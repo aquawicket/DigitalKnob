@@ -77,7 +77,7 @@ int DKDomMouseEvent::altKey(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	if (!event) {
-		DKERROR("DKDomMouseEvent::altKey(): event invalid\n");
+		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true && DKDEBUGRETURN(ctx, false);
 	}
@@ -90,7 +90,7 @@ int DKDomMouseEvent::button(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	if (!event) {
-		DKERROR("DKDomMouseEvent::button(): event invalid\n");
+		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true && DKDEBUGRETURN(ctx, false);
 	}
@@ -105,7 +105,7 @@ int DKDomMouseEvent::buttons(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	if (!event) {
-		DKERROR("DKDomMouseEvent::buttons(): event invalid\n");
+		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true && DKDEBUGRETURN(ctx, false);
 	}
@@ -117,7 +117,7 @@ int DKDomMouseEvent::clientX(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	if (!event) {
-		DKERROR("DKDomMouseEvent::clientX(): event invalid\n");
+		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true && DKDEBUGRETURN(ctx, false);
 	}
@@ -130,7 +130,7 @@ int DKDomMouseEvent::clientY(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	if (!event) {
-		DKERROR("DKDomMouseEvent::clientY(): event invalid\n");
+		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true && DKDEBUGRETURN(ctx, false);
 	}
@@ -143,7 +143,7 @@ int DKDomMouseEvent::ctrlKey(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	if (!event) {
-		DKERROR("DKDomMouseEvent::ctrlKey(): event invalid\n");
+		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true && DKDEBUGRETURN(ctx, false);
 	}
@@ -156,7 +156,7 @@ int DKDomMouseEvent::metaKey(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	if (!event) {
-		DKERROR("DKDomMouseEvent::metaKey(): event invalid\n");
+		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true && DKDEBUGRETURN(ctx, false);
 	}
@@ -169,7 +169,7 @@ int DKDomMouseEvent::movementX(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	if (!event) {
-		DKERROR("DKDomMouseEvent::altKey(): event invalid\n");
+		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true && DKDEBUGRETURN(ctx, false);
 	}
@@ -181,7 +181,7 @@ int DKDomMouseEvent::movementY(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	if (!event) {
-		DKERROR("DKDomMouseEvent::movementY(): event invalid\n");
+		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true && DKDEBUGRETURN(ctx, false);
 	}
@@ -193,7 +193,7 @@ int DKDomMouseEvent::offsetX(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	if (!event) {
-		DKERROR("DKDomMouseEvent::offSetX(): event invalid\n");
+		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true && DKDEBUGRETURN(ctx, false);
 	}
@@ -205,7 +205,7 @@ int DKDomMouseEvent::offsetY(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	if (!event) {
-		DKERROR("DKDomMouseEvent::offsetY(): event invalid\n");
+		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true && DKDEBUGRETURN(ctx, false);
 	}
@@ -217,7 +217,7 @@ int DKDomMouseEvent::pageX(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	if (!event) {
-		DKERROR("DKDomMouseEvent::pageX(): event invalid\n");
+		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true && DKDEBUGRETURN(ctx, false);
 	}
@@ -229,7 +229,7 @@ int DKDomMouseEvent::pageY(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	if (!event) {
-		DKERROR("DKDomMouseEvent::pageY(): event invalid\n");
+		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true && DKDEBUGRETURN(ctx, false);
 	}
@@ -241,7 +241,7 @@ int DKDomMouseEvent::region(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	if (!event) {
-		DKERROR("DKDomMouseEvent::region(): event invalid\n");
+		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true && DKDEBUGRETURN(ctx, false);
 	}
@@ -253,7 +253,7 @@ int DKDomMouseEvent::relatedTarget(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	if (!event) {
-		DKERROR("DKDomMouseEvent::relatedTarget(): event invalid\n");
+		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true && DKDEBUGRETURN(ctx, false);
 	}
@@ -265,7 +265,7 @@ int DKDomMouseEvent::screenX(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	if (!event) {
-		DKERROR("DKDomMouseEvent::screenX(): event invalid\n");
+		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true && DKDEBUGRETURN(ctx, false);
 	}
@@ -279,7 +279,7 @@ int DKDomMouseEvent::screenY(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	if (!event) {
-		DKERROR("DKDomMouseEvent::screenY(): event invalid\n");
+		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true && DKDEBUGRETURN(ctx, false);
 	}
@@ -293,7 +293,7 @@ int DKDomMouseEvent::shiftKey(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	if (!event) {
-		DKERROR("DKDomMouseEvent::shiftKey(): event invalid\n");
+		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true && DKDEBUGRETURN(ctx, false);
 	}
@@ -306,7 +306,7 @@ int DKDomMouseEvent::which(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	if (!event) {
-		DKERROR("DKDomMouseEvent::altKey(): event invalid\n");
+		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true && DKDEBUGRETURN(ctx, false);
 	}
@@ -318,7 +318,7 @@ int DKDomMouseEvent::mozPressure(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	if (!event) {
-		DKERROR("DKDomMouseEvent::mozPressure(): event invalid\n");
+		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true && DKDEBUGRETURN(ctx, false);
 	}
@@ -330,7 +330,7 @@ int DKDomMouseEvent::mozInputSource(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	if (!event) {
-		DKERROR("DKDomMouseEvent::mozInputSource(): event invalid\n");
+		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true && DKDEBUGRETURN(ctx, false);
 	}
@@ -342,7 +342,7 @@ int DKDomMouseEvent::webkitForce(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	if (!event) {
-		DKERROR("DKDomMouseEvent::webkitForce(): event invalid\n");
+		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true && DKDEBUGRETURN(ctx, false);
 	}
@@ -354,7 +354,7 @@ int DKDomMouseEvent::x(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	if (!event) {
-		DKERROR("DKDomMouseEvent::x(): event invalid\n");
+		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true && DKDEBUGRETURN(ctx, false);
 	}
@@ -367,7 +367,7 @@ int DKDomMouseEvent::y(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	if (!event) {
-		DKERROR("DKDomMouseEvent::y(): event invalid\n");
+		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true && DKDEBUGRETURN(ctx, false);
 	}
@@ -383,7 +383,7 @@ int DKDomMouseEvent::getModifierState(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	if (!event) {
-		DKERROR("DKDomMouseEvent::getModifierState(): event invalid\n");
+		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true && DKDEBUGRETURN(ctx, false);
 	}
@@ -396,7 +396,7 @@ int DKDomMouseEvent::initMouseEvent(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	if (!event) {
-		DKERROR("DKDomMouseEvent::initMouseEvent(): event invalid\n");
+		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}

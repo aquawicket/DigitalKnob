@@ -1,7 +1,10 @@
+# FIXME: micrate this into one php import source.   I.E. /php-src/DKMAKE.cmake
+return()
+
 # https://windows.php.net/downloads/releases
 #
-# https://phpdev.toolsforresearch.com/php-8.0.3-Win32-vs16-x64.zip
-# https://windows.php.net/downloads/releases/php-8.0.18-Win32-vs16-x86.zip
+# https://phpdev.toolsforresearch.com/php-8.0.22-Win32-vs16-x64.zip
+# https://windows.php.net/downloads/releases/php-8.0.22-Win32-vs16-x86.zip
 if(NOT WIN_HOST)
 	return()
 endif()
@@ -10,7 +13,7 @@ endif()
 ### DEPENDS ###
 dk_depend(vc_redist) #for VCRUNTIME140.dll
 
-dk_import(https://windows.php.net/downloads/releases/php-8.0.20-Win32-vs16-x86.zip)
+dk_import(https://windows.php.net/downloads/releases/php-8.0.24-Win32-vs16-x86.zip)
 
 ### INSTALL ###
 #dk_set(PHP_BINARY_VERSION 8.0.20-Win32-vs16-x86)

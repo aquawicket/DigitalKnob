@@ -5,8 +5,4 @@ if(NOT MAC_HOST)
 endif()
 
 
-FIND_LIBRARY(gameController_lib GameController)
-if(NOT gameController_lib)
-	dk_error("Could not locate GameController framework")
-endif()
-APPLE_dk_lib(${gameController_lib})
+dk_findLibrary(GameController)

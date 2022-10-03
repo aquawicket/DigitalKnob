@@ -1,8 +1,11 @@
 #NOTE: Use ${CMAKE_PROJECT_NAME} to reference the root parent project if needed
 
-if(ANDROID)
-	return()
-endif()
+#dk_require(cef_binary)
+
+ANDROID_dk_return()
+IOS_dk_return()
+IOSSIM_dk_return()
+
 if(WIN)
 	dk_depend(winmm.lib)
 endif()

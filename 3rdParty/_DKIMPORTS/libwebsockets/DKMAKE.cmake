@@ -1,11 +1,13 @@
+# https://github.com/warmcat/libwebsockets
 # https://github.com/warmcat/libwebsockets/archive/v2.2.0.zip
 
-dk_import(https://github.com/warmcat/libwebsockets)
-#dk_set(LIBWEBSOCKETS_VERSION 2.2.0)
-#dk_set(LIBWEBSOCKETS_NAME libwebsockets-${LIBWEBSOCKETS_VERSION})
-#dk_set(LIBWEBSOCKETS_DL https://github.com/warmcat/libwebsockets/archive/v2.2.0.zip)
-#dk_set(LIBWEBSOCKETS ${3RDPARTY}/${LIBWEBSOCKETS_NAME})
-#dk_install(${LIBWEBSOCKETS_DL} ${LIBWEBSOCKETS})
+
+### DEPEND ###
+#dk_depend(openssl)
+
+
+### IMPORT ###
+dk_import(https://github.com/warmcat/libwebsockets.git BRANCH main)
 
 
 ### LINK ###
@@ -13,24 +15,16 @@ dk_include(${LIBWEBSOCKETS}/lib)
 dk_include(${LIBWEBSOCKETS}/${OS})
 WIN_dk_libDebug(${LIBWEBSOCKETS}/${OS}/lib/${DEBUG_DIR}/websockets_static.lib)
 WIN_dk_libRelease(${LIBWEBSOCKETS}/${OS}/lib/${RELEASE_DIR}/websockets_static.lib)
-## APPLE_dk_libDebug(${LIBWEBSOCKETS}/${OS}/lib/${DEBUG_DIR}/libwebsockets.a)
-## APPLE_dk_libRelease(${LIBWEBSOCKETS}/${OS}/lib/${RELEASE_DIR}/libwebsockets.a)
-LINUX_dk_libDebug(${LIBWEBSOCKETS}/${OS}/${DEBUG_DIR}/lib/libwebsockets.a)
-LINUX_dk_libRelease(${LIBWEBSOCKETS}/${OS}/${RELEASE_DIR}/lib/libwebsockets.a)
-## ANDROID_dk_libDebug(${LIBWEBSOCKETS}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libwebsockets.a)
-## ANDROID_dk_libRelease(${LIBWEBSOCKETS}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libwebsockets.a)
+UNIX_dk_libDebug(${LIBWEBSOCKETS}/${OS}/${DEBUG_DIR}/lib/libwebsockets.a)
+UNIX_dk_libRelease(${LIBWEBSOCKETS}/${OS}/${RELEASE_DIR}/lib/libwebsockets.a)
+
+
+### GENERATE ###
+dk_setPath(${LIBWEBSOCKETS}/${BUILD_DIR})
+dk_queueCommand(${DKCMAKE_BUILD} -DLWS_WITH_SSL=OFF ${LIBWEBSOCKETS})
 
 
 ### COMPILE ###
-WIN_dk_setPath(${LIBWEBSOCKETS}/${OS})
-WIN32_dk_queueCommand(${DKCMAKE_BUILD} -LWS_WITH_SSL=OFF ${LIBWEBSOCKETS})
-WIN64_dk_queueCommand(${DKCMAKE_BUILD} -LWS_WITH_SSL=OFF ${LIBWEBSOCKETS})
-WIN_dk_visualStudio(${LIBWEBSOCKETS_NAME} libwebsockets.sln websockets)
-
-dk_setPath(${LIBWEBSOCKETS}/${OS}/Debug)
-LINUX_DEBUG_dk_queueCommand(${DKCMAKE_BUILD} -DLWS_WITH_SSL=OFF ${LIBWEBSOCKETS})
-LINUX_DEBUG_dk_queueCommand(make)
-
-dk_setPath(${LIBWEBSOCKETS}/${OS}/${RELEASE_DIR})
-LINUX_RELEASE_dk_queueCommand(${DKCMAKE_BUILD} -DLWS_WITH_SSL=OFF ${LIBWEBSOCKETS})
-LINUX_RELEASE_dk_queueCommand(make)
+dk_visualStudio	(${LIBWEBSOCKETS_NAME} websockets)
+dk_xcode		(${LIBWEBSOCKETS_NAME} websockets)
+dk_make			(${LIBWEBSOCKETS_NAME} websockets)

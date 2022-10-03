@@ -35,11 +35,9 @@
 class DKCurl : public DKObjectT<DKCurl>
 {
 public:
-
 	//TODO: Persistant connecton
 	bool Init();
 	bool End();
-
 	bool CurlInit();
 	bool Download(const DKString& url, const DKString& dest/*, const bool overwrite*/);
 	bool FacebookLogin(const DKString& email, const DKString& password, DKString& output);
@@ -59,7 +57,8 @@ public:
 	bool HttpFileSize(const DKString& url, long& size);
 	bool HttpToString(const DKString& url, DKString& output);
 
-	static int WriteToBuffer(char *data, size_t size, size_t nmemb, std::string *buffer);
+	//static int WriteToBuffer(char *data, size_t size, size_t nmemb, std::string *buffer);
+	static size_t WriteToBuffer(char* data, size_t size, size_t nmemb, std::string* buffer);
 	static size_t WriteToFile(void *ptr, size_t size, size_t nmemb, FILE *stream);
 	static size_t read_callback(void *ptr, size_t size, size_t nmemb, void *stream);
 	static int progress_func(void* ptr, double TotalToDownload, double NowDownloaded, double TotalToUpload, double NowUploaded);

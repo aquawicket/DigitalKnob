@@ -16,7 +16,14 @@ if(NOT LIBUV_LIBRARY)
 endif()
 
 set(uWS_SOURCES
-	src/Extensions.cpp src/Group.cpp src/Networking.cpp src/Hub.cpp src/Node.cpp src/WebSocket.cpp src/HTTPSocket.cpp src/Socket.cpp
+	src/Extensions.cpp 
+	src/Group.cpp 
+	src/Networking.cpp 
+	src/Hub.cpp 
+	src/Node.cpp 
+	src/WebSocket.cpp 
+	src/HTTPSocket.cpp 
+	src/Socket.cpp
 )
 
 add_library(uWS STATIC ${uWS_SOURCES})
@@ -40,7 +47,19 @@ target_link_libraries (uWS LINK_PUBLIC ${ZLIB_LIBRARY})
 if (UNIX)
 target_link_libraries (uWS LINK_PUBLIC pthread)
 install (TARGETS uWS DESTINATION /usr/lib64)
-install (FILES src/Extensions.h src/WebSocketProtocol.h src/Networking.h src/WebSocket.h src/Hub.h src/Group.h src/Node.h src/Socket.h src/HTTPSocket.h src/uWS.h src/uUV.h DESTINATION /usr/include/uWS)
+install (FILES 
+	src/Extensions.h 
+	src/WebSocketProtocol.h 
+	src/Networking.h 
+	src/WebSocket.h 
+	src/Hub.h 
+	src/Group.h 
+	src/Node.h 
+	src/Socket.h 
+	src/HTTPSocket.h 
+	src/uWS.h 
+	src/uUV.h 
+	DESTINATION /usr/include/uWS)
 endif (UNIX)
 
 ##add_subdirectory(examples)

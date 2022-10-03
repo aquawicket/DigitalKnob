@@ -15,6 +15,7 @@ dk_depend(libgcc)
 
 
 WIN_dk_import		(https://github.com/kiyolee/bzip2-win-build/archive/refs/tags/v1.0.8.zip)
+MAC_dk_import		(ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
 LINUX_dk_import		(ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
 RASPBERRY_dk_import	(ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
 ANDROID_dk_import	(ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
@@ -65,7 +66,7 @@ if(WIN_32)
 	dk_define(BZ_NO_STDIO)
 	dk_copy(${BZIP2}/build-VS2019 ${BZIP2}/${OS})
 	WIN32_dk_setPath(${BZIP2}/${OS})
-	WIN32_dk_visualStudio(${BZIP2_NAME} bzip2.sln libbz2-static)
+	WIN32_dk_visualStudio(${BZIP2_NAME} libbz2-static)
 endif()
 
 
@@ -76,7 +77,7 @@ if(WIN_64)
 	dk_copy(${BZIP2}/win32/libbz2.rc ${BZIP2}/${OS}/libbz2.rc)
 	dk_copy(${BZIP2}/build-VS2019 ${BZIP2}/${OS})
 	WIN64_dk_setPath(${BZIP2}/${OS})
-	WIN64_dk_visualStudio(${BZIP2_NAME} bzip2.sln libbz2-static x64)
+	WIN64_dk_visualStudio(${BZIP2_NAME} libbz2-static x64)
 endif()
 
 

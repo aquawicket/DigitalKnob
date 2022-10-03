@@ -23,20 +23,27 @@ ECHO.
 ECHO 1. Git Update
 ECHO 2. Git Commit
 ECHO 3. DKBuilder
-ECHO 4. DKSDLRmlUi
-ECHO 5. DKTestAll
-ECHO 6. Clear Screen
-ECHO 7. Exit
+ECHO 4. DKBuilderGui
+ECHO 5. Clear Screen
+ECHO 6. Exit
 set choice=
 set /p choice=Please select an app to build: 
 if not '%choice%'=='' set choice=%choice:~0,1%
 if '%choice%'=='1' goto gitupdate
 if '%choice%'=='2' goto gitcommit
 if '%choice%'=='3' goto dkbuilder
-if '%choice%'=='4' goto dksdlrmlui
-if '%choice%'=='5' goto dktestall
-if '%choice%'=='6' goto clearscreen
-if '%choice%'=='7' goto end
+if '%choice%'=='4' goto dkbuildergui
+:: if '%choice%'=='5' goto 01_DKCore
+:: if '%choice%'=='6' goto 01_DKJavascript
+:: if '%choice%'=='7' goto 01_DKSDL
+:: if '%choice%'=='8' goto 01_DKSDLRml
+:: if '%choice%'=='9' goto 01_DKCef
+:: if '%choice%'=='10' goto 01_DKSDLCef
+:: if '%choice%'=='11' goto 01_DKSDLText
+:: if '%choice%'=='12' goto 01_DKSDLRmlCef
+:: if '%choice%'=='13' goto 01_DKTestAll
+if '%choice%'=='5' goto clearscreen
+if '%choice%'=='6' goto end
 ECHO "%choice%" is not valid, try again
 goto pickapp
 
@@ -99,16 +106,18 @@ goto pickapp
 
 :dkbuilder
 set APP=DKBuilder
-goto pickos
+goto checkApp
 
-:dksdlrmlui
-set APP=DKSDLRmlUi
-goto pickos
+:dkbuildergui
+set APP=DKBuilderGui
+goto checkApp
 
-:dktestall
-set APP=DKTestAll
+:checkApp
+if NOT exist "%DKPATH%\DKApps\%APP%\DKMAKE.cmake" (
+	ECHO ERROR: %APP%/DKMAKE.cmake file not found
+	goto pickapp
+) 
 goto pickos
-
 
 
 :pickos

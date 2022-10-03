@@ -91,8 +91,7 @@ int DKWindowJS::TestReturnInt(duk_context* ctx){
 	return 1;
 }
 
-int DKWindowJS::TestReturnString(duk_context* ctx)
-{
+int DKWindowJS::TestReturnString(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	DKString rval;
 	if(!DKWindow::TestReturnString(rval)){ return 0; }
@@ -100,22 +99,19 @@ int DKWindowJS::TestReturnString(duk_context* ctx)
 	return 1;
 }
 
-int DKWindowJS::Create(duk_context* ctx)
-{
+int DKWindowJS::Create(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	if(!DKWindow::Create()){ return 0; }
 	return 1;
 }
 
-int DKWindowJS::Fullscreen(duk_context* ctx)
-{
+int DKWindowJS::Fullscreen(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	if(!DKWindow::Fullscreen()){ return 0; }
 	return 1;
 }
 
-int DKWindowJS::GetHeight(duk_context* ctx)
-{
+int DKWindowJS::GetHeight(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	int height;
 	if(!DKWindow::GetHeight(height)){ return 0; }
@@ -123,8 +119,7 @@ int DKWindowJS::GetHeight(duk_context* ctx)
 	return 1;
 }
 
-int DKWindowJS::GetMouseX(duk_context* ctx)
-{
+int DKWindowJS::GetMouseX(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	int mouseX;
 	if(!DKWindow::GetMouseX(mouseX)){ return 0; }
@@ -132,8 +127,7 @@ int DKWindowJS::GetMouseX(duk_context* ctx)
 	return 1;
 }
 
-int DKWindowJS::GetMouseY(duk_context* ctx)
-{
+int DKWindowJS::GetMouseY(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	int mouseY;
 	if(!DKWindow::GetMouseY(mouseY)){ return 0; }
@@ -141,8 +135,7 @@ int DKWindowJS::GetMouseY(duk_context* ctx)
 	return 1;
 }
 
-int DKWindowJS::GetPixelRatio(duk_context* ctx)
-{
+int DKWindowJS::GetPixelRatio(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	float ratio;
 	if(!DKWindow::GetPixelRatio(ratio)){ return 0; }
@@ -150,8 +143,7 @@ int DKWindowJS::GetPixelRatio(duk_context* ctx)
 	return 1;
 }
 
-int DKWindowJS::GetWidth(duk_context* ctx)
-{
+int DKWindowJS::GetWidth(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	int width;
 	if(!DKWindow::GetWidth(width)){ return 0; }
@@ -159,8 +151,7 @@ int DKWindowJS::GetWidth(duk_context* ctx)
 	return 1;
 }
 
-int DKWindowJS::GetX(duk_context* ctx)
-{
+int DKWindowJS::GetX(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	int x;
 	if(!DKWindow::GetX(x)){ return 0; }
@@ -168,8 +159,7 @@ int DKWindowJS::GetX(duk_context* ctx)
 	return 1;
 }
 
-int DKWindowJS::GetY(duk_context* ctx)
-{
+int DKWindowJS::GetY(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	int y;
 	if(!DKWindow::GetY(y)){ return 0; }
@@ -177,15 +167,13 @@ int DKWindowJS::GetY(duk_context* ctx)
 	return 1;
 }
 
-int DKWindowJS::Hide(duk_context* ctx)
-{
+int DKWindowJS::Hide(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	if(!DKWindow::Hide()){ return 0; }
 	return 1;
 }
 
-int DKWindowJS::IsFullscreen(duk_context* ctx)
-{
+int DKWindowJS::IsFullscreen(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	bool fullscreen;
 	if(!DKWindow::IsFullscreen(fullscreen)){ return 0; }
@@ -193,8 +181,7 @@ int DKWindowJS::IsFullscreen(duk_context* ctx)
 	return 1;
 }
 
-int DKWindowJS::IsVisible(duk_context* ctx)
-{
+int DKWindowJS::IsVisible(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	bool visible;
 	if(!DKWindow::IsVisible(visible)){ return 0; } 
@@ -202,30 +189,26 @@ int DKWindowJS::IsVisible(duk_context* ctx)
 	return 1;
 }
 
-int DKWindowJS::Maximize(duk_context* ctx)
-{
+int DKWindowJS::Maximize(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	if(!DKWindow::Maximize()){ return 0; }
 	return 1;
 }
 
-int DKWindowJS::MessageBox(duk_context* ctx)
-{
+int DKWindowJS::MessageBox(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	DKString msg = duk_require_string(ctx, 0);
 	if(!DKWindow::MessageBox(msg)){ return 0; }
 	return 1;
 }
 
-int DKWindowJS::Minimize(duk_context* ctx)
-{
+int DKWindowJS::Minimize(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	if(!DKWindow::Minimize()){ return 0; }
 	return 1;
 }
 
-int DKWindowJS::moveTo(duk_context* ctx)
-{
+int DKWindowJS::moveTo(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	int x = duk_require_int(ctx, 0);
 	int y = duk_require_int(ctx, 1);
@@ -234,8 +217,7 @@ int DKWindowJS::moveTo(duk_context* ctx)
 	return 1;
 }
 
-int DKWindowJS::resizeTo(duk_context* ctx)
-{
+int DKWindowJS::resizeTo(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	int width = duk_require_int(ctx, 0);
 	int height = duk_require_int(ctx, 1);
@@ -244,70 +226,61 @@ int DKWindowJS::resizeTo(duk_context* ctx)
 	return 1;
 }
 
-int DKWindowJS::Restore(duk_context* ctx)
-{
+int DKWindowJS::Restore(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	if(!DKWindow::Restore()){ return 0; }
 	return 1;
 }
 
-int DKWindowJS::SetHeight(duk_context* ctx)
-{
+int DKWindowJS::SetHeight(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	int height = duk_require_int(ctx, 0);
 	if(!DKWindow::SetHeight(height)){ return 0; }
 	return 1;
 }
 
-int DKWindowJS::SetIcon(duk_context* ctx)
-{
+int DKWindowJS::SetIcon(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	DKString file = duk_require_string(ctx, 0);
 	if (!DKWindow::SetIcon(file)) { return 0; }
 	return 1;
 }
 
-int DKWindowJS::SetTitle(duk_context* ctx)
-{
+int DKWindowJS::SetTitle(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	DKString string = duk_require_string(ctx, 0);
 	if(!DKWindow::SetTitle(string)){ return 0; }
 	return 1;
 }
 
-int DKWindowJS::SetWidth(duk_context* ctx)
-{
+int DKWindowJS::SetWidth(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	int width = duk_require_int(ctx, 0);
 	if(!DKWindow::SetWidth(width)){ return 0; }
 	return 1;
 }
 
-int DKWindowJS::SetX(duk_context* ctx)
-{
+int DKWindowJS::SetX(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	int x = duk_require_int(ctx, 0);
 	if(!DKWindow::SetX(x)){ return 0; }
 	return 1;
 }
 
-int DKWindowJS::SetY(duk_context* ctx)
-{
+int DKWindowJS::SetY(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	int y = duk_require_int(ctx, 0);
 	if(!DKWindow::SetY(y)){ return 0; }
 	return 1;
 }
 
-int DKWindowJS::Show(duk_context* ctx)
-{
+int DKWindowJS::Show(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	if(!DKWindow::Show()){ return 0; }
 	return 1;
 }
 
-int DKWindowJS::Windowed(duk_context* ctx)
-{
+int DKWindowJS::Windowed(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	if(!DKWindow::Windowed()){ return 0; }
 	return 1;

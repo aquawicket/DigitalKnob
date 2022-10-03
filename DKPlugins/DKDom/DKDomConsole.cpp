@@ -60,11 +60,13 @@ bool DKDomConsole::Init(){
 }
 
 int DKDomConsole::_assert(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return DKERROR("DKDomConsole::assert not implemented\n");
 }
 
 int DKDomConsole::clear(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	int out;
 	if(!DKUtil::System("cls", out))
 		return DKERROR("!DKUtil::System(\"cls\", out) failed\n");
@@ -72,16 +74,19 @@ int DKDomConsole::clear(duk_context* ctx){
 }
 
 int DKDomConsole::count(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	//TODO
-	return DKERROR("DKDomConsole::count not implemented\n");
+	return DKERROR("not implemented\n");
 }
 
 int DKDomConsole::countReset(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	//TODO
-	return DKERROR("DKDomConsole::countReset not implemented\n");
+	return DKERROR("not implemented\n");
 }
 
 int DKDomConsole::debug(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	DKString string;
 	if(duk_is_string(ctx, 0))
 		string = duk_require_string(ctx, 0);
@@ -94,15 +99,19 @@ int DKDomConsole::debug(duk_context* ctx){
 }
 
 int DKDomConsole::dir(duk_context* ctx){
-	return DKERROR("DKDomConsole::dir not implemented\n");
+	DKDEBUGFUNC(ctx);
+	//TODO
+	return DKERROR("not implemented\n");
 }
 
 int DKDomConsole::dirxml(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	//TODO
-	return DKERROR("DKDomConsole::dirxml not implemented\n");
+	return DKERROR("not implemented\n");
 }
 
 int DKDomConsole::error(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	DKString string;
 	if(duk_is_string(ctx, 0))
 		string = duk_require_string(ctx, 0);
@@ -115,26 +124,31 @@ int DKDomConsole::error(duk_context* ctx){
 }
 
 int DKDomConsole::exception(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	//TODO
-	return DKERROR("DKDomConsole::exception not implemented\n");
+	return DKERROR("not implemented\n");
 }
 
 int DKDomConsole::group(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	//TODO
-	return DKERROR("DKDomConsole::group not implemented\n");
+	return DKERROR("not implemented\n");
 }
 
 int DKDomConsole::groupCollapsed(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	//TODO
-	return DKERROR("DKDomConsole::groupCollapsed not implemented\n");
+	return DKERROR("not implemented\n");
 }
 
 int DKDomConsole::groupEnd(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	//TODO
-	return DKERROR("DKDomConsole::groupEnd not implemented\n");
+	return DKERROR("not implemented\n");
 }
 
 int DKDomConsole::info(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	DKString string;
 	if(duk_is_string(ctx, 0))
 		string = duk_require_string(ctx, 0);
@@ -147,6 +161,7 @@ int DKDomConsole::info(duk_context* ctx){
 }
 
 int DKDomConsole::log(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	DKString string;
 	if(duk_is_string(ctx, 0)) 
 		string = duk_require_string(ctx, 0);
@@ -159,47 +174,56 @@ int DKDomConsole::log(duk_context* ctx){
 }
 
 int DKDomConsole::profile(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	//TODO
-	return DKERROR("DKDomConsole::profile not implemented\n");
+	return DKERROR("not implemented\n");
 }
 
 int DKDomConsole::profileEnd(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	//TODO
-	return DKERROR("DKDomConsole::profileEnd not implemented\n");
+	return DKERROR("not implemented\n");
 }
 
 int DKDomConsole::table(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	//TODO
-	return DKERROR("DKDomConsole::table not implemented\n");
+	return DKERROR("not implemented\n");
 }
 
 int DKDomConsole::time(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	//TODO
-	return DKERROR("DKDomConsole::time not implemented\n");
+	return DKERROR("not implemented\n");
 }
 
 int DKDomConsole::timeEnd(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	//TODO
-	return DKERROR("DKDomConsole::timeEnd not implemented\n");
+	return DKERROR("not implemented\n");
 }
 
 int DKDomConsole::timeLog(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	//TODO
-	return DKERROR("DKDomConsole::timeLog not implemented\n");
+	return DKERROR("not implemented\n");
 }
 
 int DKDomConsole::timeStamp(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	//TODO
-	return DKERROR("DKDomConsole::timeStamp not implemented\n");
+	return DKERROR("not implemented\n");
 }
 
 int DKDomConsole::trace(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	if(!DKDuktape::Trace())
 		return DKERROR("DKDuktape::Trace() invalid")
 	return true;
 }
 
 int DKDomConsole::warn(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	DKString string;
 	if(duk_is_string(ctx, 0))
 		string = duk_require_string(ctx, 0);

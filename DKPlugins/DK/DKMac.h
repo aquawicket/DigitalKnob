@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-#ifdef MAC
+#if MAC
 #pragma once
 #ifndef DKMac_H
 #define DKMac_H
@@ -51,10 +51,10 @@ public:
 	static bool ReleaseKey(int key);
 	static bool VirtualMemory(unsigned long long& virtualMemory);
 	static bool VirtualMemoryUsed(unsigned long long& virtualMemory);
-	static bool VirtualMemoryUsedByApp(unsigned int& virtualMemory);
+	static bool VirtualMemoryUsedByApp(unsigned long long& virtualMemory);
 	static bool PhysicalMemory(unsigned long long& physicalMemory);
 	static bool PhysicalMemoryUsed(unsigned long long& physicalMemory);
-	static bool PhysicalMemoryUsedByApp(unsigned int& physicalMemory);
+	static bool PhysicalMemoryUsedByApp(unsigned long long& physicalMemory);
 	static bool CpuInit();
 	static bool CpuUsed(int& cpu);
 	static bool CpuUsedByApp(int& cpu);

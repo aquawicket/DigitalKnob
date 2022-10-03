@@ -1,29 +1,37 @@
-if(NOT WIN_HOST)
-#	return()
+### android-sdk ###
+
+if(NOT ANDROID)
+	dk_undepend(android-sdk)
+	return()
 endif()
 
-### VERSION ###
 dk_set(ANDROID-SDK ${3RDPARTY}/android-sdk)
+dk_depend(openjdk)
+dk_depend(openjdk-8u41)
+dk_depend(android-cmdline-tools)
 
-dk_setEnv("ANDROID_HOME" ${ANDROID-SDK})
-dk_setEnv("VS_AndroidHome" ${ANDROID-SDK})
 
-### DEPENDS ###
-#dk_depend(jdk)
-#dk_depend(jdk8)
-#dk_depend(jdk9)
-#dk_depend(ant)
-#dk_depend(android-cmdline-tools)
-#dk_depend(android-ndk)
-#dk_depend(android-platforms)
-#dk_depend(android-sources)
-#dk_depend(android-system-images)
-#dk_depend(android-platform-tools)
-#dk_depend(android-build-tools)
-#dk_depend(android-sdk-tools)
-#dk_depend(android-cmake)
+if(NOT EXISTS ${ANDROID-SDK})
+	dk_info("Installing android-sdk")
+	dk_wait()
+	dk_set(ANDROID-SDK ${3RDPARTY}/android-sdk)
+	dk_makeDirectory(${ANDROID-SDK})
+	dk_patch(android-sdk ${ANDROID-SDK})
+	dk_setEnv("ANDROID_HOME" ${ANDROID-SDK})
+	dk_setEnv("VS_AndroidHome" ${ANDROID-SDK})
 
+	### SignLicenses ###
+	dk_killProcess(java.exe NOASSERT)
+	dk_killProcess(adb.exe NOASSERT)
+	dk_executeProcess(call "${OPENJDK-8U41}/registerJDK.cmd")
+	dk_executeProcess("${SDKMANAGER_BAT} --licenses")
+	#dk_executeProcess(call "${OPENJDK}/registerJDK.cmd")
+	dk_executeProcess(call ${ANDROID-SDK}/SignLicenses.cmd)
+	dk_executeProcess(call "${OPENJDK-11}/registerJDK.cmd")
+endif()
+
+### SignLicenses ###
 if(NOT EXISTS ${ANDROID-SDK}/SignLicenses.cmd)
 	dk_copy(${DKIMPORTS}/android-sdk/SignLicenses.cmd ${ANDROID-SDK}/SignLicenses.cmd OVERWRITE)
-	dk_command(${ANDROID-SDK}/SignLicenses.cmd)
+	dk_executeProcess(call ${ANDROID-SDK}/SignLicenses.cmd)
 endif()

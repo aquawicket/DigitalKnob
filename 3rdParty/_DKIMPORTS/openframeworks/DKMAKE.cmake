@@ -1,48 +1,50 @@
+# https://github.com/openframeworks/openFrameworks
 # https://github.com/openframeworks/openFrameworks/archive/refs/tags/0.10.0.zip
 
-### VERSION ###
-dk_set(OPENFRAMEWORKS_VERSION 0.10.0)
-dk_set(OPENFRAMEWORKS_NAME openFrameworks-${OPENFRAMEWORKS_VERSION})
-dk_set(OPENFRAMEWORKS_DL https://github.com/openframeworks/openFrameworks/archive/refs/tags/${OPENFRAMEWORKS_VERSION}.zip)
-dk_set(OPENFRAMEWORKS ${3RDPARTY}/${OPENFRAMEWORKS_NAME})
 
-
-### INSTALL ###
-#dk_import(${OPENFRAMEWORKS_DL} ${OPENFRAMEWORKS})
-dk_import(${OPENFRAMEWORKS_DL} ${OPENFRAMEWORKS})
+### IMPORT ###
+#dk_import(https://github.com/openframeworks/openFrameworks/archive/refs/tags/0.10.0.zip PATCH)
+dk_import(https://github.com/openframeworks/openFrameworks.git PATCH)
 
 
 
 ### LINK ###
 dk_include(${OPENFRAMEWORKS})
-WIN32_INCLUDE(${OPENFRAMEWORKS}/libs/openFrameworks)
-WIN32_INCLUDE(${OPENFRAMEWORKS}/libs/openFrameworks/utils)
-WIN32_INCLUDE(${OPENFRAMEWORKS}/libs/glew/include)
-WIN32_INCLUDE(${OPENFRAMEWORKS}/libs/glu/include)
-WIN32_INCLUDE(${OPENFRAMEWORKS}/libs/tess2/include)
-WIN32_INCLUDE(${OPENFRAMEWORKS}/libs/json/include)
-WIN32_INCLUDE(${OPENFRAMEWORKS}/libs/openFrameworks/types)
-WIN32_INCLUDE(${OPENFRAMEWORKS}/libs/openFrameworks/math)
-WIN32_INCLUDE(${OPENFRAMEWORKS}/libs/openFrameworks/events)
-WIN32_INCLUDE(${OPENFRAMEWORKS}/libs/utf8cpp/include)
-WIN32_INCLUDE(${OPENFRAMEWORKS}/libs/openFrameworks/3d)
-WIN32_INCLUDE(${OPENFRAMEWORKS}/libs/openFrameworks/gl)
-WIN32_INCLUDE(${OPENFRAMEWORKS}/libs/openFrameworks/graphics)
-WIN32_INCLUDE(${OPENFRAMEWORKS}/libs/poco/include)
-WIN32_INCLUDE(${OPENFRAMEWORKS}/libs/openFrameworks/communication)
-WIN32_INCLUDE(${OPENFRAMEWORKS}/libs/openFrameworks/app)
-WIN32_INCLUDE(${OPENFRAMEWORKS}/libs/cairo/include/cairo)
-WIN32_INCLUDE(${OPENFRAMEWORKS}/libs/glfw/include)
-WIN32_INCLUDE(${OPENFRAMEWORKS}/libs/openFrameworks/sound)
-WIN32_INCLUDE(${OPENFRAMEWORKS}/libs/fmodex/include)
-WIN32_INCLUDE(${OPENFRAMEWORKS}/libs/openFrameworks/video)
-WIN32_INCLUDE(${OPENFRAMEWORKS}/libs/videoInput/include)
+dk_include(${OPENFRAMEWORKS}/libs/openFrameworks)
+dk_include(${OPENFRAMEWORKS}/libs/openFrameworks/utils)
+dk_include(${OPENFRAMEWORKS}/libs/glew/include)
+dk_include(${OPENFRAMEWORKS}/libs/glu/include)
+dk_include(${OPENFRAMEWORKS}/libs/tess2/include)
+dk_include(${OPENFRAMEWORKS}/libs/json/include)
+dk_include(${OPENFRAMEWORKS}/libs/openFrameworks/types)
+dk_include(${OPENFRAMEWORKS}/libs/openFrameworks/math)
+dk_include(${OPENFRAMEWORKS}/libs/openFrameworks/events)
+dk_include(${OPENFRAMEWORKS}/libs/utf8cpp/include)
+dk_include(${OPENFRAMEWORKS}/libs/openFrameworks/3d)
+dk_include(${OPENFRAMEWORKS}/libs/openFrameworks/gl)
+dk_include(${OPENFRAMEWORKS}/libs/openFrameworks/graphics)
+dk_include(${OPENFRAMEWORKS}/libs/poco/include)
+dk_include(${OPENFRAMEWORKS}/libs/openFrameworks/communication)
+dk_include(${OPENFRAMEWORKS}/libs/openFrameworks/app)
+dk_include(${OPENFRAMEWORKS}/libs/cairo/include/cairo)
+dk_include(${OPENFRAMEWORKS}/libs/glfw/include)
+dk_include(${OPENFRAMEWORKS}/libs/openFrameworks/sound)
+dk_include(${OPENFRAMEWORKS}/libs/fmodex/include)
+dk_include(${OPENFRAMEWORKS}/libs/openFrameworks/video)
+dk_include(${OPENFRAMEWORKS}/libs/videoInput/include)
 WIN_dk_libDebug(${OPENFRAMEWORKS}/${OS}/lib/${DEBUG_DIR}/openFrameworks.lib)
 WIN_dk_libRelease(${OPENFRAMEWORKS}/${OS}/lib/${RELEASE_DIR}/openFrameworks.lib)
+UNIX_dk_libDebug(${OPENFRAMEWORKS}/${OS}/lib/${DEBUG_DIR}/libopenframeworks.a)
+UNIX_dk_libRelease(${OPENFRAMEWORKS}/${OS}/lib/${RELEASE_DIR}/libopenframeworks.a)
+
+
+### GENERATE ###
+dk_setPath(${OPENFRAMEWORKS}/${BUILD_DIR})
+dk_command(${DKCMAKE_BUILD} -DOF_PATH=${OPENFRAMEWORKS} ${OPENFRAMEWORKS})
 
 
 ### COMPILE ###
-WIN_dk_setPath(${OPENFRAMEWORKS}/${OS})
-WIN32_dk_queueCommand(${DKCMAKE_BUILD} -DOF_PATH=${OPENFRAMEWORKS} ${OPENFRAMEWORKS})
-WIN64_dk_queueCommand(${DKCMAKE_BUILD} -DOF_PATH=${OPENFRAMEWORKS} ${OPENFRAMEWORKS})
-WIN_dk_visualStudio(${OPENFRAMEWORKS_NAME} openFrameworks.sln openFrameworks)
+dk_visualStudio				(${OPENFRAMEWORKS_NAME} openFrameworks)
+dk_xcode					(${OPENFRAMEWORKS_NAME} openFrameworks)
+LINUX_dk_queueCommand		(make openFrameworks)
+RASPBERRY_dk_queueCommand	(make openFrameworks)

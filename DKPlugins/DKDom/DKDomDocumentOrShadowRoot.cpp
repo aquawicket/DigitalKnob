@@ -56,8 +56,8 @@ bool DKDomDocumentOrShadowRoot::Init(){
 // Properties
 int DKDomDocumentOrShadowRoot::activeElement(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	Rml::Element* element;// = DKRml::Get()->document->GetActiveElement(); //TODO
-	if(element){
+	Rml::Element* element = DKRml::Get()->document->GetFocusLeafNode(); //TODO: test
+	if(!element){
 		duk_push_null(ctx);
 		return DKERROR("DKDomDocumentOrShadowRoot::activeElement(): element invalid\n");
 	}

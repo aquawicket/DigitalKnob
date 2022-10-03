@@ -35,12 +35,12 @@ ANDROID_dk_queueCommand		(${DKCMAKE_BUILD} ${SDL_CMAKE} ${SMPEG2})
 
 
 ### COMPILE ###
-dk_visualStudio				(${SMPEG2_NAME} SMPEG.sln SMPEG)
-#WIN_dk_visualStudio		(${SMPEG2_NAME} SMPEG.sln SMPEG)
+dk_visualStudio				(${SMPEG2_NAME} SMPEG)
+#WIN_dk_visualStudio		(${SMPEG2_NAME} SMPEG)
 dk_xcode					(${SMPEG2_NAME} SMPEG)
 #MAC_dk_xcode				(${SMPEG2_NAME} SMPEG)
 #IOS_dk_xcode				(${SMPEG2_NAME} SMPEG)
 #IOSSIM_dk_xcode			(${SMPEG2_NAME} SMPEG)
 LINUX_dk_queueCommand		(make SMPEG)
 RASPBERRY_dk_queueCommand	(make SMPEG)
-#ANDROID_dk_visualStudio	(${SMPEG2_NAME} SMPEG.sln SMPEG)
+#ANDROID_dk_visualStudio	(${SMPEG2_NAME} SMPEG)

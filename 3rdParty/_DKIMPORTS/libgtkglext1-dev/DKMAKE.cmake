@@ -1,4 +1,4 @@
-if(NOT UNIX_HOST)
+if(NOT LINUX_HOST)
 	return()
 endif()
 

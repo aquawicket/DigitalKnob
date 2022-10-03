@@ -1,4 +1,5 @@
 if(NOT ANDROID)
+	dk_undepend(android)
 	return()
 endif()
 

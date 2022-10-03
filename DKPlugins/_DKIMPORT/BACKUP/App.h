@@ -25,13 +25,13 @@
 */
 
 /*
-#ifdef HAVE_DK
+#if HAVE_DK
 #pragma once
 #ifndef App_H
 #define App_H
 
 #include "DK/DKApp.h"
-#ifdef ANDROID
+#if ANDROID
 	#include "Android.h"
 #endif
 

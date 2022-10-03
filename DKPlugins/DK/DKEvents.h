@@ -63,21 +63,25 @@ public:
 
 	template<class T> 
 	static bool AddEvent(const DKString& id, const DKString& type, bool (T::*func) (DKEvents*), T* _this){
+		DKDEBUGFUNC(id, type, func, _this);
 		return DKEvents::AddEvent(id, type, std::bind(func, _this, std::placeholders::_1), _this);
 	};
 
 	template<class T>
 	static bool AddEvent(const DKString& id, const DKString& type, const DKString& jsreturn, bool (T::*func) (DKEvents*), T* _this){
+		DKDEBUGFUNC(id, type, jsreturn, func, _this);
 		return DKEvents::AddEvent(id, type, jsreturn, std::bind(func, _this, std::placeholders::_1), _this);
 	};
 
 	template<class T>
 	static void AddRegisterEventFunc(bool (T::*func)(const DKString&, const DKString&), T* _this){
+		DKDEBUGFUNC(func, _this);
 		reg_funcs.push_back(std::bind(func, _this, std::placeholders::_1, std::placeholders::_2));
 	}
 
 	template<class T>
 	static void RemoveRegisterEventFunc(bool (T::*func)(const DKString&, const DKString&), T* _this){
+		DKDEBUGFUNC(func, _this);
 		for(unsigned int i=0; i<reg_funcs.size(); ++i){
 			//if (reg_funcs[i] == std::bind(func, _this, std::placeholders::_1, std::placeholders::_2)) {
 			//	reg_funcs.erase(reg_funcs.begin() + i);
@@ -87,11 +91,13 @@ public:
 	
 	template<class T>
 	static void AddUnegisterEventFunc(bool (T::*func)(const DKString&, const DKString&), T* _this){
+		DKDEBUGFUNC(func, _this);
 		unreg_funcs.push_back(std::bind(func, _this, std::placeholders::_1, std::placeholders::_2));
 	}
 
 	template<class T>
 	static void RemoveUnegisterEventFunc(bool (T::*func)(const DKString&, const DKString&), T* _this){
+		DKDEBUGFUNC(func, _this);
 		for(unsigned int i=0; i<unreg_funcs.size(); ++i){
 			//if (unreg_funcs[i] == std::bind(func, _this, std::placeholders::_1, std::placeholders::_2)) {
 			//	unreg_funcs.erase(unreg_funcs.begin() + i);
@@ -101,11 +107,13 @@ public:
 	
 	template<class T>
 	static void AddSendEventFunc(bool (T::*func)(const DKString&, const DKString&, const DKString&), T* _this){
+		DKDEBUGFUNC(func, _this);
 		send_funcs.push_back(std::bind(func, _this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
 	}
 
 	template<class T>
 	static void RemoveSendEventFunc(bool (T::*func)(const DKString&, const DKString&, const DKString&), T* _this){
+		DKDEBUGFUNC(func, _this);
 		for(unsigned int i=0; i<send_funcs.size(); ++i){
 			//if (send_funcs[i] == std::bind(func, _this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3)) {
 			//	send_funcs.erase(send_funcs.begin() + i);

@@ -26,7 +26,7 @@
 
 #include "DKCefChild.h"
 
-#ifdef WIN
+#if WIN
 	#ifdef CEF_USE_SANDBOX
 		#include "include/cef_sandbox_win.h"
 	#endif
@@ -49,6 +49,8 @@ CefRefPtr<CefListValue> DKCefChildV8Handler::myRetval;
 
 int main(int argc, char* argv[]){
 	printf("[DKCefChild] main()\n");
+	argc;
+	argv;
 
 #ifdef CEF_USE_SANDBOX
 	CefScopedSandboxContext sandbox_context;
@@ -62,7 +64,7 @@ int main(int argc, char* argv[]){
 		return 1;
 #endif
 
-#ifdef WIN32
+#if WIN32
 	CefMainArgs main_args;
 #else
 	CefMainArgs main_args(argc, argv);
@@ -74,6 +76,8 @@ int main(int argc, char* argv[]){
 }
 
 bool DKCefChildV8Handler::Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefV8ValueList& arguments, CefRefPtr<CefV8Value>& retval, CefString& exception){
+	exception;
+	retval;
 	std::string func = name;
 	std::string text = "DKCefChildV8Handler::Execute("+func+", object, arguments, retval, exception)\n";
 	printf(text.c_str());
@@ -84,15 +88,15 @@ bool DKCefChildV8Handler::Execute(const CefString& name, CefRefPtr<CefV8Value> o
 	for(unsigned int i=0; i<arguments.size(); i++){
 		if(arguments[i]->IsBool()){
 			args->SetBool(i, arguments[i]->GetBoolValue());
-			str += args->GetBool(i);
+			str += std::to_string(args->GetBool(i));
 		}
 		if(arguments[i]->IsDouble()){
-			args->SetInt(i, arguments[i]->GetDoubleValue());
-			str += args->GetDouble(i);
+			args->SetDouble(i, arguments[i]->GetDoubleValue());
+			str += std::to_string(args->GetDouble(i));
 		}
 		if(arguments[i]->IsInt()){
 			args->SetInt(i, arguments[i]->GetIntValue());
-			str += args->GetInt(i);
+			str += std::to_string(args->GetInt(i));
 		}
 		if(arguments[i]->IsNull()){
 			args->SetNull(i);
@@ -155,9 +159,11 @@ void DKCefChildV8Handler::SetBrowser(CefRefPtr<CefBrowser> _browser){
 
 
 void DKCefChildApp::OnBeforeCommandLineProcessing(const CefString& process_type, CefRefPtr<CefCommandLine> command_line){
-#ifndef DEBUG
+#if DEBUG
 	CEF_REQUIRE_UI_THREAD();
 #endif
+	process_type;
+
 #ifndef DKCefChild
 	printf("[DKCefChild] DKCefChildApp::OnBeforeCommandLineProcessing()\n");
 	if(same(DKV8::multi_process, "OFF"))
@@ -198,7 +204,7 @@ void DKCefChildApp::OnBeforeCommandLineProcessing(const CefString& process_type,
 }
 
 void DKCefChildApp::OnBrowserCreated(CefRefPtr<CefBrowser> browser){
-#ifndef DEBUG
+#if !DEBUG
 	CEF_REQUIRE_UI_THREAD();
 #endif
 	printf("[DKCefChild] DKCefApp::OnBrowserCreated()\n");
@@ -209,7 +215,7 @@ void DKCefChildApp::OnBrowserCreated(CefRefPtr<CefBrowser> browser){
 }
 
 void DKCefChildApp::OnContextInitialized(){
-#ifndef DEBUG
+#if !DEBUG
 	CEF_REQUIRE_UI_THREAD();
 #endif
 	printf("[DKCefChild] DKCefChildApp::OnContextInitialized()\n");
@@ -217,7 +223,7 @@ void DKCefChildApp::OnContextInitialized(){
 }
 
 void DKCefChildApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context){
-#ifndef DEBUG
+#if !DEBUG
 	CEF_REQUIRE_UI_THREAD();
 #endif
 	printf("[DKCefChild] DKCefChildApp::OnContextCreated()\n");
@@ -247,9 +253,10 @@ void DKCefChildApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<Ce
 }
 
 bool DKCefChildApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProcessId source_process, CefRefPtr<CefProcessMessage> message){
-#ifndef DEBUG
+#if !DEBUG
 	CEF_REQUIRE_UI_THREAD();
 #endif
+	source_process;
 	std::string name = std::string(message->GetName());
 	printf("[DKCefChild] DKCefChildApp::OnProcessMessageReceived(");
 	printf(name.c_str());

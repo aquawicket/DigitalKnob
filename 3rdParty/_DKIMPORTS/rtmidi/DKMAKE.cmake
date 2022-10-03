@@ -1,63 +1,42 @@
 # https://github.com/thestk/rtmidi
 
 
-#dk_import(http://www.music.mcgill.ca/~gary/rtmidi/release/rtmidi-2.1.0.tar.gz PATCH)
-#dk_set(RTMIDI_SLN Project.sln)
-#dk_set(RTMIDI_TARGET RtMidi)
+### DEPEND ###
+WIN_dk_depend(winmm.lib)
+
+
+### IMPORT ###
 dk_import(https://github.com/thestk/rtmidi.git)
-dk_set(RTMIDI_SLN RtMidi.sln)
-dk_set(RTMIDI_TARGET rtmidi)
 
 
 ### LINK ###
-dk_include(${RTMIDI})
-WIN_dk_depend(winmm.lib)
 APPLE_dk_define(__MACOSX_CORE__)
 if(LINUX OR RASPBERRY OR ANDROID)
 	dk_define(__LINUX_ALSA__)
 endif()
-WIN_dk_libDebug(${RTMIDI}/${OS}/${DEBUG_DIR}/RtMidi.lib)
-WIN_dk_libRelease(${RTMIDI}/${OS}/${RELEASE_DIR}/RtMidi.lib)
-MAC_dk_libDebug(${RTMIDI}/${OS}/${DEBUG_DIR}/libRtMidi.a)
-MAC_dk_libRelease(${RTMIDI}/${OS}/${RELEASE_DIR}/libRtMidi.a)
-IOS_dk_libDebug(${RTMIDI}/${OS}/${DEBUG_DIR}/libRtMidi.a)
-IOS_dk_libRelease(${RTMIDI}/${OS}/${RELEASE_DIR}/libRtMidi.a)
-IOSSIM_dk_libDebug(${RTMIDI}/${OS}/${DEBUG_DIR}/libRtMidi.a)
-IOSSIM_dk_libRelease(${RTMIDI}/${OS}/${RELEASE_DIR}/libRtMidi.a)
-LINUX_dk_libDebug(${RTMIDI}/${OS}/${DEBUG_DIR}/libRtMidi.a)
-LINUX_dk_libRelease(${RTMIDI}/${OS}/${RELEASE_DIR}/libRtMidi.a)
-RASPBERRY_dk_libDebug(${RTMIDI}/${OS}/${DEBUG_DIR}/libRtMidi.a)
-RASPBERRY_dk_libRelease(${RTMIDI}/${OS}/${RELEASE_DIR}/libRtMidi.a)
-ANDROID_dk_libDebug(${RTMIDI}/${OS}/${DEBUG_DIR}/libRtMidi.a)
-ANDROID_dk_libRelease(${RTMIDI}/${OS}/${RELEASE_DIR}/libRtMidi.a)
+dk_include				(${RTMIDI})
+WIN_dk_libDebug			(${RTMIDI}/${OS}/${DEBUG_DIR}/RtMidi.lib)
+WIN_dk_libRelease		(${RTMIDI}/${OS}/${RELEASE_DIR}/RtMidi.lib)
+MAC_dk_libDebug			(${RTMIDI}/${OS}/${DEBUG_DIR}/libRtMidi.a)
+MAC_dk_libRelease		(${RTMIDI}/${OS}/${RELEASE_DIR}/libRtMidi.a)
+IOS_dk_libDebug			(${RTMIDI}/${OS}/${DEBUG_DIR}/libRtMidi.a)
+IOS_dk_libRelease		(${RTMIDI}/${OS}/${RELEASE_DIR}/libRtMidi.a)
+IOSSIM_dk_libDebug		(${RTMIDI}/${OS}/${DEBUG_DIR}/libRtMidi.a)
+IOSSIM_dk_libRelease	(${RTMIDI}/${OS}/${RELEASE_DIR}/libRtMidi.a)
+LINUX_dk_libDebug		(${RTMIDI}/${OS}/${DEBUG_DIR}/librtmidi.a)
+LINUX_dk_libRelease		(${RTMIDI}/${OS}/${RELEASE_DIR}/librtmidi.a)
+RASPBERRY_dk_libDebug	(${RTMIDI}/${OS}/${DEBUG_DIR}/libRtMidi.a)
+RASPBERRY_dk_libRelease	(${RTMIDI}/${OS}/${RELEASE_DIR}/libRtMidi.a)
+ANDROID_dk_libDebug		(${RTMIDI}/${OS}/${DEBUG_DIR}/libRtMidi.a)
+ANDROID_dk_libRelease	(${RTMIDI}/${OS}/${RELEASE_DIR}/libRtMidi.a)
 
 
 ### GENERATE ###
-dk_setPath(${RTMIDI}/${BUILD_DIR})
-#WIN_dk_queueCommand(${DKCMAKE_BUILD} ${RTMIDI})
-#MAC_dk_queueCommand(${DKCMAKE_BUILD} ${RTMIDI})
-#IOS_dk_queueCommand(${DKCMAKE_BUILD} ${RTMIDI})
-#IOSSIM_dk_queueCommand(${DKCMAKE_BUILD} ${RTMIDI})
-#LINUX_DEBUG_dk_queueCommand(${DKCMAKE_BUILD} ${RTMIDI})
-#LINUX_RELEASE_dk_queueCommand(${DKCMAKE_BUILD} ${RTMIDI})
-#RASPBERRY_DEBUG_dk_queueCommand(${DKCMAKE_BUILD} ${RTMIDI})
-#RASPBERRY_RELEASE_dk_queueCommand(${DKCMAKE_BUILD} ${RTMIDI})
-#ANDROID32_dk_queueCommand(${DKCMAKE_BUILD} ${RTMIDI})
-#ANDROID64_dk_queueCommand(${DKCMAKE_BUILD} ${RTMIDI})
-dk_queueCommand(${DKCMAKE_BUILD} ${RTMIDI})
+dk_setPath		(${RTMIDI}/${BUILD_DIR})
+dk_queueCommand	(${DKCMAKE_BUILD} ${RTMIDI})
 
 
 ### COMPILE ###
-#WIN_dk_visualStudio(${RTMIDI_NAME} ${RTMIDI_SLN} ${RTMIDI_TARGET})
-dk_visualStudio(${RTMIDI_NAME} ${RTMIDI_SLN} ${RTMIDI_TARGET})
-#MAC_dk_xcode(${RTMIDI_NAME} ${RTMIDI_TARGET})
-#IOS_dk_xcode(${RTMIDI_NAME} ${RTMIDI_TARGET})
-#IOSSIM_dk_xcode(${RTMIDI_NAME} ${RTMIDI_TARGET})
-dk_xcode(${RTMIDI_NAME} ${RTMIDI_TARGET})
-#LINUX_DEBUG_dk_queueCommand(make ${RTMIDI_TARGET})
-#LINUX_RELEASE_dk_queueCommand(make ${RTMIDI_TARGET})
-LINUX_dk_queueCommand(make ${RTMIDI_TARGET})
-#RASPBERRY_DEBUG_dk_queueCommand(make ${RTMIDI_TARGET})
-#RASPBERRY_RELEASE_dk_queueCommand(make ${RTMIDI_TARGET})
-RASPBERRY_dk_queueCommand(make ${RTMIDI_TARGET})
-#ANDROID_dk_visualStudio(${RTMIDI_NAME} ${RTMIDI_SLN} ${RTMIDI_TARGET})
+dk_visualStudio	(${RTMIDI_NAME} rtmidi) # windows, android
+dk_xcode		(${RTMIDI_NAME} rtmidi) # mac, ios, iossim
+dk_make			(${RTMIDI_NAME} rtmidi)	# linux, raspberry

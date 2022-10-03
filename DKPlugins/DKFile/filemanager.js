@@ -105,7 +105,7 @@ DKFileManager.prototype.highlight = function DKFileManager_highlight(instance, e
     if (event instanceof Event)
         event.stopPropagation()
     var nodes = instance.list.childNodes;
-    for (let n = 0; n < nodes.length; n++) {
+    for (var n = 0; n < nodes.length; n++) {
         if (!nodes[n])
             console.error("nodes[" + n + "] invalid\n")
         nodes[n].style.backgroundColor = instance.list.style.backgroundColor;
@@ -325,7 +325,7 @@ DKFileManager.prototype.updatePath = function DKFileManager_updatePath(instance,
             if (!results)
                 return error("results invalid")
             const items = results.split(",")
-            for (let n = 0; n < items.length; n++) {
+            for (var n = 0; n < items.length; n++) {
                 dk.file.isDir(path.aPath + items[n], function dk_file_isDir_callback(dir) {
                     if (dir) {
                         //Folders
@@ -349,7 +349,7 @@ DKFileManager.prototype.updatePath = function DKFileManager_updatePath(instance,
                     }
                 })
             }
-            for (let n = 0; n < items.length; n++) {
+            for (var n = 0; n < items.length; n++) {
                 dk.file.isDir(path.aPath + items[n], function dk_file_isDir_callback(dir) {
                     if (!dir) {
                         //Files

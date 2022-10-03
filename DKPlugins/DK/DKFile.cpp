@@ -274,35 +274,36 @@ bool DKFile::GetAppPath(DKString& apppath){
 	if (!DKFile::PathExists(DKFile::exe_path))
 		DKFile::GetExePath(DKFile::exe_path);
 	std::string::size_type found = 0;
-#	if WIN32
-		apppath = DKFile::exe_path;
-		found = apppath.find_last_of("/");
-		apppath.erase (apppath.begin()+found+1, apppath.end()); 
-		DebugPath(apppath);
-		return true && DKDEBUGRETURN(apppath);
-#	elif defined(ANDROID)
-		apppath = DKFile::exe_path;
-		found = apppath.find_last_of("/");
-		apppath.erase(apppath.begin() + found + 1, apppath.end());
-		//apppath = "/mnt/sdcard/digitalknob/";
-		/*
-		#include <SDL.h>
-		const char* externalStoragePath = SDL_AndroidGetExternalStoragePath();
-		//int externalStorageState = SDL_AndroidGetExternalStorageState();
-		DKString appPath = externalStoragePath;
-		appPath += "/assets/";
-		*/
-		DebugPath(apppath);
-		return true && DKDEBUGRETURN(apppath);
-#	elif defined(MAC) || defined(IOS) || defined(LINUX)
-		apppath = DKFile::exe_path;
-		found = apppath.find_last_of("/");
-		apppath.erase (apppath.begin()+found+1, apppath.end());
-		DebugPath(apppath);
-		return true && DKDEBUGRETURN(apppath);
-#	endif
+#if WIN32
+	apppath = DKFile::exe_path;
+	found = apppath.find_last_of("/");
+	apppath.erase (apppath.begin()+found+1, apppath.end()); 
+	DebugPath(apppath);
+	return true && DKDEBUGRETURN(apppath);
+#elif ANDROID
+	apppath = DKFile::exe_path;
+	found = apppath.find_last_of("/");
+	apppath.erase(apppath.begin() + found + 1, apppath.end());
+	//apppath = "/mnt/sdcard/digitalknob/";
+	/*
+	#include <SDL.h>
+	const char* externalStoragePath = SDL_AndroidGetExternalStoragePath();
+	//int externalStorageState = SDL_AndroidGetExternalStorageState();
+	DKString appPath = externalStoragePath;
+	appPath += "/assets/";
+	*/
+	DebugPath(apppath);
+	return true && DKDEBUGRETURN(apppath);
+#elif MAC || IOS || LINUX
+	apppath = DKFile::exe_path;
+	found = apppath.find_last_of("/");
+	apppath.erase (apppath.begin()+found+1, apppath.end());
+	DebugPath(apppath);
+	return true && DKDEBUGRETURN(apppath);
+#else
 	DebugPath(apppath);
 	return DKERROR("not implemented on this OS \n");
+#endif
 }
 
 bool DKFile::GetBasename(const DKString& path, DKString& basename){
@@ -346,20 +347,21 @@ bool DKFile::GetDirectoryContents(const DKString& path, DKStringArray& strings){
 
 bool DKFile::GetDrives(DKStringArray& strings){
 	DKDEBUGFUNC(strings);
-#	if WIN32
-		//TCHAR szDrive[] = " A:";
-		DWORD drives = GetLogicalDrives();
-		if(drives == 0)
-			return DKERROR("GetLogicalDrives() failed \n");
-		for (int i=0; i<26; i++){
-			if((drives & (1 << i ))){
-				TCHAR driveName[] = { static_cast<TCHAR>(TEXT('A') + i), TEXT(':'), TEXT('\0') };
-				strings.push_back(driveName);
-			}
+#if WIN32
+	//TCHAR szDrive[] = " A:";
+	DWORD drives = GetLogicalDrives();
+	if(!drives)
+		return DKERROR("GetLogicalDrives() failed \n");
+	for (int i=0; i<26; i++){
+		if((drives & (1 << i ))){
+			TCHAR driveName[] = { static_cast<TCHAR>(TEXT('A') + i), TEXT(':'), TEXT('\0') };
+			strings.push_back(driveName);
 		}
-		return true;//&& DKDEBUGRETURN(toString(strings));
-#	endif //(WIN32)
+	}
+	return true;//&& DKDEBUGRETURN(toString(strings));
+#else
 	return DKERROR("not implemented on this OS \n");
+#endif
 }
 
 bool DKFile::GetExeName(DKString& exename){
@@ -447,7 +449,7 @@ bool DKFile::GetLocalCreationDate(const DKString& path, DKString& filedate){
 	DebugPath(path);
 	if(!PathExists(path))
 		return false;
-#	if defined(WIN32) || defined(MAC) || defined(LINUX)// || defined(ANDROID)	
+#if WIN32 || MAC || LINUX //|| ANDROID	
 		struct stat attrib;             // create a file attribute structure
 		stat(path.c_str(), &attrib);    // get the attributes of afile.txt
 		struct tm* clock = localtime(&(attrib.st_ctime));
@@ -466,8 +468,9 @@ bool DKFile::GetLocalCreationDate(const DKString& path, DKString& filedate){
 		//19990102040506
 		filedate = year + month + day + hour + minute + second;
 		return true && DKDEBUGRETURN(path, filedate);
-#	endif
+#else
 	return DKERROR("not implemented for this OS \n");
+#endif
 }
 
 bool DKFile::GetLocalModifiedDate(const DKString& path, DKString& filedate){
@@ -475,27 +478,28 @@ bool DKFile::GetLocalModifiedDate(const DKString& path, DKString& filedate){
 	DebugPath(path);
 	if(!PathExists(path))
 		return false;
-#	if defined(WIN32) || defined(MAC) || defined(LINUX)// || defined(ANDROID)
-		struct stat attrib;         // create a file attribute structure
-		stat(path.c_str(), &attrib);     // get the attributes of afile.txt
-		struct tm* clock = localtime(&(attrib.st_mtime));
-		DKString month = toString(clock->tm_mon);
-		DKString day = toString(clock->tm_mday);
-		DKString hour = toString(clock->tm_hour);
-		DKString minute = toString(clock->tm_min);
-		DKString second = toString(clock->tm_sec);
-		DKString year = toString(clock->tm_year + 1900);
-		Pad(4, '0', year);
-		Pad(2, '0', month);
-		Pad(2, '0', day);
-		Pad(2, '0', hour);
-		Pad(2, '0', minute);
-		Pad(2, '0', second);
-		//19990102040506
-		filedate = year + month + day + hour + minute + second;
-		return true && DKDEBUGRETURN(path, filedate);
-#	endif
+#if WIN32 || MAC || LINUX //|| ANDROID
+	struct stat attrib;         // create a file attribute structure
+	stat(path.c_str(), &attrib);     // get the attributes of afile.txt
+	struct tm* clock = localtime(&(attrib.st_mtime));
+	DKString month = toString(clock->tm_mon);
+	DKString day = toString(clock->tm_mday);
+	DKString hour = toString(clock->tm_hour);
+	DKString minute = toString(clock->tm_min);
+	DKString second = toString(clock->tm_sec);
+	DKString year = toString(clock->tm_year + 1900);
+	Pad(4, '0', year);
+	Pad(2, '0', month);
+	Pad(2, '0', day);
+	Pad(2, '0', hour);
+	Pad(2, '0', minute);
+	Pad(2, '0', second);
+	//19990102040506
+	filedate = year + month + day + hour + minute + second;
+	return true && DKDEBUGRETURN(path, filedate);
+#else
 	return DKERROR("is not implemented for this OS \n");
+#endif
 }
 
 bool DKFile::GetModifiedTime(const DKString& path, DKString& time){
@@ -503,73 +507,72 @@ bool DKFile::GetModifiedTime(const DKString& path, DKString& time){
 	DebugPath(path);
 	if(!PathExists(path))
 		return false;
-#	if WIN32 
-		WIN32_FILE_ATTRIBUTE_DATA fileInfo;
-		if(GetFileAttributesEx(path.c_str(), GetFileExInfoStandard, &fileInfo)){
-			FILETIME localFiletime;
-			if(FileTimeToLocalFileTime(&fileInfo.ftLastWriteTime, &localFiletime)){
-				SYSTEMTIME st={0};
-				::FileTimeToSystemTime(&localFiletime,&st);
-				//FILETIME ftCreationTime;	// creation time
-				//FILETIME ftLastAccessTime;	// last access time	
-				//FILETIME ftLastWriteTime;	// last modification time
-				//DWORD nFileSizeHigh;	// the high DWORD of the file size (it is zero unless the file is over four gigabytes)
-				//DWORD nFileSizeLow;	// the low DWORD of the file size
-				DKString month = toString((int)st.wMonth);
-				DKString day = toString((int)st.wDay);
-				DKString year = toString((int)st.wYear);
-				int standard = st.wHour % 12;
-				DKString hour = toString(standard);
-				DKString minute = toString((int)st.wMinute);
-				Pad(4, '0', year);
-				Pad(2, '0', month);
-				Pad(2, '0', day);
-				Pad(2, '0', hour);
-				Pad(2, '0', minute);
-				time = month;
-				time += "/";
-				time += day;
-				time += "/";
-				time += year;
-				time += " ";
-				time += hour;
-				time += ":";
-				time += minute;
-				if(st.wHour > 12)
-					time += "pm";
-				else
-					time += "am";
-				return true && DKDEBUGRETURN(path, time);
-			}
-				return DKERROR("localFiletime; invalid \n");
-		}
-		else{
-			return DKERROR("file not found \n");
-		}
-#	else 
-#		ifndef ANDROID
-			struct tm* local;
-			struct stat attrib;
-			stat(path.c_str(), &attrib);
-			local = localtime(&(attrib.st_mtime));
-			int standard = local->tm_hour % 12;
-			time = toString(local->tm_mon+1);
+#if WIN32 
+	WIN32_FILE_ATTRIBUTE_DATA fileInfo = WIN32_FILE_ATTRIBUTE_DATA();
+	if(GetFileAttributesEx(path.c_str(), GetFileExInfoStandard, &fileInfo)){
+		FILETIME localFiletime;
+		if(FileTimeToLocalFileTime(&fileInfo.ftLastWriteTime, &localFiletime)){
+			SYSTEMTIME st={0};
+			::FileTimeToSystemTime(&localFiletime,&st);
+			//FILETIME ftCreationTime;	// creation time
+			//FILETIME ftLastAccessTime;// last access time	
+			//FILETIME ftLastWriteTime;	// last modification time
+			//DWORD nFileSizeHigh;		// the high DWORD of the file size (it is zero unless the file is over four gigabytes)
+			//DWORD nFileSizeLow;		// the low DWORD of the file size
+			DKString month = toString((int)st.wMonth);
+			DKString day = toString((int)st.wDay);
+			DKString year = toString((int)st.wYear);
+			int standard = st.wHour % 12;
+			DKString hour = toString(standard);
+			DKString minute = toString((int)st.wMinute);
+			Pad(4, '0', year);
+			Pad(2, '0', month);
+			Pad(2, '0', day);
+			Pad(2, '0', hour);
+			Pad(2, '0', minute);
+			time = month;
 			time += "/";
-			time += toString(local->tm_mday);
+			time += day;
 			time += "/";
-			time += toString(local->tm_year + 1900);
+			time += year;
 			time += " ";
-			time += toString(standard);
+			time += hour;
 			time += ":";
-			time += toString(local->tm_min);
-			if(local->tm_hour > 12)
+			time += minute;
+			if(st.wHour > 12)
 				time += "pm";
 			else
 				time += "am";
 			return true && DKDEBUGRETURN(path, time);
-#		endif
-#	endif
+		}
+		return DKERROR("localFiletime; invalid \n");
+	}
+	else{
+		return DKERROR("file not found \n");
+	}
+#elif !ANDROID
+	struct tm* local;
+	struct stat attrib;
+	stat(path.c_str(), &attrib);
+	local = localtime(&(attrib.st_mtime));
+	int standard = local->tm_hour % 12;
+	time = toString(local->tm_mon+1);
+	time += "/";
+	time += toString(local->tm_mday);
+	time += "/";
+	time += toString(local->tm_year + 1900);
+	time += " ";
+	time += toString(standard);
+	time += ":";
+	time += toString(local->tm_min);
+	if(local->tm_hour > 12)
+		time += "pm";
+	else
+		time += "am";
+	return true && DKDEBUGRETURN(path, time);
+#else
 	return DKERROR("not implemeneted on this OS \n");
+#endif
 }
 
 bool DKFile::GetPath(DKString& path) {
@@ -596,16 +599,22 @@ bool DKFile::GetRelativePath(const DKString& file, const DKString& path, DKStrin
 	if (path2.back() == '/')
 		path2.pop_back();
 	DKINFO("DKFile::GetRelativePath("+file2+","+path2+",DKString&) \n");
-	int MAX_FILENAME_LEN = 512;
-	int ABSOLUTE_NAME_START = 1;
+	//int MAX_FILENAME_LEN = 512;
+	size_t MAX_FILENAME_LEN = 512;
+	//int ABSOLUTE_NAME_START = 1;
+	size_t ABSOLUTE_NAME_START = 1;
 	int SLASH = '/';
 	const char* absoluteFilename = file2.c_str();
 	const char* currentDirectory = path2.c_str();
 	// declarations - put here so this should work in a C compiler
-	int afMarker = 0, rfMarker = 0;
-	int cdLen = 0, afLen = 0;
-	int i = 0;
-	int levels = 0;
+	//int afMarker = 0, rfMarker = 0;
+	size_t afMarker = 0, rfMarker = 0;
+	//int cdLen = 0, afLen = 0;
+	size_t cdLen = 0, afLen = 0;
+	//int i = 0;
+	size_t i = 0;
+	//int levels = 0;
+	size_t levels = 0;
 	static char relativeFilename[512];
 	cdLen = strlen(currentDirectory);
 	afLen = strlen(absoluteFilename);
@@ -673,7 +682,7 @@ bool DKFile::GetRelativePath(const DKString& file, const DKString& path, DKStrin
 	for(i = 0; i < levels; i++){
 		relativeFilename[rfMarker++] = '.';
 		relativeFilename[rfMarker++] = '.';
-		relativeFilename[rfMarker++] = SLASH;
+		relativeFilename[rfMarker++] = '/'; //SLASH;
 	}
 	// copy the rest of the filename into the result string
 	strcpy(&relativeFilename[rfMarker], &absoluteFilename[afMarker]);
@@ -763,11 +772,11 @@ bool DKFile::MakeDir(const DKString& dir){
 	if(path.empty())
 		return DKERROR("path is empty \n");
 	if(PathExists(path))
-		return true;
+		return DKWARN("path already exists \n");
 	if (!fs::create_directories(path)) {
-		fs::directory_iterator end_itr; // default construction yields past-the-end
-		for (fs::directory_iterator itr(path); itr != end_itr; ++itr)
-			return DKERROR("(" + path + ") failed! \n");
+		//fs::directory_iterator end_itr; // default construction yields past-the-end
+		//for (fs::directory_iterator itr(path); itr != end_itr; ++itr)
+			return DKERROR("failed to create "+path+"\n");
 	}
 	return true;
 }
@@ -777,7 +786,7 @@ bool DKFile::PathExists(const DKString& path){
 	DebugPath(path);
 	if(fs::exists(path)) 
 		return true;
-	//DKWARN("DKFile::PathExists("+path+"): Path does not exist \n");
+	//DKWARN("path does not exist \n");
 	return false;
 }
 

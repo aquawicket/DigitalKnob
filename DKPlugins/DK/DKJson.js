@@ -18,9 +18,9 @@ DKJson.prototype.highlightJson = function DKJson_highlightJson(jsonStr) {
     if (typeof jsonStr !== 'string')
         return error("jsonStr invalid")
 
-    let hightlightedJson = jsonStr.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    var hightlightedJson = jsonStr.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
     return hightlightedJson.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function(match) {
-        let cls = 'number'
+        var cls = 'number'
         if (/^"/.test(match)) {
             if (/:$/.test(match)) {
                 cls = 'key'
@@ -45,8 +45,8 @@ DKJson.prototype.stringifyJson = function DKJson_stringifyJson(obj) {
     if (typeof obj !== 'object')
         return error("obj invalid")
 
-    let obj2 = {}
-    for (let prop in obj) {
+    var obj2 = {}
+    for (var prop in obj) {
         if (!obj.hasOwnProperty(prop)) {
             continue
         }
@@ -63,7 +63,7 @@ DKJson.prototype.stringifyJson = function DKJson_stringifyJson(obj) {
 
 DKJson.prototype.findPartialMatch = function DKJson_findPartialMatch(obj, key, value) {
     //console.log(obj.length)
-    let foundObj
+    var foundObj
     JSON.stringify(obj, function(_, nestedValue) {
         if (nestedValue && nestedValue[key] && (value.includes(nestedValue[key]) || nestedValue[key].includes(value)))
             foundObj = nestedValue
@@ -97,7 +97,7 @@ DKJson.prototype.loadJsonFromFile = function DKJson_loadJsonFromFile(path, callb
     dk.file.exists(path, function(result) {
         if (result) {
             dk.file.fileToString(path, function dk_file_fileToString_callback(str) {
-                let json
+                var json
                 try {
                     json = JSON.parse(str)
                 } catch (err) {
@@ -134,7 +134,7 @@ DKJson.prototype.objectToString = function DKJson_objectToString(obj) {
 DKJson.prototype.findMatch = function DKJson_findMatch(obj, key, value) {
     if (obj.length) {
         //array of objects
-        for (let n = 0; n < obj.length; n++) {
+        for (var n = 0; n < obj.length; n++) {
             if (key in obj[n]) {
                 if (obj[n][key] === value) {
                     //return obj[n]
@@ -152,7 +152,7 @@ DKJson.prototype.findMatch = function DKJson_findMatch(obj, key, value) {
 DKJson.prototype.findPartialMatch = function dkjson_findPartialMatch(obj, key, value) {
     if (obj.length) {
         //array of objects
-        for (let n = 0; n < obj.length; n++) {
+        for (var n = 0; n < obj.length; n++) {
             if (key in obj[n]) {
                 if (value.includes(obj[n][key])) {
                     return obj[n]

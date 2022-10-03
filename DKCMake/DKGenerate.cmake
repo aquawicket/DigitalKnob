@@ -27,7 +27,7 @@ if(EXISTS $ENV{DKCMAKE})
 	set(ENV{DKCMAKE} "$ENV{DKCMAKE}/")
 endif()
 include("$ENV{DKCMAKE}DK.cmake")
-
+include("$ENV{DKCMAKE}DKDisabled.cmake") 
 
 dk_info("\n")
 dk_info("############################################################")
@@ -402,10 +402,10 @@ if(WIN_32)
 		
 	###################### Backup Executable ###########################
 	if(DEBUG)
-		dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe.backup true)
+		dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe.backup OVERWRITE)
 	endif()
 	if(RELEASE)
-		dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe.backup true)
+		dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe.backup OVERWRITE)
 	endif()
 		
 	####################### Create Executable Target ###################
@@ -434,7 +434,8 @@ if(WIN_32)
 	list(APPEND DEBUG_LINK_FLAGS /MANIFESTUAC:NO)
 	list(APPEND DEBUG_LINK_FLAGS /level='highestAvailable')
 	list(APPEND DEBUG_LINK_FLAGS /uiAccess='true')
-	list(APPEND DEBUG_LINK_FLAGS /SUBSYSTEM:CONSOLE,5.01)
+	#list(APPEND DEBUG_LINK_FLAGS /SUBSYSTEM:CONSOLE,5.01)
+	list(APPEND DEBUG_LINK_FLAGS /SUBSYSTEM:CONSOLE)
 	list(APPEND DEBUG_LINK_FLAGS /SAFESEH:NO)
 	string(REPLACE ";" " " DEBUG_FLAGS "${DEBUG_LINK_FLAGS}")
 	
@@ -445,7 +446,8 @@ if(WIN_32)
 	list(APPEND RELEASE_LINK_FLAGS /MANIFESTUAC:NO)
 	list(APPEND RELEASE_LINK_FLAGS /level='highestAvailable')
 	list(APPEND RELEASE_LINK_FLAGS /uiAccess='true')
-	list(APPEND RELEASE_LINK_FLAGS /SUBSYSTEM:CONSOLE,5.01)
+	#list(APPEND RELEASE_LINK_FLAGS /SUBSYSTEM:CONSOLE,5.01)
+	list(APPEND RELEASE_LINK_FLAGS /SUBSYSTEM:CONSOLE)
 	list(APPEND RELEASE_LINK_FLAGS /SAFESEH:NO)
 	string(REPLACE ";" " " RELEASE_FLAGS "${RELEASE_LINK_FLAGS}")
 	
@@ -509,10 +511,10 @@ if(WIN_64)
 
 	###################### Backup Executable ###########################
 	if(DEBUG)
-		dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe.backup true)
+		dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe.backup OVERWRITE)
 	endif()
 	if(RELEASE)
-		dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe.backup true)
+		dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe.backup OVERWRITE)
 	endif()
 		
 	####################### Create Executable Target ###################
@@ -542,7 +544,8 @@ if(WIN_64)
 	list(APPEND DEBUG_LINK_FLAGS /MANIFESTUAC:NO)
 	list(APPEND DEBUG_LINK_FLAGS /level='highestAvailable')
 	list(APPEND DEBUG_LINK_FLAGS /uiAccess='true')
-	list(APPEND DEBUG_LINK_FLAGS /SUBSYSTEM:CONSOLE,5.01)
+	#list(APPEND DEBUG_LINK_FLAGS /SUBSYSTEM:CONSOLE,5.01)
+	list(APPEND DEBUG_LINK_FLAGS /SUBSYSTEM:CONSOLE)
 	list(APPEND DEBUG_LINK_FLAGS /SAFESEH:NO)
 	string(REPLACE ";" " " DEBUG_FLAGS "${DEBUG_LINK_FLAGS}")
 	
@@ -553,7 +556,8 @@ if(WIN_64)
 	list(APPEND RELEASE_LINK_FLAGS /MANIFESTUAC:NO)
 	list(APPEND RELEASE_LINK_FLAGS /level='highestAvailable')
 	list(APPEND RELEASE_LINK_FLAGS /uiAccess='true')
-	list(APPEND RELEASE_LINK_FLAGS /SUBSYSTEM:CONSOLE,5.01)
+	#list(APPEND RELEASE_LINK_FLAGS /SUBSYSTEM:CONSOLE,5.01)
+	list(APPEND RELEASE_LINK_FLAGS /SUBSYSTEM:CONSOLE)
 	list(APPEND RELEASE_LINK_FLAGS /SAFESEH:NO)
 	string(REPLACE ";" " " RELEASE_FLAGS "${RELEASE_LINK_FLAGS}")
 	
@@ -738,13 +742,21 @@ endif()
 #################
 if(IOS OR IOSSIM)
 	
+	# FIXME
 	###################### Backup Executable ###########################
-	if(DEBUG)
-		dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app.backup true)
-	endif()
-	if(RELEASE)
-		dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app.backup true)
-	endif()
+	#if(DEBUG)
+	#	if(EXISTS ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app)
+	#		dk_remove(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app.backup)
+	#		dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app.backup OVERWRITE)
+	#	endif()
+	#endif()
+	#if(RELEASE)
+	#	if(EXISTS ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app)
+	#		dk_remove(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app.backup)
+	#		dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app.backup OVERWRITE)
+	#	endif()
+	#endif()
+	
 	
 	###################### BACKUP USERDATA ###############################
 	# Backup files and folders excluded from the package
@@ -953,9 +965,9 @@ if(RASPBERRY)
 	
 	###################### Backup Executable ###########################
 	if(DEBUG)
-		dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup true)
+		dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup OVERWRITE)
 	elseif(RELEASE)
-		dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup true)
+		dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup OVERWRITE)
 	endif()
 	
 	####################### Create Executable Target ###################
@@ -1040,10 +1052,10 @@ if(ANDROID)
 		
 	###################### Backup Executable ###########################
 	if(DEBUG)
-		dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.apk ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.apk.backup true)
+		dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.apk ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.apk.backup OVERWRITE)
 	endif()
 	if(RELEASE)
-		dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.apk ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.apk.backup true)
+		dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.apk ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.apk.backup OVERWRITE)
 	endif()
 		
 	####################### Create Library Target ###################

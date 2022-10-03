@@ -21,8 +21,10 @@ LINUX_dk_libDebug		(${SDL_MIXER}/${OS}/${DEBUG_DIR}/lib/SDL_mixer.a)
 LINUX_dk_libRelease		(${SDL_MIXER}/${OS}/${RELEASE_DIR}/lib/SDL_mixer.a)
 RASPBERRY_dk_libDebug	(${SDL_MIXER}/${OS}/${DEBUG_DIR}/lib/SDL_mixer.a)
 RASPBERRY_dk_libRelease	(${SDL_MIXER}/${OS}/${RELEASE_DIR}/lib/SDL_mixer.a)
-ANDROID_dk_libDebug		(${SDL_MIXER}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libSDL2_mixer.a)
-ANDROID_dk_libRelease	(${SDL_MIXER}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libSDL2_mixer.a)
+#ANDROID_dk_libDebug	(${SDL_MIXER}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libSDL2_mixer.a)
+#ANDROID_dk_libRelease	(${SDL_MIXER}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libSDL2_mixer.a)
+ANDROID_dk_libDebug		(${SDL_MIXER}/${OS}/lib/${DEBUG_DIR}/SDL_mixer.a)
+ANDROID_dk_libRelease	(${SDL_MIXER}/${OS}/lib/${RELEASE_DIR}/SDL_mixer.a)
 
 
 ### GENERATE ###
@@ -31,7 +33,7 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${SDL_CMAKE} ${VORBIS_CMAKE} ${OGG_CMAKE} ${SM
 
 
 ### COMPILE ###
-dk_visualStudio				(${SDL_MIXER_NAME} SDLMIXER.sln SDLMIXER)
+dk_visualStudio				(${SDL_MIXER_NAME} SDLMIXER)
 dk_xcode					(${SDL_MIXER_NAME} SDLMIXER)
 LINUX_dk_queueCommand		(make SDLMIXER)
 RASPBERRY_dk_queueCommand	(make SDLMIXER)

@@ -28,14 +28,14 @@
 #ifndef DKRmlIframe_H
 #define DKRmlIframe_H
 
-#include "DKRmlIframe/RmlIframeInstancer.h"
+#include "DKRmlIframe/DKRmlIframeInstancer.h"
 
 class DKRmlIframe : public DKObjectT<DKRmlIframe>
 {
 public:
 	bool Init();
 	bool End();
-	std::shared_ptr<RmlIframeInstancer> ref;
+	std::shared_ptr<DKRmlIframeInstancer> ref;
 };
 
 REGISTER_OBJECT(DKRmlIframe, true)

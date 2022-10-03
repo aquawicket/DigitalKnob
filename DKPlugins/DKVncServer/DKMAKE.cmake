@@ -1,7 +1,8 @@
-IF(WIN)
-	dk_depend(libvncserver-master-win)
-ELSE()
-	dk_depend(libvncserver-master)
-ENDIF()
+#if(WIN)
+#	dk_depend(libvncserver-master-win)
+#else()
+#	dk_depend(libvncserver-master)
+#endif()
+dk_depend(libvncserver)
 
 dk_generateCmake(DKVncServer)

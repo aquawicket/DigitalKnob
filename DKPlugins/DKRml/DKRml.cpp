@@ -137,6 +137,7 @@ bool DKRml::End(){
 }
 
 bool DKRml::GetSourceCode(DKString& source_code) {
+	DKDEBUGFUNC(source_code);
 	source_code = document->GetContext()->GetRootElement()->GetInnerRML();
 	DKINFO("######################## CODE FROM RmlUi #########################\n");
 	DKINFO(source_code+"\n");
@@ -163,7 +164,7 @@ bool DKRml::LoadFont(const DKString& file){
 }
 
 bool DKRml::LoadFonts(DKString& directory){
-	DKDEBUGFUNC();
+	DKDEBUGFUNC(directory);
 	
 	char ch = directory.back();
 	if(ch != '/')
@@ -186,6 +187,7 @@ bool DKRml::LoadFonts(DKString& directory){
 }
 
 bool DKRml::LoadHtml(const DKString& html){
+	DKDEBUGFUNC(html);
 	//// Prepair the html document for RmlUi
 
 	DKString rml;
@@ -308,6 +310,7 @@ bool DKRml::LoadUrl(const DKString& url){
 }
 
 void DKRml::ProcessEvent(Rml::Event& rmlEvent){
+	//DKDEBUGFUNC(rmlEvent);
 	DKString rmlEventAddress = eventToAddress(&rmlEvent);
 	//DKString code = "new Event("+rmlEventAddress+")";
 	//DKString rval;
@@ -325,7 +328,6 @@ void DKRml::ProcessEvent(Rml::Event& rmlEvent){
 	DKString type = rmlEvent.GetType();
 	//TODO: implement this
     //int phase = (int)rmlEvent.GetPhase(); //{ None, Capture = 1, Target = 2, Bubble = 4 };
-	
     
     /*
 	// Send this event back to duktape to be processed in javascript
@@ -568,6 +570,7 @@ Rml::Event* DKRml::addressToEvent(const DKString& address) {
 }
 
 DKString DKRml::eventToAddress(Rml::Event* event) {
+	//DKDEBUGFUNC(event);
 	if (!event) {
 		DKERROR("invalid event\n");
 		return "";
@@ -609,6 +612,7 @@ Rml::Element* DKRml::addressToElement(const DKString& address) {
 }
 
 DKString DKRml::elementToAddress(Rml::Element* element) {
+	//DKDEBUGFUNC(element);
 	if (!element) {
 		DKERROR("invalid element\n");
 		return "";
@@ -629,8 +633,8 @@ DKString DKRml::elementToAddress(Rml::Element* element) {
 
 //TODO
 bool DKRml::GetOuterHTML(Rml::Element* element, DKString& outerHtml) {
+	DKDEBUGFUNC(element, outerHtml);
 	/*
-	//DKDEBUGFUNC(element, outerHtml);
 	if (!element)
 		return DKERROR("element invalid");
 	Rml::Element* parent = element->GetParentNode();
@@ -661,10 +665,11 @@ bool DKRml::GetOuterHTML(Rml::Element* element, DKString& outerHtml) {
 		return DKERROR("xml.GetFullNode() failed \n");
 	return true;
 	*/
-	return DKERROR("not implemented \n");
+	return DKERROR("not implemented\n");
 }
 
 //TODO
 bool DKRml::SetOuterHTML(Rml::Element* element, const DKString& outerHtml) {
-	return DKERROR("not implemented \n");
+	DKDEBUGFUNC(element, outerHtml);
+	return DKERROR("not implemented\n");
 }

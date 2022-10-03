@@ -4,9 +4,9 @@
 
 const DKApp = function() {};
 const dkapp = new DKApp;
-//let urlParams
-//let loadScript
-//let runScript
+//var urlParams
+//var loadScript
+//var runScript
 
 
 
@@ -169,7 +169,7 @@ dkapp.runApp = function dkapp_runApp(event) {
 		
 		encodeIt.onclick = function(){
 			console.log("Encoding data . . .")
-			let url_string = location.href +"?l="+loadarea.value+"&r="+runarea.value
+			var url_string = location.href +"?l="+loadarea.value+"&r="+runarea.value
 			const url_encoded = encodeURI(url_string)
 			loadarea.value = url_string
 			runarea.value = url_encoded

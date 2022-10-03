@@ -2,7 +2,7 @@
 
 const DEBUG = true;
 window.dk = new Object;
-let DUKTAPE = window.DUKTAPE
+var DUKTAPE = window.DUKTAPE
 dk.useCPP = false;
 
 //Keep a object reference to the old console
@@ -37,7 +37,7 @@ if(!DUKTAPE) {
 
 // required({args})
 const required = function required() {
-    for (let n = 0; n < arguments.length; n++) {
+    for (var n = 0; n < arguments.length; n++) {
         if (typeof arguments[n] !== "object")
             throw new Error(" Must use {} around variables when using require. EXAMPLE: required({var1}, {var2})");
         var name = Object.keys(arguments[n])[0];
@@ -92,13 +92,13 @@ const DUMP = function dk_dumpVariable(variable) {
     const lightBlue = "color:rgb(91,171,209);"
     const grey = "color:rgb(142,142,142);"
     const orange = "color:rgb(226,131,81);"
-    let name;
+    var name;
     if (typeof variable === "object") {
         console.group("%c" + variable.constructor.name + " {}", "color:rgb(213,213,213);font-style:italic;")
         //const type = Object.prototype.toString.call(variable).slice(8, -1);
         //console.log("%c valueOf: %c"+ variable.valueOf(), pink, color);
         //console.log("%c typeof: %c" + typeof variable, pink, color);
-        for (let key in variable) {
+        for (var key in variable) {
             if (variable[key] === variable) {
                 continue;
                 return error("infinate loop")
@@ -129,10 +129,10 @@ const DUMP = function dk_dumpVariable(variable) {
         console.group("%c" + variable, "color:rgb(213,213,213);font-style:italic;")
     if (typeof variable === "array")
         console.group("%c" + variable, "color:rgb(213,213,213);font-style:italic;")
-    //for(let key in variable)
+    //for(var key in variable)
     //    console.log("%c variable."+key+" = "+variable[key], color);
 
-    //for(let key in variable.__proto__.constructor)
+    //for(var key in variable.__proto__.constructor)
     //console.log("%c variable.__proto__."+key+" = "+variable.__proto__[key], color);
 	const variable_name = Object.keys({variable})[0]
     console.log(variable_name+" = "+variable)
@@ -283,7 +283,7 @@ dk.close = function dk_close(data) {
         //    plugin.end();
         //}
         const scripts = document.getElementsByTagName("script");
-        for (let n = 0; n < scripts.length; n++) {
+        for (var n = 0; n < scripts.length; n++) {
             if (scripts[n].src.includes(data[1])) {
                 scripts[n].parentNode.removeChild(scripts[n]);
                 console.debug("Unloaded " + data[1]);
@@ -301,7 +301,7 @@ dk.close = function dk_close(data) {
     }
     if (data[0] === "DKCss") {
         const links = document.getElementsByTagName("link");
-        for (let n = 0; n < links.length; n++) {
+        for (var n = 0; n < links.length; n++) {
             if (links[n].href.includes(data[1])) {
                 links[n].parentNode.removeChild(links[n]);
                 console.debug("Unloaded " + data[1]);
@@ -326,10 +326,10 @@ dk.getPlugin = function dk_getPlugin(url) {
     if (!pluginName)
         return error("pluginName invalid");
     pluginName = pluginName.substring(0, pluginName.lastIndexOf("."));
-    let instanceName = pluginName.toLowerCase();
+    var instanceName = pluginName.toLowerCase();
     if (instanceName.substring(0, 2) === "dk")
         instanceName = instanceName.slice(2);
-    let plugin = {};
+    var plugin = {};
     if (window[instanceName]) {
         plugin = window[instanceName];
         plugin.instance = instanceName;
@@ -339,9 +339,9 @@ dk.getPlugin = function dk_getPlugin(url) {
         plugin.instance = instanceName;
     }
     plugin.name = pluginName;
-    let nameCSS = "color: red;"
-    let instanceCSS = "color: red;"
-    let initCSS = "color: red;"
+    var nameCSS = "color: red;"
+    var instanceCSS = "color: red;"
+    var initCSS = "color: red;"
     plugin.name && (nameCSS = "color: green;")
     plugin.instance && (instanceCSS = "color: green;")
     plugin.init && (initCSS = "color: green;")
@@ -472,7 +472,7 @@ dk.loadCss = function dk_loadCss(url, dk_loadCss_callback) {
     const links = document.getElementsByTagName("link");
     if (!links)
         return false;
-    for (let n = 0; n < links.length; n++) {
+    for (var n = 0; n < links.length; n++) {
         if (links[n].href && links[n].href.includes(url)) {
             console.log(url + " already loaded.");
             dk_loadCss_callback && dk_loadCss_callback(links[n]);
@@ -1174,7 +1174,7 @@ dk.checkForUNICODE = function dk_checkForUNICODE(str) {
     required({
         str
     });
-    for (let i = 0, n = str.length; i < n; i++) {
+    for (var i = 0, n = str.length; i < n; i++) {
         if (str.charCodeAt(i) > 255) {
             console.warn("Found UNICODE character at " + i);
             console.log(0, str.substring(i));
@@ -1199,10 +1199,10 @@ dk.stringToBinary = function dk_sringToBinary(string) {
     //for BINARY maxBytes = 255
     //for VARBINARY maxBytes = 65535
     const maxBytes = 255;
-    let binaryOutput = '';
+    var binaryOutput = '';
     if (string.length > maxBytes)
         string = string.substring(0, maxBytes);
-    for (let i = 0; i < string.length; i++)
+    for (var i = 0; i < string.length; i++)
         binaryOutput += string[i].charCodeAt(0).toString(2) + ' ';
     return binaryOutput;
 }
@@ -1210,8 +1210,8 @@ dk.stringToBinary = function dk_sringToBinary(string) {
 // dk.binaryToString
 dk.binaryToString = function dk_binaryToString(binary) {
     const arrayOfBytes = binary.split(' ');
-    let stringOutput = '';
-    for (let i = 0; i < arrayOfBytes.length; i++)
+    var stringOutput = '';
+    for (var i = 0; i < arrayOfBytes.length; i++)
         stringOutput += String.fromCharCode(parseInt(arrayOfBytes[i], 2));
     return stringOutput;
 }
@@ -1343,7 +1343,7 @@ dk.errorCatcher = function dk_errorCatcher(obj, name) {
     });
     dk.errorCatcher.bypass = ["init", "end", "create", "close"]
     !name && (name = obj.constructor.name);
-    for (let func in obj) {
+    for (var func in obj) {
         if (func.includes("_try"))
             continue;
         if (obj[func + "_try"])
@@ -1442,14 +1442,14 @@ dk.insert = function dk_insert(str, index, value) {
 // https://stackoverflow.com/a/24032179/688352
 dk.renameFunction = function dk_renameFunction(func, name) {
     const oldName = func.name;
-    let funcString = func.toString();
+    var funcString = func.toString();
     funcString = funcString.replace("function(", "function " + name + "(")
     funcString = funcString.replace("function (", "function " + name + "(")
     funcString = funcString.replace("function " + oldName + "(", "function " + name + "(")
     funcString += "\nreturn " + name + ";"
     const parent = window;
-    let scope = parent;
-    let values = [];
+    var scope = parent;
+    var values = [];
     if (!Array.isArray(scope) || !Array.isArray(values)) {
         if (typeof scope == "object") {
             var keys = Object.keys(scope);
@@ -1473,8 +1473,8 @@ dk.editFunctionBody = function dk_editFunctionBody(func, newBody) {
     newBody = newBody.replace("function " + name + "(", "function " + name + "(")
     newBody += "\nreturn " + name + ";"
     const parent = window;
-    let scope = parent;
-    let values = [];
+    var scope = parent;
+    var values = [];
     if (!Array.isArray(scope) || !Array.isArray(values)) {
         if (typeof scope == "object") {
             var keys = Object.keys(scope);
@@ -1497,8 +1497,8 @@ dk.StringToFunction = function dk_StringToFunction(name, str) {
     str = str.replace("function " + name + "(", "function " + name + "(")
     str += "\nreturn " + name + ";"
     const parent = window;
-    let scope = parent;
-    let values = [];
+    var scope = parent;
+    var values = [];
     if (!Array.isArray(scope) || !Array.isArray(values)) {
         if (typeof scope == "object") {
             var keys = Object.keys(scope);
@@ -1518,7 +1518,7 @@ dk.StringToFunction = function dk_StringToFunction(name, str) {
 dk.classExtends = function dk_classExtends(child_class, parent_class) {
     const child_prototype = child_class.prototype;
     const funcString = "function " + child_class.name + "(){\n\tconsole.log('" + child_class.name + "() constructor')\n\t" + parent_class.name + ".call(this, arguments)\n}";
-    let child = dk.StringToFunction(child_class.name, funcString)
+    var child = dk.StringToFunction(child_class.name, funcString)
     child.prototype = Object.create(parent_class.prototype)
     child.prototype.constructor = child
     Object.assign(child.prototype, child_prototype)

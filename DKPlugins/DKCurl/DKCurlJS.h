@@ -24,19 +24,16 @@
 * SOFTWARE.
 */
 
-#ifdef HAVE_DKDuktape 
+#if HAVE_DKDuktape 
 #pragma once
 #ifndef DKCurlJS_H
 #define DKCurlJS_H
 
 #include "DKDuktape/DKDuktape.h"
 
-///////////////////////////////////////////
-class DKCurlJS : public DKObjectT<DKCurlJS>
-{
+class DKCurlJS : public DKObjectT<DKCurlJS>{
 public:
 	bool Init();
-	
 	static int Download(duk_context* ctx);
 	static int FileDate(duk_context* ctx);
 	static int FtpConnect(duk_context* ctx);

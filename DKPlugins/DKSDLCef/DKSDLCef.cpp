@@ -38,8 +38,7 @@
 #endif
 
 
-bool DKSDLCef::Init()
-{
+bool DKSDLCef::Init() {
 	DKDEBUGFUNC();
 	popup_image = NULL;
 	dkSdlWindow = DKSDLWindow::Instance("DKSDLWindow0");
@@ -62,8 +61,7 @@ bool DKSDLCef::Init()
 	return true;
 }
 
-bool DKSDLCef::End()
-{
+bool DKSDLCef::End() {
 	DKDEBUGFUNC();
 	DKApp::RemoveLoopFunc(&DKSDLCefHandler::DoFrame, cefHandler);
 	DKClass::UnregisterFunc("DKSDLCef::OnResize");
@@ -72,8 +70,7 @@ bool DKSDLCef::End()
 	return true;
 }
 
-bool DKSDLCef::GetCefMouseButton(const int& button, CefBrowserHost::MouseButtonType& type)
-{
+bool DKSDLCef::GetCefMouseButton(const int& button, CefBrowserHost::MouseButtonType& type) {
 	DKDEBUGFUNC(button, type);
 	if(button == 1){ type = MBT_LEFT; }
 	if(button == 2){ type = MBT_MIDDLE; }
@@ -81,8 +78,7 @@ bool DKSDLCef::GetCefMouseButton(const int& button, CefBrowserHost::MouseButtonT
 	return true;
 }
 
-bool DKSDLCef::GetScrollDeltas(SDL_Event* event, float &deltaX, float &deltaY)
-{
+bool DKSDLCef::GetScrollDeltas(SDL_Event* event, float &deltaX, float &deltaY) {
 	DKDEBUGFUNC(event, deltaX, deltaY);
 	deltaX = 0.0f;
 	deltaY = 0.0f;
@@ -97,8 +93,7 @@ bool DKSDLCef::GetScrollDeltas(SDL_Event* event, float &deltaX, float &deltaY)
 	return deltaX != 0.0f || deltaY != 0.0f;
 }
 
-bool DKSDLCef::GetTexture(const void* input, void* output)
-{
+bool DKSDLCef::GetTexture(const void* input, void* output) {
 	DKString id = *(DKString*)input;
 	DKDEBUGFUNC(id, "void* output");
 	//replace(id, "[CEF]", "");
@@ -116,8 +111,7 @@ bool DKSDLCef::GetTexture(const void* input, void* output)
 	return true;
 }
 
-bool DKSDLCef::Handle(SDL_Event* event)
-{
+bool DKSDLCef::Handle(SDL_Event* event) {
 	//DKDEBUGFUNC(event);
 	int browser_index;
 	if (!dkCef->GetCurrentBrowser(browser_index))
@@ -238,24 +232,24 @@ bool DKSDLCef::Handle(SDL_Event* event)
 			if(event->key.keysym.sym > 96 && event->key.keysym.sym < 123){ //letter
 				if(event->key.keysym.mod & KMOD_SHIFT && event->key.keysym.mod & KMOD_CAPS){ //both = lowercase
 					charKeyEvent.windows_key_code = DKSDLWindow::sdlCharCode[event->key.keysym.sym];
-					charKeyEvent.character = DKSDLWindow::sdlCharCode[event->key.keysym.sym];
+					charKeyEvent.character = (char16)DKSDLWindow::sdlCharCode[event->key.keysym.sym];
 				}
 				else if(event->key.keysym.mod & KMOD_SHIFT || event->key.keysym.mod & KMOD_CAPS){ //1 = uppercase
 					charKeyEvent.windows_key_code = DKSDLWindow::sdlShiftCharCode[event->key.keysym.sym];
-					charKeyEvent.character = DKSDLWindow::sdlShiftCharCode[event->key.keysym.sym];
+					charKeyEvent.character = (char16)DKSDLWindow::sdlShiftCharCode[event->key.keysym.sym];
 				}
 				else{
 					charKeyEvent.windows_key_code = DKSDLWindow::sdlCharCode[event->key.keysym.sym]; // lowercase
-					charKeyEvent.character = DKSDLWindow::sdlCharCode[event->key.keysym.sym];
+					charKeyEvent.character = (char16)DKSDLWindow::sdlCharCode[event->key.keysym.sym];
 				}
 			}
 			else if(event->key.keysym.mod & KMOD_SHIFT){ //other character keys
 				charKeyEvent.windows_key_code = DKSDLWindow::sdlShiftCharCode[event->key.keysym.sym]; //shifted symbol
-				charKeyEvent.character = DKSDLWindow::sdlShiftCharCode[event->key.keysym.sym]; //shifted symbol
+				charKeyEvent.character = (char16)DKSDLWindow::sdlShiftCharCode[event->key.keysym.sym]; //shifted symbol
 			}
 			else{
 				charKeyEvent.windows_key_code = DKSDLWindow::sdlCharCode[event->key.keysym.sym]; //symbol
-				charKeyEvent.character = DKSDLWindow::sdlCharCode[event->key.keysym.sym]; //symbol
+				charKeyEvent.character = (char16)DKSDLWindow::sdlCharCode[event->key.keysym.sym]; //symbol
 			}
 
 			//DKINFO("CHAR: windows_key_code = "+toString(charKeyEvent.windows_key_code)+"\n");
@@ -349,8 +343,7 @@ bool DKSDLCef::Handle(SDL_Event* event)
 	return false;
 }
 
-bool DKSDLCef::OnClick(const void* input, void* output)
-{
+bool DKSDLCef::OnClick(const void* input, void* output) {
 	DKDEBUGFUNC(input, output);
 	DKString str = *(DKString*)input;
 	DKStringArray arry;
@@ -364,8 +357,7 @@ bool DKSDLCef::OnClick(const void* input, void* output)
 	return false;
 }
 
-bool DKSDLCef::OnMouseOver(const void* input, void* output)
-{
+bool DKSDLCef::OnMouseOver(const void* input, void* output) {
 	DKDEBUGFUNC(input, output);
 	DKString str = *(DKString*)input;
 	DKStringArray arry;
@@ -379,8 +371,7 @@ bool DKSDLCef::OnMouseOver(const void* input, void* output)
 	return true; 
 }
 
-bool DKSDLCef::OnResize(const void* input, void* output)
-{
+bool DKSDLCef::OnResize(const void* input, void* output) {
 	DKDEBUGFUNC(input, output);
 	DKString str = *(DKString*)input;
 	DKStringArray arry;
@@ -409,8 +400,7 @@ bool DKSDLCef::OnResize(const void* input, void* output)
 	return true;
 }
 
-bool DKSDLCef::SetupCef()
-{
+bool DKSDLCef::SetupCef() {
 	DKDEBUGFUNC();
 	cefHandler = new DKSDLCefHandler();
 	cefHandler->dkSdlWindow = dkSdlWindow;
@@ -421,8 +411,7 @@ bool DKSDLCef::SetupCef()
 	return true;
 }
 
-bool DKSDLCef::TransparentPixel(SDL_Event *event)
-{
+bool DKSDLCef::TransparentPixel(SDL_Event *event) {
 	DKDEBUGFUNC(event);
 	// TODO
 	/*
@@ -441,8 +430,7 @@ bool DKSDLCef::TransparentPixel(SDL_Event *event)
 	return false;
 }
 
-bool DKSDLCef::Draw()
-{
+bool DKSDLCef::Draw() {
 	//DKDEBUGFUNC();
 	if (DKClass::DKValid("DKRml,DKRml0"))
 		return false; //We have a valid DKRml instance, so we are drawing to rml textures instead of striaght to SDL

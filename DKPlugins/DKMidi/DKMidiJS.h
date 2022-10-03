@@ -24,19 +24,19 @@
 * SOFTWARE.
 */
 
-#ifdef HAVE_DKDuktape 
+#ifdef HAVE_rtmidi
+#ifdef HAVE_DKDuktape
+ 
 #pragma once
 #ifndef DKMidiJS_H
 #define DKMidiJS_H
 
 #include "DKDuktape/DKDuktape.h"
 
-///////////////////////////////////////////
 class DKMidiJS : public DKObjectT<DKMidiJS>
 {
 public:
 	bool Init();
-	
 	static int GetMidiInputs(duk_context* ctx);
 	static int GetMidiOutputs(duk_context* ctx);
 	static int SendMidi(duk_context* ctx);
@@ -47,4 +47,6 @@ public:
 REGISTER_OBJECT(DKMidiJS, true)
 
 #endif //DKMidiJS_H
+
 #endif //HAVE_DKDuktape
+#endif //HAVE_rtmidi

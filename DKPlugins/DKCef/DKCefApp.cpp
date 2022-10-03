@@ -32,7 +32,7 @@ CefRefPtr<CefBrowser> DKV8::_browser = NULL;
 CefRefPtr<DKCefV8Handler> DKV8::v8handler = NULL;
 CefRefPtr<CefV8Value> DKV8::ctx = NULL;
 //#ifdef MAC
-		//std::map<DKString, boost::function2<bool, CefArgs, CefReturn> > DKV8::functions;
+	//std::map<DKString, boost::function2<bool, CefArgs, CefReturn> > DKV8::functions;
 	//std::map<DKString, std::function2<bool, CefArgs, CefReturn> > DKV8::functions;
 //#else
 	//std::map<DKString, boost::function<bool(CefArgs, CefReturn)>> DKV8::functions;
@@ -58,9 +58,8 @@ DKString DKV8::renderer_process_limit;
 DKString DKV8::sandbox;
 //DKString DKV8::off_screen_rendering_enabled;
 
-
 void DKV8::SetFlags(){
-	DKDEBUGFUNC();
+	//DKDEBUGFUNC();
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CEF_HOMEPAGE]", homepage);
 	DKINFO("DKV8::homepage = "+homepage+"\n");
 
@@ -114,7 +113,7 @@ void DKV8::SetFlags(){
 }
 
 bool DKV8::AttachFunction(const DKString& name, bool (*func)(CefArgs, CefReturn)){
-	DKDEBUGFUNC(name/*, func*/);
+	//DKDEBUGFUNC(name, func);
 	//FIXME - this is very unstable, not thread safe
 	// 
 	//multi process will fail
@@ -122,21 +121,21 @@ bool DKV8::AttachFunction(const DKString& name, bool (*func)(CefArgs, CefReturn)
 		CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(name.c_str(), DKV8::v8handler);
 		if(!DKV8::ctx->SetValue(name.c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE))
 			return DKERROR("DKV8::ctx->SetValue() failed");
-		DKINFO("DKV8::AttachFunction(): registered: "+name+"\n");
+		DKINFO("registered: "+name+"\n");
 	}
 	else{
 		//NOTE: this stores the function, it will be attached when OnContextCreated is called.
 		//functions[name] = boost::bind(func, boost::placeholders::_1, boost::placeholders::_2);
 		functions[name] = std::bind(func, std::placeholders::_1, std::placeholders::_2);
 		if(!functions[name])
-			return DKERROR("DKV8::AttachFunctions("+name+"): failed to register function\n");
+			return DKERROR("failed to register function\n");
 		DKV8::funcs.push_back(name);
 	}
 	return true;
 }
 
 bool DKV8::GetFunctions(CefRefPtr<CefBrowser> browser){
-	DKDEBUGFUNC(browser);
+	//DKDEBUGFUNC(browser);
 	CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("GetFunctions");
 	CefRefPtr<CefListValue> args = msg->GetArgumentList();
 	int i=0;
@@ -151,10 +150,9 @@ bool DKV8::GetFunctions(CefRefPtr<CefBrowser> browser){
 	return true;
 }
 
-bool DKV8::Execute(CefRefPtr<CefBrowser> browser, std::string func, CefRefPtr<CefListValue> args){
-	//Multi process Execute
-	DKDEBUGFUNC(browser, func);
-
+//Multi process Execute
+bool DKV8::Execute(CefRefPtr<CefBrowser> browser, std::string func, CefRefPtr<CefListValue> args) {
+	//DKDEBUGFUNC(browser, func, args);
 	_browser = browser;
 	if(!functions[func])
 		return DKERROR("DKCefV8Handler::Execute(): "+func+" not registered\n");
@@ -181,16 +179,14 @@ bool DKV8::Execute(CefRefPtr<CefBrowser> browser, std::string func, CefRefPtr<Ce
 	return true;
 }
 
-
+//Single process Execute
 bool DKCefV8Handler::Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefV8ValueList& arguments, CefRefPtr<CefV8Value>& retval, CefString& exception){
-	//Single process Execute
-	//DKDEBUGFUNC("const CefString&", object, "const CefV8ValueList&", retval, exception);
+	//DKDEBUGFUNC(name, object, arguments, retval, exception);
 	if(DKV8::singleprocess == true){ //Single process
 		if(!DKV8::functions[name])
-			return DKERROR("DKCefV8Handler::Execute(): "+name.ToString()+" not registered\n");
-
+			return DKERROR(name.ToString()+" not registered\n");
 		//Set the function arguments and show the function in log
-		DKString text = "DKCefV8Handler::Execute(): "+name.ToString()+"(";
+		DKString text = name.ToString()+"(";
 		CefRefPtr<CefListValue> args = CefListValue::Create();
 		for(unsigned int i=0; i<arguments.size(); i++){
 			if(arguments[i]->IsString()){
@@ -218,8 +214,7 @@ bool DKCefV8Handler::Execute(const CefString& name, CefRefPtr<CefV8Value> object
 
 		CefRefPtr<CefListValue> rval = CefListValue::Create();
 		if(!DKV8::functions[name](args, rval))
-			return DKERROR("DKCefV8Handler::Execute("+name.ToString()+"): "+name.ToString()+" failed\n");
-
+			return DKERROR(name.ToString()+"() failed\n");
 		//Transfer retun value into &retval
 		if(rval->GetType(0) == VTYPE_STRING){
 			retval = CefV8Value::CreateString(rval->GetString(0));
@@ -241,15 +236,10 @@ bool DKCefV8Handler::Execute(const CefString& name, CefRefPtr<CefV8Value> object
 	return true;
 }
 
-
 void DKCefV8Handler::SetBrowser(CefRefPtr<CefBrowser> _browser){
-	DKDEBUGFUNC(browser);
+	//DKDEBUGFUNC(browser);
 	browser = _browser;
 }
-
-
-
-
 
 /*
 bool DKCefApp::SendEvent(const DKString& id, const DKString& type, const DKString& value){
@@ -261,11 +251,10 @@ bool DKCefApp::SendEvent(const DKString& id, const DKString& type, const DKStrin
 	if(has(type, "DKCef_")){ return false; }
 	if(same(type, "keydown")){ return false; }
 	if(same(type, "keypress")){ return false; }
-
 	//CefRefPtr<CefFrame> frame = DKV8::v8handler->browser->GetMainFrame();
 	//CefRefPtr<CefFrame> frame = DKV8::_browser->GetMainFrame();
 	if(!frame)
-		return DKERROR("DKCefApp::SendEvent("+id+","+type+","+value+"): frame invalid\n");
+		return DKERROR("frame invalid\n");
 	DKString string = "DKSendEvent(\""+id+"\",\""+type+"\",\""+value+"\");";
 	frame->ExecuteJavaScript(string.c_str(), frame->GetURL(), 0);
 	return true;
@@ -308,40 +297,40 @@ void DKCefApp::OnBeforeCommandLineProcessing(const CefString& process_type, CefR
 	if(same(DKV8::enable_gpu, "ON"))
 		command_line->AppendSwitchWithValue("enable-gpu", "1");
 	command_line->AppendSwitchWithValue("disable-extensions", "1");
-#ifdef LINUX
-    	//TODO - only do this is the flash flag is turned on
-	//command_line->AppendSwitchWithValue("ppapi-flash-version", "25.0.0.127");
-	//command_line->AppendSwitchWithValue("ppapi-flash-path", "/usr/lib/pepperflashplugin-nonfree/libpepflashplayer.so");
-#endif
+#	ifdef LINUX
+		//TODO - only do this is the flash flag is turned on
+		//command_line->AppendSwitchWithValue("ppapi-flash-version", "25.0.0.127");
+		//command_line->AppendSwitchWithValue("ppapi-flash-path", "/usr/lib/pepperflashplugin-nonfree/libpepflashplayer.so");
+#	endif
 
 #endif //!DKCefChild
 	DKV8::v8handler = new DKCefV8Handler();
 }
 
 void DKCefApp::OnBrowserCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDictionaryValue> extra_info) {
-	DKDEBUGFUNC(browser);
+	//DKDEBUGFUNC(browser, extra_info);
 #ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
 #endif
 	DKV8::_browser = browser;
 	DKV8::v8handler->SetBrowser(browser);
 	CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("GetFunctions");
-	CefRefPtr<CefListValue> args = msg->GetArgumentList(); // Retrieve the argument list object.
+	CefRefPtr<CefListValue> args = msg->GetArgumentList();
 #ifndef DEBUG
 	//browser->SendProcessMessage(PID_RENDERER, msg); //FIXME
 #endif
 }
 
-void DKCefApp::OnContextInitialized(){
-	DKDEBUGFUNC();
+void DKCefApp::OnContextInitialized() {
+	//DKDEBUGFUNC();
 #ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
 #endif
 	//CefRefreshWebPlugins(); //FIXME
 }
 
-void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context){
-	DKDEBUGFUNC(browser, frame, context);
+void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context) {
+	//DKDEBUGFUNC(browser, frame, context);
 #ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
 #endif
@@ -350,19 +339,17 @@ void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 	for(unsigned int i=0; i<DKV8::funcs.size(); i++){
 		CefRefPtr<CefV8Value> value = CefV8Value::CreateFunction(DKV8::funcs[i].c_str(), DKV8::v8handler);
 		if(DKV8::ctx->SetValue(DKV8::funcs[i].c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE))
-			DKINFO("DKCefApp::OnContextCreated(): registered: "+DKV8::funcs[i]+"\n");
+			DKINFO("registered: "+DKV8::funcs[i]+"\n");
 	}
 }
 
 bool DKCefApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefProcessId source_process, CefRefPtr<CefProcessMessage> message) {
-	DKDEBUGFUNC(browser, source_process, message);
+	//DKDEBUGFUNC(browser, source_process, message);
 #ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
 #endif
-
 	if(DKV8::singleprocess)
-		return DKERROR("DKCefApp::OnProcessMessageReceived("+message->GetName().ToString()+"): message system disabled in single-process mode\n");
-
+		return DKERROR("message system disabled in single-process mode\n");
 	CefRefPtr<CefListValue> args = message->GetArgumentList();
 	std::string str = "DKCefApp::OnProcessMessageReceived(): "; 
 	str += message->GetName();
@@ -394,12 +381,13 @@ bool DKCefApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefRefPtr
 	return false;
 }
 
-void DKCefApp::OnUncaughtException(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context, CefRefPtr<CefV8Exception> exception, CefRefPtr<CefV8StackTrace> stackTrace){
+void DKCefApp::OnUncaughtException(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context, CefRefPtr<CefV8Exception> exception, CefRefPtr<CefV8StackTrace> stackTrace) {
+	//DKDEBUGFUNC(browser, frame, context, exception, stackTrace); //DON'T DO THIS
+	
 	//This isn't working so well, another Error handler is located in DK/Browser.js
 	return;
 
 	/*
-	//DKDEBUGFUNC(browser, frame, context, exception, stackTrace); //DON'T DO THIS
 	DKString msg = exception->GetMessage().ToString();
 	if(has(msg,"DKSendEvent is not defined")){ return; } //ignore DKSendEvent not existing
 

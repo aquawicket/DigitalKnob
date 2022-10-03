@@ -52,7 +52,7 @@ bool DKAssets::Init(){
 		DKLog::log_file = false;
 	}
 	else{
-#ifndef ANDROID
+#if !ANDROID
 	//clear the log file
 	std::ofstream file_log;
     DKString path = DKFile::local_assets+"log.txt";
@@ -61,19 +61,27 @@ bool DKAssets::Init(){
 #endif		
 	}
 
-#ifdef WIN32
+#if WIN32
 	DKString console;
-	//if (DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CONSOLE]", console)) {
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[CONSOLE]", console);
-	if(!same(console, "ON"))
-		ShowWindow(GetConsoleWindow(), SW_HIDE);
-	//}
+#	if DEBUG
+		if(!same(console, "OFF"))
+			ShowWindow(GetConsoleWindow(), SW_SHOW);
+#	else
+		if(!same(console, "ON"))
+			ShowWindow(GetConsoleWindow(), SW_HIDE);
+#	endif
 #endif
 
 	DKString debug;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_DEBUG]", debug);
+#if DEBUG
+	if(!same(debug, "OFF"))
+		DKLog::log_debug = true;
+#else
 	if(same(debug, "ON"))
 		DKLog::log_debug = true;
+#endif
 
 	DKString info;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_INFO]", info);
@@ -92,8 +100,13 @@ bool DKAssets::Init(){
 	
 	DKString stacktraceonerrors;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[STACKTRACE_ON_ERRORS]", stacktraceonerrors);
+#if DEBUG
+	if(!same(stacktraceonerrors, "OFF"))
+		DKLog::stacktrace_on_errors = true;
+#else
 	if(same(stacktraceonerrors, "ON"))
 		DKLog::stacktrace_on_errors = true;
+#endif
 
 	DKString exceptiononerrors;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[EXCEPTION_ON_ERRORS]", exceptiononerrors);
@@ -105,18 +118,33 @@ bool DKAssets::Init(){
 
 	DKString threads;
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[LOG_THREAD]", threads);
+#if DEBUG
+	if (!same(threads, "OFF"))
+		DKLog::log_thread = true;
+#else
 	if (same(threads, "ON"))
 		DKLog::log_thread = true;
+#endif
 	
 	DKString lines;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_LINES]", lines);
+#if DEBUG
+	if(!same(lines, "OFF"))
+		DKLog::log_lines = true;
+#else
 	if(same(lines, "ON"))
 		DKLog::log_lines = true;
+#endif
 
 	DKString funcs;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[LOG_FUNCS]", funcs);
+#if DEBUG
+	if(!same(funcs, "OFF"))
+		DKLog::log_funcs = true;
+#else
 	if(same(funcs, "ON"))
 		DKLog::log_funcs = true;
+#endif
 	
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[ONLINE_ASSETS]", DKFile::online_assets);
 	if(DKFile::online_assets.empty())
@@ -135,11 +163,11 @@ bool DKAssets::End(){
 }
 
 bool DKAssets::GetAssetsPath(DKString& path){
-	DKDEBUGFUNC();
+	DKDEBUGFUNC(path);
 	//If there is an assets directory below the app directory, then we are in a development environment.
 	//and we will point to that location for assets
 	
-#ifdef WIN32
+#if WIN32
 	if (DKFile::PathExists(DKFile::app_path + "../assets/") && 
 	    DKFile::PathExists(DKFile::app_path + "../DKMAKE.cmake")) {
 		if (DKFile::GetAbsolutePath(DKFile::app_path + "../assets/", path)) {
@@ -155,8 +183,7 @@ bool DKAssets::GetAssetsPath(DKString& path){
 		}
 	}
 	return false;
-#endif
-#ifdef MAC
+#elif MAC
 	if (DKFile::PathExists(DKFile::app_path + "../../../../../assets/") && 
 		DKFile::PathExists(DKFile::app_path + "../../../../../DKMAKE.cmake")) {
 		if (DKFile::GetAbsolutePath(DKFile::app_path + "../../../../../assets/", path)) {
@@ -164,8 +191,7 @@ bool DKAssets::GetAssetsPath(DKString& path){
 		}
 	}
 	return false;
-#endif
-#ifdef IOS
+#elif IOS
     std::string::size_type pos = DKFile::app_path.find("/Library");
     DKString userpath = DKFile::app_path.substr(0, pos);
     DKStringArray folders;
@@ -178,20 +204,20 @@ bool DKAssets::GetAssetsPath(DKString& path){
         }
     }
 	return false;
-#endif
-#ifdef LINUX
+#elif LINUX
 	if (DKFile::PathExists(DKFile::app_path + "../../assets/") && DKFile::PathExists(DKFile::app_path + "../../DKMAKE.cmake")) {
 		if (DKFile::GetAbsolutePath(DKFile::app_path + "../../assets/", path))
 			return true;
 	}
 	return false;
+#else
+	return DKERROR("not implemented on this OS \n");
 #endif
-	return DKERROR("DKAssets::GetAssetsPath() not implemented on this platform \n");
 }
 
 bool DKAssets::GetDataPath(DKString& path){
-	DKDEBUGFUNC();
-#ifdef WIN32
+	DKDEBUGFUNC(path);
+#if WIN32
 	DKString apppath;
 	DKFile::GetAppPath(apppath);
 	DKString appname;
@@ -201,8 +227,7 @@ bool DKAssets::GetDataPath(DKString& path){
 		return true;
 	DKFile::MakeDir(path);
 	return false;
-#endif
-#ifdef ANDROID
+#elif ANDROID
 	//TODO - folder should be named /appname_Data/
 	//CallJavaFunction("getApplicationName", "");
 	//path = "/mnt/sdcard/"+DKFile::exe_path;
@@ -210,22 +235,19 @@ bool DKAssets::GetDataPath(DKString& path){
 	
 	path = DKFile::exe_path +"/assets/";
 	return true;
-#endif
-#ifdef MAC
+#elif MAC
     path = DKFile::exe_path;
     std::string::size_type n = path.find_last_of("/");
     path.erase (path.begin()+n+1, path.end());
 	replace(path, "/MacOS", "/Resources");
 	return true;
-#endif
-#ifdef IOS //FIXME - double check that iOS doesn't have the MAC preprocessor definition.
+#elif IOS //FIXME - double check that iOS doesn't have the MAC preprocessor definition.
 	path = DKFile::exe_path;
     std::string::size_type n = path.find_last_of("/");
     path.erase(path.begin()+n+1, path.end());
 	path += "assets/";
 	return true;
-#endif
-#ifdef LINUX
+#elif LINUX
 	DKString apppath;
 	DKFile::GetAppPath(apppath);
 	DKString appname;
@@ -235,8 +257,9 @@ bool DKAssets::GetDataPath(DKString& path){
 		return true;
 	DKFile::MakeDir(path);
 	return false;
+#else
+	return DKERROR("not implemented on this OS \n");
 #endif
-	return DKERROR("DKAssets::GetDataPath() not implemented on this OS \n");
 }
 
 bool DKAssets::PackageAssets(DKString& dataFolder, DKString& headerFile){
@@ -290,8 +313,8 @@ bool DKAssets::DeployAssets(){
 #endif
 
 //Windows will use the resources interface
-#ifdef WIN32
-	DKINFO("Extracting assets from executable windows resources . . .\n");	
+#if WIN32
+	DKINFO("Extracting assets from executable windows resources . . . \n");	
 	HGLOBAL hResourceLoaded;		// handle to loaded resource 
 	HRSRC hRes;					// handle/ptr. to res. info. 
 	char *lpResLock;				// pointer to resource data 
@@ -316,8 +339,8 @@ bool DKAssets::DeployAssets(){
 	//}
 #endif
 
-#ifdef ANDROID
-	DKERROR("DKAssets::DeployAssets() is not implemented on android yet"); //NOTE: we have a CopyAssets() function for android somewhere
+#if ANDROID
+	DKERROR("not implemented this OS \n"); //NOTE: we have a CopyAssets() function for android somewhere
 #endif
 
 	//Restore User data

@@ -1,5 +1,5 @@
 ### DEPENDS ###
-#dk_depend(jdk)
+#dk_depend(openjdk)
 dk_depend(ant)
 dk_depend(nodejs)
 

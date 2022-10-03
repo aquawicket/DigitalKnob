@@ -149,6 +149,8 @@ endif()
 
 
 ########### Determine the OS we are building for ####################
+
+# WIN 32
 string(FIND "${CMAKE_BINARY_DIR}" "/win32" index)
 if(${index} GREATER -1)
 	dk_info("Creating Windows x32 Project Files")
@@ -160,6 +162,8 @@ if(${index} GREATER -1)
 	dk_set(CMAKE_SKIP_RPATH ON)
 	string(REPLACE "/win32" "" DKPROJECT ${CMAKE_BINARY_DIR})
 endif()
+
+# WIN 64
 string(FIND "${CMAKE_BINARY_DIR}" "/win64" index)
 if(${index} GREATER -1)
 	dk_info("*** Creating Windows x64 Project Files ***")
@@ -171,6 +175,8 @@ if(${index} GREATER -1)
 	dk_set(CMAKE_SKIP_RPATH ON)
 	string(REPLACE "/win64" "" DKPROJECT ${CMAKE_BINARY_DIR})
 endif()
+
+# MAC 32
 string(FIND "${CMAKE_BINARY_DIR}" "/mac32" index)
 if(${index} GREATER -1)
 	dk_info("*** Creating Mac x32 Project Files ***")
@@ -182,6 +188,8 @@ if(${index} GREATER -1)
 	dk_set(CMAKE_SKIP_RPATH ON)
 	string(REPLACE "/mac32" "" DKPROJECT ${CMAKE_BINARY_DIR})
 endif()
+
+# MAC 64
 string(FIND "${CMAKE_BINARY_DIR}" "/mac64" index)
 if(${index} GREATER -1)
 	dk_info("*** Creating Mac x64 Project Files ***")
@@ -193,6 +201,8 @@ if(${index} GREATER -1)
 	dk_set(CMAKE_SKIP_RPATH ON)
 	string(REPLACE "/mac64" "" DKPROJECT ${CMAKE_BINARY_DIR})
 endif()
+
+# IOS 32
 string(FIND "${CMAKE_BINARY_DIR}" "/ios32" index)
 if(${index} GREATER -1)
 	dk_info("*** Creating iOS x32 Project Files ***")
@@ -201,9 +211,13 @@ if(${index} GREATER -1)
 	dk_set(OS "ios32")
 	dk_set(DEBUG_DIR Debug-iphoneos)
 	dk_set(RELEASE_DIR Release-iphoneos)
+	#dk_set(DEBUG_DIR Debug)
+	#dk_set(RELEASE_DIR Release)
 	dk_set(CMAKE_SKIP_RPATH ON)
 	string(REPLACE "/ios32" "" DKPROJECT ${CMAKE_BINARY_DIR})
 endif()
+
+# IOS 64
 string(FIND "${CMAKE_BINARY_DIR}" "/ios64" index)
 if(${index} GREATER -1)
 	dk_info("*** Creating iOS x64 Project Files ***")
@@ -212,9 +226,13 @@ if(${index} GREATER -1)
 	dk_set(OS "ios64")
 	dk_set(DEBUG_DIR Debug-iphoneos)
 	dk_set(RELEASE_DIR Release-iphoneos)
+	#dk_set(DEBUG_DIR Debug)
+	#dk_set(RELEASE_DIR Release)
 	dk_set(CMAKE_SKIP_RPATH ON)
 	string(REPLACE "/ios64" "" DKPROJECT ${CMAKE_BINARY_DIR})
 endif()
+
+# IOSSIM 32
 string(FIND "${CMAKE_BINARY_DIR}" "/iossim32" index)
 if(${index} GREATER -1)
 	dk_info("*** Creating iOS-Simulator x32 Project Files ***")
@@ -223,9 +241,13 @@ if(${index} GREATER -1)
 	dk_set(OS "iossim32")
 	dk_set(DEBUG_DIR Debug-iphonesimulator)
 	dk_set(RELEASE_DIR Release-iphonesimulator)
+	#dk_set(DEBUG_DIR Debug)
+	#dk_set(RELEASE_DIR Release)
 	dk_set(CMAKE_SKIP_RPATH ON)
 	string(REPLACE "/iossim32" "" DKPROJECT ${CMAKE_BINARY_DIR})
 endif()
+
+# IOSSIM 64
 string(FIND "${CMAKE_BINARY_DIR}" "/iossim64" index)
 if(${index} GREATER -1)
 	dk_info("*** Creating iOS-Simulator x64 Project Files ***")
@@ -234,6 +256,8 @@ if(${index} GREATER -1)
 	dk_set(OS "iossim64")
 	dk_set(DEBUG_DIR Debug-iphonesimulator)
 	dk_set(RELEASE_DIR Release-iphonesimulator)
+	#dk_set(DEBUG_DIR Debug)
+	#dk_set(RELEASE_DIR Release)
 	dk_set(CMAKE_SKIP_RPATH ON)
 	string(REPLACE "/iossim64" "" DKPROJECT ${CMAKE_BINARY_DIR})
 endif()
@@ -248,6 +272,8 @@ endif()
 ## the RASPBERRY flag variables in place of the LINUX functions. In this conversion,
 ## Raspberry will listen to LINUX 32/64 and RPI 32/34.   The RASPBERRY flags will do nothing
 ## and we should be able to remove them once everythng is working.
+
+# RASPBERRY 32
 string(FIND "${CMAKE_BINARY_DIR}" "/raspberry32" index)
 if(${index} GREATER -1)
 	dk_info("*** Creating RASPBERRY x32 Project Files ***")
@@ -262,6 +288,8 @@ if(${index} GREATER -1)
 	dk_set(RELEASE_DIR Release)
 	string(REPLACE "/raspberry32" "" DKPROJECT ${CMAKE_BINARY_DIR})
 endif()
+
+# RASPBERY 64
 string(FIND "${CMAKE_BINARY_DIR}" "/raspberry64" index)
 if(${index} GREATER -1)
 	dk_info("*** Creating Raspberry x64 Project Files ***")
@@ -280,7 +308,7 @@ endif()
 #########################################################################################
 
 
-
+# LINUX 32
 string(FIND "${CMAKE_BINARY_DIR}" "/linux32" index)
 if(${index} GREATER -1)
 if(NOT RASPBERRY)
@@ -295,6 +323,8 @@ if(NOT RPI)
 endif()
 endif()
 endif()
+
+# LINUX 64
 string(FIND "${CMAKE_BINARY_DIR}" "/linux64" index)
 if(${index} GREATER -1)
 if(NOT RASPBERRY)
@@ -310,10 +340,7 @@ endif()
 endif()
 endif()
 
-
-
-
-
+# ANDROID 32
 string(FIND "${CMAKE_BINARY_DIR}" "/android32" index)
 if(${index} GREATER -1)
 	dk_info("*** Creating Android x32 Project Files ***")
@@ -325,6 +352,8 @@ if(${index} GREATER -1)
 	dk_set(CMAKE_SKIP_RPATH ON)
 	string(REPLACE "/android32" "" DKPROJECT ${CMAKE_BINARY_DIR})
 endif()
+
+# ANDROID 64
 string(FIND "${CMAKE_BINARY_DIR}" "/android64" index)
 if(${index} GREATER -1)
 	dk_info("*** Creating Android x64 Project Files ***")
@@ -336,6 +365,7 @@ if(${index} GREATER -1)
 	dk_set(CMAKE_SKIP_RPATH ON)
 	string(REPLACE "/android64" "" DKPROJECT ${CMAKE_BINARY_DIR})
 endif()
+
 
 if(NOT CMAKE_SCRIPT_MODE_FILE)
 	if(NOT OS)
@@ -351,7 +381,7 @@ if(NOT CMAKE_SCRIPT_MODE_FILE)
 endif()
 
 
-## NEW STYLE
+## TODO: NEW STYLE
 #if(WIN) #OS
 #	add_definitions(-DWIN) #OS
 #	if(X32) #ARCH

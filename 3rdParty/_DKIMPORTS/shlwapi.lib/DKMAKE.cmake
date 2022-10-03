@@ -1,9 +1,6 @@
 # https://docs.microsoft.com/en-us/windows/win32/shell/shlwapi-wrappers
-
-if(NOT WIN_HOST)
+if(NOT WIN)
 	return()
 endif()
 
-
-WIN_dk_lib(shlwapi.lib)
-#dk_import(shlwapi.lib)
+dk_findLibrary(shlwapi.lib)

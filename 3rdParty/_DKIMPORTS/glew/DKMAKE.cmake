@@ -1,20 +1,12 @@
+# https://github.com/nigels-com/glew
 # http://glew.sourceforge.net
-
 if(IOS OR IOSSIM OR ANDROID)
 	return()
 endif()
 
 
-#dk_import(https://github.com/nigels-com/glew.git)
-
 dk_import(https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip)
-
-#dk_set(GLEW_VERSION 2.2.0)
-#dk_set(GLEW_NAME glew-${GLEW_VERSION})
-#dk_set(GLEW_DL https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip)
-#dk_set(GLEW ${3RDPARTY}/${GLEW_NAME})
-#dk_import(${GLEW_DL} ${GLEW})
-
+#dk_import(https://github.com/nigels-com/glew.git)
 
 
 dk_copy(${GLEW}/build/cmake ${GLEW}/${OS}/CMakeFiles/Export/lib/cmake/glew OVERWRITE)
@@ -38,7 +30,7 @@ RASPBERRY_dk_libRelease(${GLEW}/${OS}//${RELEASE_DIR}/lib/libGLEW.a)
 
 
 ### INJECT ###
-#dk_set(GLEW_WIN32 
+# dk_set(GLEW_CMAKE
 #	-DGLEW_USE_STATIC_LIB=ON
 #	-DGLEW_DIR=${GLEW}/${OS}/CMakeFiles/Export/lib/cmake/glew
 #	-DGLEW_LIBRARY=${GLEW}/${OS}/lib/${DEBUG_DIR}/libglew32.lib
@@ -51,32 +43,17 @@ RASPBERRY_dk_libRelease(${GLEW}/${OS}//${RELEASE_DIR}/lib/libGLEW.a)
 	
 	
 
-##You need to link to other Windows libraries if you use GLFW as static library - gdi32.lib and user32.lib. Either add them in project properties for linker â€œAdditional Dependenciesâ€? setting. Or put #pragma comment (lib, "gdi32.lib") in your .c/.cpp source.
+### GENERATE ###
+dk_setPath		(${GLEW}/${BUILD_DIR})
+dk_queueCommand	(${DKCMAKE_BUILD} ${GLEW}/build/cmake)
 
-# -DGLEW_STATIC=ON -DGLEW_USE_STATIC_LIBS=ON
 
-### COMPILE ###
-dk_setPath(${GLEW}/${BUILD_DIR})
-
-WIN_dk_queueCommand(${DKCMAKE_BUILD} ${GLEW}/build/cmake)
-WIN_dk_visualStudio(${GLEW_NAME} glew.sln glew_s)
 #dk_copy(${GLEW}/${OS}/lib/${DEBUG_DIR} ${GLEW}/${OS}/CMakeFiles/Export/lib/ OVERWRITE)
 #dk_copy(${GLEW}/${OS}/lib/${RELEASE_DIR} ${GLEW}/${OS}/CMakeFiles/Export/lib/ OVERWRITE)
 #dk_copy(${GLEW}/${OS}/bin/${DEBUG_DIR} ${GLEW}/${OS}/CMakeFiles/Export/bin/ OVERWRITE)
 #dk_copy(${GLEW}/${OS}/bin/${RELEASE_DIR} ${GLEW}/${OS}/CMakeFiles/Export/bin/ OVERWRITE)
 
 
-MAC_dk_queueCommand(${DKCMAKE_BUILD} ${GLEW}/build/cmake)
-MAC_dk_xcode(${GLEW_NAME} glew_s)
-
-
-IOSSIM_dk_queueCommand(${DKCMAKE_BUILD} ${GLEW}/build/cmake)
-IOSSIM_dk_xcode(${GLEW_NAME} glew_s)
-
-
-LINUX_dk_queueCommand(${DKCMAKE_BUILD} ${GLEW}/build/cmake)
-LINUX_dk_queueCommand(make glew_s)
-
-
-RASPBERRY_dk_queueCommand(${DKCMAKE_BUILD} ${GLEW}/build/cmake)
-RASPBERRY_dk_queueCommand(make glew_s)
+dk_visualStudio	(${GLEW_NAME} glew_s)
+dk_xcode		(${GLEW_NAME} glew_s)
+dk_make			(${GLEW_NAME} glew_s)

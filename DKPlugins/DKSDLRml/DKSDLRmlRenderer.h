@@ -70,6 +70,8 @@ private:
     int mHeight;
     SDL_Window* mSdlWindow;
     SDL_Rect mScisorRect;
+
+	std::map<Rml::TextureHandle, DKString> texture_name; //texture to name map
 };
 
 #endif //DKSDLRMLRENDERER_H

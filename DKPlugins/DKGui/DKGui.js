@@ -25,7 +25,7 @@ DKGui.prototype.createTag = function DKGui_createTag(tag, parent, props, callbac
     style && delete props.style;
     const element = Object.assign(document.createElement(tag), props);
     style && Object.assign(element.style, style);
-    //for(let attr in props)
+    //for(var attr in props)
     //    element.setAttribute("dk", "");
     parent.appendChild(element);
     callback && callback(element);

@@ -1,8 +1,10 @@
 # https://github.com/AndroidSDKSources
 # https://dl.google.com/android/repository/sources-24_r01.zip
 # https://dl.google.com/android/repository/sources-26_r01.zip
-if(NOT WIN_HOST)
-#	return()
+
+if(NOT ANDROID)
+	dk_undepend(android-sources)
+	return()
 endif()
 
 dk_depend(android-sdk)

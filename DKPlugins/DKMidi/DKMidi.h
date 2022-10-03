@@ -24,6 +24,8 @@
 * SOFTWARE.
 */
 
+#ifdef HAVE_rtmidi
+
 #pragma once
 #ifndef DKMidi_H
 #define DKMidi_H
@@ -56,3 +58,4 @@ REGISTER_OBJECT(DKMidi, true);
 
 #endif //DKMidi_H
 
+#endif //HAVE_rtmidi

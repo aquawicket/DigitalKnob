@@ -1,11 +1,14 @@
 # https://github.com/uNetworking/uWebSockets
 
 
+### DEPEND ###
 dk_depend(zlib)
 dk_depend(libuv)
 dk_depend(openssl)
 
-dk_import(https://github.com/uNetworking/uWebSockets.git)
+
+### IMPORT ###
+dk_import(https://github.com/uNetworking/uWebSockets.git BRANCH v0.14 PATCH)
 
 
 ### LINK ###
@@ -13,18 +16,14 @@ dk_include(${UWEBSOCKETS})
 dk_include(${UWEBSOCKETS}/${OS})
 WIN_dk_libDebug(${UWEBSOCKETS}/${OS}/${DEBUG_DIR}/uWS.lib)
 WIN_dk_libRelease(${UWEBSOCKETS}/${OS}/${RELEASE_DIR}/uWS.lib)
-MAC_dk_libDebug(${UWEBSOCKETS}/${OS}/lib/${DEBUG_DIR}/uWS.a)
-MAC_dk_libRelease(${UWEBSOCKETS}/${OS}/lib/${RELEASE_DIR}/uWS.a)
-IOSSIM_dk_libDebug(${UWEBSOCKETS}/${OS}/${DEBUG_DIR}/lib/.libs/uWS.a)
-IOSSIM_dk_libRelease(${UWEBSOCKETS}/${OS}/${RELEASE_DIR}/lib/.libs/uWS.a)
-LINUX_dk_libDebug(${UWEBSOCKETS}/${OS}/${DEBUG_DIR}/uWS.a)
-LINUX_dk_libRelease(${UWEBSOCKETS}/${OS}/${RELEASE_DIR}/uWS.a)
-RASPBERRY_dk_libDebug(${UWEBSOCKETS}/${OS}/${DEBUG_DIR}/uWS.a)
-RASPBERRY_dk_libRelease(${UWEBSOCKETS}/${OS}/${RELEASE_DIR}/uWS.a)
-##ANDROID_dk_libDebug(${UWEBSOCKETS}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/uWS.a)
-##ANDROID_dk_libRelease(${UWEBSOCKETS}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/uWS.a)
-ANDROID_dk_libDebug(${UWEBSOCKETS}/${OS}/${DEBUG_DIR}/uWS.a)
-ANDROID_dk_libRelease(${UWEBSOCKETS}/${OS}/${RELEASE_DIR}/uWS.a)
+APPLE_dk_libDebug(${UWEBSOCKETS}/${OS}/${DEBUG_DIR}/libuWS.a)
+APPLE_dk_libRelease(${UWEBSOCKETS}/${OS}/${RELEASE_DIR}/libuWS.a)
+LINUX_dk_libDebug(${UWEBSOCKETS}/${OS}/${DEBUG_DIR}/libuWS.a)
+LINUX_dk_libRelease(${UWEBSOCKETS}/${OS}/${RELEASE_DIR}/libuWS.a)
+RASPBERRY_dk_libDebug(${UWEBSOCKETS}/${OS}/${DEBUG_DIR}/libuWS.a)
+RASPBERRY_dk_libRelease(${UWEBSOCKETS}/${OS}/${RELEASE_DIR}/libuWS.a)
+ANDROID_dk_libDebug(${UWEBSOCKETS}/${OS}/${DEBUG_DIR}/libuWS.a)
+ANDROID_dk_libRelease(${UWEBSOCKETS}/${OS}/${RELEASE_DIR}/libuWS.a)
 
 
 ### GENERATE ###
@@ -33,12 +32,6 @@ dk_queueCommand(${DKCMAKE_BUILD} ${ZLIB_CMAKE} ${LIBUV_CMAKE} ${OPENSSL_CMAKE} $
 
 
 ### COMPILE ###
-dk_visualStudio(${UWEBSOCKETS_NAME} µWebSockets.sln uWS)
-#WIN_dk_visualStudio(${UWEBSOCKETS_NAME} µWebSockets.sln uWS)
-dk_xcode(${UWEBSOCKETS_NAME} libuWS)
-#MAC_dk_xcode(${UWEBSOCKETS_NAME} libuWS)
-#IOS_dk_xcode(${UWEBSOCKETS_NAME} libuWS)
-#IOSSIM_dk_xcode(${UWEBSOCKETS_NAME} libuWS)
-LINUX_dk_queueCommand(make uWebSockets)
-RASPBERRY_dk_queueCommand(make uWebSockets)
-#ANDROID_dk_visualStudio(${UWEBSOCKETS_NAME} µWebSockets.sln uWS)
+dk_visualStudio	(${UWEBSOCKETS_NAME} uWS)
+dk_xcode		(${UWEBSOCKETS_NAME} uWS)
+dk_make			(${UWEBSOCKETS_NAME} uWS)

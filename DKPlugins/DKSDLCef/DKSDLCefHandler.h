@@ -206,11 +206,20 @@ public:
 
 	// CefPrintHandler
 	//CefRefPtr<CefPrintHandler> GetPrintHandler() override { return this; }
-	void OnPrintStart(CefRefPtr<CefBrowser> browser) override {};
-	void OnPrintSettings(CefRefPtr<CefBrowser> browser, CefRefPtr<CefPrintSettings> settings, bool get_defaults) override {}
+	void OnPrintStart(CefRefPtr<CefBrowser> browser) override {
+		DKDEBUGFUNC(browser);
+	};
+	void OnPrintSettings(CefRefPtr<CefBrowser> browser, CefRefPtr<CefPrintSettings> settings, bool get_defaults) override {
+		DKDEBUGFUNC(browser, settings, get_defaults);
+	}
 	bool OnPrintDialog(CefRefPtr<CefBrowser> browser, bool has_selection, CefRefPtr<CefPrintDialogCallback> callback) override;
-	bool OnPrintJob(CefRefPtr<CefBrowser> browser, const CefString& document_name, const CefString& pdf_file_path, CefRefPtr<CefPrintJobCallback> callback) override { return true; }
-	void OnPrintReset(CefRefPtr<CefBrowser> browser) override {};
+	bool OnPrintJob(CefRefPtr<CefBrowser> browser, const CefString& document_name, const CefString& pdf_file_path, CefRefPtr<CefPrintJobCallback> callback) override { 
+		DKDEBUGFUNC(browser, document_name, pdf_file_path, callback);
+		return true; 
+	}
+	void OnPrintReset(CefRefPtr<CefBrowser> browser) override {
+		DKDEBUGFUNC(browser);
+	};
 	//CefSize GetPdfPaperSize(int device_units_per_inch) override;
 
 	// CefRenderHandler

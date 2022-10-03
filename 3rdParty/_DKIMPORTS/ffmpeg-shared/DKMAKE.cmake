@@ -1,26 +1,30 @@
+# https://web.archive.org/web/20200919011114/https://ffmpeg.zeranoe.com/builds/
 # https://web.archive.org/web/20200918193207/https://ffmpeg.zeranoe.com/builds/win32/shared/ffmpeg-20200831-4a11a6f-win32-shared.zip
 # https://web.archive.org/web/20200916073634/https://ffmpeg.zeranoe.com/builds/win64/shared/ffmpeg-20200828-ccc7120-win64-shared.zip
+# https://web.archive.org/web/20200919011114mp_/https://ffmpeg.zeranoe.com/builds/macos64/shared/ffmpeg-20200831-4a11a6f-macos64-shared.zip
 
-dk_set(FFMPEGDLL_VERSION 20200831-4a11a6f)
-dk_set(FFMPEGDLL_NAME ffmpeg-${FFMPEGDLL_VERSION}-${OS}-shared)
-dk_set(FFMPEGDLL_DL https://web.archive.org/web/20200918193207/https://ffmpeg.zeranoe.com/builds/${OS}/shared/${FFMPEGDLL_NAME}.zip)
-dk_set(FFMPEGDLL ${3RDPARTY}/${FFMPEGDLL_NAME})
+if(NOT WIN AND NOT MAC)
+	return()
+endif()
 
-### INSTALL ###
-dk_import(${FFMPEGDLL_DL} ${FFMPEG_DLL})
+
+WIN32_dk_import(https://web.archive.org/web/20200918193207/https://ffmpeg.zeranoe.com/builds/win32/shared/ffmpeg-20200831-4a11a6f-win32-shared.zip)
+WIN64_dk_import(https://web.archive.org/web/20200916073634/https://ffmpeg.zeranoe.com/builds/win64/shared/ffmpeg-20200828-ccc7120-win64-shared.zip)
+MAC64_dk_import(https://web.archive.org/web/20200919011114mp_/https://ffmpeg.zeranoe.com/builds/macos64/shared/ffmpeg-20200831-4a11a6f-macos64-shared.zip)
+
 
 ### LINK ###
 dk_define(__STDC_CONSTANT_MACROS)
-IF(DKAPP)
+IF(DKAPP AND WIN)
 	dk_setPath(${DKPROJECT}/assets/DKFfmpeg)
-	dk_copy(${FFMPEG_DLL}/bin/avcodec-56.dll ${DKPROJECT}/assets/DKFfmpeg OVERWRITE)
-	dk_copy(${FFMPEG_DLL}/bin/avdevice-56.dll ${DKPROJECT}/assets/DKFfmpeg OVERWRITE)
-	dk_copy(${FFMPEG_DLL}/bin/avfilter-5.dll ${DKPROJECT}/assets/DKFfmpeg OVERWRITE)
-	dk_copy(${FFMPEG_DLL}/bin/avformat-56.dll ${DKPROJECT}/assets/DKFfmpeg OVERWRITE)
-	dk_copy(${FFMPEG_DLL}/bin/avutil-54.dll ${DKPROJECT}/assets/DKFfmpeg OVERWRITE)
-	dk_copy(${FFMPEG_DLL}/bin/postproc-53.dll ${DKPROJECT}/assets/DKFfmpeg OVERWRITE)
-	dk_copy(${FFMPEG_DLL}/bin/swresample-1.dll ${DKPROJECT}/assets/DKFfmpeg OVERWRITE)
-	dk_copy(${FFMPEG_DLL}/bin/swscale-3.dll ${DKPROJECT}/assets/DKFfmpeg OVERWRITE)
+	WIN_dk_copy(${FFMPEG-SHARED}/bin/avcodec-56.dll ${DKPROJECT}/assets/DKFfmpeg OVERWRITE)
+	WIN_dk_copy(${FFMPEG-SHARED}/bin/avdevice-56.dll ${DKPROJECT}/assets/DKFfmpeg OVERWRITE)
+	WIN_dk_copy(${FFMPEG-SHARED}/bin/avfilter-5.dll ${DKPROJECT}/assets/DKFfmpeg OVERWRITE)
+	WIN_dk_copy(${FFMPEG-SHARED}/bin/avformat-56.dll ${DKPROJECT}/assets/DKFfmpeg OVERWRITE)
+	WIN_dk_copy(${FFMPEG-SHARED}/bin/avutil-54.dll ${DKPROJECT}/assets/DKFfmpeg OVERWRITE)
+	WIN_dk_copy(${FFMPEG-SHARED}/bin/postproc-53.dll ${DKPROJECT}/assets/DKFfmpeg OVERWRITE)
+	WIN_dk_copy(${FFMPEG-SHARED}/bin/swresample-1.dll ${DKPROJECT}/assets/DKFfmpeg OVERWRITE)
+	WIN_dk_copy(${FFMPEG-SHARED}/bin/swscale-3.dll ${DKPROJECT}/assets/DKFfmpeg OVERWRITE)
 	LIST(APPEND DEBUG_LINK_FLAGS /DELAY:UNLOAD)
 	LIST(APPEND DEBUG_LINK_FLAGS /DELAYLOAD:avcodec-56.dll)
 	LIST(APPEND DEBUG_LINK_FLAGS /DELAYLOAD:avdevice-56.dll)
@@ -40,3 +44,8 @@ IF(DKAPP)
 	## LIST(APPEND RELEASE_LINK_FLAGS /DELAYLOAD:avfilter-5.dll)
 	## LIST(APPEND RELEASE_LINK_FLAGS /DELAYLOAD:postproc-53.dll)
 ENDIF()
+
+
+### 3RDPARTY LINK ###
+# TODO
+dk_set(FFMPEG-SHARED_CMAKE -DFFMPEG_INCLUDE_DIR=${FFMPEG-SHARED})

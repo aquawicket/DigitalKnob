@@ -24,20 +24,17 @@
 * SOFTWARE.
 */
 
-#ifdef HAVE_DKCef
+#if HAVE_DKCef
 #pragma once
 #ifndef DKCurlV8_H
 #define DKCurlV8_H
 
 #include "DKCef/DKCef.h"
 
-///////////////////////////////////////////
-class DKCurlV8 : public DKObjectT<DKCurlV8>
-{
+class DKCurlV8 : public DKObjectT<DKCurlV8>{
 public:
 	bool Init();
 	bool End();
-
 	static bool Download(CefArgs args, CefReturn retval);
 	static bool FileDate(CefArgs args, CefReturn retval);
 	static bool FtpConnect(CefArgs args, CefReturn retval);

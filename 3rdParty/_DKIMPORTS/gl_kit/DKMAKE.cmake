@@ -5,8 +5,4 @@ if(NOT MAC_HOST)
 endif()
 
 
-FIND_LIBRARY(GLKit_Lib GLKit)
-if(NOT GLKit_Lib)
-	dk_error("Could not locate GLKit framework")
-endif()
-APPLE_dk_lib(${GLKit_Lib})
+dk_findLibrary(GLKit)

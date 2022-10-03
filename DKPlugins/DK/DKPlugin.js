@@ -11,7 +11,7 @@
 //
 const DKPlugin = function DKPlugin() {
     //DKPlugin.dumpInfo.apply(this, arguments);
-    let DKPlugin_callback = null;
+    var DKPlugin_callback = null;
     if (arguments && typeof (arguments[arguments.length - 1]) === "function")
         DKPlugin_callback = arguments[arguments.length - 1];
     //Determine what type of plugin to make here
@@ -65,7 +65,7 @@ DKPlugin.fromFile = function DKPlugin_fromFile(args, DKPlugin_fromFile_callback)
         if (!this.readyState || this.readyState === "loaded" || this.readyState === "complete") {
             console.log("%cLoaded " + url, "color:green;");
             !DKPlugin.info && (DKPlugin.info = new Array)
-            let klassName = null;
+            var klassName = null;
             if (DKPlugin.info[url]){
                 klassName = DKPlugin.info[url]
 			}
@@ -81,7 +81,7 @@ DKPlugin.fromFile = function DKPlugin_fromFile(args, DKPlugin_fromFile_callback)
             Object.setPrototypeOf(klass, DKPlugin.prototype)
             //klass.prototype = DKPlugin.prototype;// = {};
             //Object.assign(klass.prototype, DKPlugin)
-            for (let n = 0; n < args.length; n++) {
+            for (var n = 0; n < args.length; n++) {
                 if (args[n] === "singleton") {
                     klass.singleton = "fromFile(): klass.singleton";
                     klass.prototype.singleton = "fromFile(): klass.prototype.singleton";
@@ -123,13 +123,13 @@ DKPlugin.fromClass = function DKPlugin_fromClass(args, DKPlugin_fromFile_callbac
     //console.log("%c DKPlugin.fromClass(): klass.name = " + klass.name, color);
     //console.log("%c DKPlugin.fromClass(): klass.singleton = " + klass.singleton, color);
     //console.log("%c DKPlugin.fromClass(): klass.prototype = " + klass.prototype, color);
-    for (let n = 0; n < args.length; n++) {
+    for (var n = 0; n < args.length; n++) {
         if (args[n] === "singleton") {
             klass.singleton = "fromClass(): klass.singleton";
             klass.prototype.singleton = "fromClass(): klass.prototype.singleton";
             //console.log("DKPlugin.fromClass() klass.singleton set");
             //console.log("DKPlugin.fromClass() klass.prototype.singleton set");
-            for (let n = 0; n < DKPlugin.instances.length; n++) {
+            for (var n = 0; n < DKPlugin.instances.length; n++) {
                 if (DKPlugin.instances[n].klassName == klassName) {
                     console.log("A singleton instance of " + klassName + " already exists");
                     DKPlugin.instances[n].dkframe.bringToFront(DKPlugin.instances[n].dkframe.frame);
@@ -193,8 +193,8 @@ DKPlugin.createInstance = function DKPlugin_createInstance() {
         return DKPlugin.instances[i];
     }
     //Set the ID or kick out existing singletons, while looping
-    let num = 0;
-    for (let n = 0; n < DKPlugin.instances.length; n++) {
+    var num = 0;
+    for (var n = 0; n < DKPlugin.instances.length; n++) {
         if (DKPlugin.instances[n].klassName === this.klassName) {
             //if (this.prototype.singleton || DKPlugin.instances[n].prototype.singleton) {
             //    console.warn(this.klassName + " already has a 'singleton' instance");
@@ -316,13 +316,13 @@ DKPlugin.prototype.close = function DKPlugin_close() {
     console.group("DKPlugin.prototype.close(): " + this.id);
     /*
 	var arr = [];
-	for (let key in this) {
+	for (var key in this) {
 		arr.push(key);
 	}
-	for (let n = arr.length; n--; ){
-		let key = arr[n];
+	for (var n = arr.length; n--; ){
+		var key = arr[n];
 	*/
-    for (let key in this) {
+    for (var key in this) {
         if (this[key] instanceof Element) {
             if (!this[key].parentNode) {
                 console.error(this.constructor.name + " parentNode invalid");
@@ -343,7 +343,7 @@ DKPlugin.prototype.close = function DKPlugin_close() {
     DKPlugin.prototype.unsuperviseFuncs(this);
     DKPlugin.prototype.removeInstance(this);
     //if any more of this type exist, don't end
-    for (let n = 0; n < DKPlugin.instances.length; n++) {
+    for (var n = 0; n < DKPlugin.instances.length; n++) {
         if (DKPlugin.instances[n].klassName === this.klassName) {
             console.groupEnd();
             return

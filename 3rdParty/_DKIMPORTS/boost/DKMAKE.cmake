@@ -93,8 +93,8 @@ if(ANDROID)
 	dk_removeTarget(boost type_erasure)
 endif()
 
-if(STATIC)
 
+if(STATIC)
 
 foreach(lib_OFF ${boost_targets_OFF})
 	if(lib_OFF)
@@ -120,7 +120,11 @@ foreach(lib ${boost_targets})
 endforeach()
 
 
-### COMPILE ###
+### 3RDPARTY LINK ###
+dk_set(BOOST_CMAKE -DBOOST_ROOT=${BOOST} -DBOOST_LIBRARYDIR=${BOOST}/${OS}/lib) #-DBoost_INCLUDE_DIR=${BOOST})
+
+
+### GENERATE ###
 dk_setPath(${BOOST})
 if(NOT EXISTS ${BOOST}/b2.exe)
 	WIN_HOST_dk_queueCommand(${BOOST}/bootstrap.bat vc143)
@@ -130,7 +134,7 @@ if(NOT EXISTS ${BOOST}/b2)
 endif()
 
 
-
+### COMPILE ###
 WIN32_DEBUG_dk_queueCommand(${BOOST}/b2.exe toolset=msvc-14.3 address-model=32 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static define=BOOST_ALL_NO_LIB --layout=system ${BOOST_WITH} ${BOOST_WITHOUT} --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
 WIN32_RELEASE_dk_queueCommand(${BOOST}/b2.exe toolset=msvc-14.3 address-model=32 variant=release link=static threading=multi runtime-debugging=off runtime-link=static define=BOOST_ALL_NO_LIB --layout=system ${BOOST_WITH} ${BOOST_WITHOUT} --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
 
@@ -165,7 +169,6 @@ RASPBERRY32_RELEASE_dk_queueCommand(${BOOST}/b2 toolset=gcc address-model=32 var
 
 RASPBERRY64_DEBUG_dk_queueCommand(${BOOST}/b2 toolset=gcc address-model=64 variant=debug link=static threading=multi runtime-debugging=on runtime-link=static --layout=system ${BOOST_WITH} ${BOOST_WITHOUT} --build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR})
 RASPBERRY64_RELEASE_dk_queueCommand(${BOOST}/b2 toolset=gcc address-model=64 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --layout=system ${BOOST_WITH} ${BOOST_WITHOUT} --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
-
 
 
 ANDROID_dk_msys(${BOOST}/SetupAndroid.sh)

@@ -21,10 +21,8 @@ dk_include(${LIBUV}/include)
 dk_include(${LIBUV}/${OS})
 WIN_dk_libDebug(${LIBUV}/${OS}/${DEBUG_DIR}/uv_a.lib)
 WIN_dk_libRelease(${LIBUV}/${OS}/${RELEASE_DIR}/uv_a.lib)
-MAC_dk_libDebug(${LIBUV}/${OS}/lib/${DEBUG_DIR}/libuv_a.a)
-MAC_dk_libRelease(${LIBUV}/${OS}/lib/${RELEASE_DIR}/libuv_a.a)
-IOSSIM_dk_libDebug(${LIBUV}/${OS}/${DEBUG_DIR}/lib/.libs/libuv_a.a)
-IOSSIM_dk_libRelease(${LIBUV}/${OS}/${RELEASE_DIR}/lib/.libs/libuv_a.a)
+APPLE_dk_libDebug(${LIBUV}/${OS}/${DEBUG_DIR}/libuv_a.a)
+APPLE_dk_libRelease(${LIBUV}/${OS}/${RELEASE_DIR}/libuv_a.a)
 LINUX_dk_libDebug(${LIBUV}/${OS}/${DEBUG_DIR}/libuv_a.a)
 LINUX_dk_libRelease(${LIBUV}/${OS}/${RELEASE_DIR}/libuv_a.a)
 RASPBERRY_dk_libDebug(${LIBUV}/${OS}/${DEBUG_DIR}/libuv_a.a)
@@ -37,11 +35,11 @@ ANDROID_dk_libRelease(${LIBUV}/${OS}/${RELEASE_DIR}/libuv_a.a)
 
 
 ### 3RDPARTY LINK ###
-WIN_dk_set(LIBUV_CMAKE -DLIBUV_INCLUDE_DIR=${LIBUV} -DLIBUV_LIBRARY=${LIBUV}/${OS}/${RELEASE_DIR}/uv_a.lib)
-APPLE_dk_set(LIBUV_CMAKE -DLIBUV_INCLUDE_DIR=${LIBUV} -DLIBUV_LIBRARY=${LIBUV}/${OS}/${RELEASE_DIR}/uv_a.a)
-LINUX_dk_set(LIBUV_CMAKE -DLIBUV_INCLUDE_DIR=${LIBUV} -DLIBUV_LIBRARY=${LIBUV}/${OS}/${RELEASE_DIR}/uv_a.a)
+WIN_dk_set		(LIBUV_CMAKE -DLIBUV_INCLUDE_DIR=${LIBUV} -DLIBUV_LIBRARY=${LIBUV}/${OS}/${RELEASE_DIR}/uv_a.lib)
+APPLE_dk_set	(LIBUV_CMAKE -DLIBUV_INCLUDE_DIR=${LIBUV} -DLIBUV_LIBRARY=${LIBUV}/${OS}/${RELEASE_DIR}/uv_a.a)
+LINUX_dk_set	(LIBUV_CMAKE -DLIBUV_INCLUDE_DIR=${LIBUV} -DLIBUV_LIBRARY=${LIBUV}/${OS}/${RELEASE_DIR}/uv_a.a)
 RASPBERRY_dk_set(LIBUV_CMAKE -DLIBUV_INCLUDE_DIR=${LIBUV} -DLIBUV_LIBRARY=${LIBUV}/${OS}/${RELEASE_DIR}/uv_a.a)
-ANDROID_dk_set(LIBUV_CMAKE -DLIBUV_INCLUDE_DIR=${LIBUV} -DLIBUV_LIBRARY=${LIBUV}/${OS}/${RELEASE_DIR}/uv_a.a)
+ANDROID_dk_set	(LIBUV_CMAKE -DLIBUV_INCLUDE_DIR=${LIBUV} -DLIBUV_LIBRARY=${LIBUV}/${OS}/${RELEASE_DIR}/uv_a.a)
 
 
 
@@ -49,7 +47,7 @@ ANDROID_dk_set(LIBUV_CMAKE -DLIBUV_INCLUDE_DIR=${LIBUV} -DLIBUV_LIBRARY=${LIBUV}
 WIN_dk_setPath(${LIBUV}/${OS})
 WIN32_dk_queueCommand(${DKCMAKE_BUILD} ${LIBUV})
 WIN64_dk_queueCommand(${DKCMAKE_BUILD} ${LIBUV})
-WIN_dk_visualStudio(${LIBUV_NAME} libuv.sln uv_a)
+WIN_dk_visualStudio(${LIBUV_NAME} uv_a)
 
 
 MAC_dk_setPath(${LIBUV}/${OS})
@@ -89,4 +87,4 @@ RASPBERRY_RELEASE_dk_queueCommand(make uv_a)
 ANDROID_dk_setPath(${LIBUV}/${OS})
 ANDROID32_dk_queueCommand(${DKCMAKE_BUILD} ${LIBUV})
 ANDROID64_dk_queueCommand(${DKCMAKE_BUILD} ${LIBUV})
-ANDROID_dk_visualStudio(${LIBUV_NAME} libuv.sln uv_a)
+ANDROID_dk_visualStudio(${LIBUV_NAME} uv_a)

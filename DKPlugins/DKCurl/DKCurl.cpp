@@ -111,7 +111,7 @@ bool DKCurl::Download(const DKString& url, const DKString& dest/*, const bool ov
 bool DKCurl::FacebookLogin(const DKString& email, const DKString& password, DKString& output){
 	DKDEBUGFUNC(email, password, output);
 	if(!CurlInit())
-		return DKERROR("curl invalid");
+		return DKERROR("CurlInit() failed\n");
 	DKString curlBuffer = "";
 	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, &DKCurl::WriteToBuffer);
 	curl_easy_setopt(curl, CURLOPT_WRITEDATA, &curlBuffer);
@@ -176,7 +176,7 @@ bool DKCurl::FtpConnect(const DKString& server, const DKString& name, const DKSt
 	ftpPass.clear();
 	ftpPort.clear();
 	if(!CurlInit())
-		return DKERROR("curl invalid");
+		return DKERROR("CurlInit() failed\n");
 	DKString login = name+":"+pass;
 	curl_easy_setopt(curl, CURLOPT_USERPWD, login.c_str() );
 	curl_easy_setopt(curl, CURLOPT_URL, server.c_str());
@@ -197,14 +197,14 @@ bool DKCurl::FtpDownload(const DKString& url, const DKString& dest/*, const bool
 	//if(!FtpFileExists(url))
 	//	return DKERROR("url not found\n");
 	if(!CurlInit())
-		return DKERROR("curl invalid");
+		return DKERROR("CurlInit() failed\n");
 	DKString login = ftpName+":"+ftpPass;
 	curl_easy_setopt(curl, CURLOPT_USERPWD, login.c_str() );
 	curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
 	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, &DKCurl::WriteToFile);
 	FILE *fp = fopen(dest.c_str(),"wb");
 	if(!fp)
-		return DKERROR("DKCurl::FtpDownload() *fp invalid \n");
+		return DKERROR("fp invalid\n");
 	curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
 	DKINFO("Downloading "+url+"...\n");
 	CURLcode curlcode = curl_easy_perform(curl);
@@ -222,7 +222,7 @@ bool DKCurl::FtpFileDate(const DKString& url, DKString& filedate){
 	//if(!FtpFileExists(url))
 	//	return DKERROR("url not found\n");
 	if(!CurlInit())
-		return DKERROR("curl invalid");
+		return DKERROR("CurlInit() failed\n");
 	DKString login = ftpName+":"+ftpPass;
 	curl_easy_setopt(curl, CURLOPT_USERPWD, login.c_str() );
 	curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
@@ -230,10 +230,8 @@ bool DKCurl::FtpFileDate(const DKString& url, DKString& filedate){
 	curl_easy_setopt(curl, CURLOPT_FILETIME, true );
 	//curl_easy_setopt(curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/535.6 (KHTML, like Gecko) Chrome/16.0.897.0 Safari/535.6");
  	CURLcode curlcode = curl_easy_perform(curl);
-	if(curlcode != CURLE_OK){
-		//curl_easy_cleanup(curl);
-		return DKERROR(DKString(curl_easy_strerror(curlcode))+"\n");
-	}
+	if(curlcode != CURLE_OK)
+		/*curl_easy_cleanup(curl);*/ return DKERROR(DKString(curl_easy_strerror(curlcode)) + "\n");
 	const time_t filetime = 0;
 	curlcode = curl_easy_getinfo(curl, CURLINFO_FILETIME, &filetime);
 	//curl_easy_cleanup(curl);
@@ -261,17 +259,15 @@ bool DKCurl::FtpFileDate(const DKString& url, DKString& filedate){
 bool DKCurl::FtpFileExists(const DKString& url){
 	DKDEBUGFUNC(url);
 	if(!CurlInit())
-		return DKERROR("curl invalid");
+		return DKERROR("CurlInit() failed\n");
 	DKString login = ftpName+":"+ftpPass;
 	curl_easy_setopt(curl, CURLOPT_USERPWD, login.c_str() );
 	curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
 	//curl_easy_setopt(curl, CURLOPT_HEADER, 1L);
 	curl_easy_setopt(curl, CURLOPT_NOBODY, 1L);
 	CURLcode curlcode = curl_easy_perform(curl);
-	if(curlcode != CURLE_OK){
-		//curl_easy_cleanup(curl);
-		return DKERROR(DKString(curl_easy_strerror(curlcode))+"\n");
-	}
+	if(curlcode != CURLE_OK)
+		/*curl_easy_cleanup(curl);*/ return DKERROR(DKString(curl_easy_strerror(curlcode))+"\n");
 	long http_code = 0;
 	curlcode = curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);
 	//curl_easy_cleanup(curl);
@@ -307,7 +303,7 @@ bool DKCurl::FtpUpload(const DKString& file, const DKString& url/*, const bool o
     //printf("Local file size: %" CURL_FORMAT_CURL_OFF_T " bytes. \n", fsize);
 	hd_src = fopen(file.c_str(), "rb");
 	if(!CurlInit())
-		return DKERROR("curl invalid");
+		return DKERROR("CurlInit() failed\n");
 	headerlist = curl_slist_append(headerlist, buff1.c_str());
 	headerlist = curl_slist_append(headerlist, buff2.c_str());
 	//curl_easy_setopt(curl, CURLOPT_COOKIEFILE, "cookies.txt");
@@ -321,16 +317,16 @@ bool DKCurl::FtpUpload(const DKString& file, const DKString& url/*, const bool o
 	curl_easy_setopt(curl, CURLOPT_POSTQUOTE, headerlist);
 	curl_easy_setopt(curl, CURLOPT_READDATA, hd_src);
 	curl_easy_setopt(curl, CURLOPT_INFILESIZE_LARGE, (curl_off_t) fsize);
-	DKINFO("Uploading "+filename);
+	DKINFO("Uploading "+filename+"\n");
 	CURLcode curlcode = curl_easy_perform(curl);
 	if(curlcode != CURLE_OK){ 
 		DKWARN(" :"+DKString(curl_easy_strerror(curlcode))+"\n");
-		DKWARN("2nd attempt.");
+		DKWARN("2nd attempt.\n");
 		curlcode = curl_easy_perform(curl);
 	}
 	if(curlcode != CURLE_OK){ 
 		DKWARN(" :"+DKString(curl_easy_strerror(curlcode))+"\n");
-		DKWARN("3rd attempt.");
+		DKWARN("3rd attempt.\n");
 		curlcode = curl_easy_perform(curl);
 	}
 	curl_slist_free_all(headerlist);
@@ -352,15 +348,13 @@ bool DKCurl::HttpDownload(const DKString& url, const DKString& dest){
 	if(!DKCurl::FileExists(url))
 		return DKERROR("url not found\n");
 	if(!CurlInit())
-		return DKERROR("curl invalid\n");
+		return DKERROR("CurlInit() failed\n");
 	curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
 	curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, &DKCurl::WriteToFile);
 	FILE *fp = fopen(dest.c_str(),"wb");
-	if(!fp){
-		//curl_easy_cleanup(curl);
-		return DKERROR("DKCurl::Download() *fp invalid\n");
-	}
+	if(!fp)
+		/*curl_easy_cleanup(curl);*/ return DKERROR("fp invalid\n");
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
 	curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 0);
 	curl_easy_setopt(curl, CURLOPT_PROGRESSFUNCTION, &DKCurl::progress_func);
@@ -381,9 +375,9 @@ bool DKCurl::HttpDownload(const DKString& url, const DKString& dest){
 bool DKCurl::HttpFileDate(const DKString& url, DKString& filedate){
 	DKDEBUGFUNC(url, filedate);
 	if(!HttpFileExists(url))
-		return DKERROR("url not found\n");
+		return DKERROR("HttpFileExists() failed\n");
 	if(!CurlInit())
-		return DKERROR("curl invalid");
+		return DKERROR("CurlInit() failed\n");
 	curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
 	curl_easy_setopt(curl, CURLOPT_NOBODY, true);
 	curl_easy_setopt(curl, CURLOPT_FILETIME, true );
@@ -391,10 +385,8 @@ bool DKCurl::HttpFileDate(const DKString& url, DKString& filedate){
 	curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
 	curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
 	CURLcode curlcode = curl_easy_perform(curl); //Perform the request, curlcode will get the return code		
-	if(curlcode != CURLE_OK){ 
-		//curl_easy_cleanup(curl);
-		return DKERROR("curl_easy_preform() failed \n");
-	}
+	if(curlcode != CURLE_OK)
+		/*curl_easy_cleanup(curl);*/ return DKERROR("curl_easy_preform() failed \n");
 	const time_t filetime = 0;
 	/*curlcode = unused code */curl_easy_getinfo(curl, CURLINFO_FILETIME, &filetime);
 	//curl_easy_cleanup(curl);
@@ -422,22 +414,20 @@ bool DKCurl::HttpFileExists(const DKString& url){
 	if(!has(url, "http://") && !has(url, "HTTP://") && !has(url, "https://") && !has(url, "HTTPS://"))
 		_url = "http://" + url;
 	if(!CurlInit())
-		return DKERROR("curl invalid");
+		return DKERROR("CurlInit() failed()\n");
 	curl_easy_setopt(curl, CURLOPT_URL, _url.c_str());
 	//curl_easy_setopt(curl, CURLOPT_HEADER, 1L);
 	curl_easy_setopt(curl, CURLOPT_NOBODY, 1L);
 	curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
 	curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
 	CURLcode curlcode = curl_easy_perform(curl); //Perform the request, curlcode will get the return code
-	if(curlcode != CURLE_OK){
-		//curl_easy_cleanup(curl);
-		return DKERROR(DKString(curl_easy_strerror(curlcode)) + "\n");
-	}
+	if(curlcode != CURLE_OK)
+		/*curl_easy_cleanup(curl);*/ return DKERROR(DKString(curl_easy_strerror(curlcode)) + "\n");
 	long http_code = 0;
 	curlcode = curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);
 	//curl_easy_cleanup(curl);
 	if(curlcode != CURLE_OK)
-		return DKERROR(DKString(curl_easy_strerror(curlcode)) + "\n");
+		return DKERROR(DKString(curl_easy_strerror(curlcode))+"\n");
 	if(http_code >= 400) //https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
 		return DKERROR("CURLINFO_RESPONSE_CODE: "+toString(http_code)+"\n");
 	return true;
@@ -447,7 +437,7 @@ bool DKCurl::HttpFileSize(const DKString& url, long& size){
 	DKDEBUGFUNC(url, size);
 	/*
 	if(!CurlInit())
-		return DKERROR("curl invalid");
+		return DKERROR("CurlInit() failed\n");
 	curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
 	curl_easy_setopt(curl, CURLOPT_NOBODY, 1); 
 	curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1);
@@ -477,7 +467,7 @@ bool DKCurl::HttpToString(const DKString& url, DKString& output){
 	if(!DKCurl::FileExists(url))
 		return DKERROR("DKCurl::HttpToString(): "+url+"  not found \n");
 	if(!CurlInit())
-		return DKERROR("curl invalid");
+		return DKERROR("CurlInit() failed\n");
 	curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, false);
     curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, false);
 	curl_easy_setopt(curl, CURLOPT_COOKIEFILE, /*DKApp::datapath+*/"cookies.txt");
@@ -501,13 +491,14 @@ bool DKCurl::HttpToString(const DKString& url, DKString& output){
 }
 
 size_t DKCurl::WriteToFile(void *ptr, size_t size, size_t nmemb, FILE *stream){
-	//DKDEBUGFUNC(ptr, size, nmemb, stream);
+	DKDEBUGFUNC(ptr, size, nmemb, stream);
 	return fwrite(ptr, size, nmemb, stream);
 }
 
-int DKCurl::WriteToBuffer(char *data, size_t size, size_t nmemb, std::string *buffer){
-	//DKDEBUGFUNC(data, size, nmemb, buffer);
-    unsigned long result = 0;
+//int DKCurl::WriteToBuffer(char *data, size_t size, size_t nmemb, std::string *buffer){
+size_t DKCurl::WriteToBuffer(char* data, size_t size, size_t nmemb, std::string* buffer) {
+	DKDEBUGFUNC(data, size, nmemb, buffer);
+	size_t result = 0;
     if(buffer != NULL){
         buffer->append(data, size * nmemb);
 		result = size * nmemb;
@@ -516,7 +507,7 @@ int DKCurl::WriteToBuffer(char *data, size_t size, size_t nmemb, std::string *bu
 }
 
 size_t DKCurl::read_callback(void *ptr, size_t size, size_t nmemb, void *stream){
-	//DKDEBUGFUNC(ptr, size, nmemb, stream);
+	DKDEBUGFUNC(ptr, size, nmemb, stream);
     size_t retcode = fread(ptr, size, nmemb, (FILE *)stream);
 	//curl_off_t nread = (curl_off_t) retcode;
 	printf(".");
@@ -525,7 +516,7 @@ size_t DKCurl::read_callback(void *ptr, size_t size, size_t nmemb, void *stream)
 }
 
 int DKCurl::progress_func(void* ptr, double TotalToDownload, double NowDownloaded, double TotalToUpload, double NowUploaded){
-	//DKDEBUGFUNC(ptr, TotalToDownload, NowDownloaded, TotalToUpload, NowUploaded);
+	DKDEBUGFUNC(ptr, TotalToDownload, NowDownloaded, TotalToUpload, NowUploaded);
     // how wide you want the progress meter to be
     int totaldotz=40;
     double fractiondownloaded = NowDownloaded / TotalToDownload;
@@ -548,6 +539,7 @@ int DKCurl::progress_func(void* ptr, double TotalToDownload, double NowDownloade
 }
 
 void DKCurl::dump(const char *text, FILE *stream, unsigned char *ptr, size_t size){
+	DKDEBUGFUNC(text, stream, ptr, size);
 	size_t i;
 	size_t c;
 	unsigned int width=0x10;
@@ -571,6 +563,7 @@ void DKCurl::dump(const char *text, FILE *stream, unsigned char *ptr, size_t siz
 }
  
 int DKCurl::my_trace(CURL *handle, curl_infotype type, char *data, size_t size, void *userp){
+	DKDEBUGFUNC(handle, type, data, size, userp);
 	const char *text;
 	(void)handle; /* prevent compiler warning */
 	(void)userp;

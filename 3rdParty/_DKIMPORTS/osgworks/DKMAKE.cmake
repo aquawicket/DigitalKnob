@@ -123,8 +123,8 @@ ANDROID_dk_queueCommand(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree
 
 
 ### COMPILE ###
-#WIN_dk_visualStudio(osgworks-master osgWorks.sln)
-dk_visualStudio(osgworks-master osgWorks.sln)
+#WIN_dk_visualStudio(osgworks-master)
+dk_visualStudio(osgworks-master)
 #MAC_dk_xcodeDebug(osgworks-master)
 #IOS_dk_xcodeDebug(osgworks-master)
 #IOSSIM_dk_xcodeDebug(osgworks-master)
@@ -133,4 +133,4 @@ dk_xcodeDebug(osgworks-master)
 #LINUX_RELEASE_dk_queueCommand(make)
 LINUX_dk_queueCommand(make)
 RASPBERRY_dk_queueCommand(make)
-#ANDROID_dk_visualStudio(osgworks-master osgWorks.sln)
+#ANDROID_dk_visualStudio(osgworks-master)

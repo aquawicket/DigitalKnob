@@ -29,7 +29,7 @@ dk_queueCommand	(${DKCMAKE_BUILD} -DBUILD_SHARED_LIB=OFF ${ZLIB_CMAKE} ${TIDY-HT
 
 
 ### COMPILE ###
-dk_visualStudio				(${TIDY-HTML5_NAME} tidy.sln tidy-static)
+dk_visualStudio				(${TIDY-HTML5_NAME} tidy-static)
 dk_xcode					(${TIDY-HTML5_NAME} tidy-static)
 LINUX_dk_queueCommand		(make tidy-static)
 RASPBERRY_dk_queueCommand	(make tidy-static)

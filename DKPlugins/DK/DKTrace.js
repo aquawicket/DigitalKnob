@@ -15,8 +15,8 @@ DKTrace.prototype.editFile = function dk_trace_editFile(file, line, ch) {
 }
 
 DKTrace.prototype.stackToConsoleString = function dk_trace_stackToConsoleString(arg, deleteTo) {
-    let jsonStack;
-    let headerMsg = false;
+    var jsonStack;
+    var headerMsg = false;
     if (arg instanceof Error) {
         if (arg.stack) {
             headerMsg = true;
@@ -47,14 +47,14 @@ DKTrace.prototype.stackToConsoleString = function dk_trace_stackToConsoleString(
     //Remove calls up to the function specified in deleteTo
     //deleteTo = null;
     if (deleteTo) {
-        for (let n = 1; n < jsonStack.length; n++) {
+        for (var n = 1; n < jsonStack.length; n++) {
             if (jsonStack[n].func === deleteTo)
                 jsonStack.splice(1, n);
         }
     }
-    let str;
+    var str;
     headerMsg ? str = jsonStack[0].msg + "\n" : str = "";
-    for (let n = 1; n < jsonStack.length; n++) {
+    for (var n = 1; n < jsonStack.length; n++) {
         str += "    at " + jsonStack[n].func + " ";
         str += "(<a href='#' onClick='dk.trace.editFile(\"" + jsonStack[n].filePath + "\",\"" + jsonStack[n].lineNum + "\",\"" + jsonStack[n].charNum + "\")' style='color:rgb(213,213,213)'>" + jsonStack[n].file + ":" + jsonStack[n].lineNum + "</a>)<br>";
     }
@@ -91,8 +91,8 @@ DKTrace.prototype.stackToJSON = function dk_trace_stackToJSON(stack) {
     const jsonStack = [{
         msg
     }];
-    for (let n = 1; n < lines.length; n++) {
-        let line = lines[n].trim();
+    for (var n = 1; n < lines.length; n++) {
+        var line = lines[n].trim();
         line = line.replace("at ", "");
         line = line.replace("(", "");
         line = line.replace(")", "");
@@ -119,8 +119,8 @@ DKTrace.prototype.stackToJSON = function dk_trace_stackToJSON(stack) {
 
 DKTrace.prototype.lastStackCall = function dk_trace_lastStackCall() {
     const stack = this.stackToJSON(this.getStack());
-    let nn;
-    for (let n = 1; n < stack.length; n++) {
+    var nn;
+    for (var n = 1; n < stack.length; n++) {
         if (stack[n].func === "LastStackCall") {
             nn = n + 1;
             break;
@@ -128,14 +128,14 @@ DKTrace.prototype.lastStackCall = function dk_trace_lastStackCall() {
     }
     if (!nn)
         return error("LastStackCall(): could not find 'LastStackCall' in the stack");
-    let str = "LastStackCall: " + stack[nn].func;
+    var str = "LastStackCall: " + stack[nn].func;
     str += "(<a href='" + stack[nn].filePath + "' target='_blank' style='color:rgb(213,213,213)'>" + stack[nn].file + ":" + stack[nn].lineNum + "</a>)";
     return str;
 }
 
 DKTrace.prototype.getArguments = function dk_trace_getArguments(func, getArgValues) {
-    let argsString = "";
-    let count = 0;
+    var argsString = "";
+    var count = 0;
     const fn = window[func];
     if (!fn) {
         console.error(this.lastStackCall() + "<br>" + "  at if(!fn)");
@@ -148,12 +148,12 @@ DKTrace.prototype.getArguments = function dk_trace_getArguments(func, getArgValu
         return argsString;
     if (!fn.arguments)
         return argsString;
-    let args = argsString.split(",");
+    var args = argsString.split(",");
 
     //FIXME: duktape
     console.error("FIXME");
     /*
-    for (let val of fn.arguments) {
+    for (var val of fn.arguments) {
         if (count > 0) {
             args[count] = " " + args[count];
         }

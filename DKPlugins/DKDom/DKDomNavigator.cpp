@@ -29,52 +29,44 @@
 #include "DK/DKApp.h"
 #include "DKDom/DKDomNavigator.h"
 
-///////////////////////////
-bool DKDomNavigator::Init()
-{
+bool DKDomNavigator::Init(){
 	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("CPP_DKDomNavigator_onLine", DKDomNavigator::onLine);
 	DKDuktape::AttachFunction("CPP_DKDomNavigator_platform", DKDomNavigator::platform);
 	DKDuktape::AttachFunction("CPP_DKDomNavigator_productSub", DKDomNavigator::productSub);
-	
 	DKClass::DKCreate("DKDom/DKDomNavigator.js");
 	return true;
 }
 
-////////////////////////////////////////////
-int DKDomNavigator::onLine(duk_context* ctx)
-{
+int DKDomNavigator::onLine(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return false;
 }
 
-//////////////////////////////////////////////
-int DKDomNavigator::platform(duk_context* ctx)
-{
+int DKDomNavigator::platform(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	//TODO - complete this for all OS's
 #ifdef WIN64
-	duk_push_string(ctx, "Win32");
-	return true;
-#endif
-#ifdef WIN32
 	duk_push_string(ctx, "Win64");
 	return true;
-#endif
-#ifdef MAC
+#elif WIN32
+	duk_push_string(ctx, "Win32");
+	return true;
+#elif MAC
 	duk_push_string(ctx, "MacIntel");
 	return true;
-#endif
-#ifdef LINUX //Raspberry Pi
+#elif LINUX //Raspberry Pi
 	duk_push_string(ctx, "Linux armv7l");
 	return true;
-#endif
+#else
 	DKERROR("DKDomNavigator::platform(): platform invalid\n");
 	return false;
+#endif
 }
 
-////////////////////////////////////////////////
-int DKDomNavigator::productSub(duk_context* ctx)
-{
+int DKDomNavigator::productSub(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return false;
 }

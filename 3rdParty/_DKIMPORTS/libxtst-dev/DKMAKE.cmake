@@ -1,3 +1,9 @@
+if(NOT LINUX AND NOT RASPBERRY)
+	dk_undepend(libxtst-dev)
+	return()
+endif()
+
+
 ### INSTALL ###
 dk_set(CURRENT_DIR /usr)
 dk_command(sudo apt -y install libxtst-dev)

@@ -1,8 +1,9 @@
 include_guard()
 
-### SETTINGS ##################################################################
+### SETTINGS #############################################
 set(DKTODO_ENABLED				1		CACHE INTERNAL "")
 set(DKDEBUG_ENABLED				1		CACHE INTERNAL "")
+set(DKVERBOSE_ENABLED			0		CACHE INTERNAL "")
 set(DKDEBUGFUNC_ENABLED			0		CACHE INTERNAL "")
 set(WAIT_ON_ERRORS				0		CACHE INTERNAL "")
 set(WAIT_ON_WARNINGS			0		CACHE INTERNAL "")
@@ -12,10 +13,9 @@ set(PRINT_CALL_DETAILS 			1		CACHE INTERNAL "")
 set(PRINT_FILE_NAMES 			1 		CACHE INTERNAL "")
 set(PRINT_LINE_NUMBERS 			1		CACHE INTERNAL "")
 set(PRINT_FUNCTION_NAMES 		1 		CACHE INTERNAL "")
-set(PRINT_FUNCTION_ ARGUMENTS 	1 		CACHE INTERNAL "")
+set(PRINT_FUNCTION_ARGUMENTS 	1 		CACHE INTERNAL "")
 set(INSTALL_DKLIBS              0		CACHE INTERNAL "")
 set(BYPASS_DISABLE				0		CACHE INTERNAL "")
-
 
 
 # PRE DEFINED VARIABLES
@@ -46,26 +46,30 @@ endif()
 
 
 
-# FUNCTIONS 
-include(${DKCMAKE}/dk_call.cmake)
-dk_load(dk_debugFunc)
-dk_load(dk_message)
-dk_load(dk_assert)
-dk_load(dk_error)
-dk_load(dk_warn)
-dk_load(dk_info)
-dk_load(dk_debug)
-dk_load(dk_verbose)
-dk_load(dk_trace)
+# FUNCTIONS
+include(${DKCMAKE}/functions/dk_load.cmake)
+#include(${DKCMAKE}/functions/dk_call.cmake)
+#dk_load(dk_listReplace)
+#dk_load(dk_getArgIdentifiers)
+#dk_load(dk_debugFunc)
+#dk_load(dk_color)
+#dk_load(dk_updateLogInfo)
+#dk_load(dk_assert)
+#dk_load(dk_error)
+#dk_load(dk_warn)
+#dk_load(dk_info)
+#dk_load(dk_debug)
+#dk_load(dk_verbose)
+#dk_load(dk_trace)
+dk_load(DKColor)
 dk_load(DKFunctions)
 dk_load(DKFileSystem)
 dk_load(DKVariables)
-dk_load(DKDisabled)
-
-dk_load(dk_findLibrary)
-dk_load(dk_importVariables)
-
-
+#dk_load(DKDisabled)
+#dk_load(dk_findLibrary)
+#dk_load(dk_importVariables)
+include(${DKCMAKE}/functions/dk_importVariables.cmake)
+#dk_load(dk_findFiles)
 
 # POST DEFINED VARIABLES
 

@@ -34,36 +34,37 @@ bool DKNavigator::Init(){
 	DKDuktape::AttachFunction("CPP_DKNavigator_onLine", DKNavigator::onLine);
 	DKDuktape::AttachFunction("CPP_DKNavigator_platform", DKNavigator::platform);
 	DKDuktape::AttachFunction("CPP_DKNavigator_productSub", DKNavigator::productSub);
-	
 	DKClass::DKCreate("DKDuktapeDom/DKNavigator.js");
 	return true;
 }
 
 int DKNavigator::onLine(duk_context* ctx){
 	//TODO
+	DKDEBUGFUNC(ctx);
 	return false;
 }
 
 int DKNavigator::platform(duk_context* ctx){
 	//TODO - complete this for all OS's
+	DKDEBUGFUNC(ctx);
 #ifdef WIN64
 	duk_push_string(ctx, "Win32");
 	return true;
-#endif
-#ifdef WIN32
+#elif WIN32
 	duk_push_string(ctx, "Win64");
 	return true;
-#endif
-#ifdef MAC
+#elif MAC
 	duk_push_string(ctx, "MacIntel");
 	return true;
-#endif
-	DKERROR("DKNavigator::platform(): platform invalid\n");
+#else
+	DKERROR("platform invalid\n");
 	return false;
+#endif
 }
 
 int DKNavigator::productSub(duk_context* ctx){
 	//TODO
+	DKDEBUGFUNC(ctx);
 	return false;
 }
 

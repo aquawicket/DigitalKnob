@@ -57,18 +57,34 @@
 # https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm64_minimal.tar.bz2
 # https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm64_client.tar.bz2
 
+if(IOS OR IOSSIM OR ANDROID)
+	return()
+endif()
+
 MAC_dk_depend(appkit)
 LINUX_dk_depend(build-essential)
 LINUX_dk_depend(libgtk2.0-dev)
 
 
 WIN32_dk_import			(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32.tar.bz2)
+WIN32_dk_download		(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32_debug_symbols.tar.bz2)
 WIN64_dk_import			(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows64.tar.bz2)
+#WIN64_dk_download		(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows64_debug_symbols.tar.bz2)
+# WINARM64_dk_import	(https://cef-builds.spotifycdn.com/cef_binary_88.1.4+g5a6ab23+chromium-88.0.4324.96_windowsarm64.tar.bz2)
+# WINARM64_dk_download	(https://cef-builds.spotifycdn.com/cef_binary_88.1.4+g5a6ab23+chromium-88.0.4324.96_windowsarm64_debug_symbols.tar.bz2)
 MAC64_dk_import			(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_macosx64.tar.bz2)
+#MAC64_dk_download		(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_macosx64_debug_symbols.tar.bz2)
+# MACARM64_dk_import	(https://cef-builds.spotifycdn.com/cef_binary_88.1.6+g4fe33a1+chromium-88.0.4324.96_macosarm64.tar.bz2)
+# MACARM64_dk_download	(https://cef-builds.spotifycdn.com/cef_binary_88.1.6+g4fe33a1+chromium-88.0.4324.96_macosarm64_debug_symbols.tar.bz2)
 LINUX32_dk_import		(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linux32.tar.bz2)
 LINUX64_dk_import		(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linux64.tar.bz2)
+# LINUXARM32_dk_import	(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm.tar.bz2)
+# LINUXARM64_dk_import	(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm64.tar.bz2)
+# FIXME - RASPBERRY is technically LINUX ARM 32/64
 RASPBERRY32_dk_import	(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm.tar.bz2)
 RASPBERRY64_dk_import	(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm64.tar.bz2)
+
+
 
 ### VERSION ###
 #DKSET				(CEF_BINARY_VERSION 81.3.3+g072a5f5+chromium-81.0.4044.138)
@@ -135,8 +151,8 @@ RASPBERRY_dk_libRelease(${CEF_BINARY}/${OS}/${RELEASE_DIR}/libcef_dll_wrapper/li
 dk_setPath(${CEF_BINARY}/${BUILD_DIR})
 
 WIN_dk_queueCommand(${DKCMAKE_BUILD} -DUSE_SANDBOX=Off ${CEF_BINARY})
-WIN_dk_visualStudio(${CEF_BINARY_NAME} cef.sln libcef_dll_wrapper)
-WIN_dk_visualStudio(${CEF_BINARY_NAME} cef.sln cefsimple)
+WIN_dk_visualStudio(${CEF_BINARY_NAME} libcef_dll_wrapper)
+WIN_dk_visualStudio(${CEF_BINARY_NAME} cefsimple)
 
 MAC_dk_queueCommand(${DKCMAKE_BUILD} ${CEF_BINARY})
 MAC_dk_xcode(${CEF_BINARY_NAME} libcef_dll_wrapper)

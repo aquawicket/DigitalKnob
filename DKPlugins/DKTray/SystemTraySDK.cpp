@@ -236,7 +236,8 @@ BOOL CSystemTray::Create(HINSTANCE hInst, HWND hParent, UINT uCallbackMessage,
     if (!m_bHidden || m_bWin2K)
     {
         bResult = Shell_NotifyIcon(NIM_ADD, &m_tnd);
-        m_bShowIconPending = m_bHidden = m_bRemoved = !bResult;
+        //m_bShowIconPending = m_bHidden = m_bRemoved = !bResult;
+        m_bShowIconPending = m_bHidden = m_bRemoved = ~bResult; //TODO: test
     }
     
 #ifdef SYSTEMTRAY_USEW2K    
@@ -931,10 +932,12 @@ void CSystemTray::InstallIconPending()
 	m_tnd.uFlags = m_uCreationFlags;
 
     // Try and recreate the icon
-    m_bHidden = !Shell_NotifyIcon(NIM_ADD, &m_tnd);
+    //m_bHidden = !Shell_NotifyIcon(NIM_ADD, &m_tnd);
+    m_bHidden = ~Shell_NotifyIcon(NIM_ADD, &m_tnd); //TODO: test
 
     // If it's STILL hidden, then have another go next time...
-    m_bShowIconPending = !m_bHidden;
+    //m_bShowIconPending = !m_bHidden;
+    m_bShowIconPending = ~m_bHidden; //TODO: test
 
     ASSERT(m_bHidden == FALSE);
 }

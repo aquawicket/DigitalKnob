@@ -21,8 +21,7 @@
 :: LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 :: OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 :: SOFTWARE.
-set "STAY_OPEN=1"
-%dkbatch%
+@echo off & %dkbatch%
 
 set "DIGITALKNOB=C:\Users\%USERNAME%\digitalknob"
 set "DKCMAKE=%DIGITALKNOB%\DK\DKCMake"
@@ -33,10 +32,8 @@ if not exist %CMAKE% ( ERROR "Could not locate CMAKE" )
 :begin
 cls
 
-set "file=%DKCMAKE%\dev\test.cmake"
+set "file=%DKCMAKE%\dev\Test.cmake"
 "%CMAKE%" -P "%file%" 
  
-pause
-goto :begin 
- 
+pause 
 %DKEND% 

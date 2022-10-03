@@ -29,7 +29,7 @@ UNIX_dk_set	(LIBXML2_CMAKE -DLIBXML2_INCLUDE_DIR=${LIBXML2}/include -DLIBXML2_LI
 ### GENERATE ###
 dk_setPath					(${LIBXML2}/${BUILD_DIR})
 WIN_dk_queueCommand			(${DKCMAKE_BUILD} ${LIBICONV_CMAKE} ${XZ_CMAKE} ${ZLIB_CMAKE} ${LIBXML2})
-APPLE_dk_queueCommand		(${DKCMAKE_BUILD} ${ZLIB_CMAKE} ${LIBXML2})
+APPLE_dk_queueCommand		(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=-I${LIBXML2}/${OS}" ${ZLIB_CMAKE} ${LIBXML2})
 LINUX_dk_queueCommand		(${DKCONFIGURE_BUILD})
 LINUX_dk_queueCommand		(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=-DLIBXML_THREAD_ENABLED -DHAVE_ERRNO_H -I${LIBXML2}/${OS}/${DEBUG_DIR}" ${ZLIB_CMAKE} ${LIBXML2})
 RASPBERRY_dk_queueCommand	(${DKCONFIGURE_BUILD})
@@ -39,10 +39,6 @@ ANDROID_dk_queueCommand		(${DKCMAKE_BUILD} "-DANDROID_COMPILER_FLAGS=-I${LIBXML2
 
 
 ### COMPILE ###
-dk_visualStudio				(${LIBXML2_NAME} xml2.sln xml2)
-dk_xcode					(${LIBXML2_NAME} xml2)
-LINUX_dk_queueCommand		(make xml2)
-RASPBERRY_dk_queueCommand	(make xml2)
-
-
-# fatal error LNK1104: cannot open file 'C:\Users\Administrator\digitalknob\DK\3rdParty\libxml2-f2ad86fa600885429a6083aaf6926c7e2e5b24d6\win32\Debug\libxml2sd.lib'
+dk_visualStudio	(${LIBXML2_NAME} xml2)
+dk_xcode		(${LIBXML2_NAME} xml2)
+dk_make			(${LIBXML2_NAME} xml2)

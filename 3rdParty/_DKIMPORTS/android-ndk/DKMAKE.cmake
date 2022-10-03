@@ -1,5 +1,6 @@
 # https://developer.android.com/ndk
 # https://github.com/android/ndk
+# https://mirrors.cloud.tencent.com/AndroidSDK/
 #
 # Docs
 # https://android.googlesource.com/platform/ndk/+/refs/heads/ndk-release-r21/docs/BuildSystemMaintainers.md
@@ -17,8 +18,10 @@
 # https://dl.google.com/android/repository/android-ndk-r23b-windows.zip        LTS
 # https://dl.google.com/android/repository/android-ndk-r23b-darwin-x86_64.dmg  LTS
 # https://dl.google.com/android/repository/android-ndk-r23b-linux-x86_64.zip   LTS
-if(NOT WIN_HOST)
-#	dk_return()
+
+if(NOT ANDROID)
+	dk_undepend(android-ndk)
+	return()
 endif()
 
 dk_depend(android-sdk)
@@ -34,7 +37,8 @@ dk_set(ANDROID-NDK_BUILD 22.1.7171670)
 dk_set(ANDROID-NDK_DL https://dl.google.com/android/repository/android-ndk-r22b-windows-x86_64.zip)
 dk_makeDirectory(${ANDROID-SDK}/ndk)
 WIN_HOST_dk_import	(${ANDROID-NDK_DL} PATH ${ANDROID-SDK}/ndk/22.1.7171670 PATCH)
-MAC_HOST_dk_import	(https://dl.google.com/android/repository/android-ndk-r22b-darwin-x86_64.dmg PATH ${ANDROID-SDK}/ndk/22.1.7171670 PATCH)
+#MAC_HOST_dk_import	(https://dl.google.com/android/repository/android-ndk-r22b-darwin-x86_64.dmg PATH ${ANDROID-SDK}/ndk/22.1.7171670 PATCH)
+MAC_HOST_dk_import	(https://mirrors.cloud.tencent.com/AndroidSDK/android-ndk-r22b-darwin-x86_64.zip PATH ${ANDROID-SDK}/ndk/22.1.7171670 PATCH)
 LINUX_HOST_dk_import(https://dl.google.com/android/repository/android-ndk-r22b-linux-x86_64.zip PATH ${ANDROID-SDK}/ndk/22.1.7171670 PATCH)
 
 # r23b LTS

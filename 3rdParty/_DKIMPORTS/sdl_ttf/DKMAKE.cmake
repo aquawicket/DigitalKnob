@@ -6,8 +6,7 @@
 dk_depend(sdl)
 dk_depend(freetype)
 
-
-dk_import(https://codeload.github.com/libsdl-org/SDL_ttf/zip/455d885c33dd26a21486bc2a2ede51aca4541679 PATCH)
+dk_import(https://github.com/libsdl-org/SDL_ttf/archive/455d885c33dd26a21486bc2a2ede51aca4541679.zip PATCH)
 #dk_import(https://github.com/libsdl-org/SDL_ttf/archive/06f1158066a5556f074fe020e407e6efcc9ff8e1.zip PATCH)
 #dk_import(https://github.com/libsdl-org/SDL_ttf.git main PATCH)
 
@@ -16,8 +15,10 @@ dk_import(https://codeload.github.com/libsdl-org/SDL_ttf/zip/455d885c33dd26a2148
 dk_include				(${SDL_TTF})
 WIN_dk_libDebug			(${SDL_TTF}/${OS}/lib/${DEBUG_DIR}/SDL_ttf.lib)
 WIN_dk_libRelease		(${SDL_TTF}/${OS}/lib/${RELEASE_DIR}/SDL_ttf.lib)
-APPLE_dk_libDebug		(${SDL_TTF}/${OS}/lib/Debug/SDL_ttf.a)
-APPLE_dk_libRelease		(${SDL_TTF}/${OS}/lib/Release/SDL_ttf.a)
+MAC_dk_libDebug			(${SDL_TTF}/${OS}/lib/${DEBUG_DIR}/SDL_ttf.a)
+MAC_dk_libRelease		(${SDL_TTF}/${OS}/lib/${RELEASE_DIR}/SDL_ttf.a)
+IOSSIM_dk_libDebug		(${SDL_TTF}/${OS}/lib/Debug/SDL_ttf.a)
+IOSSIM_dk_libRelease	(${SDL_TTF}/${OS}/lib/Release/SDL_ttf.a)
 LINUX_dk_libDebug		(${SDL_TTF}/${OS}/${DEBUG_DIR}/lib/SDL_ttf.a)
 LINUX_dk_libRelease		(${SDL_TTF}/${OS}/${RELEASE_DIR}/lib/SDL_ttf.a)
 RASPBERRY_dk_libDebug	(${SDL_TTF}/${OS}/${DEBUG_DIR}/lib/SDL_ttf.a)
@@ -32,7 +33,7 @@ dk_queueCommand	(${DKCMAKE_BUILD} -DBUILD_SHARED_LIBS=OFF -DSDLTTF_SUPPORT_WEBP=
 
 
 ### COMPILE ###
-dk_visualStudio				(${SDL_TTF_NAME} SDLTTF.sln SDLTTF)
+dk_visualStudio				(${SDL_TTF_NAME} SDLTTF)
 dk_xcode					(${SDL_TTF_NAME} SDLTTF)
 LINUX_dk_queueCommand		(make SDLTTF)
 RASPBERRY_dk_queueCommand	(make SDLTTF)

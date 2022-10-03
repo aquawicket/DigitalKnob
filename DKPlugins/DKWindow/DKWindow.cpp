@@ -30,31 +30,25 @@
 #include "DK/DKAndroid.h"
 #include "DKWindow/DKWindow.h"
 
-/////////////////////
-bool DKWindow::Init()
-{
+
+bool DKWindow::Init() {
 	DKDEBUGFUNC();
 	if (!DKClass::DKValid("DKSDLWindow,DKSDLWindow0") && !DKClass::DKValid("DKOSGWindow,DKOSGWindow0"))
-		return DKERROR("DKWindow::Init(): DO NOT create DKWindow directly, use DKSDLWindow or DKOSGWindow\n");
+		return DKERROR("DO NOT create DKWindow directly, use DKSDLWindow or DKOSGWindow\n");
 	DKClass::DKCreate("DKWindowJS");
 	DKClass::DKCreate("DKWindowV8");
 	return true;
 }
 
-////////////////////
-bool DKWindow::End()
-{
+bool DKWindow::End() {
 	DKDEBUGFUNC();
 	return true;
 }
 
-
-
 ///
 ///  If "DKWindow::TestInt()" calls a registered function, it will alter the variable and send it back.
 ///  \a see: DKPlugins/DKSDLWindow.h
-bool DKWindow::TestInt(int& input, int& output)
-{
+bool DKWindow::TestInt(int& input, int& output) {
 	DKDEBUGFUNC(input, output);
 	if(DKClass::HasFunc("DKSDLWindow::TestInt")){
 		return DKClass::CallFunc("DKSDLWindow::TestInt", &input, &output);
@@ -69,8 +63,7 @@ bool DKWindow::TestInt(int& input, int& output)
 ///
 ///  If "DKWindow::TestString()" calls a registered function, it will alter the variable and send it back.
 ///  \a see: DKPlugins/DKSDLWindow.h
-bool DKWindow::TestString(DKString& input, DKString& output)
-{
+bool DKWindow::TestString(DKString& input, DKString& output) {
 	DKDEBUGFUNC(input, output);
 	if(DKClass::HasFunc("DKSDLWindow::TestString")){
 		return DKClass::CallFunc("DKSDLWindow::TestString", &input, &output);
@@ -85,8 +78,7 @@ bool DKWindow::TestString(DKString& input, DKString& output)
 ///
 ///  If "DKWindow::TestReturnInt()" calls a registered function, it will return a variable.
 ///  \a see: DKPlugins/DKSDLWindow.h
-bool DKWindow::TestReturnInt(int& output)
-{
+bool DKWindow::TestReturnInt(int& output) {
 	DKDEBUGFUNC(output);
 	if(DKClass::HasFunc("DKSDLWindow::TestReturnInt")){
 		return DKClass::CallFunc("DKSDLWindow::TestReturnInt", NULL, &output);
@@ -101,8 +93,7 @@ bool DKWindow::TestReturnInt(int& output)
 ///
 ///  If "DKWindow::TestReturnString()" calls a registered function, it will return a variable.
 ///  \a see: DKPlugins/DKSDLWindow.h
-bool DKWindow::TestReturnString(DKString& output)
-{
+bool DKWindow::TestReturnString(DKString& output) {
 	DKDEBUGFUNC(output);
 	if(DKClass::HasFunc("DKSDLWindow::TestReturnString")){
 		return DKClass::CallFunc("DKSDLWindow::TestReturnString", NULL, &output);
@@ -114,10 +105,7 @@ bool DKWindow::TestReturnString(DKString& output)
 	return false;
 }
 
-
-///////////////////////
-bool DKWindow::Create()
-{
+bool DKWindow::Create() {
 	DKDEBUGFUNC();
 	//Create DKSDLWindow or DKOSGWindow
 	if(DKClass::DKAvailable("DKSDLWindow")){
@@ -138,9 +126,7 @@ bool DKWindow::Create()
 	return false;
 }
 
-///////////////////////////
-bool DKWindow::Fullscreen()
-{
+bool DKWindow::Fullscreen() {
 	DKDEBUGFUNC();
 	if(DKClass::HasFunc("DKCefWindow::Fullscreen")){
 		return DKClass::CallFunc("DKCefWindow::Fullscreen", NULL, NULL);
@@ -155,9 +141,7 @@ bool DKWindow::Fullscreen()
 	return false;
 }
 
-///////////////////////////////////////
-bool DKWindow::GetHandle(void*& handle)
-{
+bool DKWindow::GetHandle(void*& handle) {
 	DKDEBUGFUNC(handle);
 	//EXAMPLE
 	//HWND hwnd = NULL;
@@ -176,9 +160,7 @@ bool DKWindow::GetHandle(void*& handle)
 	return false;
 }
 
-/////////////////////////////////////
-bool DKWindow::GetHeight(int& height)
-{
+bool DKWindow::GetHeight(int& height) {
 	DKDEBUGFUNC(height);
 	if(DKClass::HasFunc("DKCefWindow::GetHeight")){
 		return DKClass::CallFunc("DKCefWindow::GetHeight", NULL, &height);
@@ -193,9 +175,7 @@ bool DKWindow::GetHeight(int& height)
 	return false;
 }
 
-////////////////////////////////
-bool DKWindow::GetMouseX(int& x)
-{
+bool DKWindow::GetMouseX(int& x) {
 	DKDEBUGFUNC(x);
 	if(DKClass::HasFunc("DKCefWindow::GetMouseX")){
 		return DKClass::CallFunc("DKCefWindow::GetMouseX", NULL, &x);
@@ -210,9 +190,7 @@ bool DKWindow::GetMouseX(int& x)
 	return false;
 }
 
-////////////////////////////////
-bool DKWindow::GetMouseY(int& y)
-{
+bool DKWindow::GetMouseY(int& y) {
 	DKDEBUGFUNC(y);
 	if(DKClass::HasFunc("DKCefWindow::GetMouseY")){
 		return DKClass::CallFunc("DKCefWindow::GetMouseY", NULL, &y);
@@ -227,9 +205,7 @@ bool DKWindow::GetMouseY(int& y)
 	return false;
 }
 
-//////////////////////////////////////////
-bool DKWindow::GetPixelRatio(float& ratio)
-{
+bool DKWindow::GetPixelRatio(float& ratio) {
 	DKDEBUGFUNC(ratio);
 	if(DKClass::HasFunc("DKCefWindow::GetPixelRatio")){
 		return DKClass::CallFunc("DKCefWindow::GetPixelRatio", NULL, &ratio);
@@ -245,9 +221,7 @@ bool DKWindow::GetPixelRatio(float& ratio)
 	return false;
 }
 
-////////////////////////////////////////
-bool DKWindow::GetTitle(DKString& title)
-{
+bool DKWindow::GetTitle(DKString& title) {
 	DKDEBUGFUNC(title);
 	if(DKClass::HasFunc("DKCefWindow::GetTitle")){
 		return DKClass::CallFunc("DKCefWindow::GetTitle", NULL, &title);
@@ -262,9 +236,7 @@ bool DKWindow::GetTitle(DKString& title)
 	return false;
 }
 
-///////////////////////////////////
-bool DKWindow::GetWidth(int& width)
-{
+bool DKWindow::GetWidth(int& width) {
 	DKDEBUGFUNC(width);
 	if(DKClass::HasFunc("DKCefWindow::GetWidth")){
 		return DKClass::CallFunc("DKCefWindow::GetWidth", NULL, &width);
@@ -279,9 +251,7 @@ bool DKWindow::GetWidth(int& width)
 	return false;
 }
 
-///////////////////////////
-bool DKWindow::GetX(int& x)
-{
+bool DKWindow::GetX(int& x) {
 	DKDEBUGFUNC(x);
 	if(DKClass::HasFunc("DKCefWindow::GetX")){
 		return DKClass::CallFunc("DKCefWindow::GetX", NULL, &x);
@@ -296,9 +266,7 @@ bool DKWindow::GetX(int& x)
 	return false;
 }
 
-///////////////////////////
-bool DKWindow::GetY(int& y)
-{
+bool DKWindow::GetY(int& y) {
 	DKDEBUGFUNC(y);
 	if(DKClass::HasFunc("DKCefWindow::GetY")){
 		return DKClass::CallFunc("DKCefWindow::GetY", NULL, &y);
@@ -313,9 +281,7 @@ bool DKWindow::GetY(int& y)
 	return false;
 }
 
-/////////////////////
-bool DKWindow::Hide()
-{
+bool DKWindow::Hide() {
 	DKDEBUGFUNC();
 	if(DKClass::HasFunc("DKCefWindow::Hide")){
 		return DKClass::CallFunc("DKCefWindow::Hide", NULL, NULL);
@@ -330,9 +296,7 @@ bool DKWindow::Hide()
 	return false;
 }
 
-/////////////////////////////////////////////
-bool DKWindow::IsFullscreen(bool& fullscreen)
-{
+bool DKWindow::IsFullscreen(bool& fullscreen) {
 	DKDEBUGFUNC(fullscreen);
 	if(DKClass::HasFunc("DKCefWindow::IsFullscreen")){
 		return DKClass::CallFunc("DKCefWindow::IsFullscreen", NULL, &fullscreen);
@@ -347,9 +311,7 @@ bool DKWindow::IsFullscreen(bool& fullscreen)
 	return false;
 }
 
-///////////////////////////////////////
-bool DKWindow::IsVisible(bool& visible)
-{
+bool DKWindow::IsVisible(bool& visible) {
 	DKDEBUGFUNC(visible);
 	if(DKClass::HasFunc("DKCefWindow::IsVisible")){
 		return DKClass::CallFunc("DKCefWindow::IsVisible", NULL, &visible);
@@ -364,9 +326,7 @@ bool DKWindow::IsVisible(bool& visible)
 	return false;
 }
 
-/////////////////////////
-bool DKWindow::Maximize()
-{
+bool DKWindow::Maximize() {
 	DKDEBUGFUNC();
 	if(DKClass::HasFunc("DKCefWindow::Maximize")) {
 		return DKClass::CallFunc("DKCefWindow::Maximize", NULL, NULL);
@@ -381,9 +341,7 @@ bool DKWindow::Maximize()
 	return false;
 }
 
-////////////////////////////////////////
-bool DKWindow::MessageBox(DKString& msg)
-{
+bool DKWindow::MessageBox(DKString& msg) {
 	DKDEBUGFUNC(msg);
 	if(DKClass::HasFunc("DKCefWindow::MessageBox")){
 		return DKClass::CallFunc("DKCefWindow::MessageBox", &msg, NULL);
@@ -398,9 +356,7 @@ bool DKWindow::MessageBox(DKString& msg)
 	return false;
 }
 
-/////////////////////////
-bool DKWindow::Minimize()
-{
+bool DKWindow::Minimize() {
 	DKDEBUGFUNC();
 	if(DKClass::HasFunc("DKCefWindow::Minimize")) {
 		return DKClass::CallFunc("DKCefWindow::Minimize", NULL, NULL);
@@ -415,9 +371,7 @@ bool DKWindow::Minimize()
 	return false;
 }
 
-////////////////////////
-bool DKWindow::Restore()
-{
+bool DKWindow::Restore() {
 	DKDEBUGFUNC();
 	if(DKClass::HasFunc("DKCefWindow::Restore")) {
 		return DKClass::CallFunc("DKCefWindow::Restore", NULL, NULL);
@@ -432,9 +386,7 @@ bool DKWindow::Restore()
 	return false;
 }
 
-////////////////////////////////
-bool DKWindow::SetHeight(int& h)
-{
+bool DKWindow::SetHeight(int& h) {
 	DKDEBUGFUNC(h);
 	//if(DKClass::HasFunc("DKCefWindow::SetHeight")){
 	//	return DKClass::CallFunc("DKCefWindow::SetHeight", &h, NULL);
@@ -449,9 +401,7 @@ bool DKWindow::SetHeight(int& h)
 	return false;
 }
 
-//////////////////////////////////////
-bool DKWindow::SetIcon(DKString& file)
-{
+bool DKWindow::SetIcon(DKString& file) {
 	DKDEBUGFUNC(file);
 	if(DKClass::HasFunc("DKCefWindow::SetIcon")){
 		return DKClass::CallFunc("DKCefWindow::SetIcon", &file, NULL);
@@ -466,9 +416,7 @@ bool DKWindow::SetIcon(DKString& file)
 	return false;
 }
 
-/////////////////////////////////////////
-bool DKWindow::SetTitle(DKString& string)
-{
+bool DKWindow::SetTitle(DKString& string) {
 	DKDEBUGFUNC(string);
 	if(DKClass::HasFunc("DKCefWindow::SetTitle")){
 		return DKClass::CallFunc("DKCefWindow::SetTitle", &string, NULL);
@@ -483,9 +431,7 @@ bool DKWindow::SetTitle(DKString& string)
 	return false;
 }
 
-///////////////////////////////
-bool DKWindow::SetWidth(int& w)
-{
+bool DKWindow::SetWidth(int& w) {
 	DKDEBUGFUNC(w);
 	//if(DKClass::HasFunc("DKCefWindow::SetWidth")){
 	//	return DKClass::CallFunc("DKCefWindow::SetWidth", &w, NULL);
@@ -500,9 +446,7 @@ bool DKWindow::SetWidth(int& w)
 	return false;
 }
 
-///////////////////////////
-bool DKWindow::SetX(int& x)
-{
+bool DKWindow::SetX(int& x) {
 	DKDEBUGFUNC(x);
 	//if(DKClass::HasFunc("DKCefWindow::SetX")){
 	//	return DKClass::CallFunc("DKCefWindow::SetX", &x, NULL);
@@ -517,9 +461,7 @@ bool DKWindow::SetX(int& x)
 	return false;
 }
 
-///////////////////////////
-bool DKWindow::SetY(int& y)
-{
+bool DKWindow::SetY(int& y) {
 	DKDEBUGFUNC(y);
 	//if(DKClass::HasFunc("DKCefWindow::SetY")){
 	//	return DKClass::CallFunc("DKCefWindow::SetY", &y, NULL);
@@ -534,9 +476,7 @@ bool DKWindow::SetY(int& y)
 	return false;
 }
 
-/////////////////////
-bool DKWindow::Show()
-{
+bool DKWindow::Show() {
 	DKDEBUGFUNC();
 	if(DKClass::HasFunc("DKCefWindow::Show")){
 		return DKClass::CallFunc("DKCefWindow::Show", NULL, NULL);
@@ -551,9 +491,7 @@ bool DKWindow::Show()
 	return false;
 }
 
-/////////////////////////
-bool DKWindow::Windowed()
-{
+bool DKWindow::Windowed() {
 	DKDEBUGFUNC();
 	if(DKClass::HasFunc("DKCefWindow::Windowed")){
 		return DKClass::CallFunc("DKCefWindow::Windowed", NULL, NULL);

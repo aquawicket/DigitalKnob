@@ -87,13 +87,13 @@ DKTime.prototype.update = function DKTime_update() {
     dk.time.time = Number(dk.time.military) + (dk.time.minute * .01);
 
     if (dk.time.longitude && dk.time.latitude) {
-        let date = new Date().sunrise(dk.time.latitude, dk.time.longitude, dk.time.zenith);
+        var date = new Date().sunrise(dk.time.latitude, dk.time.longitude, dk.time.zenith);
         dk.time.sunrise = date.getHours() + (date.getMinutes() * .01);
         date = new Date().sunset(dk.time.latitude, dk.time.longitude, dk.time.zenith);
         dk.time.sunset = date.getHours() + (date.getMinutes() * .01);
     }
   
-    for(let n=0; dk.time.updateFuncs && n < dk.time.updateFuncs.length; n++){
+    for(var n=0; dk.time.updateFuncs && n < dk.time.updateFuncs.length; n++){
         dk.time.updateFuncs[n]();
     }   
 }

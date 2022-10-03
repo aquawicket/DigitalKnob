@@ -24,14 +24,14 @@
 * SOFTWARE.
 */
 
-#ifdef HAVE_DKCef
+#if HAVE_DKCef
 #pragma once
 #ifndef DKWindowV8_H
 #define DKWindowV8_H
 
 #include "DKCef/DKCef.h"
 
-///////////////////////////////////////////////
+
 class DKWindowV8 : public DKObjectT<DKWindowV8>
 {
 public:

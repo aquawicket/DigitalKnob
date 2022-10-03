@@ -1,6 +1,8 @@
 # https://dl.google.com/android/repository/platform-26_r02.zip
-if(NOT WIN_HOST)
-#	return()
+
+if(NOT ANDROID)
+	dk_undepend(android-platforms)
+	return()
 endif()
 
 dk_depend(android-sdk)

@@ -51,16 +51,18 @@ bool DKTextColor::GetConsoleHandle(HANDLE& handle){
 	https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html
 */
 bool DKTextColor::PrintColors(){
-#	ifdef WIN
-		StoreColor();
-		for(int k = 1; k < 255; k++){
-			RestoreColor((WORD&)k);
-			std::cout << k << "   Pick This Color ! :D   " << std::endl;
-		}
-		RestoreColor();
-		return true;
-#	endif
+	DKDEBUGFUNC();
+#ifdef WIN
+	StoreColor();
+	for(int k = 1; k < 255; k++){
+		RestoreColor((WORD&)k);
+		std::cout << k << "   Pick This Color ! :D   " << std::endl;
+	}
+	RestoreColor();
+	return true;
+#else
 	return DKERROR("not implemented on this system");
+#endif
 }
 
 

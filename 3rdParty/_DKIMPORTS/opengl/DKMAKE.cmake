@@ -3,11 +3,7 @@ WIN_dk_lib(opengl32.lib)
 
 
 if(MAC)
-	FIND_LIBRARY(OpenGL_lib OpenGL)
-	if(NOT OpenGL_lib)
-		dk_error("Could not locate OpenGL framework")
-	endif()
-	APPLE_dk_lib(${OpenGL_lib})
+	dk_findLibrary(OpenGL)
 endif()
 
 IOS_dk_depend(opengles)

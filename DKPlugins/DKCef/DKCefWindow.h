@@ -39,25 +39,25 @@
 
 class DKCef;
 class DKCefWindow : public CefClient,
-					//public CefAccessibilityHandler, //Error: cannot instantiate abstract class
-					public CefContextMenuHandler,
-					public CefDialogHandler,
-					public CefDisplayHandler,
-					public CefDownloadHandler,
-					public CefDragHandler,
-					public CefExtensionHandler,
-					public CefFindHandler,
-					public CefFocusHandler,
-					public CefJSDialogHandler,
-					public CefKeyboardHandler,
-					public CefLifeSpanHandler,
-					public CefLoadHandler,
-					public CefPrintHandler,
-					public CefRenderHandler,
-					//public CefRequestContextHandler,
-					public CefRequestHandler,
-					//public CefResourceHandler,       //Error: cannot instantiate abstract class
-					public CefResourceRequestHandler
+		//public CefAccessibilityHandler, //Error: cannot instantiate abstract class
+		public CefContextMenuHandler,
+		public CefDialogHandler,
+		public CefDisplayHandler,
+		public CefDownloadHandler,
+		public CefDragHandler,
+		public CefExtensionHandler,
+		public CefFindHandler,
+		public CefFocusHandler,
+		public CefJSDialogHandler,
+		public CefKeyboardHandler,
+		public CefLifeSpanHandler,
+		public CefLoadHandler,
+		public CefPrintHandler,
+		public CefRenderHandler,
+		//public CefRequestContextHandler,
+		public CefRequestHandler,
+		//public CefResourceHandler,       //Error: cannot instantiate abstract class
+		public CefResourceRequestHandler
 {
 public:
 	DKCefWindow();
@@ -92,13 +92,13 @@ public:
 
 	DKCef* dkCef;
 
-#ifdef WIN32
+#if WIN32
 	WINDOWPLACEMENT g_wpPrev = { sizeof(g_wpPrev) };
 	WINDOWPLACEMENT wpc;
 	LONG HWNDStyle = 0;
 	LONG HWNDStyleEx = 0;
 #endif
-#ifdef LINUX
+#if LINUX
 	bool isFullscreen = false;
 #endif
 
@@ -155,15 +155,18 @@ public:
 
 	// CefPrintHandler
 	bool OnPrintDialog(CefRefPtr<CefBrowser> browser, bool has_selection, CefRefPtr<CefPrintDialogCallback> callback) override;
-	bool OnPrintJob(CefRefPtr<CefBrowser> browser, const CefString& document_name, const CefString& pdf_file_path, CefRefPtr<CefPrintJobCallback> callback) override { return true; }
+	bool OnPrintJob(CefRefPtr<CefBrowser> browser, const CefString& document_name, const CefString& pdf_file_path, CefRefPtr<CefPrintJobCallback> callback) override { 
+		DKDEBUGFUNC(browser, document_name, pdf_file_path, callback);
+		return true; 
+	}
 	void OnPrintReset(CefRefPtr<CefBrowser> browser) override {}
-	void OnPrintSettings(CefRefPtr<CefBrowser> browser, CefRefPtr<CefPrintSettings> settings, bool get_defaults) override {}
+	void OnPrintSettings(CefRefPtr<CefBrowser> browser, CefRefPtr<CefPrintSettings> settings, bool get_defaults) override {
+		DKDEBUGFUNC(browser, settings, get_defaults);
+	}
 	void OnPrintStart(CefRefPtr<CefBrowser> browser) override {}
 
 	// CefRenderProcessHandler 
 	bool OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefProcessId source_process, CefRefPtr<CefProcessMessage> message) override;
-
-
 
 	// CefGeolocationHandler
 	/*

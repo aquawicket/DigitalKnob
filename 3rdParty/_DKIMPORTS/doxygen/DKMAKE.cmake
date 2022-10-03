@@ -1,3 +1,6 @@
+# https://github.com/doxygen/doxygen
+# https://github.com/doxygen/doxygen.git
+
 if(NOT WIN_HOST)
 	return()
 endif()

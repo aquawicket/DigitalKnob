@@ -27,7 +27,7 @@ ANDROID_dk_libRelease(${LIGHTTPD}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/lib
 WIN_dk_setPath(${LIGHTTPD}/${OS})
 WIN32_dk_queueCommand(${DKCMAKE_BUILD} ${LIGHTTPD})
 WIN64_dk_queueCommand(${DKCMAKE_BUILD} ${LIGHTTPD})
-WIN_dk_visualStudio(${LIGHTTPD_NAME} liblighttpd.sln LIGHTTPD)
+WIN_dk_visualStudio(${LIGHTTPD_NAME} LIGHTTPD)
 
 
 LINUX_DEBUG_dk_setPath(${LIGHTTPD}/${OS}/${DEBUG_DIR})

@@ -30,6 +30,7 @@
 
 
 bool DKCefJS::Init(){
+	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("CPP_DKCef_CloseBrowser", DKCefJS::CloseBrowser);
 	DKDuktape::AttachFunction("CPP_DKCef_CloseDevTools", DKCefJS::CloseDevTools);
 	DKDuktape::AttachFunction("CPP_DKCef_Copy", DKCefJS::Copy);
@@ -61,6 +62,7 @@ bool DKCefJS::Init(){
 }
 
 int DKCefJS::CloseBrowser(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	int browser = duk_require_int(ctx, 0);
 	if(!DKCef::Get()->CloseBrowser(browser))
 		return 0;
@@ -68,6 +70,7 @@ int DKCefJS::CloseBrowser(duk_context* ctx){
 }
 
 int DKCefJS::CloseDevTools(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	int browser = duk_require_int(ctx, 0);
 	if(!DKCef::Get()->CloseDevTools(browser))
 		return 0;
@@ -76,12 +79,14 @@ int DKCefJS::CloseDevTools(duk_context* ctx){
 
 
 int DKCefJS::Copy(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	if(!DKCef::Get()->Copy())
 		return 0;
 	return 1;
 }
 
 int DKCefJS::CopyImage(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	DKString url = duk_require_string(ctx, 0);
 	if(!DKCef::Get()->CopyImage(url))
 		return 0;
@@ -89,12 +94,14 @@ int DKCefJS::CopyImage(duk_context* ctx){
 }
 
 int DKCefJS::Cut(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	if(!DKCef::Get()->Cut())
 		return 0;
 	return 1;
 }
 
 int DKCefJS::DownloadUrl(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	DKString url = duk_require_string(ctx, 0);
 	if(!DKCef::Get()->DownloadUrl(url))
 		return 0;
@@ -102,6 +109,7 @@ int DKCefJS::DownloadUrl(duk_context* ctx){
 }
 
 int DKCefJS::Find(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	int browser = duk_require_int(ctx, 0);
 	DKString text = duk_require_string(ctx, 1);
 	if(!DKCef::Get()->Find(browser, text))
@@ -110,6 +118,7 @@ int DKCefJS::Find(duk_context* ctx){
 }
 
 int DKCefJS::GetBrowserId(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	int browser = duk_require_int(ctx, 0);
 	DKString id;
 	if(!DKCef::Get()->GetBrowserId(browser, id))
@@ -120,6 +129,7 @@ int DKCefJS::GetBrowserId(duk_context* ctx){
 }
 
 int DKCefJS::GetBrowsers(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	int num;
 	if(!DKCef::Get()->GetBrowsers(num))
 		return 0;
@@ -128,6 +138,7 @@ int DKCefJS::GetBrowsers(duk_context* ctx){
 }
 
 int DKCefJS::GetCurrentBrowser(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	int browser;
 	if(!DKCef::Get()->GetCurrentBrowser(browser))
 		return 0;
@@ -158,6 +169,7 @@ int DKCefJS::GetUrl(duk_context* ctx){
 }
 
 int DKCefJS::GoBack(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	int browser = duk_require_int(ctx, 0);
 	if(!DKCef::Get()->GoBack(browser))
 		return 0;
@@ -165,6 +177,7 @@ int DKCefJS::GoBack(duk_context* ctx){
 }
 
 int DKCefJS::GoForward(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	int browser = duk_require_int(ctx, 0);
 	if(!DKCef::Get()->GoForward(browser))
 		return 0;
@@ -172,6 +185,7 @@ int DKCefJS::GoForward(duk_context* ctx){
 }
 
 int DKCefJS::NewBrowser(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	int top = duk_require_int(ctx, 1);
 	int left = duk_require_int(ctx, 2);
@@ -184,12 +198,14 @@ int DKCefJS::NewBrowser(duk_context* ctx){
 }
 
 int DKCefJS::Paste(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	if(!DKCef::Get()->Paste())
 		return 0;
 	return 1;
 }
 
 int DKCefJS::Popup(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	DKString url = duk_require_string(ctx, 0);
 	if(!DKCef::Get()->Popup(url))
 		return 0;
@@ -197,6 +213,7 @@ int DKCefJS::Popup(duk_context* ctx){
 }
 
 int DKCefJS::Print(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	int browser = duk_require_int(ctx, 0);
 	if(!DKCef::Get()->Print(browser))
 		return 0;
@@ -204,6 +221,7 @@ int DKCefJS::Print(duk_context* ctx){
 }
 
 int DKCefJS::Reload(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	int browser = duk_require_int(ctx, 0);
 	if(!DKCef::Get()->Reload(browser))
 		return 0;
@@ -211,6 +229,7 @@ int DKCefJS::Reload(duk_context* ctx){
 }
 
 int DKCefJS::RemoveFocus(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	int browser = duk_require_int(ctx, 0);
 	if(!DKCef::Get()->RemoveFocus(browser))
 		return 0;
@@ -218,6 +237,7 @@ int DKCefJS::RemoveFocus(duk_context* ctx){
 }
 
 int DKCefJS::RunJavascript(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	DKString string = duk_require_string(ctx, 0);
 	int browser = duk_require_int(ctx, 1);
 	if(!DKCef::Get()->RunJavascript(browser, string))
@@ -226,6 +246,7 @@ int DKCefJS::RunJavascript(duk_context* ctx){
 }
 
 int DKCefJS::SetFocus(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	int browser = duk_require_int(ctx, 0);
 	if(!DKCef::Get()->SetFocus(browser))
 		return 0;
@@ -233,6 +254,7 @@ int DKCefJS::SetFocus(duk_context* ctx){
 }
 
 int DKCefJS::SetKeyboardFocus(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	int browser = duk_require_int(ctx, 0);
 	if(!DKCef::Get()->SetKeyboardFocus(browser))
 		return 0;
@@ -240,6 +262,7 @@ int DKCefJS::SetKeyboardFocus(duk_context* ctx){
 }
 
 int DKCefJS::SetUrl(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	int browser = duk_require_int(ctx, 0);
 	DKString url = duk_require_string(ctx, 1);
 	if(!DKCef::Get()->SetUrl(browser, url))
@@ -248,6 +271,7 @@ int DKCefJS::SetUrl(duk_context* ctx){
 }
 
 int DKCefJS::ShowDevTools(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	int browser = duk_require_int(ctx, 0);
 	if(!DKCef::Get()->ShowDevTools(browser))
 		return 0;
@@ -255,6 +279,7 @@ int DKCefJS::ShowDevTools(duk_context* ctx){
 }
 
 int DKCefJS::Stop(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	int browser = duk_require_int(ctx, 0);
 	if(!DKCef::Get()->Stop(browser))
 		return 0;

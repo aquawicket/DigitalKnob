@@ -33,7 +33,8 @@ DKFunctionMap* DKClass::functions = NULL;
 void DKClass::Register(const DKString& klass, DKClass* _class, bool _singleton){
 	DKDEBUGFUNC(klass, _class, _singleton);
 	if(!classes){ classes = new std::map<DKString, DKClass*>(); }
-	if((*classes)[klass]){ return; } //already exists
+	if((*classes)[klass])
+		return;  //already exists
 	(*classes)[klass] = _class;
 	if(_singleton)
 		(*classes)[klass]->Singleton();
@@ -55,8 +56,8 @@ DKObject* DKClass::_Instance(const DKString& data){
 			return (*classes)[arry[0]]->Instance(data);
 		return (*classes)[arry[0]]->Instance("");
 	}
-	DKWARN("DKClass::_Instance "+arry[0]+" not registered\n");
-	//DKWARN("   Open DKMAKE.cmake and add DKDEPEND("+arry[0]+"), and rebuild\n");
+	DKWARN(arry[0]+" not registered\n");
+	//DKWARN("   to include, add dk_depend("+arry[0]+") to DKMAKE.cmake, and rebuild\n");
 	return NULL;
 }
 
@@ -66,11 +67,11 @@ DKObject* DKClass::_Get(const DKString& data){
 	toStringArray(arry, data, ",");
 	if(classes && (*classes)[arry[0]]){
 		if(arry.size() < 2)
-			DKINFO("DKClass::_Get("+data+"): arry.size() < 2,  we should return the first instance\n");
+			DKINFO("arry.size() < 2,  we should return the first instance\n");
 		return (*classes)[arry[0]]->Get(arry[1]);
 	}
-	DKWARN("DKClass::_Get(): "+arry[0]+" not registered\n");
-	//DKWARN("   Open DKMAKE.cmake and add DKDEPEND("+arry[0]+"), and rebuild\n");
+	DKWARN(arry[0]+" not registered\n");
+	//DKWARN("   to include, add dk_depend("+arry[0]+") to DKMAKE.cmake, and rebuild\n");
 	return NULL;
 }
 
@@ -80,12 +81,12 @@ bool DKClass::_Valid(const DKString& data){
 	toStringArray(arry, data, ",");
 	if(classes && (*classes)[arry[0]]){
 		if(arry.size() < 2)
-			DKWARN("DKClass::_Valid("+data+"): arry.size() < 2,  we should return the first instance\n");
+			DKWARN("arry.size() < 2,  we should return the first instance\n");
 		return (*classes)[arry[0]]->Valid(arry[1]);
 	}
 	//DKLOG("DKClass::_Valid(): "+arry[0]+" not registered\n", DKWARN);
-	//DKLOG("   Open DKMAKE.cmake and add DKDEPEND("+arry[0]+"), and rebuild\n", DKWARN);
-	return NULL;
+	//DKWARN("   to include, add dk_depend("+arry[0]+") to DKMAKE.cmake, and rebuild\n");
+	return false;
 }
 
 bool DKClass::_Available(const DKString& data){
@@ -94,7 +95,7 @@ bool DKClass::_Available(const DKString& data){
 	toStringArray(arry, data, ",");
 	if(classes && (*classes)[arry[0]]){
 		if(arry.size() < 2)
-			DKDEBUG("DKClass::_Available("+data+"): arry.size() < 2, we should see if we can create an instance\n");
+			DKDEBUG("arry.size() < 2, we should see if we can create an instance\n");
 		if(arry.size() > 1 && (*classes)[arry[0]]->Valid(arry[1])){
 			DKWARN("DKClass: "+arry[0]+","+arry[1]+" - id is already in use\n");
 			return false;
@@ -102,7 +103,7 @@ bool DKClass::_Available(const DKString& data){
 		return true;
 	}
 	//DKWARN("DKClass::_Available(): "+arry[0]+" not registered\n");
-	//DKWARN("   Open DKMAKE.cmake and add DKDEPEND("+arry[0]+"), and rebuild\n");
+	//DKWARN("   to include, add dk_depend("+arry[0]+") to DKMAKE.cmake, and rebuild\n");
 	return false;
 }
 
@@ -135,14 +136,14 @@ void DKClass::CloseAll(){
 		return;
 	for(rit = (*classes).rbegin(); rit != (*classes).rend(); ++rit){
 		if((*classes)[rit->first]){
-			DKINFO("DKClass::CloseAll(): Closing " + rit->first + "\n");
+			DKINFO("Closing " + rit->first + "\n");
 			(*classes)[rit->first]->Close("");
 		}
 	}
-#	if WIN32
+#if WIN32
 		if(IsWindowVisible(GetConsoleWindow()))
 			ShowWindow(GetConsoleWindow(),SW_HIDE);
-#	endif
+#endif
 }
 
 void DKClass::GetClassList(DKStringArray& list){

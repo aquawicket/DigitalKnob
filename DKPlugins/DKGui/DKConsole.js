@@ -277,7 +277,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
     DKConsole.prototype.Formatter = function DKConsole_Formatter(args) {
         if (!args.length)
             return;
-        let target = args[0];
+        var target = args[0];
         if (!target.indexOf)
             return args;
         const current = args[1];
@@ -285,7 +285,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
         if (index <= -1)
             return args;
         const specifier = target.substring(index, index + 2);
-        let converted = undefined;
+        var converted = undefined;
         if (specifier === "%s")
             converted = current.toString();
         if (specifier === "%d" || specifier === "%i") {
@@ -319,7 +319,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
             target = target.replace(specifier, converted);
         const result = [];
         result.push(target);
-        let n = 2;
+        var n = 2;
         while (args[n]) {
             result.push(args[n]);
             n++;
@@ -420,7 +420,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
                     group.display = "block";
                 }
                 const elements = dk.console.logDiv.querySelectorAll("[group='" + group.id + "']");
-                for (let n = 0; n < elements.length; n++)
+                for (var n = 0; n < elements.length; n++)
                     elements[n].style.display = group.display;
             }
 
@@ -740,7 +740,7 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
     dk.console.record = dk.x.record
     delete dk.x;
     //restore the record of messages from the program beginning
-    for (let n = 0; n < dk.console.record.length; n++) {
+    for (var n = 0; n < dk.console.record.length; n++) {
         const lvl = Object.keys(dk.console.record[n])[0];
         const msg = dk.console.record[n][lvl];
         dk.console[lvl](msg);
@@ -750,11 +750,11 @@ DKConsole.prototype.create = function DKConsole_create(parent, top, bottom, left
 }
 
 DKConsole.prototype.SpanFilter = function DKConsole_SpanFilter(args) {
-    let argArray = [];
+    var argArray = [];
     if (args.length) {
         const startTagRe = /<span\s+style=(['"])([^'"]*)\1\s*>/gi;
         const endTagRe = /<\/span>/gi;
-        let reResultArray;
+        var reResultArray;
         if (typeof args[0].replace !== "function")
             return args;
         argArray.push(args[0].replace(startTagRe, '%c').replace(endTagRe, '%c'));
@@ -763,7 +763,7 @@ DKConsole.prototype.SpanFilter = function DKConsole_SpanFilter(args) {
             argArray.push('');
         }
         // pass through subsequent args since chrome dev tools does not (yet) support console.log styling of the following form: console.log('%cBlue!', 'color: blue;', '%cRed!', 'color: red;');
-        for (let n = 1; n < args.length; n++)
+        for (var n = 1; n < args.length; n++)
             argArray.push(args[n]);
     }
     return argArray;
@@ -771,7 +771,7 @@ DKConsole.prototype.SpanFilter = function DKConsole_SpanFilter(args) {
 
 /*
 DKConsole.prototype.ColorChromeConsole = function DKConsole_ColorChromeConsole(args) {
-    let argArray = [];
+    var argArray = [];
     argArray.push("%c " + args[0]);
     if (args[1] === "red")
         argArray.push(["padding: 2px 10px 2px 0px", "background-color: rgb(41,0,0)", "color: rgb(255,128,128)"].join(";"));

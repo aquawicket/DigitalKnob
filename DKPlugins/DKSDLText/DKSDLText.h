@@ -23,7 +23,9 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-#ifdef HAVE_sdl_ttf
+#ifndef HAVE_sdl_ttf
+#	error "sdl_ttf library required for DKSDLText plugin"
+#endif 
 
 #pragma once
 #ifndef DKSDLText_H
@@ -53,5 +55,3 @@ public:
 REGISTER_OBJECT(DKSDLText, true)
 
 #endif //DKSDLText_H
-
-#endif //HAVE_sdl_ttf

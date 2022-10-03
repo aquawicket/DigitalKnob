@@ -10,27 +10,30 @@ dk_import(https://gitlab.com/libtiff/libtiff.git)
 
 ### DKPLUGINS LINK ###
 dk_include				(${TIFF}/libtiff)
-DEBUG_dk_include		(${TIFF}/${OS}/${DEBUG_DIR}/libtiff)
-RELEASE_dk_include		(${TIFF}/${OS}/${RELEASE_DIR}/libtiff)
-WIN_dk_libDebug			(${TIFF}/${OS}/${DEBUG_DIR}/tiff-static.lib)
-WIN_dk_libRelease		(${TIFF}/${OS}/${RELEASE_DIR}/tiff-static.lib)
-APPLE_dk_libDebug		(${TIFF}/${OS}/${DEBUG_DIR}/libtiff-static.a)
-APPLE_dk_libRelease		(${TIFF}/${OS}/${RELEASE_DIR}/libtiff-static.a)
+dk_include				(${TIFF}/${OS}/libtiff)
+DEBUG_dk_include		(${TIFF}/${OS}/libtiff/${DEBUG_DIR})
+RELEASE_dk_include		(${TIFF}/${OS}/libtiff/${RELEASE_DIR})
+
+WIN_dk_libDebug			(${TIFF}/${OS}/libtiff/${DEBUG_DIR}/tiffd.lib)
+WIN_dk_libRelease		(${TIFF}/${OS}/libtiff/${RELEASE_DIR}/tiff.lib)
+APPLE_dk_libDebug		(${TIFF}/${OS}/libtiff/${DEBUG_DIR}/libtiff.a)
+APPLE_dk_libRelease		(${TIFF}/${OS}/libtiff/${RELEASE_DIR}/libtiff.a)
 LINUX_dk_libDebug		(${TIFF}/${OS}/${DEBUG_DIR}/libtiff/libtiff.a)
 LINUX_dk_libRelease		(${TIFF}/${OS}/${RELEASE_DIR}/libtiff/libtiff.a)
-RASPBERRY_dk_libDebug	(${TIFF}/${OS}/${DEBUG_DIR}/libtiff/libtiff.a)
-RASPBERRY_dk_libRelease	(${TIFF}/${OS}/${RELEASE_DIR}/libtiff/libtiff.a)
-ANDROID_dk_libDebug		(${TIFF}/${OS}/${DEBUG_DIR}/libtiff-static.a)
-ANDROID_dk_libRelease	(${TIFF}/${OS}/${RELEASE_DIR}/libtiff-static.a)
+RASPBERRY_dk_libDebug	(${TIFF}/${OS}/libtiff/${DEBUG_DIR}/libtiff/libtiff.a)
+RASPBERRY_dk_libRelease	(${TIFF}/${OS}/libtiff/${RELEASE_DIR}/libtiff/libtiff.a)
+ANDROID_dk_libDebug		(${TIFF}/${OS}/libtiff/${DEBUG_DIR}/libtiff.a)
+ANDROID_dk_libRelease	(${TIFF}/${OS}/libtiff/${RELEASE_DIR}/libtiff.a)
 
 
 ### 3RDPARTY LINK ###
-WIN_dk_set		(TIFF_CMAKE -DTIFF_INCLUDE_DIR=${TIFF}/libtiff -DTIFF_INCLUDE_DIR2=${TIFF}/${OS} -DTIFF_LIBRARY_DEBUG=${TIFF}/${OS}/${DEBUG_DIR}/tiff-static.lib -DTIFF_LIBRARY_RELEASE=${TIFF}/${OS}/${RELEASE_DIR}/tiff-static.lib)
-APPLE_dk_set	(TIFF_CMAKE -DTIFF_INCLUDE_DIR=${TIFF}/libtiff -DTIFF_INCLUDE_DIR2=${TIFF}/${OS} -DTIFF_LIBRARY_DEBUG=${TIFF}/${OS}/${DEBUG_DIR}/libtiff-static.a -DTIFF_LIBRARY_RELEASE=${TIFF}/${OS}/${RELEASE_DIR}/libtiff-static.a)
-LINUX_dk_set	(TIFF_CMAKE -DTIFF_INCLUDE_DIR=${TIFF}/libtiff -DTIFF_INCLUDE_DIR2=${TIFF}/${OS}/${RELEASE_DIR} -DTIFF_LIBRARY_DEBUG=${TIFF}/${OS}/${DEBUG_DIR}/libtiff-static.a -DTIFF_LIBRARY_RELEASE=${TIFF}/${OS}/${RELEASE_DIR}/libtiff-static.a "-DCMAKE_C_FLAGS_DEBUG=-I${TIFF}/${OS}/${DEBUG_DIR}" "-DCMAKE_CXX_FLAGS_DEBUG=-I${TIFF}/${OS}/${DEBUG_DIR}")
-RASPBERRY_dk_set(TIFF_CMAKE -DTIFF_INCLUDE_DIR=${TIFF}/libtiff -DTIFF_INCLUDE_DIR2=${TIFF}/${OS}/${RELEASE_DIR} -DTIFF_LIBRARY_DEBUG=${TIFF}/${OS}/${DEBUG_DIR}/libtiff-static.a -DTIFF_LIBRARY_RELEASE=${TIFF}/${OS}/${RELEASE_DIR}/libtiff-static.a "-DCMAKE_C_FLAGS_DEBUG=-I${TIFF}/${OS}/${DEBUG_DIR}" "-DCMAKE_CXX_FLAGS_DEBUG=-I${TIFF}/${OS}/${DEBUG_DIR}")
-ANDROID_dk_set	(TIFF_CMAKE -DTIFF_INCLUDE_DIR=${TIFF}/libtiff -DTIFF_INCLUDE_DIR2=${TIFF}/${OS} -DTIFF_LIBRARY_DEBUG=${TIFF}/${OS}/${DEBUG_DIR}/libtiff-static.a -DTIFF_LIBRARY_RELEASE=${TIFF}/${OS}/${RELEASE_DIR}/libtiff-static.a)
+WIN_dk_set		(TIFF_CMAKE "-DCMAKE_C_FLAGS=-I${TIFF}/${OS}/libtiff" "-DCMAKE_CXX_FLAGS=-I${TIFF}/${OS}/libtiff" -DTIFF_INCLUDE_DIR=${TIFF}/libtiff -DTIFF_INCLUDE_DIR2=${TIFF}/${OS}/libtiff -DTIFF_LIBRARY_DEBUG=${TIFF}/${OS}/libtiff/${DEBUG_DIR}/tiffd.lib -DTIFF_LIBRARY_RELEASE=${TIFF}/${OS}/libtiff/${RELEASE_DIR}/tiff.lib)
+APPLE_dk_set	(TIFF_CMAKE -DTIFF_INCLUDE_DIR=${TIFF}/libtiff -DTIFF_INCLUDE_DIR2=${TIFF}/${OS}/libtiff -DTIFF_LIBRARY_DEBUG=${TIFF}/${OS}/${DEBUG_DIR}/libtiff.a -DTIFF_LIBRARY_RELEASE=${TIFF}/${OS}/${RELEASE_DIR}/libtiff.a)
+LINUX_dk_set	(TIFF_CMAKE -DTIFF_INCLUDE_DIR=${TIFF}/libtiff -DTIFF_INCLUDE_DIR2=${TIFF}/${OS}/${DEBUG_DIR}/libtiff -DTIFF_LIBRARY_DEBUG=${TIFF}/${OS}/${DEBUG_DIR}/libtiff/libtiff.a -DTIFF_LIBRARY_RELEASE=${TIFF}/${OS}/${RELEASE_DIR}/libtiff/libtiff.a)
+RASPBERRY_dk_set(TIFF_CMAKE -DTIFF_INCLUDE_DIR=${TIFF}/libtiff -DTIFF_INCLUDE_DIR2=${TIFF}/${OS}/${DEBUG_DIR}/libtiff -DTIFF_LIBRARY_DEBUG=${TIFF}/${OS}/${DEBUG_DIR}/libtiff/libtiff.a -DTIFF_LIBRARY_RELEASE=${TIFF}/${OS}/${RELEASE_DIR}/libtiff/libtiff.a)
+ANDROID_dk_set	(TIFF_CMAKE -DTIFF_INCLUDE_DIR=${TIFF}/libtiff -DTIFF_INCLUDE_DIR2=${TIFF}/${OS}/libtiff -DTIFF_LIBRARY_DEBUG=${TIFF}/${OS}/${DEBUG_DIR}/libtiff.a -DTIFF_LIBRARY_RELEASE=${TIFF}/${OS}/${RELEASE_DIR}/libtiff.a)
 	
+#dk_dump(TIFF_CMAKE)
 
 ### GENERATE ###
 dk_setPath		(${TIFF}/${BUILD_DIR})
@@ -38,7 +41,7 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${TIFF})
 
 
 ### COMPILE ###
-dk_visualStudio				(${TIFF_NAME} tiff.sln tiff-static)
-dk_xcode					(${TIFF_NAME} tiff-static)
-LINUX_dk_queueCommand		(make) #tiff-static)
-RASPBERRY_dk_queueCommand	(make) #tiff-static)
+dk_visualStudio				(${TIFF_NAME} tiff)
+dk_xcode					(${TIFF_NAME} tiff)
+LINUX_dk_queueCommand		(make)
+RASPBERRY_dk_queueCommand	(make)
