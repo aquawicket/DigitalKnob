@@ -19,6 +19,8 @@ dk_import(https://github.com/mirrorer/giflib.git PATCH)
 
 ### LINK ###
 dk_include				(${GIFLIB}/lib)
+WIN32_dk_include		(${MINGW32}/i686-w64-mingw32/include)
+WIN64_dk_include		(${MINGW64}/x86_64-w64-mingw32/include)
 #WIN_dk_libDebug		(${GIFLIB}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
 #WIN_dk_libRelease		(${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
 #APPLE_dk_libDebug		(${GIFLIB}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
