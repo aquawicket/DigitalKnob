@@ -71,6 +71,7 @@ dk_disable(libwebp)
 dk_disable(libx11)
 dk_disable(lighttpd)
 dk_disable(lua)					# no CMakeLists.txt
+#dk_disable(msys)
 dk_disable(msys2)				# TODO: currently using msys
 dk_disable(opencv)				# error C3861: 'random_shuffle': identifier not found
 dk_disable(openframeworks)		# error: CMakeLists.txt broken
