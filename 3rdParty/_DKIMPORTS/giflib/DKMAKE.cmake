@@ -41,25 +41,27 @@ ANDROID_dk_set	(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIFLIB}/lib -DGIF_INCLUDE_DIR2=
 
 
 ### GENERATE / COMPILE ###
-#WIN_dk_setPath						(${GIFLIB})
-#WIN_dk_queueCommand				(autoreconf -f -i)
-
+#WIN_DEBUG_dk_setPath				(${GIFLIB})
+#WIN_DEBUG_dk_queueCommand			(autoreconf -f -i)
 WIN_DEBUG_dk_setPath				(${GIFLIB}/${OS}/${DEBUG_DIR})
 WIN_DEBUG_dk_msys					(${DKCONFIGURE_BUILD})
 WIN_DEBUG_dk_msys					(make -C lib)
 
+#WIN_RELEASE_dk_setPath				(${GIFLIB})
+#WIN_RELEASE_dk_queueCommand		(autoreconf -f -i)
 WIN_RELEASE_dk_setPath				(${GIFLIB}/${OS}/${RELEASE_DIR})
 WIN_RELEASE_dk_msys					(${DKCONFIGURE_BUILD})
 WIN_RELEASE_dk_msys					(make -C lib)
 
 
-APPLE_dk_setPath					(${GIFLIB})
-APPLE_dk_queueCommand				(autoreconf -f -i)
-
+APPLE_DEBUG_dk_setPath				(${GIFLIB})
+APPLE_DEBUG_dk_queueCommand			(autoreconf -f -i)
 APPLE_DEBUG_dk_setPath				(${GIFLIB}/${OS}/${DEBUG_DIR})
 APPLE_DEBUG_dk_queueCommand			(${DKCONFIGURE_BUILD})
 APPLE_DEBUG_dk_queueCommand			(make -C lib)
 
+APPLE_RELEASE_dk_setPath			(${GIFLIB})
+APPLE_RELEASE_dk_queueCommand		(autoreconf -f -i)
 APPLE_RELEASE_dk_setPath			(${GIFLIB}/${OS}/${RELEASE_DIR})
 APPLE_RELEASE_dk_queueCommand		(${DKCONFIGURE_BUILD})
 APPLE_RELEASE_dk_queueCommand		(make -C lib)
@@ -78,16 +80,18 @@ LINUX_RELEASE_dk_queueCommand		(${DKCONFIGURE_BUILD})
 LINUX_RELEASE_dk_queueCommand		(make -C lib)
 
 
-RASPBERRY_dk_setPath				(${GIFLIB})
-RASPBERRY_dk_queueCommand			(autoreconf -f -i)
-
+RASPBERRY_DEBUG_dk_setPath			(${GIFLIB})
+RASPBERRY_DEBUG_dk_queueCommand		(autoreconf -f -i)
 RASPBERRY_DEBUG_dk_setPath			(${GIFLIB}/${OS}/${DEBUG_DIR})
 RASPBERRY_DEBUG_dk_queueCommand		(${DKCONFIGURE_BUILD})
 RASPBERRY_DEBUG_dk_queueCommand		(make -C lib)
 
+RASPBERRY_RELEASE_dk_setPath		(${GIFLIB})
+RASPBERRY_RELEASE_dk_queueCommand	(autoreconf -f -i)
 RASPBERRY_RELEASE_dk_setPath		(${GIFLIB}/${OS}/${RELEASE_DIR})
 RASPBERRY_RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
 RASPBERRY_RELEASE_dk_queueCommand	(make -C lib)
+
 
 ANDROID_dk_setPath					(${GIFLIB}/${BUILD_DIR})
 ANDROID_dk_queueCommand				(${DKCMAKE_BUILD} ${GIFLIB})
