@@ -735,7 +735,7 @@ macro(dk_wait)
 	endif()
 	
 	if(WIN_HOST)	
-		execute_process(COMMAND %SystemRoot%\system32\cmd.exe /c echo ${msg} ${timeout_str} > nul WORKING_DIRECTORY C:/)
+		execute_process(COMMAND %SystemRoot%/system32/cmd.exe /c echo ${msg} ${timeout_str} > nul WORKING_DIRECTORY C:/)
 		return()
 	endif()
 	if(UNIX_HOST)
@@ -1822,7 +1822,7 @@ function(dk_executeProcess commands) #NOASSERT
 	dk_info("\n${CLR}${magenta} $ ${commands}\n")
 	
 	if(WIN_HOST)
-		execute_process(COMMAND %SystemRoot%\system32\cmd.exe /c ${commands} RESULT_VARIABLE result ERROR_VARIABLE error) # FIXME: Do we always need  cmd /c  here?
+		execute_process(COMMAND %SystemRoot%/system32/cmd.exe /c ${commands} RESULT_VARIABLE result ERROR_VARIABLE error) # FIXME: Do we always need  cmd /c  here?
 	else()
 		execute_process(COMMAND ${commands} RESULT_VARIABLE result ERROR_VARIABLE error)
 	endif()
@@ -1869,7 +1869,7 @@ function(dk_setEnv name value)
 			dk_info("Setting %${name}% environment variable to ${value}")
 			set(ENV{${name}} ${value})
 			#dk_executeProcess(setx ${name} ${value}) # https://stackoverflow.com/a/69246810		#FIXME
-			execute_process(COMMAND %SystemRoot%\system32\cmd.exe /c setx ${name} ${value}) # https://stackoverflow.com/a/69246810
+			execute_process(COMMAND %SystemRoot%/system32/cmd.exe /c setx ${name} ${value}) # https://stackoverflow.com/a/69246810
 		else()
 			dk_error("dk_setEnv() not implemented on this system")
 		endif()
@@ -4392,7 +4392,7 @@ endfunction()
 function(dk_clearScreen)
 	#DKDEBUGFUNC(${ARGV})
 	dk_debug("clear screen")
-	execute_process(COMMAND "%SystemRoot%\system32\cmd.exe /c cls")
+	execute_process(COMMAND "%SystemRoot%/system32/cmd.exe /c cls")
 endfunction()
 
 
