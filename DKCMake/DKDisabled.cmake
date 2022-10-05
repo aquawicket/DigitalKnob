@@ -56,7 +56,6 @@ dk_disable(DKTorrent)			# requires libtorrent
 dk_disable(DKUpdate)			# compiling errors
 dk_disable(DKVncClient)			# requires libvncserver
 dk_disable(DKVncServer)			# requires libvncserver
-#dk_disable(giflib)				# 'aclocal-1.15' is missing on your system
 dk_disable(gradle)
 dk_disable(java)
 dk_disable(jerryscript)
@@ -71,7 +70,6 @@ dk_disable(libwebp)
 dk_disable(libx11)
 dk_disable(lighttpd)
 dk_disable(lua)					# no CMakeLists.txt
-#dk_disable(msys)
 dk_disable(msys2)				# TODO: currently using msys
 dk_disable(opencv)				# error C3861: 'random_shuffle': identifier not found
 dk_disable(openframeworks)		# error: CMakeLists.txt broken
@@ -147,8 +145,8 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKSFMLWindow)	# requires sfml
 	dk_disable(DKWebSockets)	# requires libwebsockets, uwebsockets
 	dk_disable(freealut)		# AL/al.h: No such file or directory
-	dk_disable(giflib)			# aclocal-1.15: command not found
-	dk_disable(imagemagick)		#libimagemagik.a not found
+	#dk_disable(giflib)			# aclocal-1.15: command not found
+	dk_disable(imagemagick)		# libimagemagik.a not found
 	dk_disable(kdevelop)
 	#dk_disable(libtorrent)		# Could not find BOOST
 	dk_disable(libxml2)			# Not such file or directory
@@ -165,7 +163,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(DKWebSockets)	# requires libwebsocket, uwebsockets
 	dk_disable(emsdk)
 	dk_disable(freealut)
-	dk_disable(giflib)
+	#dk_disable(giflib)			# aclocal-1.15: command not found
 	dk_disable(imagemagick)
 	dk_disable(java)
 	dk_disable(kdevelop)
