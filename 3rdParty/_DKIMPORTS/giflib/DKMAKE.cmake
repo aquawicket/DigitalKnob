@@ -51,12 +51,12 @@ WIN_RELEASE_dk_msys					(${DKCONFIGURE_BUILD})
 WIN_RELEASE_dk_msys					(make -C lib)
 
 APPLE_DEBUG_dk_setPath				(${GIFLIB}/${OS}/${DEBUG_DIR})
-APPLE_DEBUG_dk_msys					(${DKCONFIGURE_BUILD})
-APPLE_DEBUG_dk_msys					(make -C lib)
+APPLE_DEBUG_dk_queueCommand			(${DKCONFIGURE_BUILD})
+APPLE_DEBUG_dk_queueCommand			(make -C lib)
 
 APPLE_RELEASE_dk_setPath			(${GIFLIB}/${OS}/${RELEASE_DIR})
-APPLE_RELEASE_dk_msys				(${DKCONFIGURE_BUILD})
-APPLE_RELEASE_dk_msys				(make -C lib)
+APPLE_RELEASE_dk_queueCommand		(${DKCONFIGURE_BUILD})
+APPLE_RELEASE_dk_queueCommand		(make -C lib)
 
 LINUX_DEBUG_dk_setPath				(${GIFLIB}/${OS}/${DEBUG_DIR})
 LINUX_DEBUG_dk_queueCommand			(${DKCONFIGURE_BUILD})
