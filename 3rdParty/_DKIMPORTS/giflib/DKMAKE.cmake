@@ -41,7 +41,9 @@ ANDROID_dk_set	(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIFLIB}/lib -DGIF_INCLUDE_DIR2=
 
 
 ### GENERATE / COMPILE ###
-#WIN_dk_msys						(autoreconf -f -i)
+#WIN_dk_setPath						(${GIFLIB})
+#WIN_dk_queueCommand				(autoreconf -f -i)
+
 WIN_DEBUG_dk_setPath				(${GIFLIB}/${OS}/${DEBUG_DIR})
 WIN_DEBUG_dk_msys					(${DKCONFIGURE_BUILD})
 WIN_DEBUG_dk_msys					(make -C lib)
@@ -49,6 +51,10 @@ WIN_DEBUG_dk_msys					(make -C lib)
 WIN_RELEASE_dk_setPath				(${GIFLIB}/${OS}/${RELEASE_DIR})
 WIN_RELEASE_dk_msys					(${DKCONFIGURE_BUILD})
 WIN_RELEASE_dk_msys					(make -C lib)
+
+
+APPLE_dk_setPath					(${GIFLIB})
+APPLE_dk_queueCommand				(autoreconf -f -i)
 
 APPLE_DEBUG_dk_setPath				(${GIFLIB}/${OS}/${DEBUG_DIR})
 APPLE_DEBUG_dk_queueCommand			(${DKCONFIGURE_BUILD})
@@ -58,15 +64,22 @@ APPLE_RELEASE_dk_setPath			(${GIFLIB}/${OS}/${RELEASE_DIR})
 APPLE_RELEASE_dk_queueCommand		(${DKCONFIGURE_BUILD})
 APPLE_RELEASE_dk_queueCommand		(make -C lib)
 
+
 LINUX_DEBUG_dk_setPath				(${GIFLIB})
 LINUX_DEBUG_dk_queueCommand			(autoreconf -f -i)
 LINUX_DEBUG_dk_setPath				(${GIFLIB}/${OS}/${DEBUG_DIR})
 LINUX_DEBUG_dk_queueCommand			(${DKCONFIGURE_BUILD})
 LINUX_DEBUG_dk_queueCommand			(make -C lib)
 
+LINUX_RELEASE_dk_setPath			(${GIFLIB})
+LINUX_RELEASE_dk_queueCommand		(autoreconf -f -i)
 LINUX_RELEASE_dk_setPath			(${GIFLIB}/${OS}/${RELEASE_DIR})
 LINUX_RELEASE_dk_queueCommand		(${DKCONFIGURE_BUILD})
 LINUX_RELEASE_dk_queueCommand		(make -C lib)
+
+
+RASPBERRY_dk_setPath				(${GIFLIB})
+RASPBERRY_dk_queueCommand			(autoreconf -f -i)
 
 RASPBERRY_DEBUG_dk_setPath			(${GIFLIB}/${OS}/${DEBUG_DIR})
 RASPBERRY_DEBUG_dk_queueCommand		(${DKCONFIGURE_BUILD})
