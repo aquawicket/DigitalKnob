@@ -180,37 +180,38 @@ endif()
 
 
 if(ANDROID) # Disabled for Android targets
-	dk_disable(boxer)			# fatal error : 'boxer/boxer.h' file not found
-	dk_disable(bzip2)			# 'make' is not recognized as an internal or external command
-	dk_disable(cryptopp)		# error : cannot use 'throw' with exceptions disabled
-	dk_disable(curl)			# error : "strerror_r MUST be either POSIX, glibc style"
-	dk_disable(DKCef)			# requires cef_binary
-	dk_disable(DKCefChild)		# requires cef_binary
-	dk_disable(DKCurl)			# requires curl
-	dk_disable(DKHandles)		# could not find DKHandles
-	dk_disable(DKMidi)			# requires rtmidi
-	dk_disable(DKMySql)			# requires curl
-	dk_disable(DKSDLCef)		# requires sdl, cef_binary
-	dk_disable(DKSFMLWindow)	# requires sfml
-	dk_disable(DKWebSockets)	# requires libwebsockets or uwebsockets
-	dk_disable(DKWebview)		# compiling errors
-	dk_disable(flac)			# configure: error: unrecognized option: `-DANDROID32'
-	dk_disable(freealut)		# DKFunctions.cmake:4405->dk_findFiles():  files is invalid
-	dk_disable(imagemagick)		# dkscript.tmp: line 2: cd: /android32/Debug: No such file or directory
-	dk_disable(ogg)				# configure: error: unrecognized option: `-DANDROID32'
-	dk_disable(libuv)			# error : incomplete definition of type 'struct ifaddrs'
-	dk_disable(vorbis)			# configure: error: unrecognized option: `-DANDROID32'
-	dk_disable(libwebsockets)	# compiling errors
-	dk_disable(libxml2)			# ../../configure: No such file or directory
-	dk_disable(openal)			# The system cannot find the file specified
+	dk_disable(android-java-tools) 	# download link broken
+	dk_disable(boxer)				# fatal error : 'boxer/boxer.h' file not found
+	dk_disable(bzip2)				# 'make' is not recognized as an internal or external command
+	dk_disable(cryptopp)			# error : cannot use 'throw' with exceptions disabled
+	dk_disable(curl)				# error : "strerror_r MUST be either POSIX, glibc style"
+	dk_disable(DKCef)				# requires cef_binary
+	dk_disable(DKCefChild)			# requires cef_binary
+	dk_disable(DKCurl)				# requires curl
+	dk_disable(DKHandles)			# could not find DKHandles
+	dk_disable(DKMidi)				# requires rtmidi
+	dk_disable(DKMySql)				# requires curl
+	dk_disable(DKSDLCef)			# requires sdl, cef_binary
+	dk_disable(DKSFMLWindow)		# requires sfml
+	dk_disable(DKWebSockets)		# requires libwebsockets or uwebsockets
+	dk_disable(DKWebview)			# compiling errors
+	dk_disable(flac)				# configure: error: unrecognized option: `-DANDROID32'
+	dk_disable(freealut)			# DKFunctions.cmake:4405->dk_findFiles():  files is invalid
+	dk_disable(imagemagick)			# dkscript.tmp: line 2: cd: /android32/Debug: No such file or directory
+	dk_disable(ogg)					# configure: error: unrecognized option: `-DANDROID32'
+	dk_disable(libuv)				# error : incomplete definition of type 'struct ifaddrs'
+	dk_disable(vorbis)				# configure: error: unrecognized option: `-DANDROID32'
+	dk_disable(libwebsockets)		# compiling errors
+	dk_disable(libxml2)				# ../../configure: No such file or directory
+	dk_disable(openal)				# The system cannot find the file specified
 	dk_disable(openssl)
-	dk_disable(podofo)			# error : cannot use 'throw' with exceptions disabled
-	dk_disable(rtmidi)			# ALSA API requested but no ALSA dev libraries found
-	dk_disable(sdl-gpu)			# The target "SDL_gpu" does not exist in the project
+	dk_disable(podofo)				# error : cannot use 'throw' with exceptions disabled
+	dk_disable(rtmidi)				# ALSA API requested but no ALSA dev libraries found
+	dk_disable(sdl-gpu)				# The target "SDL_gpu" does not exist in the project
 	dk_disable(sfml)
 	dk_disable(smpeg2)
 	dk_disable(stackwalker)
-	dk_disable(uwebsockets)		# Could NOT find OpenSSL
+	dk_disable(uwebsockets)			# Could NOT find OpenSSL
 endif()
 
 if(ANDROID_64) # Disabled for Android 64bit targets
