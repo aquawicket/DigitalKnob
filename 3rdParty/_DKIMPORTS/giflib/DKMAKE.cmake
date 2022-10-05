@@ -59,6 +59,7 @@ if(NOT WIN AND NOT LINUX)
 	dk_queueCommand	(${DKCMAKE_BUILD} ${GIFLIB})
 endif()
 
+#WIN_dk_msys						(autoreconf -f -i)
 WIN_DEBUG_dk_msys					(${DKCONFIGURE_BUILD})
 WIN_RELEASE_dk_msys					(${DKCONFIGURE_BUILD})
 #APPLE_DEBUG_dk_queueCommand		(${DKCONFIGURE_BUILD})
