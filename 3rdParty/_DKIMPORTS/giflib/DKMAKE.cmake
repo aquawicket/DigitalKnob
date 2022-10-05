@@ -58,8 +58,9 @@ APPLE_RELEASE_dk_setPath			(${GIFLIB}/${OS}/${RELEASE_DIR})
 APPLE_RELEASE_dk_queueCommand		(${DKCONFIGURE_BUILD})
 APPLE_RELEASE_dk_queueCommand		(make -C lib)
 
-LINUX_DEBUG_dk_setPath				(${GIFLIB}/${OS}/${DEBUG_DIR})
+LINUX_DEBUG_dk_setPath				(${GIFLIB})
 LINUX_DEBUG_dk_queueCommand			(autoreconf -f -i)
+LINUX_DEBUG_dk_setPath				(${GIFLIB}/${OS}/${DEBUG_DIR})
 LINUX_DEBUG_dk_queueCommand			(${DKCONFIGURE_BUILD})
 LINUX_DEBUG_dk_queueCommand			(make -C lib)
 
