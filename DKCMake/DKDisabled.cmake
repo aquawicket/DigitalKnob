@@ -25,51 +25,51 @@ include_guard()
 
 
 # DISABLED FOR ALL - TODO: move these into the select OS targets below			
-dk_disable(DKJerryscript)		# requires jerryscript
-dk_disable(DKOcr)				# requires leptonica, tesseract
-dk_disable(DKOFWindow)			# requires openframeworks
-dk_disable(DKOSGAudio)			# requires openscenegraph
-dk_disable(DKOSGCef)			# requires openscenegraph
-dk_disable(DKOSGLights)			# requires openscenegraph
-dk_disable(DKOSGManipulator)	# requires openscenegraph
-dk_disable(DKOSGModel)			# requires openscenegraph
-dk_disable(DKOSGNotify)			# requires openscenegraph
-dk_disable(DKOSGPhysics)		# requires openscenegraph
-dk_disable(DKOSGPicker)			# requires openscenegraph
-dk_disable(DKOSGRml)			# requires openscenegraph
-dk_disable(DKOSGStats)			# requires openscenegraph
-dk_disable(DKOSGTerrain)		# requires openscenegraph
-dk_disable(DKOSGVideo)			# requires openscenegraph
-dk_disable(DKOSGViewer)			# requires openscenegraph 
-dk_disable(DKOSGWidget)			# requires openscenegraph 
-dk_disable(DKOSGWindow)			# requires openscenegraph 
-dk_disable(DKPlugin1)			# TODO
-dk_disable(DKPlugin2)			# TODO
-dk_disable(DKRestart)			# error C3861: 'printf': identifier not found
-dk_disable(DKScreenRecorder)	# requires opencv
-dk_disable(DKSDLWav)			# compiling errors
-dk_disable(DKSDLVideo)			# requires ffmpeg
-dk_disable(DKSFMLRml)			# requires sfml. Incomplete
-dk_disable(DKThread)			# requires threadpool
-dk_disable(DKTorrent)			# requires libtorrent
-dk_disable(DKUpdate)			# compiling errors
-dk_disable(DKVncClient)			# requires libvncserver
-dk_disable(DKVncServer)			# requires libvncserver
-dk_disable(gradle)				# TODO
-dk_disable(java)				# TODO
-dk_disable(jpeg)				# DEPRECATED: using libjpeg_turbo instead
-dk_disable(librocket)			# OBSOLETE: replaced by rmlui
+dk_disable(DKJerryscript)			# requires jerryscript
+dk_disable(DKOcr)					# requires leptonica, tesseract
+dk_disable(DKOFWindow)				# requires openframeworks
+dk_disable(DKOSGAudio)				# requires openscenegraph
+dk_disable(DKOSGCef)				# requires openscenegraph
+dk_disable(DKOSGLights)				# requires openscenegraph
+dk_disable(DKOSGManipulator)		# requires openscenegraph
+dk_disable(DKOSGModel)				# requires openscenegraph
+dk_disable(DKOSGNotify)				# requires openscenegraph
+dk_disable(DKOSGPhysics)			# requires openscenegraph
+dk_disable(DKOSGPicker)				# requires openscenegraph
+dk_disable(DKOSGRml)				# requires openscenegraph
+dk_disable(DKOSGStats)				# requires openscenegraph
+dk_disable(DKOSGTerrain)			# requires openscenegraph
+dk_disable(DKOSGVideo)				# requires openscenegraph
+dk_disable(DKOSGViewer)				# requires openscenegraph 
+dk_disable(DKOSGWidget)				# requires openscenegraph 
+dk_disable(DKOSGWindow)				# requires openscenegraph 
+dk_disable(DKPlugin1)				# TODO
+dk_disable(DKPlugin2)				# TODO
+dk_disable(DKRestart)				# error C3861: 'printf': identifier not found
+dk_disable(DKScreenRecorder)		# requires opencv
+dk_disable(DKSDLWav)				# compiling errors
+dk_disable(DKSDLVideo)				# requires ffmpeg
+dk_disable(DKSFMLRml)				# requires sfml. Incomplete
+dk_disable(DKThread)				# requires threadpool
+dk_disable(DKTorrent)				# requires libtorrent
+dk_disable(DKUpdate)				# compiling errors
+dk_disable(DKVncClient)				# requires libvncserver
+dk_disable(DKVncServer)				# requires libvncserver
+dk_disable(gradle)					# TODO
+dk_disable(java)					# TODO
+dk_disable(jpeg)					# DEPRECATED: using libjpeg_turbo instead
+dk_disable(librocket)				# OBSOLETE: replaced by rmlui
 dk_disable(libvncserver-master-win) # DEPRECATED: using libvncserver instead
-dk_disable(libx11)				# TODO
-dk_disable(msys2)				# TODO: currently using msys
-dk_disable(osgaudio)			# requires openscenegraph
-dk_disable(osgbullet)			# requires openscenegraph
-dk_disable(osgworks)			# requires openscenegraph
-dk_disable(sdl2_gif)			# DEPRECATED: using SDL_Image animation instead
-dk_disable(sdl2_giflib_sa)		# DEPRECATED: updated version of sdl2_gif. Using SDL_Image animation instead
-dk_disable(simple-getch)		# DEPRECATED: kept for reference
-dk_disable(sw)					# DEPRECATED: requested by leptonica but not required
-dk_disable(sw-client)			# DEPRECATED: requested by leptonica but not required
+dk_disable(libx11)					# TODO
+dk_disable(msys2)					# TODO: currently using msys
+dk_disable(osgaudio)				# requires openscenegraph
+dk_disable(osgbullet)				# requires openscenegraph
+dk_disable(osgworks)				# requires openscenegraph
+dk_disable(sdl2_gif)				# DEPRECATED: using SDL_Image animation instead
+dk_disable(sdl2_giflib_sa)			# DEPRECATED: updated version of sdl2_gif. Using SDL_Image animation instead
+dk_disable(simple-getch)			# DEPRECATED: kept for reference
+dk_disable(sw)						# DEPRECATED: requested by leptonica but not required
+dk_disable(sw-client)				# DEPRECATED: requested by leptonica but not required
 
 
 
@@ -214,7 +214,6 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(libtorrent)			# Could not find BOOST
 	dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
 	dk_disable(libwebp)
-	#dk_disable(libwebsockets)
 	dk_disable(libxml2)
 	dk_disable(lighttpd)
 	dk_disable(lua)					# no CMakeLists.txt
@@ -226,7 +225,6 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(tesseract)
 	dk_disable(tiff)
 	dk_disable(upx)
-	#dk_disable(uwebsockets)
 	dk_disable(waave)
 endif()
 

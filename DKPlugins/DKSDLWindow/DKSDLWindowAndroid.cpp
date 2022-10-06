@@ -56,11 +56,10 @@ extern "C" {
 	extern JNIEXPORT void JNICALL Java_org_libsdl_app_SDLActivity_nativePause(JNIEnv* env, jclass cls);
 	extern JNIEXPORT void JNICALL Java_org_libsdl_app_SDLActivity_nativeResume(JNIEnv* env, jclass cls);
 	extern JNIEXPORT void JNICALL Java_org_libsdl_app_SDLInputConnection_nativeCommitText(JNIEnv* env, jclass cls, jstring text, jint newCursorPosition);
-	extern JNIEXPORT void JNICALL Java_org_libsdl_app_SDLInputConnection_nativeSetComposingText(JNIEnv* env, jclass cls, jstring text, jint newCursorPosition);
+	//extern JNIEXPORT void JNICALL Java_org_libsdl_app_SDLInputConnection_nativeSetComposingText(JNIEnv* env, jclass cls, jstring text, jint newCursorPosition);
 	extern JNIEXPORT jstring JNICALL Java_org_libsdl_app_SDLActivity_nativeGetHint(JNIEnv* env, jclass cls, jstring name);
 }
 
-///////////////////////////////
 bool DKSDLWindowAndroid::Init()
 {
 	DKDEBUGFUNC();
@@ -84,21 +83,19 @@ bool DKSDLWindowAndroid::Init()
 	//DKClass::RegisterFunc("DKAndroid_onRemoveJoystick", &DKSDLWindowAndroid::onRemoveJoystick, this);
 	DKClass::RegisterFunc("DKAndroid_onResize", &DKSDLWindowAndroid::onResize, this);
 	DKClass::RegisterFunc("DKAndroid_onResume", &DKSDLWindowAndroid::onResume, this);
-	DKClass::RegisterFunc("DKAndroid_onSetComposingText", &DKSDLWindowAndroid::onSetComposingText, this);
+	//DKClass::RegisterFunc("DKAndroid_onSetComposingText", &DKSDLWindowAndroid::onSetComposingText, this);
 	DKClass::RegisterFunc("DKAndroid_onSurfaceChanged", &DKSDLWindowAndroid::onSurfaceChanged, this);
 	DKClass::RegisterFunc("DKAndroid_onSurfaceDestroyed", &DKSDLWindowAndroid::onSurfaceDestroyed, this);
 	DKClass::RegisterFunc("DKAndroid_onTouch", &DKSDLWindowAndroid::onTouch, this);
 	return true;
 }
 
-//////////////////////////////
 bool DKSDLWindowAndroid::End()
 {
 	DKDEBUGFUNC();
 	return true;
 }
 	
-///////////////////////////////////////////////////////////////////
 bool DKSDLWindowAndroid::onInitSDL(const void* input, void* output)
 {
 	DKDEBUGFUNC(input, output);
@@ -165,7 +162,6 @@ bool DKSDLWindowAndroid::onInitSDL(const void* input, void* output)
 	//we just run our own loop after this..   for now.  (DKApp::Loop), it's called from SDLActivity.jave as  CallCppFunction("loop")
 }
 
-////////////////////////////////////////////////////////////////////
 bool DKSDLWindowAndroid::onDropFile(const void* input, void* output)
 {
 	//DKDEBUGFUNC(input, output);
@@ -179,7 +175,6 @@ bool DKSDLWindowAndroid::onDropFile(const void* input, void* output)
 	return true;
 }
 
-//////////////////////////////////////////////////////////////////
 bool DKSDLWindowAndroid::onResize(const void* input, void* output)
 {
 	JavaData jd = *(JavaData*)input;
@@ -300,7 +295,6 @@ bool DKSDLWindowAndroid::onRemoveJoystick(const void* input, void* output){
 }
 */
 
-//////////////////////////////////////////////////////////////////////////
 bool DKSDLWindowAndroid::onSurfaceChanged(const void* input, void* output)
 {
 	DKDEBUG("DKSDLWindowAndroid::onSurfaceChanged()\n");
@@ -309,7 +303,6 @@ bool DKSDLWindowAndroid::onSurfaceChanged(const void* input, void* output)
 	return true;
 }
 
-////////////////////////////////////////////////////////////////////////////
 bool DKSDLWindowAndroid::onSurfaceDestroyed(const void* input, void* output)
 {
 	DKDEBUG("DKSDLWindowAndroid::onSurfaceDestroyed()\n");
@@ -318,7 +311,6 @@ bool DKSDLWindowAndroid::onSurfaceDestroyed(const void* input, void* output)
 	return true;
 }
 
-///////////////////////////////////////////////////////////////////
 bool DKSDLWindowAndroid::onKeyDown(const void* input, void* output)
 {
 	JavaData jd = *(JavaData*)input;
@@ -336,7 +328,6 @@ bool DKSDLWindowAndroid::onKeyDown(const void* input, void* output)
 	return true;
 }
 
-/////////////////////////////////////////////////////////////////
 bool DKSDLWindowAndroid::onKeyUp(const void* input, void* output)
 {
 	JavaData jd = *(JavaData*)input;
@@ -354,7 +345,6 @@ bool DKSDLWindowAndroid::onKeyUp(const void* input, void* output)
 	return true;
 }
 
-/////////////////////////////////////////////////////////////////////////////
 bool DKSDLWindowAndroid::onKeyboardFocusLost(const void* input, void* output)
 {
 	DKDEBUG("DKSDLWindowAndroid::onKeyboardFocusLost()\n");
@@ -363,7 +353,6 @@ bool DKSDLWindowAndroid::onKeyboardFocusLost(const void* input, void* output)
 	return true;
 }
 
-/////////////////////////////////////////////////////////////////
 bool DKSDLWindowAndroid::onTouch(const void* input, void* output)
 {
 	JavaData jd = *(JavaData*)input;
@@ -381,7 +370,6 @@ bool DKSDLWindowAndroid::onTouch(const void* input, void* output)
 	return true;
 }
 
-/////////////////////////////////////////////////////////////////
 bool DKSDLWindowAndroid::onMouse(const void* input, void* output)
 {
 	JavaData jd = *(JavaData*)input;
@@ -397,7 +385,6 @@ bool DKSDLWindowAndroid::onMouse(const void* input, void* output)
 	return true;
 }
 
-/////////////////////////////////////////////////////////////////
 bool DKSDLWindowAndroid::onAccel(const void* input, void* output)
 {
 	JavaData jd = *(JavaData*)input;
@@ -412,7 +399,6 @@ bool DKSDLWindowAndroid::onAccel(const void* input, void* output)
 	return true;
 }
 
-/////////////////////////////////////////////////////////////////////
 bool DKSDLWindowAndroid::onLowMemory(const void* input, void* output)
 {
 	DKDEBUG("DKSDLWindowAndroid::onLowMemory()\n");
@@ -421,7 +407,6 @@ bool DKSDLWindowAndroid::onLowMemory(const void* input, void* output)
 	return true;
 }
 
-////////////////////////////////////////////////////////////////
 bool DKSDLWindowAndroid::onQuit(const void* input, void* output)
 {
 	DKDEBUG("DKSDLWindowAndroid::onQuit()\n");
@@ -430,7 +415,6 @@ bool DKSDLWindowAndroid::onQuit(const void* input, void* output)
 	return true;
 }
 
-/////////////////////////////////////////////////////////////////
 bool DKSDLWindowAndroid::onPause(const void* input, void* output)
 {
 	DKDEBUG("DKSDLWindowAndroid::onPause()\n");
@@ -440,7 +424,6 @@ bool DKSDLWindowAndroid::onPause(const void* input, void* output)
 	return true;
 }
 
-//////////////////////////////////////////////////////////////////
 bool DKSDLWindowAndroid::onResume(const void* input, void* output)
 {
 	DKDEBUG("DKSDLWindowAndroid::onResume()\n");
@@ -450,7 +433,6 @@ bool DKSDLWindowAndroid::onResume(const void* input, void* output)
 	return true;
 }
 
-//////////////////////////////////////////////////////////////////////
 bool DKSDLWindowAndroid::onCommitText(const void* input, void* output)
 {
 	JavaData jd = *(JavaData*)input;
@@ -464,7 +446,7 @@ bool DKSDLWindowAndroid::onCommitText(const void* input, void* output)
 	return true;
 }
 
-////////////////////////////////////////////////////////////////////////////
+/*
 bool DKSDLWindowAndroid::onSetComposingText(const void* input, void* output)
 {
 	JavaData jd = *(JavaData*)input;
@@ -477,8 +459,8 @@ bool DKSDLWindowAndroid::onSetComposingText(const void* input, void* output)
 	Java_org_libsdl_app_SDLInputConnection_nativeSetComposingText(jd.env, jd.cls, text, newCursorPosition);
 	return true;
 }
+*/
 
-///////////////////////////////////////////////////////////////////
 bool DKSDLWindowAndroid::onGetHint(const void* input, void* output)
 {
 	JavaData jd = *(JavaData*)input;
