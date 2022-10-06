@@ -51,14 +51,6 @@ RASPBERRY_dk_depend(opengl)
 ANDROID_dk_depend(opengles)
 
 
-## FIXME: move this information into template DKMAKE.cmake files
-# dk_import(https://github.com/libsdl-org/SDL)
-# SDL         = /3rdParty/SDL                                                                             :the library name and the plugin folder it resides in 
-# SDL_main    = 18032979d892639ad4e03584a40a4d205cd2f5fd                                                  :the id of the origin head
-# SDL_version = 1803297                                                                                   :the first 7 digits of the head id
-# SDL_DL      = https://github.com/libsdl-org/SDL/archive/18032979d892639ad4e03584a40a4d205cd2f5fd.zip    :the library  download link 
-
-
 ### IMPORT ###
 dk_import(https://github.com/libsdl-org/SDL.git BRANCH main)
 
@@ -66,18 +58,16 @@ dk_import(https://github.com/libsdl-org/SDL.git BRANCH main)
 ### LINK ###
 #ANDROID_dk_define	(GL_GLEXT_PROTOTYPES)
 dk_include			(${SDL}/include)
-ANDROID_dk_include	(${ANDROID-NDK}/sources/android/cpufeatures)
-ANDROID_dk_include	(${SDL}/src)
 RASPBERRY_dk_include(/opt/vc/lib)
 LINUX_dk_include	(${SDL}/${OS}/${RELEASE_DIR}/include)
+ANDROID_dk_include	(${ANDROID-NDK}/sources/android/cpufeatures)
+ANDROID_dk_include	(${SDL}/src)
 
-#dk_addTarget(sdl2 SDL2static)
-#dk_addTarget(sdl2 SDL2main)
+#dk_addTarget(sdl2 SDL2static)	# TODO
+#dk_addTarget(sdl2 SDL2main)	# TODO
 
 #if(sdl2_SDL2static)
-	#WIN_dk_libDebug		(${SDL}/${OS}/${DEBUG_DIR}/SDL2d.lib)
 	WIN_dk_libDebug			(${SDL}/${OS}/${DEBUG_DIR}/SDL2-staticd.lib)
-	#WIN_dk_libRelease		(${SDL}/${OS}/${RELEASE_DIR}/SDL2.lib)
 	WIN_dk_libRelease		(${SDL}/${OS}/${RELEASE_DIR}/SDL2-static.lib)
 	MAC_dk_libDebug			(${SDL}/${OS}/${DEBUG_DIR}/libSDL2d.a)
 	MAC_dk_libRelease		(${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a)
@@ -123,7 +113,6 @@ WIN_dk_set(SDL_CMAKE
 	-DSDL2_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/SDL2d.lib
 	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/SDL2.lib
 	-DSDL2_MAIN_LIBRARY=${SDL}/${OS}/${RELEASE_DIR}/SDL2main.lib)
-	
 WIN_dk_set(SDLMAIN_CMAKE
 	-DSDL2MAIN_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/SDL2maind.lib
 	-DSDL2MAIN_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/SDL2main.lib)
@@ -135,7 +124,6 @@ MAC_dk_set(SDL_CMAKE
 	-DSDL2_LIBRARY=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a
 	-DSDL2_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/libSDL2d.a
 	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a)
-	
 MAC_dk_set(SDLMAIN_CMAKE
 	-DSDL2MAIN_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/libSDL2maind.a
 	-DSDL2MAIN_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL2main.a)
@@ -147,7 +135,6 @@ IOS_dk_set(SDL_CMAKE
 	-DSDL2_LIBRARY=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a
 	-DSDL2_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/libSDL2d.a
 	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a)
-	
 IOS_dk_set(SDLMAIN_CMAKE
 	-DSDL2MAIN_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/libSDL2maind.a
 	-DSDL2MAIN_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL2main.a)
@@ -159,7 +146,6 @@ IOSSIM_dk_set(SDL_CMAKE
 	-DSDL2_LIBRARY=${SDL}/${OS}/Release-iphonesimulator/libSDL2.a
 	-DSDL2_LIBRARY_DEBUG=${SDL}/${OS}/Debug-iphonesimulator/libSDL2d.a
 	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/Release-iphonesimulator/libSDL2.a)
-	
 IOSSIM_dk_set(SDLMAIN_CMAKE
 	-DSDL2MAIN_LIBRARY_DEBUG=${SDL}/${OS}/Debug-iphonesimulator/libSDL2maind.a
 	-DSDL2MAIN_LIBRARY_RELEASE=${SDL}/${OS}/Release-iphonesimulator/libSDL2main.a)
@@ -216,8 +202,6 @@ ANDROID64_dk_queueCommand	(${DKCMAKE_BUILD_SDL2} "-DCMAKE_CXX_FLAGS=-DHAVE_GCC_A
 #if(sdl2_SDL2static)
 	dk_visualStudio	(${SDL_NAME} SDL2-static) # windows, android
 	dk_xcode		(${SDL_NAME} SDL2-static) # mac, ios, iossim
-	#LINUX_dk_queueCommand(make)
-	#RASPBERRY_dk_queueCommand(make)
 	dk_make			(${SDL_NAME} SDL2-static) # linux, raspberry
 #endif()
 #if(sdl2_SDL2main)
