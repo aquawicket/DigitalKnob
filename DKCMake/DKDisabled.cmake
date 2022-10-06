@@ -24,8 +24,7 @@
 include_guard()
 
 
-# DISABLED FOR ALL
-dk_disable(bullet3)				
+# DISABLED FOR ALL - TODO: move these into the select OS targets below			
 dk_disable(DKJerryscript)		# requires jerryscript
 dk_disable(DKOcr)				# requires leptonica, tesseract
 dk_disable(DKOFWindow)			# requires openframeworks
@@ -56,24 +55,13 @@ dk_disable(DKTorrent)			# requires libtorrent
 dk_disable(DKUpdate)			# compiling errors
 dk_disable(DKVncClient)			# requires libvncserver
 dk_disable(DKVncServer)			# requires libvncserver
-dk_disable(gradle)
-dk_disable(java)
-dk_disable(jerryscript)
+dk_disable(gradle)				# TODO
+dk_disable(java)				# TODO
 dk_disable(jpeg)				# DEPRECATED: using libjpeg_turbo instead
-dk_disable(leptonica)
-dk_disable(libcaca)				# no CMakeLists.txt
 dk_disable(librocket)			# OBSOLETE: replaced by rmlui
-dk_disable(libtorrent)			# compiling errors
-dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
-dk_disable(libvncserver-master-win)
-dk_disable(libwebp)
-dk_disable(libx11)
-dk_disable(lighttpd)
-dk_disable(lua)					# no CMakeLists.txt
+dk_disable(libvncserver-master-win) # DEPRECATED: using libvncserver instead
+dk_disable(libx11)				# TODO
 dk_disable(msys2)				# TODO: currently using msys
-dk_disable(opencv)				# error C3861: 'random_shuffle': identifier not found
-dk_disable(openframeworks)		# error: CMakeLists.txt broken
-dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
 dk_disable(osgaudio)			# requires openscenegraph
 dk_disable(osgbullet)			# requires openscenegraph
 dk_disable(osgworks)			# requires openscenegraph
@@ -82,106 +70,171 @@ dk_disable(sdl2_giflib_sa)		# DEPRECATED: updated version of sdl2_gif. Using SDL
 dk_disable(simple-getch)		# DEPRECATED: kept for reference
 dk_disable(sw)					# DEPRECATED: requested by leptonica but not required
 dk_disable(sw-client)			# DEPRECATED: requested by leptonica but not required
-dk_disable(tesseract)
-dk_disable(waave)
+
+
 
 
 if(WIN) # Disabled for Windows targets
+	dk_disable(bullet3)	
 	dk_disable(DKWebview)
-	#dk_disable(libtorrent)		# Could NOT find Boost (missing: Boost_INCLUDE_DIR)
+	dk_disable(jerryscript)
+	dk_disable(leptonica)
+	dk_disable(libcaca)				# no CMakeLists.txt
+	#dk_disable(libtorrent)			# Could NOT find Boost (missing: Boost_INCLUDE_DIR)
+	dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
+	dk_disable(libwebp)
+	dk_disable(lighttpd)
+	dk_disable(lua)					# no CMakeLists.txt
+	dk_disable(opencv)				# error C3861: 'random_shuffle': identifier not found
+	dk_disable(openframeworks)		# error: CMakeLists.txt broken
+	dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
+	dk_disable(tesseract)
+	dk_disable(waave)
 endif()
 
 if(WIN_64) # Disabled for Windows 64bit targets
 	dk_disable(DKWebview)
-	dk_disable(smpeg2)			# fatal error C1083: Cannot open include file: 'unistd.h'
+	dk_disable(smpeg2)				# fatal error C1083: Cannot open include file: 'unistd.h'
 endif()
 
 
 if(MAC)  # Disabled for MAC targets
-	dk_disable(freealut)		# ** BUILD FAILED **
-	dk_disable(imagemagick)		# no such file or directory: libimagemagik.a
-	dk_disable(libwebsockets)	# error: unknown type name 'lws_mutex_t'
-	dk_disable(libxml2)			# fatal error: 'extra/stricmp.h' file not found
-	dk_disable(mlocate)			# Unable to locate a Java Runtime that supports apt
-	dk_disable(rtmidi)			# Undefined symbols for architecture x86_64
-	dk_disable(sdl-gpu)			# SDL for MAC OS X only supports deploying on 10.7 and above
-	dk_disable(smpeg2)			# ** BUILD FAILED ** MPEGstream.cpp
+	dk_disable(bullet3)	
+	dk_disable(freealut)			# ** BUILD FAILED **
+	dk_disable(imagemagick)			# no such file or directory: libimagemagik.a
+	dk_disable(jerryscript)
+	dk_disable(leptonica)
+	dk_disable(libcaca)				# no CMakeLists.txt
+	dk_disable(libtorrent)			# Could not find BOOST
+	dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
+	dk_disable(libwebp)
+	dk_disable(libwebsockets)		# error: unknown type name 'lws_mutex_t'
+	dk_disable(libxml2)				# fatal error: 'extra/stricmp.h' file not found
+	dk_disable(lighttpd)
+	dk_disable(lua)					# no CMakeLists.txt
+	dk_disable(mlocate)				# Unable to locate a Java Runtime that supports apt
+	dk_disable(opencv)				# error C3861: 'random_shuffle': identifier not found
+	dk_disable(openframeworks)		# error: CMakeLists.txt broken
+	dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
+	dk_disable(rtmidi)				# Undefined symbols for architecture x86_64
+	dk_disable(sdl-gpu)				# SDL for MAC OS X only supports deploying on 10.7 and above
+	dk_disable(smpeg2)				# ** BUILD FAILED ** MPEGstream.cpp
+	dk_disable(tesseract)
+	dk_disable(waave)
 endif()
 
 if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
-	dk_disable(boost)			# clang error: no such file or direcotry: libboost_atomic.a, libboost_chrono.a, etc, etc, etc
-	dk_disable(boxer)			# COCOA_LIBRARY not found
-	dk_disable(bzip2)			# dk_include Function invoked with incorrect arguments
+	dk_disable(boost)				# clang error: no such file or direcotry: libboost_atomic.a, libboost_chrono.a, etc, etc, etc
+	dk_disable(boxer)				# COCOA_LIBRARY not found
+	dk_disable(bullet3)	
+	dk_disable(bzip2)				# dk_include Function invoked with incorrect arguments
 	dk_disable(cef_binary)
-	dk_disable(cryptopp)		# ** BUILD FAILED ** /blake2b_simd.cpp
-	dk_disable(DKCef)			# requires cef_binary
-	dk_disable(DKCefChild)		# requires cef_binary
-	dk_disable(DKMidi)			# requires rtmidi
-	dk_disable(DKSDLCef)		# requires cef_binary, sdl
-	dk_disable(DKSFMLWindow)	# requires sfml
-	dk_disable(freealut)		# freealut-master/iossim64 does not contain an Xcode project
-	dk_disable(imagemagick)		# No such file or directory
-	dk_disable(libiconv)		# CMake Error at cmake/dist.cmake:144 (install): install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executable target "iconvcli"
-	dk_disable(libjpeg-turbo)	# CMake Error at CMakeLists.txt:60 (string): string no output variable specified
-	dk_disable(libmd)			# dk_getExtension Function invoked with incorrect arguments
-	dk_disable(libpng)			# no such sysroot directory: 'iphonesimulator'
-	#dk_disable(libwebp)		# TIFF is disabled when statically linking
-	dk_disable(libwebsockets)	# compiling errors
-	dk_disable(libxml2)			# fatal error: 'config.h' file not found
-	dk_disable(mlocate)			# Unable to locate a Java Runtime that supports apt
+	dk_disable(cryptopp)			# ** BUILD FAILED ** /blake2b_simd.cpp
+	dk_disable(DKCef)				# requires cef_binary
+	dk_disable(DKCefChild)			# requires cef_binary
+	dk_disable(DKMidi)				# requires rtmidi
+	dk_disable(DKSDLCef)			# requires cef_binary, sdl
+	dk_disable(DKSFMLWindow)		# requires sfml
+	dk_disable(freealut)			# freealut-master/iossim64 does not contain an Xcode project
+	dk_disable(imagemagick)			# No such file or directory
+	dk_disable(jerryscript)
+	dk_disable(leptonica)
+	dk_disable(libcaca)				# no CMakeLists.txt
+	dk_disable(libiconv)			# CMake Error at cmake/dist.cmake:144 (install): install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executable target "iconvcli"
+	dk_disable(libjpeg-turbo)		# CMake Error at CMakeLists.txt:60 (string): string no output variable specified
+	dk_disable(libmd)				# dk_getExtension Function invoked with incorrect arguments
+	dk_disable(libpng)				# no such sysroot directory: 'iphonesimulator'
+	dk_disable(libtorrent)			# Could not find BOOST
+	dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
+	dk_disable(libwebp)				# TIFF is disabled when statically linking
+	dk_disable(libwebsockets)		# compiling errors
+	dk_disable(libxml2)				# fatal error: 'config.h' file not found
+	dk_disable(lighttpd)
+	dk_disable(lua)					# no CMakeLists.txt
+	dk_disable(mlocate)				# Unable to locate a Java Runtime that supports apt
+	dk_disable(opencv)				# error C3861: 'random_shuffle': identifier not found
+	dk_disable(openframeworks)		# error: CMakeLists.txt broken
+	dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
 	dk_disable(opensles)		
-	dk_disable(podofo)			# Could not find FREETYPE
-	dk_disable(sdl-gpu)			# SDL2MAIN_LIBRARY is NOTFOUND
-	dk_disable(sfml)			# Unknown CMake command "find_host_package"
-	dk_disable(smpeg2)			# ** BUILD FAILED ** MPEGstream.cpp
-	dk_disable(tiff)			# install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executable target "fax2ps"
-	#dk_disable(waave)			# ** BUILD FAILED ** src/audio_decoder.c
+	dk_disable(podofo)				# Could not find FREETYPE
+	dk_disable(sdl-gpu)				# SDL2MAIN_LIBRARY is NOTFOUND
+	dk_disable(sfml)				# Unknown CMake command "find_host_package"
+	dk_disable(smpeg2)				# ** BUILD FAILED ** MPEGstream.cpp
+	dk_disable(tesseract)
+	dk_disable(tiff)				# install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executable target "fax2ps"
+	#dk_disable(waave)				# ** BUILD FAILED ** src/audio_decoder.c
 endif()
 
 
 if(LINUX) # Disabled for Linux targets
-	dk_disable(boxer)			# no package gtk+-3.0 found
+	dk_disable(boxer)				# no package gtk+-3.0 found
+	dk_disable(bullet3)	
 	dk_disable(DKHook)
-	dk_disable(DKSFMLWindow)	# requires sfml
-	dk_disable(DKWebSockets)	# requires libwebsockets, uwebsockets
-	dk_disable(freealut)		# AL/al.h: No such file or directory
-	#dk_disable(giflib)			# aclocal-1.15: command not found
-	dk_disable(imagemagick)		# libimagemagik.a not found
+	dk_disable(DKSFMLWindow)		# requires sfml
+	dk_disable(DKWebSockets)		# requires libwebsockets, uwebsockets
+	dk_disable(freealut)			# AL/al.h: No such file or directory
+	dk_disable(imagemagick)			# libimagemagik.a not found
+	dk_disable(jerryscript)
 	dk_disable(kdevelop)
-	#dk_disable(libtorrent)		# Could not find BOOST
-	dk_disable(libxml2)			# Not such file or directory
-	dk_disable(openssl)			# compiling errors
-	dk_disable(sfml)           	# sfml_sfml-network)  #TODO: disabling individual sublibraries
-	dk_disable(uwebsockets)		# requires openssl
+	dk_disable(leptonica)
+	dk_disable(libcaca)				# no CMakeLists.txt
+	dk_disable(libtorrent)			# Could not find BOOST
+	dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
+	dk_disable(libwebp)
+	dk_disable(libxml2)				# Not such file or directory
+	dk_disable(lighttpd)
+	dk_disable(lua)					# no CMakeLists.txt
+	dk_disable(opencv)				# error C3861: 'random_shuffle': identifier not found
+	dk_disable(openframeworks)		# error: CMakeLists.txt broken
+	dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
+	dk_disable(openssl)				# compiling errors
+	dk_disable(sfml)          		# sfml_sfml-network)  #TODO: disabling individual sublibraries
+	dk_disable(tesseract)
+	dk_disable(uwebsockets)			# requires openssl
+	dk_disable(waave)
 endif()
 
 
 if(RASPBERRY) # Disabled for Raspberry Pi targets
-	dk_disable(boxer)			# fatal error : 'boxer/boxer.h' file not found
+	dk_disable(boxer)				# fatal error : 'boxer/boxer.h' file not found
+	dk_disable(bullet3)	
 	dk_disable(DKHook)
-	dk_disable(DKMidi)			# requires rtmidi
-	dk_disable(DKWebSockets)	# requires libwebsocket, uwebsockets
+	dk_disable(DKMidi)				# requires rtmidi
+	dk_disable(DKWebSockets)		# requires libwebsocket, uwebsockets
 	dk_disable(emsdk)
 	dk_disable(freealut)
-	#dk_disable(giflib)			# aclocal-1.15: command not found
 	dk_disable(imagemagick)
 	dk_disable(java)
+	dk_disable(jerryscript)
 	dk_disable(kdevelop)
+	dk_disable(opencv)				# error C3861: 'random_shuffle': identifier not found
 	dk_disable(openjdk)
+	dk_disable(leptonica)
+	dk_disable(libcaca)				# no CMakeLists.txt
+	dk_disable(libtorrent)			# Could not find BOOST
+	dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
+	dk_disable(libwebp)
 	#dk_disable(libwebsockets)
 	dk_disable(libxml2)
+	dk_disable(lighttpd)
+	dk_disable(lua)					# no CMakeLists.txt
+	dk_disable(openframeworks)		# error: CMakeLists.txt broken
+	dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
 	dk_disable(rtmidi)
 	dk_disable(sdl-gpu)
 	dk_disable(stackwalker)
+	dk_disable(tesseract)
 	dk_disable(tiff)
 	dk_disable(upx)
 	#dk_disable(uwebsockets)
+	dk_disable(waave)
 endif()
 
 
 if(ANDROID) # Disabled for Android targets
 	dk_disable(android-java-tools) 	# download link broken
 	dk_disable(boxer)				# fatal error : 'boxer/boxer.h' file not found
+	dk_disable(bullet3)	
 	dk_disable(bzip2)				# 'make' is not recognized as an internal or external command
 	dk_disable(cryptopp)			# error : cannot use 'throw' with exceptions disabled
 	dk_disable(curl)				# error : "strerror_r MUST be either POSIX, glibc style"
@@ -198,12 +251,22 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(flac)				# configure: error: unrecognized option: `-DANDROID32'
 	dk_disable(freealut)			# DKFunctions.cmake:4405->dk_findFiles():  files is invalid
 	dk_disable(imagemagick)			# dkscript.tmp: line 2: cd: /android32/Debug: No such file or directory
-	dk_disable(ogg)					# configure: error: unrecognized option: `-DANDROID32'
+	dk_disable(jerryscript)
+	dk_disable(leptonica)
+	dk_disable(libcaca)				# no CMakeLists.txt
+	dk_disable(libtorrent)			# Could not find BOOST
 	dk_disable(libuv)				# error : incomplete definition of type 'struct ifaddrs'
-	dk_disable(vorbis)				# configure: error: unrecognized option: `-DANDROID32'
+	dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
+	dk_disable(libwebp)
 	dk_disable(libwebsockets)		# compiling errors
 	dk_disable(libxml2)				# ../../configure: No such file or directory
+	dk_disable(lighttpd)
+	dk_disable(lua)					# no CMakeLists.txt
+	dk_disable(ogg)					# configure: error: unrecognized option: `-DANDROID32'
 	dk_disable(openal)				# The system cannot find the file specified
+	dk_disable(opencv)				# error C3861: 'random_shuffle': identifier not found
+	dk_disable(openframeworks)		# error: CMakeLists.txt broken
+	dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
 	dk_disable(openssl)
 	dk_disable(podofo)				# error : cannot use 'throw' with exceptions disabled
 	dk_disable(rtmidi)				# ALSA API requested but no ALSA dev libraries found
@@ -211,7 +274,10 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(sfml)
 	dk_disable(smpeg2)
 	dk_disable(stackwalker)
+	dk_disable(tesseract)
 	dk_disable(uwebsockets)			# Could NOT find OpenSSL
+	dk_disable(vorbis)				# configure: error: unrecognized option: `-DANDROID32'
+	dk_disable(waave)
 endif()
 
 if(ANDROID_64) # Disabled for Android 64bit targets
