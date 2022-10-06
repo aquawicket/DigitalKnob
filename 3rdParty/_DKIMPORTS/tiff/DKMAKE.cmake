@@ -5,15 +5,15 @@
 # https://gitlab.com/libtiff/libtiff.git
 
 
+### IMPORT ###
 dk_import(https://gitlab.com/libtiff/libtiff.git)
 
 
-### DKPLUGINS LINK ###
+### LINK ###
 dk_include				(${TIFF}/libtiff)
 dk_include				(${TIFF}/${OS}/libtiff)
 DEBUG_dk_include		(${TIFF}/${OS}/libtiff/${DEBUG_DIR})
 RELEASE_dk_include		(${TIFF}/${OS}/libtiff/${RELEASE_DIR})
-
 WIN_dk_libDebug			(${TIFF}/${OS}/libtiff/${DEBUG_DIR}/tiffd.lib)
 WIN_dk_libRelease		(${TIFF}/${OS}/libtiff/${RELEASE_DIR}/tiff.lib)
 APPLE_dk_libDebug		(${TIFF}/${OS}/libtiff/${DEBUG_DIR}/libtiff.a)
@@ -33,7 +33,6 @@ LINUX_dk_set	(TIFF_CMAKE -DTIFF_INCLUDE_DIR=${TIFF}/libtiff -DTIFF_INCLUDE_DIR2=
 RASPBERRY_dk_set(TIFF_CMAKE -DTIFF_INCLUDE_DIR=${TIFF}/libtiff -DTIFF_INCLUDE_DIR2=${TIFF}/${OS}/${DEBUG_DIR}/libtiff -DTIFF_LIBRARY_DEBUG=${TIFF}/${OS}/${DEBUG_DIR}/libtiff/libtiff.a -DTIFF_LIBRARY_RELEASE=${TIFF}/${OS}/${RELEASE_DIR}/libtiff/libtiff.a)
 ANDROID_dk_set	(TIFF_CMAKE -DTIFF_INCLUDE_DIR=${TIFF}/libtiff -DTIFF_INCLUDE_DIR2=${TIFF}/${OS}/libtiff -DTIFF_LIBRARY_DEBUG=${TIFF}/${OS}/${DEBUG_DIR}/libtiff.a -DTIFF_LIBRARY_RELEASE=${TIFF}/${OS}/${RELEASE_DIR}/libtiff.a)
 	
-#dk_dump(TIFF_CMAKE)
 
 ### GENERATE ###
 dk_setPath		(${TIFF}/${BUILD_DIR})
@@ -41,7 +40,8 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${TIFF})
 
 
 ### COMPILE ###
-dk_visualStudio				(${TIFF_NAME} tiff)
-dk_xcode					(${TIFF_NAME} tiff)
-LINUX_dk_queueCommand		(make)
-RASPBERRY_dk_queueCommand	(make)
+dk_visualStudio				(${TIFF_NAME} tiff) # windows, android
+dk_xcode					(${TIFF_NAME} tiff) # mac, ios, iossim 
+#dk_make					(${TIFF_NAME} tiff) # linux, raspberry
+LINUX_dk_queueCommand		(make)				# linux
+RASPBERRY_dk_queueCommand	(make)				# raspberry

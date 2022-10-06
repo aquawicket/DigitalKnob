@@ -3,9 +3,12 @@
 # https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.0.15.zip
 
 
+### DEPEND ###
 dk_depend(sdl)
 dk_depend(freetype)
 
+
+### IMPORT ###
 dk_import(https://github.com/libsdl-org/SDL_ttf/archive/455d885c33dd26a21486bc2a2ede51aca4541679.zip PATCH)
 #dk_import(https://github.com/libsdl-org/SDL_ttf/archive/06f1158066a5556f074fe020e407e6efcc9ff8e1.zip PATCH)
 #dk_import(https://github.com/libsdl-org/SDL_ttf.git main PATCH)
@@ -33,7 +36,6 @@ dk_queueCommand	(${DKCMAKE_BUILD} -DBUILD_SHARED_LIBS=OFF -DSDLTTF_SUPPORT_WEBP=
 
 
 ### COMPILE ###
-dk_visualStudio				(${SDL_TTF_NAME} SDLTTF)
-dk_xcode					(${SDL_TTF_NAME} SDLTTF)
-LINUX_dk_queueCommand		(make SDLTTF)
-RASPBERRY_dk_queueCommand	(make SDLTTF)
+dk_visualStudio	(${SDL_TTF_NAME} SDLTTF) # windows, android
+dk_xcode		(${SDL_TTF_NAME} SDLTTF) # mac, ios, iossim
+dk_make			(${SDL_TTF_NAME} SDLTTF) # linux, raspberry

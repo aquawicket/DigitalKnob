@@ -19,6 +19,8 @@
 # Inline function expansion         Any Suitable (/Ob2)
 # Ommit frame pointers              OFF
 
+
+### DEPEND ###
 dk_depend(imageio)
 dk_depend(mobile_core_services)
 dk_depend(zlib)
@@ -30,10 +32,11 @@ dk_depend(tiff)
 dk_depend(sdl)
 
 
+### IMPORT ###
 dk_import(https://github.com/libsdl-org/SDL_image.git BRANCH main PATCH)
 
 
-### DKPLUGINS LINK ###
+### LINK ###
 dk_include				(${SDL_IMAGE})
 WIN_dk_libDebug			(${SDL_IMAGE}/${OS}/lib/${DEBUG_DIR}/SDL_image.lib)
 WIN_dk_libRelease		(${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL_image.lib)
@@ -83,6 +86,3 @@ dk_visualStudio				(${SDL_IMAGE_NAME} SDLIMAGE)
 dk_xcode					(${SDL_IMAGE_NAME} SDLIMAGE)
 LINUX_dk_queueCommand		(make SDLIMAGE)
 RASPBERRY_dk_queueCommand	(make SDLIMAGE)
-
-# fatal error LNK1104: cannot open file 'C:\Users\Administrator\digitalknob\DK\3rdParty\sdl_image-main\win32\Debug\SDL2_image-staticd.lib'
-# C:\Users\Administrator\digitalknob\DK\3rdParty\SDL_image-main\win32\lib\Debug

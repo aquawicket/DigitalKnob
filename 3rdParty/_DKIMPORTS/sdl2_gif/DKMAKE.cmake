@@ -1,7 +1,11 @@
 # sdl2_gif
 
+
+### DEPEND ###
 dk_depend(DKSDLWindow)
 
+
+### IMPORT ###
 dk_set			(SDL2_GIF_NAME SDL2_gif)
 dk_set			(SDL2_GIF ${3RDPARTY}/${SDL2_GIF_NAME})
 IF(NOT EXISTS ${SDL2_GIF})
@@ -24,8 +28,6 @@ LINUX_dk_libDebug		(${SDL2_GIF}/${OS}/${DEBUG_DIR}/libSDL2_gif.a)
 LINUX_dk_libRelease		(${SDL2_GIF}/${OS}/${RELEASE_DIR}/libSDL2_gif.a)
 RASPBERRY_dk_libDebug	(${SDL2_GIF}/${OS}/${DEBUG_DIR}/libSDL2_gif.a)
 RASPBERRY_dk_libRelease	(${SDL2_GIF}/${OS}/${RELEASE_DIR}/libSDL2_gif.a)
-#ANDROID_dk_libDebug	(${SDL2_GIF}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libSDL2_gif.a)
-#ANDROID_dk_libRelease	(${SDL2_GIF}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libSDL2_gif.a)
 ANDROID_dk_libDebug		(${SDL2_GIF}/${OS}/${DEBUG_DIR}/libSDL2_gif.a)
 ANDROID_dk_libRelease	(${SDL2_GIF}/${OS}/${RELEASE_DIR}/libSDL2_gif.a)
 

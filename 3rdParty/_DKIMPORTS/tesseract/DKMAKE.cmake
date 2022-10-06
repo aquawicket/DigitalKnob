@@ -2,10 +2,12 @@
 # https://tinsuke.wordpress.com/2011/02/17/how-to-cross-compiling-libraries-for-ios-armv6armv7i386/
 
 
+### DEPEND ###
 dk_depend(sw)
 dk_depend(leptonica)
 
 
+### IMPORT ###
 dk_import(https://github.com/tesseract-ocr/tesseract.git BRANCH main)
 
 
@@ -36,8 +38,7 @@ LINUX_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} -DSTATIC=ON -DBUILD_TRAINING_TOO
 
 
 ### COMPILE ###
-WIN_dk_visualStudio				(${TESSERACT_NAME} libtesseract)
-dk_xcode						(${TESSERACT_NAME} libtesseract)
-LINUX_dk_queueCommand			(make libtesseract)
-RASPBERRY_dk_queueCommand		(make libtesseract)
-ANDROID_dk_ndk					(${TESSERACT_NAME})
+WIN_dk_visualStudio	(${TESSERACT_NAME} libtesseract)	# windows
+dk_xcode			(${TESSERACT_NAME} libtesseract)	# mac, ios, iossim
+dk_make				(${TESSERACT_NAME} libtesseract)	#linux, raspberry
+ANDROID_dk_ndk		(${TESSERACT_NAME})					# android

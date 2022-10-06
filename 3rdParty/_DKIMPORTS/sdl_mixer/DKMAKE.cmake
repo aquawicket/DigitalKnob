@@ -13,7 +13,7 @@ dk_import(https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-2.0.1.zip
 #dk_import(https://github.com/libsdl-org/SDL_mixer.git BRANCH main PATCH)
 
 
-### DKPLUGINS LINK ###
+### LINK ###
 dk_include				(${SDL_MIXER})
 WIN_dk_libDebug			(${SDL_MIXER}/${OS}/lib/${DEBUG_DIR}/SDL_mixer.lib)
 WIN_dk_libRelease		(${SDL_MIXER}/${OS}/lib/${RELEASE_DIR}/SDL_mixer.lib)
