@@ -37,8 +37,7 @@ LINUX_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} ${WAAVE})
 
 
 ### COMPILE ###
-WIN_dk_visualStudio			(${WAAVE_NAME} waave)
-dk_xcode					(${WAAVE_NAME} waave)
-LINUX_dk_queueCommand		(make waave)
-RASPBERRY_dk_queueCommand	(make waave)
-ANDROID_dk_ndk				(${WAAVE_NAME})
+WIN_dk_visualStudio	(${WAAVE_NAME} waave)	# windows
+dk_xcode			(${WAAVE_NAME} waave)	# mac, ios, iossim
+dk_make				(${WAAVE_NAME} waave)	# linux, raspberry
+ANDROID_dk_ndk		(${WAAVE_NAME})			# android
