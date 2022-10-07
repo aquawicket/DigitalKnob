@@ -2098,7 +2098,6 @@ dk_createOsMacros("dk_queueCommand")
 #	TODO
 #
 #	@folder		- TODO
-#	@sln_file	- TODO
 #
 function(dk_visualStudioDebug folder) #target #arch
 	DKDEBUGFUNC(${ARGV})
@@ -2108,7 +2107,6 @@ function(dk_visualStudioDebug folder) #target #arch
 	
 	dk_findFiles(${3RDPARTY}/${folder}/${OS} *.sln sln_file)
 	dk_getFilename(${sln_file} sln_file)
-	
 	dk_getExtension(${sln_file} extension)
 	if(NOT ${extension} STREQUAL ".sln")
 		dk_assert("extension does not equal .sln")
