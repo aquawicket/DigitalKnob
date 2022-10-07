@@ -231,7 +231,7 @@ endif()
 if(ANDROID) # Disabled for Android targets
 	dk_disable(android-java-tools) 	# download link broken
 	dk_disable(boxer)				# fatal error : 'boxer/boxer.h' file not found
-	#dk_disable(bullet3)	
+	dk_disable(bullet3)				# build errors
 	dk_disable(bzip2)				# 'make' is not recognized as an internal or external command
 	dk_disable(cryptopp)			# error : cannot use 'throw' with exceptions disabled
 	dk_disable(curl)				# error : "strerror_r MUST be either POSIX, glibc style"
