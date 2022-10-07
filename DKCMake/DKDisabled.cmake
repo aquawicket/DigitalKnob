@@ -179,9 +179,8 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libtorrent)			# Could not find BOOST
 	dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
-	#dk_disable(libwebp)
 	dk_disable(libxml2)				# Not such file or directory
-	dk_disable(lighttpd)
+	#dk_disable(lighttpd)
 	dk_disable(lua)					# no CMakeLists.txt
 	dk_disable(opencv)				# error C3861: 'random_shuffle': identifier not found
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
