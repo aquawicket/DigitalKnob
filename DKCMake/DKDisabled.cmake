@@ -98,7 +98,7 @@ endif()
 
 
 if(MAC)  # Disabled for MAC targets
-	#dk_disable(bullet3)	
+	dk_disable(bullet3)			# library not found for -lBulletInverseDynamicsUtils
 	dk_disable(freealut)			# ** BUILD FAILED **
 	dk_disable(imagemagick)			# no such file or directory: libimagemagik.a
 	dk_disable(jerryscript)
