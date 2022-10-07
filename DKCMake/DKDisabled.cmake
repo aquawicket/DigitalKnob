@@ -75,7 +75,7 @@ dk_disable(sw-client)				# DEPRECATED: requested by leptonica but not required
 
 
 if(WIN) # Disabled for Windows targets
-	dk_disable(bullet3)	
+	#dk_disable(bullet3)	
 	dk_disable(DKWebview)
 	dk_disable(jerryscript)
 	dk_disable(libcaca)				# no CMakeLists.txt
@@ -98,7 +98,7 @@ endif()
 
 
 if(MAC)  # Disabled for MAC targets
-	dk_disable(bullet3)	
+	#dk_disable(bullet3)	
 	dk_disable(freealut)			# ** BUILD FAILED **
 	dk_disable(imagemagick)			# no such file or directory: libimagemagik.a
 	dk_disable(jerryscript)
@@ -125,7 +125,7 @@ endif()
 if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(boost)				# clang error: no such file or direcotry: libboost_atomic.a, libboost_chrono.a, etc, etc, etc
 	dk_disable(boxer)				# COCOA_LIBRARY not found
-	dk_disable(bullet3)	
+	#dk_disable(bullet3)	
 	dk_disable(bzip2)				# dk_include Function invoked with incorrect arguments
 	dk_disable(cef_binary)
 	dk_disable(cryptopp)			# ** BUILD FAILED ** /blake2b_simd.cpp
@@ -137,7 +137,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(freealut)			# freealut-master/iossim64 does not contain an Xcode project
 	dk_disable(imagemagick)			# No such file or directory
 	dk_disable(jerryscript)
-	#dk_disable(leptonica)
+	dk_disable(leptonica)			# Build Failed: fhmtauto.o
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libiconv)			# CMake Error at cmake/dist.cmake:144 (install): install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executable target "iconvcli"
 	dk_disable(libjpeg-turbo)		# CMake Error at CMakeLists.txt:60 (string): string no output variable specified
@@ -161,13 +161,13 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(smpeg2)				# ** BUILD FAILED ** MPEGstream.cpp
 	dk_disable(tesseract)
 	dk_disable(tiff)				# install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executable target "fax2ps"
-	#dk_disable(waave)				# ** BUILD FAILED ** src/audio_decoder.c
+	dk_disable(waave)				# ** BUILD FAILED ** src/audio_decoder.c
 endif()
 
 
 if(LINUX) # Disabled for Linux targets
 	dk_disable(boxer)				# no package gtk+-3.0 found
-	dk_disable(bullet3)	
+	#dk_disable(bullet3)	
 	dk_disable(DKHook)
 	dk_disable(DKSFMLWindow)		# requires sfml
 	dk_disable(DKWebSockets)		# requires libwebsockets, uwebsockets
@@ -175,7 +175,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(imagemagick)			# libimagemagik.a not found
 	dk_disable(jerryscript)
 	dk_disable(kdevelop)
-	#dk_disable(leptonica)
+	dk_disable(leptonica)			# build errors
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libtorrent)			# Could not find BOOST
 	dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
@@ -196,7 +196,7 @@ endif()
 
 if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(boxer)				# fatal error : 'boxer/boxer.h' file not found
-	dk_disable(bullet3)	
+	#dk_disable(bullet3)	
 	dk_disable(DKHook)
 	dk_disable(DKMidi)				# requires rtmidi
 	dk_disable(DKWebSockets)		# requires libwebsocket, uwebsockets
@@ -231,7 +231,7 @@ endif()
 if(ANDROID) # Disabled for Android targets
 	dk_disable(android-java-tools) 	# download link broken
 	dk_disable(boxer)				# fatal error : 'boxer/boxer.h' file not found
-	dk_disable(bullet3)	
+	#dk_disable(bullet3)	
 	dk_disable(bzip2)				# 'make' is not recognized as an internal or external command
 	dk_disable(cryptopp)			# error : cannot use 'throw' with exceptions disabled
 	dk_disable(curl)				# error : "strerror_r MUST be either POSIX, glibc style"
