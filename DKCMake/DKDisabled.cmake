@@ -76,7 +76,7 @@ dk_disable(sw-client)				# DEPRECATED: requested by leptonica but not required
 
 if(WIN) # Disabled for Windows targets
 	dk_disable(bullet3)				# build errors
-	dk_disable(DKWebview)
+	#dk_disable(DKWebview)
 	dk_disable(jerryscript)
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libtorrent)			# CMAKE ERROR:  No SOURCES given to target: torrent-rasterbar
@@ -101,7 +101,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(bullet3)				# library not found for -lBulletInverseDynamicsUtils
 	dk_disable(freealut)			# ** BUILD FAILED **
 	dk_disable(imagemagick)			# no such file or directory: libimagemagik.a
-	dk_disable(jerryscript)
+	#dk_disable(jerryscript)
 	dk_disable(leptonica)			# Build Failed: fhmtauto.o
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libtorrent)			# Could not find BOOST
@@ -136,7 +136,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(DKSFMLWindow)		# requires sfml
 	dk_disable(freealut)			# freealut-master/iossim64 does not contain an Xcode project
 	dk_disable(imagemagick)			# No such file or directory
-	dk_disable(jerryscript)
+	#dk_disable(jerryscript)
 	dk_disable(leptonica)			# Build Failed: fhmtauto.o
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libiconv)			# CMake Error at cmake/dist.cmake:144 (install): install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executable target "iconvcli"
@@ -173,7 +173,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKWebSockets)		# requires libwebsockets, uwebsockets
 	dk_disable(freealut)			# AL/al.h: No such file or directory
 	dk_disable(imagemagick)			# libimagemagik.a not found
-	dk_disable(jerryscript)
+	#dk_disable(jerryscript)
 	dk_disable(kdevelop)
 	dk_disable(leptonica)			# build errors
 	dk_disable(libcaca)				# no CMakeLists.txt
@@ -197,7 +197,7 @@ endif()
 if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(boxer)				# fatal error : 'boxer/boxer.h' file not found
 	#dk_disable(bullet3)	
-	dk_disable(DKHook)
+	#dk_disable(DKHook)
 	dk_disable(DKMidi)				# requires rtmidi
 	dk_disable(DKWebSockets)		# requires libwebsocket, uwebsockets
 	dk_disable(emsdk)
@@ -248,7 +248,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(flac)				# configure: error: unrecognized option: `-DANDROID32'
 	dk_disable(freealut)			# DKFunctions.cmake:4405->dk_findFiles():  files is invalid
 	dk_disable(imagemagick)			# dkscript.tmp: line 2: cd: /android32/Debug: No such file or directory
-	dk_disable(jerryscript)
+	#dk_disable(jerryscript)
 	dk_disable(leptonica)
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libtorrent)			# Could not find BOOST
