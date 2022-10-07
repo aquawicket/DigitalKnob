@@ -79,7 +79,7 @@ endif(MiniCL)
 
 
 ### GENERATE ###
-dk_setPath(${BOXER}/${BUILD_DIR})
+dk_setPath(${BULLET3}/${BUILD_DIR})
 dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_DEMOS=OFF -DBUILD_EXTRAS=OFF -DUSE_GLUT=OFF ${BULLET3})
 
 
