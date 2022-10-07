@@ -173,7 +173,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKWebSockets)		# requires libwebsockets, uwebsockets
 	dk_disable(freealut)			# AL/al.h: No such file or directory
 	dk_disable(imagemagick)			# libimagemagik.a not found
-	#dk_disable(jerryscript)
+	dk_disable(jerryscript)			# build errors
 	dk_disable(kdevelop)
 	dk_disable(leptonica)			# build errors
 	dk_disable(libcaca)				# no CMakeLists.txt
