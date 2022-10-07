@@ -98,7 +98,7 @@ endif()
 
 
 if(MAC)  # Disabled for MAC targets
-	dk_disable(bullet3)			# library not found for -lBulletInverseDynamicsUtils
+	dk_disable(bullet3)				# library not found for -lBulletInverseDynamicsUtils
 	dk_disable(freealut)			# ** BUILD FAILED **
 	dk_disable(imagemagick)			# no such file or directory: libimagemagik.a
 	dk_disable(jerryscript)
@@ -125,9 +125,9 @@ endif()
 if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(boost)				# clang error: no such file or direcotry: libboost_atomic.a, libboost_chrono.a, etc, etc, etc
 	dk_disable(boxer)				# COCOA_LIBRARY not found
-	#dk_disable(bullet3)	
+	dk_disable(bullet3)				# OPENGL-NOTFOUND COCOA-NOTFOUND
 	dk_disable(bzip2)				# dk_include Function invoked with incorrect arguments
-	dk_disable(cef_binary)
+	#dk_disable(cef_binary)
 	dk_disable(cryptopp)			# ** BUILD FAILED ** /blake2b_simd.cpp
 	dk_disable(DKCef)				# requires cef_binary
 	dk_disable(DKCefChild)			# requires cef_binary
