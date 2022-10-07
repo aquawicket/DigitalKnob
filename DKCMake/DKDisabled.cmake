@@ -168,7 +168,7 @@ endif()
 if(LINUX) # Disabled for Linux targets
 	dk_disable(boxer)				# no package gtk+-3.0 found
 	dk_disable(bullet3)				# library not found for -lBulletInverseDynamicsUtils
-	#dk_disable(DKHook)
+	dk_disable(DKHook)				# 'read' was not declared in this scope
 	dk_disable(DKSFMLWindow)		# requires sfml
 	dk_disable(DKWebSockets)		# requires libwebsockets, uwebsockets
 	dk_disable(freealut)			# AL/al.h: No such file or directory
@@ -179,7 +179,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libtorrent)			# Could not find BOOST
 	dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
-	dk_disable(libwebp)
+	#dk_disable(libwebp)
 	dk_disable(libxml2)				# Not such file or directory
 	dk_disable(lighttpd)
 	dk_disable(lua)					# no CMakeLists.txt
