@@ -9,6 +9,12 @@
 dk_import(https://github.com/bulletphysics/bullet3.git)
 
 
+dk_set(BulletCollision ON)
+dk_set(BulletDynamics ON)
+dk_set(BulletMultiThreaded ON)
+dk_set(BulletSoftBody ON)
+dk_set(LinearMath ON)
+dk_set(MiniCL ON)
 ### LINK ###
 dk_include					(${BULLET3}/src)
 if(BulletCollision)
@@ -84,7 +90,7 @@ dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_DEMOS=OFF -DBUILD_EXTRAS=OFF -DUSE_GLUT
 
 
 ### COMPILE ###
-WIN_dk_visualStudio	(${BULLET3_NAME}) # windows
-dk_xcode			(${BULLET3_NAME}) # mac, ios, iossim
-dk_make				(${BULLET3_NAME}) # linux, raspberry
-ANDROID_dk_ndk		(${BULLET3_NAME}) # android
+WIN_dk_visualStudio	(${BULLET3_FOLDER}) # windows
+dk_xcode			(${BULLET3_FOLDER}) # mac, ios, iossim
+dk_make				(${BULLET3_FOLDER}) # linux, raspberry
+ANDROID_dk_ndk		(${BULLET3_FOLDER}) # android

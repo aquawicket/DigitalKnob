@@ -3700,17 +3700,17 @@ endfunction()
 #
 #	TODO: https://cmake.org/cmake/help/latest/module/FetchContent.html 
 #
-function(dk_import url) #Lib #tag #Patch
-	DKDEBUGFUNC(${ARGV})
-	dk_import2(${ARGV})
+#function(dk_import url) #Lib #tag #Patch
+#	DKDEBUGFUNC(${ARGV})
+#	dk_import2(${ARGV})
 	#dk_getExtension(${url} extension)
 	#if("${extension}" STREQUAL ".git")
 	#	dk_importGit2(${ARGV})
 	#else()
 	#	dk_importDownload2(${ARGV})
 	#endif()
-endfunction()
-dk_createOsMacros("dk_import")
+#endfunction()
+#dk_createOsMacros("dk_import")
 
 
 ###############################################################################
@@ -3999,16 +3999,31 @@ function(dk_importDownload url) #install_path #PATCH
 
 endfunction()
 
-######################################
-function(dk_import2 url)
+###############################################################################
+# dk_import(url) #args
+#
+#	This is a flexable super function for importing just about anything into digitalknob
+#	The idea is to provide a url or path and dk_import will do the rest. 
+#
+#	@url	- The online path the .git or file to import
+#
+#	github GIT:	https://github.com/orginization/library.git		dk_importGit(url) #branch/tag #PATCH
+#	github DL:	https://github.com/orginization/library			dk_importGit(url) #branch/tag #PATCH
+#	lib url DL:	https://website.com/library.zip					dk_importDownload(url) #PATCH
+#	exe url DL:	https://website.com/executable.exe 				dk_importDownload(url) #PATCH
+#
+#	TODO: https://cmake.org/cmake/help/latest/module/FetchContent.html 
+#
+function(dk_import url)
 	DKDEBUGFUNC(${ARGV})
 	dk_importVariables(${ARGV} plugin)
 	string(TOUPPER ${plugin} plugin_var)
 	
-	dk_verbose("[${plugin_var}] =		${${plugin_var}}")
-	dk_verbose("[${plugin_var}_URL] =		${${plugin_var}_URL}")
+	dk_verbose("\${${plugin_var}}] =			${${plugin_var}}")
+	dk_verbose("[${plugin_var}_URL] =			${${plugin_var}_URL}")
 	dk_verbose("[${plugin_var}_VERSION] =		${${plugin_var}_VERSION}")
 	dk_verbose("[${plugin_var}_FOLDER] =		${${plugin_var}_FOLDER}")
+	#dk_verbose("[${plugin_var}_NAME] =			${${plugin_var}_NAME}") 	# FIXME: the is an unessesary duplicate of ${plugin_var}_FOLDER
 	dk_verbose("[${plugin_var}_BRANCH] =		${${plugin_var}_BRANCH}")
 
 	### .git
@@ -4040,6 +4055,8 @@ function(dk_import2 url)
 		dk_patch(${plugin} ${${plugin_var}})
 	endif()
 endfunction()
+dk_createOsMacros("dk_import")
+
 
 ###############################################################################
 # dk_DownloadAll3rdParty()
