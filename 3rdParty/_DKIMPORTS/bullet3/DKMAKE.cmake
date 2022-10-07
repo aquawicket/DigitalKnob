@@ -90,7 +90,7 @@ dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_DEMOS=OFF -DBUILD_EXTRAS=OFF -DUSE_GLUT
 
 
 ### COMPILE ###
-WIN_dk_visualStudio	(${BULLET3_FOLDER}) # windows
+dk_visualStudio		(${BULLET3_FOLDER}) # windows, android
 dk_xcode			(${BULLET3_FOLDER}) # mac, ios, iossim
 dk_make				(${BULLET3_FOLDER}) # linux, raspberry
-ANDROID_dk_ndk		(${BULLET3_FOLDER}) # android
+#ANDROID_dk_ndk		(${BULLET3_FOLDER}) # android
