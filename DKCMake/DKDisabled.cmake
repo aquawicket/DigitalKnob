@@ -175,7 +175,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(imagemagick)			# libimagemagik.a not found
 	dk_disable(jerryscript)
 	dk_disable(kdevelop)
-	dk_disable(leptonica)
+	#dk_disable(leptonica)
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libtorrent)			# Could not find BOOST
 	dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
