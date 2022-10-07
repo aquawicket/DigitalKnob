@@ -102,7 +102,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(freealut)			# ** BUILD FAILED **
 	dk_disable(imagemagick)			# no such file or directory: libimagemagik.a
 	dk_disable(jerryscript)
-	#dk_disable(leptonica)
+	dk_disable(leptonica)			# Build Failed: fhmtauto.o
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libtorrent)			# Could not find BOOST
 	dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
@@ -137,7 +137,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(freealut)			# freealut-master/iossim64 does not contain an Xcode project
 	dk_disable(imagemagick)			# No such file or directory
 	dk_disable(jerryscript)
-	dk_disable(leptonica)
+	#dk_disable(leptonica)
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libiconv)			# CMake Error at cmake/dist.cmake:144 (install): install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executable target "iconvcli"
 	dk_disable(libjpeg-turbo)		# CMake Error at CMakeLists.txt:60 (string): string no output variable specified
