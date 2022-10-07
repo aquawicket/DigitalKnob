@@ -78,7 +78,6 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(bullet3)	
 	dk_disable(DKWebview)
 	dk_disable(jerryscript)
-	#dk_disable(leptonica)
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libtorrent)			# CMAKE ERROR:  No SOURCES given to target: torrent-rasterbar
 	dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
@@ -103,7 +102,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(freealut)			# ** BUILD FAILED **
 	dk_disable(imagemagick)			# no such file or directory: libimagemagik.a
 	dk_disable(jerryscript)
-	dk_disable(leptonica)
+	#dk_disable(leptonica)
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libtorrent)			# Could not find BOOST
 	dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
