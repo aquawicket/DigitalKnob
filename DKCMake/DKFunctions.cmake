@@ -2307,17 +2307,23 @@ dk_createOsMacros("dk_ndk" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# dk_make(foleder lib)
+# dk_make(folder lib)
 #
 #	TODO
 #
-#	@lib	- TODO
+#	@folder 			- TODO
+#	@lib (optional)		- TODO
 #
-function(dk_make folder lib)
+function(dk_make folder) #lib
 	DKDEBUGFUNC(${ARGV})
 	if(LINUX OR RASPBERRY)
+		set(lib ${ARGV1})
 		dk_set(CURRENT_DIR ${3RDPARTY}/${folder}/${BUILD_DIR})
-		dk_queueCommand(make ${lib})
+		if(${ARGC} GREATER 1)
+			dk_queueCommand(make ${lib})
+		else()
+			dk_queueCommand(make)
+		endif()
 	endif()
 endfunction()
 

@@ -84,7 +84,7 @@ dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_DEMOS=OFF -DBUILD_EXTRAS=OFF -DUSE_GLUT
 
 
 ### COMPILE ###
-WIN_dk_visualStudio	(${BULLET3_NAME})
-dk_xcode			(${BULLET3_NAME})
-dk_make				(${BULLET3_NAME})
-ANDROID_dk_ndk		(${BULLET3_NAME})
+WIN_dk_visualStudio	(${BULLET3_NAME}) # windows
+dk_xcode			(${BULLET3_NAME}) # mac, ios, iossim
+dk_make				(${BULLET3_NAME}) # linux, raspberry
+ANDROID_dk_ndk		(${BULLET3_NAME}) # android
