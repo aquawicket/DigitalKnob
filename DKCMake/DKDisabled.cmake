@@ -168,7 +168,7 @@ endif()
 if(LINUX) # Disabled for Linux targets
 	dk_disable(boxer)				# no package gtk+-3.0 found
 	dk_disable(bullet3)				# library not found for -lBulletInverseDynamicsUtils
-	dk_disable(DKHook)
+	#dk_disable(DKHook)
 	dk_disable(DKSFMLWindow)		# requires sfml
 	dk_disable(DKWebSockets)		# requires libwebsockets, uwebsockets
 	dk_disable(freealut)			# AL/al.h: No such file or directory
