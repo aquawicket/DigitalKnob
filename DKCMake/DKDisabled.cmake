@@ -85,7 +85,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(opencv)				# error C3861: 'random_shuffle': identifier not found
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
-	dk_disable(tesseract)
+	dk_disable(tesseract)			# requires leptonica
 	dk_disable(waave)
 endif()
 
@@ -116,7 +116,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(rtmidi)				# Undefined symbols for architecture x86_64
 	dk_disable(sdl-gpu)				# SDL for MAC OS X only supports deploying on 10.7 and above
 	dk_disable(smpeg2)				# ** BUILD FAILED ** MPEGstream.cpp
-	#dk_disable(tesseract)
+	dk_disable(tesseract)			# requires leptonica
 	#dk_disable(waave)
 endif()
 
@@ -157,7 +157,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(sdl-gpu)				# SDL2MAIN_LIBRARY is NOTFOUND
 	dk_disable(sfml)				# Unknown CMake command "find_host_package"
 	dk_disable(smpeg2)				# ** BUILD FAILED ** MPEGstream.cpp
-	dk_disable(tesseract)
+	dk_disable(tesseract)			# requires leptonica
 	dk_disable(tiff)				# install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executable target "fax2ps"
 	dk_disable(waave)				# ** BUILD FAILED ** src/audio_decoder.c
 endif()
@@ -185,9 +185,9 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
 	dk_disable(openssl)				# compiling errors
 	dk_disable(sfml)          		# sfml_sfml-network)  #TODO: disabling individual sublibraries
-	#dk_disable(tesseract)
+	dk_disable(tesseract)			# requires leptonica
 	dk_disable(uwebsockets)			# requires openssl
-	dk_disable(waave)
+	#dk_disable(waave)
 endif()
 
 
@@ -218,7 +218,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(rtmidi)
 	dk_disable(sdl-gpu)
 	dk_disable(stackwalker)
-	dk_disable(tesseract)
+	dk_disable(tesseract)			# requires leptonica
 	dk_disable(tiff)
 	dk_disable(upx)
 	dk_disable(waave)
@@ -268,7 +268,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(sfml)
 	dk_disable(smpeg2)
 	dk_disable(stackwalker)
-	dk_disable(tesseract)
+	dk_disable(tesseract)			# requires leptonica
 	dk_disable(uwebsockets)			# Could NOT find OpenSSL
 	dk_disable(vorbis)				# configure: error: unrecognized option: `-DANDROID32'
 	dk_disable(waave)
