@@ -76,12 +76,10 @@ dk_disable(sw-client)				# DEPRECATED: requested by leptonica but not required
 
 if(WIN) # Disabled for Windows targets
 	dk_disable(bullet3)				# build errors
-	#dk_disable(DKWebview)
-	#dk_disable(jerryscript)
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libtorrent)			# CMAKE ERROR:  No SOURCES given to target: torrent-rasterbar
 	dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
-	dk_disable(libwebp)
+	#dk_disable(libwebp)
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(lua)					# no CMakeLists.txt
 	dk_disable(opencv)				# error C3861: 'random_shuffle': identifier not found
@@ -92,7 +90,7 @@ if(WIN) # Disabled for Windows targets
 endif()
 
 if(WIN_64) # Disabled for Windows 64bit targets
-	dk_disable(DKWebview)
+	#dk_disable(DKWebview)
 	dk_disable(smpeg2)				# fatal error C1083: Cannot open include file: 'unistd.h'
 endif()
 
@@ -101,7 +99,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(bullet3)				# library not found for -lBulletInverseDynamicsUtils
 	dk_disable(freealut)			# ** BUILD FAILED **
 	dk_disable(imagemagick)			# no such file or directory: libimagemagik.a
-	dk_disable(jerryscript)
+	#dk_disable(jerryscript)
 	dk_disable(leptonica)			# Build Failed: fhmtauto.o
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libtorrent)			# Could not find BOOST
@@ -118,8 +116,8 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(rtmidi)				# Undefined symbols for architecture x86_64
 	dk_disable(sdl-gpu)				# SDL for MAC OS X only supports deploying on 10.7 and above
 	dk_disable(smpeg2)				# ** BUILD FAILED ** MPEGstream.cpp
-	dk_disable(tesseract)
-	dk_disable(waave)
+	#dk_disable(tesseract)
+	#dk_disable(waave)
 endif()
 
 if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
@@ -154,7 +152,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(opencv)				# error C3861: 'random_shuffle': identifier not found
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
-	dk_disable(opensles)		
+	#dk_disable(opensles)		
 	dk_disable(podofo)				# Could not find FREETYPE
 	dk_disable(sdl-gpu)				# SDL2MAIN_LIBRARY is NOTFOUND
 	dk_disable(sfml)				# Unknown CMake command "find_host_package"
@@ -187,7 +185,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
 	dk_disable(openssl)				# compiling errors
 	dk_disable(sfml)          		# sfml_sfml-network)  #TODO: disabling individual sublibraries
-	dk_disable(tesseract)
+	#dk_disable(tesseract)
 	dk_disable(uwebsockets)			# requires openssl
 	dk_disable(waave)
 endif()
