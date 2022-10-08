@@ -86,7 +86,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
 	dk_disable(tesseract)			# requires leptonica
-	dk_disable(waave)
+	dk_disable(waave)				# requires sdl
 endif()
 
 if(WIN_64) # Disabled for Windows 64bit targets
@@ -117,7 +117,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(sdl-gpu)				# SDL for MAC OS X only supports deploying on 10.7 and above
 	dk_disable(smpeg2)				# ** BUILD FAILED ** MPEGstream.cpp
 	dk_disable(tesseract)			# requires leptonica
-	#dk_disable(waave)
+	dk_disable(waave)				# requires sdl
 endif()
 
 if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
@@ -159,7 +159,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(smpeg2)				# ** BUILD FAILED ** MPEGstream.cpp
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(tiff)				# install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executable target "fax2ps"
-	dk_disable(waave)				# ** BUILD FAILED ** src/audio_decoder.c
+	dk_disable(waave)				# requires sdl, ** BUILD FAILED ** src/audio_decoder.c
 endif()
 
 
@@ -187,7 +187,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(sfml)          		# sfml_sfml-network)  #TODO: disabling individual sublibraries
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(uwebsockets)			# requires openssl
-	#dk_disable(waave)
+	dk_disable(waave)				# requires sdl
 endif()
 
 
@@ -221,7 +221,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(tiff)
 	dk_disable(upx)
-	dk_disable(waave)
+	dk_disable(waave)				# requires sdl
 endif()
 
 
@@ -271,7 +271,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(uwebsockets)			# Could NOT find OpenSSL
 	dk_disable(vorbis)				# configure: error: unrecognized option: `-DANDROID32'
-	dk_disable(waave)
+	dk_disable(waave)				# requires sdl
 endif()
 
 if(ANDROID_64) # Disabled for Android 64bit targets
