@@ -152,7 +152,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(opencv)				# error C3861: 'random_shuffle': identifier not found
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
-	#dk_disable(opensles)		
+	dk_disable(opensles)			# could not locate OpenSLES Library
 	dk_disable(podofo)				# Could not find FREETYPE
 	dk_disable(sdl-gpu)				# SDL2MAIN_LIBRARY is NOTFOUND
 	dk_disable(sfml)				# Unknown CMake command "find_host_package"
