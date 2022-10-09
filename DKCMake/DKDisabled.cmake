@@ -84,7 +84,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(opencv)				# error C3861: 'random_shuffle': identifier not found
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
-	#dk_disable(tesseract)			# requires leptonica
+	dk_disable(tesseract)			# build errors
 	dk_disable(waave)				# requires sdl
 endif()
 
@@ -193,7 +193,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(emsdk)				# 64bit source only
 	dk_disable(freealut)			# no ruleto make 'alut_static'
 	dk_disable(java)
-	dk_disable(jerryscript)
+	#dk_disable(jerryscript)
 	dk_disable(kdevelop)
 	dk_disable(opencv)				# error C3861: 'random_shuffle': identifier not found
 	dk_disable(openjdk)
@@ -251,7 +251,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(opencv)				# error C3861: 'random_shuffle': identifier not found
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
-	dk_disable(openssl)
+	#dk_disable(openssl)
 	dk_disable(podofo)				# error : cannot use 'throw' with exceptions disabled
 	dk_disable(rtmidi)				# ALSA API requested but no ALSA dev libraries found
 	dk_disable(sdl-gpu)				# The target "SDL_gpu" does not exist in the project
