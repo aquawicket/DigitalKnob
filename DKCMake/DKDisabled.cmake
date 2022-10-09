@@ -243,6 +243,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(lua)					# no CMakeLists.txt
 	dk_disable(ogg)					# configure: error: unrecognized option: `-DANDROID32'
 	dk_disable(openal)				# The system cannot find the file specified
+	dk_disable(opencv)				# error : cannot use 'throw' with exceptions disabled
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
 	dk_disable(openssl)				# Perl v5.10.0 required
