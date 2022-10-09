@@ -25,9 +25,6 @@ include_guard()
 
 
 # DISABLED FOR ALL - TODO: move these into the select OS targets below			
-dk_disable(DKJerryscript)			# requires jerryscript
-dk_disable(DKOcr)					# requires leptonica, tesseract
-dk_disable(DKOFWindow)				# requires openframeworks
 dk_disable(DKOSGAudio)				# requires openscenegraph
 dk_disable(DKOSGCef)				# requires openscenegraph
 dk_disable(DKOSGLights)				# requires openscenegraph
@@ -46,15 +43,11 @@ dk_disable(DKOSGWindow)				# requires openscenegraph
 dk_disable(DKPlugin1)				# TODO
 dk_disable(DKPlugin2)				# TODO
 dk_disable(DKRestart)				# error C3861: 'printf': identifier not found
-dk_disable(DKScreenRecorder)		# requires opencv
 dk_disable(DKSDLWav)				# compiling errors
 dk_disable(DKSDLVideo)				# requires ffmpeg
-dk_disable(DKSFMLRml)				# requires sfml. Incomplete
+dk_disable(DKSFMLRml)				# requires sfml, rmlui.  INCOMPLETE
 dk_disable(DKThread)				# requires threadpool
-dk_disable(DKTorrent)				# requires libtorrent
 dk_disable(DKUpdate)				# compiling errors
-dk_disable(DKVncClient)				# requires libvncserver
-dk_disable(DKVncServer)				# requires libvncserver
 dk_disable(gradle)					# TODO
 dk_disable(java)					# TODO
 dk_disable(jpeg)					# DEPRECATED: using libjpeg_turbo instead
@@ -75,6 +68,11 @@ dk_disable(sw-client)				# DEPRECATED: requested by leptonica but not required
 
 
 if(WIN) # Disabled for Windows targets
+	dk_disable(DKOcr)				# requires leptonica, tesseract
+	dk_disable(DKOFWindow)			# requires openframeworks
+	dk_disable(DKTorrent)			# requires libtorrent
+	dk_disable(DKVncClient)			# requires libvncserver
+	dk_disable(DKVncServer)			# requires libvncserver
 	dk_disable(bullet3)				# build errors
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libtorrent)			# CMAKE ERROR:  No SOURCES given to target: torrent-rasterbar
@@ -82,7 +80,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(lua)					# no CMakeLists.txt
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
-	dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
+	#dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
 	dk_disable(tesseract)			# build errors
 	dk_disable(waave)				# requires sdl
 endif()
@@ -93,6 +91,11 @@ endif()
 
 
 if(MAC)  # Disabled for MAC targets
+	dk_disable(DKOcr)				# requires leptonica, tesseract
+	dk_disable(DKOFWindow)			# requires openframeworks
+	dk_disable(DKTorrent)			# requires libtorrent
+	dk_disable(DKVncClient)			# requires libvncserver
+	dk_disable(DKVncServer)			# requires libvncserver
 	dk_disable(bullet3)				# library not found for -lBulletInverseDynamicsUtils
 	dk_disable(freealut)			# ** BUILD FAILED **
 	dk_disable(imagemagick)			# no such file or directory: libimagemagik.a
@@ -122,9 +125,16 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(cryptopp)			# ** BUILD FAILED ** /blake2b_simd.cpp
 	dk_disable(DKCef)				# requires cef_binary
 	dk_disable(DKCefChild)			# requires cef_binary
+	dk_disable(DKJerryscript)		# requires jerryscript
 	dk_disable(DKMidi)				# requires rtmidi
+	dk_disable(DKOcr)				# requires leptonica, tesseract
+	dk_disable(DKOFWindow)			# requires openframeworks
+	dk_disable(DKScreenRecorder)	# requires opencv
 	dk_disable(DKSDLCef)			# requires cef_binary, sdl
 	dk_disable(DKSFMLWindow)		# requires sfml
+	dk_disable(DKTorrent)			# requires libtorrent
+	dk_disable(DKVncClient)			# requires libvncserver
+	dk_disable(DKVncServer)			# requires libvncserver
 	dk_disable(freealut)			# freealut-master/iossim64 does not contain an Xcode project
 	dk_disable(imagemagick)			# No such file or directory
 	dk_disable(jerryscript)			# build failed
@@ -160,7 +170,13 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(boxer)				# no package gtk+-3.0 found
 	dk_disable(bullet3)				# library not found for -lBulletInverseDynamicsUtils
 	dk_disable(DKHook)				# 'read' was not declared in this scope
+	dk_disable(DKJerryscript)		# requires jerryscript
+	dk_disable(DKOcr)				# requires leptonica, tesseract
+	dk_disable(DKOFWindow)			# requires openframeworks
 	dk_disable(DKSFMLWindow)		# requires sfml
+	dk_disable(DKTorrent)			# requires libtorrent
+	dk_disable(DKVncClient)			# requires libvncserver
+	dk_disable(DKVncServer)			# requires libvncserver
 	dk_disable(DKWebSockets)		# requires libwebsockets, uwebsockets
 	dk_disable(freealut)			# AL/al.h: No such file or directory
 	dk_disable(imagemagick)			# libimagemagik.a not found
@@ -185,7 +201,13 @@ endif()
 if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(boxer)				# fatal error : 'boxer/boxer.h' file not found	
 	dk_disable(DKHook)				# 'read' was not declared in this scope
+	dk_disable(DKJerryscript)		# requires jerryscript
 	dk_disable(DKMidi)				# requires rtmidi
+	dk_disable(DKOcr)				# requires leptonica, tesseract
+	dk_disable(DKOFWindow)			# requires openframeworks
+	dk_disable(DKTorrent)			# requires libtorrent
+	dk_disable(DKVncClient)			# requires libvncserver
+	dk_disable(DKVncServer)			# requires libvncserver
 	dk_disable(DKWebSockets)		# requires libwebsocket, uwebsockets
 	dk_disable(emsdk)				# 64bit source only
 	dk_disable(freealut)			# no ruleto make 'alut_static'
@@ -225,8 +247,14 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(DKHandles)			# could not find DKHandles
 	dk_disable(DKMidi)				# requires rtmidi
 	dk_disable(DKMySql)				# requires curl
+	dk_disable(DKOcr)				# requires leptonica, tesseract
+	dk_disable(DKOFWindow)			# requires openframeworks
+	dk_disable(DKScreenRecorder)	# requires opencv
 	dk_disable(DKSDLCef)			# requires sdl, cef_binary
 	dk_disable(DKSFMLWindow)		# requires sfml
+	dk_disable(DKTorrent)			# requires libtorrent
+	dk_disable(DKVncClient)			# requires libvncserver
+	dk_disable(DKVncServer)			# requires libvncserver
 	dk_disable(DKWebSockets)		# requires libwebsockets or uwebsockets
 	dk_disable(DKWebview)			# compiling errors
 	dk_disable(flac)				# configure: error: unrecognized option: `-DANDROID32'
