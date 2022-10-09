@@ -8,11 +8,8 @@
 ### DEPEND ###
 WIN_dk_depend(opengl)
 WIN_dk_depend(winmm.lib)
-#WIN_dk_lib(imm32.lib)
 WIN_dk_depend(imm32.lib)
-#WIN_dk_lib(version.lib)
 WIN_dk_depend(version.lib)
-#WIN_dk_lib(Setupapi.lib)
 WIN_dk_depend(setupapi.lib)
 MAC_dk_depend(appkit)
 MAC_dk_depend(audio_toolbox)

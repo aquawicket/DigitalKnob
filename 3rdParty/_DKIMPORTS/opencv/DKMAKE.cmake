@@ -152,60 +152,47 @@ ANDROID_dk_libRelease(${OPENCV}/${OS}/lib/${RELEASE_DIR}/libopencv_videoio.a)
 ### COMPILE ###
 dk_setPath(${OPENCV}/${BUILD_DIR})
 
-#WIN_dk_setPath(${OPENCV}/${OS})
+if(WIN)
+	dk_removeSubstring("-std=c++17" "${DKCMAKE_BUILD}" DKCMAKE_BUILD)
+endif()
 WIN32_dk_queueCommand(${DKCMAKE_BUILD} ${OPENCV})
 WIN64_dk_queueCommand(${DKCMAKE_BUILD} -DCV_DISABLE_OPTIMIZATION=ON -DCPU_BASELINE="" -DCPU_DISPATCH="" ${OPENCV})
 WIN_dk_visualStudio(${OPENCV_NAME})
 
-
-#MAC_dk_setPath(${OPENCV}/${OS})
 MAC_dk_queueCommand(${DKCMAKE_BUILD} "-DCMAKE_CXX_FLAGS=-stdlib=libc++" ${OPENCV})
 MAC_dk_xcode(${OPENCV_NAME} opencv_core)
 MAC_dk_xcode(${OPENCV_NAME} opencv_imgcodecs)
 MAC_dk_xcode(${OPENCV_NAME} opencv_videoio)
 
-
-#IOS_dk_setPath(${OPENCV}/${OS})
 IOS_dk_queueCommand(${DKCMAKE_BUILD} ${OPENCV})
 IOS_dk_xcode(${OPENCV_NAME} opencv_core)
 IOS_dk_xcode(${OPENCV_NAME} opencv_imgcodecs)
 IOS_dk_xcode(${OPENCV_NAME} opencv_videoio)
 
-
-#IOSSIM_dk_setPath(${OPENCV}/${OS})
 IOSSIM_dk_queueCommand(${DKCMAKE_BUILD} ${OPENCV})
 IOSSIM_dk_xcode(${OPENCV_NAME} opencv_core)
 IOSSIM_dk_xcode(${OPENCV_NAME} opencv_imgcodecs)
 IOSSIM_dk_xcode(${OPENCV_NAME} opencv_videoio)
 
-
-#LINUX_DEBUG_dk_setPath(${OPENCV}/${OS}/${DEBUG_DIR})
 LINUX_DEBUG_dk_queueCommand(${DKCMAKE_BUILD} ${OPENCV})
 LINUX_DEBUG_dk_queueCommand(make opencv_core)
 LINUX_DEBUG_dk_queueCommand(make opencv_imgcodecs)
 LINUX_DEBUG_dk_queueCommand(make opencv_videoio)
 
-#LINUX_RELEASE_dk_setPath(${OPENCV}/${OS}/${RELEASE_DIR})
 LINUX_RELEASE_dk_queueCommand(${DKCMAKE_BUILD} ${OPENCV})
 LINUX_RELEASE_dk_queueCommand(make opencv_core)
 LINUX_RELEASE_dk_queueCommand(make opencv_imgcodecs)
 LINUX_RELEASE_dk_queueCommand(make opencv_videoio)
 
-
-#RASPBERRY_DEBUG_dk_setPath(${OPENCV}/${OS}/${DEBUG_DIR})
 RASPBERRY_DEBUG_dk_queueCommand(${DKCMAKE_BUILD} -DWITH_IPP=ON ${OPENCV})
 RASPBERRY_DEBUG_dk_queueCommand(make opencv_core)
 RASPBERRY_DEBUG_dk_queueCommand(make opencv_imgcodecs)
 RASPBERRY_DEBUG_dk_queueCommand(make opencv_videoio)
 
-#RASPBERRY_RELEASE_dk_setPath(${OPENCV}/${OS}/${RELEASE_DIR})
 RASPBERRY_RELEASE_dk_queueCommand(${DKCMAKE_BUILD} -DWITH_IPP=ON ${OPENCV})
 RASPBERRY_RELEASE_dk_queueCommand(make opencv_core)
 RASPBERRY_RELEASE_dk_queueCommand(make opencv_imgcodecs)
 RASPBERRY_RELEASE_dk_queueCommand(make opencv_videoio)
 
-
-##ANDROID_dk_ndk(${OPENCV_NAME})
-#ANDROID_dk_setPath(${OPENCV}/${OS})
 ANDROID_dk_queueCommand(${DKCMAKE_BUILD} ${OPENCV})
 ANDROID_dk_visualStudio(${OPENCV_NAME})
