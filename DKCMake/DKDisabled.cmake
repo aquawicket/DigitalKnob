@@ -79,7 +79,6 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libtorrent)			# CMAKE ERROR:  No SOURCES given to target: torrent-rasterbar
 	dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
-	#dk_disable(libwebp)
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(lua)					# no CMakeLists.txt
 	dk_disable(opencv)				# error C3861: 'random_shuffle': identifier not found
@@ -90,7 +89,6 @@ if(WIN) # Disabled for Windows targets
 endif()
 
 if(WIN_64) # Disabled for Windows 64bit targets
-	#dk_disable(DKWebview)
 	dk_disable(smpeg2)				# fatal error C1083: Cannot open include file: 'unistd.h'
 endif()
 
@@ -99,12 +97,11 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(bullet3)				# library not found for -lBulletInverseDynamicsUtils
 	dk_disable(freealut)			# ** BUILD FAILED **
 	dk_disable(imagemagick)			# no such file or directory: libimagemagik.a
-	#dk_disable(jerryscript)
 	dk_disable(leptonica)			# Build Failed: fhmtauto.o
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libtorrent)			# Could not find BOOST
 	dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
-	dk_disable(libwebp)
+	#dk_disable(libwebp)
 	dk_disable(libwebsockets)		# error: unknown type name 'lws_mutex_t'
 	dk_disable(libxml2)				# fatal error: 'extra/stricmp.h' file not found
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
@@ -125,7 +122,6 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(boxer)				# COCOA_LIBRARY not found
 	dk_disable(bullet3)				# OPENGL-NOTFOUND COCOA-NOTFOUND
 	dk_disable(bzip2)				# dk_include Function invoked with incorrect arguments
-	#dk_disable(cef_binary)
 	dk_disable(cryptopp)			# ** BUILD FAILED ** /blake2b_simd.cpp
 	dk_disable(DKCef)				# requires cef_binary
 	dk_disable(DKCefChild)			# requires cef_binary
@@ -172,7 +168,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(freealut)			# AL/al.h: No such file or directory
 	dk_disable(imagemagick)			# libimagemagik.a not found
 	dk_disable(jerryscript)			# build errors
-	dk_disable(kdevelop)
+	#dk_disable(kdevelop)
 	dk_disable(leptonica)			# build errors
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libtorrent)			# Could not find BOOST
@@ -192,12 +188,11 @@ endif()
 
 
 if(RASPBERRY) # Disabled for Raspberry Pi targets
-	dk_disable(boxer)				# fatal error : 'boxer/boxer.h' file not found
-	#dk_disable(bullet3)	
+	dk_disable(boxer)				# fatal error : 'boxer/boxer.h' file not found	
 	dk_disable(DKHook)				# 'read' was not declared in this scope
 	dk_disable(DKMidi)				# requires rtmidi
 	dk_disable(DKWebSockets)		# requires libwebsocket, uwebsockets
-	dk_disable(emsdk)
+	#dk_disable(emsdk)
 	dk_disable(freealut)
 	dk_disable(imagemagick)
 	dk_disable(java)
@@ -245,8 +240,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(flac)				# configure: error: unrecognized option: `-DANDROID32'
 	dk_disable(freealut)			# DKFunctions.cmake:4405->dk_findFiles():  files is invalid
 	dk_disable(imagemagick)			# dkscript.tmp: line 2: cd: /android32/Debug: No such file or directory
-	#dk_disable(jerryscript)
-	dk_disable(leptonica)
+	#dk_disable(leptonica)
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libtorrent)			# Could not find BOOST
 	dk_disable(libuv)				# error : incomplete definition of type 'struct ifaddrs'
