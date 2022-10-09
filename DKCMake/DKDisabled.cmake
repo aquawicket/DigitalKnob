@@ -251,13 +251,13 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(opencv)				# error C3861: 'random_shuffle': identifier not found
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
-	#dk_disable(openssl)
+	dk_disable(openssl)				# Perl v5.10.0 required
 	dk_disable(podofo)				# error : cannot use 'throw' with exceptions disabled
 	dk_disable(rtmidi)				# ALSA API requested but no ALSA dev libraries found
 	dk_disable(sdl-gpu)				# The target "SDL_gpu" does not exist in the project
-	dk_disable(sfml)
-	dk_disable(smpeg2)
-	dk_disable(stackwalker)
+	dk_disable(sfml)				# Unsupported compiler
+	dk_disable(smpeg2)				# error : ISO C++17 does not allow 'register' storage class specifier
+	#dk_disable(stackwalker)
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(uwebsockets)			# Could NOT find OpenSSL
 	dk_disable(vorbis)				# configure: error: unrecognized option: `-DANDROID32'
