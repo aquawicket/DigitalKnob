@@ -192,8 +192,8 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(DKMidi)				# requires rtmidi
 	dk_disable(DKWebSockets)		# requires libwebsocket, uwebsockets
 	dk_disable(emsdk)				# 64bit source only
-	#dk_disable(freealut)
-	dk_disable(imagemagick)
+	dk_disable(freealut)			# no ruleto make 'alut_static'
+	#dk_disable(imagemagick)
 	dk_disable(java)
 	dk_disable(jerryscript)
 	dk_disable(kdevelop)
