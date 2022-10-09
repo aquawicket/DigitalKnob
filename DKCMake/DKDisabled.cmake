@@ -195,9 +195,8 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(java)
 	dk_disable(jerryscript)			# build errors
 	dk_disable(kdevelop)
-	dk_disable(opencv)				# error C3861: 'random_shuffle': identifier not found
+	#dk_disable(opencv)				# error C3861: 'random_shuffle': identifier not found
 	dk_disable(openjdk)
-	#dk_disable(leptonica)
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libtorrent)			# Could not find BOOST
 	dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
