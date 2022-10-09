@@ -3574,6 +3574,7 @@ function(dk_removeSubstring removethis fromthis RESULT)
 #	string(REPLACE "  " " " rtn "${rtn}") #replace doube spaces with single space
 	set(${RESULT} ${rtn} PARENT_SCOPE) #return RESULT
 endfunction()
+dk_createOsMacros("dk_removeSubstring")
 
 
 ###############################################################################
@@ -3996,7 +3997,6 @@ function(dk_importDownload url) #install_path #PATCH
 	endif()
 	
 	dk_install(${${LIBVAR}_DL} ${${LIBVAR}} ${${LIBVAR}_FOLDER} ${ARGN})
-
 endfunction()
 
 ###############################################################################
@@ -4023,7 +4023,6 @@ function(dk_import url)
 	dk_verbose("[${plugin_var}_URL] =			${${plugin_var}_URL}")
 	dk_verbose("[${plugin_var}_VERSION] =		${${plugin_var}_VERSION}")
 	dk_verbose("[${plugin_var}_FOLDER] =		${${plugin_var}_FOLDER}")
-	#dk_verbose("[${plugin_var}_NAME] =			${${plugin_var}_NAME}") 	# FIXME: the is an unessesary duplicate of ${plugin_var}_FOLDER
 	dk_verbose("[${plugin_var}_BRANCH] =		${${plugin_var}_BRANCH}")
 
 	### .git
