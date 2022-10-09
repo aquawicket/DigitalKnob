@@ -40,8 +40,6 @@ dk_import(https://github.com/libsdl-org/SDL_image.git BRANCH main PATCH)
 dk_include				(${SDL_IMAGE})
 WIN_dk_libDebug			(${SDL_IMAGE}/${OS}/lib/${DEBUG_DIR}/SDL_image.lib)
 WIN_dk_libRelease		(${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL_image.lib)
-#WIN_dk_libDebug		(${SDL_IMAGE}/${OS}/${DEBUG_DIR}/SDL2_image-staticd.lib)
-#WIN_dk_libRelease		(${SDL_IMAGE}/${OS}/${RELEASE_DIR}/SDL2_image-static.lib)
 APPLE_dk_libDebug		(${SDL_IMAGE}/${OS}/lib/Debug/SDL_image.a)
 APPLE_dk_libRelease		(${SDL_IMAGE}/${OS}/lib/Release/SDL_image.a)
 LINUX_dk_libDebug		(${SDL_IMAGE}/${OS}/${DEBUG_DIR}/lib/SDL_image.a)
@@ -53,10 +51,11 @@ ANDROID_dk_libRelease	(${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL_image.a)
 
 
 ### 3RDPARTY LINK ###
-WIN_dk_set(SDL_IMAGE_CMAKE -DSDL2_IMAGE_INCLUDE_DIR=${SDL_IMAGE} -DSDL2_IMAGE_LIBRARY_DEBUG=${SDL_IMAGE}/${OS}/lib/${DEBUG_DIR}/SDL2_image-staticd.lib -DSDL2_IMAGE_LIBRARY_TEMP=${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL2_image-static.lib -DSDL2_IMAGE_LIBRARY_RELEASE=${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL2_image-static.lib)
-	#-DSDL2_IMAGE_LIBRARY_DEBUG=${SDL_IMAGE}/${OS}/lib/${DEBUG_DIR}/SDL_image.lib
-	#-DSDL2_IMAGE_LIBRARY_TEMP=${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL_image.lib
-	#-DSDL2_IMAGE_LIBRARY_RELEASE=${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL_image.lib)
+WIN_dk_set(SDL_IMAGE_CMAKE 
+	-DSDL2_IMAGE_INCLUDE_DIR=${SDL_IMAGE}
+	-DSDL2_IMAGE_LIBRARY_DEBUG=${SDL_IMAGE}/${OS}/lib/${DEBUG_DIR}/SDL2_image.lib
+	-DSDL2_IMAGE_LIBRARY_TEMP=${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL2_image.lib
+	-DSDL2_IMAGE_LIBRARY_RELEASE=${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL2_image.lib)
 APPLE_dk_set(SDL_IMAGE_CMAKE 
 	-DSDL2_IMAGE_INCLUDE_DIR=${SDL_IMAGE}
 	-DSDL2_IMAGE_LIBRARY_TEMP=${SDL_IMAGE}/${OS}/lib/Debug/SDL_image.a
@@ -82,7 +81,6 @@ dk_queueCommand	(${DKCMAKE_BUILD} -DSDLIMAGE_SUPPORT_GIF=ON -DSDLIMAGE_SUPPORT_J
 
 
 ### COMPILE ###
-dk_visualStudio				(${SDL_IMAGE_NAME} SDLIMAGE)
-dk_xcode					(${SDL_IMAGE_NAME} SDLIMAGE)
-LINUX_dk_queueCommand		(make SDLIMAGE)
-RASPBERRY_dk_queueCommand	(make SDLIMAGE)
+dk_visualStudio	(${SDL_IMAGE_NAME} SDLIMAGE) #windows, android
+dk_xcode		(${SDL_IMAGE_NAME} SDLIMAGE) # mac, ios, iossim
+dk_make			(${SDL_IMAGE_NAME} SDLIMAGE) # linux, raspberry
