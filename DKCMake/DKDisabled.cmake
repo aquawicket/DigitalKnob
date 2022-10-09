@@ -257,7 +257,6 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(sdl-gpu)				# The target "SDL_gpu" does not exist in the project
 	dk_disable(sfml)				# Unsupported compiler
 	dk_disable(smpeg2)				# error : ISO C++17 does not allow 'register' storage class specifier
-	#dk_disable(stackwalker)
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(uwebsockets)			# Could NOT find OpenSSL
 	dk_disable(vorbis)				# configure: error: unrecognized option: `-DANDROID32'
