@@ -10,9 +10,9 @@ dk_depend(libpng)
 
 ### VERSION ###
 dk_set(OPENCV_MAJOR 4)
-dk_set(OPENCV_MINOR 5)
-dk_set(OPENCV_BUILD 3)
-#dk_set(OPENCV_VERSION 4.5.3)
+dk_set(OPENCV_MINOR 6)
+dk_set(OPENCV_BUILD 0)
+#dk_set(OPENCV_VERSION 460)
 
 
 dk_import(https://github.com/opencv/opencv.git)
