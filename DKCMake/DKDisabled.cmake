@@ -168,7 +168,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(freealut)			# AL/al.h: No such file or directory
 	dk_disable(imagemagick)			# libimagemagik.a not found
 	dk_disable(jerryscript)			# build errors
-	#dk_disable(kdevelop)
+	dk_disable(kdevelop)			# permission denied
 	dk_disable(leptonica)			# build errors
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libtorrent)			# Could not find BOOST
