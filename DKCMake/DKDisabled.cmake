@@ -109,7 +109,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(lua)					# no CMakeLists.txt
 	dk_disable(mlocate)				# Unable to locate a Java Runtime that supports apt
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
-	dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
+	#dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
 	dk_disable(rtmidi)				# Undefined symbols for architecture x86_64
 	dk_disable(sdl-gpu)				# SDL for MAC OS X only supports deploying on 10.7 and above
 	dk_disable(smpeg2)				# ** BUILD FAILED ** MPEGstream.cpp
@@ -154,7 +154,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(mlocate)				# Unable to locate a Java Runtime that supports apt
 	dk_disable(opencv)				# CMAKE_SYSTEM_PROCESSOR is not defined
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
-	dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
+	#dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
 	dk_disable(opensles)			# could not locate OpenSLES Library
 	dk_disable(podofo)				# Could not find FREETYPE
 	dk_disable(sdl-gpu)				# SDL2MAIN_LIBRARY is NOTFOUND
@@ -190,7 +190,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(lua)					# no CMakeLists.txt
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
-	dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
+	#dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
 	dk_disable(openssl)				# compiling errors
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(uwebsockets)			# requires openssl
@@ -223,7 +223,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(lua)					# no CMakeLists.txt
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
-	dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
+	#dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
 	dk_disable(rtmidi)
 	dk_disable(sdl-gpu)
 	dk_disable(stackwalker)
@@ -273,7 +273,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(openal)				# The system cannot find the file specified
 	dk_disable(opencv)				# error : cannot use 'throw' with exceptions disabled
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
-	dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
+	#dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
 	dk_disable(openssl)				# Perl v5.10.0 required
 	dk_disable(podofo)				# error : cannot use 'throw' with exceptions disabled
 	dk_disable(rtmidi)				# ALSA API requested but no ALSA dev libraries found
