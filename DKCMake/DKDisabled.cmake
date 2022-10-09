@@ -179,7 +179,6 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
 	dk_disable(openssl)				# compiling errors
-	#dk_disable(sfml)          		# TODO: disabling individual sublibraries, I.E. sfml_sfml-network
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(uwebsockets)			# requires openssl
 	dk_disable(waave)				# requires sdl
@@ -193,7 +192,6 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(DKWebSockets)		# requires libwebsocket, uwebsockets
 	dk_disable(emsdk)				# 64bit source only
 	dk_disable(freealut)			# no ruleto make 'alut_static'
-	#dk_disable(imagemagick)
 	dk_disable(java)
 	dk_disable(jerryscript)
 	dk_disable(kdevelop)
