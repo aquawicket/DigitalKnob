@@ -84,7 +84,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(opencv)				# error C3861: 'random_shuffle': identifier not found
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
-	dk_disable(tesseract)			# requires leptonica
+	#dk_disable(tesseract)			# requires leptonica
 	dk_disable(waave)				# requires sdl
 endif()
 
