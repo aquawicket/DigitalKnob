@@ -81,7 +81,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(lua)					# no CMakeLists.txt
-	dk_disable(opencv)				# error C3861: 'random_shuffle': identifier not found
+	#dk_disable(opencv)				# error C3861: 'random_shuffle': identifier not found
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
 	dk_disable(tesseract)			# build errors
