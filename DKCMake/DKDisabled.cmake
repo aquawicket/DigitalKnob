@@ -106,7 +106,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(lua)					# no CMakeLists.txt
 	dk_disable(mlocate)				# Unable to locate a Java Runtime that supports apt
-	dk_disable(opencv)				# error C3861: 'random_shuffle': identifier not found
+	#dk_disable(opencv)				# error C3861: 'random_shuffle': identifier not found
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
 	dk_disable(rtmidi)				# Undefined symbols for architecture x86_64
@@ -175,7 +175,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(libxml2)				# Not such file or directory
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(lua)					# no CMakeLists.txt
-	dk_disable(opencv)				# error C3861: 'random_shuffle': identifier not found
+	#dk_disable(opencv)				# error C3861: 'random_shuffle': identifier not found
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
 	dk_disable(openssl)				# compiling errors
@@ -248,7 +248,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(lua)					# no CMakeLists.txt
 	dk_disable(ogg)					# configure: error: unrecognized option: `-DANDROID32'
 	dk_disable(openal)				# The system cannot find the file specified
-	dk_disable(opencv)				# error C3861: 'random_shuffle': identifier not found
+	#dk_disable(opencv)				# error C3861: 'random_shuffle': identifier not found
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
 	dk_disable(openssl)				# Perl v5.10.0 required
