@@ -101,7 +101,6 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libtorrent)			# Could not find BOOST
 	dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
-	#dk_disable(libwebp)
 	dk_disable(libwebsockets)		# error: unknown type name 'lws_mutex_t'
 	dk_disable(libxml2)				# fatal error: 'extra/stricmp.h' file not found
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
@@ -180,7 +179,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	dk_disable(openscenegraph)		# error C2039: 'ptr_fun': is not a member of 'std'
 	dk_disable(openssl)				# compiling errors
-	dk_disable(sfml)          		# sfml_sfml-network)  #TODO: disabling individual sublibraries
+	#dk_disable(sfml)          		# TODO: disabling individual sublibraries, I.E. sfml_sfml-network
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(uwebsockets)			# requires openssl
 	dk_disable(waave)				# requires sdl
@@ -192,8 +191,8 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(DKHook)				# 'read' was not declared in this scope
 	dk_disable(DKMidi)				# requires rtmidi
 	dk_disable(DKWebSockets)		# requires libwebsocket, uwebsockets
-	#dk_disable(emsdk)
-	dk_disable(freealut)
+	dk_disable(emsdk)				# 64bit source only
+	#dk_disable(freealut)
 	dk_disable(imagemagick)
 	dk_disable(java)
 	dk_disable(jerryscript)
