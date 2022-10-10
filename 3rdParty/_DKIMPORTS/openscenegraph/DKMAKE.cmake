@@ -79,7 +79,7 @@ if(ALL_LIBS)
 	dk_enable(osgdb_dot)
 	#dk_enable(osgdb_dw)					# broken on MAC
 	dk_enable(osgdb_dxf)
-	dk_enable(osgdb_gif)
+	#dk_enable(osgdb_gif)					# broken on MAC
 	dk_enable(osgdb_ive)
 	dk_enable(osgdb_ffmpeg)
 	dk_enable(osgdb_freetype)
@@ -105,7 +105,7 @@ if(ALL_LIBS)
 	dk_enable(osgdb_p3d)
 	dk_enable(osgdb_pic)
 	dk_enable(osgdb_ply)
-	dk_enable(osgdb_png)
+	#dk_enable(osgdb_png)				# broken on MAC
 	dk_enable(osgdb_pnm)
 	dk_enable(osgdb_pov)
 	dk_enable(osgdb_pvr)
