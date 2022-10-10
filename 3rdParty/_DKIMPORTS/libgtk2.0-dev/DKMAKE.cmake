@@ -7,7 +7,6 @@ endif()
 dk_set(CURRENT_DIR /usr)
 dk_command(sudo apt -y install libgtk2.0-dev)
 
-
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(GTK REQUIRED gtk+-2.0)
 
