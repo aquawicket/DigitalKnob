@@ -77,7 +77,7 @@ if(ALL_LIBS)
 	dk_enable(osgdb_deprecated_osgvolume)
 	dk_enable(osgdb_deprecated_osgwidget)
 	dk_enable(osgdb_dot)
-	dk_enable(osgdb_dw)
+	#dk_enable(osgdb_dw)					# broken on MAC
 	dk_enable(osgdb_dxf)
 	dk_enable(osgdb_gif)
 	dk_enable(osgdb_ive)
