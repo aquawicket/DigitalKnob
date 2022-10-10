@@ -2,16 +2,11 @@
 
 
 ### DEPEND ###
-#dk_depend(curl)
-dk_depend(freetype)
-dk_depend(giflib)
-dk_depend(libjpeg-turbo)
-dk_depend(libpng)
+# some depends are located below for individual osg libraries
 dk_depend(libxml2)
 dk_depend(msinttypes)
 dk_depend(opengl)
 dk_depend(sdl)
-dk_depend(tiff)
 dk_depend(zlib)
 
 
