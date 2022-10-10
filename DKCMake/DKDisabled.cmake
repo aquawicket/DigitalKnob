@@ -93,6 +93,7 @@ endif()
 if(MAC)  # Disabled for MAC targets
 	dk_disable(DKOcr)				# requires leptonica, tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
+	dk_disable(DKScreenRecorder)	# error: 'cvSize' was not declared in this scope
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKVncClient)			# requires libvncserver
 	dk_disable(DKVncServer)			# requires libvncserver
