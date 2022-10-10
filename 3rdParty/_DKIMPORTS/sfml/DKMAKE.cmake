@@ -183,7 +183,6 @@ ANDROID_dk_queueCommand		(${DKCMAKE_BUILD} -DBUILD_SHARED_LIBS=FALSE ${LIBJPEG-T
 
 
 ### COMPILE ###
-dk_visualStudio				(${SFML_NAME})
-dk_xcode					(${SFML_NAME})
-LINUX_dk_queueCommand		(make)
-RASPBERRY_dk_queueCommand	(make)
+dk_visualStudio	(${SFML_NAME}) # windows, android
+dk_xcode		(${SFML_NAME}) # mac, ios, iossim
+dk_make			(${SFML_NAME}) # linux, raspberry
