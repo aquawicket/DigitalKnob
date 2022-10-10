@@ -1,11 +1,15 @@
 # https://www.cryptopp.com/
 # https://github.com/weidai11/cryptopp
 
+
+### DEPEND ###
 if(IOS OR IOSSIM)
 	#dk_depend(libmd)
 	#dk_depend(macports)
 endif()
 
+
+### IMPORT ###
 if(WIN)
 	dk_import(https://github.com/weidai11/cryptopp/archive/27b7b8e4e6b3e54cca13b2faae87eb95faa0d819.zip PATCH)
 	#dk_import(https://github.com/weidai11/cryptopp.git 27b7b8e4e6b3e54cca13b2faae87eb95faa0d819 PATCH)

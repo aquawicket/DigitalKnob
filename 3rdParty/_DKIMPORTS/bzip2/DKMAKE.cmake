@@ -8,34 +8,25 @@ if(WIN)
 endif()
 
 
+### DEPEND ###
 dk_depend(mingw32)
 dk_depend(mingw64)
 dk_depend(msys2)
 dk_depend(libgcc)
 
 
+### IMPORT ###
 WIN_dk_import		(https://github.com/kiyolee/bzip2-win-build/archive/refs/tags/v1.0.8.zip)
 MAC_dk_import		(ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
 LINUX_dk_import		(ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
 RASPBERRY_dk_import	(ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
 ANDROID_dk_import	(ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
-
-#dk_set(BZIP2_VERSION 1.0.8)
-#dk_set(BZIP2_NAME bzip2-${BZIP2_VERSION})
-#WIN_dk_set(BZIP2_DL https://github.com/kiyolee/bzip2-win-build/archive/refs/tags/v1.0.8.zip)
-#LINUX_dk_set(BZIP2_DL ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
-#RASPBERRY_dk_set(BZIP2_DL ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
-#ANDROID_dk_set(BZIP2_DL ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
-#dk_set(BZIP2 ${3RDPARTY}/${BZIP2_NAME})
-#dk_import(${BZIP2_DL} ${BZIP2})
-
-
 if(NOT EXISTS ${BZIP2}/copy)
 	dk_copy(${BZIP2} ${BZIP2}/copy OVERWRITE)
 endif()
 
 
-### DKPLUGINS LINK ###
+### LINK ###
 dk_include(${BZIP2})
 WIN32_dk_libDebug(${BZIP2}/${OS}/${DEBUG_DIR}/libbz2-static.lib)
 WIN32_dk_libRelease(${BZIP2}/${OS}/${RELEASE_DIR}/libbz2-static.lib)
@@ -69,7 +60,6 @@ if(WIN_32)
 	WIN32_dk_visualStudio(${BZIP2_NAME} libbz2-static)
 endif()
 
-
 if(WIN_64)
 	dk_copy(${BZIP2}/win32/bzip2.rc ${BZIP2}/${OS}/bzip2.rc) #copy project files that came with bzip
 	dk_copy(${BZIP2}/win32/bzip2recover.rc ${BZIP2}/${OS}/bzip2recover.rc)
@@ -80,7 +70,6 @@ if(WIN_64)
 	WIN64_dk_visualStudio(${BZIP2_NAME} libbz2-static x64)
 endif()
 
-
 if(MAC_64)
 	if(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
 		dk_copy(${BZIP2}/copy ${BZIP2}/${OS} OVERWRITE)
@@ -88,7 +77,6 @@ if(MAC_64)
 	MAC_dk_setPath(${BZIP2}/${OS})
 	MAC_dk_queueCommand(make)
 endif()
-
 
 if(LINUX)
 	if(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
@@ -98,7 +86,6 @@ if(LINUX)
 	LINUX_dk_queueCommand(make)
 endif()
 
-
 if(RASPBERRY)
 	if(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)
 		dk_copy(${BZIP2}/copy ${BZIP2}/${OS} OVERWRITE)
@@ -106,7 +93,6 @@ if(RASPBERRY)
 	RASPBERRY_dk_setPath(${BZIP2}/${OS})
 	RASPBERRY_dk_queueCommand(make)
 endif()
-
 
 if(ANDROID)
 	if(NOT EXISTS ${BZIP2}/${OS}/bzip2.c)

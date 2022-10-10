@@ -1,6 +1,5 @@
 # https://github.com/aaronmjacobs/Boxer
 
-
 ### OS CHECK ###
 RASPBERRY_dk_return()
 ANDROID_dk_return()
