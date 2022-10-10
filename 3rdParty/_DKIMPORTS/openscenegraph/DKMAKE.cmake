@@ -63,7 +63,7 @@ if(ALL_LIBS)
 	dk_enable(osgdb_bsp)
 	dk_enable(osgdb_bvh)
 	dk_enable(osgdb_cfg)
-	dk_enable(osgdb_curl)
+	#dk_enable(osgdb_curl)					# broken on LINUX
 	dk_enable(osgdb_dds)
 	dk_enable(osgdb_deprecated_osg)
 	dk_enable(osgdb_deprecated_osganimation)
