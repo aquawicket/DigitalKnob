@@ -152,9 +152,13 @@ ANDROID_dk_libRelease	(${OPENCV}/${OS}/lib/${RELEASE_DIR}/libopencv_videoio.a)
 
 ### GENERATE ###
 dk_setPath							(${OPENCV}/${BUILD_DIR})
-WIN_dk_removeSubstring				("/std:c++17" "${DKCMAKE_BUILD}" DKCMAKE_BUILD)
+
+#WIN_dk_removeSubstring	("/std:c++17" "${DKCMAKE_BUILD}" DKCMAKE_BUILD)
+string(REPLACE "/std:c++17" "" DKCMAKE_BUILD "${DKCMAKE_BUILD}")
+string(REPLACE "  " " " DKCMAKE_BUILD "${DKCMAKE_BUILD}")
 WIN32_dk_queueCommand				(${DKCMAKE_BUILD} ${OPENCV})
 WIN64_dk_queueCommand				(${DKCMAKE_BUILD} -DCV_DISABLE_OPTIMIZATION=ON -DCPU_BASELINE="" -DCPU_DISPATCH="" ${OPENCV})
+
 MAC_dk_queueCommand					(${DKCMAKE_BUILD} "-DCMAKE_CXX_FLAGS=-stdlib=libc++" ${OPENCV})
 IOS_dk_queueCommand					(${DKCMAKE_BUILD} ${OPENCV})
 IOSSIM_dk_queueCommand				(${DKCMAKE_BUILD} ${OPENCV})
