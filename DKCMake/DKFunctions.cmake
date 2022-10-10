@@ -3575,7 +3575,7 @@ function(dk_removeSubstring removethis fromthis RESULT)
 	#endforeach()
 	string(REPLACE ${removethis} "" rtn "${fromthis}")
 	string(REPLACE "  " " " rtn "${rtn}") #replace doube spaces with single space
-	set(${RESULT} ${rtn} PARENT_SCOPE) #return RESULT
+	set(${RESULT} "${rtn}" PARENT_SCOPE) #return RESULT
 	dk_dump(rtn)
 	#dk_wait()
 endfunction()
