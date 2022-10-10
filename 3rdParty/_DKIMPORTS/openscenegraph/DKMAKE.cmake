@@ -1263,8 +1263,8 @@ WIN_dk_queueCommand		(${DKCMAKE_BUILD}
 	${FFMPEG_CMAKE} 
 	${OPENSCENEGRAPH})
 
-APPLE_dk_removeSubstring("-std=c++17" "${DKCMAKE_BUILD}" DKCMAKE_BUILD)
-APPLE_dk_removeSubstring("-DRELEASE" "${DKCMAKE_BUILD}" DKCMAKE_BUILD)
+APPLE_dk_removeSubstring("-std=c++17" ${DKCMAKE_BUILD} DKCMAKE_BUILD)
+APPLE_dk_removeSubstring("-DRELEASE" ${DKCMAKE_BUILD} DKCMAKE_BUILD)
 dk_dump(DKCMAKE_BUILD)
 dk_wait()
 MAC_dk_queueCommand		(${DKCMAKE_BUILD} 
