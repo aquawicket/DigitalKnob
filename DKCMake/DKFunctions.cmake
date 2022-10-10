@@ -778,7 +778,7 @@ macro(dk_dump variable)
 		message(STATUS "${cyan}   VALUE:   ${${variable}} ${CLR}")
 		message(STATUS "${cyan}############################################################################################${CLR}\n")
 	endif()
-	dk_wait()
+	#dk_wait()
 endmacro()
 
 
@@ -3567,8 +3567,8 @@ endfunction()
 #
 function(dk_removeSubstring removethis fromthis RESULT)
 	DKDEBUGFUNC(${ARGV})
-	#dk_dump(removethis)
-	#dk_dump(fromthis)
+	dk_dump(removethis)
+	dk_dump(fromthis)
 	foreach(item ${fromthis})
 		string(REPLACE ${removethis} "" item ${item})
 		list(APPEND rtn ${item})
@@ -3576,6 +3576,7 @@ function(dk_removeSubstring removethis fromthis RESULT)
 #	string(REPLACE "  " " " rtn "${rtn}") #replace doube spaces with single space
 	set(${RESULT} ${rtn} PARENT_SCOPE) #return RESULT
 	dk_dump(RESULT)
+	dk_wait()
 endfunction()
 dk_createOsMacros("dk_removeSubstring")
 
