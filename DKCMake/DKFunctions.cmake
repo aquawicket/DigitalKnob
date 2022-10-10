@@ -3567,6 +3567,7 @@ endfunction()
 #
 function(dk_removeSubstring removethis fromthis RESULT)
 	DKDEBUGFUNC(${ARGV})
+	#dk_dump(removethis)
 	#dk_dump(fromthis)
 	foreach(item ${fromthis})
 		string(REPLACE ${removethis} "" item ${item})
