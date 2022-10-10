@@ -1230,7 +1230,9 @@ endif(osgdb_curl)
 
 ### GENERATE ###
 dk_setPath				(${OPENSCENEGRAPH}/${BUILD_DIR})
-WIN_dk_removeSubstring	("/std:c++17" "${DKCMAKE_BUILD}" DKCMAKE_BUILD)
+#WIN_dk_removeSubstring	("/std:c++17" "${DKCMAKE_BUILD}" DKCMAKE_BUILD)
+string(REPLACE "/std:c++17" "" DKCMAKE_BUILD "${DKCMAKE_BUILD}")
+string(REPLACE "  " " " DKCMAKE_BUILD "${DKCMAKE_BUILD}")
 WIN_dk_queueCommand		(${DKCMAKE_BUILD}
 	"-DCMAKE_CXX_FLAGS=/D__STDC_CONSTANT_MACROS /I${ZLIB}/${OS} /I${PNG}/${OS} /I${TIFF}/${OS} /I${JPEG}/${OS}" 
 	-DBUILD_OSG_APPLICATIONS=OFF 
