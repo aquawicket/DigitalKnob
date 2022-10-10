@@ -153,7 +153,6 @@ ANDROID_dk_libRelease	(${OPENCV}/${OS}/lib/${RELEASE_DIR}/libopencv_videoio.a)
 ### GENERATE ###
 dk_setPath							(${OPENCV}/${BUILD_DIR})
 
-#WIN_dk_removeSubstring	("/std:c++17" "${DKCMAKE_BUILD}" OPENCV_BUILD)
 string(REPLACE "/std:c++17" "" OPENCV_BUILD "${DKCMAKE_BUILD}")
 string(REPLACE "  " " " OPENCV_BUILD "${OPENCV_BUILD}")
 WIN32_dk_queueCommand				(${OPENCV_BUILD} ${OPENCV})

@@ -1422,7 +1422,6 @@ endif(osgdb_curl)
 ### GENERATE ###
 dk_setPath				(${OPENSCENEGRAPH}/${BUILD_DIR})
 
-#WIN_dk_removeSubstring	("/std:c++17" "${DKCMAKE_BUILD}" DKCMAKE_BUILD)
 string(REPLACE "/std:c++17" "" OPENCV_BUILD "${DKCMAKE_BUILD}")
 string(REPLACE "  " " " OPENCV_BUILD "${OPENCV_BUILD}")
 WIN_dk_queueCommand	(${OPENCV_BUILD}
@@ -1457,8 +1456,6 @@ WIN_dk_queueCommand	(${OPENCV_BUILD}
 	${FFMPEG_CMAKE} 
 	${OPENSCENEGRAPH})
 
-#APPLE_dk_removeSubstring("-std=c++17" "${DKCMAKE_BUILD}" OPENCV_BUILD)
-#APPLE_dk_removeSubstring("-DRELEASE" "${OPENCV_BUILD}" OPENCV_BUILD)
 string(REPLACE "-std=c++17" "" OPENCV_BUILD "${DKCMAKE_BUILD}")
 string(REPLACE "-DRELEASE" "" OPENCV_BUILD "${OPENCV_BUILD}")
 string(REPLACE "  " " " OPENCV_BUILD "${OPENCV_BUILD}")
@@ -1527,7 +1524,6 @@ IOS_dk_queueCommand(${OPENCV_BUILD}
 	${FFMPEG_CMAKE} 
 	${OPENSCENEGRAPH})
 
-#IOSSIM_dk_removeSubstring("-std=c++17" "${DKCMAKE_BUILD}" OPENCV_BUILD)
 string(REPLACE "-std=c++17" "" OPENCV_BUILD "${DKCMAKE_BUILD}")
 string(REPLACE "  " " " OPENCV_BUILD "${OPENCV_BUILD}")
 IOSSIM_dk_queueCommand(${OPENCV_BUILD} 
@@ -1565,7 +1561,6 @@ IOSSIM_dk_queueCommand(${OPENCV_BUILD}
 	-DOSG_BUILD_PLATFORM_IPHONE_SIMULATOR=ON 
 	${OPENSCENEGRAPH})
 
-#LINUX_dk_removeSubstring("-std=c++17" "${DKCMAKE_BUILD}" OPENCV_BUILD)
 string(REPLACE "-std=c++17" "" OPENCV_BUILD "${DKCMAKE_BUILD}")
 string(REPLACE "  " " " OPENCV_BUILD "${OPENCV_BUILD}")
 LINUX_dk_queueCommand(${OPENCV_BUILD} 
@@ -1598,7 +1593,6 @@ LINUX_dk_queueCommand(${OPENCV_BUILD}
 	${BOOST_CMAKE} 
 	${OPENSCENEGRAPH})
 
-#RASPBERRY_dk_removeSubstring("-std=c++17" "${DKCMAKE_BUILD}" OPENCV_BUILD)
 string(REPLACE "-std=c++17" "" OPENCV_BUILD "${DKCMAKE_BUILD}")
 string(REPLACE "  " " " OPENCV_BUILD "${OPENCV_BUILD}")
 RASPBERRY_dk_queueCommand(${OPENCV_BUILD} 
@@ -1631,7 +1625,6 @@ RASPBERRY_dk_queueCommand(${OPENCV_BUILD}
 	${BOOST_CMAKE} 
 	${OPENSCENEGRAPH})
 
-#ANDROID_dk_removeSubstring("-std=c++17" "${DKCMAKE_BUILD}" OPENCV_BUILD)
 string(REPLACE "-std=c++17" "" OPENCV_BUILD "${DKCMAKE_BUILD}")
 string(REPLACE "  " " " OPENCV_BUILD "${OPENCV_BUILD}")
 ANDROID_dk_queueCommand(${OPENCV_BUILD} 

@@ -65,14 +65,13 @@ WIN_RELEASE_dk_msys(${DKCONFIGURE_BUILD} ${OGG_CONFIGURE})
 WIN_RELEASE_dk_msys(make)
 
 
-if(MAC)
-	dk_removeSubstring(" -std=c17" "${DKCONFIGURE_BUILD}" DKCONFIGURE_BUILD)
-endif()
+string(REPLACE "-std=c++17" "" FLAC_BUILD "${DKCONFIGURE_BUILD}")
+string(REPLACE "  " " " FLAC_BUILD "${FLAC_BUILD}")
 MAC_DEBUG_dk_setPath(${FLAC}/${OS}/${DEBUG_DIR})
-MAC_DEBUG_dk_queueCommand(${DKCONFIGURE_BUILD} ${OGG_CONFIGURE})
+MAC_DEBUG_dk_queueCommand(${FLAC_BUILD} ${OGG_CONFIGURE})
 MAC_DEBUG_dk_queueCommand(make)
 MAC_RELEASE_dk_setPath(${FLAC}/${OS}/${RELEASE_DIR})
-MAC_RELEASE_dk_queueCommand(${DKCONFIGURE_BUILD} ${OGG_CONFIGURE})
+MAC_RELEASE_dk_queueCommand(${FLAC_BUILD} ${OGG_CONFIGURE})
 MAC_RELEASE_dk_queueCommand(make)
 
 
