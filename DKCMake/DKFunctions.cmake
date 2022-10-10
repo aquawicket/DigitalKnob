@@ -3567,14 +3567,14 @@ endfunction()
 #
 function(dk_removeSubstring removethis fromthis RESULT)
 	DKDEBUGFUNC(${ARGV})
-	dk_dump(fromthis)
+	#dk_dump(fromthis)
 	foreach(item ${fromthis})
 		string(REPLACE ${removethis} "" item ${item})
 		list(APPEND rtn ${item})
 	endforeach()
 #	string(REPLACE "  " " " rtn "${rtn}") #replace doube spaces with single space
 	set(${RESULT} ${rtn} PARENT_SCOPE) #return RESULT
-	dk_dump(${RESULT})
+	dk_dump(RESULT)
 endfunction()
 dk_createOsMacros("dk_removeSubstring")
 
