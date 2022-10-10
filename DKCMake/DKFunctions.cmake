@@ -3565,7 +3565,7 @@ endfunction()
 #	@fromthis		- TODO
 #	@RESULT			- TODO
 #
-function(dk_removeSubstring removethis fromthis RESULT)
+macro(dk_removeSubstring removethis fromthis RESULT)
 	DKDEBUGFUNC(${ARGV})
 	dk_dump(removethis)
 	dk_dump(fromthis)
@@ -3578,7 +3578,7 @@ function(dk_removeSubstring removethis fromthis RESULT)
 	set(${RESULT} "${rtn}" PARENT_SCOPE) #return RESULT
 	dk_dump(rtn)
 	#dk_wait()
-endfunction()
+endmacro()
 dk_createOsMacros("dk_removeSubstring")
 
 
