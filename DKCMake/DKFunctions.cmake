@@ -3573,8 +3573,8 @@ function(dk_removeSubstring removethis fromthis RESULT)
 		list(APPEND rtn ${item})
 	endforeach()
 #	string(REPLACE "  " " " rtn "${rtn}") #replace doube spaces with single space
-	dk_dump(rtn)
 	set(${RESULT} ${rtn} PARENT_SCOPE) #return RESULT
+	dk_dump(${RESULT})
 endfunction()
 dk_createOsMacros("dk_removeSubstring")
 
