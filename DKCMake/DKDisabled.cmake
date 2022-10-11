@@ -25,21 +25,6 @@ include_guard()
 
 
 # DISABLED FOR ALL - TODO: move these into the select OS targets below			
-dk_disable(DKOSGAudio)				# requires openscenegraph
-dk_disable(DKOSGCef)				# requires openscenegraph
-dk_disable(DKOSGLights)				# requires openscenegraph
-dk_disable(DKOSGManipulator)		# requires openscenegraph
-dk_disable(DKOSGModel)				# requires openscenegraph
-dk_disable(DKOSGNotify)				# requires openscenegraph
-dk_disable(DKOSGPhysics)			# requires openscenegraph
-dk_disable(DKOSGPicker)				# requires openscenegraph
-dk_disable(DKOSGRml)				# requires openscenegraph
-dk_disable(DKOSGStats)				# requires openscenegraph
-dk_disable(DKOSGTerrain)			# requires openscenegraph
-dk_disable(DKOSGVideo)				# requires openscenegraph
-dk_disable(DKOSGViewer)				# requires openscenegraph 
-dk_disable(DKOSGWidget)				# requires openscenegraph 
-dk_disable(DKOSGWindow)				# requires openscenegraph 
 dk_disable(DKPlugin1)				# TODO
 dk_disable(DKPlugin2)				# TODO
 dk_disable(DKRestart)				# error C3861: 'printf': identifier not found
@@ -55,9 +40,6 @@ dk_disable(librocket)				# OBSOLETE: replaced by rmlui
 dk_disable(libvncserver-master-win) # DEPRECATED: using libvncserver instead
 dk_disable(libx11)					# TODO
 dk_disable(msys2)					# TODO: currently using msys
-dk_disable(osgaudio)				# requires openscenegraph
-dk_disable(osgbullet)				# requires openscenegraph
-dk_disable(osgworks)				# requires openscenegraph
 dk_disable(sdl2_gif)				# DEPRECATED: using SDL_Image animation instead
 dk_disable(sdl2_giflib_sa)			# DEPRECATED: updated version of sdl2_gif. Using SDL_Image animation instead
 dk_disable(simple-getch)			# DEPRECATED: kept for reference
@@ -70,6 +52,21 @@ dk_disable(sw-client)				# DEPRECATED: requested by leptonica but not required
 if(WIN) # Disabled for Windows targets
 	dk_disable(DKOcr)				# requires leptonica, tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
+	dk_disable(DKOSGAudio)			# requires openscenegraph
+	dk_disable(DKOSGCef)			# requires openscenegraph
+	dk_disable(DKOSGLights)			# requires openscenegraph
+	dk_disable(DKOSGManipulator)	# requires openscenegraph
+	dk_disable(DKOSGModel)			# requires openscenegraph
+	dk_disable(DKOSGNotify)			# requires openscenegraph
+	dk_disable(DKOSGPhysics)		# requires openscenegraph
+	dk_disable(DKOSGPicker)			# requires openscenegraph
+	dk_disable(DKOSGRml)			# requires openscenegraph
+	dk_disable(DKOSGStats)			# requires openscenegraph
+	dk_disable(DKOSGTerrain)		# requires openscenegraph
+	dk_disable(DKOSGVideo)			# requires openscenegraph
+	dk_disable(DKOSGViewer)			# requires openscenegraph 
+	dk_disable(DKOSGWidget)			# requires openscenegraph 
+	dk_disable(DKOSGWindow)			# requires openscenegraph 
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKVncClient)			# requires libvncserver
 	dk_disable(DKVncServer)			# requires libvncserver
@@ -80,6 +77,9 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(lua)					# no CMakeLists.txt
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
+	dk_disable(osgaudio)			# requires openscenegraph
+	dk_disable(osgbullet)			# requires openscenegraph
+	dk_disable(osgworks)			# requires openscenegraph
 	dk_disable(tesseract)			# build errors
 	dk_disable(waave)				# requires sdl
 endif()
@@ -92,6 +92,21 @@ endif()
 if(MAC)  # Disabled for MAC targets
 	dk_disable(DKOcr)				# requires leptonica, tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
+	dk_disable(DKOSGAudio)			# requires openscenegraph
+	dk_disable(DKOSGCef)			# requires openscenegraph
+	dk_disable(DKOSGLights)			# requires openscenegraph
+	dk_disable(DKOSGManipulator)	# requires openscenegraph
+	dk_disable(DKOSGModel)			# requires openscenegraph
+	dk_disable(DKOSGNotify)			# requires openscenegraph
+	dk_disable(DKOSGPhysics)		# requires openscenegraph
+	dk_disable(DKOSGPicker)			# requires openscenegraph
+	dk_disable(DKOSGRml)			# requires openscenegraph
+	dk_disable(DKOSGStats)			# requires openscenegraph
+	dk_disable(DKOSGTerrain)		# requires openscenegraph
+	dk_disable(DKOSGVideo)			# requires openscenegraph
+	dk_disable(DKOSGViewer)			# requires openscenegraph 
+	dk_disable(DKOSGWidget)			# requires openscenegraph 
+	dk_disable(DKOSGWindow)			# requires openscenegraph 
 	dk_disable(DKScreenRecorder)	# error: 'cvSize' was not declared in this scope
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKVncClient)			# requires libvncserver
@@ -109,6 +124,9 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(lua)					# no CMakeLists.txt
 	dk_disable(mlocate)				# Unable to locate a Java Runtime that supports apt
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
+	dk_disable(osgaudio)			# requires openscenegraph
+	dk_disable(osgbullet)			# requires openscenegraph
+	dk_disable(osgworks)			# requires openscenegraph
 	dk_disable(podofo)				# error: expected ';' at end of declaration
 	dk_disable(rtmidi)				# Undefined symbols for architecture x86_64
 	dk_disable(sdl-gpu)				# SDL for MAC OS X only supports deploying on 10.7 and above
@@ -129,6 +147,21 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(DKMidi)				# requires rtmidi
 	dk_disable(DKOcr)				# requires leptonica, tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
+	dk_disable(DKOSGAudio)			# requires openscenegraph
+	dk_disable(DKOSGCef)			# requires openscenegraph
+	dk_disable(DKOSGLights)			# requires openscenegraph
+	dk_disable(DKOSGManipulator)	# requires openscenegraph
+	dk_disable(DKOSGModel)			# requires openscenegraph
+	dk_disable(DKOSGNotify)			# requires openscenegraph
+	dk_disable(DKOSGPhysics)		# requires openscenegraph
+	dk_disable(DKOSGPicker)			# requires openscenegraph
+	dk_disable(DKOSGRml)			# requires openscenegraph
+	dk_disable(DKOSGStats)			# requires openscenegraph
+	dk_disable(DKOSGTerrain)		# requires openscenegraph
+	dk_disable(DKOSGVideo)			# requires openscenegraph
+	dk_disable(DKOSGViewer)			# requires openscenegraph 
+	dk_disable(DKOSGWidget)			# requires openscenegraph 
+	dk_disable(DKOSGWindow)			# requires openscenegraph 
 	dk_disable(DKScreenRecorder)	# requires opencv
 	dk_disable(DKSDLCef)			# requires cef_binary, sdl
 	dk_disable(DKSFMLWindow)		# requires sfml
@@ -156,6 +189,9 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	dk_disable(openscenegraph)		# CMAKE ERROR: FIndAVFoundation.cmake:23 (IF): unknown arguments specified "LESS" "6.0"
 	dk_disable(opensles)			# could not locate OpenSLES Library
+	dk_disable(osgaudio)			# requires openscenegraph
+	dk_disable(osgbullet)			# requires openscenegraph
+	dk_disable(osgworks)			# requires openscenegraph
 	dk_disable(podofo)				# Could not find FREETYPE
 	dk_disable(sdl-gpu)				# SDL2MAIN_LIBRARY is NOTFOUND
 	dk_disable(sfml)				# Unknown CMake command "find_host_package"
@@ -173,6 +209,21 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKJerryscript)		# requires jerryscript
 	dk_disable(DKOcr)				# requires leptonica, tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
+	dk_disable(DKOSGAudio)			# requires openscenegraph
+	dk_disable(DKOSGCef)			# requires openscenegraph
+	dk_disable(DKOSGLights)			# requires openscenegraph
+	dk_disable(DKOSGManipulator)	# requires openscenegraph
+	dk_disable(DKOSGModel)			# requires openscenegraph
+	dk_disable(DKOSGNotify)			# requires openscenegraph
+	dk_disable(DKOSGPhysics)		# requires openscenegraph
+	dk_disable(DKOSGPicker)			# requires openscenegraph
+	dk_disable(DKOSGRml)			# requires openscenegraph
+	dk_disable(DKOSGStats)			# requires openscenegraph
+	dk_disable(DKOSGTerrain)		# requires openscenegraph
+	dk_disable(DKOSGVideo)			# requires openscenegraph
+	dk_disable(DKOSGViewer)			# requires openscenegraph 
+	dk_disable(DKOSGWidget)			# requires openscenegraph 
+	dk_disable(DKOSGWindow)			# requires openscenegraph 
 	dk_disable(DKScreenRecorder)	# error: 'cvSize' was not declared in this scope
 	dk_disable(DKSFMLWindow)		# requires sfml
 	dk_disable(DKTorrent)			# requires libtorrent
@@ -192,6 +243,9 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(lua)					# no CMakeLists.txt
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	dk_disable(openssl)				# compiling errors
+	dk_disable(osgaudio)			# requires openscenegraph
+	dk_disable(osgbullet)			# requires openscenegraph
+	dk_disable(osgworks)			# requires openscenegraph
 	dk_disable(podofo)				# build errors
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(uwebsockets)			# requires openssl
@@ -206,6 +260,21 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(DKMidi)				# requires rtmidi
 	dk_disable(DKOcr)				# requires leptonica, tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
+	dk_disable(DKOSGAudio)			# requires openscenegraph
+	dk_disable(DKOSGCef)			# requires openscenegraph
+	dk_disable(DKOSGLights)			# requires openscenegraph
+	dk_disable(DKOSGManipulator)	# requires openscenegraph
+	dk_disable(DKOSGModel)			# requires openscenegraph
+	dk_disable(DKOSGNotify)			# requires openscenegraph
+	dk_disable(DKOSGPhysics)		# requires openscenegraph
+	dk_disable(DKOSGPicker)			# requires openscenegraph
+	dk_disable(DKOSGRml)			# requires openscenegraph
+	dk_disable(DKOSGStats)			# requires openscenegraph
+	dk_disable(DKOSGTerrain)		# requires openscenegraph
+	dk_disable(DKOSGVideo)			# requires openscenegraph
+	dk_disable(DKOSGViewer)			# requires openscenegraph 
+	dk_disable(DKOSGWidget)			# requires openscenegraph 
+	dk_disable(DKOSGWindow)			# requires openscenegraph 
 	dk_disable(DKScreenRecorder)	# error: 'cvSize' was not declared in this scope
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKVncClient)			# requires libvncserver
@@ -225,6 +294,9 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(lua)					# no CMakeLists.txt
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
+	dk_disable(osgaudio)			# requires openscenegraph
+	dk_disable(osgbullet)			# requires openscenegraph
+	dk_disable(osgworks)			# requires openscenegraph
 	dk_disable(rtmidi)
 	dk_disable(sdl-gpu)
 	dk_disable(stackwalker)
@@ -250,6 +322,21 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(DKMySql)				# requires curl
 	dk_disable(DKOcr)				# requires leptonica, tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
+	dk_disable(DKOSGAudio)			# requires openscenegraph
+	dk_disable(DKOSGCef)			# requires openscenegraph
+	dk_disable(DKOSGLights)			# requires openscenegraph
+	dk_disable(DKOSGManipulator)	# requires openscenegraph
+	dk_disable(DKOSGModel)			# requires openscenegraph
+	dk_disable(DKOSGNotify)			# requires openscenegraph
+	dk_disable(DKOSGPhysics)		# requires openscenegraph
+	dk_disable(DKOSGPicker)			# requires openscenegraph
+	dk_disable(DKOSGRml)			# requires openscenegraph
+	dk_disable(DKOSGStats)			# requires openscenegraph
+	dk_disable(DKOSGTerrain)		# requires openscenegraph
+	dk_disable(DKOSGVideo)			# requires openscenegraph
+	dk_disable(DKOSGViewer)			# requires openscenegraph 
+	dk_disable(DKOSGWidget)			# requires openscenegraph 
+	dk_disable(DKOSGWindow)			# requires openscenegraph 
 	dk_disable(DKScreenRecorder)	# requires opencv
 	dk_disable(DKSDLCef)			# requires sdl, cef_binary
 	dk_disable(DKSFMLWindow)		# requires sfml
@@ -276,6 +363,9 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	#dk_disable(openscenegraph)
 	dk_disable(openssl)				# Perl v5.10.0 required
+	dk_disable(osgaudio)			# requires openscenegraph
+	dk_disable(osgbullet)			# requires openscenegraph
+	dk_disable(osgworks)			# requires openscenegraph
 	dk_disable(podofo)				# error : cannot use 'throw' with exceptions disabled
 	dk_disable(rtmidi)				# ALSA API requested but no ALSA dev libraries found
 	dk_disable(sdl-gpu)				# The target "SDL_gpu" does not exist in the project
