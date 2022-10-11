@@ -13,7 +13,7 @@ dk_depend(zlib)
 ### IMPORT ###
 dk_import(https://github.com/openscenegraph/OpenSceneGraph.git)
 dk_set(OSG_GL2 ${3RDPARTY}/${OPENSCENEGRAPH_NAME}-GL2)
-dk_set(OSG_PLUGINS osgPlugins-3.4.0)
+dk_set(OSG_PLUGINS osgPlugins-3.7.0)
 if(OpenGL2)
 	dk_set(OSG OSG_GL2)
 endif(OpenGL2)
