@@ -61,7 +61,7 @@ if(ALL_LIBS)
 	dk_enable(osgdb_ac)
 	dk_enable(osgdb_bmp)
 	dk_enable(osgdb_bsp)
-	dk_enable(osgdb_bvh)
+	#dk_enable(osgdb_bvh)					# broken on LINUX
 	dk_enable(osgdb_cfg)
 	#dk_enable(osgdb_curl)					# broken on LINUX
 	dk_enable(osgdb_dds)
