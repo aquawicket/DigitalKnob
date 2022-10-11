@@ -127,7 +127,7 @@ if(ALL_LIBS)
 	dk_enable(osgdb_serializers_osgvolume)	
 	dk_enable(osgdb_shp)
 	dk_enable(osgdb_stl)
-	dk_enable(osgdb_tiff)
+	#dk_enable(osgdb_tiff)				# broken on RASPBERRY
 	dk_enable(osgdb_txp)
 	dk_enable(osgdb_txf)
 	dk_enable(osgdb_trans)
