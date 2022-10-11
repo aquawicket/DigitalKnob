@@ -61,10 +61,10 @@ if(ALL_LIBS)
 	dk_enable(osgdb_ac)
 	dk_enable(osgdb_bmp)
 	dk_enable(osgdb_bsp)
-	#dk_enable(osgdb_bvh)					# broken on LINUX
-	#dk_enable(osgdb_cfg)					# broken on LINUX
-	#dk_enable(osgdb_curl)					# broken on LINUX
-	dk_enable(osgdb_dds)					# broken on LINUX
+	dk_enable(osgdb_bvh)
+	dk_enable(osgdb_cfg)
+	dk_enable(osgdb_curl)
+	dk_enable(osgdb_dds)
 	dk_enable(osgdb_deprecated_osg)
 	dk_enable(osgdb_deprecated_osganimation)
 	dk_enable(osgdb_deprecated_osgfx)
@@ -127,7 +127,7 @@ if(ALL_LIBS)
 	dk_enable(osgdb_serializers_osgvolume)	
 	dk_enable(osgdb_shp)
 	dk_enable(osgdb_stl)
-	#dk_enable(osgdb_tiff)				# broken on RASPBERRY
+	dk_enable(osgdb_tiff)
 	dk_enable(osgdb_txp)
 	dk_enable(osgdb_txf)
 	dk_enable(osgdb_trans)
