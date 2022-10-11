@@ -2,7 +2,7 @@
 
 
 ### DEPEND ###
-# some depends are located below for individual osg libraries
+# some depends are located below for individual osg plugins
 dk_depend(libxml2)
 dk_depend(msinttypes)
 dk_depend(opengl)
