@@ -2,13 +2,11 @@
 
 
 ### DEPEND ###
-dk_depend(openscenegraph)
+dk_depend(freealut)
 dk_depend(ogg)
-dk_depend(vorbis)
-dk_depend(freealut)
-dk_depend(openal-android)
-dk_depend(freealut)
 dk_depend(openal)
+dk_depend(openscenegraph)
+dk_depend(vorbis)
 
 
 ### IMPORT ###
