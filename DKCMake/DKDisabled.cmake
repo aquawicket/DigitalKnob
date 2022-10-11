@@ -124,7 +124,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(lua)					# no CMakeLists.txt
 	dk_disable(mlocate)				# Unable to locate a Java Runtime that supports apt
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
-	#dk_disable(osgaudio)			# requires openscenegraph
+	dk_disable(osgaudio)			# requires openscenegraph. ERROR: 'AL/alut.h' file not found
 	#dk_disable(osgbullet)			# requires openscenegraph
 	#dk_disable(osgworks)			# requires openscenegraph
 	dk_disable(podofo)				# error: expected ';' at end of declaration
