@@ -41,7 +41,9 @@ if(ALL_LIBS)
 	dk_enable(osgAnimation)
 	dk_enable(osgDB)
 	dk_enable(osgFX)
-	#dk_enable(osgGA)						# broken on WINDOWS
+	if(NOT WIN)
+		dk_enable(osgGA)					# broken on WINDOWS
+	endif()
 	dk_enable(osgManipulator)
 	dk_enable(osgParticle)
 	dk_enable(osgPresentation)
@@ -77,9 +79,13 @@ if(ALL_LIBS)
 	dk_enable(osgdb_deprecated_osgvolume)
 	dk_enable(osgdb_deprecated_osgwidget)
 	dk_enable(osgdb_dot)
-	#dk_enable(osgdb_dw)					# broken on MAC
+	if(NOT MAC)
+		dk_enable(osgdb_dw)					# broken on MAC
+	endif()
 	dk_enable(osgdb_dxf)
-	#dk_enable(osgdb_gif)					# broken on MAC
+	if(NOT MAC)
+		dk_enable(osgdb_gif)				# broken on MAC
+	endif()
 	dk_enable(osgdb_ive)
 	dk_enable(osgdb_ffmpeg)
 	dk_enable(osgdb_freetype)
@@ -105,7 +111,9 @@ if(ALL_LIBS)
 	dk_enable(osgdb_p3d)
 	dk_enable(osgdb_pic)
 	dk_enable(osgdb_ply)
-	#dk_enable(osgdb_png)				# broken on MAC
+	if(NOT MAC)
+		dk_enable(osgdb_png)			# broken on MAC
+	endif()
 	dk_enable(osgdb_pnm)
 	dk_enable(osgdb_pov)
 	dk_enable(osgdb_pvr)
