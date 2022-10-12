@@ -104,9 +104,9 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(DKOSGStats)			# requires openscenegraph
 	dk_disable(DKOSGTerrain)		# requires openscenegraph
 	dk_disable(DKOSGVideo)			# requires openscenegraph
-	#dk_disable(DKOSGViewer)			# requires openscenegraph 
+	#dk_disable(DKOSGViewer)		# requires openscenegraph 
 	dk_disable(DKOSGWidget)			# requires openscenegraph 
-	dk_disable(DKOSGWindow)			# requires openscenegraph 
+	dk_disable(DKOSGWindow)			# requires DKOSGViewer
 	dk_disable(DKScreenRecorder)	# error: 'cvSize' was not declared in this scope
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKVncClient)			# requires libvncserver
