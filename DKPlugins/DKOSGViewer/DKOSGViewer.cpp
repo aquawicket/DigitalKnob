@@ -33,8 +33,8 @@
 #include "DK/DKFile.h"
 
 bool DKOSGViewer::Init(){
-	DKCreate("DKOSGNotify");
-	DKCreate("DKGLInfo");
+	DKClass::DKCreate("DKOSGNotify");
+	DKClass::DKCreate("DKGLInfo");
 	viewer = new osgViewer::CompositeViewer;
 	DKApp::AppendLoopFunc(&DKOSGViewer::DoFrame, this);
 	//viewer->setRunMaxFrameRate(60.00);
