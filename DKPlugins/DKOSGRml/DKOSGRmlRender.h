@@ -2,8 +2,8 @@
 #ifndef DKOSGRmlRender_H
 #define DKOSGRmlRender_H
 
-#include <Rml/Core/Core.h>
-#include <Rml/Debugger/Debugger.h>
+#include <RmlUi/Core.h>
+#include <RmlUi/Debugger.h>
 #include <osg/Group>
 #include <osg/Scissor>
 #include <osg/Texture2D>
