@@ -6,7 +6,7 @@
 #include "DK/DKLog.h"
 #include "DK/DKString.h"
 #include "DK/DKApp.h"
-#include "DKOSGViewer.h" //FIXME
+#include "DKOSGViewer/DKOSGViewer.h"
 
 #ifdef WIN32
 #include <osgViewer/api/Win32/GraphicsHandleWin32>
