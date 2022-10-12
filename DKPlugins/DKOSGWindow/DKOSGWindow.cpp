@@ -89,7 +89,6 @@ bool DKOSGWindow::CreateView(){
 #ifdef DESKTOP
 		//dkOsgViewer->viewer->setThreadingModel(osgViewer::ViewerBase::SingleThreaded); 
 		dkOsgViewer->viewer->setDataVariance(osg::Object::DYNAMIC);
-
 		wsi = osg::GraphicsContext::getWindowingSystemInterface();
 		if (!wsi)
 			return DKERROR("Error, no WindowSystemInterface available, cannot create windows\n");
@@ -105,7 +104,7 @@ bool DKOSGWindow::CreateView(){
 		traits->screenNum = screen;
 		gc = osg::GraphicsContext::createGraphicsContext(traits.get());
 		if(!gc.valid())
-			return DKERROR("Error: GraphicsContext invalid\n");
+			return DKERROR("GraphicsContext invalid\n");
         view->getCamera()->setViewport(new osg::Viewport(0, 0, traits->width, traits->height));
         view->getCamera()->setGraphicsContext(gc.get());
 #endif
@@ -117,7 +116,7 @@ bool DKOSGWindow::CreateView(){
 	view->setUpViewerAsEmbeddedInWindow(0, 0, width, height);
 	gc = view->getCamera()->getGraphicsContext();
 	if(!gc.valid())
-		return DKERROR("Error: GraphicsContext invalid\n");
+		return DKERROR("GraphicsContext invalid\n");
 	view->getEventQueue()->setMouseInputRange(0, 0, width, height); //LOOK AT THIS
 #endif
 
@@ -146,7 +145,7 @@ bool DKOSGWindow::CreateView(){
     // Create the Graphics Context
     gc = osg::GraphicsContext::createGraphicsContext(traits.get());
     if(!gc)
-        return DKERROR("DKOSGWindow::CreateView(): ERROR: grapics context invalid. \n");
+        return DKERROR("grapics context invalid. \n");
 	// if the context was created then attach to our viewer
     view->getCamera()->setGraphicsContext(gc);
     view->getCamera()->setViewport(new osg::Viewport(traits->x, traits->y, traits->width, traits->height));
@@ -162,7 +161,7 @@ bool DKOSGWindow::CreateView(){
 	dkOsgViewer->viewer->addView(view);
 	dkOsgViewer->Realize();
 #ifdef WIN32
-	SetHwnd();//get a windows handle
+	SetHwnd(); //get a windows handle
 #endif
 	view->addEventHandler(this);
 
