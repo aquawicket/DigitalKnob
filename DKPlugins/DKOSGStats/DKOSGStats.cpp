@@ -23,6 +23,6 @@ bool DKOSGStats::End(){
 }
 
 bool DKOSGStats::Toggle(){
-	# TODO
+	// TODO
 	return DKERROR("not implemented \n");
 }
