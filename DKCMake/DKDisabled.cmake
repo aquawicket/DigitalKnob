@@ -96,9 +96,8 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(DKOFWindow)			# requires openframeworks
 	dk_disable(DKOSGAudio)			# requires openscenegraph, freealut
 	dk_disable(DKOSGCef)			# build errors
-	#dk_disable(DKOSGNotify)
 	dk_disable(DKOSGPhysics)		# 'btBulletDynamicsCommon.h' file not found
-	dk_disable(DKOSGPicker)
+	#dk_disable(DKOSGPicker)
 	dk_disable(DKOSGRml)			# build errors
 	dk_disable(DKOSGStats)
 	dk_disable(DKOSGTerrain)
