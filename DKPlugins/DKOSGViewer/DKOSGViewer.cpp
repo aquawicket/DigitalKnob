@@ -27,10 +27,10 @@
 #include "DK/stdafx.h"
 #include "DKOSGViewer.h"
 //#include "DKApp.h"
-#include "DKUtil.h"
+#include "DK/DKUtil.h"
 #include <osgDB/FileUtils>
 #include <osgDB/FileNameUtils>
-#include "DKFile.h"
+#include "DK/DKFile.h"
 
 bool DKOSGViewer::Init(){
 	DKCreate("DKOSGNotify");
