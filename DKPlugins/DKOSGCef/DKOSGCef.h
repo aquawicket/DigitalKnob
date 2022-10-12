@@ -3,7 +3,7 @@
 #define DKOSGCef_H
 #include "DK/DK.h"
 #include "DK/DKApp.h"
-#include "DKCef/DKOSGCefKeyboard.h"
+#include "DKOSGCef/DKOSGCefKeyboard.h"
 #include "DKCef/DKCef.h"
 #include "DKOSGWindow/DKOSGWindow.h"
 #include <osg/MatrixTransform>
@@ -79,15 +79,15 @@ public:
 
 	void OnLoadingStateChange(CefRefPtr<CefBrowser> browser, bool isLoading, bool canGoBack, bool canGoForward){
 		//DKLog("BrowserClient::OnLoadingStateChange()\n");
-		DKEvent::SendEvent("GLOBAL", "DKCef_OnLoadingStateChange", "");
+		DKEvents::SendEvent("GLOBAL", "DKCef_OnLoadingStateChange", "");
 	}
 
 	void OnLoadError(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefLoadHandler::ErrorCode errorCode, const CefString& errorText, const CefString& failedUrl){ 
-		DKEvent::SendEvent("GLOBAL", "DKCef_OnLoadError", toString(errorCode));
+		DKEvents::SendEvent("GLOBAL", "DKCef_OnLoadError", toString(errorCode));
 	}
 
 	void OnFullscreenModeChange(CefRefPtr<CefBrowser> browser, bool fullscreen){
-		DKEvent::SendEvent("GLOBAL", "DKCef_OnFullscreen", toString(fullscreen));
+		DKEvents::SendEvent("GLOBAL", "DKCef_OnFullscreen", toString(fullscreen));
 	}
 	
 	bool OnBeforePopup(CefRefPtr<CefBrowser> browser,
@@ -101,10 +101,10 @@ public:
 		CefRefPtr<CefClient>& client,
 		CefBrowserSettings& settings,
 		bool* no_javascript_access) {
-		DKLog("DKOSGCefHandler::OnBeforePopup()\n", DKINFO);
-		//windowInfo.windowless_rendering_enabled = TRUE;
-		//DKOSGCef::Instance("DKOSGCef")->NewBrowser();
-		return false;
+			DKINFO("DKOSGCefHandler::OnBeforePopup()\n");
+			//windowInfo.windowless_rendering_enabled = TRUE;
+			//DKOSGCef::Instance("DKOSGCef")->NewBrowser();
+			return false;
 	}
 
 	void OnBeforeDownload(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDownloadItem> download_item, const CefString& suggested_name, CefRefPtr<CefBeforeDownloadCallback> callback){
@@ -114,7 +114,7 @@ public:
 	}
 
 	void OnBeforeContextMenu(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefContextMenuParams> params, CefRefPtr<CefMenuModel> model){
-		DKLog("OnBeforeContextMenu \n", DKINFO);
+		DKINFO("OnBeforeContextMenu \n");
 		model->Clear(); //remove original context menu
 		DKString data;
 		data += params->GetSelectionText();

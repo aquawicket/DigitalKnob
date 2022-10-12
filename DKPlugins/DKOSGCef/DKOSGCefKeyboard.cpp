@@ -1,4 +1,4 @@
-#include "DKOSGCefKeyboard.h"
+#include "DKOSGCef/DKOSGCefKeyboard.h"
 #include "include/internal/cef_types.h"
 
 #ifdef WIN32
@@ -8,9 +8,7 @@
 #endif
 
 
-//////////////////////////////////////////////////////////////
-unsigned int DKOSGCefKeyboard::getCefModifiers(int modKeyMask)
-{
+unsigned int DKOSGCefKeyboard::getCefModifiers(int modKeyMask){
 	int modifiers = 0;
     if (modKeyMask & osgGA::GUIEventAdapter::MODKEY_CTRL)
 		modifiers |= EVENTFLAG_CONTROL_DOWN;

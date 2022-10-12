@@ -7,20 +7,15 @@
 #include <include/cef_urlrequest.h>
 #ifdef WIN32
 #include <delayimp.h>
-#include "DKWindows.h"
+#include "DK/DKWindows.h"
 #endif
 
 
-/////////////////////
-bool DKOSGCef::Init()
-{
+bool DKOSGCef::Init(){
 	dkOsgWindow = DKOSGWindow::Instance("DKOSGWindow0");
 	dkCef = DKCef::Instance("DKCef");
-	if(!dkOsgWindow || !dkCef){
-		DKLog("DKOSGCef::Init(): INVALID OBJECTS \n", DKERROR);
-		return;
-	}
-
+	if(!dkOsgWindow || !dkCef)
+		return DKERROR("DKOSGCef::Init(): INVALID OBJECTS \n");
 	id = data[1];
 	cef_image = NULL;
 	SetupOsg();
@@ -34,9 +29,7 @@ bool DKOSGCef::Init()
 	return true;
 }
 
-////////////////////
-bool DKOSGCef::End()
-{
+bool DKOSGCef::End(){
 	DKApp::RemoveLoopFunc(&DKOSGCefHandler::DoFrame, cefHandler);
 	//dkOsgWindow->view->removeEventHandler(this); //crash
 	dkOsgWindow->root->removeChild(modelViewMat);
@@ -45,11 +38,9 @@ bool DKOSGCef::End()
 	return true;
 }
 
-////////////////////////////////////
-void* DKOSGCef::OnResize(void* data)
-{
+void* DKOSGCef::OnResize(void* data){
 	DKString str = *static_cast<DKString*>(data);
-	//DKLog("DKOSGCef::OnResize("+str+")\n",DKWARN);
+	//DKWARN("DKOSGCef::OnResize("+str+")\n");
 
 	DKStringArray arry;
 	toStringArray(arry,str,",");
@@ -79,22 +70,17 @@ void* DKOSGCef::OnResize(void* data)
 	return NULL;
 }
 
-/////////////////////////////////
-void* DKOSGCef::GetTexture(void*)
-{
+void* DKOSGCef::GetTexture(void*){
 	if(!cef_image){
-		DKLog("DKOSGCef::GetTexture(): cef_image invalid \n", DKERROR);
+		DKERROR("DKOSGCef::GetTexture(): cef_image invalid \n");
 		return NULL;
 	}
-	if(!cef_image->getImageSizeInBytes()){
+	if(!cef_image->getImageSizeInBytes())
 		return NULL;
-	}
 	return static_cast<void*>(cef_image);
 }
 
-/////////////////////////
-void DKOSGCef::SetupOsg()
-{
+void DKOSGCef::SetupOsg(){
 	cefCam = dkOsgWindow->view->getCamera();
 	cefCam->setRenderOrder(osg::Camera::POST_RENDER);
 	cefCam->setClearMask(GL_DEPTH_BUFFER_BIT);
@@ -231,9 +217,7 @@ void DKOSGCef::SetupOsg()
 	//dkOsgWindow->root->addChild(modelViewMat);
 }
 
-/////////////////////////
-void DKOSGCef::SetupCef()
-{
+void DKOSGCef::SetupCef(){
 	cefHandler = new DKOSGCefHandler(cef_image);
 	cefHandler->dkosgcef = this;
 	DKCef::cefHandler = cefHandler;
@@ -241,11 +225,9 @@ void DKOSGCef::SetupCef()
 	DKApp::AddLoopFunc("RENDER", &DKOSGCefHandler::DoFrame, cefHandler);
 }
 
-////////////////////////////////////////////////////////////////////////////////////
-bool DKOSGCef::handle(const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa)
-{
-	if(ea.getHandled()){ return false; }
-
+bool DKOSGCef::handle(const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa){
+	if(ea.getHandled())
+		return false;
 	switch(ea.getEventType()){ //all mouse
 		case(osgGA::GUIEventAdapter::MOVE) :
 		case(osgGA::GUIEventAdapter::DRAG) :
@@ -389,9 +371,7 @@ bool DKOSGCef::handle(const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter&
 	return false; //allow event to continue
 }
 
-////////////////////////////////////////////////////////////////////////////////////////
-bool DKOSGCef::transparentPixel(osgViewer::View* view, const osgGA::GUIEventAdapter& ea)
-{
+bool DKOSGCef::transparentPixel(osgViewer::View* view, const osgGA::GUIEventAdapter& ea){
 	osg::Image* image = cef_image.get();/*cefHandler->getImage();*/
 	if (image && image->getPixelFormat()){
 		int x = ea.getX();
@@ -406,17 +386,12 @@ bool DKOSGCef::transparentPixel(osgViewer::View* view, const osgGA::GUIEventAdap
 	return false;
 }
 
-///////////////////////////////////////////////////////////////////////
-CefBrowserHost::MouseButtonType DKOSGCef::getCefMouseButton(int button)
-{
+CefBrowserHost::MouseButtonType DKOSGCef::getCefMouseButton(int button){
 	return button == osgGA::GUIEventAdapter::LEFT_MOUSE_BUTTON ? MBT_LEFT : button == osgGA::GUIEventAdapter::RIGHT_MOUSE_BUTTON ? MBT_RIGHT : MBT_MIDDLE;
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////
-bool DKOSGCef::getScrollDeltas(const osgGA::GUIEventAdapter& ea, float &deltaX, float &deltaY)
-{
-	if (ea.getScrollingDeltaX() != 0 || ea.getScrollingDeltaY() != 0)
-	{
+bool DKOSGCef::getScrollDeltas(const osgGA::GUIEventAdapter& ea, float &deltaX, float &deltaY){
+	if (ea.getScrollingDeltaX() != 0 || ea.getScrollingDeltaY() != 0){
 		deltaX = ea.getScrollingDeltaX();
 		deltaY = ea.getScrollingDeltaY();
 		return true;
@@ -446,4 +421,3 @@ bool DKOSGCef::getScrollDeltas(const osgGA::GUIEventAdapter& ea, float &deltaX, 
 
 	return deltaX != 0.0f || deltaY != 0.0f;
 }
-
