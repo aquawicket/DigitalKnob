@@ -100,7 +100,7 @@ if(MAC)  # Disabled for MAC targets
 	#dk_disable(DKOSGManipulator)	# requires openscenegraph
 	#dk_disable(DKOSGModel)			# requires openscenegraph
 	#dk_disable(DKOSGNotify)		# requires openscenegraph
-	#dk_disable(DKOSGPhysics)		# requires openscenegraph
+	dk_disable(DKOSGPhysics)		# 'btBulletDynamicsCommon.h' file not found
 	#dk_disable(DKOSGPicker)		# requires openscenegraph
 	dk_disable(DKOSGRml)			# requires openscenegraph
 	#dk_disable(DKOSGStats)			# requires openscenegraph
@@ -214,7 +214,7 @@ if(LINUX) # Disabled for Linux targets
 	#dk_disable(DKOSGManipulator)	# requires openscenegraph
 	#dk_disable(DKOSGModel)			# requires openscenegraph
 	#dk_disable(DKOSGNotify)		# requires openscenegraph
-	#dk_disable(DKOSGPhysics)		# requires openscenegraph
+	dk_disable(DKOSGPhysics)		# 'btBulletDynamicsCommon.h' file not found
 	#dk_disable(DKOSGPicker)		# requires openscenegraph
 	dk_disable(DKOSGRml)			# requires openscenegraph
 	#dk_disable(DKOSGStats)			# requires openscenegraph
