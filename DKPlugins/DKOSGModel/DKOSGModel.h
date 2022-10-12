@@ -1,9 +1,9 @@
 #pragma once
 #ifndef DKOSGModel_H
 #define DKOSGModel_H
-#include "DK.h"
+#include "DK/DK.h"
 #include <osg/Referenced>
-#include "DKOSGWindow.h"
+#include "DKOSGWindow/DKOSGWindow.h"
 
 class DKOSGModel : public DKObjectT<DKOSGModel>
 {
