@@ -232,7 +232,7 @@ void DKOSGCef::SetupCef(){
 }
 
 bool DKOSGCef::handle(const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa){
-	DKDEBUGFUNC(ea, aa);
+	//DKDEBUGFUNC(ea, aa);
 	if(ea.getHandled())
 		return false;
 	switch(ea.getEventType()){ //all mouse
