@@ -97,8 +97,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(DKOSGAudio)			# requires openscenegraph, freealut
 	dk_disable(DKOSGCef)			# build errors
 	dk_disable(DKOSGLights)
-	dk_disable(DKOSGManipulator)
-	#dk_disable(DKOSGModel)
+	#dk_disable(DKOSGManipulator)
 	dk_disable(DKOSGNotify)
 	dk_disable(DKOSGPhysics)		# 'btBulletDynamicsCommon.h' file not found
 	dk_disable(DKOSGPicker)
