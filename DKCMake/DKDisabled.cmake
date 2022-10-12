@@ -95,7 +95,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(DKOcr)				# requires leptonica, tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
 	dk_disable(DKOSGAudio)			# requires openscenegraph, freealut
-	#dk_disable(DKOSGCef)			# requires openscenegraph
+	dk_disable(DKOSGCef)			# build errors
 	#dk_disable(DKOSGLights)		# requires openscenegraph
 	#dk_disable(DKOSGManipulator)	# requires openscenegraph
 	#dk_disable(DKOSGModel)			# requires openscenegraph
@@ -209,7 +209,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKOcr)				# requires leptonica, tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
 	dk_disable(DKOSGAudio)			# requires openscenegraph
-	#dk_disable(DKOSGCef)			# requires openscenegraph
+	dk_disable(DKOSGCef)			# build errors
 	#dk_disable(DKOSGLights)		# requires openscenegraph
 	#dk_disable(DKOSGManipulator)	# requires openscenegraph
 	#dk_disable(DKOSGModel)			# requires openscenegraph
