@@ -1,6 +1,5 @@
 #include "DK/stdafx.h"
-
-#include "DKOSGRocketGui.h"
+#include "DKOSGRml/DKOSGRmlGui.h"
 #include <osg/Notify>
 #include <osg/TexMat>
 #include <osg/TextureRectangle>
@@ -11,73 +10,55 @@
 #include <osg/ShapeDrawable>
 #include <iostream>
 #include <assert.h>
+#include "DKOSGViewer/DKOSGViewer.h"
+#include "DKOSGWindow/DKOSGWindow.h"
+#include "DKRml/DKRml.h"
 
-#include "DKOSGViewer.h"
-#include "DKOSGWindow.h"
-#include "DKRocket.h"
 
-
-/////////////////////////////////////////////////////////////////////////////
-DKRocketEventListener::DKRocketEventListener(Rocket::Core::Element* rootelem)
-: _rootElement(rootelem), _keys_handled(false), _mouse_handled(false)
-{
+DKRmlEventListener::DKRmlEventListener(Rml::Core::Element* rootelem)
+: _rootElement(rootelem), _keys_handled(false), _mouse_handled(false){
 
 }
 
-DKRocketEventListener::~DKRocketEventListener()
-{
+DKRmlEventListener::~DKRmlEventListener(){
 
 }
 
-/////////////////////////////////////////////////////////////////
-void DKRocketEventListener::ProcessEvent(Rocket::Core::Event& ev)
-{
+void DKRmlEventListener::ProcessEvent(Rml::Core::Event& ev){
 	_keys_handled = _mouse_handled = false;
 	DKString ele = ev.GetTargetElement()->GetId().CString();
-	if (ev.GetTargetElement() != _rootElement && !same(ele,"body")){
+	if (ev.GetTargetElement() != _rootElement && !same(ele,"body"))
 		_keys_handled = _mouse_handled = true;
-    }
 	/*
-    if(ev.GetTargetElement()->HasAttribute("passkeyevents")){
+    if(ev.GetTargetElement()->HasAttribute("passkeyevents"))
 		_keys_handled = false;
-    }
-    if(ev.GetTargetElement()->HasAttribute("passmouseevents")){
+    if(ev.GetTargetElement()->HasAttribute("passmouseevents"))
 		_mouse_handled = false;
-    }
 	*/
 }
 
 
 
-///////////////////////////////////////////////////////
-GUIEventHandler::GUIEventHandler(DKRocketGuiNode* node)
-	: mGUINode(node)
-{
+GUIEventHandler::GUIEventHandler(DKRmlGuiNode* node) : mGUINode(node){
 
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool GUIEventHandler::handle(const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa, osg::Object*, osg::NodeVisitor* nv) 
-{ 
+bool GUIEventHandler::handle(const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa, osg::Object*, osg::NodeVisitor* nv){ 
 	osg::NodePath np;
     osg::NodePathList nodePaths = mGUINode->getParentalNodePaths();
-
     assert(!nodePaths.empty());
-    
     return mGUINode->handle(ea, nodePaths.front(), aa); 
 }
 
-////////////////////////////////////////////////////////////////////////////
-DKRocketGuiNode::DKRocketGuiNode(const std::string& contextname, bool debug)
+DKRmlGuiNode::DKRmlGuiNode(const std::string& contextname, bool debug)
     : _previousTraversalNumber(osg::UNINITIALIZED_FRAME_NUMBER)
     , _contextEventListener(NULL)
     , _camera(NULL)
     , mGUIEventHandler(new GUIEventHandler(this))
 {
-	_renderer = dynamic_cast<DKOSGRocketRender*>(Rocket::Core::GetRenderInterface());
-    if(_renderer == NULL){
+	_renderer = dynamic_cast<DKOSGRmlRender*>(Rml::Core::GetRenderInterface());
+    if(_renderer == NULL)
 		DKLog("GuiNode::GuiNode() _renderer invalid! \n", DKERROR);
-    }
 
     setDataVariance(osg::Object::STATIC);
 
@@ -89,24 +70,22 @@ DKRocketGuiNode::DKRocketGuiNode(const std::string& contextname, bool debug)
     // register for update traversal
     //setNumChildrenRequiringEventTraversal(getNumChildrenRequiringEventTraversal() + 1);
 
-    // create libRocket context for this gui
+    // create libRml context for this gui
 	unsigned int width = DKOSGWindow::Get("DKOSGWindow0")->width;
 	unsigned int height = DKOSGWindow::Get("DKOSGWindow0")->height;
 	//osg::GraphicsContext::WindowingSystemInterface* wsi = osg::GraphicsContext::getWindowingSystemInterface();
     //if(wsi){ wsi->getScreenResolution(osg::GraphicsContext::ScreenIdentifier(0), width, height); }
 
-
-    DKLog("DKRocketGuiNode::DKRocketGuiNode() width="+toString(width)+" height="+toString(height)+" \n",DKINFO);
+    DKINFO("DKRmlGuiNode::DKRmlGuiNode() width="+toString(width)+" height="+toString(height)+" \n");
     
-    _context = Rocket::Core::CreateContext(contextname.c_str(), Rocket::Core::Vector2i(width, height));
+    _context = Rml::Core::CreateContext(contextname.c_str(), Rml::Core::Vector2i(width, height));
     if(_context != NULL){
 		// add error and other debug stuff to this gui. only one gui at a time may have the
 		// debug view
-		if(debug){
-			Rocket::Debugger::Initialise(_context);
-		}
+		if(debug)
+			Rml::Debugger::Initialise(_context);
 
-		_contextEventListener = new DKRocketEventListener(_context->GetRootElement());
+		_contextEventListener = new DKRmlEventListener(_context->GetRootElement());
 		_context->AddEventListener("keydown",     _contextEventListener);
 		_context->AddEventListener("keyup",       _contextEventListener);
 		_context->AddEventListener("mousedown",   _contextEventListener);
@@ -121,32 +100,24 @@ DKRocketGuiNode::DKRocketGuiNode(const std::string& contextname, bool debug)
     ss->setMode(GL_DEPTH_TEST, osg::StateAttribute::OFF);
 }
 
-///////////////////////////////////
-DKRocketGuiNode::~DKRocketGuiNode()
-{
-    if(_context){
+DKRmlGuiNode::~DKRmlGuiNode(){
+    if(_context)
 		_context->RemoveReference();
-    }
     delete _contextEventListener;
 }
 
-/////////////////////////////////////////////////
-void DKRocketGuiNode::setCamera(osg::Camera* cam)
-{
+void DKRmlGuiNode::setCamera(osg::Camera* cam){
 	_camera = cam;
-
     osgViewer::GraphicsWindow* win = dynamic_cast<osgViewer::GraphicsWindow*>(cam->getGraphicsContext());
     if(win){
 		int x, y, w, h;
 		win->getWindowRectangle(x, y, w, h);
-        //DKLog("DKRocketGuiNode::setCamera() x="+toString(x)+" y="+toString(y)+" w="+toString(w)+" h="+toString(h)+" \n",DKINFO);
+        //DKLog("DKRmlGuiNode::setCamera() x="+toString(x)+" y="+toString(y)+" w="+toString(w)+" h="+toString(h)+" \n",DKINFO);
 		setScreenSize(w, h);
     }
 }
 
-////////////////////////////////////////////////////
-void DKRocketGuiNode::traverse(osg::NodeVisitor& nv)
-{
+void DKRmlGuiNode::traverse(osg::NodeVisitor& nv){
 	switch(nv.getVisitorType()){
 		case osg::NodeVisitor::UPDATE_VISITOR:{
 	        // ensure that we do not operate on this node more than
@@ -166,104 +137,102 @@ void DKRocketGuiNode::traverse(osg::NodeVisitor& nv)
 	osg::Group::traverse(nv);
 }
 
-//////////////////////////////////////////////////////////////////////////
-Rocket::Core::Input::KeyIdentifier DKRocketGuiNode::GetKeyCode(int osgkey)
-{
+Rml::Core::Input::KeyIdentifier DKRmlGuiNode::GetKeyCode(int osgkey){
     switch(osgkey){
-		case osgGA::GUIEventAdapter::KEY_Space : return Rocket::Core::Input::KI_SPACE;
-	    case osgGA::GUIEventAdapter::KEY_0 : return Rocket::Core::Input::KI_0;
-	    case osgGA::GUIEventAdapter::KEY_1 : return Rocket::Core::Input::KI_1;
-	    case osgGA::GUIEventAdapter::KEY_2 : return Rocket::Core::Input::KI_2;
-	    case osgGA::GUIEventAdapter::KEY_3 : return Rocket::Core::Input::KI_3;
-	    case osgGA::GUIEventAdapter::KEY_4 : return Rocket::Core::Input::KI_4;
-	    case osgGA::GUIEventAdapter::KEY_5 : return Rocket::Core::Input::KI_5;
-	    case osgGA::GUIEventAdapter::KEY_6 : return Rocket::Core::Input::KI_6;
-	    case osgGA::GUIEventAdapter::KEY_7 : return Rocket::Core::Input::KI_7;
-	    case osgGA::GUIEventAdapter::KEY_8 : return Rocket::Core::Input::KI_8;
-	    case osgGA::GUIEventAdapter::KEY_9 : return Rocket::Core::Input::KI_9;
-	    case osgGA::GUIEventAdapter::KEY_A : return Rocket::Core::Input::KI_A;
-	    case osgGA::GUIEventAdapter::KEY_B : return Rocket::Core::Input::KI_B;
-	    case osgGA::GUIEventAdapter::KEY_C : return Rocket::Core::Input::KI_C;
-	    case osgGA::GUIEventAdapter::KEY_D : return Rocket::Core::Input::KI_D;
-	    case osgGA::GUIEventAdapter::KEY_E : return Rocket::Core::Input::KI_E;
-	    case osgGA::GUIEventAdapter::KEY_F : return Rocket::Core::Input::KI_F;
-	    case osgGA::GUIEventAdapter::KEY_G : return Rocket::Core::Input::KI_G;
-	    case osgGA::GUIEventAdapter::KEY_H : return Rocket::Core::Input::KI_H;
-	    case osgGA::GUIEventAdapter::KEY_I : return Rocket::Core::Input::KI_I;
-	    case osgGA::GUIEventAdapter::KEY_J : return Rocket::Core::Input::KI_J;
-	    case osgGA::GUIEventAdapter::KEY_K : return Rocket::Core::Input::KI_K;
-	    case osgGA::GUIEventAdapter::KEY_L : return Rocket::Core::Input::KI_L;
-	    case osgGA::GUIEventAdapter::KEY_M : return Rocket::Core::Input::KI_M;
-	    case osgGA::GUIEventAdapter::KEY_N : return Rocket::Core::Input::KI_N;
-	    case osgGA::GUIEventAdapter::KEY_O : return Rocket::Core::Input::KI_O;
-	    case osgGA::GUIEventAdapter::KEY_P : return Rocket::Core::Input::KI_P;
-	    case osgGA::GUIEventAdapter::KEY_Q : return Rocket::Core::Input::KI_Q;
-	    case osgGA::GUIEventAdapter::KEY_R : return Rocket::Core::Input::KI_R;
-	    case osgGA::GUIEventAdapter::KEY_S : return Rocket::Core::Input::KI_S;
-	    case osgGA::GUIEventAdapter::KEY_T : return Rocket::Core::Input::KI_T;
-	    case osgGA::GUIEventAdapter::KEY_U : return Rocket::Core::Input::KI_U;
-	    case osgGA::GUIEventAdapter::KEY_V : return Rocket::Core::Input::KI_V;
-	    case osgGA::GUIEventAdapter::KEY_W : return Rocket::Core::Input::KI_W;
-	    case osgGA::GUIEventAdapter::KEY_X : return Rocket::Core::Input::KI_X;
-	    case osgGA::GUIEventAdapter::KEY_Y : return Rocket::Core::Input::KI_Y;
-	    case osgGA::GUIEventAdapter::KEY_Z : return Rocket::Core::Input::KI_Z;
-	    case osgGA::GUIEventAdapter::KEY_F1  : return Rocket::Core::Input::KI_F1;
-	    case osgGA::GUIEventAdapter::KEY_F2  : return Rocket::Core::Input::KI_F2;
-	    case osgGA::GUIEventAdapter::KEY_F3  : return Rocket::Core::Input::KI_F3;
-	    case osgGA::GUIEventAdapter::KEY_F4  : return Rocket::Core::Input::KI_F4;
-	    case osgGA::GUIEventAdapter::KEY_F5  : return Rocket::Core::Input::KI_F5;
-	    case osgGA::GUIEventAdapter::KEY_F6  : return Rocket::Core::Input::KI_F6;
-	    case osgGA::GUIEventAdapter::KEY_F7  : return Rocket::Core::Input::KI_F7;
-	    case osgGA::GUIEventAdapter::KEY_F8  : return Rocket::Core::Input::KI_F8;
-	    case osgGA::GUIEventAdapter::KEY_F9  : return Rocket::Core::Input::KI_F9;
-	    case osgGA::GUIEventAdapter::KEY_F10 : return Rocket::Core::Input::KI_F10;
-	    case osgGA::GUIEventAdapter::KEY_F11 : return Rocket::Core::Input::KI_F11;
-	    case osgGA::GUIEventAdapter::KEY_F12 : return Rocket::Core::Input::KI_F12;
-	    case osgGA::GUIEventAdapter::KEY_F13 : return Rocket::Core::Input::KI_F13;
-	    case osgGA::GUIEventAdapter::KEY_F14 : return Rocket::Core::Input::KI_F14;
-	    case osgGA::GUIEventAdapter::KEY_F15 : return Rocket::Core::Input::KI_F15;
-	    case osgGA::GUIEventAdapter::KEY_F16 : return Rocket::Core::Input::KI_F16;
-	    case osgGA::GUIEventAdapter::KEY_F17 : return Rocket::Core::Input::KI_F17;
-	    case osgGA::GUIEventAdapter::KEY_F18 : return Rocket::Core::Input::KI_F18;
-	    case osgGA::GUIEventAdapter::KEY_F19 : return Rocket::Core::Input::KI_F19;
-	    case osgGA::GUIEventAdapter::KEY_F20 : return Rocket::Core::Input::KI_F20;
-	    case osgGA::GUIEventAdapter::KEY_F21 : return Rocket::Core::Input::KI_F21;
-	    case osgGA::GUIEventAdapter::KEY_F22 : return Rocket::Core::Input::KI_F22;
-	    case osgGA::GUIEventAdapter::KEY_F23 : return Rocket::Core::Input::KI_F23;
-	    case osgGA::GUIEventAdapter::KEY_F24 : return Rocket::Core::Input::KI_F24;
-		case osgGA::GUIEventAdapter::KEY_Plus: return Rocket::Core::Input::KI_ADD;
-	    case osgGA::GUIEventAdapter::KEY_Home: return Rocket::Core::Input::KI_HOME;
-	    case osgGA::GUIEventAdapter::KEY_Left: return Rocket::Core::Input::KI_LEFT;
-	    case osgGA::GUIEventAdapter::KEY_Up: return Rocket::Core::Input::KI_UP;
-	    case osgGA::GUIEventAdapter::KEY_Right: return Rocket::Core::Input::KI_RIGHT;
-	    case osgGA::GUIEventAdapter::KEY_Down: return Rocket::Core::Input::KI_DOWN;
-	    case osgGA::GUIEventAdapter::KEY_Page_Up: return Rocket::Core::Input::KI_PRIOR;
-	    case osgGA::GUIEventAdapter::KEY_Page_Down: return Rocket::Core::Input::KI_NEXT;
-	    case osgGA::GUIEventAdapter::KEY_End: return Rocket::Core::Input::KI_END;
-	    case osgGA::GUIEventAdapter::KEY_Begin: return Rocket::Core::Input::KI_HOME;
-	    case osgGA::GUIEventAdapter::KEY_BackSpace: return Rocket::Core::Input::KI_BACK;
-	    case osgGA::GUIEventAdapter::KEY_Tab: return Rocket::Core::Input::KI_TAB;
-	    case osgGA::GUIEventAdapter::KEY_Clear: return Rocket::Core::Input::KI_CLEAR;
-	    case osgGA::GUIEventAdapter::KEY_Return: return Rocket::Core::Input::KI_RETURN;
-	    case osgGA::GUIEventAdapter::KEY_Pause: return Rocket::Core::Input::KI_PAUSE;
-	    case osgGA::GUIEventAdapter::KEY_Scroll_Lock: return Rocket::Core::Input::KI_SCROLL;
-	    case osgGA::GUIEventAdapter::KEY_Escape: return Rocket::Core::Input::KI_ESCAPE;
-	    case osgGA::GUIEventAdapter::KEY_Delete: return Rocket::Core::Input::KI_DELETE;
-	    case osgGA::GUIEventAdapter::KEY_KP_0: return Rocket::Core::Input::KI_NUMPAD0;
-	    case osgGA::GUIEventAdapter::KEY_KP_1: return Rocket::Core::Input::KI_NUMPAD1;
-	    case osgGA::GUIEventAdapter::KEY_KP_2: return Rocket::Core::Input::KI_NUMPAD2;
-	    case osgGA::GUIEventAdapter::KEY_KP_3: return Rocket::Core::Input::KI_NUMPAD3;
-	    case osgGA::GUIEventAdapter::KEY_KP_4: return Rocket::Core::Input::KI_NUMPAD4;
-	    case osgGA::GUIEventAdapter::KEY_KP_5: return Rocket::Core::Input::KI_NUMPAD5;
-	    case osgGA::GUIEventAdapter::KEY_KP_6: return Rocket::Core::Input::KI_NUMPAD6;
-	    case osgGA::GUIEventAdapter::KEY_KP_7: return Rocket::Core::Input::KI_NUMPAD7;
-	    case osgGA::GUIEventAdapter::KEY_KP_8: return Rocket::Core::Input::KI_NUMPAD8;
-	    case osgGA::GUIEventAdapter::KEY_KP_9: return Rocket::Core::Input::KI_NUMPAD9;
-	    case osgGA::GUIEventAdapter::KEY_Shift_L: return Rocket::Core::Input::KI_LSHIFT;
-	    case osgGA::GUIEventAdapter::KEY_Shift_R: return Rocket::Core::Input::KI_RSHIFT;
-	    case osgGA::GUIEventAdapter::KEY_Control_L: return Rocket::Core::Input::KI_LCONTROL;
-	    case osgGA::GUIEventAdapter::KEY_Control_R: return Rocket::Core::Input::KI_RCONTROL;
-	    default : return Rocket::Core::Input::KI_UNKNOWN;
+		case osgGA::GUIEventAdapter::KEY_Space : return Rml::Core::Input::KI_SPACE;
+	    case osgGA::GUIEventAdapter::KEY_0 : return Rml::Core::Input::KI_0;
+	    case osgGA::GUIEventAdapter::KEY_1 : return Rml::Core::Input::KI_1;
+	    case osgGA::GUIEventAdapter::KEY_2 : return Rml::Core::Input::KI_2;
+	    case osgGA::GUIEventAdapter::KEY_3 : return Rml::Core::Input::KI_3;
+	    case osgGA::GUIEventAdapter::KEY_4 : return Rml::Core::Input::KI_4;
+	    case osgGA::GUIEventAdapter::KEY_5 : return Rml::Core::Input::KI_5;
+	    case osgGA::GUIEventAdapter::KEY_6 : return Rml::Core::Input::KI_6;
+	    case osgGA::GUIEventAdapter::KEY_7 : return Rml::Core::Input::KI_7;
+	    case osgGA::GUIEventAdapter::KEY_8 : return Rml::Core::Input::KI_8;
+	    case osgGA::GUIEventAdapter::KEY_9 : return Rml::Core::Input::KI_9;
+	    case osgGA::GUIEventAdapter::KEY_A : return Rml::Core::Input::KI_A;
+	    case osgGA::GUIEventAdapter::KEY_B : return Rml::Core::Input::KI_B;
+	    case osgGA::GUIEventAdapter::KEY_C : return Rml::Core::Input::KI_C;
+	    case osgGA::GUIEventAdapter::KEY_D : return Rml::Core::Input::KI_D;
+	    case osgGA::GUIEventAdapter::KEY_E : return Rml::Core::Input::KI_E;
+	    case osgGA::GUIEventAdapter::KEY_F : return Rml::Core::Input::KI_F;
+	    case osgGA::GUIEventAdapter::KEY_G : return Rml::Core::Input::KI_G;
+	    case osgGA::GUIEventAdapter::KEY_H : return Rml::Core::Input::KI_H;
+	    case osgGA::GUIEventAdapter::KEY_I : return Rml::Core::Input::KI_I;
+	    case osgGA::GUIEventAdapter::KEY_J : return Rml::Core::Input::KI_J;
+	    case osgGA::GUIEventAdapter::KEY_K : return Rml::Core::Input::KI_K;
+	    case osgGA::GUIEventAdapter::KEY_L : return Rml::Core::Input::KI_L;
+	    case osgGA::GUIEventAdapter::KEY_M : return Rml::Core::Input::KI_M;
+	    case osgGA::GUIEventAdapter::KEY_N : return Rml::Core::Input::KI_N;
+	    case osgGA::GUIEventAdapter::KEY_O : return Rml::Core::Input::KI_O;
+	    case osgGA::GUIEventAdapter::KEY_P : return Rml::Core::Input::KI_P;
+	    case osgGA::GUIEventAdapter::KEY_Q : return Rml::Core::Input::KI_Q;
+	    case osgGA::GUIEventAdapter::KEY_R : return Rml::Core::Input::KI_R;
+	    case osgGA::GUIEventAdapter::KEY_S : return Rml::Core::Input::KI_S;
+	    case osgGA::GUIEventAdapter::KEY_T : return Rml::Core::Input::KI_T;
+	    case osgGA::GUIEventAdapter::KEY_U : return Rml::Core::Input::KI_U;
+	    case osgGA::GUIEventAdapter::KEY_V : return Rml::Core::Input::KI_V;
+	    case osgGA::GUIEventAdapter::KEY_W : return Rml::Core::Input::KI_W;
+	    case osgGA::GUIEventAdapter::KEY_X : return Rml::Core::Input::KI_X;
+	    case osgGA::GUIEventAdapter::KEY_Y : return Rml::Core::Input::KI_Y;
+	    case osgGA::GUIEventAdapter::KEY_Z : return Rml::Core::Input::KI_Z;
+	    case osgGA::GUIEventAdapter::KEY_F1  : return Rml::Core::Input::KI_F1;
+	    case osgGA::GUIEventAdapter::KEY_F2  : return Rml::Core::Input::KI_F2;
+	    case osgGA::GUIEventAdapter::KEY_F3  : return Rml::Core::Input::KI_F3;
+	    case osgGA::GUIEventAdapter::KEY_F4  : return Rml::Core::Input::KI_F4;
+	    case osgGA::GUIEventAdapter::KEY_F5  : return Rml::Core::Input::KI_F5;
+	    case osgGA::GUIEventAdapter::KEY_F6  : return Rml::Core::Input::KI_F6;
+	    case osgGA::GUIEventAdapter::KEY_F7  : return Rml::Core::Input::KI_F7;
+	    case osgGA::GUIEventAdapter::KEY_F8  : return Rml::Core::Input::KI_F8;
+	    case osgGA::GUIEventAdapter::KEY_F9  : return Rml::Core::Input::KI_F9;
+	    case osgGA::GUIEventAdapter::KEY_F10 : return Rml::Core::Input::KI_F10;
+	    case osgGA::GUIEventAdapter::KEY_F11 : return Rml::Core::Input::KI_F11;
+	    case osgGA::GUIEventAdapter::KEY_F12 : return Rml::Core::Input::KI_F12;
+	    case osgGA::GUIEventAdapter::KEY_F13 : return Rml::Core::Input::KI_F13;
+	    case osgGA::GUIEventAdapter::KEY_F14 : return Rml::Core::Input::KI_F14;
+	    case osgGA::GUIEventAdapter::KEY_F15 : return Rml::Core::Input::KI_F15;
+	    case osgGA::GUIEventAdapter::KEY_F16 : return Rml::Core::Input::KI_F16;
+	    case osgGA::GUIEventAdapter::KEY_F17 : return Rml::Core::Input::KI_F17;
+	    case osgGA::GUIEventAdapter::KEY_F18 : return Rml::Core::Input::KI_F18;
+	    case osgGA::GUIEventAdapter::KEY_F19 : return Rml::Core::Input::KI_F19;
+	    case osgGA::GUIEventAdapter::KEY_F20 : return Rml::Core::Input::KI_F20;
+	    case osgGA::GUIEventAdapter::KEY_F21 : return Rml::Core::Input::KI_F21;
+	    case osgGA::GUIEventAdapter::KEY_F22 : return Rml::Core::Input::KI_F22;
+	    case osgGA::GUIEventAdapter::KEY_F23 : return Rml::Core::Input::KI_F23;
+	    case osgGA::GUIEventAdapter::KEY_F24 : return Rml::Core::Input::KI_F24;
+		case osgGA::GUIEventAdapter::KEY_Plus: return Rml::Core::Input::KI_ADD;
+	    case osgGA::GUIEventAdapter::KEY_Home: return Rml::Core::Input::KI_HOME;
+	    case osgGA::GUIEventAdapter::KEY_Left: return Rml::Core::Input::KI_LEFT;
+	    case osgGA::GUIEventAdapter::KEY_Up: return Rml::Core::Input::KI_UP;
+	    case osgGA::GUIEventAdapter::KEY_Right: return Rml::Core::Input::KI_RIGHT;
+	    case osgGA::GUIEventAdapter::KEY_Down: return Rml::Core::Input::KI_DOWN;
+	    case osgGA::GUIEventAdapter::KEY_Page_Up: return Rml::Core::Input::KI_PRIOR;
+	    case osgGA::GUIEventAdapter::KEY_Page_Down: return Rml::Core::Input::KI_NEXT;
+	    case osgGA::GUIEventAdapter::KEY_End: return Rml::Core::Input::KI_END;
+	    case osgGA::GUIEventAdapter::KEY_Begin: return Rml::Core::Input::KI_HOME;
+	    case osgGA::GUIEventAdapter::KEY_BackSpace: return Rml::Core::Input::KI_BACK;
+	    case osgGA::GUIEventAdapter::KEY_Tab: return Rml::Core::Input::KI_TAB;
+	    case osgGA::GUIEventAdapter::KEY_Clear: return Rml::Core::Input::KI_CLEAR;
+	    case osgGA::GUIEventAdapter::KEY_Return: return Rml::Core::Input::KI_RETURN;
+	    case osgGA::GUIEventAdapter::KEY_Pause: return Rml::Core::Input::KI_PAUSE;
+	    case osgGA::GUIEventAdapter::KEY_Scroll_Lock: return Rml::Core::Input::KI_SCROLL;
+	    case osgGA::GUIEventAdapter::KEY_Escape: return Rml::Core::Input::KI_ESCAPE;
+	    case osgGA::GUIEventAdapter::KEY_Delete: return Rml::Core::Input::KI_DELETE;
+	    case osgGA::GUIEventAdapter::KEY_KP_0: return Rml::Core::Input::KI_NUMPAD0;
+	    case osgGA::GUIEventAdapter::KEY_KP_1: return Rml::Core::Input::KI_NUMPAD1;
+	    case osgGA::GUIEventAdapter::KEY_KP_2: return Rml::Core::Input::KI_NUMPAD2;
+	    case osgGA::GUIEventAdapter::KEY_KP_3: return Rml::Core::Input::KI_NUMPAD3;
+	    case osgGA::GUIEventAdapter::KEY_KP_4: return Rml::Core::Input::KI_NUMPAD4;
+	    case osgGA::GUIEventAdapter::KEY_KP_5: return Rml::Core::Input::KI_NUMPAD5;
+	    case osgGA::GUIEventAdapter::KEY_KP_6: return Rml::Core::Input::KI_NUMPAD6;
+	    case osgGA::GUIEventAdapter::KEY_KP_7: return Rml::Core::Input::KI_NUMPAD7;
+	    case osgGA::GUIEventAdapter::KEY_KP_8: return Rml::Core::Input::KI_NUMPAD8;
+	    case osgGA::GUIEventAdapter::KEY_KP_9: return Rml::Core::Input::KI_NUMPAD9;
+	    case osgGA::GUIEventAdapter::KEY_Shift_L: return Rml::Core::Input::KI_LSHIFT;
+	    case osgGA::GUIEventAdapter::KEY_Shift_R: return Rml::Core::Input::KI_RSHIFT;
+	    case osgGA::GUIEventAdapter::KEY_Control_L: return Rml::Core::Input::KI_LCONTROL;
+	    case osgGA::GUIEventAdapter::KEY_Control_R: return Rml::Core::Input::KI_RCONTROL;
+	    default : return Rml::Core::Input::KI_UNKNOWN;
 	}
 
 /*
@@ -361,22 +330,18 @@ KEY_Hyper_L         = 0xFFED,
 KEY_Hyper_R         = 0xFFEE  */
 }
 
-///////////////////////////////////////////////////////
-int DKRocketGuiNode::GetKeyModifiers(int osgModKeyMask)
-{
+int DKRmlGuiNode::GetKeyModifiers(int osgModKeyMask){
 	int ret = 0;
-    if((osgModKeyMask & osgGA::GUIEventAdapter::MODKEY_SHIFT) != 0) ret |= Rocket::Core::Input::KM_SHIFT;
-    if((osgModKeyMask & osgGA::GUIEventAdapter::MODKEY_ALT) != 0) ret |= Rocket::Core::Input::KM_ALT;
-    if((osgModKeyMask & osgGA::GUIEventAdapter::MODKEY_META) != 0) ret |= Rocket::Core::Input::KM_META;
-    if((osgModKeyMask & osgGA::GUIEventAdapter::MODKEY_CAPS_LOCK) != 0) ret |= Rocket::Core::Input::KM_CAPSLOCK;
-	if((osgModKeyMask & osgGA::GUIEventAdapter::MODKEY_NUM_LOCK) != 0) ret |= Rocket::Core::Input::KM_NUMLOCK;
-	if((osgModKeyMask & osgGA::GUIEventAdapter::MODKEY_LEFT_CTRL) != 0) ret |= Rocket::Core::Input::KM_CTRL;
+    if((osgModKeyMask & osgGA::GUIEventAdapter::MODKEY_SHIFT) != 0) ret |= Rml::Core::Input::KM_SHIFT;
+    if((osgModKeyMask & osgGA::GUIEventAdapter::MODKEY_ALT) != 0) ret |= Rml::Core::Input::KM_ALT;
+    if((osgModKeyMask & osgGA::GUIEventAdapter::MODKEY_META) != 0) ret |= Rml::Core::Input::KM_META;
+    if((osgModKeyMask & osgGA::GUIEventAdapter::MODKEY_CAPS_LOCK) != 0) ret |= Rml::Core::Input::KM_CAPSLOCK;
+	if((osgModKeyMask & osgGA::GUIEventAdapter::MODKEY_NUM_LOCK) != 0) ret |= Rml::Core::Input::KM_NUMLOCK;
+	if((osgModKeyMask & osgGA::GUIEventAdapter::MODKEY_LEFT_CTRL) != 0) ret |= Rml::Core::Input::KM_CTRL;
     return ret;
 }
 
-////////////////////////////////////////////
-int DKRocketGuiNode::GetButtonId(int button)
-{
+int DKRmlGuiNode::GetButtonId(int button){
     switch(button){
       case osgGA::GUIEventAdapter:: LEFT_MOUSE_BUTTON  : return 0;
       case osgGA::GUIEventAdapter:: RIGHT_MOUSE_BUTTON : return 1;
@@ -385,13 +350,11 @@ int DKRocketGuiNode::GetButtonId(int button)
     }
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void DKRocketGuiNode::mousePosition(osgViewer::View* view, const osgGA::GUIEventAdapter& ea, const osg::NodePath& nodePath, int& x, int &y)
-{
+void DKRmlGuiNode::mousePosition(osgViewer::View* view, const osgGA::GUIEventAdapter& ea, const osg::NodePath& nodePath, int& x, int &y){
 	if(_camera.valid()){
         // fullscreen
 
-        Rocket::Core::Vector2i dims = _context->GetDimensions();
+        Rml::Core::Vector2i dims = _context->GetDimensions();
         x = ea.getX();
         y = dims.y - ea.getY();
 
@@ -453,33 +416,30 @@ void DKRocketGuiNode::mousePosition(osgViewer::View* view, const osgGA::GUIEvent
 	}
 }
 
-/////////////////////////////////////////////////
-void DKRocketGuiNode::setScreenSize(int w, int h)
-{
+void DKRmlGuiNode::setScreenSize(int w, int h){
 	if(_camera != NULL){
-		// tell libRocket about new size
-		_context->SetDimensions(Rocket::Core::Vector2i(w, h));
+		// tell libRml about new size
+		_context->SetDimensions(Rml::Core::Vector2i(w, h));
 
 		// resize gui camera projection for new screen size
 		_camera->setProjectionMatrix(osg::Matrix::ortho2D(0,w,0,h));
 
-		// libRocket gui seems to stand on its head, not sure why. Flip the view matrix.
+		// libRml gui seems to stand on its head, not sure why. Flip the view matrix.
 		// If anyone has a more elegant solution for this then please contact me
 		_camera->setViewMatrix(osg::Matrix::translate(0, -h, 0) * osg::Matrix::scale(1,-1,1) * osg::Matrix::identity());
 		_camera->setViewport(0,0,w,h);
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool DKRocketGuiNode::handle(const osgGA::GUIEventAdapter& ea, const osg::NodePath& np, osgGA::GUIActionAdapter& aa)
-{
-	if(ea.getHandled()){ return false; }
+bool DKRmlGuiNode::handle(const osgGA::GUIEventAdapter& ea, const osg::NodePath& np, osgGA::GUIActionAdapter& aa){
+	if(ea.getHandled())
+		return false; 
 
-	Rocket::Core::Element* hover;
+	Rml::Core::Element* hover;
     switch(ea.getEventType()){
 		case(osgGA::GUIEventAdapter::KEYDOWN):{
 
-			Rocket::Core::Input::KeyIdentifier key = GetKeyCode(ea.getKey());
+			Rml::Core::Input::KeyIdentifier key = GetKeyCode(ea.getKey());
 			int modifiers = GetKeyModifiers(ea.getModKeyMask());
 
 			//DKLog(ea.getKey());
@@ -717,77 +677,73 @@ bool DKRocketGuiNode::handle(const osgGA::GUIEventAdapter& ea, const osg::NodePa
 				_context->ProcessTextInput((char)ea.getKey());
 			}
 
-			if(ea.getKey() == 24){ //cut
-				key = Rocket::Core::Input::KI_X;
-			}
-
-			if(ea.getKey() == 3){ //copy
-				key = Rocket::Core::Input::KI_C;
-			}
-
-			if(ea.getKey() == 22){ //paste
-				key = Rocket::Core::Input::KI_V;
-			}
-
-			if(ea.getKey() == osgGA::GUIEventAdapter::KEY_KP_End){
+			if(ea.getKey() == 24) //cut
+				key = Rml::Core::Input::KI_X;
+			
+			if(ea.getKey() == 3) //copy
+				key = Rml::Core::Input::KI_C;
+		
+			if(ea.getKey() == 22) //paste
+				key = Rml::Core::Input::KI_V;
+			
+			if(ea.getKey() == osgGA::GUIEventAdapter::KEY_KP_End)
 				_context->ProcessTextInput("1");
-			}
-			if(ea.getKey() == osgGA::GUIEventAdapter::KEY_KP_Down){
+			
+			if(ea.getKey() == osgGA::GUIEventAdapter::KEY_KP_Down)
 				_context->ProcessTextInput("2");
-			}
-			if(ea.getKey() == osgGA::GUIEventAdapter::KEY_KP_Page_Down){
+			
+			if(ea.getKey() == osgGA::GUIEventAdapter::KEY_KP_Page_Down)
 				_context->ProcessTextInput("3");
-			}
-			if(ea.getKey() == osgGA::GUIEventAdapter::KEY_KP_Left){
+			
+			if(ea.getKey() == osgGA::GUIEventAdapter::KEY_KP_Left)
 				_context->ProcessTextInput("4");
-			}
-			if(ea.getKey() == osgGA::GUIEventAdapter::KEY_KP_Begin){
+			
+			if(ea.getKey() == osgGA::GUIEventAdapter::KEY_KP_Begin)
 				_context->ProcessTextInput("5");
-			}
-			if(ea.getKey() == osgGA::GUIEventAdapter::KEY_KP_Right){
+			
+			if(ea.getKey() == osgGA::GUIEventAdapter::KEY_KP_Right)
 				_context->ProcessTextInput("6");
-			}
-			if(ea.getKey() == osgGA::GUIEventAdapter::KEY_KP_Home){
+			
+			if(ea.getKey() == osgGA::GUIEventAdapter::KEY_KP_Home)
 				_context->ProcessTextInput("7");
-			}
-			if(ea.getKey() == osgGA::GUIEventAdapter::KEY_KP_Up){
+			
+			if(ea.getKey() == osgGA::GUIEventAdapter::KEY_KP_Up)
 				_context->ProcessTextInput("8");
-			}
-			if(ea.getKey() == osgGA::GUIEventAdapter::KEY_KP_Page_Up){
+			
+			if(ea.getKey() == osgGA::GUIEventAdapter::KEY_KP_Page_Up)
 				_context->ProcessTextInput("9");
-			}
-			if(ea.getKey() == osgGA::GUIEventAdapter::KEY_KP_Insert){
+			
+			if(ea.getKey() == osgGA::GUIEventAdapter::KEY_KP_Insert)
 				_context->ProcessTextInput("0");
-			}
-			if(ea.getKey() == osgGA::GUIEventAdapter::KEY_KP_Delete){
+			
+			if(ea.getKey() == osgGA::GUIEventAdapter::KEY_KP_Delete)
 				_context->ProcessTextInput(".");
-			}
-			if(ea.getKey() == osgGA::GUIEventAdapter::KEY_KP_Subtract){
+			
+			if(ea.getKey() == osgGA::GUIEventAdapter::KEY_KP_Subtract)
 				_context->ProcessTextInput("-");
-			}
-			if(ea.getKey() == osgGA::GUIEventAdapter::KEY_KP_Add){
+			
+			if(ea.getKey() == osgGA::GUIEventAdapter::KEY_KP_Add)
 				_context->ProcessTextInput("+");
-			}
-			if(ea.getKey() == osgGA::GUIEventAdapter::KEY_KP_Multiply){
+			
+			if(ea.getKey() == osgGA::GUIEventAdapter::KEY_KP_Multiply)
 				_context->ProcessTextInput("*");
-			}
-			if(ea.getKey() == osgGA::GUIEventAdapter::KEY_KP_Divide){
+			
+			if(ea.getKey() == osgGA::GUIEventAdapter::KEY_KP_Divide)
 				_context->ProcessTextInput("/");
-			}
-			if(ea.getKey() == osgGA::GUIEventAdapter::KEY_KP_Enter){
+			
+			if(ea.getKey() == osgGA::GUIEventAdapter::KEY_KP_Enter)
 				_context->ProcessTextInput("\n");
-			}
-			if(ea.getKey() == osgGA::GUIEventAdapter::KEY_Return){
+			
+			if(ea.getKey() == osgGA::GUIEventAdapter::KEY_Return)
 				_context->ProcessTextInput("\n");
-			}
 
 #ifdef ANDROID
-			if(ea.getKey() == 0){ //backspace
-				key = Rocket::Core::Input::KI_BACK;
-			}
-			if(ea.getKey() == 10){ //enter
-				key = Rocket::Core::Input::KI_RETURN;
-			}
+			if(ea.getKey() == 0) //backspace
+				key = Rml::Core::Input::KI_BACK;
+		
+			if(ea.getKey() == 10) //enter
+				key = Rml::Core::Input::KI_RETURN;
+			
 #endif
 
 			_context->ProcessKeyDown(key, modifiers);
@@ -795,7 +751,7 @@ bool DKRocketGuiNode::handle(const osgGA::GUIEventAdapter& ea, const osg::NodePa
 			return false; //pass event to OSG
 		}
 		case(osgGA::GUIEventAdapter::KEYUP):{
-			Rocket::Core::Input::KeyIdentifier key = GetKeyCode(ea.getKey());
+			Rml::Core::Input::KeyIdentifier key = GetKeyCode(ea.getKey());
 			int modifiers = GetKeyModifiers(ea.getModKeyMask());        
 			_context->ProcessKeyUp(key, modifiers);
 			//return (_camera != NULL &&  _contextEventListener->_keys_handled);
@@ -808,10 +764,9 @@ bool DKRocketGuiNode::handle(const osgGA::GUIEventAdapter& ea, const osg::NodePa
 			_context->ProcessMouseMove(x, y, GetKeyModifiers(ea.getModKeyMask()));
        
 			//if we clicked an element, end the event.
-			hover = DKRocket::Get("DKRocket0")->context->GetHoverElement();
-			if(hover && (!has(hover->GetId().CString(), "iframe_"))){
+			hover = DKRml::Get("DKRml0")->context->GetHoverElement();
+			if(hover && (!has(hover->GetId().CString(), "iframe_")))
 				return true;
-			}
 			return false; //pass event to OSG
 		}	
 		case(osgGA::GUIEventAdapter::DRAG):{
@@ -821,10 +776,9 @@ bool DKRocketGuiNode::handle(const osgGA::GUIEventAdapter& ea, const osg::NodePa
 			_context->ProcessMouseMove(x, y, GetKeyModifiers(ea.getModKeyMask()));
        
 			//if we clicked an element, end the event.
-			hover = DKRocket::Get("DKRocket0")->context->GetHoverElement();
-			if(hover && (!has(hover->GetId().CString(), "iframe_"))){
+			hover = DKRml::Get("DKRml0")->context->GetHoverElement();
+			if(hover && (!has(hover->GetId().CString(), "iframe_")))
 				return true;
-			}
 			return false; //pass event to OSG
 		}
 		case(osgGA::GUIEventAdapter::PUSH):{
@@ -835,10 +789,9 @@ bool DKRocketGuiNode::handle(const osgGA::GUIEventAdapter& ea, const osg::NodePa
 			//return true;
 			//return (/*_camera != NULL &&*/  _contextEventListener->_mouse_handled);
 			//if we clicked an element, end the event.
-			hover = DKRocket::Get("DKRocket0")->context->GetHoverElement();
-			if(hover && (!has(hover->GetId().CString(), "iframe_"))){
+			hover = DKRml::Get("DKRml0")->context->GetHoverElement();
+			if(hover && (!has(hover->GetId().CString(), "iframe_")))
 				return true;
-			}
 			return false; //pass event to OSG
 		}
 		case(osgGA::GUIEventAdapter::RELEASE):{
@@ -846,10 +799,9 @@ bool DKRocketGuiNode::handle(const osgGA::GUIEventAdapter& ea, const osg::NodePa
 			//return true;
 			//return (/*_camera != NULL &&*/  _contextEventListener->_mouse_handled);
 			//if we clicked an element, end the event.
-			hover = DKRocket::Get("DKRocket0")->context->GetHoverElement();
-			if(hover && (!has(hover->GetId().CString(), "iframe_"))){
+			hover = DKRml::Get("DKRml0")->context->GetHoverElement();
+			if(hover && (!has(hover->GetId().CString(), "iframe_")))
 				return true;
-			}
 			return false; //pass event to OSG
 		}
 		case(osgGA::GUIEventAdapter::SCROLL):{
@@ -859,12 +811,10 @@ bool DKRocketGuiNode::handle(const osgGA::GUIEventAdapter& ea, const osg::NodePa
 			//return (_camera != NULL &&  _contextEventListener->_mouse_handled);
 #else
 		int wheel_step = 2;
-		if(ea.getScrollingMotion() == osgGA::GUIEventAdapter::SCROLL_DOWN){
+		if(ea.getScrollingMotion() == osgGA::GUIEventAdapter::SCROLL_DOWN)
 			_context->ProcessMouseWheel(wheel_step, GetKeyModifiers(ea.getModKeyMask()));
-		}
-		if(ea.getScrollingMotion() == osgGA::GUIEventAdapter::SCROLL_UP){
+		if(ea.getScrollingMotion() == osgGA::GUIEventAdapter::SCROLL_UP)
 			_context->ProcessMouseWheel(-wheel_step, GetKeyModifiers(ea.getModKeyMask()));
-		}
 #endif
 			return false; //pass event to OSG
 		}

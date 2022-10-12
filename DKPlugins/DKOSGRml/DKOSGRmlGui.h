@@ -3,7 +3,7 @@
 #define DKOSGRmlGui_H
 
 #include "DK/DKLog.h"
-#include <Rml/Core/Core.h>
+#include <RmlUi/Core.h>
 #include <Rml/Debugger/Debugger.h>
 #include <DKOSGRml/DKOSGRmlRender.h>
 #include <osg/Group>
