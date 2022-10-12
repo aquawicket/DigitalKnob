@@ -1,10 +1,8 @@
 #include "DK/stdafx.h"
-#include "DKOSGManipulator.h"
-#include "DKOSGWindow.h"
+#include "DKOSGManipulator/DKOSGManipulator.h"
+#include "DKOSGWindow/DKOSGWindow.h"
 
-/////////////////////////////
-bool DKOSGManipulator::Init()
-{
+bool DKOSGManipulator::Init(){
 	tb = new osgGA::TrackballManipulator;
 	DKString test = data[1];
 	//tb->setHomePosition(osg::Vec3(10., -100., 10.), osg::Vec3(10., 0., 10.), osg::Vec3(0., 0., 0.));
@@ -13,9 +11,7 @@ bool DKOSGManipulator::Init()
 	return true;
 }
 
-////////////////////////////
-bool DKOSGManipulator::End()
-{
+bool DKOSGManipulator::End(){
 	//dkWindow->view->removeEventHandler(tb);
 	//tb = NULL;
 	return true; 
