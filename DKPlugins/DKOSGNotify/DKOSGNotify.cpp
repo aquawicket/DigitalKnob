@@ -50,26 +50,26 @@ void DKOSGNotify::notify(osg::NotifySeverity severity, const char *message){
 void DKOSGNotify::output(osg::NotifySeverity severity, const char *message){
 	switch(severity){
 		case osg::DEBUG_FP:
-			DKLog(message, DKDEBUG);
+			DKDEBUG(message);
 			break;
 		case osg::DEBUG_INFO:
-			DKLog(message, DKDEBUG);
+			DKDEBUG(message);
 			break;
 		case osg::NOTICE:
 		case osg::INFO:
-			DKLog(message, DKINFO);
+			DKINFO(message);
 			break;
 		case osg::WARN:
-			DKLog(message, DKWARN);
+			DKWARN(message);
 			break;
 		case osg::FATAL:
-			DKLog(message, DKERROR);
+			DKERROR(message);
 			break;
 		case osg::ALWAYS:
-			DKLog(message, DKINFO);
+			DKINFO(message);
 			break;
 		default:
-			DKLog(message, DKINFO);
+			DKINFO(message);
 			break;
     }
 }
