@@ -96,18 +96,18 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(DKOFWindow)			# requires openframeworks
 	dk_disable(DKOSGAudio)			# requires openscenegraph, freealut
 	dk_disable(DKOSGCef)			# build errors
-	#dk_disable(DKOSGLights)		# requires openscenegraph
-	#dk_disable(DKOSGManipulator)	# requires openscenegraph
-	#dk_disable(DKOSGModel)			# requires openscenegraph
-	#dk_disable(DKOSGNotify)		# requires openscenegraph
+	dk_disable(DKOSGLights)
+	dk_disable(DKOSGManipulator)
+	dk_disable(DKOSGModel)
+	dk_disable(DKOSGNotify)
 	dk_disable(DKOSGPhysics)		# 'btBulletDynamicsCommon.h' file not found
-	#dk_disable(DKOSGPicker)		# requires openscenegraph
+	dk_disable(DKOSGPicker)
 	dk_disable(DKOSGRml)			# build errors
-	#dk_disable(DKOSGStats)			# requires openscenegraph
-	#dk_disable(DKOSGTerrain)		# requires openscenegraph
+	dk_disable(DKOSGStats)
+	dk_disable(DKOSGTerrain)
 	dk_disable(DKOSGVideo)			# requires openscenegraph
 	dk_disable(DKOSGWidget)			# build errors
-	#dk_disable(DKOSGWindow)		# requires DKOSGViewer
+	dk_disable(DKOSGWindow)
 	dk_disable(DKScreenRecorder)	# error: 'cvSize' was not declared in this scope
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKVncClient)			# requires libvncserver
