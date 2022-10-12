@@ -11,12 +11,12 @@ std::map<int,int> DKOSGWindow::osgMouse;
 
 bool DKOSGWindow::Init(){
 #ifdef ANDROID
-	DKCreate("DKOSGWindowAndroid");
+	DKClass::DKCreate("DKOSGWindowAndroid");
 #endif	
 	//link objects
 	dkOsgViewer = DKOSGViewer::Instance("DKOSGViewer0");
-	if(!dkOsgViewer){ DKLog("DKOSGRocket::Init(): dkOsgViewer invalid \n", DKERROR); return false; }
-
+	if(!dkOsgViewer)
+		return DKERROR("dkOsgViewer invalid \n");
 	lastMouseX = 0;
 	lastMouseY = 0;
 	DKString title;
@@ -443,7 +443,7 @@ bool DKOSGWindow::handle(const osgGA::GUIEventAdapter& ea){
 
 		//clear console
 		if (ctrl && ea.getUnmodifiedKey() == '-'){
-			//DKLog("clear console \n", DKDEBUG);
+			//DKDEBUG("clear console \n");
 			DKUtil::System("cls");
 			return true;
 		}
@@ -453,79 +453,101 @@ bool DKOSGWindow::handle(const osgGA::GUIEventAdapter& ea){
     return false; //alow event to continue
 }
 
-void* DKOSGWindow::GetX(void*){
-	return static_cast<void*>(&traits->x);
+bool DKOSGWindow::GetX(const void* input, void* output){
+	DKDEBUGFUNC(input, output);
+	*(int*)output = traits->x;
+	return true;
 }
 
-void* DKOSGWindow::GetY(void*){
-	return static_cast<void*>(&traits->y);
+bool DKOSGWindow::GetY(const void* input, void* output){
+	DKDEBUGFUNC(input, output);
+	*(int*)output = traits->y;
+	return true;
 }
 
-void* DKOSGWindow::SetX(void* x){
+bool DKOSGWindow::SetX(const void* input, void* output){
+	DKDEBUGFUNC(input, output);
+	int x = *(int*)input;
 	osgViewer::GraphicsWindow* gw = dynamic_cast<osgViewer::GraphicsWindow*>(view->getCamera()->getGraphicsContext());
-	gw->setWindowRectangle(*static_cast<int*>(x), traits->y, traits->width, traits->height);
-	return NULL;
+	gw->setWindowRectangle(x, traits->y, traits->width, traits->height);
+	return true;
 }
 
-void* DKOSGWindow::SetY(void* y){
+bool DKOSGWindow::SetY(const void* input, void* output){
+	DKDEBUGFUNC(input, output);
+	int y = *(int*)input;
 	osgViewer::GraphicsWindow* gw = dynamic_cast<osgViewer::GraphicsWindow*>(view->getCamera()->getGraphicsContext());
-	gw->setWindowRectangle(traits->x, *static_cast<int*>(y), traits->width, traits->height);
-	return NULL;
+	gw->setWindowRectangle(traits->x, y, traits->width, traits->height);
+	return true;
 }
 
-void* DKOSGWindow::GetWidth(void*){
-	return static_cast<int*>(new int(traits->width));
+bool DKOSGWindow::GetWidth(const void* input, void* output){
+	DKDEBUGFUNC(input, output);
+	*(int*)output = traits->width;
+	return true;
 }
 
-void* DKOSGWindow::GetHeight(void*){
-	return static_cast<int*>(new int(traits->height));
+bool DKOSGWindow::GetHeight(const void* input, void* output){
+	DKDEBUGFUNC(input, output);
+	*(int*)output = traits->height;
+	return true;
 }
 
-void* DKOSGWindow::SetWidth(void* width){
+bool DKOSGWindow::SetWidth(const void* input, void* output){
+	DKDEBUGFUNC(input, output);
+	int width = *(int*)input;
 	osgViewer::GraphicsWindow* gw = dynamic_cast<osgViewer::GraphicsWindow*>(view->getCamera()->getGraphicsContext());
-	gw->setWindowRectangle(traits->x, traits->y, *static_cast<int*>(width), traits->height);
-	return NULL;
+	gw->setWindowRectangle(traits->x, traits->y, width, traits->height);
+	return true;
 }
 
-void* DKOSGWindow::SetHeight(void* height){
+bool DKOSGWindow::SetHeight(const void* input, void* output){
+	DKDEBUGFUNC(input, output);
+	int height = *(int*)input;
 	osgViewer::GraphicsWindow* gw = dynamic_cast<osgViewer::GraphicsWindow*>(view->getCamera()->getGraphicsContext());
-	gw->setWindowRectangle(traits->x, traits->y, traits->width, *static_cast<int*>(height));
-	return NULL;
+	gw->setWindowRectangle(traits->x, traits->y, traits->width, height);
+	return true;
 }
 
-void* DKOSGWindow::GetScreenWidth(void*){
+bool DKOSGWindow::GetScreenWidth(const void* input, void* output){
+	DKDEBUGFUNC(input, output);
 	osg::GraphicsContext::WindowingSystemInterface* wsi = osg::GraphicsContext::getWindowingSystemInterface();
 	osg::GraphicsContext::ScreenIdentifier si;
 	unsigned int w, h;
 	wsi->getScreenResolution(si, w, h);
-	DKDEBUG("DKOSGWindow::GetScreenWidth() width="+toString(w)+" \n");
-	return static_cast<int*>(new int(w));
+	*(int*)output = w;
+	return true;
 }
 
-void* DKOSGWindow::GetScreenHeight(void*){
+bool DKOSGWindow::GetScreenHeight(const void* input, void* output){
+	DKDEBUGFUNC(input, output);
 	osg::GraphicsContext::WindowingSystemInterface* wsi = osg::GraphicsContext::getWindowingSystemInterface();
 	osg::GraphicsContext::ScreenIdentifier si;
 	unsigned int w, h;
 	wsi->getScreenResolution(si, w, h);
-	DKDEBUG("DKOSGWindow::GetScreenWidth() width="+toString(h)+" \n");
-	return static_cast<int*>(new int(h));
+	*(int*)output = h;
+	return true;
 }
 
-void* DKOSGWindow::GetMouseX(void*){
-	return &lastMouseX;
+bool DKOSGWindow::GetMouseX(const void* input, void* output){
+	DKDEBUGFUNC(input, output);
+	*(int*)output = lastMouseX;
+	return true;
 }
 
-void* DKOSGWindow::GetMouseY(void*)
-{
-	return &lastMouseY;
+bool DKOSGWindow::GetMouseY(const void* input, void* output){
+	DKDEBUGFUNC(input, output);
+	*(int*)output = lastMouseY;
+	return true
 }
 
-void* DKOSGWindow::GetHwnd(void*){
+bool DKOSGWindow::GetHwnd(const void* input, void* output){
+	DKDEBUGFUNC(input, output);
 #ifdef WIN32
-	return &hwnd;//static_cast<void*>(&hwnd);
+	*(HWND*)output = hwnd;
+	return true;
 #else
-	DKERROR("DKOSGWindow::GetHwnd(): This OS does not have and HWND handle");
-	return NULL;
+	return DKERROR("DKOSGWindow::GetHwnd(): This OS does not have and HWND handle");
 #endif
 }
 
