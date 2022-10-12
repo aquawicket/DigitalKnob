@@ -1,6 +1,6 @@
 #include "DK/stdafx.h"
-#include "DKOSGStats.h"
-#include "DKOSGWindow.h"
+#include "DKOSGStats/DKOSGStats.h"
+#include "DKOSGWindow/DKOSGWindow.h"
 
 bool DKOSGStats::Init(){
 //#ifdef USE_osgText

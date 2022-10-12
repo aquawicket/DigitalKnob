@@ -1,15 +1,14 @@
 #pragma once
 #ifndef DKOSGTerrain_H
 #define DKOSGTerrain_H
-#include "DK.h"
-
+#include "DK/DK.h"
 #include <osg/Node>
 
 class DKOSGTerrain : public DKObjectT<DKOSGTerrain>  
 {
 public:
-	void Init();
-	void End();
+	bool Init();
+	bool End();
 
 private:
 	osg::Node* createBase(const osg::Vec3& center,float radius);
