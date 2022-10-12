@@ -243,8 +243,8 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	dk_disable(openssl)				# compiling errors
 	dk_disable(osgaudio)			# requires openscenegraph
-	dk_disable(osgbullet)			# requires openscenegraph
-	dk_disable(osgworks)			# requires openscenegraph
+	#dk_disable(osgbullet)			# requires openscenegraph
+	#dk_disable(osgworks)			# requires openscenegraph
 	dk_disable(podofo)				# build errors
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(uwebsockets)			# requires openssl
