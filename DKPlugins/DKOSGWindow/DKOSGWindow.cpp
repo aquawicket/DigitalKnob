@@ -10,6 +10,7 @@ std::map<int,int> DKOSGWindow::osgShiftCharCode;
 std::map<int,int> DKOSGWindow::osgMouse;
 
 bool DKOSGWindow::Init(){
+	DKDEBUGFUNC();
 #ifdef ANDROID
 	DKClass::DKCreate("DKOSGWindowAndroid");
 #endif	
@@ -42,6 +43,7 @@ bool DKOSGWindow::Init(){
 }
 
 bool DKOSGWindow::CreateWin(const DKString& title, const int& x, const int& y, const int& w, const int& h){
+	DKDEBUGFUNC(title, x, y, w, h);
 	mTitle = title;
 	winX = x;
 	winY = y;
@@ -77,6 +79,7 @@ bool DKOSGWindow::CreateWin(const DKString& title, const int& x, const int& y, c
 }
 
 bool DKOSGWindow::CreateView(){
+	DKDEBUGFUNC();
 	unsigned int screen = 0;
 	view = new osgViewer::Viewer;
 	//view->setRunFrameScheme(osgViewer::ViewerBase::ON_DEMAND); 
@@ -201,6 +204,7 @@ bool DKOSGWindow::CreateView(){
 
 /*
 bool DKOSGWindow::CreatePIP(const int& x, const int& y, const int& w, const int& h, DKOSGWindow* parent){
+	DKDEBUGFUNC(x, y, w, h, parent);
 	winX = x;
 	winY = y;
 	width = w;
@@ -264,6 +268,7 @@ bool DKOSGWindow::CreatePIP(const int& x, const int& y, const int& w, const int&
 */
 
 bool DKOSGWindow::SetTitle(const DKString& title){
+	DKDEBUGFUNC(title);
 #ifdef DESKTOP
 	//Set Window Title
 	typedef osgViewer::Viewer::Windows Windows;
@@ -278,6 +283,7 @@ bool DKOSGWindow::SetTitle(const DKString& title){
 }
 
 bool DKOSGWindow::SetIcon(const DKString& file){
+	DKDEBUGFUNC(file);
 #ifdef WIN32
 	HICON hIcon = (HICON)LoadImage(NULL, file.c_str(), IMAGE_ICON, 32, 32, LR_LOADFROMFILE);
 	SendMessage( hwnd, WM_SETICON, ICON_SMALL, (LPARAM)hIcon );
@@ -289,6 +295,7 @@ bool DKOSGWindow::SetIcon(const DKString& file){
 
 #ifdef WIN32
 bool DKOSGWindow::SetHwnd(){
+	DKDEBUGFUNC();
 	/*
 	typedef osgViewer::Viewer::Windows Windows;
 	Windows windows;
@@ -309,59 +316,62 @@ bool DKOSGWindow::SetHwnd(){
 #endif
 
 int DKOSGWindow::getNumScreens(){
+	DKDEBUGFUNC();
     osg::GraphicsContext::WindowingSystemInterface* wsi = osg::GraphicsContext::getWindowingSystemInterface();
     osg::GraphicsContext::ScreenIdentifier si;
     si.readDISPLAY();
     return wsi->getNumScreens(si);
 }
 
-bool DKOSGWindow::handle(const osgGA::GUIEventAdapter& ea,osgGA::GUIActionAdapter&){
+bool DKOSGWindow::handle(const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter&){
+	//DKDEBUGFUNC(ea);
 	return handle(ea);
 }
 
 bool DKOSGWindow::handle(const osgGA::GUIEventAdapter& ea){
+	//DKDEBUGFUNC(ea);
 	if(ea.getEventType() == osgGA::GUIEventAdapter::KEYDOWN){ 
 		//DKDEBUG("DKOSGWindow::KEYDOWN("+toString(ea.getUnmodifiedKey())+")\n");
 		if(ea.getUnmodifiedKey() > 96 && ea.getUnmodifiedKey() < 123){ //letter
 			if(ea.getModKeyMask() & osgGA::GUIEventAdapter::MODKEY_SHIFT && ea.getModKeyMask() & osgGA::GUIEventAdapter::MODKEY_CAPS_LOCK){ //both = lowercase
-				DKEvent::SendEvent("GLOBAL", "keypress", toString(osgCharCode[ea.getUnmodifiedKey()]));
+				DKEvents::SendEvent("GLOBAL", "keypress", toString(osgCharCode[ea.getUnmodifiedKey()]));
 			}
 			else if(ea.getModKeyMask() & osgGA::GUIEventAdapter::MODKEY_SHIFT || ea.getModKeyMask() & osgGA::GUIEventAdapter::MODKEY_CAPS_LOCK){ //1 = uppercase
-				DKEvent::SendEvent("GLOBAL", "keypress", toString(osgShiftCharCode[ea.getUnmodifiedKey()]));
+				DKEvents::SendEvent("GLOBAL", "keypress", toString(osgShiftCharCode[ea.getUnmodifiedKey()]));
 			}
 			else{
-				DKEvent::SendEvent("GLOBAL", "keypress", toString(osgCharCode[ea.getUnmodifiedKey()])); //lowercase
+				DKEvents::SendEvent("GLOBAL", "keypress", toString(osgCharCode[ea.getUnmodifiedKey()])); //lowercase
 			}
 		}
 		else if(ea.getModKeyMask() & osgGA::GUIEventAdapter::MODKEY_SHIFT){ //other character keys
-			DKEvent::SendEvent("GLOBAL", "keypress", toString(osgShiftCharCode[ea.getUnmodifiedKey()])); //shifted symbol
+			DKEvents::SendEvent("GLOBAL", "keypress", toString(osgShiftCharCode[ea.getUnmodifiedKey()])); //shifted symbol
 		}
 		else{
-			DKEvent::SendEvent("GLOBAL", "keypress", toString(osgCharCode[ea.getUnmodifiedKey()])); //symbol
+			DKEvents::SendEvent("GLOBAL", "keypress", toString(osgCharCode[ea.getUnmodifiedKey()])); //symbol
 		}
-		DKEvent::SendEvent("GLOBAL", "keydown", toString(osgKeyCode[ea.getUnmodifiedKey()])); //keycode
+		DKEvents::SendEvent("GLOBAL", "keydown", toString(osgKeyCode[ea.getUnmodifiedKey()])); //keycode
 	}
 	if(ea.getEventType() == osgGA::GUIEventAdapter::KEYUP){ 
 		int key = ea.getUnmodifiedKey();
-		DKEvent::SendEvent("GLOBAL", "keyup", toString(osgKeyCode[key]));
+		DKEvents::SendEvent("GLOBAL", "keyup", toString(osgKeyCode[key]));
 	}
 	if(ea.getEventType() == osgGA::GUIEventAdapter::PUSH){
 		int button = ea.getButton();
-		DKEvent::SendEvent("GLOBAL", "mousedown", toString(osgMouse[button]));
+		DKEvents::SendEvent("GLOBAL", "mousedown", toString(osgMouse[button]));
 	}
 	if(ea.getEventType() == osgGA::GUIEventAdapter::RELEASE){
 		int button = ea.getButton();
-		DKEvent::SendEvent("GLOBAL", "mouseup", toString(osgMouse[button]));
+		DKEvents::SendEvent("GLOBAL", "mouseup", toString(osgMouse[button]));
 		if(osgMouse[button] == 3){
-			DKEvent::SendEvent("GLOBAL", "contextmenu", toString(osgMouse[button]));
+			DKEvents::SendEvent("GLOBAL", "contextmenu", toString(osgMouse[button]));
 		}
 		else{
-			DKEvent::SendEvent("GLOBAL", "click", toString(osgMouse[button]));
+			DKEvents::SendEvent("GLOBAL", "click", toString(osgMouse[button]));
 		}
 	}
 	if(ea.getEventType() == osgGA::GUIEventAdapter::DOUBLECLICK){
 		int button = ea.getButton();
-		DKEvent::SendEvent("GLOBAL", "dblclick", toString(osgMouse[button]));
+		DKEvents::SendEvent("GLOBAL", "dblclick", toString(osgMouse[button]));
 	}
 	if(ea.getEventType() == osgGA::GUIEventAdapter::MOVE){
 		if(lastMouseX != ea.getX() || lastMouseY != (ea.getYmax() - ea.getY())){
@@ -369,18 +379,18 @@ bool DKOSGWindow::handle(const osgGA::GUIEventAdapter& ea){
 			lastMouseY = ea.getYmax() - ea.getY();
 			int screenX = ea.getX() + ea.getWindowX();
 			int screenY = ea.getYmax() - ea.getY() + ea.getWindowY();
-			DKEvent::SendEvent("GLOBAL", "mousemove", toString(lastMouseX)+","+toString(lastMouseX)+","+toString(screenX)+","+toString(screenY));
+			DKEvents::SendEvent("GLOBAL", "mousemove", toString(lastMouseX)+","+toString(lastMouseX)+","+toString(screenX)+","+toString(screenY));
 		}
 	}
 	if(ea.getEventType() == osgGA::GUIEventAdapter::SCROLL){
 		int wheel_step = 1;
 #ifdef MAC
-		DKEvent::SendEvent("GLOBAL", "wheel", toString(ea.getScrollingDeltaY()));
+		DKEvents::SendEvent("GLOBAL", "wheel", toString(ea.getScrollingDeltaY()));
 #else
 		if(ea.getScrollingMotion() == osgGA::GUIEventAdapter::SCROLL_DOWN)
-			DKEvent::SendEvent("GLOBAL", "wheel", toString(-wheel_step));
+			DKEvents::SendEvent("GLOBAL", "wheel", toString(-wheel_step));
 		if(ea.getScrollingMotion() == osgGA::GUIEventAdapter::SCROLL_UP)
-			DKEvent::SendEvent("GLOBAL", "wheel", toString(wheel_step));
+			DKEvents::SendEvent("GLOBAL", "wheel", toString(wheel_step));
 #endif
 	}
 	/*
@@ -394,7 +404,7 @@ bool DKOSGWindow::handle(const osgGA::GUIEventAdapter& ea){
 		if(width != ea.getWindowWidth() || height != ea.getWindowHeight()){
 			width = ea.getWindowWidth();
 			height = ea.getWindowHeight();
-			DKEvent::SendEvent("GLOBAL", "resize", toString(width)+","+toString(height));
+			DKEvents::SendEvent("GLOBAL", "resize", toString(width)+","+toString(height));
 		}
 	}
 	*/
@@ -403,12 +413,12 @@ bool DKOSGWindow::handle(const osgGA::GUIEventAdapter& ea){
 		if(width != gc->getTraits()->width || height != gc->getTraits()->height){
 			width = gc->getTraits()->width;
 			height = gc->getTraits()->height;
-			DKEvent::SendEvent("GLOBAL", "resize", toString(width)+","+toString(height));
+			DKEvents::SendEvent("GLOBAL", "resize", toString(width)+","+toString(height));
 			return true;
 		}
 	}
 	if(ea.getEventType() == osgGA::GUIEventAdapter::CLOSE_WINDOW){
-		DKEvent::SendEvent("GLOBAL", "close_window", "true");
+		DKEvents::SendEvent("GLOBAL", "close_window", "true");
 		return true;
 	}
 
@@ -545,6 +555,7 @@ bool DKOSGWindow::GetHwnd(const void* input, void* output){
 }
 
 void DKOSGWindow::MapInputs(){
+	DKDEBUGFUNC();
 	osgKeyCode[65307] = 27; //esc
 	osgKeyCode[65470] = 112; //f1
 	osgKeyCode[65471] = 113; //f2
