@@ -1,12 +1,10 @@
 #include "DK/stdafx.h"
-#include "DKOSGLights.h"
-#include "DKOSGWindow.h"
+#include "DKOSGLights/DKOSGLights.h"
+#include "DKOSGWindow/DKOSGWindow.h"
 #include <osg/Point>
 
 
-////////////////////////
-bool DKOSGLights::Init()
-{
+bool DKOSGLights::Init(){
 	osg::Light* pLight = new osg::Light;
     pLight->setLightNum( 4 );                        
 	pLight->setPosition(osg::Vec4(1.0f,0.0f,1.0f,1.0f));  // last param    w = 0.0 directional light (direction) w = 1.0 point light (position)
@@ -25,9 +23,7 @@ bool DKOSGLights::Init()
 	return true;
 }
 
-///////////////////////////////////
-osg::Node* DKOSGLights::createLights()
-{
+osg::Node* DKOSGLights::createLights(){
 	osg::StateSet* rootStateSet = new osg::StateSet;
     DKOSGWindow::Instance("DKOSGWindow")->world->setStateSet(rootStateSet);
 
