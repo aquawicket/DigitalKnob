@@ -199,13 +199,8 @@ bool DKOSGWindow::CreateView(){
 	return true;
 }
 
-
-
-
 /*
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool DKOSGWindow::CreatePIP(const int& x, const int& y, const int& w, const int& h, DKOSGWindow* parent)
-{
+bool DKOSGWindow::CreatePIP(const int& x, const int& y, const int& w, const int& h, DKOSGWindow* parent){
 	winX = x;
 	winY = y;
 	width = w;
@@ -268,7 +263,6 @@ bool DKOSGWindow::CreatePIP(const int& x, const int& y, const int& w, const int&
 }
 */
 
-
 bool DKOSGWindow::SetTitle(const DKString& title){
 #ifdef DESKTOP
 	//Set Window Title
@@ -300,12 +294,11 @@ bool DKOSGWindow::SetHwnd(){
 	Windows windows;
 	view->getWindows(windows);
 	for (Windows::iterator window = windows.begin();window != windows.end(); ++window){
-		DKLog("!window!\n", DKDEBUG);
+		DKDEBUG("!window!\n");
 		hwnd = dynamic_cast<osgViewer::GraphicsHandleWin32*>(*window);
 	}
 	return true;
 	*/
-
 	osgViewer::GraphicsHandleWin32* gw = 
     dynamic_cast<osgViewer::GraphicsHandleWin32*> (        
     view->getCamera()->getGraphicsContext());
@@ -328,7 +321,7 @@ bool DKOSGWindow::handle(const osgGA::GUIEventAdapter& ea,osgGA::GUIActionAdapte
 
 bool DKOSGWindow::handle(const osgGA::GUIEventAdapter& ea){
 	if(ea.getEventType() == osgGA::GUIEventAdapter::KEYDOWN){ 
-		//DKLog("DKOSGWindow::KEYDOWN("+toString(ea.getUnmodifiedKey())+")\n", DKDEBUG);
+		//DKDEBUG("DKOSGWindow::KEYDOWN("+toString(ea.getUnmodifiedKey())+")\n");
 		if(ea.getUnmodifiedKey() > 96 && ea.getUnmodifiedKey() < 123){ //letter
 			if(ea.getModKeyMask() & osgGA::GUIEventAdapter::MODKEY_SHIFT && ea.getModKeyMask() & osgGA::GUIEventAdapter::MODKEY_CAPS_LOCK){ //both = lowercase
 				DKEvent::SendEvent("GLOBAL", "keypress", toString(osgCharCode[ea.getUnmodifiedKey()]));
@@ -538,7 +531,7 @@ bool DKOSGWindow::GetMouseX(const void* input, void* output){
 bool DKOSGWindow::GetMouseY(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	*(int*)output = lastMouseY;
-	return true
+	return true;
 }
 
 bool DKOSGWindow::GetHwnd(const void* input, void* output){
