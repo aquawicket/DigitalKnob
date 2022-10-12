@@ -41,9 +41,7 @@ if(ALL_LIBS)
 	dk_enable(osgAnimation)
 	dk_enable(osgDB)
 	dk_enable(osgFX)
-	if(NOT WIN)
-		dk_enable(osgGA)					# broken on WINDOWS
-	endif()
+	dk_enable(osgGA)					# broken on WINDOWS
 	dk_enable(osgManipulator)
 	dk_enable(osgParticle)
 	dk_enable(osgPresentation)

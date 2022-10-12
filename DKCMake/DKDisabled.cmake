@@ -77,6 +77,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(lua)					# no CMakeLists.txt
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
+	dk_disable(openscenegraph)		# osgGA broken
 	dk_disable(osgaudio)			# requires openscenegraph
 	dk_disable(osgbullet)			# requires openscenegraph
 	dk_disable(osgworks)			# requires openscenegraph
