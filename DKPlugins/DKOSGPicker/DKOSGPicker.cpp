@@ -104,7 +104,7 @@ void DKOSGPicker::pick(osgViewer::View* view, const osgGA::GUIEventAdapter& ea){
             gdlist += os.str();
         }
     }
-    DKLog(gdlist, DKINFO);
+    DKINFO(gdlist);
 }
 
 void DKOSGPicker::remove(osgViewer::View* view, const osgGA::GUIEventAdapter& ea){
