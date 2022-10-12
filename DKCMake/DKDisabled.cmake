@@ -106,7 +106,7 @@ if(MAC)  # Disabled for MAC targets
 	#dk_disable(DKOSGStats)			# requires openscenegraph
 	#dk_disable(DKOSGTerrain)		# requires openscenegraph
 	dk_disable(DKOSGVideo)			# requires openscenegraph
-	#dk_disable(DKOSGWidget)			# requires openscenegraph 
+	dk_disable(DKOSGWidget)			# requires openscenegraph 
 	#dk_disable(DKOSGWindow)		# requires DKOSGViewer
 	dk_disable(DKScreenRecorder)	# error: 'cvSize' was not declared in this scope
 	dk_disable(DKTorrent)			# requires libtorrent
@@ -217,12 +217,12 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKOSGPhysics)		# requires openscenegraph
 	dk_disable(DKOSGPicker)			# requires openscenegraph
 	dk_disable(DKOSGRml)			# requires openscenegraph
-	dk_disable(DKOSGStats)			# requires openscenegraph
-	dk_disable(DKOSGTerrain)		# requires openscenegraph
+	#dk_disable(DKOSGStats)			# requires openscenegraph
+	#dk_disable(DKOSGTerrain)		# requires openscenegraph
 	dk_disable(DKOSGVideo)			# requires openscenegraph
-	dk_disable(DKOSGViewer)			# requires openscenegraph 
+	#dk_disable(DKOSGViewer)		# requires openscenegraph 
 	dk_disable(DKOSGWidget)			# requires openscenegraph 
-	dk_disable(DKOSGWindow)			# requires openscenegraph 
+	#dk_disable(DKOSGWindow)		# requires openscenegraph 
 	dk_disable(DKScreenRecorder)	# error: 'cvSize' was not declared in this scope
 	dk_disable(DKSFMLWindow)		# requires sfml
 	dk_disable(DKTorrent)			# requires libtorrent
@@ -243,8 +243,6 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	dk_disable(openssl)				# compiling errors
 	dk_disable(osgaudio)			# requires openscenegraph
-	#dk_disable(osgbullet)			# requires openscenegraph
-	#dk_disable(osgworks)			# requires openscenegraph
 	dk_disable(podofo)				# build errors
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(uwebsockets)			# requires openssl
