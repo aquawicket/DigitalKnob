@@ -2,7 +2,7 @@
 #ifndef DKOSGRmlSystem_H
 #define DKOSGRmlSystem_H
 
-#include <Rml/Core/Core.h>
+#include <RmlUi/Core.h>
 #include <osg/Notify>
 #include <osg/Timer>
 
@@ -23,7 +23,6 @@ public:
 	/// @param[in] message Message to log.
 	/// @return True to continue execution, false to break into the debugger.
 	virtual bool LogMessage(Rml::Core::Log::Type type, const Rml::Core::String& message);
-
 
 	/// Called when this system interface is no longer required.
 	virtual void Release(){}

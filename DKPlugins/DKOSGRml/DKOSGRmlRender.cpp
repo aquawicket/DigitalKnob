@@ -9,7 +9,7 @@
 #include <osgDB/ReadFile>
 #include <osg/ImageStream>
 #include <osg/ImageSequence>
-#include <Rml/Core/Texture.h>
+#include <RmlUi/Texture.h>
 
 #include "DKGLInfo.h"
 
