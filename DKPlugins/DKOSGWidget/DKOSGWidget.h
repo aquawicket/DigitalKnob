@@ -2,7 +2,7 @@
 #ifndef DKOSGWidget_H
 #define DKOSGWidget_H
 
-#include "DKOSGWindow.h"
+#include "DKOSGWindow/DKOSGWindow.h"
 #include <osgWidget/Window>
 #include <osgWidget/WindowManager>
 #include <osgWidget/ViewerEventHandlers>
