@@ -81,8 +81,8 @@ if(ALL_LIBS)
 	dk_enable(osgdb_deprecated_osgvolume)
 	dk_enable(osgdb_deprecated_osgwidget)
 	dk_enable(osgdb_dot)
-	if(NOT MAC)
-		dk_enable(osgdb_dw)					# broken on MAC
+	if(NOT MAC AND NOT LINUX)
+		dk_enable(osgdb_dw)					# broken on MAC, LINUX
 	endif()
 	dk_enable(osgdb_dxf)
 	if(NOT MAC AND NOT LINUX)
