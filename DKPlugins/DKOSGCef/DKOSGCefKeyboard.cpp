@@ -9,6 +9,7 @@
 
 
 unsigned int DKOSGCefKeyboard::getCefModifiers(int modKeyMask){
+	DKDEBUGFUNC(modKeyMask);
 	int modifiers = 0;
     if (modKeyMask & osgGA::GUIEventAdapter::MODKEY_CTRL)
 		modifiers |= EVENTFLAG_CONTROL_DOWN;

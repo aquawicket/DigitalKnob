@@ -12,6 +12,7 @@
 
 
 bool DKOSGCef::Init(){
+	DKDEBUGFUNC();
 	dkOsgWindow = DKOSGWindow::Instance("DKOSGWindow0");
 	dkCef = DKCef::Instance("DKCef");
 	if(!dkOsgWindow || !dkCef)
@@ -30,6 +31,7 @@ bool DKOSGCef::Init(){
 }
 
 bool DKOSGCef::End(){
+	DKDEBUGFUNC();
 	DKApp::RemoveLoopFunc(&DKOSGCefHandler::DoFrame, cefHandler);
 	//dkOsgWindow->view->removeEventHandler(this); //crash
 	dkOsgWindow->root->removeChild(modelViewMat);
@@ -39,6 +41,7 @@ bool DKOSGCef::End(){
 }
 
 void* DKOSGCef::OnResize(void* data){
+	DKDEBUGFUNC(data);
 	DKString str = *static_cast<DKString*>(data);
 	//DKWARN("DKOSGCef::OnResize("+str+")\n");
 
@@ -71,6 +74,7 @@ void* DKOSGCef::OnResize(void* data){
 }
 
 void* DKOSGCef::GetTexture(void*){
+	//DKDEBUGFUNC();
 	if(!cef_image){
 		DKERROR("DKOSGCef::GetTexture(): cef_image invalid \n");
 		return NULL;
@@ -81,6 +85,7 @@ void* DKOSGCef::GetTexture(void*){
 }
 
 void DKOSGCef::SetupOsg(){
+	DKDEBUGFUNC();
 	cefCam = dkOsgWindow->view->getCamera();
 	cefCam->setRenderOrder(osg::Camera::POST_RENDER);
 	cefCam->setClearMask(GL_DEPTH_BUFFER_BIT);
@@ -218,6 +223,7 @@ void DKOSGCef::SetupOsg(){
 }
 
 void DKOSGCef::SetupCef(){
+	DKDEBUGFUNC();
 	cefHandler = new DKOSGCefHandler(cef_image);
 	cefHandler->dkosgcef = this;
 	DKCef::cefHandler = cefHandler;
@@ -226,6 +232,7 @@ void DKOSGCef::SetupCef(){
 }
 
 bool DKOSGCef::handle(const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa){
+	DKDEBUGFUNC(ea, aa);
 	if(ea.getHandled())
 		return false;
 	switch(ea.getEventType()){ //all mouse
@@ -372,6 +379,7 @@ bool DKOSGCef::handle(const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter&
 }
 
 bool DKOSGCef::transparentPixel(osgViewer::View* view, const osgGA::GUIEventAdapter& ea){
+	DKDEBUGFUNC(view, ea);
 	osg::Image* image = cef_image.get();/*cefHandler->getImage();*/
 	if (image && image->getPixelFormat()){
 		int x = ea.getX();
@@ -387,10 +395,12 @@ bool DKOSGCef::transparentPixel(osgViewer::View* view, const osgGA::GUIEventAdap
 }
 
 CefBrowserHost::MouseButtonType DKOSGCef::getCefMouseButton(int button){
+	DKDEBUGFUNC(button);
 	return button == osgGA::GUIEventAdapter::LEFT_MOUSE_BUTTON ? MBT_LEFT : button == osgGA::GUIEventAdapter::RIGHT_MOUSE_BUTTON ? MBT_RIGHT : MBT_MIDDLE;
 }
 
 bool DKOSGCef::getScrollDeltas(const osgGA::GUIEventAdapter& ea, float &deltaX, float &deltaY){
+	DKDEBUGFUNC(ea, deltaX, deltaY);
 	if (ea.getScrollingDeltaX() != 0 || ea.getScrollingDeltaY() != 0){
 		deltaX = ea.getScrollingDeltaX();
 		deltaY = ea.getScrollingDeltaY();

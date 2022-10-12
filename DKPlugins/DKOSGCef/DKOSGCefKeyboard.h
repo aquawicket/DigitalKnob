@@ -8,7 +8,9 @@ class DKOSGCefKeyboard
 {
 public:
 
-	DKOSGCefKeyboard(){};
+	DKOSGCefKeyboard(){
+		DKDEBUGFUNC();
+	};
     unsigned int getCefModifiers(int modKeyMask);
 };
 

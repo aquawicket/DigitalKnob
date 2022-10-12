@@ -52,25 +52,51 @@ class DKOSGCefHandler : public CefClient, public CefRenderHandler,
 	public CefDownloadHandler, public CefDisplayHandler
 {
 public:
-	DKOSGCefHandler(osg::Image* cef_image){ this->cef_image = cef_image; }
+	DKOSGCefHandler(osg::Image* cef_image){ 
+		DKDEBUGFUNC(cef_image);
+		this->cef_image = cef_image; 
+	}
 	osg::Image* cef_image;
 	DKOSGCef* dkosgcef;
 
-	virtual CefRefPtr<CefContextMenuHandler> GetContextMenuHandler(){ return this; }
-	virtual CefRefPtr<CefDisplayHandler> GetDisplayHandler(){ return this; }
-	virtual CefRefPtr<CefDownloadHandler> GetDownloadHandler(){ return this; }
-	virtual CefRefPtr<CefLifeSpanHandler> GetLifeSpanHandler(){ return this; }
-	virtual CefRefPtr<CefLoadHandler> GetLoadHandler(){ return this; }
-	virtual CefRefPtr<CefRenderHandler> GetRenderHandler(){ return this; }
+	virtual CefRefPtr<CefContextMenuHandler> GetContextMenuHandler(){ 
+		DKDEBUGFUNC(); 
+		return this; 
+	}
+	virtual CefRefPtr<CefDisplayHandler> GetDisplayHandler(){ 
+		DKDEBUGFUNC(); 
+		return this; 
+	}
+	virtual CefRefPtr<CefDownloadHandler> GetDownloadHandler(){ 
+		DKDEBUGFUNC(); 
+		return this; 
+	}
+	virtual CefRefPtr<CefLifeSpanHandler> GetLifeSpanHandler(){ 
+		DKDEBUGFUNC(); 
+		return this; 
+	}
+	virtual CefRefPtr<CefLoadHandler> GetLoadHandler(){ 
+		DKDEBUGFUNC(); 
+		return this; 
+	}
+	virtual CefRefPtr<CefRenderHandler> GetRenderHandler(){ 
+		DKDEBUGFUNC(); 
+		return this; 
+	}
 	
-	void DoFrame(){ CefDoMessageLoopWork(); }
+	void DoFrame(){
+		//DKDEBUGFUNC();
+		CefDoMessageLoopWork(); 
+	}
 
 	bool GetViewRect(CefRefPtr<CefBrowser> browser, CefRect &rect){
+		DKDEBUGFUNC(browser, rect);
 		rect = CefRect(0, 0, DKCef::Get(dkosgcef->id)->width, DKCef::Get(dkosgcef->id)->height);
 		return true;
 	}
 
 	void OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType type, const RectList &dirtyRects, const void *buffer, int width, int height){
+		//DKDEBUGFUNC(browser, type, dirtyRects, buffer, width, height);
 		if (browser->GetIdentifier() != DKCef::Get(dkosgcef->id)->current_browser->GetIdentifier()){ return; }
 		if (type == PET_VIEW && dirtyRects.size() > 0){
 			cef_image->setImage(width, height, 1, 4, GL_BGRA, GL_UNSIGNED_BYTE, (unsigned char*)(buffer), osg::Image::NO_DELETE);
@@ -78,15 +104,17 @@ public:
 	}
 
 	void OnLoadingStateChange(CefRefPtr<CefBrowser> browser, bool isLoading, bool canGoBack, bool canGoForward){
-		//DKLog("BrowserClient::OnLoadingStateChange()\n");
+		DKDEBUGFUNC(browser, isLoading, canGoBack, canGoForward);
 		DKEvents::SendEvent("GLOBAL", "DKCef_OnLoadingStateChange", "");
 	}
 
-	void OnLoadError(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefLoadHandler::ErrorCode errorCode, const CefString& errorText, const CefString& failedUrl){ 
+	void OnLoadError(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefLoadHandler::ErrorCode errorCode, const CefString& errorText, const CefString& failedUrl){
+		DKDEBUGFUNC(browser, frame, errorCode, errorText, failedUrl);
 		DKEvents::SendEvent("GLOBAL", "DKCef_OnLoadError", toString(errorCode));
 	}
 
 	void OnFullscreenModeChange(CefRefPtr<CefBrowser> browser, bool fullscreen){
+		DKDEBUGFUNC(browser, fullscreen);
 		DKEvents::SendEvent("GLOBAL", "DKCef_OnFullscreen", toString(fullscreen));
 	}
 	
@@ -101,20 +129,19 @@ public:
 		CefRefPtr<CefClient>& client,
 		CefBrowserSettings& settings,
 		bool* no_javascript_access) {
-			DKINFO("DKOSGCefHandler::OnBeforePopup()\n");
+			DKDEBUGFUNC(browser, frame, target_url, target_frame_name, target_disposition, user_gesture, popupFeatures, windowInfo, client, settings, no_javascript_access);
 			//windowInfo.windowless_rendering_enabled = TRUE;
 			//DKOSGCef::Instance("DKOSGCef")->NewBrowser();
 			return false;
 	}
 
 	void OnBeforeDownload(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDownloadItem> download_item, const CefString& suggested_name, CefRefPtr<CefBeforeDownloadCallback> callback){
-		UNREFERENCED_PARAMETER(browser);
-		UNREFERENCED_PARAMETER(download_item);
+		DKDEBUGFUNC(browser, download_item, suggested_name, callback);
 		callback->Continue(suggested_name, true);
 	}
 
 	void OnBeforeContextMenu(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefContextMenuParams> params, CefRefPtr<CefMenuModel> model){
-		DKINFO("OnBeforeContextMenu \n");
+		DKDEBUGFUNC(browser, frame, params, model);
 		model->Clear(); //remove original context menu
 		DKString data;
 		data += params->GetSelectionText();
