@@ -26,7 +26,7 @@
 
 #include "DK/stdafx.h"
 #include "DKOSGViewer.h"
-#include "DKApp.h"
+//#include "DKApp.h"
 #include "DKUtil.h"
 #include <osgDB/FileUtils>
 #include <osgDB/FileNameUtils>
