@@ -1,12 +1,11 @@
 #include "DK/stdafx.h"
-#include "DKOSGNotify.h"
+#include "DKOSGNotify/DKOSGNotify.h"
 #include <iostream>
-#include "DKAssets.h"
-#include "DKFile.h"
+#include "DKAssets/DKAssets.h"
+#include "DK/DKFile.h"
 
-////////////////////////
-bool DKOSGNotify::Init()
-{
+
+bool DKOSGNotify::Init(){
 	osg::setNotifyHandler(this);
 #ifdef DEBUG
     osg::setNotifyLevel(osg::INFO);
@@ -16,23 +15,17 @@ bool DKOSGNotify::Init()
 	return true;
 }
 
-///////////////////////
-bool DKOSGNotify::End()
-{
+bool DKOSGNotify::End(){
 	return true;
 }
 
-//////////////////////////////////////////////////////
-bool DKOSGNotify::AttachNotify(osg::NotifyHandler* panel)
-{
+bool DKOSGNotify::AttachNotify(osg::NotifyHandler* panel){
 	if(!panel){return false;}
 	notifys.push_back(panel);
 	return true;
 }
 
-//////////////////////////////////////////////////////
-bool DKOSGNotify::RemoveNotify(osg::NotifyHandler* panel)
-{
+bool DKOSGNotify::RemoveNotify(osg::NotifyHandler* panel){
 	if(!panel){return false;}
 	for(unsigned int i = 0; i < notifys.size(); i++){
 		if(panel == notifys[i]){
@@ -41,27 +34,20 @@ bool DKOSGNotify::RemoveNotify(osg::NotifyHandler* panel)
 			return true;
 		}
 	}
-
 	return false;
 }
 
-////////////////////////////////////////////////////////////////////////
-void DKOSGNotify::notify(osg::NotifySeverity severity, const char *message)
-{
+void DKOSGNotify::notify(osg::NotifySeverity severity, const char *message){
 	//FIXME - We get empty messages sometimes..  why?
-	if(message && message[0] == '\0'){ 
+	if(message && message[0] == '\0')
 		return;
-	}
 	output(severity,message); //App output
-
 	for(unsigned int i=0; i<notifys.size(); i++){
 		notifys[i]->notify(severity,message); //Attached outputs
 	}
 }
 
-////////////////////////////////////////////////////////////////////////
-void DKOSGNotify::output(osg::NotifySeverity severity, const char *message)
-{
+void DKOSGNotify::output(osg::NotifySeverity severity, const char *message){
 	switch(severity){
 		case osg::DEBUG_FP:
 			DKLog(message, DKDEBUG);
@@ -87,4 +73,3 @@ void DKOSGNotify::output(osg::NotifySeverity severity, const char *message)
 			break;
     }
 }
-
