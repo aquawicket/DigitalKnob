@@ -4,7 +4,7 @@
 
 #include "DK/DKLog.h"
 #include <RmlUi/Core.h>
-#include <Rml/Debugger/Debugger.h>
+#include <RmlUi/Debugger.h>
 #include <DKOSGRml/DKOSGRmlRender.h>
 #include <osg/Group>
 #include <osgViewer/View>
