@@ -98,7 +98,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(DKOSGCef)			# build errors
 	dk_disable(DKOSGPhysics)		# 'btBulletDynamicsCommon.h' file not found
 	dk_disable(DKOSGRml)			# build errors
-	#dk_disable(DKOSGStats)
+	dk_disable(DKOSGStats)			# build errors
 	dk_disable(DKOSGVideo)			# requires openscenegraph
 	dk_disable(DKOSGWidget)			# build errors
 	dk_disable(DKScreenRecorder)	# error: 'cvSize' was not declared in this scope

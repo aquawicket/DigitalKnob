@@ -1,19 +1,18 @@
 #pragma once
 #ifndef DKOSGVideo_H
 #define DKOSGVideo_H
-#include "DK.h"
-
+#include "DK/DK.h"
 #ifdef USE_osgDB
-#include <osgDB/Registry>
+	#include <osgDB/Registry>
 #endif
 
 class DKOSGVideo : public DKObjectT<DKOSGVideo>
 {
 public:
+	bool Init();
+	bool End();
 	static void loaddlls();
 	//static void unloaddlls();
-	void Init();
-	void End();
 	void Play(const DKString& file);
 };
 
