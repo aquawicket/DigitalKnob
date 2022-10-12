@@ -188,9 +188,9 @@ bool DKOSGWindow::CreateView(){
 #endif
 	DKString mTime;
 	DKString file;
-	DKFile::GetFullExeName(file);
-	DKFile::GetModifiedTime(file, mTime);
-	title += mTime;
+	//DKFile::GetFullExeName(file);
+	//DKFile::GetModifiedTime(file, mTime);
+	//title += mTime;
 
 	SetIcon(DKFile::local_assets+"icon.ico");
 	SetTitle(title);
