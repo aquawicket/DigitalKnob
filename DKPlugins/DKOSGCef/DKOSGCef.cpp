@@ -379,7 +379,7 @@ bool DKOSGCef::handle(const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter&
 }
 
 bool DKOSGCef::transparentPixel(osgViewer::View* view, const osgGA::GUIEventAdapter& ea){
-	DKDEBUGFUNC(view, ea);
+	//DKDEBUGFUNC(view, ea);
 	osg::Image* image = cef_image.get();/*cefHandler->getImage();*/
 	if (image && image->getPixelFormat()){
 		int x = ea.getX();
