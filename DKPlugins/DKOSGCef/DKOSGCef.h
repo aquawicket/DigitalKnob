@@ -129,7 +129,7 @@ public:
 		CefRefPtr<CefClient>& client,
 		CefBrowserSettings& settings,
 		bool* no_javascript_access) {
-			DKDEBUGFUNC(browser, frame, target_url, target_frame_name, target_disposition, user_gesture, popupFeatures, windowInfo, client, settings, no_javascript_access);
+			//DKDEBUGFUNC(browser, frame, target_url, target_frame_name, target_disposition, user_gesture, popupFeatures, windowInfo, client, settings, no_javascript_access);
 			//windowInfo.windowless_rendering_enabled = TRUE;
 			//DKOSGCef::Instance("DKOSGCef")->NewBrowser();
 			return false;
