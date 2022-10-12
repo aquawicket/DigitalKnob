@@ -85,8 +85,8 @@ if(ALL_LIBS)
 		dk_enable(osgdb_dw)					# broken on MAC
 	endif()
 	dk_enable(osgdb_dxf)
-	if(NOT MAC)
-		dk_enable(osgdb_gif)				# broken on MAC
+	if(NOT MAC AND NOT LINUX)
+		dk_enable(osgdb_gif)				# broken on MAC, LINUX
 	endif()
 	dk_enable(osgdb_ive)
 	dk_enable(osgdb_ffmpeg)
