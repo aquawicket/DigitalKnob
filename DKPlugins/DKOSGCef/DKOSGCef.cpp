@@ -400,7 +400,7 @@ CefBrowserHost::MouseButtonType DKOSGCef::getCefMouseButton(int button){
 }
 
 bool DKOSGCef::getScrollDeltas(const osgGA::GUIEventAdapter& ea, float &deltaX, float &deltaY){
-	DKDEBUGFUNC(ea, deltaX, deltaY);
+	//DKDEBUGFUNC(ea, deltaX, deltaY);
 	if (ea.getScrollingDeltaX() != 0 || ea.getScrollingDeltaY() != 0){
 		deltaX = ea.getScrollingDeltaX();
 		deltaY = ea.getScrollingDeltaY();
