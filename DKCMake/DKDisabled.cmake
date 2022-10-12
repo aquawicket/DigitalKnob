@@ -106,7 +106,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(DKOSGVideo)			# requires openscenegraph
 	dk_disable(DKOSGViewer)			# requires openscenegraph 
 	dk_disable(DKOSGWidget)			# requires openscenegraph 
-	dk_disable(DKOSGWindow)			# requires openscenegraph 
+	#dk_disable(DKOSGWindow)			# requires openscenegraph 
 	dk_disable(DKScreenRecorder)	# error: 'cvSize' was not declared in this scope
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKVncClient)			# requires libvncserver
@@ -124,9 +124,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(lua)					# no CMakeLists.txt
 	dk_disable(mlocate)				# Unable to locate a Java Runtime that supports apt
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
-	dk_disable(osgaudio)			# requires openscenegraph. ERROR: 'AL/alut.h' file not found
-	#dk_disable(osgbullet)			# requires openscenegraph
-	#dk_disable(osgworks)			# requires openscenegraph
+	dk_disable(osgaudio)			# requires openscenegraph, freealut. ERROR: 'AL/alut.h' file not found
 	dk_disable(podofo)				# error: expected ';' at end of declaration
 	dk_disable(rtmidi)				# Undefined symbols for architecture x86_64
 	dk_disable(sdl-gpu)				# SDL for MAC OS X only supports deploying on 10.7 and above
