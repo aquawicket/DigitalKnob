@@ -233,7 +233,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(kdevelop)			# permission denied
 	dk_disable(leptonica)			# build errors
 	dk_disable(libcaca)				# no CMakeLists.txt
-	dk_disable(libtorrent)			# Could not find BOOST
+	#dk_disable(libtorrent)			# Could not find BOOST
 	dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
 	dk_disable(libxml2)				# Not such file or directory
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
