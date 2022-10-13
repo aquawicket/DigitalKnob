@@ -17,6 +17,7 @@ dk_set(LinearMath ON)
 dk_set(MiniCL ON)
 ### LINK ###
 dk_include					(${BULLET3}/src)
+
 if(BulletCollision)
 	WIN_dk_libDebug			(${BULLET3}/${OS}/lib/${DEBUG_DIR}/BulletCollision_Debug.lib)
 	WIN_dk_libRelease		(${BULLET3}/${OS}/lib/${RELEASE_DIR}/BulletCollision.lib)
@@ -27,7 +28,6 @@ if(BulletCollision)
 	ANDROID_dk_libDebug		(${BULLET3}/${OS}/src/Bullet3Collision/${DEBUG_DIR}//libBulletCollision.a)
 	ANDROID_dk_libRelease	(${BULLET3}/${OS}/src/Bullet3Collision/${RELEASE_DIR}/libBulletCollision.a)
 endif()
-
 if(BulletCommon)
 	WIN_dk_libDebug			(${BULLET3}/${OS}/lib/${DEBUG_DIR}/BulletCollision_Debug.lib)
 	WIN_dk_libRelease		(${BULLET3}/${OS}/lib/${RELEASE_DIR}/BulletCollision.lib)
@@ -38,7 +38,6 @@ if(BulletCommon)
 	ANDROID_dk_libDebug		(${BULLET3}/${OS}/src/Bullet3Collision/${DEBUG_DIR}//libBulletCollision.a)
 	ANDROID_dk_libRelease	(${BULLET3}/${OS}/src/Bullet3Collision/${RELEASE_DIR}/libBulletCollision.a)
 endif()
-	
 if(BulletDynamics)
 	WIN_dk_libDebug			(${BULLET3}/${OS}/lib/${DEBUG_DIR}/BulletDynamics_Debug.lib)
 	WIN_dk_libRelease		(${BULLET3}/${OS}/lib/${RELEASE_DIR}/BulletDynamics.lib)
@@ -49,7 +48,6 @@ if(BulletDynamics)
 	ANDROID_dk_libDebug		(${BULLET3}/${OS}/src/BulletDynamics/${DEBUG_DIR}/libBulletDynamics.a)
 	ANDROID_dk_libRelease	(${BULLET3}/${OS}/src/BulletDynamics/${RELEASE_DIR}/libBulletDynamics.a)
 endif()
-	
 if(BulletMultiThreaded)
 	WIN_dk_libDebug			(${BULLET3}/${OS}/lib/${DEBUG_DIR}/BulletMultiThreaded_Debug.lib)
 	WIN_dk_libRelease		(${BULLET3}/${OS}/lib/${RELEASE_DIR}/BulletMultiThreaded.lib)
@@ -60,7 +58,6 @@ if(BulletMultiThreaded)
 	ANDROID_dk_libDebug		(${BULLET3}/${OS}/src/BulletMultiThreaded/${DEBUG_DIR}/libBulletMultiThreaded.a)
 	ANDROID_dk_libRelease	(${BULLET3}/${OS}/src/BulletMultiThreaded/${RELEASE_DIR}/libBulletMultiThreaded.a)
 endif()
-	
 if(BulletSoftBody)
 	WIN_dk_libDebug			(${BULLET3}/${OS}/lib/${DEBUG_DIR}/BulletSoftBody_Debug.lib)
 	WIN_dk_libRelease		(${BULLET3}/${OS}/lib/${RELEASE_DIR}/BulletSoftBody.lib)
@@ -71,7 +68,6 @@ if(BulletSoftBody)
 	ANDROID_dk_libDebug		(${BULLET3}/${OS}/src/BulletSoftBody/${DEBUG_DIR}/libBulletSoftBody.a)
 	ANDROID_dk_libRelease	(${BULLET3}/${OS}/src/BulletSoftBody/${RELEASE_DIR}/libBulletSoftBody.a)
 endif()
-	
 if(LinearMath)
 	WIN_dk_libDebug			(${BULLET3}/${OS}/lib/${DEBUG_DIR}/LinearMath_Debug.lib)
 	WIN_dk_libRelease		(${BULLET3}/${OS}/lib/${RELEASE_DIR}/LinearMath.lib)
@@ -82,7 +78,6 @@ if(LinearMath)
 	ANDROID_dk_libDebug		(${BULLET3}/${OS}/src/LinearMath/${DEBUG_DIR}/libLinearMath.a)
 	ANDROID_dk_libRelease	(${BULLET3}/${OS}/src/LinearMath/${RELEASE_DIR}/libLinearMath.a)
 endif(LinearMath)
-	
 if(MiniCL)
 	WIN_dk_libDebug			(${BULLET3}/${OS}/lib/${DEBUG_DIR}/MiniCL_Debug.lib)
 	WIN_dk_libRelease		(${BULLET3}/${OS}/lib/${RELEASE_DIR}/MiniCL.lib)
@@ -94,6 +89,51 @@ if(MiniCL)
 	ANDROID_dk_libRelease	(${BULLET3}/${OS}/src/MiniCL/${RELEASE_DIR}/libMiniCL.a)
 endif(MiniCL)
 
+
+### 3RDPARTY LINK ###
+WIN_dk_set(BULLET3_CMAKE 
+	-DBULLET_DYNAMICS_LIBRARY=${BULLET3}/${OS}/lib/${RELEASE_DIR}/BulletDynamics.lib 
+	-DBULLET_COLLISION_LIBRARY=${BULLET3}/${OS}/lib/${RELEASE_DIR}/BulletCollision.lib 
+	-DBULLET_MATH_LIBRARY=${BULLET3}/${OS}/lib/${RELEASE_DIR}/LinearMath.lib 
+	-DBULLET_SOFTBODY_LIBRARY=${BULLET3}/${OS}/lib/${RELEASE_DIR}/BulletSoftBody.lib 
+	-DBULLET_INCLUDE_DIR=${BULLET3}/include)
+APPLE_dk_set(BULLET3_CMAKE 
+	-DBULLET_DYNAMICS_LIBRARY=${BULLET3}/${OS}/src/BulletDynamics/${RELEASE_DIR}/libBulletDynamics.a
+	-DBULLET_COLLISION_LIBRARY=${BULLET3}/${OS}/src/BulletCollision/${RELEASE_DIR}/libBulletCollision.a 
+	-DBULLET_MATH_LIBRARY=${BULLET3}/${OS}/src/LinearMath/${RELEASE_DIR}/libLinearMath.a
+	-DBULLET_SOFTBODY_LIBRARY=${BULLET3}/${OS}/src/BulletSoftBody/${RELEASE_DIR}/libBulletSoftBody.a
+	-DBULLET_INCLUDE_DIR=${BULLET3}/include)
+LINUX_DEBUG_dk_set(BULLET3_CMAKE 
+	-DBULLET_DYNAMICS_LIBRARY=${BULLET3}/${OS}/${DEBUG_DIR}/src/BulletDynamics/libBulletDynamics.a
+	-DBULLET_COLLISION_LIBRARY=${BULLET3}/${OS}/${DEBUG_DIR}/src/BulletCollision/libBulletCollision.a
+	-DBULLET_MATH_LIBRARY=${BULLET3}/${OS}/${DEBUG_DIR}/src/LinearMath/libLinearMath.a
+	-DBULLET_SOFTBODY_LIBRARY=${BULLET3}/${OS}/${DEBUG_DIR}/src/BulletSoftBody/libBulletSoftBody.a
+	-DBULLET_INCLUDE_DIR=${BULLET3}/include)
+LINUX_RELEASE_dk_set(BULLET3_CMAKE 
+	-DBULLET_DYNAMICS_LIBRARY=${BULLET3}/${OS}/${RELEASE_DIR}/src/BulletDynamics/libBulletDynamics.a
+	-DBULLET_COLLISION_LIBRARY=${BULLET3}/${OS}/${RELEASE_DIR}/src/BulletCollision/libBulletCollision.a
+	-DBULLET_MATH_LIBRARY=${BULLET3}/${OS}/${RELEASE_DIR}/src/LinearMath/libLinearMath.a
+	-DBULLET_SOFTBODY_LIBRARY=${BULLET3}/${OS}/${RELEASE_DIR}/src/BulletSoftBody/libBulletSoftBody.a
+	-DBULLET_INCLUDE_DIR=${BULLET3}/include)
+RASPBERRY_DEBUG_dk_set(BULLET3_CMAKE 
+	-DBULLET_DYNAMICS_LIBRARY=${BULLET3}/${OS}/${DEBUG_DIR}/src/BulletDynamics/libBulletDynamics.a
+	-DBULLET_COLLISION_LIBRARY=${BULLET3}/${OS}/${DEBUG_DIR}/src/BulletCollision/libBulletCollision.a
+	-DBULLET_MATH_LIBRARY=${BULLET3}/${OS}/${DEBUG_DIR}/src/LinearMath/libLinearMath.a
+	-DBULLET_SOFTBODY_LIBRARY=${BULLET3}/${OS}/${DEBUG_DIR}/src/BulletSoftBody/libBulletSoftBody.a
+	-DBULLET_INCLUDE_DIR=${BULLET3}/include)
+RASPBERRY_RELEASE_dk_set(BULLET3_CMAKE 
+	-DBULLET_DYNAMICS_LIBRARY=${BULLET3}/${OS}/${RELEASE_DIR}/src/BulletDynamics/libBulletDynamics.a
+	-DBULLET_COLLISION_LIBRARY=${BULLET3}/${OS}/${RELEASE_DIR}/src/BulletCollision/libBulletCollision.a
+	-DBULLET_MATH_LIBRARY=${BULLET3}/${OS}/${RELEASE_DIR}/src/LinearMath/libLinearMath.a
+	-DBULLET_SOFTBODY_LIBRARY=${BULLET3}/${OS}/${RELEASE_DIR}/src/BulletSoftBody/libBulletSoftBody.a
+	-DBULLET_INCLUDE_DIR=${BULLET3}/include)
+ANDROID_dk_set(BULLET3_CMAKE 
+	-DBULLET_DYNAMICS_LIBRARY=${BULLET3}/${OS}/src/BulletDynamics/${RELEASE_DIR}/libBulletDynamics.a
+	-DBULLET_COLLISION_LIBRARY=${BULLET3}/${OS}/src/Bullet3Collision/${RELEASE_DIR}/libBulletCollision.a
+	-DBULLET_MATH_LIBRARY=${BULLET3}/${OS}/src/LinearMath/${RELEASE_DIR}/libLinearMath.a
+	-DBULLET_SOFTBODY_LIBRARY=${BULLET3}/${OS}/src/BulletSoftBody/${RELEASE_DIR}/libBulletSoftBody.a
+	-DBULLET_INCLUDE_DIR=${BULLET3}/include)
+	
 
 ### GENERATE ###
 dk_setPath(${BULLET3}/${BUILD_DIR})
