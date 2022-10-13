@@ -365,7 +365,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(openal)				# The system cannot find the file specified
 	dk_disable(opencv)				# error : cannot use 'throw' with exceptions disabled
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
-	#dk_disable(openscenegraph)
+	dk_disable(openscenegraph)
 	dk_disable(openssl)				# Perl v5.10.0 required
 	dk_disable(osgaudio)			# requires openscenegraph
 	dk_disable(osgbullet)			# requires openscenegraph
