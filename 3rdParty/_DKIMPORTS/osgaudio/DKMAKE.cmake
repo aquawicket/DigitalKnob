@@ -5,6 +5,7 @@
 dk_depend(freealut)
 dk_depend(ogg)
 dk_depend(openal)
+dk_depend(opengl)
 dk_depend(openscenegraph)
 dk_depend(vorbis)
 
