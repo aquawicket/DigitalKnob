@@ -125,7 +125,8 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(lua)					# no CMakeLists.txt
 	dk_disable(mlocate)				# Unable to locate a Java Runtime that supports apt
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
-	dk_disable(osgaudio)			# opengl identifier errors 
+	dk_disable(osgaudio)			# opengl identifier errors
+	dk_disable(osgworks)			# BUILD FAILED
 	dk_disable(podofo)				# error: expected ';' at end of declaration
 	dk_disable(rtmidi)				# Undefined symbols for architecture x86_64
 	dk_disable(sdl-gpu)				# SDL for MAC OS X only supports deploying on 10.7 and above
@@ -243,6 +244,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	dk_disable(openssl)				# compiling errors
 	dk_disable(osgaudio)			# requires openscenegraph
+	dk_disable(osgworks)			# error: osgUtil::Optimizer::MergeGeometryVisitor has no member named 'mergeGeode'
 	dk_disable(podofo)				# build errors
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(uwebsockets)			# requires openssl
