@@ -31,9 +31,7 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-/////////////////////////////////////////////////////
-class DKVncClientJS : public DKObjectT<DKVncClientJS>
-{
+class DKVncClientJS : public DKObjectT<DKVncClientJS>{
 public:
 	bool Init();
 

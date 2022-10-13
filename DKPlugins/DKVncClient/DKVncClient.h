@@ -35,7 +35,6 @@ typedef unsigned long z_size_t;
 #include <rfb/rfbclient.h>
 
 
-/////////////////////////////////////////////////
 class DKVncClient : public DKObjectT<DKVncClient>
 {
 public:

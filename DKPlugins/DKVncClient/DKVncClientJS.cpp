@@ -25,13 +25,11 @@
 */
 
 #ifdef HAVE_DKDuktape 
-#include "DKVncClientJS.h"
-#include "DKVncClient.h"
+#include "DKVncClient/DKVncClientJS.h"
+#include "DKVncClient/DKVncClient.h"
 
 
-//////////////////////////
-bool DKVncClientJS::Init()
-{
+bool DKVncClientJS::Init(){
 	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("CPP_DKVncClient_TestInt", DKVncClientJS::TestInt);
 	DKDuktape::AttachFunction("CPP_DKVncClient_TestString", DKVncClientJS::TestString);
@@ -40,9 +38,7 @@ bool DKVncClientJS::Init()
 	return true;
 }
 
-////////////////////////////////////////////
-int DKVncClientJS::TestInt(duk_context* ctx)
-{
+int DKVncClientJS::TestInt(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	int input = duk_require_int(ctx, 0);
 	int output;
@@ -51,9 +47,7 @@ int DKVncClientJS::TestInt(duk_context* ctx)
 	return 1;
 }
 
-///////////////////////////////////////////////
-int DKVncClientJS::TestString(duk_context* ctx)
-{
+int DKVncClientJS::TestString(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString input = duk_require_string(ctx, 0);
 	DKString output;
@@ -62,9 +56,7 @@ int DKVncClientJS::TestString(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////////////////////
-int DKVncClientJS::TestReturnInt(duk_context* ctx)
-{
+int DKVncClientJS::TestReturnInt(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	int rval;
 	if(!DKVncClient::TestReturnInt(rval)){ return 0; }
@@ -72,9 +64,8 @@ int DKVncClientJS::TestReturnInt(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////////////////////////
-int DKVncClientJS::TestReturnString(duk_context* ctx)
-{
+
+int DKVncClientJS::TestReturnString(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString rval;
 	if(!DKVncClient::TestReturnString(rval)){ return 0; }
