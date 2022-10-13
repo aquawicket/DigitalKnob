@@ -7,7 +7,7 @@ dk_depend(openal)
 
 
 ### IMPORT ###
-dk_import(https://github.com/vancegroup/freealut.git)
+dk_import(https://github.com/vancegroup/freealut.git PATCH)
 
 
 ### LINK ###
