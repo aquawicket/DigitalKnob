@@ -31,7 +31,7 @@ dk_disable(DKSDLWav)				# compiling errors
 dk_disable(DKSDLVideo)				# requires ffmpeg
 dk_disable(DKSFMLRml)				# requires sfml, rmlui.  INCOMPLETE
 dk_disable(DKThread)				# requires threadpool
-#dk_disable(DKUpdate)				# compiling errors
+dk_disable(DKUpdate)				# compiling errors
 dk_disable(gradle)					# TODO
 dk_disable(java)					# TODO
 dk_disable(jpeg)					# DEPRECATED: using libjpeg_turbo instead
