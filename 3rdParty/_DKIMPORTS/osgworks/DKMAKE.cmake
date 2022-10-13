@@ -109,7 +109,16 @@ if(osgwTools)
 endif()
 
 
-### generate ###
+### 3RDPARTY LINK ###
+WIN_dk_set				(OSGWORKS_CMAKE -DosgWorks_DIR=${OSGWORKS}/${OS}/lib)
+APPLE_dk_set			(OSGWORKS_CMAKE -DosgWorks_DIR=${OSGWORKS}/${OS}/lib)
+LINUX_DEBUG_dk_set		(OSGWORKS_CMAKE -DosgWorks_DIR=${OSGWORKS}/${OS}/Debug/lib/x86_64-linux-gnu)
+LINUX_RELEASE_dk_set	(OSGWORKS_CMAKE -DosgWorks_DIR=${OSGWORKS}/${OS}/Debug/lib/x86_64-linux-gnu)
+RASPBERRY_DEBUG_dk_set	(OSGWORKS_CMAKE -DosgWorks_DIR=${OSGWORKS}/${OS}/Debug/lib/x86_64-linux-gnu)
+RASPBERRY_RELEASE_dk_set(OSGWORKS_CMAKE -DosgWorks_DIR=${OSGWORKS}/${OS}/Debug/lib/x86_64-linux-gnu)
+ANDROID_dk_set			(OSGWORKS_CMAKE -DosgWorks_DIR=${OSGWORKS}/${OS}/lib)
+
+### GENERATE ###
 dk_setPath		(${OSGWORKS}/${BUILD_DIR})
 dk_queueCommand	(${DKCMAKE_BUILD} ${OPENSCENEGRAPH_CMAKE} -DOSGWORKS_BUILD_APPS=OFF -DOSGWORKS_INSTALL_DATA=OFF -DDIRECTINPUT_ARCH_x64=OFF -DBoost_INCLUDE_DIR=OFF ${OSGWORKS})
 
