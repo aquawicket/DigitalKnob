@@ -115,7 +115,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(leptonica)			# Build Failed: fhmtauto.o
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libtorrent)			# Could not find BOOST
-	#dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
+	#dk_disable(libvncserver)		# error: 'openssl/sha.h' file not found
 	dk_disable(libwebsockets)		# error: unknown type name 'lws_mutex_t'
 	dk_disable(libxml2)				# fatal error: 'extra/stricmp.h' file not found
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
