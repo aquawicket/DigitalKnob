@@ -25,81 +25,101 @@ Internet Explorer (9.0+) <br>
 
 ### Supported Frameworks <br>
 [SDL](https://github.com/spurious/SDL-mirror) <br>
-[SFML](https://github.com/SFML/SFML) <br>
+<!-- [SFML](https://github.com/SFML/SFML) <br> -->
 [OpenSceneGraph](https://github.com/openscenegraph/osg) <br>
-[OpenFrameworks](https://github.com/openframeworks/openFrameworks) (TODO) <br>
-[Emscripten](https://github.com/kripken/emscripten) (TODO) <br>
+<!-- [OpenFrameworks](https://github.com/openframeworks/openFrameworks) <br> -->
+<!-- [Emscripten](https://github.com/kripken/emscripten) (TODO) <br> -->
 
 ### Supported Tools, Libraries and Frameworks <br>
-[Agl](https://developer.apple.com/documentation/agl/agl?language=objc) <br>
-[Android-NDK](https://github.com/android/ndk) <br>
-[AppKit](https://developer.apple.com/documentation/appkit?language=objc) <br>
+[agl](https://developer.apple.com/documentation/agl/agl?language=objc) <br>
+[android-ndk](https://github.com/android/ndk) <br>
+[ant](https://github.com/apache/ant) <br>
+<!-- [aom](https://aomedia.googlesource.com/aom) <br> -->
+[appkit](https://developer.apple.com/documentation/appkit?language=objc) <br>
 [astyle](http://astyle.sourceforge.net/) <br>
-[AudioUnit](https://developer.apple.com/documentation/audiotoolbox/audiounit?language=objc) <br>
-[AudioToolbox](https://developer.apple.com/documentation/audiotoolbox?language=objc) <br>
+<!-- [aubio](https://github.com/aubio/aubio) <br> -->
+[audio_toolbox](https://developer.apple.com/documentation/audiotoolbox?language=objc) <br>
+[audiounit](https://developer.apple.com/documentation/audiotoolbox/audiounit?language=objc) <br>
 [autotools](https://www.gnu.org/software/automake/manual/html_node/Autotools-Introduction.html) <br>
-[AvfAudio](https://developer.apple.com/documentation/avfaudio?language=objc) <br>
-[AVFoundation](https://developer.apple.com/documentation/avfoundation?language=objc) <br>
-[AVKit](https://developer.apple.com/documentation/avkit?language=objc) <br>
-[Boost](https://github.com/boostorg/boost) <br>
-[Boost-android](https://github.com/MysticTreeGames/Boost-for-Android) <br>
-[Boost-iOS](https://github.com/danoli3/ofxOSXBoost) <br>
-[Bullet](https://github.com/bulletphysics/bullet3) <br>
-[Bzip2](https://github.com/asimonov-im/bzip2) <br>
-[Cef3](https://bitbucket.org/chromiumembedded/cef) <br>
-[Crosswalk](https://github.com/crosswalk-project/crosswalk) (TODO) <br>
-[Crypto++](https://github.com/weidai11/cryptopp) <br>
-[Curl](https://github.com/bagder/curl) <br>
-[Duktape](https://github.com/svaarala/duktape) <br>
-[FFmpeg](https://github.com/FFmpeg/FFmpeg) <br>
-[Freealut](https://github.com/vancegroup/freealut) <br>
-[Freetype](https://github.com/vinniefalco/FreeType) <br>
-[Gif](http://sourceforge.net/projects/giflib/files/) <br>
-[ImageMagick++](https://github.com/ImageMagick/ImageMagick/tree/master/Magick%2B%2B) <br>
-[Jpeg](https://github.com/LuaDist/libjpeg) <br>
-[Jpeg-Turbo](https://github.com/libjpeg-turbo/libjpeg-turbo) <br>
+[avfoundation](https://developer.apple.com/documentation/avfoundation?language=objc) <br>
+[avkit](https://developer.apple.com/documentation/avkit?language=objc) <br>
+[avf_audio](https://developer.apple.com/documentation/avfaudio?language=objc) <br>
+[babel](https://github.com/babel/babel) <br>
+[boost](https://github.com/boostorg/boost) <br>
+[boxer](https://github.com/aaronmjacobs/Boxer) <br>
+[build-essential](https://packages.ubuntu.com/focal/build-essential) <br>
+[bullet3](https://github.com/bulletphysics/bullet3) <br>
+[bzip2](https://github.com/asimonov-im/bzip2) <br>
+[carbon](https://developer.apple.com/documentation/coreservices/carbon_core) <br>
+[cef_binary](https://bitbucket.org/chromiumembedded/cef) <br>
+[chart.js](https://github.com/chartjs/Chart.js) <br>
+[cmake](https://cmake.org) <br>
+[cocoa](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CocoaFundamentals/WhatIsCocoa/WhatIsCocoa.html) <br>
+[codemirror](https://github.com/codemirror/CodeMirror) <br>
+<!-- [command_line_tools]() <br> -->
+<!-- [conio-for-linux](https://github.com/nowres/conio-for-linux) <br> -->
+<!-- [content](https://github.com/mdn/content) <br> -->
+[core_audio](https://developer.apple.com/library/archive/documentation/MusicAudio/Conceptual/CoreAudioOverview/WhatisCoreAudio/WhatisCoreAudio.html) <br>
+[core_foundation](https://developer.apple.com/documentation/corefoundation) <br>
+[core_graphics](https://developer.apple.com/documentation/coregraphics?language=objc) <br>
+[core_haptics](https://developer.apple.com/documentation/corehaptics?language=objc) <br>
+[core_motion](https://developer.apple.com/documentation/coremotion?language=objc) <br>
+[core_services](https://developer.apple.com/documentation/coregraphics?language=objc) <br>
+[core_video](https://developer.apple.com/documentation/corevideo) <br>
+<!-- [cpp-subprocess](https://github.com/tsaarni/cpp-subprocess) <br> -->
+<!-- [crosswalk]() <br> -->
+[cryptopp](https://github.com/weidai11/cryptopp) <br>
+[curl](https://github.com/bagder/curl) <br>
+[duktape](https://github.com/svaarala/duktape) <br>
+<!-- [ffmpeg](https://github.com/FFmpeg/FFmpeg) <br> -->
+<!-- [freealut](https://github.com/vancegroup/freealut) <br> -->
+[freetype](https://github.com/vinniefalco/FreeType) <br>
+[giflib](http://sourceforge.net/projects/giflib/files/) <br>
+[imagemagick](https://github.com/ImageMagick/ImageMagick/tree/master/Magick%2B%2B) <br>
+<!-- [libjpeg](https://github.com/LuaDist/libjpeg) <br> -->
+[libjpeg-turbo](https://github.com/libjpeg-turbo/libjpeg-turbo) <br>
 [libarchive](https://github.com/libarchive/libarchive) <br>
 [libiconv](http://gnuwin32.sourceforge.net/packages/libiconv.htm) <br>
-[libtorrent](https://github.com/arvidn/libtorrent) <br>
+<!-- [libtorrent](https://github.com/arvidn/libtorrent) <br> -->
 [libuv](https://github.com/libuv/libuv) <br>
-[libvncserver](https://github.com/LibVNC/libvncserver) <br>
+<!-- [libvncserver](https://github.com/LibVNC/libvncserver) <br> -->
 [libwebsockets](https://github.com/warmcat/libwebsockets) <br>
 [libxml2](http://xmlsoft.org/) <br>
-[Leptonica](https://github.com/DanBloomberg/leptonica) <br>
-[Msinttypes](https://github.com/chemeris/msinttypes)<br>
-[Ogg](https://github.com/gcp/libogg) <br>
-[OpenAL](https://github.com/apportable/openal-soft) <br>
-[OpenCV](https://github.com/opencv/opencv) <br>
-[OpenFrameworks](https://github.com/openframeworks/openFrameworks) (TODO) <br>
-[OpenSceneGraph](https://github.com/openscenegraph/osg) <br>
-[OpenSSL](http://www.npcglib.org/~stathis/blog/precompiled-openssl/) <br>
-[OsgAudio](https://github.com/mccdo/osgaudio) <br>
-[OsgBullet](https://github.com/mccdo/osgbullet) <br>
-[OsgWorks](https://github.com/mccdo/osgworks) <br>
-[Png](https://github.com/coapp-packages/libpng) <br>
-[Pofodo](http://podofo.sourceforge.net) <br>
-[Pugixml](https://github.com/zeux/pugixml) <br>
-[RmlUi](https://github.com/mikke89/RmlUi) <br>
-[RtMidi](https://github.com/thestk/rtmidi) <br>
-[SDL2](https://www.libsdl.org/) <br>
-[SDL2Gif](http://themealena.fr/html/SDL_GIFlib.php) <br>
-[SDL_image](https://www.libsdl.org/projects/SDL_image/) <br>
-[SDL_mixer](https://github.com/aduros/SDL_mixer) <br>
-[SDL_ttf](https://www.libsdl.org/projects/SDL_ttf/) <br>
-[SFML](https://github.com/SFML/SFML) <br>
-[Smpeg](https://github.com/ErintLabs/SDL_mixer/tree/master/external/smpeg2-2.0.0) <br>
-[StackWalker](https://stackwalker.codeplex.com/) <br>
-[Stdint](http://pubs.opengroup.org/onlinepubs/009695399/basedefs/stdint.h.html) <br>
-[Tesseract-ocr](https://github.com/tesseract-ocr/tesseract) <br>
-[ThreadPool](http://threadpool.sourceforge.net/) <br>
-[Tidy](http://tidy.sourceforge.net/) <br>
-[Tiff](https://github.com/LuaDist/libtiff) <br>
-[uWebSockets](https://github.com/uNetworking/uWebSockets) <br>
-[Vorbis](https://github.com/soundcloud/vorbis) <br>
-[Waave](https://github.com/grepwood/waave) <br>
-[WebView](https://developer.android.com/reference/android/webkit/WebView.html) (ANDROID) (iOS TODO) <br>
-[Xz](https://github.com/nobled/xz) <br>
-[Zlib](https://github.com/madler/zlib) <br>
+[leptonica](https://github.com/DanBloomberg/leptonica) <br>
+[msinttypes](https://github.com/chemeris/msinttypes)<br>
+[ogg](https://github.com/gcp/libogg) <br>
+[openal](https://github.com/apportable/openal-soft) <br>
+[opencv](https://github.com/opencv/opencv) <br>
+<!-- [openframeworks](https://github.com/openframeworks/openFrameworks) <br> -->
+[openscenegraph](https://github.com/openscenegraph/osg) <br>
+[openssl](http://www.npcglib.org/~stathis/blog/precompiled-openssl/) <br>
+<!-- [osgaudio](https://github.com/mccdo/osgaudio) <br> -->
+<!-- [osgbullet](https://github.com/mccdo/osgbullet) <br> -->
+[osgworks](https://github.com/mccdo/osgworks) <br>
+[libpng](https://github.com/coapp-packages/libpng) <br>
+[pofodo](http://podofo.sourceforge.net) <br>
+[pugixml](https://github.com/zeux/pugixml) <br>
+[rmlui](https://github.com/mikke89/RmlUi) <br>
+<!-- [rtaudio](https://github.com/thestk/rtaudio) <br> -->
+[rtmidi](https://github.com/thestk/rtmidi) <br>
+[sdl](https://github.com/libsdl-org/SDL) <br>
+[sdl2_gif](http://themealena.fr/html/SDL_GIFlib.php) <br>
+[sdl_image](https://www.libsdl.org/projects/SDL_image/) <br>
+[sdl_mixer](https://github.com/aduros/SDL_mixer) <br>
+[sdl_ttf](https://www.libsdl.org/projects/SDL_ttf/) <br>
+[sfml](https://github.com/SFML/SFML) <br>
+[smpeg2](https://github.com/ErintLabs/SDL_mixer/tree/master/external/smpeg2-2.0.0) <br>
+[stackwalker](https://stackwalker.codeplex.com/) <br>
+<!-- [tesseract](https://github.com/tesseract-ocr/tesseract) <br> -->
+[threadpool](http://threadpool.sourceforge.net/) <br>
+[tidy-html5](http://tidy.sourceforge.net/) <br>
+[tiff](https://github.com/LuaDist/libtiff) <br>
+[uwebsockets](https://github.com/uNetworking/uWebSockets) <br>
+[vorbis](https://github.com/soundcloud/vorbis) <br>
+<!-- [waave](https://github.com/grepwood/waave) <br> -->
+[webview](https://developer.android.com/reference/android/webkit/WebView.html) <br>
+[xz](https://github.com/nobled/xz) <br>
+[zlib](https://github.com/madler/zlib) <br>
 
 
 

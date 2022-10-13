@@ -1,4 +1,4 @@
-# https://github.com/babel/babel)
+# https://github.com/babel/babel
 # https://unpkg.com/@babel/standalone@7.14.4/babel.min.js
 
 
