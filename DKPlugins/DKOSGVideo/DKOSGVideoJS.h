@@ -8,7 +8,7 @@
 class DKOSGVideoJS : public DKObjectT<DKOSGVideoJS>
 {
 public:
-	void Init();
+	bool Init();
 	static int Play(duk_context* ctx);
 };
 

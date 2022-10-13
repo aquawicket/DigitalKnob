@@ -27,7 +27,7 @@ include_guard()
 # DISABLED FOR ALL - TODO: move these into the select OS targets below			
 dk_disable(DKPlugin1)				# TODO
 dk_disable(DKPlugin2)				# TODO
-dk_disable(DKRestart)				# error C3861: 'printf': identifier not found
+#dk_disable(DKRestart)				# error C3861: 'printf': identifier not found
 dk_disable(DKSDLWav)				# compiling errors
 dk_disable(DKSDLVideo)				# requires ffmpeg
 dk_disable(DKSFMLRml)				# requires sfml, rmlui.  INCOMPLETE
@@ -99,7 +99,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(DKOSGPhysics)		# 'btBulletDynamicsCommon.h' file not found
 	dk_disable(DKOSGRml)			# build errors
 	dk_disable(DKOSGStats)			# build errors
-	dk_disable(DKOSGVideo)			# requires openscenegraph
+	dk_disable(DKOSGVideo)			# TODO
 	dk_disable(DKOSGWidget)			# build errors
 	dk_disable(DKScreenRecorder)	# error: 'cvSize' was not declared in this scope
 	dk_disable(DKTorrent)			# requires libtorrent

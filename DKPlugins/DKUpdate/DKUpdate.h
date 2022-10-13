@@ -29,7 +29,6 @@
 #define DKUpdate_H
 #include "DK/DK.h"
 
-///////////////////////////////////////////
 class DKUpdate : public DKObjectT<DKUpdate>
 {
 public:
@@ -45,5 +44,4 @@ public:
 };
 
 REGISTER_OBJECT(DKUpdate, true);
-
 #endif //DKUpdate_H
