@@ -20,14 +20,13 @@ UNIX_dk_libRelease	(${FREEALUT}/${OS}/src/${RELEASE_DIR}/libalut_static.a)
 
 
 ### GENERATE ###
-dk_setPath(${FREEALUT}/${BUILD_DIR})
-#WIN_dk_queueCommand	(${DKCMAKE_BUILD} ${OPENAL_CMAKE} "-DCMAKE_C_FLAGS=/DWIN64 /D_WINDOWS /W3 /nologo /GR /EHsc /I${OPENAL}/include/AL /I${MSINTTYPES} /DAL_LIBTYPE_STATIC" ${FREEALUT})
+dk_setPath				(${FREEALUT}/${BUILD_DIR})
 WIN_dk_queueCommand		(${DKCMAKE_BUILD} -DBUILD_STATIC=ON -DBUILD_TESTS=OFF -DBUILD_EXAMPLES=OFF ${OPENAL_CMAKE} "-DCMAKE_C_FLAGS=/DAL_LIBTYPE_STATIC /I${OPENAL}/include/AL /I${MSINTTYPES}" ${FREEALUT})
 MAC_dk_queueCommand		(${DKCMAKE_BUILD} -DBUILD_STATIC=ON -DBUILD_TESTS=OFF -DBUILD_EXAMPLES=OFF ${OPENAL_CMAKE} ${FREEALUT})
 LINUX_dk_queueCommand	(${DKCMAKE_BUILD} -DBUILD_STATIC=ON -DBUILD_TESTS=OFF -DBUILD_EXAMPLES=OFF ${OPENAL_CMAKE} ${FREEALUT})
 
 
 ### COMPILE ###
-dk_visualStudio	(${FREEALUT_NAME} alut_static)
-dk_xcode		(${FREEALUT_NAME} alut_static)
-dk_make			(${FREEALUT_NAME} alut_static)
+dk_visualStudio	(${FREEALUT_NAME} alut_static) # windows, android
+dk_xcode		(${FREEALUT_NAME} alut_static) # mac, ios, iossim
+dk_make			(${FREEALUT_NAME} alut_static) # linux, raspberry

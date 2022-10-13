@@ -111,7 +111,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(DKVncServer)			# requires libvncserver
 	dk_disable(bullet3)				# library not found for -lBulletInverseDynamicsUtils
 	dk_disable(flac)				# 'asm' undelcared identifier
-	dk_disable(freealut)			# ** BUILD FAILED **
+	#dk_disable(freealut)			# ** BUILD FAILED **
 	dk_disable(imagemagick)			# no such file or directory: libimagemagik.a
 	dk_disable(leptonica)			# Build Failed: fhmtauto.o
 	dk_disable(libcaca)				# no CMakeLists.txt
