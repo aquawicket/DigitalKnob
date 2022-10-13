@@ -411,11 +411,11 @@ function DKGit_MergeBranchAndPush(branch){
 	return;
 	
 	/*
-	console.log("Merging "+branch+" into master and pushing to remote")
+	console.log("Merging "+branch+" into main and pushing to remote")
 	CPP_DK_Execute(GIT + " checkout "+branch)
 	CPP_DK_Execute(GIT + " pull")
-	CPP_DK_Execute(GIT + " checkout master")
-	CPP_DK_Execute(GIT + " pull origin master")
+	CPP_DK_Execute(GIT + " checkout main")
+	CPP_DK_Execute(GIT + " pull origin main")
 	CPP_DK_Execute(GIT + " merge --no-ff --no-commit "+branch)
 	//CPP_DK_Execute(GIT + " merge "+branch)
 	//CPP_DK_Execute(GIT + " merge --squash "+branch)
@@ -424,8 +424,8 @@ function DKGit_MergeBranchAndPush(branch){
 	//CPP_DK_Execute(GIT + " git status")
 
 	//After conflicts resolved
-	CPP_DK_Execute(GIT + " commit -a -m \"Merge Development Branch in to Master\"")
-	CPP_DK_Execute(GIT + " push origin master")
+	CPP_DK_Execute(GIT + " commit -a -m \"Merge Development branch in to main\"")
+	CPP_DK_Execute(GIT + " push origin main")
 	*/
 }
 
@@ -435,13 +435,13 @@ function DKGit_RebaseBranchAndPush(branch){
 	console.log("This section of code is for reference. These actions must be preformed manually")	
 	return;
 	/*
-	console.log("Rebasing "+branch+" into master and pushing to remote")
-	CPP_DK_Execute(GIT + " checkout master")
+	console.log("Rebasing "+branch+" into main and pushing to remote")
+	CPP_DK_Execute(GIT + " checkout main")
 	CPP_DK_Execute(GIT + " pull")
 	CPP_DK_Execute(GIT + " checkout "+branch)
 	CPP_DK_Execute(GIT + " pull")
-	CPP_DK_Execute(GIT + " rebase -i master")
-	CPP_DK_Execute(GIT + " checkout master")
+	CPP_DK_Execute(GIT + " rebase -i main")
+	CPP_DK_Execute(GIT + " checkout main")
 	CPP_DK_Execute(GIT + " merge "+branch)
 	*/
 }
@@ -462,13 +462,13 @@ function DKGit_ResetRepository(){
 	CPP_DK_Execute(GIT + " commit -am \"Initial commit\"")
 
 	//Delete the old branch:
-	CPP_DK_Execute(GIT + " branch -D master")
+	CPP_DK_Execute(GIT + " branch -D main")
 
-	//Rename the temporary branch to master:
-	CPP_DK_Execute(GIT + " branch -m master")
+	//Rename the temporary branch to main:
+	CPP_DK_Execute(GIT + " branch -m main")
 
 	//Finally, force update to our repository:
-	CPP_DK_Execute(GIT + " push -f origin master")
+	CPP_DK_Execute(GIT + " push -f origin main")
 	*/
 }
 
