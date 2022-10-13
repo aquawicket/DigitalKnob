@@ -27,11 +27,6 @@ include_guard()
 # DISABLED FOR ALL - TODO: move these into the select OS targets below			
 dk_disable(DKPlugin1)				# TODO
 dk_disable(DKPlugin2)				# TODO
-dk_disable(DKSDLWav)				# compiling errors
-dk_disable(DKSDLVideo)				# requires ffmpeg
-dk_disable(DKSFMLRml)				# requires sfml, rmlui.  INCOMPLETE
-dk_disable(DKThread)				# requires threadpool
-dk_disable(DKUpdate)				# compiling errors
 dk_disable(gradle)					# TODO
 dk_disable(java)					# TODO
 dk_disable(jpeg)					# DEPRECATED: using libjpeg_turbo instead
@@ -67,7 +62,12 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(DKOSGWidget)			# requires openscenegraph 
 	dk_disable(DKOSGWindow)			# requires openscenegraph
 	dk_disable(DKScreenRecorder)	# error: 'cvSize' was not declared in this scope
+	dk_disable(DKSDLVideo)			# requires ffmpeg
+	dk_disable(DKSDLWav)			# compiling errors
+	dk_disable(DKSFMLRml)			# requires sfml, rmlui.  INCOMPLETE
+	dk_disable(DKThread)			# requires threadpool
 	dk_disable(DKTorrent)			# requires libtorrent
+	dk_disable(DKUpdate)			# compiling errors
 	dk_disable(DKVncClient)			# requires libvncserver
 	dk_disable(DKVncServer)			# requires libvncserver
 	dk_disable(bullet3)				# build errors
@@ -101,7 +101,12 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(DKOSGVideo)			# TODO
 	dk_disable(DKOSGWidget)			# build errors
 	dk_disable(DKScreenRecorder)	# error: 'cvSize' was not declared in this scope
+	dk_disable(DKSDLVideo)			# requires ffmpeg
+	dk_disable(DKSDLWav)			# compiling errors
+	dk_disable(DKSFMLRml)			# requires sfml, rmlui.  INCOMPLETE
+	dk_disable(DKThread)			# requires threadpool
 	dk_disable(DKTorrent)			# requires libtorrent
+	dk_disable(DKUpdate)			# compiling errors
 	dk_disable(DKVncClient)			# requires libvncserver
 	dk_disable(DKVncServer)			# requires libvncserver
 	dk_disable(bullet3)				# library not found for -lBulletInverseDynamicsUtils
@@ -153,10 +158,15 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(DKOSGViewer)			# requires openscenegraph 
 	dk_disable(DKOSGWidget)			# requires openscenegraph 
 	dk_disable(DKOSGWindow)			# requires openscenegraph 
-	dk_disable(DKScreenRecorder)	# requires opencv
+	dk_disable(DKScreenRecorder)	# requires opencv.  error: 'cvSize' was not declared in this scope
 	dk_disable(DKSDLCef)			# requires cef_binary, sdl
+	dk_disable(DKSDLVideo)			# requires ffmpeg
+	dk_disable(DKSDLWav)			# compiling errors
+	dk_disable(DKSFMLRml)			# requires sfml, rmlui.  INCOMPLETE
 	dk_disable(DKSFMLWindow)		# requires sfml
+	dk_disable(DKThread)			# requires threadpool
 	dk_disable(DKTorrent)			# requires libtorrent
+	dk_disable(DKUpdate)			# compiling errors
 	dk_disable(DKVncClient)			# requires libvncserver
 	dk_disable(DKVncServer)			# requires libvncserver
 	dk_disable(freealut)			# freealut-master/iossim64 does not contain an Xcode project
@@ -207,8 +217,13 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKOSGVideo)			# requires openscenegraph
 	dk_disable(DKOSGWidget)			# build errors 
 	dk_disable(DKScreenRecorder)	# error: 'cvSize' was not declared in this scope
+	dk_disable(DKSDLVideo)			# requires ffmpeg
+	dk_disable(DKSDLWav)			# compiling errors
+	dk_disable(DKSFMLRml)			# requires sfml, rmlui.  INCOMPLETE
 	dk_disable(DKSFMLWindow)		# requires sfml
+	dk_disable(DKThread)			# requires threadpool
 	dk_disable(DKTorrent)			# requires libtorrent
+	dk_disable(DKUpdate)			# compiling errors
 	dk_disable(DKVncClient)			# requires libvncserver
 	dk_disable(DKVncServer)			# requires libvncserver
 	dk_disable(DKWebSockets)		# requires libwebsockets, uwebsockets
@@ -256,7 +271,12 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(DKOSGWidget)			# requires openscenegraph 
 	dk_disable(DKOSGWindow)			# requires openscenegraph 
 	dk_disable(DKScreenRecorder)	# error: 'cvSize' was not declared in this scope
+	dk_disable(DKSDLVideo)			# requires ffmpeg
+	dk_disable(DKSDLWav)			# compiling errors
+	dk_disable(DKSFMLRml)			# requires sfml, rmlui.  INCOMPLETE
+	dk_disable(DKThread)			# requires threadpool
 	dk_disable(DKTorrent)			# requires libtorrent
+	dk_disable(DKUpdate)			# compiling errors
 	dk_disable(DKVncClient)			# requires libvncserver
 	dk_disable(DKVncServer)			# requires libvncserver
 	dk_disable(DKWebSockets)		# requires libwebsocket, uwebsockets
@@ -317,10 +337,15 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(DKOSGViewer)			# requires openscenegraph 
 	dk_disable(DKOSGWidget)			# requires openscenegraph 
 	dk_disable(DKOSGWindow)			# requires openscenegraph 
-	dk_disable(DKScreenRecorder)	# requires opencv
+	dk_disable(DKScreenRecorder)	# requires opencv.  error: 'cvSize' was not declared in this scope
 	dk_disable(DKSDLCef)			# requires sdl, cef_binary
+	dk_disable(DKSDLVideo)			# requires ffmpeg
+	dk_disable(DKSDLWav)			# compiling errors
+	dk_disable(DKSFMLRml)			# requires sfml, rmlui.  INCOMPLETE
 	dk_disable(DKSFMLWindow)		# requires sfml
+	dk_disable(DKThread)			# requires threadpool
 	dk_disable(DKTorrent)			# requires libtorrent
+	dk_disable(DKUpdate)			# compiling errors
 	dk_disable(DKVncClient)			# requires libvncserver
 	dk_disable(DKVncServer)			# requires libvncserver
 	dk_disable(DKWebSockets)		# requires libwebsockets or uwebsockets
