@@ -125,6 +125,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(lua)					# no CMakeLists.txt
 	dk_disable(mlocate)				# Unable to locate a Java Runtime that supports apt
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
+	dk_disable(osgbullet)			# CMake Error: Could NOT find Bullet
 	dk_disable(osgaudio)			# opengl identifier errors
 	dk_disable(osgworks)			# BUILD FAILED
 	dk_disable(podofo)				# error: expected ';' at end of declaration
