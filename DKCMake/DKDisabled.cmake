@@ -27,12 +27,11 @@ include_guard()
 # DISABLED FOR ALL - TODO: move these into the select OS targets below			
 dk_disable(DKPlugin1)				# TODO
 dk_disable(DKPlugin2)				# TODO
-#dk_disable(DKRestart)				# error C3861: 'printf': identifier not found
 dk_disable(DKSDLWav)				# compiling errors
 dk_disable(DKSDLVideo)				# requires ffmpeg
 dk_disable(DKSFMLRml)				# requires sfml, rmlui.  INCOMPLETE
 dk_disable(DKThread)				# requires threadpool
-dk_disable(DKUpdate)				# compiling errors
+#dk_disable(DKUpdate)				# compiling errors
 dk_disable(gradle)					# TODO
 dk_disable(java)					# TODO
 dk_disable(jpeg)					# DEPRECATED: using libjpeg_turbo instead
