@@ -88,7 +88,7 @@ if(WIN) # Disabled for Windows targets
 endif()
 
 if(WIN_64) # Disabled for Windows 64bit targets
-	dk_disbale(opencv)				# cannot open file 'opencv-master\win64\3rdparty\ippicv\ippicv_win\icv\lib\intel64\ippicvmt.lib'
+	dk_disable(opencv)				# cannot open file 'opencv-master\win64\3rdparty\ippicv\ippicv_win\icv\lib\intel64\ippicvmt.lib'
 	dk_disable(smpeg2)				# fatal error C1083: Cannot open include file: 'unistd.h'
 endif()
 
@@ -125,7 +125,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(lua)					# no CMakeLists.txt
 	dk_disable(mlocate)				# Unable to locate a Java Runtime that supports apt
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
-	#dk_disable(osgaudio)			# requires openscenegraph, freealut. ERROR: 'AL/alut.h' file not found
+	dk_disable(osgaudio)			# opengl identifier errors 
 	dk_disable(podofo)				# error: expected ';' at end of declaration
 	dk_disable(rtmidi)				# Undefined symbols for architecture x86_64
 	dk_disable(sdl-gpu)				# SDL for MAC OS X only supports deploying on 10.7 and above
