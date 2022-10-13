@@ -1,46 +1,38 @@
 #include "DK/stdafx.h"
-#include "DKOSGPhysics.h"
-#include "DKOSGWindow.h"
+#include "DKOSGPhysics/DKOSGPhysics.h"
+#include "DKOSGWindow/DKOSGWindow.h"
 
-//////////////////////
-void DKOSGPhysics::Init()
-{
+bool DKOSGPhysics::Init(){
 //#ifdef USE_osgbDynamics 
 	InitPhysics(DKOSGWindow::Instance("DKOSGWindow")->view);
 	AddLaunchBall(DKOSGWindow::Instance("DKOSGWindow")->view,DKOSGWindow::Instance("DKOSGWindow")->world);
 	//AddDragHandler(DKOSGWindow::Instance("DKOSGWindow")->view);
 	Ground(DKOSGWindow::Instance("DKOSGWindow")->world);
 	Start();
+	return true;
 //#endif //USE_osgbDynamics
 }
 
-/////////////////////
-void DKOSGPhysics::End()
-{
+bool DKOSGPhysics::End(){
 //#ifdef USE_osgbDynamics
 	Kill();
+	return true;
 //#endif
 }
 
-/////////////////////////
-void DKOSGPhysics::Process()
-{
+void DKOSGPhysics::Process(){
 //#ifdef USE_osgbDynamics 
 	TripleBufferMotionStateUpdate( msl, &tBuf );
 //#endif
 }
 
 //FIXME - models already created in DKModel.  Change to -> AddPhysics(DKModel*) ???
-////////////////////////////////////////////////////
-bool DKOSGPhysics::AddModel(const DKOSGModel* model)
-{
+bool DKOSGPhysics::AddModel(const DKOSGModel* model){
 	//TODO
 	return false;
 }
 
-////////////////////////////////////////////////////////////////////////////////////////
-bool DKOSGPhysics::makeModel(osg::Group* world, const std::string& fileName, osg::Vec3 pos)
-{
+bool DKOSGPhysics::makeModel(osg::Group* world, const std::string& fileName, osg::Vec3 pos){
 //#ifdef USE_osgbDynamics 
 	osg::ref_ptr<osg::Node> modelNode(NULL);
 
@@ -50,10 +42,8 @@ bool DKOSGPhysics::makeModel(osg::Group* world, const std::string& fileName, osg
 
     if(!modelNode.valid()){
         modelNode = osgDB::readNodeFile( fileName );
-		if(!modelNode.valid()){
-			DKLog("Cannot load "+fileName, DKERROR);
-			return false;
-		}
+		if(!modelNode.valid())
+			return DKERROR("Cannot load "+fileName);
 	}
     amt->addChild( modelNode.get() );
 
@@ -88,31 +78,24 @@ bool DKOSGPhysics::makeModel(osg::Group* world, const std::string& fileName, osg
 }
 
 //#ifdef USE_osgbDynamics 
-///////////////////////
-void DKOSGPhysics::Start()
-{
+
+void DKOSGPhysics::Start(){
 	pt->setProcessorAffinity(0);
     pt->start();
 }
 
-//////////////////////
-void DKOSGPhysics::Kill()
-{
+void DKOSGPhysics::Kill(){
 	DKOSGWindow::Instance("DKOSGWindow")->view->removeEventHandler(lh);
 	pt->stopPhysics();
 	pt->join();
 }
 
-/////////////////////////////////////////
-bool DKOSGPhysics::Ground(osg::Group* world)
-{
+bool DKOSGPhysics::Ground(osg::Group* world){
 	DKOSGWindow::Instance("DKOSGWindow")->world->addChild(osgbDynamics::generateGroundPlane(osg::Vec4(0.f, 0.f, 1000.f, 0.f), bw));
 	return true;
 }
 
-////////////////////////////////////////////////////
-bool DKOSGPhysics::InitPhysics(osgViewer::Viewer* view)
-{
+bool DKOSGPhysics::InitPhysics(osgViewer::Viewer* view){
 	tBuf.resize(65536); // Increase triple buffer size to hold lots of transform data
 
 	btDefaultCollisionConfiguration * collisionConfiguration = new btDefaultCollisionConfiguration();
@@ -134,9 +117,7 @@ bool DKOSGPhysics::InitPhysics(osgViewer::Viewer* view)
 	return true;
 }
 
-/////////////////////////////////////////////////////////////////////////
-bool DKOSGPhysics::AddLaunchBall(osgViewer::Viewer* view, osg::Group* world)
-{
+bool DKOSGPhysics::AddLaunchBall(osgViewer::Viewer* view, osg::Group* world){
 	// Ball Launch handler
 	osg::Group* launchHandlerAttachPoint = new osg::Group; 
 	world->addChild(launchHandlerAttachPoint);
@@ -154,9 +135,7 @@ bool DKOSGPhysics::AddLaunchBall(osgViewer::Viewer* view, osg::Group* world)
 	return true;
 }
 
-///////////////////////////////////////////////////////
-bool DKOSGPhysics::AddDragHandler(osgViewer::Viewer* view)
-{
+bool DKOSGPhysics::AddDragHandler(osgViewer::Viewer* view){
 	// Drag Handler
 	osgbInteraction::DragHandler* dh = new osgbInteraction::DragHandler(bw, view->getCamera());
     view->addEventHandler(dh);
@@ -164,4 +143,4 @@ bool DKOSGPhysics::AddDragHandler(osgViewer::Viewer* view)
 	return true;
 }
 
-//#endif //USE_osgbDynamics 
+//#endif //USE_osgbDynamics

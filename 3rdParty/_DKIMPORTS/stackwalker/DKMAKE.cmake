@@ -9,7 +9,9 @@ if(NOT WIN_HOST)
 endif()
 
 
+### IMPORT ###
 dk_import(https://github.com/ConnectedVision/connectedvision/raw/master/build_env/Conan/packages/StackWalker/2014.12.28/2.3.0/stackwalker-2014-12-28.zip FOLDER stackwalker-2014-12-28)
 
 
+### LINK ###
 dk_include(${STACKWALKER}/StackWalker)

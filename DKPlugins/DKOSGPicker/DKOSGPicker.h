@@ -3,14 +3,14 @@
 #ifndef DKOSGPicker_H
 #define DKOSGPicker_H
 
-#include "DK.h"
+#include "DK/DK.h"
 #include <osgViewer/ViewerEventHandlers>
 #include <osgFX/Outline>
 
 class DKOSGPicker : public osgGA::GUIEventHandler, public DKObjectT<DKOSGPicker> 
 {
 public:
-	void Init();
+	bool Init();
 	
 	~DKOSGPicker();
 

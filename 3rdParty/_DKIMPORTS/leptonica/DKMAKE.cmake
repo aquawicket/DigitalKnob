@@ -26,8 +26,8 @@ dk_import(https://github.com/DanBloomberg/leptonica.git)
 dk_include				(${LEPTONICA})
 dk_include				(${LEPTONICA}/${OS}/src)
 dk_include				(${LEPTONICA}/${OS}/${RELEASE_DIR}/src)
-WIN_dk_libDebug			(${LEPTONICA}/${OS}/src/${DEBUG_DIR}/${LEPTONICA_NAME}d.lib)
-WIN_dk_libRelease		(${LEPTONICA}/${OS}/src/${RELEASE_DIR}/${LEPTONICA_NAME}.lib)
+WIN_dk_libDebug			(${LEPTONICA}/${OS}/src/${DEBUG_DIR}/leptonica-1.83.0d.lib)
+WIN_dk_libRelease		(${LEPTONICA}/${OS}/src/${RELEASE_DIR}/leptonica-1.83.0.lib)
 APPLE_dk_libDebug		(${LEPTONICA}/${OS}/src/${DEBUG_DIR}/libleptonica.a)
 APPLE_dk_libRelease		(${LEPTONICA}/${OS}/src/${RELEASE_DIR}/libleptonica.a)
 LINUX_dk_libDebug		(${LEPTONICA}/${OS}/${DEBUG_DIR}/src/libleptonica.a)
@@ -42,7 +42,7 @@ dk_set(LEPTONICA_CMAKE -DLeptonica_DIR=${LEPTONICA}/${OS})
 
 ### GENERATE ###
 dk_setPath		(${LEPTONICA}/${BUILD_DIR})
-dk_queueCommand	(${DKCMAKE_BUILD} -DSTATIC=ON -DCMAKE_INSTALL_PREFIX=${LEPTONICA} -DSW_BUILD=OFF ${ZLIB_CMAKE} ${TIFF_CMAKE} ${PNG_CMAKE} ${JPEG_CMAKE} ${GIF_CMAKE} ${LEPTONICA})
+dk_queueCommand	(${DKCMAKE_BUILD} "-DCMAKE_CXX_FLAGS=/I${LIBJPEG-TURBO}/${OS} /I${LIBPNG} /I${LIBPNG}/${OS}" -DSTATIC=ON -DCMAKE_INSTALL_PREFIX=${LEPTONICA} -DSW_BUILD=OFF ${ZLIB_CMAKE} ${TIFF_CMAKE} ${LIBPNG_CMAKE} ${LIBJPEG-TURBO_CMAKE} ${GIFLIB_CMAKE} ${LEPTONICA})
 
 
 ### COMPILE ###

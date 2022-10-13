@@ -1,8 +1,7 @@
-# remove these
+# to use this template, remove these
 dk_undepend(_TEMPLATE-LIB_)
 return()
-
-
+#########################################
 
 # https://github.com/organization/package
 

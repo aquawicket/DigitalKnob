@@ -51,9 +51,7 @@
 
 DKString DKUpdate::url;
 
-/////////////////////
-bool DKUpdate::Init()
-{
+bool DKUpdate::Init(){
 	DKDEBUGFUNC();	
 	DKClass::DKCreate("DKUpdateJS");
 	DKClass::DKCreate("DKUpdateV8");
@@ -104,31 +102,23 @@ bool DKUpdate::Init()
 	if(url.empty()){ url = downloads+app+".apk"; }
 #endif
 
-	if(url.empty()){
-		DKERROR("DKUpdate::Init(): update url did not get set\n");
-		return false;
-	}
+	if(url.empty())
+		return DKERROR("DKUpdate::Init(): update url did not get set\n");
 	
 	//DKQueue("Checking for Update...", boost::bind(&DKUpdate::CheckForUpdate, this, url));
 	return true;
 }
 
-////////////////////
-bool DKUpdate::End()
-{
+bool DKUpdate::End(){
 	DKDEBUGFUNC();	
 	return true;
 }
 
-///////////////////////////////
-bool DKUpdate::CheckForUpdate()
-{
+bool DKUpdate::CheckForUpdate(){
 	DKDEBUGFUNC();
 	DKCurl::Instance("DKCurlUpdate");
-	if(!DKCurl::Get("DKCurlUpdate")->FileExists(url)){
-		DKERROR(url+": NOT FOUND\n");
-		return false;
-	}
+	if(!DKCurl::Get("DKCurlUpdate")->FileExists(url))
+		return DKERROR(url+": NOT FOUND\n");
 	DKString localfile;
 	DKFile::GetExePath(localfile);
 	
@@ -137,15 +127,15 @@ bool DKUpdate::CheckForUpdate()
 #endif
 
 	DKString lctime;
-	if(!DKFile::GetLocalModifiedDate(localfile, lctime)){ return false; }
-
+	if(!DKFile::GetLocalModifiedDate(localfile, lctime))
+		return false;
 	DKString lmtime;
-	if(!DKFile::GetLocalModifiedDate(localfile, lmtime)){ return false; }
-   
+	if(!DKFile::GetLocalModifiedDate(localfile, lmtime))
+		return false; 
 	DKString stime;
 	//if(!DKFile::GetServerModifiedDate(url, stime)){ return false; }
-	if(!DKCurl::Instance("DKCurlUpdate")->FileDate(url, stime)){ return false; }
-	
+	if(!DKCurl::Instance("DKCurlUpdate")->FileDate(url, stime))
+		return false;
 	char* pEnd;
 	unsigned long long i_stime = strtoull(stime.c_str(), &pEnd, 10);
 	char* pEnd2;
@@ -165,17 +155,13 @@ bool DKUpdate::CheckForUpdate()
 	return false;
 }
 
-/////////////////////////////
-bool DKUpdate::CreateUpdate()
-{
+bool DKUpdate::CreateUpdate(){
 	DKDEBUGFUNC();	
 	//TODO: create update and upload to ftp
 	return false;
 }
 
-/////////////////////////
-bool DKUpdate::DoUpdate()
-{
+bool DKUpdate::DoUpdate(){
 	DKDEBUGFUNC();
 	DKString file;
 	DKFile::GetExeName(file);
@@ -189,9 +175,8 @@ bool DKUpdate::DoUpdate()
 		DKERROR("android updates not setup yet\n");
 		DKFile::ChDir(DKFile::local_assets);
 		DKFile::Delete(DKFile::local_assets+filename+"_dl");
-		if(!DKCurl::Get("DKCurlUpdate")->Download(url, DKFile::local_assets+filename+"_dl")){
+		if(!DKCurl::Get("DKCurlUpdate")->Download(url, DKFile::local_assets+filename+"_dl"))
 			return false;
-		}
 		DKFile::Rename(DKFile::local_assets+filename+"_dl", filename, true);
 		DKFile::Delete(DKFile::local_assets+"ASSETS"); //reload assets
 #ifdef ANDROID
@@ -205,9 +190,8 @@ bool DKUpdate::DoUpdate()
 	//Apply .zip update
 	if(has(url,".zip")){
 		DKFile::Delete(apppath+"/"+filename+"_dl");
-		if(!DKCurl::Get("DKCurlUpdate")->Download(url, apppath+"/"+filename+"_dl")){
+		if(!DKCurl::Get("DKCurlUpdate")->Download(url, apppath+"/"+filename+"_dl"))
 			return false;
-		}
 		DKFile::Rename(apppath+"/"+filename+"_dl", filename, true);
 		DKArchive::Extract(apppath+"/"+filename, apppath);
 		DKFile::Delete(apppath+"/"+filename);
@@ -217,9 +201,8 @@ bool DKUpdate::DoUpdate()
 
 	//Apply .exe update
 	DKFile::Delete(file+"_dl");
-	if(!DKCurl::Get("DKCurlUpdate")->Download(url,file+"_dl")){
+	if(!DKCurl::Get("DKCurlUpdate")->Download(url,file+"_dl"))
 		return false;
-	}
 	DKFile::Delete(file+".old");
 	DKFile::Rename(file,file+".old",true); //we'll leave .old behind for backup 
 	//DKFile::Delete(file+".old");
@@ -231,9 +214,7 @@ bool DKUpdate::DoUpdate()
 	return true;
 }
 
-////////////////////////////////////////////////
-bool DKUpdate::UpdatePlugin(const DKString& url)
-{
+bool DKUpdate::UpdatePlugin(const DKString& url){
 	DKDEBUGFUNC(url);
 	//TODO - recursive plugin file downloading
 	
@@ -242,10 +223,8 @@ bool DKUpdate::UpdatePlugin(const DKString& url)
 
 	//first check that the url exists
 	DKCurl::Instance("DKCurlUpdate");
-	if(!DKCurl::Get("DKCurlUpdate")->FileExists(url)){
-		DKERROR("DKUpdate::UpdatePlugin("+url+"): the url does not exist\n");
-		return false;
-	}
+	if(!DKCurl::Get("DKCurlUpdate")->FileExists(url))
+		return DKERROR("DKUpdate::UpdatePlugin("+url+"): the url does not exist\n");
 	DKINFO("DKUpdate::UpdatePlugin("+url+"): we found it!\n");
 
 	//now we have to find the folder relative to http://digitalknob.com/DKFile/DKFile.php
@@ -253,26 +232,21 @@ bool DKUpdate::UpdatePlugin(const DKString& url)
 	//I.E:  http://digitalknob.com/DKInputTest/DKNotePad = ../../DKInputTest/DKNotePad
 	//I.E:  http://digitalknob.com/Digitalknob/DKFpsTest = ../../Digitalknob/DKFpsTest
 
-	if(!has(url, "http://digitalknob.com/")){
-		DKERROR("DKUpdate::UpdatePlugin("+url+"): Plugins can only be obtained from digitalknob.com\n");
-		return false;
-	}
-
+	if(!has(url, "http://digitalknob.com/"))
+		return DKERROR("DKUpdate::UpdatePlugin("+url+"): Plugins can only be obtained from digitalknob.com\n");
+	
 	DKString url2 = url;
 	replace(url2, "http://digitalknob.com/", "../../");
 	DKString new_url = "http://digitalknob.com/Digitalknob/DKFile/DKFile.php?DirectoryContents="+url2;
 	DKINFO("new_url = "+new_url+"\n");
 	DKString output;
-	if(!DKCurl::Get("DKCurlUpdate")->HttpToString(new_url, output)){
-		DKERROR("DKUpdate::UpdatePlugin("+url+"): HttpToString failed\n");
-		return false;
-	}
+	if(!DKCurl::Get("DKCurlUpdate")->HttpToString(new_url, output))
+		return DKERROR("DKUpdate::UpdatePlugin("+url+"): HttpToString failed\n");
+	
 	DKINFO("HttpToString = "+output+"\n");
 
-	if(!has(output,"..,")){
-		DKERROR("DKUpdate::UpdatePlugin("+url+"): HttpToString() did not return a directory list\n");
-		return false;
-	}
+	if(!has(output,"..,"))
+		return DKERROR("DKUpdate::UpdatePlugin("+url+"): HttpToString() did not return a directory list\n");
 
 	DKStringArray arry;
 	toStringArray(arry, output, ",");
@@ -297,10 +271,8 @@ bool DKUpdate::UpdatePlugin(const DKString& url)
 
 	//now transfer the arry to plugin path
 	for(unsigned int i=1; i<arry.size(); i++){
-		if(!DKCurl::Get("DKCurlUpdate")->Download(arry[i], plugin_path)){
-			DKERROR("DKUpdate::UpdatePlugin("+url+"): DKCurl::Download("+arry[i]+") failed\n");
-			return false;
-		}
+		if(!DKCurl::Get("DKCurlUpdate")->Download(arry[i], plugin_path))
+			return DKERROR("DKUpdate::UpdatePlugin("+url+"): DKCurl::Download("+arry[i]+") failed\n");
 	}
 	return true;
 }

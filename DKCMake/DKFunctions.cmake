@@ -778,7 +778,7 @@ macro(dk_dump variable)
 		message(STATUS "${cyan}   VALUE:   ${${variable}} ${CLR}")
 		message(STATUS "${cyan}############################################################################################${CLR}\n")
 	endif()
-	dk_wait()
+	#dk_wait()
 endmacro()
 
 
@@ -2098,7 +2098,6 @@ dk_createOsMacros("dk_queueCommand")
 #	TODO
 #
 #	@folder		- TODO
-#	@sln_file	- TODO
 #
 function(dk_visualStudioDebug folder) #target #arch
 	DKDEBUGFUNC(${ARGV})
@@ -2108,7 +2107,6 @@ function(dk_visualStudioDebug folder) #target #arch
 	
 	dk_findFiles(${3RDPARTY}/${folder}/${OS} *.sln sln_file)
 	dk_getFilename(${sln_file} sln_file)
-	
 	dk_getExtension(${sln_file} extension)
 	if(NOT ${extension} STREQUAL ".sln")
 		dk_assert("extension does not equal .sln")
@@ -2307,17 +2305,23 @@ dk_createOsMacros("dk_ndk" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# dk_make(foleder lib)
+# dk_make(folder lib)
 #
 #	TODO
 #
-#	@lib	- TODO
+#	@folder 			- TODO
+#	@lib (optional)		- TODO
 #
-function(dk_make folder lib)
+function(dk_make folder) #lib
 	DKDEBUGFUNC(${ARGV})
 	if(LINUX OR RASPBERRY)
+		set(lib ${ARGV1})
 		dk_set(CURRENT_DIR ${3RDPARTY}/${folder}/${BUILD_DIR})
-		dk_queueCommand(make ${lib})
+		if(${ARGC} GREATER 1)
+			dk_queueCommand(make ${lib})
+		else()
+			dk_queueCommand(make)
+		endif()
 	endif()
 endfunction()
 
@@ -3563,13 +3567,19 @@ endfunction()
 #
 function(dk_removeSubstring removethis fromthis RESULT)
 	DKDEBUGFUNC(${ARGV})
-	foreach(item ${fromthis})
-		string(REPLACE ${removethis} "" item ${item})
-		list(APPEND rtn ${item})
-	endforeach()
-#	string(REPLACE "  " " " rtn "${rtn}") #replace doube spaces with single space
-	set(${RESULT} ${rtn} PARENT_SCOPE) #return RESULT
+	dk_dump(removethis)
+	dk_dump(fromthis)
+	#foreach(item ${fromthis})
+	#	string(REPLACE ${removethis} "" item ${item})
+	#	list(APPEND rtn ${item})
+	#endforeach()
+	string(REPLACE ${removethis} "" rtn "${fromthis}")
+	string(REPLACE "  " " " rtn "${rtn}") #replace doube spaces with single space
+	set(${RESULT} "${rtn}" PARENT_SCOPE) #return RESULT
+	dk_dump(rtn)
+	#dk_wait()
 endfunction()
+dk_createOsMacros("dk_removeSubstring")
 
 
 ###############################################################################
@@ -3696,17 +3706,17 @@ endfunction()
 #
 #	TODO: https://cmake.org/cmake/help/latest/module/FetchContent.html 
 #
-function(dk_import url) #Lib #tag #Patch
-	DKDEBUGFUNC(${ARGV})
-	dk_import2(${ARGV})
+#function(dk_import url) #Lib #tag #Patch
+#	DKDEBUGFUNC(${ARGV})
+#	dk_import2(${ARGV})
 	#dk_getExtension(${url} extension)
 	#if("${extension}" STREQUAL ".git")
 	#	dk_importGit2(${ARGV})
 	#else()
 	#	dk_importDownload2(${ARGV})
 	#endif()
-endfunction()
-dk_createOsMacros("dk_import")
+#endfunction()
+#dk_createOsMacros("dk_import")
 
 
 ###############################################################################
@@ -3992,17 +4002,30 @@ function(dk_importDownload url) #install_path #PATCH
 	endif()
 	
 	dk_install(${${LIBVAR}_DL} ${${LIBVAR}} ${${LIBVAR}_FOLDER} ${ARGN})
-
 endfunction()
 
-######################################
-function(dk_import2 url)
+###############################################################################
+# dk_import(url) #args
+#
+#	This is a flexable super function for importing just about anything into digitalknob
+#	The idea is to provide a url or path and dk_import will do the rest. 
+#
+#	@url	- The online path the .git or file to import
+#
+#	github GIT:	https://github.com/orginization/library.git		dk_importGit(url) #branch/tag #PATCH
+#	github DL:	https://github.com/orginization/library			dk_importGit(url) #branch/tag #PATCH
+#	lib url DL:	https://website.com/library.zip					dk_importDownload(url) #PATCH
+#	exe url DL:	https://website.com/executable.exe 				dk_importDownload(url) #PATCH
+#
+#	TODO: https://cmake.org/cmake/help/latest/module/FetchContent.html 
+#
+function(dk_import url)
 	DKDEBUGFUNC(${ARGV})
 	dk_importVariables(${ARGV} plugin)
 	string(TOUPPER ${plugin} plugin_var)
 	
-	dk_verbose("[${plugin_var}] =		${${plugin_var}}")
-	dk_verbose("[${plugin_var}_URL] =		${${plugin_var}_URL}")
+	dk_verbose("\${${plugin_var}}] =			${${plugin_var}}")
+	dk_verbose("[${plugin_var}_URL] =			${${plugin_var}_URL}")
 	dk_verbose("[${plugin_var}_VERSION] =		${${plugin_var}_VERSION}")
 	dk_verbose("[${plugin_var}_FOLDER] =		${${plugin_var}_FOLDER}")
 	dk_verbose("[${plugin_var}_BRANCH] =		${${plugin_var}_BRANCH}")
@@ -4036,6 +4059,8 @@ function(dk_import2 url)
 		dk_patch(${plugin} ${${plugin_var}})
 	endif()
 endfunction()
+dk_createOsMacros("dk_import")
+
 
 ###############################################################################
 # dk_DownloadAll3rdParty()

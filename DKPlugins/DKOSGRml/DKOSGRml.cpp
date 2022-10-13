@@ -1,21 +1,19 @@
 #include "DK/stdafx.h"
-#include "DKOSGRocket.h"
+#include "DKOSGRml/DKOSGRml.h"
 #include <osg/State>
 
-DKOSGRocketRender* DKOSGRocket::guirender = NULL;
-DKOSGRocketSystem* DKOSGRocket::guisystem = NULL;
+DKOSGRmlRender* DKOSGRml::guirender = NULL;
+DKOSGRmlSystem* DKOSGRml::guisystem = NULL;
 
 
-////////////////////////
-void DKOSGRocket::Init()
-{
+bool DKOSGRml::Init(){
 	//link objects
 	dkOsgViewer = DKOSGViewer::Get("DKOSGViewer0");
 	dkOsgWindow = DKOSGWindow::Get("DKOSGWindow0");
 	dkRocket = DKRocket::Instance("DKRocket0");
-	if(!dkOsgViewer){ DKLog("DKOSGRocket::Init(): dkOsgViewer invalid \n", DKERROR); return; }
-	if(!dkOsgWindow){ DKLog("DKOSGRocket::Init(): dkOsgWindow invalid \n", DKERROR); return; }
-	if(!dkRocket){ DKLog("DKOSGRocket::Init(): dkRocket invalid \n", DKERROR); return; }
+	if(!dkOsgViewer){ DKLog("DKOSGRml::Init(): dkOsgViewer invalid \n", DKERROR); return; }
+	if(!dkOsgWindow){ DKLog("DKOSGRml::Init(): dkOsgWindow invalid \n", DKERROR); return; }
+	if(!dkRocket){ DKLog("DKOSGRml::Init(): dkRocket invalid \n", DKERROR); return; }
 
 	SetupRocket();
 
@@ -29,12 +27,11 @@ void DKOSGRocket::Init()
 #endif
 
 	dkRocket->context = guinode->getContext();
-	AddEvent("GLOBAL", "resize", &DKOSGRocket::OnResize, this); 
+	AddEvent("GLOBAL", "resize", &DKOSGRml::OnResize, this);
+	return true;
 }
 
-///////////////////////
-void DKOSGRocket::End()
-{
+bool DKOSGRml::End(){
 	if(guicam){
 		//dkOsgWindow->root->removeChild(guicam);
 		//guicam->removeChild(guinode); 
@@ -48,26 +45,23 @@ void DKOSGRocket::End()
 		//guirender = NULL;
 		//Rocket::Core::Shutdown();
 	}
+	return true;
 }
 
-///////////////////////////////
-bool DKOSGRocket::SetupRocket()
-{
+bool DKOSGRml::SetupRocket(){
 	if(!guirender){
-		guirender = new DKOSGRocketRender();
+		guirender = new DKOSGRmlRender();
 		Rocket::Core::SetRenderInterface(guirender);
 	}
 	if(!guisystem){
-		guisystem = new DKOSGRocketSystem();
+		guisystem = new DKOSGRmlSystem();
 		Rocket::Core::SetSystemInterface(guisystem);
 	}
-	
 	if(!Rocket::Core::Initialise()){
 		DKLog("Rocket::Core::Initialise() failed! \n", DKERROR);
 		return false;
 	}
 	Rocket::Controls::Initialise();
-
 	guinode = new DKRocketGuiNode(dkOsgWindow->mTitle, true); //true = rocket debugger
 	guicam = new osg::Camera();
 	guicam->setClearMask(GL_DEPTH_BUFFER_BIT);
@@ -80,7 +74,7 @@ bool DKOSGRocket::SetupRocket()
 	/*
 	{ //PIP window
 		//FIXME - work to be done here and DKOSGWindow::CreatePIP()
-		guinode = new DKOSGRocket::GuiNode(title.c_str(), true); //true = rocket debugger
+		guinode = new DKOSGRml::GuiNode(title.c_str(), true); //true = rocket debugger
 		guicam = new osg::Camera();
 		guicam->setClearMask(GL_DEPTH_BUFFER_BIT);
 		guicam->setRenderOrder(osg::Camera::POST_RENDER, 100);
@@ -97,17 +91,14 @@ bool DKOSGRocket::SetupRocket()
 	*/
 
 	guicam->addChild(guinode); // add gui as child to cam
-
 	dkOsgWindow->root->addChild(guicam); // gui cam is slave cam of viewer cam	
     dkOsgWindow->view->addEventHandler(guinode->GetGUIEventHandler());
 	return true;
 }
 
-//////////////////////////////////////////
-void DKOSGRocket::OnResize(DKEvent* event)
-{
+void DKOSGRml::OnResize(DKEvent* event){
 	DKStringArray arry;
 	toStringArray(arry, event->data[0], ",");
-	DKLog("DKOSGRocket::OnResize("+arry[0]+","+arry[1]+")\n", DKINFO);
+	DKLog("DKOSGRml::OnResize("+arry[0]+","+arry[1]+")\n", DKINFO);
 	guinode->setScreenSize(toInt(arry[0]), toInt(arry[1]));
 }

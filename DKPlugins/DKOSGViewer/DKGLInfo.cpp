@@ -1,6 +1,31 @@
+/*
+* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+*
+* For the latest information, see https://github.com/aquawicket/DigitalKnob
+*
+* Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files(the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions :
+*
+* The above copyright noticeand this permission notice shall be included in all
+* copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*/
+
 #include "DK/stdafx.h"
 #include "DKGLInfo.h"
-
 #include <osg/FragmentProgram>
 #include <osg/GraphicsContext>
 #include <osg/GL>
@@ -10,28 +35,22 @@
 #include <osgViewer/Version>
 #include <OpenThreads/Thread>
 
-/////////////////////
-void DKGLInfo::Init()
-{
+bool DKGLInfo::Init(){
+	DKDEBUGFUNC();	
 	osgViewerGetVersion();
-
 	// check the environment in order to disable ATI workarounds
 	bool enableATIworkarounds = true;
-
 	// logical CPUs (cores)
 	_numProcessors = OpenThreads::GetNumberOfProcessors();
-
 	// GLES compile?
 #if (defined(OSG_GLES1_AVAILABLE) || defined(OSG_GLES2_AVAILABLE))
 	_isGLES = true;
 #else
 	_isGLES = false;
 #endif
-
 	osg::GraphicsContext::ScreenIdentifier si;
 	si.readDISPLAY();
 	si.setUndefinedScreenDetailsToDefaultScreen();
-
 	osg::ref_ptr<osg::GraphicsContext::Traits> traits = new osg::GraphicsContext::Traits;
 	traits->hostName = si.hostName;
 	traits->displayNum = si.displayNum;
@@ -44,56 +63,42 @@ void DKGLInfo::Init()
 	traits->doubleBuffer = false;
 	traits->sharedContext = 0;
 	traits->pbuffer = false;
-
 	// Intel graphics adapters dont' support pbuffers, and some of their drivers crash when
 	// you try to create them. So by default we will only use the unmapped/pbuffer method
 	// upon special request.
 	if (getenv("DK_USE_PBUFFER_TEST")){
 		traits->pbuffer = true;
-		DKLog("Activating pbuffer test for graphics capabilities. \n", DKINFO);
+		DKINFO("Activating pbuffer test for graphics capabilities. \n");
 		_gc = osg::GraphicsContext::createGraphicsContext(traits.get());
-		if (!_gc.valid()){
-			DKLog("Failed to create pbuffer \n", DKERROR);
-		}
+		if (!_gc.valid())
+			return DKERROR("Failed to create pbuffer \n");
 	}
-
 	if (!_gc.valid()){
 		// fall back on a mapped window
 		traits->pbuffer = false;
 		_gc = osg::GraphicsContext::createGraphicsContext(traits.get());
 	}
-
 	if (_gc.valid()){
 		_gc->realize();
 		_gc->makeCurrent();
-
-		if (traits->pbuffer == false)
-		{
-			DKLog("Realized graphics window for OpenGL operations. \n", DKINFO);
+		if (traits->pbuffer == false){
+			DKINFO("Realized graphics window for OpenGL operations. \n");
 		}
-		else
-		{
-			DKLog("Realized pbuffer for OpenGL operations. \n", DKINFO);
+		else{
+			DKINFO("Realized pbuffer for OpenGL operations. \n");
 		}
 	}
 	else{
-		DKLog("Failed to create graphic window too. \n", DKERROR);
+		return DKERROR("Failed to create graphic window too. \n");
 	}
-
-
-	////////////////////////////////////////////////
-	if (!_gc.valid() || !_gc->isRealized()){
-		DKLog("DKGLInfo: context invalid. \n", DKERROR);
-		return;
-	}
-
+	if (!_gc.valid() || !_gc->isRealized())
+		return DKERROR("DKGLInfo: context invalid. \n");
 	osg::GraphicsContext* gc = _gc.get();
 	unsigned int id = gc->getState()->getContextID();
 	const osg::GL2Extensions* GL2 = osg::GL2Extensions::Get(id, true);
-
 	if (::getenv("DK_NO_GLSL")){
 		_supportsGLSL = false;
-		DKLog("Note: GLSL expressly disabled (DK_NO_GLSL)\n", DKINFO);
+		DKINFO("Note: GLSL expressly disabled (DK_NO_GLSL) \n");
 	}
 	else{
 			/*
@@ -104,33 +109,23 @@ void DKGLInfo::Init()
 #endif
 			*/
 	}
-
-	DKLog("Detected hardware capabilities: \n", DKINFO);
-
+	DKINFO("Detected hardware capabilities: \n");
 	_vendor = std::string(reinterpret_cast<const char*>(glGetString(GL_VENDOR)));
-	DKLog("  Vendor = " + _vendor +"\n", DKINFO);
-
+	DKINFO("  Vendor = " + _vendor +"\n");
 	_renderer = std::string(reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
-	DKLog("  Renderer = " + _renderer + "\n", DKINFO);
-
+	DKINFO("  Renderer = " + _renderer + "\n");
 	_version = std::string(reinterpret_cast<const char*>(glGetString(GL_VERSION)));
-	DKLog("  Version = " + _version + "\n", DKINFO);
-
+	DKINFO("  Version = " + _version + "\n");
 	glGetIntegerv(GL_MAX_TEXTURE_UNITS, &_maxFFPTextureUnits);
-	//DKLog("  Max FFP texture units = " + _maxFFPTextureUnits + "\n");
-
+	//DKINFO("  Max FFP texture units = " + _maxFFPTextureUnits + "\n");
 	glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS_ARB, &_maxGPUTextureUnits);
-	//DKLog("  Max GPU texture units = " + _maxGPUTextureUnits + "\n");
-
+	//DKINFO("  Max GPU texture units = " + _maxGPUTextureUnits + "\n");
 	glGetIntegerv(GL_MAX_TEXTURE_COORDS_ARB, &_maxGPUTextureCoordSets);
-	//DKLog("  Max GPU texture coord indices = " + _maxGPUTextureCoordSets + "\n");
-
+	//DKINFO("  Max GPU texture coord indices = " + _maxGPUTextureCoordSets + "\n");
 	glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &_maxGPUAttribs);
-	//DKLog("  Max GPU attributes = " + _maxGPUAttribs + "\n");
-
+	//DKINFO("  Max GPU attributes = " + _maxGPUAttribs + "\n");
 	glGetIntegerv(GL_DEPTH_BITS, &_depthBits);
-	//DKLog("  Depth buffer bits = " + _depthBits + "\n");
-
+	//DKINFO("  Depth buffer bits = " + _depthBits + "\n");
 	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &_maxTextureSize);
 #if !(defined(OSG_GLES1_AVAILABLE) || defined(OSG_GLES2_AVAILABLE))
 		// Use the texture-proxy method to determine the maximum texture size 
@@ -144,17 +139,14 @@ void DKGLInfo::Init()
 		}
 	}
 #endif
-	//DKLog("  Max texture size = " + _maxTextureSize + "\n");
-
+	//DKINFO("  Max texture size = " + _maxTextureSize + "\n");
 #ifdef OSG_GL_FIXED_FUNCTION_AVAILABLE
 		glGetIntegerv(GL_MAX_LIGHTS, &_maxLights);
 #else
 		_maxLights = 1;
 #endif
-	//DKLog("  Max lights = " + _maxLights + "\n");
-
-	DKLog("  GLSL = " + toString(_supportsGLSL) + "\n", DKINFO);
-
+	//DKINFO("  Max lights = " + _maxLights + "\n");
+	DKINFO("  GLSL = " + toString(_supportsGLSL) + "\n");
 	if (_supportsGLSL){
 	/*
 #if OSG_MIN_VERSION_REQUIRED(3,3,3)
@@ -162,90 +154,69 @@ void DKGLInfo::Init()
 #else
 		_GLSLversion = GL2->getLanguageVersion();
 #endif
-	DKLog("  GLSL Version = " + getGLSLVersionInt());
+	DKINFO("  GLSL Version = " + getGLSLVersionInt());
 	*/
 	}
-
 	_supportsTextureArrays =
 	_supportsGLSL &&
 	osg::getGLVersionNumber() >= 2.0f && // hopefully this will detect Intel cards
 	osg::isGLExtensionSupported(id, "GL_EXT_texture_array");
-	DKLog("  Texture arrays = " + toString(_supportsTextureArrays) + "\n", DKINFO);
-
+	DKINFO("  Texture arrays = " + toString(_supportsTextureArrays) + "\n");
 	_supportsTexture3D = osg::isGLExtensionSupported(id, "GL_EXT_texture3D");
-	DKLog("  3D textures = " + toString(_supportsTexture3D) + "\n", DKINFO);
-
+	DKINFO("  3D textures = " + toString(_supportsTexture3D) + "\n");
 	_supportsMultiTexture =
 	osg::getGLVersionNumber() >= 1.3f ||
 	osg::isGLExtensionSupported(id, "GL_ARB_multitexture") ||
 	osg::isGLExtensionSupported(id, "GL_EXT_multitexture");
-	DKLog("  Multitexturing = " + toString(_supportsMultiTexture) + "\n", DKINFO);
-
+	DKINFO("  Multitexturing = " + toString(_supportsMultiTexture) + "\n");
 	_supportsStencilWrap = osg::isGLExtensionSupported(id, "GL_EXT_stencil_wrap");
-	//DKLog("  Stencil wrapping = " + toString(_supportsStencilWrap)+"\n");
-
+	//DKINFO("  Stencil wrapping = " + toString(_supportsStencilWrap)+"\n");
 	_supportsTwoSidedStencil = osg::isGLExtensionSupported(id, "GL_EXT_stencil_two_side");
-	//DKLog("  2-sided stencils = " + toString(_supportsTwoSidedStencil)+"\n");
-
+	//DKINFO("  2-sided stencils = " + toString(_supportsTwoSidedStencil)+"\n");
 	_supportsDepthPackedStencilBuffer = osg::isGLExtensionSupported(id, "GL_EXT_packed_depth_stencil") ||
 	osg::isGLExtensionSupported(id, "GL_OES_packed_depth_stencil");
-	//DKLog("  depth-packed stencil = " + toString(_supportsDepthPackedStencilBuffer)+"\n");
-
+	//DKINFO("  depth-packed stencil = " + toString(_supportsDepthPackedStencilBuffer)+"\n");
 	_supportsOcclusionQuery = osg::isGLExtensionSupported(id, "GL_ARB_occlusion_query");
-	//DKLog("  occlusion query = " + toString(_supportsOcclusionQuery)+"\n");
-
+	//DKINFO("  occlusion query = " + toString(_supportsOcclusionQuery)+"\n");
 	_supportsDrawInstanced =
 	_supportsGLSL &&
 	osg::isGLExtensionOrVersionSupported(id, "GL_EXT_draw_instanced", 3.1f);
-	DKLog("  draw instanced = " + toString(_supportsDrawInstanced) + "\n", DKINFO);
-
+	DKINFO("  draw instanced = " + toString(_supportsDrawInstanced) + "\n");
 	glGetIntegerv(GL_MAX_UNIFORM_BLOCK_SIZE, &_maxUniformBlockSize);
 	//DKLog("  max uniform block size = " + _maxUniformBlockSize+"\n");
-
 	_supportsUniformBufferObjects =
 	_supportsGLSL &&
 	osg::isGLExtensionOrVersionSupported(id, "GL_ARB_uniform_buffer_object", 2.0f);
-	DKLog("  uniform buffer objects = " + toString(_supportsUniformBufferObjects) + "\n", DKINFO);
-
+	DKINFO("  uniform buffer objects = " + toString(_supportsUniformBufferObjects) + "\n");
 	if (_supportsUniformBufferObjects && _maxUniformBlockSize == 0){
-		DKLog("  ...but disabled, since UBO block size reports zero \n", DKINFO);
+		DKINFO("  ...but disabled, since UBO block size reports zero \n");
 		_supportsUniformBufferObjects = false;
 	}
-
 	_supportsNonPowerOfTwoTextures =
 	osg::isGLExtensionSupported(id, "GL_ARB_texture_non_power_of_two");
-	DKLog("  NPOT textures = " + toString(_supportsNonPowerOfTwoTextures) + "\n", DKINFO);
-
+	DKINFO("  NPOT textures = " + toString(_supportsNonPowerOfTwoTextures) + "\n");
 	_supportsTextureBuffer =
 	osg::isGLExtensionOrVersionSupported(id, "GL_ARB_texture_buffer_object", 3.0) ||
 	osg::isGLExtensionOrVersionSupported(id, "GL_EXT_texture_buffer_object", 3.0);
-
-	if (_supportsTextureBuffer){
+	if (_supportsTextureBuffer)
 		glGetIntegerv(GL_MAX_TEXTURE_BUFFER_SIZE, &_maxTextureBufferSize);
-	}
-
-	DKLog("  Texture buffers = " + toString(_supportsTextureBuffer) + "\n", DKINFO);
+	DKINFO("  Texture buffers = " + toString(_supportsTextureBuffer) + "\n");
 	if (_supportsTextureBuffer){
 		//DKLog("  Texture buffer max size = " + _maxTextureBufferSize + "\n");
 	}
-
 	bool supportsTransformFeedback =
 	osg::isGLExtensionSupported(id, "GL_ARB_transform_feedback2");
-	DKLog("  Transform feedback = " + toString(supportsTransformFeedback) + "\n", DKINFO);
-
+	DKINFO("  Transform feedback = " + toString(supportsTransformFeedback) + "\n");
 	// Writing to gl_FragDepth is not supported under GLES:
 #if (defined(OSG_GLES1_AVAILABLE) || defined(OSG_GLES2_AVAILABLE))
 	_supportsFragDepthWrite = false;
 #else
 	_supportsFragDepthWrite = true;
 #endif
-
 	//_supportsTexture2DLod = osg::isGLExtensionSupported( id, "GL_ARB_shader_texture_lod" );
-	//DKLog("  texture2DLod = " + toString(_supportsTexture2DLod) + "\n";
-
+	//DKINFO("  texture2DLod = " + toString(_supportsTexture2DLod) + "\n");
 	// NVIDIA:
 	bool isNVIDIA = _vendor.find("NVIDIA") == 0;
-
 	// NVIDIA has h/w acceleration of some kind for display lists, supposedly.
 	// In any case they do benchmark much faster in osgEarth for static geom.
 	// BUT unfortunately, they dont' seem to work too well with shaders. Colors
@@ -253,9 +224,8 @@ void DKGLInfo::Init()
 	// untextured. TODO: investigate.
 #if 1
 	_preferDLforStaticGeom = false;
-	if (::getenv("DK_TRY_DISPLAY_LISTS")){
+	if (::getenv("DK_TRY_DISPLAY_LISTS"))
 		_preferDLforStaticGeom = true;
-	}
 #else
 	if (::getenv("DK_ALWAYS_USE_VBOS")){
 		_preferDLforStaticGeom = false;
@@ -264,15 +234,11 @@ void DKGLInfo::Init()
 		_preferDLforStaticGeom = isNVIDIA;
 	}
 #endif
-
-	DKLog("  prefer DL for static geom = " + toString(_preferDLforStaticGeom) + "\n", DKINFO);
-
+	DKINFO("  prefer DL for static geom = " + toString(_preferDLforStaticGeom) + "\n");
 	// ATI workarounds:
 	bool isATI = _vendor.find("ATI ") == 0;
-
 	_supportsMipmappedTextureUpdates = isATI && enableATIworkarounds ? false : true;
-	DKLog("  Mipmapped texture updates = " + toString(_supportsMipmappedTextureUpdates) + "\n", DKINFO);
-
+	DKINFO("  Mipmapped texture updates = " + toString(_supportsMipmappedTextureUpdates) + "\n");
 #if 0
 	// Intel workarounds:
 	bool isIntel =
@@ -280,33 +246,30 @@ void DKGLInfo::Init()
 	_vendor.find("Intel(R)") != std::string::npos ||
 	_vendor.compare("Intel") == 0;
 #endif
-
 	_maxFastTextureSize = _maxTextureSize;
-
-	//DKLog("  Max Fast Texture Size = " + _maxFastTextureSize + "\n";
-
+	//DKINFO("  Max Fast Texture Size = " + _maxFastTextureSize + "\n");
 	/*
 	// tetxure compression
-	DKLog("  Compression = ");
+	DKINFO("  Compression = ");
 	_supportsARBTC = osg::isGLExtensionSupported(id, "GL_ARB_texture_compression");
 	if (_supportsARBTC) DK_INFO_CONTINUE << "ARB ";
-
 	_supportsS3TC = osg::isGLExtensionSupported(id, "GL_EXT_texture_compression_s3tc");
 	if (_supportsS3TC) DK_INFO_CONTINUE << "S3 ";
-
 	_supportsPVRTC = osg::isGLExtensionSupported(id, "GL_IMG_texture_compression_pvrtc");
 	if (_supportsPVRTC) DK_INFO_CONTINUE << "PVR ";
-
 	_supportsETC = osg::isGLExtensionSupported(id, "GL_OES_compressed_ETC1_RGB8_texture");
 	if (_supportsETC) DK_INFO_CONTINUE << "ETC1 ";
-
 	_supportsRGTC = osg::isGLExtensionSupported(id, "GL_EXT_texture_compression_rgtc");
 	if (_supportsRGTC) DK_INFO_CONTINUE << "RG";
-
 	OE_INFO_CONTINUE << std::endl;
 	*/
-
 	//CLOSE the graphics context
 	_gc->close();
 	_gc = NULL;
+	return true;
+}
+
+bool DKGLInfo::End(){
+	DKDEBUGFUNC();	
+	return true;
 }

@@ -1,14 +1,16 @@
 #pragma once
 #ifndef DKOSGCefKeyboard_H
 #define DKOSGCefKeyboard_H
-#include "DK.h"
+#include "DK/DK.h"
 #include <osgGA/GUIEventAdapter>
 
 class DKOSGCefKeyboard
 {
 public:
 
-	DKOSGCefKeyboard(){};
+	DKOSGCefKeyboard(){
+		DKDEBUGFUNC();
+	};
     unsigned int getCefModifiers(int modKeyMask);
 };
 

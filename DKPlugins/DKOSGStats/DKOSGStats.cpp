@@ -1,10 +1,8 @@
 #include "DK/stdafx.h"
-#include "DKOSGStats.h"
-#include "DKOSGWindow.h"
+#include "DKOSGStats/DKOSGStats.h"
+#include "DKOSGWindow/DKOSGWindow.h"
 
-////////////////////
-void DKOSGStats::Init()
-{
+bool DKOSGStats::Init(){
 //#ifdef USE_osgText
 	stats = new osgViewer::StatsHandler();
 	DKOSGWindow::Instance("DKOSGWindow")->view->addEventHandler(stats);
@@ -14,18 +12,17 @@ void DKOSGStats::Init()
 #ifdef USE_SHADERS
 	DKLog("Warning: osgViewer::StatsHandler is enabled, but no shaders for it.");
 #endif //USE_SHADERS
+	return true;
 //#endif
 }
 
-///////////////////
-void DKOSGStats::End()
-{
+bool DKOSGStats::End(){
 	//DKOSGWindow::Instance("DKOSGWindow")->view->removeEventHandler(stats);
 	stats = NULL;
+	return true;
 }
 
-//////////////////////
-void DKOSGStats::Toggle()
-{
-	
+bool DKOSGStats::Toggle(){
+	// TODO
+	return DKERROR("not implemented \n");
 }

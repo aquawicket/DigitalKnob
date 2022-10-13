@@ -1,47 +1,38 @@
 #include "DK/stdafx.h"
-#include "DKOSGModel.h"
-
-#include "DKOSGWindow.h"
-#include "DKFile.h"
+#include "DKOSGModel/DKOSGModel.h"
+#include "DKOSGWindow/DKOSGWindow.h"
+#include "DK/DKFile.h"
 
 //#ifdef USE_osgwTools
-//#include "DKPhysics.h"
+//#include "DKPhysics/DKPhysics.h"
 //#include <osgwTools/AbsoluteModelTransform.h>
 //#endif
 
-#include <DKString.h>
+#include "DK/DKString.h"
 #include <osgViewer/Viewer>
 #include <osgDB/ReadFile>
-#include "DKAssets.h"
+#include "DKAssets/DKAssets.h"
 
 
-///////////////////////
-bool DKOSGModel::Init()
-{
+bool DKOSGModel::Init(){
 	modelNode = NULL;
 	Create(DKOSGWindow::Get("DKOSGWindow0"), DKOSGWindow::Get("DKOSGWindow0")->world, data[1], osg::Vec3(0, 0, 70));
 	return true;
 }
 
-//////////////////////
-bool DKOSGModel::End()
-{
+bool DKOSGModel::End(){
 	this->theRoot->removeChild(modelNode);
 	modelNode = NULL;
 	return true;
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////
-bool DKOSGModel::Create(DKOSGWindow* window, osg::Group* theRoot, const DKString& file,  osg::Vec3 pos)
-{
+bool DKOSGModel::Create(DKOSGWindow* window, osg::Group* theRoot, const DKString& file,  osg::Vec3 pos){
 	//DKLog("Loading Model "+file+"\n");
 	this->theRoot = theRoot;
 
 	DKString path = file;
-	if(!DKFile::VerifyPath(path)){
-		DKLog("Could not find "+file+"\n",DKERROR);
-		return false; 
-	}
+	if(!DKFile::VerifyPath(path))
+		return DKERROR("Could not find "+file+"\n");
 
 //#ifdef USE_osgwTools
 //	if(DKPhysics::Valid("DKPhysics")){	
@@ -60,10 +51,8 @@ bool DKOSGModel::Create(DKOSGWindow* window, osg::Group* theRoot, const DKString
 
 		if(!modelNode.valid()){
 		 modelNode = osgDB::readNodeFile( path );
-			if(!modelNode.valid()){
-				DKLog("Cannot load "+path+"\n", DKERROR);
-				return false;
-			}
+			if(!modelNode.valid())
+				return DKERROR("Cannot load "+path+"\n");
 		}
 //#ifdef USE_osgwTools
 //		amt->addChild( modelNode.get() );
@@ -74,4 +63,3 @@ bool DKOSGModel::Create(DKOSGWindow* window, osg::Group* theRoot, const DKString
 	}
 	return true;
 }
-

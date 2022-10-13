@@ -3,6 +3,7 @@
 # https://github.com/htacg/tidy-html5/archive/refs/tags/5.8.0.zip
 
 
+### IMPORT 
 dk_import(https://github.com/htacg/tidy-html5.git)
 
 
@@ -29,7 +30,6 @@ dk_queueCommand	(${DKCMAKE_BUILD} -DBUILD_SHARED_LIB=OFF ${ZLIB_CMAKE} ${TIDY-HT
 
 
 ### COMPILE ###
-dk_visualStudio				(${TIDY-HTML5_NAME} tidy-static)
-dk_xcode					(${TIDY-HTML5_NAME} tidy-static)
-LINUX_dk_queueCommand		(make tidy-static)
-RASPBERRY_dk_queueCommand	(make tidy-static)
+dk_visualStudio	(${TIDY-HTML5_NAME} tidy-static) # windows, android
+dk_xcode		(${TIDY-HTML5_NAME} tidy-static) # mac, ios, iossim
+dk_make			(${TIDY-HTML5_NAME} tidy-static) # linux, raspberry

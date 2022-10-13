@@ -1,29 +1,25 @@
 #include "DK/stdafx.h"
-#include "DKOSGTerrain.h"
-#include "DKOSGWindow.h"
+#include "DKOSGTerrain/DKOSGTerrain.h"
+#include "DKOSGWindow/DKOSGWindow.h"
 #include <osg/ShapeDrawable>
 #include "terrain_coords.h"
 #include <osgDB/ReadFile>
 
 
-//////////////////////
-void DKOSGTerrain::Init()
-{
+bool DKOSGTerrain::Init(){
 	osg::Vec3 center(0.0f,0.0f,0.0f);
 	float radius = 100.0f;
     terrain = createBase(center-osg::Vec3(0.0f,0.0f,radius*0.1),radius);
 	DKOSGWindow::Instance("DKOSGWindow")->world->addChild(terrain);
+	return true;
 }
 
-/////////////////////
-void DKOSGTerrain::End()
-{
+bool DKOSGTerrain::End(){
 	DKOSGWindow::Instance("DKOSGWindow")->world->removeChild(terrain);
+	return true;
 }
 
-//////////////////////////////////////////////////////////////////////
-osg::Node* DKOSGTerrain::createBase(const osg::Vec3& center,float radius)
-{
+osg::Node* DKOSGTerrain::createBase(const osg::Vec3& center,float radius){
     osg::Geode* geode = new osg::Geode;
     
     // set up the texture of the base.

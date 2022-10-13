@@ -1,4 +1,5 @@
 if(NOT LINUX_HOST)
+	dk_undepend(build-essential)
 	return()
 endif()
 

@@ -1,11 +1,15 @@
 ## https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz
 
 
+### DEPEND ###
 dk_depend(sdl)
 
+
+### IMPORT ###
 dk_import(https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz PATCH)
 
-### DKPLUGINS LINK ###
+
+### LINK ###
 dk_include(${SMPEG2})
 WIN_dk_libDebug			(${SMPEG2}/${OS}/lib/${DEBUG_DIR}/libsmpeg2.lib)
 WIN_dk_libRelease		(${SMPEG2}/${OS}/lib/${RELEASE_DIR}/libsmpeg2.lib)
@@ -35,12 +39,6 @@ ANDROID_dk_queueCommand		(${DKCMAKE_BUILD} ${SDL_CMAKE} ${SMPEG2})
 
 
 ### COMPILE ###
-dk_visualStudio				(${SMPEG2_NAME} SMPEG)
-#WIN_dk_visualStudio		(${SMPEG2_NAME} SMPEG)
-dk_xcode					(${SMPEG2_NAME} SMPEG)
-#MAC_dk_xcode				(${SMPEG2_NAME} SMPEG)
-#IOS_dk_xcode				(${SMPEG2_NAME} SMPEG)
-#IOSSIM_dk_xcode			(${SMPEG2_NAME} SMPEG)
-LINUX_dk_queueCommand		(make SMPEG)
-RASPBERRY_dk_queueCommand	(make SMPEG)
-#ANDROID_dk_visualStudio	(${SMPEG2_NAME} SMPEG)
+dk_visualStudio	(${SMPEG2_NAME} SMPEG) # windows, android
+dk_xcode		(${SMPEG2_NAME} SMPEG) # mac, ios, iossim
+dk_make			(${SMPEG2_NAME} SMPEG) # linux, raspberry

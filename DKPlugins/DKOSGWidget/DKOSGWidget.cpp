@@ -1,21 +1,15 @@
 #include "DK/stdafx.h"
-#include "DKOSGWidget.h"
+#include "DKOSGWindow/DKOSGWindow.h"
 
-//////////////////////////
-DKOSGWidget::DKOSGWidget()
-{
+DKOSGWidget::DKOSGWidget(){
 
 }
 
-///////////////////////////
-DKOSGWidget::~DKOSGWidget()
-{
+DKOSGWidget::~DKOSGWidget(){
 
 }
 
-///////////////////////////////////////////////
-bool DKOSGWidget::SetupWidget(DKOSGWindow* window)
-{
+bool DKOSGWidget::SetupWidget(DKOSGWindow* window){
 	/*
     wm = new osgWidget::WindowManager(
                                       window->view,
@@ -41,4 +35,3 @@ bool DKOSGWidget::SetupWidget(DKOSGWindow* window)
 	*/
 	return false;
 }
-

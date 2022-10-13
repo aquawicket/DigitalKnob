@@ -1,8 +1,7 @@
 #pragma once
 #ifndef DKOSGLights_H
 #define DKOSGLights_H
-#include "DK.h"
-
+#include "DK/DK.h"
 #include <osg/Node>
 
 class DKOSGLights : public DKObjectT<DKOSGLights>

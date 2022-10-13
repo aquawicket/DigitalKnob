@@ -1,7 +1,7 @@
 #pragma once
 #ifndef DKOSGNotify_H
 #define DKOSGNotify_H
-#include "DK.h"
+#include "DK/DK.h"
 
 #ifdef ANDROID
 #include <android/log.h>

@@ -1,11 +1,9 @@
 #include "DK/stdafx.h"
 //#ifdef USE_osgFX
-#include "DKOSGPicker.h"
-#include "DKOSGWindow.h"
+#include "DKOSGPicker/DKOSGPicker.h"
+#include "DKOSGWindow/DKOSGWindow.h"
 
-/////////////////////
-void DKOSGPicker::Init()
-{
+bool DKOSGPicker::Init(){
 	outline = new osgFX::Outline;
 	//dkWindow->world->addChild(outline.get());
 	DKOSGWindow::Instance(data[1])->world->addChild(outline.get());
@@ -16,16 +14,12 @@ void DKOSGPicker::Init()
 	DKOSGWindow::Instance(data[1])->view->addEventHandler(this);
 }
 
-/////////////////////
-DKOSGPicker::~DKOSGPicker()
-{
+DKOSGPicker::~DKOSGPicker(){
 	outline = NULL;
 	DKOSGWindow::Instance(data[1])->view->removeEventHandler(this);
 }
 
-///////////////////////////////////////////////////////////////////////////////////
-bool DKOSGPicker::handle(const osgGA::GUIEventAdapter& ea,osgGA::GUIActionAdapter& aa)
-{
+bool DKOSGPicker::handle(const osgGA::GUIEventAdapter& ea,osgGA::GUIActionAdapter& aa){
 	if(ea.getEventType() == osgGA::GUIEventAdapter::PUSH){
 		osgViewer::View* view = dynamic_cast<osgViewer::View*>(&aa);
 		if (view){
@@ -33,20 +27,16 @@ bool DKOSGPicker::handle(const osgGA::GUIEventAdapter& ea,osgGA::GUIActionAdapte
 			return true;
 		}
 	}
-
 	if(ea.getButtonMask() == osgGA::GUIEventAdapter::RIGHT_MOUSE_BUTTON){
 		osgViewer::View* view = dynamic_cast<osgViewer::View*>(&aa);
 		if (view){
 			remove(view,ea);
 		}
 	}
-	
 	return false;
 }
 
-////////////////////////////////////////////////////////////////////////////
-void DKOSGPicker::pick(osgViewer::View* view, const osgGA::GUIEventAdapter& ea)
-{
+void DKOSGPicker::pick(osgViewer::View* view, const osgGA::GUIEventAdapter& ea){
 
 	outline->removeChildren(0, outline->getNumChildren());
 
@@ -114,12 +104,10 @@ void DKOSGPicker::pick(osgViewer::View* view, const osgGA::GUIEventAdapter& ea)
             gdlist += os.str();
         }
     }
-    DKLog(gdlist, DKINFO);
+    DKINFO(gdlist);
 }
 
-//////////////////////////////////////////////////////////////////////////////
-void DKOSGPicker::remove(osgViewer::View* view, const osgGA::GUIEventAdapter& ea)
-{
+void DKOSGPicker::remove(osgViewer::View* view, const osgGA::GUIEventAdapter& ea){
 	outline->removeChildren(0, outline->getNumChildren());
     osgUtil::LineSegmentIntersector::Intersections intersections;
 
@@ -142,11 +130,8 @@ void DKOSGPicker::remove(osgViewer::View* view, const osgGA::GUIEventAdapter& ea
 	}
 }
 
-/////////////////////////////////////////////
-void DKOSGPicker::setLabel(const DKString& name)
-{
+void DKOSGPicker::setLabel(const DKString& name){
 	//if (_updateText.get()) _updateText->setText(name);
 }
-
 
 //#endif

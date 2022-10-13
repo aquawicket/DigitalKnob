@@ -1,56 +1,45 @@
 #include "DK/stdafx.h"
-
-#include "DKOSGRocketSystem.h"
+#include "DKOSGRml/DKOSGRmlSystem.h"
 #include <iostream>
 
 
-//////////////////////////////////////
-DKOSGRocketSystem::DKOSGRocketSystem()
-: _timer(osg::Timer::instance()->tick())
-{
+DKOSGRmlSystem::DKOSGRmlSystem() : _timer(osg::Timer::instance()->tick()){
 
 }
 
-/////////////////////////////////////////
-float DKOSGRocketSystem::GetElapsedTime()
-{
+float DKOSGRmlSystem::GetElapsedTime(){
 	return (float)osg::Timer::instance()->time_s();
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-int DKOSGRocketSystem::TranslateString(Rocket::Core::String& translated, const Rocket::Core::String& input)
-{
+int DKOSGRmlSystem::TranslateString(Rml::Core::String& translated, const Rml::Core::String& input){
 	translated = input;
 	return 0;
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-bool DKOSGRocketSystem::LogMessage(Rocket::Core::Log::Type type, const Rocket::Core::String& message)
-{
+bool DKOSGRmlSystem::LogMessage(Rml::Core::Log::Type type, const Rml::Core::String& message){
 	switch(type)
 	{
-	case Rocket::Core::Log::LT_ALWAYS:
-		DKLog(DKString(message.CString())+"\n", DKINFO);
+	case Rml::Core::Log::LT_ALWAYS:
+		DKINFO(DKString(message.CString())+"\n");
 		break;
-	case Rocket::Core::Log::LT_ERROR:
-		DKLog(DKString(message.CString())+"\n", DKERROR);
+	case Rml::Core::Log::LT_ERROR:
+		DKERROR(DKString(message.CString())+"\n");
 		break;
-	case Rocket::Core::Log::LT_ASSERT:
-		DKLog(DKString(message.CString())+"\n", DKERROR);
+	case Rml::Core::Log::LT_ASSERT:
+		DKERROR(DKString(message.CString())+"\n");
 		break;
-	case Rocket::Core::Log::LT_WARNING:
-		DKLog(DKString(message.CString())+"\n", DKWARN);
+	case Rml::Core::Log::LT_WARNING:
+		DKWARN(DKString(message.CString())+"\n");
 		break;
-	case Rocket::Core::Log::LT_INFO:
-		DKLog(DKString(message.CString())+"\n", DKINFO);
+	case Rml::Core::Log::LT_INFO:
+		DKINFO(DKString(message.CString())+"\n");
 		break;
-	case Rocket::Core::Log::LT_DEBUG:
-		DKLog(DKString(message.CString())+"\n", DKDEBUG);
+	case Rml::Core::Log::LT_DEBUG:
+		DKDEBUG(DKString(message.CString())+"\n");
 		break;
-    case Rocket::Core::Log::LT_MAX:
-		DKLog(DKString(message.CString())+"\n", DKINFO);
+    case Rml::Core::Log::LT_MAX:
+		DKINFO(DKString(message.CString())+"\n");
         break;
 	};
-
 	return true;
 };

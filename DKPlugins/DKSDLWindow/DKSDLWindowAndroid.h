@@ -57,7 +57,7 @@ public:
 	bool onRemoveJoystick(const void* input, void* output);
 	bool onResize(const void* input, void* output);
 	bool onResume(const void* input, void* output);
-	bool onSetComposingText(const void* input, void* output);
+	//bool onSetComposingText(const void* input, void* output);
 	bool onSurfaceChanged(const void* input, void* output);
 	bool onSurfaceDestroyed(const void* input, void* output);
 	bool onTouch(const void* input, void* output);

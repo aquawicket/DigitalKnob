@@ -6,7 +6,7 @@
 #include "DK/DKLog.h"
 #include "DK/DKString.h"
 #include "DK/DKApp.h"
-#include "DKOSGViewer.h" //FIXME
+#include "DKOSGViewer/DKOSGViewer.h"
 
 #ifdef WIN32
 #include <osgViewer/api/Win32/GraphicsHandleWin32>
@@ -25,22 +25,22 @@ class DKOSGWindow : public osgGA::GUIEventHandler, public DKObjectT<DKOSGWindow>
 {
 public:
 	bool Init();
-	bool End(){}
+	//bool End();
 
 	//Functions registered to function table
-	void* GetX(void*);
-	void* GetY(void*);
-	void* SetX(void* x);
-	void* SetY(void* y);
-	void* GetWidth(void*);
-	void* GetHeight(void*);
-	void* SetWidth(void* width);
-	void* SetHeight(void* height);
-	void* GetScreenWidth(void*);
-	void* GetScreenHeight(void*);
-	void* GetMouseX(void*);
-	void* GetMouseY(void*);
-	void* GetHwnd(void*);
+	bool GetX(const void* input, void* output);
+	bool GetY(const void* input, void* output);
+	bool SetX(const void* input, void* output);
+	bool SetY(const void* input, void* output);
+	bool GetWidth(const void* input, void* output);
+	bool GetHeight(const void* input, void* output);
+	bool SetWidth(const void* input, void* output);
+	bool SetHeight(const void* input, void* output);
+	bool GetScreenWidth(const void* input, void* output);
+	bool GetScreenHeight(const void* input, void* output);
+	bool GetMouseX(const void* input, void* output);
+	bool GetMouseY(const void* input, void* output);
+	bool GetHwnd(const void* input, void* output);
 
 	DKOSGViewer* dkOsgViewer;
 	osg::ref_ptr<osg::GraphicsContext> gc;

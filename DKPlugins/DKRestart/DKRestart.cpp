@@ -24,7 +24,9 @@
 * SOFTWARE.
 */
 
+//#include "DKRestart/DKRestart.h"
 #include "DKRestart.h"
+#include <cstdio>
 
 int main(int argc, char* argv[]){
 	printf("DKRestart\n");

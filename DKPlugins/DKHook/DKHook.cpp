@@ -70,7 +70,7 @@ bool DKHook::End() {
 
 #if LINUX
 void DKHook::LinuxHook() {
-	DKDEBUGFUNC()
+	DKDEBUGFUNC();
 	// Read Mouse     
 	bytes = read(fd, _data, sizeof(_data));
 	if(bytes > 0){

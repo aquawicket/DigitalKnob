@@ -1,30 +1,30 @@
 #pragma once
-#ifndef DKOSGRocket_H
-#define DKOSGRocket_H
-#include "DKOSGViewer.h"
-#include "DKOSGWindow.h"
-#include "DKRocket.h"
-#include "DKOSGRocketGui.h"
-#include "DKOSGRocketSystem.h"
-#include "DKEvent.h"
+#ifndef DKOSGRml_H
+#define DKOSGRml_H
+#include "DKOSGViewer/DKOSGViewer.h"
+#include "DKOSGWindow/DKOSGWindow.h"
+#include "DKRml/DKRml.h"
+#include "DKOSGRml/DKOSGRmlGui.h"
+#include "DKOSGRml/DKOSGRmlSystem.h"
+#include "DK/DKEvents.h"
 
-class DKOSGRocket : public DKObjectT<DKOSGRocket>
+class DKOSGRml : public DKObjectT<DKOSGRml>
 {
 public:
-	void Init();
-	void End();
+	bool Init();
+	bool End();
 	
-	bool SetupRocket();
+	bool SetupRml();
 	void OnResize(DKEvent* event);
 
 	DKOSGViewer* dkOsgViewer;
 	DKOSGWindow* dkOsgWindow;
-	DKRocket* dkRocket;
-	DKRocketGuiNode* guinode;
-	static DKOSGRocketRender* guirender;
-	static DKOSGRocketSystem* guisystem;
+	DKRml* dkRml;
+	DKRmlGuiNode* guinode;
+	static DKOSGRmlRender* guirender;
+	static DKOSGRmlSystem* guisystem;
 	osg::ref_ptr<osg::Camera> guicam;
 };
 
-REGISTER_OBJECT(DKOSGRocket, true)
-#endif //DKOSGRocket_H
+REGISTER_OBJECT(DKOSGRml, true)
+#endif //DKOSGRml_H

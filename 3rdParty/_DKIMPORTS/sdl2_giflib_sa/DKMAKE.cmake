@@ -2,10 +2,12 @@
 # https://github.com/theMealena/SDL2_giflib_sa/archive/master.zip
 
 
+### DEPEND ###
 dk_depend(giflib)
 dk_depend(DKSDLWindow)
 
 
+### IMPORT ###
 dk_import(https://github.com/theMealena/SDL2_giflib_sa.git)
 
 
@@ -30,8 +32,7 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${SDL2_CMAKE} ${SDL2_GIFLIB_SA})
 
 
 ### COMPILE ###
-WIN_dk_visualStudio			(${SDL2_GIFLIB_SA_NAME} SDL2_gif)
-dk_xcode					(${SDL2_GIFLIB_SA_NAME} SDL2_gif)
-LINUX_dk_queueCommand		(make)
-RASPBERRY_dk_queueCommand	(make)
-ANDROID_dk_ndk				(${SDL2_GIFLIB_SA_NAME})
+WIN_dk_visualStudio	(${SDL2_GIFLIB_SA_NAME} SDL2_gif)	# windows
+dk_xcode			(${SDL2_GIFLIB_SA_NAME} SDL2_gif)	# mac, ios, iossim
+dk_make				(${SDL2_GIFLIB_SA_NAME} SDL2_gif)	# linux, raspberry
+ANDROID_dk_ndk		(${SDL2_GIFLIB_SA_NAME})			# android

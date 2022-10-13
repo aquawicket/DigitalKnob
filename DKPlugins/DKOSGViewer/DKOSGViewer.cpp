@@ -1,16 +1,40 @@
+/*
+* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+*
+* For the latest information, see https://github.com/aquawicket/DigitalKnob
+*
+* Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files(the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions :
+*
+* The above copyright noticeand this permission notice shall be included in all
+* copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*/
+
 #include "DK/stdafx.h"
-#include "DKOSGViewer.h"
-#include "DKApp.h"
-#include "DKUtil.h"
+#include "DKOSGViewer/DKOSGViewer.h"
+//#include "DKApp.h"
+#include "DK/DKUtil.h"
 #include <osgDB/FileUtils>
 #include <osgDB/FileNameUtils>
-#include "DKFile.h"
+#include "DK/DKFile.h"
 
-////////////////////////
-bool DKOSGViewer::Init()
-{
-	DKCreate("DKOSGNotify");
-	DKCreate("DKGLInfo");
+bool DKOSGViewer::Init(){
+	DKClass::DKCreate("DKOSGNotify");
+	DKClass::DKCreate("DKGLInfo");
 	viewer = new osgViewer::CompositeViewer;
 	DKApp::AppendLoopFunc(&DKOSGViewer::DoFrame, this);
 	//viewer->setRunMaxFrameRate(60.00);
@@ -20,17 +44,12 @@ bool DKOSGViewer::Init()
 	return true;
 }
 
-///////////////////////
-bool DKOSGViewer::End()
-{
+bool DKOSGViewer::End(){
 	return true;
 }
 
-///////////////////////////
-void DKOSGViewer::DoFrame()
-{
+void DKOSGViewer::DoFrame(){
 	if(viewer->isRealized()){
-
 		//TODO: this should be moved into DKAssets
 		/*
 		if(DKApp::loaded == false){
@@ -39,34 +58,23 @@ void DKOSGViewer::DoFrame()
 			}
 		}
 		*/
-
 		viewer->frame();
 	}
-
-	if (viewer->done()){
+	if (viewer->done())
 		DKApp::active = false;
-	}
 }
 
-////////////////////////
-bool DKOSGViewer::Realize()
-{
-	if(!viewer->isRealized()){
+bool DKOSGViewer::Realize(){
+	if(!viewer->isRealized())
 		viewer->realize();
-	}
-	if(!viewer->isRealized()){
-		DKLog("DKOSGViewer::Realize(): multiviewer->realize() failed! \n", DKERROR);
-		return false;
-	}
-
+	if(!viewer->isRealized())
+		return DKERROR("DKOSGViewer::Realize(): multiviewer->realize() failed! \n");
 	viewer->setKeyEventSetsDone(0); //Don't close OSG with ESC key
-	DKLog("multiviewer->realize() success\n", DKINFO);
+	DKINFO("multiviewer->realize() success\n");
 	return true;
 }
 
-///////////////////////////////////////////////////////
-bool DKOSGViewer::AppendDataPath(const DKString& datapath)
-{
+bool DKOSGViewer::AppendDataPath(const DKString& datapath){
 	osgDB::FilePathList fl = osgDB::getDataFilePathList();
 	if(std::find(fl.begin(), fl.end(), datapath) == fl.end()){
 		fl.push_back(datapath);

@@ -1,23 +1,19 @@
-# osgbullet
+# https://github.com/mccdo/osgbullet
 
-#dk_depend(bullet)
+
+### DEPEND ###
 dk_depend(bullet3)
 dk_depend(osgworks)
 
 
-#dk_import(http://TODO.com/osgbullet-master.zip osgbullet-master)
-#dk_set(OSGBULLET ${3RDPARTY}/osgbullet-master)
-dk_import(http://TODO.com/osgbullet-master.zip)
-
-dk_set(OSGBULLET_GL2 ${3RDPARTY}/osgbullet-master-GL2)
-if(OpenGL2)
-	dk_set(OSGBULLET OSGBULLET_GL2)
-endif(OpenGL2)
+### IMPORT ###
+dk_import(https://github.com/mccdo/osgbullet.git)
 
 
 ### LINK ###
-dk_include(${OSGBULLET}/include)
 dk_define(OSGBULLET_STATIC)
+dk_include(${OSGBULLET}/include)
+
 if(osgbCollision)
 	dk_define(OSGBCOLLISION_LIBRARY)	
 	WIN_dk_libDebug(${OSGBULLET}/${OS}/lib/Debug/osgbCollisiond.lib)
@@ -80,31 +76,22 @@ endif()
 ### GENERATE ###
 dk_setPath(${OSGBULLET}/${BUILD_DIR})
 
-WIN_dk_queueCommand(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/${OS} -DOSGSourceRoot=${OSG} "-DBulletInstallType=Source And Build Tree" -DBulletBuildRoot=${BULLET}/${OS} -DBulletSourceRoot=${BULLET} -DosgWorks_DIR=${OSGWORKS}/${OS}/lib -DOSGBULLET_BUILD_APPLICATIONS=OFF -DOSGBULLET_BUILD_EXAMPLES=OFF -DOSGBULLET_INSTALL_DATA=OFF ${OSGBULLET})
+WIN_dk_queueCommand(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OPENSCENEGRAPH}/${OS} -DOSGSourceRoot=${OPENSCENEGRAPH} "-DBulletInstallType=Source And Build Tree" -DBulletBuildRoot=${BULLET}/${OS} -DBulletSourceRoot=${BULLET} -DosgWorks_DIR=${OSGWORKS}/${OS}/lib -DOSGBULLET_BUILD_APPLICATIONS=OFF -DOSGBULLET_BUILD_EXAMPLES=OFF -DOSGBULLET_INSTALL_DATA=OFF ${OSGBULLET})
 
-MAC_dk_queueCommand(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/${OS} -DOSGSourceRoot=${OSG} "-DBulletInstallType=Source And Build Tree" -DBulletBuildRoot=${BULLET}/${OS} -DBulletSourceRoot=${BULLET} -DosgWorks_DIR=${OSGWORKS}/${OS}/lib -DOSGBULLET_BUILD_APPLICATIONS=OFF -DOSGBULLET_BUILD_EXAMPLES=OFF -DOSGBULLET_INSTALL_DATA=OF ${OSGBULLET})
+MAC_dk_queueCommand(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OPENSCENEGRAPH}/${OS} -DOSGSourceRoot=${OPENSCENEGRAPH} "-DBulletInstallType=Source And Build Tree" -DBulletBuildRoot=${BULLET}/${OS} -DBulletSourceRoot=${BULLET} -DosgWorks_DIR=${OSGWORKS}/${OS}/lib -DOSGBULLET_BUILD_APPLICATIONS=OFF -DOSGBULLET_BUILD_EXAMPLES=OFF -DOSGBULLET_INSTALL_DATA=OF ${OSGBULLET})
 
-IOS_dk_queueCommand(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/ios -DOSGSourceRoot=${OSG} "-DBulletInstallType=Source And Build Tree" -DBulletBuildRoot=${BULLET}/ios -DBulletSourceRoot=${BULLET} -DosgWorks_DIR=${OSGWORKS}/ios/lib -DOSGBULLET_BUILD_APPLICATIONS=OFF -DOSGBULLET_BUILD_EXAMPLES=OFF -DOSGBULLET_INSTALL_DATA=OF ${OSGBULLET})
+IOS_dk_queueCommand(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OPENSCENEGRAPH}/ios -DOSGSourceRoot=${OPENSCENEGRAPH} "-DBulletInstallType=Source And Build Tree" -DBulletBuildRoot=${BULLET}/ios -DBulletSourceRoot=${BULLET} -DosgWorks_DIR=${OSGWORKS}/ios/lib -DOSGBULLET_BUILD_APPLICATIONS=OFF -DOSGBULLET_BUILD_EXAMPLES=OFF -DOSGBULLET_INSTALL_DATA=OF ${OSGBULLET})
 
-IOSSIM_dk_queueCommand(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/ios-simulator -DOSGSourceRoot=${OSG} "-DBulletInstallType=Source And Build Tree" -DBulletBuildRoot=${BULLET}/ios-simulator -DBulletSourceRoot=${BULLET} -DosgWorks_DIR=${OSGWORKS}/ios-simulator/lib -DOSGBULLET_BUILD_APPLICATIONS=OFF -DOSGBULLET_BUILD_EXAMPLES=OFF -DOSGBULLET_INSTALL_DATA=OF ${OSGBULLET})
+IOSSIM_dk_queueCommand(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OPENSCENEGRAPH}/ios-simulator -DOSGSourceRoot=${OPENSCENEGRAPH} "-DBulletInstallType=Source And Build Tree" -DBulletBuildRoot=${BULLET}/ios-simulator -DBulletSourceRoot=${BULLET} -DosgWorks_DIR=${OSGWORKS}/ios-simulator/lib -DOSGBULLET_BUILD_APPLICATIONS=OFF -DOSGBULLET_BUILD_EXAMPLES=OFF -DOSGBULLET_INSTALL_DATA=OF ${OSGBULLET})
 
-LINUX_DEBUG_dk_queueCommand(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/${OS}/Debug -DOSGSourceRoot=${OSG} "-DBulletInstallType=Source And Build Tree" -DBulletBuildRoot=${BULLET}/${OS}/Debug -DBulletSourceRoot=${BULLET} -DosgWorks_DIR=${OSGWORKS}/${OS}/Debug/lib/x86_64-linux-gnu -DOSGBULLET_BUILD_APPLICATIONS=OFF -DOSGBULLET_BUILD_EXAMPLES=OFF -DOSGBULLET_INSTALL_DATA=OFF ${OSGBULLET})
+LINUX_DEBUG_dk_queueCommand(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OPENSCENEGRAPH}/${OS}/Debug -DOSGSourceRoot=${OPENSCENEGRAPH} "-DBulletInstallType=Source And Build Tree" -DBulletBuildRoot=${BULLET}/${OS}/Debug -DBulletSourceRoot=${BULLET} -DosgWorks_DIR=${OSGWORKS}/${OS}/Debug/lib/x86_64-linux-gnu -DOSGBULLET_BUILD_APPLICATIONS=OFF -DOSGBULLET_BUILD_EXAMPLES=OFF -DOSGBULLET_INSTALL_DATA=OFF ${OSGBULLET})
 
-LINUX_RELEASE_dk_queueCommand(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/${OS}/Release -DOSGSourceRoot=${OSG} "-DBulletInstallType=Source And Build Tree" -DBulletBuildRoot=${BULLET}/${OS}/Release -DBulletSourceRoot=${BULLET} -DosgWorks_DIR=${OSGWORKS}/${OS}/Release/lib/x86_64-linux-gnu -DOSGBULLET_BUILD_APPLICATIONS=OFF -DOSGBULLET_BUILD_EXAMPLES=OFF -DOSGBULLET_INSTALL_DATA=OFF ${OSGBULLET})
+LINUX_RELEASE_dk_queueCommand(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OPENSCENEGRAPH}/${OS}/Release -DOSGSourceRoot=${OPENSCENEGRAPH} "-DBulletInstallType=Source And Build Tree" -DBulletBuildRoot=${BULLET}/${OS}/Release -DBulletSourceRoot=${BULLET} -DosgWorks_DIR=${OSGWORKS}/${OS}/Release/lib/x86_64-linux-gnu -DOSGBULLET_BUILD_APPLICATIONS=OFF -DOSGBULLET_BUILD_EXAMPLES=OFF -DOSGBULLET_INSTALL_DATA=OFF ${OSGBULLET})
 
-ANDROID_dk_queueCommand(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OSG}/${OS} -DOSGSourceRoot=${OSG} "-DBulletInstallType=Source And Build Tree" -DBulletBuildRoot=${BULLET}/${OS} -DBulletSourceRoot=${BULLET} -DosgWorks_DIR=${OSGWORKS}/${OS}/lib -DOSGBULLET_BUILD_APPLICATIONS=OFF -DOSGBULLET_BUILD_EXAMPLES=OFF -DOSGBULLET_INSTALL_DATA=OFF ${OSGBULLET})
+ANDROID_dk_queueCommand(${DKCMAKE_BUILD} "-DOSGInstallType=Source And Build Tree" -DOSGBuildRoot=${OPENSCENEGRAPH}/${OS} -DOSGSourceRoot=${OPENSCENEGRAPH} "-DBulletInstallType=Source And Build Tree" -DBulletBuildRoot=${BULLET}/${OS} -DBulletSourceRoot=${BULLET} -DosgWorks_DIR=${OSGWORKS}/${OS}/lib -DOSGBULLET_BUILD_APPLICATIONS=OFF -DOSGBULLET_BUILD_EXAMPLES=OFF -DOSGBULLET_INSTALL_DATA=OFF ${OSGBULLET})
 
 
 ### COMPILE ###
-WIN_dk_visualStudioDebug(osgbullet-master)
-WIN_dk_visualStudioRelease(osgbullet-master)
-MAC_dk_xcodeDebug(osgbullet-master)
-MAC_dk_xcodeRelease(osgbullet-master)
-IOS_dk_xcodeDebug(osgbullet-master)
-IOS_dk_xcodeRelease(osgbullet-master)
-IOSSIM_dk_xcodeDebug(osgbullet-master)
-IOSSIM_dk_xcodeRelease(osgbullet-master)
-LINUX_DEBUG_dk_queueCommand(make)
-LINUX_RELEASE_dk_queueCommand(make)
-ANDROID_dk_visualStudioDebug(osgbullet-master)
-ANDROID_dk_visualStudioRelease(osgbullet-master)
+dk_visualStudio	(${OSGBULLET_FOLDER})
+dk_xcode		(${OSGBULLET_FOLDER})
+dk_make			(${OSGBULLET_FOLDER})

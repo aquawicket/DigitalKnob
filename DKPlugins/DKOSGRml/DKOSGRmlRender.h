@@ -1,30 +1,30 @@
 #pragma once
-#ifndef DKOSGRocketRender_H
-#define DKOSGRocketRender_H
+#ifndef DKOSGRmlRender_H
+#define DKOSGRmlRender_H
 
-#include <Rocket/Core/Core.h>
-#include <Rocket/Debugger/Debugger.h>
+#include <RmlUi/Core.h>
+#include <RmlUi/Debugger.h>
 #include <osg/Group>
 #include <osg/Scissor>
 #include <osg/Texture2D>
 #include <osg/TexMat>
 #include <osg/Geometry>
 
-class DKOSGRocketRender : public Rocket::Core::RenderInterface
+class DKOSGRmlRender : public Rml::Core::RenderInterface
 {
 public:
-	DKOSGRocketRender();
-	~DKOSGRocketRender();
+	DKOSGRmlRender();
+	~DKOSGRmlRender();
 
 	void setRenderTarget(osg::Group* grp, int w, int h, bool fullscreen);
 	osg::Group* getRenderTarget() const;
-	virtual void RenderGeometry(Rocket::Core::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rocket::Core::TextureHandle texture, const Rocket::Core::Vector2f& translation);
+	virtual void RenderGeometry(Rml::Core::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rml::Core::TextureHandle texture, const Rml::Core::Vector2f& translation);
 	virtual void EnableScissorRegion(bool enable);
 	virtual void SetScissorRegion(int x, int y, int width, int height);
-	void AddTexture(Rocket::Core::TextureHandle& texture_handle, osg::Image* image);
-	virtual bool LoadTexture(Rocket::Core::TextureHandle& texture_handle, Rocket::Core::Vector2i& texture_dimensions, const Rocket::Core::String& source);
-	virtual bool GenerateTexture(Rocket::Core::TextureHandle& texture_handle, const Rocket::Core::byte* source, const Rocket::Core::Vector2i& source_dimensions);
-	virtual void ReleaseTexture(Rocket::Core::TextureHandle texture);
+	void AddTexture(Rml::Core::TextureHandle& texture_handle, osg::Image* image);
+	virtual bool LoadTexture(Rml::Core::TextureHandle& texture_handle, Rml::Core::Vector2i& texture_dimensions, const Rml::Core::String& source);
+	virtual bool GenerateTexture(Rml::Core::TextureHandle& texture_handle, const Rml::Core::byte* source, const Rml::Core::Vector2i& source_dimensions);
+	virtual void ReleaseTexture(Rml::Core::TextureHandle texture);
 	virtual void Release();
 
 private:
@@ -38,6 +38,7 @@ private:
 	int _screenHeight;
     bool _fullScreen;
     
-	std::map<Rocket::Core::TextureHandle, DKString> texture_name; //texture to name map
+	std::map<Rml::Core::TextureHandle, DKString> texture_name; //texture to name map
 };
-#endif //DKOSGRocketRender_H
+
+#endif //DKOSGRmlRender_H

@@ -5,12 +5,14 @@ if(NOT WIN)
 endif()
 
 
+### DEPEND ###
 dk_depend(mingw32)
 dk_depend(mingw64)
 dk_depend(msys2)
 dk_depend(libgcc)
 
 
+### IMPORT ###
 dk_import(https://github.com/kiyolee/bzip2-win-build.git BRANCH main)
 
 
@@ -24,6 +26,7 @@ WIN64_dk_libRelease(${BZIP2-WIN-BUILD}/${OS}/x64/${RELEASE_DIR}/libbz2-static.li
 
 ### 3RDPARTY LINK ###
 WIN_dk_set(BZIP2-WIN-BUILD_CMAKE -DBZIP2_INCLUDE_DIR=${BZIP2-WIN-BUILD} -DBZIP2_LIBRARY_DEBUG=${BZIP2-WIN-BUILD}/${OS}/${DEBUG_DIR}/libbz2-static.lib -DBZIP2_LIBRARY_RELEASE=${BZIP2-WIN-BUILD}/${OS}/${RELEASE_DIR}/libbz2-static.lib)
+	
 	
 ### COMPILE ###
 if(WIN_32)
