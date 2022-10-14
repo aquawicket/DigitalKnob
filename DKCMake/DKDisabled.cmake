@@ -192,7 +192,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(mlocate)				# Unable to locate a Java Runtime that supports apt
 	dk_disable(opencv)				# CMAKE_SYSTEM_PROCESSOR is not defined
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
-	#dk_disable(openscenegraph)		# CMAKE ERROR: Ignoring CMAKE_OSX_SYSROOT. iPhoneOS10.2sdk does not exist
+	dk_disable(openscenegraph)		# CMake errors
 	dk_disable(opensles)			# could not locate OpenSLES Library
 	dk_disable(osgaudio)			# requires openscenegraph
 	dk_disable(osgbullet)			# CMake Error: Could NOT find Bullet
@@ -228,8 +228,6 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKThread)			# requires threadpool
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKUpdate)			# compiling errors
-	#dk_disable(DKVncClient)
-	#dk_disable(DKVncServer)
 	dk_disable(DKWebSockets)		# requires libwebsockets, uwebsockets
 	dk_disable(freealut)			# error: not able to compile a simple test program
 	dk_disable(imagemagick)			# libimagemagik.a not found
