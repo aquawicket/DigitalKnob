@@ -347,7 +347,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(DKSFMLWindow)		# requires sfml
 	dk_disable(DKThread)			# requires threadpool
 	dk_disable(DKTorrent)			# requires libtorrent
-	#dk_disable(DKUpdate)			# compiling errors
+	dk_disable(DKUpdate)			# requires DKCurl
 	dk_disable(DKVncClient)			# requires libvncserver
 	dk_disable(DKVncServer)			# requires libvncserver
 	dk_disable(DKWebSockets)		# requires libwebsockets or uwebsockets
