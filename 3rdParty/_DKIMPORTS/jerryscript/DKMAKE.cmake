@@ -42,8 +42,12 @@ ANDROID_dk_libRelease	(${JERRYSCRIPT}/${OS}/lib/${RELEASE_DIR}/libjerry-port.a)
 
 
 ### GENERATE ###
-dk_setPath		(${JERRYSCRIPT}/${BUILD_DIR})
-dk_queueCommand	(${DKCMAKE_BUILD} ${JERRYSCRIPT})
+dk_setPath				(${JERRYSCRIPT}/${BUILD_DIR})
+WIN_dk_queueCommand		(${DKCMAKE_BUILD} ${JERRYSCRIPT})
+APPLE_dk_queueCommand	(${DKCMAKE_BUILD} ${JERRYSCRIPT})
+LINUX_dk_queueCommand	(${DKCMAKE_BUILD} "-DCMAKE_CXX_FLAGS=-Werror=maybe-uninitialized" ${JERRYSCRIPT})
+RASPBERY_dk_queueCommand(${DKCMAKE_BUILD} "-DCMAKE_CXX_FLAGS=-Werror=maybe-uninitialized" ${JERRYSCRIPT})
+ANDROID_dk_queueCommand	(${DKCMAKE_BUILD} ${JERRYSCRIPT})
 
 
 ### COMPILE ###
