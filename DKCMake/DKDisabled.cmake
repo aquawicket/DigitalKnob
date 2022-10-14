@@ -210,7 +210,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(boxer)				# no package gtk+-3.0 found
 	dk_disable(bullet3)				# library not found for -lBulletInverseDynamicsUtils
 	dk_disable(DKHook)				# 'read' was not declared in this scope
-	dk_disable(DKJerryscript)		# requires jerryscript
+	#dk_disable(DKJerryscript)		# requires jerryscript
 	dk_disable(DKOcr)				# requires leptonica, tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
 	dk_disable(DKOSGAudio)			# requires openscenegraph
@@ -230,7 +230,6 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKWebSockets)		# requires libwebsockets, uwebsockets
 	dk_disable(freealut)			# error: not able to compile a simple test program
 	dk_disable(imagemagick)			# libimagemagik.a not found
-	#dk_disable(jerryscript)		# Error: 'byte_length_to_index' may be used uninitialized in this function
 	dk_disable(kdevelop)			# permission denied
 	dk_disable(leptonica)			# build errors
 	dk_disable(libcaca)				# no CMakeLists.txt
