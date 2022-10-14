@@ -185,7 +185,7 @@ bool DKVncClient::Init(){
 	}
 	else{
 		DKSDLWindow::AddEventFunc(&DKVncClient::handle, this);
-		DKSDLWindow::AddDrawFunc(&DKVncClient::draw, this);
+		DKSDLWindow::AddRenderFunc(&DKVncClient::draw, this);
 	}
 	
 	if(!Connect(server_ip, server_password)){
