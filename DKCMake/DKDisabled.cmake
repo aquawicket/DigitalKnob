@@ -66,7 +66,6 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(DKScreenRecorder)	# error: 'cvSize' was not declared in this scope
 	dk_disable(DKSDLWav)			# compiling errors
 	dk_disable(DKSFMLRml)			# requires sfml, rmlui.  INCOMPLETE
-	#dk_disable(DKThread)			# requires threadpool
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKUpdate)			# compiling errors
 	dk_disable(DKVncClient)			# requires libvncserver
@@ -82,8 +81,8 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(osgaudio)			# requires openscenegraph
 	dk_disable(osgbullet)			# CMake Error: Could NOT find Bullet
 	dk_disable(osgworks)			# requires openscenegraph
-	dk_disable(tesseract)			# build errors
-	dk_disable(waave)				# requires sdl
+	dk_disable(tesseract)			# requires leptonica
+	#dk_disable(waave)				# requires sdl
 endif()
 
 if(WIN_64) # Disabled for Windows 64bit targets
