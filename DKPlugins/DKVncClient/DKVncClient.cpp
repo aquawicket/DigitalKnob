@@ -300,12 +300,10 @@ rfbBool DKVncClient::rfbInitConnection(rfbClient* client){
 	return true;
 }
 
-void DKVncClient::draw(){
+bool DKVncClient::draw(){
 	//DKDEBUGFUNC();
-	if(!cl->frameBuffer){
-		//DKWARN("DKVncClient::draw(): cl->frameBuffer invalid\n");
-		return; 
-	}
+	if(!cl->frameBuffer)
+		return DKERROR("cl->frameBuffer invalid\n");
 
 	//SDL_Event e;
 	//while(SDL_PollEvent(&e)){
@@ -320,14 +318,10 @@ void DKVncClient::draw(){
 	r.y = 0;
 	r.w = cl->width;
 	r.h = cl->height;
-	if(SDL_UpdateTexture(tex, &r, cl->frameBuffer, cl->width*4) == -1){
-		DKWARN("DKVncClient::draw(): SDL_UpdateTexture() failed\n");
-		return;
-	}
-	if(SDL_RenderCopyEx(dkSdlWindow->renderer, tex, NULL, NULL, 0, NULL, SDL_FLIP_NONE) == -1){
-		DKWARN("DKVncClient::draw(): SDL_RenderCopyEx() failed\n");
-		return;
-	}
+	if(SDL_UpdateTexture(tex, &r, cl->frameBuffer, cl->width*4) == -1)
+		return DKERROR("SDL_UpdateTexture() failed\n");
+	if(SDL_RenderCopyEx(dkSdlWindow->renderer, tex, NULL, NULL, 0, NULL, SDL_FLIP_NONE) == -1)
+		return DKERROR("SDL_RenderCopyEx() failed\n");
 }
 
 void DKVncClient::update(rfbClient* cl, int x, int y, int w, int h) {

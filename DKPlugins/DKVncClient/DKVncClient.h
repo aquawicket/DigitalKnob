@@ -47,7 +47,7 @@ public:
 	static bool TestReturnString(DKString& output);
 
 	bool Connect(const DKString& address, const DKString& password);  
-	void draw();
+	bool draw();
 	static void update(rfbClient* cl,int x,int y,int w,int h);
 	//static rfbBool resize(rfbClient* client);
 	static void kbd_leds(rfbClient* cl, int value, int pad);
