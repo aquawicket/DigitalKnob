@@ -193,7 +193,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(mlocate)				# Unable to locate a Java Runtime that supports apt
 	dk_disable(opencv)				# CMAKE_SYSTEM_PROCESSOR is not defined
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
-	dk_disable(openscenegraph)		# CMAKE ERROR: FIndAVFoundation.cmake:23 (IF): unknown arguments specified "LESS" "6.0"
+	#dk_disable(openscenegraph)		# CMAKE ERROR: FIndAVFoundation.cmake:23 (IF): unknown arguments specified "LESS" "6.0"
 	dk_disable(opensles)			# could not locate OpenSLES Library
 	dk_disable(osgaudio)			# requires openscenegraph
 	dk_disable(osgbullet)			# CMake Error: Could NOT find Bullet
