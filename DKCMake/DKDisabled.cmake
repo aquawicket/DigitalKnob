@@ -231,7 +231,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKWebSockets)		# requires libwebsockets, uwebsockets
 	dk_disable(freealut)			# error: not able to compile a simple test program
 	dk_disable(imagemagick)			# libimagemagik.a not found
-	dk_disable(jerryscript)			# build errors
+	#dk_disable(jerryscript)			# build errors
 	dk_disable(kdevelop)			# permission denied
 	dk_disable(leptonica)			# build errors
 	dk_disable(libcaca)				# no CMakeLists.txt
