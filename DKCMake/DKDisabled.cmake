@@ -64,7 +64,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(DKOSGWidget)			# requires openscenegraph 
 	dk_disable(DKOSGWindow)			# requires openscenegraph
 	dk_disable(DKScreenRecorder)	# error: 'cvSize' was not declared in this scope
-	dk_disable(DKSDLVideo)			# requires ffmpeg
+	#dk_disable(DKSDLVideo)			# requires ffmpeg
 	dk_disable(DKSDLWav)			# compiling errors
 	dk_disable(DKSFMLRml)			# requires sfml, rmlui.  INCOMPLETE
 	dk_disable(DKThread)			# requires threadpool
