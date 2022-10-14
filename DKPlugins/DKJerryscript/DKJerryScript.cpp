@@ -25,8 +25,7 @@
 */
 
 #include "DK/stdafx.h"
-//#include "DKJerryscript/DKJerryscript.h"
-#include "DKJerryscript.h"
+#include "DKJerryscript/DKJerryscript.h"
 
 
 bool DKJerryscript::Init(){
