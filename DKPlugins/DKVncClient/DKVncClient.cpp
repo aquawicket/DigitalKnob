@@ -281,13 +281,9 @@ rfbBool DKVncClient::rfbInitConnection(rfbClient* client){
 	if(client->appData.scaleSetting>1){
 		if(!SendScaleSetting(client, client->appData.scaleSetting))
 			return DKERROR("SendScaleSetting() failed\n");
-		if(!SendFramebufferUpdateRequest(client,
-			client->updateRect.x / client->appData.scaleSetting,
-			client->updateRect.y / client->appData.scaleSetting,
-			client->updateRect.w / client->appData.scaleSetting,
-			client->updateRect.h / client->appData.scaleSetting,
-			FALSE)){
-				return DKERROR("SendFramebufferUpdateRequest() failed\n");
+		if(!SendFramebufferUpdateRequest(client, client->updateRect.x / client->appData.scaleSetting, client->updateRect.y / client->appData.scaleSetting,
+		client->updateRect.w / client->appData.scaleSetting, client->updateRect.h / client->appData.scaleSetting, FALSE))
+			return DKERROR("SendFramebufferUpdateRequest() failed\n");
 	}
 	else{
 		if(!SendFramebufferUpdateRequest(client, client->updateRect.x, client->updateRect.y, client->updateRect.w, client->updateRect.h, FALSE))
