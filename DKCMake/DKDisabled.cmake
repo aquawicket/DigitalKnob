@@ -82,7 +82,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(osgbullet)			# CMake Error: Could NOT find Bullet
 	dk_disable(osgworks)			# requires openscenegraph
 	dk_disable(tesseract)			# requires leptonica
-	#dk_disable(waave)				# requires sdl
+	dk_disable(waave)				# Cannot open include file: 'libavcodec/avcodec.h':
 endif()
 
 if(WIN_64) # Disabled for Windows 64bit targets
@@ -105,7 +105,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(DKSDLVideo)			# requires ffmpeg
 	dk_disable(DKSDLWav)			# compiling errors
 	dk_disable(DKSFMLRml)			# requires sfml, rmlui.  INCOMPLETE
-	dk_disable(DKThread)			# requires threadpool
+	#dk_disable(DKThread)			# requires threadpool
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKUpdate)			# compiling errors
 	dk_disable(DKVncClient)			# requires libvncserver
@@ -125,7 +125,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	dk_disable(osgbullet)			# requires bullet3
 	dk_disable(osgaudio)			# opengl identifier errors
-	#dk_disable(osgworks)			# BUILD FAILED
+	dk_disable(osgworks)			# Error: 'osgworks-master/src/osgwTools/GeometeryModifier.cpp:64' no member named 'mergeGeode'
 	dk_disable(podofo)				# error: expected ';' at end of declaration
 	dk_disable(rtmidi)				# Undefined symbols for architecture x86_64
 	dk_disable(sdl-gpu)				# SDL for MAC OS X only supports deploying on 10.7 and above
