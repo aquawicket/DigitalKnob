@@ -231,7 +231,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKWebSockets)		# requires libwebsockets, uwebsockets
 	dk_disable(freealut)			# error: not able to compile a simple test program
 	dk_disable(imagemagick)			# libimagemagik.a not found
-	#dk_disable(jerryscript)			# build errors
+	#dk_disable(jerryscript)		# build errors
 	dk_disable(kdevelop)			# permission denied
 	dk_disable(leptonica)			# build errors
 	dk_disable(libcaca)				# no CMakeLists.txt
@@ -286,7 +286,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(emsdk)				# 64bit source only
 	dk_disable(freealut)			# no ruleto make 'alut_static'
 	dk_disable(java)
-	dk_disable(jerryscript)			# build errors
+	#dk_disable(jerryscript)			# build errors
 	dk_disable(kdevelop)
 	dk_disable(openjdk)
 	dk_disable(libcaca)				# no CMakeLists.txt
@@ -348,7 +348,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(DKSFMLWindow)		# requires sfml
 	dk_disable(DKThread)			# requires threadpool
 	dk_disable(DKTorrent)			# requires libtorrent
-	dk_disable(DKUpdate)			# compiling errors
+	#dk_disable(DKUpdate)			# compiling errors
 	dk_disable(DKVncClient)			# requires libvncserver
 	dk_disable(DKVncServer)			# requires libvncserver
 	dk_disable(DKWebSockets)		# requires libwebsockets or uwebsockets
