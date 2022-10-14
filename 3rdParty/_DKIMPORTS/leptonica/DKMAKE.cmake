@@ -32,8 +32,8 @@ APPLE_dk_libDebug		(${LEPTONICA}/${OS}/src/${DEBUG_DIR}/libleptonica.a)
 APPLE_dk_libRelease		(${LEPTONICA}/${OS}/src/${RELEASE_DIR}/libleptonica.a)
 LINUX_dk_libDebug		(${LEPTONICA}/${OS}/${DEBUG_DIR}/src/libleptonica.a)
 LINUX_dk_libRelease		(${LEPTONICA}/${OS}/${RELEASE_DIR}/src/libleptonica.a)
-ANDROID_dk_libDebug		(${LEPTONICA}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libleptonica.a)
-ANDROID_dk_libRelease	(${LEPTONICA}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libleptonica.a)
+ANDROID_dk_libDebug		(${LEPTONICA}/${OS}/src/${DEBUG_DIR}/libleptonica.a)
+ANDROID_dk_libRelease	(${LEPTONICA}/${OS}/src/${RELEASE_DIR}/libleptonica.a)
 
 
 ### 3RDPARTY LINK ###
