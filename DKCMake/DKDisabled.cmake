@@ -116,7 +116,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(imagemagick)			# no such file or directory: libimagemagik.a
 	dk_disable(leptonica)			# Build Failed: fhmtauto.o
 	dk_disable(libcaca)				# no CMakeLists.txt
-	#dk_disable(libtorrent)			# Could not find BOOST
+	dk_disable(libtorrent)			# CMake Error: cannot find deps/try_signal/try_signal.cpp
 	dk_disable(libvncserver)		# build errors in main.c
 	dk_disable(libwebsockets)		# error: unknown type name 'lws_mutex_t'
 	dk_disable(libxml2)				# fatal error: 'extra/stricmp.h' file not found
@@ -124,9 +124,9 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(lua)					# no CMakeLists.txt
 	dk_disable(mlocate)				# Unable to locate a Java Runtime that supports apt
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
-	dk_disable(osgbullet)			# CMake Error: Could NOT find Bullet
+	dk_disable(osgbullet)			# requires bullet3
 	dk_disable(osgaudio)			# opengl identifier errors
-	dk_disable(osgworks)			# BUILD FAILED
+	#dk_disable(osgworks)			# BUILD FAILED
 	dk_disable(podofo)				# error: expected ';' at end of declaration
 	dk_disable(rtmidi)				# Undefined symbols for architecture x86_64
 	dk_disable(sdl-gpu)				# SDL for MAC OS X only supports deploying on 10.7 and above
