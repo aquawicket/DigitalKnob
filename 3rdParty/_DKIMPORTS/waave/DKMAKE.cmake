@@ -29,11 +29,11 @@ ANDROID_dk_libRelease	(${WAAVE}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libwa
 ### GENERATE ###
 dk_setPath						(${WAAVE}/${BUILD_DIR})
 WIN_dk_queueCommand				(${DKCMAKE_BUILD} ${FFMPEG-DEV_CMAKE} ${SDL_CMAKE} ${WAAVE})
-MAC_dk_queueCommand				(${DKCMAKE_BUILD} ${SDL_CMAKE} ${WAAVE})
-IOS_dk_queueCommand				(${DKCMAKE_BUILD} ${SDL_CMAKE} ${WAAVE})
-IOSSIM_dk_queueCommand			(${DKCMAKE_BUILD} ${SDL_CMAKE} ${WAAVE})
-LINUX_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} ${SDL_CMAKE} ${WAAVE})
-LINUX_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} ${SDL_CMAKE} ${WAAVE})
+MAC_dk_queueCommand				(${DKCMAKE_BUILD} ${FFMPEG-DEV_CMAKE} ${SDL_CMAKE} ${WAAVE})
+IOS_dk_queueCommand				(${DKCMAKE_BUILD} ${FFMPEG-DEV_CMAKE} ${SDL_CMAKE} ${WAAVE})
+IOSSIM_dk_queueCommand			(${DKCMAKE_BUILD} ${FFMPEG-DEV_CMAKE} ${SDL_CMAKE} ${WAAVE})
+LINUX_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} ${FFMPEG-DEV_CMAKE} ${SDL_CMAKE} ${WAAVE})
+LINUX_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} ${FFMPEG-DEV_CMAKE} ${SDL_CMAKE} ${WAAVE})
 
 
 ### COMPILE ###
