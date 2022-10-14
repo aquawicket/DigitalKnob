@@ -72,7 +72,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(DKUpdate)			# compiling errors
 	dk_disable(DKVncClient)			# requires libvncserver
 	dk_disable(DKVncServer)			# requires libvncserver
-	#dk_disable(bullet3)				# build errors
+	dk_disable(bullet3)				# LINK ERROR: cannot open input file 'BulletInverseDynamicsUtils.lib'
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libtorrent)			# CMAKE ERROR:  No SOURCES given to target: torrent-rasterbar
 	dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
@@ -229,8 +229,8 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKThread)			# requires threadpool
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKUpdate)			# compiling errors
-	#dk_disable(DKVncClient)			# requires libvncserver
-	#dk_disable(DKVncServer)			# requires libvncserver
+	#dk_disable(DKVncClient)
+	#dk_disable(DKVncServer)
 	dk_disable(DKWebSockets)		# requires libwebsockets, uwebsockets
 	dk_disable(freealut)			# error: not able to compile a simple test program
 	dk_disable(imagemagick)			# libimagemagik.a not found
@@ -294,7 +294,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(openjdk)
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libtorrent)			# Could not find BOOST
-	dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
+	#dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
 	dk_disable(libwebp)
 	dk_disable(libxml2)
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete

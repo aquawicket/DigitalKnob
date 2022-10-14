@@ -50,15 +50,13 @@ typedef unsigned long z_size_t;
 
 #include <rfb/rfb.h>
 
-////////////////////////
-typedef struct ClientLog
-{
+typedef struct ClientLog{
 	DKString ipaddress;
 	int failed_attempts = 0;
 	int lockout_timer;
 } ClientLog;
 
-/////////////////////////////////////////////////
+
 class DKVncServer : public DKObjectT<DKVncServer>
 {
 public:
