@@ -103,7 +103,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(DKOSGWidget)			# build errors
 	dk_disable(DKScreenRecorder)	# error: 'cvSize' was not declared in this scope
 	dk_disable(DKSDLVideo)			# requires ffmpeg
-	dk_disable(DKSDLWav)			# compiling errors
+	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSFMLRml)			# requires sfml, rmlui.  INCOMPLETE
 	dk_disable(DKThread)			# Error: 'boost/thread/xtime.hpp:24 expected identifier TIME_UTC_=1
 	dk_disable(DKTorrent)			# requires libtorrent
@@ -138,13 +138,13 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(boost)				# clang error: no such file or direcotry: libboost_atomic.a, libboost_chrono.a, etc, etc, etc
 	dk_disable(boxer)				# COCOA_LIBRARY not found
 	dk_disable(bullet3)				# OPENGL-NOTFOUND COCOA-NOTFOUND
-	dk_disable(bzip2)				# dk_include Function invoked with incorrect arguments
+	#dk_disable(bzip2)				# dk_include Function invoked with incorrect arguments
 	dk_disable(cryptopp)			# ** BUILD FAILED ** /blake2b_simd.cpp
 	dk_disable(DKCef)				# requires cef_binary
 	dk_disable(DKCefChild)			# requires cef_binary
 	dk_disable(DKJerryscript)		# requires jerryscript
 	dk_disable(DKMidi)				# requires rtmidi
-	dk_disable(DKOcr)				# requires leptonica, tesseract
+	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
 	dk_disable(DKOSGAudio)			# requires openscenegraph
 	dk_disable(DKOSGCef)			# requires openscenegraph
@@ -162,14 +162,14 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(DKOSGWidget)			# requires openscenegraph 
 	dk_disable(DKOSGWindow)			# requires openscenegraph 
 	dk_disable(DKScreenRecorder)	# requires opencv.  error: 'cvSize' was not declared in this scope
-	dk_disable(DKSDLCef)			# requires cef_binary, sdl
+	dk_disable(DKSDLCef)			# requires cef_binary
 	dk_disable(DKSDLVideo)			# requires ffmpeg
-	dk_disable(DKSDLWav)			# compiling errors
+	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSFMLRml)			# requires sfml, rmlui.  INCOMPLETE
 	dk_disable(DKSFMLWindow)		# requires sfml
 	dk_disable(DKThread)			# requires threadpool
 	dk_disable(DKTorrent)			# requires libtorrent
-	dk_disable(DKUpdate)			# compiling errors
+	dk_disable(DKUpdate)			# build errors
 	dk_disable(DKVncClient)			# requires libvncserver
 	dk_disable(DKVncServer)			# requires libvncserver
 	#dk_disable(freealut)			# freealut-master/iossim64 does not contain an Xcode project
@@ -220,7 +220,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKOSGWidget)			# build errors 
 	dk_disable(DKScreenRecorder)	# error: 'cvSize' was not declared in this scope
 	dk_disable(DKSDLVideo)			# requires waave
-	dk_disable(DKSDLWav)			# compiling errors
+	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSFMLRml)			# requires sfml, rmlui.  INCOMPLETE
 	dk_disable(DKThread)			# error: need to implement boost::placeholders
 	dk_disable(DKTorrent)			# requires libtorrent
@@ -271,7 +271,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(DKOSGWindow)			# requires openscenegraph 
 	dk_disable(DKScreenRecorder)	# error: 'cvSize' was not declared in this scope
 	dk_disable(DKSDLVideo)			# requires ffmpeg
-	dk_disable(DKSDLWav)			# compiling errors
+	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSFMLRml)			# requires sfml, rmlui.  INCOMPLETE
 	dk_disable(DKThread)			# requires threadpool
 	dk_disable(DKTorrent)			# requires libtorrent
@@ -339,7 +339,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(DKScreenRecorder)	# requires opencv.  error: 'cvSize' was not declared in this scope
 	dk_disable(DKSDLCef)			# requires sdl, cef_binary
 	dk_disable(DKSDLVideo)			# requires ffmpeg
-	dk_disable(DKSDLWav)			# compiling errors
+	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSFMLRml)			# requires sfml, rmlui.  INCOMPLETE
 	dk_disable(DKSFMLWindow)		# requires sfml
 	dk_disable(DKThread)			# requires threadpool
