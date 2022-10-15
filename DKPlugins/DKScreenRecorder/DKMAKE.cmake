@@ -1,3 +1,4 @@
+dk_depend(core_graphics)
 dk_depend(opencv)
 IF(HAVE_DKDuktape)
 	dk_depend(DKDuktape)

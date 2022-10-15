@@ -160,7 +160,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(DKOSGViewer)			# requires openscenegraph 
 	dk_disable(DKOSGWidget)			# requires openscenegraph 
 	dk_disable(DKOSGWindow)			# requires openscenegraph 
-	dk_disable(DKScreenRecorder)	# requires opencv.  error: 'cvSize' was not declared in this scope
+	dk_disable(DKScreenRecorder)	# requires opencv
 	dk_disable(DKSDLCef)			# requires cef_binary
 	dk_disable(DKSDLVideo)			# requires ffmpeg
 	dk_disable(DKSDLWav)			# build errors
@@ -216,7 +216,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKOSGRml)			# build errors
 	dk_disable(DKOSGVideo)			# requires openscenegraph
 	dk_disable(DKOSGWidget)			# build errors 
-	dk_disable(DKScreenRecorder)	# error: 'cvSize' was not declared in this scope
+	#dk_disable(DKScreenRecorder)	# error: 'cvSize' was not declared in this scope
 	dk_disable(DKSDLVideo)			# requires waave
 	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSFMLRml)			# requires sfml, rmlui.  INCOMPLETE
@@ -267,7 +267,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(DKOSGViewer)			# requires openscenegraph 
 	dk_disable(DKOSGWidget)			# requires openscenegraph 
 	dk_disable(DKOSGWindow)			# requires openscenegraph 
-	dk_disable(DKScreenRecorder)	# error: 'cvSize' was not declared in this scope
+	#dk_disable(DKScreenRecorder)	# error: 'cvSize' was not declared in this scope
 	dk_disable(DKSDLVideo)			# requires ffmpeg
 	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSFMLRml)			# requires sfml, rmlui.  INCOMPLETE
