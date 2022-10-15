@@ -47,7 +47,7 @@
 #define RELEASE(__p) {if(__p!=nullptr){__p->Release();__p=nullptr;}}
 #endif
 
-//#include "include/opencv2/opencv.hpp"
+#include "include/opencv2/opencv.hpp"
 #include "modules/imgproc/include/opencv2/imgproc/imgproc.hpp"
 #include "opencv2/videoio.hpp"
 
