@@ -46,7 +46,7 @@ dk_disable(sw-client)				# DEPRECATED: requested by leptonica but not required
 
 
 if(WIN) # Disabled for Windows targets
-	dk_disable(DKOcr)				# requires leptonica, tesseract
+	#dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
 	dk_disable(DKOSGAudio)			# requires openscenegraph
 	dk_disable(DKOSGCef)			# requires openscenegraph
@@ -68,7 +68,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(DKSFMLRml)			# build errors
 	dk_disable(DKThread)			# build errors
 	dk_disable(DKTorrent)			# requires libtorrent
-	dk_disable(DKUpdate)			# compiling errors
+	dk_disable(DKUpdate)			# build errors
 	dk_disable(DKVncClient)			# requires libvncserver
 	dk_disable(DKVncServer)			# requires libvncserver
 	dk_disable(bullet3)				# LINK ERROR: cannot open input file 'BulletInverseDynamicsUtils.lib'
@@ -82,7 +82,6 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(osgaudio)			# requires openscenegraph
 	dk_disable(osgbullet)			# CMake Error: Could NOT find Bullet
 	dk_disable(osgworks)			# requires openscenegraph
-	#dk_disable(tesseract)			# requires leptonica
 	dk_disable(waave)				# Cannot open include file: 'libavcodec/avcodec.h':
 endif()
 
