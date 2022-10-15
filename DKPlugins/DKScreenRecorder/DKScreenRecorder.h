@@ -48,10 +48,9 @@
 #endif
 
 //#include "include/opencv2/opencv.hpp"
-//#include "modules/imgproc/include/opencv2/imgproc/imgproc.hpp"
+#include "modules/imgproc/include/opencv2/imgproc/imgproc.hpp"
 #include "opencv2/videoio.hpp"
 
-/////////////////////////////////////////////////
 class DKScreenRecorder : public DKObjectT<DKScreenRecorder>
 {
 public:

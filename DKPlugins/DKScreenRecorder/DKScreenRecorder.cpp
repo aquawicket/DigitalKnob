@@ -28,7 +28,7 @@
 
 #include "DK/stdafx.h"
 #include "DK/DKFile.h"
-#include "DKScreenRecorder.h"
+#include "DKScreenRecorder/DKScreenRecorder.h"
 
 #ifdef WIN32
 #define sleep Sleep
@@ -69,17 +69,13 @@ static long lastFrame = 0;
 static int ticksPerFrame = 1000 / fps;
 
 
-
-/////////////////////////////
-bool DKScreenRecorder::Init()
-{
+bool DKScreenRecorder::Init(){
 	DKDEBUGFUNC();
 	DKClass::DKCreate("DKScreenRecorderJS");
 	DKClass::DKCreate("DKScreenRecorderV8");
-
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[CAPTURE]", capture);
-	if(capture.empty()){ capture = "GDI"; } //or DIRECTX
-
+	if(capture.empty())
+		capture = "GDI"; //or DIRECTX
 	DKUtil::GetScreenWidth(desktopWidth);
 	DKUtil::GetScreenHeight(desktopHeight);
 
@@ -96,49 +92,36 @@ bool DKScreenRecorder::Init()
 #endif
  
 	frameBuffer = (char*)malloc(desktopHeight * desktopWidth * bpp);
- 
 	DKApp::AppendLoopFunc(&DKScreenRecorder::Loop, this);
 
 	//Record("out.avi"); //TEST
 	return true;
 }
 
-////////////////////////////
-bool DKScreenRecorder::End()
-{
+bool DKScreenRecorder::End(){
 	DKDEBUGFUNC();
 	brgMat.release();
 	videoWriter.release();
 	return true;
 }
 
-
-///////////////////////////////////////////////////
-bool DKScreenRecorder::Record(const DKString& file)
-{
+bool DKScreenRecorder::Record(const DKString& file){
 	DKDEBUGFUNC(file);
-	//OpenCV
 	videoWriter.open(file.c_str(), cv::VideoWriter::fourcc('M','J','P','G'), fps, cvSize(desktopWidth, desktopHeight), true);
 	//videoWriter.open(file.c_str(), cv::VideoWriter::fourcc('I', 'Y', 'U', 'V'), fps, cvSize(desktopWidth, desktopHeight), true);
-	if(!videoWriter.isOpened()){
-		DKWARN("DKScreenRecorder::Init(): Could not open the output video for write\n");
-		return false;
-	}
+	if(!videoWriter.isOpened())
+		return DKERROR("DKScreenRecorder::Init(): Could not open the output video for write \n");
 	return true;
 }
 
-/////////////////////////////
-bool DKScreenRecorder::Stop()
-{
+bool DKScreenRecorder::Stop(){
 	DKDEBUGFUNC();
 	brgMat.release();
 	videoWriter.release();
 	return true;
 }
 
-/////////////////////////////
-void DKScreenRecorder::Loop()
-{
+void DKScreenRecorder::Loop(){
 	//DKDEBUGFUNC();
 	//https://stackoverflow.com/questions/17575455/video-recording-is-too-fast#_=_
 	if(videoWriter.isOpened()){
@@ -173,16 +156,13 @@ void DKScreenRecorder::Loop()
 	}
 }
 
-///////////////////////////////////
-void DKScreenRecorder::DrawBuffer()
-{  
+void DKScreenRecorder::DrawBuffer(){
 	//DKDEBUGFUNC();
 #ifdef WIN32
 	//Capture Desktop with DirectX
 	if(capture == "DIRECTX"){
 		//DKINFO("DIRECTX\n");
 		//https://stackoverflow.com/questions/30021274/capture-screen-using-directx
-
 		HRESULT hr = S_OK;
 		IDirect3D9 *d3d = nullptr;
 		IDirect3DDevice9 *device = nullptr;
@@ -195,12 +175,9 @@ void DKScreenRecorder::DrawBuffer()
 
 		// init D3D and get screen size
 		d3d = Direct3DCreate9(D3D_SDK_VERSION);
-		if(!d3d){
-			DKERROR("DKScreenRecorder::DrawBuffer(): Direct3DCreate9() failed\n");
-			return;
-		}
+		if(!d3d)
+			return DKERROR("DKScreenRecorder::DrawBuffer(): Direct3DCreate9() failed\n");
 		HRCHECK(d3d->GetAdapterDisplayMode(adapter, &mode));
-
 		parameters.Windowed = TRUE;
 		parameters.BackBufferCount = 1;
 		parameters.BackBufferHeight = mode.Height;
@@ -223,7 +200,6 @@ void DKScreenRecorder::DrawBuffer()
 		HRCHECK(surface->LockRect(&rc, NULL, 0));
 		CopyMemory(frameBuffer, rc.pBits, mode.Height * mode.Width * bpp);
 		HRCHECK(surface->UnlockRect());
-
 
 		RELEASE(surface);
 		RELEASE(device);
@@ -296,7 +272,6 @@ void DKScreenRecorder::DrawBuffer()
 			unsigned int red   = (xpixel & 0x00ff0000) >> 16;
 			unsigned int green = (xpixel & 0x0000ff00) >> 8;
 			unsigned int blue  = (xpixel & 0x000000ff);
-
 			frameBuffer[(h*desktopWidth+w)*bpp+0]=blue;
 			frameBuffer[(h*desktopWidth+w)*bpp+1]=green;
 			frameBuffer[(h*desktopWidth+w)*bpp+2]=red;
