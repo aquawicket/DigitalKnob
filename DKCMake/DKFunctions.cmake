@@ -1588,8 +1588,9 @@ endfunction()
 function(dk_install plugin) #PATCH
 	DKDEBUGFUNC(${ARGV})
 	
-	string(TOUPPER ${plugin} plugin_var)
-	set(dest_path ${${plugin_var}})
+	# set PLUGIN_URL variable
+	string(TOUPPER ${plugin} plugin_var)	
+	set(dest_path ${${plugin_var}})			
 	set(url_path ${${plugin_var}_URL})
 	
 	#if(NOT "${ARGV2}" STREQUAL "PATCH")
@@ -1663,6 +1664,8 @@ function(dk_install plugin) #PATCH
 	endif()
 	
 	dk_download(${url_path} ${DKDOWNLOAD}/${dl_filename} NOERROR)
+	# TODO: delete downloaded file after extraction to conserve disk space
+	
 	if(NOT EXISTS ${DKDOWNLOAD}/${dl_filename})
 		dk_assert("The download files does not exist")
 	endif()
@@ -1756,6 +1759,12 @@ function(dk_install plugin) #PATCH
 	endif()
 	
 	file(WRITE ${dest_path}/installed "${dest_filename} ")
+	
+	dk_set(DK_DELETE_EXTRACTED_DOWNLOADS ON) # FIXME: move to global dk settings
+	if(DK_DELETE_EXTRACTED_DOWNLOADS) # conserve disk space 
+		dk_info("deleting ${DKDOWNLOAD}/${dl_filename}. . .")
+		dk_remove(${DKDOWNLOAD}/${dl_filename})
+	endif()
 endfunction()
 dk_createOsMacros("dk_install" "NO_DEBUG_RELEASE_TAGS")
 
