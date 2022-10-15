@@ -210,7 +210,6 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(boxer)				# no package gtk+-3.0 found
 	dk_disable(bullet3)				# library not found for -lBulletInverseDynamicsUtils
 	dk_disable(DKHook)				# 'read' was not declared in this scope
-	#dk_disable(DKJerryscript)		# requires jerryscript
 	dk_disable(DKOcr)				# requires leptonica, tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
 	dk_disable(DKOSGAudio)			# requires openscenegraph
