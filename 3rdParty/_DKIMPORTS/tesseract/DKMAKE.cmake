@@ -14,6 +14,7 @@ dk_import(https://github.com/tesseract-ocr/tesseract.git BRANCH main)
 ### LINK ###
 dk_include				(${TESSERACT})
 dk_include				(${TESSERACT}/include)
+dk_include				(${TESSERACT}/${OS}/include)
 dk_include				(${TESSERACT}/ccutil)
 dk_include				(${TESSERACT}/ccstruct)
 dk_include				(${TESSERACT}/ccmain)
