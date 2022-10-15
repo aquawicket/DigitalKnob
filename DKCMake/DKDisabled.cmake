@@ -172,7 +172,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(DKUpdate)			# compiling errors
 	dk_disable(DKVncClient)			# requires libvncserver
 	dk_disable(DKVncServer)			# requires libvncserver
-	dk_disable(freealut)			# freealut-master/iossim64 does not contain an Xcode project
+	#dk_disable(freealut)			# freealut-master/iossim64 does not contain an Xcode project
 	dk_disable(imagemagick)			# No such file or directory
 	dk_disable(jerryscript)			# Error: unknown linker option '-z'
 	dk_disable(leptonica)			# Build Failed: fhmtauto.o
