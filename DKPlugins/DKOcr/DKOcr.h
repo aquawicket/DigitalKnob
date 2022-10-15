@@ -32,7 +32,7 @@
 //#include "podofo.h"       //podofo
 #include "DK/DK.h"
 
-//////////////////////////////////////
+
 class DKOcr : public DKObjectT<DKOcr>
 {
 public:

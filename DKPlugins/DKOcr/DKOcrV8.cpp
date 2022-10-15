@@ -29,28 +29,24 @@
 #include "DKOcr/DKOcr.h"
 #include "DKOcr/DKOcrV8.h"
 
-////////////////////
-bool DKOcrV8::Init()
-{
+
+bool DKOcrV8::Init(){
 	DKDEBUGFUNC();
 	DKV8::AttachFunction("DKOcr_ImageToText", DKOcrV8::ImageToText);
 	return true;
 }
 
-///////////////////
-bool DKOcrV8::End()
-{
+bool DKOcrV8::End(){
 	DKDEBUGFUNC();
 	return true;
 }
 
-/////////////////////////////////////////////////////////
-bool DKOcrV8::ImageToText(CefArgs args, CefReturn retval)
-{
+bool DKOcrV8::ImageToText(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	DKString file = args->GetString(0);
 	DKString text;
-	if(!DKOcr::ImageToText(file, text)){ return false; }
+	if(!DKOcr::ImageToText(file, text))
+		return DKERROR("DKOcr::ImageToText() failed \n");
 	retval->SetString(0, text);
 	return true;
 }

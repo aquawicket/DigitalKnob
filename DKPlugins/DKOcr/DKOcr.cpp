@@ -36,30 +36,23 @@ bool DKOcr::Init(){
 	DKDEBUGFUNC();
 	DKClass::DKCreate("DKOcrJS");
 	DKClass::DKCreate("DKOcrV8");
-	
 	api = new tesseract::TessBaseAPI();
 	DKString datapath = DKFile::local_assets+"DKOcr";
-	if (api->Init(datapath.c_str(), "eng")){ // Initialize tesseract-ocr with English
-		DKERROR("Could not initialize tesseract\n");
-		return false;
-	}
+	if (api->Init(datapath.c_str(), "eng")) // Initialize tesseract-ocr with English
+		return DKERROR("Could not initialize tesseract\n");
 	return true;
 }
 
 bool DKOcr::End(){
 	DKDEBUGFUNC();
-	DKClass::DKCreate("DKOcrJS");
-	DKClass::DKCreate("DKOcrV8");
-	
+	//DKClass::DKCreate("DKOcrJS");
+	//DKClass::DKCreate("DKOcrV8");
 	api->End();
 	return true;
 }
 
-
 /*
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool DKOcr::AddTextElement(double dCurPosX, double dCurPosY, PoDoFo::PdfFont* pCurFont, const PoDoFo::PdfString & rString)
-{
+bool DKOcr::AddTextElement(double dCurPosX, double dCurPosY, PoDoFo::PdfFont* pCurFont, const PoDoFo::PdfString & rString){
 	DKDEBUGFUNC(dCurPosX, dCurPosY, pCurFont, rString);
 	if(!pCurFont){
 		fprintf(stderr, "WARNING: Found text but do not have a current font: %s\n", rString.GetString());
@@ -69,7 +62,6 @@ bool DKOcr::AddTextElement(double dCurPosX, double dCurPosY, PoDoFo::PdfFont* pC
 		fprintf(stderr, "WARNING: Found text but do not have a current encoding: %s\n", rString.GetString());
 		return false;
 	}
-
 	// For now just write to console
 	PoDoFo::PdfString unicode = pCurFont->GetEncoding()->ConvertToUnicode(rString, pCurFont);
 	const char* pszData = unicode.GetStringUtf8().c_str();
@@ -81,23 +73,17 @@ bool DKOcr::AddTextElement(double dCurPosX, double dCurPosY, PoDoFo::PdfFont* pC
 	return true;
 }
 
-/////////////////////////////////////////////////////////////////////////////////////
-bool DKOcr::ExtractPdfText(PoDoFo::PdfMemDocument* pDocument, PoDoFo::PdfPage* pPage)
-{
+bool DKOcr::ExtractPdfText(PoDoFo::PdfMemDocument* pDocument, PoDoFo::PdfPage* pPage){
 	DKDEBUGFUNC(pDocument, pPage);
 	const char* pszToken = NULL;
 	PoDoFo::PdfVariant var;
 	PoDoFo::EPdfContentsType eType;
-
 	PoDoFo::PdfContentsTokenizer tokenizer(pPage);
-
 	double dCurPosX = 0.0;
 	double dCurPosY = 0.0;
 	bool bTextBlock = false;
 	PoDoFo::PdfFont* pCurFont = NULL;
-
 	std::stack<PoDoFo::PdfVariant> stack;
-
 	while(tokenizer.ReadNext(eType, pszToken, var)){
 		if(eType == PoDoFo::ePdfContentsType_Keyword){
 			// support 'l' and 'm' tokens
@@ -116,7 +102,6 @@ bool DKOcr::ExtractPdfText(PoDoFo::PdfMemDocument* pDocument, PoDoFo::PdfPage* p
 				if(!bTextBlock) 
 					fprintf(stderr, "WARNING: Found ET without BT!\n");
 			}
-
 			if(bTextBlock){
 				if(strcmp(pszToken, "Tf") == 0){
 					stack.pop();
@@ -167,24 +152,22 @@ bool DKOcr::ExtractPdfText(PoDoFo::PdfMemDocument* pDocument, PoDoFo::PdfPage* p
 }
 */
 
-///////////////////////////////////////////////////////
-bool DKOcr::ImageToText(DKString& file, DKString& text)
-{
+bool DKOcr::ImageToText(DKString& file, DKString& text){
 	DKDEBUGFUNC(file, text);
 	DKString _file = file;
 	if(has(file,".pdf")){
-		if(!PdfToText(file, text)){ return false; }
+		if(!PdfToText(file, text))
+			return DKERROR("PdfToText() failed \n");
 		_file = DKFile::local_assets+"temp.png";
 	}
-	if(!DKFile::PathExists(_file)){ return false; }
+	if(!DKFile::PathExists(_file))
+		return DKERROR("_file does not exist \n");
 	char* outText;
 	Pix *image = pixRead(_file.c_str());
 	api->SetImage(image);
 	outText = api->GetUTF8Text();
-	if(!outText){ 
-		DKERROR("DKOcr::ImageToText(): outText invalid\n");	
-		return false; 
-	}
+	if(!outText)
+		return DKERROR("outText invalid \n");	
 	text = outText;
 	DKINFO("OCR output:\n"+text+"\n");
 	delete [] outText;
@@ -192,9 +175,7 @@ bool DKOcr::ImageToText(DKString& file, DKString& text)
 	return true;
 }
 
-/////////////////////////////////////////////////////
-bool DKOcr::PdfToText(DKString& file, DKString& text)
-{
+bool DKOcr::PdfToText(DKString& file, DKString& text){
 	DKDEBUGFUNC(file, text);
 	//convert using PoDoFo
 	/*
@@ -205,7 +186,6 @@ bool DKOcr::PdfToText(DKString& file, DKString& text)
 		ExtractPdfText(&document, pPage);
 	}
 	*/
-	
 	//convert using ImageMagick
 	//convert -density 300 a.pdf -resize 25% a.png
 	DKString assets = DKFile::local_assets;
