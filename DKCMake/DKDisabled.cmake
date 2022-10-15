@@ -63,7 +63,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(DKOSGViewer)			# requires openscenegraph 
 	dk_disable(DKOSGWidget)			# requires openscenegraph 
 	dk_disable(DKOSGWindow)			# requires openscenegraph
-	dk_disable(DKScreenRecorder)	# error: 'cvSize' was not declared in this scope
+	#dk_disable(DKScreenRecorder)	# error: 'cvSize' was not declared in this scope
 	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSFMLRml)			# build errors
 	dk_disable(DKThread)			# build errors
@@ -101,7 +101,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(DKOSGStats)			# build errors
 	dk_disable(DKOSGVideo)			# TODO
 	dk_disable(DKOSGWidget)			# build errors
-	dk_disable(DKScreenRecorder)	# error: 'cvSize' was not declared in this scope
+	#dk_disable(DKScreenRecorder)	# error: 'cvSize' was not declared in this scope
 	dk_disable(DKSDLVideo)			# requires ffmpeg
 	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSFMLRml)			# requires sfml, rmlui.  INCOMPLETE
