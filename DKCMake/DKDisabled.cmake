@@ -220,7 +220,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKOSGVideo)			# requires openscenegraph
 	dk_disable(DKOSGWidget)			# build errors 
 	dk_disable(DKScreenRecorder)	# error: 'cvSize' was not declared in this scope
-	dk_disable(DKSDLVideo)			# requires ffmpeg
+	#dk_disable(DKSDLVideo)			# requires ffmpeg
 	dk_disable(DKSDLWav)			# compiling errors
 	dk_disable(DKSFMLRml)			# requires sfml, rmlui.  INCOMPLETE
 	dk_disable(DKSFMLWindow)		# requires sfml
