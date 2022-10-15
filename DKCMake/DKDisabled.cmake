@@ -64,8 +64,8 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(DKOSGWidget)			# requires openscenegraph 
 	dk_disable(DKOSGWindow)			# requires openscenegraph
 	dk_disable(DKScreenRecorder)	# error: 'cvSize' was not declared in this scope
-	dk_disable(DKSDLWav)			# compiling errors
-	dk_disable(DKSFMLRml)			# requires sfml, rmlui.  INCOMPLETE
+	dk_disable(DKSDLWav)			# build errors
+	dk_disable(DKSFMLRml)			# build errors
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKUpdate)			# compiling errors
 	dk_disable(DKVncClient)			# requires libvncserver
@@ -81,7 +81,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(osgaudio)			# requires openscenegraph
 	dk_disable(osgbullet)			# CMake Error: Could NOT find Bullet
 	dk_disable(osgworks)			# requires openscenegraph
-	dk_disable(tesseract)			# requires leptonica
+	#dk_disable(tesseract)			# requires leptonica
 	dk_disable(waave)				# Cannot open include file: 'libavcodec/avcodec.h':
 endif()
 
@@ -222,7 +222,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKSDLVideo)			# requires waave
 	dk_disable(DKSDLWav)			# compiling errors
 	dk_disable(DKSFMLRml)			# requires sfml, rmlui.  INCOMPLETE
-	dk_disable(DKSFMLWindow)		# requires sfml
+	#dk_disable(DKSFMLWindow)		# requires sfml
 	dk_disable(DKThread)			# error: need to implement boost::placeholders
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKUpdate)			# error: need to implement boost::placeholders
