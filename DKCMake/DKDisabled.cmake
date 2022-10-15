@@ -224,9 +224,9 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKSDLWav)			# compiling errors
 	dk_disable(DKSFMLRml)			# requires sfml, rmlui.  INCOMPLETE
 	dk_disable(DKSFMLWindow)		# requires sfml
-	#dk_disable(DKThread)			# requires threadpool
+	dk_disable(DKThread)			# error: need to implement boost::placeholders
 	dk_disable(DKTorrent)			# requires libtorrent
-	dk_disable(DKUpdate)			# compiling errors
+	#dk_disable(DKUpdate)			# compiling errors
 	dk_disable(DKWebSockets)		# requires libwebsockets, uwebsockets
 	dk_disable(freealut)			# error: not able to compile a simple test program
 	dk_disable(imagemagick)			# libimagemagik.a not found
