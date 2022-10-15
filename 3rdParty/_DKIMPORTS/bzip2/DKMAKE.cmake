@@ -17,7 +17,7 @@ dk_depend(libgcc)
 
 ### IMPORT ###
 WIN_dk_import		(https://github.com/kiyolee/bzip2-win-build/archive/refs/tags/v1.0.8.zip)
-MAC_dk_import		(ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
+APPLE_dk_import		(ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
 LINUX_dk_import		(ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
 RASPBERRY_dk_import	(ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
 ANDROID_dk_import	(ftp://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz)
