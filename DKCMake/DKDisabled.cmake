@@ -92,7 +92,7 @@ endif()
 
 
 if(MAC)  # Disabled for MAC targets
-	dk_disable(DKOcr)				# requires leptonica, tesseract
+	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
 	dk_disable(DKOSGAudio)			# requires openscenegraph, freealut
 	dk_disable(DKOSGCef)			# build errors
