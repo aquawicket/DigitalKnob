@@ -175,8 +175,10 @@ void DKScreenRecorder::DrawBuffer(){
 
 		// init D3D and get screen size
 		d3d = Direct3DCreate9(D3D_SDK_VERSION);
-		if(!d3d)
-			return DKERROR("DKScreenRecorder::DrawBuffer(): Direct3DCreate9() failed\n");
+		if(!d3d){
+			DKERROR("DKScreenRecorder::DrawBuffer(): Direct3DCreate9() failed\n");
+			return;
+		}
 		HRCHECK(d3d->GetAdapterDisplayMode(adapter, &mode));
 		parameters.Windowed = TRUE;
 		parameters.BackBufferCount = 1;

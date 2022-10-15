@@ -29,12 +29,6 @@
 #define DKScreenRecorder_H
 #include "DK/DK.h"
 
-#if LINUX
-#	include <unistd.h>
-#	include <X11/Xlib.h>
-#	include <X11/Xutil.h>
-#endif
-
 //DirectX Capture
 #if WIN32
 #	include <Wincodec.h>             // we use WIC for saving images
@@ -45,6 +39,16 @@
 #	define __WFILE__ WIDEN(__FILE__)
 #	define HRCHECK(__expr) {hr=(__expr);if(FAILED(hr)){wprintf(L"FAILURE 0x%08X (%i)\n\tline: %u file: '%s'\n\texpr: '" WIDEN(#__expr) L"'\n",hr, hr, __LINE__,__WFILE__);}}
 #	define RELEASE(__p) {if(__p!=nullptr){__p->Release();__p=nullptr;}}
+#endif
+
+#if MAC
+#	import "CoreGraphics/CoreGraphics.h"
+#endif
+
+#if LINUX
+#	include <unistd.h>
+#	include <X11/Xlib.h>
+#	include <X11/Xutil.h>
 #endif
 
 #include "include/opencv2/opencv.hpp"
