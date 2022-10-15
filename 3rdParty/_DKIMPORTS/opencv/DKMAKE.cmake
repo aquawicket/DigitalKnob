@@ -24,6 +24,7 @@ dk_import(https://github.com/opencv/opencv.git)
 ### LINK ###
 dk_include(${OPENCV})
 dk_include(${OPENCV}/modules/core/include)
+dk_include(${OPENCV}/modules/imgproc/include)
 dk_include(${OPENCV}/modules/videoio/include)
 dk_include(${OPENCV}/${OS})
 dk_include(${OPENCV}/${OS}/${DEBUG_DIR})
