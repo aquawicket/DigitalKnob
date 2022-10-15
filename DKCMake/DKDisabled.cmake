@@ -66,6 +66,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(DKScreenRecorder)	# error: 'cvSize' was not declared in this scope
 	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSFMLRml)			# build errors
+	dk_disable(DKThread)			# build errors
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKUpdate)			# compiling errors
 	dk_disable(DKVncClient)			# requires libvncserver
@@ -222,7 +223,6 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKSDLVideo)			# requires waave
 	dk_disable(DKSDLWav)			# compiling errors
 	dk_disable(DKSFMLRml)			# requires sfml, rmlui.  INCOMPLETE
-	#dk_disable(DKSFMLWindow)		# requires sfml
 	dk_disable(DKThread)			# error: need to implement boost::placeholders
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKUpdate)			# error: need to implement boost::placeholders

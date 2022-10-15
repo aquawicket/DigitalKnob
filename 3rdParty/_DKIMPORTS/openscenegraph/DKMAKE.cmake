@@ -61,9 +61,7 @@ if(ALL_LIBS)
 	dk_enable(osgdb_ac)
 	dk_enable(osgdb_bmp)
 	dk_enable(osgdb_bsp)
-	if(NOT RASPBERRY)
-		dk_enable(osgdb_bvh)
-	endif()
+	dk_enable(osgdb_bvh)
 	dk_enable(osgdb_cfg)
 	if(NOT LINUX AND NOT RASPBERRY)
 		dk_enable(osgdb_curl)				# broken on LINUX, RASPBERRY
@@ -1601,7 +1599,7 @@ RASPBERRY_DEBUG_dk_queueCommand(${OPENCV_BUILD}
 	
 RASPBERRY_RELEASE_dk_queueCommand(${OPENCV_BUILD} 
 	"-DCMAKE_CXX_FLAGS=-I${ZLIB}/${OS}/Release -I${LIBPNG}/${OS}/Release -I${TIFF}/${OS}/Release/libtiff -I${LIBJPEG-TURBO}/${OS}/Release" 
-	-DCMAKE_BUILD_TYPE=DEBUG 
+	-DCMAKE_BUILD_TYPE=RELEASE
 	-DBUILD_OSG_APPLICATIONS=OFF 
 	-DBUILD_OSG_EXAMPLES=OFF
 	-DDYNAMIC_OPENTHREADS=OFF 
