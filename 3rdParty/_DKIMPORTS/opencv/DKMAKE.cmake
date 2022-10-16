@@ -10,15 +10,9 @@ dk_depend(libpng)
 dk_depend(vfw32.lib)
 
 
-### VERSION ###
-dk_set(OPENCV_MAJOR 4)
-dk_set(OPENCV_MINOR 6)
-dk_set(OPENCV_BUILD 0)
-#dk_set(OPENCV_VERSION 460)
-
-
 ### IMPORT ###
 dk_import(https://github.com/opencv/opencv.git)
+dk_set(OPENCV_VERSION 460)
 
 
 ### LINK ###
@@ -41,9 +35,13 @@ dk_include(${OPENCV}/${OS})
 dk_include(${OPENCV}/${OS}/${DEBUG_DIR})
 dk_include(${OPENCV}/${OS}/${RELEASE_DIR})
 
+dk_enable(ALL_LIBS)
+if(ALL_LIBS)
+	dk_enable(opencv_core)
+endif()
 # opencv_core
-WIN_dk_libDebug			(${OPENCV}/${OS}/lib/${DEBUG_DIR}/opencv_core${OPENCV_MAJOR}${OPENCV_MINOR}${OPENCV_BUILD}d.lib)
-WIN_dk_libRelease		(${OPENCV}/${OS}/lib/${RELEASE_DIR}/opencv_core${OPENCV_MAJOR}${OPENCV_MINOR}${OPENCV_BUILD}.lib)
+WIN_dk_libDebug			(${OPENCV}/${OS}/lib/${DEBUG_DIR}/opencv_core${OPENCV_VERSION}d.lib)
+WIN_dk_libRelease		(${OPENCV}/${OS}/lib/${RELEASE_DIR}/opencv_core${OPENCV_VERSION}.lib)
 APPLE_dk_libDebug		(${OPENCV}/${OS}/lib/${DEBUG_DIR}/libopencv_core.a)
 APPLE_dk_libRelease		(${OPENCV}/${OS}/lib/${RELEASE_DIR}/libopencv_core.a)
 LINUX_dk_libDebug		(${OPENCV}/${OS}/${DEBUG_DIR}/lib/libopencv_core.a)
@@ -56,8 +54,8 @@ ANDROID_dk_libRelease	(${OPENCV}/${OS}/lib/${RELEASE_DIR}/libopencv_core.a)
 #ANDROID_dk_libRelease	(${OPENCV}/${OS}/lib/${RELEASE_DIR}/obj/local/armeabi-v7a/libopencv_core.a)
 
 # opencv_imgcodecs
-WIN_dk_libDebug			(${OPENCV}/${OS}/lib/${DEBUG_DIR}/opencv_imgcodecs${OPENCV_MAJOR}${OPENCV_MINOR}${OPENCV_BUILD}d.lib)
-WIN_dk_libRelease		(${OPENCV}/${OS}/lib/${RELEASE_DIR}/opencv_imgcodecs${OPENCV_MAJOR}${OPENCV_MINOR}${OPENCV_BUILD}.lib)
+WIN_dk_libDebug			(${OPENCV}/${OS}/lib/${DEBUG_DIR}/opencv_imgcodecs${OPENCV_VERSION}d.lib)
+WIN_dk_libRelease		(${OPENCV}/${OS}/lib/${RELEASE_DIR}/opencv_imgcodecs${OPENCV_VERSION}.lib)
 APPLE_dk_libDebug		(${OPENCV}/${OS}/lib/${DEBUG_DIR}/libopencv_imgcodecs.a)
 APPLE_dk_libRelease		(${OPENCV}/${OS}/lib/${RELEASE_DIR}/libopencv_imgcodecs.a)
 LINUX_dk_libDebug		(${OPENCV}/${OS}/${DEBUG_DIR}/lib/libopencv_imgcodecs.a)
@@ -68,8 +66,8 @@ ANDROID_dk_libDebug		(${OPENCV}/${OS}/lib/${DEBUG_DIR}/libopencv_imgcodecs.a)
 ANDROID_dk_libRelease	(${OPENCV}/${OS}/lib/${RELEASE_DIR}/libopencv_imgcodecs.a)
 
 # opencv_imgproc
-WIN_dk_libDebug			(${OPENCV}/${OS}/lib/${DEBUG_DIR}/opencv_imgproc${OPENCV_MAJOR}${OPENCV_MINOR}${OPENCV_BUILD}d.lib)
-WIN_dk_libRelease		(${OPENCV}/${OS}/lib/${RELEASE_DIR}/opencv_imgproc${OPENCV_MAJOR}${OPENCV_MINOR}${OPENCV_BUILD}.lib)
+WIN_dk_libDebug			(${OPENCV}/${OS}/lib/${DEBUG_DIR}/opencv_imgproc${OPENCV_VERSION}d.lib)
+WIN_dk_libRelease		(${OPENCV}/${OS}/lib/${RELEASE_DIR}/opencv_imgproc${OPENCV_VERSION}.lib)
 APPLE_dk_libDebug		(${OPENCV}/${OS}/lib/${DEBUG_DIR}/libopencv_imgproc.a)
 APPLE_dk_libRelease		(${OPENCV}/${OS}/lib/${RELEASE_DIR}/libopencv_imgproc.a)
 LINUX_dk_libDebug		(${OPENCV}/${OS}/${DEBUG_DIR}/lib/libopencv_imgproc.a)
@@ -80,8 +78,8 @@ ANDROID_dk_libDebug		(${OPENCV}/${OS}/lib/${DEBUG_DIR}/libopencv_imgproc.a)
 ANDROID_dk_libRelease	(${OPENCV}/${OS}/lib/${RELEASE_DIR}/libopencv_imgproc.a)
 
 # opencv_videoio
-WIN_dk_libDebug			(${OPENCV}/${OS}/lib/${DEBUG_DIR}/opencv_videoio${OPENCV_MAJOR}${OPENCV_MINOR}${OPENCV_BUILD}d.lib)
-WIN_dk_libRelease		(${OPENCV}/${OS}/lib/${RELEASE_DIR}/opencv_videoio${OPENCV_MAJOR}${OPENCV_MINOR}${OPENCV_BUILD}.lib)
+WIN_dk_libDebug			(${OPENCV}/${OS}/lib/${DEBUG_DIR}/opencv_videoio${OPENCV_VERSION}d.lib)
+WIN_dk_libRelease		(${OPENCV}/${OS}/lib/${RELEASE_DIR}/opencv_videoio${OPENCV_VERSION}.lib)
 APPLE_dk_libDebug		(${OPENCV}/${OS}/lib/${DEBUG_DIR}/libopencv_videoio.a)
 APPLE_dk_libRelease		(${OPENCV}/${OS}/lib/${RELEASE_DIR}/libopencv_videoio.a)
 LINUX_dk_libDebug		(${OPENCV}/${OS}/${DEBUG_DIR}/lib/libopencv_videoio.a)
@@ -196,7 +194,7 @@ ANDROID_dk_queueCommand				(${DKCMAKE_BUILD} ${OPENCV})
 ### COMPILE ###
 dk_visualStudio	(${OPENCV_NAME}) # windows, android
 dk_xcode		(${OPENCV_NAME}) # mac, ios, iossim
-dk_make			(${OPENCV_NAME})# linux, raspberry
+dk_make			(${OPENCV_NAME}) # linux, raspberry
 #dk_xcode		(${OPENCV_NAME} opencv_core)		# mac, ios, iossim
 #dk_xcode		(${OPENCV_NAME} opencv_imgcodecs)	# mac, ios, iossim
 #dk_xcode		(${OPENCV_NAME} opencv_videoio)		# mac, ios, iossim
