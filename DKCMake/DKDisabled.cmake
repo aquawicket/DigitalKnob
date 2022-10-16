@@ -195,6 +195,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(osgbullet)			# CMake Error: Could NOT find Bullet
 	dk_disable(osgworks)			# requires openscenegraph
 	dk_disable(podofo)				# Could not find FREETYPE
+	dk_disable(rtaudio)				# 'CoreAudio/AudioHardware.h' file not found
 	dk_disable(sdl-gpu)				# SDL2MAIN_LIBRARY is NOTFOUND
 	dk_disable(sfml)				# Unknown CMake command "find_host_package"
 	dk_disable(smpeg2)				# ** BUILD FAILED ** MPEGstream.cpp
