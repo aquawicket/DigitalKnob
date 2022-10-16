@@ -6,8 +6,8 @@ dk_import(https://code.videolan.org/videolan/x264.git)
 
 
 ### LINK ###
-# TODO
 dk_include(${X264})
+# TODO
 
 
 ### GENERATE / COMPILE ###

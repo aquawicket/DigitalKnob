@@ -24,10 +24,10 @@ UNIX_dk_libRelease	(${BOXER}/${OS}/${RELEASE_DIR}/libBoxer.a)
 
 ### GENERATE ###
 dk_setPath(${BOXER}/${BUILD_DIR})
-dk_command(${DKCMAKE_BUILD} ${BOXER})
+dk_command(${DKCMAKE_BUILD} ${BOXER}) #FIXME: should this be dk_queueCommand ?
 
 
 ### COMPILE ###
-dk_visualStudio	(${BOXER_NAME} Boxer) #windows, android
-dk_xcode		(${BOXER_NAME} Boxer) #mac, ios, iossim
-dk_make			(${BOXER_NAME} Boxer) #linux, raspberry
+dk_visualStudio	(${BOXER_FOLDER} Boxer) #windows, android
+dk_xcode		(${BOXER_FOLDER} Boxer) #mac, ios, iossim
+dk_make			(${BOXER_FOLDER} Boxer) #linux, raspberry
