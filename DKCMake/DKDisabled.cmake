@@ -24,9 +24,7 @@
 include_guard()
 
 
-# DISABLED FOR ALL - TODO: move these into the select OS targets below		
-dk_disable(freealut_BACKUP)
-	
+# DISABLED FOR ALL - TODO: move these into the select OS targets below	
 dk_disable(DKPlugin1)				# TODO
 dk_disable(DKPlugin2)				# TODO
 dk_disable(gradle)					# We don't need to build this from source
