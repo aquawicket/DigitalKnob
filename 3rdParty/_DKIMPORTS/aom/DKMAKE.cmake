@@ -13,17 +13,12 @@ UNIX_dk_libDebug	(${AOM}/${OS}/${DEBUG_DIR}/libaom.a)
 UNIX_dk_libRelease	(${AOM}/${OS}/${RELEASE_DIR}/libaom.a)
 
 
-### GENERATE / COMPILE ###
-WIN_DEBUG_dk_setPath	(${AOM}/${OS}/${DEBUG_DIR})
-WIN_DEBUG_dk_msys		(${DKCONFIGURE_BUILD})
-WIN_DEBUG_dk_msys		(make)
-WIN_RELEASE_dk_setPath	(${AOM}/${OS}/${RELEASE_DIR})
-WIN_RELEASE_dk_msys		(${DKCONFIGURE_BUILD})
-WIN_RELEASE_dk_msys		(make)
+### GENERATE ###
+dk_setPath		(${AOM}/${BUILD_DIR})
+dk_queueCommand	(${DKCMAKE_BUILD} ${AOM})
 
-UNIX_DEBUG_dk_setPath		(${AOM}/${OS}/${DEBUG_DIR})
-UNIX_DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
-UNIX_DEBUG_dk_queueCommand	(make)
-UNIX_RELEASE_dk_setPath		(${AOM}/${OS}/${RELEASE_DIR})
-UNIX_RELEASE_dk_queueCommand(${DKCONFIGURE_BUILD})
-UNIX_RELEASE_dk_queueCommand(make)
+
+### COMPILE ###
+dk_visualStudio	(${AOM_FOLDER}) #windows, android
+dk_xcode		(${AOM_FOLDER}) #mac, ios, iossim
+dk_make			(${AOM_FOLDER}) #linux, raspberry
