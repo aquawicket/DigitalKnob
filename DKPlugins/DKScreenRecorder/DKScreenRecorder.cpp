@@ -108,7 +108,7 @@ bool DKScreenRecorder::End(){
 bool DKScreenRecorder::Record(const DKString& file){
 	DKDEBUGFUNC(file);
 	//videoWriter.open(file.c_str(), cv::VideoWriter::fourcc('M','J','P','G'), fps, cvSize(desktopWidth, desktopHeight), true);
-	videoWriter.open(file.c_str(), cv::VideoWriter::fourcc('M','J','P','G'), fps, (desktopWidth, desktopHeight), true);
+	videoWriter.open(file.c_str(), cv::VideoWriter::fourcc('M','J','P','G'), fps, cv::Size(desktopWidth, desktopHeight), true);
 	//videoWriter.open(file.c_str(), cv::VideoWriter::fourcc('I', 'Y', 'U', 'V'), fps, cvSize(desktopWidth, desktopHeight), true);
 	if(!videoWriter.isOpened())
 		return DKERROR("DKScreenRecorder::Init(): Could not open the output video for write \n");
