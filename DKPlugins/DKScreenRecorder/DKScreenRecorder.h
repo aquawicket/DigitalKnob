@@ -41,12 +41,6 @@
 #	define RELEASE(__p) {if(__p!=nullptr){__p->Release();__p=nullptr;}}
 #endif
 
-#if LINUX
-#	include <unistd.h>
-#	include <X11/Xlib.h>
-#	include <X11/Xutil.h>
-#endif
-
 #include "include/opencv2/opencv.hpp"
 //#include "modules/imgproc/include/opencv2/imgproc/imgproc.hpp"
 #include "opencv2/imgproc/imgproc.hpp""
@@ -55,6 +49,12 @@
 
 #if MAC
 #	import "CoreGraphics/CoreGraphics.h"
+#endif
+
+#if LINUX
+#	include <unistd.h>
+#	include <X11/Xlib.h>
+#	include <X11/Xutil.h>
 #endif
 
 class DKScreenRecorder : public DKObjectT<DKScreenRecorder>
