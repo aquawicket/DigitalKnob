@@ -31,27 +31,27 @@
 #include "DKScreenRecorder/DKScreenRecorder.h"
 
 #ifdef WIN32
-#define sleep Sleep
-#include <WS2tcpip.h>
+	#define sleep Sleep
+	#include <WS2tcpip.h>
 #endif
 
 #ifdef LINUX
-#include <unistd.h>
-#include <X11/Xlib.h>
-#include <X11/Xutil.h>
-Display* DKScreenRecorder::disp;
-Window DKScreenRecorder::root;
-XImage* DKScreenRecorder::image;
+	#include <unistd.h>
+	#include <X11/Xlib.h>
+	#include <X11/Xutil.h>
+	Display* DKScreenRecorder::disp;
+	Window DKScreenRecorder::root;
+	XImage* DKScreenRecorder::image;
 #endif
 
 #ifdef MAC
-CGImageRef DKScreenRecorder::image_ref;
-CGDataProviderRef DKScreenRecorder::provider;
-CFDataRef DKScreenRecorder::dataref;
+	CGImageRef DKScreenRecorder::image_ref;
+	CGDataProviderRef DKScreenRecorder::provider;
+	CFDataRef DKScreenRecorder::dataref;
 #endif
 
 #ifdef __IRIX__
-#include <netdb.h>
+	#include <netdb.h>
 #endif
 
 static int fps = 30;
@@ -110,7 +110,7 @@ bool DKScreenRecorder::Record(const DKString& file){
 	videoWriter.open(file.c_str(), cv::VideoWriter::fourcc('M','J','P','G'), fps, cv::Size(desktopWidth, desktopHeight), true);
 	//videoWriter.open(file.c_str(), cv::VideoWriter::fourcc('I', 'Y', 'U', 'V'), fps, cv::Size(desktopWidth, desktopHeight), true);
 	if(!videoWriter.isOpened())
-		return DKERROR("DKScreenRecorder::Init(): Could not open the output video for write \n");
+		return DKERROR("videoWriter.isOpened() failed! \n");
 	return true;
 }
 

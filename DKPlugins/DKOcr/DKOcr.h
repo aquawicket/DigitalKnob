@@ -28,9 +28,9 @@
 #ifndef DKOcr_H
 #define DKOcr_H
 
+#include "DK/DK.h"
 #include "tesseract/baseapi.h"  //tesseract
 //#include "podofo.h"       //podofo
-#include "DK/DK.h"
 
 
 class DKOcr : public DKObjectT<DKOcr>

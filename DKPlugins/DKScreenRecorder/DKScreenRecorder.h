@@ -23,10 +23,10 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #pragma once
 #ifndef DKScreenRecorder_H
 #define DKScreenRecorder_H
+
 #include "DK/DK.h"
 
 //DirectX Capture
@@ -72,7 +72,6 @@ public:
 	static char* frameBuffer;
 	static int desktopWidth;
 	static int desktopHeight;
-
 	static cv::VideoWriter videoWriter;
 	static cv::Mat brgMat;
 
@@ -92,4 +91,3 @@ public:
 REGISTER_OBJECT(DKScreenRecorder, true);
 
 #endif //DKScreenRecorder_H
-

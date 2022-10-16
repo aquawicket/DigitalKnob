@@ -25,10 +25,11 @@
 */
 
 #include "DK/stdafx.h"
-#include "DKOcr/DKOcr.h"
 #include "DK/DKFile.h"
 #include "DKAssets/DKAssets.h"
+#include "DKOcr/DKOcr.h"
 #include "src/allheaders.h"
+
 
 tesseract::TessBaseAPI* DKOcr::api;
 
@@ -38,38 +39,36 @@ bool DKOcr::Init(){
 	DKClass::DKCreate("DKOcrV8");
 	api = new tesseract::TessBaseAPI();
 	DKString datapath = DKFile::local_assets+"DKOcr";
-	if (api->Init(datapath.c_str(), "eng")) // Initialize tesseract-ocr with English
+	if(api->Init(datapath.c_str(), "eng", tesseract::OEM_TESSERACT_ONLY) == -1) // Initialize tesseract with English
 		return DKERROR("Could not initialize tesseract\n");
 	return true;
 }
 
 bool DKOcr::End(){
 	DKDEBUGFUNC();
-	//DKClass::DKCreate("DKOcrJS");
-	//DKClass::DKCreate("DKOcrV8");
 	api->End();
+	DKClass::DKClose("DKOcrV8");
+	DKClass::DKClose("DKOcrJS");
 	return true;
 }
 
 /*
 bool DKOcr::AddTextElement(double dCurPosX, double dCurPosY, PoDoFo::PdfFont* pCurFont, const PoDoFo::PdfString & rString){
 	DKDEBUGFUNC(dCurPosX, dCurPosY, pCurFont, rString);
-	if(!pCurFont){
-		fprintf(stderr, "WARNING: Found text but do not have a current font: %s\n", rString.GetString());
-		return false;
-	}
-	if(!pCurFont->GetEncoding()){
-		fprintf(stderr, "WARNING: Found text but do not have a current encoding: %s\n", rString.GetString());
-		return false;
-	}
+	if(!pCurFont)
+		return DKERROR("pCurFOnt invalid: "+rString.GetString()+" \n");
+	if(!pCurFont->GetEncoding())
+		return DKERROR("pCurFont->GetEncoding() failed:  "+rString.GetString()+" \n");
 	// For now just write to console
 	PoDoFo::PdfString unicode = pCurFont->GetEncoding()->ConvertToUnicode(rString, pCurFont);
 	const char* pszData = unicode.GetStringUtf8().c_str();
 	while(*pszData){
 		//printf("%02x", static_cast<unsigned char>(*pszData) );
+		//DKINFO(toString(static_cast<unsigned char>(*pszData))+" \n");
 		++pszData;
 	}
-	printf("(%.3f,%.3f) %s \n", dCurPosX, dCurPosY, unicode.GetStringUtf8().c_str());
+	//printf("(%.3f,%.3f) %s \n", dCurPosX, dCurPosY, unicode.GetStringUtf8().c_str());
+	DKINFO(toString(dCurPosX)+","+toString(dCurPosY)+": "+unicode.GetStringUtf8().c_str()+" \n");
 	return true;
 }
 
@@ -99,8 +98,9 @@ bool DKOcr::ExtractPdfText(PoDoFo::PdfMemDocument* pDocument, PoDoFo::PdfPage* p
 				//pCurFont     = NULL;
 			}
 			else if(strcmp( pszToken, "ET") == 0){
-				if(!bTextBlock) 
-					fprintf(stderr, "WARNING: Found ET without BT!\n");
+				if(!bTextBlock)
+					//fprintf(stderr, "WARNING: Found ET without BT!\n");
+					DKERROR("bTextBlock invalid: Found ET without BT! \n");
 			}
 			if(bTextBlock){
 				if(strcmp(pszToken, "Tf") == 0){
@@ -109,15 +109,11 @@ bool DKOcr::ExtractPdfText(PoDoFo::PdfMemDocument* pDocument, PoDoFo::PdfPage* p
 					PoDoFo::PdfObject* pFont = pPage->GetFromResources(PoDoFo::PdfName("Font"), fontName);
 					if(!pFont){
 						//PoDoFo::PODOFO_RAISE_ERROR_INFO( ePdfError_InvalidHandle, "Cannot create font!" );
-						DKWARN("DKOcr::ExtractPdfText(): Cannot create font\n");
-						return false;
+						return DKERROR("pFont invalid! \n");
 					}
 					pCurFont = pDocument->GetFont(pFont);
-					if(!pCurFont){
-						fprintf(stderr, "WARNING: Unable to create font for object %i %i R\n",
-							pFont->Reference().ObjectNumber(),
-							pFont->Reference().GenerationNumber());
-					}
+					if(!pCurFont)
+						fprintf(stderr, "WARNING: Unable to create font for object %i %i R\n", pFont->Reference().ObjectNumber(), pFont->Reference().GenerationNumber());
 				}
 				else if(strcmp(pszToken, "Tj") == 0 || strcmp( pszToken, "'") == 0){
 					AddTextElement(dCurPosX, dCurPosY, pCurFont, stack.top().GetString());
@@ -143,9 +139,9 @@ bool DKOcr::ExtractPdfText(PoDoFo::PdfMemDocument* pDocument, PoDoFo::PdfPage* p
 			stack.push(var);
 		}
 		else{
-			// Impossible; type must be keyword or variant
+			// type must be keyword or variant
 			//PODOFO_RAISE_ERROR(ePdfError_InternalLogic);
-			DKWARN("DKOcr::ExtractPdfText(): type must be keyword or variant\n");
+			return DKERROR("type must be keyword or variant\n");
 		}
 	}
 	return true;
@@ -157,19 +153,19 @@ bool DKOcr::ImageToText(DKString& file, DKString& text){
 	DKString _file = file;
 	if(has(file,".pdf")){
 		if(!PdfToText(file, text))
-			return DKERROR("PdfToText() failed \n");
+			return DKERROR("PdfToText() failed! \n");
 		_file = DKFile::local_assets+"temp.png";
 	}
 	if(!DKFile::PathExists(_file))
-		return DKERROR("_file does not exist \n");
+		return DKERROR("DKFile::PathExists() failed! \n");
 	char* outText;
 	Pix *image = pixRead(_file.c_str());
 	api->SetImage(image);
 	outText = api->GetUTF8Text();
 	if(!outText)
-		return DKERROR("outText invalid \n");	
+		return DKERROR("outText invalid! \n");	
 	text = outText;
-	DKINFO("OCR output:\n"+text+"\n");
+	DKINFO("OCR output:\n"+text+" \n");
 	delete [] outText;
 	pixDestroy(&image);
 	return true;
