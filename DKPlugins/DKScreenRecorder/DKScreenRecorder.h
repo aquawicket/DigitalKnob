@@ -48,8 +48,10 @@
 #endif
 
 #include "include/opencv2/opencv.hpp"
-#include "modules/imgproc/include/opencv2/imgproc/imgproc.hpp"
-#include "opencv2/videoio.hpp"
+//#include "modules/imgproc/include/opencv2/imgproc/imgproc.hpp"
+#include "opencv2/imgproc/imgproc.hpp""
+//#include "opencv2/videoio.hpp"
+#include "opencv2/videoio/videoio.hpp"
 
 #if MAC
 #	import "CoreGraphics/CoreGraphics.h"
