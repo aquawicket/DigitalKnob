@@ -6,7 +6,7 @@ endif()
 
 
 ### IMPORT ###
-dk_set(GHOSTSCRIPT "C:/Program Files/gs/gs922/bin")
+dk_set(GHOSTSCRIPT "C:/Program Files/gs/gs9.22/bin")
 IF(NOT EXISTS ${GHOSTSCRIPT})
 	#dk_download(https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs922/gs922w64.exe gs922w64.exe)
 	dk_import(https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs922/gs922w64.exe)
