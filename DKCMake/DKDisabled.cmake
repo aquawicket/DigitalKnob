@@ -245,6 +245,7 @@ endif()
 
 
 if(RASPBERRY) # Disabled for Raspberry Pi targets
+	dk_disable(aom)
 	dk_disable(boxer)				# fatal error : 'boxer/boxer.h' file not found	
 	dk_disable(DKHook)				# 'read' was not declared in this scope
 	dk_disable(DKJerryscript)		# requires jerryscript
