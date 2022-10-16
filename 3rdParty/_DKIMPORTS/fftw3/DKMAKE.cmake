@@ -1,4 +1,4 @@
-# https://github.com/FFTW/fftw3
+# https://github.com/FFTW/fftw3.git
 
 
 ### IMPORT ###

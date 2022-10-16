@@ -1,17 +1,14 @@
+# https://github.com/ArtifexSoftware/ghostpdl-downloads
+# https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs922/gs922w64.exe
 if(NOT WIN_HOST)
 	return()
 endif()
 
-### VERSION ###
-dk_set(GHOSTSCRIPT_MAJOR 9)
-dk_set(GHOSTSCRIPT_MINOR 22)
-dk_set(GHOSTSCRIPT_VERSION ${GHOSTSCRIPT_MAJOR}${GHOSTSCRIPT_MINOR})
-dk_set(GHOSTSCRIPT_NAME gs${GHOSTSCRIPT_VERSION}w64)
-dk_set(GHOSTSCRIPT_DL https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs${GHOSTSCRIPT_VERSION}/${GHOSTSCRIPT_NAME}.exe)
-dk_set(GHOSTSCRIPT "C:/Program Files/gs/gs${GHOSTSCRIPT_MAJOR}.${GHOSTSCRIPT_MINOR}/bin")
 
-### INSTALL ###
+### IMPORT ###
+dk_set(GHOSTSCRIPT "C:/Program Files/gs/gs922/bin")
 IF(NOT EXISTS ${GHOSTSCRIPT})
-	dk_download(${GHOSTSCRIPT_DL} ${DKDOWNLOAD}/${GHOSTSCRIPT_NAME}.exe)
-	dk_command(${DKDOWNLOAD}/${GHOSTSCRIPT_NAME}.exe)
+	#dk_download(https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs922/gs922w64.exe gs922w64.exe)
+	dk_import(https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs922/gs922w64.exe)
+	dk_command(${DKDOWNLOAD}/gs922w64.exe)
 ENDIF()

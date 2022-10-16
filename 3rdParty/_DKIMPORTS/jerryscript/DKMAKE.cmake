@@ -1,4 +1,4 @@
-# https://github.com/jerryscript-project/jerryscript
+# https://github.com/jerryscript-project/jerryscript.git
 # https://jerryscript.net
 
 

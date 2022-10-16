@@ -1,4 +1,4 @@
-# https://git.ffmpeg.org/ffmpeg
+# https://git.ffmpeg.org/ffmpeg.git
 
 
 ### IMPORT ###

@@ -9,10 +9,5 @@ if(NOT WIN_HOST)
 endif()
 
 
-### VERSION ###
-#dk_set(FAR_VERSION 2.0.3)
-#dk_set(FAR_NAME FAR-${FAR_VERSION}-win)
-#dk_set(FAR_DL https://sourceforge.net/projects/findandreplace/files/findandreplace/2.0.3/FAR-2.0.3-win.zip)
-
-
+### IMPORT ###
 dk_import(https://sourceforge.net/projects/findandreplace/files/findandreplace/2.0.3/FAR-2.0.3-win.zip ${3RDPARTY}/FAR-2.0.3-win)
