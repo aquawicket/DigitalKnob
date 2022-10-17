@@ -293,6 +293,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(libxml2)
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(lua)					# no CMakeLists.txt
+	dk_disable(opencv)				# build errors
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	dk_disable(osgaudio)			# requires openscenegraph
 	dk_disable(osgbullet)			# CMake Error: Could NOT find Bullet
