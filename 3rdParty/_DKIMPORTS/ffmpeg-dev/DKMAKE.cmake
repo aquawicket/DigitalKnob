@@ -61,3 +61,4 @@ WIN_dk_queueCommand(${VISUALSTUDIO}/VC/bin/amd64_x86/lib.exe /machine:i386 /def:
 	${VC2013}/VC/bin/amd64_x86/lib.exe /machine:i386 /def:${FFMPEG-DEV}/lib/postproc-53.def /out:${FFMPEG-DEV}/lib/postproc.lib & 
 	${VC2013}/VC/bin/amd64_x86/lib.exe /machine:i386 /def:${FFMPEG-DEV}/lib/swresample-1.def /out:${FFMPEG-DEV}/lib/swresample.lib & 
 	${VC2013}/VC/bin/amd64_x86/lib.exe /machine:i386 /def:${FFMPEG-DEV}/lib/swscale-3.def /out:${FFMPEG-DEV}/lib/swscale.lib & exit)
+	
