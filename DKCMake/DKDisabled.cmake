@@ -132,7 +132,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(sdl-gpu)				# SDL for MAC OS X only supports deploying on 10.7 and above
 	dk_disable(smpeg2)				# ** BUILD FAILED ** MPEGstream.cpp
 	dk_disable(tesseract)			# requires leptonica
-	dk_disable(waave)				# requires sdl
+	#dk_disable(waave)				#
 endif()
 
 if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
