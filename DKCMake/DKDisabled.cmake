@@ -136,6 +136,7 @@ if(MAC)  # Disabled for MAC targets
 endif()
 
 if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
+	dk_disable(aom)					# build errors
 	dk_disable(boost)				# clang error: no such file or direcotry: libboost_atomic.a, libboost_chrono.a, etc, etc, etc
 	dk_disable(boxer)				# COCOA_LIBRARY not found
 	dk_disable(bullet3)				# OPENGL-NOTFOUND COCOA-NOTFOUND
