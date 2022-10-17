@@ -22,18 +22,17 @@ APPLE_dk_libDebug		(${WAAVE}/${OS}/${DEBUG_DIR}/libwaave.a)
 APPLE_dk_libRelease		(${WAAVE}/${OS}/${RELEASE_DIR}/libwaave.a)
 LINUX_dk_libDebug		(${WAAVE}/${OS}/${DEBUG_DIR}/libwaave.a)
 LINUX_dk_libRelease		(${WAAVE}/${OS}/${RELEASE_DIR}/libwaave.a)
-ANDROID_dk_libDebug		(${WAAVE}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libwaave.a)
-ANDROID_dk_libRelease	(${WAAVE}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libwaave.a)
+ANDROID_dk_libDebug		(${WAAVE}/${OS}/${DEBUG_DIR}/libwaave.a)
+ANDROID_dk_libRelease	(${WAAVE}/${OS}/${RELEASE_DIR}/libwaave.a)
 
 
 ### GENERATE ###
-dk_setPath						(${WAAVE}/${BUILD_DIR})
-WIN_dk_queueCommand				(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=/I${FFMPEG-DEV}/include" ${FFMPEG-DEV_CMAKE} ${SDL_CMAKE} ${WAAVE})
-MAC_dk_queueCommand				(${DKCMAKE_BUILD} ${FFMPEG-DEV_CMAKE} ${SDL_CMAKE} ${WAAVE})
-IOS_dk_queueCommand				(${DKCMAKE_BUILD} ${FFMPEG-DEV_CMAKE} ${SDL_CMAKE} ${WAAVE})
-IOSSIM_dk_queueCommand			(${DKCMAKE_BUILD} ${FFMPEG-DEV_CMAKE} ${SDL_CMAKE} ${WAAVE})
-LINUX_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} ${FFMPEG-DEV_CMAKE} ${SDL_CMAKE} ${WAAVE})
-LINUX_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} ${FFMPEG-DEV_CMAKE} ${SDL_CMAKE} ${WAAVE})
+dk_setPath					(${WAAVE}/${BUILD_DIR})
+WIN_dk_queueCommand			(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=/I${FFMPEG-DEV}/include" ${FFMPEG-DEV_CMAKE} ${SDL_CMAKE} ${WAAVE})
+APPLE_dk_queueCommand		(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=/I${FFMPEG-DEV}/include" ${FFMPEG-DEV_CMAKE} ${SDL_CMAKE} ${WAAVE})
+LINUX_dk_queueCommand		(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=/I${FFMPEG-DEV}/include" ${FFMPEG-DEV_CMAKE} ${SDL_CMAKE} ${WAAVE})
+RASPBERRY_dk_queueCommand	(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=/I${FFMPEG-DEV}/include" ${FFMPEG-DEV_CMAKE} ${SDL_CMAKE} ${WAAVE})
+ANDROID_dk_queueCommand		(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=/I${FFMPEG-DEV}/include" ${FFMPEG-DEV_CMAKE} ${SDL_CMAKE} ${WAAVE})
 
 
 ### COMPILE ###
