@@ -78,11 +78,11 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(lua)					# no CMakeLists.txt
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
-	dk_disable(openscenegraph)		# osgGA broken
+	#dk_disable(openscenegraph)		# osgGA broken
 	dk_disable(osgaudio)			# requires openscenegraph
-	dk_disable(osgbullet)			# CMake Error: Could NOT find Bullet
+	dk_disable(osgbullet)			# requires openscenegraph
 	dk_disable(osgworks)			# requires openscenegraph
-	dk_disable(waave)				# Cannot open include file: 'libavcodec/avcodec.h':
+	dk_disable(waave)				# error C2065: 'PIX_FMT_YUV420P': undeclared identifier
 endif()
 
 if(WIN_64) # Disabled for Windows 64bit targets
@@ -197,7 +197,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(osgaudio)			# requires openscenegraph
 	dk_disable(osgbullet)			# CMake Error: Could NOT find Bullet
 	dk_disable(osgworks)			# requires openscenegraph
-	dk_disable(podofo)				# Could not find FREETYPE
+	#dk_disable(podofo)				# Could not find FREETYPE
 	dk_disable(rtaudio)				# 'CoreAudio/AudioHardware.h' file not found
 	dk_disable(sdl-gpu)				# SDL2MAIN_LIBRARY is NOTFOUND
 	dk_disable(sfml)				# Unknown CMake command "find_host_package"
