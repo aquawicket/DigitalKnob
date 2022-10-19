@@ -86,7 +86,7 @@ if(WIN) # Disabled for Windows targets
 endif()
 
 if(WIN_64) # Disabled for Windows 64bit targets
-	#dk_disable(opencv)				# cannot open file 'opencv-master\win64\3rdparty\ippicv\ippicv_win\icv\lib\intel64\ippicvmt.lib'
+	dk_disable(opencv)				# error: Only SIMD128, AVX2 and NEON are supported in Winograd.
 	dk_disable(smpeg2)				# fatal error C1083: Cannot open include file: 'unistd.h'
 endif()
 
