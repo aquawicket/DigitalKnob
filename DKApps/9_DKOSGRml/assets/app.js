@@ -8,18 +8,18 @@ CPP_DK_Create("DKRml")
 location.href = url
 
 //// Resize SDLRml window
-const sdl_x = window.screen.width / 2
-const sdl_y = 0
-const sdl_width = window.screen.width / 2
-const sdl_height = window.screen.height
-const sdl_x_offset = 0
-const sdl_y_offest = 30
-const sdl_width_offset = 1
-const sdl_height_offset = -30
+const osg_x = window.screen.width / 2
+const osg_y = 0
+const osg_width = window.screen.width / 2
+const osg_height = window.screen.height
+const osg_x_offset = 0
+const osg_y_offest = 30
+const osg_width_offset = 1
+const osg_height_offset = -30
 
 /*
-window.resizeTo(sdl_width+sdl_width_offset, sdl_height+sdl_height_offset)
-window.moveTo(sdl_x+sdl_x_offset, sdl_y+sdl_y_offest)
+window.resizeTo(osg_width+osg_width_offset, osg_height+osg_height_offset)
+window.moveTo(osg_x+osg_x_offset, osg_y+osg_y_offest)
 window.addEventListener("keydown", function(event){
 	CPP_DK_Create("DKWindow/DKWindow.js")
 	console.log(event.code)
