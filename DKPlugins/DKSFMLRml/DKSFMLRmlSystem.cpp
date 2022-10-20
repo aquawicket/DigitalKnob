@@ -27,6 +27,7 @@
 #include <RmlUi/Core.h>
 #include "DKSFMLRml/DKSFMLRmlSystem.h"
 
+/*
 Rml::Input::KeyIdentifier RmlSFML2SystemInterface::TranslateKey(SFML_Keycode sdlkey){
 	DKDEBUGFUNC(sdlkey);
     using namespace Rml::Input;
@@ -367,17 +368,18 @@ Rml::Input::KeyIdentifier RmlSFML2SystemInterface::TranslateKey(SFML_Keycode sdl
         case SFMLK_RGUI:
             return KI_RMETA;
             break;
-        /*case SFMLK_LSUPER:
-            return KI_LWIN;
-            break;
-        case SFMLK_RSUPER:
-            return KI_RWIN;
-            break;*/
+        //case SFMLK_LSUPER:
+        //   return KI_LWIN;
+        //    break;
+        //case SFMLK_RSUPER:
+        //    return KI_RWIN;
+        //    break;
         default:
             return KI_UNKNOWN;
             break;
     }
 }
+*/
 
 int RmlSFML2SystemInterface::TranslateMouseButton(Uint8 button){
 	DKDEBUGFUNC(button);

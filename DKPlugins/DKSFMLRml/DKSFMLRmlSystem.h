@@ -36,7 +36,7 @@
 class RmlSFML2SystemInterface : public Rml::SystemInterface
 {
 public:
-    Rml::Input::KeyIdentifier TranslateKey(SFML_Keycode sdlkey);
+    //Rml::Input::KeyIdentifier TranslateKey(SFML_Keycode sdlkey);
     int TranslateMouseButton(Uint8 button);
 	int GetKeyModifiers();
     double GetElapsedTime();
