@@ -1,0 +1,80 @@
+#################  HOST SYSTEM VARIABLES  ################
+CMAKE_COMMAND:                 C:/Program Files (x86)/CMake/bin/cmake.exe
+CMAKE_EXE:                     C:/Progra~2/CMake/bin/cmake.exe
+CMAKE_VERSION:                 3.21.1
+CMAKE_HOST_SYSTEM_NAME:        Windows
+CMAKE_HOST_SYSTEM_VERSION:     10.0.19043
+CMAKE_HOST_SYSTEM_PROCESSOR:   AMD64
+CMAKE_SYSTEM_NAME:             Windows
+CMAKE_LIBRARY_ARCHITECTURE:    
+ENV(USERNAME):                 Administrator
+ENV(USER):	    				
+DIGITALKNOB:                   C:/Users/Administrator/digitalknob
+3RDPARTY:                      C:/Users/Administrator/digitalknob/DK/3rdParty
+DKPLUGINS:                     C:/Users/Administrator/digitalknob/DK/DKPlugins
+ 
+#############  PROJECT VARIABLES  ############
+APP_NAME:                      DKBuilder
+DKPROJECT:                     C:/Users/Administrator/digitalknob/DK/DKApps/DKBuilder
+CMAKE_BINARY_DIR:              C:/Users/Administrator/digitalknob/DK/DKApps/DKBuilder/win32
+DEBUG_DIR:                     Debug
+RELEASE_DIR:                   Release
+CMAKE_GENERATOR:               Visual Studio 17 2022
+VS_STARTUP_PROJECT:            
+CMAKE_C_COMPILER:              C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.32.31326/bin/Hostx64/x86/cl.exe
+CMAKE_C_FLAGS:                 /DWIN32 /D_WINDOWS /W3 /DWIN /DWIN32 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c17 /nologo /GR /EHsc /Zm500 /Zc:__cplusplus /W4
+CMAKE_C_FLAGS_DEBUG:           /MDd /Zi /Ob0 /Od /RTC1 /MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG
+CMAKE_C_FLAGS_RELEASE:         /MD /O2 /Ob2 /DNDEBUG /MT /O2 /Ob2 /DNDEBUG
+CMAKE_CXX_COMPILER:            C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.32.31326/bin/Hostx64/x86/cl.exe
+CMAKE_CXX_FLAGS:               /DWIN32 /D_WINDOWS /W3 /GR /EHsc /DWIN /DWIN32 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c++17 /nologo /GR /EHsc /Zm500 /Zc:__cplusplus /W4
+CMAKE_CXX_FLAGS_DEBUG:         /MDd /Zi /Ob0 /Od /RTC1 /MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG
+CMAKE_CXX_FLAGS_RELEASE:       /MD /O2 /Ob2 /DNDEBUG /MT /O2 /Ob2 /DNDEBUG
+OS:                            win32
+DEBUG:                         ON
+RELEASE:                       ON
+REBUILDALL:                    ON
+WIN:                           ON
+WIN_32:                        ON
+ 
+##############################################
+######  Enabled Dependencies (sorted)  #######
+##############################################
+git
+cmake
+visualstudio
+imagemagick
+psapi.lib
+pdh.lib
+dxva2.dll
+boxer
+python
+fmt
+DK
+stackwalker
+zlib
+xz
+bzip2
+libiconv
+libxml2
+cryptopp
+openssl
+libarchive
+pyyaml
+nodejs
+duktape
+DKDuktape
+DKArchive
+DKAssets
+dl
+libssh
+system_configuration
+ws2_32.lib
+curl
+DKFile
+DKCurl
+DKDebug
+DKDuktapeDom
+DKBuild
+DKGit
+
+
