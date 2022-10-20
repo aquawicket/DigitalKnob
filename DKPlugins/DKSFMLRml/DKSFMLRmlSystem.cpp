@@ -381,7 +381,7 @@ Rml::Input::KeyIdentifier RmlSFML2SystemInterface::TranslateKey(SFML_Keycode sdl
 }
 */
 
-int RmlSFML2SystemInterface::TranslateMouseButton(Uint8 button){
+int RmlSFML2SystemInterface::TranslateMouseButton(sf::Uint8 button){
 	DKDEBUGFUNC(button);
     switch(button){
         case SFML_BUTTON_LEFT:
