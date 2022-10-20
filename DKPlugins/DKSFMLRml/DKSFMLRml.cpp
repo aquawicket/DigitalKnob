@@ -37,12 +37,16 @@ bool DKSFMLRml::Init(){
 	//SFML_EventState(SFML_TEXTINPUT, SFML_ENABLE);
 	dkSFMLWindow = DKSFMLWindow::Instance("DKSFMLWindow0");
 	dkRml = DKRml::Instance("DKRml0");
-	if(!dkSFMLWindow || !dkRml)
-		return DKERROR("DKSFMLRml::Init(): INVALID OBJECTS\n");
+	if(!dkSFMLWindow)
+		return DKERROR("dkSFMLWindow invalid! \n")
+	if(!dkRml)
+		return DKERROR("dkRml invalid! \n");
 #ifdef RML_SHELL_RENDER
 	Renderer = new ShellRenderInterfaceOpenGL();
 #else
-	Renderer = new RmlSFML2Renderer(dkSFMLWindow->renderer, dkSFMLWindow->window);
+	//Renderer = new RmlSFML2Renderer(dkSFMLWindow->renderer, dkSFMLWindow->window);
+	Renderer = new RmlSFML2Renderer();
+	Renderer.SetWindow(&dkSFMLWindow->window);
 #endif
 	SystemInterface = new RmlSFML2SystemInterface();
 	Rml::SetRenderInterface(Renderer);
@@ -61,7 +65,7 @@ bool DKSFMLRml::End(){
 bool DKSFMLRml::Handle(SFML_Event *event) {
 	//DKDEBUGFUNC(event);
 	if(!dkRml->document)
-		return DKERROR("dkRml->document invalid");
+		return DKERROR("dkRml->document invalid! \n");
 	Rml::Element* hover;
 	switch(event->type){
 		case SFML_MOUSEMOTION:
