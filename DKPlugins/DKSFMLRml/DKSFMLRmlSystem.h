@@ -30,6 +30,7 @@
 
 #include <RmlUi/Core.h>
 //#include <SFML.h>
+#include <SFML/Window.hpp>
 #include "DK/DK.h"
 
 class RmlSFML2SystemInterface : public Rml::SystemInterface

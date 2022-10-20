@@ -31,12 +31,12 @@
 #include <RmlUi/Core.h>
 //#include <SFML.h>
 
-#if !defined(ANDROID) && !defined(IOS)
+//#if !defined(ANDROID) && !defined(IOS)
 //#include "SFML_opengl.h"
 	#include "SFML/Graphics.hpp"
-#else
-	#include "SFML_opengles.h"
-#endif
+//#else
+//	#include "SFML_opengles.h"
+//#endif
 
 #ifdef USE_SFML2_gif
 extern "C" {
