@@ -191,7 +191,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(lua)					# no CMakeLists.txt
 	dk_disable(mlocate)				# Unable to locate a Java Runtime that supports apt
 	dk_disable(opencv)				# CMAKE_SYSTEM_PROCESSOR is not defined
-	#dk_disable(openframeworks)		# error: CMakeLists.txt broken
+	dk_disable(openframeworks)		# error: tesselator.h: No such file or directory
 	dk_disable(openscenegraph)		# CMake errors
 	dk_disable(opensles)			# could not locate OpenSLES Library
 	dk_disable(osgaudio)			# requires openscenegraph
