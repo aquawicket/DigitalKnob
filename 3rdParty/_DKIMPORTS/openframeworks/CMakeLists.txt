@@ -419,7 +419,7 @@ list(APPEND OF_HEADERS
 
 #sound
 list(APPEND OF_SRC
-    ${OF_PATH}/libs/openFrameworks/sound/ofBaseSoundStream.cpp
+    #${OF_PATH}/libs/openFrameworks/sound/ofBaseSoundStream.cpp
     ${OF_PATH}/libs/openFrameworks/sound/ofFmodSoundPlayer.cpp
     ${OF_PATH}/libs/openFrameworks/sound/ofOpenALSoundPlayer.cpp
     ${OF_PATH}/libs/openFrameworks/sound/ofRtAudioSoundStream.cpp
