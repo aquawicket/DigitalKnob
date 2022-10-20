@@ -27,11 +27,11 @@ ANDROID_dk_libRelease	(${TIFF}/${OS}/libtiff/${RELEASE_DIR}/libtiff.a)
 
 
 ### 3RDPARTY LINK ###
-WIN_dk_set		(TIFF_CMAKE "-DCMAKE_C_FLAGS=-I${TIFF}/${OS}/libtiff" "-DCMAKE_CXX_FLAGS=-I${TIFF}/${OS}/libtiff" -DTIFF_INCLUDE_DIR=${TIFF}/libtiff -DTIFF_INCLUDE_DIR2=${TIFF}/${OS}/libtiff -DTIFF_LIBRARY_DEBUG=${TIFF}/${OS}/libtiff/${DEBUG_DIR}/tiffd.lib -DTIFF_LIBRARY_RELEASE=${TIFF}/${OS}/libtiff/${RELEASE_DIR}/tiff.lib)
-APPLE_dk_set	(TIFF_CMAKE -DTIFF_INCLUDE_DIR=${TIFF}/libtiff -DTIFF_INCLUDE_DIR2=${TIFF}/${OS}/libtiff -DTIFF_LIBRARY_DEBUG=${TIFF}/${OS}/${DEBUG_DIR}/libtiff.a -DTIFF_LIBRARY_RELEASE=${TIFF}/${OS}/${RELEASE_DIR}/libtiff.a)
-LINUX_dk_set	(TIFF_CMAKE -DTIFF_INCLUDE_DIR=${TIFF}/libtiff -DTIFF_INCLUDE_DIR2=${TIFF}/${OS}/${DEBUG_DIR}/libtiff -DTIFF_LIBRARY_DEBUG=${TIFF}/${OS}/${DEBUG_DIR}/libtiff/libtiff.a -DTIFF_LIBRARY_RELEASE=${TIFF}/${OS}/${RELEASE_DIR}/libtiff/libtiff.a)
-RASPBERRY_dk_set(TIFF_CMAKE -DTIFF_INCLUDE_DIR=${TIFF}/libtiff -DTIFF_INCLUDE_DIR2=${TIFF}/${OS}/${DEBUG_DIR}/libtiff -DTIFF_LIBRARY_DEBUG=${TIFF}/${OS}/${DEBUG_DIR}/libtiff/libtiff.a -DTIFF_LIBRARY_RELEASE=${TIFF}/${OS}/${RELEASE_DIR}/libtiff/libtiff.a)
-ANDROID_dk_set	(TIFF_CMAKE "-DCMAKE_C_FLAGS=-I${TIFF}/${OS}/libtiff" "-DCMAKE_CXX_FLAGS=-I${TIFF}/${OS}/libtiff" -DTIFF_INCLUDE_DIR=${TIFF}/libtiff -DTIFF_INCLUDE_DIR2=${TIFF}/${OS}/libtiff -DTIFF_LIBRARY_DEBUG=${TIFF}/${OS}/${DEBUG_DIR}/libtiff.a -DTIFF_LIBRARY_RELEASE=${TIFF}/${OS}/${RELEASE_DIR}/libtiff.a)
+WIN_dk_set		(TIFF_CMAKE -DTIFF_INCLUDE_DIR=${TIFF}/libtiff "-DCMAKE_C_FLAGS=/I${TIFF}/${OS}/libtiff" -DTIFF_INCLUDE_DIR2=${TIFF}/${OS}/libtiff -DTIFF_LIBRARY_DEBUG=${TIFF}/${OS}/libtiff/${DEBUG_DIR}/tiffd.lib -DTIFF_LIBRARY_RELEASE=${TIFF}/${OS}/libtiff/${RELEASE_DIR}/tiff.lib)
+APPLE_dk_set	(TIFF_CMAKE -DTIFF_INCLUDE_DIR=${TIFF}/libtiff "-DCMAKE_C_FLAGS=-I${TIFF}/${OS}/libtiff" -DTIFF_INCLUDE_DIR2=${TIFF}/${OS}/libtiff -DTIFF_LIBRARY_DEBUG=${TIFF}/${OS}/${DEBUG_DIR}/libtiff.a -DTIFF_LIBRARY_RELEASE=${TIFF}/${OS}/${RELEASE_DIR}/libtiff.a)
+LINUX_dk_set	(TIFF_CMAKE -DTIFF_INCLUDE_DIR=${TIFF}/libtiff "-DCMAKE_C_FLAGS=-I${TIFF}/${OS}/libtiff" -DTIFF_INCLUDE_DIR2=${TIFF}/${OS}/${DEBUG_DIR}/libtiff -DTIFF_LIBRARY_DEBUG=${TIFF}/${OS}/${DEBUG_DIR}/libtiff/libtiff.a -DTIFF_LIBRARY_RELEASE=${TIFF}/${OS}/${RELEASE_DIR}/libtiff/libtiff.a)
+RASPBERRY_dk_set(TIFF_CMAKE -DTIFF_INCLUDE_DIR=${TIFF}/libtiff "-DCMAKE_C_FLAGS=-I${TIFF}/${OS}/libtiff" -DTIFF_INCLUDE_DIR2=${TIFF}/${OS}/${DEBUG_DIR}/libtiff -DTIFF_LIBRARY_DEBUG=${TIFF}/${OS}/${DEBUG_DIR}/libtiff/libtiff.a -DTIFF_LIBRARY_RELEASE=${TIFF}/${OS}/${RELEASE_DIR}/libtiff/libtiff.a)
+ANDROID_dk_set	(TIFF_CMAKE -DTIFF_INCLUDE_DIR=${TIFF}/libtiff "-DCMAKE_C_FLAGS=-I${TIFF}/${OS}/libtiff" -DTIFF_INCLUDE_DIR2=${TIFF}/${OS}/libtiff -DTIFF_LIBRARY_DEBUG=${TIFF}/${OS}/${DEBUG_DIR}/libtiff.a -DTIFF_LIBRARY_RELEASE=${TIFF}/${OS}/${RELEASE_DIR}/libtiff.a)
 	
 
 ### GENERATE ###
@@ -40,8 +40,8 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${TIFF})
 
 
 ### COMPILE ###
-dk_visualStudio				(${TIFF_NAME} tiff) # windows, android
-dk_xcode					(${TIFF_NAME} tiff) # mac, ios, iossim 
-#dk_make					(${TIFF_NAME} tiff) # linux, raspberry
-LINUX_dk_queueCommand		(make)				# linux
-RASPBERRY_dk_queueCommand	(make)				# raspberry
+dk_visualStudio				(${TIFF_FOLDER} tiff) # windows, android
+dk_xcode					(${TIFF_FOLDER} tiff) # mac, ios, iossim 
+dk_make						(${TIFF_FOLDER} tiff) # linux, raspberry
+#LINUX_dk_queueCommand		(make)				# linux
+#RASPBERRY_dk_queueCommand	(make)				# raspberry
