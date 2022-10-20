@@ -2,6 +2,10 @@
 # https://github.com/openframeworks/openFrameworks/archive/refs/tags/0.10.0.zip
 
 
+### DEPEND ###
+dk_depend(opengl)
+
+
 ### IMPORT ###
 #dk_import(https://github.com/openframeworks/openFrameworks/archive/refs/tags/0.10.0.zip PATCH)
 dk_import(https://github.com/openframeworks/openFrameworks.git PATCH)

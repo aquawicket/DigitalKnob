@@ -77,7 +77,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(lua)					# no CMakeLists.txt
-	dk_disable(openframeworks)		# error: CMakeLists.txt broken
+	#dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	#dk_disable(openscenegraph)		# osgGA broken
 	dk_disable(osgaudio)			# requires openscenegraph
 	dk_disable(osgbullet)			# requires openscenegraph
@@ -191,7 +191,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(lua)					# no CMakeLists.txt
 	dk_disable(mlocate)				# Unable to locate a Java Runtime that supports apt
 	dk_disable(opencv)				# CMAKE_SYSTEM_PROCESSOR is not defined
-	dk_disable(openframeworks)		# error: CMakeLists.txt broken
+	#dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	dk_disable(openscenegraph)		# CMake errors
 	dk_disable(opensles)			# could not locate OpenSLES Library
 	dk_disable(osgaudio)			# requires openscenegraph
@@ -298,7 +298,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(lua)					# no CMakeLists.txt
 	dk_disable(opencv)				# build errors
-	dk_disable(openframeworks)		# error: CMakeLists.txt broken
+	#dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	dk_disable(osgaudio)			# requires openscenegraph
 	dk_disable(osgbullet)			# CMake Error: Could NOT find Bullet
 	dk_disable(osgworks)			# requires openscenegraph
