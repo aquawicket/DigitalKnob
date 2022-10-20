@@ -277,7 +277,7 @@ set(OF_SRC
     ${OF_PATH}/libs/openFrameworks/3d/of3dUtils.cpp
     ${OF_PATH}/libs/openFrameworks/3d/ofCamera.cpp
     ${OF_PATH}/libs/openFrameworks/3d/ofEasyCam.cpp
-    ${OF_PATH}/libs/openFrameworks/3d/ofMesh.cpp
+    #${OF_PATH}/libs/openFrameworks/3d/ofMesh.cpp
     ${OF_PATH}/libs/openFrameworks/3d/ofNode.cpp
     )
 
