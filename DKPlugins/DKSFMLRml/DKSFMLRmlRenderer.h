@@ -32,7 +32,7 @@
 //#include <SFML.h>
 
 #if !defined(ANDROID) && !defined(IOS)
-#include "SFML_opengl.h"
+//#include "SFML_opengl.h"
 #else
 #include "SFML_opengles.h"
 #endif
