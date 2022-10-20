@@ -27,359 +27,263 @@
 #include <RmlUi/Core.h>
 #include "DKSFMLRml/DKSFMLRmlSystem.h"
 
-/*
-Rml::Input::KeyIdentifier RmlSFML2SystemInterface::TranslateKey(SFML_Keycode sdlkey){
-	DKDEBUGFUNC(sdlkey);
-    using namespace Rml::Input;
-    switch(sdlkey) {
-        case SFMLK_UNKNOWN:
-            return KI_UNKNOWN;
-            break;
-        case SFMLK_SPACE:
-            return KI_SPACE;
-            break;
-        case SFMLK_0:
-            return KI_0;
-            break;
-        case SFMLK_1:
-            return KI_1;
-            break;
-        case SFMLK_2:
-            return KI_2;
-            break;
-        case SFMLK_3:
-            return KI_3;
-            break;
-        case SFMLK_4:
-            return KI_4;
-            break;
-        case SFMLK_5:
-            return KI_5;
-            break;
-        case SFMLK_6:
-            return KI_6;
-            break;
-        case SFMLK_7:
-            return KI_7;
-            break;
-        case SFMLK_8:
-            return KI_8;
-            break;
-        case SFMLK_9:
-            return KI_9;
-            break;
-        case SFMLK_a:
-            return KI_A;
-            break;
-        case SFMLK_b:
-            return KI_B;
-            break;
-        case SFMLK_c:
-            return KI_C;
-            break;
-        case SFMLK_d:
-            return KI_D;
-            break;
-        case SFMLK_e:
-            return KI_E;
-            break;
-        case SFMLK_f:
-            return KI_F;
-            break;
-        case SFMLK_g:
-            return KI_G;
-            break;
-        case SFMLK_h:
-            return KI_H;
-            break;
-        case SFMLK_i:
-            return KI_I;
-            break;
-        case SFMLK_j:
-            return KI_J;
-            break;
-        case SFMLK_k:
-            return KI_K;
-            break;
-        case SFMLK_l:
-            return KI_L;
-            break;
-        case SFMLK_m:
-            return KI_M;
-            break;
-        case SFMLK_n:
-            return KI_N;
-            break;
-        case SFMLK_o:
-            return KI_O;
-            break;
-        case SFMLK_p:
-            return KI_P;
-            break;
-        case SFMLK_q:
-            return KI_Q;
-            break;
-        case SFMLK_r:
-            return KI_R;
-            break;
-        case SFMLK_s:
-            return KI_S;
-            break;
-        case SFMLK_t:
-            return KI_T;
-            break;
-        case SFMLK_u:
-            return KI_U;
-            break;
-        case SFMLK_v:
-            return KI_V;
-            break;
-        case SFMLK_w:
-            return KI_W;
-            break;
-        case SFMLK_x:
-            return KI_X;
-            break;
-        case SFMLK_y:
-            return KI_Y;
-            break;
-        case SFMLK_z:
-            return KI_Z;
-            break;
-        case SFMLK_SEMICOLON:
-            return KI_OEM_1;
-            break;
-        case SFMLK_QUOTE:
-            return KI_OEM_7;
-            break;
-        case SFMLK_EQUALS:
-            return KI_OEM_PLUS;
-            break;
-        case SFMLK_PLUS:
-            return KI_OEM_PLUS;
-            break;
-        case SFMLK_COMMA:
-            return KI_OEM_COMMA;
-            break;
-        case SFMLK_MINUS:
-            return KI_OEM_MINUS;
-            break;
-        case SFMLK_PERIOD:
-            return KI_OEM_PERIOD;
-            break;
-        case SFMLK_SLASH:
-            return KI_OEM_2;
-            break;
-        case SFMLK_BACKQUOTE:
-            return KI_OEM_3;
-            break;
-        case SFMLK_LEFTBRACKET:
-            return KI_OEM_4;
-            break;
-        case SFMLK_BACKSLASH:
-            return KI_OEM_5;
-            break;
-        case SFMLK_RIGHTBRACKET:
-            return KI_OEM_6;
-            break;
-        case SFMLK_QUOTEDBL:
-            return KI_OEM_7;
-            break;
-        case SFMLK_ESCAPE:
-            return KI_ESCAPE;
-            break;
-        case SFMLK_KP_0:
-            return KI_NUMPAD0;
-            break;
-        case SFMLK_KP_1:
-            return KI_NUMPAD1;
-            break;
-        case SFMLK_KP_2:
-            return KI_NUMPAD2;
-            break;
-        case SFMLK_KP_3:
-            return KI_NUMPAD3;
-            break;
-        case SFMLK_KP_4:
-            return KI_NUMPAD4;
-            break;
-        case SFMLK_KP_5:
-            return KI_NUMPAD5;
-            break;
-        case SFMLK_KP_6:
-            return KI_NUMPAD6;
-            break;
-        case SFMLK_KP_7:
-            return KI_NUMPAD7;
-            break;
-        case SFMLK_KP_8:
-            return KI_NUMPAD8;
-            break;
-        case SFMLK_KP_9:
-            return KI_NUMPAD9;
-            break;
-        case SFMLK_KP_ENTER:
-            return KI_NUMPADENTER;
-            break;
-        case SFMLK_KP_MULTIPLY:
-            return KI_MULTIPLY;
-            break;
-        case SFMLK_KP_PLUS:
-            return KI_ADD;
-            break;
-        case SFMLK_KP_MINUS:
-            return KI_SUBTRACT;
-            break;
-        case SFMLK_KP_PERIOD:
-            return KI_DECIMAL;
-            break;
-        case SFMLK_KP_DIVIDE:
-            return KI_DIVIDE;
-            break;
-        case SFMLK_KP_EQUALS:
-            return KI_OEM_NEC_EQUAL;
-            break;
-        case SFMLK_BACKSPACE:
-            return KI_BACK;
-            break;
-        case SFMLK_TAB:
-            return KI_TAB;
-            break;
-        case SFMLK_CLEAR:
-            return KI_CLEAR;
-            break;
-        case SFMLK_RETURN:
-            return KI_RETURN;
-            break;
-        case SFMLK_PAUSE:
-            return KI_PAUSE;
-            break;
-        case SFMLK_CAPSLOCK:
-            return KI_CAPITAL;
-            break;
-        case SFMLK_PAGEUP:
-            return KI_PRIOR;
-            break;
-        case SFMLK_PAGEDOWN:
-            return KI_NEXT;
-            break;
-        case SFMLK_END:
-            return KI_END;
-            break;
-        case SFMLK_HOME:
-            return KI_HOME;
-            break;
-        case SFMLK_LEFT:
-            return KI_LEFT;
-            break;
-        case SFMLK_UP:
-            return KI_UP;
-            break;
-        case SFMLK_RIGHT:
-            return KI_RIGHT;
-            break;
-        case SFMLK_DOWN:
-            return KI_DOWN;
-            break;
-        case SFMLK_INSERT:
-            return KI_INSERT;
-            break;
-        case SFMLK_DELETE:
-            return KI_DELETE;
-            break;
-        case SFMLK_HELP:
-            return KI_HELP;
-            break;
-        case SFMLK_F1:
-            return KI_F1;
-            break;
-        case SFMLK_F2:
-            return KI_F2;
-            break;
-        case SFMLK_F3:
-            return KI_F3;
-            break;
-        case SFMLK_F4:
-            return KI_F4;
-            break;
-        case SFMLK_F5:
-            return KI_F5;
-            break;
-        case SFMLK_F6:
-            return KI_F6;
-            break;
-        case SFMLK_F7:
-            return KI_F7;
-            break;
-        case SFMLK_F8:
-            return KI_F8;
-            break;
-        case SFMLK_F9:
-            return KI_F9;
-            break;
-        case SFMLK_F10:
-            return KI_F10;
-            break;
-        case SFMLK_F11:
-            return KI_F11;
-            break;
-        case SFMLK_F12:
-            return KI_F12;
-            break;
-        case SFMLK_F13:
-            return KI_F13;
-            break;
-        case SFMLK_F14:
-            return KI_F14;
-            break;
-        case SFMLK_F15:
-            return KI_F15;
-            break;
-        case SFMLK_NUMLOCKCLEAR:
-            return KI_NUMLOCK;
-            break;
-        case SFMLK_PRINTSCREEN:
-            return KI_SNAPSHOT;
-            break;
-        case SFMLK_SCROLLLOCK:
-            return KI_SCROLL;
-            break;
-        case SFMLK_LSHIFT:
-            return KI_LSHIFT;
-            break;
-        case SFMLK_RSHIFT:
-            return KI_RSHIFT;
-            break;
-        case SFMLK_LCTRL:
-            return KI_LCONTROL;
-            break;
-        case SFMLK_RCTRL:
-            return KI_RCONTROL;
-            break;
-        case SFMLK_LALT:
-            return KI_LMENU;
-            break;
-        case SFMLK_RALT:
-            return KI_RMENU;
-            break;
-        case SFMLK_LGUI:
-            return KI_LMETA;
-            break;
-        case SFMLK_RGUI:
-            return KI_RMETA;
-            break;
-        //case SFMLK_LSUPER:
-        //   return KI_LWIN;
-        //    break;
-        //case SFMLK_RSUPER:
-        //    return KI_RWIN;
-        //    break;
-        default:
-            return KI_UNKNOWN;
-            break;
-    }
+Rml::Input::KeyIdentifier RmlSFML2SystemInterface::TranslateKey(sf::Keyboard::Key Key){
+	DKDEBUGFUNC(Key);
+	switch(Key){
+	case sf::Keyboard::A:
+		return Rml::Input::KI_A;
+		break;
+	case sf::Keyboard::B:
+		return Rml::Input::KI_B;
+		break;
+	case sf::Keyboard::C:
+		return Rml::Input::KI_C;
+		break;
+	case sf::Keyboard::D:
+		return Rml::Input::KI_D;
+		break;
+	case sf::Keyboard::E:
+		return Rml::Input::KI_E;
+		break;
+	case sf::Keyboard::F:
+		return Rml::Input::KI_F;
+		break;
+	case sf::Keyboard::G:
+		return Rml::Input::KI_G;
+		break;
+	case sf::Keyboard::H:
+		return Rml::Input::KI_H;
+		break;
+	case sf::Keyboard::I:
+		return Rml::Input::KI_I;
+		break;
+	case sf::Keyboard::J:
+		return Rml::Input::KI_J;
+		break;
+	case sf::Keyboard::K:
+		return Rml::Input::KI_K;
+		break;
+	case sf::Keyboard::L:
+		return Rml::Input::KI_L;
+		break;
+	case sf::Keyboard::M:
+		return Rml::Input::KI_M;
+		break;
+	case sf::Keyboard::N:
+		return Rml::Input::KI_N;
+		break;
+	case sf::Keyboard::O:
+		return Rml::Input::KI_O;
+		break;
+	case sf::Keyboard::P:
+		return Rml::Input::KI_P;
+		break;
+	case sf::Keyboard::Q:
+		return Rml::Input::KI_Q;
+		break;
+	case sf::Keyboard::R:
+		return Rml::Input::KI_R;
+		break;
+	case sf::Keyboard::S:
+		return Rml::Input::KI_S;
+		break;
+	case sf::Keyboard::T:
+		return Rml::Input::KI_T;
+		break;
+	case sf::Keyboard::U:
+		return Rml::Input::KI_U;
+		break;
+	case sf::Keyboard::V:
+		return Rml::Input::KI_V;
+		break;
+	case sf::Keyboard::W:
+		return Rml::Input::KI_W;
+		break;
+	case sf::Keyboard::X:
+		return Rml::Input::KI_X;
+		break;
+	case sf::Keyboard::Y:
+		return Rml::Input::KI_Y;
+		break;
+	case sf::Keyboard::Z:
+		return Rml::Input::KI_Z;
+		break;
+	case sf::Keyboard::Num0:
+		return Rml::Input::KI_0;
+		break;
+	case sf::Keyboard::Num1:
+		return Rml::Input::KI_1;
+		break;
+	case sf::Keyboard::Num2:
+		return Rml::Input::KI_2;
+		break;
+	case sf::Keyboard::Num3:
+		return Rml::Input::KI_3;
+		break;
+	case sf::Keyboard::Num4:
+		return Rml::Input::KI_4;
+		break;
+	case sf::Keyboard::Num5:
+		return Rml::Input::KI_5;
+		break;
+	case sf::Keyboard::Num6:
+		return Rml::Input::KI_6;
+		break;
+	case sf::Keyboard::Num7:
+		return Rml::Input::KI_7;
+		break;
+	case sf::Keyboard::Num8:
+		return Rml::Input::KI_8;
+		break;
+	case sf::Keyboard::Num9:
+		return Rml::Input::KI_9;
+		break;
+	case sf::Keyboard::Numpad0:
+		return Rml::Input::KI_NUMPAD0;
+		break;
+	case sf::Keyboard::Numpad1:
+		return Rml::Input::KI_NUMPAD1;
+		break;
+	case sf::Keyboard::Numpad2:
+		return Rml::Input::KI_NUMPAD2;
+		break;
+	case sf::Keyboard::Numpad3:
+		return Rml::Input::KI_NUMPAD3;
+		break;
+	case sf::Keyboard::Numpad4:
+		return Rml::Input::KI_NUMPAD4;
+		break;
+	case sf::Keyboard::Numpad5:
+		return Rml::Input::KI_NUMPAD5;
+		break;
+	case sf::Keyboard::Numpad6:
+		return Rml::Input::KI_NUMPAD6;
+		break;
+	case sf::Keyboard::Numpad7:
+		return Rml::Input::KI_NUMPAD7;
+		break;
+	case sf::Keyboard::Numpad8:
+		return Rml::Input::KI_NUMPAD8;
+		break;
+	case sf::Keyboard::Numpad9:
+		return Rml::Input::KI_NUMPAD9;
+		break;
+	case sf::Keyboard::Left:
+		return Rml::Input::KI_LEFT;
+		break;
+	case sf::Keyboard::Right:
+		return Rml::Input::KI_RIGHT;
+		break;
+	case sf::Keyboard::Up:
+		return Rml::Input::KI_UP;
+		break;
+	case sf::Keyboard::Down:
+		return Rml::Input::KI_DOWN;
+		break;
+	case sf::Keyboard::Add:
+		return Rml::Input::KI_ADD;
+		break;
+	case sf::Keyboard::BackSpace:
+		return Rml::Input::KI_BACK;
+		break;
+	case sf::Keyboard::Delete:
+		return Rml::Input::KI_DELETE;
+		break;
+	case sf::Keyboard::Divide:
+		return Rml::Input::KI_DIVIDE;
+		break;
+	case sf::Keyboard::End:
+		return Rml::Input::KI_END;
+		break;
+	case sf::Keyboard::Escape:
+		return Rml::Input::KI_ESCAPE;
+		break;
+	case sf::Keyboard::F1:
+		return Rml::Input::KI_F1;
+		break;
+	case sf::Keyboard::F2:
+		return Rml::Input::KI_F2;
+		break;
+	case sf::Keyboard::F3:
+		return Rml::Input::KI_F3;
+		break;
+	case sf::Keyboard::F4:
+		return Rml::Input::KI_F4;
+		break;
+	case sf::Keyboard::F5:
+		return Rml::Input::KI_F5;
+		break;
+	case sf::Keyboard::F6:
+		return Rml::Input::KI_F6;
+		break;
+	case sf::Keyboard::F7:
+		return Rml::Input::KI_F7;
+		break;
+	case sf::Keyboard::F8:
+		return Rml::Input::KI_F8;
+		break;
+	case sf::Keyboard::F9:
+		return Rml::Input::KI_F9;
+		break;
+	case sf::Keyboard::F10:
+		return Rml::Input::KI_F10;
+		break;
+	case sf::Keyboard::F11:
+		return Rml::Input::KI_F11;
+		break;
+	case sf::Keyboard::F12:
+		return Rml::Input::KI_F12;
+		break;
+	case sf::Keyboard::F13:
+		return Rml::Input::KI_F13;
+		break;
+	case sf::Keyboard::F14:
+		return Rml::Input::KI_F14;
+		break;
+	case sf::Keyboard::F15:
+		return Rml::Input::KI_F15;
+		break;
+	case sf::Keyboard::Home:
+		return Rml::Input::KI_HOME;
+		break;
+	case sf::Keyboard::Insert:
+		return Rml::Input::KI_INSERT;
+		break;
+	case sf::Keyboard::LControl:
+		return Rml::Input::KI_LCONTROL;
+		break;
+	case sf::Keyboard::LShift:
+		return Rml::Input::KI_LSHIFT;
+		break;
+	case sf::Keyboard::Multiply:
+		return Rml::Input::KI_MULTIPLY;
+		break;
+	case sf::Keyboard::Pause:
+		return Rml::Input::KI_PAUSE;
+		break;
+	case sf::Keyboard::RControl:
+		return Rml::Input::KI_RCONTROL;
+		break;
+	case sf::Keyboard::Return:
+		return Rml::Input::KI_RETURN;
+		break;
+	case sf::Keyboard::RShift:
+		return Rml::Input::KI_RSHIFT;
+		break;
+	case sf::Keyboard::Space:
+		return Rml::Input::KI_SPACE;
+		break;
+	case sf::Keyboard::Subtract:
+		return Rml::Input::KI_SUBTRACT;
+		break;
+	case sf::Keyboard::Tab:
+		return Rml::Input::KI_TAB;
+		break;
+	default:
+		break;
+	};
+	return Rml::Input::KI_UNKNOWN;
 }
-*/
 
 int RmlSFML2SystemInterface::TranslateMouseButton(sf::Uint8 button){
 	DKDEBUGFUNC(button);
@@ -405,50 +309,48 @@ int RmlSFML2SystemInterface::TranslateMouseButton(sf::Uint8 button){
 
 int RmlSFML2SystemInterface::GetKeyModifiers(){
 	DKDEBUGFUNC();
-    SFML_Keymod sdlMods = SFML_GetModState();
-    int retval = 0;
-    if(sdlMods & KMOD_CTRL)
-        retval |= Rml::Input::KM_CTRL;
-    if(sdlMods & KMOD_SHIFT)
-        retval |= Rml::Input::KM_SHIFT;
-    if(sdlMods & KMOD_ALT)
-        retval |= Rml::Input::KM_ALT;
-	if(sdlMods & KMOD_NUM)
-        retval |= Rml::Input::KM_NUMLOCK;
-    return retval;
+	int Modifiers = 0;
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))
+		Modifiers |= Rml::Input::KM_SHIFT;
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) || sf::Keyboard::isKeyPressed(sf::Keyboard::RControl))
+		Modifiers |= Rml::Input::KM_CTRL;
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt) || sf::Keyboard::isKeyPressed(sf::Keyboard::RAlt))
+		Modifiers |= Rml::Input::KM_ALT;
+	return Modifiers;
 }
 
 double RmlSFML2SystemInterface::GetElapsedTime(){
 	//DKDEBUGFUNC();
-	return (float)SFML_GetTicks() / 1000;
+	return timer.getElapsedTime().asSeconds();
 }
 
 bool RmlSFML2SystemInterface::LogMessage(Rml::Log::Type type, const Rml::String& message){
 	//DKDEBUGFUNC(type, message);
-	if(has(message,"Loaded font face"))
-		type = Rml::Log::LT_DEBUG;
+	Rml::String Type;
 	switch(type){
-	case Rml::Log::LT_ALWAYS:
-		DKINFO("[Rml] "+DKString(message)+"\n");
-		break;
-	case Rml::Log::LT_ERROR:
-		DKERROR("[Rml] "+DKString(message)+"\n");
-		break;
-	case Rml::Log::LT_ASSERT:
-		DKERROR("[Rml] "+DKString(message)+"\n");
-		break;
-	case Rml::Log::LT_WARNING:
-		DKWARN("[Rml] "+DKString(message)+"\n");
-		break;
-	case Rml::Log::LT_INFO:
-		DKINFO("[Rml] "+DKString(message)+"\n");
-		break;
-	case Rml::Log::LT_DEBUG:
-		DKDEBUG("[Rml] "+DKString(message)+"\n");
-		break;
-    case Rml::Log::LT_MAX:
-		DKINFO("[Rml] "+DKString(message)+"\n");
-        break;
+		case Rml::Log::LT_ALWAYS:
+			DKINFO("[Rml] "+DKString(message)+"\n");
+			break;
+		case Rml::Log::LT_ERROR:
+			DKERROR("[Rml] "+DKString(message)+"\n");
+			break;
+		case Rml::Log::LT_ASSERT:
+			DKERROR("[Rml] "+DKString(message)+"\n");
+			break;
+		case Rml::Log::LT_WARNING:
+			DKWARN("[Rml] "+DKString(message)+"\n");
+			break;
+		case Rml::Log::LT_INFO:
+			DKINFO("[Rml] "+DKString(message)+"\n");
+			break;
+		case Rml::Log::LT_DEBUG:
+			DKDEBUG("[Rml] "+DKString(message)+"\n");
+			break;
+		case Rml::Log::LT_MAX:
+			DKDEBUG("[Rml] "+DKString(message)+"\n");
+			break;
+		default:
+			break;
 	};
 	return true;
-};
+}
