@@ -26,6 +26,8 @@ LINUX_dk_libDebug		(${GLEW}/${OS}/${DEBUG_DIR}/lib/libGLEWd.a)
 LINUX_dk_libRelease		(${GLEW}/${OS}/${RELEASE_DIR}/lib/libGLEW.a)
 RASPBERRY_dk_libDebug	(${GLEW}/${OS}/${DEBUG_DIR}/lib/libGLEWd.a)
 RASPBERRY_dk_libRelease	(${GLEW}/${OS}//${RELEASE_DIR}/lib/libGLEW.a)
+ANDROID_dk_libDebug		(${GLEW}/${OS}/${DEBUG_DIR}/lib/libGLEWd.a)
+ANDROID_dk_libRelease	(${GLEW}/${OS}//${RELEASE_DIR}/lib/libGLEW.a)
 
 
 ### 3RDPARTY LINK ###

@@ -7,11 +7,9 @@ dk_depend(glew)
 dk_depend(opengl)
 
 
-
 ### IMPORT ###
 #dk_import(https://github.com/openframeworks/openFrameworks/archive/refs/tags/0.10.0.zip PATCH)
 dk_import(https://github.com/openframeworks/openFrameworks.git PATCH)
-
 
 
 ### LINK ###
@@ -46,11 +44,11 @@ UNIX_dk_libRelease(${OPENFRAMEWORKS}/${OS}/lib/${RELEASE_DIR}/libopenframeworks.
 
 ### GENERATE ###
 dk_setPath(${OPENFRAMEWORKS}/${BUILD_DIR})
-dk_command(${DKCMAKE_BUILD} -DOF_PATH=${OPENFRAMEWORKS} ${OPENFRAMEWORKS})
+WIN_dk_command(${DKCMAKE_BUILD} -DOF_PATH=${OPENFRAMEWORKS} "-DCMAKE_CXX_FLAGS=/I${GLEW}/include" ${OPENFRAMEWORKS})
+UNIX_dk_command(${DKCMAKE_BUILD} -DOF_PATH=${OPENFRAMEWORKS} "-DCMAKE_CXX_FLAGS=-I${GLEW}/include" ${OPENFRAMEWORKS})
 
 
 ### COMPILE ###
-dk_visualStudio				(${OPENFRAMEWORKS_NAME} openFrameworks)
-dk_xcode					(${OPENFRAMEWORKS_NAME} openFrameworks)
-LINUX_dk_queueCommand		(make openFrameworks)
-RASPBERRY_dk_queueCommand	(make openFrameworks)
+dk_visualStudio	(${OPENFRAMEWORKS_NAME} openFrameworks)
+dk_xcode		(${OPENFRAMEWORKS_NAME} openFrameworks)
+dk_make			(${OPENFRAMEWORKS_NAME} openFrameworks)
