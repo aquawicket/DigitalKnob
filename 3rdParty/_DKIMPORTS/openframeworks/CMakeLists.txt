@@ -107,6 +107,9 @@ list(APPEND OF_INCLUDE_PATH
     ${OF_PATH}/libs/glfw/include/GLFW
     )
 
+#GLM
+#list(APPEND OF_LIBS ${OF_PATH}/libs/glm/lib/vs/${AR}/glm.lib)
+list(APPEND OF_INCLUDE_PATH ${OF_PATH}/libs/glm/include)
 
 #GLU
 list(APPEND OF_LIBS ${OF_PATH}/libs/glu/lib/vs/Win32/glu32.lib)
@@ -419,7 +422,7 @@ list(APPEND OF_HEADERS
 
 #sound
 list(APPEND OF_SRC
-    ${OF_PATH}/libs/openFrameworks/sound/ofBaseSoundStream.cpp
+    #${OF_PATH}/libs/openFrameworks/sound/ofBaseSoundStream.cpp
     ${OF_PATH}/libs/openFrameworks/sound/ofFmodSoundPlayer.cpp
     ${OF_PATH}/libs/openFrameworks/sound/ofOpenALSoundPlayer.cpp
     ${OF_PATH}/libs/openFrameworks/sound/ofRtAudioSoundStream.cpp

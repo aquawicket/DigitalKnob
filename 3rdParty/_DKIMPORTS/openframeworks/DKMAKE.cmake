@@ -54,11 +54,10 @@ UNIX_dk_libRelease(${OPENFRAMEWORKS}/${OS}/lib/${RELEASE_DIR}/libopenframeworks.
 
 ### GENERATE ###
 dk_setPath(${OPENFRAMEWORKS}/${BUILD_DIR})
-WIN_dk_command(${DKCMAKE_BUILD} -DOF_PATH=${OPENFRAMEWORKS} "-DCMAKE_C_FLAGS=/I${GLEW}/include" "-DCMAKE_CXX_FLAGS=/I${GLEW}/include" ${OPENFRAMEWORKS})
-UNIX_dk_command(${DKCMAKE_BUILD} -DOF_PATH=${OPENFRAMEWORKS} "-DCMAKE_C_FLAGS=-I${GLEW}/include" "-DCMAKE_CXX_FLAGS=-I${GLEW}/include" ${OPENFRAMEWORKS})
+dk_command(${DKCMAKE_BUILD} -DOF_PATH=${OPENFRAMEWORKS} ${OPENFRAMEWORKS})
 
 
 ### COMPILE ###
-dk_visualStudio	(${OPENFRAMEWORKS_NAME} openFrameworks)
-dk_xcode		(${OPENFRAMEWORKS_NAME} openFrameworks)
-dk_make			(${OPENFRAMEWORKS_NAME} openFrameworks)
+dk_visualStudio	(${OPENFRAMEWORKS_NAME} openFrameworks) # windows, android
+dk_xcode		(${OPENFRAMEWORKS_NAME} openFrameworks) # mac, ios, iossim
+dk_make			(${OPENFRAMEWORKS_NAME} openFrameworks) # linux, raspberry

@@ -82,7 +82,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(osgaudio)			# requires openscenegraph
 	dk_disable(osgbullet)			# requires openscenegraph
 	dk_disable(osgworks)			# requires openscenegraph
-	dk_disable(waave)				# error C2065: 'PIX_FMT_YUV420P': undeclared identifier
+	dk_disable(waave)				# error C2065: 'PIX_FMT_YUV420P': undeclared identifier.  https://sourceforge.net/p/guvcview/tickets/34/
 endif()
 
 if(WIN_64) # Disabled for Windows 64bit targets
@@ -204,7 +204,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(smpeg2)				# ** BUILD FAILED ** MPEGstream.cpp
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(tiff)				# install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executable target "fax2ps"
-	dk_disable(waave)				# requires sdl, ** BUILD FAILED ** src/audio_decoder.c
+	dk_disable(waave)				# ** BUILD FAILED ** src/audio_decoder.c
 endif()
 
 
@@ -247,7 +247,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(podofo)				# build errors
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(uwebsockets)			# requires openssl
-	dk_disable(waave)				# requires sdl
+	dk_disable(waave)				#
 endif()
 
 
@@ -308,7 +308,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(tiff)
 	dk_disable(upx)
-	dk_disable(waave)				# requires sdl
+	dk_disable(waave)				#
 endif()
 
 
@@ -384,7 +384,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(uwebsockets)			# Could NOT find OpenSSL
 	dk_disable(vorbis)				# configure: error: unrecognized option: `-DANDROID32'
-	dk_disable(waave)				# requires sdl
+	dk_disable(waave)				#
 endif()
 
 if(ANDROID_64) # Disabled for Android 64bit targets
