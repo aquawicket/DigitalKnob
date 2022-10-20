@@ -123,7 +123,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(lua)					# no CMakeLists.txt
 	dk_disable(mlocate)				# Unable to locate a Java Runtime that supports apt
-	#dk_disable(openframeworks)		# error: CMakeLists.txt broken
+	dk_disable(openframeworks)		# fatal error: /utils/ofConstants.h:183     'GL/glew.h' file not found
 	dk_disable(osgbullet)			# requires bullet3
 	dk_disable(osgaudio)			# opengl identifier errors
 	dk_disable(osgworks)			# Error: 'osgworks-master/src/osgwTools/GeometeryModifier.cpp:64' no member named 'mergeGeode'
