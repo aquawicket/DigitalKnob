@@ -33,8 +33,9 @@
 
 #if !defined(ANDROID) && !defined(IOS)
 //#include "SFML_opengl.h"
+	#include "SFML/Graphics.hpp"
 #else
-#include "SFML_opengles.h"
+	#include "SFML_opengles.h"
 #endif
 
 #ifdef USE_SFML2_gif
