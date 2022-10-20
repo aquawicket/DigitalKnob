@@ -374,7 +374,7 @@ list(APPEND OF_SRC
     ${OF_PATH}/libs/openFrameworks/graphics/ofImage.cpp
     ${OF_PATH}/libs/openFrameworks/graphics/ofPath.cpp
     ${OF_PATH}/libs/openFrameworks/graphics/ofPixels.cpp
-    ${OF_PATH}/libs/openFrameworks/graphics/ofPolyline.cpp
+    #${OF_PATH}/libs/openFrameworks/graphics/ofPolyline.cpp
     ${OF_PATH}/libs/openFrameworks/graphics/ofRendererCollection.cpp
     ${OF_PATH}/libs/openFrameworks/graphics/ofTessellator.cpp
     ${OF_PATH}/libs/openFrameworks/graphics/ofTrueTypeFont.cpp
