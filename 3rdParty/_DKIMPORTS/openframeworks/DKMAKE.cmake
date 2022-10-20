@@ -3,7 +3,9 @@
 
 
 ### DEPEND ###
+dk_depend(glew)
 dk_depend(opengl)
+
 
 
 ### IMPORT ###

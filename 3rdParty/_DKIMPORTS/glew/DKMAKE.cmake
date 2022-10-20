@@ -2,6 +2,7 @@
 # http://glew.sourceforge.net
 # https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip
 if(IOS OR IOSSIM OR ANDROID)
+	dk_undepend(glew)
 	return()
 endif()
 
@@ -27,7 +28,7 @@ RASPBERRY_dk_libDebug	(${GLEW}/${OS}/${DEBUG_DIR}/lib/libGLEWd.a)
 RASPBERRY_dk_libRelease	(${GLEW}/${OS}//${RELEASE_DIR}/lib/libGLEW.a)
 
 
-### INJECT ###
+### 3RDPARTY LINK ###
 # dk_set(GLEW_CMAKE
 #	-DGLEW_USE_STATIC_LIB=ON
 #	-DGLEW_DIR=${GLEW}/${OS}/CMakeFiles/Export/lib/cmake/glew
