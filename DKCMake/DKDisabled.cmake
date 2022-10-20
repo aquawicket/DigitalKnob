@@ -105,7 +105,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(DKScreenRecorder)	#
 	dk_disable(DKSDLVideo)			# requires ffmpeg
 	dk_disable(DKSDLWav)			# build errors
-	dk_disable(DKSFMLRml)			# requires sfml, rmlui.  INCOMPLETE
+	#dk_disable(DKSFMLRml)			# INCOMPLETE
 	dk_disable(DKThread)			# Error: 'boost/thread/xtime.hpp:24 expected identifier TIME_UTC_=1
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKUpdate)			# Error: 'boost/thread/xtime.hpp:24 expected identifier TIME_UTC_=1
