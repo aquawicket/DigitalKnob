@@ -65,7 +65,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(DKOSGWindow)			# requires openscenegraph
 	dk_disable(DKScreenRecorder)	#
 	dk_disable(DKSDLWav)			# build errors
-	dk_disable(DKSFMLRml)			# build errors
+	dk_disable(DKSFMLRml)			# INCOMPLETE
 	dk_disable(DKThread)			# build errors
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKUpdate)			# build errors
@@ -105,7 +105,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(DKScreenRecorder)	#
 	dk_disable(DKSDLVideo)			# requires ffmpeg
 	dk_disable(DKSDLWav)			# build errors
-	#dk_disable(DKSFMLRml)			# INCOMPLETE
+	dk_disable(DKSFMLRml)			# INCOMPLETE
 	dk_disable(DKThread)			# Error: 'boost/thread/xtime.hpp:24 expected identifier TIME_UTC_=1
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKUpdate)			# Error: 'boost/thread/xtime.hpp:24 expected identifier TIME_UTC_=1
@@ -167,7 +167,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(DKSDLCef)			# requires cef_binary
 	dk_disable(DKSDLVideo)			# requires ffmpeg
 	dk_disable(DKSDLWav)			# build errors
-	dk_disable(DKSFMLRml)			# requires sfml, rmlui.  INCOMPLETE
+	dk_disable(DKSFMLRml)			# requires sfml
 	dk_disable(DKSFMLWindow)		# requires sfml
 	dk_disable(DKThread)			# requires threadpool
 	dk_disable(DKTorrent)			# requires libtorrent
@@ -224,7 +224,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKScreenRecorder)	#
 	dk_disable(DKSDLVideo)			# requires waave
 	dk_disable(DKSDLWav)			# build errors
-	dk_disable(DKSFMLRml)			# requires sfml, rmlui.  INCOMPLETE
+	dk_disable(DKSFMLRml)			# INCOMPLETE
 	dk_disable(DKThread)			# error: need to implement boost::placeholders
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKUpdate)			# error: need to implement boost::placeholders
@@ -277,7 +277,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(DKScreenRecorder)	#
 	dk_disable(DKSDLVideo)			# requires ffmpeg
 	dk_disable(DKSDLWav)			# build errors
-	dk_disable(DKSFMLRml)			# requires sfml, rmlui.  INCOMPLETE
+	dk_disable(DKSFMLRml)			# INCOMPLETE
 	dk_disable(DKThread)			# requires threadpool
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKUpdate)			# compiling errors
@@ -346,7 +346,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(DKSDLCef)			# requires sdl, cef_binary
 	dk_disable(DKSDLVideo)			# requires ffmpeg
 	dk_disable(DKSDLWav)			# build errors
-	dk_disable(DKSFMLRml)			# requires sfml, rmlui.  INCOMPLETE
+	dk_disable(DKSFMLRml)			# requires sfml
 	dk_disable(DKSFMLWindow)		# requires sfml
 	dk_disable(DKThread)			# requires threadpool
 	dk_disable(DKTorrent)			# requires libtorrent
