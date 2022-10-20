@@ -123,7 +123,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(lua)					# no CMakeLists.txt
 	dk_disable(mlocate)				# Unable to locate a Java Runtime that supports apt
-	#dk_disable(openframeworks)		# fatal error: /utils/ofConstants.h:183     'GL/glew.h' file not found
+	dk_disable(openframeworks)		# fatal error: /utils/ofConstants.h:183     'GL/glew.h' file not found
 	dk_disable(osgbullet)			# requires bullet3
 	dk_disable(osgaudio)			# opengl identifier errors
 	dk_disable(osgworks)			# Error: 'osgworks-master/src/osgwTools/GeometeryModifier.cpp:64' no member named 'mergeGeode'
@@ -191,7 +191,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(lua)					# no CMakeLists.txt
 	dk_disable(mlocate)				# Unable to locate a Java Runtime that supports apt
 	dk_disable(opencv)				# CMAKE_SYSTEM_PROCESSOR is not defined
-	#dk_disable(openframeworks)		# error: tesselator.h: No such file or directory
+	dk_disable(openframeworks)		# error: tesselator.h: No such file or directory
 	dk_disable(openscenegraph)		# CMake errors
 	dk_disable(opensles)			# could not locate OpenSLES Library
 	dk_disable(osgaudio)			# requires openscenegraph
@@ -239,7 +239,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(libxml2)				# Not such file or directory
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(lua)					# no CMakeLists.txt
-	#dk_disable(openframeworks)		# error: tesselator.h: No such file or directory
+	dk_disable(openframeworks)		# error: tesselator.h: No such file or directory
 	dk_disable(openssl)				# compiling errors
 	dk_disable(osgaudio)			# requires freealut
 	dk_disable(osgbullet)			# CMake Error: Could NOT find Bullet
@@ -298,7 +298,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(lua)					# no CMakeLists.txt
 	dk_disable(opencv)				# build errors
-	#dk_disable(openframeworks)		# error: cannot find opengles
+	dk_disable(openframeworks)		# error: cannot find opengles
 	dk_disable(osgaudio)			# requires openscenegraph
 	dk_disable(osgbullet)			# CMake Error: Could NOT find Bullet
 	dk_disable(osgworks)			# requires openscenegraph
@@ -370,7 +370,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(ogg)					# configure: error: unrecognized option: `-DANDROID32'
 	dk_disable(openal)				# The system cannot find the file specified
 	dk_disable(opencv)				# error : cannot use 'throw' with exceptions disabled
-	#dk_disable(openframeworks)		# error: CMakeLists.txt broken
+	dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	dk_disable(openscenegraph)
 	dk_disable(openssl)				# Perl v5.10.0 required
 	dk_disable(osgaudio)			# requires openscenegraph
