@@ -454,9 +454,9 @@ if(WIN_32)
 	set_target_properties(${APP_NAME}-bin PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
 	
 	# remove -bin from APP_NAME. Was added to avoid app/library same name conflicts
-	set_target_properties(${APP_NAME}-bin PROPERTIES OUTPUT_NAME ${APP_NAME})
+	#set_target_properties(${APP_NAME}-bin PROPERTIES OUTPUT_NAME ${APP_NAME})
 	#set_target_properties(${APP_NAME}-bin PROPERTIES RUNTIME_OUTPUT_NAME ${APP_NAME})
-	set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${APP_NAME})
+	set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${APP_NAME}-bin)
 	
 	
 	#dk_set(CMAKE_BUILD_TYPE "")
