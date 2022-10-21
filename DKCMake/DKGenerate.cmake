@@ -41,7 +41,7 @@ string(REPLACE " " "_" APP_NAME ${APP_NAME})
 ############################   ADD EXECUTABLE  #############################################
 ############################################################################################
 if(NOT TARGET)
-	PROJECT(${APP_NAME})
+	PROJECT(${APP_NAME}-bin)
 	dk_set(DKAPP ON)
 endif()
 
