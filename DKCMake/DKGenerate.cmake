@@ -36,12 +36,13 @@ dk_info("############################################################")
 dk_info("\n")
 get_filename_component(APP_NAME ${DKPROJECT} NAME)
 string(REPLACE " " "_" APP_NAME ${APP_NAME})
+set(APP_NAME ${APP_NAME}-bin)
 
 ############################################################################################
 ############################   ADD EXECUTABLE  #############################################
 ############################################################################################
 if(NOT TARGET)
-	PROJECT(${APP_NAME}-bin)
+	PROJECT(${APP_NAME})
 	dk_set(DKAPP ON)
 endif()
 
@@ -418,13 +419,13 @@ if(WIN_32)
 			${DKPROJECT}/icons/windows/*.rc)
 			list(APPEND App_SRC ${resources_SRC})
 	endif()
-	add_executable(${APP_NAME}-bin WIN32 ${App_SRC})
-	target_link_libraries(${APP_NAME}-bin ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
+	add_executable(${APP_NAME} WIN32 ${App_SRC})
+	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	
 	########################## Add Dependencies ########################
 	foreach(plugin ${dkdepend_list})
 		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
-			add_dependencies(${APP_NAME}-bin ${plugin})
+			add_dependencies(${APP_NAME} ${plugin})
 		endif()	
 	endforeach()
 
@@ -451,12 +452,12 @@ if(WIN_32)
 	list(APPEND RELEASE_LINK_FLAGS /SAFESEH:NO)
 	string(REPLACE ";" " " RELEASE_FLAGS "${RELEASE_LINK_FLAGS}")
 	
-	set_target_properties(${APP_NAME}-bin PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
+	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
 	
 	# remove -bin from APP_NAME. Was added to avoid app/library same name conflicts
-	#set_target_properties(${APP_NAME}-bin PROPERTIES OUTPUT_NAME ${APP_NAME})
-	#set_target_properties(${APP_NAME}-bin PROPERTIES RUNTIME_OUTPUT_NAME ${APP_NAME})
-	set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${APP_NAME}-bin)
+	#set_target_properties(${APP_NAME} PROPERTIES OUTPUT_NAME ${APP_NAME})
+	#set_target_properties(${APP_NAME} PROPERTIES RUNTIME_OUTPUT_NAME ${APP_NAME})
+	set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${APP_NAME})
 	
 	
 	#dk_set(CMAKE_BUILD_TYPE "")
