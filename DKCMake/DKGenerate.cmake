@@ -36,7 +36,7 @@ dk_info("############################################################")
 dk_info("\n")
 get_filename_component(APP_NAME ${DKPROJECT} NAME)
 string(REPLACE " " "_" APP_NAME ${APP_NAME})
-set(APP_NAME ${APP_NAME}-bin)
+set(APP_NAME ${APP_NAME}_APP)
 
 ############################################################################################
 ############################   ADD EXECUTABLE  #############################################

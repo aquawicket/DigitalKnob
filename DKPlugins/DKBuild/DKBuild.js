@@ -372,11 +372,11 @@ function DKBuild_DoResults(){
 		if(!DKBuild_Command(CMAKE+" -G \""+VS_GENERATOR+"\" -A Win32 "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+OS))
 			return false
 		if(TYPE === "Debug" || TYPE === "ALL"){
-			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+" --config Debug"))
+			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+"_APP --config Debug"))
 				return false
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
-			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+" --config Release"))
+			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+"_APP --config Release"))
 				return false
 		}
 	}
@@ -389,11 +389,11 @@ function DKBuild_DoResults(){
 			return false
 
 		if(TYPE === "Debug" || TYPE === "ALL"){
-			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+" --config Debug"))
+			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+"_APP --config Debug"))
 				return false
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
-			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+" --config Release"))
+			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+"_APP --config Release"))
 				return false
 		}
 	}
@@ -411,11 +411,11 @@ function DKBuild_DoResults(){
 			return false
 		//CPP_DKFile_ChDir(app_path+OS)
 		if(TYPE === "Debug" || TYPE === "ALL"){
-			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+" --config Debug"))	
+			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+"_APP --config Debug"))	
 				return false
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
-			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+" --config Release"))
+			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+"_APP --config Release"))
 				return false
 		}
 	}
@@ -429,11 +429,11 @@ function DKBuild_DoResults(){
 
 		//CPP_DKFile_ChDir(app_path+OS)
 		if(TYPE === "Debug" || TYPE === "ALL"){
-			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+" --config Debug"))	
+			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+"_APP --config Debug"))	
 				return false				
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
-			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+" --config Release"))
+			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+"_APP --config Release"))
 				return false
 		}
 	}
@@ -446,11 +446,11 @@ function DKBuild_DoResults(){
 			return false
 		//CPP_DKFile_ChDir(app_path+OS)
 		if(TYPE === "Debug" || TYPE === "ALL"){
-			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+" --config Debug"))	
+			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+"_APP --config Debug"))	
 				return false
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
-			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+" --config Release"))
+			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+"_APP --config Release"))
 				return false
 		}
 	}
@@ -463,11 +463,11 @@ function DKBuild_DoResults(){
 			return false
 		//CPP_DKFile_ChDir(app_path+OS)
 		if(TYPE === "Debug" || TYPE === "ALL"){
-			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+" --config Debug"))	
+			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+"_APP --config Debug"))	
 				return false
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
-			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+" --config Release"))
+			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+"_APP --config Release"))
 				return false
 		}
 	}
@@ -479,11 +479,11 @@ function DKBuild_DoResults(){
 			return false
 		//CPP_DKFile_ChDir(app_path+OS)
 		if(TYPE === "Debug" || TYPE === "ALL"){
-			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+" --config Debug"))	
+			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+"_APP --config Debug"))	
 				return false
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
-			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+" --config Release"))
+			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target "+APP+"_APP --config Release"))
 				return false
 		}
 	}
@@ -499,7 +499,7 @@ function DKBuild_DoResults(){
 			CPP_DKFile_ChDir(app_path+OS+"/Debug")
 			if(!DKBuild_Command(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+""+DIGITALKNOB+"DK/DKCMake"))
 				return false
-			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+"/Debug --target "+APP+" --config Debug"))	
+			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+"/Debug --target "+APP+"_APP --config Debug"))	
 				return false
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
@@ -509,7 +509,7 @@ function DKBuild_DoResults(){
 			CPP_DKFile_ChDir(app_path+OS+"/Release")
 			if(!DKBuild_Command(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+""+DIGITALKNOB+"DK/DKCMake"))
 				return false
-			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+"/Release --target "+APP+" --config Release"))
+			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+"/Release --target "+APP+"_APP --config Release"))
 				return false
 		}
 	}
