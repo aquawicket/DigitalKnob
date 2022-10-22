@@ -83,11 +83,13 @@ if(ALL_LIBS)
 		#dk_enable(osgdb_dw)					# broken on everything
 	#endif()
 	dk_enable(osgdb_dxf)
-	if(NOT MAC AND NOT LINUX AND NOT RASPBERRY)
-		dk_enable(osgdb_gif)				# broken on MAC, LINUX, RASPBERRY
+	if(NOT MAC AND NOT LINUX AND NOT RASPBERRY AND NOT WIN)
+		dk_enable(osgdb_gif)				# broken
 	endif()
 	dk_enable(osgdb_ive)
-	dk_enable(osgdb_ffmpeg)
+	if(NOT WIN)
+		dk_enable(osgdb_ffmpeg)
+	endif()
 	dk_enable(osgdb_freetype)
 	dk_enable(osgdb_glsl)
 	dk_enable(osgdb_hdr)
