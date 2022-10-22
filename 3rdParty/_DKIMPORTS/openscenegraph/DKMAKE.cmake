@@ -63,8 +63,8 @@ if(ALL_LIBS)
 	dk_enable(osgdb_bsp)
 	dk_enable(osgdb_bvh)
 	dk_enable(osgdb_cfg)
-	if(NOT LINUX AND NOT RASPBERRY)
-		dk_enable(osgdb_curl)				# broken on LINUX, RASPBERRY
+	if(NOT LINUX AND NOT RASPBERRY AND NOT WIN)
+		dk_enable(osgdb_curl)				# broken
 	endif()
 	dk_enable(osgdb_dds)
 	dk_enable(osgdb_deprecated_osg)
