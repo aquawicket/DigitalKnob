@@ -50,19 +50,11 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(DKOFWindow)			# requires openframeworks
 	dk_disable(DKOSGAudio)			# requires openscenegraph
 	dk_disable(DKOSGCef)			# requires openscenegraph
-	#dk_disable(DKOSGLights)			# requires openscenegraph
-	#dk_disable(DKOSGManipulator)	# requires openscenegraph
-	#dk_disable(DKOSGModel)			# requires openscenegraph
-	#dk_disable(DKOSGNotify)			# requires openscenegraph
 	dk_disable(DKOSGPhysics)		# requires openscenegraph
-	#dk_disable(DKOSGPicker)			# requires openscenegraph
 	dk_disable(DKOSGRml)			# requires openscenegraph
 	dk_disable(DKOSGStats)			# requires openscenegraph
-	#dk_disable(DKOSGTerrain)		# requires openscenegraph
 	dk_disable(DKOSGVideo)			# requires openscenegraph
-	#dk_disable(DKOSGViewer)			# requires openscenegraph 
 	dk_disable(DKOSGWidget)			# requires openscenegraph 
-	#dk_disable(DKOSGWindow)			# requires openscenegraph
 	dk_disable(DKScreenRecorder)
 	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSFMLRml)			# INCOMPLETE
@@ -363,7 +355,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(libwebsockets)		# compiling errors
 	dk_disable(libxml2)				# ../../configure: No such file or directory
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
-	#dk_disable(lua)					# no CMakeLists.txt
+	#dk_disable(lua)
 	dk_disable(ogg)					# configure: error: unrecognized option: `-DANDROID32'
 	dk_disable(openal)				# The system cannot find the file specified
 	dk_disable(opencv)				# error : cannot use 'throw' with exceptions disabled
