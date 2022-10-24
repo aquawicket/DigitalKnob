@@ -50,19 +50,19 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(DKOFWindow)			# requires openframeworks
 	dk_disable(DKOSGAudio)			# requires openscenegraph
 	dk_disable(DKOSGCef)			# requires openscenegraph
-	dk_disable(DKOSGLights)			# requires openscenegraph
-	dk_disable(DKOSGManipulator)	# requires openscenegraph
-	dk_disable(DKOSGModel)			# requires openscenegraph
-	dk_disable(DKOSGNotify)			# requires openscenegraph
+	#dk_disable(DKOSGLights)			# requires openscenegraph
+	#dk_disable(DKOSGManipulator)	# requires openscenegraph
+	#dk_disable(DKOSGModel)			# requires openscenegraph
+	#dk_disable(DKOSGNotify)			# requires openscenegraph
 	dk_disable(DKOSGPhysics)		# requires openscenegraph
-	dk_disable(DKOSGPicker)			# requires openscenegraph
+	#dk_disable(DKOSGPicker)			# requires openscenegraph
 	dk_disable(DKOSGRml)			# requires openscenegraph
 	dk_disable(DKOSGStats)			# requires openscenegraph
-	dk_disable(DKOSGTerrain)		# requires openscenegraph
+	#dk_disable(DKOSGTerrain)		# requires openscenegraph
 	dk_disable(DKOSGVideo)			# requires openscenegraph
-	dk_disable(DKOSGViewer)			# requires openscenegraph 
+	#dk_disable(DKOSGViewer)			# requires openscenegraph 
 	dk_disable(DKOSGWidget)			# requires openscenegraph 
-	dk_disable(DKOSGWindow)			# requires openscenegraph
+	#dk_disable(DKOSGWindow)			# requires openscenegraph
 	dk_disable(DKScreenRecorder)
 	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSFMLRml)			# INCOMPLETE
@@ -77,9 +77,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(libtorrent)			# CMAKE ERROR:  No SOURCES given to target: torrent-rasterbar
 	dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
-	#dk_disable(lua)
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
-	#dk_disable(openscenegraph)		# osgGA broken
 	dk_disable(osgaudio)			# requires openscenegraph
 	dk_disable(osgbullet)			# requires openscenegraph
 	dk_disable(osgworks)			# requires openscenegraph
