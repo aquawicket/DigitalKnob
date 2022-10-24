@@ -258,7 +258,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(DKHook)				# 'read' was not declared in this scope
 	dk_disable(DKJerryscript)		# requires jerryscript
 	dk_disable(DKMidi)				# requires rtmidi
-	dk_disable(DKOcr)				# requires leptonica, tesseract
+	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
 	dk_disable(DKOSGAudio)			# requires openscenegraph
 	dk_disable(DKOSGCef)			# requires openscenegraph
@@ -275,7 +275,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(DKOSGViewer)			# requires openscenegraph 
 	dk_disable(DKOSGWidget)			# requires openscenegraph 
 	dk_disable(DKOSGWindow)			# requires openscenegraph 
-	dk_disable(DKScreenRecorder)	#
+	dk_disable(DKScreenRecorder)	# requires opencv
 	dk_disable(DKSDLVideo)			# requires ffmpeg
 	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSFMLRml)			# INCOMPLETE
@@ -284,16 +284,14 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(DKUpdate)			# compiling errors
 	dk_disable(DKVncClient)			# requires libvncserver
 	dk_disable(DKVncServer)			# requires libvncserver
-	dk_disable(DKWebSockets)		# requires libwebsocket, uwebsockets
+	#dk_disable(DKWebSockets)		# requires uwebsockets
 	dk_disable(emsdk)				# 64bit source only
-	dk_disable(freealut)			# no ruleto make 'alut_static'
+	dk_disable(freealut)			# no rule to make 'alut_static'
 	dk_disable(java)
-	#dk_disable(jerryscript)		# build errors
 	dk_disable(kdevelop)
 	dk_disable(openjdk)
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libtorrent)			# Could not find BOOST
-	#dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
 	dk_disable(libwebp)
 	dk_disable(libxml2)
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
@@ -309,7 +307,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(tiff)
 	dk_disable(upx)
-	dk_disable(waave)				#
+	dk_disable(waave)
 endif()
 
 
@@ -327,7 +325,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(DKHandles)			# could not find DKHandles
 	dk_disable(DKMidi)				# requires rtmidi
 	dk_disable(DKMySql)				# requires curl
-	dk_disable(DKOcr)				# requires leptonica, tesseract
+	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
 	dk_disable(DKOSGAudio)			# requires openscenegraph
 	dk_disable(DKOSGCef)			# requires openscenegraph
@@ -344,8 +342,8 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(DKOSGViewer)			# requires openscenegraph 
 	dk_disable(DKOSGWidget)			# requires openscenegraph 
 	dk_disable(DKOSGWindow)			# requires openscenegraph 
-	dk_disable(DKScreenRecorder)	# requires opencv.  error: 'cvSize' was not declared in this scope
-	dk_disable(DKSDLCef)			# requires sdl, cef_binary
+	dk_disable(DKScreenRecorder)	# requires opencv
+	dk_disable(DKSDLCef)			# requires cef_binary
 	dk_disable(DKSDLVideo)			# requires ffmpeg
 	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSFMLRml)			# requires sfml
