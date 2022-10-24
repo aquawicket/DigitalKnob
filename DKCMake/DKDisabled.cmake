@@ -77,7 +77,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(libtorrent)			# CMAKE ERROR:  No SOURCES given to target: torrent-rasterbar
 	dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
-	dk_disable(lua)					# no CMakeLists.txt
+	#dk_disable(lua)					# no CMakeLists.txt
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	#dk_disable(openscenegraph)		# osgGA broken
 	dk_disable(osgaudio)			# requires openscenegraph
@@ -122,7 +122,6 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(libwebsockets)		# error: unknown type name 'lws_mutex_t'
 	dk_disable(libxml2)				# fatal error: 'extra/stricmp.h' file not found
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
-	#dk_disable(lua)					# no CMakeLists.txt
 	dk_disable(mlocate)				# Unable to locate a Java Runtime that supports apt
 	dk_disable(openframeworks)		# fatal error: /utils/ofConstants.h:183     'GL/glew.h' file not found
 	dk_disable(osgbullet)			# requires bullet3
@@ -189,7 +188,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(libwebsockets)		# compiling errors
 	dk_disable(libxml2)				# fatal error: 'config.h' file not found
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
-	dk_disable(lua)					# no CMakeLists.txt
+	#dk_disable(lua)					# no CMakeLists.txt
 	dk_disable(mlocate)				# Unable to locate a Java Runtime that supports apt
 	dk_disable(opencv)				# CMAKE_SYSTEM_PROCESSOR is not defined
 	dk_disable(openframeworks)		# error: tesselator.h: No such file or directory
@@ -239,7 +238,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(libtorrent)			# CMake Error: cannot find source file: deps/try_signal/try_singal.cpp
 	dk_disable(libxml2)				# Not such file or directory
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
-	dk_disable(lua)					# no CMakeLists.txt
+	#dk_disable(lua)					# no CMakeLists.txt
 	dk_disable(openframeworks)		# error: tesselator.h: No such file or directory
 	dk_disable(openssl)				# compiling errors
 	dk_disable(osgaudio)			# requires freealut
@@ -295,7 +294,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(libwebp)
 	dk_disable(libxml2)
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
-	dk_disable(lua)					# no CMakeLists.txt
+	#dk_disable(lua)					# no CMakeLists.txt
 	dk_disable(opencv)				# build errors
 	dk_disable(openframeworks)		# error: cannot find opengles
 	dk_disable(osgaudio)			# requires openscenegraph
@@ -366,7 +365,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(libwebsockets)		# compiling errors
 	dk_disable(libxml2)				# ../../configure: No such file or directory
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
-	dk_disable(lua)					# no CMakeLists.txt
+	#dk_disable(lua)					# no CMakeLists.txt
 	dk_disable(ogg)					# configure: error: unrecognized option: `-DANDROID32'
 	dk_disable(openal)				# The system cannot find the file specified
 	dk_disable(opencv)				# error : cannot use 'throw' with exceptions disabled
