@@ -1,69 +1,48 @@
-project ( lua C )
-cmake_minimum_required ( VERSION 2.8 )
- 
-include(GNUInstallDirs)
- 
-include_directories ( src ${CMAKE_CURRENT_BINARY_DIR} )
-set ( SRC_CORE lapi.c lcode.c lctype.c ldebug.c ldo.c ldump.c lfunc.c lgc.c llex.c
-  lmem.c lobject.c lopcodes.c lparser.c lstate.c lstring.c ltable.c
-  ltm.c lundump.c lvm.c lzio.c )
-set ( SRC_LIB lauxlib.c lbaselib.c lcorolib.c ldblib.c liolib.c
-  lmathlib.c loslib.c lstrlib.c ltablib.c lutf8lib.c loadlib.c linit.c )
- 
-set ( SRC_LUA lua.c )
-#set ( SRC_LUAC luac.c )
- 
-add_library ( liblua ${SRC_CORE} ${SRC_LIB} )
-set_target_properties ( liblua PROPERTIES OUTPUT_NAME lua )
- 
-add_library ( libluadll SHARED ${SRC_CORE} ${SRC_LIB} )
-target_compile_definitions ( libluadll PRIVATE _CRT_SECURE_NO_WARNINGS LUA_BUILD_AS_DLL LUA_COMPAT_ALL )
-set_target_properties ( libluadll PROPERTIES OUTPUT_NAME lua54 )
- 
-add_executable ( lua ${SRC_LUA} )
-target_link_libraries ( lua libluadll )
- 
-add_executable ( luac ${SRC_LUAC} )
-target_link_libraries ( luac liblua )
- 
-set ( LUA_INCLUDES lua.h lualib.h lauxlib.h lua.hpp luaconf.h )
- 
-# Installation
-if(NOT BUNDLED_MODE)
-  install(
-    TARGETS lua
-    RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
-  )
- 
-  install(
-    TARGETS luac
-    RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
-  )
- 
-  install(
-    TARGETS liblua
-    ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
-    LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
-    RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
-  )
- 
-  install(
-    TARGETS libluadll
-    ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
-    LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
-    RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
-  )
- 
-  install(
-    FILES lua.h lualib.h lauxlib.h lua.hpp luaconf.h 
-    DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
-  )
-endif()
- 
-## install_executable ( lua luac )
-## install_library ( liblua )
-## install_data ( README.md )
-## #install_lua_module ( strict etc/strict.lua )
-## install_header ( lua.h lualib.h lauxlib.h lua.hpp ${CMAKE_CURRENT_BINARY_DIR}/luaconf.h )
-## #install_doc ( doc/ )
-## #install_test ( test/ )
+
+cmake_minimum_required(VERSION 3.12)
+project(lua-cmake VERSION 1.0.0 DESCRIPTION "Lua build for a project subdirectory" LANGUAGES C)
+
+option(BUILD_SHARED_LIBS "Build as shared library" ON)
+
+set(srcDir ${CMAKE_SOURCE_DIR})
+
+set(srcFiles lapi.c lauxlib.c lbaselib.c lcode.c lcorolib.c lctype.c ldblib.c ldebug.c ldo.c
+    ldump.c lfunc.c lgc.c linit.c liolib.c llex.c lmathlib.c lmem.c loadlib.c lobject.c lopcodes.c
+    loslib.c lparser.c lstate.c lstring.c lstrlib.c ltable.c ltablib.c ltests.c ltm.c lundump.c
+    lutf8lib.c lvm.c lzio.c)
+
+set(publicHeaderFiles lauxlib.h lua.h luaconf.h lualib.h)
+
+list(TRANSFORM srcFiles PREPEND ${srcDir}/)
+list(TRANSFORM publicHeaderFiles PREPEND ${srcDir}/)
+
+add_library(lua
+    ${srcFiles})
+
+target_compile_definitions(lua
+    PRIVATE
+    $<$<PLATFORM_ID:Linux>:LUA_USE_LINUX LUA_COMPAT_5_2>)
+
+target_compile_options(lua
+    PRIVATE
+    $<$<OR:$<C_COMPILER_ID:AppleClang>,$<C_COMPILER_ID:Clang>,$<C_COMPILER_ID:GNU>>:
+    -Wextra -Wshadow -Wsign-compare -Wundef -Wwrite-strings -Wredundant-decls
+    -Wdisabled-optimization -Waggregate-return -Wdouble-promotion -Wdeclaration-after-statement
+    -Wmissing-prototypes -Wnested-externs -Wstrict-prototypes -Wc++-compat -Wold-style-definition>)
+
+set(includeDir ${CMAKE_CURRENT_BINARY_DIR}/include)
+file(COPY ${publicHeaderFiles} DESTINATION ${includeDir})
+
+add_library(lua-header
+    INTERFACE)
+
+target_include_directories(lua-header
+    INTERFACE
+    ${includeDir})
+
+target_link_libraries(lua
+    INTERFACE
+    lua-header)
+
+add_library(lua::lib ALIAS lua)
+add_library(lua::header ALIAS lua-header)
