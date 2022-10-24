@@ -12,6 +12,7 @@ bool DKOSGPicker::Init(){
 	outline->setColor(osg::Vec4(1,0,0,1));
 
 	DKOSGWindow::Instance(data[1])->view->addEventHandler(this);
+	return true;
 }
 
 DKOSGPicker::~DKOSGPicker(){
