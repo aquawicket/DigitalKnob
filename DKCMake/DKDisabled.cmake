@@ -63,7 +63,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(DKOSGViewer)			# requires openscenegraph 
 	dk_disable(DKOSGWidget)			# requires openscenegraph 
 	dk_disable(DKOSGWindow)			# requires openscenegraph
-	dk_disable(DKScreenRecorder)	#
+	dk_disable(DKScreenRecorder)
 	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSFMLRml)			# INCOMPLETE
 	dk_disable(DKThread)			# build errors
@@ -72,7 +72,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(DKVncClient)			# requires libvncserver
 	dk_disable(DKVncServer)			# requires libvncserver
 	dk_disable(bullet3)				# LINK ERROR: cannot open input file 'BulletInverseDynamicsUtils.lib'
-	dk_disable(giflib)				# 
+	dk_disable(giflib)
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libtorrent)			# CMAKE ERROR:  No SOURCES given to target: torrent-rasterbar
 	dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
@@ -93,7 +93,8 @@ endif()
 
 
 if(MAC)  # Disabled for MAC targets
-	dk_disable(aubio)				# breaks DKCefV8 
+	dk_disable(aubio)				# breaks DKCefV8
+	dk_disable(bullet3)				# library not found for -lBulletInverseDynamicsUtils
 	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
 	dk_disable(DKOSGAudio)			# requires openscenegraph, freealut
@@ -112,7 +113,6 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(DKUpdate)			# Error: 'boost/thread/xtime.hpp:24 expected identifier TIME_UTC_=1
 	dk_disable(DKVncClient)			# requires libvncserver
 	dk_disable(DKVncServer)			# requires libvncserver
-	dk_disable(bullet3)				# library not found for -lBulletInverseDynamicsUtils
 	dk_disable(flac)				# 'asm' undelcared identifier
 	dk_disable(imagemagick)			# no such file or directory: libimagemagik.a
 	dk_disable(leptonica)			# Build Failed: fhmtauto.o
@@ -214,7 +214,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(bullet3)				# library not found for -lBulletInverseDynamicsUtils
 	dk_disable(DKHook)				# 'read' was not declared in this scope
 	dk_disable(DKJerryscript)		# requires jerryscript
-	dk_disable(DKOcr)				# requires leptonica, tesseract
+	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
 	dk_disable(DKOSGAudio)			# requires openscenegraph
 	dk_disable(DKOSGCef)			# build errors
@@ -222,7 +222,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKOSGRml)			# build errors
 	dk_disable(DKOSGVideo)			# requires openscenegraph
 	dk_disable(DKOSGWidget)			# build errors 
-	dk_disable(DKScreenRecorder)	#
+	dk_disable(DKScreenRecorder)
 	dk_disable(DKSDLVideo)			# requires waave
 	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSFMLRml)			# INCOMPLETE
@@ -248,7 +248,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(podofo)				# build errors
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(uwebsockets)			# requires openssl
-	dk_disable(waave)				#
+	dk_disable(waave)
 endif()
 
 
@@ -377,6 +377,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(osgbullet)			# CMake Error: Could NOT find Bullet
 	dk_disable(osgworks)			# requires openscenegraph
 	dk_disable(podofo)				# error : cannot use 'throw' with exceptions disabled
+	dk_disable(rtaudio)				# build errors
 	dk_disable(rtmidi)				# ALSA API requested but no ALSA dev libraries found
 	dk_disable(sdl-gpu)				# The target "SDL_gpu" does not exist in the project
 	dk_disable(sfml)				# Unsupported compiler

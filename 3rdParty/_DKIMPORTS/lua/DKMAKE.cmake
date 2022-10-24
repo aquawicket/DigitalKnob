@@ -3,7 +3,7 @@
 
 
 ### IMPORT ###
-dk_import(https://github.com/lua/lua.git)
+dk_import(https://github.com/lua/lua.git PATCH)
 
 
 ### LINK ###
@@ -27,6 +27,6 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${LUA})
 
 
 ### COMPILE ###
-dk_visualStudio	(${LUA_NAME} lua)
-dk_xcode		(${LUA_NAME} lua)
-dk_make			(${LUA_NAME} lua)
+dk_visualStudio	(${LUA_FOLDER} lua)
+dk_xcode		(${LUA_FOLDER} lua)
+dk_make			(${LUA_FOLDER} lua)
