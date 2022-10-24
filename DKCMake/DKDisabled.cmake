@@ -309,6 +309,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(bzip2)				# 'make' is not recognized as an internal or external command
 	dk_disable(cryptopp)			# error : cannot use 'throw' with exceptions disabled
 	dk_disable(curl)				# error : "strerror_r MUST be either POSIX, glibc style"
+	dk_disable(diff-match-patch)
 	dk_disable(DKCef)				# requires cef_binary
 	dk_disable(DKCefChild)			# requires cef_binary
 	dk_disable(DKCurl)				# requires curl
