@@ -11,7 +11,7 @@ set ( SRC_LIB lauxlib.c lbaselib.c lcorolib.c ldblib.c liolib.c
   lmathlib.c loslib.c lstrlib.c ltablib.c lutf8lib.c loadlib.c linit.c )
  
 set ( SRC_LUA lua.c )
-set ( SRC_LUAC luac.c )
+#set ( SRC_LUAC luac.c )
  
 add_library ( liblua ${SRC_CORE} ${SRC_LIB} )
 set_target_properties ( liblua PROPERTIES OUTPUT_NAME lua )
