@@ -24,7 +24,7 @@ UNIX_dk_libRelease	(${BOXER}/${OS}/${RELEASE_DIR}/libBoxer.a)
 
 ### GENERATE ###
 dk_setPath(${BOXER}/${BUILD_DIR})
-dk_command(${DKCMAKE_BUILD} ${BOXER}) #FIXME: should this be dk_queueCommand ?
+dk_queueCommand(${DKCMAKE_BUILD} ${BOXER})
 
 
 ### COMPILE ###
