@@ -188,7 +188,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(libwebsockets)		# compiling errors
 	dk_disable(libxml2)				# fatal error: 'config.h' file not found
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
-	#dk_disable(lua)					# no CMakeLists.txt
+	dk_disable(lua)					# error:'system' is unavailable: not available on iOS
 	dk_disable(mlocate)				# Unable to locate a Java Runtime that supports apt
 	dk_disable(opencv)				# CMAKE_SYSTEM_PROCESSOR is not defined
 	dk_disable(openframeworks)		# error: tesselator.h: No such file or directory
