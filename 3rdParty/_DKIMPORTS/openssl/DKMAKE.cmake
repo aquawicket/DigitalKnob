@@ -1,4 +1,4 @@
-# https://github.com/openssl/openssl
+# https://github.com/openssl/openssl.git
 # https://www.openssl.org/
 # https://www.npcglib.org/~stathis/downloads/openssl-1.0.2h-vs2015.7z
 # https://github.com/openssl/openssl/issues/14131 # iOS & iOS-Simulator
