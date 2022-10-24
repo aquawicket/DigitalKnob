@@ -23,18 +23,23 @@ ANDROID_dk_libRelease	(${LUA}/${OS}/${RELEASE_DIR}/liblua.a)
 
 
 ### 3RDPARTY LINK ###
-WIN_DEBUG_dk_set	(LUA_CMAKE -DLUA_INCLUDE_DIR=${LUA} -DLUA_LIBRARIES=${LUA}/${OS}/${DEBUG_DIR}/lua.lib)
-WIN_RELEASE_dk_set	(LUA_CMAKE -DLUA_INCLUDE_DIR=${LUA} -DLUA_LIBRARIES=${LUA}/${OS}/${RELEASE_DIR}/lua.lib)
-UNIX_DEBUG_dk_set	(LUA_CMAKE -DLUA_INCLUDE_DIR=${LUA} -DLUA_LIBRARIES=${LUA}/${OS}/${DEBUG_DIR}/liblua.a)
-UNIX_RELEASE_dk_set	(LUA_CMAKE -DLUA_INCLUDE_DIR=${LUA} -DLUA_LIBRARIES=${LUA}/${OS}/${RELEASE_DIR}/liblua.a)
-	
-	
+WIN_DEBUG_dk_set		(LUA_CMAKE -DLUA_INCLUDE_DIR=${LUA} -DLUA_LIBRARIES=${LUA}/${OS}/${DEBUG_DIR}/lua.lib)
+WIN_RELEASE_dk_set		(LUA_CMAKE -DLUA_INCLUDE_DIR=${LUA} -DLUA_LIBRARIES=${LUA}/${OS}/${RELEASE_DIR}/lua.lib)
+APPLE_DEBUG_dk_set		(LUA_CMAKE -DLUA_INCLUDE_DIR=${LUA} -DLUA_LIBRARIES=${LUA}/${OS}/${DEBUG_DIR}/liblua.a)
+APPLE_RELEASE_dk_set	(LUA_CMAKE -DLUA_INCLUDE_DIR=${LUA} -DLUA_LIBRARIES=${LUA}/${OS}/${RELEASE_DIR}/liblua.a)
+LINUX_DEBUG_dk_set		(LUA_CMAKE -DLUA_INCLUDE_DIR=${LUA}/${OS}/${DEBUG_DIR}/include -DLUA_LIBRARIES=${LUA}/${OS}/${DEBUG_DIR}/liblua.a)
+LINUX_RELEASE_dk_set	(LUA_CMAKE -DLUA_INCLUDE_DIR=${LUA}/${OS}/${RELEASE_DIR}/include -DLUA_LIBRARIES=${LUA}/${OS}/${RELEASE_DIR}/liblua.a)
+RASPBERRY_DEBUG_dk_set	(LUA_CMAKE -DLUA_INCLUDE_DIR=${LUA}/${OS}/${DEBUG_DIR}/include -DLUA_LIBRARIES=${LUA}/${OS}/${DEBUG_DIR}/liblua.a)
+RASPBERRY_RELEASE_dk_set(LUA_CMAKE -DLUA_INCLUDE_DIR=${LUA}/${OS}/${RELEASE_DIR}/include -DLUA_LIBRARIES=${LUA}/${OS}/${RELEASE_DIR}/liblua.a)
+ANDROID_DEBUG_dk_set	(LUA_CMAKE -DLUA_INCLUDE_DIR=${LUA} -DLUA_LIBRARIES=${LUA}/${OS}/${DEBUG_DIR}/liblua.a)
+ANDROID_RELEASE_dk_set	(LUA_CMAKE -DLUA_INCLUDE_DIR=${LUA} -DLUA_LIBRARIES=${LUA}/${OS}/${RELEASE_DIR}/liblua.a)
+
 ### GENERATE ###
 dk_setPath		(${LUA}/${BUILD_DIR})
 dk_queueCommand	(${DKCMAKE_BUILD} ${LUA})
 
 
 ### COMPILE ###
-dk_visualStudio	(${LUA_FOLDER} lua)
-dk_xcode		(${LUA_FOLDER} lua)
-dk_make			(${LUA_FOLDER} lua)
+dk_visualStudio	(${LUA_FOLDER} lua) # windows, android
+dk_xcode		(${LUA_FOLDER} lua) # mac, ios, iossim
+dk_make			(${LUA_FOLDER} lua) # linux, raspberry

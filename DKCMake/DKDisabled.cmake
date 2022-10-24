@@ -238,7 +238,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(libtorrent)			# CMake Error: cannot find source file: deps/try_signal/try_singal.cpp
 	dk_disable(libxml2)				# Not such file or directory
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
-	#dk_disable(lua)					# no CMakeLists.txt
+	#dk_disable(lua)
 	dk_disable(openframeworks)		# error: tesselator.h: No such file or directory
 	dk_disable(openssl)				# compiling errors
 	dk_disable(osgaudio)			# requires freealut
@@ -294,7 +294,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(libwebp)
 	dk_disable(libxml2)
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
-	#dk_disable(lua)					# no CMakeLists.txt
+	#dk_disable(lua)
 	dk_disable(opencv)				# build errors
 	dk_disable(openframeworks)		# error: cannot find opengles
 	dk_disable(osgaudio)			# requires openscenegraph
