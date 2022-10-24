@@ -11,7 +11,7 @@ std::map<int,int> DKOSGWindow::osgMouse;
 
 bool DKOSGWindow::Init(){
 	DKDEBUGFUNC();
-#ifdef ANDROID
+#if ANDROID
 	DKClass::DKCreate("DKOSGWindowAndroid");
 #endif	
 	//link objects
@@ -63,7 +63,7 @@ bool DKOSGWindow::CreateWin(const DKString& title, const int& x, const int& y, c
 	if(!textWidth.empty()){ width = toInt(textWidth); }
 	if(!textHeight.empty()){ height = toInt(textHeight); }
 
-#ifdef WIN32 //account window frame
+#if WIN //account window frame
 	winY = (winY + 30); 
 	winX = (winX + 10);
 #endif
@@ -109,7 +109,7 @@ bool DKOSGWindow::CreateView(){
         view->getCamera()->setGraphicsContext(gc.get());
 #endif
 	
-#ifdef ANDROID
+#if ANDROID
 	width = DKAndroid::android_width;
 	height = DKAndroid::android_height;
 	view->setThreadingModel(osgViewer::ViewerBase::SingleThreaded);
@@ -120,7 +120,7 @@ bool DKOSGWindow::CreateView(){
 	view->getEventQueue()->setMouseInputRange(0, 0, width, height); //LOOK AT THIS
 #endif
 
-#ifdef IOS
+#if IOS
     view->setThreadingModel(osgViewer::Viewer::SingleThreaded);
     osg::GraphicsContext::WindowingSystemInterface* wsi = osg::GraphicsContext::getWindowingSystemInterface();
     if(wsi)
@@ -160,7 +160,7 @@ bool DKOSGWindow::CreateView(){
 	root->addChild(world);
 	dkOsgViewer->viewer->addView(view);
 	dkOsgViewer->Realize();
-#ifdef WIN32
+#if WIN
 	SetHwnd(); //get a windows handle
 #endif
 	view->addEventHandler(this);
@@ -171,16 +171,16 @@ bool DKOSGWindow::CreateView(){
 #if defined(WIN32) && !defined(WIN64)
 		title += " - WIN32";
 #endif
-#ifdef WIN64
+#if WIN64
 		title += " - WIN64";
 #endif
-#ifdef MAC
+#if MAC
 		title += " - MAC";
 #endif
-#ifdef LINUX
+#if LINUX
 		title += " - LINUX";
 #endif
-#ifdef DEBUG
+#if DEBUG
 		title += " DEBUG ";
 #else
 		title += " RELEASE ";
@@ -283,7 +283,7 @@ bool DKOSGWindow::SetTitle(const DKString& title){
 
 bool DKOSGWindow::SetIcon(const DKString& file){
 	DKDEBUGFUNC(file);
-#ifdef WIN32
+#if WIN
 	HICON hIcon = (HICON)LoadImage(NULL, file.c_str(), IMAGE_ICON, 32, 32, LR_LOADFROMFILE);
 	SendMessage( hwnd, WM_SETICON, ICON_SMALL, (LPARAM)hIcon );
 	return true;
@@ -292,7 +292,7 @@ bool DKOSGWindow::SetIcon(const DKString& file){
 }
 
 
-#ifdef WIN32
+#if WIN
 bool DKOSGWindow::SetHwnd(){
 	DKDEBUGFUNC();
 	/*
@@ -309,7 +309,7 @@ bool DKOSGWindow::SetHwnd(){
     dynamic_cast<osgViewer::GraphicsHandleWin32*> (        
     view->getCamera()->getGraphicsContext());
 	hwnd = gw->getHWND();
-	DKApp::hInstance = GetModuleHandle(0);
+	DKWindows::hInstance = GetModuleHandle(0);
 	return true;
 }
 #endif
@@ -383,7 +383,7 @@ bool DKOSGWindow::handle(const osgGA::GUIEventAdapter& ea){
 	}
 	if(ea.getEventType() == osgGA::GUIEventAdapter::SCROLL){
 		int wheel_step = 1;
-#ifdef MAC
+#if MAC
 		DKEvents::SendEvent("GLOBAL", "wheel", toString(ea.getScrollingDeltaY()));
 #else
 		if(ea.getScrollingMotion() == osgGA::GUIEventAdapter::SCROLL_DOWN)
@@ -431,7 +431,7 @@ bool DKOSGWindow::handle(const osgGA::GUIEventAdapter& ea){
 		const bool shift = ( (mod&osgGA::GUIEventAdapter::MODKEY_LEFT_SHIFT) ||
 			(mod&osgGA::GUIEventAdapter::MODKEY_RIGHT_SHIFT) );
 
-#ifdef WIN32
+#if WIN
 		// (~)Key - Show WIN32 Console
 		if(ctrl && ea.getUnmodifiedKey()=='`'){
 			if(IsWindowVisible(GetConsoleWindow())){
@@ -446,7 +446,8 @@ bool DKOSGWindow::handle(const osgGA::GUIEventAdapter& ea){
 		//clear console
 		if (ctrl && ea.getUnmodifiedKey() == '-'){
 			//DKDEBUG("clear console \n");
-			DKUtil::System("cls");
+			int rtnval;
+			DKUtil::System("cls", rtnval);
 			return true;
 		}
 #endif
@@ -545,7 +546,7 @@ bool DKOSGWindow::GetMouseY(const void* input, void* output){
 
 bool DKOSGWindow::GetHwnd(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
-#ifdef WIN32
+#if WIN
 	*(HWND*)output = hwnd;
 	return true;
 #else
