@@ -228,7 +228,6 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(libtorrent)			# CMake Error: cannot find source file: deps/try_signal/try_singal.cpp
 	dk_disable(libxml2)				# Not such file or directory
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
-	#dk_disable(lua)
 	dk_disable(openframeworks)		# error: tesselator.h: No such file or directory
 	dk_disable(openssl)				# compiling errors
 	dk_disable(osgaudio)			# requires freealut
@@ -349,7 +348,6 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(flac)				# configure: error: unrecognized option: `-DANDROID32'
 	dk_disable(freealut)			# DKFunctions.cmake:4405->dk_findFiles():  files is invalid
 	dk_disable(imagemagick)			# dkscript.tmp: line 2: cd: /android32/Debug: No such file or directory
-	#dk_disable(leptonica)			# fatal error : 'tiffconf.h' file not found
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libtorrent)			# Could not find BOOST
 	dk_disable(libuv)				# error : incomplete definition of type 'struct ifaddrs'
@@ -357,7 +355,6 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(libwebsockets)		# compiling errors
 	dk_disable(libxml2)				# ../../configure: No such file or directory
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
-	#dk_disable(lua)
 	dk_disable(ogg)					# configure: error: unrecognized option: `-DANDROID32'
 	dk_disable(openal)				# The system cannot find the file specified
 	dk_disable(opencv)				# error : cannot use 'throw' with exceptions disabled

@@ -304,7 +304,7 @@
 #endif
 ////
 
-#ifdef USE_osgViewer
+#if HAVE_osgViewer
 #ifdef WIN32
     USE_GRAPHICSWINDOW()
 #endif
@@ -317,7 +317,7 @@
 #ifdef LINUX
     USE_GRAPICSWINDOW_IMPLEMENTATION(X11)
 #endif
-#endif //USE_osgViewer
+#endif //HAVE_osgViewer
 
 #endif //!DKLIB
 

@@ -37,7 +37,7 @@
 
 bool DKGLInfo::Init(){
 	DKDEBUGFUNC();	
-	osgViewerGetVersion();
+	const char* osg_version = osgViewerGetVersion();
 	// check the environment in order to disable ATI workarounds
 	bool enableATIworkarounds = true;
 	// logical CPUs (cores)
@@ -57,8 +57,8 @@ bool DKGLInfo::Init(){
 	traits->screenNum = si.screenNum;
 	traits->x = 0;
 	traits->y = 0;
-	traits->width = 1;
-	traits->height = 1;
+	traits->width = 100;
+	traits->height = 100;
 	traits->windowDecoration = false;
 	traits->doubleBuffer = false;
 	traits->sharedContext = 0;
@@ -78,21 +78,21 @@ bool DKGLInfo::Init(){
 		traits->pbuffer = false;
 		_gc = osg::GraphicsContext::createGraphicsContext(traits.get());
 	}
-	if (_gc.valid()){
-		_gc->realize();
-		_gc->makeCurrent();
-		if (traits->pbuffer == false){
-			DKINFO("Realized graphics window for OpenGL operations. \n");
-		}
-		else{
-			DKINFO("Realized pbuffer for OpenGL operations. \n");
-		}
+	if(!_gc.valid())
+		return DKERROR("Failed to create graphic window. \n");
+
+	_gc->realize();
+	_gc->makeCurrent();
+	if (!_gc->isRealized())
+		return DKERROR("Graphics context is not realized \n");
+
+	if (traits->pbuffer == false) {
+		DKINFO("Realized graphics window for OpenGL operations. \n");
 	}
 	else{
-		return DKERROR("Failed to create graphic window too. \n");
+		DKINFO("Realized pbuffer for OpenGL operations. \n");
 	}
-	if (!_gc.valid() || !_gc->isRealized())
-		return DKERROR("DKGLInfo: context invalid. \n");
+
 	osg::GraphicsContext* gc = _gc.get();
 	unsigned int id = gc->getState()->getContextID();
 	const osg::GL2Extensions* GL2 = osg::GL2Extensions::Get(id, true);
