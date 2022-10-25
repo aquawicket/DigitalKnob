@@ -1,40 +1,34 @@
-#dk_set(VNCSERVER_DL https://github.com/LibVNC/libvncserver/archive/refs/heads/master-win.zip)
+# https://github.com/LibVNC/libvncserver/archive/refs/heads/master-win.zip
 
-### DEPENDS ###
-dk_depend(zlib)
+
+### DEPEND ###
+dk_depend(libjpeg-turbo)
 dk_depend(libpng)
-IF(ANDROID)
-	dk_depend(jpeg)
-ELSE()
-	dk_depend(libjpeg-turbo)
-ENDIF()
 dk_depend(openssl)
+dk_depend(zlib)
 
 
-dk_set(VNCSERVER_VERSION master-win)
-dk_set(VNCSERVER_NAME libvncserver-${VNCSERVER_VERSION})
-dk_set(VNCSERVER_DL https://github.com/LibVNC/libvncserver/archive/refs/heads/${VNCSERVER_VERSION}.zip)
-dk_set(VNCSERVER ${3RDPARTY}/${VNCSERVER_NAME})
-
-
-### INSTALL ###
-#dk_import(${VNCSERVER_DL} ${VNCSERVER})
-dk_import(${VNCSERVER_DL} ${VNCSERVER})
+### IMPORT ###
+dk_import(https://github.com/LibVNC/libvncserver/archive/refs/heads/master-win.zip)
 
 
 ### LINK ###
-dk_include(${VNCSERVER})
-dk_include(${VNCSERVER}/examples)
-dk_include(${VNCSERVER}/${OS})
-dk_include(${VNCSERVER}/${OS}/${RELEASE_DIR})
-WIN_dk_libDebug(${VNCSERVER}/${OS}/${DEBUG_DIR}/vncserver.lib)
-WIN_dk_libRelease(${VNCSERVER}/${OS}/${RELEASE_DIR}/vncserver.lib)
-WIN_dk_libDebug(${VNCSERVER}/${OS}/${DEBUG_DIR}/vncclient.lib)
-WIN_dk_libRelease(${VNCSERVER}/${OS}/${RELEASE_DIR}/vncclient.lib)
+dk_include			(${LIBVNCSERVER-MASTER-WIN})
+dk_include			(${LIBVNCSERVER-MASTER-WIN}/examples)
+dk_include			(${LIBVNCSERVER-MASTER-WIN}/${OS})
+DEBUG_dk_include	(${LIBVNCSERVER-MASTER-WIN}/${OS}/${DEBUG_DIR})
+RELEASE_dk_include	(${LIBVNCSERVER-MASTER-WIN}/${OS}/${RELEASE_DIR})
+dk_libDebug			(${LIBVNCSERVER-MASTER-WIN}/${OS}/${DEBUG_DIR}/vncserver.lib)
+dk_libRelease		(${LIBVNCSERVER-MASTER-WIN}/${OS}/${RELEASE_DIR}/vncserver.lib)
+dk_libDebug			(${LIBVNCSERVER-MASTER-WIN}/${OS}/${DEBUG_DIR}/vncclient.lib)
+dk_libRelease		(${LIBVNCSERVER-MASTER-WIN}/${OS}/${RELEASE_DIR}/vncclient.lib)
+
+
+### GENERATE ###
+dk_setPath		(${LIBVNCSERVER-MASTER-WIN}/${BUILD_DIR})
+dk_queueCommand	(${DKCMAKE_BUILD} -DWITH_JPEG=ON ${LIBJPEG-TURBO_CMAKE} ${LIBPNG_CMAKE} ${OPENSSL_CMAKE} ${ZLIB_CMAKE} ${LIBVNCSERVER-MASTER-WIN})
 
 
 ### COMPILE ###
-WIN_dk_setPath(${VNCSERVER}/${OS})
-WIN_dk_queueCommand(${DKCMAKE_BUILD} ${OPENSSL_CMAKE} ${LIBPNG_CMAKE} -DWITH_JPEG=ON ${LIBJPEG-TURBO_CMAKE} ${ZLIB_CMAKE} ${VNCSERVER})
-WIN_dk_visualStudio(${VNCSERVER_NAME} vncserver)
-WIN_dk_visualStudio(${VNCSERVER_NAME} vncclient)
+dk_visualStudio(${VNCSERVER_NAME} vncserver)
+dk_visualStudio(${VNCSERVER_NAME} vncclient)

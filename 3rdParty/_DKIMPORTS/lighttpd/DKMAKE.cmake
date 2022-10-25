@@ -1,39 +1,26 @@
-### VERSION ###
-dk_set(LIGHTTPD_VERSION 1.4.45)
-dk_set(LIGHTTPD_NAME lighttpd-${LIGHTTPD_VERSION})
-#dk_set(LIGHTTPD_DL ???)
-dk_set(LIGHTTPD ${3RDPARTY}/${LIGHTTPD_NAME})
+# https://github.com/lighttpd/lighttpd1.4.git
 
 
-### INSTALL ###
-#dk_import(${LIGHTTPD_DL} ${LIGHTTPD})
-dk_import(${LIGHTTPD_DL} ${LIGHTTPD})
+### IMPORT ###
+dk_import(https://github.com/lighttpd/lighttpd1.4.git)
 
 
 ### LINK ###
-dk_include(${LIGHTTPD}/lib)
-dk_include(${LIGHTTPD}/${OS}/${RELEASE_DIR})
-WIN_dk_libDebug(${LIGHTTPD}/${OS}/lib/${DEBUG_DIR}/liblighttpd.lib)
-WIN_dk_libRelease(${LIGHTTPD}/${OS}/lib/${RELEASE_DIR}/liblighttpd.lib)
-APPLE_dk_libDebug(${LIGHTTPD}/${OS}/lib/${DEBUG_DIR}/liblighttpd.a)
-APPLE_dk_libRelease(${LIGHTTPD}/${OS}/lib/${RELEASE_DIR}/liblighttpd.a)
-LINUX_dk_libDebug(${LIGHTTPD}/${OS}/${DEBUG_DIR}/lib/liblighttpd.a)
-LINUX_dk_libRelease(${LIGHTTPD}/${OS}/${RELEASE_DIR}/lib/liblighttpd.a)
-ANDROID_dk_libDebug(${LIGHTTPD}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/liblighttpd.a)
-ANDROID_dk_libRelease(${LIGHTTPD}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/liblighttpd.a)
+dk_include			(${LIGHTTPD}/lib)
+DEBUG_dk_include	(${LIGHTTPD}/${OS}/${DEBUG_DIR})
+RELEASE_dk_include	(${LIGHTTPD}/${OS}/${RELEASE_DIR})
+WIN_dk_libDebug		(${LIGHTTPD}/${OS}/lib/${DEBUG_DIR}/liblighttpd.lib)
+WIN_dk_libRelease	(${LIGHTTPD}/${OS}/lib/${RELEASE_DIR}/liblighttpd.lib)
+UNIX_dk_libDebug	(${LIGHTTPD}/${OS}/lib/${DEBUG_DIR}/liblighttpd.a)
+UNIX_dk_libRelease	(${LIGHTTPD}/${OS}/lib/${RELEASE_DIR}/liblighttpd.a)
+
+
+### GENERATE ###
+dk_setPath		(${LIGHTTPD}/${BUILD_DIR})
+dk_queueCommand	(${DKCMAKE_BUILD} ${LIGHTTPD}) # -DLWS_WITH_SSL=OFF
 
 
 ### COMPILE ###
-WIN_dk_setPath(${LIGHTTPD}/${OS})
-WIN32_dk_queueCommand(${DKCMAKE_BUILD} ${LIGHTTPD})
-WIN64_dk_queueCommand(${DKCMAKE_BUILD} ${LIGHTTPD})
-WIN_dk_visualStudio(${LIGHTTPD_NAME} LIGHTTPD)
-
-
-LINUX_DEBUG_dk_setPath(${LIGHTTPD}/${OS}/${DEBUG_DIR})
-LINUX_DEBUG_dk_queueCommand(${DKCMAKE_BUILD} -DLWS_WITH_SSL=OFF ${LIGHTTPD})
-LINUX_DEBUG_dk_queueCommand(make)
-
-LINUX_RELEASE_dk_setPath(${LIGHTTPD}/${OS}/${RELEASE_DIR})
-LINUX_RELEASE_dk_queueCommand(${DKCMAKE_BUILD} -DLWS_WITH_SSL=OFF ${LIGHTTPD})
-LINUX_RELEASE_dk_queueCommand(make)
+dk_visualStudio	(${LIGHTTPD_NAME} LIGHTTPD) # windows, android
+dk_xcode		(${LIGHTTPD_NAME} LIGHTTPD) # mac, ios, iossim
+dk_make			(${LIGHTTPD_NAME} LIGHTTPD) # linux, raspberry
