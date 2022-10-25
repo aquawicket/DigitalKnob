@@ -2,11 +2,10 @@
 # https://www.x.org/
 # https://www.x.org/releases/individual/lib/
 # https://www.x.org/releases/individual/lib/libX11-1.6.10.tar.gz
-# https://github.com/mirror/libX11/archive/refs/tags/libX11-1.7.0.zip
 
 
 ### IMPORT ###
-dk_import(https://github.com/mirror/libX11/archive/refs/tags/libx11-1.7.0.zip)
+dk_import(https://github.com/mirror/libX11.git)
 
 
 ### LINK ###
