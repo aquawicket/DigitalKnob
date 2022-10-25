@@ -285,6 +285,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	#dk_disable(lua)
 	dk_disable(opencv)				# build errors
 	dk_disable(openframeworks)		# error: cannot find opengles
+	dk_disable(openssl)				# lots of undefined references
 	dk_disable(osgaudio)			# requires openscenegraph
 	dk_disable(osgbullet)			# CMake Error: Could NOT find Bullet
 	dk_disable(osgworks)			# requires openscenegraph
