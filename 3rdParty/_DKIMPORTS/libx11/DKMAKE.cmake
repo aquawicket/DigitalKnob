@@ -1,22 +1,12 @@
-##return() #TODO
-# https://github.com/mirror/libX11
+# https://github.com/mirror/libX11.git
 # https://www.x.org/
 # https://www.x.org/releases/individual/lib/
-# 
 # https://www.x.org/releases/individual/lib/libX11-1.6.10.tar.gz
 # https://github.com/mirror/libX11/archive/refs/tags/libX11-1.7.0.zip
 
 
-### VERSION ###
-dk_set(LIBX11_VERSION 1.7.0)
-dk_set(LIBX11_NAME libx11-${LIBX11_VERSION})
-dk_set(LIBX11_DL https://github.com/mirror/libX11/archive/refs/tags/${LIBX11_NAME}.zip)
-dk_set(LIBX11 ${3RDPARTY}/${LIBX11_NAME})
-
-
-### INSTALL ###
-#dk_import(${LIBX11_DL} ${LIBX11})
-dk_import(${LIBX11_DL} ${LIBX11})
+### IMPORT ###
+dk_import(https://github.com/mirror/libX11/archive/refs/tags/libx11-1.7.0.zip)
 
 
 ### LINK ###
