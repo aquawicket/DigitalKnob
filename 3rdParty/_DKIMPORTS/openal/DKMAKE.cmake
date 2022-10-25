@@ -7,7 +7,7 @@
 
 
 ### DEPEND ###
-WIN_dk_depend(winmm.lib)
+dk_depend(winmm.lib)
 
 
 ### IMPORT ###
@@ -19,24 +19,25 @@ endif()
 
 
 ### LINK ###
-dk_define				(AL_LIBTYPE_STATIC)
-dk_include				(${OPENAL}/include)
-dk_include				(${OPENAL}/include/AL)
-ANDROID_dk_include		(${OPENAL}/${OS}/${RELEASE_DIR}/jni)
+dk_define					(AL_LIBTYPE_STATIC)
+dk_include					(${OPENAL}/include)
+dk_include					(${OPENAL}/include/AL)
+ANDROID_DEBUG_dk_include	(${OPENAL}/${OS}/${DEBUG_DIR}/jni)
+ANDROID_RELEASE_dk_include	(${OPENAL}/${OS}/${RELEASE_DIR}/jni)
 file(REMOVE ${OPENAL}/include/AL/stdint.h)
 file(REMOVE ${OPENAL}/include/AL/inttypes.h)
-WIN_dk_libDebug			(${OPENAL}/${OS}/${DEBUG_DIR}/OpenAL32.lib)
-WIN_dk_libRelease		(${OPENAL}/${OS}/${RELEASE_DIR}/OpenAL32.lib)
-APPLE_dk_libDebug		(${OPENAL}/${OS}/${DEBUG_DIR}/libopenal.a)
-APPLE_dk_libRelease		(${OPENAL}/${OS}/${RELEASE_DIR}/libopenal.a)
-LINUX_dk_libDebug		(${OPENAL}/${OS}/${DEBUG_DIR}/libopenal.a)
-LINUX_dk_libRelease		(${OPENAL}/${OS}/${RELEASE_DIR}/libopenal.a)
-RASPBERRY_dk_libDebug	(${OPENAL}/${OS}/${DEBUG_DIR}/libopenal.a)
-RASPBERRY_dk_libRelease	(${OPENAL}/${OS}/${RELEASE_DIR}/libopenal.a)
-#ANDROID_dk_libDebug	(${OPENAL}/${OS}/${DEBUG_DIR}/libopenal.a)
-#ANDROID_dk_libRelease	(${OPENAL}/${OS}/${RELEASE_DIR}/libopenal.a)
-ANDROID_dk_libDebug		(${OPENAL}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libopenal.a)
-ANDROID_dk_libRelease	(${OPENAL}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libopenal.a)
+WIN_dk_libDebug				(${OPENAL}/${OS}/${DEBUG_DIR}/OpenAL32.lib)
+WIN_dk_libRelease			(${OPENAL}/${OS}/${RELEASE_DIR}/OpenAL32.lib)
+APPLE_dk_libDebug			(${OPENAL}/${OS}/${DEBUG_DIR}/libopenal.a)
+APPLE_dk_libRelease			(${OPENAL}/${OS}/${RELEASE_DIR}/libopenal.a)
+LINUX_dk_libDebug			(${OPENAL}/${OS}/${DEBUG_DIR}/libopenal.a)
+LINUX_dk_libRelease			(${OPENAL}/${OS}/${RELEASE_DIR}/libopenal.a)
+RASPBERRY_dk_libDebug		(${OPENAL}/${OS}/${DEBUG_DIR}/libopenal.a)
+RASPBERRY_dk_libRelease		(${OPENAL}/${OS}/${RELEASE_DIR}/libopenal.a)
+#ANDROID_dk_libDebug		(${OPENAL}/${OS}/${DEBUG_DIR}/libopenal.a)
+#ANDROID_dk_libRelease		(${OPENAL}/${OS}/${RELEASE_DIR}/libopenal.a)
+ANDROID_dk_libDebug			(${OPENAL}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libopenal.a)
+ANDROID_dk_libRelease		(${OPENAL}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libopenal.a)
 
 
 ### 3RDPARTY LINK ###

@@ -1,4 +1,4 @@
-# to use this template, remove these
+# to use this template, remove these lines
 dk_undepend(_TEMPLATE-LIB_)
 return()
 #########################################

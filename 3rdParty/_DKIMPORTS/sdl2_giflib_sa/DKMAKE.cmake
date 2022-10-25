@@ -4,7 +4,7 @@
 
 ### DEPEND ###
 dk_depend(giflib)
-dk_depend(DKSDLWindow)
+dk_depend(sdl)
 
 
 ### IMPORT ###
@@ -12,7 +12,7 @@ dk_import(https://github.com/theMealena/SDL2_giflib_sa.git)
 
 
 ### LINK ###
-dk_define				(USE_SDL2_gif)
+#dk_define				(USE_SDL2_gif)
 dk_include				(${SDL2_GIFLIB_SA})
 WIN_dk_libDebug			(${SDL2_GIFLIB_SA}/${OS}/${DEBUG_DIR}/SDL2_gif.lib)
 WIN_dk_libRelease		(${SDL2_GIFLIB_SA}/${OS}/${RELEASE_DIR}/SDL2_gif.lib)
@@ -28,7 +28,7 @@ ANDROID_dk_libRelease	(${SDL2_GIFLIB_SA}/${OS}/${RELEASE_DIR}/obj/local/armeabi-
 
 ### GENERATE ###
 dk_setPath		(${SDL2_GIFLIB_SA}/${BUILD_DIR})
-dk_queueCommand	(${DKCMAKE_BUILD} ${SDL2_CMAKE} ${SDL2_GIFLIB_SA})
+dk_queueCommand	(${DKCMAKE_BUILD} ${GIFLIB} ${SDL_CMAKE} ${SDL2_GIFLIB_SA})
 
 
 ### COMPILE ###
