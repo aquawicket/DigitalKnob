@@ -271,7 +271,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(DKUpdate)			# compiling errors
 	dk_disable(DKVncClient)			# requires libvncserver
 	dk_disable(DKVncServer)			# requires libvncserver
-	#dk_disable(DKWebSockets)		# requires uwebsockets
+	dk_disable(DKWebSockets)		# requires openssl
 	dk_disable(emsdk)				# 64bit source only
 	dk_disable(freealut)			# no rule to make 'alut_static'
 	dk_disable(java)
