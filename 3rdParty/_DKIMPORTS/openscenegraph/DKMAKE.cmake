@@ -2,8 +2,8 @@
 
 
 ### DEPEND ###
-# some depends are located below for individual osg plugins
-dk_depend(libx11-dev)
+# some depends are located further below for individual osg plugins
+#dk_depend(libx11-dev)
 dk_depend(libxml2)
 dk_depend(msinttypes)
 dk_depend(opengl)
@@ -668,7 +668,7 @@ if(osgdb_ffmpeg)
 	#LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_ffmpegd.a)
 	#LINUX_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_ffmpeg.a)
 	#RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_ffmpegd.a)
-	#RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_ffmpeg.a)
+	#RASPBERRY_dk_libRelease(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_ffmpeg.a)
 	#ANDROID_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_ffmpegd.a)
 	#ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_ffmpeg.a)
 endif(osgdb_ffmpeg)
