@@ -89,7 +89,6 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(DKOSGAudio)			# requires openscenegraph, freealut
 	dk_disable(DKOSGCef)			# build errors
 	dk_disable(DKOSGPhysics)		# 'btBulletDynamicsCommon.h' file not found
-	#dk_disable(DKOSGRml)			# build errors
 	dk_disable(DKOSGStats)			# build errors
 	dk_disable(DKOSGVideo)			# TODO
 	dk_disable(DKOSGWidget)			# build errors
@@ -283,7 +282,6 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(libwebp)
 	dk_disable(libxml2)
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
-	#dk_disable(lua)
 	dk_disable(opencv)				# build errors
 	dk_disable(openframeworks)		# error: cannot find opengles
 	dk_disable(openssl)				# lots of undefined references
