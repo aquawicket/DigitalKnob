@@ -228,6 +228,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(libxml2)				# Not such file or directory
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(openframeworks)		# error: tesselator.h: No such file or directory
+	dk_disable(openscenegraph)		# error: undefined reference to symbol 'XineramaIsActive'
 	dk_disable(openssl)				# compiling errors
 	dk_disable(osgaudio)			# requires freealut
 	dk_disable(osgbullet)			# CMake Error: Could NOT find Bullet
