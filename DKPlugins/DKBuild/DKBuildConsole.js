@@ -7,7 +7,7 @@ var LEVEL  = "RebuildAll";
 
 function getch(){
 	key = CPP_DK_getch()
-	//console.log("key = "+key)
+	console.log("key = "+key)
 	return key
 }
 
@@ -122,12 +122,12 @@ function DKBuildConsole_ChooseUpdate() {
 			console.log("-> BACK")
 			UPDATE = "";
 			break
-		//Esc
+		//Esc key
 		case 27:
 			console.log("-> EXIT")
 			CPP_DK_Exit()
 			break
-		//Enter
+		//Enter key
 		case 13:
 			console.log("-> Rerunning last configuration")
 			OS = cache_json.OS
