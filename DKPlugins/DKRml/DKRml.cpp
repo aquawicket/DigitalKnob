@@ -62,19 +62,20 @@ bool DKRml::Init(){
 	if(DKClass::DKAvailable("DKSDLRml")){
 		DKClass::DKCreate("DKSDLRml");
 		if(!Rml::Initialise())
-			return DKERROR("Rml::Initialise(): failed\n");
+			return DKERROR("Rml::Initialise(): failed \n");
 		int w;
-		if(!DKWindow::GetWidth(w)){ return false; }
+		if(!DKWindow::GetWidth(w))
+			return DKERROR("DKWindow::GetWidth() failed! \n");
 		int h;
-		if(!DKWindow::GetHeight(h)){ return false; }
+		if(!DKWindow::GetHeight(h))
+			return DKERROR("DKWindow::GetHeight() failed! \n");
 		context = Rml::CreateContext("default", Rml::Vector2i(w, h));
 	}
 	else if(DKClass::DKAvailable("DKOSGRml")){
 		DKClass::DKCreate("DKOSGRml");
 	}
 	else{
-		DKERROR("No registered window found\n");
-		return false;
+		return DKERROR("No registered window found \n");
 	}
 #ifdef HAVE_rmlui_debugger
 	if (!Rml::Debugger::Initialise(context))
