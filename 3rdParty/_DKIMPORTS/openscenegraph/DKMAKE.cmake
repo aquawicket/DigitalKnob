@@ -3,6 +3,7 @@
 
 ### DEPEND ###
 # some depends are located below for individual osg plugins
+dk_depend(libx11-dev)
 dk_depend(libxml2)
 dk_depend(msinttypes)
 dk_depend(opengl)
@@ -12,11 +13,11 @@ dk_depend(zlib)
 
 ### IMPORT ###
 dk_import(https://github.com/openscenegraph/OpenSceneGraph.git)
-dk_set(OSG_GL2 ${3RDPARTY}/${OPENSCENEGRAPH_NAME}-GL2)
+#dk_set(OSG_GL2 ${3RDPARTY}/${OPENSCENEGRAPH_NAME}-GL2)
 dk_set(OSG_PLUGINS osgPlugins-3.7.0)
-if(OpenGL2)
-	dk_set(OSG OSG_GL2)
-endif(OpenGL2)
+#if(OpenGL2)
+#	dk_set(OSG OSG_GL2)
+#endif(OpenGL2)
 
 
 ### LINK ###
@@ -1677,6 +1678,6 @@ ANDROID_dk_queueCommand(${OPENCV_BUILD}
 
 
 ### COMPILE ###
-dk_visualStudio		(${OPENSCENEGRAPH_FOLDER}) # windows, android
-dk_xcode			(${OPENSCENEGRAPH_FOLDER}) # mac, ios, iossim
-dk_make				(${OPENSCENEGRAPH_FOLDER}) # linux, raspberry
+dk_visualStudio	(${OPENSCENEGRAPH_FOLDER}) # windows, android
+dk_xcode		(${OPENSCENEGRAPH_FOLDER}) # mac, ios, iossim
+dk_make			(${OPENSCENEGRAPH_FOLDER}) # linux, raspberry
