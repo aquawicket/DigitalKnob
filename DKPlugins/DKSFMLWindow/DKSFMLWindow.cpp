@@ -26,6 +26,7 @@
 
 #include "DK/stdafx.h"
 #include "DKSFMLWindow/DKSFMLWindow.h"
+#include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
 //std::vector<boost::function<bool(sf::Event& e)> > DKSFMLWindow::event_funcs;
