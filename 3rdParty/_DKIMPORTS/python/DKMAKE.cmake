@@ -17,13 +17,14 @@ RASPBERRY_dk_set(PYTHON_APP python)
 
 ### INSTALL ###
 if(WIN)
+	dk_setEnv("PATH" "${PYTHON}") #FIXME
 	if(NOT EXISTS ${PYTHON_APP})
 		dk_download(${PYTHON_DL} ${DKDOWNLOAD}/python-2.7.18.msi)
 		dk_makeDirectory(${PYTHON})
 		dk_executeProcess(cmd /c ${DKDOWNLOAD}/python-2.7.18.msi /passive PrependPath=1 TargetDir=${PYTHON})
 		#dk_executeProcess(MsiExec.exe /i "${DKDOWNLOAD}/python-2.7.18.msi" ALLUSERS=1 ADDLOCAL=ALL TARGETDIR="${PYTHON}" /qn)
 		# string(REPLACE "/" "\\" PYTHON_PATH ${PYTHON})
-		dk_setEnv("PATH" "${PYTHON}") #FIXME
+		#dk_setEnv("PATH" "${PYTHON}") #FIXME
 	endif()
 	if(EXISTS ${PYTHON_APP})
 		if(NOT EXISTS ${PYTHON}/Scripts/pip.exe)
