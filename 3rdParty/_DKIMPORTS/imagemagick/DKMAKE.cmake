@@ -2,26 +2,26 @@
 # https://github.com/ImageMagick/ImageMagick
 
 
+### DEPEND ###
 #dk_depend(ghostscript)
 
-WIN_dk_import(http://ftp.icm.edu.pl/packages/ImageMagick/binaries/ImageMagick-7.1.0-portable-Q16-x86.zip)
-LINUX_dk_import(https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-0.zip)
-MAC_dk_import(https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-0.zip)
 
-
-WIN_dk_set(IMAGEMAGICK_CONVERT ${IMAGEMAGICK}/convert.exe)
+### IMPORT ###
+WIN_dk_import	(http://ftp.icm.edu.pl/packages/ImageMagick/binaries/ImageMagick-7.1.0-portable-Q16-x86.zip)
+UNIX_dk_import	(https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-0.zip)
+WIN_dk_set		(IMAGEMAGICK_CONVERT ${IMAGEMAGICK}/convert.exe)
 
 
 ### LINK ###
-#dk_include(${IMAGEMAGICK}/${OS})
-#WIN_dk_libDebug(${IMAGEMAGICK}/${OS}/${DEBUG_DIR}/imagemagickd.lib)
-#WIN_dk_libRelease(${IMAGEMAGICK}/${OS}/${RELEASE_DIR}/imagemagick.lib)
-APPLE_dk_libDebug(${IMAGEMAGICK}/${OS}/${DEBUG_DIR}/libimagemagick.a)
-APPLE_dk_libRelease(${IMAGEMAGICK}/${OS}/${RELEASE_DIR}/libimagemagick.a)
-LINUX_dk_libDebug(${IMAGEMAGICK}/${OS}/${DEBUG_DIR}/libimagemagick.a)
-LINUX_dk_libRelease(${IMAGEMAGICK}/${OS}/${RELEASE_DIR}/libimagemagick.a)
-ANDROID_dk_libDebug(${IMAGEMAGICK}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libimagemagick.a)
-ANDROID_dk_libRelease(${IMAGEMAGICK}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libimagemagick.a)
+#dk_include			(${IMAGEMAGICK}/${OS})
+#WIN_dk_libDebug	(${IMAGEMAGICK}/${OS}/${DEBUG_DIR}/imagemagickd.lib)
+#WIN_dk_libRelease	(${IMAGEMAGICK}/${OS}/${RELEASE_DIR}/imagemagick.lib)
+UNIX_dk_libDebug	(${IMAGEMAGICK}/${OS}/${DEBUG_DIR}/libimagemagick.a)
+UNIX_dk_libRelease	(${IMAGEMAGICK}/${OS}/${RELEASE_DIR}/libimagemagick.a)
+
+
+### GENERATE ###
+#dk_setPath		(${IMAGEMAGICK}/${BUILD_DIR})
 
 
 ### COMPILE ###
@@ -32,14 +32,12 @@ WIN32_RELEASE_dk_setPath(${IMAGEMAGICK}/${OS}/${RELEASE_DIR})
 WIN32_RELEASE_dk_msys(${DKCONFIGURE_BUILD})
 WIN32_RELEASE_dk_msys(make)
 
-
 WIN64_DEBUG_dk_setPath(${IMAGEMAGICK}/${OS}/${DEBUG_DIR})
 WIN64_DEBUG_dk_msys(${DKCONFIGURE_BUILD})
 WIN64_DEBUG_dk_msys(make)
 WIN64_RELEASE_dk_setPath(${IMAGEMAGICK}/${OS}/${RELEASE_DIR})
 WIN64_RELEASE_dk_msys(${DKCONFIGURE_BUILD})
 WIN64_RELEASE_dk_msys(make)
-
 
 MAC_DEBUG_dk_setPath(${IMAGEMAGICK}/${OS}/${DEBUG_DIR})
 MAC_DEBUG_dk_queueCommand(${DKCONFIGURE_BUILD})

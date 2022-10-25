@@ -6,7 +6,8 @@ ANDROID_dk_return()
 
 
 ### DEPEND ###
-APPLE_dk_depend(cocoa)
+dk_depend(cocoa)
+dk_depend(libgtk-3-dev)
 
 
 ### IMPORT ###

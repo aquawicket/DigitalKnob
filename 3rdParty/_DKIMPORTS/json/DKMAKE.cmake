@@ -15,6 +15,7 @@ dk_import(https://github.com/nlohmann/json/archive/d8a63291cbe50411a2c513d06f3ae
 dk_include(${JSON}/include/nlohmann)
 
 
+#dk_set(JSON_TESTS ON)
 if(JSON_TESTS)
 	### GENERATE ###
 	dk_setPath(${JSON}/${BUILD_DIR})
@@ -24,7 +25,5 @@ if(JSON_TESTS)
 	### COMPILE ###
 	dk_visualStudio	(${JSON_NAME} json_unit)
 	dk_xcode		(${JSON_NAME} json_unit)
-	#LINUX_dk_queueCommand(make all)
-	#RASPBERRY_dk_queueCommand(make all)
 	dk_make			(${JSON_NAME} json_unit)
 endif()
