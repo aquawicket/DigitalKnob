@@ -90,7 +90,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(DKOSGAudio)			# requires openscenegraph, freealut
 	dk_disable(DKOSGCef)			# build errors
 	dk_disable(DKOSGPhysics)		# 'btBulletDynamicsCommon.h' file not found
-	dk_disable(DKOSGRml)			# build errors
+	#dk_disable(DKOSGRml)			# build errors
 	dk_disable(DKOSGStats)			# build errors
 	dk_disable(DKOSGVideo)			# TODO
 	dk_disable(DKOSGWidget)			# build errors
@@ -208,7 +208,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKOSGAudio)			# requires openscenegraph
 	dk_disable(DKOSGCef)			# build errors
 	dk_disable(DKOSGPhysics)		# 'btBulletDynamicsCommon.h' file not found
-	dk_disable(DKOSGRml)			# build errors
+	#dk_disable(DKOSGRml)			# build errors
 	dk_disable(DKOSGVideo)			# requires openscenegraph
 	dk_disable(DKOSGWidget)			# build errors 
 	dk_disable(DKScreenRecorder)
