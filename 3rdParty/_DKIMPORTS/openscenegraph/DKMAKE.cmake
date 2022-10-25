@@ -3,7 +3,7 @@
 
 ### DEPEND ###
 # some depends are located further below for individual osg plugins
-#dk_depend(libx11-dev)
+dk_depend(libx11-dev)
 dk_depend(libxml2)
 dk_depend(msinttypes)
 dk_depend(opengl)

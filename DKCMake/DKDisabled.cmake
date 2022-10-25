@@ -32,7 +32,7 @@ dk_disable(java)					# TODO
 dk_disable(jpeg)					# DEPRECATED: using libjpeg_turbo instead
 dk_disable(librocket)				# OBSOLETE: replaced by rmlui
 dk_disable(libvncserver-master-win) # DEPRECATED: using libvncserver instead
-#dk_disable(libx11)					# TODO
+dk_disable(libx11)					# TODO
 dk_disable(msys2)					# TODO: currently using msys
 dk_disable(sdl2_gif)				# DEPRECATED: using SDL_Image animation instead
 dk_disable(sdl2_giflib_sa)			# DEPRECATED: updated version of sdl2_gif. Using SDL_Image animation instead
@@ -48,13 +48,12 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(diff-match-patch)
 	dk_disable(DKOcr)				# causing linking errors in tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
-	dk_disable(DKOSGAudio)			# requires openscenegraph
-	dk_disable(DKOSGCef)			# requires openscenegraph
-	dk_disable(DKOSGPhysics)		# requires openscenegraph
-	#dk_disable(DKOSGRml)			# requires openscenegraph
-	dk_disable(DKOSGStats)			# requires openscenegraph
-	dk_disable(DKOSGVideo)			# requires openscenegraph
-	dk_disable(DKOSGWidget)			# requires openscenegraph 
+	dk_disable(DKOSGAudio)			# requires openscenegraph, freealut
+	dk_disable(DKOSGCef)			# build errors
+	dk_disable(DKOSGPhysics)		# 'btBulletDynamicsCommon.h' file not found
+	dk_disable(DKOSGStats)			# build errors
+	dk_disable(DKOSGVideo)			# TODO
+	dk_disable(DKOSGWidget)			# build errors
 	dk_disable(DKScreenRecorder)
 	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSFMLRml)			# INCOMPLETE

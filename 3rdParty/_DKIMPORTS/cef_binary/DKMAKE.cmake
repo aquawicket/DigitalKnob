@@ -1,5 +1,4 @@
 # https://en.wikipedia.org/wiki/Google_Chrome_version_history
-#
 # https://cef-builds.spotifycdn.com/index.html
 #
 # WINDOWS 32
@@ -74,17 +73,18 @@ WIN64_dk_import			(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+
 #WIN64_dk_download		(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows64_debug_symbols.tar.bz2)
 # WINARM64_dk_import	(https://cef-builds.spotifycdn.com/cef_binary_88.1.4+g5a6ab23+chromium-88.0.4324.96_windowsarm64.tar.bz2)
 # WINARM64_dk_download	(https://cef-builds.spotifycdn.com/cef_binary_88.1.4+g5a6ab23+chromium-88.0.4324.96_windowsarm64_debug_symbols.tar.bz2)
-MAC64_dk_import			(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_macosx64.tar.bz2)
-#MAC64_dk_download		(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_macosx64_debug_symbols.tar.bz2)
+APPLE_dk_import			(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_macosx64.tar.bz2)
+#APPLE_dk_download		(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_macosx64_debug_symbols.tar.bz2)
 # MACARM64_dk_import	(https://cef-builds.spotifycdn.com/cef_binary_88.1.6+g4fe33a1+chromium-88.0.4324.96_macosarm64.tar.bz2)
 # MACARM64_dk_download	(https://cef-builds.spotifycdn.com/cef_binary_88.1.6+g4fe33a1+chromium-88.0.4324.96_macosarm64_debug_symbols.tar.bz2)
 LINUX32_dk_import		(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linux32.tar.bz2)
 LINUX64_dk_import		(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linux64.tar.bz2)
 # LINUXARM32_dk_import	(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm.tar.bz2)
 # LINUXARM64_dk_import	(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm64.tar.bz2)
-# FIXME - RASPBERRY is technically LINUX ARM 32/64
 RASPBERRY32_dk_import	(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm.tar.bz2)
 RASPBERRY64_dk_import	(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm64.tar.bz2)
+ANDROID32_dk_import		(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm.tar.bz2)
+ANDROID64_dk_import		(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm64.tar.bz2)
 
 
 ### LINK ###
@@ -124,22 +124,26 @@ RASPBERRY_dk_libRelease(${CEF_BINARY}/${OS}/${RELEASE_DIR}/libcef_dll_wrapper/li
 ## RASPBERRY_dk_libDebug(${CEF_BINARY}/${DEBUG_DIR}/cef_sandbox.a)
 ## RASPBERRY_dk_libRelease(${CEF_BINARY}/${RELEASE_DIR}/cef_sandbox.a)
 
+ANDROID_dk_libDebug(${CEF_BINARY}/${DEBUG_DIR}/libcef.a)
+ANDROID_dk_libRelease(${CEF_BINARY}/${RELEASE_DIR}/libcef.a)
+ANDROID_dk_libDebug(${CEF_BINARY}/${OS}/libcef_dll_wrapper/${DEBUG_DIR}/libcef_dll_wrapper.a)
+ANDROID_dk_libRelease(${CEF_BINARY}/${OS}/libcef_dll_wrapper/${RELEASE_DIR}/libcef_dll_wrapper.a)
+
+
+### GENERATE ###
+dk_setPath(${CEF_BINARY}/${BUILD_DIR})
+WIN_dk_queueCommand(${DKCMAKE_BUILD} -DUSE_SANDBOX=Off ${CEF_BINARY})
+APPLE_dk_queueCommand(${DKCMAKE_BUILD} ${CEF_BINARY})
+LINUX_dk_queueCommand(${DKCMAKE_BUILD} ${CEF_BINARY})
+RASPBERRY_dk_queueCommand(${DKCMAKE_BUILD} -DPROJECT_ARCH="linuxarm" ${CEF_BINARY})
+ANDROID_dk_queueCommand(${DKCMAKE_BUILD} -DUSE_SANDBOX=Off ${CEF_BINARY})
+
 
 ### COMPILE ###
-dk_setPath(${CEF_BINARY}/${BUILD_DIR})
+dk_visualStudio	(${CEF_BINARY_NAME} libcef_dll_wrapper) # windows, android
+dk_xcode		(${CEF_BINARY_NAME} libcef_dll_wrapper) # mac, ios, iossim
+dk_make			(${CEF_BINARY_NAME} libcef_dll_wrapper) # linux, raspberry
 
-WIN_dk_queueCommand(${DKCMAKE_BUILD} -DUSE_SANDBOX=Off ${CEF_BINARY})
-WIN_dk_visualStudio(${CEF_BINARY_NAME} libcef_dll_wrapper)
-WIN_dk_visualStudio(${CEF_BINARY_NAME} cefsimple)
-
-APPLE_dk_queueCommand(${DKCMAKE_BUILD} ${CEF_BINARY})
-APPLE_dk_xcode(${CEF_BINARY_NAME} libcef_dll_wrapper)
-APPLE_dk_xcode(${CEF_BINARY_NAME} cefsimple)
-
-LINUX_dk_queueCommand(${DKCMAKE_BUILD} ${CEF_BINARY})
-LINUX_dk_queueCommand(make libcef_dll_wrapper)
-LINUX_dk_queueCommand(make cefsimple)
-
-RASPBERRY_dk_queueCommand(${DKCMAKE_BUILD} -DPROJECT_ARCH="linuxarm" ${CEF_BINARY})
-RASPBERRY_dk_queueCommand(make libcef_dll_wrapper)
-RASPBERRY_dk_queueCommand(make cefsimple)
+dk_visualStudio	(${CEF_BINARY_NAME} cefsimple) # windows, android
+dk_xcode		(${CEF_BINARY_NAME} cefsimple) # mac, ios, iossim
+dk_make			(${CEF_BINARY_NAME} cefsimple) # linux, raspberry

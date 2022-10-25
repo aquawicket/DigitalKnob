@@ -1,11 +1,12 @@
-# https://github.com/libsdl-org/SDL_ttf
+# https://github.com/libsdl-org/SDL_ttf.git
 # https://www.libsdl.org/projects/SDL_ttf
 # https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.0.15.zip
 
 
 ### DEPEND ###
-dk_depend(sdl)
+dk_depend(libwebp)
 dk_depend(freetype)
+dk_depend(sdl)
 
 
 ### IMPORT ###
@@ -32,10 +33,10 @@ ANDROID_dk_libRelease	(${SDL_TTF}/${OS}/lib/${RELEASE_DIR}/SDL_ttf.a)
 
 ### GENERATE ###
 dk_setPath		(${SDL_TTF}/${BUILD_DIR})
-dk_queueCommand	(${DKCMAKE_BUILD} -DBUILD_SHARED_LIBS=OFF -DSDLTTF_SUPPORT_WEBP=OFF ${SDL_CMAKE} ${FREETYPE_CMAKE} ${SDL_TTF})
+dk_queueCommand	(${DKCMAKE_BUILD} ${FREETYPE_CMAKE} ${LIBWEBP_CMAKE} ${SDL_CMAKE} ${SDL_TTF}) # -DSDLTTF_SUPPORT_WEBP=OFF
 
 
 ### COMPILE ###
-dk_visualStudio	(${SDL_TTF_NAME} SDLTTF) # windows, android
-dk_xcode		(${SDL_TTF_NAME} SDLTTF) # mac, ios, iossim
-dk_make			(${SDL_TTF_NAME} SDLTTF) # linux, raspberry
+dk_visualStudio	(${SDL_TTF_FOLDER} SDLTTF) # windows, android
+dk_xcode		(${SDL_TTF_FOLDER} SDLTTF) # mac, ios, iossim
+dk_make			(${SDL_TTF_FOLDER} SDLTTF) # linux, raspberry
