@@ -9,9 +9,9 @@
 #include <osgDB/ReadFile>
 #include <osg/ImageStream>
 #include <osg/ImageSequence>
-#include <RmlUi/Texture.h>
+#include <RmlUi/Core.h>
 
-#include "DKGLInfo.h"
+#include "DKOSGViewer/DKGLInfo.h"
 
 //#define USE_SHADERS //OpenGL < 1.1
 
@@ -99,7 +99,7 @@ osg::Group* DKOSGRmlRender::getRenderTarget() const{
 }
 
 /*
-osg::Object* DKOSGRmlRender::createGeometry(Rml::Core::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rml::Core::TextureHandle texture, bool useVBOs){
+osg::Object* DKOSGRmlRender::createGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rml::TextureHandle texture, bool useVBOs){
 	osg::Geometry* geometry = new osg::Geometry();
 	geometry->setUseDisplayList(false);
 	geometry->setUseVertexBufferObjects(useVBOs);
@@ -109,8 +109,8 @@ osg::Object* DKOSGRmlRender::createGeometry(Rml::Core::Vertex* vertices, int num
 	osg::ref_ptr<osg::Vec2Array> texcoords = new osg::Vec2Array(num_vertices);
 
 	for(int i = 0; i < num_vertices; ++i){
-		Rml::Core::Vertex* vert = &vertices[i];
-		Rml::Core::Colourb c = vert->colour;
+		Rml::Vertex* vert = &vertices[i];
+		Rml::Colourb c = vert->colour;
 		(*vertarray)[i].set(vert->position.x, vert->position.y, 0);
 		(*colorarray)[i].set(c.red / 255.0f, c.green / 255.0f, c.blue / 255.0f, c.alpha / 255.0f);
 		(*texcoords)[i].set(vert->tex_coord.x, vert->tex_coord.y);
@@ -161,7 +161,7 @@ osg::Object* DKOSGRmlRender::createGeometry(Rml::Core::Vertex* vertices, int num
 /// @param[in] num_indices The number of indices passed to the function. This will always be a multiple of three.
 /// @param[in] texture The texture to be applied to the geometry. This may be NULL, in which case the geometry is untextured.
 /// @param[in] translation The translation to apply to the geometry.
-void DKOSGRmlRender::RenderGeometry(Rml::Core::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rml::Core::TextureHandle texture, const Rml::Core::Vector2f& translation){
+void DKOSGRmlRender::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rml::TextureHandle texture, const Rml::Vector2f& translation){
 	osg::Geometry* geometry = static_cast<osg::Geometry*>(createGeometry(vertices, num_vertices, indices, num_indices, texture, false));
 	osg::MatrixTransform* trans = new osg::MatrixTransform();
 	trans->setMatrix(osg::Matrix::translate(osg::Vec3(translation.x, translation.y, 0)));
@@ -184,18 +184,18 @@ void DKOSGRmlRender::RenderGeometry(Rml::Core::Vertex* vertices, int num_vertice
 /// @param[in] num_indices The number of indices passed to the function. This will always be a multiple of three.
 /// @param[in] texture The texture to be applied to the geometry. This may be NULL, in which case the geometry is untextured.
 /// @return The application-specific compiled geometry. Compiled geometry will be stored and rendered using RenderCompiledGeometry() in future calls, and released with ReleaseCompiledGeometry() when it is no longer needed.
-Rml::Core::CompiledGeometryHandle DKOSGRmlRender::CompileGeometry(Rml::Core::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rml::Core::TextureHandle texture){
+Rml::CompiledGeometryHandle DKOSGRmlRender::CompileGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rml::TextureHandle texture){
 	osg::Geometry* node = static_cast<osg::Geometry*>(createGeometry(vertices, num_vertices, indices, num_indices, texture, true));
 	node->ref();
 	osg::Uniform* posuni = new osg::Uniform(osg::Uniform::FLOAT_VEC2, uniformName);
 	node->getOrCreateStateSet()->addUniform(posuni);
-	return reinterpret_cast<Rml::Core::CompiledGeometryHandle>(node);
+	return reinterpret_cast<Rml::CompiledGeometryHandle>(node);
 }
 
 /// Called by Rml when it wants to render application-compiled geometry.
 /// @param[in] geometry The application-specific compiled geometry to render.
 /// @param[in] translation The translation to apply to the geometry.
-void DKOSGRmlRender::RenderCompiledGeometry(Rml::Core::CompiledGeometryHandle geo, const Rml::Core::Vector2f& translation){
+void DKOSGRmlRender::RenderCompiledGeometry(Rml::CompiledGeometryHandle geo, const Rml::Vector2f& translation){
 	osg::Geometry* geometry = reinterpret_cast<osg::Geometry*>(geo);
 	osg::StateSet* ss = geometry->getOrCreateStateSet();
 	osg::Uniform* uni = ss->getUniform(uniformName);
@@ -215,7 +215,7 @@ void DKOSGRmlRender::RenderCompiledGeometry(Rml::Core::CompiledGeometryHandle ge
 
 /// Called by Rml when it wants to release application-compiled geometry.
 /// @param[in] geometry The application-specific compiled geometry to release.
-void DKOSGRmlRender::ReleaseCompiledGeometry(Rml::Core::CompiledGeometryHandle geo){
+void DKOSGRmlRender::ReleaseCompiledGeometry(Rml::CompiledGeometryHandle geo){
 	osg::Geometry* geometry = reinterpret_cast<osg::Geometry*>(geo);
 	if(geometry->getNumParents() != 0){
 		assert(geometry->getNumParents() == 1);
@@ -243,7 +243,7 @@ void DKOSGRmlRender::SetScissorRegion(int x, int y, int width, int height){
 	_scissorTest = new osg::Scissor(x, _screenHeight - y - height, width, height);
 }
 
-void DKOSGRmlRender::AddTexture(Rml::Core::TextureHandle& texture_handle, osg::Image* image){
+void DKOSGRmlRender::AddTexture(Rml::TextureHandle& texture_handle, osg::Image* image){
 	osg::ref_ptr<osg::Texture2D> texture = new osg::Texture2D();
 	texture->setResizeNonPowerOfTwoHint(false);
 	texture->setImage(image);
@@ -257,7 +257,7 @@ void DKOSGRmlRender::AddTexture(Rml::Core::TextureHandle& texture_handle, osg::I
 		texture->setFilter(osg::Texture::MIN_FILTER, osg::Texture::LINEAR);
 		texture->setFilter(osg::Texture::MAG_FILTER, osg::Texture::LINEAR);
 	}
-	texture_handle = reinterpret_cast<Rml::Core::TextureHandle>(texture.get());
+	texture_handle = reinterpret_cast<Rml::TextureHandle>(texture.get());
 	texture->ref();
 }
 
@@ -266,7 +266,7 @@ void DKOSGRmlRender::AddTexture(Rml::Core::TextureHandle& texture_handle, osg::I
 /// @param[out] texture_dimensions The variable to write the dimensions of the loaded texture.
 /// @param[in] source The application-defined image source, joined with the path of the referencing document.
 /// @return True if the load attempt succeeded and the handle and dimensions are valid, false if not.
-bool DKOSGRmlRender::LoadTexture(Rml::Core::TextureHandle& texture_handle, Rml::Core::Vector2i& texture_dimensions, const Rml::Core::String& source){
+bool DKOSGRmlRender::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vector2i& texture_dimensions, const Rml::String& source){
 	std::string src = source.CString();
 	// Hack: Sometimes libRml attaches that string to paths, sometimes it doesn't (when cloning elements)
     /*
@@ -300,19 +300,19 @@ bool DKOSGRmlRender::LoadTexture(Rml::Core::TextureHandle& texture_handle, Rml::
 /// @param[in] source The raw 8-bit texture data. Each pixel is made up of four 8-bit values, indicating red, green, blue and alpha in that order.
 /// @param[in] source_dimensions The dimensions, in pixels, of the source data.
 /// @return True if the texture generation succeeded and the handle is valid, false if not.
-bool DKOSGRmlRender::GenerateTexture(Rml::Core::TextureHandle& texture_handle, const Rml::Core::byte* source, const Rml::Core::Vector2i& source_dimensions){
+bool DKOSGRmlRender::GenerateTexture(Rml::TextureHandle& texture_handle, const Rml::byte* source, const Rml::Vector2i& source_dimensions){
 	osg::ref_ptr<osg::Image> img = new osg::Image();
 	int w = source_dimensions.x;
 	int h = source_dimensions.y;
 	img->allocateImage(w, h, 1, GL_RGBA, GL_UNSIGNED_BYTE);
-	memcpy(img->data(), source, w * h * 4 * sizeof(Rml::Core::byte));
+	memcpy(img->data(), source, w * h * 4 * sizeof(Rml::byte));
 	AddTexture(texture_handle, img);
 	return true;
 }
 
 /// Called by Rml when a loaded texture is no longer required.
 /// @param texture The texture handle to release.
-void DKOSGRmlRender::ReleaseTexture(Rml::Core::TextureHandle th){
+void DKOSGRmlRender::ReleaseTexture(Rml::TextureHandle th){
 	osg::Texture2D* texture = reinterpret_cast<osg::Texture2D*>(th);
 	texture->unref();
 }
@@ -376,9 +376,10 @@ osg::Group* DKOSGRmlRender::getRenderTarget() const{
 /// @param[in] num_indices The number of indices passed to the function. This will always be a multiple of three.
 /// @param[in] texture The texture to be applied to the geometry. This may be NULL, in which case the geometry is untextured.
 /// @param[in] translation The translation to apply to the geometry.
-void DKOSGRmlRender::RenderGeometry(Rml::Core::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rml::Core::TextureHandle texture, const Rml::Core::Vector2f& translation){
+void DKOSGRmlRender::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rml::TextureHandle texture, const Rml::Vector2f& translation){
 	//Cef
 	///////////////////////////////////////////////////////////
+	/*
 	if(has(texture_name[texture],"iframe_")){
 		//return;
 		osg::Image* cef_image = static_cast<osg::Image*>(DKClass::CallFunc("DKOSGCef::GetTexture"));
@@ -400,9 +401,10 @@ void DKOSGRmlRender::RenderGeometry(Rml::Core::Vertex* vertices, int num_vertice
 		osg::StateSet* ss = new osg::StateSet();//LEAK
 		ss->setTextureAttributeAndModes(0, cef_texture, osg::StateAttribute::ON);
 		//ss->ref();
-		texture = reinterpret_cast<Rml::Core::TextureHandle>(ss);
+		texture = reinterpret_cast<Rml::TextureHandle>(ss);
 		//AddTexture(texture, cef_image);
 	}
+	*/
 	osg::ref_ptr<osg::Geometry> geometry = new osg::Geometry();//LEAK
 	geometry->setUseDisplayList(false);
 	geometry->setUseVertexBufferObjects(false);
@@ -411,8 +413,8 @@ void DKOSGRmlRender::RenderGeometry(Rml::Core::Vertex* vertices, int num_vertice
 	osg::ref_ptr<osg::Vec4Array> colorarray = new osg::Vec4Array(num_vertices);//LEAK
 	osg::ref_ptr<osg::Vec2Array> texcoords = new osg::Vec2Array(num_vertices);
 	for(int i = 0; i < num_vertices; ++i){
-		Rml::Core::Vertex vert = vertices[i];
-		Rml::Core::Colourb c = vert.colour;
+		Rml::Vertex vert = vertices[i];
+		Rml::Colourb c = vert.colour;
 		(*vertarray)[i].set(vert.position.x, vert.position.y, 0);
 		(*colorarray)[i].set(c.red / 255.0f, c.green / 255.0f, c.blue / 255.0f, c.alpha / 255.0f);
 		if(texture != 0 && num_vertices == 4 && !texture_name[texture].empty()) //ignore text
@@ -469,7 +471,7 @@ void DKOSGRmlRender::SetScissorRegion(int x, int y, int width, int height){
 	_scissorTest = new osg::Scissor(x, _screenHeight - y - height, width, height);
 }
 
-void DKOSGRmlRender::AddTexture(Rml::Core::TextureHandle& texture_handle, osg::Image* image){
+void DKOSGRmlRender::AddTexture(Rml::TextureHandle& texture_handle, osg::Image* image){
 	osg::ref_ptr<osg::Texture2D> texture = new osg::Texture2D();//LEAK
 	texture->setResizeNonPowerOfTwoHint(false);
 	texture->setImage(image);
@@ -486,7 +488,7 @@ void DKOSGRmlRender::AddTexture(Rml::Core::TextureHandle& texture_handle, osg::I
 	osg::StateSet* ss = new osg::StateSet();//LEAK
 	ss->setTextureAttributeAndModes(0, texture, osg::StateAttribute::ON);
 	ss->ref();
-	texture_handle = reinterpret_cast<Rml::Core::TextureHandle>(ss);
+	texture_handle = reinterpret_cast<Rml::TextureHandle>(ss);
 }
 
 /// Called by Rml when a texture is required by the library.
@@ -494,11 +496,11 @@ void DKOSGRmlRender::AddTexture(Rml::Core::TextureHandle& texture_handle, osg::I
 /// @param[out] texture_dimensions The variable to write the dimensions of the loaded texture.
 /// @param[in] source The application-defined image source, joined with the path of the referencing document.
 /// @return True if the load attempt succeeded and the handle and dimensions are valid, false if not.
-bool DKOSGRmlRender::LoadTexture(Rml::Core::TextureHandle& texture_handle, Rml::Core::Vector2i& texture_dimensions, const Rml::Core::String& source){
-	DKString src = source.CString();
+bool DKOSGRmlRender::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vector2i& texture_dimensions, const Rml::String& source){
+	DKString src = source;
 	//CEF Texture
 	if(has(src,"iframe_")){
-		texture_handle = (Rml::Core::TextureHandle)src.c_str();
+		texture_handle = (Rml::TextureHandle)src.c_str();
 		texture_name[texture_handle] = src;
 		return true;
 	}
@@ -531,19 +533,19 @@ bool DKOSGRmlRender::LoadTexture(Rml::Core::TextureHandle& texture_handle, Rml::
 /// @param[in] source The raw 8-bit texture data. Each pixel is made up of four 8-bit values, indicating red, green, blue and alpha in that order.
 /// @param[in] source_dimensions The dimensions, in pixels, of the source data.
 /// @return True if the texture generation succeeded and the handle is valid, false if not.
-bool DKOSGRmlRender::GenerateTexture(Rml::Core::TextureHandle& texture_handle, const Rml::Core::byte* source, const Rml::Core::Vector2i& source_dimensions){
+bool DKOSGRmlRender::GenerateTexture(Rml::TextureHandle& texture_handle, const Rml::byte* source, const Rml::Vector2i& source_dimensions){
 	osg::ref_ptr<osg::Image> img = new osg::Image();//LEAK
 	int w = source_dimensions.x;
 	int h = source_dimensions.y;
 	img->allocateImage(w, h, 1, GL_RGBA, GL_UNSIGNED_BYTE);
-	memcpy(img->data(), source, w * h * 4 * sizeof(Rml::Core::byte));
+	memcpy(img->data(), source, w * h * 4 * sizeof(Rml::byte));
 	AddTexture(texture_handle, img);
 	return true;
 }
 
 /// Called by Rml when a loaded texture is no longer required.
 /// @param texture The texture handle to release.
-void DKOSGRmlRender::ReleaseTexture(Rml::Core::TextureHandle th){
+void DKOSGRmlRender::ReleaseTexture(Rml::TextureHandle th){
 	osg::Texture2D* texture = reinterpret_cast<osg::Texture2D*>(th);
 	texture->unref();
 }

@@ -10,12 +10,15 @@ bool DKOSGRml::Init(){
 	//link objects
 	dkOsgViewer = DKOSGViewer::Get("DKOSGViewer0");
 	dkOsgWindow = DKOSGWindow::Get("DKOSGWindow0");
-	dkRocket = DKRocket::Instance("DKRocket0");
-	if(!dkOsgViewer){ DKLog("DKOSGRml::Init(): dkOsgViewer invalid \n", DKERROR); return; }
-	if(!dkOsgWindow){ DKLog("DKOSGRml::Init(): dkOsgWindow invalid \n", DKERROR); return; }
-	if(!dkRocket){ DKLog("DKOSGRml::Init(): dkRocket invalid \n", DKERROR); return; }
+	dkRml = DKRml::Instance("DKRocket0");
+	if(!dkOsgViewer)
+		return DKERROR("dkOsgViewer invalid \n");
+	if(!dkOsgWindow)
+		return DKERROR("dkOsgWindow invalid \n");
+	if(!dkRml)
+		return DKERROR("dkRml invalid \n");
 
-	SetupRocket();
+	SetupRml();
 
 	//ANDROID FIX
 	//Unless we initiate some geometry, librocket will not display text or images
@@ -26,8 +29,8 @@ bool DKOSGRml::Init(){
 	dkOsgWindow->world->addChild(androidFix);
 #endif
 
-	dkRocket->context = guinode->getContext();
-	AddEvent("GLOBAL", "resize", &DKOSGRml::OnResize, this);
+	dkRml->context = guinode->getContext();
+	//AddEvent("GLOBAL", "resize", &DKOSGRml::OnResize, this);
 	return true;
 }
 
@@ -48,21 +51,18 @@ bool DKOSGRml::End(){
 	return true;
 }
 
-bool DKOSGRml::SetupRocket(){
+bool DKOSGRml::SetupRml(){
 	if(!guirender){
 		guirender = new DKOSGRmlRender();
-		Rocket::Core::SetRenderInterface(guirender);
+		Rml::SetRenderInterface(guirender);
 	}
 	if(!guisystem){
 		guisystem = new DKOSGRmlSystem();
-		Rocket::Core::SetSystemInterface(guisystem);
+		Rml::SetSystemInterface(guisystem);
 	}
-	if(!Rocket::Core::Initialise()){
-		DKLog("Rocket::Core::Initialise() failed! \n", DKERROR);
-		return false;
-	}
-	Rocket::Controls::Initialise();
-	guinode = new DKRocketGuiNode(dkOsgWindow->mTitle, true); //true = rocket debugger
+	if(!Rml::Initialise())
+		return DKERROR("Rocket::Core::Initialise() failed! \n");
+	guinode = new DKRmlGuiNode(dkOsgWindow->mTitle, true); //true = rocket debugger
 	guicam = new osg::Camera();
 	guicam->setClearMask(GL_DEPTH_BUFFER_BIT);
 	guicam->setRenderOrder(osg::Camera::POST_RENDER, 100);
@@ -96,9 +96,9 @@ bool DKOSGRml::SetupRocket(){
 	return true;
 }
 
-void DKOSGRml::OnResize(DKEvent* event){
+void DKOSGRml::OnResize(DKEvents* event){
 	DKStringArray arry;
 	toStringArray(arry, event->data[0], ",");
-	DKLog("DKOSGRml::OnResize("+arry[0]+","+arry[1]+")\n", DKINFO);
+	DKINFO("DKOSGRml::OnResize("+arry[0]+","+arry[1]+")\n");
 	guinode->setScreenSize(toInt(arry[0]), toInt(arry[1]));
 }

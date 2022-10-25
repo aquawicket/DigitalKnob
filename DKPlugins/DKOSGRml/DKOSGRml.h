@@ -15,7 +15,7 @@ public:
 	bool End();
 	
 	bool SetupRml();
-	void OnResize(DKEvent* event);
+	void OnResize(DKEvents* event);
 
 	DKOSGViewer* dkOsgViewer;
 	DKOSGWindow* dkOsgWindow;

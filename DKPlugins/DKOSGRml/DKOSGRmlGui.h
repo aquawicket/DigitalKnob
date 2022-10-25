@@ -9,23 +9,23 @@
 #include <osg/Group>
 #include <osgViewer/View>
 
-//typedef Rml::Core::Element DKElement;
-//typedef Rml::Core::Property DKProperty;
-//typedef Rml::Core::EventListener DKListener;
-typedef Rml::Core::ElementDocument DKElementDocument;
-//typedef Rml::Core::ElementList DKElementList;
-//typedef Rml::Core::Event Rml::Core::Event;
-//typedef Rml::Core::ElementUtilities DKElementUtilities;
-//typedef Rml::Core::String DKCString;
+//typedef Rml::Element DKElement;
+//typedef Rml::Property DKProperty;
+//typedef Rml::EventListener DKListener;
+typedef Rml::ElementDocument DKElementDocument;
+//typedef Rml::ElementList DKElementList;
+//typedef Rml::Event Rml::Core::Event;
+//typedef Rml::ElementUtilities DKElementUtilities;
+//typedef Rml::String DKCString;
 
-class DKRmlEventListener : public Rml::Core::EventListener
+class DKRmlEventListener : public Rml::EventListener
 {
 public:
-	DKRmlEventListener(Rml::Core::Element* rootelem);
+	DKRmlEventListener(Rml::Element* rootelem);
 	~DKRmlEventListener();
-	virtual void ProcessEvent(Rml::Core::Event& ev);
+	virtual void ProcessEvent(Rml::Event& ev);
 
-	Rml::Core::Element* _rootElement;
+	Rml::Element* _rootElement;
     bool _keys_handled;
     bool _mouse_handled;
 };
@@ -44,9 +44,9 @@ public:
 	~DKRmlGuiNode();
 	virtual bool handle(const osgGA::GUIEventAdapter& ea, const osg::NodePath& np, osgGA::GUIActionAdapter& aa);
     
-    Rml::Core::Context* getContext() { return _context; } // get libRml context of this gui
+    Rml::Context* getContext() { return _context; } // get libRml context of this gui
     virtual void traverse(osg::NodeVisitor& nv); // traversal handler for injecting time into libRml
-    Rml::Core::Input::KeyIdentifier GetKeyCode(int osgkey); //transform osg key to libRml key
+    Rml::Input::KeyIdentifier GetKeyCode(int osgkey); //transform osg key to libRml key
     int GetKeyModifiers(int osgModKeyMask); // transform key modifiers from osg to libRml
     int GetButtonId(int button); // transform from osg button to libRml button
     void setCamera(osg::Camera* cam); // Set this if libRml gui should render to a fullscreen camera.
@@ -59,7 +59,7 @@ public:
     void mousePosition(osgViewer::View* view, const osgGA::GUIEventAdapter& ea, const osg::NodePath& nodePath, int& x, int &y);
     unsigned int _previousTraversalNumber; // number of last frame so we don't update multiple times per frame
 	DKOSGRmlRender* _renderer; // DKRml render interface singleton  
-    Rml::Core::Context* _context; // context of this gui (one per gui)
+    Rml::Context* _context; // context of this gui (one per gui)
 	DKRmlEventListener* _contextEventListener;
     osg::ref_ptr<osg::Camera> _camera; // camera to render to (can be NULL)
     osg::ref_ptr<osgGA::GUIEventHandler> mGUIEventHandler;

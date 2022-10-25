@@ -4,42 +4,46 @@
 
 
 DKOSGRmlSystem::DKOSGRmlSystem() : _timer(osg::Timer::instance()->tick()){
-
+	DKDEBUGFUNC();
 }
 
-float DKOSGRmlSystem::GetElapsedTime(){
+double DKOSGRmlSystem::GetElapsedTime(){
+	//DKDEBUGFUNC();
 	return (float)osg::Timer::instance()->time_s();
 }
 
-int DKOSGRmlSystem::TranslateString(Rml::Core::String& translated, const Rml::Core::String& input){
+int DKOSGRmlSystem::TranslateString(Rml::String& translated, const Rml::String& input){
+	//DKDEBUGFUNC(translated, input);
 	translated = input;
 	return 0;
 }
 
-bool DKOSGRmlSystem::LogMessage(Rml::Core::Log::Type type, const Rml::Core::String& message){
-	switch(type)
-	{
-	case Rml::Core::Log::LT_ALWAYS:
-		DKINFO(DKString(message.CString())+"\n");
+bool DKOSGRmlSystem::LogMessage(Rml::Log::Type type, const Rml::String& message){
+	//DKDEBUGFUNC(type, message);
+	if (has(message, "Loaded font face"))
+		type = Rml::Log::LT_DEBUG;
+	switch (type) {
+	case Rml::Log::LT_ALWAYS:
+		DKINFO("[Rml] " + DKString(message) + "\n");
 		break;
-	case Rml::Core::Log::LT_ERROR:
-		DKERROR(DKString(message.CString())+"\n");
+	case Rml::Log::LT_ERROR:
+		DKERROR("[Rml] " + DKString(message) + "\n");
 		break;
-	case Rml::Core::Log::LT_ASSERT:
-		DKERROR(DKString(message.CString())+"\n");
+	case Rml::Log::LT_ASSERT:
+		DKASSERT("[Rml] " + DKString(message) + "\n");
 		break;
-	case Rml::Core::Log::LT_WARNING:
-		DKWARN(DKString(message.CString())+"\n");
+	case Rml::Log::LT_WARNING:
+		DKWARN("[Rml] " + DKString(message) + "\n");
 		break;
-	case Rml::Core::Log::LT_INFO:
-		DKINFO(DKString(message.CString())+"\n");
+	case Rml::Log::LT_INFO:
+		DKINFO("[Rml] " + DKString(message) + "\n");
 		break;
-	case Rml::Core::Log::LT_DEBUG:
-		DKDEBUG(DKString(message.CString())+"\n");
+	case Rml::Log::LT_DEBUG:
+		DKDEBUG("[Rml] " + DKString(message) + "\n");
 		break;
-    case Rml::Core::Log::LT_MAX:
-		DKINFO(DKString(message.CString())+"\n");
-        break;
+	case Rml::Log::LT_MAX:
+		DKVERBOSE("[Rml] " + DKString(message) + "\n");
+		break;
 	};
 	return true;
 };

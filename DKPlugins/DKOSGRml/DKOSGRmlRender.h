@@ -10,7 +10,7 @@
 #include <osg/TexMat>
 #include <osg/Geometry>
 
-class DKOSGRmlRender : public Rml::Core::RenderInterface
+class DKOSGRmlRender : public Rml::RenderInterface
 {
 public:
 	DKOSGRmlRender();
@@ -18,13 +18,13 @@ public:
 
 	void setRenderTarget(osg::Group* grp, int w, int h, bool fullscreen);
 	osg::Group* getRenderTarget() const;
-	virtual void RenderGeometry(Rml::Core::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rml::Core::TextureHandle texture, const Rml::Core::Vector2f& translation);
+	virtual void RenderGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rml::TextureHandle texture, const Rml::Vector2f& translation);
 	virtual void EnableScissorRegion(bool enable);
 	virtual void SetScissorRegion(int x, int y, int width, int height);
-	void AddTexture(Rml::Core::TextureHandle& texture_handle, osg::Image* image);
-	virtual bool LoadTexture(Rml::Core::TextureHandle& texture_handle, Rml::Core::Vector2i& texture_dimensions, const Rml::Core::String& source);
-	virtual bool GenerateTexture(Rml::Core::TextureHandle& texture_handle, const Rml::Core::byte* source, const Rml::Core::Vector2i& source_dimensions);
-	virtual void ReleaseTexture(Rml::Core::TextureHandle texture);
+	void AddTexture(Rml::TextureHandle& texture_handle, osg::Image* image);
+	virtual bool LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vector2i& texture_dimensions, const Rml::String& source);
+	virtual bool GenerateTexture(Rml::TextureHandle& texture_handle, const Rml::byte* source, const Rml::Vector2i& source_dimensions);
+	virtual void ReleaseTexture(Rml::TextureHandle texture);
 	virtual void Release();
 
 private:
@@ -38,7 +38,7 @@ private:
 	int _screenHeight;
     bool _fullScreen;
     
-	std::map<Rml::Core::TextureHandle, DKString> texture_name; //texture to name map
+	std::map<Rml::TextureHandle, DKString> texture_name; //texture to name map
 };
 
 #endif //DKOSGRmlRender_H

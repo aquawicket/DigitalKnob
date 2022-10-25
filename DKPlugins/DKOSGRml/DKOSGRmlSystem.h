@@ -6,23 +6,23 @@
 #include <osg/Notify>
 #include <osg/Timer>
 
-class DKOSGRmlSystem : public Rml::Core::SystemInterface
+class DKOSGRmlSystem : public Rml::SystemInterface
 {
 public:
 	DKOSGRmlSystem();
-    virtual float GetElapsedTime();
+    virtual double GetElapsedTime();
 
 	/// Translate the input string into the translated string.
 	/// @param[out] translated Translated string ready for display.
 	/// @param[in] input String as received from XML.
 	/// @return Number of translations that occured.
-	virtual int TranslateString(Rml::Core::String& translated, const Rml::Core::String& input);
+	virtual int TranslateString(Rml::String& translated, const Rml::String& input);
 
 	/// Log the specified message.
 	/// @param[in] type Type of log message, ERROR, WARNING, etc.
 	/// @param[in] message Message to log.
 	/// @return True to continue execution, false to break into the debugger.
-	virtual bool LogMessage(Rml::Core::Log::Type type, const Rml::Core::String& message);
+	virtual bool LogMessage(Rml::Log::Type type, const Rml::String& message);
 
 	/// Called when this system interface is no longer required.
 	virtual void Release(){}
