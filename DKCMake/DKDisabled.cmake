@@ -197,7 +197,7 @@ endif()
 
 
 if(LINUX) # Disabled for Linux targets
-	dk_disable(boxer)				# no package gtk+-3.0 found
+	#dk_disable(boxer)				# no package gtk+-3.0 found
 	dk_disable(bullet3)				# library not found for -lBulletInverseDynamicsUtils
 	dk_disable(DKHook)				# 'read' was not declared in this scope
 	dk_disable(DKJerryscript)		# requires jerryscript
@@ -208,6 +208,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKOSGPhysics)		# 'btBulletDynamicsCommon.h' file not found
 	dk_disable(DKOSGRml)
 	dk_disable(DKOSGVideo)			# requires openscenegraph
+	dk_disable(DKOSGViewer)			# requires openscenegraph
 	dk_disable(DKOSGWidget)			# build errors 
 	dk_disable(DKScreenRecorder)
 	dk_disable(DKSDLVideo)			# requires waave
