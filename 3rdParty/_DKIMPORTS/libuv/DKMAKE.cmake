@@ -33,6 +33,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${LIBUV})
 
 
 ### COMPILE ###
-dk_visualStudio	(${LIBUV_FOLDER} uv_a) # windows, android
-dk_xcode		(${LIBUV_FOLDER} uv_a) # mac, ios, iossim
-dk_make			(${LIBUV_FOLDER} uv_a) # linux, raspberry
+dk_build(${LIBUV_FOLDER} uv_a)

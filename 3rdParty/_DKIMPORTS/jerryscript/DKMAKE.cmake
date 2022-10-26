@@ -57,6 +57,4 @@ ANDROID_dk_queueCommand		(${DKCMAKE_BUILD} ${JERRYSCRIPT})
 
 
 ### COMPILE ###
-dk_visualStudio	(${JERRYSCRIPT_NAME} jerry) # windows, android
-dk_xcode		(${JERRYSCRIPT_NAME} jerry) # mac, ios, iossim
-dk_make			(${JERRYSCRIPT_NAME} jerry) # linux, raspberry
+dk_build(${JERRYSCRIPT_FOLDER} jerry)

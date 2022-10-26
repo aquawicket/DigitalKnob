@@ -29,7 +29,4 @@ dk_queueCommand(${DKCMAKE_BUILD} ${BOXER})
 
 
 ### COMPILE ###
-#dk_visualStudio(${BOXER_FOLDER} Boxer) #windows, android
-#dk_xcode		(${BOXER_FOLDER} Boxer) #mac, ios, iossim
-#dk_make		(${BOXER_FOLDER} Boxer) #linux, raspberry
-dk_build		(${BOXER_FOLDER} Boxer)
+dk_build(${BOXER_FOLDER} Boxer)

@@ -13,9 +13,9 @@ dk_depend(zlib)
 
 
 
-WIN_dk_import(https://github.com/curl/curl/archive/refs/tags/curl-7_43_0.zip)
-UNIX_dk_import(https://github.com/curl/curl/archive/refs/tags/curl-7_84_0.zip)
-#dk_import(https://github.com/curl/curl.git)
+WIN_dk_import	(https://github.com/curl/curl/archive/refs/tags/curl-7_43_0.zip)
+UNIX_dk_import	(https://github.com/curl/curl/archive/refs/tags/curl-7_84_0.zip)
+#dk_import		(https://github.com/curl/curl.git)
 
 
 ### LINK ###
@@ -64,9 +64,7 @@ RASPBERRY_dk_queueCommand	(${DKCMAKE_BUILD} -DCURL_STATICLIB=ON -DBUILD_CURL_EXE
 ANDROID_dk_queueCommand		(${DKCMAKE_BUILD} -DCURL_STATICLIB=ON -DBUILD_CURL_EXE=OFF -DBUILD_CURL_TESTS=OFF -DCURL_DISABLE_LDAP=ON -DCURL_USE_OPENSSL=OFF ${OPENSSL_CMAKE} ${ZLIB_CMAKE} -DHAVE_POSIX_STRERROR_R=1 -DHAVE_GLIBC_STRERROR_R=advanced -DHAVE_GLIBC_STRERROR_R__TRYRUN_OUTPUT=advanced ${CURL})
 
 ### COMPILE ###
-dk_visualStudio	(${CURL_NAME} libcurl) #windows, android
-dk_xcode		(${CURL_NAME} libcurl) #mac, ios, iossim
-dk_make			(${CURL_NAME} libcurl) #linux, raspberry
+dk_build(${CURL_FOLDER} libcurl)
 
 
 # arm64

@@ -46,6 +46,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} "-DCMAKE_CXX_FLAGS=/I${LIBJPEG-TURBO}/${OS} /I
 
 
 ### COMPILE ###
-dk_visualStudio	(${LEPTONICA_NAME} leptonica)	# windows, android
-dk_xcode		(${LEPTONICA_NAME} leptonica)	# mac, ios, iossim
-dk_make			(${LEPTONICA_NAME} leptonica)	# linux, raspberry
+dk_build(${LEPTONICA_FOLDER} leptonica)

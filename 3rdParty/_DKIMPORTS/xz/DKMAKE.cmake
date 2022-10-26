@@ -11,9 +11,9 @@ dk_import(https://github.com/xz-mirror/xz/archive/20e7a33e2d59c6a814447d3991f21e
 #dk_depend(mingw64)
 #dk_depend(msys2)
 #dk_set(XZ_VERSION 5.2.5)
-#dk_set(XZ_DL https://tukaani.org/xz/${XZ_NAME}.tar.gz)
+#dk_set(XZ_DL https://tukaani.org/xz/${XZ_FOLDER}.tar.gz)
 #dk_set(XZ_NAME xz-${XZ_VERSION})
-#dk_set(XZ ${3RDPARTY}/${XZ_NAME})
+#dk_set(XZ ${3RDPARTY}/${XZ_FOLDER})
 #dk_import(${XZ_DL} ${XZ})
 
 
@@ -44,9 +44,7 @@ dk_setPath(${XZ}/${BUILD_DIR})
 
 
 ### COMPILE ###
-dk_visualStudio	(${XZ_NAME} liblzma)
-dk_xcode		(${XZ_NAME} liblzma)
-dk_make			(${XZ_NAME} liblzma)
+dk_build(${XZ_FOLDER} liblzma)
 
 
 #FIXME
@@ -142,4 +140,4 @@ ANDROID_RELEASE_dk_msys(make)
 
 ANDROID_dk_setPath(${XZ}/${OS})
 ANDROID_dk_queueCommand(${DKCMAKE_BUILD} ${XZ})
-ANDROID_dk_visualStudio(${XZ_NAME} liblzma)
+ANDROID_dk_visualStudio(${XZ_FOLDER} liblzma)

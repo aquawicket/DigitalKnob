@@ -40,6 +40,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${LUA})
 
 
 ### COMPILE ###
-dk_visualStudio	(${LUA_FOLDER} lua) # windows, android
-dk_xcode		(${LUA_FOLDER} lua) # mac, ios, iossim
-dk_make			(${LUA_FOLDER} lua) # linux, raspberry
+dk_build(${LUA_FOLDER} lua)

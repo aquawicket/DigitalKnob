@@ -104,7 +104,7 @@ RASPBERRY_RELEASE_dk_queueCommand(${DKCONFIGURE_BUILD})
 RASPBERRY_RELEASE_dk_queueCommand(make)
 
 
-#ANDROID_dk_ndk(${OGG_NAME})
+#ANDROID_dk_ndk(${OGG_FOLDER})
 ANDROID_DEBUG_dk_setPath(${OGG}/${OS}/${DEBUG_DIR})
 ANDROID_DEBUG_dk_queueMsys(${DKCONFIGURE_BUILD})
 ANDROID_DEBUG_dk_queueMsys(make)

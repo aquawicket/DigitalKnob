@@ -23,7 +23,5 @@ if(JSON_TESTS)
 
 
 	### COMPILE ###
-	dk_visualStudio	(${JSON_NAME} json_unit)
-	dk_xcode		(${JSON_NAME} json_unit)
-	dk_make			(${JSON_NAME} json_unit)
+	dk_build(${JSON_FOLDER} json_unit)
 endif()

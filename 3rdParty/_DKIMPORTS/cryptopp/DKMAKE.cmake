@@ -49,6 +49,4 @@ ANDROID_dk_queueCommand		(${DKCMAKE_BUILD_CRYPTOPP} "-DCMAKE_CXX_FLAGS=/I${ANDRO
 
 
 ### COMPILE ###
-dk_visualStudio	(${CRYPTOPP_NAME} cryptopp-static) #windows, android
-dk_xcode		(${CRYPTOPP_NAME} cryptopp-static) #mac, ios, iossim
-dk_make			(${CRYPTOPP_NAME} cryptopp-static) #linux, raspberry
+dk_build(${CRYPTOPP_FOLDER} cryptopp-static)

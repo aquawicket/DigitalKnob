@@ -2349,6 +2349,7 @@ function(dk_build folder)
 	dk_xcode(${ARGV})
 	dk_make(${ARGV})
 endfunction()
+dk_createOsMacros("dk_build")
 
 
 ###############################################################################

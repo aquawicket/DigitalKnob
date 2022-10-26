@@ -91,6 +91,4 @@ ANDROID_dk_queueCommand				(${DKCMAKE_BUILD} ${OPENSCENEGRAPH_CMAKE} ${OSGWORKS_
 
 
 ### COMPILE ###
-dk_visualStudio	(${OSGBULLET_FOLDER})
-dk_xcode		(${OSGBULLET_FOLDER})
-dk_make			(${OSGBULLET_FOLDER})
+dk_build(${OSGBULLET_FOLDER})

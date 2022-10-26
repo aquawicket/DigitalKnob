@@ -30,6 +30,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} -DBUILD_SHARED_LIB=OFF ${ZLIB_CMAKE} ${TIDY-HT
 
 
 ### COMPILE ###
-dk_visualStudio	(${TIDY-HTML5_NAME} tidy-static) # windows, android
-dk_xcode		(${TIDY-HTML5_NAME} tidy-static) # mac, ios, iossim
-dk_make			(${TIDY-HTML5_NAME} tidy-static) # linux, raspberry
+dk_build(${TIDY-HTML5_FOLDER} tidy-static)

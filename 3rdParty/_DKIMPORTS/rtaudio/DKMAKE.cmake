@@ -37,6 +37,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${RTAUDIO})
 
 
 ### COMPILE ###
-dk_visualStudio	(${RTAUDIO_NAME} rtaudio) # windows, android
-dk_xcode		(${RTAUDIO_NAME} rtaudio) # mac, ios, iossim
-dk_make			(${RTAUDIO_NAME} rtaudio) # linux, raspberry
+dk_build(${RTAUDIO_FOLDER} rtaudio)

@@ -49,6 +49,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${GIFLIB_CMAKE} ${LIBJPEG-TURBO_CMAKE} ${LIBPN
 
 
 ### COMPILE ###
-dk_visualStudio	(${LIBWEBP_NAME} webp)	# windows, android
-dk_xcode		(${LIBWEBP_NAME} webp)	# mac, ios, iossim
-dk_make			(${LIBWEBP_NAME} webp)	# linux, raspberry
+dk_build(${LIBWEBP_FOLDER} webp)

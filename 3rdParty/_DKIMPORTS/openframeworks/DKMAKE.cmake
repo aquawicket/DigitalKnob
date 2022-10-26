@@ -58,6 +58,4 @@ dk_command(${DKCMAKE_BUILD} -DOF_PATH=${OPENFRAMEWORKS} ${OPENFRAMEWORKS})
 
 
 ### COMPILE ###
-dk_visualStudio	(${OPENFRAMEWORKS_NAME} openFrameworks) # windows, android
-dk_xcode		(${OPENFRAMEWORKS_NAME} openFrameworks) # mac, ios, iossim
-dk_make			(${OPENFRAMEWORKS_NAME} openFrameworks) # linux, raspberry
+dk_build(${OPENFRAMEWORKS_FOLDER} openFrameworks)

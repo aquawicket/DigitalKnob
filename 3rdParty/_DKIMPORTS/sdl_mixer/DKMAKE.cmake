@@ -33,6 +33,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${SDL_CMAKE} ${VORBIS_CMAKE} ${OGG_CMAKE} ${SM
 
 
 ### COMPILE ###
-dk_visualStudio	(${SDL_MIXER_NAME} SDLMIXER) # windows, android
-dk_xcode		(${SDL_MIXER_NAME} SDLMIXER) # mac, ios, iossim
-dk_make			(${SDL_MIXER_NAME} SDLMIXER) # linux, raspberry
+dk_build(${SDL_MIXER_FOLDER} SDLMIXER)

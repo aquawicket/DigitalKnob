@@ -476,12 +476,7 @@ ANDROID_dk_queueCommand				(${DKCMAKE_BUILD} ${OPENCV})
 
 
 ### COMPILE ###
-dk_visualStudio	(${OPENCV_NAME}) # windows, android
-dk_xcode		(${OPENCV_NAME}) # mac, ios, iossim
-dk_make			(${OPENCV_NAME}) # linux, raspberry
-#dk_xcode		(${OPENCV_NAME} opencv_core)		# mac, ios, iossim
-#dk_xcode		(${OPENCV_NAME} opencv_imgcodecs)	# mac, ios, iossim
-#dk_xcode		(${OPENCV_NAME} opencv_videoio)		# mac, ios, iossim
-#dk_make		(${OPENCV_NAME} opencv_core)		# linux, raspberry
-#dk_make		(${OPENCV_NAME} opencv_imgcodecs)	# linux, raspberry
-#dk_make		(${OPENCV_NAME} opencv_videoio)		# linux, raspberry
+dk_build	(${OPENCV_FOLDER})
+#dk_build	(${OPENCV_FOLDER} opencv_core)
+#dk_build	(${OPENCV_FOLDER} opencv_imgcodecs)
+#dk_build	(${OPENCV_FOLDER} opencv_videoio)

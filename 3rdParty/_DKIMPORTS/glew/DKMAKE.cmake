@@ -53,6 +53,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${GLEW}/build/cmake)
 
 
 ### COMPILE ###
-dk_visualStudio	(${GLEW_NAME} glew_s) # windows, android
-dk_xcode		(${GLEW_NAME} glew_s) # mac, ios, iossim
-dk_make			(${GLEW_NAME} glew_s) # linux, raspberry
+dk_build(${GLEW_FOLDER} glew_s)

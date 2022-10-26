@@ -43,6 +43,4 @@ dk_queueCommand(${DKCMAKE_BUILD} -DWITH_SIMD=OFF ${LIBJPEG-TURBO})
 
 
 ### COMPILE ###
-dk_visualStudio	(${LIBJPEG-TURBO_NAME} turbojpeg-static)	# windows, android
-dk_xcode		(${LIBJPEG-TURBO_NAME} turbojpeg-static)	# mac, ios, iossim
-dk_make			(${LIBJPEG-TURBO_NAME} turbojpeg-static)	# linux, raspberry
+dk_build(${LIBJPEG-TURBO_FOLDER} turbojpeg-static)

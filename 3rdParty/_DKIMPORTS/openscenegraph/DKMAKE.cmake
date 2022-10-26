@@ -13,7 +13,7 @@ dk_depend(zlib)
 
 ### IMPORT ###
 dk_import(https://github.com/openscenegraph/OpenSceneGraph.git)
-#dk_set(OSG_GL2 ${3RDPARTY}/${OPENSCENEGRAPH_NAME}-GL2)
+#dk_set(OSG_GL2 ${3RDPARTY}/${OPENSCENEGRAPH_FOLDER}-GL2)
 dk_set(OSG_PLUGINS osgPlugins-3.7.0)
 #if(OpenGL2)
 #	dk_set(OSG OSG_GL2)
@@ -1678,6 +1678,4 @@ ANDROID_dk_queueCommand(${OPENCV_BUILD}
 
 
 ### COMPILE ###
-dk_visualStudio	(${OPENSCENEGRAPH_FOLDER}) # windows, android
-dk_xcode		(${OPENSCENEGRAPH_FOLDER}) # mac, ios, iossim
-dk_make			(${OPENSCENEGRAPH_FOLDER}) # linux, raspberry
+dk_build(${OPENSCENEGRAPH_FOLDER})

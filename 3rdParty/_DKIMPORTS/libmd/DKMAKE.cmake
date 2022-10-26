@@ -11,9 +11,9 @@ dk_depend(autotools)
 
 dk_import(https://github.com/guillemj/libmd)
 #dk_set(LIBMD_VERSION 1.0.4)
-#dk_set(LIBMD_NAME libmd-${LIBMD_VERSION})
+#dk_set(LIBMD_FOLDER libmd-${LIBMD_VERSION})
 #dk_set(LIBMD_DL https://github.com/guillemj/libmd/archive/refs/tags/1.0.4.zip)
-#dk_set(LIBMD ${3RDPARTY}/${LIBMD_NAME})
+#dk_set(LIBMD ${3RDPARTY}/${LIBMD_FOLDER})
 #dk_import(${LIBMD_DL} ${LIBMD} NOPATCH)
 
 
@@ -98,7 +98,7 @@ RASPBERRY_RELEASE_dk_queueCommand(${DKCONFIGURE_BUILD})
 RASPBERRY_RELEASE_dk_queueCommand(make)
 
 
-ANDROID_dk_ndk(${LIBMD_NAME})
+ANDROID_dk_ndk(${LIBMD_FOLDER})
 #ANDROID_DEBUG_dk_setPath(${LIBMD}/${OS}/${DEBUG_DIR})
 #ANDROID_DEBUG_dk_msys(${DKCONFIGURE_BUILD})
 #ANDROID_DEBUG_dk_msys(make)

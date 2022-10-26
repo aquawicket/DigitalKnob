@@ -32,7 +32,7 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${GIFLIB} ${SDL_CMAKE} ${SDL2_GIFLIB_SA})
 
 
 ### COMPILE ###
-WIN_dk_visualStudio	(${SDL2_GIFLIB_SA_NAME} SDL2_gif)	# windows
-dk_xcode			(${SDL2_GIFLIB_SA_NAME} SDL2_gif)	# mac, ios, iossim
-dk_make				(${SDL2_GIFLIB_SA_NAME} SDL2_gif)	# linux, raspberry
-ANDROID_dk_ndk		(${SDL2_GIFLIB_SA_NAME})			# android
+WIN_dk_visualStudio	(${SDL2_GIFLIB_SA_FOLDER} SDL2_gif)	# windows
+dk_xcode			(${SDL2_GIFLIB_SA_FOLDER} SDL2_gif)	# mac, ios, iossim
+dk_make				(${SDL2_GIFLIB_SA_FOLDER} SDL2_gif)	# linux, raspberry
+ANDROID_dk_ndk		(${SDL2_GIFLIB_SA_FOLDER})			# android

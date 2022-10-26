@@ -65,6 +65,4 @@ ANDROID_dk_queueCommand				(${DKCMAKE_BUILD} "-DCMAKE_CXX_FLAGS=/DOSG_LIBRARY_ST
 
 
 ### COMPILE ###
-dk_visualStudio	(${OSGAUDIO_FOLDER}) # windows, android
-dk_xcode		(${OSGAUDIO_FOLDER}) # mac, ios, iossim
-dk_make			(${OSGAUDIO_FOLDER}) # linux, raspberry
+dk_build(${OSGAUDIO_FOLDER})

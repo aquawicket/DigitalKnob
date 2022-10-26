@@ -59,6 +59,4 @@ UNIX_dk_queueCommand(${DKCMAKE_BUILD} "-DCMAKE_CXX_FLAGS=-I${LIBROCKET}/Include"
 
 
 ### COMPILE ###
-dk_visualStudio	(${LIBROCKET_FOLDER})
-dk_xcode		(${LIBROCKET_FOLDER})
-dk_make			(${LIBROCKET_FOLDER})
+dk_build(${LIBROCKET_FOLDER})

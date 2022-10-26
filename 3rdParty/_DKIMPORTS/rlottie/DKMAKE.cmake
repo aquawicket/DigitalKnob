@@ -33,6 +33,4 @@ UNIX_dk_queueCommand(${DKCMAKE_BUILD} ${RLOTTIE})
 
 
 ### COMPILE ###
-dk_visualStudio	(${RLOTTIE_NAME} rlottie)	# windows, android
-dk_xcode		(${RLOTTIE_NAME} rlottie)	# mac, ios, iossim
-dk_make			(${RLOTTIE_NAME} rlottie)	# linux, raspbery
+dk_build(${RLOTTIE_FOLDER} rlottie)

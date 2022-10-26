@@ -118,12 +118,11 @@ RASPBERRY_DEBUG_dk_set	(OSGWORKS_CMAKE -DosgWorks_DIR=${OSGWORKS}/${OS}/Debug/li
 RASPBERRY_RELEASE_dk_set(OSGWORKS_CMAKE -DosgWorks_DIR=${OSGWORKS}/${OS}/Debug/lib/x86_64-linux-gnu)
 ANDROID_dk_set			(OSGWORKS_CMAKE -DosgWorks_DIR=${OSGWORKS}/${OS}/lib)
 
+
 ### GENERATE ###
 dk_setPath		(${OSGWORKS}/${BUILD_DIR})
 dk_queueCommand	(${DKCMAKE_BUILD} ${OPENSCENEGRAPH_CMAKE} -DOSGWORKS_BUILD_APPS=OFF -DOSGWORKS_INSTALL_DATA=OFF -DDIRECTINPUT_ARCH_x64=OFF -DBoost_INCLUDE_DIR=OFF ${OSGWORKS})
 
 
 ### COMPILE ###
-dk_visualStudio	(${OSGWORKS_FOLDER}) # windows, android
-dk_xcode		(${OSGWORKS_FOLDER}) # mac, ios, iossim
-dk_make			(${OSGWORKS_FOLDER}) # linux, raspberrry
+dk_build(${OSGWORKS_FOLDER})

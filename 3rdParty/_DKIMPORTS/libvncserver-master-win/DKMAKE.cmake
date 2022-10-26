@@ -30,5 +30,5 @@ dk_queueCommand	(${DKCMAKE_BUILD} -DWITH_JPEG=ON ${LIBJPEG-TURBO_CMAKE} ${LIBPNG
 
 
 ### COMPILE ###
-dk_visualStudio(${VNCSERVER_NAME} vncserver)
-dk_visualStudio(${VNCSERVER_NAME} vncclient)
+dk_build(${VNCSERVER_FOLDER} vncserver)
+dk_build(${VNCSERVER_FOLDER} vncclient)

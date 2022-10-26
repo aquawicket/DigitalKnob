@@ -5,9 +5,9 @@ endif()
 
 ### VERSION ###
 #dk_set(MSINTTYPES_VERSION r26)
-#dk_set(MSINTTYPES_NAME msinttypes-${MSINTTYPES_VERSION})
+#dk_set(MSINTTYPES_FOLDER msinttypes-${MSINTTYPES_VERSION})
 #dk_set(MSINTTYPES_DL https://raw.githubusercontent.com/SummersEpsilon/msinttypes/master/msinttypes-r26.zip)
-#dk_set(MSINTTYPES ${3RDPARTY}/${MSINTTYPES_NAME})
+#dk_set(MSINTTYPES ${3RDPARTY}/${MSINTTYPES_FOLDER})
 
 
 ### INSTALL ###

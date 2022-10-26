@@ -28,6 +28,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${LIBCACA})
 
 
 ### COMPILE ###
-dk_visualStudio	(${LIBCACA_NAME} libcaca)
-dk_xcode		(${LIBCACA_NAME} libcaca)
-dk_make			(${LIBCACA_NAME} libcaca)
+dk_build(${LIBCACA_FOLDER} libcaca)

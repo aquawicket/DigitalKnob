@@ -37,6 +37,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${FREETYPE_CMAKE} ${LIBWEBP_CMAKE} ${SDL_CMAKE
 
 
 ### COMPILE ###
-dk_visualStudio	(${SDL_TTF_FOLDER} SDLTTF) # windows, android
-dk_xcode		(${SDL_TTF_FOLDER} SDLTTF) # mac, ios, iossim
-dk_make			(${SDL_TTF_FOLDER} SDLTTF) # linux, raspberry
+dk_build(${SDL_TTF_FOLDER} SDLTTF)

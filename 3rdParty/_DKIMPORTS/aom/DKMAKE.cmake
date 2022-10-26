@@ -19,6 +19,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} -DAOM_TARGET_CPU=generic ${AOM})
 
 
 ### COMPILE ###
-dk_visualStudio	(${AOM_FOLDER}) #windows, android
-dk_xcode		(${AOM_FOLDER}) #mac, ios, iossim
-dk_make			(${AOM_FOLDER}) #linux, raspberry
+dk_build(${AOM_FOLDER})

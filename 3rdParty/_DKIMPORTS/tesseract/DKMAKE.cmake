@@ -39,7 +39,7 @@ LINUX_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} -DSTATIC=ON -DSW_BUILD=OFF -DBUI
 
 
 ### COMPILE ###
-WIN_dk_visualStudio	(${TESSERACT_NAME} libtesseract)	# windows
-dk_xcode			(${TESSERACT_NAME} libtesseract)	# mac, ios, iossim
-dk_make				(${TESSERACT_NAME} libtesseract)	#linux, raspberry
-ANDROID_dk_ndk		(${TESSERACT_NAME})					# android
+WIN_dk_visualStudio	(${TESSERACT_FOLDER} libtesseract)	# windows
+dk_xcode			(${TESSERACT_FOLDER} libtesseract)	# mac, ios, iossim
+dk_make				(${TESSERACT_FOLDER} libtesseract)	#linux, raspberry
+ANDROID_dk_ndk		(${TESSERACT_FOLDER})				# android

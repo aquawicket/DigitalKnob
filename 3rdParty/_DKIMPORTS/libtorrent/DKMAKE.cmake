@@ -33,6 +33,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} -Dshared=OFF -Dunicode=OFF -Dstatic_runtime=ON
 
 
 ### COMPILE ###
-dk_visualStudio	(${LIBTORRENT_NAME} torrent-rasterbar) #windows, android
-dk_xcode		(${LIBTORRENT_NAME} torrent-rasterbar) #mac, ios, iossim
-dk_make			(${LIBTORRENT_NAME} torrent-rasterbar) #linux, raspberry
+dk_build(${LIBTORRENT_FOLDER} torrent-rasterbar)

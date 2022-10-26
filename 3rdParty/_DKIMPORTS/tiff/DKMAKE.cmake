@@ -40,8 +40,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${TIFF})
 
 
 ### COMPILE ###
-dk_visualStudio				(${TIFF_FOLDER} tiff) # windows, android
-dk_xcode					(${TIFF_FOLDER} tiff) # mac, ios, iossim 
-dk_make						(${TIFF_FOLDER} tiff) # linux, raspberry
-#LINUX_dk_queueCommand		(make)				# linux
-#RASPBERRY_dk_queueCommand	(make)				# raspberry
+dk_build(${TIFF_FOLDER} tiff)

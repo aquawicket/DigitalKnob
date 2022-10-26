@@ -35,6 +35,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${JPEG})
 
 
 ### COMPILE ###
-dk_visualStudio	(${JPEG_NAME} jpeg-static) # windows, android
-dk_xcode		(${JPEG_NAME} jpeg-static) # mac, ios, iossim
-dk_make			(${JPEG_NAME} jpeg-static) # linux, raspberry
+dk_build(${JPEG_FOLDER} jpeg-static)

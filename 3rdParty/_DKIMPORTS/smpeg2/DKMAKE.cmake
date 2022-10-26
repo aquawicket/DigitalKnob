@@ -39,6 +39,4 @@ ANDROID_dk_queueCommand		(${DKCMAKE_BUILD} ${SDL_CMAKE} ${SMPEG2})
 
 
 ### COMPILE ###
-dk_visualStudio	(${SMPEG2_NAME} SMPEG) # windows, android
-dk_xcode		(${SMPEG2_NAME} SMPEG) # mac, ios, iossim
-dk_make			(${SMPEG2_NAME} SMPEG) # linux, raspberry
+dk_build(${SMPEG2_FOLDER} SMPEG)

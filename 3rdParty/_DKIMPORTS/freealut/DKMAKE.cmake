@@ -34,6 +34,4 @@ ANDROID_dk_queueCommand		(${DKCMAKE_BUILD} -DBUILD_STATIC=ON -DBUILD_TESTS=OFF -
 
 
 ### COMPILE ###
-dk_visualStudio	(${FREEALUT_NAME} alut_static) # windows, android
-dk_xcode		(${FREEALUT_NAME} alut_static) # mac, ios, iossim
-dk_make			(${FREEALUT_NAME} alut_static) # linux, raspberry
+dk_build(${FREEALUT_FOLDER} alut_static)

@@ -38,6 +38,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${SDL2_CMAKE} ${SDL2_GIF})
 
 
 ### COMPILE ###
-dk_visualStudio	(${SDL2_GIF_NAME} SDL2_gif) # windows, android
-dk_xcode		(${SDL2_GIF_NAME} SDL2_gif) # mac, ios, iossim
-dk_make			(${SDL2_GIF_NAME} SDL2_gif) # linux, raspberry
+dk_build(${SDL2_GIF_FOLDER} SDL2_gif)

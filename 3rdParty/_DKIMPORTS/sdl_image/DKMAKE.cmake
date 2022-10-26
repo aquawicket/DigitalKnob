@@ -81,6 +81,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} -DSDLIMAGE_SUPPORT_GIF=ON -DSDLIMAGE_SUPPORT_J
 
 
 ### COMPILE ###
-dk_visualStudio	(${SDL_IMAGE_NAME} SDLIMAGE) #windows, android
-dk_xcode		(${SDL_IMAGE_NAME} SDLIMAGE) # mac, ios, iossim
-dk_make			(${SDL_IMAGE_NAME} SDLIMAGE) # linux, raspberry
+dk_build(${SDL_IMAGE_FOLDER} SDLIMAGE)

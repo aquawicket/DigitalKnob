@@ -21,6 +21,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${LIGHTTPD}) # -DLWS_WITH_SSL=OFF
 
 
 ### COMPILE ###
-dk_visualStudio	(${LIGHTTPD_NAME} LIGHTTPD) # windows, android
-dk_xcode		(${LIGHTTPD_NAME} LIGHTTPD) # mac, ios, iossim
-dk_make			(${LIGHTTPD_NAME} LIGHTTPD) # linux, raspberry
+dk_build(${LIGHTTPD_FOLDER} LIGHTTPD)

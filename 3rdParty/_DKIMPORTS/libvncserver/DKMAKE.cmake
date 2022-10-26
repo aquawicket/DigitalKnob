@@ -1,16 +1,12 @@
-# https://github.com/LibVNC/libvncserver
+# https://github.com/LibVNC/libvncserver.git
 
 
 ### DEPEND ###
-dk_depend(zlib)
+dk_depend(libjpeg-turbo)
 dk_depend(libpng)
-IF(ANDROID)
-	dk_depend(jpeg)
-ELSE()
-	dk_depend(libjpeg-turbo)
-ENDIF()
+dk_depend(libsystemd-dev)
 dk_depend(openssl)
-LINUX_dk_depend(libsystemd-dev)
+dk_depend(zlib)
 
 
 ### IMPORT ###
@@ -45,7 +41,6 @@ ANDROID_dk_libRelease		(${LIBVNCSERVER}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v
 
 ### GENERATE ###
 dk_setPath							(${LIBVNCSERVER}/${BUILD_DIR})
-
 WIN_dk_queueCommand					(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=-I${LIBJPEG-TURBO}/${OS}" ${OPENSSL_CMAKE} ${LIBPNG_CMAKE} ${ZLIB_CMAKE} -DWITH_JPEG=ON ${LIBJPEG-TURBO_CMAKE} ${LIBVNCSERVER})
 APPLE_dk_queueCommand				(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=-I${LIBJPEG-TURBO}/${OS} -I${OPENSSL}/include" ${OPENSSL_CMAKE} ${LIBPNG_CMAKE} ${ZLIB_CMAKE} -DWITH_JPEG=ON ${LIBJPEG-TURBO_CMAKE} ${LIBVNCSERVER})
 LINUX_DEBUG_dk_queueCommand			(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=-I${LIBJPEG-TURBO}/${OS}/Debug" ${OPENSSL_CMAKE} ${LIBPNG_CMAKE} ${ZLIB_CMAKE} -DWITH_JPEG=ON ${LIBJPEG-TURBO_CMAKE} ${LIBVNCSERVER})
@@ -56,9 +51,5 @@ ANDROID_dk_queueCommand				(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=-I${LIBJPEG-TURBO}
 
 
 ### COMPILE ###
-dk_visualStudio	(${LIBVNCSERVER_NAME} vncserver)	# windows, android
-dk_visualStudio	(${LIBVNCSERVER_NAME} vncclient)	# windows, android
-dk_xcode		(${LIBVNCSERVER_NAME} vncserver)	# mac, ios, iossim
-dk_xcode		(${LIBVNCSERVER_NAME} vncclient)	# mac, ios, iossim
-dk_make			(${LIBVNCSERVER_NAME} vncserver)	# linux, raspberry
-dk_make			(${LIBVNCSERVER_NAME} vncclient)	# linux, raspberry
+dk_build(${LIBVNCSERVER_FOLDER} vncserver)
+dk_build(${LIBVNCSERVER_FOLDER} vncclient)

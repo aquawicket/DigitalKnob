@@ -33,6 +33,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${SDL_CMAKE} ${SDL-GPU})
 
 
 ### COMPILE ###
-dk_visualStudio	(${SDL-GPU_NAME} SDL_gpu)	# windows, android
-dk_xcode		(${SDL-GPU_NAME} SDL_gpu)	# mac, ios, iossim
-dk_make			(${SDL-GPU_NAME} SDL_gpu)	# linux, raspbery
+dk_build(${SDL-GPU_FOLDER} SDL_gpu)

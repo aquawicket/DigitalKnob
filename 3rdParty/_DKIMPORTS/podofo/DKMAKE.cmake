@@ -46,6 +46,4 @@ ANDROID_dk_queueCommand		(${DKCMAKE_BUILD} -DPODOFO_BUILD_STATIC=ON ${CRYPTOPP_C
 
 
 ### COMPILE ###
-dk_visualStudio	(${PODOFO_NAME} podofo_static)	# windows, android
-dk_xcode		(${PODOFO_NAME} podofo_static)	# mac, iso, iossim
-dk_make			(${PODOFO_NAME} podofo_static)	# linux, raspberry
+dk_build(${PODOFO_FOLDER} podofo_static)

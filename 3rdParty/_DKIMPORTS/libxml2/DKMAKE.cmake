@@ -39,6 +39,4 @@ ANDROID_dk_queueCommand		(${DKCMAKE_BUILD} "-DANDROID_COMPILER_FLAGS=-I${LIBXML2
 
 
 ### COMPILE ###
-dk_visualStudio	(${LIBXML2_NAME} xml2)
-dk_xcode		(${LIBXML2_NAME} xml2)
-dk_make			(${LIBXML2_NAME} xml2)
+dk_build(${LIBXML2_FOLDER} xml2)

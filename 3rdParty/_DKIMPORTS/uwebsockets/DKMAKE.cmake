@@ -32,6 +32,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${ZLIB_CMAKE} ${LIBUV_CMAKE} ${OPENSSL_CMAKE} 
 
 
 ### COMPILE ###
-dk_visualStudio	(${UWEBSOCKETS_NAME} uWS) # windows, android
-dk_xcode		(${UWEBSOCKETS_NAME} uWS) # mac, ios, iossim
-dk_make			(${UWEBSOCKETS_NAME} uWS) # linux, raspberry
+dk_build(${UWEBSOCKETS_FOLDER} uWS)

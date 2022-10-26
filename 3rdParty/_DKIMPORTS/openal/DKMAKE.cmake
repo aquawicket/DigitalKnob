@@ -62,7 +62,7 @@ RASPBERRY_dk_queueCommand	(${DKCMAKE_BUILD} -DLIBTYPE=STATIC -DEXAMPLES=OFF ${OG
 
 
 ### COMPILE ###
-WIN_dk_visualStudio	(${OPENAL_NAME} OpenAL) # windows
-ANDROID_dk_ndk		(${OPENAL_NAME}) 		# android
-dk_xcode			(${OPENAL_NAME} OpenAL) # mac, ios, iossim
-dk_make				(${OPENAL_NAME} OpenAL) # linux, rasperry
+WIN_dk_visualStudio	(${OPENAL_FOLDER} OpenAL) # windows
+ANDROID_dk_ndk		(${OPENAL_FOLDER}) 		  # android
+dk_xcode			(${OPENAL_FOLDER} OpenAL) # mac, ios, iossim
+dk_make				(${OPENAL_FOLDER} OpenAL) # linux, rasperry

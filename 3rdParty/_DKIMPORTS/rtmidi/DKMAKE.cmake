@@ -37,6 +37,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${RTMIDI})
 
 
 ### COMPILE ###
-dk_visualStudio	(${RTMIDI_NAME} rtmidi) # windows, android
-dk_xcode		(${RTMIDI_NAME} rtmidi) # mac, ios, iossim
-dk_make			(${RTMIDI_NAME} rtmidi)	# linux, raspberry
+dk_build(${RTMIDI_FOLDER} rtmidi)

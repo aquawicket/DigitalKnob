@@ -183,6 +183,4 @@ ANDROID_dk_queueCommand		(${DKCMAKE_BUILD} ${LIBJPEG-TURBO_CMAKE} ${OPENAL_CMAKE
 
 
 ### COMPILE ###
-dk_visualStudio	(${SFML_NAME}) # windows, android
-dk_xcode		(${SFML_NAME}) # mac, ios, iossim
-dk_make			(${SFML_NAME}) # linux, raspberry
+dk_build(${SFML_FOLDER})
