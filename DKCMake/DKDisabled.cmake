@@ -204,12 +204,20 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
 	dk_disable(DKOSGAudio)			# requires openscenegraph
-	dk_disable(DKOSGCef)			# build errors
-	dk_disable(DKOSGPhysics)		# 'btBulletDynamicsCommon.h' file not found
-	dk_disable(DKOSGRml)
+	dk_disable(DKOSGCef)			# requires openscenegraph
+	dk_disable(DKOSGLights)			# requires openscenegraph
+	dk_disable(DKOSGManipulator)	# requires openscenegraph
+	dk_disable(DKOSGModel)			# requires openscenegraph
+	dk_disable(DKOSGNotify)			# requires openscenegraph
+	dk_disable(DKOSGPhysics)		# requires openscenegraph
+	dk_disable(DKOSGPicker)			# requires openscenegraph
+	dk_disable(DKOSGRml)			# requires openscenegraph
+	dk_disable(DKOSGStats)			# requires openscenegraph
+	dk_disable(DKOSGTerrain)		# requires openscenegraph
 	dk_disable(DKOSGVideo)			# requires openscenegraph
-	dk_disable(DKOSGViewer)			# requires openscenegraph
-	dk_disable(DKOSGWidget)			# build errors 
+	dk_disable(DKOSGViewer)			# requires openscenegraph 
+	dk_disable(DKOSGWidget)			# requires openscenegraph 
+	dk_disable(DKOSGWindow)			# requires openscenegraph 
 	dk_disable(DKScreenRecorder)
 	dk_disable(DKSDLVideo)			# requires waave
 	dk_disable(DKSDLWav)			# build errors
