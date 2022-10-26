@@ -197,7 +197,7 @@ endif()
 
 
 if(LINUX) # Disabled for Linux targets
-	#dk_disable(boxer)				# no package gtk+-3.0 found
+	dk_disable(boxer)				# error: can't create CMakeFiles/Boxer.dir/src/boxer_linux.cpp.o: No such file or directory
 	dk_disable(bullet3)				# library not found for -lBulletInverseDynamicsUtils
 	dk_disable(DKHook)				# 'read' was not declared in this scope
 	dk_disable(DKJerryscript)		# requires jerryscript
