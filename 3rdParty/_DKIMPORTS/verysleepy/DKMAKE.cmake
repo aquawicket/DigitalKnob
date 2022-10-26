@@ -1,6 +1,5 @@
-# https://github.com/VerySleepy/verysleepy
+# https://github.com/VerySleepy/verysleepy.git
 # http://www.codersnotes.com/sleepy/
-#
 # https://github.com/VerySleepy/verysleepy/releases/download/v0.91/verysleepy-0.91.exe
 # https://github.com/VerySleepy/verysleepy/archive/refs/tags/v0.91.zip (source)
 

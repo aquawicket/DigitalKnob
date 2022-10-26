@@ -2336,6 +2336,22 @@ endfunction()
 
 
 ###############################################################################
+# dk_build(folder lib)
+#
+#	TODO
+#
+#	@folder 			- TODO
+#	@lib (optional)		- TODO
+#
+function(dk_build folder)
+	DKDEBUGFUNC(${ARGV})
+	dk_visualStudio(${ARGV})
+	dk_xcode(${ARGV})
+	dk_make(${ARGV})
+endfunction()
+
+
+###############################################################################
 # dk_lib(lib_path)
 #
 #	TODO
