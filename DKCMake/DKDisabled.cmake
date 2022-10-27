@@ -111,6 +111,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(libxml2)				# fatal error: 'extra/stricmp.h' file not found
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(mlocate)				# Unable to locate a Java Runtime that supports apt
+	dk_disable(ncurses)				# error: C preprocessor "/lib/cpp" fails sanity check
 	dk_disable(openframeworks)		# fatal error: /utils/ofConstants.h:183     'GL/glew.h' file not found
 	dk_disable(osgbullet)			# requires bullet3
 	dk_disable(osgaudio)			# opengl identifier errors
@@ -304,6 +305,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(tiff)
 	dk_disable(upx)
+	dk_disable(uwebsockets)			# broken
 	dk_disable(waave)
 endif()
 
