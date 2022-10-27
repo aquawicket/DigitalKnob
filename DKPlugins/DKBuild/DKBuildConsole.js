@@ -54,54 +54,45 @@ function DKBuildConsole_ChooseUpdate() {
 	
 	UPDATE = 1	
 	switch(key){
-		//1 key
-		case 49:
+		case 49: //1 key
 			console.log("-> Git Update")
 			CPP_DK_Create("DKGit/DKGit.js")
 			DKGit_GitUpdate()
 			break
-		//2 key
-		case 50:
+		case 50: //2 key
 			console.log("-> Git Commit")
 			CPP_DK_Create("DKGit/DKGit.js")
 			DKGit_GitCommit()
 			break
-		//3 key
-		case 51:
+		case 51: //3 key
 			console.log("-> Push assets")
-				dk.file.pushDKAssets()
+			dk.file.pushDKAssets()
 			break
-		//4 key
-		case 52:
+		case 52: //4 key
 			console.log("-> Pull assets")
-				 dk.file.pullDKAssets()
+			dk.file.pullDKAssets()
 			break
-		//A key	
-		case 97:
+		case 97: //A key	
 			console.log("-> Reset Apps")
 			DKBuild_ResetAppsPlugins()
 			DKGit_GitUpdate()
 			break
-		//P key
-		case 112:
+		case 112: //P key
 			console.log("-> Reset Plugins")
 			DKBuild_ResetPlugins()
 			DKGit_GitUpdate()
 			break
-		//T key
-		case 116:
+		case 116: //T key
 			console.log("-> Reset 3rdParty")
 			DKBuild_Reset3rdParty()
 			DKGit_GitUpdate()
 			break
-		//X key
-		case 120:
+		case 120: //X key
 			console.log("-> Reset Everything")
 			DKBuild_ResetEverything()
 			DKGit_GitUpdate()
 			break
-		//C key	
-		case 99:
+		case 99: //C key	
 			console.log("-> Clear Screen")
 			if(CPP_DK_GetOS() === "Windows"){
 				CPP_DK_System('cls')
@@ -111,24 +102,21 @@ function DKBuildConsole_ChooseUpdate() {
 			}
 			UPDATE = ""
 			break
-		//S key
-		case 115:
+		case 115: //S key
 			DKBuild_ClearCMakeCache()
 			DKBuild_DeleteTmpFiles()
 			UPDATE = ""
 			break
-		//0 key
-		case 48:
+		case 48: //0 key
 			console.log("-> BACK")
 			UPDATE = "";
 			break
-		//Esc key
-		case 27:
+		case 27: //Esc key
 			console.log("-> EXIT")
 			CPP_DK_Exit()
 			break
-		//Enter key
-		case 13:
+		case 10: //Enter key (osx)
+		case 13: //Enter key (windows)
 			console.log("-> Rerunning last configuration")
 			OS = cache_json.OS
 			APP = cache_json.APP
