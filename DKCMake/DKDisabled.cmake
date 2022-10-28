@@ -83,12 +83,12 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(waave)				# error C2065: 'PIX_FMT_YUV420P': undeclared identifier.  https://sourceforge.net/p/guvcview/tickets/34/
 	dk_disable(x264)
 	dk_disable(x265)
-endif()
+endif(WIN)
 
 if(WIN_64) # Disabled for Windows 64bit targets
 	dk_disable(opencv)				# error: Only SIMD128, AVX2 and NEON are supported in Winograd.
 	dk_disable(smpeg2)				# fatal error C1083: Cannot open include file: 'unistd.h'
-endif()
+endif(WIN_64)
 
 
 if(MAC)  # Disabled for MAC targets
@@ -140,7 +140,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(waave)				# error: streaming_objet.h:59 field has incomplete type 'enum PixelFormat'
 	dk_disable(x264)
 	dk_disable(x265)
-endif()
+endif(MAC)
 
 if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(aom)					# build errors
@@ -224,7 +224,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(waave)				# ** BUILD FAILED ** src/audio_decoder.c
 	dk_disable(x264)
 	dk_disable(x265)
-endif()
+endif(IOS OR IOSSIM)
 
 
 if(LINUX) # Disabled for Linux targets
@@ -276,7 +276,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(waave)
 	dk_disable(x264)
 	dk_disable(x265)
-endif()
+endif(LINUX)
 
 
 if(RASPBERRY) # Disabled for Raspberry Pi targets
@@ -339,13 +339,14 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(rmlui-d3d11)
 	dk_disable(rtmidi)
 	dk_disable(sdl-gpu)
+	dk_disable(sdl_rtf)
 	dk_disable(stackwalker)
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(tiff)
 	dk_disable(upx)
 	dk_disable(uwebsockets)			# broken
 	dk_disable(waave)
-endif()
+endif(RASPBERRY)
 
 
 if(ANDROID) # Disabled for Android targets
@@ -434,8 +435,8 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(waave)
 	dk_disable(x264)
 	dk_disable(x265)
-endif()
+endif(ANDROID)
 
 if(ANDROID_64) # Disabled for Android 64bit targets
 	dk_disable(boost)
-endif()
+endif(ANDROID_64)
