@@ -430,12 +430,15 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(rtaudio)				# build errors
 	dk_disable(rtmidi)				# ALSA API requested but no ALSA dev libraries found
 	dk_disable(sdl-gpu)				# The target "SDL_gpu" does not exist in the project
+	dk_disable(sdl_rtf)
 	dk_disable(sfml)				# Unsupported compiler
 	dk_disable(smpeg2)				# error : ISO C++17 does not allow 'register' storage class specifier
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(uwebsockets)			# Could NOT find OpenSSL
 	dk_disable(vorbis)				# configure: error: unrecognized option: `-DANDROID32'
-	dk_disable(waave)				#
+	dk_disable(waave)
+	dk_disable(x264)
+	dk_disable(x265)
 endif()
 
 if(ANDROID_64) # Disabled for Android 64bit targets
