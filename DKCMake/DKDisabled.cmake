@@ -366,6 +366,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(libwebsockets)		# compiling errors
 	dk_disable(libxml2)				# ../../configure: No such file or directory
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
+	dk_disable(ncurses)				# error: '..' is not recognized as an internal or external command
 	dk_disable(ogg)					# configure: error: unrecognized option: `-DANDROID32'
 	dk_disable(openal)				# The system cannot find the file specified
 	dk_disable(opencv)				# error : cannot use 'throw' with exceptions disabled
