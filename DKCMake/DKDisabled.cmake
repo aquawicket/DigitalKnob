@@ -264,6 +264,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(osgrmlui)
 	dk_disable(osgworks)			# error: osgUtil::Optimizer::MergeGeometryVisitor has no member named 'mergeGeode'
 	dk_disable(podofo)				# build errors
+	dk_disable(rmlui-d3d11)
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(uwebsockets)			# requires openssl
 	dk_disable(waave)
