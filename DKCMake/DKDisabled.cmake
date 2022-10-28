@@ -191,6 +191,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(libjpeg-turbo)		# CMake Error at CMakeLists.txt:60 (string): string no output variable specified
 	dk_disable(libmd)				# dk_getExtension Function invoked with incorrect arguments
 	dk_disable(libpng)				# no such sysroot directory: 'iphonesimulator'
+	dk_disable(libsndfile)
 	dk_disable(libtorrent)			# Could not find BOOST
 	dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
 	dk_disable(libwebp)				# TIFF is disabled when statically linking
