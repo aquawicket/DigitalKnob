@@ -63,6 +63,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(DKUpdate)			# build errors
 	dk_disable(DKVncClient)			# requires libvncserver
 	dk_disable(DKVncServer)			# requires libvncserver
+	dk_disable(dukluv)
 	dk_disable(bullet3)				# LINK ERROR: cannot open input file 'BulletInverseDynamicsUtils.lib'
 	dk_disable(giflib)
 	dk_disable(libcaca)				# no CMakeLists.txt
@@ -103,6 +104,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(DKVncClient)			# requires libvncserver
 	dk_disable(DKVncServer)			# requires libvncserver
 	dk_disable(dukluv)
+	dk_disable(ffmpeg)
 	dk_disable(flac)				# 'asm' undelcared identifier
 	dk_disable(imagemagick)			# no such file or directory: libimagemagik.a
 	dk_disable(leptonica)			# Build Failed: fhmtauto.o
