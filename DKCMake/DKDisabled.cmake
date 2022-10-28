@@ -251,7 +251,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(leptonica)			# build errors
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libexpat)
-	dk_disable(linsndfile)
+	dk_disable(libsndfile)
 	dk_disable(libtorrent)			# CMake Error: cannot find source file: deps/try_signal/try_singal.cpp
 	dk_disable(libxml2)				# Not such file or directory
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
@@ -312,7 +312,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libexpat)
 	dk_disable(libgtk-3-dev)		# unable to download package
-	dk_disable(linsndfile)
+	dk_disable(libsndfile)
 	dk_disable(libtorrent)			# Could not find BOOST
 	dk_disable(libwebp)
 	dk_disable(libxml2)

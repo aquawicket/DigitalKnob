@@ -11,7 +11,7 @@ dk_include			(${POCO}/${OS})
 WIN_dk_libDebug		(${POCO}/${OS}/lib/${DEBUG_DIR}/PocoFoundationmdd.lib)
 WIN_dk_libRelease	(${POCO}/${OS}/lib/${RELEASE_DIR}/PocoFoundationm.lib)
 UNIX_dk_libDebug	(${POCO}/${OS}/lib/${DEBUG_DIR}/libPocoFoundationd.a)
-UNIX_dk_libRelease	(${POCO}/${OS}/lib/${RELEASE_DIR}/linPocoFoundation.a)
+UNIX_dk_libRelease	(${POCO}/${OS}/lib/${RELEASE_DIR}/libPocoFoundation.a)
 
 
 ### GENERATE ###
