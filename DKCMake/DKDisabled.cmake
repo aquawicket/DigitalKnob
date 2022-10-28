@@ -209,6 +209,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(osgbullet)			# requires openscenegraph, bullet3
 	dk_disable(osgrmlui)			# requires openscenegraph
 	dk_disable(osgworks)			# requires openscenegraph
+	dk_disable(poco)
 	dk_disable(podofo)				# CMake errors
 	dk_disable(rtaudio)				# 'CoreAudio/AudioHardware.h' file not found
 	dk_disable(sdl-gpu)				# SDL2MAIN_LIBRARY is NOTFOUND
