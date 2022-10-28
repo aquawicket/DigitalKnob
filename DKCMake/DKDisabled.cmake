@@ -45,6 +45,7 @@ dk_disable(sw-client)				# DEPRECATED: requested by leptonica but not required
 
 if(WIN) # Disabled for Windows targets
 	dk_disable(aom)					# Perl is required to build libaom.
+	dk_disable(aubio)	
 	dk_disable(diff-match-patch)
 	dk_disable(DKOcr)				# causing linking errors in tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
@@ -101,6 +102,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(DKUpdate)			# Error: 'boost/thread/xtime.hpp:24 expected identifier TIME_UTC_=1
 	dk_disable(DKVncClient)			# requires libvncserver
 	dk_disable(DKVncServer)			# requires libvncserver
+	dk_disable(dukluv)
 	dk_disable(flac)				# 'asm' undelcared identifier
 	dk_disable(imagemagick)			# no such file or directory: libimagemagik.a
 	dk_disable(leptonica)			# Build Failed: fhmtauto.o
