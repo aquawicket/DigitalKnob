@@ -133,6 +133,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(rmlui-d3d11)
 	dk_disable(rtmidi)				# Undefined symbols for architecture x86_64
 	dk_disable(sdl-gpu)				# SDL for MAC OS X only supports deploying on 10.7 and above
+	dk_disable(sdl_rtf)
 	dk_disable(smpeg2)				# ** BUILD FAILED ** MPEGstream.cpp
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(waave)				# error: streaming_objet.h:59 field has incomplete type 'enum PixelFormat'
@@ -277,6 +278,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(osgworks)			# error: osgUtil::Optimizer::MergeGeometryVisitor has no member named 'mergeGeode'
 	dk_disable(podofo)				# build errors
 	dk_disable(rmlui-d3d11)
+	dk_disable(sdl_rtf)
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(uwebsockets)			# requires openssl
 	dk_disable(waave)
