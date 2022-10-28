@@ -45,7 +45,8 @@ dk_disable(sw-client)				# DEPRECATED: requested by leptonica but not required
 
 if(WIN) # Disabled for Windows targets
 	dk_disable(aom)					# Perl is required to build libaom.
-	dk_disable(aubio)	
+	dk_disable(aubio)
+	dk_disable(bullet3)				# LINK ERROR: cannot open input file 'BulletInverseDynamicsUtils.lib'	
 	dk_disable(diff-match-patch)
 	dk_disable(DKOcr)				# causing linking errors in tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
@@ -64,7 +65,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(DKVncClient)			# requires libvncserver
 	dk_disable(DKVncServer)			# requires libvncserver
 	dk_disable(dukluv)
-	dk_disable(bullet3)				# LINK ERROR: cannot open input file 'BulletInverseDynamicsUtils.lib'
+	dk_disable(ffmpeg)
 	dk_disable(giflib)
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libtorrent)			# CMAKE ERROR:  No SOURCES given to target: torrent-rasterbar
@@ -109,6 +110,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(imagemagick)			# no such file or directory: libimagemagik.a
 	dk_disable(leptonica)			# Build Failed: fhmtauto.o
 	dk_disable(libcaca)				# no CMakeLists.txt
+	dk_disable(libexpat)
 	dk_disable(libtorrent)			# CMake Error: cannot find deps/try_signal/try_signal.cpp
 	dk_disable(libvncserver)		# build errors in main.c
 	dk_disable(libwebsockets)		# error: unknown type name 'lws_mutex_t'
@@ -255,6 +257,7 @@ endif()
 
 if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(aom)
+	dk_disable(aubio)
 	dk_disable(boxer)				# fatal error : 'boxer/boxer.h' file not found	
 	dk_disable(DKHook)				# 'read' was not declared in this scope
 	dk_disable(DKJerryscript)		# requires jerryscript
