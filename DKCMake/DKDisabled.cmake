@@ -67,6 +67,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(dukluv)
 	dk_disable(ffmpeg)
 	dk_disable(giflib)
+	dk_disable(jasper)
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libtorrent)			# CMAKE ERROR:  No SOURCES given to target: torrent-rasterbar
 	dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
@@ -121,6 +122,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(openframeworks)		# fatal error: /utils/ofConstants.h:183     'GL/glew.h' file not found
 	dk_disable(osgbullet)			# requires bullet3
 	dk_disable(osgaudio)			# opengl identifier errors
+	dk_disable(osgrmlui)
 	dk_disable(osgworks)			# Error: 'osgworks-master/src/osgwTools/GeometeryModifier.cpp:64' no member named 'mergeGeode'
 	dk_disable(podofo)				# error: expected ';' at end of declaration
 	dk_disable(rtmidi)				# Undefined symbols for architecture x86_64
