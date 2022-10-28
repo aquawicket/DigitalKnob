@@ -69,6 +69,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(giflib)
 	dk_disable(jasper)
 	dk_disable(libcaca)				# no CMakeLists.txt
+	dk_disable(libexpat)
 	dk_disable(libtorrent)			# CMAKE ERROR:  No SOURCES given to target: torrent-rasterbar
 	dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
@@ -291,6 +292,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(DKVncClient)			# requires libvncserver
 	dk_disable(DKVncServer)			# requires libvncserver
 	dk_disable(DKWebSockets)		# requires openssl
+	dk_disable(dukluv)
 	dk_disable(emsdk)				# 64bit source only
 	dk_disable(freealut)			# no rule to make 'alut_static'
 	dk_disable(java)
