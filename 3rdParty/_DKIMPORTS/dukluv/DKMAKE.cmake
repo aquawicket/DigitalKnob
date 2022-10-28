@@ -1,9 +1,25 @@
 # https://github.com/creationix/dukluv.git
 # https://github.com/creationix/dukluv/archive/f02103bcadd5a5b9280b7a07064649d0a465f70c.zip
 
+
 ### IMPORT ###
 #dk_import(https://github.com/creationix/dukluv/archive/f02103bcadd5a5b9280b7a07064649d0a465f70c.zip)
 dk_import(https://github.com/creationix/dukluv.git)
 
 
-# TODO
+### LINK ###
+dk_include			(${DUKLUV}/include)
+dk_include			(${DUKLUV}/${OS})
+WIN_dk_libDebug		(${DUKLUV}/${OS}/${DEBUG_DIR}/dukluv.lib)
+WIN_dk_libRelease	(${DUKLUV}/${OS}/${RELEASE_DIR}/dukluv.lib)
+UNIX_dk_libDebug	(${DUKLUV}/${OS}/${DEBUG_DIR}/libdukluv.a)
+UNIX_dk_libRelease	(${DUKLUV}/${OS}/${RELEASE_DIR}/libdukluv.a)
+
+
+### GENERATE ###
+dk_setPath(${DUKLUV}/${BUILD_DIR})
+dk_queueCommand(${DKCMAKE_BUILD} ${DUKLUV})
+
+
+### COMPILE ###
+dk_build(${DUKLUV_FOLDER})

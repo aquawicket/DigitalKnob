@@ -1,4 +1,4 @@
-# https://bitbucket.org/multicoreware/x265_git
+# https://bitbucket.org/multicoreware/x265_git.git
 
 
 ### IMPORT ###
@@ -6,21 +6,18 @@ dk_import(https://bitbucket.org/multicoreware/x265_git.git)
 
 
 ### LINK ###
-dk_include(${X265})
-# TODO
+dk_include			(${X265}/include)
+dk_include			(${X265}/${OS})
+WIN_dk_libDebug		(${X265}/${OS}/${DEBUG_DIR}/x265.lib)
+WIN_dk_libRelease	(${X265}/${OS}/${RELEASE_DIR}/x265.lib)
+UNIX_dk_libDebug	(${X265}/${OS}/${DEBUG_DIR}/libx265.a)
+UNIX_dk_libRelease	(${X265}/${OS}/${RELEASE_DIR}/libx265.a)
 
 
-### GENERATE / COMPILE ###
-WIN_DEBUG_dk_setPath	(${X265}/${OS}/${DEBUG_DIR})
-WIN_DEBUG_dk_msys		(${DKCONFIGURE_BUILD})
-WIN_DEBUG_dk_msys		(make)
-WIN_RELEASE_dk_setPath	(${X265}/${OS}/${RELEASE_DIR})
-WIN_RELEASE_dk_msys		(${DKCONFIGURE_BUILD})
-WIN_RELEASE_dk_msys		(make)
+### GENERATE ###
+dk_setPath(${X265}/${BUILD_DIR})
+dk_queueCommand(${DKCMAKE_BUILD} ${X265})
 
-UNIX_DEBUG_dk_setPath		(${X265}/${OS}/${DEBUG_DIR})
-UNIX_DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
-UNIX_DEBUG_dk_queueCommand	(make)
-UNIX_RELEASE_dk_setPath		(${X265}/${OS}/${RELEASE_DIR})
-UNIX_RELEASE_dk_queueCommand(${DKCONFIGURE_BUILD})
-UNIX_RELEASE_dk_queueCommand(make)
+
+### COMPILE ###
+dk_build(${X265_FOLDER})

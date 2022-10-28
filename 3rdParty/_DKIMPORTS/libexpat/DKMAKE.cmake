@@ -1,6 +1,24 @@
-# https://github.com/libexpat/libexpat
+# https://github.com/libexpat/libexpat.git
 
 
-#dk_import(https://github.com/libexpat/libexpat)
-dk_import(https://github.com/libexpat/libexpat/archive/f1a444ef64680ebd4ff89091a2c388cd046ece2d.zip)
-# TODO
+### IMPORT ###
+#dk_import(https://github.com/libexpat/libexpat/archive/f1a444ef64680ebd4ff89091a2c388cd046ece2d.zip)
+dk_import(https://github.com/libexpat/libexpat.git)
+
+
+### LINK ###
+dk_include			(${LIBEXPAT}/include)
+dk_include			(${LIBEXPAT}/${OS})
+WIN_dk_libDebug		(${LIBEXPAT}/${OS}/${DEBUG_DIR}/libexpat.lib)
+WIN_dk_libRelease	(${LIBEXPAT}/${OS}/${RELEASE_DIR}/libexpat.lib)
+UNIX_dk_libDebug	(${LIBEXPAT}/${OS}/${DEBUG_DIR}/libexpat.a)
+UNIX_dk_libRelease	(${LIBEXPAT}/${OS}/${RELEASE_DIR}/libexpat.a)
+
+
+### GENERATE ###
+dk_setPath(${LIBEXPAT}/${BUILD_DIR})
+dk_queueCommand(${DKCMAKE_BUILD} ${LIBEXPAT})
+
+
+### COMPILE ###
+dk_build(${LIBEXPAT_FOLDER})

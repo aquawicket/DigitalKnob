@@ -1,4 +1,5 @@
-# https://github.com/aaronmjacobs/Boxer
+# https://github.com/aaronmjacobs/Boxer.git
+
 
 ### OS CHECK ###
 RASPBERRY_dk_return()
