@@ -220,6 +220,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(tiff)				# install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executable target "fax2ps"
 	dk_disable(waave)				# ** BUILD FAILED ** src/audio_decoder.c
 	dk_disable(x264)
+	dk_disable(x265)
 endif()
 
 
