@@ -1,4 +1,5 @@
-# https://github.com/grimfang4/sdl-gpu
+# https://github.com/grimfang4/sdl-gpu.git
+# https://github.com/grimfang4/sdl-gpu/issues/77   rmlui with sdl-gpu
 
 
 ### DEPEND ###

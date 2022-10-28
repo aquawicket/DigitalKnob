@@ -50,7 +50,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(diff-match-patch)
 	dk_disable(DKOcr)				# causing linking errors in tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
-	dk_disable(DKOSGAudio)			# requires openscenegraph, freealut
+	dk_disable(DKOSGAudio)			# requires freealut
 	dk_disable(DKOSGCef)			# build errors
 	dk_disable(DKOSGPhysics)		# 'btBulletDynamicsCommon.h' file not found
 	dk_disable(DKOSGStats)			# build errors
