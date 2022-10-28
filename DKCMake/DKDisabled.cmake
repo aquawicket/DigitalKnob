@@ -346,6 +346,8 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(upx)
 	dk_disable(uwebsockets)			# broken
 	dk_disable(waave)
+	dk_disable(x264)
+	dk_disable(x265)
 endif(RASPBERRY)
 
 
