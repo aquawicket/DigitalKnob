@@ -24,7 +24,7 @@
 include_guard()
 
 
-# DISABLED FOR ALL - TODO: move these into the select OS targets below	
+# DISABLED FOR ALL	
 dk_disable(DKPlugin1)				# TODO
 dk_disable(DKPlugin2)				# TODO
 dk_disable(gradle)					# We don't need to build this from source
@@ -79,6 +79,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(osgrmlui)
 	dk_disable(osgworks)			# requires openscenegraph
 	dk_disable(rmlui-d3d11)
+	dk_disable(sdl_rtf)
 	dk_disable(waave)				# error C2065: 'PIX_FMT_YUV420P': undeclared identifier.  https://sourceforge.net/p/guvcview/tickets/34/
 	dk_disable(x264)
 	dk_disable(x265)
@@ -236,19 +237,10 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKOFWindow)			# requires openframeworks
 	dk_disable(DKOSGAudio)			# requires freealut
 	dk_disable(DKOSGCef)			# build errors
-	#dk_disable(DKOSGLights)			# requires openscenegraph
-	#dk_disable(DKOSGManipulator)	# requires openscenegraph
-	#dk_disable(DKOSGModel)			# requires openscenegraph
-	#dk_disable(DKOSGNotify)			# requires openscenegraph
 	dk_disable(DKOSGPhysics)		# requires bullet3
-	#dk_disable(DKOSGPicker)			# requires openscenegraph
-	#dk_disable(DKOSGRml)			# requires openscenegraph
 	dk_disable(DKOSGStats)			# build errors
-	#dk_disable(DKOSGTerrain)		# requires openscenegraph
 	dk_disable(DKOSGVideo)			# TODO
-	#dk_disable(DKOSGViewer)			# requires openscenegraph 
 	dk_disable(DKOSGWidget)			# build errors
-	#dk_disable(DKOSGWindow)			# requires openscenegraph 
 	dk_disable(DKScreenRecorder)
 	dk_disable(DKSDLVideo)			# requires waave
 	dk_disable(DKSDLWav)			# build errors
@@ -271,7 +263,6 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(libxml2)				# Not such file or directory
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(openframeworks)		# error: tesselator.h: No such file or directory
-	#dk_disable(openscenegraph)		# error: undefined reference to symbol 'XineramaIsActive'
 	dk_disable(openssl)				# compiling errors
 	dk_disable(osgaudio)			# requires freealut
 	dk_disable(osgbullet)			# CMake Error: Could NOT find Bullet
