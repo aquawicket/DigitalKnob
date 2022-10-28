@@ -3,7 +3,7 @@
 
 ### DEPEND ###
 # some depends are located further below for individual osg plugins
-dk_depend(libx11-dev)
+#dk_depend(libx11-dev)
 dk_depend(libxml2)
 dk_depend(msinttypes)
 dk_depend(opengl)
@@ -42,7 +42,7 @@ if(ALL_LIBS)
 	dk_enable(osgAnimation)
 	dk_enable(osgDB)
 	dk_enable(osgFX)
-	dk_enable(osgGA)					# broken on WINDOWS
+	dk_enable(osgGA)
 	dk_enable(osgManipulator)
 	dk_enable(osgParticle)
 	dk_enable(osgPresentation)

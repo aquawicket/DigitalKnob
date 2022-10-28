@@ -234,19 +234,19 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKOFWindow)			# requires openframeworks
 	dk_disable(DKOSGAudio)			# requires freealut
 	dk_disable(DKOSGCef)			# build errors
-	dk_disable(DKOSGLights)			# requires openscenegraph
-	dk_disable(DKOSGManipulator)	# requires openscenegraph
-	dk_disable(DKOSGModel)			# requires openscenegraph
-	dk_disable(DKOSGNotify)			# requires openscenegraph
+	#dk_disable(DKOSGLights)			# requires openscenegraph
+	#dk_disable(DKOSGManipulator)	# requires openscenegraph
+	#dk_disable(DKOSGModel)			# requires openscenegraph
+	#dk_disable(DKOSGNotify)			# requires openscenegraph
 	dk_disable(DKOSGPhysics)		# requires bullet3
-	dk_disable(DKOSGPicker)			# requires openscenegraph
-	dk_disable(DKOSGRml)			# requires openscenegraph
+	#dk_disable(DKOSGPicker)			# requires openscenegraph
+	#dk_disable(DKOSGRml)			# requires openscenegraph
 	dk_disable(DKOSGStats)			# build errors
-	dk_disable(DKOSGTerrain)		# requires openscenegraph
+	#dk_disable(DKOSGTerrain)		# requires openscenegraph
 	dk_disable(DKOSGVideo)			# TODO
-	dk_disable(DKOSGViewer)			# requires openscenegraph 
+	#dk_disable(DKOSGViewer)			# requires openscenegraph 
 	dk_disable(DKOSGWidget)			# build errors
-	dk_disable(DKOSGWindow)			# requires openscenegraph 
+	#dk_disable(DKOSGWindow)			# requires openscenegraph 
 	dk_disable(DKScreenRecorder)
 	dk_disable(DKSDLVideo)			# requires waave
 	dk_disable(DKSDLWav)			# build errors
@@ -404,6 +404,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(imagemagick)			# dkscript.tmp: line 2: cd: /android32/Debug: No such file or directory
 	dk_disable(jasper)
 	dk_disable(libcaca)				# no CMakeLists.txt
+	dk_disable(libexpat)
 	dk_disable(libtorrent)			# Could not find BOOST
 	dk_disable(libuv)				# error : incomplete definition of type 'struct ifaddrs'
 	dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
@@ -419,6 +420,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(openssl)				# Perl v5.10.0 required
 	dk_disable(osgaudio)			# requires openscenegraph
 	dk_disable(osgbullet)			# CMake Error: Could NOT find Bullet
+	dk_disable(osgrmlui)
 	dk_disable(osgworks)			# requires openscenegraph
 	dk_disable(podofo)				# error : cannot use 'throw' with exceptions disabled
 	dk_disable(rtaudio)				# build errors
