@@ -12,7 +12,7 @@ dk_depend(sdl)
 ### IMPORT ###
 dk_import(https://github.com/libsdl-org/SDL_ttf/archive/455d885c33dd26a21486bc2a2ede51aca4541679.zip PATCH)
 #dk_import(https://github.com/libsdl-org/SDL_ttf/archive/06f1158066a5556f074fe020e407e6efcc9ff8e1.zip PATCH)
-#dk_import(https://github.com/libsdl-org/SDL_ttf.git main PATCH)
+#dk_import(https://github.com/libsdl-org/SDL_ttf.git BRANCH main PATCH)
 
 
 ### LINK ###
