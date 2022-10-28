@@ -397,6 +397,8 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(DKVncServer)			# requires libvncserver
 	dk_disable(DKWebSockets)		# requires libwebsockets or uwebsockets
 	dk_disable(DKWebview)			# compiling errors
+	dk_disable(dukluv)
+	dk_disable(ffmpeg)
 	dk_disable(flac)				# configure: error: unrecognized option: `-DANDROID32'
 	dk_disable(freealut)			# DKFunctions.cmake:4405->dk_findFiles():  files is invalid
 	dk_disable(imagemagick)			# dkscript.tmp: line 2: cd: /android32/Debug: No such file or directory
