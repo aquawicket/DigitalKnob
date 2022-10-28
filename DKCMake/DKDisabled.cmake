@@ -296,6 +296,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(DKWebSockets)		# requires openssl
 	dk_disable(dukluv)
 	dk_disable(emsdk)				# 64bit source only
+	dk_disable(ffmpeg)
 	dk_disable(freealut)			# no rule to make 'alut_static'
 	dk_disable(java)
 	dk_disable(kdevelop)
