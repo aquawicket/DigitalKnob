@@ -334,6 +334,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(opus)
 	dk_disable(osgaudio)			# requires openscenegraph
 	dk_disable(osgbullet)			# CMake Error: Could NOT find Bullet
+	dk_disable(osgrmlui)
 	dk_disable(osgworks)			# requires openscenegraph
 	dk_disable(rtmidi)
 	dk_disable(sdl-gpu)
