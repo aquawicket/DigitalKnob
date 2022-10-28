@@ -422,6 +422,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(osgbullet)			# CMake Error: Could NOT find Bullet
 	dk_disable(osgrmlui)
 	dk_disable(osgworks)			# requires openscenegraph
+	dk_disable(poco)				# error: Compiler does not support C++14
 	dk_disable(podofo)				# error : cannot use 'throw' with exceptions disabled
 	dk_disable(rtaudio)				# build errors
 	dk_disable(rtmidi)				# ALSA API requested but no ALSA dev libraries found

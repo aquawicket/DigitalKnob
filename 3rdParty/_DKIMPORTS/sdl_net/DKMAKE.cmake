@@ -6,7 +6,7 @@ dk_depend(sdl)
 
 
 ### IMPORT ###
-dk_import(https://github.com/libsdl-org/SDL_net.git)
+dk_import(https://github.com/libsdl-org/SDL_net.git BRANCH main)
 
 
 ### LINK ###
