@@ -306,6 +306,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libexpat)
 	dk_disable(libgtk-3-dev)		# unable to download package
+	dk_disable(linsndfile)
 	dk_disable(libtorrent)			# Could not find BOOST
 	dk_disable(libwebp)
 	dk_disable(libxml2)
