@@ -1,6 +1,10 @@
 # https://github.com/libsdl-org/SDL_net.git
 
 
+### DEPEND ###
+dk_depend(sdl)
+
+
 ### IMPORT ###
 dk_import(https://github.com/libsdl-org/SDL_net.git)
 
@@ -23,7 +27,7 @@ ANDROID_dk_libRelease	(${SDL_NET}/${OS}/lib/${RELEASE_DIR}/SDL_net.a)
 
 ### GENERATE ###
 dk_setPath		(${SDL_NET}/${BUILD_DIR})
-dk_queueCommand	(${DKCMAKE_BUILD} ${FREETYPE_CMAKE} ${LIBWEBP_CMAKE} ${SDL_CMAKE} ${SDL_NET})
+dk_queueCommand	(${DKCMAKE_BUILD} ${SDL_CMAKE} ${SDL_NET})
 
 
 ### COMPILE ###
