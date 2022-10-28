@@ -95,9 +95,9 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(bullet3)				# library not found for -lBulletInverseDynamicsUtils
 	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
-	dk_disable(DKOSGAudio)			# requires openscenegraph, freealut
+	dk_disable(DKOSGAudio)			# requires freealut
 	dk_disable(DKOSGCef)			# build errors
-	dk_disable(DKOSGPhysics)		# 'btBulletDynamicsCommon.h' file not found
+	dk_disable(DKOSGPhysics)		# requires bullet3
 	dk_disable(DKOSGStats)			# build errors
 	dk_disable(DKOSGVideo)			# TODO
 	dk_disable(DKOSGWidget)			# build errors
@@ -219,6 +219,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(tiff)				# install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executable target "fax2ps"
 	dk_disable(waave)				# ** BUILD FAILED ** src/audio_decoder.c
+	dk_disable(x264)
 endif()
 
 
@@ -230,21 +231,21 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKJerryscript)		# requires jerryscript
 	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
-	dk_disable(DKOSGAudio)			# requires openscenegraph
-	dk_disable(DKOSGCef)			# requires openscenegraph
-	dk_disable(DKOSGLights)			# requires openscenegraph
-	dk_disable(DKOSGManipulator)	# requires openscenegraph
-	dk_disable(DKOSGModel)			# requires openscenegraph
-	dk_disable(DKOSGNotify)			# requires openscenegraph
-	dk_disable(DKOSGPhysics)		# requires openscenegraph
-	dk_disable(DKOSGPicker)			# requires openscenegraph
-	dk_disable(DKOSGRml)			# requires openscenegraph
-	dk_disable(DKOSGStats)			# requires openscenegraph
-	dk_disable(DKOSGTerrain)		# requires openscenegraph
-	dk_disable(DKOSGVideo)			# requires openscenegraph
-	dk_disable(DKOSGViewer)			# requires openscenegraph 
-	dk_disable(DKOSGWidget)			# requires openscenegraph 
-	dk_disable(DKOSGWindow)			# requires openscenegraph 
+	dk_disable(DKOSGAudio)			# requires freealut
+	dk_disable(DKOSGCef)			# build errors
+	#dk_disable(DKOSGLights)		# requires openscenegraph
+	#dk_disable(DKOSGManipulator)	# requires openscenegraph
+	#dk_disable(DKOSGModel)			# requires openscenegraph
+	#dk_disable(DKOSGNotify)		# requires openscenegraph
+	dk_disable(DKOSGPhysics)		# requires bullet3
+	#dk_disable(DKOSGPicker)		# requires openscenegraph
+	#dk_disable(DKOSGRml)			# requires openscenegraph
+	dk_disable(DKOSGStats)			# build errors
+	#dk_disable(DKOSGTerrain)		# requires openscenegraph
+	dk_disable(DKOSGVideo)			# TODO
+	#dk_disable(DKOSGViewer)		# requires openscenegraph 
+	dk_disable(DKOSGWidget)			# build errors
+	#dk_disable(DKOSGWindow)		# requires openscenegraph 
 	dk_disable(DKScreenRecorder)
 	dk_disable(DKSDLVideo)			# requires waave
 	dk_disable(DKSDLWav)			# build errors
@@ -292,21 +293,21 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(DKMidi)				# requires rtmidi
 	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
-	dk_disable(DKOSGAudio)			# requires openscenegraph
-	dk_disable(DKOSGCef)			# requires openscenegraph
-	dk_disable(DKOSGLights)			# requires openscenegraph
-	dk_disable(DKOSGManipulator)	# requires openscenegraph
-	dk_disable(DKOSGModel)			# requires openscenegraph
-	dk_disable(DKOSGNotify)			# requires openscenegraph
-	dk_disable(DKOSGPhysics)		# requires openscenegraph
-	dk_disable(DKOSGPicker)			# requires openscenegraph
-	dk_disable(DKOSGRml)			# requires openscenegraph
-	dk_disable(DKOSGStats)			# requires openscenegraph
-	dk_disable(DKOSGTerrain)		# requires openscenegraph
-	dk_disable(DKOSGVideo)			# requires openscenegraph
-	dk_disable(DKOSGViewer)			# requires openscenegraph 
-	dk_disable(DKOSGWidget)			# requires openscenegraph 
-	dk_disable(DKOSGWindow)			# requires openscenegraph 
+	dk_disable(DKOSGAudio)			# requires freealut
+	dk_disable(DKOSGCef)			# build errors
+	#dk_disable(DKOSGLights)		# requires openscenegraph
+	#dk_disable(DKOSGManipulator)	# requires openscenegraph
+	#dk_disable(DKOSGModel)			# requires openscenegraph
+	#dk_disable(DKOSGNotify)		# requires openscenegraph
+	dk_disable(DKOSGPhysics)		# requires bullet3
+	#dk_disable(DKOSGPicker)		# requires openscenegraph
+	#dk_disable(DKOSGRml)			# requires openscenegraph
+	dk_disable(DKOSGStats)			# build errors
+	#dk_disable(DKOSGTerrain)		# requires openscenegraph
+	dk_disable(DKOSGVideo)			# TODO
+	#dk_disable(DKOSGViewer)		# requires openscenegraph 
+	dk_disable(DKOSGWidget)			# build errors
+	#dk_disable(DKOSGWindow)		# requires openscenegraph  
 	dk_disable(DKScreenRecorder)	# requires opencv
 	dk_disable(DKSDLVideo)			# requires ffmpeg
 	dk_disable(DKSDLWav)			# build errors
