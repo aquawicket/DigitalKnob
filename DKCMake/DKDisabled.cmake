@@ -133,6 +133,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(smpeg2)				# ** BUILD FAILED ** MPEGstream.cpp
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(waave)				# error: streaming_objet.h:59 field has incomplete type 'enum PixelFormat'
+	dk_disable(x264)
 endif()
 
 if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
