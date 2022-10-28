@@ -80,6 +80,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(osgworks)			# requires openscenegraph
 	dk_disable(rmlui-d3d11)
 	dk_disable(waave)				# error C2065: 'PIX_FMT_YUV420P': undeclared identifier.  https://sourceforge.net/p/guvcview/tickets/34/
+	dk_disable(x264)
 endif()
 
 if(WIN_64) # Disabled for Windows 64bit targets
@@ -180,6 +181,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(dukluv)
 	dk_disable(ffmpeg)
 	dk_disable(imagemagick)			# No such file or directory
+	dk_disable(jasper)
 	dk_disable(jerryscript)			# Error: unknown linker option '-z'
 	dk_disable(leptonica)			# Build Failed: fhmtauto.o
 	dk_disable(libcaca)				# no CMakeLists.txt
@@ -271,6 +273,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(uwebsockets)			# requires openssl
 	dk_disable(waave)
 	dk_disable(x264)
+	dk_disable(x265)
 endif()
 
 
