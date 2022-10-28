@@ -215,6 +215,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(rmlui-d3d11)
 	dk_disable(rtaudio)				# 'CoreAudio/AudioHardware.h' file not found
 	dk_disable(sdl-gpu)				# SDL2MAIN_LIBRARY is NOTFOUND
+	dk_disable(sdl_rtf)
 	dk_disable(sfml)				# Unknown CMake command "find_host_package"
 	dk_disable(smpeg2)				# ** BUILD FAILED ** MPEGstream.cpp
 	dk_disable(tesseract)			# requires leptonica
