@@ -206,7 +206,8 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(openscenegraph)		# CMake errors
 	dk_disable(opensles)			# could not locate OpenSLES Library
 	dk_disable(osgaudio)			# requires openscenegraph
-	dk_disable(osgbullet)			# CMake Error: Could NOT find Bullet
+	dk_disable(osgbullet)			# requires openscenegraph, bullet3
+	dk_disable(osgrmlui)			# requires openscenegraph
 	dk_disable(osgworks)			# requires openscenegraph
 	dk_disable(podofo)				# CMake errors
 	dk_disable(rtaudio)				# 'CoreAudio/AudioHardware.h' file not found
