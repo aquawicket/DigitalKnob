@@ -424,6 +424,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(osgworks)			# requires openscenegraph
 	dk_disable(poco)				# error: Compiler does not support C++14
 	dk_disable(podofo)				# error : cannot use 'throw' with exceptions disabled
+	dk_disable(rmlui-d3d11)
 	dk_disable(rtaudio)				# build errors
 	dk_disable(rtmidi)				# ALSA API requested but no ALSA dev libraries found
 	dk_disable(sdl-gpu)				# The target "SDL_gpu" does not exist in the project

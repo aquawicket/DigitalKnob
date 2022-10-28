@@ -6,7 +6,7 @@ dk_depend(sdl)
 
 
 ### IMPORT ###
-dk_import(https://github.com/libsdl-org/SDL_rtf.git)
+dk_import(https://github.com/libsdl-org/SDL_rtf.git BRANCH main)
 
 
 ### LINK ###
@@ -31,4 +31,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${SDL_CMAKE} ${SDL_RTF})
 
 
 ### COMPILE ###
-dk_build(${SDL_RTF_FOLDER} SDLRTF)
+dk_build(${SDL_RTF_FOLDER})
