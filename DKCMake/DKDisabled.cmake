@@ -319,6 +319,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(freealut)			# no rule to make 'alut_static'
 	dk_disable(imagemagick)
 	dk_disable(java)
+	dk_disable(jerryscript)
 	dk_disable(kdevelop)
 	dk_disable(openjdk)
 	dk_disable(libcaca)				# no CMakeLists.txt
