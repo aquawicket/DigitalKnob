@@ -3749,9 +3749,11 @@ endfunction()
 #
 #	TODO
 #
-#	@url	- TODO
+#	@url			- The git url to clone
+# 	BRANCH @branch	- OPTIONAL: The branch name to checkout
+#   ID @id			- OPTIONAL: The commit-id to checkout
 #
-function(dk_importGit url) #branch #PATCH
+function(dk_importGit url) #branch #id #PATCH
 	DKDEBUGFUNC(${ARGV})
 	string(REPLACE "/" ";" url_list ${url})  #split url path into list
 	foreach(item ${url_list})
@@ -3865,7 +3867,7 @@ function(dk_importGit url) #branch #PATCH
 	endif()
 	dk_set(CURRENT_DIR ${${LIBVAR}})
 	dk_command(${GIT_EXE} checkout -- .)
-	dk_command(${GIT_EXE} checkout ${branch})
+	dk_command(${GIT_EXE} checkout ${branch} ${id})
 	dk_command(${GIT_EXE} pull)
 	
 	#set(arg_list "${ARGN}")
@@ -4054,7 +4056,8 @@ function(dk_import url)
 	dk_verbose("[${plugin_var}_VERSION] =		${${plugin_var}_VERSION}")
 	dk_verbose("[${plugin_var}_FOLDER] =		${${plugin_var}_FOLDER}")
 	dk_verbose("[${plugin_var}_BRANCH] =		${${plugin_var}_BRANCH}")
-
+	dk_verbose("[${plugin_var}_TAG] =			${${plugin_var}_TAG}")
+	
 	### .git
 	dk_getExtension(${url} extension)
 	if("${extension}" STREQUAL ".git")
@@ -4079,8 +4082,8 @@ function(dk_import url)
 		dk_install(${plugin} ${ARGN})
 	endif()
 	
-	dk_includes("${ARGN}" "PATCH" includes)
-	if(${includes})
+	dk_includes("${ARGN}" "PATCH" has_patch)
+	if(${has_patch})
 		dk_patch(${plugin} ${${plugin_var}})
 	endif()
 endfunction()

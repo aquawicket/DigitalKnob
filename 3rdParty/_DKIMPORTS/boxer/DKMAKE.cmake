@@ -12,7 +12,7 @@ dk_depend(libgtk-3-dev)
 
 
 ### IMPORT ###
-dk_import(https://github.com/aaronmjacobs/Boxer.git)
+dk_import(https://github.com/aaronmjacobs/Boxer.git BRANCE master TAG 8356d21b38f189a3e72ae50d1255e9e863a0e42b)
 
 
 ### LINK ###
