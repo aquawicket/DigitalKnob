@@ -51,8 +51,8 @@ dk_depend(libjpeg-turbo)
 
 
 ### IMPORT ###
-dk_import(https://github.com/SFML/SFML/archive/a733e4cd7e0056922e4f74f1932749b4d6a5744d.zip PATCH)
-#dk_import(https://github.com/SFML/SFML.git)
+#dk_import(https://github.com/SFML/SFML/archive/a733e4cd7e0056922e4f74f1932749b4d6a5744d.zip PATCH)
+dk_import(https://github.com/SFML/SFML.git PATCH)
 
 
 ### LINK ###

@@ -134,6 +134,8 @@ function DKBuild_DeleteTmpFiles(){
 	console.log("Deleting .TMP files . . .")
 	CPP_DKFile_ChDir(DIGITALKNOB)
 	if(CPP_DK_GetOS() === "Windows"){
+		// FIXME: this will also delete *.tmpl files, etc.
+		// 		  this should be reworked to ONLY delete matching .tmp files
 		CPP_DK_Execute("cmd /c for /r %i in (*.tmp) do del \"%i\"")
 		CPP_DK_Execute("cmd /c for /r %i in (*.TMP) do del \"%i\"")
 	}else{

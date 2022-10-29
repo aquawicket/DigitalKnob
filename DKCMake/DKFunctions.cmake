@@ -428,25 +428,32 @@ endfunction()
 
 
 ###############################################################################
-# dk_getParameter(name RESULT)
+# dk_getParameter(name RESULT ${ARGV})
 #
 #	get a parameter by name from within a function
 #
 #	@name		-The input MARKER name for the parameter
-#	@RESULT		-The value of the next parameter after the ID
+#	@RESULT		-The value of the next parameter after the MARKER
+#	${ARGV}		-The are list from the calling function
 #
 macro(dk_getParameter name RESULT)
 	#DKDEBUGFUNC(${ARGV})
-	set(index 1)
-	foreach(arg ${ARGV})
+	#dk_debug("ARGV = ${ARGV}")
+	#dk_debug("ARGN = ${ARGN}")
+	set(index 0)
+	foreach(arg ${ARGN})
+		#dk_debug("index = ${index}")
+		#dk_debug("arg = ${arg}")
+		#dk_debug("ARGV${index} = ${ARGV${index}}")
 		if("${ARGV${index}}" STREQUAL "${name}")
-			math(EXPR index ${index}+1)
-			dk_debug("ARGV${index} = ${ARGV${index}}")
-			dk_debug("name = ${name}")
-			set(${RESULT} ${ARGV${index}})
-			dk_debug(${${RESULT}})
+		#if("${arg}" STREQUAL "${name}")
+			math(EXPR value "${index}+1")
+			set(${RESULT} ${ARGV${value}})
+			#dk_debug("dk_getParameter(${name}) = ${${RESULT}}")
 		endif()
+		math(EXPR index "${index}+1")
 	endforeach()
+	#dk_debug("dk_getParameter(${name}) = ${${RESULT}}")
 endmacro()
 
 
@@ -4076,6 +4083,9 @@ function(dk_import url)
 		dk_command(${GIT_EXE} checkout -- .)
 		dk_command(${GIT_EXE} checkout ${${plugin_var}_BRANCH})
 		dk_command(${GIT_EXE} pull)
+		if(${plugin_var}_TAG)
+			dk_command(${GIT_EXE} checkout ${${plugin_var}_TAG})
+		endif()
 	### download
 	else()
 		dk_verbose("dk_install(${plugin} ${ARGN})")

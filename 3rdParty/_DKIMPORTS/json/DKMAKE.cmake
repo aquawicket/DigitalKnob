@@ -1,5 +1,4 @@
-# https://github.com/nlohmann/json
-# https://github.com/nlohmann/json/archive/refs/tags/v3.9.1.zip
+# https://github.com/nlohmann/json.git
 
 
 ### NOTES ###
@@ -8,7 +7,8 @@
 
 
 ### IMPORT ###
-dk_import(https://github.com/nlohmann/json/archive/d8a63291cbe50411a2c513d06f3ae7c8c1a43c33.zip)
+#dk_import(https://github.com/nlohmann/json/archive/d8a63291cbe50411a2c513d06f3ae7c8c1a43c33.zip)
+dk_import(https://github.com/nlohmann/json.git)
 
 
 ### LINK ###

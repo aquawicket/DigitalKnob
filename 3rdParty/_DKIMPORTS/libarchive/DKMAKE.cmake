@@ -14,8 +14,9 @@ dk_depend(cryptopp)
 WIN_dk_depend(openssl)
 
 
-dk_import(https://github.com/libarchive/libarchive/archive/93f03b0f5d7316714df9b289a49150ab7a63bfaf.zip PATCH)
-#dk_import(https://github.com/libarchive/libarchive.git BRANCH 93f03b0f5d7316714df9b289a49150ab7a63bfaf PATCH)
+#dk_import(https://github.com/libarchive/libarchive/archive/93f03b0f5d7316714df9b289a49150ab7a63bfaf.zip PATCH)
+#dk_import(https://github.com/libarchive/libarchive.git TAG 93f03b0f5d7316714df9b289a49150ab7a63bfaf PATCH)
+dk_import(https://github.com/libarchive/libarchive.git PATCH)
 
 
 ### LINK ###

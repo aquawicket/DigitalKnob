@@ -11,10 +11,11 @@ endif()
 
 ### IMPORT ###
 if(WIN)
-	dk_import(https://github.com/weidai11/cryptopp/archive/27b7b8e4e6b3e54cca13b2faae87eb95faa0d819.zip PATCH)
-	#dk_import(https://github.com/weidai11/cryptopp.git 27b7b8e4e6b3e54cca13b2faae87eb95faa0d819 PATCH)
+	#dk_import(https://github.com/weidai11/cryptopp/archive/27b7b8e4e6b3e54cca13b2faae87eb95faa0d819.zip PATCH)
+	dk_import(https://github.com/weidai11/cryptopp.git PATCH)
 else()
-	dk_import(https://github.com/weidai11/cryptopp/archive/refs/tags/CRYPTOPP_8_5_0.zip PATCH)
+	#dk_import(https://github.com/weidai11/cryptopp/archive/refs/tags/CRYPTOPP_8_5_0.zip PATCH)
+	dk_import(https://github.com/weidai11/cryptopp.git PATCH)
 endif()
 
 

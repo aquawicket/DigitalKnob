@@ -1,9 +1,10 @@
-# https://github.com/xz-mirror/xz
+# https://github.com/xz-mirror/xz.git
 # https://tukaani.org/xz/xz-5.2.5.tar.gz
 # https://github.com/xz-mirror/xz/archive/refs/tags/v5.2.5.zip
 
 
-dk_import(https://github.com/xz-mirror/xz/archive/20e7a33e2d59c6a814447d3991f21e2702174b20.zip)
+#dk_import(https://github.com/xz-mirror/xz/archive/20e7a33e2d59c6a814447d3991f21e2702174b20.zip)
+dk_import(https://github.com/xz-mirror/xz.git)
 
 
 ### autotools ###
