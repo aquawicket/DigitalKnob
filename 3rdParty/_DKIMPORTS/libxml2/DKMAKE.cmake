@@ -8,7 +8,8 @@ dk_depend(xz)
 
 
 #dk_import(https://github.com/GNOME/libxml2/archive/f2ad86fa600885429a6083aaf6926c7e2e5b24d6.zip PATCH)
-dk_import(https://github.com/GNOME/libxml2.git PATCH)
+dk_import(https://github.com/GNOME/libxml2.git TAG f2ad86fa600885429a6083aaf6926c7e2e5b24d6 PATCH)
+#dk_import(https://github.com/GNOME/libxml2.git PATCH)
 
 
 ### LINK ###
