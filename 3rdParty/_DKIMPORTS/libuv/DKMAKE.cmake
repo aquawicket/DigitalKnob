@@ -8,7 +8,8 @@ dk_depend(userenv.lib)
 
 ### IMPORT ###
 #dk_import(https://github.com/libuv/libuv/archive/2bc22c40eb68f3b38d1ae3ea68ef2f180cbe9fef.zip)
-dk_import(https://github.com/libuv/libuv.git)
+dk_import(https://github.com/libuv.git TAG 2bc22c40eb68f3b38d1ae3ea68ef2f180cbe9fef)
+#dk_import(https://github.com/libuv/libuv.git)
 
 
 ### LINK ###
