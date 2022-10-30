@@ -544,8 +544,7 @@ bool DKSDLWindow::SetIcon(const void* input, void* output) {
     SendMessage(hwnd, WM_SETICON, ICON_SMALL, (LPARAM)hIcon);
     return true;
 #else
-    DKWARN("not implemented on this OS\n");
-    return false;
+    return DKERROR("not implemented on this OS\n");
 #endif
 }
 
