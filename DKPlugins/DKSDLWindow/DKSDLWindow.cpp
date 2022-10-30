@@ -448,7 +448,7 @@ bool DKSDLWindow::GetPixelRatio(const void* input, void* output) {
 }
 
 bool DKSDLWindow::GetWidth(const void* input, void* output) {
-    DKDEBUGFUNC(input, output);
+    //DKDEBUGFUNC(input, output);
     int w;
     SDL_GetWindowSize(window, &w, NULL);
     if(w == 0)

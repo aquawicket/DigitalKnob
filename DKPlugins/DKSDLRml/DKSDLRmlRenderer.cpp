@@ -101,11 +101,10 @@ void DKSDLRmlRenderer::ReleaseCompiledGeometry(Rml::CompiledGeometryHandle geome
 // Called by RmlUi when it wants to enable or disable scissoring to clip content.		
 void DKSDLRmlRenderer::EnableScissorRegion(bool enable) {
     //DKDEBUGFUNC(enable);
-    if (enable) {
+    if (enable)
        SDL_RenderSetClipRect(mSdlRenderer, &mScisorRect);
-    } else {
+    else
         SDL_RenderSetClipRect(mSdlRenderer, NULL);
-    }
 }
 
 // Called by RmlUi when it wants to change the scissor region.		
