@@ -82,7 +82,7 @@ fail:
 }
 
 duk_int_t duk_peval_file(duk_context *ctx, const char *path) {
-	DKDEBUGFUNC(ctx, path);
+	//DKDEBUGFUNC(ctx, path);
 	duk_int_t rc;
 	duk_push_string_file_raw(ctx, path, DUK_STRING_PUSH_SAFE);
 	duk_push_string(ctx, path);
