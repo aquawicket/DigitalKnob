@@ -61,7 +61,7 @@ bool DKWindow::TestInt(int& input, int& output) {
 ///  If "DKWindow::TestString()" calls a registered function, it will alter the variable and send it back.
 ///  \a see: DKPlugins/DKSDLWindow.h
 bool DKWindow::TestString(DKString& input, DKString& output) {
-	DKDEBUGFUNC(input, output);
+	//DKDEBUGFUNC(input, output);
 	if(DKClass::HasFunc("DKSDLWindow::TestString"))
 		return DKClass::CallFunc("DKSDLWindow::TestString", &input, &output);
 	if(DKClass::HasFunc("DKSFMLWindow::TestString"))
