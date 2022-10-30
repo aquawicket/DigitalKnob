@@ -533,7 +533,7 @@ bool DKSDLWindow::SetHeight(const void* input, void* output) {
 }
 
 bool DKSDLWindow::SetIcon(const void* input, void* output) {
-    DKDEBUGFUNC(input, output);
+    //DKDEBUGFUNC(input, output);
 #ifdef WIN32
     DKString file = *(DKString*)input;
     SDL_SysWMinfo wmInfo;
