@@ -134,7 +134,7 @@ public:
 		for(unsigned int i=0; i<instances.size(); ++i){
 			if(same(id, instances[i]->data[1])){
 				if (instances[i]) {
-					DKDEBUGRETURN(id, true);
+					//DKDEBUGRETURN(id, true);
 					return true;
 				}
 			}
