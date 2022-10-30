@@ -691,7 +691,7 @@ bool DKFile::GetRelativePath(const DKString& file, const DKString& path, DKStrin
 }
 
 bool DKFile::GetSetting(const DKString& file, const DKString& setting, DKString& value){
-	DKDEBUGRETURN(file, setting, value);
+	DKDEBUGFUNC(file, setting, value);
 	DebugPath(file);
 	DKString path = file;
 	replace(path, "file:///", "");
