@@ -342,7 +342,7 @@ bool DKSDLWindow::End() {
 }
 
 bool DKSDLWindow::TestInt(const void* input, void* output) {
-    DKDEBUGFUNC(input, output);
+    //DKDEBUGFUNC(input, output);
     int in = *(int*)input;
     int out = in;
     *(int*)output = out;
