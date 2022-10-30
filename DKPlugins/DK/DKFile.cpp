@@ -266,7 +266,7 @@ bool DKFile::GetAppName(DKString& appname){
 	DKFile::GetExeName(appname);
 	replace(appname, ".exe", "");
 	DebugPath(appname);
-	return true && DKDEBUGRETURN(appname);
+	return true;//&& DKDEBUGRETURN(appname);
 }
 
 bool DKFile::GetAppPath(DKString& apppath){
