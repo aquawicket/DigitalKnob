@@ -703,7 +703,7 @@ bool DKFile::GetSetting(const DKString& file, const DKString& setting, DKString&
 		return DKERROR("("+path+", "+filestring+") failed \n");
 	if(!getSettingFromString(filestring, setting, value))
 		return DKERROR("getSettingFromString("+filestring+", "+setting+", "+value+") failed \n");
-	return true && DKDEBUGRETURN(file, setting, value);
+	return true;// && DKDEBUGRETURN(file, setting, value);
 }
 
 /*
