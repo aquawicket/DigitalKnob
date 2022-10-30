@@ -171,7 +171,7 @@ void DKDuktape::my_fatal(void* udata, const char* msg) {
 }
 
 bool DKDuktape::AttachFunction(const DKString& name, duk_c_function func){
-	DKDEBUGFUNC(name, func);
+	//DKDEBUGFUNC(name, func);
 	if(!ctx)
 		return DKERROR("ctx invalid\n");
 	duk_require_stack(ctx, 1);
