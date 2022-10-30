@@ -43,7 +43,7 @@ bool DKEvents::AddEvent(const DKString& id, const DKString& type, const DKString
 
 bool DKEvents::SendEvent(const DKString& id, const DKString& type, const DKString& value){
 	if(!same(id,"DKLog") && !same(type,"second") && !same(type,"mousemove")) //prevent looping messages
-		DKDEBUGFUNC(id, type, value);
+		//DKDEBUGFUNC(id, type, value);
 	if(type.empty())
 		return DKERROR("("+id+", ,"+value+"): No Type Specified \n");
 	if(id.empty())
