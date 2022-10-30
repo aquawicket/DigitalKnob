@@ -82,7 +82,7 @@ public:
 
 	/////  GLOBAL FUNCTIONS //////////////////////////////
 	static DKObject* DKCreate(const DKString& data){
-		DKDEBUGFUNC(data); //data = (class,id,var1,var2,var3,etc)
+		//DKDEBUGFUNC(data); //data = (class,id,var1,var2,var3,etc)
 		return DKClass::_Instance(data);
 	}
 
