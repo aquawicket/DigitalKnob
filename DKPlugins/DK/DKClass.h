@@ -129,7 +129,7 @@ public:
 	}
 
 	static bool HasFunc(const DKString& name){
-		DKDEBUGFUNC(name);
+		//DKDEBUGFUNC(name);
 		return (bool)(*functions)[name];
 	}
 	
