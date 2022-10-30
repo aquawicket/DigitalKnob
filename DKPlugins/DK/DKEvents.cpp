@@ -13,7 +13,7 @@ bool DKEvents::AddEvent(const DKString& id, const DKString& type, std::function<
 }
 
 bool DKEvents::AddEvent(const DKString& id, const DKString& type, const DKString& jsreturn, std::function<bool(DKEvents*)> func, DKObject* object){
-	DKDEBUGFUNC(id, type, jsreturn, func, object);
+	//DKDEBUGFUNC(id, type, jsreturn, func, object);
 	DKString _jsreturn = jsreturn;
 	replace(_jsreturn, "() { [ecmascript code] }", ""); //remove  () { [ecmascript code] }
 	if(id.empty())
