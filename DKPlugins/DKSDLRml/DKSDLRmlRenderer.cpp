@@ -33,7 +33,7 @@
 #include "GifAnimate.h"
 
 DKSDLRmlRenderer::DKSDLRmlRenderer(SDL_Renderer* sdlRenderer, SDL_Window* sdlWindow) {
-    DKDEBUGFUNC(sdlRenderer, sdlWindow);
+    //DKDEBUGFUNC(sdlRenderer, sdlWindow);
     DKINFO("Using DKSDLRmlRenderer\n");
     mSdlRenderer = sdlRenderer;
     mSdlWindow = sdlWindow;
