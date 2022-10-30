@@ -336,6 +336,7 @@ bool DKSDLWindow::End() {
     DKDEBUGFUNC();
     //SDL_DestroyTexture(tex);
     SDL_DestroyRenderer(renderer);
+    renderer = NULL;
     SDL_DestroyWindow(window);
     SDL_Quit();
     return true;
