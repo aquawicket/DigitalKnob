@@ -1461,7 +1461,7 @@ bool DKWidget::GetMouseWindowX(int& x_out)
 	//Dynamic cast a DKOject to it's class
 	//DKOSGWindow* window = dynamic_cast<DKOSGWindow*>(DKCreate("MainWindow"));
 	//mouseX -= window->traits->x;
-#ifdef DESKTOP
+#if DESKTOP
 	//mouseX -= DKOSGWindow::Get("DKOSGWindow")->traits->x;
 	int x;
 	if(!DKWindow::GetX(x)){ return 0; }
@@ -1483,7 +1483,7 @@ bool DKWidget::GetMouseWindowY(int& y_out)
 	//Dynamic cast a DKOject to it's class
 	//DKOSGWindow* window = dynamic_cast<DKOSGWindow*>(DKCreate("MainWindow"));
 	//mouseY -= window->traits->y;
-#ifdef DESKTOP
+#if DESKTOP
 	//mouseY -= DKOSGWindow::Get("DKOSGWindow")->traits->y;
 	int y;
 	if(!DKWindow::GetY(y)){ return false; }

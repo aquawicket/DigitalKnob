@@ -86,7 +86,7 @@ bool DKOSGWindow::CreateView(){
 	//view->setRunFrameScheme(osgViewer::ViewerBase::CONTINUOUS); 
 	//view->setRunMaxFrameRate(120);
 
-#ifdef DESKTOP
+#if DESKTOP
 		//dkOsgViewer->viewer->setThreadingModel(osgViewer::ViewerBase::SingleThreaded); 
 		dkOsgViewer->viewer->setDataVariance(osg::Object::DYNAMIC);
 		wsi = osg::GraphicsContext::getWindowingSystemInterface();
@@ -268,7 +268,7 @@ bool DKOSGWindow::CreatePIP(const int& x, const int& y, const int& w, const int&
 
 bool DKOSGWindow::SetTitle(const DKString& title){
 	DKDEBUGFUNC(title);
-#ifdef DESKTOP
+#if DESKTOP
 	//Set Window Title
 	typedef osgViewer::Viewer::Windows Windows;
 	Windows windows;

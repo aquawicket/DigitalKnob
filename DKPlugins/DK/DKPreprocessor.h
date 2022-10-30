@@ -64,6 +64,7 @@
 
 // https://web.archive.org/web/20191012035921/http://nadeausoftware.com/articles/2012/01/c_c_tip_how_use_compiler_predefined_macros_detect_operating_system
 #if _WIN32
+#	define DESKTOP 1
 #	ifndef WIN
 #		define WIN 1
 #	endif
@@ -126,6 +127,7 @@
 #			define DKOS_VERSION "UNKNOWN"
 #		endif
 #	elif TARGET_OS_MAC == 1
+#		define DESKTOP 1
 #		ifndef MAC
 #			define MAC 1
 #		endif
@@ -164,6 +166,7 @@
 #		define DKOS_VERSION "UNKNOWN" //TOSTRING(__ANDROID_API__)  FIXME: defining from another macro
 #	endif
 #elif __linux__
+#	define DESKTOP 1
 #	ifndef LINUX
 #		define LINUX 1
 #	endif
