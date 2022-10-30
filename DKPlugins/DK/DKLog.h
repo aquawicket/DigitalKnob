@@ -236,7 +236,8 @@ bool DebugReturn(const char* file, int line, const char* func, const DKString& n
 					if (arg_count) {
 						func_string += " -> { ";
 						func_string += argArray[i];
-						func_string += " }\n";
+						func_string += " }";
+						//func_string += "\n";
 					}
 				}
 			}
@@ -244,8 +245,9 @@ bool DebugReturn(const char* file, int line, const char* func, const DKString& n
 	}
 	else{ //!arg_count
 		func_string += ")";
-		func_string += "\n";
+		//func_string += "\n";
 	}
+	func_string += "\n";
 	DKLog::Log(file, line, "", func_string, DK_DEBUG);
 	return true;
 }

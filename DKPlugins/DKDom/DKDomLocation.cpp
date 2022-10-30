@@ -50,8 +50,9 @@ bool DKDomLocation::Init(){
 
 int DKDomLocation::hash(duk_context* ctx){
 	std::string::size_type found = DKRml::Get()->href.find("#");
+	std::string::size_type length = DKRml::Get()->href.length();
 	DKString hash;
-	if(found > 0)
+	if(found > 0 && found < length)
 		hash = DKRml::Get()->href.substr(found);
 	duk_push_string(ctx, hash.c_str());
 	return true;
