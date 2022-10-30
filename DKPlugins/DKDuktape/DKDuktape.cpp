@@ -444,7 +444,7 @@ bool DKDuktape::RunDuktape(const DKString& code, DKString& rval){
 	if(duk_is_boolean(ctx, -1))
 		rval = toString(duk_get_boolean(ctx, -1));
 	duk_pop(ctx);
-	DKDEBUGRETURN(code, rval);
+	//DKDEBUGRETURN(code, rval);
 	return true;
 }
 
