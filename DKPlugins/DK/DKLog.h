@@ -52,6 +52,36 @@
 #define DK_SHOW    8
 #define DK_HIDE    9
 
+#define DKBUILDMONTH(buildMonth) GetBuildMonth(__DATE__, buildMonth);
+#define DKBUILDDAY(buildDay) GetBuildDay(__DATE__, buildDay);
+#define DKBUILDYEAR(buildYear) GetBuildYear(__DATE__, buildYear);
+#define DKBUILDHOUR(buildHour) GetBuildHour(__TIME__, buildHour);
+#define DKBUILDMINUTE(buildMinute) GetBuildMinute(__TIME__, buildMinute);
+#define DKBUILDSECOND(buildSecond) GetBuildSecond(__TIME__, buildSecond);
+#define  DKASSERT(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_ASSERT);//, DKASSERT_COLOR, false);
+#define   DKFATAL(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_FATAL);//, DKFATAL_COLOR, false);
+#define   DKERROR(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_ERROR);//, DKERROR_COLOR, false);
+#define    DKWARN(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_WARN);
+#define    DKINFO(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_INFO);
+#define   DKDEBUG(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_DEBUG);
+#define DKVERBOSE(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_VERBOSE);
+#define DKREDINFO(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_INFO, DKERROR_COLOR);
+//#define DKWARNRTN(message, rtnval) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_WARN, DKWARN_COLOR, rtnval);
+
+#if WIN32
+#define DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, ...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
+#define DKDEBUGRETURN1(__FILE__, __LINE__, __FUNCTION__, ...) DebugReturn(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
+#define DKDEBUGFUNC(...) DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
+#define DKDEBUGRETURN(...) DKDEBUGRETURN1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
+#elif APPLE || LINUX
+#define DKDEBUGFUNC(...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, "", ##__VA_ARGS__)
+#define DKDEBUGRETURN(...) DebugReturn(__FILE__, __LINE__, __FUNCTION__, "", ##__VA_ARGS__)
+#else
+#define DKDEBUGFUNC(...) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, "", DK_DEBUG)
+#define DKDEBUGRETURN(...) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, "", DK_DEBUG)
+#endif
+
+
 class DKLog {
 public:
 	static bool Clear(int& rtnvalue);
@@ -111,12 +141,11 @@ void printVariable(const DKString& name, T t, std::ostringstream& out) {
 #	endif
 		value << "\"" << t << "\"";
 	replace(type, " *", "*");
-	if (same(value.str(), "\"")) {
+	if (same(value.str(), "\""))
 		out << "<" << type << ">\"" << name << "\":";
-	}
-	else {
+	else
 		out << "<" << type << ">\"" << name << "\":" << value.str();
-	}
+
 }
 
 template<typename T, typename std::enable_if<!is_streamable<std::ostream, T>::value>::type* = nullptr>
@@ -184,8 +213,9 @@ bool DebugReturn(const char* file, int line, const char* func, const DKString& n
 	DKString func_string = func;
 	func_string += "(";
 	if(arg_count){
-		if(names.empty()) 
-			return DKLog::Log(__FILE__, __LINE__, __FUNCTION__, "arg_count is > 1, but names is empty\n", DK_ERROR);
+		if (names.empty())
+			return DKERROR("arg_count is > 1, but names is empty\n");
+			//return DKLog::Log(__FILE__, __LINE__, __FUNCTION__, "arg_count is > 1, but names is empty\n", DK_ERROR);
 		DKStringArray name_array;
 		toStringArray(name_array, names, ","); 
 		getTemplateArgs(out, name_array, args...);
@@ -229,34 +259,7 @@ namespace {
 void signal_handler(int signal);
 */
 
-#define DKBUILDMONTH(buildMonth) GetBuildMonth(__DATE__, buildMonth);
-#define DKBUILDDAY(buildDay) GetBuildDay(__DATE__, buildDay);
-#define DKBUILDYEAR(buildYear) GetBuildYear(__DATE__, buildYear);
-#define DKBUILDHOUR(buildHour) GetBuildHour(__TIME__, buildHour);
-#define DKBUILDMINUTE(buildMinute) GetBuildMinute(__TIME__, buildMinute);
-#define DKBUILDSECOND(buildSecond) GetBuildSecond(__TIME__, buildSecond);
-#define  DKASSERT(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_ASSERT);//, DKASSERT_COLOR, false);
-#define   DKFATAL(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_FATAL);//, DKFATAL_COLOR, false);
-#define   DKERROR(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_ERROR);//, DKERROR_COLOR, false);
-#define    DKWARN(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_WARN);
-#define    DKINFO(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_INFO);
-#define   DKDEBUG(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_DEBUG);
-#define DKVERBOSE(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_VERBOSE);
-#define DKREDINFO(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_INFO, DKERROR_COLOR);
-//#define DKWARNRTN(message, rtnval) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_WARN, DKWARN_COLOR, rtnval);
 
-#if WIN32
-	#define DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, ...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
-	#define DKDEBUGRETURN1(__FILE__, __LINE__, __FUNCTION__, ...) DebugReturn(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
-	#define DKDEBUGFUNC(...) DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
-	#define DKDEBUGRETURN(...) DKDEBUGRETURN1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
-#elif APPLE || LINUX
-	#define DKDEBUGFUNC(...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, "", ##__VA_ARGS__)
-	#define DKDEBUGRETURN(...) DebugReturn(__FILE__, __LINE__, __FUNCTION__, "", ##__VA_ARGS__)
-#else
-	#define DKDEBUGFUNC(...) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, "", DK_DEBUG)
-	#define DKDEBUGRETURN(...) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, "", DK_DEBUG)
-#endif
 
 
 ///////////////////// logy test code /////////////////////////////////////////////////

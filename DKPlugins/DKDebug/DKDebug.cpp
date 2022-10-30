@@ -254,8 +254,8 @@ bool DKDebug::SendBugReport(const DKString& filename){
 
 bool DKDebug::ShowStackTrace(const void* input, void* output){
 	//DKDEBUGFUNC(input, output);
-	DKWARN("########## C++ CALL STACK ##########\n");
 #if WIN32
+	DKWARN("########## C++ CALL STACK ##########\n");
 	StackWalkerToConsole sw;  // output to console
 	sw.ShowCallstack(GetCurrentThread(), NULL);
 	DKINFO("\n");
