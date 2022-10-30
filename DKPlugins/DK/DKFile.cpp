@@ -691,14 +691,12 @@ bool DKFile::GetRelativePath(const DKString& file, const DKString& path, DKStrin
 }
 
 bool DKFile::GetSetting(const DKString& file, const DKString& setting, DKString& value){
-	DKDEBUGFUNC(file, setting, value);
+	//DKDEBUGFUNC(file, setting, value);
 	DebugPath(file);
 	DKString path = file;
 	replace(path, "file:///", "");
-	if(!PathExists(path)){
-		DKWARN("path does not exist \n");
-		return false; 
-	}
+	if(!PathExists(path))
+		return DKERROR("path does not exist \n");
 	DKString filestring;
 	if(!FileToString(path, filestring))
 		return DKERROR("("+path+", "+filestring+") failed \n");
