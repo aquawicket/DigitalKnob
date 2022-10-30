@@ -48,7 +48,7 @@ DKStringArray DKDuktape::codeToRun;
 #endif
 
 const char *duk_push_string_file_raw(duk_context *ctx, const char *path, duk_uint_t flags) {
-	DKDEBUGFUNC(ctx, path, flags);
+	//DKDEBUGFUNC(ctx, path, flags);
 	FILE *f = NULL;
 	char *buf;
 	long sz;  /* ANSI C typing */
