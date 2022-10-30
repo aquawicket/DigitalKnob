@@ -416,7 +416,7 @@ bool DKSDLWindow::GetHandle(const void* input, void* output) {
 }
 
 bool DKSDLWindow::GetHeight(const void* input, void* output) {
-    DKDEBUGFUNC(input, output);
+    //DKDEBUGFUNC(input, output);
     int h;
     SDL_GetWindowSize(window, NULL, &h);
     if(h == 0)
