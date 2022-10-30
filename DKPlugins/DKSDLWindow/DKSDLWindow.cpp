@@ -545,8 +545,7 @@ bool DKSDLWindow::SetIcon(const void* input, void* output) {
     return true;
 #else
     //return DKERROR("not implemented on this OS\n");
-    DKERROR("not implemented on this OS\n");
-    return true;
+    return false;
 #endif
 }
 
