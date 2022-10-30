@@ -422,7 +422,7 @@ bool DKFile::GetFileName(const DKString& path, DKString& filename){
 	std::string::size_type found = filename.find_last_of("/");
 	if(found != std::string::npos && found < filename.length()){
 		filename = filename.substr(found+1);
-		return true && DKDEBUGRETURN(path, filename);
+		return true;//&& DKDEBUGRETURN(path, filename);
 	}
 	DKWARN("/ not found in path ("+path+") \n");
 	DKWARN("returning this path as the filename("+filename+") \n");
