@@ -365,6 +365,7 @@ bool DKFile::GetDrives(DKStringArray& strings){
 }
 
 bool DKFile::GetExeName(DKString& exename){
+	DKDEBUGFUNC(exename);
 	if(!DKFile::PathExists(DKFile::exe_path))
 		DKFile::GetExePath(DKFile::exe_path);
 	std::string::size_type found = DKFile::exe_path.find_last_of("/");
@@ -585,7 +586,7 @@ bool DKFile::GetPath(DKString& path) {
 }
 
 bool DKFile::GetRelativePath(const DKString& file, const DKString& path, DKString& out){
-	DKDEBUGRETURN(file, path, out);
+	DKDEBUGFUNC(file, path, out);
 	DebugPath(file);
 	DebugPath(path);
 	if (same(file, path))
@@ -721,7 +722,7 @@ bool DKFile::GetSettings(const DKString& file, const DKString& setting, DKString
 
 
 bool DKFile::GetShortName(const DKString& file, DKString& shortname){
-	DKDEBUGRETURN(file, shortname);
+	DKDEBUGFUNC(file, shortname);
 	DebugPath(file);
 	if(!PathExists(file))
 		return DKERROR("("+file+") path does not exist \n");
@@ -746,7 +747,7 @@ bool DKFile::GetShortName(const DKString& file, DKString& shortname){
 }
 
 bool DKFile::IsDirectory(const DKString& file){
-	DKDEBUGRETURN(file);
+	DKDEBUGFUNC(file);
 	DebugPath(file);
 	if(!PathExists(file))
 		return DKERROR("("+file+") path does not exist \n");
@@ -909,7 +910,7 @@ bool DKFile::VerifyPath(DKString& path){
 }
 
 bool DKFile::ValidatePath(DKString& path){
-	DKDEBUGRETURN(path);
+	DKDEBUGFUNC(path);
 	if (has(path, "\\"))
 		replace(path, "\\", "/");
 	if (has(path, "://") && (substr_count(path, "//") > 0))
