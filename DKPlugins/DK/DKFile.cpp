@@ -215,7 +215,7 @@ bool DKFile::FileToString(const DKString& file, DKString& string){
 	std::ifstream t(file.c_str());
 	std::string str((std::istreambuf_iterator<char>(t)), std::istreambuf_iterator<char>());
 	string = str;
-	return true && DKDEBUGRETURN(file, string);
+	return true;// && DKDEBUGRETURN(file, string);
 }
 
 bool DKFile::FindFile(DKString& filename, const DKString& path, const DKString& extension){
