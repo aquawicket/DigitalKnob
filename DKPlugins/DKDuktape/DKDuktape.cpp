@@ -435,7 +435,7 @@ bool DKDuktape::RunDuktape(const DKString& code, DKString& rval){
 	if(!DKUtil::InMainThread())
 		return DKERROR("not in main thread");
 	if(!DKDuktape::ctx)
-		return DKERROR("DKDuktape::RunDuktape("+code+", rval): context is invalid\n");
+		return DKERROR("DKDuktape::ctx is invalid\n");
 	if(duk_peval_string(ctx, code.c_str()) != 0)
 		DKDuktape::DumpError(code);
 	//get return value
@@ -544,8 +544,10 @@ DKEvents* DKDuktape::addressToEvent(const DKString& address) {
 
 void DKDuktape::EventLoop(){
 	//DKDEBUGFUNC();
-	if(!DKUtil::InMainThread())
+	if (!DKUtil::InMainThread()) {
+		DKERROR("not in main thread");
 		return;
+	}
 	//cycle through queue codeToRun
 	if(codeToRun.size() > 0){
 		DKString rval;
@@ -578,7 +580,7 @@ void DKDuktape::EventLoop(){
 //////////////////////////////////////////////////////////////////
 #ifdef HAVE_eventloop
 	int DKDuktape::handle_file(duk_context *ctx, const char *filename) {
-		//DKDEBUGFUNC(/*ctx, filename*/);
+		//DKDEBUGFUNC(ctx, filename);
 		FILE *f = NULL;
 		int retval;
 		f = fopen(filename, "rb");

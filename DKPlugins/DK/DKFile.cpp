@@ -372,7 +372,7 @@ bool DKFile::GetExeName(DKString& exename){
 	if (found != std::string::npos && found < DKFile::exe_path.length()) {
 		exename = DKFile::exe_path.substr(found + 1);
 		DebugPath(exename);
-		return true && DKDEBUGRETURN(exename);
+		return true; //&& DKDEBUGRETURN(exename);
 	}
 	return DKERROR("exename invalid \n");
 }
