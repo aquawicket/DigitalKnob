@@ -358,14 +358,14 @@ bool DKSDLWindow::TestString(const void* input, void* output) {
 }
 
 bool DKSDLWindow::TestReturnInt(const void* input, void* output) {
-    DKDEBUGFUNC(input, output);
+    //DKDEBUGFUNC(input, output);
     int var = 1234;
     *(int*)output = var;
     return true;
 }
 
 bool DKSDLWindow::TestReturnString(const void* input, void* output) {
-    DKDEBUGFUNC(input, output);
+    //DKDEBUGFUNC(input, output);
     std::string var = "Return test";
     *(std::string*)output = var;
     return true;
