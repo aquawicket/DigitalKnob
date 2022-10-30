@@ -414,7 +414,7 @@ bool DKFile::GetExtention(const DKString& file, DKString& extension){
 }
 
 bool DKFile::GetFileName(const DKString& path, DKString& filename){
-	DKDEBUGFUNC(path, filename);
+	//DKDEBUGFUNC(path, filename);
 	DebugPath(path);
 	filename = path;
 	if (filename.back() == '/')

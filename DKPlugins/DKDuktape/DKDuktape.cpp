@@ -48,6 +48,7 @@ DKStringArray DKDuktape::codeToRun;
 #endif
 
 const char *duk_push_string_file_raw(duk_context *ctx, const char *path, duk_uint_t flags) {
+	DKDEBUGFUNC(ctx, path, flags);
 	FILE *f = NULL;
 	char *buf;
 	long sz;  /* ANSI C typing */
@@ -81,6 +82,7 @@ fail:
 }
 
 duk_int_t duk_peval_file(duk_context *ctx, const char *path) {
+	DKDEBUGFUNC(ctx, path);
 	duk_int_t rc;
 	duk_push_string_file_raw(ctx, path, DUK_STRING_PUSH_SAFE);
 	duk_push_string(ctx, path);
@@ -163,6 +165,7 @@ bool DKDuktape::End(){
 }
 
 void DKDuktape::my_fatal(void* udata, const char* msg) {
+	DKDEBUGFUNC(udata, msg);
 	(void)udata;  /* ignored in this case, silence warning */
 	/* Note that 'msg' may be NULL. */
 	fprintf(stderr, "*** FATAL ERROR: %s\n", (msg ? msg : "no message"));
@@ -248,6 +251,7 @@ bool DKDuktape::CallInit(const DKString& file){
 }
 
 bool DKDuktape::DumpError(const DKString& code){
+	DKDEBUGFUNC(code);
 	DKString name;
 	DKString message;
 	DKString fileName;
@@ -445,6 +449,7 @@ bool DKDuktape::RunDuktape(const DKString& code, DKString& rval){
 }
 
 bool DKDuktape::Trace(){
+	DKDEBUGFUNC();
 	/*
 	duk_inspect_callstack_entry(ctx, -1);
 	duk_get_prop_string(ctx, -1, "lineNumber");
@@ -487,7 +492,6 @@ bool DKDuktape::UnloadFile(const DKString& path){
 		return DKERROR("path invalid");
 	if(!FileLoaded(path))
 		return DKERROR("FileLoaded("+path+") failed");
-	DKDEBUGFUNC(path);
 	for(unsigned int i = 0; i < filelist.size(); ++i) {
 		if(has(path, filelist[i])) {
 			//DKINFO("DKDuktape::FileLoaded(): "+path+" is loaded\n");
@@ -499,6 +503,7 @@ bool DKDuktape::UnloadFile(const DKString& path){
 }
 
 DKString DKDuktape::eventToAddress(DKEvents* event) {
+	//DKDEBUGFUNC(event);
 	if (!event) {
 		DKERROR("DKDuktape::eventToAddress(): invalid event\n");
 		return NULL;
@@ -626,7 +631,7 @@ void DKDuktape::EventLoop(){
 	}
 
 	int DKDuktape::wrapped_compile_execute(duk_context *ctx, void *udata){
-		//DKDEBUGFUNC(ctx);
+		//DKDEBUGFUNC(ctx, udata);
 		int comp_flags = 0;
 		//int rc;
 		//Compile input and place it into global _USERCODE
