@@ -350,7 +350,7 @@ bool DKSDLWindow::TestInt(const void* input, void* output) {
 }
 
 bool DKSDLWindow::TestString(const void* input, void* output) {
-    DKDEBUGFUNC(input, output);
+    //DKDEBUGFUNC(input, output);
     std::string in = *(std::string*)input;
     std::string out = in;
     *(std::string*)output = out;
