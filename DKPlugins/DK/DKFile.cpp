@@ -205,7 +205,7 @@ bool DKFile::Delete(const DKString& path){
 }
 
 bool DKFile::FileToString(const DKString& file, DKString& string){
-	DKDEBUGFUNC(file, string);
+	//DKDEBUGFUNC(file, string);
 	DebugPath(file);
 	if(!PathExists(file))
 		return DKERROR("file:("+file+") path does not exist \n");
