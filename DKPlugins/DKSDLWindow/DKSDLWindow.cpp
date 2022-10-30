@@ -410,8 +410,7 @@ bool DKSDLWindow::GetHandle(const void* input, void* output) {
     //*(GdkWindow**)output = gdk_window;
     //return true;
 #else
-    DKWARN("not implemented on this OS\n");
-    return false;
+    return DKERROR("not implemented on this OS\n");
 #endif
 }
 

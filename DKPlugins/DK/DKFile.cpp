@@ -320,7 +320,7 @@ bool DKFile::GetBasename(const DKString& path, DKString& basename){
 }
 
 bool DKFile::GetDirectoryContents(const DKString& path, DKStringArray& strings){
-	DKDEBUGFUNC(path, strings);
+	//DKDEBUGFUNC(path, strings);
 	DebugPath(path);
 	if(!PathExists(path))
 		return DKERROR("path does not exist \n");
