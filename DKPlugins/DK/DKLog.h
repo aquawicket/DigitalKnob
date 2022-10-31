@@ -220,7 +220,6 @@ bool DebugReturn(const char* file, int line, const char* func, const DKString& n
 	if(arg_count){
 		if (names.empty())
 			return DKERROR("arg_count is > 1, but names is empty\n");
-			//return DKLog::Log(__FILE__, __LINE__, __FUNCTION__, "arg_count is > 1, but names is empty\n", DK_ERROR);
 		DKStringArray name_array;
 		toStringArray(name_array, names, ","); 
 		getTemplateArgs(out, name_array, args...);
@@ -242,7 +241,6 @@ bool DebugReturn(const char* file, int line, const char* func, const DKString& n
 						func_string += " -> { ";
 						func_string += argArray[i];
 						func_string += " }";
-						//func_string += "\n";
 					}
 				}
 			}
@@ -250,7 +248,6 @@ bool DebugReturn(const char* file, int line, const char* func, const DKString& n
 	}
 	else{ //!arg_count
 		func_string += ")";
-		//func_string += "\n";
 	}
 	func_string += "\n";
 	DKLog::Log(file, line, "", func_string, DK_DEBUG);
