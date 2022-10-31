@@ -86,7 +86,7 @@ void DKRmlFile::Close(Rml::FileHandle file){
 /// @param file The handle of the file.
 /// @return The total number of bytes read into the buffer.
 size_t DKRmlFile::Read(void* buffer, size_t size, Rml::FileHandle file){
-	DKDEBUGFUNC(buffer, size, file);
+	//DKDEBUGFUNC(buffer, size, file);
 	return fread(buffer, 1, size, (FILE*) file);
 }
 
