@@ -128,7 +128,7 @@ DKString DKEvents::GetJSReturn(){
 }
 
 DKString DKEvents::GetId(){
-	DKDEBUGRETURN(id);
+	//DKDEBUGRETURN(id);
 	return id;
 }
 
