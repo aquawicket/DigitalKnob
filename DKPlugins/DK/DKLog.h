@@ -30,6 +30,7 @@
 
 #include "DK/DKString.h"
 #include "DK/DKTextColor.h"
+#include "DK/DKUtil.h"
 #include <stdio.h>
 #include <iostream>
 #if IOS
