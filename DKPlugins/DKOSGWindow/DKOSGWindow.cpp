@@ -43,7 +43,7 @@ bool DKOSGWindow::Init(){
 }
 
 bool DKOSGWindow::CreateWin(const DKString& title, const int& x, const int& y, const int& w, const int& h){
-	DKDEBUGFUNC(title, x, y, w, h);
+	//DKDEBUGFUNC(title, x, y, w, h);
 	mTitle = title;
 	winX = x;
 	winY = y;
