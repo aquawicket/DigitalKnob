@@ -63,7 +63,7 @@ public:
 
 	template<class T> 
 	static bool AddEvent(const DKString& id, const DKString& type, bool (T::*func) (DKEvents*), T* _this){
-		DKDEBUGFUNC(id, type, func, _this);
+		//DKDEBUGFUNC(id, type, func, _this);
 		return DKEvents::AddEvent(id, type, std::bind(func, _this, std::placeholders::_1), _this);
 	};
 
