@@ -402,7 +402,7 @@ bool DKFile::GetExePath(DKString& exepath){
 }
 
 bool DKFile::GetExtention(const DKString& file, DKString& extension){
-	DKDEBUGFUNC(file, extension);
+	//DKDEBUGFUNC(file, extension);
 	DebugPath(file);
 	if(!has(file,".")){
 		DKWARN("file ("+file+") has no extension \n");
