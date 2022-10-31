@@ -107,7 +107,7 @@ public:
 	
 	template<class T>
 	static void AddSendEventFunc(bool (T::*func)(const DKString&, const DKString&, const DKString&), T* _this){
-		DKDEBUGFUNC(func, _this);
+		//DKDEBUGFUNC(func, _this);
 		send_funcs.push_back(std::bind(func, _this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
 	}
 
