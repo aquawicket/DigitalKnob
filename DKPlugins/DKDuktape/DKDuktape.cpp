@@ -339,7 +339,7 @@ bool DKDuktape::LoadFile(const DKString& path){
 }
 
 bool DKDuktape::LoadJSString(const DKString& url, const DKString& string){
-	DKDEBUGFUNC(url, string);
+	//DKDEBUGFUNC(url, string);
 	if(url.empty())
 		return DKERROR("url invalid\n");
 	if(string.empty())
