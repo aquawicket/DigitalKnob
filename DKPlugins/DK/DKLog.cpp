@@ -208,12 +208,14 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 	}
 
 	DKString output;
+	std::stringstream ss;
 
 	///// ADD extra info if requested
 	if (log_thread) {
 		unsigned long int threadId;
 		DKUtil::GetThreadId(threadId);
-		output = output + "THREAD: " + toString((unsigned int)threadId) + "  ";
+		output = output + "TID: " + toString((unsigned int)threadId) + "  ";
+		ss << std::left << std::setw(10) << "TID: " + toString((unsigned int)threadId);
 	}
 	if (log_lines || lvl <= DK_ERROR) {
 		DKString filename = file;
@@ -221,12 +223,16 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 		if (found != std::string::npos && found < filename.length())
 			output += filename.substr(found + 1);
 		output = output + ":" + toString(line) + "  ";
+		ss << std::right << std::setw(25) << filename.substr(found + 1) + ":" + toString(line) << "  ";
 	}
 	if (log_funcs || lvl <= DK_ERROR) {
-		if (strlen(func))
+		if (strlen(func)) {
 			output = output + func + "() ";
+			ss << func << "() ";
+		}
 	}
 	output += input;
+	ss << input;
 
 	/////// Main Console Color Decorators ///////
 #	if WIN32
@@ -260,8 +266,8 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 #	endif
 
 	//CONSOLE/TERMINAL WINDOW OUTPUT
-	printf("%s", output.c_str()); 
-	//stdout << output;
+	//printf("%s", output.c_str());
+	std::cout << ss.str();
 					
 	// File Output (log.txt)
 	if(log_file && !DKFile::local_assets.empty()){

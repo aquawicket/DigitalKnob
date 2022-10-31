@@ -280,9 +280,9 @@ public:
 		toStringArray(name_array, names, ",");
 		getTemplateArgs(out, name_array, args...);
 		DKString func_string = "";
-		for (unsigned int i = 0; i < count; i++)
-			func_string += "   ";
-		func_string += "--> ";
+		for (unsigned int i = 1; i < count; i++)
+			func_string += "  ";
+		func_string += "-> ";
 		func_string += func;
 		func_string += "(";
 		if (arg_count)
@@ -291,7 +291,7 @@ public:
 		if (arg_count)
 			func_string += " }";
 		func_string += ")\n";
-		
+
 		DKLog::Log(file, line, "", func_string, DK_DEBUG);
 		
 	};
@@ -302,11 +302,11 @@ public:
 			return;
 		DKString func_string = "";
 		for (unsigned int i = 0; i < count; i++)
-			func_string += "   ";
-		func_string += "<-- ";
+			func_string += "  ";
+		func_string += "<- ";
 		func_string += toString(((double)(clock() - start_time) / CLOCKS_PER_SEC));
 		func_string += "s \n";
-		DKDEBUG(func_string);
+		DKLog::Log(this->file.c_str(), this->line, "", func_string, DK_DEBUG);
 	};
 
 	static std::ostream* stream;
