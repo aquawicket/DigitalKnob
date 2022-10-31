@@ -392,7 +392,7 @@ bool DKUtil::GetScreenHeight(int& h){
 #	elif MAC
 		return DKMac::GetScreenHeight(h) && DKDEBUGRETURN(h);
 #	elif LINUX
-		return DKLinux::GetScreenHeight(h) && DKDEBUGRETURN(h);
+	return DKLinux::GetScreenHeight(h);//&& DKDEBUGRETURN(h);
 #	else
 		return DKERROR("not implemented on this OS\n");
 #	endif

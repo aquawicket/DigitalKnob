@@ -46,6 +46,7 @@ endif()
 LINUX_dk_depend(opengl)
 RASPBERRY_dk_depend(opengl)
 ANDROID_dk_depend(opengles)
+ANDROID_dk_depend(opensles)
 
 
 ### IMPORT ###
