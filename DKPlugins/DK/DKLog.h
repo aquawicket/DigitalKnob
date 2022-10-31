@@ -70,15 +70,15 @@
 //#define DKWARNRTN(message, rtnval) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_WARN, DKWARN_COLOR, rtnval);
 
 #if WIN32
-#define DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, ...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
+//#define DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, ...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
 #define DKDEBUGRETURN1(__FILE__, __LINE__, __FUNCTION__, ...) DebugReturn(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
 //#define DKDEBUGFUNC(...) DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
 #define DKDEBUGRETURN(...) DKDEBUGRETURN1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
 #elif APPLE || LINUX
-#define DKDEBUGFUNC(...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, "", ##__VA_ARGS__)
+//#define DKDEBUGFUNC(...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, "", ##__VA_ARGS__)
 #define DKDEBUGRETURN(...) DebugReturn(__FILE__, __LINE__, __FUNCTION__, "", ##__VA_ARGS__)
 #else
-#define DKDEBUGFUNC(...) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, "", DK_DEBUG)
+//#define DKDEBUGFUNC(...) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, "", DK_DEBUG)
 #define DKDEBUGRETURN(...) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, "", DK_DEBUG)
 #endif
 
@@ -321,8 +321,14 @@ public:
 	//const Args&&... args;
 };
 
-#define DKDEBUGFUNC2(__FILE__, __LINE__, __FUNCTION__, ...) logy _logy(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
-#define DKDEBUGFUNC(...) DKDEBUGFUNC2(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
+#if WIN
+	#define DKDEBUGFUNC2(__FILE__, __LINE__, __FUNCTION__, ...) logy _logy(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
+	#define DKDEBUGFUNC(...) DKDEBUGFUNC2(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
+#elif APPLE || LINUX
+	#define DKDEBUGFUNC(...) logy _logy(__FILE__, __LINE__, __FUNCTION__, "", ##__VA_ARGS__)
+#else
+	#define DKDEBUGFUNC(...) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, "", DK_DEBUG)
+#endif
 //////////////////////////////////////////////////////////////////////////////////////
 
 
