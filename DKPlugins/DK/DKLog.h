@@ -286,9 +286,11 @@ template <typename... Args>
 bool testLogyA(const DKString& str);
 bool testLogyB(const int& num);
 bool testLogyC(const double& dbl);
+bool testLogyD();
 
-#define DEBUG_METHOD1(__FILE__, __LINE__, __FUNCTION__, ...) logy _logy(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
-#define DEBUG_METHOD(...) DEBUG_METHOD1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
+#define DKDEBUGFUNC2(__FILE__, __LINE__, __FUNCTION__, ...) logy _logy(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
+//#define DKDEBUGFUNC(...) DKDEBUGFUNC2(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
+#define DEBUG_METHOD(...) DKDEBUGFUNC2(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
 //////////////////////////////////////////////////////////////////////////////////////
 
 

@@ -417,6 +417,12 @@ bool testLogyB(const int& num) {
 
 bool testLogyC(const double& dbl) {
 	DEBUG_METHOD(dbl);
+	testLogyD();
+	return true;
+}
+
+bool testLogyD() {
+	DEBUG_METHOD();
 	return true;
 }
 
