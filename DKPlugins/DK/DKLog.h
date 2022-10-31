@@ -210,7 +210,7 @@ void DebugFunc(const char* file, int line, const char* func, const DKString& nam
 template <typename... Args>
 bool DebugReturn(const char* file, int line, const char* func, const DKString& names, Args&&... args) {
 	if (!DKUtil::InMainThread())
-		return;
+		return true;
 	if (DKLog::log_show.empty() && !DKLog::log_debug)
 		return true;
 	int arg_count = sizeof...(Args);
