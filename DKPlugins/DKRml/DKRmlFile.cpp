@@ -96,7 +96,7 @@ size_t DKRmlFile::Read(void* buffer, size_t size, Rml::FileHandle file){
 /// @param origin One of either SEEK_SET (seek from the beginning of the file), SEEK_END (seek from the end of the file) or SEEK_CUR (seek from the current file position).
 /// @return True if the operation completed successfully, false otherwise.
 bool DKRmlFile::Seek(Rml::FileHandle file, long offset, int origin){
-	DKDEBUGFUNC(file, offset, origin);
+	//DKDEBUGFUNC(file, offset, origin);
 	return fseek((FILE*) file, offset, origin) == 0;
 }
 
