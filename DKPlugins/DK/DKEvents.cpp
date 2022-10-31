@@ -118,7 +118,7 @@ bool DKEvents::RemoveEvents(DKObject* obj){
 }
 
 DKString DKEvents::GetType(){
-	DKDEBUGRETURN(type);
+	//DKDEBUGRETURN(type);
 	return type;
 }
 
