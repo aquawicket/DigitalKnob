@@ -310,7 +310,7 @@ int DKDomElement::innerHTML(duk_context* ctx){
 		DKString innerHTML = duk_require_string(ctx, 1);
 		element->SetInnerRML(innerHTML.c_str());
 	}
-	return true && DKDEBUGRETURN(ctx, innerHTML);
+	return true; //&& DKDEBUGRETURN(ctx, innerHTML);
 }
 
 // outerHTML:  https://developer.mozilla.org/en-US/docs/Web/API/Element/outerHTML
