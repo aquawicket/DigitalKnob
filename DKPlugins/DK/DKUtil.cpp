@@ -494,7 +494,7 @@ bool DKUtil::InMainThread(){
 bool DKUtil::InitFps(){
 	DKDEBUGFUNC();
 	memset(frametimes, 0, sizeof(frametimes)); // Set all frame times to 0ms
-	return DKUtil::GetTicks(frametimelast) && DKDEBUGRETURN(frametimelast);
+	return DKUtil::GetTicks(frametimelast);//&& DKDEBUGRETURN(frametimelast);
 }
 
 bool DKUtil::InitFramerate(){
