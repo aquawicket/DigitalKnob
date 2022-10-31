@@ -72,7 +72,7 @@
 #if WIN32
 #define DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, ...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
 #define DKDEBUGRETURN1(__FILE__, __LINE__, __FUNCTION__, ...) DebugReturn(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
-#define DKDEBUGFUNC(...) DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
+//#define DKDEBUGFUNC(...) DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
 #define DKDEBUGRETURN(...) DKDEBUGRETURN1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
 #elif APPLE || LINUX
 #define DKDEBUGFUNC(...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, "", ##__VA_ARGS__)
@@ -269,10 +269,48 @@ void signal_handler(int signal);
 ///////////////////// logy test code /////////////////////////////////////////////////
 class logy {
 public:
-template <typename... Args>
-	logy(const char* file, int line, const char* func, const DKString& names, Args&&... args);
-	~logy();
+	template <typename... Args>
+	logy(const char* file, int line, const char* func, const DKString& names, Args&&... args) : file(file), line(line), func(func), names(names), /*args(args...),*/ start_time(clock()) {
+		count++;
+		if (DKLog::log_show.empty() && !DKLog::log_debug)
+			return;
+		int arg_count = sizeof...(Args);
+		std::ostringstream out;
+		DKStringArray name_array;
+		toStringArray(name_array, names, ",");
+		getTemplateArgs(out, name_array, args...);
+		DKString func_string = "";
+		for (unsigned int i = 0; i < count; i++)
+			func_string += "   ";
+		func_string += "--> ";
+		func_string += func;
+		func_string += "(";
+		if (arg_count)
+			func_string += "{ ";
+		func_string += out.str();
+		if (arg_count)
+			func_string += " }";
+		func_string += ")\n";
+		
+		DKLog::Log(file, line, "", func_string, DK_DEBUG);
+		
+	};
+
+	~logy() {
+		count--;
+		if (DKLog::log_show.empty() && !DKLog::log_debug)
+			return;
+		DKString func_string = "";
+		for (unsigned int i = 0; i < count; i++)
+			func_string += "   ";
+		func_string += "<-- ";
+		func_string += toString(((double)(clock() - start_time) / CLOCKS_PER_SEC));
+		func_string += "s \n";
+		DKDEBUG(func_string);
+	};
+
 	static std::ostream* stream;
+	static unsigned int count;
 	const DKString file;
 	const int line;
 	const DKString func;
@@ -283,14 +321,8 @@ template <typename... Args>
 	//const Args&&... args;
 };
 
-bool testLogyA(const DKString& str);
-bool testLogyB(const int& num);
-bool testLogyC(const double& dbl);
-bool testLogyD();
-
 #define DKDEBUGFUNC2(__FILE__, __LINE__, __FUNCTION__, ...) logy _logy(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
-//#define DKDEBUGFUNC(...) DKDEBUGFUNC2(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
-#define DEBUG_METHOD(...) DKDEBUGFUNC2(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
+#define DKDEBUGFUNC(...) DKDEBUGFUNC2(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
 //////////////////////////////////////////////////////////////////////////////////////
 
 

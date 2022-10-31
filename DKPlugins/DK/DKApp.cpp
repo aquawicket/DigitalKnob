@@ -135,10 +135,6 @@ DKApp::DKApp(int _argc, char** _argv){
 	//}
 	DKClass::DKCreate("DKDuktape");
 	DKClass::DKCreate("DKDebug");
-
-	//////test logy ////////////////
-	testLogyA("string A");
-	////////////////////////////////
 }
 
 void DKApp::Init(){
