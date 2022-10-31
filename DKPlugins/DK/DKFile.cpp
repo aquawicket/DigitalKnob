@@ -410,7 +410,7 @@ bool DKFile::GetExtention(const DKString& file, DKString& extension){
 	}
 	std::string::size_type found = file.find_last_of(".");
 	extension = file.substr(found,file.size());
-	return true && DKDEBUGRETURN(file, extension);
+	return true;//&& DKDEBUGRETURN(file, extension);
 }
 
 bool DKFile::GetFileName(const DKString& path, DKString& filename){
