@@ -75,7 +75,7 @@ public:
 
 	template<class T>
 	static void AddRegisterEventFunc(bool (T::*func)(const DKString&, const DKString&), T* _this){
-		DKDEBUGFUNC(func, _this);
+		//DKDEBUGFUNC(func, _this);
 		reg_funcs.push_back(std::bind(func, _this, std::placeholders::_1, std::placeholders::_2));
 	}
 
