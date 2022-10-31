@@ -8,7 +8,7 @@ std::vector<std::function<bool(const DKString&, const DKString&)> > DKEvents::un
 std::vector<std::function<bool(const DKString&, const DKString&, const DKString&)> > DKEvents::send_funcs;
 
 bool DKEvents::AddEvent(const DKString& id, const DKString& type, std::function<bool(DKEvents*)> func, DKObject* object){
-	DKDEBUGFUNC(id, type, func, object);
+	//DKDEBUGFUNC(id, type, func, object);
 	return DKEvents::AddEvent(id, type, "", func, object);
 }
 
