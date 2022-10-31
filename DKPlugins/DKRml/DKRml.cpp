@@ -433,7 +433,7 @@ void DKRml::ProcessEvent(Rml::Event& rmlEvent){
 }
 
 bool DKRml::RegisterEvent(const DKString& elementAddress, const DKString& type){
-	DKDEBUGFUNC(elementAddress, type);
+	//DKDEBUGFUNC(elementAddress, type);
 	if(elementAddress.empty())
 		return DKERROR(elementAddress +": elementAddress empty\n"); 
 	if(type.empty())
