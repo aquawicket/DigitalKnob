@@ -754,7 +754,7 @@ bool DKFile::IsDirectory(const DKString& file){
 	struct stat s;
 	if(stat(file.c_str(),&s) == 0){
 		if (s.st_mode & S_IFDIR)
-			return true && DKDEBUGRETURN(file, true);
+			return true;//&& DKDEBUGRETURN(file, true);
 		else if( s.st_mode & S_IFREG )
 			return false && DKDEBUGRETURN(file, false); //it's a file
 		else
