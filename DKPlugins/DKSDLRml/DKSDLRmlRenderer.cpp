@@ -176,7 +176,7 @@ bool DKSDLRmlRenderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vect
 
 // Called by RmlUi when a texture is required to be built from an internally-generated sequence of pixels.
 bool DKSDLRmlRenderer::GenerateTexture(Rml::TextureHandle& texture_handle, const Rml::byte* source, const Rml::Vector2i& source_dimensions){
-    DKDEBUGFUNC(texture_handle, source, source_dimensions);
+    //DKDEBUGFUNC(texture_handle, source, source_dimensions);
     #if SDL_BYTEORDER == SDL_BIG_ENDIAN
         Uint32 rmask = 0xff000000;
         Uint32 gmask = 0x00ff0000;
