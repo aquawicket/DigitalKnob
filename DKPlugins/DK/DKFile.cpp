@@ -342,7 +342,7 @@ bool DKFile::GetDirectoryContents(const DKString& path, DKStringArray& strings){
 			--i;
 		}
 	}
-	return true && DKDEBUGRETURN(path);
+	return true;//&& DKDEBUGRETURN(path);
 }
 
 bool DKFile::GetDrives(DKStringArray& strings){
