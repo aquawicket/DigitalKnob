@@ -3,21 +3,23 @@
 
 ### DEPEND ###
 # some depends are located further below for individual osg plugins
-#dk_depend(libx11-dev)
+dk_depend(curl)
+dk_depend(libx11-dev)
+dk_depend(freetype)
+dk_depend(giflib)
+dk_depend(libpng)
+dk_depend(libjpeg-turbo)
 dk_depend(libxml2)
 dk_depend(msinttypes)
 dk_depend(opengl)
 dk_depend(sdl)
+dk_depend(tiff)
 dk_depend(zlib)
 
 
 ### IMPORT ###
 dk_import(https://github.com/openscenegraph/OpenSceneGraph.git)
-#dk_set(OSG_GL2 ${3RDPARTY}/${OPENSCENEGRAPH_FOLDER}-GL2)
 dk_set(OSG_PLUGINS osgPlugins-3.7.0)
-#if(OpenGL2)
-#	dk_set(OSG OSG_GL2)
-#endif(OpenGL2)
 
 
 ### LINK ###
@@ -64,9 +66,9 @@ if(ALL_LIBS)
 	dk_enable(osgdb_bsp)
 	dk_enable(osgdb_bvh)
 	dk_enable(osgdb_cfg)
-	if(NOT LINUX AND NOT RASPBERRY AND NOT WIN)
+	#if(NOT LINUX AND NOT RASPBERRY AND NOT WIN)
 		dk_enable(osgdb_curl)				# broken
-	endif()
+	#endif()
 	dk_enable(osgdb_dds)
 	dk_enable(osgdb_deprecated_osg)
 	dk_enable(osgdb_deprecated_osganimation)
@@ -84,9 +86,9 @@ if(ALL_LIBS)
 		#dk_enable(osgdb_dw)					# broken on everything
 	#endif()
 	dk_enable(osgdb_dxf)
-	if(NOT MAC AND NOT LINUX AND NOT RASPBERRY AND NOT WIN)
+	#if(NOT MAC AND NOT LINUX AND NOT RASPBERRY AND NOT WIN)
 		dk_enable(osgdb_gif)				# broken
-	endif()
+	#endif()
 	dk_enable(osgdb_ive)
 	if(NOT WIN)
 		dk_enable(osgdb_ffmpeg)
@@ -114,9 +116,9 @@ if(ALL_LIBS)
 	dk_enable(osgdb_p3d)
 	dk_enable(osgdb_pic)
 	dk_enable(osgdb_ply)
-	if(NOT MAC)
+	#if(NOT MAC)
 		dk_enable(osgdb_png)			# broken on MAC
-	endif()
+	#endif()
 	dk_enable(osgdb_pnm)
 	dk_enable(osgdb_pov)
 	dk_enable(osgdb_pvr)
@@ -138,9 +140,9 @@ if(ALL_LIBS)
 	dk_enable(osgdb_serializers_osgvolume)	
 	dk_enable(osgdb_shp)
 	dk_enable(osgdb_stl)
-	if(NOT RASPBERRY)
+	#if(NOT RASPBERRY)
 		dk_enable(osgdb_tiff)			# broken on RASPBERRY
-	endif()
+	#endif()
 	dk_enable(osgdb_txp)
 	dk_enable(osgdb_txf)
 	dk_enable(osgdb_trans)
@@ -1347,7 +1349,7 @@ dk_setPath				(${OPENSCENEGRAPH}/${BUILD_DIR})
 string(REPLACE "/std:c++17" "" OPENCV_BUILD "${DKCMAKE_BUILD}")
 string(REPLACE "  " " " OPENCV_BUILD "${OPENCV_BUILD}")
 WIN_dk_queueCommand	(${OPENCV_BUILD}
-	"-DCMAKE_CXX_FLAGS=/D__STDC_CONSTANT_MACROS /I${ZLIB}/${OS} /I${LIBPNG} /I${LIBPNG}/${OS} /I${TIFF}/${OS}/libtiff /I${LIBJPEG-TURBO}/${OS}" 
+	"-DCMAKE_CXX_FLAGS=/D__STDC_CONSTANT_MACROS /I${LIBJPEG-TURBO}/${OS} /I${LIBPNG} /I${LIBPNG}/${OS} /I${TIFF}/${OS}/libtiff /I${ZLIB}/${OS}" 
 	-DBUILD_OSG_APPLICATIONS=OFF 
 	-DBUILD_OSG_EXAMPLES=OFF
 	-DDYNAMIC_OPENTHREADS=OFF 
