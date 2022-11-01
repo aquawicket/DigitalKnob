@@ -97,8 +97,8 @@ if(ALL_LIBS)
 		dk_enable(osgdb_ffmpeg)
 	endif()
 	dk_enable(osgdb_freetype)
-	if(GDAL)
-			dk_enable(osgdb_gdal)		#TODO: gdal/DKMAKE.cmake
+	if(GDAL AND NOT MAC)
+			dk_enable(osgdb_gdal)		#FIXME: Not buildig on MAC
 	endif()
 	if(GIFLIB AND NOT MAC)
 		dk_enable(osgdb_gif)			#FIXME: Not buildig on MAC
@@ -175,7 +175,9 @@ if(ALL_LIBS)
 	dk_enable(osgdb_rgb)
 	dk_enable(osgdb_rot)
 	dk_enable(osgdb_scale)
-	dk_enable(osgdb_sdl)
+	if(NOT MAC)
+		dk_enable(osgdb_sdl)			#FIXME: Not buildig on MAC
+	endif()
 	if(NOT MAC)
 		dk_enable(osgdb_shadow)			#FIXME: Not buildig on MAC
 	endif()
