@@ -31,8 +31,6 @@
 
 #include "DK/DKString.h"
 
-#define DESKTOP
-
 class DKMac{
 public:
 	static bool GetKey(int& key);
