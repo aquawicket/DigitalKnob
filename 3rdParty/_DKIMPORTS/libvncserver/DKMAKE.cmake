@@ -21,23 +21,24 @@ LINUX_DEBUG_dk_include		(${LIBVNCSERVER}/${OS}/${DEBUG_DIR})
 LINUX_RELEASE_dk_include	(${LIBVNCSERVER}/${OS}/${RELEASE_DIR})
 RASPBERRY_DEBUG_dk_include	(${LIBVNCSERVER}/${OS}/${DEBUG_DIR})
 RASPBERRY_RELEASE_dk_include(${LIBVNCSERVER}/${OS}/${RELEASE_DIR})
+
+# vncserver
 WIN_dk_libDebug				(${LIBVNCSERVER}/${OS}/${DEBUG_DIR}/vncserver.lib)
 WIN_dk_libRelease			(${LIBVNCSERVER}/${OS}/${RELEASE_DIR}/vncserver.lib)
+UNIX_dk_libDebug			(${LIBVNCSERVER}/${OS}/${DEBUG_DIR}/libvncserver.a)
+UNIX_dk_libRelease			(${LIBVNCSERVER}/${OS}/${RELEASE_DIR}/libvncserver.a)
+
+# vncclient
 WIN_dk_libDebug				(${LIBVNCSERVER}/${OS}/${DEBUG_DIR}/vncclient.lib)
 WIN_dk_libRelease			(${LIBVNCSERVER}/${OS}/${RELEASE_DIR}/vncclient.lib)
-MAC_dk_libDebug				(${LIBVNCSERVER}/${OS}/${DEBUG_DIR}/libvncserver.a)
-MAC_dk_libRelease			(${LIBVNCSERVER}/${OS}/${RELEASE_DIR}/libvncserver.a)
-MAC_dk_libDebug				(${LIBVNCSERVER}/${OS}/${DEBUG_DIR}/libvncclient.a)
-MAC_dk_libRelease			(${LIBVNCSERVER}/${OS}/${RELEASE_DIR}/libvncclient.a)
-IOSSIM_dk_libDebug			(${LIBVNCSERVER}/${OS}/${DEBUG_DIR}/lib/.libs/libvncserver.a)
-IOSSIM_dk_libRelease		(${LIBVNCSERVER}/${OS}/${RELEASE_DIR}/lib/.libs/libvncserver.a)
-LINUX_dk_libDebug			(${LIBVNCSERVER}/${OS}/${DEBUG_DIR}/libvncserver.a)
-LINUX_dk_libRelease			(${LIBVNCSERVER}/${OS}/${RELEASE_DIR}/libvncserver.a)
-LINUX_dk_libDebug			(${LIBVNCSERVER}/${OS}/${DEBUG_DIR}/libvncclient.a)
-LINUX_dk_libRelease			(${LIBVNCSERVER}/${OS}/${RELEASE_DIR}/libvncclient.a)
-ANDROID_dk_libDebug			(${LIBVNCSERVER}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libvncserver.a)
-ANDROID_dk_libRelease		(${LIBVNCSERVER}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libvncserver.a)
+UNIX_dk_libDebug			(${LIBVNCSERVER}/${OS}/${DEBUG_DIR}/libvncclient.a)
+UNIX_dk_libRelease			(${LIBVNCSERVER}/${OS}/${RELEASE_DIR}/libvncclient.a)
 
+
+
+### 3RDPARTY LINK ###
+WIN_dk_set	(LIBVNCSERVER_CMAKE -DLIBVNCSERVER_INCLUDE_DIR=${LIBVNCSERVER}/include -DLIBVNCSERVER_LIBRARY=${LIBVNCSERVER}/${OS}/${RELEASE_DIR}/vncserver.lib)
+UNIX_dk_set	(LIBVNCSERVER_CMAKE -DLIBVNCSERVER_INCLUDE_DIR=${LIBVNCSERVER}/include -DLIBVNCSERVER_LIBRARY=${LIBVNCSERVER}/${OS}/${RELEASE_DIR}/libvncserver.a)
 
 ### GENERATE ###
 dk_setPath							(${LIBVNCSERVER}/${BUILD_DIR})
@@ -47,7 +48,7 @@ LINUX_DEBUG_dk_queueCommand			(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=-I${LIBJPEG-TUR
 LINUX_RELEASE_dk_queueCommand		(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=-I${LIBJPEG-TURBO}/${OS}/Release" ${OPENSSL_CMAKE} ${LIBPNG_CMAKE} ${ZLIB_CMAKE} -DWITH_JPEG=ON ${LIBJPEG-TURBO_CMAKE} ${LIBVNCSERVER})
 RASPBERRY_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=-I${LIBJPEG-TURBO}/${OS}/Debug" ${OPENSSL_CMAKE} ${LIBPNG_CMAKE} ${ZLIB_CMAKE} -DWITH_JPEG=ON ${LIBJPEG-TURBO_CMAKE} ${LIBVNCSERVER})
 RASPBERRY_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=-I${LIBJPEG-TURBO}/${OS}/Release" ${OPENSSL_CMAKE} ${LIBPNG_CMAKE} ${ZLIB_CMAKE} -DWITH_JPEG=ON ${LIBJPEG-TURBO_CMAKE} ${LIBVNCSERVER})
-ANDROID_dk_queueCommand				(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=-I${LIBJPEG-TURBO}/${OS}" ${OPENSSL_CMAKE} ${LIBPNG_CMAKE} ${ZLIB_CMAKE} -DWITH_JPEG=ON ${LIBJPEG-TURBO_CMAKE} ${LIBVNCSERVER})
+ANDROID_dk_queueCommand				(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=-I${LIBJPEG-TURBO}/${OS}" -DWITH_JPEG=ON ${LIBJPEG-TURBO_CMAKE} ${LIBPNG_CMAKE} ${OPENSSL_CMAKE} ${ZLIB_CMAKE} ${LIBVNCSERVER})
 
 
 ### COMPILE ###

@@ -71,7 +71,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libexpat)
 	dk_disable(libtorrent)			# CMAKE ERROR:  No SOURCES given to target: torrent-rasterbar
-	dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
+	#dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	dk_disable(osgaudio)			# requires openscenegraph
