@@ -34,4 +34,8 @@ ANDROID_dk_queueCommand		(${DKCMAKE_BUILD} -DBUILD_STATIC=ON -DBUILD_TESTS=OFF -
 
 
 ### COMPILE ###
-dk_build(${FREEALUT_FOLDER} alut_static)
+WIN_dk_build(${FREEALUT_FOLDER} alut_static)
+APPLE_dk_build(${FREEALUT_FOLDER} alut_static)
+LINUX_dk_build(${FREEALUT_FOLDER})
+RASPBERRY_dk_build(${FREEALUT_FOLDER})
+ANDROID_dk_build(${FREEALUT_FOLDER} alut_static)
