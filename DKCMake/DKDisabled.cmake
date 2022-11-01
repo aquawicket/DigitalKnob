@@ -251,7 +251,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKWebSockets)		# requires libwebsockets, uwebsockets
 	dk_disable(dukluv)
 	dk_disable(ffmpeg)
-	dk_disable(freealut)			# error: not able to compile a simple test program
+	#dk_disable(freealut)			# error: not able to compile a simple test program
 	dk_disable(jerryscript)			# build errors
 	dk_disable(imagemagick)			# libimagemagik.a not found
 	dk_disable(kdevelop)			# permission denied
@@ -307,7 +307,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(dukluv)
 	dk_disable(emsdk)				# 64bit source only
 	dk_disable(ffmpeg)
-	dk_disable(freealut)			# no rule to make 'alut_static'
+	#dk_disable(freealut)			# no rule to make 'alut_static'
 	dk_disable(imagemagick)
 	dk_disable(java)
 	dk_disable(jerryscript)
