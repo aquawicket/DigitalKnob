@@ -62,8 +62,8 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(DKThread)			# build errors
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKUpdate)			# build errors
-	dk_disable(DKVncClient)			# requires libvncserver
-	dk_disable(DKVncServer)			# requires libvncserver
+	#dk_disable(DKVncClient)			# requires libvncserver
+	#dk_disable(DKVncServer)			# requires libvncserver
 	dk_disable(dukluv)
 	dk_disable(ffmpeg)
 	dk_disable(giflib)
