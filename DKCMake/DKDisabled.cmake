@@ -31,7 +31,6 @@ dk_disable(gradle)					# We don't need to build this from source
 dk_disable(java)					# TODO
 dk_disable(jpeg)					# DEPRECATED: using libjpeg_turbo instead
 dk_disable(librocket)				# OBSOLETE: replaced by rmlui
-dk_disable(libvncserver-master-win) # DEPRECATED: using libvncserver instead
 dk_disable(libx11)					# TODO
 dk_disable(msys2)					# TODO: currently using msys
 dk_disable(sdl2_gif)				# DEPRECATED: using SDL_Image animation instead
