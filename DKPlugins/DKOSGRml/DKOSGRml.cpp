@@ -60,8 +60,8 @@ bool DKOSGRml::SetupRml(){
 		guisystem = new DKOSGRmlSystem();
 		Rml::SetSystemInterface(guisystem);
 	}
-	if(!Rml::Initialise())
-		return DKERROR("Rocket::Core::Initialise() failed! \n");
+	Rml::Initialise();
+
 	guinode = new DKRmlGuiNode(dkOsgWindow->mTitle, true); //true = rocket debugger
 	guicam = new osg::Camera();
 	guicam->setClearMask(GL_DEPTH_BUFFER_BIT);

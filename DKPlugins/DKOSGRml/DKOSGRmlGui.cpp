@@ -80,11 +80,6 @@ DKRmlGuiNode::DKRmlGuiNode(const std::string& contextname, bool debug)
     
     _context = Rml::CreateContext(contextname.c_str(), Rml::Vector2i(width, height));
     if(_context != NULL){
-		// add error and other debug stuff to this gui. only one gui at a time may have the
-		// debug view
-		if(debug)
-			Rml::Debugger::Initialise(_context);
-
 		_contextEventListener = new DKRmlEventListener(_context->GetRootElement());
 		_context->AddEventListener("keydown",     _contextEventListener);
 		_context->AddEventListener("keyup",       _contextEventListener);
