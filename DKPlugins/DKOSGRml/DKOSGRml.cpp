@@ -10,7 +10,7 @@ bool DKOSGRml::Init(){
 	//link objects
 	dkOsgViewer = DKOSGViewer::Get("DKOSGViewer0");
 	dkOsgWindow = DKOSGWindow::Get("DKOSGWindow0");
-	dkRml = DKRml::Instance("DKRocket0");
+	dkRml = DKRml::Instance("DKRml0");
 	if(!dkOsgViewer)
 		return DKERROR("dkOsgViewer invalid \n");
 	if(!dkOsgWindow)
