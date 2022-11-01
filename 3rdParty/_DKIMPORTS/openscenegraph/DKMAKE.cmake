@@ -100,8 +100,8 @@ if(ALL_LIBS)
 	if(GDAL AND NOT MAC)
 			dk_enable(osgdb_gdal)		#FIXME: Not buildig on MAC
 	endif()
-	if(GIFLIB AND NOT MAC)
-		dk_enable(osgdb_gif)			#FIXME: Not buildig on MAC
+	if(GIFLIB AND NOT MAC AND NOT RASPBERRY)
+		dk_enable(osgdb_gif)			#FIXME: Not buildig on MAC, RASPBERRY
 	endif()
 	dk_enable(osgdb_gles)
 	dk_enable(osgdb_glsl)
