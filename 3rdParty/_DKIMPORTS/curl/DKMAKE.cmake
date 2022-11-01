@@ -37,6 +37,13 @@ ANDROID_dk_libDebug		(${CURL}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libcurl-d
 ANDROID_dk_libRelease	(${CURL}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libcurl.a)
 
 
+### 3RDPARTY LINK ###
+WIN_dk_set		(CURL_CMAKE -DCURL_INCLUDE_DIR=${CURL}/include -DCURL_LIBRARY=${CURL}/${OS}/lib/${RELEASE_DIR}/libcurl.lib)
+APPLE_dk_set	(CURL_CMAKE -DCURL_INCLUDE_DIR=${CURL}/include -DCURL_LIBRARY=${CURL}/${OS}/lib/${RELEASE_DIR}/libcurl.a)
+LINUX_dk_set	(CURL_CMAKE -DCURL_INCLUDE_DIR=${CURL}/include -DCURL_LIBRARY=${CURL}/${OS}/${RELEASE_DIR}/lib/libcurl.a)
+RASPBERRY_dk_set(CURL_CMAKE -DCURL_INCLUDE_DIR=${CURL}/include -DCURL_LIBRARY=${CURL}/${OS}/${RELEASE_DIR}/lib/libcurl.a)
+ANDROID_dk_set	(CURL_CMAKE -DCURL_INCLUDE_DIR=${CURL}/include -DCURL_LIBRARY=${CURL}/${OS}/lib/${RELEASE_DIR}/libcurl.a)
+
 ### GENERATE ###
 dk_setPath(${CURL}/${BUILD_DIR})
 WIN_dk_queueCommand			(${DKCMAKE_BUILD} -DCURL_STATICLIB=ON -DBUILD_CURL_EXE=OFF -DBUILD_CURL_TESTS=OFF -DCURL_DISABLE_LDAP=ON -DCURL_USE_OPENSSL=ON ${OPENSSL_CMAKE} ${ZLIB_CMAKE} -DCURL_STATIC_CRT=ON ${CURL})
