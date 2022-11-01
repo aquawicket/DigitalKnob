@@ -65,6 +65,7 @@ if(WIN) # Disabled for Windows targets
 	#dk_disable(DKVncServer)			# requires libvncserver
 	dk_disable(dukluv)
 	dk_disable(ffmpeg)
+	dk_disable(gdal)
 	dk_disable(giflib)
 	dk_disable(jasper)
 	dk_disable(libcaca)				# no CMakeLists.txt
