@@ -202,8 +202,8 @@ if(ALL_LIBS)
 	if(NOT MAC)
 		dk_enable(osgdb_v8)				#FIXME: Not buildig on MAC
 	endif()
-	if(NOT MAC)
-		dk_enable(osgdb_view)			#FIXME: Not buildig on MAC
+	if(NOT MAC AND NOT LINUX)
+		dk_enable(osgdb_view)			#FIXME: Not buildig on MAC, LINUX
 	endif()
 	if(NOT MAC)
 		dk_enable(osgdb_vnc)			#FIXME: Not buildig on MAC
