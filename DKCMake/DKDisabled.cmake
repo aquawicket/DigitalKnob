@@ -57,7 +57,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(DKOSGWidget)			# build errors
 	dk_disable(DKScreenRecorder)
 	dk_disable(DKSDLWav)			# build errors
-	dk_disable(DKSFMLRml)			# INCOMPLETE
+	#dk_disable(DKSFMLRml)			# INCOMPLETE
 	dk_disable(DKThread)			# build errors
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKUpdate)			# build errors
