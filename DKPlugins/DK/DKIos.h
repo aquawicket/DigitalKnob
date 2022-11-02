@@ -28,7 +28,6 @@
 #pragma once
 #ifndef DKIos_H
 #define DKIos_H
-#define MOBILE
 
 #import <UIKit/UIKit.h>
 

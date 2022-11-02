@@ -90,6 +90,9 @@
 #	endif
 #	include <TargetConditionals.h>
 #	if TARGET_IPHONE_SIMULATOR == 1
+#		ifndef MOBILE
+#			define MOBILE 1
+#		endif
 #		ifndef IOS
 #			define IOS 1
 #		endif
@@ -114,6 +117,9 @@
 #			define DKOS_VERSION "UNKNOWN"
 #		endif
 #	elif TARGET_OS_IPHONE == 1
+#		ifndef MOBILE
+#			define MOBILE 1
+#		endif
 #		ifndef IOS
 #			define IOS 1
 #		endif
@@ -155,6 +161,9 @@
 #	else
 #	endif
 #elif __ANDROID__
+#	ifndef MOBILE
+#		define MOBILE 1
+#	endif
 #	ifndef ANDROID
 #		define ANDROID 1
 #	endif
@@ -173,7 +182,9 @@
 #		define DKOS_VERSION "UNKNOWN" //TOSTRING(__ANDROID_API__)  FIXME: defining from another macro
 #	endif
 #elif __linux__
-#	define DESKTOP 1
+#	ifndef DESKTOP
+#		define DESKTOP 1
+#	endif
 #	ifndef LINUX
 #		define LINUX 1
 #	endif
