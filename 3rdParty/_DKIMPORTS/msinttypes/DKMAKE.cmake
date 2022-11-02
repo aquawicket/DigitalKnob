@@ -12,3 +12,7 @@ endif()
 
 ### INSTALL ###
 dk_import(https://raw.githubusercontent.com/SummersEpsilon/msinttypes/master/msinttypes-r26.zip)
+
+
+### 3RDPARTY LINK ###
+dk_set(MSINTTYPES_CMAKE "-DCMAKE_C_FLAGS=/I${MSINTTYPES}" "-DCMAKE_CXX_FLAGS=/I${MSINTTYPES}")

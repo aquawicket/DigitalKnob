@@ -24,8 +24,8 @@ UNIX_dk_libRelease		(${WAAVE}/${OS}/${RELEASE_DIR}/libwaave.a)
 
 ### GENERATE ###
 dk_setPath					(${WAAVE}/${BUILD_DIR})
-WIN_dk_queueCommand			(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=/I${FFMPEG-DEV}/include" ${FFMPEG-DEV_CMAKE} ${SDL_CMAKE} ${WAAVE})
-UNIX_dk_queueCommand		(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=-I${FFMPEG-DEV}/include" ${FFMPEG-DEV_CMAKE} ${SDL_CMAKE} ${WAAVE})
+WIN_dk_queueCommand			(${DKCMAKE_BUILD} ${FFMPEG-DEV_CMAKE} ${SDL_CMAKE} ${WAAVE})
+UNIX_dk_queueCommand		(${DKCMAKE_BUILD} ${FFMPEG-DEV_CMAKE} ${SDL_CMAKE} ${WAAVE})
 
 
 ### COMPILE ###
