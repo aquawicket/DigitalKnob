@@ -113,6 +113,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(dukluv)
 	dk_disable(ffmpeg)
 	dk_disable(flac)				# 'asm' undelcared identifier
+	dk_disable(gdal)
 	dk_disable(imagemagick)			# no such file or directory: libimagemagik.a
 	dk_disable(leptonica)			# Build Failed: fhmtauto.o
 	dk_disable(libcaca)				# no CMakeLists.txt
@@ -182,6 +183,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(DKVncServer)			# requires libvncserver
 	dk_disable(dukluv)
 	dk_disable(ffmpeg)
+	dk_disable(gdal)
 	dk_disable(imagemagick)			# No such file or directory
 	dk_disable(jasper)
 	dk_disable(jerryscript)			# Error: unknown linker option '-z'
@@ -250,6 +252,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKWebSockets)		# requires libwebsockets, uwebsockets
 	dk_disable(dukluv)
 	dk_disable(ffmpeg)
+	dk_disable(gdal)
 	dk_disable(jerryscript)			# build errors
 	dk_disable(imagemagick)			# libimagemagik.a not found
 	dk_disable(kdevelop)			# permission denied
@@ -305,6 +308,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(dukluv)
 	dk_disable(emsdk)				# 64bit source only
 	dk_disable(ffmpeg)
+	dk_disable(gdal)
 	dk_disable(imagemagick)
 	dk_disable(java)
 	dk_disable(jerryscript)
@@ -391,6 +395,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(ffmpeg)
 	dk_disable(flac)				# configure: error: unrecognized option: `-DANDROID32'
 	dk_disable(freealut)			# DKFunctions.cmake:4405->dk_findFiles():  files is invalid
+	dk_disable(gdal)
 	dk_disable(imagemagick)			# dkscript.tmp: line 2: cd: /android32/Debug: No such file or directory
 	dk_disable(jasper)
 	dk_disable(libcaca)				# no CMakeLists.txt
