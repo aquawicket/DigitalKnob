@@ -46,15 +46,16 @@
 //#include "../../../shell/include/ShellOpenGL.h"
 //#endif
 
-#ifdef USE_SFML2_gif
+#ifdef USE_SFML_gif
 extern "C" {
-	#include "SFML2_gif.h"
+	#include "SFML_gif.h"
 }
 #endif
 
-class RmlSFML2Renderer : public Rml::RenderInterface
+class RmlSFMLRenderer : public Rml::RenderInterface
 {
-	RmlSFML2Renderer();
+public:
+	RmlSFMLRenderer();
 
 	/// Sets the window
 	void SetWindow(sf::RenderWindow *Window);
@@ -91,7 +92,7 @@ private:
 private:
 	sf::RenderWindow *MyWindow;
 
-#ifdef USE_SFML2_gif
+#ifdef USE_SFML_gif
 	std::vector<SFML_GifAnim*> animations;
 #endif
 };

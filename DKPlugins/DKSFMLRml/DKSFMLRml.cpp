@@ -36,24 +36,24 @@ bool DKSFMLRml::Init(){
 	//SFML_StartTextInput(); 
 	//SFML_EventState(SFML_TEXTINPUT, SFML_ENABLE);
 	dkSFMLWindow = DKSFMLWindow::Instance("DKSFMLWindow0");
-	dkRml = DKRml::Instance("DKRml0");
-	if(!dkSFMLWindow)
+	if (!dkSFMLWindow)
 		return DKERROR("dkSFMLWindow invalid! \n")
+	dkRml = DKRml::Instance("DKRml0");
 	if(!dkRml)
 		return DKERROR("dkRml invalid! \n");
 #ifdef RML_SHELL_RENDER
-	Renderer = new ShellRenderInterfaceOpenGL();
+	renderer = new ShellRenderInterfaceOpenGL();
 #else
-	//Renderer = new RmlSFML2Renderer(dkSFMLWindow->renderer, dkSFMLWindow->window);
-	Renderer = new RmlSFML2Renderer();
-	Renderer.SetWindow(&dkSFMLWindow->window);
+	//Renderer = new RmlSFMLRenderer(dkSFMLWindow->renderer, dkSFMLWindow->window);
+	renderer = new RmlSFMLRenderer();
+	renderer->SetWindow(&dkSFMLWindow->window);
 #endif
-	SystemInterface = new RmlSFML2SystemInterface();
-	Rml::SetRenderInterface(Renderer);
-    Rml::SetSystemInterface(SystemInterface);
+	systemInterface = new RmlSFMLSystemInterface();
+	Rml::SetRenderInterface(renderer);
+    Rml::SetSystemInterface(systemInterface);
 	DKSFMLWindow::AddEventFunc(&DKSFMLRml::Handle, this);
-	DKSFMLWindow::AddRenderFunc(&DKSFMLRml::Render, this);
-	DKSFMLWindow::AddUpdateFunc(&DKSFMLRml::Update, this);
+	//DKSFMLWindow::AddRenderFunc(&DKSFMLRml::Render, this);
+	//DKSFMLWindow::AddUpdateFunc(&DKSFMLRml::Update, this);
 	return true;
 }
 
@@ -62,46 +62,46 @@ bool DKSFMLRml::End(){
 	return true;
 }
 
-bool DKSFMLRml::Handle(SFML_Event *event) {
+bool DKSFMLRml::Handle(sf::Event& event) {
 	//DKDEBUGFUNC(event);
 	if(!dkRml->document)
 		return DKERROR("dkRml->document invalid! \n");
 	Rml::Element* hover;
-	switch(event->type){
-		case SFML_MOUSEMOTION:
-			dkRml->context->ProcessMouseMove(event->motion.x, event->motion.y, SystemInterface->GetKeyModifiers());
+	switch(event.type){
+		case sf::Event::MouseMoved:
+			dkRml->context->ProcessMouseMove(event.mouseMove.x, event.mouseMove.y, systemInterface->GetKeyModifiers());
 			//if we clicked an element, end the event.
 			hover = dkRml->context->GetHoverElement();
 			if(hover && (!has(hover->GetId(), "iframe_")))
 				return true;
             break;   
-		case SFML_MOUSEBUTTONDOWN:
-            dkRml->context->ProcessMouseButtonDown(SystemInterface->TranslateMouseButton(event->button.button), SystemInterface->GetKeyModifiers());
+		case sf::Event::MouseButtonPressed:
+            dkRml->context->ProcessMouseButtonDown(systemInterface->TranslateMouseButton(event.mouseButton.button), systemInterface->GetKeyModifiers());
             //if we clicked an element, end the event.
 			hover = dkRml->context->GetHoverElement();
 			if(hover && (!has(hover->GetId(), "iframe_")))
 				return true;
 			break;
-        case SFML_MOUSEBUTTONUP:
-            dkRml->context->ProcessMouseButtonUp(SystemInterface->TranslateMouseButton(event->button.button), SystemInterface->GetKeyModifiers());
+		case sf::Event::MouseButtonReleased:
+            dkRml->context->ProcessMouseButtonUp(systemInterface->TranslateMouseButton(event.mouseButton.button), systemInterface->GetKeyModifiers());
 			//if we clicked an element, end the event.
 			hover = dkRml->context->GetHoverElement();
 			if(hover && (!has(hover->GetId(), "iframe_"))){
 				//return true;
 			}
 			break;
-        case SFML_MOUSEWHEEL:
-            dkRml->context->ProcessMouseWheel(event->wheel.y * -1, SystemInterface->GetKeyModifiers());
+		case sf::Event::MouseWheelScrolled:
+            dkRml->context->ProcessMouseWheel(event.mouseWheelScroll.y * -1, systemInterface->GetKeyModifiers());
             break;
 #ifdef ANDROID
-        case SFML_KEYDOWN:
+		case sf::Event::KeyPressed:
 			//DKINFO("DKSFMLRml::SFML_KEYDOWN("+toString((int)event->key.keysym.sym)+")\n");
-			dkRml->context->ProcessKeyDown(SystemInterface->TranslateKey(event->key.keysym.sym), SystemInterface->GetKeyModifiers());
-			if(event->key.keysym.sym == 13) //enter
+			dkRml->context->ProcessKeyDown(systemInterface->TranslateKey(event->key.keysym.sym), systemInterface->GetKeyModifiers());
+			if(event.key.code == 13) //enter
 				dkRml->context->ProcessTextInput("\n");
             break;
 #else
-		case SFML_KEYDOWN:{
+		case sf::Event::KeyPressed: {
 			//DKINFO("DKSFMLWindow::SFML_KEYDOWN("+toString(event->key.keysym.sym)+")\n");
 			/*
 			if(event->key.keysym.sym == 0){ return true; }
@@ -129,25 +129,25 @@ bool DKSFMLRml::Handle(SFML_Event *event) {
 			}
 			*/
 			//DKEvent::SendEvent("window", "keydown", toString(DKSFMLWindow::SFMLKeyCode[event->key.keysym.sym])); //keycode
-			//dkRml->context->ProcessKeyDown((Rml::Input::KeyIdentifier)DKSFMLWindow::SFMLKeyCode[event->key.keysym.sym], SystemInterface->GetKeyModifiers());
-			dkRml->context->ProcessKeyDown(SystemInterface->TranslateKey(event->key.keysym.sym), SystemInterface->GetKeyModifiers());
+			//dkRml->context->ProcessKeyDown((Rml::Input::KeyIdentifier)DKSFMLWindow::SFMLKeyCode[event->key.keysym.sym], systemInterface->GetKeyModifiers());
+			dkRml->context->ProcessKeyDown(systemInterface->TranslateKey(event.key.code), systemInterface->GetKeyModifiers());
 			//TODO: If enter is pressed, send enter event on ProcessTextInput
-			if(event->key.keysym.sym == 13) //Enter key
+			if(event.key.code == 13) //Enter key
 			//dkRml->context->ProcessTextInput(DKSFMLWindow::SFMLCharCode[event->key.keysym.sym]); //TEST
 			dkRml->context->ProcessTextInput("\n"); //TEST2
 			return false; //allow event to continue
 		}
 #endif
-		case SFML_TEXTINPUT:
+		case sf::Event::TextEntered:
 			//DKINFO("DKSFMLRml::SFML_TEXTINPUT("+DKString(event->text.text)+")\n");
-			dkRml->context->ProcessTextInput(event->text.text);
+			//dkRml->context->ProcessTextInput(event.text);
 			break;
-		case SFML_TEXTEDITING:
-			//DKINFO("DKSFMLRml::SFML_TEXTEDITING()\n");
-			break;	
-		case SFML_KEYUP:
-			//dkRml->context->ProcessKeyUp((Rml::Input::KeyIdentifier)DKSFMLWindow::SFMLKeyCode[event->key.keysym.sym], SystemInterface->GetKeyModifiers());
-			dkRml->context->ProcessKeyUp(SystemInterface->TranslateKey(event->key.keysym.sym), SystemInterface->GetKeyModifiers());
+		//case sf::Event::TextEvent
+		//	DKINFO("DKSFMLRml::SFML_TEXTEDITING()\n");
+		//	break;	
+		case sf::Event::KeyReleased:
+			//dkRml->context->ProcessKeyUp((Rml::Input::KeyIdentifier)DKSFMLWindow::SFMLKeyCode[event->key.keysym.sym], systemInterface->GetKeyModifiers());
+			dkRml->context->ProcessKeyUp(systemInterface->TranslateKey(event.key.code), systemInterface->GetKeyModifiers());
 			break;
             default:
                 break;
@@ -160,8 +160,8 @@ void DKSFMLRml::Render(){
 	if(dkSFMLWindow->width != dkRml->context->GetDimensions().x || dkSFMLWindow->height != dkRml->context->GetDimensions().y){
 		dkRml->context->SetDimensions(Rml::Vector2i(dkSFMLWindow->width, dkSFMLWindow->height));
 		// Reset blending and draw a fake point just outside the screen to let SFML know that it needs to reset its state in case it wants to render a texture 
-		SFML_SetRenderDrawBlendMode(dkSFMLWindow->renderer, SFML_BLENDMODE_NONE);
-		SFML_RenderDrawPoint(dkSFMLWindow->renderer, -1, -1);
+		//SFML_SetRenderDrawBlendMode(dkSFMLWindow->renderer, SFML_BLENDMODE_NONE);
+		//SFML_RenderDrawPoint(dkSFMLWindow->renderer, -1, -1);
 	}
 	dkRml->context->Render();
 }

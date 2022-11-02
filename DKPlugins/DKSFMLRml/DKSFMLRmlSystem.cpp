@@ -27,7 +27,7 @@
 #include <RmlUi/Core.h>
 #include "DKSFMLRml/DKSFMLRmlSystem.h"
 
-Rml::Input::KeyIdentifier RmlSFML2SystemInterface::TranslateKey(sf::Keyboard::Key Key){
+Rml::Input::KeyIdentifier RmlSFMLSystemInterface::TranslateKey(sf::Keyboard::Key Key){
 	DKDEBUGFUNC(Key);
 	switch(Key){
 	case sf::Keyboard::A:
@@ -183,7 +183,7 @@ Rml::Input::KeyIdentifier RmlSFML2SystemInterface::TranslateKey(sf::Keyboard::Ke
 	case sf::Keyboard::Add:
 		return Rml::Input::KI_ADD;
 		break;
-	case sf::Keyboard::BackSpace:
+	case sf::Keyboard::Backspace:
 		return Rml::Input::KI_BACK;
 		break;
 	case sf::Keyboard::Delete:
@@ -264,7 +264,7 @@ Rml::Input::KeyIdentifier RmlSFML2SystemInterface::TranslateKey(sf::Keyboard::Ke
 	case sf::Keyboard::RControl:
 		return Rml::Input::KI_RCONTROL;
 		break;
-	case sf::Keyboard::Return:
+	case sf::Keyboard::Enter:
 		return Rml::Input::KI_RETURN;
 		break;
 	case sf::Keyboard::RShift:
@@ -285,29 +285,25 @@ Rml::Input::KeyIdentifier RmlSFML2SystemInterface::TranslateKey(sf::Keyboard::Ke
 	return Rml::Input::KI_UNKNOWN;
 }
 
-int RmlSFML2SystemInterface::TranslateMouseButton(sf::Uint8 button){
+int RmlSFMLSystemInterface::TranslateMouseButton(sf::Mouse::Button button){
 	DKDEBUGFUNC(button);
     switch(button){
-        case SFML_BUTTON_LEFT:
+		case sf::Mouse::Left:
             return 0;
-        case SFML_BUTTON_RIGHT:
+        case sf::Mouse::Right:
             return 1;
-        case SFML_BUTTON_MIDDLE:
+		case sf::Mouse::Middle:
             return 2;
-        case SFML_BUTTON(3):
+		case sf::Mouse::XButton1:
             return 3;
-        case SFML_BUTTON(4):
+        case sf::Mouse::XButton2:
             return 4;
-        case SFML_BUTTON(5):
-            return 5;
-        case SFML_BUTTON(6):
-            return 6;
         default:
             return 99; //FIXME
     }
 }
 
-int RmlSFML2SystemInterface::GetKeyModifiers(){
+int RmlSFMLSystemInterface::GetKeyModifiers(){
 	DKDEBUGFUNC();
 	int Modifiers = 0;
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))
@@ -319,12 +315,12 @@ int RmlSFML2SystemInterface::GetKeyModifiers(){
 	return Modifiers;
 }
 
-double RmlSFML2SystemInterface::GetElapsedTime(){
+double RmlSFMLSystemInterface::GetElapsedTime(){
 	//DKDEBUGFUNC();
 	return timer.getElapsedTime().asSeconds();
 }
 
-bool RmlSFML2SystemInterface::LogMessage(Rml::Log::Type type, const Rml::String& message){
+bool RmlSFMLSystemInterface::LogMessage(Rml::Log::Type type, const Rml::String& message){
 	//DKDEBUGFUNC(type, message);
 	Rml::String Type;
 	switch(type){

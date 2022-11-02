@@ -30,6 +30,24 @@
 //#include <SFML_image.h>
 #include "DKSFMLRml/DKSFMLRmlRenderer.h"
 #include "DKSFMLWindow/DKSFMLWindow.h"
+#include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
+
+#if defined RMLUI_PLATFORM_WIN32
+#include <gl/Gl.h>
+#include <gl/Glu.h>
+#elif defined RMLUI_PLATFORM_MACOSX
+#include <AGL/agl.h>
+#include <OpenGL/gl.h>
+#include <OpenGL/glext.h>
+#include <OpenGL/glu.h>
+#elif defined RMLUI_PLATFORM_UNIX
+#include "RmlUi_Include_Xlib.h"
+#include <GL/gl.h>
+#include <GL/glext.h>
+#include <GL/glu.h>
+#include <GL/glx.h>
+#endif
 
 //#if !defined(IOS) && !defined(ANDROID)
 //static PFNGLUSEPROGRAMOBJECTARBPROC glUseProgramObjectARB;
@@ -58,19 +76,19 @@ struct RmlUiSFMLRendererVertex{
 	sf::Color Color;
 };
 
-RmlSFML2Renderer::RmlSFML2Renderer(){
+RmlSFMLRenderer::RmlSFMLRenderer(){
 }
 
-void RmlSFML2Renderer::SetWindow(sf::RenderWindow *Window){
+void RmlSFMLRenderer::SetWindow(sf::RenderWindow *Window){
 	MyWindow = Window;
 }
 
-sf::RenderWindow *RmlSFML2Renderer::GetWindow(){
+sf::RenderWindow *RmlSFMLRenderer::GetWindow(){
 	return MyWindow;
 }
 
 // Called by RmlUi when it wants to render geometry that it does not wish to optimise.
-void RmlSFML2Renderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, const Rml::TextureHandle texture, const Rml::Vector2f& translation){
+void RmlSFMLRenderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, const Rml::TextureHandle texture, const Rml::Vector2f& translation){
 	MyWindow->pushGLStates();
 	initViewport();
 
@@ -119,7 +137,7 @@ void RmlSFML2Renderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, i
 }
 
 // Called by RmlUi when it wants to compile geometry it believes will be static for the forseeable future.		
-Rml::CompiledGeometryHandle RmlSFML2Renderer::CompileGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, const Rml::TextureHandle texture)
+Rml::CompiledGeometryHandle RmlSFMLRenderer::CompileGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, const Rml::TextureHandle texture)
 {
 #ifdef ENABLE_GLEW
 	Rml::Vector<RmlUiSFMLRendererVertex> Data(num_vertices);
@@ -154,7 +172,7 @@ Rml::CompiledGeometryHandle RmlSFML2Renderer::CompileGeometry(Rml::Vertex* verti
 }
 
 // Called by RmlUi when it wants to render application-compiled geometry.		
-void RmlSFML2Renderer::RenderCompiledGeometry(Rml::CompiledGeometryHandle geometry, const Rml::Vector2f& translation){
+void RmlSFMLRenderer::RenderCompiledGeometry(Rml::CompiledGeometryHandle geometry, const Rml::Vector2f& translation){
 #ifdef ENABLE_GLEW
 	RmlUiSFMLRendererGeometryHandler *RealGeometry = (RmlUiSFMLRendererGeometryHandler *)geometry;
 
@@ -201,7 +219,7 @@ void RmlSFML2Renderer::RenderCompiledGeometry(Rml::CompiledGeometryHandle geomet
 }
 
 // Called by RmlUi when it wants to release application-compiled geometry.		
-void RmlSFML2Renderer::ReleaseCompiledGeometry(Rml::CompiledGeometryHandle geometry){
+void RmlSFMLRenderer::ReleaseCompiledGeometry(Rml::CompiledGeometryHandle geometry){
 #ifdef ENABLE_GLEW
 	delete (RmlUiSFMLRendererGeometryHandler *)geometry;
 #else
@@ -210,7 +228,7 @@ void RmlSFML2Renderer::ReleaseCompiledGeometry(Rml::CompiledGeometryHandle geome
 }
 
 // Called by RmlUi when it wants to enable or disable scissoring to clip content.		
-void RmlSFML2Renderer::EnableScissorRegion(bool enable){
+void RmlSFMLRenderer::EnableScissorRegion(bool enable){
 	if (enable)
 		glEnable(GL_SCISSOR_TEST);
 	else
@@ -218,12 +236,12 @@ void RmlSFML2Renderer::EnableScissorRegion(bool enable){
 }
 
 // Called by RmlUi when it wants to change the scissor region.		
-void RmlSFML2Renderer::SetScissorRegion(int x, int y, int width, int height){
+void RmlSFMLRenderer::SetScissorRegion(int x, int y, int width, int height){
 	glScissor(x, MyWindow->getSize().y - (y + height), width, height);
 }
 
 // Called by RmlUi when a texture is required by the library.		
-bool RmlSFML2Renderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vector2i& texture_dimensions, const Rml::String& source){
+bool RmlSFMLRenderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vector2i& texture_dimensions, const Rml::String& source){
 	Rml::FileInterface* file_interface = Rml::GetFileInterface();
 	Rml::FileHandle file_handle = file_interface->Open(source);
 	if (!file_handle)
@@ -253,26 +271,26 @@ bool RmlSFML2Renderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vect
 }
 
 // Called by RmlUi when a texture is required to be built from an internally-generated sequence of pixels.
-bool RmlSFML2Renderer::GenerateTexture(Rml::TextureHandle& texture_handle, const Rml::byte* source, const Rml::Vector2i& source_dimensions){
+bool RmlSFMLRenderer::GenerateTexture(Rml::TextureHandle& texture_handle, const Rml::byte* source, const Rml::Vector2i& source_dimensions){
 	sf::Texture *texture = new sf::Texture();
 
-	if (!texture->create(source_dimensions.x, source_dimensions.y)) {
+	if (!texture->create(sf::Vector2u(source_dimensions.x, source_dimensions.y))) {
 		delete texture;
 		return false;
 	}
 
-	texture->update(source, source_dimensions.x, source_dimensions.y, 0, 0);
+	//texture->update(source, sf::Vector2u(source_dimensions.x, source_dimensions.y)));  # FIXME
 	texture_handle = (Rml::TextureHandle)texture;
 
 	return true;
 }
 
 // Called by RmlUi when a loaded texture is no longer required.		
-void RmlSFML2Renderer::ReleaseTexture(Rml::TextureHandle texture_handle){
+void RmlSFMLRenderer::ReleaseTexture(Rml::TextureHandle texture_handle){
 	delete (sf::Texture *)texture_handle;
 }
 
-void RmlSFML2Renderer::initViewport(){
+void RmlSFMLRenderer::initViewport(){
 	glViewport(0, 0, MyWindow->getSize().x, MyWindow->getSize().y);
 
 	glMatrixMode(GL_PROJECTION);
@@ -307,14 +325,14 @@ void RmlSFML2Renderer::initViewport(){
 
 
 /*
-RmlSFML2Renderer::RmlSFML2Renderer(SFML_Renderer* renderer, SFML_Window* screen) {
+RmlSFMLRenderer::RmlSFMLRenderer(SFML_Renderer* renderer, SFML_Window* screen) {
 	//DKDEBUGFUNC(renderer, screen);
     mRenderer = renderer;
     mScreen = screen;
 }
 
 // Called by Rml when it wants to render geometry that it does not wish to optimise.
-void RmlSFML2Renderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, const Rml::TextureHandle texture, const Rml::Vector2f& translation) {
+void RmlSFMLRenderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, const Rml::TextureHandle texture, const Rml::Vector2f& translation) {
 	//DKDEBUGFUNC(vertices, num_vertices, indices, num_indices, texture, translation);
 #if !defined(IOS) && !defined(ANDROID)
     // DISABLE SFML Shaders
@@ -401,7 +419,7 @@ void RmlSFML2Renderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, i
     }
     glColor4f(1.0, 1.0, 1.0, 1.0);
     glPopMatrix();
-#ifdef USE_SFML2_gif
+#ifdef USE_SFML_gif
 	for(unsigned int i=0; i<animations.size(); ++i){
 		SFML_GIFAnimAuto(animations[i]);
 	}
@@ -414,7 +432,7 @@ void RmlSFML2Renderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, i
 
 
 // Called by Rml when it wants to enable or disable scissoring to clip content.
-void RmlSFML2Renderer::EnableScissorRegion(bool enable)
+void RmlSFMLRenderer::EnableScissorRegion(bool enable)
 {
 	//DKDEBUGFUNC(enable);
     if (enable)
@@ -424,7 +442,7 @@ void RmlSFML2Renderer::EnableScissorRegion(bool enable)
 }
 
 // Called by Rml when it wants to change the scissor region.
-void RmlSFML2Renderer::SetScissorRegion(int x, int y, int width, int height)
+void RmlSFMLRenderer::SetScissorRegion(int x, int y, int width, int height)
 {
 	//DKDEBUGFUNC(x, y, width, height);
     int w_width, w_height;
@@ -433,7 +451,7 @@ void RmlSFML2Renderer::SetScissorRegion(int x, int y, int width, int height)
 }
 
 // Called by Rml when a texture is required by the library.
-bool RmlSFML2Renderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vector2i& texture_dimensions, const Rml::String& source)
+bool RmlSFMLRenderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vector2i& texture_dimensions, const Rml::String& source)
 {
 	//DKDEBUGFUNC(texture_handle, texture_dimensions, "Rml::String&");
 
@@ -459,7 +477,7 @@ bool RmlSFML2Renderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vect
     file_interface->Read(buffer, buffer_size, file_handle);
     file_interface->Close(file_handle);
 
-#ifdef USE_SFML2_gif
+#ifdef USE_SFML_gif
 	std::string src = source;//.CString();
 	if(has(src,".gif")){
 		animations.push_back(SFML_GIFAnimLoad_RW(SFML_RWFromMem(buffer, buffer_size), mRenderer));
@@ -514,7 +532,7 @@ bool RmlSFML2Renderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vect
         }
         return true;
     }
-#ifdef USE_SFML2_gif
+#ifdef USE_SFML_gif
 	}
     
 #endif
@@ -522,7 +540,7 @@ bool RmlSFML2Renderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vect
 }
 
 // Called by Rml when a texture is required to be built from an internally-generated sequence of pixels.
-bool RmlSFML2Renderer::GenerateTexture(Rml::TextureHandle& texture_handle, const Rml::byte* source, const Rml::Vector2i& source_dimensions)
+bool RmlSFMLRenderer::GenerateTexture(Rml::TextureHandle& texture_handle, const Rml::byte* source, const Rml::Vector2i& source_dimensions)
 {
 	//DKDEBUGFUNC(texture_handle, source, source_dimensions);
     #if SFML_BYTEORDER == SFML_BIG_ENDIAN
@@ -546,7 +564,7 @@ bool RmlSFML2Renderer::GenerateTexture(Rml::TextureHandle& texture_handle, const
 }
 
 // Called by Rml when a loaded texture is no longer required.
-void RmlSFML2Renderer::ReleaseTexture(Rml::TextureHandle texture_handle)
+void RmlSFMLRenderer::ReleaseTexture(Rml::TextureHandle texture_handle)
 {
 	//DKDEBUGFUNC(texture_handle);
     SFML_DestroyTexture((SFML_Texture*) texture_handle);

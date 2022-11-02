@@ -44,7 +44,7 @@ public:
 	bool Init();
 	bool End();
 
-	bool Handle(SFML_Event *event);
+	bool Handle(sf::Event& event);
 	void Render();
 	void Update();
 	//void ProcessEvent(Rml::Core::Event& event);
@@ -54,9 +54,9 @@ public:
 #ifdef RML_SHELL_RENDER
 	ShellRenderInterfaceOpenGL* Renderer;
 #else
-	RmlSFML2Renderer* Renderer;
+	RmlSFMLRenderer* renderer;
 #endif
-	RmlSFML2SystemInterface* SystemInterface;
+	RmlSFMLSystemInterface* systemInterface;
 };
 REGISTER_OBJECT(DKSFMLRml, true)
 #endif //DKSFMLRml_H

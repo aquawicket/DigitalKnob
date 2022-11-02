@@ -28,19 +28,21 @@
 #ifndef DKSFMLRmlSystem_H
 #define DKSFMLRmlSystem_H
 
+#include "DK/DK.h"
 #include <RmlUi/Core/SystemInterface.h>
 #include <RmlUi/Core/Input.h>
+#include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
 
-class RmlSFML2SystemInterface : public Rml::SystemInterface
+class RmlSFMLSystemInterface : public Rml::SystemInterface
 {
 public:
 	double GetElapsedTime() override;
 	int GetKeyModifiers();
 	bool LogMessage(Rml::Log::Type type, const Rml::String& message) override;
 	Rml::Input::KeyIdentifier TranslateKey(sf::Keyboard::Key Key);
-	int TranslateMouseButton(sf::Uint8 button);
+	int TranslateMouseButton(sf::Mouse::Button button);
 private:
 	sf::Clock timer;
 };
