@@ -186,7 +186,7 @@ if(ALL_LIBS)
 	if(NOT MAC)
 		dk_enable(osgdb_svg)			#FIXME: Not buildig on MAC
 	endif()
-	if(NOT MAC)
+	if(NOT MAC AND NOT LINUX)
 		dk_enable(osgdb_terrain)		#FIXME: Not buildig on MAC
 	endif()
 	dk_enable(osgdb_tf)
