@@ -210,8 +210,8 @@ if(ALL_LIBS)
 	endif()
 	dk_enable(osgdb_vtf)
 	dk_enable(osgdb_x)
-	if(NOT MAC)
-		dk_enable(osgdb_zeroconfdevice)	#FIXME: Not buildig on MAC
+	if(NOT MAC AND NOT LINUX)
+		dk_enable(osgdb_zeroconfdevice)	#FIXME: Not buildig on MAC, LINUX
 	endif()
 	dk_enable(osgdb_zip)
 	
