@@ -401,7 +401,7 @@ bool DKUtil::GetScreenHeight(int& h){
 bool DKUtil::GetScreenWidth(int& w){
 #	if WIN32
 		return DKWindows::GetScreenWidth(w) && DKDEBUGRETURN(w);
-#	elif APPLE
+#	elif MAC
 		return DKMac::GetScreenWidth(w) && DKDEBUGRETURN(w);
 #	elif LINUX
 		return DKLinux::GetScreenWidth(w);// && DKDEBUGRETURN(w);
