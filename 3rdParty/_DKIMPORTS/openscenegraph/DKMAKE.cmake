@@ -199,8 +199,8 @@ if(ALL_LIBS)
 	dk_enable(osgdb_trk)
 	dk_enable(osgdb_txf)
 	dk_enable(osgdb_txp)
-	if(NOT MAC)
-		dk_enable(osgdb_v8)				#FIXME: Not buildig on MAC
+	if(NOT MAC AND NOT LINUX)
+		dk_enable(osgdb_v8)				#FIXME: Not buildig on MAC, LINUX
 	endif()
 	if(NOT MAC AND NOT LINUX)
 		dk_enable(osgdb_view)			#FIXME: Not buildig on MAC, LINUX
