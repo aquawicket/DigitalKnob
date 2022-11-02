@@ -4,6 +4,7 @@
 # https://robertying.io/posts/compile-openssl-and-curl-for-android
 
 
+### DEPEND ###
 dk_depend(dl)
 dk_depend(libssh)
 dk_depend(openssl)
@@ -12,7 +13,7 @@ dk_depend(ws2_32.lib)
 dk_depend(zlib)
 
 
-
+### IMPORT ###
 WIN_dk_import	(https://github.com/curl/curl/archive/refs/tags/curl-7_43_0.zip)
 UNIX_dk_import	(https://github.com/curl/curl/archive/refs/tags/curl-7_84_0.zip)
 #dk_import		(https://github.com/curl/curl.git)
@@ -38,7 +39,7 @@ ANDROID_dk_libRelease	(${CURL}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libcur
 
 
 ### 3RDPARTY LINK ###
-WIN_dk_set		(CURL_CMAKE "-DCMAKE_C_FLAGS=/I${CURL}/${OS}/include" "-DCMAKE_CXX_FLAGS=/I${CURL}/${OS}/include" -DCURL_INCLUDE_DIR=${CURL}/include -DCURL_LIBRARY=${CURL}/${OS}/lib/${RELEASE_DIR}/libcurl.lib)
+WIN_dk_set		(CURL_CMAKE "-DCMAKE_C_FLAGS=/I${CURL}/${OS}/include/curl" "-DCMAKE_CXX_FLAGS=/I${CURL}/${OS}/include/curl" -DCURL_INCLUDE_DIR=${CURL}/include -DCURL_LIBRARY=${CURL}/${OS}/lib/${RELEASE_DIR}/libcurl.lib)
 APPLE_dk_set	(CURL_CMAKE "-DCMAKE_C_FLAGS=-I${CURL}/${OS}/include" "-DCMAKE_CXX_FLAGS=-I${CURL}/${OS}/include" -DCURL_INCLUDE_DIR=${CURL}/include -DCURL_LIBRARY=${CURL}/${OS}/lib/${RELEASE_DIR}/libcurl.a)
 LINUX_dk_set	(CURL_CMAKE "-DCMAKE_C_FLAGS=-I${CURL}/${OS}/include" "-DCMAKE_CXX_FLAGS=-I${CURL}/${OS}/include" -DCURL_INCLUDE_DIR=${CURL}/include -DCURL_LIBRARY=${CURL}/${OS}/${RELEASE_DIR}/lib/libcurl.a)
 RASPBERRY_dk_set(CURL_CMAKE "-DCMAKE_C_FLAGS=-I${CURL}/${OS}/include" "-DCMAKE_CXX_FLAGS=-I${CURL}/${OS}/include" -DCURL_INCLUDE_DIR=${CURL}/include -DCURL_LIBRARY=${CURL}/${OS}/${RELEASE_DIR}/lib/libcurl.a)
