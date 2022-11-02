@@ -178,7 +178,7 @@ if(ALL_LIBS)
 	if(NOT MAC)
 		dk_enable(osgdb_sdl)			#FIXME: Not buildig on MAC
 	endif()
-	if(NOT MAC)
+	if(NOT MAC AND NOT LINUX)
 		dk_enable(osgdb_shadow)			#FIXME: Not buildig on MAC
 	endif()
 	dk_enable(osgdb_shp)
