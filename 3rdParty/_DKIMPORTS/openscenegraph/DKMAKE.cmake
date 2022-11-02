@@ -26,6 +26,7 @@ dk_set(OSG_PLUGINS osgPlugins-3.7.0)
 
 
 ### LINK ###
+dk_define					(OSG_LIBRARY_STATIC)
 dk_include					(${OPENSCENEGRAPH}/include)
 WIN32_dk_include			(${OPENSCENEGRAPH}/${OS}/include)
 WIN64_dk_include			(${OPENSCENEGRAPH}/${OS}/include)
@@ -175,7 +176,7 @@ if(ALL_LIBS)
 	dk_enable(osgdb_rgb)
 	dk_enable(osgdb_rot)
 	dk_enable(osgdb_scale)
-	if(NOT MAC)
+	if(NOT MAC AND NOT LINUX)
 		dk_enable(osgdb_sdl)			#FIXME: Not buildig on MAC
 	endif()
 	if(NOT MAC AND NOT LINUX)
@@ -205,8 +206,8 @@ if(ALL_LIBS)
 	if(NOT MAC AND NOT LINUX)
 		dk_enable(osgdb_view)			#FIXME: Not buildig on MAC, LINUX
 	endif()
-	if(NOT MAC)
-		dk_enable(osgdb_vnc)			#FIXME: Not buildig on MAC
+	if(LIBVNCSERVER)
+		dk_enable(osgdb_vnc)
 	endif()
 	dk_enable(osgdb_vtf)
 	dk_enable(osgdb_x)
@@ -249,7 +250,6 @@ if(ALL_LIBS)
 endif()
 
 if(OpenThreads)
-	dk_define				(OSG_LIBRARY_STATIC)
 	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/OpenThreadsd.lib)
 	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/OpenThreads.lib)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libOpenThreadsd.a)
