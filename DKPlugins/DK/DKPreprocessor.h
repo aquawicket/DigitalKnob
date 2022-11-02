@@ -64,7 +64,9 @@
 
 // https://web.archive.org/web/20191012035921/http://nadeausoftware.com/articles/2012/01/c_c_tip_how_use_compiler_predefined_macros_detect_operating_system
 #if _WIN32
-#	define DESKTOP 1
+#	ifndef DESKTOP
+#		define DESKTOP 1
+#	endif
 #	ifndef WIN
 #		define WIN 1
 #	endif
@@ -83,6 +85,9 @@
 #		define DKOS_VERSION "UNKNOWN"
 #	endif
 #elif __APPLE__ && __MACH__
+#   ifndef APPLE
+#		define APPLE 1
+#	endif
 #	include <TargetConditionals.h>
 #	if TARGET_IPHONE_SIMULATOR == 1
 #		ifndef IOS
@@ -127,7 +132,9 @@
 #			define DKOS_VERSION "UNKNOWN"
 #		endif
 #	elif TARGET_OS_MAC == 1
-#		define DESKTOP 1
+#		ifndef DESKTOP
+#			define DESKTOP 1
+#		endif
 #		ifndef MAC
 #			define MAC 1
 #		endif
@@ -261,7 +268,7 @@
 #	define DKCPP_LANGUAGE_VERSION "UNKNOWN"
 #endif
 
-
+// BUILD_TYPE
 #if DEBUG
 #	define DKBUILD_TYPE "DEBUG"
 #elif RELEASE
@@ -290,7 +297,7 @@
 #ifdef __has_builtin
 	//TODO
 #else
-	//TODO
+	//static_assert(false, "__has_builtin not supported");
 #endif
 
 #ifdef __has_include
