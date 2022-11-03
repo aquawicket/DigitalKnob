@@ -22,7 +22,7 @@ Desktop.onevent = function Desktop_onevent(event) {
         event.preventDefault();
         DKPlugin("DKOS/DesktopMenu.js", function() {
             DKPlugin("DKGui/DKMenu.js", function() {
-                DKMenu_ValidatePosition("DKOS/DesktopMenu.html");
+                //DKMenu_ValidatePosition("DKOS/DesktopMenu.html");
             });
         });
     }

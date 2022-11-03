@@ -28,14 +28,12 @@ DesktopMenu.onevent = function DesktopMenu_onevent(event) {
             DKFrame_Html("DKOS/BackgroundMenu.html");
         });
     }
-    if (event.currentTarget.id === "ToggleFullscreen") {
+    if (event.currentTarget.id === "ToggleFullscreen")
         Desktop_ToggleFullscreen();
-    }
-
+   
     if (event.currentTarget === document) {
-        if (byId("DKOS/DesktopMenu.html").contains(document.elementFromPoint(window.mouseX, window.mouseY))) {
+        if (byId("DKOS/DesktopMenu.html").contains(document.elementFromPoint(window.mouseX, window.mouseY)))
             return;
-        }
     }
     dk.close("DKOS/DesktopMenu.js");
 }
@@ -43,9 +41,8 @@ DesktopMenu.onevent = function DesktopMenu_onevent(event) {
 Desktop.toggleFullscreen = function Desktop_toggleFullscreen() {
     //TODO: move this function into DKWindow.js
     //http://stackoverflow.com/questions/3900701/onclick-go-full-screen
-    if (CPP_DKWindow_IsFullscreen()) {
+    if (CPP_DKWindow_IsFullscreen())
         CPP_DKWindow_Windowed();
-    } else {
+    else
         CPP_DKWindow_Fullscreen();
-    }
 }

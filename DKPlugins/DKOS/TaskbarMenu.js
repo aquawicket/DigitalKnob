@@ -2,30 +2,34 @@
 // All elements will be added dynamically via DKTaskbarMenu functions.   I.E.  DKTaskbarMenu_AddApp(); 
 // Start with a blank DKTaskbarMenu that forms to the number of elements in it.
 
-function TaskbarMenu_init() {
+function TaskbarMenu(){}
+dk.taskbarMenu = DKPlugin(TaskbarMenu)
+
+
+TaskbarMenu.prototype.init = function TaskbarMenu_init() {
     dk.create("DKOS/TaskbarMenu.html", function() {
-        document.addEventListener("mousedown", TaskbarMenu_onevent);
-        byId("OpenSource").addEventListener("click", TaskbarMenu_onevent);
-        byId("OpenDebug").addEventListener("click", TaskbarMenu_onevent);
-        byId("PushDKFiles").addEventListener("click", TaskbarMenu_onevent);
-        byId("ClearConsole").addEventListener("click", TaskbarMenu_onevent);
-        byId("Info").addEventListener("click", TaskbarMenu_onevent);
-        byId("Reload").addEventListener("click", TaskbarMenu_onevent);
-        byId("CloseDKGui").addEventListener("click", TaskbarMenu_onevent);
-        byId("FileExplorer").addEventListener("click", TaskbarMenu_onevent);
-        byId("OpenBuilder").addEventListener("click", TaskbarMenu_onevent);
-        byId("OpenNotepad").addEventListener("click", TaskbarMenu_onevent);
-        byId("InputTest").addEventListener("click", TaskbarMenu_onevent);
-        byId("OpenMessage").addEventListener("click", TaskbarMenu_onevent);
-        byId("OpenTetris").addEventListener("click", TaskbarMenu_onevent);
-        byId("OpenGoogle").addEventListener("click", TaskbarMenu_onevent);
-        byId("TaskbarMenu_Run").addEventListener("keydown", TaskbarMenu_onevent);
-        byId("Git").addEventListener("click", TaskbarMenu_onevent);
+        document.addEventListener("mousedown", TaskbarMenu.onevent);
+        byId("OpenSource").addEventListener("click", TaskbarMenu.onevent);
+        byId("OpenDebug").addEventListener("click", TaskbarMenu.onevent);
+        byId("PushDKFiles").addEventListener("click", TaskbarMenu.onevent);
+        byId("ClearConsole").addEventListener("click", TaskbarMenu.onevent);
+        byId("Info").addEventListener("click", TaskbarMenu.onevent);
+        byId("Reload").addEventListener("click", TaskbarMenu.onevent);
+        byId("CloseDKGui").addEventListener("click", TaskbarMenu.onevent);
+        byId("FileExplorer").addEventListener("click", TaskbarMenu.onevent);
+        byId("OpenBuilder").addEventListener("click", TaskbarMenu.onevent);
+        byId("OpenNotepad").addEventListener("click", TaskbarMenu.onevent);
+        byId("InputTest").addEventListener("click", TaskbarMenu.onevent);
+        byId("OpenMessage").addEventListener("click", TaskbarMenu.onevent);
+        byId("OpenTetris").addEventListener("click", TaskbarMenu.onevent);
+        byId("OpenGoogle").addEventListener("click", TaskbarMenu.onevent);
+        byId("TaskbarMenu_Run").addEventListener("keydown", TaskbarMenu.onevent);
+        byId("Git").addEventListener("click", TaskbarMenu.onevent);
         byId("TaskbarMenu_Run").focus();
     });
 }
 
-function TaskbarMenu_end() {
+TaskbarMenu.prototype.end = function TaskbarMenu_end() {
     document.removeEventListener("mousedown", TaskbarMenu.onevent);
     byId("OpenSource").removeEventListener("click", TaskbarMenu.onevent);
     byId("OpenDebug").removeEventListener("click", TaskbarMenu.onevent);
@@ -191,13 +195,13 @@ TaskbarMenu.onevent = function TaskbarMenu_onevent(event) {
     dk.close("DKOS/TaskbarMenu.js");
 }
 
-TaskbarMenu.Add = function TaskbarMenu_Add(title, code) {
+TaskbarMenu.prototype.Add = function TaskbarMenu_Add(title, code) {
     //<div title="tooltip" id="FileExplorer" style="position:absolute;top:5rem;left:10rem;">File Explorer</div>
     var ele = DK_CreateElement(byId("DKOS/TaskbarMenu.html"), "div", "TaskbarMenu_item");
     ele.innerHTML = title;
 }
 
-TaskbarMenu.Run = function TaskbarMenu_Run(command) {
+TaskbarMenu.prototype.Run = function TaskbarMenu_Run(command) {
     if (command.indexOf("http://") === 0) {
         DKFrame_Iframe(command, command, "100%", "100%");
         return true;
