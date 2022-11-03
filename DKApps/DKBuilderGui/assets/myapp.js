@@ -80,8 +80,13 @@ myapp.loadApp = function myapp_loadApp() {
     });
 	*/
 	
+	/*
 	DKPlugin("DKCodeRunner/DKCodeRunner.js", function(){
 		DKCodeRunner.prototype.create();
+	})*/
+	
+	DKPlugin("DKOS/DKOS.js", function(){
+		DKOS.prototype.create();
 	})
 }
 
