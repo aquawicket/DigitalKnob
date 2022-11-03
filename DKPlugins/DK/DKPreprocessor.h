@@ -244,7 +244,7 @@
 
 
 #if __STDC_VERSION__ > 201710L
-#	define DKC_LANGUAGE_VERSION "Grater then C18"
+#	define DKC_LANGUAGE_VERSION "Greater then C18"
 #elif __STDC_VERSION__ == 201710L
 #	define DKC_LANGUAGE_VERSION "C18"
 #elif __STDC_VERSION__ == 201112L
@@ -302,6 +302,10 @@
 #		define RTTI_ENABLED 1
 #	endif
 #endif
+
+
+// DK_UNUSED(arg) - supress unfererenced formal parameter warnings for uused variables
+#define DK_UNUSED(arg) (void)arg;
 
 
 // https://en.cppreference.com/w/cpp/keyword
