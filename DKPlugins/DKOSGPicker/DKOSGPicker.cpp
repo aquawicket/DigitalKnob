@@ -66,7 +66,7 @@ void DKOSGPicker::pick(osgViewer::View* view, const osgGA::GUIEventAdapter& ea){
 	*/
 	
     DKString gdlist="";
-	int z = 0;
+	//int z = 0;
 	osgUtil::LineSegmentIntersector::Intersections intersections;
     if(view->computeIntersections(ea,intersections)){
         for(osgUtil::LineSegmentIntersector::Intersections::iterator hitr = intersections.begin(); hitr != intersections.end(); ++hitr){
@@ -132,6 +132,7 @@ void DKOSGPicker::remove(osgViewer::View* view, const osgGA::GUIEventAdapter& ea
 }
 
 void DKOSGPicker::setLabel(const DKString& name){
+	DK_UNUSED(name);
 	//if (_updateText.get()) _updateText->setText(name);
 }
 

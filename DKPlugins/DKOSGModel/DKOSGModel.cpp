@@ -27,6 +27,7 @@ bool DKOSGModel::End(){
 }
 
 bool DKOSGModel::Create(DKOSGWindow* window, osg::Group* theRoot, const DKString& file,  osg::Vec3 pos){
+	DK_UNUSED(window);
 	//DKLog("Loading Model "+file+"\n");
 	this->theRoot = theRoot;
 

@@ -64,8 +64,8 @@ public:
 	DKString mTitle;
 	int winX;
 	int winY;
-	unsigned int width;
-	unsigned int height;
+	int width;
+	int height;
 
 #ifdef WIN32
 	bool SetHwnd();

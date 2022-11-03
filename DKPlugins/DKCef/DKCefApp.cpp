@@ -182,6 +182,7 @@ bool DKV8::Execute(CefRefPtr<CefBrowser> browser, std::string func, CefRefPtr<Ce
 //Single process Execute
 bool DKCefV8Handler::Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefV8ValueList& arguments, CefRefPtr<CefV8Value>& retval, CefString& exception){
 	//DKDEBUGFUNC(name, object, arguments, retval, exception);
+	DK_UNUSED(exception);
 	if(DKV8::singleprocess == true){ //Single process
 		if(!DKV8::functions[name])
 			return DKERROR(name.ToString()+" not registered\n");
@@ -263,6 +264,7 @@ bool DKCefApp::SendEvent(const DKString& id, const DKString& type, const DKStrin
 
 void DKCefApp::OnBeforeCommandLineProcessing(const CefString& process_type, CefRefPtr<CefCommandLine> command_line){
 	//DKDEBUGFUNC(process_type, command_line);
+	DK_UNUSED(process_type);
 #ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
 #endif
@@ -345,6 +347,9 @@ void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 
 bool DKCefApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefProcessId source_process, CefRefPtr<CefProcessMessage> message) {
 	//DKDEBUGFUNC(browser, source_process, message);
+	DK_UNUSED(browser);
+	DK_UNUSED(source_process);
+	//DK_UNUSED(message);
 #ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
 #endif

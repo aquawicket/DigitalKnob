@@ -360,6 +360,7 @@ bool DKSDLWindow::TestString(const void* input, void* output) {
 
 bool DKSDLWindow::TestReturnInt(const void* input, void* output) {
     //DKDEBUGFUNC(input, output);
+    DK_UNUSED(input);
     int var = 1234;
     *(int*)output = var;
     return true;
@@ -367,6 +368,7 @@ bool DKSDLWindow::TestReturnInt(const void* input, void* output) {
 
 bool DKSDLWindow::TestReturnString(const void* input, void* output) {
     //DKDEBUGFUNC(input, output);
+    DK_UNUSED(input);
     std::string var = "Return test";
     *(std::string*)output = var;
     return true;
@@ -416,6 +418,7 @@ bool DKSDLWindow::GetHandle(const void* input, void* output) {
 
 bool DKSDLWindow::GetHeight(const void* input, void* output) {
     //DKDEBUGFUNC(input, output);
+    DK_UNUSED(input);
     int h;
     SDL_GetWindowSize(window, NULL, &h);
     if(h == 0)
@@ -448,6 +451,7 @@ bool DKSDLWindow::GetPixelRatio(const void* input, void* output) {
 
 bool DKSDLWindow::GetWidth(const void* input, void* output) {
     //DKDEBUGFUNC(input, output);
+    DK_UNUSED(input);
     int w;
     SDL_GetWindowSize(window, &w, NULL);
     if(w == 0)
@@ -534,6 +538,7 @@ bool DKSDLWindow::SetHeight(const void* input, void* output) {
 
 bool DKSDLWindow::SetIcon(const void* input, void* output) {
     //DKDEBUGFUNC(input, output);
+    DK_UNUSED(output);
 #ifdef WIN32
     DKString file = *(DKString*)input;
     SDL_SysWMinfo wmInfo;

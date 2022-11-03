@@ -43,7 +43,8 @@ GUIEventHandler::GUIEventHandler(DKRmlGuiNode* node) : mGUINode(node){
 
 }
 
-bool GUIEventHandler::handle(const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa, osg::Object*, osg::NodeVisitor* nv){ 
+bool GUIEventHandler::handle(const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa, osg::Object*, osg::NodeVisitor* nv){
+	DK_UNUSED(nv);
 	osg::NodePath np;
     osg::NodePathList nodePaths = mGUINode->getParentalNodePaths();
     assert(!nodePaths.empty());
@@ -56,6 +57,7 @@ DKRmlGuiNode::DKRmlGuiNode(const std::string& contextname, bool debug)
     , _camera(NULL)
     , mGUIEventHandler(new GUIEventHandler(this))
 {
+	DK_UNUSED(debug);
 	_renderer = dynamic_cast<DKOSGRmlRender*>(Rml::GetRenderInterface());
     if(_renderer == NULL)
 		DKERROR("GuiNode::GuiNode() _renderer invalid! \n");

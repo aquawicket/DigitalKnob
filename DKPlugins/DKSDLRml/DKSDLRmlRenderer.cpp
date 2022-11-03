@@ -85,6 +85,11 @@ void DKSDLRmlRenderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, i
 // Called by RmlUi when it wants to compile geometry it believes will be static for the foreseeable future.
 Rml::CompiledGeometryHandle DKSDLRmlRenderer::CompileGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rml::TextureHandle texture) {
     //DKDEBUGFUNC(vertices, num_vertices, indices, num_indices, texture);
+    DK_UNUSED(vertices);
+    DK_UNUSED(num_vertices);
+    DK_UNUSED(num_indices);
+    DK_UNUSED(texture);
+    DK_UNUSED(indices);
     return (Rml::CompiledGeometryHandle) nullptr;
 }
 
