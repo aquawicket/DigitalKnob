@@ -1,7 +1,7 @@
 //"use strict";
 
-function DKOS(){}
-dk.os = DKPlugin(DKOS)
+dk.os = DKPlugin(DKOS, "singleton")
+function DKOS() {}
 
 DKOS.prototype.init = function DKOS_init() {
     console.log("DKOS.prototype.init()")

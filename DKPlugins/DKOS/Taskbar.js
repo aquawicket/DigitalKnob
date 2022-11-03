@@ -1,3 +1,5 @@
+//"use strict";
+
 function Taskbar(){}
 dk.taskbar = DKPlugin(Taskbar)
 
