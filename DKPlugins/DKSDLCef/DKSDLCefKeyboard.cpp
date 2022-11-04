@@ -26,7 +26,7 @@
 
 #include "DKSDLCefKeyboard.h"
 
-#pragma warning(push, 0); //Silence warning from 3rd party headers
+//WARNING_DISABLE
 	#include "include/internal/cef_types.h"
 	#include "SDL.h"
 	#ifdef WIN32
@@ -34,7 +34,7 @@
 	#elif X11
 	  #include <X11/keysym.h>
 	#endif
-#pragma warning(pop);
+//WARNING_ENABLE
 
 
 int DKSDLCefKeyboard::getCefModifiers(int modKeyMask){

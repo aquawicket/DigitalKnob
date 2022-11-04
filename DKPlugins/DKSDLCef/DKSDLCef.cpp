@@ -34,13 +34,14 @@
 	#include "DK/DKWindows.h"
 #endif
 
-#pragma warning(push, 0); //Silence warning from 3rd party headers
+//WARNING_DISABLE
 	#include "SDL_syswm.h"
 	#include <include/cef_urlrequest.h>
 	#ifdef WIN32
 		#include <delayimp.h>
 	#endif
-#pragma warning(pop);
+//WARNING_ENABLE
+
 
 bool DKSDLCef::Init() {
 	DKDEBUGFUNC();
