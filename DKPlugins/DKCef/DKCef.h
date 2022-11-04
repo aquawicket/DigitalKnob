@@ -28,7 +28,7 @@
 #ifndef DKCef_H
 #define DKCef_H
 
-#pragma warning(push, 0); //Silence warning from 3rd party headers
+#pragma warning(push, 0); //Silence warnings from 3rd party headers
 	#include <include/cef_client.h>
 	#include <include/cef_render_handler.h>
 	#include <include/cef_browser_process_handler.h>

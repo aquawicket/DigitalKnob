@@ -2,24 +2,26 @@
 #ifndef DKOSGWindow_H
 #define DKOSGWindow_H
 
+#pragma warning(push, 0); //Silence warnings from 3rd party headers
+	#ifdef WIN32
+		#include <osgViewer/api/Win32/GraphicsHandleWin32>
+	#endif
+	#ifdef IOS
+		#include <osgViewer/api/IOS/GraphicsWindowIOS>
+	#endif
+	#include <osgViewer/CompositeViewer>
+	#include <osgViewer/Viewer>
+	#include <osgViewer/ViewerEventHandlers>
+	#include <osg/PositionAttitudeTransform>
+	#include <osgGA/EventQueue>
+#pragma warning(pop);
+
 #include "DK/DK.h"
 #include "DK/DKLog.h"
 #include "DK/DKString.h"
 #include "DK/DKApp.h"
 #include "DKOSGViewer/DKOSGViewer.h"
 
-#ifdef WIN32
-#include <osgViewer/api/Win32/GraphicsHandleWin32>
-#endif
-#ifdef IOS
-#include <osgViewer/api/IOS/GraphicsWindowIOS>
-#endif
-
-#include <osgViewer/CompositeViewer>
-#include <osgViewer/Viewer>
-#include <osgViewer/ViewerEventHandlers>
-#include <osg/PositionAttitudeTransform>
-#include <osgGA/EventQueue>
 
 class DKOSGWindow : public osgGA::GUIEventHandler, public DKObjectT<DKOSGWindow>
 {
