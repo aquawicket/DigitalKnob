@@ -33,7 +33,7 @@
 #include "DK/DKEvents.h"
 
 #pragma warning(push, 0) //silence warnings from "duktape.h"
-#include "duktape.h"
+	#include "duktape.h"
 #pragma warning(pop);
 
 #define DKHAVE_DKDuktape 1

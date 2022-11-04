@@ -29,16 +29,11 @@
 #ifndef DKTray_H
 #define DKTray_H
 
-#pragma warning(push, 0); //Silence warnings from 3rd party headers
-	#ifdef WIN32
-		#include "SystemTraySDK.h"
-	#endif
-#pragma warning(pop);
-
 #include "DK/DK.h"
-#include "DKTray/resource.h"
 
 #if WIN
+	#include "DKTray/SystemTraySDK.h"
+	#include "DKTray/resource.h"
 	#define	WM_ICON_NOTIFY WM_APP+10
 #endif
 

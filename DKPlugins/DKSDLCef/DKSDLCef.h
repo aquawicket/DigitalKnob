@@ -35,11 +35,11 @@
 	#include <include/cef_browser_process_handler.h>
 	#include <include/cef_display_handler.h>
 	#ifdef LINUX
-	//#include <X11/cursorfont.h>
+		//#include <X11/cursorfont.h>
 	#endif
+	#include "SDL.h"
 #pragma warning(pop);
 
-#include "SDL.h"
 #include "DK/DK.h"
 #include "DK/DKApp.h"
 #include "DKCef/DKCef.h"

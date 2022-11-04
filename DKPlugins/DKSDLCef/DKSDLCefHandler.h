@@ -28,36 +28,31 @@
 #ifndef DKSDLCefHandler_H
 #define DKSDLCefHandler_H
 
-#include <list>
-#include <include/cef_client.h>
-
-//cef handlers
-#include <include/cef_accessibility_handler.h>
-#include <include/cef_context_menu_handler.h>
-#include <include/cef_dialog_handler.h>
-#include <include/cef_display_handler.h>
-#include <include/cef_download_handler.h>
-#include <include/cef_drag_handler.h>
-#include <include/cef_extension_handler.h>
-#include <include/cef_find_handler.h>
-#include <include/cef_focus_handler.h>
-#include <include/cef_jsdialog_handler.h>
-#include <include/cef_keyboard_handler.h>
-#include <include/cef_life_span_handler.h>
-#include <include/cef_load_handler.h>
-#include <include/cef_print_handler.h>
-#include <include/cef_render_handler.h>
-#include <include/cef_request_context_handler.h>
-#include <include/cef_request_handler.h>
-#include <include/cef_resource_handler.h>
-#include <include/cef_resource_request_handler.h>
-
-
-
-
-
-//#include <include/cef_geolocation.h>
-#include "SDL.h"
+#pragma warning(push, 0); //Silence warning from 3rd party headers
+	#include <list>
+	#include <include/cef_client.h>
+	#include <include/cef_accessibility_handler.h>
+	#include <include/cef_context_menu_handler.h>
+	#include <include/cef_dialog_handler.h>
+	#include <include/cef_display_handler.h>
+	#include <include/cef_download_handler.h>
+	#include <include/cef_drag_handler.h>
+	#include <include/cef_extension_handler.h>
+	#include <include/cef_find_handler.h>
+	#include <include/cef_focus_handler.h>
+	#include <include/cef_jsdialog_handler.h>
+	#include <include/cef_keyboard_handler.h>
+	#include <include/cef_life_span_handler.h>
+	#include <include/cef_load_handler.h>
+	#include <include/cef_print_handler.h>
+	#include <include/cef_render_handler.h>
+	#include <include/cef_request_context_handler.h>
+	#include <include/cef_request_handler.h>
+	#include <include/cef_resource_handler.h>
+	#include <include/cef_resource_request_handler.h>
+	//#include <include/cef_geolocation.h>
+	#include "SDL.h"
+#pragma warning(pop);
 
 #include "DK/DK.h"
 #include "DK/DKApp.h"
