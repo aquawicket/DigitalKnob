@@ -23,9 +23,8 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #include "DK/stdafx.h"
-#include "DKRmlConverter.h"
+#include "DKRml/DKRmlConverter.h"
 #include "DK/DKLog.h"
 #ifdef HAVE_DKCurl
 	#include "DKCurl/DKCurl.h"
@@ -33,16 +32,19 @@
 #include "DKDuktape/DKDuktape.h"
 #include "DKRml/DKRml.h"
 #include "DKXml/DKXml.h"
+
+//WARNING_DISABLE
 #ifdef HAVE_tidy_html5
 	#include "tidy.h"
 	#include "tidybuffio.h"
 #endif
+//WARNING_ENABLE
 
 
 bool DKRmlConverter::HtmlToRml(const DKString& html, DKString& rml){
 	//DKDEBUGFUNC(html, rml);
 	if(html.empty())
-		return false;
+		return DKERROR("html is invalid! \n");
 	stored_html = html;
 #ifdef DEBUG
 	DKINFO("\n########## .html ---> HtmlToRml ############\n");
@@ -51,9 +53,8 @@ bool DKRmlConverter::HtmlToRml(const DKString& html, DKString& rml){
 #endif
 
 	rml = html;
-	if(!has(html, "<rml")){
+	if(!has(html, "<rml"))
 		rml = "<rml id=\"rml\">\n" + rml + "</rml>";
-	}
 	
 	//dkHtmlToRml.TidyFile(rml,rml);
 	//replace(rml, "\"HTML Tidy for HTML5 for Windows version 5.7.28\" />", "");

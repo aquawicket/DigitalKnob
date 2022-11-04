@@ -27,8 +27,13 @@
 #pragma once
 #ifndef DKRmlFile_H
 #define DKRmlFile_H
-#include <RmlUi/Core.h>
+
 #include "DK/DKFile.h"
+
+//WARNING_DISABLE
+#include <RmlUi/Core.h>
+//WARNING_ENABLE
+
 
 class DKRmlFile : public Rml::FileInterface {
 	virtual Rml::FileHandle Open(const Rml::String& path);

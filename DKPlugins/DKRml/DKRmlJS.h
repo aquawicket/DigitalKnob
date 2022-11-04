@@ -23,13 +23,13 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #ifdef HAVE_DKDuktape
 #pragma once
 #ifndef DKRmlJS_H
 #define DKRmlJS_H
 
 #include "DKDuktape/DKDuktape.h"
+
 
 class DKRmlJS : public DKObjectT<DKRmlJS>{
 public:
@@ -41,6 +41,7 @@ public:
 	static int DebuggerToggle(duk_context* ctx);
 	static int PostProcess(duk_context* ctx);
 };
+
 
 REGISTER_OBJECT(DKRmlJS, true)
 #endif //DKRmlJS_H

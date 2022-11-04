@@ -23,20 +23,14 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
+#include "DKPlugin2/DKPlugin2.h"
 
-#include "DKPlugin2.h"
-
-//////////////////////
-void DKPlugin2::Init()
-{
+void DKPlugin2::Init(){
 	DKDEBUGFUNC();
 	DKClass::RegisterFunc("DKPlugin2::SomeFunction", &DKPlugin2::SomeFunction, this);
 };
 
-/////////////////////////////////////////
-void* DKPlugin2::SomeFunction(void* data)
-{
+void* DKPlugin2::SomeFunction(void* data){
 	DKDEBUGFUNC(data);
 	return NULL;
 };
-

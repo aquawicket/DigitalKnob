@@ -23,11 +23,18 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #include "DK/stdafx.h"
+
+//WARNING_DISABLE
 #ifdef HAVE_rmlui_debugger
 #	include <RmlUi/Debugger.h>
 #endif
+#include <RmlUi/Core/StreamMemory.h>
+#include <Core/PluginRegistry.h>
+#include <Core/XMLNodeHandlerDefault.h>
+#include <Core/XMLNodeHandlerBody.h>
+//WARNING_EABLE
+
 #include "DKRml/DKRml.h"
 #include "DKWindow/DKWindow.h"
 #include "DKDuktape/DKDuktape.h"
@@ -36,12 +43,10 @@
 #ifdef HAVE_DKCurl
 #	include "DKCurl/DKCurl.h"
 #endif
-#include <RmlUi/Core/StreamMemory.h>
-#include <Core/PluginRegistry.h>
-#include <Core/XMLNodeHandlerDefault.h>
-#include <Core/XMLNodeHandlerBody.h>
 
 #define DRAG_FIX 1
+
+
 DKRmlFile* DKRml::dkRmlFile = NULL;
 
 bool DKRml::Init(){

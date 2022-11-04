@@ -28,9 +28,9 @@
 #pragma once
 #ifndef DKPlugin2_H
 #define DKPlugin2_H
-#include "DKPlugin.h"
+#include "DK/DKPlugin.h"
 
-/////////////////////////////////////////////
+
 class DKPlugin2 : public DKObjectT<DKPlugin2>
 {
 public:
@@ -46,7 +46,6 @@ extern "C" void* getObj() {
 extern "C" void* getName() {
     return static_cast<void*>("DKPlugin2");
 }
-
 
 extern "C" DLLAPI BOOL APIENTRY DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 {

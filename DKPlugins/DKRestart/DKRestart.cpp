@@ -25,8 +25,12 @@
 */
 
 //#include "DKRestart/DKRestart.h"
-#include "DKRestart.h"
+#include "DKRestart/DKRestart.h"
+
+//WARNING_DISABLE
 #include <cstdio>
+//WARING_ENABLE
+
 
 int main(int argc, char* argv[]){
 	(void)argc;
@@ -37,6 +41,5 @@ int main(int argc, char* argv[]){
 #else
 	//DKMainArgs main_args(argc, argv);
 #endif
-
 	//TODO
 }

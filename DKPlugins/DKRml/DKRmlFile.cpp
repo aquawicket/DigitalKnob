@@ -23,13 +23,13 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #include "DK/stdafx.h"
-#include "DKRmlFile.h"
-#include "DKRml.h"
+#include "DKRml/DKRmlFile.h"
+#include "DKRml/DKRml.h"
 #ifdef HAVE_DKCurl
 	#include "DKCurl/DKCurl.h"
 #endif
+
 
 Rml::FileHandle DKRmlFile::Open(const Rml::String& path){
 	DKDEBUGFUNC("path");

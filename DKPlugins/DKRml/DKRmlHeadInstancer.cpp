@@ -25,28 +25,28 @@
 */
 
 #include "DK/stdafx.h"
-#include "DKRmlHeadInstancer.h"
+#include "DKRml/DKRmlHeadInstancer.h"
 
+//WARNING_DISABLE
 #include <RmlUi/Core/StringUtilities.h>
 #include <RmlUi/Core/XMLParser.h>
 #include <RmlUi/Core/SystemInterface.h>
-
 #include <Core/DocumentHeader.h>
 #include <RmlUi/Core/Core.h>
 #include <RmlUi/Core/Element.h>
 #include <RmlUi/Core/ElementDocument.h>
 #include <RmlUi/Core/URL.h>
 #include <RmlUi/Core/Factory.h>
+//WARNING_ENABLE
 
-static Rml::String Absolutepath(const Rml::String& source, const Rml::String& base)
-{
+
+static Rml::String Absolutepath(const Rml::String& source, const Rml::String& base){
 	Rml::String joined_path;
 	::Rml::GetSystemInterface()->JoinPath(joined_path, Rml::StringUtilities::Replace(base, '|', ':'), Rml::StringUtilities::Replace(source, '|', ':'));
 	return Rml::StringUtilities::Replace(joined_path, ':', '|');
 }
 
-static Rml::DocumentHeader::Resource MakeInlineResource(Rml::XMLParser* parser, const Rml::String& data)
-{
+static Rml::DocumentHeader::Resource MakeInlineResource(Rml::XMLParser* parser, const Rml::String& data){
 	Rml::DocumentHeader::Resource resource;
 	resource.is_inline = true;
 	resource.content = data;
@@ -55,24 +55,20 @@ static Rml::DocumentHeader::Resource MakeInlineResource(Rml::XMLParser* parser, 
 	return resource;
 }
 
-static Rml::DocumentHeader::Resource MakeExternalResource(Rml::XMLParser* parser, const Rml::String& path)
-{
+static Rml::DocumentHeader::Resource MakeExternalResource(Rml::XMLParser* parser, const Rml::String& path){
 	Rml::DocumentHeader::Resource resource;
 	resource.is_inline = false;
 	resource.path = Absolutepath(path, parser->GetSourceURL().GetURL());
 	return resource;
 }
 
-HeadInstancer::HeadInstancer()
-{
+HeadInstancer::HeadInstancer(){
 }
 
-HeadInstancer::~HeadInstancer()
-{
+HeadInstancer::~HeadInstancer(){
 }
 
-Rml::Element* HeadInstancer::ElementStart(Rml::XMLParser* parser, const Rml::String& name, const Rml::XMLAttributes& attributes)
-{
+Rml::Element* HeadInstancer::ElementStart(Rml::XMLParser* parser, const Rml::String& name, const Rml::XMLAttributes& attributes){
 	if (name == "head"){
 		// Process the head attribute
 		parser->GetDocumentHeader()->source = parser->GetSourceURL().GetURL();
@@ -137,8 +133,7 @@ Rml::Element* HeadInstancer::ElementStart(Rml::XMLParser* parser, const Rml::Str
 	//return nullptr;
 }
 
-bool HeadInstancer::ElementEnd(Rml::XMLParser* parser, const Rml::String& name)
-{	
+bool HeadInstancer::ElementEnd(Rml::XMLParser* parser, const Rml::String& name){
 	// When the head tag closes, inject the header into the active document
 	if (name == "head"){
 		Rml::Element* element = parser->GetParseFrame()->element;
@@ -151,8 +146,7 @@ bool HeadInstancer::ElementEnd(Rml::XMLParser* parser, const Rml::String& name)
 	return true;
 }
 
-bool HeadInstancer::ElementData(Rml::XMLParser* parser, const Rml::String& data, Rml::XMLDataType RMLUI_UNUSED_PARAMETER(type))
-{
+bool HeadInstancer::ElementData(Rml::XMLParser* parser, const Rml::String& data, Rml::XMLDataType RMLUI_UNUSED_PARAMETER(type)){
 	RMLUI_UNUSED(type);
 	const Rml::String& tag = parser->GetParseFrame()->tag;
 

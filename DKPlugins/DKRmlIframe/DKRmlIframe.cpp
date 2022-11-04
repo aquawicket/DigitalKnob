@@ -23,10 +23,13 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #include "DK/stdafx.h"
 #include "DKRmlIframe/DKRmlIframe.h"
+
+//WARNING_DISABLE
 #include "../Include/RmlUi/Core/Factory.h"
+//WARNING_ENABLE
+
 
 bool DKRmlIframe::Init(){
 	DKDEBUGFUNC();

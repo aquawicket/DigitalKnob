@@ -31,6 +31,7 @@
 
 #include "DKCef/DKCef.h"
 
+
 class DKRmlV8 : public DKObjectT<DKRmlV8>{
 public:
 	bool Init();
@@ -38,6 +39,7 @@ public:
 
 	static bool DebuggerToggle(CefArgs args, CefReturn retval);
 };
+
 
 REGISTER_OBJECT(DKRmlV8, false);
 #endif //DKRmlV8_H
