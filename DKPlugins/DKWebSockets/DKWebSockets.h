@@ -28,11 +28,12 @@
 #ifndef DKWebSockets_H
 #define DKWebSockets_H
 
-#pragma warning(push, 0) //silence warnings from "src/uWS.h"
+//WARNING_DISABLE
 #include "src/uWS.h"
-#pragma warning(pop)
+//WARNING_ENABLE
 
 #include "DK/DK.h"
+
 
 class DKWebSockets : public DKObjectT<DKWebSockets>
 {
@@ -61,8 +62,7 @@ public:
 	static uWS::Hub clientHub;
 	static uWS::WebSocket<uWS::CLIENT>* clientWebSocket;
 };
-
-
 REGISTER_OBJECT(DKWebSockets, true);
+
 
 #endif //DKWebSockets_H

@@ -23,11 +23,10 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 //https://github.com/uNetworking/uWebSockets/blob/master/tests/main.cpp
-
 #include "DK/stdafx.h"
 #include "DKWebSockets/DKWebSockets.h"
+
 
 //SERVER
 DKString DKWebSockets::serverAddress;
