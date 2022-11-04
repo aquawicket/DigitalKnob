@@ -1,9 +1,33 @@
+/*
+* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+*
+* For the latest information, see https://github.com/aquawicket/DigitalKnob
+*
+* Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files(the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions :
+*
+* The above copyright noticeand this permission notice shall be included in all
+* copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*/
 #include "DK/stdafx.h"
-#include "DKffmpeg.h"
+#include "DKOSGVideo/DKffmpeg.h"
 
-////////////////////////////////////////////
-void MovieEventHandler::set(osg::Node* node)
-{
+
+void MovieEventHandler::set(osg::Node* node){
     _imageStreamList.clear();
     if (node){
         FindImageStreamsVisitor fisv(_imageStreamList);
@@ -11,9 +35,7 @@ void MovieEventHandler::set(osg::Node* node)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool MovieEventHandler::handle(const osgGA::GUIEventAdapter& ea,osgGA::GUIActionAdapter& aa, osg::Object*, osg::NodeVisitor* nv)
-{
+bool MovieEventHandler::handle(const osgGA::GUIEventAdapter& ea,osgGA::GUIActionAdapter& aa, osg::Object*, osg::NodeVisitor* nv){
     switch(ea.getEventType()){
         case(osgGA::GUIEventAdapter::MOVE):
         case(osgGA::GUIEventAdapter::PUSH):
@@ -170,9 +192,7 @@ bool MovieEventHandler::handle(const osgGA::GUIEventAdapter& ea,osgGA::GUIAction
     return false;
 }
 
-////////////////////////////////////////////////////////////////////
-void MovieEventHandler::getUsage(osg::ApplicationUsage& usage) const
-{
+void MovieEventHandler::getUsage(osg::ApplicationUsage& usage) const{
     usage.addKeyboardMouseBinding("p","Play/Pause movie");
     usage.addKeyboardMouseBinding("r","Restart movie");
     usage.addKeyboardMouseBinding("l","Toggle looping of movie");
@@ -187,11 +207,12 @@ void MovieEventHandler::getUsage(osg::ApplicationUsage& usage) const
 
 
 #if USE_SDL
-#include "SDL.h"
 
-////////////////////////////////////////////////////////////////////////////
-static void soundReadCallback(void * user_data, uint8_t * data, int datalen)
-{
+//WARNING_DISABLE
+#include "SDL.h"
+//WARNING_ENABLE
+
+static void soundReadCallback(void * user_data, uint8_t * data, int datalen){
     SDLAudioSink * sink = reinterpret_cast<SDLAudioSink*>(user_data);
     osg::ref_ptr<osg::AudioStream> as = sink->_audioStream.get();
     if (as.valid()){
@@ -199,14 +220,11 @@ static void soundReadCallback(void * user_data, uint8_t * data, int datalen)
     }
 }
 
-/////////////////////////////
-SDLAudioSink::~SDLAudioSink()
-{
+SDLAudioSink::~SDLAudioSink(){
     stop();
 }
 
-void SDLAudioSink::play()
-{
+void SDLAudioSink::play(){
     if (_started){
         if (_paused){
             SDL_PauseAudio(0);
@@ -241,23 +259,19 @@ void SDLAudioSink::play()
     SDL_PauseAudio(0);
 }
 
-//////////////////////////
-void SDLAudioSink::pause()
-{
+void SDLAudioSink::pause(){
     if (_started){
         SDL_PauseAudio(1);
         _paused = true;
     }
 }
 
-/////////////////////////
-void SDLAudioSink::stop()
-{
+void SDLAudioSink::stop(){
     if (_started){
         if (!_paused) SDL_PauseAudio(1);
         SDL_CloseAudio();
         osg::notify(osg::NOTICE)<<"~SDLAudioSink() destructor, but still playing"<<std::endl;
     }
 }
-#endif //USE_SDL
 
+#endif //USE_SDL

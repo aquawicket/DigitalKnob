@@ -27,7 +27,7 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration
 
 #include "DK/DKApp.h"
-#include "DKDom.h"
+#include "DKDom/DKDom.h"
 #include "DKDom/DKDomCSSStyleDeclaration.h"
 
 
@@ -41,7 +41,7 @@ bool DKDomCSSStyleDeclaration::Init(){
 	return true;
 }
 
-int DKDomCSSStyleDeclaration::getPropertyPriority(duk_context* ctx) {
+int DKDomCSSStyleDeclaration::getPropertyPriority(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	/*
 	DKString address = duk_require_string(ctx, 0);

@@ -25,8 +25,10 @@
 */
 
 #include "DK/stdafx.h"
-#include "DKLog.h"
-#include "DKFile.h"
+#include "DK/DKLog.h"
+#include "DK/DKFile.h"
+
+//WARNING_DISABLE
 #include <cstring>
 #if HAVE_boxer
 	#include <boxer/boxer.h>
@@ -39,6 +41,7 @@
 #if MAC || IOS
 	#import <Foundation/Foundation.h>  //NSLog()
 #endif
+//WARNING_ENABLE
 
 bool DKLog::log_fatal = true;      //console.assert()
 bool DKLog::log_errors = true;     //console.error()

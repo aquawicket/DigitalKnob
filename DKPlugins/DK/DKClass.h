@@ -29,8 +29,8 @@
 #ifndef DKClass_H
 #define DKClass_H
 
-#include "DKObject.h"
-#include "DKUtil.h"
+#include "DK/DKObject.h"
+#include "DK/DKUtil.h"
 
 #ifdef __has_include
 #	if __has_include(<functional>)

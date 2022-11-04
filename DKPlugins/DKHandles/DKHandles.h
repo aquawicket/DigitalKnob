@@ -31,17 +31,18 @@
 #ifndef DKHandles_H
 #define DKHandles_H
 
+//WARNING_DISABLE
 #include <vector>
+//WARNING_ENABLE
+
 #include "DK/DK.h"
 
 
-////////////////
 struct HWNDname{   
    int alias;
    const char* caption;
 };
 
-/////////////////////////////////////////////
 class DKHandles : public DKObjectT<DKHandles>
 {
 public:

@@ -26,11 +26,14 @@
 
 //https://developer.mozilla.org/en-US/docs/Web/API/Window
 
-#include "DKDom.h"
+//WARNING_DISABLE
+#include "duktape.h"
+//WARNING_DISABLE
+
+#include "DKDom/DKDom.h"
 #include "DKDom/DKDomWindow.h"
 #include "DKDom/DKDomElement.h"
-#include "duktape.h"
-#include "DKDuktape.h"
+#include "DKDuktape/DKDuktape.h"
 
 /*
 // https://github.com/svaarala/duktape/blob/master/tests/api/test-set-global-object.c

@@ -33,6 +33,7 @@
 
 #include "DKDuktape/DKDuktape.h"
 
+
 class DKMidiJS : public DKObjectT<DKMidiJS>
 {
 public:

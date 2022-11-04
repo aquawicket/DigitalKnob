@@ -27,9 +27,11 @@
 #include "DK/stdafx.h"
 
 #if WIN32
-#include "DKWindows.h"
-#include "DKFile.h"
-#include "DKLog.h"
+#include "DK/DKWindows.h"
+#include "DK/DKFile.h"
+#include "DK/DKLog.h"
+
+//WARNING_DISABLE
 #include <shellapi.h>       //DKFile::Execute()
 #include "conio.h"          //getch, getche
 #include <mmdeviceapi.h>
@@ -41,6 +43,8 @@
 //Monitor brightness
 #include "PhysicalMonitorEnumerationAPI.h"
 #include "HighLevelMonitorConfigurationAPI.h"
+//WARNING_ENABLE
+
 
 HINSTANCE DKWindows::hInstance = 0L;
 HWND DKWindows::consoleWindow;

@@ -29,9 +29,8 @@
 #include "DKCurl/DKCurl.h"
 #include "DKCurl/DKCurlV8.h"
 
-/////////////////////
-bool DKCurlV8::Init()
-{
+
+bool DKCurlV8::Init(){
 	DKDEBUGFUNC();
 	DKV8::AttachFunction("DKCurl_Download", DKCurlV8::Download);
 	DKV8::AttachFunction("DKCurl_FileDate", DKCurlV8::FileDate);
@@ -43,101 +42,80 @@ bool DKCurlV8::Init()
 	return true;
 }
 
-////////////////////
-bool DKCurlV8::End()
-{
+bool DKCurlV8::End(){
 	DKDEBUGFUNC();
 	return true;
 }
 
-///////////////////////////////////////////////////////
-bool DKCurlV8::Download(CefArgs args, CefReturn retval)
-{
+bool DKCurlV8::Download(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	DKString url = args->GetString(0);
 	DKString dest = args->GetString(1);
-	if(!DKCurl::Get()->Download(url, dest)){
-		return false;
-	}
+	if(!DKCurl::Get()->Download(url, dest))
+		return DKERROR("DKCurl::Get()->Download() failed! \n");
 	return true;
 }
 
-///////////////////////////////////////////////////////
-bool DKCurlV8::FileDate(CefArgs args, CefReturn retval)
-{
+bool DKCurlV8::FileDate(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	DKString url = args->GetString(0);
 	DKString filedate;
-	if(!DKCurl::Get()->FileDate(url, filedate)){
-		return false;
-	}
+	if(!DKCurl::Get()->FileDate(url, filedate))
+		return DKERROR("DKCurl::Get()->FileDate() failed! \n");
 	char* pEnd;
 	double time = (double)strtoull(filedate.c_str(), &pEnd, 10);
-	if(!retval->SetDouble(0, time)){ return false; }
+	if(!retval->SetDouble(0, time))
+		return DKERROR("retval->SetDouble() failed! \n");
 	return true;
 }
 
-/////////////////////////////////////////////////////////
-bool DKCurlV8::FtpConnect(CefArgs args, CefReturn retval)
-{
+bool DKCurlV8::FtpConnect(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	DKString server = args->GetString(0);
 	DKString name = args->GetString(1);
 	DKString pass = args->GetString(2);
 	DKString port = args->GetString(3);
-
-	if(!DKCurl::Get()->FtpConnect(server, name, pass, port)){
-		return false;
-	}
+	if(!DKCurl::Get()->FtpConnect(server, name, pass, port))
+		return DKERROR("DKCurl::Get()->FtpConnect() failed! \n");
 	return true;
 }
 
-////////////////////////////////////////////////////////
-bool DKCurlV8::FtpUpload(CefArgs args, CefReturn retval)
-{
+bool DKCurlV8::FtpUpload(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	DKString file = args->GetString(0);
 	DKString url = args->GetString(1);
-	if(!DKCurl::Get()->FtpUpload(file, url)){
-		return false;
-	}
+	if(!DKCurl::Get()->FtpUpload(file, url))
+		return DKERROR("DKCurl::Get()->FtpUpload() failed! \n");
 	//DKQueue("FtpUpload", boost::bind(&DKCurl::FtpUpload, DKCurl::Get("DKCurl0"), file, url));
 	return true;
 }
 
-////////////////////////////////////////////////////////////
-bool DKCurlV8::GetExternalIP(CefArgs args, CefReturn retval)
-{
+bool DKCurlV8::GetExternalIP(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	DKString ipaddress;
-	if(!DKCurl::Get()->GetExternalIP(ipaddress)){
-		return false;
-	}
-	if(!retval->SetString(0, ipaddress)){ return false; }
+	if(!DKCurl::Get()->GetExternalIP(ipaddress))
+		return DKERROR("DKCurl::Get()->GetExternalIP()! \n");
+	if(!retval->SetString(0, ipaddress))
+		return DKERROR("retval->SetString() failed! \n");
 	return true;
 }
 
-/////////////////////////////////////////////////////////////
-bool DKCurlV8::HttpFileExists(CefArgs args, CefReturn retval)
-{
+bool DKCurlV8::HttpFileExists(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	DKString url = args->GetString(0);
-	if(!DKCurl::Get()->HttpFileExists(url)){
-		return false;
-	}
+	if(!DKCurl::Get()->HttpFileExists(url))
+		return DKERROR("DKCurl::Get()->HttpFileExists() failed! \n");
 	return true;
 }
 
-///////////////////////////////////////////////////////////
-bool DKCurlV8::HttpToString(CefArgs args, CefReturn retval)
-{
+bool DKCurlV8::HttpToString(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	DKString url = args->GetString(0);
 	DKString output;
-	if(!DKCurl::Get()->HttpToString(url, output)){
-		return 0;
-	}
-	if(!retval->SetString(0, output)){ return false; }
+	if(!DKCurl::Get()->HttpToString(url, output))
+		return DKERROR("DKCurl::Get()->HttpToString() failed! \n");
+	if(!retval->SetString(0, output))
+		return DKERROR("retval->SetString() failed! \n");
 	return true;
 }
 

@@ -28,11 +28,14 @@
 #ifndef DKUtil_H
 #define DKUtil_H
 
-#include "DKString.h"
+#include "DK/DKString.h"
+
+//WARNING_DISABLE
 #ifndef WIN32
 	#include <limits.h>
 	#include <stdlib.h>
 #endif
+//WARNING_ENABLE
 
 #define FRAME_VALUES 30
 

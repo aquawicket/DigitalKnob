@@ -31,7 +31,7 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-/////////////////////////////////////////////
+
 class DKConsole : public DKObjectT<DKConsole>
 {
 public:

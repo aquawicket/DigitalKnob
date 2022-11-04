@@ -26,8 +26,12 @@
 
 #include "DK/stdafx.h"
 #ifdef WIN32
+
+//WARNING_DISABLE
 #include <tchar.h>
 #include <Commctrl.h>
+//WARNING_ENABLE
+
 #include "DKHandles/DKHandles.h"
 
 DKStringArray DKHandles::_windows;

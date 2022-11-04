@@ -28,7 +28,7 @@
 #ifndef DKEvents_H
 #define DKEvents_H
 
-#include "DKObject.h"
+#include "DK/DKObject.h"
 
 class DKObject;
 class DKEvents{

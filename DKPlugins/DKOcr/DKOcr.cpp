@@ -28,7 +28,10 @@
 #include "DK/DKFile.h"
 #include "DKAssets/DKAssets.h"
 #include "DKOcr/DKOcr.h"
+
+//WARNING_DISABLE
 #include "src/allheaders.h"
+//WARNING_ENABLE
 
 
 tesseract::TessBaseAPI* DKOcr::api;

@@ -25,7 +25,7 @@
 */
 
 #include "DK/stdafx.h"
-#include "DKClass.h"
+#include "DK/DKClass.h"
 
 std::map<DKString, DKClass*>* DKClass::classes = NULL;
 DKFunctionMap* DKClass::functions = NULL;

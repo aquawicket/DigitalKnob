@@ -25,8 +25,8 @@
 */
 
 #ifdef HAVE_DKDuktape 
-#include "DKOcrJS.h"
-#include "DKOcr.h"
+#include "DKOcr/DKOcrJS.h"
+#include "DKOcr/DKOcr.h"
 
 
 bool DKOcrJS::Init(){
@@ -40,7 +40,7 @@ int DKOcrJS::ImageToText(duk_context* ctx){
 	DKString file = duk_require_string(ctx, 0);
 	DKString text;
 	if(!DKOcr::ImageToText(file, text))
-		return 0;
+		return DKERROR("DKOcr::ImageToText() failed! \n");
 	duk_push_string(ctx, text.c_str());
 	return 1;
 }

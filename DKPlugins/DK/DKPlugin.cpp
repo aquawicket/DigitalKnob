@@ -25,8 +25,8 @@
 */
 
 #include "DK/stdafx.h"
-#include "DKPlugin.h"
-#include "DKFile.h"
+#include "DK/DKPlugin.h"
+#include "DK/DKFile.h"
 
 #ifdef WIN32
 	std::vector<HINSTANCE> DKPlugins::modules;

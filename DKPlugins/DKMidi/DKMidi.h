@@ -25,15 +25,17 @@
 */
 
 #ifdef HAVE_rtmidi
-
 #pragma once
 #ifndef DKMidi_H
 #define DKMidi_H
 
+//WARNING_DISABLE
 #include "RtMidi.h"
+//WARNING_ENABLE
+
 #include "DK/DK.h"
 
-///////////////////////////////////////
+
 class DKMidi : public DKObjectT<DKMidi>
 {
 public:

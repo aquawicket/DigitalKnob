@@ -28,10 +28,13 @@
 #ifndef DKPlugin_H
 #define DKPlugin_H
 
-#include "DKClass.h"
-#include "DKObject.h"
-#include "DKString.h"
+#include "DK/DKClass.h"
+#include "DK/DKObject.h"
+#include "DK/DKString.h"
+
+//WARNING_DISABLE
 #include <vector>
+//WARNING_ENABLE
 
 #ifdef WIN32
 //#ifdef BUILD_DLL

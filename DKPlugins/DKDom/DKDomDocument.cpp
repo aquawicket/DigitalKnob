@@ -27,7 +27,7 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/Document
 
 #include "DK/DKApp.h"
-#include "DKDom.h"
+#include "DKDom/DKDom.h"
 #include "DKDom/DKDomDocument.h"
 #include "DKDom/DKDomElement.h"
 

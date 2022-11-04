@@ -29,6 +29,7 @@
 #include "DK/DKApp.h"
 #include "DKDom/DKDomNavigator.h"
 
+
 bool DKDomNavigator::Init(){
 	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("CPP_DKDomNavigator_onLine", DKDomNavigator::onLine);

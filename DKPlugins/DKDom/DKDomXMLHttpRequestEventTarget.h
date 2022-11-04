@@ -30,11 +30,11 @@
 
 #include "DKDuktape/DKDuktape.h"
 
+
 class DKDomXMLHttpRequestEventTarget : public DKObjectT<DKDomXMLHttpRequestEventTarget>
 {
 public:
 	bool Init();
-
 };
 
 

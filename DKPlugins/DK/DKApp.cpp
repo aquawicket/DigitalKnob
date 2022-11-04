@@ -28,12 +28,15 @@
 #include "DK/DKApp.h"
 #include "DK/DKOsInfo.h"
 #include "DK/DKFile.h"
+
+//WARNING_DISABLE
 #if HAVE_boxer
 	#include <boxer/boxer.h>
 #endif
 #if ANDROID
 	#include <SDL.h>
-#endif 
+#endif
+//WARNING_ENABLE
 
 int    DKApp::argc;
 char** DKApp::argv;

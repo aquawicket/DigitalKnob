@@ -26,11 +26,15 @@
 
 #include "DK/stdafx.h"
 #ifndef WIN32
-#include "DKUnix.h"
-#include "DKFile.h"
+#include "DK/DKUnix.h"
+#include "DK/DKFile.h"
+
+//WARNING_DISABLE
 #include <cstdlib>     // GetUsername()  std::getenv()
 #include <unistd.h>    // sleep()  / usleep()
 #include <termios.h>                  //for system(), tcsetattr()
+//WARNING_ENABLE
+
 static struct termios current, old;
 /*
 #include <pwd.h>       //GetUsername()  getpwuid()/getuid()

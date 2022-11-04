@@ -25,8 +25,12 @@
 */
 
 #include "DK/stdafx.h"
+
+//WARNING_DISABLE
 #include <sys/stat.h>
 #include <cstring>
+//WARNING_ENABLE
+
 #include "DK/DKFile.h"
 #include "DKCurl/DKCurl.h"
 

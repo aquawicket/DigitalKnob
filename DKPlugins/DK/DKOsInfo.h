@@ -28,11 +28,14 @@
 #ifndef DKOsInfo_H
 #define DKOsInfo_H
 
-#include "DKLog.h"
-
-#ifdef WIN32
+//WARNING_DISABLE
+#if WIN
 	#include "windows.h"
 	#include <sstream>
+#endif
+//WARNING_ENABLE
+	
+#if WIN
 	typedef LONG NTSTATUS, * PNTSTATUS;
 	#define STATUS_SUCCESS (0x00000000)
 	typedef BOOL(WINAPI* LPFN_ISWOW64PROCESS)(HANDLE, PBOOL);
@@ -44,7 +47,10 @@
 	bool GetWinOSVersion(RTL_OSVERSIONINFOEXW& vi);
 	bool GetWinSystemInfo(SYSTEM_INFO& si);
 	bool GetWinProductInfo(RTL_OSVERSIONINFOEXW& vi, DWORD& dwType);
-#endif //WIN32
+#endif
+
+#include "DK/DKLog.h"
+
 
 bool GetOSFlag(DKString& flag);
 bool GetOSInfo(DKString& info);

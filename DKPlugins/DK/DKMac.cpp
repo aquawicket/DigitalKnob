@@ -26,11 +26,13 @@
 
 #include "DK/stdafx.h"
 #ifdef MAC
-#include "DKMac.h"
-#include "DKUnix.h"
+#include "DK/DKMac.h"
+#include "DK/DKUnix.h"
 
+//WARNING_DISABLE
 #import "CoreFoundation/CoreFoundation.h"
 #import "CoreGraphics/CoreGraphics.h"
+//WARNING_ENABLE
 
 bool DKMac::GetKey(int& key) {
     return DKUnix::GetKey(key);

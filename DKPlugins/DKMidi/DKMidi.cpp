@@ -30,6 +30,7 @@
 #include "DK/DKFile.h"
 #include "DKMidi/DKMidi.h"
 
+
 bool DKMidi::Init(){
 	DKDEBUGFUNC();
 	DKClass::DKCreate("DKMidiJS");

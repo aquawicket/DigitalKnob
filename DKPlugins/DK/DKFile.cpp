@@ -25,14 +25,17 @@
 */
 
 #include "DK/stdafx.h"
-#include "DKFile.h"
-#include "DKLog.h"
+#include "DK/DKFile.h"
+#include "DK/DKLog.h"
+
+//WARNING_DISABLE
 #include <stdio.h>
 #include <fstream>
 #include <string>
 #include <iostream>
 #include <sys/stat.h>
 #include <cstring>
+//WARNING_ENABLE
 
 DKString DKFile::exe_path;      //EXAMPLE:  C:/Users/aquawicket/digitalknob/DK/DKApps/DKBuilder/win32/Release/DKBuilder.exe
 DKString DKFile::exe_name;      //EXAMPLE:  DKBuilder.exe

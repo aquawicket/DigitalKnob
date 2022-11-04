@@ -26,7 +26,7 @@
 
 #include "DK/stdafx.h"
 
-#pragma warning(push, 0); //Silence warning from 3rd party headers
+//WARNING_DISABLE
 	#include <sstream>
 	#include <string>
 	#include <include/cef_urlrequest.h>
@@ -41,7 +41,7 @@
 		#include <delayimp.h>
 		#include <include/cef_sandbox_win.h>
 	#endif
-#pragma warning(pop);
+//WARNING_ENABLE
 
 #include "DK/DKApp.h"
 #include "DK/DKClass.h"

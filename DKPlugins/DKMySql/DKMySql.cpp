@@ -30,6 +30,7 @@
 #include "DKAssets/DKAssets.h"
 #include "DKMySql/DKMySql.h"
 
+
 bool DKMySql::Init(){
 	DKDEBUGFUNC();
 	DKClass::DKCreate("DKMySqlJS");

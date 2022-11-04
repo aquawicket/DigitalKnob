@@ -27,7 +27,10 @@
 #pragma once
 #ifndef DKTextColor_H
 #define DKTextColor_H
+
+//WARNING_DISABLE
 #include <ostream>
+//WARNING_ENABLE
 
 #ifdef WIN32
 	#define RESET    FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE

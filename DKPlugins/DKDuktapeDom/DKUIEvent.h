@@ -32,7 +32,7 @@
 
 #include "DKDuktapeDom/DKDuktapeDom.h"
 
-///////////////////////////////////////////////////
+
 class DKUIEvent : public DKObjectT<DKUIEvent>
 {
 public:

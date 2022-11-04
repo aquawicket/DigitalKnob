@@ -23,19 +23,23 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #pragma once
 #ifndef DKOSGViewer_H
 #define DKOSGViewer_H
 #include "DK/DK.h"
+
+//WARNING_DISABLE
 #include <osgViewer/CompositeViewer>
+//WARNING_ENABLE
 
 #if !defined(DKLIB)
 
+//WARNING_DISABLE
 #ifdef USE_osgDB
 #include <osgDB/Registry>
 #include <osgWidget/Util>
 #endif
+//WARNING_ENABLE
 
 #ifdef USE_osgdb_osg
     USE_OSGPLUGIN(osg)

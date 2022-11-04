@@ -27,9 +27,13 @@
 #include "DK/stdafx.h"
 #include "DK/DKFile.h"
 #include "DKDuktape/DKDuktape.h"
+
+//WARNING_DISABLE
 #include <string>
 #include <iostream>
 #include <sstream>
+//WARNING_ENABLE
+
 #define DKHAVE_DKDuktape 1
 
 duk_context* DKDuktape::ctx;

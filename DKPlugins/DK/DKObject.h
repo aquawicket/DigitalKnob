@@ -29,9 +29,12 @@
 #ifndef DKObject_H
 #define DKObject_H
 
+//WARNING_DISABLE
 #include <map> //std::map
-#include "DKLog.h"
 #include <iostream>
+//WARNING_ENABLE
+
+#include "DK/DKLog.h"
 
 class DKObject{
 public:

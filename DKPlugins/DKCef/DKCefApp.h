@@ -28,12 +28,12 @@
 #ifndef DKCefApp_H
 #define DKCefApp_H
 
-#pragma warning(push, 0); //Silence warning from 3rd party headers
+//WARNING_DISABLE
 	//#include <boost/function.hpp>
 	//#include <boost/bind/bind.hpp>
 	#include <include/cef_app.h>
 	#include <include/wrapper/cef_helpers.h>
-#pragma warning(pop);
+//WARNING_ENABLE
 
 #include "DK/DKFile.h"
 

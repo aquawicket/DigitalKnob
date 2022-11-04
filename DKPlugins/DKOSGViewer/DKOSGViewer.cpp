@@ -23,14 +23,17 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #include "DK/stdafx.h"
 #include "DKOSGViewer/DKOSGViewer.h"
-//#include "DKApp.h"
+//#include "DK/DKApp.h"
 #include "DK/DKUtil.h"
+#include "DK/DKFile.h"
+
+//WARNING_DISABLE
 #include <osgDB/FileUtils>
 #include <osgDB/FileNameUtils>
-#include "DK/DKFile.h"
+//WARING_ENABLE
+
 
 bool DKOSGViewer::Init(){
 	DKClass::DKCreate("DKOSGNotify");

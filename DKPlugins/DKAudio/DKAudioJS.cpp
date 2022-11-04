@@ -25,8 +25,8 @@
 */
 
 #ifdef HAVE_DKDuktape
-#include "DKAudio.h"
-#include "DKAudioJS.h"
+#include "DKAudio/DKAudio.h"
+#include "DKAudio/DKAudioJS.h"
 
 bool DKAudioJS::Init(){
 	DKDEBUGFUNC();

@@ -31,7 +31,7 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-/////////////////////////////////////////////////
+
 class DKNavigator : public DKObjectT<DKNavigator>
 {
 public:

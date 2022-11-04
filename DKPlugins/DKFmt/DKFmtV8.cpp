@@ -28,6 +28,7 @@
 #include "DKFmt/DKFmt.h" // DKFmt::Funktion()
 #include "DKFmt/DKFmtV8.h"
 
+
 bool DKFmtV8::Init(){
 	DKDEBUGFUNC();
 	DKV8::AttachFunction("DKFmt_Funktion", DKFmtV8::Funktion);

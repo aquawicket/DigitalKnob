@@ -35,12 +35,15 @@
 #define  LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG_TAG,__VA_ARGS__)
 #define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
 
+// WARNING_DISABLE
 #include <jni.h>
 #include <string>
 #include <android/log.h>
 #include <iostream>
 #include <stdio.h>
-#include "DKString.h"
+// WARNING_ENABLE
+
+#include "DK/DKString.h"
 
 struct JavaData
 {

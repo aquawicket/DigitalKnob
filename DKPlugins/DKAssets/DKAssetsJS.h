@@ -31,7 +31,7 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-///////////////////////////////////////////////
+
 class DKAssetsJS : public DKObjectT<DKAssetsJS>
 {
 public:

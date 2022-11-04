@@ -1,6 +1,6 @@
 #include "DK/stdafx.h"
-#include "DKEvents.h"
-#include "DKClass.h"
+#include "DK/DKEvents.h"
+#include "DK/DKClass.h"
 
 std::vector<DKEvents*> DKEvents::events;
 std::vector<std::function<bool(const DKString&, const DKString&)> > DKEvents::reg_funcs;

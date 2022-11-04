@@ -29,7 +29,7 @@
 #ifndef DKLinux_H
 #define DKLinux_H
 
-#include "DKString.h"
+#include "DK/DKString.h"
 
 // http://xahlee.info/linux/linux_show_keycode_keysym.html
 // https://github.com/depp/keycode

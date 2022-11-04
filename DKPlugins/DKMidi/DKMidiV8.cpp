@@ -31,6 +31,7 @@
 #include "DKMidi/DKMidi.h"
 #include "DKMidi/DKMidiV8.h"
 
+
 bool DKMidiV8::Init(){
 	DKDEBUGFUNC();
 	DKV8::AttachFunction("DKMidi_GetMidiInputs", DKMidiV8::GetMidiInputs);

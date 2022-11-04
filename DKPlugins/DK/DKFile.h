@@ -28,7 +28,6 @@
 #ifndef DKFile_H
 #define DKFile_H
 
-
 #ifdef __has_include
 #	if __has_include(<filesystem>) // && __cplusplus >= 201703L 
 #		include <filesystem>

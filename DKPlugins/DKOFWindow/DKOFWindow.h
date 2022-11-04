@@ -27,10 +27,9 @@
 #pragma once
 #ifndef DKOFWindow_H
 #define DKOFWindow_H
-#include "DK.h"
+#include "DK/DK.h"
 
 
-////////////////////////////////////////////////
 class DKOFWindow : public DKObjectT<DKOFWindow>
 {
 public:

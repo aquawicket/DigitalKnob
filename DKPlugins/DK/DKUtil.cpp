@@ -25,18 +25,27 @@
 */
 
 #include "DK/stdafx.h"
-#include "DKUtil.h"
-#include "DKLog.h"
-#include "DKFile.h"
+
+//WARNING_DISABLE
 #include <iostream>
 #include <cstring>
+#include <math.h>
+#include <assert.h>
+//#include <boost/asio.hpp> //Boost deprecated in the DKCore library
 #ifndef WIN32
 #	include <sys/time.h>
+#	include <shellapi.h> //DKFile::Execute()
 #endif
+#ifndef MAC
+#	include <fstream>
+#endif
+//WARNING_ENABLE
 
+#include "DK/DKUtil.h"
+#include "DK/DKLog.h"
+#include "DK/DKFile.h"
 #if WIN32
 #	include "DKWindows.h"
-#	include <shellapi.h> //DKFile::Execute()
 #else
 #	include "DKUnix.h"
 #endif
@@ -53,15 +62,6 @@
 #	include "DKMac.h"
 #endif
 	
-//#include <boost/asio.hpp> //Boost deprecated in the DKCore library
-
-#include <iostream>
-#ifndef MAC
-#	include <fstream>
-#endif
-#include <math.h>
-#include <assert.h>
-
 
 //Frame limiter
 long DKUtil::lastSecond = 0;

@@ -28,11 +28,12 @@
 #ifndef DKDom_H
 #define DKDom_H
 
-
 #include "DKDuktape/DKDuktape.h"
 #include "DKRml/DKRml.h"
-#include <RmlUi/Core.h>
 
+//WARNING_DISABLE
+#include <RmlUi/Core.h>
+//WARNING_ENABLE
 
 typedef Rml::Element DKDom_Element;
 

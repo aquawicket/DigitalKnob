@@ -31,6 +31,7 @@
 
 #include "DKDuktape/DKDuktape.h"
 
+
 class DKFmtJS : public DKObjectT<DKFmtJS>
 {
 public:

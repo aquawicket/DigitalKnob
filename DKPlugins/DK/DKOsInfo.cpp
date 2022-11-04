@@ -27,11 +27,13 @@
 //https://stackoverflow.com/a/36545162/688352
 //https://en.wikipedia.org/wiki/List_of_Microsoft_Windows_versions
 #include "DK/stdafx.h"
-#include "DKOsInfo.h"
+#include "DK/DKOsInfo.h"
 
+//WARNING_DISABLE
 #ifdef MAC
 #import <CoreServices/CoreServices.h>
 #endif
+//WARNING_ENABLE
 
 bool GetOSFlag(DKString& flag) {
 #ifdef WIN32

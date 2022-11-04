@@ -30,10 +30,15 @@
 #define DKWindows_H
 
 #define WIN32_LEAN_AND_MEAN
-#include <windows.h>
-#include "DKString.h"
 
+//WARNING_DISABLE
+#include <windows.h>
 #include "pdh.h"
+//WARNING_ENABLE
+
+#include "DK/DKString.h"
+
+
 const int MB = 1048576; // A megabyte is 1,048,576 bytes
 static PDH_HQUERY cpuQuery;
 static PDH_HCOUNTER cpuTotal;

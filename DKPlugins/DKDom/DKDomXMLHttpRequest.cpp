@@ -30,6 +30,7 @@
 #include "DK/DKFile.h"
 #include "DKDom/DKDomXMLHttpRequest.h"
 
+
 bool DKDomXMLHttpRequest::Init(){
 	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("CPP_DKDomXMLHttpRequest_send", DKDomXMLHttpRequest::send);

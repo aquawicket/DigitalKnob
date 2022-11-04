@@ -31,7 +31,7 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-/////////////////////////////////////////////
+
 class DKMySqlJS : public DKObjectT<DKMySqlJS>
 {
 public:

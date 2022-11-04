@@ -25,9 +25,12 @@
 */
 
 #include "DK/stdafx.h"
-#include "DKString.h"
-#include "DKLog.h"
+#include "DK/DKString.h"
+#include "DK/DKLog.h"
+
+//WARNING_DISABLE
 #include <codecvt> //string <--> wsting conversion
+//WARNING_ENABLE
 
 
 bool same(const DKString& str, const DKString& str2){

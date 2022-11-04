@@ -30,11 +30,11 @@
 
 #include "DK/DK.h"
 
+
 //Functions in DKHookDLL.dll
 //typedef bool(*InstallHook)(unsigned long);
 //typedef bool(*UnInstallHook)();
 
-///////////////////////////////////////
 class DKHook : public DKObjectT<DKHook>
 {
 public:

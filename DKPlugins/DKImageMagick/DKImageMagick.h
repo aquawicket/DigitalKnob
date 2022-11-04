@@ -30,7 +30,7 @@
 
 #include "DK/DK.h"
 
-/////////////////////////////////////////////////////
+
 class DKImageMagick : public DKObjectT<DKImageMagick>
 {
 public:

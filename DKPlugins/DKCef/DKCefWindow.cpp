@@ -26,11 +26,11 @@
 
 #include "DK/stdafx.h"
 
-#pragma warning(push, 0); //Silence warning from 3rd party headers
+//WARNING_DISABLE
 	#if MAC
 		#import <AppKit/AppKit.h>
 	#endif
-#pragma warning(pop);
+//WARNING_ENABLE
 
 #include "DKCef/DKCefWindow.h"
 

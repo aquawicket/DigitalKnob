@@ -29,13 +29,13 @@
 #define DKCefWindow_H
 //#define USE_GDK    
 
-//#pragma warning(push, 0); //Silence warning from 3rd party headers
+//WARNING_DISABLE
 	#ifdef LINUX
 		#ifdef USE_GDK
 			#include <gdk/gdk.h>
 		#endif //USE_GDK
 	#endif //LINUX
-//#pragma warning(pop);
+//WARNING ENABLE
 
 #include "DKCef/DKCef.h"
 

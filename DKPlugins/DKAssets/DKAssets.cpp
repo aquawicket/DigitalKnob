@@ -30,8 +30,11 @@
 #include "DK/DKUtil.h"
 #include "DKArchive/DKArchive.h"
 #include "DKAssets/DKAssets.h"
+
+//WARNING_DISABLE
 #include <algorithm>
 #include <fstream>
+//WARNING_ENABLE
 
 bool DKAssets::Init(){
 	DKDEBUGFUNC();

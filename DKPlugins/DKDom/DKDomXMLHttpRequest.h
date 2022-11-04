@@ -32,6 +32,7 @@
 
 #include "DKDuktape/DKDuktape.h"
 
+
 class DKDomXMLHttpRequest : public DKObjectT<DKDomXMLHttpRequest>
 {
 public:

@@ -25,13 +25,14 @@
 */
 
 #include "DK/stdafx.h"
-#include "DKOFWindow.h"
+#include "DKOFWindow/DKOFWindow.h"
 
+//WARNING_DISABLE
 #include "ofMain.h"
+//WARNING_ENABLE
 
-///////////////////////
-bool DKOFWindow::Init()
-{
+
+bool DKOFWindow::Init(){
 	//ofSetupOpenGL(1024, 768, OF_WINDOW);
 	
 	//ofGLWindowSettings settings;
@@ -42,8 +43,6 @@ bool DKOFWindow::Init()
 	return true;
 }
 
-//////////////////////
-bool DKOFWindow::End()
-{
+bool DKOFWindow::End(){
 	return true;
 }

@@ -26,13 +26,11 @@
 
 #ifdef WIN32
 #ifdef HAVE_DKDuktape 
-#include "DKHandles.h"
-#include "DKHandlesJS.h"
+#include "DKHandles/DKHandles.h"
+#include "DKHandles/DKHandlesJS.h"
 
 
-////////////////////////
-bool DKHandlesJS::Init()
-{
+bool DKHandlesJS::Init(){
 	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("CPP_DKHandles_Click", DKHandlesJS::Click);
 	DKDuktape::AttachFunction("CPP_DKHandles_CurrentHandle", DKHandlesJS::CurrentHandle);
@@ -62,11 +60,7 @@ bool DKHandlesJS::Init()
 	return true;
 }
 
-
-
-////////////////////////////////////////
-int DKHandlesJS::Click(duk_context* ctx)
-{
+int DKHandlesJS::Click(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString handle = duk_require_string(ctx, 0);
 	if(!DKHandles::Click(toHWND(handle))){
@@ -75,18 +69,14 @@ int DKHandlesJS::Click(duk_context* ctx)
 	return 1;
 }
 
-////////////////////////////////////////////////
-int DKHandlesJS::CurrentHandle(duk_context* ctx)
-{
+int DKHandlesJS::CurrentHandle(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString handle = toString(DKHandles::currentHandle);
 	duk_push_string(ctx, handle.c_str());
 	return 1;
 }
 
-////////////////////////////////////////////
-int DKHandlesJS::GetBottom(duk_context* ctx)
-{
+int DKHandlesJS::GetBottom(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString handle = duk_require_string(ctx, 0);
 	int bottom;
@@ -98,9 +88,7 @@ int DKHandlesJS::GetBottom(duk_context* ctx)
 	return true;
 }
 
-///////////////////////////////////////////
-int DKHandlesJS::GetClass(duk_context* ctx)
-{
+int DKHandlesJS::GetClass(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString handle = duk_require_string(ctx, 0);
 	DKString clas;
@@ -109,9 +97,7 @@ int DKHandlesJS::GetClass(duk_context* ctx)
 	return 1;
 }
 
-///////////////////////////////////////////
-int DKHandlesJS::GetIndex(duk_context* ctx)
-{
+int DKHandlesJS::GetIndex(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString handle = duk_require_string(ctx, 0);
 	int index;
@@ -120,9 +106,7 @@ int DKHandlesJS::GetIndex(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////////////
-int DKHandlesJS::GetLeft(duk_context* ctx)
-{
+int DKHandlesJS::GetLeft(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString handle = duk_require_string(ctx, 0);
 	int left;
@@ -134,9 +118,7 @@ int DKHandlesJS::GetLeft(duk_context* ctx)
 	return true;
 }
 
-////////////////////////////////////////////
-int DKHandlesJS::GetParent(duk_context* ctx)
-{
+int DKHandlesJS::GetParent(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString handle = duk_require_string(ctx, 0);
 	DKString parent;
@@ -148,9 +130,7 @@ int DKHandlesJS::GetParent(duk_context* ctx)
 	return true;
 }
 
-///////////////////////////////////////////
-int DKHandlesJS::GetRight(duk_context* ctx)
-{
+int DKHandlesJS::GetRight(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString handle = duk_require_string(ctx, 0);
 	int right;
@@ -162,9 +142,7 @@ int DKHandlesJS::GetRight(duk_context* ctx)
 	return true;
 }
 
-/////////////////////////////////////////
-int DKHandlesJS::GetTop(duk_context* ctx)
-{
+int DKHandlesJS::GetTop(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString handle = duk_require_string(ctx, 0);
 	int top;
@@ -176,9 +154,7 @@ int DKHandlesJS::GetTop(duk_context* ctx)
 	return true;
 }
 
-///////////////////////////////////////////
-int DKHandlesJS::GetValue(duk_context* ctx)
-{
+int DKHandlesJS::GetValue(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString handle = duk_require_string(ctx, 0);
 	DKString value;
@@ -187,9 +163,7 @@ int DKHandlesJS::GetValue(duk_context* ctx)
 	return 1;
 }
 
-////////////////////////////////////////////
-int DKHandlesJS::GetWindow(duk_context* ctx)
-{
+int DKHandlesJS::GetWindow(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString handle = duk_require_string(ctx, 0);
 	HWND window;
@@ -201,9 +175,7 @@ int DKHandlesJS::GetWindow(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////////////////////
-int DKHandlesJS::GetWindowIndex(duk_context* ctx)
-{
+int DKHandlesJS::GetWindowIndex(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString handle = duk_require_string(ctx, 0);
 	int index;
@@ -215,9 +187,7 @@ int DKHandlesJS::GetWindowIndex(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////////////////
-int DKHandlesJS::GetWindows(duk_context* ctx)
-{
+int DKHandlesJS::GetWindows(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKStringArray windows;
 	if(!DKHandles::GetWindows(windows)){ return 0; }
@@ -226,9 +196,7 @@ int DKHandlesJS::GetWindows(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////////////////
-int DKHandlesJS::NextHandle(duk_context* ctx)
-{
+int DKHandlesJS::NextHandle(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString handle = duk_require_string(ctx, 0);
 	HWND next;
@@ -237,9 +205,7 @@ int DKHandlesJS::NextHandle(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////////////////
-int DKHandlesJS::PrevHandle(duk_context* ctx)
-{
+int DKHandlesJS::PrevHandle(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString handle = duk_require_string(ctx, 0);
 	HWND prev;
@@ -249,9 +215,7 @@ int DKHandlesJS::PrevHandle(duk_context* ctx)
 }
 
 /*
-///////////////////////////////////////////
-int DKHandlesJS::SendHook(duk_context* ctx)
-{
+int DKHandlesJS::SendHook(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString window = duk_require_string(ctx, 0);
 	DKString handle = duk_require_string(ctx, 1);
@@ -264,9 +228,7 @@ int DKHandlesJS::SendHook(duk_context* ctx)
 }
 */
 
-////////////////////////////////////////////
-int DKHandlesJS::SetHandle(duk_context* ctx)
-{
+int DKHandlesJS::SetHandle(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	int timeout = 1;
 	if(duk_is_number(ctx, 0)){ //By handle number
@@ -294,9 +256,7 @@ int DKHandlesJS::SetHandle(duk_context* ctx)
 	return 1;
 }
 
-///////////////////////////////////////////
-int DKHandlesJS::SetValue(duk_context* ctx)
-{
+int DKHandlesJS::SetValue(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString handle = duk_require_string(ctx, 0);
 	DKString value = duk_require_string(ctx, 1);
@@ -304,9 +264,7 @@ int DKHandlesJS::SetValue(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////////////////////
-int DKHandlesJS::SetWindowHandle(duk_context* ctx)
-{
+int DKHandlesJS::SetWindowHandle(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString window = duk_require_string(ctx, 0);
 	HWND hwnd;
@@ -319,9 +277,7 @@ int DKHandlesJS::SetWindowHandle(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////////////////
-int DKHandlesJS::ShowWindow(duk_context* ctx)
-{
+int DKHandlesJS::ShowWindow(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString handle = duk_require_string(ctx, 0);
 	bool flag = duk_require_boolean(ctx, 1);
@@ -333,9 +289,7 @@ int DKHandlesJS::ShowWindow(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////////////////
-int DKHandlesJS::StartSearch(duk_context* ctx)
-{
+int DKHandlesJS::StartSearch(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	if(!DKHandles::Instance("DKHandles")->StartSearch()){
 		return 0;
@@ -343,17 +297,13 @@ int DKHandlesJS::StartSearch(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////////////////////
-int DKHandlesJS::ToggleHighlight(duk_context* ctx)
-{
+int DKHandlesJS::ToggleHighlight(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKHandles::Instance("DKHandles")->ToggleHighlight();
 	return 1;
 }
 
-////////////////////////////////////////////////
-int DKHandlesJS::WaitForHandle(duk_context* ctx)
-{
+int DKHandlesJS::WaitForHandle(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	if(duk_is_number(ctx, 0)){ //By handle number
 		if(!DKHandles::WaitForHandle(duk_require_int(ctx, 0), duk_require_int(ctx, 1))){
@@ -377,9 +327,7 @@ int DKHandlesJS::WaitForHandle(duk_context* ctx)
 	return 1;
 }
 
-////////////////////////////////////////////////
-int DKHandlesJS::WaitForWindow(duk_context* ctx)
-{
+int DKHandlesJS::WaitForWindow(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString window = duk_require_string(ctx, 0);
 	int timeout = duk_require_int(ctx, 1);
@@ -390,9 +338,7 @@ int DKHandlesJS::WaitForWindow(duk_context* ctx)
 	return 1;
 }
 
-///////////////////////////////////////////////
-int DKHandlesJS::WindowExists(duk_context* ctx)
-{
+int DKHandlesJS::WindowExists(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString window = duk_require_string(ctx, 0);
 	if(!DKHandles::Instance("DKHandles")->WindowExists(window)){

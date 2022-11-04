@@ -32,7 +32,7 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-/////////////////////////////////////////////////
+
 class DKHandlesJS : public DKObjectT<DKHandlesJS>
 {
 public:
