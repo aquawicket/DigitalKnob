@@ -24,8 +24,11 @@
 * SOFTWARE.
 */
 
+//WARNING_DISABLE
 #include <RmlUi/Core.h>
 #include <SDL_image.h>
+//WARNING_ENABLE
+
 #include "DK/DK.h"
 #include "DK/DKString.h"
 #include "DKSDLMetalRml/DKSDLMetalRmlRenderer.h"
@@ -34,6 +37,7 @@
 #if !defined(IOS) && !defined(ANDROID)
 static PFNGLUSEPROGRAMOBJECTARBPROC glUseProgramObjectARB;
 #endif
+
 
 RmlSDL2Renderer::RmlSDL2Renderer(SDL_Renderer* renderer, SDL_Window* screen) {
 	//DKDEBUGFUNC(renderer, screen);
@@ -149,8 +153,7 @@ void RmlSDL2Renderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, in
 
 
 // Called by Rml when it wants to enable or disable scissoring to clip content.
-void RmlSDL2Renderer::EnableScissorRegion(bool enable)
-{
+void RmlSDL2Renderer::EnableScissorRegion(bool enable){
 	//DKDEBUGFUNC(enable);
     if (enable)
         glEnable(GL_SCISSOR_TEST);
@@ -159,8 +162,7 @@ void RmlSDL2Renderer::EnableScissorRegion(bool enable)
 }
 
 // Called by Rml when it wants to change the scissor region.
-void RmlSDL2Renderer::SetScissorRegion(int x, int y, int width, int height)
-{
+void RmlSDL2Renderer::SetScissorRegion(int x, int y, int width, int height){
 	//DKDEBUGFUNC(x, y, width, height);
     int w_width, w_height;
     SDL_GetWindowSize(mScreen, &w_width, &w_height);
@@ -168,8 +170,7 @@ void RmlSDL2Renderer::SetScissorRegion(int x, int y, int width, int height)
 }
 
 // Called by Rml when a texture is required by the library.
-bool RmlSDL2Renderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vector2i& texture_dimensions, const Rml::String& source)
-{
+bool RmlSDL2Renderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vector2i& texture_dimensions, const Rml::String& source){
 	//DKDEBUGFUNC(texture_handle, texture_dimensions, "Rml::String&");
 
 	//CEF Texture
@@ -258,8 +259,7 @@ bool RmlSDL2Renderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vecto
 }
 
 // Called by Rml when a texture is required to be built from an internally-generated sequence of pixels.
-bool RmlSDL2Renderer::GenerateTexture(Rml::TextureHandle& texture_handle, const Rml::byte* source, const Rml::Vector2i& source_dimensions)
-{
+bool RmlSDL2Renderer::GenerateTexture(Rml::TextureHandle& texture_handle, const Rml::byte* source, const Rml::Vector2i& source_dimensions){
 	//DKDEBUGFUNC(texture_handle, source, source_dimensions);
     #if SDL_BYTEORDER == SDL_BIG_ENDIAN
         Uint32 rmask = 0xff000000;
@@ -282,8 +282,7 @@ bool RmlSDL2Renderer::GenerateTexture(Rml::TextureHandle& texture_handle, const 
 }
 
 // Called by Rml when a loaded texture is no longer required.
-void RmlSDL2Renderer::ReleaseTexture(Rml::TextureHandle texture_handle)
-{
+void RmlSDL2Renderer::ReleaseTexture(Rml::TextureHandle texture_handle){
 	//DKDEBUGFUNC(texture_handle);
     SDL_DestroyTexture((SDL_Texture*) texture_handle);
 }

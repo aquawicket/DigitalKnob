@@ -23,9 +23,12 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
+//WARNING_DISABLE
 #include <RmlUi/Core.h>
+//WARNING_ENABLE
+
 #include "DKSDLMetalRml/DKSDLMetalRmlSystem.h"
+
 
 Rml::Input::KeyIdentifier RmlSDL2SystemInterface::TranslateKey(SDL_Keycode sdlkey){
 	DKDEBUGFUNC(sdlkey);

@@ -28,7 +28,10 @@
 #ifndef DKSDLMetalRml_H
 #define DKSDLMetalRml_H
 
+//WARNING_DISABLE
 #include <RmlUi/Core.h>
+//WARNING_ENABLE
+
 #include "DK/DK.h"
 #include "DKSDLWindow/DKSDLWindow.h"
 #include "DKRml/DKRml.h"
@@ -38,7 +41,7 @@
 //#include "ShellRenderInterfaceOpenGL.h"
 //#define RML_SHELL_RENDER 1
 
-///////////////////////////////////////////
+
 class DKSDLMetalRml : public DKObjectT<DKSDLMetalRml>
 {
 public:

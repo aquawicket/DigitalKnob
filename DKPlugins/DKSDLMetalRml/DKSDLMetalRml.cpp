@@ -23,12 +23,12 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #include "DK/stdafx.h"
 #include "SDL.h"
 #include "DK/DKFile.h"
 #include "DKAssets/DKAssets.h"
 #include "DKSDLMetalRml/DKSDLMetalRml.h"
+
 
 bool DKSDLMetalRml::Init(){
 	DKDEBUGFUNC();

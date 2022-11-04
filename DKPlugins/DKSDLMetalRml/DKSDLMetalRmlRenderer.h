@@ -28,14 +28,15 @@
 #ifndef DKSDLMetalRmlRenderer_H
 #define DKSDLMetalRmlRenderer_H
 
+//WARNING_DISABLE
 #include <RmlUi/Core.h>
 //#include <RmlUi/Core/RenderInterface.h>
 #include <SDL.h>
 
 #if !defined(ANDROID) && !defined(IOS)
-#include "SDL_opengl.h"
+	#include "SDL_opengl.h"
 #else
-#include "SDL_opengles.h"
+	#include "SDL_opengles.h"
 #endif
 
 #ifdef USE_SDL2_gif
@@ -43,10 +44,9 @@ extern "C" {
 	#include "SDL2_gif.h"
 }
 #endif
+//WARNING_ENABLE
 
 
-
-////////////////////////////////////////////////////////////////
 class RmlSDL2Renderer : public Rml::RenderInterface
 {
 public:
@@ -66,7 +66,6 @@ public:
 	virtual void ReleaseTexture(Rml::TextureHandle texture_handle);
 
 	std::map<Rml::TextureHandle, DKString> texture_name; //texture to name map
-
 
 private:
     SDL_Renderer* mRenderer;

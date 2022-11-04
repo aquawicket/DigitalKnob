@@ -28,8 +28,12 @@
 #ifndef DKSDLWindow_H
 #define DKSDLWindow_H
 
-#include "SDL.h"
 #include "DK/DK.h"
+
+//WARNING_DISABLE
+#include "SDL.h"
+//WARNING_ENABLE
+
 
 class DKSDLWindow : public DKObjectT<DKSDLWindow>{
 public:

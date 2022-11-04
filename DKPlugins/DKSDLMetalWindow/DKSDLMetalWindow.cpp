@@ -23,13 +23,14 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #include "DK/stdafx.h"
-#include "SDL_syswm.h"
 #include "DK/DKAndroid.h"
 #include "DK/DKFile.h"
 #include "DKSDLWindow/DKSDLWindow.h"
+#include "DK/DKOsInfo.h"
 
+//WARNING_DISABLE
+#include "SDL_syswm.h"
 #ifdef WIN32
     #include <GL/glew.h>
 	#include <GL/gl.h>
@@ -47,7 +48,8 @@
 #ifdef ANDROID
 	#include <GLES/gl.h>
 #endif
-#include <DK/DKOsInfo.h>
+//WARNING_ENABLE
+
 
 std::vector<std::function<bool(SDL_Event* event)> > DKSDLWindow::event_funcs;
 std::vector<std::function<bool()> > DKSDLWindow::render_funcs;
