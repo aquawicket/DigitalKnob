@@ -5,10 +5,11 @@ if(USE_babel)
 endif()
 
 
+#NOTE: include duktape.c in DKDuktape
 #if(NOT EXISTS ${DKPLUGINS}/DKDuktape/duktape.cpp)
-	dk_copy(${DUKTAPE}/dist/src/duk_config.h 	${DKPLUGINS}/DKDuktape/duk_config.h OVERWRITE)
-	dk_copy(${DUKTAPE}/dist/src/duktape.h 		${DKPLUGINS}/DKDuktape/duktape.h 	OVERWRITE)
-	dk_copy(${DUKTAPE}/dist/src/duktape.c 		${DKPLUGINS}/DKDuktape/duktape.cpp 	OVERWRITE)
+	#dk_copy(${DUKTAPE}/dist/src/duk_config.h 	${DKPLUGINS}/DKDuktape/duk_config.h OVERWRITE)
+	#dk_copy(${DUKTAPE}/dist/src/duktape.h 		${DKPLUGINS}/DKDuktape/duktape.h 	OVERWRITE)
+	#dk_copy(${DUKTAPE}/dist/src/duktape.c 		${DKPLUGINS}/DKDuktape/duktape.cpp 	OVERWRITE)
 #endif()
 	
 #dk_set(ENABLE_eventloop ON)

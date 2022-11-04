@@ -6,21 +6,34 @@
 # https://wiki.duktape.org/projectsusingduktape
 
 
+### DEPEND ###
 dk_depend(python)
 dk_depend(pyyaml)
 dk_depend(nodejs)
 
 
+### IMPORT ###
 #dk_import(https://github.com/aquawicket/duktape/archive/0701a460ca25c2dc76a96bd3187849ca278d1865.zip PATCH)
 dk_import(https://github.com/aquawicket/duktape.git PATCH) #NOTE: PATCH is for CMakeLists.txt
 
 
+### LINK ###
+WIN_dk_define		(DUK_F_VBCC)
+ANDROID_dk_define	(DUK_F_32BIT_PTRS)
+dk_include			(${DUKTAPE}/include)
+WIN_dk_libDebug		(${DUKTAPE}/${OS}/${DEBUG_DIR}/duktape.lib)
+WIN_dk_libRelease	(${DUKTAPE}/${OS}/${RELEASE_DIR}/duktape.lib)
+UNIX_dk_libDebug	(${DUKTAPE}/${OS}/${DEBUG_DIR}/libduktape.a)
+UNIX_dk_libRelease	(${DUKTAPE}/${OS}/${RELEASE_DIR}/libduktape.a)
+
+
+### GENERATE ###
 if(NOT EXISTS ${DUKTAPE}/dist/src/duktape.c)
 	dk_setPath(${DUKTAPE})
-	
-	#WIN_dk_executeProcess(${PYTHON}/Scripts/pip install PyYAML)
-	#WIN_dk_executeProcess(${PYTHON_EXE} ${DUKTAPE}/util/dist.py)  #default generator
 	dk_makeDirectory(${DUKTAPE}/dist)
+	
+	#dk_executeProcess(${NODE_EXE} ${DUKTAPE}/src-tools/index.js configure --output-directory ${DUKTAPE}/src --source-directory ${DUKTAPE}/src-input --config-directory ${DUKTAPE}/config)
+	#dk_executeProcess(${PYTHON_EXE} ${DUKTAPE}/util/dist.py)  # default generator
 	dk_executeProcess(${PYTHON_APP} ${DUKTAPE}/tools/configure.py
 		--output-directory ${DUKTAPE}/dist/src
 		-DDUK_USE_GLOBAL_BINDING 
@@ -29,40 +42,13 @@ if(NOT EXISTS ${DUKTAPE}/dist/src/duktape.c)
 		-DDUK_USE_INTERRUPT_COUNTER 
 		-DDUK_USE_DEBUGGER_DUMPHEAP 
 		-DDUK_USE_DEBUGGER_INSPECT)
-	
-	#MAC_dk_executeProcess(pip install PyYAML)
-	#MAC_dk_executeProcess(python ${DUKTAPE}/util/dist.py) #default generator
-	#MAC_dk_executeProcess(${PYTHON_APP} ${DUKTAPE}/tools/configure.py
-	#	--output-directory ${DUKTAPE}/dist/src
-	#	-DDUK_USE_GLOBAL_BINDING 
-	#	-DDUK_USE_FATAL_HANDLER 
-	#	-DDUK_USE_DEBUGGER_SUPPORT 
-	#	-DDUK_USE_INTERRUPT_COUNTER 
-	#	-DDUK_USE_DEBUGGER_DUMPHEAP 
-	#	-DDUK_USE_DEBUGGER_INSPECT)
-
-	#LINUX_dk_executeProcess(sudo apt-get -y install python python-yaml)
-	#LINUX_dk_executeProcess(python ${DUKTAPE}/util/dist.py) #default generator
-	#LINUX_dk_executeProcess(${PYTHON_APP} ${DUKTAPE}/tools/configure.py
-	#	--output-directory ${DUKTAPE}/dist/src
-	#	-DDUK_USE_GLOBAL_BINDING 
-	#	-DDUK_USE_FATAL_HANDLER 
-	#	-DDUK_USE_DEBUGGER_SUPPORT 
-	#	-DDUK_USE_INTERRUPT_COUNTER 
-	#	-DDUK_USE_DEBUGGER_DUMPHEAP 
-	#	-DDUK_USE_DEBUGGER_INSPECT)
 
 	#dk_copy(${DUKTAPE}/dist/src/ ${DUKTAPE}/src OVERWRITE)
 endif()
 
+dk_setPath(${DUKTAPE}/${BUILD_DIR})
+dk_queueCommand(${DKCMAKE_BUILD} ${DUKTAPE})
 
-#dk_import(https://codeload.github.com/nodeca/js-yaml/zip/refs/tags/3.14.1 ${DUKTAPE_NAME}/src-tools/lib/extdeps/js-yaml)
-#WIN32_dk_executeProcess(${NODE_EXE} ${DUKTAPE}/src-tools/index.js configure --output-directory ${DUKTAPE}/src --source-directory ${DUKTAPE}/src-input --config-directory ${DUKTAPE}/config)
 
-### LINK ###
-IF(WIN)
-	dk_define(DUK_F_VBCC)
-ENDIF()
-IF(ANDROID)
-	##dk_define(DUK_F_32BIT_PTRS)
-ENDIF()
+### COMPILE ###
+dk_build(${DUKTAPE_FOLDER})
