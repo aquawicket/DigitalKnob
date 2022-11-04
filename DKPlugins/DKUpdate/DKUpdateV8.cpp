@@ -23,15 +23,13 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #ifdef HAVE_DKCef
 #include "DK/DKApp.h"
 #include "DKUpdate/DKUpdate.h"
 #include "DKUpdate/DKUpdateV8.h"
 
-///////////////////////
-bool DKUpdateV8::Init()
-{
+
+bool DKUpdateV8::Init(){
 	DKDEBUGFUNC();
 	DKV8::AttachFunction("DKUpdate_CheckForUpdate", DKUpdateV8::CheckForUpdate);
 	DKV8::AttachFunction("DKUpdate_CreateUpdate", DKUpdateV8::CreateUpdate);
@@ -40,44 +38,39 @@ bool DKUpdateV8::Init()
 	return true;
 }
 
-//////////////////////
-bool DKUpdateV8::End()
-{
+bool DKUpdateV8::End(){
 	DKDEBUGFUNC();
 	return true;
 }
 
-///////////////////////////////////////////////////////////////
-bool DKUpdateV8::CheckForUpdate(CefArgs args, CefReturn retval)
-{
+bool DKUpdateV8::CheckForUpdate(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
-	if(!DKUpdate::CheckForUpdate()){ return false; }
+	if(!DKUpdate::CheckForUpdate())
+		return DKERROR("DKUpdate::CheckForUpdate() failed! \n");
 	return true;
 }
 
-/////////////////////////////////////////////////////////////
-bool DKUpdateV8::CreateUpdate(CefArgs args, CefReturn retval)
-{
+bool DKUpdateV8::CreateUpdate(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
-	if(!DKUpdate::CreateUpdate()){ return false; }
+	if(!DKUpdate::CreateUpdate())
+		return DKERROR("DKUpdate::CreateUpdate() failed! \n");
 	return true;
 }
 
-/////////////////////////////////////////////////////////
-bool DKUpdateV8::DoUpdate(CefArgs args, CefReturn retval)
-{
+bool DKUpdateV8::DoUpdate(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
-	if(!DKUpdate::DoUpdate()){ return false; }
+	if(!DKUpdate::DoUpdate())
+		return DKERROR("DKUpdate::DoUpdate() failed! \n");
 	return true;
 }
 
-/////////////////////////////////////////////////////////////
-bool DKUpdateV8::UpdatePlugin(CefArgs args, CefReturn retval)
-{
+bool DKUpdateV8::UpdatePlugin(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	DKString url = args->GetString(0);
-	if(!DKUpdate::UpdatePlugin(url)){ return false; }
+	if(!DKUpdate::UpdatePlugin(url))
+		return DKERROR("DKUpdate::UpdatePlugin() failed! \n");
 	return true;
 }
+
 
 #endif //HAVE_DKCef

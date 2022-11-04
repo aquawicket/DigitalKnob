@@ -23,7 +23,6 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #ifdef HAVE_DKDuktape 
 #pragma once
 #ifndef DKUpdateJS_H
@@ -31,7 +30,7 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-///////////////////////////////////////////////
+
 class DKUpdateJS : public DKObjectT<DKUpdateJS>
 {
 public:
@@ -49,9 +48,8 @@ public:
 	static int DoUpdate(duk_context* ctx);
 	static int UpdatePlugin(duk_context* ctx);
 };
-
-
 REGISTER_OBJECT(DKUpdateJS, true)
+
 
 #endif //DKUpdateJS_H
 #endif //HAVE_DKDuktape
