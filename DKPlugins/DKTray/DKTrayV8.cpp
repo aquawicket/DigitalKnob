@@ -23,15 +23,13 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #ifdef HAVE_DKCef
 #include "DK/DKApp.h"
 #include "DKTray/DKTray.h"
 #include "DKTray/DKTrayV8.h"
 
-/////////////////////
-bool DKTrayV8::Init()
-{
+
+bool DKTrayV8::Init(){
 	DKDEBUGFUNC();
 	DKV8::AttachFunction("DKTray_AddItem", DKTrayV8::AddItem);
 	DKV8::AttachFunction("DKTray_GetIcon", DKTrayV8::GetIcon);
@@ -41,58 +39,52 @@ bool DKTrayV8::Init()
 	return true;
 }
 
-///////////////////
-bool DKTrayV8::End()
-{
+bool DKTrayV8::End(){
 	DKDEBUGFUNC();
 	return true;
 }
 
-//////////////////////////////////////////////////////
-bool DKTrayV8::AddItem(CefArgs args, CefReturn retval)
-{
+bool DKTrayV8::AddItem(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	DKString name = args->GetString(0);
 	int id = args->GetInt(1);
-	if(!DKTray::Get()->AddItem(name, id)){ return false; }
+	if(!DKTray::Get()->AddItem(name, id))
+		return DKERROR("DKTray::Get()->AddItem() failed! \n");
 	return true;
 }
 
-//////////////////////////////////////////////////////
-bool DKTrayV8::GetIcon(CefArgs args, CefReturn retval)
-{
+bool DKTrayV8::GetIcon(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	DKString icon;
-	if(!DKTray::Get()->GetIcon(icon)){ return false; }
-	if(!retval->SetString(0, icon)){ return false; }
+	if(!DKTray::Get()->GetIcon(icon))
+		return DKERROR("DKTray::Get()->GetIcon() failed! \n");
+	if(!retval->SetString(0, icon))
+		return DKERROR("retval->SetString() failed! \n");
 	return true;
 }
 
-//////////////////////////////////////////////////////
-bool DKTrayV8::SetIcon(CefArgs args, CefReturn retval)
-{
+bool DKTrayV8::SetIcon(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	DKString file = args->GetString(0);
-	if(!DKTray::Get()->SetIcon(file)){ return false; }
+	if(!DKTray::Get()->SetIcon(file))
+		return DKERROR("DKTray::Get()->SetIcon() failed! \n");
 	return true;
 }
 
-/////////////////////////////////////////////////////////
-bool DKTrayV8::SetTooltip(CefArgs args, CefReturn retval)
-{
+bool DKTrayV8::SetTooltip(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	DKString name = args->GetString(0);
-	if(!DKTray::Get()->SetTooltip(name)){ return false; }
+	if(!DKTray::Get()->SetTooltip(name))
+		return DKERROR("DKTray::Get()->SetTooltip() failed! \n");
 	return true;
 }
 
-//////////////////////////////////////////////////////////
-bool DKTrayV8::ShowBalloon(CefArgs args, CefReturn retval)
-{
+bool DKTrayV8::ShowBalloon(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	DKString string = args->GetString(0);
 	//int seconds = duk_require_int(ctx, 1);
-	if(!DKTray::Get()->ShowBalloon(string/*, seconds*/)){ return false; }
+	if(!DKTray::Get()->ShowBalloon(string/*, seconds*/))
+		return DKERROR("DKTray::Get()->SetBaloon() failed! \n");
 	return true;
 }
 

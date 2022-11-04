@@ -23,7 +23,6 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #ifdef HAVE_DKDuktape 
 #pragma once
 #ifndef DKTrayJS_H
@@ -31,7 +30,7 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-///////////////////////////////////////////
+
 class DKTrayJS : public DKObjectT<DKTrayJS>
 {
 public:
@@ -51,8 +50,8 @@ public:
 	//static int ShowIcon(duk_context* ctx); //TODO
 	//static int StopAnimation(duk_context* ctx); //TODO
 };
-
 REGISTER_OBJECT(DKTrayJS, true)
+
 
 #endif //DKTrayJS_H
 #endif //HAVE_DKDuktape

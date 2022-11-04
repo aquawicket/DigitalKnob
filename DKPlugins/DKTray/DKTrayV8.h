@@ -23,7 +23,6 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #ifdef HAVE_DKCef
 #pragma once
 #ifndef DKTrayV8_H
@@ -31,7 +30,7 @@
 
 #include "DKCef/DKCef.h"
 
-///////////////////////////////////////////
+
 class DKTrayV8 : public DKObjectT<DKTrayV8>
 {
 public:
@@ -44,8 +43,8 @@ public:
 	static bool SetTooltip(CefArgs args, CefReturn retval);
 	static bool ShowBalloon(CefArgs args, CefReturn retval);
 };
-
 REGISTER_OBJECT(DKTrayV8, false);
+
 
 #endif //DKTrayV8_H
 #endif //HAVE_DKCef

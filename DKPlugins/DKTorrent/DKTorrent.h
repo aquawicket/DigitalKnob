@@ -23,28 +23,28 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #pragma once
 #ifndef DKTorrent_H
 #define DKTorrent_H
 #include "DK/DK.h"
 
+//WARNING_DISABLE
 #include <iostream>
 #include <thread>
 #include <chrono>
 #include <fstream>
-
 #include <libtorrent/session.hpp>
 #include <libtorrent/add_torrent_params.hpp>
 #include <libtorrent/torrent_handle.hpp>
 #include <libtorrent/alert_types.hpp>
 #include <libtorrent/bencode.hpp>
 #include <libtorrent/torrent_status.hpp>
+//WARNING_ENABLE
+
 
 namespace lt = libtorrent;
 using clk = std::chrono::steady_clock;
 
-/////////////////////////////////////////////
 class DKTorrent : public DKObjectT<DKTorrent>
 {
 public:
@@ -60,6 +60,5 @@ public:
 
 
 REGISTER_OBJECT(DKTorrent, true);
-
 #endif //DKTorrent_H
 
