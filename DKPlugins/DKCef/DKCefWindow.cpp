@@ -25,10 +25,15 @@
 */
 
 #include "DK/stdafx.h"
+
+#pragma warning(push, 0); //Silence warning from 3rd party headers
+	#if MAC
+		#import <AppKit/AppKit.h>
+	#endif
+#pragma warning(pop);
+
 #include "DKCef/DKCefWindow.h"
-#if MAC
-	#import <AppKit/AppKit.h>
-#endif
+
 
 DKCefWindow::DKCefWindow(){
 	DKDEBUGFUNC();

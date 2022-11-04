@@ -25,8 +25,8 @@
 */
 
 #ifdef HAVE_DKDuktape 
-#include "DKWindow.h"
-#include "DKWindowJS.h"
+#include "DKWindow/DKWindow.h"
+#include "DKWindow/DKWindowJS.h"
 
 
 bool DKWindowJS::Init(){

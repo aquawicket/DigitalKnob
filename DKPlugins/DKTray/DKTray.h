@@ -37,7 +37,6 @@
 #endif
 
 
-///////////////////////////////////////
 class DKTray : public DKObjectT<DKTray>
 {
 public:

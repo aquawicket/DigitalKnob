@@ -31,7 +31,11 @@
 #ifdef USE_GDK
 #	include <gtk/gtk.h>
 #endif
+
+#pragma warning(push, 0) //silence warnings from <SFML/Window.hpp>
 #include <SFML/Window.hpp>
+#pragma warning(pop)
+
 #include "DK/DK.h"
 
 

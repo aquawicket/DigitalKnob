@@ -31,7 +31,6 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-///////////////////////////////////////////////////////
 class DKWebSocketsJS : public DKObjectT<DKWebSocketsJS>
 {
 public:

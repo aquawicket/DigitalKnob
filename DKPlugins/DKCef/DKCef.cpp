@@ -25,13 +25,24 @@
 */
 
 #include "DK/stdafx.h"
-#include <sstream>
-#include <string>
-#include <include/cef_urlrequest.h>
-#include <include/cef_version.h>
-#include "include/base/cef_bind.h"
-#include "include/wrapper/cef_closure_task.h"
-#include "include/wrapper/cef_helpers.h"
+
+#pragma warning(push, 0); //Silence warning from 3rd party headers
+	#include <sstream>
+	#include <string>
+	#include <include/cef_urlrequest.h>
+	#include <include/cef_version.h>
+	#include "include/base/cef_bind.h"
+	#include "include/wrapper/cef_closure_task.h"
+	#include "include/wrapper/cef_helpers.h"
+	#if MAC
+		#include "include/wrapper/cef_library_loader.h"
+	#endif
+	#if WIN32
+		#include <delayimp.h>
+		#include <include/cef_sandbox_win.h>
+	#endif
+#pragma warning(pop);
+
 #include "DK/DKApp.h"
 #include "DK/DKClass.h"
 #include "DK/DKFile.h"
@@ -39,16 +50,12 @@
 #include "DKCef/DKCef.h"
 #include "DKCef/DKCefWindow.h"
 #include "DKDuktape/DKDuktape.h"
-
-#if MAC
-#include "include/wrapper/cef_library_loader.h"
-#endif
-
 #if WIN32
-#include <delayimp.h>
-#include <include/cef_sandbox_win.h>
-#include "DK/DKWindows.h"
+	#include "DK/DKWindows.h"
 #endif
+
+
+
 
 CefRefPtr<CefClient> DKCef::cefHandler;
 unsigned long DKCef::cefThreadId;

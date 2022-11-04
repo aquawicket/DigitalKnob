@@ -30,8 +30,12 @@
 #ifndef DKDuktape_H
 #define DKDuktape_H
 #include "DK/DK.h"
-#include "duktape.h"
 #include "DK/DKEvents.h"
+
+#pragma warning(push, 0) //silence warnings from "duktape.h"
+#include "duktape.h"
+#pragma warning(pop);
+
 #define DKHAVE_DKDuktape 1
 
 /* Flags for duk_push_string_file_raw() */

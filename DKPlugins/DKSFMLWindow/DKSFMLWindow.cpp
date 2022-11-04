@@ -26,8 +26,11 @@
 
 #include "DK/stdafx.h"
 #include "DKSFMLWindow/DKSFMLWindow.h"
+
+#pragma warning(push, 0) //silence warnings from <SFML/Window.hpp> and <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#pragma warning(pop)
 
 //std::vector<boost::function<bool(sf::Event& e)> > DKSFMLWindow::event_funcs;
 //std::vector<boost::function<void()> > DKSFMLWindow::draw_funcs;

@@ -28,10 +28,12 @@
 #ifndef DKWebSockets_H
 #define DKWebSockets_H
 
+#pragma warning(push, 0) //silence warnings from "src/uWS.h"
 #include "src/uWS.h"
+#pragma warning(pop)
+
 #include "DK/DK.h"
 
-///////////////////////////////////////////////////
 class DKWebSockets : public DKObjectT<DKWebSockets>
 {
 public:

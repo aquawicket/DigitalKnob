@@ -28,11 +28,17 @@
 #ifndef DKSDLCef_H
 #define DKSDLCef_H
 
-#include <list>
-#include <include/cef_client.h>
-#include <include/cef_render_handler.h>
-#include <include/cef_browser_process_handler.h>
-#include <include/cef_display_handler.h>
+#pragma warning(push, 0); //Silence warning from 3rd party headers
+	#include <list>
+	#include <include/cef_client.h>
+	#include <include/cef_render_handler.h>
+	#include <include/cef_browser_process_handler.h>
+	#include <include/cef_display_handler.h>
+	#ifdef LINUX
+	//#include <X11/cursorfont.h>
+	#endif
+#pragma warning(pop);
+
 #include "SDL.h"
 #include "DK/DK.h"
 #include "DK/DKApp.h"
@@ -40,13 +46,10 @@
 #include "DKSDLCef/DKSDLCefKeyboard.h"
 #include "DKSDLWindow/DKSDLWindow.h"
 
-#ifndef WIN32
-#define  UNREFERENCED_PARAMETER(P) (P)
-#endif
+//#ifndef WIN32
+//	#define  UNREFERENCED_PARAMETER(P) (P)
+//#endif
 
-#ifdef LINUX
-//#include <X11/cursorfont.h>
-#endif
 
 class DKSDLCefHandler;
 

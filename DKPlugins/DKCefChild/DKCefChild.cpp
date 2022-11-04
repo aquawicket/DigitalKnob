@@ -24,26 +24,24 @@
 * SOFTWARE.
 */
 
+#pragma warning(push, 0); //Silence warning from 3rd party headers
+	#if MAC
+		#include "include/wrapper/cef_library_loader.h"
+	#endif
+	#ifdef CEF_USE_SANDBOX
+		#if WIN
+			#include "include/cef_sandbox_win.h"
+		#endif
+		#if MAC
+			#include "include/cef_sandbox_mac.h"
+		#endif
+		#if LINUX
+			#include "include/cef_sandbox_linux.h"
+		#endif
+	#endif
+#pragma warning(pop);
+
 #include "DKCefChild.h"
-
-#if WIN
-	#ifdef CEF_USE_SANDBOX
-		#include "include/cef_sandbox_win.h"
-	#endif
-#endif
-
-#ifdef MAC
-	#include "include/wrapper/cef_library_loader.h"
-	#ifdef CEF_USE_SANDBOX
-		#include "include/cef_sandbox_mac.h"
-	#endif
-#endif
-
-#ifdef LINUX
-	#ifdef CEF_USE_SANDBOX
-		#include "include/cef_sandbox_linux.h"
-	#endif
-#endif
 
 CefRefPtr<CefListValue> DKCefChildV8Handler::myRetval;
 

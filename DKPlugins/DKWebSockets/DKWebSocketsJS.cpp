@@ -25,8 +25,8 @@
 */
 
 #ifdef HAVE_DKDuktape 
-#include "DKWebSockets.h"
-#include "DKWebSocketsJS.h"
+#include "DKWebSockets/DKWebSockets.h"
+#include "DKWebSockets/DKWebSocketsJS.h"
 
 
 ///////////////////////////
