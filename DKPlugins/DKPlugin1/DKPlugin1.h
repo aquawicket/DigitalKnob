@@ -23,14 +23,13 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #pragma once
 #ifndef DKPlugin1_H
 #define DKPlugin1_H
 
 #include "DK/DKPlugin.h"
 
-/////////////////////////////////////////////
+
 class DKPlugin1 : public DKObjectT<DKPlugin1>
 {
 public:
@@ -46,7 +45,6 @@ extern "C" void* getObj() {
 extern "C" void* getName() {
     return static_cast<void*>("DKPlugin1");
 }
-
 
 extern "C" DLLAPI BOOL APIENTRY DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 {

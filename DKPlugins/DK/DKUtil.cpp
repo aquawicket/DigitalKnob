@@ -33,11 +33,13 @@
 #include <assert.h>
 //#include <boost/asio.hpp> //Boost deprecated in the DKCore library
 #ifndef WIN32
-#	include <sys/time.h>
-#	include <shellapi.h> //DKFile::Execute()
+	#include <sys/time.h>
+#endif
+#if WIN
+	#include <shellapi.h> //DKFile::Execute()
 #endif
 #ifndef MAC
-#	include <fstream>
+	#include <fstream>
 #endif
 //WARNING_ENABLE
 
@@ -45,21 +47,18 @@
 #include "DK/DKLog.h"
 #include "DK/DKFile.h"
 #if WIN32
-#	include "DKWindows.h"
+	#include "DKWindows.h"
 #else
-#	include "DKUnix.h"
+	#include "DKUnix.h"
 #endif
-
 #if LINUX
-#	include "DKLinux.h"
+	#include "DKLinux.h"
 #endif 
-
 #if ANDROID
-#	include "DKAndroid.h"
+	#include "DKAndroid.h"
 #endif 
-
 #if MAC
-#	include "DKMac.h"
+	#include "DKMac.h"
 #endif
 	
 
