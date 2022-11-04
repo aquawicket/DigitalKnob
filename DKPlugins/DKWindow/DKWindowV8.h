@@ -23,7 +23,6 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #if HAVE_DKCef
 #pragma once
 #ifndef DKWindowV8_H
@@ -68,8 +67,8 @@ public:
 	static bool Show(CefArgs args, CefReturn retval);
 	static bool Windowed(CefArgs args, CefReturn retval);
 };
-
 REGISTER_OBJECT(DKWindowV8, false);
+
 
 #endif //DKWindowV8_H
 #endif //HAVE_DKCef
