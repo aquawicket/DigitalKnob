@@ -28,7 +28,10 @@
 #ifndef DKSDLRml_H
 #define DKSDLRml_H
 
+//WARNING_DISABLE
 #include <RmlUi/Core.h>
+//WARNING_ENABLE
+
 #include "DK/DK.h"
 #include "DKSDLWindow/DKSDLWindow.h"
 #include "DKRml/DKRml.h"

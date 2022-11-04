@@ -23,12 +23,15 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #include "DK/stdafx.h"
-#include "SDL.h"
 #include "DK/DKFile.h"
 #include "DKAssets/DKAssets.h"
 #include "DKSDLRml/DKSDLRml.h"
+
+//WARNING_DISABLE
+#include "SDL.h"
+//WARNING_ENABLE
+
 
 bool DKSDLRml::Init(){
 	DKDEBUGFUNC();

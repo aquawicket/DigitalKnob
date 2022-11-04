@@ -23,10 +23,10 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #include "DK/stdafx.h"
-#include "DKSDLText.h"
+#include "DKSDLText/DKSDLText.h"
 #include "DK/DKFile.h"
+
 
 bool DKSDLText::Init(){
 	DKDEBUGFUNC();
