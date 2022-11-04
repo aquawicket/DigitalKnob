@@ -126,7 +126,7 @@ template<typename S, typename T>
 struct is_streamable<S, T, decltype(std::declval<S&>() << std::declval<T&>(), void())> : std::true_type {};
 
 template<typename T, typename std::enable_if<is_streamable<std::ostream, T>::value>::type* = nullptr>
-void printVariable(const DKString& name, T t, std::ostringstream& out) {
+void printVariable(const DKString& name, T t, std::ostringstream& out){
 	DKString type = "";
 	DKString constant = "";
 	std::ostringstream value;
@@ -153,7 +153,7 @@ void printVariable(const DKString& name, T t, std::ostringstream& out) {
 }
 
 template<typename T, typename std::enable_if<!is_streamable<std::ostream, T>::value>::type* = nullptr>
-void printVariable(const DKString& name, T t, std::ostringstream& out) {
+void printVariable(const DKString& name, T t, std::ostringstream& out){
 	DKString type = "";
 	DKString constant = "";
 	std::ostringstream value;
@@ -179,7 +179,7 @@ void getTemplateArgs(std::ostringstream& out);
 void getTemplateArgs(std::ostringstream& out, DKStringArray& name_array);
 
 template <typename A, typename... Args>
-void getTemplateArgs(std::ostringstream& out, DKStringArray& name_array, A arg1, Args&&... args) {
+void getTemplateArgs(std::ostringstream& out, DKStringArray& name_array, A arg1, Args&&... args){
 	int arg_count = sizeof...(Args);
 	printVariable(name_array[0], arg1, out); //use first name element
 	name_array.erase(name_array.begin()); //remove first name element
@@ -189,7 +189,7 @@ void getTemplateArgs(std::ostringstream& out, DKStringArray& name_array, A arg1,
 }
 
 template <typename... Args>
-void DebugFunc(const char* file, int line, const char* func, const DKString& names, Args&&... args) {
+void DebugFunc(const char* file, int line, const char* func, const DKString& names, Args&&... args){
 	if (!DKUtil::InMainThread())
 		return;
 	if(DKLog::log_show.empty() && !DKLog::log_debug)
@@ -211,7 +211,7 @@ void DebugFunc(const char* file, int line, const char* func, const DKString& nam
 }
 
 template <typename... Args>
-bool DebugReturn(const char* file, int line, const char* func, const DKString& names, Args&&... args) {
+bool DebugReturn(const char* file, int line, const char* func, const DKString& names, Args&&... args){
 	if (!DKUtil::InMainThread())
 		return true;
 	if (DKLog::log_show.empty() && !DKLog::log_debug)
@@ -230,17 +230,17 @@ bool DebugReturn(const char* file, int line, const char* func, const DKString& n
 		toStringArray(argArray, out.str(), ",");
 		if (arg_count > 1){
 			func_string += "{ ";
-			for (int i = 0; i < arg_count; ++i) {
-				if (i < (arg_count - 1)) {
+			for (int i = 0; i < arg_count; ++i){
+				if (i < (arg_count - 1)){
 					func_string += argArray[i];
 					func_string += ", ";
 				}
 				else {
-					if (arg_count > 1) {
+					if (arg_count > 1){
 						func_string += " }";
 						func_string += ")";
 					}
-					if (arg_count) {
+					if (arg_count){
 						func_string += " -> { ";
 						func_string += argArray[i];
 						func_string += " }";
@@ -273,7 +273,7 @@ void signal_handler(int signal);
 class logy {
 public:
 	template <typename... Args>
-	logy(const char* file, int line, const char* func, const DKString& names, Args&&... args) : file(file), line(line), func(func), names(names), /*args(args...),*/ start_time(clock()) {
+	logy(const char* file, int line, const char* func, const DKString& names, Args&&... args) : file(file), line(line), func(func), names(names), /*args(args...),*/ start_time(clock()){
 		count++;
 		if (DKLog::log_show.empty() && !DKLog::log_debug)
 			return;
@@ -299,7 +299,7 @@ public:
 		
 	};
 
-	~logy() {
+	~logy(){
 		count--;
 		if (DKLog::log_show.empty() && !DKLog::log_debug)
 			return;

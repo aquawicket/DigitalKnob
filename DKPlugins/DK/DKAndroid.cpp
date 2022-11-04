@@ -91,7 +91,7 @@ extern "C" {
 		}
 		//Call function with string parameter
 		jmethodID method = env->GetMethodID(cls, name.c_str(), "(Ljava/lang/String;)V");
-		if (!method) {
+		if (!method){
 			DKERROR("Could not get method\n");
 			return;
 		}

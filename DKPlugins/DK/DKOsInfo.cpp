@@ -35,7 +35,7 @@
 #endif
 //WARNING_ENABLE
 
-bool GetOSFlag(DKString& flag) {
+bool GetOSFlag(DKString& flag){
 #ifdef WIN32
 	flag = "WIN32";
 #endif
@@ -146,41 +146,41 @@ bool GetOSName(DKString& osname){
 	SYSTEM_INFO si;
 	GetWinSystemInfo(si);
 	std::wstringstream os;
-	if (vi.dwMajorVersion == 10) {
-		if (vi.dwMinorVersion == 0) {
+	if (vi.dwMajorVersion == 10){
+		if (vi.dwMinorVersion == 0){
 			if (vi.wProductType == VER_NT_WORKSTATION)
 				os << "Windows 10";
 			else
 				os << "Windows Server 2019";
 		}
 	}
-	if(vi.dwMajorVersion == 6) {
-		if (vi.dwMinorVersion == 3) {
+	if(vi.dwMajorVersion == 6){
+		if (vi.dwMinorVersion == 3){
 			if (vi.wProductType == VER_NT_WORKSTATION)
 				os << "Windows 8.1";
 			else
 				os << "Windows Server 2012 R2";
 		}
-		if (vi.dwMinorVersion == 2) {
+		if (vi.dwMinorVersion == 2){
 			if (vi.wProductType == VER_NT_WORKSTATION)
 				os << "Windows 8";
 			else
 				os << "Windows Server 2012";
 		}
-		if (vi.dwMinorVersion == 1) {
+		if (vi.dwMinorVersion == 1){
 			if (vi.wProductType == VER_NT_WORKSTATION)
 				os << "Windows 7";
 			else
 				os << "Windows Server 2008 R2";
 		}
-		if (vi.dwMinorVersion == 0) {
+		if (vi.dwMinorVersion == 0){
 			if (vi.wProductType == VER_NT_WORKSTATION)
 				os << "Windows Vista";
 			else
 				os << "Windows Server 2008";
 		}
 	}
-	if (vi.dwMajorVersion == 5 && vi.dwMinorVersion == 2) {
+	if (vi.dwMajorVersion == 5 && vi.dwMinorVersion == 2){
 		if (GetSystemMetrics(SM_SERVERR2))
 			os << "Windows Server 2003 R2";
 		else if (vi.wSuiteMask & VER_SUITE_STORAGE_SERVER)
@@ -427,7 +427,7 @@ bool GetOSArchitecture(DKString& osarchitecture){
 	SYSTEM_INFO si;
 	GetWinSystemInfo(si);
 	std::wstringstream os;
-	if((vi.dwMajorVersion == 5 && vi.dwMinorVersion >= 2) || vi.dwMajorVersion >= 6) {
+	if((vi.dwMajorVersion == 5 && vi.dwMinorVersion >= 2) || vi.dwMajorVersion >= 6){
 		if (si.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_AMD64){
 			os << "64";
 		}
@@ -435,8 +435,8 @@ bool GetOSArchitecture(DKString& osarchitecture){
 			BOOL bIsWow64 = FALSE;
 			LPFN_ISWOW64PROCESS fnIsWow64Process;
 			fnIsWow64Process = (LPFN_ISWOW64PROCESS)GetProcAddress(GetModuleHandle(TEXT("kernel32")), "IsWow64Process");
-			if (NULL != fnIsWow64Process) {
-				if (!fnIsWow64Process(GetCurrentProcess(), &bIsWow64)) {
+			if (NULL != fnIsWow64Process){
+				if (!fnIsWow64Process(GetCurrentProcess(), &bIsWow64)){
 					os << "32";
 					return DKERROR("GetOSArchitecture(): failed at: fnIsWow64Process(GetCurrentProcess(), &bIsWow64)");
 				}
@@ -489,7 +489,7 @@ bool GetWinOSVersion(RTL_OSVERSIONINFOEXW& vi){
 	HMODULE hMod = ::GetModuleHandleW(L"ntdll.dll");
 	if(hMod){
 		RtlGetVersionPtr fxPtr = (RtlGetVersionPtr)::GetProcAddress(hMod, "RtlGetVersion");
-		if(fxPtr != nullptr) {
+		if(fxPtr != nullptr){
 			vi = { 0 };
 			vi.dwOSVersionInfoSize = sizeof(vi);
 			if (STATUS_SUCCESS == fxPtr(&vi)){
@@ -503,14 +503,14 @@ bool GetWinOSVersion(RTL_OSVERSIONINFOEXW& vi){
 	return false;
 }
 
-bool GetWinSystemInfo(SYSTEM_INFO& si) {
+bool GetWinSystemInfo(SYSTEM_INFO& si){
 	ZeroMemory(&si, sizeof(SYSTEM_INFO));
 	HMODULE hMod = ::GetModuleHandleW(L"kernel32.dll");
-	if (hMod) {
+	if (hMod){
 		SYSTEM_INFO_Ptr fxPtr = (SYSTEM_INFO_Ptr)::GetProcAddress(hMod, "GetNativeSystemInfo");
-		if (fxPtr != nullptr) {
+		if (fxPtr != nullptr){
 			si = { 0 };
-			if (STATUS_SUCCESS == fxPtr(&si)) {
+			if (STATUS_SUCCESS == fxPtr(&si)){
 				return true;
 			}
 		}
@@ -519,11 +519,11 @@ bool GetWinSystemInfo(SYSTEM_INFO& si) {
 	return false;
 }
 
-bool GetWinProductInfo(RTL_OSVERSIONINFOEXW& vi, DWORD& dwType) {
+bool GetWinProductInfo(RTL_OSVERSIONINFOEXW& vi, DWORD& dwType){
 	HMODULE hMod = ::GetModuleHandleW(L"kernel32.dll");
-	if (hMod) {
+	if (hMod){
 		ProductInfoPtr fxPtr = (ProductInfoPtr)::GetProcAddress(hMod, "GetProductInfo");
-		if (fxPtr != nullptr) {
+		if (fxPtr != nullptr){
 			fxPtr(vi.dwMajorVersion, vi.dwMinorVersion, 0, 0, &dwType);
 			return true;
 		}

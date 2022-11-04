@@ -114,7 +114,7 @@ public:
 	static void Close(const DKString& id = ""){
 		DKDEBUGFUNC(id);		
 		//if(id.empty()){ return; }
-		for (size_t i = instances.size() - 1; i >= 0 && i < instances.size(); --i) {
+		for (size_t i = instances.size() - 1; i >= 0 && i < instances.size(); --i){
 			if(id.empty() || same(id, instances[i]->data[1])){
 				//if(has(id,"/"))
 				//	DKERROR("Close(): "+id+" contains a /\n");
@@ -136,7 +136,7 @@ public:
 		//DKDEBUGFUNC(id);
 		for(unsigned int i=0; i<instances.size(); ++i){
 			if(same(id, instances[i]->data[1])){
-				if (instances[i]) {
+				if (instances[i]){
 					//DKDEBUGRETURN(id, true);
 					return true;
 				}

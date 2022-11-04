@@ -31,6 +31,7 @@
 #define HEADER_ACCEPT "Accept:text/html,application/xhtml+xml,application/xml"
 #define HEADER_USER_AGENT "User-Agent:Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.70 Safari/537.17"
 
+
 bool DKXml::Init() {
 	DKDEBUGFUNC();
 	//test_libxml();

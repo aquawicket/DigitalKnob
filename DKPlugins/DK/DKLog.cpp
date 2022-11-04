@@ -61,7 +61,7 @@ DKString DKLog::log_hide = ""; //comma seperated
 bool DKLog::stacktrace_on_errors = false;
 bool DKLog::exception_on_errors = false;
 
-bool GetVersion(DKString& version) {
+bool GetVersion(DKString& version){
 	DKString year;
 	DKBUILDYEAR(year);
 	version = year;
@@ -85,7 +85,7 @@ bool GetVersion(DKString& version) {
 	return true;
 }
 
-bool GetBuildMonth(const char* buildDate, DKString& buildMonth) {
+bool GetBuildMonth(const char* buildDate, DKString& buildMonth){
 	buildMonth = buildDate;
 	std::string::size_type found = buildMonth.find_first_of(" ");
 	buildMonth = buildMonth.substr(0, found);
@@ -116,7 +116,7 @@ bool GetBuildMonth(const char* buildDate, DKString& buildMonth) {
 	return true;
 }
 
-bool GetBuildDay(const char* buildDate, DKString& buildDay) {
+bool GetBuildDay(const char* buildDate, DKString& buildDay){
 	buildDay = buildDate;
 	std::string::size_type foundA = buildDay.find_first_of(" ");
 	std::string::size_type foundB = buildDay.find_first_of(" ", foundA);
@@ -124,21 +124,21 @@ bool GetBuildDay(const char* buildDate, DKString& buildDay) {
 	return true;
 }
 
-bool GetBuildYear(const char* buildDate, DKString& buildYear) {
+bool GetBuildYear(const char* buildDate, DKString& buildYear){
 	buildYear = buildDate;
 	std::string::size_type found = buildYear.find_last_of(" ");
 	buildYear = buildYear.substr(found+3);
 	return true;
 }
 
-bool GetBuildHour(const char* buildTime, DKString& buildHour) {
+bool GetBuildHour(const char* buildTime, DKString& buildHour){
 	buildHour = buildTime;
 	std::string::size_type found = buildHour.find_first_of(":");
 	buildHour = buildHour.substr(0, found);
 	return true;
 }
 
-bool GetBuildMinute(const char* buildTime, DKString& buildMinute) {
+bool GetBuildMinute(const char* buildTime, DKString& buildMinute){
 	buildMinute = buildTime;
 	std::string::size_type foundA = buildMinute.find_first_of(":");
 	std::string::size_type foundB = buildMinute.find_first_of(":", foundA);
@@ -146,7 +146,7 @@ bool GetBuildMinute(const char* buildTime, DKString& buildMinute) {
 	return true;
 }
 
-bool GetBuildSecond(const char* buildTime, DKString& buildSecond) {
+bool GetBuildSecond(const char* buildTime, DKString& buildSecond){
 	buildSecond = buildTime;
 	std::string::size_type found = buildSecond.find_last_of(":");
 	buildSecond = buildSecond.substr(found+1);
@@ -158,13 +158,13 @@ bool DKLog::Clear(int& rtnvalue){
 }
 
 /*
-void signal_handler(int signal) {
+void signal_handler(int signal){
 	gSignalStatus = signal;
 }
 */
 
 // https://stackoverflow.com/a/9371717/688352  - The command windows is slow, read this
-bool DKLog::Log(const char* file, int line, const char* func, const DKString& input, const int lvl, const unsigned short color_override/*, const bool rtnval*/) {
+bool DKLog::Log(const char* file, int line, const char* func, const DKString& input, const int lvl, const unsigned short color_override/*, const bool rtnval*/){
 	/*
 	if(lvl == DK_ASSERT){
 		// Install a signal handler
@@ -181,27 +181,27 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 		//return DKASSERT("bad practice to start a string with \\n")
 
 	//check LOG_HIDE strings
-	if (!log_hide.empty()) {
+	if (!log_hide.empty()){
 		DKStringArray hides;
 		toStringArray(hides, log_hide, " ");
-		for (unsigned int i = 0; i < hides.size(); ++i) {
+		for (unsigned int i = 0; i < hides.size(); ++i){
 			if (!hides[i].empty() && has(input, hides[i]))
 				return true;
 		}
 	}
 	//check LOG_SHOW strings
 	bool force = false;
-	if (!log_show.empty()) {
+	if (!log_show.empty()){
 		DKStringArray shows;
 		toStringArray(shows, log_show, ",");
-		for (unsigned int i = 0; i < shows.size(); ++i) {
-			if (!shows[i].empty() && has(input, shows[i])) {
+		for (unsigned int i = 0; i < shows.size(); ++i){
+			if (!shows[i].empty() && has(input, shows[i])){
 				force = true;
 				break;
 			}
 		}
 	}
-	if (!force) {
+	if (!force){
 		if (log_fatal == false && lvl == DK_FATAL)     { return false; }
 		if (log_errors == false && lvl == DK_ERROR)    { return false; }
 		if (log_warnings == false && lvl == DK_WARN)   { return true; }
@@ -214,13 +214,13 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 	std::stringstream ss;
 
 	///// ADD extra info if requested
-	if (log_thread) {
+	if (log_thread){
 		unsigned long int threadId;
 		DKUtil::GetThreadId(threadId);
 		output = output + "TID: " + toString((unsigned int)threadId) + "  ";
 		ss << std::left << std::setw(10) << "TID: " + toString((unsigned int)threadId);
 	}
-	if (log_lines || lvl <= DK_ERROR) {
+	if (log_lines || lvl <= DK_ERROR){
 		DKString filename = file;
 		std::string::size_type found = filename.find_last_of("/\\");
 		if (found != std::string::npos && found < filename.length())
@@ -228,8 +228,8 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 		output = output + ":" + toString(line) + "  ";
 		ss << std::right << std::setw(25) << filename.substr(found + 1) + ":" + toString(line) << "  ";
 	}
-	if (log_funcs || lvl <= DK_ERROR) {
-		if (strlen(func)) {
+	if (log_funcs || lvl <= DK_ERROR){
+		if (strlen(func)){
 			output = output + func + "() ";
 			ss << func << "() ";
 		}
@@ -240,7 +240,7 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 	/////// Main Console Color Decorators ///////
 #	if WIN32
 		WORD color = 0;
-		if (!color_override) {
+		if (!color_override){
 			if (lvl == DK_ASSERT)  { color = DKASSERT_COLOR; }
 			if (lvl == DK_FATAL)   { color = DKFATAL_COLOR; }
 			if (lvl == DK_ERROR)   { color = DKERROR_COLOR; }
@@ -364,8 +364,8 @@ bool DKLog::SetLog(const int lvl, const DKString& text){
 	return true;
 }
 
-void getTemplateArgs(std::ostringstream& /*out*/) {}
-void getTemplateArgs(std::ostringstream& /*out*/, DKStringArray& /*names*/) {}
+void getTemplateArgs(std::ostringstream& /*out*/){}
+void getTemplateArgs(std::ostringstream& /*out*/, DKStringArray& /*names*/){}
 
 ///////////////////// logy test code /////////////////////////////////////////////////
 std::ostream* logy::stream = &std::cout;

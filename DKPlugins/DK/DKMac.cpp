@@ -34,7 +34,7 @@
 #import "CoreGraphics/CoreGraphics.h"
 //WARNING_ENABLE
 
-bool DKMac::GetKey(int& key) {
+bool DKMac::GetKey(int& key){
     return DKUnix::GetKey(key);
 }
 
@@ -207,7 +207,7 @@ bool DKMac::PhysicalMemoryUsed(unsigned long long& physicalMemory){
     #include <mach/mach_types.h>
     #include <mach/mach_init.h>
     #include <mach/mach_host.h>
-    int main(int argc, const char * argv[]) {
+    int main(int argc, const char * argv[]){
         vm_size_t page_size;
         mach_port_t mach_port;
         mach_msg_type_number_t count;
@@ -267,7 +267,7 @@ bool DKMac::TurnOffMonitor(){
         return DKERROR("io_registry_entry_t invalid");
 	int err = IORegistryEntrySetCFProperty(r, CFSTR("IORequestIdle"), kCFBooleanTrue);
     IOObjectRelease(r);
-    switch (err) {
+    switch (err){
         case 1:
             return DKERROR("KERN_INVALID_ADDRESS");
         case 2:

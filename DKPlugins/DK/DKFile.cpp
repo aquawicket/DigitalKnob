@@ -105,7 +105,7 @@ bool DKFile::Copy(const DKString& src, const DKString& dst, const bool overwrite
 	DebugPath(dst);
 	if(!PathExists(src))
 		return DKERROR("("+src+","+dst+","+toString(overwrite)+","+toString(recursive)+"): The src path does not exits \n");
-	if(fs::is_directory(src)) {
+	if(fs::is_directory(src)){
 		if(!CopyDirectory(src, dst, overwrite, recursive))
 			return DKERROR("("+src+","+dst+","+toString(overwrite)+","+toString(recursive)+"): failed \n");
 	}
@@ -120,7 +120,7 @@ bool DKFile::Copy(const DKString& src, const DKString& dst, const bool overwrite
 	return true;
 }
 
-bool DKFile::CopyDirectory(fs::path const& source, fs::path const& destination, const bool overwrite, const bool recursive) {
+bool DKFile::CopyDirectory(fs::path const& source, fs::path const& destination, const bool overwrite, const bool recursive){
 	DKDEBUGFUNC(source, destination, overwrite, recursive);
 	DebugPath(source.string());
 	DebugPath(destination.string());
@@ -315,7 +315,7 @@ bool DKFile::GetBasename(const DKString& path, DKString& basename){
 	if (basename.back() == '/')
 		basename.pop_back();
 	std::string::size_type found = basename.find_last_of("/");
-	if (found != std::string::npos && found < basename.length()) {
+	if (found != std::string::npos && found < basename.length()){
 		basename = basename.substr(found + 1);
 		return true && DKDEBUGRETURN(path, basename);
 	}
@@ -328,7 +328,7 @@ bool DKFile::GetDirectoryContents(const DKString& path, DKStringArray& strings){
 	if(!PathExists(path))
 		return DKERROR("path does not exist \n");
 	fs::directory_iterator end_itr;
-	for (fs::directory_iterator itr(path); itr != end_itr; ++itr) {
+	for (fs::directory_iterator itr(path); itr != end_itr; ++itr){
 		DKString itrPath = itr->path().string();
 		DKFile::NormalizePath(itrPath);
 		DKString filename;
@@ -372,7 +372,7 @@ bool DKFile::GetExeName(DKString& exename){
 	if(!DKFile::PathExists(DKFile::exe_path))
 		DKFile::GetExePath(DKFile::exe_path);
 	std::string::size_type found = DKFile::exe_path.find_last_of("/");
-	if (found != std::string::npos && found < DKFile::exe_path.length()) {
+	if (found != std::string::npos && found < DKFile::exe_path.length()){
 		exename = DKFile::exe_path.substr(found + 1);
 		DebugPath(exename);
 		return true; //&& DKDEBUGRETURN(exename);
@@ -385,7 +385,7 @@ bool DKFile::GetExePath(DKString& exepath){
 	//DKFile::exe_path should hold the full file path of this executable from argv[0];
 	//If is doesn't, we should fill that now and figure out why it didn't get assigned.
 
-	if (!DKFile::PathExists(DKFile::exe_path)) {
+	if (!DKFile::PathExists(DKFile::exe_path)){
 		DKWARN("GetExePath(): DKFile::exe_path is invalid. It should have been set by argv[0] at app start \n");
 		DKClass::DKCreate("DKDebug");
 		DKClass::CallFunc("DKDebug::ShowStackTrace");
@@ -579,7 +579,7 @@ bool DKFile::GetModifiedTime(const DKString& path, DKString& time){
 #endif
 }
 
-bool DKFile::GetPath(DKString& path) {
+bool DKFile::GetPath(DKString& path){
 	DKDEBUGFUNC(path);
 	if (path.empty() || same(path, "/") || same(path, "."))
 		path = DKFile::local_assets;
@@ -775,7 +775,7 @@ bool DKFile::MakeDir(const DKString& dir){
 		return DKERROR("path is empty \n");
 	if(PathExists(path))
 		return DKWARN("path already exists \n");
-	if (!fs::create_directories(path)) {
+	if (!fs::create_directories(path)){
 		//fs::directory_iterator end_itr; // default construction yields past-the-end
 		//for (fs::directory_iterator itr(path); itr != end_itr; ++itr)
 			return DKERROR("failed to create "+path+"\n");
@@ -887,7 +887,7 @@ bool DKFile::StringToFile(const DKString& string, const DKString& file){
 	DKFile::GetFilePath(file,folder);
 	if(!folder.empty()){
 		fs::path path(folder);
-		if(!(fs::exists(path))) {
+		if(!(fs::exists(path))){
 			if (!fs::create_directories(path))
 				return DKERROR("could not create path \n");
 		}
@@ -918,7 +918,7 @@ bool DKFile::ValidatePath(DKString& path){
 		replace(path, "\\", "/");
 	if (has(path, "://") && (substr_count(path, "//") > 0))
 		replace(path, "//", "/");
-	if (has(path, "://") && (substr_count(path, "//") > 1)) {
+	if (has(path, "://") && (substr_count(path, "//") > 1)){
 		replace(path, "//", "/");
 		replace(path, ":/", "://");
 	}

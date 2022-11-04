@@ -42,7 +42,7 @@
 //WARNING_ENABLE
 
 
-bool DKLinux::GetKey(int& key) {
+bool DKLinux::GetKey(int& key){
 	DKDEBUGRETURN(key);
 	return DKUnix::GetKey(key);
 }

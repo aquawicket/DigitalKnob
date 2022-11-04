@@ -2,7 +2,7 @@
 // https://www.sitepoint.com/get-url-parameters-with-javascript/ 
 
 
-const DKApp = function() {};
+const DKApp = function(){};
 const dkapp = new DKApp;
 //var urlParams
 //var loadScript
@@ -37,22 +37,22 @@ function HasParameter(name, result){
 }
 // Rolling Your Own Query String Parsing Function
 // https://www.sitepoint.com/get-url-parameters-with-javascript/
-function getAllUrlParams(url) {
+function getAllUrlParams(url){
 	var queryString = url ? url.split('?')[1] : window.location.search.slice(1); // get query string from url (optional) or window
 	var obj = {}; // we'll store the parameters here
-	if (queryString) { // if query string exists
+	if (queryString){ // if query string exists
 		queryString = queryString.split('#')[0]; // stuff after # is not part of query string, so get rid of it
 		var arr = queryString.split('&'); // split our query string into its component parts
-		for (var i = 0; i < arr.length; i++) {
+		for (var i = 0; i < arr.length; i++){
 			var a = arr[i].split('='); // separate the keys and the values
 			var paramName = a[0];  // set parameter name and value (use 'true' if empty)
 			var paramValue = typeof (a[1]) === 'undefined' ? true : a[1];
 			paramName = paramName.toLowerCase(); // (optional) keep case consistent
 			if (typeof paramValue === 'string') paramValue = paramValue.toLowerCase();
-			if (paramName.match(/\[(\d+)?\]$/)) { // if the paramName ends with square brackets, e.g. colors[] or colors[2]
+			if (paramName.match(/\[(\d+)?\]$/)){ // if the paramName ends with square brackets, e.g. colors[] or colors[2]
 			var key = paramName.replace(/\[(\d+)?\]/, '');  // create key if it doesn't exist
 			if (!obj[key]) obj[key] = [];       
-				if (paramName.match(/\[\d+\]$/)) {  // if it's an indexed array e.g. colors[2]
+				if (paramName.match(/\[\d+\]$/)){  // if it's an indexed array e.g. colors[2]
 					var index = /\[(\d+)\]/.exec(paramName)[1]; // get the index value and add the entry at the appropriate position
 				obj[key][index] = paramValue;
 			} 
@@ -61,7 +61,7 @@ function getAllUrlParams(url) {
 			}
 		} 
 		else {
-			if (!obj[paramName]) { // we're dealing with a string
+			if (!obj[paramName]){ // we're dealing with a string
 				obj[paramName] = paramValue;  // if it doesn't exist, create property
 			} 
 			else if (obj[paramName] && typeof obj[paramName] === 'string'){
@@ -82,7 +82,7 @@ function getAllUrlParams(url) {
 
 
 
-dkapp.loadFiles = function dkapp_loadFiles(event) {
+dkapp.loadFiles = function dkapp_loadFiles(event){
 	console.log("loadFiles()")
 	const wls = decodeURIComponent(event.currentTarget.ownerDocument.location.search);
 	const queryString = wls;
@@ -92,7 +92,7 @@ dkapp.loadFiles = function dkapp_loadFiles(event) {
 		eval(loadScript)
 }
 
-dkapp.runApp = function dkapp_runApp(event) {	
+dkapp.runApp = function dkapp_runApp(event){	
 	console.log("runApp()")
 	const wls = decodeURIComponent(event.currentTarget.location.search);
 	const queryString = wls;
