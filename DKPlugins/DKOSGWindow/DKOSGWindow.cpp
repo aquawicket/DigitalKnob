@@ -1,5 +1,5 @@
 #include "DK/stdafx.h"
-#include "DKOSGWindow.h"
+#include "DKOSGWindow/DKOSGWindow.h"
 #include "DK/DKFile.h"
 #include "DKAssets/DKAssets.h"
 
@@ -210,15 +210,14 @@ bool DKOSGWindow::CreatePIP(const int& x, const int& y, const int& w, const int&
 	height = h;
 
 	wsi = osg::GraphicsContext::getWindowingSystemInterface();
-	if (!wsi){
-		DKLog("Error, no WindowSystemInterface available, cannot create windows\n",DKERROR);
-	    return false;
-	}
+	if (!wsi)
+		return DKERROR("Error, no WindowSystemInterface available, cannot create windows\n");
 
 	int screen = 0;
 	//DKString computername; //Bandaid: YOU CAN DELETE THIS :P
     //getComputerName(computername); //Bandaid: YOU CAN DELETE THIS :P
-	//if(same(computername, "aquastudio-PC") && getNumScreens() > 1){ screen = 1; } //Bandaid: YOU CAN DELETE THIS :P
+	//if(same(computername, "aquastudio-PC") && getNumScreens() > 1)
+	//	screen = 1; //Bandaid: YOU CAN DELETE THIS :P
 
 	traits = new osg::GraphicsContext::Traits;
 	traits->x = winX;
@@ -232,10 +231,8 @@ bool DKOSGWindow::CreatePIP(const int& x, const int& y, const int& w, const int&
 	traits->screenNum = screen;
 
 	gc = osg::GraphicsContext::createGraphicsContext(traits.get());
-	if(!gc.valid()){
-		DKLog("Error: GraphicsContext invalid\n",DKERROR);
-	    return false;
-	}
+	if(!gc.valid())
+		return DKERROR("Error: GraphicsContext invalid \n");
 
 	//FIXME - work to be done here and DKOSGWindow::CreatePIP()
 	DKLog("Creating Window. \n");
@@ -268,7 +265,7 @@ bool DKOSGWindow::CreatePIP(const int& x, const int& y, const int& w, const int&
 
 bool DKOSGWindow::SetTitle(const DKString& title){
 	DKDEBUGFUNC(title);
-#ifdef DESKTOP
+#if DESKTOP
 	//Set Window Title
 	typedef osgViewer::Viewer::Windows Windows;
 	Windows windows;
@@ -277,8 +274,9 @@ bool DKOSGWindow::SetTitle(const DKString& title){
 		(*window)->setWindowName(title.c_str());
 	}
 	return true;
-#endif
+#else
 	return DKERROR("DKOSGWindow::SetTitle is not implemented on this OS. \n");
+#endif
 }
 
 bool DKOSGWindow::SetIcon(const DKString& file){
@@ -287,8 +285,9 @@ bool DKOSGWindow::SetIcon(const DKString& file){
 	HICON hIcon = (HICON)LoadImage(NULL, file.c_str(), IMAGE_ICON, 32, 32, LR_LOADFROMFILE);
 	SendMessage( hwnd, WM_SETICON, ICON_SMALL, (LPARAM)hIcon );
 	return true;
-#endif
+#else
 	return DKERROR("DKOSGWindow::SetIcon is not implemented on this OS. \n");
+#endif
 }
 
 

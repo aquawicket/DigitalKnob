@@ -29,8 +29,12 @@
 #define DKCefChild_H
 
 #define DKCefChild
-#include <include/cef_app.h>
-#include <include/wrapper/cef_helpers.h>
+
+#pragma warning(push, 0); //Silence warnings from 3rd party headers
+	#include <include/cef_app.h>
+	#include <include/wrapper/cef_helpers.h>
+#pragma warning(pop);
+
 
 class DKCefChildV8Handler : public CefV8Handler
 {

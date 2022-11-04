@@ -25,16 +25,19 @@
 */
 
 #include "DK/stdafx.h"
-#include <sstream>
-#include <string>
-#include "include/base/cef_bind.h"
-#include "include/wrapper/cef_closure_task.h"
-#include "include/wrapper/cef_helpers.h"
 #include "DKSDLCef/DKSDLCefHandler.h"
 #include "DKCef/DKCef.h"
 
-DKSDLCefHandler* DKSDLCefHandler::g_instance = NULL;
+#pragma warning(push, 0); //Silence warning from 3rd party headers
+	#include <sstream>
+	#include <string>
+	#include "include/base/cef_bind.h"
+	#include "include/wrapper/cef_closure_task.h"
+	#include "include/wrapper/cef_helpers.h"
+#pragma warning(pop);
 
+
+DKSDLCefHandler* DKSDLCefHandler::g_instance = NULL;
 
 void SourceCallback::Visit(const CefString& string){
 	DKDEBUGFUNC(string);

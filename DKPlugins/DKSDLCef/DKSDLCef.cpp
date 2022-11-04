@@ -25,18 +25,22 @@
 */
 
 #include "DK/stdafx.h"
-#include "SDL_syswm.h"
-#include <include/cef_urlrequest.h>
 #include "DK/DKApp.h"
 #include "DK/DKFile.h"
 #include "DK/DKLog.h"
 #include "DKSDLCef/DKSDLCef.h"
 #include "DKSDLCef/DKSDLCefHandler.h"
 #ifdef WIN32
-#include <delayimp.h>
-#include "DK/DKWindows.h"
+	#include "DK/DKWindows.h"
 #endif
 
+#pragma warning(push, 0); //Silence warning from 3rd party headers
+	#include "SDL_syswm.h"
+	#include <include/cef_urlrequest.h>
+	#ifdef WIN32
+		#include <delayimp.h>
+	#endif
+#pragma warning(pop);
 
 bool DKSDLCef::Init() {
 	DKDEBUGFUNC();

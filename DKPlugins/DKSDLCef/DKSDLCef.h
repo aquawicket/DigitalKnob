@@ -46,10 +46,6 @@
 #include "DKSDLCef/DKSDLCefKeyboard.h"
 #include "DKSDLWindow/DKSDLWindow.h"
 
-//#ifndef WIN32
-//	#define  UNREFERENCED_PARAMETER(P) (P)
-//#endif
-
 
 class DKSDLCefHandler;
 

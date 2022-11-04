@@ -30,7 +30,6 @@
 
 #include "DK/DK.h"
 
-//////////////////////
 class DKSDLCefKeyboard
 {
 public:

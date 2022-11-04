@@ -2,32 +2,34 @@
 #include "DKOSGModel/DKOSGModel.h"
 #include "DKOSGWindow/DKOSGWindow.h"
 #include "DK/DKFile.h"
+#include "DK/DKString.h"
+#include "DKAssets/DKAssets.h"
+
 
 //#ifdef USE_osgwTools
 //#include "DKPhysics/DKPhysics.h"
 //#include <osgwTools/AbsoluteModelTransform.h>
 //#endif
-
-#include "DK/DKString.h"
 #include <osgViewer/Viewer>
 #include <osgDB/ReadFile>
-#include "DKAssets/DKAssets.h"
 
 
 bool DKOSGModel::Init(){
+	DKDEBUGFUNC();
 	modelNode = NULL;
 	Create(DKOSGWindow::Get("DKOSGWindow0"), DKOSGWindow::Get("DKOSGWindow0")->world, data[1], osg::Vec3(0, 0, 70));
 	return true;
 }
 
 bool DKOSGModel::End(){
+	DKDEBUGFUNC();
 	this->theRoot->removeChild(modelNode);
 	modelNode = NULL;
 	return true;
 }
 
 bool DKOSGModel::Create(DKOSGWindow* window, osg::Group* theRoot, const DKString& file,  osg::Vec3 pos){
-	DK_UNUSED(window);
+	DKDEBUGFUNC(window, theRoot, file, pos);
 	//DKLog("Loading Model "+file+"\n");
 	this->theRoot = theRoot;
 

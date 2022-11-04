@@ -25,19 +25,19 @@
 */
 
 #include "DKSDLCefKeyboard.h"
-#include "include/internal/cef_types.h"
-#include "SDL.h"
 
-#ifdef WIN32
-  #include <windows.h>
-#elif X11
-  #include <X11/keysym.h>
-#endif
+#pragma warning(push, 0); //Silence warning from 3rd party headers
+	#include "include/internal/cef_types.h"
+	#include "SDL.h"
+	#ifdef WIN32
+	  #include <windows.h>
+	#elif X11
+	  #include <X11/keysym.h>
+	#endif
+#pragma warning(pop);
 
 
-/////////////////////////////////////////////////////
-int DKSDLCefKeyboard::getCefModifiers(int modKeyMask)
-{
+int DKSDLCefKeyboard::getCefModifiers(int modKeyMask){
 	DKDEBUGFUNC(modKeyMask);
 	int modifiers = 0;
     if (modKeyMask & KMOD_CTRL)
