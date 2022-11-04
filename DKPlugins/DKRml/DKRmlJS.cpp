@@ -25,8 +25,8 @@
 */
 #ifdef HAVE_DKDuktape
 #include "DK/stdafx.h"
-#include "DKRml.DKRml.h"
-#include "DKRml.DKRmlJS.h"
+#include "DKRml/DKRml.h"
+#include "DKRml/DKRmlJS.h"
 
 
 bool DKRmlJS::Init() {

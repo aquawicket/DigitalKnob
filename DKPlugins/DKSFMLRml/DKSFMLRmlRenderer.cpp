@@ -26,10 +26,12 @@
 
 #include "DK/DK.h"
 #include "DK/DKString.h"
-#include <RmlUi/Core.h>
-//#include <SFML_image.h>
 #include "DKSFMLRml/DKSFMLRmlRenderer.h"
 #include "DKSFMLWindow/DKSFMLWindow.h"
+
+//WARNING_DISABLE
+#include <RmlUi/Core.h>
+//#include <SFML_image.h>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
@@ -48,6 +50,8 @@
 #include <GL/glu.h>
 #include <GL/glx.h>
 #endif
+//WARNING_ENABLE
+
 
 //#if !defined(IOS) && !defined(ANDROID)
 //static PFNGLUSEPROGRAMOBJECTARBPROC glUseProgramObjectARB;
