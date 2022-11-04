@@ -20,7 +20,7 @@ dk_import(https://github.com/aquawicket/duktape.git PATCH) #NOTE: PATCH is for C
 ### LINK ###
 WIN_dk_define		(DUK_F_VBCC)
 ANDROID_dk_define	(DUK_F_32BIT_PTRS)
-dk_include			(${DUKTAPE}/include)
+dk_include			(${DUKTAPE}/dist/src)
 WIN_dk_libDebug		(${DUKTAPE}/${OS}/${DEBUG_DIR}/duktape.lib)
 WIN_dk_libRelease	(${DUKTAPE}/${OS}/${RELEASE_DIR}/duktape.lib)
 UNIX_dk_libDebug	(${DUKTAPE}/${OS}/${DEBUG_DIR}/libduktape.a)
