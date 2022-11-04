@@ -23,7 +23,6 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #ifdef HAVE_DKDuktape 
 #pragma once
 #ifndef DKThreadJS_H
@@ -31,7 +30,7 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-///////////////////////////////////////////////
+
 class DKThreadJS : public DKObjectT<DKThreadJS>
 {
 public:

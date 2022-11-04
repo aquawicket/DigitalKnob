@@ -23,7 +23,6 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #ifdef HAVE_DKCef
 #pragma once
 #ifndef DKThreadV8_H
@@ -31,7 +30,7 @@
 
 #include "DKCef/DKCef.h"
 
-///////////////////////////////////////////////
+
 class DKThreadV8 : public DKObjectT<DKThreadV8>
 {
 public:
@@ -43,7 +42,7 @@ public:
 	static void QueueItem();
 };
 
-REGISTER_OBJECT(DKThreadV8, true);
 
+REGISTER_OBJECT(DKThreadV8, true);
 #endif //DKThreadV8_H
 #endif //HAVE_DKCef

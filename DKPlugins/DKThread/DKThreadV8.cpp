@@ -23,30 +23,24 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #ifdef HAVE_DKCef
-#include "DKThread.h"
-#include "DKThreadV8.h"
+#include "DKThread/DKThread.h"
+#include "DKThread/DKThreadV8.h"
 
-///////////////////////
-bool DKThreadV8::Init()
-{
+
+bool DKThreadV8::Init(){
 	DKDEBUGFUNC();
 	DKV8::AttachFunction("DKThread_DKQueue", &DKThreadV8::_DKQueue);
 	DKV8::AttachFunction("DKThread_GetThreadNames", DKThreadV8::GetThreadNames);
 	return true;
 }
 
-//////////////////////
-bool DKThreadV8::End()
-{
+bool DKThreadV8::End(){
 	DKDEBUGFUNC();
 	return true;
 }
 
-//////////////////////////////////////////////////////////////
-bool DKThreadV8::GetThreadNames(CefArgs args, CefReturn retval)
-{
+bool DKThreadV8::GetThreadNames(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	DKString names = toString(DKThreadPool::Instance("DKThreadPool")->names, ",");
 	//retval = CefV8Value::CreateString(names.c_str());
@@ -54,9 +48,7 @@ bool DKThreadV8::GetThreadNames(CefArgs args, CefReturn retval)
 	return true;
 }
 
-////////////////////////////////////////////////////////
-bool DKThreadV8::_DKQueue(CefArgs args, CefReturn retval)
-{
+bool DKThreadV8::_DKQueue(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	//DKString name = args[0]->GetStringValue();
 	DKString name = args->GetString(0);
@@ -72,9 +64,7 @@ bool DKThreadV8::_DKQueue(CefArgs args, CefReturn retval)
 	return true;
 }
 
-/////////////////////////////
-void DKThreadV8::QueueItem()
-{
+void DKThreadV8::QueueItem(){
 	DKDEBUGFUNC();
 	DKUtil::Sleep(100); //Bad!  FIXME
 	//duk_context* ctx2 = DKDuktape::ctx;

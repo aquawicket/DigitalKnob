@@ -25,11 +25,10 @@
 */
 
 #include "DK/stdafx.h"
-#include "DKThread.h"
+#include "DKThread/DKThread.h"
 
-/////////////////////////
-bool DKThreadPool::Init()
-{
+
+bool DKThreadPool::Init(){
 #ifdef HAVE_DKDuktape 
 	DKClass::DKCreate("DKThreadJS");
 #endif
@@ -45,9 +44,7 @@ bool DKThreadPool::Init()
 	return true;
 }
 
-////////////////////////
-bool DKThreadPool::End()
-{
+bool DKThreadPool::End(){
 	active = false;
 	dkThreadPool = NULL;
 	delete dkThreadPool;
