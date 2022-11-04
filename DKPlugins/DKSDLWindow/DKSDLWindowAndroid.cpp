@@ -26,10 +26,13 @@
 
 #ifdef ANDROID
 #include "DK/stdafx.h"
-#include "DKSDLWindowAndroid.h"
+#include "DKSDLWindow/DKSDLWindowAndroid.h"
 #include "DK/DKAndroid.h"
+
+//WARNING_DISABLE
 #include "SDL.h"
 //#include "SDL_main.h"
+//WARNING_ENABLE
 
 extern "C" {
 	//extern JavaVM* thejvm;

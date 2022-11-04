@@ -30,10 +30,13 @@
 #ifndef DKSDLVideo_H
 #define DKSDLVideo_H
 
-#include "WAAVE.h"
 #include "DK/DK.h"
 
-///////////////////////////////////////////////
+//WARNING_DISABLE
+#include "WAAVE.h"
+//WARNING_ENABLE
+
+
 class DKSDLVideo : public DKObjectT<DKSDLVideo>
 {
 public:
@@ -47,6 +50,6 @@ public:
 	WVStreamingObject* streamObj;
 };
 
-REGISTER_OBJECT(DKSDLVideo, true)
 
+REGISTER_OBJECT(DKSDLVideo, true)
 #endif //DKSDLVideo_H

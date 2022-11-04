@@ -29,7 +29,10 @@
 #ifndef DKSDLWindowAndroid_H
 #define DKSDLWindowAndroid_H
 
+//WARNING_DISABLE
 #include <jni.h>
+//WARNING_ENABLE
+
 
 class DKSDLWindowAndroid : public DKObjectT<DKSDLWindowAndroid>
 {

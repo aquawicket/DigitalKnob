@@ -29,10 +29,13 @@
 #ifndef DKSDLWav_H
 #define DKSDLWav_H
 
+//WARNING_DISABLE
 #include "SDL.h"
+//WARNING_ENABLE
+
 #include "DK/DK.h"
 
-///////////////////////////////////////////
+
 class DKSDLWav : public DKObjectT<DKSDLWav>
 {
 public:
@@ -50,6 +53,4 @@ public:
 
 
 REGISTER_OBJECT(DKSDLWav, true);
-
 #endif //DKSDLWav_H
-
