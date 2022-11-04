@@ -23,16 +23,19 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #pragma once
 #ifndef DKVncClient_H
 #define DKVncClient_H
+
 #include "DK/DK.h"
 #include "DKSDLWindow/DKSDLWindow.h"
 #ifdef LINUX
 typedef unsigned long z_size_t;
 #endif
+
+//WARNING_DISABLE
 #include <rfb/rfbclient.h>
+//WARNING_ENABLE
 
 
 class DKVncClient : public DKObjectT<DKVncClient>
@@ -76,9 +79,7 @@ public:
 
 	static long last_mouse_move;
 };
-
-
 REGISTER_OBJECT(DKVncClient, true);
 
-#endif //DKVncClient_H
 
+#endif //DKVncClient_H
