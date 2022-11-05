@@ -43,8 +43,9 @@
 
 bool DKRmlConverter::HtmlToRml(const DKString& html, DKString& rml){
 	//DKDEBUGFUNC(html, rml);
-	if(html.empty())
-		return DKERROR("html is invalid! \n");
+	if (html.empty())
+		return DKREDINFO("html is invalid! \n");
+		//return DKERROR("html is invalid! \n");
 	stored_html = html;
 #ifdef DEBUG
 	DKINFO("\n########## .html ---> HtmlToRml ############\n");
