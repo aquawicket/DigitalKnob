@@ -222,7 +222,8 @@ bool DebugReturn(const char* file, int line, const char* func, const DKString& n
 	func_string += "(";
 	if(arg_count){
 		if (names.empty())
-			return DKERROR("arg_count is > 1, but names is empty\n");
+			return DKREDINFO("arg_count is > 1, but names is empty\n");
+			//return DKERROR("arg_count is > 1, but names is empty\n");
 		DKStringArray name_array;
 		toStringArray(name_array, names, ","); 
 		getTemplateArgs(out, name_array, args...);
