@@ -23,7 +23,6 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #include "DK/stdafx.h"
 #include "DK/DKFile.h"
 #include "DKXml/DKXml.h"
@@ -399,4 +398,6 @@ bool DKXml::test_libxml() {
 	xmlCleanupParser();    // Free globals
 	return true;
 }
+
+
 #endif  //USE_libxml2

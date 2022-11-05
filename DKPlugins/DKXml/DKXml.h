@@ -23,26 +23,27 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #pragma once
 #ifndef DKXml_H
 #define DKXml_H
 #include "DK/DKClass.h"
+
+//WARNING_DISABLE
 #ifdef USE_libxml2
-#include "libxml/HTMLparser.h"
+	#include "libxml/HTMLparser.h"
 #endif
 #include "pugixml.hpp"
+//WARNING_ENABLE
+
 
 typedef pugi::xml_node DKXmlNode;
 typedef pugi::xpath_node_set DKXmlNodes;
-
 
 class DKXml : public DKObjectT<DKXml>
 {
 public:
 	bool Init();
 	bool End();
-
 	bool AppendNode(const DKString& xpath, const DKString& type);
 	bool FindNode(const DKString& xpath);
 	bool GetAttribute(const DKString& xpath, const DKString& attrib, DKString& string);
@@ -75,8 +76,7 @@ public:
 	bool test_libxml();
 #endif
 };
-
-
 REGISTER_OBJECT(DKXml, true);
+
 
 #endif //DKXml_H
