@@ -165,8 +165,11 @@ void signal_handler(int signal){
 
 // https://stackoverflow.com/a/9371717/688352  - The command windows is slow, read this
 bool DKLog::Log(const char* file, int line, const char* func, const DKString& input, const int lvl, const unsigned short color_override/*, const bool rtnval*/){
-	if (!DKUtil::InMainThread())
-		return;
+	if (!DKUtil::InMainThread()) {
+		if (lvl <= DK_ERROR)
+			return false;
+		return true;
+	}
 	/*
 	if(lvl == DK_ASSERT){
 		// Install a signal handler
