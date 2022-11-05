@@ -116,8 +116,8 @@ bool DKHandles::DoMouseUp() {
 	//Bring back the main window
 	HWND hwnd = NULL;
 	//DKWindow::GetHandle((void*&)hwnd);
-	if(DKClass::HasFunc("DKCefWindow::GetHandle"))
-		DKClass::CallFunc("DKCefWindow::GetHandle", NULL, &hwnd);
+	if(DKClass::HasFunc("DKCEFWindow::GetHandle"))
+		DKClass::CallFunc("DKCEFWindow::GetHandle", NULL, &hwnd);
 	if(DKClass::HasFunc("DKSDLWindow::GetHandle"))
 		DKClass::CallFunc("DKSDLWindow::GetHandle", NULL, &hwnd);
 	if(!hwnd)
@@ -489,8 +489,8 @@ bool DKHandles::StartSearch() {
 	DKDEBUGFUNC();
 	HWND hwnd = NULL;
 	//DKWindow::GetHandle((void*&)hwnd);
-	if(DKClass::HasFunc("DKCefWindow::GetHandle"))
-		DKClass::CallFunc("DKCefWindow::GetHandle", NULL, &hwnd);
+	if(DKClass::HasFunc("DKCEFWindow::GetHandle"))
+		DKClass::CallFunc("DKCEFWindow::GetHandle", NULL, &hwnd);
 	if(DKClass::HasFunc("DKSDLWindow::GetHandle"))
 		DKClass::CallFunc("DKSDLWindow::GetHandle", NULL, &hwnd);
 	if(!hwnd)

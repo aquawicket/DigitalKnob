@@ -37,9 +37,9 @@
 #include "DK/DK.h"
 #include "DK/DKApp.h"
 #include "DKCef/DKCefApp.h"
-#include "DKCef/DKCefWindow.h"
+#include "DKCef/DKCEFWindow.h"
 
-class DKCefWindow;
+class DKCEFWindow;
 
 struct DKBrowser{
 	DKString id;
@@ -106,8 +106,8 @@ public:
 	CefRefPtr<CefBrowser> current_browser;
 	int keyboardFocus;
 	static CefRefPtr<DKCefApp> cefApp;
-	static CefRefPtr<CefClient> cefHandler; //external handler  (DKCefWindow, DKSDLCef or DKOSGCef)
-	DKCefWindow* dkCefWindow;
+	static CefRefPtr<CefClient> cefHandler; //external handler  (DKCEFWindow, DKSDLCef or DKOSGCef)
+	DKCEFWindow* dkCefWindow;
 	static unsigned long cefThreadId;
 	DialogCallback* fileDialogCallback;
 	static bool initialized;

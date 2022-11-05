@@ -48,7 +48,7 @@
 #include "DK/DKFile.h"
 #include "DK/DKLog.h"
 #include "DKCef/DKCef.h"
-#include "DKCef/DKCefWindow.h"
+#include "DKCef/DKCEFWindow.h"
 #include "DKDuktape/DKDuktape.h"
 #if WIN32
 	#include "DK/DKWindows.h"
@@ -297,13 +297,13 @@ bool DKCef::Init(){
 		}
 	}
 	else{
-		dkCefWindow = new DKCefWindow();
+		dkCefWindow = new DKCEFWindow();
 		cefHandler = dkCefWindow;
 		dkCefWindow->dkCef = this;
 		//NewBrowser("default", 10, 10, 800, 600, "http://www.google.com");
-		DKApp::AppendLoopFunc(&DKCefWindow::DoFrame, dkCefWindow);
+		DKApp::AppendLoopFunc(&DKCEFWindow::DoFrame, dkCefWindow);
 		//DKString icon = DKFile::local_assets+"icon.ico";
-		//DKClass::CallFunc("DKCefWindow::SetIcon", &icon, NULL);
+		//DKClass::CallFunc("DKCEFWindow::SetIcon", &icon, NULL);
 	}
 	DKEvents::AddSendEventFunc(&DKCef::SendEvent, this);
 	DKClass::RegisterFunc("DKCef::NewBrowser", &DKCef::NewBrowser, this);
@@ -595,7 +595,7 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 
 		//Set Icon
 		DKString icon = DKFile::local_assets+"icon.ico";
-		DKClass::CallFunc("DKCefWindow::SetIcon", &icon, NULL);
+		DKClass::CallFunc("DKCEFWindow::SetIcon", &icon, NULL);
 		
 #	if LINUX
 #			ifdef USE_GDK
