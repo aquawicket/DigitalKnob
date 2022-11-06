@@ -95,7 +95,7 @@ class DKCefV8Handler : public CefV8Handler
 {
 public:
 	DKCefV8Handler(){
-		//DKDEBUGFUNC();
+		DKDEBUGFUNC();
 	}
 	bool Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefV8ValueList& arguments, CefRefPtr<CefV8Value>& retval, CefString& exception) override;
 	void SetBrowser(CefRefPtr<CefBrowser> _browser);
@@ -116,16 +116,16 @@ public:
 	// CefApp
 	void OnBeforeCommandLineProcessing(const CefString& process_type, CefRefPtr<CefCommandLine> command_line) override;
 	void OnRegisterCustomSchemes(CefRawPtr<CefSchemeRegistrar> registrar) override {
-		//DKDEBUGFUNC(registrar);
-		DK_UNUSED(registrar);
+		DKDEBUGFUNC(registrar);
+		//DK_UNUSED(registrar);
 	}
 	//CefRefPtr<CefResourceBundleHandler> GetResourceBundleHandler() override;
 	CefRefPtr<CefBrowserProcessHandler> GetBrowserProcessHandler() override {
-		//DKDEBUGFUNC();
+		DKDEBUGFUNC();
 		return this; 
 	}
 	CefRefPtr<CefRenderProcessHandler> GetRenderProcessHandler() override {
-		//DKDEBUGFUNC();
+		DKDEBUGFUNC();
 		return this; 
 	}
 
@@ -137,46 +137,46 @@ public:
 	// CefBrowserProcessHandler
 	void OnContextInitialized() override;
 	void OnBeforeChildProcessLaunch(CefRefPtr<CefCommandLine> command_line) override {
-		//DKDEBUGFUNC(command_line);
-		DK_UNUSED(command_line);
+		DKDEBUGFUNC(command_line);
+		//DK_UNUSED(command_line);
 	}
 	void OnRenderProcessThreadCreated(CefRefPtr<CefListValue> extra_info) override {
-		//DKDEBUGFUNC(extra_info);
-		DK_UNUSED(extra_info);
+		DKDEBUGFUNC(extra_info);
+		//DK_UNUSED(extra_info);
 	}
 	//CefRefPtr<CefPrintHandler> GetPrintHandler() override;
 	void OnScheduleMessagePumpWork(int64 delay_ms) override {
-		//DKDEBUGFUNC(delay_ms);
-		DK_UNUSED(delay_ms);
+		DKDEBUGFUNC(delay_ms);
+		//DK_UNUSED(delay_ms);
 	}
 
 	// CefRenderProcessHandler
 	void OnRenderThreadCreated(CefRefPtr<CefListValue> extra_info) override {
-		//DKDEBUGFUNC();
-		DK_UNUSED(extra_info);
+		DKDEBUGFUNC();
+		//DK_UNUSED(extra_info);
 	}
 	void OnWebKitInitialized() override {
-		//DKDEBUGFUNC();
+		DKDEBUGFUNC();
 	}
 	void OnBrowserCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDictionaryValue> extra_info) override;
 	void OnBrowserDestroyed(CefRefPtr<CefBrowser> browser) override {
-		//DKDEBUGFUNC(browser);
-		DK_UNUSED(browser);
+		DKDEBUGFUNC(browser);
+		//DK_UNUSED(browser);
 	}
 	//CefRefPtr<CefLoadHandler> GetLoadHandler() override;
 	void OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context) override;
 	void OnContextReleased(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context) override {
-		//DKDEBUGFUNC(browser, frame, context);
-		DK_UNUSED(browser);
-		DK_UNUSED(frame); 
-		DK_UNUSED(context);
+		DKDEBUGFUNC(browser, frame, context);
+		//DK_UNUSED(browser);
+		//DK_UNUSED(frame); 
+		//DK_UNUSED(context);
 	}
 	void OnUncaughtException(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context, CefRefPtr<CefV8Exception> exception, CefRefPtr<CefV8StackTrace> stackTrace) override;
 	void OnFocusedNodeChanged(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefDOMNode> node) override {
-		//DKDEBUGFUNC(browser, frame, node);
-		DK_UNUSED(browser);
-		DK_UNUSED(frame);
-		DK_UNUSED(node);
+		DKDEBUGFUNC(browser, frame, node);
+		//DK_UNUSED(browser);
+		//DK_UNUSED(frame);
+		//DK_UNUSED(node);
 	}
 	bool OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefProcessId source_process, CefRefPtr<CefProcessMessage> message) override;
 

@@ -114,7 +114,7 @@ public:
 	}
 	
 	void DoFrame(){
-		//DKDEBUGFUNC();
+		//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 		CefDoMessageLoopWork(); 
 	}
 
@@ -125,7 +125,7 @@ public:
 	}
 
 	void OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType type, const RectList &dirtyRects, const void *buffer, int width, int height){
-		//DKDEBUGFUNC(browser, type, dirtyRects, buffer, width, height);
+		//DKDEBUGFUNC(browser, type, dirtyRects, buffer, width, height); //EXCESSIVE LOGGING
 		if (browser->GetIdentifier() != DKCef::Get(dkosgcef->id)->current_browser->GetIdentifier()){ return; }
 		if (type == PET_VIEW && dirtyRects.size() > 0){
 			cef_image->setImage(width, height, 1, 4, GL_BGRA, GL_UNSIGNED_BYTE, (unsigned char*)(buffer), osg::Image::NO_DELETE);
