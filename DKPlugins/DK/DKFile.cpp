@@ -208,7 +208,7 @@ bool DKFile::Delete(const DKString& path){
 }
 
 bool DKFile::FileToString(const DKString& file, DKString& string){
-	//DKDEBUGFUNC(file, string);
+	DKDEBUGFUNC(file, string);
 	DebugPath(file);
 	if(!PathExists(file))
 		return DKERROR("file:("+file+") path does not exist \n");
@@ -323,7 +323,7 @@ bool DKFile::GetBasename(const DKString& path, DKString& basename){
 }
 
 bool DKFile::GetDirectoryContents(const DKString& path, DKStringArray& strings){
-	//DKDEBUGFUNC(path, strings);
+	DKDEBUGFUNC(path, strings);
 	DebugPath(path);
 	if(!PathExists(path))
 		return DKERROR("path does not exist \n");
@@ -405,7 +405,7 @@ bool DKFile::GetExePath(DKString& exepath){
 }
 
 bool DKFile::GetExtention(const DKString& file, DKString& extension){
-	//DKDEBUGFUNC(file, extension);
+	DKDEBUGFUNC(file, extension);
 	DebugPath(file);
 	if(!has(file,".")){
 		DKWARN("file ("+file+") has no extension \n");
@@ -417,7 +417,7 @@ bool DKFile::GetExtention(const DKString& file, DKString& extension){
 }
 
 bool DKFile::GetFileName(const DKString& path, DKString& filename){
-	//DKDEBUGFUNC(path, filename);
+	DKDEBUGFUNC(path, filename);
 	DebugPath(path);
 	filename = path;
 	if (filename.back() == '/')
@@ -695,7 +695,7 @@ bool DKFile::GetRelativePath(const DKString& file, const DKString& path, DKStrin
 }
 
 bool DKFile::GetSetting(const DKString& file, const DKString& setting, DKString& value){
-	//DKDEBUGFUNC(file, setting, value);
+	DKDEBUGFUNC(file, setting, value);
 	DebugPath(file);
 	DKString path = file;
 	replace(path, "file:///", "");

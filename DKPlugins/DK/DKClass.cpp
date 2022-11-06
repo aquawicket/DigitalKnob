@@ -41,7 +41,7 @@ void DKClass::Register(const DKString& klass, DKClass* _class, bool _singleton){
 }
 
 DKObject* DKClass::_Instance(const DKString& data){
-	//DKDEBUGFUNC(data);
+	DKDEBUGFUNC(data);
 	DKStringArray arry;
 	toStringArray(arry, data, ",");
 	if(has(arry[0],".html"))

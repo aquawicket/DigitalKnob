@@ -8,12 +8,12 @@ std::vector<std::function<bool(const DKString&, const DKString&)> > DKEvents::un
 std::vector<std::function<bool(const DKString&, const DKString&, const DKString&)> > DKEvents::send_funcs;
 
 bool DKEvents::AddEvent(const DKString& id, const DKString& type, std::function<bool(DKEvents*)> func, DKObject* object){
-	//DKDEBUGFUNC(id, type, func, object);
+	DKDEBUGFUNC(id, type, func, object);
 	return DKEvents::AddEvent(id, type, "", func, object);
 }
 
 bool DKEvents::AddEvent(const DKString& id, const DKString& type, const DKString& jsreturn, std::function<bool(DKEvents*)> func, DKObject* object){
-	//DKDEBUGFUNC(id, type, jsreturn, func, object);
+	DKDEBUGFUNC(id, type, jsreturn, func, object);
 	DKString _jsreturn = jsreturn;
 	replace(_jsreturn, "() { [ecmascript code] }", ""); //remove  () { [ecmascript code] }
 	if(id.empty())
@@ -43,11 +43,11 @@ bool DKEvents::AddEvent(const DKString& id, const DKString& type, const DKString
 
 bool DKEvents::SendEvent(const DKString& id, const DKString& type, const DKString& value){
 	if(!same(id,"DKLog") && !same(type,"second") && !same(type,"mousemove")) //prevent looping messages
-		//DKDEBUGFUNC(id, type, value);
+		DKDEBUGFUNC(id, type, value);
 	if(type.empty())
-		return DKERROR("("+id+", ,"+value+"): No Type Specified \n");
+		return DKERROR("type is invalid! \n");
 	if(id.empty())
-		return DKERROR("( ,"+type+","+value+"): No Id Specified \n");
+		return DKERROR("id is invalie! \n");
 	//call the function directly
 	for(unsigned int i = 0; i < events.size(); ++i){
 		if((same(events[i]->id, id)) && same(events[i]->type, type)){
