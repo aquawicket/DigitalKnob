@@ -36,7 +36,7 @@ DKOSGRmlSystem::DKOSGRmlSystem() : _timer(osg::Timer::instance()->tick()){
 }
 
 double DKOSGRmlSystem::GetElapsedTime(){
-	//DKDEBUGFUNC();
+	//DKDEBUGFUNC(); //EXCESSIVE LOGGING
 	return (float)osg::Timer::instance()->time_s();
 }
 
@@ -47,7 +47,7 @@ int DKOSGRmlSystem::TranslateString(Rml::String& translated, const Rml::String& 
 }
 
 bool DKOSGRmlSystem::LogMessage(Rml::Log::Type type, const Rml::String& message){
-	//DKDEBUGFUNC(type, message);
+	//DKDEBUGFUNC(type, message);  //EXCESSIVE LOGGING
 	if (has(message, "Loaded font face"))
 		type = Rml::Log::LT_DEBUG;
 	switch (type) {
