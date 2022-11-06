@@ -115,10 +115,12 @@ public:
 
 	// CefApp
 	void OnBeforeCommandLineProcessing(const CefString& process_type, CefRefPtr<CefCommandLine> command_line) override;
+	/*
 	void OnRegisterCustomSchemes(CefRawPtr<CefSchemeRegistrar> registrar) override {
 		DKDEBUGFUNC(registrar);
 		//DK_UNUSED(registrar);
 	}
+	*/
 	//CefRefPtr<CefResourceBundleHandler> GetResourceBundleHandler() override;
 	CefRefPtr<CefBrowserProcessHandler> GetBrowserProcessHandler() override {
 		DKDEBUGFUNC();
