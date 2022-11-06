@@ -96,38 +96,41 @@ dk_define	(CEF_ATL)
 #dk_define	(CEF_SANDBOX)
 dk_include	(${CEF_BINARY})
 
+# libcef
 WIN_dk_libDebug			(${CEF_BINARY}/${DEBUG_DIR}/libcef.lib)
 WIN_dk_libRelease		(${CEF_BINARY}/${RELEASE_DIR}/libcef.lib)
-WIN_dk_libDebug			(${CEF_BINARY}/${OS}/libcef_dll_wrapper/${DEBUG_DIR}/libcef_dll_wrapper.lib)
-WIN_dk_libRelease		(${CEF_BINARY}/${OS}/libcef_dll_wrapper/${RELEASE_DIR}/libcef_dll_wrapper.lib)
-#WIN_dk_libDebug		(${CEF_BINARY}/${DEBUG_DIR}/cef_sandbox.lib)
-#WIN_dk_libRelease		(${CEF_BINARY}/${RELEASE_DIR}/cef_sandbox.lib)
-
 #APPLE_dk_libDebug		("${CEF_BINARY}${DEBUG_DIR}/Chromium Embedded Framework.framework")
 #APPLE_dk_libRelease	("${CEF_BINARY}/${RELEASE_DIR}/Chromium Embedded Framework.framework")
-APPLE_dk_libDebug		(${CEF_BINARY}/${OS}/libcef_dll_wrapper/${DEBUG_DIR}/libcef_dll_wrapper.a)
-APPLE_dk_libRelease		(${CEF_BINARY}/${OS}/libcef_dll_wrapper/${RELEASE_DIR}/libcef_dll_wrapper.a)
-#APPLE_dk_libDebug		(${CEF_BINARY}${DEBUG_DIR}/cef_sandbox.a)
-#APPLE_dk_libRelease	(${CEF_BINARY}/${RELEASE_DIR}/cef_sandbox.a)
-
 LINUX_dk_libDebug		(${CEF_BINARY}/${DEBUG_DIR}/libcef.so)
 LINUX_dk_libRelease		(${CEF_BINARY}/${RELEASE_DIR}/libcef.so)
-LINUX_dk_libDebug		(${CEF_BINARY}/${OS}/${DEBUG_DIR}/libcef_dll_wrapper/libcef_dll_wrapper.a)
-LINUX_dk_libRelease		(${CEF_BINARY}/${OS}/${RELEASE_DIR}/libcef_dll_wrapper/libcef_dll_wrapper.a)
-#LINUX_dk_libDebug		(${CEF_BINARY}/${DEBUG_DIR}/cef_sandbox.a)
-#LINUX_dk_libRelease	(${CEF_BINARY}/${RELEASE_DIR}/cef_sandbox.a)
-
 RASPBERRY_dk_libDebug	(${CEF_BINARY}/${DEBUG_DIR}/libcef.so)
 RASPBERRY_dk_libRelease	(${CEF_BINARY}/${RELEASE_DIR}/libcef.so)
-RASPBERRY_dk_libDebug	(${CEF_BINARY}/${OS}/${DEBUG_DIR}/libcef_dll_wrapper/libcef_dll_wrapper.a)
-RASPBERRY_dk_libRelease	(${CEF_BINARY}/${OS}/${RELEASE_DIR}/libcef_dll_wrapper/libcef_dll_wrapper.a)
-#RASPBERRY_dk_libDebug	(${CEF_BINARY}/${DEBUG_DIR}/cef_sandbox.a)
-#RASPBERRY_dk_libRelease(${CEF_BINARY}/${RELEASE_DIR}/cef_sandbox.a)
-
 ANDROID_dk_libDebug		(${CEF_BINARY}/${DEBUG_DIR}/libcef.a)
 ANDROID_dk_libRelease	(${CEF_BINARY}/${RELEASE_DIR}/libcef.a)
+
+# libcef_dll_wrapper
+WIN_dk_libDebug			(${CEF_BINARY}/${OS}/libcef_dll_wrapper/${DEBUG_DIR}/libcef_dll_wrapper.lib)
+WIN_dk_libRelease		(${CEF_BINARY}/${OS}/libcef_dll_wrapper/${RELEASE_DIR}/libcef_dll_wrapper.lib)
+APPLE_dk_libDebug		(${CEF_BINARY}/${OS}/libcef_dll_wrapper/${DEBUG_DIR}/libcef_dll_wrapper.a)
+APPLE_dk_libRelease		(${CEF_BINARY}/${OS}/libcef_dll_wrapper/${RELEASE_DIR}/libcef_dll_wrapper.a)
+LINUX_dk_libDebug		(${CEF_BINARY}/${OS}/${DEBUG_DIR}/libcef_dll_wrapper/libcef_dll_wrapper.a)
+LINUX_dk_libRelease		(${CEF_BINARY}/${OS}/${RELEASE_DIR}/libcef_dll_wrapper/libcef_dll_wrapper.a)
+RASPBERRY_dk_libDebug	(${CEF_BINARY}/${OS}/${DEBUG_DIR}/libcef_dll_wrapper/libcef_dll_wrapper.a)
+RASPBERRY_dk_libRelease	(${CEF_BINARY}/${OS}/${RELEASE_DIR}/libcef_dll_wrapper/libcef_dll_wrapper.a)
 ANDROID_dk_libDebug		(${CEF_BINARY}/${OS}/libcef_dll_wrapper/${DEBUG_DIR}/libcef_dll_wrapper.a)
 ANDROID_dk_libRelease	(${CEF_BINARY}/${OS}/libcef_dll_wrapper/${RELEASE_DIR}/libcef_dll_wrapper.a)
+
+# cef_sandbox
+#WIN_dk_libDebug		(${CEF_BINARY}/${DEBUG_DIR}/cef_sandbox.lib)
+#WIN_dk_libRelease		(${CEF_BINARY}/${RELEASE_DIR}/cef_sandbox.lib)
+#APPLE_dk_libDebug		(${CEF_BINARY}${DEBUG_DIR}/cef_sandbox.a)
+#APPLE_dk_libRelease	(${CEF_BINARY}/${RELEASE_DIR}/cef_sandbox.a)
+#LINUX_dk_libDebug		(${CEF_BINARY}/${DEBUG_DIR}/cef_sandbox.a)
+#LINUX_dk_libRelease	(${CEF_BINARY}/${RELEASE_DIR}/cef_sandbox.a)
+#RASPBERRY_dk_libDebug	(${CEF_BINARY}/${DEBUG_DIR}/cef_sandbox.a)
+#RASPBERRY_dk_libRelease(${CEF_BINARY}/${RELEASE_DIR}/cef_sandbox.a)
+#ANDROID_dk_libDebug	(${CEF_BINARY}/${DEBUG_DIR}/cef_sandbox.a)
+#ANDROID_dk_libRelease	(${CEF_BINARY}/${RELEASE_DIR}/cef_sandbox.a)
 
 
 ### GENERATE ###
@@ -142,3 +145,4 @@ ANDROID_dk_queueCommand		(${DKCMAKE_BUILD} -DUSE_SANDBOX=OFF -DPROJECT_ARCH="lin
 ### COMPILE ###
 dk_build(${CEF_BINARY_FOLDER} libcef_dll_wrapper)
 dk_build(${CEF_BINARY_FOLDER} cefsimple)
+#dk_build(${CEF_BINARY_FOLDER} cefsandbox)
