@@ -263,6 +263,6 @@ bool DKDebug::ShowStackTrace(const void* input, void* output){
 	DKINFO("\n");
 	return true;
 #else
-	return DKERROR("not implemented on this OS\n");
+	return DKREDINFO("not implemented on this OS \n");
 #endif
 }
