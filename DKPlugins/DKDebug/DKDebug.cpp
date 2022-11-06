@@ -253,7 +253,7 @@ bool DKDebug::SendBugReport(const DKString& filename){
 }
 
 bool DKDebug::ShowStackTrace(const void* input, void* output){
-	//DKDEBUGFUNC(input, output);
+	//DKDEBUGFUNC(input, output);  //EXCESSIVE LOGGING
 	DK_UNUSED(input);
 	DK_UNUSED(output);
 #if WIN32

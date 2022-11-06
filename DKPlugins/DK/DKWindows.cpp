@@ -800,7 +800,7 @@ bool DKWindows::SetVolume(int& percent){
 }
 
 bool DKWindows::Sleep(int milliseconds){
-	//DKDEBUGFUNC(milliseconds);
+	//DKDEBUGFUNC(milliseconds);  //EXCESSIVE LOGGING
 	::Sleep(milliseconds);
 	return true;;
 }

@@ -301,7 +301,7 @@ bool DKUtil::GetDate(DKString& date){
 }
 
 bool DKUtil::GetFps(unsigned int& fps){
-	//DKDEBUGFUNC(fps);
+	//DKDEBUGFUNC(fps);  //EXCESSIVE LOGGING
 	fps = (unsigned int)framespersecond;
 	return true;
 }
@@ -410,7 +410,7 @@ bool DKUtil::GetScreenWidth(int& w){
 }
 
 bool DKUtil::GetThreadId(unsigned long int& id){
-	//DKDEBUGFUNC(id);
+	//DKDEBUGFUNC(id); 
 	id = DKUtil::mainThreadId;
 	return true;//&& DKDEBUGRETURN(id);
 }
@@ -421,7 +421,7 @@ bool DKUtil::GetThreadId(unsigned long int& id){
 // 1 second = 1000000000 nanoseconds    1e+9
 
 bool DKUtil::GetTicks(long& ticks){
-	//DKDEBUGFUNC(ticks);
+	//DKDEBUGFUNC(ticks);  //EXCESSIVE LOGGING
 	//boost::posix_time::ptime tick = boost::posix_time::second_clock::local_time();
 	//boost::posix_time::ptime now = boost::posix_time::second_clock::local_time();
 	//boost::posix_time::time_duration diff = tick - now;
@@ -551,7 +551,7 @@ bool DKUtil::LeftRelease(){
 }
 
 bool DKUtil::LimitFramerate(){
-	//DKDEBUGFUNC();
+	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 	if(!DKUtil::now)
 		DKUtil::InitFramerate();
 	//Framerate / cpu limiter
@@ -753,7 +753,7 @@ bool DKUtil::SetBrightness(const int& percent){
 //       Duktape currently blocks when using timers, so we've placed it here for now.
 //       Send a timer event every second
 bool DKUtil::SendTick(){
-	//DKDEBUGFUNC();
+	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 	if(((lastFrame / 1000) - (lastSecond / 1000)) >= 1){ //1 second
 		DKEvents::SendEvent("window", "second", "");
 		DKUtil::GetTicks(lastSecond);
@@ -853,7 +853,7 @@ bool DKUtil::SetVolume(int& percent){
 }
 
 bool DKUtil::Sleep(const int& milliseconds){
-	//DKDEBUGFUNC(milliseconds);
+	//DKDEBUGFUNC(milliseconds);  //EXCESSIVE LOGGING
 #	if WIN32
 		return DKWindows::Sleep(milliseconds);
 #	elif defined(MAC) || defined(IOS) || defined(ANDROID) || defined(LINUX)
@@ -908,7 +908,7 @@ bool DKUtil::TurnOnMonitor(){
 }
 
 bool DKUtil::UpdateFps(){
-	//DKDEBUGFUNC();
+	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 	if(!frametimelast)
 		DKUtil::InitFps();
 	long frametimesindex;

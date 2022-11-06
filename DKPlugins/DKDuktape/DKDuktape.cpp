@@ -52,7 +52,7 @@ DKStringArray DKDuktape::codeToRun;
 #endif
 
 const char *duk_push_string_file_raw(duk_context *ctx, const char *path, duk_uint_t flags) {
-	//DKDEBUGFUNC(ctx, path, flags);
+	DKDEBUGFUNC(ctx, path, flags);
 	FILE *f = NULL;
 	char *buf;
 	long sz;  /* ANSI C typing */
@@ -86,7 +86,7 @@ fail:
 }
 
 duk_int_t duk_peval_file(duk_context *ctx, const char *path) {
-	//DKDEBUGFUNC(ctx, path);
+	DKDEBUGFUNC(ctx, path);
 	duk_int_t rc;
 	duk_push_string_file_raw(ctx, path, DUK_STRING_PUSH_SAFE);
 	duk_push_string(ctx, path);
@@ -178,7 +178,7 @@ void DKDuktape::my_fatal(void* udata, const char* msg) {
 }
 
 bool DKDuktape::AttachFunction(const DKString& name, duk_c_function func){
-	//DKDEBUGFUNC(name, func);
+	DKDEBUGFUNC(name, func);
 	if(!ctx)
 		return DKERROR("ctx invalid\n");
 	duk_require_stack(ctx, 1);
@@ -328,7 +328,7 @@ bool DKDuktape::FileLoaded(const DKString& path){
 bool DKDuktape::LoadFile(const DKString& path){
 	DKDEBUGFUNC(path);
 	if(path.empty()) 
-		return DKERROR("path invalid\n");
+		return DKERROR("path invalid! \n");
 	//if(FileLoaded(path))
 		//return false;
 	DKString js;
@@ -343,7 +343,7 @@ bool DKDuktape::LoadFile(const DKString& path){
 }
 
 bool DKDuktape::LoadJSString(const DKString& url, const DKString& string){
-	//DKDEBUGFUNC(url, string);
+	DKDEBUGFUNC(url, string);
 	if(url.empty())
 		return DKERROR("url invalid\n");
 	if(string.empty())
@@ -421,7 +421,7 @@ bool DKDuktape::Reload(){
 
 /*
 bool DKDuktape::RunDuktape(const DKString& code){
-	//DKDEBUGFUNC(code);
+	DKDEBUGFUNC(code);
 	if(!DKUtil::InMainThread()){ return false; }
 	if(!DKDuktape::ctx){
 		DKERROR("DKDuktape::RunDuktape("+code+"): context is invalid\n"); 
@@ -435,7 +435,7 @@ bool DKDuktape::RunDuktape(const DKString& code){
 */
 
 bool DKDuktape::RunDuktape(const DKString& code, DKString& rval){
-	//DKDEBUGFUNC(code, rval);
+	DKDEBUGFUNC(code, rval);
 	if(!DKUtil::InMainThread())
 		return DKERROR("not in main thread");
 	if(!DKDuktape::ctx)
@@ -507,7 +507,7 @@ bool DKDuktape::UnloadFile(const DKString& path){
 }
 
 DKString DKDuktape::eventToAddress(DKEvents* event) {
-	//DKDEBUGFUNC(event);
+	//DKDEBUGFUNC(event);  //EXCESSIVE LOGGING
 	if (!event) {
 		DKERROR("DKDuktape::eventToAddress(): invalid event\n");
 		return NULL;
@@ -523,7 +523,7 @@ DKString DKDuktape::eventToAddress(DKEvents* event) {
 }
 
 DKEvents* DKDuktape::addressToEvent(const DKString& address) {
-	//DKDEBUGFUNC(address);
+	//DKDEBUGFUNC(address);  //EXCESSIVE LOGGING
 	DKEvents* event;
 	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {
 		DKERROR("DKRml::addressToEvent(): the address is not a valid hex notation");
@@ -547,7 +547,7 @@ DKEvents* DKDuktape::addressToEvent(const DKString& address) {
 }
 
 void DKDuktape::EventLoop(){
-	//DKDEBUGFUNC();
+	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 	if (!DKUtil::InMainThread()) {
 		DKERROR("not in main thread");
 		return;
@@ -584,7 +584,7 @@ void DKDuktape::EventLoop(){
 //////////////////////////////////////////////////////////////////
 #ifdef HAVE_eventloop
 	int DKDuktape::handle_file(duk_context *ctx, const char *filename) {
-		//DKDEBUGFUNC(ctx, filename);
+		DKDEBUGFUNC(ctx, filename);
 		FILE *f = NULL;
 		int retval;
 		f = fopen(filename, "rb");
@@ -598,7 +598,7 @@ void DKDuktape::EventLoop(){
 	}
 
 	int DKDuktape::handle_fh(duk_context *ctx, FILE *f, const char *filename){
-		//DKDEBUGFUNC(ctx, f, filename);
+		DKDEBUGFUNC(ctx, f, filename);
 		char *buf = NULL;
 		int len;
 		unsigned long got;
@@ -637,7 +637,7 @@ void DKDuktape::EventLoop(){
 	}
 
 	int DKDuktape::wrapped_compile_execute(duk_context *ctx, void *udata){
-		//DKDEBUGFUNC(ctx, udata);
+		DKDEBUGFUNC(ctx, udata);
 		int comp_flags = 0;
 		//int rc;
 		//Compile input and place it into global _USERCODE
