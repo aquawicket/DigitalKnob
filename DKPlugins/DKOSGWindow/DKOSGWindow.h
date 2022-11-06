@@ -53,6 +53,11 @@ class DKOSGWindow : public osgGA::GUIEventHandler, public DKObjectT<DKOSGWindow>
 public:
 	bool Init();
 	//bool End();
+	
+	bool TestInt(const void* input, void* output);
+	bool TestString(const void* input, void* output);
+	bool TestReturnInt(const void* input, void* output);
+	bool TestReturnString(const void* input, void* output);
 
 	//Functions registered to function table
 	bool GetX(const void* input, void* output);

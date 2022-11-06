@@ -481,6 +481,38 @@ bool DKOSGWindow::handle(const osgGA::GUIEventAdapter& ea){
     return false; //alow event to continue
 }
 
+bool DKOSGWindow::TestInt(const void* input, void* output) {
+    //DKDEBUGFUNC(input, output);
+    int in = *(int*)input;
+    int out = in;
+    *(int*)output = out;
+    return true;
+}
+
+bool DKOSGWindow::TestString(const void* input, void* output) {
+    //DKDEBUGFUNC(input, output);
+    std::string in = *(std::string*)input;
+    std::string out = in;
+    *(std::string*)output = out;
+    return true;
+}
+
+bool DKOSGWindow::TestReturnInt(const void* input, void* output) {
+    //DKDEBUGFUNC(input, output);
+    DK_UNUSED(input);
+    int var = 1234;
+    *(int*)output = var;
+    return true;
+}
+
+bool DKOSGWindow::TestReturnString(const void* input, void* output) {
+    //DKDEBUGFUNC(input, output);
+    DK_UNUSED(input);
+    std::string var = "Return test";
+    *(std::string*)output = var;
+    return true;
+}
+
 bool DKOSGWindow::GetX(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	*(int*)output = traits->x;
