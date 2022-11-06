@@ -410,7 +410,7 @@ bool DKUtil::GetScreenWidth(int& w){
 }
 
 bool DKUtil::GetThreadId(unsigned long int& id){
-	//DKDEBUGFUNC(id); 
+	//DKDEBUGFUNC(id);  // DON'T DO THIS
 	id = DKUtil::mainThreadId;
 	return true;//&& DKDEBUGRETURN(id);
 }

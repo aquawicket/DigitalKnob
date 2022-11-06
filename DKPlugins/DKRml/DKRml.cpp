@@ -316,13 +316,12 @@ bool DKRml::LoadUrl(const DKString& url){
 }
 
 void DKRml::ProcessEvent(Rml::Event& rmlEvent){
-	//DKDEBUGFUNC(rmlEvent);
+	//DKDEBUGFUNC(rmlEvent);  //EXCESSIVE LOGGING
 	DKString rmlEventAddress = eventToAddress(&rmlEvent);
 	//DKString code = "new Event("+rmlEventAddress+")";
 	//DKString rval;
 	//DKDuktape::Get()->RunDuktape(code, rval);
 	//DKINFO("DKRml::ProcessEvent(): "+code+": rval="+rval+"\n");
-	//DKDEBUGFUNC(event);
 	if (!rmlEvent.GetCurrentElement())
 		return;
 	if (!rmlEvent.GetTargetElement())
@@ -438,7 +437,7 @@ void DKRml::ProcessEvent(Rml::Event& rmlEvent){
 }
 
 bool DKRml::RegisterEvent(const DKString& elementAddress, const DKString& type){
-	//DKDEBUGFUNC(elementAddress, type);
+	//DKDEBUGFUNC(elementAddress, type);  //EXCESSIVE LOGGING
 	if(elementAddress.empty())
 		return DKERROR(elementAddress +": elementAddress empty\n"); 
 	if(type.empty())
@@ -472,7 +471,7 @@ bool DKRml::RegisterEvent(const DKString& elementAddress, const DKString& type){
 }
 
 bool DKRml::SendEvent(const DKString& elementAddress, const DKString& type, const DKString& value){
-	//DKDEBUGFUNC(id, type, value);
+	//DKDEBUGFUNC(id, type, value);  //EXCESSIVE LOGGING
 	if(elementAddress.empty())
 		return DKERROR("elementAddress invalid");
 	if(type.empty())
@@ -552,7 +551,7 @@ bool DKRml::UnregisterEvent(const DKString& elementAddress, const DKString& type
 }
 
 Rml::Event* DKRml::addressToEvent(const DKString& address) {
-	//DKDEBUGFUNC(address);
+	//DKDEBUGFUNC(address);  //EXCESSIVE LOGGING
 	Rml::Event* event;
 	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {
 		DKERROR(address+" is invalid hex notation\n");
@@ -576,7 +575,7 @@ Rml::Event* DKRml::addressToEvent(const DKString& address) {
 }
 
 DKString DKRml::eventToAddress(Rml::Event* event) {
-	//DKDEBUGFUNC(event);
+	//DKDEBUGFUNC(event);  //EXCESSIVE LOGGING
 	if (!event) {
 		DKERROR("invalid event\n");
 		return "";
@@ -592,7 +591,7 @@ DKString DKRml::eventToAddress(Rml::Event* event) {
 }
 
 Rml::Element* DKRml::addressToElement(const DKString& address) {
-	//DKDEBUGFUNC(address);
+	//DKDEBUGFUNC(address);  //EXCESSIVE LOGGING
 	Rml::Element* element = nullptr;
 	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {
 		DKERROR(address+": the address is not a valid hex notation\n");
@@ -618,7 +617,7 @@ Rml::Element* DKRml::addressToElement(const DKString& address) {
 }
 
 DKString DKRml::elementToAddress(Rml::Element* element) {
-	//DKDEBUGFUNC(element);
+	//DKDEBUGFUNC(element);  //EXCESSIVE LOGGING
 	if (!element) {
 		DKERROR("invalid element\n");
 		return "";

@@ -104,7 +104,7 @@ void* DKOSGCef::OnResize(void* data){
 }
 
 void* DKOSGCef::GetTexture(void*){
-	//DKDEBUGFUNC();
+	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 	if(!cef_image){
 		DKERROR("DKOSGCef::GetTexture(): cef_image invalid \n");
 		return NULL;

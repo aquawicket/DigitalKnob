@@ -619,7 +619,7 @@ BOOL CALLBACK DKHandles::EnumChildProcTemp(HWND hwnd, LPARAM lParam) {
 
 /*
 BOOL CALLBACK DKHandles::EnumWindowsProc(HWND hwnd, LPARAM lParam) {
-	//DKDEBUGFUNC(hwnd, lParam);
+	DKDEBUGFUNC(hwnd, lParam);
 	char class_name[80];
 	char title[80];
 	GetClassName(hwnd,class_name, sizeof(class_name));
@@ -627,7 +627,7 @@ BOOL CALLBACK DKHandles::EnumWindowsProc(HWND hwnd, LPARAM lParam) {
 	//if(!same("",title)){
 	//DKINFO("Window: "+title+"\n");
 	//DKINFO(" Class: "+class_name+"\n");
-	}
+	//}
 	return TRUE;
 }
 */

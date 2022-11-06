@@ -55,7 +55,7 @@ bool DKSDLText::End(){
 }
 
 bool DKSDLText::SetText(const DKString& text){
-	//DKDEBUGFUNC(text);
+	//DKDEBUGFUNC(text);  //EXCESSIVE LOGGING
 	surface = TTF_RenderText_Solid(font, text.c_str(), color);
 	texture = SDL_CreateTextureFromSurface(dkSdlWindow->renderer, surface);
 	SDL_FreeSurface(surface);
@@ -63,7 +63,7 @@ bool DKSDLText::SetText(const DKString& text){
 }
 
 bool DKSDLText::Render(){
-	//DKDEBUGFUNC();
+	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 	
 	//DEBUG CODE
 	/*

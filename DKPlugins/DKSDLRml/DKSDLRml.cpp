@@ -64,7 +64,7 @@ bool DKSDLRml::End(){
 }
 
 bool DKSDLRml::Handle(SDL_Event *event) {
-	//DKDEBUGFUNC(event);
+	//DKDEBUGFUNC(event);  //EXCESSIVE LOGGING
 	if(!dkRml->document)
 		return DKERROR("dkRml->document invalid\n");
 	Rml::Element* hover;
@@ -157,7 +157,7 @@ bool DKSDLRml::Handle(SDL_Event *event) {
 }
 
 bool DKSDLRml::Render(){
-    //DKDEBUGFUNC();
+    //DKDEBUGFUNC();  //EXCESSIVE LOGGING
 	if(dkSdlWindow->width != dkRml->context->GetDimensions().x || dkSdlWindow->height != dkRml->context->GetDimensions().y){
 		dkRml->context->SetDimensions(Rml::Vector2i(dkSdlWindow->width, dkSdlWindow->height));
 		// Reset blending and draw a fake point just outside the screen to let SDL know that it needs to reset its state in case it wants to render a texture 
