@@ -70,7 +70,7 @@ public:
 		instances.clear();
 	}
 	static T* Instance(const DKString& data){ //data = (id,var1,var2,var3,etc)
-		//DKDEBUGFUNC(data);
+		DKDEBUGFUNC(data);
 		//if(has(data, ".js"))
 		//	DKERROR("DKObject::Instance(): this is a .js file. Can't work for Cef\n");
 		if(!instances.empty() && _singleton)
@@ -133,7 +133,7 @@ public:
 		}
 	}
 	static bool Valid(const DKString& id = ""){
-		//DKDEBUGFUNC(id);
+		DKDEBUGFUNC(id);
 		for(unsigned int i=0; i<instances.size(); ++i){
 			if(same(id, instances[i]->data[1])){
 				if (instances[i]){
@@ -145,7 +145,7 @@ public:
 		return false;
 	}
 	static T* Get(const DKString& id = ""){
-		//DKDEBUGFUNC(id);
+		DKDEBUGFUNC(id);
 		for(unsigned int i=0; i<instances.size(); ++i){
 			if(id.empty() || same(id, instances[i]->data[1])){
 				if (instances[i])
