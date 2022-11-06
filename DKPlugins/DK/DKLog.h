@@ -78,7 +78,7 @@
 //#define DKDEBUGFUNC(...) DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
 #define DKDEBUGRETURN(...) DKDEBUGRETURN1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
 #elif APPLE || LINUX
-//#define DKDEBUGFUNC(...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, "", ##__VA_ARGS__)
+//#define DKDEBUGFUNC(...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, ##__VA_ARGS__)
 #define DKDEBUGRETURN(...) DebugReturn(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, ##__VA_ARGS__)
 #else
 //#define DKDEBUGFUNC(...) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, "", DK_DEBUG)
