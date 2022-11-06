@@ -108,7 +108,7 @@ public:
 
 	template<class T>
     static bool RegisterFunc(const DKString& name, bool (T::*func) (const void*, void*), T* _this){
-		//DKDEBUGFUNC(name, func, _this);
+		DKDEBUGFUNC(name, func, _this);
         if(!functions)
             functions = new DKFunctionMap();
         if(HasFunc(name))
@@ -131,7 +131,7 @@ public:
 	}
 
 	static bool HasFunc(const DKString& name){
-		//DKDEBUGFUNC(name);
+		DKDEBUGFUNC(name);
 		if(!functions)
 			return false;
 		if(functions->empty())
@@ -143,7 +143,7 @@ public:
 	}
 	
 	static bool CallFunc(const DKString& name, const void* input = NULL, void* output = NULL){
-		//DKDEBUGFUNC(name, input, output); //excessive logging
+		DKDEBUGFUNC(name, input, output); //excessive logging
 		//if(!(*functions)[name])
 		if(!HasFunc(name))
 			return DKERROR(name+"() function not registered \n");
