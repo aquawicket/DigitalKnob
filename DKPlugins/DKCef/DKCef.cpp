@@ -107,11 +107,11 @@ bool DKCef::Init(){
 		DKString elf_dll;
 		DKString cef_dll;
 #		ifdef DEBUG
-			elf_dll = DKFile::local_assets + "DKCef/win32Debug/chrome_elf.dll";
-			cef_dll = DKFile::local_assets + "DKCef/win32Debug/libcef.dll";
+			elf_dll = DKFile::local_assets + "/DKCef/win32Debug/chrome_elf.dll";
+			cef_dll = DKFile::local_assets + "/DKCef/win32Debug/libcef.dll";
 #		else
-			elf_dll = DKFile::local_assets + "DKCef/win32Release/chrome_elf.dll";
-			cef_dll = DKFile::local_assets + "DKCef/win32Release/libcef.dll";
+			elf_dll = DKFile::local_assets + "/DKCef/win32Release/chrome_elf.dll";
+			cef_dll = DKFile::local_assets + "/DKCef/win32Release/libcef.dll";
 #		endif
 		libelf = LoadLibrary(elf_dll.c_str());
 		if (!libelf){
@@ -135,11 +135,11 @@ bool DKCef::Init(){
 		DKString elf_dll;
 		DKString cef_dll;
 #		ifdef DEBUG
-			elf_dll = DKFile::local_assets + "DKCef/win64Debug/chrome_elf.dll";
-			cef_dll = DKFile::local_assets + "DKCef/win64Debug/libcef.dll";
+			elf_dll = DKFile::local_assets + "/DKCef/win64Debug/chrome_elf.dll";
+			cef_dll = DKFile::local_assets + "/DKCef/win64Debug/libcef.dll";
 #		else
-			elf_dll = DKFile::local_assets + "DKCef/win64Release/chrome_elf.dll";
-			cef_dll = DKFile::local_assets + "DKCef/win64Release/libcef.dll";
+			elf_dll = DKFile::local_assets + "/DKCef/win64Release/chrome_elf.dll";
+			cef_dll = DKFile::local_assets + "/DKCef/win64Release/libcef.dll";
 #		endif
 		libelf = LoadLibrary(elf_dll.c_str());
 		if (!libelf) {
@@ -222,30 +222,30 @@ bool DKCef::Init(){
 	//settings.persist_user_preferences;
 	//settings.uncaught_exception_stack_size = 100;
 	//MAC's resources are in the bundle
-#	ifndef MAC
-		DKString rp = DKFile::local_assets + "DKCef";
+	#if !MAC
+		DKString rp = DKFile::local_assets + "/DKCef";
 		CefString(&settings.resources_dir_path) = rp.c_str();
-		DKString lp = DKFile::local_assets + "DKCef/locales";
+		DKString lp = DKFile::local_assets + "/DKCef/locales";
 		CefString(&settings.locales_dir_path) = lp.c_str();
-#	endif
-	DKString cp = DKFile::local_assets + "USER";
+	#endif
+	DKString cp = DKFile::local_assets + "/USER";
 	CefString(&settings.cache_path) = cp.c_str();
-	DKString lf = DKFile::local_assets + "cef.log";
+	DKString lf = DKFile::local_assets + "/cef.log";
 	CefString(&settings.log_file) = lf.c_str();
 #	ifdef WIN32
 #		if defined(WIN32) && !defined(WIN64)
 #			ifdef DEBUG
-				DKString ep = DKFile::local_assets + "DKCef/win32Debug/DKCefChild.exe";
+				DKString ep = DKFile::local_assets + "/DKCef/win32Debug/DKCefChild.exe";
 #			else
-				DKString ep = DKFile::local_assets + "DKCef/win32Release/DKCefChild.exe";
+				DKString ep = DKFile::local_assets + "/DKCef/win32Release/DKCefChild.exe";
 #			endif
 #		endif
 
 #		ifdef WIN64
 #			ifdef DEBUG
-				DKString ep = DKFile::local_assets + "DKCef/win64Debug/DKCefChild.exe";
+				DKString ep = DKFile::local_assets + "/DKCef/win64Debug/DKCefChild.exe";
 #			else
-				DKString ep = DKFile::local_assets + "DKCef/win64Release/DKCefChild.exe";
+				DKString ep = DKFile::local_assets + "/DKCef/win64Release/DKCefChild.exe";
 #			endif
 #		endif
 
@@ -267,7 +267,7 @@ bool DKCef::Init(){
 #	endif
 
 #	if LINUX
-		DKString ep = DKFile::local_assets + "DKCef/DKCefChild";
+		DKString ep = DKFile::local_assets + "/DKCef/DKCefChild";
 		if(!DKFile::PathExists(ep)){
 		    DKERROR("file not found: "+ep+"\n");
 		    //TODO: disable multi-process
