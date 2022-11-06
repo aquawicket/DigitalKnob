@@ -117,7 +117,7 @@ bool DKSDLCef::GetTexture(const void* input, void* output) {
 }
 
 bool DKSDLCef::Handle(SDL_Event* event) {
-	//DKDEBUGFUNC(event);
+	//DKDEBUGFUNC(event);  //EXCESSIVE LOGGING
 	int browser_index;
 	if (!dkCef->GetCurrentBrowser(browser_index))
 		return false;// DKERROR("browser_index is invalid\n");
@@ -436,7 +436,7 @@ bool DKSDLCef::TransparentPixel(SDL_Event *event) {
 }
 
 bool DKSDLCef::Draw() {
-	//DKDEBUGFUNC();
+	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 	if (DKClass::DKValid("DKRml,DKRml0"))
 		return false; //We have a valid DKRml instance, so we are drawing to rml textures instead of striaght to SDL
 	if (!cefHandler->cef_texture.size())

@@ -49,7 +49,7 @@ bool DKWindow::End(){
 ///  If "DKWindow::TestInt()" calls a registered function, it will alter the variable and send it back.
 ///  \a see: DKPlugins/DKSDLWindow.h
 bool DKWindow::TestInt(int& input, int& output){
-	//DKDEBUGFUNC(input, output);
+	DKDEBUGFUNC(input, output);
 	if(DKClass::HasFunc("DKCEFWindow::TestInt"))
 		return DKClass::CallFunc("DKCEFWindow::TestInt", &input, &output);
 	if(DKClass::HasFunc("DKOSGWindow::TestInt"))
@@ -65,7 +65,7 @@ bool DKWindow::TestInt(int& input, int& output){
 ///  If "DKWindow::TestString()" calls a registered function, it will alter the variable and send it back.
 ///  \a see: DKPlugins/DKSDLWindow.h
 bool DKWindow::TestString(DKString& input, DKString& output) {
-	//DKDEBUGFUNC(input, output);
+	DKDEBUGFUNC(input, output);
 	if(DKClass::HasFunc("DKCEFWindow::TestString"))
 		return DKClass::CallFunc("DKCEFWindow::TestString", &input, &output);
 	if(DKClass::HasFunc("DKOSGWindow::TestString"))
@@ -81,7 +81,7 @@ bool DKWindow::TestString(DKString& input, DKString& output) {
 ///  If "DKWindow::TestReturnInt()" calls a registered function, it will return a variable.
 ///  \a see: DKPlugins/DKSDLWindow.h
 bool DKWindow::TestReturnInt(int& output) {
-	//DKDEBUGFUNC(output);
+	DKDEBUGFUNC(output);
 	if(DKClass::HasFunc("DKCEFWindow::TestReturnInt"))
 		return DKClass::CallFunc("DKCEFWindow::TestReturnInt", NULL, &output);
 	if(DKClass::HasFunc("DKOSGWindow::TestReturnInt"))
@@ -97,7 +97,7 @@ bool DKWindow::TestReturnInt(int& output) {
 ///  If "DKWindow::TestReturnString()" calls a registered function, it will return a variable.
 ///  \a see: DKPlugins/DKSDLWindow.h
 bool DKWindow::TestReturnString(DKString& output) {
-	//DKDEBUGFUNC(output);
+	DKDEBUGFUNC(output);
 	if(DKClass::HasFunc("DKCEFWindow::TestReturnString"))
 		return DKClass::CallFunc("DKCEFWindow::TestReturnString", NULL, &output);
 	if(DKClass::HasFunc("DKOSGWindow::TestReturnString"))

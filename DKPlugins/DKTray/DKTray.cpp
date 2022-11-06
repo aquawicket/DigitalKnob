@@ -136,7 +136,7 @@ bool DKTray::ShowBalloon(const DKString& string/*, int seconds*/){
 }
 
 void DKTray::Process(){
-	//DKDEBUGFUNC();
+	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 #if WIN
     //Process Tray Icon Messages
     MSG msg;

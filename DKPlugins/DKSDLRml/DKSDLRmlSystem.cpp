@@ -307,12 +307,12 @@ int RmlSDL2SystemInterface::GetKeyModifiers(){
 }
 
 double RmlSDL2SystemInterface::GetElapsedTime(){
-	//DKDEBUGFUNC();
+	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 	return (float)SDL_GetTicks() / 1000;
 }
 
 bool RmlSDL2SystemInterface::LogMessage(Rml::Log::Type type, const Rml::String& message){
-	//DKDEBUGFUNC(type, message);
+	//DKDEBUGFUNC(type, message);  //EXCESSIVE LOGGING
 	if(has(message,"Loaded font face"))
 		type = Rml::Log::LT_DEBUG;
 	switch(type){

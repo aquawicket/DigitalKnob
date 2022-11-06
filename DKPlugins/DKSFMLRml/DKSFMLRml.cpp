@@ -65,7 +65,7 @@ bool DKSFMLRml::End(){
 }
 
 bool DKSFMLRml::Handle(sf::Event& event) {
-	//DKDEBUGFUNC(event);
+	//DKDEBUGFUNC(event);  //EXCESSIVE LOGGING
 	if(!dkRml->document)
 		return DKERROR("dkRml->document invalid! \n");
 	Rml::Element* hover;
@@ -158,7 +158,7 @@ bool DKSFMLRml::Handle(sf::Event& event) {
 }
 
 void DKSFMLRml::Render(){
-    //DKDEBUGFUNC();
+    //DKDEBUGFUNC();  //EXCESSIVE LOGGING
 	if(dkSFMLWindow->width != dkRml->context->GetDimensions().x || dkSFMLWindow->height != dkRml->context->GetDimensions().y){
 		dkRml->context->SetDimensions(Rml::Vector2i(dkSFMLWindow->width, dkSFMLWindow->height));
 		// Reset blending and draw a fake point just outside the screen to let SFML know that it needs to reset its state in case it wants to render a texture 

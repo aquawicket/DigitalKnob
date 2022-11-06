@@ -184,7 +184,7 @@ void DKVncServer::clientgone(rfbClientPtr cl){
 }
 
 void DKVncServer::Loop(){
-	//DKDEBUGFUNC();
+	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 	if(rfbProcessEvents(rfbScreen, 1))
 		DrawBuffer();
 }
@@ -226,7 +226,7 @@ rfbBool DKVncServer::rfbCheckPasswordByList2(rfbClientPtr cl, const char* respon
 }
 
 void DKVncServer::DrawBuffer(){  
-	//DKDEBUGFUNC();
+	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 #ifdef WIN32
 	//Capture Desktop with DirectX
 	if(capture == "DIRECTX"){

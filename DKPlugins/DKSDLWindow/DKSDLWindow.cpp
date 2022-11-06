@@ -346,7 +346,7 @@ bool DKSDLWindow::End(){
 }
 
 bool DKSDLWindow::TestInt(const void* input, void* output) {
-    //DKDEBUGFUNC(input, output);
+    DKDEBUGFUNC(input, output);
     int in = *(int*)input;
     int out = in;
     *(int*)output = out;
@@ -354,7 +354,7 @@ bool DKSDLWindow::TestInt(const void* input, void* output) {
 }
 
 bool DKSDLWindow::TestString(const void* input, void* output) {
-    //DKDEBUGFUNC(input, output);
+    DKDEBUGFUNC(input, output);
     std::string in = *(std::string*)input;
     std::string out = in;
     *(std::string*)output = out;
@@ -362,7 +362,7 @@ bool DKSDLWindow::TestString(const void* input, void* output) {
 }
 
 bool DKSDLWindow::TestReturnInt(const void* input, void* output) {
-    //DKDEBUGFUNC(input, output);
+    DKDEBUGFUNC(input, output);
     DK_UNUSED(input);
     int var = 1234;
     *(int*)output = var;
@@ -370,7 +370,7 @@ bool DKSDLWindow::TestReturnInt(const void* input, void* output) {
 }
 
 bool DKSDLWindow::TestReturnString(const void* input, void* output) {
-    //DKDEBUGFUNC(input, output);
+    DKDEBUGFUNC(input, output);
     DK_UNUSED(input);
     std::string var = "Return test";
     *(std::string*)output = var;
@@ -420,7 +420,7 @@ bool DKSDLWindow::GetHandle(const void* input, void* output) {
 }
 
 bool DKSDLWindow::GetHeight(const void* input, void* output) {
-    //DKDEBUGFUNC(input, output);
+    DKDEBUGFUNC(input, output);
     DK_UNUSED(input);
     int h;
     SDL_GetWindowSize(window, NULL, &h);
@@ -453,7 +453,7 @@ bool DKSDLWindow::GetPixelRatio(const void* input, void* output) {
 }
 
 bool DKSDLWindow::GetWidth(const void* input, void* output) {
-    //DKDEBUGFUNC(input, output);
+    DKDEBUGFUNC(input, output);
     DK_UNUSED(input);
     int w;
     SDL_GetWindowSize(window, &w, NULL);
@@ -540,7 +540,7 @@ bool DKSDLWindow::SetHeight(const void* input, void* output) {
 }
 
 bool DKSDLWindow::SetIcon(const void* input, void* output) {
-    //DKDEBUGFUNC(input, output);
+    DKDEBUGFUNC(input, output);
     DK_UNUSED(output);
 #ifdef WIN32
     DKString file = *(DKString*)input;
@@ -624,7 +624,7 @@ bool DKSDLWindow::drawBackground(SDL_Renderer *renderer, int w, int h){
 }
 
 void DKSDLWindow::Process() {
-    //DKDEBUGFUNC();
+    //DKDEBUGFUNC();  //EXCESSIVE LOGGING
     if(SDL_GetWindowFlags(window) & SDL_WINDOW_HIDDEN)
         DKUtil::Sleep(1000); //FIXME - look for a better way to save cpu usage here
 
@@ -654,7 +654,7 @@ void DKSDLWindow::Process() {
 }
 
 int DKSDLWindow::EventFilter(void* userdata, SDL_Event* event) {
-    //DKDEBUGFUNC(userdata, event);
+    //DKDEBUGFUNC(userdata, event);  //EXCESSIVE LOGGING
     if(event->type == SDL_WINDOWEVENT) {
         switch(event->window.event) {
             case SDL_WINDOWEVENT_MOVED: {
@@ -712,7 +712,7 @@ int DKSDLWindow::EventFilter(void* userdata, SDL_Event* event) {
 }
 
 bool DKSDLWindow::handle(SDL_Event *event) {
-    //DKDEBUGFUNC(event);
+    //DKDEBUGFUNC(event);  //EXCESSIVE LOGGING
     switch(event->type) {
         case SDL_QUIT: {
             DKApp::Exit();

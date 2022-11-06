@@ -114,7 +114,7 @@ bool DKSDLCefHandler::DoClose(CefRefPtr<CefBrowser> browser) {
 }
 
 void DKSDLCefHandler::DoFrame(){
-	//DKDEBUGFUNC();
+	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 	if(!DKApp::active)
 		return;
 	CefDoMessageLoopWork(); //FIXME: this breaks SDL keyboard events for Mac OSX
@@ -323,8 +323,9 @@ void DKSDLCefHandler::OnLoadingStateChange(CefRefPtr<CefBrowser> browser, bool i
 }
 
 void DKSDLCefHandler::OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType type, const RectList& dirtyRects, const void *buffer, int width, int height){
-	//DKDEBUGFUNC(browser, type, "const RectList&", buffer, width, height);
-	//if(browser->GetIdentifier() != dkCef->current_browser->GetIdentifier()){ return; }
+	//DKDEBUGFUNC(browser, type, dirtyRects, buffer, width, height);  //EXCESSIVE LOGGING
+	//if(browser->GetIdentifier() != dkCef->current_browser->GetIdentifier())
+		//return;
 	bool found = false;
 	unsigned int n=0;
 	for(n=0; n<browser_list_.size(); ++n){

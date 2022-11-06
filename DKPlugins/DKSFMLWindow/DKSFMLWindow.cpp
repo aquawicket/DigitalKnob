@@ -81,7 +81,7 @@ bool DKSFMLWindow::End(){
 }
 
 void DKSFMLWindow::Process(){
-	//DKDEBUGFUNC();
+	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 	sf::Event e;
 	while(window.pollEvent(e)){
 		//for(unsigned int i = 0; i < event_funcs.size(); ++i){

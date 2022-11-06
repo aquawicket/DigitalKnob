@@ -319,12 +319,12 @@ int RmlSFMLSystemInterface::GetKeyModifiers(){
 }
 
 double RmlSFMLSystemInterface::GetElapsedTime(){
-	//DKDEBUGFUNC();
+	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 	return timer.getElapsedTime().asSeconds();
 }
 
 bool RmlSFMLSystemInterface::LogMessage(Rml::Log::Type type, const Rml::String& message){
-	//DKDEBUGFUNC(type, message);
+	//DKDEBUGFUNC(type, message);  //EXCESSIVE LOGGING
 	Rml::String Type;
 	switch(type){
 		case Rml::Log::LT_ALWAYS:

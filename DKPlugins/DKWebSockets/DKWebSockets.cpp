@@ -210,7 +210,7 @@ bool DKWebSockets::CreateServer(const DKString& address, const int& port){
 }
 
 void DKWebSockets::Loop(){
-	//DKDEBUGFUNC();
+	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 	if(!serverAddress.empty() && serverPort && serverHub.listen(serverAddress.c_str(), serverPort))
 		serverHub.poll();
 	if(serverAddress.empty() && serverPort && serverHub.listen(serverPort))

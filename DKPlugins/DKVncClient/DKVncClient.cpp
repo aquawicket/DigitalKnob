@@ -290,7 +290,7 @@ rfbBool DKVncClient::rfbInitConnection(rfbClient* client){
 }
 
 bool DKVncClient::draw(){
-	//DKDEBUGFUNC();
+	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 	if(!cl->frameBuffer)
 		return DKERROR("cl->frameBuffer invalid\n");
 
@@ -341,7 +341,7 @@ void DKVncClient::update(rfbClient* cl, int x, int y, int w, int h) {
 }
 
 bool DKVncClient::handle(SDL_Event *e){
-	//DKDEBUGFUNC(e);
+	//DKDEBUGFUNC(e);  //EXCESSIVE LOGGING
 	switch(e->type){
 		case SDL_MOUSEBUTTONUP:
 		case SDL_MOUSEBUTTONDOWN:

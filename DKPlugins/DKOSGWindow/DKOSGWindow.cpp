@@ -73,7 +73,7 @@ bool DKOSGWindow::Init(){
 }
 
 bool DKOSGWindow::CreateWin(const DKString& title, const int& x, const int& y, const int& w, const int& h){
-	//DKDEBUGFUNC(title, x, y, w, h);
+	DKDEBUGFUNC(title, x, y, w, h);
 	mTitle = title;
 	winX = x;
 	winY = y;
@@ -486,7 +486,7 @@ bool DKOSGWindow::handle(const osgGA::GUIEventAdapter& ea){
 }
 
 bool DKOSGWindow::TestInt(const void* input, void* output) {
-    //DKDEBUGFUNC(input, output);
+    DKDEBUGFUNC(input, output);
     int in = *(int*)input;
     int out = in;
     *(int*)output = out;
@@ -494,7 +494,7 @@ bool DKOSGWindow::TestInt(const void* input, void* output) {
 }
 
 bool DKOSGWindow::TestString(const void* input, void* output) {
-    //DKDEBUGFUNC(input, output);
+    DKDEBUGFUNC(input, output);
     std::string in = *(std::string*)input;
     std::string out = in;
     *(std::string*)output = out;
@@ -502,7 +502,7 @@ bool DKOSGWindow::TestString(const void* input, void* output) {
 }
 
 bool DKOSGWindow::TestReturnInt(const void* input, void* output) {
-    //DKDEBUGFUNC(input, output);
+    DKDEBUGFUNC(input, output);
     DK_UNUSED(input);
     int var = 1234;
     *(int*)output = var;
@@ -510,7 +510,7 @@ bool DKOSGWindow::TestReturnInt(const void* input, void* output) {
 }
 
 bool DKOSGWindow::TestReturnString(const void* input, void* output) {
-    //DKDEBUGFUNC(input, output);
+    DKDEBUGFUNC(input, output);
     DK_UNUSED(input);
     std::string var = "Return test";
     *(std::string*)output = var;

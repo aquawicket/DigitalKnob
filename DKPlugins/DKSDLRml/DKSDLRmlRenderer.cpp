@@ -37,7 +37,7 @@
 
 
 DKSDLRmlRenderer::DKSDLRmlRenderer(SDL_Renderer* sdlRenderer, SDL_Window* sdlWindow) {
-    //DKDEBUGFUNC(sdlRenderer, sdlWindow);
+    DKDEBUGFUNC(sdlRenderer, sdlWindow);
     DKINFO("Using DKSDLRmlRenderer\n");
     mSdlRenderer = sdlRenderer;
     mSdlWindow = sdlWindow;
@@ -50,7 +50,7 @@ DKSDLRmlRenderer::DKSDLRmlRenderer(SDL_Renderer* sdlRenderer, SDL_Window* sdlWin
 
 // Called by RmlUi when it wants to render geometry that it does not wish to optimise.
 void DKSDLRmlRenderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, const Rml::TextureHandle texture, const Rml::Vector2f& translation) {
-    //DKDEBUGFUNC(vertices, num_vertices, indices, num_indices, texture, translation);
+    //DKDEBUGFUNC(vertices, num_vertices, indices, num_indices, texture, translation);  //EXCESSIVE LOGGING
     SDL_Texture* sdlTexture = GetGifAnimation(texture);
     if (sdlTexture == nullptr)
         sdlTexture = (SDL_Texture*)texture;
@@ -88,7 +88,7 @@ void DKSDLRmlRenderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, i
 
 // Called by RmlUi when it wants to compile geometry it believes will be static for the foreseeable future.
 Rml::CompiledGeometryHandle DKSDLRmlRenderer::CompileGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rml::TextureHandle texture) {
-    //DKDEBUGFUNC(vertices, num_vertices, indices, num_indices, texture);
+    DKDEBUGFUNC(vertices, num_vertices, indices, num_indices, texture);
     DK_UNUSED(vertices);
     DK_UNUSED(num_vertices);
     DK_UNUSED(num_indices);
@@ -109,7 +109,7 @@ void DKSDLRmlRenderer::ReleaseCompiledGeometry(Rml::CompiledGeometryHandle geome
 
 // Called by RmlUi when it wants to enable or disable scissoring to clip content.		
 void DKSDLRmlRenderer::EnableScissorRegion(bool enable) {
-    //DKDEBUGFUNC(enable);
+    //DKDEBUGFUNC(enable);  //EXCESSIVE LOGGING
     if (enable)
        SDL_RenderSetClipRect(mSdlRenderer, &mScisorRect);
     else
@@ -118,7 +118,7 @@ void DKSDLRmlRenderer::EnableScissorRegion(bool enable) {
 
 // Called by RmlUi when it wants to change the scissor region.		
 void DKSDLRmlRenderer::SetScissorRegion(int x, int y, int width, int height){
-    //DKDEBUGFUNC(x, y, width, height);
+    //DKDEBUGFUNC(x, y, width, height);  //EXCESSIVE LOGGING
     //int w_width, w_height;
     //SDL_GetWindowSize(mScreen, &w_width, &w_height);
     mScisorRect.x = x;
@@ -185,7 +185,7 @@ bool DKSDLRmlRenderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vect
 
 // Called by RmlUi when a texture is required to be built from an internally-generated sequence of pixels.
 bool DKSDLRmlRenderer::GenerateTexture(Rml::TextureHandle& texture_handle, const Rml::byte* source, const Rml::Vector2i& source_dimensions){
-    //DKDEBUGFUNC(texture_handle, source, source_dimensions);
+    //DKDEBUGFUNC(texture_handle, source, source_dimensions);  //EXCESSIVE LOGGING
     #if SDL_BYTEORDER == SDL_BIG_ENDIAN
         Uint32 rmask = 0xff000000;
         Uint32 gmask = 0x00ff0000;
