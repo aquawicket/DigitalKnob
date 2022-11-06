@@ -180,14 +180,13 @@ void getTemplateArgs(std::ostringstream& out, DKStringArray& name_array);
 
 template <typename A, typename... Args>
 void getTemplateArgs(std::ostringstream& out, DKStringArray& name_array, A arg1, Args&&... args){
-	int arg_count = sizeof...(Args);
-	if(!arg_count)
-		return;
 	printVariable(name_array[0], arg1, out); //use first name element
 	name_array.erase(name_array.begin()); //remove first name element
-	if(arg_count)
+	int arg_count = sizeof...(Args);
+	if(arg_count){
 		out << ",  ";
-    getTemplateArgs(out, name_array, args...);
+		getTemplateArgs(out, name_array, args...);
+	}
 }
 
 template <typename... Args>
@@ -214,6 +213,7 @@ void DebugFunc(const char* file, int line, const char* func, const DKString& nam
 
 template <typename... Args>
 bool DebugReturn(const char* file, int line, const char* func, const DKString& names, Args&&... args){
+	return true;
 	if (!DKUtil::InMainThread())
 		return true;
 	if (DKLog::log_show.empty() && !DKLog::log_debug)
@@ -222,10 +222,7 @@ bool DebugReturn(const char* file, int line, const char* func, const DKString& n
 	std::ostringstream out;
 	DKString func_string = func;
 	func_string += "(";
-	if(arg_count){
-		if (names.empty())
-			return DKREDINFO("arg_count is > 1, but names is empty\n");
-			//return DKERROR("arg_count is > 1, but names is empty\n");
+	if(arg_count && !names.empty()){
 		DKStringArray name_array;
 		toStringArray(name_array, names, ","); 
 		getTemplateArgs(out, name_array, args...);
@@ -252,9 +249,9 @@ bool DebugReturn(const char* file, int line, const char* func, const DKString& n
 			}
 		}
 	}
-	else{ //!arg_count
+	//else{ //!arg_count
 		func_string += ")";
-	}
+	//}
 	func_string += "\n";
 	DKLog::Log(file, line, "", func_string, DK_DEBUG);
 	return true;

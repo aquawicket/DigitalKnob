@@ -49,7 +49,7 @@ bool DKRmlConverter::HtmlToRml(const DKString& html, DKString& rml){
 	stored_html = html;
 #ifdef DEBUG
 	DKINFO("\n########## .html ---> HtmlToRml ############\n");
-	DKINFO(rml);
+	DKINFO(rml+"\n");
 	DKINFO("\n############################################\n");
 #endif
 
@@ -113,7 +113,7 @@ bool DKRmlConverter::HtmlToRml(const DKString& html, DKString& rml){
 	stored_rml = rml;
 #ifdef DEBUG
 	DKINFO("\n########## HtmlToRml ---> .rml ############\n");
-	DKINFO(rml);
+	DKINFO(rml+"\n");
 	DKINFO("\n###########################################\n");
 #endif
 	return true;
