@@ -130,9 +130,13 @@ public:
 
 	static bool HasFunc(const DKString& name){
 		//DKDEBUGFUNC(name);
-		if(functions->find(name) != functions->end())
-			return true;
-		return false;
+		if(!functions)
+			return false;
+		if(functions->empty())
+			return false;
+		if(functions->find(name) == functions->end())
+			return false;
+		return true;
 		//return (bool)(*functions)[name];
 	}
 	
