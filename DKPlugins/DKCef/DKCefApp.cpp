@@ -31,13 +31,10 @@ bool DKV8::singleprocess = true;
 CefRefPtr<CefBrowser> DKV8::_browser = NULL;
 CefRefPtr<DKCefV8Handler> DKV8::v8handler = NULL;
 CefRefPtr<CefV8Value> DKV8::ctx = NULL;
-//#ifdef MAC
-	//std::map<DKString, boost::function2<bool, CefArgs, CefReturn> > DKV8::functions;
-	//std::map<DKString, std::function2<bool, CefArgs, CefReturn> > DKV8::functions;
-//#else
-	//std::map<DKString, boost::function<bool(CefArgs, CefReturn)>> DKV8::functions;
-	std::map<DKString, std::function<bool(CefArgs, CefReturn)>> DKV8::functions;
-//#endif
+
+//std::map<DKString, boost::function<bool(CefArgs, CefReturn)>> DKV8::functions;
+std::map<DKString, std::function<bool(CefArgs, CefReturn)>> DKV8::functions;
+
 std::vector<std::string> DKV8::funcs;
 
 DKString DKV8::disable_gpu;
@@ -306,7 +303,10 @@ void DKCefApp::OnBeforeCommandLineProcessing(const CefString& process_type, CefR
 #	endif
 
 #endif //!DKCefChild
+
+#if USE_DKV8
 	DKV8::v8handler = new DKCefV8Handler();
+#endif
 }
 
 void DKCefApp::OnBrowserCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDictionaryValue> extra_info) {
@@ -314,13 +314,16 @@ void DKCefApp::OnBrowserCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDict
 #ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
 #endif
+
+#if USE_DKV8
 	DKV8::_browser = browser;
 	DKV8::v8handler->SetBrowser(browser);
+#endif
 	CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("GetFunctions");
 	CefRefPtr<CefListValue> args = msg->GetArgumentList();
-#ifndef DEBUG
+//#ifndef DEBUG
 	//browser->SendProcessMessage(PID_RENDERER, msg); //FIXME
-#endif
+//#endif
 }
 
 void DKCefApp::OnContextInitialized() {
@@ -336,6 +339,8 @@ void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 #ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
 #endif
+
+#if USE_DKV8
 	//Load all of the c++ functions into the V8 context.
 	DKV8::ctx = context->GetGlobal();
 	for(unsigned int i=0; i<DKV8::funcs.size(); i++){
@@ -343,6 +348,7 @@ void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 		if(DKV8::ctx->SetValue(DKV8::funcs[i].c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE))
 			DKINFO("registered: "+DKV8::funcs[i]+"\n");
 	}
+#endif
 }
 
 bool DKCefApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefProcessId source_process, CefRefPtr<CefProcessMessage> message) {
