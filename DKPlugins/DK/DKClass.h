@@ -111,20 +111,22 @@ public:
 		//DKDEBUGFUNC(name, func, _this);
         if(!functions)
             functions = new DKFunctionMap();
-        if((*functions)[name])
-            DKERROR("failed to register "+name+"() function\n");
+        if(HasFunc(name))
+            return DKERROR(name+"() function already registered\n");
 		//functions[name] = std::bind(func, _this, dk_placeholders::_1, dk_placeholders::_2); //as variable
         (*functions)[name] = std::bind(func, _this, dk_placeholders::_1, dk_placeholders::_2); //as pointer
-        if(!(*functions)[name])
-            return DKERROR("failed to register "+name+"() function\n");
+        if(!HasFunc(name))
+            return DKERROR("failed to register "+name+"() function \n");
         return true;
 	}
     
 	static bool UnregisterFunc(const DKString& name){
 		DKDEBUGFUNC(name);
+		if(!HasFunc(name))
+			return DKERROR(name+"() function not registered \n");
 		functions->erase(name);
-        if((*functions)[name])
-			return DKERROR("failed to unregister "+name+"() function\n");
+        if(HasFunc(name))
+			return DKERROR("failed to unregister "+name+"() function \n");
 		return true;
 	}
 
@@ -142,8 +144,9 @@ public:
 	
 	static bool CallFunc(const DKString& name, const void* input = NULL, void* output = NULL){
 		//DKDEBUGFUNC(name, input, output); //excessive logging
-		if(!(*functions)[name])
-			return DKERROR(name+"() function not registered\n");
+		//if(!(*functions)[name])
+		if(!HasFunc(name))
+			return DKERROR(name+"() function not registered \n");
 		return (*functions)[name](input, output);
 	}
 };
