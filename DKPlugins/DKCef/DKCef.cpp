@@ -108,10 +108,20 @@ bool DKCef::Init(){
 		DKString cef_dll;
 #		ifdef DEBUG
 			elf_dll = DKFile::local_assets + "/DKCef/win32Debug/chrome_elf.dll";
+			if(!DKFile::PathExists(elf_dll))
+				return DKERROR(elf_dll + ": path not found! \n");
+
 			cef_dll = DKFile::local_assets + "/DKCef/win32Debug/libcef.dll";
+			if(!DKFile::PathExists(cef_dll))
+				return DKERROR(cef_dll + ": path not found! \n");
 #		else
 			elf_dll = DKFile::local_assets + "/DKCef/win32Release/chrome_elf.dll";
+			if(!DKFile::PathExists(elf_dll))
+				return DKERROR(elf_dll + ": path not found! \n");
+
 			cef_dll = DKFile::local_assets + "/DKCef/win32Release/libcef.dll";
+			if(!DKFile::PathExists(cef_dll))
+				return DKERROR(cef_dll + ": path not found! \n");
 #		endif
 		libelf = LoadLibrary(elf_dll.c_str());
 		if (!libelf){
@@ -136,10 +146,20 @@ bool DKCef::Init(){
 		DKString cef_dll;
 #		ifdef DEBUG
 			elf_dll = DKFile::local_assets + "/DKCef/win64Debug/chrome_elf.dll";
+			if(!DKFile::PathExists(elf_dll))
+				return DKERROR(elf_dll + ": path not found! \n");
+
 			cef_dll = DKFile::local_assets + "/DKCef/win64Debug/libcef.dll";
+			if(!DKFile::PathExists(cef_dll))
+				return DKERROR(cef_dll + ": path not found! \n");
 #		else
 			elf_dll = DKFile::local_assets + "/DKCef/win64Release/chrome_elf.dll";
+			if(!DKFile::PathExists(elf_dll))
+				return DKERROR(elf_dll + ": path not found! \n");
+
 			cef_dll = DKFile::local_assets + "/DKCef/win64Release/libcef.dll";
+			if(!DKFile::PathExists(cef_dll))
+				return DKERROR(cef_dll + ": path not found! \n");
 #		endif
 		libelf = LoadLibrary(elf_dll.c_str());
 		if (!libelf) {
@@ -224,14 +244,26 @@ bool DKCef::Init(){
 	//MAC's resources are in the bundle
 	#if !MAC
 		DKString rp = DKFile::local_assets + "/DKCef";
+		if(!DKFile::PathExists(rp))
+			return DKERROR(rp + ": path not found! \n");
 		CefString(&settings.resources_dir_path) = rp.c_str();
+
 		DKString lp = DKFile::local_assets + "/DKCef/locales";
+		if(!DKFile::PathExists(lp))
+			return DKERROR(lp + ": path not found! \n");
 		CefString(&settings.locales_dir_path) = lp.c_str();
 	#endif
+
 	DKString cp = DKFile::local_assets + "/USER";
+	if(!DKFile::PathExists(cp))
+		return DKERROR(cp + ": path not found! \n");
 	CefString(&settings.cache_path) = cp.c_str();
+
 	DKString lf = DKFile::local_assets + "/cef.log";
+	if(!DKFile::PathExists(lf))
+		return DKERROR(lf + ": path not found! \n");
 	CefString(&settings.log_file) = lf.c_str();
+
 #	ifdef WIN32
 #		if defined(WIN32) && !defined(WIN64)
 #			ifdef DEBUG
@@ -240,7 +272,6 @@ bool DKCef::Init(){
 				DKString ep = DKFile::local_assets + "/DKCef/win32Release/DKCefChild.exe";
 #			endif
 #		endif
-
 #		ifdef WIN64
 #			ifdef DEBUG
 				DKString ep = DKFile::local_assets + "/DKCef/win64Debug/DKCefChild.exe";
@@ -249,10 +280,8 @@ bool DKCef::Init(){
 #			endif
 #		endif
 
-		if(!DKFile::PathExists(ep)){
-		    DKWARN("file not found: "+ep+"\n");
-		    //TODO: disable multi-process
-		}
+		if(!DKFile::PathExists(ep))
+		    return DKERROR(ep + ": path not found! \n");//TODO: disable multi-process
 		CefString(&settings.browser_subprocess_path) = ep.c_str(); //DKCefChild.exe
 #	endif
 
@@ -263,15 +292,15 @@ bool DKCef::Init(){
 		DKString exename;
 		DKFile::GetExeName(exename);
 		DKString ep = exepath+"../Frameworks/"+exename+" Helper.app/Contents/MacOS/"+exename+" Helper";
+		if(!DKFile::PathExists(ep))
+			return DKERROR(ep + ": path not found! \n");
 		CefString(&settings.browser_subprocess_path) = ep.c_str(); //helper
 #	endif
 
 #	if LINUX
 		DKString ep = DKFile::local_assets + "/DKCef/DKCefChild";
-		if(!DKFile::PathExists(ep)){
-		    DKERROR("file not found: "+ep+"\n");
-		    //TODO: disable multi-process
-		}
+		if(!DKFile::PathExists(ep))
+		    return DKERROR(ep + ": path not found! \n");
 		CefString(&settings.browser_subprocess_path) = ep.c_str(); //DKCefChild
 #	endif
 
@@ -599,6 +628,8 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 
 		//Set Icon
 		DKString icon = DKFile::local_assets+"icon.ico";
+		if(!DKFile::PathExists(icon))
+				return DKERROR(icon + ": path not found! \n");
 		DKClass::CallFunc("DKCEFWindow::SetIcon", &icon, NULL);
 		
 #	if LINUX
@@ -642,7 +673,8 @@ bool DKCef::QueueDuktape(DKString& string){
 
 bool DKCef::Reload(const int& browser){
 	DKDEBUGFUNC(browser);
-	if(browser > (int)dkBrowsers.size()-1){ return false; } //error
+	if(browser > (int)dkBrowsers.size()-1)
+		return DKERROR("browser > (int)dkBrowsers.size()-1 ! \n");
 	dkBrowsers[browser].browser->Reload();
 	return true;
 }
@@ -667,18 +699,18 @@ bool DKCef::RunJavascript(const int& browser, DKString& string){
 	//	return false;
 	//}
 	if (!DKUtil::InMainThread())
-		DKWARN("not in the main thread\n");
+		DKWARN("not in the main thread! \n");
 	CefRefPtr<CefFrame> frame = dkBrowsers[browser].browser->GetMainFrame();
 	if(!frame)
-		return DKERROR("frame invalid\n");
+		return DKERROR("frame is invalid! \n");
 	frame->ExecuteJavaScript(string.c_str(), frame->GetURL(), 0);
 	return true;
 }
 
 bool DKCef::SetFocus(const int& browser) {
 	DKDEBUGFUNC(browser);
-	if(browser > (int)dkBrowsers.size() - 1)
-		return DKERROR("browser is greater than dkBrowsers.size()\n");
+	if(browser > (int)dkBrowsers.size()-1)
+		return DKERROR("browser > (int)dkBrowsers.size()-1 ! \n");
 	dkBrowsers[browser].browser->GetHost()->SendFocusEvent(true);
 	current_browser = dkBrowsers[browser].browser;
 	current_browser->GetHost()->Invalidate(PET_VIEW);
@@ -687,16 +719,16 @@ bool DKCef::SetFocus(const int& browser) {
 
 bool DKCef::SetKeyboardFocus(const int& browser){
 	DKDEBUGFUNC(browser);
-	if(browser > (int)dkBrowsers.size() - 1)
-		return DKERROR("browser is greater than dkBrowsers.size()\n");
+	if(browser > (int)dkBrowsers.size()-1)
+		return DKERROR("browser > (int)dkBrowsers.size()-1 ! \n");
 	keyboardFocus = browser;
 	return true;
 }
 
 bool DKCef::SetUrl(const int& browser, const DKString& url){
 	DKDEBUGFUNC(browser, url);
-	if(browser > (int)dkBrowsers.size() - 1)
-		return DKERROR("browser is greater than dkBrowsers.size()\n");
+	if(browser > (int)dkBrowsers.size()-1)
+		return DKERROR("browser > (int)dkBrowsers.size()-1 ! \n");
 	if(same(url, "chrome://plugins")){
 		RunPluginInfoTest(dkBrowsers[browser].browser);
 		return true;
@@ -721,34 +753,50 @@ bool DKCef::ShowDevTools(const int& browser){
 
 bool DKCef::Stop(const int& browser){
 	DKDEBUGFUNC(browser);
-	if(browser > (int)dkBrowsers.size() - 1)
-		return DKERROR("browser is greater than dkBrowsers.size()\n");
+	if(browser > (int)dkBrowsers.size()-1)
+		return DKERROR("browser > (int)dkBrowsers.size()-1 ! \n");
 	dkBrowsers[browser].browser->StopLoad();
 	return true;
 }
 
 bool DKCef::SendEvent(const DKString& id, const DKString& type, const DKString& value){
-	if(same(id,"DKLog")){ return false; }
+	if(same(id,"DKLog"))
+		return false;
 	DKDEBUGFUNC(id, type, value);
 	if (id.empty())
 		return DKERROR("id invalid\n");
 	if (type.empty())
 		return DKERROR("type invalid\n");
-	if(same(type,"second")){ return false; }
-	if(same(type,"mousemove")){ return false; }
-	if(same(type,"mousedown")){ return false; }
-	if(same(type,"mouseup")){ return false; }
-	if(same(type,"wheel")){ return false; }
-	if(same(type,"click")){ return false; }
-	if(same(type,"contextmenu")){ return false; }
-	if(same(type,"keypress")){ return false; }
-	if(same(type,"keydown")){ return false; }
-	if(same(type,"keyup")){ return false; }
-	if(same(type,"move")){ return false; }
-	if(same(type,"resize")){ return false; }
-	if(same(type,"minimize")){ return false; }
-	if(same(type,"maximize")){ return false; }
-	if(same(type,"restore")){ return false; }
+	if(same(type,"second"))
+		return false;
+	if(same(type,"mousemove"))
+		return false;
+	if(same(type,"mousedown"))
+		return false;
+	if(same(type,"mouseup"))
+		return false;
+	if(same(type,"wheel"))
+		return false;
+	if(same(type,"click"))
+		return false;
+	if(same(type,"contextmenu"))
+		return false;
+	if(same(type,"keypress"))
+		return false;
+	if(same(type,"keydown"))
+		return false;
+	if(same(type,"keyup"))
+		return false;
+	if(same(type,"move"))
+		return false;
+	if(same(type,"resize"))
+		return false;
+	if(same(type,"minimize"))
+		return false;
+	if(same(type,"maximize"))
+		return false;
+	if(same(type,"restore"))
+		return false;
 	if(dkBrowsers.size() <= 0)
 		return DKERROR("dkBrowsers.size() <= 0\n");
 
