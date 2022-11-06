@@ -41,7 +41,7 @@ double DKOSGRmlSystem::GetElapsedTime(){
 }
 
 int DKOSGRmlSystem::TranslateString(Rml::String& translated, const Rml::String& input){
-	//DKDEBUGFUNC(translated, input);
+	DKDEBUGFUNC(translated, input);
 	translated = input;
 	return 0;
 }
