@@ -51,6 +51,10 @@ bool DKOSGWindow::Init(){
 	DKFile::RemoveExtention(title);
 	CreateWin(title, 0, 0, 0, 0);
 
+	DKClass::RegisterFunc("DKOSGWindow::TestInt", &DKOSGWindow::TestInt, this);
+    DKClass::RegisterFunc("DKOSGWindow::TestString", &DKOSGWindow::TestString, this);
+    DKClass::RegisterFunc("DKOSGWindow::TestReturnInt", &DKOSGWindow::TestReturnInt, this);
+    DKClass::RegisterFunc("DKOSGWindow::TestReturnString", &DKOSGWindow::TestReturnString, this);
 	DKClass::RegisterFunc("DKOSGWindow::GetX", &DKOSGWindow::GetX, this);
 	DKClass::RegisterFunc("DKOSGWindow::GetY", &DKOSGWindow::GetY, this);
 	DKClass::RegisterFunc("DKOSGWindow::SetX", &DKOSGWindow::SetX, this);
