@@ -593,7 +593,7 @@ bool DKSDLWindow::drawBackground(SDL_Renderer *renderer, int w, int h){
 }
 
 void DKSDLWindow::Process() {
-    //DKDEBUGFUNC();
+    //DKDEBUGFUNC();  //EXCESSIVE LOGGING
     if(SDL_GetWindowFlags(window) & SDL_WINDOW_HIDDEN)
         DKUtil::Sleep(1000); //FIXME - look for a better way to save cpu usage here
 
@@ -619,7 +619,7 @@ void DKSDLWindow::Process() {
 }
 
 int DKSDLWindow::EventFilter(void* userdata, SDL_Event* event) {
-    //DKDEBUGFUNC(userdata, event);
+    //DKDEBUGFUNC(userdata, event);  //EXCESSIVE LOGGING
     if(event->type == SDL_WINDOWEVENT) {
         switch(event->window.event) {
             case SDL_WINDOWEVENT_MOVED: {
@@ -678,7 +678,7 @@ int DKSDLWindow::EventFilter(void* userdata, SDL_Event* event) {
 }
 
 bool DKSDLWindow::handle(SDL_Event *event) {
-    //DKDEBUGFUNC(event);
+    //DKDEBUGFUNC(event);  //EXCESSIVE LOGGING
     switch(event->type) {
         case SDL_QUIT: {
             DKApp::Exit();

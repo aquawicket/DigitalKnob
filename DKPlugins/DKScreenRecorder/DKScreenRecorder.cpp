@@ -128,7 +128,7 @@ bool DKScreenRecorder::Stop(){
 }
 
 void DKScreenRecorder::Loop(){
-	//DKDEBUGFUNC();
+	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 	//https://stackoverflow.com/questions/17575455/video-recording-is-too-fast#_=_
 	if(videoWriter.isOpened()){
 		//DrawBuffer(); //TODO: slow computers can't keep up with 30fps. Videos play too fast. 
@@ -163,7 +163,7 @@ void DKScreenRecorder::Loop(){
 }
 
 void DKScreenRecorder::DrawBuffer(){
-	//DKDEBUGFUNC();
+	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 #ifdef WIN32
 	//Capture Desktop with DirectX
 	if(capture == "DIRECTX"){

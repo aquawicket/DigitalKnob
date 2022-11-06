@@ -175,7 +175,7 @@ bool DKSDLAudio::UnMute(const void* input, void* output){
 }
 
 void DKSDLAudio::Process(){
-	//DKDEBUGFUNC();
+	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 	/*
 	if(Mix_PlayingMusic() && !Mix_PausedMusic()){
 		if(((SDL_GetTicks() - lastTime) / 1000) > (unsigned int)trk.position){

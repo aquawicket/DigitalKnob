@@ -68,7 +68,7 @@ DKCEFWindow::DKCEFWindow(){
 }
 
 void DKCEFWindow::DoFrame(){
-	//DKDEBUGFUNC();
+	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 /*
 #if WIN32
 	//Display FPS
