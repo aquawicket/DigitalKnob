@@ -143,7 +143,7 @@ public:
 	}
 	
 	static bool CallFunc(const DKString& name, const void* input = NULL, void* output = NULL){
-		DKDEBUGFUNC(name, input, output); //excessive logging
+		DKDEBUGFUNC(name);//, input, output); //excessive logging
 		//if(!(*functions)[name])
 		if(!HasFunc(name))
 			return DKERROR(name+"() function not registered \n");
