@@ -132,11 +132,11 @@ ANDROID_dk_libRelease	(${CEF_BINARY}/${OS}/libcef_dll_wrapper/${RELEASE_DIR}/lib
 
 ### GENERATE ###
 dk_setPath					(${CEF_BINARY}/${BUILD_DIR})
-WIN_dk_queueCommand			(${DKCMAKE_BUILD} -DUSE_SANDBOX=Off ${CEF_BINARY})
-APPLE_dk_queueCommand		(${DKCMAKE_BUILD} ${CEF_BINARY})
-LINUX_dk_queueCommand		(${DKCMAKE_BUILD} ${CEF_BINARY})
-RASPBERRY_dk_queueCommand	(${DKCMAKE_BUILD} -DPROJECT_ARCH="linuxarm" ${CEF_BINARY})
-ANDROID_dk_queueCommand		(${DKCMAKE_BUILD} -DUSE_SANDBOX=Off ${CEF_BINARY})
+WIN_dk_queueCommand			(${DKCMAKE_BUILD} -DUSE_SANDBOX=OFF ${CEF_BINARY})
+APPLE_dk_queueCommand		(${DKCMAKE_BUILD} -DUSE_SANDBOX=OFF ${CEF_BINARY})
+LINUX_dk_queueCommand		(${DKCMAKE_BUILD} -DUSE_SANDBOX=OFF ${CEF_BINARY})
+RASPBERRY_dk_queueCommand	(${DKCMAKE_BUILD} -DUSE_SANDBOX=OFF -DPROJECT_ARCH="linuxarm" ${CEF_BINARY})
+ANDROID_dk_queueCommand		(${DKCMAKE_BUILD} -DUSE_SANDBOX=OFF -DPROJECT_ARCH="linuxarm" ${CEF_BINARY})
 
 
 ### COMPILE ###
