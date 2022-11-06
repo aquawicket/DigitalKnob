@@ -186,9 +186,10 @@ bool DKCef::Init(){
 	// checkout detailed settings options http://magpcss.org/ceforum/apidocs/projects/%28default%29/_cef_settings_t.html
 	// CefString(&settings.log_file).FromASCII("");
 	DKV8::SetFlags();
+
 	CefSettings settings;
-	if(DKClass::DKValid("DKWindow,DKWindow0"))
-		settings.windowless_rendering_enabled = true;
+	if(same(DKV8::multi_threaded_message_loop, "ON"))
+		settings.multi_threaded_message_loop = true;
 	void* sandbox_info = NULL;
 	if(same(DKV8::sandbox, "OFF"))
 		settings.no_sandbox = true;
@@ -199,24 +200,27 @@ bool DKCef::Init(){
 			//sandbox_info = scoped_sandbox.sandbox_info();
 #		endif
 	}
-	if(same(DKV8::multi_threaded_message_loop, "ON"))
-		settings.multi_threaded_message_loop = true;
+	if(DKClass::DKValid("DKWindow,DKWindow0"))
+		settings.windowless_rendering_enabled = true;
+
 	if(same(DKV8::multi_process, "ON"))
 		DKV8::singleprocess = false;
 	else
 		DKV8::singleprocess = true;
-	if(!same(DKV8::log_severity, "ON")) //OFF
-		settings.log_severity = LOGSEVERITY_DISABLE;
-	settings.uncaught_exception_stack_size = 100;
+
 	//settings.accept_language_list;
 	//settings.background_color;
 	//settings.command_line_args_disabled;
 	//settings.context_safety_implementation;
 	//settings.ignore_certificate_errors;
 	//settings.javascript_flags;
+	//settings.log_file = "";
+	//if(!same(DKV8::log_severity, "ON"))
+	//	settings.log_severity = LOGSEVERITY_DISABLE;
 	//settings.pack_loading_disabled;
 	//settings.persist_session_cookies;
 	//settings.persist_user_preferences;
+	//settings.uncaught_exception_stack_size = 100;
 	//MAC's resources are in the bundle
 #	ifndef MAC
 		DKString rp = DKFile::local_assets + "DKCef";
@@ -252,7 +256,7 @@ bool DKCef::Init(){
 		CefString(&settings.browser_subprocess_path) = ep.c_str(); //DKCefChild.exe
 #	endif
 
-#	ifdef MAC
+#	if MAC
 		DKString exepath;
 		DKFile::GetExePath(exepath);
 		DKINFO("exepath="+exepath+"\n");
@@ -262,7 +266,7 @@ bool DKCef::Init(){
 		CefString(&settings.browser_subprocess_path) = ep.c_str(); //helper
 #	endif
 
-#	ifdef LINUX
+#	if LINUX
 		DKString ep = DKFile::local_assets + "DKCef/DKCefChild";
 		if(!DKFile::PathExists(ep)){
 		    DKERROR("file not found: "+ep+"\n");
@@ -280,7 +284,7 @@ bool DKCef::Init(){
 	CefString(&settings.user_agent).FromASCII(userAgent.c_str());
 	DKINFO("Cef User Agent: "+CefString(&settings.user_agent).ToString()+"\n");
     //FIXME - crashes on linux
-    int result2 = CefInitialize(args, settings, cefApp.get(), sandbox_info);
+    bool result2 = CefInitialize(args, settings, cefApp.get(), sandbox_info);
 	if (!result2)
 		return DKERROR("CefInitialize error");
 	DKUtil::GetThreadId(cefThreadId); //store the main Cef threadId
