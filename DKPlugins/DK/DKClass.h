@@ -108,7 +108,7 @@ public:
 
 	template<class T>
     static bool RegisterFunc(const DKString& name, bool (T::*func) (const void*, void*), T* _this){
-		DKDEBUGFUNC(name, func, _this);
+		DKDEBUGFUNC(name);//, func, _this);
         if(!functions)
             functions = new DKFunctionMap();
         if(HasFunc(name))
