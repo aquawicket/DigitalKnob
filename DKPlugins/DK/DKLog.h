@@ -284,9 +284,11 @@ public:
 			return;
 		int arg_count = sizeof...(Args);
 		std::ostringstream out;
-		DKStringArray name_array;
-		toStringArray(name_array, names, ",");
-		getTemplateArgs(out, name_array, args...);
+		if(!names.empty()){
+			DKStringArray name_array;
+			toStringArray(name_array, names, ",");
+			getTemplateArgs(out, name_array, args...);
+		}
 		DKString func_string = "";
 		for (unsigned int i = 1; i < count; i++)
 			func_string += "  ";
