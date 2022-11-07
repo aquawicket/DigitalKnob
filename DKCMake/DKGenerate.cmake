@@ -688,7 +688,7 @@ if(MAC)
 		add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory "${CEF_BINARY}/$<CONFIG>/Chromium Embedded Framework.framework" "$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/Chromium Embedded Framework.framework")
 	endif()
 	
-	# Copy the DKCefChild into the app bundle
+	# Copy the DKCefChild.app into the app bundle as "DKAppName Helper.app"
 	if(EXISTS "${DKPLUGINS}/DKCefChild/${OS}/Release/DKCefChild.app")
 		dk_info("Adding ${APP_NAME} Helper to bundle . . .")
 		add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory "${DKPLUGINS}/DKCefChild/${OS}/$<CONFIG>/DKCefChild.app" "$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/${APP_NAME} Helper.app")
@@ -697,7 +697,7 @@ if(MAC)
 	
 	# Make bundle open with Terminal
 	# https://github.com/pyinstaller/pyinstaller/issues/5154#issuecomment-690646012
-	if(TRUE)
+	if(FALSE)
 		dk_info("Making bundle app run in terminal on double-click . . .")
 		set(TERMINAL_SCRIPT 
 			"\#!/bin/bash\n"
