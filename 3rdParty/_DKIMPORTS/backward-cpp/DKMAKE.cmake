@@ -9,8 +9,8 @@ dk_import(https://github.com/bombela/backward-cpp.git)
 dk_include			(${BACKWARD-CPP})
 WIN_dk_libDebug		(${BACKWARD-CPP}/${DEBUG_DIR}/backward.lib)
 WIN_dk_libRelease	(${BACKWARD-CPP}/${RELEASE_DIR}/backward.lib)
-UNIX_dk_libDebug	(${BACKWARD-CPP}/${DEBUG_DIR}/backward.a)
-UNIX_dk_libRelease	(${BACKWARD-CPP}/${RELEASE_DIR}/backward.a)
+UNIX_dk_libDebug	(${BACKWARD-CPP}/${DEBUG_DIR}/libbackward.a)
+UNIX_dk_libRelease	(${BACKWARD-CPP}/${RELEASE_DIR}/libbackward.a)
 
 
 ### GENERATE ###
