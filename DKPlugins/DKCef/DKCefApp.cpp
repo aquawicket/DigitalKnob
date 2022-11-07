@@ -260,12 +260,11 @@ bool DKCefApp::SendEvent(const DKString& id, const DKString& type, const DKStrin
 */
 
 void DKCefApp::OnBeforeCommandLineProcessing(const CefString& process_type, CefRefPtr<CefCommandLine> command_line){
-	DKDEBUGFUNC(process_type, command_line);
-	DK_UNUSED(process_type);
-#ifndef DEBUG
-	CEF_REQUIRE_UI_THREAD();
+#ifdef DKCefChild
+	return;
 #endif
-#ifndef DKCefChild
+	DKDEBUGFUNC(process_type, command_line);
+
 	if(!same(DKV8::multi_process, "ON"))
 		command_line->AppendSwitchWithValue("single-process", "1");
 	if(same(DKV8::enable_system_flash, "ON"))
@@ -302,7 +301,7 @@ void DKCefApp::OnBeforeCommandLineProcessing(const CefString& process_type, CefR
 		//command_line->AppendSwitchWithValue("ppapi-flash-path", "/usr/lib/pepperflashplugin-nonfree/libpepflashplayer.so");
 #	endif
 
-#endif //!DKCefChild
+//#endif //!DKCefChild
 
 #if USE_DKV8
 	DKV8::v8handler = new DKCefV8Handler();
