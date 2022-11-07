@@ -115,6 +115,7 @@ bool DKSDLCefHandler::DoClose(CefRefPtr<CefBrowser> browser) {
 
 void DKSDLCefHandler::DoFrame(){
 	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
+	CEF_REQUIRE_UI_THREAD();
 	if(!DKApp::active)
 		return;
 	CefDoMessageLoopWork(); //FIXME: this breaks SDL keyboard events for Mac OSX
