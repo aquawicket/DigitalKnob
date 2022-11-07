@@ -586,6 +586,7 @@ endif(WIN_64)
 
 #######
 if(MAC)
+	set(DKMAC_USE_WRAPPER 1)
 	###################### Backup Executable ###########################
 	if(DEBUG)
 		dk_copy(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app.backup TRUE)
@@ -640,7 +641,11 @@ if(MAC)
 	dk_set(PRODUCT_BUNDLE_IDENTIFIER com.digitalknob.${APP_NAME})
 	dk_set(CFBundleDevelopmentRegion en)
 	dk_set(CFBundleDisplayName ${APP_NAME})
-	dk_set(CFBundleExecutable wrapper) ##${APP_NAME})
+	if(DKMAC_USE_WRAPPER)
+		dk_set(CFBundleExecutable wrapper)
+	else()
+		dk_set(CFBundleExecutable ${APP_NAME})
+	endif()
 	dk_set(CFBundleGetInfoString "DigitalKnob")
 	dk_set(CFBundleIconFile "icons.icns")
 	#dk_set(CFBundleIconFiles "icons.icns")
@@ -697,7 +702,7 @@ if(MAC)
 	
 	# Make bundle open with Terminal
 	# https://github.com/pyinstaller/pyinstaller/issues/5154#issuecomment-690646012
-	if(FALSE)
+	if(DKMAC_USE_WRAPPER)
 		dk_info("Making bundle app run in terminal on double-click . . .")
 		set(TERMINAL_SCRIPT 
 			"\#!/bin/bash\n"
