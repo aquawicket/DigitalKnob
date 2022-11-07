@@ -309,10 +309,8 @@ void DKCefApp::OnBeforeCommandLineProcessing(const CefString& process_type, CefR
 }
 
 void DKCefApp::OnBrowserCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDictionaryValue> extra_info) {
+	CEF_REQUIRE_RENDERER_THREAD();
 	DKDEBUGFUNC(browser, extra_info);
-#ifndef DEBUG
-	CEF_REQUIRE_UI_THREAD();
-#endif
 
 #if USE_DKV8
 	DKV8::_browser = browser;
@@ -326,18 +324,14 @@ void DKCefApp::OnBrowserCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDict
 }
 
 void DKCefApp::OnContextInitialized() {
-	DKDEBUGFUNC();
-#ifndef DEBUG
 	CEF_REQUIRE_UI_THREAD();
-#endif
+	DKDEBUGFUNC();
 	//CefRefreshWebPlugins(); //FIXME
 }
 
 void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context) {
+	CEF_REQUIRE_RENDERER_THREAD();
 	DKDEBUGFUNC(browser, frame, context);
-#ifndef DEBUG
-	CEF_REQUIRE_UI_THREAD();
-#endif
 
 #if USE_DKV8
 	//Load all of the c++ functions into the V8 context.
@@ -351,13 +345,12 @@ void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 }
 
 bool DKCefApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefProcessId source_process, CefRefPtr<CefProcessMessage> message) {
+	CEF_REQUIRE_UI_THREAD();
 	DKDEBUGFUNC(browser, source_process, message);
 	//DK_UNUSED(browser);
 	//DK_UNUSED(source_process);
 	//DK_UNUSED(message);
-#ifndef DEBUG
-	CEF_REQUIRE_UI_THREAD();
-#endif
+
 	if(DKV8::singleprocess)
 		return DKERROR("message system disabled in single-process mode\n");
 	CefRefPtr<CefListValue> args = message->GetArgumentList();
