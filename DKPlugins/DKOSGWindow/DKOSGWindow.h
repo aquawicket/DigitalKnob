@@ -48,6 +48,11 @@
 #include "DKOSGViewer/DKOSGViewer.h"
 
 
+// include the plugins we need
+USE_OSGPLUGIN(freetype)
+USE_OSGPLUGIN(osg)
+
+
 class DKOSGWindow : public osgGA::GUIEventHandler, public DKObjectT<DKOSGWindow>
 {
 public:

@@ -87,14 +87,14 @@ class StackWalkerToConsole : public StackWalker{
 protected:
 	// do not print modules initialization
 	void OnLoadModule(LPCSTR, LPCSTR, DWORD64, DWORD, DWORD, LPCSTR, LPCSTR, ULONGLONG){
-		DKDEBUGFUNC();
+		//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 	}
 	// do not print symbols initialization
 	void OnSymInit(LPCSTR, DWORD, LPCSTR){
 		DKDEBUGFUNC();
 	}
 	virtual void OnOutput(LPCSTR szText){
-		DKDEBUGFUNC(szText);
+		//DKDEBUGFUNC(szText);  //EXCESSIVE LOGGING
 		DKWARN(szText);
 	}
 };
