@@ -586,7 +586,8 @@ endif(WIN_64)
 
 #######
 if(MAC)
-	set(DKMAC_USE_WRAPPER 1)
+	#set(DKMAC_USE_WRAPPER ON)
+	
 	###################### Backup Executable ###########################
 	if(DEBUG)
 		dk_copy(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app.backup TRUE)
