@@ -39,6 +39,7 @@
 	#include <osgViewer/ViewerEventHandlers>
 	#include <osg/PositionAttitudeTransform>
 	#include <osgGA/EventQueue>
+	#include <osgDB/ReadFile>
 //WARNING_ENABLE
 
 #include "DK/DK.h"
