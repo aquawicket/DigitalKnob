@@ -28,6 +28,8 @@
 #ifndef DKCef_H
 #define DKCef_H
 
+#define USE_DKV8 1
+
 //WARNING_DISABLE
 	#include <include/cef_client.h>
 	#include <include/cef_render_handler.h>

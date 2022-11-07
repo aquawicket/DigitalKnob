@@ -186,7 +186,7 @@ bool DKCef::Init(){
 		if(!library_loader.LoadInMain())
 			return 1;
 #	endif
-#	ifdef WIN32
+#	if WIN
 		CefMainArgs args(GetModuleHandle(NULL));
 #	else
 		CefMainArgs args(DKApp::argc, DKApp::argv);

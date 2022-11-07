@@ -36,7 +36,7 @@
 #if HAVE_boxer
 	#include <boxer/boxer.h>
 #endif
-#if ANDROID // && HAVE_sdl
+#if ANDROID && HAVE_sdl
 	#include <SDL.h>
 #endif
 //WARNING_ENABLE
