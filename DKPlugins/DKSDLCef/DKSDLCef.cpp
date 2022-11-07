@@ -442,7 +442,7 @@ bool DKSDLCef::Draw() {
 	if (!cefHandler->cef_texture.size())
 		return DKERROR("!cef_texture.size()\n");
 	if (!cefHandler->cef_texture[0])
-		return DKERROR("cefHandler->cef_texture[0] is invalid\n");
+		return DKREDINFO("cefHandler->cef_texture[0] is invalid! \n");
 
 	SDL_Rect texture_rect;
 	texture_rect.y = dkCef->dkBrowsers[0].top; // the y coordinate
