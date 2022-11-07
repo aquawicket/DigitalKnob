@@ -92,7 +92,7 @@ public:
 	}
 
 	static bool DKValid(const DKString& data){
-		DKDEBUGFUNC(data); //data = (class,id)
+		//DKDEBUGFUNC(data); //data = (class,id)    // EXCESSIVE LOGGING
 		return DKClass::_Valid(data);
 	}
 

@@ -76,7 +76,7 @@ DKObject* DKClass::_Get(const DKString& data){
 }
 
 bool DKClass::_Valid(const DKString& data){
-	DKDEBUGFUNC(data);
+	//DKDEBUGFUNC(data);  // EXCESSIVE LOGGING
 	DKStringArray arry;
 	toStringArray(arry, data, ",");
 	if(classes && (*classes)[arry[0]]){
