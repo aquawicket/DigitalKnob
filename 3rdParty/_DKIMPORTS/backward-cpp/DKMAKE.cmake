@@ -14,9 +14,9 @@ dk_include			(${BACKWARD-CPP})
 
 
 ### GENERATE ###
-dk_setPath		(${BACKWARD-CPP}/${BUILD_DIR})
-dk_queueCommand	(${DKCMAKE_BUILD} ${BACKWARD-CPP})
+#dk_setPath		(${BACKWARD-CPP}/${BUILD_DIR})
+#dk_queueCommand	(${DKCMAKE_BUILD} ${BACKWARD-CPP})
 
 
 ### COMPILE ###
-dk_build(${BACKWARD-CPP_FOLDER})
+#dk_build(${BACKWARD-CPP_FOLDER})
