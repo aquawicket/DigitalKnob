@@ -50,13 +50,15 @@
 
 
 // include the plugins we need
+/*
 USE_OSGPLUGIN(ive)
 USE_OSGPLUGIN(osg)
 USE_OSGPLUGIN(osg2)
 USE_OSGPLUGIN(rgb)
 USE_OSGPLUGIN(OpenFlight)
-//USE_OSGPLUGIN(freetype)
-
+#if HAVE_freetype
+	USE_OSGPLUGIN(freetype)
+#endif
 
 USE_DOTOSGWRAPPER_LIBRARY(osg)
 USE_DOTOSGWRAPPER_LIBRARY(osgFX)
@@ -79,6 +81,7 @@ USE_SERIALIZER_WRAPPER_LIBRARY(osgSim)
 USE_SERIALIZER_WRAPPER_LIBRARY(osgTerrain)
 USE_SERIALIZER_WRAPPER_LIBRARY(osgText)
 USE_SERIALIZER_WRAPPER_LIBRARY(osgVolume)
+*/
 
 
 class DKOSGWindow : public osgGA::GUIEventHandler, public DKObjectT<DKOSGWindow>
