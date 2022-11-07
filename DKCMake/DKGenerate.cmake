@@ -683,9 +683,9 @@ if(MAC)
 	)
 	
 	# Copy the CEF framework into the app bundle
-	if(EXISTS ${CEF})
+	if(EXISTS ${CEF_BINARY})
 		dk_info("Adding Chromium Embedded Framework.framework to bundle . . .")
-		add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory "${CEF}/$<CONFIG>/Chromium Embedded Framework.framework" "$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/Chromium Embedded Framework.framework")
+		add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory "${CEF_BINARY}/$<CONFIG>/Chromium Embedded Framework.framework" "$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/Chromium Embedded Framework.framework")
 	endif()
 	
 	# Copy the DKCefChild into the app bundle
