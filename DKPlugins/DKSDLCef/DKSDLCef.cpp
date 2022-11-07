@@ -413,6 +413,7 @@ bool DKSDLCef::SetupCef() {
 	cefHandler->dkSdlCef = this;
 	dkCef->cefHandler = cefHandler;
 	DKApp::AppendLoopFunc(&DKSDLCefHandler::DoFrame, cefHandler);
+	//CefRunMessageLoop();
 	return true;
 }
 
