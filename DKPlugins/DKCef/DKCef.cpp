@@ -259,10 +259,8 @@ bool DKCef::Init(){
 		return DKERROR(cp + ": path not found! \n");
 	CefString(&settings.cache_path) = cp.c_str();
 
-	DKString lf = DKFile::local_assets + "/cef.log";
-	if(!DKFile::PathExists(lf))
-		return DKERROR(lf + ": path not found! \n");
-	CefString(&settings.log_file) = lf.c_str();
+	//DKString lf = DKFile::local_assets + "/cef.log";
+	//CefString(&settings.log_file) = lf.c_str();
 
 #	ifdef WIN32
 #		if defined(WIN32) && !defined(WIN64)
