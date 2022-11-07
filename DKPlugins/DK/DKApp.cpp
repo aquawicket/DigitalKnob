@@ -31,7 +31,7 @@
 
 //WARNING_DISABLE
 #if HAVE_backward_cpp
-	#include <backward.hpp>
+	//#include <backward.hpp>
 #endif
 #if HAVE_boxer
 	#include <boxer/boxer.h>
