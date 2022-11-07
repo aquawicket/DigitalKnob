@@ -296,7 +296,7 @@ bool DKCef::Init(){
 		DKFile::GetExeName(exename);
 		DKINFO("exename="+exename+"\n");
 		
-		DKString ep = apppath+"/../../Frameworks/"+exename+" Helper.app/Contents/MacOS/"+exename+" Helper";
+		DKString ep = apppath+"../Frameworks/"+exename+" Helper.app/Contents/MacOS/"+exename+" Helper";
 		if(!DKFile::PathExists(ep))
 			return DKERROR(ep + ": path not found! \n");
 		CefString(&settings.browser_subprocess_path) = ep.c_str(); //helper
