@@ -30,10 +30,13 @@
 #include "DK/DKFile.h"
 
 //WARNING_DISABLE
+#if HAVE_backward_cpp
+	#include <backward.hpp>
+#endif
 #if HAVE_boxer
 	#include <boxer/boxer.h>
 #endif
-#if ANDROID
+#if ANDROID // && HAVE_sdl
 	#include <SDL.h>
 #endif
 //WARNING_ENABLE

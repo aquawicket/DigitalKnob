@@ -34,6 +34,7 @@ endif()
 if(ANDROID)
 	dk_depend(sdl)
 endif()
+dk_depend(backward-cpp)
 dk_depend(boxer)
 dk_depend(fmt)
 
