@@ -32,7 +32,8 @@
 #include <osgViewer/CompositeViewer>
 //WARNING_ENABLE
 
-#if !defined(DKLIB)
+//#if !defined(DKLIB)
+#ifdef DKAPP
 
 //WARNING_DISABLE
 #ifdef HAVE_osgDB
