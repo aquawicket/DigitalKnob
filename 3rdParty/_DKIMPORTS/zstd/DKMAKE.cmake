@@ -9,8 +9,8 @@ dk_import(https://github.com/facebook/zstd.git)
 dk_include			(${ZSTD}/lib)
 WIN_dk_libDebug		(${ZSTD}/${OS}/${DEBUG_DIR}/zstd.lib)
 WIN_dk_libRelease	(${ZSTD}/${OS}/${RELEASE_DIR}/zstd.lib)
-UNIX_dk_libDebug	(${ZSTD}/${OS}/${DEBUG_DIR}/libzstd.a)
-UNIX_dk_libRelease	(${ZSTD}/${OS}/${RELEASE_DIR}/libzstd.a)
+UNIX_dk_libDebug	(${ZSTD}/${OS}/${DEBUG_DIR}/lib/libzstd.a)
+UNIX_dk_libRelease	(${ZSTD}/${OS}/${RELEASE_DIR}/lib/libzstd.a)
 
 
 ### 3RDPARTY LINK ###
