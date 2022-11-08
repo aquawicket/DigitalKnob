@@ -41,6 +41,8 @@ WIN_RELEASE_dk_setPath	(${GZIP}/${OS}/${RELEASE_DIR})
 WIN_RELEASE_dk_queueMsys(${DKCONFIGURE_BUILD})
 WIN_RELEASE_dk_queueMsys(make)
 
+APPLE_DEBUG_dk_setPath			(${GZIP})
+APPLE_DEBUG_dk_queueCommand		(autoconf)
 APPLE_DEBUG_dk_setPath			(${GZIP}/${OS}/${DEBUG_DIR})
 APPLE_DEBUG_dk_queueCommand		(${DKCONFIGURE_BUILD})
 APPLE_DEBUG_dk_queueCommand		(make)
