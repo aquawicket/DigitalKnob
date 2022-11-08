@@ -1,9 +1,11 @@
 # https://git.savannah.gnu.org/cgit/gzip.git
 # git://git.savannah.gnu.org/gzip.git
+# https://github.com/kunpengcompute/gzip.git
 
 
 ### IMPORT ###
-dk_import(git://git.savannah.gnu.org/gzip.git)
+#dk_import(git://git.savannah.gnu.org/gzip.git)
+dk_import(https://github.com/kunpengcompute/gzip.git)
 
 
 ### LINK ###
@@ -41,8 +43,8 @@ WIN_RELEASE_dk_setPath	(${GZIP}/${OS}/${RELEASE_DIR})
 WIN_RELEASE_dk_queueMsys(${DKCONFIGURE_BUILD})
 WIN_RELEASE_dk_queueMsys(make)
 
-APPLE_DEBUG_dk_setPath			(${GZIP})
-APPLE_DEBUG_dk_queueCommand		(autoconf)
+#APPLE_DEBUG_dk_setPath			(${GZIP})
+#APPLE_DEBUG_dk_queueCommand	(autoconf)
 APPLE_DEBUG_dk_setPath			(${GZIP}/${OS}/${DEBUG_DIR})
 APPLE_DEBUG_dk_queueCommand		(${DKCONFIGURE_BUILD})
 APPLE_DEBUG_dk_queueCommand		(make)
