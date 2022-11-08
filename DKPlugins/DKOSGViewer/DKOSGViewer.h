@@ -43,7 +43,6 @@
 //WARNING_ENABLE
 
 
-/*
 #ifdef HAVE_osgdb_osg
     USE_OSGPLUGIN(osg)
 	USE_OSGPLUGIN(osg2)
@@ -306,7 +305,7 @@
     USE_SERIALIZER_WRAPPER_LIBRARY(osgVolume)
 #endif
 ////
-*/
+
 
 #if HAVE_osgViewer
 #ifdef WIN32
@@ -323,7 +322,7 @@
 #endif
 #endif //HAVE_osgViewer
 
-#endif //!DKLIB
+#endif //DKAPP
 
 class DKOSGViewer : public DKObjectT<DKOSGViewer>
 {
