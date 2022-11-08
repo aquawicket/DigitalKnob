@@ -35,6 +35,7 @@
 //WARNING_ENABLE
 
 #include "DK/DKFile.h"
+#include "DKCef/DKCef.h"
 
 
 typedef CefRefPtr<CefListValue> CefArgs;
