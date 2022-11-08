@@ -16,6 +16,7 @@ UNIX_dk_libRelease	(${ZSTD}/${OS}/${RELEASE_DIR}/lib/libzstd.a)
 ### 3RDPARTY LINK ###
 dk_set(ZSTD_CMAKE -DZSTD_INCLUDE_DIR=${ZSTD}/lib) #TODO
 
+
 ### GENERATE ###
 dk_setPath(${ZSTD}/${BUILD_DIR})
 dk_queueCommand(${DKCMAKE_BUILD} ${ZSTD}/build/cmake)
