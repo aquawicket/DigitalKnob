@@ -23,9 +23,10 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #include "DK/stdafx.h"
 #include "DKCef/DKCefApp.h"
+#include "DKCef/DKCef.h"
+
 
 bool DKV8::singleprocess = true;
 CefRefPtr<CefBrowser> DKV8::_browser = NULL;
