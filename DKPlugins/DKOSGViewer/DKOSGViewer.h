@@ -41,6 +41,8 @@
 #endif
 //WARNING_ENABLE
 
+
+/*
 #ifdef HAVE_osgdb_osg
     USE_OSGPLUGIN(osg)
 	USE_OSGPLUGIN(osg2)
@@ -303,6 +305,7 @@
     USE_SERIALIZER_WRAPPER_LIBRARY(osgVolume)
 #endif
 ////
+*/
 
 #if HAVE_osgViewer
 #ifdef WIN32
