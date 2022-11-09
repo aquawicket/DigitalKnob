@@ -9,8 +9,8 @@ dk_import(https://github.com/kunpengcompute/gzip.git)
 
 
 ### LINK ###
-DEBUG_dk_include		(${GZIP}/${OS}/${DEBUG_DIR}/lib)
-DEBUG_dk_include		(${GZIP}/${OS}/${RELEASE_DIR}/lib)
+#DEBUG_dk_include		(${GZIP}/${OS}/${DEBUG_DIR}/lib)
+#RELEASE_dk_include		(${GZIP}/${OS}/${RELEASE_DIR}/lib)
 WIN_dk_libDebug			(${GZIP}/${OS}/${DEBUG_DIR}/lib/gzip.a)
 WIN_dk_libRelease		(${GZIP}/${OS}/${RELEASE_DIR}/lib/gzip.a)
 APPLE_dk_libDebug		(${GZIP}/${OS}/${DEBUG_DIR}/lib/libgzip.a)
