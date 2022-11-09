@@ -72,3 +72,5 @@ Let continue to strip down DKWidget.js because it's all moving to DK.js and DKWi
 * Make EVERY event go through DKDomEventTarget.js event without a DOM
 * keep track of events in DKDomEventTarget.js
 
+*** dk_shell ***
+* make dk_shell point to dk_msys on WIN_HOST and dk_command on all other hosts

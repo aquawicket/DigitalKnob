@@ -4508,5 +4508,40 @@ function(dk_findFiles path pattern RESULT)
 endfunction()
 
 
+###############################################################################
+# dk_shell()
+#
+#	TODO
+#
+#	@args		- TODO
+#
+macro(dk_shell args)
+	DKDEBUGFUNC(${ARGV})
+	if(WIN_HOST)
+		dk_msys(${ARGV})
+	else()
+		dk_command(${ARGV})
+	endif()
+endmacro()
+dk_createOsMacros("dk_shell")
+
+
+###############################################################################
+# dk_queueShell()
+#
+#	TODO
+#
+#	@args		- TODO
+#
+macro(dk_queueShell args)
+	DKDEBUGFUNC(${ARGV})
+	if(WIN_HOST)
+		dk_queueMsys(${ARGV})
+	else()
+		dk_queueCommand(${ARGV})
+	endif()
+endmacro()
+dk_createOsMacros("dk_queueShell")
+
 
 include(${DKFunctions_ext})
