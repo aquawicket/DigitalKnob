@@ -244,7 +244,7 @@ if(ALL_LIBS)
 	dk_enable(osgdb_deprecated_osgwidget)
 	
 	#osgdb_serializers
-	if(NOT LINUX)
+	if(NOT LINUX AND NOT APPLE)
 		dk_enable(osgdb_serializers_osg)
 	endif()
 	dk_enable(osgdb_serializers_osganimation)
