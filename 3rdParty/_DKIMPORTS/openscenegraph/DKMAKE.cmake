@@ -231,7 +231,7 @@ if(ALL_LIBS)
 	
 	# osgdb_deprecated
 	dk_enable(osgdb_deprecated_osg)
-	if(NOT LINUX AND NOT APPLE)
+	if(NOT WIN AND NOT LINUX AND NOT APPLE)
 		dk_enable(osgdb_deprecated_osganimation)
 	endif()
 	dk_enable(osgdb_deprecated_osgfx)
