@@ -2,6 +2,11 @@
 # https://gitlab.freedesktop.org/fontconfig/fontconfig/-/blob/main/INSTALL
 
 
+if(APPLE)
+	dk_shell(sudo port install fontconfig)
+	return()
+endif()
+
 ### IMPORT ###
 dk_import(https://gitlab.freedesktop.org/fontconfig/fontconfig.git BRANCH main)
 
