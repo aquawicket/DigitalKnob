@@ -3,7 +3,7 @@
 
 
 ### IMPORT ###
-dk_import(https://gitlab.freedesktop.org/fontconfig/fontconfig.git)
+dk_import(https://gitlab.freedesktop.org/fontconfig/fontconfig.git BRANCH main)
 
 
 # TODO
