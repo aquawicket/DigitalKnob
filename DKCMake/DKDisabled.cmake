@@ -233,6 +233,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(waave)				# ** BUILD FAILED ** src/audio_decoder.c
 	dk_disable(x264)
 	dk_disable(x265)
+	dk_disable(zstd)
 endif(IOS OR IOSSIM)
 
 
