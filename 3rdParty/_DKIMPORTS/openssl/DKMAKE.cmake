@@ -14,11 +14,14 @@ endif()
 dk_include				(${OPENSSL}/include)
 DEBUG_dk_include		(${OPENSSL}/${OS}/${DEBUG_DIR}/include)
 RELEASE_dk_include      (${OPENSSL}/${OS}/${RELEASE_DIR}/include)
+
+# libeay
 WIN32_dk_libDebug		(${OPENSSL}/lib/libeay32MTd.lib)
 WIN32_dk_libRelease		(${OPENSSL}/lib/libeay32MT.lib)
 WIN64_dk_libDebug		(${OPENSSL}/lib64/libeay32MTd.lib)
 WIN64_dk_libRelease		(${OPENSSL}/lib64/libeay32MT.lib)
 
+# libssl
 WIN32_dk_libDebug		(${OPENSSL}/lib/ssleay32MTd.lib)
 WIN32_dk_libRelease		(${OPENSSL}/lib/ssleay32MT.lib)
 WIN64_dk_libDebug		(${OPENSSL}/lib64/ssleay32MTd.lib)
@@ -52,47 +55,27 @@ ANDROID_RELEASE_dk_set	(OPENSSL_CMAKE -DOPENSSL_INCLUDE_DIR=${OPENSSL}/${OS}/${R
 
 ### GENERATE ###
 ### COMPILE ###
-MAC_DEBUG_dk_setPath(${OPENSSL}/${OS}/${DEBUG_DIR})
-MAC_DEBUG_dk_queueCommand(../../Configure no-shared --debug)
-MAC_DEBUG_dk_queueCommand(make)
-MAC_RELEASE_dk_setPath(${OPENSSL}/${OS}/${RELEASE_DIR})
-MAC_RELEASE_dk_queueCommand(../../Configure no-shared --release)
-MAC_RELEASE_dk_queueCommand(make)
+DEBUG_dk_setPath				(${OPENSSL}/${OS}/${DEBUG_DIR})
+MAC_DEBUG_dk_queueShell			(../../Configure no-shared --debug)
+IOS64_DEBUG_dk_queueShell		(../../Configure no-shared --debug ios64-xcrun)
+IOSSIM_DEBUG_dk_queueShell		(../../Configure no-shared --debug iossimulator-xcrun )
+LINUX_DEBUG_dk_queueShell		(../../Configure no-shared --debug)
+RASPBERRY_DEBUG_dk_queueShell	(../../Configure no-shared --debug)
+ANDROID_DEBUG_dk_queueShell		(../../Configure no-shared --debug)
+if(NOT WIN)
+	DEBUG_dk_queueShell			(make)
+endif()
 
-IOS64_DEBUG_dk_setPath(${OPENSSL}/${OS}/${DEBUG_DIR})
-IOS64_DEBUG_dk_queueCommand(../../Configure ios64-xcrun no-shared --debug)
-IOS64_DEBUG_dk_queueCommand(make)
-IOS64_RELEASE_dk_setPath(${OPENSSL}/${OS}/${RELEASE_DIR})
-IOS64_RELEASE_dk_queueCommand(../../Configure ios64-xcrun no-shared --release)
-IOS64_RELEASE_dk_queueCommand(make)
-
-IOSSIM_DEBUG_dk_setPath(${OPENSSL}/${OS}/${DEBUG_DIR})
-IOSSIM_DEBUG_dk_queueCommand(../../Configure iossimulator-xcrun no-shared --debug)
-IOSSIM_DEBUG_dk_queueCommand(make)
-IOSSIM_RELEASE_dk_setPath(${OPENSSL}/${OS}/${RELEASE_DIR})
-IOSSIM_RELEASE_dk_queueCommand(../../Configure iossimulator-xcrun no-shared --release)
-IOSSIM_RELEASE_dk_queueCommand(make)
-
-LINUX_DEBUG_dk_setPath(${OPENSSL}/${OS}/${DEBUG_DIR})
-LINUX_DEBUG_dk_queueCommand(../../Configure no-shared --debug)
-LINUX_DEBUG_dk_queueCommand(make)
-LINUX_RELEASE_dk_setPath(${OPENSSL}/${OS}/${RELEASE_DIR})
-LINUX_RELEASE_dk_queueCommand(../../Configure no-shared --release)
-LINUX_RELEASE_dk_queueCommand(make)
-
-RASPBERRY_DEBUG_dk_setPath(${OPENSSL}/${OS}/${DEBUG_DIR})
-RASPBERRY_DEBUG_dk_queueCommand(../../Configure no-shared --debug)
-RASPBERRY_DEBUG_dk_queueCommand(make)
-RASPBERRY_RELEASE_dk_setPath(${OPENSSL}/${OS}/${RELEASE_DIR})
-RASPBERRY_RELEASE_dk_queueCommand(../../Configure no-shared --release)
-RASPBERRY_RELEASE_dk_queueCommand(make)
-
-ANDROID_DEBUG_dk_setPath(${OPENSSL}/${OS}/${DEBUG_DIR})
-ANDROID_DEBUG_dk_queueMsys(../../Configure no-shared --debug)
-ANDROID_DEBUG_dk_queueMsys(make)
-ANDROID_RELEASE_dk_setPath(${OPENSSL}/${OS}/${RELEASE_DIR})
-ANDROID_RELEASE_dk_queueMsys(../../Configure no-shared --release)
-ANDROID_RELEASE_dk_queueMsys(make)
+RELEASE_dk_setPath				(${OPENSSL}/${OS}/${RELEASE_DIR})
+MAC_RELEASE_dk_queueShell		(../../Configure no-shared --release)
+IOS64_RELEASE_dk_queueShell		(../../Configure no-shared --release ios64-xcrun )
+IOSSIM_RELEASE_dk_queueShell	(../../Configure no-shared --release iossimulator-xcrun )
+LINUX_RELEASE_dk_queueShell		(../../Configure no-shared --release)
+RASPBERRY_RELEASE_dk_queueShell	(../../Configure no-shared --release)
+ANDROID_RELEASE_dk_queueShell	(../../Configure no-shared --release)
+if(NOT WIN)
+	RELEASE_dk_queueShell		(make)
+endif()
 
 
 ####### openssl_binary ###############################################
