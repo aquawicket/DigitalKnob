@@ -50,6 +50,7 @@ WIN_RELEASE_dk_queueMsys(make)
 
 APPLE_DEBUG_dk_setPath			(${GZIP})
 APPLE_DEBUG_dk_queueCommand		(chmod 777 configure)
+APPLE_DEBUG_dk_queueCommand		(chmod 777 /build_aux/git-version-gen)
 APPLE_DEBUG_dk_setPath			(${GZIP}/${OS}/${DEBUG_DIR})
 APPLE_DEBUG_dk_queueCommand		(${GZIP_CONFIGURE})
 APPLE_DEBUG_dk_queueCommand		(make)
