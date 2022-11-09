@@ -65,6 +65,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(DKVncServer)
 	dk_disable(dukluv)
 	dk_disable(ffmpeg)
+	dk_disable(fontconfig)
 	dk_disable(gdal)
 	dk_disable(giflib)
 	dk_disable(gzip)
@@ -116,6 +117,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(dukluv)
 	dk_disable(ffmpeg)
 	dk_disable(flac)				# 'asm' undelcared identifier
+	dk_disable(fontconfig)
 	dk_disable(gdal)
 	dk_disable(gzip)
 	dk_disable(imagemagick)			# no such file or directory: libimagemagik.a
@@ -187,6 +189,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(DKVncServer)			# requires libvncserver
 	dk_disable(dukluv)
 	dk_disable(ffmpeg)
+	dk_disable(fontconfig)
 	dk_disable(gdal)
 	dk_disable(gzip)
 	dk_disable(imagemagick)			# No such file or directory
@@ -257,6 +260,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKWebSockets)		# requires libwebsockets, uwebsockets
 	dk_disable(dukluv)
 	dk_disable(ffmpeg)
+	dk_disable(fontconfig)
 	dk_disable(gdal)
 	dk_disable(gzip)
 	dk_disable(jerryscript)			# build errors
@@ -314,6 +318,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(dukluv)
 	dk_disable(emsdk)				# 64bit source only
 	dk_disable(ffmpeg)
+	dk_disable(fontconfig)
 	dk_disable(gdal)
 	dk_disable(gzip)
 	dk_disable(imagemagick)
@@ -402,6 +407,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(dukluv)
 	dk_disable(ffmpeg)
 	dk_disable(flac)				# configure: error: unrecognized option: `-DANDROID32'
+	dk_disable(fontconfig)
 	dk_disable(freealut)			# DKFunctions.cmake:4405->dk_findFiles():  files is invalid
 	dk_disable(gdal)
 	dk_disable(gzip)
