@@ -18,13 +18,13 @@ dk_set		(FONTCONFIG_CMAKE -DFONTCONFIG_INCLUDE_DIR=${FONTCONFIG}/lib -DFONTCONFI
 
 ### GENERATE / COMPILE ###
 WIN_DEBUG_dk_setPath		(${FONTCONFIG})
-WIN_DEBUG_dk_queueMsys		(autogen.sh)
+WIN_DEBUG_dk_queueMsys		(./autogen.sh)
 WIN_DEBUG_dk_setPath		(${FONTCONFIG}/${OS}/${DEBUG_DIR})
 WIN_DEBUG_dk_queueMsys		(${DKCONFIGURE_BUILD})
 WIN_DEBUG_dk_queueMsys		(make)
 
 WIN_RELEASE_dk_setPath		(${FONTCONFIG})
-WIN_RELEASE_dk_queueMsys	(autogen.sh)
+WIN_RELEASE_dk_queueMsys	(./autogen.sh)
 WIN_RELEASE_dk_setPath		(${FONTCONFIG}/${OS}/${RELEASE_DIR})
 WIN_RELEASE_dk_queueMsys	(${DKCONFIGURE_BUILD})
 WIN_RELEASE_dk_queueMsys	(make)
