@@ -28,7 +28,7 @@
 #ifndef DKCef_H
 #define DKCef_H
 
-#define USE_DKV8 1
+//#define USE_DKV8 1
 
 //WARNING_DISABLE
 	#include <include/cef_client.h>

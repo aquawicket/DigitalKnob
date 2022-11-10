@@ -304,19 +304,19 @@ void DKCefApp::OnBeforeCommandLineProcessing(const CefString& process_type, CefR
 
 //#endif //!DKCefChild
 
-#if USE_DKV8
+//#if USE_DKV8
 	DKV8::v8handler = new DKCefV8Handler();
-#endif
+//#endif
 }
 
 void DKCefApp::OnBrowserCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDictionaryValue> extra_info) {
 	CEF_REQUIRE_RENDERER_THREAD();
 	DKDEBUGFUNC(browser, extra_info);
 
-#if USE_DKV8
+//#if USE_DKV8
 	DKV8::_browser = browser;
 	DKV8::v8handler->SetBrowser(browser);
-#endif
+//#endif
 	CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("GetFunctions");
 	CefRefPtr<CefListValue> args = msg->GetArgumentList();
 //#ifndef DEBUG
@@ -334,7 +334,7 @@ void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 	CEF_REQUIRE_RENDERER_THREAD();
 	DKDEBUGFUNC(browser, frame, context);
 
-#if USE_DKV8
+//#if USE_DKV8
 	//Load all of the c++ functions into the V8 context.
 	DKV8::ctx = context->GetGlobal();
 	for(unsigned int i=0; i<DKV8::funcs.size(); i++){
@@ -342,7 +342,7 @@ void DKCefApp::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFram
 		if(DKV8::ctx->SetValue(DKV8::funcs[i].c_str(), value, V8_PROPERTY_ATTRIBUTE_NONE))
 			DKINFO("registered: "+DKV8::funcs[i]+"\n");
 	}
-#endif
+//#endif
 }
 
 bool DKCefApp::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefProcessId source_process, CefRefPtr<CefProcessMessage> message) {
