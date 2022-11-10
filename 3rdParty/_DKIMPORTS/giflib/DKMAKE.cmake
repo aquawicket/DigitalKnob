@@ -41,14 +41,14 @@ ANDROID_dk_set	(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIFLIB}/lib -DGIF_INCLUDE_DIR2=
 
 
 ### GENERATE / COMPILE ###
-DEBUG_dk_setPath	(${GIFLIB})
-DEBUG_dk_queueShell	(autoreconf -f -i)
+if(NOT WIN_HOST)
+	dk_setPath		(${GIFLIB})
+	dk_queueShell	(autoreconf -f -i)
+endif()
 DEBUG_dk_setPath	(${GIFLIB}/${OS}/${DEBUG_DIR})
 DEBUG_dk_queueShell	(${DKCONFIGURE_BUILD})
 DEBUG_dk_queueShell	(make -C lib)
 
-RELEASE_dk_setPath		(${GIFLIB})
-RELEASE_dk_queueCommand	(autoreconf -f -i)
 RELEASE_dk_setPath		(${GIFLIB}/${OS}/${RELEASE_DIR})
 RELEASE_dk_queueShell	(${DKCONFIGURE_BUILD})
 RELEASE_dk_queueShell	(make -C lib)
