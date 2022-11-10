@@ -1,5 +1,5 @@
-# https://github.com/mikke89/RmlUi
-# https://github.com/aquawicket/RmlUi
+# https://github.com/mikke89/RmlUi.git
+# https://github.com/aquawicket/RmlUi.git
 
 
 ### DEPEND ###
@@ -12,8 +12,9 @@ dk_depend(lua)
 
 
 ### IMPORT ###
-dk_import(https://github.com/aquawicket/RmlUi.git PATCH)
-#dk_import(https://github.com/aquawicket/RmlUi.git RCSS_attribute_selector_support PATCH)
+#dk_import(https://github.com/aquawicket/RmlUi.git PATCH)
+#dk_import(https://github.com/aquawicket/RmlUi.git BRANCH RCSS_attribute_selector_support PATCH)
+dk_import(https://github.com/mikke89/RmlUi.git)
 
 
 ### LINK ###
@@ -69,7 +70,7 @@ endif()
 dk_setPath					(${RMLUI}/${BUILD_DIR})
 
 ## RML minimal
-WIN_dk_queueCommand			(${DKCMAKE_BUILD} "-DCMAKE_CXX_FLAGS=/DRMLUI_STATIC_LIB /DGLEW_STATIC /I${RMLUI}/Include /I${SDL}/include /I${GLEW}/include" -DBUILD_SAMPLES=OFF -DBUILD_TESTING=OFF -DENABLE_SVG_PLUGIN=OFF -DENABLE_LOTTIE_PLUGIN=OFF -DBUILD_LUA_BINDINGS=OFF ${FREETYPE_CMAKE} ${LUA_CMAKE} ${RMLUI})
+WIN_dk_queueCommand			(${DKCMAKE_BUILD} "-DCMAKE_CXX_FLAGS=/DRMLUI_STATIC_LIB /I${RMLUI}/Include" -DBUILD_SAMPLES=OFF -DBUILD_TESTING=OFF -DENABLE_SVG_PLUGIN=OFF -DENABLE_LOTTIE_PLUGIN=OFF -DBUILD_LUA_BINDINGS=OFF ${FREETYPE_CMAKE} ${GLEW_CMAKE} ${LUA_CMAKE} ${SDL_CMAKE} ${RMLUI})
 
 ## RML + ALL Extras
 # WIN32_dk_queueCommand(${DKCMAKE_BUILD} 
