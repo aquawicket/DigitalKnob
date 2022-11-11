@@ -26,6 +26,7 @@ IF(IOS OR IOSSIM OR WIN)
 ENDIF()
 dk_include		(${RMLUI}/Include)
 dk_include		(${RMLUI}/Source)
+
 dk_addTarget	(rmlui RmlCore)
 dk_addTarget	(rmlui RmlDebugger)
 
