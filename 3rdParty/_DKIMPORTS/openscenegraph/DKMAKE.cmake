@@ -68,7 +68,7 @@ if(ALL_LIBS)
 	
 	# osgWrappers
 	dk_enable(osgdb_deprecated_osg)
-	dk_enable(osgdb_deprecated_osganimation)
+	#dk_enable(osgdb_deprecated_osganimation)
 	dk_enable(osgdb_deprecated_osgfx)
 	dk_enable(osgdb_deprecated_osgparticle)
 	dk_enable(osgdb_deprecated_osgshadow)
