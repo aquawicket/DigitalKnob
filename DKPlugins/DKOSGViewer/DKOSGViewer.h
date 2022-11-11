@@ -40,6 +40,79 @@
 	#endif
 	//WARNING_ENABLE
 
+	// osgWrappers
+	#ifdef HAVE_osgdb_deprecated_osg
+		USE_DOTOSGWRAPPER_LIBRARY(osg)
+	#endif
+	#ifdef HAVE_osgdb_deprecated_osganimation
+		USE_DOTOSGWRAPPER_LIBRARY(osgAnimation)
+	#endif
+	#ifdef HAVE_osgdb_deprecated_osgfx
+		USE_DOTOSGWRAPPER_LIBRARY(osgFX)
+	#endif
+	#ifdef HAVE_osgdb_deprecated_osgparticle
+		USE_DOTOSGWRAPPER_LIBRARY(osgParticle)
+	#endif
+	#ifdef HAVE_osgdb_deprecated_osgshadow
+		USE_DOTOSGWRAPPER_LIBRARY(osgShadow)
+	#endif
+	#ifdef HAVE_osgdb_deprecated_osgsim
+		USE_DOTOSGWRAPPER_LIBRARY(osgSim)
+	#endif
+	#ifdef HAVE_osgdb_deprecated_osgterrain
+		USE_DOTOSGWRAPPER_LIBRARY(osgTerrain)
+	#endif
+	#ifdef HAVE_osgdb_deprecated_osgtext
+		USE_DOTOSGWRAPPER_LIBRARY(osgText)
+	#endif
+	#ifdef HAVE_osgdb_deprecated_osgviewer
+		USE_DOTOSGWRAPPER_LIBRARY(osgViewer)
+	#endif
+	#ifdef HAVE_osgdb_deprecated_osgvolume
+		USE_DOTOSGWRAPPER_LIBRARY(osgVolume)
+	#endif
+	#ifdef HAVE_osgdb_deprecated_osgwidget
+		USE_DOTOSGWRAPPER_LIBRARY(osgWidget)
+	#endif
+	
+	#ifdef HAVE_osgdb_serializers_osg
+		USE_SERIALIZER_WRAPPER_LIBRARY(osg)
+	#endif
+	#ifdef HAVE_osgdb_serializers_osganimation
+		USE_SERIALIZER_WRAPPER_LIBRARY(osgAnimation)
+	#endif
+	#ifdef HAVE_osgdb_serializers_osgfx
+		USE_SERIALIZER_WRAPPER_LIBRARY(osgFX)
+	#endif
+	#ifdef HAVE_osgdb_serializers_osgga
+		USE_SERIALIZER_WRAPPER_LIBRARY(osgGA)
+	#endif
+	#ifdef HAVE_osgdb_serializers_osgmanipulator
+		USE_SERIALIZER_WRAPPER_LIBRARY(osgManipulator)
+	#endif
+	#ifdef HAVE_osgdb_serializers_osgparticle
+		USE_SERIALIZER_WRAPPER_LIBRARY(osgParticle)
+	#endif
+	#ifdef HAVE_osgdb_serializers_osgpresentation
+		USE_SERIALIZER_WRAPPER_LIBRARY(osgPresentation)
+	#endif
+	#ifdef HAVE_osgdb_serializers_osgshadow
+		USE_SERIALIZER_WRAPPER_LIBRARY(osgShadow)
+	#endif
+	#ifdef HAVE_osgdb_serializers_osgterrain
+		USE_SERIALIZER_WRAPPER_LIBRARY(osgTerrain)
+	#endif 
+	#ifdef HAVE_osgdb_serializers_osgtext
+		USE_SERIALIZER_WRAPPER_LIBRARY(osgText)
+	#endif
+	#ifdef HAVE_osgdb_serializers_osgviewer
+		USE_SERIALIZER_WRAPPER_LIBRARY(osgviewer)
+	#endif
+	#ifdef HAVE_osgdb_serializers_osgvolume
+		USE_SERIALIZER_WRAPPER_LIBRARY(osgVolume)
+	#endif
+	
+	// osgPlugins
 	#ifdef HAVE_osgdb_osg
 		USE_OSGPLUGIN(osg)
 		USE_OSGPLUGIN(osg2)
@@ -230,75 +303,6 @@
 	#endif
 	#ifdef HAVE_osgdb_zip
 		USE_OSGPLUGIN(zip)
-	#endif
-	#ifdef HAVE_osgdb_deprecated_osg
-		USE_DOTOSGWRAPPER_LIBRARY(osg)
-	#endif
-	#ifdef HAVE_osgdb_deprecated_osganimation
-		USE_DOTOSGWRAPPER_LIBRARY(osgAnimation)
-	#endif
-	#ifdef HAVE_osgdb_deprecated_osgfx
-		USE_DOTOSGWRAPPER_LIBRARY(osgFX)
-	#endif
-	#ifdef HAVE_osgdb_deprecated_osgparticle
-		USE_DOTOSGWRAPPER_LIBRARY(osgParticle)
-	#endif
-	#ifdef HAVE_osgdb_deprecated_osgshadow
-		USE_DOTOSGWRAPPER_LIBRARY(osgShadow)
-	#endif
-	#ifdef HAVE_osgdb_deprecated_osgsim
-		USE_DOTOSGWRAPPER_LIBRARY(osgSim)
-	#endif
-	#ifdef HAVE_osgdb_deprecated_osgterrain
-		USE_DOTOSGWRAPPER_LIBRARY(osgTerrain)
-	#endif
-	#ifdef HAVE_osgdb_deprecated_osgtext
-		USE_DOTOSGWRAPPER_LIBRARY(osgText)
-	#endif
-	#ifdef HAVE_osgdb_deprecated_osgviewer
-		USE_DOTOSGWRAPPER_LIBRARY(osgViewer)
-	#endif
-	#ifdef HAVE_osgdb_deprecated_osgvolume
-		USE_DOTOSGWRAPPER_LIBRARY(osgVolume)
-	#endif
-	#ifdef HAVE_osgdb_deprecated_osgwidget
-		USE_DOTOSGWRAPPER_LIBRARY(osgWidget)
-	#endif
-	#ifdef HAVE_osgdb_serializers_osg
-		USE_SERIALIZER_WRAPPER_LIBRARY(osg)
-	#endif
-	#ifdef HAVE_osgdb_serializers_osganimation
-		USE_SERIALIZER_WRAPPER_LIBRARY(osgAnimation)
-	#endif
-	#ifdef HAVE_osgdb_serializers_osgfx
-		USE_SERIALIZER_WRAPPER_LIBRARY(osgFX)
-	#endif
-	#ifdef HAVE_osgdb_serializers_osgga
-		USE_SERIALIZER_WRAPPER_LIBRARY(osgGA)
-	#endif
-	#ifdef HAVE_osgdb_serializers_osgmanipulator
-		USE_SERIALIZER_WRAPPER_LIBRARY(osgManipulator)
-	#endif
-	#ifdef HAVE_osgdb_serializers_osgparticle
-		USE_SERIALIZER_WRAPPER_LIBRARY(osgParticle)
-	#endif
-	#ifdef HAVE_osgdb_serializers_osgpresentation
-		USE_SERIALIZER_WRAPPER_LIBRARY(osgPresentation)
-	#endif
-	#ifdef HAVE_osgdb_serializers_osgshadow
-		USE_SERIALIZER_WRAPPER_LIBRARY(osgShadow)
-	#endif
-	#ifdef HAVE_osgdb_serializers_osgterrain
-		USE_SERIALIZER_WRAPPER_LIBRARY(osgTerrain)
-	#endif 
-	#ifdef HAVE_osgdb_serializers_osgtext
-		USE_SERIALIZER_WRAPPER_LIBRARY(osgText)
-	#endif
-	#ifdef HAVE_osgdb_serializers_osgviewer
-		USE_SERIALIZER_WRAPPER_LIBRARY(osgviewer)
-	#endif
-	#ifdef HAVE_osgdb_serializers_osgvolume
-		USE_SERIALIZER_WRAPPER_LIBRARY(osgVolume)
 	#endif
 
 	#if HAVE_osgViewer
