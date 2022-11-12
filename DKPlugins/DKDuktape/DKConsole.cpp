@@ -157,7 +157,7 @@ int DKConsole::log(duk_context* ctx){
 		string = toString(duk_require_boolean(ctx, 0));
 	if (duk_is_number(ctx, 0))
 		string = toString(duk_require_int(ctx, 0));
-	DKINFO(string+"\n");
+	DKINFO(string);
 	return true;
 }
 
