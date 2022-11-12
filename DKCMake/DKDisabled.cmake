@@ -61,7 +61,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKUpdate)			# build errors
 	dk_disable(DKVncClient)
-	dk_disable(DKVncServer)
+	#dk_disable(DKVncServer)
 	dk_disable(dukluv)
 	dk_disable(ffmpeg)
 	dk_disable(fontconfig)
@@ -74,7 +74,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(libtorrent)			# CMAKE ERROR:  No SOURCES given to target: torrent-rasterbar
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
-	#dk_disable(osgaudio)
+	dk_disable(osgaudio)			# openalpp\AudioBase.cpp(106,54): error C2440: '=': cannot convert from 'ALCcontext *' to 'openalpp::ALCcontext_struct *'
 	dk_disable(osgbullet)			# requires osgworks
 	dk_disable(osgrmlui)
 	dk_disable(osgworks)			# osgwTools\GeometryModifier.cpp(64,13): error C2039: 'mergeGeode': is not a member of 'osgUtil::Optimizer::MergeGeometryVisitor'
