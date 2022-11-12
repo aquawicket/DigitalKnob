@@ -60,8 +60,8 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(DKThread)			# build errors
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKUpdate)			# build errors
-	dk_disable(DKVncClient)
-	#dk_disable(DKVncServer)
+	#dk_disable(DKVncClient)
+	dk_disable(DKVncServer)
 	dk_disable(dukluv)
 	dk_disable(ffmpeg)
 	dk_disable(fontconfig)
