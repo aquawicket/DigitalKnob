@@ -456,15 +456,15 @@ bool DKCef::GetBrowserId(const int& browser, DKString& id){
 }
 
 bool DKCef::GetBrowserNumber(const DKString& id, int& browser){
-	DKDEBUGFUNC(id, browser);
+	//DKDEBUGFUNC(id, browser);  //EXCESSIVE LOGGING
 	for(unsigned int i=0; i<dkBrowsers.size(); i++){
 		if(id == dkBrowsers[i].id){
 			browser = i;
-			return true && DKDEBUGRETURN(browser);
+			return true; // && DKDEBUGRETURN(browser); //EXCESSIVE LOGGING
 		}
 	}
 	browser = -1;
-	return false && DKDEBUGRETURN(browser);
+	return false; // && DKDEBUGRETURN(browser); //EXCESSIVE LOGGING
 }
 
 bool DKCef::GetBrowsers(int& num){
