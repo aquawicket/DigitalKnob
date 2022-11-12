@@ -51,7 +51,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(DKOFWindow)			# requires openframeworks
 	dk_disable(DKOSGAudio)			# requires freealut
 	dk_disable(DKOSGCef)			# build errors
-	dk_disable(DKOSGPhysics)		# 'btBulletDynamicsCommon.h' file not found
+	dk_disable(DKOSGPhysics)		# requires bullet3
 	dk_disable(DKOSGStats)			# build errors
 	dk_disable(DKOSGVideo)			# TODO
 	dk_disable(DKOSGWidget)			# build errors
