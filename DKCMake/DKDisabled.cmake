@@ -77,7 +77,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(osgaudio)			# requires openscenegraph
 	dk_disable(osgbullet)			# requires osgworks
 	dk_disable(osgrmlui)
-	dk_disable(osgworks)			# requires openscenegraph
+	#dk_disable(osgworks)
 	dk_disable(rmlui-d3d11)
 	dk_disable(sdl_rtf)
 	dk_disable(waave)				# error C2065: 'PIX_FMT_YUV420P': undeclared identifier.  https://sourceforge.net/p/guvcview/tickets/34/
