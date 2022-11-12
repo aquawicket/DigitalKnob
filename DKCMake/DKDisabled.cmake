@@ -276,7 +276,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(openframeworks)		# error: tesselator.h: No such file or directory
 	dk_disable(openssl)				# compiling errors
-	dk_disable(osgaudio)			# requires freealut
+	#dk_disable(osgaudio)			# requires freealut
 	dk_disable(osgbullet)			# CMake Error: Could NOT find Bullet
 	dk_disable(osgrmlui)
 	dk_disable(osgworks)			# error: osgUtil::Optimizer::MergeGeometryVisitor has no member named 'mergeGeode'
