@@ -74,7 +74,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(libtorrent)			# CMAKE ERROR:  No SOURCES given to target: torrent-rasterbar
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
-	dk_disable(osgaudio)			# requires openscenegraph
+	dk_disable(osgaudio)
 	dk_disable(osgbullet)			# requires osgworks
 	dk_disable(osgrmlui)
 	#dk_disable(osgworks)
