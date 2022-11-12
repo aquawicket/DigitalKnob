@@ -11,6 +11,7 @@ dk_import(https://github.com/bulletphysics/bullet3.git)
 
 dk_set(BulletCollision ON)
 dk_set(BulletDynamics ON)
+dk_set(BulletInverseDynamics ON)
 dk_set(BulletMultiThreaded ON)
 dk_set(BulletSoftBody ON)
 dk_set(LinearMath ON)
@@ -47,6 +48,16 @@ if(BulletDynamics)
 	LINUX_dk_libRelease		(${BULLET3}/${OS}/${RELEASE_DIR}/src/BulletDynamics/libBulletDynamics.a)
 	ANDROID_dk_libDebug		(${BULLET3}/${OS}/src/BulletDynamics/${DEBUG_DIR}/libBulletDynamics.a)
 	ANDROID_dk_libRelease	(${BULLET3}/${OS}/src/BulletDynamics/${RELEASE_DIR}/libBulletDynamics.a)
+endif()
+if(BulletInverseDynamics)
+	WIN_dk_libDebug			(${BULLET3}/${OS}/lib/${DEBUG_DIR}/BulletInverseDynamics_Debug.lib)
+	WIN_dk_libRelease		(${BULLET3}/${OS}/lib/${RELEASE_DIR}/BulletInverseDynamics.lib)
+	APPLE_dk_libDebug		(${BULLET3}/${OS}/src/BulletInverseDynamics/${DEBUG_DIR}/libBulletInverseDynamics.a)
+	APPLE_dk_libRelease		(${BULLET3}/${OS}/src/BulletInverseDynamics/${RELEASE_DIR}/libBulletInverseDynamics.a)
+	LINUX_dk_libDebug		(${BULLET3}/${OS}/${DEBUG_DIR}/src/BulletInverseDynamics/libBulletInverseDynamics.a)
+	LINUX_dk_libRelease		(${BULLET3}/${OS}/${RELEASE_DIR}/src/BulletInverseDynamics/libBulletInverseDynamics.a)
+	ANDROID_dk_libDebug		(${BULLET3}/${OS}/src/BulletInverseDynamics/${DEBUG_DIR}/libBulletInverseDynamics.a)
+	ANDROID_dk_libRelease	(${BULLET3}/${OS}/src/BulletInverseDynamics/${RELEASE_DIR}/libBulletInverseDynamics.a)
 endif()
 if(BulletMultiThreaded)
 	WIN_dk_libDebug			(${BULLET3}/${OS}/lib/${DEBUG_DIR}/BulletMultiThreaded_Debug.lib)
@@ -99,6 +110,7 @@ WIN_dk_set(BULLET3_CMAKE
 	-DBULLET_INCLUDE_DIR=${BULLET3}/include)
 APPLE_dk_set(BULLET3_CMAKE 
 	-DBULLET_DYNAMICS_LIBRARY=${BULLET3}/${OS}/src/BulletDynamics/${RELEASE_DIR}/libBulletDynamics.a
+	-DBULLET_INVERSE_DYNAMICS_LIBRARY=${BULLET3}/${OS}/src/BulletInverseDynamics/${RELEASE_DIR}/libBulletInverseDynamics.a
 	-DBULLET_COLLISION_LIBRARY=${BULLET3}/${OS}/src/BulletCollision/${RELEASE_DIR}/libBulletCollision.a 
 	-DBULLET_MATH_LIBRARY=${BULLET3}/${OS}/src/LinearMath/${RELEASE_DIR}/libLinearMath.a
 	-DBULLET_SOFTBODY_LIBRARY=${BULLET3}/${OS}/src/BulletSoftBody/${RELEASE_DIR}/libBulletSoftBody.a
