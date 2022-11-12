@@ -75,7 +75,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	dk_disable(osgaudio)			# requires openscenegraph
-	#dk_disable(osgbullet)			# requires openscenegraph
+	dk_disable(osgbullet)			# requires osgworks
 	dk_disable(osgrmlui)
 	dk_disable(osgworks)			# requires openscenegraph
 	dk_disable(rmlui-d3d11)
@@ -130,7 +130,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(mlocate)				# Unable to locate a Java Runtime that supports apt
 	dk_disable(ncurses)				# error: C preprocessor "/lib/cpp" fails sanity check
 	dk_disable(openframeworks)		# fatal error: /utils/ofConstants.h:183     'GL/glew.h' file not found
-	#dk_disable(osgbullet)			# requires bullet3
+	dk_disable(osgbullet)			# requires osgworks
 	dk_disable(osgaudio)			# opengl identifier errors
 	dk_disable(osgrmlui)
 	dk_disable(osgworks)			# Error: 'osgworks-master/src/osgwTools/GeometeryModifier.cpp:64' no member named 'mergeGeode'
@@ -215,7 +215,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(openscenegraph)		# CMake errors
 	dk_disable(opensles)			# could not locate OpenSLES Library
 	dk_disable(osgaudio)			# requires openscenegraph
-	#dk_disable(osgbullet)			# requires openscenegraph, bullet3
+	dk_disable(osgbullet)			# requires osgworks
 	dk_disable(osgrmlui)			# requires openscenegraph
 	dk_disable(osgworks)			# requires openscenegraph
 	dk_disable(poco)
@@ -274,7 +274,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(openframeworks)		# error: tesselator.h: No such file or directory
 	dk_disable(openssl)				# compiling errors
 	dk_disable(osgaudio)			# can't find libosg_osgAudiod.a
-	#dk_disable(osgbullet)			# CMake Error: Could NOT find Bullet
+	dk_disable(osgbullet)			# requires osgworks
 	dk_disable(osgrmlui)
 	dk_disable(osgworks)			# error: osgUtil::Optimizer::MergeGeometryVisitor has no member named 'mergeGeode'
 	dk_disable(podofo)				# build errors
@@ -337,7 +337,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(openssl)				# lots of undefined references
 	dk_disable(opus)
 	dk_disable(osgaudio)			# requires openscenegraph
-	#dk_disable(osgbullet)			# CMake Error: Could NOT find Bullet
+	dk_disable(osgbullet)			# requires osgworks
 	dk_disable(osgrmlui)
 	dk_disable(osgworks)			# requires openscenegraph
 	dk_disable(rmlui-d3d11)
@@ -427,7 +427,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(openscenegraph)
 	dk_disable(openssl)				# Perl v5.10.0 required
 	dk_disable(osgaudio)			# requires openscenegraph
-	dk_disable(osgbullet)			# CMake Error: Could NOT find Bullet
+	dk_disable(osgbullet)			# requires bullet3, osgworks
 	dk_disable(osgrmlui)
 	dk_disable(osgworks)			# requires openscenegraph
 	dk_disable(poco)				# error: Compiler does not support C++14
