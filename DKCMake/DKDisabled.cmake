@@ -245,7 +245,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKJerryscript)		# requires jerryscript
 	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
-	#dk_disable(DKOSGAudio)			# requires freealut
+	dk_disable(DKOSGAudio)			# requires freealut
 	dk_disable(DKOSGCef)			# build errors
 	dk_disable(DKOSGPhysics)		# requires bullet3
 	dk_disable(DKOSGStats)			# build errors
