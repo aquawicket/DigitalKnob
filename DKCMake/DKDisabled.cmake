@@ -45,7 +45,7 @@ dk_disable(sw-client)				# DEPRECATED: requested by leptonica but not required
 if(WIN) # Disabled for Windows targets
 	dk_disable(aom)					# Perl is required to build libaom.
 	dk_disable(aubio)
-	dk_disable(bullet3)				# LINK ERROR: cannot open input file 'BulletInverseDynamicsUtils.lib'	
+	#dk_disable(bullet3)			# LINK ERROR: cannot open input file 'BulletInverseDynamicsUtils.lib'	
 	dk_disable(diff-match-patch)
 	dk_disable(DKOcr)				# causing linking errors in tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
@@ -96,7 +96,7 @@ endif(WIN_64)
 
 if(MAC)  # Disabled for MAC targets
 	dk_disable(aubio)				# breaks DKCefV8
-	dk_disable(bullet3)				# library not found for -lBulletInverseDynamicsUtils
+	#dk_disable(bullet3)			# library not found for -lBulletInverseDynamicsUtils
 	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
 	dk_disable(DKOSGAudio)			# requires freealut
@@ -245,7 +245,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKJerryscript)		# requires jerryscript
 	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
-	dk_disable(DKOSGAudio)			# requires freealut
+	#dk_disable(DKOSGAudio)			# requires freealut
 	dk_disable(DKOSGCef)			# build errors
 	dk_disable(DKOSGPhysics)		# requires bullet3
 	dk_disable(DKOSGStats)			# build errors
@@ -300,7 +300,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(DKMidi)				# requires rtmidi
 	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
-	dk_disable(DKOSGAudio)			# requires freealut
+	#dk_disable(DKOSGAudio)			# requires freealut
 	dk_disable(DKOSGCef)			# build errors
 	dk_disable(DKOSGPhysics)		# requires bullet3
 	dk_disable(DKOSGStats)			# build errors
@@ -366,7 +366,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(boxer)				# fatal error : 'boxer/boxer.h' file not found
 	dk_disable(bullet3)				# build errors
 	dk_disable(bzip2)				# 'make' is not recognized as an internal or external command
-	dk_disable(cryptopp)			# error : cannot use 'throw' with exceptions disabled
+	#dk_disable(cryptopp)			# error : cannot use 'throw' with exceptions disabled
 	dk_disable(curl)				# error : "strerror_r MUST be either POSIX, glibc style"
 	dk_disable(diff-match-patch)
 	dk_disable(DKCef)				# requires cef_binary
