@@ -45,7 +45,6 @@ dk_disable(sw-client)				# DEPRECATED: requested by leptonica but not required
 if(WIN) # Disabled for Windows targets
 	dk_disable(aom)					# Perl is required to build libaom.
 	dk_disable(aubio)
-	#dk_disable(bullet3)			# LINK ERROR: cannot open input file 'BulletInverseDynamicsUtils.lib'	
 	dk_disable(diff-match-patch)
 	dk_disable(DKOcr)				# causing linking errors in tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
@@ -76,7 +75,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	dk_disable(osgaudio)			# requires openscenegraph
-	dk_disable(osgbullet)			# requires openscenegraph
+	#dk_disable(osgbullet)			# requires openscenegraph
 	dk_disable(osgrmlui)
 	dk_disable(osgworks)			# requires openscenegraph
 	dk_disable(rmlui-d3d11)
@@ -96,7 +95,6 @@ endif(WIN_64)
 
 if(MAC)  # Disabled for MAC targets
 	dk_disable(aubio)				# breaks DKCefV8
-	#dk_disable(bullet3)			# library not found for -lBulletInverseDynamicsUtils
 	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
 	dk_disable(DKOSGAudio)			# requires freealut
@@ -132,7 +130,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(mlocate)				# Unable to locate a Java Runtime that supports apt
 	dk_disable(ncurses)				# error: C preprocessor "/lib/cpp" fails sanity check
 	dk_disable(openframeworks)		# fatal error: /utils/ofConstants.h:183     'GL/glew.h' file not found
-	dk_disable(osgbullet)			# requires bullet3
+	#dk_disable(osgbullet)			# requires bullet3
 	dk_disable(osgaudio)			# opengl identifier errors
 	dk_disable(osgrmlui)
 	dk_disable(osgworks)			# Error: 'osgworks-master/src/osgwTools/GeometeryModifier.cpp:64' no member named 'mergeGeode'
@@ -217,7 +215,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(openscenegraph)		# CMake errors
 	dk_disable(opensles)			# could not locate OpenSLES Library
 	dk_disable(osgaudio)			# requires openscenegraph
-	dk_disable(osgbullet)			# requires openscenegraph, bullet3
+	#dk_disable(osgbullet)			# requires openscenegraph, bullet3
 	dk_disable(osgrmlui)			# requires openscenegraph
 	dk_disable(osgworks)			# requires openscenegraph
 	dk_disable(poco)
@@ -240,7 +238,6 @@ endif(IOS OR IOSSIM)
 if(LINUX) # Disabled for Linux targets
 	dk_disable(aubio)
 	dk_disable(boxer)				# error: can't create CMakeFiles/Boxer.dir/src/boxer_linux.cpp.o: No such file or directory
-	#dk_disable(bullet3)				# library not found for -lBulletInverseDynamicsUtils
 	dk_disable(DKHook)				# 'read' was not declared in this scope
 	dk_disable(DKJerryscript)		# requires jerryscript
 	dk_disable(DKOcr)				# requires tesseract
@@ -277,7 +274,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(openframeworks)		# error: tesselator.h: No such file or directory
 	dk_disable(openssl)				# compiling errors
 	dk_disable(osgaudio)			# can't find libosg_osgAudiod.a
-	dk_disable(osgbullet)			# CMake Error: Could NOT find Bullet
+	#dk_disable(osgbullet)			# CMake Error: Could NOT find Bullet
 	dk_disable(osgrmlui)
 	dk_disable(osgworks)			# error: osgUtil::Optimizer::MergeGeometryVisitor has no member named 'mergeGeode'
 	dk_disable(podofo)				# build errors
@@ -340,7 +337,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(openssl)				# lots of undefined references
 	dk_disable(opus)
 	dk_disable(osgaudio)			# requires openscenegraph
-	dk_disable(osgbullet)			# CMake Error: Could NOT find Bullet
+	#dk_disable(osgbullet)			# CMake Error: Could NOT find Bullet
 	dk_disable(osgrmlui)
 	dk_disable(osgworks)			# requires openscenegraph
 	dk_disable(rmlui-d3d11)
