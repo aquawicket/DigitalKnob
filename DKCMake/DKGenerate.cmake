@@ -586,9 +586,9 @@ endif(WIN_64)
 
 #######
 if(MAC)
-	if(${APP_NAME} STREQUAL DKBuilder_APP)
+	#if(${APP_NAME} STREQUAL DKBuilder_APP)
 		set(DKMAC_USE_WRAPPER ON) # open app with terminal
-	endif()
+	#endif()
 	
 	###################### Backup Executable ###########################
 	if(DEBUG)
