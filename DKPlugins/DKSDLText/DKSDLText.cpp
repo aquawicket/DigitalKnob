@@ -38,9 +38,9 @@ bool DKSDLText::Init(){
 	TTF_Init();
 	DKString file = DKFile::local_assets+"DKSDLText/arial.ttf";
 	font = TTF_OpenFont(file.c_str(), 20);
-    color.r = 100;
-    color.g = 100;
-    color.b = 255;
+    color.r = 255;
+    color.g = 0;
+    color.b = 0;
 	SetText(toString("Test String"));
 	DKSDLWindow::AddRenderFunc(&DKSDLText::Render, this);
 	return true;
