@@ -60,11 +60,7 @@ bool DKUnix::GetKey(int& key){
 
 bool DKUnix::Sleep(int milliseconds){
 	//DKDEBUGFUNC(milliseconds);  //EXCESSIVE LOGGING
-#ifdef ANDROID
 	usleep(milliseconds * 1000);
-#else
-	usleep(milliseconds * 1000);
-#endif
 	return true;
 }
 
