@@ -65,7 +65,7 @@ if not exist %ANDROID_HOME% ( %ERROR% "Environment Variable ANDROID_HOME does no
 if %GRADLE% EQU 0 ( 
 	set "JAVA_HOME=C:/Users/%USERNAME%/digitalknob/DK/3rdParty/openjdk-1.8.0_41"
 ) else (
-	set "JAVA_HOME=C:/Users/%USERNAME%/digitalknob/DK/3rdParty/openjdk-11"
+	set "JAVA_HOME=C:/Users/%USERNAME%/digitalknob/DK/3rdParty/openjdk"
 )
 call "%JAVA_HOME%/registerJDK.cmd"
 %IF_ERROR% "Failed at call to registerJDK.cmd"
