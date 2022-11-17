@@ -50,7 +50,7 @@ ANDROID_dk_depend(opensles)
 
 
 ### IMPORT ###
-dk_import(https://github.com/libsdl-org/SDL.git BRANCH main)
+dk_import(https://github.com/libsdl-org/SDL.git BRANCH main PATCH)
 
 
 ### LINK ###
