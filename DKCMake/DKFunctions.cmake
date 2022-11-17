@@ -158,7 +158,7 @@ endmacro()
 ##################################################################################
 # dk_updateLogInfo()
 #
-#	TODO
+#	Updates the STACK_HEADER variable with the current filename, line number, function name and arguments
 #
 macro(dk_updateLogInfo)
 	#DKDEBUGFUNC(${ARGV})
@@ -359,11 +359,11 @@ endmacro()
 
 
 ###############################################################################
-# dk_todo([msg])
+# dk_todo(msg)
 #
 #	print a TODO message and wait 10 seconds
 #
-#	msg:(optional)	- A header message to print
+#	@msg (optional)	- A header message to print
 #
 macro(dk_todo)
 	#DKDEBUGFUNC(${ARGV})
@@ -383,7 +383,12 @@ endmacro()
 ###############################################################################
 # dk_pad(str padchar length RESULT)
 #
-#	TODO
+#	Pad the end of a string to length with a given character
+#
+#   @str		- The string to pad
+#   @padchar	- The fill character to use
+#	@length		- The number of spaces to pad
+#	@RESULT		- The returned string w/padding
 #
 function(dk_pad str padchar length RESULT)
 	#DKDEBUGFUNC(${ARGV})
@@ -407,16 +412,15 @@ endfunction()
 
 
 ###############################################################################
-# dk_includes(variable find RESULT [REVERSE])
+# dk_includes(variable find RESULT)
 #
-#	Test if a string contains a substring
+#	Check if a string contains a substring
 #
 #	@variable	- The variable
 #	@find		- The substring to search for
 #	@RESULT		- Returns true if the str contains the substr. Otherwise returns false
-#	REVERSE		- if REVERSE is found in the parameters, FIND will be preformed in the reverse direction
 #
-function(dk_includes variable find RESULT) #REVERSE
+function(dk_includes variable find RESULT)
 	#DKDEBUGFUNC(${ARGV})
 	string(FIND "${variable}" "${find}" index)
 	if(${index} GREATER -1)
@@ -434,7 +438,7 @@ endfunction()
 #
 #	@name		-The input MARKER name for the parameter
 #	@RESULT		-The value of the next parameter after the MARKER
-#	${ARGV}		-The are list from the calling function
+#	${ARGV}		-The arg list from the calling function
 #
 macro(dk_getParameter name RESULT)
 	#DKDEBUGFUNC(${ARGV})
@@ -467,8 +471,8 @@ endmacro()
 #
 function(dk_remove path)
 	DKDEBUGFUNC(${ARGV})
-	dk_includes("${ARGN}" "NOERROR" includes)
-	if(${includes})
+	dk_includes("${ARGN}" "NOERROR" has_NOERROR)
+	if(${has_NOERROR})
 		set(noerror true)
 	endif()
 	if(NOT EXISTS ${path})
@@ -599,9 +603,9 @@ dk_remove(${DKFunctions_ext} NOERROR)
 
 
 ###############################################################################
-# dk_printAllVariables()
+# dk_return()
 #
-#	Print all cmake varibles
+#	Print the CMAKE_CURRENT_LIST_DIR and return.
 #
 macro(dk_return)
 	#DKDEBUGFUNC(${ARGV})
@@ -614,7 +618,7 @@ dk_createOsMacros("dk_return")
 ###############################################################################
 # dk_printAllVariables()
 #
-#	Print all cmake varibles
+#	Print all cmake varibles and save to /cmake_variables.temp 
 #
 macro(dk_printAllVariables)
 	DKDEBUGFUNC(${ARGV})
