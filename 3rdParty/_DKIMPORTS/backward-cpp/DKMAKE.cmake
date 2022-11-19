@@ -12,6 +12,12 @@ dk_include			(${BACKWARD-CPP})
 #UNIX_dk_libDebug	(${BACKWARD-CPP}/${OS}/${DEBUG_DIR}/libbackward.a)
 #UNIX_dk_libRelease	(${BACKWARD-CPP}/${OS}/${RELEASE_DIR}/libbackward.a)
 
+if(ANDROID)
+	dk_remove(${DKPLUGINS}/DK/backward.cpp NOERROR)
+else()
+	dk_copy(${BACKWARD-CPP}/backward.cpp ${DKPLUGINS}/DK/backward.cpp OVERWRITE)
+endif()
+
 
 ### GENERATE ###
 #dk_setPath		(${BACKWARD-CPP}/${BUILD_DIR})

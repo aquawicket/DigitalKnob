@@ -36,9 +36,6 @@ if(ANDROID)
 endif()
 
 dk_depend(backward-cpp)
-if(HAVE_backward-cpp)
-	dk_copy(${BACKWARD-CPP}/backward.cpp ${DKPLUGINS}/DK/backward.cpp OVERWRITE)
-endif()
 dk_depend(boxer)
 dk_depend(fmt)
 
