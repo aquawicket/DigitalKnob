@@ -256,7 +256,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKUpdate)			# error: need to implement boost::placeholders
 	dk_disable(DKWebSockets)		# requires libwebsockets, uwebsockets
-	dk_disable(dukluv)
+	#dk_disable(dukluv)
 	dk_disable(ffmpeg)
 	dk_disable(fontconfig)
 	dk_disable(gdal)
