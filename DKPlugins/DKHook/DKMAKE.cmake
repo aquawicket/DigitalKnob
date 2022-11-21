@@ -8,7 +8,7 @@ endif()
 dk_generateCmake(DKHook)
 dk_assets(DKHook)
 
-## hookdll windows
+## add hoodll.dll to CMakeLists.txt on windows
 if(WIN)
 	dk_appendCmake("\n\n")
 	dk_appendCmake("FILE(GLOB hookdll_SRC \n")
@@ -20,5 +20,6 @@ if(WIN)
 	dk_appendCmake("SET_TARGET_PROPERTIES(hookdll PROPERTIES LINKER_LANGUAGE CPP) \n")
 endif()
 
+# FIXME - these should be post built operations. hookdll.dll will not exist yet
 WIN32_dk_copy(${DKPLUGINS}/DKHook/win32/Release/hookdll.dll ${DKPROJECT}/assets/DKHook OVERWRITE)
 WIN64_dk_copy(${DKPLUGINS}/DKHook/win64/Release/hookdll.dll ${DKPROJECT}/assets/DKHook OVERWRITE)
