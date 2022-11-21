@@ -112,7 +112,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(DKUpdate)			# Error: 'boost/thread/xtime.hpp:24 expected identifier TIME_UTC_=1
 	dk_disable(DKVncClient)			# requires libvncserver
 	dk_disable(DKVncServer)			# requires libvncserver
-	#dk_disable(dukluv)
+	dk_disable(dukluv)
 	dk_disable(ffmpeg)
 	dk_disable(flac)				# 'asm' undelcared identifier
 	dk_disable(fontconfig)
@@ -256,7 +256,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKUpdate)			# error: need to implement boost::placeholders
 	dk_disable(DKWebSockets)		# requires libwebsockets, uwebsockets
-	#dk_disable(dukluv)
+	dk_disable(dukluv)
 	dk_disable(ffmpeg)
 	dk_disable(fontconfig)
 	dk_disable(gdal)
