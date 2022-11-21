@@ -199,7 +199,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(libjpeg-turbo)		# CMake Error at CMakeLists.txt:60 (string): string no output variable specified
 	dk_disable(libmd)				# dk_getExtension Function invoked with incorrect arguments
 	dk_disable(libpng)				# no such sysroot directory: 'iphonesimulator'
-	#dk_disable(libsndfile)
+	dk_disable(libsndfile)			# Cmake Error: install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executable target "sndfile-info"
 	dk_disable(libtorrent)			# Could not find BOOST
 	dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
 	dk_disable(libwebp)				# TIFF is disabled when statically linking
@@ -208,7 +208,7 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(lua)					# error:'system' is unavailable: not available on iOS
 	dk_disable(mlocate)				# Unable to locate a Java Runtime that supports apt
-	dk_disable(ncurses)
+	#dk_disable(ncurses)
 	dk_disable(opencv)				# CMAKE_SYSTEM_PROCESSOR is not defined
 	dk_disable(openframeworks)		# error: tesselator.h: No such file or directory
 	dk_disable(openscenegraph)		# CMake errors
