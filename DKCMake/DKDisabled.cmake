@@ -60,8 +60,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(DKThread)			# build errors
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKUpdate)			# build errors
-	#dk_disable(DKVncClient)
-	dk_disable(DKVncServer)
+	dk_disable(DKVncServer)			# build errors
 	dk_disable(dukluv)
 	dk_disable(ffmpeg)
 	dk_disable(fontconfig)
@@ -71,7 +70,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(jasper)
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libexpat)
-	dk_disable(libtorrent)			# CMAKE ERROR:  No SOURCES given to target: torrent-rasterbar
+	#dk_disable(libtorrent)			# CMAKE ERROR:  No SOURCES given to target: torrent-rasterbar
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	dk_disable(osgaudio)			# openalpp\AudioBase.cpp(106,54): error C2440: '=': cannot convert from 'ALCcontext *' to 'openalpp::ALCcontext_struct *'

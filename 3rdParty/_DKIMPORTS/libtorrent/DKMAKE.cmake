@@ -33,4 +33,5 @@ dk_queueCommand	(${DKCMAKE_BUILD} -Dshared=OFF -Dunicode=OFF -Dstatic_runtime=ON
 
 
 ### COMPILE ###
-dk_build(${LIBTORRENT_FOLDER} torrent-rasterbar)
+#dk_build(${LIBTORRENT_FOLDER} torrent-rasterbar)
+dk_build(${LIBTORRENT_FOLDER})
