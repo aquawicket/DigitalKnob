@@ -296,7 +296,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(DKMidi)				# requires rtmidi
 	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
-	#dk_disable(DKOSGAudio)			# requires freealut
+	dk_disable(DKOSGAudio)			# requires osgaudio
 	dk_disable(DKOSGCef)			# build errors
 	dk_disable(DKOSGPhysics)		# requires bullet3
 	dk_disable(DKOSGStats)			# build errors
@@ -335,7 +335,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(openframeworks)		# error: cannot find opengles
 	dk_disable(openssl)				# lots of undefined references
 	dk_disable(opus)
-	dk_disable(osgaudio)			# requires openscenegraph
+	#dk_disable(osgaudio)			# requires openscenegraph
 	dk_disable(osgbullet)			# requires osgworks
 	dk_disable(osgrmlui)
 	dk_disable(osgworks)			# requires openscenegraph
