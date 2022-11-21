@@ -94,7 +94,7 @@ public:
 
 	DKCef* dkCef;
 
-#if WIN32
+#if WIN
 	WINDOWPLACEMENT g_wpPrev = { sizeof(g_wpPrev) };
 	WINDOWPLACEMENT wpc;
 	LONG HWNDStyle = 0;
