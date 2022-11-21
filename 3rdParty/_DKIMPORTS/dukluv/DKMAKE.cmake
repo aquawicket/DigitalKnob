@@ -3,6 +3,7 @@
 
 
 ### DEPEND ###
+dk_depend(duktape)
 dk_depend(libuv)
 
 
@@ -22,7 +23,7 @@ UNIX_dk_libRelease	(${DUKLUV}/${OS}/${RELEASE_DIR}/libdukluv.a)
 
 ### GENERATE ###
 dk_setPath(${DUKLUV}/${BUILD_DIR})
-dk_queueCommand(${DKCMAKE_BUILD} ${LIBUV_CMAKE} ${DUKLUV})
+dk_queueCommand(${DKCMAKE_BUILD} ${DUKTAPE_CMAKE} ${LIBUV_CMAKE} ${DUKLUV})
 
 
 ### COMPILE ###
