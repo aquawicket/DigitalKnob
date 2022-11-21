@@ -103,7 +103,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(DKOSGStats)			# build errors
 	dk_disable(DKOSGVideo)			# TODO
 	dk_disable(DKOSGWidget)			# build errors
-	dk_disable(DKScreenRecorder)	#
+	dk_disable(DKScreenRecorder)
 	dk_disable(DKSDLVideo)			# requires ffmpeg
 	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSFMLRml)			# INCOMPLETE
@@ -112,7 +112,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(DKUpdate)			# Error: 'boost/thread/xtime.hpp:24 expected identifier TIME_UTC_=1
 	dk_disable(DKVncClient)			# requires libvncserver
 	dk_disable(DKVncServer)			# requires libvncserver
-	dk_disable(dukluv)
+	#dk_disable(dukluv)
 	dk_disable(ffmpeg)
 	dk_disable(flac)				# 'asm' undelcared identifier
 	dk_disable(fontconfig)
