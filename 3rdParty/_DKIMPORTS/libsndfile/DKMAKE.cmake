@@ -1,6 +1,10 @@
 # https://github.com/libsndfile/libsndfile.git
 
 
+### DEPEND ###
+dk_depend(opus)
+
+
 ### IMPORT ###
 dk_import(https://github.com/libsndfile/libsndfile.git)
 
@@ -16,7 +20,7 @@ UNIX_dk_libRelease	(${LIBSNDFILE}/${OS}/${RELEASE_DIR}/libsndfile.a)
 
 ### GENERATE ###
 dk_setPath(${LIBSNDFILE}/${BUILD_DIR})
-dk_queueCommand(${DKCMAKE_BUILD} ${LIBSNDFILE})
+dk_queueCommand(${DKCMAKE_BUILD} ${OPUS_CMAKE} ${LIBSNDFILE})
 
 
 ### COMPILE ###
