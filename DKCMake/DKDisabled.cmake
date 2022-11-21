@@ -335,10 +335,10 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(openframeworks)		# error: cannot find opengles
 	dk_disable(openssl)				# lots of undefined references
 	dk_disable(opus)
-	#dk_disable(osgaudio)			# requires openscenegraph
+	#dk_disable(osgaudio)
 	dk_disable(osgbullet)			# requires osgworks
 	dk_disable(osgrmlui)
-	dk_disable(osgworks)			# requires openscenegraph
+	dk_disable(osgworks)
 	dk_disable(rmlui-d3d11)
 	dk_disable(rtmidi)
 	dk_disable(sdl-gpu)
