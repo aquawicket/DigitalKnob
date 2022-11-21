@@ -32,7 +32,7 @@ dk_disable(java)					# TODO
 dk_disable(jpeg)					# DEPRECATED: using libjpeg_turbo instead
 dk_disable(librocket)				# OBSOLETE: replaced by rmlui
 dk_disable(libx11)					# TODO
-dk_disable(mpg123)
+dk_disable(mpg123)					# TODO
 dk_disable(msys2)					# TODO: currently using msys
 dk_disable(sdl2_gif)				# DEPRECATED: using SDL_Image animation instead
 dk_disable(sdl2_giflib_sa)			# DEPRECATED: updated version of sdl2_gif. Using SDL_Image animation instead
@@ -86,7 +86,7 @@ if(WIN) # Disabled for Windows targets
 endif(WIN)
 
 if(WIN_64) # Disabled for Windows 64bit targets
-	dk_disable(libvncserver)
+	#dk_disable(libvncserver)
 	dk_disable(opencv)				# error: Only SIMD128, AVX2 and NEON are supported in Winograd.
 	dk_disable(sdl_net)
 	dk_disable(smpeg2)				# fatal error C1083: Cannot open include file: 'unistd.h'
