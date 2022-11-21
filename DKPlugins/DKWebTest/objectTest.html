@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Scratch Pad</title>
+<title>Object Test</title>
 </head>
 <body>
 
@@ -19,13 +19,13 @@
 // DKDom object comparison
 var a = document.getElementById("element1");
 var b = document.getElementById("element1");
-if(a == b){
-	console.log("DKDom object comparison: a == b");
-	document.getElementById("output").innerHTML += "<br></br>Object comparison: a == b";
-}
-else if(a === b){
+if(a === b){
 	console.log("DKDom object comparison: a === b");
 	document.getElementById("output").innerHTML += "<br></br>Object comparison: a === b";
+}
+else if(a == b){
+	console.log("DKDom object comparison: a == b");
+	document.getElementById("output").innerHTML += "<br></br>Object comparison: a == b";
 }
 else{
 	console.log("DKDom object comparison: a != b");
