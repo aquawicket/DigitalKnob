@@ -365,7 +365,7 @@ bool DKSDLWindow::GetHandle(const void* input, void* output) {
     SDL_SysWMinfo wmInfo;
     SDL_VERSION(&wmInfo.version);
     SDL_GetWindowWMInfo(window, &wmInfo);
-#ifdef WIN32
+#if WIN32
     HWND hwnd = wmInfo.info.win.window;
     *(HWND*)output = hwnd;
     return true;
@@ -384,6 +384,7 @@ bool DKSDLWindow::GetHandle(const void* input, void* output) {
     //if(!gdk_window){ return false; }
     //*(GdkWindow**)output = gdk_window;
     //return true;
+	return false;
 #else
     DKWARN("not implemented on this OS\n");
     return false;
