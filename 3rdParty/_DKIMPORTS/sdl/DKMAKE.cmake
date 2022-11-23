@@ -210,11 +210,12 @@ ANDROID64_dk_queueCommand	(${SDL_BUILD} "-DCMAKE_CXX_FLAGS=-DHAVE_GCC_ATOMICS=1"
 
 
 ### COMPILE ###
+dk_build(${SDL_FOLDER})
 #if(sdl2_SDL2static)
-	dk_build(${SDL_FOLDER} SDL2-static)
+	#dk_build(${SDL_FOLDER} SDL2-static)
 #endif()
 #if(sdl2_SDL2main)
-	dk_visualStudio	(${SDL_FOLDER} SDL2main) # windows, android
-	dk_xcode		(${SDL_FOLDER} SDL2main) # mac, ios, iossim
-	#dk_make		(${SDL_FOLDER} SDL2main) # linux, raspberry
+	#dk_visualStudio	(${SDL_FOLDER} SDL2main) # windows, android
+	#dk_xcode		(${SDL_FOLDER} SDL2main) # mac, ios, iossim
+	##dk_make		(${SDL_FOLDER} SDL2main) # linux, raspberry
 #endif()
