@@ -46,7 +46,7 @@ UNIX_dk_set	(GLEW_CMAKE "-DCMAKE_C_FLAGS=-I${GLEW}/include -DGLEW_STATIC" "-DCMA
 	
 	
 ### GENERATE ###
-dk_setPath		(${GLEW}/${BUILD_DIR})
+#dk_setPath		(${GLEW}/${BUILD_DIR})
 dk_queueCommand	(${DKCMAKE_BUILD} ${GLEW}/build/cmake)
 #dk_copy(${GLEW}/${OS}/lib/${DEBUG_DIR} ${GLEW}/${OS}/CMakeFiles/Export/lib/ OVERWRITE)
 #dk_copy(${GLEW}/${OS}/lib/${RELEASE_DIR} ${GLEW}/${OS}/CMakeFiles/Export/lib/ OVERWRITE)

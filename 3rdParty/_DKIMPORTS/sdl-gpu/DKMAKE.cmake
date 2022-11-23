@@ -29,7 +29,7 @@ ANDROID_dk_libRelease	(${SDL-GPU}/${OS}/SDL_gpu-VS/lib/${RELEASE_DIR}/libSDL2_gp
 
 
 ### GENERATE ###
-dk_setPath		(${SDL-GPU}/${BUILD_DIR})
+#dk_setPath		(${SDL-GPU}/${BUILD_DIR})
 dk_queueCommand	(${DKCMAKE_BUILD} ${SDL_CMAKE} ${SDL-GPU})
 
 

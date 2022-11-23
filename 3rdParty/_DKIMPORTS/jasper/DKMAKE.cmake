@@ -21,7 +21,7 @@ ANDROID_dk_libRelease	(${JASPER}/${OS}/src/libjasper/jasper.a)
 
 
 ### GENERATE ###
-dk_setPath(${JASPER}/${BUILD_DIR})
+#dk_setPath(${JASPER}/${BUILD_DIR})
 dk_queueCommand(${DKCMAKE_BUILD} ${JASPER})
 
 

@@ -37,7 +37,7 @@ ANDROID_dk_set			(TIFF_CMAKE -DTIFF_INCLUDE_DIR=${TIFF}/libtiff "-DCMAKE_C_FLAGS
 	
 
 ### GENERATE ###
-dk_setPath		(${TIFF}/${BUILD_DIR})
+#dk_setPath		(${TIFF}/${BUILD_DIR})
 dk_queueCommand	(${DKCMAKE_BUILD} ${TIFF})
 
 

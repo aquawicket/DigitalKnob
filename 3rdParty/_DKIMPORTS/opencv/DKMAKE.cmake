@@ -458,7 +458,7 @@ endif()
 
 
 ### GENERATE ###
-dk_setPath							(${OPENCV}/${BUILD_DIR})
+#dk_setPath							(${OPENCV}/${BUILD_DIR})
 
 string(REPLACE "/std:c++17" "" OPENCV_BUILD "${DKCMAKE_BUILD}")
 string(REPLACE "  " " " OPENCV_BUILD "${OPENCV_BUILD}")

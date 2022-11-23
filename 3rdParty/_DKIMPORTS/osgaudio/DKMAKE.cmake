@@ -55,7 +55,7 @@ ANDROID_dk_libRelease(${OSGAUDIO}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/lib
 
 
 ### GENERATE ###
-dk_setPath(${OSGAUDIO}/${BUILD_DIR})
+#dk_setPath(${OSGAUDIO}/${BUILD_DIR})
 string(REPLACE "-std=c++17" "" OSGAUDIO_BUILD "${DKCMAKE_BUILD}")
 string(REPLACE "-std=gnu++17" "" OSGAUDIO_BUILD "${OSGAUDIO_BUILD}")
 string(REPLACE "  " " " OSGAUDIO_BUILD "${OSGAUDIO_BUILD}")

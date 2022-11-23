@@ -26,7 +26,7 @@ UNIX_dk_libRelease	(${LIBSNDFILE}/${OS}/${RELEASE_DIR}/libsndfile.a)
 
 
 ### GENERATE ###
-dk_setPath(${LIBSNDFILE}/${BUILD_DIR})
+#dk_setPath(${LIBSNDFILE}/${BUILD_DIR})
 dk_queueCommand(${DKCMAKE_BUILD} ${FLAC_CMAKE} ${LAME_CMAKE} ${MPG123_CMAKE} ${OGG_CMAKE} ${OPUS_CMAKE} ${SPEEX_CMAKE} ${SQLITE_CMAKE} ${VORBIS_CMAKE} ${LIBSNDFILE})
 
 

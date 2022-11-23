@@ -15,7 +15,7 @@ UNIX_dk_libRelease	(${OPUS}/${OS}/${RELEASE_DIR}/libopus.a)
 
 
 ### GENERATE ###
-dk_setPath(${OPUS}/${BUILD_DIR})
+#dk_setPath(${OPUS}/${BUILD_DIR})
 dk_queueCommand(${DKCMAKE_BUILD} ${OPUS})
 
 

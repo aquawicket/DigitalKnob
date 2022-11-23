@@ -30,7 +30,7 @@ ANDROID_dk_set	(JPEG_CMAKE -DJPEG_INCLUDE_DIR=${JPEG} -DJPEG_INCLUDE_DIR2=${JPEG
 
 
 ### GENERATE ###
-dk_setPath		(${JPEG}/${BUILD_DIR})
+#dk_setPath		(${JPEG}/${BUILD_DIR})
 dk_queueCommand	(${DKCMAKE_BUILD} ${JPEG})
 
 

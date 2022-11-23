@@ -27,7 +27,7 @@ ANDROID_dk_libRelease	(${UWEBSOCKETS}/${OS}/${RELEASE_DIR}/libuWS.a)
 
 
 ### GENERATE ###
-dk_setPath		(${UWEBSOCKETS}/${BUILD_DIR})
+#dk_setPath		(${UWEBSOCKETS}/${BUILD_DIR})
 dk_queueCommand	(${DKCMAKE_BUILD} ${ZLIB_CMAKE} ${LIBUV_CMAKE} ${OPENSSL_CMAKE} ${UWEBSOCKETS})
 
 

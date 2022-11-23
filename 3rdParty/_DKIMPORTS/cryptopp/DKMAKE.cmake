@@ -33,7 +33,7 @@ ANDROID_dk_libRelease	(${CRYPTOPP}/${OS}/${RELEASE_DIR}/libcryptopp.a)
 
 
 ### GENERATE ###
-dk_setPath(${CRYPTOPP}/${BUILD_DIR})
+#dk_setPath(${CRYPTOPP}/${BUILD_DIR})
 WIN_dk_queueCommand			(${DKCMAKE_BUILD} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DBUILD_TESTING=OFF ${CRYPTOPP})
 
 string(REPLACE "-DMAC " " " DKCMAKE_BUILD_CRYPTOPP "${DKCMAKE_BUILD}") #fix for class named MAC in cryptopp

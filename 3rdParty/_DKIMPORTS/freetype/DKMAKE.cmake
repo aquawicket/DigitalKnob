@@ -30,7 +30,7 @@ ANDROID_dk_set	(FREETYPE_CMAKE -DFREETYPE_DIR=${FREETYPE} -DFREETYPE_INCLUDE_DIR
 	
 	
 ### GENERATE ###
-dk_setPath		(${FREETYPE}/${BUILD_DIR})
+#dk_setPath		(${FREETYPE}/${BUILD_DIR})
 dk_queueCommand	(${DKCMAKE_BUILD} ${FREETYPE})
 
 

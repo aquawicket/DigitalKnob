@@ -24,7 +24,7 @@ UNIX_dk_libRelease	(${PACKAGE}/${OS}/${RELEASE_DIR}/libpackage.a)
 
 
 ### GENERATE ###
-dk_setPath		(${PACKAGE}/${BUILD_DIR})
+#dk_setPath		(${PACKAGE}/${BUILD_DIR})
 dk_queueCommand	(${DKCMAKE_BUILD} ${PACKAGE})
 
 

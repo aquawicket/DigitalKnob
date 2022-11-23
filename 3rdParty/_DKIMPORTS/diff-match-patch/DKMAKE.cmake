@@ -22,7 +22,7 @@ dk_import(https://github.com/google/diff-match-patch.git)
 
 
 ### GENERATE ###
-dk_setPath		(${DIFF-MATCH-PATCH}/${BUILD_DIR})
+#dk_setPath		(${DIFF-MATCH-PATCH}/${BUILD_DIR})
 dk_queueCommand	(${DKCMAKE_BUILD} ${DIFF-MATCH-PATCH})
 
 ### COMPILE ###

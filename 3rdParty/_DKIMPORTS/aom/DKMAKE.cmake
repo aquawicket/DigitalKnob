@@ -14,7 +14,7 @@ UNIX_dk_libRelease	(${AOM}/${OS}/${RELEASE_DIR}/libaom.a)
 
 
 ### GENERATE ###
-dk_setPath		(${AOM}/${BUILD_DIR})
+#dk_setPath		(${AOM}/${BUILD_DIR})
 dk_queueCommand	(${DKCMAKE_BUILD} -DAOM_TARGET_CPU=generic ${AOM})
 
 

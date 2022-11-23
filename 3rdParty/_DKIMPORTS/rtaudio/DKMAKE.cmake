@@ -32,7 +32,7 @@ ANDROID_dk_libRelease	(${RTAUDIO}/${OS}/${RELEASE_DIR}/librtaudio.a)
 
 
 ### GENERATE ###
-dk_setPath		(${RTAUDIO}/${BUILD_DIR})
+#dk_setPath		(${RTAUDIO}/${BUILD_DIR})
 dk_queueCommand	(${DKCMAKE_BUILD} ${RTAUDIO})
 
 

@@ -27,7 +27,7 @@ ANDROID_dk_libRelease	(${RLOTTIE}/${OS}/${RELEASE_DIR}/librlottie.a)
 
 
 ### GENERATE ###
-dk_setPath			(${RLOTTIE}/${BUILD_DIR})
+#dk_setPath			(${RLOTTIE}/${BUILD_DIR})
 WIN_dk_queueCommand	(${DKCMAKE_BUILD} /EHsc ${RLOTTIE})
 UNIX_dk_queueCommand(${DKCMAKE_BUILD} ${RLOTTIE})
 

@@ -29,7 +29,7 @@ UNIX_RELEASE_dk_set	(LIBUV_CMAKE -DLIBUV_INCLUDE_DIR=${LIBUV} -DLIBUV_LIBRARY=${
 
 
 ### GENERATE ###
-dk_setPath		(${LIBUV}/${BUILD_DIR})
+#dk_setPath		(${LIBUV}/${BUILD_DIR})
 dk_queueCommand	(${DKCMAKE_BUILD} ${LIBUV})
 
 

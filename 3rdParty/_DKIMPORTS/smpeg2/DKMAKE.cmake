@@ -28,7 +28,7 @@ dk_set(SMPEG2_CMAKE -DSMPEG_INCLUDE_DIR=${SMPEG2})
 	
 	
 ### GENERATE ###
-dk_setPath(${SMPEG2}/${BUILD_DIR})
+#dk_setPath(${SMPEG2}/${BUILD_DIR})
 WIN_dk_queueCommand			(${DKCMAKE_BUILD} ${SDL_CMAKE} ${SMPEG2})
 MAC_dk_queueCommand			(${DKCMAKE_BUILD} -DCMAKE_CXX_FLAGS=-Wno-narrowing ${SDL_CMAKE} ${SMPEG2})
 IOS_dk_queueCommand			(${DKCMAKE_BUILD} -DCMAKE_CXX_FLAGS=-Wno-narrowing ${SDL_CMAKE} ${SMPEG2})

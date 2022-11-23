@@ -16,7 +16,7 @@ UNIX_dk_libRelease	(${LIGHTTPD}/${OS}/lib/${RELEASE_DIR}/liblighttpd.a)
 
 
 ### GENERATE ###
-dk_setPath		(${LIGHTTPD}/${BUILD_DIR})
+#dk_setPath		(${LIGHTTPD}/${BUILD_DIR})
 dk_queueCommand	(${DKCMAKE_BUILD} ${LIGHTTPD}) # -DLWS_WITH_SSL=OFF
 
 

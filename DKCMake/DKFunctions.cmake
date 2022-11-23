@@ -3891,7 +3891,7 @@ function(dk_importGit url) #branch #id #PATCH
 	dk_includes("${ARGN}" "PATCH" includes)
 	if(${includes})
 		dk_patch(${Lib} ${${LIBVAR}})
-	endif()
+	endif()	
 endfunction()
 
 
@@ -4100,6 +4100,11 @@ function(dk_import url)
 	if(${has_patch})
 		dk_patch(${plugin} ${${plugin_var}})
 	endif()
+	
+	# Set the current build output directory
+	dk_verbose("setting current build directory to ${${plugin_var}}/${BUILD_DIR}")
+	dk_setPath(${${plugin_var}}/${BUILD_DIR})
+	
 endfunction()
 dk_createOsMacros("dk_import")
 

@@ -187,7 +187,7 @@ ANDROID_dk_set(SDL_CMAKE
 	
 
 ### GENERATE ###
-dk_setPath					(${SDL}/${BUILD_DIR})
+#dk_setPath					(${SDL}/${BUILD_DIR})
 WIN_dk_queueCommand			(${DKCMAKE_BUILD} -DSDL_SHARED=OFF -DSDL_LIBC=ON ${SDL})
 
 string(REPLACE "-std=c17" "" SDL_BUILD "${DKCMAKE_BUILD}")

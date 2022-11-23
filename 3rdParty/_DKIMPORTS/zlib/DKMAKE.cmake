@@ -26,7 +26,7 @@ ANDROID_dk_set			(ZLIB_CMAKE -DZLIB_INCLUDE_DIR=${ZLIB} "-DCMAKE_C_FLAGS=-I${ZLI
 
 
 ### GENERATE ###
-dk_setPath		(${ZLIB}/${BUILD_DIR})
+#dk_setPath		(${ZLIB}/${BUILD_DIR})
 dk_queueCommand	(${DKCMAKE_BUILD} ${ZLIB})
 
 
