@@ -273,6 +273,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(libxml2)				# Not such file or directory
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(openframeworks)		# error: tesselator.h: No such file or directory
+	dk_disable(openssl)				# undefined reference errors
 	dk_disable(osgaudio)			# can't find libosg_osgAudiod.a
 	dk_disable(osgbullet)			# requires osgworks
 	dk_disable(osgrmlui)
