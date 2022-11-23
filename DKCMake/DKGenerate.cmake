@@ -93,8 +93,11 @@ foreach(plugin ${dkdepend_list})
 		break()
 	endif()
 	dk_debug(plugin_path)
+	
+	# Set the current build output directory
+	dk_setPath(${plugin_path}/${BUILD_DIR})
 
-	#This executes the 3rdParty library builds, and dkplugin setup, creates CMakeLists.txt files
+	# This executes the 3rdParty library builds, and dkplugin setup, creates CMakeLists.txt files
 	include(${plugin_path}/DKMAKE.cmake)
 	
 	#check that each library is using the proper variables. Should be UPPERCASE plugin name.   I.E. boost = BOOST
