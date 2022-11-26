@@ -15,8 +15,8 @@ LINUX_dk_libDebug		(${ZSTD}/${OS}/${DEBUG_DIR}/lib/libzstd.a)
 LINUX_dk_libRelease		(${ZSTD}/${OS}/${RELEASE_DIR}/lib/libzstd.a)
 RASPBERRY_dk_libDebug	(${ZSTD}/${OS}/${DEBUG_DIR}/lib/libzstd.a)
 RASPBERRY_dk_libRelease	(${ZSTD}/${OS}/${RELEASE_DIR}/lib/libzstd.a)
-ANDROID_dk_libDebug		(${ZSTD}/${OS}/${DEBUG_DIR}/libzstd.a)
-ANDROID_dk_libRelease	(${ZSTD}/${OS}/${RELEASE_DIR}/libzstd.a)
+ANDROID_dk_libDebug		(${ZSTD}/${OS}/lib/${DEBUG_DIR}/libzstd.a)
+ANDROID_dk_libRelease	(${ZSTD}/${OS}/lib/${RELEASE_DIR}/libzstd.a)
 
 
 ### 3RDPARTY LINK ###
