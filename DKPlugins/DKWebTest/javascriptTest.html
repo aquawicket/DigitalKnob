@@ -1,19 +1,30 @@
 <html>
 	<head>
 		<title>Javascript Test</title>
+		<!--
 		<script>
 			function runCode(){
 				var textarea = document.getElementById("jscode")
 				var code = textarea.value
-				alert(code)
+				console.log(code)
 			}
 		</script>
+		-->
 	</head>
 	<body>
 		<a href="index.html">home</a><br /><br />
 		<a style="font-weight:bold;font-size:20px;">Javascript Test</a><br />
 		<textarea id="jscode" name="jscode" rows="4" cols="50"></textarea><br />
-		<button type="button" onclick="runCode()">Run Code</button>
+		<button id="runCode" type="button">Run Code</button>
+		<script>
+			var button = document.getElementById("runCode")
+			button.onclick = function(){
+				var textarea = document.getElementById("jscode")
+				var code = textarea.value
+				console.log(code)
+				eval(code)
+			};
+		</script>
 		<br />
 	</body>
 </html>
