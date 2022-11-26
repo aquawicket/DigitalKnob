@@ -133,7 +133,7 @@ public:
 		}
 	}
 	static bool Valid(const DKString& id = ""){
-		DKDEBUGFUNC(id);
+		//DKDEBUGFUNC(id); // EXCESSIVE LOGGING
 		for(unsigned int i=0; i<instances.size(); ++i){
 			if(same(id, instances[i]->data[1])){
 				if (instances[i]){
