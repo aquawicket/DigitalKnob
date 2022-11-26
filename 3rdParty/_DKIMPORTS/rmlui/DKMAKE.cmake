@@ -14,7 +14,7 @@ dk_depend(sfml)
 ### IMPORT ###
 #dk_import(https://github.com/aquawicket/RmlUi.git PATCH)
 #dk_import(https://github.com/aquawicket/RmlUi.git BRANCH RCSS_attribute_selector_support PATCH)
-dk_import(https://github.com/mikke89/RmlUi.git PATCH)
+dk_import(https://github.com/mikke89/RmlUi.git)
 
 
 ### LINK ###
