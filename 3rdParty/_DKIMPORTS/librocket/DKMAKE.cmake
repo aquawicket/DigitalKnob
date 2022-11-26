@@ -53,7 +53,6 @@ ANDROID_dk_libRelease	(${LIBROCKET}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/l
 
 
 ### GENERATE ###
-#dk_setPath			(${LIBROCKET}/${BUILD_DIR})
 WIN_dk_queueCommand	(${DKCMAKE_BUILD} "-DCMAKE_CXX_FLAGS=/I${LIBROCKET}/Include" ${FREETYPE_CMAKE} ${LIBROCKET})
 UNIX_dk_queueCommand(${DKCMAKE_BUILD} "-DCMAKE_CXX_FLAGS=-I${LIBROCKET}/Include" ${FREETYPE_CMAKE} ${LIBROCKET})
 

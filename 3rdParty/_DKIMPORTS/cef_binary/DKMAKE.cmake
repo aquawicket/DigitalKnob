@@ -134,7 +134,6 @@ ANDROID_dk_libRelease	(${CEF_BINARY}/${OS}/libcef_dll_wrapper/${RELEASE_DIR}/lib
 
 
 ### GENERATE ###
-#dk_setPath					(${CEF_BINARY}/${BUILD_DIR})
 WIN_dk_queueCommand			(${DKCMAKE_BUILD} -DUSE_SANDBOX=OFF ${CEF_BINARY})
 APPLE_dk_queueCommand		(${DKCMAKE_BUILD} -DUSE_SANDBOX=OFF ${CEF_BINARY})
 LINUX_dk_queueCommand		(${DKCMAKE_BUILD} -DUSE_SANDBOX=OFF ${CEF_BINARY})

@@ -33,8 +33,7 @@ ANDROID_dk_libRelease	(${SDL2_GIF}/${OS}/${RELEASE_DIR}/libSDL2_gif.a)
 
 
 ### GENERATE ###
-#dk_setPath		(${SDL2_GIF}/${BUILD_DIR})
-dk_queueCommand	(${DKCMAKE_BUILD} ${SDL2_CMAKE} ${SDL2_GIF})
+dk_queueCommand	(${DKCMAKE_BUILD} ${SDL_CMAKE} ${SDL2_GIF})
 
 
 ### COMPILE ###

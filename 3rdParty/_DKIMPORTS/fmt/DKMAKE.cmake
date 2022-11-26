@@ -21,7 +21,6 @@ dk_include(${FMT}/include)
 
 
 ### GENERATE ###
-#dk_setPath		(${FMT}/${BUILD_DIR})
 #dk_queueCommand(${DKCMAKE_BUILD} -DCMAKE_POSITION_INDEPENDENT_CODE=TRUE ${FMT})
 
 

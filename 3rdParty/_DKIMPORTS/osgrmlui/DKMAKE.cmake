@@ -16,7 +16,6 @@ UNIX_dk_libRelease	(${OSGRMLUI}/${OS}/${RELEASE_DIR}/libosgrmlui.a)
 
 
 ### GENERATE ###
-#dk_setPath(${OSGRMLUI}/${BUILD_DIR})
 dk_queueCommand(${DKCMAKE_BUILD} ${OSGRMLUI})
 
 

@@ -45,8 +45,6 @@ if(NOT EXISTS ${DUKTAPE}/dist/src/duktape.c)
 
 	#dk_copy(${DUKTAPE}/dist/src/ ${DUKTAPE}/src OVERWRITE)
 endif()
-
-#dk_setPath(${DUKTAPE}/${BUILD_DIR})
 dk_queueCommand(${DKCMAKE_BUILD} ${DUKTAPE})
 
 

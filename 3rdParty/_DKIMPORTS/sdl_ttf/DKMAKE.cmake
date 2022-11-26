@@ -31,7 +31,6 @@ ANDROID_dk_libRelease	(${SDL_TTF}/${OS}/lib/${RELEASE_DIR}/SDL_ttf.a)
 
 
 ### GENERATE ###
-#dk_setPath		(${SDL_TTF}/${BUILD_DIR})
 dk_queueCommand	(${DKCMAKE_BUILD} ${FREETYPE_CMAKE} ${LIBWEBP_CMAKE} ${SDL_CMAKE} ${SDL_TTF}) # -DSDLTTF_SUPPORT_WEBP=OFF
 
 

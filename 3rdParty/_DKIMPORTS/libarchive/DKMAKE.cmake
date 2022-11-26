@@ -37,8 +37,6 @@ ANDROID_dk_libRelease	(${LIBARCHIVE}/${OS}/libarchive/${RELEASE_DIR}/libarchive.
 
 
 ### GENERATE ###
-#dk_setPath(${LIBARCHIVE}/${BUILD_DIR})
-
 WIN_dk_queueCommand(${DKCMAKE_BUILD}	
 	-DWINDOWS_VERSION=WIN10
 	-DENABLE_BZip2=ON

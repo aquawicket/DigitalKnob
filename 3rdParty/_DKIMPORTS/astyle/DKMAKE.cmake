@@ -17,7 +17,6 @@ UNIX_dk_libRelease	(${ASTYLE}/${OS}/${RELEASE_DIR}/libastyle.a)
 
 
 ### GENERATE ###
-#dk_setPath(${ASTYLE}/${BUILD_DIR})
 dk_queueCommand(${DKCMAKE_BUILD} ${ASTYLE})
 
 

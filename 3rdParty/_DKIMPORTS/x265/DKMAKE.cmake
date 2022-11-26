@@ -15,7 +15,6 @@ UNIX_dk_libRelease	(${X265}/${OS}/${RELEASE_DIR}/libx265.a)
 
 
 ### GENERATE ###
-#dk_setPath(${X265}/${BUILD_DIR})
 dk_queueCommand(${DKCMAKE_BUILD} ${X265})
 
 

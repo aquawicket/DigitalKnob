@@ -24,7 +24,6 @@ dk_set(ZSTD_CMAKE -DZSTD_INCLUDE_DIR=${ZSTD}/lib) #TODO
 
 
 ### GENERATE ###
-#dk_setPath(${ZSTD}/${BUILD_DIR})
 dk_queueCommand(${DKCMAKE_BUILD} ${ZSTD}/build/cmake)
 
 

@@ -23,7 +23,6 @@ ANDROID_dk_libRelease	(${LIBCACA}/${OS}/${RELEASE_DIR}/libcaca.a)
 
 
 ### GENERATE ####
-#dk_setPath		(${LIBCACA}/${BUILD_DIR})
 dk_queueCommand	(${DKCMAKE_BUILD} ${LIBCACA})
 
 

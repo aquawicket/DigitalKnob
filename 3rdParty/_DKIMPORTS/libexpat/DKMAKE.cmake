@@ -16,7 +16,6 @@ UNIX_dk_libRelease	(${LIBEXPAT}/${OS}/${RELEASE_DIR}/libexpat.a)
 
 
 ### GENERATE ###
-#dk_setPath(${LIBEXPAT}/${BUILD_DIR})
 dk_queueCommand(${DKCMAKE_BUILD} ${LIBEXPAT})
 
 

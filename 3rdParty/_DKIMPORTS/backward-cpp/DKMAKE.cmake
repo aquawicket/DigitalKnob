@@ -20,7 +20,6 @@ endif()
 
 
 ### GENERATE ###
-#dk_setPath		(${BACKWARD-CPP}/${BUILD_DIR})
 #dk_queueCommand	(${DKCMAKE_BUILD} ${BACKWARD-CPP})
 
 

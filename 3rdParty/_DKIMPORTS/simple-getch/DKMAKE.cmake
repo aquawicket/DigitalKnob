@@ -23,7 +23,6 @@ ANDROID_dk_libRelease	(${GETCH}/getch/libgetch.a)
 
 
 ### COMPILE ###
-#dk_setPath							(${GETCH}/${BUILD_DIR})
 LINUX_DEBUG_dk_queueCommand			(../../make)
 LINUX_RELEASE_dk_queueCommand		(../../make)
 RASPBERRY_DEBUG_dk_queueCommand		(../../make)
