@@ -239,6 +239,7 @@ if(IOS)  # Disabled for iOS targets
 	dk_disable(flac)				# configure: error: C compiler cannot create executables
 	dk_disable(giflib)				# configure: error: C compiler cannot create executables
 	dk_disable(ogg)					# configure: error: C compiler cannot create executables
+	dk_disable(vorbis)				# configure: error: C compiler cannot create executables
 endif()
 
 
