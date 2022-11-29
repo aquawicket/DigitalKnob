@@ -235,6 +235,9 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(x265)
 	dk_disable(zstd)
 endif(IOS OR IOSSIM)
+if(IOS)  # Disabled for iOS targets
+	dk_disable(giflib)
+endif()
 
 
 if(LINUX) # Disabled for Linux targets
