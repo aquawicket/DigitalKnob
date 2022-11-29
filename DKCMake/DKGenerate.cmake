@@ -845,7 +845,10 @@ if(IOS OR IOSSIM)
 	#dk_set(UILaunchStoryboardName dk)
 	#dk_set(UIMainStoryboardFile dk.storyboard)
 	set_target_properties(${APP_NAME} PROPERTIES MACOSX_BUNDLE TRUE MACOSX_BUNDLE_INFO_PLIST ${DKPLUGINS}/_DKIMPORT/ios/Info.plist)
-			
+	
+	###################### Disable bitcode ############################
+	set_target_properties(${APP_NAME} PROPERTIES XCODE_ATTRIBUTE_ENABLE_BITCODE "NO")
+	
 	###################### Add Assets to Bundle #######################
 	add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${DKPROJECT}/assets $<TARGET_FILE_DIR:${APP_NAME}>/assets)
 	#if(EXISTS ${DKPROJECT}/icons/mac/icons.icns)
