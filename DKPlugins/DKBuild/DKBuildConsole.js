@@ -153,6 +153,8 @@ function DKBuildConsole_SelectOs() {
 		OSes.push("ios64")
 		//OSes.push("iossim32")
 		OSes.push("iossim64")
+		OSes.push("android32")
+		OSes.push("android64")
 	}
 	if(CPP_DK_GetOS() === "Linux"){
 		var arch = CPP_DK_Execute("uname -m")
