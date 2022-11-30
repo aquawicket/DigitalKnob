@@ -32,7 +32,6 @@ if(NOT EXISTS ${DUKTAPE}/dist/src/duktape.c)
 	dk_makeDirectory(${DUKTAPE}/dist)
 	#dk_executeProcess(${NODE_EXE} ${DUKTAPE}/src-tools/index.js configure --output-directory ${DUKTAPE}/src --source-directory ${DUKTAPE}/src-input --config-directory ${DUKTAPE}/config)
 	#dk_executeProcess(${PYTHON_EXE} ${DUKTAPE}/util/dist.py)  # default generator
-	#dk_setPath(${DUKTAPE})
 	dk_executeProcess(${PYTHON_APP} ${DUKTAPE}/tools/configure.py
 		--output-directory ${DUKTAPE}/dist/src
 		-DDUK_USE_GLOBAL_BINDING 
@@ -41,10 +40,7 @@ if(NOT EXISTS ${DUKTAPE}/dist/src/duktape.c)
 		-DDUK_USE_INTERRUPT_COUNTER 
 		-DDUK_USE_DEBUGGER_DUMPHEAP 
 		-DDUK_USE_DEBUGGER_INSPECT)
-
-	#dk_copy(${DUKTAPE}/dist/src/ ${DUKTAPE}/src OVERWRITE)
 endif()
-#dk_setPath(${DUKTAPE}/${BUILD_DIR})
 dk_queueCommand(${DKCMAKE_BUILD} ${DUKTAPE})
 
 
