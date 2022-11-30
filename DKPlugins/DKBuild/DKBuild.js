@@ -178,6 +178,10 @@ function DKBuild_InstallCmake(){
 }
 
 function DKBuild_ValidateVC2019(){
+	if(CPP_DK_GetOS() !== "Windows"){
+		console.log("Visual Studio is for Windows only. skipping...")
+		return;
+	}
 	console.log("Looking for Visual Studio")
 	if(!CPP_DKFile_Exists(VISUALSTUDIO))
 		DKBuild_InstallVC2019()
