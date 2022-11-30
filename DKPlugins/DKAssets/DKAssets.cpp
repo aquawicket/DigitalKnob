@@ -48,7 +48,7 @@ bool DKAssets::Init(){
 
 #if !IOS
 	DKFile::MakeDir(DKFile::local_assets+"USER");
-#endf
+#endif
 	DKINFO("DKFile::local_assets = "+DKFile::local_assets+"\n");
 
 	DKString file;
