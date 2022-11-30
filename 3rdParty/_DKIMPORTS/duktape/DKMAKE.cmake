@@ -28,10 +28,9 @@ UNIX_dk_libRelease	(${DUKTAPE}/${OS}/${RELEASE_DIR}/libduktape.a)
 
 
 ### GENERATE ###
+dk_setPath(${DUKTAPE})
 if(NOT EXISTS ${DUKTAPE}/dist/src/duktape.c)
-	dk_setPath(${DUKTAPE})
 	dk_makeDirectory(${DUKTAPE}/dist)
-	
 	#dk_executeProcess(${NODE_EXE} ${DUKTAPE}/src-tools/index.js configure --output-directory ${DUKTAPE}/src --source-directory ${DUKTAPE}/src-input --config-directory ${DUKTAPE}/config)
 	#dk_executeProcess(${PYTHON_EXE} ${DUKTAPE}/util/dist.py)  # default generator
 	dk_executeProcess(${PYTHON_APP} ${DUKTAPE}/tools/configure.py
