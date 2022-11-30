@@ -228,8 +228,13 @@ function DKBuild_ValidateNDK(){
 	ANDROID_NDK = DIGITALKNOB+"DK/3rdParty/android-sdk/ndk/"+ANDROID_NDK_BUILD
 	
 	//set environment variables
-	if(ANDROID_NDK !== CPP_DK_Execute("echo %VS_NdkRoot%", "rt"))
-		CPP_DK_Execute("setx VS_NdkRoot "+ANDROID_NDK) //https://stackoverflow.com/a/54350289/688352
+	if(CPP_DK_GetOS() === "Windows"){
+		if(ANDROID_NDK !== CPP_DK_Execute("echo %VS_NdkRoot%", "rt"))
+			CPP_DK_Execute("setx VS_NdkRoot "+ANDROID_NDK) //https://stackoverflow.com/a/54350289/688352
+	}
+	else{
+		console.warn("set environment variables not implemented on LINUX");
+	}
 		
 	// Validate install
 	if(!CPP_DKFile_Exists(ANDROID_NDK+"/installed")){
