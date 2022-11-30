@@ -233,7 +233,7 @@ function DKBuild_ValidateNDK(){
 			CPP_DK_Execute("setx VS_NdkRoot "+ANDROID_NDK) //https://stackoverflow.com/a/54350289/688352
 	}
 	else{
-		console.warn("set environment variables not implemented on LINUX");
+		console.warn("setting environment variables not implemented on LINUX");
 	}
 		
 	// Validate install
@@ -529,13 +529,19 @@ function DKBuild_DoResults(){
 	if(OS === "android32"){
 		DKBuild_ValidateNDK()
 		DKBuild_ValidateVC2019()
-		CPP_DKFile_MkDir(app_path+OS)		
-		if(!DKBuild_Command(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/openjdk/registerJDK.cmd"))
-			return false
+		CPP_DKFile_MkDir(app_path+OS)
+		
 		if(CPP_DK_GetOS() === "Windows"){
+			if(!DKBuild_Command(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/openjdk/registerJDK.cmd"))
+				return false
 			if(!DKBuild_Command(CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=26 -DANDROID-NDK="+ANDROID_NDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROID_NDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"android32"))
 				return false
 		}
+		else{
+			if(!DKBuild_Command(CMAKE+" -G \"Unix Makefiles\" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=26 -DANDROID-NDK="+ANDROID_NDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROID_NDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"android32"))
+				return false
+		}
+		
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target main --config Debug"))	
 				return false
@@ -544,12 +550,19 @@ function DKBuild_DoResults(){
 			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target main --config Release"))
 				return false
 		}
-		if(!DKBuild_Command(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/openjdk/registerJDK.cmd"))
-			return false
+		
+		if(CPP_DK_GetOS() === "Windows"){
+			if(!DKBuild_Command(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/openjdk/registerJDK.cmd"))
+				return false
+		}
+		
 		if(!DKBuild_Command(app_path+OS+"/gradlew --project-dir "+app_path+OS+" --info clean build"))
 			return false
-		if(!DKBuild_Command(app_path+OS+"/___Install.cmd"))
-			return false
+		
+		if(CPP_DK_GetOS() === "Windows"){
+			if(!DKBuild_Command(app_path+OS+"/___Install.cmd"))
+				return false
+		}
 	}
 	
 	////// ANDROID6 arm64-v8a/////
