@@ -18,10 +18,10 @@ if(COMPILE_CMAKE)
 	
 	### GENERATE / COMPILE ###
 	DEBUG_dk_setPath	(${CMAKE}/${OS}/${DEBUG_DIR})
-	DEBUG_dk_shell		(${DKCONFIGURE_BUILD})
+	DEBUG_dk_shell		(../../configure)
 	DEBUG_dk_shell		(make)
 	RELEASE_dk_setPath	(${CMAKE}/${OS}/${RELEASE_DIR})
-	RELEASE_dk_shell	(${DKCONFIGURE_BUILD})
+	RELEASE_dk_shell	(../../configure)
 	RELEASE_dk_shell	(make)
 
 else()
