@@ -4,7 +4,7 @@
 # https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi
 # https://developer.android.com/studio/projects/configure-cmake
 
-set(COMPILE_CMAKE 1)
+set(COMPILE_CMAKE 0)
 
 if(COMPILE_CMAKE)
 	################################################################################################################
