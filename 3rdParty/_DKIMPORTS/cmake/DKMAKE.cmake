@@ -18,7 +18,7 @@ if(COMPILE_CMAKE)
 	#dk_shell(pacman -S --needed git base-devel mingw-w64-x86_64-gcc)
 	
 	### GENERATE ###
-	dk_command(${DKCMAKE_BUILD} ${OPENSSL_CMAKE} ${CMAKE})
+	dk_command(${DKCMAKE_BUILD} -DCMAKE_USE_OPENSSL=OFF ${CMAKE}) # ${OPENSSL_CMAKE}
 
 	### COMPILE ###
 	dk_set(QUEUE_BUILD ON)
