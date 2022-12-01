@@ -9,6 +9,7 @@ set(COMPILE_CMAKE 1)
 if(COMPILE_CMAKE)
 	################################################################################################################
 	#dk_depend(msys)
+	dk_depend(openssl)
 	dk_import(https://github.com/Kitware/CMake.git)
 	#WIN_HOST_dk_set(CMAKE_VERSION 3a169af9524339e8b2e82130da7605040daf7925)
 	#dk_import(https://github.com/Kitware/CMake/archive/3a169af9524339e8b2e82130da7605040daf7925.zip)
@@ -17,7 +18,7 @@ if(COMPILE_CMAKE)
 	#dk_shell(pacman -S --needed git base-devel mingw-w64-x86_64-gcc)
 	
 	### GENERATE ###
-	dk_command	(${DKCMAKE_BUILD} ${CMAKE})
+	dk_command(${DKCMAKE_BUILD} ${OPENSSL_CMAKE} ${CMAKE})
 
 	### COMPILE ###
 	dk_set(QUEUE_BUILD ON)
