@@ -48,8 +48,8 @@ dk_depend(android-sdk)
 dk_set(ANDROID-NDK_VERSION r22b)
 dk_set(ANDROID-NDK_BUILD 22.1.7171670)
 dk_set(ANDROID-NDK_WIN_DL https://dl.google.com/android/repository/android-ndk-r22b-windows-x86_64.zip)
-dk_set(ANDROID-NDK_MAC_DL http://mirrors.cloud.tencent.com/AndroidSDK/android-ndk-r22b-darwin-x86_64.zip) # https://
-dk_set(ANDROID-NDK_LINUX_DL https://dl.google.com/android/repository/android-ndk-r22b-linux-x86_64.zip)
+dk_set(ANDROID-NDK_MAC_DL http://mirrors.cloud.tencent.com/AndroidSDK/android-ndk-r22b-darwin-x86_64.zip) #FIXME https: not working in DKCurl
+dk_set(ANDROID-NDK_LINUX_DL http://dl.google.com/android/repository/android-ndk-r22b-linux-x86_64.zip)  #FIXME https: not working in DKCurl
 
 dk_makeDirectory(${ANDROID-SDK}/ndk)
 WIN_HOST_dk_import	(${ANDROID-NDK_WIN_DL} PATH ${ANDROID-SDK}/ndk/${ANDROID-NDK_BUILD} PATCH)
