@@ -1,29 +1,3 @@
-/*
-* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
-*
-* For the latest information, see https://github.com/aquawicket/DigitalKnob
-*
-* Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
-*
-* Permission is hereby granted, free of charge, to any person obtaining a copy
-* of this software and associated documentation files(the "Software"), to deal
-* in the Software without restriction, including without limitation the rights
-* to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
-* copies of the Software, and to permit persons to whom the Software is
-* furnished to do so, subject to the following conditions :
-*
-* The above copyright noticeand this permission notice shall be included in all
-* copies or substantial portions of the Software.
-*
-* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
-* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-* SOFTWARE.
-*/
-
 package org.libsdl.app;
 
 import java.util.ArrayList;
@@ -281,23 +255,21 @@ class SDLJoystickHandler_API16 extends SDLJoystickHandler {
 
     @Override
     public boolean handleMotionEvent(MotionEvent event) {
-        if ((event.getSource() & InputDevice.SOURCE_JOYSTICK) != 0) {
-            int actionPointerIndex = event.getActionIndex();
-            int action = event.getActionMasked();
-            if (action == MotionEvent.ACTION_MOVE) {
-                SDLJoystick joystick = getJoystick(event.getDeviceId());
-                if (joystick != null) {
-                    for (int i = 0; i < joystick.axes.size(); i++) {
-                        InputDevice.MotionRange range = joystick.axes.get(i);
-                        /* Normalize the value to -1...1 */
-                        float value = (event.getAxisValue(range.getAxis(), actionPointerIndex) - range.getMin()) / range.getRange() * 2.0f - 1.0f;
-                        SDLControllerManager.onNativeJoy(joystick.device_id, i, value);
-                    }
-                    for (int i = 0; i < joystick.hats.size() / 2; i++) {
-                        int hatX = Math.round(event.getAxisValue(joystick.hats.get(2 * i).getAxis(), actionPointerIndex));
-                        int hatY = Math.round(event.getAxisValue(joystick.hats.get(2 * i + 1).getAxis(), actionPointerIndex));
-                        SDLControllerManager.onNativeHat(joystick.device_id, i, hatX, hatY);
-                    }
+        int actionPointerIndex = event.getActionIndex();
+        int action = event.getActionMasked();
+        if (action == MotionEvent.ACTION_MOVE) {
+            SDLJoystick joystick = getJoystick(event.getDeviceId());
+            if (joystick != null) {
+                for (int i = 0; i < joystick.axes.size(); i++) {
+                    InputDevice.MotionRange range = joystick.axes.get(i);
+                    /* Normalize the value to -1...1 */
+                    float value = (event.getAxisValue(range.getAxis(), actionPointerIndex) - range.getMin()) / range.getRange() * 2.0f - 1.0f;
+                    SDLControllerManager.onNativeJoy(joystick.device_id, i, value);
+                }
+                for (int i = 0; i < joystick.hats.size() / 2; i++) {
+                    int hatX = Math.round(event.getAxisValue(joystick.hats.get(2 * i).getAxis(), actionPointerIndex));
+                    int hatY = Math.round(event.getAxisValue(joystick.hats.get(2 * i + 1).getAxis(), actionPointerIndex));
+                    SDLControllerManager.onNativeHat(joystick.device_id, i, hatX, hatY);
                 }
             }
         }
@@ -345,6 +317,7 @@ class SDLJoystickHandler_API19 extends SDLJoystickHandler_API16 {
             KeyEvent.KEYCODE_BUTTON_X,
             KeyEvent.KEYCODE_BUTTON_Y,
             KeyEvent.KEYCODE_BACK,
+            KeyEvent.KEYCODE_MENU,
             KeyEvent.KEYCODE_BUTTON_MODE,
             KeyEvent.KEYCODE_BUTTON_START,
             KeyEvent.KEYCODE_BUTTON_THUMBL,
@@ -386,6 +359,7 @@ class SDLJoystickHandler_API19 extends SDLJoystickHandler_API16 {
             (1 << 2),   // X -> X
             (1 << 3),   // Y -> Y
             (1 << 4),   // BACK -> BACK
+            (1 << 6),   // MENU -> START
             (1 << 5),   // MODE -> GUIDE
             (1 << 6),   // START -> START
             (1 << 7),   // THUMBL -> LEFTSTICK
@@ -586,8 +560,6 @@ class SDLGenericMotionListener_API12 implements View.OnGenericMotionListener {
 
         switch ( event.getSource() ) {
             case InputDevice.SOURCE_JOYSTICK:
-            case InputDevice.SOURCE_GAMEPAD:
-            case InputDevice.SOURCE_DPAD:
                 return SDLControllerManager.handleJoystickMotionEvent(event);
 
             case InputDevice.SOURCE_MOUSE:
@@ -717,8 +689,6 @@ class SDLGenericMotionListener_API26 extends SDLGenericMotionListener_API24 {
 
         switch ( event.getSource() ) {
             case InputDevice.SOURCE_JOYSTICK:
-            case InputDevice.SOURCE_GAMEPAD:
-            case InputDevice.SOURCE_DPAD:
                 return SDLControllerManager.handleJoystickMotionEvent(event);
 
             case InputDevice.SOURCE_MOUSE:
