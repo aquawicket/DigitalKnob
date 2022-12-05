@@ -530,40 +530,21 @@ endif()
 
 
 
-# FIXME: This is incorrect. Build directory should go by IDE/compiler, not OS
+# FIXME: This is incorrect. Build directory should go by IDE/Generator, not OS
 # Here's the list
 
-# COMPILER                 Build_root         Target configs
+# GENERATOR                 Build_root         Target configs
 # ---------------------------------------------------
-# VisualStudio_cl           ${OS}             /multiple      /win
-# VisualStudio clang/++     ${OS}             /multiple
-# XCode_clang/++            ${OS}             /multiple
-# MinGW_gcc/++              ${OS}/${TYPE}     /single        /win   for example, win can be multiple or single 
-# Linux_gcc/++              ${OS}/${TYPE}     /single
-# RaspberryPi_gcc/++        ${OS}/${TYPE}     /single           
+# Visual Studio 17 2022     ${OS}             /multiple
+# Visual Studio 16 2019     ${OS}             /multiple
+# Visual Studio 15 2017     ${OS}             /multiple
+# Visual Studio 14 2015     ${OS}             /multiple
+# Visual Studio 12 2013     ${OS}             /multiple
+# Visual Studio 11 2012     ${OS}             /multiple
+# Visual Studio 9 2008      ${OS}             /multiple
+# XCode			            ${OS}             /multiple
+# Unix Makefiles            ${OS}/${TYPE}     /single   
 # ./configure               ${OS}/${TYPE}     /single
-dk_dump(CMAKE_GENERATOR)
-
-# multi-type
-if(${CMAKE_GENERATOR} STREQUAL "Visual Studio 17 2022")
-	dk_set		(CMAKE_BUILD_TYPE DEBUG RELEASE)
-	dk_set		(BUILD_DIR ${OS})
-endif()
-if(${CMAKE_GENERATOR} STREQUAL "Xcode")
-	dk_set		(CMAKE_BUILD_TYPE DEBUG RELEASE)
-	dk_set		(BUILD_DIR ${OS})
-endif()
-
-# non-multi-type
-if(${CMAKE_GENERATOR} STREQUAL "Unix Makefiles")
-	if(DEBUG)
-		dk_set	(CMAKE_BUILD_TYPE DEBUG)
-		dk_set	(BUILD_DIR ${OS}/${DEBUG_DIR})
-	elseif(RELEASE)
-		dk_set	(CMAKE_BUILD_TYPE RELEASE)
-		dk_set	(BUILD_DIR ${OS}/${RELEASE_DIR})
-	endif()
-endif()
 
 #if(LINUX OR RASPBERRY)
 #	if(DEBUG)
@@ -577,6 +558,28 @@ endif()
 #	dk_set		(CMAKE_BUILD_TYPE DEBUG RELEASE)
 #	dk_set		(BUILD_DIR ${OS})
 #endif()
+dk_dump(CMAKE_GENERATOR)
+# multi-type
+if(${CMAKE_GENERATOR} STREQUAL "Visual Studio 17 2022")
+	dk_set		(CMAKE_BUILD_TYPE DEBUG RELEASE)
+	dk_set		(BUILD_DIR ${OS})
+endif()
+if(${CMAKE_GENERATOR} STREQUAL "Xcode")
+	dk_set		(CMAKE_BUILD_TYPE DEBUG RELEASE)
+	dk_set		(BUILD_DIR ${OS})
+endif()
+# non-multi-type
+if(${CMAKE_GENERATOR} STREQUAL "Unix Makefiles")
+	if(DEBUG)
+		dk_set	(CMAKE_BUILD_TYPE DEBUG)
+		dk_set	(BUILD_DIR ${OS}/${DEBUG_DIR})
+	elseif(RELEASE)
+		dk_set	(CMAKE_BUILD_TYPE RELEASE)
+		dk_set	(BUILD_DIR ${OS}/${RELEASE_DIR})
+	endif()
+endif()
+
+
 
 
 ############ CORE DEPENDENCIES ############
