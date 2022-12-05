@@ -543,6 +543,8 @@ endif()
 # RaspberryPi_gcc/++        ${OS}/${TYPE}     /single           
 # ./configure               ${OS}/${TYPE}     /single
 dk_dump(CMAKE_GENERATOR)
+
+# multi-type
 if(${CMAKE_GENERATOR} STREQUAL "Visual Studio 17 2022")
 	dk_set		(CMAKE_BUILD_TYPE DEBUG RELEASE)
 	dk_set		(BUILD_DIR ${OS})
@@ -552,7 +554,8 @@ if(${CMAKE_GENERATOR} STREQUAL "Xcode")
 	dk_set		(BUILD_DIR ${OS})
 endif()
 
-if(LINUX OR RASPBERRY)
+# non-multi-type
+if(${CMAKE_GENERATOR} STREQUAL "Unix Makefiles")
 	if(DEBUG)
 		dk_set	(CMAKE_BUILD_TYPE DEBUG)
 		dk_set	(BUILD_DIR ${OS}/${DEBUG_DIR})
@@ -560,7 +563,17 @@ if(LINUX OR RASPBERRY)
 		dk_set	(CMAKE_BUILD_TYPE RELEASE)
 		dk_set	(BUILD_DIR ${OS}/${RELEASE_DIR})
 	endif()
-endif() #else()
+endif()
+
+#if(LINUX OR RASPBERRY)
+#	if(DEBUG)
+#		dk_set	(CMAKE_BUILD_TYPE DEBUG)
+#		dk_set	(BUILD_DIR ${OS}/${DEBUG_DIR})
+#	elseif(RELEASE)
+#		dk_set	(CMAKE_BUILD_TYPE RELEASE)
+#		dk_set	(BUILD_DIR ${OS}/${RELEASE_DIR})
+#	endif()
+#endif() #else()
 #	dk_set		(CMAKE_BUILD_TYPE DEBUG RELEASE)
 #	dk_set		(BUILD_DIR ${OS})
 #endif()
