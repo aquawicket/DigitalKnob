@@ -21,8 +21,8 @@ dk_set(ANDROID-SDK ${3RDPARTY}/android-sdk)
 dk_makeDirectory(${ANDROID-SDK})
 dk_makeDirectory(${ANDROID-SDK}/cmdline-tools)
 WIN_HOST_dk_import(https://dl.google.com/android/repository/commandlinetools-win-7583922_latest.zip PATH ${ANDROID-SDK}/cmdline-tools/latest)
-MAC_HOST_dk_import(https://dl.google.com/android/repository/commandlinetools-mac-7302050_latest.zip PATH ${ANDROID-SDK}/cmdline-tools/latest)
-LINUX_HOST_dk_import(https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip PATH ${ANDROID-SDK}/cmdline-tools/latest)
+MAC_HOST_dk_import(https://dl.google.com/android/repository/commandlinetools-mac-7583922_latest.zip PATH ${ANDROID-SDK}/cmdline-tools/latest)
+LINUX_HOST_dk_import(https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip PATH ${ANDROID-SDK}/cmdline-tools/latest)
 dk_set(SDKMANAGER_BAT ${ANDROID-CMDLINE-TOOLS}/bin/sdkmanager.bat)
 
 
