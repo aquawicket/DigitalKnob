@@ -214,7 +214,11 @@ ANDROID64_dk_queueCommand	(${SDL_BUILD} "-DCMAKE_CXX_FLAGS=-DHAVE_GCC_ATOMICS=1"
 
 
 ### COMPILE ###
-dk_build(${SDL_FOLDER})
+if(NOT MAC_HOST AND NOT ANDROID)
+	dk_build(${SDL_FOLDER})
+else()
+	dk_make(${SDL_FOLDER})
+endif()
 #if(sdl_SDL2static)
 	#dk_build(${SDL_FOLDER} SDL2-static)
 #endif()
