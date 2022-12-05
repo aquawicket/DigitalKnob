@@ -114,7 +114,7 @@ endif()
 ## Get variables for Library Build Type (STATIC or SHARED)
 ###########################################################################
 option(STATIC "Build Static Libraries and Plugins" OFF)
-option(SHARED "Build SHARED Libraries and Plugins" OFF)
+option(SHARED "Build Shared Libraries and Plugins" OFF)
 if(NOT STATIC)
 if(NOT SHARED)
 	dk_set(STATIC ON)

@@ -417,18 +417,18 @@ ANDROID64_dk_set(DKCMAKE_FLAGS
 	-DBUILD_STATIC_LIBS=ON
 	-DCMAKE_TOOLCHAIN_FILE=${ANDROID-NDK}/build/cmake/android.toolchain.cmake)
 #ANDROID64_dk_set(DKCMAKE_C_COMPILER		${CLANG})
-ANDROID64_dk_set(DKCMAKE_C_FLAGS			"-DANDROID -DANDROID64 -std=c17") #-U__ANDROID_API__ -D__ANDROID_API__=26 -Wno-macro-redefined
-ANDROID64_dk_set(DKCMAKE_C_FLAGS_DEBUG		"-DDEBUG -D_DEBUG -g")
-ANDROID64_dk_set(DKCMAKE_C_FLAGS_RELEASE	"-DNDEBUG -O3")
+ANDROID64_dk_set(DKCMAKE_C_FLAGS			"-DANDROID -DANDROID64 -frtti -std=c17") #-U__ANDROID_API__ -D__ANDROID_API__=26 -Wno-macro-redefined
+ANDROID64_dk_set(DKCMAKE_C_FLAGS_DEBUG		"-DDEBUG -D_DEBUG -frtti -g")
+ANDROID64_dk_set(DKCMAKE_C_FLAGS_RELEASE	"-DNDEBUG -frtti -O3")
 #ANDROID64_dk_set(DKCMAKE_CXX_COMPILER		${CLANGXX})
-ANDROID64_dk_set(DKCMAKE_CXX_FLAGS			"-DANDROID -DANDROID64 -std=c++1z") #-U__ANDROID_API__ -D__ANDROID_API__=26 -Wno-macro-redefined
-ANDROID64_dk_set(DKCMAKE_CXX_FLAGS_DEBUG	"-DDEBUG -D_DEBUG -g")
-ANDROID64_dk_set(DKCMAKE_CXX_FLAGS_RELEASE	"-DNDEBUG -O3")
+ANDROID64_dk_set(DKCMAKE_CXX_FLAGS			"-DANDROID -DANDROID64 -frtti -std=c++1z") #-U__ANDROID_API__ -D__ANDROID_API__=26 -Wno-macro-redefined
+ANDROID64_dk_set(DKCMAKE_CXX_FLAGS_DEBUG	"-DDEBUG -D_DEBUG -frtti -g")
+ANDROID64_dk_set(DKCMAKE_CXX_FLAGS_RELEASE	"-DNDEBUG -frtti -O3")
 ANDROID64_dk_set(DKCONFIGURE_FLAGS			--disable-shared --enable-static)
 #ANDROID64_dk_set(DKCONFIGURE_CC			${CLANG})
-ANDROID64_dk_set(DKCONFIGURE_CFLAGS			"-DANDROID -DANDROID64 -std=c17") #-U__ANDROID_API__ -D__ANDROID_API__=26 -Wno-macro-redefined
+ANDROID64_dk_set(DKCONFIGURE_CFLAGS			"-DANDROID -DANDROID64 -frtti -std=c17") #-U__ANDROID_API__ -D__ANDROID_API__=26 -Wno-macro-redefined
 #ANDROID64_dk_set(DKCONFIGURE_CXX			${CLANGXX})
-ANDROID64_dk_set(DKCONFIGURE_CXXFLAGS		"-DANDROID -DANDROID64 -std=c++1z") #-U__ANDROID_API__ -D__ANDROID_API__=26 -Wno-macro-redefined
+ANDROID64_dk_set(DKCONFIGURE_CXXFLAGS		"-DANDROID -DANDROID64 -frtti -std=c++1z") #-U__ANDROID_API__ -D__ANDROID_API__=26 -Wno-macro-redefined
 
 
 
@@ -573,9 +573,6 @@ ANDROID_dk_depend	(log)
 ANDROID_dk_depend	(android)
 ANDROID_dk_depend	(m)
 
-#ANDROID_dk_depend(jdk)
-#ANDROID_dk_depend(jdk8)
-#dk_depend(jdk9)
 ANDROID_dk_depend(ant)
 ANDROID_dk_depend(android-cmdline-tools)
 ANDROID_dk_depend(android-ndk)
@@ -587,14 +584,13 @@ ANDROID_dk_depend(android-build-tools)
 ANDROID_dk_depend(android-sdk-tools)
 ANDROID_dk_depend(android-cmake)
 
-#ANDROID_dk_depend	(jdk8)
-#ANDROID_dk_depend	(jdk)
+#ANDROID_dk_depend	(openjdk-8u41)
+#ANDROID_dk_depend	(openjdk)
 ##ANDROID_dk_depend	(android-sdk)
 ##ANDROID_dk_depend	(android-studio)
 ANDROID_dk_depend	(visualstudio)
 #ANDROID32_dk_depend(mingw32)
 #ANDROID64_dk_depend(mingw64)
-#ANDROID_dk_depend	(msys2)
 #ANDROID_dk_depend	(openssl)
 #ANDROID_dk_depend	(openssl_binary)
 
@@ -614,8 +610,9 @@ else()
 	ANDROID64_dk_set		(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})
 endif()
 
-WIN_dk_set			(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})
-MAC_HOST_dk_set		(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})
-LINUX_dk_set		(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS}) 
-RASPBERRY_dk_set	(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})  
-ANDROID_dk_set		(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})
+#WIN_dk_set			(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})
+#MAC_HOST_dk_set	(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})
+#LINUX_dk_set		(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS}) 
+#RASPBERRY_dk_set	(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})  
+#ANDROID_dk_set		(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})
+dk_set				(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})

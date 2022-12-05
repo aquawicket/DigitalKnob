@@ -1,4 +1,5 @@
 ### android-sdk ###
+# https://androidsdkoffline.blogspot.com/
 
 if(NOT ANDROID)
 	dk_undepend(android-sdk)
