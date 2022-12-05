@@ -542,6 +542,11 @@ endif()
 # Linux_gcc/++              ${OS}/${TYPE}     /single
 # RaspberryPi_gcc/++        ${OS}/${TYPE}     /single           
 # ./configure               ${OS}/${TYPE}     /single
+dk_dump(CMAKE_GENERATOR)
+if(${CMAKE_GENERATOR} STREQUAL "Visual Studio 17 2022")
+	dk_set		(CMAKE_BUILD_TYPE DEBUG RELEASE)
+	dk_set		(BUILD_DIR ${OS})
+endif()
 
 if(LINUX OR RASPBERRY)
 	if(DEBUG)
@@ -551,10 +556,10 @@ if(LINUX OR RASPBERRY)
 		dk_set	(CMAKE_BUILD_TYPE RELEASE)
 		dk_set	(BUILD_DIR ${OS}/${RELEASE_DIR})
 	endif()
-else()
-	dk_set		(CMAKE_BUILD_TYPE DEBUG RELEASE)
-	dk_set		(BUILD_DIR ${OS})
-endif()
+endif() #else()
+#	dk_set		(CMAKE_BUILD_TYPE DEBUG RELEASE)
+#	dk_set		(BUILD_DIR ${OS})
+#endif()
 
 
 ############ CORE DEPENDENCIES ############
