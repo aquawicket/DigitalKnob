@@ -121,6 +121,11 @@ dk_set(LINUX_GXX		/usr/bin/g++)
 #	set(CMAKE_CXX_COMPILER "/usr/bin/g++")
 #endif()
 
+# Android variables
+dk_set(ANDROID_CLANG	${3RDPARTY}/android-sdk/ndk/22.1.7171670/toolchains/llvm/prebuilt/windows-x86_64/bin/clang.exe)
+dk_set(ANDROID_CLANGXX	${3RDPARTY}/android-sdk/ndk/22.1.7171670/toolchains/llvm/prebuilt/windows-x86_64/bin/clang.exe)
+
+
 # Visual C++ variables 
 dk_set(MSVC_CL			C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x86/cl.exe)
 dk_set(MINGW32			${3RDPARTY}/mingw32-i686-8.1.0-release-posix-dwarf-rt_v6-rev0)
@@ -405,6 +410,8 @@ ANDROID32_dk_set(DKCONFIGURE_CXXFLAGS		"-DANDROID -DANDROID32 -frtti -std=c++1z"
 
 # Android arm64-v8a (x64)
 ANDROID64_dk_set(DKCMAKE_FLAGS
+	#-DCMAKE_C_COMPILER_WORKS=1 
+	#-DCMAKE_CXX_COMPILER_WORKS=1 
 	-DANDROID_ABI=arm64-v8a
 	"-DANDROID_CPP_FEATURES=rtti exceptions"
 	-DANDROID_NATIVE_API_LEVEL=26
@@ -416,18 +423,18 @@ ANDROID64_dk_set(DKCMAKE_FLAGS
 	-DBUILD_SHARED_LIBS=OFF 
 	-DBUILD_STATIC_LIBS=ON
 	-DCMAKE_TOOLCHAIN_FILE=${ANDROID-NDK}/build/cmake/android.toolchain.cmake)
-#ANDROID64_dk_set(DKCMAKE_C_COMPILER		${CLANG})
+#ANDROID64_dk_set(DKCMAKE_C_COMPILER		${ANDROID_CLANG})
 ANDROID64_dk_set(DKCMAKE_C_FLAGS			"-DANDROID -DANDROID64 -frtti -std=c17") #-U__ANDROID_API__ -D__ANDROID_API__=26 -Wno-macro-redefined
 ANDROID64_dk_set(DKCMAKE_C_FLAGS_DEBUG		"-DDEBUG -D_DEBUG -frtti -g")
 ANDROID64_dk_set(DKCMAKE_C_FLAGS_RELEASE	"-DNDEBUG -frtti -O3")
-#ANDROID64_dk_set(DKCMAKE_CXX_COMPILER		${CLANGXX})
+#ANDROID64_dk_set(DKCMAKE_CXX_COMPILER		${ANDROID_CLANGXX})
 ANDROID64_dk_set(DKCMAKE_CXX_FLAGS			"-DANDROID -DANDROID64 -frtti -std=c++1z") #-U__ANDROID_API__ -D__ANDROID_API__=26 -Wno-macro-redefined
 ANDROID64_dk_set(DKCMAKE_CXX_FLAGS_DEBUG	"-DDEBUG -D_DEBUG -frtti -g")
 ANDROID64_dk_set(DKCMAKE_CXX_FLAGS_RELEASE	"-DNDEBUG -frtti -O3")
 ANDROID64_dk_set(DKCONFIGURE_FLAGS			--disable-shared --enable-static)
-#ANDROID64_dk_set(DKCONFIGURE_CC			${CLANG})
+#ANDROID64_dk_set(DKCONFIGURE_CC			${ANDROID_CLANG})
 ANDROID64_dk_set(DKCONFIGURE_CFLAGS			"-DANDROID -DANDROID64 -frtti -std=c17") #-U__ANDROID_API__ -D__ANDROID_API__=26 -Wno-macro-redefined
-#ANDROID64_dk_set(DKCONFIGURE_CXX			${CLANGXX})
+#ANDROID64_dk_set(DKCONFIGURE_CXX			${ANDROID_CLANGXX})
 ANDROID64_dk_set(DKCONFIGURE_CXXFLAGS		"-DANDROID -DANDROID64 -frtti -std=c++1z") #-U__ANDROID_API__ -D__ANDROID_API__=26 -Wno-macro-redefined
 
 
