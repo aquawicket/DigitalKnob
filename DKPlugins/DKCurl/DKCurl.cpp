@@ -350,7 +350,7 @@ bool DKCurl::GetExternalIP(DKString& ipaddress){
 bool DKCurl::HttpDownload(const DKString& url, const DKString& dest){
 	DKDEBUGFUNC(url, dest);
 	if(!DKCurl::FileExists(url))
-		return DKERROR("url not found\n");
+		return DKERROR(url+": url not found\n");
 	if(!CurlInit())
 		return DKERROR("CurlInit() failed\n");
 	curl_easy_setopt(curl, CURLOPT_URL, url.c_str());

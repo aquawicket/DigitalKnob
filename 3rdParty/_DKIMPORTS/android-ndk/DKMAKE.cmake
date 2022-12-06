@@ -33,9 +33,9 @@ dk_set(ANDROID-NDK_LINUX_DL http://dl.google.com/android/repository/android-ndk-
 # r23b
 #dk_set(ANDROID-NDK_VERSION r23b)
 #dk_set(ANDROID-NDK_BUILD 23.1.7779620)
-#dk_set(ANDROID-NDK_WIN_DL https://dl.google.com/android/repository/android-ndk-r23b-windows-x86_64.zip)
-#dk_set(ANDROID-NDK_MAC_DL https://dl.google.com/android/repository/android-ndk-r23b-darwin-x86_64.dmg)
-#dk_set(ANDROID-NDK_LINUX_DL https://dl.google.com/android/repository/android-ndk-r23b-linux-x86_64.zip)
+#dk_set(ANDROID-NDK_WIN_DL https://dl.google.com/android/repository/android-ndk-r23b-windows.zip)
+#dk_set(ANDROID-NDK_MAC_DL https://dl.google.com/android/repository/android-ndk-r23b-darwin.zip)
+#dk_set(ANDROID-NDK_LINUX_DL https://dl.google.com/android/repository/android-ndk-r23b-linux.zip)
 
 # r23c
 #dk_set(ANDROID-NDK_VERSION r23c)
