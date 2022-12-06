@@ -3,26 +3,30 @@
 # https://developer.android.com/studio/releases/cmdline-tools
 # https://developer.android.com/studio?hl=fr#command-tools
 # https://androidsdkoffline.blogspot.com/p/android-sdk-cmdline-tools-offline.html
-#
-# Downloads
-# https://dl.google.com/android/repository/commandlinetools-win-7302050_latest.zip
-# https://dl.google.com/android/repository/commandlinetools-mac-7302050_latest.zip
-# https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip
-# https://dl.google.com/android/repository/commandlinetools-win-7583922_latest.zip
+
 
 if(NOT ANDROID)
 	dk_undepend(android-cmdline-tools)
 	return()
 endif()
 
-#dk_depend(jdk8)
+#dk_depend(openjdk-8u41)
 
 dk_set(ANDROID-SDK ${3RDPARTY}/android-sdk)
 dk_makeDirectory(${ANDROID-SDK})
 dk_makeDirectory(${ANDROID-SDK}/cmdline-tools)
+
+# 7583922
 WIN_HOST_dk_import(https://dl.google.com/android/repository/commandlinetools-win-7583922_latest.zip PATH ${ANDROID-SDK}/cmdline-tools/latest)
 MAC_HOST_dk_import(https://dl.google.com/android/repository/commandlinetools-mac-7583922_latest.zip PATH ${ANDROID-SDK}/cmdline-tools/latest)
 LINUX_HOST_dk_import(https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip PATH ${ANDROID-SDK}/cmdline-tools/latest)
+
+# 8512546
+#WIN_HOST_dk_import(https://dl.google.com/android/repository/commandlinetools-win-8512546_latest.zip PATH ${ANDROID-SDK}/cmdline-tools/latest)
+#MAC_HOST_dk_import(https://dl.google.com/android/repository/commandlinetools-mac-8512546_latest.zip PATH ${ANDROID-SDK}/cmdline-tools/latest)
+#LINUX_HOST_dk_import(https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip PATH ${ANDROID-SDK}/cmdline-tools/latest)
+
+
 dk_set(SDKMANAGER_BAT ${ANDROID-CMDLINE-TOOLS}/bin/sdkmanager.bat)
 
 

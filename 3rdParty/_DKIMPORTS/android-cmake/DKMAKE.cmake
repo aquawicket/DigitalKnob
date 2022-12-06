@@ -1,4 +1,4 @@
-# https://androidsdkoffline.blogspot.com/
+# https://androidsdkoffline.blogspot.com
 
 if(NOT ANDROID)
 	dk_undepend(android-cmake)
