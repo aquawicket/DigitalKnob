@@ -108,6 +108,8 @@ function DKBuild_end(){
 
 //This is and alternative way to get windows short paths
 function DKBuild_GetShortPath(fullPath){
+	if(CPP_DK_GetOS() !== "Windows")
+		return fullPath;
 	const assets = CPP_DKAssets_LocalAssets()
 	var getShortPath = assets+"/DKFile/getShortPath.cmd"
 	var shortPath = CPP_DK_Execute(getShortPath+' "'+fullPath+'"')
@@ -578,8 +580,10 @@ function DKBuild_DoResults(){
 		DKBuild_ValidateNDK()
 		DKBuild_ValidateVC2019()
 		CPP_DKFile_MkDir(app_path+OS)
-		if(!DKBuild_Command(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/openjdk/registerJDK.cmd"))
-			return false
+		if(CPP_DK_GetOS() === "Windows"){
+			if(!DKBuild_Command(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/openjdk/registerJDK.cmd"))
+				return false
+		}
 		if(CPP_DK_GetOS() === "Windows"){
 			//if(!DKBuild_Command(CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM64 -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=26 -DANDROID-NDK="+ANDROID_NDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROID_NDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"android64"))
 			if(!DKBuild_Command(CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM64 -DCMAKE_C_COMPILER_WORKS=1 -DCMAKE_CXX_COMPILER_WORKS=1 -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=26 -DANDROID-NDK="+ANDROID_NDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROID_NDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"android64"))
@@ -593,12 +597,16 @@ function DKBuild_DoResults(){
 			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target main --config Release"))
 				return false
 		}
-		if(!DKBuild_Command(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/openjdk/registerJDK.cmd"))
-			return false
+		if(CPP_DK_GetOS() === "Windows"){
+			if(!DKBuild_Command(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/openjdk/registerJDK.cmd"))
+				return false
+		}
 		if(!DKBuild_Command(app_path+OS+"/gradlew --project-dir "+app_path+OS+" --info clean build"))
 			return false
-		if(!DKBuild_Command(app_path+OS+"/___Install.cmd"))
-			return false
+		if(CPP_DK_GetOS() === "Windows"){
+			if(!DKBuild_Command(app_path+OS+"/___Install.cmd"))
+				return false
+		}
 	}
 	
 	console.log("\n")
