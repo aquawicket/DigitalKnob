@@ -250,6 +250,7 @@ function DKBuild_ValidateNDK(){
 		const filename = ANDROID_NDK_DL.substring(index+1)
 		CPP_DKArchive_Extract(DKDOWNLOAD+"/"+filename, DIGITALKNOB+"DK/3rdParty/android-sdk/ndk")
 		CPP_DKFile_Rename(DIGITALKNOB+"DK/3rdParty/android-sdk/ndk/android-ndk-r22b", ANDROID_NDK, true)
+		CPP_DKFile_Rename(DIGITALKNOB+"DK/3rdParty/android-sdk/ndk/android-ndk-r23b", ANDROID_NDK, true)
 		CPP_DKFile_Copy(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/android-ndk/", ANDROID_NDK, true)
 		CPP_DKFile_Delete(ANDROID_NDK+"/DKMAKE.cmake")
 		CPP_DKFile_StringToFile(ANDROID_NDK_BUILD, ANDROID_NDK+"/installed")
@@ -540,7 +541,8 @@ function DKBuild_DoResults(){
 		if(CPP_DK_GetOS() === "Windows"){
 			if(!DKBuild_Command(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/openjdk/registerJDK.cmd"))
 				return false
-			if(!DKBuild_Command(CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=26 -DANDROID-NDK="+ANDROID_NDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROID_NDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"android32"))
+			//if(!DKBuild_Command(CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=26 -DANDROID-NDK="+ANDROID_NDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROID_NDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"android32"))
+			if(!DKBuild_Command(CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM -DCMAKE_C_COMPILER_WORKS=1 -DCMAKE_CXX_COMPILER_WORKS=1 -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=26 -DANDROID-NDK="+ANDROID_NDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROID_NDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"android32"))
 				return false
 		}
 		else{
@@ -579,7 +581,8 @@ function DKBuild_DoResults(){
 		if(!DKBuild_Command(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/openjdk/registerJDK.cmd"))
 			return false
 		if(CPP_DK_GetOS() === "Windows"){
-			if(!DKBuild_Command(CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM64 -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=26 -DANDROID-NDK="+ANDROID_NDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROID_NDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"android64"))
+			//if(!DKBuild_Command(CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM64 -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=26 -DANDROID-NDK="+ANDROID_NDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROID_NDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"android64"))
+			if(!DKBuild_Command(CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM64 -DCMAKE_C_COMPILER_WORKS=1 -DCMAKE_CXX_COMPILER_WORKS=1 -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=26 -DANDROID-NDK="+ANDROID_NDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROID_NDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"android64"))
 				return false
 		}
 		if(TYPE === "Debug" || TYPE === "ALL"){
