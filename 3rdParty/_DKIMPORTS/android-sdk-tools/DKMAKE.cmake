@@ -1,7 +1,6 @@
 # https://developer.android.com/studio/releases/sdk-tools
-# https://dl.google.com/android/repository/sdk-tools-windows-4333796.zip
-# https://dl.google.com/android/repository/sdk-tools-darwin-4333796.zip
-# https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
+# https://androidsdkoffline.blogspot.com/p/android-sdk-tools.html
+
 
 if(NOT ANDROID)
 	dk_undepend(android-sdk-tools)
@@ -10,7 +9,7 @@ endif()
 
 dk_depend(android-sdk)
 
-
+# 4333796
 WIN_HOST_dk_import	(https://dl.google.com/android/repository/sdk-tools-windows-4333796.zip PATH ${ANDROID-SDK}/tools PATCH)
 MAC_HOST_dk_import	(https://dl.google.com/android/repository/sdk-tools-darwin-4333796.zip PATH ${ANDROID-SDK}/tools PATCH)
 LINUX_HOST_dk_import(https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip PATH ${ANDROID-SDK}/tools PATCH)
