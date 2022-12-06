@@ -543,10 +543,6 @@ function DKBuild_DoResults(){
 			if(!DKBuild_Command(CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=26 -DANDROID-NDK="+ANDROID_NDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROID_NDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"android32"))
 				return false
 		}
-		else if(CPP_DK_GetOS() === "Mac"){
-			if(!DKBuild_Command(CMAKE+" -G \"Xcode\" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=26 -DANDROID-NDK="+ANDROID_NDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROID_NDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"android32"))
-				return false
-		}
 		else{
 			if(!DKBuild_Command(CMAKE+" -G \"Unix Makefiles\" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=26 -DANDROID-NDK="+ANDROID_NDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROID_NDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"android32"))
 				return false
