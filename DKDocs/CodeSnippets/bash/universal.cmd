@@ -1,14 +1,14 @@
 :<<"::CMDLITERAL"
 @ECHO OFF
-GOTO :CMDSCRIPT
+GOTO :WINDOWS
 ::CMDLITERAL
 
-echo "I can write free-form ${SHELL} now!"
+echo "This universal script is running on Unix"
 if :; then
   echo "This makes conditional constructs so much easier because"
   echo "they can now span multiple lines."
 fi
 exit $?
 
-:CMDSCRIPT
-ECHO Welcome to %COMSPEC%
+:WINDOWS
+ECHO This universal script is running on Windows
