@@ -47,6 +47,7 @@ LINUX_dk_depend(opengl)
 RASPBERRY_dk_depend(opengl)
 ANDROID_dk_depend(opengles)
 ANDROID_dk_depend(opensles)
+ANDROID_dk_depend(libiconv)
 
 
 ### IMPORT ###
@@ -210,7 +211,7 @@ string(REPLACE "-std=c17" "" SDL_BUILD "${DKCMAKE_BUILD}")
 string(REPLACE "-std=c++1z" "" SDL_BUILD "${SDL_BUILD}")
 string(REPLACE "  " " " SDL_BUILD "${SDL_BUILD}")
 ANDROID32_dk_queueCommand	(${SDL_BUILD} -DLIBTYPE=STATIC -DSDL_SHARED=OFF ${SDL}) 
-ANDROID64_dk_queueCommand	(${SDL_BUILD} "-DCMAKE_CXX_FLAGS=-DHAVE_GCC_ATOMICS=1" -DLIBTYPE=STATIC -DSDL_SHARED=OFF ${SDL})
+ANDROID64_dk_queueCommand	(${SDL_BUILD} "-DCMAKE_CXX_FLAGS=-DHAVE_GCC_ATOMICS=1" -DLIBTYPE=STATIC -DSDL_SHARED=OFF -DHAVE_BUILTIN_ICONV=0 -DHAVE_LIBICONV=0 ${ICONV_CMAKE} ${SDL})
 
 
 ### COMPILE ###
