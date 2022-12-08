@@ -8,8 +8,8 @@ call %APP_ROOT%___Clean
 echo 1. Set and map all variables and environment variables
 :: Build architecture and type
 set "BUILD_TYPE=Debug"
-set "ABI=armeabi-v7a"
-::set "ABI=arm64-v8a"
+::set "ABI=armeabi-v7a"
+set "ABI=arm64-v8a"
 
 :: Choose a C++ Compilers setting
 :: 		options: CMAKE, NDK, CLANG    or GRADLE: must be enabled in build.gradle
@@ -51,8 +51,8 @@ set "Country=US"
 
 ::::::::::::: CMAKE / CLANG :::::::::::::::::::
 :: Android api, ndk and tools versions
-set "ANDROID_API=26"
-set "NDK=22.1.7171670"
+set "ANDROID_API=31"
+set "NDK=23.1.7779620"
 set "BUILD_TOOLS=30.0.3"
 :::::::::::::::::::::::::::::::::::::::::::::::
 
