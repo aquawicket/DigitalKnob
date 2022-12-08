@@ -585,6 +585,11 @@ function DKBuild_DoResults(){
 		CPP_DKFile_MkDir(app_path+OS)
 		const ANDROID_PLATFORM = DKBuild_GetDKMakeVariable(DIGITALKNOB+"DK/DKCMake/DKBuildFlags.cmake", "ANDROID_PLATFORM")
 		
+		if(CPP_DK_GetOS() !== "Windows"){
+			if(!DKBuild_Command("export JAVA_HOME=/home/$USER/digitalknob/DK/3rdParty/openjdk-11+28_linux-x64_bin/"))
+				return false
+		}
+		
 		if(CPP_DK_GetOS() === "Windows"){
 			if(!DKBuild_Command(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/openjdk/registerJDK.cmd"))
 				return false
