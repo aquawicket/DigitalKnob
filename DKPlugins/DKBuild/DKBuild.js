@@ -612,10 +612,10 @@ function DKBuild_DoResults(){
 				return false
 		}
 		if(CPP_DK_GetOS() !== "Windows"){
-			if(!DKBuild_Command("export JAVA_HOME=/home/$USER/digitalknob/DK/3rdParty/openjdk-11+28_linux-x64_bin/"))
-				return false
-			if(!DKBuild_Command("echo $JAVA_HOME"))
-				return false
+			//if(!DKBuild_Command("export JAVA_HOME=/home/$USER/digitalknob/DK/3rdParty/openjdk-11+28_linux-x64_bin/"))
+			//	return false
+			//if(!DKBuild_Command("echo $JAVA_HOME"))
+			//	return false
 			if(!DKBuild_Command("chmod 777 "+app_path+OS+"/gradlew"))
 				return false;
 		}
