@@ -123,8 +123,8 @@ dk_set(LINUX_GXX		/usr/bin/g++)
 
 # Android variables
 dk_set(ANDROID_PLATFORM 31)
-#dk_set(ANDROID_CLANG	${3RDPARTY}/android-sdk/ndk/22.1.7171670/toolchains/llvm/prebuilt/windows-x86_64/bin/clang.exe)
-#dk_set(ANDROID_CLANGXX	${3RDPARTY}/android-sdk/ndk/22.1.7171670/toolchains/llvm/prebuilt/windows-x86_64/bin/clang.exe)
+#dk_set(ANDROID_CLANG	${3RDPARTY}/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/windows-x86_64/bin/clang.exe)
+#dk_set(ANDROID_CLANGXX	${3RDPARTY}/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/windows-x86_64/bin/clang.exe)
 
 
 # Visual C++ variables 
