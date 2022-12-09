@@ -12,14 +12,15 @@
 #dk_set(OPENJDK-11_VERSION 11)
 
 WIN_HOST_dk_import	(https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip PATCH)
-MAC_HOST_dk_import	(https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz PATCH)
-LINUX_HOST_dk_import(https://download.java.net/openjdk/jdk11/ri/openjdk-11+28_linux-x64_bin.tar.gz PATCH)
+#MAC_HOST_dk_import	(https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz PATCH)
+#LINUX_HOST_dk_import(https://download.java.net/openjdk/jdk11/ri/openjdk-11+28_linux-x64_bin.tar.gz PATCH)
 
 # MAC Install
 if(MAC_HOST)
-	dk_set(CURRENT_DIR /usr)
-	dk_command(curl -C - https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz -O openjdk-11_osx-x64_bin.tar.gz)
-	dk_command(tar xf openjdk-11_osx-x64_bin.tar.gz)
+	dk_set(CURRENT_DIR ${DKDOWNLOAD})
+	#dk_command(curl -C - https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz -O openjdk-11_osx-x64_bin.tar.gz)
+	dk_download(https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz ${DKDOWNLOAD}/openjdk-11_osx-x64_bin.tar.gz)
+	dk_command(tar xf ${DKDOWNLOAD}/openjdk-11_osx-x64_bin.tar.gz)
 	dk_command(sudo mv jdk-11.jdk /Library/Java/JavaVirtualMachines/)
 	dk_command(java -version)
 endif()
