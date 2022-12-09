@@ -30,7 +30,6 @@ dk_include				(${SDL_TTF})
 #RASPBERRY_dk_libRelease(${SDL_TTF}/${OS}/${RELEASE_DIR}/lib/SDL_ttf.a)
 #ANDROID_dk_libDebug	(${SDL_TTF}/${OS}/lib/${DEBUG_DIR}/SDL_ttf.a)
 #ANDROID_dk_libRelease	(${SDL_TTF}/${OS}/lib/${RELEASE_DIR}/SDL_ttf.a)
-
 if(MSVC)
 	WIN_dk_libDebug			(${SDL_TTF}/${OS}/lib/${DEBUG_DIR}/SDL_ttf.lib)
 	WIN_dk_libRelease		(${SDL_TTF}/${OS}/lib/${RELEASE_DIR}/SDL_ttf.lib)

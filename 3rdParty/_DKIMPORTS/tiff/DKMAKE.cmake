@@ -24,7 +24,6 @@ RELEASE_dk_include		(${TIFF}/${OS}/libtiff/${RELEASE_DIR})
 #RASPBERRY_dk_libRelease(${TIFF}/${OS}/libtiff/${RELEASE_DIR}/libtiff/libtiff.a)
 #ANDROID_dk_libDebug	(${TIFF}/${OS}/libtiff/${DEBUG_DIR}/libtiff.a)
 #ANDROID_dk_libRelease	(${TIFF}/${OS}/libtiff/${RELEASE_DIR}/libtiff.a)
-
 if(MSVC)
 	WIN_dk_libDebug			(${TIFF}/${OS}/libtiff/${DEBUG_DIR}/tiffd.lib)
 	WIN_dk_libRelease		(${TIFF}/${OS}/libtiff/${RELEASE_DIR}/tiff.lib)
