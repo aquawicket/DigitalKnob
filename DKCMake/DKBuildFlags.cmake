@@ -529,49 +529,15 @@ endif()
 
 
 
-
-# FIXME: This is incorrect. Build directory should go by IDE/Generator, not OS
-# Here's the list
-
 # GENERATOR                 Build_root         Target configs
 # ---------------------------------------------------
-# Visual Studio 17 2022     ${OS}             /multiple
-# Visual Studio 16 2019     ${OS}             /multiple
-# Visual Studio 15 2017     ${OS}             /multiple
-# Visual Studio 14 2015     ${OS}             /multiple
-# Visual Studio 12 2013     ${OS}             /multiple
-# Visual Studio 11 2012     ${OS}             /multiple
-# Visual Studio 9 2008      ${OS}             /multiple
-# XCode			            ${OS}             /multiple
-# Unix Makefiles            ${OS}/${TYPE}     /single   
-# ./configure               ${OS}/${TYPE}     /single
-
-#if(LINUX OR RASPBERRY)
-#	if(DEBUG)
-#		dk_set	(CMAKE_BUILD_TYPE DEBUG)
-#		dk_set	(BUILD_DIR ${OS}/${DEBUG_DIR})
-#	elseif(RELEASE)
-#		dk_set	(CMAKE_BUILD_TYPE RELEASE)
-#		dk_set	(BUILD_DIR ${OS}/${RELEASE_DIR})
-#	endif()
-#endif() #else()
-#	dk_set		(CMAKE_BUILD_TYPE DEBUG RELEASE)
-#	dk_set		(BUILD_DIR ${OS})
-#endif()
-
-#dk_dump(CMAKE_GENERATOR)
-# multi-type
-#dk_includes(${CMAKE_GENERATOR} "Visual Studio" isVisualStudio)
-#if(${isVisualStudio})
+# MSVC     					${OS}             /multiple  (Debug AND Release)
+# XCODE			            ${OS}             /multiple	 (Debug AND Release)
+# Unix Makefiles            ${OS}/${TYPE}     /single    (Debug OR Release)
+# ./configure               ${OS}/${TYPE}     /single	 (Debug OR Release)
 if(MSVC OR XCODE)
 	dk_set		(CMAKE_BUILD_TYPE DEBUG RELEASE)
 	dk_set		(BUILD_DIR ${OS})
-#if(${CMAKE_GENERATOR} STREQUAL "Xcode")
-#	dk_set		(CMAKE_BUILD_TYPE DEBUG RELEASE)
-#	dk_set		(BUILD_DIR ${OS})
-#endif()
-# non-multi-type
-#elseif(${CMAKE_GENERATOR} STREQUAL "Unix Makefiles")
 else()
 	if(DEBUG)
 		dk_set	(CMAKE_BUILD_TYPE DEBUG)

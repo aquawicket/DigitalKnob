@@ -14,16 +14,29 @@ dk_include				(${TIFF}/libtiff)
 dk_include				(${TIFF}/${OS}/libtiff)
 DEBUG_dk_include		(${TIFF}/${OS}/libtiff/${DEBUG_DIR})
 RELEASE_dk_include		(${TIFF}/${OS}/libtiff/${RELEASE_DIR})
-WIN_dk_libDebug			(${TIFF}/${OS}/libtiff/${DEBUG_DIR}/tiffd.lib)
-WIN_dk_libRelease		(${TIFF}/${OS}/libtiff/${RELEASE_DIR}/tiff.lib)
-APPLE_dk_libDebug		(${TIFF}/${OS}/libtiff/${DEBUG_DIR}/libtiff.a)
-APPLE_dk_libRelease		(${TIFF}/${OS}/libtiff/${RELEASE_DIR}/libtiff.a)
-LINUX_dk_libDebug		(${TIFF}/${OS}/${DEBUG_DIR}/libtiff/libtiff.a)
-LINUX_dk_libRelease		(${TIFF}/${OS}/${RELEASE_DIR}/libtiff/libtiff.a)
-RASPBERRY_dk_libDebug	(${TIFF}/${OS}/libtiff/${DEBUG_DIR}/libtiff/libtiff.a)
-RASPBERRY_dk_libRelease	(${TIFF}/${OS}/libtiff/${RELEASE_DIR}/libtiff/libtiff.a)
-ANDROID_dk_libDebug		(${TIFF}/${OS}/libtiff/${DEBUG_DIR}/libtiff.a)
-ANDROID_dk_libRelease	(${TIFF}/${OS}/libtiff/${RELEASE_DIR}/libtiff.a)
+#WIN_dk_libDebug		(${TIFF}/${OS}/libtiff/${DEBUG_DIR}/tiffd.lib)
+#WIN_dk_libRelease		(${TIFF}/${OS}/libtiff/${RELEASE_DIR}/tiff.lib)
+#APPLE_dk_libDebug		(${TIFF}/${OS}/libtiff/${DEBUG_DIR}/libtiff.a)
+#APPLE_dk_libRelease	(${TIFF}/${OS}/libtiff/${RELEASE_DIR}/libtiff.a)
+#LINUX_dk_libDebug		(${TIFF}/${OS}/${DEBUG_DIR}/libtiff/libtiff.a)
+#LINUX_dk_libRelease	(${TIFF}/${OS}/${RELEASE_DIR}/libtiff/libtiff.a)
+#RASPBERRY_dk_libDebug	(${TIFF}/${OS}/libtiff/${DEBUG_DIR}/libtiff/libtiff.a)
+#RASPBERRY_dk_libRelease(${TIFF}/${OS}/libtiff/${RELEASE_DIR}/libtiff/libtiff.a)
+#ANDROID_dk_libDebug	(${TIFF}/${OS}/libtiff/${DEBUG_DIR}/libtiff.a)
+#ANDROID_dk_libRelease	(${TIFF}/${OS}/libtiff/${RELEASE_DIR}/libtiff.a)
+
+if(MSVC)
+	WIN_dk_libDebug			(${TIFF}/${OS}/libtiff/${DEBUG_DIR}/tiffd.lib)
+	WIN_dk_libRelease		(${TIFF}/${OS}/libtiff/${RELEASE_DIR}/tiff.lib)
+	ANDROID_dk_libDebug		(${TIFF}/${OS}/libtiff/${DEBUG_DIR}/libtiff.a)
+	ANDROID_dk_libRelease	(${TIFF}/${OS}/libtiff/${RELEASE_DIR}/libtiff.a)
+elseif(XCODE)
+	dk_libDebug				(${TIFF}/${OS}/libtiff/${DEBUG_DIR}/libtiff.a)
+	dk_libRelease			(${TIFF}/${OS}/libtiff/${RELEASE_DIR}/libtiff.a)
+else()
+	dk_libDebug				(${TIFF}/${OS}/${DEBUG_DIR}/libtiff/libtiff.a)
+	dk_libRelease			(${TIFF}/${OS}/${RELEASE_DIR}/libtiff/libtiff.a)
+endif()
 
 
 ### 3RDPARTY LINK ###
@@ -37,7 +50,7 @@ ANDROID_dk_set			(TIFF_CMAKE -DTIFF_INCLUDE_DIR=${TIFF}/libtiff "-DCMAKE_C_FLAGS
 	
 
 ### GENERATE ###
-dk_queueCommand	(${DKCMAKE_BUILD} ${TIFF})
+dk_queueCommand(${DKCMAKE_BUILD} ${TIFF})
 
 
 ### COMPILE ###
