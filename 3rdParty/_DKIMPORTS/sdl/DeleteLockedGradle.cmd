@@ -1,0 +1,1 @@
+del C:\Users\Administrator\digitalknob\DK\3rdParty\sdl-release-2.26.0 /F /S /Q
