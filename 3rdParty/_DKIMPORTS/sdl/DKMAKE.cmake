@@ -103,7 +103,7 @@ ANDROID_dk_include	(${SDL}/src)
 	#LINUX_dk_libRelease	(${SDL}/${OS}/${RELEASE_DIR}/libSDL2main.a)
 	#RASPBERRY_dk_libDebug	(${SDL}/${OS}/${DEBUG_DIR}/libSDL2maind.a)
 	#RASPBERRY_dk_libRelease(${SDL}/${OS}/${RELEASE_DIR}/libSDL2main.a)
-	#ANDROID_dk_libDebug	(${SDL}/${OS}/${DEBUG_DIR}/libSDL2maind.a)
+	#ANDROID_dk_libDebug		(${SDL}/${OS}/${DEBUG_DIR}/libSDL2main.a)
 	#ANDROID_dk_libRelease	(${SDL}/${OS}/${RELEASE_DIR}/libSDL2main.a)
 #endif()
 
