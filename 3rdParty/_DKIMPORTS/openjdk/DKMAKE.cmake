@@ -16,10 +16,23 @@ MAC_HOST_dk_import	(https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_b
 LINUX_HOST_dk_import(https://download.java.net/openjdk/jdk11/ri/openjdk-11+28_linux-x64_bin.tar.gz PATCH)
 
 # MAC Install
-#$ curl -C - https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz -O openjdk-11_osx-x64_bin.tar.gz
-#$ tar xf openjdk-11_osx-x64_bin.tar.gz
-#$ sudo mv jdk-11.jdk /Library/Java/JavaVirtualMachines/
-#$ java -version
+if(MAC_HOST)
+	dk_set(CURRENT_DIR /usr)
+	dk_command(curl -C - https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz -O openjdk-11_osx-x64_bin.tar.gz)
+	dk_command(tar xf openjdk-11_osx-x64_bin.tar.gz)
+	dk_command(sudo mv jdk-11.jdk /Library/Java/JavaVirtualMachines/)
+	dk_command(java -version)
+endif()
+
+# LINUX Install
+if(LINUX_HOST)
+	dk_set(CURRENT_DIR /usr)
+	dk_command(sudo apt-get update)
+	#dk_command(sudo apt-get install openjdk-11-jdk)
+	dk_command(sudo apt -y install openjdk-11-jdk)
+	dk_command(java -version)
+endif()
+
 
 ### LINK ###
 #dk_include(${OPENJDK-11}/)	
