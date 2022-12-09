@@ -413,6 +413,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(DKVncServer)			# requires libvncserver
 	dk_disable(DKWebSockets)		# requires libwebsockets or uwebsockets
 	dk_disable(DKWebview)			# compiling errors
+	dk_disable(dl)
 	dk_disable(dukluv)
 	dk_disable(ffmpeg)
 	dk_disable(flac)				# configure: error: unrecognized option: `-DANDROID32'
