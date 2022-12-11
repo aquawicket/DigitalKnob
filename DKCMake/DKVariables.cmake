@@ -81,6 +81,19 @@ endif()
 
 
 ###########################################################################
+## Set the IDE variable
+###########################################################################
+string(FIND "${CMAKE_GENERATOR}" "Visual Studio" index)
+if(${index} GREATER -1)
+	dk_set(VISUAL_STUDIO_IDE)
+endif()
+string(FIND "${CMAKE_GENERATOR}" "Xcode" index)
+if(${index} GREATER -1)
+	dk_set(XCODE_IDE)
+endif()
+
+
+###########################################################################
 ## Get variables for Build Type
 ###########################################################################
 option(DEBUG "Build Debug Output" ON)
