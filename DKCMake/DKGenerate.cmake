@@ -139,7 +139,7 @@ foreach(plugin ${dkdepend_list})
 	if(${isDKPlugin} GREATER -1)
 		#Add the DKPlugin to the app project
 		if(EXISTS "${plugin_path}/CMakeLists.txt")
-			if(MSVC OR XCODE)
+			if(VISUAL_STUDIO_IDE OR XCODE_IDE)
 				add_subdirectory(${plugin_path} ${plugin_path}/${OS})
 			else()
 				if(DEBUG)
