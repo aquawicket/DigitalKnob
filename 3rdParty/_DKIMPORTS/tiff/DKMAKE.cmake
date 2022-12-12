@@ -4,6 +4,12 @@
 # https://gitlab.com/libtiff/libtiff/-/archive/v4.2.0/libtiff-v4.2.0.zip
 # https://gitlab.com/libtiff/libtiff.git
 
+### DEPEND ###
+dk_depend(libjpeg-turbo)
+dk_depend(libwebp)
+dk_depend(zlib)
+dk_depend(zstd)
+
 
 ### IMPORT ###
 dk_import(https://gitlab.com/libtiff/libtiff.git)
