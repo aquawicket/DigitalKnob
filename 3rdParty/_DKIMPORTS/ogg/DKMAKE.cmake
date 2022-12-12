@@ -7,9 +7,7 @@
 
 
 ### DEPEND ###
-#WIN32_dk_depend(mingw32)
-#WIN64_dk_depend(mingw64)
-#WIN_dk_depend(msys)
+WIN_dk_depend(msys)
 
 
 ### IMPORT ###

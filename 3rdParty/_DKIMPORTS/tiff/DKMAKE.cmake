@@ -6,7 +6,7 @@
 
 ### DEPEND ###
 dk_depend(libjpeg-turbo)
-#dk_depend(libwebp) ERROR: round dependency issuse
+#dk_depend(libwebp) ERROR: circular reference 
 dk_depend(zlib)
 dk_depend(zstd)
 
