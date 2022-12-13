@@ -300,7 +300,6 @@ public:
 		func_string += ")\n";
 
 		DKLog::Log(file, line, "", func_string, DK_DEBUG);
-		
 	};
 
 	~logy(){
