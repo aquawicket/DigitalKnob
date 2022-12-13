@@ -2333,7 +2333,7 @@ dk_createOsMacros("dk_ndk" "NO_DEBUG_RELEASE_TAGS")
 #
 function(dk_make folder) #lib
 	DKDEBUGFUNC(${ARGV})
-	if(LINUX OR RASPBERRY)
+	#if(LINUX OR RASPBERRY)
 		set(lib ${ARGV1})
 		dk_set(CURRENT_DIR ${3RDPARTY}/${folder}/${BUILD_DIR})
 		if(${ARGC} GREATER 1)
@@ -2341,7 +2341,7 @@ function(dk_make folder) #lib
 		else()
 			dk_queueCommand(make)
 		endif()
-	endif()
+	#endif()
 endfunction()
 
 
@@ -2361,8 +2361,12 @@ function(dk_build folder)
 	else()
 		dk_visualStudio(${ARGV})
 		dk_xcode(${ARGV})
-		dk_make(${ARGV})
+		if(LINUX OR RASPBERRY)
+			dk_make(${ARGV})
+		endif()
 	endif()
+	
+	
 endfunction()
 dk_createOsMacros("dk_build")
 
