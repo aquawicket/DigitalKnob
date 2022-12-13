@@ -269,7 +269,15 @@ bool DKAndroid::GetScreenHeight(int& h) {
 	*/
 
 	//TODO
-	h = 800;
+	h = 1;
+	return false;
+}
+
+bool DKAndroid::GetScreenWidth(int& w){
+	DKDEBUGFUNC(w);
+
+	//TODO
+	w = 1;
 	return false;
 }
 

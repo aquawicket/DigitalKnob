@@ -406,6 +406,8 @@ bool DKUtil::GetScreenWidth(int& w){
 		return DKMac::GetScreenWidth(w) && DKDEBUGRETURN(w);
 #	elif LINUX
 		return DKLinux::GetScreenWidth(w);// && DKDEBUGRETURN(w);
+#	elif ANDROID
+		return DKAndroid::GetScreenWidth(w);// && DKDEBUGRETURN(w);
 #	else
 		return DKERROR("not implemented on this OS\n");
 #	endif
