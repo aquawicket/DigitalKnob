@@ -32,7 +32,7 @@ elseif(XCODE_IDE)
 	dk_libDebug			(${LIBPNG}/${OS}/${DEBUG_DIR}/libpng.a)
 	dk_libRelease		(${LIBPNG}/${OS}/${RELEASE_DIR}/libpng.a)
 else()
-	dk_libDebug			(${LIBPNG}/${OS}/${DEBUG_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}d.a)
+	dk_libDebug			(${LIBPNG}/${OS}/${DEBUG_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}.a)
 	dk_libRelease		(${LIBPNG}/${OS}/${RELEASE_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}.a)
 endif()
 
