@@ -332,7 +332,7 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 				DKClass::CallFunc("DKDebug::ShowStackTrace");
 		}
 		if(exception_on_errors || lvl <= DK_ASSERT){
-#			ifndef ANDROID			
+#			ifndef ANDROID //FIXME: change to DKEXCEPTIONS		
 				try{
 					throw output; // throw an exception
 				}
@@ -347,7 +347,7 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 						return false;
 					}
 #			endif
-#			ifndef ANDROID
+#			ifndef ANDROID //FIXME: change to DKEXCEPTIONS
 				}
 #			endif
 		}
