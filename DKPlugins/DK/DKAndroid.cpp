@@ -255,6 +255,25 @@ bool DKAndroid::GetMousePos(int& x, int& y){
 	return true;
 }
 
+bool DKAndroid::GetScreenHeight(int& h) {
+	DKDEBUGFUNC(h);
+
+	// https://stackoverflow.com/a/12134363/688352
+	/*
+	#include <sys/ioctl.h>
+	#include <linux/fb.h>
+	#include <jni.h>
+	#include <stdio.h>
+	struct fb_var_screeninfo fb_var;
+	int fd = open("/dev/graphics/fb0", O_RDONLY);
+	ioctl(fd, FBIOGET_VSCREENINFO, &fb_var);
+	close(fd);
+	*/
+
+	//TODO
+	return false;
+}
+
 /*
 void DKAndroid::ProcessEvent(Rocket::Core::Event& event){
 	DKDEBUGFUNC(events);

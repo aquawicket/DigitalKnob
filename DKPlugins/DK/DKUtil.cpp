@@ -392,6 +392,8 @@ bool DKUtil::GetScreenHeight(int& h){
 		return DKMac::GetScreenHeight(h) && DKDEBUGRETURN(h);
 #	elif LINUX
 		return DKLinux::GetScreenHeight(h);//&& DKDEBUGRETURN(h);
+#	elif ANDROID
+		return DKAndroid::GetScreenHeight(w);
 #	else
 		return DKERROR("not implemented on this OS\n");
 #	endif
@@ -485,7 +487,7 @@ bool DKUtil::InMainThread(){
 	//DKDEBUGFUNC(); // DON'T DO THIS
 #	if WIN32
 		return mainThreadId == GetCurrentThreadId();
-#	elif defined(MAC) || defined(IOS) || defined(ANDROID) || defined(LINUX)
+#	elif MAC || IOS || ANDROID || LINUX
 		return mainThreadId == (unsigned long int)pthread_self(); //TODO: move this to DKUnix::InMainThread()
 #	endif
 }
@@ -814,14 +816,11 @@ bool DKUtil::SetFramerate(const int& fps){
 bool DKUtil::SetMainThreadNow(){
 	DKDEBUGFUNC();
 	//ONLY SET THIS FROM THE MAIN THREAD ONCE
-#	if WIN32
+#	if WIN
 		DKUtil::mainThreadId = GetCurrentThreadId();
 		return true;
-#	elif defined(MAC) || defined(IOS) || defined(LINUX)
+#	elif MAC || IOS || LINUX || ANDROID
 		DKUtil::mainThreadId = (unsigned long int)pthread_self();
-		return true;
-#	elif ANDROID
-		DKUtil::mainThreadId = (int)pthread_self();
 		return true;
 #	else
 		return DKERROR("not implemented on this OS\n");

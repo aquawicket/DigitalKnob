@@ -57,7 +57,8 @@ class DKAndroid
 {
 public:
 	static void init();
-	static bool GetMousePos(int& x, int& y);	
+	static bool GetMousePos(int& x, int& y);
+	static bool GetScreenHeight(int& h);
 	static unsigned int android_width;
 	static unsigned int android_height;
 	static unsigned int android_mouseX;
