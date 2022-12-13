@@ -262,8 +262,6 @@ bool DKAndroid::GetScreenHeight(int& h) {
 	/*
 	#include <sys/ioctl.h>
 	#include <linux/fb.h>
-	#include <jni.h>
-	#include <stdio.h>
 	struct fb_var_screeninfo fb_var;
 	int fd = open("/dev/graphics/fb0", O_RDONLY);
 	ioctl(fd, FBIOGET_VSCREENINFO, &fb_var);

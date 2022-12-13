@@ -393,7 +393,7 @@ bool DKUtil::GetScreenHeight(int& h){
 #	elif LINUX
 		return DKLinux::GetScreenHeight(h);//&& DKDEBUGRETURN(h);
 #	elif ANDROID
-		return DKAndroid::GetScreenHeight(w);
+		return DKAndroid::GetScreenHeight(h);//&& DKDEBUGRETURN(h);
 #	else
 		return DKERROR("not implemented on this OS\n");
 #	endif
