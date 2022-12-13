@@ -38,7 +38,6 @@ dk_import(https://github.com/libsdl-org/SDL_image.git BRANCH main PATCH)
 
 ### LINK ###
 dk_include				(${SDL_IMAGE})
-
 if(VISUAL_STUDIO_IDE)
 	WIN_dk_libDebug			(${SDL_IMAGE}/${OS}/lib/${DEBUG_DIR}/SDL_image.lib)
 	WIN_dk_libRelease		(${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL_image.lib)
