@@ -269,6 +269,7 @@ bool DKAndroid::GetScreenHeight(int& h) {
 	*/
 
 	//TODO
+	h = 800;
 	return false;
 }
 
