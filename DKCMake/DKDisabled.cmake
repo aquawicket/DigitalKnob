@@ -420,6 +420,9 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(fontconfig)
 	dk_disable(freealut)			# DKFunctions.cmake:4405->dk_findFiles():  files is invalid
 	dk_disable(gdal)
+	if(MAC_HOST)
+		dk_disable(giflib)
+	endif()
 	dk_disable(gzip)
 	dk_disable(imagemagick)			# dkscript.tmp: line 2: cd: /android32/Debug: No such file or directory
 	dk_disable(jasper)
