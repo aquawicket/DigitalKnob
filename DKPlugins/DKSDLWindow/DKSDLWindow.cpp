@@ -99,7 +99,7 @@ bool DKSDLWindow::Init(){
         width = toInt(textWidth);
     if(!textHeight.empty())
         height = toInt(textHeight);
-#ifdef WIN32 //account window frame
+#ifdef WIN32 //account for window frame and titlebar
     winY = (winY + 30);
     winX = (winX + 10);
 #endif
@@ -112,13 +112,22 @@ bool DKSDLWindow::Init(){
     if(height < 1)
         height = 600;
 #ifdef IOS
-    width = 320;
-    height = 480;
+    //width = 320;
+    //height = 480;
+    SDL_DisplayMode sdl_displayMode;
+    SDL_GetCurrentDisplayMode(0, &sdl_displayMode);
+    width = sdl_displayMode.w;
+    height = sdl_displayMode.h;
 #endif
 #ifdef ANDROID
-    width = DKAndroid::android_width;
-    height = DKAndroid::android_height;
+    //width = DKAndroid::android_width;
+    //height = DKAndroid::android_height;
+    SDL_DisplayMode sdl_displayMode;
+    SDL_GetCurrentDisplayMode(0, &sdl_displayMode);
+    width = sdl_displayMode.w;
+    height = sdl_displayMode.h;
 #endif
+
     SDL_SetHint(SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS, "0");
 #if !defined(ANDROID) && !defined(IOS)
     SDL_SetHint(SDL_HINT_MOUSE_FOCUS_CLICKTHROUGH, "1");
