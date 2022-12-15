@@ -60,6 +60,9 @@
 #if MAC
 	#include "DKMac.h"
 #endif
+#if IOS
+	#include "DKIos.h"
+#endif
 	
 
 //Frame limiter
@@ -394,6 +397,8 @@ bool DKUtil::GetScreenHeight(int& h){
 		return DKLinux::GetScreenHeight(h);//&& DKDEBUGRETURN(h);
 #	elif ANDROID
 		return DKAndroid::GetScreenHeight(h);//&& DKDEBUGRETURN(h);
+#	elif IOS
+		return DKIos::GetScreenHeight(h);//&& DKDEBUGRETURN(h);
 #	else
 		return DKERROR("not implemented on this OS\n");
 #	endif
@@ -408,6 +413,8 @@ bool DKUtil::GetScreenWidth(int& w){
 		return DKLinux::GetScreenWidth(w);// && DKDEBUGRETURN(w);
 #	elif ANDROID
 		return DKAndroid::GetScreenWidth(w);// && DKDEBUGRETURN(w);
+#	elif IOS
+		return DKIos::GetScreenWidth(w);// && DKDEBUGRETURN(w);
 #	else
 		return DKERROR("not implemented on this OS\n");
 #	endif
