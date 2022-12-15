@@ -4,11 +4,13 @@
 # https://github.com/mirrorer/giflib/archive/fa37672085ce4b3d62c51627ab3c8cf2dda8009a.zip
 # https://sourceforge.net/projects/giflib/files/giflib-5.1.1.tar.gz
 
+# https://stackoverflow.com/a/34102586/688352  #'aclocal-1.15' is missing on your system
+
 
 ### DEPEND ###
 #WIN32_dk_depend(mingw32)
 #WIN64_dk_depend(mingw64)
-#WIN_dk_depend(msys)
+WIN_dk_depend(msys)
 #WIN_dk_depend(msys2)
 MAC_dk_depend(autotools)
 

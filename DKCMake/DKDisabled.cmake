@@ -66,7 +66,7 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(ffmpeg)
 	dk_disable(fontconfig)
 	dk_disable(gdal)
-	dk_disable(giflib)
+	#dk_disable(giflib)
 	dk_disable(gzip)
 	dk_disable(jasper)
 	dk_disable(libcaca)				# no CMakeLists.txt
