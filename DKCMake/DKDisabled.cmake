@@ -66,7 +66,6 @@ if(WIN) # Disabled for Windows targets
 	dk_disable(ffmpeg)
 	dk_disable(fontconfig)
 	dk_disable(gdal)
-	#dk_disable(giflib)
 	dk_disable(gzip)
 	dk_disable(jasper)
 	dk_disable(libcaca)				# no CMakeLists.txt
@@ -429,8 +428,6 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(libarchive)
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libexpat)
-	#dk_disable(libjpeg-turbo)
-	#dk_disable(libpng)
 	dk_disable(libtorrent)			# Could not find BOOST
 	dk_disable(libuv)				# error : incomplete definition of type 'struct ifaddrs'
 	dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
