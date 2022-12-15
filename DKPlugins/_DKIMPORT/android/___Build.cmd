@@ -52,6 +52,7 @@ set "Country=US"
 ::::::::::::: CMAKE / CLANG :::::::::::::::::::
 :: Android api, ndk and tools versions
 set "ANDROID_API=31"
+set "ANDROID_MIN_API=19"
 set "NDK=23.1.7779620"
 set "BUILD_TOOLS=30.0.3"
 :::::::::::::::::::::::::::::::::::::::::::::::

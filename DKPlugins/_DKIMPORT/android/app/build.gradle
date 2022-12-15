@@ -10,8 +10,6 @@ else {
 
 android {
 	compileSdkVersion 31
-	//ndkVersion "23.1.7779620"
-	//ndkPath 'C:/Users/Administrator/digitalknob/DK/3rdParty/android-sdk/ndk/23.1.7779620'
 	ndkVersion "23.1.7779620"
 	ndkPath 'C:/Users/Administrator/digitalknob/DK/3rdParty/android-sdk/ndk/23.1.7779620'
     defaultConfig {
@@ -21,7 +19,7 @@ android {
         if (buildAsApplication) {
 			applicationId "com.digitalknob.dk"
         }
-		minSdkVersion 31
+		minSdkVersion 19
 		targetSdkVersion 31
         versionCode 1
         versionName "1.0"
