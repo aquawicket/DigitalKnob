@@ -28,13 +28,22 @@
 #ifdef IOS
 #include "DK/DKIos.h"
 
+//WARNING_DISABLE
+#import <UIKit/UIKit.h>
+//WARNING_ENABLE
 
 bool DKIos::GetScreenHeight(int& h){
-	return false;
+	CGRect screenRect = [[UIScreen mainScreen] bounds];
+	CGFloat screenHeight = screenRect.size.height;
+	h = screenHeight;
+	return true;
 }
 
 bool DKIos::GetScreenWidth(int& w){
-	return false;
+	CGRect screenRect = [[UIScreen mainScreen] bounds];
+	CGFloat screenWidth = screenRect.size.width;
+	w = screenWidth;
+	return true;
 }
 
 #endif //IOS

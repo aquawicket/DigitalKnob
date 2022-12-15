@@ -29,9 +29,6 @@
 #ifndef DKIos_H
 #define DKIos_H
 
-//WARNING_DISABLE
-#import <UIKit/UIKit.h>
-//WARNING_ENABLE
 
 class DKIos{
 public:
