@@ -24,20 +24,17 @@
 * SOFTWARE.
 */
 
+#include "DK/stdafx.h"
 #ifdef IOS
-#pragma once
-#ifndef DKIos_H
-#define DKIos_H
+#include "DK/DKIos.h"
 
-//WARNING_DISABLE
-#import <UIKit/UIKit.h>
-//WARNING_ENABLE
 
-class DKIos{
-public:
-	static bool GetScreenWidth(int& w);
-	static bool GetScreenHeight(int& h);
-};
+bool DKIos::GetScreenHeight(int& h){
+	return false;
+}
 
-#endif //DKIos_H
+bool DKIos::GetScreenWidth(int& w){
+	return false;
+}
+
 #endif //IOS
