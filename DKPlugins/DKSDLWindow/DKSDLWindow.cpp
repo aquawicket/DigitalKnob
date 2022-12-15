@@ -120,12 +120,12 @@ bool DKSDLWindow::Init(){
     height = sdl_displayMode.h;
 #endif
 #ifdef ANDROID
-    //width = DKAndroid::android_width;
-    //height = DKAndroid::android_height;
     SDL_DisplayMode sdl_displayMode;
     SDL_GetCurrentDisplayMode(0, &sdl_displayMode);
     width = sdl_displayMode.w;
     height = sdl_displayMode.h;
+    //DKAndroid::android_width = width;
+    //DKAndroid::android_height = height;
 #endif
 
     SDL_SetHint(SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS, "0");

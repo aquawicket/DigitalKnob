@@ -31,6 +31,10 @@
 #include "DK/DKApp.h"
 #include "DK/DKClass.h"
 
+# if HAVE_sdl
+	#include "SDL.h"
+#endif
+
 unsigned int DKAndroid::android_width = 800;
 unsigned int DKAndroid::android_height = 480;
 unsigned int DKAndroid::android_mouseX = 0;
@@ -257,7 +261,6 @@ bool DKAndroid::GetMousePos(int& x, int& y){
 
 bool DKAndroid::GetScreenHeight(int& h) {
 	DKDEBUGFUNC(h);
-
 	// https://stackoverflow.com/a/12134363/688352
 	/*
 	#include <sys/ioctl.h>
@@ -267,18 +270,35 @@ bool DKAndroid::GetScreenHeight(int& h) {
 	ioctl(fd, FBIOGET_VSCREENINFO, &fb_var);
 	close(fd);
 	*/
-
-	//TODO
-	h = 1;
-	return false;
+#if HAVE_sdl
+	SDL_DisplayMode sdl_displayMode;
+	SDL_GetCurrentDisplayMode(0, &sdl_displayMode);
+	h = sdl_displayMode.h;
+	return true;
+#else
+	return DKERROR("sdl unavailable! \n");
+#endif
 }
 
 bool DKAndroid::GetScreenWidth(int& w){
 	DKDEBUGFUNC(w);
-
-	//TODO
-	w = 1;
-	return false;
+	// https://stackoverflow.com/a/12134363/688352
+	/*
+	#include <sys/ioctl.h>
+	#include <linux/fb.h>
+	struct fb_var_screeninfo fb_var;
+	int fd = open("/dev/graphics/fb0", O_RDONLY);
+	ioctl(fd, FBIOGET_VSCREENINFO, &fb_var);
+	close(fd);
+	*/
+#if HAVE_sdl
+	SDL_DisplayMode sdl_displayMode;
+	SDL_GetCurrentDisplayMode(0, &sdl_displayMode);
+	w = sdl_displayMode.w;
+	return true;
+#else 
+	return DKERROR("sdl unavailable! \n");
+#endif
 }
 
 /*
