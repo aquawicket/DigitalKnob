@@ -26,9 +26,12 @@ if(!USERNAME){
 console.log("username was set to: "+USERNAME)
 
 function DKBuild_GetDKMakeVariable(file, variable){
+	// TEST: Throw error if variable is not found
 	const str = CPP_DKFile_FileToString(file)
-	if(!str)
+	if(!str){
+		console.error("DKBuild_GetDKMakeVariable(): str invalid!")
 		return null;
+	}
 	str = str.split("dkset(").join("set(")
 	str = str.split("DKSET(").join("set(")
 	str = str.split("SET(").join("set(")
@@ -54,6 +57,7 @@ function DKBuild_GetDKMakeVariable(file, variable){
 			pos--
 		}
 	}
+	console.error("DKBuild_GetDKMakeVariable("+file+","+variable+"): "+variable+" not found!")
 	return null
 }
 
