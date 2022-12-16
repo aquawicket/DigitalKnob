@@ -1107,6 +1107,7 @@ if(ANDROID)
 		dk_copy(${DKPLUGINS}/_DKIMPORT/android/ ${DKPROJECT}/android64/ FALSE)
 		dk_copy(${DKPLUGINS}/_DKIMPORT/android64/ ${DKPROJECT}/android64/ FALSE)
 	endif()
+	# TODO:  Create local.properties file that points to android-sdk path
 	set(CMAKE_ANDROID_GUI 1)
 	
 	dk_set(CMAKE_C_FLAGS ${CMAKE_C_FLAGS} -frtti)
