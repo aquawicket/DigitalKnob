@@ -24,15 +24,58 @@
 * SOFTWARE.
 */
 
-//--- DK.java --------------------------
+
 package com.digitalknob.dk;
 
-import org.libsdl.app.SDLActivity; 
+import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 
-/**
- * A sample wrapper class that just calls SDLActivity 
- */ 
+import org.libsdl.app.SDLActivity;
 
-public class DKApp extends SDLActivity { }
 
-//------------------------------------------
+public class DKApp extends SDLActivity {
+	public static DKApp instance;
+
+	@Override
+	protected void onCreate(Bundle app) {
+		Log.d("DKApp.java", "onCreate()");
+		super.onCreate(app);
+		instance = this;
+
+	/*
+		initJNIBridge(); // Calls C++ function to store object for C++ to Java bridge
+
+		OpenActivity("SplashActivity");
+
+		Handler handler = new Handler();
+		handler.postDelayed(new Runnable() {
+			@Override
+			public void run(){
+				copyAssets();
+
+				//TODO: maybe we can check if the plugins is available - DKAvailable(data)
+				//if(USE_dkappWindow){
+				OpenActivity("SDLActivity");
+				//}
+				//else{
+				//CallCppFunction("DKAndroid_init");
+				//}
+
+				//This gives DK time to register functions for Webview
+				Handler handler2 = new Handler();
+				handler2.postDelayed(new Runnable() {
+					@Override
+					public void run(){
+						//TODO: maybe we can check if the plugins is available - DKAvailable(data)
+						//if(HAVE_DKWebview){
+						//OpenActivity("WebviewActivity");
+						//}
+					}
+				}, 2000);
+			}
+		}, 2000);
+		*/
+	}
+}
+
