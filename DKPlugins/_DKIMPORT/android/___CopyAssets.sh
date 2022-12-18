@@ -34,10 +34,10 @@ fi
 
 	
 
-ASSETS="$APP_ROOT/app/src/main/assets"
-if [[ -f "$APP_ROOT..\assets" ]]; then
+#ASSETS="$APP_ROOT/app/src/main/assets"
+#if [[ -f "$APP_ROOT..\assets" ]]; then
 	ASSETS="$APP_ROOT..\assets"
-fi
+#fi
 
 DEVICE_PATH="/sdcard/Android/data/$PACKAGE_NAME/files/assets"
 
