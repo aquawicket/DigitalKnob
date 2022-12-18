@@ -35,12 +35,12 @@ APK_NAME="$APP_NAME"
 PACKAGE_NAME="$TYPE.$COMPANY.$APP_NAME"
 
 echo "15. Uninstall any previous matching package"
-"$ANDROID_HOME/platform-tools/adb" shell pm list packages $PACKAGE_NAME
+#"$ANDROID_HOME/platform-tools/adb" shell pm list packages $PACKAGE_NAME
 # echo error level from list packages is %ERRORLEVEL%
-"$ANDROID_HOME/platform-tools/adb" shell pm list packages $PACKAGE_NAME | findstr /I /C:"$PACKAGE_NAME"
+#"$ANDROID_HOME/platform-tools/adb" shell pm list packages $PACKAGE_NAME | findstr /I /C:"$PACKAGE_NAME"
 # echo error level from list packages findstr is %ERRORLEVEL%
 #if %ERRORLEVEL% EQU 0 ( 
-	echo "uninstalling previous %PACKAGE_NAME%  package . . ."
+	echo "uninstalling previous $PACKAGE_NAME  package . . ."
 	"$ANDROID_HOME/platform-tools/adb" shell pm uninstall $PACKAGE_NAME
 #	%IF_ERROR% "Failed to Uninstall previous package"
 #)
