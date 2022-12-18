@@ -37,4 +37,6 @@ if %GRADLE% EQU 1 (
 
 
 echo 17. Copying assets to device
-call %APP_ROOT%___CopyAssets.cmd %PACKAGE_NAME%
+call %APP_ROOT%___CopyAssets.cmd %PACKAGE_NAME% 
+ 
+%DKEND% 
