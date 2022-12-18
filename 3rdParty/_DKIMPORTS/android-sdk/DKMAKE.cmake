@@ -39,5 +39,5 @@ endif()
 
 if(NOT EXISTS ${ANDROID-SDK}/SignLicenses.sh)
 	dk_copy(${DKIMPORTS}/android-sdk/SignLicenses.sh ${ANDROID-SDK}/SignLicenses.sh OVERWRITE)
-	UNIX_HOST_dk_executeProcess(call ${ANDROID-SDK}/SignLicenses.sh)
+	UNIX_HOST_dk_executeProcess(${ANDROID-SDK}/SignLicenses.sh)
 endif()
