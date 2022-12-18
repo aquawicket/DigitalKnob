@@ -1102,7 +1102,7 @@ if(ANDROID)
 	######## Create local.properties file that points to android-sdk path #############
 	if(WIN_HOST)
 		set(localProperties "sdk.dir=C\:\\Users\\Administrator\\digitalknob\\DK\\3rdParty\\android-sdk")
-	else
+	else()
 		set(localProperties "sdk.dir=${ANDROID-SDK}")
 	endif()
 	
