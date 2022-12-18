@@ -52,6 +52,10 @@ extern "C" {
 		return JNI_VERSION_1_6;
 	}
 
+	JNIEXPORT void Java_com_digitalknob_dk_DKApp_testFunc(JNIEnv* env, jobject thiz){
+		DKINFO("Java_com_digitalknob_dk_DKApp_testFunc() \n");
+	}
+
 	void initJNIBridge(JNIEnv* env, jobject obj){
 		DKDEBUGFUNC(env, obj);
 		theobj = env->NewGlobalRef(obj);

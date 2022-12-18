@@ -27,22 +27,43 @@
 
 package com.digitalknob.dk;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.AssetManager;
+import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
+import android.view.inputmethod.InputMethodManager;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
 import org.libsdl.app.SDLActivity;
+
+import java.io.File;
 
 
 public class DKApp extends SDLActivity {
+	private static String TAG = "DKApp";
 	public static DKApp instance;
 
 	@Override
-	protected void onCreate(Bundle app) {
+	protected void onCreate(Bundle savedInstanceState) {
 		Log.d("DKApp.java", "onCreate()");
-		super.onCreate(app);
 		instance = this;
-
+		super.onCreate(savedInstanceState);
+		Log.d("DKApp.java", "after super.onCreate(savedInstanceState)");
+		copyAssets();
+		
 	/*
 		initJNIBridge(); // Calls C++ function to store object for C++ to Java bridge
 
@@ -77,5 +98,99 @@ public class DKApp extends SDLActivity {
 		}, 2000);
 		*/
 	}
+
+	private void copyAssets() {
+		Log.d("DK.java", "copyAssets()");
+		Log.i("DK.java", "Copying assets to storage . . .");
+		Context context = this.getApplicationContext();
+		int stringId = context.getApplicationInfo().labelRes;
+		//String appdir = "/mnt/sdcard/"+context.getString(stringId);
+		String appdir = "/sdcard/Android/data/com.digitalknob.dk/files/assets";
+		File checkfile = new File(appdir+"/ASSETS");
+
+		if(checkfile.exists()){
+			Log.i("DK.java", "Remove "+appdir+"/ASSETS file from the device to reload assets.");
+			return;
+		}
+		else{
+			Log.i("DK.java", "Reloading Assets . . .");
+			copyFileOrDir("null", true);
+		}
+	}
+
+	private void copyAsset(String path) {
+		Log.d("DK.java", "copyAsset("+path+")");
+		Log.i("DK.java", "Copying "+path+" to storage . . .");
+		copyFile(path, true);
+	}
+
+	private void copyFileOrDir(String path, boolean overwrite) {
+		//Log.d("DK.java", "copyFileOrDir("+path+",boolean)");
+		if(path.equals("null")){ path = ""; }
+		Context context = this.getApplicationContext();
+		int stringId = context.getApplicationInfo().labelRes;
+
+		AssetManager assetManager = this.getAssets();
+		String assets[] = null;
+		try{
+			assets = assetManager.list(path);
+			if(assets.length == 0){
+				copyFile(path, overwrite);
+			}
+			else{
+				//String fullPath = "/mnt/sdcard/"+context.getString(stringId) + "/" + path;
+				String fullPath = "/sdcard/Android/data/com.digitalknob.dk/files/assets/" + path;
+				File dir = new File(fullPath);
+				if(!dir.exists()){
+					dir.mkdir();
+				}
+				for(int i = 0; i < assets.length; ++i){
+					if(path.equals("")){
+						copyFileOrDir(assets[i], overwrite);
+					}
+					else{
+						copyFileOrDir(path + "/" + assets[i], overwrite);
+					}
+				}
+			}
+		}
+		catch(IOException ex){
+			Log.e("DK.java", "copyFileOrDir("+path+",boolean): I/O Exception", ex);
+		}
+	}
+
+	private void copyFile(String filename, boolean overwrite) {
+		//Log.d("DK.java", "copyFile("+filename+",boolean)");
+		Context context = this.getApplicationContext();
+		int stringId = context.getApplicationInfo().labelRes;
+
+		AssetManager assetManager = this.getAssets();
+		InputStream in = null;
+		OutputStream out = null;
+		try{
+			in = assetManager.open(filename);
+			//String newFileName = "/mnt/sdcard/"+context.getString(stringId) + "/" + filename;
+			String newFileName = "/sdcard/Android/data/com.digitalknob.dk/files/assets/" + filename;
+			out = new FileOutputStream(newFileName);
+
+			File file = new File(newFileName);
+			if(file.exists() && !overwrite){ return; }
+
+			byte[] buffer = new byte[1024];
+			int read;
+			while((read = in.read(buffer)) != -1){
+				out.write(buffer, 0, read);
+			}
+			in.close();
+			in = null;
+			out.flush();
+			out.close();
+			out = null;
+		}
+		catch(Exception e){
+			Log.e("DK.java", "copyFile("+filename+",boolean)"+e.getMessage());
+		}
+	}
+	//private static native void testFunc();
 }
 

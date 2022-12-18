@@ -69,6 +69,7 @@ public:
 extern "C" 
 {
 	JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved);
+	JNIEXPORT void Java_com_digitalknob_dk_DKApp_testFunc(JNIEnv* env, jobject thiz);
 	void initJNIBridge(JNIEnv * env, jobject obj);
 	void exitJNIBridge(JNIEnv * env, jobject obj);
 	void initSDL(JNIEnv* env, jclass cls, jobject array);
