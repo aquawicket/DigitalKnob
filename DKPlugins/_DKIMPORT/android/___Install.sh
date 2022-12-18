@@ -57,4 +57,4 @@ fi
 
 
 echo "17. Copying assets to device"
-#call %APP_ROOT%___CopyAssets.cmd %PACKAGE_NAME% 
+$APP_ROOT___CopyAssets.sh $PACKAGE_NAME 
