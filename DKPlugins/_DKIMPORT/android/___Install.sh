@@ -49,7 +49,7 @@ echo "15. Uninstall any previous matching package"
 
 echo "16. Install the apk package to android device"
 if [[ "$GRADLE" == "1"* ]]; then
-	"$ANDROID_HOME/platform-tools/adb" install -r $APP_ROOT\app\build\outputs\apk\debug\app-debug.apk
+	"$ANDROID_HOME/platform-tools/adb" install -r $APP_ROOT/app/build/outputs/apk/debug/app-debug.apk
 else
 	"$ANDROID_HOME/platform-tools/adb" install -r $APP_PATH/build/$APK_NAME.apk
 fi
