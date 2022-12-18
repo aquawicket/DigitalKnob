@@ -3135,7 +3135,7 @@ function(dkFileReplace filePath find replace)
 		string(REPLACE "${find}" "${replace}" fileString "${fileString}")
 		file(WRITE ${filePath} "${fileString}")
 	else()
-		dk_info("WARNING: cannot find \"${find}\"  in  (${filePath})")
+		dk_error("cannot find \"${find}\"  in  (${filePath})")
 	endif()
 endfunction()
 

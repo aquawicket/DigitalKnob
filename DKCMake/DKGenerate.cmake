@@ -1118,6 +1118,9 @@ if(ANDROID)
 		file(WRITE ${DKPROJECT}/android64/local.properties ${localProperties})
 	endif()
 	
+	### rename "app_name"
+	dkFileReplace(${DKPROJECT}/android64/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}")
+	
 	####### Append -frtti to C/CXX Flags ##############################
 	set(CMAKE_ANDROID_GUI 1)
 	dk_set(CMAKE_C_FLAGS ${CMAKE_C_FLAGS} -frtti)
