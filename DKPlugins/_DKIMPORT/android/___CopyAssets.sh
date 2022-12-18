@@ -1,17 +1,41 @@
+#!/bin/bash
 
-# https://developer.android.com/studio/projects
+# to run this script requires privledges 
+# > chmod 777 build.sh
 
-set "PACKAGE_NAME=com.digitalknob.dk"
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+	DIGITALKNOB="/home/$USER/digitalknob"
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+	DIGITALKNOB="/Users/$USER/digitalknob"
+elif [[ "$OSTYPE" == "cygwin" ]]; then
+	DIGITALKNOB="C:/Users/$USERNAME/digitalknob"
+elif [[ "$OSTYPE" == "msys" ]]; then
+	DIGITALKNOB="C:/Users/$USERNAME/digitalknob"
+elif [[ "$OSTYPE" == "win32" ]]; then #I'm not sure this can happen
+	DIGITALKNOB="C:/Users/$USERNAME/digitalknob" 
+elif [[ "$OSTYPE" == "freebsd"* ]]; then
+	echo "TODO: DIGITALKNOB NOT SET"
+else
+    echo "UNKNOWN OS TYPE ($OSTYPE)"
+fi
+
+
+PACKAGE_NAME="com.digitalknob.dk"
 #if not "%1"=="" set PACKAGE_NAME=%~1
-
-
 APP_ROOT="$PWD"
+ANDROID_HOME="$DIGITALKNOB/DK/3rdParty/android-sdk"
 
-if not exist $ANDROID_HOME
+
+if [[ -f "$ANDROID_HOME" ]]; then
+    echo "$ANDROID_HOME"
+else
 	echo "ANDROID_HOME environment variable not set"
+fi
+
+	
 
 ASSETS="$APP_ROOT/app/src/main/assets"
-if exist $APP_ROOT..\assets
+if [[ -f "$APP_ROOT..\assets" ]]; then
 	ASSETS="$APP_ROOT..\assets"
 
 DEVICE_PATH="/sdcard/Android/data/$PACKAGE_NAME/files/assets"
@@ -33,4 +57,4 @@ echo " "
 #%IF_ERROR% "Failed to copy assets to the device"
 
 
-ECHO Done
+echo "Done"
