@@ -3,10 +3,27 @@
 # to run this script requires privledges 
 # > chmod 777 build.sh
 
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+	DIGITALKNOB="/home/$USER/digitalknob"
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+	DIGITALKNOB="/Users/$USER/digitalknob"
+elif [[ "$OSTYPE" == "cygwin" ]]; then
+	DIGITALKNOB="C:/Users/$USERNAME/digitalknob"
+elif [[ "$OSTYPE" == "msys" ]]; then
+	DIGITALKNOB="C:/Users/$USERNAME/digitalknob"
+elif [[ "$OSTYPE" == "win32" ]]; then #I'm not sure this can happen
+	DIGITALKNOB="C:/Users/$USERNAME/digitalknob" 
+elif [[ "$OSTYPE" == "freebsd"* ]]; then
+	echo "TODO: DIGITALKNOB NOT SET"
+else
+    echo "UNKNOWN OS TYPE ($OSTYPE)"
+fi
+
 GRADLE=1
 
 APP_ROOT="$~dp0"
 APP_PATH="$APP_ROOT/app/src/main"
+ANDROID_HOME="$DIGITALKNOB/DK/3rdParty/android-sdk"
 
 # App package name and lable
 TYPE="com"
