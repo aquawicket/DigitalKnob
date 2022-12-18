@@ -1111,15 +1111,15 @@ if(ANDROID)
 		dk_copy(${DKPLUGINS}/_DKIMPORT/android/ ${DKPROJECT}/android32/ FALSE)
 		dk_copy(${DKPLUGINS}/_DKIMPORT/android32/ ${DKPROJECT}/android32/ FALSE)
 		file(WRITE ${DKPROJECT}/android32/local.properties ${localProperties})
+		dkFileReplace(${DKPROJECT}/android32/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}")
 	endif()
 	if(ANDROID_64)
 		dk_copy(${DKPLUGINS}/_DKIMPORT/android/ ${DKPROJECT}/android64/ FALSE)
 		dk_copy(${DKPLUGINS}/_DKIMPORT/android64/ ${DKPROJECT}/android64/ FALSE)
 		file(WRITE ${DKPROJECT}/android64/local.properties ${localProperties})
+		dkFileReplace(${DKPROJECT}/android64/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}")
 	endif()
 	
-	### rename "app_name"
-	dkFileReplace(${DKPROJECT}/android64/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}")
 	
 	####### Append -frtti to C/CXX Flags ##############################
 	set(CMAKE_ANDROID_GUI 1)
