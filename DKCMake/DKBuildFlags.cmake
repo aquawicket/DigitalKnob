@@ -381,7 +381,8 @@ RASPBERRY64_dk_set(DKCONFIGURE_CXXFLAGS			"-march=armv7l -DLINUX -DLINUX64 -DRAS
 RASPBERRY64_dk_set(DKCONFIGURE_CXXFLAGS_DEBUG	"-DDEBUG -D_DEBUG -g")
 RASPBERRY64_dk_set(DKCONFIGURE_CXXFLAGS_RELEASE	"-DNDEBUG -O3")
 
-# ANDROID_dk_depend(android-ndk) #for ${ANDROID-NDK}
+# ANDROID_dk_depend(android-ndk) #for ${ANDROID-NDK} variable
+
 # Android armeabi-v7a (x32)
 ANDROID32_dk_set(DKCMAKE_FLAGS
 	-DANDROID_ABI=armeabi-v7a

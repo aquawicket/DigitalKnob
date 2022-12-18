@@ -1099,17 +1099,27 @@ if(ANDROID)
 	set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/app/src/main/jniLibs/${ANDROID_ABI}")
 	set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/app/src/main/jniLibs/${ANDROID_ABI}")
 
+	######## Create local.properties file that points to android-sdk path #############
+	if(WIN_HOST)
+		set(localProperties "sdk.dir=C\:\\Users\\Administrator\\digitalknob\\DK\\3rdParty\\android-sdk")
+	else
+		set(localProperties "sdk.dir=${ANDROID-SDK}")
+	endif()
+	
+	####### Import Android Build files ############################################
 	if(ANDROID_32)
 		dk_copy(${DKPLUGINS}/_DKIMPORT/android/ ${DKPROJECT}/android32/ FALSE)
 		dk_copy(${DKPLUGINS}/_DKIMPORT/android32/ ${DKPROJECT}/android32/ FALSE)
+		file(WRITE ${DKPROJECT}/android32/local.properties ${localProperties})
 	endif()
 	if(ANDROID_64)
 		dk_copy(${DKPLUGINS}/_DKIMPORT/android/ ${DKPROJECT}/android64/ FALSE)
 		dk_copy(${DKPLUGINS}/_DKIMPORT/android64/ ${DKPROJECT}/android64/ FALSE)
+		file(WRITE ${DKPROJECT}/android64/local.properties ${localProperties})
 	endif()
-	# TODO:  Create local.properties file that points to android-sdk path
-	set(CMAKE_ANDROID_GUI 1)
 	
+	####### Append -frtti to C/CXX Flags ##############################
+	set(CMAKE_ANDROID_GUI 1)
 	dk_set(CMAKE_C_FLAGS ${CMAKE_C_FLAGS} -frtti)
 	dk_set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} -frtti)
 	
