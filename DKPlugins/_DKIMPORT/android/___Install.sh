@@ -21,7 +21,7 @@ fi
 
 GRADLE=1
 
-APP_ROOT="$~dp0"
+APP_ROOT="$PWD"
 APP_PATH="$APP_ROOT/app/src/main"
 ANDROID_HOME="$DIGITALKNOB/DK/3rdParty/android-sdk"
 
