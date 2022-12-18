@@ -13,29 +13,34 @@ dk_depend(android-ndk)
 
 
 ### IMPORT ###
-WIN_HOST_dk_set(ANDROID-STUDIO_NAME "android-studio-2020.3.1.26-windows.exe")
-WIN_HOST_dk_set(ANDROID-STUDIO_DL "https://redirector.gvt1.com/edgedl/android/studio/install/2020.3.1.26/android-studio-2020.3.1.26-windows.exe")
-WIN_HOST_dk_set(ANDROID-STUDIO "C:/Program Files/Android/Android Studio/bin")
-WIN_HOST_dk_set(ANDROID-STUDIO_EXE "${ANDROID-STUDIO}/studio.exe")
+if(WIN_HOST)
+	dk_set(ANDROID-STUDIO "C:/Program Files/Android/Android Studio/bin")
+	dk_set(ANDROID-STUDIO_EXE "${ANDROID-STUDIO}/studio.exe")
+	if(NOT EXISTS ${ANDROID-STUDIO_EXE})
+		dk_download("https://redirector.gvt1.com/edgedl/android/studio/install/2020.3.1.26/android-studio-2020.3.1.26-windows.exe" ${DKDOWNLOAD}/android-studio-2020.3.1.26-windows.exe)
+		dk_command(${DKDOWNLOAD}/android-studio-2020.3.1.26-windows.exe)
+	endif()
+endif()
 
-MAC_HOST_dk_set(ANDROID-STUDIO_NAME "android-studio-2021.3.1.17-mac.dmg")
-MAC_HOST_dk_set(ANDROID-STUDIO_DL "https://redirector.gvt1.com/edgedl/android/studio/install/2021.3.1.17/android-studio-2021.3.1.17-mac.dmg")
-MAC_HOST_dk_set(ANDROID-STUDIO "/Applications")
-MAC_HOST_dk_set(ANDROID-STUDIO_EXE "${ANDROID-STUDIO}/Android Studio.app")
+if(MAC_HOST)
+	dk_set(ANDROID-STUDIO "/Applications")
+	dk_set(ANDROID-STUDIO_EXE "${ANDROID-STUDIO}/Android Studio.app")
+	if(NOT EXISTS ${ANDROID-STUDIO_EXE})
+		dk_download("https://redirector.gvt1.com/edgedl/android/studio/install/2021.3.1.17/android-studio-2021.3.1.17-mac.dmg" ${DKDOWNLOAD}/android-studio-2021.3.1.17-mac.dmg)
+		dk_command(${DKDOWNLOAD}/android-studio-2021.3.1.17-mac.dmg)
+	endif()
+endif()
 
-LINUX_HOST_dk_set(ANDROID-STUDIO_NAME "android-studio-2021.3.1.17-linux.tar.gz")
-LINUX_HOST_dk_set(ANDROID-STUDIO_DL "https://redirector.gvt1.com/edgedl/android/studio/ide-zips/2021.3.1.17/android-studio-2021.3.1.17-linux.tar.gz")
-LINUX_HOST_dk_set(ANDROID-STUDIO "${3RDPARTY}/android-studio/bin")
-LINUX_HOST_dk_set(ANDROID-STUDIO_EXE "${ANDROID-STUDIO}/Android Studio.app")
+if(LINUX_HOST)
+	dk_set(ANDROID-STUDIO "${3RDPARTY}/android-studio/bin")
+	dk_set(ANDROID-STUDIO_EXE "${ANDROID-STUDIO}/Android Studio.app")
+	if(NOT EXISTS ${ANDROID-STUDIO_EXE})
+		dk_download("https://redirector.gvt1.com/edgedl/android/studio/ide-zips/2021.3.1.17/android-studio-2021.3.1.17-linux.tar.gz" ${DKDOWNLOAD}/android-studio-2021.3.1.17-linux.tar.gz)
+		dk_extract(${DKDOWNLOAD}/android-studio-2021.3.1.17-linux.tar.gz ${3RDPARTY}/android-studio)
+	endif()
+endif()
 
+
+### SET ENVIRONMENT VARIABLES ###
 dk_setEnv("STUDIO_JDK" ${OPENJDK-8U41})
 dk_setEnv("STUDIO_GRADLE_JDK" ${OPENJDK-8U41})
-
-
-### INSTALL ###
-#dk_import(${ANDROID-STUDIO_DL} ${ANDROID-STUDIO_EXE})
-
-if(NOT EXISTS ${ANDROID-STUDIO_EXE})
-	dk_download(${ANDROID-STUDIO_DL} ${DKDOWNLOAD}/${ANDROID-STUDIO_NAME})
-	dk_command(${DKDOWNLOAD}/${ANDROID-STUDIO_NAME})
-endif()
