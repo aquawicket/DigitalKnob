@@ -1100,11 +1100,7 @@ if(ANDROID)
 	set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/app/src/main/jniLibs/${ANDROID_ABI}")
 
 	######## Create local.properties file that points to android-sdk path #############
-	if(WIN_HOST)
-		set(localProperties "sdk.dir=C\:\\Users\\Administrator\\digitalknob\\DK\\3rdParty\\android-sdk")
-	else()
-		set(localProperties "sdk.dir=${ANDROID-SDK}")
-	endif()
+	set(localProperties "sdk.dir=${ANDROID-SDK}")
 	
 	####### Import Android Build files ############################################
 	if(ANDROID_32)
