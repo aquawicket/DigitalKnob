@@ -33,9 +33,8 @@ else
 fi
 
 	
-
 #ASSETS="$APP_ROOT/app/src/main/assets"
-#if [[ -f "$APP_ROOT..\assets" ]]; then
+#if [[ -f "$APP_ROOT/../assets" ]]; then
 	ASSETS="$APP_ROOT/../assets"
 #fi
 
