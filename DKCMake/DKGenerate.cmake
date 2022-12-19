@@ -1124,6 +1124,11 @@ if(ANDROID)
 	dk_set(CMAKE_C_FLAGS ${CMAKE_C_FLAGS} -frtti)
 	dk_set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} -frtti)
 	
+	# https://stackoverflow.com/a/53806411/688352
+	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS_RELEASE} -Wl,--hash-style=both")
+    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS_RELEASE} -Wl,--hash-style=both")
+    set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS_RELEASE} -Wl,--hash-style=both")
+	
 	#add_library(${APP_NAME} SHARED ${App_SRC})
 	add_library(main SHARED ${App_SRC})
 		

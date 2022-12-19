@@ -14,6 +14,7 @@ android {
 	ndkPath 'C:/Users/Administrator/digitalknob/DK/3rdParty/android-sdk/ndk/23.1.7779620'
     defaultConfig {
 		packagingOptions {
+			doNotStrip "*/armeabi-v7a/*.so"
 			doNotStrip '**.so'
 		}		
         if (buildAsApplication) {
