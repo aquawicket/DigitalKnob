@@ -23,28 +23,25 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #ifdef HAVE_DKCef
 #include "DK/stdafx.h"
 #include "DK/DKApp.h"
 #include "DKRml/DKRml.h"
 #include "DKRml/DKRmlV8.h"
 
-bool DKRmlV8::Init()
-{
+
+bool DKRmlV8::Init(){
 	DKDEBUGFUNC();
 	DKV8::AttachFunction("DKRml_DebuggerToggle", DKRmlV8::DebuggerToggle);
 	return true;
 }
 
-bool DKRmlV8::End()
-{
+bool DKRmlV8::End(){
 	DKDEBUGFUNC();
 	return true;
 }
 
-bool DKRmlV8::DebuggerToggle(CefArgs args, CefReturn retval)
-{
+bool DKRmlV8::DebuggerToggle(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
 	DKRml::Get()->DebuggerToggle();
 	return true;

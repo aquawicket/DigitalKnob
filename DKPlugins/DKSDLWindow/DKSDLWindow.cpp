@@ -25,11 +25,13 @@
 */
 
 #include "DK/stdafx.h"
-#include "SDL_syswm.h"
 //#include "DK/DKAndroid.h"
 #include "DK/DKFile.h"
 #include "DKSDLWindow/DKSDLWindow.h"
+#include "DK/DKOsInfo.h"
 
+//WARNING_DISABLE
+#include "SDL_syswm.h"
 #ifdef WIN32
     #include <GL/glew.h>
 	#include <GL/gl.h>
@@ -47,7 +49,8 @@
 #ifdef ANDROID
 	#include <GLES/gl.h>
 #endif
-#include <DK/DKOsInfo.h>
+//WARNING_ENABLE
+
 
 std::vector<std::function<bool(SDL_Event* event)> > DKSDLWindow::event_funcs;
 std::vector<std::function<bool()> > DKSDLWindow::render_funcs;
@@ -57,7 +60,7 @@ std::map<int, int> DKSDLWindow::sdlCharCode;
 std::map<int, int> DKSDLWindow::sdlShiftCharCode;
 std::map<int, int> DKSDLWindow::sdlMacCode;
 
-bool DKSDLWindow::Init() {
+bool DKSDLWindow::Init(){
     DKDEBUGFUNC();
 	SDL_SetMainReady(); //Bypass SDL_main() //https://wiki.libsdl.org/SDL_SetMainReady
 	
@@ -96,7 +99,7 @@ bool DKSDLWindow::Init() {
         width = toInt(textWidth);
     if(!textHeight.empty())
         height = toInt(textHeight);
-#ifdef WIN32 //account window frame
+#ifdef WIN32 //account for window frame and titlebar
     winY = (winY + 30);
     winX = (winX + 10);
 #endif
@@ -109,13 +112,22 @@ bool DKSDLWindow::Init() {
     if(height < 1)
         height = 600;
 #ifdef IOS
-    width = 320;
-    height = 480;
+    //width = 320;
+    //height = 480;
+    SDL_DisplayMode sdl_displayMode;
+    SDL_GetCurrentDisplayMode(0, &sdl_displayMode);
+    width = sdl_displayMode.w;
+    height = sdl_displayMode.h;
 #endif
 #ifdef ANDROID
-    width = DKAndroid::android_width;
-    height = DKAndroid::android_height;
+    SDL_DisplayMode sdl_displayMode;
+    SDL_GetCurrentDisplayMode(0, &sdl_displayMode);
+    width = sdl_displayMode.w;
+    height = sdl_displayMode.h;
+    //DKAndroid::android_width = width;
+    //DKAndroid::android_height = height;
 #endif
+
     SDL_SetHint(SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS, "0");
 #if !defined(ANDROID) && !defined(IOS)
     SDL_SetHint(SDL_HINT_MOUSE_FOCUS_CLICKTHROUGH, "1");
@@ -332,7 +344,7 @@ bool DKSDLWindow::Init() {
     return true;
 }
 
-bool DKSDLWindow::End() {
+bool DKSDLWindow::End(){
     DKDEBUGFUNC();
     //SDL_DestroyTexture(tex);
     SDL_DestroyRenderer(renderer);
@@ -343,7 +355,7 @@ bool DKSDLWindow::End() {
 }
 
 bool DKSDLWindow::TestInt(const void* input, void* output) {
-    //DKDEBUGFUNC(input, output);
+    DKDEBUGFUNC(input, output);
     int in = *(int*)input;
     int out = in;
     *(int*)output = out;
@@ -351,7 +363,7 @@ bool DKSDLWindow::TestInt(const void* input, void* output) {
 }
 
 bool DKSDLWindow::TestString(const void* input, void* output) {
-    //DKDEBUGFUNC(input, output);
+    DKDEBUGFUNC(input, output);
     std::string in = *(std::string*)input;
     std::string out = in;
     *(std::string*)output = out;
@@ -359,7 +371,7 @@ bool DKSDLWindow::TestString(const void* input, void* output) {
 }
 
 bool DKSDLWindow::TestReturnInt(const void* input, void* output) {
-    //DKDEBUGFUNC(input, output);
+    DKDEBUGFUNC(input, output);
     DK_UNUSED(input);
     int var = 1234;
     *(int*)output = var;
@@ -367,7 +379,7 @@ bool DKSDLWindow::TestReturnInt(const void* input, void* output) {
 }
 
 bool DKSDLWindow::TestReturnString(const void* input, void* output) {
-    //DKDEBUGFUNC(input, output);
+    DKDEBUGFUNC(input, output);
     DK_UNUSED(input);
     std::string var = "Return test";
     *(std::string*)output = var;
@@ -417,7 +429,7 @@ bool DKSDLWindow::GetHandle(const void* input, void* output) {
 }
 
 bool DKSDLWindow::GetHeight(const void* input, void* output) {
-    //DKDEBUGFUNC(input, output);
+    DKDEBUGFUNC(input, output);
     DK_UNUSED(input);
     int h;
     SDL_GetWindowSize(window, NULL, &h);
@@ -450,7 +462,7 @@ bool DKSDLWindow::GetPixelRatio(const void* input, void* output) {
 }
 
 bool DKSDLWindow::GetWidth(const void* input, void* output) {
-    //DKDEBUGFUNC(input, output);
+    DKDEBUGFUNC(input, output);
     DK_UNUSED(input);
     int w;
     SDL_GetWindowSize(window, &w, NULL);
@@ -537,7 +549,7 @@ bool DKSDLWindow::SetHeight(const void* input, void* output) {
 }
 
 bool DKSDLWindow::SetIcon(const void* input, void* output) {
-    //DKDEBUGFUNC(input, output);
+    DKDEBUGFUNC(input, output);
     DK_UNUSED(output);
 #ifdef WIN32
     DKString file = *(DKString*)input;
@@ -621,7 +633,7 @@ bool DKSDLWindow::drawBackground(SDL_Renderer *renderer, int w, int h){
 }
 
 void DKSDLWindow::Process() {
-    //DKDEBUGFUNC();
+    //DKDEBUGFUNC();  //EXCESSIVE LOGGING
     if(SDL_GetWindowFlags(window) & SDL_WINDOW_HIDDEN)
         DKUtil::Sleep(1000); //FIXME - look for a better way to save cpu usage here
 
@@ -651,7 +663,7 @@ void DKSDLWindow::Process() {
 }
 
 int DKSDLWindow::EventFilter(void* userdata, SDL_Event* event) {
-    //DKDEBUGFUNC(userdata, event);
+    //DKDEBUGFUNC(userdata, event);  //EXCESSIVE LOGGING
     if(event->type == SDL_WINDOWEVENT) {
         switch(event->window.event) {
             case SDL_WINDOWEVENT_MOVED: {
@@ -709,7 +721,7 @@ int DKSDLWindow::EventFilter(void* userdata, SDL_Event* event) {
 }
 
 bool DKSDLWindow::handle(SDL_Event *event) {
-    //DKDEBUGFUNC(event);
+    //DKDEBUGFUNC(event);  //EXCESSIVE LOGGING
     switch(event->type) {
         case SDL_QUIT: {
             DKApp::Exit();

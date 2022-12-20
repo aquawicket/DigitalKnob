@@ -32,6 +32,7 @@
 
 #include "DKDuktape/DKDuktape.h"
 
+
 class DKEvent : public DKObjectT<DKEvent>
 {
 public:

@@ -23,7 +23,6 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #pragma once
 #ifndef DKSFMLRmlRenderer_H
 #define DKSFMLRmlRenderer_H
@@ -32,25 +31,25 @@
 // OpenGL Extension Wrangler Library (GLEW)
 //#define ENABLE_GLEW
 
+//WARNING_DISABLE
 // if the OpenGL Extension Wrangler Library (GLEW) should be used include it
 #ifdef ENABLE_GLEW
-#include <GL/glew.h>
+	#include <GL/glew.h>
 #endif
-
 #include <RmlUi/Core/RenderInterface.h>
 #include <SFML/Graphics.hpp>
-
 // if the OpenGL Extension Wrangler Library (GLEW) should not be used
 // include the standard OpenGL library
 //#ifndef ENABLE_GLEW
 //#include "../../../shell/include/ShellOpenGL.h"
 //#endif
-
 #ifdef USE_SFML_gif
 extern "C" {
 	#include "SFML_gif.h"
 }
 #endif
+//WARNING_ENABLE
+
 
 class RmlSFMLRenderer : public Rml::RenderInterface
 {

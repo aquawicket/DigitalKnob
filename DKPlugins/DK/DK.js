@@ -6,7 +6,7 @@ var DUKTAPE = window.DUKTAPE
 dk.useCPP = false;
 
 //Keep a object reference to the old console
-if(!DUKTAPE) {
+if(!DUKTAPE){
     dk.xconsole = new Object;
     //Create a logger for console
     dk.x = new Object;
@@ -15,29 +15,29 @@ if(!DUKTAPE) {
     dk.xconsole.log = console.log;
     dk.xconsole.warn = console.warn;
     dk.x.record = [];
-    dk.x.logger = function(lvl, args) {
+    dk.x.logger = function(lvl, args){
         !DUKTAPE && dk.xconsole[lvl] && dk.xconsole[lvl].apply(this, Array.prototype.slice.call(args));
         DUKTAPE && dk && dk.x && dk.x.log && dk.x.log.apply(this, Array.prototype.slice.call(args));
         var obj = {};
         (obj[lvl] = args[0]) && (dk.x && dk.x.record.push(obj))
     }
-    console.debug = function() {
+    console.debug = function(){
         dk.x && dk.x.logger("debug", arguments);
     }
-    console.error = function() {
+    console.error = function(){
         dk.x && dk.x.logger("error", arguments);
     }
-    console.log = function() {
+    console.log = function(){
         dk.x && dk.x.logger("log", arguments);
     }
-    console.warn = function() {
+    console.warn = function(){
         dk.x && dk.x.logger("warn", arguments);
     }
 }
 
 // required({args})
-const required = function required() {
-    for (var n = 0; n < arguments.length; n++) {
+const required = function required(){
+    for (var n = 0; n < arguments.length; n++){
         if (typeof arguments[n] !== "object")
             throw new Error(" Must use {} around variables when using require. EXAMPLE: required({var1}, {var2})");
         var name = Object.keys(arguments[n])[0];
@@ -48,16 +48,16 @@ const required = function required() {
 }
 
 // byId(id)
-const byId = function byId(id) {
+const byId = function byId(id){
     return document.getElementById(id);
 }
 
 // error(str, callback, result)
-const error = function error(str, callback, result) {
+const error = function error(str, callback, result){
     !result && (result = false);
     console.error(str);
     callback && callback(result);
-    if (DEBUG) {
+    if (DEBUG){
         //debugger ;
     }
     throw new Error(str);
@@ -66,7 +66,7 @@ const error = function error(str, callback, result) {
 }
 
 // warn(str, callback, result)
-const warn = function warn(str, callback, result) {
+const warn = function warn(str, callback, result){
     !result && (result = false);
     console.warn(str);
     callback && callback(result);
@@ -74,14 +74,14 @@ const warn = function warn(str, callback, result) {
 }
 
 // ok(callback, result)
-const ok = function ok(callback, result) {
+const ok = function ok(callback, result){
     !result && (result = true);
     callback && callback(result);
     return result;
 }
 
 // DUMP({variable})
-const DUMP = function dk_dumpVariable(variable) {
+const DUMP = function dk_dumpVariable(variable){
 	if (typeof variable !== "object")
             throw new Error(" Must use {} around variables when using dump. EXAMPLE: dk.dump({myVariable})");
 		
@@ -93,26 +93,26 @@ const DUMP = function dk_dumpVariable(variable) {
     const grey = "color:rgb(142,142,142);"
     const orange = "color:rgb(226,131,81);"
     var name;
-    if (typeof variable === "object") {
+    if (typeof variable === "object"){
         console.group("%c" + variable.constructor.name + " {}", "color:rgb(213,213,213);font-style:italic;")
         //const type = Object.prototype.toString.call(variable).slice(8, -1);
         //console.log("%c valueOf: %c"+ variable.valueOf(), pink, color);
         //console.log("%c typeof: %c" + typeof variable, pink, color);
-        for (var key in variable) {
-            if (variable[key] === variable) {
+        for (var key in variable){
+            if (variable[key] === variable){
                 continue;
                 return error("infinate loop")
             }
             if (typeof variable[key] === "function")
                 console.log("%c " + key + "%c: %c f %c" + variable[key].name + "()", pink, white, blue, white);
-            else if (typeof variable[key] === "object") {
+            else if (typeof variable[key] === "object"){
                 if (variable[key]instanceof HTMLElement)
                     console.log("%c " + key + "%c: %c" + variable[key].localName, pink, white, lightBlue);
                 else if (variable[key] && variable[key].constructor && variable[key].constructor.name === "Array")
                     console.log("%c " + key + "%c: %c" + variable[key], pink, white, grey);
                 else
                     console.log("%c " + key + "%c: %c" + variable[key], pink, white, grey);
-            } else if (typeof variable[key] === "string") {
+            } else if (typeof variable[key] === "string"){
                 console.log("%c " + key + "%c: %c\"" + variable[key] + "\"", pink, white, orange);
             } else
                 console.log("%c " + key + "%c: " + variable[key], pink, white);
@@ -148,19 +148,19 @@ const DUMP = function dk_dumpVariable(variable) {
 
 // document.onselectstart()
 //prevent screen highlighting while dragging
-document.onselectstart = function document_onselectstart() {
+document.onselectstart = function document_onselectstart(){
     return false;
 }
 
 // document.addEventListener("mousemove", calback)
-document.addEventListener("mousemove", function document_addEventListener(event) {
-    if (dk.iE()) {
+document.addEventListener("mousemove", function document_addEventListener(event){
+    if (dk.iE()){
         // grab the x-y pos.s if browser is IE
         window.mouseX = event.clientX + document.body.scrollLeft
         window.mouseY = event.clientY + document.body.scrollTop
     }
     //FIXME
-    if (dk.getBrowser() === "Rml") {
+    if (dk.getBrowser() === "Rml"){
         window.mouseX = event.clientX;
         window.mouseY = event.clientY;
     } 
@@ -170,17 +170,17 @@ document.addEventListener("mousemove", function document_addEventListener(event)
         window.mouseY = event.pageY
     }
     // catch possible negative values in NS4
-    if (window.mouseX < 0) {
+    if (window.mouseX < 0){
         window.mouseX = 0
     }
-    if (window.mouseY < 0) {
+    if (window.mouseY < 0){
         window.mouseY = 0
     }
     return true;
 });
 
 // dk.init()
-dk.init = function dk_init() {
+dk.init = function dk_init(){
 	!DUKTAPE && eval("var __temp = null");
 	const use_strict = (typeof __temp === "undefined");
     console.debug("*** DigitalKnob ***");
@@ -191,24 +191,24 @@ dk.init = function dk_init() {
 }
 
 // dk.hasCPP()
-dk.hasCPP = function dk_hasCPP() {
-    if (dk.useCPP === false) {
+dk.hasCPP = function dk_hasCPP(){
+    if (dk.useCPP === false){
         return false;
     }
     dk.cpp = false;
-    if (dk.getBrowser() === "Cef") {
+    if (dk.getBrowser() === "Cef"){
         dk.cpp = true;
         dk.cef = true;
     }
-    if (dk.getBrowser() === "Rml") {
+    if (dk.getBrowser() === "Rml"){
         dk.cpp = true;
         dk.rml = true;
     }
-    if (dk.getJSEngine() === "Duktape") {
+    if (dk.getJSEngine() === "Duktape"){
         dk.cpp = true;
         dk.duktape = true;
     }
-    if (dk.getJSEngine() === "V8") {
+    if (dk.getJSEngine() === "V8"){
         dk.cpp = true;
         dk.v8 = true;
     }
@@ -216,18 +216,18 @@ dk.hasCPP = function dk_hasCPP() {
 }
 
 // dk.create(data, callback)
-dk.create = function dk_create(data, dk_create_callback) {
+dk.create = function dk_create(data, dk_create_callback){
     if (dk.hasCPP())
         CPP_DK_Create(data);
     var arry = data.split(",");
-    if (arry[0].includes(".js")) {
-        if (!dk.loadJs(arry[0], function dk_loadJs_callback(data) {
+    if (arry[0].includes(".js")){
+        if (!dk.loadJs(arry[0], function dk_loadJs_callback(data){
             if (dk_create_callback)
                 return dk_create_callback(data);
             //else
             //    console.warn("dk.create(" + data + "): does not have a callback");
-        })) {
-            if (dk.getJSEngine() === "Duktape") {
+        })){
+            if (dk.getJSEngine() === "Duktape"){
                 console.log("dk.loadJS(" + arry[0] + ") failed");
                 dk_create_callback && dk_create_callback(true);
                 return true;
@@ -236,24 +236,24 @@ dk.create = function dk_create(data, dk_create_callback) {
             dk_create_callback && dk_create_callback(false);
         }
     }
-    if (arry[0].includes(".html")) {
-        if (!dk.loadHtml(arry[0], arry[1], function dk_loadHtml_callback(element) {
+    if (arry[0].includes(".html")){
+        if (!dk.loadHtml(arry[0], arry[1], function dk_loadHtml_callback(element){
             if (typeof dk_create_callback === "function")
                 return dk_create_callback(element);
             else
                 console.warn("dk.create(" + data + "): does not have a callback");
-        })) {
+        })){
             console.error("dk.loadHtml failed");
             //return dk_create_callback && dk_create_callback(false);
         }
     }
-    if (arry[0].includes(".css")) {
-        if (!dk.loadCss(arry[0], function dk_loadCss_callback(data) {
+    if (arry[0].includes(".css")){
+        if (!dk.loadCss(arry[0], function dk_loadCss_callback(data){
             if (dk_create_callback)
                 return dk_create_callback(data);
             //else
             //    console.warn("dk.create(" + data + "): does not have a callback");
-        })) {
+        })){
             console.error("dk.loadCss failed");
             //return dk_create_callback && dk_create_callback(false);
         }
@@ -262,7 +262,7 @@ dk.create = function dk_create(data, dk_create_callback) {
 }
 
 // dk.close(data)
-dk.close = function dk_close(data) {
+dk.close = function dk_close(data){
     required({
         data
     });
@@ -275,16 +275,16 @@ dk.close = function dk_close(data) {
         data.splice(0, 0, "DKJavascript");
     else if (dk.hasCPP)
         CPP_DK_Close(data);
-    if (data[0] === "DKJavascript") {
+    if (data[0] === "DKJavascript"){
         //var plugin = dk.getPlugin(data[1]);
         //console.log("closing dk." + plugin.name + " plugin");
-        //if (plugin && plugin.end) {
+        //if (plugin && plugin.end){
         //    console.log("running dk." + plugin.name + ".end()");
         //    plugin.end();
         //}
         const scripts = document.getElementsByTagName("script");
-        for (var n = 0; n < scripts.length; n++) {
-            if (scripts[n].src.includes(data[1])) {
+        for (var n = 0; n < scripts.length; n++){
+            if (scripts[n].src.includes(data[1])){
                 scripts[n].parentNode.removeChild(scripts[n]);
                 console.debug("Unloaded " + data[1]);
                 return true;
@@ -292,17 +292,17 @@ dk.close = function dk_close(data) {
         }
         return true;
     }
-    if (data[0] === "DKHtml") {
+    if (data[0] === "DKHtml"){
         var element = byId(data[1]);
         if (!element)
             return warn("element invalid");
         element.parentNode.removeChild(element);
         return true;
     }
-    if (data[0] === "DKCss") {
+    if (data[0] === "DKCss"){
         const links = document.getElementsByTagName("link");
-        for (var n = 0; n < links.length; n++) {
-            if (links[n].href.includes(data[1])) {
+        for (var n = 0; n < links.length; n++){
+            if (links[n].href.includes(data[1])){
                 links[n].parentNode.removeChild(links[n]);
                 console.debug("Unloaded " + data[1]);
                 return true;
@@ -314,7 +314,7 @@ dk.close = function dk_close(data) {
 }
 
 // dk.getPlugin(url)
-dk.getPlugin = function dk_getPlugin(url) {
+dk.getPlugin = function dk_getPlugin(url){
     required({
         url
     });
@@ -330,11 +330,11 @@ dk.getPlugin = function dk_getPlugin(url) {
     if (instanceName.substring(0, 2) === "dk")
         instanceName = instanceName.slice(2);
     var plugin = {};
-    if (window[instanceName]) {
+    if (window[instanceName]){
         plugin = window[instanceName];
         plugin.instance = instanceName;
     }
-    if (dk[instanceName]) {
+    if (dk[instanceName]){
         plugin = dk[instanceName];
         plugin.instance = instanceName;
     }
@@ -354,19 +354,19 @@ dk.getPlugin = function dk_getPlugin(url) {
 }
 
 // dk.loadJs(url, callback)
-dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
+dk.loadJs = function dk_loadJs(url, dk_loadJs_callback){
     console.warn("Use DKPlugin() instead of dk.create to load .js files now");
     required({
         url
     });
-    //if (dk.getObjects().indexOf(url) > -1) {
+    //if (dk.getObjects().indexOf(url) > -1){
     //    console.log(url + " script already loaded...");
     //    dk_loadJs_callback(true);
     //    return true;
     //}
     var scripts = document.getElementsByTagName("script");
-    for (var n = 0; scripts && n < scripts.length; n++) {
-        if (scripts[n].src && scripts[n].src.includes(url)) {
+    for (var n = 0; scripts && n < scripts.length; n++){
+        if (scripts[n].src && scripts[n].src.includes(url)){
             console.info(url + ": is already loaded");
             dk_loadJs_callback && dk_loadJs_callback(true);
             return true;
@@ -381,14 +381,14 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
     head.appendChild(script);
     ////// CALLBACKS
     var done = false;
-    script.onload = script.onreadystatechange = function script_onload() {
+    script.onload = script.onreadystatechange = function script_onload(){
         //FIXME - DigitalKnob can't trigger onload yet.
-        if (!done && (!this.readyState || this.readyState === "loaded" || this.readyState === "complete")) {
+        if (!done && (!this.readyState || this.readyState === "loaded" || this.readyState === "complete")){
             console.log("Loaded " + url);
             var plugin = dk.getPlugin(url);
             plugin.url = url;
-            if (plugin.init) {
-                DKPlugin.prototype.init.call(plugin, function callback(instance) {
+            if (plugin.init){
+                DKPlugin.prototype.init.call(plugin, function callback(instance){
                     done = true;
                     dk_loadJs_callback && dk_loadJs_callback(true);
                     return true;
@@ -400,19 +400,19 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
             }
         }
     }
-    script.onerror = function script_onerror() {
+    script.onerror = function script_onerror(){
         done = true;
         return error("onerror: " + url, dk_loadJs_callback(false));
     }
     //FIXME - DigitalKnob can't trigger onload yet, so we do this
-    if (dk.getJSEngine() === "Duktape") {
+    if (dk.getJSEngine() === "Duktape"){
         console.log("Duktape Loading: " + url);
         var plugin = dk.getPlugin(url);
         plugin && console.log("loading dk." + plugin.name + " plugin");
-        if (plugin && plugin.init) {
+        if (plugin && plugin.init){
             //console.debug("running dk." + plugin.name + ".init()");
             plugin.init();
-        } else if (typeof old_plugin === 'function') {
+        } else if (typeof old_plugin === 'function'){
             return error("FIXME: (" + url + ") This plugin uses Init the old way", dk_loadJs_callback(false));
             old_plugin();
         }
@@ -424,14 +424,14 @@ dk.loadJs = function dk_loadJs(url, dk_loadJs_callback) {
 }
 
 // dk.loadHtml(url, parent, callback)
-dk.loadHtml = function dk_loadHtml(url, parent, dk_loadHtml_callback) {
+dk.loadHtml = function dk_loadHtml(url, parent, dk_loadHtml_callback){
     required({
         url
     });
     if (url.indexOf(".html") === -1)
         return error("url is not a valid .html file", dk_loadHtml_callback(false));
 
-    dk.fileToString(url, function dk_fileToString(string) {
+    dk.fileToString(url, function dk_fileToString(string){
         //Create an empty widget
         //if (!string)
         //    string = "<div id=\"" + url + "\" style=\"position:absolute;top:200rem;left:200rem;width:200rem;height:200rem;background-color:rgb(230,230,230);\"></div>";
@@ -448,7 +448,7 @@ dk.loadHtml = function dk_loadHtml(url, parent, dk_loadHtml_callback) {
             return error("container invalid", dk_loadHtml_callback);
         container.id = dk.getAvailableId(url);
         container.setAttribute("url", url);
-        if (parent && byId(parent)) {
+        if (parent && byId(parent)){
             console.warn("An element should be used instaed of an id here");
             byId(parent).appendChild(container);
         } else {
@@ -465,15 +465,15 @@ dk.loadHtml = function dk_loadHtml(url, parent, dk_loadHtml_callback) {
 }
 
 // dk.loadCss(url, calback)
-dk.loadCss = function dk_loadCss(url, dk_loadCss_callback) {
+dk.loadCss = function dk_loadCss(url, dk_loadCss_callback){
     required({
         url
     });
     const links = document.getElementsByTagName("link");
     if (!links)
         return false;
-    for (var n = 0; n < links.length; n++) {
-        if (links[n].href && links[n].href.includes(url)) {
+    for (var n = 0; n < links.length; n++){
+        if (links[n].href && links[n].href.includes(url)){
             console.log(url + " already loaded.");
             dk_loadCss_callback && dk_loadCss_callback(links[n]);
             return links[n];
@@ -491,8 +491,8 @@ dk.loadCss = function dk_loadCss(url, dk_loadCss_callback) {
 }
 
 // dk.checkFileSupport()
-dk.checkFileSupport = function dk_checkFileSupport() {
-    if (window.File && window.FileReader && window.FileList && window.Blob) {
+dk.checkFileSupport = function dk_checkFileSupport(){
+    if (window.File && window.FileReader && window.FileList && window.Blob){
         console.log("File support OK");
     } else {
         console.warn("The File APIs are not fully supported in this browser");
@@ -503,7 +503,7 @@ dk.checkFileSupport = function dk_checkFileSupport() {
 // dk.preventDefault(event)
 dk.preventDefault = function dk_preventDefault(event){
     required({event});
-	if(event.stopPropagation) {
+	if(event.stopPropagation){
         event.preventDefault();
     } else {
         event.cancelBubble = true;
@@ -513,7 +513,7 @@ dk.preventDefault = function dk_preventDefault(event){
 // dk.stopPropagation(event)
 dk.stopPropagation = function dk_stopPropagation(event){
     required({event});
-	if(event.stopPropagation) {
+	if(event.stopPropagation){
         event.stopPropagation();
     } else {
         event.cancelBubble = true;
@@ -522,7 +522,7 @@ dk.stopPropagation = function dk_stopPropagation(event){
 */
 
 // dk.setCookie(cname, cvalue, exdays)
-dk.setCookie = function dk_setCookie(cname, cvalue, exdays) {
+dk.setCookie = function dk_setCookie(cname, cvalue, exdays){
     required({
         cname
     }, {
@@ -537,13 +537,13 @@ dk.setCookie = function dk_setCookie(cname, cvalue, exdays) {
 }
 
 // dk.getCookie(cname)
-dk.getCookie = function dk_getCookie(cname) {
+dk.getCookie = function dk_getCookie(cname){
     required({
         cname
     });
     var name = cname + "=";
     var ca = document.cookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
+    for (var i = 0; i < ca.length; i++){
         var c = ca[i];
         while (c.charAt(0) === ' ')
             c = c.substring(1);
@@ -554,14 +554,14 @@ dk.getCookie = function dk_getCookie(cname) {
 }
 
 // dk.makeStruct(names)
-dk.makeStruct = function dk_makeStruct(names) {
+dk.makeStruct = function dk_makeStruct(names){
     required({
         names
     });
     var names = names.split(' ');
     var count = names.length;
-    function constructor() {
-        for (var i = 0; i < count; i++) {
+    function constructor(){
+        for (var i = 0; i < count; i++){
             this[names[i]] = arguments[i];
         }
     }
@@ -574,7 +574,7 @@ dk.makeStruct = function dk_makeStruct(names) {
 
 // dk.replace(str, old, newstr)
 /*
-dk.replace = function dk_replace(str, old, newstr) {
+dk.replace = function dk_replace(str, old, newstr){
     required({str},{old},{newstr});
     var re = new RegExp(old,'g');
     return str.replace(re, newstr);
@@ -584,8 +584,8 @@ dk.replace = function dk_replace(str, old, newstr) {
 // dk.isLocal()
 /*
 This is a misleading function.
-dk.isLocal = function dk_isLocal() {
-    switch (window.location.protocol) {
+dk.isLocal = function dk_isLocal(){
+    switch (window.location.protocol){
     case 'http:':
     case 'https:':
         //remote file over http or https
@@ -603,11 +603,11 @@ dk.isLocal = function dk_isLocal() {
 
 // dk.available(name)
 // FIXME: This function needs to be investigated
-dk.available = function dk_available(name) {
+dk.available = function dk_available(name){
     required({name});
     if (name === "DKWidget")
         return true;
-    if (name === "DKWidgetJS") {
+    if (name === "DKWidgetJS"){
         //FIXME: is this needed?
         console.log("DKAvailable(" + name + "): name === DKWidgetJS!  check DK.js line 235");
         return true;
@@ -621,8 +621,8 @@ dk.getObjects = function dk_getObjects()
     // Search the Dom for all scripts (.js files)
     var jsfiles = "";
     var elements = document.getElementsByTagName("script");
-    for (var i = 0; elements && i < elements.length; i++) {
-        if (!elements[i].id) {
+    for (var i = 0; elements && i < elements.length; i++){
+        if (!elements[i].id){
             if (elements[i].src)
                 elements[i].id = elements[i].src;
             //console.warn(elements[i].src+": script object has no id");
@@ -634,9 +634,9 @@ dk.getObjects = function dk_getObjects()
     // Search the Dom for all css (.css files)
     var cssfiles = "";
     var elements = document.getElementsByTagName("link");
-    if (elements) {
-        for (var i = 0; i < elements.length; i++) {
-            if (!elements[i].id) {
+    if (elements){
+        for (var i = 0; i < elements.length; i++){
+            if (!elements[i].id){
                 //console.warn(elements[i].href+": css object has no id");
                 continue;
             }
@@ -647,10 +647,10 @@ dk.getObjects = function dk_getObjects()
     // Search the Dom for all widgets (.html id's)
     var htmlfiles = "";
     var divs = document.getElementsByTagName("div");
-    if (divs) {
-        for (var i = divs.length; i; ) {
+    if (divs){
+        for (var i = divs.length; i; ){
             var div = divs[--i];
-            if (!div.id) {
+            if (!div.id){
                 //console.warn(div + ": html object has no id");
                 continue;
             }
@@ -662,33 +662,33 @@ dk.getObjects = function dk_getObjects()
 }
 
 // dk.getEvents()
-dk.getEvents = function dk_getEvents() {
+dk.getEvents = function dk_getEvents(){
 	console.log("dk.getEvents: not implemented")
 	return ""
 }
 
 // dk.getFunctions()
-dk.getFunctions = function dk_getFunctions() {
+dk.getFunctions = function dk_getFunctions(){
 	console.log("dk.getFunctions: not implemented")
 	return ""
 }
 
 // dk.getOS()
-dk.getOS = function dk_GetOS() {
+dk.getOS = function dk_GetOS(){
     var userAgent = navigator.userAgent || navigator.vendor || window.opera;
     // Windows Phone must come first because its UA also contains "Android"
-    if (/windows phone/i.test(userAgent)) {
+    if (/windows phone/i.test(userAgent)){
         return "Windows Phone";
     }
-    if (/android/i.test(userAgent)) {
+    if (/android/i.test(userAgent)){
         return "Android";
     }
     // iOS detection from: http://stackoverflow.com/a/9039885/177710
-    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream){
         return "iOS";
     }
     var os_value = navigator.platform;
-    if (navigator.userAgent.indexOf("WOW64") !== -1 || navigator.userAgent.indexOf("Win64") !== -1) {
+    if (navigator.userAgent.indexOf("WOW64") !== -1 || navigator.userAgent.indexOf("Win64") !== -1){
         os_value = os_value.replace("32", "64");
     }
     os_value = os_value.replace("Intel", "");
@@ -699,21 +699,21 @@ dk.getOS = function dk_GetOS() {
 }
 
 // dk.getBrowser()
-dk.getBrowser = function dk_getBrowser() {
-    if (navigator.userAgent.indexOf("Rml") !== -1) {
+dk.getBrowser = function dk_getBrowser(){
+    if (navigator.userAgent.indexOf("Rml") !== -1){
         dk.rml = true;
         return "Rml";
-    } else if ((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) !== -1) {
+    } else if ((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) !== -1){
         return "Opera";
-    } else if (navigator.userAgent.indexOf("Chrome") !== -1 && navigator.userAgent.indexOf("Cef") === -1) {
+    } else if (navigator.userAgent.indexOf("Chrome") !== -1 && navigator.userAgent.indexOf("Cef") === -1){
         return "Chrome";
-    } else if (navigator.userAgent.indexOf("Cef") !== -1) {
+    } else if (navigator.userAgent.indexOf("Cef") !== -1){
         return "Cef";
-    } else if (navigator.userAgent.indexOf("Safari") !== -1) {
+    } else if (navigator.userAgent.indexOf("Safari") !== -1){
         return "Safari";
-    } else if (navigator.userAgent.indexOf("Firefox") !== -1) {
+    } else if (navigator.userAgent.indexOf("Firefox") !== -1){
         return "Firefox";
-    } else if ((navigator.userAgent.indexOf("MSIE") !== -1) || (!!document.documentMode === true)) {
+    } else if ((navigator.userAgent.indexOf("MSIE") !== -1) || (!!document.documentMode === true)){
         //IF IE > 10
         return "IE";
     } else {
@@ -722,15 +722,15 @@ dk.getBrowser = function dk_getBrowser() {
 }
 
 // dk.getJSEngine()
-dk.getJSEngine = function dk_getJSEngine() {
-    if (navigator.product === "Duktape") {
+dk.getJSEngine = function dk_getJSEngine(){
+    if (navigator.product === "Duktape"){
         dk.duktape = true;
         return "Duktape"
     }
     var v8string = 'function%20javaEnabled%28%29%20%7B%20%5Bnative%20code%5D%20%7D';
-    if ('WebkitAppearance'in document.documentElement.style) {
+    if ('WebkitAppearance'in document.documentElement.style){
         //If (probably) WebKit browser
-        if (escape(navigator.javaEnabled.toString()) === v8string) {
+        if (escape(navigator.javaEnabled.toString()) === v8string){
             dk.v8 = true;
             return "V8";
         } else {
@@ -742,14 +742,14 @@ dk.getJSEngine = function dk_getJSEngine() {
 }
 
 // dk.getIE()
-dk.iE = function dk_iE() {
+dk.iE = function dk_iE(){
     var rv = 0;
-    if (navigator.appName === 'Microsoft Internet Explorer') {
+    if (navigator.appName === 'Microsoft Internet Explorer'){
         var ua = navigator.userAgent;
         var re = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
         if (re.exec(ua) !== null)
             rv = parseFloat(RegExp.$1);
-    } else if (navigator.appName === 'Netscape') {
+    } else if (navigator.appName === 'Netscape'){
         var ua = navigator.userAgent;
         var re = new RegExp("Trident/.*rv:([0-9]{1,}[\.0-9]{0,})");
         if (re.exec(ua) !== null)
@@ -762,51 +762,51 @@ dk.iE = function dk_iE() {
 
 // dk.fileToString()
 if(typeof CPP_DKFile_FileToString === "function"){
-	dk.fileToString = function DKFile_fileToString(path, callback) {
+	dk.fileToString = function DKFile_fileToString(path, callback){
 		console.log("dk.fileToString()")
         //path = dk.validatepath(path);
         const str = CPP_DKFile_FileToString(path);
         return callback(str);
     }
 } else {
-    dk.fileToString = function dk_fileToString(url, dk_fileToString_callback) {
+    dk.fileToString = function dk_fileToString(url, dk_fileToString_callback){
 		console.log("dk_fileToString("+url+")");
 		required({
 			url
 		}, {
 			dk_fileToString_callback
 		});
-		dk.sendRequest("GET", url, function dk_sendRequest_callback(success, url, data) {
+		dk.sendRequest("GET", url, function dk_sendRequest_callback(success, url, data){
 			return dk_fileToString_callback(data);
 		});
 	}
 }
 
 // dk.sleep()
-dk.sleep = function dk_sleep(milliseconds) {
+dk.sleep = function dk_sleep(milliseconds){
     required({
         milliseconds
     });
     var start = new Date().getTime();
-    for (var i = 0; i < 1e7; i++) {
-        if ((new Date().getTime() - start) > milliseconds) {
+    for (var i = 0; i < 1e7; i++){
+        if ((new Date().getTime() - start) > milliseconds){
             break;
         }
     }
 }
 
 // dk.clearSelection()
-dk.clearSelection = function dk_clearSelection() {
+dk.clearSelection = function dk_clearSelection(){
     //Clear text selection
-    if (document.selection) {
+    if (document.selection){
         document.selection.empty();
-    } else if (window.getSelection) {
+    } else if (window.getSelection){
         window.getSelection().removeAllRanges();
     }
 }
 
 // dk.getElements()
-dk.getElements = function dk_getElements(element) {
+dk.getElements = function dk_getElements(element){
     required({
         element
     });
@@ -815,8 +815,8 @@ dk.getElements = function dk_getElements(element) {
     var nodes = element.childNodes;
     if (!nodes)
         return error("nodes invalid");
-    for (var n = 0; n < nodes.length; n++) {
-        if (nodes[i].id) {
+    for (var n = 0; n < nodes.length; n++){
+        if (nodes[i].id){
             string += nodes[i].id;
             string += ",";
         }
@@ -825,16 +825,16 @@ dk.getElements = function dk_getElements(element) {
 }
 
 // dk.getAvailableId()
-dk.getAvailableId = function dk_getAvailableId(id) {
+dk.getAvailableId = function dk_getAvailableId(id){
     required({
         id
     });
     var out = id;
     var i = 0;
-    while (byId(out)) {
+    while (byId(out)){
         //if there is a .  the number must come before
         var n = id.lastIndexOf(".");
-        if (n > 0) {
+        if (n > 0){
             out = id.substring(0, n) + String(i) + id.substring(n);
         } else {
             out = id + toString(i);
@@ -849,30 +849,30 @@ dk.getAvailableId = function dk_getAvailableId(id) {
 // *** UNKNOWN *please test* *** //
 
 // dk.getInnerHtmlString()
-dk.getInnerHtmlString = function dk_getInnerHtmlString(id) {
+dk.getInnerHtmlString = function dk_getInnerHtmlString(id){
     required({
         id
     });
     var element = byId(id);
-    for (var i = 0; i < element.childNodes.length; i++) {
+    for (var i = 0; i < element.childNodes.length; i++){
         var curNode = element.childNodes[i];
-        if (curNode.nodeName === "#text") {
+        if (curNode.nodeName === "#text"){
             return curNode.nodeValue;
         }
     }
 }
 
 // dk.setInnerHtmlString()
-dk.setInnerHtmlString = function dk_setInnerHtmlString(id, string) {
+dk.setInnerHtmlString = function dk_setInnerHtmlString(id, string){
     required({
         id
     }, {
         string
     });
     var element = byId(id);
-    for (var i = 0; i < element.childNodes.length; i++) {
+    for (var i = 0; i < element.childNodes.length; i++){
         var curNode = element.childNodes[i];
-        if (curNode.nodeName === "#text") {
+        if (curNode.nodeName === "#text"){
             curNode.nodeValue = string;
             return true;
         }
@@ -882,21 +882,21 @@ dk.setInnerHtmlString = function dk_setInnerHtmlString(id, string) {
 // *** EVENTS & VALUES *** //
 /*
 // dk.getValue()
-dk.getValue = function dk_getValue(variable) {
+dk.getValue = function dk_getValue(variable){
     //FIXME: phase this function out. This function will become obsolete.
     console.error("dk.getValue(): this function is deprecated and will be obsolete");
-    if (typeof variable === "string") {
+    if (typeof variable === "string"){
         //id
         var ele = byId(variable);
-        if (!ele) {
+        if (!ele){
             return error("ele invalid");
         }
-        if (ele) {
-            if (ele.type && ele.type === "checkbox") {
+        if (ele){
+            if (ele.type && ele.type === "checkbox"){
                 console.debug("dk.getValue(): returning ele.checked\n");
                 return ele.checked;
             }
-            if (!ele.value) {
+            if (!ele.value){
                 console.debug("dk.getValue(): returning ele.innerHTML\n");
                 return ele.innerHTML;
             }
@@ -905,56 +905,56 @@ dk.getValue = function dk_getValue(variable) {
         }
         return error("return value invalid");
     }
-    if (typeof variable === "object") {
-        if (variable.nodeType === 1) {
-            if (variable.tagName === "INPUT") {
+    if (typeof variable === "object"){
+        if (variable.nodeType === 1){
+            if (variable.tagName === "INPUT"){
                 console.debug("dk.getValue(): returning variable.value");
                 return variable.value;
             }
             console.debug("dk.getValue(): returning variable.innerHTML");
             return variable.innerHTML;
         }
-        if (variable.type) {
+        if (variable.type){
             //event
             var event = variable;
-            if (variable.type === "mousedown") {
+            if (variable.type === "mousedown"){
                 console.debug("dk.getValue(): returning GetMouseButton(variable)");
                 return GetMouseButton(variable);
             }
-            if (variable.type === "mouseup") {
+            if (variable.type === "mouseup"){
                 console.debug("dk.getValue(): returning GetMouseButton(variable)");
                 return GetMouseButton(variable);
             }
-            if (variable.type === "click") {
-                if (variable.target && variable.target.value) {
+            if (variable.type === "click"){
+                if (variable.target && variable.target.value){
                     console.debug("dk.getValue(): returning variable.target.value");
                     return variable.target.value;
                 }
                 console.debug("dk.getValue(): returning GetMouseButton(variable)");
                 return GetMouseButton(variable);
             }
-            if (variable.type === "dblclick") {
+            if (variable.type === "dblclick"){
                 console.debug("dk.getValue(): returning GetMouseButton(variable)\n");
                 return GetMouseButton(variable);
             }
-            if (variable.type === "contextmenu") {
+            if (variable.type === "contextmenu"){
                 console.debug("dk.getValue(): returning GetMouseButton(variable)\n");
                 return GetMouseButton(variable);
             }
-            if (variable.type === "mousemove") {
+            if (variable.type === "mousemove"){
                 console.debug("dk.getValue(): returning event.clientX+", "+event.clientY+", "+event.screenX+", "+event.screenY\n");
                 return event.clientX + "," + event.clientY + "," + event.screenX + "," + event.screenY;
             }
-            if (variable.type === "mouseover") {
-                if (!event.target) {
+            if (variable.type === "mouseover"){
+                if (!event.target){
                     return window.event.srcElement.id;
                 }
                 //if(!event.target){ return event.srcElement.id; }
                 console.debug("dk.getValue(): returning event.target.id\n");
                 return event.target.id;
             }
-            if (variable.type === "mouseout") {
-                if (!event.target) {
+            if (variable.type === "mouseout"){
+                if (!event.target){
                     return window.event.srcElement.id;
                 }
                 //if(!event.target){ return event.srcElement.id; }
@@ -962,7 +962,7 @@ dk.getValue = function dk_getValue(variable) {
                 return event.target.id;
             }
             //NOTE:  Found in DKInputTest/DKInputTest.js
-            if (variable.type === "wheel") {
+            if (variable.type === "wheel"){
                 var o = variable
                 //.originalEvent,
                 d = o.detail,
@@ -979,19 +979,19 @@ dk.getValue = function dk_getValue(variable) {
                 console.debug("dk.getValue(): returning event.delta\n");
                 return event.delta;
             }
-            if (variable.type === "keypress") {
+            if (variable.type === "keypress"){
                 console.debug("dk.getValue(): returning GetCharCode(variable)\n");
                 return GetCharCode(variable);
             }
-            if (variable.type === "keydown") {
+            if (variable.type === "keydown"){
                 console.debug("dk.getValue(): returning GetKeyCode(variable)\n");
                 return GetKeyCode(variable);
             }
-            if (variable.type === "keyup") {
+            if (variable.type === "keyup"){
                 console.debug("dk.getValue(): returning GetCharCode(variable)\n");
                 return GetKeyCode(variable);
             }
-            if (variable.type === "resize") {
+            if (variable.type === "resize"){
                 var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
                 var height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
                 console.debug("dk.getValue(): returning width+", "+height\n");
@@ -1003,7 +1003,7 @@ dk.getValue = function dk_getValue(variable) {
             return ele.value;
         } else {
             //element or other object
-            if (variable.value) {
+            if (variable.value){
                 console.debug("dk.getValue(): returning variable.value\n");
                 return variable.value;
             }
@@ -1016,7 +1016,7 @@ dk.getValue = function dk_getValue(variable) {
 */
 
 // dk.preloadFile()
-dk.preloadFile = function dk_preloadFile(url) {
+dk.preloadFile = function dk_preloadFile(url){
     required({
         url
     });
@@ -1026,11 +1026,11 @@ dk.preloadFile = function dk_preloadFile(url) {
 }
 
 // dk.preloadImage()
-dk.preloadImage = function dk_preloadImage(url) {
+dk.preloadImage = function dk_preloadImage(url){
     required({
         url
     });
-    if (!DUKTAPE) {
+    if (!DUKTAPE){
         var img = new Image();
         img.src = url;
         return img;
@@ -1038,7 +1038,7 @@ dk.preloadImage = function dk_preloadImage(url) {
 }
 
 // dk.saveToLocalStorage()
-dk.saveToLocalStorage = function dk_saveToLocalStorage(name, string) {
+dk.saveToLocalStorage = function dk_saveToLocalStorage(name, string){
     required({
         name
     }, {
@@ -1048,7 +1048,7 @@ dk.saveToLocalStorage = function dk_saveToLocalStorage(name, string) {
 }
 
 // dk.loadFromLocalStorage()
-dk.loadFromLocalStorage = function dk_loadFromLocalStorage(name) {
+dk.loadFromLocalStorage = function dk_loadFromLocalStorage(name){
     required({
         name
     });
@@ -1056,7 +1056,7 @@ dk.loadFromLocalStorage = function dk_loadFromLocalStorage(name) {
 }
 
 // dk.removeFromLocalStorage()
-dk.removeFromLocalStorage = function dk_removeFromLocalStorage(name) {
+dk.removeFromLocalStorage = function dk_removeFromLocalStorage(name){
     required({
         name
     });
@@ -1070,7 +1070,7 @@ dk.removeFromLocalStorage = function dk_removeFromLocalStorage(name) {
 //https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
 
 // dk.sendRequest()
-dk.sendRequest = function dk_sendRequest(httpMethod, url, dk_sendRequest_callback) {
+dk.sendRequest = function dk_sendRequest(httpMethod, url, dk_sendRequest_callback){
     required({
         httpMethod
     }, {
@@ -1078,8 +1078,8 @@ dk.sendRequest = function dk_sendRequest(httpMethod, url, dk_sendRequest_callbac
     }, {
         dk_sendRequest_callback
     });
-    if (httpMethod) {
-        switch (httpMethod) {
+    if (httpMethod){
+        switch (httpMethod){
         case "GET":
         case "POST":
         case "PUT":
@@ -1100,22 +1100,22 @@ dk.sendRequest = function dk_sendRequest(httpMethod, url, dk_sendRequest_callbac
     var xhr;
     try {
         !xhr && (xhr = new XMLHttpRequest());
-    } catch (e) {}
+    } catch (e){}
     try {
         !xhr && (xhr = new ActiveXObject("Msxml3.XMLHTTP"));
-    } catch (e) {}
+    } catch (e){}
     try {
         !xhr && (xhr = new ActiveXObject("Msxml2.XMLHTTP.6.0"));
-    } catch (e) {}
+    } catch (e){}
     try {
         !xhr && (xhr = new ActiveXObject("Msxml2.XMLHTTP.3.0"));
-    } catch (e) {}
+    } catch (e){}
     try {
         !xhr && (xhr = new ActiveXObject("Msxml2.XMLHTTP"));
-    } catch (e) {}
+    } catch (e){}
     try {
         !xhr && (xhr = new ActiveXObject("Microsoft.XMLHTTP"));
-    } catch (e) {}
+    } catch (e){}
     if (!xhr)
         return error("Error creating xhr object", dk_sendRequest_callback(false));
 
@@ -1129,29 +1129,29 @@ dk.sendRequest = function dk_sendRequest(httpMethod, url, dk_sendRequest_callbac
 
     //Possible error codes
     //https://github.com/richardwilkes/cef/blob/master/cef/enums_gen.go
-    xhr.onabort = function xhr_onabort(event) {
+    xhr.onabort = function xhr_onabort(event){
         dk.console.error && dk.console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onabort");
         //console.debug("XMLHttpRequest.onabort(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
         return dk_sendRequest_callback(false, url, xhr.responseText);
     }
-    xhr.onerror = function xhr_onerror(event) {
+    xhr.onerror = function xhr_onerror(event){
         dk.console.error && dk.console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onerror");
         //console.debug("XMLHttpRequest.onerror(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
         return dk_sendRequest_callback(false, url, xhr.responseText);
     }
-    xhr.onload = function xhr_onload(event) {
+    xhr.onload = function xhr_onload(event){
         //console.debug("XMLHttpRequest.onload(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
         return dk_sendRequest_callback(true, url, xhr.responseText);
     }
-    xhr.onloadend = function xhr_onloadend(event) {//console.debug("XMLHttpRequest.onloadend(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
+    xhr.onloadend = function xhr_onloadend(event){//console.debug("XMLHttpRequest.onloadend(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
     }
-    xhr.onloadstart = function xhr_onloadstart(event) {//console.debug("XMLHttpRequest.onloadstart(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
+    xhr.onloadstart = function xhr_onloadstart(event){//console.debug("XMLHttpRequest.onloadstart(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
     }
-    xhr.onprogress = function xhr_onprogress(event) {//console.debug("XMLHttpRequest.onprogress(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
+    xhr.onprogress = function xhr_onprogress(event){//console.debug("XMLHttpRequest.onprogress(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
     }
-    xhr.onreadystatechange = function xhr_onreadystatechange(event) {//console.log("XMLHttpRequest.onreadystatechange(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
+    xhr.onreadystatechange = function xhr_onreadystatechange(event){//console.log("XMLHttpRequest.onreadystatechange(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
     /*
-        if (xhr.readyState === 4) {
+        if (xhr.readyState === 4){
             if (xhr.status >= 200 && xhr.status < 400 || !xhr.status)
                 dk_sendRequest_callback(true, url, xhr.responseText);
             else
@@ -1159,7 +1159,7 @@ dk.sendRequest = function dk_sendRequest(httpMethod, url, dk_sendRequest_callbac
         }
         */
     }
-    xhr.ontimeout = function xhr_ontimeout(event) {
+    xhr.ontimeout = function xhr_ontimeout(event){
         dk.console.error && dk.console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> net::ERR_CONNECTION_TIMED_OUT");
         //console.debug("XMLHttpRequest.ontimeout(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
         return dk_sendRequest_callback(false, url, "ontimeout");
@@ -1170,12 +1170,12 @@ dk.sendRequest = function dk_sendRequest(httpMethod, url, dk_sendRequest_callbac
 }
 
 // dk.checkForUNICODE()
-dk.checkForUNICODE = function dk_checkForUNICODE(str) {
+dk.checkForUNICODE = function dk_checkForUNICODE(str){
     required({
         str
     });
-    for (var i = 0, n = str.length; i < n; i++) {
-        if (str.charCodeAt(i) > 255) {
+    for (var i = 0, n = str.length; i < n; i++){
+        if (str.charCodeAt(i) > 255){
             console.warn("Found UNICODE character at " + i);
             console.log(0, str.substring(i));
             return true;
@@ -1185,7 +1185,7 @@ dk.checkForUNICODE = function dk_checkForUNICODE(str) {
 }
 
 // dk.validateStrict()
-dk.validateStrict = function dk_validateStrict(str) {
+dk.validateStrict = function dk_validateStrict(str){
     required({
         str
     });
@@ -1195,7 +1195,7 @@ dk.validateStrict = function dk_validateStrict(str) {
 
 // dk.stringToBinary()
 //https://stackoverflow.com/a/54430417/688352
-dk.stringToBinary = function dk_sringToBinary(string) {
+dk.stringToBinary = function dk_sringToBinary(string){
     //for BINARY maxBytes = 255
     //for VARBINARY maxBytes = 65535
     const maxBytes = 255;
@@ -1208,7 +1208,7 @@ dk.stringToBinary = function dk_sringToBinary(string) {
 }
 
 // dk.binaryToString
-dk.binaryToString = function dk_binaryToString(binary) {
+dk.binaryToString = function dk_binaryToString(binary){
     const arrayOfBytes = binary.split(' ');
     var stringOutput = '';
     for (var i = 0; i < arrayOfBytes.length; i++)
@@ -1251,41 +1251,41 @@ dk.toggle = function dk_toggle(id){
 
 // String.prototype.trim()
 // trim for IE8
-if (typeof String.prototype.trim !== 'function') {
-    String.prototype.trim = function String_trim() {
+if (typeof String.prototype.trim !== 'function'){
+    String.prototype.trim = function String_trim(){
         return this.replace(/^\s+|\s+$/g, '');
     }
 }
 
 // Array.prototype.includes(searchElement, fromIndex)
-if (!Array.prototype.includes) {
+if (!Array.prototype.includes){
     Array.prototype.includes = function(searchElement /*, fromIndex*/
-    ) {
+    ){
         required({
             searchElement
         });
-        if (this == null) {
+        if (this == null){
             throw new TypeError('Array.prototype.includes called on null or undefined');
         }
         var O = Object(this);
         var len = parseInt(O.length, 10) || 0;
-        if (len === 0) {
+        if (len === 0){
             return false;
         }
         var n = parseInt(arguments[1], 10) || 0;
         var k;
-        if (n >= 0) {
+        if (n >= 0){
             k = n;
         } else {
             k = len + n;
-            if (k < 0) {
+            if (k < 0){
                 k = 0;
             }
         }
         var currentElement;
-        while (k < len) {
+        while (k < len){
             currentElement = O[k];
-            if (searchElement === currentElement || (searchElement !== searchElement && currentElement !== currentElement)) {
+            if (searchElement === currentElement || (searchElement !== searchElement && currentElement !== currentElement)){
                 // NaN !== NaN
                 return true;
             }
@@ -1307,7 +1307,7 @@ if (!Array.prototype.includes) {
  * @returns A number in the range [min, max]
  * @type Number
  */
-Number.prototype.clamp = function Number_clamp(min, max) {
+Number.prototype.clamp = function Number_clamp(min, max){
     required({
         min
     }, {
@@ -1318,13 +1318,13 @@ Number.prototype.clamp = function Number_clamp(min, max) {
 
 /*
 // Object.prototype.clone()
-Object.prototype.clone = Array.prototype.clone = function() {
-    if (Object.prototype.toString.call(this) === '[object Array]') {
+Object.prototype.clone = Array.prototype.clone = function(){
+    if (Object.prototype.toString.call(this) === '[object Array]'){
         var clone = [];
         for (var i = 0; i < this.length; i++)
             clone[i] = this[i].clone();
         return clone;
-    } else if (typeof (this) == "object") {
+    } else if (typeof (this) == "object"){
         var clone = {};
         for (var prop in this)
             if (this.hasOwnProperty(prop))
@@ -1337,13 +1337,13 @@ Object.prototype.clone = Array.prototype.clone = function() {
 
 // dk.errorCatcher(obj, name)
 //https://humanwhocodes.com/blog/2009/04/28/javascript-error-handling-anti-pattern/
-dk.errorCatcher = function dk_errorCatcher(obj, name) {
+dk.errorCatcher = function dk_errorCatcher(obj, name){
     required({
         obj
     });
     dk.errorCatcher.bypass = ["init", "end", "create", "close"]
     !name && (name = obj.constructor.name);
-    for (var func in obj) {
+    for (var func in obj){
         if (func.includes("_try"))
             continue;
         if (obj[func + "_try"])
@@ -1351,20 +1351,20 @@ dk.errorCatcher = function dk_errorCatcher(obj, name) {
         if (obj[func] == DKPlugin.prototype[func])
             continue;
         const method = obj[func];
-        if (typeof method === "function") {
+        if (typeof method === "function"){
             if (dk.errorCatcher.bypass.includes(func))
                 continue;
             Object.defineProperty(method, 'name', {
                 value: func
             })
             //console.debug(name + "." + func + "()");
-            obj[func] = function errorCatcher(func, method) {
-                return obj[func + "_try"] = function() {
+            obj[func] = function errorCatcher(func, method){
+                return obj[func + "_try"] = function(){
                     try {
                         return method.apply(this, arguments);
-                    } catch (err) {
+                    } catch (err){
                         //const stack = dk.trace.stackToConsoleString(err);
-                        //if (dk.console && dk.console.error) {
+                        //if (dk.console && dk.console.error){
                             //dk.console.error(err);
                             //dk.xconsole && dk.dk.xconsole.error(err);
                         //} else
@@ -1378,26 +1378,26 @@ dk.errorCatcher = function dk_errorCatcher(obj, name) {
 
 // dk.testSyntax(code)
 // https://stackoverflow.com/a/63785848/688352
-dk.testSyntax = function dk_testSyntax(code) {
+dk.testSyntax = function dk_testSyntax(code){
     required({
         code
     });
     try {
         new Function([],code)
-    } catch (err) {
+    } catch (err){
         throw err
     }
 }
 
 //dk.getNewFuncs()
-dk.getNewFuncs = function dk_getNewFuncs() {
+dk.getNewFuncs = function dk_getNewFuncs(){
     !dk.windowfuncs && (dk.windowfuncs = new Array)
     const newfuncs = new Array
     const removedfuncs = new Array
     const obj = globalThis//window
     //remove any function that have been removed from obj
-    for (var i in dk.windowfuncs) {
-        if (!obj[dk.windowfuncs[i]]) {
+    for (var i in dk.windowfuncs){
+        if (!obj[dk.windowfuncs[i]]){
             obj[dk.windowfuncs[i]] = undefined
             //delete obj[dk.windowfuncs[i]]
             removedfuncs.push(dk.windowfuncs[i])
@@ -1405,9 +1405,9 @@ dk.getNewFuncs = function dk_getNewFuncs() {
         }
     }
     //update windowfuncs and newfuncs
-    for (var i in obj) {
-        if ((typeof obj[i]).toString() == "function" && obj[i].toString().indexOf("[native code]") == -1) {
-            if (!dk.windowfuncs.includes(obj[i].name) && obj[obj[i].name]) {
+    for (var i in obj){
+        if ((typeof obj[i]).toString() == "function" && obj[i].toString().indexOf("[native code]") == -1){
+            if (!dk.windowfuncs.includes(obj[i].name) && obj[obj[i].name]){
                 newfuncs.push(obj[i].name)
                 dk.windowfuncs.push(obj[i].name)
             }
@@ -1417,13 +1417,13 @@ dk.getNewFuncs = function dk_getNewFuncs() {
 }
 
 // Object.byString(someObj, 'part3[0].name');  
-Object.byString = function(o, s) {
+Object.byString = function(o, s){
     // convert indexes to properties
     s = s.replace(/\[(\w+)\]/g, '.$1');
     // strip a leading dot
     s = s.replace(/^\./, '');
     var a = s.split('.');
-    for (var i = 0, n = a.length; i < n; ++i) {
+    for (var i = 0, n = a.length; i < n; ++i){
         var k = a[i];
         if (k in o)
             o = o[k];
@@ -1434,13 +1434,13 @@ Object.byString = function(o, s) {
 }
 
 // dk.insert(str, index, value)
-dk.insert = function dk_insert(str, index, value) {
+dk.insert = function dk_insert(str, index, value){
     return str.substr(0, index) + value + str.substr(index);
 }
 
 // dk.renameFunction(func, name)
 // https://stackoverflow.com/a/24032179/688352
-dk.renameFunction = function dk_renameFunction(func, name) {
+dk.renameFunction = function dk_renameFunction(func, name){
     const oldName = func.name;
     var funcString = func.toString();
     funcString = funcString.replace("function(", "function " + name + "(")
@@ -1450,10 +1450,10 @@ dk.renameFunction = function dk_renameFunction(func, name) {
     const parent = window;
     var scope = parent;
     var values = [];
-    if (!Array.isArray(scope) || !Array.isArray(values)) {
-        if (typeof scope == "object") {
+    if (!Array.isArray(scope) || !Array.isArray(values)){
+        if (typeof scope == "object"){
             var keys = Object.keys(scope);
-            values = keys.map(function(p) {
+            values = keys.map(function(p){
                 return scope[p];
             });
             scope = keys;
@@ -1466,7 +1466,7 @@ dk.renameFunction = function dk_renameFunction(func, name) {
 
 // dk.editFunctionBody(func, newBody)
 // https://stackoverflow.com/a/24032179/688352
-dk.editFunctionBody = function dk_editFunctionBody(func, newBody) {
+dk.editFunctionBody = function dk_editFunctionBody(func, newBody){
     const name = func.name;
     newBody = newBody.replace("function(", "function " + name + "(")
     newBody = newBody.replace("function (", "function " + name + "(")
@@ -1475,10 +1475,10 @@ dk.editFunctionBody = function dk_editFunctionBody(func, newBody) {
     const parent = window;
     var scope = parent;
     var values = [];
-    if (!Array.isArray(scope) || !Array.isArray(values)) {
-        if (typeof scope == "object") {
+    if (!Array.isArray(scope) || !Array.isArray(values)){
+        if (typeof scope == "object"){
             var keys = Object.keys(scope);
-            values = keys.map(function(p) {
+            values = keys.map(function(p){
                 return scope[p];
             });
             scope = keys;
@@ -1491,7 +1491,7 @@ dk.editFunctionBody = function dk_editFunctionBody(func, newBody) {
 
 // dk.StringToFunction(name, str)
 // https://stackoverflow.com/a/24032179/688352
-dk.StringToFunction = function dk_StringToFunction(name, str) {
+dk.StringToFunction = function dk_StringToFunction(name, str){
     str = str.replace("function(", "function " + name + "(")
     str = str.replace("function (", "function " + name + "(")
     str = str.replace("function " + name + "(", "function " + name + "(")
@@ -1499,10 +1499,10 @@ dk.StringToFunction = function dk_StringToFunction(name, str) {
     const parent = window;
     var scope = parent;
     var values = [];
-    if (!Array.isArray(scope) || !Array.isArray(values)) {
-        if (typeof scope == "object") {
+    if (!Array.isArray(scope) || !Array.isArray(values)){
+        if (typeof scope == "object"){
             var keys = Object.keys(scope);
-            values = keys.map(function(p) {
+            values = keys.map(function(p){
                 return scope[p];
             });
             scope = keys;
@@ -1515,7 +1515,7 @@ dk.StringToFunction = function dk_StringToFunction(name, str) {
 
 // dk.classExtends(child_class, parent_class)
 // https://eli.thegreenplace.net/2013/10/22/classical-inheritance-in-javascript-es5
-dk.classExtends = function dk_classExtends(child_class, parent_class) {
+dk.classExtends = function dk_classExtends(child_class, parent_class){
     const child_prototype = child_class.prototype;
     const funcString = "function " + child_class.name + "(){\n\tconsole.log('" + child_class.name + "() constructor')\n\t" + parent_class.name + ".call(this, arguments)\n}";
     var child = dk.StringToFunction(child_class.name, funcString)

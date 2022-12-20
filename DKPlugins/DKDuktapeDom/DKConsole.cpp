@@ -28,6 +28,7 @@
 #include "DK/DKApp.h"
 #include "DKDuktapeDom/DKConsole.h"
 
+
 bool DKConsole::Init(){
 	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("CPP_DKConsole_assert", DKConsole::_assert);

@@ -91,13 +91,10 @@ public:
 	static int hasAttribute(duk_context* ctx);
 	static int removeAttribute(duk_context* ctx);
 	
-	
 	static int querySelector(duk_context* ctx);
 	static int querySelectorAll(duk_context* ctx);
 	
 	static int scrollIntoView(duk_context* ctx);
-	
-	
 	
 	static int setAttribute(duk_context* ctx);
 	static int tagName(duk_context* ctx);

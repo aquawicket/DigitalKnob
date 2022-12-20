@@ -23,13 +23,12 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #pragma once
 #ifndef DKVideo_H
 #define DKVideo_H
 #include "DK/DK.h"
 
-/////////////////////////////////////////
+
 class DKVideo : public DKObjectT<DKVideo>
 {
 public:
@@ -38,7 +37,7 @@ public:
 	
 	static bool Play(DKString& file);
 };
-
 REGISTER_OBJECT(DKVideo, true);
-#endif //DKVideo_H
 
+
+#endif //DKVideo_H

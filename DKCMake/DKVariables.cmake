@@ -81,6 +81,19 @@ endif()
 
 
 ###########################################################################
+## Set the IDE variable
+###########################################################################
+string(FIND "${CMAKE_GENERATOR}" "Visual Studio" index)
+if(${index} GREATER -1)
+	dk_set(VISUAL_STUDIO_IDE ON)
+endif()
+string(FIND "${CMAKE_GENERATOR}" "Xcode" index)
+if(${index} GREATER -1)
+	dk_set(XCODE_IDE ON)
+endif()
+
+
+###########################################################################
 ## Get variables for Build Type
 ###########################################################################
 option(DEBUG "Build Debug Output" ON)
@@ -114,7 +127,7 @@ endif()
 ## Get variables for Library Build Type (STATIC or SHARED)
 ###########################################################################
 option(STATIC "Build Static Libraries and Plugins" OFF)
-option(SHARED "Build SHARED Libraries and Plugins" OFF)
+option(SHARED "Build Shared Libraries and Plugins" OFF)
 if(NOT STATIC)
 if(NOT SHARED)
 	dk_set(STATIC ON)

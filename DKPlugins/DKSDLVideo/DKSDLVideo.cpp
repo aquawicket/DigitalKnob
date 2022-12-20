@@ -25,14 +25,12 @@
 */
 
 #include "DK/stdafx.h"
-#include "DKSDLVideo.h"
-#include "DKFile.h"
-#include "DKSDLWindow.h"
+#include "DKSDLVideo/DKSDLVideo.h"
+#include "DK/DKFile.h"
+#include "DKSDLWindow/DKSDLWindow.h"
 
 
-///////////////////////
-void DKSDLVideo::Init()
-{
+void DKSDLVideo::Init(){
 	DKDebug();
 	stream = NULL;
 	streamObj = NULL;
@@ -40,9 +38,7 @@ void DKSDLVideo::Init()
 	DKClass::RegisterFunc("DKSDLVideo::Play", &DKSDLVideo::Play, this);
 }
 
-//////////////////////
-void DKSDLVideo::End()
-{
+void DKSDLVideo::End(){
 	DKDebug();
 	if(stream)
 		WV_closeStream(stream);
@@ -55,11 +51,7 @@ void DKSDLVideo::End()
 	WV_waaveClose();
 }
 
-
-
-/////////////////////////////////////////
-bool DKSDLVideo::Handle(SDL_Event *event)
-{
+bool DKSDLVideo::Handle(SDL_Event *event){
 	DKDebug(event);
 	if(event->type == WV_REFRESH_EVENT){
 		WV_refreshVideoFrame(event);
@@ -81,9 +73,7 @@ bool DKSDLVideo::Handle(SDL_Event *event)
 	return false;
 }
 
-//////////////////////////////////////////////////////
-bool DKSDLVideo::Play(const void* input, void* output)
-{
+bool DKSDLVideo::Play(const void* input, void* output){
 	DKDebug(input, output);
 	DKString path = *(DKString*)input;
 	if(!DKFile::VerifyPath(path)) { return false; }

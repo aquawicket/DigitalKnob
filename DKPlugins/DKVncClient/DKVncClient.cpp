@@ -23,15 +23,16 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 //see: digitalknob/3rdParty/libvncserver-master/client_examples/SDLvncviewer.c
-
 #include "DK/stdafx.h"
 #include "DKVncClient/DKVncClient.h"
 #include "DK/DKFile.h"
 #include "DKWindow/DKWindow.h"
+
+//WARNING_DISABLE
 #include "SDL.h"
 #include <signal.h>
+//WARNING_ENABLE
 
 
 struct { int sdl; int rfb; } buttonMapping[]={
@@ -52,9 +53,7 @@ int DKVncClient::message_wait = 1;
 SDL_Texture* DKVncClient::tex = NULL;
 rfbClient* DKVncClient::cl;
 bool DKVncClient::seperate_loop = false;
-
 long DKVncClient::last_mouse_move = 0;
-
 
 bool DKVncClient::Init(){
 	DKDEBUGFUNC();
@@ -188,10 +187,8 @@ bool DKVncClient::Init(){
 		DKSDLWindow::AddRenderFunc(&DKVncClient::draw, this);
 	}
 	
-	if(!Connect(server_ip, server_password)){
-		DKWARN("DKVncClient::Init(): Connect() failed\n");
-		return false; 
-	}
+	if(!Connect(server_ip, server_password))
+		return DKERROR("DKVncClient::Init(): Connect() failed\n");
 	return true;
 }
 
@@ -293,7 +290,7 @@ rfbBool DKVncClient::rfbInitConnection(rfbClient* client){
 }
 
 bool DKVncClient::draw(){
-	//DKDEBUGFUNC();
+	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 	if(!cl->frameBuffer)
 		return DKERROR("cl->frameBuffer invalid\n");
 
@@ -344,7 +341,7 @@ void DKVncClient::update(rfbClient* cl, int x, int y, int w, int h) {
 }
 
 bool DKVncClient::handle(SDL_Event *e){
-	//DKDEBUGFUNC(e);
+	//DKDEBUGFUNC(e);  //EXCESSIVE LOGGING
 	switch(e->type){
 		case SDL_MOUSEBUTTONUP:
 		case SDL_MOUSEBUTTONDOWN:

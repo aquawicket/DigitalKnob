@@ -23,13 +23,13 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #ifdef HAVE_DKDuktape 
 #pragma once
 #ifndef DKWindowJS_H
 #define DKWindowJS_H
 
 #include "DKDuktape/DKDuktape.h"
+
 
 class DKWindowJS : public DKObjectT<DKWindowJS>
 {
@@ -74,9 +74,8 @@ public:
 	static int Show(duk_context* ctx);
 	static int Windowed(duk_context* ctx);
 };
-
-
 REGISTER_OBJECT(DKWindowJS, true)
+
 
 #endif //DKWindowJS_H
 #endif //HAVE_DKDuktape

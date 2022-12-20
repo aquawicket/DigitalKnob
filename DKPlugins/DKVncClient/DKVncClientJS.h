@@ -23,13 +23,13 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #ifdef HAVE_DKDuktape 
 #pragma once
 #ifndef DKVncClientJS_H
 #define DKVncClientJS_H
 
 #include "DKDuktape/DKDuktape.h"
+
 
 class DKVncClientJS : public DKObjectT<DKVncClientJS>{
 public:
@@ -40,9 +40,8 @@ public:
 	static int TestReturnInt(duk_context* ctx);
 	static int TestReturnString(duk_context* ctx);
 };
-
-
 REGISTER_OBJECT(DKVncClientJS, true)
+
 
 #endif //DKVncClientJS_H
 #endif //HAVE_DKDuktape

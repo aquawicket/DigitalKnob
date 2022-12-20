@@ -2,8 +2,32 @@
 
 
 ### IMPORT ###
-#dk_import(https://github.com/facebook/zstd/archive/621d79898811d42529dbabebe7a2d7d5cb0e8dcd.zip)
 dk_import(https://github.com/facebook/zstd.git)
 
 
-# TODO
+### LINK ###
+dk_include				(${ZSTD}/lib)
+if(VISUAL_STUDIO_IDE)
+	WIN_dk_libDebug			(${ZSTD}/${OS}/lib/${DEBUG_DIR}/zstd_static.lib)
+	WIN_dk_libRelease		(${ZSTD}/${OS}/lib/${RELEASE_DIR}/zstd_static.lib)
+	ANDROID_dk_libDebug		(${ZSTD}/${OS}/lib/${DEBUG_DIR}/libzstd.a)
+	ANDROID_dk_libRelease	(${ZSTD}/${OS}/lib/${RELEASE_DIR}/libzstd.a)
+elseif(XCODE_IDE)
+	dk_libDebug		(${ZSTD}/${OS}/lib/${DEBUG_DIR}/libzstd.a)
+	dk_libRelease	(${ZSTD}/${OS}/lib/${RELEASE_DIR}/libzstd.a)
+else()
+	dk_libDebug		(${ZSTD}/${OS}/${DEBUG_DIR}/lib/libzstd.a)
+	dk_libRelease		(${ZSTD}/${OS}/${RELEASE_DIR}/lib/libzstd.a)
+endif()
+
+
+### 3RDPARTY LINK ###
+dk_set(ZSTD_CMAKE -DZSTD_INCLUDE_DIR=${ZSTD}/lib) #TODO
+
+
+### GENERATE ###
+dk_queueCommand(${DKCMAKE_BUILD} ${ZSTD}/build/cmake)
+
+
+### COMPILE ###
+dk_build(${ZSTD_FOLDER})

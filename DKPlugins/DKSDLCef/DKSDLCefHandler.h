@@ -28,7 +28,7 @@
 #ifndef DKSDLCefHandler_H
 #define DKSDLCefHandler_H
 
-#pragma warning(push, 0); //Silence warning from 3rd party headers
+//WARNING_DISABLE
 	#include <list>
 	#include <include/cef_client.h>
 	#include <include/cef_accessibility_handler.h>
@@ -52,7 +52,7 @@
 	#include <include/cef_resource_request_handler.h>
 	//#include <include/cef_geolocation.h>
 	#include "SDL.h"
-#pragma warning(pop);
+//WARNING_ENABLE
 
 #include "DK/DK.h"
 #include "DK/DKApp.h"

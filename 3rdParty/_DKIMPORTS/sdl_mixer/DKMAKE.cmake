@@ -28,8 +28,7 @@ ANDROID_dk_libRelease	(${SDL_MIXER}/${OS}/lib/${RELEASE_DIR}/SDL_mixer.a)
 
 
 ### GENERATE ###
-dk_setPath		(${SDL_MIXER}/${BUILD_DIR})
-dk_queueCommand	(${DKCMAKE_BUILD} ${SDL_CMAKE} ${VORBIS_CMAKE} ${OGG_CMAKE} ${SMPEG2_CMAKE} ${SDL_MIXER})
+dk_queueCommand	(${DKCMAKE_BUILD} ${OGG_CMAKE} ${SDL_CMAKE} ${SMPEG2_CMAKE} ${VORBIS_CMAKE} ${SDL_MIXER})
 
 
 ### COMPILE ###

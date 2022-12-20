@@ -23,11 +23,14 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #include "DK/stdafx.h"
-#include "RmlUi/Core/Factory.h"
 #include "DK/DKFile.h"
 #include "DKRml/DKRmlCss.h"
+
+//WARNING_DISABLE
+#include "RmlUi/Core/Factory.h"
+//WARNING_ENABLE
+
 
 DKRml* DKRmlCss::dkRml;
 
@@ -45,7 +48,6 @@ bool DKRmlCss::Init(){
 		DKString _data = toString(data, ",");
 		return DKERROR("data has too many parameters: data:("+_data+")\n");
 	}
-
 	DKString file = data[1];
 	if(!DKFile::VerifyPath(file))
 		return DKERROR("could not find css file\n");	

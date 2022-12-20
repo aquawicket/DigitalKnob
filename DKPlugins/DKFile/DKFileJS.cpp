@@ -29,6 +29,7 @@
 #include "DK/DKFile.h"
 #include "DKFile/DKFileJS.h"
 
+
 bool DKFileJS::Init(){
 	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("CPP_DKFile_ChDir", DKFileJS::ChDir);

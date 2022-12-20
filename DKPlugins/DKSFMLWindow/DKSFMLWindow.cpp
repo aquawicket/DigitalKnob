@@ -23,14 +23,14 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #include "DK/stdafx.h"
 #include "DKSFMLWindow/DKSFMLWindow.h"
 
-#pragma warning(push, 0) //silence warnings from <SFML/Window.hpp> and <SFML/Graphics.hpp>
+//WARNING_DISABLE
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
-#pragma warning(pop)
+//WARNING_ENABLE
+
 
 //std::vector<boost::function<bool(sf::Event& e)> > DKSFMLWindow::event_funcs;
 //std::vector<boost::function<void()> > DKSFMLWindow::draw_funcs;
@@ -81,7 +81,7 @@ bool DKSFMLWindow::End(){
 }
 
 void DKSFMLWindow::Process(){
-	DKDEBUGFUNC();
+	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 	sf::Event e;
 	while(window.pollEvent(e)){
 		//for(unsigned int i = 0; i < event_funcs.size(); ++i){

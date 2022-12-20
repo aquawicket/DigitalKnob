@@ -29,6 +29,7 @@
 #include "DK/DKApp.h"
 #include "DKDom/DKDomEventTarget.h"
 
+
 bool DKDomEventTarget::Init(){
 	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("CPP_DKDomEventTarget_addEventListener", DKDomEventTarget::addEventListener);

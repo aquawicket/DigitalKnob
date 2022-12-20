@@ -31,28 +31,28 @@
   <Import Project="$(AndroidTargetsPath)\Android.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <AndroidAPILevel>android-26</AndroidAPILevel>
+    <AndroidAPILevel>android-31</AndroidAPILevel>
     <TargetName>$(RootNamespace)-debug</TargetName>
     <PackagePath>$(ProjectDir)app\build\outputs\apk\debug\$(RootNamespace)-debug.apk</PackagePath>
     <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <AndroidAPILevel>android-26</AndroidAPILevel>
+    <AndroidAPILevel>android-31</AndroidAPILevel>
     <TargetName>$(RootNamespace)-release-unsigned</TargetName>
     <PackagePath>$(ProjectDir)app\build\outputs\apk\release\$(RootNamespace)-release-unsigned.apk</PackagePath>
     <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|ARM64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <AndroidAPILevel>android-26</AndroidAPILevel>
+    <AndroidAPILevel>android-31</AndroidAPILevel>
     <TargetName>$(RootNamespace)-release-unsigned</TargetName>
     <PackagePath>$(ProjectDir)app\build\outputs\apk\release\$(RootNamespace)-release-unsigned.apk</PackagePath>
     <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|ARM64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <AndroidAPILevel>android-26</AndroidAPILevel>
+    <AndroidAPILevel>android-31</AndroidAPILevel>
     <TargetName>$(RootNamespace)-release-unsigned</TargetName>
     <PackagePath>$(ProjectDir)app\build\outputs\apk\release\$(RootNamespace)-release-unsigned.apk</PackagePath>
     <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
@@ -107,6 +107,7 @@
     <ProjectReference Include="main.vcxproj" />
   </ItemGroup>
   <ItemGroup>
+	<JavaCompile Include="app\src\main\java\com\digitalknob\dk\DK.java" />
     <JavaCompile Include="app\src\main\java\com\digitalknob\dk\DKApp.java" />
     <JavaCompile Include="app\src\main\java\org\libsdl\app\HIDDevice.java" />
     <JavaCompile Include="app\src\main\java\org\libsdl\app\HIDDeviceBLESteamController.java" />
@@ -116,6 +117,7 @@
     <JavaCompile Include="app\src\main\java\org\libsdl\app\SDLActivity.java" />
     <JavaCompile Include="app\src\main\java\org\libsdl\app\SDLAudioManager.java" />
     <JavaCompile Include="app\src\main\java\org\libsdl\app\SDLControllerManager.java" />
+	<JavaCompile Include="app\src\main\java\org\libsdl\app\SDLSurface.java" />
   </ItemGroup>
   <Import Project="$(AndroidTargetsPath)\Android.targets" />
   <ImportGroup Label="ExtensionTargets" />

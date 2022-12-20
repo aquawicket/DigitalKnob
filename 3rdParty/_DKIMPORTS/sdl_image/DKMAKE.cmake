@@ -38,16 +38,18 @@ dk_import(https://github.com/libsdl-org/SDL_image.git BRANCH main PATCH)
 
 ### LINK ###
 dk_include				(${SDL_IMAGE})
-WIN_dk_libDebug			(${SDL_IMAGE}/${OS}/lib/${DEBUG_DIR}/SDL_image.lib)
-WIN_dk_libRelease		(${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL_image.lib)
-APPLE_dk_libDebug		(${SDL_IMAGE}/${OS}/lib/Debug/SDL_image.a)
-APPLE_dk_libRelease		(${SDL_IMAGE}/${OS}/lib/Release/SDL_image.a)
-LINUX_dk_libDebug		(${SDL_IMAGE}/${OS}/${DEBUG_DIR}/lib/SDL_image.a)
-LINUX_dk_libRelease		(${SDL_IMAGE}/${OS}/${RELEASE_DIR}/lib/SDL_image.a)
-RASPBERRY_dk_libDebug	(${SDL_IMAGE}/${OS}/${DEBUG_DIR}/lib/SDL_image.a)
-RASPBERRY_dk_libRelease	(${SDL_IMAGE}/${OS}/${RELEASE_DIR}/lib/SDL_image.a)
-ANDROID_dk_libDebug		(${SDL_IMAGE}/${OS}/lib/${DEBUG_DIR}/SDL_image.a)
-ANDROID_dk_libRelease	(${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL_image.a)
+if(VISUAL_STUDIO_IDE)
+	WIN_dk_libDebug			(${SDL_IMAGE}/${OS}/lib/${DEBUG_DIR}/SDL_image.lib)
+	WIN_dk_libRelease		(${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL_image.lib)
+	ANDROID_dk_libDebug		(${SDL_IMAGE}/${OS}/lib/${DEBUG_DIR}/SDL_image.a)
+	ANDROID_dk_libRelease	(${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL_image.a)
+elseif(XCODE_IDE)
+	dk_libDebug		(${SDL_IMAGE}/${OS}/lib/Debug/SDL_image.a)
+	dk_libRelease	(${SDL_IMAGE}/${OS}/lib/Release/SDL_image.a)
+else()
+	dk_libDebug		(${SDL_IMAGE}/${OS}/${DEBUG_DIR}/lib/SDL_image.a)
+	dk_libRelease	(${SDL_IMAGE}/${OS}/${RELEASE_DIR}/lib/SDL_image.a)
+endif()
 
 
 ### 3RDPARTY LINK ###
@@ -76,7 +78,6 @@ ANDROID_dk_set(SDL_IMAGE_CMAKE
 
 
 ### GENERATE ###
-dk_setPath		(${SDL_IMAGE}/${BUILD_DIR})
 dk_queueCommand	(${DKCMAKE_BUILD} -DSDLIMAGE_SUPPORT_GIF=ON -DSDLIMAGE_SUPPORT_JPEG=ON -DSDLIMAGE_SUPPORT_PNG=ON -DSDLIMAGE_SUPPORT_WEBP=OFF ${GIFLIB_CMAKE} ${LIBJPEG-TURBO_CMAKE} ${LIBPNG_CMAKE} ${SDL_CMAKE} ${TIFF_CMAKE} ${ZLIB_CMAKE} ${SDL_IMAGE})
 
 

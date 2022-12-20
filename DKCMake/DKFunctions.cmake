@@ -158,7 +158,7 @@ endmacro()
 ##################################################################################
 # dk_updateLogInfo()
 #
-#	TODO
+#	Updates the STACK_HEADER variable with the current filename, line number, function name and arguments
 #
 macro(dk_updateLogInfo)
 	#DKDEBUGFUNC(${ARGV})
@@ -359,11 +359,11 @@ endmacro()
 
 
 ###############################################################################
-# dk_todo([msg])
+# dk_todo(msg)
 #
 #	print a TODO message and wait 10 seconds
 #
-#	msg:(optional)	- A header message to print
+#	@msg (optional)	- A header message to print
 #
 macro(dk_todo)
 	#DKDEBUGFUNC(${ARGV})
@@ -383,7 +383,12 @@ endmacro()
 ###############################################################################
 # dk_pad(str padchar length RESULT)
 #
-#	TODO
+#	Pad the end of a string to length with a given character
+#
+#   @str		- The string to pad
+#   @padchar	- The fill character to use
+#	@length		- The number of spaces to pad
+#	@RESULT		- The returned string w/padding
 #
 function(dk_pad str padchar length RESULT)
 	#DKDEBUGFUNC(${ARGV})
@@ -407,16 +412,15 @@ endfunction()
 
 
 ###############################################################################
-# dk_includes(variable find RESULT [REVERSE])
+# dk_includes(variable find RESULT)
 #
-#	Test if a string contains a substring
+#	Check if a string contains a substring
 #
 #	@variable	- The variable
 #	@find		- The substring to search for
 #	@RESULT		- Returns true if the str contains the substr. Otherwise returns false
-#	REVERSE		- if REVERSE is found in the parameters, FIND will be preformed in the reverse direction
 #
-function(dk_includes variable find RESULT) #REVERSE
+function(dk_includes variable find RESULT)
 	#DKDEBUGFUNC(${ARGV})
 	string(FIND "${variable}" "${find}" index)
 	if(${index} GREATER -1)
@@ -434,7 +438,7 @@ endfunction()
 #
 #	@name		-The input MARKER name for the parameter
 #	@RESULT		-The value of the next parameter after the MARKER
-#	${ARGV}		-The are list from the calling function
+#	${ARGV}		-The arg list from the calling function
 #
 macro(dk_getParameter name RESULT)
 	#DKDEBUGFUNC(${ARGV})
@@ -467,8 +471,8 @@ endmacro()
 #
 function(dk_remove path)
 	DKDEBUGFUNC(${ARGV})
-	dk_includes("${ARGN}" "NOERROR" includes)
-	if(${includes})
+	dk_includes("${ARGN}" "NOERROR" has_NOERROR)
+	if(${has_NOERROR})
 		set(noerror true)
 	endif()
 	if(NOT EXISTS ${path})
@@ -599,9 +603,9 @@ dk_remove(${DKFunctions_ext} NOERROR)
 
 
 ###############################################################################
-# dk_printAllVariables()
+# dk_return()
 #
-#	Print all cmake varibles
+#	Print the CMAKE_CURRENT_LIST_DIR and return.
 #
 macro(dk_return)
 	#DKDEBUGFUNC(${ARGV})
@@ -614,7 +618,7 @@ dk_createOsMacros("dk_return")
 ###############################################################################
 # dk_printAllVariables()
 #
-#	Print all cmake varibles
+#	Print all cmake varibles and save to /cmake_variables.temp 
 #
 macro(dk_printAllVariables)
 	DKDEBUGFUNC(${ARGV})
@@ -2329,7 +2333,7 @@ dk_createOsMacros("dk_ndk" "NO_DEBUG_RELEASE_TAGS")
 #
 function(dk_make folder) #lib
 	DKDEBUGFUNC(${ARGV})
-	if(LINUX OR RASPBERRY)
+	#if(LINUX OR RASPBERRY)
 		set(lib ${ARGV1})
 		dk_set(CURRENT_DIR ${3RDPARTY}/${folder}/${BUILD_DIR})
 		if(${ARGC} GREATER 1)
@@ -2337,7 +2341,7 @@ function(dk_make folder) #lib
 		else()
 			dk_queueCommand(make)
 		endif()
-	endif()
+	#endif()
 endfunction()
 
 
@@ -2351,9 +2355,18 @@ endfunction()
 #
 function(dk_build folder)
 	DKDEBUGFUNC(${ARGV})
-	dk_visualStudio(${ARGV})
-	dk_xcode(${ARGV})
-	dk_make(${ARGV})
+	if(NOT WIN_HOST AND ANDROID)
+		#dk_queueCommand(make)
+		dk_make(${ARGV})
+	else()
+		dk_visualStudio(${ARGV})
+		dk_xcode(${ARGV})
+		if(LINUX OR RASPBERRY)
+			dk_make(${ARGV})
+		endif()
+	endif()
+	
+	
 endfunction()
 dk_createOsMacros("dk_build")
 
@@ -2554,8 +2567,8 @@ function(dk_generateCmake plugin_name)
 	WIN_dk_libRelease		(${plugin_path}/${OS}/${RELEASE_DIR}/${plugin_name}.lib)
 	MAC_dk_libDebug			(${plugin_path}/${OS}/${DEBUG_DIR}/lib${plugin_name}.a)
 	MAC_dk_libRelease		(${plugin_path}/${OS}/${RELEASE_DIR}/lib${plugin_name}.a)
-	IOS_dk_libDebug			(${plugin_path}/${OS}/Debug-iphone/lib${plugin_name}.a)
-	IOS_dk_libRelease		(${plugin_path}/${OS}/Release-iphone/lib${plugin_name}.a)
+	IOS_dk_libDebug			(${plugin_path}/${OS}/Debug-iphoneos/lib${plugin_name}.a)
+	IOS_dk_libRelease		(${plugin_path}/${OS}/Release-iphoneos/lib${plugin_name}.a)
 	IOSSIM_dk_libDebug		(${plugin_path}/${OS}/Debug-iphonesimulator/lib${plugin_name}.a)
 	IOSSIM_dk_libRelease	(${plugin_path}/${OS}/Release-iphonesimulator/lib${plugin_name}.a)
 	LINUX_dk_libDebug		(${plugin_path}/${OS}/${DEBUG_DIR}/lib${plugin_name}.a)
@@ -3122,7 +3135,7 @@ function(dkFileReplace filePath find replace)
 		string(REPLACE "${find}" "${replace}" fileString "${fileString}")
 		file(WRITE ${filePath} "${fileString}")
 	else()
-		dk_info("WARNING: cannot find \"${find}\"  in  (${filePath})")
+		dk_error("cannot find \"${find}\"  in  (${filePath})")
 	endif()
 endfunction()
 
@@ -3887,7 +3900,7 @@ function(dk_importGit url) #branch #id #PATCH
 	dk_includes("${ARGN}" "PATCH" includes)
 	if(${includes})
 		dk_patch(${Lib} ${${LIBVAR}})
-	endif()
+	endif()	
 endfunction()
 
 
@@ -4096,6 +4109,11 @@ function(dk_import url)
 	if(${has_patch})
 		dk_patch(${plugin} ${${plugin_var}})
 	endif()
+	
+	# Set the current build output directory
+	dk_verbose("setting current build directory to ${${plugin_var}}/${BUILD_DIR}")
+	dk_setPath(${${plugin_var}}/${BUILD_DIR})
+	
 endfunction()
 dk_createOsMacros("dk_import")
 
@@ -4507,6 +4525,41 @@ function(dk_findFiles path pattern RESULT)
 	set(${RESULT} ${files} PARENT_SCOPE)
 endfunction()
 
+
+###############################################################################
+# dk_shell()
+#
+#	TODO
+#
+#	@args		- TODO
+#
+macro(dk_shell args)
+	DKDEBUGFUNC(${ARGV})
+	if(WIN_HOST)
+		dk_msys(${ARGV})
+	else()
+		dk_command(${ARGV})
+	endif()
+endmacro()
+dk_createOsMacros("dk_shell")
+
+
+###############################################################################
+# dk_queueShell()
+#
+#	TODO
+#
+#	@args		- TODO
+#
+macro(dk_queueShell args)
+	DKDEBUGFUNC(${ARGV})
+	if(WIN_HOST)
+		dk_queueMsys(${ARGV})
+	else()
+		dk_queueCommand(${ARGV})
+	endif()
+endmacro()
+dk_createOsMacros("dk_queueShell")
 
 
 include(${DKFunctions_ext})

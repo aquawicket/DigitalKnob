@@ -31,7 +31,6 @@
 #include "DK/DK.h"
 
 
-///////////////////////////////////////////////////
 class DKJavascript : public DKObjectT<DKJavascript>
 {
 public:

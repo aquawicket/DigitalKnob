@@ -23,7 +23,6 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #ifdef HAVE_DKCef
 #pragma once
 #ifndef DKUpdateV8_H
@@ -31,7 +30,7 @@
 
 #include "DKCef/DKCef.h"
 
-///////////////////////////////////////////////
+
 class DKUpdateV8 : public DKObjectT<DKUpdateV8>
 {
 public:
@@ -44,8 +43,8 @@ public:
 	static bool UpdatePlugin(CefArgs args, CefReturn retval);
 
 };
-
 REGISTER_OBJECT(DKUpdateV8, false);
+
 
 #endif //DKUpdateV8_H
 #endif //HAVE_DKCef

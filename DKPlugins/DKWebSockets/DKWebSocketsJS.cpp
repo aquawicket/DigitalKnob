@@ -23,15 +23,12 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #ifdef HAVE_DKDuktape 
 #include "DKWebSockets/DKWebSockets.h"
 #include "DKWebSockets/DKWebSocketsJS.h"
 
 
-///////////////////////////
-bool DKWebSocketsJS::Init()
-{
+bool DKWebSocketsJS::Init(){
 	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("CPP_DKWebSockets_CloseClient", DKWebSocketsJS::CloseClient);
 	DKDuktape::AttachFunction("CPP_DKWebSockets_CloseServer", DKWebSocketsJS::CloseServer);
@@ -42,57 +39,52 @@ bool DKWebSocketsJS::Init()
 	return true;
 }
 
-/////////////////////////////////////////////////
-int DKWebSocketsJS::CloseClient(duk_context* ctx)
-{
+int DKWebSocketsJS::CloseClient(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	if(!DKWebSockets::CloseClient()){ return 0; }
-	return 1;
+	if(!DKWebSockets::CloseClient())
+		return DKERROR("DKWebSockets::CloseClient() failed! \n");
+	return true;
 }
 
-/////////////////////////////////////////////////
-int DKWebSocketsJS::CloseServer(duk_context* ctx)
-{
+int DKWebSocketsJS::CloseServer(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	if(!DKWebSockets::CloseServer()){ return 0; }
-	return 1;
+	if(!DKWebSockets::CloseServer())
+		return DKERROR("DKWebSockets::CloseServer() failed! \n");
+	return true;
 }
 
-//////////////////////////////////////////////////
-int DKWebSocketsJS::CreateClient(duk_context* ctx)
-{
+int DKWebSocketsJS::CreateClient(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	if(!DKWebSockets::CreateClient(address)){ return 0; }
-	return 1;
+	if(!DKWebSockets::CreateClient(address))
+		return DKERROR("DKWebSockets::CreateClient() failed! \n");
+	return true;
 }
 
-//////////////////////////////////////////////////
-int DKWebSocketsJS::CreateServer(duk_context* ctx)
-{
+int DKWebSocketsJS::CreateServer(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	int port = duk_require_int(ctx, 1);
-	if(!DKWebSockets::CreateServer(address, port)){ return 0; }
-	return 1;
+	if(!DKWebSockets::CreateServer(address, port))
+		return DKERROR("DKWebSockets::CreateServer() failed! \n");
+	return true;
 }
 
-/////////////////////////////////////////////////////
-int DKWebSocketsJS::MessageToClient(duk_context* ctx)
-{
+int DKWebSocketsJS::MessageToClient(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString text = duk_require_string(ctx, 0);
-	if(!DKWebSockets::MessageToClient(text)){ return 0; }
-	return 1;
+	if(!DKWebSockets::MessageToClient(text))
+		return DKERROR("DKWebSockets::MessageToClient() failed! \n");
+	return true;
 }
 
-/////////////////////////////////////////////////////
-int DKWebSocketsJS::MessageToServer(duk_context* ctx)
-{
+int DKWebSocketsJS::MessageToServer(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString text = duk_require_string(ctx, 0);
-	if(!DKWebSockets::MessageToServer(text)){ return 0; }
-	return 1;
+	if(!DKWebSockets::MessageToServer(text))
+		return DKERROR("DKWebSockets::MessageToServer() failed! \n");
+	return true;
 }
+
 
 #endif //HAVE_DKDuktape

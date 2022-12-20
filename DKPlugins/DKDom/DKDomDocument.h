@@ -32,6 +32,7 @@
 
 #include "DKDuktape/DKDuktape.h"
 
+
 class DKDomDocument : public DKObjectT<DKDomDocument>{
 public:
 	bool Init();

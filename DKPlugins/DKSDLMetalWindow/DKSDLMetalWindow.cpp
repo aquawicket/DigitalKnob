@@ -23,13 +23,14 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #include "DK/stdafx.h"
-#include "SDL_syswm.h"
 #include "DK/DKAndroid.h"
 #include "DK/DKFile.h"
 #include "DKSDLWindow/DKSDLWindow.h"
+#include "DK/DKOsInfo.h"
 
+//WARNING_DISABLE
+#include "SDL_syswm.h"
 #ifdef WIN32
     #include <GL/glew.h>
 	#include <GL/gl.h>
@@ -47,7 +48,8 @@
 #ifdef ANDROID
 	#include <GLES/gl.h>
 #endif
-#include <DK/DKOsInfo.h>
+//WARNING_ENABLE
+
 
 std::vector<std::function<bool(SDL_Event* event)> > DKSDLWindow::event_funcs;
 std::vector<std::function<bool()> > DKSDLWindow::render_funcs;
@@ -363,7 +365,7 @@ bool DKSDLWindow::GetHandle(const void* input, void* output) {
     SDL_SysWMinfo wmInfo;
     SDL_VERSION(&wmInfo.version);
     SDL_GetWindowWMInfo(window, &wmInfo);
-#ifdef WIN32
+#if WIN32
     HWND hwnd = wmInfo.info.win.window;
     *(HWND*)output = hwnd;
     return true;
@@ -382,6 +384,7 @@ bool DKSDLWindow::GetHandle(const void* input, void* output) {
     //if(!gdk_window){ return false; }
     //*(GdkWindow**)output = gdk_window;
     //return true;
+	return false;
 #else
     DKWARN("not implemented on this OS\n");
     return false;
@@ -591,7 +594,7 @@ bool DKSDLWindow::drawBackground(SDL_Renderer *renderer, int w, int h){
 }
 
 void DKSDLWindow::Process() {
-    //DKDEBUGFUNC();
+    //DKDEBUGFUNC();  //EXCESSIVE LOGGING
     if(SDL_GetWindowFlags(window) & SDL_WINDOW_HIDDEN)
         DKUtil::Sleep(1000); //FIXME - look for a better way to save cpu usage here
 
@@ -617,7 +620,7 @@ void DKSDLWindow::Process() {
 }
 
 int DKSDLWindow::EventFilter(void* userdata, SDL_Event* event) {
-    //DKDEBUGFUNC(userdata, event);
+    //DKDEBUGFUNC(userdata, event);  //EXCESSIVE LOGGING
     if(event->type == SDL_WINDOWEVENT) {
         switch(event->window.event) {
             case SDL_WINDOWEVENT_MOVED: {
@@ -676,7 +679,7 @@ int DKSDLWindow::EventFilter(void* userdata, SDL_Event* event) {
 }
 
 bool DKSDLWindow::handle(SDL_Event *event) {
-    //DKDEBUGFUNC(event);
+    //DKDEBUGFUNC(event);  //EXCESSIVE LOGGING
     switch(event->type) {
         case SDL_QUIT: {
             DKApp::Exit();

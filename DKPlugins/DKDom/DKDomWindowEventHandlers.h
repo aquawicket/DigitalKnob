@@ -30,6 +30,7 @@
 
 #include "DKDuktape/DKDuktape.h"
 
+
 class DKDomWindowEventHandlers : public DKObjectT<DKDomWindowEventHandlers>
 {
 public:

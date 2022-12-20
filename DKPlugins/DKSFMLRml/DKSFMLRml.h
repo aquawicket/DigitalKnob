@@ -28,7 +28,10 @@
 #ifndef DKSFMLRml_H
 #define DKSFMLRml_H
 
+//WARNING_DISABLE
 #include "RmlUi/Core.h"
+//WARNING_ENABLE
+
 #include "DK/DK.h"
 #include "DKSFMLWindow/DKSFMLWindow.h"
 #include "DKRml/DKRml.h"
@@ -37,6 +40,7 @@
 
 //#include "ShellRenderInterfaceOpenGL.h"
 //#define RML_SHELL_RENDER 1
+
 
 class DKSFMLRml : public DKObjectT<DKSFMLRml>
 {

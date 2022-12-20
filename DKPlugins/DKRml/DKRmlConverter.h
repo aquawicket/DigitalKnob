@@ -23,13 +23,16 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #pragma once
 #ifndef DKRmlConverter_H
 #define DKRmlConverter_H
 
 #include "DK/DK.h"
+
+//WARNING_DISABLE
 #include <RmlUi/Core.h>
+//WARNING_ENABLE
+
 
 class DKRmlConverter  : public DKObject{
 public:

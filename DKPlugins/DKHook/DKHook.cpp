@@ -33,9 +33,11 @@
 HHOOK DKHook::hook;
 #endif
 
+//WARNING_DISABLE
 #if LINUX
-#include <fcntl.h>
+	#include <fcntl.h>
 #endif
+//WARNING_ENABLE
 
 bool DKHook::Init() {
 	DKDEBUGFUNC();

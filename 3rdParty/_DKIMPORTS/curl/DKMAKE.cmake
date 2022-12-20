@@ -26,16 +26,19 @@ dk_include				(${CURL}/${OS}/include/curl)
 DEBUG_dk_include		(${CURL}/${OS}/${DEBUG_DIR}/include/curl)
 RELEASE_dk_include		(${CURL}/${OS}/${RELEASE_DIR}/include/curl)
 
-WIN_dk_libDebug			(${CURL}/${OS}/lib/${DEBUG_DIR}/libcurl.lib)
-WIN_dk_libRelease		(${CURL}/${OS}/lib/${RELEASE_DIR}/libcurl.lib)
-APPLE_dk_libDebug		(${CURL}/${OS}/lib/${DEBUG_DIR}/libcurl-d.a)
-APPLE_dk_libRelease		(${CURL}/${OS}/lib/${RELEASE_DIR}/libcurl.a)
-LINUX_dk_libDebug		(${CURL}/${OS}/${DEBUG_DIR}/lib/libcurl-d.a)
-LINUX_dk_libRelease		(${CURL}/${OS}/${RELEASE_DIR}/lib/libcurl.a)
-RASPBERRY_dk_libDebug	(${CURL}/${OS}/${DEBUG_DIR}/lib/libcurl-d.a)
-RASPBERRY_dk_libRelease	(${CURL}/${OS}/${RELEASE_DIR}/lib/libcurl.a)
-ANDROID_dk_libDebug		(${CURL}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libcurl-d.a)
-ANDROID_dk_libRelease	(${CURL}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libcurl.a)
+if(VISUAL_STUDIO_IDE)
+	WIN_dk_libDebug			(${CURL}/${OS}/lib/${DEBUG_DIR}/libcurl.lib)
+	WIN_dk_libRelease		(${CURL}/${OS}/lib/${RELEASE_DIR}/libcurl.lib)
+	ANDROID_dk_libDebug		(${CURL}/${OS}/lib/${DEBUG_DIR}/libcurl.a)
+	ANDROID_dk_libRelease	(${CURL}/${OS}/lib/${RELEASE_DIR}/libcurl.a)
+elseif(XCODE_IDE)
+	dk_libDebug				(${CURL}/${OS}/lib/${DEBUG_DIR}/libcurl-d.a)
+	dk_libRelease			(${CURL}/${OS}/lib/${RELEASE_DIR}/libcurl.a)
+else()
+	dk_libDebug				(${CURL}/${OS}/${DEBUG_DIR}/lib/libcurl-d.a)
+	dk_libRelease			(${CURL}/${OS}/${RELEASE_DIR}/lib/libcurl.a)
+endif()
+
 
 
 ### 3RDPARTY LINK ###
@@ -46,10 +49,25 @@ RASPBERRY_dk_set(CURL_CMAKE "-DCMAKE_C_FLAGS=-I${CURL}/${OS}/include" "-DCMAKE_C
 ANDROID_dk_set	(CURL_CMAKE "-DCMAKE_C_FLAGS=-I${CURL}/${OS}/include" "-DCMAKE_CXX_FLAGS=-I${CURL}/${OS}/include" -DCURL_INCLUDE_DIR=${CURL}/include -DCURL_LIBRARY=${CURL}/${OS}/lib/${RELEASE_DIR}/libcurl.a)
 
 ### GENERATE ###
-dk_setPath(${CURL}/${BUILD_DIR})
 WIN_dk_queueCommand			(${DKCMAKE_BUILD} -DCURL_STATICLIB=ON -DBUILD_CURL_EXE=OFF -DBUILD_CURL_TESTS=OFF -DCURL_DISABLE_LDAP=ON -DCURL_USE_OPENSSL=ON -DCURL_STATIC_CRT=ON ${OPENSSL_CMAKE} ${ZLIB_CMAKE} ${CURL})
 MAC_dk_queueCommand			(${DKCMAKE_BUILD} -DCURL_STATICLIB=ON -DBUILD_CURL_EXE=OFF -DBUILD_CURL_TESTS=OFF -DCURL_DISABLE_LDAP=ON -DCURL_USE_OPENSSL=OFF ${OPENSSL_CMAKE} ${ZLIB_CMAKE} ${CURL})
-IOS_dk_queueCommand			(${DKCMAKE_BUILD} -DCURL_STATICLIB=ON -DBUILD_CURL_EXE=OFF -DBUILD_CURL_TESTS=OFF -DCURL_DISABLE_LDAP=ON -DCURL_USE_OPENSSL=OFF -DHAVE_POSIX_STRERROR_R=1 -DHAVE_GLIBC_STRERROR_R=advanced -DHAVE_GLIBC_STRERROR_R__TRYRUN_OUTPUT=advanced ${OPENSSL_CMAKE} ${ZLIB_CMAKE} ${CURL})
+IOS_dk_queueCommand(
+	${DKCMAKE_BUILD}
+	-DCURL_STATICLIB=ON
+	-DBUILD_CURL_EXE=OFF
+	-DBUILD_CURL_TESTS=OFF
+	-DCURL_DISABLE_LDAP=ON
+	-DCURL_USE_OPENSSL=OFF
+	-DHAVE_POSIX_STRERROR_R=0
+	#-DHAVE_POSIX_STRERROR_R=advanced
+	#-DHAVE_POSIX_STRERROR_R__TRYRUN_OUTPUT=advanced
+	-DHAVE_POLL_FINE_EXITCODE=advanced
+	-DHAVE_POLL_FINE_EXITCODE__TRYRUN_OUTPUT=advanced 
+	-DHAVE_GLIBC_STRERROR_R=advanced
+	-DHAVE_GLIBC_STRERROR_R__TRYRUN_OUTPUT=advanced
+	${OPENSSL_CMAKE}
+	${ZLIB_CMAKE}
+	${CURL})
 IOSSIM_dk_queueCommand(
 	${DKCMAKE_BUILD}
 	-DCURL_STATICLIB=ON

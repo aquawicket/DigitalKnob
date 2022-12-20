@@ -2,11 +2,11 @@
 
 dk.php = DKPlugin(DKPhp, "singleton")
 
-function DKPhp() {}
+function DKPhp(){}
 
 // EXAMPLE
 //DKPhp.prototype.call("GET", "DK/DK.php", "Function", "args", "args", dkphp_callback);
-DKPhp.prototype.call = function DKPhp_call(httpMethod, phpPath, funcName) {
+DKPhp.prototype.call = function DKPhp_call(httpMethod, phpPath, funcName){
     const args = arguments;
     var dkphp_callback = null;
     if (args && typeof (args[args.length - 1]) === "function")
@@ -29,8 +29,8 @@ DKPhp.prototype.call = function DKPhp_call(httpMethod, phpPath, funcName) {
         func: funcName,
         args: []
     };
-    for (var n = 3; arguments && n < arguments.length; n++) {
-        if (typeof (arguments[n]) === "function") {
+    for (var n = 3; arguments && n < arguments.length; n++){
+        if (typeof (arguments[n]) === "function"){
             continue;
         }
         var newArg = new Object;
@@ -44,11 +44,11 @@ DKPhp.prototype.call = function DKPhp_call(httpMethod, phpPath, funcName) {
     const str = JSON.stringify(jsonData);
     const data = "dkx=" + encodeURIComponent(str);
     const url = dk.file.validatepath(path + phpPath) + "?" + data;
-    const php_error = function php_error(msg, dkphp_callback) {
+    const php_error = function php_error(msg, dkphp_callback){
         return error(msg, dkphp_callback);
     }
 
-    dk.sendRequest(httpMethod, url, function dk_sendRequest_callback(success, url, rval) {
+    dk.sendRequest(httpMethod, url, function dk_sendRequest_callback(success, url, rval){
         if (!success)
             return error("DKPhp.prototype.call request failed, is php server running?", dkphp_callback);
         const beforeLastLine = rval.substr(0, rval.lastIndexOf("\n") + 1);
@@ -58,7 +58,7 @@ DKPhp.prototype.call = function DKPhp_call(httpMethod, phpPath, funcName) {
         var rJson;
         try {
             rJson = JSON.parse(lastLine);
-        } catch (e) {
+        } catch (e){
             !rval && (rval = e.message);
             return error(rval, dkphp_callback);
         }
@@ -74,13 +74,13 @@ DKPhp.prototype.call = function DKPhp_call(httpMethod, phpPath, funcName) {
 }
 
 //Todo - listen for broadcast messaged from php 
-DKPhp.prototype.listen = function DKPhp_listen() {
+DKPhp.prototype.listen = function DKPhp_listen(){
 }
 
-//DKPhp.prototype.noCB = function DKPhp_noCB(rVal) {}
+//DKPhp.prototype.noCB = function DKPhp_noCB(rVal){}
 
 /*
-DKPhp.prototype.callPhpFunc = function DKPhp_callPhpFunc(args) {
+DKPhp.prototype.callPhpFunc = function DKPhp_callPhpFunc(args){
     //const args = arguments;
     var func = dk.trace.getCurrentFunctionName(1);
     //const n = func.indexOf("_") + 1;
@@ -90,9 +90,9 @@ DKPhp.prototype.callPhpFunc = function DKPhp_callPhpFunc(args) {
         func: funcName,
         args: []
     };
-    for (var n = 0; args && n < args.length; n++) {
+    for (var n = 0; args && n < args.length; n++){
         //console.log(typeof args[n]);
-        if (typeof args[n] === "function") {
+        if (typeof args[n] === "function"){
             continue;
         }
         var newArg = new Object;
@@ -100,7 +100,7 @@ DKPhp.prototype.callPhpFunc = function DKPhp_callPhpFunc(args) {
         jsonData.args.push(newArg);
     }
     var path = "";
-    if (location.protocol == "file:") {
+    if (location.protocol == "file:"){
         path = "";
         path = "http://"+dk.localIP+":"dk.port"/"
     }
@@ -109,8 +109,8 @@ DKPhp.prototype.callPhpFunc = function DKPhp_callPhpFunc(args) {
     const data = "dkx=" + encodeURIComponent(str);
     //console.log("DKPhp.prototype.callPhpFunc(): data = "+data);
     const url = path + "DK/DK.php?" + data;
-    dk.sendRequest("POST", url, function dk_sendRequest_callback(success, url, rVal) {
-        if (args && typeof (args[args.length - 1]) === "function") {
+    dk.sendRequest("POST", url, function dk_sendRequest_callback(success, url, rVal){
+        if (args && typeof (args[args.length - 1]) === "function"){
             args[args.length - 1](rVal);
         } else {//console.log(rVal);
         }

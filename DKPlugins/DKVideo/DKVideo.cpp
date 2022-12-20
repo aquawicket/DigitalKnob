@@ -23,13 +23,11 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #include "DK/stdafx.h"
-#include "DKVideo.h"
+#include "DKVideo/DKVideo.h"
 
-////////////////////
-bool DKVideo::Init()
-{
+
+bool DKVideo::Init(){
 	DKDEBUGFUNC();
 	DKClass::DKCreate("DKVideoJS");
 	DKClass::DKCreate("DKOSGVideo");
@@ -37,17 +35,11 @@ bool DKVideo::Init()
 	return true;
 }
 
-//////////////////////////////////
-bool DKVideo::Play(DKString& file)
-{
+bool DKVideo::Play(DKString& file){
 	DKDEBUGFUNC();
-	if(DKClass::HasFunc("DKSDLVideo::Play")){
+	if(DKClass::HasFunc("DKSDLVideo::Play"))
 		return DKClass::CallFunc("DKSDLVideo::Play", &file, NULL);
-	}
-	if(DKClass::HasFunc("DKOSGVideo::Play")){
+	if(DKClass::HasFunc("DKOSGVideo::Play"))
 		return DKClass::CallFunc("DKOSGVideo::Play", &file, NULL);
-	}
-	
-	DKERROR("DKVideo::Play() - No function available\n");
-	return false;
+	return DKERROR("DKVideo::Play() - No function available\n");
 }

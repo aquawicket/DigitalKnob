@@ -23,14 +23,17 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #pragma once
 #ifndef DKGLInfo_H
 #define DKGLInfo_H
 
+#include "DK/DK.h"
+
+//WARNING_DISABLE
 #include <osg/Uniform>
 #include <osg/Texture>
-#include "DK/DK.h"
+//WARING_ENABLE
+
 
 class DKGLInfo : public DKObjectT<DKGLInfo>
 {

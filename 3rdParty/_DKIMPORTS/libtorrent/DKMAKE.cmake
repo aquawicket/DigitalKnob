@@ -28,9 +28,9 @@ ANDROID_dk_libRelease	(${LIBTORRENT}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/
 
 
 ### GENERATE ###
-dk_setPath		(${LIBTORRENT}/${BUILD_DIR})
 dk_queueCommand	(${DKCMAKE_BUILD} -Dshared=OFF -Dunicode=OFF -Dstatic_runtime=ON ${BOOST_CMAKE} ${OPENSSL_CMAKE} ${LIBTORRENT})
 
 
 ### COMPILE ###
-dk_build(${LIBTORRENT_FOLDER} torrent-rasterbar)
+#dk_build(${LIBTORRENT_FOLDER} torrent-rasterbar)
+dk_build(${LIBTORRENT_FOLDER})

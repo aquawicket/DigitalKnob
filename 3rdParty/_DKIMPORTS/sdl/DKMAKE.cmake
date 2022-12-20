@@ -47,10 +47,16 @@ LINUX_dk_depend(opengl)
 RASPBERRY_dk_depend(opengl)
 ANDROID_dk_depend(opengles)
 ANDROID_dk_depend(opensles)
+ANDROID_dk_depend(libiconv)
 
 
 ### IMPORT ###
-dk_import(https://github.com/libsdl-org/SDL.git BRANCH main)
+#dk_import(https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.0.18.zip PATCH)
+#dk_import(https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.0.20.zip PATCH)
+#dk_import(https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.0.22.zip PATCH)
+#dk_import(https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.24.0.zip PATCH)
+dk_import(https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.26.0.zip PATCH)
+#dk_import(https://github.com/libsdl-org/SDL.git BRANCH main PATCH)
 
 
 ### LINK ###
@@ -61,10 +67,10 @@ LINUX_dk_include	(${SDL}/${OS}/${RELEASE_DIR}/include)
 ANDROID_dk_include	(${ANDROID-NDK}/sources/android/cpufeatures)
 ANDROID_dk_include	(${SDL}/src)
 
-#dk_addTarget(sdl2 SDL2static)	# TODO
-#dk_addTarget(sdl2 SDL2main)	# TODO
+#dk_addTarget(sdl SDL2static)	# TODO
+#dk_addTarget(sdl SDL2main)		# TODO
 
-#if(sdl2_SDL2static)
+#if(sdl_SDL2static)
 	WIN_dk_libDebug			(${SDL}/${OS}/${DEBUG_DIR}/SDL2-staticd.lib)
 	WIN_dk_libRelease		(${SDL}/${OS}/${RELEASE_DIR}/SDL2-static.lib)
 	MAC_dk_libDebug			(${SDL}/${OS}/${DEBUG_DIR}/libSDL2d.a)
@@ -84,7 +90,7 @@ ANDROID_dk_include	(${SDL}/src)
 #ANDROID_dk_libDebug(${SDL}/${OS}/${DEBUG_DIR}/libhidapi.a)
 #ANDROID_dk_libRelease(${SDL}/${OS}/${RELEASE_DIR}/libhidapi.a)
 
-#if(sdl2_SDL2main)
+#if(sdl_SDL2main)
 	#WIN_dk_libDebug		(${SDL}/${OS}/${DEBUG_DIR}/SDL2maind.lib)
 	#WIN_dk_libRelease		(${SDL}/${OS}/${RELEASE_DIR}/SDL2main.lib)
 	#MAC_dk_libDebug		(${SDL}/${OS}/${DEBUG_DIR}/libSDL2maind.a)
@@ -97,13 +103,15 @@ ANDROID_dk_include	(${SDL}/src)
 	#LINUX_dk_libRelease	(${SDL}/${OS}/${RELEASE_DIR}/libSDL2main.a)
 	#RASPBERRY_dk_libDebug	(${SDL}/${OS}/${DEBUG_DIR}/libSDL2maind.a)
 	#RASPBERRY_dk_libRelease(${SDL}/${OS}/${RELEASE_DIR}/libSDL2main.a)
-	#ANDROID_dk_libDebug	(${SDL}/${OS}/${DEBUG_DIR}/libSDL2maind.a)
+	#ANDROID_dk_libDebug		(${SDL}/${OS}/${DEBUG_DIR}/libSDL2main.a)
 	#ANDROID_dk_libRelease	(${SDL}/${OS}/${RELEASE_DIR}/libSDL2main.a)
 #endif()
 
 
 ### 3RDPARTY LINK ###
 WIN_dk_set(SDL_CMAKE
+	"-DCMAKE_C_FLAGS=/I${SDL}/include"
+	"-DCMAKE_CXX_FLAGS=/I${SDL}/include" 
 	-DSDL2_DIR=${SDL}
 	-DSDL2_INCLUDE_DIR=${SDL}/include
 	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/SDL2.lib
@@ -116,6 +124,8 @@ WIN_dk_set(SDLMAIN_CMAKE
 	-DSDL2MAIN_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/SDL2main.lib)
 	
 MAC_dk_set(SDL_CMAKE
+	"-DCMAKE_C_FLAGS=-I${SDL}/include"
+	"-DCMAKE_CXX_FLAGS=-I${SDL}/include" 
 	-DSDL2_DIR=${SDL}
 	-DSDL2_INCLUDE_DIR=${SDL}/include
 	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a
@@ -127,6 +137,8 @@ MAC_dk_set(SDLMAIN_CMAKE
 	-DSDL2MAIN_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL2main.a)
 	
 IOS_dk_set(SDL_CMAKE
+	"-DCMAKE_C_FLAGS=-I${SDL}/include"
+	"-DCMAKE_CXX_FLAGS=-I${SDL}/include" 
 	-DSDL2_DIR=${SDL}
 	-DSDL2_INCLUDE_DIR=${SDL}/include
 	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a
@@ -138,6 +150,8 @@ IOS_dk_set(SDLMAIN_CMAKE
 	-DSDL2MAIN_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL2main.a)
 	
 IOSSIM_dk_set(SDL_CMAKE
+	"-DCMAKE_C_FLAGS=-I${SDL}/include"
+	"-DCMAKE_CXX_FLAGS=-I${SDL}/include" 
 	-DSDL2_DIR=${SDL}
 	-DSDL2_INCLUDE_DIR=${SDL}/include
 	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/Release-iphonesimulator/libSDL2.a
@@ -149,6 +163,8 @@ IOSSIM_dk_set(SDLMAIN_CMAKE
 	-DSDL2MAIN_LIBRARY_RELEASE=${SDL}/${OS}/Release-iphonesimulator/libSDL2main.a)
 	
 LINUX_dk_set(SDL_CMAKE
+	"-DCMAKE_C_FLAGS=-I${SDL}/include"
+	"-DCMAKE_CXX_FLAGS=-I${SDL}/include" 
 	-DSDL2_DIR=${SDL}
 	-DSDL2_INCLUDE_DIR=${SDL}/include
 	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a
@@ -157,7 +173,8 @@ LINUX_dk_set(SDL_CMAKE
 	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a)
 	
 RASPBERRY_dk_set(SDL_CMAKE
-	"-DCMAKE_C_FLAGS=-I${SDL}/include" 
+	"-DCMAKE_C_FLAGS=-I${SDL}/include"
+	"-DCMAKE_CXX_FLAGS=-I${SDL}/include" 
 	-DSDL2_INCLUDE_DIR=${SDL}/include
 	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a
 	-DSDL2_LIBRARY=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a
@@ -165,7 +182,8 @@ RASPBERRY_dk_set(SDL_CMAKE
 	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a)
 	
 ANDROID_dk_set(SDL_CMAKE
-	"-DCMAKE_C_FLAGS=-I${SDL}/include" 
+	"-DCMAKE_C_FLAGS=-I${SDL}/include"
+	"-DCMAKE_CXX_FLAGS=-I${SDL}/include" 
 	-DSDL2_DIR=${SDL}/cmake
 	-DSDL2_INCLUDE_DIR=${SDL}/include
 	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a
@@ -175,7 +193,6 @@ ANDROID_dk_set(SDL_CMAKE
 	
 
 ### GENERATE ###
-dk_setPath					(${SDL}/${BUILD_DIR})
 WIN_dk_queueCommand			(${DKCMAKE_BUILD} -DSDL_SHARED=OFF -DSDL_LIBC=ON ${SDL})
 
 string(REPLACE "-std=c17" "" SDL_BUILD "${DKCMAKE_BUILD}")
@@ -194,15 +211,17 @@ string(REPLACE "-std=c17" "" SDL_BUILD "${DKCMAKE_BUILD}")
 string(REPLACE "-std=c++1z" "" SDL_BUILD "${SDL_BUILD}")
 string(REPLACE "  " " " SDL_BUILD "${SDL_BUILD}")
 ANDROID32_dk_queueCommand	(${SDL_BUILD} -DLIBTYPE=STATIC -DSDL_SHARED=OFF ${SDL}) 
-ANDROID64_dk_queueCommand	(${SDL_BUILD} "-DCMAKE_CXX_FLAGS=-DHAVE_GCC_ATOMICS=1" -DLIBTYPE=STATIC -DSDL_SHARED=OFF ${SDL})
+ANDROID64_dk_queueCommand	(${SDL_BUILD} "-DCMAKE_CXX_FLAGS=-DHAVE_GCC_ATOMICS=1" -DLIBTYPE=STATIC -DSDL_SHARED=OFF -DHAVE_BUILTIN_ICONV=0 -DHAVE_LIBICONV=0 ${ICONV_CMAKE} ${SDL})
 
 
 ### COMPILE ###
-#if(sdl2_SDL2static)
-	dk_build(${SDL_FOLDER} SDL2-static)
+dk_build(${SDL_FOLDER})
+
+#if(sdl_SDL2static)
+	#dk_build(${SDL_FOLDER} SDL2-static)
 #endif()
-#if(sdl2_SDL2main)
-	dk_visualStudio	(${SDL_FOLDER} SDL2main) # windows, android
-	dk_xcode		(${SDL_FOLDER} SDL2main) # mac, ios, iossim
-	#dk_make		(${SDL_FOLDER} SDL2main) # linux, raspberry
+#if(sdl_SDL2main)
+	#dk_visualStudio	(${SDL_FOLDER} SDL2main) # windows, android
+	#dk_xcode		(${SDL_FOLDER} SDL2main) # mac, ios, iossim
+	##dk_make		(${SDL_FOLDER} SDL2main) # linux, raspberry
 #endif()

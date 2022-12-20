@@ -26,16 +26,19 @@
 
 // https://github.com/mikke89/RmlUi
 // https://mikke89.github.io/RmlUiDoc/
-
 #pragma once
 #ifndef DKRml_H
 #define DKRml_H
 
-#include <RmlUi/Core.h>
 #include "DK/DK.h"
 #include "DKWindow/DKWindow.h"
 #include "DKRml/DKRmlFile.h"
 #include "DKRml/DKRmlConverter.h"
+
+//WARNING_DISABLE
+#include <RmlUi/Core.h>
+//WARNING_ENABLE
+
 
 class DKRml : public Rml::EventListener, public DKObjectT<DKRml> {
 public:

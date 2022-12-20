@@ -33,7 +33,7 @@
 
 #include "DKDuktapeDom/DKDuktapeDom.h"
 
-///////////////////////////////////////////
+
 class DKScreen : public DKObjectT<DKScreen>
 {
 public:

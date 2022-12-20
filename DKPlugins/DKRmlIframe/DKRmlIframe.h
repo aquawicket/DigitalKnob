@@ -23,12 +23,12 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #pragma once
 #ifndef DKRmlIframe_H
 #define DKRmlIframe_H
 
 #include "DKRmlIframe/DKRmlIframeInstancer.h"
+
 
 class DKRmlIframe : public DKObjectT<DKRmlIframe>
 {
@@ -37,6 +37,7 @@ public:
 	bool End();
 	std::shared_ptr<DKRmlIframeInstancer> ref;
 };
+
 
 REGISTER_OBJECT(DKRmlIframe, true)
 #endif //DKRmlIframe_H

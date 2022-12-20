@@ -1,3 +1,28 @@
+/*
+* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+*
+* For the latest information, see https://github.com/aquawicket/DigitalKnob
+*
+* Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files(the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions :
+*
+* The above copyright noticeand this permission notice shall be included in all
+* copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*/
 #pragma once
 #ifndef DKOSGCef_H
 #define DKOSGCef_H
@@ -6,12 +31,16 @@
 #include "DKOSGCef/DKOSGCefKeyboard.h"
 #include "DKCef/DKCef.h"
 #include "DKOSGWindow/DKOSGWindow.h"
+
+//WARNING_DISABLE
 #include <osg/MatrixTransform>
 #include <osgViewer/ViewerEventHandlers>
 #include <include/cef_client.h>
 #include <include/cef_render_handler.h>
 #include <include/cef_browser_process_handler.h>
 #include <include/cef_display_handler.h>
+//WARNING_ENABLE
+
 
 class DKOSGCefHandler;
 
@@ -85,7 +114,7 @@ public:
 	}
 	
 	void DoFrame(){
-		//DKDEBUGFUNC();
+		//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 		CefDoMessageLoopWork(); 
 	}
 
@@ -96,7 +125,7 @@ public:
 	}
 
 	void OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType type, const RectList &dirtyRects, const void *buffer, int width, int height){
-		//DKDEBUGFUNC(browser, type, dirtyRects, buffer, width, height);
+		//DKDEBUGFUNC(browser, type, dirtyRects, buffer, width, height); //EXCESSIVE LOGGING
 		if (browser->GetIdentifier() != DKCef::Get(dkosgcef->id)->current_browser->GetIdentifier()){ return; }
 		if (type == PET_VIEW && dirtyRects.size() > 0){
 			cef_image->setImage(width, height, 1, 4, GL_BGRA, GL_UNSIGNED_BYTE, (unsigned char*)(buffer), osg::Image::NO_DELETE);

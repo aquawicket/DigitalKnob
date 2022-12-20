@@ -31,6 +31,10 @@
 #include "DK/DKApp.h"
 #include "DK/DKClass.h"
 
+# if HAVE_sdl
+	#include "SDL.h"
+#endif
+
 unsigned int DKAndroid::android_width = 800;
 unsigned int DKAndroid::android_height = 480;
 unsigned int DKAndroid::android_mouseX = 0;
@@ -46,6 +50,10 @@ extern "C" {
 		DKDEBUGFUNC(vm, reserved);
 		thejvm = vm;
 		return JNI_VERSION_1_6;
+	}
+
+	JNIEXPORT void Java_com_digitalknob_dk_DKApp_testFunc(JNIEnv* env, jobject thiz){
+		DKINFO("Java_com_digitalknob_dk_DKApp_testFunc() \n");
 	}
 
 	void initJNIBridge(JNIEnv* env, jobject obj){
@@ -91,7 +99,7 @@ extern "C" {
 		}
 		//Call function with string parameter
 		jmethodID method = env->GetMethodID(cls, name.c_str(), "(Ljava/lang/String;)V");
-		if (!method) {
+		if (!method){
 			DKERROR("Could not get method\n");
 			return;
 		}
@@ -253,6 +261,48 @@ bool DKAndroid::GetMousePos(int& x, int& y){
 	x = android_mouseX;
 	y = android_mouseY;
 	return true;
+}
+
+bool DKAndroid::GetScreenHeight(int& h) {
+	DKDEBUGFUNC(h);
+	// https://stackoverflow.com/a/12134363/688352
+	/*
+	#include <sys/ioctl.h>
+	#include <linux/fb.h>
+	struct fb_var_screeninfo fb_var;
+	int fd = open("/dev/graphics/fb0", O_RDONLY);
+	ioctl(fd, FBIOGET_VSCREENINFO, &fb_var);
+	close(fd);
+	*/
+#if HAVE_sdl
+	SDL_DisplayMode sdl_displayMode;
+	SDL_GetCurrentDisplayMode(0, &sdl_displayMode);
+	h = sdl_displayMode.h;
+	return true;
+#else
+	return DKERROR("sdl unavailable! \n");
+#endif
+}
+
+bool DKAndroid::GetScreenWidth(int& w){
+	DKDEBUGFUNC(w);
+	// https://stackoverflow.com/a/12134363/688352
+	/*
+	#include <sys/ioctl.h>
+	#include <linux/fb.h>
+	struct fb_var_screeninfo fb_var;
+	int fd = open("/dev/graphics/fb0", O_RDONLY);
+	ioctl(fd, FBIOGET_VSCREENINFO, &fb_var);
+	close(fd);
+	*/
+#if HAVE_sdl
+	SDL_DisplayMode sdl_displayMode;
+	SDL_GetCurrentDisplayMode(0, &sdl_displayMode);
+	w = sdl_displayMode.w;
+	return true;
+#else 
+	return DKERROR("sdl unavailable! \n");
+#endif
 }
 
 /*

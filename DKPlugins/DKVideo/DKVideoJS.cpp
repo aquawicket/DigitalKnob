@@ -23,27 +23,23 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #ifdef HAVE_DKDuktape
-#include "DKVideo.h"
-#include "DKVideoJS.h"
+#include "DKVideo/DKVideo.h"
+#include "DKVideo/DKVideoJS.h"
 
 
-//////////////////////
-bool DKVideoJS::Init()
-{
+bool DKVideoJS::Init(){
 	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("CPP_DKVideo_Play", DKVideoJS::Play);
 	return true;
 }
 
-/////////////////////////////////////
-int DKVideoJS::Play(duk_context* ctx)
-{
+int DKVideoJS::Play(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString data = duk_require_string(ctx, 0);
 	DKVideo::Play(data);
 	return 1;
 }
+
 
 #endif //HAVE_DKDuktape

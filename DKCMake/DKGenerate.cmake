@@ -94,7 +94,7 @@ foreach(plugin ${dkdepend_list})
 	endif()
 	dk_debug(plugin_path)
 
-	#This executes the 3rdParty library builds, and dkplugin setup, creates CMakeLists.txt files
+	# This executes the 3rdParty library builds, and dkplugin setup, creates CMakeLists.txt files
 	include(${plugin_path}/DKMAKE.cmake)
 	
 	#check that each library is using the proper variables. Should be UPPERCASE plugin name.   I.E. boost = BOOST
@@ -139,14 +139,14 @@ foreach(plugin ${dkdepend_list})
 	if(${isDKPlugin} GREATER -1)
 		#Add the DKPlugin to the app project
 		if(EXISTS "${plugin_path}/CMakeLists.txt")
-			if(LINUX OR RASPBERRY)
+			if(VISUAL_STUDIO_IDE OR XCODE_IDE)
+				add_subdirectory(${plugin_path} ${plugin_path}/${OS})
+			else()
 				if(DEBUG)
 					add_subdirectory(${plugin_path} ${plugin_path}/${OS}/Debug)
 				elseif(RELEASE)
 					add_subdirectory(${plugin_path} ${plugin_path}/${OS}/Release)
 				endif()
-			else()
-				add_subdirectory(${plugin_path} ${plugin_path}/${OS})
 			endif()
 		endif()
 		
@@ -274,21 +274,41 @@ foreach(plugin ${dkdepend_list})
 				endif()
 			endif()
 			if(ANDROID_32)
-				ANDROID_dk_queueCommand(${DKCMAKE_BUILD} -DANDROID_32=ON -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON ${plugin_path})
-				if(DEBUG)
-					ANDROID32_dk_queueCommand(${MSBUILD} ${CURRENT_DIR}/${plugin}.sln /p:Configuration=Debug)
-				endif()
-				if(RELEASE)
-					ANDROID32_dk_queueCommand(${MSBUILD} ${CURRENT_DIR}/${plugin}.sln /p:Configuration=Release)
+				if(WIN_HOST)
+					ANDROID_dk_queueCommand(${DKCMAKE_BUILD} -DANDROID_32=ON -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON ${plugin_path})
+					if(DEBUG)
+						ANDROID32_dk_queueCommand(${MSBUILD} ${CURRENT_DIR}/${plugin}.sln /p:Configuration=Debug)
+					endif()
+					if(RELEASE)
+						ANDROID32_dk_queueCommand(${MSBUILD} ${CURRENT_DIR}/${plugin}.sln /p:Configuration=Release)
+					endif()
+				else() # Mac, Linux
+					if(DEBUG)
+						dk_queueCommand(${DKCMAKE_BUILD} -DANDROID_32=ON -DDEBUG=ON -DREBUILD=ON ${plugin_path})
+						dk_queueCommand(make)
+					elseif(RELEASE)
+						dk_queueCommand(${DKCMAKE_BUILD} -DANDROID_32=ON -DRELEASE=ON -DREBUILD=ON ${plugin_path})
+						dk_queueCommand(make)
+					endif()
 				endif()
 			endif()
 			if(ANDROID_64)
-				ANDROID_dk_queueCommand(${DKCMAKE_BUILD} -DANDROID_64=ON -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON ${plugin_path})
-				if(DEBUG)
-					ANDROID64_dk_queueCommand(${MSBUILD} ${CURRENT_DIR}/${plugin}.sln /p:Configuration=Debug)
-				endif()
-				if(RELEASE)
-					ANDROID64_dk_queueCommand(${MSBUILD} ${CURRENT_DIR}/${plugin}.sln /p:Configuration=Release)
+				if(WIN_HOST)
+					ANDROID_dk_queueCommand(${DKCMAKE_BUILD} -DANDROID_64=ON -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON ${plugin_path})
+					if(DEBUG)
+						ANDROID64_dk_queueCommand(${MSBUILD} ${CURRENT_DIR}/${plugin}.sln /p:Configuration=Debug)
+					endif()
+					if(RELEASE)
+						ANDROID64_dk_queueCommand(${MSBUILD} ${CURRENT_DIR}/${plugin}.sln /p:Configuration=Release)
+					endif()
+				else() # Mac, Linux
+					if(DEBUG)
+						dk_queueCommand(${DKCMAKE_BUILD} -DANDROID_64=ON -DDEBUG=ON -DREBUILD=ON ${plugin_path})
+						dk_queueCommand(make)
+					elseif(RELEASE)
+						dk_queueCommand(${DKCMAKE_BUILD} -DANDROID_64=ON -DRELEASE=ON -DREBUILD=ON ${plugin_path})
+						dk_queueCommand(make)
+					endif()
 				endif()
 			endif()
 		
@@ -586,6 +606,10 @@ endif(WIN_64)
 
 #######
 if(MAC)
+	#if(${APP_NAME} STREQUAL DKBuilder_APP)
+		set(DKMAC_USE_WRAPPER ON) # open app with terminal
+	#endif()
+	
 	###################### Backup Executable ###########################
 	if(DEBUG)
 		dk_copy(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app.backup TRUE)
@@ -640,7 +664,11 @@ if(MAC)
 	dk_set(PRODUCT_BUNDLE_IDENTIFIER com.digitalknob.${APP_NAME})
 	dk_set(CFBundleDevelopmentRegion en)
 	dk_set(CFBundleDisplayName ${APP_NAME})
-	dk_set(CFBundleExecutable wrapper) ##${APP_NAME})
+	if(DKMAC_USE_WRAPPER)
+		dk_set(CFBundleExecutable wrapper)
+	else()
+		dk_set(CFBundleExecutable ${APP_NAME})
+	endif()
 	dk_set(CFBundleGetInfoString "DigitalKnob")
 	dk_set(CFBundleIconFile "icons.icns")
 	#dk_set(CFBundleIconFiles "icons.icns")
@@ -683,27 +711,28 @@ if(MAC)
 	)
 	
 	# Copy the CEF framework into the app bundle
-	if(EXISTS ${CEF})
+	if(EXISTS ${CEF_BINARY})
 		dk_info("Adding Chromium Embedded Framework.framework to bundle . . .")
-		add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory "${CEF}/$<CONFIG>/Chromium Embedded Framework.framework" "$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/Chromium Embedded Framework.framework")
+		add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory "${CEF_BINARY}/$<CONFIG>/Chromium Embedded Framework.framework" "$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/Chromium Embedded Framework.framework")
 	endif()
 	
-	# Copy the DKCefChild into the app bundle
+	# Copy the DKCefChild.app into the app bundle as "DKAppName Helper.app"
 	if(EXISTS "${DKPLUGINS}/DKCefChild/${OS}/Release/DKCefChild.app")
-		dk_info("Adding Chromium Embedded Framework.framework to bundle . . .")
-		add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy "${DKPLUGINS}/DKCefChild/${OS}/$<CONFIG>/DKCefChild.app" "$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/${APP_NAME} Helper.app")
+		dk_info("Adding ${APP_NAME} Helper to bundle . . .")
+		add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory "${DKPLUGINS}/DKCefChild/${OS}/$<CONFIG>/DKCefChild.app" "$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/${APP_NAME} Helper.app")
+		add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy "${DKPLUGINS}/DKCefChild/${OS}/$<CONFIG>/DKCefChild.app/Contents/MacOS/DKCefChild" "$<TARGET_FILE_DIR:${APP_NAME}>/../Frameworks/${APP_NAME} Helper.app/Contents/MacOS/${APP_NAME} Helper")
 	endif()
 	
 	# Make bundle open with Terminal
 	# https://github.com/pyinstaller/pyinstaller/issues/5154#issuecomment-690646012
-	if(true)
+	if(DKMAC_USE_WRAPPER)
 		dk_info("Making bundle app run in terminal on double-click . . .")
 		set(TERMINAL_SCRIPT 
 			"\#!/bin/bash\n"
 			"dir=$(cd \"$( dirname \"\${0}\")\" && pwd )\n"
 			"Open -a \"Terminal\" \"\${dir}/${APP_NAME}\""
 		)
-		file(WRITE ${DKPROJECT}/${OS}/wrapper ${TERMINAL_SCRIPT}) #${APP_NAME}
+		file(WRITE ${DKPROJECT}/${OS}/wrapper ${TERMINAL_SCRIPT})
 		dk_executeProcess(chmod +x ${DKPROJECT}/${OS}/wrapper WORKING_DIRECTORY ${DKPROJECT}/${OS})
 		add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/${OS}/wrapper" "$<TARGET_FILE_DIR:${APP_NAME}>/wrapper")
 	endif()
@@ -836,7 +865,10 @@ if(IOS OR IOSSIM)
 	#dk_set(UILaunchStoryboardName dk)
 	#dk_set(UIMainStoryboardFile dk.storyboard)
 	set_target_properties(${APP_NAME} PROPERTIES MACOSX_BUNDLE TRUE MACOSX_BUNDLE_INFO_PLIST ${DKPLUGINS}/_DKIMPORT/ios/Info.plist)
-			
+	
+	###################### Disable bitcode ############################
+	set_target_properties(${APP_NAME} PROPERTIES XCODE_ATTRIBUTE_ENABLE_BITCODE "NO")
+	
 	###################### Add Assets to Bundle #######################
 	add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${DKPROJECT}/assets $<TARGET_FILE_DIR:${APP_NAME}>/assets)
 	#if(EXISTS ${DKPROJECT}/icons/mac/icons.icns)
@@ -1054,7 +1086,7 @@ if(ANDROID)
 	endif()
 	dk_copy(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
 	dk_copy(${DKPROJECT}/icons/icon.png ${DKPROJECT}/${OS}/res/drawable/icon.png TRUE)
-		
+	
 	###################### Backup Executable ###########################
 	if(DEBUG)
 		dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.apk ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.apk.backup OVERWRITE)
@@ -1067,18 +1099,35 @@ if(ANDROID)
 	set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/app/src/main/jniLibs/${ANDROID_ABI}")
 	set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/app/src/main/jniLibs/${ANDROID_ABI}")
 
+	######## Create local.properties file that points to android-sdk path #############
+	set(localProperties "sdk.dir=${ANDROID-SDK}")
+	
+	####### Import Android Build files ############################################
 	if(ANDROID_32)
 		dk_copy(${DKPLUGINS}/_DKIMPORT/android/ ${DKPROJECT}/android32/ FALSE)
 		dk_copy(${DKPLUGINS}/_DKIMPORT/android32/ ${DKPROJECT}/android32/ FALSE)
+		dk_copy(${DKPROJECT}/assets ${DKPROJECT}/android32/app/src/main/assets)
+		file(WRITE ${DKPROJECT}/android32/local.properties ${localProperties})
+		dkFileReplace(${DKPROJECT}/android32/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}")
 	endif()
-	if(ANDROID_64)
+	if(ANDROID_64) 
 		dk_copy(${DKPLUGINS}/_DKIMPORT/android/ ${DKPROJECT}/android64/ FALSE)
 		dk_copy(${DKPLUGINS}/_DKIMPORT/android64/ ${DKPROJECT}/android64/ FALSE)
+		dk_copy(${DKPROJECT}/assets ${DKPROJECT}/android64/app/src/main/assets)
+		file(WRITE ${DKPROJECT}/android64/local.properties ${localProperties})
+		dkFileReplace(${DKPROJECT}/android64/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}")
 	endif()
-	set(CMAKE_ANDROID_GUI 1)
 	
+	
+	####### Append -frtti to C/CXX Flags ##############################
+	set(CMAKE_ANDROID_GUI 1)
 	dk_set(CMAKE_C_FLAGS ${CMAKE_C_FLAGS} -frtti)
 	dk_set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} -frtti)
+	
+	# https://stackoverflow.com/a/53806411/688352
+	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS_RELEASE} -Wl,--hash-style=both")
+    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS_RELEASE} -Wl,--hash-style=both")
+    set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS_RELEASE} -Wl,--hash-style=both")
 	
 	#add_library(${APP_NAME} SHARED ${App_SRC})
 	add_library(main SHARED ${App_SRC})
@@ -1094,12 +1143,22 @@ if(ANDROID)
 	######################### Link Libraries ###########################
 	#target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	#target_include_directories(${APP_NAME} PUBLIC ${SDL2}/include)
-	target_link_libraries(main ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
+	if(WIN_HOST)
+		target_link_libraries(main ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
+	else()
+		if(DEBUG)
+			target_link_libraries(main ${DEBUG_LIBS} ${LIBS})
+		elseif(RELEASE)
+			target_link_libraries(main ${RELEASE_LIBS} ${LIBS})
+		endif()
+	endif()
 	target_include_directories(main PUBLIC ${SDL2}/include)
 	
-	include_external_msproject(gradleAPK gradleAPK.androidproj TYPE 39E2626F-3545-4960-A6E8-258AD8476CE5)
-	set_property(TARGET gradleAPK PROPERTY VS_SOLUTION_DEPLOY ON) # NOT WORKING
-	set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT gradleAPK)
+	if(WIN_HOST)
+		include_external_msproject(gradleAPK gradleAPK.androidproj TYPE 39E2626F-3545-4960-A6E8-258AD8476CE5)
+		set_property(TARGET gradleAPK PROPERTY VS_SOLUTION_DEPLOY ON) # NOT WORKING
+		set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT gradleAPK)
+	endif()
 		
 	####################### Do Post Build Stuff #######################
 	# "https://gist.github.com/baiwfg2/39881ba703e9c74e95366ed422641609"

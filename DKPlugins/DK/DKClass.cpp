@@ -25,7 +25,7 @@
 */
 
 #include "DK/stdafx.h"
-#include "DKClass.h"
+#include "DK/DKClass.h"
 
 std::map<DKString, DKClass*>* DKClass::classes = NULL;
 DKFunctionMap* DKClass::functions = NULL;
@@ -41,7 +41,7 @@ void DKClass::Register(const DKString& klass, DKClass* _class, bool _singleton){
 }
 
 DKObject* DKClass::_Instance(const DKString& data){
-	//DKDEBUGFUNC(data);
+	DKDEBUGFUNC(data);
 	DKStringArray arry;
 	toStringArray(arry, data, ",");
 	if(has(arry[0],".html"))
@@ -76,7 +76,7 @@ DKObject* DKClass::_Get(const DKString& data){
 }
 
 bool DKClass::_Valid(const DKString& data){
-	DKDEBUGFUNC(data);
+	//DKDEBUGFUNC(data);  // EXCESSIVE LOGGING
 	DKStringArray arry;
 	toStringArray(arry, data, ",");
 	if(classes && (*classes)[arry[0]]){

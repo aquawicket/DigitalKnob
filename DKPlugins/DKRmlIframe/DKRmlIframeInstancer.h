@@ -27,6 +27,7 @@
 #ifndef DKRmlIframeInstancer_H
 #define DKRmlIframeInstancer_H
 
+//WARNING_DISABLE
 #include "../Include/RmlUi/Core/ComputedValues.h"
 #include "../Include/RmlUi/Core/Element.h"
 #include "../Include/RmlUi/Core/ElementDocument.h"
@@ -37,6 +38,8 @@
 #include "../Include/RmlUi/Core/PropertyIdSet.h"
 #include "../Include/RmlUi/Core/StyleSheet.h"
 #include "../Include/RmlUi/Core/URL.h"
+//WARNING_ENABLE
+
 
 class RmlIframe : public Rml::Element 
 {

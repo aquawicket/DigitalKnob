@@ -28,7 +28,6 @@
 #ifndef DKDuktapeDom_H
 #define DKDuktapeDom_H
 
-
 #include "DKDuktape/DKDuktape.h"
 
 

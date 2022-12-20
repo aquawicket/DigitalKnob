@@ -28,18 +28,20 @@
 #ifndef DKCef_H
 #define DKCef_H
 
-#pragma warning(push, 0); //Silence warnings from 3rd party headers
+//#define USE_DKV8 1
+
+//WARNING_DISABLE
 	#include <include/cef_client.h>
 	#include <include/cef_render_handler.h>
 	#include <include/cef_browser_process_handler.h>
-#pragma warning(pop);
+//WARNING_ENABLE
 
 #include "DK/DK.h"
 #include "DK/DKApp.h"
 #include "DKCef/DKCefApp.h"
-#include "DKCef/DKCefWindow.h"
+#include "DKCef/DKCEFWindow.h"
 
-class DKCefWindow;
+class DKCEFWindow;
 
 struct DKBrowser{
 	DKString id;
@@ -106,8 +108,8 @@ public:
 	CefRefPtr<CefBrowser> current_browser;
 	int keyboardFocus;
 	static CefRefPtr<DKCefApp> cefApp;
-	static CefRefPtr<CefClient> cefHandler; //external handler  (DKCefWindow, DKSDLCef or DKOSGCef)
-	DKCefWindow* dkCefWindow;
+	static CefRefPtr<CefClient> cefHandler; //external handler  (DKCEFWindow, DKSDLCef or DKOSGCef)
+	DKCEFWindow* dkCefWindow;
 	static unsigned long cefThreadId;
 	DialogCallback* fileDialogCallback;
 	static bool initialized;

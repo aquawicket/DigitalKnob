@@ -28,7 +28,7 @@
 // https://javascript.info/mixins
 
 #include "DK/DKApp.h"
-#include "DKDom.h"
+#include "DKDom/DKDom.h"
 #include "DKDom/DKDomDocumentOrShadowRoot.h"
 #include "DKDom/DKDomElement.h"
 

@@ -30,6 +30,7 @@
 #define DKAssetsV8_H
 #include "DKCef/DKCef.h"
 
+
 class DKAssetsV8 : public DKObjectT<DKAssetsV8>
 {
 public:

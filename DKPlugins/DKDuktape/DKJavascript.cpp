@@ -29,6 +29,7 @@
 #include "DKDuktape/DKDuktape.h"
 #include "DKDuktape/DKJavascript.h"
 
+
 bool DKJavascript::Init(){
 	DKDEBUGFUNC();
 	//data = ["DKJavascript", "path/file.ext")

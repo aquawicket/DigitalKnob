@@ -23,11 +23,11 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #ifdef HAVE_DKDuktape
 #include "DK/stdafx.h"
-#include "DKRml.h"
-#include "DKRmlJS.h"
+#include "DKRml/DKRml.h"
+#include "DKRml/DKRmlJS.h"
+
 
 bool DKRmlJS::Init() {
 	DKDEBUGFUNC();
@@ -60,7 +60,8 @@ int DKRmlJS::DebuggerToggle(duk_context* ctx) {
 int DKRmlJS::LoadUrl(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	DKString file = duk_require_string(ctx, 0);
-	if (!DKRml::Get()->LoadUrl(file)) { return 0; }
+	if (!DKRml::Get()->LoadUrl(file))
+		return DKERROR("DKRml::Get()->LoadUrl() failed! \n");
 	return true;
 }
 

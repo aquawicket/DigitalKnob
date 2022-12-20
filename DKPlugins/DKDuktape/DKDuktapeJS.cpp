@@ -36,10 +36,13 @@
 #include "DK/DKUtil.h"
 #include "DK/DKTextColor.h"
 #include "DKDuktape/DKDuktapeJS.h"
+
+//WARNING_DISABLE
 #include <signal.h>
 #if WIN32
 	#include "conio.h"          //getch, getche
 #endif
+//WARNING_ENABLE
 
 
 bool DKDuktapeJS::Init(){

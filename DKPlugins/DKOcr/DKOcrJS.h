@@ -30,6 +30,7 @@
 #define DKOcrJS_H
 #include "DKDuktape/DKDuktape.h"
 
+
 class DKOcrJS : public DKObjectT<DKOcrJS>
 {
 public:

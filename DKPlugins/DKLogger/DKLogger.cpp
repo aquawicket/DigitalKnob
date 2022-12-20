@@ -25,9 +25,12 @@
 */
 
 #include "DK/stdafx.h"
-#include "DKLogger.h"
-#include "DKFile.h"
+#include "DKLogger/DKLogger.h"
+#include "DK/DKFile.h"
+
+//WARNING_DISABLE
 #include <cstring>
+//WARING_ENABLE
 
 
 /*
@@ -38,9 +41,6 @@ DKString& getLogSetting(DKLOG_LEVEL){
 bool setLogSetting(DKLOG_LEVEL, const DKString&){
 
 }
-
-
-
 
 DKString logSettings[7];
 extern DKString log_assert      = "1";

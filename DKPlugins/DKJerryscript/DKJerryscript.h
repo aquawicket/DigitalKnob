@@ -28,8 +28,12 @@
 #ifndef DKJerryscript_H
 #define DKJerryscript_H
 #include "DK/DK.h"
-#include "jerryscript.h"
-//#include "DK/DKEvents.h"
+//#include "DK/DKEvent.h"
+
+//WARNING_DISABLE
+	#include "jerryscript.h"
+//WARNING_ENABLE
+
 
 class DKJerryscript : public DKObjectT<DKJerryscript>{
 public:
@@ -37,7 +41,6 @@ public:
 	bool End();
 	
 	//static bool AttachFunction(const DKString& name, const DKString& vars);
-
 };
 
 

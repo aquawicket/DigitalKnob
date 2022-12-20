@@ -29,9 +29,12 @@
 #ifndef DKObject_H
 #define DKObject_H
 
+//WARNING_DISABLE
 #include <map> //std::map
-#include "DKLog.h"
 #include <iostream>
+//WARNING_ENABLE
+
+#include "DK/DKLog.h"
 
 class DKObject{
 public:
@@ -67,7 +70,7 @@ public:
 		instances.clear();
 	}
 	static T* Instance(const DKString& data){ //data = (id,var1,var2,var3,etc)
-		//DKDEBUGFUNC(data);
+		DKDEBUGFUNC(data);
 		//if(has(data, ".js"))
 		//	DKERROR("DKObject::Instance(): this is a .js file. Can't work for Cef\n");
 		if(!instances.empty() && _singleton)
@@ -111,7 +114,7 @@ public:
 	static void Close(const DKString& id = ""){
 		DKDEBUGFUNC(id);		
 		//if(id.empty()){ return; }
-		for (size_t i = instances.size() - 1; i >= 0 && i < instances.size(); --i) {
+		for (size_t i = instances.size() - 1; i >= 0 && i < instances.size(); --i){
 			if(id.empty() || same(id, instances[i]->data[1])){
 				//if(has(id,"/"))
 				//	DKERROR("Close(): "+id+" contains a /\n");
@@ -130,10 +133,10 @@ public:
 		}
 	}
 	static bool Valid(const DKString& id = ""){
-		//DKDEBUGFUNC(id);
+		//DKDEBUGFUNC(id); // EXCESSIVE LOGGING
 		for(unsigned int i=0; i<instances.size(); ++i){
 			if(same(id, instances[i]->data[1])){
-				if (instances[i]) {
+				if (instances[i]){
 					//DKDEBUGRETURN(id, true);
 					return true;
 				}
@@ -142,7 +145,7 @@ public:
 		return false;
 	}
 	static T* Get(const DKString& id = ""){
-		//DKDEBUGFUNC(id);
+		DKDEBUGFUNC(id);
 		for(unsigned int i=0; i<instances.size(); ++i){
 			if(id.empty() || same(id, instances[i]->data[1])){
 				if (instances[i])

@@ -23,22 +23,22 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #pragma once
 #ifndef DKWebview_H
 #define DKWebview_H
 
+//WARNING_DISABLE
 #ifdef ANDROID
 #include <jni.h>
 #endif
+//WARNING_ENABLE
 
-/////////////////////////////////////////////
+
 class DKWebview : public DKObjectT<DKWebview>
 {
 public:
 	bool Init();
 	bool End();
-	
 	bool PrintFunctions(void* input, void* output);
 	bool ReceiveValue(void* input, void* output);
 	bool SendValue(void* input, void* output);
@@ -46,8 +46,7 @@ public:
 	bool onCreate(void* input, void* output);
 	
 };
-
 REGISTER_OBJECT(DKWebview, true)
 
-#endif //DKWebview_H
 
+#endif //DKWebview_H

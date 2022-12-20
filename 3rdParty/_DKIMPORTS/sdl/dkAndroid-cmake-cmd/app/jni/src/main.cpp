@@ -35,7 +35,7 @@ int main(int argc, char** argsv)
 		SDL_Log("Could not load font %s\n", SDL_GetError());
 	}
 	SDL_Color textColor = { 255, 255, 255, 0 };
-	SDL_Surface* surface = TTF_RenderText_Solid(font, "Hello World", textColor);
+	SDL_Surface* surface = TTF_RenderText_Solid(font, "dkAndroid-cmake-cmd", textColor);
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
 	SDL_Rect rect_tex = { 200, 200, surface ? surface->w : 0, surface ? surface->h : 0 };
 	SDL_FreeSurface(surface);

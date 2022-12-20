@@ -23,13 +23,13 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #ifdef HAVE_DKDuktape 
 #pragma once
 #ifndef DKWebSocketsJS_H
 #define DKWebSocketsJS_H
 
 #include "DKDuktape/DKDuktape.h"
+
 
 class DKWebSocketsJS : public DKObjectT<DKWebSocketsJS>
 {
@@ -43,8 +43,8 @@ public:
 	static int MessageToClient(duk_context* ctx);
 	static int MessageToServer(duk_context* ctx);
 };
-
 REGISTER_OBJECT(DKWebSocketsJS, true)
+
 
 #endif //DKWebSocketsJS_H
 #endif //HAVE_DKDuktape

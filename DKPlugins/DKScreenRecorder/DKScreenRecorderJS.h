@@ -31,7 +31,7 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-///////////////////////////////////////////////////////////////
+
 class DKScreenRecorderJS : public DKObjectT<DKScreenRecorderJS>
 {
 public:
@@ -41,7 +41,7 @@ public:
 	static int Stop(duk_context* ctx);
 };
 
-REGISTER_OBJECT(DKScreenRecorderJS, true)
 
+REGISTER_OBJECT(DKScreenRecorderJS, true)
 #endif //DKScreenRecorderJS_H
 #endif //HAVE_DKDuktape

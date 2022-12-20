@@ -23,10 +23,9 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #ifdef HAVE_DKDuktape 
-#include "DKXmlJS.h"
-#include "DKXml.h"
+#include "DKXml/DKXmlJS.h"
+#include "DKXml/DKXml.h"
 
 
 bool DKXmlJS::Init() {
@@ -46,5 +45,6 @@ int DKXmlJS::GetXmlNode(duk_context* ctx) {
 	duk_push_string(ctx, libraries.c_str());
 	return 1;
 }
+
 
 #endif //HAVE_DKDuktape

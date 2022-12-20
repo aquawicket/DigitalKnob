@@ -29,8 +29,10 @@
 #ifndef DKSDLRMLRENDERER_H
 #define DKSDLRMLRENDERER_H
 
+//WARNING_DISABLE
 #include "SDL.h"
 #include "RmlUi/Core/RenderInterface.h"
+//WARNING_ENABLE
 
 
 class DKSDLRmlRenderer : public Rml::RenderInterface

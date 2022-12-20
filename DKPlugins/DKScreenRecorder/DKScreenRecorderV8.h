@@ -31,7 +31,7 @@
 
 #include "DKCef/DKCef.h"
 
-///////////////////////////////////////////////////////////////
+
 class DKScreenRecorderV8 : public DKObjectT<DKScreenRecorderV8>
 {
 public:
@@ -42,7 +42,7 @@ public:
 	static bool Stop(CefArgs args, CefReturn retval);
 };
 
-REGISTER_OBJECT(DKScreenRecorderV8, false);
 
+REGISTER_OBJECT(DKScreenRecorderV8, false);
 #endif //DKScreenRecorderV8_H
 #endif //HAVE_DKCef

@@ -27,8 +27,9 @@
 #ifdef HAVE_rtmidi
 #ifdef HAVE_DKDuktape
 
-#include "DKMidi.h"
-#include "DKMidiJS.h"
+#include "DKMidi/DKMidi.h"
+#include "DKMidi/DKMidiJS.h"
+
 
 bool DKMidiJS::Init(){
 	DKDEBUGFUNC();

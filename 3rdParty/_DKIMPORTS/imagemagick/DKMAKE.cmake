@@ -7,9 +7,9 @@
 
 
 ### IMPORT ###
-WIN_dk_import	(http://ftp.icm.edu.pl/packages/ImageMagick/binaries/ImageMagick-7.1.0-portable-Q16-x86.zip)
+WIN_dk_import	(http://ftp.icm.edu.pl/packages/ImageMagick/binaries/ImageMagick-7.1.0-53-portable-Q16-x86.zip)
 UNIX_dk_import	(https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-0.zip)
-WIN_dk_set		(IMAGEMAGICK_CONVERT ${IMAGEMAGICK}/convert.exe) # TODO: rename to IMAGEMAGICK_CONVERT_EXE
+WIN_HOST_dk_set	(IMAGEMAGICK_CONVERT ${IMAGEMAGICK}/convert.exe) # TODO: rename to IMAGEMAGICK_CONVERT_EXE
 
 
 ### LINK ###
@@ -21,18 +21,10 @@ UNIX_dk_libRelease	(${IMAGEMAGICK}/${OS}/${RELEASE_DIR}/libimagemagick.a)
 
 
 ### GENERATE / COMPILE ###
-if(WIN OR ANDROID)
-	DEBUG_dk_setPath(${IMAGEMAGICK}/${OS}/${DEBUG_DIR})
-	DEBUG_dk_msys(${DKCONFIGURE_BUILD})
-	DEBUG_dk_msys(make)
-	RELEASE_dk_setPath(${IMAGEMAGICK}/${OS}/${RELEASE_DIR})
-	RELEASE_dk_msys(${DKCONFIGURE_BUILD})
-	RELEASE_dk_msys(make)
-else()
-	DEBUG_dk_setPath(${IMAGEMAGICK}/${OS}/${DEBUG_DIR})
-	DEBUG_dk_queueCommand(${DKCONFIGURE_BUILD})
-	DEBUG_dk_queueCommand(make)
-	RELEASE_dk_setPath(${IMAGEMAGICK}/${OS}/${RELEASE_DIR})
-	RELEASE_dk_queueCommand(${DKCONFIGURE_BUILD})
-	RELEASE_dk_queueCommand(make)
-endif()
+DEBUG_dk_setPath		(${IMAGEMAGICK}/${OS}/${DEBUG_DIR})
+DEBUG_dk_queueShell		(${DKCONFIGURE_BUILD})
+DEBUG_dk_queueShell		(make)
+
+RELEASE_dk_setPath		(${IMAGEMAGICK}/${OS}/${RELEASE_DIR})
+RELEASE_dk_queueShell	(${DKCONFIGURE_BUILD})
+RELEASE_dk_queueShell	(make)

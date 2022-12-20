@@ -9,8 +9,8 @@ else {
 
 android {
     compileSdkVersion 31
-	ndkVersion "22.1.7171670"
-	ndkPath 'C:/Users/Administrator/digitalknob/DK/3rdParty/android-sdk/ndk/22.1.7171670'
+	ndkVersion "23.1.7779620"
+	ndkPath 'C:/Users/Administrator/digitalknob/DK/3rdParty/android-sdk/ndk/23.1.7779620'
     defaultConfig {
         if (buildAsApplication) {
             applicationId "org.libsdl.app"
@@ -22,7 +22,7 @@ android {
         externalNativeBuild {
             cmake {
 				arguments "-DANDROID_APP_PLATFORM=android-26", "-DANDROID_STL=c++_static"
-                abiFilters 'armeabi-v7a' //, 'arm64-v8a', 'x86', 'x86_64'
+                abiFilters 'arm64-v8a' //, 'armeabi-v7a', 'x86', 'x86_64'
             }
         }
     }

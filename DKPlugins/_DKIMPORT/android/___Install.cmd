@@ -36,5 +36,7 @@ if %GRADLE% EQU 1 (
 %IF_ERROR% "Failed to Install the apk package to android device"
 
 
-echo 17. Copying assets to device
-call %APP_ROOT%___CopyAssets.cmd %PACKAGE_NAME%
+::echo 17. Copying assets to device
+::call %APP_ROOT%___CopyAssets.cmd %PACKAGE_NAME% 
+ 
+%DKEND% 

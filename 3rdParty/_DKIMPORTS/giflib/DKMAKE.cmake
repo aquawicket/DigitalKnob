@@ -4,10 +4,12 @@
 # https://github.com/mirrorer/giflib/archive/fa37672085ce4b3d62c51627ab3c8cf2dda8009a.zip
 # https://sourceforge.net/projects/giflib/files/giflib-5.1.1.tar.gz
 
+# https://stackoverflow.com/a/34102586/688352  #'aclocal-1.15' is missing on your system
+
 
 ### DEPEND ###
-WIN32_dk_depend(mingw32)
-WIN64_dk_depend(mingw64)
+#WIN32_dk_depend(mingw32)
+#WIN64_dk_depend(mingw64)
 WIN_dk_depend(msys)
 #WIN_dk_depend(msys2)
 MAC_dk_depend(autotools)
@@ -20,16 +22,18 @@ dk_import(https://github.com/mirrorer/giflib.git PATCH)
 
 ### LINK ###
 dk_include				(${GIFLIB}/lib)
-WIN_dk_libDebug			(${GIFLIB}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
-WIN_dk_libRelease		(${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
-APPLE_dk_libDebug		(${GIFLIB}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
-APPLE_dk_libRelease		(${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
-LINUX_dk_libDebug		(${GIFLIB}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
-LINUX_dk_libRelease		(${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
-RASPBERRY_dk_libDebug	(${GIFLIB}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
-RASPBERRY_dk_libRelease	(${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
-ANDROID_dk_libDebug		(${GIFLIB}/${OS}/${DEBUG_DIR}/libgiflib.a)
-ANDROID_dk_libRelease	(${GIFLIB}/${OS}/${RELEASE_DIR}/libgiflib.a)
+if(VISUAL_STUDIO_IDE)
+	WIN_dk_libDebug			(${GIFLIB}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
+	WIN_dk_libRelease		(${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
+	ANDROID_dk_libDebug		(${GIFLIB}/${OS}/${DEBUG_DIR}/libgiflib.a)
+	ANDROID_dk_libRelease	(${GIFLIB}/${OS}/${RELEASE_DIR}/libgiflib.a)
+elseif(XCODE_IDE)
+	dk_libDebug		(${GIFLIB}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
+	dk_libRelease	(${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
+else()
+	dk_libDebug		(${GIFLIB}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
+	dk_libRelease	(${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
+endif()
 
 
 ### 3RDPARTY LINK ###
@@ -41,58 +45,35 @@ ANDROID_dk_set	(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIFLIB}/lib -DGIF_INCLUDE_DIR2=
 
 
 ### GENERATE / COMPILE ###
-#WIN_DEBUG_dk_setPath				(${GIFLIB})
-#WIN_DEBUG_dk_queueCommand			(autoreconf -f -i)
-WIN_DEBUG_dk_setPath				(${GIFLIB}/${OS}/${DEBUG_DIR})
-WIN_DEBUG_dk_msys					(${DKCONFIGURE_BUILD})
-WIN_DEBUG_dk_msys					(make -C lib)
+if(NOT WIN_HOST)
+	dk_setPath		(${GIFLIB})
+	dk_queueShell	(autoreconf -f -i)
+endif()
 
-#WIN_RELEASE_dk_setPath				(${GIFLIB})
-#WIN_RELEASE_dk_queueCommand		(autoreconf -f -i)
-WIN_RELEASE_dk_setPath				(${GIFLIB}/${OS}/${RELEASE_DIR})
-WIN_RELEASE_dk_msys					(${DKCONFIGURE_BUILD})
-WIN_RELEASE_dk_msys					(make -C lib)
+string(REPLACE "-std=c17" "" GIFLIB_CONFIGURE "${DKCONFIGURE_BUILD}")
+string(REPLACE "-std=c++1z" "" GIFLIB_CONFIGURE "${GIFLIB_CONFIGURE}")
+string(REPLACE "  " " " GIFLIB_CONFIGURE "${GIFLIB_CONFIGURE}")
 
-
-APPLE_DEBUG_dk_setPath				(${GIFLIB})
-APPLE_DEBUG_dk_queueCommand			(autoreconf -f -i)
-APPLE_DEBUG_dk_setPath				(${GIFLIB}/${OS}/${DEBUG_DIR})
-APPLE_DEBUG_dk_queueCommand			(${DKCONFIGURE_BUILD})
-APPLE_DEBUG_dk_queueCommand			(make -C lib)
-
-APPLE_RELEASE_dk_setPath			(${GIFLIB})
-APPLE_RELEASE_dk_queueCommand		(autoreconf -f -i)
-APPLE_RELEASE_dk_setPath			(${GIFLIB}/${OS}/${RELEASE_DIR})
-APPLE_RELEASE_dk_queueCommand		(${DKCONFIGURE_BUILD})
-APPLE_RELEASE_dk_queueCommand		(make -C lib)
-
-
-LINUX_DEBUG_dk_setPath				(${GIFLIB})
-LINUX_DEBUG_dk_queueCommand			(autoreconf -f -i)
-LINUX_DEBUG_dk_setPath				(${GIFLIB}/${OS}/${DEBUG_DIR})
-LINUX_DEBUG_dk_queueCommand			(${DKCONFIGURE_BUILD})
-LINUX_DEBUG_dk_queueCommand			(make -C lib)
-
-LINUX_RELEASE_dk_setPath			(${GIFLIB})
-LINUX_RELEASE_dk_queueCommand		(autoreconf -f -i)
-LINUX_RELEASE_dk_setPath			(${GIFLIB}/${OS}/${RELEASE_DIR})
-LINUX_RELEASE_dk_queueCommand		(${DKCONFIGURE_BUILD})
-LINUX_RELEASE_dk_queueCommand		(make -C lib)
-
-
-RASPBERRY_DEBUG_dk_setPath			(${GIFLIB})
-RASPBERRY_DEBUG_dk_queueCommand		(autoreconf -f -i)
-RASPBERRY_DEBUG_dk_setPath			(${GIFLIB}/${OS}/${DEBUG_DIR})
-RASPBERRY_DEBUG_dk_queueCommand		(${DKCONFIGURE_BUILD})
-RASPBERRY_DEBUG_dk_queueCommand		(make -C lib)
-
-RASPBERRY_RELEASE_dk_setPath		(${GIFLIB})
-RASPBERRY_RELEASE_dk_queueCommand	(autoreconf -f -i)
-RASPBERRY_RELEASE_dk_setPath		(${GIFLIB}/${OS}/${RELEASE_DIR})
-RASPBERRY_RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
-RASPBERRY_RELEASE_dk_queueCommand	(make -C lib)
-
-
-ANDROID_dk_setPath					(${GIFLIB}/${BUILD_DIR})
-ANDROID_dk_queueCommand				(${DKCMAKE_BUILD} ${GIFLIB})
-ANDROID_dk_visualStudio				(${GIFLIB_FOLDER} giflib)
+if(NOT ANDROID)
+	DEBUG_dk_setPath	(${GIFLIB}/${OS}/${DEBUG_DIR})
+	DEBUG_dk_queueShell	(${GIFLIB_CONFIGURE})
+	DEBUG_dk_queueShell	(make -C lib)
+	RELEASE_dk_setPath		(${GIFLIB}/${OS}/${RELEASE_DIR})
+	RELEASE_dk_queueShell	(${GIFLIB_CONFIGURE})
+	RELEASE_dk_queueShell	(make -C lib)
+else()
+	if(VISUAL_STUDIO_IDE)
+		ANDROID_dk_queueCommand(${DKCMAKE_BUILD} ${GIFLIB})
+		ANDROID_dk_visualStudio(${GIFLIB_FOLDER} giflib)
+	#elseif(XCODE_IDE)
+	#	ANDROID_dk_queueCommand(${DKCMAKE_BUILD} ${GIFLIB})
+	#	ANDROID_dk_xcode(${GIFLIB_FOLDER} giflib)
+	else()
+		ANDROID_DEBUG_dk_setPath		(${GIFLIB}/${OS}/${DEBUG_DIR})
+		ANDROID_DEBUG_dk_queueShell		(${GIFLIB_CONFIGURE})
+		ANDROID_DEBUG_dk_queueShell		(make -C lib)
+		ANDROID_RELEASE_dk_setPath		(${GIFLIB}/${OS}/${RELEASE_DIR})
+		ANDROID_RELEASE_dk_queueShell	(${GIFLIB_CONFIGURE})
+		ANDROID_RELEASE_dk_queueShell	(make -C lib)
+	endif()
+endif()

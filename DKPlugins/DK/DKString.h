@@ -33,10 +33,10 @@
 
 #define _SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING //silence <codecvt> deprecation warnings
 
+//WARNING_DISABLE
 #ifdef WIN32
 #include "windows.h"
 #endif
-
 #include <cstdio>  
 #include <vector>
 #include <string>
@@ -48,6 +48,7 @@
 #include <locale>
 #include <stdio.h>
 #include <stdlib.h>
+//WARNING_ENABLE
 
 /*
 #ifdef _MSC_VER

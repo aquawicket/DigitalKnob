@@ -20,7 +20,6 @@ UNIX_dk_libRelease	(${LIBWEBSOCKETS}/${OS}/${RELEASE_DIR}/lib/libwebsockets.a)
 
 
 ### GENERATE ###
-dk_setPath(${LIBWEBSOCKETS}/${BUILD_DIR})
 dk_queueCommand(${DKCMAKE_BUILD} -DLWS_WITH_SSL=OFF ${LIBWEBSOCKETS})
 
 

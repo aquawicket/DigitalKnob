@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-#pragma warning(push, 0); //Silence warning from 3rd party headers
+//WARNING_DISABLE
 	#if MAC
 		#include "include/wrapper/cef_library_loader.h"
 	#endif
@@ -39,9 +39,10 @@
 			#include "include/cef_sandbox_linux.h"
 		#endif
 	#endif
-#pragma warning(pop);
+//WARNING_ENABLE
 
-#include "DKCefChild.h"
+#include "DKCefChild/DKCefChild.h"
+
 
 CefRefPtr<CefListValue> DKCefChildV8Handler::myRetval;
 

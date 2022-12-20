@@ -27,8 +27,7 @@ ANDROID_dk_libRelease	(${SDL2_GIFLIB_SA}/${OS}/${RELEASE_DIR}/obj/local/armeabi-
 
 
 ### GENERATE ###
-dk_setPath		(${SDL2_GIFLIB_SA}/${BUILD_DIR})
-dk_queueCommand	(${DKCMAKE_BUILD} ${GIFLIB} ${SDL_CMAKE} ${SDL2_GIFLIB_SA})
+dk_queueCommand	(${DKCMAKE_BUILD} ${GIFLIB_CMAKE} ${SDL_CMAKE} ${SDL2_GIFLIB_SA})
 
 
 ### COMPILE ###

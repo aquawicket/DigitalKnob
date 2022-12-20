@@ -32,13 +32,17 @@
 
 #ifdef WIN32
 	#define sleep Sleep
+//WARNING_DISABLE
 	#include <WS2tcpip.h>
+//WARNING_ENABLE
 #endif
 
 #ifdef LINUX
+//WARNING_DISABLE
 	#include <unistd.h>
 	#include <X11/Xlib.h>
 	#include <X11/Xutil.h>
+//WARNING_ENABLE
 	Display* DKScreenRecorder::disp;
 	Window DKScreenRecorder::root;
 	XImage* DKScreenRecorder::image;
@@ -51,8 +55,11 @@
 #endif
 
 #ifdef __IRIX__
+//WARNING_DISABLE
 	#include <netdb.h>
+//WARNING_ENABLE
 #endif
+
 
 static int fps = 30;
 static int bpp = 4;
@@ -67,7 +74,6 @@ cv::Mat DKScreenRecorder::brgMat;
 static long now = 0;
 static long lastFrame = 0;
 static int ticksPerFrame = 1000 / fps;
-
 
 bool DKScreenRecorder::Init(){
 	DKDEBUGFUNC();
@@ -122,7 +128,7 @@ bool DKScreenRecorder::Stop(){
 }
 
 void DKScreenRecorder::Loop(){
-	//DKDEBUGFUNC();
+	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 	//https://stackoverflow.com/questions/17575455/video-recording-is-too-fast#_=_
 	if(videoWriter.isOpened()){
 		//DrawBuffer(); //TODO: slow computers can't keep up with 30fps. Videos play too fast. 
@@ -157,7 +163,7 @@ void DKScreenRecorder::Loop(){
 }
 
 void DKScreenRecorder::DrawBuffer(){
-	//DKDEBUGFUNC();
+	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 #ifdef WIN32
 	//Capture Desktop with DirectX
 	if(capture == "DIRECTX"){

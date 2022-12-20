@@ -26,10 +26,12 @@
 
 #include "DK/DK.h"
 #include "DK/DKString.h"
-#include <RmlUi/Core.h>
-//#include <SFML_image.h>
 #include "DKSFMLRml/DKSFMLRmlRenderer.h"
 #include "DKSFMLWindow/DKSFMLWindow.h"
+
+//WARNING_DISABLE
+#include <RmlUi/Core.h>
+//#include <SFML_image.h>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
@@ -48,6 +50,8 @@
 #include <GL/glu.h>
 #include <GL/glx.h>
 #endif
+//WARNING_ENABLE
+
 
 //#if !defined(IOS) && !defined(ANDROID)
 //static PFNGLUSEPROGRAMOBJECTARBPROC glUseProgramObjectARB;
@@ -333,7 +337,7 @@ RmlSFMLRenderer::RmlSFMLRenderer(SFML_Renderer* renderer, SFML_Window* screen) {
 
 // Called by Rml when it wants to render geometry that it does not wish to optimise.
 void RmlSFMLRenderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, const Rml::TextureHandle texture, const Rml::Vector2f& translation) {
-	//DKDEBUGFUNC(vertices, num_vertices, indices, num_indices, texture, translation);
+	//DKDEBUGFUNC(vertices, num_vertices, indices, num_indices, texture, translation);  //EXCESSIVE LOGGING
 #if !defined(IOS) && !defined(ANDROID)
     // DISABLE SFML Shaders
 	DKSFMLWindow* dkSfmlWindow = DKSFMLWindow::Instance("DKSFMLWindow0");
@@ -432,9 +436,8 @@ void RmlSFMLRenderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, in
 
 
 // Called by Rml when it wants to enable or disable scissoring to clip content.
-void RmlSFMLRenderer::EnableScissorRegion(bool enable)
-{
-	//DKDEBUGFUNC(enable);
+void RmlSFMLRenderer::EnableScissorRegion(bool enable){
+	//DKDEBUGFUNC(enable);  //EXCESSIVE LOGGING
     if (enable)
         glEnable(GL_SCISSOR_TEST);
     else
@@ -442,18 +445,16 @@ void RmlSFMLRenderer::EnableScissorRegion(bool enable)
 }
 
 // Called by Rml when it wants to change the scissor region.
-void RmlSFMLRenderer::SetScissorRegion(int x, int y, int width, int height)
-{
-	//DKDEBUGFUNC(x, y, width, height);
+void RmlSFMLRenderer::SetScissorRegion(int x, int y, int width, int height){
+	//DKDEBUGFUNC(x, y, width, height);  //EXCESSIVE LOGGING
     int w_width, w_height;
     SFML_GetWindowSize(mScreen, &w_width, &w_height);
     glScissor(x, w_height - (y + height), width, height);
 }
 
 // Called by Rml when a texture is required by the library.
-bool RmlSFMLRenderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vector2i& texture_dimensions, const Rml::String& source)
-{
-	//DKDEBUGFUNC(texture_handle, texture_dimensions, "Rml::String&");
+bool RmlSFMLRenderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vector2i& texture_dimensions, const Rml::String& source){
+	DKDEBUGFUNC(texture_handle, texture_dimensions, "Rml::String&");
 
 	//CEF Texture
 	//The source variable is the id of the iframe. It will contain iframe_ in it's id.
@@ -540,9 +541,8 @@ bool RmlSFMLRenderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vecto
 }
 
 // Called by Rml when a texture is required to be built from an internally-generated sequence of pixels.
-bool RmlSFMLRenderer::GenerateTexture(Rml::TextureHandle& texture_handle, const Rml::byte* source, const Rml::Vector2i& source_dimensions)
-{
-	//DKDEBUGFUNC(texture_handle, source, source_dimensions);
+bool RmlSFMLRenderer::GenerateTexture(Rml::TextureHandle& texture_handle, const Rml::byte* source, const Rml::Vector2i& source_dimensions){
+	//DKDEBUGFUNC(texture_handle, source, source_dimensions); //EXCESSIVE LOGGING
     #if SFML_BYTEORDER == SFML_BIG_ENDIAN
         Uint32 rmask = 0xff000000;
         Uint32 gmask = 0x00ff0000;
@@ -564,9 +564,8 @@ bool RmlSFMLRenderer::GenerateTexture(Rml::TextureHandle& texture_handle, const 
 }
 
 // Called by Rml when a loaded texture is no longer required.
-void RmlSFMLRenderer::ReleaseTexture(Rml::TextureHandle texture_handle)
-{
-	//DKDEBUGFUNC(texture_handle);
+void RmlSFMLRenderer::ReleaseTexture(Rml::TextureHandle texture_handle){
+	DKDEBUGFUNC(texture_handle);
     SFML_DestroyTexture((SFML_Texture*) texture_handle);
 }
 */

@@ -87,14 +87,14 @@ class StackWalkerToConsole : public StackWalker{
 protected:
 	// do not print modules initialization
 	void OnLoadModule(LPCSTR, LPCSTR, DWORD64, DWORD, DWORD, LPCSTR, LPCSTR, ULONGLONG){
-		DKDEBUGFUNC();
+		//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 	}
 	// do not print symbols initialization
 	void OnSymInit(LPCSTR, DWORD, LPCSTR){
 		DKDEBUGFUNC();
 	}
 	virtual void OnOutput(LPCSTR szText){
-		DKDEBUGFUNC(szText);
+		//DKDEBUGFUNC(szText);  //EXCESSIVE LOGGING
 		DKWARN(szText);
 	}
 };
@@ -253,7 +253,7 @@ bool DKDebug::SendBugReport(const DKString& filename){
 }
 
 bool DKDebug::ShowStackTrace(const void* input, void* output){
-	//DKDEBUGFUNC(input, output);
+	//DKDEBUGFUNC(input, output);  //EXCESSIVE LOGGING
 	DK_UNUSED(input);
 	DK_UNUSED(output);
 #if WIN32
@@ -263,6 +263,6 @@ bool DKDebug::ShowStackTrace(const void* input, void* output){
 	DKINFO("\n");
 	return true;
 #else
-	return DKERROR("not implemented on this OS\n");
+	return DKREDINFO("not implemented on this OS \n");
 #endif
 }

@@ -28,6 +28,7 @@
 #include "DKFmt/DKFmtJS.h"
 #include "DKFmt/DKFmt.h" //access DKFmt::Funktion()
 
+
 bool DKFmtJS::Init(){
 	DKDEBUGFUNC();
 	return true;

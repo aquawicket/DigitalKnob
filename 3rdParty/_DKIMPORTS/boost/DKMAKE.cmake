@@ -171,7 +171,7 @@ RASPBERRY64_DEBUG_dk_queueCommand(${BOOST}/b2 toolset=gcc address-model=64 varia
 RASPBERRY64_RELEASE_dk_queueCommand(${BOOST}/b2 toolset=gcc address-model=64 variant=release link=static threading=multi runtime-debugging=off runtime-link=static --layout=system ${BOOST_WITH} ${BOOST_WITHOUT} --build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR})
 
 
-ANDROID_dk_msys(${BOOST}/SetupAndroid.sh)
+ANDROID_dk_shell(${BOOST}/SetupAndroid.sh)
 
 ANDROID32_DEBUG_dk_queueCommand(
 	#setx NDK_ROOT ${ANDROID-NDK} &&

@@ -8,16 +8,30 @@ set(COMPILE_CMAKE 0)
 
 if(COMPILE_CMAKE)
 	################################################################################################################
-	dk_depend(msys2)
-	#dk_import(https://github.com/Kitware/CMake)
-	
+	#dk_depend(msys)
+	dk_depend(openssl)
 	dk_import(https://github.com/Kitware/CMake.git)
 	#WIN_HOST_dk_set(CMAKE_VERSION 3a169af9524339e8b2e82130da7605040daf7925)
 	#dk_import(https://github.com/Kitware/CMake/archive/3a169af9524339e8b2e82130da7605040daf7925.zip)
 
-	dk_set(QUEUE_BUILD ON)
-	dk_msys(pacman -S --needed git base-devel mingw-w64-x86_64-gcc)
+	#dk_set(QUEUE_BUILD ON)
+	#dk_shell(pacman -S --needed git base-devel mingw-w64-x86_64-gcc)
 	
+	### GENERATE ###
+	dk_command(${DKCMAKE_BUILD} -DCMAKE_USE_OPENSSL=OFF ${CMAKE}) # ${OPENSSL_CMAKE}
+
+	### COMPILE ###
+	dk_set(QUEUE_BUILD ON)
+	dk_build(${CMAKE_FOLDER})
+
+	### GENERATE / COMPILE ###
+	#DEBUG_dk_setPath	(${CMAKE}/${OS}/${DEBUG_DIR})
+	#DEBUG_dk_shell		(../../configure)
+	#DEBUG_dk_shell		(make)
+	#RELEASE_dk_setPath	(${CMAKE}/${OS}/${RELEASE_DIR})
+	#RELEASE_dk_shell	(../../configure)
+	#RELEASE_dk_shell	(make)
+
 else()
 	###############################################################################################################
 	WIN_HOST_dk_set(CMAKE_VERSION 3.21.1)

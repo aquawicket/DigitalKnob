@@ -23,7 +23,6 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #ifdef HAVE_DKDuktape 
 #pragma once
 #ifndef DKVideoJS_H
@@ -31,7 +30,7 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-/////////////////////////////////////////////
+
 class DKVideoJS : public DKObjectT<DKVideoJS>
 {
 public:
@@ -39,8 +38,8 @@ public:
 	
 	static int Play(duk_context* ctx);
 };
-
 REGISTER_OBJECT(DKVideoJS, true)
+
 
 #endif //DKVideoJS_H
 #endif //HAVE_DKDuktape

@@ -26,7 +26,11 @@
 
 #include "DK/stdafx.h"
 #include "DKFmt/DKFmt.h"
+
+//WARNING_DISABLE
 #include "fmt/core.h"
+//WARNING_ENABLE
+
 
 bool DKFmt::Init(){
 	DKDEBUGFUNC();	

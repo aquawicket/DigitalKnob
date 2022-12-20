@@ -31,6 +31,8 @@
 #include "DK/DKString.h"
 #include "DK/DKTextColor.h"
 #include "DK/DKUtil.h"
+
+//WARNING_DISABLE
 #include <stdio.h>
 #include <iostream>
 #if IOS
@@ -42,6 +44,7 @@
 #if RTTI_ENABLED
 	#include <type_traits>
 #endif
+//WARNING_ENABLE
 
 #define DK_ASSERT  1
 #define DK_FATAL   2
@@ -69,14 +72,14 @@
 #define DKREDINFO(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_INFO, DKERROR_COLOR);
 //#define DKWARNRTN(message, rtnval) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_WARN, DKWARN_COLOR, rtnval);
 
-#if WIN32
+#if WIN
 //#define DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, ...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
 #define DKDEBUGRETURN1(__FILE__, __LINE__, __FUNCTION__, ...) DebugReturn(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
 //#define DKDEBUGFUNC(...) DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
 #define DKDEBUGRETURN(...) DKDEBUGRETURN1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
-#elif APPLE || LINUX
-//#define DKDEBUGFUNC(...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, "", ##__VA_ARGS__)
-#define DKDEBUGRETURN(...) DebugReturn(__FILE__, __LINE__, __FUNCTION__, "", ##__VA_ARGS__)
+#elif APPLE || LINUX || ANDROID
+//#define DKDEBUGFUNC(...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, ##__VA_ARGS__)
+#define DKDEBUGRETURN(...) DebugReturn(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, ##__VA_ARGS__)
 #else
 //#define DKDEBUGFUNC(...) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, "", DK_DEBUG)
 #define DKDEBUGRETURN(...) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, "", DK_DEBUG)
@@ -123,7 +126,7 @@ template<typename S, typename T>
 struct is_streamable<S, T, decltype(std::declval<S&>() << std::declval<T&>(), void())> : std::true_type {};
 
 template<typename T, typename std::enable_if<is_streamable<std::ostream, T>::value>::type* = nullptr>
-void printVariable(const DKString& name, T t, std::ostringstream& out) {
+void printVariable(const DKString& name, T t, std::ostringstream& out){
 	DKString type = "";
 	DKString constant = "";
 	std::ostringstream value;
@@ -150,7 +153,7 @@ void printVariable(const DKString& name, T t, std::ostringstream& out) {
 }
 
 template<typename T, typename std::enable_if<!is_streamable<std::ostream, T>::value>::type* = nullptr>
-void printVariable(const DKString& name, T t, std::ostringstream& out) {
+void printVariable(const DKString& name, T t, std::ostringstream& out){
 	DKString type = "";
 	DKString constant = "";
 	std::ostringstream value;
@@ -176,17 +179,18 @@ void getTemplateArgs(std::ostringstream& out);
 void getTemplateArgs(std::ostringstream& out, DKStringArray& name_array);
 
 template <typename A, typename... Args>
-void getTemplateArgs(std::ostringstream& out, DKStringArray& name_array, A arg1, Args&&... args) {
-	int arg_count = sizeof...(Args);
+void getTemplateArgs(std::ostringstream& out, DKStringArray& name_array, A arg1, Args&&... args){
 	printVariable(name_array[0], arg1, out); //use first name element
 	name_array.erase(name_array.begin()); //remove first name element
-	if(arg_count)
+	int arg_count = sizeof...(Args);
+	if(arg_count){
 		out << ",  ";
-    getTemplateArgs(out, name_array, args...);
+		getTemplateArgs(out, name_array, args...);
+	}
 }
 
 template <typename... Args>
-void DebugFunc(const char* file, int line, const char* func, const DKString& names, Args&&... args) {
+void DebugFunc(const char* file, int line, const char* func, const DKString& names, Args&&... args){
 	if (!DKUtil::InMainThread())
 		return;
 	if(DKLog::log_show.empty() && !DKLog::log_debug)
@@ -208,7 +212,8 @@ void DebugFunc(const char* file, int line, const char* func, const DKString& nam
 }
 
 template <typename... Args>
-bool DebugReturn(const char* file, int line, const char* func, const DKString& names, Args&&... args) {
+bool DebugReturn(const char* file, int line, const char* func, const DKString& names, Args&&... args){
+	return true;
 	if (!DKUtil::InMainThread())
 		return true;
 	if (DKLog::log_show.empty() && !DKLog::log_debug)
@@ -217,9 +222,7 @@ bool DebugReturn(const char* file, int line, const char* func, const DKString& n
 	std::ostringstream out;
 	DKString func_string = func;
 	func_string += "(";
-	if(arg_count){
-		if (names.empty())
-			return DKERROR("arg_count is > 1, but names is empty\n");
+	if(arg_count && !names.empty()){
 		DKStringArray name_array;
 		toStringArray(name_array, names, ","); 
 		getTemplateArgs(out, name_array, args...);
@@ -227,17 +230,17 @@ bool DebugReturn(const char* file, int line, const char* func, const DKString& n
 		toStringArray(argArray, out.str(), ",");
 		if (arg_count > 1){
 			func_string += "{ ";
-			for (int i = 0; i < arg_count; ++i) {
-				if (i < (arg_count - 1)) {
+			for (int i = 0; i < arg_count; ++i){
+				if (i < (arg_count - 1)){
 					func_string += argArray[i];
 					func_string += ", ";
 				}
 				else {
-					if (arg_count > 1) {
+					if (arg_count > 1){
 						func_string += " }";
 						func_string += ")";
 					}
-					if (arg_count) {
+					if (arg_count){
 						func_string += " -> { ";
 						func_string += argArray[i];
 						func_string += " }";
@@ -246,9 +249,9 @@ bool DebugReturn(const char* file, int line, const char* func, const DKString& n
 			}
 		}
 	}
-	else{ //!arg_count
+	//else{ //!arg_count
 		func_string += ")";
-	}
+	//}
 	func_string += "\n";
 	DKLog::Log(file, line, "", func_string, DK_DEBUG);
 	return true;
@@ -270,15 +273,19 @@ void signal_handler(int signal);
 class logy {
 public:
 	template <typename... Args>
-	logy(const char* file, int line, const char* func, const DKString& names, Args&&... args) : file(file), line(line), func(func), names(names), /*args(args...),*/ start_time(clock()) {
+	logy(const char* file, int line, const char* func, const DKString& names, Args&&... args) : file(file), line(line), func(func), names(names), /*args(args...),*/ start_time(clock()){
 		count++;
+		if (!DKUtil::InMainThread())
+			return;
 		if (DKLog::log_show.empty() && !DKLog::log_debug)
 			return;
 		int arg_count = sizeof...(Args);
 		std::ostringstream out;
-		DKStringArray name_array;
-		toStringArray(name_array, names, ",");
-		getTemplateArgs(out, name_array, args...);
+		if(!names.empty()){
+			DKStringArray name_array;
+			toStringArray(name_array, names, ",");
+			getTemplateArgs(out, name_array, args...);
+		}
 		DKString func_string = "";
 		for (unsigned int i = 1; i < count; i++)
 			func_string += "  ";
@@ -293,10 +300,9 @@ public:
 		func_string += ")\n";
 
 		DKLog::Log(file, line, "", func_string, DK_DEBUG);
-		
 	};
 
-	~logy() {
+	~logy(){
 		count--;
 		if (DKLog::log_show.empty() && !DKLog::log_debug)
 			return;
@@ -324,8 +330,8 @@ public:
 #if WIN
 	#define DKDEBUGFUNC2(__FILE__, __LINE__, __FUNCTION__, ...) logy _logy(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
 	#define DKDEBUGFUNC(...) DKDEBUGFUNC2(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
-#elif APPLE || LINUX
-	#define DKDEBUGFUNC(...) logy _logy(__FILE__, __LINE__, __FUNCTION__, "", ##__VA_ARGS__)
+#elif APPLE || LINUX || ANDROID
+	#define DKDEBUGFUNC(...) logy _logy(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, ##__VA_ARGS__)
 #else
 	#define DKDEBUGFUNC(...) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, "", DK_DEBUG)
 #endif

@@ -29,8 +29,8 @@
 #ifndef DKClass_H
 #define DKClass_H
 
-#include "DKObject.h"
-#include "DKUtil.h"
+#include "DK/DKObject.h"
+#include "DK/DKUtil.h"
 
 #ifdef __has_include
 #	if __has_include(<functional>)
@@ -82,7 +82,7 @@ public:
 
 	/////  GLOBAL FUNCTIONS //////////////////////////////
 	static DKObject* DKCreate(const DKString& data){
-		//DKDEBUGFUNC(data); //data = (class,id,var1,var2,var3,etc)
+		DKDEBUGFUNC(data); //data = (class,id,var1,var2,var3,etc)
 		return DKClass::_Instance(data);
 	}
 
@@ -92,7 +92,7 @@ public:
 	}
 
 	static bool DKValid(const DKString& data){
-		//DKDEBUGFUNC(data); //data = (class,id)
+		//DKDEBUGFUNC(data); //data = (class,id)    // EXCESSIVE LOGGING
 		return DKClass::_Valid(data);
 	}
 
@@ -108,35 +108,45 @@ public:
 
 	template<class T>
     static bool RegisterFunc(const DKString& name, bool (T::*func) (const void*, void*), T* _this){
-		//DKDEBUGFUNC(name, func, _this);
+		DKDEBUGFUNC(name);//, func, _this);
         if(!functions)
             functions = new DKFunctionMap();
-        if((*functions)[name])
-            DKERROR("failed to register "+name+"() function\n");
+        if(HasFunc(name))
+            return DKERROR(name+"() function already registered\n");
 		//functions[name] = std::bind(func, _this, dk_placeholders::_1, dk_placeholders::_2); //as variable
         (*functions)[name] = std::bind(func, _this, dk_placeholders::_1, dk_placeholders::_2); //as pointer
-        if(!(*functions)[name])
-            return DKERROR("failed to register "+name+"() function\n");
+        if(!HasFunc(name))
+            return DKERROR("failed to register "+name+"() function \n");
         return true;
 	}
     
 	static bool UnregisterFunc(const DKString& name){
 		DKDEBUGFUNC(name);
+		if(!HasFunc(name))
+			return DKERROR(name+"() function not registered \n");
 		functions->erase(name);
-        if((*functions)[name])
-			return DKERROR("failed to unregister "+name+"() function\n");
+        if(HasFunc(name))
+			return DKERROR("failed to unregister "+name+"() function \n");
 		return true;
 	}
 
 	static bool HasFunc(const DKString& name){
-		//DKDEBUGFUNC(name);
-		return (bool)(*functions)[name];
+		DKDEBUGFUNC(name);
+		if(!functions)
+			return false;
+		if(functions->empty())
+			return false;
+		if(functions->find(name) == functions->end())
+			return false;
+		return true;
+		//return (bool)(*functions)[name];
 	}
 	
 	static bool CallFunc(const DKString& name, const void* input = NULL, void* output = NULL){
-		//DKDEBUGFUNC(name, input, output); //excessive logging
-		if(!(*functions)[name])
-			return DKERROR(name+"() function not registered\n");
+		DKDEBUGFUNC(name);//, input, output); //excessive logging
+		//if(!(*functions)[name])
+		if(!HasFunc(name))
+			return DKERROR(name+"() function not registered \n");
 		return (*functions)[name](input, output);
 	}
 };

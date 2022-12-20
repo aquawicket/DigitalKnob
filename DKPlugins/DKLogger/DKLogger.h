@@ -29,6 +29,7 @@
 #define DKLogger_H
 
 /*
+//WARNING_DISABLE
 #include <stdio.h>
 #include <iostream>
 #ifdef MAC
@@ -42,8 +43,9 @@
 #ifdef ANDROID
 	#include <android/log.h>
 #endif
-#include "DKString.h"
+//WARNING_ENABLE
 
+#include "DKString.h"
 
 #ifdef WIN32
 	#define DKNORMAL FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE

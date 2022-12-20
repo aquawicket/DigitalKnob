@@ -45,3 +45,12 @@ else()  #install
 		dk_command(${DKDOWNLOAD}/vs_Community.exe)
 	endif()
 ENDIF()
+
+if(NOT EXISTS "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Microsoft/MDD/Android/V150/Android.Common.targets")
+	dk_error("C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Microsoft/MDD/Android/V150/Android.Common.targets does not exist!")
+else()
+	dk_info("Patching Android.Common.targets. . .")
+	dkFileReplace("C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Microsoft/MDD/Android/V150/Android.Common.targets" ">ARM7</GradlePlatform>" "></GradlePlatform>")
+	dkFileReplace("C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Microsoft/MDD/Android/V150/Android.Common.targets" ">ARM8</GradlePlatform>" "></GradlePlatform>")
+	dkFileReplace("C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Microsoft/MDD/Android/V150/Android.Common.targets" ">x86-64</GradlePlatform>" "></GradlePlatform>")
+endif()

@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 #ifndef HAVE_sdl_ttf
-#	error "sdl_ttf library required for DKSDLText plugin"
+#	error "DKSDLText requires sdl_ttf library"
 #endif 
 
 #pragma once
@@ -33,7 +33,10 @@
 
 #include "DK/DK.h"
 #include "DKSDLWindow/DKSDLWindow.h"
+
+//WARNING_DISABLE
 #include "SDL_ttf.h"
+//WARNING_ENABLE
 
 
 class DKSDLText : public DKObjectT<DKSDLText>
@@ -52,6 +55,6 @@ public:
 	SDL_Color color;
 };
 
-REGISTER_OBJECT(DKSDLText, true)
 
+REGISTER_OBJECT(DKSDLText, true)
 #endif //DKSDLText_H

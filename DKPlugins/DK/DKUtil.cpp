@@ -25,43 +25,45 @@
 */
 
 #include "DK/stdafx.h"
-#include "DKUtil.h"
-#include "DKLog.h"
-#include "DKFile.h"
+
+//WARNING_DISABLE
 #include <iostream>
 #include <cstring>
-#ifndef WIN32
-#	include <sys/time.h>
-#endif
-
-#if WIN32
-#	include "DKWindows.h"
-#	include <shellapi.h> //DKFile::Execute()
-#else
-#	include "DKUnix.h"
-#endif
-
-#if LINUX
-#	include "DKLinux.h"
-#endif 
-
-#if ANDROID
-#	include "DKAndroid.h"
-#endif 
-
-#if MAC
-#	include "DKMac.h"
-#endif
-	
-//#include <boost/asio.hpp> //Boost deprecated in the DKCore library
-
-#include <iostream>
-#ifndef MAC
-#	include <fstream>
-#endif
 #include <math.h>
 #include <assert.h>
+//#include <boost/asio.hpp> //Boost deprecated in the DKCore library
+#ifndef WIN32
+	#include <sys/time.h>
+#endif
+#if WIN
+	#include <shellapi.h> //DKFile::Execute()
+#endif
+#ifndef MAC
+	#include <fstream>
+#endif
+//WARNING_ENABLE
 
+#include "DK/DKUtil.h"
+#include "DK/DKLog.h"
+#include "DK/DKFile.h"
+#if WIN32
+	#include "DKWindows.h"
+#else
+	#include "DKUnix.h"
+#endif
+#if LINUX
+	#include "DKLinux.h"
+#endif 
+#if ANDROID
+	#include "DKAndroid.h"
+#endif 
+#if MAC
+	#include "DKMac.h"
+#endif
+#if IOS
+	#include "DKIos.h"
+#endif
+	
 
 //Frame limiter
 long DKUtil::lastSecond = 0;
@@ -302,7 +304,7 @@ bool DKUtil::GetDate(DKString& date){
 }
 
 bool DKUtil::GetFps(unsigned int& fps){
-	//DKDEBUGFUNC(fps);
+	//DKDEBUGFUNC(fps);  //EXCESSIVE LOGGING
 	fps = (unsigned int)framespersecond;
 	return true;
 }
@@ -393,6 +395,10 @@ bool DKUtil::GetScreenHeight(int& h){
 		return DKMac::GetScreenHeight(h) && DKDEBUGRETURN(h);
 #	elif LINUX
 		return DKLinux::GetScreenHeight(h);//&& DKDEBUGRETURN(h);
+#	elif ANDROID
+		return DKAndroid::GetScreenHeight(h);//&& DKDEBUGRETURN(h);
+#	elif IOS
+		return DKIos::GetScreenHeight(h);//&& DKDEBUGRETURN(h);
 #	else
 		return DKERROR("not implemented on this OS\n");
 #	endif
@@ -405,13 +411,17 @@ bool DKUtil::GetScreenWidth(int& w){
 		return DKMac::GetScreenWidth(w) && DKDEBUGRETURN(w);
 #	elif LINUX
 		return DKLinux::GetScreenWidth(w);// && DKDEBUGRETURN(w);
+#	elif ANDROID
+		return DKAndroid::GetScreenWidth(w);// && DKDEBUGRETURN(w);
+#	elif IOS
+		return DKIos::GetScreenWidth(w);// && DKDEBUGRETURN(w);
 #	else
 		return DKERROR("not implemented on this OS\n");
 #	endif
 }
 
 bool DKUtil::GetThreadId(unsigned long int& id){
-	//DKDEBUGFUNC(id);
+	//DKDEBUGFUNC(id);  // DON'T DO THIS
 	id = DKUtil::mainThreadId;
 	return true;//&& DKDEBUGRETURN(id);
 }
@@ -422,7 +432,7 @@ bool DKUtil::GetThreadId(unsigned long int& id){
 // 1 second = 1000000000 nanoseconds    1e+9
 
 bool DKUtil::GetTicks(long& ticks){
-	//DKDEBUGFUNC(ticks);
+	//DKDEBUGFUNC(ticks);  //EXCESSIVE LOGGING
 	//boost::posix_time::ptime tick = boost::posix_time::second_clock::local_time();
 	//boost::posix_time::ptime now = boost::posix_time::second_clock::local_time();
 	//boost::posix_time::time_duration diff = tick - now;
@@ -486,7 +496,7 @@ bool DKUtil::InMainThread(){
 	//DKDEBUGFUNC(); // DON'T DO THIS
 #	if WIN32
 		return mainThreadId == GetCurrentThreadId();
-#	elif defined(MAC) || defined(IOS) || defined(ANDROID) || defined(LINUX)
+#	elif MAC || IOS || ANDROID || LINUX
 		return mainThreadId == (unsigned long int)pthread_self(); //TODO: move this to DKUnix::InMainThread()
 #	endif
 }
@@ -552,7 +562,7 @@ bool DKUtil::LeftRelease(){
 }
 
 bool DKUtil::LimitFramerate(){
-	//DKDEBUGFUNC();
+	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 	if(!DKUtil::now)
 		DKUtil::InitFramerate();
 	//Framerate / cpu limiter
@@ -754,7 +764,7 @@ bool DKUtil::SetBrightness(const int& percent){
 //       Duktape currently blocks when using timers, so we've placed it here for now.
 //       Send a timer event every second
 bool DKUtil::SendTick(){
-	//DKDEBUGFUNC();
+	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 	if(((lastFrame / 1000) - (lastSecond / 1000)) >= 1){ //1 second
 		DKEvents::SendEvent("window", "second", "");
 		DKUtil::GetTicks(lastSecond);
@@ -815,14 +825,11 @@ bool DKUtil::SetFramerate(const int& fps){
 bool DKUtil::SetMainThreadNow(){
 	DKDEBUGFUNC();
 	//ONLY SET THIS FROM THE MAIN THREAD ONCE
-#	if WIN32
+#	if WIN
 		DKUtil::mainThreadId = GetCurrentThreadId();
 		return true;
-#	elif defined(MAC) || defined(IOS) || defined(LINUX)
+#	elif MAC || IOS || LINUX || ANDROID
 		DKUtil::mainThreadId = (unsigned long int)pthread_self();
-		return true;
-#	elif ANDROID
-		DKUtil::mainThreadId = (int)pthread_self();
 		return true;
 #	else
 		return DKERROR("not implemented on this OS\n");
@@ -854,7 +861,7 @@ bool DKUtil::SetVolume(int& percent){
 }
 
 bool DKUtil::Sleep(const int& milliseconds){
-	//DKDEBUGFUNC(milliseconds);
+	//DKDEBUGFUNC(milliseconds);  //EXCESSIVE LOGGING
 #	if WIN32
 		return DKWindows::Sleep(milliseconds);
 #	elif defined(MAC) || defined(IOS) || defined(ANDROID) || defined(LINUX)
@@ -909,7 +916,7 @@ bool DKUtil::TurnOnMonitor(){
 }
 
 bool DKUtil::UpdateFps(){
-	//DKDEBUGFUNC();
+	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 	if(!frametimelast)
 		DKUtil::InitFps();
 	long frametimesindex;

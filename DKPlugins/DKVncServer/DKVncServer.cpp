@@ -23,23 +23,29 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #include "DK/stdafx.h"
 #include "DK/DKFile.h"
 #include "DKVncServer/DKVncServer.h"
 
-#ifdef WIN32
-#define sleep Sleep
-#include <WS2tcpip.h>
+#if WIN
+	#define sleep Sleep
 #endif
 
+//WARNING_DISABLE
+#if WIN
+	#include <WS2tcpip.h>
+#endif
 #ifdef LINUX
-#include <unistd.h>
-#include <X11/Xlib.h>
-#include <X11/Xutil.h>
-Display* DKVncServer::disp;
-Window DKVncServer::root;
-XImage* DKVncServer::image;
+	#include <unistd.h>
+	#include <X11/Xlib.h>
+	#include <X11/Xutil.h>
+#endif
+//WARNING_ENABLE
+
+#if LINUX
+	Display* DKVncServer::disp;
+	Window DKVncServer::root;
+	XImage* DKVncServer::image;
 #endif
 
 #ifdef MAC
@@ -48,12 +54,14 @@ CGDataProviderRef DKVncServer::provider;
 CFDataRef DKVncServer::dataref;
 #endif
 
+//WARNING_DISABLE
 #ifdef __IRIX__
-#include <netdb.h>
+	#include <netdb.h>
 #endif
-
 #include <rfb/keysym.h>
 #include "radon.h"
+//WARNING_ENABLE
+
 
 static rfbScreenInfoPtr rfbScreen;
 static int bpp = 4;
@@ -89,7 +97,6 @@ typedef struct ClientData{
 
 std::vector<ClientLog> DKVncServer::clientLog;
 DKString DKVncServer::capture;
-
 
 bool DKVncServer::Init(){
 	DKDEBUGFUNC();
@@ -177,7 +184,7 @@ void DKVncServer::clientgone(rfbClientPtr cl){
 }
 
 void DKVncServer::Loop(){
-	//DKDEBUGFUNC();
+	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 	if(rfbProcessEvents(rfbScreen, 1))
 		DrawBuffer();
 }
@@ -219,7 +226,7 @@ rfbBool DKVncServer::rfbCheckPasswordByList2(rfbClientPtr cl, const char* respon
 }
 
 void DKVncServer::DrawBuffer(){  
-	//DKDEBUGFUNC();
+	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 #ifdef WIN32
 	//Capture Desktop with DirectX
 	if(capture == "DIRECTX"){

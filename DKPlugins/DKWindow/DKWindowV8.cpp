@@ -23,14 +23,13 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #ifdef HAVE_DKCef
 #include "DK/DKApp.h"
 #include "DKWindow/DKWindow.h"
 #include "DKWindow/DKWindowV8.h"
 
 
-bool DKWindowV8::Init() {
+bool DKWindowV8::Init(){
 	DKDEBUGFUNC();
 	DKV8::AttachFunction("DKWindow_TestInt", DKWindowV8::TestInt);
 	DKV8::AttachFunction("DKWindow_TestString", DKWindowV8::TestString);
@@ -267,5 +266,6 @@ bool DKWindowV8::Windowed(CefArgs args, CefReturn retval) {
 	if(!DKWindow::Windowed()){ return false; }
 	return true;
 }
+
 
 #endif //HAVE_DKCef

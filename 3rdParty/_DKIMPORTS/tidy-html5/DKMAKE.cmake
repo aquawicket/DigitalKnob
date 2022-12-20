@@ -25,7 +25,6 @@ ANDROID_dk_libRelease	(${TIDY-HTML5}/${OS}/${RELEASE_DIR}/libtidy.a)
 
 
 ### GENERATE ###
-dk_setPath		(${TIDY-HTML5}/${BUILD_DIR})
 dk_queueCommand	(${DKCMAKE_BUILD} -DBUILD_SHARED_LIB=OFF ${ZLIB_CMAKE} ${TIDY-HTML5})
 
 

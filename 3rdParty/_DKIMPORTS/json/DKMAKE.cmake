@@ -18,7 +18,6 @@ dk_include(${JSON}/include/nlohmann)
 #dk_set(JSON_TESTS ON)
 if(JSON_TESTS)
 	### GENERATE ###
-	dk_setPath(${JSON}/${BUILD_DIR})
 	dk_queueCommand(${DKCMAKE_BUILD} ${JSON})
 
 

@@ -25,9 +25,10 @@
 */
 
 #include "DK/stdafx.h"
-#include "DKOSGAudio.h"
-#include "DKOSGWindow.h"
-#include "DKAssets.h"
+#include "DKOSGAudio/DKOSGAudio.h"
+#include "DKOSGWindow/DKOSGWindow.h"
+#include "DKAssets/DKAssets.h"
+
 
 bool DKOSGAudio::Init(){
 	if(instance_count == 1){ //only initiate on first instance

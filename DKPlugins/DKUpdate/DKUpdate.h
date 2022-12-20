@@ -23,11 +23,11 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #pragma once
 #ifndef DKUpdate_H
 #define DKUpdate_H
 #include "DK/DK.h"
+
 
 class DKUpdate : public DKObjectT<DKUpdate>
 {
@@ -42,6 +42,7 @@ public:
 
 	static DKString url;
 };
-
 REGISTER_OBJECT(DKUpdate, true);
+
+
 #endif //DKUpdate_H

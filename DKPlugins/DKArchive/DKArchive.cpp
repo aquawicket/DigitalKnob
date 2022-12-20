@@ -25,12 +25,16 @@
 */
 
 #include "DK/stdafx.h"
+
+//WARNING_DISABLE
 #include <iostream>
 #include <fcntl.h>
 #include <sstream>
 #include <fstream>
 #include <archive.h>
 #include <archive_entry.h>
+// WARNING_ENABLE
+
 #include "DK/DKFile.h"
 #include "DKArchive/DKArchive.h"
 

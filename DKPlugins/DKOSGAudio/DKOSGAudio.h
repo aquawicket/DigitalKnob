@@ -27,12 +27,16 @@
 #pragma once
 #ifndef DKOSGAudio_H
 #define DKOSGAudio_H
-#include "DK.h"
+#include "DK/DK.h"
+
+//WARNING_DISABLE
 #include <osgAudio/SoundManager.h>
 #include <osgAudio/SoundNode.h>
 #include <osgAudio/Source.h>
 #include <osgAudio/Sample.h>
 #include <osg/DeleteHandler>
+//WARING_ENABLE
+
 
 class DKOSGAudio : public DKObjectT<DKOSGAudio>
 {

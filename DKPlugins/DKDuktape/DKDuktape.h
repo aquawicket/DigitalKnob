@@ -29,12 +29,13 @@
 #pragma once
 #ifndef DKDuktape_H
 #define DKDuktape_H
+
 #include "DK/DK.h"
 #include "DK/DKEvents.h"
 
-#pragma warning(push, 0) //silence warnings from "duktape.h"
+//WARNING_DISABLE
 	#include "duktape.h"
-#pragma warning(pop);
+//WARNING_ENABLE
 
 #define DKHAVE_DKDuktape 1
 

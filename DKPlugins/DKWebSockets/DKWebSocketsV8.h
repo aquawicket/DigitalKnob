@@ -23,7 +23,6 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #ifdef HAVE_DKCef
 #pragma once
 #ifndef DKWebSocketsV8_H
@@ -31,13 +30,12 @@
 
 #include "DKCef/DKCef.h"
 
-///////////////////////////////////////////////////////
+
 class DKWebSocketsV8 : public DKObjectT<DKWebSocketsV8>
 {
 public:
 	bool Init();
 	bool End();
-
 	static bool CloseClient(CefArgs args, CefReturn retval);
 	static bool CloseServer(CefArgs args, CefReturn retval);
 	static bool CreateClient(CefArgs args, CefReturn retval);
@@ -45,8 +43,8 @@ public:
 	static bool MessageToClient(CefArgs args, CefReturn retval);
 	static bool MessageToServer(CefArgs args, CefReturn retval);
 };
-
 REGISTER_OBJECT(DKWebSocketsV8, false);
+
 
 #endif //DKWebSocketsV8_H
 #endif //HAVE_DKCef

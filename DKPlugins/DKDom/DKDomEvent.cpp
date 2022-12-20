@@ -27,9 +27,10 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/Event
 
 #include "DK/DKApp.h"
-#include "DKDom.h"
+#include "DKDom/DKDom.h"
 #include "DKDom/DKDomEvent.h"
 #include "DKDom/DKDomElement.h"
+
 
 bool DKDomEvent::Init(){
 	DKDEBUGFUNC();

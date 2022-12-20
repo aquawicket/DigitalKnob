@@ -7,8 +7,8 @@ set "APP_PATH=%APP_ROOT%app/src/main"
 echo 1. Set and map all variables and environment variables
 :: Build architecture and type
 set "BUILD_TYPE=Debug"
-set "ABI=armeabi-v7a"
-::set "ABI=arm64-v8a"
+::set "ABI=armeabi-v7a"
+set "ABI=arm64-v8a"
 
 :: Choose a C++ Compilers setting
 :: 		options: CMAKE, NDK, CLANG    or GRADLE: must be enabled in build.gradle
@@ -50,8 +50,8 @@ set "Country=US"
 
 ::::::::::::: CMAKE / CLANG :::::::::::::::::::
 :: Android api, ndk and tools versions
-set "ANDROID_API=26"
-set "NDK=22.1.7171670"
+set "ANDROID_API=31"
+set "NDK=23.1.7779620"
 set "BUILD_TOOLS=30.0.3"
 :::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -62,9 +62,9 @@ if not exist %ANDROID_HOME% ( %ERROR% "Environment Variable ANDROID_HOME does no
 
 :: JDK
 if %GRADLE% EQU 0 ( 
-	set "JAVA_HOME=C:/Users/%USERNAME%/digitalknob/DK/3rdParty/openjdk-1.8.0_41"
+	set "JAVA_HOME=C:/Users/%USERNAME%/digitalknob/DK/3rdParty/openjdk-8u41-b04-windows-i586-14_jan_2020"
 ) else (
-	set "JAVA_HOME=C:/Users/%USERNAME%/digitalknob/DK/3rdParty/openjdk-11"
+	set "JAVA_HOME=C:/Users/%USERNAME%/digitalknob/DK/3rdParty/openjdk-11_windows-x64_bin"
 )
 call "%JAVA_HOME%/registerJDK.cmd"
 %IF_ERROR% "Failed at call to registerJDK.cmd"

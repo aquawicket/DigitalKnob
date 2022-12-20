@@ -44,3 +44,6 @@ start /wait C:\Users\Administrator\digitalknob\Download\vs_Community.exe --layou
 --add Microsoft.VisualStudio.Workload.NativeMobile ^
 --add Microsoft.VisualStudio.Component.VC.14.29.16.11.x86.x64 ^
 --lang en-US --passive --wait
+ 
+ 
+%DKEND% 

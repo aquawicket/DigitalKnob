@@ -1,7 +1,33 @@
+/*
+* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+*
+* For the latest information, see https://github.com/aquawicket/DigitalKnob
+*
+* Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files(the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions :
+*
+* The above copyright noticeand this permission notice shall be included in all
+* copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*/
 #include "DK/stdafx.h"
 #include "DKOSGWindow/DKOSGWindow.h"
 #include "DK/DKFile.h"
 #include "DKAssets/DKAssets.h"
+
 
 const unsigned int MASK_2D = 0xF0000000;
 std::map<int,int> DKOSGWindow::osgKeyCode;
@@ -25,6 +51,10 @@ bool DKOSGWindow::Init(){
 	DKFile::RemoveExtention(title);
 	CreateWin(title, 0, 0, 0, 0);
 
+	DKClass::RegisterFunc("DKOSGWindow::TestInt", &DKOSGWindow::TestInt, this);
+    DKClass::RegisterFunc("DKOSGWindow::TestString", &DKOSGWindow::TestString, this);
+    DKClass::RegisterFunc("DKOSGWindow::TestReturnInt", &DKOSGWindow::TestReturnInt, this);
+    DKClass::RegisterFunc("DKOSGWindow::TestReturnString", &DKOSGWindow::TestReturnString, this);
 	DKClass::RegisterFunc("DKOSGWindow::GetX", &DKOSGWindow::GetX, this);
 	DKClass::RegisterFunc("DKOSGWindow::GetY", &DKOSGWindow::GetY, this);
 	DKClass::RegisterFunc("DKOSGWindow::SetX", &DKOSGWindow::SetX, this);
@@ -43,7 +73,7 @@ bool DKOSGWindow::Init(){
 }
 
 bool DKOSGWindow::CreateWin(const DKString& title, const int& x, const int& y, const int& w, const int& h){
-	//DKDEBUGFUNC(title, x, y, w, h);
+	DKDEBUGFUNC(title, x, y, w, h);
 	mTitle = title;
 	winX = x;
 	winY = y;
@@ -453,6 +483,38 @@ bool DKOSGWindow::handle(const osgGA::GUIEventAdapter& ea){
 	}
 
     return false; //alow event to continue
+}
+
+bool DKOSGWindow::TestInt(const void* input, void* output) {
+    DKDEBUGFUNC(input, output);
+    int in = *(int*)input;
+    int out = in;
+    *(int*)output = out;
+    return true;
+}
+
+bool DKOSGWindow::TestString(const void* input, void* output) {
+    DKDEBUGFUNC(input, output);
+    std::string in = *(std::string*)input;
+    std::string out = in;
+    *(std::string*)output = out;
+    return true;
+}
+
+bool DKOSGWindow::TestReturnInt(const void* input, void* output) {
+    DKDEBUGFUNC(input, output);
+    DK_UNUSED(input);
+    int var = 1234;
+    *(int*)output = var;
+    return true;
+}
+
+bool DKOSGWindow::TestReturnString(const void* input, void* output) {
+    DKDEBUGFUNC(input, output);
+    DK_UNUSED(input);
+    std::string var = "Return test";
+    *(std::string*)output = var;
+    return true;
 }
 
 bool DKOSGWindow::GetX(const void* input, void* output){

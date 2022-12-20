@@ -33,7 +33,6 @@
 bool DKXMLHttpRequest::Init(){
 	DKDEBUGFUNC();
 	DKDuktape::AttachFunction("CPP_DKXMLHttpRequest_send", DKXMLHttpRequest::send);
-	
 	DKClass::DKCreate("DKDuktapeDom/DKXMLHttpRequest.js");
 	return true;
 }

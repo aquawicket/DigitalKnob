@@ -28,10 +28,14 @@
 #ifndef DKKeyCodes_H
 #define DKKeyCodes_H
 #include "DKDuktape/DKDuktape.h"
+
+//WARNING_DISABLE
 #include <iostream>
 #include <map>
 #include <string>
 #include <iterator>
+//WARNING_ENABLE
+
 
 // Read
 // https://keycode.info/

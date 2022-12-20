@@ -36,6 +36,7 @@
 
 #include "DKDuktape/DKDuktape.h"
 
+
 class DKDomWindow : public DKObjectT<DKDomWindow>
 {
 public:

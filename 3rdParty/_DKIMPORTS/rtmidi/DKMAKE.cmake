@@ -32,7 +32,6 @@ ANDROID_dk_libRelease	(${RTMIDI}/${OS}/${RELEASE_DIR}/libRtMidi.a)
 
 
 ### GENERATE ###
-dk_setPath		(${RTMIDI}/${BUILD_DIR})
 dk_queueCommand	(${DKCMAKE_BUILD} ${RTMIDI})
 
 

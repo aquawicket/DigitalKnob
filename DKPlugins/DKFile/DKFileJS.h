@@ -31,6 +31,7 @@
 
 #include "DKDuktape/DKDuktape.h"
 
+
 class DKFileJS : public DKObjectT<DKFileJS>
 {
 public:

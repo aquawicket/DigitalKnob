@@ -29,8 +29,11 @@
 #define DKOcr_H
 
 #include "DK/DK.h"
+
+//WARNING_DISABLE
 #include "tesseract/baseapi.h"  //tesseract
 //#include "podofo.h"       //podofo
+//WARNING_ENABLE
 
 
 class DKOcr : public DKObjectT<DKOcr>

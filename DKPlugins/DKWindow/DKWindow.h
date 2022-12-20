@@ -25,12 +25,12 @@
 */
 
 // This is a Switch plugin..  
-// To links to DKSDLWindow, DKSFMLWindow, DKCefWindow and DKOSGWindow
+// To links to DKCEFWindow, DKOSGWindow, DKSDLWindow and DKSFMLWindow
 // When we call DKWindow commands, this class will determine the proper window system to use. 
-
 #pragma once
 #ifndef DKWindow_H
 #define DKWindow_H
+
 #include "DK/DK.h"
 
 
@@ -130,7 +130,7 @@ public:
 	///Set the Window to Windowed mode
 	static bool Windowed();
 };
-
 REGISTER_OBJECT(DKWindow, true)
-#endif //DKWindow_H
 
+
+#endif //DKWindow_H

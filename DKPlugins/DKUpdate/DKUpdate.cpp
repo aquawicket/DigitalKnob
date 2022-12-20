@@ -23,16 +23,19 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #include "DK/stdafx.h"
-#include <stdlib.h> 
-#include <sys/stat.h>
 #include "DK/DKFile.h"
 #include "DKArchive/DKArchive.h"
 #include "DKAssets/DKAssets.h"
 #include "DKCurl/DKCurl.h"
 #include "DKThread/DKThread.h"
 #include "DKUpdate/DKUpdate.h"
+
+//WARNING_DISABLE
+#include <stdlib.h> 
+#include <sys/stat.h>
+//WARNING_ENABLE
+
 
 //////////////////////////////////////
 //     Default update files

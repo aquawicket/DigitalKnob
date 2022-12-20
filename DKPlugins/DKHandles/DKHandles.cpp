@@ -26,8 +26,12 @@
 
 #include "DK/stdafx.h"
 #ifdef WIN32
+
+//WARNING_DISABLE
 #include <tchar.h>
 #include <Commctrl.h>
+//WARNING_ENABLE
+
 #include "DKHandles/DKHandles.h"
 
 DKStringArray DKHandles::_windows;
@@ -112,8 +116,8 @@ bool DKHandles::DoMouseUp() {
 	//Bring back the main window
 	HWND hwnd = NULL;
 	//DKWindow::GetHandle((void*&)hwnd);
-	if(DKClass::HasFunc("DKCefWindow::GetHandle"))
-		DKClass::CallFunc("DKCefWindow::GetHandle", NULL, &hwnd);
+	if(DKClass::HasFunc("DKCEFWindow::GetHandle"))
+		DKClass::CallFunc("DKCEFWindow::GetHandle", NULL, &hwnd);
 	if(DKClass::HasFunc("DKSDLWindow::GetHandle"))
 		DKClass::CallFunc("DKSDLWindow::GetHandle", NULL, &hwnd);
 	if(!hwnd)
@@ -485,8 +489,8 @@ bool DKHandles::StartSearch() {
 	DKDEBUGFUNC();
 	HWND hwnd = NULL;
 	//DKWindow::GetHandle((void*&)hwnd);
-	if(DKClass::HasFunc("DKCefWindow::GetHandle"))
-		DKClass::CallFunc("DKCefWindow::GetHandle", NULL, &hwnd);
+	if(DKClass::HasFunc("DKCEFWindow::GetHandle"))
+		DKClass::CallFunc("DKCEFWindow::GetHandle", NULL, &hwnd);
 	if(DKClass::HasFunc("DKSDLWindow::GetHandle"))
 		DKClass::CallFunc("DKSDLWindow::GetHandle", NULL, &hwnd);
 	if(!hwnd)
@@ -615,7 +619,7 @@ BOOL CALLBACK DKHandles::EnumChildProcTemp(HWND hwnd, LPARAM lParam) {
 
 /*
 BOOL CALLBACK DKHandles::EnumWindowsProc(HWND hwnd, LPARAM lParam) {
-	//DKDEBUGFUNC(hwnd, lParam);
+	DKDEBUGFUNC(hwnd, lParam);
 	char class_name[80];
 	char title[80];
 	GetClassName(hwnd,class_name, sizeof(class_name));
@@ -623,7 +627,7 @@ BOOL CALLBACK DKHandles::EnumWindowsProc(HWND hwnd, LPARAM lParam) {
 	//if(!same("",title)){
 	//DKINFO("Window: "+title+"\n");
 	//DKINFO(" Class: "+class_name+"\n");
-	}
+	//}
 	return TRUE;
 }
 */

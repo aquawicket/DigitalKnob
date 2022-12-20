@@ -30,6 +30,7 @@
 #define DKOcrV8_H
 #include "DKCef/DKCef.h"
 
+
 class DKOcrV8 : public DKObjectT<DKOcrV8>
 {
 public:

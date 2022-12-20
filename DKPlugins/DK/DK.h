@@ -30,7 +30,7 @@
 #ifndef DK_H
 #define DK_H
 
-#include "DKPreprocessor.h"
+#include "DK/DKPreprocessor.h"
 
 #if defined(WIN32)
 #	include "DK/DKWindows.h"

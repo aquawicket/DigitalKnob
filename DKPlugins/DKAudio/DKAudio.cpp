@@ -25,7 +25,7 @@
 */
 
 #include "DK/stdafx.h"
-#include "DKAudio.h"
+#include "DKAudio/DKAudio.h"
 
 bool DKAudio::Init(){
 	DKDEBUGFUNC();

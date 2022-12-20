@@ -36,11 +36,12 @@
 #define TIME_UTC_ TIME_UTC
 #endif
 
+//WARNING_DISABLE
 #include "threadpool/boost/threadpool.hpp" //Not truly a Boost library.
-
 #include <boost/asio.hpp>
 #include <boost/smart_ptr.hpp>
 #include <boost/thread.hpp>
+//WARNING_ENABLE
 
 
 class DKThreadPool : public DKObjectT<DKThreadPool>
@@ -113,5 +114,4 @@ public:
 
 
 REGISTER_OBJECT(DKThreadPool, true)
-#endif //DKThread.h
-
+#endif //DKThread_h

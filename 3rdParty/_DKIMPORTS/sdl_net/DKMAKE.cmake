@@ -24,7 +24,6 @@ ANDROID_dk_libRelease	(${SDL_NET}/${OS}/${RELEASE_DIR}/libSDL2_net.a)
 
 
 ### GENERATE ###
-dk_setPath		(${SDL_NET}/${BUILD_DIR})
 dk_queueCommand	(${DKCMAKE_BUILD} ${SDL_CMAKE} ${SDL_NET})
 
 

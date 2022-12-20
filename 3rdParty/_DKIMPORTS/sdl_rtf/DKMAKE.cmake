@@ -26,7 +26,6 @@ ANDROID_dk_libRelease	(${SDL_RTF}/${OS}/lib/${RELEASE_DIR}/SDL_rtf.a)
 
 
 ### GENERATE ###
-dk_setPath		(${SDL_RTF}/${BUILD_DIR})
 dk_queueCommand	(${DKCMAKE_BUILD} ${SDL_CMAKE} ${SDL_RTF})
 
 

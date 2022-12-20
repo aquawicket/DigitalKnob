@@ -23,16 +23,18 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #pragma once
 #ifndef DKSFMLRmlSystem_H
 #define DKSFMLRmlSystem_H
 
 #include "DK/DK.h"
+
+//WARNING_DISABLE
 #include <RmlUi/Core/SystemInterface.h>
 #include <RmlUi/Core/Input.h>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+//WARNING_ENABLE
 
 
 class RmlSFMLSystemInterface : public Rml::SystemInterface

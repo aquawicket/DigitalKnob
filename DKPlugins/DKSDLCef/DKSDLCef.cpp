@@ -34,13 +34,14 @@
 	#include "DK/DKWindows.h"
 #endif
 
-#pragma warning(push, 0); //Silence warning from 3rd party headers
+//WARNING_DISABLE
 	#include "SDL_syswm.h"
 	#include <include/cef_urlrequest.h>
 	#ifdef WIN32
 		#include <delayimp.h>
 	#endif
-#pragma warning(pop);
+//WARNING_ENABLE
+
 
 bool DKSDLCef::Init() {
 	DKDEBUGFUNC();
@@ -99,7 +100,7 @@ bool DKSDLCef::GetScrollDeltas(SDL_Event* event, float &deltaX, float &deltaY) {
 
 bool DKSDLCef::GetTexture(const void* input, void* output) {
 	DKString id = *(DKString*)input;
-	DKDEBUGFUNC(id, "void* output");
+	//DKDEBUGFUNC(id, "void* output"); // EXCESSIVE LOGGING
 	//replace(id, "[CEF]", "");
 	int browser;
 	if(!dkCef->GetBrowserNumber(id, browser))
@@ -116,7 +117,7 @@ bool DKSDLCef::GetTexture(const void* input, void* output) {
 }
 
 bool DKSDLCef::Handle(SDL_Event* event) {
-	//DKDEBUGFUNC(event);
+	//DKDEBUGFUNC(event);  //EXCESSIVE LOGGING
 	int browser_index;
 	if (!dkCef->GetCurrentBrowser(browser_index))
 		return false;// DKERROR("browser_index is invalid\n");
@@ -412,6 +413,7 @@ bool DKSDLCef::SetupCef() {
 	cefHandler->dkSdlCef = this;
 	dkCef->cefHandler = cefHandler;
 	DKApp::AppendLoopFunc(&DKSDLCefHandler::DoFrame, cefHandler);
+	//CefRunMessageLoop();
 	return true;
 }
 
@@ -435,13 +437,13 @@ bool DKSDLCef::TransparentPixel(SDL_Event *event) {
 }
 
 bool DKSDLCef::Draw() {
-	//DKDEBUGFUNC();
+	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 	if (DKClass::DKValid("DKRml,DKRml0"))
 		return false; //We have a valid DKRml instance, so we are drawing to rml textures instead of striaght to SDL
 	if (!cefHandler->cef_texture.size())
 		return DKERROR("!cef_texture.size()\n");
 	if (!cefHandler->cef_texture[0])
-		return DKERROR("cefHandler->cef_texture[0] is invalid\n");
+		return DKREDINFO("cefHandler->cef_texture[0] is invalid! \n");
 
 	SDL_Rect texture_rect;
 	texture_rect.y = dkCef->dkBrowsers[0].top; // the y coordinate

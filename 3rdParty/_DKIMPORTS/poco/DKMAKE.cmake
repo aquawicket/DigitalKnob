@@ -179,7 +179,6 @@ ANDROID_dk_libRelease	(${POCO}/${OS}/lib/${RELEASE_DIR}/PocoZip.a)
 
 
 ### GENERATE ###
-dk_setPath(${POCO}/${BUILD_DIR})
 dk_queueCommand(${DKCMAKE_BUILD} -DPOCO_MT=ON ${POCO})
 
 

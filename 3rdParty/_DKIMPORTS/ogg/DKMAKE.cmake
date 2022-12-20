@@ -6,9 +6,11 @@
 # https://github.com/xiph/ogg.git
 
 
-dk_depend(msys)
+### DEPEND ###
+WIN_dk_depend(msys)
 
 
+### IMPORT ###
 dk_import(https://ftp.osuosl.org/pub/xiph/releases/ogg/libogg-1.3.5.zip)
 #dk_import(https://github.com/xiph/ogg.git)
 
@@ -17,7 +19,6 @@ dk_import(https://ftp.osuosl.org/pub/xiph/releases/ogg/libogg-1.3.5.zip)
 dk_include				(${OGG}/include)
 dk_include				(${OGG}/${OS}/${DEBUG_DIR}/include)
 dk_include				(${OGG}/${OS}/${RELEASE_DIR}/include)
-
 WIN_dk_libDebug			(${OGG}/${OS}/${DEBUG_DIR}/src/.libs/libogg.a)
 WIN_dk_libRelease		(${OGG}/${OS}/${RELEASE_DIR}/src/.libs/libogg.a)
 APPLE_dk_libDebug		(${OGG}/${OS}/${DEBUG_DIR}/src/.libs/libogg.a)
@@ -31,9 +32,9 @@ ANDROID_dk_libRelease	(${OGG}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libogg.
 
 
 ### 3RDPARTY CONFIGURE LINK ###
-WIN_DEBUG_dk_set		(OGG_CONFIGURE --with-ogg-includes=${OGG}/include 		--with-ogg-libraries=${OGG}/${OS}/${DEBUG_DIR}/src/.libs 	CFLAGS=-I${OGG}/include )
+WIN_DEBUG_dk_set		(OGG_CONFIGURE --with-ogg-includes=${OGG}/include 		--with-ogg-libraries=${OGG}/${OS}/${DEBUG_DIR}/src/.libs 	CFLAGS=-I${OGG}/include)
 WIN_RELEASE_dk_set		(OGG_CONFIGURE --with-ogg-includes=${OGG}/include 		--with-ogg-libraries=${OGG}/${OS}/${RELEASE_DIR}/src/.libs 	CFLAGS=-I${OGG}/include)
-APPLE_DEBUG_dk_set		(OGG_CONFIGURE --with-ogg-includes=${OGG}/include 		--with-ogg-libraries=${OGG}/${OS}/${DEBUG_DIR}/src/.libs 	CFLAGS=-I${OGG}/include )
+APPLE_DEBUG_dk_set		(OGG_CONFIGURE --with-ogg-includes=${OGG}/include 		--with-ogg-libraries=${OGG}/${OS}/${DEBUG_DIR}/src/.libs 	CFLAGS=-I${OGG}/include)
 APPLE_RELEASE_dk_set	(OGG_CONFIGURE --with-ogg-includes=${OGG}/include 		--with-ogg-libraries=${OGG}/${OS}/${RELEASE_DIR}/src/.libs 	CFLAGS=-I${OGG}/include)
 LINUX_DEBUG_dk_set		(OGG_CONFIGURE CPPFLAGS=-I${OGG}/${OS}/${DEBUG_DIR}/include)
 LINUX_RELEASE_dk_set	(OGG_CONFIGURE CPPFLAGS=-I${OGG}/${OS}/${RELEASE_DIR}/include)
@@ -42,72 +43,16 @@ RASPBERRY_RELEASE_dk_set(OGG_CONFIGURE CPPFLAGS=-I${OGG}/${OS}/${RELEASE_DIR}/in
 ANDROID_DEBUG_dk_set	(OGG_CONFIGURE -I${OGG}/${OS}/${DEBUG_DIR}/include 		--with-ogg-libraries=${OGG}/${OS}/${DEBUG_DIR}/src/.libs 	CFLAGS=-I${OGG}/include)
 ANDROID_RELEASE_dk_set	(OGG_CONFIGURE -I${OGG}/${OS}/${RELEASE_DIR}/include 	--with-ogg-libraries=${OGG}/${OS}/${RELEASE_DIR}/src/.libs 	CFLAGS=-I${OGG}/include)
 
+
 ### 3RDPARTY CMAKE LINK ###
-WIN_DEBUG_dk_set		(OGG_CMAKE -DOGG_INCLUDE_DIR=${OGG}/include -DOGG_LIBRARY=${OGG}/${OS}/${DEBUG_DIR}/src/.libs/libogg.a 		"-DCMAKE_CXX_FLAGS=-I${OGG}/${OS}/${DEBUG_DIR}/include" )
-WIN_RELEASE_dk_set		(OGG_CMAKE -DOGG_INCLUDE_DIR=${OGG}/include -DOGG_LIBRARY=${OGG}/${OS}/${RELEASE_DIR}/src/.libs/libogg.a 	"-DCMAKE_CXX_FLAGS=-I${OGG}/${OS}/${RELEASE_DIR}/include")
-APPLE_DEBUG_dk_set		(OGG_CMAKE -DOGG_INCLUDE_DIR=${OGG}/include -DOGG_LIBRARY=${OGG}/${OS}/${DEBUG_DIR}/src/.libs/libogg.a 		"-DCMAKE_CXX_FLAGS=-I${OGG}/${OS}/${DEBUG_DIR}/include")
-APPLE_RELEASE_dk_set	(OGG_CMAKE -DOGG_INCLUDE_DIR=${OGG}/include -DOGG_LIBRARY=${OGG}/${OS}/${RELEASE_DIR}/src/.libs/libogg.a 	"-DCMAKE_CXX_FLAGS=-I${OGG}/${OS}/${RELEASE_DIR}/include")
-LINUX_DEBUG_dk_set		(OGG_CMAKE -DOGG_INCLUDE_DIR=${OGG}/include -DOGG_LIBRARY=${OGG}/${OS}/${DEBUG_DIR}/src/.libs/libogg.a 		"-DCMAKE_CXX_FLAGS=-I${OGG}/${OS}/${DEBUG_DIR}/include")
-LINUX_RELEASE_dk_set	(OGG_CMAKE -DOGG_INCLUDE_DIR=${OGG}/include -DOGG_LIBRARY=${OGG}/${OS}/${RELEASE_DIR}/src/.libs/libogg.a 	"-DCMAKE_CXX_FLAGS=-I${OGG}/${OS}/${RELEASE_DIR}/include")
-RASPBERRY_DEBUG_dk_set	(OGG_CMAKE -DOGG_INCLUDE_DIR=${OGG}/include -DOGG_LIBRARY=${OGG}/${OS}/${DEBUG_DIR}/src/.libs/libogg.a 		"-DCMAKE_CXX_FLAGS=-I${OGG}/${OS}/${DEBUG_DIR}/include")
-RASPBERRY_RELEASE_dk_set(OGG_CMAKE -DOGG_INCLUDE_DIR=${OGG}/include -DOGG_LIBRARY=${OGG}/${OS}/${RELEASE_DIR}/src/.libs/libogg.a 	"-DCMAKE_CXX_FLAGS=-I${OGG}/${OS}/${RELEASE_DIR}/include")
-ANDROID_DEBUG_dk_set	(OGG_CMAKE -DOGG_INCLUDE_DIR=${OGG}/include -DOGG_LIBRARY=${OGG}/${OS}/${DEBUG_DIR}/src/.libs/libogg.a		"-DCMAKE_CXX_FLAGS=-I${OGG}/${OS}/${DEBUG_DIR}/include")
-ANDROID_RELEASE_dk_set	(OGG_CMAKE -DOGG_INCLUDE_DIR=${OGG}/include -DOGG_LIBRARY=${OGG}/${OS}/${RELEASE_DIR}/src/.libs/libogg.a 	"-DCMAKE_CXX_FLAGS=-I${OGG}/${OS}/${RELEASE_DIR}/include")
+DEBUG_dk_set	(OGG_CMAKE -DOGG_INCLUDE_DIR=${OGG}/include -DOGG_LIBRARY=${OGG}/${OS}/${DEBUG_DIR}/src/.libs/libogg.a 		"-DCMAKE_CXX_FLAGS=-I${OGG}/${OS}/${DEBUG_DIR}/include" )
+RELEASE_dk_set	(OGG_CMAKE -DOGG_INCLUDE_DIR=${OGG}/include -DOGG_LIBRARY=${OGG}/${OS}/${RELEASE_DIR}/src/.libs/libogg.a 	"-DCMAKE_CXX_FLAGS=-I${OGG}/${OS}/${RELEASE_DIR}/include")
 
 
-### COMPILE ###
-WIN_DEBUG_dk_setPath(${OGG}/${OS}/${DEBUG_DIR})
-WIN_DEBUG_dk_queueMsys(${DKCONFIGURE_BUILD})
-WIN_DEBUG_dk_queueMsys(make)
-WIN_RELEASE_dk_setPath(${OGG}/${OS}/${RELEASE_DIR})
-WIN_RELEASE_dk_queueMsys(${DKCONFIGURE_BUILD})
-WIN_RELEASE_dk_queueMsys(make)
-
-
-MAC_DEBUG_dk_setPath(${OGG}/${OS}/${DEBUG_DIR})
-MAC_DEBUG_dk_queueCommand(${DKCONFIGURE_BUILD})
-MAC_DEBUG_dk_queueCommand(make)
-MAC_RELEASE_dk_setPath(${OGG}/${OS}/${RELEASE_DIR})
-MAC_RELEASE_dk_queueCommand(${DKCONFIGURE_BUILD})
-MAC_RELEASE_dk_queueCommand(make)
-
-
-IOS_DEBUG_dk_setPath(${OGG}/${OS}/${DEBUG_DIR})
-IOS_DEBUG_dk_queueCommand(${DKCONFIGURE_BUILD})
-IOS_DEBUG_dk_queueCommand(make)
-IOS_RELEASE_dk_setPath(${OGG}/${OS}/${RELEASE_DIR})
-IOS_RELEASE_dk_queueCommand(${DKCONFIGURE_BUILD})
-IOS_RELEASE_dk_queueCommand(make)
-
-
-IOSSIM_DEBUG_dk_setPath(${OGG}/${OS}/${DEBUG_DIR})
-IOSSIM_DEBUG_dk_queueCommand(${DKCONFIGURE_BUILD})
-IOSSIM_DEBUG_dk_queueCommand(make)
-IOSSIM_RELEASE_dk_setPath(${OGG}/${OS}/${RELEASE_DIR})
-IOSSIM_RELEASE_dk_queueCommand(${DKCONFIGURE_BUILD})
-IOSSIM_RELEASE_dk_queueCommand(make)
-
-
-LINUX_DEBUG_dk_setPath(${OGG}/${OS}/${DEBUG_DIR})
-LINUX_DEBUG_dk_queueCommand(${DKCONFIGURE_BUILD})
-LINUX_DEBUG_dk_queueCommand(make)
-LINUX_RELEASE_dk_setPath(${OGG}/${OS}/${RELEASE_DIR})
-LINUX_RELEASE_dk_queueCommand(${DKCONFIGURE_BUILD})
-LINUX_RELEASE_dk_queueCommand(make)
-
-
-RASPBERRY_DEBUG_dk_setPath(${OGG}/${OS}/${DEBUG_DIR})
-RASPBERRY_DEBUG_dk_queueCommand(${DKCONFIGURE_BUILD})
-RASPBERRY_DEBUG_dk_queueCommand(make)
-RASPBERRY_RELEASE_dk_setPath(${OGG}/${OS}/${RELEASE_DIR})
-RASPBERRY_RELEASE_dk_queueCommand(${DKCONFIGURE_BUILD})
-RASPBERRY_RELEASE_dk_queueCommand(make)
-
-
-#ANDROID_dk_ndk(${OGG_FOLDER})
-ANDROID_DEBUG_dk_setPath(${OGG}/${OS}/${DEBUG_DIR})
-ANDROID_DEBUG_dk_queueMsys(${DKCONFIGURE_BUILD})
-ANDROID_DEBUG_dk_queueMsys(make)
-ANDROID_RELEASE_dk_setPath(${OGG}/${OS}/${RELEASE_DIR})
-ANDROID_RELEASE_dk_queueMsys(${DKCONFIGURE_BUILD})
-ANDROID_RELEASE_dk_queueMsys(make)
+### GENERATE / COMPILE ###
+DEBUG_dk_setPath		(${OGG}/${OS}/${DEBUG_DIR})
+DEBUG_dk_queueShell		(${DKCONFIGURE_BUILD})
+DEBUG_dk_queueShell		(make)
+RELEASE_dk_setPath		(${OGG}/${OS}/${RELEASE_DIR})
+RELEASE_dk_queueShell	(${DKCONFIGURE_BUILD})
+RELEASE_dk_queueShell	(make)

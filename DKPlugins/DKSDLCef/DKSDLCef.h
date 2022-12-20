@@ -28,7 +28,7 @@
 #ifndef DKSDLCef_H
 #define DKSDLCef_H
 
-#pragma warning(push, 0); //Silence warning from 3rd party headers
+//WARNING_DISABLE
 	#include <list>
 	#include <include/cef_client.h>
 	#include <include/cef_render_handler.h>
@@ -38,7 +38,7 @@
 		//#include <X11/cursorfont.h>
 	#endif
 	#include "SDL.h"
-#pragma warning(pop);
+//WARNING_ENABLE
 
 #include "DK/DK.h"
 #include "DK/DKApp.h"

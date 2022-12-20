@@ -23,9 +23,10 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #include "DK/stdafx.h"
-#include "DKGLInfo.h"
+#include "DKOSGViewer/DKGLInfo.h"
+
+//WARNING_DISABLE
 #include <osg/FragmentProgram>
 #include <osg/GraphicsContext>
 #include <osg/GL>
@@ -34,6 +35,8 @@
 #include <osg/Texture>
 #include <osgViewer/Version>
 #include <OpenThreads/Thread>
+//WARNING_ENABLE
+
 
 bool DKGLInfo::Init(){
 	DKDEBUGFUNC();	

@@ -29,10 +29,11 @@
 #ifndef DKIos_H
 #define DKIos_H
 
-#import <UIKit/UIKit.h>
 
 class DKIos{
-	//TODO
+public:
+	static bool GetScreenWidth(int& w);
+	static bool GetScreenHeight(int& h);
 };
 
 #endif //DKIos_H

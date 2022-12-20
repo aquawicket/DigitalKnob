@@ -35,12 +35,15 @@
 #define  LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG_TAG,__VA_ARGS__)
 #define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
 
+// WARNING_DISABLE
 #include <jni.h>
 #include <string>
 #include <android/log.h>
 #include <iostream>
 #include <stdio.h>
-#include "DKString.h"
+// WARNING_ENABLE
+
+#include "DK/DKString.h"
 
 struct JavaData
 {
@@ -54,7 +57,9 @@ class DKAndroid
 {
 public:
 	static void init();
-	static bool GetMousePos(int& x, int& y);	
+	static bool GetMousePos(int& x, int& y);
+	static bool GetScreenHeight(int& h);
+	static bool GetScreenWidth(int& w);
 	static unsigned int android_width;
 	static unsigned int android_height;
 	static unsigned int android_mouseX;
@@ -64,6 +69,7 @@ public:
 extern "C" 
 {
 	JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved);
+	JNIEXPORT void Java_com_digitalknob_dk_DKApp_testFunc(JNIEnv* env, jobject thiz);
 	void initJNIBridge(JNIEnv * env, jobject obj);
 	void exitJNIBridge(JNIEnv * env, jobject obj);
 	void initSDL(JNIEnv* env, jclass cls, jobject array);

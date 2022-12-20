@@ -34,7 +34,6 @@
 #include "DKDuktape/DKDuktape.h"
 
 
-///////////////////////////////////////////////////////////////
 class DKKeyboardEvent : public DKObjectT<DKKeyboardEvent>
 {
 public:
