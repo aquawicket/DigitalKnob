@@ -4,11 +4,14 @@
 
 ### DEPEND ###
 dk_depend(freetype)
-dk_depend(glew)
-dk_depend(lua)
-dk_depend(sdl)
-dk_depend(sdl_image)
-dk_depend(sfml)
+
+
+# BUILD_SAMPLES
+#dk_depend(glew)
+#dk_depend(lua)
+#dk_depend(sdl)
+#dk_depend(sdl_image)
+#dk_depend(sfml)
 
 
 ### IMPORT ###
