@@ -569,6 +569,7 @@ function DKBuild_DoResults(){
 			if(!DKBuild_Command(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/openjdk/registerJDK.cmd"))
 				return false
 		}
+		/*
 		if(CPP_DK_GetOS() !== "Windows"){
 			if(!DKBuild_Command("chmod 777 "+app_path+OS+"/gradlew"))
 				return false;
@@ -580,6 +581,7 @@ function DKBuild_DoResults(){
 			if(!DKBuild_Command(app_path+OS+"/___Install.cmd"))
 				return false
 		}
+		*/
 	}
 	
 	////// ANDROID6 arm64-v8a/////
@@ -615,6 +617,7 @@ function DKBuild_DoResults(){
 			if(!DKBuild_Command(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/openjdk/registerJDK.cmd"))
 				return false
 		}
+		/*
 		if(CPP_DK_GetOS() !== "Windows"){
 			// FIXME: Setting JAVA_HOME not working on UNIX
 			//if(!DKBuild_Command("chmod 777 "+DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/openjdk/registerJDK.sh"))
@@ -624,7 +627,6 @@ function DKBuild_DoResults(){
 			if(!DKBuild_Command("chmod 777 "+app_path+OS+"/gradlew"))
 				return false;
 		}
-		/*
 		if(!DKBuild_Command(app_path+OS+"/gradlew --project-dir "+app_path+OS+" --info clean build"))
 			return false
 		if(CPP_DK_GetOS() === "Windows"){
