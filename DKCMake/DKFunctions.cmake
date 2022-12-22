@@ -4562,4 +4562,22 @@ endmacro()
 dk_createOsMacros("dk_queueShell")
 
 
+###############################################################################
+# dk_resizeImage(inpath width height outpath)
+#
+#	@inpath		- Full path of the image file to resize
+#	@width		- The number of pixels in with to resize to 
+#	@height		- The number of pixels in height to resize to
+#	@outpath	- Full path of the output file to save to
+#
+function(dk_resizeImage inpath width height outpath)
+	DKDEBUGFUNC(${ARGV})
+	if(IMAGEMAGICK_CONVERT)
+		dk_executeProcess(${IMAGEMAGICK_CONVERT} ${inpath} -resize ${width}x${height} ${outpath})
+	else()
+		dk_executeProcess(sips -z ${width} ${height} ${inpath} --out ${outpath})
+	endif()
+endfunction()
+
+
 include(${DKFunctions_ext})

@@ -624,12 +624,14 @@ function DKBuild_DoResults(){
 			if(!DKBuild_Command("chmod 777 "+app_path+OS+"/gradlew"))
 				return false;
 		}
+		/*
 		if(!DKBuild_Command(app_path+OS+"/gradlew --project-dir "+app_path+OS+" --info clean build"))
 			return false
 		if(CPP_DK_GetOS() === "Windows"){
 			if(!DKBuild_Command(app_path+OS+"/___Install.cmd"))
 				return false
 		}
+		*/
 	}
 	
 	console.log("\n")
