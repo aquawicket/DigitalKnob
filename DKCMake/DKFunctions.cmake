@@ -1215,7 +1215,7 @@ function(dk_rename from to) # FLAGS: OVERWRITE, NOERROR
 	endif()
 	file(RENAME ${from} ${to})
 endfunction()
-
+dk_createOsMacros("dk_rename")
 
 ###############################################################################
 # dk_upxCompress(path)
