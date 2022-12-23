@@ -1193,9 +1193,9 @@ if(ANDROID)
 	#cmd /c "%ANDROID_HOME%/platform-tools/adb" install -r %APP_ROOT%\app\build\outputs\apk\debug\app-debug.apk
 	
 	if(WIN_HOST)
-		add_custom_command(TARGET main POST_BUILD COMMAND ${DKPROJECT}/${OS}/____Install.cmd)
+		add_custom_command(TARGET main POST_BUILD COMMAND ${DKPROJECT}/${OS}/___Install.cmd)
 	else()
-		add_custom_command(TARGET main POST_BUILD COMMAND ${DKPROJECT}/${OS}/____Install.sh)
+		add_custom_command(TARGET main POST_BUILD COMMAND ${DKPROJECT}/${OS}/___Install.sh)
 	endif()
 	
 endif()
