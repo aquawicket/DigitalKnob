@@ -1127,7 +1127,7 @@ if(ANDROID)
 	dk_copy(${DKPROJECT}/assets ${DKPROJECT}/${OS}/app/src/main/assets)
 	file(WRITE ${DKPROJECT}/${OS}/local.properties ${localProperties})
 	dkFileReplace(${DKPROJECT}/${OS}/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}")
-	dk_executeProcess(chmod 777 ${DKPROJECT}/${OS}/gradlew)
+	UNIX_HOST_dk_executeProcess(chmod 777 ${DKPROJECT}/${OS}/gradlew)
 	
 	####### Append -frtti to C/CXX Flags ##############################
 	set(CMAKE_ANDROID_GUI 1)
