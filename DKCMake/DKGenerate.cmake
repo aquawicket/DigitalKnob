@@ -1085,7 +1085,7 @@ if(ANDROID)
 	########################## CREATE ICONS ###############################
 	#if(IMAGEMAGICK_CONVERT)
 		dk_info("Creating android icons for ${APP_NAME} . . .")
-		dk_makeDirectory(${DKPROJECT}/${OS}/app/src/main/res/mipmap-ldpi)
+		#dk_makeDirectory(${DKPROJECT}/${OS}/app/src/main/res/mipmap-ldpi)
 		#dk_executeProcess(${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 36x36 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-ldpi/ic_launcher.png)
 		dk_resizeImage(${DKPROJECT}/icons/icon.png 36 36 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-ldpi/ic_launcher.png)
 		#dk_makeDirectory(${DKPROJECT}/${OS}/app/src/main/res/mipmap-mdpi)
