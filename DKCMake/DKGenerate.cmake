@@ -1193,17 +1193,10 @@ if(ANDROID)
 	#################### Install apk to device ###############
 	#cmd /c "%ANDROID_HOME%/platform-tools/adb" install -r %APP_ROOT%\app\build\outputs\apk\debug\app-debug.apk
 	
-	#if(ANDROID-SDK)
-		add_custom_command(TARGET main 
-		POST_BUILD 
-		COMMAND ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/app/build/outputs/apk/debug/app-debug.apk)
-	#endif()
-	
-	#if(WIN_HOST)
-	#	add_custom_command(TARGET main POST_BUILD COMMAND ${DKPROJECT}/${OS}/___Install.cmd)
-	#else()
-	#	add_custom_command(TARGET main POST_BUILD COMMAND ${DKPROJECT}/${OS}/___Install.sh)
-	#endif()
+	#add_custom_command(TARGET main 
+	#	POST_BUILD 
+	#	COMMAND ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/app/build/outputs/apk/debug/app-debug.apk)
+
 	
 endif()
 
