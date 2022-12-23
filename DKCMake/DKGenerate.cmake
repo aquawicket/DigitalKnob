@@ -1184,7 +1184,8 @@ if(ANDROID)
 	add_custom_command(
 		TARGET main
 		POST_BUILD
-		COMMAND ${DKPROJECT}/${OS}/gradlew --project-dir ${DKPROJECT}/${OS} --info clean build)
+		COMMAND ${DKPROJECT}/${OS}/gradlew --project-dir ${DKPROJECT}/${OS} --info clean build
+		COMMAND ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/app/build/outputs/apk/debug/app-debug.apk)
 	
 	#################### List packages ####################################
 	#################### List packages matching PACKAGE_NAME ##############
