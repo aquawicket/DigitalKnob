@@ -1084,35 +1084,35 @@ endif()
 if(ANDROID)
 	########################## CREATE ICONS ###############################
 	#if(IMAGEMAGICK_CONVERT)
-		dk_info("Building android icons for ${APP_NAME} . . .")
-		dk_makeDirectory(${DKPROJECT}/${OS}/app/src/main/res/mipmap-ldpi)
+		dk_info("Creating android icons for ${APP_NAME} . . .")
+		#dk_makeDirectory(${DKPROJECT}/${OS}/app/src/main/res/mipmap-ldpi)
 		#dk_executeProcess(${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 36x36 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-ldpi/ic_launcher.png)
 		dk_resizeImage(${DKPROJECT}/icons/icon.png 36 36 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-ldpi/ic_launcher.png)
-		dk_makeDirectory(${DKPROJECT}/${OS}/app/src/main/res/mipmap-mdpi)
+		#dk_makeDirectory(${DKPROJECT}/${OS}/app/src/main/res/mipmap-mdpi)
 		#dk_executeProcess(${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 48x48 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-mdpi/ic_launcher.png)
 		dk_resizeImage(${DKPROJECT}/icons/icon.png 48 48 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-mdpi/ic_launcher.png)
-		dk_makeDirectory(${DKPROJECT}/${OS}/app/src/main/res/mipmap-hdpi)
+		#dk_makeDirectory(${DKPROJECT}/${OS}/app/src/main/res/mipmap-hdpi)
 		#dk_executeProcess(${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 72x72 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-hdpi/ic_launcher.png)
 		dk_resizeImage(${DKPROJECT}/icons/icon.png 72 72 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-hdpi/ic_launcher.png)
-		dk_makeDirectory(${DKPROJECT}/${OS}/app/src/main/res/mipmap-xhdpi)
+		#dk_makeDirectory(${DKPROJECT}/${OS}/app/src/main/res/mipmap-xhdpi)
 		#dk_executeProcess(${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 96x96 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-xhdpi/ic_launcher.png)
 		dk_resizeImage(${DKPROJECT}/icons/icon.png 96 96 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-xhdpi/ic_launcher.png)
-		dk_makeDirectory(${DKPROJECT}/${OS}/app/src/main/res/mipmap-xxhdpi)
+		#dk_makeDirectory(${DKPROJECT}/${OS}/app/src/main/res/mipmap-xxhdpi)
 		#dk_executeProcess(${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 144x144 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
 		dk_resizeImage(${DKPROJECT}/icons/icon.png 144 144 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
-		dk_makeDirectory(${DKPROJECT}/${OS}/app/src/main/res/mipmap-xxxhdpi)
+		#dk_makeDirectory(${DKPROJECT}/${OS}/app/src/main/res/mipmap-xxxhdpi)
 		#dk_executeProcess(${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 192x192 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
 		dk_resizeImage(${DKPROJECT}/icons/icon.png 192 192 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
 	#endif()
 	dk_copy(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
 	
 	###################### Backup Executable ###########################
-	if(DEBUG)
-		dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.apk ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.apk.backup OVERWRITE)
-	endif()
-	if(RELEASE)
-		dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.apk ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.apk.backup OVERWRITE)
-	endif()
+	#if(DEBUG)
+		DEBUG_dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.apk ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.apk.backup OVERWRITE)
+	#endif()
+	#if(RELEASE)
+		RELEASE_dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.apk ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.apk.backup OVERWRITE)
+	#endif()
 		
 	####################### Create Library Target ###################
 	set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/app/src/main/jniLibs/${ANDROID_ABI}")
@@ -1122,39 +1122,28 @@ if(ANDROID)
 	set(localProperties "sdk.dir=${ANDROID-SDK}")
 	
 	####### Import Android Build files ############################################
-	#if(ANDROID_32)
-		dk_copy(${DKPLUGINS}/_DKIMPORT/android/ ${DKPROJECT}/${OS}/ FALSE)
-		dk_copy(${DKPLUGINS}/_DKIMPORT/${OS}/ ${DKPROJECT}/${OS}/ FALSE)
-		dk_copy(${DKPROJECT}/assets ${DKPROJECT}/${OS}/app/src/main/assets)
-		file(WRITE ${DKPROJECT}/${OS}/local.properties ${localProperties})
-		dkFileReplace(${DKPROJECT}/${OS}/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}")
-	#endif()
-	#if(ANDROID_64) 
-	#	dk_copy(${DKPLUGINS}/_DKIMPORT/android/ ${DKPROJECT}/android64/ FALSE)
-	#	dk_copy(${DKPLUGINS}/_DKIMPORT/android64/ ${DKPROJECT}/android64/ FALSE)
-	#	dk_copy(${DKPROJECT}/assets ${DKPROJECT}/android64/app/src/main/assets)
-	#	file(WRITE ${DKPROJECT}/android64/local.properties ${localProperties})
-	#	dkFileReplace(${DKPROJECT}/android64/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}")
-	#endif()
-	
+	dk_copy(${DKPLUGINS}/_DKIMPORT/android/ ${DKPROJECT}/${OS}/ FALSE)
+	dk_copy(${DKPLUGINS}/_DKIMPORT/${OS}/ ${DKPROJECT}/${OS}/ FALSE)
+	dk_copy(${DKPROJECT}/assets ${DKPROJECT}/${OS}/app/src/main/assets)
+	file(WRITE ${DKPROJECT}/${OS}/local.properties ${localProperties})
+	dkFileReplace(${DKPROJECT}/${OS}/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}")
+	dk_executeProcess(chmod 777 ${DKPROJECT}/${OS}/gradlew)
 	
 	####### Append -frtti to C/CXX Flags ##############################
 	set(CMAKE_ANDROID_GUI 1)
-	dk_set(CMAKE_C_FLAGS ${CMAKE_C_FLAGS} -frtti)
-	dk_set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} -frtti)
+	#dk_set(CMAKE_C_FLAGS ${CMAKE_C_FLAGS} -frtti)
+	#dk_set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} -frtti)
 	
 	# https://stackoverflow.com/a/53806411/688352
 	#set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS_RELEASE} -Wl,--hash-style=both")
     #set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS_RELEASE} -Wl,--hash-style=both")
     #set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS_RELEASE} -Wl,--hash-style=both")
 	
-	#add_library(${APP_NAME} SHARED ${App_SRC})
 	add_library(main SHARED ${App_SRC})
 		
 	########################## Add Dependencies ########################
 	foreach(plugin ${dkdepend_list})
 		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
-			#add_dependencies(${APP_NAME} ${plugin})
 			add_dependencies(main ${plugin})
 		endif()	
 	endforeach()
@@ -1179,6 +1168,7 @@ if(ANDROID)
 		set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT gradleAPK)
 	endif()
 		
+		
 	####################### Do Post Build Stuff #######################
 	# "https://gist.github.com/baiwfg2/39881ba703e9c74e95366ed422641609"
 	# TEST
@@ -1190,16 +1180,24 @@ if(ANDROID)
 	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
 	#)
 	
+	####################### Gradle Build #####################
 	add_custom_command(
 		TARGET main
 		POST_BUILD
 		COMMAND ${DKPROJECT}/${OS}/gradlew --project-dir ${DKPROJECT}/${OS} --info clean build)
 	
-	#if(CPP_DK_Execute(app_path+OS+"/gradlew --project-dir "+app_path+OS+" --info clean build").error)
-	#	return
-	#if(CPP_DK_Execute(app_path+OS+"/___Install.cmd").error)
-	#	return
-		
+	#################### List packages ####################################
+	#################### List packages matching PACKAGE_NAME ##############
+	#################### Uninstall PACKAGE_NAME package ###################	
+	#################### Install apk to device ###############
+	#cmd /c "%ANDROID_HOME%/platform-tools/adb" install -r %APP_ROOT%\app\build\outputs\apk\debug\app-debug.apk
+	
+	if(WIN_HOST)
+		add_custom_command(TARGET main POST_BUILD COMMAND ${DKPROJECT}/${OS}/____Install.cmd)
+	else()
+		add_custom_command(TARGET main POST_BUILD COMMAND ${DKPROJECT}/${OS}/____Install.sh)
+	endif()
+	
 endif()
 
 
