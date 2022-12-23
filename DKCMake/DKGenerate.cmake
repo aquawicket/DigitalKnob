@@ -1184,6 +1184,7 @@ if(ANDROID)
 	add_custom_command(
 		TARGET main
 		POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E echo "Building with Gradle"
 		COMMAND ${DKPROJECT}/${OS}/gradlew --project-dir ${DKPROJECT}/${OS} --info clean build)
 	
 	#################### List packages ####################################
@@ -1194,7 +1195,8 @@ if(ANDROID)
 	#cmd /c "%ANDROID_HOME%/platform-tools/adb" install -r %APP_ROOT%\app\build\outputs\apk\debug\app-debug.apk
 	add_custom_command(
 		TARGET main 
-		POST_BUILD 
+		POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E echo "Installing app-debug.apk to device"
 		COMMAND ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/app/build/outputs/apk/debug/app-debug.apk)
 
 endif()
