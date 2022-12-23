@@ -791,7 +791,6 @@ if(IOS OR IOSSIM)
 	#	endif()
 	#endif()
 	
-	
 	###################### BACKUP USERDATA ###############################
 	# Backup files and folders excluded from the package
 	#dk_copy(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
@@ -800,37 +799,24 @@ if(IOS OR IOSSIM)
 	# Restore the backed up files, excluded from assets
 	#dk_copy(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
 	#file(REMOVE ${DKPROJECT}/Backup)
-		
-	########################## Images ##############################
-	#TODO
 	
 	########################## ICONS ###############################
 	if(EXISTS ${DKPROJECT}/icons/icon.png)
-		dk_makeDirectory(${DKPROJECT}/icons/ios)
-		dk_makeDirectory(${DKPROJECT}/icons/ios/icons.iconset)
-		
-		#dk_executeProcess(sips -z 16 16 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/ios/icons.iconset/icon_16x16.png WORKING_DIRECTORY ${DIGITALKNOB})
+		#dk_makeDirectory(${DKPROJECT}/icons/ios)
+		#dk_makeDirectory(${DKPROJECT}/icons/ios/icons.iconset)
 		dk_resizeImage(${DKPROJECT}/icons/icon.png 16 16 ${DKPROJECT}/icons/ios/icons.iconset/icon_16x16.png)
-		#dk_executeProcess(sips -z 32 32 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/ios/icons.iconset/icon_16x16@2x.png WORKING_DIRECTORY ${DIGITALKNOB})
 		dk_resizeImage(${DKPROJECT}/icons/icon.png 32 32 ${DKPROJECT}/icons/ios/icons.iconset/icon_16x16@2x.png)
-		#dk_executeProcess(sips -z 32 32 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/ios/icons.iconset/icon_32x32.png WORKING_DIRECTORY ${DIGITALKNOB})
 		dk_resizeImage(${DKPROJECT}/icons/icon.png 32 32 ${DKPROJECT}/icons/ios/icons.iconset/icon_32x32.png)
-		#dk_executeProcess(sips -z 64 64 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/ios/icons.iconset/icon_32x32@2x.png WORKING_DIRECTORY ${DIGITALKNOB})
 		dk_resizeImage(${DKPROJECT}/icons/icon.png 64 64 ${DKPROJECT}/icons/ios/icons.iconset/icon_32x32@2x.png)
-		#dk_executeProcess(sips -z 128 128 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/ios/icons.iconset/icon_128x128.png WORKING_DIRECTORY ${DIGITALKNOB})
 		dk_resizeImage(${DKPROJECT}/icons/icon.png 128 128 ${DKPROJECT}/icons/ios/icons.iconset/icon_128x128.png)
-		#dk_executeProcess(sips -z 256 256 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/ios/icons.iconset/icon_128x128@2x.png WORKING_DIRECTORY ${DIGITALKNOB})
 		dk_resizeImage(${DKPROJECT}/icons/icon.png 256 256 ${DKPROJECT}/icons/ios/icons.iconset/icon_128x128@2x.png)
-		#dk_executeProcess(sips -z 256 256 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/ios/icons.iconset/icon_256x256.png WORKING_DIRECTORY ${DIGITALKNOB})
 		dk_resizeImage(${DKPROJECT}/icons/icon.png 256 256 ${DKPROJECT}/icons/ios/icons.iconset/icon_256x256.png)
-		#dk_executeProcess(sips -z 512 512 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/ios/icons.iconset/icon_256x256@2x.png WORKING_DIRECTORY ${DIGITALKNOB})
 		dk_resizeImage(${DKPROJECT}/icons/icon.png 512 512 ${DKPROJECT}/icons/ios/icons.iconset/icon_256x256@2x.png)
-		#dk_executeProcess(sips -z 512 512 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/ios/icons.iconset/icon_512x512.png WORKING_DIRECTORY ${DIGITALKNOB})
 		dk_resizeImage(${DKPROJECT}/icons/icon.png 512 512 ${DKPROJECT}/icons/ios/icons.iconset/icon_512x512.png)
-		#dk_executeProcess(sips -z 1024 1024 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/ios/icons.iconset/icon_512x512@2x.png WORKING_DIRECTORY ${DIGITALKNOB})
 		dk_resizeImage(${DKPROJECT}/icons/icon.png 1024 1024 ${DKPROJECT}/icons/ios/icons.iconset/icon_512x512@2x.png)
 
-		dk_executeProcess(iconutil -c icns -o ${DKPROJECT}/icons/ios/icons.icns ${DKPROJECT}/icons/ios/icons.iconset WORKING_DIRECTORY ${DIGITALKNOB})
+		#dk_executeProcess(iconutil -c icns -o ${DKPROJECT}/icons/ios/icons.icns ${DKPROJECT}/icons/ios/icons.iconset WORKING_DIRECTORY ${DIGITALKNOB})
+		dk_executeProcess(iconutil -c icns -o ${DKPROJECT}/icons/ios/icons.icns ${DKPROJECT}/icons/ios/icons.iconset)
 		set(MACOSX_BUNDLE_ICON_FILE icons.icns)
 		set(app_ICONS ${DKPROJECT}/icons/ios/icons.icns)
 		set_source_files_properties(${app_ICONS} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
@@ -1083,27 +1069,14 @@ endif()
 ###########
 if(ANDROID)
 	########################## CREATE ICONS ###############################
-	#if(IMAGEMAGICK_CONVERT)
-		dk_info("Creating android icons for ${APP_NAME} . . .")
-		#dk_makeDirectory(${DKPROJECT}/${OS}/app/src/main/res/mipmap-ldpi)
-		#dk_executeProcess(${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 36x36 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-ldpi/ic_launcher.png)
-		dk_resizeImage(${DKPROJECT}/icons/icon.png 36 36 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-ldpi/ic_launcher.png)
-		#dk_makeDirectory(${DKPROJECT}/${OS}/app/src/main/res/mipmap-mdpi)
-		#dk_executeProcess(${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 48x48 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-mdpi/ic_launcher.png)
-		dk_resizeImage(${DKPROJECT}/icons/icon.png 48 48 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-mdpi/ic_launcher.png)
-		#dk_makeDirectory(${DKPROJECT}/${OS}/app/src/main/res/mipmap-hdpi)
-		#dk_executeProcess(${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 72x72 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-hdpi/ic_launcher.png)
-		dk_resizeImage(${DKPROJECT}/icons/icon.png 72 72 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-hdpi/ic_launcher.png)
-		#dk_makeDirectory(${DKPROJECT}/${OS}/app/src/main/res/mipmap-xhdpi)
-		#dk_executeProcess(${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 96x96 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-xhdpi/ic_launcher.png)
-		dk_resizeImage(${DKPROJECT}/icons/icon.png 96 96 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-xhdpi/ic_launcher.png)
-		#dk_makeDirectory(${DKPROJECT}/${OS}/app/src/main/res/mipmap-xxhdpi)
-		#dk_executeProcess(${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 144x144 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
-		dk_resizeImage(${DKPROJECT}/icons/icon.png 144 144 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
-		#dk_makeDirectory(${DKPROJECT}/${OS}/app/src/main/res/mipmap-xxxhdpi)
-		#dk_executeProcess(${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -resize 192x192 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
-		dk_resizeImage(${DKPROJECT}/icons/icon.png 192 192 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
-	#endif()
+	dk_info("Creating android icons for ${APP_NAME} . . .")
+	dk_resizeImage(${DKPROJECT}/icons/icon.png 36 36 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-ldpi/ic_launcher.png)
+	dk_resizeImage(${DKPROJECT}/icons/icon.png 48 48 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-mdpi/ic_launcher.png)
+	dk_resizeImage(${DKPROJECT}/icons/icon.png 72 72 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-hdpi/ic_launcher.png)
+	dk_resizeImage(${DKPROJECT}/icons/icon.png 96 96 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-xhdpi/ic_launcher.png)
+	dk_resizeImage(${DKPROJECT}/icons/icon.png 144 144 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
+	dk_resizeImage(${DKPROJECT}/icons/icon.png 192 192 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
+
 	dk_copy(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
 	
 	###################### Backup Executable ###########################
