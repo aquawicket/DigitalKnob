@@ -4572,6 +4572,8 @@ dk_createOsMacros("dk_queueShell")
 #
 function(dk_resizeImage inpath width height outpath)
 	DKDEBUGFUNC(${ARGV})
+	get_filename_component(indir ${inpath} DIRECTORY)
+	dk_makeDirectory(${indir})
 	if(IMAGEMAGICK_CONVERT)
 		dk_executeProcess(${IMAGEMAGICK_CONVERT} ${inpath} -resize ${width}x${height} ${outpath})
 	elseif(MAC_HOST)
