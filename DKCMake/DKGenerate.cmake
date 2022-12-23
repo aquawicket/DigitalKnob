@@ -1181,11 +1181,12 @@ if(ANDROID)
 	#)
 	
 	####################### Gradle Build #####################
+	WIN_HOST_dk_set(CMD_C "cmd /c")
 	add_custom_command(
 		TARGET main
 		POST_BUILD
 		COMMAND ${CMAKE_COMMAND} -E echo "Building with Gradle"
-		COMMAND ${DKPROJECT}/${OS}/gradlew --project-dir ${DKPROJECT}/${OS} --info clean build)
+		COMMAND ${CMD_C} ${DKPROJECT}/${OS}/gradlew --project-dir ${DKPROJECT}/${OS} --info clean build)
 	
 	#################### List packages ####################################
 	#################### List packages matching PACKAGE_NAME ##############
