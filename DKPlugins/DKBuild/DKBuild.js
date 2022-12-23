@@ -565,11 +565,11 @@ function DKBuild_DoResults(){
 				return false
 		}
 		
+		/*
 		if(CPP_DK_GetOS() === "Windows"){
 			if(!DKBuild_Command(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/openjdk/registerJDK.cmd"))
 				return false
 		}
-		/*
 		if(CPP_DK_GetOS() !== "Windows"){
 			if(!DKBuild_Command("chmod 777 "+app_path+OS+"/gradlew"))
 				return false;
@@ -613,11 +613,12 @@ function DKBuild_DoResults(){
 			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+" --target main --config Release"))
 				return false
 		}
+		
+		/*
 		if(CPP_DK_GetOS() === "Windows"){
 			if(!DKBuild_Command(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/openjdk/registerJDK.cmd"))
 				return false
 		}
-		/*
 		if(CPP_DK_GetOS() !== "Windows"){
 			// FIXME: Setting JAVA_HOME not working on UNIX
 			//if(!DKBuild_Command("chmod 777 "+DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/openjdk/registerJDK.sh"))
