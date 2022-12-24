@@ -1154,12 +1154,14 @@ if(ANDROID)
 	#)
 	
 	####################### Gradle Build #####################
-	WIN_HOST_dk_set(CMD_C "cmd /c")
+	#WIN_HOST_dk_set(CMD_C "cmd /c")
 	add_custom_command(
 		TARGET main
 		POST_BUILD
 		COMMAND ${CMAKE_COMMAND} -E echo "Building with Gradle"
-		COMMAND ${CMD_C} ${DKPROJECT}/${OS}/gradlew --project-dir ${DKPROJECT}/${OS} --info clean build)
+		COMMAND ${DKPROJECT}/${OS}/gradlew --project-dir ${DKPROJECT}/${OS} --info clean build)
+		#COMMAND ${CMAKE_COMMAND} -E echo "Installing app-debug.apk to device"
+		#COMMAND ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/app/build/outputs/apk/debug/app-debug.apk)
 	
 	#################### List packages ####################################
 	#################### List packages matching PACKAGE_NAME ##############
