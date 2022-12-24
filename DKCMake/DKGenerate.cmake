@@ -1159,16 +1159,13 @@ if(ANDROID)
 		TARGET main
 		POST_BUILD
 		COMMAND ${CMAKE_COMMAND} -E echo "Building with Gradle"
-		COMMAND ${DKPROJECT}/${OS}/gradlew --project-dir ${DKPROJECT}/${OS} --info clean build)
-		#COMMAND ${CMAKE_COMMAND} -E echo "Installing app-debug.apk to device"
-		#COMMAND ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/app/build/outputs/apk/debug/app-debug.apk)
+		COMMAND ${DKPROJECT}/${OS}/gradlew --project-dir ${DKPROJECT}/${OS} --info clean build)  #FIXME: Command does not exit
 	
 	#################### List packages ####################################
 	#################### List packages matching PACKAGE_NAME ##############
 	#################### Uninstall PACKAGE_NAME package ###################
 	
 	#################### Install apk to device ###############
-	#cmd /c "%ANDROID_HOME%/platform-tools/adb" install -r %APP_ROOT%\app\build\outputs\apk\debug\app-debug.apk
 	add_custom_command(
 		TARGET main 
 		POST_BUILD
