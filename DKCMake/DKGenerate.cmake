@@ -1095,9 +1095,9 @@ if(ANDROID)
 	set(localProperties "sdk.dir=${ANDROID-SDK}")
 	
 	####### Import Android Build files ############################################
-	dk_copy(${DKPLUGINS}/_DKIMPORT/android/ ${DKPROJECT}/${OS}/ FALSE)
-	dk_copy(${DKPLUGINS}/_DKIMPORT/${OS}/ ${DKPROJECT}/${OS}/ FALSE)
-	dk_copy(${DKPROJECT}/assets ${DKPROJECT}/${OS}/app/src/main/assets)
+	dk_copy(${DKPLUGINS}/_DKIMPORT/android/ ${DKPROJECT}/${OS}/)
+	dk_copy(${DKPLUGINS}/_DKIMPORT/${OS}/ ${DKPROJECT}/${OS}/)
+	dk_copy(${DKPROJECT}/assets ${DKPROJECT}/${OS}/app/src/main/assets OVERWRITE)
 	file(WRITE ${DKPROJECT}/${OS}/local.properties ${localProperties})
 	dkFileReplace(${DKPROJECT}/${OS}/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}")
 	UNIX_HOST_dk_executeProcess(chmod 777 ${DKPROJECT}/${OS}/gradlew)
