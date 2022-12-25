@@ -1154,13 +1154,13 @@ if(ANDROID)
 	#)
 	
 	####################### Gradle Build #####################
-	WIN_HOST_dk_set(CMD_K "cmd /k")
+	#WIN_HOST_dk_set(CMD_K "cmd /k")
 	add_custom_command(
 		POST_BUILD
 		TARGET main
 		COMMAND ${CMAKE_COMMAND} -E echo "Building with Gradle"
-		COMMAND ${CMD_K} ${DKPROJECT}/${OS}/gradlew --project-dir ${DKPROJECT}/${OS} --info clean build  #FIXME: Command does not exit on windows
-		COMMAND ${CMAKE_COMMAND} -E echo "Finnished building with Gradle")								#FIXME: Command never reached on windows
+		COMMAND cmd /k ${DKPROJECT}/${OS}/gradlew --project-dir ${DKPROJECT}/${OS} --info clean build  #FIXME: Command does not exit on windows
+		COMMAND ${CMAKE_COMMAND} -E echo "Finnished building with Gradle")			   					 #FIXME: Command never reached on windows
 		
 	
 	#################### List packages ####################################
