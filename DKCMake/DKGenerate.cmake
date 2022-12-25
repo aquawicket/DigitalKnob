@@ -1160,8 +1160,8 @@ if(ANDROID)
 		TARGET main
 		COMMAND ${CMAKE_COMMAND} -E echo "Building with Gradle"
 		COMMAND ${CMD_K} ${DKPROJECT}/${OS}/gradlew --project-dir ${DKPROJECT}/${OS} --info clean build  #FIXME: Command does not exit on windows
-		COMMAND ${CMAKE_COMMAND} -E echo "Finnished building with Gradle"						#FIXME: Command never reached on windows
-		VERBATIM)
+		COMMAND ${CMAKE_COMMAND} -E echo "Finnished building with Gradle")								#FIXME: Command never reached on windows
+		
 	
 	#################### List packages ####################################
 	#################### List packages matching PACKAGE_NAME ##############
