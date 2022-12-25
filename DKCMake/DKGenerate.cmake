@@ -1154,12 +1154,12 @@ if(ANDROID)
 	#)
 	
 	####################### Gradle Build #####################
-	#WIN_HOST_dk_set(CMD_C "cmd /c")
 	add_custom_command(
-		TARGET main
 		POST_BUILD
+		TARGET main
 		COMMAND ${CMAKE_COMMAND} -E echo "Building with Gradle"
-		COMMAND ${DKPROJECT}/${OS}/gradlew --project-dir ${DKPROJECT}/${OS} --info clean build)  #FIXME: Command does not exit
+		COMMAND ${DKPROJECT}/${OS}/gradlew --project-dir ${DKPROJECT}/${OS} --info clean build  #FIXME: Command does not exit
+		COMMAND ${CMAKE_COMMAND} -E echo "Finnished building with Gradle")
 	
 	#################### List packages ####################################
 	#################### List packages matching PACKAGE_NAME ##############
@@ -1167,10 +1167,11 @@ if(ANDROID)
 	
 	#################### Install apk to device ###############
 	add_custom_command(
-		TARGET main 
 		POST_BUILD
+		TARGET main
 		COMMAND ${CMAKE_COMMAND} -E echo "Installing app-debug.apk to device"
-		COMMAND ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/app/build/outputs/apk/debug/app-debug.apk)
+		COMMAND ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/app/build/outputs/apk/debug/app-debug.apk
+		COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing app-debug.apk to device")
 
 endif()
 
