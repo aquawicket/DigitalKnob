@@ -1154,7 +1154,7 @@ if(ANDROID)
 	#)
 	
 	####################### Gradle Build #####################
-	#WIN_HOST_dk_set(CMD_K "cmd /k")
+	#WIN_HOST_dk_set(CMD_K cmd /k)
 	if(WIN_HOST)
 		add_custom_command(
 			POST_BUILD
