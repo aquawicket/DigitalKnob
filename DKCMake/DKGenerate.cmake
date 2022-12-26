@@ -1176,12 +1176,22 @@ if(ANDROID)
 	#################### Uninstall PACKAGE_NAME package ###################
 	
 	#################### Install apk to device ###############
-	add_custom_command(
-		POST_BUILD
-		TARGET main
-		COMMAND ${CMAKE_COMMAND} -E echo "Installing app-debug.apk to device"
-		COMMAND ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/app/build/outputs/apk/debug/app-debug.apk
-		COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing app-debug.apk to device")
+	if(WIN_HOST)
+		add_custom_command(
+			POST_BUILD
+			TARGET main
+			COMMAND ${CMAKE_COMMAND} -E echo "Installing app-debug.apk to device"
+			COMMAND cmd /c ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/app/build/outputs/apk/debug/app-debug.apk
+			COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing app-debug.apk to device")
+	else()
+		add_custom_command(
+			POST_BUILD
+			TARGET main
+			COMMAND ${CMAKE_COMMAND} -E echo "Installing app-debug.apk to device"
+			COMMAND ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/app/build/outputs/apk/debug/app-debug.apk
+			COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing app-debug.apk to device")
+
+	endif()
 
 endif()
 
