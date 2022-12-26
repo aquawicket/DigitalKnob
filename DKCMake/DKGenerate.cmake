@@ -360,12 +360,13 @@ if(PLUGINS_FILE)
 endif()
 
 if(HAVE_DK)
+	## copy app default files recursivly without overwrite
 	dk_info("Copying DKPlugins/_DKIMPORT/ to App...")
-	dk_copy(${DKPLUGINS}/_DKIMPORT/icons ${DKPROJECT}/icons FALSE) ## copy app default files recursivly without overwrite
-	dk_copy(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h FALSE) ## copy app default files recursivly without overwrite
-	#dk_copy(${DKPLUGINS}/_DKIMPORT/App.h ${DKPROJECT}/App.h FALSE) ## copy app default files recursivly without overwrite
-	#dk_copy(${DKPLUGINS}/_DKIMPORT/App.cpp ${DKPROJECT}/App.cpp FALSE) ## copy app default files recursivly without overwrite
-	dk_copy(${DKPLUGINS}/_DKIMPORT/main.cpp ${DKPROJECT}/main.cpp FALSE)
+	dk_copy(${DKPLUGINS}/_DKIMPORT/icons ${DKPROJECT}/icons) 
+	dk_copy(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h)
+	#dk_copy(${DKPLUGINS}/_DKIMPORT/App.h ${DKPROJECT}/App.h)
+	#dk_copy(${DKPLUGINS}/_DKIMPORT/App.cpp ${DKPROJECT}/App.cpp)
+	dk_copy(${DKPLUGINS}/_DKIMPORT/main.cpp ${DKPROJECT}/main.cpp)
 endif()
 	
 ### Include all source files from the app folder for the compilers
@@ -399,7 +400,7 @@ if(WIN_32)
 			dk_info("Building icons for ${APP_NAME} . . .")
 			#dk_makeDirectory(${DKPROJECT}/icons/windows)
 			#dk_executeProcess(${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 ${DKPROJECT}/icons/windows/icon.ico)
-			#dk_copy(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico TRUE) # copy the icon to assets
+			#dk_copy(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico OVERWRITE) # copy the icon to assets
 			dk_executeProcess(${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 ${DKPROJECT}/assets/icon.ico)
 			dk_executeProcess(${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=16 ${DKPROJECT}/assets/favicon.ico)
 		endif()
@@ -418,7 +419,7 @@ if(WIN_32)
 		# Restore the backed up files, excluded from assets
 		dk_copy(${DKPROJECT}/Backup ${DKPROJECT}/assets OVERWRITE NOERROR)
 		file(REMOVE ${DKPROJECT}/Backup)
-		dk_copy(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h TRUE) #required
+		dk_copy(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h OVERWRITE) #required
 	endif()	
 		
 	###################### Backup Executable ###########################
@@ -431,8 +432,8 @@ if(WIN_32)
 		
 	####################### Create Executable Target ###################
 	if(HAVE_DK)
-		dk_copy(${DKPLUGINS}/_DKIMPORT/win/resource.h ${DKPROJECT}/resource.h FALSE)
-		dk_copy(${DKPLUGINS}/_DKIMPORT/win/resource.rc ${DKPROJECT}/resource.rc FALSE)
+		dk_copy(${DKPLUGINS}/_DKIMPORT/win/resource.h ${DKPROJECT}/resource.h)
+		dk_copy(${DKPLUGINS}/_DKIMPORT/win/resource.rc ${DKPROJECT}/resource.rc)
 		file(GLOB_RECURSE resources_SRC 
 			${DKPROJECT}/*.manifest
 			${DKPROJECT}/*.rc
@@ -515,23 +516,23 @@ if(WIN_64)
 			dk_info("Building icons for ${APP_NAME} . . .")
 			dk_makeDirectory(${DKPROJECT}/icons/windows)
 			dk_executeProcess(${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 ${DKPROJECT}/icons/windows/icon.ico)
-			dk_copy(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico TRUE)
+			dk_copy(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico OVERWRITE)
 			dk_executeProcess(${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=16 ${DKPROJECT}/assets/favicon.ico)
 		endif()
 	endif()
 			
 	################# BACKUP USERDATA / INJECT ASSETS #####################
 	if(HAVE_DK)
-		dk_copy(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
+		dk_copy(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER OVERWRITE)
 		file(REMOVE ${DKPROJECT}/assets/USER)
 		#Compress the assets, they will be included by resource.rc
 		dk_info("Creating assets.zip . . .")
 		dk_zip(${DKPROJECT}/assets)
 		# Restore the backed up files
-		dk_copy(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ TRUE)
+		dk_copy(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ OVERWRITE)
 		file(REMOVE ${DKPROJECT}/Backup)
 		#dummy assets.h file, or the builder wil complain about assets.h missing
-		dk_copy(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h TRUE)
+		dk_copy(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h OVERWRITE)
 	endif()
 
 	###################### Backup Executable ###########################
@@ -545,8 +546,8 @@ if(WIN_64)
 	####################### Create Executable Target ###################
 	if(HAVE_DK)
 		##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
-		dk_copy(${DKPLUGINS}/_DKIMPORT/win/resource.h ${DKPROJECT}/resource.h FALSE)
-		dk_copy(${DKPLUGINS}/_DKIMPORT/win/resource.rc ${DKPROJECT}/resource.rc FALSE)
+		dk_copy(${DKPLUGINS}/_DKIMPORT/win/resource.h ${DKPROJECT}/resource.h)
+		dk_copy(${DKPLUGINS}/_DKIMPORT/win/resource.rc ${DKPROJECT}/resource.rc)
 		file(GLOB_RECURSE resources_SRC 
 			${DKPROJECT}/*.manifest
 			${DKPROJECT}/*.rc
@@ -612,10 +613,10 @@ if(MAC)
 	
 	###################### Backup Executable ###########################
 	if(DEBUG)
-		dk_copy(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app.backup TRUE)
+		dk_copy(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app.backup OVERWRITE)
 	endif()
 	if(RELEASE)
-		dk_copy(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app.backup TRUE)
+		dk_copy(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app.backup OVERWRITE)
 	endif()
 		
 	########################## CREATE ICONS ###############################
@@ -639,9 +640,9 @@ if(MAC)
 	endif()
 		
 	################# BACKUP USERDATA / INJECT ASSETS #####################	
-	dk_copy(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
+	dk_copy(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER OVERWRITE)
 	file(REMOVE ${DKPROJECT}/assets/USER)
-	dk_copy(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
+	dk_copy(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/)
 	file(REMOVE ${DKPROJECT}/Backup)
 	
 	####################### Create Executable Target ###################
@@ -793,11 +794,11 @@ if(IOS OR IOSSIM)
 	
 	###################### BACKUP USERDATA ###############################
 	# Backup files and folders excluded from the package
-	#dk_copy(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
+	#dk_copy(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER OVERWRITE)
 	# Remove excluded files and folders before packaging
 	#file(REMOVE ${DKPROJECT}/assets/USER)
 	# Restore the backed up files, excluded from assets
-	#dk_copy(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
+	#dk_copy(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/)
 	#file(REMOVE ${DKPROJECT}/Backup)
 	
 	########################## ICONS ###############################
@@ -896,18 +897,18 @@ if(LINUX)
 if(NOT RASPBERRY)
 	###################### Backup Executable ###########################
 	if(DEBUG)
-		dk_copy(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup TRUE)
+		dk_copy(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup OVERWRITE)
 	elseif(RELEASE)
-		dk_copy(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup TRUE)
+		dk_copy(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup OVERWRITE)
 	endif()
 	
 	########################## CREATE ICONS ###############################
-	dk_copy(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
+	dk_copy(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png OVERWRITE)
 	
 	############### BACKUP USERDATA / inject assets #######################
 	if(false)
 		# backup files not going in the package
-		dk_copy(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
+		dk_copy(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER OVERWRITE)
 		file(REMOVE ${DKPROJECT}/assets/USER)
 		# Remove excluded files and folders before packaging
 		dk_info("Creating assets.zip . . .")
@@ -915,7 +916,7 @@ if(NOT RASPBERRY)
 		#dk_info("Creating assets.h . . .")
 		bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
 		# Restore the backed up assets
-		dk_copy(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
+		dk_copy(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/)
 		file(REMOVE ${DKPROJECT}/Backup)
 	endif()
 	
@@ -981,12 +982,12 @@ endif()
 #############
 if(RASPBERRY)
 	########################## CREATE ICONS ###############################
-	dk_copy(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
+	dk_copy(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png OVERWRITE)
 
 	############### BACKUP USERDATA / inject assets #######################
 	if(false)
 		# backup files not going in the package
-		dk_copy(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER TRUE)
+		dk_copy(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER OVERWRITE)
 		# Remove excluded files and folders before packaging
 		file(REMOVE ${DKPROJECT}/assets/USER)
 		dk_info("Creating assets.zip . . .")
@@ -994,7 +995,7 @@ if(RASPBERRY)
 		#dk_info("Creating assets.h . . .")
 		bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
 		# Restore the backed up assets
-		dk_copy(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ FALSE)
+		dk_copy(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/)
 		file(REMOVE ${DKPROJECT}/Backup)
 	endif()
 	
@@ -1077,7 +1078,7 @@ if(ANDROID)
 	dk_resizeImage(${DKPROJECT}/icons/icon.png 144 144 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
 	dk_resizeImage(${DKPROJECT}/icons/icon.png 192 192 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
 
-	dk_copy(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png TRUE)
+	dk_copy(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png OVERWRITE)
 	
 	###################### Backup Executable ###########################
 	#if(DEBUG)
