@@ -423,7 +423,6 @@ if(ANDROID) # Disabled for Android targets
 		dk_disable(giflib)
 	endif()
 	dk_disable(gzip)
-	#dk_disable(imagemagick)			# dkscript.tmp: line 2: cd: /android32/Debug: No such file or directory
 	dk_disable(jasper)
 	dk_disable(libarchive)
 	dk_disable(libcaca)				# no CMakeLists.txt
@@ -462,7 +461,6 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(waave)
 	dk_disable(x264)
 	dk_disable(x265)
-	#dk_disable(zstd)
 endif(ANDROID)
 
 if(ANDROID_64) # Disabled for Android 64bit targets
