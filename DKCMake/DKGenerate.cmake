@@ -390,7 +390,7 @@ endif()
 	
 add_definitions(-DDKAPP)
 include_directories(${DKPROJECT})
-include_directories(${DKPLUGINS})
+#include_directories(${DKPLUGINS})
 
 ##########
 if(WIN_32)
