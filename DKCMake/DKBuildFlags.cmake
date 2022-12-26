@@ -108,7 +108,7 @@ dk_set(XCODE_CLANGXX	${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bi
 dk_set(XCODE_LIBTOOL	${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool)
 
 # iOS variables
-dk_set(IOS_DARWIN		darwin) #20.6.0)
+dk_set(IOS_DARWIN		darwin64) #20.6.0)
 dk_set(IOS_MIN_SDK		13.0)
 dk_set(IOS_SYSROOT		${XCODE_DEVROOT}/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.0.sdk)
 dk_set(IOSSIM_SYSROOT	${XCODE_DEVROOT}/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator15.0.sdk)
