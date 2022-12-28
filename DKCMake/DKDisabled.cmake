@@ -465,3 +465,8 @@ endif(ANDROID)
 if(ANDROID_64) # Disabled for Android 64bit targets
 	dk_disable(boost)
 endif(ANDROID_64)
+
+
+if(EMSCRIPTEN) # Disabled for Emscripten targets
+	dk_disable(boxer)
+endif()
