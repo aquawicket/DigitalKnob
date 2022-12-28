@@ -379,6 +379,17 @@ if(${index} GREATER -1)
 	string(REPLACE "/android64" "" DKPROJECT ${CMAKE_BINARY_DIR})
 endif()
 
+# EMSCRIPTEN
+string(FIND "${CMAKE_BINARY_DIR}" "/emscripten" index)
+if(${index} GREATER -1)
+	dk_info("*** Creating Emscripten Project Files ***")
+	dk_set(EMSCRIPTEN ON)
+	dk_set(OS "emscripten")
+	dk_set(DEBUG_DIR Debug)
+	dk_set(RELEASE_DIR Release)
+	string(REPLACE "/emscripten" "" DKPROJECT ${CMAKE_BINARY_DIR})
+endif()
+
 
 if(NOT CMAKE_SCRIPT_MODE_FILE)
 	if(NOT OS)
