@@ -637,16 +637,45 @@ function DKBuild_DoResults(){
 		*/
 	}
 	
-	////// EMSCRIPTEN /////
+	//////// EMSCRIPTEN //////////////////////////////////////////////////////////////
 	if(OS === "emscripten"){
+		const EMSDK = "C:/Users/Administrator/digitalknob/DK/3rdParty/emsdk-main/"
+		const EMSDK_ENV = EMSDK+"/emsdk_env"
+		const EMSDK_TOOLCHAIN_FILE = EMSDK+"/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake"
+		//DKBuild_ValidateEMSDK()
 		CPP_DKFile_MkDir(app_path+OS)
-		if(CPP_DK_GetOS() === "Windows"){
-			if(!DKBuild_Command("C:/Users/Administrator/digitalknob/DK/3rdParty/emsdk-main/emsdk_env.bat & C:/Users/Administrator/digitalknob/DK/3rdParty/emsdk-main/upstream/emscripten/emcmake "+CMAKE+" -G \"MinGW Makefiles\" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"emscripten"))
+		if(TYPE === "Debug" || TYPE === "ALL"){
+			cmake_string = cmake_string.replace("-DDEBUG=OFF", "-DDEBUG=ON");
+			cmake_string = cmake_string.replace("-DRELEASE=ON", "-DRELEASE=OFF");
+			CPP_DKFile_MkDir(app_path+OS+"/Debug")
+			CPP_DKFile_ChDir(app_path+OS+"/Debug")
+			if(CPP_DK_GetOS() === "Windows"){
+				if(!DKBuild_Command(EMSDK_ENV+" & "+CMAKE+" -G \"MinGW Makefiles\" -DCMAKE_TOOLCHAIN_FILE=\""+EMSDK_TOOLCHAIN_FILE+"\" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"emscripten"))
+					return false
+			}
+			else{
+				if(!DKBuild_Command(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+""+DIGITALKNOB+"DK/DKCMake"))
+					return false
+			}
+			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+"/Debug --target "+APP+"_APP --config Debug"))	
 				return false
 		}
-			
-		//if(!DKBuild_Command(CMAKE+" --build "+app_path+OS))	
-		//	return false
+		if(TYPE === "Release" || TYPE === "ALL"){
+			cmake_string = cmake_string.replace("-DDEBUG=ON", "-DDEBUG=OFF");
+			cmake_string = cmake_string.replace("-DRELEASE=OFF", "-DRELEASE=ON");
+			CPP_DKFile_MkDir(app_path+OS+"/Release")
+			CPP_DKFile_ChDir(app_path+OS+"/Release")
+			if(CPP_DK_GetOS() === "Windows"){
+				if(!DKBuild_Command(EMSDK_ENV+" & "+CMAKE+" -G \"MinGW Makefiles\" -DCMAKE_TOOLCHAIN_FILE=\""+EMSDK_TOOLCHAIN_FILE+"\" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"emscripten"))
+					return false
+			}
+			else{
+				if(!DKBuild_Command(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+""+DIGITALKNOB+"DK/DKCMake"))
+					return false
+			}
+			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+"/Release --target "+APP+"_APP --config Release"))
+				return false
+		}
 	}
 	
 	console.log("\n")
