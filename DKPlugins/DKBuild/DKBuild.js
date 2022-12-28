@@ -650,14 +650,14 @@ function DKBuild_DoResults(){
 			CPP_DKFile_MkDir(app_path+OS+"/Debug")
 			CPP_DKFile_ChDir(app_path+OS+"/Debug")
 			if(CPP_DK_GetOS() === "Windows"){
-				if(!DKBuild_Command(EMSDK_ENV+" & "+CMAKE+" -G \"MinGW Makefiles\" -DCMAKE_TOOLCHAIN_FILE=\""+EMSDK_TOOLCHAIN_FILE+"\" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"emscripten"))
+				if(!DKBuild_Command(EMSDK_ENV+" & "+CMAKE+" -G \"MinGW Makefiles\" -DCMAKE_TOOLCHAIN_FILE=\""+EMSDK_TOOLCHAIN_FILE+"\" "+cmake_string+""+DIGITALKNOB+"DK/DKCMake"))
 					return false
 			}
 			else{
 				if(!DKBuild_Command(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+""+DIGITALKNOB+"DK/DKCMake"))
 					return false
 			}
-			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+"/Debug --target "+APP+"_APP --config Debug"))	
+			if(!DKBuild_Command(EMSDK_ENV+" & "+CMAKE+" --build "+app_path+OS+"/Debug --target "+APP+"_APP --config Debug"))	
 				return false
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
@@ -666,17 +666,18 @@ function DKBuild_DoResults(){
 			CPP_DKFile_MkDir(app_path+OS+"/Release")
 			CPP_DKFile_ChDir(app_path+OS+"/Release")
 			if(CPP_DK_GetOS() === "Windows"){
-				if(!DKBuild_Command(EMSDK_ENV+" & "+CMAKE+" -G \"MinGW Makefiles\" -DCMAKE_TOOLCHAIN_FILE=\""+EMSDK_TOOLCHAIN_FILE+"\" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"emscripten"))
+				if(!DKBuild_Command(EMSDK_ENV+" & "+CMAKE+" -G \"MinGW Makefiles\" -DCMAKE_TOOLCHAIN_FILE=\""+EMSDK_TOOLCHAIN_FILE+"\" "+cmake_string+""+DIGITALKNOB+"DK/DKCMake"))
 					return false
 			}
 			else{
 				if(!DKBuild_Command(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+""+DIGITALKNOB+"DK/DKCMake"))
 					return false
 			}
-			if(!DKBuild_Command(CMAKE+" --build "+app_path+OS+"/Release --target "+APP+"_APP --config Release"))
+			if(!DKBuild_Command(EMSDK_ENV+" & "+CMAKE+" --build "+app_path+OS+"/Release --target "+APP+"_APP --config Release"))
 				return false
 		}
 	}
+	
 	
 	console.log("\n")
 	console.log("********************************************")
