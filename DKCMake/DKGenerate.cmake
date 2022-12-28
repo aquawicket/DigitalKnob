@@ -1235,7 +1235,8 @@ if(EMSCRIPTEN)
 	elseif(RELEASE)
 		target_link_libraries(${APP_NAME} ${RELEASE_LIBS} ${LIBS})
 	endif()
-
+	set(CMAKE_EXECUTABLE_SUFFIX ".html")
+	
 	########################## Add Dependencies ########################
 	foreach(plugin ${dkdepend_list})
 		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
