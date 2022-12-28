@@ -310,6 +310,15 @@ foreach(plugin ${dkdepend_list})
 					endif()
 				endif()
 			endif()
+			if(EMSCRIPTEN)
+				if(DEBUG)
+					EMSCRIPTEN_dk_queueCommand(${DKCMAKE_BUILD} -DEMSCRIPTEN=ON -DDEBUG=ON -DREBUILD=ON ${plugin_path})
+					EMSCRIPTEN_dk_queueCommand(make)
+				elseif(RELEASE)
+					EMSCRIPTEN_dk_queueCommand(${DKCMAKE_BUILD} -DEMSCRIPTEN=ON -DRELEASE=ON -DREBUILD=ON ${plugin_path})
+					EMSCRIPTEN_dk_queueCommand(make)
+				endif()
+			endif()
 		
 			set(PREBUILD OFF)
 
@@ -1189,7 +1198,62 @@ if(ANDROID)
 			COMMAND ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/app/build/outputs/apk/debug/app-debug.apk
 			COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing app-debug.apk to device")
 	endif()
+endif()
 
+
+##############
+if(EMSCRIPTEN)
+	########################## CREATE ICONS ###############################
+	dk_copy(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png OVERWRITE)
+
+	############### BACKUP USERDATA / inject assets #######################
+	if(false)
+		# backup files not going in the package
+		dk_copy(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER OVERWRITE)
+		# Remove excluded files and folders before packaging
+		file(REMOVE ${DKPROJECT}/assets/USER)
+		dk_info("Creating assets.zip . . .")
+		dk_zip(${DKPROJECT}/assets)
+		#dk_info("Creating assets.h . . .")
+		bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
+		# Restore the backed up assets
+		dk_copy(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/)
+		file(REMOVE ${DKPROJECT}/Backup)
+	endif()
+	
+	###################### Backup Executable ###########################
+	#if(DEBUG)
+	#	dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup OVERWRITE)
+	#elseif(RELEASE)
+	#	dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup OVERWRITE)
+	#endif()
+	
+	####################### Create Executable Target ###################
+	add_executable(${APP_NAME} ${App_SRC})
+	if(DEBUG)
+		target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${LIBS})
+	elseif(RELEASE)
+		target_link_libraries(${APP_NAME} ${RELEASE_LIBS} ${LIBS})
+	endif()
+
+	########################## Add Dependencies ########################
+	foreach(plugin ${dkdepend_list})
+		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
+			add_dependencies(${APP_NAME} ${plugin})
+		endif()	
+	endforeach()
+
+		
+	####################### Do Post Build Stuff #######################
+	# "https://gist.github.com/baiwfg2/39881ba703e9c74e95366ed422641609"
+	# TEST
+	#add_custom_command(
+	#	TARGET ${APP_NAME}
+	#	POST_BUILD
+	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE:APP_NAME = $<TARGET_FILE:${APP_NAME}>"
+	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE_DIR:APP_NAME = $<TARGET_FILE_DIR:${APP_NAME}>"
+	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
+	#)
 endif()
 
 
