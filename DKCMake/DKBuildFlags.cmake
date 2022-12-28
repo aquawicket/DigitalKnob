@@ -616,7 +616,7 @@ ANDROID_dk_depend	(visualstudio)
 #ANDROID_dk_depend	(openssl)
 #ANDROID_dk_depend	(openssl_binary)
 
-EMSCRIPTEN_dk_depend(emsdk)
+#EMSCRIPTEN_dk_depend(emsdk)
 
 
 WIN32_dk_set			(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -A Win32 ${DKCMAKE_FLAGS})

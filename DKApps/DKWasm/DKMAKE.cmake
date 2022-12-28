@@ -1,5 +1,5 @@
-dk_depend(emsdk)
-dk_depend(pacman.c)
+#dk_depend(emsdk)
+#dk_depend(pacman.c)
 #dk_depend(rocketship)
 #dk_depend(sdl)
 #dk_depend(sdl_ttf)
