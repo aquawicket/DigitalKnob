@@ -635,7 +635,7 @@ else()
 endif()
 
 EMSCRIPTEN_dk_set			(EMSDK C:/Users/Administrator/digitalknob/DK/3rdParty/emsdk-main)
-EMSCRIPTEN_dk_set			(CMAKE_CPP_CREATE_STATIC_LIBRARY "${EMSDK}/upstream/emscripten/emar.bat qc libDK.a CMakeFiles/DK.dir/stdafx.cpp.o.d" "${EMSDK}/upstream/emscripten/emranlib.bat libDK.a")
+#EMSCRIPTEN_dk_set			(CMAKE_CPP_CREATE_STATIC_LIBRARY "${EMSDK}/upstream/emscripten/emar.bat qc libDK.a CMakeFiles/DK.dir/stdafx.cpp.o.d CMakeFiles/DK.dir/DKApp.cpp.o.d" "${EMSDK}/upstream/emscripten/emranlib.bat libDK.a")
 EMSCRIPTEN_dk_set			(EMSDK_TOOLCHAIN_FILE ${EMSDK}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake)
 EMSCRIPTEN_DEBUG_dk_set		(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -DCMAKE_TOOLCHAIN_FILE=${EMSDK_TOOLCHAIN_FILE} -DCMAKE_BUILD_TYPE=Debug ${DKCMAKE_FLAGS})
 EMSCRIPTEN_RELEASE_dk_set	(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -DCMAKE_TOOLCHAIN_FILE=${EMSDK_TOOLCHAIN_FILE} -DCMAKE_BUILD_TYPE=Release ${DKCMAKE_FLAGS})
