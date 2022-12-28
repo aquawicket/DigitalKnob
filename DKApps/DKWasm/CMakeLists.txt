@@ -34,7 +34,7 @@ endif()
 #endif()
 #target_include_directories(sokol INTERFACE sokol)
 
-#=== EXECUTABLE: pacman
+#=== EXECUTABLE: dkwasm
 if(CMAKE_SYSTEM_NAME STREQUAL Windows)
     add_executable(dkwasm WIN32 main.cpp)
 else()

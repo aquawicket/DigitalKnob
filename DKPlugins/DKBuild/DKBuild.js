@@ -637,6 +637,18 @@ function DKBuild_DoResults(){
 		*/
 	}
 	
+	////// EMSCRIPTEN /////
+	if(OS === "emscripten"){
+		CPP_DKFile_MkDir(app_path+OS)
+		if(CPP_DK_GetOS() === "Windows"){
+			if(!DKBuild_Command("C:/Users/Administrator/digitalknob/DK/3rdParty/emsdk-main/emsdk_env.bat & C:/Users/Administrator/digitalknob/DK/3rdParty/emsdk-main/upstream/emscripten/emcmake "+CMAKE+" -G \"MinGW Makefiles\" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"emscripten"))
+				return false
+		}
+			
+		//if(!DKBuild_Command(CMAKE+" --build "+app_path+OS))	
+		//	return false
+	}
+	
 	console.log("\n")
 	console.log("********************************************")
 	console.log("********************************************")
