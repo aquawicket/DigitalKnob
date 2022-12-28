@@ -654,7 +654,7 @@ function DKBuild_DoResults(){
 					return false
 			}
 			else{
-				if(!DKBuild_Command(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+""+DIGITALKNOB+"DK/DKCMake"))
+				if(!DKBuild_Command(EMSDK_ENV+" & "+CMAKE+" -G \"Unix Makefiles\" -DCMAKE_TOOLCHAIN_FILE=\""+EMSDK_TOOLCHAIN_FILE+"\" "+cmake_string+""+DIGITALKNOB+"DK/DKCMake"))
 					return false
 			}
 			if(!DKBuild_Command(EMSDK_ENV+" & "+CMAKE+" --build "+app_path+OS+"/Debug --target "+APP+"_APP --config Debug"))	
@@ -670,7 +670,7 @@ function DKBuild_DoResults(){
 					return false
 			}
 			else{
-				if(!DKBuild_Command(CMAKE+" -G \"Unix Makefiles\" "+cmake_string+""+DIGITALKNOB+"DK/DKCMake"))
+				if(!DKBuild_Command(EMSDK_ENV+" & "+CMAKE+" -G \"Unix Makefiles\" -DCMAKE_TOOLCHAIN_FILE=\""+EMSDK_TOOLCHAIN_FILE+"\" "+cmake_string+""+DIGITALKNOB+"DK/DKCMake"))
 					return false
 			}
 			if(!DKBuild_Command(EMSDK_ENV+" & "+CMAKE+" --build "+app_path+OS+"/Release --target "+APP+"_APP --config Release"))
