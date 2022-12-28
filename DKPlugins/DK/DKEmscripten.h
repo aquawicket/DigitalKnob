@@ -24,39 +24,17 @@
 * SOFTWARE.
 */
 
-
-// https://www.mantidproject.org/C++_Coding_Standards
+#ifdef EMSCRIPTEN
 #pragma once
-#ifndef DK_H
-#define DK_H
+#ifndef DKEmscripten_H
+#define DKEmscripten_H
 
-#include "DK/DKPreprocessor.h"
 
-#if defined(WIN32)
-#	include "DK/DKWindows.h"
-#elif defined(MAC)
-#	include "DK/DKMac.h"
-#elif defined(IOS)
-#	include "DK/DKIos.h"
-#elif defined(LINUX)
-#	include "DK/DKLinux.h"
-#elif defined(RASPBERRY)
-#	include "DK/DKLinux.h"
-#elif defined(ANDROID)
-#	include "DK/DKAndroid.h"
-#elif defined(EMSCRIPTEN)
-#	include "DK/DKEmscripten.h"
-#else
-#	error NO KNOWN PLATFORM FLAG WAS FOUND (WIN,MAC,LINUX,ANDROID,IOS,RASPBERRY)
-#endif
+class DKEmscripten{
+public:
+	static bool GetScreenWidth(int& w);
+	static bool GetScreenHeight(int& h);
+};
 
-#include "DK/DKClass.h"
-#include "DK/DKEvents.h"
-#include "DK/DKUtil.h"
-#include "DK/DKApp.h"
-
-#ifdef DKAPP
-#	include "DKPlugins.h"
-#endif
-
-#endif
+#endif //DKEmscripten_H
+#endif //EMSCRIPTEN

@@ -7,12 +7,16 @@
 dk_import(https://github.com/emscripten-core/emsdk.git BRANCH main)
 
 
-WIN_dk_command(${EMSDK}/emsdk update)
+#WIN_dk_command(${EMSDK}/emsdk update)
+#dk_command(${EMSDK}/emsdk install latest)
+#WIN_dk_command(${EMSDK}/emsdk install activate latest)
+#WIN_dk_command(${EMSDK}/emsdk_env.bat)
+
 dk_command(${EMSDK}/emsdk install latest)
-WIN_dk_command(${EMSDK}/emsdk install activate latest)
-WIN_dk_command(${EMSDK}/emsdk_env.bat)
-
-
+dk_command(${EMSDK}/emsdk activate latest)
+dk_command(${EMSDK}/emsdk_env)
+WIN_dk_command(${EMSDK}/emsdk install mingw-4.6.2-32bit)
+WIN_dk_command(${EMSDK}/emsdk activate mingw-4.6.2-32bit)
 
 
 ######################################################################################################################
