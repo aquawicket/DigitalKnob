@@ -272,7 +272,7 @@ bool DKSDLWindow::Init(){
     DKSDLWindow::AddEventFunc(&DKSDLWindow::handle, this);
     MapInputs();
     SDL_SetEventFilter(&DKSDLWindow::EventFilter, this); //DEBUG : bypassing events here for now
-#if !defined(ANDROID) && !defined(IOS)
+#if !defined(ANDROID) && !defined(IOS) && !defined(EMSCRIPTEN)
 	// https://github.com/ocornut/imgui/issues/1116#issuecomment-297701113
     SDL_GLContext glcontext = SDL_GL_CreateContext(window);
     SDL_GL_MakeCurrent(window, glcontext);
