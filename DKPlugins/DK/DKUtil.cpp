@@ -869,7 +869,7 @@ bool DKUtil::Sleep(const int& milliseconds){
 	//DKDEBUGFUNC(milliseconds);  //EXCESSIVE LOGGING
 #	if WIN32
 		return DKWindows::Sleep(milliseconds);
-#	elif defined(MAC) || defined(IOS) || defined(ANDROID) || defined(LINUX)
+#	elif MAC || IOS || ANDROID || LINUX || EMSCRIPTEN
 		return DKUnix::Sleep(milliseconds);
 #	else
 		return DKERROR("not implemented on this OS\n");
