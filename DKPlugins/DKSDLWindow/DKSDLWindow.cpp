@@ -725,6 +725,7 @@ int DKSDLWindow::EventFilter(void* userdata, SDL_Event* event) {
             }
         }
     }
+#ifndef EMSCRIPTEN
     if(event->type == SDL_APP_WILLENTERBACKGROUND) {
         DKINFO("SDL_APP_WILLENTERBACKGROUND\n");
         DKApp::paused = true;
@@ -735,6 +736,7 @@ int DKSDLWindow::EventFilter(void* userdata, SDL_Event* event) {
         DKApp::paused = false;
         return 1;
     }
+#endif
     if(event->type == SDL_TEXTINPUT) 
         return 1; //DKINFO("SDL_TEXTINPUT\n");
     
