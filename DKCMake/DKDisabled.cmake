@@ -499,6 +499,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	endif()
 	dk_disable(DKThread)
 	dk_disable(dukluv)
+	dk_disable(ffmpeg)
 	dk_disable(foundation)
 	dk_disable(game_controller)
 	dk_disable(giflib)				# dk_msys(): ERROR: not WIN_32, WIN_64, ANDROID_32 or ANDROID_64
