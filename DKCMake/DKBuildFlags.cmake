@@ -635,7 +635,7 @@ else()
 	ANDROID64_dk_set		(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})
 endif()
 
-dk_dump(EMSDK)
+#dk_dump(EMSDK) #FIXME: not set
 EMSCRIPTEN_dk_set			(EMSDK ${3RDPARTY}/emsdk-main)
 EMSCRIPTEN_dk_set			(EMSDK_TOOLCHAIN_FILE ${EMSDK}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake)
 EMSCRIPTEN_dk_set			(EMCONFIGURE ${EMSDK}/upstream/emscripten/emconfigure)
