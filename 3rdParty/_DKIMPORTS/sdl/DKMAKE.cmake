@@ -232,7 +232,11 @@ endif()
 #endif()
 EMSCRIPTEN_dk_Command		(${SDL}/build-scripts/emscripten-buildbot.sh)
 EMSCRIPTEN_DEBUG_dk_copy	(${SDL}/buildbot/usr/local/include ${SDL}/emscripten/Debug/include)
+EMSCRIPTEN_DEBUG_dk_copy	(${SDL}/buildbot/usr/local/lib/libSDL2.a ${SDL}/emscripten/Debug)
+EMSCRIPTEN_DEBUG_dk_copy	(${SDL}/buildbot/usr/local/lib/libSDL2main.a ${SDL}/emscripten/Debug)
 EMSCRIPTEN_RELEASE_dk_copy	(${SDL}/buildbot/usr/local/include ${SDL}/emscripten/Release/include)
+EMSCRIPTEN_RELEASE_dk_copy	(${SDL}/buildbot/usr/local/lib/libSDL2.a ${SDL}/emscripten/Release)
+EMSCRIPTEN_RELEASE_dk_copy	(${SDL}/buildbot/usr/local/lib/libSDL2main.a ${SDL}/emscripten/Release)
 
 ### COMPILE ###
 if(NOT EMSCRIPTEN)
