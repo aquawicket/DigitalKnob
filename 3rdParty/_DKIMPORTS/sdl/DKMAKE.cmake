@@ -53,8 +53,8 @@ ANDROID_dk_depend(libiconv)
 ### IMPORT ###
 #dk_import(https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.26.0.zip PATCH)
 #dk_import(https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.26.1.zip PATCH)
-dk_import(https://github.com/libsdl-org/SDL.git BRANCH SDL2 PATCH)
-#dk_import(https://github.com/libsdl-org/SDL.git BRANCH main PATCH)
+#dk_import(https://github.com/libsdl-org/SDL.git BRANCH SDL2 PATCH)
+dk_import(https://github.com/libsdl-org/SDL.git BRANCH main PATCH)
 
 
 ### LINK ###
@@ -69,8 +69,10 @@ ANDROID_dk_include	(${SDL}/src)
 #dk_addTarget(sdl SDL2main)		# TODO
 
 #if(sdl_SDL2static)
-	WIN_dk_libDebug			(${SDL}/${OS}/${DEBUG_DIR}/SDL2-staticd.lib)
-	WIN_dk_libRelease		(${SDL}/${OS}/${RELEASE_DIR}/SDL2-static.lib)
+	#WIN_dk_libDebug			(${SDL}/${OS}/${DEBUG_DIR}/SDL2-staticd.lib)
+	#WIN_dk_libRelease		(${SDL}/${OS}/${RELEASE_DIR}/SDL2-static.lib)
+	WIN_dk_libDebug			(${SDL}/${OS}/${DEBUG_DIR}/SDL3-staticd.lib)
+	WIN_dk_libRelease		(${SDL}/${OS}/${RELEASE_DIR}/SDL3-static.lib)
 	UNIX_dk_libDebug		(${SDL}/${OS}/${DEBUG_DIR}/libSDL2.a)
 	UNIX_dk_libRelease		(${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a)
 	#MAC_dk_libDebug		(${SDL}/${OS}/${DEBUG_DIR}/libSDL2d.a)
@@ -114,14 +116,21 @@ WIN_dk_set(SDL_CMAKE
 	"-DCMAKE_CXX_FLAGS=/I${SDL}/include" 
 	-DSDL2_DIR=${SDL}
 	-DSDL2_INCLUDE_DIR=${SDL}/include
-	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/SDL2.lib
-	-DSDL2_LIBRARY=${SDL}/${OS}/${RELEASE_DIR}/SDL2.lib
-	-DSDL2_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/SDL2d.lib
-	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/SDL2.lib
-	-DSDL2_MAIN_LIBRARY=${SDL}/${OS}/${RELEASE_DIR}/SDL2main.lib)
+	#-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/SDL2.lib
+	#-DSDL2_LIBRARY=${SDL}/${OS}/${RELEASE_DIR}/SDL2.lib
+	#-DSDL2_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/SDL2d.lib
+	#-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/SDL2.lib
+	#-DSDL2_MAIN_LIBRARY=${SDL}/${OS}/${RELEASE_DIR}/SDL2main.lib)
+	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/SDL3.lib
+	-DSDL2_LIBRARY=${SDL}/${OS}/${RELEASE_DIR}/SDL3.lib
+	-DSDL2_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/SDL3d.lib
+	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/SDL3.lib
+	-DSDL2_MAIN_LIBRARY=${SDL}/${OS}/${RELEASE_DIR}/SDL3main.lib)
 WIN_dk_set(SDLMAIN_CMAKE
-	-DSDL2MAIN_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/SDL2maind.lib
-	-DSDL2MAIN_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/SDL2main.lib)
+	#-DSDL2MAIN_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/SDL2maind.lib
+	#-DSDL2MAIN_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/SDL2main.lib)
+	-DSDL2MAIN_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/SDL3maind.lib
+	-DSDL2MAIN_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/SDL3main.lib)
 	
 MAC_dk_set(SDL_CMAKE
 	"-DCMAKE_C_FLAGS=-I${SDL}/include"
@@ -196,10 +205,13 @@ EMSCRIPTEN_dk_set(SDL_CMAKE
 	"-DCMAKE_CXX_FLAGS=-I${SDL}/include" 
 	-DSDL2_DIR=${SDL}
 	-DSDL2_INCLUDE_DIR=${SDL}/include
-	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a
-	-DSDL2_LIBRARY=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a
-	-DSDL2_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/libSDL2.a
-	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a)
+	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/libSDL3.a
+	-DSDL2_LIBRARY=${SDL}/${OS}/${RELEASE_DIR}/libSDL3.a
+	-DSDL2_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/libSDL3.a
+	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL3.a)
+EMSCRIPTEN_dk_set(SDLMAIN_CMAKE
+	-DSDL2MAIN_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/libSDL3maind.a
+	-DSDL2MAIN_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL3main.a)
 
 ### GENERATE ###
 WIN_dk_queueCommand			(${DKCMAKE_BUILD} -DSDL_SHARED=OFF -DSDL_LIBC=ON ${SDL})
