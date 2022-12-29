@@ -468,6 +468,7 @@ endif(ANDROID_64)
 
 
 if(EMSCRIPTEN) # Disabled for Emscripten targets
+	dk_disable(audiotoolbox)
 	dk_disable(boxer)				# CMake Error: CMake can not determine link language for target "Boxer"
 	dk_disable(bzip2)				# error='make' is not recognized as an internal or external command
 	dk_disable(curl)
@@ -485,7 +486,9 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(libpng)				# CMake Error: The following variables are used in this project, but they are set to NOTFOUND. (M_LIBRARY)
 	dk_disable(libxml2)				# fatal error: 'config.h' file not found
 	dk_disable(m)
-	#dk_disable(sdl)
+	if(WIN_HOST)
+		dk_disable(sdl)
+	endif()
 	dk_disable(sdl_image)			# error: call to undeclared function 'SDL_CreateRGBSurfaceWithFormat'
 	dk_disable(sdl_ttf)				# requires sdl
 	dk_disable(xz)					# CMake Error: TEST_BIG_ENDIAN found no result!
