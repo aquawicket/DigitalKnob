@@ -642,7 +642,9 @@ bool DKSDLWindow::drawBackground(SDL_Renderer *renderer, int w, int h){
             i = (((x ^ y) >> 3) & 1);
             sdlRect.x = x;
             sdlRect.y = y;
-            SDL_SetRenderDrawColor(renderer, sdlColor[i].r, sdlColor[i].g, sdlColor[i].b, sdlColor[i].a);
+			#ifndef EMSCRIPTEN
+				SDL_SetRenderDrawColor(renderer, sdlColor[i].r, sdlColor[i].g, sdlColor[i].b, sdlColor[i].a);
+			#endif
             SDL_RenderFillRect(renderer, &sdlRect);
         }
     }
@@ -654,7 +656,9 @@ void DKSDLWindow::Process() {
     if(SDL_GetWindowFlags(window) & SDL_WINDOW_HIDDEN)
         DKUtil::Sleep(1000); //FIXME - look for a better way to save cpu usage here
 
+#ifndef EMSCRIPTEN
     SDL_SetRenderTarget(renderer, NULL);
+#endif
     SDL_SetRenderDrawColor(renderer, 127, 127, 127, 255); //white
     SDL_RenderClear(renderer);
 	//drawBackground(renderer, width, height);
