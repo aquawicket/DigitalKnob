@@ -58,7 +58,8 @@ bool DKSDLText::SetText(const DKString& text){
 	//DKDEBUGFUNC(text);  //EXCESSIVE LOGGING
 	surface = TTF_RenderText_Solid(font, text.c_str(), color);
 	texture = SDL_CreateTextureFromSurface(dkSdlWindow->renderer, surface);
-	SDL_FreeSurface(surface);
+	//SDL_FreeSurface(surface);
+	SDL_DestroySurface(surface);
 	return true;
 }
 
@@ -91,7 +92,8 @@ bool DKSDLText::Render(){
 	int left = 5;
 	int top = dkSdlWindow->height - texH;
 	SDL_Rect dstrect = {left, top, texW, texH};
-	SDL_RenderCopy(dkSdlWindow->renderer, texture, NULL, &dstrect);
+	//SDL_RenderCopy(dkSdlWindow->renderer, texture, NULL, &dstrect);
+	SDL_RenderTexture(dkSdlWindow->renderer, texture, NULL, &dstrect);
 	SDL_DestroyTexture(texture);
 	return true;
 }
