@@ -476,6 +476,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(DKDebug)				# DKDebug.cpp:158:10: fatal error: 'execinfo.h' file not found
 	dk_disable(DKDom)				# fatal error: 'RmlUi/Core.h' file not found
 	dk_disable(DKRml)				# fatal error: 'sys/utime.h' file not found
+	dk_disable(DKRmlElement)		# requires DKRml
 	dk_disable(DKSDLText)			# requires sdl_ttf
 	dk_disable(giflib)				# dk_msys(): ERROR: not WIN_32, WIN_64, ANDROID_32 or ANDROID_64
 	dk_disable(libarchive)			# /archive_write_set_format_7zip.c:1541:13:  error: implicit truncation from 'int' to a one-bit wide bit-filed
