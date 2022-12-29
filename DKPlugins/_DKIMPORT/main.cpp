@@ -37,7 +37,7 @@
 
 int main(int argc, char** argv) {
 	#if HAVE_DKSDLWindow
-		#if !IOS
+		#if !IOS && !EMSCRIPTEN
 			SDL_SetMainReady();
 		#endif
 	#endif
