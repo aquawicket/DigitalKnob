@@ -2434,7 +2434,7 @@ function(dk_libDebug lib_path)
 		return() # The library is already in the list
 	endif()
 	
-	if(LINUX OR RASPBERRY OR ANDROID)
+	if(LINUX OR RASPBERRY OR ANDROID OR EMSCRIPTEN)
 		dk_set(DEBUG_LIBS debug ${lib_path} ${DEBUG_LIBS})  # Add to beginning of list
 	else()
 		dk_set(DEBUG_LIBS ${DEBUG_LIBS} debug ${lib_path})  # Add to end of list
@@ -2475,7 +2475,7 @@ function(dk_libRelease lib_path)
 		return() # The library is already in the list
 	endif()	
 	
-	if(LINUX OR RASPBERRY OR ANDROID)
+	if(LINUX OR RASPBERRY OR ANDROID OR EMSCRIPTEN)
 		dk_set(RELEASE_LIBS optimized ${lib_path} ${RELEASE_LIBS})  # Add to beginning of list
 	else()
 		dk_set(RELEASE_LIBS ${RELEASE_LIBS} optimized ${lib_path})  # Add to end of list
@@ -2583,6 +2583,8 @@ function(dk_generateCmake plugin_name)
 	RASPBERRY_dk_libRelease	(${plugin_path}/${OS}/${RELEASE_DIR}/lib${plugin_name}.a)
 	ANDROID_dk_libDebug		(${plugin_path}/${OS}/${DEBUG_DIR}/lib${plugin_name}.a)
 	ANDROID_dk_libRelease	(${plugin_path}/${OS}/${RELEASE_DIR}/lib${plugin_name}.a)
+	EMSCRIPTEN_dk_libDebug		(${plugin_path}/${OS}/${DEBUG_DIR}/lib${plugin_name}.a)
+	EMSCRIPTEN_dk_libRelease		(${plugin_path}/${OS}/${RELEASE_DIR}/lib${plugin_name}.a)
 	if(REBUILD OR REBUILDALL)
 		dk_set(QUEUE_BUILD ON)
 	endif()
@@ -2793,6 +2795,7 @@ SET(ASSETS
 	PATTERN android64 EXCLUDE
 	PATTERN raspberry32 EXCLUDE
 	PATTERN raspberry64 EXCLUDE
+	PATTERN emscripten EXCLUDE
 	PATTERN dktest EXCLUDE)
 
 
@@ -3512,6 +3515,9 @@ function(dk_printSettings)
 	endif()
 	if(RASPBERRY_64)
 		dk_buildLog("RASPBERRY_64:                  ${RASPBERRY_64}")
+	endif()
+	if(EMSCRIPTEN)
+		dk_buildLog("EMSCRIPTEN:                    ${EMSCRIPTEN}")
 	endif()
 	dk_buildLog(" ") 
 endfunction()
