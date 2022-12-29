@@ -505,6 +505,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(libxml2)				# fatal error: 'config.h' file not found
 	dk_disable(m)
 	dk_disable(media_player)
+	dk_disable(metal)
 	dk_disable(ncurses)
 	if(WIN_HOST)
 		dk_disable(sdl)
