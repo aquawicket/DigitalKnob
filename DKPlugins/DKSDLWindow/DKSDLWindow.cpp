@@ -767,10 +767,12 @@ bool DKSDLWindow::handle(SDL_Event *event) {
             if(event->button.button == 3)
                 DKEvents::SendEvent("sdlwindow", "contextmenu", toString(event->button.button));
             else {
-                if(event->button.clicks == 2)
-                    DKEvents::SendEvent("sdlwindow", "dblclick", toString(event->button.button));
-                else
-                    DKEvents::SendEvent("sdlwindow", "click", toString(event->button.button));
+				#ifndef EMSCRIPTEN
+					if(event->button.clicks == 2)
+						DKEvents::SendEvent("sdlwindow", "dblclick", toString(event->button.button));
+					else
+				#endif
+						DKEvents::SendEvent("sdlwindow", "click", toString(event->button.button));
             }
             return false; //allow event to continue
         }
