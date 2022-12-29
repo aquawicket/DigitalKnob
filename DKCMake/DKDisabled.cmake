@@ -477,6 +477,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(DKDom)				# fatal error: 'RmlUi/Core.h' file not found
 	dk_disable(DKRml)				# fatal error: 'sys/utime.h' file not found
 	dk_disable(DKRmlElement)		# requires DKRml
+	dk_disable(DKSDLRml)
 	dk_disable(DKSDLText)			# requires sdl_ttf
 	dk_disable(DKThread)
 	dk_disable(giflib)				# dk_msys(): ERROR: not WIN_32, WIN_64, ANDROID_32 or ANDROID_64
