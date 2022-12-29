@@ -477,6 +477,6 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	#dk_disable(libxml2)
 	dk_disable(sdl)
 	dk_disable(sdl_ttf)				# requires sdl
-	#dk_disable(xz)
+	dk_disable(xz)					# CMake Error: TEST_BIG_ENDIAN found no result!
 	dk_disable(zstd)				# error: call to undeclared function 'fileno'; ISO C99 and later do not support implicit function declarations
 endif()
