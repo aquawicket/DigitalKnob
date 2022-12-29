@@ -217,7 +217,11 @@ ANDROID64_dk_queueCommand	(${SDL_BUILD} "-DCMAKE_CXX_FLAGS=-DHAVE_GCC_ATOMICS=1"
 
 
 ### COMPILE ###
-dk_build(${SDL_FOLDER})
+if(NOT EMSCRIPTEN)
+	dk_build(${SDL_FOLDER})
+else()
+	dk_info("TODO: run 'emconfigure ../../configure' here")
+endif()
 
 #if(sdl_SDL2static)
 	#dk_build(${SDL_FOLDER} SDL2-static)
