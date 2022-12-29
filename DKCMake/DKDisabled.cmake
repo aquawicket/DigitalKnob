@@ -469,6 +469,7 @@ endif(ANDROID_64)
 
 if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(audio_toolbox)
+	dk_disable(av_foundation)
 	dk_disable(boxer)				# CMake Error: CMake can not determine link language for target "Boxer"
 	dk_disable(bzip2)				# error='make' is not recognized as an internal or external command
 	dk_disable(curl)
