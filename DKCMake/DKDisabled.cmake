@@ -476,7 +476,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(libarchive)			# /archive_write_set_format_7zip.c:1541:13:  error: implicit truncation from 'int' to a one-bit wide bit-filed
 	dk_disable(libpng)				# CMake Error: The following variables are used in this project, but they are set to NOTFOUND. (M_LIBRARY)
 	dk_disable(libxml2)				# fatal error: 'config.h' file not found
-	#dk_disable(sdl)
+	dk_disable(sdl)
 	dk_disable(sdl_ttf)				# requires sdl
 	dk_disable(xz)					# CMake Error: TEST_BIG_ENDIAN found no result!
 	dk_disable(zstd)				# error: call to undeclared function 'fileno'; ISO C99 and later do not support implicit function declarations
