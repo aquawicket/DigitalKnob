@@ -471,6 +471,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(boxer)
 	dk_disable(bzip2)
 	dk_disable(DKArchive)
+	dk_disable(DKSDLText)
 	dk_disable(giflib)
 	dk_disable(libpng)
 	dk_disable(libxml2)
