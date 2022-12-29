@@ -63,6 +63,9 @@
 #if IOS
 	#include "DKIos.h"
 #endif
+#if EMSCRIPTEN
+	#include "DKEmscripten.h"
+#endif
 	
 
 //Frame limiter
@@ -830,7 +833,7 @@ bool DKUtil::SetMainThreadNow(){
 #	if WIN
 		DKUtil::mainThreadId = GetCurrentThreadId();
 		return true;
-#	elif MAC || IOS || LINUX || ANDROID
+#	elif MAC || IOS || LINUX || ANDROID || EMSCRIPTEN
 		DKUtil::mainThreadId = (unsigned long int)pthread_self();
 		return true;
 #	else
