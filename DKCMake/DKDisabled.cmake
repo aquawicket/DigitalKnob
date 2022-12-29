@@ -481,6 +481,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(core_haptics)
 	dk_disable(core_motion)
 	dk_disable(core_services)
+	dk_disable(core_video)
 	dk_disable(curl)
 	dk_disable(DKArchive)			# requires libarchive
 	dk_disable(DKCurl)				# requires curl
@@ -499,6 +500,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(libpng)				# CMake Error: The following variables are used in this project, but they are set to NOTFOUND. (M_LIBRARY)
 	dk_disable(libxml2)				# fatal error: 'config.h' file not found
 	dk_disable(m)
+	dk_disable(ncurses)
 	if(WIN_HOST)
 		dk_disable(sdl)
 	endif()
