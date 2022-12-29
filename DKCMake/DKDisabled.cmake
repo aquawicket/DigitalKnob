@@ -474,6 +474,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(giflib)
 	dk_disable(libpng)
 	dk_disable(libxml2)
+	dk_disable(sdl_ttf)
 	dk_disable(xz)
 	dk_disable(zstd)
 endif()

@@ -2336,8 +2336,8 @@ dk_createOsMacros("dk_ndk" "NO_DEBUG_RELEASE_TAGS")
 #
 function(dk_make folder) #lib
 	DKDEBUGFUNC(${ARGV})
-	dk_set(EMMAKE ${3RDPARTY}/emsdk-main/upstream/emscripten/emmake)
 	if(EMSCRIPTEN)
+		dk_set(EMMAKE ${3RDPARTY}/emsdk-main/upstream/emscripten/emmake)
 		set(lib ${ARGV1})
 		dk_set(CURRENT_DIR ${3RDPARTY}/${folder}/${BUILD_DIR})
 		if(${ARGC} GREATER 1)
