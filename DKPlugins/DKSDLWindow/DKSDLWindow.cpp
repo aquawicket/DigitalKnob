@@ -154,8 +154,10 @@ bool DKSDLWindow::Init(){
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
     result = "OpenglES";
     DKINFO("DKSDLWindow Width: " + toString(width) + " Height: " + toString(height) + "\n");
-    if(SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_RESIZABLE, &window, &renderer) < 0)
-        return DKERROR("SDL_CreateWindow Error: " + DKString(SDL_GetError()) + "\n");
+	#ifndef EMSCRIPTEN
+		if(SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_RESIZABLE, &window, &renderer) < 0)
+			return DKERROR("SDL_CreateWindow Error: " + DKString(SDL_GetError()) + "\n");
+	#endif
     
     /*
     //SDL_SetHint(SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS, "0");
