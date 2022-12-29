@@ -479,6 +479,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(core_foundation)
 	dk_disable(core_graphics)
 	dk_disable(core_haptics)
+	dk_disable(core_motion)
 	dk_disable(curl)
 	dk_disable(DKArchive)			# requires libarchive
 	dk_disable(DKCurl)				# requires curl
