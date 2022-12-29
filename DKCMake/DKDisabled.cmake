@@ -469,4 +469,5 @@ endif(ANDROID_64)
 
 if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(boxer)
+	dk_disable(xz)
 endif()
