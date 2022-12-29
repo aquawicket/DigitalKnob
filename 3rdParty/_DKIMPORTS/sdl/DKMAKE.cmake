@@ -227,6 +227,7 @@ ANDROID64_dk_queueCommand	(${SDL_BUILD} "-DCMAKE_CXX_FLAGS=-DHAVE_GCC_ATOMICS=1"
 #EMSCRIPTEN_RELEASE_dk_setPath		(${SDL}/${OS}/${RELEASE_DIR})
 #EMSCRIPTEN_RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD} --host=wasm32-unknown-emscripten --disable-assembly --disable-threads) # --disable-cpuinfo CFLAGS="-s USE_SDL=0 -O2 -Wno-warn-absolute-paths -Wdeclaration-after-statement -Werror=declaration-after-statement")
 #EMSCRIPTEN_RELEASE_dk_queueCommand	(${EMSDK}/upstream/emscripten/emmake make)
+EMSCRIPTEN_dk_queueCommand			(export SDKDIR=${EMSDK})
 EMSCRIPTEN_dk_queueCommand			(${SDL}/build-scripts/emscripten-buildbot.sh)
 EMSCRIPTEN_DEBUG_dk_copy			(${SDL}/buildbot/usr/local/include ${SDK}/emscripten/Debug/include)
 EMSCRIPTEN_RELEASE_dk_copy			(${SDL}/buildbot/usr/local/include ${SDK}/emscripten/Release/include)
