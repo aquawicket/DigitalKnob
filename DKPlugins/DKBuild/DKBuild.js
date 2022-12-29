@@ -657,8 +657,14 @@ function DKBuild_DoResults(){
 				if(!DKBuild_Command(EMSDK_ENV+".sh & "+CMAKE+" -G \"Unix Makefiles\" -DCMAKE_TOOLCHAIN_FILE=\""+EMSDK_TOOLCHAIN_FILE+"\" "+cmake_string+""+DIGITALKNOB+"DK/DKCMake"))
 					return false
 			}
-			if(!DKBuild_Command(EMSDK_ENV+" & "+CMAKE+" --build "+app_path+OS+"/Debug --target "+APP+"_APP --config Debug"))	
-				return false
+			if(CPP_DK_GetOS() === "Windows"){
+				if(!DKBuild_Command(EMSDK_ENV+" & "+CMAKE+" --build "+app_path+OS+"/Debug --target "+APP+"_APP --config Debug"))	
+					return false
+			}
+			else{
+				if(!DKBuild_Command(EMSDK_ENV+".sh & "+CMAKE+" --build "+app_path+OS+"/Debug --target "+APP+"_APP --config Debug"))	
+					return false
+			}
 		}
 		if(TYPE === "Release" || TYPE === "ALL"){
 			cmake_string = cmake_string.replace("-DDEBUG=ON", "-DDEBUG=OFF");
@@ -673,8 +679,14 @@ function DKBuild_DoResults(){
 				if(!DKBuild_Command(EMSDK_ENV+".sh & "+CMAKE+" -G \"Unix Makefiles\" -DCMAKE_TOOLCHAIN_FILE=\""+EMSDK_TOOLCHAIN_FILE+"\" "+cmake_string+""+DIGITALKNOB+"DK/DKCMake"))
 					return false
 			}
-			if(!DKBuild_Command(EMSDK_ENV+" & "+CMAKE+" --build "+app_path+OS+"/Release --target "+APP+"_APP --config Release"))
-				return false
+			if(CPP_DK_GetOS() === "Windows"){
+				if(!DKBuild_Command(EMSDK_ENV+" & "+CMAKE+" --build "+app_path+OS+"/Release --target "+APP+"_APP --config Release"))
+					return false
+			}
+			else{
+				if(!DKBuild_Command(EMSDK_ENV+".sh & "+CMAKE+" --build "+app_path+OS+"/Release --target "+APP+"_APP --config Release"))
+					return false
+			}
 		}
 	}
 	
