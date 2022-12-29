@@ -215,7 +215,11 @@ ANDROID64_dk_queueCommand	(${SDL_BUILD} "-DCMAKE_CXX_FLAGS=-DHAVE_GCC_ATOMICS=1"
 
 #EMSCRIPTEN_dk_queueCommand	(${DKCMAKE_BUILD} ${SDL})
 #emconfigure ../configure --host=wasm32-unknown-emscripten --disable-assembly --disable-threads --disable-cpuinfo CFLAGS="-s USE_SDL=0 -O2 -Wno-warn-absolute-paths -Wdeclaration-after-statement -Werror=declaration-after-statement" --prefix="$PWD/emscripten-sdl2-installed"
-EMSCRIPTEN_DEBUG_dk_queueCommand	(${EMSDK}/emsdk_env)
+if(WIN_HOST)
+	EMSCRIPTEN_DEBUG_dk_queueCommand	(${EMSDK}/emsdk_env.bat)
+else()
+	EMSCRIPTEN_DEBUG_dk_queueCommand	(${EMSDK}/emsdk_env.sh)
+endif()
 EMSCRIPTEN_DEBUG_dk_setPath			(${SDL}/${OS}/${DEBUG_DIR})
 EMSCRIPTEN_DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD} --host=wasm32-unknown-emscripten --disable-assembly --disable-threads) #--disable-cpuinfo CFLAGS="-s USE_SDL=0 -O2 -Wno-warn-absolute-paths -Wdeclaration-after-statement -Werror=declaration-after-statement")
 EMSCRIPTEN_DEBUG_dk_queueCommand	(${EMSDK}/upstream/emscripten/emmake make)
