@@ -626,7 +626,9 @@ bool DKSDLWindow::Show(const void* input, void* output)
 bool DKSDLWindow::Windowed(const void* input, void* output) 
 {
     DKDEBUGFUNC(input, output);
+#ifndef EMSCRIPTEN
     SDL_SetWindowFullscreen(window, 0);
+#endif
     return true;
 }
 
