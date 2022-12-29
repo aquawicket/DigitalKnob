@@ -474,6 +474,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(avf_audio)
 	dk_disable(boxer)				# CMake Error: CMake can not determine link language for target "Boxer"
 	dk_disable(bzip2)				# error='make' is not recognized as an internal or external command
+	dk_disable(core_audio)
 	dk_disable(curl)
 	dk_disable(DKArchive)			# requires libarchive
 	dk_disable(DKCurl)				# requires curl
