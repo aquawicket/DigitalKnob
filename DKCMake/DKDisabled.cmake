@@ -504,6 +504,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(libpng)				# CMake Error: The following variables are used in this project, but they are set to NOTFOUND. (M_LIBRARY)
 	dk_disable(libxml2)				# fatal error: 'config.h' file not found
 	dk_disable(m)
+	dk_disable(media_player)
 	dk_disable(ncurses)
 	if(WIN_HOST)
 		dk_disable(sdl)
