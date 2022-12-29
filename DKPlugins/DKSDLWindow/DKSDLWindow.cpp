@@ -136,7 +136,7 @@ bool DKSDLWindow::Init(){
 #ifndef EMSCRIPTEN
     SDL_SetHint(SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS, "0");
 #endif
-#if !defined(ANDROID) && !defined(IOS)
+#if !defined(ANDROID) && !defined(IOS) && !defined(EMSCRIPTEN)
     SDL_SetHint(SDL_HINT_MOUSE_FOCUS_CLICKTHROUGH, "1");
 #endif
     DKString result;
