@@ -468,6 +468,7 @@ endif(ANDROID_64)
 
 
 if(EMSCRIPTEN) # Disabled for Emscripten targets
+	dk_disable(aubio)
 	dk_disable(audio_toolbox)
 	dk_disable(av_foundation)
 	dk_disable(av_kit)
@@ -477,6 +478,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(core_audio)
 	dk_disable(core_foundation)
 	dk_disable(core_graphics)
+	dk_disable(core_haptics)
 	dk_disable(curl)
 	dk_disable(DKArchive)			# requires libarchive
 	dk_disable(DKCurl)				# requires curl
