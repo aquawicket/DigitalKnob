@@ -2311,7 +2311,7 @@ extern DECLSPEC int SDLCALL TTF_SetFontScriptName(TTF_Font *font, const char *sc
 #ifdef __cplusplus
 }
 #endif
-#include "close_code.h"
+#include "SDL_close_code.h"
 
 #endif /* SDL_TTF_H_ */
 

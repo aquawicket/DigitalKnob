@@ -91,7 +91,7 @@ ANDROID_dk_include	(${SDL}/src)
 	#LINUX_dk_libRelease	(${SDL}/${OS}/${RELEASE_DIR}/libSDL3main.a)
 	#RASPBERRY_dk_libDebug	(${SDL}/${OS}/${DEBUG_DIR}/libSDL3maind.a)
 	#RASPBERRY_dk_libRelease(${SDL}/${OS}/${RELEASE_DIR}/libSDL3main.a)
-	#ANDROID_dk_libDebug		(${SDL}/${OS}/${DEBUG_DIR}/libSDL3main.a)
+	#ANDROID_dk_libDebug	(${SDL}/${OS}/${DEBUG_DIR}/libSDL3main.a)
 	#ANDROID_dk_libRelease	(${SDL}/${OS}/${RELEASE_DIR}/libSDL3main.a)
 #endif()
 
@@ -125,8 +125,8 @@ MAC_dk_set(SDLMAIN_CMAKE
 	-DSDL2MAIN_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL3main.a)
 	
 IOS_dk_set(SDL_CMAKE
-	"-DCMAKE_C_FLAGS=-I${SDL}/include"
-	"-DCMAKE_CXX_FLAGS=-I${SDL}/include" 
+	"-DCMAKE_C_FLAGS=-I${SDL}/include/SDL3"
+	"-DCMAKE_CXX_FLAGS=-I${SDL}/include/SDL3"
 	-DSDL2_DIR=${SDL}
 	-DSDL2_INCLUDE_DIR=${SDL}/include
 	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/libSDL3.a
@@ -138,8 +138,8 @@ IOS_dk_set(SDLMAIN_CMAKE
 	-DSDL2MAIN_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL3main.a)
 	
 IOSSIM_dk_set(SDL_CMAKE
-	"-DCMAKE_C_FLAGS=-I${SDL}/include"
-	"-DCMAKE_CXX_FLAGS=-I${SDL}/include" 
+	"-DCMAKE_C_FLAGS=-I${SDL}/include/SDL3"
+	"-DCMAKE_CXX_FLAGS=-I${SDL}/include/SDL3"
 	-DSDL2_DIR=${SDL}
 	-DSDL2_INCLUDE_DIR=${SDL}/include
 	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/Release-iphonesimulator/libSDL3.a
@@ -151,8 +151,8 @@ IOSSIM_dk_set(SDLMAIN_CMAKE
 	-DSDL2MAIN_LIBRARY_RELEASE=${SDL}/${OS}/Release-iphonesimulator/libSDL3main.a)
 	
 LINUX_dk_set(SDL_CMAKE
-	"-DCMAKE_C_FLAGS=-I${SDL}/include"
-	"-DCMAKE_CXX_FLAGS=-I${SDL}/include" 
+	"-DCMAKE_C_FLAGS=-I${SDL}/include/SDL3"
+	"-DCMAKE_CXX_FLAGS=-I${SDL}/include/SDL3"
 	-DSDL2_DIR=${SDL}
 	-DSDL2_INCLUDE_DIR=${SDL}/include
 	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/libSDL3.a
@@ -161,8 +161,8 @@ LINUX_dk_set(SDL_CMAKE
 	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL3.a)
 	
 RASPBERRY_dk_set(SDL_CMAKE
-	"-DCMAKE_C_FLAGS=-I${SDL}/include"
-	"-DCMAKE_CXX_FLAGS=-I${SDL}/include" 
+	"-DCMAKE_C_FLAGS=-I${SDL}/include/SDL3"
+	"-DCMAKE_CXX_FLAGS=-I${SDL}/include/SDL3"
 	-DSDL2_INCLUDE_DIR=${SDL}/include
 	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/libSDL3.a
 	-DSDL2_LIBRARY=${SDL}/${OS}/${RELEASE_DIR}/libSDL3.a
@@ -170,8 +170,8 @@ RASPBERRY_dk_set(SDL_CMAKE
 	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL3.a)
 	
 ANDROID_dk_set(SDL_CMAKE
-	"-DCMAKE_C_FLAGS=-I${SDL}/include"
-	"-DCMAKE_CXX_FLAGS=-I${SDL}/include" 
+	"-DCMAKE_C_FLAGS=-I${SDL}/include/SDL3"
+	"-DCMAKE_CXX_FLAGS=-I${SDL}/include/SDL3"
 	-DSDL2_DIR=${SDL}/cmake
 	-DSDL2_INCLUDE_DIR=${SDL}/include
 	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/libSDL3.a
@@ -180,8 +180,8 @@ ANDROID_dk_set(SDL_CMAKE
 	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL3.a)
 
 EMSCRIPTEN_dk_set(SDL_CMAKE
-	"-DCMAKE_C_FLAGS=-I${SDL}/include"
-	"-DCMAKE_CXX_FLAGS=-I${SDL}/include" 
+	"-DCMAKE_C_FLAGS=-I${SDL}/include/SDL3"
+	"-DCMAKE_CXX_FLAGS=-I${SDL}/include/SDL3"
 	-DSDL2_DIR=${SDL}
 	-DSDL2_INCLUDE_DIR=${SDL}/include
 	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/libSDL3.a
