@@ -509,6 +509,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(metal)
 	dk_disable(metalKit)
 	dk_disable(ncurses)
+	dk_disable(quartz_core)
 	if(WIN_HOST)
 		dk_disable(sdl)
 	endif()
