@@ -214,13 +214,17 @@ ANDROID32_dk_queueCommand	(${SDL_BUILD} -DLIBTYPE=STATIC -DSDL_SHARED=OFF ${SDL}
 ANDROID64_dk_queueCommand	(${SDL_BUILD} "-DCMAKE_CXX_FLAGS=-DHAVE_GCC_ATOMICS=1" -DLIBTYPE=STATIC -DSDL_SHARED=OFF -DHAVE_BUILTIN_ICONV=0 -DHAVE_LIBICONV=0 ${ICONV_CMAKE} ${SDL})
 
 #EMSCRIPTEN_dk_queueCommand	(${DKCMAKE_BUILD} ${SDL})
-
+#emconfigure ../configure --host=wasm32-unknown-emscripten --disable-assembly --disable-threads --disable-cpuinfo CFLAGS="-s USE_SDL=0 -O2 -Wno-warn-absolute-paths -Wdeclaration-after-statement -Werror=declaration-after-statement" --prefix="$PWD/emscripten-sdl2-installed"
+EMSCRIPTEN_DEBUG_dk_setPath		(${SDL}/${OS}/${DEBUG_DIR})
+EMSCRIPTEN_DEBUG_dk_queueCommand(${DKCONFIGURE_BUILD} --host=wasm32-unknown-emscripten --disable-assembly --disable-threads) #--disable-cpuinfo CFLAGS="-s USE_SDL=0 -O2 -Wno-warn-absolute-paths -Wdeclaration-after-statement -Werror=declaration-after-statement")
+EMSCRIPTEN_DEBUG_dk_queueShell	(make)
+EMSCRIPTEN_RELEASE_dk_setPath	(${SDL}/${OS}/${RELEASE_DIR})
+EMSCRIPTEN_RELEASE_dk_queueShell(${DKCONFIGURE_BUILD} --host=wasm32-unknown-emscripten --disable-assembly --disable-threads --disable-cpuinfo CFLAGS="-s USE_SDL=0 -O2 -Wno-warn-absolute-paths -Wdeclaration-after-statement -Werror=declaration-after-statement")
+EMSCRIPTEN_RELEASE_dk_queueShell(make)
 
 ### COMPILE ###
 if(NOT EMSCRIPTEN)
 	dk_build(${SDL_FOLDER})
-else()
-	dk_info("TODO: run 'emconfigure ../../configure' here")
 endif()
 
 #if(sdl_SDL2static)
