@@ -69,8 +69,10 @@ ANDROID_dk_include	(${SDL}/src)
 #if(sdl_SDL2static)
 	WIN_dk_libDebug			(${SDL}/${OS}/${DEBUG_DIR}/SDL2-staticd.lib)
 	WIN_dk_libRelease		(${SDL}/${OS}/${RELEASE_DIR}/SDL2-static.lib)
-	UNIX_dk_libDebug		(${SDL}/${OS}/${DEBUG_DIR}/libSDL2.a)
-	UNIX_dk_libRelease		(${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a)
+	#UNIX_dk_libDebug		(${SDL}/${OS}/${DEBUG_DIR}/libSDL2.a)
+	#UNIX_dk_libRelease		(${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a)
+	UNIX_dk_libDebug		(${SDL}/${OS}/${DEBUG_DIR}/libSDL3.a)
+	UNIX_dk_libRelease		(${SDL}/${OS}/${RELEASE_DIR}/libSDL3.a)
 	#MAC_dk_libDebug		(${SDL}/${OS}/${DEBUG_DIR}/libSDL2d.a)
 	#MAC_dk_libRelease		(${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a)
 	#IOS_dk_libDebug		(${SDL}/${OS}/${DEBUG_DIR}/libSDL2d.a)
@@ -194,10 +196,10 @@ EMSCRIPTEN_dk_set(SDL_CMAKE
 	"-DCMAKE_CXX_FLAGS=-I${SDL}/include" 
 	-DSDL2_DIR=${SDL}
 	-DSDL2_INCLUDE_DIR=${SDL}/include
-	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a
-	-DSDL2_LIBRARY=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a
-	-DSDL2_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/libSDL2.a
-	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a)
+	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/libSDL3.a
+	-DSDL2_LIBRARY=${SDL}/${OS}/${RELEASE_DIR}/libSDL3.a
+	-DSDL2_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/libSDL3.a
+	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL3.a)
 
 ### GENERATE ###
 WIN_dk_queueCommand			(${DKCMAKE_BUILD} -DSDL_SHARED=OFF -DSDL_LIBC=ON ${SDL})

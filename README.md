@@ -22,13 +22,14 @@ Safari <br>
 Firefox <br>
 Opera <br>
 Internet Explorer (9.0+) <br>
+Emscripten <br>
 
 ### Supported Frameworks <br>
 [SDL](https://github.com/spurious/SDL-mirror) <br>
 <!-- [SFML](https://github.com/SFML/SFML) -->
 [OpenSceneGraph](https://github.com/openscenegraph/osg) <br>
 <!-- [OpenFrameworks](https://github.com/openframeworks/openFrameworks) -->
-<!-- [Emscripten](https://github.com/kripken/emscripten) (TODO) -->
+[Emscripten](https://github.com/kripken/emscripten) <br>
 
 ### Supported Tools, Libraries and Frameworks <br>
 [agl](https://developer.apple.com/documentation/agl/agl?language=objc) <br>
