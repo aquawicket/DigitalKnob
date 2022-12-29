@@ -495,6 +495,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 		dk_disable(DKSDLWindow)
 	endif()
 	dk_disable(DKThread)
+	dk_disable(dukluv)
 	dk_disable(foundation)
 	dk_disable(game_controller)
 	dk_disable(giflib)				# dk_msys(): ERROR: not WIN_32, WIN_64, ANDROID_32 or ANDROID_64
@@ -506,6 +507,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(m)
 	dk_disable(media_player)
 	dk_disable(metal)
+	dk_disable(metalKit)
 	dk_disable(ncurses)
 	if(WIN_HOST)
 		dk_disable(sdl)
