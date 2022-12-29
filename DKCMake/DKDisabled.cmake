@@ -476,7 +476,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(libpng)				# CMake Error: The following variables are used in this project, but they are set to NOTFOUND. (M_LIBRARY)
 	#dk_disable(libxml2)
 	dk_disable(sdl)
-	#dk_disable(sdl_ttf)
+	dk_disable(sdl_ttf)				# requires sdl
 	#dk_disable(xz)
 	dk_disable(zstd)				# error: call to undeclared function 'fileno'; ISO C99 and later do not support implicit function declarations
 endif()
