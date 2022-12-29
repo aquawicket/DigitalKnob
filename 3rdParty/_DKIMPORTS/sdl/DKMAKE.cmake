@@ -224,11 +224,11 @@ EMSCRIPTEN_dk_queueCommand	(${DKCMAKE_BUILD} ${SDL})
 
 
 ### COMPILE ###
-if(EMSCRIPTEN)
-	dk_build(${SDL_FOLDER} SDL2-static)
-else()
+#if(EMSCRIPTEN)
+#	dk_build(${SDL_FOLDER} SDL2-static)
+#else()
 	dk_build(${SDL_FOLDER})
-endif()
+#endif()
 
 #if(sdl_SDL2static)
 	#dk_build(${SDL_FOLDER} SDL2-static)
