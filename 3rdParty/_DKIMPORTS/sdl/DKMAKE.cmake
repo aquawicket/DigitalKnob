@@ -98,8 +98,8 @@ ANDROID_dk_include	(${SDL}/src)
 
 ### 3RDPARTY LINK ###
 WIN_dk_set(SDL_CMAKE
-	"-DCMAKE_C_FLAGS=/I${SDL}/include"
-	"-DCMAKE_CXX_FLAGS=/I${SDL}/include" 
+	"-DCMAKE_C_FLAGS=/I${SDL}/include/SDL3"
+	"-DCMAKE_CXX_FLAGS=/I${SDL}/include/SDL3" 
 	-DSDL2_DIR=${SDL}
 	-DSDL2_INCLUDE_DIR=${SDL}/include
 	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/SDL3.lib
@@ -112,8 +112,8 @@ WIN_dk_set(SDLMAIN_CMAKE
 	-DSDL2MAIN_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/SDL3main.lib)
 	
 MAC_dk_set(SDL_CMAKE
-	"-DCMAKE_C_FLAGS=-I${SDL}/include"
-	"-DCMAKE_CXX_FLAGS=-I${SDL}/include" 
+	"-DCMAKE_C_FLAGS=-I${SDL}/include/SDL3"
+	"-DCMAKE_CXX_FLAGS=-I${SDL}/include/SDL3" 
 	-DSDL2_DIR=${SDL}
 	-DSDL2_INCLUDE_DIR=${SDL}/include
 	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/libSDL3.a
