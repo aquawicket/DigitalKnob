@@ -496,8 +496,10 @@ bool DKUtil::InMainThread(){
 	//DKDEBUGFUNC(); // DON'T DO THIS
 #	if WIN32
 		return mainThreadId == GetCurrentThreadId();
-#	elif MAC || IOS || ANDROID || LINUX
+#	elif MAC || IOS || ANDROID || LINUX || EMSCRIPTEN
 		return mainThreadId == (unsigned long int)pthread_self(); //TODO: move this to DKUnix::InMainThread()
+#	else 
+		return DKERROR("not implemented on this OS\n");
 #	endif
 }
 
@@ -621,7 +623,7 @@ bool DKUtil::PhysicalMemory(unsigned long long& physicalMemory){
 #	elif LINUX
 		return DKLinux::PhysicalMemory(physicalMemory) && DKDEBUGRETURN(physicalMemory);
 #	else
-	return DKERROR("not implemented on this OS\n");
+		return DKERROR("not implemented on this OS\n");
 #	endif
 }
 
