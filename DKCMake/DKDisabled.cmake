@@ -256,7 +256,6 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKOSGWidget)			# build errors
 	dk_disable(DKScreenRecorder)
 	dk_disable(DKSDLVideo)			# requires waave
-	dk_disable(DKSDLText)
 	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSFMLRml)			# INCOMPLETE
 	dk_disable(DKThread)			# error: need to implement boost::placeholders
@@ -290,7 +289,6 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(podofo)				# build errors
 	dk_disable(rmlui-d3d11)
 	dk_disable(sdl_rtf)
-	dk_disable(sdl_ttf)
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(uwebsockets)			# requires openssl
 	dk_disable(waave)
