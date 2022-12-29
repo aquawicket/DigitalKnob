@@ -472,6 +472,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(bzip2)				# error='make' is not recognized as an internal or external command
 	dk_disable(curl)
 	dk_disable(DKArchive)			# requires libarchive
+	dk_disable(DKCurl)				# requires curl
 	dk_disable(DKSDLText)			# requires sdl_ttf
 	dk_disable(giflib)				# dk_msys(): ERROR: not WIN_32, WIN_64, ANDROID_32 or ANDROID_64
 	dk_disable(libarchive)			# /archive_write_set_format_7zip.c:1541:13:  error: implicit truncation from 'int' to a one-bit wide bit-filed
