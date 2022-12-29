@@ -140,7 +140,7 @@ bool DKSDLWindow::Init(){
     SDL_SetHint(SDL_HINT_MOUSE_FOCUS_CLICKTHROUGH, "1");
 #endif
     DKString result;
-#if defined(ANDROID) || defined(IOS)
+#if defined(ANDROID) || defined(IOS) || defined(EMSCRIPTEN)
     DKINFO("Creating SDLWindow for mobile device\n");
     
     SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengles");
@@ -180,7 +180,7 @@ bool DKSDLWindow::Init(){
     SDL_SetWindowTitle(sdlWindow, mTitle.c_str());
     */
 #endif
-#if !defined(ANDROID) && !defined(IOS)
+#if !defined(ANDROID) && !defined(IOS) && !defined(EMSCRIPTEN)
     DKINFO("Creating SDLWindow for Desktop\n");
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_COMPATIBILITY);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 1);
