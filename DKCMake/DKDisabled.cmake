@@ -470,6 +470,7 @@ endif(ANDROID_64)
 if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(boxer)				# CMake Error: CMake can not determine link language for target "Boxer"
 	dk_disable(bzip2)				# error='make' is not recognized as an internal or external command
+	dk_disable(curl)
 	dk_disable(DKArchive)			# requires libarchive
 	dk_disable(DKSDLText)			# requires sdl_ttf
 	dk_disable(giflib)				# dk_msys(): ERROR: not WIN_32, WIN_64, ANDROID_32 or ANDROID_64
