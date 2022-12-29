@@ -399,7 +399,9 @@ bool DKSDLWindow::TestReturnString(const void* input, void* output) {
 
 bool DKSDLWindow::Fullscreen(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
+#ifndef EMACRIPTEN
     SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+#endif
     return true;
 }
 
@@ -524,7 +526,9 @@ bool DKSDLWindow::IsVisible(const void* input, void* output) {
 bool DKSDLWindow::MessageBox(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     DKString message = *(DKString*)input;
+#ifndef EMACRIPTEN
     SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "DKERROR", message.c_str(), window);
+#endif
     return true;
 }
 
