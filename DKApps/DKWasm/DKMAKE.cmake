@@ -1,4 +1,5 @@
 dk_depend(emsdk)
+dk_depend(wasi)
 dk_depend(wasm3)
 #dk_depend(pacman.c)
 #dk_depend(rocketship)
