@@ -60,6 +60,7 @@ dk_import(https://github.com/libsdl-org/SDL.git BRANCH main PATCH)
 ### LINK ###
 #ANDROID_dk_define	(GL_GLEXT_PROTOTYPES)
 dk_include			(${SDL}/include)
+dk_include			(${SDL}/include/SDL3)
 RASPBERRY_dk_include(/opt/vc/lib)
 LINUX_dk_include	(${SDL}/${OS}/${RELEASE_DIR}/include)
 ANDROID_dk_include	(${ANDROID-NDK}/sources/android/cpufeatures)
