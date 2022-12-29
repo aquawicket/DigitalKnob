@@ -133,7 +133,9 @@ bool DKSDLWindow::Init(){
     //DKAndroid::android_height = height;
 #endif
 
+#ifndef EMSCRIPTEN
     SDL_SetHint(SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS, "0");
+#endif
 #if !defined(ANDROID) && !defined(IOS)
     SDL_SetHint(SDL_HINT_MOUSE_FOCUS_CLICKTHROUGH, "1");
 #endif
