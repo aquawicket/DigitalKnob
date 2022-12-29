@@ -509,6 +509,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(iokit)
 	dk_disable(libarchive)			# /archive_write_set_format_7zip.c:1541:13:  error: implicit truncation from 'int' to a one-bit wide bit-filed
 	dk_disable(libpng)				# CMake Error: The following variables are used in this project, but they are set to NOTFOUND. (M_LIBRARY)
+	dk_disable(libexpat)
 	dk_disable(libxml2)				# fatal error: 'config.h' file not found
 	dk_disable(kdevelop)
 	dk_disable(m)
