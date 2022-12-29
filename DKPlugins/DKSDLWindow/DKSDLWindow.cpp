@@ -49,6 +49,9 @@
 #ifdef ANDROID
 	#include <GLES/gl.h>
 #endif
+#ifdef EMSCRIPTEN
+#   include <GLES2/gl2.h>
+#endif
 //WARNING_ENABLE
 
 
@@ -62,7 +65,9 @@ std::map<int, int> DKSDLWindow::sdlMacCode;
 
 bool DKSDLWindow::Init(){
     DKDEBUGFUNC();
+#ifndef EMSCRIPTEN
 	SDL_SetMainReady(); //Bypass SDL_main() //https://wiki.libsdl.org/SDL_SetMainReady
+#endif
 	
 #ifdef ANDROID
     //DKINFO("CallJavaFunction(OpenActivity,SDLActivity)\n");
