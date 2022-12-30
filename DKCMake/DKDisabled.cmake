@@ -490,6 +490,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(DKAudio)
 	dk_disable(DKCef)
 	dk_disable(DKCurl)				# requires curl
+	dk_disable(DKCrypto)
 	dk_disable(DKDebug)				# DKDebug.cpp:158:10: fatal error: 'execinfo.h' file not found
 	dk_disable(DKDom)				# fatal error: 'RmlUi/Core.h' file not found
 	dk_disable(DKRml)				# fatal error: 'sys/utime.h' file not found
