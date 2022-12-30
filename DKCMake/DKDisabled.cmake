@@ -495,6 +495,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(DKDom)				# fatal error: 'RmlUi/Core.h' file not found
 	dk_disable(DKDuktapeDom)
 	dk_disable(DKHook)
+	dk_disable(DKImageMagick)
 	dk_disable(DKRml)				# fatal error: 'sys/utime.h' file not found
 	dk_disable(DKRmlElement)		# requires DKRml
 	dk_disable(DKSDLRml)
