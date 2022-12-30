@@ -526,6 +526,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(DKSDLRml)
 	dk_disable(DKSDLText)			# requires sdl_ttf
 	dk_disable(DKSDLVideo)			# requires waave
+	dk_disable(DKSDLWav)
 	if(WIN_HOST)
 		dk_disable(DKSDLWindow)		# requires sdl
 	endif()
