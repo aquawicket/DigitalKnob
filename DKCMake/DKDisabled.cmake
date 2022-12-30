@@ -519,14 +519,16 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(DKOSGWidget)
 	dk_disable(DKOSGWindow)
 	dk_disable(DKRestart)
-	dk_disable(DKRml)				# fatal error: 'sys/utime.h' file not found
+	#dk_disable(DKRml)				# fatal error: 'sys/utime.h' file not found
 	dk_disable(DKRmlElement)		# requires DKRml
 	dk_disable(DKRmlIframe)
 	dk_disable(DKScreenRecorder)
 	dk_disable(DKSDLAudio)
 	dk_disable(DKSDLCef)
 	dk_disable(DKSDLMetalWindow)
-	dk_disable(DKSDLRml)
+	if(WIN_HOST)
+		dk_disable(DKSDLRml)
+	endif()
 	dk_disable(DKSDLText)			# requires sdl_ttf
 	dk_disable(DKSDLVideo)			# requires waave
 	dk_disable(DKSDLWav)

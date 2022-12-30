@@ -11,14 +11,15 @@ dk_import(https://github.com/emscripten-core/emsdk.git BRANCH main)
 #dk_command(${EMSDK}/emsdk install latest)
 #WIN_dk_command(${EMSDK}/emsdk install activate latest)
 #WIN_dk_command(${EMSDK}/emsdk_env.bat)
-
 dk_command(${EMSDK}/emsdk install latest)
 dk_command(${EMSDK}/emsdk activate latest)
 UNIX_HOST_dk_command(chmod 777 ${EMSDK}/emsdk_env.sh)
-UNIX_dk_command(${EMSDK}/emsdk_env.sh)
-WIN_dk_command(${EMSDK}/emsdk_env.bat)
-WIN_dk_command(${EMSDK}/emsdk install mingw-4.6.2-32bit)
-WIN_dk_command(${EMSDK}/emsdk activate mingw-4.6.2-32bit)
+UNIX_HOST_dk_command(${EMSDK}/emsdk_env.sh)
+WIN_HOST_dk_command(${EMSDK}/emsdk_env.bat)
+WIN_HOST_dk_command(${EMSDK}/emsdk install mingw-4.6.2-32bit)
+WIN_HOST_dk_command(${EMSDK}/emsdk activate mingw-4.6.2-32bit)
+
+dk_set(EMCMAKE ${EMSDK}/upstream/emscripten/emcmake)
 
 
 ######################################################################################################################
