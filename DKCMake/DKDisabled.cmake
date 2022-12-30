@@ -537,6 +537,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(DKSFMLWindow)
 	dk_disable(DKThread)
 	dk_disable(DKTorrent)
+	dk_disable(DKTray)
 	dk_disable(DKUpdate)
 	dk_disable(DKVncClient)
 	dk_disable(DKVncServer)
@@ -549,6 +550,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(gdal)
 	dk_disable(giflib)				# dk_msys(): ERROR: not WIN_32, WIN_64, ANDROID_32 or ANDROID_64
 	dk_disable(gl_kit)
+	dk_disable(gzip)
 	dk_disable(imagemagick)
 	dk_disable(iokit)
 	dk_disable(libarchive)			# /archive_write_set_format_7zip.c:1541:13:  error: implicit truncation from 'int' to a one-bit wide bit-filed
