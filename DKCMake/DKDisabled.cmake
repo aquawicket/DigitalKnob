@@ -512,7 +512,8 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(libexpat)
 	dk_disable(libpng)				# CMake Error: The following variables are used in this project, but they are set to NOTFOUND. (M_LIBRARY)
 	dk_disable(libsndfile)
-	dk_diaable(libvncserver)
+	dk_disable(libuv)
+	dk_disable(libvncserver)
 	dk_disable(libxml2)				# fatal error: 'config.h' file not found
 	dk_disable(kdevelop)
 	dk_disable(m)
