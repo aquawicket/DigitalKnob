@@ -536,6 +536,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(sdl_ttf)				# error: unknown type name 'SDL_INLINE'
 	dk_disable(system_configuration)
 	dk_disable(waave)
+	dk_disable(wasm3)
 	dk_disable(xz)					# CMake Error: TEST_BIG_ENDIAN found no result!
 	dk_disable(zstd)				# error: call to undeclared function 'fileno'; ISO C99 and later do not support implicit function declarations
 endif()
