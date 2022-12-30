@@ -514,6 +514,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(libsndfile)
 	dk_disable(libuv)
 	dk_disable(libvncserver)
+	dk_disable(libwebsockets)
 	dk_disable(libxml2)				# fatal error: 'config.h' file not found
 	dk_disable(kdevelop)
 	dk_disable(m)
