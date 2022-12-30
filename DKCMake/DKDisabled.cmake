@@ -525,6 +525,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(mlocate)
 	dk_disable(ncurses)
 	dk_disable(openframeworks)
+	dk_disable(opus)
 	dk_disable(osgrmlui)
 	dk_disable(quartz_core)
 	dk_disable(rmlui-d3d11)
