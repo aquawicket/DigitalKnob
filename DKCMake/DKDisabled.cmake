@@ -532,9 +532,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 		dk_disable(sdl)
 	endif()
 	dk_disable(sdl_image)			# error: call to undeclared function 'SDL_CreateRGBSurfaceWithFormat'
-	if(WIN_HOST)
-		dk_disable(sdl_ttf)				# requires sdl
-	endif()
+	dk_disable(sdl_ttf)				# error: unknown type name 'SDL_INLINE'
 	dk_disable(system_configuration)
 	dk_disable(xz)					# CMake Error: TEST_BIG_ENDIAN found no result!
 	dk_disable(zstd)				# error: call to undeclared function 'fileno'; ISO C99 and later do not support implicit function declarations
