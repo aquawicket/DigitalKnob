@@ -27,7 +27,11 @@ UNIX_dk_libRelease		(${TIDY-HTML5}/${OS}/${RELEASE_DIR}/libtidy.a)
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=-DHAS_FUTIME=0" ${ZLIB_CMAKE} ${TIDY-HTML5})
+if(EMSCRIPTEN)
+	dk_queueCommand(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=-DHAS_FUTIME=0" "-DCMAKE_CXX_FLAGS=-DHAS_FUTIME=0" ${ZLIB_CMAKE} ${TIDY-HTML5})
+else()
+	dk_queueCommand(${DKCMAKE_BUILD} ${ZLIB_CMAKE} ${TIDY-HTML5})
+endif()
 
 
 ### COMPILE ###
