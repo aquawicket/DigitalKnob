@@ -536,6 +536,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(DKSFMLRml)
 	dk_disable(DKSFMLWindow)
 	dk_disable(DKThread)
+	dk_disable(DKTorrent)
 	dk_disable(dukluv)
 	dk_disable(ffmpeg)
 	dk_disable(fontconfig)
