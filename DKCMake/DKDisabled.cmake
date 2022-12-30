@@ -579,8 +579,8 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(rmlui-d3d11)
 	if(WIN_HOST)
 		dk_disable(sdl)
+		dk_disable(sdl_image)		# error: call to undeclared function 'SDL_CreateRGBSurfaceWithFormat'
 	endif()
-	dk_disable(sdl_image)			# error: call to undeclared function 'SDL_CreateRGBSurfaceWithFormat'
 	dk_disable(sdl_ttf)				# error: unknown type name 'SDL_INLINE'
 	dk_disable(system_configuration)
 	dk_disable(waave)
