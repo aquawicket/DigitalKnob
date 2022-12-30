@@ -497,6 +497,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(DKJerryscript)
 	dk_disable(DKHook)
 	dk_disable(DKImageMagick)
+	dk_disable(DKMidi)
 	dk_disable(DKRml)				# fatal error: 'sys/utime.h' file not found
 	dk_disable(DKRmlElement)		# requires DKRml
 	dk_disable(DKSDLRml)
