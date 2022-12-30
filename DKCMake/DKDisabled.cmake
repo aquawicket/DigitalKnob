@@ -531,6 +531,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	if(WIN_HOST)
 		dk_disable(DKSDLWindow)		# requires sdl
 	endif()
+	dk_disable(DKSFMLWindow)
 	dk_disable(DKThread)
 	dk_disable(dukluv)
 	dk_disable(ffmpeg)
