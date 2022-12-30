@@ -490,6 +490,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(DKArchive)			# requires libarchive
 	dk_disable(DKAudio)
 	dk_disable(DKCef)
+	dk_disable(DKCefChild)
 	dk_disable(DKCurl)				# requires curl
 	dk_disable(DKCrypto)
 	dk_disable(DKDebug)				# DKDebug.cpp:158:10: fatal error: 'execinfo.h' file not found
