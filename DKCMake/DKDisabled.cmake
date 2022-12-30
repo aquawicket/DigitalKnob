@@ -511,6 +511,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(DKOSGRml)
 	dk_disable(DKOSGStats)
 	dk_disable(DKOSGTerrain)
+	dk_disable(DKOSGVideo)
 	dk_disable(DKOSGViewer)
 	dk_disable(DKOSGWindow)
 	dk_disable(DKRml)				# fatal error: 'sys/utime.h' file not found
