@@ -539,6 +539,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(DKTorrent)
 	dk_disable(DKUpdate)
 	dk_disable(DKVncClient)
+	dk_disable(DKVncServer)
 	dk_disable(dukluv)
 	dk_disable(ffmpeg)
 	dk_disable(fontconfig)
