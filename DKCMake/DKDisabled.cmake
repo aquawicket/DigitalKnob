@@ -499,6 +499,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(DKImageMagick)
 	dk_disable(DKMidi)
 	dk_disable(DKMySql)
+	dk_disable(DKOcr)
 	dk_disable(DKOFWindow)
 	dk_disable(DKOSGAudio)
 	dk_disable(DKOSGCef)
