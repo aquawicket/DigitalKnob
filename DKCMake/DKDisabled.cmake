@@ -522,6 +522,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(DKRml)				# fatal error: 'sys/utime.h' file not found
 	dk_disable(DKRmlElement)		# requires DKRml
 	dk_disable(DKRmlIframe)
+	dk_disable(DKScreenRecorder)
 	dk_disable(DKSDLAudio)
 	dk_disable(DKSDLCef)
 	dk_disable(DKSDLMetalWindow)
