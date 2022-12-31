@@ -519,18 +519,12 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(DKOSGWidget)
 	dk_disable(DKOSGWindow)
 	dk_disable(DKRestart)
-	#dk_disable(DKRml)				# fatal error: 'sys/utime.h' file not found
-	#dk_disable(DKRmlElement)		# requires DKRml
-	#dk_disable(DKRmlIframe)
 	dk_disable(DKScreenRecorder)
 	dk_disable(DKSDLAudio)
 	dk_disable(DKSDLCef)
 	dk_disable(DKSDLMetalWindow)
-	#dk_disable(DKSDLRml)
-	#dk_disable(DKSDLText)			# requires sdl_ttf
 	dk_disable(DKSDLVideo)			# requires waave
 	dk_disable(DKSDLWav)
-	#dk_disable(DKSDLWindow)		# requires sdl
 	dk_disable(DKSFMLRml)
 	dk_disable(DKSFMLWindow)
 	dk_disable(DKThread)
@@ -573,9 +567,6 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(osgrmlui)
 	dk_disable(quartz_core)
 	dk_disable(rmlui-d3d11)
-	#dk_disable(sdl)
-	#dk_disable(sdl_image)
-	#dk_disable(sdl_ttf)				# error: unknown type name 'SDL_INLINE'
 	dk_disable(system_configuration)
 	dk_disable(waave)
 	dk_disable(wasm3)
