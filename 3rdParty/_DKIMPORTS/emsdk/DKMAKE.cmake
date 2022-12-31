@@ -4,7 +4,7 @@
 # https://github.com/emscripten-core/emsdk/archive/refs/tags/2.0.26.zip
 
 
-dk_import(https://github.com/emscripten-core/emsdk.git BRANCH main)
+dk_import(https://github.com/emscripten-core/emsdk.git BRANCH main PATCH)
 
 
 #WIN_dk_command(${EMSDK}/emsdk update)
@@ -20,7 +20,7 @@ WIN_HOST_dk_command(${EMSDK}/emsdk install mingw-4.6.2-32bit)
 WIN_HOST_dk_command(${EMSDK}/emsdk activate mingw-4.6.2-32bit)
 
 dk_set(EMCMAKE ${EMSDK}/upstream/emscripten/emcmake)
-#dk_copy(${DKIMPORTS}/emsdk/upstream/emscripten/src/)
+#dk_copy(${DKIMPORTS}/emsdk/upstream/emscripten/src/settings.js ${EMSDK}/emsdk/upstream/emscripten/src/settings.js)
 
 
 ######################################################################################################################
