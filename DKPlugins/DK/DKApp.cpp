@@ -90,13 +90,13 @@ DKApp::DKApp(int _argc, char** _argv){
 		DKFile::exe_path = externalStoragePath;
 	#endif
 	
-	//#if EMSCRIPTEN
-		DKString currentPath;
-		DKFile::GetCurrentPath(currentPath);
-		DKINFO("currentPath = " + currentPath + "\n");
-	//#endif
+	#if EMSCRIPTEN
+		DKFile::GetCurrentPath(DKFile::exe_path);
+		DKINFO("DKFile::exe_path = " + DKFile::exe_path + "\n");
+	#endif
 
 	DKFile::NormalizePath(DKFile::exe_path);
+	DKINFO("DKFile::exe_path = " + DKFile::exe_path + "\n");
 
 	DKString appName;
 	DKFile::GetAppName(appName);
