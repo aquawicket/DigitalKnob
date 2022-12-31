@@ -113,7 +113,7 @@ set(SDLIMAGE_SRC
 	IMG_png.c
 	IMG_pnm.c
 	#IMG_qoi.c
-	IMG_svg.c
+	#IMG_svg.c
 	IMG_tga.c
 	IMG_tif.c
 	IMG_webp.c
