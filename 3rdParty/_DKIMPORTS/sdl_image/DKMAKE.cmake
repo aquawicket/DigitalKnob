@@ -34,7 +34,7 @@ dk_depend(sdl)
 
 ### IMPORT ###
 if(EMSCRIPTEN)
-	EMSCRIPTEN_dk_import(https://github.com/emscripten-ports/SDL2_image.git)
+	dk_import(https://github.com/emscripten-ports/SDL2_image.git PATCH)
 else()
 	dk_import(https://github.com/libsdl-org/SDL_image.git BRANCH main PATCH)
 endif()
