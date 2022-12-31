@@ -4,7 +4,7 @@
 # https://github.com/emscripten-core/emsdk/archive/refs/tags/2.0.26.zip
 
 
-dk_import(https://github.com/emscripten-core/emsdk.git BRANCH main)
+dk_import(https://github.com/emscripten-core/emsdk.git BRANCH main PATCH)
 
 
 #WIN_dk_command(${EMSDK}/emsdk update)
