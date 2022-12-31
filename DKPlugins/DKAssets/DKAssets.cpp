@@ -211,7 +211,7 @@ bool DKAssets::GetAssetsPath(DKString& path){
         }
     }
 	return false;
-#elif LINUX
+#elif LINUX || EMSCRIPTEN
 	if (DKFile::PathExists(DKFile::app_path + "../../assets/") && DKFile::PathExists(DKFile::app_path + "../../DKMAKE.cmake")) {
 		if (DKFile::GetAbsolutePath(DKFile::app_path + "../../assets/", path))
 			return true;
@@ -254,7 +254,7 @@ bool DKAssets::GetDataPath(DKString& path){
     path.erase(path.begin()+n+1, path.end());
 	path += "assets/";
 	return true;
-#elif LINUX
+#elif LINUX || EMSCRIPTEN
 	DKString apppath;
 	DKFile::GetAppPath(apppath);
 	DKString appname;
