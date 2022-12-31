@@ -218,7 +218,7 @@ bool DKAssets::GetAssetsPath(DKString& path){
 	}
 	return false;
 #elif EMSCRIPTEN
-	path = "/";
+	path = "/assets/";
 	return true;
 #else
 	return DKERROR("not implemented on this OS \n");
@@ -268,7 +268,7 @@ bool DKAssets::GetDataPath(DKString& path){
 	DKFile::MakeDir(path);
 	return false;
 #elif EMSCRIPTEN
-	path = "/";
+	path = "/assets/";
 	return true;
 #else
 	return DKERROR("not implemented on this OS \n");
