@@ -30,6 +30,10 @@
 
 #include "DK/DK.h"
 
+#if EMSCRIPTEN
+	#include <emscripten.h>
+#endif
+
 class DKApp{
 public:
 
@@ -48,6 +52,9 @@ public:
 	static void Init();
 	static void Load(){};
 	static void Loop();
+#if EMSCRIPTEN
+	static EM_BOOL EM_DoFrame(double time, void* userData);
+#endif
 	static void DoFrame();
 	static void CallLoops();
 	

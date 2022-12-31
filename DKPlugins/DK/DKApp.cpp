@@ -89,14 +89,11 @@ DKApp::DKApp(int _argc, char** _argv){
 		const char* externalStoragePath = SDL_AndroidGetExternalStoragePath();
 		DKFile::exe_path = externalStoragePath;
 	#endif
-	
 	#if EMSCRIPTEN
 		DKFile::GetCurrentPath(DKFile::exe_path);
-		DKINFO("DKFile::exe_path = " + DKFile::exe_path + "\n");
 	#endif
 
 	DKFile::NormalizePath(DKFile::exe_path);
-	DKINFO("DKFile::exe_path = " + DKFile::exe_path + "\n");
 
 	DKString appName;
 	DKFile::GetAppName(appName);
@@ -155,10 +152,22 @@ void DKApp::Init(){
 	active = true;
 }
 
+#if EMSCRIPTEN
+EM_BOOL DKApp::EM_DoFrame(double time, void* userData) {
+	CallLoops(); //Call loop functions
+	return EM_TRUE; // Return true to keep the loop running.
+}
+#endif
+
 void DKApp::Loop(){
 	DKDEBUGFUNC();
+#if EMSCRIPTEN
+	// Receives a function to call and some user data to provide it.
+	emscripten_request_animation_frame_loop(DKApp::EM_DoFrame, 0);
+#else
 	while(active)
 		DoFrame();
+#endif
 }
 
 void DKApp::DoFrame(){
