@@ -156,7 +156,7 @@ void DKApp::Init(){
 EM_BOOL DKApp::EM_DoFrame(double time, void* userData) {
 	if (paused) {
 		DKUtil::Sleep(100);
-		return;
+		return EM_TRUE; // Return true to keep the loop running.
 	}
 	DKUtil::LimitFramerate();
 	CallLoops(); //Call loop functions
