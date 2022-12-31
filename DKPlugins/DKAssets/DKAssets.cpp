@@ -211,12 +211,15 @@ bool DKAssets::GetAssetsPath(DKString& path){
         }
     }
 	return false;
-#elif LINUX || EMSCRIPTEN
+#elif LINUX
 	if (DKFile::PathExists(DKFile::app_path + "../../assets/") && DKFile::PathExists(DKFile::app_path + "../../DKMAKE.cmake")) {
 		if (DKFile::GetAbsolutePath(DKFile::app_path + "../../assets/", path))
 			return true;
 	}
 	return false;
+#elif EMSCRIPTEN
+	path = "/";
+	return true;
 #else
 	return DKERROR("not implemented on this OS \n");
 #endif
@@ -254,7 +257,7 @@ bool DKAssets::GetDataPath(DKString& path){
     path.erase(path.begin()+n+1, path.end());
 	path += "assets/";
 	return true;
-#elif LINUX || EMSCRIPTEN
+#elif LINUX
 	DKString apppath;
 	DKFile::GetAppPath(apppath);
 	DKString appname;
@@ -264,6 +267,9 @@ bool DKAssets::GetDataPath(DKString& path){
 		return true;
 	DKFile::MakeDir(path);
 	return false;
+#elif EMSCRIPTEN
+	path = "/";
+	return true;
 #else
 	return DKERROR("not implemented on this OS \n");
 #endif

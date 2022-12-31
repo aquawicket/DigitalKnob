@@ -32,7 +32,7 @@
 #include <ostream>
 //WARNING_ENABLE
 
-#ifdef WIN32
+#if WIN
 	#define RESET    FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE
 	#define LTRED    FOREGROUND_RED|FOREGROUND_INTENSITY|BACKGROUND_INTENSITY
 	#define RED      FOREGROUND_RED|FOREGROUND_INTENSITY
@@ -90,7 +90,7 @@
 class DKTextColor{
 public:
 	static bool PrintColors();
-#ifdef WIN
+#if WIN
 	static bool GetConsoleHandle(HANDLE& handle = DKTextColor::hConsole);
 	static bool StoreColor(WORD& colorScheme = DKTextColor::storedColorScheme);
 	static bool RestoreColor(WORD& colorScheme = DKTextColor::storedColorScheme);

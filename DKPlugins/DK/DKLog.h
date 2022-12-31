@@ -77,7 +77,7 @@
 #define DKDEBUGRETURN1(__FILE__, __LINE__, __FUNCTION__, ...) DebugReturn(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
 //#define DKDEBUGFUNC(...) DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
 #define DKDEBUGRETURN(...) DKDEBUGRETURN1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
-#elif APPLE || LINUX || ANDROID
+#elif APPLE || LINUX || ANDROID || EMSCRIPTEN
 //#define DKDEBUGFUNC(...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, ##__VA_ARGS__)
 #define DKDEBUGRETURN(...) DebugReturn(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, ##__VA_ARGS__)
 #else
@@ -330,7 +330,7 @@ public:
 #if WIN
 	#define DKDEBUGFUNC2(__FILE__, __LINE__, __FUNCTION__, ...) logy _logy(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
 	#define DKDEBUGFUNC(...) DKDEBUGFUNC2(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
-#elif APPLE || LINUX || ANDROID
+#elif APPLE || LINUX || ANDROID || EMSCRIPTEN
 	#define DKDEBUGFUNC(...) logy _logy(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, ##__VA_ARGS__)
 #else
 	#define DKDEBUGFUNC(...) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, "", DK_DEBUG)

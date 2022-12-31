@@ -1244,7 +1244,16 @@ if(EMSCRIPTEN)
 		endif()	
 	endforeach()
 
-		
+	########## Remove previous built files from assets #################
+	dk_remove(${DKPROJECT}/assets/${APP_NAME}.data NOERROR)
+	dk_remove(${DKPROJECT}/assets/${APP_NAME}.html NOERROR)
+	dk_remove(${DKPROJECT}/assets/${APP_NAME}.js NOERROR)
+	dk_remove(${DKPROJECT}/assets/${APP_NAME}.wasm NOERROR)
+	
+
+	########################## PACKAGE ASSETS ##########################
+	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS "-s DEMANGLE_SUPPORT=1 --preload-file ${DKPROJECT}/assets --bind")
+	
 	####################### Do Post Build Stuff #######################
 	# "https://gist.github.com/baiwfg2/39881ba703e9c74e95366ed422641609"
 	# TEST
@@ -1261,17 +1270,21 @@ if(EMSCRIPTEN)
 			TARGET ${APP_NAME} 
 			POST_BUILD
 			COMMAND ${CMAKE_COMMAND} -E echo "Copying ${APP_NAME} Debug wasm files to /assets"
+			COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/emscripten/Debug/${APP_NAME}.data" "${DKPROJECT}/assets/"
+			COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/emscripten/Debug/${APP_NAME}.html" "${DKPROJECT}/assets/"
 			COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/emscripten/Debug/${APP_NAME}.js" "${DKPROJECT}/assets/"
-			COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/emscripten/Debug/${APP_NAME}.wasm" "${DKPROJECT}/assets/"
-			COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/emscripten/Debug/${APP_NAME}.html" "${DKPROJECT}/assets/")
+			COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/emscripten/Debug/${APP_NAME}.wasm" "${DKPROJECT}/assets/")
+			
 	else()
 		add_custom_command(
 			TARGET ${APP_NAME} 
 			POST_BUILD
 			COMMAND ${CMAKE_COMMAND} -E echo "Copying ${APP_NAME} Release wasm files to /assets"
+			COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/emscripten/Release/${APP_NAME}.data" "${DKPROJECT}/assets/"
+			COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/emscripten/Release/${APP_NAME}.html" "${DKPROJECT}/assets/"
 			COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/emscripten/Release/${APP_NAME}.js" "${DKPROJECT}/assets/"
-			COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/emscripten/Release/${APP_NAME}.wasm" "${DKPROJECT}/assets/"
-			COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/emscripten/Release/${APP_NAME}.html" "${DKPROJECT}/assets/")
+			COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/emscripten/Release/${APP_NAME}.wasm" "${DKPROJECT}/assets/")
+			
 	endif()
 endif()
 
