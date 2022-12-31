@@ -117,7 +117,7 @@ set(SDLIMAGE_SRC
 	IMG_tga.c
 	IMG_tif.c
 	IMG_webp.c
-	IMG_WIC.c
+	#IMG_WIC.c
 	IMG_xcf.c
 	IMG_xpm.c
 	IMG_xv.c
