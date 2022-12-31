@@ -1249,7 +1249,6 @@ if(EMSCRIPTEN)
 	dk_remove(${DKPROJECT}/assets/${APP_NAME}.html NOERROR)
 	dk_remove(${DKPROJECT}/assets/${APP_NAME}.js NOERROR)
 	dk_remove(${DKPROJECT}/assets/${APP_NAME}.wasm NOERROR)
-	
 
 	########################## PACKAGE ASSETS ##########################
 	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS "-s DEMANGLE_SUPPORT=1 --preload-file ${DKPROJECT}/assets@/ --bind")

@@ -65,9 +65,9 @@ std::map<int, int> DKSDLWindow::sdlMacCode;
 
 bool DKSDLWindow::Init(){
     DKDEBUGFUNC();
-#ifndef EMSCRIPTEN
+//#ifndef EMSCRIPTEN
 	SDL_SetMainReady(); //Bypass SDL_main() //https://wiki.libsdl.org/SDL_SetMainReady
-#endif
+//#endif
 	
 #ifdef ANDROID
     //DKINFO("CallJavaFunction(OpenActivity,SDLActivity)\n");
@@ -117,8 +117,6 @@ bool DKSDLWindow::Init(){
     if(height < 1)
         height = 600;
 #ifdef IOS
-    //width = 320;
-    //height = 480;
     SDL_DisplayMode sdl_displayMode;
     SDL_GetCurrentDisplayMode(0, &sdl_displayMode);
     width = sdl_displayMode.w;
@@ -133,9 +131,9 @@ bool DKSDLWindow::Init(){
     //DKAndroid::android_height = height;
 #endif
 
-#ifndef EMSCRIPTEN
+//#ifndef EMSCRIPTEN
     SDL_SetHint(SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS, "0");
-#endif
+//#endif
 #if !defined(ANDROID) && !defined(IOS) && !defined(EMSCRIPTEN)
     SDL_SetHint(SDL_HINT_MOUSE_FOCUS_CLICKTHROUGH, "1");
 #endif
@@ -144,9 +142,9 @@ bool DKSDLWindow::Init(){
     DKINFO("Creating SDLWindow for mobile device\n");
     
     SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengles");
-	#ifndef EMSCRIPTEN
+	//#ifndef EMSCRIPTEN
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
-	#endif
+	//#endif
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 1);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
@@ -154,10 +152,10 @@ bool DKSDLWindow::Init(){
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
     result = "OpenglES";
     DKINFO("DKSDLWindow Width: " + toString(width) + " Height: " + toString(height) + "\n");
-	#ifndef EMSCRIPTEN
+	//#ifndef EMSCRIPTEN
 		if(SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_RESIZABLE, &window, &renderer) < 0)
 			return DKERROR("SDL_CreateWindow Error: " + DKString(SDL_GetError()) + "\n");
-	#endif
+	//#endif
     
     /*
     //SDL_SetHint(SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS, "0");
@@ -399,9 +397,9 @@ bool DKSDLWindow::TestReturnString(const void* input, void* output) {
 
 bool DKSDLWindow::Fullscreen(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
-#ifndef EMSCRIPTEN
+//#ifndef EMSCRIPTEN
     SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
-#endif
+//#endif
     return true;
 }
 
@@ -526,9 +524,9 @@ bool DKSDLWindow::IsVisible(const void* input, void* output) {
 bool DKSDLWindow::MessageBox(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     DKString message = *(DKString*)input;
-#ifndef EMSCRIPTEN
+//#ifndef EMSCRIPTEN
     SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "DKERROR", message.c_str(), window);
-#endif
+//#endif
     return true;
 }
 
@@ -626,9 +624,9 @@ bool DKSDLWindow::Show(const void* input, void* output)
 bool DKSDLWindow::Windowed(const void* input, void* output) 
 {
     DKDEBUGFUNC(input, output);
-#ifndef EMSCRIPTEN
+//#ifndef EMSCRIPTEN
     SDL_SetWindowFullscreen(window, 0);
-#endif
+//#endif
     return true;
 }
 
@@ -642,9 +640,9 @@ bool DKSDLWindow::drawBackground(SDL_Renderer *renderer, int w, int h){
             i = (((x ^ y) >> 3) & 1);
             sdlRect.x = x;
             sdlRect.y = y;
-			#ifndef EMSCRIPTEN
+			//#ifndef EMSCRIPTEN
 				SDL_SetRenderDrawColor(renderer, sdlColor[i].r, sdlColor[i].g, sdlColor[i].b, sdlColor[i].a);
-			#endif
+			//#endif
             SDL_RenderFillRect(renderer, &sdlRect);
         }
     }
@@ -656,9 +654,9 @@ void DKSDLWindow::Process() {
     if(SDL_GetWindowFlags(window) & SDL_WINDOW_HIDDEN)
         DKUtil::Sleep(1000); //FIXME - look for a better way to save cpu usage here
 
-#ifndef EMSCRIPTEN
+//#ifndef EMSCRIPTEN
     SDL_SetRenderTarget(renderer, NULL);
-#endif
+//#endif
     SDL_SetRenderDrawColor(renderer, 127, 127, 127, 255); //white
     SDL_RenderClear(renderer);
 	//drawBackground(renderer, width, height);
@@ -725,7 +723,7 @@ int DKSDLWindow::EventFilter(void* userdata, SDL_Event* event) {
             }
         }
     }
-#ifndef EMSCRIPTEN
+//#ifndef EMSCRIPTEN
     if(event->type == SDL_APP_WILLENTERBACKGROUND) {
         DKINFO("SDL_APP_WILLENTERBACKGROUND\n");
         DKApp::paused = true;
@@ -736,7 +734,7 @@ int DKSDLWindow::EventFilter(void* userdata, SDL_Event* event) {
         DKApp::paused = false;
         return 1;
     }
-#endif
+//#endif
     if(event->type == SDL_TEXTINPUT) 
         return 1; //DKINFO("SDL_TEXTINPUT\n");
     
@@ -767,11 +765,11 @@ bool DKSDLWindow::handle(SDL_Event *event) {
             if(event->button.button == 3)
                 DKEvents::SendEvent("sdlwindow", "contextmenu", toString(event->button.button));
             else {
-				#ifndef EMSCRIPTEN
+				//#ifndef EMSCRIPTEN
 					if(event->button.clicks == 2)
 						DKEvents::SendEvent("sdlwindow", "dblclick", toString(event->button.button));
 					else
-				#endif
+				//#endif
 						DKEvents::SendEvent("sdlwindow", "click", toString(event->button.button));
             }
             return false; //allow event to continue
