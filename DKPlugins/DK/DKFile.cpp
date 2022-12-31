@@ -297,7 +297,7 @@ bool DKFile::GetAppPath(DKString& apppath){
 	*/
 	DebugPath(apppath);
 	return true && DKDEBUGRETURN(apppath);
-#elif MAC || IOS || LINUX //|| EMSCRIPTEN
+#elif MAC || IOS || LINUX || EMSCRIPTEN
 	apppath = DKFile::exe_path;
 	found = apppath.find_last_of("/");
 	apppath.erase (apppath.begin()+found+1, apppath.end());
