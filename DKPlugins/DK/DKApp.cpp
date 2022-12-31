@@ -89,6 +89,13 @@ DKApp::DKApp(int _argc, char** _argv){
 		const char* externalStoragePath = SDL_AndroidGetExternalStoragePath();
 		DKFile::exe_path = externalStoragePath;
 	#endif
+	
+	//#if EMSCRIPTEN
+		DKString currentPath;
+		DKFile::GetCurrentPath(currentPath);
+		DKINFO("currentPath = " + currentPath + "\n");
+	//#endif
+
 	DKFile::NormalizePath(DKFile::exe_path);
 
 	DKString appName;

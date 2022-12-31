@@ -29,6 +29,10 @@
 #ifndef DKEmscripten_H
 #define DKEmscripten_H
 
+//WARNING_DISABLE
+#include <emscripten.h>
+//WARNING_ENABLE
+
 
 class DKEmscripten{
 public:

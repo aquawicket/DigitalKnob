@@ -73,6 +73,7 @@ public:
 	static bool GetAppName(DKString& appname);
 	static bool GetAppPath(DKString& exepath);
 	static bool GetBasename(const DKString& path, DKString& basename);
+	static bool GetCurrentPath(DKString& currentPath);
 	static bool GetDirectoryContents(const DKString& path, DKStringArray& strings);
 	static bool GetDrives(DKStringArray& strings);
 	static bool GetExeName(DKString& exename);
