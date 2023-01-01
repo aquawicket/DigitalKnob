@@ -275,6 +275,9 @@ public:
 	template <typename... Args>
 	logy(const char* file, int line, const char* func, const DKString& names, Args&&... args) : file(file), line(line), func(func), names(names), /*args(args...),*/ start_time(clock()){
 		count++;
+#if EMSCRIPTEN
+		return;
+#endif
 		if (!DKUtil::InMainThread())
 			return;
 		if (DKLog::log_show.empty() && !DKLog::log_debug)
