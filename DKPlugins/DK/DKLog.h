@@ -77,7 +77,7 @@
 #define DKDEBUGRETURN1(__FILE__, __LINE__, __FUNCTION__, ...) DebugReturn(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
 //#define DKDEBUGFUNC(...) DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
 #define DKDEBUGRETURN(...) DKDEBUGRETURN1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
-#elif APPLE || LINUX || ANDROID || EMSCRIPTEN
+#elif APPLE || LINUX || ANDROID //|| EMSCRIPTEN
 //#define DKDEBUGFUNC(...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, ##__VA_ARGS__)
 #define DKDEBUGRETURN(...) DebugReturn(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, ##__VA_ARGS__)
 #else
@@ -275,9 +275,6 @@ public:
 	template <typename... Args>
 	logy(const char* file, int line, const char* func, const DKString& names, Args&&... args) : file(file), line(line), func(func), names(names), /*args(args...),*/ start_time(clock()){
 		count++;
-#if EMSCRIPTEN
-		return;
-#endif
 		if (!DKUtil::InMainThread())
 			return;
 		if (DKLog::log_show.empty() && !DKLog::log_debug)
@@ -333,7 +330,7 @@ public:
 #if WIN
 	#define DKDEBUGFUNC2(__FILE__, __LINE__, __FUNCTION__, ...) logy _logy(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
 	#define DKDEBUGFUNC(...) DKDEBUGFUNC2(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
-#elif APPLE || LINUX || ANDROID || EMSCRIPTEN
+#elif APPLE || LINUX || ANDROID //|| EMSCRIPTEN
 	#define DKDEBUGFUNC(...) logy _logy(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, ##__VA_ARGS__)
 #else
 	#define DKDEBUGFUNC(...) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, "", DK_DEBUG)

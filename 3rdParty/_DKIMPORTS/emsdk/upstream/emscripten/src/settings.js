@@ -1420,15 +1420,15 @@ var USE_SDL_GFX = 0;
 
 // Specify the SDL_image version that is being linked against. Must match USE_SDL
 // [compile+link]
-var USE_SDL_IMAGE = 1;
+var USE_SDL_IMAGE = false;
 
 // Specify the SDL_ttf version that is being linked against. Must match USE_SDL
 // [compile+link]
-var USE_SDL_TTF = 1;
+var USE_SDL_TTF = false;
 
 // Specify the SDL_net version that is being linked against. Must match USE_SDL
 // [compile+link]
-var USE_SDL_NET = 1;
+var USE_SDL_NET = false;
 
 // 1 = use icu from emscripten-ports
 // [compile+link]
