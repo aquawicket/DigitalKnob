@@ -486,7 +486,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(core_motion)
 	dk_disable(core_services)
 	dk_disable(core_video)
-	dk_disable(curl)
+	#dk_disable(curl)
 	dk_disable(DKArchive)			# requires libarchive
 	dk_disable(DKAudio)
 	dk_disable(DKCef)
