@@ -20,8 +20,8 @@ WIN_HOST_dk_command(${EMSDK}/emsdk install mingw-4.6.2-32bit)
 WIN_HOST_dk_command(${EMSDK}/emsdk activate mingw-4.6.2-32bit)
 
 dk_set(EMCMAKE ${EMSDK}/upstream/emscripten/emcmake)
-dk_set(EMMAKE ${EMSDK}/upstream/emscripten/emmake)
 dk_set(EMCONFIGURE ${EMSDK}/upstream/emscripten/emconfigure)
+dk_set(EMMAKE ${EMSDK}/upstream/emscripten/emmake)
 #dk_copy(${DKIMPORTS}/emsdk/upstream/emscripten/src/settings.js ${EMSDK}/emsdk/upstream/emscripten/src/settings.js)
 
 
