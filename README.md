@@ -142,7 +142,7 @@ This repository references the use of third-party source code and assets with th
 
 MIT License
 
-Copyright (c) 2010-2022 DigitalKnob, and contributors
+Copyright (c) 2010-2023 DigitalKnob, and contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
