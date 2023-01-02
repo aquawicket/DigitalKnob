@@ -1485,7 +1485,7 @@ var USE_FREETYPE = false;
 // Specify the SDL_mixer version that is being linked against.
 // Doesn't *have* to match USE_SDL, but a good idea.
 // [compile+link]
-var USE_SDL_MIXER = 1;
+var USE_SDL_MIXER = false;
 
 // 1 = use harfbuzz from harfbuzz upstream
 // [compile+link]
