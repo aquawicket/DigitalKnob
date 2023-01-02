@@ -3,6 +3,7 @@
 
 
 ### DEPEND ###
+EMSCRIPTEN_dk_depend(m)
 dk_depend(zlib)
 
 
@@ -10,7 +11,7 @@ dk_depend(zlib)
 if(MAC)
 	dk_import(https://github.com/glennrp/libpng.git)
 else()
-	dk_import(https://github.com/glennrp/libpng/archive/refs/tags/v1.6.35.zip)
+	dk_import(https://github.com/glennrp/libpng/archive/refs/tags/v1.6.35.zip PATCH)
 	dk_set(LIBPNG_MAJOR 1)
 	dk_set(LIBPNG_MINOR 6)
 	dk_set(LIBPNG_BUILD 35)
