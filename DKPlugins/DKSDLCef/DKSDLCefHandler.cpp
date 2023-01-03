@@ -423,10 +423,10 @@ bool DKSDLCefHandler::OnPreKeyEvent(CefRefPtr<CefBrowser> browser, const CefKeyE
 	CEF_REQUIRE_UI_THREAD();
 	if(event.type == KEYEVENT_RAWKEYDOWN){
 		//DKINFO("OnPreKeyEvent(): RawKeyDown: "+toString(event.character)+"\n");
-		//#ifdef WIN32
-		DKEvents::SendEvent("window", "keydown", toString(event.windows_key_code));
+		//#if WIN
+			DKEvents::SendEvent("window", "keydown", toString(event.windows_key_code));
 		//#else
-		//			DKEvent::SendEvent("window", "keydown", toString(event.character));
+		//	DKEvent::SendEvent("window", "keydown", toString(event.character));
 		//#endif
 	}
 	if(event.type == KEYEVENT_KEYDOWN){

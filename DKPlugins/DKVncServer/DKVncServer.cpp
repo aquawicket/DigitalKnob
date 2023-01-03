@@ -35,7 +35,7 @@
 #if WIN
 	#include <WS2tcpip.h>
 #endif
-#ifdef LINUX
+#if LINUX
 	#include <unistd.h>
 	#include <X11/Xlib.h>
 	#include <X11/Xutil.h>
@@ -48,7 +48,7 @@
 	XImage* DKVncServer::image;
 #endif
 
-#ifdef MAC
+#if MAC
 CGImageRef DKVncServer::image_ref;
 CGDataProviderRef DKVncServer::provider;
 CFDataRef DKVncServer::dataref;
@@ -113,13 +113,13 @@ bool DKVncServer::Init(){
 	DKUtil::GetScreenHeight(desktopHeight);
 
 /*
-#ifdef MAC
+#if MAC
 	image_ref = CGDisplayCreateImage(CGMainDisplayID());
 	provider = CGImageGetDataProvider(image_ref);
 	dataref = CGDataProviderCopyData(provider);
 #endif
 */
-#ifdef LINUX
+#if LINUX
 	disp = XOpenDisplay(NULL);
 	root = XDefaultRootWindow(disp);
 #endif
@@ -227,7 +227,7 @@ rfbBool DKVncServer::rfbCheckPasswordByList2(rfbClientPtr cl, const char* respon
 
 void DKVncServer::DrawBuffer(){  
 	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
-#ifdef WIN32
+#if WIN
 	//Capture Desktop with DirectX
 	if(capture == "DIRECTX"){
 		//DKINFO("DIRECTX\n");
@@ -326,7 +326,7 @@ void DKVncServer::DrawBuffer(){
 	}
 #endif
 
-#ifdef MAC
+#if MAC
 	image_ref = CGDisplayCreateImage(CGMainDisplayID());
 	provider = CGImageGetDataProvider(image_ref);
 	dataref = CGDataProviderCopyData(provider);
@@ -340,7 +340,7 @@ void DKVncServer::DrawBuffer(){
 	//CGImageRelease(image_ref); 
 #endif
 
-#ifdef LINUX
+#if LINUX
 	image = XGetImage(disp, root, 0, 0, rfbScreen->width, rfbScreen->height, AllPlanes, ZPixmap);
 	int w,h;
 	for(h=0;h<rfbScreen->height;++h) {

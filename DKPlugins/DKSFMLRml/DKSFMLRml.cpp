@@ -95,7 +95,7 @@ bool DKSFMLRml::Handle(sf::Event& event) {
 		case sf::Event::MouseWheelScrolled:
             dkRml->context->ProcessMouseWheel(event.mouseWheelScroll.y * -1, systemInterface->GetKeyModifiers());
             break;
-#ifdef ANDROID
+#if ANDROID
 		case sf::Event::KeyPressed:
 			//DKINFO("DKSFMLRml::SFML_KEYDOWN("+toString((int)event->key.keysym.sym)+")\n");
 			dkRml->context->ProcessKeyDown(systemInterface->TranslateKey(event->key.keysym.sym), systemInterface->GetKeyModifiers());

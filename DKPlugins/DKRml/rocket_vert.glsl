@@ -1,4 +1,4 @@
-#ifdef LINUX
+#if LINUX
 	#version 100
 #endif
 			

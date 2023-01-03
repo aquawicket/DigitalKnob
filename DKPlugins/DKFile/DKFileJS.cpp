@@ -285,7 +285,7 @@ int DKFileJS::GetSetting(duk_context* ctx){
 int DKFileJS::GetShortName(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString path = duk_require_string(ctx, 0);
-#ifdef WIN32
+#if WIN
 	DKString shortname;
 	if(DKFile::GetShortName(path, shortname)){
 		duk_push_string(ctx, shortname.c_str());

@@ -306,16 +306,16 @@
 	#endif
 
 	#if HAVE_osgViewer
-		#ifdef WIN32
+		#if WIN
 			USE_GRAPHICSWINDOW()
 		#endif
-		#ifdef MAC
+		#if MAC
 			USE_GRAPICSWINDOW_IMPLEMENTATION(Cocoa)
 		#endif
-		#ifdef IOS
+		#if IOS
 			USE_GRAPICSWINDOW_IMPLEMENTATION(IOS)
 		#endif
-		#ifdef LINUX
+		#if LINUX
 			USE_GRAPICSWINDOW_IMPLEMENTATION(X11)
 		#endif
 	#endif //HAVE_osgViewer

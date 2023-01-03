@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-#ifdef ANDROID
+#if ANDROID
 #include "DK/stdafx.h"
 #include "DKSDLWindow/DKSDLWindowAndroid.h"
 #include "DK/DKAndroid.h"

@@ -23,7 +23,7 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-#ifdef ANDROID
+#if ANDROID
 #pragma once
 #ifndef DKOSGWindowAndroid_H
 #define DKOSGWindowAndroid_H

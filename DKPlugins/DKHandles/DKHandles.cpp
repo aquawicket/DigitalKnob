@@ -25,7 +25,7 @@
 */
 
 #include "DK/stdafx.h"
-#ifdef WIN32
+#if WIN
 
 //WARNING_DISABLE
 #include <tchar.h>

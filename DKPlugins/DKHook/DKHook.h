@@ -41,15 +41,15 @@ public:
 	bool Init();
 	bool End();
 
-#ifdef LINUX
+#if LINUX
 	void LinuxHook();
 	int fd, bytes;
 	unsigned char _data[3];
 	int left, middle, right;
 	signed char x, y;
-#endif //LINUX
+#endif
 
-#ifdef WIN32
+#if WIN
 	void InstallHook(); // function to install our hook
 	void UninstallHook(); // function to uninstall our hook
 	int Messsages(); // function to "deal" with our messages 
@@ -57,10 +57,10 @@ public:
 	static HHOOK hook; // handle to the hook
 	MSG msg; // struct with information about all messages in our queue
 	//HMODULE hModule;  //dll module
-#endif //WIN32
+#endif
 };
 
-#ifdef WIN32
+#if WIN
 LRESULT WINAPI MyMouseCallback(int nCode, WPARAM wParam, LPARAM lParam);
 LRESULT WINAPI MyKeyboardCallback(int nCode, WPARAM wParam, LPARAM lParam);
 #endif //WIN32

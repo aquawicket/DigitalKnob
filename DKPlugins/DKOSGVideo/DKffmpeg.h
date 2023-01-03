@@ -169,9 +169,9 @@ int main(int argc, char** argv)
     arguments.getApplicationUsage()->addCommandLineOption("--shader","Use shaders to post process the video.");
     arguments.getApplicationUsage()->addCommandLineOption("--interactive","Use camera manipulator to allow movement around movie.");
     arguments.getApplicationUsage()->addCommandLineOption("--flip","Flip the movie so top becomes bottom.");
-#if defined(WIN32) || defined(__APPLE__)
-    arguments.getApplicationUsage()->addCommandLineOption("--devices","Print the Video input capability via QuickTime and exit.");
-#endif
+#	if WIN || defined(__APPLE__)
+		arguments.getApplicationUsage()->addCommandLineOption("--devices","Print the Video input capability via QuickTime and exit.");
+#	endif
     bool useTextureRectangle = true;
     bool useShader = false;
     // construct the viewer.
@@ -180,14 +180,14 @@ int main(int argc, char** argv)
         arguments.getApplicationUsage()->write(std::cout,osg::ApplicationUsage::COMMAND_LINE_OPTION);
         return 1;
     }
-#if defined(WIN32) || defined(__APPLE__)
-    // if user requests devices video capability.
-    if (arguments.read("-devices") || arguments.read("--devices")) {
-        // Force load QuickTime plugin, probe video capability, exit
-        osgDB::readImageFile("devices.live");
-        return 1;
-    }
-#endif
+#	if WIN || defined(__APPLE__)
+		// if user requests devices video capability.
+		if (arguments.read("-devices") || arguments.read("--devices")) {
+			// Force load QuickTime plugin, probe video capability, exit
+			osgDB::readImageFile("devices.live");
+			return 1;
+		}
+#	endif
     while (arguments.read("--texture2D")) useTextureRectangle=false;
     while (arguments.read("--shader")) useShader=true;
     bool mouseTracking = false;

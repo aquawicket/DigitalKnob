@@ -848,7 +848,7 @@ int DKDuktapeJS::GetVolume(duk_context* ctx){
 
 int DKDuktapeJS::HideConsole(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	#ifdef WIN32
+	#if WIN
 		HWND consoleWindow = GetConsoleWindow();
 		ShowWindow(consoleWindow, SW_HIDE);
 	#endif 
@@ -1083,7 +1083,7 @@ int DKDuktapeJS::SetVolume(duk_context* ctx){
 
 int DKDuktapeJS::ShowConsole(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	#ifdef WIN32
+	#if WIN
 		HWND consoleWindow = GetConsoleWindow();
 		ShowWindow(consoleWindow, SW_RESTORE);
 	#endif 
@@ -1210,7 +1210,7 @@ int DKDuktapeJS::ColorMap(duk_context* ctx) {
 //Desktop Console
 int DKDuktapeJS::setConsolePosition(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
-#ifdef WIN32
+#if WIN
 	int x = duk_require_int(ctx, 0);
 	int y = duk_require_int(ctx, 1);
 	int w = duk_require_int(ctx, 2);

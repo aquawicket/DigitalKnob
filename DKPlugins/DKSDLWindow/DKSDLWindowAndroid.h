@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-#ifdef ANDROID
+#if ANDROID
 #pragma once
 #ifndef DKSDLWindowAndroid_H
 #define DKSDLWindowAndroid_H

@@ -29,24 +29,24 @@
 #ifndef DKPoll_H
 #define DKPoll_H
 
-#ifdef WIN32
+#if WIN
 	#include <Winsock2.h>
 	#define poll WSAPoll
 #endif
 
-#ifdef ANDROID
+#if ANDROID
 	#include "android_poll.h"
 #endif
 
-#ifdef MAC
+#if MAC
 	#include <sys/poll.h>
 #endif
 
-#ifdef IOS
+#if IOS
 	#include <sys/poll.h>
 #endif
 
-#ifdef LINUX
+#if LINUX
 	#include <sys/poll.h>
 #endif
 

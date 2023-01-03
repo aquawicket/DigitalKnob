@@ -32,24 +32,24 @@
 
 //WARNING_DISABLE
 #include "SDL_syswm.h"
-#ifdef WIN32
+#if WIN
     #include <GL/glew.h>
 	#include <GL/gl.h>
 #endif
-#ifdef MAC
+#if MAC
 	#include <OpenGL/gl.h>
 #endif
-#ifdef IOS
+#if IOS
 	#include <OpenGLES/ES1/gl.h>
 #endif
-#ifdef LINUX
+#if LINUX
 	#include <GL/gl.h>
 	//#include <gdk/gdk.h>
 #endif	
-#ifdef ANDROID
+#if ANDROID
 	#include <GLES/gl.h>
 #endif
-#ifdef EMSCRIPTEN
+#if EMSCRIPTEN
 #   include <GLES2/gl2.h>
 #endif
 //WARNING_ENABLE
@@ -67,7 +67,7 @@ bool DKSDLWindow::Init(){
     DKDEBUGFUNC();
 	SDL_SetMainReady(); //Bypass SDL_main() //https://wiki.libsdl.org/SDL_SetMainReady
 	
-#ifdef ANDROID
+#if ANDROID
     //DKINFO("CallJavaFunction(OpenActivity,SDLActivity)\n");
     //CallJavaFunction("OpenActivity","SDLActivity");
 #endif
@@ -102,7 +102,7 @@ bool DKSDLWindow::Init(){
         width = toInt(textWidth);
     if(!textHeight.empty())
         height = toInt(textHeight);
-#ifdef WIN32 //account for window frame and titlebar
+#if WIN //account for window frame and titlebar
     winY = (winY + 30);
     winX = (winX + 10);
 #endif
@@ -114,13 +114,13 @@ bool DKSDLWindow::Init(){
         width = 800;
     if(height < 1)
         height = 600;
-#ifdef IOS
+#if IOS
     SDL_DisplayMode sdl_displayMode;
     SDL_GetCurrentDisplayMode(0, &sdl_displayMode);
     width = sdl_displayMode.w;
     height = sdl_displayMode.h;
 #endif
-#ifdef ANDROID
+#if ANDROID
     SDL_DisplayMode sdl_displayMode;
     SDL_GetCurrentDisplayMode(0, &sdl_displayMode);
     width = sdl_displayMode.w;
@@ -175,7 +175,7 @@ bool DKSDLWindow::Init(){
     SDL_SetWindowTitle(sdlWindow, mTitle.c_str());
     */
 #endif
-#if !defined(ANDROID) && !defined(IOS) && !defined(EMSCRIPTEN)
+#if !ANDROID && !IOS && !EMSCRIPTEN
     DKINFO("Creating SDLWindow for Desktop\n");
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_COMPATIBILITY);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 1);
@@ -206,7 +206,7 @@ bool DKSDLWindow::Init(){
         SDL_Quit();
 		return DKERROR("SDL_CreateRenderer Error: " + DKString(SDL_GetError()) + "\n");
     }
-#ifdef WIN32
+#if WIN
 	GLenum err = glewInit();
 	if (err != GLEW_OK)
 		DKERROR("GLEW ERROR:\n"); // "+glewGetErrorString(err)+"\n");
@@ -220,7 +220,7 @@ bool DKSDLWindow::Init(){
     DKString osFlag;
     GetOSFlag(osFlag);
     DKString buildType;
-#ifdef DEBUG
+#if DEBUG
     buildType = "DEBUG";
 #else
     buildType = "RELEASE";
@@ -263,7 +263,7 @@ bool DKSDLWindow::Init(){
     DKSDLWindow::AddEventFunc(&DKSDLWindow::handle, this);
     MapInputs();
     SDL_SetEventFilter(&DKSDLWindow::EventFilter, this); //DEBUG : bypassing events here for now
-#if !defined(ANDROID) && !defined(IOS) && !defined(EMSCRIPTEN)
+#if !ANDROID && !IOS && !EMSCRIPTEN
 	// https://github.com/ocornut/imgui/issues/1116#issuecomment-297701113
     SDL_GLContext glcontext = SDL_GL_CreateContext(window);
     SDL_GL_MakeCurrent(window, glcontext);
@@ -406,7 +406,7 @@ bool DKSDLWindow::GetHandle(const void* input, void* output) {
     SDL_SysWMinfo wmInfo;
     SDL_VERSION(&wmInfo.version);
     SDL_GetWindowWMInfo(window, &wmInfo);
-#if WIN32
+#if WIN
     HWND hwnd = wmInfo.info.win.window;
     *(HWND*)output = hwnd;
     return true;
@@ -553,7 +553,7 @@ bool DKSDLWindow::SetHeight(const void* input, void* output) {
 bool DKSDLWindow::SetIcon(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     DK_UNUSED(output);
-#ifdef WIN32
+#if WIN
     DKString file = *(DKString*)input;
     SDL_SysWMinfo wmInfo;
     SDL_VERSION(&wmInfo.version);

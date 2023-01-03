@@ -36,7 +36,7 @@ int main(int argc, char* argv[]){
 	(void)argc;
 	(void)argv;
 	printf("DKRestart\n");
-#ifdef WIN32
+#if WIN
 	//DKMainArgs main_args;
 #else
 	//DKMainArgs main_args(argc, argv);

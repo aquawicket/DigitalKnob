@@ -1,5 +1,5 @@
-#ifdef HAVE_eventloop
-#ifdef ANDROID
+#if HAVE_eventloop
+#if ANDROID
 /*
  * Copyright (C) 2008 The Android Open Source Project
  * All rights reserved.

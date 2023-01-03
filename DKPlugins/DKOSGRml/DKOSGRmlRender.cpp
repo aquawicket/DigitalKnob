@@ -75,7 +75,7 @@ void DKOSGRmlRender::setRenderTarget(osg::Group* grp, int w, int h, bool fullscr
 		osg::Program* prg = new osg::Program();
 
 		std::string vertexShader = ""
-#ifdef LINUX
+#if LINUX
 			"#version 100 \n"
 #endif
 			"uniform vec2 LibRmlPosition; \n"
@@ -143,7 +143,7 @@ osg::Object* DKOSGRmlRender::createGeometry(Rml::Vertex* vertices, int num_verti
 		(*texcoords)[i].set(vert->tex_coord.x, vert->tex_coord.y);
 	}
 
-#ifdef ANDROID
+#if ANDROID
     osg::DrawElementsUShort* elements = new osg::DrawElementsUShort(osg::PrimitiveSet::TRIANGLES, num_indices);
     for(int i = 0; i < num_indices; ++i){
 		elements->setElement(i, indices[i]);

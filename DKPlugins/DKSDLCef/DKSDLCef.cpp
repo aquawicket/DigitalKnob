@@ -30,14 +30,14 @@
 #include "DK/DKLog.h"
 #include "DKSDLCef/DKSDLCef.h"
 #include "DKSDLCef/DKSDLCefHandler.h"
-#ifdef WIN32
+#if WIN
 	#include "DK/DKWindows.h"
 #endif
 
 //WARNING_DISABLE
 	#include "SDL_syswm.h"
 	#include <include/cef_urlrequest.h>
-	#ifdef WIN32
+	#if WIN
 		#include <delayimp.h>
 	#endif
 //WARNING_ENABLE
@@ -220,7 +220,7 @@ bool DKSDLCef::Handle(SDL_Event* event) {
        		KeyEvent.type = KEYEVENT_KEYDOWN;
 			//KeyEvent.type = KEYEVENT_RAWKEYDOWN;
 			KeyEvent.windows_key_code = DKSDLWindow::sdlKeyCode[event->key.keysym.sym];
-#ifdef MAC
+#if MAC
 			KeyEvent.native_key_code = DKSDLWindow::sdlMacCode[event->key.keysym.sym];
 #endif
 			//KeyEvent.unmodified_character = DKSDLWindow::sdlKeyCode[event->key.keysym.sym];

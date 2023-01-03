@@ -1,11 +1,11 @@
-#ifdef LINUX
+#if LINUX
 	#version 100
 #endif
 
 uniform sampler2D myTexture;
 uniform bool is_texture;
 
-#if defined(MAC) || defined(WIN32)
+#if WIN || MAC
 varying vec2 texCoord;
 varying vec4 out_color;
 #else

@@ -50,7 +50,7 @@ bool DKOSGRml::Init(){
 
 	//ANDROID FIX
 	//Unless we initiate some geometry, librocket will not display text or images
-#ifdef ANDROID
+#if ANDROID
 	osg::ref_ptr<osg::Geode> androidFix = new osg::Geode;
 	osg::ref_ptr<osgText::Text> _androidFix = new osgText::Text();
 	androidFix->addDrawable(_androidFix);

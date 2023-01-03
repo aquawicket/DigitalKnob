@@ -24,8 +24,8 @@
 * SOFTWARE.
 */
 
-#ifdef WIN32
-#ifdef HAVE_DKDuktape 
+#if WIN
+#if HAVE_DKDuktape 
 #pragma once
 #ifndef DKHandlesJS_H
 #define DKHandlesJS_H

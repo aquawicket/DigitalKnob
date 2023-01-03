@@ -29,7 +29,7 @@
 
 #include "DK/DK.h"
 #include "DKSDLWindow/DKSDLWindow.h"
-#ifdef LINUX
+#if LINUX
 typedef unsigned long z_size_t;
 #endif
 

@@ -47,7 +47,7 @@ int DKThreadJS::_DKQueue(duk_context* ctx){
 	DKString name = duk_require_string(ctx, 0);
 	DKString code = duk_require_string(ctx, 1);
 	DKINFO("DKThreadJS::DKQueue("+name+","+code+")\n");
-#ifdef WIN32
+#if WIN
 	DKQueue(name, QueueItem, code); //Call in thread
 #else
 	duk_eval_string(DKDuktape::ctx, code.c_str()); //Call directly
@@ -59,7 +59,8 @@ void DKThreadJS::QueueItem(){
 	DKDEBUGFUNC();
 	DKUtil::Sleep(100); //Bad!  FIXME
 	duk_context* ctx2 = DKDuktape::ctx;
-	if(!ctx2){ return; }// post error here
+	if(!ctx2)
+		return; // post error here
 	//DKDuktape::ctx = NULL;
 	//Create a copy of the context to work with in a new thread..  
 	//P.S.  I am very bad a threading. This needs to be fixed.
@@ -70,7 +71,8 @@ void DKThreadJS::QueueItem(){
 	
 	//DKThreadPool::Get("DKThreadPool0")->tdata is also created in the main thread.. this is bad bad bad...
 	DKThreadPool* dkThreadTool = DKThreadPool::Get("DKThreadPool0");
-	if(!dkThreadTool){ return; }
+	if(!dkThreadTool)
+		return;
 	duk_eval_string(ctx2, dkThreadTool->tdata[dkThreadTool->tdata.size()-1].c_str());
 	DKUtil::Sleep(500); //Bad!  FIXME
 	//free(ctx);

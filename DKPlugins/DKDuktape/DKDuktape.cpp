@@ -514,7 +514,7 @@ DKString DKDuktape::eventToAddress(DKEvents* event) {
 	}
 	std::stringstream ss;
 	const void* address = static_cast<const void*>(event);
-#ifdef WIN32
+#if WIN
 	ss << "0x" << address;
 #else 
 	ss << address;

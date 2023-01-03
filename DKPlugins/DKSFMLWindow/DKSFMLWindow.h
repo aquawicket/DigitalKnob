@@ -76,7 +76,7 @@ public:
 	bool handle(sf::Event& e);
 	void Process();
 
-#ifdef WIN32
+#if WIN
 	WINDOWPLACEMENT g_wpPrev = { sizeof(g_wpPrev) };
 #endif
 

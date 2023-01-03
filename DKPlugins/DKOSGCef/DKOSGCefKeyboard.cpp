@@ -27,7 +27,7 @@
 
 //WARNING_DISABLE
 #include "include/internal/cef_types.h"
-#ifdef WIN32
+#if WIN
   #include <windows.h>
 #elif X11
   #include <X11/keysym.h>

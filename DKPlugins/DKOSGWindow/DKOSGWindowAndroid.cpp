@@ -23,7 +23,7 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-#ifdef ANDROID
+#if ANDROID
 #include "DK/stdafx.h"
 #include "DKOSGWindow/DKOSGWindowAndroid.h"
 #include "DKOSGWindow/DKOSGWindow.h"

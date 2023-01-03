@@ -28,8 +28,8 @@
 #define DKWebview_H
 
 //WARNING_DISABLE
-#ifdef ANDROID
-#include <jni.h>
+#if ANDROID
+	#include <jni.h>
 #endif
 //WARNING_ENABLE
 

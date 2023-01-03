@@ -44,7 +44,7 @@
 
 
 ////////////
-//#ifdef WIN32
+//#if WIN
 // Windows Keyboard mapping table
 // https://docs.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
 enum Key{
@@ -386,7 +386,7 @@ static const int KeyboardModifiers[] = {
 
 /*
 //////////
-#ifdef MAC
+#if MAC
 // Mac Keyboard mapping table
 enum Key {
                            // Dec | Hex |  Mac Virtual key
@@ -395,7 +395,7 @@ enum Key {
 }
 #endif //MAC
 ////////////
-#ifdef LINUX
+#if LINUX
 // Linux Keyboard mapping table
 enum Key {
     // Dec | Hex |  Linux Virtual key

@@ -262,8 +262,8 @@ bool DKCef::Init(){
 	//DKString lf = DKFile::local_assets + "/cef.log";
 	//CefString(&settings.log_file) = lf.c_str();
 
-#	ifdef WIN32
-#		if defined(WIN32) && !defined(WIN64)
+#	if WIN
+#		if WIN32 && !WIN64
 #			ifdef DEBUG
 				DKString ep = DKFile::local_assets + "/DKCef/win32Debug/DKCefChild.exe";
 #			else
@@ -588,7 +588,7 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 		DKString title; 
 		DKFile::GetExeName(title);
 		DKFile::RemoveExtention(title);
-#		if defined(WIN32) && !defined(WIN64)
+#		if WIN32 && !WIN64
 			title += " - WIN32";
 #		endif
 #		ifdef WIN64

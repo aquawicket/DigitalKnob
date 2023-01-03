@@ -239,7 +239,7 @@ bool DKSFMLWindow::GetMouseX(const void* input, void* output){
 
 bool DKSFMLWindow::GetMouseY(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
-#ifdef WIN32
+#if WIN
 	POINT p;
 	if(!GetCursorPos(&p))
 		return DKERROR("GetCursorPos() failed! \n");

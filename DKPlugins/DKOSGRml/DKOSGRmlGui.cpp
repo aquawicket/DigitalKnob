@@ -762,7 +762,7 @@ bool DKRmlGuiNode::handle(const osgGA::GUIEventAdapter& ea, const osg::NodePath&
 			if(ea.getKey() == osgGA::GUIEventAdapter::KEY_Return)
 				_context->ProcessTextInput("\n");
 
-#ifdef ANDROID
+#if ANDROID
 			if(ea.getKey() == 0) //backspace
 				key = Rml::Input::KI_BACK;
 		
@@ -831,7 +831,7 @@ bool DKRmlGuiNode::handle(const osgGA::GUIEventAdapter& ea, const osg::NodePath&
 		}
 		case(osgGA::GUIEventAdapter::SCROLL):{
 
-#ifdef MAC
+#if MAC
 		_context->ProcessMouseWheel((int)ea.getScrollingDeltaY(), GetKeyModifiers(ea.getModKeyMask()));
 			//return (_camera != NULL &&  _contextEventListener->_mouse_handled);
 #else

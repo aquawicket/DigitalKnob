@@ -89,7 +89,7 @@ bool DKSDLMetalRml::Handle(SDL_Event *event) {
         case SDL_MOUSEWHEEL:
             dkRml->context->ProcessMouseWheel(event->wheel.y * -1, SystemInterface->GetKeyModifiers());
             break;
-#ifdef ANDROID
+#if ANDROID
         case SDL_KEYDOWN:
 			//DKINFO("DKSDLMetalRml::SDL_KEYDOWN("+toString((int)event->key.keysym.sym)+")\n");
 			dkRml->context->ProcessKeyDown(SystemInterface->TranslateKey(event->key.keysym.sym), SystemInterface->GetKeyModifiers());

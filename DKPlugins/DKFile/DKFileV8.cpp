@@ -172,7 +172,7 @@ bool DKFileV8::GetShortName(CefArgs args, CefReturn retval){
 	//DKString path = args[0]->GetStringValue();
 	DKString path = args->GetString(0);
 	//DKINFO("DKFileV8::GetShortName("+path+",CefReturn)\n");
-#ifdef WIN32
+#if WIN
 	DKString shortname;
 	if(DKFile::GetShortName(path, shortname)){
 		//retval = CefV8Value::CreateString(shortname);

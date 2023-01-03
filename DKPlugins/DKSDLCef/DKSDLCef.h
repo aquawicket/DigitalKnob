@@ -34,7 +34,7 @@
 	#include <include/cef_render_handler.h>
 	#include <include/cef_browser_process_handler.h>
 	#include <include/cef_display_handler.h>
-	#ifdef LINUX
+	#if LINUX
 		//#include <X11/cursorfont.h>
 	#endif
 	#include "SDL.h"

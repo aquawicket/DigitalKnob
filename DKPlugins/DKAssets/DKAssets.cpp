@@ -277,11 +277,11 @@ bool DKAssets::GetDataPath(DKString& path){
 
 bool DKAssets::PackageAssets(DKString& dataFolder, DKString& headerFile){
 	DKDEBUGFUNC(dataFolder, headerFile);
-#if !defined(WIN32)
-#if HAVE_DKArchive
-	if(!DKArchive::Compress(dataFolder, dataFolder + "/../assets.zip"))
-		return false;
-#endif
+#if !WIN
+	#if HAVE_DKArchive
+		if(!DKArchive::Compress(dataFolder, dataFolder + "/../assets.zip"))
+			return false;
+	#endif
 	if (!DKUtil::Bin2C(dataFolder + "/../assets.zip", headerFile))
 		return false;
 	//DKFile::Delete(dataFolder + "/../assets.zip"); //delete lingering zip file;
@@ -318,14 +318,14 @@ bool DKAssets::DeployAssets(){
 		DKFile::CopyFolder(DKFile::local_assets + "USER", DKFile::local_assets + "../USER", true, true);
 	DKFile::Delete(DKFile::local_assets); //remove assets folder completely 
 
-#if !defined(ANDROID) && !defined(WIN32)
+#if !ANDROID && !WIN
 	DKINFO("Extracting assets from binary executable . . .\n");	
 	DKFile::MakeDir(DKFile::local_assets);
 	DKString fileOut = DKFile::local_assets+"assets.zip";
 	DKUtil::C2Bin(ASSETS_H, ASSETS_H_SIZE, fileOut.c_str());
-#if HAVE_DKArchive
-	DKArchive::Extract(DKFile::local_assets+"assets.zip", DKFile::local_assets);
-#endif
+	#if HAVE_DKArchive
+		DKArchive::Extract(DKFile::local_assets+"assets.zip", DKFile::local_assets);
+	#endif
 	DKFile::Delete(DKFile::local_assets+"assets.zip"); //delete lingering zip file;
 #endif
 

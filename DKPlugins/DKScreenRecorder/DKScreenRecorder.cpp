@@ -30,14 +30,14 @@
 #include "DK/DKFile.h"
 #include "DKScreenRecorder/DKScreenRecorder.h"
 
-#ifdef WIN32
+#if WIN
 	#define sleep Sleep
 //WARNING_DISABLE
 	#include <WS2tcpip.h>
 //WARNING_ENABLE
 #endif
 
-#ifdef LINUX
+#if LINUX
 //WARNING_DISABLE
 	#include <unistd.h>
 	#include <X11/Xlib.h>
@@ -48,7 +48,7 @@
 	XImage* DKScreenRecorder::image;
 #endif
 
-#ifdef MAC
+#if MAC
 	CGImageRef DKScreenRecorder::image_ref;
 	CGDataProviderRef DKScreenRecorder::provider;
 	CFDataRef DKScreenRecorder::dataref;
@@ -86,13 +86,13 @@ bool DKScreenRecorder::Init(){
 	DKUtil::GetScreenHeight(desktopHeight);
 
 /*
-#ifdef MAC
+#if MAC
 	image_ref = CGDisplayCreateImage(CGMainDisplayID());
 	provider = CGImageGetDataProvider(image_ref);
 	dataref = CGDataProviderCopyData(provider);
 #endif
 */
-#ifdef LINUX
+#if LINUX
 	disp = XOpenDisplay(NULL);
 	root = XDefaultRootWindow(disp);
 #endif
@@ -164,7 +164,7 @@ void DKScreenRecorder::Loop(){
 
 void DKScreenRecorder::DrawBuffer(){
 	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
-#ifdef WIN32
+#if WIN
 	//Capture Desktop with DirectX
 	if(capture == "DIRECTX"){
 		//DKINFO("DIRECTX\n");
@@ -258,7 +258,7 @@ void DKScreenRecorder::DrawBuffer(){
 	}
 #endif
 
-#ifdef MAC
+#if MAC
 	image_ref = CGDisplayCreateImage(CGMainDisplayID());
 	provider = CGImageGetDataProvider(image_ref);
 	dataref = CGDataProviderCopyData(provider);
@@ -271,7 +271,7 @@ void DKScreenRecorder::DrawBuffer(){
 	//CGImageRelease(image_ref); 
 #endif
 
-#ifdef LINUX
+#if LINUX
 	image = XGetImage(disp, root, 0, 0, desktopWidth, desktopHeight, AllPlanes, ZPixmap);
 	int w,h;
 	for(h=0; h<desktopHeight; ++h) {

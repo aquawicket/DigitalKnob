@@ -198,7 +198,7 @@ bool DKOSGWindow::CreateView(){
 	//Set the window title
 	DKString title = mTitle;
 
-#if defined(WIN32) && !defined(WIN64)
+#if WIN32 && !WIN64
 		title += " - WIN32";
 #endif
 #if WIN64

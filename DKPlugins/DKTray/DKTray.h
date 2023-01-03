@@ -54,7 +54,7 @@ public:
 	static DKString icon;
 
 private:
-#ifdef WIN32
+#if WIN
 	void setCallback(DKTrayCallback callback);
     static LRESULT DKTray::OnTrayNotification(UINT message, WPARAM wParam, LPARAM lParam);
 	static CSystemTray TrayIcon;
