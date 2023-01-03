@@ -185,7 +185,7 @@ function DKBuildConsole_SelectOs() {
 		//}
 		OSes.push("android32")
 		OSes.push("android64")
-		OSes.push("emscripten")
+		//OSes.push("emscripten")
 	}
 		
 	console.log("\n")
