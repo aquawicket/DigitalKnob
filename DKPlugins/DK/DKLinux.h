@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-#ifdef LINUX
+#if LINUX
 #pragma once
 #ifndef DKLinux_H
 #define DKLinux_H

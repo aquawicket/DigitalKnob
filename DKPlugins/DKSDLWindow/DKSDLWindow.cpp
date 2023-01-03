@@ -130,11 +130,11 @@ bool DKSDLWindow::Init(){
 #endif
 
     SDL_SetHint(SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS, "0");
-#if !defined(ANDROID) && !defined(IOS) && !defined(EMSCRIPTEN)
+#if !ANDROID && !IOS && !EMSCRIPTEN
     SDL_SetHint(SDL_HINT_MOUSE_FOCUS_CLICKTHROUGH, "1");
 #endif
     DKString result;
-#if defined(ANDROID) || defined(IOS) || defined(EMSCRIPTEN)
+#if ANDROID || IOS || EMSCRIPTEN
     DKINFO("Creating SDLWindow for mobile device\n");
     
     SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengles");

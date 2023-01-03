@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-#ifdef EMSCRIPTEN
+#if EMSCRIPTEN
 #pragma once
 #ifndef DKEmscripten_H
 #define DKEmscripten_H

@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-#ifdef HAVE_DKDuktape
+#if HAVE_DKDuktape
 #include "DK/DKFile.h"
 #include "DKAssets/DKAssets.h"
 #include "DKAssets/DKAssetsJS.h"

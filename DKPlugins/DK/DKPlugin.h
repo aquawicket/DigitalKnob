@@ -36,7 +36,7 @@
 #include <vector>
 //WARNING_ENABLE
 
-#ifdef WIN32
+#if WIN
 //#ifdef BUILD_DLL
     #define DLLAPI __declspec(dllexport)
 //#else
@@ -63,7 +63,7 @@ public:
 	static bool LoadPlugin(const std::string& file);
 	static void ClosePlugins();
 
-#ifdef WIN32
+#if WIN
 	static std::vector<HINSTANCE> modules;
 #endif
 	static std::vector<DKObject*> dkobjs;

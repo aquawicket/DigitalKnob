@@ -25,7 +25,7 @@
 */
 
 #include "DK/stdafx.h"
-#ifdef MAC
+#if MAC
 #include "DK/DKMac.h"
 #include "DK/DKUnix.h"
 

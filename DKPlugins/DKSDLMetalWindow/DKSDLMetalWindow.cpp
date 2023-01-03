@@ -62,7 +62,7 @@ std::map<int, int> DKSDLWindow::sdlMacCode;
 
 bool DKSDLWindow::Init() {
     DKDEBUGFUNC();
-#ifdef ANDROID
+#if ANDROID
     //DKINFO("CallJavaFunction(OpenActivity,SDLActivity)\n");
     //CallJavaFunction("OpenActivity","SDLActivity");
 #endif
@@ -98,7 +98,7 @@ bool DKSDLWindow::Init() {
         width = toInt(textWidth);
     if(!textHeight.empty())
         height = toInt(textHeight);
-#ifdef WIN32 //account window frame
+#if WIN //account window frame
     winY = (winY + 30);
     winX = (winX + 10);
 #endif
@@ -110,20 +110,20 @@ bool DKSDLWindow::Init() {
         width = 800;
     if(height < 1)
         height = 600;
-#ifdef IOS
+#if IOS
     width = 320;
     height = 480;
 #endif
-#ifdef ANDROID
+#if ANDROID
     width = DKAndroid::android_width;
     height = DKAndroid::android_height;
 #endif
     SDL_SetHint(SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS, "0");
-#if !defined(ANDROID) && !defined(IOS)
+#if !ANDROID && !IOS
     SDL_SetHint(SDL_HINT_MOUSE_FOCUS_CLICKTHROUGH, "1");
 #endif
     DKString result;
-#if defined(ANDROID) || defined(IOS)
+#if ANDROID || IOS
     DKINFO("Creating SDLWindow for mobile device\n");
     SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengles");
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);

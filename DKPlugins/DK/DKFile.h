@@ -57,7 +57,7 @@ class DKFile{
 public:
 	static bool DebugPath(const DKString& path);
 	static bool NormalizePath(DKString& path);
-#ifdef WIN32
+#if WIN
 	static bool AppendSystemPath(const DKString& path);
 #endif
 	static bool ChDir(const DKString& dir);

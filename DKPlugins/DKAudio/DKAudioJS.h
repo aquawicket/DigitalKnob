@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-#ifdef HAVE_DKDuktape 
+#if HAVE_DKDuktape 
 #pragma once
 #ifndef DKAudioJS_H
 #define DKAudioJS_H

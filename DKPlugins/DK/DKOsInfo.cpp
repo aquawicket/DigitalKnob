@@ -30,47 +30,50 @@
 #include "DK/DKOsInfo.h"
 
 //WARNING_DISABLE
-#ifdef MAC
+#if MAC
 #import <CoreServices/CoreServices.h>
 #endif
 //WARNING_ENABLE
 
 bool GetOSFlag(DKString& flag){
-#ifdef WIN32
+#if WIN32
 	flag = "WIN32";
 #endif
-#ifdef WIN64
+#if WIN64
 	flag = "WIN64";
 #endif
-#ifdef MAC32
+#if MAC32
 	flag = "MAC32";
 #endif
-#ifdef MAC64
+#if MAC64
 	flag = "MAC64";
 #endif
-#ifdef IOS32
+#if IOS32
 	flag = "IOS32";
 #endif
-#ifdef IOS64
+#if IOS64
 	flag = "IOS64";
 #endif
-#ifdef LINUX32
+#if LINUX32
 	flag = "LINUX32";
 #endif
-#ifdef LINUX64
+#if LINUX64
 	flag = "LINUX64";
 #endif
-#ifdef RASPBERRY32
+#if RASPBERRY32
 	flag = "RASPBERRY32";
 #endif
-#ifdef RASPBERRY64
+#if RASPBERRY64
 	flag = "RASPBERRY64";
 #endif
-#ifdef ANDROID32
+#if ANDROID32
 	flag = "ANDROID32";
 #endif
-#ifdef ANDROID64
+#if ANDROID64
 	flag = "ANDROID64";
+#endif
+#if EMSCRIPTEN
+	flag = "EMSCRIPTEN";
 #endif
 	return true;
 }
@@ -95,22 +98,25 @@ bool GetOSInfo(DKString& info){
 }
 
 bool GetSystemOS(DKString& os){
-#if defined(WIN32)
+#if WIN
 	os = "Windows";
 #endif
-#if defined(MAC)
+#if MAC
 	os = "Mac";
 #endif
-#if defined(IOS)
+#if IOS
 	os = "iOS";
 #endif
-#if defined(RASPBERRY)
+#if RASPBERRY
 	os = "Raspberry";
-#elif defined(LINUX)
+#elif LINUX
 	os = "Linux";
 #endif
-#if defined(ANDROID)
+#if ANDROID
 	os = "Android";
+#endif
+#if EMSCRIPTEN
+	os = "Emscripten";
 #endif
 	if(os.empty())
 		return DKERROR("cound not get the OS\n");
@@ -118,20 +124,23 @@ bool GetSystemOS(DKString& os){
 }
 
 bool GetOSCompany(DKString& oscompany){ 
-#ifdef WIN32
+#if WIN
 	oscompany = "Microsoft";
 	return true;
-#elif defined(MAC)
+#elif MAC
 	oscompany = "Apple";
 	return true;
-#elif defined(IOS)
+#elif IOS
 	oscompany = "Apple";
 	return true;
-#elif defined(ANDROID)
+#elif ANDROID
 	oscompany = "Google";
 	return true;
-#elif defined(LINUX)
+#elif LINUX
 	oscompany = "Linux";
+	return true;
+#elif EMSCRIPTEN
+	oscompany = "Emscripten";
 	return true;
 #else
 	return DKERROR("not implemented on this OS \n");
@@ -139,7 +148,7 @@ bool GetOSCompany(DKString& oscompany){
 }
 
 bool GetOSName(DKString& osname){
-#ifdef WIN32
+#if WIN
 	RTL_OSVERSIONINFOEXW vi;
 	if(!GetWinOSVersion(vi))
 		return DKERROR("!GetWinOSVersion(vi)\n")
@@ -202,17 +211,20 @@ bool GetOSName(DKString& osname){
 		os << "Windows NT 4.0";
 	osname = toString(os.str());
 	return true;
-#elif defined(MAC)
+#elif MAC
 	osname = "MacOSX";
 	return true;
-#elif defined(IOS)
+#elif IOS
 	osname = "iOS";
 	return true;
-#elif defined(ANDROID)
+#elif ANDROID
 	osname = "Android";
 	return true;
-#elif defined(LINUX)
+#elif LINUX
 	osname = "Linux";
+	return true;
+#elif EMSCRIPTEN
+	osname = "Emscripten";
 	return true;
 #else
 	return DKERROR("not implemented on this OS \n");
@@ -220,7 +232,7 @@ bool GetOSName(DKString& osname){
 }
 
 bool GetOSVersion(DKString& osversion){
-#ifdef WIN32
+#if WIN
 	RTL_OSVERSIONINFOEXW vi;
 	if (!GetWinOSVersion(vi))
 		return DKERROR("GetWinOSVersion() failed\n");
@@ -339,7 +351,7 @@ bool GetOSVersion(DKString& osversion){
 	} 
 	osversion = toString(os.str());
 	return true;
-#elif defined(MAC)
+#elif MAC
     SInt32 majorVersion,minorVersion,bugFixVersion;
     Gestalt(gestaltSystemVersionMajor, &majorVersion);
     Gestalt(gestaltSystemVersionMinor, &minorVersion);
@@ -350,13 +362,16 @@ bool GetOSVersion(DKString& osversion){
     osversion += ".";
     osversion += toString(bugFixVersion);
 	return true;
-#elif defined(IOS)
+#elif IOS
 	osversion = "";
 	return true;
-#elif defined(ANDROID)
+#elif ANDROID
 	osversion = "";
 	return true;
-#elif defined(LINUX)
+#elif LINUX
+	osversion = "";
+	return true;
+#elif EMSCRIPTEN
 	osversion = "";
 	return true;
 #else
@@ -365,7 +380,7 @@ bool GetOSVersion(DKString& osversion){
 }
 
 bool GetOSServicePack(DKString& osservicepack){
-#ifdef WIN32
+#if WIN
 	RTL_OSVERSIONINFOEXW vi;
 	if (!GetWinOSVersion(vi))
 		return DKERROR("GetWinOSVersion() failed\n");
@@ -376,16 +391,19 @@ bool GetOSServicePack(DKString& osservicepack){
 		osservicepack = toString(os.str());
 	}
 	return true;
-#elif defined(MAC)
+#elif MAC
 	osservicepack = "";
 	return true;
-#elif defined(IOS)
+#elif IOS
 	osservicepack = "";
 	return true;
-#elif defined(ANDROID)
+#elif ANDROID
 	osservicepack = "";
 	return true;
-#elif defined(LINUX)
+#elif LINUX
+	osservicepack = "";
+	return true;
+#elif EMSCRIPTEN
 	osservicepack = "";
 	return true;
 #else
@@ -394,7 +412,7 @@ bool GetOSServicePack(DKString& osservicepack){
 }
 
 bool GetOSBuild(DKString& osbuild){
-#ifdef WIN32
+#if WIN
 	RTL_OSVERSIONINFOEXW vi;
 	if (!GetWinOSVersion(vi))
 		return DKERROR("GetWinOSVersion() failed\n");
@@ -402,16 +420,19 @@ bool GetOSBuild(DKString& osbuild){
 	os << L"build " << vi.dwMajorVersion << "." << vi.dwMinorVersion << "." << vi.dwBuildNumber;
 	osbuild = toString(os.str());
 	return true;
-#elif defined(MAC)
+#elif MAC
 	osbuild = "";
 	return true;
-#elif defined(IOS)
+#elif IOS
 	osbuild = "";
 	return true;
-#elif defined(ANDROID)
+#elif ANDROID
 	osbuild = "";
 	return true;
-#elif defined(LINUX)
+#elif LINUX
+	osbuild = "";
+	return true;
+#elif EMSCRIPTEN
 	osbuild = "";
 	return true;
 #else
@@ -420,7 +441,7 @@ bool GetOSBuild(DKString& osbuild){
 }
 
 bool GetOSArchitecture(DKString& osarchitecture){
-#ifdef WIN32
+#if WIN
 	RTL_OSVERSIONINFOEXW vi;
 	if (!GetWinOSVersion(vi))
 		return DKERROR("GetWinOSVersion() failed\n");
@@ -453,16 +474,19 @@ bool GetOSArchitecture(DKString& osarchitecture){
 	}
 	osarchitecture = toString(os.str());
 	return true;
-#elif defined(MAC)
+#elif MAC
 	osarchitecture = "";
 	return true;
-#elif defined(IOS)
+#elif IOS
 	osarchitecture = "";
 	return true;
-#elif defined(ANDROID)
+#elif ANDROID
 	osarchitecture = "";
 	return true;
-#elif defined(LINUX)
+#elif LINUX
+	osarchitecture = "";
+	return true;
+#elif EMSCRIPTEN
 	osarchitecture = "";
 	return true;
 #else
@@ -472,7 +496,7 @@ bool GetOSArchitecture(DKString& osarchitecture){
 
 ////////////////////////////////////////////
 bool GetComputerName(DKString& computername){
-#ifdef WIN32
+#if WIN
 	TCHAR computerName[MAX_COMPUTERNAME_LENGTH + 1];
 	DWORD size = sizeof(computerName) / sizeof(computerName[0]);
 	GetComputerName(computerName, &size);
@@ -483,7 +507,7 @@ bool GetComputerName(DKString& computername){
 #endif
 }
 
-#ifdef WIN32
+#if WIN
 bool GetWinOSVersion(RTL_OSVERSIONINFOEXW& vi){
 	ZeroMemory(&vi, sizeof(RTL_OSVERSIONINFOEXW));
 	HMODULE hMod = ::GetModuleHandleW(L"ntdll.dll");
@@ -531,4 +555,4 @@ bool GetWinProductInfo(RTL_OSVERSIONINFOEXW& vi, DWORD& dwType){
 	return false;
 }
 
-#endif //WIN32
+#endif //WIN

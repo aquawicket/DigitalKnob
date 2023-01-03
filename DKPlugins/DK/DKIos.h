@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-#ifdef IOS
+#if IOS
 #pragma once
 #ifndef DKIos_H
 #define DKIos_H

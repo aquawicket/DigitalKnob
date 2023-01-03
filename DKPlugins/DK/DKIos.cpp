@@ -25,7 +25,7 @@
 */
 
 #include "DK/stdafx.h"
-#ifdef IOS
+#if IOS
 #include "DK/DKIos.h"
 
 //WARNING_DISABLE

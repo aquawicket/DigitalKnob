@@ -293,10 +293,10 @@ bool DKAssets::PackageAssets(DKString& dataFolder, DKString& headerFile){
 	replace(assets_string, "\r", "");
 	replace(assets_string, " ", "");
 	std::remove_if(assets_string.begin(), assets_string.end(), isspace);
-	assets_string += "#if defined(HAVE_DKAssets) && !defined(ANDROID)\n" + assets_string;
+	assets_string += "#if HAVE_DKAssets && !ANDROID\n" + assets_string;
 	assets_string += "#endif\n\n";
 	assets_string += "void CopyAssets(){\n";
-	assets_string += "#if defined(HAVE_DKAssets) && !defined(ANDROID)\n";
+	assets_string += "#if HAVE_DKAssets && !ANDROID\n";
 	assets_string += "DKCreate(\"DKAssets\");\n";
 	assets_string += "DKAssets::CopyAssets(assets, assets_size);\n";
 	assets_string += "#endif\n";

@@ -340,7 +340,7 @@ bool DKFile::GetDirectoryContents(const DKString& path, DKStringArray& strings){
 		DKFile::GetFileName(itrPath,filename);
 		strings.push_back(filename);
 	}
-//	#if defined(LINUX) || defined(MAC)
+//	#if LINUX || MAC
 	std::sort(strings.begin(), strings.end());
 //	#endif
 	//remove . && ..

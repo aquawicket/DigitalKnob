@@ -24,10 +24,10 @@
 * SOFTWARE.
 */
 
-#ifdef HAVE_DKDuktape 
+#if HAVE_DKDuktape 
 #include "DKCurl/DKCurl.h"
 #include "DKCurl/DKCurlJS.h"
-//#ifdef HAVE_DKThread
+//#if HAVE_DKThread
 //	#include "DKThread/DKThread.h"
 //#endif
 

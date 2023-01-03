@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-#ifdef HAVE_DKDuktape
+#if HAVE_DKDuktape
 
 #include "DKArchive/DKArchive.h"
 #include "DKArchive/DKArchiveJS.h"

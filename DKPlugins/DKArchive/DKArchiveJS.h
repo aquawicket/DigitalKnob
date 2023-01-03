@@ -25,7 +25,7 @@
 */
 
 
-#ifdef HAVE_DKDuktape
+#if HAVE_DKDuktape
 
 #pragma once
 #ifndef DKArchiveJS_H

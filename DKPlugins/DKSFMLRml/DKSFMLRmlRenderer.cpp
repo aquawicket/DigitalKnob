@@ -395,7 +395,7 @@ void RmlSFMLRenderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, in
         else TexCoords[i] = vertices[i].tex_coord;
     };
 
-#if defined(ANDROID) || defined(IOS)
+#if ANDROID || IOS
 	unsigned short newIndicies[num_indices];
     for (int i = 0; i < num_indices; i++)
     {
@@ -410,7 +410,7 @@ void RmlSFMLRenderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, in
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-#if defined(ANDROID) || defined(IOS)
+#if ANDROID || IOS
 	glDrawElements(GL_TRIANGLES, num_indices, GL_UNSIGNED_SHORT, newIndicies);
 #else
     glDrawElements(GL_TRIANGLES, num_indices, GL_UNSIGNED_INT, indices);

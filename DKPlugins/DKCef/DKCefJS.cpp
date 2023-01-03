@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-#ifdef HAVE_DKDuktape 
+#if HAVE_DKDuktape 
 #include "DKCef/DKCef.h"
 #include "DKCef/DKCefJS.h"
 

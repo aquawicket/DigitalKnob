@@ -32,7 +32,7 @@
 
 #include "DK/DK.h"
 
-#if defined(MAC) /*|| defined(ANDROID)*/ || defined(IOS)
+#if MAC || IOS //|| ANDROID
 #define TIME_UTC_ TIME_UTC
 #endif
 

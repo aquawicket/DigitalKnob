@@ -210,14 +210,14 @@ bool DKDebug::Init(){
 	DKDEBUGFUNC();
 	DKClass::DKCreate("DKDebugJS");
 	DKClass::DKCreate("DKDebugV8");
-#ifdef WIN32
+#if WIN
 	//Copy PDB file if it exists
 	DKString exename;
 	DKFile::GetExeName(exename);
 	DKFile::RemoveExtention(exename);
 	DKString apppath;
 	DKFile::GetAppPath(apppath);
-#ifndef DEBUG
+#if !DEBUG
 	//TODO: we need to do this in the build script. The exe will be using the .pdb, so the file is locked. 
 	//DKINFO("DKFile::Copy("+DKFile::local_assets+exename+".pdb,"+apppath+exename+".pdb)\n");
 	//DKFile::Copy(DKFile::local_assets+exename+".pdb", apppath+exename+".pdb", true, true);

@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-#ifdef HAVE_DKCef
+#if HAVE_DKCef
 #include "DK/DKApp.h"
 #include "DKCurl/DKCurl.h"
 #include "DKCurl/DKCurlV8.h"

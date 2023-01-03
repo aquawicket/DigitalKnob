@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-#ifdef HAVE_DKDuktape
+#if HAVE_DKDuktape
 #include "DKAudio/DKAudio.h"
 #include "DKAudio/DKAudioJS.h"
 

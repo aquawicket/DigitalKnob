@@ -62,7 +62,7 @@ bool DKCurl::CurlInit(){
 	curl = curl_easy_init(); //NOTE: Curl inits are NOT thread safe. we must init within the given thread
 	if(!curl)
         return DKERROR("curl invalid\n");
-#ifdef DEBUG
+#if DEBUG
 	//curl_easy_setopt(curl, CURLOPT_DEBUGFUNCTION, my_trace); //PRINT EXTIRE CURL DEBUG TRACE INFO
 	curl_easy_setopt(curl, CURLOPT_VERBOSE, true);
 #endif

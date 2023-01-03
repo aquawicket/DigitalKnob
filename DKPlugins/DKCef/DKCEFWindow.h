@@ -30,7 +30,7 @@
 //#define USE_GDK    
 
 //WARNING_DISABLE
-	#ifdef LINUX
+	#if LINUX
 		#ifdef USE_GDK
 			#include <gdk/gdk.h>
 		#endif //USE_GDK

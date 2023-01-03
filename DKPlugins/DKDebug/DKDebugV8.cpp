@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-#ifdef HAVE_DKCef
+#if HAVE_DKCef
 #include "DK/DKApp.h"
 #include "DKDebug/DKDebug.h"
 #include "DKDebug/DKDebugV8.h"

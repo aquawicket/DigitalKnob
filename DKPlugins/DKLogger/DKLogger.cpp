@@ -215,11 +215,11 @@ bool Log(const char* file, int line, const char* func, const DKString& text, con
 #if(log_msvc)
 	OutputDebugString(string.c_str()); //Output to Visual Studio
 #endif
-#if defined(MAC) || defined (IOS)
+#if MAC || IOS
 	if(log_xcode)
 		NSLog(@"%s", string.c_str()); //Output to XCode
 #endif
-#ifdef ANDROID
+#if ANDROID
 	// https://developer.android.com/ndk/reference/group/logging
 	if(lvl == DK_FATAL) //Android Studio 
 		__android_log_write(ANDROID_LOG_FATAL, "DKAndroid", string.c_str());

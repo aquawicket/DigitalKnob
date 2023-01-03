@@ -187,13 +187,13 @@ int DKArchive::copy_data(struct archive* ar, struct archive* aw){
 	la_ssize_t r;
 	const void *buff;
 	size_t size;
-//#ifndef ANDROID
-//#ifdef WIN32
+//#if !ANDROID
+//#if WIN
 //	__int64 offset;
 //#endif 
-//#ifdef RASPBERRY
+//#if RASPBERRY
 //	long long int offset; //Fix for Raspberry Pi
-//#elif defined(LINUX)
+//#elif LINUX
 //	long int offset; //Lubuntu Linux64
 //#endif
 //FIXME: These were left where without notes. Mac or iPhone maybe

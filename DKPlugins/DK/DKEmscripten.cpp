@@ -25,7 +25,7 @@
 */
 
 #include "DK/stdafx.h"
-#ifdef EMSCRIPTEN
+#if EMSCRIPTEN
 #include "DK/DKEmscripten.h"
 
 

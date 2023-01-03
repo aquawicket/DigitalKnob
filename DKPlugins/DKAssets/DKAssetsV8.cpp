@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-#ifdef HAVE_DKCef
+#if HAVE_DKCef
 #include "DK/DKApp.h"
 #include "DK/DKFile.h"
 #include "DKAssets/DKAssetsV8.h"

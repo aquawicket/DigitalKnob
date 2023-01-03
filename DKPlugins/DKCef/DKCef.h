@@ -114,7 +114,7 @@ public:
 	DialogCallback* fileDialogCallback;
 	static bool initialized;
 
-#ifdef WIN32
+#if WIN
 	HMODULE libcef;
 	HMODULE libelf;
 #endif

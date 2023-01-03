@@ -29,7 +29,7 @@
 #define DKDebug_H
 #include "DK/DK.h"
 
-//#ifdef HAVE_DKCurl
+//#if HAVE_DKCurl
 //	#include "DKCurl/DKCurl.h"
 //#endif
 

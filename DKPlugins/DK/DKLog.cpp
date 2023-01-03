@@ -35,7 +35,7 @@
 #endif
 #include <fstream>
 
-#ifdef WIN
+#if WIN
 	#include <debugapi.h> //OutputDebugString()
 #endif
 #if MAC || IOS

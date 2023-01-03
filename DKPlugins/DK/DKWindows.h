@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-#ifdef WIN32
+#if WIN
 #pragma once
 #ifndef DKWindows_H
 #define DKWindows_H

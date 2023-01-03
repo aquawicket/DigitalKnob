@@ -32,7 +32,7 @@
 
 #include "DK/DKPreprocessor.h"
 
-#if WIN32
+#if WIN
 #	include "DK/DKWindows.h"
 #elif MAC
 #	include "DK/DKMac.h"

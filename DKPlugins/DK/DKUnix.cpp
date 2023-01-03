@@ -66,13 +66,13 @@ bool DKUnix::Sleep(int milliseconds){
 
 bool DKUnix::GetUsername(DKString& username){
 	DKDEBUGFUNC(username);
-#ifdef MAC
+#if MAC
 	if (const char* usr_a = std::getenv("USER")){ //'USERNAME' on Windows
 		username = usr_a;
 		return true;
 	}
 #endif
-#ifdef IOS
+#if IOS
     //Get the username from the app_path in case we are in ios-simulator
     std::string::size_type pos = DKFile::app_path.find("/Library");
     username = DKFile::app_path.substr(0, pos);
@@ -82,7 +82,7 @@ bool DKUnix::GetUsername(DKString& username){
         return true;
     return false;
 #endif
-#ifdef LINUX
+#if LINUX
 	if (const char* usr_a = std::getenv("USER")){ //'USERNAME' on Windows
 		username = usr_a;
 		return true;
