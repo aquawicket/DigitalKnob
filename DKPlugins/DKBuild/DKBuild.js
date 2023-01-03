@@ -284,6 +284,8 @@ function DKBuild_InstallEMSDK(){
 	CPP_DK_Execute("git checkout -- .")
 	CPP_DK_Execute("git checkout main")
 	CPP_DK_Execute("git pull")
+	if(CPP_DK_GetOS() !== "Windows")
+		CPP_DK_Execute("chmod 777 "+DIGITALKNOB+"DK/3rdParty/emsdk-main/emsdk_env.sh")
 }
 	
 function DKBuild_ResetApps(){
