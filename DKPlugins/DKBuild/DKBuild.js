@@ -272,6 +272,11 @@ function DKBuild_ValidateEMSDK(){
 
 function DKBuild_InstallEMSDK(){
 	//TODO - install Emscripten SDK
+	const EMSDK_DL = "https://github.com/emscripten-core/emsdk/archive/refs/heads/main.zip"
+	CPP_DKCurl_Download(EMSDK_DL, DKDOWNLOAD)
+	const index = EMSDK_DL.lastIndexOf("/")
+	const filename = EMSDK_DL.substring(index+1)
+	CPP_DKArchive_Extract(DKDOWNLOAD+"/"+filename, DIGITALKNOB+"DK/3rdParty/emsdk-main")
 }
 	
 function DKBuild_ResetApps(){
