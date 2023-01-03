@@ -9,10 +9,8 @@ var DIGITALKNOB = ""
 var DKDOWNLOAD = ""
 var CMAKE = ""
 var ANDROID_NDK = ""  //filled by DKBuild_ValidateNDK()
-//var VISUALSTUDIO_VERSION = "2019"
 var VISUALSTUDIO_VERSION = "2022"
 var VISUALSTUDIO = ""
-//var VS_GENERATOR = "Visual Studio 16 2019"
 var VS_GENERATOR = "Visual Studio 17 2022"
 var MSBUILD = ""
 var GCC = ""
@@ -192,7 +190,7 @@ function DKBuild_ValidateVC2019(){
 	if(!CPP_DKFile_Exists(VISUALSTUDIO))
 		DKBuild_InstallVC2019()
 	if(CPP_DKFile_Exists(VISUALSTUDIO))
-	console.log("Found Visual Studio")
+		console.log("Found Visual Studio")
 }
 
 function DKBuild_InstallVC2019(){
@@ -263,6 +261,19 @@ function DKBuild_ValidateNDK(){
 	}
 }
 
+function DKBuild_ValidateEMSDK(){
+	console.log("Looking for Emscripten SDK . . .")
+	const EMMAKE = DKBuild_GetDKMakeVariable(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/emsdk/DKMAKE.cmake", "EMMAKE")
+	if(!CPP_DKFile_Exists(EMMAKE))
+		DKBuild_InstallEMSDK()
+	if(CPP_DKFile_Exists(EMMAKE))
+		console.log("Found Emscripten SDK")
+}
+
+function DKBuild_InstallEMSDK(){
+	//TODO - install Emscripten SDK
+}
+	
 function DKBuild_ResetApps(){
 	var contents = CPP_DKFile_DirectoryContents(DIGITALKNOB)
 	var items = contents.split(",")
@@ -642,7 +653,7 @@ function DKBuild_DoResults(){
 		const EMSDK = DIGITALKNOB+"/DK/3rdParty/emsdk-main"
 		const EMSDK_ENV = EMSDK+"/emsdk_env"
 		const EMSDK_TOOLCHAIN_FILE = EMSDK+"/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake"
-		//DKBuild_ValidateEMSDK()
+		DKBuild_ValidateEMSDK()
 		CPP_DKFile_MkDir(app_path+OS)
 		if(TYPE === "Debug" || TYPE === "ALL"){
 			cmake_string = cmake_string.replace("-DDEBUG=OFF", "-DDEBUG=ON");
