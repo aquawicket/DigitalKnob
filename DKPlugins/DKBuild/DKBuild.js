@@ -279,6 +279,13 @@ function DKBuild_InstallEMSDK(){
 	CPP_DK_Execute("git checkout -- .")
 	CPP_DK_Execute("git checkout main")
 	CPP_DK_Execute("git pull")
+	
+	CPP_DK_Execute(DIGITALKNOB+"DK/3rdParty/emsdk-main/emsdk install latest")
+	CPP_DK_Execute(DIGITALKNOB+"DK/3rdParty/emsdk-main/emsdk activate latest")
+	if(CPP_DK_GetOS() === "Windows"){
+		CPP_DK_Execute(DIGITALKNOB+"DK/3rdParty/emsdk-main/emsdk install mingw-4.6.2-32bit")
+		CPP_DK_Execute(DIGITALKNOB+"DK/3rdParty/emsdk-main/emsdk activate mingw-4.6.2-32bit")
+	}
 	if(CPP_DK_GetOS() !== "Windows")
 		CPP_DK_Execute("chmod 777 "+DIGITALKNOB+"DK/3rdParty/emsdk-main/emsdk_env.sh")
 }
