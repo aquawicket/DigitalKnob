@@ -32,22 +32,22 @@
 
 #include "DK/DKPreprocessor.h"
 
-#if defined(WIN32)
+#if WIN32
 #	include "DK/DKWindows.h"
-#elif defined(MAC)
+#elif MAC
 #	include "DK/DKMac.h"
-#elif defined(IOS)
+#elif IOS
 #	include "DK/DKIos.h"
-#elif defined(LINUX)
+#elif LINUX
 #	include "DK/DKLinux.h"
-#elif defined(RASPBERRY)
+#elif RASPBERRY
 #	include "DK/DKLinux.h"
-#elif defined(ANDROID)
+#elif ANDROID
 #	include "DK/DKAndroid.h"
-#elif defined(EMSCRIPTEN)
+#elif EMSCRIPTEN
 #	include "DK/DKEmscripten.h"
 #else
-#	error NO KNOWN PLATFORM FLAG WAS FOUND (WIN,MAC,LINUX,ANDROID,IOS,RASPBERRY)
+#	error NO KNOWN PLATFORM FLAG WAS FOUND (WIN,MAC,LINUX,ANDROID,IOS,RASPBERRY,EMSCRIPTEN)
 #endif
 
 #include "DK/DKClass.h"

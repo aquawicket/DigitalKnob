@@ -31,6 +31,7 @@
 
 //WARNING_DISABLE
 #include <emscripten.h>
+#include <emscripten/html5.h>
 //WARNING_ENABLE
 
 

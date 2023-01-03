@@ -30,11 +30,6 @@
 
 #include "DK/DK.h"
 
-#if EMSCRIPTEN
-	#include <emscripten.h>
-	#include <emscripten/html5.h>
-#endif
-
 class DKApp{
 public:
 

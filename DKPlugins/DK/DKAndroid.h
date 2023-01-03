@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-#ifdef ANDROID
+#if ANDROID
 //* http://stackoverflow.com/questions/6017646/jni-warnig-expected-return-type-l-calling-locationmanager-requestlocationupdat
 
 #pragma once
