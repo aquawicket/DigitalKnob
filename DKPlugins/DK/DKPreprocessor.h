@@ -283,7 +283,7 @@
 // BUILD_TYPE
 #if DEBUG
 #	define DKBUILD_TYPE "DEBUG"
-#elif RELEASE
+#elif NDEBUG
 #	define DKBUILD_TYPE "RELEASE"
 #else
 #	define DKBUILD_TYPE "UNKNOWN"
