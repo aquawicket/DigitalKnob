@@ -271,16 +271,11 @@ function DKBuild_ValidateEMSDK(){
 }
 
 function DKBuild_InstallEMSDK(){
-	//TODO - install Emscripten SDK
-	//const EMSDK_DL = "http://github.com/emscripten-core/emsdk/archive/refs/heads/main.zip"
-	//CPP_DKCurl_Download(EMSDK_DL, DKDOWNLOAD)
-	//const index = EMSDK_DL.lastIndexOf("/")
-	//const filename = EMSDK_DL.substring(index+1)
-	//CPP_DKArchive_Extract(DKDOWNLOAD+"/"+filename, DIGITALKNOB+"DK/3rdParty/emsdk-main")
-	const EMSDK_GIT = "https://github.com/emscripten-core/emsdk.git"
 	CPP_DKFile_MkDir(DIGITALKNOB+"DK/3rdParty/emsdk-main")
 	CPP_DKFile_ChDir(DIGITALKNOB+"DK/3rdParty/emsdk-main")
-	CPP_DK_Execute("git clone "+EMSDK_GIT+" "+DIGITALKNOB+"DK/3rdParty/emsdk-main")
+	const EMSDK_GIT = "https://github.com/emscripten-core/emsdk.git"
+	if(!CPP_DKFile_Exists(DIGITALKNOB+"DK/3rdParty/emsdk-main/.git"))
+		CPP_DK_Execute("git clone "+EMSDK_GIT+" "+DIGITALKNOB+"DK/3rdParty/emsdk-main")
 	CPP_DK_Execute("git checkout -- .")
 	CPP_DK_Execute("git checkout main")
 	CPP_DK_Execute("git pull")
