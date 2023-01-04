@@ -33,8 +33,11 @@
 #include <osgViewer/ViewerEventHandlers>
 #include <osgGA/TrackballManipulator>
 #include <osgDB/ReadFile>
+#include <osg/PositionAttitudeTransform>
 #include "SDL.h"
 #include <iostream>
+#include <osgText/Text>
+#include <osg/Geometry>
 //WARNING_ENABLE
 
 #include "DK/DK.h"
@@ -46,6 +49,7 @@ class DKSDLOsg : public DKObjectT<DKSDLOsg>
 public:
 	bool Init();
 	bool End();
+	osg::Node* createScene();
 	//bool convertEvent(SDL_Event& event, osgGA::EventQueue& eventQueue);
 };
 

@@ -37,44 +37,45 @@ bool DKSDLOsg::Init(){
 	 // init SDL
     if(SDL_Init(SDL_INIT_VIDEO) < 0 )
         return DKERROR("Unable to init SDL \n");
-
-	// load the scene.
-	DKString file = "";
-    osg::ref_ptr<osg::Node> loadedModel = osgDB::readRefNodeFile(file);
-    if(!loadedModel)
-		return DKERROR("loadedModel invalid! \n");
-	
-	// Starting with SDL 1.2.10, passing in 0 will use the system's current resolution.
-    unsigned int windowWidth = 0;
-    unsigned int windowHeight = 0;
-	
-	// Passing in 0 for bitdepth also uses the system's current bitdepth. This works before 1.2.10 too.
-    unsigned int bitDepth = 0;
 	
 	SDL_GL_SetAttribute( SDL_GL_RED_SIZE, 5 );
     SDL_GL_SetAttribute( SDL_GL_GREEN_SIZE, 5 );
     SDL_GL_SetAttribute( SDL_GL_BLUE_SIZE, 5 );
     SDL_GL_SetAttribute( SDL_GL_DEPTH_SIZE, 16 );
     SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 );
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_EGL, 1);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_EGL, 1);
+	
+	SDL_Window* window = SDL_CreateWindow("ContextWindow", 0, 0, 800, 600, SDL_WINDOW_OPENGL );//| SDL_WINDOW_FULLSCREEN
+	// Create an OpenGL context associated with the window.
+	SDL_GLContext glcontext = SDL_GL_CreateContext(window);
+	
+	// load the scene.
+    osg::ref_ptr<osg::Node> loadedModel = createScene();//osgDB::readNodeFile(argv[1]);
+	
+	if (!loadedModel)
+		return DKERROR("loadedModel invalid! \n");
+
+	// Starting with SDL 1.2.10, passing in 0 will use the system's current resolution.
+    unsigned int windowWidth = 0;
+    unsigned int windowHeight = 0;
+
+    // Passing in 0 for bitdepth also uses the system's current bitdepth. This works before 1.2.10 too.
+    unsigned int bitDepth = 0;
 	
 	// set up the surface to render to
-    SDL_Surface* screen = SDL_SetVideoMode(windowWidth, windowHeight, bitDepth, SDL_OPENGL | SDL_FULLSCREEN | SDL_RESIZABLE);
-    if(!screen)
-		return DKERROR("screen invalid \n");
+    SDL_Surface* screen = SDL_GetWindowSurface(window);
+    if ( screen == NULL )
+		return DKERROR("screen invalid! \n");
 
-    //SDL_EnableUNICODE(1);
-	
-	// If we used 0 to set the fields, query the values so we can pass it to osgViewer
+    // If we used 0 to set the fields, query the values so we can pass it to osgViewer
     windowWidth = screen->w;
     windowHeight = screen->h;
-	
-	osgViewer::Viewer viewer;
+    
+    osgViewer::Viewer viewer;
     osg::ref_ptr<osgViewer::GraphicsWindowEmbedded> gw = viewer.setUpViewerAsEmbeddedInWindow(0,0,windowWidth,windowHeight);
-	
-	// set the draw and read buffers up for a double buffered window with rendering going to back buffer
-    viewer.getCamera()->setDrawBuffer(GL_BACK);
-    viewer.getCamera()->setReadBuffer(GL_BACK);
-
     viewer.setSceneData(loadedModel.get());
     viewer.setCameraManipulator(new osgGA::TrackballManipulator);
     viewer.addEventHandler(new osgViewer::StatsHandler);
@@ -86,6 +87,44 @@ bool DKSDLOsg::Init(){
 bool DKSDLOsg::End(){
 	DKDEBUGFUNC();
 	return true;
+}
+
+osg::Node* DKSDLOsg::createScene(){
+    // create drawable geometry object
+    osg::Geometry* pGeo = new osg::Geometry;
+ 
+    // add 3 vertices creating a triangle
+    osg::Vec3Array* pVerts = new osg::Vec3Array;
+    pVerts->push_back( osg::Vec3( -1, 0, -1 ) );
+    pVerts->push_back( osg::Vec3( 1, 0, -1 ) );
+    pVerts->push_back( osg::Vec3( 0, 0, 1 ) );
+    pGeo->setVertexArray( pVerts );
+ 
+    // create a primitive set (add index numbers)
+    osg::DrawElementsUInt* pPrimitiveSet =
+        new osg::DrawElementsUInt( osg::PrimitiveSet::TRIANGLES, 0 );
+    pPrimitiveSet->push_back( 2 );
+    pPrimitiveSet->push_back( 1 );
+    pPrimitiveSet->push_back( 0 );
+    pGeo->addPrimitiveSet( pPrimitiveSet );
+ 
+    // create color array data (each corner of our triangle will have one color component)
+    osg::Vec4Array* pColors = new osg::Vec4Array;
+    pColors->push_back( osg::Vec4( 1.0f, 0.0f, 0.0f, 1.0f ) );
+    pColors->push_back( osg::Vec4( 0.0f, 1.0f, 0.0f, 1.0f ) );
+    pColors->push_back( osg::Vec4( 0.0f, 0.0f, 1.0f, 1.0f ) );
+    pGeo->setColorArray( pColors );
+ 
+    // make sure that our geometry is using one color per vertex
+    pGeo->setColorBinding( osg::Geometry::BIND_PER_VERTEX );
+ 
+    // create geometry node that will contain all our drawables
+    osg::Geode* pGeode = new osg::Geode;
+    osg::StateSet* pStateSet = pGeode->getOrCreateStateSet();
+    pStateSet->setMode( GL_LIGHTING, osg::StateAttribute::OFF );
+    pGeode->addDrawable( pGeo );
+ 
+    return pGeode;
 }
 
 /*
