@@ -53,13 +53,6 @@ bool DKSDLOsg::Init(){
     osg::ref_ptr<osg::Node> loadedModel = createScene();//osgDB::readNodeFile(argv[1]);
 	if (!loadedModel)
 		return DKERROR("loadedModel invalid! \n");
-
-	// Starting with SDL 1.2.10, passing in 0 will use the system's current resolution.
-    //unsigned int windowWidth = 0;
-    //unsigned int windowHeight = 0;
-
-    // Passing in 0 for bitdepth also uses the system's current bitdepth. This works before 1.2.10 too.
-    unsigned int bitDepth = 0;
 	
 	// set up the surface to render to
     SDL_Surface* screen = SDL_GetWindowSurface(window);
@@ -67,11 +60,11 @@ bool DKSDLOsg::Init(){
 		return DKERROR("screen invalid! \n");
 
     // If we used 0 to set the fields, query the values so we can pass it to osgViewer
-    unsigned int windowWidth = screen->w;
-    unsigned int windowHeight = screen->h;
+    //unsigned int windowWidth = screen->w;
+    //unsigned int windowHeight = screen->h;
     
     //osgViewer::Viewer viewer;
-    gw = viewer.setUpViewerAsEmbeddedInWindow(0, 0, windowWidth, windowHeight);
+    gw = viewer.setUpViewerAsEmbeddedInWindow(0, 0, screen->w, screen->h);
     viewer.setSceneData(loadedModel.get());
     viewer.setCameraManipulator(new osgGA::TrackballManipulator);
     viewer.addEventHandler(new osgViewer::StatsHandler);
