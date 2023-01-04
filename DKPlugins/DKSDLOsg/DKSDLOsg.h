@@ -29,7 +29,12 @@
 #define DKSDLOsg_H
 
 //WARNING_DISABLE
-//#include <???.h>
+#include <osgViewer/Viewer>
+#include <osgViewer/ViewerEventHandlers>
+#include <osgGA/TrackballManipulator>
+#include <osgDB/ReadFile>
+#include "SDL.h"
+#include <iostream>
 //WARNING_ENABLE
 
 #include "DK/DK.h"
@@ -41,6 +46,7 @@ class DKSDLOsg : public DKObjectT<DKSDLOsg>
 public:
 	bool Init();
 	bool End();
+	bool convertEvent(SDL_Event& event, osgGA::EventQueue& eventQueue);
 };
 
 
