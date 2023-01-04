@@ -2,7 +2,7 @@
 
 
 ### IMPORT ###
-dk_import(https://github.com/MotleyCoderDev/wasm2brs.git)
+dk_import(https://github.com/MotleyCoderDev/wasm2brs.git BRANCH main)
 
 
 # TODO
