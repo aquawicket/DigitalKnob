@@ -31,20 +31,20 @@ bool DKSDLOsg::Init(){
 	DKDEBUGFUNC();
 	
 	 // init SDL
-    if(SDL_Init(SDL_INIT_VIDEO) < 0 )
+    if(SDL_Init(SDL_INIT_VIDEO) < 0)
         return DKERROR("Unable to init SDL \n");
 	
-	SDL_GL_SetAttribute( SDL_GL_RED_SIZE, 5 );
-    SDL_GL_SetAttribute( SDL_GL_GREEN_SIZE, 5 );
-    SDL_GL_SetAttribute( SDL_GL_BLUE_SIZE, 5 );
-    SDL_GL_SetAttribute( SDL_GL_DEPTH_SIZE, 16 );
-    SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 );
+	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 5);
+    SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 5);
+    SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 5);
+    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);
+    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_EGL, 1);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_EGL, 1);
 	
-	window = SDL_CreateWindow("DKSDLOsg", 0, 0, 800, 600, SDL_WINDOW_OPENGL );
+	window = SDL_CreateWindow("DKSDLOsg", 0, 0, 800, 600, SDL_WINDOW_OPENGL);
 	
 	// Create an OpenGL context associated with the window.
 	SDL_GLContext glcontext = SDL_GL_CreateContext(window);
@@ -56,14 +56,9 @@ bool DKSDLOsg::Init(){
 	
 	// set up the surface to render to
     SDL_Surface* screen = SDL_GetWindowSurface(window);
-    if ( screen == NULL )
+    if(screen == NULL)
 		return DKERROR("screen invalid! \n");
-
-    // If we used 0 to set the fields, query the values so we can pass it to osgViewer
-    //unsigned int windowWidth = screen->w;
-    //unsigned int windowHeight = screen->h;
     
-    //osgViewer::Viewer viewer;
     gw = viewer.setUpViewerAsEmbeddedInWindow(0, 0, screen->w, screen->h);
     viewer.setSceneData(loadedModel.get());
     viewer.setCameraManipulator(new osgGA::TrackballManipulator);
@@ -71,7 +66,6 @@ bool DKSDLOsg::Init(){
     viewer.realize();
 	
 	DKApp::AppendLoopFunc(&DKSDLOsg::Process, this);
-	
 	return true;
 }
 
@@ -86,34 +80,33 @@ osg::Node* DKSDLOsg::createScene(){
  
     // add 3 vertices creating a triangle
     osg::Vec3Array* pVerts = new osg::Vec3Array;
-    pVerts->push_back( osg::Vec3( -1, 0, -1 ) );
-    pVerts->push_back( osg::Vec3( 1, 0, -1 ) );
-    pVerts->push_back( osg::Vec3( 0, 0, 1 ) );
-    pGeo->setVertexArray( pVerts );
+    pVerts->push_back(osg::Vec3(-1, 0, -1));
+    pVerts->push_back(osg::Vec3(1, 0, -1));
+    pVerts->push_back(osg::Vec3(0, 0, 1));
+    pGeo->setVertexArray(pVerts);
  
     // create a primitive set (add index numbers)
-    osg::DrawElementsUInt* pPrimitiveSet =
-        new osg::DrawElementsUInt( osg::PrimitiveSet::TRIANGLES, 0 );
-    pPrimitiveSet->push_back( 2 );
-    pPrimitiveSet->push_back( 1 );
-    pPrimitiveSet->push_back( 0 );
-    pGeo->addPrimitiveSet( pPrimitiveSet );
+    osg::DrawElementsUInt* pPrimitiveSet = new osg::DrawElementsUInt(osg::PrimitiveSet::TRIANGLES, 0);
+    pPrimitiveSet->push_back(2);
+    pPrimitiveSet->push_back(1);
+    pPrimitiveSet->push_back(0);
+    pGeo->addPrimitiveSet(pPrimitiveSet);
  
     // create color array data (each corner of our triangle will have one color component)
     osg::Vec4Array* pColors = new osg::Vec4Array;
-    pColors->push_back( osg::Vec4( 1.0f, 0.0f, 0.0f, 1.0f ) );
-    pColors->push_back( osg::Vec4( 0.0f, 1.0f, 0.0f, 1.0f ) );
-    pColors->push_back( osg::Vec4( 0.0f, 0.0f, 1.0f, 1.0f ) );
-    pGeo->setColorArray( pColors );
+    pColors->push_back(osg::Vec4(1.0f, 0.0f, 0.0f, 1.0f));
+    pColors->push_back(osg::Vec4(0.0f, 1.0f, 0.0f, 1.0f));
+    pColors->push_back(osg::Vec4(0.0f, 0.0f, 1.0f, 1.0f));
+    pGeo->setColorArray(pColors);
  
     // make sure that our geometry is using one color per vertex
-    pGeo->setColorBinding( osg::Geometry::BIND_PER_VERTEX );
+    pGeo->setColorBinding(osg::Geometry::BIND_PER_VERTEX);
  
     // create geometry node that will contain all our drawables
     osg::Geode* pGeode = new osg::Geode;
     osg::StateSet* pStateSet = pGeode->getOrCreateStateSet();
-    pStateSet->setMode( GL_LIGHTING, osg::StateAttribute::OFF );
-    pGeode->addDrawable( pGeo );
+    pStateSet->setMode(GL_LIGHTING, osg::StateAttribute::OFF);
+    pGeode->addDrawable(pGeo);
  
     return pGeode;
 }
@@ -121,10 +114,8 @@ osg::Node* DKSDLOsg::createScene(){
 void DKSDLOsg::Process(){
 	SDL_Event event;
 	while(SDL_PollEvent(&event)){
-        // pass the SDL event into the viewers event queue
         convertEvent(event, *(gw->getEventQueue()));
-
-        switch(event.type) {
+        switch(event.type){
 			/* case SDL_VIDEORESIZE:
 				SDL_SetVideoMode(event.resize.w, event.resize.h, bitDepth, SDL_OPENGL | SDL_RESIZABLE);
                 gw->resized(0, 0, event.resize.w, event.resize.h );
@@ -132,10 +123,7 @@ void DKSDLOsg::Process(){
         }
     }
 	
-    // draw the new frame
-    viewer.frame();
-
-    // Swap Buffers
+    viewer.frame(); // draw the new frame
 	SDL_GL_SwapWindow(window);
 }
 
@@ -151,13 +139,13 @@ bool DKSDLOsg::convertEvent(SDL_Event& event, osgGA::EventQueue& eventQueue){
             eventQueue.mouseButtonRelease(event.button.x, event.button.y, event.button.button);
             return true;
         //case SDL_KEYUP:
-        //    eventQueue.keyRelease( (osgGA::GUIEventAdapter::KeySymbol) event.key.keysym.unicode);
+        //    eventQueue.keyRelease((osgGA::GUIEventAdapter::KeySymbol) event.key.keysym.unicode);
         //    return true;
         //case SDL_KEYDOWN:
-        //    eventQueue.keyPress( (osgGA::GUIEventAdapter::KeySymbol) event.key.keysym.unicode);
+        //    eventQueue.keyPress((osgGA::GUIEventAdapter::KeySymbol) event.key.keysym.unicode);
         //    return true;
         //case SDL_VIDEORESIZE:
-        //    eventQueue.windowResize(0, 0, event.resize.w, event.resize.h );
+        //    eventQueue.windowResize(0, 0, event.resize.w, event.resize.h);
             return true;
         default:
             break;
