@@ -20,6 +20,8 @@ RASPBERRY_dk_libDebug	(${POCO}/${OS}/${DEBUG_DIR}/lib/libPocoActiveRecordd.a)
 RASPBERRY_dk_libRelease	(${POCO}/${OS}/${RELEASE_DIR}/lib/libPocoActiveRecord.a)
 ANDROID_dk_libDebug		(${POCO}/${OS}/lib/${DEBUG_DIR}/PocoActiveRecordd.a)
 ANDROID_dk_libRelease	(${POCO}/${OS}/lib/${RELEASE_DIR}/PocoActiveRecord.a)
+EMSCRIPTEN_dk_libDebug	(${POCO}/${OS}/${DEBUG_DIR}/lib/libPocoActiveRecordd.a)
+EMSCRIPTEN_dk_libRelease(${POCO}/${OS}/${RELEASE_DIR}/lib/libPocoActiveRecord.a)
 
 # PocoData
 WIN_dk_libDebug			(${POCO}/${OS}/lib/${DEBUG_DIR}/PocoDatamtd.lib)
@@ -32,6 +34,8 @@ RASPBERRY_dk_libDebug	(${POCO}/${OS}/${DEBUG_DIR}/lib/libPocoDatad.a)
 RASPBERRY_dk_libRelease	(${POCO}/${OS}/${RELEASE_DIR}/lib/libPocoData.a)
 ANDROID_dk_libDebug		(${POCO}/${OS}/lib/${DEBUG_DIR}/PocoDatad.a)
 ANDROID_dk_libRelease	(${POCO}/${OS}/lib/${RELEASE_DIR}/PocoData.a)
+EMSCRIPTEN_dk_libDebug	(${POCO}/${OS}/${DEBUG_DIR}/lib/libPocoDatad.a)
+EMSCRIPTEN_dk_libRelease(${POCO}/${OS}/${RELEASE_DIR}/lib/libPocoData.a)
 
 # PocoDataODBC
 WIN_dk_libDebug			(${POCO}/${OS}/lib/${DEBUG_DIR}/PocoDataODBCmtd.lib)
@@ -44,6 +48,8 @@ WIN_dk_libRelease		(${POCO}/${OS}/lib/${RELEASE_DIR}/PocoDataODBCmt.lib)
 #RASPBERRY_dk_libRelease(${POCO}/${OS}/${RELEASE_DIR}/lib/libPocoDataODBC.a)
 #ANDROID_dk_libDebug	(${POCO}/${OS}/lib/${DEBUG_DIR}/PocoDataODBCd.a)
 #ANDROID_dk_libRelease	(${POCO}/${OS}/lib/${RELEASE_DIR}/PocoDataODBC.a)
+#EMSCRIPTEN_dk_libDebug	(${POCO}/${OS}/${DEBUG_DIR}/lib/libPocoDataODBCd.a)
+#EMSCRIPTEN_dk_libRelease(${POCO}/${OS}/${RELEASE_DIR}/lib/libPocoDataODBC.a)
 
 # PocoDataSQLite
 WIN_dk_libDebug			(${POCO}/${OS}/lib/${DEBUG_DIR}/PocoDataSQLitemtd.lib)
@@ -56,6 +62,8 @@ RASPBERRY_dk_libDebug	(${POCO}/${OS}/${DEBUG_DIR}/lib/libPocoDataSQLited.a)
 RASPBERRY_dk_libRelease	(${POCO}/${OS}/${RELEASE_DIR}/lib/libPocoDataSQLite.a)
 ANDROID_dk_libDebug		(${POCO}/${OS}/lib/${DEBUG_DIR}/PocoDataSQLited.a)
 ANDROID_dk_libRelease	(${POCO}/${OS}/lib/${RELEASE_DIR}/PocoDataSQLite.a)
+EMSCRIPTEN_dk_libDebug	(${POCO}/${OS}/${DEBUG_DIR}/lib/libPocoDataSQLited.a)
+EMSCRIPTEN_dk_libRelease(${POCO}/${OS}/${RELEASE_DIR}/lib/libPocoDataSQLite.a)
 
 # PocoEncodings
 WIN_dk_libDebug			(${POCO}/${OS}/lib/${DEBUG_DIR}/PocoEncodingsmtd.lib)
@@ -68,6 +76,8 @@ RASPBERRY_dk_libDebug	(${POCO}/${OS}/${DEBUG_DIR}/lib/libPocoEncodingsd.a)
 RASPBERRY_dk_libRelease	(${POCO}/${OS}/${RELEASE_DIR}/lib/libPocoEncodings.a)
 ANDROID_dk_libDebug		(${POCO}/${OS}/lib/${DEBUG_DIR}/PocoEncodingsd.a)
 ANDROID_dk_libRelease	(${POCO}/${OS}/lib/${RELEASE_DIR}/PocoEncodings.a)
+EMSCRIPTEN_dk_libDebug	(${POCO}/${OS}/${DEBUG_DIR}/lib/libPocoEncodingsd.a)
+EMSCRIPTEN_dk_libRelease(${POCO}/${OS}/${RELEASE_DIR}/lib/libPocoEncodings.a)
 
 # PocoFoundation
 WIN_dk_libDebug			(${POCO}/${OS}/lib/${DEBUG_DIR}/PocoFoundationmtd.lib)
@@ -80,6 +90,8 @@ RASPBERRY_dk_libDebug	(${POCO}/${OS}/${DEBUG_DIR}/lib/libPocoFoundationd.a)
 RASPBERRY_dk_libRelease	(${POCO}/${OS}/${RELEASE_DIR}/lib/libPocoFoundation.a)
 ANDROID_dk_libDebug		(${POCO}/${OS}/lib/${DEBUG_DIR}/PocoFoundationd.a)
 ANDROID_dk_libRelease	(${POCO}/${OS}/lib/${RELEASE_DIR}/PocoFoundation.a)
+EMSCRIPTEN_dk_libDebug	(${POCO}/${OS}/${DEBUG_DIR}/lib/libPocoFoundationd.a)
+EMSCRIPTEN_dk_libRelease(${POCO}/${OS}/${RELEASE_DIR}/lib/libPocoFoundation.a)
 
 # PocoJSON
 WIN_dk_libDebug			(${POCO}/${OS}/lib/${DEBUG_DIR}/PocoJSONmtd.lib)
@@ -92,6 +104,8 @@ RASPBERRY_dk_libDebug	(${POCO}/${OS}/${DEBUG_DIR}/lib/libPocoJSONd.a)
 RASPBERRY_dk_libRelease	(${POCO}/${OS}/${RELEASE_DIR}/lib/libPocoJSON.a)
 ANDROID_dk_libDebug		(${POCO}/${OS}/lib/${DEBUG_DIR}/PocoJSONd.a)
 ANDROID_dk_libRelease	(${POCO}/${OS}/lib/${RELEASE_DIR}/PocoJSON.a)
+EMSCRIPTEN_dk_libDebug	(${POCO}/${OS}/${DEBUG_DIR}/lib/libPocoJSONd.a)
+EMSCRIPTEN_dk_libRelease(${POCO}/${OS}/${RELEASE_DIR}/lib/libPocoJSON.a)
 
 # PocoMongoDB
 WIN_dk_libDebug			(${POCO}/${OS}/lib/${DEBUG_DIR}/PocoMongoDBmtd.lib)
@@ -104,6 +118,8 @@ RASPBERRY_dk_libDebug	(${POCO}/${OS}/${DEBUG_DIR}/lib/libPocoMongoDBd.a)
 RASPBERRY_dk_libRelease	(${POCO}/${OS}/${RELEASE_DIR}/lib/libPocoMongoDB.a)
 ANDROID_dk_libDebug		(${POCO}/${OS}/lib/${DEBUG_DIR}/PocoMongoDBd.a)
 ANDROID_dk_libRelease	(${POCO}/${OS}/lib/${RELEASE_DIR}/PocoMongoDB.a)
+EMSCRIPTEN_dk_libDebug	(${POCO}/${OS}/${DEBUG_DIR}/lib/libPocoMongoDBd.a)
+EMSCRIPTEN_dk_libRelease(${POCO}/${OS}/${RELEASE_DIR}/lib/libPocoMongoDB.a)
 
 # PocoNet
 WIN_dk_libDebug			(${POCO}/${OS}/lib/${DEBUG_DIR}/PocoNetmtd.lib)
@@ -116,6 +132,8 @@ RASPBERRY_dk_libDebug	(${POCO}/${OS}/${DEBUG_DIR}/lib/libPocoNetd.a)
 RASPBERRY_dk_libRelease	(${POCO}/${OS}/${RELEASE_DIR}/lib/libPocoNet.a)
 ANDROID_dk_libDebug		(${POCO}/${OS}/lib/${DEBUG_DIR}/PocoNetd.a)
 ANDROID_dk_libRelease	(${POCO}/${OS}/lib/${RELEASE_DIR}/PocoNet.a)
+EMSCRIPTEN_dk_libDebug	(${POCO}/${OS}/${DEBUG_DIR}/lib/libPocoNetd.a)
+EMSCRIPTEN_dk_libRelease(${POCO}/${OS}/${RELEASE_DIR}/lib/libPocoNet.a)
 
 # PocoPrometheus
 WIN_dk_libDebug			(${POCO}/${OS}/lib/${DEBUG_DIR}/PocoPrometheusmtd.lib)
@@ -128,6 +146,8 @@ RASPBERRY_dk_libDebug	(${POCO}/${OS}/${DEBUG_DIR}/lib/libPocoPrometheusd.a)
 RASPBERRY_dk_libRelease	(${POCO}/${OS}/${RELEASE_DIR}/lib/libPocoPrometheus.a)
 ANDROID_dk_libDebug		(${POCO}/${OS}/lib/${DEBUG_DIR}/PocoPrometheusd.a)
 ANDROID_dk_libRelease	(${POCO}/${OS}/lib/${RELEASE_DIR}/PocoPrometheus.a)
+EMSCRIPTEN_dk_libDebug	(${POCO}/${OS}/${DEBUG_DIR}/lib/libPocoPrometheusd.a)
+EMSCRIPTEN_dk_libRelease(${POCO}/${OS}/${RELEASE_DIR}/lib/libPocoPrometheus.a)
 
 # PocoRedis
 WIN_dk_libDebug			(${POCO}/${OS}/lib/${DEBUG_DIR}/PocoRedismtd.lib)
@@ -140,6 +160,8 @@ RASPBERRY_dk_libDebug	(${POCO}/${OS}/${DEBUG_DIR}/lib/libPocoRedisd.a)
 RASPBERRY_dk_libRelease	(${POCO}/${OS}/${RELEASE_DIR}/lib/libPocoRedis.a)
 ANDROID_dk_libDebug		(${POCO}/${OS}/lib/${DEBUG_DIR}/PocoRedisd.a)
 ANDROID_dk_libRelease	(${POCO}/${OS}/lib/${RELEASE_DIR}/PocoRedis.a)
+EMSCRIPTEN_dk_libDebug	(${POCO}/${OS}/${DEBUG_DIR}/lib/libPocoRedisd.a)
+EMSCRIPTEN_dk_libRelease(${POCO}/${OS}/${RELEASE_DIR}/lib/libPocoRedis.a)
 
 # PocoUtil
 WIN_dk_libDebug			(${POCO}/${OS}/lib/${DEBUG_DIR}/PocoUtilmtd.lib)
@@ -152,6 +174,8 @@ RASPBERRY_dk_libDebug	(${POCO}/${OS}/${DEBUG_DIR}/lib/libPocoUtild.a)
 RASPBERRY_dk_libRelease	(${POCO}/${OS}/${RELEASE_DIR}/lib/libPocoUtil.a)
 ANDROID_dk_libDebug		(${POCO}/${OS}/lib/${DEBUG_DIR}/PocoUtild.a)
 ANDROID_dk_libRelease	(${POCO}/${OS}/lib/${RELEASE_DIR}/PocoUtil.a)
+EMSCRIPTEN_dk_libDebug	(${POCO}/${OS}/${DEBUG_DIR}/lib/libPocoUtild.a)
+EMSCRIPTEN_dk_libRelease(${POCO}/${OS}/${RELEASE_DIR}/lib/libPocoUtil.a)
 
 # PocoXML
 WIN_dk_libDebug			(${POCO}/${OS}/lib/${DEBUG_DIR}/PocoXMLmtd.lib)
@@ -164,6 +188,8 @@ RASPBERRY_dk_libDebug	(${POCO}/${OS}/${DEBUG_DIR}/lib/libPocoXMLd.a)
 RASPBERRY_dk_libRelease	(${POCO}/${OS}/${RELEASE_DIR}/lib/libPocoXML.a)
 ANDROID_dk_libDebug		(${POCO}/${OS}/lib/${DEBUG_DIR}/PocoXMLd.a)
 ANDROID_dk_libRelease	(${POCO}/${OS}/lib/${RELEASE_DIR}/PocoXML.a)
+EMSCRIPTEN_dk_libDebug	(${POCO}/${OS}/${DEBUG_DIR}/lib/libPocoXMLd.a)
+EMSCRIPTEN_dk_libRelease(${POCO}/${OS}/${RELEASE_DIR}/lib/libPocoXML.a)
 
 # PocoZip
 WIN_dk_libDebug			(${POCO}/${OS}/lib/${DEBUG_DIR}/PocoZipmtd.lib)
@@ -176,6 +202,8 @@ RASPBERRY_dk_libDebug	(${POCO}/${OS}/${DEBUG_DIR}/lib/libPocoZipd.a)
 RASPBERRY_dk_libRelease	(${POCO}/${OS}/${RELEASE_DIR}/lib/libPocoZip.a)
 ANDROID_dk_libDebug		(${POCO}/${OS}/lib/${DEBUG_DIR}/PocoZipd.a)
 ANDROID_dk_libRelease	(${POCO}/${OS}/lib/${RELEASE_DIR}/PocoZip.a)
+EMSCRIPTEN_dk_libDebug	(${POCO}/${OS}/${DEBUG_DIR}/lib/libPocoZipd.a)
+EMSCRIPTEN_dk_libRelease(${POCO}/${OS}/${RELEASE_DIR}/lib/libPocoZip.a)
 
 
 ### GENERATE ###
