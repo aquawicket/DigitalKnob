@@ -102,9 +102,7 @@ if(ALL_LIBS)
 	dk_enable(osgdb_bmp)
 	dk_enable(osgdb_bsp)
 	dk_enable(osgdb_bvh)
-	if(NOT EMSCRIPTEN)
-		#dk_enable(osgdb_cfg)
-	endif()
+	dk_enable(osgdb_cfg)
 	if(CURL)
 		dk_enable(osgdb_curl)
 	endif()
@@ -2522,7 +2520,7 @@ ANDROID_dk_queueCommand(${OPENSCENEGRAPH_BUILD}
 	${ZSTD_CMAKE}
 	${OPENSCENEGRAPH})
 
-string(REPLACE "-std=c++17" "" OPENSCENEGRAPH_BUILD "${DKCMAKE_BUILD}")
+string(REPLACE "-std=gnu++17" "" OPENSCENEGRAPH_BUILD "${DKCMAKE_BUILD}")
 string(REPLACE "  " " " OPENSCENEGRAPH_BUILD "${OPENSCENEGRAPH_BUILD}")
 EMSCRIPTEN_DEBUG_dk_queueCommand(${OPENSCENEGRAPH_BUILD} 
 	-DCMAKE_BUILD_TYPE=DEBUG 
