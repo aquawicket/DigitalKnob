@@ -89,7 +89,7 @@ bool DKSDLOsg::End(){
 }
 
 bool DKSDLOsg::convertEvent(SDL_Event& event, osgGA::EventQueue& eventQueue){
-	DKDEBUGFUNC(event, eventQueue);
+	//DKDEBUGFUNC(event, eventQueue);
     switch (event.type) {
         case SDL_MOUSEMOTION:
             eventQueue.mouseMotion(event.motion.x, event.motion.y);
