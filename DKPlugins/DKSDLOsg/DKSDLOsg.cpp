@@ -75,7 +75,7 @@ bool DKSDLOsg::Init(){
     windowHeight = screen->h;
     
     osgViewer::Viewer viewer;
-    osg::ref_ptr<osgViewer::GraphicsWindowEmbedded> gw = viewer.setUpViewerAsEmbeddedInWindow(0, 0, windowWidth, windowHeight);
+    gw = viewer.setUpViewerAsEmbeddedInWindow(0, 0, windowWidth, windowHeight);
     viewer.setSceneData(loadedModel.get());
     viewer.setCameraManipulator(new osgGA::TrackballManipulator);
     viewer.addEventHandler(new osgViewer::StatsHandler);

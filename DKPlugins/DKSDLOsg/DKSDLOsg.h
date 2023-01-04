@@ -52,6 +52,8 @@ public:
 	osg::Node* createScene();
 	void Process();
 	bool convertEvent(SDL_Event& event, osgGA::EventQueue& eventQueue);
+	
+	osg::ref_ptr<osgViewer::GraphicsWindowEmbedded> gw;
 };
 
 
