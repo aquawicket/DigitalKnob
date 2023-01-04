@@ -26,10 +26,6 @@
 #include "DK/stdafx.h"
 #include "DKSDLOsg/DKSDLOsg.h"
 
-//WARNING_DISABLE
-//#include "???.h"
-//WARNING_ENABLE
-
 
 bool DKSDLOsg::Init(){
 	DKDEBUGFUNC();
@@ -48,19 +44,19 @@ bool DKSDLOsg::Init(){
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_EGL, 1);
 	
-	window = SDL_CreateWindow("ContextWindow", 0, 0, 800, 600, SDL_WINDOW_OPENGL );//| SDL_WINDOW_FULLSCREEN
+	window = SDL_CreateWindow("DKSDLOsg", 0, 0, 800, 600, SDL_WINDOW_OPENGL );
+	
 	// Create an OpenGL context associated with the window.
 	SDL_GLContext glcontext = SDL_GL_CreateContext(window);
 	
 	// load the scene.
     osg::ref_ptr<osg::Node> loadedModel = createScene();//osgDB::readNodeFile(argv[1]);
-	
 	if (!loadedModel)
 		return DKERROR("loadedModel invalid! \n");
 
 	// Starting with SDL 1.2.10, passing in 0 will use the system's current resolution.
-    unsigned int windowWidth = 0;
-    unsigned int windowHeight = 0;
+    //unsigned int windowWidth = 0;
+    //unsigned int windowHeight = 0;
 
     // Passing in 0 for bitdepth also uses the system's current bitdepth. This works before 1.2.10 too.
     unsigned int bitDepth = 0;
@@ -71,8 +67,8 @@ bool DKSDLOsg::Init(){
 		return DKERROR("screen invalid! \n");
 
     // If we used 0 to set the fields, query the values so we can pass it to osgViewer
-    windowWidth = screen->w;
-    windowHeight = screen->h;
+    unsigned int windowWidth = screen->w;
+    unsigned int windowHeight = screen->h;
     
     //osgViewer::Viewer viewer;
     gw = viewer.setUpViewerAsEmbeddedInWindow(0, 0, windowWidth, windowHeight);
