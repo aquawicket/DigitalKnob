@@ -50,7 +50,8 @@ public:
 	bool Init();
 	bool End();
 	osg::Node* createScene();
-	//bool convertEvent(SDL_Event& event, osgGA::EventQueue& eventQueue);
+	void Process();
+	bool convertEvent(SDL_Event& event, osgGA::EventQueue& eventQueue);
 };
 
 

@@ -81,6 +81,8 @@ bool DKSDLOsg::Init(){
     viewer.addEventHandler(new osgViewer::StatsHandler);
     viewer.realize();
 	
+	DKApp::AppendLoopFunc(&DKSDLOsg::Process, this);
+	
 	return true;
 }
 
@@ -127,10 +129,41 @@ osg::Node* DKSDLOsg::createScene(){
     return pGeode;
 }
 
-/*
+void DKSDLOsg::Process(){
+	SDL_Event event;
+	while(SDL_PollEvent(&event)){
+        // pass the SDL event into the viewers event queue
+        convertEvent(event, *(gw->getEventQueue()));
+
+        switch(event.type) {
+			/* case SDL_VIDEORESIZE:
+				SDL_SetVideoMode(event.resize.w, event.resize.h, bitDepth, SDL_OPENGL | SDL_RESIZABLE);
+                gw->resized(0, 0, event.resize.w, event.resize.h );
+                break;*/
+            case SDL_KEYUP:
+                if (event.key.keysym.sym==SDLK_ESCAPE) 
+					done = true;
+                /*if (event.key.keysym.sym=='f') 
+                {
+					SDL_WM_ToggleFullScreen(screen);
+                    gw->resized(0, 0, screen->w, screen->h );
+                }*/
+                break;
+            case SDL_QUIT:
+                done = true;
+        }
+    }
+	
+    // draw the new frame
+    viewer.frame();
+
+    // Swap Buffers
+	SDL_GL_SwapWindow(window);
+}
+
 bool DKSDLOsg::convertEvent(SDL_Event& event, osgGA::EventQueue& eventQueue){
 	//DKDEBUGFUNC(event, eventQueue);
-    switch (event.type) {
+    switch(event.type){
         case SDL_MOUSEMOTION:
             eventQueue.mouseMotion(event.motion.x, event.motion.y);
             return true;
@@ -154,4 +187,3 @@ bool DKSDLOsg::convertEvent(SDL_Event& event, osgGA::EventQueue& eventQueue){
     }
     return false;
 }
-*/
