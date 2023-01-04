@@ -75,7 +75,7 @@ bool DKSDLOsg::Init(){
     windowHeight = screen->h;
     
     osgViewer::Viewer viewer;
-    osg::ref_ptr<osgViewer::GraphicsWindowEmbedded> gw = viewer.setUpViewerAsEmbeddedInWindow(0,0,windowWidth,windowHeight);
+    osg::ref_ptr<osgViewer::GraphicsWindowEmbedded> gw = viewer.setUpViewerAsEmbeddedInWindow(0, 0, windowWidth, windowHeight);
     viewer.setSceneData(loadedModel.get());
     viewer.setCameraManipulator(new osgGA::TrackballManipulator);
     viewer.addEventHandler(new osgViewer::StatsHandler);
@@ -162,7 +162,6 @@ void DKSDLOsg::Process(){
 }
 
 bool DKSDLOsg::convertEvent(SDL_Event& event, osgGA::EventQueue& eventQueue){
-	//DKDEBUGFUNC(event, eventQueue);
     switch(event.type){
         case SDL_MOUSEMOTION:
             eventQueue.mouseMotion(event.motion.x, event.motion.y);
@@ -179,8 +178,8 @@ bool DKSDLOsg::convertEvent(SDL_Event& event, osgGA::EventQueue& eventQueue){
         case SDL_KEYDOWN:
             eventQueue.keyPress( (osgGA::GUIEventAdapter::KeySymbol) event.key.keysym.unicode);
             return true;
-        case SDL_VIDEORESIZE:
-            eventQueue.windowResize(0, 0, event.resize.w, event.resize.h );
+        //case SDL_VIDEORESIZE:
+        //    eventQueue.windowResize(0, 0, event.resize.w, event.resize.h );
             return true;
         default:
             break;
