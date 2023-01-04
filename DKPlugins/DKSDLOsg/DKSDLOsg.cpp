@@ -62,7 +62,7 @@ bool DKSDLOsg::Init(){
     if(!screen)
 		return DKERROR("screen invalid \n");
 
-    SDL_EnableUNICODE(1);
+    //SDL_EnableUNICODE(1);
 	
 	// If we used 0 to set the fields, query the values so we can pass it to osgViewer
     windowWidth = screen->w;
