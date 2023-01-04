@@ -88,6 +88,7 @@ bool DKSDLOsg::End(){
 	return true;
 }
 
+/*
 bool DKSDLOsg::convertEvent(SDL_Event& event, osgGA::EventQueue& eventQueue){
 	//DKDEBUGFUNC(event, eventQueue);
     switch (event.type) {
@@ -114,3 +115,4 @@ bool DKSDLOsg::convertEvent(SDL_Event& event, osgGA::EventQueue& eventQueue){
     }
     return false;
 }
+*/

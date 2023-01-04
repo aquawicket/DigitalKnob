@@ -46,7 +46,7 @@ class DKSDLOsg : public DKObjectT<DKSDLOsg>
 public:
 	bool Init();
 	bool End();
-	bool convertEvent(SDL_Event& event, osgGA::EventQueue& eventQueue);
+	//bool convertEvent(SDL_Event& event, osgGA::EventQueue& eventQueue);
 };
 
 
