@@ -161,12 +161,12 @@ bool DKSDLOsg::convertEvent(SDL_Event& event, osgGA::EventQueue& eventQueue){
         case SDL_MOUSEBUTTONUP:
             eventQueue.mouseButtonRelease(event.button.x, event.button.y, event.button.button);
             return true;
-        case SDL_KEYUP:
-            eventQueue.keyRelease( (osgGA::GUIEventAdapter::KeySymbol) event.key.keysym.unicode);
-            return true;
-        case SDL_KEYDOWN:
-            eventQueue.keyPress( (osgGA::GUIEventAdapter::KeySymbol) event.key.keysym.unicode);
-            return true;
+        //case SDL_KEYUP:
+        //    eventQueue.keyRelease( (osgGA::GUIEventAdapter::KeySymbol) event.key.keysym.unicode);
+        //    return true;
+        //case SDL_KEYDOWN:
+        //    eventQueue.keyPress( (osgGA::GUIEventAdapter::KeySymbol) event.key.keysym.unicode);
+        //    return true;
         //case SDL_VIDEORESIZE:
         //    eventQueue.windowResize(0, 0, event.resize.w, event.resize.h );
             return true;
