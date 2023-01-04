@@ -36,7 +36,7 @@ bool DKSDLOsg::Init(){
 	
 	 // init SDL
     if(SDL_Init(SDL_INIT_VIDEO) < 0 )
-        return DKERROR("Unable to init SDL:"+SDL_GetError()+"\n");
+        return DKERROR("Unable to init SDL \n");
 
 	// load the scene.
 	DKString file = "";
