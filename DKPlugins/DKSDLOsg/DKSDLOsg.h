@@ -53,6 +53,8 @@ public:
 	void Process();
 	bool convertEvent(SDL_Event& event, osgGA::EventQueue& eventQueue);
 	
+	SDL_Window* window;
+	osgViewer::Viewer viewer;
 	osg::ref_ptr<osgViewer::GraphicsWindowEmbedded> gw;
 };
 

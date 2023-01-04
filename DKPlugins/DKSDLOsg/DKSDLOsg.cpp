@@ -48,7 +48,7 @@ bool DKSDLOsg::Init(){
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_EGL, 1);
 	
-	SDL_Window* window = SDL_CreateWindow("ContextWindow", 0, 0, 800, 600, SDL_WINDOW_OPENGL );//| SDL_WINDOW_FULLSCREEN
+	window = SDL_CreateWindow("ContextWindow", 0, 0, 800, 600, SDL_WINDOW_OPENGL );//| SDL_WINDOW_FULLSCREEN
 	// Create an OpenGL context associated with the window.
 	SDL_GLContext glcontext = SDL_GL_CreateContext(window);
 	
@@ -74,7 +74,7 @@ bool DKSDLOsg::Init(){
     windowWidth = screen->w;
     windowHeight = screen->h;
     
-    osgViewer::Viewer viewer;
+    //osgViewer::Viewer viewer;
     gw = viewer.setUpViewerAsEmbeddedInWindow(0, 0, windowWidth, windowHeight);
     viewer.setSceneData(loadedModel.get());
     viewer.setCameraManipulator(new osgGA::TrackballManipulator);
@@ -140,17 +140,6 @@ void DKSDLOsg::Process(){
 				SDL_SetVideoMode(event.resize.w, event.resize.h, bitDepth, SDL_OPENGL | SDL_RESIZABLE);
                 gw->resized(0, 0, event.resize.w, event.resize.h );
                 break;*/
-            case SDL_KEYUP:
-                if (event.key.keysym.sym==SDLK_ESCAPE) 
-					done = true;
-                /*if (event.key.keysym.sym=='f') 
-                {
-					SDL_WM_ToggleFullScreen(screen);
-                    gw->resized(0, 0, screen->w, screen->h );
-                }*/
-                break;
-            case SDL_QUIT:
-                done = true;
         }
     }
 	
