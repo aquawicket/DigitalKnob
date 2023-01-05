@@ -884,6 +884,29 @@ if(IOS OR IOSSIM)
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY XCODE_STARTUP_PROJECT ${APP_NAME})
 	
+	################### Create Run.sh #################################
+	if(IOSSIM)
+		dk_info("Creating Run.sh . . .")
+		if(DEBUG)
+			set(RUN_SCRIPT_DEBUG
+				"\#!/bin/bash\n"
+				"open -a Simulator.app\n"
+				"xcrun simctl install booted ${DKPROJECT}/iossim64/Debug-iphonesimulator/${APP_NAME}.app\n"
+				"xcrun simctl launch booted com.digitalknob.${APP_NAME}"
+			)
+			file(WRITE ${DKPROJECT}/iossim64/Debug-iphonesimulator/Run.sh ${RUN_SCRIPT_DEBUG})
+		endif()
+		if(RELEASE)
+			set(RUN_SCRIPT_RELEASE
+				"\#!/bin/bash\n"
+				"open -a Simulator.app\n"
+				"xcrun simctl install booted ${DKPROJECT}/iossim64/Release-iphonesimulator/${APP_NAME}.app\n"
+				"xcrun simctl launch booted com.digitalknob.${APP_NAME}"
+			)
+			file(WRITE ${DKPROJECT}/iossim64/Release-iphonesimulator/Run.sh ${RUN_SCRIPT_RELEASE})
+		endif()
+	endif()
+	
 	####################### Do Post Build Stuff #######################
 	# "https://gist.github.com/baiwfg2/39881ba703e9c74e95366ed422641609"
 	# TEST
