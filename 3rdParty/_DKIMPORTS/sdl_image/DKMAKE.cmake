@@ -33,11 +33,9 @@ dk_depend(sdl)
 
 
 ### IMPORT ###
-#if(EMSCRIPTEN)
-#	dk_import(https://github.com/emscripten-ports/SDL2_image.git PATCH)
-#else()
-	dk_import(https://github.com/libsdl-org/SDL_image.git BRANCH main PATCH)
-#endif()
+dk_import(https://github.com/libsdl-org/SDL_image/archive/refs/tags/release-2.6.2.zip PATCH)
+#dk_import(https://github.com/libsdl-org/SDL_image.git BRANCH main PATCH) # SDL3
+
 
 
 
