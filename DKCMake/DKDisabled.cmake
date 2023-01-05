@@ -557,6 +557,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(media_player)
 	dk_disable(metal)
 	dk_disable(metalKit)
+	dk_disable(msinttypes)
 	dk_disable(mlocate)
 	dk_disable(ncurses)
 	dk_disable(openframeworks)
