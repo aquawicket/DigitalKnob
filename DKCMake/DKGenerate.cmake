@@ -1323,25 +1323,26 @@ if(EMSCRIPTEN)
 	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
 	#)
 	
-	if(DEBUG)
-		add_custom_command(
-			TARGET ${APP_NAME} 
-			POST_BUILD
-			COMMAND ${CMAKE_COMMAND} -E echo "Copying ${APP_NAME} Debug wasm files to /assets"
-			COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/emscripten/Debug/${APP_NAME}.data" "${DKPROJECT}/assets/"
-			COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/emscripten/Debug/${APP_NAME}.html" "${DKPROJECT}/assets/"
-			COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/emscripten/Debug/${APP_NAME}.js" "${DKPROJECT}/assets/"
-			COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/emscripten/Debug/${APP_NAME}.wasm" "${DKPROJECT}/assets/")
-	else()
-		add_custom_command(
-			TARGET ${APP_NAME} 
-			POST_BUILD
-			COMMAND ${CMAKE_COMMAND} -E echo "Copying ${APP_NAME} Release wasm files to /assets"
-			COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/emscripten/Release/${APP_NAME}.data" "${DKPROJECT}/assets/"
-			COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/emscripten/Release/${APP_NAME}.html" "${DKPROJECT}/assets/"
-			COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/emscripten/Release/${APP_NAME}.js" "${DKPROJECT}/assets/"
-			COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/emscripten/Release/${APP_NAME}.wasm" "${DKPROJECT}/assets/")
-	endif()
+	###################### Copy WASM files to /assets #################
+	#if(DEBUG)
+	#	add_custom_command(
+	#		TARGET ${APP_NAME} 
+	#		POST_BUILD
+	#		COMMAND ${CMAKE_COMMAND} -E echo "Copying ${APP_NAME} Debug wasm files to /assets"
+	#		COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/emscripten/Debug/${APP_NAME}.data" "${DKPROJECT}/assets/"
+	#		COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/emscripten/Debug/${APP_NAME}.html" "${DKPROJECT}/assets/"
+	#		COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/emscripten/Debug/${APP_NAME}.js" "${DKPROJECT}/assets/"
+	#		COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/emscripten/Debug/${APP_NAME}.wasm" "${DKPROJECT}/assets/")
+	#else()
+	#	add_custom_command(
+	#		TARGET ${APP_NAME} 
+	#		POST_BUILD
+	#		COMMAND ${CMAKE_COMMAND} -E echo "Copying ${APP_NAME} Release wasm files to /assets"
+	#		COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/emscripten/Release/${APP_NAME}.data" "${DKPROJECT}/assets/"
+	#		COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/emscripten/Release/${APP_NAME}.html" "${DKPROJECT}/assets/"
+	#		COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/emscripten/Release/${APP_NAME}.js" "${DKPROJECT}/assets/"
+	#		COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/emscripten/Release/${APP_NAME}.wasm" "${DKPROJECT}/assets/")
+	#endif()
 endif()
 
 
