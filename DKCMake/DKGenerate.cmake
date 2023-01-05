@@ -895,6 +895,7 @@ if(IOS OR IOSSIM)
 				"xcrun simctl launch booted com.digitalknob.${APP_NAME}"
 			)
 			file(WRITE ${DKPROJECT}/iossim64/Debug-iphonesimulator/Run.sh ${RUN_SCRIPT_DEBUG})
+			dk_executeProcess(chmod 777 ${DKPROJECT}/iossim64/Debug-iphonesimulator/Run.sh)
 		endif()
 		if(RELEASE)
 			set(RUN_SCRIPT_RELEASE
@@ -904,6 +905,7 @@ if(IOS OR IOSSIM)
 				"xcrun simctl launch booted com.digitalknob.${APP_NAME}"
 			)
 			file(WRITE ${DKPROJECT}/iossim64/Release-iphonesimulator/Run.sh ${RUN_SCRIPT_RELEASE})
+			dk_executeProcess(chmod 777 ${DKPROJECT}/iossim64/Release-iphonesimulator/Run.sh)
 		endif()
 	endif()
 	
