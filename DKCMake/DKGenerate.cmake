@@ -1278,6 +1278,40 @@ if(EMSCRIPTEN)
 	########################## PACKAGE ASSETS ##########################
 	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS "-s DEMANGLE_SUPPORT=1 --preload-file ${DKPROJECT}/assets@/ --bind")
 	
+	################### Create Run.sh #################################
+	dk_info("Creating Run scripts . . .")
+	if(DEBUG)
+		if(WIN_HOST)
+			set(RUN_SCRIPT_DEBUG
+				"${3RDPARTY}/emsdk-main/upstream/emscriten/emrun ${DKPROJECT}/emscripten/Debug/${APP_NAME}.html"
+			)
+			file(WRITE ${DKPROJECT}/emscripten/Debug/Run.bat ${RUN_SCRIPT_DEBUG})
+		else()
+			set(RUN_SCRIPT_DEBUG
+				"\#!/bin/bash\n"
+				"${3RDPARTY}/emsdk-main/upstream/emscriten/emrun ${DKPROJECT}/emscripten/Debug/${APP_NAME}.html"
+			)
+			file(WRITE ${DKPROJECT}/emscripten/Debug/Run.sh ${RUN_SCRIPT_DEBUG})
+			dk_executeProcess(chmod 777 ${DKPROJECT}/emscripten/Debug/Run.sh)
+		endif()
+	endif()
+	if(RELEASE)
+		if(WIN_HOST)
+			set(RUN_SCRIPT_RELEASE
+				"${3RDPARTY}/emsdk-main/upstream/emscriten/emrun ${DKPROJECT}/emscripten/Release/${APP_NAME}.html"
+			)
+			file(WRITE ${DKPROJECT}/emscripten/Release/Run.bat ${RUN_SCRIPT_RELEASE})
+		else()
+			set(RUN_SCRIPT_RELEASE
+				"\#!/bin/bash\n"
+				"${3RDPARTY}/emsdk-main/upstream/emscriten/emrun ${DKPROJECT}/emscripten/Release/${APP_NAME}.html"
+			)
+			file(WRITE ${DKPROJECT}/emscripten/Release/Run.sh ${RUN_SCRIPT_RELEASE})
+			dk_executeProcess(chmod 777 ${DKPROJECT}/emscripten/Release/Run.sh)
+		endif()
+	endif()
+
+	
 	####################### Do Post Build Stuff #######################
 	# "https://gist.github.com/baiwfg2/39881ba703e9c74e95366ed422641609"
 	# TEST
