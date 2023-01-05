@@ -169,8 +169,8 @@ if(ALL_LIBS)
 	#dk_enable(osgdb_pdf)
 	dk_enable(osgdb_pic)
 	dk_enable(osgdb_ply)
-	if(LIBPNG AND NOT APPLE)
-		dk_enable(osgdb_png)	#FIXME: Not buildig on MAC
+	if(LIBPNG AND NOT APPLE AND NOT EMSCRIPTEN)
+		dk_enable(osgdb_png)	#FIXME: Not buildig on MAC or EMSCRIPTEN
 	endif()
 	dk_enable(osgdb_pnm)
 	dk_enable(osgdb_pov)
