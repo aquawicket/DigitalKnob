@@ -123,7 +123,7 @@ Emscripten <br>
 [zlib](https://github.com/madler/zlib) <br>
 
 <br>
-# How to build
+### How to build
 
 ## Windows Host
 Download and run build.bat 
@@ -131,7 +131,7 @@ Download and run build.bat
 ## Unix Host:  
 Download build.sh <br>
 From terminal run 'chmod 777 /path/to/build.sh' <br>
-Run /path/to/build.sh
+Run '/path/to/build.sh'
 
 
 <br><br><br>
