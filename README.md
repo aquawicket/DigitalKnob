@@ -124,10 +124,10 @@ Emscripten <br>
 
 
 ### How to build <br>
-#### Windows Host <br>
+#### Windows Host
 Download and run build.bat 
 
-#### Unix Host <br>
+#### Unix Host
 Download build.sh <br>
 From terminal run 'chmod 777 /path/to/build.sh' <br>
 Run '/path/to/build.sh'
