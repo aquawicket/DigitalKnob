@@ -125,10 +125,10 @@ Emscripten <br>
 
 # How to build
 ### Windows Host
-Download and run build.bat 
+Download and run [build.bat](https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/build.cmd) 
 
 ### Unix Host
-Download build.sh <br>
+Download [build.sh](https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/build.sh)
 From terminal run 'chmod 777 /path/to/build.sh' <br>
 Run '/path/to/build.sh'
 
