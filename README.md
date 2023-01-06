@@ -3,10 +3,10 @@
 
 <!-- [![Gitter](https://badges.gitter.im/DigitalKnob/community.svg)](https://gitter.im/DigitalKnob/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) -->
 
-### Digitalknob is a Cross-Platform Solution that embraces C++, JavaScript, Html, and CSS. <br>
+### Digitalknob is a Cross-Platform Solution that embraces C++, JavaScript, Html, and CSS.
 *"Apps should look and act the same on every operating system and browser."* <br><br>
 
-### Supported Platforms <br>
+### Supported Platforms
 Windows 32 <br>
 Windows 64 <br>
 Mac 64 <br>
@@ -24,14 +24,14 @@ Opera <br>
 Internet Explorer (9.0+) <br>
 Emscripten <br>
 
-### Supported Frameworks <br>
+### Supported Frameworks
 [SDL](https://github.com/spurious/SDL-mirror) <br>
 <!-- [SFML](https://github.com/SFML/SFML) -->
 [OpenSceneGraph](https://github.com/openscenegraph/osg) <br>
 <!-- [OpenFrameworks](https://github.com/openframeworks/openFrameworks) -->
 [Emscripten](https://github.com/kripken/emscripten) <br>
 
-### Supported Tools, Libraries and Frameworks <br>
+### Supported Tools, Libraries and Frameworks
 [agl](https://developer.apple.com/documentation/agl/agl?language=objc) <br>
 [android-ndk](https://github.com/android/ndk) <br>
 [ant](https://github.com/apache/ant) <br>
@@ -123,7 +123,7 @@ Emscripten <br>
 [zlib](https://github.com/madler/zlib) <br>
 
 
-## How to build <br>
+# How to build
 ### Windows Host
 Download and run build.bat 
 
