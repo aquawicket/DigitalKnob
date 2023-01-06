@@ -138,11 +138,8 @@ Run '/path/to/build.sh'
 [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
 [.](http://aquawicket.github.io/DigitalKnob/DKPlugins/index.html)
 
-<br>
-
 
 # License
-
 DigitalKnob is published under the MIT license. 
 This repository references the use of third-party source code and assets with their own licenses. Upon any use of DigitalKnob and/or any part of its code base, you hereby fully agree to, and acknowledge all licensees of said third-party source code.
 
