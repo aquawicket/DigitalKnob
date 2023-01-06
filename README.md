@@ -128,7 +128,7 @@ Emscripten <br>
 Download and run [build.bat](https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/build.cmd) 
 
 ### Unix Host
-Download [build.sh](https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/build.sh)
+Download [build.sh](https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/build.sh) <br>
 From terminal run 'chmod 777 /path/to/build.sh' <br>
 Run '/path/to/build.sh'
 
