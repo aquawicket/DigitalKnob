@@ -124,10 +124,10 @@ Emscripten <br>
 
 
 ### How to build <br>
-## Windows Host <br>
+#### Windows Host <br>
 Download and run build.bat 
 
-## Unix Host <br>
+#### Unix Host <br>
 Download build.sh <br>
 From terminal run 'chmod 777 /path/to/build.sh' <br>
 Run '/path/to/build.sh'
@@ -139,10 +139,7 @@ Run '/path/to/build.sh'
 [.](http://aquawicket.github.io/DigitalKnob/DKPlugins/index.html)
 
 <br>
-<br>
-<br>
-<br>
-<br>
+
 
 # License
 
