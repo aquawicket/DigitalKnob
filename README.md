@@ -122,6 +122,16 @@ Emscripten <br>
 [xz](https://github.com/nobled/xz) <br>
 [zlib](https://github.com/madler/zlib) <br>
 
+<br>
+# How to build
+
+## Windows Host
+Download and run build.bat 
+
+## Unix Host:  
+Download build.sh
+From terminal run 'chmod 777 /path/to/build.sh'
+Run /path/to/build.sh 
 
 
 <br><br><br>
