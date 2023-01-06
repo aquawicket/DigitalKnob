@@ -122,9 +122,8 @@ Emscripten <br>
 [xz](https://github.com/nobled/xz) <br>
 [zlib](https://github.com/madler/zlib) <br>
 
-<br>
-### How to build <br>
 
+### How to build <br>
 ## Windows Host <br>
 Download and run build.bat 
 
