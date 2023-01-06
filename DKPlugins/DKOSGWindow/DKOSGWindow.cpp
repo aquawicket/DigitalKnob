@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -198,7 +198,7 @@ bool DKOSGWindow::CreateView(){
 	//Set the window title
 	DKString title = mTitle;
 
-#if defined(WIN32) && !defined(WIN64)
+#if WIN32 && !WIN64
 		title += " - WIN32";
 #endif
 #if WIN64

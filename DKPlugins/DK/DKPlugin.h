@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -36,7 +36,7 @@
 #include <vector>
 //WARNING_ENABLE
 
-#ifdef WIN32
+#if WIN
 //#ifdef BUILD_DLL
     #define DLLAPI __declspec(dllexport)
 //#else
@@ -63,7 +63,7 @@ public:
 	static bool LoadPlugin(const std::string& file);
 	static void ClosePlugins();
 
-#ifdef WIN32
+#if WIN
 	static std::vector<HINSTANCE> modules;
 #endif
 	static std::vector<DKObject*> dkobjs;

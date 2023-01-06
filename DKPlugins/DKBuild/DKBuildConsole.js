@@ -143,6 +143,7 @@ function DKBuildConsole_SelectOs() {
 		//}
 		OSes.push("android32")
 		OSes.push("android64")
+		OSes.push("emscripten")
 	}
 	if(CPP_DK_GetOS() === "Mac"){
 		var arch = CPP_DK_Execute("uname -m")
@@ -155,6 +156,7 @@ function DKBuildConsole_SelectOs() {
 		OSes.push("iossim64")
 		OSes.push("android32")
 		OSes.push("android64")
+		OSes.push("emscripten")
 	}
 	if(CPP_DK_GetOS() === "Linux"){
 		var arch = CPP_DK_Execute("uname -m")
@@ -170,6 +172,7 @@ function DKBuildConsole_SelectOs() {
 		}
 		OSes.push("android32")
 		OSes.push("android64")
+		OSes.push("emscripten")
 	}
 	if(CPP_DK_GetOS() === "Raspberry"){
 		var arch = CPP_DK_Execute("uname -m")
@@ -182,6 +185,7 @@ function DKBuildConsole_SelectOs() {
 		//}
 		OSes.push("android32")
 		OSes.push("android64")
+		//OSes.push("emscripten")
 	}
 		
 	console.log("\n")

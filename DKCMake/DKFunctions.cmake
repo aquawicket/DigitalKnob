@@ -2,7 +2,7 @@
 #
 # For the latest information, see https://github.com/aquawicket/DigitalKnob
 #
-# Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+# Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files(the "Software"), to deal
@@ -543,6 +543,7 @@ function(dk_createOsMacros func)
 	file(APPEND ${DKFunctions_ext} "macro(ANDROID_${func})\n   if(ANDROID)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
 	file(APPEND ${DKFunctions_ext} "macro(ANDROID32_${func})\n   if(ANDROID_32)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
 	file(APPEND ${DKFunctions_ext} "macro(ANDROID64_${func})\n   if(ANDROID_64)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(EMSCRIPTEN_${func})\n   if(EMSCRIPTEN)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
 	
 	if("${ARGN}" STREQUAL "NO_DEBUG_RELEASE_TAGS")
 		return()
@@ -571,6 +572,7 @@ function(dk_createOsMacros func)
 	file(APPEND ${DKFunctions_ext} "macro(ANDROID_DEBUG_${func})\n   if(ANDROID AND DEBUG)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
 	file(APPEND ${DKFunctions_ext} "macro(ANDROID32_DEBUG_${func})\n   if(ANDROID_32 AND DEBUG)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
 	file(APPEND ${DKFunctions_ext} "macro(ANDROID64_DEBUG_${func})\n   if(ANDROID_64 AND DEBUG)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(EMSCRIPTEN_DEBUG_${func})\n   if(EMSCRIPTEN AND DEBUG)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
 	
 	file(APPEND ${DKFunctions_ext} "macro(RELEASE_${func})\n   if(RELEASE)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
 	file(APPEND ${DKFunctions_ext} "macro(WIN_RELEASE_${func})\n   if(WIN AND RELEASE)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
@@ -596,6 +598,7 @@ function(dk_createOsMacros func)
 	file(APPEND ${DKFunctions_ext} "macro(ANDROID_RELEASE_${func})\n   if(ANDROID AND RELEASE)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
 	file(APPEND ${DKFunctions_ext} "macro(ANDROID32_RELEASE_${func})\n   if(ANDROID_32 AND RELEASE)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
 	file(APPEND ${DKFunctions_ext} "macro(ANDROID64_RELEASE_${func})\n   if(ANDROID_64 AND RELEASE)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(EMSCRIPTEN_RELEASE_${func})\n   if(EMSCRIPTEN AND RELEASE)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
 endfunction()
 set(dk_disabled_list ""	CACHE INTERNAL "")
 set(DKFunctions_ext ${DKCMAKE}/DKFunctions_ext.cmake)
@@ -1215,7 +1218,7 @@ function(dk_rename from to) # FLAGS: OVERWRITE, NOERROR
 	endif()
 	file(RENAME ${from} ${to})
 endfunction()
-
+dk_createOsMacros("dk_rename")
 
 ###############################################################################
 # dk_upxCompress(path)
@@ -1958,7 +1961,7 @@ function(dk_msys)
 		string(REPLACE ";" " " str "${ARGV}")
 		set(bash "#!/bin/bash")
 		list(APPEND bash "cd ${CURRENT_DIR}")
-		if(WIN_32 OR ANDROID_32)
+		if(WIN_32 OR ANDROID_32) # OR EMSCRIPTEN)
 			list(APPEND bash "export PATH=${MINGW32}/bin:$PATH")
 		elseif(WIN_64 OR ANDROID_64)
 			list(APPEND bash "export PATH=${MINGW64}/bin:$PATH")
@@ -2333,7 +2336,16 @@ dk_createOsMacros("dk_ndk" "NO_DEBUG_RELEASE_TAGS")
 #
 function(dk_make folder) #lib
 	DKDEBUGFUNC(${ARGV})
-	#if(LINUX OR RASPBERRY)
+	if(EMSCRIPTEN)
+		dk_set(EMMAKE ${3RDPARTY}/emsdk-main/upstream/emscripten/emmake)
+		set(lib ${ARGV1})
+		dk_set(CURRENT_DIR ${3RDPARTY}/${folder}/${BUILD_DIR})
+		if(${ARGC} GREATER 1)
+			dk_queueCommand(${EMMAKE} make ${lib})
+		else()
+			dk_queueCommand(${EMMAKE} make)
+		endif()
+	else()
 		set(lib ${ARGV1})
 		dk_set(CURRENT_DIR ${3RDPARTY}/${folder}/${BUILD_DIR})
 		if(${ARGC} GREATER 1)
@@ -2341,7 +2353,7 @@ function(dk_make folder) #lib
 		else()
 			dk_queueCommand(make)
 		endif()
-	#endif()
+	endif()
 endfunction()
 
 
@@ -2356,12 +2368,13 @@ endfunction()
 function(dk_build folder)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT WIN_HOST AND ANDROID)
-		#dk_queueCommand(make)
 		dk_make(${ARGV})
 	else()
-		dk_visualStudio(${ARGV})
-		dk_xcode(${ARGV})
-		if(LINUX OR RASPBERRY)
+		if(NOT EMSCRIPTEN)
+			dk_visualStudio(${ARGV})
+			dk_xcode(${ARGV})
+		endif()
+		if(LINUX OR RASPBERRY OR EMSCRIPTEN)
 			dk_make(${ARGV})
 		endif()
 	endif()
@@ -2428,7 +2441,7 @@ function(dk_libDebug lib_path)
 		return() # The library is already in the list
 	endif()
 	
-	if(LINUX OR RASPBERRY OR ANDROID)
+	if(LINUX OR RASPBERRY OR ANDROID OR EMSCRIPTEN)
 		dk_set(DEBUG_LIBS debug ${lib_path} ${DEBUG_LIBS})  # Add to beginning of list
 	else()
 		dk_set(DEBUG_LIBS ${DEBUG_LIBS} debug ${lib_path})  # Add to end of list
@@ -2469,7 +2482,7 @@ function(dk_libRelease lib_path)
 		return() # The library is already in the list
 	endif()	
 	
-	if(LINUX OR RASPBERRY OR ANDROID)
+	if(LINUX OR RASPBERRY OR ANDROID OR EMSCRIPTEN)
 		dk_set(RELEASE_LIBS optimized ${lib_path} ${RELEASE_LIBS})  # Add to beginning of list
 	else()
 		dk_set(RELEASE_LIBS ${RELEASE_LIBS} optimized ${lib_path})  # Add to end of list
@@ -2536,7 +2549,7 @@ function(dk_generateCmake plugin_name)
 	file(APPEND ${plugin_path}/CMakeLists.txt "endif()\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "add_library(${plugin_name} STATIC \${${plugin_name}_SRC})\n")
 #	file(APPEND ${plugin_path}/CMakeLists.txt "target_compile_options(${plugin_name} PRIVATE \${CMAKE_CXX_FLAGS} $<$<CONFIG:Debug>:\${CMAKE_CXX_FLAGS_DEBUG}> $<$<CONFIG:Release>:\${CMAKE_CXX_FLAGS_RELEASE}>)\n")
-	file(APPEND ${plugin_path}/CMakeLists.txt "if(WIN_HOST)\n")
+	file(APPEND ${plugin_path}/CMakeLists.txt "if(VISUAL_STUDIO_IDE)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "		set_target_properties(${plugin_name} PROPERTIES LINKER_LANGUAGE CPP)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "		set_property(DIRECTORY \${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${plugin_name})\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "endif()\n")
@@ -2577,6 +2590,8 @@ function(dk_generateCmake plugin_name)
 	RASPBERRY_dk_libRelease	(${plugin_path}/${OS}/${RELEASE_DIR}/lib${plugin_name}.a)
 	ANDROID_dk_libDebug		(${plugin_path}/${OS}/${DEBUG_DIR}/lib${plugin_name}.a)
 	ANDROID_dk_libRelease	(${plugin_path}/${OS}/${RELEASE_DIR}/lib${plugin_name}.a)
+	EMSCRIPTEN_dk_libDebug		(${plugin_path}/${OS}/${DEBUG_DIR}/lib${plugin_name}.a)
+	EMSCRIPTEN_dk_libRelease		(${plugin_path}/${OS}/${RELEASE_DIR}/lib${plugin_name}.a)
 	if(REBUILD OR REBUILDALL)
 		dk_set(QUEUE_BUILD ON)
 	endif()
@@ -2787,6 +2802,7 @@ SET(ASSETS
 	PATTERN android64 EXCLUDE
 	PATTERN raspberry32 EXCLUDE
 	PATTERN raspberry64 EXCLUDE
+	PATTERN emscripten EXCLUDE
 	PATTERN dktest EXCLUDE)
 
 
@@ -3506,6 +3522,9 @@ function(dk_printSettings)
 	endif()
 	if(RASPBERRY_64)
 		dk_buildLog("RASPBERRY_64:                  ${RASPBERRY_64}")
+	endif()
+	if(EMSCRIPTEN)
+		dk_buildLog("EMSCRIPTEN:                    ${EMSCRIPTEN}")
 	endif()
 	dk_buildLog(" ") 
 endfunction()
@@ -4560,6 +4579,31 @@ macro(dk_queueShell args)
 	endif()
 endmacro()
 dk_createOsMacros("dk_queueShell")
+
+
+###############################################################################
+# dk_resizeImage(inpath width height outpath)
+#
+#	@inpath		- Full path of the image file to resize
+#	@width		- The number of pixels in with to resize to 
+#	@height		- The number of pixels in height to resize to
+#	@outpath	- Full path of the output file to save to
+#
+function(dk_resizeImage inpath width height outpath)
+	DKDEBUGFUNC(${ARGV})
+	get_filename_component(outdir ${outpath} DIRECTORY)
+	if(NOT outdir)
+		dk_assert("outdir is invalid")
+	endif()
+	dk_makeDirectory(${outdir})
+	if(IMAGEMAGICK_CONVERT)
+		dk_executeProcess(${IMAGEMAGICK_CONVERT} ${inpath} -resize ${width}x${height} ${outpath})
+	elseif(MAC_HOST)
+		dk_executeProcess(sips -z ${width} ${height} ${inpath} --out ${outpath})
+	else()
+		dk_warn("No method to resize images on this host OS")
+	endif()
+endfunction()
 
 
 include(${DKFunctions_ext})

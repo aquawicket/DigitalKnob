@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -32,22 +32,22 @@
 //WARNING_DISABLE
 #include <stdio.h>
 #include <iostream>
-#ifdef MAC
+#if MAC
 	#import <Foundation/Foundation.h>
 #endif
-#ifdef IOS
+#if IOS
 	#import <Foundation/Foundation.h>
 #else 
 	#include <fstream>
 #endif
-#ifdef ANDROID
+#if ANDROID
 	#include <android/log.h>
 #endif
 //WARNING_ENABLE
 
 #include "DKString.h"
 
-#ifdef WIN32
+#if WIN
 	#define DKNORMAL FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE
 	#define DKWHITE FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY
 	#define DKRED FOREGROUND_RED|FOREGROUND_INTENSITY
@@ -221,9 +221,9 @@ class logy{
 #define DKVERBOSE(message) Log(__FILE__, __LINE__, __FUNCTION__, message, DK_VERBOSE);
 #define DEBUG_METHOD() logy _logy(__FUNCTION__);
 
-#ifndef ANDROID
+#if !ANDROID
 	#define DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, ...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
-#ifdef WIN32
+#if WIN32
 	#define DKDEBUGFUNC(...) DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
 #else
 	#define DKDEBUGFUNC(...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, "", ##__VA_ARGS__)	

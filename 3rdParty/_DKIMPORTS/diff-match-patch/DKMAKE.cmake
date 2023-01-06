@@ -8,21 +8,16 @@ dk_import(https://github.com/google/diff-match-patch.git)
 
 
 ### LINK ###
-#dk_include				(${DIFF-MATCH-PATCH}/include)
-#WIN_dk_libDebug		(${DIFF-MATCH-PATCH}/${OS}/${DEBUG_DIR}/diff-match-patchd.lib)
-#WIN_dk_libRelease		(${DIFF-MATCH-PATCH}/${OS}/${RELEASE_DIR}/diff-match-patch.lib)
-#APPLE_dk_libDebug		(${DIFF-MATCH-PATCH}/${OS}/${DEBUG_DIR}/libdiff-match-patchd.a)
-#APPLE_dk_libRelease	(${DIFF-MATCH-PATCH}/${OS}/${RELEASE_DIR}/libdiff-match-patch.a)
-#LINUX_dk_libDebug		(${DIFF-MATCH-PATCH}/${OS}/${DEBUG_DIR}/libdiff-match-patchd.a)
-#LINUX_dk_libRelease	(${DIFF-MATCH-PATCH}/${OS}/${RELEASE_DIR}/libdiff-match-patch.a)
-#RASPBERRY_dk_libDebug	(${DIFF-MATCH-PATCH}/${OS}/${DEBUG_DIR}/libdiff-match-patchd.a)
-#RASPBERRY_dk_libRelease(${DIFF-MATCH-PATCH}/${OS}/${RELEASE_DIR}/libdiff-match-patch.a)
-#ANDROID_dk_libDebug	(${DIFF-MATCH-PATCH}/${OS}/${DEBUG_DIR}/libdiff-match-patchd.a)
-#ANDROID_dk_libRelease	(${DIFF-MATCH-PATCH}/${OS}/${RELEASE_DIR}/libdiff-match-patch.a)
+#dk_include			(${DIFF-MATCH-PATCH}/include)
+#WIN_dk_libDebug	(${DIFF-MATCH-PATCH}/${OS}/${DEBUG_DIR}/diff-match-patchd.lib)
+#WIN_dk_libRelease	(${DIFF-MATCH-PATCH}/${OS}/${RELEASE_DIR}/diff-match-patch.lib)
+#UNIX_dk_libDebug	(${DIFF-MATCH-PATCH}/${OS}/${DEBUG_DIR}/libdiff-match-patchd.a)
+#UNIX_dk_libRelease	(${DIFF-MATCH-PATCH}/${OS}/${RELEASE_DIR}/libdiff-match-patch.a)
 
 
 ### GENERATE ###
 dk_queueCommand	(${DKCMAKE_BUILD} ${DIFF-MATCH-PATCH})
+
 
 ### COMPILE ###
 dk_build(${DIFF-MATCH-PATCH_FOLDER} diff-match-patch)

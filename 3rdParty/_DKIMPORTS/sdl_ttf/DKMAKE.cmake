@@ -10,8 +10,8 @@ dk_depend(sdl)
 
 
 ### IMPORT ###
-#dk_import(https://github.com/libsdl-org/SDL_ttf/archive/455d885c33dd26a21486bc2a2ede51aca4541679.zip PATCH)
-dk_import(https://github.com/libsdl-org/SDL_ttf.git BRANCH main PATCH)
+dk_import(https://github.com/libsdl-org/SDL_ttf/archive/refs/tags/release-2.20.1.zip PATCH)
+#dk_import(https://github.com/libsdl-org/SDL_ttf.git BRANCH main PATCH) # SDL3
 
 
 ### LINK ###
@@ -36,8 +36,10 @@ if(VISUAL_STUDIO_IDE)
 	ANDROID_dk_libDebug		(${SDL_TTF}/${OS}/lib/${DEBUG_DIR}/SDL_ttf.a)
 	ANDROID_dk_libRelease	(${SDL_TTF}/${OS}/lib/${RELEASE_DIR}/SDL_ttf.a)
 elseif(XCODE_IDE)
-	dk_libDebug				(${SDL_TTF}/${OS}/lib/${DEBUG_DIR}/SDL_ttf.a)
-	dk_libRelease			(${SDL_TTF}/${OS}/lib/${RELEASE_DIR}/SDL_ttf.a)
+	#dk_libDebug			(${SDL_TTF}/${OS}/lib/${DEBUG_DIR}/SDL_ttf.a)
+	#dk_libRelease			(${SDL_TTF}/${OS}/lib/${RELEASE_DIR}/SDL_ttf.a)
+	dk_libDebug				(${SDL_TTF}/${OS}/lib/Debug/SDL_ttf.a)
+	dk_libRelease			(${SDL_TTF}/${OS}/lib/Release/SDL_ttf.a)
 else()
 	dk_libDebug				(${SDL_TTF}/${OS}/${DEBUG_DIR}/lib/SDL_ttf.a)
 	dk_libRelease			(${SDL_TTF}/${OS}/${RELEASE_DIR}/lib/SDL_ttf.a)
@@ -45,7 +47,7 @@ endif()
 
 
 ### GENERATE ###
-dk_queueCommand	(${DKCMAKE_BUILD} ${FREETYPE_CMAKE} ${LIBWEBP_CMAKE} ${SDL_CMAKE} ${SDL_TTF}) # -DSDLTTF_SUPPORT_WEBP=OFF
+dk_queueCommand(${DKCMAKE_BUILD} ${FREETYPE_CMAKE} ${LIBWEBP_CMAKE} ${SDL_CMAKE} ${SDL_TTF}) # -DSDLTTF_SUPPORT_WEBP=OFF
 
 
 ### COMPILE ###

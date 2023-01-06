@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -66,13 +66,13 @@ bool DKUnix::Sleep(int milliseconds){
 
 bool DKUnix::GetUsername(DKString& username){
 	DKDEBUGFUNC(username);
-#ifdef MAC
+#if MAC
 	if (const char* usr_a = std::getenv("USER")){ //'USERNAME' on Windows
 		username = usr_a;
 		return true;
 	}
 #endif
-#ifdef IOS
+#if IOS
     //Get the username from the app_path in case we are in ios-simulator
     std::string::size_type pos = DKFile::app_path.find("/Library");
     username = DKFile::app_path.substr(0, pos);
@@ -82,7 +82,7 @@ bool DKUnix::GetUsername(DKString& username){
         return true;
     return false;
 #endif
-#ifdef LINUX
+#if LINUX
 	if (const char* usr_a = std::getenv("USER")){ //'USERNAME' on Windows
 		username = usr_a;
 		return true;

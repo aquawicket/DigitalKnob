@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -239,7 +239,7 @@ bool DKSFMLWindow::GetMouseX(const void* input, void* output){
 
 bool DKSFMLWindow::GetMouseY(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
-#ifdef WIN32
+#if WIN
 	POINT p;
 	if(!GetCursorPos(&p))
 		return DKERROR("GetCursorPos() failed! \n");

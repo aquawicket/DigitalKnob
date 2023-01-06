@@ -25,6 +25,8 @@ LINUX_dk_libDebug		(${LIBTORRENT}/${OS}/${DEBUG_DIR}/libtorrent-rasterbar.a)
 LINUX_dk_libRelease		(${LIBTORRENT}/${OS}/${RELEASE_DIR}/libtorrent-rasterbar.a)
 ANDROID_dk_libDebug		(${LIBTORRENT}/${OS}/${DEBUG_DIR}/obj/local/armeabi-v7a/libtorrent-rasterbar.a)
 ANDROID_dk_libRelease	(${LIBTORRENT}/${OS}/${RELEASE_DIR}/obj/local/armeabi-v7a/libtorrent-rasterbar.a)
+EMSCRIPTEN_dk_libDebug	(${LIBTORRENT}/${OS}/${DEBUG_DIR}/libtorrent-rasterbar.a)
+EMSCRIPTEN_dk_libRelease(${LIBTORRENT}/${OS}/${RELEASE_DIR}/libtorrent-rasterbar.a)
 
 
 ### GENERATE ###

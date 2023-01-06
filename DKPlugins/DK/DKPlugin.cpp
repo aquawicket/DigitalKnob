@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -28,13 +28,13 @@
 #include "DK/DKPlugin.h"
 #include "DK/DKFile.h"
 
-#ifdef WIN32
+#if WIN
 	std::vector<HINSTANCE> DKPlugins::modules;
 #endif
 std::vector<DKObject*> DKPlugins::dkobjs;
 
 bool DKPlugins::LoadPlugin(const std::string& file){
-#ifdef WIN32
+#if WIN
 	// Load the library
     HINSTANCE mod = LoadLibrary(file.c_str());
 	if(!mod)
@@ -60,7 +60,7 @@ bool DKPlugins::LoadPlugin(const std::string& file){
 
 void DKPlugins::ClosePlugins()
 {
-#ifdef WIN32
+#if WIN
 	// Program finishing, time to clean up
     for (HINSTANCE hInst : modules)
         FreeLibrary(hInst);

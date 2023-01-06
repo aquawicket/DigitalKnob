@@ -18,16 +18,18 @@ dk_define				(GLEW_STATIC)
 dk_include				(${GLEW}/include)
 WIN_dk_libDebug			(${GLEW}/${OS}/lib/${DEBUG_DIR}/libglew32d.lib)
 WIN_dk_libRelease		(${GLEW}/${OS}/lib/${RELEASE_DIR}/libglew32.lib)
-MAC_dk_libDebug			(${GLEW}/${OS}/lib/${DEBUG_DIR}/libGLEWd.a)
-MAC_dk_libRelease		(${GLEW}/${OS}/lib/${RELEASE_DIR}/libGLEW.a)
-IOSSIM_dk_libDebug		(${GLEW}/${OS}/lib/${DEBUG_DIR}/libGLEWd.a)
-IOSSIM_dk_libRelease	(${GLEW}/${OS}/lib/${RELEASE_DIR}/libGLEW.a)
+APPLE_dk_libDebug		(${GLEW}/${OS}/lib/${DEBUG_DIR}/libGLEWd.a)
+APPLE_dk_libRelease		(${GLEW}/${OS}/lib/${RELEASE_DIR}/libGLEW.a)
+#IOSSIM_dk_libDebug		(${GLEW}/${OS}/lib/${DEBUG_DIR}/libGLEWd.a)
+#IOSSIM_dk_libRelease	(${GLEW}/${OS}/lib/${RELEASE_DIR}/libGLEW.a)
 LINUX_dk_libDebug		(${GLEW}/${OS}/${DEBUG_DIR}/lib/libGLEWd.a)
 LINUX_dk_libRelease		(${GLEW}/${OS}/${RELEASE_DIR}/lib/libGLEW.a)
 RASPBERRY_dk_libDebug	(${GLEW}/${OS}/${DEBUG_DIR}/lib/libGLEWd.a)
-RASPBERRY_dk_libRelease	(${GLEW}/${OS}//${RELEASE_DIR}/lib/libGLEW.a)
+RASPBERRY_dk_libRelease	(${GLEW}/${OS}/${RELEASE_DIR}/lib/libGLEW.a)
 ANDROID_dk_libDebug		(${GLEW}/${OS}/${DEBUG_DIR}/lib/libGLEWd.a)
-ANDROID_dk_libRelease	(${GLEW}/${OS}//${RELEASE_DIR}/lib/libGLEW.a)
+ANDROID_dk_libRelease	(${GLEW}/${OS}/${RELEASE_DIR}/lib/libGLEW.a)
+EMSCRIPTEN_dk_libDebug	(${GLEW}/${OS}/${DEBUG_DIR}/lib/libGLEWd.a)
+EMSCRIPTEN_dk_libRelease(${GLEW}/${OS}/${RELEASE_DIR}/lib/libGLEW.a)
 
 
 ### 3RDPARTY LINK ###
@@ -46,7 +48,7 @@ UNIX_dk_set	(GLEW_CMAKE "-DCMAKE_C_FLAGS=-I${GLEW}/include -DGLEW_STATIC" "-DCMA
 	
 	
 ### GENERATE ###
-dk_queueCommand	(${DKCMAKE_BUILD} ${GLEW}/build/cmake)
+dk_queueCommand(${DKCMAKE_BUILD} ${GLEW}/build/cmake)
 #dk_copy(${GLEW}/${OS}/lib/${DEBUG_DIR} ${GLEW}/${OS}/CMakeFiles/Export/lib/ OVERWRITE)
 #dk_copy(${GLEW}/${OS}/lib/${RELEASE_DIR} ${GLEW}/${OS}/CMakeFiles/Export/lib/ OVERWRITE)
 #dk_copy(${GLEW}/${OS}/bin/${DEBUG_DIR} ${GLEW}/${OS}/CMakeFiles/Export/bin/ OVERWRITE)

@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -70,20 +70,20 @@ extern DKString log_trace       = "0";
 
 
 bool Clear(){
-#ifdef WIN32
+#if WIN
     system("cls");
     //clrscr(); // #include conio.h
-#elif defined (LINUX)
+#elif LINUX
     system("clear");
     //std::cout<< u8"\033[2J\033[1;1H"; //Escape Sequences Clear 
-#elif defined (APPLE)
+#elif APPLE
     system("clear");
 #endif
 	return true;
 }
 
 bool ColorMap(){
-#ifdef WIN32
+#if WIN
 	// Save Current Colors
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
@@ -138,7 +138,7 @@ bool Log(const char* file, int line, const char* func, const DKString& text, con
 	/// /// /// OUTPUT FILTERS /// /// ///
 	int i=0;
 	DKString value;
-//#ifdef WIN32
+//#if WIN
 	if(!log_hide.empty()){ //check for LOG_HIDE
 		DKStringArray hides;
 		toStringArray(hides, log_hide, ",");
@@ -150,7 +150,7 @@ bool Log(const char* file, int line, const char* func, const DKString& text, con
 //#endif
 	//check for LOG_SHOW
 	bool flag = false;
-//#ifdef WIN32
+//#if WIN
 	if(!log_show.empty()){
 		DKStringArray shows;
 		toStringArray(shows, log_show, ",");
@@ -172,7 +172,7 @@ bool Log(const char* file, int line, const char* func, const DKString& text, con
 	}
 
 	/// /// Main Console Color Decorators /// ///
-#ifdef WIN32
+#if WIN
 	int color;
 	if(lvl == DK_FATAL){ color = DKFATAL_COLOR; }
 	if(lvl == DK_ERROR){ color = DKERROR_COLOR; }
@@ -180,7 +180,7 @@ bool Log(const char* file, int line, const char* func, const DKString& text, con
     if(lvl == DK_INFO){ color = DKINFO_COLOR; }
 	if(lvl == DK_DEBUG){ color = DKDEBUG_COLOR; }
 	if(lvl == DK_VERBOSE){ color = DKVERBOSE_COLOR; }
-#elif !defined(LINUX)
+#elif !LINUX
     char color[10];
 	if(lvl == DK_FATAL){ strcpy(color, DKFATAL_COLOR; }
 	if(lvl == DK_ERROR){ strcpy(color, DKERROR_COLOR; }
@@ -189,7 +189,7 @@ bool Log(const char* file, int line, const char* func, const DKString& text, con
 	if(lvl == DK_DEBUG){ strcpy(color, DKDEBUG_COLOR; }
 	if(lvl == DK_VERBOSE){ strcpy(color, DKVERBOSE_COLOR; }
 #endif
-#ifdef WIN32
+#if WIN
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
     GetConsoleScreenBufferInfo(hConsole, &consoleInfo);
@@ -215,11 +215,11 @@ bool Log(const char* file, int line, const char* func, const DKString& text, con
 #if(log_msvc)
 	OutputDebugString(string.c_str()); //Output to Visual Studio
 #endif
-#if defined(MAC) || defined (IOS)
+#if MAC || IOS
 	if(log_xcode)
 		NSLog(@"%s", string.c_str()); //Output to XCode
 #endif
-#ifdef ANDROID
+#if ANDROID
 	// https://developer.android.com/ndk/reference/group/logging
 	if(lvl == DK_FATAL) //Android Studio 
 		__android_log_write(ANDROID_LOG_FATAL, "DKAndroid", string.c_str());
@@ -238,7 +238,7 @@ bool Log(const char* file, int line, const char* func, const DKString& text, con
 #endif
 
 	// // // Restore Default Color Decorators
-#ifdef WIN32
+#if WIN
 	SetConsoleTextAttribute(hConsole, saved_attributes);
 #endif
 

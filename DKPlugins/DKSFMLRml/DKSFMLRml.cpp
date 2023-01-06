@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -95,7 +95,7 @@ bool DKSFMLRml::Handle(sf::Event& event) {
 		case sf::Event::MouseWheelScrolled:
             dkRml->context->ProcessMouseWheel(event.mouseWheelScroll.y * -1, systemInterface->GetKeyModifiers());
             break;
-#ifdef ANDROID
+#if ANDROID
 		case sf::Event::KeyPressed:
 			//DKINFO("DKSFMLRml::SFML_KEYDOWN("+toString((int)event->key.keysym.sym)+")\n");
 			dkRml->context->ProcessKeyDown(systemInterface->TranslateKey(event->key.keysym.sym), systemInterface->GetKeyModifiers());

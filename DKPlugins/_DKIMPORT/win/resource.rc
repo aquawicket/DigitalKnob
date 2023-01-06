@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -28,8 +28,8 @@
 #include "resource.h"
 
 ASSETS_ZIP                RCDATA                  "assets.zip"
-IDI_ICON                  ICON    DISCARDABLE     "icons\\windows\\icon.ico"
-IDI_TASKBARDEMO           ICON    DISCARDABLE     "icons\\windows\\icon.ico"
+IDI_ICON                  ICON    DISCARDABLE     "assets\\icon.ico"
+IDI_TASKBARDEMO           ICON    DISCARDABLE     "assets\\icon.ico"
 //IDI_ICON4               ICON    DISCARDABLE     "assets\\icon4.ico"
 //IDI_ICON3               ICON    DISCARDABLE     "assets\\icon3.ico"
 //IDI_ICON2               ICON    DISCARDABLE     "assets\\icon2.ico"

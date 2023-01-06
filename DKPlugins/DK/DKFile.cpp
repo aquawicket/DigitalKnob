@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -297,7 +297,7 @@ bool DKFile::GetAppPath(DKString& apppath){
 	*/
 	DebugPath(apppath);
 	return true && DKDEBUGRETURN(apppath);
-#elif MAC || IOS || LINUX
+#elif MAC || IOS || LINUX || EMSCRIPTEN
 	apppath = DKFile::exe_path;
 	found = apppath.find_last_of("/");
 	apppath.erase (apppath.begin()+found+1, apppath.end());
@@ -307,6 +307,11 @@ bool DKFile::GetAppPath(DKString& apppath){
 	DebugPath(apppath);
 	return DKERROR("not implemented on this OS \n");
 #endif
+}
+
+bool DKFile::GetCurrentPath(DKString& currentPath){
+	currentPath = fs::current_path().string();
+	return true;
 }
 
 bool DKFile::GetBasename(const DKString& path, DKString& basename){
@@ -335,7 +340,7 @@ bool DKFile::GetDirectoryContents(const DKString& path, DKStringArray& strings){
 		DKFile::GetFileName(itrPath,filename);
 		strings.push_back(filename);
 	}
-//	#if defined(LINUX) || defined(MAC)
+//	#if LINUX || MAC
 	std::sort(strings.begin(), strings.end());
 //	#endif
 	//remove . && ..

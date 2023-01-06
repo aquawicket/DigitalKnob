@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -29,24 +29,24 @@
 #ifndef DKPoll_H
 #define DKPoll_H
 
-#ifdef WIN32
+#if WIN
 	#include <Winsock2.h>
 	#define poll WSAPoll
 #endif
 
-#ifdef ANDROID
+#if ANDROID
 	#include "android_poll.h"
 #endif
 
-#ifdef MAC
+#if MAC
 	#include <sys/poll.h>
 #endif
 
-#ifdef IOS
+#if IOS
 	#include <sys/poll.h>
 #endif
 
-#ifdef LINUX
+#if LINUX
 	#include <sys/poll.h>
 #endif
 

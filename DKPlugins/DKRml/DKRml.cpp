@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -265,7 +265,7 @@ bool DKRml::LoadHtml(const DKString& html){
 	//dkRmlConverter.PostProcess(document);
 	dkRmlConverter.PostProcess(elements[0]);
 	document->Show();
-#ifdef ANDROID
+#if ANDROID
 	//We have to make sure the fonts are loaded on ANDROID
 	LoadFonts(DKFile::local_assets);
 #endif
@@ -363,7 +363,7 @@ void DKRml::ProcessEvent(Rml::Event& rmlEvent){
 	DKString string = "EVENT: " + type + " (current) " + tag + "> " + id + " (target) " + target_tag + "> " + target_id + "(hover)" + hover_id + "\n";
 	DKINFO(string + "\n");
 	*/
-#ifdef ANDROID
+#if ANDROID
 	//Toggle Keyboard on text element click
 	if (type == "mousedown") {
 		if (same(currentElement->GetTagName(), "textarea") ||
@@ -582,7 +582,7 @@ DKString DKRml::eventToAddress(Rml::Event* event) {
 	}
 	std::stringstream ss;
 	const void* address = static_cast<const void*>(event);
-#ifdef WIN32
+#if WIN
 	ss << "0x" << address;
 #else 
 	ss << address;
@@ -624,7 +624,7 @@ DKString DKRml::elementToAddress(Rml::Element* element) {
 	}
 	std::stringstream ss;
 	const void* address = static_cast<const void*>(element);
-#ifdef WIN32
+#if WIN
 	ss << "0x" << address;
 #else 
 	ss << address;

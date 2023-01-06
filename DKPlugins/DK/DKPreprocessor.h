@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -60,6 +60,7 @@
 #	define DKBITS 32
 #else
 #	define DKARCH "UNKNOWN"
+#	define DKBITS "UNKNOWN"
 #endif
 
 // https://web.archive.org/web/20191012035921/http://nadeausoftware.com/articles/2012/01/c_c_tip_how_use_compiler_predefined_macros_detect_operating_system
@@ -282,7 +283,7 @@
 // BUILD_TYPE
 #if DEBUG
 #	define DKBUILD_TYPE "DEBUG"
-#elif RELEASE
+#elif NDEBUG
 #	define DKBUILD_TYPE "RELEASE"
 #else
 #	define DKBUILD_TYPE "UNKNOWN"

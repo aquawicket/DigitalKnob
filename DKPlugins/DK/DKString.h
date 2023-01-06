@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -34,7 +34,7 @@
 #define _SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING //silence <codecvt> deprecation warnings
 
 //WARNING_DISABLE
-#ifdef WIN32
+#if WIN
 #include "windows.h"
 #endif
 #include <cstdio>  
@@ -83,7 +83,7 @@ DKString toString(const DKStringArray& arry, const char* seperator);
 DKString toLower(const DKString& str);
 DKString toUpper(const DKString& str);
 DKString toString(const std::wstring& _wstring);
-#ifdef WIN32
+#if WIN
 DKString toString(const HWND hwnd);
 #endif
 
@@ -100,7 +100,7 @@ unsigned int toUInt(const DKString& str);
 unsigned long toULong(const DKString& str);
 unsigned long long int toULongLong(const DKString& str);
 std::wstring toWString(const DKString& str);
-#ifdef WIN32
+#if WIN
 HWND toHWND(const DKString& str);
 #endif
 

@@ -14,7 +14,6 @@ android {
 	ndkPath 'C:/Users/Administrator/digitalknob/DK/3rdParty/android-sdk/ndk/23.1.7779620'
     defaultConfig {
 		packagingOptions {
-			doNotStrip "*/armeabi-v7a/*.so"
 			doNotStrip '**.so'
 		}		
         if (buildAsApplication) {
@@ -27,23 +26,23 @@ android {
         externalNativeBuild {
             cmake {
 				if (project.hasProperty("armeabi-v7a")) {
-					project.logger.lifecycle('##############################  armeabi-v7a  #######################################')
+					project.logger.lifecycle('#########################  armeabi-v7a  ###############################')
 					arguments "-DANDROID_APP_PLATFORM=android-31", "-DANDROID_STL=c++_static", "-DCMAKE_ANDROID_ARCH_ABI=armeabi-v7a"
                     abiFilters 'armeabi-v7a'
                 } else if (project.hasProperty("arm64-v8a")) {
-					project.logger.lifecycle('##############################  arm64-v8a  #######################################')
+					project.logger.lifecycle('#########################  arm64-v8a  #################################')
 					arguments "-DANDROID_APP_PLATFORM=android-31", "-DANDROID_STL=c++_static", "-DCMAKE_ANDROID_ARCH_ABI=arm64-v8a"
                     abiFilters 'arm64-v8a'
                 } else if (project.hasProperty("x86")) {
-					project.logger.lifecycle('##############################  x86  #######################################')
+					project.logger.lifecycle('#########################  x86  #######################################')
 					arguments "-DANDROID_APP_PLATFORM=android-31", "-DANDROID_STL=c++_static", "-DCMAKE_ANDROID_ARCH_ABI=x86"
                     abiFilters 'x86'
                 } else if (project.hasProperty("x86_64")) {
-					project.logger.lifecycle('##############################  x64  #######################################')
+					project.logger.lifecycle('#########################  x64  #######################################')
 					arguments "-DANDROID_APP_PLATFORM=android-31", "-DANDROID_STL=c++_static", "-DCMAKE_ANDROID_ARCH_ABI=x86_64"
                     abiFilters 'x86_64'
                 } else {
-					project.logger.lifecycle('##############################  arm64-v8a  #######################################')
+					project.logger.lifecycle('######################### arm64-v8a (default) #########################')
 					arguments "-DANDROID_APP_PLATFORM=android-31", "-DANDROID_STL=c++_static", "-DCMAKE_ANDROID_ARCH_ABI=arm64-v8a"
                     abiFilters 'arm64-v8a'
                 }

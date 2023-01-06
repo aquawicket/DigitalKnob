@@ -2,7 +2,7 @@
 #
 # For the latest information, see https://github.com/aquawicket/DigitalKnob
 #
-# Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+# Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files(the "Software"), to deal
@@ -234,9 +234,8 @@ if(IOS OR IOSSIM)  # Disabled for iOS and iOS-Simulator targets
 	dk_disable(x265)
 	dk_disable(zstd)
 endif(IOS OR IOSSIM)
-if(IOS)  # Disabled for iOS targets
+if(IOS AND NOT IOSSIM)  # Disabled for iOS targets
 	dk_disable(flac)				# configure: error: C compiler cannot create executables
-	dk_disable(giflib)				# configure: error: C compiler cannot create executables
 	dk_disable(ogg)					# configure: error: C compiler cannot create executables
 	dk_disable(vorbis)				# configure: error: C compiler cannot create executables
 endif()
@@ -423,7 +422,6 @@ if(ANDROID) # Disabled for Android targets
 		dk_disable(giflib)
 	endif()
 	dk_disable(gzip)
-	dk_disable(imagemagick)			# dkscript.tmp: line 2: cd: /android32/Debug: No such file or directory
 	dk_disable(jasper)
 	dk_disable(libarchive)
 	dk_disable(libcaca)				# no CMakeLists.txt
@@ -462,9 +460,117 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(waave)
 	dk_disable(x264)
 	dk_disable(x265)
-	#dk_disable(zstd)
 endif(ANDROID)
 
 if(ANDROID_64) # Disabled for Android 64bit targets
 	dk_disable(boost)
 endif(ANDROID_64)
+
+
+if(EMSCRIPTEN) # Disabled for Emscripten targets
+	if(WIN_HOST)
+		dk_disable(aom)
+	endif()
+	dk_disable(aubio)
+	dk_disable(audio_toolbox)
+	dk_disable(av_foundation)
+	dk_disable(av_kit)
+	dk_disable(avf_audio)
+	dk_disable(boxer)				# CMake Error: CMake can not determine link language for target "Boxer"
+	dk_disable(bzip2)				# error='make' is not recognized as an internal or external command
+	dk_disable(cef_binary)
+	dk_disable(core_audio)
+	dk_disable(core_foundation)
+	dk_disable(core_graphics)
+	dk_disable(core_haptics)
+	dk_disable(core_motion)
+	dk_disable(core_services)
+	dk_disable(core_video)
+	#dk_disable(curl)
+	dk_disable(DKArchive)			# requires libarchive
+	dk_disable(DKAudio)
+	dk_disable(DKCef)
+	dk_disable(DKCefChild)
+	dk_disable(DKCurl)				# requires curl
+	dk_disable(DKCrypto)
+	dk_disable(DKDebug)				# DKDebug.cpp:158:10: fatal error: 'execinfo.h' file not found
+	dk_disable(DKJerryscript)
+	dk_disable(DKHook)
+	dk_disable(DKImageMagick)
+	dk_disable(DKMidi)
+	dk_disable(DKMySql)
+	dk_disable(DKOcr)
+	dk_disable(DKOFWindow)
+	dk_disable(DKOSGAudio)
+	dk_disable(DKOSGCef)
+	dk_disable(DKOSGLights)
+	dk_disable(DKOSGManipulator)
+	dk_disable(DKOSGModel)
+	dk_disable(DKOSGNotify)
+	dk_disable(DKOSGPhysics)
+	dk_disable(DKOSGPicker)
+	dk_disable(DKOSGRml)
+	dk_disable(DKOSGStats)
+	dk_disable(DKOSGTerrain)
+	dk_disable(DKOSGVideo)
+	dk_disable(DKOSGViewer)
+	dk_disable(DKOSGWidget)
+	dk_disable(DKOSGWindow)
+	dk_disable(DKRestart)
+	dk_disable(DKScreenRecorder)
+	dk_disable(DKSDLAudio)
+	dk_disable(DKSDLCef)
+	dk_disable(DKSDLMetalWindow)
+	dk_disable(DKSDLVideo)			# requires waave
+	dk_disable(DKSDLWav)
+	dk_disable(DKSFMLRml)
+	dk_disable(DKSFMLWindow)
+	dk_disable(DKThread)
+	dk_disable(DKTorrent)
+	dk_disable(DKTray)
+	dk_disable(DKUpdate)
+	dk_disable(DKVncClient)
+	dk_disable(DKVncServer)
+	dk_disable(DKWebSockets)
+	dk_disable(dukluv)
+	dk_disable(ffmpeg)
+	dk_disable(fontconfig)
+	dk_disable(foundation)
+	dk_disable(game_controller)
+	dk_disable(gdal)
+	dk_disable(giflib)				# dk_msys(): ERROR: not WIN_32, WIN_64, ANDROID_32 or ANDROID_64
+	dk_disable(gl_kit)
+	dk_disable(gzip)
+	dk_disable(imagemagick)
+	dk_disable(iokit)
+	dk_disable(jasper)
+	dk_disable(libarchive)			# /archive_write_set_format_7zip.c:1541:13:  error: implicit truncation from 'int' to a one-bit wide bit-filed
+	dk_disable(libexpat)
+	dk_disable(libsndfile)
+	dk_disable(libuv)
+	dk_disable(libvncserver)
+	dk_disable(libwebsockets)
+	dk_disable(libxml2)				# fatal error: 'config.h' file not found
+	dk_disable(lighttpd)
+	dk_disable(kdevelop)
+	dk_disable(m)
+	dk_disable(media_player)
+	dk_disable(metal)
+	dk_disable(metalKit)
+	dk_disable(msinttypes)
+	dk_disable(mlocate)
+	dk_disable(ncurses)
+	dk_disable(openframeworks)
+	dk_disable(openssl)
+	dk_disable(opus)
+	dk_disable(osgrmlui)
+	dk_disable(quartz_core)
+	dk_disable(rmlui-d3d11)
+	dk_disable(system_configuration)
+	dk_disable(waave)
+	dk_disable(wasm3)
+	dk_disable(x264)
+	dk_disable(x265)
+	dk_disable(xz)					# CMake Error: TEST_BIG_ENDIAN found no result!
+	dk_disable(zstd)				# error: call to undeclared function 'fileno'; ISO C99 and later do not support implicit function declarations
+endif()

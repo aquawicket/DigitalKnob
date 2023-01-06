@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -48,6 +48,9 @@ public:
 	static void Init();
 	static void Load(){};
 	static void Loop();
+#if EMSCRIPTEN
+	static EM_BOOL EM_DoFrame(double time, void* userData);
+#endif
 	static void DoFrame();
 	static void CallLoops();
 	

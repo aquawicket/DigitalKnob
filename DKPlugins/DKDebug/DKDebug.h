@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -29,7 +29,7 @@
 #define DKDebug_H
 #include "DK/DK.h"
 
-//#ifdef HAVE_DKCurl
+//#if HAVE_DKCurl
 //	#include "DKCurl/DKCurl.h"
 //#endif
 

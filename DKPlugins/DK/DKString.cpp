@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -172,7 +172,7 @@ DKString toString(void* _voidptr){
 // https://riptutorial.com/cplusplus/example/4190/conversion-to-std--wstring
 DKString toString(const std::wstring& _wstring){
 /*
-#ifdef WIN32
+#if WIN
 	int len;
     int slength = (int)_wstring.length();
     len = WideCharToMultiByte(CP_ACP, 0, _wstring.c_str(), slength, 0, 0, 0, 0); 
@@ -211,7 +211,7 @@ DKString toUpper(const DKString& input){
     return output;
 }
 
-#ifdef WIN32
+#if WIN
 DKString toString(const HWND hwnd){
 	std::stringstream ss;
 	ss << "0x" << hwnd;
@@ -271,7 +271,7 @@ unsigned long long int toULongLong(const DKString& str){
 // https://riptutorial.com/cplusplus/example/4190/conversion-to-std--wstring
 std::wstring toWString(const DKString& str){
 /*
-#ifdef WIN32
+#if WIN
 	int len;
 	int slength = (int)str.length() + 1;
 	len = MultiByteToWideChar(CP_ACP, 0, str.c_str(), slength, 0, 0);
@@ -286,7 +286,7 @@ std::wstring toWString(const DKString& str){
 //#endif
 }
 
-#ifdef WIN32
+#if WIN
 HWND toHWND(const DKString& str){
 	DKString hex = str;
 	hex.erase(0,2);

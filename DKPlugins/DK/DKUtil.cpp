@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -62,6 +62,9 @@
 #endif
 #if IOS
 	#include "DKIos.h"
+#endif
+#if EMSCRIPTEN
+	#include "DKEmscripten.h"
 #endif
 	
 
@@ -496,8 +499,10 @@ bool DKUtil::InMainThread(){
 	//DKDEBUGFUNC(); // DON'T DO THIS
 #	if WIN32
 		return mainThreadId == GetCurrentThreadId();
-#	elif MAC || IOS || ANDROID || LINUX
+#	elif MAC || IOS || ANDROID || LINUX || EMSCRIPTEN
 		return mainThreadId == (unsigned long int)pthread_self(); //TODO: move this to DKUnix::InMainThread()
+#	else 
+		return DKERROR("not implemented on this OS\n");
 #	endif
 }
 
@@ -621,7 +626,7 @@ bool DKUtil::PhysicalMemory(unsigned long long& physicalMemory){
 #	elif LINUX
 		return DKLinux::PhysicalMemory(physicalMemory) && DKDEBUGRETURN(physicalMemory);
 #	else
-	return DKERROR("not implemented on this OS\n");
+		return DKERROR("not implemented on this OS\n");
 #	endif
 }
 
@@ -828,7 +833,7 @@ bool DKUtil::SetMainThreadNow(){
 #	if WIN
 		DKUtil::mainThreadId = GetCurrentThreadId();
 		return true;
-#	elif MAC || IOS || LINUX || ANDROID
+#	elif MAC || IOS || LINUX || ANDROID || EMSCRIPTEN
 		DKUtil::mainThreadId = (unsigned long int)pthread_self();
 		return true;
 #	else
@@ -864,7 +869,7 @@ bool DKUtil::Sleep(const int& milliseconds){
 	//DKDEBUGFUNC(milliseconds);  //EXCESSIVE LOGGING
 #	if WIN32
 		return DKWindows::Sleep(milliseconds);
-#	elif defined(MAC) || defined(IOS) || defined(ANDROID) || defined(LINUX)
+#	elif MAC || IOS || ANDROID || LINUX || EMSCRIPTEN
 		return DKUnix::Sleep(milliseconds);
 #	else
 		return DKERROR("not implemented on this OS\n");

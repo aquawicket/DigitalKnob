@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -57,7 +57,7 @@ class DKFile{
 public:
 	static bool DebugPath(const DKString& path);
 	static bool NormalizePath(DKString& path);
-#ifdef WIN32
+#if WIN
 	static bool AppendSystemPath(const DKString& path);
 #endif
 	static bool ChDir(const DKString& dir);
@@ -73,6 +73,7 @@ public:
 	static bool GetAppName(DKString& appname);
 	static bool GetAppPath(DKString& exepath);
 	static bool GetBasename(const DKString& path, DKString& basename);
+	static bool GetCurrentPath(DKString& currentPath);
 	static bool GetDirectoryContents(const DKString& path, DKStringArray& strings);
 	static bool GetDrives(DKStringArray& strings);
 	static bool GetExeName(DKString& exename);

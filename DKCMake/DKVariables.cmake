@@ -2,7 +2,7 @@
 #
 # For the latest information, see https://github.com/aquawicket/DigitalKnob
 #
-# Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+# Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files(the "Software"), to deal
@@ -377,6 +377,17 @@ if(${index} GREATER -1)
 	dk_set(RELEASE_DIR Release)
 	dk_set(CMAKE_SKIP_RPATH ON)
 	string(REPLACE "/android64" "" DKPROJECT ${CMAKE_BINARY_DIR})
+endif()
+
+# EMSCRIPTEN
+string(FIND "${CMAKE_BINARY_DIR}" "/emscripten" index)
+if(${index} GREATER -1)
+	dk_info("*** Creating Emscripten Project Files ***")
+	dk_set(EMSCRIPTEN ON)
+	dk_set(OS "emscripten")
+	dk_set(DEBUG_DIR Debug)
+	dk_set(RELEASE_DIR Release)
+	string(REPLACE "/emscripten" "" DKPROJECT ${CMAKE_BINARY_DIR})
 endif()
 
 

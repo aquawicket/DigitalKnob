@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -26,7 +26,7 @@
 
 //https://stackoverflow.com/questions/63166/how-to-determine-cpu-and-memory-consumption-from-inside-a-process
 
-//#ifdef HAVE_DKCef
+//#if HAVE_DKCef
 #include "DKDuktape/DKDuktape.h"
 #include "DKCef/DKCefV8.h"
 
@@ -358,7 +358,7 @@ bool DKCefV8::GetVolume(CefArgs args, CefReturn retval){
 
 bool DKCefV8::HideConsole(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
-#ifdef WIN32
+#if WIN
 	HWND consoleWindow = GetConsoleWindow();
 	ShowWindow(consoleWindow, SW_HIDE);
 #endif 
@@ -491,7 +491,7 @@ bool DKCefV8::SetVolume(CefArgs args, CefReturn retval){
 
 bool DKCefV8::ShowConsole(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
-#ifdef WIN32
+#if WIN32
 	HWND consoleWindow = GetConsoleWindow();
 	ShowWindow(consoleWindow, SW_RESTORE);
 #endif 

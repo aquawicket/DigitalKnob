@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -89,6 +89,10 @@ DKApp::DKApp(int _argc, char** _argv){
 		const char* externalStoragePath = SDL_AndroidGetExternalStoragePath();
 		DKFile::exe_path = externalStoragePath;
 	#endif
+	#if EMSCRIPTEN
+		DKFile::GetCurrentPath(DKFile::exe_path);
+	#endif
+
 	DKFile::NormalizePath(DKFile::exe_path);
 
 	DKString appName;
@@ -148,10 +152,27 @@ void DKApp::Init(){
 	active = true;
 }
 
+#if EMSCRIPTEN
+EM_BOOL DKApp::EM_DoFrame(double time, void* userData) {
+	if (paused) {
+		DKUtil::Sleep(100);
+		return EM_TRUE; // Return true to keep the loop running.
+	}
+	DKUtil::LimitFramerate();
+	CallLoops(); //Call loop functions
+	return EM_TRUE; // Return true to keep the loop running.
+}
+#endif
+
 void DKApp::Loop(){
 	DKDEBUGFUNC();
+#if EMSCRIPTEN
+	// Receives a function to call and some user data to provide it.
+	emscripten_request_animation_frame_loop(DKApp::EM_DoFrame, 0);
+#else
 	while(active)
 		DoFrame();
+#endif
 }
 
 void DKApp::DoFrame(){

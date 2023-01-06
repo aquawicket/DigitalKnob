@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -75,7 +75,7 @@ void DKOSGRmlRender::setRenderTarget(osg::Group* grp, int w, int h, bool fullscr
 		osg::Program* prg = new osg::Program();
 
 		std::string vertexShader = ""
-#ifdef LINUX
+#if LINUX
 			"#version 100 \n"
 #endif
 			"uniform vec2 LibRmlPosition; \n"
@@ -92,12 +92,12 @@ void DKOSGRmlRender::setRenderTarget(osg::Group* grp, int w, int h, bool fullscr
 		prg->addShader(vShader);
 
 		std::string fragmentShader = ""
-#ifdef LINUX
+#if LINUX
 			"#version 100 \n"
 #endif
 			"uniform sampler2D myTexture; \n"
 			"uniform bool is_texture; \n"
-#if defined(MAC) || defined(WIN32)
+#if WIN || MAC
 			"varying vec2 texCoord; \n"
 			"varying vec4 out_color; \n"
 #else
@@ -143,7 +143,7 @@ osg::Object* DKOSGRmlRender::createGeometry(Rml::Vertex* vertices, int num_verti
 		(*texcoords)[i].set(vert->tex_coord.x, vert->tex_coord.y);
 	}
 
-#ifdef ANDROID
+#if ANDROID
     osg::DrawElementsUShort* elements = new osg::DrawElementsUShort(osg::PrimitiveSet::TRIANGLES, num_indices);
     for(int i = 0; i < num_indices; ++i){
 		elements->setElement(i, indices[i]);
@@ -448,7 +448,7 @@ void DKOSGRmlRender::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int
 			vert.tex_coord.y = 1.0f - vert.tex_coord.y; //flip
 		(*texcoords)[i].set(vert.tex_coord.x, vert.tex_coord.y);
 	}
-#if defined(ANDROID)// || defined (IOS)
+#if ANDROID// || IOS
     osg::DrawElementsUShort* elements = new osg::DrawElementsUShort(osg::PrimitiveSet::TRIANGLES, num_indices);
     for(int i = 0; i < num_indices; ++i){
 		elements->setElement(i, indices[i]);

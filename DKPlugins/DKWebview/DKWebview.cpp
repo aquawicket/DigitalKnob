@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -49,7 +49,7 @@ bool DKWebview::End(){
 
 bool DKWebview::onCreate(void* input, void* output){
 	DKDEBUGFUNC(input, output);
-#ifdef ANDROID
+#if ANDROID
 	CallJavaFunction("AttachFunction", "function DKWebview_PrintFunctions(){ DK.CallCppFunction('DKWebview_PrintFunctions'); }");
 	CallJavaFunction("AttachFunction", "function DKWebview_ReceiveValue(string){ DK.CallCppFunction('DKWebview_ReceiveValue,'+string); }");
 	CallJavaFunction("AttachFunction", "function DKWebview_SendValue(){ return DK.CallCppFunction('DKWebview_SendValue'); }");
@@ -60,7 +60,7 @@ bool DKWebview::onCreate(void* input, void* output){
 
 bool DKWebview::Test(void* input, void* output){
 	DKDEBUGFUNC(input, output);
-#ifdef ANDROID
+#if ANDROID
 	JavaData jd = *(JavaData*)input;
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
 	DKINFO("DKWebview::Test("+DKString(_data)+")\n");
@@ -74,7 +74,7 @@ bool DKWebview::Test(void* input, void* output){
 
 bool DKWebview::SendValue(void* input, void* output){
 	DKDEBUGFUNC(input, output);
-#ifdef ANDROID
+#if ANDROID
 	JavaData jd = *(JavaData*)input;
 	DKINFO("DKWebview::SendValue()\n");
 	DKString rval = "Test";
@@ -85,7 +85,7 @@ bool DKWebview::SendValue(void* input, void* output){
 
 bool DKWebview::ReceiveValue(void* input, void* output){
 	DKDEBUGFUNC(input, output);
-#ifdef ANDROID
+#if ANDROID
 	JavaData jd = *(JavaData*)input;
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
 	DKINFO("DKWebview::ReceiveValue("+DKString(_data)+")\n");

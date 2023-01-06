@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -28,10 +28,10 @@
 #define DKOSGWindow_H
 
 //WARNING_DISABLE
-	#ifdef WIN32
+	#if WIN
 		#include <osgViewer/api/Win32/GraphicsHandleWin32>
 	#endif
-	#ifdef IOS
+	#if IOS
 		#include <osgViewer/api/IOS/GraphicsWindowIOS>
 	#endif
 	#include <osgViewer/CompositeViewer>
@@ -100,7 +100,7 @@ public:
 	int width;
 	int height;
 
-#ifdef WIN32
+#if WIN
 	bool SetHwnd();
 	HWND hwnd;
 #endif

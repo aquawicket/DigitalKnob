@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -56,7 +56,7 @@ bool DKThreadV8::_DKQueue(CefArgs args, CefReturn retval){
 	DKString code = args->GetString(1);
 	
 	DKINFO("DKThreadJS::DKQueue("+name+","+code+")\n");
-//#ifdef WIN32
+//#if WIN
 //	DKQueue(name, QueueItem, code); //Call in thread
 //#else
 	DKCef::Get()->RunJavascript(0, code); //Call directly

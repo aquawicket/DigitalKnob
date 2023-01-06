@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -105,7 +105,7 @@ void DKSDLRmlOpenGL::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int
         else TexCoords[i] = vertices[i].tex_coord;
     };
 
-#if defined(ANDROID) || defined(IOS)
+#if ANDROID || IOS
 	unsigned short newIndicies[num_indices];
     for (int i = 0; i < num_indices; i++){
       newIndicies[i] = (unsigned short) indices[i];
@@ -126,7 +126,7 @@ void DKSDLRmlOpenGL::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         }
     }
-#if defined(ANDROID) || defined(IOS)
+#if ANDROID || IOS
 	glDrawElements(GL_TRIANGLES, num_indices, GL_UNSIGNED_SHORT, newIndicies);
 #else
     glDrawElements(GL_TRIANGLES, num_indices, GL_UNSIGNED_INT, indices);

@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -31,7 +31,7 @@
 #include "DKOSGWindow/DKOSGWindow.h"
 
 //WARNING_DISABLE
-#ifdef WIN32
+#if WIN
 	#include <delayimp.h>
 #endif
 //WARNING_ENABLE
@@ -55,7 +55,7 @@ bool DKOSGVideo::End(){
 }
 
 void DKOSGVideo::loaddlls(){
-#ifdef WIN32
+#if WIN
 	//delay loading the DLL to move it's locations
 	//DKClass::DKCreate("DKAssets");
 	DKFile::local_assets = "C:/digitalknob/DKApps/DKOS/assets/"; //FIXME
@@ -113,7 +113,7 @@ void DKOSGVideo::loaddlls(){
 
 /*
 void DKOSGVideo::unloaddlls(){
-#ifdef WIN32
+#if WIN
 	//if(!__FUnloadDelayLoadedDLL2("avutil-54.dll"))
 	//	DKERROR("DKOSGVideo::loaddlls(): avutil-54.dll did not unload \n");
     if(!__FUnloadDelayLoadedDLL2("avdevice-56.dll"))

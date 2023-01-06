@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -285,7 +285,7 @@ int DKFileJS::GetSetting(duk_context* ctx){
 int DKFileJS::GetShortName(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString path = duk_require_string(ctx, 0);
-#ifdef WIN32
+#if WIN
 	DKString shortname;
 	if(DKFile::GetShortName(path, shortname)){
 		duk_push_string(ctx, shortname.c_str());

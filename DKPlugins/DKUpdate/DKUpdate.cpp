@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -125,7 +125,7 @@ bool DKUpdate::CheckForUpdate(){
 	DKString localfile;
 	DKFile::GetExePath(localfile);
 	
-#ifdef ANDROID
+#if ANDROID
 	localfile = DKFile::local_assets+"ASSETS";
 #endif
 
@@ -182,7 +182,7 @@ bool DKUpdate::DoUpdate(){
 			return false;
 		DKFile::Rename(DKFile::local_assets+filename+"_dl", filename, true);
 		DKFile::Delete(DKFile::local_assets+"ASSETS"); //reload assets
-#ifdef ANDROID
+#if ANDROID
 		//FIXME - does not seem to work. correct path?
 		//CallJavaFunction("InstallPackage", DKApp::datapath+filename);
 #endif

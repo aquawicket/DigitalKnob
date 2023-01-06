@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -29,7 +29,7 @@
 
 #include "DK/DK.h"
 #include "DKSDLWindow/DKSDLWindow.h"
-#ifdef LINUX
+#if LINUX
 typedef unsigned long z_size_t;
 #endif
 

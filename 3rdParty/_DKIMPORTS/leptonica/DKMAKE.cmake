@@ -10,11 +10,7 @@
 dk_depend(zlib)
 dk_depend(tiff)
 dk_depend(libpng)
-IF(ANDROID)
-	dk_depend(jpeg)
-ELSE()
-	dk_depend(libjpeg-turbo)
-ENDIF()
+dk_depend(libjpeg-turbo)
 dk_depend(giflib)
 
 
@@ -32,8 +28,12 @@ APPLE_dk_libDebug		(${LEPTONICA}/${OS}/src/${DEBUG_DIR}/libleptonica.a)
 APPLE_dk_libRelease		(${LEPTONICA}/${OS}/src/${RELEASE_DIR}/libleptonica.a)
 LINUX_dk_libDebug		(${LEPTONICA}/${OS}/${DEBUG_DIR}/src/libleptonica.a)
 LINUX_dk_libRelease		(${LEPTONICA}/${OS}/${RELEASE_DIR}/src/libleptonica.a)
+RASPBERRY_dk_libDebug	(${LEPTONICA}/${OS}/${DEBUG_DIR}/src/libleptonica.a)
+RASPBERRY_dk_libRelease	(${LEPTONICA}/${OS}/${RELEASE_DIR}/src/libleptonica.a)
 ANDROID_dk_libDebug		(${LEPTONICA}/${OS}/src/${DEBUG_DIR}/libleptonica.a)
 ANDROID_dk_libRelease	(${LEPTONICA}/${OS}/src/${RELEASE_DIR}/libleptonica.a)
+EMSCRIPTEN_dk_libDebug	(${LEPTONICA}/${OS}/${DEBUG_DIR}/src/libleptonica.a)
+EMSCRIPTEN_dk_libRelease(${LEPTONICA}/${OS}/${RELEASE_DIR}/src/libleptonica.a)
 
 
 ### 3RDPARTY LINK ###
@@ -41,7 +41,8 @@ dk_set(LEPTONICA_CMAKE -DLeptonica_DIR=${LEPTONICA}/${OS})
 
 
 ### GENERATE ###
-dk_queueCommand	(${DKCMAKE_BUILD} "-DCMAKE_CXX_FLAGS=/I${LIBJPEG-TURBO}/${OS} /I${LIBPNG} /I${LIBPNG}/${OS} /I${TIFF}/${OS}/libtiff" -DSTATIC=ON -DCMAKE_INSTALL_PREFIX=${LEPTONICA} -DSW_BUILD=OFF ${GIFLIB_CMAKE} ${LIBJPEG-TURBO_CMAKE} ${LIBPNG_CMAKE} ${TIFF_CMAKE} ${ZLIB_CMAKE} ${LEPTONICA})
+#dk_queueCommand	(${DKCMAKE_BUILD} "-DCMAKE_CXX_FLAGS=/I${LIBJPEG-TURBO}/${OS} /I${LIBPNG} /I${LIBPNG}/${OS} /I${TIFF}/${OS}/libtiff" -DSTATIC=ON -DCMAKE_INSTALL_PREFIX=${LEPTONICA} -DSW_BUILD=OFF ${GIFLIB_CMAKE} ${LIBJPEG-TURBO_CMAKE} ${LIBPNG_CMAKE} ${TIFF_CMAKE} ${ZLIB_CMAKE} ${LEPTONICA})
+dk_queueCommand(${DKCMAKE_BUILD} -DSTATIC=ON -DCMAKE_INSTALL_PREFIX=${LEPTONICA} -DSW_BUILD=OFF ${GIFLIB_CMAKE} ${LIBJPEG-TURBO_CMAKE} ${LIBPNG_CMAKE} ${TIFF_CMAKE} ${ZLIB_CMAKE} ${LEPTONICA})
 
 
 ### COMPILE ###

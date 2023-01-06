@@ -18,6 +18,8 @@ RASPBERRY_dk_libDebug	(${JASPER}/${OS}/${DEBUG_DIR}/src/libjasper/libjasper.a)
 RASPBERRY_dk_libRelease	(${JASPER}/${OS}/${RELEASE_DIR}/src/libjasper/libjasper.a)
 ANDROID_dk_libDebug		(${JASPER}/${OS}/src/libjasper/jasperd.a)
 ANDROID_dk_libRelease	(${JASPER}/${OS}/src/libjasper/jasper.a)
+EMSCRIPTEN_dk_libDebug	(${JASPER}/${OS}/${DEBUG_DIR}/src/libjasper/libjasper.a)
+EMSCRIPTEN_dk_libRelease(${JASPER}/${OS}/${RELEASE_DIR}/src/libjasper/libjasper.a)
 
 
 ### GENERATE ###

@@ -3,7 +3,7 @@
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
-* Copyright(c) 2010 - 2022 Digitalknob Team, and contributors
+* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files(the "Software"), to deal
@@ -73,9 +73,9 @@ bool DKArchive::Extract(const DKString& file, const DKString& path){
     //flags |= ARCHIVE_EXTRACT_NO_OVERWRITE_NEWER;
     a = archive_read_new();
 	archive_read_support_format_all(a);
-#if !defined(MAC) && !defined(IOS)
-	archive_read_support_filter_all(a);
-#endif
+#	if !MAC && !IOS
+		archive_read_support_filter_all(a);
+#	endif
     ext = archive_write_disk_new();
     archive_write_disk_set_options(ext, flags);
     archive_write_disk_set_standard_lookup(ext);
@@ -107,22 +107,22 @@ bool DKArchive::Extract(const DKString& file, const DKString& path){
 			return DKERROR("r < ARCHIVE_WARN "+toString(archive_error_string(ext))+"\n");
 	}
 	archive_read_close(a);
-#if !defined(MAC) && !defined(IOS)
-    archive_read_free(a);
-#endif
+#	if !MAC && !IOS
+		archive_read_free(a);
+#	endif
     archive_write_close(ext);
-#if !defined(MAC) && !defined(IOS)
-    archive_write_free(ext);
-#endif
+#	if !MAC && !IOS
+		archive_write_free(ext);
+#	endif
     return DKINFO("Extract Complete: "+file+"\n");
 }
 
 bool DKArchive::Compress(const DKString& path, const DKString& file){
 	DKDEBUGFUNC(path, file);
 
-#	ifdef ANDROID
+#	if ANDROID
 		return DKERROR("not implemented on Android\n")
-#	endif //ANDROID
+#	endif
 
 	if(!DKFile::PathExists(path))
 		return DKERROR("path does not exist ("+path+")\n");
@@ -176,9 +176,9 @@ bool DKArchive::Compress(const DKString& path, const DKString& file){
 		archive_entry_free(entry);
 	}
 	archive_write_close(a);
-#	if !defined(MAC) && !defined(IOS)
+#	if !MAC && !IOS
 		archive_write_free(a);
-#	endif //!defined(MAC) && !defined(IOS)
+#	endif
 	return true;
 }
 
@@ -187,21 +187,21 @@ int DKArchive::copy_data(struct archive* ar, struct archive* aw){
 	la_ssize_t r;
 	const void *buff;
 	size_t size;
-//#ifndef ANDROID
-//#ifdef WIN32
-//	__int64 offset;
-//#endif 
-//#ifdef RASPBERRY
-//	long long int offset; //Fix for Raspberry Pi
-//#elif defined(LINUX)
-//	long int offset; //Lubuntu Linux64
-//#endif
-//FIXME: These were left where without notes. Mac or iPhone maybe
-//#ifdef WHICH_OS
-	//off_t offset;
-	int64_t offset;
-//#endif
-//#endif
+//#	if !ANDROID
+//#		if WIN
+//			__int64 offset;
+//#		endif 
+//#		if RASPBERRY
+//			long long int offset; //Fix for Raspberry Pi
+//#		elif LINUX
+//			long int offset; //Lubuntu Linux64
+//#		endif
+//		FIXME: These were left where without notes. Mac or iPhone maybe
+//#		ifdef WHICH_OS
+//			off_t offset;
+			int64_t offset;
+//#		endif
+//#	endif
 	for(;;){
 		r = archive_read_data_block(ar, &buff, &size, &offset);
 		if (r == ARCHIVE_EOF)

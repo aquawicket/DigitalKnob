@@ -3,10 +3,10 @@
 
 <!-- [![Gitter](https://badges.gitter.im/DigitalKnob/community.svg)](https://gitter.im/DigitalKnob/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) -->
 
-### Digitalknob is a Cross-Platform Solution that embraces C++, JavaScript, Html, and CSS. <br>
+### Digitalknob is a Cross-Platform Solution that embraces C++, JavaScript, Html, and CSS.
 *"Apps should look and act the same on every operating system and browser."* <br><br>
 
-### Supported Platforms <br>
+### Supported Platforms
 Windows 32 <br>
 Windows 64 <br>
 Mac 64 <br>
@@ -22,15 +22,16 @@ Safari <br>
 Firefox <br>
 Opera <br>
 Internet Explorer (9.0+) <br>
+Emscripten <br>
 
-### Supported Frameworks <br>
+### Supported Frameworks
 [SDL](https://github.com/spurious/SDL-mirror) <br>
 <!-- [SFML](https://github.com/SFML/SFML) -->
 [OpenSceneGraph](https://github.com/openscenegraph/osg) <br>
 <!-- [OpenFrameworks](https://github.com/openframeworks/openFrameworks) -->
-<!-- [Emscripten](https://github.com/kripken/emscripten) (TODO) -->
+[Emscripten](https://github.com/kripken/emscripten) <br>
 
-### Supported Tools, Libraries and Frameworks <br>
+### Supported Tools, Libraries and Frameworks
 [agl](https://developer.apple.com/documentation/agl/agl?language=objc) <br>
 [android-ndk](https://github.com/android/ndk) <br>
 [ant](https://github.com/apache/ant) <br>
@@ -122,26 +123,29 @@ Internet Explorer (9.0+) <br>
 [zlib](https://github.com/madler/zlib) <br>
 
 
+# How to build
+### Windows Host
+Download and run [build.bat](https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/build.cmd) 
+
+### Unix Host
+Download [build.sh](https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/build.sh) <br>
+From terminal run 'chmod 777 /path/to/build.sh' <br>
+Run '/path/to/build.sh'
+
 
 <br><br><br>
 [Forking, Branching and Pull Requests](https://github.com/Kunena/Kunena-Forum/wiki/Create-a-new-branch-with-git-and-manage-branches)<br>
 [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
 [.](http://aquawicket.github.io/DigitalKnob/DKPlugins/index.html)
 
-<br>
-<br>
-<br>
-<br>
-<br>
 
 # License
-
 DigitalKnob is published under the MIT license. 
 This repository references the use of third-party source code and assets with their own licenses. Upon any use of DigitalKnob and/or any part of its code base, you hereby fully agree to, and acknowledge all licensees of said third-party source code.
 
 MIT License
 
-Copyright (c) 2010-2022 DigitalKnob, and contributors
+Copyright (c) 2010-2023 DigitalKnob, and contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
