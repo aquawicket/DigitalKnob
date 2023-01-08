@@ -123,7 +123,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libexpat)
 	dk_disable(libtorrent)			# CMake Error: cannot find deps/try_signal/try_signal.cpp
-	dk_disable(libvncserver)		# build errors in main.c
+	#dk_disable(libvncserver)		# build errors in main.c
 	dk_disable(libwebsockets)		# error: unknown type name 'lws_mutex_t'
 	dk_disable(libxml2)				# fatal error: 'extra/stricmp.h' file not found
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
