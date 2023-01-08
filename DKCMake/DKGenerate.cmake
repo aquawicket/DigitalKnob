@@ -1125,6 +1125,7 @@ if(ANDROID)
 endif()
 
 
+# TODO: https://schellcode.github.io/webassembly-without-emscripten
 ##############
 if(EMSCRIPTEN)
 	########################## CREATE ICONS ###############################
