@@ -110,8 +110,8 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(DKThread)			# Error: 'boost/thread/xtime.hpp:24 expected identifier TIME_UTC_=1
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKUpdate)			# Error: 'boost/thread/xtime.hpp:24 expected identifier TIME_UTC_=1
-	dk_disable(DKVncClient)			# requires libvncserver
-	dk_disable(DKVncServer)			# requires libvncserver
+	#dk_disable(DKVncClient)			# requires libvncserver
+	#dk_disable(DKVncServer)			# requires libvncserver
 	dk_disable(dukluv)
 	dk_disable(ffmpeg)
 	dk_disable(flac)				# 'asm' undelcared identifier
@@ -261,8 +261,8 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKThread)			# error: need to implement boost::placeholders
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKUpdate)			# error: need to implement boost::placeholders
-	dk_disable(DKVncClient)			# requires libvncserver
-	dk_disable(DKVncServer)			# requires libvncserver
+	#dk_disable(DKVncClient)			# requires libvncserver
+	#dk_disable(DKVncServer)			# requires libvncserver
 	dk_disable(DKWebSockets)		# requires libwebsockets, uwebsockets
 	dk_disable(dukluv)
 	dk_disable(ffmpeg)
@@ -277,7 +277,7 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(libexpat)
 	dk_disable(libsndfile)			# requires opus
 	dk_disable(libtorrent)			# CMake Error: cannot find source file: deps/try_signal/try_singal.cpp
-	dk_disable(libvncserver)		# requires openssl
+	#dk_disable(libvncserver)		# requires openssl
 	dk_disable(libxml2)				# Not such file or directory
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(openframeworks)		# error: tesselator.h: No such file or directory
