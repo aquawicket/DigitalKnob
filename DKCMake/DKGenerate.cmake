@@ -1175,7 +1175,8 @@ if(EMSCRIPTEN)
 	dk_remove(${DKPROJECT}/assets/${APP_NAME}.wasm NOERROR)
 
 	########################## PACKAGE ASSETS ##########################
-	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS "-s DEMANGLE_SUPPORT=1 --preload-file ${DKPROJECT}/assets@/ --bind")
+	#set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS "-sDEMANGLE_SUPPORT=1 --preload-file ${DKPROJECT}/assets@/") # --bind
+	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS "-sASSERTIONS -sALLOW_MEMORY_GROWTH --preload-file ${DKPROJECT}/assets@/") # --bind
 	
 	################### Create Run.sh #################################
 	dk_info("Creating Run scripts . . .")
