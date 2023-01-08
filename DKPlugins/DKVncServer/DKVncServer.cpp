@@ -49,9 +49,9 @@
 #endif
 
 #if MAC
-CGImageRef DKVncServer::image_ref;
-CGDataProviderRef DKVncServer::provider;
-CFDataRef DKVncServer::dataref;
+	CGImageRef DKVncServer::image_ref;
+	CGDataProviderRef DKVncServer::provider;
+	CFDataRef DKVncServer::dataref;
 #endif
 
 //WARNING_DISABLE
@@ -98,7 +98,8 @@ typedef struct ClientData{
 std::vector<ClientLog> DKVncServer::clientLog;
 DKString DKVncServer::capture;
 
-bool DKVncServer::Init(){
+
+bool DKVncServer::Init() {
 	DKDEBUGFUNC();
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_CAPTURE]", capture);
 	if(capture.empty())
@@ -126,7 +127,7 @@ bool DKVncServer::Init(){
 
 	rfbScreen = rfbGetScreen(&DKApp::argc, DKApp::argv, desktopWidth, desktopHeight, 8, 3, bpp);
 	if(!rfbScreen)
-		return DKERROR("DKVncServer::Init(): rfbScreen is invalid\n");
+		return DKERROR("rfbScreen is invalid\n");
 	rfbScreen->desktopName = "DKVncServer";
 	rfbScreen->frameBuffer = (char*)malloc(desktopHeight * desktopWidth * bpp);
 	rfbScreen->alwaysShared = TRUE;
@@ -147,12 +148,12 @@ bool DKVncServer::Init(){
 	return true;
 }
 
-bool DKVncServer::End(){
+bool DKVncServer::End() {
 	DKDEBUGFUNC();
 	return true;
 }
 
-enum rfbNewClientAction DKVncServer::newclient(rfbClientPtr cl){
+enum rfbNewClientAction DKVncServer::newclient(rfbClientPtr cl) {
 	DKDEBUGFUNC(cl);
 	cl->clientData = (void*)calloc(sizeof(ClientData), 1);
 	cl->clientGoneHook = clientgone;
@@ -177,19 +178,19 @@ enum rfbNewClientAction DKVncServer::newclient(rfbClientPtr cl){
 	return RFB_CLIENT_ACCEPT;
 }
 
-void DKVncServer::clientgone(rfbClientPtr cl){
+void DKVncServer::clientgone(rfbClientPtr cl) {
 	DKDEBUGFUNC(cl);
 	free(cl->clientData);
 	cl->clientData = NULL;
 }
 
-void DKVncServer::Loop(){
+void DKVncServer::Loop() {
 	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 	if(rfbProcessEvents(rfbScreen, 1))
 		DrawBuffer();
 }
 
-rfbBool DKVncServer::rfbCheckPasswordByList2(rfbClientPtr cl, const char* response, int len){
+rfbBool DKVncServer::rfbCheckPasswordByList2(rfbClientPtr cl, const char* response, int len) {
 	DKDEBUGFUNC(cl, response, len);
 	char **passwds;
 	int i=0;
@@ -225,7 +226,7 @@ rfbBool DKVncServer::rfbCheckPasswordByList2(rfbClientPtr cl, const char* respon
 	return(FALSE);
 }
 
-void DKVncServer::DrawBuffer(){  
+void DKVncServer::DrawBuffer() {  
 	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 #if WIN
 	//Capture Desktop with DirectX
@@ -385,7 +386,7 @@ void DKVncServer::DrawBuffer(){
 	//rfbDrawString(rfbScreen, &radonFont, 10, 10, "DKVncServer", 0xffffff);
 }
 
-void DKVncServer::newframebuffer(rfbScreenInfoPtr screen, int width, int height){
+void DKVncServer::newframebuffer(rfbScreenInfoPtr screen, int width, int height) {
 	DKDEBUGFUNC(screen, width, height);
 	char *oldfb, *newfb;
 	oldfb = (char*)screen->frameBuffer;
@@ -394,7 +395,7 @@ void DKVncServer::newframebuffer(rfbScreenInfoPtr screen, int width, int height)
 	free(oldfb);
 }
 
-void DKVncServer::mouseevent(int buttonMask, int x, int y, rfbClientPtr cl){
+void DKVncServer::mouseevent(int buttonMask, int x, int y, rfbClientPtr cl) {
 	DKDEBUGFUNC(buttonMask, x, y, cl);
 	ClientData* cd = (ClientData*)cl->clientData;
 	if(same(cd->ipaddress,"127.0.0.1"))
@@ -425,7 +426,7 @@ void DKVncServer::mouseevent(int buttonMask, int x, int y, rfbClientPtr cl){
 	rfbDefaultPtrAddEvent(buttonMask, x, y, cl);
 }
 
-void DKVncServer::keyevent(rfbBool down, rfbKeySym key, rfbClientPtr cl){
+void DKVncServer::keyevent(rfbBool down, rfbKeySym key, rfbClientPtr cl) {
 	DKDEBUGFUNC(down, key, cl);
 	int k = key;
 	switch(key){
