@@ -32,6 +32,10 @@
 #ifndef DKPreprocessor_H
 #define DKPreprocessor_H
 
+// https://developercommunity.visualstudio.com/t/error-c2872-byte-ambiguous-symbol/93889
+// Fix for DKVncServer
+#define _HAS_STD_BYTE 0
+
 #define STR(x) #x
 #define DKMSG(x) __pragma(message(STR(x)))
 //#define TOSTRING(x) STR(x)
