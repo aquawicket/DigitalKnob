@@ -59,7 +59,7 @@ CFDataRef DKVncServer::dataref;
 	#include <netdb.h>
 #endif
 #include <rfb/keysym.h>
-#include "radon.h"
+#include "examples/server/radon.h"
 //WARNING_ENABLE
 
 
