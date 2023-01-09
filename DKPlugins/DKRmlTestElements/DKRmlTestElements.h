@@ -38,7 +38,7 @@ public:
 	bool Init();
 	bool End();
 	//std::shared_ptr<DKCustomInstancer> dkCustomInstancer;
-	std::shared_ptr<DKImgInstancer> dkImgInstancer;
+	std::shared_ptr<Rml::DKImgInstancer> dkImgInstancer;
 	
 };
 
