@@ -47,6 +47,10 @@
 	#define RELEASE(__p) {if(__p!=nullptr){__p->Release();__p=nullptr;}}
 #endif
 
+#if MAC
+	#import "CoreGraphics/CoreGraphics.h"
+#endif
+
 #include <rfb/rfb.h>
 
 typedef struct ClientLog{
