@@ -67,10 +67,8 @@ if(APPLE)
 	dkFileReplace(${LIBVNCSERVER}/${OS}/rfb/rfbconfig.h "UNISTD_H  1" "UNISTD_H  1 \n#include <unistd.h>")
 endif()
 if(EMSCRIPTEN)
-	dkFileReplace(${LIBVNCSERVER}/${OS}/Debug/rfb/rfbconfig.h "\n#include <unistd.h>" "")
-	dkFileReplace(${LIBVNCSERVER}/${OS}/Debug/rfb/rfbconfig.h "UNISTD_H  1" "UNISTD_H  1 \n#include <unistd.h>")
-	dkFileReplace(${LIBVNCSERVER}/${OS}/Release/rfb/rfbconfig.h "\n#include <unistd.h>" "")
-	dkFileReplace(${LIBVNCSERVER}/${OS}/Release/rfb/rfbconfig.h "UNISTD_H  1" "UNISTD_H  1 \n#include <unistd.h>")
+	dkFileReplace(${LIBVNCSERVER}/${BUILD_DIR}/rfb/rfbconfig.h "\n#include <unistd.h>" "")
+	dkFileReplace(${LIBVNCSERVER}/${BUILD_DIR}/rfb/rfbconfig.h "UNISTD_H  1" "UNISTD_H  1 \n#include <unistd.h>")
 endif()
 
 ### COMPILE ###
