@@ -24,8 +24,8 @@
 * SOFTWARE.
 */
 
-#ifndef DKImgElement_H
-#define DKImgElement_H
+#ifndef DKCustomElement_H
+#define DKCustomElement_H
 
 //WARNING_DISABLE
 #include "../Include/RmlUi/Core/ComputedValues.h"
@@ -41,16 +41,16 @@
 //WARNING_ENABLE
 
 
-class DKImgElement : public Rml::Element 
+class DKCustomElement : public Rml::Element 
 {
 public:
-	DKImgElement(const Rml::String& tag) : Rml::Element(tag), dimensions(-1, -1), rect_source(RectSource::None), geometry(this){
+	DKCustomElement(const Rml::String& tag) : Rml::Element(tag), dimensions(-1, -1), rect_source(RectSource::None), geometry(this){
 		dimensions_scale = 1.0f;
 		geometry_dirty = false;
 		texture_dirty = true;
 	}
 
-	~DKImgElement(){}
+	~DKCustomElement(){}
 
 	// Sizes the box to the element's inherent size.
 	bool GetIntrinsicDimensions(Rml::Vector2f& _dimensions, float& _ratio){
@@ -260,10 +260,10 @@ public:
 	bool geometry_dirty;
 };
 
-class DKImgInstancer : public Rml::ElementInstancer
+class DKCustomInstancer : public Rml::ElementInstancer
 {
 public:
-	virtual ~DKImgInstancer() {};
+	virtual ~DKCustomInstancer() {};
 
 	// Instances an element given the tag name and attributes.
 	// @param[in] parent The element the new element is destined to be parented to.
@@ -273,8 +273,8 @@ public:
 	Rml::ElementPtr InstanceElement(Rml::Element* RMLUI_UNUSED_PARAMETER(parent), const Rml::String& tag, const Rml::XMLAttributes& RMLUI_UNUSED_PARAMETER(attributes)) override{
 		RMLUI_UNUSED(parent);
 		RMLUI_UNUSED(attributes);
-		RMLUI_ZoneScopedN("DKImgInstance");
-		DKImgElement* element = new DKImgElement(tag);
+		RMLUI_ZoneScopedN("DKCustomInstance");
+		DKCustomElement* element = new DKCustomElement(tag);
 		return Rml::ElementPtr(static_cast<Rml::Element*>(element));
 	}
 
@@ -286,4 +286,4 @@ public:
 	}
 };
 
-#endif //DKImgElement
+#endif //DKCustomElement
