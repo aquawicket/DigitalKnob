@@ -28,7 +28,7 @@
 #ifndef DKRmlTestElements_H
 #define DKRmlTestElements_H
 
-#include "DKRmlTestElements/DKCustomElement.h"
+//#include "DKRmlTestElements/DKCustomElement.h"
 #include "DKRmlTestElements/DKImgElement.h"
 
 
@@ -37,8 +37,9 @@ class DKRmlTestElements : public DKObjectT<DKRmlTestElements>
 public:
 	bool Init();
 	bool End();
-	std::shared_ptr<DKCustomInstancer> dkCustomInstancer;
+	//std::shared_ptr<DKCustomInstancer> dkCustomInstancer;
 	std::shared_ptr<DKImgInstancer> dkImgInstancer;
+	
 };
 
 REGISTER_OBJECT(DKRmlTestElements, true)

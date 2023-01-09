@@ -33,8 +33,8 @@ bool DKRmlTestElements::Init(){
 	DKDEBUGFUNC();
 	
 	// register <dkcustom> tag
-	dkCustomInstancer = std::make_unique<DKCustomInstancer>(); // Make sure custom_instancer is kept alive until after the call to Rml::Shutdown
-	Rml::Factory::RegisterElementInstancer("dkcustom", dkCustomInstancer.get());
+	//dkCustomInstancer = std::make_unique<DKCustomInstancer>(); // Make sure custom_instancer is kept alive until after the call to Rml::Shutdown
+	//Rml::Factory::RegisterElementInstancer("dkcustom", dkCustomInstancer.get());
 	
 	// register <dkimg> tag
 	dkImgInstancer = std::make_unique<DKImgInstancer>(); // Make sure custom_instancer is kept alive until after the call to Rml::Shutdown
