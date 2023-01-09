@@ -487,7 +487,6 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(core_motion)
 	dk_disable(core_services)
 	dk_disable(core_video)
-	#dk_disable(curl)
 	dk_disable(DKArchive)			# requires libarchive
 	dk_disable(DKAudio)
 	dk_disable(DKCef)
@@ -539,7 +538,6 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(foundation)
 	dk_disable(game_controller)
 	dk_disable(gdal)
-	#dk_disable(giflib)				# dk_msys(): ERROR: not WIN_32, WIN_64, ANDROID_32 or ANDROID_64
 	dk_disable(gl_kit)
 	dk_disable(gzip)
 	dk_disable(imagemagick)
@@ -549,7 +547,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(libexpat)
 	dk_disable(libsndfile)
 	dk_disable(libuv)
-	dk_disable(libvncserver)
+	#dk_disable(libvncserver)
 	dk_disable(libwebsockets)
 	dk_disable(libxml2)				# fatal error: 'config.h' file not found
 	dk_disable(lighttpd)
