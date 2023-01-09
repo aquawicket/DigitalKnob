@@ -202,9 +202,9 @@ string(REPLACE "-std=c17" "" SDL_BUILD "${DKCMAKE_BUILD}")
 string(REPLACE "  " " " SDL_BUILD "${SDL_BUILD}")
 MAC_dk_queueCommand			(${SDL_BUILD} -DSDL_SHARED=OFF -DSDL_OPENGL=ON -DSDL_METAL=ON -DHAVE_BUILTIN_ICONV=0 -DHAVE_LIBICONV=0 ${ICONV_CMAKE} ${SDL})
 
-IOS_dk_queueCommand			(${DKCMAKE_BUILD} -DSDL_SHARED=OFF -DSDL_OPENGLES=ON -DSDL_METAL=ON -DSDL_JOYSTICK=OFF -DSDL_HAPTIC=OFF ${SDL})
+IOS_dk_queueCommand			(${DKCMAKE_BUILD} -DSDL_SHARED=OFF -DSDL_OPENGLES=ON -DSDL_METAL=ON -DSDL_JOYSTICK=OFF -DSDL_HAPTIC=OFF -DHAVE_BUILTIN_ICONV=0 -DHAVE_LIBICONV=0 ${SDL})
 
-IOSSIM_dk_queueCommand		(${DKCMAKE_BUILD} -DSDL_SHARED=OFF -DSDL_OPENGLES=ON -DSDL_METAL=ON -DSDL_JOYSTICK=OFF -DSDL_HAPTIC=OFF ${SDL})
+IOSSIM_dk_queueCommand		(${DKCMAKE_BUILD} -DSDL_SHARED=OFF -DSDL_OPENGLES=ON -DSDL_METAL=ON -DSDL_JOYSTICK=OFF -DSDL_HAPTIC=OFF -DHAVE_BUILTIN_ICONV=0 -DHAVE_LIBICONV=0 ${SDL})
 
 LINUX_dk_queueCommand		(${DKCMAKE_BUILD} -DSDL_SHARED=OFF -DVIDEO_OPENGLES=OFF -DVIDEO_OPENGL=ON -DDIRECTX=OFF -DVIDEO_WAYLAND=OFF ${SDL})
 
@@ -219,31 +219,31 @@ ANDROID64_dk_queueCommand	(${SDL_BUILD} "-DCMAKE_CXX_FLAGS=-DHAVE_GCC_ATOMICS=1"
 EMSCRIPTEN_dk_queueCommand	(${SDL_BUILD} ${SDL})
 
 
-if(USE_EMSCRIPTEN_BUILD_SCRIPT)
-	if(WIN_HOST)
-		EMSCRIPTEN_DEBUG_dk_queueCommand	(${EMSDK}/emsdk_env.bat)
-	else()
-		EMSCRIPTEN_DEBUG_dk_queueCommand	(${EMSDK}/emsdk_env.sh)
-	endif()
-	if(NOT EXISTS ${SDL}/buildbot/usr/local/lib/libSDL2.a)
-		if(EMSCRIPTEN)
-			set(ENV{SDKDIR} ${EMSDK})
-		endif()
-		EMSCRIPTEN_dk_Command		(${SDL}/build-scripts/emscripten-buildbot.sh)
-	endif()
-
-	if(NOT EXISTS ${SDL}/emscripten/Debug/libSDL2d.a)
-		EMSCRIPTEN_DEBUG_dk_copy	(${SDL}/buildbot/usr/local/include ${SDL}/emscripten/Debug/include)
-		EMSCRIPTEN_DEBUG_dk_copy	(${SDL}/buildbot/usr/local/lib/libSDL2.a ${SDL}/emscripten/Debug/libSDL2d.a)
-		EMSCRIPTEN_DEBUG_dk_copy	(${SDL}/buildbot/usr/local/lib/libSDL2main.a ${SDL}/emscripten/Debug/libSDL2maind.a)
-	endif()
-
-	if(NOT EXISTS ${SDL}/emscripten/Release/libSDL2d.a)
-		EMSCRIPTEN_RELEASE_dk_copy	(${SDL}/buildbot/usr/local/include ${SDL}/emscripten/Release/include)
-		EMSCRIPTEN_RELEASE_dk_copy	(${SDL}/buildbot/usr/local/lib/libSDL2.a ${SDL}/emscripten/Release/libSDL2.a)
-		EMSCRIPTEN_RELEASE_dk_copy	(${SDL}/buildbot/usr/local/lib/libSDL2main.a ${SDL}/emscripten/Release/libSDL2main.a)
-	endif()
-endif()
+#if(USE_EMSCRIPTEN_BUILD_SCRIPT)
+#	if(WIN_HOST)
+#		EMSCRIPTEN_DEBUG_dk_queueCommand	(${EMSDK}/emsdk_env.bat)
+#	else()
+#		EMSCRIPTEN_DEBUG_dk_queueCommand	(${EMSDK}/emsdk_env.sh)
+#	endif()
+#	if(NOT EXISTS ${SDL}/buildbot/usr/local/lib/libSDL2.a)
+#		if(EMSCRIPTEN)
+#			set(ENV{SDKDIR} ${EMSDK})
+#		endif()
+#		EMSCRIPTEN_dk_Command		(${SDL}/build-scripts/emscripten-buildbot.sh)
+#	endif()
+#
+#	if(NOT EXISTS ${SDL}/emscripten/Debug/libSDL2d.a)
+#		EMSCRIPTEN_DEBUG_dk_copy	(${SDL}/buildbot/usr/local/include ${SDL}/emscripten/Debug/include)
+#		EMSCRIPTEN_DEBUG_dk_copy	(${SDL}/buildbot/usr/local/lib/libSDL2.a ${SDL}/emscripten/Debug/libSDL2d.a)
+#		EMSCRIPTEN_DEBUG_dk_copy	(${SDL}/buildbot/usr/local/lib/libSDL2main.a ${SDL}/emscripten/Debug/libSDL2maind.a)
+#	endif()
+#
+#	if(NOT EXISTS ${SDL}/emscripten/Release/libSDL2d.a)
+#		EMSCRIPTEN_RELEASE_dk_copy	(${SDL}/buildbot/usr/local/include ${SDL}/emscripten/Release/include)
+#		EMSCRIPTEN_RELEASE_dk_copy	(${SDL}/buildbot/usr/local/lib/libSDL2.a ${SDL}/emscripten/Release/libSDL2.a)
+#		EMSCRIPTEN_RELEASE_dk_copy	(${SDL}/buildbot/usr/local/lib/libSDL2main.a ${SDL}/emscripten/Release/libSDL2main.a)
+#	endif()
+#endif()
 
 ### COMPILE ###
 #if(NOT EMSCRIPTEN)
