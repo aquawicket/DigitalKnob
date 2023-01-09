@@ -57,6 +57,10 @@ public:
 		// Check if we need to reload the texture.
 		if (texture_dirty)
 			LoadTexture();
+
+		if (HasAttribute("controls"))
+			printf("HAS controls ATTRIBUTE\n");
+
 		// Calculate the x dimension.
 		if (HasAttribute("width"))
 			dimensions.x = GetAttribute< float >("width", -1);

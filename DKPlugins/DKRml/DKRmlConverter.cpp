@@ -285,6 +285,7 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 		}
 	}
 	// <audio> tags
+	/*
 	Rml::ElementList audios;
 	Rml::ElementUtilities::GetElementsByTagName(audios, element, "audio");
 	for(unsigned int i=0; i<audios.size(); ++i){
@@ -297,6 +298,8 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 			DKDuktape::RunDuktape("DKRmlAudio_Open(\""+file+"\");", rval);
 		}
 	}
+	*/
+
 	// <link> tags
 	Rml::ElementList links;
 	Rml::ElementUtilities::GetElementsByTagName(links, element, "link");
