@@ -40,7 +40,7 @@ function DKTray_OnEvent(event)
 	if(event.type === "dblclick"){
 		DKTray_ToggleWindow();
 	}
-	if(event.type === (event, "1000"){
+	if(event.type === "1000"){
 		DK_ShowConsole();
 		dk.create("DKWindowJS");
 		CPP_DKWindow_Show();
