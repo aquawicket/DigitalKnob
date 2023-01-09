@@ -28,6 +28,7 @@
 #ifndef DKRmlTestElements_H
 #define DKRmlTestElements_H
 
+#include "DKRmlTestElements/DKButtonElement.h"
 //#include "DKRmlTestElements/DKCustomElement.h"
 #include "DKRmlTestElements/DKImgElement.h"
 
@@ -37,6 +38,7 @@ class DKRmlTestElements : public DKObjectT<DKRmlTestElements>
 public:
 	bool Init();
 	bool End();
+	std::shared_ptr<DKButtonInstancer> dkButtonInstancer;
 	//std::shared_ptr<DKCustomInstancer> dkCustomInstancer;
 	std::shared_ptr<Rml::DKImgInstancer> dkImgInstancer;
 	

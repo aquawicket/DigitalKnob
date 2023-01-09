@@ -32,6 +32,10 @@
 bool DKRmlTestElements::Init(){
 	DKDEBUGFUNC();
 	
+	// register <dkbutton> tag
+	dkImgInstancer = std::make_unique<Rml::DKButtonInstancer>(); // Make sure custom_instancer is kept alive until after the call to Rml::Shutdown
+	Rml::Factory::RegisterElementInstancer("dkbutton", dkButtonInstancer.get());
+	
 	// register <dkcustom> tag
 	//dkCustomInstancer = std::make_unique<DKCustomInstancer>(); // Make sure custom_instancer is kept alive until after the call to Rml::Shutdown
 	//Rml::Factory::RegisterElementInstancer("dkcustom", dkCustomInstancer.get());
