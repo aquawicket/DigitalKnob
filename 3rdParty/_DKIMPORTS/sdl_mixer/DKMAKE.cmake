@@ -15,7 +15,7 @@ dk_import(https://github.com/libsdl-org/SDL_mixer/archive/refs/tags/release-2.6.
 
 
 ### LINK ###
-dk_include				(${SDL_MIXER})
+dk_include				(${SDL_MIXER}/include)
 WIN_dk_libDebug			(${SDL_MIXER}/${OS}/lib/${DEBUG_DIR}/SDL_mixer.lib)
 WIN_dk_libRelease		(${SDL_MIXER}/${OS}/lib/${RELEASE_DIR}/SDL_mixer.lib)
 APPLE_dk_libDebug		(${SDL_MIXER}/${OS}/lib/Debug/SDL_mixer.a)
