@@ -63,6 +63,7 @@ RASPBERRY_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=-I${LIBVNCS
 WIN_dk_queueCommand					(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=/I${LIBVNCSERVER}" ${LIBJPEG-TURBO_CMAKE} ${LIBPNG_CMAKE} ${OPENSSL_CMAKE} ${SDL_CMAKE} ${ZLIB_CMAKE} -DWITH_JPEG=ON ${LIBVNCSERVER})
 
 if(APPLE)
+	dkFileReplace(${LIBVNCSERVER}/${OS}/rfb/rfbconfig.h "\n#include <unistd.h>" "")
 	dkFileReplace(${LIBVNCSERVER}/${OS}/rfb/rfbconfig.h "UNISTD_H  1" "UNISTD_H  1 \n#include <unistd.h>")
 endif()
 
