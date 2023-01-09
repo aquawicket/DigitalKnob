@@ -32,7 +32,7 @@
 //WARNING_DISABLE
 #include <cstdlib>     // GetUsername()  std::getenv()
 #include <unistd.h>    // sleep()  / usleep()
-#include <termios.h>                  //for system(), tcsetattr()
+#include <termios.h>   // for system(), tcsetattr()
 //WARNING_ENABLE
 
 static struct termios current, old;
