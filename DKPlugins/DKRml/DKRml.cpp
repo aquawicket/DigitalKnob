@@ -57,6 +57,7 @@ bool DKRml::Init(){
 	DKClass::DKCreate("DKRmlAudio");
 	DKClass::DKCreate("DKRmlElement");
 	DKClass::DKCreate("DKRmlIframe");
+	DKClass::DKCreate("DKRmlTestElements");
 	
 
 	document = NULL;
