@@ -29,9 +29,15 @@
 #ifndef DKButtonElement_H
 #define DKButtonElement_H
 
+#include "../Include/RmlUi/Core/Header.h"
+#include "../Include/RmlUi/Core/Element.h"
 #include "../Include/RmlUi/Core/EventListener.h"
 #include "../Include/RmlUi/Core/ElementDocument.h"
-//#include "InputType.h"
+#include "../Include/RmlUi/Core/ElementInstancer.h"
+#include "../Include/RmlUi/Core/Geometry.h"
+#include "../Include/RmlUi/Core/Texture.h"
+#include "../Include/RmlUi/Core/Spritesheet.h"
+#include "../Source/Core/Elements/InputType.h"
 
 namespace Rml {
 
@@ -76,8 +82,9 @@ public:
 		RMLUI_UNUSED(parent);
 		RMLUI_UNUSED(attributes);
 		RMLUI_ZoneScopedN("DKButtonInstance");
-		DKImgElement* element = new DKImgElement(tag);
-		return Rml::ElementPtr(static_cast<Rml::Element*>(element));
+		//DKButtonElement* element = new DKButtonElement(tag);
+		//return Rml::ElementPtr(static_cast<Rml::Element*>(element));
+		return NULL;
 	}
 
 	// Releases an element instanced by this instancer.

@@ -38,8 +38,8 @@ class DKRmlTestElements : public DKObjectT<DKRmlTestElements>
 public:
 	bool Init();
 	bool End();
-	std::shared_ptr<DKButtonInstancer> dkButtonInstancer;
-	//std::shared_ptr<DKCustomInstancer> dkCustomInstancer;
+	std::shared_ptr<Rml::DKButtonInstancer> dkButtonInstancer;
+	//std::shared_ptr<Rml::DKCustomInstancer> dkCustomInstancer;
 	std::shared_ptr<Rml::DKImgInstancer> dkImgInstancer;
 	
 };
