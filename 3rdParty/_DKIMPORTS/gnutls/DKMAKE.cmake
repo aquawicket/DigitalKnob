@@ -1,1 +1,10 @@
-SET(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -lgnutls")
+### INSTALL ###
+if(LINUX)
+	dk_set(CURRENT_DIR /usr)
+	dk_command(sudo apt -y install libgnutls)
+endif()
+if(MAC)
+	dk_command(brew install gnutls)
+	dk_include(/usr/local/include)
+	dk_lib(/usr/local/lib/libgnutls.dylib)
+endif()
