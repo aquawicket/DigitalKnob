@@ -62,9 +62,15 @@ RASPBERRY_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=-I${LIBVNCSE
 RASPBERRY_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=-I${LIBVNCSERVER} -I${LIBVNCSERVER}/${OS}/${RELEASE_DIR}" ${LIBJPEG-TURBO_CMAKE} ${LIBPNG_CMAKE} ${OPENSSL_CMAKE} ${SDL_CMAKE} ${ZLIB_CMAKE} -DWITH_JPEG=ON ${LIBVNCSERVER})
 WIN_dk_queueCommand					(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=/I${LIBVNCSERVER}" ${LIBJPEG-TURBO_CMAKE} ${LIBPNG_CMAKE} ${OPENSSL_CMAKE} ${SDL_CMAKE} ${ZLIB_CMAKE} -DWITH_JPEG=ON ${LIBVNCSERVER})
 
-if(APPLE OR EMSCRIPTEN)
+if(APPLE)
 	dkFileReplace(${LIBVNCSERVER}/${OS}/rfb/rfbconfig.h "\n#include <unistd.h>" "")
 	dkFileReplace(${LIBVNCSERVER}/${OS}/rfb/rfbconfig.h "UNISTD_H  1" "UNISTD_H  1 \n#include <unistd.h>")
+endif()
+if(EMSCRIPTEN)
+	dkFileReplace(${LIBVNCSERVER}/${OS}/Debug/rfb/rfbconfig.h "\n#include <unistd.h>" "")
+	dkFileReplace(${LIBVNCSERVER}/${OS}/Debug/rfb/rfbconfig.h "UNISTD_H  1" "UNISTD_H  1 \n#include <unistd.h>")
+	dkFileReplace(${LIBVNCSERVER}/${OS}/Release/rfb/rfbconfig.h "\n#include <unistd.h>" "")
+	dkFileReplace(${LIBVNCSERVER}/${OS}/Release/rfb/rfbconfig.h "UNISTD_H  1" "UNISTD_H  1 \n#include <unistd.h>")
 endif()
 
 ### COMPILE ###
