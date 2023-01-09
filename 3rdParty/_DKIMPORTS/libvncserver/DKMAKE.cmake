@@ -2,6 +2,7 @@
 
 
 ### DEPEND ###
+APPLE_dk_depend(gnutls)
 dk_depend(libjpeg-turbo)
 dk_depend(libpng)
 dk_depend(libsystemd-dev)
