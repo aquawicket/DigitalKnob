@@ -25,6 +25,7 @@
 */
 
 #include "DK/stdafx.h"
+#include "DK/DKFile.h";
 #include "DKRmlAudio/DKRmlAudio.h"
 #include "../Include/RmlUi/Core/Factory.h"
 
@@ -33,7 +34,8 @@ bool DKRmlAudio::Init(){
 	DKDEBUGFUNC();
 	ref = std::make_unique<RmlAudioInstancer>(); // Make sure custom_instancer is kept alive until after the call to Rml::Shutdown
 	Rml::Factory::RegisterElementInstancer("audio", ref.get());
-	DKClass::DKCreate("DKRmlCss,DKRmlAudio/DKRmlAudio.css");
+	//DKString css_path = DKFile::local_assets + "/DKRmlAudio/DKRmlAudio.css";
+	//DKClass::DKCreate("DKRmlCss,"+css_path);
 	return true;
 }
 
