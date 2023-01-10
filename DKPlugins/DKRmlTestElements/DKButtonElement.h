@@ -31,47 +31,108 @@
 
 #include "../Include/RmlUi/Core/Header.h"
 #include "../Include/RmlUi/Core/Element.h"
-#include "../Include/RmlUi/Core/EventListener.h"
-#include "../Include/RmlUi/Core/ElementDocument.h"
 #include "../Include/RmlUi/Core/ElementInstancer.h"
 #include "../Include/RmlUi/Core/Geometry.h"
 #include "../Include/RmlUi/Core/Texture.h"
 #include "../Include/RmlUi/Core/Spritesheet.h"
-#include "../Source/Core/Elements/InputType.h"
 
 namespace Rml {
 
 /**
-	A button input type handler. The only functionality a button provides over a normal element is the ability
-	to be disabled. This prevents 'click' events on this element and the ability to receive focus.
+	The 'img' element can render images and sprites. 
+
+	The 'src' attribute is used to specify an image url. If instead the `sprite` attribute is set,
+	it will load a sprite and ignore the `src` and `rect` attributes.
+
+	The 'rect' attribute takes four space-separated	integer values, specifying a rectangle
+	using 'x y width height' in pixel coordinates inside the image. No clamping to the
+	dimensions of the source image will occur; rendered results in this case will
+	depend on the user's texture addressing mode.
+
+	The intrinsic dimensions of the image can now come from three different sources. They are
+	used in the following order:
+
+	1) 'width' / 'height' attributes if present
+	2) pixel width / height of the sprite 
+	3) pixel width / height given by the 'rect' attribute
+	4) width / height of the image texture
+
+	This has the result of sizing the element to the pixel-size of the rendered image, unless
+	overridden by the 'width' or 'height' attributes.
 
 	@author Peter Curry
  */
 
-class DKButtonElement : public InputType
+class DKButtonElement : public Element
 {
 public:
-	DKButtonElement(ElementFormControlInput* element);
+	RMLUI_RTTI_DefineWithParent(DKButtonElement, Element)
+
+	/// Constructs a new DKImg. This should not be called directly; use the Factory instead.
+	/// @param[in] tag The tag the element was declared as in RML.
+	DKButtonElement(const String& tag);
 	virtual ~DKButtonElement();
 
-	/// Returns if this value should be submitted with the form.
-	/// @return True if the form control is to be submitted, false otherwise.
-	bool IsSubmitted() override;
-
-	/// Checks for necessary functional changes in the control as a result of the event.
-	/// @param[in] event The event to process.
-	void ProcessDefaultAction(Event& event) override;
-
-	/// Sizes the dimensions to the element's inherent size.
-	/// @return False.
+	/// Returns the element's inherent size.
 	bool GetIntrinsicDimensions(Vector2f& dimensions, float& ratio) override;
+
+protected:
+	/// Renders the image.
+	void OnRender() override;
+
+	/// Regenerates the element's geometry.
+	void OnResize() override;
+	
+	/// Our intrinsic dimensions may change with the dp-ratio.
+	void OnDpRatioChange() override;
+
+	/// The sprite may have changed when the style sheet is recompiled.
+	void OnStyleSheetChange() override;
+
+	/// Checks for changes to the image's source or dimensions.
+	/// @param[in] changed_attributes A list of attributes changed on the element.
+	void OnAttributeChange(const ElementAttributes& changed_attributes) override;
+
+	/// Called when properties on the element are changed.
+	/// @param[in] changed_properties The properties changed on the element.
+	void OnPropertyChange(const PropertyIdSet& changed_properties) override;
+
+	/// Detect when we have been added to the document.
+	void OnChildAdd(Element* child) override;
+
+private:
+	// Generates the element's geometry.
+	void GenerateGeometry();
+	// Loads the element's texture, as specified by the 'src' attribute.
+	bool LoadTexture();
+	// Loads the rect value from the element's attribute, but only if we're not a sprite.
+	void UpdateRect();
+
+	// The texture this element is rendering from.
+	Texture texture;
+	// True if we need to refetch the texture's source from the element's attributes.
+	bool texture_dirty;
+	// A factor which scales the intrinsic dimensions based on the dp-ratio and image scale.
+	float dimensions_scale;
+	// The element's computed intrinsic dimensions. If either of these values are set to -1, then
+	// that dimension has not been computed yet.
+	Vector2f dimensions;
+
+	// The rectangle extracted from the sprite or 'rect' attribute. The rect_source will be None if
+	// these have not been specified or are invalid.
+	Rectangle rect;
+	enum class RectSource { None, Attribute, Sprite } rect_source;
+
+	// The geometry used to render this element.
+	Geometry geometry;
+	bool geometry_dirty;
 };
 
 
-class DKButtonInstancer : public ElementInstancer
+class DKImgInstancer : public ElementInstancer
 {
 public:
-	virtual ~DKButtonInstancer() {};
+	virtual ~DKImgInstancer() {};
 
 	// Instances an element given the tag name and attributes.
 	// @param[in] parent The element the new element is destined to be parented to.
@@ -82,9 +143,8 @@ public:
 		RMLUI_UNUSED(parent);
 		RMLUI_UNUSED(attributes);
 		RMLUI_ZoneScopedN("DKButtonInstance");
-		//DKButtonElement* element = new DKButtonElement(tag);
-		//return Rml::ElementPtr(static_cast<Rml::Element*>(element));
-		return NULL;
+		DKButtonElement* element = new DKButtonElement(tag);
+		return Rml::ElementPtr(static_cast<Rml::Element*>(element));
 	}
 
 	// Releases an element instanced by this instancer.
@@ -95,6 +155,6 @@ public:
 	}
 };
 
-
 } // namespace Rml
+
 #endif
