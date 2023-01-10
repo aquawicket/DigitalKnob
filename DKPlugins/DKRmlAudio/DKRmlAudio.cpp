@@ -33,7 +33,7 @@ bool DKRmlAudio::Init(){
 	DKDEBUGFUNC();
 	ref = std::make_unique<RmlAudioInstancer>(); // Make sure custom_instancer is kept alive until after the call to Rml::Shutdown
 	Rml::Factory::RegisterElementInstancer("audio", ref.get());
-	DKClass::DKCreate("DKRmlAudio/DKRmlAudio.css");
+	DKClass::DKCreate("DKRmlCss,DKRmlAudio/DKRmlAudio.css");
 	return true;
 }
 
