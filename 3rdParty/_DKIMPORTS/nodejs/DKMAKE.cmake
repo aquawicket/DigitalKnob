@@ -1,11 +1,7 @@
 # https://nodejs.org/dist/v14.16.1/node-v14.16.1-win-x86.zip
 
 
-dk_set(NODEJS_VERSION v14.16.1)
-dk_set(NODEJS_NAME node-${NODEJS_VERSION}-win-x86)
-dk_set(NODEJS_DL https://nodejs.org/dist/${NODEJS_VERSION}/${NODEJS_NAME}.zip)
-dk_set(NODEJS ${3RDPARTY}/${NODEJS_NAME})
+### IMPORT ###
+dk_import(https://nodejs.org/dist/v14.16.1/node-v14.16.1-win-x86.zip)
+dk_setEnv("PATH" "${NODEJS}")
 dk_set(NODE_EXE ${NODEJS}/node.exe)
-
-
-dk_import(${NODEJS_DL} ${NODEJS})

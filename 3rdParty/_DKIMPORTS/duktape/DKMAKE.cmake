@@ -7,14 +7,17 @@
 
 
 ### DEPEND ###
-dk_depend(python)
-dk_depend(pyyaml)
-dk_depend(nodejs)
+#if(NOT EXISTS ${DUKTAPE}/src/duktape.c)
+#	dk_depend(python)
+#	dk_depend(pyyaml)
+#	dk_depend(nodejs)
+#endif()
 
 
 ### IMPORT ###
-#dk_import(https://github.com/aquawicket/duktape/archive/0701a460ca25c2dc76a96bd3187849ca278d1865.zip PATCH)
 dk_import(https://github.com/aquawicket/duktape.git PATCH) #NOTE: PATCH is for CMakeLists.txt
+#dk_import(https://github.com/svaarala/duktape/releases/download/v2.7.0/duktape-2.7.0.tar.xz PATCH) #NOTE: PATCH is for CMakeLists.txt
+#dk_import(https://github.com/svaarala/duktape.git PATCH) #NOTE: PATCH is for CMakeLists.txt
 
 
 ### LINK ###
@@ -28,12 +31,22 @@ UNIX_dk_libRelease	(${DUKTAPE}/${OS}/${RELEASE_DIR}/libduktape.a)
 
 
 ### GENERATE ###
-if(NOT EXISTS ${DUKTAPE}/dist/src/duktape.c)
-	dk_makeDirectory(${DUKTAPE}/dist)
+#if(NOT EXISTS ${DUKTAPE}/dist/src/duktape.c)
+#	dk_makeDirectory(${DUKTAPE}/dist)
 	#dk_executeProcess(${NODE_EXE} ${DUKTAPE}/src-tools/index.js configure --output-directory ${DUKTAPE}/src --source-directory ${DUKTAPE}/src-input --config-directory ${DUKTAPE}/config)
 	#dk_executeProcess(${PYTHON_EXE} ${DUKTAPE}/util/dist.py)  # default generator
+#	dk_executeProcess(${PYTHON_APP} ${DUKTAPE}/tools/configure.py
+#		--output-directory ${DUKTAPE}/dist/src
+#		-DDUK_USE_GLOBAL_BINDING 
+#		-DDUK_USE_FATAL_HANDLER 
+#		-DDUK_USE_DEBUGGER_SUPPORT 
+#		-DDUK_USE_INTERRUPT_COUNTER 
+#		-DDUK_USE_DEBUGGER_DUMPHEAP 
+#		-DDUK_USE_DEBUGGER_INSPECT)
+#endif()
+if(NOT EXISTS ${DUKTAPE}/src/duktape.c)
 	dk_executeProcess(${PYTHON_APP} ${DUKTAPE}/tools/configure.py
-		--output-directory ${DUKTAPE}/dist/src
+		--output-directory ${DUKTAPE}/src
 		-DDUK_USE_GLOBAL_BINDING 
 		-DDUK_USE_FATAL_HANDLER 
 		-DDUK_USE_DEBUGGER_SUPPORT 

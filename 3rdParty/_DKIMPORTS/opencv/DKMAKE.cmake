@@ -3,7 +3,7 @@
 
 
 ### DEPEND ###
-dk_depend(python)
+#dk_depend(python)
 dk_depend(libjpeg-turbo)
 dk_depend(libpng)
 dk_depend(libwebp)
