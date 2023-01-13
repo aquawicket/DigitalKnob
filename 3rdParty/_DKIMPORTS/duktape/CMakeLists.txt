@@ -29,11 +29,10 @@ if(BUILD_DUKTAPE_EXAMPLES AND WIN32)
 	#set_target_properties(alloc-torture PROPERTIES LINK_FLAGS /SUBSYSTEM:CONSOLE)
 	
 	# cmdline
-	add_definitions(DUK_CMDLINE_DEBUGGER_SUPPORT)
-	include_directories(${CMAKE_SOURCE_DIR}/examples/cmdline)
-	file(GLOB cmdline_SRC ${CMAKE_SOURCE_DIR}/examples/cmdline/*.c)
-	add_executable(cmdline WIN32 ${duktape_SRC} ${cmdline_SRC})
-	set_target_properties(cmdline PROPERTIES LINK_FLAGS /SUBSYSTEM:CONSOLE)
+	#include_directories(${CMAKE_SOURCE_DIR}/examples/cmdline)
+	#file(GLOB cmdline_SRC ${CMAKE_SOURCE_DIR}/examples/cmdline/*.c)
+	#add_executable(cmdline WIN32 ${duktape_SRC} ${cmdline_SRC})
+	#set_target_properties(cmdline PROPERTIES LINK_FLAGS /SUBSYSTEM:CONSOLE)
 	
 	# codepage-conv
 	include_directories(${CMAKE_SOURCE_DIR}/examples/codepage-conv)
@@ -57,6 +56,7 @@ if(BUILD_DUKTAPE_EXAMPLES AND WIN32)
 	set_target_properties(debug-trans-dvalue PROPERTIES LINK_FLAGS /SUBSYSTEM:CONSOLE)
 
 	# debug-trans-socket
+	add_definitions(-DDUK_CMDLINE_DEBUGGER_SUPPORT)
 	include_directories(${CMAKE_SOURCE_DIR}/examples/debug-trans-socket)
 	add_executable(debug-trans-socket WIN32 ${duktape_SRC}
 		${CMAKE_SOURCE_DIR}/examples/cmdline/duk_cmdline.c
