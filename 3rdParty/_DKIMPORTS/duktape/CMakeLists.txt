@@ -29,6 +29,7 @@ if(BUILD_DUKTAPE_EXAMPLES AND WIN32)
 	#set_target_properties(alloc-torture PROPERTIES LINK_FLAGS /SUBSYSTEM:CONSOLE)
 	
 	# cmdline
+	add_definitions(DUK_CMDLINE_DEBUGGER_SUPPORT)
 	include_directories(${CMAKE_SOURCE_DIR}/examples/cmdline)
 	file(GLOB cmdline_SRC ${CMAKE_SOURCE_DIR}/examples/cmdline/*.c)
 	add_executable(cmdline WIN32 ${duktape_SRC} ${cmdline_SRC})
