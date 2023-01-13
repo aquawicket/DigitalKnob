@@ -108,6 +108,7 @@ bool DKDuktape::Init(){
 		ctx = duk_create_heap(NULL, NULL, NULL, my_udata, my_fatal);
 		if(!ctx)
 			return DKERROR("Failed to create a Duktape heap.\n");
+		DKClass::DKCreate("DKDuktapeDebugger");
 		DKClass::DKCreate("DKDuktapeJS");
 
 #ifdef USE_DuktapeDom

@@ -34,6 +34,68 @@ bool DKDuktapeDebugger::Init(){
 	if (!ctx)
 		return DKERROR("ctx is invalid! \n");
 
+	duk_push_c_function(ctx, native_print, DUK_VARARGS);
+	duk_put_global_string(ctx, "print");
+
+	trans_ctx = duk_trans_dvalue_init();
+	if (!trans_ctx)
+		return DKERROR("trans_ctx is invalid! \n");
+
+	trans_ctx->cooperate = my_cooperate;
+	trans_ctx->received = my_received;
+	trans_ctx->handshake = my_handshake;
+	trans_ctx->detached = my_detached;
+
+	// Attach debugger; this will fail with a fatal error here unless
+	// debugger support is compiled in.  To fail more gracefully, call
+	// this under a duk_safe_call() to catch the error.
+	duk_debugger_attach(ctx,
+		duk_trans_dvalue_read_cb,
+		duk_trans_dvalue_write_cb,
+		duk_trans_dvalue_peek_cb,
+		duk_trans_dvalue_read_flush_cb,
+		duk_trans_dvalue_write_flush_cb,
+		NULL,  /* app request cb */
+		duk_trans_dvalue_detached_cb,
+		(void*)trans_ctx);
+
+	fprintf(stderr, "Debugger attached \n");
+	fflush(stderr);
+
+	/*
+	// Evaluate simple test code, callbacks will "step over" until end.
+	// The test code here is just for exercising the debug transport.
+	// The 'evalMe' variable is evaluated (using debugger command Eval)
+	// before every step to force different dvalues to be carried over
+	// the transport.
+	duk_eval_string(ctx,
+		"var evalMe;\n"
+		"\n"
+		"print('Hello world!');\n"
+		"[ undefined, null, true, false, 123, -123, 123.1, 0, -0, 1/0, 0/0, -1/0, \n"
+		"  'foo', Uint8Array.allocPlain('bar'), Duktape.Pointer('dummy'), Math.cos, \n"
+		"].forEach(function (val) {\n"
+		"    print(val);\n"
+		"    evalMe = val;\n"
+		"});\n"
+		"\n"
+		"var str = 'xxx'\n"
+		"for (i = 0; i < 10; i++) {\n"
+		"    print(i, str);\n"
+		"    evalMe = str;\n"
+		"    evalMe = Uint8Array.allocPlain(str);\n"
+		"    str = str + str;\n"
+		"}\n"
+	);
+	duk_pop(ctx);
+
+	duk_debugger_detach(ctx);
+	if (trans_ctx) {
+		duk_trans_dvalue_free(trans_ctx);
+		trans_ctx = NULL;
+	}
+	*/
+
 	return true;
 }
 
@@ -67,7 +129,6 @@ void DKDuktapeDebugger::my_cooperate(duk_trans_dvalue_ctx* ctx, int block) {
 	// If you create dvalues manually and send them using
 	// duk_trans_dvalue_send(), you must free the dvalues after
 	// the send call returns using duk_dvalue_free().
-
 	if (first_blocked) {
 		char* tmp;
 		int i;
@@ -79,7 +140,6 @@ void DKDuktapeDebugger::my_cooperate(duk_trans_dvalue_ctx* ctx, int block) {
 		// bytes.  This is caused by the DumpHeap command writing out
 		// verbatim duk_tval values which are intentionally not
 		// always fully initialized for performance reasons.
-		
 		first_blocked = 0;
 
 		fprintf(stderr, "Duktape is blocked, send DumpHeap\n");
@@ -139,7 +199,6 @@ void DKDuktapeDebugger::my_cooperate(duk_trans_dvalue_ctx* ctx, int block) {
 void DKDuktapeDebugger::my_received(duk_trans_dvalue_ctx* ctx, duk_dvalue* dv) {
 	DKDEBUGFUNC(ctx, dv);
 	char buf[DUK_DVALUE_TOSTRING_BUFLEN];
-	(void) ctx;
 
 	duk_dvalue_to_string(dv, buf);
 	fprintf(stderr, "Received dvalue: %s\n", buf);
@@ -154,29 +213,24 @@ void DKDuktapeDebugger::my_received(duk_trans_dvalue_ctx* ctx, duk_dvalue* dv) {
 	// Here we free it immediately, but an actual client would probably
 	// gather dvalues into an array or linked list to handle when the
 	// debug message was complete.
-
 	duk_dvalue_free(dv);
 }
 
 void DKDuktapeDebugger::my_handshake(duk_trans_dvalue_ctx* ctx, const char* line) {
 	DKDEBUGFUNC(ctx, line);
-	(void) ctx;
 
 	// The Duktape handshake line is given in 'line' (without LF).
 	// The 'line' argument can be accessed for the duration of the
 	// callback (read only).  Don't free 'line' here, the transport
 	// handles that.
-
 	fprintf(stderr, "Received handshake line: '%s'\n", line);
 	fflush(stderr);
 }
 
 void DKDuktapeDebugger::my_detached(duk_trans_dvalue_ctx* ctx) {
 	DKDEBUGFUNC(ctx);
-	(void) ctx;
 
 	// Detached call forwarded as is.
-
 	fprintf(stderr, "Debug transport detached\n");
 	fflush(stderr);
 }
