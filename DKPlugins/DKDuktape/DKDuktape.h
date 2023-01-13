@@ -44,7 +44,8 @@
 const char *duk_push_string_file_raw(duk_context *ctx, const char *path, duk_uint_t flags);
 duk_int_t duk_peval_file(duk_context *ctx, const char *path);
 
-class DKDuktape : public DKObjectT<DKDuktape>{
+class DKDuktape : public DKObjectT<DKDuktape>
+{
 public:
 	bool Init();
 	bool End();
