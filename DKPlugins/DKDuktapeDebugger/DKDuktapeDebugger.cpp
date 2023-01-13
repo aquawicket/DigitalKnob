@@ -229,8 +229,8 @@ void DKDuktapeDebugger::my_received(duk_trans_dvalue_ctx* ctx, duk_dvalue* dv) {
 		//message[3] = /path/to/file.js
 		//message[4] = function name
 		//message[5] = line number
+		//DKINFO(toString(message, ",") + "\n");
 		if (same(message[2], "0")) {
-			//DKINFO(toString(message, ",") + "\n");
 			DKString fileString;
 			if(DKFile::PathExists(message[3]))
 				DKFile::FileLineToString(message[3], toInt(message[5]), fileString);
