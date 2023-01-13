@@ -116,7 +116,7 @@ bool DKDuktapeDebugger::attach() {
 }
 
 void DKDuktapeDebugger::my_cooperate(duk_trans_dvalue_ctx* ctx, int block) {
-	DKDEBUGFUNC(ctx, block);
+	//DKDEBUGFUNC(ctx, block); //EXCESSIVE LOGGING
 	static int first_blocked = 1;
 
 	if (!block) {
@@ -211,7 +211,7 @@ void DKDuktapeDebugger::my_cooperate(duk_trans_dvalue_ctx* ctx, int block) {
 }
 
 void DKDuktapeDebugger::my_received(duk_trans_dvalue_ctx* ctx, duk_dvalue* dv) {
-	DKDEBUGFUNC(ctx, dv);
+	//DKDEBUGFUNC(ctx, dv); //EXCESSIVE LOGGING
 	char buf[DUK_DVALUE_TOSTRING_BUFLEN];
 
 	duk_dvalue_to_string(dv, buf);
@@ -223,11 +223,20 @@ void DKDuktapeDebugger::my_received(duk_trans_dvalue_ctx* ctx, duk_dvalue* dv) {
 	message.push_back(toString(buf));
 
 	if (same(toString(buf), "EOM")) {
-		replace(message[3], DKFile::local_assets, "");
-		
+		//message[0] = NFY
+		//message[1] = 1
+		//message[2] = 1 or 0
+		//message[3] = /path/to/file.js
+		//message[4] = function name
+		//message[5] = line number
 		if (same(message[2], "0")) {
 			//DKINFO(toString(message, ",") + "\n");
-			DKINFO(message[3] + ":"+message[5]+" "+message[4] + "()\n");
+			DKString fileString;
+			if(DKFile::PathExists(message[3]))
+				DKFile::FileLineToString(message[3], toInt(message[5]), fileString);
+			replace(message[3], DKFile::local_assets, "");
+			//DKINFO("[JS] " + message[3] + ":" + message[5] + " " + message[4] + "(): "+fileString+"\n");
+			DKINFO("[JS] " + message[3] + ":" + message[5] + ": " + fileString + "\n");
 		}
 	}
 

@@ -440,9 +440,9 @@ bool DKDuktape::RunDuktape(const DKString& code){
 bool DKDuktape::RunDuktape(const DKString& code, DKString& rval){
 	DKDEBUGFUNC(code, rval);
 	if(!DKUtil::InMainThread())
-		return DKERROR("not in main thread");
+		return DKERROR("Not in main thread! \n");
 	if(!DKDuktape::ctx)
-		return DKERROR("DKDuktape::ctx is invalid\n");
+		return DKERROR("DKDuktape::ctx is invalid! \n");
 	if(duk_peval_string(ctx, code.c_str()) != 0)
 		DKDuktape::DumpError(code);
 	//get return value

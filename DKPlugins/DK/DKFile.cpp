@@ -33,6 +33,7 @@
 #include <fstream>
 #include <string>
 #include <iostream>
+#include <sstream>
 #include <sys/stat.h>
 #include <cstring>
 //WARNING_ENABLE
@@ -207,13 +208,13 @@ bool DKFile::Delete(const DKString& path){
 	return true;
 }
 
-bool DKFile::FileToString(const DKString& file, DKString& string){
+bool DKFile::FileToString(const DKString& file, DKString& string) {
 	DKDEBUGFUNC(file, string);
 	DebugPath(file);
 	if(!PathExists(file))
-		return DKERROR("file:("+file+") path does not exist \n");
+		return DKERROR(file+": path does not exist! \n");
 	if(IsDirectory(file))
-		return DKERROR("file:("+file+") path is a directory \n");
+		return DKERROR(file+": path is a directory! \n");
 	//TODO: error control
 	std::ifstream t(file.c_str());
 	std::string str((std::istreambuf_iterator<char>(t)), std::istreambuf_iterator<char>());
@@ -221,7 +222,25 @@ bool DKFile::FileToString(const DKString& file, DKString& string){
 	return true;// && DKDEBUGRETURN(file, string);
 }
 
-bool DKFile::FindFile(DKString& filename, const DKString& path, const DKString& extension){
+bool DKFile::FileLineToString(const DKString& file, const int lineNum, DKString& string) {
+	DKDEBUGFUNC(file, lineNum, string);
+	DKString data;
+	FileToString(file, data);
+
+	unsigned int currentLine = 1;
+	std::istringstream f(data);
+	std::string line;
+	while (std::getline(f, line)) {
+		if (lineNum == currentLine){
+			string = line;
+			return true;
+		}
+		currentLine++;
+	}
+	return false;// DKERROR("DKFile::FileLineToString() failed! \n");
+}
+
+bool DKFile::FindFile(DKString& filename, const DKString& path, const DKString& extension) {
 	DKDEBUGFUNC(filename, path, extension);
 	DebugPath(filename);
 	DebugPath(path);
@@ -239,7 +258,7 @@ bool DKFile::FindFile(DKString& filename, const DKString& path, const DKString& 
 	return DKERROR("Could not find "+filename+extension+" file \n");
 }
 
-bool DKFile::GetAbsolutePath(const DKString& in, DKString& out){
+bool DKFile::GetAbsolutePath(const DKString& in, DKString& out) {
 	DKDEBUGFUNC(in, out);
 	//GetAbsolutePath is allowed to recieve obscure paths, it will return normalized paths.
 	if(!PathExists(in))
