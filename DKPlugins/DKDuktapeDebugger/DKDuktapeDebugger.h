@@ -42,11 +42,11 @@ public:
 	bool Init();
 	bool End();
 	
+	bool attach();
 	static void my_cooperate(duk_trans_dvalue_ctx* ctx, int block);
 	static void my_received(duk_trans_dvalue_ctx* ctx, duk_dvalue* dv);
 	static void my_handshake(duk_trans_dvalue_ctx* ctx, const char* line);
 	static void my_detached(duk_trans_dvalue_ctx* ctx);
-	static duk_ret_t native_print(duk_context* ctx);
 	
 	duk_context* ctx;
 	duk_trans_dvalue_ctx* trans_ctx;

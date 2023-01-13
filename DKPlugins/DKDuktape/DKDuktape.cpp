@@ -27,6 +27,7 @@
 #include "DK/stdafx.h"
 #include "DK/DKFile.h"
 #include "DKDuktape/DKDuktape.h"
+#include "DKDuktapeDebugger/DKDuktapeDebugger.h"
 
 //WARNING_DISABLE
 #include <string>
@@ -108,7 +109,7 @@ bool DKDuktape::Init(){
 		ctx = duk_create_heap(NULL, NULL, NULL, my_udata, my_fatal);
 		if(!ctx)
 			return DKERROR("Failed to create a Duktape heap.\n");
-		DKClass::DKCreate("DKDuktapeDebugger");
+		//DKClass::DKCreate("DKDuktapeDebugger");
 		DKClass::DKCreate("DKDuktapeJS");
 
 #ifdef USE_DuktapeDom
@@ -146,10 +147,10 @@ bool DKDuktape::Init(){
 				return DKERROR("Error in handle_file\n");
 		}
 #endif
-
         DKString app = DKFile::local_assets+"app.js";
 		LoadFile(app);
 	}
+	
 	DKApp::AppendLoopFunc(&DKDuktape::EventLoop, this);
 	return true;
 }
@@ -332,6 +333,7 @@ bool DKDuktape::LoadFile(const DKString& path){
 		return DKERROR("path invalid! \n");
 	//if(FileLoaded(path))
 		//return false;
+
 	DKString js;
 	DKFile::FileToString(path, js);
 	if(duk_peval_file(ctx, path.c_str()) != 0)

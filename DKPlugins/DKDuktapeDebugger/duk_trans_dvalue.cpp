@@ -120,7 +120,7 @@ void duk_dvalue_to_string(duk_dvalue *dv, char *buf) {
 		sprintf(buf, "%d", dv->i);
 		break;
 	case DUK_DVALUE_STRING:
-		duk__dvalue_bufesc(dv, hexbuf, 32, 1);
+		duk__dvalue_bufesc(dv, hexbuf, 128, 1);
 		sprintf(buf, "str:%ld:\"%s\"", (long) dv->len, hexbuf);
 		break;
 	case DUK_DVALUE_BUFFER:

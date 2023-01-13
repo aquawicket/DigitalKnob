@@ -27,15 +27,12 @@
 #include "DK/stdafx.h"
 #include "DKDuktapeDebugger/DKDuktapeDebugger.h"
 
-bool DKDuktapeDebugger::Init(){
+bool DKDuktapeDebugger::Init() {
 	DKDEBUGFUNC();
 
 	ctx = DKDuktape::Get()->ctx;
 	if (!ctx)
 		return DKERROR("ctx is invalid! \n");
-
-	duk_push_c_function(ctx, native_print, DUK_VARARGS);
-	duk_put_global_string(ctx, "print");
 
 	trans_ctx = duk_trans_dvalue_init();
 	if (!trans_ctx)
@@ -46,20 +43,7 @@ bool DKDuktapeDebugger::Init(){
 	trans_ctx->handshake = my_handshake;
 	trans_ctx->detached = my_detached;
 
-	// Attach debugger; this will fail with a fatal error here unless
-	// debugger support is compiled in.  To fail more gracefully, call
-	// this under a duk_safe_call() to catch the error.
-	duk_debugger_attach(ctx,
-		duk_trans_dvalue_read_cb,
-		duk_trans_dvalue_write_cb,
-		duk_trans_dvalue_peek_cb,
-		duk_trans_dvalue_read_flush_cb,
-		duk_trans_dvalue_write_flush_cb,
-		NULL,  /* app request cb */
-		duk_trans_dvalue_detached_cb,
-		(void*)trans_ctx);
-
-	DKINFO("Debugger attached \n");
+	attach();
 
 	/*
 	// Evaluate simple test code, callbacks will "step over" until end.
@@ -98,7 +82,7 @@ bool DKDuktapeDebugger::Init(){
 	return true;
 }
 
-bool DKDuktapeDebugger::End(){
+bool DKDuktapeDebugger::End() {
 	DKDEBUGFUNC();
 
 	duk_debugger_detach(ctx);
@@ -107,6 +91,24 @@ bool DKDuktapeDebugger::End(){
 		trans_ctx = NULL;
 	}
 
+	return true;
+}
+
+bool DKDuktapeDebugger::attach() {
+	// Attach debugger; this will fail with a fatal error here unless
+	// debugger support is compiled in.  To fail more gracefully, call
+	// this under a duk_safe_call() to catch the error.
+	duk_debugger_attach(ctx,
+		duk_trans_dvalue_read_cb,
+		duk_trans_dvalue_write_cb,
+		duk_trans_dvalue_peek_cb,
+		duk_trans_dvalue_read_flush_cb,
+		duk_trans_dvalue_write_flush_cb,
+		NULL,  /* app request cb */
+		duk_trans_dvalue_detached_cb,
+		(void*)trans_ctx);
+
+	DKINFO("Debugger attached \n");
 	return true;
 }
 
@@ -148,16 +150,17 @@ void DKDuktapeDebugger::my_cooperate(duk_trans_dvalue_ctx* ctx, int block) {
 		// always fully initialized for performance reasons.
 		first_blocked = 0;
 
+		/*
 		DKINFO("Duktape is blocked, send DumpHeap \n");
-
 		duk_trans_dvalue_send_req(ctx);
 		duk_trans_dvalue_send_integer(ctx, 0x20);  // DumpHeap
 		duk_trans_dvalue_send_eom(ctx);
+		*/
 
+		/*
 		// Also send a dummy TriggerStatus request with trailing dvalues
 		// ignored by Duktape; Duktape will parse the dvalues to be able to
 		// skip them, so that the dvalue encoding is exercised.
-
 		tmp = (char*)malloc(100000);  // long buffer, >= 65536 chars
 		for (i = 0; i < 100000; i++) {
 			tmp[i] = (char) i;
@@ -185,17 +188,21 @@ void DKDuktapeDebugger::my_cooperate(duk_trans_dvalue_ctx* ctx, int block) {
 		duk_trans_dvalue_send_heapptr(ctx, (const char *) tmp, 8);  // fake ptr len
 
 		duk_trans_dvalue_send_eom(ctx);
+		*/
 	}
 
-	DKINFO("Duktape is blocked, send Eval and StepInto to resume execution \n");
+	//DKINFO("Duktape is blocked, send Eval and StepInto to resume execution \n");
 
 	// duk_trans_dvalue_send_req_cmd() sends a REQ dvalue followed by
 	// an integer dvalue (command) for convenience.
 
+	/*
 	duk_trans_dvalue_send_req_cmd(ctx, 0x1e);  // 0x1e = Eval
 	duk_trans_dvalue_send_string(ctx, "evalMe");
 	duk_trans_dvalue_send_eom(ctx);
+	*/
 
+	DKINFO("Duktape is blocked, send StepInto to resume execution \n");
 	duk_trans_dvalue_send_req_cmd(ctx, 0x14);  // 0x14 = StepOver
 	duk_trans_dvalue_send_eom(ctx);
 }
@@ -236,6 +243,7 @@ void DKDuktapeDebugger::my_detached(duk_trans_dvalue_ctx* ctx) {
 	DKINFO("Debug transport detached \n");
 }
 
+/*
 duk_ret_t DKDuktapeDebugger::native_print(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	duk_push_string(ctx, " ");
@@ -245,3 +253,4 @@ duk_ret_t DKDuktapeDebugger::native_print(duk_context* ctx) {
 	DKINFO(toString(duk_to_string(ctx, -1))+" \n");
 	return 0;
 }
+*/
