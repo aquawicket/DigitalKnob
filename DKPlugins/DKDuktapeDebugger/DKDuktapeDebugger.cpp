@@ -59,8 +59,7 @@ bool DKDuktapeDebugger::Init(){
 		duk_trans_dvalue_detached_cb,
 		(void*)trans_ctx);
 
-	fprintf(stderr, "Debugger attached \n");
-	fflush(stderr);
+	DKINFO("Debugger attached \n");
 
 	/*
 	// Evaluate simple test code, callbacks will "step over" until end.
@@ -101,6 +100,13 @@ bool DKDuktapeDebugger::Init(){
 
 bool DKDuktapeDebugger::End(){
 	DKDEBUGFUNC();
+
+	duk_debugger_detach(ctx);
+	if (trans_ctx) {
+		duk_trans_dvalue_free(trans_ctx);
+		trans_ctx = NULL;
+	}
+
 	return true;
 }
 
@@ -142,8 +148,7 @@ void DKDuktapeDebugger::my_cooperate(duk_trans_dvalue_ctx* ctx, int block) {
 		// always fully initialized for performance reasons.
 		first_blocked = 0;
 
-		fprintf(stderr, "Duktape is blocked, send DumpHeap\n");
-		fflush(stderr);
+		DKINFO("Duktape is blocked, send DumpHeap \n");
 
 		duk_trans_dvalue_send_req(ctx);
 		duk_trans_dvalue_send_integer(ctx, 0x20);  // DumpHeap
@@ -182,8 +187,7 @@ void DKDuktapeDebugger::my_cooperate(duk_trans_dvalue_ctx* ctx, int block) {
 		duk_trans_dvalue_send_eom(ctx);
 	}
 
-	fprintf(stderr, "Duktape is blocked, send Eval and StepInto to resume execution\n");
-	fflush(stderr);
+	DKINFO("Duktape is blocked, send Eval and StepInto to resume execution \n");
 
 	// duk_trans_dvalue_send_req_cmd() sends a REQ dvalue followed by
 	// an integer dvalue (command) for convenience.
@@ -201,8 +205,7 @@ void DKDuktapeDebugger::my_received(duk_trans_dvalue_ctx* ctx, duk_dvalue* dv) {
 	char buf[DUK_DVALUE_TOSTRING_BUFLEN];
 
 	duk_dvalue_to_string(dv, buf);
-	fprintf(stderr, "Received dvalue: %s\n", buf);
-	fflush(stderr);
+	DKINFO("Received dvalue: " + toString(buf) + "\n");
 
 	// Here a normal debug client would wait for dvalues until an EOM
 	// dvalue was received (which completes a debug message).  The
@@ -223,16 +226,14 @@ void DKDuktapeDebugger::my_handshake(duk_trans_dvalue_ctx* ctx, const char* line
 	// The 'line' argument can be accessed for the duration of the
 	// callback (read only).  Don't free 'line' here, the transport
 	// handles that.
-	fprintf(stderr, "Received handshake line: '%s'\n", line);
-	fflush(stderr);
+	DKINFO("Received handshake line: " + toString(line) + "\n");
 }
 
 void DKDuktapeDebugger::my_detached(duk_trans_dvalue_ctx* ctx) {
 	DKDEBUGFUNC(ctx);
 
 	// Detached call forwarded as is.
-	fprintf(stderr, "Debug transport detached\n");
-	fflush(stderr);
+	DKINFO("Debug transport detached \n");
 }
 
 duk_ret_t DKDuktapeDebugger::native_print(duk_context* ctx) {
@@ -240,6 +241,7 @@ duk_ret_t DKDuktapeDebugger::native_print(duk_context* ctx) {
 	duk_push_string(ctx, " ");
 	duk_insert(ctx, 0);
 	duk_join(ctx, duk_get_top(ctx) - 1);
-	printf("%s\n", duk_to_string(ctx, -1));
+
+	DKINFO(toString(duk_to_string(ctx, -1))+" \n");
 	return 0;
 }
