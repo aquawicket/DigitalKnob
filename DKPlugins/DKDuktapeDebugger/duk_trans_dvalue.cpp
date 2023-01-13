@@ -405,11 +405,11 @@ duk_trans_dvalue_ctx *duk_trans_dvalue_init(void) {
 	ctx->send_buf.base = NULL;
 	ctx->recv_buf.base = NULL;
 
-	ctx->send_buf.base = malloc(256);
+	ctx->send_buf.base = (unsigned char*)malloc(256);
 	if (!ctx->send_buf.base) { goto fail; }
 	ctx->send_buf.alloc_size = 256;
 
-	ctx->recv_buf.base = malloc(256);
+	ctx->recv_buf.base = (unsigned char*)malloc(256);
 	if (!ctx->recv_buf.base) { goto fail; }
 	ctx->recv_buf.alloc_size = 256;
 
