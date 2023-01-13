@@ -50,6 +50,7 @@ public:
 	
 	duk_context* ctx;
 	duk_trans_dvalue_ctx* trans_ctx;
+	static DKStringArray message;
 };
 
 

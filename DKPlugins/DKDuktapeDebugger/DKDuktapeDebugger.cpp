@@ -26,6 +26,9 @@
 
 #include "DK/stdafx.h"
 #include "DKDuktapeDebugger/DKDuktapeDebugger.h"
+#include "DK/DKFile.h"
+
+DKStringArray DKDuktapeDebugger::message;
 
 bool DKDuktapeDebugger::Init() {
 	DKDEBUGFUNC();
@@ -202,8 +205,8 @@ void DKDuktapeDebugger::my_cooperate(duk_trans_dvalue_ctx* ctx, int block) {
 	duk_trans_dvalue_send_eom(ctx);
 	*/
 
-	DKINFO("Duktape is blocked, send StepInto to resume execution \n");
-	duk_trans_dvalue_send_req_cmd(ctx, 0x14);  // 0x14 = StepOver
+	//DKINFO("Duktape is blocked, send StepInto to resume execution \n");
+	duk_trans_dvalue_send_req_cmd(ctx, 0x14);  // 0x14 = StepInto
 	duk_trans_dvalue_send_eom(ctx);
 }
 
@@ -212,7 +215,21 @@ void DKDuktapeDebugger::my_received(duk_trans_dvalue_ctx* ctx, duk_dvalue* dv) {
 	char buf[DUK_DVALUE_TOSTRING_BUFLEN];
 
 	duk_dvalue_to_string(dv, buf);
-	DKINFO("Received dvalue: " + toString(buf) + "\n");
+	//DKINFO("Received dvalue: " + toString(buf) + "\n");
+
+	if (same(toString(buf), "NFY"))
+		message.clear();
+
+	message.push_back(toString(buf));
+
+	if (same(toString(buf), "EOM")) {
+		replace(message[3], DKFile::local_assets, "");
+		
+		if (same(message[2], "0")) {
+			//DKINFO(toString(message, ",") + "\n");
+			DKINFO(message[3] + ":"+message[5]+" "+message[4] + "()\n");
+		}
+	}
 
 	// Here a normal debug client would wait for dvalues until an EOM
 	// dvalue was received (which completes a debug message).  The
