@@ -42,7 +42,6 @@ bool DKDuktapeDebugger::End(){
 	return true;
 }
 
-/*
 void DKDuktapeDebugger::my_cooperate(duk_trans_dvalue_ctx* ctx, int block) {
 	DKDEBUGFUNC(ctx, block);
 	static int first_blocked = 1;
@@ -190,4 +189,3 @@ duk_ret_t DKDuktapeDebugger::native_print(duk_context* ctx) {
 	printf("%s\n", duk_to_string(ctx, -1));
 	return 0;
 }
-*/
