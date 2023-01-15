@@ -8,9 +8,9 @@
 
 ### DEPEND ###
 #if(NOT EXISTS ${DUKTAPE}/src/duktape.c)
-	dk_depend(python)
-	dk_depend(pyyaml)
-	dk_depend(nodejs)
+	#dk_depend(python)
+	#dk_depend(pyyaml)
+	#dk_depend(nodejs)
 #endif()
 
 
