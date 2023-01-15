@@ -1,83 +1,83 @@
 //https://developer.mozilla.org/en-US/docs/Web/API/Location
 
-var Location = function(pointer) {
+var Location = function Location(pointer) {
     // Properties
     Object.defineProperty(this, "hash", {
-        get: function() {
+        get: function hash() {
             return CPP_DKDomLocation_hash();
         }
     });
     Object.defineProperty(this, "host", {
-        get: function() {
+        get: function host() {
             return CPP_DKDomLocation_host();
         },
-        set: function(val) {
+        set: function host(val) {
             return CPP_DKDomLocation_host(val);
         }
     });
     Object.defineProperty(this, "hostname", {
-        get: function() {
+        get: function hostname() {
             return CPP_DKDomLocation_hostname();
         },
-        set: function(val) {
+        set: function hostname(val) {
             return CPP_DKDomLocation_hostname(val);
         }
     });
     Object.defineProperty(this, "href", {
-        get: function() {
+        get: function href() {
             return CPP_DKDomLocation_href();
         },
-        set: function(val) {
+        set: function href(val) {
             return CPP_DKDomLocation_href(val);
         }
     });
     Object.defineProperty(this, "origin", {
-        get: function() {
+        get: function origin() {
             return CPP_DKDomLocation_origin();
         }
     });
     Object.defineProperty(this, "pathname", {
-        get: function() {
+        get: function pathname() {
             return CPP_DKDomLocation_pathname();
         },
-        set: function(val) {
+        set: function pathname(val) {
             return CPP_DKDomLocation_pathname(val);
         }
     });
     Object.defineProperty(this, "port", {
-        get: function() {
+        get: function port() {
             return CPP_DKDomLocation_port();
         },
-        set: function(val) {
+        set: function port(val) {
             return CPP_DKDomLocation_port(val);
         }
     });
     Object.defineProperty(this, "protocol", {
-        get: function() {
+        get: function protocol() {
             return CPP_DKDomLocation_protocol();
         },
-        set: function(val) {
+        set: function protocol(val) {
             return CPP_DKDomLocation_protocol(val);
         }
     });
     Object.defineProperty(this, "search", {
-        get: function() {
+        get: function search() {
             return CPP_DKDomLocation_search();
         },
-        set: function(val) {
+        set: function search(val) {
             return CPP_DKDomLocation_search(val);
         }
     });
 
     // Methods
-    Location.prototype.assign = function(url) {
+    Location.prototype.assign = function assign(url) {
         CPP_DKDomLocation_href(url);
     }
-    Location.prototype.reload = function(forcedReload) {
+    Location.prototype.reload = function reload(forcedReload) {
         CPP_DK_Reload();
         //CPP_DKDomLocation_reload(forcedReload); 
     }
-    Location.prototype.replace = function(url) {
+    Location.prototype.replace = function replace(url) {
         CPP_DKDomLocation_href(url);
         //TODO - https://developer.mozilla.org/en-US/docs/Web/API/Location/replace
     }
