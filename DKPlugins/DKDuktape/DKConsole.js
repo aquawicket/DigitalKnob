@@ -11,7 +11,7 @@ const Console_HandleColor = function Console_HandleColor(msg){
 }
 
 // https://console.spec.whatwg.org/#console-namespace
-var Console = function(pointer) {
+var Console = function Console(pointer) {
     Console.prototype.assert = function assert(msg) {
 		msg = Console_HandleColor(msg)
         //if (assertion)

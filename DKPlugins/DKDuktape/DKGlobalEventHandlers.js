@@ -1,15 +1,15 @@
 //https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers
 
-var GlobalEventHandlers = function(pointer) {
+var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
     this.pointer = pointer;
 
     this.abort = null;
     Object.defineProperty(this, "onabort", {
         configurable: true,
-        get: function() {
+        get: function onabort() {
             return this.abort;
         },
-        set: function(func) {
+        set: function onabort(func) {
             this.addEventListener("abort", func);
             this.abort = func
         }
