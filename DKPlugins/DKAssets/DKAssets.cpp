@@ -280,10 +280,10 @@ bool DKAssets::PackageAssets(DKString& dataFolder, DKString& headerFile){
 #if !WIN
 	#if HAVE_DKArchive
 		if(!DKArchive::Compress(dataFolder, dataFolder + "/../assets.zip"))
-			return false;
+			return DKERROR("DKArchive::Compress() failed! \n");
 	#endif
 	if (!DKUtil::Bin2C(dataFolder + "/../assets.zip", headerFile))
-		return false;
+		return DKERROR("DKUtil::Bin2C() failed! \n");
 	//DKFile::Delete(dataFolder + "/../assets.zip"); //delete lingering zip file;
 	//alter assets.h file (the memory intensive way :P)
 	/*
@@ -332,9 +332,9 @@ bool DKAssets::DeployAssets(){
 //Windows will use the resources interface
 #if WIN32
 	DKINFO("Extracting assets from executable windows resources . . . \n");	
-	HGLOBAL hResourceLoaded;		// handle to loaded resource 
+	HGLOBAL hResourceLoaded;	// handle to loaded resource 
 	HRSRC hRes;					// handle/ptr. to res. info. 
-	char *lpResLock;				// pointer to resource data 
+	char *lpResLock;			// pointer to resource data 
 	DWORD dwSizeRes;
 
 	DKFile::MakeDir(DKFile::local_assets);

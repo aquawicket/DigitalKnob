@@ -21,7 +21,7 @@ dk_import(https://github.com/aquawicket/duktape.git PATCH) #NOTE: PATCH is for C
 ### LINK ###
 WIN_dk_define		(DUK_F_VBCC)
 ANDROID_dk_define	(DUK_F_32BIT_PTRS)
-dk_include			(${DUKTAPE}/dist/src)
+dk_include			(${DUKTAPE}/src)
 WIN_dk_libDebug		(${DUKTAPE}/${OS}/${DEBUG_DIR}/duktape.lib)
 WIN_dk_libRelease	(${DUKTAPE}/${OS}/${RELEASE_DIR}/duktape.lib)
 UNIX_dk_libDebug	(${DUKTAPE}/${OS}/${DEBUG_DIR}/libduktape.a)
@@ -44,6 +44,7 @@ if(NOT EXISTS ${DUKTAPE}/src/duktape.c)
 		-DDUK_USE_DEBUGGER_INSPECT
 		-DDUK_CMDLINE_DEBUGGER_SUPPORT)
 endif()
+
 dk_queueCommand(${DKCMAKE_BUILD} ${DUKTAPE})
 
 

@@ -219,36 +219,8 @@ ANDROID64_dk_queueCommand	(${SDL_BUILD} "-DCMAKE_CXX_FLAGS=-DHAVE_GCC_ATOMICS=1"
 EMSCRIPTEN_dk_queueCommand	(${SDL_BUILD} ${SDL})
 
 
-#if(USE_EMSCRIPTEN_BUILD_SCRIPT)
-#	if(WIN_HOST)
-#		EMSCRIPTEN_DEBUG_dk_queueCommand	(${EMSDK}/emsdk_env.bat)
-#	else()
-#		EMSCRIPTEN_DEBUG_dk_queueCommand	(${EMSDK}/emsdk_env.sh)
-#	endif()
-#	if(NOT EXISTS ${SDL}/buildbot/usr/local/lib/libSDL2.a)
-#		if(EMSCRIPTEN)
-#			set(ENV{SDKDIR} ${EMSDK})
-#		endif()
-#		EMSCRIPTEN_dk_Command		(${SDL}/build-scripts/emscripten-buildbot.sh)
-#	endif()
-#
-#	if(NOT EXISTS ${SDL}/emscripten/Debug/libSDL2d.a)
-#		EMSCRIPTEN_DEBUG_dk_copy	(${SDL}/buildbot/usr/local/include ${SDL}/emscripten/Debug/include)
-#		EMSCRIPTEN_DEBUG_dk_copy	(${SDL}/buildbot/usr/local/lib/libSDL2.a ${SDL}/emscripten/Debug/libSDL2d.a)
-#		EMSCRIPTEN_DEBUG_dk_copy	(${SDL}/buildbot/usr/local/lib/libSDL2main.a ${SDL}/emscripten/Debug/libSDL2maind.a)
-#	endif()
-#
-#	if(NOT EXISTS ${SDL}/emscripten/Release/libSDL2d.a)
-#		EMSCRIPTEN_RELEASE_dk_copy	(${SDL}/buildbot/usr/local/include ${SDL}/emscripten/Release/include)
-#		EMSCRIPTEN_RELEASE_dk_copy	(${SDL}/buildbot/usr/local/lib/libSDL2.a ${SDL}/emscripten/Release/libSDL2.a)
-#		EMSCRIPTEN_RELEASE_dk_copy	(${SDL}/buildbot/usr/local/lib/libSDL2main.a ${SDL}/emscripten/Release/libSDL2main.a)
-#	endif()
-#endif()
-
 ### COMPILE ###
-#if(NOT EMSCRIPTEN)
-	dk_build(${SDL_FOLDER})
-#endif()
+dk_build(${SDL_FOLDER})
 
 #if(sdl_SDL2static)
 	#dk_build(${SDL_FOLDER} SDL2-static)
