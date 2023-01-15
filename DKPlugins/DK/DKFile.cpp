@@ -222,7 +222,7 @@ bool DKFile::FileToString(const DKString& file, DKString& string) {
 	return true;// && DKDEBUGRETURN(file, string);
 }
 
-bool DKFile::FileLineToString(const DKString& file, const int lineNum, DKString& string) {
+bool DKFile::FileLineToString(const DKString& file, const unsigned int lineNum, DKString& string) {
 	DKDEBUGFUNC(file, lineNum, string);
 	DKString data;
 	FileToString(file, data);

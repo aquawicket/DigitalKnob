@@ -8,7 +8,7 @@ file(GLOB duktape_SRC ${CMAKE_SOURCE_DIR}/src/*.c)
 add_library(duktape STATIC ${duktape_SRC})
 
 #### BUILD EXAMPLES ###
-set(BUILD_DUKTAPE_EXAMPLES ON)
+#set(BUILD_DUKTAPE_EXAMPLES ON)
 if(BUILD_DUKTAPE_EXAMPLES AND WIN32)
 	# alloc-hybrid
 	#include_directories(${CMAKE_SOURCE_DIR}/examples/alloc-hybrid)

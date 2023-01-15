@@ -68,7 +68,7 @@ public:
 	static bool CreateFile(const DKString& path);
 	static bool Delete(const DKString& path);
 	static bool FileToString(const DKString& file, DKString& string);
-	static bool FileLineToString(const DKString& file, const int line, DKString& string);
+	static bool FileLineToString(const DKString& file, const unsigned int line, DKString& string);
 	static bool FindFile(DKString& filename, const DKString& path, const DKString& extension);
 	static bool GetAbsolutePath(const DKString& in, DKString& out);
 	static bool GetAppName(DKString& appname);
