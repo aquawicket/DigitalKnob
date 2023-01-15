@@ -1,7 +1,7 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/HTMLSpanElement
 // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/span
 
-var HTMLSpanElement = function(pointer) {
+var HTMLSpanElement = function HTMLSpanElement(pointer) {
  
     return HTMLElement.call(this, pointer);
 }
