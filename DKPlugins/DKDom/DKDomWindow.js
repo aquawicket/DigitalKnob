@@ -332,7 +332,7 @@ var Window = function Window(pointer)
     Window.prototype.maximize = function maximize() {}
     Window.prototype.minimize = function minimize() {}
     Window.prototype.moveBy = function moveBy() {}
-    Window.prototype.moveTo = functionmoveTo(x, y) {
+    Window.prototype.moveTo = function moveTo(x, y) {
         CPP_DKWindow_moveTo(x, y)
     }
     Window.prototype.open = function open() {}
