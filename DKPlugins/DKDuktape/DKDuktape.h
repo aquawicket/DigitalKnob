@@ -42,6 +42,7 @@
 /* Flags for duk_push_string_file_raw() */
 #define DUK_STRING_PUSH_SAFE              (1 << 0)    /* no error if file does not exist */
 const char *duk_push_string_file_raw(duk_context *ctx, const char *path, duk_uint_t flags);
+//void duk_eval_file(duk_context* ctx, const char* path);
 duk_int_t duk_peval_file(duk_context *ctx, const char *path);
 
 class DKDuktape : public DKObjectT<DKDuktape>

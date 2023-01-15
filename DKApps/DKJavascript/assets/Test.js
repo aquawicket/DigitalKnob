@@ -8,3 +8,4 @@ console.log(var_variable);
 
 let let_variable = "This is the value of a 'let' variable";
 console.log(let_variable);
+

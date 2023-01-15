@@ -37,6 +37,8 @@
 
 #define DKHAVE_DKDuktape 1
 
+#define DUK_DBG_MARKER_EOM        0x00
+
 duk_context* DKDuktape::ctx;
 DKStringArray DKDuktape::filelist;
 DKStringArray DKDuktape::functions;
@@ -85,6 +87,16 @@ fail:
 		(void) duk_type_error(ctx, "read file error");
 	return NULL;
 }
+
+/*
+void duk_eval_file(duk_context* ctx, const char* path) {
+	duk_push_string_file_raw(ctx, path, 0);
+	duk_push_string(ctx, path);
+	duk_compile(ctx, DUK_COMPILE_EVAL);
+	duk_push_global_object(ctx);  // 'this' binding
+	duk_call_method(ctx, 0);
+}
+*/
 
 duk_int_t duk_peval_file(duk_context *ctx, const char *path) {
 	DKDEBUGFUNC(ctx, path);
@@ -336,6 +348,7 @@ bool DKDuktape::LoadFile(const DKString& path){
 
 	DKString js;
 	DKFile::FileToString(path, js);
+	//duk_eval_file(ctx, path.c_str());
 	if (duk_peval_file(ctx, path.c_str()) != 0)
 		DKDuktape::DumpError(js);
 	duk_pop(ctx);  // what does this do?

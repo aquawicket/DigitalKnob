@@ -141,8 +141,8 @@ void DKDuktapeDebugger::my_cooperate(duk_trans_dvalue_ctx* ctx, int block) {
 	// duk_trans_dvalue_send(), you must free the dvalues after
 	// the send call returns using duk_dvalue_free().
 	if (first_blocked) {
-		char* tmp;
-		int i;
+		//char* tmp;
+		//int i;
 
 		// First time Duktape becomes blocked, send DumpHeap which
 		// exercises a lot of parsing code.
@@ -212,6 +212,7 @@ void DKDuktapeDebugger::my_cooperate(duk_trans_dvalue_ctx* ctx, int block) {
 
 void DKDuktapeDebugger::my_received(duk_trans_dvalue_ctx* ctx, duk_dvalue* dv) {
 	//DKDEBUGFUNC(ctx, dv); //EXCESSIVE LOGGING
+	(void)ctx;
 	char buf[DUK_DVALUE_TOSTRING_BUFLEN];
 
 	duk_dvalue_to_string(dv, buf);
@@ -235,8 +236,8 @@ void DKDuktapeDebugger::my_received(duk_trans_dvalue_ctx* ctx, duk_dvalue* dv) {
 			if(DKFile::PathExists(message[3]))
 				DKFile::FileLineToString(message[3], toInt(message[5]), fileString);
 			replace(message[3], DKFile::local_assets, "");
-			//DKINFO("[JS] " + message[3] + ":" + message[5] + " " + message[4] + "(): "+fileString+"\n");
-			DKINFO("[JS] " + message[3] + ":" + message[5] + ": " + fileString + "\n");
+			DKINFO("[JS] " + message[3] + ":" + message[5] + " " + message[4] + "(): \n"); //"+fileString+"\n");
+			//DKINFO("[JS] " + message[3] + ":" + message[5] + ": " + fileString + "\n");
 		}
 	}
 
