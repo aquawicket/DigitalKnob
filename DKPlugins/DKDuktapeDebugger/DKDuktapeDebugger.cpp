@@ -232,12 +232,13 @@ void DKDuktapeDebugger::my_received(duk_trans_dvalue_ctx* ctx, duk_dvalue* dv) {
 		//message[5] = line number
 		//DKINFO(toString(message, ",") + "\n");
 		if (same(message[2], "0")) {
+			/*
 			DKString fileString;
 			if(DKFile::PathExists(message[3]))
 				DKFile::FileLineToString(message[3], toInt(message[5]), fileString);
 			replace(message[3], DKFile::local_assets, "");
+			*/
 			DKINFO("[JS] " + message[3] + ":" + message[5] + " " + message[4] + "(): \n"); //"+fileString+"\n");
-			//DKINFO("[JS] " + message[3] + ":" + message[5] + ": " + fileString + "\n");
 		}
 	}
 
