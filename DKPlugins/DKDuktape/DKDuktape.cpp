@@ -27,7 +27,7 @@
 #include "DK/stdafx.h"
 #include "DK/DKFile.h"
 #include "DKDuktape/DKDuktape.h"
-#include "DKDuktapeDebugger/DKDuktapeDebugger.h"
+//#include "DKDuktapeDebugger/DKDuktapeDebugger.h"
 
 //WARNING_DISABLE
 #include <string>
@@ -36,8 +36,6 @@
 //WARNING_ENABLE
 
 #define DKHAVE_DKDuktape 1
-
-#define DUK_DBG_MARKER_EOM        0x00
 
 duk_context* DKDuktape::ctx;
 DKStringArray DKDuktape::filelist;
