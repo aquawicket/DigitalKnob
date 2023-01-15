@@ -1,13 +1,13 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/Document
 
 // https://dom.spec.whatwg.org/#interface-document
-var Document = function(pointer) 
+var Document = function Document(pointer) 
 {
     this.pointer = pointer;
     // Properties
     //TODO
     Object.defineProperty(this, "activeElement", {
-        get: function() {
+        get: function activeElement() {
             var address = CPP_DKDomDocument_activeElement()
             if (!address)
                 return;
@@ -15,13 +15,13 @@ var Document = function(pointer)
         },
     })
     Object.defineProperty(this, "body", {
-        get: function() {
+        get: function body() {
             var address = CPP_DKDomDocument_body()
             if (!address)
                 return;
             return new HTMLElement(address)
         },
-        set: function() {
+        set: function body() {
             if (!address)
                 return;
             return CPP_DKDomDocument_body(address)
@@ -30,7 +30,7 @@ var Document = function(pointer)
     })
     //TODO
     Object.defineProperty(this, "characterSet", {
-        get: function() {
+        get: function characterSet() {
             var address = CPP_DKDomDocument_characterSet()
             if (!address)
                 return;
@@ -39,7 +39,7 @@ var Document = function(pointer)
     })
     //TODO
     Object.defineProperty(this, "childElementCount", {
-        get: function() {
+        get: function childElementCount() {
             var address = CPP_DKDomDocument_childElementCount()
             if (!address)
                 return;
@@ -48,7 +48,7 @@ var Document = function(pointer)
     })
     //TODO
     Object.defineProperty(this, "children", {
-        get: function() {
+        get: function children() {
             var address = CPP_DKDomDocument_children()
             if (!address)
                 return;
@@ -57,7 +57,7 @@ var Document = function(pointer)
     })
     //TODO
     Object.defineProperty(this, "capatMode", {
-        get: function() {
+        get: function capatMode() {
             var address = CPP_DKDomDocument_capatMode()
             if (!address)
                 return;
@@ -68,7 +68,7 @@ var Document = function(pointer)
     //contentType 
     //doctype
     Object.defineProperty(this, "documentElement", {
-        get: function() {
+        get: function documentElement() {
             var address = CPP_DKDomDocument_documentElement()
             if (!address)
                 return;
@@ -103,7 +103,7 @@ var Document = function(pointer)
      */  
 
     // Methods
-    Document.prototype.createElement = function(tag) {
+    Document.prototype.createElement = function createElement(tag) {
         var address = CPP_DKDomDocument_createElement(tag)
         if (!address)
             return undefined;
@@ -115,7 +115,7 @@ var Document = function(pointer)
 			return new HTMLSpanElement(address)
         return new HTMLElement(address)
     }
-    Document.prototype.getElementById = function(id) {
+    Document.prototype.getElementById = function getElementById(id) {
         var address = CPP_DKDomDocument_getElementById(id)
         if (!address)
             return undefined;
@@ -128,7 +128,7 @@ var Document = function(pointer)
 			return new HTMLSpanElement(address)
 		return new HTMLElement(address)
     }
-    Document.prototype.getElementsByTagName = function(tag) {
+    Document.prototype.getElementsByTagName = function getElementsByTagName(tag) {
         var addresses = CPP_DKDomDocument_getElementsByTagName(tag)
         if (!addresses)
             return;
