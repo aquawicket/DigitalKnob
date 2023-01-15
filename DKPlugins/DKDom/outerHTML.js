@@ -18,7 +18,7 @@ var
 	  container = document.createElementNS("http://www.w3.org/1999/xhtml", "_")
 	, elem_proto = (view.HTMLElement || view.Element).prototype
 	, xml_serializer = new XMLSerializer
-	, outerHTML_getter = function() {
+	, outerHTML_getter = function outerHTML_getter() {
 		var
 			  node = this
 			, html
@@ -32,7 +32,7 @@ var
 			return html;
 		}
 	}
-	, outerHTML_setter = function(html) {
+	, outerHTML_setter = function outerHTML_setter(html) {
 		var
 			  node = this
 			, parent = node.parentNode
