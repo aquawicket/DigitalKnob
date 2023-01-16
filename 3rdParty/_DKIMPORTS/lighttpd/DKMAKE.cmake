@@ -20,4 +20,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${LIGHTTPD}) # -DLWS_WITH_SSL=OFF
 
 
 ### COMPILE ###
-dk_build(${LIGHTTPD_FOLDER} LIGHTTPD)
+dk_build(${LIGHTTPD} LIGHTTPD)

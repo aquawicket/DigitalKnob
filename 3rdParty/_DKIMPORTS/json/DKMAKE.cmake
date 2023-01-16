@@ -22,5 +22,5 @@ if(JSON_TESTS)
 
 
 	### COMPILE ###
-	dk_build(${JSON_FOLDER} json_unit)
+	dk_build(${JSON} json_unit)
 endif()

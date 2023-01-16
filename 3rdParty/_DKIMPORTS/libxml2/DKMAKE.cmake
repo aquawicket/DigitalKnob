@@ -50,4 +50,4 @@ EMSCRIPTEN_RELEASE_dk_queueShell(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=-DLIBXML_THRE
 
 
 ### COMPILE ###
-dk_build(${LIBXML2_FOLDER} xml2)
+dk_build(${LIBXML2} xml2)

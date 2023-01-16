@@ -56,4 +56,4 @@ dk_queueCommand(${DKCMAKE_BUILD} ${GLEW}/build/cmake)
 
 
 ### COMPILE ###
-dk_build(${GLEW_FOLDER} glew_s)
+dk_build(${GLEW} glew_s)

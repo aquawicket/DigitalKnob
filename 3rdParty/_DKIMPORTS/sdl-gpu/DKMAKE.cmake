@@ -33,4 +33,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${SDL_CMAKE} ${SDL-GPU})
 
 
 ### COMPILE ###
-dk_build(${SDL-GPU_FOLDER} SDL_gpu)
+dk_build(${SDL-GPU} SDL_gpu)

@@ -68,7 +68,7 @@ endif()
 
 ### COMPILE ###
 #if(PNG_MINOR LESS 7)
-	dk_build(${LIBPNG_FOLDER} png_static)
+	dk_build(${LIBPNG} png_static)
 #else()
-#	dk_build(${LIBPNG_FOLDER} png${LIBPNG_MAJOR}${LIBPNG_MINOR}_static)
+#	dk_build(${LIBPNG} png${LIBPNG_MAJOR}${LIBPNG_MINOR}_static)
 #endif()

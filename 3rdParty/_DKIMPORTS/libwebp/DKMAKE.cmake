@@ -50,4 +50,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${GIFLIB_CMAKE} ${LIBJPEG-TURBO_CMAKE} ${LIBPN
 
 
 ### COMPILE ###
-dk_build(${LIBWEBP_FOLDER} webp)
+dk_build(${LIBWEBP} webp)

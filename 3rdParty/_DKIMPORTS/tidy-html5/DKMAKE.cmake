@@ -36,4 +36,4 @@ endif()
 
 
 ### COMPILE ###
-dk_build(${TIDY-HTML5_FOLDER} tidy-static)
+dk_build(${TIDY-HTML5} tidy-static)

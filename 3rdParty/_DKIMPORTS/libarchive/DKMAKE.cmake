@@ -107,4 +107,4 @@ EMSCRIPTEN_dk_queueCommand(${DKCMAKE_BUILD} -DENABLE_TEST=OFF -DENABLE_ACL=OFF -
 
 
 ### COMPILE ###
-dk_build(${LIBARCHIVE_FOLDER} archive_static)
+dk_build(${LIBARCHIVE} archive_static)

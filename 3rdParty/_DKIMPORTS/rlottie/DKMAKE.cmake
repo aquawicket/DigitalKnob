@@ -22,4 +22,4 @@ UNIX_dk_queueCommand(${DKCMAKE_BUILD} ${RLOTTIE})
 
 
 ### COMPILE ###
-dk_build(${RLOTTIE_FOLDER} rlottie)
+dk_build(${RLOTTIE} rlottie)

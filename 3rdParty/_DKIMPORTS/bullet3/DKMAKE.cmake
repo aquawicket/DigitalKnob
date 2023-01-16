@@ -230,4 +230,4 @@ dk_queueCommand(${DKCMAKE_BUILD} ${BULLET3})
 
 
 ### COMPILE ###
-dk_build(${BULLET3_FOLDER})
+dk_build(${BULLET3})

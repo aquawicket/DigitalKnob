@@ -37,4 +37,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${SDL_CMAKE} ${SDL2_GIF})
 
 
 ### COMPILE ###
-dk_build(${SDL2_GIF_FOLDER} SDL2_gif)
+dk_build(${SDL2_GIF} SDL2_gif)

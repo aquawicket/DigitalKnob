@@ -76,5 +76,5 @@ endif()
 
 
 ### COMPILE ###
-dk_build(${LIBVNCSERVER_FOLDER} vncserver)
-dk_build(${LIBVNCSERVER_FOLDER} vncclient)
+dk_build(${LIBVNCSERVER} vncserver)
+dk_build(${LIBVNCSERVER} vncclient)

@@ -26,4 +26,4 @@ dk_queueCommand(${DKCMAKE_BUILD} ${DUKTAPE_CMAKE} ${LIBUV_CMAKE} ${DUKLUV})
 
 
 ### COMPILE ###
-dk_build(${DUKLUV_FOLDER})
+dk_build(${DUKLUV})

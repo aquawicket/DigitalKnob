@@ -60,7 +60,7 @@ UNIX_dk_queueCommand		(${DKCMAKE_BUILD} -DLIBTYPE=STATIC -DEXAMPLES=OFF ${OGG_CM
 
 
 ### COMPILE ###
-WIN_dk_visualStudio	(${OPENAL_FOLDER} OpenAL) # windows
-ANDROID_dk_ndk		(${OPENAL_FOLDER}) 		  # android
-dk_xcode			(${OPENAL_FOLDER} OpenAL) # mac, ios, iossim
-dk_make				(${OPENAL_FOLDER} OpenAL) # linux, rasperry, emscripten
+WIN_dk_visualStudio	(${OPENAL} OpenAL) # windows
+ANDROID_dk_ndk		(${OPENAL}) 		  # android
+dk_xcode			(${OPENAL} OpenAL) # mac, ios, iossim
+dk_make				(${OPENAL} OpenAL) # linux, rasperry, emscripten

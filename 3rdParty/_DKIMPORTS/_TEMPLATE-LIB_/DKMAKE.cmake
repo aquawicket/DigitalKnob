@@ -28,4 +28,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${PACKAGE})
 
 
 ### COMPILE ###
-dk_build(${PACKAGE_FOLDER} package)
+dk_build(${PACKAGE} package)

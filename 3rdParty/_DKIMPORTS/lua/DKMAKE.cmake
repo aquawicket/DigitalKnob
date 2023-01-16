@@ -36,4 +36,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${LUA})
 
 
 ### COMPILE ###
-dk_build(${LUA_FOLDER} lua)
+dk_build(${LUA} lua)

@@ -63,4 +63,4 @@ EMSCRIPTEN_dk_queueCommand	(${DKCMAKE_BUILD} "-DCMAKE_CXX_FLAGS=-Werror=maybe-un
 
 
 ### COMPILE ###
-dk_build(${JERRYSCRIPT_FOLDER} jerry)
+dk_build(${JERRYSCRIPT} jerry)

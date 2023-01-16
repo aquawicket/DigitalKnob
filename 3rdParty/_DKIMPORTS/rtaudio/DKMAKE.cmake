@@ -36,4 +36,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${RTAUDIO})
 
 
 ### COMPILE ###
-dk_build(${RTAUDIO_FOLDER} rtaudio)
+dk_build(${RTAUDIO} rtaudio)

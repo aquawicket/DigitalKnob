@@ -19,4 +19,4 @@ dk_queueCommand(${DKCMAKE_BUILD} ${OPUS})
 
 
 ### COMPILE ###
-dk_build(${OPUS_FOLDER})
+dk_build(${OPUS})

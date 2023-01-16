@@ -2115,19 +2115,24 @@ dk_createOsMacros("dk_queueCommand")
 
 
 ###############################################################################
-# dk_visualStudioDebug(folder) #target #arch
+# dk_visualStudioDebug(path) #target #arch
 #
 #	TODO
 #
-#	@folder		- TODO
+#	@path		- TODO
 #
-function(dk_visualStudioDebug folder) #target #arch
+function(dk_visualStudioDebug path) #target #arch
 	DKDEBUGFUNC(${ARGV})
 	if(NOT WIN_HOST)
 		return()
 	endif()
 	
-	dk_findFiles(${3RDPARTY}/${folder}/${OS} *.sln sln_file)
+	if(NOT EXISTS ${path})
+		dk_assert("dk_visualStudioDebug(${path}) path does not exist")
+	endif()
+	
+	#dk_findFiles(${3RDPARTY}/${folder}/${OS} *.sln sln_file)
+	dk_findFiles(${path}/${OS} *.sln sln_file)
 	dk_getFilename(${sln_file} sln_file)
 	dk_getExtension(${sln_file} extension)
 	if(NOT ${extension} STREQUAL ".sln")
@@ -2135,37 +2140,47 @@ function(dk_visualStudioDebug folder) #target #arch
 	endif()
 	
 	if(DEBUG AND QUEUE_BUILD)
-		if(NOT EXISTS ${3RDPARTY}/${folder}/${OS}/${sln_file})
-			dk_assert("CANNOT FIND: ${3RDPARTY}/${folder}/${OS}/${sln_file}" )
+		#if(NOT EXISTS ${3RDPARTY}/${folder}/${OS}/${sln_file})
+		if(NOT EXISTS ${path}/${OS}/${sln_file})
+			#dk_assert("CANNOT FIND: ${3RDPARTY}/${folder}/${OS}/${sln_file}" )
+			dk_assert("CANNOT FIND: ${path}/${OS}/${sln_file}" )
 		endif()
 		if(${ARGC} GREATER 2)
-			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /t:${ARGV1} /p:Configuration=Debug /p:Platform=${ARGV2})
+			#set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /t:${ARGV1} /p:Configuration=Debug /p:Platform=${ARGV2})
+			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${OS}/${sln_file} /t:${ARGV1} /p:Configuration=Debug /p:Platform=${ARGV2})
 		elseif(${ARGC} GREATER 1)
-			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /t:${ARGV1} /p:Configuration=Debug)
+			#set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /t:${ARGV1} /p:Configuration=Debug)
+			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${OS}/${sln_file} /t:${ARGV1} /p:Configuration=Debug)
 		else()
-			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /p:Configuration=Debug)
+			#set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /p:Configuration=Debug)
+			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${OS}/${sln_file} /p:Configuration=Debug)
 		endif()
-		dk_executeProcess(${EXECUTE_COMMAND} WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
+		#dk_executeProcess(${EXECUTE_COMMAND} WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
+		dk_executeProcess(${EXECUTE_COMMAND} WORKING_DIRECTORY ${path}/${OS})
 	endif()
 endfunction()
 dk_createOsMacros("dk_visualStudioDebug" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# dk_visualStudioRelease(folder) #target #arch
+# dk_visualStudioRelease(path) #target #arch
 #
 #	TODO
 #
-#	@folder		- TODO
-#	@sln_file	- TODO
+#	@path		- TODO
 #
-function(dk_visualStudioRelease folder) #target #arch
+function(dk_visualStudioRelease path) #target #arch
 	DKDEBUGFUNC(${ARGV})
 	if(NOT WIN_HOST)
 		return()
 	endif()
 	
-	dk_findFiles(${3RDPARTY}/${folder}/${OS} *.sln sln_file)
+	if(NOT EXISTS ${path})
+		dk_assert("dk_visualStudioRelease(${path}) path does not exist")
+	endif()
+	
+	#dk_findFiles(${3RDPARTY}/${folder}/${OS} *.sln sln_file)
+	dk_findFiles(${path}/${OS} *.sln sln_file)
 	dk_getFilename(${sln_file} sln_file)
 	
 	dk_getExtension(${sln_file} extension)
@@ -2174,24 +2189,30 @@ function(dk_visualStudioRelease folder) #target #arch
 	endif()
 	
 	if(RELEASE AND QUEUE_BUILD)
-		if(NOT EXISTS ${3RDPARTY}/${folder}/${OS}/${sln_file})
-			dk_assert("CANNOT FIND: ${3RDPARTY}/${folder}/${OS}/${sln_file}" )
+		#if(NOT EXISTS ${3RDPARTY}/${folder}/${OS}/${sln_file})
+		if(NOT EXISTS ${path}/${OS}/${sln_file})
+			#dk_assert("CANNOT FIND: ${3RDPARTY}/${folder}/${OS}/${sln_file}" )
+			dk_assert("CANNOT FIND: ${path}/${OS}/${sln_file}")
 		endif()
 		if(${ARGC} GREATER 2)
-			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /t:${ARGV1} /p:Configuration=Release /p:Platform=${ARGV2})
+			#set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /t:${ARGV1} /p:Configuration=Release /p:Platform=${ARGV2})
+			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${OS}/${sln_file} /t:${ARGV1} /p:Configuration=Release /p:Platform=${ARGV2})
 		elseif(${ARGC} GREATER 1)
-			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /t:${ARGV1} /p:Configuration=Release)
+			#set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /t:${ARGV1} /p:Configuration=Release)
+			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${OS}/${sln_file} /t:${ARGV1} /p:Configuration=Release)
 		else()
-			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /p:Configuration=Release)
+			#set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /p:Configuration=Release)
+			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${OS}/${sln_file} /p:Configuration=Release)
 		endif()
-		dk_executeProcess(${EXECUTE_COMMAND} WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
+		#dk_executeProcess(${EXECUTE_COMMAND} WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
+		dk_executeProcess(${EXECUTE_COMMAND} WORKING_DIRECTORY ${path}/${OS})
 	endif()
 endfunction()
 dk_createOsMacros("dk_visualStudioRelease" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# dk_visualStudio(folder sln_file)
+# dk_visualStudio(path sln_file)
 #
 #	TODO
 #
@@ -2206,23 +2227,30 @@ dk_createOsMacros("dk_visualStudio" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# dk_xcodeDebug(folder) #target
+# dk_xcodeDebug(path) #target
 #
 #	TODO
 #
-#	@folder				- TODO
+#	@path				- TODO
 #	@target:(optional)	- TODO
 #
-function(dk_xcodeDebug folder)
+function(dk_xcodeDebug path)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT MAC_HOST)
 		return()
 	endif()
+	
+	if(NOT EXISTS ${path})
+		dk_assert("dk_xcodeDebug(${path}) path does not exist")
+	endif()
+	
 	if(DEBUG AND QUEUE_BUILD)
 		if(${ARGC} GREATER 1)
-			dk_executeProcess(xcodebuild -target ${ARGV1} -configuration Debug build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
+			#dk_executeProcess(xcodebuild -target ${ARGV1} -configuration Debug build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
+			dk_executeProcess(xcodebuild -target ${ARGV1} -configuration Debug build WORKING_DIRECTORY ${path}/${OS})
 		else()
-			dk_executeProcess(xcodebuild -configuration Debug build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
+			#dk_executeProcess(xcodebuild -configuration Debug build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
+			dk_executeProcess(xcodebuild -configuration Debug build WORKING_DIRECTORY ${path}/${OS})
 		endif()
 	endif()
 endfunction()
@@ -2230,23 +2258,30 @@ dk_createOsMacros("dk_xcodeDebug" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# dk_xcodeRelease(folder) #target
+# dk_xcodeRelease(path) #target
 #
 #	TODO
 #
-#	@folder				- TODO
+#	@path				- TODO
 #	@target:(optional)	- TODO
 #
-function(dk_xcodeRelease folder)
+function(dk_xcodeRelease path)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT MAC_HOST)
 		return()
 	endif()
+	
+	if(NOT EXISTS ${path})
+		dk_assert("dk_xcodeDebug(${path}) path does not exist")
+	endif()
+	
 	if(RELEASE AND QUEUE_BUILD)
 		if(${ARGC} GREATER 1)
-			dk_executeProcess(xcodebuild -target ${ARGV1} -configuration Release build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
+			#dk_executeProcess(xcodebuild -target ${ARGV1} -configuration Release build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
+			dk_executeProcess(xcodebuild -target ${ARGV1} -configuration Release build WORKING_DIRECTORY ${path}/${OS})
 		else()
-			dk_executeProcess(xcodebuild -configuration Release build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
+			#dk_executeProcess(xcodebuild -configuration Release build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
+			dk_executeProcess(xcodebuild -configuration Release build WORKING_DIRECTORY ${path}/${OS})
 		endif()
 	endif()
 endfunction()
@@ -2270,20 +2305,27 @@ dk_createOsMacros("dk_xcode" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# dk_ndkDebug(folder)
+# dk_ndkDebug(path)
 #
 #	TODO
 #
-#	@folder		- TODO
+#	@path		- TODO
 #
-function(dk_ndkDebug folder)
+function(dk_ndkDebug path)
 	DKDEBUGFUNC(${ARGV})
+	
+	if(NOT EXISTS ${path})
+		dk_assert("dk_ndkDebug(${path}) path does not exist")
+	endif()
+	
 	if(DEBUG AND QUEUE_BUILD)
 		if(WIN_HOST)
-			dk_executeProcess(${ANDROID-NDK}/ndk-build.cmd WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS}/Debug)
+			#dk_executeProcess(${ANDROID-NDK}/ndk-build.cmd WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS}/Debug)
+			dk_executeProcess(${ANDROID-NDK}/ndk-build.cmd WORKING_DIRECTORY ${path}/${OS}/Debug)
 		endif()
 		if(UNIX_HOST)
-			dk_executeProcess(${ANDROID-NDK}/ndk-build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS}/Debug)
+			#dk_executeProcess(${ANDROID-NDK}/ndk-build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS}/Debug)
+			dk_executeProcess(${ANDROID-NDK}/ndk-build WORKING_DIRECTORY ${path}/${OS}/Debug)
 		endif()
 	endif()
 endfunction()
@@ -2291,20 +2333,27 @@ dk_createOsMacros("dk_ndkDebug" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# dk_ndkRelease(folder)
+# dk_ndkRelease(path)
 #
 #	TODO
 #
-#	@folder		- TODO
+#	@path		- TODO
 #
-function(dk_ndkRelease folder)
+function(dk_ndkRelease path)
 	DKDEBUGFUNC(${ARGV})
+	
+	if(NOT EXISTS ${path})
+		dk_assert("dk_ndkRelease(${path}) path does not exist")
+	endif()
+	
 	if(RELEASE AND QUEUE_BUILD)
 		if(WIN_HOST)
-			dk_executeProcess(${ANDROID-NDK}/ndk-build.cmd WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS}/Release)
+			#dk_executeProcess(${ANDROID-NDK}/ndk-build.cmd WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS}/Release)
+			dk_executeProcess(${ANDROID-NDK}/ndk-build.cmd WORKING_DIRECTORY ${path}/${OS}/Release)
 		endif()
 		if(UNIX_HOST)
-			dk_executeProcess(${ANDROID-NDK}/ndk-build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS}/Release)
+			#dk_executeProcess(${ANDROID-NDK}/ndk-build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS}/Release)
+			dk_executeProcess(${ANDROID-NDK}/ndk-build WORKING_DIRECTORY ${path}/${OS}/Release)
 		endif()
 	endif()
 endfunction()
@@ -2312,11 +2361,11 @@ dk_createOsMacros("dk_ndkRelease" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# dk_ndk(folder)
+# dk_ndk(path)
 #
 #	TODO
 #
-#	@folder		- TODO
+#	@path		- TODO
 #
 function(dk_ndk)
 	DKDEBUGFUNC(${ARGV})
@@ -2327,19 +2376,25 @@ dk_createOsMacros("dk_ndk" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# dk_make(folder lib)
+# dk_make(path lib)
 #
 #	TODO
 #
-#	@folder 			- TODO
+#	@path 				- TODO
 #	@lib (optional)		- TODO
 #
-function(dk_make folder) #lib
+function(dk_make path) #lib
 	DKDEBUGFUNC(${ARGV})
+	
+	if(NOT EXISTS ${path})
+		dk_assert("dk_make(${path}) path does not exist")
+	endif()
+	
 	if(EMSCRIPTEN)
 		dk_set(EMMAKE ${3RDPARTY}/emsdk-main/upstream/emscripten/emmake)
 		set(lib ${ARGV1})
-		dk_set(CURRENT_DIR ${3RDPARTY}/${folder}/${BUILD_DIR})
+		#dk_set(CURRENT_DIR ${3RDPARTY}/${folder}/${BUILD_DIR})
+		dk_set(CURRENT_DIR ${path}/${BUILD_DIR})
 		#if(${ARGC} GREATER 1)
 		#	dk_queueCommand(${EMMAKE} make ${lib})
 		#else()
@@ -2349,7 +2404,8 @@ function(dk_make folder) #lib
 		RELEASE_dk_queueCommand(${CMAKE_COMMAND} --build . --config Release)
 	else()
 		set(lib ${ARGV1})
-		dk_set(CURRENT_DIR ${3RDPARTY}/${folder}/${BUILD_DIR})
+		#dk_set(CURRENT_DIR ${3RDPARTY}/${folder}/${BUILD_DIR})
+		dk_set(CURRENT_DIR ${path}/${BUILD_DIR})
 		if(${ARGC} GREATER 1)
 			dk_queueCommand(make ${lib})
 		else()
@@ -2360,28 +2416,77 @@ endfunction()
 
 
 ###############################################################################
-# dk_build(folder lib)
+# dk_build(path target)
 #
 #	TODO
 #
-#	@folder 			- TODO
-#	@lib (optional)		- TODO
+#	@path 				- TODO
+#	@target (optional)	- TODO
 #
-function(dk_build folder)
+function(dk_build path)
 	DKDEBUGFUNC(${ARGV})
-	if(NOT WIN_HOST AND ANDROID)
-		dk_make(${ARGV})
-	else()
-		if(NOT EMSCRIPTEN)
-			dk_visualStudio(${ARGV})
-			dk_xcode(${ARGV})
-		endif()
-		if(LINUX OR RASPBERRY OR EMSCRIPTEN)
-			dk_make(${ARGV})
-		endif()
+	
+	if(NOT EXISTS ${path})
+		dk_assert("dk_build(${path}) path does not exist")
 	endif()
 	
+	set(target ${ARGV1})
+	#dk_setPath(${3RDPARTY}/${folder}/${BUILD_DIR})
+	dk_setPath(${path}/${BUILD_DIR})
 	
+	# Build with CMake
+	#if(EXISTS ${3RDPARTY}/${folder}/${BUILD_DIR}/cmake_install.cmake)
+	if(EXISTS ${path}/${BUILD_DIR}/cmake_install.cmake)
+		dk_info("Building with CMake")
+		if(${ARGC} GREATER 1)
+			DEBUG_dk_queueCommand(${CMAKE_COMMAND} --build . --config Debug --target ${target})
+			RELEASE_dk_queueCommand(${CMAKE_COMMAND} --build . --config Release --target ${target})
+		else()
+			DEBUG_dk_queueCommand(${CMAKE_COMMAND} --build . --config Debug)
+			RELEASE_dk_queueCommand(${CMAKE_COMMAND} --build . --config Release)
+		endif()
+		return()
+	endif()
+	
+	# Build with MSBuild
+	#dk_findFiles(${3RDPARTY}/${folder}/${BUILD_DIR} *.sln sln_file)
+	dk_findFiles(${path}/${BUILD_DIR} *.sln sln_file)
+	#if(EXISTS ${3RDPARTY}/${folder}/${BUILD_DIR}/${sln_file})
+	if(EXISTS ${path}/${BUILD_DIR}/${sln_file})
+		dk_info("Building with MSBuild")
+		dk_visualStudio(${ARGV})
+		return()
+	endif()
+	
+	# Build with XCode
+	#dk_findFiles(${3RDPARTY}/${folder}/${BUILD_DIR} *.xcodeproj xcode_file)
+	dk_findFiles(${path}/${BUILD_DIR} *.xcodeproj xcode_file)
+	#if(EXISTS ${3RDPARTY}/${folder}/${BUILD_DIR}/${xcode_file})
+	if(EXISTS ${path}/${BUILD_DIR}/${xcode_file})
+		dk_info("Building with XCode")
+		dk_xcode(${ARGV})
+		return()
+	endif()
+	
+	# Build with make
+	#if(EXISTS ${3RDPARTY}/${folder}/${BUILD_DIR}/Makefile)
+	if(EXISTS ${path}/${BUILD_DIR}/Makefile)
+		dk_info("Building with make")
+		dk_make(${ARGV})
+		return()
+	endif()
+	
+	#if(NOT WIN_HOST AND ANDROID)
+	#	dk_make(${ARGV})
+	#else()
+	#	if(NOT EMSCRIPTEN)
+	#		dk_visualStudio(${ARGV})
+	#		dk_xcode(${ARGV})
+	#	endif()
+	#	if(LINUX OR RASPBERRY OR EMSCRIPTEN)
+	#		dk_make(${ARGV})
+	#	endif()
+	#endif()
 endfunction()
 dk_createOsMacros("dk_build")
 

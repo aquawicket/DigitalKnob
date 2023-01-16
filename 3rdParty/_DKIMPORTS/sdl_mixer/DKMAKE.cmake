@@ -40,4 +40,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} -DSDL2MIXER_DEPS_SHARED=OFF -DSDL2MIXER_FLAC=O
 
 
 ### COMPILE ###
-dk_build(${SDL_MIXER_FOLDER} SDL2_mixer)
+dk_build(${SDL_MIXER} SDL2_mixer)

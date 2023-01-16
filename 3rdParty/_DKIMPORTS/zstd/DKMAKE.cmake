@@ -30,4 +30,4 @@ dk_queueCommand(${DKCMAKE_BUILD} ${ZSTD}/build/cmake)
 
 
 ### COMPILE ###
-dk_build(${ZSTD_FOLDER})
+dk_build(${ZSTD})

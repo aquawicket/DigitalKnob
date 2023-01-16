@@ -38,4 +38,4 @@ ANDROID_dk_queueCommand		(${DKCMAKE_BUILD} ${SDL_CMAKE} ${SMPEG2})
 
 
 ### COMPILE ###
-dk_build(${SMPEG2_FOLDER} SMPEG)
+dk_build(${SMPEG2} SMPEG)

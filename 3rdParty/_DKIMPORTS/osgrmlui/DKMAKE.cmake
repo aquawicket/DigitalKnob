@@ -20,4 +20,4 @@ dk_queueCommand(${DKCMAKE_BUILD} ${OSGRMLUI})
 
 
 ### COMPILE ###
-dk_build(${OSGRMLUI_FOLDER})
+dk_build(${OSGRMLUI})

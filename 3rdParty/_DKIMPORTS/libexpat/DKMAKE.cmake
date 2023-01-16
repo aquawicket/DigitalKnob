@@ -20,4 +20,4 @@ dk_queueCommand(${DKCMAKE_BUILD} ${LIBEXPAT})
 
 
 ### COMPILE ###
-dk_build(${LIBEXPAT_FOLDER})
+dk_build(${LIBEXPAT})

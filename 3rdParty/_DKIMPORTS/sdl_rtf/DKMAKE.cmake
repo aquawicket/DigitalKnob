@@ -30,4 +30,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${SDL_CMAKE} ${SDL_RTF})
 
 
 ### COMPILE ###
-dk_build(${SDL_RTF_FOLDER})
+dk_build(${SDL_RTF})

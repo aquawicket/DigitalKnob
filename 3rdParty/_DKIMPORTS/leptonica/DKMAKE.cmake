@@ -46,4 +46,4 @@ dk_queueCommand(${DKCMAKE_BUILD} -DSTATIC=ON -DCMAKE_INSTALL_PREFIX=${LEPTONICA}
 
 
 ### COMPILE ###
-dk_build(${LEPTONICA_FOLDER} leptonica)
+dk_build(${LEPTONICA} leptonica)

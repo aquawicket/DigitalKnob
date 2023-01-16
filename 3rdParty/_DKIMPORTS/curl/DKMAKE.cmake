@@ -97,7 +97,7 @@ EMSCRIPTEN_dk_queueCommand	(${DKCMAKE_BUILD} -DCURL_STATICLIB=ON -DBUILD_CURL_EX
 
 
 ### COMPILE ###
-dk_build(${CURL_FOLDER} libcurl)
+dk_build(${CURL} libcurl)
 
 
 # arm64

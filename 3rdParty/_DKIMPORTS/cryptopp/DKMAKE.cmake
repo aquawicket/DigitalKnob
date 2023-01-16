@@ -50,4 +50,4 @@ EMSCRIPTEN_dk_queueCommand	(${DKCMAKE_BUILD} -DBUILD_STATIC=ON -DBUILD_SHARED=OF
 
 
 ### COMPILE ###
-dk_build(${CRYPTOPP_FOLDER} cryptopp-static)
+dk_build(${CRYPTOPP} cryptopp-static)

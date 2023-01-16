@@ -57,4 +57,4 @@ dk_queueCommand(${DKCMAKE_BUILD} ${TIFF})
 
 
 ### COMPILE ###
-dk_build(${TIFF_FOLDER} tiff)
+dk_build(${TIFF} tiff)

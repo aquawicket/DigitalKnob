@@ -29,4 +29,4 @@ dk_queueCommand(${DKCMAKE_BUILD} ${BOXER})
 
 
 ### COMPILE ###
-dk_build(${BOXER_FOLDER} Boxer)
+dk_build(${BOXER} Boxer)

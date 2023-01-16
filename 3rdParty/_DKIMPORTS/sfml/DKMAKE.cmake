@@ -182,4 +182,4 @@ ANDROID_dk_queueCommand		(${DKCMAKE_BUILD} ${LIBJPEG-TURBO_CMAKE} ${OPENAL_CMAKE
 
 
 ### COMPILE ###
-dk_build(${SFML_FOLDER})
+dk_build(${SFML})

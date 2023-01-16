@@ -48,4 +48,4 @@ EMSCRIPTEN_dk_queueCommand	(${DKCMAKE_BUILD} -DPODOFO_BUILD_STATIC=ON ${CRYPTOPP
 
 
 ### COMPILE ###
-dk_build(${PODOFO_FOLDER} podofo_static)
+dk_build(${PODOFO} podofo_static)

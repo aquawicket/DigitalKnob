@@ -51,4 +51,4 @@ dk_queueCommand(${DKCMAKE_BUILD} ${FREETYPE_CMAKE} ${LIBWEBP_CMAKE} ${SDL_CMAKE}
 
 
 ### COMPILE ###
-dk_build(${SDL_TTF_FOLDER} SDLTTF)
+dk_build(${SDL_TTF} SDLTTF)

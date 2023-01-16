@@ -36,4 +36,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${RTMIDI})
 
 
 ### COMPILE ###
-dk_build(${RTMIDI_FOLDER} rtmidi)
+dk_build(${RTMIDI} rtmidi)

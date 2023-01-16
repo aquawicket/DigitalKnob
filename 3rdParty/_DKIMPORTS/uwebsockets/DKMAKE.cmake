@@ -31,4 +31,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${ZLIB_CMAKE} ${LIBUV_CMAKE} ${OPENSSL_CMAKE} 
 
 
 ### COMPILE ###
-dk_build(${UWEBSOCKETS_FOLDER} uWS)
+dk_build(${UWEBSOCKETS} uWS)

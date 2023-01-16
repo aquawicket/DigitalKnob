@@ -41,7 +41,7 @@ UNIX_dk_set	(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA
 
 
 ### COMPILE ###
-dk_build(${XZ_FOLDER} liblzma)
+dk_build(${XZ} liblzma)
 
 
 #FIXME
@@ -96,4 +96,4 @@ UNIX_RELEASE_dk_queueShell	(make)
 
 ANDROID_dk_setPath		(${XZ}/${OS})
 ANDROID_dk_queueCommand	(${DKCMAKE_BUILD} ${XZ})
-ANDROID_dk_visualStudio	(${XZ_FOLDER} liblzma)
+ANDROID_dk_visualStudio	(${XZ} liblzma)

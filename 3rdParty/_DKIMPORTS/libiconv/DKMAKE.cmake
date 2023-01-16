@@ -37,4 +37,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${LIBICONV})
 
 
 ### COMPILE ###
-dk_build(${LIBICONV_FOLDER} iconv)
+dk_build(${LIBICONV} iconv)

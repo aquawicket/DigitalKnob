@@ -21,4 +21,4 @@ dk_queueCommand(${DKCMAKE_BUILD} ${ASTYLE})
 
 
 ### COMPILE ###
-dk_build(${ASTYLE_FOLDER})
+dk_build(${ASTYLE})

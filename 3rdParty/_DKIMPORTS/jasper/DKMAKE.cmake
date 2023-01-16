@@ -27,4 +27,4 @@ dk_queueCommand(${DKCMAKE_BUILD} ${JASPER})
 
 
 ### COMPILE ###
-dk_build(${JASPER_FOLDER})
+dk_build(${JASPER})

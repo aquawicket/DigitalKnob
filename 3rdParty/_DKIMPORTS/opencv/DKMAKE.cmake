@@ -530,7 +530,7 @@ EMSCRIPTEN_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} ${OPENCV})
 
 
 ### COMPILE ###
-dk_build	(${OPENCV_FOLDER})
-#dk_build	(${OPENCV_FOLDER} opencv_core)
-#dk_build	(${OPENCV_FOLDER} opencv_imgcodecs)
-#dk_build	(${OPENCV_FOLDER} opencv_videoio)
+dk_build	(${OPENCV})
+#dk_build	(${OPENCV} opencv_core)
+#dk_build	(${OPENCV} opencv_imgcodecs)
+#dk_build	(${OPENCV} opencv_videoio)

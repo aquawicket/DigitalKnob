@@ -220,11 +220,11 @@ EMSCRIPTEN_dk_queueCommand	(${SDL_BUILD} ${SDL})
 
 
 ### COMPILE ###
-dk_build(${SDL_FOLDER})
+dk_build(${SDL})
 
 #if(sdl_SDL2static)
-	#dk_build(${SDL_FOLDER} SDL2-static)
+	#dk_build(${SDL} SDL2-static)
 #endif()
 #if(sdl_SDL2main)
-	#dk_build(${SDL_FOLDER} SDL2main)
+	#dk_build(${SDL} SDL2main)
 #endif()

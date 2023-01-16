@@ -24,4 +24,4 @@ dk_queueCommand(${DKCMAKE_BUILD} -DLWS_WITH_SSL=OFF ${LIBWEBSOCKETS})
 
 
 ### COMPILE ###
-dk_build(${LIBWEBSOCKETS_FOLDER} websockets)
+dk_build(${LIBWEBSOCKETS} websockets)

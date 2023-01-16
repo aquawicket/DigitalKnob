@@ -18,4 +18,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} -DAOM_TARGET_CPU=generic ${AOM})
 
 
 ### COMPILE ###
-dk_build(${AOM_FOLDER})
+dk_build(${AOM})

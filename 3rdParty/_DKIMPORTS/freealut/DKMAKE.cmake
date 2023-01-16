@@ -42,9 +42,9 @@ UNIX_dk_queueCommand		(${DKCMAKE_BUILD} -DBUILD_STATIC=ON -DBUILD_TESTS=OFF -DBU
 
 
 ### COMPILE ###
-WIN_dk_build(${FREEALUT_FOLDER} alut_static)
-APPLE_dk_build(${FREEALUT_FOLDER} alut_static)
-LINUX_dk_build(${FREEALUT_FOLDER})
-RASPBERRY_dk_build(${FREEALUT_FOLDER})
-ANDROID_dk_build(${FREEALUT_FOLDER} alut_static)
-EMSCRIPTEN_dk_build(${FREEALUT_FOLDER})
+WIN_dk_build(${FREEALUT} alut_static)
+APPLE_dk_build(${FREEALUT} alut_static)
+LINUX_dk_build(${FREEALUT})
+RASPBERRY_dk_build(${FREEALUT})
+ANDROID_dk_build(${FREEALUT} alut_static)
+EMSCRIPTEN_dk_build(${FREEALUT})

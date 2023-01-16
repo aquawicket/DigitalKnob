@@ -76,4 +76,4 @@ EMSCRIPTEN_RELEASE_dk_queueCommand	(${OSGAUDIO_BUILD} "-DCMAKE_CXX_FLAGS=-I${OSG
 
 
 ### COMPILE ###
-dk_build(${OSGAUDIO_FOLDER})
+dk_build(${OSGAUDIO})

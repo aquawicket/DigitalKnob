@@ -19,4 +19,4 @@ dk_queueCommand(${DKCMAKE_BUILD} ${X265})
 
 
 ### COMPILE ###
-dk_build(${X265_FOLDER})
+dk_build(${X265})

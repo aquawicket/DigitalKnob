@@ -33,4 +33,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${LIBUV})
 
 
 ### COMPILE ###
-dk_build(${LIBUV_FOLDER} uv_a)
+dk_build(${LIBUV} uv_a)

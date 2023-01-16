@@ -48,5 +48,5 @@ dk_queueCommand(${DKCMAKE_BUILD} ${DUKTAPE})
 
 
 ### COMPILE ###
-dk_build(${DUKTAPE_FOLDER})
+dk_build(${DUKTAPE})
 

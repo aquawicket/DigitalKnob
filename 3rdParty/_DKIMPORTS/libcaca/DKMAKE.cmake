@@ -21,4 +21,4 @@ dk_queueCommand(${DKCMAKE_BUILD} ${LIBCACA})
 
 
 ### COMPILE ###
-dk_build(${LIBCACA_FOLDER} libcaca)
+dk_build(${LIBCACA} libcaca)

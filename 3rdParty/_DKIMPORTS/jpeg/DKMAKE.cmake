@@ -31,4 +31,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${JPEG})
 
 
 ### COMPILE ###
-dk_build(${JPEG_FOLDER} jpeg-static)
+dk_build(${JPEG} jpeg-static)

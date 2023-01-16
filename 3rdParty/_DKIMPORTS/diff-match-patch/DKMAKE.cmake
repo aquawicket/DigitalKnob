@@ -20,4 +20,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${DIFF-MATCH-PATCH})
 
 
 ### COMPILE ###
-dk_build(${DIFF-MATCH-PATCH_FOLDER} diff-match-patch)
+dk_build(${DIFF-MATCH-PATCH} diff-match-patch)

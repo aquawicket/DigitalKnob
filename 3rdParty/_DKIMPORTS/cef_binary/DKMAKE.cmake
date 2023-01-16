@@ -142,6 +142,6 @@ ANDROID_dk_queueCommand		(${DKCMAKE_BUILD} -DUSE_SANDBOX=OFF -DPROJECT_ARCH="lin
 
 
 ### COMPILE ###
-dk_build(${CEF_BINARY_FOLDER} libcef_dll_wrapper)
-dk_build(${CEF_BINARY_FOLDER} cefsimple)
-#dk_build(${CEF_BINARY_FOLDER} cefsandbox)
+dk_build(${CEF_BINARY} libcef_dll_wrapper)
+dk_build(${CEF_BINARY} cefsimple)
+#dk_build(${CEF_BINARY} cefsandbox)

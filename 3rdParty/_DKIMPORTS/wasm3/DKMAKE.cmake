@@ -19,4 +19,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${WASM3})
 
 
 ### COMPILE ###
-dk_build(${WASM3_FOLDER})
+dk_build(${WASM3})

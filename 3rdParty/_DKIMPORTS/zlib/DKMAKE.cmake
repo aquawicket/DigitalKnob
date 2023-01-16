@@ -32,4 +32,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${ZLIB})
 
 
 ### COMPILE ###
-dk_build(${ZLIB_FOLDER} zlibstatic)
+dk_build(${ZLIB} zlibstatic)

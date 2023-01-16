@@ -50,4 +50,4 @@ dk_queueCommand(${DKCMAKE_BUILD} -DWITH_SIMD=OFF ${LIBJPEG-TURBO})
 
 
 ### COMPILE ###
-dk_build(${LIBJPEG-TURBO_FOLDER} turbojpeg-static)
+dk_build(${LIBJPEG-TURBO} turbojpeg-static)

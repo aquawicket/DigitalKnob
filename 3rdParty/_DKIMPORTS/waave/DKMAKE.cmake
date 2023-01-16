@@ -28,4 +28,4 @@ UNIX_dk_queueCommand		(${DKCMAKE_BUILD} ${FFMPEG-DEV_CMAKE} ${SDL_CMAKE} ${WAAVE
 
 
 ### COMPILE ###
-dk_build(${WAAVE_FOLDER} waave)
+dk_build(${WAAVE} waave)

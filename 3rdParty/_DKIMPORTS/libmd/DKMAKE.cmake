@@ -27,7 +27,7 @@ dk_set(LIBMD_CMAKE -DLIBMD_LIBRARY=${LIBMD}/${OS}/${DEBUG_DIR}/libmd.a)
 
 ### COMPILE ###
 if(ANDROID)
-	ANDROID_dk_ndk(${LIBMD_FOLDER})
+	ANDROID_dk_ndk(${LIBMD})
 else()
 	DEBUG_dk_setPath		(${LIBMD})
 	DEBUG_dk_queueShell		(aclocal)

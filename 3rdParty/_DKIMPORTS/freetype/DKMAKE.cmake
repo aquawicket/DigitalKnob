@@ -35,4 +35,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${FREETYPE})
 
 
 ### COMPILE ###
-dk_build(${FREETYPE_FOLDER} freetype)
+dk_build(${FREETYPE} freetype)

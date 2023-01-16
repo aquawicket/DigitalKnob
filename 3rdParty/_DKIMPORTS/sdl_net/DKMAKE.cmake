@@ -29,4 +29,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${SDL_CMAKE} ${SDL_NET})
 
 
 ### COMPILE ###
-dk_build(${SDL_NET_FOLDER})
+dk_build(${SDL_NET})

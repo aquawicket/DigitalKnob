@@ -211,4 +211,4 @@ dk_queueCommand(${DKCMAKE_BUILD} -DPOCO_MT=ON ${POCO})
 
 
 ### COMPILE ###
-dk_build(${POCO_FOLDER})
+dk_build(${POCO})

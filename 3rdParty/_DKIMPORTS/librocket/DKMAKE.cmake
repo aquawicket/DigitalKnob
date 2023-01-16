@@ -58,4 +58,4 @@ UNIX_dk_queueCommand(${DKCMAKE_BUILD} "-DCMAKE_CXX_FLAGS=-I${LIBROCKET}/Include"
 
 
 ### COMPILE ###
-dk_build(${LIBROCKET_FOLDER})
+dk_build(${LIBROCKET})

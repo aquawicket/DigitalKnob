@@ -30,4 +30,4 @@ dk_queueCommand(${DKCMAKE_BUILD} ${FLAC_CMAKE} ${LAME_CMAKE} ${MPG123_CMAKE} ${O
 
 
 ### COMPILE ###
-dk_build(${LIBSNDFILE_FOLDER})
+dk_build(${LIBSNDFILE})

@@ -141,4 +141,4 @@ dk_queueCommand	(${DKCMAKE_BUILD} ${BOOST} ${OPENSCENEGRAPH_CMAKE} -DOSGWORKS_BU
 
 
 ### COMPILE ###
-dk_build(${OSGWORKS_FOLDER})
+dk_build(${OSGWORKS})

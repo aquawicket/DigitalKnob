@@ -58,4 +58,4 @@ dk_command(${DKCMAKE_BUILD} -DOF_PATH=${OPENFRAMEWORKS} ${OPENFRAMEWORKS})
 
 
 ### COMPILE ###
-dk_build(${OPENFRAMEWORKS_FOLDER} openFrameworks)
+dk_build(${OPENFRAMEWORKS} openFrameworks)

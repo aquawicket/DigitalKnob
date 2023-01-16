@@ -25,4 +25,4 @@ dk_include(${FMT}/include)
 
 
 ### COMPILE ###
-#dk_build(${FMT_FOLDER} fmt)
+#dk_build(${FMT} fmt)
