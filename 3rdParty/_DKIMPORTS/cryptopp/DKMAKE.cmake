@@ -10,13 +10,8 @@ endif()
 
 
 ### IMPORT ###
-if(WIN)
-	#dk_import(https://github.com/weidai11/cryptopp/archive/27b7b8e4e6b3e54cca13b2faae87eb95faa0d819.zip PATCH)
-	dk_import(https://github.com/weidai11/cryptopp.git PATCH)
-else()
-	dk_import(https://github.com/weidai11/cryptopp/archive/refs/tags/CRYPTOPP_8_5_0.zip PATCH)
-	#dk_import(https://github.com/weidai11/cryptopp.git PATCH)
-endif()
+WIN_dk_import	(https://github.com/weidai11/cryptopp.git PATCH)
+UNIX_dk_import	(https://github.com/weidai11/cryptopp/archive/refs/tags/CRYPTOPP_8_5_0.zip PATCH)
 
 
 ### LINK ###
@@ -36,16 +31,23 @@ EMSCRIPTEN_dk_libRelease(${CRYPTOPP}/${OS}/${RELEASE_DIR}/libcryptopp.a)
 
 ### GENERATE ###
 WIN_dk_queueCommand			(${DKCMAKE_BUILD} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DBUILD_TESTING=OFF ${CRYPTOPP})
-string(REPLACE "-DMAC " " " DKCMAKE_BUILD_CRYPTOPP "${DKCMAKE_BUILD}") #fix for class named MAC in cryptopp
-MAC_dk_queueCommand			(${DKCMAKE_BUILD_CRYPTOPP} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DBUILD_TESTING=OFF -DCRYPTOPP_DISABLE_MIXED_ASM=ON ${CRYPTOPP})
+
+string(REPLACE "-DMAC " " " CRYPTOPP_BUILD "${DKCMAKE_BUILD}") #fix for class named MAC in cryptopp
+MAC_dk_queueCommand			(${CRYPTOPP_BUILD} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DBUILD_TESTING=OFF -DCRYPTOPP_DISABLE_MIXED_ASM=ON ${CRYPTOPP})
+
 IOS_dk_queueCommand			(${DKCMAKE_BUILD} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DBUILD_TESTING=OFF ${LIBMD_CMAKE} ${CRYPTOPP})
+
 IOSSIM_dk_queueCommand		(${DKCMAKE_BUILD} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DBUILD_TESTING=OFF ${LIBMD_CMAKE} ${CRYPTOPP})
+
 LINUX_dk_queueCommand		(${DKCMAKE_BUILD} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DBUILD_TESTING=OFF ${CRYPTOPP})
+
 RASPBERRY_dk_queueCommand	(${DKCMAKE_BUILD} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DBUILD_TESTING=OFF ${CRYPTOPP})
-string(REPLACE "-DANDROID_CPP_FEATURES=\"rtti exceptions\"" "" DKCMAKE_BUILD_CRYPTOPP "${DKCMAKE_BUILD}")
-string(REPLACE "-std=c++1z" "" DKCMAKE_BUILD_CRYPTOPP "${DKCMAKE_BUILD_CRYPTOPP}")
-string(REPLACE "  " " " DKCMAKE_BUILD_CRYPTOPP "${DKCMAKE_BUILD_CRYPTOPP}") 
-ANDROID_dk_queueCommand		(${DKCMAKE_BUILD_CRYPTOPP} "-DCMAKE_CXX_FLAGS=/I${ANDROID-NDK}/sources/android/cpufeatures" -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DBUILD_TESTING=OFF ${CRYPTOPP})
+
+string(REPLACE "-DANDROID_CPP_FEATURES=\"rtti exceptions\"" "" CRYPTOPP_BUILD "${DKCMAKE_BUILD}")
+string(REPLACE "-std=c++1z" "" CRYPTOPP_BUILD "${CRYPTOPP_BUILD}")
+string(REPLACE "  " " " CRYPTOPP_BUILD "${CRYPTOPP_BUILD}") 
+ANDROID_dk_queueCommand		(${CRYPTOPP_BUILD} "-DCMAKE_CXX_FLAGS=/I${ANDROID-NDK}/sources/android/cpufeatures" -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DBUILD_TESTING=OFF ${CRYPTOPP})
+
 EMSCRIPTEN_dk_queueCommand	(${DKCMAKE_BUILD} -DBUILD_STATIC=ON -DBUILD_SHARED=OFF -DBUILD_TESTING=OFF ${CRYPTOPP})
 
 
