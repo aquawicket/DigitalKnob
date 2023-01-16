@@ -154,7 +154,7 @@ foreach(plugin ${dkdepend_list})
 		## Only prebuild if the library binaries are missing
 		foreach(lib ${LIBLIST})
 			if(NOT EXISTS ${lib})
-				dk_set(PREBUILD ON)
+				#dk_set(PREBUILD ON)
 				dk_set(QUEUE_BUILD ON)
 			endif()
 		endforeach()

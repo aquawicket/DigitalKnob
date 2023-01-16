@@ -5,6 +5,7 @@
 
 
 dk_import(https://github.com/emscripten-core/emsdk.git BRANCH main PATCH)
+#dk_copy(${DKIMPORTS}/emsdk/upstream/emscripten/src/settings.js ${EMSDK}/emsdk/upstream/emscripten/src/settings.js)
 
 
 #WIN_dk_command(${EMSDK}/emsdk update)
@@ -19,10 +20,14 @@ WIN_HOST_dk_command(${EMSDK}/emsdk_env.bat)
 WIN_HOST_dk_command(${EMSDK}/emsdk install mingw-4.6.2-32bit)
 WIN_HOST_dk_command(${EMSDK}/emsdk activate mingw-4.6.2-32bit)
 
+if(WIN_HOST)
+	dk_set(EMSDK_ENV ${EMSDK}/emsdk_env.bat)
+else()
+	dk_set(EMSDK_ENV ${EMSDK}/emsdk_env.sh)
+endif()
 dk_set(EMCMAKE ${EMSDK}/upstream/emscripten/emcmake)
 dk_set(EMCONFIGURE ${EMSDK}/upstream/emscripten/emconfigure)
 dk_set(EMMAKE ${EMSDK}/upstream/emscripten/emmake)
-#dk_copy(${DKIMPORTS}/emsdk/upstream/emscripten/src/settings.js ${EMSDK}/emsdk/upstream/emscripten/src/settings.js)
 
 
 ######################################################################################################################

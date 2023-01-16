@@ -25,7 +25,7 @@
 */
 
 #include "DK/stdafx.h"
-#include "DK/DKFile.h";
+#include "DK/DKFile.h"
 #include "DKRmlAudio/DKRmlAudio.h"
 #include "../Include/RmlUi/Core/Factory.h"
 

@@ -44,7 +44,6 @@ if(NOT EXISTS ${DUKTAPE}/src/duktape.c)
 		-DDUK_USE_DEBUGGER_INSPECT
 		-DDUK_CMDLINE_DEBUGGER_SUPPORT)
 endif()
-
 dk_queueCommand(${DKCMAKE_BUILD} ${DUKTAPE})
 
 
