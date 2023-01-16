@@ -539,6 +539,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(game_controller)
 	dk_disable(gdal)
 	dk_disable(gl_kit)
+	dk_disable(glew)
 	dk_disable(gzip)
 	dk_disable(imagemagick)
 	dk_disable(iokit)
