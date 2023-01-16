@@ -3,7 +3,7 @@
 # https://github.com/xz-mirror/xz/archive/refs/tags/v5.2.5.zip
 
 
-#dk_import(https://github.com/xz-mirror/xz/archive/20e7a33e2d59c6a814447d3991f21e2702174b20.zip)
+### IMPORT ###
 dk_import(https://github.com/xz-mirror/xz.git)
 
 
@@ -19,17 +19,17 @@ dk_import(https://github.com/xz-mirror/xz.git)
 
 
 ### LINK ###
-dk_define				(LZMA_API_STATIC)
-dk_include				(${XZ}/src/liblzma/api)
-WIN_dk_libDebug			(${XZ}/${OS}/${DEBUG_DIR}/liblzma.lib)
-WIN_dk_libRelease		(${XZ}/${OS}/${RELEASE_DIR}/liblzma.lib)
-UNIX_dk_libDebug		(${XZ}/${OS}/${DEBUG_DIR}/liblzma.a)
-UNIX_dk_libRelease		(${XZ}/${OS}/${RELEASE_DIR}/liblzma.a)
+dk_define			(LZMA_API_STATIC)
+dk_include			(${XZ}/src/liblzma/api)
+UNIX_dk_libDebug	(${XZ}/${OS}/${DEBUG_DIR}/liblzma.a)
+UNIX_dk_libRelease	(${XZ}/${OS}/${RELEASE_DIR}/liblzma.a)
+WIN_dk_libDebug		(${XZ}/${OS}/${DEBUG_DIR}/liblzma.lib)
+WIN_dk_libRelease	(${XZ}/${OS}/${RELEASE_DIR}/liblzma.lib)
 
 
 ### 3RDPARTY LINK ###
-WIN_dk_set	(XZ_CMAKE -DCMAKE_C_FLAGS=/DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=/DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ}/${OS}/${DEBUG_DIR}/liblzma.lib -DLIBLZMA_LIBRARY_RELEASE=${XZ}/${OS}/${RELEASE_DIR}/liblzma.lib)
 UNIX_dk_set	(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ}/${OS}/${DEBUG_DIR}/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ}/${OS}/${RELEASE_DIR}/liblzma.a)
+WIN_dk_set	(XZ_CMAKE -DCMAKE_C_FLAGS=/DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=/DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ}/${OS}/${DEBUG_DIR}/liblzma.lib -DLIBLZMA_LIBRARY_RELEASE=${XZ}/${OS}/${RELEASE_DIR}/liblzma.lib)
 
 
 ### GENERATE ###
