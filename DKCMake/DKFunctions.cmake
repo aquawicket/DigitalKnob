@@ -4612,11 +4612,13 @@ dk_createOsMacros("dk_findLibrary")
 
 
 ###############################################################################
-# dk_findFiles(path pattern) RECURSE RELATIVE
+# dk_findFiles(path pattern RESULT) RECURSE RELATIVE
 #
 #	Search for a file using a pattern I.E. *.txt
 #
-#	@pattern		- The pattern to search for
+#	@path		- The path to search 
+#	@pattern	- The pattern to search for
+#	@RESULT		- Returns the list of file(s) if found
 #
 function(dk_findFiles path pattern RESULT)
 	DKDEBUGFUNC(${ARGV})
@@ -4636,11 +4638,11 @@ endfunction()
 
 
 ###############################################################################
-# dk_shell()
+# dk_shell(args)
 #
-#	TODO
+#	Execute a UNIX style command
 #
-#	@args		- TODO
+#	@args	- The command and args to execute
 #
 macro(dk_shell args)
 	DKDEBUGFUNC(${ARGV})
@@ -4654,11 +4656,11 @@ dk_createOsMacros("dk_shell")
 
 
 ###############################################################################
-# dk_queueShell()
+# dk_queueShell(args)
 #
-#	TODO
+#	Queue the execution of a UNIX style command
 #
-#	@args		- TODO
+#	@args	- The command and args to execute
 #
 macro(dk_queueShell args)
 	DKDEBUGFUNC(${ARGV})
@@ -4694,6 +4696,23 @@ function(dk_resizeImage inpath width height outpath)
 		dk_warn("No method to resize images on this host OS")
 	endif()
 endfunction()
+
+
+###############################################################################
+# dk_pathContains(expression RESULT)
+#
+#	@expression	- The search expression to use. Example: "${path}/subfolder/*.exe"
+#   @RESULT		- Returns TRUE if the expression is found
+#
+function(dk_pathContains expression RESULT)
+	DKDEBUGFUNC(${ARGV})
+	FILE(GLOB contains "${expression}") 
+	if(contains)
+		set(${RESULT} TRUE PARENT_SCOPE)
+		return()
+	endif()
+endfunction()
+
 
 
 include(${DKFunctions_ext})
