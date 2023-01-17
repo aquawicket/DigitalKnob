@@ -2447,23 +2447,19 @@ function(dk_build path)
 	endif()
 	
 	# Build with MSBuild
-	dk_findFiles(${path}/${BUILD_DIR} *.sln sln_file)
-	if(sln_file)
-		#if(EXISTS ${path}/${BUILD_DIR}/${sln_file})
-			dk_info("Building with MSBuild")
-			dk_visualStudio(${ARGV})
-			return()
-		#endif()
+	file(GLOB sln "${path}/${BUILD_DIR}/*.sln")
+	if(sln)
+		dk_info("Building with MSBuild")
+		dk_visualStudio(${ARGV})
+		return()
 	endif()
 	
 	# Build with XCode
-	dk_findFiles(${path}/${BUILD_DIR} *.xcodeproj xcode_file)
-	if(xcode_file)
-		#if(EXISTS ${path}/${BUILD_DIR}/${xcode_file})
-			dk_info("Building with XCode")
-			dk_xcode(${ARGV})
-			return()
-		#endif()
+	file(GLOB xcodeproj "${path}/${BUILD_DIR}/*.xcodeproj")
+	if(xcodeproj)
+		dk_info("Building with XCode")
+		dk_xcode(${ARGV})
+		return()
 	endif()
 	
 	# Build with make
@@ -2473,6 +2469,7 @@ function(dk_build path)
 		return()
 	endif()
 	
+	dk_assert("dk_build(): ${path}/${BUILD_DIR} has no buildable files")
 endfunction()
 dk_createOsMacros("dk_build")
 
