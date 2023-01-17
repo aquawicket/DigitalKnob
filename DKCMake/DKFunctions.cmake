@@ -4014,7 +4014,7 @@ endfunction()
 
 
 ###############################################################################
-# dk_importDownload(url) #install_path #PATCH
+# dk_importDownload(url) install_path PATCH
 #
 #	TODO
 #
@@ -4353,6 +4353,7 @@ function(dk_getFileType path rtn-type)
 	endif()
 endfunction()
 
+
 ###############################################################################
 # dk_getAppDirectory(RESULT)
 #
@@ -4361,7 +4362,7 @@ endfunction()
 #	@RESULT		- TODO
 #
 function(dk_getAppDirectory RESULT)
-	#DKDEBUGFUNC(${ARGV})
+	DKDEBUGFUNC(${ARGV})
 	set(USE_32BIT 1)
 	if(WIN_HOST)
 		set(appDirectory "C:/Program Files")
@@ -4393,11 +4394,11 @@ endfunction()
 #
 #	Convert a string to lower case
 #
-#	@str		- TODO
-#	@RESULT		- TODO
+#	@str	- The input string to convert
+#	@RESULT	- Returns the converted output string
 #
 function(toLower str RESULT)
-	#DKDEBUGFUNC(${ARGV})
+	DKDEBUGFUNC(${ARGV})
 	string(TOLOWER "${str}" upper)
 	set(${RESULT} ${out} PARENT_SCOPE)
 endfunction()
@@ -4408,8 +4409,8 @@ endfunction()
 #
 #	Convert a string to upper case
 #
-#	@str		- TODO
-#	@RESULT		- TODO
+#	@str	- The input string to convert
+#	@RESULT	- Returns the converted output string
 #
 function(toUpper str RESULT)
 	#DKDEBUGFUNC(${ARGV})
@@ -4423,9 +4424,9 @@ endfunction()
 #
 #	Remove the extension from a file path
 #
-#	@path		- TODO
-#	@RESULT		- TODO
-#   NOERROR     - if any of the parameters equals NOERROR, dk_error() messages will not be displayed
+#	@path				- TODO
+#	@RESULT				- TODO
+#   NOERROR (optional)	- if any of the parameters equals NOERROR, dk_error() messages will not be displayed
 #
 function(dk_removeExtension path RESULT)
 	DKDEBUGFUNC(${ARGV})
@@ -4469,7 +4470,7 @@ endfunction()
 #
 #	Generate a folder/DKMAKE.cmake for a new plugin
 #
-#	@url		- TODO
+#	@url	- TODO
 #
 function(dk_createPlugin url)
 	DKDEBUGFUNC(${ARGV})
@@ -4490,9 +4491,10 @@ endfunction()
 ###############################################################################
 # dk_getGitBranchName(url RESULT)
 #
-#	TODO
+#	Return the name of the head branch from a git repository
 #
-#	@url		- TODO
+#	@url	- The git url
+#	@RESULT	- Returns the name of the head branch
 #
 #	https://stackoverflow.com/a/31919435
 #
@@ -4506,14 +4508,12 @@ endfunction()
 ###############################################################################
 # dk_printArgData()
 #
-#	TODO
+#	Print the current CMake scripte path and ARG* variables
 #
 macro(dk_printArgData)
-	#DKDEBUGFUNC(${ARGV})
-	dk_debug(" ")
+	DKDEBUGFUNC(${ARGV})
 	dk_debug(" ")
 	dk_debug("************************************************************")
-	dk_debug("	dk_import2(${ARGV})")
 	dk_debug(" ")
 	dk_debug(CMAKE_CURRENT_LIST_DIR)
 	dk_debug("*** ARG Variables ***")
@@ -4533,14 +4533,14 @@ endmacro()
 ###############################################################################
 # dk_printUrlData(url)
 #
-#	TODO
+#	Print url seperated into an array
 #
-#	@url		- TODO
+#	@url	- The url to print
 #
 function(dk_printUrlData url)
-	#DKDEBUGFUNC(${ARGV})
+	DKDEBUGFUNC(${ARGV})
 	if(NOT url)
-		dk_assert("url invalid")
+		dk_assert("url invalid! ")
 	endif()
 	dk_verbose("*** url Variables ***")
 	dk_verbose(url)
@@ -4564,12 +4564,12 @@ endfunction()
 ###############################################################################
 # dk_killProcess(name)
 #
-#	TODO
+#	Kill a running process by name
 #
-#	@url		- TODO
+#	@name		- name of the process to kill
 #
 function(dk_killProcess name)
-	#DKDEBUGFUNC(${ARGV})
+	DKDEBUGFUNC(${ARGV})
 	dk_executeProcess("taskkill /f /im ${name}" NOASSERT)
 endfunction()
 
@@ -4577,10 +4577,10 @@ endfunction()
 ###############################################################################
 # dk_clearScreen()
 #
-#	TODO
+#	Clear the console
 #
 function(dk_clearScreen)
-	#DKDEBUGFUNC(${ARGV})
+	DKDEBUGFUNC(${ARGV})
 	dk_debug("clear screen")
 	execute_process(COMMAND "cmd /c cls")
 endfunction()
@@ -4591,10 +4591,10 @@ endfunction()
 #
 #	Search for a library and include it with dk_lib
 #
-#	@name		- The name of the library
+#	@name	- The name of the library
 #
 function(dk_findLibrary name)
-	#DKDEBUGFUNC(${ARGV})
+	DKDEBUGFUNC(${ARGV})
 	find_library(${name}_LIBRARY ${name})
 	if(NOT WIN)
 		if(NOT ${name}_LIBRARY)
@@ -4612,13 +4612,14 @@ dk_createOsMacros("dk_findLibrary")
 
 
 ###############################################################################
-# dk_findFiles(path pattern RESULT) RECURSE RELATIVE
+# dk_findFiles(path pattern RESULT) RECURSE
 #
-#	Search for a file using a pattern I.E. *.txt
+#	Search for files within a path matching a pattern
 #
-#	@path		- The path to search 
-#	@pattern	- The pattern to search for
-#	@RESULT		- Returns the list of file(s) if found
+#	@path				- The path to search 
+#	@pattern			- The pattern to search for
+#	@RESULT				- Returns the list of file(s) if found
+#   RECURSE (optional) 	- Search the path recursivly 
 #
 function(dk_findFiles path pattern RESULT)
 	DKDEBUGFUNC(${ARGV})
