@@ -2469,6 +2469,13 @@ function(dk_build path)
 		return()
 	endif()
 	
+	# Build with Android NDK
+	if(EXISTS ${path}/${BUILD_DIR}/AndroidManifest.xml)
+		dk_info("Building with Android NDK")
+		dk_ndk(${ARGV})
+		return()
+	endif()
+	
 	dk_assert("dk_build(): ${path}/${BUILD_DIR} has no buildable files")
 endfunction()
 dk_createOsMacros("dk_build")
