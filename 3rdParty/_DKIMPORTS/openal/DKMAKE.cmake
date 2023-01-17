@@ -61,9 +61,9 @@ UNIX_dk_queueCommand		(${DKCMAKE_BUILD} -DLIBTYPE=STATIC -DEXAMPLES=OFF ${OGG_CM
 
 ### COMPILE ###
 if(ANDROID)
-	dk_build(${OPENAL} OpenAL)
+	dk_ndk(${OPENAL}) 
 else()
-	dk_ndk(${OPENAL}) 	
+	dk_build(${OPENAL} OpenAL)
 endif()
 #WIN_dk_visualStudio(${OPENAL} OpenAL) # windows
 #ANDROID_dk_ndk		(${OPENAL}) 		 # android
