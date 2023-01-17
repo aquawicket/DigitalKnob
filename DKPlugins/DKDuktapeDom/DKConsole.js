@@ -2,19 +2,19 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/Console
 
 // https://console.spec.whatwg.org/#console-namespace
-var Console = function(pointer) {
-    Console.prototype.assert = function(msg) {
+var Console = function Console(pointer) {
+    Console.prototype.assert = function assert(msg) {
         //if (assertion)
         //    return;
         CPP_DKConsole_assert(msg + "\n");
     }
-    Console.prototype.clear = function() {
+    Console.prototype.clear = function clear() {
         CPP_DKConsole_clear();
     }
-    Console.prototype.debug = function(msg) {
+    Console.prototype.debug = function debug(msg) {
         CPP_DKConsole_debug(msg + "\n");
     }
-    Console.prototype.error = function(msg) {
+    Console.prototype.error = function error(msg) {
         //CPP_DKConsole_error(msg + "\n");
 		const e = new Error(msg);
 		if (!e.stack) {
@@ -28,28 +28,28 @@ var Console = function(pointer) {
 		}
 		CPP_DKConsole_error(e.stack+"\n");
     }
-    Console.prototype.exception = function(msg) {
+    Console.prototype.exception = function exception(msg) {
         CPP_DKConsole_exception(msg + "\n");
     }
-    Console.prototype.group = function(msg) {
+    Console.prototype.group = function group(msg) {
         CPP_DKConsole_group(msg + "\n");
     }
-    Console.prototype.groupCollapsed = function(msg) {
+    Console.prototype.groupCollapsed = function groupCollapsed(msg) {
         CPP_DKConsole_groupCollapsed(msg + "\n");
     }
-    Console.prototype.groupEnd = function(msg) {
+    Console.prototype.groupEnd = function groupEnd(msg) {
         CPP_DKConsole_groupEnd(msg + "\n");
     }
-    Console.prototype.info = function(msg) {
+    Console.prototype.info = function info(msg) {
         CPP_DKConsole_info(msg + "\n");
     }
-    Console.prototype.log = function(msg) {
+    Console.prototype.log = function log(msg) {
         CPP_DKConsole_log(msg + "\n");
     }
-    Console.prototype.trace = function(msg) {
+    Console.prototype.trace = function trace(msg) {
 		CPP_DKConsole_trace(msg + "\n");
     }
-    Console.prototype.warn = function(msg) {
+    Console.prototype.warn = function warn(msg) {
         CPP_DKConsole_warn(msg + "\n");
     }
 }
