@@ -26,5 +26,6 @@ else
 fi
 
 SDKMANAGER="$DIGITALKNOB/DK/3rdParty/android-sdk/cmdline-tools/latest/bin/sdkmanager"
-$SDKMANAGER --licenses
+yes | $SDKMANAGER --licenses
+#$SDKMANAGER --licenses
  
