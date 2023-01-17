@@ -262,13 +262,14 @@ if(LINUX) # Disabled for Linux targets
 	dk_disable(DKThread)			# error: need to implement boost::placeholders
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKUpdate)			# error: need to implement boost::placeholders
-	#dk_disable(DKVncClient)			# requires libvncserver
-	#dk_disable(DKVncServer)			# requires libvncserver
+	#dk_disable(DKVncClient)		# requires libvncserver
+	#dk_disable(DKVncServer)		# requires libvncserver
 	dk_disable(DKWebSockets)		# requires libwebsockets, uwebsockets
 	dk_disable(dukluv)
 	dk_disable(ffmpeg)
 	dk_disable(fontconfig)
 	dk_disable(gdal)
+	dk_disable(gnutls)
 	dk_disable(gzip)
 	dk_disable(jerryscript)			# build errors
 	dk_disable(imagemagick)			# libimagemagik.a not found
