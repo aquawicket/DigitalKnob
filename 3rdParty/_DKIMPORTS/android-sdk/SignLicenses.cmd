@@ -8,7 +8,29 @@ call "C:/Users/%USERNAME%/digitalknob/DK/3rdParty/_DKIMPORTS/openjdk-8u41/regist
 set "SDKMANAGER=C:\Users\%USERNAME%\digitalknob\DK\3rdParty\android-sdk\cmdline-tools\latest\bin\sdkmanager.bat
 
 :: https://stackoverflow.com/a/48539058/688352
-:: echo y | %SDKMANAGER% --licenses  :: DOES NOT WORK
+(
+  echo y
+  echo y
+  echo y
+  echo y
+  echo y
+  echo y
+  echo y
+  echo y
+  echo y
+  echo y
+  echo y
+  echo y
+  echo y
+  echo y
+  echo y
+  echo y
+  echo y
+  echo y
+  echo y
+  echo y
+) > file-y.txt
+
 %SDKMANAGER% --licenses < file-y.txt
 ::%SDKMANAGER% --licenses
 
