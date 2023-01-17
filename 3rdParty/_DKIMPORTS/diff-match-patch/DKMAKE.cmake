@@ -16,8 +16,8 @@ dk_import(https://github.com/google/diff-match-patch.git)
 
 
 ### GENERATE ###
-dk_queueCommand	(${DKCMAKE_BUILD} ${DIFF-MATCH-PATCH})
+#dk_queueCommand(${DKCMAKE_BUILD} ${DIFF-MATCH-PATCH})
 
 
 ### COMPILE ###
-dk_build(${DIFF-MATCH-PATCH} diff-match-patch)
+#dk_build(${DIFF-MATCH-PATCH} diff-match-patch)
