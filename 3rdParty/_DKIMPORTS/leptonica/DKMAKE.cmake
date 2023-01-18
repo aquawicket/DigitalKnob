@@ -33,8 +33,8 @@ LINUX_dk_libDebug		(${LEPTONICA}/${OS}/${DEBUG_DIR}/src/libleptonica.a)
 LINUX_dk_libRelease		(${LEPTONICA}/${OS}/${RELEASE_DIR}/src/libleptonica.a)
 RASPBERRY_dk_libDebug	(${LEPTONICA}/${OS}/${DEBUG_DIR}/src/libleptonica.a)
 RASPBERRY_dk_libRelease	(${LEPTONICA}/${OS}/${RELEASE_DIR}/src/libleptonica.a)
-WIN_dk_libDebug			(${LEPTONICA}/${OS}/src/${DEBUG_DIR}/leptonica-1.83.0d.lib)
-WIN_dk_libRelease		(${LEPTONICA}/${OS}/src/${RELEASE_DIR}/leptonica-1.83.0.lib)
+WIN_dk_libDebug			(${LEPTONICA}/${OS}/src/${DEBUG_DIR}/leptonica-1.84.0d.lib)
+WIN_dk_libRelease		(${LEPTONICA}/${OS}/src/${RELEASE_DIR}/leptonica-1.84.0.lib)
 
 
 ### 3RDPARTY LINK ###
