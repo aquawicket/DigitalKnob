@@ -44,10 +44,10 @@ bool DKSDLOsg::Init(){
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_EGL, 1);
 	
-	window = SDL_CreateWindow("DKSDLOsg", 0, 0, 800, 600, SDL_WINDOW_OPENGL);
+	sdl_window = SDL_CreateWindow("DKSDLOsg", 0, 0, 800, 600, SDL_WINDOW_OPENGL);
 	
 	// Create an OpenGL context associated with the window.
-	SDL_GLContext glcontext = SDL_GL_CreateContext(window);
+	SDL_GLContext glcontext = SDL_GL_CreateContext(sdl_window);
 	
 	// load the scene.
     osg::ref_ptr<osg::Node> loadedModel = createScene();//osgDB::readNodeFile(argv[1]);
@@ -55,15 +55,15 @@ bool DKSDLOsg::Init(){
 		return DKERROR("loadedModel invalid! \n");
 	
 	// set up the surface to render to
-    SDL_Surface* screen = SDL_GetWindowSurface(window);
+    SDL_Surface* screen = SDL_GetWindowSurface(sdl_window);
     if(screen == NULL)
 		return DKERROR("screen invalid! \n");
     
-    gw = viewer.setUpViewerAsEmbeddedInWindow(0, 0, screen->w, screen->h);
-    viewer.setSceneData(loadedModel.get());
-    viewer.setCameraManipulator(new osgGA::TrackballManipulator);
-    viewer.addEventHandler(new osgViewer::StatsHandler);
-    viewer.realize();
+    osg_graphicsWindow = osg_viewer.setUpViewerAsEmbeddedInWindow(0, 0, screen->w, screen->h);
+    osg_viewer.setSceneData(loadedModel.get());
+    osg_viewer.setCameraManipulator(new osgGA::TrackballManipulator);
+    osg_viewer.addEventHandler(new osgViewer::StatsHandler);
+    osg_viewer.realize();
 	
 	DKApp::AppendLoopFunc(&DKSDLOsg::Process, this);
 	return true;
@@ -114,7 +114,7 @@ osg::Node* DKSDLOsg::createScene(){
 void DKSDLOsg::Process(){
 	SDL_Event event;
 	while(SDL_PollEvent(&event)){
-        convertEvent(event, *(gw->getEventQueue()));
+        convertEvent(event, *(osg_graphicsWindow->getEventQueue()));
         switch(event.type){
 			/* case SDL_VIDEORESIZE:
 				SDL_SetVideoMode(event.resize.w, event.resize.h, bitDepth, SDL_OPENGL | SDL_RESIZABLE);
@@ -123,8 +123,8 @@ void DKSDLOsg::Process(){
         }
     }
 	
-    viewer.frame(); // draw the new frame
-	SDL_GL_SwapWindow(window);
+    osg_viewer.frame(); // draw the new frame
+	SDL_GL_SwapWindow(sdl_window);
 }
 
 bool DKSDLOsg::convertEvent(SDL_Event& event, osgGA::EventQueue& eventQueue){
