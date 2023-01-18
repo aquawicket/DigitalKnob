@@ -123,7 +123,7 @@ if(ALL_LIBS)
 	if(GDAL)
 		dk_enable(osgdb_gdal)
 	endif()
-	if(GIFLIB AND NOT APPLE AND NOT LINUX AND NOT RASPBERRY)
+	if(GIFLIB AND NOT APPLE AND NOT LINUX AND NOT RASPBERRY AND NOT EMSCRIPTEN)
 		dk_enable(osgdb_gif)	#FIXME: not building
 	endif()
 	dk_enable(osgdb_gles)
