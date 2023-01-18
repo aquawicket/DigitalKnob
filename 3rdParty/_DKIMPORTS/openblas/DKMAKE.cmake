@@ -7,10 +7,10 @@ dk_import(https://github.com/xianyi/OpenBLAS.git BRANCH develop)
 
 ### LINK ###
 dk_include				(${OPENBLAS})
-UNIX_dk_libDebug		(${LEPTONICA}/${OS}/${DEBUG_DIR}/libopenblas.a)
-UNIX_dk_libRelease		(${LEPTONICA}/${OS}/${RELEASE_DIR}/libopenblas.a)
-WIN_dk_libDebug			(${LEPTONICA}/${OS}/lib/DEBUG/openblas.lib)
-WIN_dk_libRelease		(${LEPTONICA}/${OS}/lib/RELEASE/openblas.lib)
+UNIX_dk_libDebug		(${OPENBLAS}/${OS}/${DEBUG_DIR}/libopenblas.a)
+UNIX_dk_libRelease		(${OPENBLAS}/${OS}/${RELEASE_DIR}/libopenblas.a)
+WIN_dk_libDebug			(${OPENBLAS}/${OS}/lib/DEBUG/openblas.lib)
+WIN_dk_libRelease		(${OPENBLAS}/${OS}/lib/RELEASE/openblas.lib)
 
 
 ### 3RDPARTY LINK ###
