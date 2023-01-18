@@ -413,8 +413,8 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(DKThread)			# requires threadpool
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKUpdate)			# requires DKCurl
-	#dk_disable(DKVncClient)			# requires libvncserver
-	#dk_disable(DKVncServer)			# requires libvncserver
+	dk_disable(DKVncClient)			# requires libvncserver
+	dk_disable(DKVncServer)			# requires libvncserver
 	dk_disable(DKWebSockets)		# requires libwebsockets or uwebsockets
 	dk_disable(DKWebview)			# compiling errors
 	dk_disable(dl)
@@ -434,7 +434,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(libexpat)
 	dk_disable(libtorrent)			# Could not find BOOST
 	dk_disable(libuv)				# error : incomplete definition of type 'struct ifaddrs'
-	#dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
+	dk_disable(libvncserver)
 	dk_disable(libwebp)
 	dk_disable(libwebsockets)		# compiling errors
 	dk_disable(libxml2)				# ../../configure: No such file or directory
