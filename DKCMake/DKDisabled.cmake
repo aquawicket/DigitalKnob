@@ -589,6 +589,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(sfml)				# CMake Error: Unsupported operating system or environment
 	dk_disable(smpeg2)				# ISO C++17 does not allow 'register' storage class specifier
 	dk_disable(system_configuration)
+	dk_disable(tesseract)			# missing <allheaders.h>
 	dk_disable(vorbis)				# requires ogg
 	dk_disable(waave)
 	dk_disable(wasm3)
