@@ -38,7 +38,7 @@ WIN_dk_libRelease		(${LEPTONICA}/${OS}/src/${RELEASE_DIR}/leptonica-1.84.0.lib)
 
 
 ### 3RDPARTY LINK ###
-dk_set(LEPTONICA_CMAKE -DLeptonica_DIR=${LEPTONICA}/${OS})
+dk_set(LEPTONICA_CMAKE -DLeptonica_DIR=${LEPTONICA}/${BUILD_DIR})
 
 
 ### GENERATE ###
