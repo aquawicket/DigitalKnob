@@ -30,8 +30,8 @@ LINUX_dk_libDebug		(${TESSERACT}/${OS}/${DEBUG_DIR}/libtesseract.a)
 LINUX_dk_libRelease		(${TESSERACT}/${OS}/${RELEASE_DIR}/libtesseract.a)
 RASPBERRY_dk_libDebug	(${TESSERACT}/${OS}/${DEBUG_DIR}/libtesseract.a)
 RASPBERRY_dk_libRelease	(${TESSERACT}/${OS}/${RELEASE_DIR}/libtesseract.a)
-WIN_dk_libDebug			(${TESSERACT}/${OS}/${DEBUG_DIR}/tesseract52d.lib)
-WIN_dk_libRelease		(${TESSERACT}/${OS}/${RELEASE_DIR}/tesseract52.lib)
+WIN_dk_libDebug			(${TESSERACT}/${OS}/${DEBUG_DIR}/tesseract53d.lib)
+WIN_dk_libRelease		(${TESSERACT}/${OS}/${RELEASE_DIR}/tesseract53.lib)
 
 
 ### GENERATE ###
