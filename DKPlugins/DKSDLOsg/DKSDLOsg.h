@@ -50,8 +50,9 @@ public:
 	bool Init();
 	bool End();
 	osg::Node* createScene();
-	void Process();
-	bool convertEvent(SDL_Event& event, osgGA::EventQueue& eventQueue);
+	bool OnEvent(SDL_Event* event);
+	bool OnRender();
+	void OnUpdate();
 	
 	SDL_Window* sdl_window;
 	osgViewer::Viewer osg_viewer;
