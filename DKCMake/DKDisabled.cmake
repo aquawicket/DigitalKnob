@@ -573,6 +573,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(quartz_core)
 	dk_disable(rmlui-d3d11)
 	dk_disable(system_configuration)
+	dk_disable(vorbis)				# requires ogg
 	dk_disable(waave)
 	dk_disable(wasm3)
 	dk_disable(x264)
