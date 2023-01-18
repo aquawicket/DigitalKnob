@@ -533,7 +533,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(DKTorrent)
 	dk_disable(DKTray)
 	dk_disable(DKUpdate)
-	#dk_disable(DKVncClient)
+	dk_disable(DKVncClient)			# case value evaluates to 4294967295, which cannot be narrowed to type 'int'
 	#dk_disable(DKVncServer)
 	dk_disable(DKWebSockets)
 	dk_disable(dukluv)
