@@ -252,4 +252,15 @@ dk_queueCommand(${DKCMAKE_BUILD} ${BULLET3})
 
 
 ### COMPILE ###
-dk_build(${BULLET3})
+#dk_build(${BULLET3})
+dk_build(${BULLET3} Bullet3Collision)
+dk_build(${BULLET3} Bullet3Common)
+dk_build(${BULLET3} Bullet3Dynamics)
+dk_build(${BULLET3} Bullet3Geometry)
+dk_build(${BULLET3} Bullet3OpenCL)
+dk_build(${BULLET3} Bullet3Serialize)
+dk_build(${BULLET3} BulletCollision)
+dk_build(${BULLET3} BulletDynamics)
+dk_build(${BULLET3} BulletInverseDynamics)
+dk_build(${BULLET3} BulletSoftBody)
+dk_build(${BULLET3} LinearMath)
