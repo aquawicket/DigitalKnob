@@ -470,9 +470,7 @@ endif(ANDROID_64)
 
 
 if(EMSCRIPTEN) # Disabled for Emscripten targets
-	if(WIN_HOST)
-		dk_disable(aom)
-	endif()
+	dk_disable(aom)
 	dk_disable(aubio)
 	dk_disable(audio_toolbox)
 	dk_disable(av_foundation)
