@@ -564,6 +564,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(msinttypes)
 	dk_disable(mlocate)
 	dk_disable(ncurses)
+	dk_disable(opencv)				# ittnotify_config.h:376:12: error: call to undeclared function '__TBB_machine_fetchadd4'
 	dk_disable(openframeworks)
 	dk_disable(openssl)
 	dk_disable(opus)
