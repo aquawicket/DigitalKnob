@@ -684,6 +684,7 @@ function(dk_unset variable)
 	#unset(${variable} CACHE)
 	#unset(variable CACHE)
 endfunction()
+dk_createOsMacros("dk_unset")
 
 
 ###############################################################################
