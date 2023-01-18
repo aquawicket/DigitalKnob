@@ -590,6 +590,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(smpeg2)				# ISO C++17 does not allow 'register' storage class specifier
 	dk_disable(system_configuration)
 	dk_disable(tesseract)			# missing <allheaders.h>
+	di_disable(uwebsockets)         # requires openssl
 	dk_disable(vorbis)				# requires ogg
 	dk_disable(waave)
 	dk_disable(wasm3)
