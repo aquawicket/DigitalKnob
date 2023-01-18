@@ -335,6 +335,7 @@ if(RASPBERRY) # Disabled for Raspberry Pi targets
 	dk_disable(java)
 	dk_disable(jerryscript)
 	dk_disable(kdevelop)
+	dk_disable(openblas)
 	dk_disable(openjdk)
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libexpat)
