@@ -88,57 +88,57 @@ ANDROID64_dk_import		(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5
 
 
 ### LINK ###
-dk_define	(__STDC_CONSTANT_MACROS)
-dk_define	(__STDC_FORMAT_MACROS)
-dk_define	(PSAPI_VERSION=1)
-dk_define	(NOMINMAX)
 dk_define	(CEF_ATL)
 #dk_define	(CEF_SANDBOX)
+dk_define	(NOMINMAX)
+dk_define	(PSAPI_VERSION=1)
+dk_define	(__STDC_CONSTANT_MACROS)
+dk_define	(__STDC_FORMAT_MACROS)
 dk_include	(${CEF_BINARY})
 
 # libcef
-WIN_dk_libDebug			(${CEF_BINARY}/${DEBUG_DIR}/libcef.lib)
-WIN_dk_libRelease		(${CEF_BINARY}/${RELEASE_DIR}/libcef.lib)
+ANDROID_dk_libDebug		(${CEF_BINARY}/${DEBUG_DIR}/libcef.a)
+ANDROID_dk_libRelease	(${CEF_BINARY}/${RELEASE_DIR}/libcef.a)
 #APPLE_dk_libDebug		("${CEF_BINARY}${DEBUG_DIR}/Chromium Embedded Framework.framework")
 #APPLE_dk_libRelease	("${CEF_BINARY}/${RELEASE_DIR}/Chromium Embedded Framework.framework")
 LINUX_dk_libDebug		(${CEF_BINARY}/${DEBUG_DIR}/libcef.so)
 LINUX_dk_libRelease		(${CEF_BINARY}/${RELEASE_DIR}/libcef.so)
 RASPBERRY_dk_libDebug	(${CEF_BINARY}/${DEBUG_DIR}/libcef.so)
 RASPBERRY_dk_libRelease	(${CEF_BINARY}/${RELEASE_DIR}/libcef.so)
-ANDROID_dk_libDebug		(${CEF_BINARY}/${DEBUG_DIR}/libcef.a)
-ANDROID_dk_libRelease	(${CEF_BINARY}/${RELEASE_DIR}/libcef.a)
+WIN_dk_libDebug			(${CEF_BINARY}/${DEBUG_DIR}/libcef.lib)
+WIN_dk_libRelease		(${CEF_BINARY}/${RELEASE_DIR}/libcef.lib)
 
 # libcef_dll_wrapper
-WIN_dk_libDebug			(${CEF_BINARY}/${OS}/libcef_dll_wrapper/${DEBUG_DIR}/libcef_dll_wrapper.lib)
-WIN_dk_libRelease		(${CEF_BINARY}/${OS}/libcef_dll_wrapper/${RELEASE_DIR}/libcef_dll_wrapper.lib)
+ANDROID_dk_libDebug		(${CEF_BINARY}/${OS}/libcef_dll_wrapper/${DEBUG_DIR}/libcef_dll_wrapper.a)
+ANDROID_dk_libRelease	(${CEF_BINARY}/${OS}/libcef_dll_wrapper/${RELEASE_DIR}/libcef_dll_wrapper.a)
 APPLE_dk_libDebug		(${CEF_BINARY}/${OS}/libcef_dll_wrapper/${DEBUG_DIR}/libcef_dll_wrapper.a)
 APPLE_dk_libRelease		(${CEF_BINARY}/${OS}/libcef_dll_wrapper/${RELEASE_DIR}/libcef_dll_wrapper.a)
 LINUX_dk_libDebug		(${CEF_BINARY}/${OS}/${DEBUG_DIR}/libcef_dll_wrapper/libcef_dll_wrapper.a)
 LINUX_dk_libRelease		(${CEF_BINARY}/${OS}/${RELEASE_DIR}/libcef_dll_wrapper/libcef_dll_wrapper.a)
 RASPBERRY_dk_libDebug	(${CEF_BINARY}/${OS}/${DEBUG_DIR}/libcef_dll_wrapper/libcef_dll_wrapper.a)
 RASPBERRY_dk_libRelease	(${CEF_BINARY}/${OS}/${RELEASE_DIR}/libcef_dll_wrapper/libcef_dll_wrapper.a)
-ANDROID_dk_libDebug		(${CEF_BINARY}/${OS}/libcef_dll_wrapper/${DEBUG_DIR}/libcef_dll_wrapper.a)
-ANDROID_dk_libRelease	(${CEF_BINARY}/${OS}/libcef_dll_wrapper/${RELEASE_DIR}/libcef_dll_wrapper.a)
+WIN_dk_libDebug			(${CEF_BINARY}/${OS}/libcef_dll_wrapper/${DEBUG_DIR}/libcef_dll_wrapper.lib)
+WIN_dk_libRelease		(${CEF_BINARY}/${OS}/libcef_dll_wrapper/${RELEASE_DIR}/libcef_dll_wrapper.lib)
 
 # cef_sandbox
-#WIN_dk_libDebug		(${CEF_BINARY}/${DEBUG_DIR}/cef_sandbox.lib)
-#WIN_dk_libRelease		(${CEF_BINARY}/${RELEASE_DIR}/cef_sandbox.lib)
+#ANDROID_dk_libDebug	(${CEF_BINARY}/${DEBUG_DIR}/cef_sandbox.a)
+#ANDROID_dk_libRelease	(${CEF_BINARY}/${RELEASE_DIR}/cef_sandbox.a)
 #APPLE_dk_libDebug		(${CEF_BINARY}${DEBUG_DIR}/cef_sandbox.a)
 #APPLE_dk_libRelease	(${CEF_BINARY}/${RELEASE_DIR}/cef_sandbox.a)
 #LINUX_dk_libDebug		(${CEF_BINARY}/${DEBUG_DIR}/cef_sandbox.a)
 #LINUX_dk_libRelease	(${CEF_BINARY}/${RELEASE_DIR}/cef_sandbox.a)
 #RASPBERRY_dk_libDebug	(${CEF_BINARY}/${DEBUG_DIR}/cef_sandbox.a)
 #RASPBERRY_dk_libRelease(${CEF_BINARY}/${RELEASE_DIR}/cef_sandbox.a)
-#ANDROID_dk_libDebug	(${CEF_BINARY}/${DEBUG_DIR}/cef_sandbox.a)
-#ANDROID_dk_libRelease	(${CEF_BINARY}/${RELEASE_DIR}/cef_sandbox.a)
+#WIN_dk_libDebug		(${CEF_BINARY}/${DEBUG_DIR}/cef_sandbox.lib)
+#WIN_dk_libRelease		(${CEF_BINARY}/${RELEASE_DIR}/cef_sandbox.lib)
 
 
 ### GENERATE ###
-WIN_dk_queueCommand			(${DKCMAKE_BUILD} -DUSE_SANDBOX=OFF ${CEF_BINARY})
+ANDROID_dk_queueCommand		(${DKCMAKE_BUILD} -DUSE_SANDBOX=OFF -DPROJECT_ARCH="linuxarm" ${CEF_BINARY})
 APPLE_dk_queueCommand		(${DKCMAKE_BUILD} -DUSE_SANDBOX=OFF ${CEF_BINARY})
 LINUX_dk_queueCommand		(${DKCMAKE_BUILD} -DUSE_SANDBOX=OFF ${CEF_BINARY})
 RASPBERRY_dk_queueCommand	(${DKCMAKE_BUILD} -DUSE_SANDBOX=OFF -DPROJECT_ARCH="linuxarm" ${CEF_BINARY})
-ANDROID_dk_queueCommand		(${DKCMAKE_BUILD} -DUSE_SANDBOX=OFF -DPROJECT_ARCH="linuxarm" ${CEF_BINARY})
+WIN_dk_queueCommand			(${DKCMAKE_BUILD} -DUSE_SANDBOX=OFF ${CEF_BINARY})
 
 
 ### COMPILE ###
