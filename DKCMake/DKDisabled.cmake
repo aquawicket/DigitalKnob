@@ -406,6 +406,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(DKOSGWindow)			# requires openscenegraph 
 	dk_disable(DKScreenRecorder)	# requires opencv
 	dk_disable(DKSDLCef)			# requires cef_binary
+	dk_disable(DKSDLOsg)			# requires openscenegraph
 	dk_disable(DKSDLVideo)			# requires ffmpeg
 	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSFMLRml)			# requires sfml
