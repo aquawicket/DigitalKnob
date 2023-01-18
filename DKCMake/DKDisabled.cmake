@@ -569,6 +569,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(openframeworks)
 	dk_disable(openssl)
 	dk_disable(opus)
+	dk_disable(osgaudio)			# missing osg cmake includes
 	dk_disable(osgrmlui)
 	dk_disable(quartz_core)
 	dk_disable(rmlui-d3d11)
