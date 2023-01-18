@@ -534,6 +534,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(DKWebSockets)
 	dk_disable(dukluv)
 	dk_disable(ffmpeg)
+	dk_disable(flac)				# ERROR: src/libFLAC/cpu.c:91:43 error: invalid output constraint '=a' in asm
 	dk_disable(fontconfig)
 	dk_disable(foundation)
 	dk_disable(game_controller)
