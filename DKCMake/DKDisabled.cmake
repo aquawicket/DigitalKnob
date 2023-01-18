@@ -550,6 +550,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(libcaca)
 	dk_disable(libexpat)
 	dk_disable(libsndfile)
+	dk_disable(libtorrent)
 	dk_disable(libuv)
 	#dk_disable(libvncserver)
 	dk_disable(libwebsockets)
