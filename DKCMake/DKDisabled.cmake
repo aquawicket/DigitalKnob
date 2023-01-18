@@ -584,6 +584,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(rtmidi)				# ALSA API requested but no ALSA dev libraries found
 	dk_disable(sdl-gpu)				# emcc: error: setting 'USE_SDL' expects 'bool' but got 'int'
 	dk_disable(sdl_mixer)			# emcc: error: setting 'USE_SDL' expects 'bool' but got 'int'
+	dk_disable(sdl_net)				# emcc: error: setting 'USE_SDL' expects 'bool' but got 'int'
 	dk_disable(smpeg2)				# ISO C++17 does not allow 'register' storage class specifier
 	dk_disable(system_configuration)
 	dk_disable(vorbis)				# requires ogg
