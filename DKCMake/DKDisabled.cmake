@@ -465,6 +465,7 @@ if(ANDROID) # Disabled for Android targets
 	dk_disable(uwebsockets)			# Could NOT find OpenSSL
 	dk_disable(vorbis)				# configure: error: unrecognized option: `-DANDROID32'
 	dk_disable(waave)
+	dk_disable(wasm3)
 	dk_disable(x264)
 	dk_disable(x265)
 endif(ANDROID)
