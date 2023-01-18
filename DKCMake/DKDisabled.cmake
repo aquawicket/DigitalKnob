@@ -579,6 +579,7 @@ if(EMSCRIPTEN) # Disabled for Emscripten targets
 	dk_disable(quartz_core)
 	dk_disable(rmlui-d3d11)
 	dk_disable(rtaudio)				# ALSA API requested but no ALSA dev libraries found
+	dk_disable(rtmidi)				# ALSA API requested but no ALSA dev libraries found
 	dk_disable(system_configuration)
 	dk_disable(vorbis)				# requires ogg
 	dk_disable(waave)
