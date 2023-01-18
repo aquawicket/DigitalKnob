@@ -46,6 +46,7 @@ dk_disable(sw-client)				# DEPRECATED: requested by leptonica but not required
 if(WIN) # Disabled for Windows targets
 	dk_disable(aom)					# Perl is required to build libaom.
 	dk_disable(aubio)
+	dk_disable(bzip2)
 	dk_disable(diff-match-patch)
 	dk_disable(DKOcr)				# causing linking errors in tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
