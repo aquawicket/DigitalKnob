@@ -19,10 +19,10 @@ dk_import(https://github.com/libsndfile/libsndfile.git)
 ### LINK ###
 dk_include			(${LIBSNDFILE}/include)
 dk_include			(${LIBSNDFILE}/${OS})
-WIN_dk_libDebug		(${LIBSNDFILE}/${OS}/${DEBUG_DIR}/sndfile.lib)
-WIN_dk_libRelease	(${LIBSNDFILE}/${OS}/${RELEASE_DIR}/sndfile.lib)
 UNIX_dk_libDebug	(${LIBSNDFILE}/${OS}/${DEBUG_DIR}/libsndfile.a)
 UNIX_dk_libRelease	(${LIBSNDFILE}/${OS}/${RELEASE_DIR}/libsndfile.a)
+WIN_dk_libDebug		(${LIBSNDFILE}/${OS}/${DEBUG_DIR}/sndfile.lib)
+WIN_dk_libRelease	(${LIBSNDFILE}/${OS}/${RELEASE_DIR}/sndfile.lib)
 
 
 ### GENERATE ###

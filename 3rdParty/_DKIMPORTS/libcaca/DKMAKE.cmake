@@ -1,4 +1,4 @@
-# https://github.com/cacalabs/libcaca
+# https://github.com/cacalabs/libcaca.git
 # http://caca.zoy.org/wiki/libcaca
 
 
@@ -10,10 +10,10 @@ dk_import(https://github.com/cacalabs/libcaca.git BRANCH main)
 ### LINK ###
 dk_include				(${LIBCACA}/include)
 dk_include				(${LIBCACA}/${OS})
-WIN_dk_libDebug			(${LIBCACA}/${OS}/${DEBUG_DIR}/libcacad.lib)
-WIN_dk_libRelease		(${LIBCACA}/${OS}/${RELEASE_DIR}/libcaca.lib)
 UNIX_dk_libDebug		(${LIBCACA}/${OS}/${DEBUG_DIR}/libcacad.a)
 UNIX_dk_libRelease		(${LIBCACA}/${OS}/${RELEASE_DIR}/libcaca.a)
+WIN_dk_libDebug			(${LIBCACA}/${OS}/${DEBUG_DIR}/libcacad.lib)
+WIN_dk_libRelease		(${LIBCACA}/${OS}/${RELEASE_DIR}/libcaca.lib)
 
 
 ### GENERATE ####

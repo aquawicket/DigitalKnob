@@ -21,24 +21,24 @@ dk_include						(${LIBVNCSERVER}/examples)
 dk_include						(${LIBVNCSERVER}/${OS})
 ANDROID_DEBUG_dk_include		(${LIBVNCSERVER}/${OS}/${DEBUG_DIR})
 ANDROID_RELEASE_dk_include		(${LIBVNCSERVER}/${OS}/${RELEASE_DIR})
+EMSCRIPTEN_DEBUG_dk_include		(${LIBVNCSERVER}/${OS}/${DEBUG_DIR})
+EMSCRIPTEN_RELEASE_dk_include	(${LIBVNCSERVER}/${OS}/${RELEASE_DIR})
 LINUX_DEBUG_dk_include			(${LIBVNCSERVER}/${OS}/${DEBUG_DIR})
 LINUX_RELEASE_dk_include		(${LIBVNCSERVER}/${OS}/${RELEASE_DIR})
 RASPBERRY_DEBUG_dk_include		(${LIBVNCSERVER}/${OS}/${DEBUG_DIR})
 RASPBERRY_RELEASE_dk_include	(${LIBVNCSERVER}/${OS}/${RELEASE_DIR})
-EMSCRIPTEN_DEBUG_dk_include		(${LIBVNCSERVER}/${OS}/${DEBUG_DIR})
-EMSCRIPTEN_RELEASE_dk_include	(${LIBVNCSERVER}/${OS}/${RELEASE_DIR})
 
 # vncserver
-WIN_dk_libDebug				(${LIBVNCSERVER}/${OS}/${DEBUG_DIR}/vncserver.lib)
-WIN_dk_libRelease			(${LIBVNCSERVER}/${OS}/${RELEASE_DIR}/vncserver.lib)
-UNIX_dk_libDebug			(${LIBVNCSERVER}/${OS}/${DEBUG_DIR}/libvncserver.a)
-UNIX_dk_libRelease			(${LIBVNCSERVER}/${OS}/${RELEASE_DIR}/libvncserver.a)
+UNIX_dk_libDebug	(${LIBVNCSERVER}/${OS}/${DEBUG_DIR}/libvncserver.a)
+UNIX_dk_libRelease	(${LIBVNCSERVER}/${OS}/${RELEASE_DIR}/libvncserver.a)
+WIN_dk_libDebug		(${LIBVNCSERVER}/${OS}/${DEBUG_DIR}/vncserver.lib)
+WIN_dk_libRelease	(${LIBVNCSERVER}/${OS}/${RELEASE_DIR}/vncserver.lib)
 
 # vncclient
-WIN_dk_libDebug				(${LIBVNCSERVER}/${OS}/${DEBUG_DIR}/vncclient.lib)
-WIN_dk_libRelease			(${LIBVNCSERVER}/${OS}/${RELEASE_DIR}/vncclient.lib)
-UNIX_dk_libDebug			(${LIBVNCSERVER}/${OS}/${DEBUG_DIR}/libvncclient.a)
-UNIX_dk_libRelease			(${LIBVNCSERVER}/${OS}/${RELEASE_DIR}/libvncclient.a)
+UNIX_dk_libDebug	(${LIBVNCSERVER}/${OS}/${DEBUG_DIR}/libvncclient.a)
+UNIX_dk_libRelease	(${LIBVNCSERVER}/${OS}/${RELEASE_DIR}/libvncclient.a)
+WIN_dk_libDebug		(${LIBVNCSERVER}/${OS}/${DEBUG_DIR}/vncclient.lib)
+WIN_dk_libRelease	(${LIBVNCSERVER}/${OS}/${RELEASE_DIR}/vncclient.lib)
 
 
 

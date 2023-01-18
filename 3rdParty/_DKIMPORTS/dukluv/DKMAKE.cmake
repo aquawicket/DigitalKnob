@@ -15,10 +15,10 @@ dk_import(https://github.com/creationix/dukluv.git)
 ### LINK ###
 dk_include			(${DUKLUV}/include)
 dk_include			(${DUKLUV}/${OS})
-WIN_dk_libDebug		(${DUKLUV}/${OS}/${DEBUG_DIR}/dukluv.lib)
-WIN_dk_libRelease	(${DUKLUV}/${OS}/${RELEASE_DIR}/dukluv.lib)
 UNIX_dk_libDebug	(${DUKLUV}/${OS}/${DEBUG_DIR}/libdukluv.a)
 UNIX_dk_libRelease	(${DUKLUV}/${OS}/${RELEASE_DIR}/libdukluv.a)
+WIN_dk_libDebug		(${DUKLUV}/${OS}/${DEBUG_DIR}/dukluv.lib)
+WIN_dk_libRelease	(${DUKLUV}/${OS}/${RELEASE_DIR}/dukluv.lib)
 
 
 ### GENERATE ###
