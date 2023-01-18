@@ -2,9 +2,9 @@
 
 
 ### DEPEND ###
-dk_depend(zlib)
 dk_depend(libuv)
 dk_depend(openssl)
+dk_depend(zlib)
 
 
 ### IMPORT ###
@@ -12,22 +12,20 @@ dk_import(https://github.com/uNetworking/uWebSockets.git BRANCH v0.14 PATCH)
 
 
 ### LINK ###
-dk_include				(${UWEBSOCKETS})
-dk_include				(${UWEBSOCKETS}/${OS})
-WIN_dk_libDebug			(${UWEBSOCKETS}/${OS}/${DEBUG_DIR}/uWS.lib)
-WIN_dk_libRelease		(${UWEBSOCKETS}/${OS}/${RELEASE_DIR}/uWS.lib)
-APPLE_dk_libDebug		(${UWEBSOCKETS}/${OS}/${DEBUG_DIR}/libuWS.a)
-APPLE_dk_libRelease		(${UWEBSOCKETS}/${OS}/${RELEASE_DIR}/libuWS.a)
-LINUX_dk_libDebug		(${UWEBSOCKETS}/${OS}/${DEBUG_DIR}/libuWS.a)
-LINUX_dk_libRelease		(${UWEBSOCKETS}/${OS}/${RELEASE_DIR}/libuWS.a)
-RASPBERRY_dk_libDebug	(${UWEBSOCKETS}/${OS}/${DEBUG_DIR}/libuWS.a)
-RASPBERRY_dk_libRelease	(${UWEBSOCKETS}/${OS}/${RELEASE_DIR}/libuWS.a)
-ANDROID_dk_libDebug		(${UWEBSOCKETS}/${OS}/${DEBUG_DIR}/libuWS.a)
-ANDROID_dk_libRelease	(${UWEBSOCKETS}/${OS}/${RELEASE_DIR}/libuWS.a)
+dk_include			(${UWEBSOCKETS})
+dk_include			(${UWEBSOCKETS}/${OS})
+UNIX_dk_libDebug	(${UWEBSOCKETS}/${OS}/${DEBUG_DIR}/libuWS.a)
+UNIX_dk_libRelease	(${UWEBSOCKETS}/${OS}/${RELEASE_DIR}/libuWS.a)
+WIN_dk_libDebug		(${UWEBSOCKETS}/${OS}/${DEBUG_DIR}/uWS.lib)
+WIN_dk_libRelease	(${UWEBSOCKETS}/${OS}/${RELEASE_DIR}/uWS.lib)
 
 
 ### GENERATE ###
-dk_queueCommand	(${DKCMAKE_BUILD} ${ZLIB_CMAKE} ${LIBUV_CMAKE} ${OPENSSL_CMAKE} ${UWEBSOCKETS})
+dk_queueCommand(${DKCMAKE_BUILD} 
+	${LIBUV_CMAKE}
+	${OPENSSL_CMAKE}
+	${ZLIB_CMAKE}
+	${UWEBSOCKETS})
 
 
 ### COMPILE ###

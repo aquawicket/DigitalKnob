@@ -6,9 +6,9 @@ endif()
 
 
 ### IMPORT ###
+MAC64_dk_import(https://web.archive.org/web/20200919011114mp_/https://ffmpeg.zeranoe.com/builds/macos64/static/ffmpeg-20200831-4a11a6f-macos64-static.zip)
 WIN32_dk_import(https://web.archive.org/web/20200919011114mp_/https://ffmpeg.zeranoe.com/builds/win32/static/ffmpeg-20200831-4a11a6f-win32-static.zip)
 WIN64_dk_import(https://web.archive.org/web/20200919011114mp_/https://ffmpeg.zeranoe.com/builds/win64/static/ffmpeg-20200831-4a11a6f-win64-static.zip)
-MAC64_dk_import(https://web.archive.org/web/20200919011114mp_/https://ffmpeg.zeranoe.com/builds/macos64/static/ffmpeg-20200831-4a11a6f-macos64-static.zip)
 
 
 ### LINK ###

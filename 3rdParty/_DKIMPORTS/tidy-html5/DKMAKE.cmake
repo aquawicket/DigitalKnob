@@ -12,11 +12,11 @@ dk_import(https://github.com/htacg/tidy-html5.git)
 
 
 ### LINK ###
+EMSCRIPTEN_dk_define	(HAS_FUTIME=0)
 dk_include				(${TIDY-HTML5})
 dk_include				(${TIDY-HTML5}/include)
 dk_include				(${TIDY-HTML5}/${OS})
 ANDROID_dk_include		(${TIDY-HTML5}/${OS}/$(BUILD_TYPE)/jni)
-EMSCRIPTEN_dk_define	(HAS_FUTIME=0)
 UNIX_dk_libDebug		(${TIDY-HTML5}/${OS}/${DEBUG_DIR}/libtidy.a)
 UNIX_dk_libRelease		(${TIDY-HTML5}/${OS}/${RELEASE_DIR}/libtidy.a)
 WIN_dk_libDebug			(${TIDY-HTML5}/${OS}/${DEBUG_DIR}/tidy_staticd.lib)

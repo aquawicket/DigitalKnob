@@ -7,10 +7,10 @@ dk_import(https://git.ffmpeg.org/ffmpeg.git)
 
 ### LINK ###
 dk_include			(${FFMPEG}/src)
-WIN_dk_libDebug		(${FFMPEG}/${OS}/${DEBUG_DIR}/ffmpeg.lib)
-WIN_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/ffmpeg.lib)
 UNIX_dk_libDebug	(${FFMPEG}/${OS}/${DEBUG_DIR}/libffmpeg.a)
 UNIX_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libffmpeg.a)
+WIN_dk_libDebug		(${FFMPEG}/${OS}/${DEBUG_DIR}/ffmpeg.lib)
+WIN_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/ffmpeg.lib)
 
 
 ### GENERATE / COMPILE ###

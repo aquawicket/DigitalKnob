@@ -31,24 +31,24 @@ dk_include(${FFMPEG-DEV}/include/libavutil)
 dk_include(${FFMPEG-DEV}/include/libswresample)
 dk_include(${FFMPEG-DEV}/include/libswscale)
 WIN_dk_libDebug(${FFMPEG-DEV}/lib/avcodec.lib)
-WIN_dk_libRelease(${FFMPEG-DEV}/lib/avcodec.lib)
 WIN_dk_libDebug(${FFMPEG-DEV}/lib/avdevice.lib)
-WIN_dk_libRelease(${FFMPEG-DEV}/lib/avdevice.lib)
 WIN_dk_libDebug(${FFMPEG-DEV}/lib/avfilter.lib)
-WIN_dk_libRelease(${FFMPEG-DEV}/lib/avfilter.lib)
 WIN_dk_libDebug(${FFMPEG-DEV}/lib/avformat.lib)
-WIN_dk_libRelease(${FFMPEG-DEV}/lib/avformat.lib)
 WIN_dk_libDebug(${FFMPEG-DEV}/lib/avutil.lib)
-WIN_dk_libRelease(${FFMPEG-DEV}/lib/avutil.lib)
 WIN_dk_libDebug(${FFMPEG-DEV}/lib/swresample.lib)
-WIN_dk_libRelease(${FFMPEG-DEV}/lib/swresample.lib)
 WIN_dk_libDebug(${FFMPEG-DEV}/lib/swscale.lib)
+WIN_dk_libRelease(${FFMPEG-DEV}/lib/avcodec.lib)
+WIN_dk_libRelease(${FFMPEG-DEV}/lib/avdevice.lib)
+WIN_dk_libRelease(${FFMPEG-DEV}/lib/avfilter.lib)
+WIN_dk_libRelease(${FFMPEG-DEV}/lib/avformat.lib)
+WIN_dk_libRelease(${FFMPEG-DEV}/lib/avutil.lib)
+WIN_dk_libRelease(${FFMPEG-DEV}/lib/swresample.lib)
 WIN_dk_libRelease(${FFMPEG-DEV}/lib/swscale.lib)
 
 
 ### 3RDPARTY LINK ###
-WIN_dk_set(FFMPEG-DEV_CMAKE "-DCMAKE_C_FLAGS=/I${FFMPEG-DEV}/include" "-DCMAKE_CXX_FLAGS=/I${FFMPEG-DEV}/include" -DFFMPEG_INCLUDE_DIR=${FFMPEG-DEV})
-UNIX_dk_set(FFMPEG-DEV_CMAKE "-DCMAKE_C_FLAGS=-I${FFMPEG-DEV}/include" "-DCMAKE_CXX_FLAGS=-I${FFMPEG-DEV}/include" -DFFMPEG_INCLUDE_DIR=${FFMPEG-DEV})
+UNIX_dk_set	(FFMPEG-DEV_CMAKE "-DCMAKE_C_FLAGS=-I${FFMPEG-DEV}/include" "-DCMAKE_CXX_FLAGS=-I${FFMPEG-DEV}/include" -DFFMPEG_INCLUDE_DIR=${FFMPEG-DEV})
+WIN_dk_set	(FFMPEG-DEV_CMAKE "-DCMAKE_C_FLAGS=/I${FFMPEG-DEV}/include" "-DCMAKE_CXX_FLAGS=/I${FFMPEG-DEV}/include" -DFFMPEG_INCLUDE_DIR=${FFMPEG-DEV})
 
 
 ### COMPILE ###

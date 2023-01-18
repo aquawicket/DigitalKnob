@@ -25,14 +25,6 @@ else()
 	UNIX_dk_libDebug	(${SDL_MIXER}/${OS}/${DEBUG_DIR}/libSDL2_mixerd.a)
 	UNIX_dk_libRelease	(${SDL_MIXER}/${OS}/${RELEASE_DIR}/libSDL2_mixer.a)
 endif()
-#ANDROID_dk_libDebug	(${SDL_MIXER}/${OS}/lib/${DEBUG_DIR}/SDL_mixer.a)
-#ANDROID_dk_libRelease	(${SDL_MIXER}/${OS}/lib/${RELEASE_DIR}/SDL_mixer.a)
-#APPLE_dk_libDebug		(${SDL_MIXER}/${OS}/lib/Debug/libSDL2_mixerd.a)
-#APPLE_dk_libRelease	(${SDL_MIXER}/${OS}/lib/Release/libSDL2_mixer.a)
-#LINUX_dk_libDebug		(${SDL_MIXER}/${OS}/${DEBUG_DIR}/libSDL2_mixerd.a)
-#LINUX_dk_libRelease	(${SDL_MIXER}/${OS}/${RELEASE_DIR}/libSDL2_mixer.a)
-#RASPBERRY_dk_libDebug	(${SDL_MIXER}/${OS}/${DEBUG_DIR}/lib/SDL_mixer.a)
-#RASPBERRY_dk_libRelease(${SDL_MIXER}/${OS}/${RELEASE_DIR}/lib/SDL_mixer.a)
 
 
 ### GENERATE ###

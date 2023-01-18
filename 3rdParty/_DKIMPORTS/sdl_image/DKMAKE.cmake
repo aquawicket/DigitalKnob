@@ -40,10 +40,10 @@ dk_import(https://github.com/libsdl-org/SDL_image/archive/refs/tags/release-2.6.
 ### LINK ###
 dk_include					(${SDL_IMAGE})
 if(VISUAL_STUDIO_IDE)
-	WIN_dk_libDebug			(${SDL_IMAGE}/${OS}/lib/${DEBUG_DIR}/SDL_image.lib)
-	WIN_dk_libRelease		(${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL_image.lib)
 	ANDROID_dk_libDebug		(${SDL_IMAGE}/${OS}/lib/${DEBUG_DIR}/SDL_image.a)
 	ANDROID_dk_libRelease	(${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL_image.a)
+	WIN_dk_libDebug			(${SDL_IMAGE}/${OS}/lib/${DEBUG_DIR}/SDL_image.lib)
+	WIN_dk_libRelease		(${SDL_IMAGE}/${OS}/lib/${RELEASE_DIR}/SDL_image.lib)
 elseif(XCODE_IDE)
 	dk_libDebug				(${SDL_IMAGE}/${OS}/lib/Debug/SDL_image.a)
 	dk_libRelease			(${SDL_IMAGE}/${OS}/lib/Release/SDL_image.a)
