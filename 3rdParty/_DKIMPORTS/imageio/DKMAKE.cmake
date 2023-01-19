@@ -1,11 +1,11 @@
 # https://developer.apple.com/documentation/imageio
 
 if(NOT MAC_HOST)
-	return()
+	dk_return()
 endif()
 
 
-FIND_LIBRARY(ImageIO_lib ImageIO)
+find_library(ImageIO_lib ImageIO)
 if(NOT ImageIO_lib)
 	dk_error("Could not locate ImageIO framework")
 endif()

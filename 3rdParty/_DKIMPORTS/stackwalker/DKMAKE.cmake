@@ -5,7 +5,7 @@
 # FIXME: Let's replace this with boost::stacktrace for cross platform support.
 # https://www.boost.org/doc/libs/1_75_0/doc/html/stacktrace.html
 if(NOT WIN_HOST)
-	return()
+	dk_return()
 endif()
 
 

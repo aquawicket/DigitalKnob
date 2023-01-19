@@ -1,5 +1,5 @@
 if(NOT WIN)
-	return()
+	dk_return()
 endif()
 
 dk_findLibrary(pdh.lib)

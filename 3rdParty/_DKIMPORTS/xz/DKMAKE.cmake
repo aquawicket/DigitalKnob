@@ -45,7 +45,7 @@ dk_build(${XZ} liblzma)
 
 
 #FIXME
-return()
+dk_return()
 
 ################## autotools #################################################
 #WIN_dk_libDebug(${XZ}/${OS}/${DEBUG_DIR}/src/liblzma/.libs/liblzma.a)

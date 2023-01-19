@@ -1,6 +1,6 @@
 # remove these
 dk_undepend(_TEMPLATE-APP_)
-return()
+dk_return()
 
 
 

@@ -1,5 +1,5 @@
 if(NOT UNIX_HOST)
-	return()
+	dk_return()
 endif()
 
 ### INSTALL ###

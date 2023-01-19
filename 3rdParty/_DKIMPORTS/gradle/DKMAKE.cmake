@@ -1,5 +1,6 @@
-return() # FIXME: currently disabled
 # https://github.com/gradle/gradle
+
+dk_return() # FIXME: currently disabled
 
 dk_depend(openjdk)
 

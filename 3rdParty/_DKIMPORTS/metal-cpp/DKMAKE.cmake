@@ -1,5 +1,5 @@
 if(NOT MAC_HOST)
-	return()
+	dk_return()
 endif()
 
 # https://developer.apple.com/metal/cpp/

@@ -6,7 +6,7 @@
 # https://phpdev.toolsforresearch.com/php-8.0.23-Win32-vs16-x64.zip
 # https://windows.php.net/downloads/releases/php-8.0.26-Win32-vs16-x86.zip
 if(NOT WIN_HOST)
-	return()
+	dk_return()
 endif()
 
 

@@ -1,7 +1,7 @@
 if(NOT ANDROID)
-	return()
+	dk_return()
 endif()
 
-ANDROID_dk_depend(android-ndk)
+dk_depend(android-ndk)
 
 dk_findLibrary(log)
