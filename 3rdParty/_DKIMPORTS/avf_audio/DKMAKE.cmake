@@ -1,7 +1,7 @@
 # https://developer.apple.com/documentation/avfaudio?language=objc
 
-if(NOT MAC_HOST)
-	return()
+if(NOT APPLE)
+	dk_return()
 endif()
 
 dk_findLibrary(AVFAudio)
