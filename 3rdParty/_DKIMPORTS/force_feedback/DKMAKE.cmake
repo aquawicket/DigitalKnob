@@ -1,7 +1,7 @@
 # https://developer.apple.com/documentation/ForceFeedback
 
 if(NOT MAC)
-	return()
+	dk_return()
 endif()
 
 

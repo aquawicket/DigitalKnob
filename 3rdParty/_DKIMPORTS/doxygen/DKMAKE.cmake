@@ -1,5 +1,9 @@
 # https://github.com/doxygen/doxygen.git
 # https://sourceforge.net/projects/doxygen
+if(NOT WIN_HOST)
+	dk_return()
+endif()
+
 
 ### IMPORT ###
 LINUX_HOST_dk_set(DOXYGEN_EXE "/Applications/Doxygen.app") #FIXME
@@ -10,7 +14,7 @@ endif()
 
 MAC_HOST_dk_set(DOXYGEN_EXE "/Applications/Doxygen.app") #FIXME
 if(NOT EXISTS ${DOXYGEN_EXE})
-	MAC_HOST_dk_import(https://github.com/doxygen/doxygen/releases/download/Release_1_9_6/Doxygen-1.9.6.dmg)
+	MAC_HOST_dk_import(https://github.com/doxygen/doxygen/releases/download/Release_1_9_6/Doxygen-1.9.6.dmg) #FIXME:  The Downloaded file is a BYPASS file .dmg
 	MAC_HOST_dk_command(${DKDOWNLOAD}/Doxygen-1.9.6.dmg)
 endif()
 

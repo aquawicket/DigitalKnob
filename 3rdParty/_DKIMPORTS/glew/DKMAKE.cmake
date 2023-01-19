@@ -3,7 +3,7 @@
 # https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip
 if(IOS OR IOSSIM OR ANDROID)
 	dk_undepend(glew)
-	return()
+	dk_return()
 endif()
 
 
