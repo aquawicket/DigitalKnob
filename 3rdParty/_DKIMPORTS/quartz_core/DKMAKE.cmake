@@ -1,6 +1,7 @@
-# https://developer.apple.com/documentation/quartzcore
-if(NOT MAC_HOST)
-	return()
+# https://developer.apple.com/documentation/quartzcore?language=objc
+
+if(NOT APPLE)
+	dk_return()
 endif()
 
 
