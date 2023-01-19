@@ -1,4 +1,4 @@
-# https://developer.apple.com/documentation/systemconfiguration
+# https://developer.apple.com/documentation/systemconfiguration?language=objc
 
 if(NOT APPLE)
 	dk_return()
