@@ -1,8 +1,8 @@
 # mlocate
 # EXAMPLE Usage:   $ locate libx11.a
 
-if(NOT UNIX_HOST)
-	return()
+if(NOT UNIX_HOST OR ANDROID)
+	dk_return()
 endif()
 
 ### INSTALL ###

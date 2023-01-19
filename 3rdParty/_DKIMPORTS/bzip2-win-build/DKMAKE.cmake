@@ -1,8 +1,8 @@
 # https://github.com/kiyolee/bzip2-win-build
 # https://github.com/kiyolee/bzip2-win-build/archive/refs/tags/v1.0.8.zip
-if(NOT WIN)
-	return()
-endif()
+
+### OS CHECK ###
+UNIX_dk_return()
 
 
 ### DEPEND ###

@@ -1,8 +1,8 @@
-# https://developer.apple.com/documentation/appkit
+# https://developer.apple.com/documentation/appkit?language=objc
 
 if(NOT MAC)
 	dk_undepend(appkit)
-	return()
+	dk_return()
 endif()
 
 dk_findLibrary(Appkit)

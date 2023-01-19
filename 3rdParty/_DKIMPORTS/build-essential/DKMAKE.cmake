@@ -2,7 +2,7 @@
 
 if(NOT LINUX_HOST)
 	dk_undepend(build-essential)
-	return()
+	dk_return()
 endif()
 
 dk_depend(openjdk)

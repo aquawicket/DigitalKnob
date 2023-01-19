@@ -58,7 +58,7 @@
 
 if(IOS OR IOSSIM OR ANDROID)
 	dk_undepend(cef_binary)
-	return()
+	dk_return()
 endif()
 
 dk_depend(appkit)
