@@ -1,7 +1,7 @@
 # https://developer.apple.com/documentation/IOKit
 
-if(NOT MAC_HOST)
-	return()
+if(NOT APPLE)
+	dk_return()
 endif()
 
 
