@@ -102,6 +102,7 @@ if(ANDROID)
 	endif()
 	dk_disable(gzip)
 	dk_disable(jasper)
+	dk_disable(kdevelop)			# Permission denied running KDevelop-5.6.1-x86_64.AppImage
 	dk_disable(libarchive)
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libexpat)
