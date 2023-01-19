@@ -2391,7 +2391,9 @@ function(dk_make path) #lib
 		dk_assert("dk_make(${path}) path does not exist")
 	endif()
 	
+	# https://github.com/emscripten-core/emscripten/issues/2005#issuecomment-32162107
 	if(EMSCRIPTEN)
+		dk_assert("No proper dk_make() implemented for emscripten")
 		dk_set(EMMAKE ${3RDPARTY}/emsdk-main/upstream/emscripten/emmake)
 		set(lib ${ARGV1})
 		#dk_set(CURRENT_DIR ${3RDPARTY}/${folder}/${BUILD_DIR})
