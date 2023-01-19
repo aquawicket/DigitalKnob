@@ -46,6 +46,7 @@ if(ANDROID)
 	dk_disable(android-java-tools) 	# download link broken
 	dk_disable(aom)					# build errors
 	dk_disable(aubio)				# build errors
+	#dk_disable(audio_toolbox)		
 	dk_disable(boxer)				# fatal error : 'boxer/boxer.h' file not found
 	dk_disable(bullet3)				# build errors
 	dk_disable(bzip2)				# 'make' is not recognized as an internal or external command
