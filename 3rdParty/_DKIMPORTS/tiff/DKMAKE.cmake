@@ -6,9 +6,14 @@
 
 ### DEPEND ###
 dk_depend(libjpeg-turbo)
-#dk_depend(libwebp) ERROR: circular reference 
+#dk_depend(libwebp) ERROR: circular reference
+dk_depend(xz)
 dk_depend(zlib)
 dk_depend(zstd)
+#-- Could NOT find Deflate (missing: Deflate_LIBRARY Deflate_INCLUDE_DIR)
+#-- Could NOT find JBIG (missing: JBIG_LIBRARY JBIG_INCLUDE_DIR)
+#-- Could NOT find LERC (missing: LERC_LIBRARY LERC_INCLUDE_DIR)
+#-- Could NOT find GLUT (missing: GLUT_glut_LIBRARY)
 
 
 ### IMPORT ###
@@ -51,9 +56,13 @@ RASPBERRY_RELEASE_dk_set	(TIFF_CMAKE -DTIFF_INCLUDE_DIR=${TIFF}/libtiff "-DCMAKE
 WIN_dk_set					(TIFF_CMAKE -DTIFF_INCLUDE_DIR=${TIFF}/libtiff "-DCMAKE_C_FLAGS=/I${TIFF}/${OS}/libtiff" "-DCMAKE_CXX_FLAGS=/I${TIFF}/${OS}/libtiff" -DTIFF_INCLUDE_DIR2=${TIFF}/${OS}/libtiff -DTIFF_LIBRARY_DEBUG=${TIFF}/${OS}/libtiff/${DEBUG_DIR}/tiffd.lib -DTIFF_LIBRARY_RELEASE=${TIFF}/${OS}/libtiff/${RELEASE_DIR}/tiff.lib)
 
 
-
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} ${TIFF})
+dk_queueCommand(${DKCMAKE_BUILD} 
+	${LIBJPEG-TURBO_CMAKE} 
+	${XZ_CMAKE}
+	${ZLIB_CMAKE}
+	${ZSTD_CMAKE}
+	${TIFF})
 
 
 ### COMPILE ###
