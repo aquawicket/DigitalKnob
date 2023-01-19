@@ -331,11 +331,13 @@ if(WIN_32)
 	endif()	
 		
 	###################### Backup Executable ###########################
-	if(DEBUG)
-		dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe.backup OVERWRITE)
-	endif()
-	if(RELEASE)
-		dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe.backup OVERWRITE)
+	if(BACKUP_APP_EXECUTABLES)
+		if(DEBUG)
+			dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe.backup OVERWRITE)
+		endif()
+		if(RELEASE)
+			dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe.backup OVERWRITE)
+		endif()
 	endif()
 		
 	####################### Create Executable Target ###################
@@ -444,11 +446,13 @@ if(WIN_64)
 	endif()
 
 	###################### Backup Executable ###########################
-	if(DEBUG)
-		dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe.backup OVERWRITE)
-	endif()
-	if(RELEASE)
-		dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe.backup OVERWRITE)
+	if(BACKUP_APP_EXECUTABLES)
+		if(DEBUG)
+			dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe.backup OVERWRITE)
+		endif()
+		if(RELEASE)
+			dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe.backup OVERWRITE)
+		endif()
 	endif()
 		
 	####################### Create Executable Target ###################
@@ -520,11 +524,13 @@ if(MAC)
 	#endif()
 	
 	###################### Backup Executable ###########################
-	if(DEBUG)
-		dk_copy(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app.backup OVERWRITE)
-	endif()
-	if(RELEASE)
-		dk_copy(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app.backup OVERWRITE)
+	if(BACKUP_APP_EXECUTABLES)
+		if(DEBUG)
+			dk_copy(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app.backup OVERWRITE)
+		endif()
+		if(RELEASE)
+			dk_copy(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app.backup OVERWRITE)
+		endif()
 	endif()
 		
 	########################## CREATE ICONS ###############################
@@ -687,16 +693,18 @@ if(IOS OR IOSSIM)
 	
 	# FIXME
 	###################### Backup Executable ###########################
-	#if(DEBUG)
-	#	if(EXISTS ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app)
-	#		dk_remove(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app.backup)
-	#		dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app.backup OVERWRITE)
+	#if(BACKUP_APP_EXECUTABLES)
+	#	if(DEBUG)
+	#		if(EXISTS ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app)
+	#			dk_remove(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app.backup)
+	#			dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app.backup OVERWRITE)
+	#		endif()
 	#	endif()
-	#endif()
-	#if(RELEASE)
-	#	if(EXISTS ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app)
-	#		dk_remove(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app.backup)
-	#		dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app.backup OVERWRITE)
+	#	if(RELEASE)
+	#		if(EXISTS ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app)
+	#			dk_remove(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app.backup)
+	#			dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app.backup OVERWRITE)
+	#		endif()
 	#	endif()
 	#endif()
 	
@@ -826,10 +834,12 @@ endif()
 if(LINUX)
 if(NOT RASPBERRY)
 	###################### Backup Executable ###########################
-	if(DEBUG)
-		dk_copy(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup OVERWRITE)
-	elseif(RELEASE)
-		dk_copy(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup OVERWRITE)
+	if(BACKUP_APP_EXECUTABLES)
+		if(DEBUG)
+			dk_copy(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup OVERWRITE)
+		elseif(RELEASE)
+			dk_copy(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup OVERWRITE)
+		endif()
 	endif()
 	
 	########################## CREATE ICONS ###############################
@@ -930,10 +940,12 @@ if(RASPBERRY)
 	endif()
 	
 	###################### Backup Executable ###########################
-	if(DEBUG)
-		dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup OVERWRITE)
-	elseif(RELEASE)
-		dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup OVERWRITE)
+	if(BACKUP_APP_EXECUTABLES)
+		if(DEBUG)
+			dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup OVERWRITE)
+		elseif(RELEASE)
+			dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup OVERWRITE)
+		endif()
 	endif()
 	
 	####################### Create Executable Target ###################
@@ -1007,16 +1019,14 @@ if(ANDROID)
 	dk_resizeImage(${DKPROJECT}/icons/icon.png 96 96 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-xhdpi/ic_launcher.png)
 	dk_resizeImage(${DKPROJECT}/icons/icon.png 144 144 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
 	dk_resizeImage(${DKPROJECT}/icons/icon.png 192 192 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
-
+	
 	dk_copy(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png OVERWRITE)
 	
 	###################### Backup Executable ###########################
-	#if(DEBUG)
-		DEBUG_dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.apk ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.apk.backup OVERWRITE)
-	#endif()
-	#if(RELEASE)
-		RELEASE_dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.apk ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.apk.backup OVERWRITE)
-	#endif()
+	if(BACKUP_APP_EXECUTABLES)
+		DEBUG_dk_rename(${DKPROJECT}/${OS}/app/build/outputs/apk/debug/app-debug.apk ${DKPROJECT}/${OS}/app/build/outputs/apk/app-debug.apk.backup OVERWRITE)
+		RELEASE_dk_rename(${DKPROJECT}/${OS}/app/build/outputs/apk/release/app-release-unsigned.apk ${DKPROJECT}/${OS}/app/build/outputs/apk/release/app-release-unsigned.apk.backup OVERWRITE)
+	endif()
 		
 	####################### Create Library Target ###################
 	set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/app/src/main/jniLibs/${ANDROID_ABI}")
@@ -1147,11 +1157,19 @@ if(EMSCRIPTEN)
 	endif()
 	
 	###################### Backup Executable ###########################
-	#if(DEBUG)
-	#	dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup OVERWRITE)
-	#elseif(RELEASE)
-	#	dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup OVERWRITE)
-	#endif()
+	if(BACKUP_APP_EXECUTABLES)
+		if(DEBUG)
+			dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.data ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.data.backup OVERWRITE)
+			dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.html ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.html.backup OVERWRITE)
+			dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.js ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.js.backup OVERWRITE)
+			dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.wasm ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.wasm.backup OVERWRITE)
+		elseif(RELEASE)
+			dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.data ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.data.backup OVERWRITE)
+			dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.html ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.html.backup OVERWRITE)
+			dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.js ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.js.backup OVERWRITE)
+			dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.wasm ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.wasm.backup OVERWRITE)
+		endif()
+	endif()
 	
 	####################### Create Executable Target ###################
 	add_executable(${APP_NAME} ${App_SRC})
