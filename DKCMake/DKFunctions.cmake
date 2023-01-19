@@ -608,11 +608,11 @@ dk_remove(${DKFunctions_ext} NOERROR)
 ###############################################################################
 # dk_return()
 #
-#	Print the current cmake file, line number and return
+#	Print the current cmake file and return
 #
 macro(dk_return)
 	#DKDEBUGFUNC(${ARGV})
-	message(STATUS "${CMAKE_CURRENT_LIST_DIR}:${CMAKE_CURRENT_LIST_LINE} -> dk_return()")
+	message(STATUS "${CMAKE_CURRENT_LIST_FILE} -> dk_return()")
 	return()
 endmacro()
 dk_createOsMacros("dk_return")
