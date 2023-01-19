@@ -344,6 +344,7 @@ if(IOS OR IOSSIM)
 	dk_disable(lua)					# error:'system' is unavailable: not available on iOS
 	dk_disable(mlocate)				# Unable to locate a Java Runtime that supports apt
 	dk_disable(ncurses)				# CMake Error: C preprocessor "/lib/cpp" fails sanity check
+	dk_disable(openblas)			# CMake Error: if given arguments: "STREQUAL" "CORE2" Unknown arguments specified
 	dk_disable(opencv)				# CMAKE_SYSTEM_PROCESSOR is not defined
 	dk_disable(openframeworks)		# error: tesselator.h: No such file or directory
 	dk_disable(openscenegraph)		# CMake errors
