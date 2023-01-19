@@ -2,7 +2,7 @@
 
 if(NOT ANDROID)
 	dk_undepend(android-cmake)
-	return()
+	dk_return()
 endif()
 
 dk_depend(android-sdk)

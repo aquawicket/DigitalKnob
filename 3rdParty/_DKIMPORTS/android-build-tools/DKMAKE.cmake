@@ -4,11 +4,9 @@
 # https://developer.android.com/studio/releases/build-tools
 # https://androidsdkoffline.blogspot.com/p/android-sdk-build-tools.html
 # https://mirrors.cloud.tencent.com/AndroidSDK/
-
-
 if(NOT ANDROID)
 	dk_undepend(android-build-tools)
-	return()
+	dk_return()
 endif()
 
 dk_depend(android-sdk)

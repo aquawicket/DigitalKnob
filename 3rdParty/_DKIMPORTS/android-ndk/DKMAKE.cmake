@@ -4,10 +4,9 @@
 # https://android.googlesource.com/platform/ndk/+/refs/heads/ndk-release-r21/docs/BuildSystemMaintainers.md
 # https://androidsdkoffline.blogspot.com/p/android-ndk-side-by-side-direct-download.html
 
-
 if(NOT ANDROID)
 	dk_undepend(android-ndk)
-	return()
+	dk_return()
 endif()
 
 

@@ -3,7 +3,7 @@
 
 if(NOT ANDROID)
 	dk_undepend(android-studio)
-	return()
+	dk_return()
 endif()
 
 

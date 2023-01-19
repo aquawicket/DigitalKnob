@@ -3,7 +3,7 @@
 # https://visualcppteam.gallerycdn.vsassets.io/extensions/visualcppteam/javatoolsforandroidprojvs2019/2.8/1561139034309/AndroidJavaTools28.vsix
 if(NOT ANDROID OR NOT WIN_HOST)
 	dk_undepend(android-java-tools)
-	return()
+	dk_return()
 endif()
 
 

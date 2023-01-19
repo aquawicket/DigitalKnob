@@ -1,11 +1,11 @@
 # https://developer.android.com/studio/releases/sdk-tools
 # https://androidsdkoffline.blogspot.com/p/android-sdk-tools.html
 
-
 if(NOT ANDROID)
 	dk_undepend(android-sdk-tools)
-	return()
+	dk_return()
 endif()
+
 
 dk_depend(android-sdk)
 

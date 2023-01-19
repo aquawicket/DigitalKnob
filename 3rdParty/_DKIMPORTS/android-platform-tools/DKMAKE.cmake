@@ -3,7 +3,7 @@
 
 if(NOT ANDROID)
 	dk_undepend(android-platform-tools)
-	return()
+	dk_return()
 endif()
 
 dk_depend(android-sdk)
