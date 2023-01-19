@@ -1,7 +1,7 @@
 # https://developer.apple.com/documentation/corehaptics?language=objc
 
-if(NOT MAC_HOST)
-	return()
+if(NOT APPLE)
+	dk_return()
 endif()
 
 
