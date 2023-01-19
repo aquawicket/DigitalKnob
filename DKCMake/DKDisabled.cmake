@@ -112,7 +112,7 @@ if(MAC)  # Disabled for MAC targets
 	dk_disable(DKThread)			# Error: 'boost/thread/xtime.hpp:24 expected identifier TIME_UTC_=1
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKUpdate)			# Error: 'boost/thread/xtime.hpp:24 expected identifier TIME_UTC_=1
-	#dk_disable(DKVncClient)			# requires libvncserver
+	dk_disable(DKVncClient)			# case value evaluates to 4294967295, which cannot be narrowed to type 'int'
 	#dk_disable(DKVncServer)			# requires libvncserver
 	dk_disable(dukluv)
 	dk_disable(ffmpeg)
