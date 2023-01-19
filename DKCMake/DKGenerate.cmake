@@ -519,10 +519,7 @@ endif(WIN_64)
 
 #######
 if(MAC)
-	#if(${APP_NAME} STREQUAL DKBuilder_APP)
-		set(DKMAC_USE_WRAPPER ON) # open app with terminal
-	#endif()
-	
+
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
 		if(DEBUG)
@@ -579,7 +576,7 @@ if(MAC)
 	dk_set(PRODUCT_BUNDLE_IDENTIFIER com.digitalknob.${APP_NAME})
 	dk_set(CFBundleDevelopmentRegion en)
 	dk_set(CFBundleDisplayName ${APP_NAME})
-	if(DKMAC_USE_WRAPPER)
+	if(MAC_TERMINAL_WRAPPER)
 		dk_set(CFBundleExecutable wrapper)
 	else()
 		dk_set(CFBundleExecutable ${APP_NAME})
@@ -640,7 +637,7 @@ if(MAC)
 	
 	# Make bundle open with Terminal
 	# https://github.com/pyinstaller/pyinstaller/issues/5154#issuecomment-690646012
-	if(DKMAC_USE_WRAPPER)
+	if(MAC_TERMINAL_WRAPPER)
 		dk_info("Making bundle app run in terminal on double-click . . .")
 		set(TERMINAL_SCRIPT 
 			"\#!/bin/bash\n"
@@ -710,12 +707,12 @@ if(IOS OR IOSSIM)
 	
 	###################### BACKUP USERDATA ###############################
 	# Backup files and folders excluded from the package
-	#dk_copy(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER OVERWRITE)
+	#	dk_copy(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER OVERWRITE)
 	# Remove excluded files and folders before packaging
-	#file(REMOVE ${DKPROJECT}/assets/USER)
+	#	file(REMOVE ${DKPROJECT}/assets/USER)
 	# Restore the backed up files, excluded from assets
-	#dk_copy(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/)
-	#file(REMOVE ${DKPROJECT}/Backup)
+	#	dk_copy(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/)
+	#	file(REMOVE ${DKPROJECT}/Backup)
 	
 	########################## ICONS ###############################
 	if(EXISTS ${DKPROJECT}/icons/icon.png)
