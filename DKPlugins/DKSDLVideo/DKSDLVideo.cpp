@@ -29,10 +29,12 @@
 #include "DK/DKFile.h"
 #include "DKSDLWindow/DKSDLWindow.h"
 
-
+// http://www.dranger.com/ffmpeg/tutorial01.html
 bool DKSDLVideo::Init() {
 	DKDEBUGFUNC();
 
+	av_register_all();
+	
 	DKSDLWindow::AddEventFunc(&DKSDLVideo::OnEvent, this);
 	DKClass::RegisterFunc("DKSDLVideo::Play", &DKSDLVideo::Play, this);
 	return true;
