@@ -581,7 +581,7 @@ if(WIN)
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKUpdate)			# build errors
 	dk_disable(dukluv)
-	dk_disable(ffmpeg)
+	#dk_disable(ffmpeg)
 	dk_disable(fontconfig)
 	dk_disable(gdal)
 	dk_disable(gzip)
@@ -598,7 +598,7 @@ if(WIN)
 	dk_disable(rmlui-d3d11)
 	dk_disable(sdl_rtf)
 	dk_disable(waave)				# error C2065: 'PIX_FMT_YUV420P': undeclared identifier.  https://sourceforge.net/p/guvcview/tickets/34/
-	dk_disable(x264)
+	#dk_disable(x264)
 	dk_disable(x265)
 endif(WIN)
 
