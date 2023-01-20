@@ -13,6 +13,8 @@ dk_import(https://git.ffmpeg.org/ffmpeg.git)
 
 ### LINK ###
 dk_include			(${FFMPEG})
+DEBUG_dk_include	(${FFMPEG}/${OS}/${DEBUG_DIR})
+RELEASE_dk_include	(${FFMPEG}/${OS}/${RELEASE_DIR})
 
 # avcodec
 UNIX_dk_libDebug	(${FFMPEG}/${OS}/${DEBUG_DIR}/libavcodec/libavcodec.a)
