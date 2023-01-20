@@ -46,9 +46,52 @@ bool DKSDLVideo::End() {
 }
 
 bool DKSDLVideo::Open(const DKString& file) {
+	
+	// open file
 	AVFormatContext *pFormatCtx = NULL;
 	if(avformat_open_input(&pFormatCtx, file.c_str(), NULL, 0, NULL) != 0)
 		return DKERROR("avformat_open_input() failed! \n");
+	
+	// Retrieve stream information
+	if(avformat_find_stream_info(pFormatCtx, NULL) < 0)
+		return DKERROR("avformat_find_stream_info() failed! \n");
+	
+	// Dump information about file onto standard error
+	av_dump_format(pFormatCtx, 0, file.c_str(), 0);
+	
+	int i;
+	AVCodecContext *pCodecCtxOrig = NULL;
+	AVCodecContext *pCodecCtx = NULL;
+
+	// Find the first video stream
+	videoStream=-1;
+	for(i=0; i < pFormatCtx->nb_streams; i++)
+		if(pFormatCtx->streams[i]->codec->codec_type == AVMEDIA_TYPE_VIDEO) {
+			videoStream=i;
+			break;
+	}
+	if(videoStream == -1)
+		return DKERROR("Didn't find a video stream \n");
+
+	// Get a pointer to the codec context for the video stream
+	pCodecCtx=pFormatCtx->streams[videoStream]->codec;
+	
+	AVCodec *pCodec = NULL;
+
+	// Find the decoder for the video stream
+	pCodec=avcodec_find_decoder(pCodecCtx->codec_id);
+	if(pCodec==NULL) 
+		return DKERROR("Unsupported codec! \n");
+
+	// Copy context
+	pCodecCtx = avcodec_alloc_context3(pCodec);
+	if(avcodec_copy_context(pCodecCtx, pCodecCtxOrig) != 0)
+		return DKERROR("Couldn't copy codec context! \n");
+
+	// Open codec
+	if(avcodec_open2(pCodecCtx, pCodec) < 0)
+		return DKERROR("Could not open codec! \n");
+
 }
 
 bool DKSDLVideo::OnEvent(SDL_Event *event) {
