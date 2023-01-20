@@ -33,9 +33,10 @@
 #include "DK/DK.h"
 
 //WARNING_DISABLE
-#include <libavcodec/avcodec.h>
-#include <libavformat/avformat.h>
-#include <libswscale/swscale.h>
+#include "SDL.h"
+#include "libavcodec/avcodec.h"
+#include "libavformat/avformat.h"
+#include "libswscale/swscale.h"
 //WARNING_ENABLE
 
 
