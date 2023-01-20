@@ -215,7 +215,7 @@ if(EMSCRIPTEN)
 	dk_disable(DKVncClient)			# case value evaluates to 4294967295, which cannot be narrowed to type 'int'
 	dk_disable(DKWebSockets)
 	dk_disable(dukluv)
-	dk_disable(ffmpeg)
+	#dk_disable(ffmpeg)
 	dk_disable(flac)				# ERROR: src/libFLAC/cpu.c:91:43 error: invalid output constraint '=a' in asm
 	dk_disable(fontconfig)
 	dk_disable(foundation)
@@ -272,7 +272,7 @@ if(EMSCRIPTEN)
 	dk_disable(vorbis)				# requires ogg
 	dk_disable(waave)
 	dk_disable(wasm3)
-	dk_disable(x264)
+	#dk_disable(x264)
 	dk_disable(x265)
 	dk_disable(xz)					# CMake Error: TEST_BIG_ENDIAN found no result!
 	dk_disable(zstd)				# error: call to undeclared function 'fileno'; ISO C99 and later do not support implicit function declarations
