@@ -43,8 +43,8 @@
 class DKSDLVideo : public DKObjectT<DKSDLVideo>
 {
 public:
-	void Init();
-	void End();
+	bool Init();
+	bool End();
 	
 	bool Open(const DKString& file);
 	bool Close();
