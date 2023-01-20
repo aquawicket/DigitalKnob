@@ -174,8 +174,10 @@ void DKSDLVideo::SaveFrame(AVFrame *pFrame, int width, int height, int iFrame) {
 	// Open file
 	sprintf(szFilename, "frame%d.ppm", iFrame);
 	pFile=fopen(szFilename, "wb");
-	if(pFile == NULL)
-		return DKERROR("pFile invalid! \n");
+	if(pFile == NULL){
+		DKERROR("pFile invalid! \n");
+		return;
+	}
   
 	// Write header
 	fprintf(pFile, "P6\n%d %d\n255\n", width, height);
