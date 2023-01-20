@@ -35,7 +35,7 @@
 //WARNING_DISABLE
 #include <libavcodec/avcodec.h>
 #include <libavformat/avformat.h>
-#include <ffmpeg/swscale.h>
+#include <libswscale/swscale.h>
 //WARNING_ENABLE
 
 
