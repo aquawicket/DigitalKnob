@@ -1,5 +1,7 @@
 # https://www.nasm.us
 
+dk_depend(rpm)
+
 
 LINUX32_HOST_dk_import(https://www.nasm.us/pub/nasm/releasebuilds/2.16.01/linux/nasm-2.16.01-0.fc36.i686.rpm)
 LINUX32_HOST_dk_set(NASM_EXE ${NASM}/nasm)
