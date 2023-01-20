@@ -37,6 +37,8 @@ bool DKSDLVideo::Init() {
 	
 	DKSDLWindow::AddEventFunc(&DKSDLVideo::OnEvent, this);
 	DKClass::RegisterFunc("DKSDLVideo::Play", &DKSDLVideo::Play, this);
+	
+	Open(DKFile::local_assets+"/DKSDLVideo/test.avi");
 	return true;
 }
 
