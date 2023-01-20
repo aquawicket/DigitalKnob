@@ -519,7 +519,7 @@ if(RASPBERRY)
 	dk_disable(DKWebSockets)		# requires openssl
 	dk_disable(dukluv)
 	dk_disable(emsdk)				# 64bit source only
-	dk_disable(ffmpeg)
+	#dk_disable(ffmpeg)
 	dk_disable(fontconfig)
 	dk_disable(gdal)
 	dk_disable(gzip)
@@ -555,7 +555,7 @@ if(RASPBERRY)
 	dk_disable(upx)
 	dk_disable(uwebsockets)			# broken
 	dk_disable(waave)
-	dk_disable(x264)
+	#dk_disable(x264)
 	dk_disable(x265)
 endif(RASPBERRY)
 
