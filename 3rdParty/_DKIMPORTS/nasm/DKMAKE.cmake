@@ -8,8 +8,8 @@ LINUX32_HOST_dk_set(NASM_EXE ${NASM}/nasm)
 
 if(LINUX_HOST)
 #import(https://www.nasm.us/pub/nasm/releasebuilds/2.16.01/linux/nasm-2.16.01-0.fc36.x86_64.rpm)
-dk_download(https://www.nasm.us/pub/nasm/releasebuilds/2.16.01/linux/nasm-2.16.01-0.fc36.x86_64.rpm ${DOWNLOADS})
-dk_command(sudo rpm -i ${DOWNLOADS}/nasm-2.16.01-0.fc36.x86_64.rpm)
+dk_download(https://www.nasm.us/pub/nasm/releasebuilds/2.16.01/linux/nasm-2.16.01-0.fc36.x86_64.rpm)
+dk_command(sudo rpm -i ${DKDOWNLOAD}/nasm-2.16.01-0.fc36.x86_64.rpm)
 #dk_set(NASM_EXE ${NASM}/nasm)
 endif()
 
