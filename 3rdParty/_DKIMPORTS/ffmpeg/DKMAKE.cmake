@@ -1,4 +1,10 @@
 # https://git.ffmpeg.org/ffmpeg.git
+# https://trac.ffmpeg.org/wiki/CompilationGuide
+# https://www.roxlu.com/2019/062/compiling-ffmpeg-with-x264-on-windows-10-using-msvc
+
+
+### DEPENDS ###
+dk_depend(x264)
 
 
 ### IMPORT ###
