@@ -1,8 +1,4 @@
-IF(WIN)
-	RETURN()
-ENDIF()
-
-dk_depend(waave)
+dk_depend(ffmpeg)
 dk_depend(DKVideo)
 dk_depend(DKSDLWindow)
 

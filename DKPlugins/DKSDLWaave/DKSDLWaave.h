@@ -27,17 +27,17 @@
 //https://github.com/ashafiei/dranger-ffmpeg-tuto
 //http://dranger.com/ffmpeg/
 #pragma once
-#ifndef DKSDLVideo_H
-#define DKSDLVideo_H
+#ifndef DKSDLWaave_H
+#define DKSDLWaave_H
 
 #include "DK/DK.h"
 
 //WARNING_DISABLE
-//#include "???.h"
+#include "WAAVE.h"
 //WARNING_ENABLE
 
 
-class DKSDLVideo : public DKObjectT<DKSDLVideo>
+class DKSDLWaave : public DKObjectT<DKSDLWaave>
 {
 public:
 	void Init();
@@ -45,8 +45,11 @@ public:
 	
 	bool Handle(SDL_Event* event);
 	bool Play(const void* input, void* output);
+	
+	WVStream* stream;
+	WVStreamingObject* streamObj;
 };
 
 
-REGISTER_OBJECT(DKSDLVideo, true)
-#endif //DKSDLVideo_H
+REGISTER_OBJECT(DKSDLWaave, true)
+#endif //DKSDLWaave_H
