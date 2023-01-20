@@ -457,7 +457,7 @@ if(MAC)
 	dk_disable(DKUpdate)			# Error: 'boost/thread/xtime.hpp:24 expected identifier TIME_UTC_=1
 	dk_disable(DKVncClient)			# case value evaluates to 4294967295, which cannot be narrowed to type 'int'
 	dk_disable(dukluv)
-	dk_disable(ffmpeg)
+	#dk_disable(ffmpeg)
 	dk_disable(flac)				# 'asm' undelcared identifier
 	dk_disable(fontconfig)
 	dk_disable(gdal)
@@ -486,7 +486,7 @@ if(MAC)
 	dk_disable(smpeg2)				# ** BUILD FAILED ** MPEGstream.cpp
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(waave)				# error: streaming_objet.h:59 field has incomplete type 'enum PixelFormat'
-	dk_disable(x264)
+	#dk_disable(x264)
 	dk_disable(x265)
 endif(MAC)
 
