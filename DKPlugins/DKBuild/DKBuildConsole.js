@@ -183,8 +183,8 @@ function DKBuildConsole_SelectOs() {
 		//else if(arch = "amrv7l64")
 			//OSes.push("raspberry64")
 		//}
-		OSes.push("android32")
-		OSes.push("android64")
+		//OSes.push("android32")
+		//OSes.push("android64")
 		//OSes.push("emscripten")
 	}
 		

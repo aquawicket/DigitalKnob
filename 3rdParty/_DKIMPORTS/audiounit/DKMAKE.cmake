@@ -1,7 +1,8 @@
-# https://developer.apple.com/documentation/audiounit
+# https://developer.apple.com/documentation/audiounit?language=objc
 
-if(NOT MAC)
-	return()
+if(NOT APPLE)
+	dk_undepend(audiounit)
+	dk_return()
 endif()
 
 dk_findLibrary(AudioUnit)

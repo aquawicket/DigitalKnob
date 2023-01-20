@@ -13,36 +13,37 @@ dk_depend(nodejs)
 
 
 ### IMPORT ###
-#dk_import(https://github.com/aquawicket/duktape/archive/0701a460ca25c2dc76a96bd3187849ca278d1865.zip PATCH)
 dk_import(https://github.com/aquawicket/duktape.git PATCH) #NOTE: PATCH is for CMakeLists.txt
+#dk_import(https://github.com/svaarala/duktape/releases/download/v2.7.0/duktape-2.7.0.tar.xz PATCH) #NOTE: PATCH is for CMakeLists.txt
+#dk_import(https://github.com/svaarala/duktape.git PATCH) #NOTE: PATCH is for CMakeLists.txt
 
 
 ### LINK ###
 WIN_dk_define		(DUK_F_VBCC)
 ANDROID_dk_define	(DUK_F_32BIT_PTRS)
-dk_include			(${DUKTAPE}/dist/src)
-WIN_dk_libDebug		(${DUKTAPE}/${OS}/${DEBUG_DIR}/duktape.lib)
-WIN_dk_libRelease	(${DUKTAPE}/${OS}/${RELEASE_DIR}/duktape.lib)
+dk_include			(${DUKTAPE}/src)
 UNIX_dk_libDebug	(${DUKTAPE}/${OS}/${DEBUG_DIR}/libduktape.a)
 UNIX_dk_libRelease	(${DUKTAPE}/${OS}/${RELEASE_DIR}/libduktape.a)
+WIN_dk_libDebug		(${DUKTAPE}/${OS}/${DEBUG_DIR}/duktape.lib)
+WIN_dk_libRelease	(${DUKTAPE}/${OS}/${RELEASE_DIR}/duktape.lib)
 
 
 ### GENERATE ###
-if(NOT EXISTS ${DUKTAPE}/dist/src/duktape.c)
-	dk_makeDirectory(${DUKTAPE}/dist)
-	#dk_executeProcess(${NODE_EXE} ${DUKTAPE}/src-tools/index.js configure --output-directory ${DUKTAPE}/src --source-directory ${DUKTAPE}/src-input --config-directory ${DUKTAPE}/config)
-	#dk_executeProcess(${PYTHON_EXE} ${DUKTAPE}/util/dist.py)  # default generator
+if(NOT EXISTS ${DUKTAPE}/src/duktape.c)
+	#dk_executeProcess(${PYTHON_EXE} ${DUKTAPE}/util/dist.py)  # default generator	
 	dk_executeProcess(${PYTHON_APP} ${DUKTAPE}/tools/configure.py
-		--output-directory ${DUKTAPE}/dist/src
-		-DDUK_USE_GLOBAL_BINDING 
-		-DDUK_USE_FATAL_HANDLER 
-		-DDUK_USE_DEBUGGER_SUPPORT 
-		-DDUK_USE_INTERRUPT_COUNTER 
-		-DDUK_USE_DEBUGGER_DUMPHEAP 
-		-DDUK_USE_DEBUGGER_INSPECT)
+		--output-directory ${DUKTAPE}/src
+		-DDUK_CMDLINE_DEBUGGER_SUPPORT
+		-DDUK_USE_DEBUGGER_DUMPHEAP
+		-DDUK_USE_DEBUGGER_INSPECT
+		-DDUK_USE_DEBUGGER_SUPPORT
+		-DDUK_USE_FATAL_HANDLER
+		-DDUK_USE_GLOBAL_BINDING
+		-DDUK_USE_INTERRUPT_COUNTER)
+	#dk_executeProcess(${NODE_EXE} ${DUKTAPE}/src-tools/index.js configure --output-directory ${DUKTAPE}/src --source-directory ${DUKTAPE}/src-input --config-directory ${DUKTAPE}/config)
 endif()
 dk_queueCommand(${DKCMAKE_BUILD} ${DUKTAPE})
 
 
 ### COMPILE ###
-dk_build(${DUKTAPE_FOLDER})
+dk_build(${DUKTAPE})

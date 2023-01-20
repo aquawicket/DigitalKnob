@@ -1,5 +1,6 @@
 if(NOT UNIX_HOST)
-	return()
+	dk_undepend(libglfw3-dev)
+	dk_return()
 endif()
 
 ### INSTALL ###
@@ -10,5 +11,5 @@ endif()
 if(MAC)
 	dk_command(brew install glfw3)
 	dk_include(/usr/local/include)
-	APPLE_dk_lib(/usr/local/lib/libglfw.3.3.dylib)
+	dk_lib(/usr/local/lib/libglfw.3.3.dylib)
 endif()

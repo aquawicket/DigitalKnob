@@ -1,7 +1,8 @@
 # https://developer.apple.com/documentation/GLKit?language=objc
 
-if(NOT MAC_HOST)
-	return()
+if(NOT APPLE)
+	dk_undepend(gl_kit)
+	dk_return()
 endif()
 
 

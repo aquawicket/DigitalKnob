@@ -6,12 +6,13 @@
 
 
 ### DEPEND ###
-#dk_depend(sw)
-dk_depend(zlib)
-dk_depend(tiff)
-dk_depend(libpng)
-dk_depend(libjpeg-turbo)
 dk_depend(giflib)
+dk_depend(libjpeg-turbo)
+dk_depend(libpng)
+dk_depend(libwebp)
+#dk_depend(sw)
+dk_depend(tiff)
+dk_depend(zlib)
 
 
 ### IMPORT ###
@@ -19,31 +20,36 @@ dk_import(https://github.com/DanBloomberg/leptonica.git)
 
 
 ### LINK ###
-dk_include				(${LEPTONICA})
-dk_include				(${LEPTONICA}/${OS}/src)
-dk_include				(${LEPTONICA}/${OS}/${RELEASE_DIR}/src)
-WIN_dk_libDebug			(${LEPTONICA}/${OS}/src/${DEBUG_DIR}/leptonica-1.83.0d.lib)
-WIN_dk_libRelease		(${LEPTONICA}/${OS}/src/${RELEASE_DIR}/leptonica-1.83.0.lib)
-APPLE_dk_libDebug		(${LEPTONICA}/${OS}/src/${DEBUG_DIR}/libleptonica.a)
-APPLE_dk_libRelease		(${LEPTONICA}/${OS}/src/${RELEASE_DIR}/libleptonica.a)
-LINUX_dk_libDebug		(${LEPTONICA}/${OS}/${DEBUG_DIR}/src/libleptonica.a)
-LINUX_dk_libRelease		(${LEPTONICA}/${OS}/${RELEASE_DIR}/src/libleptonica.a)
-RASPBERRY_dk_libDebug	(${LEPTONICA}/${OS}/${DEBUG_DIR}/src/libleptonica.a)
-RASPBERRY_dk_libRelease	(${LEPTONICA}/${OS}/${RELEASE_DIR}/src/libleptonica.a)
-ANDROID_dk_libDebug		(${LEPTONICA}/${OS}/src/${DEBUG_DIR}/libleptonica.a)
-ANDROID_dk_libRelease	(${LEPTONICA}/${OS}/src/${RELEASE_DIR}/libleptonica.a)
-EMSCRIPTEN_dk_libDebug	(${LEPTONICA}/${OS}/${DEBUG_DIR}/src/libleptonica.a)
-EMSCRIPTEN_dk_libRelease(${LEPTONICA}/${OS}/${RELEASE_DIR}/src/libleptonica.a)
+dk_include					(${LEPTONICA})
+dk_include					(${LEPTONICA}/${OS}/src)
+dk_include					(${LEPTONICA}/${OS}/${RELEASE_DIR}/src)
+if(VISUAL_STUDIO_IDE)
+	ANDROID_dk_libDebug		(${LEPTONICA}/${OS}/src/${DEBUG_DIR}/libleptonica.a)
+	ANDROID_dk_libRelease	(${LEPTONICA}/${OS}/src/${RELEASE_DIR}/libleptonica.a)
+else()
+	ANDROID_dk_libDebug		(${LEPTONICA}/${OS}/${DEBUG_DIR}/src/libleptonica.a)
+	ANDROID_dk_libRelease	(${LEPTONICA}/${OS}/${RELEASE_DIR}/src/libleptonica.a)
+endif()
+APPLE_dk_libDebug			(${LEPTONICA}/${OS}/src/${DEBUG_DIR}/libleptonica.a)
+APPLE_dk_libRelease			(${LEPTONICA}/${OS}/src/${RELEASE_DIR}/libleptonica.a)
+EMSCRIPTEN_dk_libDebug		(${LEPTONICA}/${OS}/${DEBUG_DIR}/src/libleptonica.a)
+EMSCRIPTEN_dk_libRelease	(${LEPTONICA}/${OS}/${RELEASE_DIR}/src/libleptonica.a)
+LINUX_dk_libDebug			(${LEPTONICA}/${OS}/${DEBUG_DIR}/src/libleptonica.a)
+LINUX_dk_libRelease			(${LEPTONICA}/${OS}/${RELEASE_DIR}/src/libleptonica.a)
+RASPBERRY_dk_libDebug		(${LEPTONICA}/${OS}/${DEBUG_DIR}/src/libleptonica.a)
+RASPBERRY_dk_libRelease		(${LEPTONICA}/${OS}/${RELEASE_DIR}/src/libleptonica.a)
+WIN_dk_libDebug				(${LEPTONICA}/${OS}/src/${DEBUG_DIR}/leptonica-1.84.0d.lib)
+WIN_dk_libRelease			(${LEPTONICA}/${OS}/src/${RELEASE_DIR}/leptonica-1.84.0.lib)
 
 
 ### 3RDPARTY LINK ###
-dk_set(LEPTONICA_CMAKE -DLeptonica_DIR=${LEPTONICA}/${OS})
+dk_set(LEPTONICA_CMAKE -DLeptonica_DIR=${LEPTONICA}/${BUILD_DIR})
 
 
 ### GENERATE ###
-#dk_queueCommand	(${DKCMAKE_BUILD} "-DCMAKE_CXX_FLAGS=/I${LIBJPEG-TURBO}/${OS} /I${LIBPNG} /I${LIBPNG}/${OS} /I${TIFF}/${OS}/libtiff" -DSTATIC=ON -DCMAKE_INSTALL_PREFIX=${LEPTONICA} -DSW_BUILD=OFF ${GIFLIB_CMAKE} ${LIBJPEG-TURBO_CMAKE} ${LIBPNG_CMAKE} ${TIFF_CMAKE} ${ZLIB_CMAKE} ${LEPTONICA})
-dk_queueCommand(${DKCMAKE_BUILD} -DSTATIC=ON -DCMAKE_INSTALL_PREFIX=${LEPTONICA} -DSW_BUILD=OFF ${GIFLIB_CMAKE} ${LIBJPEG-TURBO_CMAKE} ${LIBPNG_CMAKE} ${TIFF_CMAKE} ${ZLIB_CMAKE} ${LEPTONICA})
+#dk_queueCommand(${DKCMAKE_BUILD} "-DCMAKE_CXX_FLAGS=/I${LIBJPEG-TURBO}/${OS} /I${LIBPNG} /I${LIBPNG}/${OS} /I${TIFF}/${OS}/libtiff" -DSTATIC=ON -DCMAKE_INSTALL_PREFIX=${LEPTONICA} -DSW_BUILD=OFF ${GIFLIB_CMAKE} ${LIBJPEG-TURBO_CMAKE} ${LIBPNG_CMAKE} ${TIFF_CMAKE} ${ZLIB_CMAKE} ${LEPTONICA})
+dk_queueCommand(${DKCMAKE_BUILD} -DSTATIC=ON -DCMAKE_INSTALL_PREFIX=${LEPTONICA} -DSW_BUILD=OFF ${GIFLIB_CMAKE} ${LIBJPEG-TURBO_CMAKE} ${LIBPNG_CMAKE} ${LIBWEBP_CMAKE} ${TIFF_CMAKE} ${ZLIB_CMAKE} ${LEPTONICA})
 
 
 ### COMPILE ###
-dk_build(${LEPTONICA_FOLDER} leptonica)
+dk_build(${LEPTONICA} leptonica)

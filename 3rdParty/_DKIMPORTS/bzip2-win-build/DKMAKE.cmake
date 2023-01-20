@@ -1,15 +1,17 @@
 # https://github.com/kiyolee/bzip2-win-build
 # https://github.com/kiyolee/bzip2-win-build/archive/refs/tags/v1.0.8.zip
-if(NOT WIN)
-	return()
+
+if(UNIX)
+	dk_undepend(bzip2-win-build)
+	dk_return()
 endif()
 
 
 ### DEPEND ###
+dk_depend(libgcc)
 dk_depend(mingw32)
 dk_depend(mingw64)
 dk_depend(msys2)
-dk_depend(libgcc)
 
 
 ### IMPORT ###
@@ -35,7 +37,7 @@ if(WIN_32)
 	dkFileReplace	(${BZIP2-WIN-BUILD}/${OS}/bzip2-static/bzip2-static.vcxproj "v142" "v143")
 	dkFileReplace	(${BZIP2-WIN-BUILD}/${OS}/libbz2-static/libbz2-static.vcxproj "v142" "v143")
 	dk_setPath		(${BZIP2-WIN-BUILD}/${OS})
-	dk_build		(${BZIP2-WIN-BUILD_FOLDER} libbz2-static)
+	dk_build		(${BZIP2-WIN-BUILD} libbz2-static)
 endif()
 
 
@@ -48,5 +50,5 @@ if(WIN_64)
 	dkFileReplace	(${BZIP2-WIN-BUILD}/${OS}/bzip2-static/bzip2-static.vcxproj "v142" "v143")
 	dkFileReplace	(${BZIP2-WIN-BUILD}/${OS}/libbz2-static/libbz2-static.vcxproj "v142" "v143")
 	dk_setPath		(${BZIP2-WIN-BUILD}/${OS})
-	dk_build		(${BZIP2-WIN-BUILD_FOLDER} libbz2-static x64)
+	dk_build		(${BZIP2-WIN-BUILD} libbz2-static x64)
 endif()

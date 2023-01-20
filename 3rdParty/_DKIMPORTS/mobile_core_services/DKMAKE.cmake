@@ -2,7 +2,7 @@
 
 if(NOT IOS AND NOT IOSSIM)
 	dk_undepend(mobile_core_services)
-	return()
+	dk_return()
 endif()
 
 dk_findLibrary(MobileCoreServices)

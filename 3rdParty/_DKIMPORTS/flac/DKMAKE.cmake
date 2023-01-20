@@ -14,19 +14,27 @@ dk_import(https://ftp.osuosl.org/pub/xiph/releases/flac/flac-1.3.2.tar.xz)
 
 
 ### LINK ###
-dk_include(${FLAC})
-dk_libDebug			(${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a)
-dk_libRelease		(${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a)
+dk_include		(${FLAC})
+dk_libDebug		(${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a)
+dk_libRelease	(${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a)
 
 
 ### 3rd Party Link ###
-WIN_dk_set(FLAC_CMAKE
+ANDROID_dk_set(FLAC_CMAKE 
 	-DFLAC_INCLUDE_DIR=${FLAC}/include 
 	-DFLAC_LIBRARY_DEBUG=${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a 
 	-DFLAC_LIBRARY_RELEASE=${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a)
 APPLE_dk_set(FLAC_CMAKE
 	-DFLAC_INCLUDE_DIR=${FLAC}/include 
 	-DFLAC_LIBRARY_DEBUG=${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a 
+	-DFLAC_LIBRARY_RELEASE=${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a)
+EMSCRIPTEN_DEBUG_dk_set(FLAC_CMAKE 
+	-DFLAC_INCLUDE_DIR=${FLAC}/include
+	-DFLAC_LIBRARY=${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a
+	-DFLAC_LIBRARY_DEBUG=${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a)
+EMSCRIPTEN_RELEASE_dk_set(FLAC_CMAKE 
+	-DFLAC_INCLUDE_DIR=${FLAC}/include
+	-DFLAC_LIBRARY=${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a
 	-DFLAC_LIBRARY_RELEASE=${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a)
 LINUX_DEBUG_dk_set(FLAC_CMAKE 
 	-DFLAC_INCLUDE_DIR=${FLAC}/include
@@ -44,17 +52,9 @@ RASPBERRY_RELEASE_dk_set(FLAC_CMAKE
 	-DFLAC_INCLUDE_DIR=${FLAC}/include
 	-DFLAC_LIBRARY=${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a
 	-DFLAC_LIBRARY_RELEASE=${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a)
-ANDROID_dk_set(FLAC_CMAKE 
+WIN_dk_set(FLAC_CMAKE
 	-DFLAC_INCLUDE_DIR=${FLAC}/include 
 	-DFLAC_LIBRARY_DEBUG=${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a 
-	-DFLAC_LIBRARY_RELEASE=${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a)
-EMSCRIPTEN_DEBUG_dk_set(FLAC_CMAKE 
-	-DFLAC_INCLUDE_DIR=${FLAC}/include
-	-DFLAC_LIBRARY=${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a
-	-DFLAC_LIBRARY_DEBUG=${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a)
-EMSCRIPTEN_RELEASE_dk_set(FLAC_CMAKE 
-	-DFLAC_INCLUDE_DIR=${FLAC}/include
-	-DFLAC_LIBRARY=${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a
 	-DFLAC_LIBRARY_RELEASE=${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a)
 
 

@@ -12,12 +12,12 @@
 * copies of the Software, and to permit persons to whom the Software is
 * furnished to do so, subject to the following conditions :
 *
-* The above copyright noticeand this permission notice shall be included in all
+* The above copyright notice and this permission notice shall be included in all
 * copies or substantial portions of the Software.
 *
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
@@ -41,7 +41,7 @@ int DKArchiveJS::Compress(duk_context* ctx){
 	DKString path = duk_require_string(ctx, 0);
 	DKString file = duk_require_string(ctx, 1);
 	if(!DKArchive::Compress(path, file))
-		return DKERROR("DKArchive::Extract() failed");
+		return DKERROR("DKArchive::Extract() failed \n");
 	return true;
 }
 
@@ -50,7 +50,7 @@ int DKArchiveJS::Extract(duk_context* ctx){
 	DKString file = duk_require_string(ctx, 0);
 	DKString path = duk_require_string(ctx, 1);
 	if(!DKArchive::Extract(file, path)) 
-		return DKERROR("DKArchive::Extract() failed");
+		return DKERROR("DKArchive::Extract() failed \n");
 	return true;
 }
 

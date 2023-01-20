@@ -1,36 +1,36 @@
 //https://developer.mozilla.org/en-US/docs/Web/API/Event
 
 //event_instances = [];
-var Event = function(pointer) //https://developer.mozilla.org/en-US/docs/Web/API/Event/Event
+var Event = function Event(pointer) //https://developer.mozilla.org/en-US/docs/Web/API/Event/Event
 {
     this.pointer = pointer;
 
     //Properties
     Object.defineProperty(this, "bubbles", {
         //Read Only
-        get: function() {
+        get: function bubbles() {
             return CPP_DKDomEvent_bubbles(pointer)
         }
     })
     Object.defineProperty(this, "cancelBubble", {
-        set: function(flag) {
+        set: function cancelBubble(flag) {
             return CPP_DKDomEvent_cancelBubble(pointer, flag)
         }
     })
     Object.defineProperty(this, "cancelable", {
-        get: function() {
+        get: function cancelable() {
             return CPP_DKDomEvent_cancelable(pointer)
         }
     })
     //Read Only
     Object.defineProperty(this, "composed", {
-        get: function() {
+        get: function composed() {
             return CPP_DKDomEvent_composed(pointer)
         }
     })
     //Read Only
     Object.defineProperty(this, "currentTarget", {
-        get: function() {
+        get: function currentTarget() {
             var elementPointer = CPP_DKDomEvent_currentTarget(pointer)
             if (!elementPointer) {
                 return;
@@ -40,54 +40,53 @@ var Event = function(pointer) //https://developer.mozilla.org/en-US/docs/Web/API
     })
     //Read Only
     Object.defineProperty(this, "deepPath", {
-        get: function() {
+        get: function deepPath() {
             return CPP_DKDomEvent_deepPath(pointer)
         }
     })
     //Not standardized
     Object.defineProperty(this, "defaultPrevented", {
-        get: function() {
+        get: function defaultPrevented() {
             return CPP_DKDomEvent_defaultPrevented(pointer)
         }
     })
     //Read Only
     Object.defineProperty(this, "eventPhase", {
-        get: function() {
+        get: function eventPhase() {
             return CPP_DKDomEvent_eventPhase(pointer)
         }
     })
     //Read Only
     Object.defineProperty(this, "explicitOriginalTarget", {
-        get: function() {
+        get: function explicitOriginalTarget() {
             return CPP_DKDomEvent_explicitOriginalTarget(pointer)
         }
     })
     //Not standardized, Read Only
     Object.defineProperty(this, "originalTarget", {
-        get: function() {
+        get: function originalTarget() {
             return CPP_DKDomEvent_originalTarget(pointer)
         }
     })
     //Not standardized, Read only
     Object.defineProperty(this, "returnValue", {
-        get: function() {
+        get: function returnValue() {
             return CPP_DKDomEvent_returnValue(pointer)
         }
     })
     Object.defineProperty(this, "srcElement", {
         //Not standardized
-        get: function() {
+        get: function srcElement() {
             var elementPointer = CPP_DKDomEvent_srcElement(pointer)
-            if (!elementPointer) {
+            if (!elementPointer)
                 return;
-            }
             return new HTMLElement(elementPointer)
         }
     })
     //Read Only
     Object.defineProperty(this, "target", {
         //Read Only
-        get: function() {
+        get: function target() {
             var elementPointer = CPP_DKDomEvent_target(pointer)
             if (!elementPointer) {
                 return;
@@ -97,19 +96,19 @@ var Event = function(pointer) //https://developer.mozilla.org/en-US/docs/Web/API
     })
     //Read Only
     Object.defineProperty(this, "timeStamp", {
-        get: function() {
+        get: function timeStamp() {
             return CPP_DKDomEvent_timeStamp(pointer)
         }
     })
     //Read Only
     Object.defineProperty(this, "type", {
-        get: function() {
+        get: function type() {
             return CPP_DKDomEvent_type(pointer)
         },
     })
     //Read Only
     Object.defineProperty(this, "isTrusted", {
-        get: function() {
+        get: function isTrusted() {
             return CPP_DKDomEvent_isTrusted(pointer)
         }
     })
@@ -117,44 +116,44 @@ var Event = function(pointer) //https://developer.mozilla.org/en-US/docs/Web/API
 
     //Obsolete properties
     Object.defineProperty(this, "scoped", {
-        get: function() {
+        get: function scoped() {
             return CPP_DKDomEvent_scoped(pointer)
         }
     })
     //Read Only, Obsolete
 
     //Methods
-    Event.prototype.createEvent = function() {
+    Event.prototype.createEvent = function createEvent() {
         //Deprecated
         CPP_DKDomEvent_createEvent(pointer)
     }
-    Event.prototype.composedPath = function() {
+    Event.prototype.composedPath = function composedPath() {
         CPP_DKDomEvent_composedPath(pointer)
     }
-    Event.prototype.initEvent = function() {
+    Event.prototype.initEvent = function initEvent() {
         //Deprecated
         CPP_DKDomEvent_initEvent(pointer)
     }
-    Event.prototype.preventDefault = function() {
+    Event.prototype.preventDefault = function preventDefault() {
         CPP_DKDomEvent_preventDefault(pointer)
     }
-    Event.prototype.stopImmediatePropagation = function() {
+    Event.prototype.stopImmediatePropagation = function stopImmediatePropagation() {
         CPP_DKDomEvent_stopImmediatePropagation(pointer)
     }
-    Event.prototype.stopPropagation = function() {
+    Event.prototype.stopPropagation = function stopPropagation() {
         CPP_DKDomEvent_stopPropagation(pointer)
     }
 
     //Obsolete methods
-    Event.prototype.getPreventDefault = function() {
+    Event.prototype.getPreventDefault = function getPreventDefault() {
         //Not standardized
         CPP_DKDomEvent_getPreventDefault(pointer)
     }
-    Event.prototype.preventBubble = function() {
+    Event.prototype.preventBubble = function preventBubble() {
         //Not standardized, Obsolete
         CPP_DKDomEvent_preventBubble(pointer)
     }
-    Event.prototype.preventCapture = function() {
+    Event.prototype.preventCapture = function preventCapture() {
         //Not standardized, Obsolete
         CPP_DKDomEvent_preventCapture(pointer)
     }

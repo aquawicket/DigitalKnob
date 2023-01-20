@@ -2,7 +2,7 @@
 
 
 ### DEPEND ###
-dk_depend(DKSDLWindow)
+dk_depend(sdl)
 
 
 ### IMPORT ###
@@ -16,25 +16,17 @@ ENDIF()
 
 
 ### LINK ###
-dk_define				(USE_SDL2_gif)
-dk_include				(${SDL2_GIF})
-WIN_dk_libDebug			(${SDL2_GIF}/${OS}/${DEBUG_DIR}/SDL2_gif.lib)
-WIN_dk_libRelease		(${SDL2_GIF}/${OS}/${RELEASE_DIR}/SDL2_gif.lib)
-MAC_dk_libDebug			(${SDL2_GIF}/${OS}/${DEBUG_DIR}/libSDL2_gif.a)
-MAC_dk_libRelease		(${SDL2_GIF}/${OS}/${RELEASE_DIR}/libSDL2_gif.a)
-IOSSIM_dk_libDebug		(${SDL2_GIF}/${OS}/${DEBUG_DIR}/libSDL2_gif.a)
-IOSSIM_dk_libRelease	(${SDL2_GIF}/${OS}/${RELEASE_DIR}/libSDL2_gif.a)
-LINUX_dk_libDebug		(${SDL2_GIF}/${OS}/${DEBUG_DIR}/libSDL2_gif.a)
-LINUX_dk_libRelease		(${SDL2_GIF}/${OS}/${RELEASE_DIR}/libSDL2_gif.a)
-RASPBERRY_dk_libDebug	(${SDL2_GIF}/${OS}/${DEBUG_DIR}/libSDL2_gif.a)
-RASPBERRY_dk_libRelease	(${SDL2_GIF}/${OS}/${RELEASE_DIR}/libSDL2_gif.a)
-ANDROID_dk_libDebug		(${SDL2_GIF}/${OS}/${DEBUG_DIR}/libSDL2_gif.a)
-ANDROID_dk_libRelease	(${SDL2_GIF}/${OS}/${RELEASE_DIR}/libSDL2_gif.a)
+dk_define			(USE_SDL2_gif)
+dk_include			(${SDL2_GIF})
+UNIX_dk_libDebug	(${SDL2_GIF}/${OS}/${DEBUG_DIR}/libSDL2_gif.a)
+UNIX_dk_libRelease	(${SDL2_GIF}/${OS}/${RELEASE_DIR}/libSDL2_gif.a)
+WIN_dk_libDebug		(${SDL2_GIF}/${OS}/${DEBUG_DIR}/SDL2_gif.lib)
+WIN_dk_libRelease	(${SDL2_GIF}/${OS}/${RELEASE_DIR}/SDL2_gif.lib)
 
 
 ### GENERATE ###
-dk_queueCommand	(${DKCMAKE_BUILD} ${SDL_CMAKE} ${SDL2_GIF})
+dk_queueCommand(${DKCMAKE_BUILD} ${SDL_CMAKE} ${SDL2_GIF})
 
 
 ### COMPILE ###
-dk_build(${SDL2_GIF_FOLDER} SDL2_gif)
+dk_build(${SDL2_GIF} SDL2_gif)

@@ -1,10 +1,10 @@
-return() # disabled for now
-
-# https://www.java.com/en/download/
-#
-# jre-8u311-windows-x64.exe
+# https://www.java.com/en/download
 # https://javadl.oracle.com/webapps/download/AutoDL?BundleId=245479_4d5417147a92418ea8b615e228bb6935
 # http://deb.sambaedu.org/wpkg/files/jre/jre-8u311-windows-x64.exe
+
+dk_undepend(java)
+dk_return() # disabled for now
+
 
 ### VERSION ###
 # jre1.8.0_311

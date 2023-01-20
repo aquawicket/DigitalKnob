@@ -12,12 +12,12 @@
 * copies of the Software, and to permit persons to whom the Software is
 * furnished to do so, subject to the following conditions :
 *
-* The above copyright noticeand this permission notice shall be included in all
+* The above copyright notice and this permission notice shall be included in all
 * copies or substantial portions of the Software.
 *
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
@@ -42,9 +42,11 @@
 /* Flags for duk_push_string_file_raw() */
 #define DUK_STRING_PUSH_SAFE              (1 << 0)    /* no error if file does not exist */
 const char *duk_push_string_file_raw(duk_context *ctx, const char *path, duk_uint_t flags);
+//void duk_eval_file(duk_context* ctx, const char* path);
 duk_int_t duk_peval_file(duk_context *ctx, const char *path);
 
-class DKDuktape : public DKObjectT<DKDuktape>{
+class DKDuktape : public DKObjectT<DKDuktape>
+{
 public:
 	bool Init();
 	bool End();

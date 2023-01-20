@@ -1,13 +1,12 @@
 if(NOT LINUX AND NOT RASPBERRY)
 	dk_undepend(libx11-dev)
-	return()
+	dk_return()
 endif()
 
 ### INSTALL ###
 if(MAC)
 	dk_include(/opt/X11/include)
 endif()
-
 
 if(LINUX OR RASPBERRY)
 	dk_set(CURRENT_DIR /usr)

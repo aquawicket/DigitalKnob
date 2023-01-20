@@ -12,12 +12,12 @@
 * copies of the Software, and to permit persons to whom the Software is
 * furnished to do so, subject to the following conditions :
 *
-* The above copyright noticeand this permission notice shall be included in all
+* The above copyright notice and this permission notice shall be included in all
 * copies or substantial portions of the Software.
 *
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
@@ -25,12 +25,14 @@
 */
 #include "DK/stdafx.h"
 #include "DKSDLOsg/DKSDLOsg.h"
+#include "DKSDLWindow/DKSDLWindow.h"
 
 
 bool DKSDLOsg::Init(){
 	DKDEBUGFUNC();
 	
 	 // init SDL
+    /*
     if(SDL_Init(SDL_INIT_VIDEO) < 0)
         return DKERROR("Unable to init SDL \n");
 	
@@ -44,10 +46,13 @@ bool DKSDLOsg::Init(){
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_EGL, 1);
 	
-	window = SDL_CreateWindow("DKSDLOsg", 0, 0, 800, 600, SDL_WINDOW_OPENGL);
+	sdl_window = SDL_CreateWindow("DKSDLOsg", 0, 0, 800, 600, SDL_WINDOW_OPENGL);
+    */
+    DKClass::DKCreate("DKSDLWindow");
+    sdl_window = DKSDLWindow::Get()->window;
 	
 	// Create an OpenGL context associated with the window.
-	SDL_GLContext glcontext = SDL_GL_CreateContext(window);
+	SDL_GLContext glcontext = SDL_GL_CreateContext(sdl_window);
 	
 	// load the scene.
     osg::ref_ptr<osg::Node> loadedModel = createScene();//osgDB::readNodeFile(argv[1]);
@@ -55,17 +60,19 @@ bool DKSDLOsg::Init(){
 		return DKERROR("loadedModel invalid! \n");
 	
 	// set up the surface to render to
-    SDL_Surface* screen = SDL_GetWindowSurface(window);
+    SDL_Surface* screen = SDL_GetWindowSurface(sdl_window);
     if(screen == NULL)
 		return DKERROR("screen invalid! \n");
     
-    gw = viewer.setUpViewerAsEmbeddedInWindow(0, 0, screen->w, screen->h);
-    viewer.setSceneData(loadedModel.get());
-    viewer.setCameraManipulator(new osgGA::TrackballManipulator);
-    viewer.addEventHandler(new osgViewer::StatsHandler);
-    viewer.realize();
+    osg_graphicsWindow = osg_viewer.setUpViewerAsEmbeddedInWindow(0, 0, screen->w, screen->h);
+    osg_viewer.setSceneData(loadedModel.get());
+    osg_viewer.setCameraManipulator(new osgGA::TrackballManipulator);
+    osg_viewer.addEventHandler(new osgViewer::StatsHandler);
+    osg_viewer.realize();
 	
-	DKApp::AppendLoopFunc(&DKSDLOsg::Process, this);
+    DKSDLWindow::AddEventFunc(&DKSDLOsg::OnEvent, this);
+    DKSDLWindow::AddRenderFunc(&DKSDLOsg::OnRender, this);
+    DKSDLWindow::AddUpdateFunc(&DKSDLOsg::OnUpdate, this);
 	return true;
 }
 
@@ -75,6 +82,7 @@ bool DKSDLOsg::End(){
 }
 
 osg::Node* DKSDLOsg::createScene(){
+    DKDEBUGFUNC();
     // create drawable geometry object
     osg::Geometry* pGeo = new osg::Geometry;
  
@@ -111,44 +119,38 @@ osg::Node* DKSDLOsg::createScene(){
     return pGeode;
 }
 
-void DKSDLOsg::Process(){
-	SDL_Event event;
-	while(SDL_PollEvent(&event)){
-        convertEvent(event, *(gw->getEventQueue()));
-        switch(event.type){
-			/* case SDL_VIDEORESIZE:
-				SDL_SetVideoMode(event.resize.w, event.resize.h, bitDepth, SDL_OPENGL | SDL_RESIZABLE);
-                gw->resized(0, 0, event.resize.w, event.resize.h );
-                break;*/
-        }
-    }
-	
-    viewer.frame(); // draw the new frame
-	SDL_GL_SwapWindow(window);
-}
-
-bool DKSDLOsg::convertEvent(SDL_Event& event, osgGA::EventQueue& eventQueue){
-    switch(event.type){
+bool DKSDLOsg::OnEvent(SDL_Event* event) {
+    switch (event->type) {
         case SDL_MOUSEMOTION:
-            eventQueue.mouseMotion(event.motion.x, event.motion.y);
+            osg_graphicsWindow->getEventQueue()->mouseMotion(event->motion.x, event->motion.y);
             return true;
         case SDL_MOUSEBUTTONDOWN:
-            eventQueue.mouseButtonPress(event.button.x, event.button.y, event.button.button);
+            osg_graphicsWindow->getEventQueue()->mouseButtonPress(event->button.x, event->button.y, event->button.button);
             return true;
         case SDL_MOUSEBUTTONUP:
-            eventQueue.mouseButtonRelease(event.button.x, event.button.y, event.button.button);
+            osg_graphicsWindow->getEventQueue()->mouseButtonRelease(event->button.x, event->button.y, event->button.button);
             return true;
         //case SDL_KEYUP:
-        //    eventQueue.keyRelease((osgGA::GUIEventAdapter::KeySymbol) event.key.keysym.unicode);
+        //    osg_graphicsWindow->getEventQueue()->keyRelease((osgGA::GUIEventAdapter::KeySymbol) event->key.keysym.unicode);
         //    return true;
         //case SDL_KEYDOWN:
-        //    eventQueue.keyPress((osgGA::GUIEventAdapter::KeySymbol) event.key.keysym.unicode);
+        //    osg_graphicsWindow->getEventQueue()->keyPress((osgGA::GUIEventAdapter::KeySymbol) event->key.keysym.unicode);
         //    return true;
         //case SDL_VIDEORESIZE:
-        //    eventQueue.windowResize(0, 0, event.resize.w, event.resize.h);
-            return true;
+        //    osg_graphicsWindow->getEventQueue()->windowResize(0, 0, event.resize.w, event.resize.h);
+        //    return true;
         default:
             break;
     }
-    return false;
+    return false; //allow event to continue
+}
+
+
+bool DKSDLOsg::OnRender() {
+	SDL_GL_SwapWindow(sdl_window);
+    return true;
+}
+
+void DKSDLOsg::OnUpdate() {
+    osg_viewer.frame(); // draw the new frame
 }

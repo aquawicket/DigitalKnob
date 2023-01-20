@@ -1,240 +1,240 @@
 //https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement
 
 // https://html.spec.whatwg.org/multipage/dom.html#htmlelement
-var HTMLElement = function(pointer) {
+var HTMLElement = function HTMLElement(pointer) {
     // Properties
     Object.defineProperty(this, "accessKey", {
 		configurable: true,
-        get: function() {
+        get: function accessKey() {
             return CPP_DKDomHTMLElement_accessKey(pointer);
         }
     });
     Object.defineProperty(this, "accessKeyLabel", {
-        get: function() {
+        get: function accessKeyLabel() {
             return CPP_DKDomHTMLElement_accessKeyLabel(pointer);
         }
     });
     Object.defineProperty(this, "contentEditable", {
-        get: function() {
+        get: function contentEditable() {
             return CPP_DKDomHTMLElement_contentEditable(pointer);
         },
-        set: function(val) {
+        set: function contentEditable(val) {
             return CPP_DKDomHTMLElement_setContentEditable(pointer, val);
         }
     });
     Object.defineProperty(this, "isContentEditable", {
-        get: function() {
+        get: function isContentEditable() {
             return CPP_DKDomHTMLElement_isContentEditable(pointer);
         }
     });
     Object.defineProperty(this, "contextMenu", {
-        get: function() {
+        get: function contextMenu() {
             return CPP_DKDomHTMLElement_contextMenu(pointer);
         }
     });
     Object.defineProperty(this, "dataset", {
-        get: function() {
+        get: function dataset() {
             return CPP_DKDomHTMLElement_dataset(pointer);
         }
     });
     Object.defineProperty(this, "dir", {
-        get: function() {
+        get: function dir() {
             return CPP_DKDomHTMLElement_dir(pointer);
         },
-        set: function(val) {
+        set: function dir(val) {
             return CPP_DKDomHTMLElement_dir(pointer, val);
         }
     });
     Object.defineProperty(this, "draggable", {
-        get: function() {
+        get: function draggable() {
             return CPP_DKDomHTMLElement_draggable(pointer);
         }
     });
     Object.defineProperty(this, "dropzone", {
-        get: function() {
+        get: function dropzone() {
             return CPP_DKDomHTMLElement_dropzone(pointer);
         }
     });
     Object.defineProperty(this, "hidden", {
-        get: function() {
+        get: function hidden() {
             return CPP_DKDomHTMLElement_hidden(pointer);
         },
-        set: function(val) {
+        set: function hidden(val) {
             return CPP_DKDomHTMLElement_hidden(pointer, val);
         }
     });
     Object.defineProperty(this, "inert", {
-        get: function() {
+        get: function inert() {
             return CPP_DKDomHTMLElement_inert(pointer);
         }
     });
 	Object.defineProperty(this, "innerText", {
-        get: function() {
+        get: function innerText() {
             return CPP_DKDomHTMLElement_innerText(pointer)
         },
-        set: function(val) {
+        set: function innerText(val) {
             return CPP_DKDomHTMLElement_innerText(pointer, val)
         }
     })
     Object.defineProperty(this, "itemScope", {
-        get: function() {
+        get: function itemScope() {
             return CPP_DKDomHTMLElement_itemScope(pointer);
         }
     });
     Object.defineProperty(this, "itemType", {
-        get: function() {
+        get: function itemType() {
             return CPP_DKDomHTMLElement_itemType(pointer);
         }
     });
     Object.defineProperty(this, "itemId", {
-        get: function() {
+        get: function itemId() {
             return CPP_DKDomHTMLElement_itemId(pointer);
         }
     });
     Object.defineProperty(this, "itemRef", {
-        get: function() {
+        get: function itemRef() {
             return CPP_DKDomHTMLElement_itemRef(pointer);
         }
     });
     Object.defineProperty(this, "itemProp", {
-        get: function() {
+        get: function itemProp() {
             return CPP_DKDomHTMLElement_itemProp(pointer);
         }
     });
     Object.defineProperty(this, "itemValue", {
-        get: function() {
+        get: function itemValue() {
             return CPP_DKDomHTMLElement_itemValue(pointer);
         }
     });
     Object.defineProperty(this, "lang", {
-        get: function() {
+        get: function lang() {
             return CPP_DKDomHTMLElement_lang(pointer);
         },
-        set: function(val) {
+        set: function lang(val) {
             return CPP_DKDomHTMLElement_lang(pointer, val);
         }
     });
     Object.defineProperty(this, "noModule", {
-		get: function() {
+		get: function noModule() {
             return CPP_DKDomHTMLElement_noModule(pointer);
         }
     });
     Object.defineProperty(this, "nonce", {
-        get: function() {
+        get: function nonce() {
             return CPP_DKDomHTMLElement_nonce(pointer);
         },
-        set: function(val) {
+        set: function nonce(val) {
             return CPP_DKDomHTMLElement_nonce(pointer, val);
         }
     });
     Object.defineProperty(this, "offsetHeight", {
-        get: function() {
+        get: function offsetHeight() {
             return CPP_DKDomHTMLElement_offsetHeight(pointer);
         }
     });
     Object.defineProperty(this, "offsetLeft", {
-        get: function() {
+        get: function offsetLeft() {
             return CPP_DKDomHTMLElement_offsetLeft(pointer);
         }
     });
     Object.defineProperty(this, "offsetParent", {
-        get: function() {
+        get: function offsetParent() {
             return CPP_DKDomHTMLElement_offsetParent(pointer);
         }
     });
     Object.defineProperty(this, "offsetTop", {
-        get: function() {
+        get: function offsetTop() {
             return CPP_DKDomHTMLElement_offsetTop(pointer);
         }
     });
     Object.defineProperty(this, "offsetWidth", {
-        get: function() {
+        get: function offsetWidth() {
             return CPP_DKDomHTMLElement_offsetWidth(pointer);
         }
     });
 	
 	// outerText: https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/outerText
 	Object.defineProperty(this, "outerText", {
-        get: function() {
+        get: function outerText() {
             return CPP_DKDomHTMLElement_outerText(pointer);
         }
     });
     Object.defineProperty(this, "properties", {
-        get: function() {
+        get: function properties() {
             return CPP_DKDomHTMLElement_properties(pointer);
         }
     });
     Object.defineProperty(this, "spellcheck", {
-        get: function() {
+        get: function spellcheck() {
             return CPP_DKDomHTMLElement_spellcheck(pointer);
         }
     });
     Object.defineProperty(this, "style", {
-        get: function() {
+        get: function style() {
             return new CSSStyleDeclaration(pointer);
         }
     });
     Object.defineProperty(this, "tabIndex", {
-        get: function() {
+        get: function tabIndex() {
             return CPP_DKDomHTMLElement_tabIndex(pointer);
         },
-        set: function(val) {
+        set: function tabIndex(val) {
             return CPP_DKDomHTMLElement_tabIndex(pointer, val);
         }
     });
     Object.defineProperty(this, "title", {
-        get: function() {
+        get: function title() {
             return CPP_DKDomHTMLElement_title(pointer);
         },
-        set: function(val) {
+        set: function title(val) {
             return CPP_DKDomHTMLElement_title(pointer, val);
         }
     });
     Object.defineProperty(this, "translate", {
-        get: function() {
+        get: function translate() {
             return CPP_DKDomHTMLElement_translate(pointer);
         }
     });
     Object.defineProperty(this, "oncopy", {
-        get: function() {
+        get: function oncopy() {
             return this.copy;
         },
-        set: function(func) {
+        set: function oncopy(func) {
             this.addEventListener("copy", func);
             this.copy = func
         }
     });
     Object.defineProperty(this, "oncut", {
-        get: function() {
+        get: function oncut() {
             return this.cut;
         },
-        set: function(func) {
+        set: function oncut(func) {
             this.addEventListener("cut", func);
             this.cut = func
         }
     });
     Object.defineProperty(this, "onpaste", {
-        get: function() {
+        get: function onpaste() {
             return this.paste;
         },
-        set: function(func) {
+        set: function onpaste(func) {
             this.addEventListener("paste", func);
             this.paste = func
         }
     });
 
     // Methods
-    HTMLElement.prototype.blur = function() {
+    HTMLElement.prototype.blur = function blur() {
         console.log("HTMLElement.blur(): TODO");
     }
-    HTMLElement.prototype.click = function() {
+    HTMLElement.prototype.click = function click() {
         console.log("HTMLElement.click(): TODO");
     }
-    HTMLElement.prototype.focus = function() {
+    HTMLElement.prototype.focus = function focus() {
         //console.log("HTMLElement.focus()");
         CPP_DKDomHTMLElement_focus(this.pointer);
     }
-    HTMLElement.prototype.forceSpellCheck = function() {
+    HTMLElement.prototype.forceSpellCheck = function forceSpellCheck() {
         console.log("HTMLElement.forceSpellCheck(): TODO");
     }
 

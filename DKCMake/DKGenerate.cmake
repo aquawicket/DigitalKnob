@@ -11,12 +11,12 @@
 # copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions :
 #
-# The above copyright noticeand this permission notice shall be included in all
+# The above copyright notice and this permission notice shall be included in all
 # copies or substantial portions of the Software.
 #
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 # AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
@@ -94,16 +94,16 @@ foreach(plugin ${dkdepend_list})
 	endif()
 	dk_debug(plugin_path)
 
-	# This executes the 3rdParty library builds, and dkplugin setup, creates CMakeLists.txt files
+	# This executes the 3rdParty library builds, and creates CMakeLists.txt files for DKPlugins
 	include(${plugin_path}/DKMAKE.cmake)
 	
-	#check that each library is using the proper variables. Should be UPPERCASE plugin name.   I.E. boost = BOOST
+	#check that each library is using the proper variables. Should be UPPERCASE plugin name.   I.E. boost = ${BOOST}
 	if(NOT ${plugin})
 		dk_error("${plugin} variable is invalid")
 	endif()
 	
 	#NOTE: we won't have the library paths to remove until we've run DKCMake.cmake for the library
-	# We want to to use this to refresh 3rdParty Plugins
+	# We can use this to refresh 3rdParty Plugins
 	#if(REBUILDALL)
 		#foreach(lib ${LIBLIST})
 		#	file(REMOVE ${lib})
@@ -154,7 +154,7 @@ foreach(plugin ${dkdepend_list})
 		## Only prebuild if the library binaries are missing
 		foreach(lib ${LIBLIST})
 			if(NOT EXISTS ${lib})
-				dk_set(PREBUILD ON)
+				#dk_set(PREBUILD ON)
 				dk_set(QUEUE_BUILD ON)
 			endif()
 		endforeach()
@@ -331,11 +331,13 @@ if(WIN_32)
 	endif()	
 		
 	###################### Backup Executable ###########################
-	if(DEBUG)
-		dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe.backup OVERWRITE)
-	endif()
-	if(RELEASE)
-		dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe.backup OVERWRITE)
+	if(BACKUP_APP_EXECUTABLES)
+		if(DEBUG)
+			dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe.backup OVERWRITE)
+		endif()
+		if(RELEASE)
+			dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe.backup OVERWRITE)
+		endif()
 	endif()
 		
 	####################### Create Executable Target ###################
@@ -444,11 +446,13 @@ if(WIN_64)
 	endif()
 
 	###################### Backup Executable ###########################
-	if(DEBUG)
-		dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe.backup OVERWRITE)
-	endif()
-	if(RELEASE)
-		dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe.backup OVERWRITE)
+	if(BACKUP_APP_EXECUTABLES)
+		if(DEBUG)
+			dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe.backup OVERWRITE)
+		endif()
+		if(RELEASE)
+			dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe.backup OVERWRITE)
+		endif()
 	endif()
 		
 	####################### Create Executable Target ###################
@@ -515,16 +519,15 @@ endif(WIN_64)
 
 #######
 if(MAC)
-	#if(${APP_NAME} STREQUAL DKBuilder_APP)
-		set(DKMAC_USE_WRAPPER ON) # open app with terminal
-	#endif()
-	
+
 	###################### Backup Executable ###########################
-	if(DEBUG)
-		dk_copy(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app.backup OVERWRITE)
-	endif()
-	if(RELEASE)
-		dk_copy(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app.backup OVERWRITE)
+	if(BACKUP_APP_EXECUTABLES)
+		if(DEBUG)
+			dk_copy(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app.backup OVERWRITE)
+		endif()
+		if(RELEASE)
+			dk_copy(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app.backup OVERWRITE)
+		endif()
 	endif()
 		
 	########################## CREATE ICONS ###############################
@@ -573,7 +576,7 @@ if(MAC)
 	dk_set(PRODUCT_BUNDLE_IDENTIFIER com.digitalknob.${APP_NAME})
 	dk_set(CFBundleDevelopmentRegion en)
 	dk_set(CFBundleDisplayName ${APP_NAME})
-	if(DKMAC_USE_WRAPPER)
+	if(MAC_TERMINAL_WRAPPER)
 		dk_set(CFBundleExecutable wrapper)
 	else()
 		dk_set(CFBundleExecutable ${APP_NAME})
@@ -634,7 +637,7 @@ if(MAC)
 	
 	# Make bundle open with Terminal
 	# https://github.com/pyinstaller/pyinstaller/issues/5154#issuecomment-690646012
-	if(DKMAC_USE_WRAPPER)
+	if(MAC_TERMINAL_WRAPPER)
 		dk_info("Making bundle app run in terminal on double-click . . .")
 		set(TERMINAL_SCRIPT 
 			"\#!/bin/bash\n"
@@ -685,29 +688,28 @@ endif()
 #################
 if(IOS OR IOSSIM)
 	
-	# FIXME
 	###################### Backup Executable ###########################
-	#if(DEBUG)
-	#	if(EXISTS ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app)
-	#		dk_remove(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app.backup)
-	#		dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app.backup OVERWRITE)
-	#	endif()
-	#endif()
-	#if(RELEASE)
-	#	if(EXISTS ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app)
-	#		dk_remove(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app.backup)
-	#		dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app.backup OVERWRITE)
-	#	endif()
-	#endif()
+	if(BACKUP_APP_EXECUTABLES)
+		if(DEBUG)
+			if(EXISTS ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app)
+				dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app.backup OVERWRITE)
+			endif()
+		endif()
+		if(RELEASE)
+			if(EXISTS ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app)
+				dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app.backup OVERWRITE)
+			endif()
+		endif()
+	endif()
 	
 	###################### BACKUP USERDATA ###############################
 	# Backup files and folders excluded from the package
-	#dk_copy(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER OVERWRITE)
+	#	dk_copy(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER OVERWRITE)
 	# Remove excluded files and folders before packaging
-	#file(REMOVE ${DKPROJECT}/assets/USER)
+	#	file(REMOVE ${DKPROJECT}/assets/USER)
 	# Restore the backed up files, excluded from assets
-	#dk_copy(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/)
-	#file(REMOVE ${DKPROJECT}/Backup)
+	#	dk_copy(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/)
+	#	file(REMOVE ${DKPROJECT}/Backup)
 	
 	########################## ICONS ###############################
 	if(EXISTS ${DKPROJECT}/icons/icon.png)
@@ -826,10 +828,12 @@ endif()
 if(LINUX)
 if(NOT RASPBERRY)
 	###################### Backup Executable ###########################
-	if(DEBUG)
-		dk_copy(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup OVERWRITE)
-	elseif(RELEASE)
-		dk_copy(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup OVERWRITE)
+	if(BACKUP_APP_EXECUTABLES)
+		if(DEBUG)
+			dk_copy(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup OVERWRITE)
+		elseif(RELEASE)
+			dk_copy(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup OVERWRITE)
+		endif()
 	endif()
 	
 	########################## CREATE ICONS ###############################
@@ -930,10 +934,12 @@ if(RASPBERRY)
 	endif()
 	
 	###################### Backup Executable ###########################
-	if(DEBUG)
-		dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup OVERWRITE)
-	elseif(RELEASE)
-		dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup OVERWRITE)
+	if(BACKUP_APP_EXECUTABLES)
+		if(DEBUG)
+			dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup OVERWRITE)
+		elseif(RELEASE)
+			dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup OVERWRITE)
+		endif()
 	endif()
 	
 	####################### Create Executable Target ###################
@@ -1007,16 +1013,14 @@ if(ANDROID)
 	dk_resizeImage(${DKPROJECT}/icons/icon.png 96 96 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-xhdpi/ic_launcher.png)
 	dk_resizeImage(${DKPROJECT}/icons/icon.png 144 144 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
 	dk_resizeImage(${DKPROJECT}/icons/icon.png 192 192 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
-
+	
 	dk_copy(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png OVERWRITE)
 	
 	###################### Backup Executable ###########################
-	#if(DEBUG)
-		DEBUG_dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.apk ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.apk.backup OVERWRITE)
-	#endif()
-	#if(RELEASE)
-		RELEASE_dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.apk ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.apk.backup OVERWRITE)
-	#endif()
+	if(BACKUP_APP_EXECUTABLES)
+		DEBUG_dk_rename(${DKPROJECT}/${OS}/app/build/outputs/apk/debug/app-debug.apk ${DKPROJECT}/${OS}/app/build/outputs/apk/app-debug.apk.backup OVERWRITE)
+		RELEASE_dk_rename(${DKPROJECT}/${OS}/app/build/outputs/apk/release/app-release-unsigned.apk ${DKPROJECT}/${OS}/app/build/outputs/apk/release/app-release-unsigned.apk.backup OVERWRITE)
+	endif()
 		
 	####################### Create Library Target ###################
 	set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/app/src/main/jniLibs/${ANDROID_ABI}")
@@ -1125,6 +1129,7 @@ if(ANDROID)
 endif()
 
 
+# TODO: https://schellcode.github.io/webassembly-without-emscripten
 ##############
 if(EMSCRIPTEN)
 	########################## CREATE ICONS ###############################
@@ -1146,11 +1151,19 @@ if(EMSCRIPTEN)
 	endif()
 	
 	###################### Backup Executable ###########################
-	#if(DEBUG)
-	#	dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup OVERWRITE)
-	#elseif(RELEASE)
-	#	dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup OVERWRITE)
-	#endif()
+	if(BACKUP_APP_EXECUTABLES)
+		if(DEBUG)
+			dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.data ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.data.backup OVERWRITE)
+			dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.html ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.html.backup OVERWRITE)
+			dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.js ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.js.backup OVERWRITE)
+			dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.wasm ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.wasm.backup OVERWRITE)
+		elseif(RELEASE)
+			dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.data ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.data.backup OVERWRITE)
+			dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.html ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.html.backup OVERWRITE)
+			dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.js ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.js.backup OVERWRITE)
+			dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.wasm ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.wasm.backup OVERWRITE)
+		endif()
+	endif()
 	
 	####################### Create Executable Target ###################
 	add_executable(${APP_NAME} ${App_SRC})
@@ -1175,7 +1188,7 @@ if(EMSCRIPTEN)
 	dk_remove(${DKPROJECT}/assets/${APP_NAME}.wasm NOERROR)
 
 	########################## PACKAGE ASSETS ##########################
-	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS "-s DEMANGLE_SUPPORT=1 --preload-file ${DKPROJECT}/assets@/ --bind")
+	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS "-sASSERTIONS -sALLOW_MEMORY_GROWTH --preload-file ${DKPROJECT}/assets@/")
 	
 	################### Create Run.sh #################################
 	dk_info("Creating Run scripts . . .")

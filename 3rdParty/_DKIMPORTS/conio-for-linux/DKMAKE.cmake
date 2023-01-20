@@ -1,7 +1,8 @@
-# https://github.com/nowres/conio-for-linux
-# https://github.com/nowres/conio-for-linux/archive/refs/heads/master.zip
+# https://github.com/nowres/conio-for-linux.git
+
 if(NOT UNIX_HOST)
-	return()
+	dk_undepend(conio-for-linux)
+	dk_return()
 endif()
 
 

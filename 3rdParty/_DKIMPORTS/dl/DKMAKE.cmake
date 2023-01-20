@@ -1,9 +1,8 @@
-if(WIN)
-	return()
+if(NOT ANDROID)
+	dk_undepend(dl)
+	dk_return()
 endif()
 
-ANDROID_dk_depend(android-ndk)
+dk_depend(android-ndk)
 
-if(ANDROID)
-	dk_findLibrary(dl)
-endif()
+dk_findLibrary(dl)

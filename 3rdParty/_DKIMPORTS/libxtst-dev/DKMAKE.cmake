@@ -1,13 +1,12 @@
 if(NOT LINUX AND NOT RASPBERRY)
 	dk_undepend(libxtst-dev)
-	return()
+	dk_return()
 endif()
 
 
 ### INSTALL ###
 dk_set(CURRENT_DIR /usr)
 dk_command(sudo apt -y install libxtst-dev)
-
 
 ### LINK ###
 ## dk_include(/usr/include/gtk-2.0)

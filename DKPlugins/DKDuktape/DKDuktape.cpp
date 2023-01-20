@@ -12,12 +12,12 @@
 * copies of the Software, and to permit persons to whom the Software is
 * furnished to do so, subject to the following conditions :
 *
-* The above copyright noticeand this permission notice shall be included in all
+* The above copyright notice and this permission notice shall be included in all
 * copies or substantial portions of the Software.
 *
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
@@ -27,6 +27,7 @@
 #include "DK/stdafx.h"
 #include "DK/DKFile.h"
 #include "DKDuktape/DKDuktape.h"
+//#include "DKDuktapeDebugger/DKDuktapeDebugger.h"
 
 //WARNING_DISABLE
 #include <string>
@@ -85,6 +86,16 @@ fail:
 	return NULL;
 }
 
+/*
+void duk_eval_file(duk_context* ctx, const char* path) {
+	duk_push_string_file_raw(ctx, path, 0);
+	duk_push_string(ctx, path);
+	duk_compile(ctx, DUK_COMPILE_EVAL);
+	duk_push_global_object(ctx);  // 'this' binding
+	duk_call_method(ctx, 0);
+}
+*/
+
 duk_int_t duk_peval_file(duk_context *ctx, const char *path) {
 	DKDEBUGFUNC(ctx, path);
 	duk_int_t rc;
@@ -108,6 +119,11 @@ bool DKDuktape::Init(){
 		ctx = duk_create_heap(NULL, NULL, NULL, my_udata, my_fatal);
 		if(!ctx)
 			return DKERROR("Failed to create a Duktape heap.\n");
+#if DEBUG 
+		//FIXME: This should work as DKDEBUGFUNC() does. By Default, in DEBUG mode, DKDuktapeDebugger should
+		//display function calls. And /assets/settings.txt should have a [LOG_JS_DEBUG] entry allowing setting overwrite. etc.
+		DKClass::DKCreate("DKDuktapeDebugger");
+#endif
 		DKClass::DKCreate("DKDuktapeJS");
 
 #ifdef USE_DuktapeDom
@@ -145,10 +161,10 @@ bool DKDuktape::Init(){
 				return DKERROR("Error in handle_file\n");
 		}
 #endif
-
         DKString app = DKFile::local_assets+"app.js";
 		LoadFile(app);
 	}
+	
 	DKApp::AppendLoopFunc(&DKDuktape::EventLoop, this);
 	return true;
 }
@@ -331,9 +347,11 @@ bool DKDuktape::LoadFile(const DKString& path){
 		return DKERROR("path invalid! \n");
 	//if(FileLoaded(path))
 		//return false;
+
 	DKString js;
 	DKFile::FileToString(path, js);
-	if(duk_peval_file(ctx, path.c_str()) != 0)
+	//duk_eval_file(ctx, path.c_str());
+	if (duk_peval_file(ctx, path.c_str()) != 0)
 		DKDuktape::DumpError(js);
 	duk_pop(ctx);  // what does this do?
 	//DKString filename;
@@ -437,9 +455,9 @@ bool DKDuktape::RunDuktape(const DKString& code){
 bool DKDuktape::RunDuktape(const DKString& code, DKString& rval){
 	DKDEBUGFUNC(code, rval);
 	if(!DKUtil::InMainThread())
-		return DKERROR("not in main thread");
+		return DKERROR("Not in main thread! \n");
 	if(!DKDuktape::ctx)
-		return DKERROR("DKDuktape::ctx is invalid\n");
+		return DKERROR("DKDuktape::ctx is invalid! \n");
 	if(duk_peval_string(ctx, code.c_str()) != 0)
 		DKDuktape::DumpError(code);
 	//get return value

@@ -1,5 +1,6 @@
 # https://github.com/msys2/msys2-installer/releases/download/2022-01-28/msys2-x86_64-20220128.exe
 if(NOT WIN_HOST)
+	dk_undepend(msys2)
 	dk_return()
 endif()
 

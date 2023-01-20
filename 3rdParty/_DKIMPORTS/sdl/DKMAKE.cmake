@@ -6,11 +6,11 @@
 
 
 ### DEPEND ###
-WIN_dk_depend(opengl)
-WIN_dk_depend(winmm.lib)
 WIN_dk_depend(imm32.lib)
-WIN_dk_depend(version.lib)
+WIN_dk_depend(opengl)
 WIN_dk_depend(setupapi.lib)
+WIN_dk_depend(version.lib)
+WIN_dk_depend(winmm.lib)
 MAC_dk_depend(appkit)
 MAC_dk_depend(audio_toolbox)
 MAC_dk_depend(audiounit)
@@ -18,16 +18,16 @@ MAC_dk_depend(carbon)
 MAC_dk_depend(cocoa)
 MAC_dk_depend(core_audio)
 MAC_dk_depend(core_foundation)
-MAC_dk_depend(game_controller)
 MAC_dk_depend(core_haptics)
 MAC_dk_depend(core_video)
 MAC_dk_depend(force_feedback)
+MAC_dk_depend(game_controller)
 MAC_dk_depend(iokit)
 MAC_dk_depend(libiconv)
 MAC_dk_depend(media_player)
+MAC_dk_depend(metal)
 MAC_dk_depend(opengl)
 MAC_dk_depend(quartz_core)
-MAC_dk_depend(metal)
 if(IOS OR IOSSIM)
 	dk_depend(audio_toolbox)
 	dk_depend(av_foundation)
@@ -37,10 +37,10 @@ if(IOS OR IOSSIM)
 	dk_depend(core_motion)
 	dk_depend(foundation)
 	dk_depend(game_controller)
+	dk_depend(metal)
+	dk_depend(opengles)
 	dk_depend(quartz_core)
 	dk_depend(uikit)
-	dk_depend(opengles)
-	dk_depend(metal)
 	#dk_define(SDL_VIDEO_RENDER_OGL)
 endif()
 LINUX_dk_depend(opengl)
@@ -58,11 +58,11 @@ dk_import(https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.26.1.zip
 ### LINK ###
 #ANDROID_dk_define		(GL_GLEXT_PROTOTYPES)
 dk_include				(${SDL}/include)
-RASPBERRY_dk_include	(/opt/vc/lib)
-LINUX_dk_include		(${SDL}/${OS}/${RELEASE_DIR}/include)
 ANDROID_dk_include		(${ANDROID-NDK}/sources/android/cpufeatures)
 ANDROID_dk_include		(${SDL}/src)
 EMSCRIPTEN_dk_include	(${SDL}/${OS}/${DEBUG_DIR}/include)
+LINUX_dk_include		(${SDL}/${OS}/${RELEASE_DIR}/include)
+RASPBERRY_dk_include	(/opt/vc/lib)
 
 #dk_addTarget(sdl SDL2static)	# TODO
 #dk_addTarget(sdl SDL2main)		# TODO
@@ -71,9 +71,9 @@ EMSCRIPTEN_dk_include	(${SDL}/${OS}/${DEBUG_DIR}/include)
 	WIN_dk_libDebug			(${SDL}/${OS}/${DEBUG_DIR}/SDL2-staticd.lib)
 	WIN_dk_libRelease		(${SDL}/${OS}/${RELEASE_DIR}/SDL2-static.lib)
 	if(ANDROID)
-		ANDROID_dk_libDebug		(${SDL}/${OS}/${DEBUG_DIR}/libSDL2.a)
+		ANDROID_dk_libDebug	(${SDL}/${OS}/${DEBUG_DIR}/libSDL2.a)
 	else()
-		UNIX_dk_libDebug		(${SDL}/${OS}/${DEBUG_DIR}/libSDL2d.a)
+		UNIX_dk_libDebug	(${SDL}/${OS}/${DEBUG_DIR}/libSDL2d.a)
 	endif()
 	UNIX_dk_libRelease		(${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a)
 #endif()
@@ -82,96 +82,24 @@ EMSCRIPTEN_dk_include	(${SDL}/${OS}/${DEBUG_DIR}/include)
 #ANDROID_dk_libRelease(${SDL}/${OS}/${RELEASE_DIR}/libhidapi.a)
 
 #if(sdl_SDL2main)
-	#WIN_dk_libDebug		(${SDL}/${OS}/${DEBUG_DIR}/SDL2maind.lib)
-	#WIN_dk_libRelease		(${SDL}/${OS}/${RELEASE_DIR}/SDL2main.lib)
-	#MAC_dk_libDebug		(${SDL}/${OS}/${DEBUG_DIR}/libSDL2maind.a)
-	#MAC_dk_libRelease		(${SDL}/${OS}/${RELEASE_DIR}/libSDL2main.a)
-	IOS_dk_libDebug			(${SDL}/${OS}/${DEBUG_DIR}/libSDL2maind.a)
-	IOS_dk_libRelease		(${SDL}/${OS}/${RELEASE_DIR}/libSDL2main.a)
-	IOSSIM_dk_libDebug		(${SDL}/${OS}/Debug-iphonesimulator/libSDL2maind.a)
-	IOSSIM_dk_libRelease	(${SDL}/${OS}/Release-iphonesimulator/libSDL2main.a)
-	#LINUX_dk_libDebug		(${SDL}/${OS}/${DEBUG_DIR}/libSDL2maind.a)
-	#LINUX_dk_libRelease	(${SDL}/${OS}/${RELEASE_DIR}/libSDL2main.a)
-	#RASPBERRY_dk_libDebug	(${SDL}/${OS}/${DEBUG_DIR}/libSDL2maind.a)
-	#RASPBERRY_dk_libRelease(${SDL}/${OS}/${RELEASE_DIR}/libSDL2main.a)
 	#ANDROID_dk_libDebug	(${SDL}/${OS}/${DEBUG_DIR}/libSDL2main.a)
 	#ANDROID_dk_libRelease	(${SDL}/${OS}/${RELEASE_DIR}/libSDL2main.a)
+	#LINUX_dk_libDebug		(${SDL}/${OS}/${DEBUG_DIR}/libSDL2maind.a)
+	#LINUX_dk_libRelease	(${SDL}/${OS}/${RELEASE_DIR}/libSDL2main.a)
+	#MAC_dk_libDebug		(${SDL}/${OS}/${DEBUG_DIR}/libSDL2maind.a)
+	#MAC_dk_libRelease		(${SDL}/${OS}/${RELEASE_DIR}/libSDL2main.a)
+	#RASPBERRY_dk_libDebug	(${SDL}/${OS}/${DEBUG_DIR}/libSDL2maind.a)
+	#RASPBERRY_dk_libRelease(${SDL}/${OS}/${RELEASE_DIR}/libSDL2main.a)
+	#WIN_dk_libDebug		(${SDL}/${OS}/${DEBUG_DIR}/SDL2maind.lib)
+	#WIN_dk_libRelease		(${SDL}/${OS}/${RELEASE_DIR}/SDL2main.lib)
+	IOSSIM_dk_libDebug		(${SDL}/${OS}/Debug-iphonesimulator/libSDL2maind.a)
+	IOSSIM_dk_libRelease	(${SDL}/${OS}/Release-iphonesimulator/libSDL2main.a)
+	IOS_dk_libDebug			(${SDL}/${OS}/${DEBUG_DIR}/libSDL2maind.a)
+	IOS_dk_libRelease		(${SDL}/${OS}/${RELEASE_DIR}/libSDL2main.a)
 #endif()
 
 
 ### 3RDPARTY LINK ###
-WIN_dk_set(SDL_CMAKE
-	"-DCMAKE_C_FLAGS=/I${SDL}/include"
-	"-DCMAKE_CXX_FLAGS=/I${SDL}/include" 
-	-DSDL2_DIR=${SDL}
-	-DSDL2_INCLUDE_DIR=${SDL}/include
-	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/SDL2.lib
-	-DSDL2_LIBRARY=${SDL}/${OS}/${RELEASE_DIR}/SDL2.lib
-	-DSDL2_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/SDL2d.lib
-	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/SDL2.lib
-	-DSDL2_MAIN_LIBRARY=${SDL}/${OS}/${RELEASE_DIR}/SDL2main.lib)
-WIN_dk_set(SDLMAIN_CMAKE
-	-DSDL2MAIN_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/SDL2maind.lib
-	-DSDL2MAIN_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/SDL2main.lib)
-	
-MAC_dk_set(SDL_CMAKE
-	"-DCMAKE_C_FLAGS=-I${SDL}/include"
-	"-DCMAKE_CXX_FLAGS=-I${SDL}/include" 
-	-DSDL2_DIR=${SDL}
-	-DSDL2_INCLUDE_DIR=${SDL}/include
-	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a
-	-DSDL2_LIBRARY=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a
-	-DSDL2_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/libSDL2d.a
-	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a)
-MAC_dk_set(SDLMAIN_CMAKE
-	-DSDL2MAIN_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/libSDL2maind.a
-	-DSDL2MAIN_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL2main.a)
-	
-IOS_dk_set(SDL_CMAKE
-	"-DCMAKE_C_FLAGS=-I${SDL}/include"
-	"-DCMAKE_CXX_FLAGS=-I${SDL}/include"
-	-DSDL2_DIR=${SDL}
-	-DSDL2_INCLUDE_DIR=${SDL}/include
-	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a
-	-DSDL2_LIBRARY=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a
-	-DSDL2_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/libSDL2d.a
-	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a)
-IOS_dk_set(SDLMAIN_CMAKE
-	-DSDL2MAIN_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/libSDL2maind.a
-	-DSDL2MAIN_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL2main.a)
-	
-IOSSIM_dk_set(SDL_CMAKE
-	"-DCMAKE_C_FLAGS=-I${SDL}/include"
-	"-DCMAKE_CXX_FLAGS=-I${SDL}/include"
-	-DSDL2_DIR=${SDL}
-	-DSDL2_INCLUDE_DIR=${SDL}/include
-	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/Release-iphonesimulator/libSDL2.a
-	-DSDL2_LIBRARY=${SDL}/${OS}/Release-iphonesimulator/libSDL2.a
-	-DSDL2_LIBRARY_DEBUG=${SDL}/${OS}/Debug-iphonesimulator/libSDL2d.a
-	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/Release-iphonesimulator/libSDL2.a)
-IOSSIM_dk_set(SDLMAIN_CMAKE
-	-DSDL2MAIN_LIBRARY_DEBUG=${SDL}/${OS}/Debug-iphonesimulator/libSDL2maind.a
-	-DSDL2MAIN_LIBRARY_RELEASE=${SDL}/${OS}/Release-iphonesimulator/libSDL2main.a)
-	
-LINUX_dk_set(SDL_CMAKE
-	"-DCMAKE_C_FLAGS=-I${SDL}/include"
-	"-DCMAKE_CXX_FLAGS=-I${SDL}/include"
-	-DSDL2_DIR=${SDL}
-	-DSDL2_INCLUDE_DIR=${SDL}/include
-	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a
-	-DSDL2_LIBRARY=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a
-	-DSDL2_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/libSDL2d.a
-	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a)
-	
-RASPBERRY_dk_set(SDL_CMAKE
-	"-DCMAKE_C_FLAGS=-I${SDL}/include"
-	"-DCMAKE_CXX_FLAGS=-I${SDL}/include"
-	-DSDL2_INCLUDE_DIR=${SDL}/include
-	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a
-	-DSDL2_LIBRARY=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a
-	-DSDL2_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/libSDL2d.a
-	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a)
-	
 ANDROID_dk_set(SDL_CMAKE
 	"-DCMAKE_C_FLAGS=-I${SDL}/include"
 	"-DCMAKE_CXX_FLAGS=-I${SDL}/include"
@@ -181,7 +109,7 @@ ANDROID_dk_set(SDL_CMAKE
 	-DSDL2_LIBRARY=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a
 	-DSDL2_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}libSDL2d.a
 	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a)
-
+	
 EMSCRIPTEN_dk_set(SDL_CMAKE
 	"-DCMAKE_C_FLAGS=-I${SDL}/include"
 	"-DCMAKE_CXX_FLAGS=-I${SDL}/include"
@@ -195,21 +123,80 @@ EMSCRIPTEN_dk_set(SDLMAIN_CMAKE
 	-DSDL2MAIN_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/libSDL2maind.a
 	-DSDL2MAIN_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL2main.a)
 
+IOS_dk_set(SDL_CMAKE
+	"-DCMAKE_C_FLAGS=-I${SDL}/include"
+	"-DCMAKE_CXX_FLAGS=-I${SDL}/include"
+	-DSDL2_DIR=${SDL}
+	-DSDL2_INCLUDE_DIR=${SDL}/include
+	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a
+	-DSDL2_LIBRARY=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a
+	-DSDL2_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/libSDL2d.a
+	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a)
+IOS_dk_set(SDLMAIN_CMAKE
+	-DSDL2MAIN_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/libSDL2maind.a
+	-DSDL2MAIN_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL2main.a)
+
+IOSSIM_dk_set(SDL_CMAKE
+	"-DCMAKE_C_FLAGS=-I${SDL}/include"
+	"-DCMAKE_CXX_FLAGS=-I${SDL}/include"
+	-DSDL2_DIR=${SDL}
+	-DSDL2_INCLUDE_DIR=${SDL}/include
+	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/Release-iphonesimulator/libSDL2.a
+	-DSDL2_LIBRARY=${SDL}/${OS}/Release-iphonesimulator/libSDL2.a
+	-DSDL2_LIBRARY_DEBUG=${SDL}/${OS}/Debug-iphonesimulator/libSDL2d.a
+	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/Release-iphonesimulator/libSDL2.a)
+IOSSIM_dk_set(SDLMAIN_CMAKE
+	-DSDL2MAIN_LIBRARY_DEBUG=${SDL}/${OS}/Debug-iphonesimulator/libSDL2maind.a
+	-DSDL2MAIN_LIBRARY_RELEASE=${SDL}/${OS}/Release-iphonesimulator/libSDL2main.a)
+
+LINUX_dk_set(SDL_CMAKE
+	"-DCMAKE_C_FLAGS=-I${SDL}/include"
+	"-DCMAKE_CXX_FLAGS=-I${SDL}/include"
+	-DSDL2_DIR=${SDL}
+	-DSDL2_INCLUDE_DIR=${SDL}/include
+	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a
+	-DSDL2_LIBRARY=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a
+	-DSDL2_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/libSDL2d.a
+	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a)
+	
+MAC_dk_set(SDL_CMAKE
+	"-DCMAKE_C_FLAGS=-I${SDL}/include"
+	"-DCMAKE_CXX_FLAGS=-I${SDL}/include" 
+	-DSDL2_DIR=${SDL}
+	-DSDL2_INCLUDE_DIR=${SDL}/include
+	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a
+	-DSDL2_LIBRARY=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a
+	-DSDL2_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/libSDL2d.a
+	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a)
+MAC_dk_set(SDLMAIN_CMAKE
+	-DSDL2MAIN_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/libSDL2maind.a
+	-DSDL2MAIN_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL2main.a)
+
+RASPBERRY_dk_set(SDL_CMAKE
+	"-DCMAKE_C_FLAGS=-I${SDL}/include"
+	"-DCMAKE_CXX_FLAGS=-I${SDL}/include"
+	-DSDL2_INCLUDE_DIR=${SDL}/include
+	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a
+	-DSDL2_LIBRARY=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a
+	-DSDL2_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/libSDL2d.a
+	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a)
+	
+WIN_dk_set(SDL_CMAKE
+	"-DCMAKE_C_FLAGS=/I${SDL}/include"
+	"-DCMAKE_CXX_FLAGS=/I${SDL}/include" 
+	-DSDL2_DIR=${SDL}
+	-DSDL2_INCLUDE_DIR=${SDL}/include
+	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/SDL2.lib
+	-DSDL2_LIBRARY=${SDL}/${OS}/${RELEASE_DIR}/SDL2.lib
+	-DSDL2_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/SDL2d.lib
+	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/SDL2.lib
+	-DSDL2_MAIN_LIBRARY=${SDL}/${OS}/${RELEASE_DIR}/SDL2main.lib)
+WIN_dk_set(SDLMAIN_CMAKE
+	-DSDL2MAIN_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/SDL2maind.lib
+	-DSDL2MAIN_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/SDL2main.lib)
+
+
 ### GENERATE ###
-WIN_dk_queueCommand			(${DKCMAKE_BUILD} -DSDL_SHARED=OFF -DSDL_LIBC=ON ${SDL})
-
-string(REPLACE "-std=c17" "" SDL_BUILD "${DKCMAKE_BUILD}")
-string(REPLACE "  " " " SDL_BUILD "${SDL_BUILD}")
-MAC_dk_queueCommand			(${SDL_BUILD} -DSDL_SHARED=OFF -DSDL_OPENGL=ON -DSDL_METAL=ON -DHAVE_BUILTIN_ICONV=0 -DHAVE_LIBICONV=0 ${ICONV_CMAKE} ${SDL})
-
-IOS_dk_queueCommand			(${DKCMAKE_BUILD} -DSDL_SHARED=OFF -DSDL_OPENGLES=ON -DSDL_METAL=ON -DSDL_JOYSTICK=OFF -DSDL_HAPTIC=OFF ${SDL})
-
-IOSSIM_dk_queueCommand		(${DKCMAKE_BUILD} -DSDL_SHARED=OFF -DSDL_OPENGLES=ON -DSDL_METAL=ON -DSDL_JOYSTICK=OFF -DSDL_HAPTIC=OFF ${SDL})
-
-LINUX_dk_queueCommand		(${DKCMAKE_BUILD} -DSDL_SHARED=OFF -DVIDEO_OPENGLES=OFF -DVIDEO_OPENGL=ON -DDIRECTX=OFF -DVIDEO_WAYLAND=OFF ${SDL})
-
-RASPBERRY_dk_queueCommand	(${DKCMAKE_BUILD} -DSDL_SHARED=OFF -DVIDEO_OPENGLES=ON ${SDL})
-
 string(REPLACE "-std=c17" "" SDL_BUILD "${DKCMAKE_BUILD}")
 string(REPLACE "-std=c++1z" "" SDL_BUILD "${SDL_BUILD}")
 string(REPLACE "  " " " SDL_BUILD "${SDL_BUILD}")
@@ -218,41 +205,27 @@ ANDROID64_dk_queueCommand	(${SDL_BUILD} "-DCMAKE_CXX_FLAGS=-DHAVE_GCC_ATOMICS=1"
 
 EMSCRIPTEN_dk_queueCommand	(${SDL_BUILD} ${SDL})
 
+IOS_dk_queueCommand			(${DKCMAKE_BUILD} -DSDL_SHARED=OFF -DSDL_OPENGLES=ON -DSDL_METAL=ON -DSDL_JOYSTICK=OFF -DSDL_HAPTIC=OFF -DHAVE_BUILTIN_ICONV=0 -DHAVE_LIBICONV=0 ${SDL})
 
-if(USE_EMSCRIPTEN_BUILD_SCRIPT)
-	if(WIN_HOST)
-		EMSCRIPTEN_DEBUG_dk_queueCommand	(${EMSDK}/emsdk_env.bat)
-	else()
-		EMSCRIPTEN_DEBUG_dk_queueCommand	(${EMSDK}/emsdk_env.sh)
-	endif()
-	if(NOT EXISTS ${SDL}/buildbot/usr/local/lib/libSDL2.a)
-		if(EMSCRIPTEN)
-			set(ENV{SDKDIR} ${EMSDK})
-		endif()
-		EMSCRIPTEN_dk_Command		(${SDL}/build-scripts/emscripten-buildbot.sh)
-	endif()
+IOSSIM_dk_queueCommand		(${DKCMAKE_BUILD} -DSDL_SHARED=OFF -DSDL_OPENGLES=ON -DSDL_METAL=ON -DSDL_JOYSTICK=OFF -DSDL_HAPTIC=OFF -DHAVE_BUILTIN_ICONV=0 -DHAVE_LIBICONV=0 ${SDL})
 
-	if(NOT EXISTS ${SDL}/emscripten/Debug/libSDL2d.a)
-		EMSCRIPTEN_DEBUG_dk_copy	(${SDL}/buildbot/usr/local/include ${SDL}/emscripten/Debug/include)
-		EMSCRIPTEN_DEBUG_dk_copy	(${SDL}/buildbot/usr/local/lib/libSDL2.a ${SDL}/emscripten/Debug/libSDL2d.a)
-		EMSCRIPTEN_DEBUG_dk_copy	(${SDL}/buildbot/usr/local/lib/libSDL2main.a ${SDL}/emscripten/Debug/libSDL2maind.a)
-	endif()
+LINUX_dk_queueCommand		(${DKCMAKE_BUILD} -DSDL_SHARED=OFF -DVIDEO_OPENGLES=OFF -DVIDEO_OPENGL=ON -DDIRECTX=OFF -DVIDEO_WAYLAND=OFF ${SDL})
 
-	if(NOT EXISTS ${SDL}/emscripten/Release/libSDL2d.a)
-		EMSCRIPTEN_RELEASE_dk_copy	(${SDL}/buildbot/usr/local/include ${SDL}/emscripten/Release/include)
-		EMSCRIPTEN_RELEASE_dk_copy	(${SDL}/buildbot/usr/local/lib/libSDL2.a ${SDL}/emscripten/Release/libSDL2.a)
-		EMSCRIPTEN_RELEASE_dk_copy	(${SDL}/buildbot/usr/local/lib/libSDL2main.a ${SDL}/emscripten/Release/libSDL2main.a)
-	endif()
-endif()
+string(REPLACE "-std=c17" "" SDL_BUILD "${DKCMAKE_BUILD}")
+string(REPLACE "  " " " SDL_BUILD "${SDL_BUILD}")
+MAC_dk_queueCommand			(${SDL_BUILD} -DSDL_SHARED=OFF -DSDL_OPENGL=ON -DSDL_METAL=ON -DHAVE_BUILTIN_ICONV=0 -DHAVE_LIBICONV=0 ${ICONV_CMAKE} ${SDL})
+
+RASPBERRY_dk_queueCommand	(${DKCMAKE_BUILD} -DSDL_SHARED=OFF -DVIDEO_OPENGLES=ON ${SDL})
+
+WIN_dk_queueCommand			(${DKCMAKE_BUILD} -DSDL_SHARED=OFF -DSDL_LIBC=ON ${SDL})
+
 
 ### COMPILE ###
-#if(NOT EMSCRIPTEN)
-	dk_build(${SDL_FOLDER})
-#endif()
+dk_build(${SDL})
 
 #if(sdl_SDL2static)
-	#dk_build(${SDL_FOLDER} SDL2-static)
+	#dk_build(${SDL} SDL2-static)
 #endif()
 #if(sdl_SDL2main)
-	#dk_build(${SDL_FOLDER} SDL2main)
+	#dk_build(${SDL} SDL2main)
 #endif()

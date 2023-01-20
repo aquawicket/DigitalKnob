@@ -8,7 +8,9 @@ dk_depend(libx11-dev)
 dk_depend(ffmpeg)
 dk_depend(fontconfig)
 dk_depend(freetype)
+dk_depend(gdal)
 dk_depend(giflib)
+dk_depend(gstreamer)
 dk_depend(gzip)
 dk_depend(jasper)
 dk_depend(libpng)
@@ -123,8 +125,8 @@ if(ALL_LIBS)
 	if(GDAL)
 		dk_enable(osgdb_gdal)
 	endif()
-	if(GIFLIB AND NOT APPLE AND NOT LINUX AND NOT RASPBERRY)
-		dk_enable(osgdb_gif)	#FIXME: not building
+	if(GIFLIB)
+		#dk_enable(osgdb_gif)	#FIXME: not building
 	endif()
 	dk_enable(osgdb_gles)
 	dk_enable(osgdb_glsl)
@@ -220,2306 +222,1935 @@ endif()
 
 # NOTE: do not change library order
 if(OpenThreads)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/OpenThreadsd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/OpenThreads.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libOpenThreadsd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libOpenThreads.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libOpenThreadsd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libOpenThreads.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libOpenThreadsd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libOpenThreads.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libOpenThreadsd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libOpenThreads.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libOpenThreadsd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libOpenThreads.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libOpenThreadsd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libOpenThreads.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libOpenThreadsd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libOpenThreads.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/OpenThreadsd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/OpenThreads.lib)
 endif(OpenThreads)
 if(osg)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/osgd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/osg.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosg.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosg.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosg.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosg.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosg.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosg.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosg.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/osgd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/osg.lib)
 endif(osg)
 if(osgUtil)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/osgUtild.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/osgUtil.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgUtild.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgUtil.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgUtild.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgUtil.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgUtild.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgUtil.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgUtild.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgUtil.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgUtild.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgUtil.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgUtild.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgUtil.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgUtild.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgUtil.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/osgUtild.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/osgUtil.lib)
 endif(osgUtil)
 if(osgDB)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/osgDBd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/osgDB.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgDBd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgDB.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgDBd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgDB.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgDBd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgDB.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgDBd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgDB.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgDBd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgDB.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgDBd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgDB.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgDBd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgDB.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/osgDBd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/osgDB.lib)
 endif(osgDB)
 if(osgFX)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/osgFXd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/osgFX.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgFXd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgFX.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgFXd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgFX.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgFXd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgFX.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgFXd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgFX.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgFXd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgFX.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgFXd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgFX.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgFXd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgFX.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/osgFXd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/osgFX.lib)
 endif(osgFX)
 if(osgGA)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/osgGAd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/osgGA.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgGAd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgGA.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgGAd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgGA.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgGAd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgGA.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgGAd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgGA.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgGAd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgGA.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgGAd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgGA.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgGAd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgGA.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/osgGAd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/osgGA.lib)
 endif(osgGA)
 if(osgParticle)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/osgParticled.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/osgParticle.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgParticled.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgParticle.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgParticled.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgParticle.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgParticled.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgParticle.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgParticled.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgParticle.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgParticled.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgParticle.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgParticled.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgParticle.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgParticled.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgParticle.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/osgParticled.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/osgParticle.lib)
 endif(osgParticle)
 if(osgShadow)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/osgShadowd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/osgShadow.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgShadowd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgShadow.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgShadowd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgShadow.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgShadowd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgShadow.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgShadowd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgShadow.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgShadowd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgShadow.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgShadowd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgShadow.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgShadowd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgShadow.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/osgShadowd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/osgShadow.lib)
 endif(osgShadow)
 if(osgTerrain)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/osgTerraind.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/osgTerrain.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgTerraind.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgTerrain.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgTerraind.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgTerrain.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgTerraind.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgTerrain.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgTerraind.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgTerrain.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgTerraind.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgTerrain.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgTerraind.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgTerrain.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgTerraind.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgTerrain.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/osgTerraind.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/osgTerrain.lib)
 endif(osgTerrain)
 if(osgText)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/osgTextd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/osgText.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgTextd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgText.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgTextd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgText.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgTextd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgText.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgTextd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgText.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgTextd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgText.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgTextd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgText.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgTextd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgText.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/osgTextd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/osgText.lib)
 endif(osgText)
 if(osgSim)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/osgSimd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/osgSim.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgSimd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgSim.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgSimd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgSim.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgSimd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgSim.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgSimd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgSim.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgSimd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgSim.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgSimd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgSim.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgSimd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgSim.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/osgSimd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/osgSim.lib)
 endif(osgSim)
 if(osgViewer)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/osgViewerd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/osgViewer.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgViewerd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgViewer.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgViewerd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgViewer.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgViewerd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgViewer.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgViewerd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgViewer.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgViewerd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgViewer.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgViewerd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgViewer.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgViewerd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgViewer.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/osgViewerd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/osgViewer.lib)
 endif(osgViewer)
 if(osgVolume)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/osgVolumed.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/osgVolume.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgVolumed.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgVolume.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgVolumed.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgVolume.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgVolumed.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgVolume.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgVolumed.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgVolume.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgVolumed.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgVolume.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgVolumed.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgVolume.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgVolumed.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgVolume.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/osgVolumed.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/osgVolume.lib)
 endif(osgVolume)
 if(osgWidget)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/osgWidgetd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/osgWidget.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgWidgetd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgWidget.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgWidgetd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgWidget.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgWidgetd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgWidget.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgWidgetd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgWidget.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgWidgetd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgWidget.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgWidgetd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgWidget.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgWidgetd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgWidget.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/osgWidgetd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/osgWidget.lib)
 endif(osgWidget)
 if(osgUI)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/osgUId.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/osgUI.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgUId.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgUI.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgUId.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgUI.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgUId.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgUI.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgUId.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgUI.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgUId.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgUI.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgUId.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgUI.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgUId.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgUI.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/osgUId.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/osgUI.lib)
 endif(osgUI)
 if(osgManipulator)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/osgManipulatord.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/osgManipulator.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgManipulatord.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgManipulator.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgManipulatord.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgManipulator.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgManipulatord.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgManipulator.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgManipulatord.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgManipulator.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgManipulatord.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgManipulator.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgManipulatord.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgManipulator.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgManipulatord.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgManipulator.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/osgManipulatord.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/osgManipulator.lib)
 endif(osgManipulator)
 if(osgAnimation)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/osgAnimationd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/osgAnimation.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgAnimationd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgAnimation.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgAnimationd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgAnimation.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgAnimationd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgAnimation.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgAnimationd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgAnimation.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgAnimationd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgAnimation.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgAnimationd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgAnimation.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgAnimationd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgAnimation.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/osgAnimationd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/osgAnimation.lib)
 endif(osgAnimation)
 if(osgPresentation)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/osgPresentationd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/osgPresentation.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgPresentationd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgPresentation.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgPresentationd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgPresentation.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgPresentationd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgPresentation.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgPresentationd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgPresentation.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgPresentationd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgPresentation.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgPresentationd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgPresentation.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgPresentationd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgPresentation.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/osgPresentationd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/osgPresentation.lib)
 endif(osgPresentation)
 
 # osgdb_deprecated
 if(osgdb_deprecated_osg)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osgd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osg.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osgd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osg.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_deprecated_osgd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_deprecated_osg.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osg.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osg.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osg.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osgd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osg.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osg.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osgd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osg.lib)
 endif(osgdb_deprecated_osg)
 if(osgdb_deprecated_osganimation)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osganimationd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osganimation.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osganimationd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osganimation.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_deprecated_osganimationd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_deprecated_osganimation.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osganimationd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osganimation.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osganimationd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osganimation.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osganimationd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osganimation.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osganimationd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osganimation.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osganimationd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osganimation.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osganimationd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osganimation.lib)
 endif(osgdb_deprecated_osganimation)
 if(osgdb_deprecated_osgfx)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osgfxd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osgfx.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osgfxd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osgfx.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_deprecated_osgfxd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_deprecated_osgfx.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgfxd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osgfx.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgfxd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osgfx.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgfxd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osgfx.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osgfxd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osgfx.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgfxd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osgfx.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osgfxd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osgfx.lib)
 endif(osgdb_deprecated_osgfx)
 if(osgdb_deprecated_osgparticle)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osgparticled.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osgparticle.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osgparticled.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osgparticle.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_deprecated_osgparticled.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_deprecated_osgparticle.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgparticled.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osgparticle.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgparticled.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osgparticle.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgparticled.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osgparticle.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osgparticled.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osgparticle.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgparticled.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osgparticle.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osgparticled.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osgparticle.lib)
 endif(osgdb_deprecated_osgparticle)
 if(osgdb_deprecated_osgshadow)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osgshadowd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osgshadow.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osgshadowd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osgshadow.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_deprecated_osgshadowd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_deprecated_osgshadow.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgshadowd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osgshadow.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgshadowd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osgshadow.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgshadowd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osgshadow.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osgshadowd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osgshadow.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgshadowd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osgshadow.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osgshadowd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osgshadow.lib)
 endif(osgdb_deprecated_osgshadow)
 if(osgdb_deprecated_osgsim)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osgsimd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osgsim.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osgsimd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osgsim.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_deprecated_osgsimd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_deprecated_osgsim.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgsimd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osgsim.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgsimd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osgsim.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgsimd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osgsim.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osgsimd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osgsim.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgsimd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osgsim.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osgsimd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osgsim.lib)
 endif(osgdb_deprecated_osgsim)
 if(osgdb_deprecated_osgterrain)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osgterraind.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osgterrain.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osgterraind.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osgterrain.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_deprecated_osgterraind.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_deprecated_osgterrain.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgterraind.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osgterrain.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgterraind.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osgterrain.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgterraind.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osgterrain.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osgterraind.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osgterrain.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgterraind.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osgterrain.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osgterraind.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osgterrain.lib)
 endif(osgdb_deprecated_osgterrain)
 if(osgdb_deprecated_osgtext)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osgtextd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osgtext.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osgtextd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osgtext.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_deprecated_osgtextd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_deprecated_osgtext.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgtextd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osgtext.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgtextd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osgtext.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgtextd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osgtext.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osgtextd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osgtext.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgtextd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osgtext.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osgtextd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osgtext.lib)
 endif(osgdb_deprecated_osgtext)
 if(osgdb_deprecated_osgviewer)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osgviewerd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osgviewer.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osgviewerd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osgviewer.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_deprecated_osgviewerd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_deprecated_osgviewer.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgviewerd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osgviewer.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgviewerd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osgviewer.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgviewerd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osgviewer.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osgviewerd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osgviewer.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgviewerd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osgviewer.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osgviewerd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osgviewer.lib)
 endif(osgdb_deprecated_osgviewer)
 if(osgdb_deprecated_osgvolume)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osgvolumed.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osgvolume.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osgvolumed.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osgvolume.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_deprecated_osgvolumed.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_deprecated_osgvolume.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgvolumed.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osgvolume.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgvolumed.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osgvolume.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgvolumed.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osgvolume.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osgvolumed.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osgvolume.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgvolumed.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osgvolume.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osgvolumed.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osgvolume.lib)
 endif(osgdb_deprecated_osgvolume)
 if(osgdb_deprecated_osgwidget)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osgwidgetd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osgwidget.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osgwidgetd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osgwidget.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_deprecated_osgwidgetd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_deprecated_osgwidget.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgwidgetd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osgwidget.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgwidgetd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osgwidget.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgwidgetd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osgwidget.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osgwidgetd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_deprecated_osgwidget.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_deprecated_osgwidgetd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_deprecated_osgwidget.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osgwidgetd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_deprecated_osgwidget.lib)
 endif(osgdb_deprecated_osgwidget)
 
 # osgdb_serializers
 if(osgdb_serializers_osg)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osg.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_serializers_osg.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_serializers_osgd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_serializers_osg.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osg.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osg.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osg.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_serializers_osg.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osg.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osg.lib)
 endif(osgdb_serializers_osg)
 if(osgdb_serializers_osganimation)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osganimationd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osganimation.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_serializers_osganimationd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_serializers_osganimation.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_serializers_osganimationd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_serializers_osganimation.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osganimationd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osganimation.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osganimationd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osganimation.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osganimationd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osganimation.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_serializers_osganimationd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_serializers_osganimation.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osganimationd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osganimation.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osganimationd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osganimation.lib)
 endif(osgdb_serializers_osganimation)
 if(osgdb_serializers_osgfx)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgfxd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgfx.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgfxd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgfx.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_serializers_osgfxd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_serializers_osgfx.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgfxd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgfx.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgfxd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgfx.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgfxd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgfx.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgfxd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgfx.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgfxd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgfx.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgfxd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgfx.lib)
 endif(osgdb_serializers_osgfx)
 if(osgdb_serializers_osgga)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osggad.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgga.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_serializers_osggad.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgga.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_serializers_osggad.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_serializers_osgga.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osggad.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgga.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osggad.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgga.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osggad.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgga.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_serializers_osggad.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgga.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osggad.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgga.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osggad.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgga.lib)
 endif(osgdb_serializers_osgga)
 if(osgdb_serializers_osgmanipulator)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgmanipulatord.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgmanipulator.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgmanipulatord.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgmanipulator.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_serializers_osgmanipulatord.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_serializers_osgmanipulator.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgmanipulatord.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgmanipulator.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgmanipulatord.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgmanipulator.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgmanipulatord.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgmanipulator.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgmanipulatord.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgmanipulator.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgmanipulatord.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgmanipulator.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgmanipulatord.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgmanipulator.lib)
 endif(osgdb_serializers_osgmanipulator)
 if(osgdb_serializers_osgparticle)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgparticled.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgparticle.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgparticled.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgparticle.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_serializers_osgparticled.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_serializers_osgparticle.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgparticled.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgparticle.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgparticled.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgparticle.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgparticled.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgparticle.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgparticled.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgparticle.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgparticled.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgparticle.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgparticled.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgparticle.lib)
 endif(osgdb_serializers_osgparticle)
 if(osgdb_serializers_osgshadow)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgshadowd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgshadow.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgshadowd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgshadow.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_serializers_osgshadowd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_serializers_osgshadow.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgshadowd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgshadow.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgshadowd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgshadow.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgshadowd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgshadow.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgshadowd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgshadow.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgshadowd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgshadow.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgshadowd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgshadow.lib)
 endif(osgdb_serializers_osgshadow)
 if(osgdb_serializers_osgsim)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgsimd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgsim.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgsimd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgsim.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_serializers_osgsimd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_serializers_osgsim.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgsimd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgsim.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgsimd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgsim.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgsimd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgsim.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgsimd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgsim.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgsimd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgsim.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgsimd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgsim.lib)
 endif(osgdb_serializers_osgsim)
 if(osgdb_serializers_osgterrain)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgterraind.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgterrain.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgterraind.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgterrain.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_serializers_osgterraind.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_serializers_osgterrain.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgterraind.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgterrain.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgterraind.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgterrain.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgterraind.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgterrain.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgterraind.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgterrain.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgterraind.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgterrain.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgterraind.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgterrain.lib)
 endif(osgdb_serializers_osgterrain)
 if(osgdb_serializers_osgtext)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgtextd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgtext.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgtextd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgtext.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_serializers_osgtextd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_serializers_osgtext.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgtextd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgtext.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgtextd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgtext.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgtextd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgtext.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgtextd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgtext.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgtextd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgtext.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgtextd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgtext.lib)
 endif(osgdb_serializers_osgtext)
 if(osgdb_serializers_osgviewer)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgviewerd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgviewer.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgviewerd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgviewer.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_serializers_osgviewerd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_serializers_osgviewer.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgviewerd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgviewer.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgviewerd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgviewer.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgviewerd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgviewer.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgviewerd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgviewer.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgviewerd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgviewer.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgviewerd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgviewer.lib)
 endif(osgdb_serializers_osgviewer)
 if(osgdb_serializers_osgvolume)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgvolumed.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgvolume.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgvolumed.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgvolume.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_serializers_osgvolumed.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_serializers_osgvolume.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgvolumed.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgvolume.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgvolumed.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgvolume.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgvolumed.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgvolume.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgvolumed.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_serializers_osgvolume.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_serializers_osgvolumed.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_serializers_osgvolume.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgvolumed.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_serializers_osgvolume.lib)
 endif(osgdb_serializers_osgvolume)
 
 # osgPlugins
 if(osgdb_3dc)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_3dcd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_3dc.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_3dcd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_3dc.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_3dcd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_3dc.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_3dcd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_3dc.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_3dcd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_3dc.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_3dcd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_3dc.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_3dcd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_3dc.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_3dcd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_3dc.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_3dcd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_3dc.lib)
 endif(osgdb_3dc)
 if(osgdb_3ds)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_3dsd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_3ds.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_3dsd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_3ds.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_3dsd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_3ds.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_3dsd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_3ds.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_3dsd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_3ds.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_3dsd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_3ds.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_3dsd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_3ds.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_3dsd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_3ds.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_3dsd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_3ds.lib)
 endif(osgdb_3ds)
 if(osgdb_ac)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_acd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_ac.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_acd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_ac.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_acd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_ac.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_acd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_ac.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_acd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_ac.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_acd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_ac.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_acd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_ac.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_acd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_ac.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_acd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_ac.lib)
 endif(osgdb_ac)
 if(osgdb_avfoundation)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_avfoundationd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_avfoundation.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_avfoundationd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_avfoundation.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_avfoundationd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_avfoundation.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_avfoundationd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_avfoundation.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_avfoundationd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_avfoundation.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_avfoundationd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_avfoundation.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_avfoundationd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_avfoundation.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_avfoundationd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_avfoundation.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_avfoundationd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_avfoundation.lib)
 endif(osgdb_avfoundation)
 if(osgdb_bmp)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_bmpd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_bmp.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_bmpd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_bmp.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_bmpd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_bmp.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_bmpd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_bmp.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_bmpd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_bmp.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_bmpd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_bmp.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_bmpd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_bmp.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_bmpd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_bmp.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_bmpd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_bmp.lib)
 endif(osgdb_bmp)
 if(osgdb_bsp)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_bspd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_bsp.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_bspd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_bsp.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_bspd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_bsp.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_bspd.a)
+	EMSCRIPTEN_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_bsp.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_bspd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_bsp.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_bspd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_bsp.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_bspd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_bsp.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_bspd.a)
-	EMSCRIPTEN_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_bsp.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_bspd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_bsp.lib)
 endif(osgdb_bsp)
 if(osgdb_bvh)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_bvhd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_bvh.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_bvhd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_bvh.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_bvhd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_bvh.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_bvhd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_bvh.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_bvhd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_bvh.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_bvhd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_bvh.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_bvhd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_bvh.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_bvhd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_bvh.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_bvhd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_bvh.lib)
 endif(osgdb_bvh)
 if(osgdb_cfg)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_cfgd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_cfg.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_cfgd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_cfg.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_cfgd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_cfg.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_cfgd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_cfg.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_cfgd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_cfg.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_cfgd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_cfg.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_cfgd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_cfg.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_cfgd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_cfg.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_cfgd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_cfg.lib)
 endif(osgdb_cfg)
 if(osgdb_curl)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_curld.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_curl.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_curld.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_curl.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_curld.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_curl.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_curld.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_curl.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_curld.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_curl.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_curld.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_curl.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_curld.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_curl.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_curld.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_curl.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_curld.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_curl.lib)
 endif(osgdb_curl)
 if(osgdb_dae)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_daed.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_dae.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_daed.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_dae.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_daed.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_dae.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_daed.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_dae.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_daed.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_dae.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_daed.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_dae.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_daed.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_dae.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_daed.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_dae.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_daed.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_dae.lib)
 endif(osgdb_dae)
 if(osgdb_dds)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_ddsd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_dds.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_ddsd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_dds.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_ddsd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_dds.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_ddsd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_dds.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_ddsd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_dds.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_ddsd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_dds.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_ddsd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_dds.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_ddsd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_dds.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_ddsd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_dds.lib)
 endif(osgdb_dds)
 if(osgdb_dicom)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_dicomd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_dicom.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_dicomd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_dicom.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_dicomd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_dicom.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_dicomd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_dicom.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_dicomd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_dicom.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_dicomd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_dicom.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_dicomd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_dicom.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_dicomd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_dicom.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_dicomd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_dicom.lib)
 endif(osgdb_dicom)
 if(osgdb_directshow)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_directshowd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_directshow.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_directshowd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_directshow.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_directshowd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_directshow.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_directshowd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_directshow.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_directshowd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_directshow.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_directshowd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_directshow.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_directshowd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_directshow.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_directshowd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_directshow.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_directshowd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_directshow.lib)
 endif(osgdb_directshow)
 if(osgdb_dot)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_dotd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_dot.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_dotd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_dot.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_dotd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_dot.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_dotd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_dot.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_dotd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_dot.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_dotd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_dot.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_dotd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_dot.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_dotd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_dot.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_dotd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_dot.lib)
 endif(osgdb_dot)
 if(osgdb_dxf)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_dxfd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_dxf.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_dxfd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_dxf.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_dxfd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_dxf.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_dxfd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_dxf.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_dxfd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_dxf.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_dxfd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_dxf.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_dxfd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_dxf.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_dxfd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_dxf.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_dxfd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_dxf.lib)
 endif(osgdb_dxf)
 if(osgdb_exr)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_exrd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_exr.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_exrd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_exr.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_exrd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_exr.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_exrd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_exr.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_exrd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_exr.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_exrd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_exr.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_exrd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_exr.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_exrd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_exr.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_exrd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_exr.lib)
 endif(osgdb_exr)
 if(osgdb_fbx)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_fbxd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_fbx.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_fbxd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_fbx.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_fbxd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_fbx.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_fbxd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_fbx.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_fbxd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_fbx.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_fbxd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_fbx.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_fbxd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_fbx.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_fbxd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_fbx.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_fbxd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_fbx.lib)
 endif(osgdb_fbx)
 if(osgdb_ffmpeg)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_ffmpegd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_ffmpeg.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_ffmpegd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_ffmpeg.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_ffmpegd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_ffmpeg.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_ffmpegd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_ffmpeg.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_ffmpegd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_ffmpeg.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_ffmpegd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_ffmpeg.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_ffmpegd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_ffmpeg.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_ffmpegd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_ffmpeg.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_ffmpegd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_ffmpeg.lib)
 endif(osgdb_ffmpeg)
 if(osgdb_freetype)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_freetyped.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_freetype.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_freetyped.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_freetype.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_freetyped.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_freetype.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_freetyped.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_freetype.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_freetyped.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_freetype.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_freetyped.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_freetype.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_freetyped.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_freetype.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_freetyped.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_freetype.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_freetyped.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_freetype.lib)
 endif(osgdb_freetype)
 if(osgdb_gdal)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_gdald.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_gdal.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_gdald.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_gdal.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_gdald.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_gdal.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_gdald.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_gdal.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_gdald.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_gdal.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_gdald.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_gdal.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_gdald.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_gdal.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_gdald.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_gdal.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_gdald.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_gdal.lib)
 endif(osgdb_gdal)
 if(osgdb_gif)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_gifd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_gif.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_gifd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_gif.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_gifd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_gif.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_gifd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_gif.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_gifd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_gif.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_gifd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_gif.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_gifd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_gif.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_gifd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_gif.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_gifd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_gif.lib)
 endif(osgdb_gif)
 if(osgdb_gles)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_glesd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_gles.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_glesd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_gles.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_glesd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_gles.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_glesd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_gles.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_glesd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_gles.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_glesd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_gles.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_glesd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_gles.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_glesd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_gles.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_glesd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_gles.lib)
 endif(osgdb_gles)
 if(osgdb_glsl)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_glsld.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_glsl.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_glsld.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_glsl.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_glsld.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_glsl.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_glsld.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_glsl.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_glsld.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_glsl.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_glsld.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_glsl.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_glsld.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_glsl.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_glsld.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_glsl.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_glsld.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_glsl.lib)
 endif(osgdb_glsl)
 if(osgdb_gstreamer)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_gstreamerd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_gstreamer.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_gstreamerd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_gstreamer.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_gstreamerd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_gstreamer.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_gstreamerd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_gstreamer.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_gstreamerd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_gstreamer.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_gstreamerd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_gstreamer.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_gstreamerd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_gstreamer.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_gstreamerd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_gstreamer.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_gstreamerd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_gstreamer.lib)
 endif(osgdb_gstreamer)
 if(osgdb_gta)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_gtad.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_gta.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_gtad.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_gta.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_gtad.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_gta.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_gtad.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_gta.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_gtad.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_gta.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_gtad.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_gta.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_gtad.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_gta.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_gtad.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_gta.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_gtad.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_gta.lib)
 endif(osgdb_gta)
 if(osgdb_gz)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_gzd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_gz.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_gzd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_gz.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_gzd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_gz.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_gzd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_gz.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_gzd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_gz.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_gzd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_gz.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_gzd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_gz.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_gzd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_gz.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_gzd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_gz.lib)
 endif(osgdb_gz)
 if(osgdb_hdr)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_hdrd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_hdr.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_hdrd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_hdr.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_hdrd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_hdr.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_hdrd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_hdr.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_hdrd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_hdr.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_hdrd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_hdr.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_hdrd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_hdr.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_hdrd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_hdr.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_hdrd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_hdr.lib)
 endif(osgdb_hdr)
 if(osgdb_imageio)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_imageiod.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_imageio.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_imageiod.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_imageio.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_imageiod.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_imageio.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_imageiod.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_imageio.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_imageiod.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_imageio.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_imageiod.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_imageio.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_imageiod.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_imageio.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_imageiod.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_imageio.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_imageiod.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_imageio.lib)
 endif(osgdb_imageio)
 if(osgdb_Inventor)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_Inventord.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_Inventor.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_Inventord.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_Inventor.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_Inventord.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_Inventor.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_Inventord.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_Inventor.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_Inventord.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_Inventor.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_Inventord.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_Inventor.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_Inventord.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_Inventor.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_Inventord.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_Inventor.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_Inventord.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_Inventor.lib)
 endif(osgdb_Inventor)
 if(osgdb_ive)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_ived.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_ive.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_ived.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_ive.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_ived.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_ive.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_ived.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_ive.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_ived.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_ive.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_ived.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_ive.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_ived.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_ive.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_ived.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_ive.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_ived.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_ive.lib)
 endif(osgdb_ive)
 if(osgdb_jp2)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_jp2d.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_jp2.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_jp2d.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_jp2.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_jp2d.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_jp2.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_jp2d.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_jp2.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_jp2d.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_jp2.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_jp2d.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_jp2.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_jp2d.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_jp2.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_jp2d.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_jp2.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_jp2d.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_jp2.lib)
 endif(osgdb_jp2)
 if(osgdb_jpeg)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_jpegd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_jpeg.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_jpegd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_jpeg.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_jpegd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_jpeg.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_jpegd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_jpeg.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_jpegd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_jpeg.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_jpegd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_jpeg.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_jpegd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_jpeg.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_jpegd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_jpeg.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_jpegd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_jpeg.lib)
 endif(osgdb_jpeg)
 if(osgdb_ktx)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_ktxd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_ktx.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_ktxd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_ktx.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_ktxd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_ktx.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_ktxd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_ktx.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_ktxd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_ktx.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_ktxd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_ktx.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_ktxd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_ktx.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_ktxd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_ktx.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_ktxd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_ktx.lib)
 endif(osgdb_ktx)
 if(osgdb_las)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_lasd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_las.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_lasd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_las.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_lasd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_las.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_lasd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_las.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_lasd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_las.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_lasd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_las.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_lasd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_las.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_lasd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_las.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_lasd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_las.lib)
 endif(osgdb_las)
 if(osgdb_logo)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_logod.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_logo.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_logod.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_logo.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_logod.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_logo.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_logod.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_logo.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_logod.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_logo.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_logod.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_logo.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_logod.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_logo.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_logod.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_logo.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_logod.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_logo.lib)
 endif(osgdb_logo)
 if(osgdb_lua)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_luad.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_lua.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_luad.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_lua.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_luad.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_lua.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_luad.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_lua.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_luad.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_lua.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_luad.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_lua.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_luad.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_lua.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_luad.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_lua.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_luad.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_lua.lib)
 endif(osgdb_lua)
 if(osgdb_lwo)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_lwod.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_lwo.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_lwod.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_lwo.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_lwod.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_lwo.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_lwod.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_lwo.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_lwod.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_lwo.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_lwod.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_lwo.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_lwod.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_lwo.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_lwod.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_lwo.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_lwod.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_lwo.lib)
 endif(osgdb_lwo)
 if(osgdb_lws)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_lwsd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_lws.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_lwsd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_lws.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_lwsd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_lws.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_lwsd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_lws.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_lwsd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_lws.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_lwsd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_lws.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_lwsd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_lws.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_lwsd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_lws.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_lwsd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_lws.lib)
 endif(osgdb_lws)
 if(osgdb_md2)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_md2d.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_md2.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_md2d.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_md2.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_md2d.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_md2.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_md2d.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_md2.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_md2d.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_md2.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_md2d.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_md2.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_md2d.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_md2.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_md2d.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_md2.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_md2d.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_md2.lib)
 endif(osgdb_md2)
 if(osgdb_mdl)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_mdld.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_mdl.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_mdld.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_mdl.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_mdld.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_mdl.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_mdld.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_mdl.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_mdld.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_mdl.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_mdld.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_mdl.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_mdld.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_mdl.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_mdld.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_mdl.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_mdld.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_mdl.lib)
 endif(osgdb_mdl)
 if(osgdb_normals)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_normalsd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_normals.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_normalsd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_normals.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_normalsd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_normals.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_normalsd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_normals.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_normalsd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_normals.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_normalsd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_normals.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_normalsd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_normals.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_normalsd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_normals.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_normalsd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_normals.lib)
 endif(osgdb_normals)
 if(osgdb_nvtt)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_nvttd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_nvtt.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_nvttd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_nvtt.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_nvttd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_nvtt.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_nvttd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_nvtt.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_nvttd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_nvtt.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_nvttd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_nvtt.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_nvttd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_nvtt.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_nvttd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_nvtt.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_nvttd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_nvtt.lib)
 endif(osgdb_nvtt)
 if(osgdb_obj)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_objd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_obj.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_objd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_obj.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_objd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_obj.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_objd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_obj.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_objd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_obj.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_objd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_obj.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_objd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_obj.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_objd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_obj.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_objd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_obj.lib)
 endif(osgdb_obj)
 if(osgdb_ogr)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_ogrd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_ogr.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_ogrd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_ogr.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_ogrd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_ogr.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_ogrd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_ogr.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_ogrd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_ogr.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_ogrd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_ogr.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_ogrd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_ogr.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_ogrd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_ogr.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_ogrd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_ogr.lib)
 endif(osgdb_ogr)
 if(osgdb_opencascade)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_opencascaded.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_opencascade.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_opencascaded.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_opencascade.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_opencascaded.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_opencascade.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_opencascaded.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_opencascade.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_opencascaded.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_opencascade.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_opencascaded.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_opencascade.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_opencascaded.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_opencascade.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_opencascaded.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_opencascade.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_opencascaded.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_opencascade.lib)
 endif(osgdb_opencascade)
 if(osgdb_openflight)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_openflightd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_openflight.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_openflightd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_openflight.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_openflightd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_openflight.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_openflightd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_openflight.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_openflightd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_openflight.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_openflightd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_openflight.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_openflightd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_openflight.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_openflightd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_openflight.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_openflightd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_openflight.lib)
 endif(osgdb_openflight)
 if(osgdb_osc)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_oscd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_osc.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_oscd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_osc.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_oscd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_osc.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_oscd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_osc.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_oscd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_osc.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_oscd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_osc.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_oscd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_osc.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_oscd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_osc.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_oscd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_osc.lib)
 endif(osgdb_osc)
 if(osgdb_osg)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_osgd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_osg.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_osgd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_osg.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_osgd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_osg.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_osgd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_osg.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_osgd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_osg.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_osgd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_osg.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_osgd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_osg.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_osgd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_osg.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_osgd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_osg.lib)
 endif(osgdb_osg)
 if(osgdb_osga)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_osgad.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_osga.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_osgad.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_osga.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_osgad.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_osga.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_osgad.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_osga.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_osgad.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_osga.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_osgad.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_osga.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_osgad.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_osga.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_osgad.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_osga.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_osgad.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_osga.lib)
 endif(osgdb_osga)
 if(osgdb_osgjs)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_osgjsd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_osgjs.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_osgjsd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_osgjs.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_osgjsd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_osgjs.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_osgjsd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_osgjs.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_osgjsd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_osgjs.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_osgjsd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_osgjs.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_osgjsd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_osgjs.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_osgjsd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_osgjs.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_osgjsd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_osgjs.lib)
 endif(osgdb_osgjs)
 if(osgdb_osgtgz)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_osgtgzd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_osgtgz.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_osgtgzd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_osgtgz.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_osgtgzd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_osgtgz.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_osgtgzd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_osgtgz.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_osgtgzd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_osgtgz.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_osgtgzd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_osgtgz.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_osgtgzd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_osgtgz.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_osgtgzd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_osgtgz.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_osgtgzd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_osgtgz.lib)
 endif(osgdb_osgtgz)
 if(osgdb_p3d)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_p3dd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_p3d.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_p3dd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_p3d.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_p3dd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_p3d.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_p3dd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_p3d.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_p3dd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_p3d.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_p3dd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_p3d.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_p3dd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_p3d.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_p3dd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_p3d.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_p3dd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_p3d.lib)
 endif(osgdb_p3d)
 if(osgdb_pdf)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_pdfd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_pdf.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_pdfd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_pdf.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_pdfd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_pdf.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_pdfd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_pdf.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_pdfd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_pdf.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_pdfd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_pdf.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_pdfd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_pdf.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_pdfd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_pdf.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_pdfd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_pdf.lib)
 endif(osgdb_pdf)
 if(osgdb_pic)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_picd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_pic.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_picd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_pic.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_picd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_pic.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_picd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_pic.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_picd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_pic.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_picd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_pic.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_picd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_pic.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_picd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_pic.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_picd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_pic.lib)
 endif(osgdb_pic)
 if(osgdb_ply)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_plyd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_ply.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_plyd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_ply.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_plyd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_ply.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_plyd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_ply.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_plyd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_ply.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_plyd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_ply.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_plyd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_ply.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_plyd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_ply.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_plyd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_ply.lib)
 endif(osgdb_ply)
 if(osgdb_png)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_pngd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_png.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_pngd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_png.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_pngd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_png.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_pngd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_png.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_pngd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_png.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_pngd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_png.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_pngd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_png.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_pngd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_png.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_pngd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_png.lib)
 endif(osgdb_png)
 if(osgdb_pnm)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_pnmd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_pnm.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_pnmd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_pnm.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_pnmd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_pnm.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_pnmd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_pnm.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_pnmd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_pnm.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_pnmd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_pnm.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_pnmd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_pnm.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_pnmd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_pnm.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_pnmd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_pnm.lib)
 endif(osgdb_pnm)
 if(osgdb_pov)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_povd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_pov.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_povd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_pov.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_povd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_pov.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_povd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_pov.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_povd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_pov.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_povd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_pov.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_povd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_pov.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_povd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_pov.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_povd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_pov.lib)
 endif(osgdb_pov)
 if(osgdb_pvr)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_pvrd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_pvr.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_pvrd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_pvr.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_pvrd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_pvr.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_pvrd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_pvr.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_pvrd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_pvr.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_pvrd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_pvr.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_pvrd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_pvr.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_pvrd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_pvr.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_pvrd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_pvr.lib)
 endif(osgdb_pvr)
 if(osgdb_python)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_pythond.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_python.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_pythond.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_python.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_pythond.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_python.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_pythond.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_python.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_pythond.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_python.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_pythond.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_python.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_pythond.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_python.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_pythond.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_python.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_pythond.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_python.lib)
 endif(osgdb_python)
 if(osgdb_qtkit)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_qtkitd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_qtkit.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_qtkitd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_qtkit.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_qtkitd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_qtkit.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_qtkitd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_qtkit.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_qtkitd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_qtkit.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_qtkitd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_qtkit.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_qtkitd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_qtkit.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_qtkitd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_qtkit.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_qtkitd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_qtkit.lib)
 endif(osgdb_qtkit)
 if(osgdb_quicktime)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_quicktimed.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_quicktime.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_quicktimed.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_quicktime.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_quicktimed.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_quicktime.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_quicktimed.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_quicktime.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_quicktimed.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_quicktime.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_quicktimed.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_quicktime.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_quicktimed.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_quicktime.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_quicktimed.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_quicktime.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_quicktimed.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_quicktime.lib)
 endif(osgdb_quicktime)
 if(osgdb_resthttpdevice)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_resthttpdeviced.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_resthttpdevice.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_resthttpdeviced.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_resthttpdevice.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_resthttpdeviced.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_resthttpdevice.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_resthttpdeviced.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_resthttpdevice.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_resthttpdeviced.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_resthttpdevice.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_resthttpdeviced.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_resthttpdevice.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_resthttpdeviced.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_resthttpdevice.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_resthttpdeviced.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_resthttpdevice.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_resthttpdeviced.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_resthttpdevice.lib)
 endif(osgdb_resthttpdevice)
 if(osgdb_revisions)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_revisionsd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_revisions.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_revisionsd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_revisions.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_revisionsd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_revisions.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_revisionsd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_revisions.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_revisionsd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_revisions.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_revisionsd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_revisions.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_revisionsd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_revisions.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_revisionsd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_revisions.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_revisionsd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_revisions.lib)
 endif(osgdb_revisions)
 if(osgdb_rgb)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_rgbd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_rgb.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_rgbd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_rgb.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_rgbd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_rgb.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_rgbd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_rgb.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_rgbd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_rgb.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_rgbd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_rgb.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_rgbd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_rgb.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_rgbd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_rgb.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_rgbd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_rgb.lib)
 endif(osgdb_rgb)
 if(osgdb_rot)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_rotd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_rot.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_rotd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_rot.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_rotd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_rot.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_rotd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_rot.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_rotd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_rot.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_rotd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_rot.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_rotd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_rot.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_rotd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_rot.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_rotd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_rot.lib)
 endif(osgdb_rot)
 if(osgdb_scale)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_scaled.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_scale.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_scaled.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_scale.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_scaled.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_scale.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_scaled.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_scale.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_scaled.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_scale.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_scaled.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_scale.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_scaled.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_scale.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_scaled.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_scale.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_scaled.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_scale.lib)
 endif(osgdb_scale)
 if(osgdb_sdl)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_sdld.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_sdl.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_sdld.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_sdl.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_sdld.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_sdl.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_sdld.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_sdl.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_sdld.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_sdl.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_sdld.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_sdl.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_sdld.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_sdl.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_sdld.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_sdl.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_sdld.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_sdl.lib)
 endif(osgdb_sdl)
 if(osgdb_shadow)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_shadowd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_shadow.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_shadowd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_shadow.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_shadowd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_shadow.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_shadowd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_shadow.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_shadowd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_shadow.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_shadowd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_shadow.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_shadowd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_shadow.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_shadowd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_shadow.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_shadowd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_shadow.lib)
 endif(osgdb_shadow)
 if(osgdb_shp)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_shpd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_shp.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_shpd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_shp.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_shpd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_shp.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_shpd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_shp.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_shpd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_shp.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_shpd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_shp.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_shpd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_shp.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_shpd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_shp.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_shpd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_shp.lib)
 endif(osgdb_shp)
 if(osgdb_stl)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_stld.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_stl.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_stld.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_stl.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_stld.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_stl.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_stld.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_stl.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_stld.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_stl.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_stld.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_stl.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_stld.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_stl.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_stld.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_stl.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_stld.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_stl.lib)
 endif(osgdb_stl)
 if(osgdb_svg)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_svgd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_svg.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_svgd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_svg.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_svgd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_svg.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_svgd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_svg.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_svgd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_svg.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_svgd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_svg.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_svgd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_svg.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_svgd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_svg.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_svgd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_svg.lib)
 endif(osgdb_svg)
 if(osgdb_terrain)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_terraind.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_terrain.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_terraind.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_terrain.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_terraind.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_terrain.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_terraind.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_terrain.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_terraind.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_terrain.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_terraind.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_terrain.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_terraind.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_terrain.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_terraind.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_terrain.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_terraind.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_terrain.lib)
 endif(osgdb_terrain)
 if(osgdb_tf)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_tfd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_tf.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_tfd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_tf.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_tfd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_tf.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_tfd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_tf.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_tfd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_tf.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_tfd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_tf.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_tfd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_tf.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_tfd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_tf.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_tfd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_tf.lib)
 endif(osgdb_tf)
 if(osgdb_tga)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_tgad.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_tga.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_tgad.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_tga.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_tgad.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_tga.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_tgad.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_tga.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_tgad.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_tga.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_tgad.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_tga.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_tgad.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_tga.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_tgad.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_tga.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_tgad.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_tga.lib)
 endif(osgdb_tga)
 if(osgdb_tgz)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_tgzd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_tgz.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_tgzd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_tgz.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_tgzd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_tgz.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_tgzd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_tgz.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_tgzd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_tgz.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_tgzd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_tgz.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_tgzd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_tgz.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_tgzd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_tgz.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_tgzd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_tgz.lib)
 endif(osgdb_tgz)
 if(osgdb_tiff)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_tiffd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_tiff.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_tiffd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_tiff.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_tiffd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_tiff.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_tiffd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_tiff.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_tiffd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_tiff.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_tiffd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_tiff.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_tiffd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_tiff.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_tiffd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_tiff.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_tiffd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_tiff.lib)
 endif(osgdb_tiff)
 if(osgdb_trans)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_transd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_trans.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_transd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_trans.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_transd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_trans.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_transd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_trans.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_transd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_trans.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_transd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_trans.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_transd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_trans.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_transd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_trans.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_transd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_trans.lib)
 endif(osgdb_trans)
 if(osgdb_trk)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_trkd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_trk.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_trkd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_trk.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_trkd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_trk.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_trkd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_trk.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_trkd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_trk.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_trkd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_trk.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_trkd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_trk.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_trkd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_trk.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_trkd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_trk.lib)
 endif(osgdb_trk)
 if(osgdb_txf)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_txfd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_txf.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_txfd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_txf.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_txfd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_txf.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_txfd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_txf.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_txfd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_txf.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_txfd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_txf.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_txfd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_txf.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_txfd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_txf.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_txfd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_txf.lib)
 endif(osgdb_txf)
 if(osgdb_txp)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_txpd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_txp.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_txpd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_txp.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_txpd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_txp.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_txpd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_txp.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_txpd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_txp.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_txpd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_txp.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_txpd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_txp.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_txpd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_txp.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_txpd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_txp.lib)
 endif(osgdb_txp)
 if(osgdb_v8)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_v8d.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_v8.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_v8d.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_v8.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_v8d.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_v8.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_v8d.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_v8.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_v8d.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_v8.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_v8d.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_v8.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_v8d.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_v8.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_v8d.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_v8.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_v8d.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_v8.lib)
 endif(osgdb_v8)
 if(osgdb_view)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_viewd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_view.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_viewd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_view.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_viewd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_view.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_viewd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_view.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_viewd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_view.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_viewd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_view.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_viewd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_view.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_viewd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_view.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_viewd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_view.lib)
 endif(osgdb_view)
 if(osgdb_vnc)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_vncd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_vnc.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_vncd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_vnc.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_vncd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_vnc.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_vncd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_vnc.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_vncd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_vnc.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_vncd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_vnc.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_vncd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_vnc.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_vncd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_vnc.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_vncd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_vnc.lib)
 endif(osgdb_vnc)
 if(osgdb_vtf)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_vtfd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_vtf.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_vtfd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_vtf.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_vtfd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_vtf.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_vtfd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_vtf.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_vtfd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_vtf.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_vtfd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_vtf.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_vtfd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_vtf.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_vtfd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_vtf.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_vtfd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_vtf.lib)
 endif(osgdb_vtf)
 if(osgdb_x)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_xd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_x.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_xd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_x.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_xd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_x.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_xd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_x.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_xd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_x.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_xd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_x.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_xd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_x.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_xd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_x.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_xd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_x.lib)
 endif(osgdb_x)
 if(osgdb_zeroconfdevice)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_zeroconfdeviced.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_zeroconfdevice.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_zeroconfdeviced.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_zeroconfdevice.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_zeroconfdeviced.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_zeroconfdevice.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_zeroconfdeviced.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_zeroconfdevice.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_zeroconfdeviced.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_zeroconfdevice.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_zeroconfdeviced.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_zeroconfdevice.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_zeroconfdeviced.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_zeroconfdevice.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_zeroconfdeviced.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_zeroconfdevice.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_zeroconfdeviced.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_zeroconfdevice.lib)
 endif(osgdb_zeroconfdevice)
 if(osgdb_zip)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_zipd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_zip.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_zipd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_zip.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_zipd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_zip.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_zipd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_zip.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_zipd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_zip.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_zipd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_zip.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_zipd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_zip.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_zipd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_zip.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_zipd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_zip.lib)
 endif(osgdb_zip)
 
 #osgdb_ect
 if(osgdb_osgviewer)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_osgviewerd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_osgviewer.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_osgviewerd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_osgviewer.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_osgviewerd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_osgviewer.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_osgviewerd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_osgviewer.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_osgviewerd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_osgviewer.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_osgviewerd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_osgviewer.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_osgviewerd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_osgviewer.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_osgviewerd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_osgviewer.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_osgviewerd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_osgviewer.lib)
 endif(osgdb_osgviewer)
 if(osgdb_osgterrain)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_osgterraind.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_osgterrain.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_osgterraind.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_osgterrain.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_osgterraind.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_osgterrain.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_osgterraind.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_osgterrain.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_osgterraind.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_osgterrain.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_osgterraind.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_osgterrain.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_osgterraind.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_osgterrain.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_osgterraind.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_osgterrain.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_osgterraind.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_osgterrain.lib)
 endif(osgdb_osgterrain)
 if(osgdb_osgshadow)
-	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_osgshadowd.lib)
-	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_osgshadow.lib)
+	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_osgshadowd.a)
+	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_osgshadow.a)
 	APPLE_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_osgshadowd.a)
 	APPLE_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/libosgdb_osgshadow.a)
+	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_osgshadowd.a)
+	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_osgshadow.a)
 	LINUX_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_osgshadowd.a)
 	LINUX_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_osgshadow.a)
 	RASPBERRY_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_osgshadowd.a)
 	RASPBERRY_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_osgshadow.a)
-	ANDROID_dk_libDebug		(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/armeabi-v7a/lib/libosgdb_osgshadowd.a)
-	ANDROID_dk_libRelease	(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/armeabi-v7a/lib/libosgdb_osgshadow.a)
-	EMSCRIPTEN_dk_libDebug	(${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/lib/libosgdb_osgshadowd.a)
-	EMSCRIPTEN_dk_libRelease(${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR}/lib/libosgdb_osgshadow.a)
+	WIN_dk_libDebug			(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_osgshadowd.lib)
+	WIN_dk_libRelease		(${OPENSCENEGRAPH}/${OS}/lib/${OSG_PLUGINS}/osgdb_osgshadow.lib)
 endif(osgdb_osgshadow)
 
 
 
 
 ### 3RDPARTY LINK ###
-WIN_dk_set					(OPENSCENEGRAPH_CMAKE "-DCMAKE_CXX_FLAGS=/DOSG_LIBRARY_STATIC" "-DOSGInstallType=Source And Build Tree" -DOSGSourceRoot=${OPENSCENEGRAPH} -DOSGBuildRoot=${OPENSCENEGRAPH}/${OS})
-MAC_dk_set					(OPENSCENEGRAPH_CMAKE "-DCMAKE_CXX_FLAGS=-DOSG_LIBRARY_STATIC" "-DOSGInstallType=Source And Build Tree" -DOSGSourceRoot=${OPENSCENEGRAPH} -DOSGBuildRoot=${OPENSCENEGRAPH}/${OS})
-IOS_dk_set					(OPENSCENEGRAPH_CMAKE "-DCMAKE_CXX_FLAGS=-DOSG_LIBRARY_STATIC" "-DOSGInstallType=Source And Build Tree" -DOSGSourceRoot=${OPENSCENEGRAPH} -DOSGBuildRoot=${OPENSCENEGRAPH}/${OS})
-IOSSIM_dk_set				(OPENSCENEGRAPH_CMAKE "-DCMAKE_CXX_FLAGS=-DOSG_LIBRARY_STATIC" "-DOSGInstallType=Source And Build Tree" -DOSGSourceRoot=${OPENSCENEGRAPH} -DOSGBuildRoot=${OPENSCENEGRAPH}/${OS})
-LINUX_DEBUG_dk_set			(OPENSCENEGRAPH_CMAKE "-DCMAKE_CXX_FLAGS=-DOSG_LIBRARY_STATIC" "-DOSGInstallType=Source And Build Tree" -DOSGSourceRoot=${OPENSCENEGRAPH} -DOSGBuildRoot=${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR})
-LINUX_RELEASE_dk_set		(OPENSCENEGRAPH_CMAKE "-DCMAKE_CXX_FLAGS=-DOSG_LIBRARY_STATIC" "-DOSGInstallType=Source And Build Tree" -DOSGSourceRoot=${OPENSCENEGRAPH} -DOSGBuildRoot=${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR})
-RASPBERRY_DEBUG_dk_set		(OPENSCENEGRAPH_CMAKE "-DCMAKE_CXX_FLAGS=-DOSG_LIBRARY_STATIC" "-DOSGInstallType=Source And Build Tree" -DOSGSourceRoot=${OPENSCENEGRAPH} -DOSGBuildRoot=${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR})
-RASPBERRY_RELEASE_dk_set	(OPENSCENEGRAPH_CMAKE "-DCMAKE_CXX_FLAGS=-DOSG_LIBRARY_STATIC" "-DOSGInstallType=Source And Build Tree" -DOSGSourceRoot=${OPENSCENEGRAPH} -DOSGBuildRoot=${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR})
 ANDROID_dk_set				(OPENSCENEGRAPH_CMAKE "-DCMAKE_CXX_FLAGS=-DOSG_LIBRARY_STATIC" "-DOSGInstallType=Source And Build Tree" -DOSGSourceRoot=${OPENSCENEGRAPH} -DOSGBuildRoot=${OPENSCENEGRAPH}/${OS})
 EMSCRIPTEN_DEBUG_dk_set		(OPENSCENEGRAPH_CMAKE "-DCMAKE_CXX_FLAGS=-DOSG_LIBRARY_STATIC" "-DOSGInstallType=Source And Build Tree" -DOSGSourceRoot=${OPENSCENEGRAPH} -DOSGBuildRoot=${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR})
 EMSCRIPTEN_RELEASE_dk_set	(OPENSCENEGRAPH_CMAKE "-DCMAKE_CXX_FLAGS=-DOSG_LIBRARY_STATIC" "-DOSGInstallType=Source And Build Tree" -DOSGSourceRoot=${OPENSCENEGRAPH} -DOSGBuildRoot=${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR})
+IOSSIM_dk_set				(OPENSCENEGRAPH_CMAKE "-DCMAKE_CXX_FLAGS=-DOSG_LIBRARY_STATIC" "-DOSGInstallType=Source And Build Tree" -DOSGSourceRoot=${OPENSCENEGRAPH} -DOSGBuildRoot=${OPENSCENEGRAPH}/${OS})
+IOS_dk_set					(OPENSCENEGRAPH_CMAKE "-DCMAKE_CXX_FLAGS=-DOSG_LIBRARY_STATIC" "-DOSGInstallType=Source And Build Tree" -DOSGSourceRoot=${OPENSCENEGRAPH} -DOSGBuildRoot=${OPENSCENEGRAPH}/${OS})
+LINUX_DEBUG_dk_set			(OPENSCENEGRAPH_CMAKE "-DCMAKE_CXX_FLAGS=-DOSG_LIBRARY_STATIC" "-DOSGInstallType=Source And Build Tree" -DOSGSourceRoot=${OPENSCENEGRAPH} -DOSGBuildRoot=${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR})
+LINUX_RELEASE_dk_set		(OPENSCENEGRAPH_CMAKE "-DCMAKE_CXX_FLAGS=-DOSG_LIBRARY_STATIC" "-DOSGInstallType=Source And Build Tree" -DOSGSourceRoot=${OPENSCENEGRAPH} -DOSGBuildRoot=${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR})
+MAC_dk_set					(OPENSCENEGRAPH_CMAKE "-DCMAKE_CXX_FLAGS=-DOSG_LIBRARY_STATIC" "-DOSGInstallType=Source And Build Tree" -DOSGSourceRoot=${OPENSCENEGRAPH} -DOSGBuildRoot=${OPENSCENEGRAPH}/${OS})
+RASPBERRY_DEBUG_dk_set		(OPENSCENEGRAPH_CMAKE "-DCMAKE_CXX_FLAGS=-DOSG_LIBRARY_STATIC" "-DOSGInstallType=Source And Build Tree" -DOSGSourceRoot=${OPENSCENEGRAPH} -DOSGBuildRoot=${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR})
+RASPBERRY_RELEASE_dk_set	(OPENSCENEGRAPH_CMAKE "-DCMAKE_CXX_FLAGS=-DOSG_LIBRARY_STATIC" "-DOSGInstallType=Source And Build Tree" -DOSGSourceRoot=${OPENSCENEGRAPH} -DOSGBuildRoot=${OPENSCENEGRAPH}/${OS}/${RELEASE_DIR})
+WIN_dk_set					(OPENSCENEGRAPH_CMAKE "-DCMAKE_CXX_FLAGS=/DOSG_LIBRARY_STATIC" "-DOSGInstallType=Source And Build Tree" -DOSGSourceRoot=${OPENSCENEGRAPH} -DOSGBuildRoot=${OPENSCENEGRAPH}/${OS})
 
 
 ### GENERATE ###
-string(REPLACE "/std:c++17" "" OPENSCENEGRAPH_BUILD "${DKCMAKE_BUILD}")
-string(REPLACE "  " " " OPENSCENEGRAPH_BUILD "${OPENSCENEGRAPH_BUILD}")
-WIN_dk_queueCommand	(${OPENSCENEGRAPH_BUILD}
-	"-DCMAKE_CXX_FLAGS=/D__STDC_CONSTANT_MACROS /DOSG_LIBRARY_STATIC" 
-	-DBUILD_OSG_APPLICATIONS=OFF
-	-DBUILD_OSG_EXAMPLES=ON
-	-DDYNAMIC_OPENTHREADS=OFF 
-	-DDYNAMIC_OPENSCENEGRAPH=OFF 
-	-DOSG_GL_DISPLAYLISTS_AVAILABLE=OFF 
-	-DOSG_GL_MATRICES_AVAILABLE=ON 
-	-DOSG_GL_VERTEX_FUNCS_AVAILABLE=ON 
-	-DOSG_GL_VERTEX_ARRAY_FUNCS_AVAILABLE=ON 
-	-DOSG_GL_FIXED_FUNCTION_AVAILABLE=ON 
-	-DOSG_CPP_EXCEPTIONS_AVAILABLE=ON 
-	-DOSG_GL1_AVAILABLE=ON 
-	-DOSG_GL2_AVAILABLE=ON 
-	-DOSG_GL3_AVAILABLE=OFF 
-	-DOSG_GLES1_AVAILABLE=OFF 
-	-DOSG_GLES2_AVAILABLE=OFF 
-	-DOSG_GL_LIBRARY_STATIC=OFF 
-	-DOSG_MSVC_VERSIONED_DLL=OFF 
-	-DOSG_USE_QT=OFF 
-	-DUSE_3RDPARTY_BIN=OFF 
-	-DOSG_MSVC_GENERATE_PLUGINS_AND_WRAPPERS_MANIFESTS=OFF
-	-DOSG_TEXT_USE_FONTCONFIG=OFF
-	${BOOST_CMAKE}
-	${CURL_CMAKE}
-	${LIBX11-DEV_CMAKE}
-	${FFMPEG_CMAKE}
-	${FONTCONFIG_CMAKE}
-	${FREETYPE_CMAKE} 
-	${GIFLIB_CMAKE}
-	${GZIP_CMAKE}
-	${JASPER_CMAKE}
-	${LIBJPEG-TURBO_CMAKE} 
-	${LIBPNG_CMAKE}
-	${LIBVNCSERVER_CMAKE}
-	${LIBXML2_CMAKE}
-	${MSINTTYPES_CMAKE}
-	${OPENGL_CMAKE}
-	${SDL_CMAKE}
-	${TIFF_CMAKE} 
-	${ZLIB_CMAKE}
-	${ZSTD_CMAKE}
-	${OPENSCENEGRAPH})
-
-	
 string(REPLACE "-std=c++17" "" OPENSCENEGRAPH_BUILD "${DKCMAKE_BUILD}")
 string(REPLACE "  " " " OPENSCENEGRAPH_BUILD "${OPENSCENEGRAPH_BUILD}")
-MAC_dk_queueCommand(${OPENSCENEGRAPH_BUILD} 
-	-DAV_FOUNDATION_INCLUDE_DIR=OFF 
-	-DAV_FOUNDATION_LIBRARY=OFF
-	-DBUILD_OSG_APPLICATIONS=OFF 
-	-DBUILD_OSG_EXAMPLES=OFF
-	-DDYNAMIC_OPENTHREADS=OFF 
-	-DDYNAMIC_OPENSCENEGRAPH=OFF 
-	-DOSG_GL_DISPLAYLISTS_AVAILABLE=OFF 
-	-DOSG_GL_MATRICES_AVAILABLE=ON 
-	-DOSG_GL_VERTEX_FUNCS_AVAILABLE=ON 
-	-DOSG_GL_VERTEX_ARRAY_FUNCS_AVAILABLE=ON 
-	-DOSG_GL_FIXED_FUNCTION_AVAILABLE=ON 
-	-DOSG_CPP_EXCEPTIONS_AVAILABLE=ON 
-	-DOSG_GL1_AVAILABLE=ON 
-	-DOSG_GL2_AVAILABLE=ON 
-	-DOSG_GL3_AVAILABLE=OFF 
-	-DOSG_GLES1_AVAILABLE=OFF 
-	-DOSG_GLES2_AVAILABLE=OFF 
-	-DOSG_GL_LIBRARY_STATIC=OFF 
-	-DOSG_MSVC_VERSIONED_DLL=OFF 
-	-DOSG_USE_QT=OFF
-	-DOSG_TEXT_USE_FONTCONFIG=OFF
-	${BOOST_CMAKE}
-	${CURL_CMAKE}
-	${LIBX11-DEV_CMAKE}
-	${FFMPEG_CMAKE}
-	${FONTCONFIG_CMAKE}
-	${FREETYPE_CMAKE} 
-	${GIFLIB_CMAKE}
-	${GZIP_CMAKE}
-	${JASPER_CMAKE}
-	${LIBJPEG-TURBO_CMAKE} 
-	${LIBPNG_CMAKE}
-	${LIBVNCSERVER_CMAKE}
-	${LIBXML2_CMAKE}
-	${MSINTTYPES_CMAKE}
-	${OPENGL_CMAKE}
-	${SDL_CMAKE}
-	${TIFF_CMAKE} 
-	${ZLIB_CMAKE}
-	${ZSTD_CMAKE}
-	${OPENSCENEGRAPH})
-
-string(REPLACE "-std=c++17" "" OPENSCENEGRAPH_BUILD "${DKCMAKE_BUILD}")
-string(REPLACE "  " " " OPENSCENEGRAPH_BUILD "${OPENSCENEGRAPH_BUILD}")
-IOS_dk_queueCommand(${OPENSCENEGRAPH_BUILD} 
-	-DAV_FOUNDATION_INCLUDE_DIR=OFF
-	-DAV_FOUNDATION_LIBRARY=OFF
-	-DBUILD_OSG_APPLICATIONS=OFF
-	-DBUILD_OSG_EXAMPLES=OFF
-	-DOSG_BUILD_PLATFORM_IPHONE=ON
-	-DDYNAMIC_OPENTHREADS=OFF 
-	-DDYNAMIC_OPENSCENEGRAPH=OFF
-	-DIPHONE_SDKVER="15.0"
-	-DIPHONE_VERSION_MIN="13.0"
-	-DOSG_BUILD_PLATFORM_IPHONE=ON
-	-DOSG_GL_DISPLAYLISTS_AVAILABLE=OFF 
-	-DOSG_GL_MATRICES_AVAILABLE=ON 
-	-DOSG_GL_VERTEX_FUNCS_AVAILABLE=ON 
-	-DOSG_GL_VERTEX_ARRAY_FUNCS_AVAILABLE=ON 
-	-DOSG_GL_FIXED_FUNCTION_AVAILABLE=ON 
-	-DOSG_CPP_EXCEPTIONS_AVAILABLE=ON 
-	-DOSG_GL1_AVAILABLE=OFF 
-	-DOSG_GL2_AVAILABLE=OFF 
-	-DOSG_GL3_AVAILABLE=OFF 
-	-DOSG_GLES1_AVAILABLE=ON 
-	-DOSG_GLES2_AVAILABLE=OFF 
-	-DOSG_GLES3_AVAILABLE=OFF 
-	-DOSG_GL_LIBRARY_STATIC=OFF
-	-DOSG_WINDOWING_SYSTEM=IOS
-	-DOPENGL_PROFILE=GLES1 
-	-DOSG_MSVC_VERSIONED_DLL=OFF 
-	-DOSG_USE_QT=OFF
-	-DOSG_TEXT_USE_FONTCONFIG=OFF
-	${BOOST_CMAKE}
-	${CURL_CMAKE}
-	${LIBX11-DEV_CMAKE}
-	${FFMPEG_CMAKE}
-	${FONTCONFIG_CMAKE}
-	${FREETYPE_CMAKE} 
-	${GIFLIB_CMAKE}
-	${GZIP_CMAKE}
-	${JASPER_CMAKE}
-	${LIBJPEG-TURBO_CMAKE} 
-	${LIBPNG_CMAKE}
-	${LIBVNCSERVER_CMAKE}
-	${LIBXML2_CMAKE}
-	${MSINTTYPES_CMAKE}
-	${OPENGL_CMAKE}
-	${SDL_CMAKE}
-	${TIFF_CMAKE} 
-	${ZLIB_CMAKE}
-	${ZSTD_CMAKE}
-	${OPENSCENEGRAPH})
-
-string(REPLACE "-std=c++17" "" OPENSCENEGRAPH_BUILD "${DKCMAKE_BUILD}")
-string(REPLACE "  " " " OPENSCENEGRAPH_BUILD "${OPENSCENEGRAPH_BUILD}")
-IOSSIM_dk_queueCommand(${OPENSCENEGRAPH_BUILD} 
-	#-DAV_FOUNDATION_INCLUDE_DIR=OFF 
-	#-DAV_FOUNDATION_LIBRARY=OFF 
-	#-DCOCOA_LIBRARY=OFF				#FIXME
-	-DBUILD_OSG_APPLICATIONS=OFF
-	-DBUILD_OSG_EXAMPLES=OFF
-	-DDYNAMIC_OPENTHREADS=OFF 
-	-DDYNAMIC_OPENSCENEGRAPH=OFF
-	#-DEGL_LIBRARY=OFF				#FIXME
-	-DIPHONE_SDKVER="15.0"
-	-DIPHONE_VERSION_MIN="13.0"
-	-DOSG_BUILD_PLATFORM_IPHONE_SIMULATOR:BOOL=ON
-	-DOSG_CXX_LANGUAGE_STANDARD=C++98
-	-DOSG_DEFAULT_IMAGE_PLUGIN_FOR_OSX="imageio"
-	-DOSG_GL_DISPLAYLISTS_AVAILABLE=OFF 
-	-DOSG_GL_MATRICES_AVAILABLE=ON 
-	-DOSG_GL_VERTEX_FUNCS_AVAILABLE=ON 
-	-DOSG_GL_VERTEX_ARRAY_FUNCS_AVAILABLE=ON 
-	-DOSG_GL_FIXED_FUNCTION_AVAILABLE=ON 
-	-DOSG_CPP_EXCEPTIONS_AVAILABLE=ON 
-	-DOSG_GL1_AVAILABLE=OFF 
-	-DOSG_GL2_AVAILABLE=OFF 
-	-DOSG_GL3_AVAILABLE=OFF 
-	-DOSG_GLES1_AVAILABLE=ON 
-	-DOSG_GLES2_AVAILABLE=OFF 
-	-DOSG_GLES3_AVAILABLE=OFF 
-	-DOSG_GL_LIBRARY_STATIC=OFF
-	-DOSG_WINDOWING_SYSTEM:STRING=IOS
-	#-DOPENGL_INCLUDE_DIR=OFF		#FIXME
-	#-DOPENGL_gl_LIBRARY=OFF			#FIXME
-	-DOPENGL_PROFILE=GLES1 
-	-DOSG_MSVC_VERSIONED_DLL=OFF 
-	#-DOSG_USE_QT=OFF
-	-DOSG_TEXT_USE_FONTCONFIG=OFF
-	${BOOST_CMAKE}
-	${CURL_CMAKE}
-	${LIBX11-DEV_CMAKE}
-	${FFMPEG_CMAKE}
-	${FONTCONFIG_CMAKE}
-	${FREETYPE_CMAKE} 
-	${GIFLIB_CMAKE}
-	${GZIP_CMAKE}
-	${JASPER_CMAKE}
-	${LIBJPEG-TURBO_CMAKE} 
-	${LIBPNG_CMAKE}
-	${LIBVNCSERVER_CMAKE}
-	${LIBXML2_CMAKE}
-	${MSINTTYPES_CMAKE}
-	${OPENGL_CMAKE}
-	${SDL_CMAKE}
-	${TIFF_CMAKE} 
-	${ZLIB_CMAKE}
-	${ZSTD_CMAKE}
-	${OPENSCENEGRAPH})
-
-string(REPLACE "-std=c++17" "" OPENSCENEGRAPH_BUILD "${DKCMAKE_BUILD}")
-string(REPLACE "  " " " OPENSCENEGRAPH_BUILD "${OPENSCENEGRAPH_BUILD}")
-LINUX_DEBUG_dk_queueCommand(${OPENSCENEGRAPH_BUILD} 
-	-DCMAKE_BUILD_TYPE=DEBUG 
-	-DBUILD_OSG_APPLICATIONS=OFF 
-	-DBUILD_OSG_EXAMPLES=OFF
-	-DDYNAMIC_OPENTHREADS=OFF 
-	-DDYNAMIC_OPENSCENEGRAPH=OFF 
-	-DOSG_GL_DISPLAYLISTS_AVAILABLE=OFF 
-	-DOSG_GL_MATRICES_AVAILABLE=ON 
-	-DOSG_GL_VERTEX_FUNCS_AVAILABLE=ON 
-	-DOSG_GL_VERTEX_ARRAY_FUNCS_AVAILABLE=ON 
-	-DOSG_GL_FIXED_FUNCTION_AVAILABLE=ON 
-	-DOSG_CPP_EXCEPTIONS_AVAILABLE=ON 
-	-DOSG_GL1_AVAILABLE=ON 
-	-DOSG_GL2_AVAILABLE=ON 
-	-DOSG_GL3_AVAILABLE=OFF 
-	-DOSG_GLES1_AVAILABLE=OFF 
-	-DOSG_GLES2_AVAILABLE=OFF 
-	-DOSG_GL_LIBRARY_STATIC=OFF 
-	-DOSG_MSVC_VERSIONED_DLL=OFF 
-	-DOSG_USE_QT=OFF
-	-DOSG_TEXT_USE_FONTCONFIG=OFF
-	${BOOST_CMAKE}
-	${CURL_CMAKE}
-	${LIBX11-DEV_CMAKE}
-	${FFMPEG_CMAKE}
-	${FONTCONFIG_CMAKE}
-	${FREETYPE_CMAKE} 
-	${GIFLIB_CMAKE}
-	${GZIP_CMAKE}
-	${JASPER_CMAKE}
-	${LIBJPEG-TURBO_CMAKE} 
-	${LIBPNG_CMAKE}
-	${LIBVNCSERVER_CMAKE}
-	${LIBXML2_CMAKE}
-	${MSINTTYPES_CMAKE}
-	${OPENGL_CMAKE}
-	${SDL_CMAKE}
-	${TIFF_CMAKE} 
-	${ZLIB_CMAKE}
-	${ZSTD_CMAKE}
-	${OPENSCENEGRAPH})
-	
-LINUX_RELEASE_dk_queueCommand(${OPENSCENEGRAPH_BUILD} 
-	-DCMAKE_BUILD_TYPE=RELEASE
-	-DBUILD_OSG_APPLICATIONS=OFF 
-	-DBUILD_OSG_EXAMPLES=OFF
-	-DDYNAMIC_OPENTHREADS=OFF 
-	-DDYNAMIC_OPENSCENEGRAPH=OFF 
-	-DOSG_GL_DISPLAYLISTS_AVAILABLE=OFF 
-	-DOSG_GL_MATRICES_AVAILABLE=ON 
-	-DOSG_GL_VERTEX_FUNCS_AVAILABLE=ON 
-	-DOSG_GL_VERTEX_ARRAY_FUNCS_AVAILABLE=ON 
-	-DOSG_GL_FIXED_FUNCTION_AVAILABLE=ON 
-	-DOSG_CPP_EXCEPTIONS_AVAILABLE=ON 
-	-DOSG_GL1_AVAILABLE=ON 
-	-DOSG_GL2_AVAILABLE=ON 
-	-DOSG_GL3_AVAILABLE=OFF 
-	-DOSG_GLES1_AVAILABLE=OFF 
-	-DOSG_GLES2_AVAILABLE=OFF 
-	-DOSG_GL_LIBRARY_STATIC=OFF 
-	-DOSG_MSVC_VERSIONED_DLL=OFF 
-	-DOSG_USE_QT=OFF
-	-DOSG_TEXT_USE_FONTCONFIG=OFF
-	${BOOST_CMAKE}
-	${CURL_CMAKE}
-	${LIBX11-DEV_CMAKE}
-	${FFMPEG_CMAKE}
-	${FONTCONFIG_CMAKE}
-	${FREETYPE_CMAKE} 
-	${GIFLIB_CMAKE}
-	${GZIP_CMAKE}
-	${JASPER_CMAKE}
-	${LIBJPEG-TURBO_CMAKE} 
-	${LIBPNG_CMAKE}
-	${LIBVNCSERVER_CMAKE}
-	${LIBXML2_CMAKE}
-	${MSINTTYPES_CMAKE}
-	${OPENGL_CMAKE}
-	${SDL_CMAKE}
-	${TIFF_CMAKE} 
-	${ZLIB_CMAKE}
-	${ZSTD_CMAKE}
-	${OPENSCENEGRAPH})
-
-string(REPLACE "-std=c++17" "" OPENSCENEGRAPH_BUILD "${DKCMAKE_BUILD}")
-string(REPLACE "  " " " OPENSCENEGRAPH_BUILD "${OPENSCENEGRAPH_BUILD}")
-RASPBERRY_DEBUG_dk_queueCommand(${OPENSCENEGRAPH_BUILD} 
-	-DCMAKE_BUILD_TYPE=DEBUG 
-	-DBUILD_OSG_APPLICATIONS=OFF 
-	-DBUILD_OSG_EXAMPLES=OFF
-	-DDYNAMIC_OPENTHREADS=OFF 
-	-DDYNAMIC_OPENSCENEGRAPH=OFF 
-	-DOSG_GL_DISPLAYLISTS_AVAILABLE=OFF 
-	-DOSG_GL_MATRICES_AVAILABLE=ON 
-	-DOSG_GL_VERTEX_FUNCS_AVAILABLE=ON 
-	-DOSG_GL_VERTEX_ARRAY_FUNCS_AVAILABLE=ON 
-	-DOSG_GL_FIXED_FUNCTION_AVAILABLE=ON 
-	-DOSG_CPP_EXCEPTIONS_AVAILABLE=ON 
-	-DOSG_GL1_AVAILABLE=ON 
-	-DOSG_GL2_AVAILABLE=ON 
-	-DOSG_GL3_AVAILABLE=OFF 
-	-DOSG_GLES1_AVAILABLE=OFF 
-	-DOSG_GLES2_AVAILABLE=OFF 
-	-DOSG_GL_LIBRARY_STATIC=OFF 
-	-DOSG_MSVC_VERSIONED_DLL=OFF 
-	-DOSG_USE_QT=OFF
-	-DOSG_TEXT_USE_FONTCONFIG=OFF
-	${BOOST_CMAKE}
-	${CURL_CMAKE}
-	${LIBX11-DEV_CMAKE}
-	${FFMPEG_CMAKE}
-	${FONTCONFIG_CMAKE}
-	${FREETYPE_CMAKE} 
-	${GIFLIB_CMAKE}
-	${GZIP_CMAKE}
-	${JASPER_CMAKE}
-	${LIBJPEG-TURBO_CMAKE} 
-	${LIBPNG_CMAKE}
-	${LIBVNCSERVER_CMAKE}
-	${LIBXML2_CMAKE}
-	${MSINTTYPES_CMAKE}
-	${OPENGL_CMAKE}
-	${SDL_CMAKE}
-	${TIFF_CMAKE} 
-	${ZLIB_CMAKE}
-	${ZSTD_CMAKE}
-	${OPENSCENEGRAPH})
-	
-RASPBERRY_RELEASE_dk_queueCommand(${OPENSCENEGRAPH_BUILD} 
-	-DCMAKE_BUILD_TYPE=RELEASE
-	-DBUILD_OSG_APPLICATIONS=OFF 
-	-DBUILD_OSG_EXAMPLES=OFF
-	-DDYNAMIC_OPENTHREADS=OFF 
-	-DDYNAMIC_OPENSCENEGRAPH=OFF 
-	-DOSG_GL_DISPLAYLISTS_AVAILABLE=OFF 
-	-DOSG_GL_MATRICES_AVAILABLE=ON 
-	-DOSG_GL_VERTEX_FUNCS_AVAILABLE=ON 
-	-DOSG_GL_VERTEX_ARRAY_FUNCS_AVAILABLE=ON 
-	-DOSG_GL_FIXED_FUNCTION_AVAILABLE=ON 
-	-DOSG_CPP_EXCEPTIONS_AVAILABLE=ON 
-	-DOSG_GL1_AVAILABLE=ON 
-	-DOSG_GL2_AVAILABLE=ON 
-	-DOSG_GL3_AVAILABLE=OFF 
-	-DOSG_GLES1_AVAILABLE=OFF 
-	-DOSG_GLES2_AVAILABLE=OFF 
-	-DOSG_GL_LIBRARY_STATIC=OFF 
-	-DOSG_MSVC_VERSIONED_DLL=OFF 
-	-DOSG_USE_QT=OFF
-	-DOSG_TEXT_USE_FONTCONFIG=OFF
-	${BOOST_CMAKE}
-	${CURL_CMAKE}
-	${LIBX11-DEV_CMAKE}
-	${FFMPEG_CMAKE}
-	${FONTCONFIG_CMAKE}
-	${FREETYPE_CMAKE} 
-	${GIFLIB_CMAKE}
-	${GZIP_CMAKE}
-	${JASPER_CMAKE}
-	${LIBJPEG-TURBO_CMAKE} 
-	${LIBPNG_CMAKE}
-	${LIBVNCSERVER_CMAKE}
-	${LIBXML2_CMAKE}
-	${MSINTTYPES_CMAKE}
-	${OPENGL_CMAKE}
-	${SDL_CMAKE}
-	${TIFF_CMAKE} 
-	${ZLIB_CMAKE}
-	${ZSTD_CMAKE}
-	${OPENSCENEGRAPH})
-
-string(REPLACE "-std=c++17" "" OPENSCENEGRAPH_BUILD "${DKCMAKE_BUILD}")
-string(REPLACE "  " " " OPENSCENEGRAPH_BUILD "${OPENSCENEGRAPH_BUILD}")
-ANDROID_dk_queueCommand(${OPENSCENEGRAPH_BUILD} 
+ANDROID_dk_queueCommand(${OPENSCENEGRAPH_BUILD}
 	-DANDROID_ABI=armeabi-v7a
-	-DANDROID_DEBUG=OFF 
+	-DANDROID_DEBUG=OFF
 	-DANDROID_NATIVE_API_LEVEL=15 #${ANDROID_API}
-	-DANDROID_NDK=${ANDROID_NDK} 
-	-DANDROID_OPTIM_NEON=OFF 
+	-DANDROID_NDK=${ANDROID_NDK}
 	-DANDROID_OPTIM_ARM32=OFF
+	-DANDROID_OPTIM_NEON=OFF
 	-DANDROID_PLATFORM=android-15 #android-${ANDROID_API}
 	-DANDROID_STL=gnustl_static
-	-DANDROID_TOOLCHAIN_NAME=arm-linux-androideabi-4.8 
-	-DCMAKE_TOOLCHAIN_FILE=${OPENSCENEGRAPH}/PlatformSpecifics/Android/android.toolchain.cmake 
-	-DCMAKE_INSTALL_PREFIX=${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/install  
-	-DBoost_INCLUDE_DIR=OFF 
+	-DANDROID_TOOLCHAIN_NAME=arm-linux-androideabi-4.8
 	-DBUILD_OSG_APPLICATIONS=OFF
 	-DBUILD_OSG_EXAMPLES=OFF
-	-DDYNAMIC_OPENTHREADS=OFF 
-	-DDYNAMIC_OPENSCENEGRAPH=OFF 
+	-DBoost_INCLUDE_DIR=OFF
+	-DCMAKE_INSTALL_PREFIX=${OPENSCENEGRAPH}/${OS}/${DEBUG_DIR}/install  
+	-DCMAKE_TOOLCHAIN_FILE=${OPENSCENEGRAPH}/PlatformSpecifics/Android/android.toolchain.cmake 
+	-DDYNAMIC_OPENSCENEGRAPH=OFF
+	-DDYNAMIC_OPENTHREADS=OFF
 	-DJ=8
-	-DOSG_BUILD_PLATFORM_ANDROID=ON
-	-DOSG_CPP_EXCEPTIONS_AVAILABLE=ON 
-	-DOSG_GL_DISPLAYLISTS_AVAILABLE=OFF 
-	-DOSG_GL_MATRICES_AVAILABLE=ON 
-	-DOSG_GL_VERTEX_FUNCS_AVAILABLE=ON 
-	-DOSG_GL_VERTEX_ARRAY_FUNCS_AVAILABLE=ON 
-	-DOSG_GL_FIXED_FUNCTION_AVAILABLE=ON 
-	-DOSG_GL1_AVAILABLE=OFF 
-	-DOSG_GL2_AVAILABLE=OFF 
-	-DOSG_GL3_AVAILABLE=OFF 
-	-DOSG_GLES1_AVAILABLE=ON 
-	-DOSG_GLES2_AVAILABLE=OFF 
-	-DOSG_GL_LIBRARY_STATIC=OFF 
-	-DOSG_USE_QT=OFF 
 	-DOPENGL_PROFILE=GLES1
+	-DOSG_BUILD_PLATFORM_ANDROID=ON
+	-DOSG_CPP_EXCEPTIONS_AVAILABLE=ON
+	-DOSG_GL1_AVAILABLE=OFF
+	-DOSG_GL2_AVAILABLE=OFF
+	-DOSG_GL3_AVAILABLE=OFF
+	-DOSG_GLES1_AVAILABLE=ON
+	-DOSG_GLES2_AVAILABLE=OFF
+	-DOSG_GL_DISPLAYLISTS_AVAILABLE=OFF
+	-DOSG_GL_FIXED_FUNCTION_AVAILABLE=ON
+	-DOSG_GL_LIBRARY_STATIC=OFF
+	-DOSG_GL_MATRICES_AVAILABLE=ON
+	-DOSG_GL_VERTEX_ARRAY_FUNCS_AVAILABLE=ON
+	-DOSG_GL_VERTEX_FUNCS_AVAILABLE=ON
 	-DOSG_TEXT_USE_FONTCONFIG=OFF
+	-DOSG_USE_QT=OFF
 	${BOOST_CMAKE}
 	${CURL_CMAKE}
-	${LIBX11-DEV_CMAKE}
 	${FFMPEG_CMAKE}
 	${FONTCONFIG_CMAKE}
-	${FREETYPE_CMAKE} 
+	${FREETYPE_CMAKE}
+	${GDAL_CMAKE}
 	${GIFLIB_CMAKE}
+	${GSTREAMER_CMAKE}
 	${GZIP_CMAKE}
 	${JASPER_CMAKE}
-	${LIBJPEG-TURBO_CMAKE} 
+	${LIBJPEG-TURBO_CMAKE}
 	${LIBPNG_CMAKE}
 	${LIBVNCSERVER_CMAKE}
+	${LIBX11-DEV_CMAKE}
 	${LIBXML2_CMAKE}
 	${MSINTTYPES_CMAKE}
 	${OPENGL_CMAKE}
 	${SDL_CMAKE}
-	${TIFF_CMAKE} 
+	${TIFF_CMAKE}
 	${ZLIB_CMAKE}
 	${ZSTD_CMAKE}
 	${OPENSCENEGRAPH})
@@ -2528,422 +2159,814 @@ string(REPLACE "-std=gnu++17" "" OPENSCENEGRAPH_BUILD "${DKCMAKE_BUILD}")
 string(REPLACE "  " " " OPENSCENEGRAPH_BUILD "${OPENSCENEGRAPH_BUILD}")
 EMSCRIPTEN_DEBUG_dk_queueCommand(${OPENSCENEGRAPH_BUILD}
 	"-DCMAKE_CXX_FLAGS=-std=gnu++14"
-	-DCMAKE_BUILD_TYPE=DEBUG 
-	-DBUILD_OSG_APPLICATIONS=OFF 
+	-DBUILD_OSG_APPLICATIONS=OFF
 	-DBUILD_OSG_EXAMPLES=OFF
-	-DDYNAMIC_OPENTHREADS=OFF 
-	-DDYNAMIC_OPENSCENEGRAPH=OFF 
-	#-DOSG_GL_DISPLAYLISTS_AVAILABLE=OFF 
-	#-DOSG_GL_MATRICES_AVAILABLE=ON 
-	#-DOSG_GL_VERTEX_FUNCS_AVAILABLE=ON 
-	#-DOSG_GL_VERTEX_ARRAY_FUNCS_AVAILABLE=ON 
-	#-DOSG_GL_FIXED_FUNCTION_AVAILABLE=ON 
-	#-DOSG_CPP_EXCEPTIONS_AVAILABLE=ON 
+	-DCMAKE_BUILD_TYPE=DEBUG
+	-DDYNAMIC_OPENSCENEGRAPH=OFF
+	-DDYNAMIC_OPENTHREADS=OFF
+	-DEGL_LIBRARY=GL
+	#-DOSG_CPP_EXCEPTIONS_AVAILABLE=ON
+	#-DOSG_GL_DISPLAYLISTS_AVAILABLE=OFF
+	#-DOSG_GL_FIXED_FUNCTION_AVAILABLE=ON
+	#-DOSG_GL_LIBRARY_STATIC=OFF
+	#-DOSG_GL_MATRICES_AVAILABLE=ON
+	#-DOSG_GL_VERTEX_ARRAY_FUNCS_AVAILABLE=ON
+	#-DOSG_GL_VERTEX_FUNCS_AVAILABLE=ON
 	-DOSG_GL1_AVAILABLE=OFF
-	-DOSG_GL2_AVAILABLE=OFF 
-	#-DOSG_GL3_AVAILABLE=OFF 
-	#-DOSG_GLES1_AVAILABLE=OFF 
-	-DOSG_GLES2_AVAILABLE=ON 
-	#-DOSG_GL_LIBRARY_STATIC=OFF 
-	#-DOSG_MSVC_VERSIONED_DLL=OFF 
-	#-DOSG_USE_QT=OFF
+	-DOSG_GL2_AVAILABLE=OFF
+	#-DOSG_GL3_AVAILABLE=OFF
+	#-DOSG_GLES1_AVAILABLE=OFF
+	-DOSG_GLES2_AVAILABLE=ON
+	#-DOSG_MSVC_VERSIONED_DLL=OFF
 	#-DOSG_TEXT_USE_FONTCONFIG=OFF
+	#-DOSG_USE_QT=OFF
+	-DOSG_WINDOWING_SYSTEM=None
 	-D_OPENTHREADS_ATOMIC_USE_GCC_BUILTINS_EXITCODE=0
 	-D_OPENTHREADS_ATOMIC_USE_GCC_BUILTINS_EXITCODE__TRYRUN_OUTPUT=advanced
-	-DOSG_WINDOWING_SYSTEM=None
-	-DEGL_LIBRARY=GL
 	${BOOST_CMAKE}
 	${CURL_CMAKE}
-	${LIBX11-DEV_CMAKE}
 	${FFMPEG_CMAKE}
 	${FONTCONFIG_CMAKE}
-	${FREETYPE_CMAKE} 
+	${FREETYPE_CMAKE}
+	${GDAL_CMAKE}
 	${GIFLIB_CMAKE}
+	${GSTREAMER_CMAKE}
 	${GZIP_CMAKE}
 	${JASPER_CMAKE}
-	${LIBJPEG-TURBO_CMAKE} 
+	${LIBJPEG-TURBO_CMAKE}
 	${LIBPNG_CMAKE}
 	${LIBVNCSERVER_CMAKE}
+	${LIBX11-DEV_CMAKE}
 	${LIBXML2_CMAKE}
 	${MSINTTYPES_CMAKE}
 	${OPENGL_CMAKE}
 	${SDL_CMAKE}
-	${TIFF_CMAKE} 
+	${TIFF_CMAKE}
 	${ZLIB_CMAKE}
 	${ZSTD_CMAKE}
 	${OPENSCENEGRAPH})
 	
 EMSCRIPTEN_RELEASE_dk_queueCommand(${OPENSCENEGRAPH_BUILD}
 	"-DCMAKE_CXX_FLAGS=-std=gnu++14"
-	-DCMAKE_BUILD_TYPE=DEBUG 
-	-DBUILD_OSG_APPLICATIONS=OFF 
+	-DBUILD_OSG_APPLICATIONS=OFF
 	-DBUILD_OSG_EXAMPLES=OFF
-	-DDYNAMIC_OPENTHREADS=OFF 
-	-DDYNAMIC_OPENSCENEGRAPH=OFF 
-	#-DOSG_GL_DISPLAYLISTS_AVAILABLE=OFF 
-	#-DOSG_GL_MATRICES_AVAILABLE=ON 
-	#-DOSG_GL_VERTEX_FUNCS_AVAILABLE=ON 
-	#-DOSG_GL_VERTEX_ARRAY_FUNCS_AVAILABLE=ON 
-	#-DOSG_GL_FIXED_FUNCTION_AVAILABLE=ON 
-	#-DOSG_CPP_EXCEPTIONS_AVAILABLE=ON 
+	-DCMAKE_BUILD_TYPE=RELEASE
+	-DDYNAMIC_OPENSCENEGRAPH=OFF
+	-DDYNAMIC_OPENTHREADS=OFF
+	-DEGL_LIBRARY=GL
+	#-DOSG_CPP_EXCEPTIONS_AVAILABLE=ON
+	#-DOSG_GL_DISPLAYLISTS_AVAILABLE=OFF
+	#-DOSG_GL_FIXED_FUNCTION_AVAILABLE=ON
+	#-DOSG_GL_LIBRARY_STATIC=OFF
+	#-DOSG_GL_MATRICES_AVAILABLE=ON
+	#-DOSG_GL_VERTEX_ARRAY_FUNCS_AVAILABLE=ON
+	#-DOSG_GL_VERTEX_FUNCS_AVAILABLE=ON
 	-DOSG_GL1_AVAILABLE=OFF
-	-DOSG_GL2_AVAILABLE=OFF 
-	#-DOSG_GL3_AVAILABLE=OFF 
-	#-DOSG_GLES1_AVAILABLE=OFF 
-	-DOSG_GLES2_AVAILABLE=ON 
-	#-DOSG_GL_LIBRARY_STATIC=OFF 
-	#-DOSG_MSVC_VERSIONED_DLL=OFF 
-	#-DOSG_USE_QT=OFF
+	-DOSG_GL2_AVAILABLE=OFF
+	#-DOSG_GL3_AVAILABLE=OFF
+	#-DOSG_GLES1_AVAILABLE=OFF
+	-DOSG_GLES2_AVAILABLE=ON
+	#-DOSG_MSVC_VERSIONED_DLL=OFF
 	#-DOSG_TEXT_USE_FONTCONFIG=OFF
+	#-DOSG_USE_QT=OFF
+	-DOSG_WINDOWING_SYSTEM=None
 	-D_OPENTHREADS_ATOMIC_USE_GCC_BUILTINS_EXITCODE=0
 	-D_OPENTHREADS_ATOMIC_USE_GCC_BUILTINS_EXITCODE__TRYRUN_OUTPUT=advanced
-	-DOSG_WINDOWING_SYSTEM=None
-	-DEGL_LIBRARY=GL
 	${BOOST_CMAKE}
 	${CURL_CMAKE}
-	${LIBX11-DEV_CMAKE}
 	${FFMPEG_CMAKE}
 	${FONTCONFIG_CMAKE}
-	${FREETYPE_CMAKE} 
+	${FREETYPE_CMAKE}
+	${GDAL_CMAKE}
 	${GIFLIB_CMAKE}
+	${GSTREAMER_CMAKE}
 	${GZIP_CMAKE}
 	${JASPER_CMAKE}
-	${LIBJPEG-TURBO_CMAKE} 
+	${LIBJPEG-TURBO_CMAKE}
 	${LIBPNG_CMAKE}
 	${LIBVNCSERVER_CMAKE}
+	${LIBX11-DEV_CMAKE}
 	${LIBXML2_CMAKE}
 	${MSINTTYPES_CMAKE}
 	${OPENGL_CMAKE}
 	${SDL_CMAKE}
-	${TIFF_CMAKE} 
+	${TIFF_CMAKE}
 	${ZLIB_CMAKE}
 	${ZSTD_CMAKE}
 	${OPENSCENEGRAPH})
 	
+string(REPLACE "-std=c++17" "" OPENSCENEGRAPH_BUILD "${DKCMAKE_BUILD}")
+string(REPLACE "  " " " OPENSCENEGRAPH_BUILD "${OPENSCENEGRAPH_BUILD}")
+IOS_dk_queueCommand(${OPENSCENEGRAPH_BUILD}
+	-DAV_FOUNDATION_INCLUDE_DIR=OFF
+	-DAV_FOUNDATION_LIBRARY=OFF
+	-DBUILD_OSG_APPLICATIONS=OFF
+	-DBUILD_OSG_EXAMPLES=OFF
+	-DDYNAMIC_OPENSCENEGRAPH=OFF
+	-DDYNAMIC_OPENTHREADS=OFF
+	-DIPHONE_SDKVER="15.0"
+	-DIPHONE_VERSION_MIN="13.0"
+	-DOPENGL_PROFILE=GLES1 
+	-DOSG_BUILD_PLATFORM_IPHONE=ON
+	-DOSG_BUILD_PLATFORM_IPHONE=ON
+	-DOSG_CPP_EXCEPTIONS_AVAILABLE=ON
+	-DOSG_GL1_AVAILABLE=OFF
+	-DOSG_GL2_AVAILABLE=OFF
+	-DOSG_GL3_AVAILABLE=OFF
+	-DOSG_GLES1_AVAILABLE=ON
+	-DOSG_GLES2_AVAILABLE=OFF
+	-DOSG_GLES3_AVAILABLE=OFF
+	-DOSG_GL_DISPLAYLISTS_AVAILABLE=OFF
+	-DOSG_GL_FIXED_FUNCTION_AVAILABLE=ON
+	-DOSG_GL_LIBRARY_STATIC=OFF
+	-DOSG_GL_MATRICES_AVAILABLE=ON
+	-DOSG_GL_VERTEX_ARRAY_FUNCS_AVAILABLE=ON
+	-DOSG_GL_VERTEX_FUNCS_AVAILABLE=ON
+	-DOSG_MSVC_VERSIONED_DLL=OFF
+	-DOSG_TEXT_USE_FONTCONFIG=OFF
+	-DOSG_USE_QT=OFF
+	-DOSG_WINDOWING_SYSTEM=IOS
+	${BOOST_CMAKE}
+	${CURL_CMAKE}
+	${FFMPEG_CMAKE}
+	${FONTCONFIG_CMAKE}
+	${FREETYPE_CMAKE}
+	${GDAL_CMAKE}
+	${GIFLIB_CMAKE}
+	${GSTREAMER_CMAKE}
+	${GZIP_CMAKE}
+	${JASPER_CMAKE}
+	${LIBJPEG-TURBO_CMAKE}
+	${LIBPNG_CMAKE}
+	${LIBVNCSERVER_CMAKE}
+	${LIBX11-DEV_CMAKE}
+	${LIBXML2_CMAKE}
+	${MSINTTYPES_CMAKE}
+	${OPENGL_CMAKE}
+	${SDL_CMAKE}
+	${TIFF_CMAKE}
+	${ZLIB_CMAKE}
+	${ZSTD_CMAKE}
+	${OPENSCENEGRAPH})
+
+string(REPLACE "-std=c++17" "" OPENSCENEGRAPH_BUILD "${DKCMAKE_BUILD}")
+string(REPLACE "  " " " OPENSCENEGRAPH_BUILD "${OPENSCENEGRAPH_BUILD}")
+IOSSIM_dk_queueCommand(${OPENSCENEGRAPH_BUILD}
+	#-DAV_FOUNDATION_INCLUDE_DIR=OFF
+	#-DAV_FOUNDATION_LIBRARY=OFF
+	-DBUILD_OSG_APPLICATIONS=OFF
+	-DBUILD_OSG_EXAMPLES=OFF
+	#-DCOCOA_LIBRARY=OFF			#FIXME
+	-DDYNAMIC_OPENSCENEGRAPH=OFF
+	-DDYNAMIC_OPENTHREADS=OFF
+	#-DEGL_LIBRARY=OFF				#FIXME
+	-DIPHONE_SDKVER="15.0"
+	-DIPHONE_VERSION_MIN="13.0"
+	#-DOPENGL_INCLUDE_DIR=OFF		#FIXME
+	#-DOPENGL_gl_LIBRARY=OFF		#FIXME
+	-DOPENGL_PROFILE=GLES1 
+	-DOSG_BUILD_PLATFORM_IPHONE_SIMULATOR:BOOL=ON
+	-DOSG_CPP_EXCEPTIONS_AVAILABLE=ON
+	-DOSG_CXX_LANGUAGE_STANDARD=C++98
+	-DOSG_DEFAULT_IMAGE_PLUGIN_FOR_OSX="imageio"
+	-DOSG_GL1_AVAILABLE=OFF
+	-DOSG_GL2_AVAILABLE=OFF
+	-DOSG_GL3_AVAILABLE=OFF
+	-DOSG_GLES1_AVAILABLE=ON
+	-DOSG_GLES2_AVAILABLE=OFF
+	-DOSG_GLES3_AVAILABLE=OFF
+	-DOSG_GL_DISPLAYLISTS_AVAILABLE=OFF
+	-DOSG_GL_FIXED_FUNCTION_AVAILABLE=ON
+	-DOSG_GL_LIBRARY_STATIC=OFF
+	-DOSG_GL_MATRICES_AVAILABLE=ON
+	-DOSG_GL_VERTEX_ARRAY_FUNCS_AVAILABLE=ON
+	-DOSG_GL_VERTEX_FUNCS_AVAILABLE=ON
+	-DOSG_MSVC_VERSIONED_DLL=OFF
+	-DOSG_TEXT_USE_FONTCONFIG=OFF
+	#-DOSG_USE_QT=OFF
+	-DOSG_WINDOWING_SYSTEM:STRING=IOS
+	${BOOST_CMAKE}
+	${CURL_CMAKE}
+	${FFMPEG_CMAKE}
+	${FONTCONFIG_CMAKE}
+	${FREETYPE_CMAKE}
+	${GDAL_CMAKE}
+	${GIFLIB_CMAKE}
+	${GSTREAMER_CMAKE}
+	${GZIP_CMAKE}
+	${JASPER_CMAKE}
+	${LIBJPEG-TURBO_CMAKE}
+	${LIBPNG_CMAKE}
+	${LIBVNCSERVER_CMAKE}
+	${LIBX11-DEV_CMAKE}
+	${LIBXML2_CMAKE}
+	${MSINTTYPES_CMAKE}
+	${OPENGL_CMAKE}
+	${SDL_CMAKE}
+	${TIFF_CMAKE}
+	${ZLIB_CMAKE}
+	${ZSTD_CMAKE}
+	${OPENSCENEGRAPH})
+
+string(REPLACE "-std=c++17" "" OPENSCENEGRAPH_BUILD "${DKCMAKE_BUILD}")
+string(REPLACE "  " " " OPENSCENEGRAPH_BUILD "${OPENSCENEGRAPH_BUILD}")
+LINUX_DEBUG_dk_queueCommand(${OPENSCENEGRAPH_BUILD}
+	-DBUILD_OSG_APPLICATIONS=OFF
+	-DBUILD_OSG_EXAMPLES=OFF
+	-DCMAKE_BUILD_TYPE=DEBUG 
+	-DDYNAMIC_OPENSCENEGRAPH=OFF
+	-DDYNAMIC_OPENTHREADS=OFF
+	-DOSG_CPP_EXCEPTIONS_AVAILABLE=ON
+	-DOSG_GL1_AVAILABLE=ON
+	-DOSG_GL2_AVAILABLE=ON
+	-DOSG_GL3_AVAILABLE=OFF
+	-DOSG_GLES1_AVAILABLE=OFF
+	-DOSG_GLES2_AVAILABLE=OFF
+	-DOSG_GL_DISPLAYLISTS_AVAILABLE=OFF
+	-DOSG_GL_FIXED_FUNCTION_AVAILABLE=ON
+	-DOSG_GL_LIBRARY_STATIC=OFF
+	-DOSG_GL_MATRICES_AVAILABLE=ON
+	-DOSG_GL_VERTEX_ARRAY_FUNCS_AVAILABLE=ON
+	-DOSG_GL_VERTEX_FUNCS_AVAILABLE=ON
+	-DOSG_MSVC_VERSIONED_DLL=OFF
+	-DOSG_TEXT_USE_FONTCONFIG=OFF
+	-DOSG_USE_QT=OFF
+	${BOOST_CMAKE}
+	${CURL_CMAKE}
+	${FFMPEG_CMAKE}
+	${FONTCONFIG_CMAKE}
+	${FREETYPE_CMAKE}
+	${GDAL_CMAKE}
+	${GIFLIB_CMAKE}
+	${GSTREAMER_CMAKE}
+	${GZIP_CMAKE}
+	${JASPER_CMAKE}
+	${LIBJPEG-TURBO_CMAKE}
+	${LIBPNG_CMAKE}
+	${LIBVNCSERVER_CMAKE}
+	${LIBX11-DEV_CMAKE}
+	${LIBXML2_CMAKE}
+	${MSINTTYPES_CMAKE}
+	${OPENGL_CMAKE}
+	${SDL_CMAKE}
+	${TIFF_CMAKE}
+	${ZLIB_CMAKE}
+	${ZSTD_CMAKE}
+	${OPENSCENEGRAPH})
+	
+LINUX_RELEASE_dk_queueCommand(${OPENSCENEGRAPH_BUILD}
+	-DBUILD_OSG_APPLICATIONS=OFF
+	-DBUILD_OSG_EXAMPLES=OFF
+	-DCMAKE_BUILD_TYPE=RELEASE
+	-DDYNAMIC_OPENSCENEGRAPH=OFF
+	-DDYNAMIC_OPENTHREADS=OFF
+	-DOSG_CPP_EXCEPTIONS_AVAILABLE=ON
+	-DOSG_GL1_AVAILABLE=ON
+	-DOSG_GL2_AVAILABLE=ON
+	-DOSG_GL3_AVAILABLE=OFF
+	-DOSG_GLES1_AVAILABLE=OFF
+	-DOSG_GLES2_AVAILABLE=OFF
+	-DOSG_GL_DISPLAYLISTS_AVAILABLE=OFF
+	-DOSG_GL_FIXED_FUNCTION_AVAILABLE=ON
+	-DOSG_GL_LIBRARY_STATIC=OFF
+	-DOSG_GL_MATRICES_AVAILABLE=ON
+	-DOSG_GL_VERTEX_ARRAY_FUNCS_AVAILABLE=ON
+	-DOSG_GL_VERTEX_FUNCS_AVAILABLE=ON
+	-DOSG_MSVC_VERSIONED_DLL=OFF
+	-DOSG_TEXT_USE_FONTCONFIG=OFF
+	-DOSG_USE_QT=OFF
+	${BOOST_CMAKE}
+	${CURL_CMAKE}
+	${FFMPEG_CMAKE}
+	${FONTCONFIG_CMAKE}
+	${FREETYPE_CMAKE}
+	${GDAL_CMAKE}
+	${GIFLIB_CMAKE}
+	${GSTREAMER_CMAKE}
+	${GZIP_CMAKE}
+	${JASPER_CMAKE}
+	${LIBJPEG-TURBO_CMAKE}
+	${LIBPNG_CMAKE}
+	${LIBVNCSERVER_CMAKE}
+	${LIBX11-DEV_CMAKE}
+	${LIBXML2_CMAKE}
+	${MSINTTYPES_CMAKE}
+	${OPENGL_CMAKE}
+	${SDL_CMAKE}
+	${TIFF_CMAKE}
+	${ZLIB_CMAKE}
+	${ZSTD_CMAKE}
+	${OPENSCENEGRAPH})
+
+string(REPLACE "-std=c++17" "" OPENSCENEGRAPH_BUILD "${DKCMAKE_BUILD}")
+string(REPLACE "  " " " OPENSCENEGRAPH_BUILD "${OPENSCENEGRAPH_BUILD}")
+MAC_dk_queueCommand(${OPENSCENEGRAPH_BUILD}
+	-DAV_FOUNDATION_INCLUDE_DIR=OFF
+	-DAV_FOUNDATION_LIBRARY=OFF
+	-DBUILD_OSG_APPLICATIONS=OFF
+	-DBUILD_OSG_EXAMPLES=OFF
+	-DDYNAMIC_OPENSCENEGRAPH=OFF
+	-DDYNAMIC_OPENTHREADS=OFF
+	-DOSG_CPP_EXCEPTIONS_AVAILABLE=ON
+	-DOSG_GL1_AVAILABLE=ON
+	-DOSG_GL2_AVAILABLE=ON
+	-DOSG_GL3_AVAILABLE=OFF
+	-DOSG_GLES1_AVAILABLE=OFF
+	-DOSG_GLES2_AVAILABLE=OFF
+	-DOSG_GL_DISPLAYLISTS_AVAILABLE=OFF
+	-DOSG_GL_FIXED_FUNCTION_AVAILABLE=ON
+	-DOSG_GL_LIBRARY_STATIC=OFF
+	-DOSG_GL_MATRICES_AVAILABLE=ON
+	-DOSG_GL_VERTEX_ARRAY_FUNCS_AVAILABLE=ON
+	-DOSG_GL_VERTEX_FUNCS_AVAILABLE=ON
+	-DOSG_MSVC_VERSIONED_DLL=OFF
+	-DOSG_TEXT_USE_FONTCONFIG=OFF
+	-DOSG_USE_QT=OFF
+	${BOOST_CMAKE}
+	${CURL_CMAKE}
+	${FFMPEG_CMAKE}
+	${FONTCONFIG_CMAKE}
+	${FREETYPE_CMAKE}
+	${GDAL_CMAKE}
+	${GIFLIB_CMAKE}
+	${GSTREAMER_CMAKE}
+	${GZIP_CMAKE}
+	${JASPER_CMAKE}
+	${LIBJPEG-TURBO_CMAKE}
+	${LIBPNG_CMAKE}
+	${LIBVNCSERVER_CMAKE}
+	${LIBX11-DEV_CMAKE}
+	${LIBXML2_CMAKE}
+	${MSINTTYPES_CMAKE}
+	${OPENGL_CMAKE}
+	${SDL_CMAKE}
+	${TIFF_CMAKE}
+	${ZLIB_CMAKE}
+	${ZSTD_CMAKE}
+	${OPENSCENEGRAPH})
+	
+string(REPLACE "-std=c++17" "" OPENSCENEGRAPH_BUILD "${DKCMAKE_BUILD}")
+string(REPLACE "  " " " OPENSCENEGRAPH_BUILD "${OPENSCENEGRAPH_BUILD}")
+RASPBERRY_DEBUG_dk_queueCommand(${OPENSCENEGRAPH_BUILD}
+	-DBUILD_OSG_APPLICATIONS=OFF
+	-DBUILD_OSG_EXAMPLES=OFF
+	-DCMAKE_BUILD_TYPE=DEBUG 
+	-DDYNAMIC_OPENSCENEGRAPH=OFF
+	-DDYNAMIC_OPENTHREADS=OFF
+	-DOSG_CPP_EXCEPTIONS_AVAILABLE=ON
+	-DOSG_GL1_AVAILABLE=ON
+	-DOSG_GL2_AVAILABLE=ON
+	-DOSG_GL3_AVAILABLE=OFF
+	-DOSG_GLES1_AVAILABLE=OFF
+	-DOSG_GLES2_AVAILABLE=OFF
+	-DOSG_GL_DISPLAYLISTS_AVAILABLE=OFF
+	-DOSG_GL_FIXED_FUNCTION_AVAILABLE=ON
+	-DOSG_GL_LIBRARY_STATIC=OFF
+	-DOSG_GL_MATRICES_AVAILABLE=ON
+	-DOSG_GL_VERTEX_ARRAY_FUNCS_AVAILABLE=ON
+	-DOSG_GL_VERTEX_FUNCS_AVAILABLE=ON
+	-DOSG_MSVC_VERSIONED_DLL=OFF
+	-DOSG_TEXT_USE_FONTCONFIG=OFF
+	-DOSG_USE_QT=OFF
+	${BOOST_CMAKE}
+	${CURL_CMAKE}
+	${FFMPEG_CMAKE}
+	${FONTCONFIG_CMAKE}
+	${FREETYPE_CMAKE}
+	${GDAL_CMAKE}
+	${GIFLIB_CMAKE}
+	${GSTREAMER_CMAKE}
+	${GZIP_CMAKE}
+	${JASPER_CMAKE}
+	${LIBJPEG-TURBO_CMAKE}
+	${LIBPNG_CMAKE}
+	${LIBVNCSERVER_CMAKE}
+	${LIBX11-DEV_CMAKE}
+	${LIBXML2_CMAKE}
+	${MSINTTYPES_CMAKE}
+	${OPENGL_CMAKE}
+	${SDL_CMAKE}
+	${TIFF_CMAKE}
+	${ZLIB_CMAKE}
+	${ZSTD_CMAKE}
+	${OPENSCENEGRAPH})
+	
+RASPBERRY_RELEASE_dk_queueCommand(${OPENSCENEGRAPH_BUILD}
+	-DBUILD_OSG_APPLICATIONS=OFF
+	-DBUILD_OSG_EXAMPLES=OFF
+	-DCMAKE_BUILD_TYPE=RELEASE
+	-DDYNAMIC_OPENSCENEGRAPH=OFF
+	-DDYNAMIC_OPENTHREADS=OFF
+	-DOSG_CPP_EXCEPTIONS_AVAILABLE=ON
+	-DOSG_GL1_AVAILABLE=ON
+	-DOSG_GL2_AVAILABLE=ON
+	-DOSG_GL3_AVAILABLE=OFF
+	-DOSG_GLES1_AVAILABLE=OFF
+	-DOSG_GLES2_AVAILABLE=OFF
+	-DOSG_GL_DISPLAYLISTS_AVAILABLE=OFF
+	-DOSG_GL_FIXED_FUNCTION_AVAILABLE=ON
+	-DOSG_GL_LIBRARY_STATIC=OFF
+	-DOSG_GL_MATRICES_AVAILABLE=ON
+	-DOSG_GL_VERTEX_ARRAY_FUNCS_AVAILABLE=ON
+	-DOSG_GL_VERTEX_FUNCS_AVAILABLE=ON
+	-DOSG_MSVC_VERSIONED_DLL=OFF
+	-DOSG_TEXT_USE_FONTCONFIG=OFF
+	-DOSG_USE_QT=OFF
+	${BOOST_CMAKE}
+	${CURL_CMAKE}
+	${FFMPEG_CMAKE}
+	${FONTCONFIG_CMAKE}
+	${FREETYPE_CMAKE}
+	${GDAL_CMAKE}
+	${GIFLIB_CMAKE}
+	${GSTREAMER_CMAKE}
+	${GZIP_CMAKE}
+	${JASPER_CMAKE}
+	${LIBJPEG-TURBO_CMAKE}
+	${LIBPNG_CMAKE}
+	${LIBVNCSERVER_CMAKE}
+	${LIBX11-DEV_CMAKE}
+	${LIBXML2_CMAKE}
+	${MSINTTYPES_CMAKE}
+	${OPENGL_CMAKE}
+	${SDL_CMAKE}
+	${TIFF_CMAKE}
+	${ZLIB_CMAKE}
+	${ZSTD_CMAKE}
+	${OPENSCENEGRAPH})
+
+string(REPLACE "/std:c++17" "" OPENSCENEGRAPH_BUILD "${DKCMAKE_BUILD}")
+string(REPLACE "  " " " OPENSCENEGRAPH_BUILD "${OPENSCENEGRAPH_BUILD}")
+WIN_dk_queueCommand(${OPENSCENEGRAPH_BUILD}
+	"-DCMAKE_CXX_FLAGS=/D__STDC_CONSTANT_MACROS /DOSG_LIBRARY_STATIC"
+	-DBUILD_OSG_APPLICATIONS=OFF
+	-DBUILD_OSG_EXAMPLES=ON
+	-DDYNAMIC_OPENSCENEGRAPH=OFF
+	-DDYNAMIC_OPENTHREADS=OFF
+	-DOSG_CPP_EXCEPTIONS_AVAILABLE=ON
+	-DOSG_GL1_AVAILABLE=ON
+	-DOSG_GL2_AVAILABLE=ON
+	-DOSG_GL3_AVAILABLE=OFF
+	-DOSG_GLES1_AVAILABLE=OFF
+	-DOSG_GLES2_AVAILABLE=OFF
+	-DOSG_GL_DISPLAYLISTS_AVAILABLE=OFF
+	-DOSG_GL_FIXED_FUNCTION_AVAILABLE=ON
+	-DOSG_GL_LIBRARY_STATIC=OFF
+	-DOSG_GL_MATRICES_AVAILABLE=ON
+	-DOSG_GL_VERTEX_ARRAY_FUNCS_AVAILABLE=ON
+	-DOSG_GL_VERTEX_FUNCS_AVAILABLE=ON
+	-DOSG_MSVC_GENERATE_PLUGINS_AND_WRAPPERS_MANIFESTS=OFF
+	-DOSG_MSVC_VERSIONED_DLL=OFF
+	-DOSG_TEXT_USE_FONTCONFIG=OFF
+	-DOSG_USE_QT=OFF
+	-DUSE_3RDPARTY_BIN=OFF
+	${BOOST_CMAKE}
+	${CURL_CMAKE}
+	${FFMPEG_CMAKE}
+	${FONTCONFIG_CMAKE}
+	${FREETYPE_CMAKE}
+	${GDAL_CMAKE}
+	${GIFLIB_CMAKE}
+	${GSTREAMER_CMAKE}
+	${GZIP_CMAKE}
+	${JASPER_CMAKE}
+	${LIBJPEG-TURBO_CMAKE}
+	${LIBPNG_CMAKE}
+	${LIBVNCSERVER_CMAKE}
+	${LIBX11-DEV_CMAKE}
+	${LIBXML2_CMAKE}
+	${MSINTTYPES_CMAKE}
+	${OPENGL_CMAKE}
+	${SDL_CMAKE}
+	${TIFF_CMAKE}
+	${ZLIB_CMAKE}
+	${ZSTD_CMAKE}
+	${OPENSCENEGRAPH})
+
 
 ### COMPILE ###
-dk_build(${OPENSCENEGRAPH_FOLDER})
+dk_build(${OPENSCENEGRAPH})
 
 # osgCore
 if(OpenThreads)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} OpenThreads)
+	#dk_build(${OPENSCENEGRAPH} OpenThreads)
 endif()
 if(osg)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osg)
+	#dk_build(${OPENSCENEGRAPH} osg)
 endif()
 if(osgUtil)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgUtil)
+	#dk_build(${OPENSCENEGRAPH} osgUtil)
 endif()
 if(osgDB)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgDB)
+	#dk_build(${OPENSCENEGRAPH} osgDB)
 endif()
 if(osgGA)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgGA)
+	#dk_build(${OPENSCENEGRAPH} osgGA)
 endif()
 if(osgText)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgText)
+	#dk_build(${OPENSCENEGRAPH} osgText)
 endif()
 if(osgViewer)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgViewer)
+	#dk_build(${OPENSCENEGRAPH} osgViewer)
 endif()
 if(osgAnimation)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgAnimation)
+	#dk_build(${OPENSCENEGRAPH} osgAnimation)
 endif()
 if(osgFX)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgFX)
+	#dk_build(${OPENSCENEGRAPH} osgFX)
 endif()
 if(osgManipulator)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgManipulator)
+	#dk_build(${OPENSCENEGRAPH} osgManipulator)
 endif()
 if(osgParitcle)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgParticle)
+	#dk_build(${OPENSCENEGRAPH} osgParticle)
 endif()
 if(osgShadow)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgShadow)
+	#dk_build(${OPENSCENEGRAPH} osgShadow)
 endif()
 if(osgSim)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgSim)
+	#dk_build(${OPENSCENEGRAPH} osgSim)
 endif()
 if(osgTerrain)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgTerrain)
+	#dk_build(${OPENSCENEGRAPH} osgTerrain)
 endif()
 if(osgVolume)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgVolume)
+	#dk_build(${OPENSCENEGRAPH} osgVolume)
 endif()
 if(osgWidget)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgWidget)
+	#dk_build(${OPENSCENEGRAPH} osgWidget)
 endif()
 
 # osgWrappers
 if(osgdb_deprecated_osg)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_deprecated_osg)
+	#dk_build(${OPENSCENEGRAPH} osgdb_deprecated_osg)
 endif()
 if(osgdb_deprecated_osganimation)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_deprecated_osganimation)
+	#dk_build(${OPENSCENEGRAPH} osgdb_deprecated_osganimation)
 endif()
 if(osgdb_deprecated_osgfx)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_deprecated_osgfx)
+	#dk_build(${OPENSCENEGRAPH} osgdb_deprecated_osgfx)
 endif()
 if(osgdb_deprecated_osgparticle)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_deprecated_osgparticle)
+	#dk_build(${OPENSCENEGRAPH} osgdb_deprecated_osgparticle)
 endif()
 if(osgdb_deprecated_osgshadow)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_deprecated_osgshadow)
+	#dk_build(${OPENSCENEGRAPH} osgdb_deprecated_osgshadow)
 endif()
 if(osgdb_deprecated_osgsim)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_deprecated_osgsim)
+	#dk_build(${OPENSCENEGRAPH} osgdb_deprecated_osgsim)
 endif()
 if(osgdb_deprecated_osgterrain)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_deprecated_osgterrain)
+	#dk_build(${OPENSCENEGRAPH} osgdb_deprecated_osgterrain)
 endif()
 if(osgdb_deprecated_osgtext)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_deprecated_osgtext)
+	#dk_build(${OPENSCENEGRAPH} osgdb_deprecated_osgtext)
 endif()
 if(osgdb_deprecated_osgviewer)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_deprecated_osgviewer)
+	#dk_build(${OPENSCENEGRAPH} osgdb_deprecated_osgviewer)
 endif()
 if(osgdb_deprecated_osgvolume)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_deprecated_osgvolume)
+	#dk_build(${OPENSCENEGRAPH} osgdb_deprecated_osgvolume)
 endif()
 if(osgdb_deprecated_osgwidget)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_deprecated_osgwidget)
+	#dk_build(${OPENSCENEGRAPH} osgdb_deprecated_osgwidget)
 endif()
 
 # osgPlugins
 if(osgdb_freetype)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_freetype)
+	#dk_build(${OPENSCENEGRAPH} osgdb_freetype)
 endif()
 if(osgdb_ive)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_ive)
+	#dk_build(${OPENSCENEGRAPH} osgdb_ive)
 endif()
 if(osgdb_openflight)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_openflight)
+	#dk_build(${OPENSCENEGRAPH} osgdb_openflight)
 endif()
 if(osgdb_osg)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_osg)
+	#dk_build(${OPENSCENEGRAPH} osgdb_osg)
 endif()
 if(osgdb_rgb)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_rgb)
+	#dk_build(${OPENSCENEGRAPH} osgdb_rgb)
 endif()
 
 # osgSerializers
 if(osgdb_serializers_osg)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_serializers_osg)
+	#dk_build(${OPENSCENEGRAPH} osgdb_serializers_osg)
 endif()
 if(osgdb_serializers_osganimation)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_serializers_osganimation)
+	#dk_build(${OPENSCENEGRAPH} osgdb_serializers_osganimation)
 endif()
 if(osgdb_serializers_osgfx)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_serializers_osgfx)
+	#dk_build(${OPENSCENEGRAPH} osgdb_serializers_osgfx)
 endif()
 if(osgdb_serializers_osgmanipulator)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_serializers_osgmanipulator)
+	#dk_build(${OPENSCENEGRAPH} osgdb_serializers_osgmanipulator)
 endif()
 if(osgdb_serializers_osgparticle)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_serializers_osgparticle)
+	#dk_build(${OPENSCENEGRAPH} osgdb_serializers_osgparticle)
 endif()
 if(osgdb_serializers_osgshadow)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_serializers_osgshadow)
+	#dk_build(${OPENSCENEGRAPH} osgdb_serializers_osgshadow)
 endif()
 if(osgdb_serializers_osgsim)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_serializers_osgsim)
+	#dk_build(${OPENSCENEGRAPH} osgdb_serializers_osgsim)
 endif()
 if(osgdb_serializers_osgterrain)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_serializers_osgterrain)
+	#dk_build(${OPENSCENEGRAPH} osgdb_serializers_osgterrain)
 endif()
 if(osgdb_serializers_osgtext)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_serializers_osgtext)
+	#dk_build(${OPENSCENEGRAPH} osgdb_serializers_osgtext)
 endif()
 if(osgdb_serializers_osgvolume)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_serializers_osgvolume)
+	#dk_build(${OPENSCENEGRAPH} osgdb_serializers_osgvolume)
 endif()
 
 if(osgUl)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgUl)
+	#dk_build(${OPENSCENEGRAPH} osgUl)
 endif()
 if(osgPresentation)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgPresentation)
+	#dk_build(${OPENSCENEGRAPH} osgPresentation)
 endif()
 
 if(osgdb_3dc)
-	#dk_bu1ild(${OPENSCENEGRAPH_FOLDER} osgdb_3dc)
+	#dk_bu1ild(${OPENSCENEGRAPH} osgdb_3dc)
 endif()
 if(osgdb_3ds)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_3ds)
+	#dk_build(${OPENSCENEGRAPH} osgdb_3ds)
 endif()
 if(osgdb_ac)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_ac)
+	#dk_build(${OPENSCENEGRAPH} osgdb_ac)
 endif()
 if(osgdb_bmp)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_bmp)
+	#dk_build(${OPENSCENEGRAPH} osgdb_bmp)
 endif()
 if(osgdb_bsp)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_bsp)
+	#dk_build(${OPENSCENEGRAPH} osgdb_bsp)
 endif()
 if(osgdb_bvh)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_bvh)
+	#dk_build(${OPENSCENEGRAPH} osgdb_bvh)
 endif()
 if(osgdb_cfg)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_cfg)
+	#dk_build(${OPENSCENEGRAPH} osgdb_cfg)
 endif()
 if(osgdb_curl)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_curl)
+	#dk_build(${OPENSCENEGRAPH} osgdb_curl)
 endif()
 if(osgdb_dds)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_dds)
+	#dk_build(${OPENSCENEGRAPH} osgdb_dds)
 endif()
 if(osgdb_dot)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_dot)
+	#dk_build(${OPENSCENEGRAPH} osgdb_dot)
 endif()
 if(osgdb_dxf)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_dxf)
+	#dk_build(${OPENSCENEGRAPH} osgdb_dxf)
 endif()
 if(osgdb_gles)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_gles)
+	#dk_build(${OPENSCENEGRAPH} osgdb_gles)
 endif()
 if(osgdb_glsl)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_glsl)
+	#dk_build(${OPENSCENEGRAPH} osgdb_glsl)
 endif()
 if(osgdb_gz)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_gz)
+	#dk_build(${OPENSCENEGRAPH} osgdb_gz)
 endif()
 if(osgdb_hdr)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_hdr)
+	#dk_build(${OPENSCENEGRAPH} osgdb_hdr)
 endif()
 if(osgdb_jpeg)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_jpeg)
+	#dk_build(${OPENSCENEGRAPH} osgdb_jpeg)
 endif()
 if(osgdb_ktx)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_ktx)
+	#dk_build(${OPENSCENEGRAPH} osgdb_ktx)
 endif()
 if(osgdb_logo)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_logo)
+	#dk_build(${OPENSCENEGRAPH} osgdb_logo)
 endif()
 if(osgdb_lua)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_lua)
+	#dk_build(${OPENSCENEGRAPH} osgdb_lua)
 endif()
 if(osgdb_lwo)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_lwo)
+	#dk_build(${OPENSCENEGRAPH} osgdb_lwo)
 endif()
 if(osgdb_lws)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_lws)
+	#dk_build(${OPENSCENEGRAPH} osgdb_lws)
 endif()
 if(osgdb_md2)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_md2)
+	#dk_build(${OPENSCENEGRAPH} osgdb_md2)
 endif()
 if(osgdb_mdl)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_mdl)
+	#dk_build(${OPENSCENEGRAPH} osgdb_mdl)
 endif()
 if(osgdb_normals)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_normals)
+	#dk_build(${OPENSCENEGRAPH} osgdb_normals)
 endif()
 if(osgdb_obj)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_obj)
+	#dk_build(${OPENSCENEGRAPH} osgdb_obj)
 endif()
 if(osgdb_osc)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_osc)
+	#dk_build(${OPENSCENEGRAPH} osgdb_osc)
 endif()
 if(osgdb_osga)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_osga)
+	#dk_build(${OPENSCENEGRAPH} osgdb_osga)
 endif()
 if(osgdb_osgjs)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_osgjs)
+	#dk_build(${OPENSCENEGRAPH} osgdb_osgjs)
 endif()
 if(osgdb_osgshadow)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_osgshadow)
+	#dk_build(${OPENSCENEGRAPH} osgdb_osgshadow)
 endif()
 if(osgdb_osgterrain)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_osgterrain)
+	#dk_build(${OPENSCENEGRAPH} osgdb_osgterrain)
 endif()
 if(osgdb_osgtgz)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_osgtgz)
+	#dk_build(${OPENSCENEGRAPH} osgdb_osgtgz)
 endif()
 if(osgdb_osgviewer)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_osgviewer)
+	#dk_build(${OPENSCENEGRAPH} osgdb_osgviewer)
 endif()
 if(osgdb_p3d)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_p3d)
+	#dk_build(${OPENSCENEGRAPH} osgdb_p3d)
 endif()
 if(osgdb_pic)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_pic)
+	#dk_build(${OPENSCENEGRAPH} osgdb_pic)
 endif()
 if(osgdb_ply)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_ply)
+	#dk_build(${OPENSCENEGRAPH} osgdb_ply)
 endif()
 if(osgdb_png)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_png)
+	#dk_build(${OPENSCENEGRAPH} osgdb_png)
 endif()
 if(osgdb_pnm)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_pnm)
+	#dk_build(${OPENSCENEGRAPH} osgdb_pnm)
 endif()
 if(osgdb_pov)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_pov)
+	#dk_build(${OPENSCENEGRAPH} osgdb_pov)
 endif()
 if(osgdb_pvr)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_pvr)
+	#dk_build(${OPENSCENEGRAPH} osgdb_pvr)
 endif()
 if(osgdb_revisions)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_revisions)
+	#dk_build(${OPENSCENEGRAPH} osgdb_revisions)
 endif()
 if(osgdb_rot)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_rot)
+	#dk_build(${OPENSCENEGRAPH} osgdb_rot)
 endif()
 if(osgdb_scale)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_scale)
+	#dk_build(${OPENSCENEGRAPH} osgdb_scale)
 endif()
 
 if(osgdb_serializers_osgga)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_serializers_osgga)
+	#dk_build(${OPENSCENEGRAPH} osgdb_serializers_osgga)
 endif()
 if(osgdb_serializers_osggui)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_serializers_osggui)
+	#dk_build(${OPENSCENEGRAPH} osgdb_serializers_osggui)
 endif()
 if(osgdb_serializers_osgutil)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_serializers_osgutil)
+	#dk_build(${OPENSCENEGRAPH} osgdb_serializers_osgutil)
 endif()
 if(osgdb_serializers_osgviewer)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_serializers_osgviewer)
+	#dk_build(${OPENSCENEGRAPH} osgdb_serializers_osgviewer)
 endif()
 
 if(osgdb_shp)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_shp)
+	#dk_build(${OPENSCENEGRAPH} osgdb_shp)
 endif()
 if(osgdb_stl)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_stl)
+	#dk_build(${OPENSCENEGRAPH} osgdb_stl)
 endif()
 if(osgdb_tf)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_tf)
+	#dk_build(${OPENSCENEGRAPH} osgdb_tf)
 endif()
 if(osgdb_tga)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_tga)
+	#dk_build(${OPENSCENEGRAPH} osgdb_tga)
 endif()
 if(osgdb_tgz)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_tgz)
+	#dk_build(${OPENSCENEGRAPH} osgdb_tgz)
 endif()
 if(osgdb_tiff)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_tiff)
+	#dk_build(${OPENSCENEGRAPH} osgdb_tiff)
 endif()
 if(osgdb_trans)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_trans)
+	#dk_build(${OPENSCENEGRAPH} osgdb_trans)
 endif()
 if(osgdb_trk)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_trk)
+	#dk_build(${OPENSCENEGRAPH} osgdb_trk)
 endif()
 if(osgdb_txf)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_txf)
+	#dk_build(${OPENSCENEGRAPH} osgdb_txf)
 endif()
 if(osgdb_txp)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_txp)
+	#dk_build(${OPENSCENEGRAPH} osgdb_txp)
 endif()
 if(osgdb_vnc)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_vnc)
+	#dk_build(${OPENSCENEGRAPH} osgdb_vnc)
 endif()
 if(osgdb_vtf)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_vtf)
+	#dk_build(${OPENSCENEGRAPH} osgdb_vtf)
 endif()
 if(osgdb_x)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_x)
+	#dk_build(${OPENSCENEGRAPH} osgdb_x)
 endif()
 if(osgdb_zip)
-	#dk_build(${OPENSCENEGRAPH_FOLDER} osgdb_zip)
+	#dk_build(${OPENSCENEGRAPH} osgdb_zip)
 endif()

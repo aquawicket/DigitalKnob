@@ -10,10 +10,10 @@ dk_import(https://sourceforge.net/projects/astyle/files/astyle/astyle%203.1/ASty
 
 ### LINK ###
 dk_include			(${ASTYLE}/src)
-WIN_dk_libDebug		(${ASTYLE}/${OS}/${DEBUG_DIR}/AStyleLib.lib)
-WIN_dk_libRelease	(${ASTYLE}/${OS}/${RELEASE_DIR}/AStyleLib.lib)
 UNIX_dk_libDebug	(${ASTYLE}/${OS}/${DEBUG_DIR}/libastyle.a)
 UNIX_dk_libRelease	(${ASTYLE}/${OS}/${RELEASE_DIR}/libastyle.a)
+WIN_dk_libDebug		(${ASTYLE}/${OS}/${DEBUG_DIR}/AStyleLib.lib)
+WIN_dk_libRelease	(${ASTYLE}/${OS}/${RELEASE_DIR}/AStyleLib.lib)
 
 
 ### GENERATE ###
@@ -21,4 +21,4 @@ dk_queueCommand(${DKCMAKE_BUILD} ${ASTYLE})
 
 
 ### COMPILE ###
-dk_build(${ASTYLE_FOLDER})
+dk_build(${ASTYLE})

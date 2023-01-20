@@ -19,4 +19,4 @@ dk_queueCommand(${DKCMAKE_BUILD} ${RMLUI-D3D11})
 
 
 ### COMPILE ###
-dk_build(${RMLUI-D3D11_FOLDER})
+dk_build(${RMLUI-D3D11})

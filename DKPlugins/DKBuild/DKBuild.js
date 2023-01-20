@@ -575,11 +575,11 @@ function DKBuild_DoResults(){
 		if(CPP_DK_GetOS() === "Windows"){
 			if(!DKBuild_Command(DIGITALKNOB+"DK/3rdParty/_DKIMPORTS/openjdk/registerJDK.cmd"))
 				return false
-			if(!DKBuild_Command(CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM="+ANDROID_API+" -DANDROID-NDK="+ANDROID_NDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROID_NDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=-std=c++1z -DCMAKE_ANDROID_STL_TYPE=c++_static "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"android32"))
+			if(!DKBuild_Command(CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM="+ANDROID_API+" -DANDROID-NDK="+ANDROID_NDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROID_NDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=\"-std=c++1z -frtti -fexceptions\" -DCMAKE_ANDROID_STL_TYPE=c++_static "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"android32"))
 				return false
 		}
 		else{
-			if(!DKBuild_Command(CMAKE+" -G \"Unix Makefiles\" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM="+ANDROID_API+" -DANDROID-NDK="+ANDROID_NDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROID_NDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=-std=c++1z -DCMAKE_ANDROID_STL_TYPE=c++_static "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"android32"))
+			if(!DKBuild_Command(CMAKE+" -G \"Unix Makefiles\" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM="+ANDROID_API+" -DANDROID-NDK="+ANDROID_NDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROID_NDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=\"-std=c++1z -frtti -fexceptions\" -DCMAKE_ANDROID_STL_TYPE=c++_static "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"android32"))
 				return false
 		}
 		
@@ -624,11 +624,11 @@ function DKBuild_DoResults(){
 		}
 		if(CPP_DK_GetOS() === "Windows"){
 			//if(!DKBuild_Command(CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM64 -DCMAKE_C_COMPILER_WORKS=1 -DCMAKE_CXX_COMPILER_WORKS=1 -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=26 -DANDROID-NDK="+ANDROID_NDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROID_NDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=-std=c++1z "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"android64"))
-			if(!DKBuild_Command(CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM64 -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM="+ANDROID_API+" -DANDROID-NDK="+ANDROID_NDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROID_NDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=-std=c++1z -DCMAKE_ANDROID_STL_TYPE=c++_static "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"android64"))
+			if(!DKBuild_Command(CMAKE+" -G \""+VS_GENERATOR+"\" -A ARM64 -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM="+ANDROID_API+" -DANDROID-NDK="+ANDROID_NDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROID_NDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=\"-std=c++1z -frtti -fexceptions\" -DCMAKE_ANDROID_STL_TYPE=c++_static "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"android64"))
 				return false
 		}
 		else{
-			if(!DKBuild_Command(CMAKE+" -G \"Unix Makefiles\" -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM="+ANDROID_API+" -DANDROID-NDK="+ANDROID_NDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROID_NDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=-std=c++1z -DCMAKE_ANDROID_STL_TYPE=c++_static "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"android64"))
+			if(!DKBuild_Command(CMAKE+" -G \"Unix Makefiles\" -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM="+ANDROID_API+" -DANDROID-NDK="+ANDROID_NDK+" -DCMAKE_TOOLCHAIN_FILE="+ANDROID_NDK+"/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS=\"-std=c++1z -frtti -fexceptions\" -DCMAKE_ANDROID_STL_TYPE=c++_static "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+"android64"))
 				return false
 		}
 		
@@ -677,7 +677,7 @@ function DKBuild_DoResults(){
 			CPP_DKFile_MkDir(app_path+OS+"/Debug")
 			CPP_DKFile_ChDir(app_path+OS+"/Debug")
 			if(CPP_DK_GetOS() === "Windows"){
-				if(!DKBuild_Command(EMSDK_ENV+" & "+CMAKE+" -G \"MinGW Makefiles\" -DCMAKE_TOOLCHAIN_FILE=\""+EMSDK_TOOLCHAIN_FILE+"\" "+cmake_string+""+DIGITALKNOB+"DK/DKCMake"))
+				if(!DKBuild_Command(EMSDK_ENV+".bat & "+CMAKE+" -G \"MinGW Makefiles\" -DCMAKE_TOOLCHAIN_FILE=\""+EMSDK_TOOLCHAIN_FILE+"\" "+cmake_string+""+DIGITALKNOB+"DK/DKCMake"))
 					return false
 			}
 			else{
@@ -685,7 +685,7 @@ function DKBuild_DoResults(){
 					return false
 			}
 			if(CPP_DK_GetOS() === "Windows"){
-				if(!DKBuild_Command(EMSDK_ENV+" & "+CMAKE+" --build "+app_path+OS+"/Debug --target "+APP+"_APP --config Debug"))	
+				if(!DKBuild_Command(EMSDK_ENV+".bat & "+CMAKE+" --build "+app_path+OS+"/Debug --target "+APP+"_APP --config Debug"))	
 					return false
 			}
 			else{
@@ -699,7 +699,7 @@ function DKBuild_DoResults(){
 			CPP_DKFile_MkDir(app_path+OS+"/Release")
 			CPP_DKFile_ChDir(app_path+OS+"/Release")
 			if(CPP_DK_GetOS() === "Windows"){
-				if(!DKBuild_Command(EMSDK_ENV+" & "+CMAKE+" -G \"MinGW Makefiles\" -DCMAKE_TOOLCHAIN_FILE=\""+EMSDK_TOOLCHAIN_FILE+"\" "+cmake_string+""+DIGITALKNOB+"DK/DKCMake"))
+				if(!DKBuild_Command(EMSDK_ENV+".bat & "+CMAKE+" -G \"MinGW Makefiles\" -DCMAKE_TOOLCHAIN_FILE=\""+EMSDK_TOOLCHAIN_FILE+"\" "+cmake_string+""+DIGITALKNOB+"DK/DKCMake"))
 					return false
 			}
 			else{
@@ -707,7 +707,7 @@ function DKBuild_DoResults(){
 					return false
 			}
 			if(CPP_DK_GetOS() === "Windows"){
-				if(!DKBuild_Command(EMSDK_ENV+" & "+CMAKE+" --build "+app_path+OS+"/Release --target "+APP+"_APP --config Release"))
+				if(!DKBuild_Command(EMSDK_ENV+".bat & "+CMAKE+" --build "+app_path+OS+"/Release --target "+APP+"_APP --config Release"))
 					return false
 			}
 			else{

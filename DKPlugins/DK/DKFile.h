@@ -12,12 +12,12 @@
 * copies of the Software, and to permit persons to whom the Software is
 * furnished to do so, subject to the following conditions :
 *
-* The above copyright noticeand this permission notice shall be included in all
+* The above copyright notice and this permission notice shall be included in all
 * copies or substantial portions of the Software.
 *
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
@@ -68,6 +68,7 @@ public:
 	static bool CreateFile(const DKString& path);
 	static bool Delete(const DKString& path);
 	static bool FileToString(const DKString& file, DKString& string);
+	static bool FileLineToString(const DKString& file, const unsigned int line, DKString& string);
 	static bool FindFile(DKString& filename, const DKString& path, const DKString& extension);
 	static bool GetAbsolutePath(const DKString& in, DKString& out);
 	static bool GetAppName(DKString& appname);

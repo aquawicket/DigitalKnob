@@ -1,7 +1,7 @@
-# remove these
+# to use this template, remove these lines
 dk_undepend(_TEMPLATE-APP_)
-return()
-
+dk_return()
+#########################################
 
 
 # http://www.app.com

@@ -1,7 +1,8 @@
-# https://developer.apple.com/documentation/coreservices/carbon_core
+# https://developer.apple.com/documentation/coreservices/carbon_core?language=objc
 
 if(NOT MAC)
-	return()
+	dk_undepend(carbon)
+	dk_return()
 endif()
 
 dk_findLibrary(Carbon)

@@ -1,11 +1,11 @@
 # https://androidsdkoffline.blogspot.com/p/android-sysimg-arm-v7a-direct-download.html
 # https://androidsdkoffline.blogspot.com/p/android-sysimg-arm-v8a-direct-download.html
 
-
 if(NOT ANDROID)
 	dk_undepend(android-system-images)
-	return()
+	dk_return()
 endif()
+
 
 dk_depend(android-sdk)
 

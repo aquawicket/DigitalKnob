@@ -7,7 +7,8 @@
 # https://github.com/upx/upx/releases/download/v3.96/upx-3.96-dos.zip
 
 if(ANDROID OR IOS OR IOSSIM OR MAC)
-	return()
+	dk_undepend(upx)
+	dk_return()
 endif()
 
 WIN32_dk_import(https://github.com/upx/upx/releases/download/v3.96/upx-3.96-win32.zip)

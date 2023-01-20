@@ -1,7 +1,8 @@
 # https://developer.apple.com/documentation/metal?language=objc
 
-if(NOT MAC_HOST)
-	return()
+if(NOT APPLE)
+	dk_undepend(metal)
+	dk_return()
 endif()
 
 

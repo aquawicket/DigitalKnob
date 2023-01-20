@@ -1,7 +1,8 @@
 # https://developer.apple.com/documentation/metal?language=objc
 
-if(NOT MAC_HOST)
-	return()
+if(NOT APPLE)
+	dk_undepend(metalkit)
+	dk_return()
 endif()
 
 dk_findLibrary(MetalKit)

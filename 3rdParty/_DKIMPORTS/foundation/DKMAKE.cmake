@@ -1,7 +1,8 @@
 # https://developer.apple.com/documentation/foundation?language=objc
 
-if(NOT MAC_HOST)
-	return()
+if(NOT APPLE)
+	dk_undepend(foundation)
+	dk_return()
 endif()
 
 

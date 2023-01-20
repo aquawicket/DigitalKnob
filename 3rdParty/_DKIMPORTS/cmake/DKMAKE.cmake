@@ -22,7 +22,7 @@ if(COMPILE_CMAKE)
 
 	### COMPILE ###
 	dk_set(QUEUE_BUILD ON)
-	dk_build(${CMAKE_FOLDER})
+	dk_build(${CMAKE})
 
 	### GENERATE / COMPILE ###
 	#DEBUG_dk_setPath	(${CMAKE}/${OS}/${DEBUG_DIR})

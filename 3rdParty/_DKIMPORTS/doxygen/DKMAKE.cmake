@@ -1,14 +1,26 @@
 # https://github.com/doxygen/doxygen.git
-# https://sourceforge.net/projects/doxygen/files/rel-1.8.13/doxygen-1.8.13-setup.exe
+# https://sourceforge.net/projects/doxygen
 if(NOT WIN_HOST)
-	return()
+	dk_undepend(doxygen)
+	dk_return()
 endif()
 
 
 ### IMPORT ###
-dk_set(DOXYGEN_EXE "C:/Program Files/doxygen/bin/doxygen.exe")
-IF(NOT EXISTS ${DOXYGEN_EXE})
-	dk_import(https://sourceforge.net/projects/doxygen/files/rel-1.8.13/doxygen-1.8.13-setup.exe)
-	dk_set(QUEUE_BUILD ON)
-	WIN32_dk_queueCommand(${DKDOWNLOAD}/doxygen-1.8.13-setup.exe)
-ENDIF()
+LINUX_HOST_dk_set(DOXYGEN_EXE "/Applications/Doxygen.app") #FIXME
+if(NOT EXISTS ${DOXYGEN_EXE})
+	LINUX_HOST_dk_import(https://github.com/doxygen/doxygen/releases/download/Release_1_9_6/doxygen-1.9.6.linux.bin.tar.gz)
+	#LINUX_HOST_dk_command(${DKDOWNLOAD}/doxygen-1.9.6.linux.bin.tar.gz) #FIXME
+endif()
+
+MAC_HOST_dk_set(DOXYGEN_EXE "/Applications/Doxygen.app") #FIXME
+if(NOT EXISTS ${DOXYGEN_EXE})
+	MAC_HOST_dk_import(https://github.com/doxygen/doxygen/releases/download/Release_1_9_6/Doxygen-1.9.6.dmg) #FIXME:  The Downloaded file is a BYPASS file .dmg
+	MAC_HOST_dk_command(${DKDOWNLOAD}/Doxygen-1.9.6.dmg)
+endif()
+
+WIN_HOST_dk_set(DOXYGEN_EXE "C:/Program Files/doxygen/bin/doxygen.exe")
+if(NOT EXISTS ${DOXYGEN_EXE})
+	WIN_HOST_dk_import(https://github.com/doxygen/doxygen/releases/download/Release_1_9_6/doxygen-1.9.6-setup.exe)
+	WIN_HOST_dk_command(${DKDOWNLOAD}/doxygen-1.9.6-setup.exe)
+endif()

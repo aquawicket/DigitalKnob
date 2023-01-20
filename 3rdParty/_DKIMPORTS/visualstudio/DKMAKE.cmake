@@ -11,7 +11,8 @@
 # VS2022  https://aka.ms/vs/17/release/vs_community.exe
 
 if(NOT WIN_HOST)
-	return()
+	dk_undepend(visualstudio)
+	dk_return()
 endif()
 
 

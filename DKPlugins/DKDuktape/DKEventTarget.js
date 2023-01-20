@@ -2,7 +2,7 @@
 
 /*
 var stored_events = [];
-var EventFromCPP = function(pointer, event)
+var EventFromCPP = function EventFromCPP(pointer, event)
 {
 	//console.warn("EventFromCPP("+pointer+","+event.type+")");
 	for(var i=0; i<stored_events.length; i++){
@@ -15,7 +15,7 @@ var EventFromCPP = function(pointer, event)
 
 // https://dom.spec.whatwg.org/#interface-eventtarget
 instances = [];
-var EventTarget = function(pointer) {
+var EventTarget = function EventTarget(pointer) {
     this.pointer = pointer;
     for (var i = 0; i < instances.length; i++) {
         if (instances[i].pointer === pointer) {
@@ -30,7 +30,7 @@ var EventTarget = function(pointer) {
     this.listeners = {};
 
     Object.defineProperty(this, "addEventListener", {
-        value: function(type, callback, useCapture) {
+        value: function addEventListener(type, callback, useCapture) {
             if (!(type in this.listeners)) {
                 this.listeners[type] = [];
             }
@@ -43,7 +43,7 @@ var EventTarget = function(pointer) {
         }
     });
     Object.defineProperty(this, "removeEventListener", {
-        value: function(type, callback, useCapture) {
+        value: function removeEventListener(type, callback, useCapture) {
             if (!(type in this.listeners)) {
                 return;
             }
@@ -61,7 +61,7 @@ var EventTarget = function(pointer) {
         }
     });
     Object.defineProperty(this, "dispatchEvent", {
-        value: function(event) {
+        value: function dispatchEvent(event) {
             if (!(event.type in this.listeners)) {
                 return true;
             }

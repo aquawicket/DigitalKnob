@@ -1,6 +1,6 @@
 if(NOT LINUX AND NOT RASPBERRY)
 	dk_undepend(libgl1-mesa-dev)
-	return()
+	dk_return()
 endif()
 
 ### INSTALL ###

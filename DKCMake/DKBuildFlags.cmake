@@ -11,12 +11,12 @@
 # copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions :
 #
-# The above copyright noticeand this permission notice shall be included in all
+# The above copyright notice and this permission notice shall be included in all
 # copies or substantial portions of the Software.
 #
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 # AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
@@ -399,18 +399,18 @@ ANDROID32_dk_set(DKCMAKE_FLAGS
 	-DCMAKE_ANDROID_STL_TYPE=c++_static
 	-DCMAKE_TOOLCHAIN_FILE=${ANDROID-NDK}/build/cmake/android.toolchain.cmake)
 #ANDROID32_dk_set(DKCMAKE_C_COMPILER		${ANDROID_CLANG})
-ANDROID32_dk_set(DKCMAKE_C_FLAGS			"-DANDROID -DANDROID32 -frtti -std=c17") #-U__ANDROID_API__ -D__ANDROID_API__=26 -Wno-macro-redefined
-ANDROID32_dk_set(DKCMAKE_C_FLAGS_DEBUG		"-DDEBUG -D_DEBUG -frtti -g")
-ANDROID32_dk_set(DKCMAKE_C_FLAGS_RELEASE	"-DNDEBUG -frtti -O3")
+ANDROID32_dk_set(DKCMAKE_C_FLAGS			"-DANDROID -DANDROID32 -frtti -fexceptions -std=c17") #-U__ANDROID_API__ -D__ANDROID_API__=26 -Wno-macro-redefined
+ANDROID32_dk_set(DKCMAKE_C_FLAGS_DEBUG		"-DDEBUG -D_DEBUG -frtti -fexceptions -g")
+ANDROID32_dk_set(DKCMAKE_C_FLAGS_RELEASE	"-DNDEBUG -frtti -fexceptions -O3")
 #ANDROID32_dk_set(DKCMAKE_CXX_COMPILER		${ANDROID_CLANGXX})
-ANDROID32_dk_set(DKCMAKE_CXX_FLAGS			"-DANDROID -DANDROID32 -frtti -std=c++1z") #-U__ANDROID_API__ -D__ANDROID_API__=26 -Wno-macro-redefined
-ANDROID32_dk_set(DKCMAKE_CXX_FLAGS_DEBUG	"-DDEBUG -D_DEBUG -frtti -g")
-ANDROID32_dk_set(DKCMAKE_CXX_FLAGS_RELEASE	"-DNDEBUG -frtti -O3")
+ANDROID32_dk_set(DKCMAKE_CXX_FLAGS			"-DANDROID -DANDROID32 -frtti -fexceptions -std=c++1z") #-U__ANDROID_API__ -D__ANDROID_API__=26 -Wno-macro-redefined
+ANDROID32_dk_set(DKCMAKE_CXX_FLAGS_DEBUG	"-DDEBUG -D_DEBUG -frtti -fexceptions -g")
+ANDROID32_dk_set(DKCMAKE_CXX_FLAGS_RELEASE	"-DNDEBUG -frtti -fexceptions -O3")
 ANDROID32_dk_set(DKCONFIGURE_FLAGS			--disable-shared --enable-static)
 #ANDROID32_dk_set(DKCONFIGURE_CC			${ANDROID_CLANG})
-ANDROID32_dk_set(DKCONFIGURE_CFLAGS			"-DANDROID -DANDROID32 -frtti -std=c17") #-U__ANDROID_API__ -D__ANDROID_API__=26 -Wno-macro-redefined
+ANDROID32_dk_set(DKCONFIGURE_CFLAGS			"-DANDROID -DANDROID32 -frtti -fexceptions -std=c17") #-U__ANDROID_API__ -D__ANDROID_API__=26 -Wno-macro-redefined
 #ANDROID32_dk_set(DKCONFIGURE_CXX			${ANDROID_CLANGXX})
-ANDROID32_dk_set(DKCONFIGURE_CXXFLAGS		"-DANDROID -DANDROID32 -frtti -std=c++1z") #-U__ANDROID_API__ -D__ANDROID_API__=26 -Wno-macro-redefined
+ANDROID32_dk_set(DKCONFIGURE_CXXFLAGS		"-DANDROID -DANDROID32 -frtti -fexceptions -std=c++1z") #-U__ANDROID_API__ -D__ANDROID_API__=26 -Wno-macro-redefined
 
 # Android arm64-v8a (x64)
 ANDROID64_dk_set(DKCMAKE_FLAGS
@@ -427,18 +427,18 @@ ANDROID64_dk_set(DKCMAKE_FLAGS
 	-DCMAKE_ANDROID_STL_TYPE=c++_static
 	-DCMAKE_TOOLCHAIN_FILE=${ANDROID-NDK}/build/cmake/android.toolchain.cmake)
 #ANDROID64_dk_set(DKCMAKE_C_COMPILER		${ANDROID_CLANG})
-ANDROID64_dk_set(DKCMAKE_C_FLAGS			"-DANDROID -DANDROID64 -frtti -std=c17") #-U__ANDROID_API__ -D__ANDROID_API__=26 -Wno-macro-redefined
-ANDROID64_dk_set(DKCMAKE_C_FLAGS_DEBUG		"-DDEBUG -D_DEBUG -frtti -g")
-ANDROID64_dk_set(DKCMAKE_C_FLAGS_RELEASE	"-DNDEBUG -frtti -O3")
+ANDROID64_dk_set(DKCMAKE_C_FLAGS			"-DANDROID -DANDROID64 -frtti -fexceptions -std=c17") #-U__ANDROID_API__ -D__ANDROID_API__=26 -Wno-macro-redefined
+ANDROID64_dk_set(DKCMAKE_C_FLAGS_DEBUG		"-DDEBUG -D_DEBUG -frtti -fexceptions -g")
+ANDROID64_dk_set(DKCMAKE_C_FLAGS_RELEASE	"-DNDEBUG -frtti -fexceptions -O3")
 #ANDROID64_dk_set(DKCMAKE_CXX_COMPILER		${ANDROID_CLANGXX})
-ANDROID64_dk_set(DKCMAKE_CXX_FLAGS			"-DANDROID -DANDROID64 -frtti -std=c++1z") #-U__ANDROID_API__ -D__ANDROID_API__=26 -Wno-macro-redefined
-ANDROID64_dk_set(DKCMAKE_CXX_FLAGS_DEBUG	"-DDEBUG -D_DEBUG -frtti -g")
-ANDROID64_dk_set(DKCMAKE_CXX_FLAGS_RELEASE	"-DNDEBUG -frtti -O3")
+ANDROID64_dk_set(DKCMAKE_CXX_FLAGS			"-DANDROID -DANDROID64 -frtti -fexceptions -std=c++1z") #-U__ANDROID_API__ -D__ANDROID_API__=26 -Wno-macro-redefined
+ANDROID64_dk_set(DKCMAKE_CXX_FLAGS_DEBUG	"-DDEBUG -D_DEBUG -frtti -fexceptions -g")
+ANDROID64_dk_set(DKCMAKE_CXX_FLAGS_RELEASE	"-DNDEBUG -frtti -fexceptions -O3")
 ANDROID64_dk_set(DKCONFIGURE_FLAGS			--disable-shared --enable-static)
 #ANDROID64_dk_set(DKCONFIGURE_CC			${ANDROID_CLANG})
-ANDROID64_dk_set(DKCONFIGURE_CFLAGS			"-DANDROID -DANDROID64 -frtti -std=c17") #-U__ANDROID_API__ -D__ANDROID_API__=26 -Wno-macro-redefined
+ANDROID64_dk_set(DKCONFIGURE_CFLAGS			"-DANDROID -DANDROID64 -frtti -fexceptions -std=c17") #-U__ANDROID_API__ -D__ANDROID_API__=26 -Wno-macro-redefined
 #ANDROID64_dk_set(DKCONFIGURE_CXX			${ANDROID_CLANGXX})
-ANDROID64_dk_set(DKCONFIGURE_CXXFLAGS		"-DANDROID -DANDROID64 -frtti -std=c++1z") #-U__ANDROID_API__ -D__ANDROID_API__=26 -Wno-macro-redefined
+ANDROID64_dk_set(DKCONFIGURE_CXXFLAGS		"-DANDROID -DANDROID64 -frtti -fexceptions -std=c++1z") #-U__ANDROID_API__ -D__ANDROID_API__=26 -Wno-macro-redefined
 
 # Emscripten
 EMSCRIPTEN_dk_set(DKCMAKE_FLAGS					-DBUILD_SHARED_LIBS=OFF -DBUILD_STATIC_LIBS=ON)
@@ -554,12 +554,13 @@ endif()
 
 
 
-# GENERATOR                 Build_root         Target configs
-# ---------------------------------------------------
-# MSVC     					${OS}             /multiple  (Debug AND Release)
-# XCODE			            ${OS}             /multiple	 (Debug AND Release)
-# Unix Makefiles            ${OS}/${TYPE}     /single    (Debug OR Release)
-# ./configure               ${OS}/${TYPE}     /single	 (Debug OR Release)
+# GENERATOR			BUILD_DIR		OUTPUT_DIR
+# -----------------------------------------------
+# MSVC     			${OS}			${OS}/${TYPE}		
+# XCODE			    ${OS}			${OS}/${TYPE} 
+# MinGW Makefiles   ${OS}/${TYPE}	${OS}/${TYPE} 
+# Unix Makefiles    ${OS}/${TYPE}   ${OS}/${TYPE}  
+# ./configure       ${OS}/${TYPE}   ${OS}/${TYPE}
 if(VISUAL_STUDIO_IDE OR XCODE_IDE)
 	dk_set		(CMAKE_BUILD_TYPE DEBUG RELEASE)
 	dk_set		(BUILD_DIR ${OS})
@@ -579,36 +580,22 @@ endif()
 ############ CORE DEPENDENCIES ############
 dk_depend			(git)
 dk_depend			(cmake)
-WIN_HOST_dk_depend	(visualstudio)
-WIN_HOST_dk_depend	(imagemagick)
-MAC_HOST_dk_depend	(xcode)
-#LINUX_dk_depend	(kdevelop)
-LINUX_dk_depend		(libx11-dev)
-LINUX_dk_lib		(pthread)
-LINUX_dk_lib		(dl)
-LINUX_dk_lib		(libstdc++fs.a)
-RASPBERRY_dk_depend	(libx11-dev)
-RASPBERRY_dk_lib	(pthread)
-RASPBERRY_dk_lib	(dl)
-RASPBERRY_dk_lib	(libstdc++fs.a)
-RASPBERRY_dk_linkDir(/opt/vc/lib)
-RASPBERRY_dk_lib	(bcm_host)
 
 ANDROID_dk_depend	(dl)
 ANDROID_dk_depend	(log)
 ANDROID_dk_depend	(android)
 ANDROID_dk_depend	(m)
 
-ANDROID_dk_depend(ant)
-ANDROID_dk_depend(android-cmdline-tools)
-ANDROID_dk_depend(android-ndk)
-ANDROID_dk_depend(android-platforms)
-ANDROID_dk_depend(android-sources)
-ANDROID_dk_depend(android-system-images)
-ANDROID_dk_depend(android-platform-tools)
-ANDROID_dk_depend(android-build-tools)
-ANDROID_dk_depend(android-sdk-tools)
-ANDROID_dk_depend(android-cmake)
+ANDROID_dk_depend	(ant)
+ANDROID_dk_depend	(android-cmdline-tools)
+ANDROID_dk_depend	(android-ndk)
+ANDROID_dk_depend	(android-platforms)
+ANDROID_dk_depend	(android-sources)
+ANDROID_dk_depend	(android-system-images)
+ANDROID_dk_depend	(android-platform-tools)
+ANDROID_dk_depend	(android-build-tools)
+ANDROID_dk_depend	(android-sdk-tools)
+ANDROID_dk_depend	(android-cmake)
 
 #ANDROID_dk_depend	(openjdk-8u41)
 #ANDROID_dk_depend	(openjdk)
@@ -623,14 +610,32 @@ ANDROID_dk_depend	(visualstudio)
 EMSCRIPTEN_dk_depend(emsdk)
 EMSCRIPTEN_dk_depend(DKPhp)
 
+#LINUX_dk_depend	(kdevelop)
+LINUX_dk_depend		(libx11-dev)
+LINUX_dk_lib		(pthread)
+LINUX_dk_lib		(dl)
+LINUX_dk_lib		(libstdc++fs.a)
 
-WIN32_dk_set			(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -A Win32 ${DKCMAKE_FLAGS})
-WIN64_dk_set			(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -A x64 ${DKCMAKE_FLAGS})
-MAC_HOST_dk_set			(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -T buildsystem=1 ${DKCMAKE_FLAGS})
-LINUX_DEBUG_dk_set		(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -DCMAKE_BUILD_TYPE=Debug ${DKCMAKE_FLAGS})
-LINUX_RELEASE_dk_set	(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -DCMAKE_BUILD_TYPE=Release ${DKCMAKE_FLAGS})
-RASPBERRY_DEBUG_dk_set	(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -DCMAKE_BUILD_TYPE=Debug ${DKCMAKE_FLAGS})
-RASPBERRY_RELEASE_dk_set(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -DCMAKE_BUILD_TYPE=Release ${DKCMAKE_FLAGS})
+MAC_HOST_dk_depend	(xcode)
+
+RASPBERRY_dk_depend	(libx11-dev)
+RASPBERRY_dk_lib	(pthread)
+RASPBERRY_dk_lib	(dl)
+RASPBERRY_dk_lib	(libstdc++fs.a)
+RASPBERRY_dk_linkDir(/opt/vc/lib)
+RASPBERRY_dk_lib	(bcm_host)
+
+WIN_HOST_dk_depend	(visualstudio)
+WIN_HOST_dk_depend	(imagemagick)
+
+
+WIN32_dk_set				(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -A Win32 ${DKCMAKE_FLAGS})
+WIN64_dk_set				(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -A x64 ${DKCMAKE_FLAGS})
+MAC_HOST_dk_set				(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -T buildsystem=1 ${DKCMAKE_FLAGS})
+LINUX_DEBUG_dk_set			(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -DCMAKE_BUILD_TYPE=Debug ${DKCMAKE_FLAGS})
+LINUX_RELEASE_dk_set		(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -DCMAKE_BUILD_TYPE=Release ${DKCMAKE_FLAGS})
+RASPBERRY_DEBUG_dk_set		(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -DCMAKE_BUILD_TYPE=Debug ${DKCMAKE_FLAGS})
+RASPBERRY_RELEASE_dk_set	(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -DCMAKE_BUILD_TYPE=Release ${DKCMAKE_FLAGS})
 if(WIN_HOST)
 	ANDROID32_dk_set		(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -A ARM ${DKCMAKE_FLAGS})
 	ANDROID64_dk_set		(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -A ARM64 ${DKCMAKE_FLAGS})
@@ -641,13 +646,18 @@ endif()
 
 #dk_dump(EMSDK) #FIXME: not set
 EMSCRIPTEN_dk_set			(EMSDK ${3RDPARTY}/emsdk-main)
+if(WIN_HOST)
+	EMSCRIPTEN_dk_set		(EMSDK_ENV ${3RDPARTY}/emsdk-main/emsdk_env.bat;&)
+else()
+	EMSCRIPTEN_dk_unset		(EMSDK_ENV)
+endif()
 EMSCRIPTEN_dk_set			(EMSDK_TOOLCHAIN_FILE ${EMSDK}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake)
 EMSCRIPTEN_dk_set			(EMCONFIGURE ${EMSDK}/upstream/emscripten/emconfigure)
-EMSCRIPTEN_DEBUG_dk_set		(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -DCMAKE_TOOLCHAIN_FILE=${EMSDK_TOOLCHAIN_FILE} -DCMAKE_BUILD_TYPE=Debug ${DKCMAKE_FLAGS})
-EMSCRIPTEN_RELEASE_dk_set	(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -DCMAKE_TOOLCHAIN_FILE=${EMSDK_TOOLCHAIN_FILE} -DCMAKE_BUILD_TYPE=Release ${DKCMAKE_FLAGS})
+EMSCRIPTEN_DEBUG_dk_set		(DKCMAKE_BUILD ${EMSDK_ENV} ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -DCMAKE_TOOLCHAIN_FILE=${EMSDK_TOOLCHAIN_FILE} -DCMAKE_BUILD_TYPE=Debug ${DKCMAKE_FLAGS})
+EMSCRIPTEN_RELEASE_dk_set	(DKCMAKE_BUILD ${EMSDK_ENV} ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -DCMAKE_TOOLCHAIN_FILE=${EMSDK_TOOLCHAIN_FILE} -DCMAKE_BUILD_TYPE=Release ${DKCMAKE_FLAGS})
 
 if(EMSCRIPTEN)
-	dk_set	(DKCONFIGURE_BUILD ${EMCONFIGURE} ../../configure ${DKCONFIGURE_FLAGS})
+	dk_set(DKCONFIGURE_BUILD ${EMCONFIGURE} ../../configure ${DKCONFIGURE_FLAGS})
 else()
-	dk_set	(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})
+	dk_set(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})
 endif()

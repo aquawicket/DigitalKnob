@@ -1,8 +1,9 @@
-# https://developer.apple.com/documentation/agl/agl
+# https://developer.apple.com/documentation/agl/agl?language=objc
 if(NOT MAC)
 	dk_undepend(agl)
-	return()
+	dk_return()
 endif()
+
 
 dk_depend(carbon)
 dk_depend(opengl)

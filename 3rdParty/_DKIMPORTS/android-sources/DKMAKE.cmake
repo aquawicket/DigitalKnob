@@ -3,8 +3,9 @@
 
 if(NOT ANDROID)
 	dk_undepend(android-sources)
-	return()
+	dk_return()
 endif()
+
 
 dk_depend(android-sdk)
 

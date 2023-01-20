@@ -1,75 +1,75 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/UIEvent
 
-var UIEvent = function(pointer) {
+var UIEvent = function UIEvent(pointer) {
     // Properties
     /*
 	Object.defineProperty(this, "cancelBubble", { //Not standardized, Deprecated
-		get: function(){ 
+		get: function cancelBubble(){ 
 			return CPP_DKDomUIEvent_cancelBubble(pointer)
 		}
-		set: function(flag){ 
+		set: function cancelBubble(flag){ 
 			return CPP_DKDomUIEvent_cancelBubble(pointer, flag)
 		}
 	})
 	*/
     Object.defineProperty(this, "detail", {
         //Read only
-        get: function() {
+        get: function detail() {
             return CPP_DKDomUIEvent_detail(pointer)
         }
     })
     Object.defineProperty(this, "isChar", {
         //Read only
-        get: function() {
+        get: function isChar() {
             return CPP_DKDomUIEvent_isChar(pointer)
         }
     })
     Object.defineProperty(this, "layerX", {
         //Read only
-        get: function() {
+        get: function layerX() {
             return CPP_DKDomUIEvent_layerX(pointer)
         }
     })
     Object.defineProperty(this, "layerY", {
         //Read only
-        get: function() {
+        get: function layerY() {
             return CPP_DKDomUIEvent_layerY(pointer)
         }
     })
     /*
 	Object.defineProperty(this, "pageX", { //Read only
-		get: function(){ 
+		get: function pageX(){ 
 			return CPP_DKDomUIEvent_pageX(pointer)
 		}
 	})
 	Object.defineProperty(this, "pageY", { //Read only
-		get: function(){ 
+		get: function pageY(){ 
 			return CPP_DKDomUIEvent_pageY(pointer)
 		}
 	})
 	*/
     Object.defineProperty(this, "sourceCapabilities", {
         //Read only
-        get: function() {
+        get: function sourceCapabilities() {
             return CPP_DKDomUIEvent_sourceCapabilities(pointer)
         }
     })
     Object.defineProperty(this, "view", {
         //Read only
-        get: function() {
+        get: function view() {
             return CPP_DKDomUIEvent_view(pointer)
         }
     })
     /*
 	Object.defineProperty(this, "which", { //Read only
-		get: function(){ 
+		get: function which(){ 
 			return CPP_DKDomUIEvent_which(pointer)
 		}
 	})
 	*/
 
     // Methods
-    UIEvent.prototype.initUIEvent = function() {
+    UIEvent.prototype.initUIEvent = function initUIEvent() {
         //Deprecated
         CPP_DKDomUIEvent_initUIEvent(this.pointer)
     }

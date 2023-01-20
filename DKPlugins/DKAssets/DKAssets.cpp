@@ -12,12 +12,12 @@
 * copies of the Software, and to permit persons to whom the Software is
 * furnished to do so, subject to the following conditions :
 *
-* The above copyright noticeand this permission notice shall be included in all
+* The above copyright notice and this permission notice shall be included in all
 * copies or substantial portions of the Software.
 *
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
@@ -280,10 +280,10 @@ bool DKAssets::PackageAssets(DKString& dataFolder, DKString& headerFile){
 #if !WIN
 	#if HAVE_DKArchive
 		if(!DKArchive::Compress(dataFolder, dataFolder + "/../assets.zip"))
-			return false;
+			return DKERROR("DKArchive::Compress() failed! \n");
 	#endif
 	if (!DKUtil::Bin2C(dataFolder + "/../assets.zip", headerFile))
-		return false;
+		return DKERROR("DKUtil::Bin2C() failed! \n");
 	//DKFile::Delete(dataFolder + "/../assets.zip"); //delete lingering zip file;
 	//alter assets.h file (the memory intensive way :P)
 	/*
@@ -332,9 +332,9 @@ bool DKAssets::DeployAssets(){
 //Windows will use the resources interface
 #if WIN32
 	DKINFO("Extracting assets from executable windows resources . . . \n");	
-	HGLOBAL hResourceLoaded;		// handle to loaded resource 
+	HGLOBAL hResourceLoaded;	// handle to loaded resource 
 	HRSRC hRes;					// handle/ptr. to res. info. 
-	char *lpResLock;				// pointer to resource data 
+	char *lpResLock;			// pointer to resource data 
 	DWORD dwSizeRes;
 
 	DKFile::MakeDir(DKFile::local_assets);

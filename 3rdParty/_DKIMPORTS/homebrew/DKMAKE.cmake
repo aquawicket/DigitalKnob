@@ -1,7 +1,8 @@
 # https://github.com/Homebrew/brew
 # https://brew.sh/
 if(NOT MAC_HOST)
-	return()
+	dk_undepend(homebrew)
+	dk_return()
 endif()
 
 #dk_import(https://github.com/Homebrew/brew)

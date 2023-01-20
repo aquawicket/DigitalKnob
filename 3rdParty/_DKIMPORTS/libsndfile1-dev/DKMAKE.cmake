@@ -1,6 +1,6 @@
 if(NOT LINUX AND NOT RASPBERRY)
 	dk_undepend(libsndfile1-dev)
-	return()
+	dk_return()
 endif()
 
 ### INSTALL ###

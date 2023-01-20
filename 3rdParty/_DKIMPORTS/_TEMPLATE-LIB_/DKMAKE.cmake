@@ -1,6 +1,6 @@
 # to use this template, remove these lines
 dk_undepend(_TEMPLATE-LIB_)
-return()
+dk_return()
 #########################################
 
 # https://github.com/organization/package
@@ -11,21 +11,21 @@ return()
 
 
 ### INSTALL ###
-#dk_import	(https://organization.com/download/package-1.0.zip)
-dk_import	(https://github.com/organization/package.git)
+#dk_import(https://organization.com/download/package-1.0.zip)
+dk_import(https://github.com/organization/package.git)
 
 
 ### LINK ###
 dk_include			(${PACKAGE}/include)
-WIN_dk_libDebug		(${PACKAGE}/${OS}/${DEBUG_DIR}/package.lib)
-WIN_dk_libRelease	(${PACKAGE}/${OS}/${RELEASE_DIR}/package.lib)
 UNIX_dk_libDebug	(${PACKAGE}/${OS}/${DEBUG_DIR}/libpackage.a)
 UNIX_dk_libRelease	(${PACKAGE}/${OS}/${RELEASE_DIR}/libpackage.a)
+WIN_dk_libDebug		(${PACKAGE}/${OS}/${DEBUG_DIR}/package.lib)
+WIN_dk_libRelease	(${PACKAGE}/${OS}/${RELEASE_DIR}/package.lib)
 
 
 ### GENERATE ###
-dk_queueCommand	(${DKCMAKE_BUILD} ${PACKAGE})
+dk_queueCommand(${DKCMAKE_BUILD} ${PACKAGE})
 
 
 ### COMPILE ###
-dk_build(${PACKAGE_FOLDER} package)
+dk_build(${PACKAGE} package)

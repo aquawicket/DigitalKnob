@@ -11,12 +11,12 @@
 # copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions :
 #
-# The above copyright noticeand this permission notice shall be included in all
+# The above copyright notice and this permission notice shall be included in all
 # copies or substantial portions of the Software.
 #
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 # AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
@@ -608,11 +608,13 @@ dk_remove(${DKFunctions_ext} NOERROR)
 ###############################################################################
 # dk_return()
 #
-#	Print the CMAKE_CURRENT_LIST_DIR and return.
+#	Print the current cmake file and return
 #
 macro(dk_return)
 	#DKDEBUGFUNC(${ARGV})
-	message(STATUS "${CMAKE_CURRENT_LIST_DIR} -> dk_return()")
+	if(PRINT_DKRETURNS)
+		message(STATUS "${CMAKE_CURRENT_LIST_FILE} -> dk_return()")
+	endif()
 	return()
 endmacro()
 dk_createOsMacros("dk_return")
@@ -684,6 +686,7 @@ function(dk_unset variable)
 	#unset(${variable} CACHE)
 	#unset(variable CACHE)
 endfunction()
+dk_createOsMacros("dk_unset")
 
 
 ###############################################################################
@@ -2115,19 +2118,24 @@ dk_createOsMacros("dk_queueCommand")
 
 
 ###############################################################################
-# dk_visualStudioDebug(folder) #target #arch
+# dk_visualStudioDebug(path) #target #arch
 #
 #	TODO
 #
-#	@folder		- TODO
+#	@path		- TODO
 #
-function(dk_visualStudioDebug folder) #target #arch
+function(dk_visualStudioDebug path) #target #arch
 	DKDEBUGFUNC(${ARGV})
 	if(NOT WIN_HOST)
 		return()
 	endif()
 	
-	dk_findFiles(${3RDPARTY}/${folder}/${OS} *.sln sln_file)
+	if(NOT EXISTS ${path})
+		dk_assert("dk_visualStudioDebug(${path}) path does not exist")
+	endif()
+	
+	#dk_findFiles(${3RDPARTY}/${folder}/${OS} *.sln sln_file)
+	dk_findFiles(${path}/${OS} *.sln sln_file)
 	dk_getFilename(${sln_file} sln_file)
 	dk_getExtension(${sln_file} extension)
 	if(NOT ${extension} STREQUAL ".sln")
@@ -2135,37 +2143,47 @@ function(dk_visualStudioDebug folder) #target #arch
 	endif()
 	
 	if(DEBUG AND QUEUE_BUILD)
-		if(NOT EXISTS ${3RDPARTY}/${folder}/${OS}/${sln_file})
-			dk_assert("CANNOT FIND: ${3RDPARTY}/${folder}/${OS}/${sln_file}" )
+		#if(NOT EXISTS ${3RDPARTY}/${folder}/${OS}/${sln_file})
+		if(NOT EXISTS ${path}/${OS}/${sln_file})
+			#dk_assert("CANNOT FIND: ${3RDPARTY}/${folder}/${OS}/${sln_file}" )
+			dk_assert("CANNOT FIND: ${path}/${OS}/${sln_file}" )
 		endif()
 		if(${ARGC} GREATER 2)
-			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /t:${ARGV1} /p:Configuration=Debug /p:Platform=${ARGV2})
+			#set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /t:${ARGV1} /p:Configuration=Debug /p:Platform=${ARGV2})
+			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${OS}/${sln_file} /t:${ARGV1} /p:Configuration=Debug /p:Platform=${ARGV2})
 		elseif(${ARGC} GREATER 1)
-			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /t:${ARGV1} /p:Configuration=Debug)
+			#set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /t:${ARGV1} /p:Configuration=Debug)
+			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${OS}/${sln_file} /t:${ARGV1} /p:Configuration=Debug)
 		else()
-			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /p:Configuration=Debug)
+			#set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /p:Configuration=Debug)
+			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${OS}/${sln_file} /p:Configuration=Debug)
 		endif()
-		dk_executeProcess(${EXECUTE_COMMAND} WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
+		#dk_executeProcess(${EXECUTE_COMMAND} WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
+		dk_executeProcess(${EXECUTE_COMMAND} WORKING_DIRECTORY ${path}/${OS})
 	endif()
 endfunction()
 dk_createOsMacros("dk_visualStudioDebug" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# dk_visualStudioRelease(folder) #target #arch
+# dk_visualStudioRelease(path) #target #arch
 #
 #	TODO
 #
-#	@folder		- TODO
-#	@sln_file	- TODO
+#	@path		- TODO
 #
-function(dk_visualStudioRelease folder) #target #arch
+function(dk_visualStudioRelease path) #target #arch
 	DKDEBUGFUNC(${ARGV})
 	if(NOT WIN_HOST)
 		return()
 	endif()
 	
-	dk_findFiles(${3RDPARTY}/${folder}/${OS} *.sln sln_file)
+	if(NOT EXISTS ${path})
+		dk_assert("dk_visualStudioRelease(${path}) path does not exist")
+	endif()
+	
+	#dk_findFiles(${3RDPARTY}/${folder}/${OS} *.sln sln_file)
+	dk_findFiles(${path}/${OS} *.sln sln_file)
 	dk_getFilename(${sln_file} sln_file)
 	
 	dk_getExtension(${sln_file} extension)
@@ -2174,24 +2192,30 @@ function(dk_visualStudioRelease folder) #target #arch
 	endif()
 	
 	if(RELEASE AND QUEUE_BUILD)
-		if(NOT EXISTS ${3RDPARTY}/${folder}/${OS}/${sln_file})
-			dk_assert("CANNOT FIND: ${3RDPARTY}/${folder}/${OS}/${sln_file}" )
+		#if(NOT EXISTS ${3RDPARTY}/${folder}/${OS}/${sln_file})
+		if(NOT EXISTS ${path}/${OS}/${sln_file})
+			#dk_assert("CANNOT FIND: ${3RDPARTY}/${folder}/${OS}/${sln_file}" )
+			dk_assert("CANNOT FIND: ${path}/${OS}/${sln_file}")
 		endif()
 		if(${ARGC} GREATER 2)
-			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /t:${ARGV1} /p:Configuration=Release /p:Platform=${ARGV2})
+			#set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /t:${ARGV1} /p:Configuration=Release /p:Platform=${ARGV2})
+			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${OS}/${sln_file} /t:${ARGV1} /p:Configuration=Release /p:Platform=${ARGV2})
 		elseif(${ARGC} GREATER 1)
-			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /t:${ARGV1} /p:Configuration=Release)
+			#set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /t:${ARGV1} /p:Configuration=Release)
+			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${OS}/${sln_file} /t:${ARGV1} /p:Configuration=Release)
 		else()
-			set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /p:Configuration=Release)
+			#set(EXECUTE_COMMAND ${MSBUILD} ${3RDPARTY}/${folder}/${OS}/${sln_file} /p:Configuration=Release)
+			set(EXECUTE_COMMAND ${MSBUILD} ${path}/${OS}/${sln_file} /p:Configuration=Release)
 		endif()
-		dk_executeProcess(${EXECUTE_COMMAND} WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
+		#dk_executeProcess(${EXECUTE_COMMAND} WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
+		dk_executeProcess(${EXECUTE_COMMAND} WORKING_DIRECTORY ${path}/${OS})
 	endif()
 endfunction()
 dk_createOsMacros("dk_visualStudioRelease" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# dk_visualStudio(folder sln_file)
+# dk_visualStudio(path sln_file)
 #
 #	TODO
 #
@@ -2206,23 +2230,30 @@ dk_createOsMacros("dk_visualStudio" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# dk_xcodeDebug(folder) #target
+# dk_xcodeDebug(path) #target
 #
 #	TODO
 #
-#	@folder				- TODO
+#	@path				- TODO
 #	@target:(optional)	- TODO
 #
-function(dk_xcodeDebug folder)
+function(dk_xcodeDebug path)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT MAC_HOST)
 		return()
 	endif()
+	
+	if(NOT EXISTS ${path})
+		dk_assert("dk_xcodeDebug(${path}) path does not exist")
+	endif()
+	
 	if(DEBUG AND QUEUE_BUILD)
 		if(${ARGC} GREATER 1)
-			dk_executeProcess(xcodebuild -target ${ARGV1} -configuration Debug build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
+			#dk_executeProcess(xcodebuild -target ${ARGV1} -configuration Debug build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
+			dk_executeProcess(xcodebuild -target ${ARGV1} -configuration Debug build WORKING_DIRECTORY ${path}/${OS})
 		else()
-			dk_executeProcess(xcodebuild -configuration Debug build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
+			#dk_executeProcess(xcodebuild -configuration Debug build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
+			dk_executeProcess(xcodebuild -configuration Debug build WORKING_DIRECTORY ${path}/${OS})
 		endif()
 	endif()
 endfunction()
@@ -2230,23 +2261,30 @@ dk_createOsMacros("dk_xcodeDebug" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# dk_xcodeRelease(folder) #target
+# dk_xcodeRelease(path) #target
 #
 #	TODO
 #
-#	@folder				- TODO
+#	@path				- TODO
 #	@target:(optional)	- TODO
 #
-function(dk_xcodeRelease folder)
+function(dk_xcodeRelease path)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT MAC_HOST)
 		return()
 	endif()
+	
+	if(NOT EXISTS ${path})
+		dk_assert("dk_xcodeDebug(${path}) path does not exist")
+	endif()
+	
 	if(RELEASE AND QUEUE_BUILD)
 		if(${ARGC} GREATER 1)
-			dk_executeProcess(xcodebuild -target ${ARGV1} -configuration Release build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
+			#dk_executeProcess(xcodebuild -target ${ARGV1} -configuration Release build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
+			dk_executeProcess(xcodebuild -target ${ARGV1} -configuration Release build WORKING_DIRECTORY ${path}/${OS})
 		else()
-			dk_executeProcess(xcodebuild -configuration Release build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
+			#dk_executeProcess(xcodebuild -configuration Release build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS})
+			dk_executeProcess(xcodebuild -configuration Release build WORKING_DIRECTORY ${path}/${OS})
 		endif()
 	endif()
 endfunction()
@@ -2270,20 +2308,27 @@ dk_createOsMacros("dk_xcode" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# dk_ndkDebug(folder)
+# dk_ndkDebug(path)
 #
 #	TODO
 #
-#	@folder		- TODO
+#	@path		- TODO
 #
-function(dk_ndkDebug folder)
+function(dk_ndkDebug path)
 	DKDEBUGFUNC(${ARGV})
+	
+	if(NOT EXISTS ${path})
+		dk_assert("dk_ndkDebug(${path}) path does not exist")
+	endif()
+	
 	if(DEBUG AND QUEUE_BUILD)
 		if(WIN_HOST)
-			dk_executeProcess(${ANDROID-NDK}/ndk-build.cmd WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS}/Debug)
+			#dk_executeProcess(${ANDROID-NDK}/ndk-build.cmd WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS}/Debug)
+			dk_executeProcess(${ANDROID-NDK}/ndk-build.cmd WORKING_DIRECTORY ${path}/${OS}/Debug)
 		endif()
 		if(UNIX_HOST)
-			dk_executeProcess(${ANDROID-NDK}/ndk-build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS}/Debug)
+			#dk_executeProcess(${ANDROID-NDK}/ndk-build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS}/Debug)
+			dk_executeProcess(${ANDROID-NDK}/ndk-build WORKING_DIRECTORY ${path}/${OS}/Debug)
 		endif()
 	endif()
 endfunction()
@@ -2291,20 +2336,27 @@ dk_createOsMacros("dk_ndkDebug" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# dk_ndkRelease(folder)
+# dk_ndkRelease(path)
 #
 #	TODO
 #
-#	@folder		- TODO
+#	@path		- TODO
 #
-function(dk_ndkRelease folder)
+function(dk_ndkRelease path)
 	DKDEBUGFUNC(${ARGV})
+	
+	if(NOT EXISTS ${path})
+		dk_assert("dk_ndkRelease(${path}) path does not exist")
+	endif()
+	
 	if(RELEASE AND QUEUE_BUILD)
 		if(WIN_HOST)
-			dk_executeProcess(${ANDROID-NDK}/ndk-build.cmd WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS}/Release)
+			#dk_executeProcess(${ANDROID-NDK}/ndk-build.cmd WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS}/Release)
+			dk_executeProcess(${ANDROID-NDK}/ndk-build.cmd WORKING_DIRECTORY ${path}/${OS}/Release)
 		endif()
 		if(UNIX_HOST)
-			dk_executeProcess(${ANDROID-NDK}/ndk-build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS}/Release)
+			#dk_executeProcess(${ANDROID-NDK}/ndk-build WORKING_DIRECTORY ${3RDPARTY}/${folder}/${OS}/Release)
+			dk_executeProcess(${ANDROID-NDK}/ndk-build WORKING_DIRECTORY ${path}/${OS}/Release)
 		endif()
 	endif()
 endfunction()
@@ -2312,11 +2364,11 @@ dk_createOsMacros("dk_ndkRelease" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# dk_ndk(folder)
+# dk_ndk(path)
 #
 #	TODO
 #
-#	@folder		- TODO
+#	@path		- TODO
 #
 function(dk_ndk)
 	DKDEBUGFUNC(${ARGV})
@@ -2327,27 +2379,38 @@ dk_createOsMacros("dk_ndk" "NO_DEBUG_RELEASE_TAGS")
 
 
 ###############################################################################
-# dk_make(folder lib)
+# dk_make(path lib)
 #
 #	TODO
 #
-#	@folder 			- TODO
+#	@path 				- TODO
 #	@lib (optional)		- TODO
 #
-function(dk_make folder) #lib
+function(dk_make path) #lib
 	DKDEBUGFUNC(${ARGV})
+	
+	if(NOT EXISTS ${path})
+		dk_assert("dk_make(${path}) path does not exist")
+	endif()
+	
+	# https://github.com/emscripten-core/emscripten/issues/2005#issuecomment-32162107
 	if(EMSCRIPTEN)
+		dk_assert("No proper dk_make() implemented for emscripten")
 		dk_set(EMMAKE ${3RDPARTY}/emsdk-main/upstream/emscripten/emmake)
 		set(lib ${ARGV1})
-		dk_set(CURRENT_DIR ${3RDPARTY}/${folder}/${BUILD_DIR})
-		if(${ARGC} GREATER 1)
-			dk_queueCommand(${EMMAKE} make ${lib})
-		else()
-			dk_queueCommand(${EMMAKE} make)
-		endif()
+		#dk_set(CURRENT_DIR ${3RDPARTY}/${folder}/${BUILD_DIR})
+		dk_set(CURRENT_DIR ${path}/${BUILD_DIR})
+		#if(${ARGC} GREATER 1)
+		#	dk_queueCommand(${EMMAKE} make ${lib})
+		#else()
+		#	dk_queueCommand(${EMMAKE} make)
+		#endif()
+		DEBUG_dk_queueCommand(${CMAKE_COMMAND} --build . --config Debug)
+		RELEASE_dk_queueCommand(${CMAKE_COMMAND} --build . --config Release)
 	else()
 		set(lib ${ARGV1})
-		dk_set(CURRENT_DIR ${3RDPARTY}/${folder}/${BUILD_DIR})
+		#dk_set(CURRENT_DIR ${3RDPARTY}/${folder}/${BUILD_DIR})
+		dk_set(CURRENT_DIR ${path}/${BUILD_DIR})
 		if(${ARGC} GREATER 1)
 			dk_queueCommand(make ${lib})
 		else()
@@ -2358,28 +2421,67 @@ endfunction()
 
 
 ###############################################################################
-# dk_build(folder lib)
+# dk_build(path target)
 #
 #	TODO
 #
-#	@folder 			- TODO
-#	@lib (optional)		- TODO
+#	@path 				- TODO
+#	@target (optional)	- TODO
 #
-function(dk_build folder)
+function(dk_build path)
 	DKDEBUGFUNC(${ARGV})
-	if(NOT WIN_HOST AND ANDROID)
-		dk_make(${ARGV})
-	else()
-		if(NOT EMSCRIPTEN)
-			dk_visualStudio(${ARGV})
-			dk_xcode(${ARGV})
-		endif()
-		if(LINUX OR RASPBERRY OR EMSCRIPTEN)
-			dk_make(${ARGV})
-		endif()
+	
+	if(NOT EXISTS ${path})
+		dk_assert("dk_build(${path}) path does not exist")
 	endif()
 	
+	set(target ${ARGV1})
+	dk_setPath(${path}/${BUILD_DIR})
 	
+	# Build with CMake
+	if(EXISTS ${path}/${BUILD_DIR}/cmake_install.cmake)
+		dk_info("Building with CMake")
+		if(${ARGC} GREATER 1)
+			DEBUG_dk_queueCommand(${CMAKE_COMMAND} --build . --config Debug --target ${target})
+			RELEASE_dk_queueCommand(${CMAKE_COMMAND} --build . --config Release --target ${target})
+		else()
+			DEBUG_dk_queueCommand(${CMAKE_COMMAND} --build . --config Debug)
+			RELEASE_dk_queueCommand(${CMAKE_COMMAND} --build . --config Release)
+		endif()
+		return()
+	endif()
+	
+	# Build with MSBuild
+	file(GLOB sln "${path}/${BUILD_DIR}/*.sln")
+	if(sln)
+		dk_info("Building with MSBuild")
+		dk_visualStudio(${ARGV})
+		return()
+	endif()
+	
+	# Build with XCode
+	file(GLOB xcodeproj "${path}/${BUILD_DIR}/*.xcodeproj")
+	if(xcodeproj)
+		dk_info("Building with XCode")
+		dk_xcode(${ARGV})
+		return()
+	endif()
+	
+	# Build with make
+	if(EXISTS ${path}/${BUILD_DIR}/Makefile)
+		dk_info("Building with make")
+		dk_make(${ARGV})
+		return()
+	endif()
+	
+	# Build with Android NDK
+	if(EXISTS ${path}/${BUILD_DIR}/AndroidManifest.xml)
+		dk_info("Building with Android NDK")
+		dk_ndk(${ARGV})
+		return()
+	endif()
+	
+	dk_assert("dk_build(): ${path}/${BUILD_DIR} has no buildable files")
 endfunction()
 dk_createOsMacros("dk_build")
 
@@ -3924,7 +4026,7 @@ endfunction()
 
 
 ###############################################################################
-# dk_importDownload(url) #install_path #PATCH
+# dk_importDownload(url) install_path PATCH
 #
 #	TODO
 #
@@ -4263,6 +4365,7 @@ function(dk_getFileType path rtn-type)
 	endif()
 endfunction()
 
+
 ###############################################################################
 # dk_getAppDirectory(RESULT)
 #
@@ -4271,7 +4374,7 @@ endfunction()
 #	@RESULT		- TODO
 #
 function(dk_getAppDirectory RESULT)
-	#DKDEBUGFUNC(${ARGV})
+	DKDEBUGFUNC(${ARGV})
 	set(USE_32BIT 1)
 	if(WIN_HOST)
 		set(appDirectory "C:/Program Files")
@@ -4303,11 +4406,11 @@ endfunction()
 #
 #	Convert a string to lower case
 #
-#	@str		- TODO
-#	@RESULT		- TODO
+#	@str	- The input string to convert
+#	@RESULT	- Returns the converted output string
 #
 function(toLower str RESULT)
-	#DKDEBUGFUNC(${ARGV})
+	DKDEBUGFUNC(${ARGV})
 	string(TOLOWER "${str}" upper)
 	set(${RESULT} ${out} PARENT_SCOPE)
 endfunction()
@@ -4318,8 +4421,8 @@ endfunction()
 #
 #	Convert a string to upper case
 #
-#	@str		- TODO
-#	@RESULT		- TODO
+#	@str	- The input string to convert
+#	@RESULT	- Returns the converted output string
 #
 function(toUpper str RESULT)
 	#DKDEBUGFUNC(${ARGV})
@@ -4333,9 +4436,9 @@ endfunction()
 #
 #	Remove the extension from a file path
 #
-#	@path		- TODO
-#	@RESULT		- TODO
-#   NOERROR     - if any of the parameters equals NOERROR, dk_error() messages will not be displayed
+#	@path				- TODO
+#	@RESULT				- TODO
+#   NOERROR (optional)	- if any of the parameters equals NOERROR, dk_error() messages will not be displayed
 #
 function(dk_removeExtension path RESULT)
 	DKDEBUGFUNC(${ARGV})
@@ -4379,7 +4482,7 @@ endfunction()
 #
 #	Generate a folder/DKMAKE.cmake for a new plugin
 #
-#	@url		- TODO
+#	@url	- TODO
 #
 function(dk_createPlugin url)
 	DKDEBUGFUNC(${ARGV})
@@ -4400,9 +4503,10 @@ endfunction()
 ###############################################################################
 # dk_getGitBranchName(url RESULT)
 #
-#	TODO
+#	Return the name of the head branch from a git repository
 #
-#	@url		- TODO
+#	@url	- The git url
+#	@RESULT	- Returns the name of the head branch
 #
 #	https://stackoverflow.com/a/31919435
 #
@@ -4416,14 +4520,12 @@ endfunction()
 ###############################################################################
 # dk_printArgData()
 #
-#	TODO
+#	Print the current CMake scripte path and ARG* variables
 #
 macro(dk_printArgData)
-	#DKDEBUGFUNC(${ARGV})
-	dk_debug(" ")
+	DKDEBUGFUNC(${ARGV})
 	dk_debug(" ")
 	dk_debug("************************************************************")
-	dk_debug("	dk_import2(${ARGV})")
 	dk_debug(" ")
 	dk_debug(CMAKE_CURRENT_LIST_DIR)
 	dk_debug("*** ARG Variables ***")
@@ -4443,14 +4545,14 @@ endmacro()
 ###############################################################################
 # dk_printUrlData(url)
 #
-#	TODO
+#	Print url seperated into an array
 #
-#	@url		- TODO
+#	@url	- The url to print
 #
 function(dk_printUrlData url)
-	#DKDEBUGFUNC(${ARGV})
+	DKDEBUGFUNC(${ARGV})
 	if(NOT url)
-		dk_assert("url invalid")
+		dk_assert("url invalid! ")
 	endif()
 	dk_verbose("*** url Variables ***")
 	dk_verbose(url)
@@ -4474,12 +4576,12 @@ endfunction()
 ###############################################################################
 # dk_killProcess(name)
 #
-#	TODO
+#	Kill a running process by name
 #
-#	@url		- TODO
+#	@name		- name of the process to kill
 #
 function(dk_killProcess name)
-	#DKDEBUGFUNC(${ARGV})
+	DKDEBUGFUNC(${ARGV})
 	dk_executeProcess("taskkill /f /im ${name}" NOASSERT)
 endfunction()
 
@@ -4487,10 +4589,10 @@ endfunction()
 ###############################################################################
 # dk_clearScreen()
 #
-#	TODO
+#	Clear the console
 #
 function(dk_clearScreen)
-	#DKDEBUGFUNC(${ARGV})
+	DKDEBUGFUNC(${ARGV})
 	dk_debug("clear screen")
 	execute_process(COMMAND "cmd /c cls")
 endfunction()
@@ -4501,10 +4603,10 @@ endfunction()
 #
 #	Search for a library and include it with dk_lib
 #
-#	@name		- The name of the library
+#	@name	- The name of the library
 #
 function(dk_findLibrary name)
-	#DKDEBUGFUNC(${ARGV})
+	DKDEBUGFUNC(${ARGV})
 	find_library(${name}_LIBRARY ${name})
 	if(NOT WIN)
 		if(NOT ${name}_LIBRARY)
@@ -4522,11 +4624,14 @@ dk_createOsMacros("dk_findLibrary")
 
 
 ###############################################################################
-# dk_findFiles(path pattern) RECURSE RELATIVE
+# dk_findFiles(path pattern RESULT) RECURSE
 #
-#	Search for a file using a pattern I.E. *.txt
+#	Search for files within a path matching a pattern
 #
-#	@pattern		- The pattern to search for
+#	@path				- The path to search 
+#	@pattern			- The pattern to search for
+#	@RESULT				- Returns the list of file(s) if found
+#   RECURSE (optional) 	- Search the path recursivly 
 #
 function(dk_findFiles path pattern RESULT)
 	DKDEBUGFUNC(${ARGV})
@@ -4546,11 +4651,11 @@ endfunction()
 
 
 ###############################################################################
-# dk_shell()
+# dk_shell(args)
 #
-#	TODO
+#	Execute a UNIX style command
 #
-#	@args		- TODO
+#	@args	- The command and args to execute
 #
 macro(dk_shell args)
 	DKDEBUGFUNC(${ARGV})
@@ -4564,11 +4669,11 @@ dk_createOsMacros("dk_shell")
 
 
 ###############################################################################
-# dk_queueShell()
+# dk_queueShell(args)
 #
-#	TODO
+#	Queue the execution of a UNIX style command
 #
-#	@args		- TODO
+#	@args	- The command and args to execute
 #
 macro(dk_queueShell args)
 	DKDEBUGFUNC(${ARGV})
@@ -4604,6 +4709,23 @@ function(dk_resizeImage inpath width height outpath)
 		dk_warn("No method to resize images on this host OS")
 	endif()
 endfunction()
+
+
+###############################################################################
+# dk_pathContains(expression RESULT)
+#
+#	@expression	- The search expression to use. Example: "${path}/subfolder/*.exe"
+#   @RESULT		- Returns TRUE if the expression is found
+#
+function(dk_pathContains expression RESULT)
+	DKDEBUGFUNC(${ARGV})
+	FILE(GLOB contains "${expression}") 
+	if(contains)
+		set(${RESULT} TRUE PARENT_SCOPE)
+		return()
+	endif()
+endfunction()
+
 
 
 include(${DKFunctions_ext})
