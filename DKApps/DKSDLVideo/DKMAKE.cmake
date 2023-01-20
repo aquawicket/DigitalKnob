@@ -1,3 +1,4 @@
+dk_depend(msys2)
 dk_depend(ffmpeg)
 dk_depend(DK)
 dk_depend(DKAssets)

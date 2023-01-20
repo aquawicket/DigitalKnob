@@ -1960,6 +1960,12 @@ dk_createOsMacros("dk_setPath")
 #
 function(dk_msys)
 	DKDEBUGFUNC(${ARGV})
+	
+	if(USE_MSYS2)
+		dk_msys2(${ARGV})
+		return()
+	endif()
+	
 	if(QUEUE_BUILD)
 		string(REPLACE ";" " " str "${ARGV}")
 		set(bash "#!/bin/bash")
@@ -1986,22 +1992,6 @@ dk_createOsMacros("dk_msys")
 
 
 ###############################################################################
-# dk_queueMsys(args)
-#
-#	TODO
-#
-#	@args	- TODO
-#
-function(dk_queueMsys)
-	DKDEBUGFUNC(${ARGV})
-	if(QUEUE_BUILD)
-		dk_msys(${ARGV})
-	endif()	
-endfunction()
-dk_createOsMacros("dk_queueMsys")
-
-
-###############################################################################
 # dk_msys2(args)
 #
 #	TODO
@@ -2014,12 +2004,12 @@ function(dk_msys2)
 		string(REPLACE ";" " " str "${ARGV}")
 		set(bash "#!/bin/bash")
 		list(APPEND bash "cd ${CURRENT_DIR}")
-		if(WIN_32 OR ANDROID_32)
-			list(APPEND bash "export PATH=${MINGW32}/bin:$PATH")
+		if(WIN_32 OR ANDROID_32) # OR EMSCRIPTEN)
+			list(APPEND bash "export PATH=${MSYS2}/mingw32/bin:$PATH")
 		elseif(WIN_64 OR ANDROID_64)
-			list(APPEND bash "export PATH=${MINGW64}/bin:$PATH")
+			list(APPEND bash "export PATH=${MSYS2}/mingw64/bin:$PATH")
 		else()
-			dk_error("dk_msys2(): ERROR: not WIN_32, WIN_64, ANDROID_32 or ANDROID_64")
+			dk_assert("dk_msys2(): ERROR: not WIN_32, WIN_64, ANDROID_32 or ANDROID_64")
 		endif()
 		list(APPEND bash "export PATH=${MSYS2}/usr/bin:$PATH")
 		list(APPEND bash "${str}")
@@ -2033,6 +2023,22 @@ function(dk_msys2)
 	endif()
 endfunction()
 dk_createOsMacros("dk_msys2")
+
+
+###############################################################################
+# dk_queueMsys(args)
+#
+#	TODO
+#
+#	@args	- TODO
+#
+function(dk_queueMsys)
+	DKDEBUGFUNC(${ARGV})
+	if(QUEUE_BUILD)
+		dk_msys(${ARGV})
+	endif()	
+endfunction()
+dk_createOsMacros("dk_queueMsys")
 
 
 ###############################################################################

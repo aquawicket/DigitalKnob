@@ -16,55 +16,44 @@ dk_include			(${FFMPEG})
 DEBUG_dk_include	(${FFMPEG}/${OS}/${DEBUG_DIR})
 RELEASE_dk_include	(${FFMPEG}/${OS}/${RELEASE_DIR})
 
-# avcodec
-UNIX_dk_libDebug	(${FFMPEG}/${OS}/${DEBUG_DIR}/libavcodec/libavcodec.a)
-UNIX_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavcodec/libavcodec.a)
-WIN_dk_libDebug		(${FFMPEG}/${OS}/${DEBUG_DIR}/libavcodec/avcodec.lib)
-WIN_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavcodec/avcodec.lib)
+# libavcodec
+dk_libDebug		(${FFMPEG}/${OS}/${DEBUG_DIR}/libavcodec/libavcodec.a)
+dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavcodec/libavcodec.a)
 
-# avdevice
-UNIX_dk_libDebug	(${FFMPEG}/${OS}/${DEBUG_DIR}/libavdevice/libavdevice.a)
-UNIX_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavdevice/libavdevice.a)
-WIN_dk_libDebug		(${FFMPEG}/${OS}/${DEBUG_DIR}/libavdevice/avdevice.lib)
-WIN_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavdevice/avdevice.lib)
+# libavdevice
+dk_libDebug		(${FFMPEG}/${OS}/${DEBUG_DIR}/libavdevice/libavdevice.a)
+dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavdevice/libavdevice.a)
 
-# avfilter
-UNIX_dk_libDebug	(${FFMPEG}/${OS}/${DEBUG_DIR}/libavfilter/libavfilter.a)
-UNIX_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavfilter/libavfilter.a)
-WIN_dk_libDebug		(${FFMPEG}/${OS}/${DEBUG_DIR}/libavfilter/avfilter.lib)
-WIN_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavfilter/avfilter.lib)
+# libavfilter
+dk_libDebug		(${FFMPEG}/${OS}/${DEBUG_DIR}/libavfilter/libavfilter.a)
+dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavfilter/libavfilter.a)
 
-# avformat
-UNIX_dk_libDebug	(${FFMPEG}/${OS}/${DEBUG_DIR}/libavformat/libavformat.a)
-UNIX_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavformat/libavformat.a)
-WIN_dk_libDebug		(${FFMPEG}/${OS}/${DEBUG_DIR}/libavformat/avformat.lib)
-WIN_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavformat/avformat.lib)
+# libavformat
+dk_libDebug		(${FFMPEG}/${OS}/${DEBUG_DIR}/libavformat/libavformat.a)
+dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavformat/libavformat.a)
 
-# avutil
-UNIX_dk_libDebug	(${FFMPEG}/${OS}/${DEBUG_DIR}/libavutil/libavutil.a)
-UNIX_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavutil/libavutil.a)
-WIN_dk_libDebug		(${FFMPEG}/${OS}/${DEBUG_DIR}/libavutil/avutil.lib)
-WIN_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavutil/avutil.lib)
+# libavutil
+dk_libDebug		(${FFMPEG}/${OS}/${DEBUG_DIR}/libavutil/libavutil.a)
+dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavutil/libavutil.a)
 
-# swresample
-UNIX_dk_libDebug	(${FFMPEG}/${OS}/${DEBUG_DIR}/libswresample/libswresample.a)
-UNIX_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libswresample/libswresample.a)
-WIN_dk_libDebug		(${FFMPEG}/${OS}/${DEBUG_DIR}/libswresample/swresample.lib)
-WIN_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libswresample/swresample.lib)
+# libswresample
+dk_libDebug		(${FFMPEG}/${OS}/${DEBUG_DIR}/libswresample/libswresample.a)
+dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libswresample/libswresample.a)
 
-# swscale
-UNIX_dk_libDebug	(${FFMPEG}/${OS}/${DEBUG_DIR}/libswscale/libswscale.a)
-UNIX_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libswscale/libswscale.a)
-WIN_dk_libDebug		(${FFMPEG}/${OS}/${DEBUG_DIR}/libswscale/swscale.lib)
-WIN_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libswscale/swscale.lib)
+# libswscale
+dk_libDebug		(${FFMPEG}/${OS}/${DEBUG_DIR}/libswscale/libswscale.a)
+dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libswscale/libswscale.a)
 
 
 ### GENERATE / COMPILE ###
 DEBUG_dk_setPath		(${FFMPEG}/${OS}/${DEBUG_DIR})
 #DEBUG_dk_queueshell	(${DKCONFIGURE_BUILD})
-DEBUG_dk_queueshell		(../../configure --disable-x86asm)
+#DEBUG_dk_queueshell	(../../configure --disable-x86asm)
+DEBUG_dk_queueshell		(../../configure --pkg-config-flags=--static --disable-shared --enable-static)
 DEBUG_dk_queueshell		(make)
+
 RELEASE_dk_setPath		(${FFMPEG}/${OS}/${RELEASE_DIR})
 #RELEASE_dk_queueshell	(${DKCONFIGURE_BUILD})
-RELEASE_dk_queueshell	(../../configure --disable-x86asm)
+#RELEASE_dk_queueshell	(../../configure --disable-x86asm)
+RELEASE_dk_queueshell	(../../configure --pkg-config-flags=--static --disable-shared --enable-static)
 RELEASE_dk_queueshell	(make)

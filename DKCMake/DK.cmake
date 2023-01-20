@@ -18,6 +18,7 @@ set(PRINT_FILE_NAMES 			1 		CACHE INTERNAL "")	# print function call file names
 set(PRINT_FUNCTION_ARGUMENTS 	1 		CACHE INTERNAL "")	# print function call arguments
 set(PRINT_FUNCTION_NAMES 		1 		CACHE INTERNAL "")	# print function call function names
 set(PRINT_LINE_NUMBERS 			1		CACHE INTERNAL "")	# print function call file line numbers
+set(USE_MSYS2		 			1		CACHE INTERNAL "")	# use msys2 instead of msys
 set(WAIT_ON_ERRORS				0		CACHE INTERNAL "")	# pause cmake build script on errors
 set(WAIT_ON_WARNINGS			0		CACHE INTERNAL "")	# pause cmake build script on warnings
 

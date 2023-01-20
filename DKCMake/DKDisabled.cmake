@@ -33,7 +33,7 @@ dk_disable(jpeg)					# DEPRECATED: using libjpeg_turbo instead
 dk_disable(librocket)				# OBSOLETE: replaced by rmlui
 dk_disable(libx11)					# TODO
 dk_disable(mpg123)					# TODO
-dk_disable(msys2)					# TODO: currently using msys
+#dk_disable(msys2)					# TODO: currently using msys
 dk_disable(sdl2_gif)				# DEPRECATED: using SDL_Image animation instead
 dk_disable(sdl2_giflib_sa)			# DEPRECATED: updated version of sdl2_gif. Using SDL_Image animation instead
 dk_disable(simple-getch)			# DEPRECATED: kept for reference
