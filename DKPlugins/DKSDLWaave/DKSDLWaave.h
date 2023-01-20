@@ -40,8 +40,8 @@
 class DKSDLWaave : public DKObjectT<DKSDLWaave>
 {
 public:
-	void Init();
-	void End();
+	bool Init();
+	bool End();
 	
 	bool Handle(SDL_Event* event);
 	bool Play(const void* input, void* output);

@@ -30,16 +30,17 @@
 #include "DKSDLWindow/DKSDLWindow.h"
 
 
-void DKSDLWaave::Init(){
-	DKDebug();
+bool DKSDLWaave::Init(){
+	DKDEBUGFUNC();
 	stream = NULL;
 	streamObj = NULL;
 	DKSDLWindow::AddEventFunc(&DKSDLWaave::handle, this);
 	DKClass::RegisterFunc("DKSDLWaave::Play", &DKSDLWaave::Play, this);
+	return true;
 }
 
-void DKSDLWaave::End(){
-	DKDebug();
+bool DKSDLWaave::End(){
+	DKDEBUGFUNC();
 	if(stream)
 		WV_closeStream(stream);
 
@@ -49,10 +50,11 @@ void DKSDLWaave::End(){
 
 	/* close the waave engine */
 	WV_waaveClose();
+	return true;
 }
 
 bool DKSDLWaave::Handle(SDL_Event *event){
-	DKDebug(event);
+	DKDEBUGFUNC(event);
 	if(event->type == WV_REFRESH_EVENT){
 		WV_refreshVideoFrame(event);
 		return true;
@@ -60,13 +62,10 @@ bool DKSDLWaave::Handle(SDL_Event *event){
 	else if (event->type == WV_EOF_EVENT){
 		//closePlayer();
 		DKINFO("DKSDLWaave::handle(): end of file\n");
-		if (stream){
+		if (stream)
 			WV_closeStream(stream);
-		}
-
-		if (streamObj){ //close the streaming object
+		if (streamObj) //close the streaming object
 			WV_freeStreamRendererObj(streamObj);
-		}
 		return true;
 	}
 
@@ -74,9 +73,10 @@ bool DKSDLWaave::Handle(SDL_Event *event){
 }
 
 bool DKSDLWaave::Play(const void* input, void* output){
-	DKDebug(input, output);
+	DKDEBUGFUNC(input, output);
 	DKString path = *(DKString*)input;
-	if(!DKFile::VerifyPath(path)) { return false; }
+	if(!DKFile::VerifyPath(path))
+		return DKERROR("DKFile::VerifyPath() failed! \n");
 
 	WV_waaveInit(WAAVE_INIT_AUDIO | WAAVE_INIT_VIDEO);
 	stream = WV_getStream(path.c_str());
