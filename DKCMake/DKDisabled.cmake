@@ -404,7 +404,7 @@ if(LINUX)
 	dk_disable(DKUpdate)			# error: need to implement boost::placeholders
 	dk_disable(DKWebSockets)		# requires libwebsockets, uwebsockets
 	dk_disable(dukluv)
-	dk_disable(ffmpeg)
+	#dk_disable(ffmpeg)
 	dk_disable(fontconfig)
 	dk_disable(gdal)
 	dk_disable(gnutls)
@@ -431,7 +431,7 @@ if(LINUX)
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(uwebsockets)			# requires openssl
 	dk_disable(waave)
-	dk_disable(x264)
+	#dk_disable(x264)
 	dk_disable(x265)
 endif(LINUX)
 
