@@ -45,6 +45,12 @@ bool DKSDLVideo::End() {
 	return true;
 }
 
+bool DKSDLVideo::Open(const DKString& file) {
+	AVFormatContext *pFormatCtx = NULL;
+	if(avformat_open_input(&pFormatCtx, file.c_str(), NULL, 0, NULL) != 0)
+		return DKERROR("avformat_open_input() failed! \n");
+}
+
 bool DKSDLVideo::OnEvent(SDL_Event *event) {
 	DKDEBUGFUNC(event);
 	return false;

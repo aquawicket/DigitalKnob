@@ -45,6 +45,7 @@ public:
 	void Init();
 	void End();
 	
+	bool Open(const DKString& file);
 	bool Handle(SDL_Event* event);
 	bool Play(const void* input, void* output);
 };
