@@ -1,6 +1,7 @@
 # https://github.com/Homebrew/brew
 # https://brew.sh/
 if(NOT MAC_HOST)
+	dk_undepend(homebrew)
 	dk_return()
 endif()
 

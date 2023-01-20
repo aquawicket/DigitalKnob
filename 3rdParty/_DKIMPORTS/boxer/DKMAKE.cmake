@@ -1,9 +1,9 @@
 # https://github.com/aaronmjacobs/Boxer.git
 
-
-### OS CHECK ###
-RASPBERRY_dk_return()
-ANDROID_dk_return()
+if(ANDROID OR RASPBERRY)
+	dk_undepend(boxer)
+	dk_return()
+endif()
 
 
 ### DEPEND ###

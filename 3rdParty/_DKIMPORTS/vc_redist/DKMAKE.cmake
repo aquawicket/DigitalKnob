@@ -6,9 +6,11 @@
 # VCRUNTIME140.dll
 
 if(NOT WIN_HOST)
+	dk_undepend(vc_redist)
 	dk_return()
 endif()
 if(VISUALSTUDIO)
+	#dk_undepend(vc_redist)
 	#dk_return()
 endif()
 

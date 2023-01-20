@@ -1,4 +1,5 @@
 if(NOT UNIX_HOST)
+	dk_undepend(libglfw3-dev)
 	dk_return()
 endif()
 

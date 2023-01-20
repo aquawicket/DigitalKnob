@@ -1,4 +1,5 @@
 if(NOT WIN_HOST)
+	dk_undepend(msinttypes)
 	dk_return()
 endif()
 ## https://raw.githubusercontent.com/SummersEpsilon/msinttypes/master/msinttypes-r26.zip

@@ -1,4 +1,5 @@
 if(NOT LINUX_HOST)
+	dk_undepend(libgtkglext1-dev)
 	dk_return()
 endif()
 

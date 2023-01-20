@@ -1,6 +1,7 @@
 # https://developer.apple.com/documentation/imageio
 
 if(NOT MAC_HOST)
+	dk_undepend(imageio)
 	dk_return()
 endif()
 

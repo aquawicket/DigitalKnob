@@ -1,6 +1,7 @@
 # https://developer.apple.com/library/archive/documentation/MusicAudio/Conceptual/CoreAudioOverview/WhatisCoreAudio/WhatisCoreAudio.html
 
 if(NOT APPLE)
+	dk_undepend(core_audio)
 	dk_return()
 endif()
 

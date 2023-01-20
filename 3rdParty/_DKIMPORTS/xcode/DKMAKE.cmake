@@ -3,6 +3,7 @@
 # Apple Frameworks https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/OSX_Technology_Overview/SystemFrameworks/SystemFrameworks.html
 
 if(NOT MAC_HOST)
+	dk_undepend(xcode)
 	dk_return()
 endif()
 

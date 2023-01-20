@@ -2,6 +2,7 @@
 # https://github.com/notepad-plus-plus.git
 
 if(NOT WIN_HOST)
+	dk_undepend(notepadpp)
 	dk_return()
 endif()
 	

@@ -1,6 +1,7 @@
 # https://github.com/doxygen/doxygen.git
 # https://sourceforge.net/projects/doxygen
 if(NOT WIN_HOST)
+	dk_undepend(doxygen)
 	dk_return()
 endif()
 

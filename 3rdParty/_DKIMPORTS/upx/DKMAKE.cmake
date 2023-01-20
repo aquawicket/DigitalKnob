@@ -7,6 +7,7 @@
 # https://github.com/upx/upx/releases/download/v3.96/upx-3.96-dos.zip
 
 if(ANDROID OR IOS OR IOSSIM OR MAC)
+	dk_undepend(upx)
 	dk_return()
 endif()
 

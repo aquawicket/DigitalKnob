@@ -2,7 +2,10 @@
 #
 # https://invisible-island.net/datafiles/release/ncurses.tar.gz
 
-WIN_dk_return()
+if(WIN)
+	dk_undepend(ncurses)
+	dk_return()
+endif()
 
 
 ### IMPORT ###

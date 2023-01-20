@@ -1,4 +1,5 @@
 if(NOT WIN)
+	dk_undepend(pdh.lib)
 	dk_return()
 endif()
 

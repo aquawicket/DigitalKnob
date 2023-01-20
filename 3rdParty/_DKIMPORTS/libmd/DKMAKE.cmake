@@ -1,6 +1,7 @@
 # https://github.com/guillemj/libmd.git
 
 if(NOT IOSSIM)
+	dk_undepend(libmd)
 	dk_return()
 endif()
 

@@ -1,4 +1,5 @@
 if(NOT MAC_HOST)
+	dk_undepend(metal-cpp)
 	dk_return()
 endif()
 

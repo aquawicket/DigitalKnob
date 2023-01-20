@@ -3,6 +3,7 @@
 # https://github.com/XQuartz/XQuartz/releases/download/XQuartz-2.8.1/XQuartz-2.8.1.dmg
 
 if(NOT MAC)
+	dk_undepend(xquartz)
 	dk_return()
 endif()
 

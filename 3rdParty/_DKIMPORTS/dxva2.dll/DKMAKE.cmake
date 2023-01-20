@@ -1,6 +1,7 @@
 # https://dll.website/dxva2-dll
 
 if(NOT WIN)
+	dk_undepend(dxva2.dll)
 	dk_return()
 endif()
 

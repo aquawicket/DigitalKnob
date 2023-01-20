@@ -2,6 +2,7 @@
 # https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs922/gs922w64.exe
 # https://silentinstallhq.com/ghostscript-silent-install-how-to-guide/
 if(NOT WIN_HOST)
+	dk_undepend(ghostscript)
 	dk_return()
 endif()
 
