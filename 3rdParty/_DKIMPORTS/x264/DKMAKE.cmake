@@ -1,6 +1,10 @@
 # https://code.videolan.org/videolan/x264.git
 
 
+### DEPENDS ###
+dk_depend(nasm)
+
+
 ### IMPORT ###
 dk_import(https://code.videolan.org/videolan/x264.git)
 
