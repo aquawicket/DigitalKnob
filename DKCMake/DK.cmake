@@ -1,8 +1,8 @@
 include_guard()
 
 #################### SETTINGS ############################
-set(BACKUP_APP_EXECUTABLES		1		CACHE INTERNAL "")	# backup previous app executable when rebuilding
-#set(BACKUP_APP_USER_DATA		1		CACHE INTERNAL "")	# preserve assets/USER folder when building 
+set(BACKUP_APP_EXECUTABLES		0		CACHE INTERNAL "")	# backup previous app executable when rebuilding
+#set(BACKUP_APP_USER_DATA		0		CACHE INTERNAL "")	# preserve assets/USER folder when building 
 set(BYPASS_DISABLE				0		CACHE INTERNAL "")	# bypass dk_disable() commands
 set(DKDEBUGFUNC_ENABLED			0		CACHE INTERNAL "")	# enable DKDEBUGFUNC() function to print function calls
 set(DKDEBUG_ENABLED				1		CACHE INTERNAL "")	# enable dk_debug() functions
