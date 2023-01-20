@@ -537,6 +537,7 @@ if(RASPBERRY)
 	dk_disable(libwebp)
 	dk_disable(libxml2)
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
+	dk_disable(nasm)
 	dk_disable(opencv)				# build errors
 	dk_disable(openframeworks)		# error: cannot find opengles
 	dk_disable(openssl)				# lots of undefined references
