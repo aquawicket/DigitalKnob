@@ -147,8 +147,8 @@ bool DKSDLVideo::Open(const DKString& file) {
 	}
 }
 
+/*
 bool DKSDLVideo::Close() {
-	/*
 	// Free the RGB image
 	av_free(buffer);
 	av_free(pFrameRGB);
@@ -162,9 +162,9 @@ bool DKSDLVideo::Close() {
 
 	// Close the video file
 	avformat_close_input(&pFormatCtx);
-	*/
 	return true;
 }
+*/
 
 void DKSDLVideo::SaveFrame(AVFrame *pFrame, int width, int height, int iFrame) {
 	FILE *pFile;
