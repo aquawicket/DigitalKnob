@@ -20,8 +20,8 @@ WIN_dk_libRelease	(${X264}/${OS}/${RELEASE_DIR}/x264.lib)
 
 ### GENERATE / COMPILE ###
 DEBUG_dk_setPath		(${X264}/${OS}/${DEBUG_DIR})
-DEBUG_dk_queueShell		(${DKCONFIGURE_BUILD})
+DEBUG_dk_queueShell		(${DKCONFIGURE_BUILD} --disable-asm)
 DEBUG_dk_queueShell		(make)
 RELEASE_dk_setPath		(${X264}/${OS}/${RELEASE_DIR})
-RELEASE_dk_queueShell	(${DKCONFIGURE_BUILD})
+RELEASE_dk_queueShell	(${DKCONFIGURE_BUILD} --disable-asm)
 RELEASE_dk_queueShell	(make)
