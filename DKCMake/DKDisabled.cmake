@@ -322,7 +322,7 @@ if(IOS OR IOSSIM)
 	dk_disable(DKVncClient)			# requires libvncserver
 	dk_disable(DKVncServer)			# requires libvncserver
 	dk_disable(dukluv)
-	dk_disable(ffmpeg)
+	#dk_disable(ffmpeg)
 	dk_disable(fontconfig)
 	dk_disable(gdal)
 	dk_disable(gzip)
@@ -367,7 +367,7 @@ if(IOS OR IOSSIM)
 	dk_disable(tiff)				# install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executable target "fax2ps"
 	dk_disable(waave)				# ** BUILD FAILED ** src/audio_decoder.c
 	dk_disable(wasm3)				# CMake Error: install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executbale target "wasm3"
-	dk_disable(x264)
+	#dk_disable(x264)
 	dk_disable(x265)
 	dk_disable(zstd)
 endif(IOS OR IOSSIM)
