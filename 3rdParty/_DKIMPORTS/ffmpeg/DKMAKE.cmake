@@ -15,46 +15,46 @@ dk_import(https://git.ffmpeg.org/ffmpeg.git)
 dk_include			(${FFMPEG}/src)
 
 # avcodec
-UNIX_dk_libDebug	(${FFMPEG}/${OS}/${DEBUG_DIR}/libavcodec.a)
-UNIX_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavcodec.a)
-WIN_dk_libDebug		(${FFMPEG}/${OS}/${DEBUG_DIR}/avcodec.lib)
-WIN_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/avcodec.lib)
+UNIX_dk_libDebug	(${FFMPEG}/${OS}/${DEBUG_DIR}/libavcodec/libavcodec.a)
+UNIX_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavcodec/libavcodec.a)
+WIN_dk_libDebug		(${FFMPEG}/${OS}/${DEBUG_DIR}/libavcodec/avcodec.lib)
+WIN_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavcodec/avcodec.lib)
 
 # avdevice
-UNIX_dk_libDebug	(${FFMPEG}/${OS}/${DEBUG_DIR}/libavdevice.a)
-UNIX_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavdevice.a)
-WIN_dk_libDebug		(${FFMPEG}/${OS}/${DEBUG_DIR}/avdevice.lib)
-WIN_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/avdevice.lib)
+UNIX_dk_libDebug	(${FFMPEG}/${OS}/${DEBUG_DIR}/libavdevice/libavdevice.a)
+UNIX_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavdevice/libavdevice.a)
+WIN_dk_libDebug		(${FFMPEG}/${OS}/${DEBUG_DIR}/libavdevice/avdevice.lib)
+WIN_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavdevice/avdevice.lib)
 
 # avfilter
-UNIX_dk_libDebug	(${FFMPEG}/${OS}/${DEBUG_DIR}/libavfilter.a)
-UNIX_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavfilter.a)
-WIN_dk_libDebug		(${FFMPEG}/${OS}/${DEBUG_DIR}/avfilter.lib)
-WIN_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/avfilter.lib)
+UNIX_dk_libDebug	(${FFMPEG}/${OS}/${DEBUG_DIR}/libavfilter/libavfilter.a)
+UNIX_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavfilter/libavfilter.a)
+WIN_dk_libDebug		(${FFMPEG}/${OS}/${DEBUG_DIR}/libavfilter/avfilter.lib)
+WIN_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavfilter/avfilter.lib)
 
 # avformat
-UNIX_dk_libDebug	(${FFMPEG}/${OS}/${DEBUG_DIR}/libavformat.a)
-UNIX_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavformat.a)
-WIN_dk_libDebug		(${FFMPEG}/${OS}/${DEBUG_DIR}/avformat.lib)
-WIN_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/avformat.lib)
+UNIX_dk_libDebug	(${FFMPEG}/${OS}/${DEBUG_DIR}/libavformat/libavformat.a)
+UNIX_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavformat/libavformat.a)
+WIN_dk_libDebug		(${FFMPEG}/${OS}/${DEBUG_DIR}/libavformat/avformat.lib)
+WIN_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavformat/avformat.lib)
 
 # avutil
-UNIX_dk_libDebug	(${FFMPEG}/${OS}/${DEBUG_DIR}/libavutil.a)
-UNIX_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavutil.a)
-WIN_dk_libDebug		(${FFMPEG}/${OS}/${DEBUG_DIR}/avutil.lib)
-WIN_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/avutil.lib)
+UNIX_dk_libDebug	(${FFMPEG}/${OS}/${DEBUG_DIR}/libavutil/libavutil.a)
+UNIX_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavutil/libavutil.a)
+WIN_dk_libDebug		(${FFMPEG}/${OS}/${DEBUG_DIR}/libavutil/avutil.lib)
+WIN_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavutil/avutil.lib)
 
 # swresample
-UNIX_dk_libDebug	(${FFMPEG}/${OS}/${DEBUG_DIR}/libswresample.a)
-UNIX_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libswresample.a)
-WIN_dk_libDebug		(${FFMPEG}/${OS}/${DEBUG_DIR}/swresample.lib)
-WIN_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/swresample.lib)
+UNIX_dk_libDebug	(${FFMPEG}/${OS}/${DEBUG_DIR}/libswresample/libswresample.a)
+UNIX_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libswresample/libswresample.a)
+WIN_dk_libDebug		(${FFMPEG}/${OS}/${DEBUG_DIR}/libswresample/swresample.lib)
+WIN_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libswresample/swresample.lib)
 
 # swscale
-UNIX_dk_libDebug	(${FFMPEG}/${OS}/${DEBUG_DIR}/libswscale.a)
-UNIX_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libswscale.a)
-WIN_dk_libDebug		(${FFMPEG}/${OS}/${DEBUG_DIR}/swscale.lib)
-WIN_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/swscale.lib)
+UNIX_dk_libDebug	(${FFMPEG}/${OS}/${DEBUG_DIR}/libswscale/libswscale.a)
+UNIX_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libswscale/libswscale.a)
+WIN_dk_libDebug		(${FFMPEG}/${OS}/${DEBUG_DIR}/libswscale/swscale.lib)
+WIN_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libswscale/swscale.lib)
 
 
 ### GENERATE / COMPILE ###
