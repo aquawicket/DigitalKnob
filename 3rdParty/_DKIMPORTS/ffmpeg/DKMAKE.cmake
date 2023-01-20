@@ -21,8 +21,10 @@ WIN_dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/ffmpeg.lib)
 
 ### GENERATE / COMPILE ###
 DEBUG_dk_setPath		(${FFMPEG}/${OS}/${DEBUG_DIR})
-DEBUG_dk_queueshell		(${DKCONFIGURE_BUILD})
+#DEBUG_dk_queueshell	(${DKCONFIGURE_BUILD})
+DEBUG_dk_queueshell		(../../configure)
 DEBUG_dk_queueshell		(make)
 RELEASE_dk_setPath		(${FFMPEG}/${OS}/${RELEASE_DIR})
-RELEASE_dk_queueshell	(${DKCONFIGURE_BUILD})
+#RELEASE_dk_queueshell	(${DKCONFIGURE_BUILD})
+RELEASE_dk_queueshell	(../../configure)
 RELEASE_dk_queueshell	(make)
