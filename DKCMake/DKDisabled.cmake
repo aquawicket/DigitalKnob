@@ -79,7 +79,7 @@ if(ANDROID)
 	dk_disable(DKScreenRecorder)	# requires opencv
 	dk_disable(DKSDLCef)			# requires cef_binary
 	dk_disable(DKSDLOsg)			# requires openscenegraph
-	dk_disable(DKSDLVideo)			# requires ffmpeg
+	#dk_disable(DKSDLVideo)			# requires ffmpeg
 	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSFMLRml)			# requires sfml
 	dk_disable(DKSFMLWindow)		# requires sfml
@@ -204,7 +204,7 @@ if(EMSCRIPTEN)
 	dk_disable(DKSDLAudio)
 	dk_disable(DKSDLCef)
 	dk_disable(DKSDLMetalWindow)
-	dk_disable(DKSDLVideo)			# requires waave
+	#dk_disable(DKSDLVideo)			# requires ffmpeg
 	dk_disable(DKSDLWav)
 	dk_disable(DKSFMLRml)
 	dk_disable(DKSFMLWindow)
@@ -312,7 +312,7 @@ if(IOS OR IOSSIM)
 	dk_disable(DKScreenRecorder)	# requires opencv
 	dk_disable(DKSDLCef)			# requires cef_binary
 	dk_disable(DKSDLOsg)			# requires openscenegraph 
-	dk_disable(DKSDLVideo)			# requires ffmpeg
+	#dk_disable(DKSDLVideo)			# requires ffmpeg
 	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSFMLRml)			# requires sfml
 	dk_disable(DKSFMLWindow)		# requires sfml
@@ -396,7 +396,7 @@ if(LINUX)
 	dk_disable(DKOSGVideo)			# TODO
 	dk_disable(DKOSGWidget)			# build errors
 	dk_disable(DKScreenRecorder)
-	dk_disable(DKSDLVideo)			# requires waave
+	#dk_disable(DKSDLVideo)			# requires ffmpeg
 	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSFMLRml)			# INCOMPLETE
 	dk_disable(DKThread)			# error: need to implement boost::placeholders
@@ -449,7 +449,7 @@ if(MAC)
 	dk_disable(DKOSGVideo)			# TODO
 	dk_disable(DKOSGWidget)			# build errors
 	dk_disable(DKScreenRecorder)
-	dk_disable(DKSDLVideo)			# requires ffmpeg
+	#dk_disable(DKSDLVideo)			# requires ffmpeg
 	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSFMLRml)			# INCOMPLETE
 	dk_disable(DKThread)			# Error: 'boost/thread/xtime.hpp:24 expected identifier TIME_UTC_=1
@@ -508,7 +508,7 @@ if(RASPBERRY)
 	dk_disable(DKOSGVideo)			# TODO
 	dk_disable(DKOSGWidget)			# build errors
 	dk_disable(DKScreenRecorder)	# requires opencv
-	dk_disable(DKSDLVideo)			# requires ffmpeg
+	#dk_disable(DKSDLVideo)			# requires ffmpeg
 	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSFMLRml)			# INCOMPLETE
 	dk_disable(DKThread)			# requires threadpool
