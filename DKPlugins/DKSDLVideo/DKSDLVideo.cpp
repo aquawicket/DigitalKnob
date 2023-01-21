@@ -78,7 +78,8 @@ bool DKSDLVideo::Open(const DKString& file) {
 	bool foundAudio = false;
     for(int i = 0; i < pFormatCtx->nb_streams; i++) {
         AVCodecParameters *localparam = pFormatCtx->streams[i]->codecpar;
-        AVCodec *localcodec = avcodec_find_decoder(localparam->codec_id);
+        //AVCodec *localcodec = avcodec_find_decoder(localparam->codec_id);
+		const AVCodec *localcodec = avcodec_find_decoder(localparam->codec_id);
         if(localparam->codec_type == AVMEDIA_TYPE_VIDEO && !foundVideo) {
             vidCodec = localcodec;
             vidpar = localparam;
