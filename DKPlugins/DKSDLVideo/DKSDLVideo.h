@@ -34,9 +34,11 @@
 
 //WARNING_DISABLE
 #include "SDL.h"
-#include "libavcodec/avcodec.h"
-#include "libavformat/avformat.h"
-#include "libswscale/swscale.h"
+extern "C" {
+	#include "libavcodec/avcodec.h"
+	#include "libavformat/avformat.h"
+	#include "libswscale/swscale.h"
+}
 //WARNING_ENABLE
 
 
