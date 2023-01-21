@@ -48,7 +48,7 @@ public:
 	
 	bool Open(const DKString& file);
 	//bool Close();
-	void SaveFrame(AVFrame *pFrame, int width, int height, int iFrame);
+	//void SaveFrame(AVFrame *pFrame, int width, int height, int iFrame);
 	bool OnEvent(SDL_Event* event);
 	bool Play(const void* input, void* output);
 };

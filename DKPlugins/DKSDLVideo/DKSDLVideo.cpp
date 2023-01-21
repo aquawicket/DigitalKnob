@@ -33,7 +33,7 @@
 bool DKSDLVideo::Init() {
 	DKDEBUGFUNC();
 
-	av_register_all();
+	//av_register_all();
 	
 	DKSDLWindow::AddEventFunc(&DKSDLVideo::OnEvent, this);
 	DKClass::RegisterFunc("DKSDLVideo::Play", &DKSDLVideo::Play, this);
@@ -49,6 +49,7 @@ bool DKSDLVideo::End() {
 
 bool DKSDLVideo::Open(const DKString& file) {
 	
+	/*
 	// open file
 	AVFormatContext *pFormatCtx = NULL;
 	if(avformat_open_input(&pFormatCtx, file.c_str(), NULL, 0, NULL) != 0)
@@ -145,6 +146,8 @@ bool DKSDLVideo::Open(const DKString& file) {
 		// Free the packet that was allocated by av_read_frame
 		av_free_packet(&packet);
 	}
+	*/
+	return false;
 }
 
 /*
@@ -166,6 +169,7 @@ bool DKSDLVideo::Close() {
 }
 */
 
+/*
 void DKSDLVideo::SaveFrame(AVFrame *pFrame, int width, int height, int iFrame) {
 	FILE *pFile;
 	char szFilename[32];
@@ -189,6 +193,7 @@ void DKSDLVideo::SaveFrame(AVFrame *pFrame, int width, int height, int iFrame) {
 	// Close file
 	fclose(pFile);
 }
+*/
 
 bool DKSDLVideo::OnEvent(SDL_Event *event) {
 	DKDEBUGFUNC(event);
