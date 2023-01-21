@@ -627,7 +627,8 @@ RASPBERRY_dk_lib	(bcm_host)
 
 WIN_HOST_dk_depend	(visualstudio)
 WIN_HOST_dk_depend	(imagemagick)
-
+WIN_HOST_dk_depend	(msys2)			# WATCH ME, some libraries like giflib, freealut, and ogg have no CMakeList.txt, and only supply unix style "configure and make"
+									# We hope to translate any unix style commands through msys2 for windows platforms.  
 
 WIN32_dk_set				(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -A Win32 ${DKCMAKE_FLAGS})
 WIN64_dk_set				(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -A x64 ${DKCMAKE_FLAGS})
