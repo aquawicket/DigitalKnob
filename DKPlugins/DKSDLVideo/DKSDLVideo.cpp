@@ -96,7 +96,7 @@ bool DKSDLVideo::Open(const DKString& file) {
             foundVideo = true;
         } 
 		else if(localparam->codec_type == AVMEDIA_TYPE_AUDIO && !foundAudio) {
-            audCodec = localcodec;
+            audCodec = (AVCodec*)localcodec;
             audpar = localparam;
             audId = i;
             foundAudio = true;
