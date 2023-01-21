@@ -48,23 +48,30 @@ bool DKSDLVideo::End() {
 bool DKSDLVideo::Open(const DKString& file) {
 	
 	// ffmpeg part
-    AVFormatContext *pFormatCtx;
-    int vidId = -1, audId = -1;
+    AVFormatContext* pFormatCtx;
+    int vidId = -1;
+	int audId = -1;
     double fpsrendering = 0.0;
-    AVCodecContext *vidCtx, *audCtx;
-    AVCodec *vidCodec, *audCodec;
-    AVCodecParameters *vidpar, *audpar;
-    AVFrame *vframe, *aframe;
-    AVPacket *packet;
+    AVCodecContext* vidCtx;
+	AVCodecContext* audCtx;
+    AVCodec* vidCodec;
+	AVCodec* audCodec;
+    AVCodecParameters* vidpar;
+	AVCodecParameters* audpar;
+    AVFrame* vframe;
+	AVFrame* aframe;
+    AVPacket* packet;
 	
 	//sdl part
-    int swidth, sheight;
-    SDL_Window *screen;
-    SDL_Renderer *renderer;
-    SDL_Texture *texture;
+    int swidth;
+	int sheight;
+    SDL_Window* screen;
+    SDL_Renderer* renderer;
+    SDL_Texture* texture;
     SDL_Rect rect;
     SDL_AudioDeviceID auddev;
-    SDL_AudioSpec want, have;
+    SDL_AudioSpec want;
+	SDL_AudioSpec have;
 	
 	SDL_Init(SDL_INIT_EVERYTHING);
     pFormatCtx = avformat_alloc_context();
@@ -244,7 +251,7 @@ void DKSDLVideo::playaudio(AVCodecContext *ctx, AVPacket *pkt, AVFrame *frame, S
     int bufsize = av_samples_get_buffer_size(&size, ctx->channels, frame->nb_samples, frame->format, 0);
     bool isplanar = av_sample_fmt_is_planar(frame->format) == 1;
     for(int ch = 0; ch < ctx->channels; ch++) {
-        if (!isplanar) {
+        if(!isplanar) {
             if(SDL_QueueAudio(auddev, frame->data[ch], frame->linesize[ch]) < 0) {
                 DKERROR("SDL_QueueAudio() failed! \n");
                 return;
