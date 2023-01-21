@@ -24,19 +24,21 @@
 * SOFTWARE.
 */
 
+// https://gist.github.com/mashingan/e94d41e21c6e0ce4c9f19cea72a57dc4
+
 #include "DK/stdafx.h"
 #include "DKSDLVideo/DKSDLVideo.h"
 #include "DK/DKFile.h"
 #include "DKSDLWindow/DKSDLWindow.h"
 
-// http://www.dranger.com/ffmpeg/tutorial01.html
+
 bool DKSDLVideo::Init() {
 	DKDEBUGFUNC();
 
 	//DKSDLWindow::AddEventFunc(&DKSDLVideo::OnEvent, this);
-	//DKClass::RegisterFunc("DKSDLVideo::Play", &DKSDLVideo::Play, this);
 	
-	Open(DKFile::local_assets+"/DKSDLVideo/test.mp4");
+	OpenFile_A(DKFile::local_assets+"/DKSDLVideo/test.mp4");
+	CloseFile_A();
 	return true;
 }
 
@@ -45,9 +47,9 @@ bool DKSDLVideo::End() {
 	return true;
 }
 
-bool DKSDLVideo::Open(const DKString& file) {
+bool DKSDLVideo::OpenFile_A(const DKString& file) {
 	
-	// ffmpeg part
+	// ffmpeg
     AVFormatContext* pFormatCtx;
     int vidId = -1;
 	int audId = -1;
@@ -62,7 +64,7 @@ bool DKSDLVideo::Open(const DKString& file) {
 	AVFrame* aframe;
     AVPacket* packet;
 	
-	//sdl part
+	//sdl
     int swidth;
 	int sheight;
     SDL_Window* screen;
@@ -85,7 +87,6 @@ bool DKSDLVideo::Open(const DKString& file) {
 	bool foundAudio = false;
     for(int i = 0; i < pFormatCtx->nb_streams; i++) {
         AVCodecParameters *localparam = pFormatCtx->streams[i]->codecpar;
-        //AVCodec *localcodec = avcodec_find_decoder(localparam->codec_id);
 		const AVCodec *localcodec = avcodec_find_decoder(localparam->codec_id);
         if(localparam->codec_type == AVMEDIA_TYPE_VIDEO && !foundVideo) {
             vidCodec = (AVCodec*)localcodec;
@@ -119,7 +120,7 @@ bool DKSDLVideo::Open(const DKString& file) {
     packet = av_packet_alloc();
     swidth = vidpar->width;
     sheight = vidpar->height;
-    screen = SDL_CreateWindow("Fplay", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, swidth, sheight, SDL_WINDOW_OPENGL); 
+    screen = SDL_CreateWindow("DKSDLVideo", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, swidth, sheight, SDL_WINDOW_OPENGL); 
     if(!screen)
 		return DKERROR("screen invalid! \n"); //goto clean_packet_frame;
 	renderer = SDL_CreateRenderer(screen, -1, SDL_RENDERER_ACCELERATED);
@@ -127,7 +128,7 @@ bool DKSDLVideo::Open(const DKString& file) {
         return DKERROR("renderer invalid! \n"); //goto clean_renderer;
 	texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_IYUV, SDL_TEXTUREACCESS_STREAMING | SDL_TEXTUREACCESS_TARGET, swidth, sheight);
     if(!texture)
-        return DKERROR("texture invalid! \n"); //goto clean_texture;
+        return DKERROR("texture invalid! \n"); // goto clean_texture:
     rect.x = 0;
     rect.y = 0;
     rect.w = swidth;
@@ -139,20 +140,20 @@ bool DKSDLVideo::Open(const DKString& file) {
     auddev = SDL_OpenAudioDevice(NULL, 0, &want, &have, 0);
     SDL_PauseAudioDevice(auddev, 0);
     if(!auddev)
-		return DKERROR("auddev invalid! \n"); //goto clean_audio_device;
+		return DKERROR("auddev invalid! \n"); // goto clean_audio_device:
     SDL_Event evt;
     uint32_t windowID = SDL_GetWindowID(screen);
     
         
 	//////////// LOOP ////////////////////////////
 	bool running = true;
-    while (running) {
-        while (av_read_frame(pFormatCtx, packet) >= 0) {
-            while (SDL_PollEvent(&evt)) {
+    while(running) {
+        while(av_read_frame(pFormatCtx, packet) >= 0) {
+            while(SDL_PollEvent(&evt)) {
                 switch (evt.type) {
                     case SDL_WINDOWEVENT: {
-                        if (evt.window.windowID == windowID) {
-                            switch (evt.window.event) {
+                        if(evt.window.windowID == windowID) {
+                            switch(evt.window.event) {
                                 case SDL_WINDOWEVENT_CLOSE: {
                                     evt.type = SDL_QUIT;
                                     running = false;
@@ -170,10 +171,10 @@ bool DKSDLVideo::Open(const DKString& file) {
                 }
             }
             if(packet->stream_index == vidId) {
-                display(vidCtx, packet, vframe, &rect, texture, renderer, fpsrendering);
+                display_A(vidCtx, packet, vframe, &rect, texture, renderer, fpsrendering);
             } 
 			else if(packet->stream_index == audId) {
-                playaudio(audCtx, packet, aframe, auddev);
+                playaudio_A(audCtx, packet, aframe, auddev);
             }
             av_packet_unref(packet);
         }
@@ -184,31 +185,35 @@ bool DKSDLVideo::Open(const DKString& file) {
 	return true;
 }
 
-/*
-bool DKSDLVideo::Close() {
+bool DKSDLVideo::CloseFile_A() {
+	
 	clean_audio_device:
     SDL_CloseAudioDevice(auddev);
+	
     clean_texture:
     SDL_DestroyTexture(texture);
+	
     clean_renderer:
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(screen);
+	
     clean_packet_frame:
     av_packet_free(&packet);
     av_frame_free(&vframe);
     av_frame_free(&aframe);
+	
     clean_codec_context:
     avcodec_free_context(&vidCtx);
     avcodec_free_context(&audCtx);
+	
     clean_format_context:
     avformat_close_input(&pFormatCtx);
     avformat_free_context(pFormatCtx);
     SDL_Quit();
 	return true;
 }
-*/
 
-void DKSDLVideo::display(AVCodecContext* ctx, AVPacket* pkt, AVFrame* frame, SDL_Rect* rect, SDL_Texture* texture, SDL_Renderer* renderer, double fpsrend) {
+void DKSDLVideo::display_A(AVCodecContext* ctx, AVPacket* pkt, AVFrame* frame, SDL_Rect* rect, SDL_Texture* texture, SDL_Renderer* renderer, double fpsrend) {
 	time_t start = time(NULL);
     if(avcodec_send_packet(ctx, pkt) < 0) {
         DKERROR("avcodec_send_packet() failed! \n");
@@ -238,7 +243,7 @@ void DKSDLVideo::display(AVCodecContext* ctx, AVPacket* pkt, AVFrame* frame, SDL
     }
 }
 
-void DKSDLVideo::playaudio(AVCodecContext *ctx, AVPacket *pkt, AVFrame *frame, SDL_AudioDeviceID auddev) {
+void DKSDLVideo::playaudio_A(AVCodecContext *ctx, AVPacket *pkt, AVFrame *frame, SDL_AudioDeviceID auddev) {
 	if(avcodec_send_packet(ctx, pkt) < 0) {
         DKERROR("avcodec_send_packet() failed! \n");
         return;
@@ -270,10 +275,5 @@ void DKSDLVideo::playaudio(AVCodecContext *ctx, AVPacket *pkt, AVFrame *frame, S
 bool DKSDLVideo::OnEvent(SDL_Event *event) {
 	DKDEBUGFUNC(event);
 	return false;
-}
-
-bool DKSDLVideo::Play(const void* input, void* output) {
-	DKDEBUGFUNC(input, output);
-	return true;
 }
 */

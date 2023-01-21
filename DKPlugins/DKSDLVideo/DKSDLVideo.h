@@ -48,12 +48,13 @@ public:
 	bool Init();
 	bool End();
 	
-	bool Open(const DKString& file);
-	//bool Close();
-	void display(AVCodecContext* ctx, AVPacket* pkt, AVFrame* frame, SDL_Rect* rect, SDL_Texture* texture, SDL_Renderer* renderer, double fpsrend);
-	void playaudio(AVCodecContext *ctx, AVPacket *pkt, AVFrame *frame, SDL_AudioDeviceID auddev);
+	bool OpenFile_A(const DKString& file);
+	//bool CloseFile_A();
+	void display_A(AVCodecContext* ctx, AVPacket* pkt, AVFrame* frame, SDL_Rect* rect, SDL_Texture* texture, SDL_Renderer* renderer, double fpsrend);
+	void playaudio_A(AVCodecContext *ctx, AVPacket *pkt, AVFrame *frame, SDL_AudioDeviceID auddev);
+	
+	
 	//bool OnEvent(SDL_Event* event);
-	//bool Play(const void* input, void* output);
 };
 
 
