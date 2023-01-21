@@ -249,7 +249,7 @@ void DKSDLVideo::playaudio(AVCodecContext *ctx, AVPacket *pkt, AVFrame *frame, S
     }
     int size;
     int bufsize = (int)av_samples_get_buffer_size(&size, ctx->channels, frame->nb_samples, frame->format, 0);
-    bool isplanar = av_sample_fmt_is_planar(frame->format) == 1;
+    bool isplanar = (bool)av_sample_fmt_is_planar(frame->format) == 1;
     for(int ch = 0; ch < ctx->channels; ch++) {
         if(!isplanar) {
             if(SDL_QueueAudio(auddev, frame->data[ch], frame->linesize[ch]) < 0) {
