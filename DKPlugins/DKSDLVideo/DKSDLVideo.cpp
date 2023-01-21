@@ -60,6 +60,13 @@ bool DKSDLVideo::Open(const DKString& file) {
 	return false;
 }
 
+void DKSDLVideo::display(AVCodecContext* ctx, AVPacket* pkt, AVFrame* frame, SDL_Rect* rect, SDL_Texture* texture, SDL_Renderer* renderer, double fpsrend) {
+	
+}
+
+void DKSDLVideo::playaudio(AVCodecContext *ctx, AVPacket *pkt, AVFrame *frame, SDL_AudioDeviceID auddev) {
+	
+}
 
 bool DKSDLVideo::OnEvent(SDL_Event *event) {
 	DKDEBUGFUNC(event);
