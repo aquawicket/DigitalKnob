@@ -46,6 +46,7 @@ dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libswscale/libswscale.a)
 
 
 ### GENERATE / COMPILE ###
+set(USE_MSYS2 1)
 DEBUG_dk_setPath		(${FFMPEG}/${OS}/${DEBUG_DIR})
 #DEBUG_dk_queueshell	(${DKCONFIGURE_BUILD})
 #DEBUG_dk_queueshell	(../../configure --disable-x86asm)
@@ -61,3 +62,4 @@ RELEASE_dk_setPath			(${FFMPEG}/${OS}/${RELEASE_DIR})
 UNIX_RELEASE_dk_queueshell	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-x86asm)
 WIN_RELEASE_dk_queueshell	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --target-os=mingw32)
 RELEASE_dk_queueshell		(make)
+set(USE_MSYS2 0)

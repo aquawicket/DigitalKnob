@@ -596,16 +596,9 @@ ANDROID_dk_depend	(android-platform-tools)
 ANDROID_dk_depend	(android-build-tools)
 ANDROID_dk_depend	(android-sdk-tools)
 ANDROID_dk_depend	(android-cmake)
-
-#ANDROID_dk_depend	(openjdk-8u41)
-#ANDROID_dk_depend	(openjdk)
-##ANDROID_dk_depend	(android-sdk)
-ANDROID_dk_depend	(android-studio)
+#ANDROID_dk_depend	(android-studio)
 ANDROID_dk_depend	(visualstudio)
-#ANDROID32_dk_depend(mingw32)
-#ANDROID64_dk_depend(mingw64)
-#ANDROID_dk_depend	(openssl)
-#ANDROID_dk_depend	(openssl_binary)
+
 
 EMSCRIPTEN_dk_depend(emsdk)
 EMSCRIPTEN_dk_depend(DKPhp)
@@ -627,9 +620,9 @@ RASPBERRY_dk_lib	(bcm_host)
 
 WIN_HOST_dk_depend	(visualstudio)
 WIN_HOST_dk_depend	(imagemagick)
-WIN_HOST_dk_depend	(msys2)			# WATCH ME, some libraries like giflib, freealut, and ogg have no CMakeList.txt, and only supply unix style "configure and make"
-									# We hope to translate any unix style commands through msys2 for windows platforms.
-									# With this, The need for dk_depend(msys2) can be removed in those lib/DKMAKE.cmake files
+WIN_HOST_dk_depend	(msys)	
+WIN_HOST_dk_depend	(msys2)			
+
 
 WIN32_dk_set				(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -A Win32 ${DKCMAKE_FLAGS})
 WIN64_dk_set				(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -A x64 ${DKCMAKE_FLAGS})
