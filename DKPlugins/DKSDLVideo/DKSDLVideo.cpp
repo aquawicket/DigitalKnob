@@ -74,7 +74,7 @@ bool DKSDLVideo::Open(const DKString& file) {
         return DKERROR("avformat_open_input() failed! \n"); //goto clean_format_context;
     if(avformat_find_stream_info(pFormatCtx, NULL) < 0)
 		return DKERROR("avformat_find_stream_info() failed! \n"); //goto clean_format_context;
-	bool foundVideo = false, 
+	bool foundVideo = false;
 	bool foundAudio = false;
     for(int i = 0; i < pFormatCtx->nb_streams; i++) {
         AVCodecParameters *localparam = pFormatCtx->streams[i]->codecpar;
