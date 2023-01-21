@@ -88,7 +88,7 @@ bool DKSDLVideo::Open(const DKString& file) {
         //AVCodec *localcodec = avcodec_find_decoder(localparam->codec_id);
 		const AVCodec *localcodec = avcodec_find_decoder(localparam->codec_id);
         if(localparam->codec_type == AVMEDIA_TYPE_VIDEO && !foundVideo) {
-            vidCodec = localcodec;
+            vidCodec = (AVCodec*)localcodec;
             vidpar = localparam;
             vidId = i;
             AVRational rational = pFormatCtx->streams[i]->avg_frame_rate;
