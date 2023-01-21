@@ -47,7 +47,7 @@ public:
 	bool End();
 	
 	bool Open(const DKString& file);
-	bool Close();
+	//bool Close();
 	void display(AVCodecContext* ctx, AVPacket* pkt, AVFrame* frame, SDL_Rect* rect, SDL_Texture* texture, SDL_Renderer* renderer, double fpsrend);
 	void playaudio(AVCodecContext *ctx, AVPacket *pkt, AVFrame *frame, SDL_AudioDeviceID auddev);
 	//bool OnEvent(SDL_Event* event);

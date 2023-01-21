@@ -176,8 +176,8 @@ bool DKSDLVideo::Open(const DKString& file) {
 	return true;
 }
 
+/*
 bool DKSDLVideo::Close() {
-	/*
 	clean_audio_device:
     SDL_CloseAudioDevice(auddev);
     clean_texture:
@@ -196,9 +196,9 @@ bool DKSDLVideo::Close() {
     avformat_close_input(&pFormatCtx);
     avformat_free_context(pFormatCtx);
     SDL_Quit();
-	*/
 	return true;
 }
+*/
 
 void DKSDLVideo::display(AVCodecContext* ctx, AVPacket* pkt, AVFrame* frame, SDL_Rect* rect, SDL_Texture* texture, SDL_Renderer* renderer, double fpsrend) {
 	time_t start = time(NULL);
