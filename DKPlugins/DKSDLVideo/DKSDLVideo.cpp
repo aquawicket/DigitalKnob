@@ -248,7 +248,7 @@ void DKSDLVideo::playaudio(AVCodecContext *ctx, AVPacket *pkt, AVFrame *frame, S
         return;
     }
     int size;
-    int bufsize = (int)av_samples_get_buffer_size(&size, ctx->channels, frame->nb_samples, frame->format, 0);
+    int bufsize = (int)av_samples_get_buffer_size(&size, ctx->channels, frame->nb_samples, (AVSampleFormat)frame->format, 0);
     bool isplanar = (bool)av_sample_fmt_is_planar((AVSampleFormat)frame->format) == 1;
     for(int ch = 0; ch < ctx->channels; ch++) {
         if(!isplanar) {
