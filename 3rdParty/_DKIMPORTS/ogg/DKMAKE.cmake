@@ -8,6 +8,7 @@
 
 ### DEPEND ###
 WIN_dk_depend(msys)
+WIN_dk_depend(msys2)
 
 
 ### IMPORT ###

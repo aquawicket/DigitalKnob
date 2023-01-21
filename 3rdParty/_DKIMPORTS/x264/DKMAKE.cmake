@@ -2,9 +2,10 @@
 
 
 ### DEPENDS ###
-dk_depend(mingw32)
-dk_depend(mingw64)
+#dk_depend(mingw32)
+#dk_depend(mingw64)
 dk_depend(msys)
+dk_depend(msys2)
 dk_depend(nasm)
 
 

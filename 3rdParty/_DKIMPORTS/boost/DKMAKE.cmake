@@ -12,6 +12,7 @@
 
 ANDROID_dk_depend(android-ndk) #version 21e or newer required
 ANDROID_dk_depend(msys)
+ANDROID_dk_depend(msys2)
 ANDROID32_dk_depend(mingw32)
 ANDROID64_dk_depend(mingw64)
 
