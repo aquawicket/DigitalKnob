@@ -5,6 +5,8 @@
 
 ### DEPENDS ###
 dk_depend(x264)
+dk_depend(xz)
+dk_depend(zlib)
 
 
 ### IMPORT ###
