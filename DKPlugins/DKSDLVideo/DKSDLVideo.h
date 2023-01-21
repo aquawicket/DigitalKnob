@@ -35,9 +35,17 @@
 //WARNING_DISABLE
 #include "SDL.h"
 extern "C" {
-	#include "libavcodec/avcodec.h"
-	#include "libavformat/avformat.h"
-	#include "libswscale/swscale.h"
+	#include <libavcodec/avcodec.h>
+	#include <libavdevice/avdevice.h>
+	#include <libavfilter/avfilter.h>
+	#include <libavformat/avformat.h>
+	#include <libavformat/avio.h>
+	#include <libavutil/avutil.h>
+	#include <libpostproc/postprocess.h>
+	#include <libswresample/swresample.h>
+	#include <libswscale/swscale.h>
+	#include <libavutil/frame.h>
+	#include <libavutil/imgutils.h>
 }
 //WARNING_ENABLE
 
@@ -48,11 +56,12 @@ public:
 	bool Init();
 	bool End();
 	
+	/*
 	bool OpenFile_A(const DKString& file);
-	//bool CloseFile_A();
+	bool CloseFile_A();
 	void display_A(AVCodecContext* ctx, AVPacket* pkt, AVFrame* frame, SDL_Rect* rect, SDL_Texture* texture, SDL_Renderer* renderer, double fpsrend);
 	void playaudio_A(AVCodecContext *ctx, AVPacket *pkt, AVFrame *frame, SDL_AudioDeviceID auddev);
-	
+	*/
 	
 	//bool OnEvent(SDL_Event* event);
 };

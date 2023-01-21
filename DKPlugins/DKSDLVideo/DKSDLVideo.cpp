@@ -37,8 +37,8 @@ bool DKSDLVideo::Init() {
 
 	//DKSDLWindow::AddEventFunc(&DKSDLVideo::OnEvent, this);
 	
-	OpenFile_A(DKFile::local_assets+"/DKSDLVideo/test.mp4");
-	CloseFile_A();
+	//OpenFile_A(DKFile::local_assets+"/DKSDLVideo/test.mp4");
+	//CloseFile_A();
 	return true;
 }
 
@@ -47,6 +47,7 @@ bool DKSDLVideo::End() {
 	return true;
 }
 
+/*
 bool DKSDLVideo::OpenFile_A(const DKString& file) {
 	
 	// ffmpeg
@@ -180,8 +181,7 @@ bool DKSDLVideo::OpenFile_A(const DKString& file) {
         }
     }
 	////////////////////////////////////////////////
-	
-	
+
 	return true;
 }
 
@@ -270,6 +270,7 @@ void DKSDLVideo::playaudio_A(AVCodecContext *ctx, AVPacket *pkt, AVFrame *frame,
         }
     }
 }
+*/
 
 /*
 bool DKSDLVideo::OnEvent(SDL_Event *event) {
