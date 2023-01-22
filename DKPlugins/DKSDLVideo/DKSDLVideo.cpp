@@ -49,6 +49,7 @@ bool DKSDLVideo::End() {
 }
 
 bool DKSDLVideo::OpenFile(const DKString& file) {
+    DKDEBUGFUNC(file);
 	SDLWrapper_init_sdl();
 	Player_run(file);
 	Player_clear();
@@ -58,6 +59,7 @@ bool DKSDLVideo::OpenFile(const DKString& file) {
 
 /////// SDLWrapper /////// 
 void DKSDLVideo::SDLWrapper_init_sdl() {
+    DKDEBUGFUNC();
 	SDL_Init(SDL_INIT_EVERYTHING);
 	#if WIN
 		SDL_AudioInit("directsound");
@@ -65,12 +67,14 @@ void DKSDLVideo::SDLWrapper_init_sdl() {
 }
 
 void DKSDLVideo::SDLWrapper_open_audio(SDL_AudioSpec* desired, SDL_AudioSpec* obtained) {
+    DKDEBUGFUNC(desired, obtained);
 	if (SDL_OpenAudio(desired, obtained) < 0)
 		DKERROR("Failed to open audio \n");
 }
 
 /////// Player /////// 
 void DKSDLVideo::Player_run(std::string video_add, std::string window_nam){
+    DKDEBUGFUNC(video_add, window_nam);
 	video_addr = video_add;
 	window_name = window_nam;
 	Player_open();
@@ -80,6 +84,7 @@ void DKSDLVideo::Player_run(std::string video_add, std::string window_nam){
 }
 
 bool DKSDLVideo::Player_open() {
+    DKDEBUGFUNC();
 	audioStream = -1;
 
 	int res = avformat_open_input(&pFormatCtx, video_addr.c_str(), NULL, NULL); // open video
@@ -103,6 +108,7 @@ bool DKSDLVideo::Player_open() {
 }
 
 void DKSDLVideo::Player_clear() {
+    DKDEBUGFUNC();
 	// close context info
 	avformat_close_input(&pFormatCtx);
 	avcodec_free_context(&pCodecCtx);
@@ -124,6 +130,7 @@ void DKSDLVideo::Player_clear() {
 }
 
 int DKSDLVideo::Player_get_video_stream(void) {
+    DKDEBUGFUNC();
 	int videoStream = -1;
 	for(unsigned int i = 0; i<pFormatCtx->nb_streams; i++){
 		if (pFormatCtx->streams[i]->codecpar->codec_type == AVMEDIA_TYPE_VIDEO) 
@@ -140,6 +147,7 @@ int DKSDLVideo::Player_get_video_stream(void) {
 }
 
 int DKSDLVideo::Player_malloc(void){
+    DKDEBUGFUNC();
 	Audio_malloc(pCodecAudioCtx);
 	Audio_open();
 	pFrame = av_frame_alloc();
@@ -158,6 +166,7 @@ int DKSDLVideo::Player_malloc(void){
 }
 
 int DKSDLVideo::Player_create_display(void) {
+    DKDEBUGFUNC();
 	screen = SDL_CreateWindow(window_name.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, pCodecCtx->width, pCodecCtx->height, SDL_WINDOW_OPENGL);
 	if (!screen)
 		DKERROR("Couldn't show display window \n");
@@ -167,6 +176,7 @@ int DKSDLVideo::Player_create_display(void) {
 }
 
 int DKSDLVideo::Player_display_video(void) {
+    DKDEBUGFUNC();
 	AVPacket packet;
 	//video context
 	sws_ctx = sws_getContext(pCodecCtx->width, pCodecCtx->height, pCodecCtx->pix_fmt, pCodecCtx->width, pCodecCtx->height, VIDEO_FORMAT, SWS_BILINEAR, NULL, NULL, NULL);
@@ -194,6 +204,7 @@ int DKSDLVideo::Player_display_video(void) {
 }
 
 int DKSDLVideo::Player_getAudioPacket(AudioPacket* q, AVPacket* pkt, int block) {
+    DKDEBUGFUNC();
 	AVPacketList* pktl;
     int ret;
     SDL_LockMutex(q->mutex);
@@ -223,6 +234,7 @@ int DKSDLVideo::Player_getAudioPacket(AudioPacket* q, AVPacket* pkt, int block) 
 }
 
 int DKSDLVideo::Player_read_audio_video_codec(void) {
+    DKDEBUGFUNC();
 	pCodec = (AVCodec*)avcodec_find_decoder(pCodecParameters->codec_id);
 	pAudioCodec = (AVCodec*)avcodec_find_decoder(pCodecAudioParameters->codec_id);
 	if (pCodec == NULL)
@@ -254,6 +266,7 @@ int DKSDLVideo::Player_read_audio_video_codec(void) {
 
 /////// Audio /////// 
 void DKSDLVideo::Audio_malloc(AVCodecContext* pCodecAudioCtx) {
+    DKDEBUGFUNC();
     //AudioCallback::set_audio_instance(this);
     swrCtx = swr_alloc();
     if (swrCtx == NULL)
@@ -278,6 +291,7 @@ void DKSDLVideo::Audio_malloc(AVCodecContext* pCodecAudioCtx) {
 }
 
 void DKSDLVideo::Audio_open() {
+    DKDEBUGFUNC();
     SDLWrapper_open_audio(&wantedSpec, &audioSpec);
     wanted_frame.format = AV_SAMPLE_FMT_S16;
     wanted_frame.sample_rate = audioSpec.freq;
@@ -288,6 +302,7 @@ void DKSDLVideo::Audio_open() {
 }
 
 int DKSDLVideo::Audio_audio_decode_frame(AVCodecContext* aCodecCtx, uint8_t* audio_buf, int buf_size) {
+    DKDEBUGFUNC(aCodecCtx, audio_buf, buf_size);
     static AVPacket pkt;
     static uint8_t* audio_pkt_data = NULL;
     static int audio_pkt_size = 0;
@@ -345,6 +360,7 @@ int DKSDLVideo::Audio_audio_decode_frame(AVCodecContext* aCodecCtx, uint8_t* aud
 }
 
 void DKSDLVideo::Audio_init_audio_packet(AudioPacket* q) {
+    DKDEBUGFUNC(q);
     q->last = NULL;
     q->first = NULL;
     q->mutex = SDL_CreateMutex();
@@ -352,6 +368,7 @@ void DKSDLVideo::Audio_init_audio_packet(AudioPacket* q) {
 }
 
 int DKSDLVideo::Audio_put_audio_packet(AVPacket* packet) {
+    DKDEBUGFUNC(packet);
     AVPacketList* pktl;
     AVPacket* newPkt;
     newPkt = (AVPacket*)av_mallocz_array(1, sizeof(AVPacket));
@@ -379,6 +396,7 @@ int DKSDLVideo::Audio_put_audio_packet(AVPacket* packet) {
 
 /////// AudioCallback /////// 
 void DKSDLVideo::AudioCallback_audio_callback(void* userdata, Uint8* stream, int len) {
+    DKDEBUGFUNC(userdata, stream, len);
     AVCodecContext* aCodecCtx = (AVCodecContext*)userdata;
     int len1;
     int audio_size;
