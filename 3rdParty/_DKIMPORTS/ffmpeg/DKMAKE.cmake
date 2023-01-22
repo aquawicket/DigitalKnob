@@ -5,7 +5,6 @@
 
 ### DEPENDS ###
 dk_depend(core_media)
-#dk_depend(libiconv)
 dk_depend(security)
 dk_depend(video_toolbox)
 dk_depend(x264)
@@ -74,20 +73,20 @@ EMSCRIPTEN_DEBUG_dk_queueshell(${EMCONFIGURE} ../../configure
 	--nm="llvm-nm"
 	--ar=emar
 	--ranlib=emranlib
-	--cc=emcc
-	--cxx=em++
-	--objcc=emcc
-	--dep-cc=emcc)
-IOS32_DEBUG_dk_queueshell		(../../configure --pkg-config-flags=--static --arch=arm --disable-x86asm --disable-iconv)
-IOS64_DEBUG_dk_queueshell		(../../configure --pkg-config-flags=--static --arch=arm64 --disable-x86asm --disable-iconv)
-IOSSIM32_DEBUG_dk_queueshell	(../../configure --pkg-config-flags=--static --arch=i686 --disable-x86asm --disable-iconv)
-IOSSIM64_DEBUG_dk_queueshell	(../../configure --pkg-config-flags=--static --arch=x86_64 --disable-x86asm --disable-iconv)
-LINUX32_DEBUG_dk_queueshell		(../../configure --pkg-config-flags=--static --arch=i686 --disable-x86asm --disable-iconv)
-LINUX64_DEBUG_dk_queueshell		(../../configure --pkg-config-flags=--static --arch=x86_64 --disable-x86asm --disable-iconv)
-MAC32_DEBUG_dk_queueshell		(../../configure --pkg-config-flags=--static --arch=i686 --disable-x86asm --disable-iconv)
-MAC64_DEBUG_dk_queueshell		(../../configure --pkg-config-flags=--static --arch=x86_64 --disable-x86asm --disable-iconv)
-RASPBERRY32_DEBUG_dk_queueshell	(../../configure --pkg-config-flags=--static --arch=i686 --disable-x86asm --disable-iconv)
-RASPBERRY64_DEBUG_dk_queueshell	(../../configure --pkg-config-flags=--static --arch=x86_64 --disable-x86asm --disable-iconv)
+	--cc=${EMCC}
+	--cxx=${EMPP}
+	--objcc=${EMCC}
+	--dep-cc=${EMCC})
+IOS32_DEBUG_dk_queueshell		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=arm --disable-x86asm --disable-iconv)
+IOS64_DEBUG_dk_queueshell		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=arm64 --disable-x86asm --disable-iconv)
+IOSSIM32_DEBUG_dk_queueshell	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
+IOSSIM64_DEBUG_dk_queueshell	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=x86_64 --disable-x86asm --disable-iconv)
+LINUX32_DEBUG_dk_queueshell		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
+LINUX64_DEBUG_dk_queueshell		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=x86_64 --disable-x86asm --disable-iconv)
+MAC32_DEBUG_dk_queueshell		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
+MAC64_DEBUG_dk_queueshell		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=x86_64 --disable-x86asm --disable-iconv)
+RASPBERRY32_DEBUG_dk_queueshell	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
+RASPBERRY64_DEBUG_dk_queueshell	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=x86_64 --disable-x86asm --disable-iconv)
 WIN32_DEBUG_dk_queueshell		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --target-os=mingw32)
 WIN64_DEBUG_dk_queueshell		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --target-os=mingw64)
 
@@ -121,18 +120,18 @@ EMSCRIPTEN_RELEASE_dk_queueshell(${EMCONFIGURE} ../../configure
 	--cxx=em++
 	--objcc=emcc
 	--dep-cc=emcc)
-IOS32_RELEASE_dk_queueshell			(../../configure --pkg-config-flags=--static --arch=arm --disable-x86asm --disable-iconv)
-IOS64_RELEASE_dk_queueshell			(../../configure --pkg-config-flags=--static --arch=arm64 --disable-x86asm --disable-iconv)
-IOSSIM32_RELEASE_dk_queueshell		(../../configure --pkg-config-flags=--static --arch=i686 --disable-x86asm --disable-iconv)
-IOSSIM64_RELEASE_dk_queueshell		(../../configure --pkg-config-flags=--static --arch=x86_64 --disable-x86asm --disable-iconv)
-LINUX32_RELEASE_dk_queueshell		(../../configure --pkg-config-flags=--static --arch=i686 --disable-x86asm --disable-iconv)
-LINUX64_RELEASE_dk_queueshell		(../../configure --pkg-config-flags=--static --arch=x86_64 --disable-x86asm --disable-iconv)
-MAC32_RELEASE_dk_queueshell			(../../configure --pkg-config-flags=--static --arch=i686 --disable-x86asm --disable-iconv)
-MAC64_RELEASE_dk_queueshell			(../../configure --pkg-config-flags=--static --arch=x86_64 --disable-x86asm --disable-iconv)
-RASPBERRY32_RELEASE_dk_queueshell	(../../configure --pkg-config-flags=--static --arch=i686 --disable-x86asm --disable-iconv)
-RASPBERRY64_RELEASE_dk_queueshell	(../../configure --pkg-config-flags=--static --arch=x86_64 --disable-x86asm --disable-iconv)
-WIN32_RELEASE_dk_queueshell			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --target-os=mingw32)
-WIN64_RELEASE_dk_queueshell			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --target-os=mingw64)
+IOS32_RELEASE_dk_queueshell			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=arm --disable-x86asm --disable-iconv)
+IOS64_RELEASE_dk_queueshell			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=arm64 --disable-x86asm --disable-iconv)
+IOSSIM32_RELEASE_dk_queueshell		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
+IOSSIM64_RELEASE_dk_queueshell		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=x86_64 --disable-x86asm --disable-iconv)
+LINUX32_RELEASE_dk_queueshell		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
+LINUX64_RELEASE_dk_queueshell		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=x86_64 --disable-x86asm --disable-iconv)
+MAC32_RELEASE_dk_queueshell			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
+MAC64_RELEASE_dk_queueshell			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=x86_64 --disable-x86asm --disable-iconv)
+RASPBERRY32_RELEASE_dk_queueshell	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
+RASPBERRY64_RELEASE_dk_queueshell	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=x86_64 --disable-x86asm --disable-iconv)
+WIN32_RELEASE_dk_queueshell			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-shared --enable-static --target-os=mingw32)
+WIN64_RELEASE_dk_queueshell			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-shared --enable-static --target-os=mingw64)
 
 EMSCRIPTEN_RELEASE_dk_queueShell(${EMMAKE} make)
 if(NOT EMSCRIPTEN)

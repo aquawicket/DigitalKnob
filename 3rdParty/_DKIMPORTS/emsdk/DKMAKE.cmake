@@ -28,6 +28,8 @@ endif()
 dk_set(EMCMAKE ${EMSDK}/upstream/emscripten/emcmake)
 dk_set(EMCONFIGURE ${EMSDK}/upstream/emscripten/emconfigure)
 dk_set(EMMAKE ${EMSDK}/upstream/emscripten/emmake)
+dk_set(EMCC ${EMSDK}/upstream/emscripten/emcc)
+dk_set(EMPP ${EMSDK}/upstream/emscripten/em++)
 
 
 ######################################################################################################################
