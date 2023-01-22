@@ -53,6 +53,10 @@ dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavformat/libavformat.a)
 
 ### GENERATE / COMPILE ###
 set(USE_MSYS2 1)
+
+string(REPLACE "CFLAGS=-DMAC" "" FFMPEG_CONFIGURE "${DKCONFIGURE_BUILD}")
+string(REPLACE "  " " " FFMPEG_CONFIGURE "${FFMPEG_CONFIGURE}")
+
 DEBUG_dk_setPath				(${FFMPEG}/${OS}/${DEBUG_DIR})
 if(EMSCRIPTEN)
 	DEBUG_dk_queueshell(${EMCONFIGURE} ../../configure
@@ -80,7 +84,7 @@ if(EMSCRIPTEN)
 		--dep-cc=emcc)
 	DEBUG_dk_queueShell(${EMMAKE} make)
 else()
-	UNIX_DEBUG_dk_queueshell	(${DKCONFIGURE_BUILD} --pkg-config-flags=--static --disable-x86asm --disable-iconv)
+	UNIX_DEBUG_dk_queueshell	(${FFMPEG_CONFIGURE} --pkg-config-flags=--static --disable-x86asm --disable-iconv)
 	#DEBUG_dk_queueshell		(../../configure --disable-x86asm)
 	#DEBUG_dk_queueshell		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=x86 --target-os=mingw32 --cross-prefix=i686-w64-mingw32-)
 	#UNIX_DEBUG_dk_queueshell	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-x86asm --disable-iconv)
