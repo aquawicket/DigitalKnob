@@ -243,6 +243,7 @@ if(EMSCRIPTEN)
 	dk_disable(metalKit)
 	dk_disable(msinttypes)
 	dk_disable(mlocate)
+	dk_disable(nasm)
 	dk_disable(ncurses)
 	dk_disable(ogg)
 	dk_disable(openblas)			# CMake Error: When cross compiling, a TARGET is required
