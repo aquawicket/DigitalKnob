@@ -49,12 +49,90 @@ extern "C" {
 }
 //WARNING_ENABLE
 
+#define ERROR_SIZE 128
+#define VIDEO_FORMAT AV_PIX_FMT_RGB24
+#define SDL_AUDIO_BUFFER_SIZE 1024;
+#define AVCODEC_MAX_AUDIO_FRAME_SIZE 192000
+
+typedef struct _AudioPacket {
+	AVPacketList* first, * last;
+	int nb_packets, size;
+	SDL_mutex* mutex;
+	SDL_cond* cond;
+} AudioPacket;
+
 
 class DKSDLVideo : public DKObjectT<DKSDLVideo>
 {
 public:
 	bool Init();
 	bool End();
+	
+	bool OpenFile(const DKString& file);
+	
+	// SDLWrapper
+	static void SDLWrapper_init_sdl();
+	void SDLWrapper_open_audio(SDL_AudioSpec* desired, SDL_AudioSpec* obtained);
+	
+	
+	// Player
+	void Player_run(std::string, std::string window_nam="");
+	void Player_clear();
+	bool Player_open();
+	int Player_get_video_stream(void);
+	int Player_malloc(void);
+	int Player_create_display(void);
+	int Player_display_video(void);
+	static int Player_getAudioPacket(AudioPacket*, AVPacket*, int);
+	int Player_read_audio_video_codec(void);
+	
+	std::string video_addr;
+	std::string window_name;
+	int videoStream = 0;
+	int audioStream = 0;
+	AVFormatContext* pFormatCtx = NULL;
+	AVCodecParameters* pCodecParameters = NULL;
+	AVCodecParameters* pCodecAudioParameters = NULL;
+	AVCodecContext* pCodecCtx = NULL;
+	AVCodecContext* pCodecAudioCtx = NULL;
+	AVCodec* pCodec = NULL;
+	AVCodec* pAudioCodec = NULL;
+	AVFrame* pFrame = NULL;
+	AVFrame* pFrameRGB = NULL;
+	uint8_t* buffer = NULL;
+	SDL_Window* screen = NULL;
+	SDL_Renderer* renderer = NULL;
+	SDL_Texture* bmp = NULL;
+	struct SwsContext* sws_ctx = NULL;
+	
+	
+	// Audio
+	void Audio_open();
+	void Audio_malloc(AVCodecContext* pCodecAudioCtx);
+	void Audio_init_audio_packet(AudioPacket* q);
+	int Audio_audio_decode_frame(AVCodecContext* aCodecCtx, uint8_t* audio_buf, int buf_size);
+	int Audio_put_audio_packet(AVPacket*);
+	
+	struct SwrContext* swrCtx = NULL;
+	AVFrame wanted_frame;
+	AudioPacket audioq;
+	SDL_AudioSpec wantedSpec = { 0 };
+	SDL_AudioSpec audioSpec = { 0 };
+	
+	
+	// AudioCallback
+	void AudioCallback_audio_callback(void* userdata, Uint8* stream, int len);
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/*
 	bool OpenFile_A(const DKString& file);
