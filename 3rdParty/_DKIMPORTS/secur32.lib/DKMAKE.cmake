@@ -1,4 +1,4 @@
-# https://docs.microsoft.com/en-us/windows/win32/shell/shlwapi-wrappers
+# Secur32.Lib
 
 if(NOT WIN)
 	dk_undepend(secur32.lib)
