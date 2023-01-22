@@ -55,6 +55,7 @@ dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavformat/libavformat.a)
 set(USE_MSYS2 1)
 
 string(REPLACE "CFLAGS=-DMAC" "" FFMPEG_CONFIGURE "${DKCONFIGURE_BUILD}")
+string(REPLACE "-DMAC64" "" FFMPEG_CONFIGURE "${FFMPEG_CONFIGURE}")
 string(REPLACE "  " " " FFMPEG_CONFIGURE "${FFMPEG_CONFIGURE}")
 
 DEBUG_dk_setPath				(${FFMPEG}/${OS}/${DEBUG_DIR})
