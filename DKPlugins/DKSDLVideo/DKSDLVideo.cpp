@@ -221,7 +221,7 @@ int DKSDLVideo::Player_getAudioPacket(AudioPacket* q, AVPacket* pkt, int block) 
 }
 
 int DKSDLVideo::Player_read_audio_video_codec(void) {
-	pCodec = avcodec_find_decoder(pCodecParameters->codec_id);
+	pCodec = (AVCodec*)avcodec_find_decoder(pCodecParameters->codec_id);
 	pAudioCodec = avcodec_find_decoder(pCodecAudioParameters->codec_id);
 	if (pCodec == NULL)
 		DKERROR("Video decoder not found \n");
