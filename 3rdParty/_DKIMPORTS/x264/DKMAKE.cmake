@@ -22,10 +22,10 @@ dk_libRelease	(${X264}/${OS}/${RELEASE_DIR}/libx264.a)
 
 ### GENERATE / COMPILE ###
 DEBUG_dk_setPath		(${X264}/${OS}/${DEBUG_DIR})
-DEBUG_dk_queueShell		(${DKCONFIGURE_BUILD} --host=i686-gnu --disable-asm --disable-cli --extra-cflags="-s USE_PTHREADS=1")
+DEBUG_dk_queueShell		(${DKCONFIGURE_BUILD} --host=i686-pc-linux-gnu --disable-asm --disable-cli --extra-cflags="-s USE_PTHREADS=1")
 #DEBUG_dk_queueShell	(../../configure --disable-asm)
 DEBUG_dk_queueShell		(make)
 RELEASE_dk_setPath		(${X264}/${OS}/${RELEASE_DIR})
-RELEASE_dk_queueShell	(${DKCONFIGURE_BUILD} --host=i686-gnu --disable-asm --disable-cli --extra-cflags="-s USE_PTHREADS=1")
+RELEASE_dk_queueShell	(${DKCONFIGURE_BUILD} --host=i686-pc-linux-gnu --disable-asm --disable-cli --extra-cflags="-s USE_PTHREADS=1")
 #RELEASE_dk_queueShell	(../../configure --disable-asm)
 RELEASE_dk_queueShell	(make)
