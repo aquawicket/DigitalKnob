@@ -6,6 +6,7 @@
 ### DEPENDS ###
 dk_depend(core_media)
 dk_depend(libgcc)
+dk_depend(libmingwex)
 dk_depend(secur32.lib)
 dk_depend(security)
 dk_depend(strmiids.lib)

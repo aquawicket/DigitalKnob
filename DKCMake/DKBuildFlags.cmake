@@ -620,7 +620,7 @@ RASPBERRY_dk_lib	(bcm_host)
 
 WIN_HOST_dk_depend	(visualstudio)
 WIN_HOST_dk_depend	(imagemagick)
-WIN_HOST_dk_depend	(msys)	
+#WIN_HOST_dk_depend	(msys)	
 WIN_HOST_dk_depend	(msys2)			
 
 
