@@ -34,7 +34,9 @@
 
 // https://developercommunity.visualstudio.com/t/error-c2872-byte-ambiguous-symbol/93889
 // Fix for DKVncServer
-#define _HAS_STD_BYTE 0
+#if HAVE_DKVncServer
+	#define _HAS_STD_BYTE 0
+#endif
 
 #define STR(x) #x
 #define DKMSG(x) __pragma(message(STR(x)))
