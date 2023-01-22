@@ -71,8 +71,8 @@ EMSCRIPTEN_DEBUG_dk_queueshell(${EMCONFIGURE} ../../configure
 	#--extra-cxxflags="-s USE_PTHREADS"
 	#--extra-ldflags="-s USE_PTHREADS -s INITIAL_MEMORY=33554432"
 	--nm="llvm-nm"
-	--ar=emar
-	--ranlib=emranlib
+	--ar=${EMAR}
+	--ranlib=${EMRANLIB}
 	--cc=${EMCC}
 	--cxx=${EMPP}
 	--objcc=${EMCC}
@@ -114,12 +114,12 @@ EMSCRIPTEN_RELEASE_dk_queueshell(${EMCONFIGURE} ../../configure
 	#--extra-cxxflags="-s USE_PTHREADS"
 	#--extra-ldflags="-s USE_PTHREADS -s INITIAL_MEMORY=33554432"
 	--nm="llvm-nm"
-	--ar=emar
-	--ranlib=emranlib
-	--cc=emcc
-	--cxx=em++
-	--objcc=emcc
-	--dep-cc=emcc)
+	--ar=${EMAR}
+	--ranlib=${EMRANLIB}
+	--cc=${EMCC}
+	--cxx=${EMPP}
+	--objcc=${EMCC}
+	--dep-cc=${EMCC})
 IOS32_RELEASE_dk_queueshell			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=arm --disable-x86asm --disable-iconv)
 IOS64_RELEASE_dk_queueshell			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=arm64 --disable-x86asm --disable-iconv)
 IOSSIM32_RELEASE_dk_queueshell		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
