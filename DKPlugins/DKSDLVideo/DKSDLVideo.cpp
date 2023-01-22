@@ -368,7 +368,7 @@ void DKSDLVideo::Audio_init_audio_packet(AudioPacket* q) {
 }
 
 int DKSDLVideo::Audio_put_audio_packet(AVPacket* packet) {
-    DKDEBUGFUNC(packet);
+    //DKDEBUGFUNC(packet); // EXCESSIVE LOGGING
     AVPacketList* pktl;
     AVPacket* newPkt;
     newPkt = (AVPacket*)av_mallocz_array(1, sizeof(AVPacket));
