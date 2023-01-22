@@ -31,6 +31,8 @@
 #include "DK/DKFile.h"
 #include "DKSDLWindow/DKSDLWindow.h"
 
+AVFrame DKSDLVideo::wanted_frame;
+AudioPacket DKSDLVideo::audioq;
 
 bool DKSDLVideo::Init() {
 	DKDEBUGFUNC();
@@ -272,7 +274,7 @@ void DKSDLVideo::Audio_malloc(AVCodecContext* pCodecAudioCtx) {
     wantedSpec.silence = 0;
     wantedSpec.samples = SDL_AUDIO_BUFFER_SIZE;
     wantedSpec.userdata = pCodecAudioCtx;
-    wantedSpec.callback = AudioCallback_audio_callback;
+    wantedSpec.callback = DKSDLVideo::AudioCallback_audio_callback;
 }
 
 void DKSDLVideo::Audio_open() {
@@ -309,7 +311,7 @@ int DKSDLVideo::Audio_audio_decode_frame(AVCodecContext* aCodecCtx, uint8_t* aud
             if (got_frame) {
                 int linesize = 1;
                 data_size = av_samples_get_buffer_size(&linesize, aCodecCtx->channels, frame.nb_samples, aCodecCtx->sample_fmt, 1);
-                std::assert(data_size <= buf_size);
+                assert(data_size <= buf_size);
                 memcpy(audio_buf, frame.data[0], data_size);
             }
             if (frame.channels > 0 && frame.channel_layout == 0)
@@ -378,7 +380,8 @@ int DKSDLVideo::Audio_put_audio_packet(AVPacket* packet) {
 /////// AudioCallback /////// 
 void DKSDLVideo::AudioCallback_audio_callback(void* userdata, Uint8* stream, int len) {
     AVCodecContext* aCodecCtx = (AVCodecContext*)userdata;
-    int len1, audio_size;
+    int len1;
+    int audio_size;
     static uint8_t audio_buff[192000 * 3 / 2];
     static unsigned int audio_buf_size = 0;
     static unsigned int audio_buf_index = 0;

@@ -34,6 +34,7 @@
 
 //WARNING_DISABLE
 #include "SDL.h"
+#include <assert.h>
 extern "C" {
 	#include <libavcodec/avcodec.h>
 	#include <libavdevice/avdevice.h>
@@ -110,18 +111,18 @@ public:
 	void Audio_open();
 	void Audio_malloc(AVCodecContext* pCodecAudioCtx);
 	void Audio_init_audio_packet(AudioPacket* q);
-	int Audio_audio_decode_frame(AVCodecContext* aCodecCtx, uint8_t* audio_buf, int buf_size);
+	static int Audio_audio_decode_frame(AVCodecContext* aCodecCtx, uint8_t* audio_buf, int buf_size);
 	int Audio_put_audio_packet(AVPacket*);
 	
 	struct SwrContext* swrCtx = NULL;
-	AVFrame wanted_frame;
-	AudioPacket audioq;
+	static AVFrame wanted_frame;
+	static AudioPacket audioq;
 	SDL_AudioSpec wantedSpec = { 0 };
 	SDL_AudioSpec audioSpec = { 0 };
 	
 	
 	// AudioCallback
-	void AudioCallback_audio_callback(void* userdata, Uint8* stream, int len);
+	static void AudioCallback_audio_callback(void* userdata, Uint8* stream, int len);
 	
 	
 
