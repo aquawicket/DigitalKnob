@@ -78,7 +78,9 @@ void DKSDLVideo::Player_run(std::string video_add, std::string window_nam){
 	video_addr = video_add;
 	window_name = window_nam;
 	Player_open();
+    DKINFO("finnished Player_Open() \n");
 	Player_malloc();
+    DKINFO("finnished Player_malloc() \n");
 	Player_create_display();
 	Player_display_video();
 }
