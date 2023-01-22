@@ -97,7 +97,7 @@ bool DKSDLVideo::Player_open() {
 		return DKERROR("Error opening your video using AVCodecParameters, probably doesnt have codecpar_type type AVMEDIA_TYPE_VIDEO \n");
 
 	// open
-	read_audio_video_codec();
+	Player_read_audio_video_codec();
 }
 
 void DKSDLVideo::Player_clear() {
@@ -170,8 +170,10 @@ int DKSDLVideo::Player_display_video(void) {
 	sws_ctx = sws_getContext(pCodecCtx->width, pCodecCtx->height, pCodecCtx->pix_fmt, pCodecCtx->width, pCodecCtx->height, VIDEO_FORMAT, SWS_BILINEAR, NULL, NULL, NULL);
 	SDL_Event evt;
 	while (av_read_frame(pFormatCtx, &packet) >= 0) {
-		if (packet.stream_index == audioStream)
-			Audio::get_instance()->put_audio_packet(&packet);
+		if (packet.stream_index == audioStream){
+			//Audio::get_instance()->put_audio_packet(&packet);
+			Audio_put_audio_packet(&packet);
+		}
 		if (packet.stream_index == videoStream) {
 			int res = avcodec_send_packet(pCodecCtx, &packet);
 			if (res < 0)
