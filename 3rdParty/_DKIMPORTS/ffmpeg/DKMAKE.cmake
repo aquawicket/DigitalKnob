@@ -68,9 +68,9 @@ if(EMSCRIPTEN)
 		--disable-stripping
 		--disable-programs
 		--disable-doc
-		--extra-cflags="-s USE_PTHREADS"
-		--extra-cxxflags="-s USE_PTHREADS"
-		--extra-ldflags="-s USE_PTHREADS -s INITIAL_MEMORY=33554432"
+		#--extra-cflags="-s USE_PTHREADS"
+		#--extra-cxxflags="-s USE_PTHREADS"
+		#--extra-ldflags="-s USE_PTHREADS -s INITIAL_MEMORY=33554432"
 		--nm="llvm-nm"
 		--ar=emar
 		--ranlib=emranlib
@@ -104,9 +104,9 @@ if(EMSCRIPTEN)
 		--disable-stripping
 		--disable-programs
 		--disable-doc
-		--extra-cflags="-s USE_PTHREADS"
-		--extra-cxxflags="-s USE_PTHREADS"
-		--extra-ldflags="-s USE_PTHREADS -s INITIAL_MEMORY=33554432"
+		#--extra-cflags="-s USE_PTHREADS"
+		#--extra-cxxflags="-s USE_PTHREADS"
+		#--extra-ldflags="-s USE_PTHREADS -s INITIAL_MEMORY=33554432"
 		--nm="llvm-nm"
 		--ar=emar
 		--ranlib=emranlib
