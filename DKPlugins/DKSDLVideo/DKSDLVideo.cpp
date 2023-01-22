@@ -222,7 +222,7 @@ int DKSDLVideo::Player_getAudioPacket(AudioPacket* q, AVPacket* pkt, int block) 
 
 int DKSDLVideo::Player_read_audio_video_codec(void) {
 	pCodec = (AVCodec*)avcodec_find_decoder(pCodecParameters->codec_id);
-	pAudioCodec = avcodec_find_decoder(pCodecAudioParameters->codec_id);
+	pAudioCodec = (AVCodec*)avcodec_find_decoder(pCodecAudioParameters->codec_id);
 	if (pCodec == NULL)
 		DKERROR("Video decoder not found \n");
 	if (pAudioCodec == NULL) 
@@ -272,7 +272,7 @@ void DKSDLVideo::Audio_malloc(AVCodecContext* pCodecAudioCtx) {
     wantedSpec.silence = 0;
     wantedSpec.samples = SDL_AUDIO_BUFFER_SIZE;
     wantedSpec.userdata = pCodecAudioCtx;
-    wantedSpec.callback = AudioCallback::audio_callback;
+    wantedSpec.callback = AudioCallback_audio_callback;
 }
 
 void DKSDLVideo::Audio_open() {
@@ -281,7 +281,7 @@ void DKSDLVideo::Audio_open() {
     wanted_frame.sample_rate = audioSpec.freq;
     wanted_frame.channel_layout = av_get_default_channel_layout(audioSpec.channels);
     wanted_frame.channels = audioSpec.channels;
-    init_audio_packet(&audioq);
+    Audio_init_audio_packet(&audioq);
     SDL_PauseAudio(0);
 }
 
@@ -309,7 +309,7 @@ int DKSDLVideo::Audio_audio_decode_frame(AVCodecContext* aCodecCtx, uint8_t* aud
             if (got_frame) {
                 int linesize = 1;
                 data_size = av_samples_get_buffer_size(&linesize, aCodecCtx->channels, frame.nb_samples, aCodecCtx->sample_fmt, 1);
-                assert(data_size <= buf_size);
+                std::assert(data_size <= buf_size);
                 memcpy(audio_buf, frame.data[0], data_size);
             }
             if (frame.channels > 0 && frame.channel_layout == 0)
@@ -335,7 +335,7 @@ int DKSDLVideo::Audio_audio_decode_frame(AVCodecContext* aCodecCtx, uint8_t* aud
             }
             return wanted_frame.channels * len2 * av_get_bytes_per_sample(AV_SAMPLE_FMT_S16);
         }
-        if (Player::get_instance()->getAudioPacket(&audioq, &pkt, 1) < 0)
+        if (Player_getAudioPacket(&audioq, &pkt, 1) < 0)
             return -1;
         audio_pkt_data = pkt.data;
         audio_pkt_size = pkt.size;
