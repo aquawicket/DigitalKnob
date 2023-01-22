@@ -5,6 +5,7 @@
 
 ### DEPENDS ###
 dk_depend(core_media)
+dk_depend(secur32.lib)
 dk_depend(security)
 dk_depend(video_toolbox)
 dk_depend(x264)
