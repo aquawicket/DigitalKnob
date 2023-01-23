@@ -1,0 +1,4 @@
+# Build from MSYS2/mingw shell
+
+"C:/Program Files (x86)/CMake/bin/cmake.exe" -G"MSYS Makefiles" -SC:/Users/Administrator/digitalknob/DK/DKCMake -BC:/Users/Administrator/digitalknob/DK/DKApps/DKCore/win32/Debug
+"C:/Program Files (x86)/CMake/bin/cmake.exe" --build C:/Users/Administrator/digitalknob/DK/DKApps/DKCore/win32/Debug

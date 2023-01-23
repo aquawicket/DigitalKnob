@@ -51,7 +51,7 @@
 //WARNING_ENABLE
 
 /*
-#ifdef _MSC_VER
+#ifdef _MSC_VER //Visual Studio Compiler
 #define strtoll _strtoi64
 #define strtoull _strtoui64
 #endif

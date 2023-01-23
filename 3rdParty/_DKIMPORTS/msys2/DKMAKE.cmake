@@ -27,5 +27,6 @@ if(NOT EXISTS ${MSYS2}/msys2.exe)
 	dk_command(bash -c "pacman -S yasm --noconfirm")
 	dk_command(bash -c "pacman -S mingw-w64-x86_64-gcc --noconfirm")
 	dk_command(bash -c "pacman -S mingw-w64-i686-gcc --noconfirm")
+	dk_command(bash -c "pacman -S automake1.15 --noconfirm")			# used in giflib
 endif()
 

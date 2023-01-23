@@ -328,7 +328,7 @@ public:
 };
 
 //#if WIN
-#if _MSC_VER
+#if _MSC_VER //Visual Studio Compiler
 	#define DKDEBUGFUNC2(__FILE__, __LINE__, __FUNCTION__, ...) logy _logy(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
 	#define DKDEBUGFUNC(...) DKDEBUGFUNC2(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
 #elif APPLE || LINUX || ANDROID || EMSCRIPTEN

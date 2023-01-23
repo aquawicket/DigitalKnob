@@ -242,7 +242,7 @@ bool GetOSVersion(DKString& osversion){
 	if (!GetWinProductInfo(vi, dwType))
 		return DKERROR("GetWinProductInfo() failed\n");
 	std::wstringstream os;
-#if defined(_MSC_VER)
+#if defined(_MSC_VER) //Visual Studio Compiler
 	switch(dwType){
 		case PRODUCT_ULTIMATE:
 			os << "Ultimate Edition";

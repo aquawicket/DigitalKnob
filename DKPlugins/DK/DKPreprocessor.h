@@ -304,7 +304,7 @@
 #	if defined(__GXX_RTTI)
 #		define RTTI_ENABLED 1
 #	endif
-#elif defined(_MSC_VER)
+#elif defined(_MSC_VER) //Visual Studio Compiler
 #	if defined(_CPPRTTI)
 #		define RTTI_ENABLED 1
 #	endif

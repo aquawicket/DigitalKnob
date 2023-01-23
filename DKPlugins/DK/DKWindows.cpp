@@ -155,7 +155,7 @@ bool DKWindows::DrawTextOnScreen(const DKString& text){
 
 bool DKWindows::FindImageOnScreen(const DKString& file, int& x, int& y){
 	DKDEBUGFUNC(file, x, y);
-#if _MSC_VER //Microsoft Visual Studio Compiler
+#if _MSC_VER //Visual Studio Compiler
 	//// Screen to RGB ////
 	int SCREEN_WIDTH = 1280;
 	int SCREEN_HEIGHT = 1024;
