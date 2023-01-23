@@ -27,6 +27,9 @@ include_guard()
 # DISABLED FOR ALL TARGETS
 dk_disable(DKPlugin1)				# TODO
 dk_disable(DKPlugin2)				# TODO
+dk_disable(ffmpeg-dev)				# DEPRECATED: using ffmpeg instead
+dk_disable(ffmpeg-shared)			# DEPRECATED: using ffmpeg instead
+dk_disable(ffmpeg-static)			# DEPRECATED: using ffmpeg instead
 dk_disable(gradle)					# We don't need to build this from source
 dk_disable(java)					# TODO
 dk_disable(jpeg)					# DEPRECATED: using libjpeg_turbo instead
