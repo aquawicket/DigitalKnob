@@ -1,5 +1,6 @@
 # https://git.ffmpeg.org/ffmpeg.git
 # https://trac.ffmpeg.org/wiki/CompilationGuide
+# https://ffmpeg.org/platform.html#Microsoft-Visual-C_002b_002b-or-Intel-C_002b_002b-Compiler-for-Windows
 # https://www.roxlu.com/2019/062/compiling-ffmpeg-with-x264-on-windows-10-using-msvc
 # https://itnext.io/build-ffmpeg-webassembly-version-ffmpeg-js-part-2-compile-with-emscripten-4c581e8c9a16
 
@@ -7,18 +8,15 @@
 dk_depend(core_media)
 dk_depend(libgcc)
 dk_depend(libmingwex)
-dk_depend(libwinpthread)
 dk_depend(secur32.lib)
 dk_depend(security)
-dk_depend(shlwapi.lib)
-dk_depend(strmiids.lib)
-#dk_depend(vccorlib.lib)
 dk_depend(video_toolbox)
 dk_depend(ws2_32.lib)
 dk_depend(x264)
 dk_depend(xz)
 dk_depend(zlib)
 
+#FIXME:  WIN32 - 9 unresolved externals
 
 ### IMPORT ###
 dk_import(https://git.ffmpeg.org/ffmpeg.git)
@@ -122,7 +120,12 @@ MAC32_DEBUG_dk_queueshell		(../../configure --pkg-config-flags=--static --disabl
 MAC64_DEBUG_dk_queueshell		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=x86_64 --disable-x86asm --disable-iconv)
 RASPBERRY32_DEBUG_dk_queueshell	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
 RASPBERRY64_DEBUG_dk_queueshell	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=x86_64 --disable-x86asm --disable-iconv)
-WIN32_DEBUG_dk_queueshell		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --target-os=mingw32)
+#WIN32_DEBUG_dk_queueshell		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --target-os=mingw32)
+WIN32_DEBUG_dk_queueshell(../../configure 
+	--pkg-config-flags=--static
+	--disable-shared
+	--enable-static
+	--toolchain=msvc) # --cc=\${MSVC_CL}
 WIN64_DEBUG_dk_queueshell		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --target-os=mingw64)
 
 EMSCRIPTEN_DEBUG_dk_queueShell(${EMMAKE} make)
@@ -166,7 +169,8 @@ MAC32_RELEASE_dk_queueshell			(../../configure --pkg-config-flags=--static --dis
 MAC64_RELEASE_dk_queueshell			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=x86_64 --disable-x86asm --disable-iconv)
 RASPBERRY32_RELEASE_dk_queueshell	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=i686 --disable-x86asm --disable-iconv)
 RASPBERRY64_RELEASE_dk_queueshell	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=x86_64 --disable-x86asm --disable-iconv)
-WIN32_RELEASE_dk_queueshell			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --target-os=mingw32)
+#WIN32_RELEASE_dk_queueshell			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --target-os=mingw32)
+WIN32_RELEASE_dk_queueshell			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --toolchain=msvc)
 WIN64_RELEASE_dk_queueshell			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --target-os=mingw64)
 
 EMSCRIPTEN_RELEASE_dk_queueShell(${EMMAKE} make)

@@ -117,10 +117,7 @@ dk_set(IOSSIM_SYSROOT	${XCODE_DEVROOT}/Platforms/iPhoneSimulator.platform/Develo
 # linux variables
 dk_set(LINUX_GCC		/usr/bin/gcc)
 dk_set(LINUX_GXX		/usr/bin/g++)
-#if(LINUX)
-#	set(CMAKE_C_COMPILER "/usr/bin/gcc")
-#	set(CMAKE_CXX_COMPILER "/usr/bin/g++")
-#endif()
+
 
 # Android variables
 dk_set(ANDROID_API 31)
@@ -130,7 +127,7 @@ dk_set(ANDROID_MIN_API 19)
 
 
 # Visual C++ variables 
-dk_set(MSVC_CL			C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x86/cl.exe)
+dk_set(MSVC_CL			C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.34.31933/bin/Hostx64/x86/cl.exe)
 dk_set(MINGW32			${3RDPARTY}/mingw32-i686-8.1.0-release-posix-dwarf-rt_v6-rev0)
 dk_set(MINGW64			${3RDPARTY}/mingw64-x86_64-8.1.0-release-posix-seh-rt_v6-rev0)
 dk_set(MINGW32_GCC  	${MINGW32}/bin/gcc.exe)
