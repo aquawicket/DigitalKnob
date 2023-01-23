@@ -117,7 +117,8 @@ Run '/path/to/build.sh'
 ### DKCMake
 Digitalknob uses it's own build system powered by the cmake scripting language. (DKCMake) <br>
 Invoking cmake -G"<generator>" -S<DKCMake_directory> -B<DKApps/MyApp/<OS>> will use a universal /DKCMake/CMakeLists.txt script. <br>
-The build system will differenciate the appropriate scriptes to use when the output directory is pointed to <DKApps/MyApp/<OS>> <br>
+The build system will differenciate the appropriate scripts to use when the output directory is pointed to a valid <OS> folder
+EXAMPLE: "<DKApps/MyApp/ios64>" <br>
 
 Valid <OS>'s are <br>
 android32 <br>
