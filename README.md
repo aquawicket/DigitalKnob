@@ -35,10 +35,8 @@ Emscripten <br>
 [agl](https://developer.apple.com/documentation/agl/agl?language=objc) <br>
 [android-ndk](https://github.com/android/ndk) <br>
 [ant](https://github.com/apache/ant) <br>
-<!-- [aom](https://aomedia.googlesource.com/aom) <br> -->
 [appkit](https://developer.apple.com/documentation/appkit?language=objc) <br>
 [astyle](http://astyle.sourceforge.net/) <br>
-<!-- [aubio](https://github.com/aubio/aubio) <br> -->
 [audio_toolbox](https://developer.apple.com/documentation/audiotoolbox?language=objc) <br>
 [audiounit](https://developer.apple.com/documentation/audiotoolbox/audiounit?language=objc) <br>
 [autotools](https://www.gnu.org/software/automake/manual/html_node/Autotools-Introduction.html) <br>
@@ -57,9 +55,6 @@ Emscripten <br>
 [cmake](https://cmake.org) <br>
 [cocoa](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CocoaFundamentals/WhatIsCocoa/WhatIsCocoa.html) <br>
 [codemirror](https://github.com/codemirror/CodeMirror) <br>
-<!-- [command_line_tools]() <br> -->
-<!-- [conio-for-linux](https://github.com/nowres/conio-for-linux) <br> -->
-<!-- [content](https://github.com/mdn/content) <br> -->
 [core_audio](https://developer.apple.com/library/archive/documentation/MusicAudio/Conceptual/CoreAudioOverview/WhatisCoreAudio/WhatisCoreAudio.html) <br>
 [core_foundation](https://developer.apple.com/documentation/corefoundation) <br>
 [core_graphics](https://developer.apple.com/documentation/coregraphics?language=objc) <br>
@@ -67,23 +62,16 @@ Emscripten <br>
 [core_motion](https://developer.apple.com/documentation/coremotion?language=objc) <br>
 [core_services](https://developer.apple.com/documentation/coregraphics?language=objc) <br>
 [core_video](https://developer.apple.com/documentation/corevideo) <br>
-<!-- [cpp-subprocess](https://github.com/tsaarni/cpp-subprocess) <br> -->
-<!-- [crosswalk]() <br> -->
 [cryptopp](https://github.com/weidai11/cryptopp) <br>
 [curl](https://github.com/bagder/curl) <br>
 [duktape](https://github.com/svaarala/duktape) <br>
-<!-- [ffmpeg](https://github.com/FFmpeg/FFmpeg) <br> -->
-<!-- [freealut](https://github.com/vancegroup/freealut) <br> -->
 [freetype](https://github.com/vinniefalco/FreeType) <br>
 [giflib](http://sourceforge.net/projects/giflib/files/) <br>
 [imagemagick](https://github.com/ImageMagick/ImageMagick/tree/master/Magick%2B%2B) <br>
-<!-- [libjpeg](https://github.com/LuaDist/libjpeg) <br> -->
 [libjpeg-turbo](https://github.com/libjpeg-turbo/libjpeg-turbo) <br>
 [libarchive](https://github.com/libarchive/libarchive) <br>
 [libiconv](http://gnuwin32.sourceforge.net/packages/libiconv.htm) <br>
-<!-- [libtorrent](https://github.com/arvidn/libtorrent) <br> -->
 [libuv](https://github.com/libuv/libuv) <br>
-<!-- [libvncserver](https://github.com/LibVNC/libvncserver) <br> -->
 [libwebsockets](https://github.com/warmcat/libwebsockets) <br>
 [libxml2](http://xmlsoft.org/) <br>
 [leptonica](https://github.com/DanBloomberg/leptonica) <br>
@@ -91,17 +79,13 @@ Emscripten <br>
 [ogg](https://github.com/gcp/libogg) <br>
 [openal](https://github.com/apportable/openal-soft) <br>
 [opencv](https://github.com/opencv/opencv) <br>
-<!-- [openframeworks](https://github.com/openframeworks/openFrameworks) <br> -->
 [openscenegraph](https://github.com/openscenegraph/osg) <br>
 [openssl](http://www.npcglib.org/~stathis/blog/precompiled-openssl/) <br>
-<!-- [osgaudio](https://github.com/mccdo/osgaudio) <br> -->
-<!-- [osgbullet](https://github.com/mccdo/osgbullet) <br> -->
 [osgworks](https://github.com/mccdo/osgworks) <br>
 [libpng](https://github.com/coapp-packages/libpng) <br>
 [pofodo](http://podofo.sourceforge.net) <br>
 [pugixml](https://github.com/zeux/pugixml) <br>
 [rmlui](https://github.com/mikke89/RmlUi) <br>
-<!-- [rtaudio](https://github.com/thestk/rtaudio) <br> -->
 [rtmidi](https://github.com/thestk/rtmidi) <br>
 [sdl](https://github.com/libsdl-org/SDL) <br>
 [sdl2_gif](http://themealena.fr/html/SDL_GIFlib.php) <br>
@@ -111,13 +95,11 @@ Emscripten <br>
 [sfml](https://github.com/SFML/SFML) <br>
 [smpeg2](https://github.com/ErintLabs/SDL_mixer/tree/master/external/smpeg2-2.0.0) <br>
 [stackwalker](https://stackwalker.codeplex.com/) <br>
-<!-- [tesseract](https://github.com/tesseract-ocr/tesseract) <br> -->
 [threadpool](http://threadpool.sourceforge.net/) <br>
 [tidy-html5](http://tidy.sourceforge.net/) <br>
 [tiff](https://github.com/LuaDist/libtiff) <br>
 [uwebsockets](https://github.com/uNetworking/uWebSockets) <br>
 [vorbis](https://github.com/soundcloud/vorbis) <br>
-<!-- [waave](https://github.com/grepwood/waave) <br> -->
 [webview](https://developer.android.com/reference/android/webkit/WebView.html) <br>
 [xz](https://github.com/nobled/xz) <br>
 [zlib](https://github.com/madler/zlib) <br>
@@ -131,6 +113,34 @@ Download and run [build.bat](https://github.com/aquawicket/DigitalKnob/releases/
 Download [build.sh](https://github.com/aquawicket/DigitalKnob/releases/download/1.0b/build.sh) <br>
 From terminal run 'chmod 777 /path/to/build.sh' <br>
 Run '/path/to/build.sh'
+
+### DKCMake
+Digitalknob uses it's own build system powered by the cmake scripting language. (DKCMake) <br>
+Invoking cmake -G"<generator>" -S<DKCMake_directory> -B<DKApps/MyApp/<OS>> will use a universal /DKCMake/CMakeLists.txt script. <br>
+The build system will differenciate the appropriate scriptes to use when the output directory is pointed to <DKApps/MyApp/<OS>> <br>
+
+Valid <OS>'s are <br>
+android32 <br>
+android64 <br>
+emscripten <br>
+ios32 <br>
+ios64 <br>
+iossim32 <br>
+iossim64 <br>
+linux32 <br>
+linux64 <br>
+mac32 <br>
+mac64 <br>
+raspberry32 <br>
+raspberry64 <br>
+win32 <br>
+win64 <br>
+
+EXAMPLE: cmake -G"Visual Studio 17 2022" -SC:/Users/<username>/digitalknob/DK/DKCMake -BC:/Users/<username>/digitalknob/DK/DKApps/DKCore/win32
+	"will use Visual Studio 17 2022 to build DKCore for the windows i686 platform"
+"NOTE: using build.sh to build DKBuilder, and using DKBuilder_APP.exe is the prefered and tested way to build DK Apps" 
+
+
 
 
 <br><br><br>
