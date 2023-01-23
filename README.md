@@ -27,79 +27,279 @@ Emscripten <br>
 ### Supported Frameworks
 [SDL](https://github.com/spurious/SDL-mirror) <br>
 
-
 ### Supported Tools, Libraries and Frameworks
-[agl](https://developer.apple.com/documentation/agl/agl?language=objc) <br>
-[android-ndk](https://github.com/android/ndk) <br>
-[ant](https://github.com/apache/ant) <br>
-[appkit](https://developer.apple.com/documentation/appkit?language=objc) <br>
-[astyle](http://astyle.sourceforge.net/) <br>
-[audio_toolbox](https://developer.apple.com/documentation/audiotoolbox?language=objc) <br>
-[audiounit](https://developer.apple.com/documentation/audiotoolbox/audiounit?language=objc) <br>
-[autotools](https://www.gnu.org/software/automake/manual/html_node/Autotools-Introduction.html) <br>
-[avfoundation](https://developer.apple.com/documentation/avfoundation?language=objc) <br>
-[avkit](https://developer.apple.com/documentation/avkit?language=objc) <br>
-[avf_audio](https://developer.apple.com/documentation/avfaudio?language=objc) <br>
-[babel](https://github.com/babel/babel) <br>
-[boost](https://github.com/boostorg/boost) <br>
-[boxer](https://github.com/aaronmjacobs/Boxer) <br>
-[build-essential](https://packages.ubuntu.com/focal/build-essential) <br>
-[bullet3](https://github.com/bulletphysics/bullet3) <br>
-[bzip2](https://github.com/asimonov-im/bzip2) <br>
-[carbon](https://developer.apple.com/documentation/coreservices/carbon_core) <br>
-[cef_binary](https://bitbucket.org/chromiumembedded/cef) <br>
-[chart.js](https://github.com/chartjs/Chart.js) <br>
-[cmake](https://cmake.org) <br>
-[cocoa](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CocoaFundamentals/WhatIsCocoa/WhatIsCocoa.html) <br>
-[codemirror](https://github.com/codemirror/CodeMirror) <br>
-[core_audio](https://developer.apple.com/library/archive/documentation/MusicAudio/Conceptual/CoreAudioOverview/WhatisCoreAudio/WhatisCoreAudio.html) <br>
-[core_foundation](https://developer.apple.com/documentation/corefoundation) <br>
-[core_graphics](https://developer.apple.com/documentation/coregraphics?language=objc) <br>
-[core_haptics](https://developer.apple.com/documentation/corehaptics?language=objc) <br>
-[core_motion](https://developer.apple.com/documentation/coremotion?language=objc) <br>
-[core_services](https://developer.apple.com/documentation/coregraphics?language=objc) <br>
-[core_video](https://developer.apple.com/documentation/corevideo) <br>
-[cryptopp](https://github.com/weidai11/cryptopp) <br>
-[curl](https://github.com/bagder/curl) <br>
-[duktape](https://github.com/svaarala/duktape) <br>
-[freetype](https://github.com/vinniefalco/FreeType) <br>
-[giflib](http://sourceforge.net/projects/giflib/files/) <br>
-[imagemagick](https://github.com/ImageMagick/ImageMagick/tree/master/Magick%2B%2B) <br>
-[libjpeg-turbo](https://github.com/libjpeg-turbo/libjpeg-turbo) <br>
-[libarchive](https://github.com/libarchive/libarchive) <br>
-[libiconv](http://gnuwin32.sourceforge.net/packages/libiconv.htm) <br>
-[libuv](https://github.com/libuv/libuv) <br>
-[libwebsockets](https://github.com/warmcat/libwebsockets) <br>
-[libxml2](http://xmlsoft.org/) <br>
-[leptonica](https://github.com/DanBloomberg/leptonica) <br>
-[msinttypes](https://github.com/chemeris/msinttypes)<br>
-[ogg](https://github.com/gcp/libogg) <br>
-[openal](https://github.com/apportable/openal-soft) <br>
-[opencv](https://github.com/opencv/opencv) <br>
-[openscenegraph](https://github.com/openscenegraph/osg) <br>
-[openssl](http://www.npcglib.org/~stathis/blog/precompiled-openssl/) <br>
-[osgworks](https://github.com/mccdo/osgworks) <br>
-[libpng](https://github.com/coapp-packages/libpng) <br>
-[pofodo](http://podofo.sourceforge.net) <br>
-[pugixml](https://github.com/zeux/pugixml) <br>
-[rmlui](https://github.com/mikke89/RmlUi) <br>
-[rtmidi](https://github.com/thestk/rtmidi) <br>
-[sdl](https://github.com/libsdl-org/SDL) <br>
-[sdl2_gif](http://themealena.fr/html/SDL_GIFlib.php) <br>
-[sdl_image](https://www.libsdl.org/projects/SDL_image/) <br>
-[sdl_mixer](https://github.com/aduros/SDL_mixer) <br>
-[sdl_ttf](https://www.libsdl.org/projects/SDL_ttf/) <br>
-[sfml](https://github.com/SFML/SFML) <br>
-[smpeg2](https://github.com/ErintLabs/SDL_mixer/tree/master/external/smpeg2-2.0.0) <br>
-[stackwalker](https://stackwalker.codeplex.com/) <br>
-[threadpool](http://threadpool.sourceforge.net/) <br>
-[tidy-html5](http://tidy.sourceforge.net/) <br>
-[tiff](https://github.com/LuaDist/libtiff) <br>
-[uwebsockets](https://github.com/uNetworking/uWebSockets) <br>
-[vorbis](https://github.com/soundcloud/vorbis) <br>
-[webview](https://developer.android.com/reference/android/webkit/WebView.html) <br>
-[xz](https://github.com/nobled/xz) <br>
-[zlib](https://github.com/madler/zlib) <br>
+[agl
+[android
+[android-build-tools
+[android-cmake
+[android-cmdline-tools
+[android-java-tools
+[android-ndk
+[android-platform-tools
+[android-platforms
+[android-sdk
+[android-sdk-tools
+[android-sources
+[android-studio
+[android-system-images
+[ant
+[aom
+[appkit
+[asio
+[astyle
+[aubio
+[audiounit
+[audio_toolbox
+[autotools
+[avf_audio
+[av_foundation
+[av_kit
+[babel
+[backward-cpp
+[boost
+[boxer
+[build-essential
+[bullet3
+[bzip2
+[bzip2-win-build
+[carbon
+[cef_binary
+[chart.js
+[cmake
+[cocoa
+[codemirror
+[command_line_tools
+[conio-for-linux
+[content
+[core_audio
+[core_foundation
+[core_graphics
+[core_haptics
+[core_media
+[core_motion
+[core_services
+[core_video
+[cpp-subprocess
+[crosswalk
+[cryptopp
+[curl
+[ddd
+[dependencywalker
+[diff-match-patch
+[dl
+[doxygen
+[duk4vb
+[dukluv
+[duktape
+[dxva2.dll
+[emsdk
+[far
+[ffmpeg
+[ffmpeg-dev
+[ffmpeg-shared
+[ffmpeg-static
+[fftw3
+[flac
+[fmt
+[fontconfig
+[force_feedback
+[foundation
+[freealut
+[freeimage
+[freetype
+[game_controller
+[gdal
+[ghidra
+[ghostscript
+[giflib
+[git
+[glew
+[glintercept
+[gl_kit
+[gnutls
+[gradle
+[gstreamer
+[gzip
+[homebrew
+[ilmerge
+[imageio
+[imagemagick
+[imm32.lib
+[iokit
+[ios-cmake
+[iphlpapi.lib
+[jasper
+[java
+[jerryscript
+[jpeg
+[js-yaml
+[json
+[kdevelop
+[lame
+[leptonica
+[libarchive
+[libasound2-dev
+[libatomic
+[libb2
+[libcaca
+[libexpat
+[libgcc
+[libgl1-mesa-dev
+[libglfw3-dev
+[libglib2.0-dev
+[libglu1-mesa-dev
+[libgtk-3-dev
+[libgtk2.0-dev
+[libgtkglext1-dev
+[libiconv
+[libjpeg-turbo
+[libmd
+[libmingwex
+[libpng
+[libpsl
+[librocket
+[libsndfile
+[libsndfile1-dev
+[libssh
+[libsystemd-dev
+[libtorrent
+[libudev-dev
+[libusb
+[libuv
+[libvncserver
+[libwebp
+[libwebsockets
+[libwinpthread
+[libx11
+[libx11-dev
+[libxcursor-dev
+[libxml2
+[libxrandr-dev
+[libxtst-dev
+[lighttpd
+[lodepng
+[log
+[lua
+[lz4
+[m
+[macports
+[media_player
+[mesa-common-dev
+[metal
+[metal-cpp
+[metalKit
+[mingw-win32-application
+[mingw32
+[mingw64
+[miniweb
+[mlocate
+[mobile_core_services
+[moment
+[mpg123
+[msinttypes
+[msys
+[msys2
+[nasm
+[ncurses
+[nodejs
+[notepadpp
+[ofxcmake
+[ofxiosboost-1.60.0
+[ofxiosboost-1.60.0-libc-bitcode
+[ogg
+[openal
+[openblas
+[opencv
+[openframeworks
+[opengl
+[opengles
+[openjdk
+[openjdk-8u41
+[openjpeg
+[openmw
+[openscenegraph
+[opensles
+[openssl
+[opus
+[os.js
+[osgaudio
+[osgbullet
+[osgrmlui
+[osgworks
+[pacman.c
+[pako
+[pcre2
+[pdh.lib
+[pearl
+[php-src
+[poco
+[podofo
+[psapi.lib
+[pugixml
+[python
+[pyyaml
+[quartz_core
+[rlottie
+[rmlui
+[rmlui-d3d11
+[rmluieditor
+[rocketship
+[rpm
+[rtaudio
+[rtmidi
+[sdl
+[sdl-gpu
+[sdl2_gif
+[sdl2_giflib_sa
+[sdl_image
+[sdl_mixer
+[sdl_net
+[sdl_rtf
+[sdl_ttf
+[secur32.lib
+[security
+[setupapi.lib
+[sfml
+[shlwapi.lib
+[simple-getch
+[smpeg2
+[stackwalker
+[strmiids.lib
+[sun-js
+[sw
+[sw-client
+[system_configuration
+[terminator
+[tesseract
+[threadpool
+[tidy-html5
+[tiff
+[uikit
+[upx
+[userenv.lib
+[uwebsockets
+[vccorlib.lib
+[vcpkg
+[vc_redist
+[version.lib
+[verysleepy
+[vfw32.lib
+[video_toolbox
+[visualstudio
+[vorbis
+[waave
+[wasi
+[wasm2brs
+[wasm3
+[winmm.lib
+[ws2_32.lib
+[x264
+[x265
+[xcode
+[xquartz
+[xz
+[zlib
+[zstd
 
 
 # How to build
