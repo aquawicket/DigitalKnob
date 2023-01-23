@@ -607,7 +607,7 @@ if(WIN)
 	dk_disable(rmlui-d3d11)
 	dk_disable(sdl_rtf)
 	dk_disable(waave)				# error C2065: 'PIX_FMT_YUV420P': undeclared identifier.  https://sourceforge.net/p/guvcview/tickets/34/
-	#dk_disable(x264)
+	dk_disable(x264)				# broken with new msys2,   check DKMAKE.cmake build script
 	dk_disable(x265)
 endif(WIN)
 
