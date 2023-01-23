@@ -121,12 +121,8 @@ MAC32_DEBUG_dk_queueshell		(../../configure --pkg-config-flags=--static --disabl
 MAC64_DEBUG_dk_queueshell		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=x86_64 --disable-x86asm --disable-iconv)
 RASPBERRY32_DEBUG_dk_queueshell	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
 RASPBERRY64_DEBUG_dk_queueshell	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=x86_64 --disable-x86asm --disable-iconv)
-#WIN32_DEBUG_dk_queueshell		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --target-os=mingw32)
-WIN32_DEBUG_dk_queueshell(../../configure 
-	--pkg-config-flags=--static
-	--disable-shared
-	--enable-static
-	--toolchain=msvc) # --cc=\${MSVC_CL}
+WIN32_DEBUG_dk_queueshell		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --target-os=mingw32)
+#WIN32_DEBUG_dk_queueshell(../../configure --pkg-config-flags=--static --disable-shared --enable-static --toolchain=msvc) # --cc=\${MSVC_CL}
 WIN64_DEBUG_dk_queueshell		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --target-os=mingw64)
 
 EMSCRIPTEN_DEBUG_dk_queueShell(${EMMAKE} make)
@@ -170,8 +166,8 @@ MAC32_RELEASE_dk_queueshell			(../../configure --pkg-config-flags=--static --dis
 MAC64_RELEASE_dk_queueshell			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=x86_64 --disable-x86asm --disable-iconv)
 RASPBERRY32_RELEASE_dk_queueshell	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=i686 --disable-x86asm --disable-iconv)
 RASPBERRY64_RELEASE_dk_queueshell	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=x86_64 --disable-x86asm --disable-iconv)
-#WIN32_RELEASE_dk_queueshell			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --target-os=mingw32)
-WIN32_RELEASE_dk_queueshell			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --toolchain=msvc)
+WIN32_RELEASE_dk_queueshell			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --target-os=mingw32)
+#WIN32_RELEASE_dk_queueshell			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --toolchain=msvc)
 WIN64_RELEASE_dk_queueshell			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --target-os=mingw64)
 
 EMSCRIPTEN_RELEASE_dk_queueShell(${EMMAKE} make)

@@ -34,11 +34,11 @@ dk_disable(librocket)				# OBSOLETE: replaced by rmlui
 dk_disable(libx11)					# TODO
 dk_disable(mpg123)					# TODO
 
-# NOTE: making the move to msys2
+# NOTE: migrated to msys2
 dk_disable(msys)
 dk_disable(mingw32)
 dk_disable(mingw64)
-#dk_disable(msys2)					# TODO: currently using msys
+#dk_disable(msys2)					
 
 dk_disable(sdl2_gif)				# DEPRECATED: using SDL_Image animation instead
 dk_disable(sdl2_giflib_sa)			# DEPRECATED: updated version of sdl2_gif. Using SDL_Image animation instead
@@ -590,7 +590,7 @@ if(WIN)
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKUpdate)			# build errors
 	dk_disable(dukluv)
-	dk_disable(ffmpeg)				# FIXME:   check DKMake.cmake script.  msys2
+	#dk_disable(ffmpeg)				# FIXME:   check DKMake.cmake script.  msys2
 	dk_disable(fontconfig)
 	dk_disable(gdal)
 	dk_disable(gzip)
