@@ -155,6 +155,7 @@ bool DKWindows::DrawTextOnScreen(const DKString& text){
 
 bool DKWindows::FindImageOnScreen(const DKString& file, int& x, int& y){
 	DKDEBUGFUNC(file, x, y);
+#if _MSC_VER //Microsoft Visual Studio Compiler
 	//// Screen to RGB ////
 	int SCREEN_WIDTH = 1280;
 	int SCREEN_HEIGHT = 1024;
@@ -263,6 +264,9 @@ bool DKWindows::FindImageOnScreen(const DKString& file, int& x, int& y){
 	::DeleteDC(memDC1);
 	::DeleteDC(memDC2);
 	return false;
+#else
+	return DKERROR("not working for this copiler \n");
+#endif
 }
 
 bool DKWindows::GetClipboard(DKString& text){
