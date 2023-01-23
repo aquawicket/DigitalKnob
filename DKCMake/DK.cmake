@@ -11,7 +11,7 @@ set(DKTODO_ENABLED				1		CACHE INTERNAL "")	# enable dk_todo() functions
 set(DKVERBOSE_ENABLED			0		CACHE INTERNAL "")	# enable dk_verbose() functions
 set(HALT_ON_ERRORS				0		CACHE INTERNAL "")	# halt cmake build script on errors
 set(HALT_ON_WARNINGS			0		CACHE INTERNAL "")	# halt cmake build script on warnings
-set(INSTALL_DKLIBS              0		CACHE INTERNAL "")	# install header files and libraries to DKInstall directory
+set(INSTALL_DKLIBS              1		CACHE INTERNAL "")	# install header files and libraries to DKBIN directory
 set(MAC_TERMINAL_WRAPPER        1		CACHE INTERNAL "")	# open app with terminal
 set(PRINT_CALL_DETAILS 			1		CACHE INTERNAL "")	# print function call details
 set(PRINT_FILE_NAMES 			1 		CACHE INTERNAL "")	# print function call file names
