@@ -905,7 +905,7 @@ function(dk_deleteEmptyDirectories path)
 		# https://stackoverflow.com/a/30138960/688352
 		execute_process(COMMAND ROBOCOPY ${path} ${path} /S /MOVE WORKING_DIRECTORY ${path})
 	else()
-		dk_error("Not implemented for this platform")
+		execute_process(COMMAND find ${path} -empty -type d -delete WORKING_DIRECTORY ${path})
 	endif()
 endfunction()
 
