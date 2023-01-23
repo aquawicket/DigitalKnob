@@ -304,7 +304,7 @@ zstd
 
 # How to build
 ### Windows Host
-Download and run [build.bat](https://github.com/aquawicket/DigitalKnob/releases/download/1.0b/build.cmd) 
+Download and run [build.cmd](https://github.com/aquawicket/DigitalKnob/releases/download/1.0b/build.cmd) 
 
 ### Unix Host
 Download [build.sh](https://github.com/aquawicket/DigitalKnob/releases/download/1.0b/build.sh) <br>
