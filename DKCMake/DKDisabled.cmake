@@ -584,6 +584,7 @@ if(WIN)
 	dk_disable(DKOSGWidget)			# build errors
 	dk_disable(DKScreenRecorder)
 	dk_disable(DKSDLWav)			# build errors
+	dk_disable(DKSDLWaave)			# requires waave
 	dk_disable(DKSFMLRml)			# INCOMPLETE
 	dk_disable(DKThread)			# build errors
 	dk_disable(DKTorrent)			# requires libtorrent
