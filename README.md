@@ -26,10 +26,7 @@ Emscripten <br>
 
 ### Supported Frameworks
 [SDL](https://github.com/spurious/SDL-mirror) <br>
-<!-- [SFML](https://github.com/SFML/SFML) -->
-[OpenSceneGraph](https://github.com/openscenegraph/osg) <br>
-<!-- [OpenFrameworks](https://github.com/openframeworks/openFrameworks) -->
-[Emscripten](https://github.com/kripken/emscripten) <br>
+
 
 ### Supported Tools, Libraries and Frameworks
 [agl](https://developer.apple.com/documentation/agl/agl?language=objc) <br>
