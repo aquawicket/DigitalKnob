@@ -22,11 +22,11 @@ if(NOT EXISTS ${MSYS2}/msys2.exe)
 	dk_setEnv("PATH" "${MSYS2}/usr/bin")
 	
 	# install needed packages
-	dk_command(bash -c "pacman -S make --noconfirm")	
-	dk_command(bash -c "pacman -S diffutils --noconfirm")
-	dk_command(bash -c "pacman -S yasm --noconfirm")
-	dk_command(bash -c "pacman -S mingw-w64-x86_64-gcc --noconfirm")
-	dk_command(bash -c "pacman -S mingw-w64-i686-gcc --noconfirm")
-	dk_command(bash -c "pacman -S automake1.15 --noconfirm")			# used in giflib
+	dk_command(bash -c "pacman -S make --noconfirm")						# make
+	dk_command(bash -c "pacman -S diffutils --noconfirm")					# diffutils
+	dk_command(bash -c "pacman -S yasm --noconfirm")						# yasm
+	dk_command(bash -c "pacman -S mingw-w64-x86_64-gcc --noconfirm")		# WIN64 builds
+	dk_command(bash -c "pacman -S mingw-w64-i686-gcc --noconfirm")			# WIN32 builds
+	dk_command(bash -c "pacman -S mingw-w64-x86_64-autotools --noconfirm")	# used by giflib
 endif()
 
