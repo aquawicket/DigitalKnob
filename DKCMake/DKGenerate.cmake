@@ -139,7 +139,7 @@ foreach(plugin ${dkdepend_list})
 	if(${isDKPlugin} GREATER -1)
 		# Install header files for DKPlugin
 		if(INSTALL_DKLIBS)
-			file(INSTALL DIRECTORY ${plugin_path}/ DESTINATION ${CMAKE_INSTALL_PREFIX}/${plugin}/include FILES_MATCHING PATTERN "*.h")
+			file(INSTALL DIRECTORY ${plugin_path}/ DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${plugin} FILES_MATCHING PATTERN "*.h")
 		endif()
 	
 		#Add the DKPlugin to the app project
