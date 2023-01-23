@@ -21,7 +21,7 @@ if(NOT EXISTS ${MSYS2}/msys2.exe)
 	### ADD msys2 bin directory to path environment variable
 	dk_setEnv("PATH" "${MSYS2}/usr/bin")
 	
-	# install mingw64
+	# install needed packages
 	dk_command(bash -c "pacman -S make --noconfirm")	
 	dk_command(bash -c "pacman -S diffutils --noconfirm")
 	dk_command(bash -c "pacman -S yasm --noconfirm")
