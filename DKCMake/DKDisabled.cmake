@@ -590,7 +590,7 @@ if(WIN)
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKUpdate)			# build errors
 	dk_disable(dukluv)
-	#dk_disable(ffmpeg)
+	dk_disable(ffmpeg)				# FIXME:   check DKMake.cmake script.  msys2
 	dk_disable(fontconfig)
 	dk_disable(gdal)
 	dk_disable(gzip)
