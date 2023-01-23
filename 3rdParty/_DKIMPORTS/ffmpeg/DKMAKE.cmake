@@ -6,6 +6,7 @@
 
 ### DEPENDS ###
 dk_depend(core_media)
+RASPBERRY_dk_depend(libatomic)
 dk_depend(libgcc)
 dk_depend(libmingwex)
 dk_depend(secur32.lib)
