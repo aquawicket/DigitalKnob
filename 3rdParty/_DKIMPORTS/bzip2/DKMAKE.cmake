@@ -7,8 +7,7 @@
 
 ### DEPEND ###
 dk_depend(libgcc)
-dk_depend(mingw32)
-dk_depend(mingw64)
+#dk_depend(msys)		# migrated to msys2
 dk_depend(msys2)
 
 

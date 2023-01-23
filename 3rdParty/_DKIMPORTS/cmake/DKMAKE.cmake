@@ -8,7 +8,7 @@ set(COMPILE_CMAKE 0)
 
 if(COMPILE_CMAKE)
 	################################################################################################################
-	#dk_depend(msys)
+	#dk_depend(msys)	# migrated to msys2
 	#dk_depend(msys2)
 	dk_depend(openssl)
 	dk_import(https://github.com/Kitware/CMake.git)

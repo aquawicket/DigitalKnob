@@ -8,7 +8,7 @@
 
 ### DEPEND ###
 MAC_dk_depend(autotools)
-WIN_dk_depend(msys)
+#WIN_dk_depend(msys)		# migrated to msys2
 WIN_dk_depend(msys2)
 
 

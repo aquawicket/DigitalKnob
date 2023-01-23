@@ -8,9 +8,6 @@ dk_import(https://github.com/xz-mirror/xz.git)
 
 
 ### autotools ###
-#dk_depend(mingw32)
-#dk_depend(mingw64)
-#dk_depend(msys2)
 #dk_set(XZ_VERSION 5.2.5)
 #dk_set(XZ_DL https://tukaani.org/xz/${XZ_FOLDER}.tar.gz)
 #dk_set(XZ_NAME xz-${XZ_VERSION})
