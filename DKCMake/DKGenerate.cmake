@@ -128,15 +128,20 @@ foreach(plugin ${dkdepend_list})
 	string(FIND "${DKPLUGIN_LIST_lower}" "${plugin_lower}" isDKPlugin)
 	
 	# Install 3rd Party Libs
-	if(INSTALL_DKLIBS)
-		if(${isDKPlugin} EQUAL -1)
-			if(EXISTS ${plugin_path}/${BUILD_DIR}/cmake_install.cmake)
-				dk_queueCommand(${CMAKE_COMMAND} --install ${plugin_path}/${BUILD_DIR})
-			endif()
-		endif()
-	endif()
+	#if(INSTALL_DKLIBS)
+	#	if(${isDKPlugin} EQUAL -1)
+	#		if(EXISTS ${plugin_path}/${BUILD_DIR}/cmake_install.cmake)
+	#			dk_queueCommand(${CMAKE_COMMAND} --install ${plugin_path}/${BUILD_DIR})
+	#		endif()
+	#	endif()
+	#endif()
 	
 	if(${isDKPlugin} GREATER -1)
+		# Install header files for DKPlugin
+		if(INSTALL_DKLIBS)
+			file(INSTALL DIRECTORY ${plugin_path}/ DESTINATION ${CMAKE_INSTALL_PREFIX}/${plugin}/include FILES_MATCHING PATTERN "*.h")
+		endif()
+	
 		#Add the DKPlugin to the app project
 		if(EXISTS "${plugin_path}/CMakeLists.txt")
 			if(VISUAL_STUDIO_IDE OR XCODE_IDE)

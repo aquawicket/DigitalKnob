@@ -2518,7 +2518,7 @@ function(dk_lib lib_path)
 				dk_getFilename(${CMAKE_CURRENT_LIST_DIR} LIB_NAME)
 				file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/${LIB_NAME}/lib/${OS})
 			else()
-				dk_error("Could not locate ${lib_path}")
+				dk_error("DKINSTALL: Could not locate ${lib_path}")
 			endif()
 		endif()
 		
