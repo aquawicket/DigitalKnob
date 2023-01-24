@@ -141,7 +141,7 @@ foreach(plugin ${dkdepend_list})
 		if(INSTALL_DKLIBS)
 			dk_info("Installing ${plugin} header files")
 			file(INSTALL DIRECTORY ${plugin_path}/ DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${plugin} FILES_MATCHING PATTERN "*.h")
-			dk_deleteEmptyDirectories(${CMAKE_INSTALL_PREFIX}/include/${plugin})
+			dk_deleteEmptyDirectories(${CMAKE_INSTALL_PREFIX}/include) #/${plugin})
 		endif()
 	
 		#Add the DKPlugin to the app project
