@@ -156,8 +156,8 @@
 	#ifdef HAVE_osgdb_ffmpeg
 		#ifndef ANDROID
 			#include "DKOSGVideo/DKOSGVideo.h"
-			DKVIDEO_LOAD_DLLS()
-			USE_OSGPLUGIN(ffmpeg)
+			//DKVIDEO_LOAD_DLLS()
+			//USE_OSGPLUGIN(ffmpeg)
 		#endif
 	#endif
 	#ifdef HAVE_osgdb_freetype
