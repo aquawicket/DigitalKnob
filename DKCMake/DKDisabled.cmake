@@ -25,6 +25,7 @@ include_guard()
 
 
 # DISABLED FOR ALL TARGETS
+dk_disable(bgfx)					# TODO
 dk_disable(DKPlugin1)				# TODO
 dk_disable(DKPlugin2)				# TODO
 dk_disable(ffmpeg-dev)				# DEPRECATED: using ffmpeg instead
