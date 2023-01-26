@@ -618,14 +618,16 @@ EMSCRIPTEN_dk_depend(DKPhp)
 
 #LINUX_dk_depend	(kdevelop)
 LINUX_dk_depend		(libx11-dev)
-LINUX_dk_lib		(pthread)
+#LINUX_dk_lib		(pthread)
+LINUX_dk_depend		(pthread)
 LINUX_dk_lib		(dl)
 LINUX_dk_lib		(libstdc++fs.a)
 
 MAC_HOST_dk_depend	(xcode)
 
 RASPBERRY_dk_depend	(libx11-dev)
-RASPBERRY_dk_lib	(pthread)
+#RASPBERRY_dk_lib	(pthread)
+RASPBERRY_dk_depend	(pthread)
 RASPBERRY_dk_lib	(dl)
 RASPBERRY_dk_lib	(libstdc++fs.a)
 RASPBERRY_dk_linkDir(/opt/vc/lib)
