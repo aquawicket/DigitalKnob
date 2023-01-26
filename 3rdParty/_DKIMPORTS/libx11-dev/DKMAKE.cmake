@@ -9,11 +9,18 @@ if(MAC)
 endif()
 
 if(LINUX OR RASPBERRY)
-	dk_set(CURRENT_DIR /usr)
-	dk_command(sudo apt -y install libx11-dev)
-
-	### LINK ###
-	dk_include(/usr/include/X11)
+	#dk_set(CURRENT_DIR /usr)
+	
+	if(EXISTS /usr/include/X11)
+		### LINK ###
+		dk_include(/usr/include/X11)
+	else if(EXISTS /usr/local/include/X11)
+		### LINK ###
+		dk_include(/usr/local/include/X11)
+	else()
+		### INSTALL ###
+		dk_command(sudo apt -y install libx11-dev)
+	endif()
 	
 	#dynamic linking
 	SET(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -lX11")
