@@ -578,6 +578,12 @@ if(RASPBERRY)
 endif(RASPBERRY)
 
 
+# Disabled for tinycore targets
+if(TINYCORE)
+	dk_disable(mesa-common-dev)
+endif()
+
+
 # Disabled for Windows targets
 if(WIN) 
 	dk_disable(aom)					# Perl is required to build libaom.

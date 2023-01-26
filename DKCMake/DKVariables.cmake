@@ -354,6 +354,13 @@ endif()
 #########################################################################################
 #########################################################################################
 
+# TINYCORE
+string(FIND "${CMAKE_HOST_SYSTEM_VERSION}" "tinycore" index)
+if(${index} GREATER -1)
+	dk_info("Detected tinycore OS")
+	dk_set(TINYCORE ON)
+endif()	
+	
 # WIN 32
 string(FIND "${CMAKE_BINARY_DIR}" "/win32" index)
 if(${index} GREATER -1)
