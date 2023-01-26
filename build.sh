@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# to run this script requires privledges 
+# to run this script requires privledges
 # > chmod 777 build.sh
 
 if [ -e /proc/device-tree/model ]; then
