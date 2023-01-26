@@ -583,6 +583,7 @@ if(TINYCORE)
 	dk_disable(libasound2-dev)
 	dk_disable(libgl1-mesa-dev)
 	dk_disable(libxrandr-dev)
+	dk_disable(libxtst-dev)
 	dk_disable(mesa-common-dev)
 endif()
 
