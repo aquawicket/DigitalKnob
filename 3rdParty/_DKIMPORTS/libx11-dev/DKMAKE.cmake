@@ -14,7 +14,7 @@ if(LINUX OR RASPBERRY)
 	if(EXISTS /usr/include/X11)
 		### LINK ###
 		dk_include(/usr/include/X11)
-	else if(EXISTS /usr/local/include/X11)
+	elseif(EXISTS /usr/local/include/X11)
 		### LINK ###
 		dk_include(/usr/local/include/X11)
 	else()
