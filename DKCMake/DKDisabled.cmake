@@ -580,6 +580,7 @@ endif(RASPBERRY)
 
 # Disabled for tinycore targets
 if(TINYCORE)
+	dk_disable(libgl1-mesa-dev)
 	dk_disable(mesa-common-dev)
 endif()
 

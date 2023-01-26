@@ -1,4 +1,4 @@
-if(NOT LINUX AND NOT RASPBERRY)
+if(NOT LINUX AND NOT RASPBERRY OR TINYCORE)
 	dk_undepend(libglu1-mesa-dev)
 	dk_return()
 endif()
