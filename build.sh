@@ -6,11 +6,6 @@
 if [ -e /proc/device-tree/model ]; then
 	MODEL=$(tr -d '\0' </proc/device-tree/model)
 fi
-echo "hostname = $HOSTNAME"
-echo "hosttype = $HOSTTYPE"
-echo "ostype =   $OSTYPE"
-echo "machtype = $MACHTYPE"
-
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	DIGITALKNOB="/home/$USER/digitalknob"
@@ -27,8 +22,20 @@ elif [[ "$OSTYPE" == "freebsd"* ]]; then
 else
     echo "UNKNOWN OS TYPE ($OSTYPE)"
 fi
+
 DKPATH="$DIGITALKNOB/DK"
 DKCMAKE="$DIGITALKNOB/DK/DKCMake"
+
+echo "hostname		= $HOSTNAME"
+echo "hosttype		= $HOSTTYPE"
+echo "ostype		= $OSTYPE"
+echo "machtype		= $MACHTYPE"
+echo "model			= $MODEL"
+echo "user			= $USER"
+echo "username		= $USERNAME"
+echo "digitalknob	= $DIGITALKNOB"
+echo "dkpath		= $DKPATH"
+echo "dkcmake		= $DKCMAKE"
 
 sudo echo
 
