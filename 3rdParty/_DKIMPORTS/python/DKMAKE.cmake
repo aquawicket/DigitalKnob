@@ -18,7 +18,7 @@ RASPBERRY_dk_set(PYTHON_APP python)
 ### INSTALL ###
 if(WIN)
 	dk_makeDirectory(${PYTHON})
-	string(REPLACE "/" "\\" PYTHON_PATH "${PYTHON}")
+	#string(REPLACE "/" "\\" PYTHON_PATH "${PYTHON}")
 	dk_setEnv("PATH" "${PYTHON}")
 	if(NOT EXISTS ${PYTHON_APP})
 		dk_download(${PYTHON_DL} ${DKDOWNLOAD}/python-2.7.18.msi)
