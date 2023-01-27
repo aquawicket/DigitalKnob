@@ -19,7 +19,11 @@ if(LINUX OR RASPBERRY)
 		dk_include(/usr/local/include/X11)
 	else()
 		### INSTALL ###
-		dk_command(sudo apt -y install libx11-dev)
+		if(TINYCORE)
+			dk_command(tce-load -wi libX11-dev.tcz)
+		else()
+			dk_command(sudo apt -y install libx11-dev)
+		endif()
 	endif()
 	
 	#dynamic linking

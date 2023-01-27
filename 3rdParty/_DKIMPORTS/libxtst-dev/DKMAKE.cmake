@@ -5,8 +5,12 @@ endif()
 
 
 ### INSTALL ###
-dk_set(CURRENT_DIR /usr)
-dk_command(sudo apt -y install libxtst-dev)
+#dk_set(CURRENT_DIR /usr)
+if(TINYCORE)
+	dk_command(tce-load -wi libXtst-dev.tcz)
+else()
+	dk_command(sudo apt -y install libxtst-dev)
+endif()
 
 ### LINK ###
 ## dk_include(/usr/include/gtk-2.0)

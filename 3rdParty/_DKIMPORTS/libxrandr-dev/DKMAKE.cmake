@@ -4,8 +4,13 @@ if(NOT LINUX AND NOT RASPBERRY)
 endif()
 
 ### INSTALL ###
-dk_set(CURRENT_DIR /usr)
-dk_command(sudo apt -y install libxrandr-dev)
+#dk_set(CURRENT_DIR /usr)
+
+if(TINYCORE)
+	dk_command(tce-load -wi libXrandr-dev.tcz)
+else()
+	dk_command(sudo apt -y install libxrandr-dev)
+endif()
 
 ### LINK ###
 SET(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -lXrandr")
