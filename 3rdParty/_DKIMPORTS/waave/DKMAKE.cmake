@@ -3,9 +3,7 @@
 
 
 ### DEPEND ###
-dk_depend(ffmpeg-dev)
-dk_depend(ffmpeg-shared)
-dk_depend(ffmpeg-static)
+dk_depend(ffmpeg)
 dk_depend(sdl)
 
 

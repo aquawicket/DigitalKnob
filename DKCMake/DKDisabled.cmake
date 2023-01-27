@@ -28,22 +28,15 @@ include_guard()
 dk_disable(bgfx)					# TODO
 dk_disable(DKPlugin1)				# TODO
 dk_disable(DKPlugin2)				# TODO
-dk_disable(ffmpeg-dev)				# DEPRECATED: using ffmpeg instead
-dk_disable(ffmpeg-shared)			# DEPRECATED: using ffmpeg instead
-dk_disable(ffmpeg-static)			# DEPRECATED: using ffmpeg instead
 dk_disable(gradle)					# We don't need to build this from source
 dk_disable(java)					# TODO
 dk_disable(jpeg)					# DEPRECATED: using libjpeg_turbo instead
 dk_disable(librocket)				# OBSOLETE: replaced by rmlui
 dk_disable(libx11)					# TODO
+dk_disable(mingw32)					# DEPRECATED: migrated to msys2
+dk_disable(mingw64)					# DEPRECATED: migrated to msys2
 dk_disable(mpg123)					# TODO
-
-# NOTE: migrated to msys2
-dk_disable(msys)
-dk_disable(mingw32)
-dk_disable(mingw64)
-#dk_disable(msys2)					
-
+dk_disable(msys)					# DEPRECATED: migrated to msys2
 dk_disable(sdl2_gif)				# DEPRECATED: using SDL_Image animation instead
 dk_disable(sdl2_giflib_sa)			# DEPRECATED: updated version of sdl2_gif. Using SDL_Image animation instead
 dk_disable(simple-getch)			# DEPRECATED: kept for reference
