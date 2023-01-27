@@ -4,8 +4,12 @@ if(NOT LINUX AND NOT RASPBERRY)
 endif()
 
 ### INSTALL ###
-dk_set(CURRENT_DIR /usr)
-dk_command(sudo apt -y install libsndfile1-dev)
+#dk_set(CURRENT_DIR /usr)
+if(TINYCORE)
+	dk_command(tce-load -wi libsndfile-dev.tcz)
+else()
+	dk_command(sudo apt -y install libsndfile1-dev)
+endif()
 
 
 ### LINK ###
