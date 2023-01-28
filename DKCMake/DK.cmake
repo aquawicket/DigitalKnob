@@ -7,6 +7,7 @@ set(BYPASS_DISABLE				0		CACHE INTERNAL "")	# bypass dk_disable() commands
 set(DKDEBUGFUNC_ENABLED			0		CACHE INTERNAL "")	# enable DKDEBUGFUNC() function to print function calls
 set(DKDEBUG_ENABLED				1		CACHE INTERNAL "")	# enable dk_debug() functions
 set(PRINT_DKRETURNS				0		CACHE INTERNAL "")	# dk_return() will print the current cmake file
+set(DELETE_DOWNLOADS			1		CACHE INTERNAL "")  # delete downloads after they are extracted or installed
 set(DKTODO_ENABLED				1		CACHE INTERNAL "")	# enable dk_todo() functions
 set(DKVERBOSE_ENABLED			0		CACHE INTERNAL "")	# enable dk_verbose() functions
 set(HALT_ON_ERRORS				0		CACHE INTERNAL "")	# halt cmake build script on errors

@@ -1788,8 +1788,7 @@ function(dk_install plugin) #PATCH
 	
 	file(WRITE ${dest_path}/installed "${dest_filename} ")
 	
-	dk_set(DK_DELETE_EXTRACTED_DOWNLOADS ON) # FIXME: move to global dk settings
-	if(DK_DELETE_EXTRACTED_DOWNLOADS) # conserve disk space 
+	if(DELETE_DOWNLOADS) # conserve disk space 
 		dk_info("deleting ${DKDOWNLOAD}/${dl_filename}. . .")
 		dk_remove(${DKDOWNLOAD}/${dl_filename})
 	endif()
