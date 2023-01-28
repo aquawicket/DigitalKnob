@@ -5,14 +5,16 @@
 
 
 ##### EAMPLE with tinycorelinux #####
-### Create the virtual image (5gb)
-# qemu-img create -f qcow2 tinycore.img 5G
+# cd <iso directory>
+
+### Create the virtual image (10gb)
+# C:/Users/Administrator/digitalknob/DK/3rdParty/qemu-7.2.0/qemu-img create -f qcow2 tinycore.img 10G
 
 ### Launching the VM
-# qemu-system-x86_64 -cdrom CorePlus-current.iso -boot menu=on -drive file=tinycore.img -m 2G -cpu max -smp 2 -vga virtio -display sdl
+# C:/Users/Administrator/digitalknob/DK/3rdParty/qemu-7.2.0/qemu-system-x86_64 -cdrom CorePlus-current.iso -boot menu=on -drive file=tinycore.img -m 2G -cpu max -smp 2 -vga virtio -display sdl
 
 ### Install the OS to the .img file
 # (Install from the running virtual OS)
 
 ### Launching the VM without cdrom (after install)
-# qemu-system-x86_64 -boot menu=on -drive file=tinycore.img -m 2G -cpu max -smp 2 -vga virtio -display sdl
+# C:/Users/Administrator/digitalknob/DK/3rdParty/qemu-7.2.0/qemu-system-x86_64 -boot menu=on -drive file=tinycore.img -m 2G -cpu max -smp 2 -vga virtio -display sdl
