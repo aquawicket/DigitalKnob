@@ -78,12 +78,16 @@ bool DKLinux::GetMousePos(int& x, int& y){
 
 bool DKLinux::SetMousePos(const int& x, const int& y){
 	DKDEBUGFUNC(x, y);
+#if HAVE_libx11_dev
 	Display *dpy = XOpenDisplay(0);
 	Window root = XRootWindow(dpy, 0);
 	XSelectInput(dpy, root, KeyReleaseMask);
 	XWarpPointer(dpy, None, root, 0, 0, 0, 0, x, y);
 	XFlush(dpy); // Flushes the output buffer, therefore updates the cursor's position.
 	return true;
+#else
+	return DKERROR("!HAVE_libx11_dev");
+#endif
 }
 
 bool DKLinux::LeftPress(){
