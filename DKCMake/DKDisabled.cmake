@@ -425,6 +425,7 @@ if(LINUX)
 	dk_disable(libexpat)
 	dk_disable(libsndfile)			# requires opus
 	dk_disable(libtorrent)			# CMake Error: cannot find source file: deps/try_signal/try_singal.cpp
+	dk_disable(libxinerama-dev)		# apt: Unable to locate package libXinerama-dev
 	dk_disable(libxml2)				# Not such file or directory
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(nasm)
@@ -545,6 +546,7 @@ if(RASPBERRY)
 	dk_disable(libsndfile)
 	dk_disable(libtorrent)			# Could not find BOOST
 	dk_disable(libwebp)
+	dk_disable(libxinerama-dev)		# apt: Unable to locate package libXinerama-dev
 	dk_disable(libxml2)
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(nasm)
@@ -575,6 +577,7 @@ endif(RASPBERRY)
 if(TINYCORE)
 	dk_disable(libasound2-dev)
 	dk_disable(libgl1-mesa-dev)
+	dk_disable(libxinerama-dev)		# apt: Unable to locate package libXinerama-dev
 	#dk_disable(libxrandr-dev)
 	#dk_disable(libxtst-dev)
 	dk_disable(mesa-common-dev)
