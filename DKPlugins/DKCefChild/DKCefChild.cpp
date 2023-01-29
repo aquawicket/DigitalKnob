@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-WARNING_DISABLE
+//WARNING_DISABLE
 	#if MAC
 		#include "include/wrapper/cef_library_loader.h"
 	#endif
@@ -39,7 +39,7 @@ WARNING_DISABLE
 			#include "include/cef_sandbox_linux.h"
 		#endif
 	#endif
-WARNING_ENABLE
+//WARNING_ENABLE
 
 #include "DKCefChild/DKCefChild.h"
 
