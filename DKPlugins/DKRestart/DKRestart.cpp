@@ -27,9 +27,9 @@
 //#include "DKRestart/DKRestart.h"
 #include "DKRestart.h"
 
-WARNING_DISABLE
+//WARNING_DISABLE
 #include <cstdio>
-//WARING_ENABLE
+//WARNING_ENABLE
 
 
 int main(int argc, char* argv[]){
