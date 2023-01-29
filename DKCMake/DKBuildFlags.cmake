@@ -616,14 +616,14 @@ EMSCRIPTEN_dk_depend(emsdk)
 EMSCRIPTEN_dk_depend(DKPhp)
 
 #LINUX_dk_depend	(kdevelop)
-LINUX_dk_depend		(libx11-dev)
+#LINUX_dk_depend	(libx11-dev)
 LINUX_dk_depend		(pthread)
 LINUX_dk_depend		(dl)
 LINUX_dk_depend		(libstdc++fs)
 
 MAC_HOST_dk_depend	(xcode)
 
-RASPBERRY_dk_depend	(libx11-dev)
+#RASPBERRY_dk_depend(libx11-dev)
 RASPBERRY_dk_depend	(pthread)
 RASPBERRY_dk_depend	(dl)
 RASPBERRY_dk_depend	(libstdc++fs)
