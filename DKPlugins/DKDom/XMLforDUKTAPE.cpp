@@ -1,3 +1,5 @@
+#include "DK/DK.h"
+
 WARNING_DISABLE
 #include <duktape.h>
 WARNING_ENABLE
