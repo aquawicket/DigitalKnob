@@ -30,11 +30,11 @@
 #include "DKAssets/DKAssets.h"
 #include "DKOSGWindow/DKOSGWindow.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #if WIN
 	#include <delayimp.h>
 #endif
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 // FIXME

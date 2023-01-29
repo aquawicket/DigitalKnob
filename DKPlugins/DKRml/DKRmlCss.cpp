@@ -27,9 +27,9 @@
 #include "DK/DKFile.h"
 #include "DKRml/DKRmlCss.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include "RmlUi/Core/Factory.h"
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 DKRml* DKRmlCss::dkRml;

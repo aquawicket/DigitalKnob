@@ -29,11 +29,11 @@
 #include "DKDuktape/DKDuktape.h"
 //#include "DKDuktapeDebugger/DKDuktapeDebugger.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <string>
 #include <iostream>
 #include <sstream>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 #define DKHAVE_DKDuktape 1
 

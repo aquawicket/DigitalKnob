@@ -28,9 +28,9 @@
 #include "DKAssets/DKAssets.h"
 #include "DKSDLRml/DKSDLRml.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include "SDL.h"
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 bool DKSDLRml::Init(){

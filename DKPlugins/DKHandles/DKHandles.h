@@ -31,9 +31,9 @@
 #ifndef DKHandles_H
 #define DKHandles_H
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <vector>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 #include "DK/DK.h"
 

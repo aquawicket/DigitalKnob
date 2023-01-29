@@ -29,9 +29,9 @@
 #include "DK/DK.h"
 #include "DKOSGWindow/DKOSGWindow.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <osg/Referenced>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 class DKOSGModel : public DKObjectT<DKOSGModel>

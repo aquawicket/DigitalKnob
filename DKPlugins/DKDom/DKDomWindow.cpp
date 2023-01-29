@@ -26,9 +26,9 @@
 
 //https://developer.mozilla.org/en-US/docs/Web/API/Window
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include "duktape.h"
-//WARNING_DISABLE
+WARNING_DISABLE
 
 #include "DKDom/DKDom.h"
 #include "DKDom/DKDomWindow.h"

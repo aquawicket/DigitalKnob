@@ -30,7 +30,7 @@
 
 #include "DK/DK.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <fmt/format.h> // header only
 //#include <fmt/core.h> // compiled api
 //WARING_ENABLE

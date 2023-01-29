@@ -30,10 +30,10 @@
 #include "DK/DK.h"
 #include "DKDuktape/DKDuktape.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 	#include "duktape.h"
 	#include "DKDuktapeDebugger/duk_trans_dvalue.h"
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 class DKDuktapeDebugger : public DKObjectT<DKDuktapeDebugger>

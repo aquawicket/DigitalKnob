@@ -1,6 +1,6 @@
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <duktape.h>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 /*
 

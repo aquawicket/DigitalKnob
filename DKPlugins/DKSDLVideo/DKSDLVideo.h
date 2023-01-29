@@ -32,7 +32,7 @@
 
 #include "DK/DK.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include "SDL.h"
 #include <assert.h>
 extern "C" {
@@ -48,7 +48,7 @@ extern "C" {
 	#include <libavutil/frame.h>
 	#include <libavutil/imgutils.h>
 }
-//WARNING_ENABLE
+WARNING_ENABLE
 
 #define ERROR_SIZE 128
 #define VIDEO_FORMAT AV_PIX_FMT_RGB24

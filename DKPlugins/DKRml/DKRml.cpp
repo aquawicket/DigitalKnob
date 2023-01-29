@@ -25,7 +25,7 @@
 */
 #include "DK/stdafx.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #ifdef HAVE_rmlui_debugger
 #	include <RmlUi/Debugger.h>
 #endif

@@ -27,10 +27,10 @@
 #include "DK/stdafx.h"
 #if WIN
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <tchar.h>
 #include <Commctrl.h>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 #include "DKHandles/DKHandles.h"
 

@@ -28,9 +28,9 @@
 #ifndef DKOSGWindowAndroid_H
 #define DKOSGWindowAndroid_H
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <jni.h>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 class DKOSGWindowAndroid : public DKObjectT<DKOSGWindowAndroid>

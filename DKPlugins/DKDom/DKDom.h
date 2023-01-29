@@ -31,9 +31,9 @@
 #include "DKDuktape/DKDuktape.h"
 #include "DKRml/DKRml.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <RmlUi/Core.h>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 typedef Rml::Element DKDom_Element;
 

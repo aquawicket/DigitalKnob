@@ -27,11 +27,11 @@
 #ifndef DKWebview_H
 #define DKWebview_H
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #if ANDROID
 	#include <jni.h>
 #endif
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 class DKWebview : public DKObjectT<DKWebview>

@@ -26,11 +26,11 @@
 
 #include "DK/stdafx.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 	#if MAC
 		#import <AppKit/AppKit.h>
 	#endif
-//WARNING_ENABLE
+WARNING_ENABLE
 
 #include "DKCef/DKCEFWindow.h"
 

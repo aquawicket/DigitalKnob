@@ -29,7 +29,7 @@
 #include "DK/DKUtil.h"
 #include "DK/DKFile.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <osgDB/FileUtils>
 #include <osgDB/FileNameUtils>
 //WARING_ENABLE

@@ -32,17 +32,17 @@
 
 #if WIN
 	#define sleep Sleep
-//WARNING_DISABLE
+WARNING_DISABLE
 	#include <WS2tcpip.h>
-//WARNING_ENABLE
+WARNING_ENABLE
 #endif
 
 #if LINUX
-//WARNING_DISABLE
+WARNING_DISABLE
 	#include <unistd.h>
 	#include <X11/Xlib.h>
 	#include <X11/Xutil.h>
-//WARNING_ENABLE
+WARNING_ENABLE
 	Display* DKScreenRecorder::disp;
 	Window DKScreenRecorder::root;
 	XImage* DKScreenRecorder::image;
@@ -55,9 +55,9 @@
 #endif
 
 #ifdef __IRIX__
-//WARNING_DISABLE
+WARNING_DISABLE
 	#include <netdb.h>
-//WARNING_ENABLE
+WARNING_ENABLE
 #endif
 
 

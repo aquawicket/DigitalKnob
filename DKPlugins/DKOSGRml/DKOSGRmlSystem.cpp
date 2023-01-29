@@ -26,9 +26,9 @@
 #include "DK/stdafx.h"
 #include "DKOSGRml/DKOSGRmlSystem.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <iostream>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 DKOSGRmlSystem::DKOSGRmlSystem() : _timer(osg::Timer::instance()->tick()){

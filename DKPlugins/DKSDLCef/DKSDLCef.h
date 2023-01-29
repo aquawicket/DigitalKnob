@@ -28,7 +28,7 @@
 #ifndef DKSDLCef_H
 #define DKSDLCef_H
 
-//WARNING_DISABLE
+WARNING_DISABLE
 	#include <list>
 	#include <include/cef_client.h>
 	#include <include/cef_render_handler.h>
@@ -38,7 +38,7 @@
 		//#include <X11/cursorfont.h>
 	#endif
 	#include "SDL.h"
-//WARNING_ENABLE
+WARNING_ENABLE
 
 #include "DK/DK.h"
 #include "DK/DKApp.h"

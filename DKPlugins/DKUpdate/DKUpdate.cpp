@@ -31,10 +31,10 @@
 #include "DKThread/DKThread.h"
 #include "DKUpdate/DKUpdate.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <stdlib.h> 
 #include <sys/stat.h>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 //////////////////////////////////////

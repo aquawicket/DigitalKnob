@@ -33,12 +33,12 @@
 #include "DKRml/DKRml.h"
 #include "DKXml/DKXml.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #ifdef HAVE_tidy_html5
 	#include "tidy.h"
 	#include "tidybuffio.h"
 #endif
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 bool DKRmlConverter::HtmlToRml(const DKString& html, DKString& rml){

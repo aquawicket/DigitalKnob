@@ -29,9 +29,9 @@
 #ifndef DKMidi_H
 #define DKMidi_H
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include "RtMidi.h"
-//WARNING_ENABLE
+WARNING_ENABLE
 
 #include "DK/DK.h"
 

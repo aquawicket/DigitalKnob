@@ -27,12 +27,12 @@
 #ifndef DKCefApp_H
 #define DKCefApp_H
 
-//WARNING_DISABLE
+WARNING_DISABLE
 	//#include <boost/function.hpp>
 	//#include <boost/bind/bind.hpp>
 	#include <include/cef_app.h>
 	#include <include/wrapper/cef_helpers.h>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 #include "DK/DKFile.h"
 

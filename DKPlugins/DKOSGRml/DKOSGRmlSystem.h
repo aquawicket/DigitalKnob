@@ -27,11 +27,11 @@
 #ifndef DKOSGRmlSystem_H
 #define DKOSGRmlSystem_H
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <RmlUi/Core.h>
 #include <osg/Notify>
 #include <osg/Timer>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 class DKOSGRmlSystem : public Rml::SystemInterface

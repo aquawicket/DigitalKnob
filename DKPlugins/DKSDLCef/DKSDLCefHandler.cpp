@@ -28,13 +28,13 @@
 #include "DKSDLCef/DKSDLCefHandler.h"
 #include "DKCef/DKCef.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 	#include <sstream>
 	#include <string>
 	#include "include/base/cef_bind.h"
 	#include "include/wrapper/cef_closure_task.h"
 	#include "include/wrapper/cef_helpers.h"
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 DKSDLCefHandler* DKSDLCefHandler::g_instance = NULL;

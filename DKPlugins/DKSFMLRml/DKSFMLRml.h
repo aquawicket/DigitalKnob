@@ -28,9 +28,9 @@
 #ifndef DKSFMLRml_H
 #define DKSFMLRml_H
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include "RmlUi/Core.h"
-//WARNING_ENABLE
+WARNING_ENABLE
 
 #include "DK/DK.h"
 #include "DKSFMLWindow/DKSFMLWindow.h"

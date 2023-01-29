@@ -27,7 +27,7 @@
 #ifndef DKffmpeg_H
 #define DKffmpeg_H
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <osgViewer/Viewer>
 #include <osgViewer/ViewerEventHandlers>
 #include <osgDB/ReadFile>
@@ -46,7 +46,7 @@
 #include <osgGA/StateSetManipulator>
 #include <osgGA/EventVisitor>
 #include <iostream>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 class MovieEventHandler : public osgGA::GUIEventHandler

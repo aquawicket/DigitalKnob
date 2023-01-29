@@ -32,9 +32,9 @@
 
 #include "DK/DK.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include "WAAVE.h"
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 class DKSDLWaave : public DKObjectT<DKSDLWaave>

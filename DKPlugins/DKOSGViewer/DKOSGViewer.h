@@ -28,17 +28,17 @@
 #define DKOSGViewer_H
 #include "DK/DK.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <osgViewer/CompositeViewer>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 #ifdef DKAPP
-	//WARNING_DISABLE
+	WARNING_DISABLE
 	#ifdef HAVE_osgDB
 	#include <osgDB/Registry>
 	#include <osgWidget/Util>
 	#endif
-	//WARNING_ENABLE
+	WARNING_ENABLE
 
 	// osgWrappers
 	#ifdef HAVE_osgdb_deprecated_osg

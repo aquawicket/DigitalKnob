@@ -27,11 +27,11 @@
 #include "DKOSGTerrain/DKOSGTerrain.h"
 #include "DKOSGWindow/DKOSGWindow.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <osg/ShapeDrawable>
 #include "terrain_coords.h"
 #include <osgDB/ReadFile>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 bool DKOSGTerrain::Init(){

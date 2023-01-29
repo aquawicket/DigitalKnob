@@ -26,9 +26,9 @@
 #include "DK/stdafx.h"
 #include "DKRmlIframe/DKRmlIframe.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include "../Include/RmlUi/Core/Factory.h"
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 bool DKRmlIframe::Init(){

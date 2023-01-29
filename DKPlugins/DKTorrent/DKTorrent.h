@@ -28,7 +28,7 @@
 #define DKTorrent_H
 #include "DK/DK.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <iostream>
 #include <thread>
 #include <chrono>
@@ -39,7 +39,7 @@
 #include <libtorrent/alert_types.hpp>
 #include <libtorrent/bencode.hpp>
 #include <libtorrent/torrent_status.hpp>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 namespace lt = libtorrent;

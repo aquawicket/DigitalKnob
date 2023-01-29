@@ -28,9 +28,9 @@
 #define DKOSGTerrain_H
 #include "DK/DK.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <osg/Node>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 class DKOSGTerrain : public DKObjectT<DKOSGTerrain>  

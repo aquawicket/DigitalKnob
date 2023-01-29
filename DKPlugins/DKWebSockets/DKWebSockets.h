@@ -28,9 +28,9 @@
 #ifndef DKWebSockets_H
 #define DKWebSockets_H
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include "src/uWS.h"
-//WARNING_ENABLE
+WARNING_ENABLE
 
 #include "DK/DK.h"
 

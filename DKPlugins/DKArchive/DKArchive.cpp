@@ -26,7 +26,7 @@
 
 #include "DK/stdafx.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <iostream>
 #include <fcntl.h>
 #include <sstream>

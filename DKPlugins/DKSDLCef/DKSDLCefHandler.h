@@ -28,7 +28,7 @@
 #ifndef DKSDLCefHandler_H
 #define DKSDLCefHandler_H
 
-//WARNING_DISABLE
+WARNING_DISABLE
 	#include <list>
 	#include <include/cef_client.h>
 	#include <include/cef_accessibility_handler.h>
@@ -52,7 +52,7 @@
 	#include <include/cef_resource_request_handler.h>
 	//#include <include/cef_geolocation.h>
 	#include "SDL.h"
-//WARNING_ENABLE
+WARNING_ENABLE
 
 #include "DK/DK.h"
 #include "DK/DKApp.h"

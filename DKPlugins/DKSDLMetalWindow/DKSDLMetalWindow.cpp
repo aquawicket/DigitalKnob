@@ -29,7 +29,7 @@
 #include "DKSDLWindow/DKSDLWindow.h"
 #include "DK/DKOsInfo.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include "SDL_syswm.h"
 #if WIN
     #include <GL/glew.h>
@@ -48,7 +48,7 @@
 #if ANDROID
 	#include <GLES/gl.h>
 #endif
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 std::vector<std::function<bool(SDL_Event* event)> > DKSDLWindow::event_funcs;

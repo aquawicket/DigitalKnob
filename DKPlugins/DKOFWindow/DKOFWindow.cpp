@@ -27,9 +27,9 @@
 #include "DK/stdafx.h"
 #include "DKOFWindow/DKOFWindow.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include "ofMain.h"
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 bool DKOFWindow::Init(){

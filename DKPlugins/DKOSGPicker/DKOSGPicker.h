@@ -30,10 +30,10 @@
 
 #include "DK/DK.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <osgViewer/ViewerEventHandlers>
 #include <osgFX/Outline>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 class DKOSGPicker : public osgGA::GUIEventHandler, public DKObjectT<DKOSGPicker> 

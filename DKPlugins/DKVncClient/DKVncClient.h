@@ -33,9 +33,9 @@
 typedef unsigned long z_size_t;
 #endif
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <rfb/rfbclient.h>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 class DKVncClient : public DKObjectT<DKVncClient>

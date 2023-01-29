@@ -30,12 +30,12 @@
 #include "DK/DKLog.h"
 #include "DKOSGRml/DKOSGRmlRender.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <RmlUi/Core.h>
 #include <RmlUi/Debugger.h>
 #include <osg/Group>
 #include <osgViewer/View>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 //typedef Rml::Element DKElement;

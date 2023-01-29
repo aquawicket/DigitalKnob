@@ -29,7 +29,7 @@
 #include "DKOSGWindow/DKOSGWindow.h"
 #include "DKRml/DKRml.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <osg/Notify>
 #include <osg/TexMat>
 #include <osg/TextureRectangle>
@@ -40,7 +40,7 @@
 #include <osg/ShapeDrawable>
 #include <iostream>
 #include <assert.h>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 DKRmlEventListener::DKRmlEventListener(Rml::Element* rootelem)

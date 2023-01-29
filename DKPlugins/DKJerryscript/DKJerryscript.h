@@ -30,9 +30,9 @@
 #include "DK/DK.h"
 //#include "DK/DKEvent.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 	#include "jerryscript.h"
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 class DKJerryscript : public DKObjectT<DKJerryscript>{

@@ -29,9 +29,9 @@
 #define DKSDLWindow_H
 
 //#define SDL_MAIN_HANDLED 1 //Bypass SDL_main() //https://wiki.libsdl.org/SDL_SetMainReady
-//WARNING_DISABLE
+WARNING_DISABLE
 #include "SDL.h"
-//WARNING_ENABLE
+WARNING_ENABLE
 
 #include "DK/DK.h"
 

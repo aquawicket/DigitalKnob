@@ -28,7 +28,7 @@
 #ifndef DKMySql_H
 #define DKMySql_H
 
-//WARNING_DISABLE
+WARNING_DISABLE
 //#if defined (WIN32) || defined (WIN64)
   //#include <winsock.h>
   //#pragma warning (disable: 4514 4786)
@@ -41,14 +41,14 @@
 #if !defined (WIN32) && !defined (WIN64)
   #include <unistd.h>
 #endif
-//WARNING_ENABLE
+WARNING_ENABLE
 
 #include "DK/DK.h"
 
 #ifdef USE_mysql
-	//WARNING_DISABLE
+	WARNING_DISABLE
 	#include "mysql.h"
-	//WARNING_ENABLE
+	WARNING_ENABLE
 #else
 	#include "DKCurl/DKCurl.h"
 #endif

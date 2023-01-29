@@ -26,11 +26,11 @@
 #ifndef GIFANIMATE_H
 #define GIFANIMATE_H
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <map>
 #include <SDL_image.h>
 #include <RmlUi/Core/Types.h>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 struct GifData 

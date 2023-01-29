@@ -28,12 +28,12 @@
 #define DKXml_H
 #include "DK/DKClass.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #ifdef USE_libxml2
 	#include "libxml/HTMLparser.h"
 #endif
 #include "pugixml.hpp"
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 typedef pugi::xml_node DKXmlNode;

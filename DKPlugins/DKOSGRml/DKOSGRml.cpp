@@ -28,7 +28,7 @@
 
 //WARINING_DISABLE
 #include <osg/State>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 DKOSGRmlRender* DKOSGRml::guirender = NULL;

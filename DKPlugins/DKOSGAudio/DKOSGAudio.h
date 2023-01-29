@@ -29,7 +29,7 @@
 #define DKOSGAudio_H
 #include "DK/DK.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <osgAudio/SoundManager.h>
 #include <osgAudio/SoundNode.h>
 #include <osgAudio/Source.h>

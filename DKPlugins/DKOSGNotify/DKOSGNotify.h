@@ -28,12 +28,12 @@
 #define DKOSGNotify_H
 #include "DK/DK.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #if ANDROID
 	#include <android/log.h>
 #endif
 #include <osg/Notify>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 class DKOSGNotify : public DKObjectT<DKOSGNotify>, public osg::NotifyHandler

@@ -28,9 +28,9 @@
 #ifndef DKSDLMetalRml_H
 #define DKSDLMetalRml_H
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <RmlUi/Core.h>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 #include "DK/DK.h"
 #include "DKSDLWindow/DKSDLWindow.h"

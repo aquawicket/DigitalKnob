@@ -29,7 +29,7 @@
 #include "DK/DK.h"
 #include "DKOSGModel/DKOSGModel.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <osgDB/ReadFile>
 #include <osgViewer/Viewer>
 //#ifdef USE_osgwTools
@@ -53,7 +53,7 @@
 #include <osgbInteraction/DragHandler.h>
 //#endif
 #include <btBulletDynamicsCommon.h>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 class DKOSGPhysics : public DKObjectT<DKOSGPhysics>

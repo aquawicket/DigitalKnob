@@ -34,9 +34,9 @@
 #include "DK/DK.h"
 #include "DKSDLWindow/DKSDLWindow.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include "SDL_ttf.h"
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 class DKSDLText : public DKObjectT<DKSDLText>

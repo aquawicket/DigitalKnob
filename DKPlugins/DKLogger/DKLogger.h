@@ -29,7 +29,7 @@
 #define DKLogger_H
 
 /*
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <stdio.h>
 #include <iostream>
 #if MAC
@@ -43,7 +43,7 @@
 #if ANDROID
 	#include <android/log.h>
 #endif
-//WARNING_ENABLE
+WARNING_ENABLE
 
 #include "DKString.h"
 

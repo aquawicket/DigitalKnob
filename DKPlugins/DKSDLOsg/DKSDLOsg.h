@@ -28,7 +28,7 @@
 #ifndef DKSDLOsg_H
 #define DKSDLOsg_H
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <osgViewer/Viewer>
 #include <osgViewer/ViewerEventHandlers>
 #include <osgGA/TrackballManipulator>
@@ -38,7 +38,7 @@
 #include <iostream>
 #include <osgText/Text>
 #include <osg/Geometry>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 #include "DK/DK.h"
 #include "DKSDLWindow/DKSDLWindow.h"

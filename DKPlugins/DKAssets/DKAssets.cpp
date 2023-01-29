@@ -33,10 +33,10 @@
 #endif
 #include "DKAssets/DKAssets.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <algorithm>
 #include <fstream>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 bool DKAssets::Init(){
 	DKDEBUGFUNC();

@@ -29,10 +29,10 @@
 #include "DKSDLWindow/DKSDLWindowAndroid.h"
 #include "DK/DKAndroid.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include "SDL.h"
 //#include "SDL_main.h"
-//WARNING_ENABLE
+WARNING_ENABLE
 
 extern "C" {
 	//extern JavaVM* thejvm;

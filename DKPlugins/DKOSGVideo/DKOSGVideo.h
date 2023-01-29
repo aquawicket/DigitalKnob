@@ -28,11 +28,11 @@
 #define DKOSGVideo_H
 #include "DK/DK.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #ifdef USE_osgDB
 	#include <osgDB/Registry>
 #endif
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 class DKOSGVideo : public DKObjectT<DKOSGVideo>

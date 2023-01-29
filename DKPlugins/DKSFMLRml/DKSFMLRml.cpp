@@ -28,9 +28,9 @@
 #include "DKAssets/DKAssets.h"
 #include "DKSFMLRml/DKSFMLRml.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 //#include "SFML.h"
-//WARNING_ENABLE
+WARNING_ENABLE
 
 bool DKSFMLRml::Init(){
 	DKDEBUGFUNC();

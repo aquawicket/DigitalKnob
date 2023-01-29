@@ -27,9 +27,9 @@
 #ifndef DKOSGManipulator_H
 #define DKOSGManipulator_H
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <osgGA/TrackballManipulator>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 class DKOSGManipulator : public DKObjectT<DKOSGManipulator>

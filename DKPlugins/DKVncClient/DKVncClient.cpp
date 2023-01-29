@@ -29,10 +29,10 @@
 #include "DK/DKFile.h"
 #include "DKWindow/DKWindow.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include "SDL.h"
 #include <signal.h>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 struct { int sdl; int rfb; } buttonMapping[]={

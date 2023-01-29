@@ -28,7 +28,7 @@
 #ifndef DKSDLMetalRmlRenderer_H
 #define DKSDLMetalRmlRenderer_H
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <RmlUi/Core.h>
 //#include <RmlUi/Core/RenderInterface.h>
 #include <SDL.h>
@@ -44,7 +44,7 @@ extern "C" {
 	#include "SDL2_gif.h"
 }
 #endif
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 class RmlSDL2Renderer : public Rml::RenderInterface

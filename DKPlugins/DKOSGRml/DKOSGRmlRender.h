@@ -27,7 +27,7 @@
 #ifndef DKOSGRmlRender_H
 #define DKOSGRmlRender_H
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <RmlUi/Core.h>
 #include <RmlUi/Debugger.h>
 #include <osg/Group>
@@ -35,7 +35,7 @@
 #include <osg/Texture2D>
 #include <osg/TexMat>
 #include <osg/Geometry>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 class DKOSGRmlRender : public Rml::RenderInterface

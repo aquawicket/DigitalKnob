@@ -208,9 +208,9 @@ void MovieEventHandler::getUsage(osg::ApplicationUsage& usage) const{
 
 #if USE_SDL
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include "SDL.h"
-//WARNING_ENABLE
+WARNING_ENABLE
 
 static void soundReadCallback(void * user_data, uint8_t * data, int datalen){
     SDLAudioSink * sink = reinterpret_cast<SDLAudioSink*>(user_data);

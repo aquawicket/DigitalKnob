@@ -29,11 +29,11 @@
 #include "DK/DK.h"
 #include "DKSDLRml/DKSDLRmlRenderer.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include "SDL_image.h"
 #include "RmlUi/Core.h"
 #include "GifAnimate.h"
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 DKSDLRmlRenderer::DKSDLRmlRenderer(SDL_Renderer* sdlRenderer, SDL_Window* sdlWindow) {

@@ -33,9 +33,9 @@
 #include "DK/DK.h"
 #include "DK/DKEvents.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 	#include "duktape.h"
-//WARNING_ENABLE
+WARNING_ENABLE
 
 #define DKHAVE_DKDuktape 1
 

@@ -30,10 +30,10 @@
 
 #define DKCefChild
 
-//WARNING_DISABLE
+WARNING_DISABLE
 	#include <include/cef_app.h>
 	#include <include/wrapper/cef_helpers.h>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 class DKCefChildV8Handler : public CefV8Handler

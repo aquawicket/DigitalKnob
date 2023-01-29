@@ -31,7 +31,7 @@
 // OpenGL Extension Wrangler Library (GLEW)
 //#define ENABLE_GLEW
 
-//WARNING_DISABLE
+WARNING_DISABLE
 // if the OpenGL Extension Wrangler Library (GLEW) should be used include it
 #ifdef ENABLE_GLEW
 	#include <GL/glew.h>
@@ -48,7 +48,7 @@ extern "C" {
 	#include "SFML_gif.h"
 }
 #endif
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 class RmlSFMLRenderer : public Rml::RenderInterface

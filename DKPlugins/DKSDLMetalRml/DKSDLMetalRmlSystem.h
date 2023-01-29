@@ -28,10 +28,10 @@
 #ifndef DKSDLMetalRmlSystem_H
 #define DKSDLMetalRmlSystem_H
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <RmlUi/Core.h>
 #include <SDL.h>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 #include "DK/DK.h"
 

@@ -29,9 +29,9 @@
 #ifndef DKSDLWav_H
 #define DKSDLWav_H
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include "SDL.h"
-//WARNING_ENABLE
+WARNING_ENABLE
 
 #include "DK/DK.h"
 

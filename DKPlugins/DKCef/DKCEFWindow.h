@@ -29,7 +29,7 @@
 #define DKCEFWindow_H
 //#define USE_GDK    
 
-//WARNING_DISABLE
+WARNING_DISABLE
 	#if LINUX
 		#ifdef USE_GDK
 			#include <gdk/gdk.h>

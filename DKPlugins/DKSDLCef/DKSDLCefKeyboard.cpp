@@ -26,7 +26,7 @@
 
 #include "DKSDLCefKeyboard.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 	#include "include/internal/cef_types.h"
 	#include "SDL.h"
 	#if WIN
@@ -34,7 +34,7 @@
 	#elif X11
 	  #include <X11/keysym.h>
 	#endif
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 int DKSDLCefKeyboard::getCefModifiers(int modKeyMask){

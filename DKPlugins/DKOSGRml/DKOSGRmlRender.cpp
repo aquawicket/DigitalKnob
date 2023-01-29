@@ -27,7 +27,7 @@
 #include "DKOSGRml/DKOSGRmlRender.h"
 #include "DKOSGViewer/DKGLInfo.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <osg/BlendFunc>
 #include <osg/MatrixTransform>
 #include <assert.h>
@@ -37,7 +37,7 @@
 #include <osg/ImageStream>
 #include <osg/ImageSequence>
 #include <RmlUi/Core.h>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 //#define USE_SHADERS //OpenGL < 1.1
 

@@ -33,12 +33,12 @@
 	#include "DK/DKWindows.h"
 #endif
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <include/cef_urlrequest.h>
 #if WIN
 	#include <delayimp.h>
 #endif
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 bool DKOSGCef::Init(){

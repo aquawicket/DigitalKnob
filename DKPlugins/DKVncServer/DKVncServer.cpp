@@ -31,7 +31,7 @@
 	#define sleep Sleep
 #endif
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #if WIN
 	#include <WS2tcpip.h>
 #endif
@@ -40,7 +40,7 @@
 	#include <X11/Xlib.h>
 	#include <X11/Xutil.h>
 #endif
-//WARNING_ENABLE
+WARNING_ENABLE
 
 #if LINUX
 	Display* DKVncServer::disp;
@@ -54,13 +54,13 @@
 	CFDataRef DKVncServer::dataref;
 #endif
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #ifdef __IRIX__
 	#include <netdb.h>
 #endif
 #include <rfb/keysym.h>
 #include "examples/server/radon.h"
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 static rfbScreenInfoPtr rfbScreen;

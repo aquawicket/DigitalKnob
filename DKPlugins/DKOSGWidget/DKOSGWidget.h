@@ -29,11 +29,11 @@
 
 #include "DKOSGWindow/DKOSGWindow.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <osgWidget/Window>
 #include <osgWidget/WindowManager>
 #include <osgWidget/ViewerEventHandlers>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 class DKOSGWidget : public osg::Referenced

@@ -27,7 +27,7 @@
 #ifndef DKOSGWindow_H
 #define DKOSGWindow_H
 
-//WARNING_DISABLE
+WARNING_DISABLE
 	#if WIN
 		#include <osgViewer/api/Win32/GraphicsHandleWin32>
 	#endif
@@ -40,7 +40,7 @@
 	#include <osg/PositionAttitudeTransform>
 	#include <osgGA/EventQueue>
 	#include <osgDB/ReadFile>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 #include "DK/DK.h"
 #include "DK/DKLog.h"

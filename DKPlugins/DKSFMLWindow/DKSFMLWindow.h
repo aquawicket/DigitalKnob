@@ -28,12 +28,12 @@
 #ifndef DKSFMLWindow_H
 #define DKSFMLWindow_H
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #ifdef USE_GDK
 #	include <gtk/gtk.h>
 #endif
 #include <SFML/Window.hpp>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 #include "DK/DK.h"
 

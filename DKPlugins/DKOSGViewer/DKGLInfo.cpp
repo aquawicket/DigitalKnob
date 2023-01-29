@@ -26,7 +26,7 @@
 #include "DK/stdafx.h"
 #include "DKOSGViewer/DKGLInfo.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <osg/FragmentProgram>
 #include <osg/GraphicsContext>
 #include <osg/GL>
@@ -35,7 +35,7 @@
 #include <osg/Texture>
 #include <osgViewer/Version>
 #include <OpenThreads/Thread>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 bool DKGLInfo::Init(){

@@ -31,10 +31,10 @@
 
 //DirectX Capture
 #if WIN32
-//WARNING_DISABLE
+WARNING_DISABLE
 #	include <Wincodec.h>             // we use WIC for saving images
 #	include <d3d9.h>                 // DirectX 9 header
-//WARNING_ENABLE
+WARNING_ENABLE
 #	pragma comment(lib, "d3d9.lib")  // link to DirectX 9 library
 #	define WIDEN2(x) L ## x
 #	define WIDEN(x) WIDEN2(x)
@@ -43,7 +43,7 @@
 #	define RELEASE(__p) {if(__p!=nullptr){__p->Release();__p=nullptr;}}
 #endif
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include "include/opencv2/opencv.hpp"
 //#include "modules/imgproc/include/opencv2/imgproc/imgproc.hpp"
 #include "opencv2/imgproc/imgproc.hpp""
@@ -58,7 +58,7 @@
 #	include <X11/Xlib.h>
 #	include <X11/Xutil.h>
 #endif
-//WARNING_ENABLE
+WARNING_ENABLE
 
 class DKScreenRecorder : public DKObjectT<DKScreenRecorder>
 {

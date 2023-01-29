@@ -30,9 +30,9 @@
 
 #include "DK/DKFile.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <RmlUi/Core.h>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 class DKRmlFile : public Rml::FileInterface {

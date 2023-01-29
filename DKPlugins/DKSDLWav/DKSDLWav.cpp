@@ -27,11 +27,11 @@
 #include "DKSDLWave/DKSDLWav.h"
 #include "DK/DKFile.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdio.h>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 #define AUDIO_FORMAT AUDIO_S16LSB
 #define AUDIO_FREQUENCY 48000;

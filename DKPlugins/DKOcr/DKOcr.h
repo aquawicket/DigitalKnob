@@ -30,10 +30,10 @@
 
 #include "DK/DK.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include "tesseract/baseapi.h"  //tesseract
 //#include "podofo.h"       //podofo
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 class DKOcr : public DKObjectT<DKOcr>

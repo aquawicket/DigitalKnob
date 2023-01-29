@@ -26,10 +26,10 @@
 #include "DK/stdafx.h"
 #include "DKSFMLWindow/DKSFMLWindow.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 //std::vector<boost::function<bool(sf::Event& e)> > DKSFMLWindow::event_funcs;

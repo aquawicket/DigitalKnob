@@ -27,7 +27,7 @@
 #include "DK/stdafx.h"
 #include "DKRml/DKRmlHeadInstancer.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <RmlUi/Core/StringUtilities.h>
 #include <RmlUi/Core/XMLParser.h>
 #include <RmlUi/Core/SystemInterface.h>
@@ -37,7 +37,7 @@
 #include <RmlUi/Core/ElementDocument.h>
 #include <RmlUi/Core/URL.h>
 #include <RmlUi/Core/Factory.h>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 static Rml::String Absolutepath(const Rml::String& source, const Rml::String& base){

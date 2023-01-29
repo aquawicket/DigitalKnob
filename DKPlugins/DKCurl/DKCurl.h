@@ -31,9 +31,9 @@
 #include "DK/DK.h"
 #include "DK/DKUtil.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <curl/curl.h>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 class DKCurl : public DKObjectT<DKCurl>
 {

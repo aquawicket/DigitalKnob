@@ -28,7 +28,7 @@
 #define DKOSGCefKeyboard_H
 #include "DK/DK.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <osgGA/GUIEventAdapter>
 //WARING_ENABLE
 

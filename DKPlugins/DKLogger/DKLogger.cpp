@@ -28,7 +28,7 @@
 #include "DKLogger/DKLogger.h"
 #include "DK/DKFile.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <cstring>
 //WARING_ENABLE
 

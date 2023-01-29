@@ -29,7 +29,7 @@
 
 #include "DK/DK.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <osg/Uniform>
 #include <osg/Texture>
 //WARING_ENABLE

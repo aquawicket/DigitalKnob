@@ -30,14 +30,14 @@
 #include "DK/DKString.h"
 #include "DKAssets/DKAssets.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 //#ifdef USE_osgwTools
 //#include "DKPhysics/DKPhysics.h"
 //#include <osgwTools/AbsoluteModelTransform.h>
 //#endif
 #include <osgViewer/Viewer>
 #include <osgDB/ReadFile>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 bool DKOSGModel::Init(){

@@ -32,14 +32,14 @@
 #include "DKCef/DKCef.h"
 #include "DKOSGWindow/DKOSGWindow.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <osg/MatrixTransform>
 #include <osgViewer/ViewerEventHandlers>
 #include <include/cef_client.h>
 #include <include/cef_render_handler.h>
 #include <include/cef_browser_process_handler.h>
 #include <include/cef_display_handler.h>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 class DKOSGCefHandler;

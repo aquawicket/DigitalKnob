@@ -26,7 +26,7 @@
 
 #include "DK/stdafx.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 	#include <sstream>
 	#include <string>
 	#include <include/cef_urlrequest.h>
@@ -41,7 +41,7 @@
 		#include <delayimp.h>
 		#include <include/cef_sandbox_win.h>
 	#endif
-//WARNING_ENABLE
+WARNING_ENABLE
 
 #include "DK/DKApp.h"
 #include "DK/DKClass.h"

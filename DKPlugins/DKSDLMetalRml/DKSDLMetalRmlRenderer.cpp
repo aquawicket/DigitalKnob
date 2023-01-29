@@ -24,10 +24,10 @@
 * SOFTWARE.
 */
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <RmlUi/Core.h>
 #include <SDL_image.h>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 #include "DK/DK.h"
 #include "DK/DKString.h"

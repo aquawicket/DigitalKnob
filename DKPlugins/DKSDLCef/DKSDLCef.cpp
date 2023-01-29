@@ -34,13 +34,13 @@
 	#include "DK/DKWindows.h"
 #endif
 
-//WARNING_DISABLE
+WARNING_DISABLE
 	#include "SDL_syswm.h"
 	#include <include/cef_urlrequest.h>
 	#if WIN
 		#include <delayimp.h>
 	#endif
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 bool DKSDLCef::Init() {

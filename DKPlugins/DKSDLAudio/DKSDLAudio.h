@@ -29,10 +29,10 @@
 #ifndef DKSDLAudio_H
 #define DKSDLAudio_H
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include "SDL.h"
 #include "SDL_mixer.h"
-//WARNING_ENABLE
+WARNING_ENABLE
 
 #include "DK/DK.h"
 

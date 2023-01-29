@@ -29,7 +29,7 @@
 #ifndef DKSDLRmlOpenGL_H
 #define DKSDLRmlOpenGL_H
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include "RmlUi/Core.h"
 //#include <RmlUi/Core/RenderInterface.h>
 #include "SDL.h"
@@ -43,7 +43,7 @@ extern "C" {
 	#include "SDL2_gif.h"
 }
 #endif
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 class DKSDLRmlOpenGL : public Rml::RenderInterface

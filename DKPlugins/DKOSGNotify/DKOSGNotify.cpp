@@ -28,7 +28,7 @@
 #include "DKAssets/DKAssets.h"
 #include "DK/DKFile.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <iostream>
 //WARING_ENABLE
 

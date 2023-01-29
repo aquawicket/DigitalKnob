@@ -27,9 +27,9 @@
 #ifndef HEADINSTANCER_H
 #define HEADINSTANCER_H
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <RmlUi/Core/XMLNodeHandler.h>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 class HeadInstancer : public Rml::XMLNodeHandler{

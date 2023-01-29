@@ -27,9 +27,9 @@
 #include "DKOSGLights/DKOSGLights.h"
 #include "DKOSGWindow/DKOSGWindow.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <osg/Point>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 bool DKOSGLights::Init(){

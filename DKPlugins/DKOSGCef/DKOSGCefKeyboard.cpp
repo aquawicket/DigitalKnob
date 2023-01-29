@@ -25,14 +25,14 @@
 */
 #include "DKOSGCef/DKOSGCefKeyboard.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include "include/internal/cef_types.h"
 #if WIN
   #include <windows.h>
 #elif X11
   #include <X11/keysym.h>
 #endif
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 unsigned int DKOSGCefKeyboard::getCefModifiers(int modKeyMask){

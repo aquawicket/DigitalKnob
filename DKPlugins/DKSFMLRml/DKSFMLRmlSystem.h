@@ -29,12 +29,12 @@
 
 #include "DK/DK.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <RmlUi/Core/SystemInterface.h>
 #include <RmlUi/Core/Input.h>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 class RmlSFMLSystemInterface : public Rml::SystemInterface
