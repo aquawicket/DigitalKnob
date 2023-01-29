@@ -904,7 +904,9 @@ if(NOT RASPBERRY)
 		file(WRITE ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop ${DESKTOP_FILE})
 	
 		# Install shortcut of Release build to the apps menu
-		dk_executeProcess(desktop-file-install --dir=/home/$ENV{USER}/.local/share/applications ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DKPROJECT}/${OS}/Release)
+		if(NOT TINYCORE)
+			dk_executeProcess(desktop-file-install --dir=/home/$ENV{USER}/.local/share/applications ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DKPROJECT}/${OS}/Release)
+		endif()
 	endif()
 	
 	####################### Do Post Build Stuff #######################
