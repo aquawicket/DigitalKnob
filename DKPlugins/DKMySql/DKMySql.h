@@ -28,6 +28,8 @@
 #ifndef DKMySql_H
 #define DKMySql_H
 
+#include "DK/DK.h"
+
 WARNING_DISABLE
 //#if defined (WIN32) || defined (WIN64)
   //#include <winsock.h>
@@ -43,7 +45,6 @@ WARNING_DISABLE
 #endif
 WARNING_ENABLE
 
-#include "DK/DK.h"
 
 #ifdef USE_mysql
 	WARNING_DISABLE
