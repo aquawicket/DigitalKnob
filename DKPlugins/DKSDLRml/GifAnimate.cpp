@@ -23,16 +23,17 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-WARNING_DISABLE
-#include "GifAnimate.h"
-WARNING_ENABLE
-
 #include "DK/DKFile.h"
 #include "DKRml/DKRml.h"
 #ifdef HAVE_DKCurl
     #include "DKCurl/DKCurl.h"
 #endif
 //#include "FileInterface.h"
+
+WARNING_DISABLE
+#include "GifAnimate.h"
+WARNING_ENABLE
+
 
 bool LoadGifAnimation(SDL_Renderer* renderer, const Rml::String& source, Rml::TextureHandle& texture_handle, Rml::Vector2i& texture_dimensions) {
     size_t i;

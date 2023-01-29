@@ -26,6 +26,8 @@
 #ifndef GIFANIMATE_H
 #define GIFANIMATE_H
 
+#include "DK/DK.h"
+
 WARNING_DISABLE
 #include <map>
 #include <SDL_image.h>
