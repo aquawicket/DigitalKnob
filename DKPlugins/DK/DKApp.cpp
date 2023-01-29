@@ -53,12 +53,12 @@ std::vector<std::function<void()> > DKApp::loop_funcs;
 try{
 	//code to try
 }
-catch (...){
+catch (...) {
 	std::cout << "Exception:\n";
-	if(DKClass::HasFunc("DKDebug::ShowStackTrace")){
+	if(DKClass::HasFunc("DKDebug::ShowStackTrace")) {
 		DKClass::CallFunc("DKDebug::ShowStackTrace");
 		boxer::Selection sel = boxer::show("An exception in the main thread has occured.\n", "EXCEPTION", boxer::Style::Error, boxer::Buttons::YesNo);
-		if(sel == boxer::Selection::Yes){
+		if(sel == boxer::Selection::Yes) {
 			DKApp::Exit();
 			return false;
 		}
@@ -73,7 +73,7 @@ DKApp::DKApp(_argc, _argv)
 	_argc: (int) The number of arguments provided
 	_argv: (char**) The values of the arguments
 */
-DKApp::DKApp(int _argc, char** _argv){
+DKApp::DKApp(int _argc, char** _argv) {
 	DKDEBUGFUNC(_argc, _argv);
 	DKApp::argc = _argc;
 	DKApp::argv = _argv;
@@ -113,7 +113,7 @@ DKApp::DKApp(int _argc, char** _argv){
 	DKINFO("C++ Version: " + toString(DKCPP_LANGUAGE_VERSION) + "\n");
 	DKINFO("Build type:  " + toString(DKBUILD_TYPE) + "\n");
 
-	#if WIN32
+	#if WIN
 		DKWindows::CreateConsoleHandler();
 		DKWindows::SetTitle(appName + " " + version + " " + osFlag + " " + toString(DKBUILD_TYPE));
 	#endif
@@ -125,8 +125,8 @@ DKApp::DKApp(int _argc, char** _argv){
 	DKString time;
 	DKUtil::GetTime(time);
 	DKINFO(date + " " + time + "\n");
-	if (DKApp::argc > 1){
-		for (int i = 1; i < DKApp::argc; ++i){
+	if (DKApp::argc > 1) {
+		for (int i = 1; i < DKApp::argc; ++i) {
 			DKINFO("argv[" + toString(i) + "] = " + toString(DKApp::argv[i]) + "\n"); //print args
 		}
 	}
@@ -140,20 +140,21 @@ DKApp::DKApp(int _argc, char** _argv){
 	DKINFO("DKFile::exe_name = " + DKFile::exe_name + "\n");
 	DKINFO("DKFile::app_name = " + DKFile::app_name + "\n");
 	DKClass::DKCreate("DKAssets"); //Nothing will be logged to log.txt until here.
-	//if (DKClass::DKAvailable("App")){
+	//if (DKClass::DKAvailable("App")) {
 	//	DKObject* app = DKClass::DKCreate("App"); //App.h/App.cpp (user code)
 	//}
 	DKClass::DKCreate("DKDuktape");
 	DKClass::DKCreate("DKDebug");
 }
 
-void DKApp::Init(){
+void DKApp::Init() {
 	DKDEBUGFUNC();
 	active = true;
 }
 
 #if EMSCRIPTEN
 EM_BOOL DKApp::EM_DoFrame(double time, void* userData) {
+	//DKDEBUGFUNC(); // EXCESSIVE LOGGING
 	if (paused) {
 		DKUtil::Sleep(100);
 		return EM_TRUE; // Return true to keep the loop running.
@@ -164,7 +165,7 @@ EM_BOOL DKApp::EM_DoFrame(double time, void* userData) {
 }
 #endif
 
-void DKApp::Loop(){
+void DKApp::Loop() {
 	DKDEBUGFUNC();
 #if EMSCRIPTEN
 	// Receives a function to call and some user data to provide it.
@@ -175,8 +176,9 @@ void DKApp::Loop(){
 #endif
 }
 
-void DKApp::DoFrame(){
-	if(paused){ 
+void DKApp::DoFrame() {
+	//DKDEBUGFUNC(); // EXCESSIVE LOGGING
+	if(paused) { 
 		DKUtil::Sleep(100);
 		return;
 	}
@@ -184,14 +186,15 @@ void DKApp::DoFrame(){
 	CallLoops(); //Call loop functions
 }
 
-void DKApp::CallLoops(){
-	for(unsigned int i = 0; i < loop_funcs.size(); ++i){
+void DKApp::CallLoops() {
+	//DKDEBUGFUNC(); // EXCESSIVE LOGGING
+	for(unsigned int i = 0; i < loop_funcs.size(); ++i) {
 		//if(active)
 			loop_funcs[i]();
 	}
 }
 
-void DKApp::Exit(){
+void DKApp::Exit() {
 	DKDEBUGFUNC();
 	active = false;
 	DKUtil::CallExit();
