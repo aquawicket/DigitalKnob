@@ -31,15 +31,16 @@
 //#define USE_DKV8 1
 
 #include "DK/DK.h"
-#include "DK/DKApp.h"
-#include "DKCef/DKCefApp.h"
-#include "DKCef/DKCEFWindow.h"
 
 WARNING_DISABLE
 	#include <include/cef_client.h>
 	#include <include/cef_render_handler.h>
 	#include <include/cef_browser_process_handler.h>
 WARNING_ENABLE
+
+#include "DK/DKApp.h"
+#include "DKCef/DKCefApp.h"
+#include "DKCef/DKCEFWindow.h"
 
 
 class DKCEFWindow;
