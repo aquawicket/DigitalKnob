@@ -209,6 +209,7 @@ bool DKLinux::SetClipboard(const DKString& text){
 	return DKClass::CallFunc("DKSDLWindow::SetClipboard", &text);
 }
 
+#if HAVE_libasound2_dev
 bool DKLinux::SetVolume(double nVolume){
 	DKDEBUGFUNC(nVolume);
 	long min, max;
@@ -229,6 +230,7 @@ bool DKLinux::SetVolume(double nVolume){
 	snd_mixer_close(handle);
 	return true;
 }
+#endif
 
 bool DKLinux::StrokeKey(const int& key){
 	DKDEBUGFUNC(key);
@@ -236,6 +238,7 @@ bool DKLinux::StrokeKey(const int& key){
 	return ReleaseKey(key);
 }
 
+#if HAVE_libasound2_dev
 bool DKLinux::GetVolume(int& percent){
 	DKDEBUGFUNC(percent);
 	long min, max;
@@ -260,6 +263,7 @@ bool DKLinux::GetVolume(int& percent){
 	snd_mixer_close(handle);
 	return true;
 }
+#endif
 
 bool DKLinux::VirtualMemory(unsigned long long& virtualMemory){
 	DKDEBUGFUNC(virtualMemory);

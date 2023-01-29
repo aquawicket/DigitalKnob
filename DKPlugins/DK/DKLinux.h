@@ -46,7 +46,9 @@ public:
 	static bool SetMousePos(const int& x, const int& y);
 	static bool GetScreenWidth(int& w);
 	static bool GetScreenHeight(int& h);
+#if HAVE_libasound2_dev
 	static bool GetVolume(int& percent);
+#endif
 	static bool KeyIsDown(int& key);
 	static bool LeftPress();
 	static bool LeftRelease();
@@ -62,7 +64,9 @@ public:
 	static bool PhysicalMemoryUsedByApp(unsigned long long& physicalMemory);
 	static bool Run(const DKString& command, int& rtnvalue);
 	static bool SetClipboard(const DKString& text);
+#if HAVE_libasound2_dev
 	static bool SetVolume(double nVolume);
+#endif
 	static bool StrokeKey(const int& key);
 	static bool TurnOffMonitor(int& rtnvalue);
 	static bool TurnOnMonitor();
