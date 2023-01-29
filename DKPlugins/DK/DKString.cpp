@@ -28,9 +28,9 @@
 #include "DK/DKString.h"
 #include "DK/DKLog.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <codecvt> //string <--> wsting conversion
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 bool same(const DKString& str, const DKString& str2) {

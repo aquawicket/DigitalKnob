@@ -25,9 +25,12 @@
 */
 
 #include "DK/DKPreprocessor.h"
+
+WARNING_DISABLE
 #include <cstdio>
 #include <stdio.h>
 #include <iostream>
+WARNING_ENABLE
 
 bool DKPreprocessor::PrintPreprocessor(){
 	printf("DKPreprocessor::PrintPreprocessor()\n");
