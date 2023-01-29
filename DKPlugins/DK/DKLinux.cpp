@@ -209,9 +209,9 @@ bool DKLinux::SetClipboard(const DKString& text){
 	return DKClass::CallFunc("DKSDLWindow::SetClipboard", &text);
 }
 
-#if HAVE_libasound2_dev
 bool DKLinux::SetVolume(double nVolume){
 	DKDEBUGFUNC(nVolume);
+#if HAVE_libasound2_dev
 	long min, max;
 	snd_mixer_t *handle;
 	snd_mixer_selem_id_t *sid;
@@ -229,8 +229,11 @@ bool DKLinux::SetVolume(double nVolume){
 	snd_mixer_selem_set_playback_volume_all(elem, nVolume/* * max / 100*/);
 	snd_mixer_close(handle);
 	return true;
-}
+#else
+	return DKERROR("!HAVE_libasound2_dev\n");
 #endif
+}
+
 
 bool DKLinux::StrokeKey(const int& key){
 	DKDEBUGFUNC(key);
@@ -238,9 +241,9 @@ bool DKLinux::StrokeKey(const int& key){
 	return ReleaseKey(key);
 }
 
-#if HAVE_libasound2_dev
 bool DKLinux::GetVolume(int& percent){
 	DKDEBUGFUNC(percent);
+#if HAVE_libasound2_dev
 	long min, max;
 	snd_mixer_t *handle;
 	snd_mixer_selem_id_t *sid;
@@ -262,8 +265,11 @@ bool DKLinux::GetVolume(int& percent){
 	DKINFO("DKLinux::GetVolume(): returned "+toString(percent)+"\n");
 	snd_mixer_close(handle);
 	return true;
-}
+#else
+	return DKERROR("!HAVE_libasound2_dev\n");
 #endif
+}
+
 
 bool DKLinux::VirtualMemory(unsigned long long& virtualMemory){
 	DKDEBUGFUNC(virtualMemory);
