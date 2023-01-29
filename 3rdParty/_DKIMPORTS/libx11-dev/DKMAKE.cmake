@@ -28,7 +28,7 @@ if(LINUX OR RASPBERRY)
 	
 	#dynamic linking
 	SET(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -lX11")
-	SET(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -lXinerama")  # used by openscenegraph
+	#SET(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -lXinerama")  # used by openscenegraph, moved to libxinerama-dev
 	
 	#static linking
 	#RASPBERRY_dk_lib(/usr/lib/arm-linux-gnueabihf/libX11.a)
