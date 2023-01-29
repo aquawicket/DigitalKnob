@@ -29,7 +29,7 @@
 #ifndef DKSDLRmlOpenGL_H
 #define DKSDLRmlOpenGL_H
 
-#include "DK/DK.h"
+//#include "DK/DK.h"
 
 WARNING_DISABLE
 #include "RmlUi/Core.h"
