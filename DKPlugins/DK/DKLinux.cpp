@@ -183,6 +183,7 @@ bool DKLinux::Run(const DKString& command, int& rtnvalue){
 
 bool DKLinux::KeyIsDown(int& key){
 	DKDEBUGFUNC(key);
+#if HAVE_libx11_dev
 	XkbStateRec r;
     Display* d = XOpenDisplay(NULL);
     XkbGetState(d, XkbUseCoreKbd, &r);
@@ -195,6 +196,9 @@ bool DKLinux::KeyIsDown(int& key){
 		return true;
     XCloseDisplay(d);
 	return false;
+#else
+	return DKERROR("!HAVE_libx11_dev");
+#endif
 }
 
 bool DKLinux::GetClipboard(DKString& text){
