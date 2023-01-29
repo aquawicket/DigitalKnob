@@ -29,11 +29,11 @@
 #include "DK/DKUnix.h"
 #include "DK/DKFile.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <cstdlib>     // GetUsername()  std::getenv()
 #include <unistd.h>    // sleep()  / usleep()
 #include <termios.h>   // for system(), tcsetattr()
-//WARNING_ENABLE
+WARNING_ENABLE
 
 static struct termios current, old;
 /*

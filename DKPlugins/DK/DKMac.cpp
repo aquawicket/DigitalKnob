@@ -29,10 +29,10 @@
 #include "DK/DKMac.h"
 #include "DK/DKUnix.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #import "CoreFoundation/CoreFoundation.h"
 #import "CoreGraphics/CoreGraphics.h"
-//WARNING_ENABLE
+WARNING_ENABLE
 
 bool DKMac::GetKey(int& key){
     return DKUnix::GetKey(key);

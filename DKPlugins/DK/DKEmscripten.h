@@ -29,10 +29,10 @@
 #ifndef DKEmscripten_H
 #define DKEmscripten_H
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <emscripten.h>
 #include <emscripten/html5.h>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 class DKEmscripten{

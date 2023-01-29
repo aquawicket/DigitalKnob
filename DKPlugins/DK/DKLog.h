@@ -32,7 +32,7 @@
 #include "DK/DKTextColor.h"
 #include "DK/DKUtil.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <stdio.h>
 #include <iostream>
 #if IOS
@@ -44,7 +44,7 @@
 #if RTTI_ENABLED
 	#include <type_traits>
 #endif
-//WARNING_ENABLE
+WARNING_ENABLE
 
 #define DK_ASSERT  1
 #define DK_FATAL   2

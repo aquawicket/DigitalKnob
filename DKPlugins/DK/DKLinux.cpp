@@ -30,7 +30,7 @@
 #include "DK/DKUnix.h"
 #include "DK/DKLog.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <stdio.h>
 #include <stdlib.h>
 #include <X11/Xlib.h>
@@ -39,7 +39,7 @@
 #include <alsa/asoundlib.h>
 #include <unistd.h>         
 #include <termios.h>               //for system()
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
 bool DKLinux::GetKey(int& key){

@@ -26,7 +26,7 @@
 
 #include "DK/stdafx.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <iostream>
 #include <cstring>
 #include <math.h>
@@ -41,7 +41,7 @@
 #ifndef MAC
 	#include <fstream>
 #endif
-//WARNING_ENABLE
+WARNING_ENABLE
 
 #include "DK/DKUtil.h"
 #include "DK/DKLog.h"

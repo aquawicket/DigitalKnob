@@ -29,11 +29,11 @@
 #include "DK/stdafx.h"
 #include "DK/DKOsInfo.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #if MAC
 #import <CoreServices/CoreServices.h>
 #endif
-//WARNING_ENABLE
+WARNING_ENABLE
 
 bool GetOSFlag(DKString& flag){
 #if WIN32

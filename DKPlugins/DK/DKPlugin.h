@@ -32,9 +32,9 @@
 #include "DK/DKObject.h"
 #include "DK/DKString.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <vector>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 #if WIN
 //#ifdef BUILD_DLL

@@ -30,12 +30,12 @@
 
 #include "DK/DKString.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #ifndef WIN32
 	#include <limits.h>
 	#include <stdlib.h>
 #endif
-//WARNING_ENABLE
+WARNING_ENABLE
 
 #define FRAME_VALUES 30
 

@@ -28,12 +28,12 @@
 #ifndef DKOsInfo_H
 #define DKOsInfo_H
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #if WIN
 	#include "windows.h"
 	#include <sstream>
 #endif
-//WARNING_ENABLE
+WARNING_ENABLE
 	
 #if WIN
 	typedef LONG NTSTATUS, * PNTSTATUS;

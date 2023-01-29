@@ -29,7 +29,7 @@
 #include "DK/DKOsInfo.h"
 #include "DK/DKFile.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #if HAVE_backward_cpp
 	//#include <backward.hpp>
 #endif
@@ -39,7 +39,7 @@
 #if ANDROID && HAVE_sdl
 	#include <SDL.h>
 #endif
-//WARNING_ENABLE
+WARNING_ENABLE
 
 int    DKApp::argc;
 char** DKApp::argv;

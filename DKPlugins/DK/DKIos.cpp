@@ -28,9 +28,9 @@
 #if IOS
 #include "DK/DKIos.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #import <UIKit/UIKit.h>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 bool DKIos::GetScreenHeight(int& h){
 	CGRect screenRect = [[UIScreen mainScreen] bounds];

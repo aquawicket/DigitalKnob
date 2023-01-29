@@ -29,10 +29,10 @@
 #ifndef DKObject_H
 #define DKObject_H
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <map> //std::map
 #include <iostream>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 #include "DK/DKLog.h"
 
