@@ -21,5 +21,3 @@ endif()
 
 #dynamic linking
 SET(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -lXinerama")
-	
-
