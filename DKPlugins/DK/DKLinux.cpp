@@ -92,74 +92,106 @@ bool DKLinux::SetMousePos(const int& x, const int& y){
 
 bool DKLinux::LeftPress(){
 	DKDEBUGFUNC();
+#if HAVE_libx11_dev
 	Display *display = XOpenDisplay(NULL);
 	XTestFakeButtonEvent(display, 1, true, 0);
 	XFlush(display);
 	XCloseDisplay(display);
 	return true;
+#else
+	return DKERROR("!HAVE_libx11_dev");
+#endif
 }
 
 bool DKLinux::LeftRelease(){
 	DKDEBUGFUNC();
+#if HAVE_libx11_dev
 	Display *display = XOpenDisplay(NULL);
 	XTestFakeButtonEvent(display, 1, false, 0);
 	XFlush(display);
 	XCloseDisplay(display);
 	return true;
+#else
+	return DKERROR("!HAVE_libx11_dev");
+#endif
 }
 
 bool DKLinux::RightPress(){
 	DKDEBUGFUNC();
+#if HAVE_libx11_dev
 	Display *display = XOpenDisplay(NULL);
 	XTestFakeButtonEvent(display, 3, true, 0);
 	XFlush(display);
 	XCloseDisplay(display);
 	return true;
+#else
+	return DKERROR("!HAVE_libx11_dev");
+#endif
 }
 
 bool DKLinux::RightRelease(){
 	DKDEBUGFUNC();
+#if HAVE_libx11_dev
 	Display *display = XOpenDisplay(NULL);
 	XTestFakeButtonEvent(display, 3, false, 0);
 	XFlush(display);
 	XCloseDisplay(display);
 	return true;
+#else
+	return DKERROR("!HAVE_libx11_dev");
+#endif
 }
 
 bool DKLinux::MiddlePress(){
 	DKDEBUGFUNC();
+#if HAVE_libx11_dev
 	Display *display = XOpenDisplay(NULL);
 	XTestFakeButtonEvent(display, 2, true, 0);
 	XFlush(display);
 	XCloseDisplay(display);
 	return true;
+#else
+	return DKERROR("!HAVE_libx11_dev");
+#endif
 }
 
 bool DKLinux::MiddleRelease(){
 	DKDEBUGFUNC();
+#if HAVE_libx11_dev
 	Display *display = XOpenDisplay(NULL);
 	XTestFakeButtonEvent(display, 2, false, 0);
 	XFlush(display);
 	XCloseDisplay(display);
 	return true;
+#else
+	return DKERROR("!HAVE_libx11_dev");
+#endif
 }
 
 bool DKLinux::PressKey(int key){
 	DKDEBUGFUNC(key);
+#if HAVE_libx11_dev
 	Display *display = XOpenDisplay(NULL);
 	XTestFakeKeyEvent(display, key, true, 0);
 	XFlush(display);
 	XCloseDisplay(display);
 	return true;
+#else
+	return DKERROR("!HAVE_libx11_dev");
+#endif
 }
 
 bool DKLinux::ReleaseKey(int key){
 	DKDEBUGFUNC(key);
+#if HAVE_libx11_dev
 	Display *display = XOpenDisplay(NULL);
 	XTestFakeKeyEvent(display, key, false, 0);
 	XFlush(display);
 	XCloseDisplay(display);
 	return true;
+#else
+	return DKERROR("!HAVE_libx11_dev");
+#endif
 }
 
 bool DKLinux::GetScreenWidth(int& w){
