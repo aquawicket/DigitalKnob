@@ -28,11 +28,11 @@
 #ifndef DKWebSockets_H
 #define DKWebSockets_H
 
+#include "DK/DK.h"
+
 WARNING_DISABLE
 #include "src/uWS.h"
 WARNING_ENABLE
-
-#include "DK/DK.h"
 
 
 class DKWebSockets : public DKObjectT<DKWebSockets>
