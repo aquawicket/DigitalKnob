@@ -49,6 +49,7 @@ bool DKLinux::GetKey(int& key){
 
 bool DKLinux::GetMousePos(int& x, int& y){
 	DKDEBUGFUNC(x, y);
+#if HAVE_libx11_dev
 	//Compile with:
     //cc -Wall -I/usr/X11R6/include -L/usr/X11R6/lib -lXm -o xquerypointer xquerypointer.c
 	//or on solaris:
@@ -74,6 +75,9 @@ bool DKLinux::GetMousePos(int& x, int& y){
 		return true;
 	}
 	return false;
+#else
+	return DKERROR("!HAVE_libx11_dev");
+#endif
 }
 
 bool DKLinux::SetMousePos(const int& x, const int& y){
@@ -196,18 +200,26 @@ bool DKLinux::ReleaseKey(int key){
 
 bool DKLinux::GetScreenWidth(int& w){
 	DKDEBUGFUNC(w);
+#if HAVE_libx11_dev
 	Display* d = XOpenDisplay(NULL);
 	Screen* s = DefaultScreenOfDisplay(d);
 	w = s->width;
 	return true;
+#else
+	return DKERROR("!HAVE_libx11_dev");
+#endif
 }
 
 bool DKLinux::GetScreenHeight(int& h){
 	DKDEBUGFUNC(h);
+#if HAVE_libx11_dev
 	Display* d = XOpenDisplay(NULL);
 	Screen* s = DefaultScreenOfDisplay(d);
 	h = s->height;
 	return true;
+#else
+	return DKERROR("!HAVE_libx11_dev");
+#endif
 }
 
 bool DKLinux::Run(const DKString& command, int& rtnvalue){
