@@ -28,12 +28,12 @@
 #ifndef DKSDLRmlSystem_H
 #define DKSDLRmlSystem_H
 
+#include "DK/DK.h"
+
 WARNING_DISABLE
 #include <RmlUi/Core.h>
 #include <SDL.h>
 WARNING_ENABLE
-
-#include "DK/DK.h"
 
 
 class RmlSDL2SystemInterface : public Rml::SystemInterface
