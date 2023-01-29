@@ -23,6 +23,7 @@
 # SOFTWARE.
 include_guard()
 
+dk_disable(libx11-dev)  # TEMPORARY
 
 # DISABLED FOR ALL TARGETS
 dk_disable(bgfx)					# TODO
