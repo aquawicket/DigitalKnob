@@ -24,11 +24,11 @@
 * SOFTWARE.
 */
 
+#include "DKSDLRml/DKSDLRmlSystem.h"
+
 WARNING_DISABLE
 #include <RmlUi/Core.h>
 WARNING_ENABLE
-
-#include "DKSDLRml/DKSDLRmlSystem.h"
 
 
 Rml::Input::KeyIdentifier RmlSDL2SystemInterface::TranslateKey(SDL_Keycode sdlkey){
