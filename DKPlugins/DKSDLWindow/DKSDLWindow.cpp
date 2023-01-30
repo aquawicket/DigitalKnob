@@ -32,6 +32,8 @@
 
 WARNING_DISABLE
 #include "SDL_syswm.h"
+
+// TODO: replace all of these with #include "DKOpenGL/DKOpenGL.h"
 #if WIN
     #include <GL/glew.h>
 	#include <GL/gl.h>
@@ -139,7 +141,7 @@ bool DKSDLWindow::Init(){
 #endif
     DKString result;
 #if !SDL_VIDEO_OPENGL//ANDROID || IOS || EMSCRIPTEN
-    DKINFO("Creating SDLWindow for mobile device\n");
+    DKINFO("Creating SDLWindow (OpenGLES)\n");
     
     SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengles");
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
@@ -152,35 +154,33 @@ bool DKSDLWindow::Init(){
     DKINFO("DKSDLWindow Width: " + toString(width) + " Height: " + toString(height) + "\n");
 	
     if(SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_RESIZABLE, &window, &renderer) < 0)
-		return DKERROR("SDL_CreateWindow Error: " + DKString(SDL_GetError()) + "\n");
+		return DKERROR("SDL_CreateWindowAndRenderer() failed!: " + DKString(SDL_GetError()) + "\n");
     
     /*
     //SDL_SetHint(SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS, "0");
-    width = DKAndroid::android_width;
-    height = DKAndroid::android_height;
     SDL_Window* sdlWindow = SDL_CreateWindow("RmlUi SDL2 with SDL_Renderer", 0, 0, width, height, SDL_WINDOW_RESIZABLE);
     if (!sdlWindow)
-        printf("SDL_Window* invalid: %s\n", SDL_GetError());
+		return DKERROR("sdlWindow inavlid!: " + DKString(SDL_GetError()) + "\n");
     window = sdlWindow;
 
     SDL_Renderer* sdlRenderer = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_ACCELERATED);// | SDL_RENDERER_PRESENTVSYNC);
     if (!sdlRenderer)
-        printf("SDL renderer invalid: %s\n", SDL_GetError());
+		return DKERROR("sdlRenderer inavlid!: " + DKString(SDL_GetError()) + "\n");
     renderer = sdlRenderer;
 
     SDL_RendererInfo sdlRenderinfo;
     if (SDL_GetRendererInfo(renderer, &sdlRenderinfo) < 0)
-        printf("SDL_GetRendererInfo() failed: %s\n", SDL_GetError());
+		return DKERROR("SDL_GetRendererInfo() failed!: " + DKString(SDL_GetError()) + "\n");
 
     // Print the SDL_Render name, and display it in the mTitle bar
     DKString rendererName = sdlRenderinfo.name;
-    printf("SDL_Renderer Driver = %s\n", rendererName.c_str());
+	DKINFO("SDL_Renderer Driver = "+rendererName.c_str()+"\n");
     mTitle = DKString("SDL_Renderer RmlUi - " + rendererName);
     SDL_SetWindowTitle(sdlWindow, mTitle.c_str());
     */
 #endif
 #if SDL_VIDEO_OPENGL//!ANDROID && !IOS && !EMSCRIPTEN
-    DKINFO("Creating SDLWindow for Desktop\n");
+    DKINFO("Creating SDLWindow (OpenGL)\n");
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_COMPATIBILITY);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 1);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
@@ -194,7 +194,7 @@ bool DKSDLWindow::Init(){
     window = SDL_CreateWindow(mTitle.c_str(), winX, winY, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL | SDL_WINDOW_ALLOW_HIGHDPI);
     if(!window) {
         SDL_Quit();
-        return DKERROR("SDL_CreateWindow Error: " + DKString(SDL_GetError()) + "\n");
+        return DKERROR("window invalid!: " + DKString(SDL_GetError()) + "\n");
     }
     renderer = NULL;
     if(!same(sdl_renderer, "SOFTWARE")) {
@@ -213,7 +213,7 @@ bool DKSDLWindow::Init(){
 #	if WIN
 		GLenum err = glewInit();
 		if (err != GLEW_OK)
-			DKERROR("GLEW ERROR:\n"); // "+glewGetErrorString(err)+"\n");
+			DKERROR("glewInit() failed! \n"); // "+glewGetErrorString(err)+"\n");
 #	endif
 #endif
     //Set window Title
@@ -378,7 +378,6 @@ bool DKSDLWindow::TestString(const void* input, void* output) {
 
 bool DKSDLWindow::TestReturnInt(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
-    DK_UNUSED(input);
     int var = 1234;
     *(int*)output = var;
     return true;
@@ -386,7 +385,6 @@ bool DKSDLWindow::TestReturnInt(const void* input, void* output) {
 
 bool DKSDLWindow::TestReturnString(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
-    DK_UNUSED(input);
     std::string var = "Return test";
     *(std::string*)output = var;
     return true;
@@ -436,7 +434,6 @@ bool DKSDLWindow::GetHandle(const void* input, void* output) {
 
 bool DKSDLWindow::GetHeight(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
-    DK_UNUSED(input);
     int h;
     SDL_GetWindowSize(window, NULL, &h);
     if(h == 0)
@@ -469,7 +466,6 @@ bool DKSDLWindow::GetPixelRatio(const void* input, void* output) {
 
 bool DKSDLWindow::GetWidth(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
-    DK_UNUSED(input);
     int w;
     SDL_GetWindowSize(window, &w, NULL);
     if(w == 0)
@@ -556,7 +552,6 @@ bool DKSDLWindow::SetHeight(const void* input, void* output) {
 
 bool DKSDLWindow::SetIcon(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
-    DK_UNUSED(output);
 #if WIN
     DKString file = *(DKString*)input;
     SDL_SysWMinfo wmInfo;
@@ -620,6 +615,7 @@ bool DKSDLWindow::Windowed(const void* input, void* output) {
 
 //FIXME: This is very slow
 bool DKSDLWindow::drawBackground(SDL_Renderer *renderer, int w, int h) {
+	//DKDEBUGFUNC(renderer, w, h); // EXCESSIVE LOGGING
     SDL_Color sdlColor[2] = { { 100, 100, 100, 255 }, { 150, 150, 150, 255 } };
     SDL_Rect sdlRect({ 0,0,8,8 });
     int i, x, y;
@@ -649,7 +645,6 @@ void DKSDLWindow::Process() {
         render_funcs[i](); //Call render functions     //TODO: add a duktape sheet here to manipulate SDL via javascript
     SDL_Event e;
     while(SDL_PollEvent(&e)) {
-        //for(unsigned long i = 0; i < event_funcs.size(); ++i) {
         for (size_t i = 0; i < event_funcs.size(); ++i) {
             if(event_funcs[i](&e)) //Call event functions
                 i = event_funcs.size();	//eat the event
