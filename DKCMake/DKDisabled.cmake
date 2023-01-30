@@ -426,7 +426,7 @@ if(LINUX)
 	dk_disable(libexpat)
 	dk_disable(libsndfile)			# requires opus
 	dk_disable(libtorrent)			# CMake Error: cannot find source file: deps/try_signal/try_singal.cpp
-	dk_disable(libxinerama-dev)		# apt: Unable to locate package libXinerama-dev
+	#dk_disable(libxinerama-dev)		# apt: Unable to locate package libXinerama-dev
 	dk_disable(libxml2)				# Not such file or directory
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(nasm)
