@@ -115,8 +115,17 @@ dk_set(IOS_SYSROOT		${XCODE_DEVROOT}/Platforms/iPhoneOS.platform/Developer/SDKs/
 dk_set(IOSSIM_SYSROOT	${XCODE_DEVROOT}/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator15.0.sdk)
 
 # linux variables
-dk_set(LINUX_GCC		/usr/bin/gcc)
-dk_set(LINUX_GXX		/usr/bin/g++)
+if(EXISTS /usr/bin/gcc)
+	dk_set(LINUX_GCC	/usr/bin/gcc)
+elseif(EXISTS /usr/local/bin/gcc)
+	dk_set(LINUX_GCC	/usr/local/bin/gcc)
+endif()
+
+if(EXISTS /usr/bin/g++)
+	dk_set(LINUX_GXX	/usr/bin/g++)
+elseif(EXISTS /usr/local/bin/g++)
+	dk_set(LINUX_GXX	/usr/local/bin/g++)
+endif()
 
 
 # Android variables
