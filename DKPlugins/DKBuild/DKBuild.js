@@ -66,31 +66,31 @@ function DKBuild_init(){
 	if(CPP_DK_GetOS() === "Windows"){
 		DIGITALKNOB = "C:/Users/"+USERNAME+"/digitalknob/"
 		if(CPP_DK_GetOSArchitecture() === "32"){
-			CMAKE = "C:/Program Files/CMake/bin/cmake.exe"
+			//CMAKE = "C:/Program Files/CMake/bin/cmake.exe"
 			VISUALSTUDIO = "C:/Program Files/Microsoft Visual Studio/"+VISUALSTUDIO_VERSION
 		}
 		if(CPP_DK_GetOSArchitecture() === "64"){
-			CMAKE = "C:/Program Files (x86)/CMake/bin/cmake.exe"
+			//CMAKE = "C:/Program Files (x86)/CMake/bin/cmake.exe"
 			VISUALSTUDIO = "C:/Program Files/Microsoft Visual Studio/"+VISUALSTUDIO_VERSION
 		}
 		//CMAKE = CPP_DKFile_GetShortName(CMAKE)
-		CMAKE = DKBuild_GetShortPath(CMAKE)
+		//CMAKE = DKBuild_GetShortPath(CMAKE)
 		MSBUILD = VISUALSTUDIO+"/Community/MSBuild/Current/Bin/MSBuild.exe"
 		MSBUILD = CPP_DKFile_GetShortName(MSBUILD)
 	}
 	if(CPP_DK_GetOS() === "Mac"){
 		DIGITALKNOB = "/Users/"+USERNAME+"/digitalknob/"
-		CMAKE = "/Applications/CMake.app/Contents/bin/cmake"
+		//CMAKE = "/Applications/CMake.app/Contents/bin/cmake"
 		XCODE = "/Applications/Xcode.app"
 	}
 	if(CPP_DK_GetOS() === "Linux"){
 		DIGITALKNOB = "/home/"+USERNAME+"/digitalknob/"
-		CMAKE = "/usr/bin/cmake"
+		//CMAKE = "/usr/bin/cmake"
 		GCC = "/usr/bin/g++"
 	}
 	if(CPP_DK_GetOS() === "Raspberry"){
 		DIGITALKNOB = "/home/"+USERNAME+"/digitalknob/"
-		CMAKE = "/usr/bin/cmake"
+		//CMAKE = "/usr/bin/cmake"
 		GCC = "/usr/bin/g++"
 	}
 	
@@ -148,14 +148,35 @@ function DKBuild_DeleteTmpFiles(){
 	}
 }
 
+function DKBuild_SetCMakeExePath(){
+	// CMake
+	if(CPP_DKFile_Exists("C:/Program Files/CMake/bin/cmake.exe"))
+		CMAKE = CPP_DKFile_GetShortName("C:/Program Files/CMake/bin/cmake.exe")
+	else if(CPP_DKFile_Exists("C:/Program Files (x86)/CMake/bin/cmake.exe"))
+		CMAKE = CPP_DKFile_GetShortName("C:/Program Files (x86)/CMake/bin/cmake.exe")
+	else if(CPP_DKFile_Exists("/Applications/CMake.app/Contents/bin/cmake"))
+		CMAKE = "/Applications/CMake.app/Contents/bin/cmake"
+	else if(CPP_DKFile_Exists("/usr/bin/cmake"))
+		CMAKE = "/usr/bin/cmake"
+	else if(CPP_DKFile_Exists("/usr/local/bin/cmake"))
+		CMAKE = "/usr/local/bin/cmake"
+	else
+		CMAKE = "cmake"
+}
+
 function DKBuild_ValidateCmake(){
 	console.log("Looking for CMake")
-	if(!CPP_DKFile_Exists(CMAKE))
+	
+	DKBuild_SetCMakeExePath()
+	if(!CPP_DKFile_Exists(CMAKE)){
 		DKBuild_InstallCmake()
+		DKBuild_SetCMakeExePath()
+	}
+	
 	if(CPP_DKFile_Exists(CMAKE))
 		console.log("Found CMake")
-	if(CPP_DK_GetOS() === "Mac")
-		CMAKE = "cmake"
+	//if(CPP_DK_GetOS() === "Mac")
+	//	CMAKE = "cmake"
 }
 
 function DKBuild_InstallCmake(){

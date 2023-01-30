@@ -3,7 +3,6 @@
 var GIT = ""
 
 function DKGit_init() {
-    DKGit_SetGitExePath()
     DKGit_ValidateGit()
 }
 
@@ -36,6 +35,8 @@ function DKGit_SetGitExePath() {
 
 function DKGit_ValidateGit() {
     console.log("Looking for GIT\n")
+	
+	DKGit_SetGitExePath()
     if (!CPP_DKFile_Exists(GIT)) {
         DKGit_InstallGit()
         DKGit_SetGitExePath()
