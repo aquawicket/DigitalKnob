@@ -43,7 +43,9 @@ WARNING_DISABLE
 	#include <OpenGLES/ES1/gl.h>
 #endif
 #if LINUX
-	#include <GL/gl.h>
+    #if SDL_VIDEO_OPENGL 
+	    #include <GL/gl.h>
+    #endif
 	//#include <gdk/gdk.h>
 #endif	
 #if ANDROID
