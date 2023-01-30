@@ -28,14 +28,16 @@
 #ifndef DKSFMLWindow_H
 #define DKSFMLWindow_H
 
+#include "DK/DK.h"
+
 WARNING_DISABLE
-#ifdef USE_GDK
+#if USE_GDK
 #	include <gtk/gtk.h>
 #endif
 #include <SFML/Window.hpp>
 WARNING_ENABLE
 
-#include "DK/DK.h"
+
 
 
 class DKSFMLWindow : public DKObjectT<DKSFMLWindow>
