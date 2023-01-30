@@ -29,11 +29,11 @@
 #ifndef DKMidi_H
 #define DKMidi_H
 
+#include "DK/DK.h"
+
 WARNING_DISABLE
 #include "RtMidi.h"
 WARNING_ENABLE
-
-#include "DK/DK.h"
 
 
 class DKMidi : public DKObjectT<DKMidi>
