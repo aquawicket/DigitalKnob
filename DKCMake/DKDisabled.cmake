@@ -577,10 +577,7 @@ endif(RASPBERRY)
 # Disabled for tinycore targets
 if(TINYCORE)
 	dk_disable(libasound2-dev)
-	dk_disable(libgl1-mesa-dev)
-	dk_disable(libxinerama-dev)		# apt: Unable to locate package libXinerama-dev
-	#dk_disable(libxrandr-dev)
-	#dk_disable(libxtst-dev)
+	dk_disable(libgl1-mesa-dev)	
 	dk_disable(mesa-common-dev)
 	dk_disable(opengl)
 	dk_disable(pyyaml)
