@@ -29,15 +29,16 @@
 #define DKCEFWindow_H
 //#define USE_GDK    
 
+#include "DKCef/DKCef.h"
+
 WARNING_DISABLE
 	#if LINUX
 		#ifdef USE_GDK
 			#include <gdk/gdk.h>
 		#endif //USE_GDK
 	#endif //LINUX
-//WARNING ENABLE
+WARNING_ENABLE
 
-#include "DKCef/DKCef.h"
 
 class DKCef;
 class DKCEFWindow : public CefClient,
