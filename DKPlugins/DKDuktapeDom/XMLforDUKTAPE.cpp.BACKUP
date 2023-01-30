@@ -1,8 +1,8 @@
 // https://gist.github.com/armornick/f53ca953c5771bfee8aa0172e22d5181
 
-WARNING_DISABLE
+//WARNING_DISABLE
 #include <duktape.h>
-WARNING_ENABLE
+//WARNING_ENABLE
 
 /*
 
