@@ -45,14 +45,16 @@ WARNING_DISABLE
 #if LINUX
     #if SDL_VIDEO_OPENGL 
 	    #include <GL/gl.h>
-    #endif
+	#elif SDL_VIDEO_OPENGL_ES2
+		#include <GLES2/gl2.h>
+	#endif
 	//#include <gdk/gdk.h>
 #endif	
 #if ANDROID
 	#include <GLES/gl.h>
 #endif
 #if EMSCRIPTEN
-#   include <GLES2/gl2.h>
+	#include <GLES2/gl2.h>
 #endif
 WARNING_ENABLE
 
