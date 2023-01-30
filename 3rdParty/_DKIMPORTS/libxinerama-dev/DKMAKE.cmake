@@ -15,9 +15,9 @@ endif()
 
 	### INSTALL ###
 	if(TINYCORE)
-		#dk_command(tce-load -wi libXinerama-dev.tcz)
+		dk_command(tce-load -wi libXinerama-dev.tcz)
 	else()
-		#dk_command(sudo apt -y install libXinerama-dev)
+		dk_command(sudo apt -y install libxinerama-dev)
 	endif()
 #endif()
 
