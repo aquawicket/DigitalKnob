@@ -38,8 +38,6 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
-
-
 class DKSFMLWindow : public DKObjectT<DKSFMLWindow>
 {
 public:

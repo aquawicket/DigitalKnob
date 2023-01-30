@@ -30,7 +30,7 @@
    
 #include "DKCef/DKCef.h"
 
-#define USE_GDK 0
+//#define USE_GDK 1
 
 WARNING_DISABLE
 #if LINUX
