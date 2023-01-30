@@ -582,6 +582,7 @@ if(TINYCORE)
 	#dk_disable(libxrandr-dev)
 	#dk_disable(libxtst-dev)
 	dk_disable(mesa-common-dev)
+	dk_disable(opengl)
 	dk_disable(pyyaml)
 endif()
 
