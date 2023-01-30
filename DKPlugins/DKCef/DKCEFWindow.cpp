@@ -25,14 +25,13 @@
 */
 
 #include "DK/stdafx.h"
+#include "DKCef/DKCEFWindow.h"
 
 WARNING_DISABLE
 	#if MAC
 		#import <AppKit/AppKit.h>
 	#endif
 WARNING_ENABLE
-
-#include "DKCef/DKCEFWindow.h"
 
 
 DKCEFWindow::DKCEFWindow(){

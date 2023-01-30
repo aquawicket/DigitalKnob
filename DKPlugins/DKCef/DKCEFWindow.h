@@ -27,17 +27,17 @@
 #pragma once
 #ifndef DKCEFWindow_H
 #define DKCEFWindow_H
-//#define USE_GDK    
-
+   
 #include "DKCef/DKCef.h"
 
-//WARNING_DISABLE
+//#define USE_GDK 1 
+WARNING_DISABLE
 	#if LINUX
-		#ifdef USE_GDK
+		#if USE_GDK
 			#include <gdk/gdk.h>
-		#endif //USE_GDK
-	#endif //LINUX
-//WARNING_ENABLE
+		#endif
+	#endif
+WARNING_ENABLE
 
 
 class DKCef;
