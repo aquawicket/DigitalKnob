@@ -576,6 +576,7 @@ endif(RASPBERRY)
 
 # Disabled for tinycore targets
 if(TINYCORE)
+	dk_disable(glew)
 	dk_disable(libasound2-dev)
 	dk_disable(libgl1-mesa-dev)	
 	dk_disable(mesa-common-dev)
