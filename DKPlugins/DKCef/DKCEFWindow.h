@@ -31,13 +31,13 @@
 
 #include "DKCef/DKCef.h"
 
-WARNING_DISABLE
+//WARNING_DISABLE
 	#if LINUX
 		#ifdef USE_GDK
 			#include <gdk/gdk.h>
 		#endif //USE_GDK
 	#endif //LINUX
-WARNING_ENABLE
+//WARNING_ENABLE
 
 
 class DKCef;
