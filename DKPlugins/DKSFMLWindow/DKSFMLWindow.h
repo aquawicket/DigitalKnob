@@ -30,6 +30,7 @@
 
 #include "DK/DK.h"
 
+#define USE_GDK 0
 WARNING_DISABLE
 #if USE_GDK
 #	include <gtk/gtk.h>
