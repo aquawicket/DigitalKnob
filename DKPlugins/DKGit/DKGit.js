@@ -8,6 +8,7 @@ function DKGit_init() {
 }
 
 function DKGit_SetGitExePath() {
+	/*
     if (CPP_DK_GetOS() === "Windows"){
 		if(CPP_DK_GetOSArchitecture() === "32")
 			GIT = CPP_DKFile_GetShortName("C:/Program Files/Git/bin/git.exe")
@@ -20,6 +21,17 @@ function DKGit_SetGitExePath() {
         GIT = "/usr/bin/git"
     if (CPP_DK_GetOS() === "Raspberry")
         GIT = "/usr/bin/git"
+	*/
+	if(CPP_DKFile_Exists("C:/Program Files/Git/bin/git.exe"))
+		GIT = CPP_DKFile_GetShortName("C:/Program Files/Git/bin/git.exe")
+	else if(CPP_DKFile_Exists("C:/Program Files (x86)/Git/bin/git.exe"))
+		GIT = CPP_DKFile_GetShortName("C:/Program Files (x86)/Git/bin/git.exe")
+	else if(CPP_DKFile_Exists("/usr/bin/git"))
+		GIT = "/usr/bin/git"
+	else if(CPP_DKFile_Exists("/usr/local/bin/git"))
+		GIT = "/usr/local/bin/git"
+	else
+		GIT = "git"
 }
 
 function DKGit_ValidateGit() {
