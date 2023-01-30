@@ -311,7 +311,7 @@
 #endif
 
 
-// DK_UNUSED(arg) - supress unfererenced formal parameter warnings for uused variables
+// DK_UNUSED(arg) - supress unreferenced formal parameter warnings for uused variables
 #define DK_UNUSED(arg) (void)arg;
 
 

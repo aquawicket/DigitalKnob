@@ -134,11 +134,11 @@ bool DKSDLWindow::Init(){
 #endif
 
     SDL_SetHint(SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS, "0");
-#if !ANDROID && !IOS && !EMSCRIPTEN
+#if SDL_VIDEO_OPENGL//!ANDROID && !IOS && !EMSCRIPTEN
     SDL_SetHint(SDL_HINT_MOUSE_FOCUS_CLICKTHROUGH, "1");
 #endif
     DKString result;
-#if ANDROID || IOS || EMSCRIPTEN
+#if !SDL_VIDEO_OPENGL//ANDROID || IOS || EMSCRIPTEN
     DKINFO("Creating SDLWindow for mobile device\n");
     
     SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengles");
@@ -179,7 +179,7 @@ bool DKSDLWindow::Init(){
     SDL_SetWindowTitle(sdlWindow, mTitle.c_str());
     */
 #endif
-#if !ANDROID && !IOS && !EMSCRIPTEN
+#if SDL_VIDEO_OPENGL//!ANDROID && !IOS && !EMSCRIPTEN
     DKINFO("Creating SDLWindow for Desktop\n");
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_COMPATIBILITY);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 1);
@@ -267,7 +267,7 @@ bool DKSDLWindow::Init(){
     DKSDLWindow::AddEventFunc(&DKSDLWindow::handle, this);
     MapInputs();
     SDL_SetEventFilter(&DKSDLWindow::EventFilter, this); //DEBUG : bypassing events here for now
-#if !ANDROID && !IOS && !EMSCRIPTEN
+#if SDL_VIDEO_OPENGL//!ANDROID && !IOS && !EMSCRIPTEN
 	// https://github.com/ocornut/imgui/issues/1116#issuecomment-297701113
     SDL_GLContext glcontext = SDL_GL_CreateContext(window);
     SDL_GL_MakeCurrent(window, glcontext);
