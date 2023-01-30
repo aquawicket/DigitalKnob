@@ -638,7 +638,7 @@ bool DKCef::NewBrowser(const DKString& id, const int& top, const int& left, cons
 		DKClass::CallFunc("DKCEFWindow::SetIcon", &icon, NULL);
 		
 #	if LINUX
-#			ifdef USE_GDK
+#			if USE_GDK
 				gdk_init(NULL, NULL);
 				GdkWindow* gdk_window = gdk_window_foreign_new(current_browser->GetHost()->GetWindowHandle());
 				if(!gdk_window)
