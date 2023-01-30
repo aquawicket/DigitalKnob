@@ -392,6 +392,7 @@ endif()
 if(LINUX)
 	dk_disable(aubio)
 	dk_disable(boxer)				# error: can't create CMakeFiles/Boxer.dir/src/boxer_linux.cpp.o: No such file or directory
+	dk_disable(DKCef)				# can't find glibconfig.h
 	dk_disable(DKHook)				# 'read' was not declared in this scope
 	dk_disable(DKJerryscript)		# requires jerryscript
 	dk_disable(DKOcr)				# requires tesseract
