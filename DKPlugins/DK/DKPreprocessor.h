@@ -51,6 +51,10 @@
 //#define JOIN_THREE(_1, _2, _3) STR(_1) "." STR(_2) "." STR(_3)
 
 
+// TODO: Cross-platform warnings
+// https://stackoverflow.com/questions/471935/user-warnings-on-msvc-and-gcc
+// https://stackoverflow.com/questions/171435/portability-of-warning-preprocessor-directive
+
 
 #if __x86_64__ || _M_X64
 #	define DKARCH "x86_64"
