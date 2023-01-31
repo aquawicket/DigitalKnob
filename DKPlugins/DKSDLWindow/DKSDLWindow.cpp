@@ -115,7 +115,7 @@ bool DKSDLWindow::Init(){
     SDL_SetHint(SDL_HINT_MOUSE_FOCUS_CLICKTHROUGH, "1");
 #endif
     DKString result;
-#if !SDL_VIDEO_OPENGL && (SDL_VIDEO_OPENGL_ES || SDL_VIDEO_OPENGL_ES2)
+#if !SDL_VIDEO_OPENGL //&& (SDL_VIDEO_OPENGL_ES || SDL_VIDEO_OPENGL_ES2)
     DKINFO("Creating SDLWindow (OpenGLES)\n");
     
     SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengles");
@@ -617,7 +617,7 @@ void DKSDLWindow::Process() {
 	//drawBackground(renderer, width, height);
 	
     for(unsigned int i = 0; i < render_funcs.size(); ++i) 
-        render_funcs[i](); //Call render functions     //TODO: add a duktape sheet here to manipulate SDL via javascript
+        render_funcs[i](); //Call render functions
     SDL_Event e;
     while(SDL_PollEvent(&e)) {
         for (size_t i = 0; i < event_funcs.size(); ++i) {
@@ -632,7 +632,7 @@ void DKSDLWindow::Process() {
         DKERROR("renderer invalid");
         return;
     }
-    SDL_RenderPresent(renderer); //FIXME: is renderer valid?
+    SDL_RenderPresent(renderer);
 }
 
 int DKSDLWindow::EventFilter(void* userdata, SDL_Event* event) {
