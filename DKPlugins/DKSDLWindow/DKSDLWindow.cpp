@@ -33,34 +33,6 @@
 
 WARNING_DISABLE
 #include "SDL_syswm.h"
-
-/*
-// TODO: replace all of these with #include "DKOpenGL/DKOpenGL.h"
-#if WIN
-    #include <GL/glew.h>
-	#include <GL/gl.h>
-#endif
-#if MAC
-	#include <OpenGL/gl.h>
-#endif
-#if IOS
-	#include <OpenGLES/ES1/gl.h>
-#endif
-#if LINUX
-    #if SDL_VIDEO_OPENGL 
-	    #include <GL/gl.h>
-	#elif SDL_VIDEO_OPENGL_ES2
-		#include <GLES2/gl2.h>
-	#endif
-	//#include <gdk/gdk.h>
-#endif	
-#if ANDROID
-	#include <GLES/gl.h>
-#endif
-#if EMSCRIPTEN
-	#include <GLES2/gl2.h>
-#endif
-*/
 WARNING_ENABLE
 
 
