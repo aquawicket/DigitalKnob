@@ -8,7 +8,7 @@
 
 ### DEPEND ###
 MAC_dk_depend(autotools)
-#WIN_dk_depend(msys2)
+WIN_dk_depend(msys2)
 
 
 ### IMPORT ###
@@ -21,18 +21,35 @@ if(GIFLIB_USE_CMAKE)
 	dk_include			(${GIFLIB}/lib)
 	UNIX_dk_libDebug	(${GIFLIB}/${OS}/${DEBUG_DIR}/libgiflib.a)
 	UNIX_dk_libRelease	(${GIFLIB}/${OS}/${RELEASE_DIR}/libgiflib.a)
-	WIN_dk_libDebug		(${GIFLIB}/${OS}/${DEBUG_DIR}/giflib.lib)
-	WIN_dk_libRelease	(${GIFLIB}/${OS}/${RELEASE_DIR}/giflib.lib)
+	WIN_dk_libDebug		(${GIFLIB}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
+	WIN_dk_libRelease	(${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
 	
 	### 3RDPARTY LINK ###
 	UNIX_dk_set	(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIFLIB}/lib -DGIF_INCLUDE_DIR2=${GIFLIB}/${OS} -DGIF_LIBRARY=${GIFLIB}/${OS}/${RELEASE_DIR}/libgiflib.a)
-	WIN_dk_set	(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIFLIB}/lib -DGIF_INCLUDE_DIR2=${GIFLIB}/${OS} -DGIF_LIBRARY=${GIFLIB}/${OS}/${RELEASE_DIR}/giflib.lib)
+	WIN_dk_set	(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIFLIB}/lib -DGIF_INCLUDE_DIR2=${GIFLIB}/${OS} -DGIF_LIBRARY=${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
 	
-	### GENERATE ###
-	dk_queueCommand(${DKCMAKE_BUILD} ${GIFLIB})
+	### GENERATE / CONFIGURE ###
+	if(WIN)
+		dk_setPath				(${GIFLIB})
+		dk_queueShell			(autoreconf -f -i)
+		
+		string(REPLACE "-std=c17" "" GIFLIB_CONFIGURE "${DKCONFIGURE_BUILD}")
+		string(REPLACE "-std=c++1z" "" GIFLIB_CONFIGURE "${GIFLIB_CONFIGURE}")
+		string(REPLACE "  " " " GIFLIB_CONFIGURE "${GIFLIB_CONFIGURE}")
 	
-	### COMPILE ###
-	dk_build(${GIFLIB} giflib)
+		DEBUG_dk_setPath		(${GIFLIB}/${OS}/${DEBUG_DIR})
+		DEBUG_dk_queueShell		(${GIFLIB_CONFIGURE})
+		DEBUG_dk_queueShell		(make -C lib)
+		RELEASE_dk_setPath		(${GIFLIB}/${OS}/${RELEASE_DIR})
+		RELEASE_dk_queueShell	(${GIFLIB_CONFIGURE})
+		RELEASE_dk_queueShell	(make -C lib)
+	else()
+		### GENERATE ###
+		dk_queueCommand(${DKCMAKE_BUILD} ${GIFLIB})
+	
+		### COMPILE ###
+		dk_build(${GIFLIB} giflib)
+	endif()
 	
 else()
 
