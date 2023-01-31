@@ -6,10 +6,9 @@
 
 dk_depend(python)
 
-#dk_import(https://github.com/emscripten-core/emsdk/archive/refs/tags/3.1.30.zip PATCH)
-#dk_import(https://github.com/emscripten-core/emsdk/archive/refs/tags/3.1.31.zip PATCH)
-dk_import(https://github.com/emscripten-core/emsdk/archive/refs/tags/3.1.31.zip)
-#dk_import(https://github.com/emscripten-core/emsdk.git BRANCH main PATCH)
+
+#dk_import(https://github.com/emscripten-core/emsdk/archive/refs/tags/3.1.31.zip)
+dk_import(https://github.com/emscripten-core/emsdk.git BRANCH main)
 
 
 dk_command(${EMSDK}/emsdk install latest)
