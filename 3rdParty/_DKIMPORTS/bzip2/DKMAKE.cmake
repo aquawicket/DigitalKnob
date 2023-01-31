@@ -7,7 +7,6 @@
 
 ### DEPEND ###
 dk_depend(libgcc)
-#dk_depend(msys)		# migrated to msys2
 dk_depend(msys2)
 
 

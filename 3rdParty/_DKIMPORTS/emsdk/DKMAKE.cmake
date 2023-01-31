@@ -7,10 +7,9 @@
 dk_depend(python)
 
 #dk_import(https://github.com/emscripten-core/emsdk/archive/refs/tags/3.1.30.zip PATCH)
-dk_import(https://github.com/emscripten-core/emsdk/archive/refs/tags/3.1.31.zip PATCH)
+#dk_import(https://github.com/emscripten-core/emsdk/archive/refs/tags/3.1.31.zip PATCH)
+dk_import(https://github.com/emscripten-core/emsdk/archive/refs/tags/3.1.31.zip)
 #dk_import(https://github.com/emscripten-core/emsdk.git BRANCH main PATCH)
-
-#dk_copy(${DKIMPORTS}/emsdk/upstream/emscripten/src/settings.js ${EMSDK}/emsdk/upstream/emscripten/src/settings.js)
 
 
 dk_command(${EMSDK}/emsdk install latest)
@@ -20,6 +19,14 @@ UNIX_HOST_dk_command(${EMSDK}/emsdk_env.sh)
 WIN_HOST_dk_command(${EMSDK}/emsdk_env.bat)
 WIN_HOST_dk_command(${EMSDK}/emsdk install mingw-4.6.2-32bit)
 WIN_HOST_dk_command(${EMSDK}/emsdk activate mingw-4.6.2-32bit)
+
+
+dkFileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL = 0;" 		"var USE_SDL = false;")
+dkFileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL_IMAGE = 1;" 	"var USE_SDL_IMAGE = false;")
+dkFileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL_TTF = 1;" 	"var USE_SDL_TTF = false;")
+dkFileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL_NET = 1;" 	"var USE_SDL_NET = false;")
+dkFileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL_MIXER = 1;" 	"var USE_SDL_MIXER = false;")
+
 
 #if(WIN_HOST)
 	WIN_HOST_dk_set(EMSDK_ENV ${EMSDK}/emsdk_env.bat)
