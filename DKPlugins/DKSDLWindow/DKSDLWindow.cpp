@@ -29,10 +29,12 @@
 #include "DK/DKFile.h"
 #include "DKSDLWindow/DKSDLWindow.h"
 #include "DK/DKOsInfo.h"
+#include "DKOpenGL/DKOpenGL.h"
 
 WARNING_DISABLE
 #include "SDL_syswm.h"
 
+/*
 // TODO: replace all of these with #include "DKOpenGL/DKOpenGL.h"
 #if WIN
     #include <GL/glew.h>
@@ -58,6 +60,7 @@ WARNING_DISABLE
 #if EMSCRIPTEN
 	#include <GLES2/gl2.h>
 #endif
+*/
 WARNING_ENABLE
 
 
