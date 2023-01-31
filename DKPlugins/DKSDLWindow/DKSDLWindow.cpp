@@ -136,11 +136,11 @@ bool DKSDLWindow::Init(){
 #endif
 
     SDL_SetHint(SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS, "0");
-#if SDL_VIDEO_OPENGL//!ANDROID && !IOS && !EMSCRIPTEN
+#if SDL_VIDEO_OPENGL
     SDL_SetHint(SDL_HINT_MOUSE_FOCUS_CLICKTHROUGH, "1");
 #endif
     DKString result;
-#if !SDL_VIDEO_OPENGL//ANDROID || IOS || EMSCRIPTEN
+#if SDL_VIDEO_OPENGL_ES || SDL_VIDEO_OPENGL_ES2 //!SDL_VIDEO_OPENGL
     DKINFO("Creating SDLWindow (OpenGLES)\n");
     
     SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengles");
@@ -150,7 +150,7 @@ bool DKSDLWindow::Init(){
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
-    result = "OpenglES";
+    result = "OpenGLES";
     DKINFO("DKSDLWindow Width: " + toString(width) + " Height: " + toString(height) + "\n");
 	
     if(SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_RESIZABLE, &window, &renderer) < 0)
@@ -179,7 +179,7 @@ bool DKSDLWindow::Init(){
     SDL_SetWindowTitle(sdlWindow, mTitle.c_str());
     */
 #endif
-#if SDL_VIDEO_OPENGL//!ANDROID && !IOS && !EMSCRIPTEN
+#if SDL_VIDEO_OPENGL
     DKINFO("Creating SDLWindow (OpenGL)\n");
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_COMPATIBILITY);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 1);
@@ -267,7 +267,7 @@ bool DKSDLWindow::Init(){
     DKSDLWindow::AddEventFunc(&DKSDLWindow::handle, this);
     MapInputs();
     SDL_SetEventFilter(&DKSDLWindow::EventFilter, this); //DEBUG : bypassing events here for now
-#if SDL_VIDEO_OPENGL//!ANDROID && !IOS && !EMSCRIPTEN
+#if SDL_VIDEO_OPENGL
 	// https://github.com/ocornut/imgui/issues/1116#issuecomment-297701113
     SDL_GLContext glcontext = SDL_GL_CreateContext(window);
     SDL_GL_MakeCurrent(window, glcontext);
