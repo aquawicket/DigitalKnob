@@ -185,11 +185,11 @@ bool DKSDLWindow::Init(){
         SDL_Quit();
 		return DKERROR("SDL_CreateRenderer Error: " + DKString(SDL_GetError()) + "\n");
     }
-#	if WIN
+	#if WIN
 		GLenum err = glewInit();
 		if (err != GLEW_OK)
 			DKERROR("glewInit() failed! \n"); // "+glewGetErrorString(err)+"\n");
-#	endif
+	#endif
 #endif
     //Set window Title
     DKString appName;
@@ -610,7 +610,12 @@ void DKSDLWindow::Process() {
     //DKDEBUGFUNC();  //EXCESSIVE LOGGING
     if(SDL_GetWindowFlags(window) & SDL_WINDOW_HIDDEN)
         DKUtil::Sleep(1000); //FIXME - look for a better way to save cpu usage here
-
+	
+	if (!renderer) {
+        DKERROR("renderer invalid");
+        return;
+    }
+	
     SDL_SetRenderTarget(renderer, NULL);
     SDL_SetRenderDrawColor(renderer, 127, 127, 127, 255); //white
     SDL_RenderClear(renderer);
@@ -628,10 +633,6 @@ void DKSDLWindow::Process() {
     for(unsigned int i = 0; i < update_funcs.size(); ++i)
         update_funcs[i](); //Call update functions
 
-    if (!renderer) {
-        DKERROR("renderer invalid");
-        return;
-    }
     SDL_RenderPresent(renderer);
 }
 
