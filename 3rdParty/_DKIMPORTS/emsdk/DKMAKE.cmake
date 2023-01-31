@@ -4,7 +4,9 @@
 # https://github.com/emscripten-core/emsdk/archive/refs/tags/2.0.26.zip
 
 
-dk_import(https://github.com/emscripten-core/emsdk.git BRANCH main PATCH)
+dk_import(https://github.com/emscripten-core/emsdk/archive/refs/tags/3.1.30.zip PATCH)
+#dk_import(https://github.com/emscripten-core/emsdk.git BRANCH main PATCH)
+
 #dk_copy(${DKIMPORTS}/emsdk/upstream/emscripten/src/settings.js ${EMSDK}/emsdk/upstream/emscripten/src/settings.js)
 
 
