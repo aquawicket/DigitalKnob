@@ -482,7 +482,7 @@ function(dk_remove path)
 		return()
 	endif()
 	#file(REMOVE ${path})
-	file(REMOVE_RECURSE ${path}}
+	file(REMOVE_RECURSE ${path})
 	if(EXISTS ${path})
 		dk_error("failed to remove ${path}")
 	endif()
