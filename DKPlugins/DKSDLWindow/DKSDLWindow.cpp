@@ -140,7 +140,7 @@ bool DKSDLWindow::Init(){
     SDL_SetHint(SDL_HINT_MOUSE_FOCUS_CLICKTHROUGH, "1");
 #endif
     DKString result;
-#if SDL_VIDEO_OPENGL_ES || SDL_VIDEO_OPENGL_ES2 //!SDL_VIDEO_OPENGL
+#if !SDL_VIDEO_OPENGL && SDL_VIDEO_OPENGL_ES || SDL_VIDEO_OPENGL_ES2
     DKINFO("Creating SDLWindow (OpenGLES)\n");
     
     SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengles");
