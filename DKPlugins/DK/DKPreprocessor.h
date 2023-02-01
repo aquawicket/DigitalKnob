@@ -64,16 +64,15 @@
 
 // NOTE: use #error instead 
 // DKERR(string): pass a error string to the compiler 
-/*
 #if defined(_MSC_VER)
-    #define DKERR(x) static_assert(false, "error message");
+    #define DKERR(x) static_assert(false, STR(x));
 #elif defined(__GNUC__) || defined(__clang__)
 	#define DKERR(x) DO_PRAGMA(GCC error #x)
 #else
 	#define DKERR(X)
 #endif
-DKERR("test DKERR")
-*/
+//DKERR("test DKERR")
+
 
 
 //#define TOSTRING(x) STR(x)
