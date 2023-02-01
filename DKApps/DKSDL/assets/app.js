@@ -1,4 +1,3 @@
-//CPP_DK_Create("DKDuktapeDom")
 CPP_DK_Create("DKSDLWindow")
 CPP_DK_Create("DKWindow")
 CPP_DK_Create("DKSDLText")

@@ -1,7 +1,6 @@
 var USE_CEF = 1
 var url = "chrome://gpu";
 
-//CPP_DK_Create("DKDuktapeDom")
 CPP_DK_Create("DKSDLWindow")
 CPP_DK_Create("DKSDLText")
 CPP_DK_Create("DKCef")

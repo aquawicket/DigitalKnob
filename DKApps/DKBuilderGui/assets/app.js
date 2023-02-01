@@ -1,4 +1,3 @@
-CPP_DK_Create("DKDuktapeDom")
 const assets = CPP_DKAssets_LocalAssets()
 
 
