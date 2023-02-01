@@ -25,12 +25,12 @@
 */
 
 #include "DK/stdafx.h"
-#include "DKDuktapeDebugger/DKDuktapeDebugger.h"
+#include "DKDukDebugger/DKDukDebugger.h"
 #include "DK/DKFile.h"
 
-DKStringArray DKDuktapeDebugger::message;
+DKStringArray DKDukDebugger::message;
 
-bool DKDuktapeDebugger::Init() {
+bool DKDukDebugger::Init() {
 	DKDEBUGFUNC();
 
 	ctx = DKDuktape::Get()->ctx;
@@ -85,7 +85,7 @@ bool DKDuktapeDebugger::Init() {
 	return true;
 }
 
-bool DKDuktapeDebugger::End() {
+bool DKDukDebugger::End() {
 	DKDEBUGFUNC();
 
 	duk_debugger_detach(ctx);
@@ -97,7 +97,7 @@ bool DKDuktapeDebugger::End() {
 	return true;
 }
 
-bool DKDuktapeDebugger::attach() {
+bool DKDukDebugger::attach() {
 	// Attach debugger; this will fail with a fatal error here unless
 	// debugger support is compiled in.  To fail more gracefully, call
 	// this under a duk_safe_call() to catch the error.
@@ -115,7 +115,7 @@ bool DKDuktapeDebugger::attach() {
 	return true;
 }
 
-void DKDuktapeDebugger::my_cooperate(duk_trans_dvalue_ctx* ctx, int block) {
+void DKDukDebugger::my_cooperate(duk_trans_dvalue_ctx* ctx, int block) {
 	//DKDEBUGFUNC(ctx, block); //EXCESSIVE LOGGING
 	static int first_blocked = 1;
 
@@ -210,7 +210,7 @@ void DKDuktapeDebugger::my_cooperate(duk_trans_dvalue_ctx* ctx, int block) {
 	duk_trans_dvalue_send_eom(ctx);
 }
 
-void DKDuktapeDebugger::my_received(duk_trans_dvalue_ctx* ctx, duk_dvalue* dv) {
+void DKDukDebugger::my_received(duk_trans_dvalue_ctx* ctx, duk_dvalue* dv) {
 	//DKDEBUGFUNC(ctx, dv); //EXCESSIVE LOGGING
 	(void)ctx;
 	char buf[DUK_DVALUE_TOSTRING_BUFLEN];
@@ -254,7 +254,7 @@ void DKDuktapeDebugger::my_received(duk_trans_dvalue_ctx* ctx, duk_dvalue* dv) {
 	duk_dvalue_free(dv);
 }
 
-void DKDuktapeDebugger::my_handshake(duk_trans_dvalue_ctx* ctx, const char* line) {
+void DKDukDebugger::my_handshake(duk_trans_dvalue_ctx* ctx, const char* line) {
 	DKDEBUGFUNC(ctx, line);
 
 	// The Duktape handshake line is given in 'line' (without LF).
@@ -264,7 +264,7 @@ void DKDuktapeDebugger::my_handshake(duk_trans_dvalue_ctx* ctx, const char* line
 	DKINFO("Received handshake line: " + toString(line) + "\n");
 }
 
-void DKDuktapeDebugger::my_detached(duk_trans_dvalue_ctx* ctx) {
+void DKDukDebugger::my_detached(duk_trans_dvalue_ctx* ctx) {
 	DKDEBUGFUNC(ctx);
 
 	// Detached call forwarded as is.
@@ -272,7 +272,7 @@ void DKDuktapeDebugger::my_detached(duk_trans_dvalue_ctx* ctx) {
 }
 
 /*
-duk_ret_t DKDuktapeDebugger::native_print(duk_context* ctx) {
+duk_ret_t DKDukDebugger::native_print(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	duk_push_string(ctx, " ");
 	duk_insert(ctx, 0);

@@ -43,7 +43,7 @@ public:
 	static bool ResizeIframe(DKEvents* event);
 	bool ClickIframe(DKEvents* event);
 	bool MouseOverIframe(DKEvents* event);
-	bool Encode(std::string& data);
+	bool Encode(std::string& _data);
 #ifdef USE_tidy_html5
 	bool TidyFile(const DKString& in, DKString& out);
 #endif

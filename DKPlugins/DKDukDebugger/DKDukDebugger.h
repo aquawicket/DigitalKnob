@@ -25,18 +25,18 @@
 */
 
 #pragma once
-#ifndef DKDuktapeDebugger_H
-#define DKDuktapeDebugger_H
+#ifndef DKDukDebugger_H
+#define DKDukDebugger_H
 #include "DK/DK.h"
 #include "DKDuktape/DKDuktape.h"
 
 WARNING_DISABLE
 	#include "duktape.h"
-	#include "DKDuktapeDebugger/duk_trans_dvalue.h"
+	#include "DKDukDebugger/duk_trans_dvalue.h"
 WARNING_ENABLE
 
 
-class DKDuktapeDebugger : public DKObjectT<DKDuktapeDebugger>
+class DKDukDebugger : public DKObjectT<DKDukDebugger>
 {
 public:
 	bool Init();
@@ -54,6 +54,6 @@ public:
 };
 
 
-REGISTER_OBJECT(DKDuktapeDebugger, true);
+REGISTER_OBJECT(DKDukDebugger, true);
 
-#endif //DKDuktapeDebugger_H
+#endif //DKDukDebugger_H

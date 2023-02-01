@@ -408,8 +408,8 @@ bool DKRmlConverter::ClickIframe(DKEvents* event){
 	DKString iLeft = toString(iframe->GetAbsoluteLeft());
 	DKString iWidth = toString(iframe->GetClientWidth());
 	DKString iHeight = toString(iframe->GetClientHeight());
-	DKString data = id+","+iTop+","+iLeft+","+iWidth+","+iHeight;
-	DKClass::CallFunc("DKSDLCef::OnClick", &data, NULL); //call OnResize in DKCef window handler
+	DKString _data = id+","+iTop+","+iLeft+","+iWidth+","+iHeight;
+	DKClass::CallFunc("DKSDLCef::OnClick", &_data, NULL); //call OnResize in DKCef window handler
 	return true;
 }
 
@@ -423,16 +423,16 @@ bool DKRmlConverter::MouseOverIframe(DKEvents* event){
 	DKString iLeft = toString(iframe->GetAbsoluteLeft());
 	DKString iWidth = toString(iframe->GetClientWidth());
 	DKString iHeight = toString(iframe->GetClientHeight());
-	DKString data = id+","+iTop+","+iLeft+","+iWidth+","+iHeight;
-	DKClass::CallFunc("DKSDLCef::OnMouseOver", &data, NULL); //call OnResize in DKCef window handler
+	DKString _data = id+","+iTop+","+iLeft+","+iWidth+","+iHeight;
+	DKClass::CallFunc("DKSDLCef::OnMouseOver", &_data, NULL); //call OnResize in DKCef window handler
 	return true;
 }
 
-bool DKRmlConverter::Encode(std::string& data){
+bool DKRmlConverter::Encode(std::string& _data){
 	std::string buffer;
-	buffer.reserve(data.size());
-	for(size_t pos = 0; pos != data.size(); ++pos) {
-		switch(data[pos]) {
+	buffer.reserve(_data.size());
+	for(size_t pos = 0; pos != _data.size(); ++pos) {
+		switch(_data[pos]) {
 			//case '&':  buffer.append("&amp;");      
 				//break;
 			case '\"': buffer.append("&quot;");      
@@ -444,11 +444,11 @@ bool DKRmlConverter::Encode(std::string& data){
 			//case '>':  buffer.append("&gt;");        
 				//break;
 			default:   
-				buffer.append(&data[pos], 1); 
+				buffer.append(&_data[pos], 1); 
 				break;
 		}
 	}
-	data.swap(buffer);
+	_data.swap(buffer);
 	return true;
 }
 

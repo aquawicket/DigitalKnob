@@ -9,13 +9,6 @@ IF(HAVE_DKCef)
 	dk_depend(DKCef)
 ENDIF()
 
-if(WIN)
-	#dk_copy(${STACKWALKER}/StackWalker/StackWalker.cpp ${DKPLUGINS}/DKDebug/StackWalker.cpp)
-	#WIN_dk_include(${3RDPARTY}/stackwalker/StackWalker)
-else()
-	dk_remove(${DKPLUGINS}/DKDebug/StackWalker.cpp)
-endif()
-
 dk_generateCmake(DKDebug)
 dk_assets(DKDebug)
 
