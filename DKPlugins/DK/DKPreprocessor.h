@@ -40,7 +40,7 @@
 
 #define STR(x) #x
 
-// DKMESSAGE(message)
+// DKMESSAGE(string)
 #if defined(_MSC_VER)
     #define DKMESSAGE(x) __pragma(message(STR(x)))
 #elif defined(__GNUC__) || defined(__clang__)
@@ -49,9 +49,9 @@
 #else
 	#define DKMESSAGE(X)
 #endif
-DKMESSAGE("test DKMESSAGE")
+//DKMESSAGE("test DKMESSAGE")
 
-// DKWARNING(message)
+// DKWARNING(string)
 #if defined(_MSC_VER)
     #define DKWARNING(x) __pragma(warning(STR(x)))
 #elif defined(__GNUC__) || defined(__clang__)
@@ -60,7 +60,18 @@ DKMESSAGE("test DKMESSAGE")
 #else
 	#define DKWARNING(X)
 #endif
-DKWARNING("test DKWARNING")
+//DKWARNING("test DKWARNING")
+
+// DKERR(string)
+#if defined(_MSC_VER)
+    #define DKERR(x) __pragma(error(STR(x)))
+#elif defined(__GNUC__) || defined(__clang__)
+	//#define DO_PRAGMA(x) _Pragma(#x)
+	#define DKERR(x) DO_PRAGMA(GCC error #x)
+#else
+	#define DKERR(X)
+#endif
+DKERR("test DKERR")
 
 
 //#define TOSTRING(x) STR(x)
