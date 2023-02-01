@@ -68,7 +68,7 @@ bool DKDomWindow::Init(){
 	DKDuktape::AttachFunction("CPP_DKDomWindow_event", DKDomWindow::event);
 	DKDuktape::AttachFunction("CPP_DKDomWindow_frameElement", DKDomWindow::frameElement);
 	DKDuktape::AttachFunction("CPP_DKDomWindow_frames", DKDomWindow::frames);
-	DKDuktape::AttachFunction("CPP_DKDomWindow_fullscreen", DKDomWindow::fullscreen);
+	DKDuktape::AttachFunction("CPP_DKDomWindow_fullScreen", DKDomWindow::fullscreen);
 	DKDuktape::AttachFunction("CPP_DKDomWindow_history", DKDomWindow::history);
 	DKDuktape::AttachFunction("CPP_DKDomWindow_innerHeight", DKDomWindow::innerHeight);
 	DKDuktape::AttachFunction("CPP_DKDomWindow_innerWidth", DKDomWindow::innerWidth);
@@ -76,7 +76,7 @@ bool DKDomWindow::Init(){
 	DKDuktape::AttachFunction("CPP_DKDomWindow_length", DKDomWindow::length);
 	DKDuktape::AttachFunction("CPP_DKDomWindow_location", DKDomWindow::location);
 	DKDuktape::AttachFunction("CPP_DKDomWindow_locationbar", DKDomWindow::locationbar);
-	DKDuktape::AttachFunction("CPP_DKDomWindow_locationStorage", DKDomWindow::locationStorage);
+	DKDuktape::AttachFunction("CPP_DKDomWindow_localStorage", DKDomWindow::localStorage);
 	DKDuktape::AttachFunction("CPP_DKDomWindow_menubar", DKDomWindow::menubar);
 	DKDuktape::AttachFunction("CPP_DKDomWindow_messageManager", DKDomWindow::messageManager);
 	DKDuktape::AttachFunction("CPP_DKDomWindow_mozInnerScreenX", DKDomWindow::mozInnerScreenX);
@@ -84,8 +84,8 @@ bool DKDomWindow::Init(){
 	DKDuktape::AttachFunction("CPP_DKDomWindow_name", DKDomWindow::name);
 	DKDuktape::AttachFunction("CPP_DKDomWindow_navigator", DKDomWindow::navigator);
 	DKDuktape::AttachFunction("CPP_DKDomWindow_opener", DKDomWindow::opener);
-	DKDuktape::AttachFunction("CPP_DKDomWindow_outterHeight", DKDomWindow::outterHeight);
-	DKDuktape::AttachFunction("CPP_DKDomWindow_outterWidth", DKDomWindow::outterWidth);
+	DKDuktape::AttachFunction("CPP_DKDomWindow_outerHeight", DKDomWindow::outerHeight);
+	DKDuktape::AttachFunction("CPP_DKDomWindow_outerWidth", DKDomWindow::outerWidth);
 	DKDuktape::AttachFunction("CPP_DKDomWindow_pageXOffset", DKDomWindow::pageXOffset);
 	DKDuktape::AttachFunction("CPP_DKDomWindow_pageYOffset", DKDomWindow::pageYOffset);
 	DKDuktape::AttachFunction("CPP_DKDomWindow_parent", DKDomWindow::parent);
@@ -102,7 +102,7 @@ bool DKDomWindow::Init(){
 	DKDuktape::AttachFunction("CPP_DKDomWindow_scrollX", DKDomWindow::scrollX);
 	DKDuktape::AttachFunction("CPP_DKDomWindow_scrollY", DKDomWindow::scrollY);
 	DKDuktape::AttachFunction("CPP_DKDomWindow_self", DKDomWindow::self);
-	DKDuktape::AttachFunction("CPP_DKDomWindow_sessionStroage", DKDomWindow::sessionStroage);
+	DKDuktape::AttachFunction("CPP_DKDomWindow_sessionStorage", DKDomWindow::sessionStorage);
 	DKDuktape::AttachFunction("CPP_DKDomWindow_sidebar", DKDomWindow::sidebar);
 	DKDuktape::AttachFunction("CPP_DKDomWindow_speechSynthesis", DKDomWindow::speechSynthesis);
 	DKDuktape::AttachFunction("CPP_DKDomWindow_status", DKDomWindow::status);
@@ -382,7 +382,7 @@ int DKDomWindow::locationbar(duk_context* ctx){
 	return DKERROR("not implemented\n");
 }
 
-int DKDomWindow::locationStorage(duk_context* ctx){
+int DKDomWindow::localStorage(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	return DKERROR("not implemented\n");
 }
@@ -424,12 +424,12 @@ int DKDomWindow::opener(duk_context* ctx){
 	return DKERROR("not implemented\n");
 }
 
-int DKDomWindow::outterHeight(duk_context* ctx){
+int DKDomWindow::outerHeight(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	return DKERROR("not implemented\n");
 }
 
-int DKDomWindow::outterWidth(duk_context* ctx){
+int DKDomWindow::outerWidth(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	return DKERROR("not implemented\n");
 }
@@ -518,7 +518,7 @@ int DKDomWindow::self(duk_context* ctx){
 	return DKERROR("not implemented\n");
 }
 
-int DKDomWindow::sessionStroage(duk_context* ctx){
+int DKDomWindow::sessionStorage(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	return DKERROR("not implemented\n");
 }

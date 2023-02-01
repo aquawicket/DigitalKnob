@@ -3,12 +3,13 @@
 //const url = CPP_DKAssets_LocalAssets()+"index.html"
 //const url = CPP_DKAssets_LocalAssets()+"DKRmlElement/index.html"
 const url = CPP_DKAssets_LocalAssets()+"DKWebTest/index.html"
+//const url = CPP_DKAssets_LocalAssets()+"DKWebTest/objectTest.html"
 //const url = CPP_DKAssets_LocalAssets()+"DKWebTest/positionTest.html"
 CPP_DK_Create("DKSDLWindow")
 CPP_DK_Create("DKRml")
 location.href = url
 
-//// Resize SDLRml window
+//// SDL window resize variables
 const sdl_x = window.screen.width / 2
 const sdl_y = 0
 const sdl_width = window.screen.width / 2

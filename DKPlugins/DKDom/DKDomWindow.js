@@ -11,9 +11,10 @@ var Window = function Window(pointer)
         }
     })
     Object.defineProperty(this, "console", {
-        get: function console() {
-            return console
-        }
+        get: function() {
+			return console
+		}
+        
     })
     Object.defineProperty(this, "controllers", {
         get: function controllers() {
@@ -44,7 +45,7 @@ var Window = function Window(pointer)
         }
     })
     Object.defineProperty(this, "document", {
-        get: function document() {
+        get: function() {
             return document
         }
     })
@@ -105,7 +106,7 @@ var Window = function Window(pointer)
         }
     })
     Object.defineProperty(this, "location", {
-        get: function location() {
+        get: function() {
             return location
         }
     })
@@ -158,7 +159,7 @@ var Window = function Window(pointer)
         }
     })
     Object.defineProperty(this, "navigator", {
-        get: function navigator() {
+        get: function() {
             return navigator
         }
     })
@@ -213,7 +214,7 @@ var Window = function Window(pointer)
         }
     })
     Object.defineProperty(this, "screen", {
-        get: function screen() {
+        get: function() {
             return screen
         }
     })
@@ -356,11 +357,13 @@ var Window = function Window(pointer)
     Window.prototype.setResizable = function setResizable() {}
     Window.prototype.sizeToContent = function sizeToContent() {}
     Window.prototype.stop = function stop() {}
+	
 	/*
 	Window.prototype.toString = function toString(){
 		return "[object Window]"
 	}
 	*/
+	
     Window.prototype.updateCommands = function updateCommands() {}
     Window.prototype.XMLHttpRequest = function XMLHttpRequest(client) {
         return new XMLHttpRequest(client.pointer)

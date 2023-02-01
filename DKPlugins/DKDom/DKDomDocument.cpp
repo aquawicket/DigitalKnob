@@ -47,7 +47,9 @@ bool DKDomDocument::Init(){
 		DKString document_address = DKRml::Get()->elementToAddress(DKRml::Get()->document);
 		DKDuktape::RunDuktape("var document = new Document(\"" + document_address + "\");", rval);
 	}
-
+	DKDuktape* dt = DKDuktape::Get();
+	duk_eval_string(dt->ctx, "console.log('document = '+document)");
+	//duk_eval_string(dt->ctx, "console.log('document.getElementById = '+document.getElementById)");
 	return true;
 }
 

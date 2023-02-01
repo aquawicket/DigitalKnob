@@ -67,7 +67,7 @@ public:
 	static int length(duk_context* ctx);
 	static int location(duk_context* ctx);
 	static int locationbar(duk_context* ctx);
-	static int locationStorage(duk_context* ctx);
+	static int localStorage(duk_context* ctx);
 	static int menubar(duk_context* ctx);
 	static int messageManager(duk_context* ctx);
 	static int mozInnerScreenX(duk_context* ctx);
@@ -75,8 +75,8 @@ public:
 	static int name(duk_context* ctx);
 	static int navigator(duk_context* ctx);
 	static int opener(duk_context* ctx);
-	static int outterHeight(duk_context* ctx);
-	static int outterWidth(duk_context* ctx);
+	static int outerHeight(duk_context* ctx);
+	static int outerWidth(duk_context* ctx);
 	static int pageXOffset(duk_context* ctx);
 	static int pageYOffset(duk_context* ctx);
 	static int parent(duk_context* ctx);
@@ -93,7 +93,7 @@ public:
 	static int scrollX(duk_context* ctx);
 	static int scrollY(duk_context* ctx);
 	static int self(duk_context* ctx);
-	static int sessionStroage(duk_context* ctx);
+	static int sessionStorage(duk_context* ctx);
 	static int sidebar(duk_context* ctx);
 	static int speechSynthesis(duk_context* ctx);
 	static int status(duk_context* ctx);
