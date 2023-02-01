@@ -39,18 +39,28 @@
 #endif
 
 #define STR(x) #x
-//#define DKMSG(x) __pragma(message(STR(x)))
 
-// DKMSG(message)
+// DKMESSAGE(message)
 #if defined(_MSC_VER)
-    #define DKMSG(x) __pragma(message(STR(x)))
+    #define DKMESSAGE(x) __pragma(message(STR(x)))
 #elif defined(__GNUC__) || defined(__clang__)
 	#define DO_PRAGMA(x) _Pragma(#x)
-	#define DKMSG(x) DO_PRAGMA(message (#x))
+	#define DKMESSAGE(x) DO_PRAGMA(message (#x))
 #else
-	#define DKMSG(X)
+	#define DKMESSAGE(X)
 #endif
-DKMSG("test DKMSG")
+DKMESSAGE("test DKMESSAGE")
+
+// DKWARNING(message)
+#if defined(_MSC_VER)
+    #define DKWARNING(x) __pragma(warning(STR(x)))
+#elif defined(__GNUC__) || defined(__clang__)
+	#define DO_PRAGMA(x) _Pragma(#x)
+	#define DKWARNING(x) DO_PRAGMA(warning (#x))
+#else
+	#define DKWARNING(X)
+#endif
+DKWARNING("test DKWARNING")
 
 
 //#define TOSTRING(x) STR(x)
