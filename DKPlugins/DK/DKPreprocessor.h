@@ -45,7 +45,7 @@
     #define DKMESSAGE(x) __pragma(message(STR(x)))
 #elif defined(__GNUC__) || defined(__clang__)
 	#define DO_PRAGMA(x) _Pragma(#x)
-	#define DKMESSAGE(x) DO_PRAGMA(GCC message (#x))
+	#define DKMESSAGE(x) DO_PRAGMA(message (#x))
 #else
 	#define DKMESSAGE(X)
 #endif
