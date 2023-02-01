@@ -44,13 +44,15 @@ DKPlugin.fromFile = function DKPlugin_fromFile(args, DKPlugin_fromFile_callback)
     dk.getNewFuncs();
     //Is the javascript file already loaded?
     var scripts = document.getElementsByTagName("script");
-    for (var n = 0; n < scripts.length; n++){
-        if (scripts[n].src === url){
-            console.info(url + ": is already loaded");
-            DKPlugin_fromFile_callback && DKPlugin_fromFile_callback(true);
-            return true;
-        }
-    }
+	if(scripts){
+		for (var n = 0; n < scripts.length; n++){
+			if (scripts[n].src === url){
+				console.info(url + ": is already loaded");
+				DKPlugin_fromFile_callback && DKPlugin_fromFile_callback(true);
+				return true;
+			}
+		}
+	}
     // Adding the script tag to the head of the document
     var head = document.getElementsByTagName('head')[0];
     var script = document.createElement('script');

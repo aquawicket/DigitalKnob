@@ -24,6 +24,9 @@
 * SOFTWARE.
 */
 
-// called from index.html
+
 const url = "DKWebTest/index.html"
 location.href = url
+
+DKPlugin("DKFile/DKFile.js")
+DKPlugin("DKDebug/DKDebug.js")

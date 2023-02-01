@@ -1,13 +1,14 @@
 //CPP_DK_Create("DKDuktapeDom")
 
-//const url = CPP_DKAssets_LocalAssets()+"index.html"
+const url = CPP_DKAssets_LocalAssets()+"index.html"
 //const url = CPP_DKAssets_LocalAssets()+"DKRmlElement/index.html"
-const url = CPP_DKAssets_LocalAssets()+"DKWebTest/index.html"
+//const url = CPP_DKAssets_LocalAssets()+"DKWebTest/index.html"
 //const url = CPP_DKAssets_LocalAssets()+"DKWebTest/objectTest.html"
 //const url = CPP_DKAssets_LocalAssets()+"DKWebTest/positionTest.html"
 CPP_DK_Create("DKSDLWindow")
 CPP_DK_Create("DKRml")
 location.href = url
+/*
 CPP_DK_Create("DK/DK.js")
 CPP_DK_Create("DK/DKPlugin.js")
 CPP_DK_Create("DKFile/DKFile.js")
@@ -24,7 +25,7 @@ const sdl_x_offset = 0
 const sdl_y_offest = 30
 const sdl_width_offset = 1
 const sdl_height_offset = -30
-
+*/
 /*
 window.resizeTo(sdl_width+sdl_width_offset, sdl_height+sdl_height_offset)
 window.moveTo(sdl_x+sdl_x_offset, sdl_y+sdl_y_offest)
