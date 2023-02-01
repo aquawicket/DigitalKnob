@@ -94,7 +94,7 @@ include_guard()
 
 
 ### User Friendly Options ###
-dk_set(WARNINGS_AS_ERRORS	OFF)
+dk_set(WARNINGS_AS_ERRORS	ON)
 dk_set(WARNING_LEVEL 		4)
 dk_set(WARNING_4244			OFF)
 dk_set(WARNING_5105			OFF)
