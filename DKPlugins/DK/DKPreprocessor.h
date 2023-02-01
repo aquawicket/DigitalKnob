@@ -46,7 +46,8 @@
     #define DKMSG(x) __pragma(message(STR(x)))
 #elif defined(__GNUC__) || defined(__clang__)
 	#define DO_PRAGMA(x) _Pragma(#x)
-	#define DKMSG(x) DO_PRAGMA(message ("TODO - " #x))
+	//#define DKMSG(x) DO_PRAGMA(message (#x))
+	#define DKMSG(x) _Pragma(message (#x))
 #else
 	#define DKMSG(X)
 #endif
