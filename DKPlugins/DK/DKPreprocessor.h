@@ -45,7 +45,8 @@
 #if defined(_MSC_VER)
     #define DKMSG(x) __pragma(message(STR(x)))
 #elif defined(__GNUC__) || defined(__clang__)
-	#define DKMSG(X) __Pragma(message("WARNING: " STR(x))))
+	#define DO_PRAGMA(x) _Pragma(#x)
+	#define TODO(x) DO_PRAGMA(message (#x))
 #else
 	#define DKMSG(X)
 #endif
