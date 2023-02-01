@@ -153,11 +153,11 @@ public:
 
 
 ////////////  GLOBAL CLASS REGISTER //////////////
-#define REGISTER_OBJECT(klass, singleton_or_non) \
+#define REGISTER_OBJECT(klass, is_singleton) \
     class klass##Class : public DKClass { \
     public: \
         klass##Class(){ \
-            DKClass::Register(#klass, this, singleton_or_non); \
+            DKClass::Register(#klass, this, is_singleton); \
 			klass::SetName(#klass); \
         } \
 		virtual void Singleton(){ \

@@ -40,7 +40,7 @@
 
 #define STR(x) #x
 
-// DKMESSAGE(string)
+// DKMESSAGE(<string>): pass a message string to the compiler
 #if defined(_MSC_VER)
     #define DKMESSAGE(x) __pragma(message(STR(x)))
 #elif defined(__GNUC__) || defined(__clang__)
@@ -51,56 +51,29 @@
 #endif
 //DKMESSAGE("test DKMESSAGE")
 
-// DKWARNING(string)
+// DKWARNING(string): pass a warning string to the compiler
 #if defined(_MSC_VER)
     #define DKWARNING(x) __pragma(warning(STR(x)))
 #elif defined(__GNUC__) || defined(__clang__)
-	//#define DO_PRAGMA(x) _Pragma(#x)
 	#define DKWARNING(x) DO_PRAGMA(GCC warning #x)
 #else
 	#define DKWARNING(X)
 #endif
 //DKWARNING("test DKWARNING")
 
-// DKERR(string)
+// NOTE: use #error instead 
+// DKERR(string): pass a error string to the compiler 
+/*
 #if defined(_MSC_VER)
-    #define DKERR(x) __pragma(error(STR(x)))
+    #define DKERR(x) static_assert(false, "error message");
 #elif defined(__GNUC__) || defined(__clang__)
-	//#define DO_PRAGMA(x) _Pragma(#x)
 	#define DKERR(x) DO_PRAGMA(GCC error #x)
 #else
 	#define DKERR(X)
 #endif
-//DKERR("test DKERR")
+DKERR("test DKERR")
+*/
 
-
-#if defined( __clang__ )
-#   define PRAGMA( x )                    _Pragma( #x )
-#elif defined( __GNUC__ )
-#   define PRAGMA( x )                    _Pragma( #x )
-#elif defined( _MSC_VER )
-#   define PRAGMA( x )                    __pragma( x )
-#endif
-
-#define STRINGISIZE( str )    #str
-#define STR2( str )            STRINGISIZE( str )
-
-#define LINE                  STR2( __LINE__ )
-#define FILE                  __FILE__
-#define FILE_LINE             __FILE__ "(" LINE ")"
-
-#define INFO( info , msg ) \
-  PRAGMA( message( FILE_LINE ": " #info ": " msg ) )
-
-#define MESSAGE( m )          INFO( msg , m )
-#define WARNING( w )          INFO( warning , w )
-#define ERR( e )              INFO( error , e )
-#define TODO( t )             INFO( TODO , t )
-
-MESSAGE("test MESSAGE")
-TODO("test WARNING")
-WARNING("test WARNING")
-ERR("test WARNING")
 
 //#define TOSTRING(x) STR(x)
 #define PRNT_NAME(x) printf("%s", #x)
