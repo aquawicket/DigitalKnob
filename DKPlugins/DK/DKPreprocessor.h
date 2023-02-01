@@ -56,7 +56,7 @@ DKMESSAGE("test DKMESSAGE")
     #define DKWARNING(x) __pragma(warning(STR(x)))
 #elif defined(__GNUC__) || defined(__clang__)
 	//#define DO_PRAGMA(x) _Pragma(#x)
-	#define DKWARNING(x) DO_PRAGMA(GCC diagnostic warning #x)
+	#define DKWARNING(x) DO_PRAGMA(GCC diagnostic warning "#x")
 #else
 	#define DKWARNING(X)
 #endif
