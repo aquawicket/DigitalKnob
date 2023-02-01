@@ -41,7 +41,7 @@
 #define STR(x) #x
 //#define DKMSG(x) __pragma(message(STR(x)))
 
-
+// DKMSG(message)
 #if defined(_MSC_VER)
     #define DKMSG(x) __pragma(message(STR(x)))
 #elif defined(__GNUC__) || defined(__clang__)
@@ -50,7 +50,7 @@
 #else
 	#define DKMSG(X)
 #endif
-DKMSG(test DKMSG)
+DKMSG("test DKMSG")
 
 
 //#define TOSTRING(x) STR(x)
