@@ -30,6 +30,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <limits.h>
+
 
 #include "duktape.h"
 #include "duk_trans_dvalue.h"
@@ -524,7 +526,8 @@ void duk_trans_dvalue_send(duk_trans_dvalue_ctx *ctx, duk_dvalue *dv) {
 			*p++ = (unsigned char) (0xc0 + (i >> 8));
 			*p++ = (unsigned char) (i & 0xff);
 			ctx->send_buf.write_offset += 2;
-		} else if (i >= -0x80000000L && i <= 0x7fffffffL) {  /* Harmless warning on some platforms (re: range) */
+		//} else if (i >= -0x80000000L && i <= 0x7fffffffL) {  /* Harmless warning on some platforms (re: range) */
+		} else if (i >= LONG_MIN && i <= 0x7fffffffL) {
 			p = duk__trans_buffer_ensure(&ctx->send_buf, 5);
 			if (!p) { goto alloc_error; }
 			*p++ = 0x10;

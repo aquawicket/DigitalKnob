@@ -34,15 +34,16 @@
 	#include "DKCurl/DKCurl.h"
 #endif
 
-#include <stdio.h>
-
-
-#if WIN32
 WARNING_DISABLE
-#include "StackWalker.h"
-#include <tchar.h>
-#include <fstream>
+#include <stdio.h>
+#if WIN
+	#include "StackWalker.h"
+	#include <tchar.h>
+	#include <fstream>
+#endif
 WARNING_ENABLE
+
+#if WIN
 // secure-CRT_functions are only available starting with VC8
 #if _MSC_VER < 1400  //Visual Studio 2003
 #define _tcscpy_s _tcscpy
