@@ -8,6 +8,12 @@ const url = CPP_DKAssets_LocalAssets()+"DKWebTest/index.html"
 CPP_DK_Create("DKSDLWindow")
 CPP_DK_Create("DKRml")
 location.href = url
+CPP_DK_Create("DK/DK.js")
+CPP_DK_Create("DK/DKPlugin.js")
+CPP_DK_Create("DKFile/DKFile.js")
+CPP_DK_Create("DKDebug/DKDebug.js")
+DKDebug.prototype.init()
+
 
 //// SDL window resize variables
 const sdl_x = window.screen.width / 2

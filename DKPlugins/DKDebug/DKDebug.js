@@ -448,6 +448,7 @@ DKDebug.prototype.debugFunc = function DKDebug_debugFunc() {
 /////////////////////////////////////////////
 
 DKDebug.prototype.init = function DKDebug_init() {
+	//console.log("DKDebug.prototype.init()")
     dk.debug.keyHistory = new Array;
     document.addEventListener("keydown", dk.debug.onevent);
 }
@@ -457,7 +458,7 @@ DKDebug.prototype.end = function DKDebug_end() {
 }
 
 DKDebug.prototype.onevent = function DKDebug_onevent(event) {
-    //console.debug("DKDebug.prototype.onevent("+event.code+" "+JSON.stringify(event)+")");
+    //console.log("DKDebug.prototype.onevent("+event.code+" "+JSON.stringify(event)+")");
     if (event.type === "keydown") {
         dk.debug.logKey(event.code);
         dk.debug.checkKeys();
@@ -482,6 +483,8 @@ DKDebug.prototype.checkKeys = function DKDebug_checkKeys() {
     var string = "";
     for (var n = 0; n < dk.debug.keyHistory.length; n++)
         string += dk.debug.keyToChar(dk.debug.keyHistory[n]);
+	
+	//console.log("string = "+string)
     //check for commands
     if (string.includes("dkreload")) {
         console.log("*** dk.debug.reload() ***");

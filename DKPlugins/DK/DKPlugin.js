@@ -7,7 +7,7 @@
 //  This will load a javascript file, ready to create an instance
 //
 // DKPlugin(MyClass)
-//   This will creat an instance of the class. MyClass must be available. 
+//   This will create an instance of the class. MyClass must be available. 
 //
 const DKPlugin = function DKPlugin(){
     //DKPlugin.dumpInfo.apply(this, arguments);
