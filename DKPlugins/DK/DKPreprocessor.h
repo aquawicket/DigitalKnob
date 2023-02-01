@@ -71,8 +71,36 @@
 #else
 	#define DKERR(X)
 #endif
-DKERR("test DKERR")
+//DKERR("test DKERR")
 
+
+#if defined( __clang__ )
+#   define PRAGMA( x )                    _Pragma( #x )
+#elif defined( __GNUC__ )
+#   define PRAGMA( x )                    _Pragma( #x )
+#elif defined( _MSC_VER )
+#   define PRAGMA( x )                    __pragma( x )
+#endif
+
+#define STRINGISIZE( str )    #str
+#define STR2( str )            STRINGISIZE( str )
+
+#define LINE                  STR2( __LINE__ )
+#define FILE                  __FILE__
+#define FILE_LINE             __FILE__ "(" LINE ")"
+
+#define INFO( info , msg ) \
+  PRAGMA( message( FILE_LINE ": " #info ": " msg ) )
+
+#define MESSAGE( m )          INFO( msg , m )
+#define WARNING( w )          INFO( warning , w )
+#define ERR( e )              INFO( error , e )
+#define TODO( t )             INFO( TODO , t )
+
+MESSAGE("test MESSAGE")
+TODO("test WARNING")
+WARNING("test WARNING")
+ERR("test WARNING")
 
 //#define TOSTRING(x) STR(x)
 #define PRNT_NAME(x) printf("%s", #x)
