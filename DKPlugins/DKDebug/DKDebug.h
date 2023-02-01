@@ -27,6 +27,7 @@
 #pragma once
 #ifndef DKDebug_H
 #define DKDebug_H
+
 #include "DK/DK.h"
 
 //#if HAVE_DKCurl
