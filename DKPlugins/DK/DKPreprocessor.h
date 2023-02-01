@@ -39,7 +39,19 @@
 #endif
 
 #define STR(x) #x
-#define DKMSG(x) __pragma(message(STR(x)))
+//#define DKMSG(x) __pragma(message(STR(x)))
+
+
+#if defined(_MSC_VER)
+    #define DKMSG(x) __pragma(message(STR(x)))
+#elif defined(__GNUC__) || defined(__clang__)
+	#define DKMSG(X) __Pragma(message("WARNING: " STR(x))))
+#else
+	#define DKMSG(X)
+#endif
+DKMSG(test DKMSG)
+
+
 //#define TOSTRING(x) STR(x)
 #define PRNT_NAME(x) printf("%s", #x)
 #define PRNT_NAME_VALUE(x) printf("%s=%s", #x, STR(x))

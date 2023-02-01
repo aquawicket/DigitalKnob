@@ -50,7 +50,7 @@ WARNING_DISABLE
 		#include <OpenGLES/ES1/gl.h>			// OpenGLES 1
 	#else
 		//#error No suitable OpenGL/GLES headers found
-		DKMSG(No suitable OpenGL/GLES headers found)
+		DKMSG("No suitable OpenGL/GLES headers found")
 	#endif
 	
 	#if __has_include(<GL/glu.h>)
