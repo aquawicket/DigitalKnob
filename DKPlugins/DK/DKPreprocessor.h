@@ -28,6 +28,7 @@
 // https://sourceforge.net/p/predef/wiki/Home/
 // https://github.com/nemequ/pre-defined-macros
 // https://stackoverflow.com/a/3672331/688352
+// https://learn.microsoft.com/en-us/cpp/preprocessor/pragma-directives-and-the-pragma-keyword?view=msvc-170
 #pragma once
 #ifndef DKPreprocessor_H
 #define DKPreprocessor_H
