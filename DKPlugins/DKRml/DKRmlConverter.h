@@ -52,6 +52,28 @@ public:
 	DKString stored_html;
 	DKString stored_rml;
 	DKString processed;
+	
+	// TODO: multi-demensional map of html escape characters
+	// https://mateam.net/html-escape-characters/
+	// https://www.geeksforgeeks.org/implementing-multidimensional-map-in-c
+	//
+	//	NUMBER	SYMBOL		ENTITY		CODE		DESCRIPTION
+	//
+	//	9		Tab			&Tab;		&#9;		Tab
+	//	10		New Line	&NewLine;	&#10;		New Line
+	//	32		Space		&nbsp;		&#32;		Space
+	//	33		!						&#33;		Exclamation mark
+	//	34		“			&quot;		&#34;		Quotation mark
+	//	35		#						&#35;		Number sign
+	//	36		$						&#36;		Dollar sign
+	//	37		%						&#37;		Percent sign
+	//	38		&			&amp;		&#38;		Ampersand
+	//	39		‘						&#39;		Apostrophe
+	//	40		(						&#40;		Opening/Left Parenthesis
+	//
+	//	... and so on
+
+
 };
 
 #endif //DKRmlConverter_H
