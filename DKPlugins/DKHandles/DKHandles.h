@@ -31,11 +31,11 @@
 #ifndef DKHandles_H
 #define DKHandles_H
 
+#include "DK/DK.h"
+
 WARNING_DISABLE
 #include <vector>
 WARNING_ENABLE
-
-#include "DK/DK.h"
 
 
 struct HWNDname{   

@@ -1,7 +1,6 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 
-////////////////////////////////////////////////////////////////////////////
 if($_GET["query"]){
 
 	$var = explode(",", $_GET["query"]);

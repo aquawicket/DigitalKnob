@@ -1,4 +1,4 @@
-//"use strict"; //FIXME: this breaks duktape
+//"use strict"; //FIXME: "use strict" breaks Duktape
 //https://www.phpied.com/3-ways-to-define-a-javascript-class/
 
 // EXAMPLES

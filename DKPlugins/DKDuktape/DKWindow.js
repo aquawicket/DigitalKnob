@@ -1,6 +1,13 @@
 //https://developer.mozilla.org/en-US/docs/Web/API/Window
 
 var Window = function Window(pointer) {
+	
+	if(this.toString() === "[object Object]"){
+		this.toString = function(){
+			return "[object Window]"
+		}
+	}
+	
     return EventTarget.call(this, pointer);
 }
 Window.prototype = EventTarget.prototype;

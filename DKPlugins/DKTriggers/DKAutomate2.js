@@ -1,23 +1,17 @@
-///////////////////////////
-function DKAutomate2_init()
-{
+function DKAutomate2_init(){
 	dk.create("DKTriggers/DKAutomate2.html,DKTriggers/DKAutomate.html", function(){
 		byId("DKTriggers/DKAutomate2.html").addEventListener("SelectTrigger", DKAutomate2_onevent);
 		byId("DKTriggers/DKAutomate2.html").addEventListener("input", DKAutomate2_onevent);
 	});
 }
 
-//////////////////////////
-function DKAutomate2_end()
-{
+function DKAutomate2_end(){
 	byId("DKTriggers/DKAutomate2.html").removeEventListener("SelectTrigger", DKAutomate2_onevent);
 	byId("DKTriggers/DKAutomate2.html").removeEventListener("input", DKAutomate2_onevent);
 	dk.close("DKTriggers/DKAutomate2.html");
 }
 
-///////////////////////////////////
-function DKAutomate2_OnEvent(event)
-{
+function DKAutomate2_OnEvent(event){
 	if(event.currentTarget.id === "NewCause"){
 		DKTrigger_NewCause();
 		DKAutomate2_SelectTrigger();
@@ -80,9 +74,7 @@ function DKAutomate2_OnEvent(event)
 	}
 }
 
-////////////////////////////////////
-function DKAutomate2_SelectTrigger()
-{
+function DKAutomate2_SelectTrigger(){
 	byId("TriggerName").value = current_trigger;
 	byId("Causes").innerHTML = "";
 	

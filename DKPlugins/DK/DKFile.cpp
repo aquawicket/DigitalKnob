@@ -80,7 +80,7 @@ bool DKFile::NormalizePath(DKString& path){
 	return false;
 }
 
-#if WIN32
+#if WIN
 bool DKFile::AppendSystemPath(const DKString& path){
 	DKDEBUGFUNC(path);
 	DebugPath(path);

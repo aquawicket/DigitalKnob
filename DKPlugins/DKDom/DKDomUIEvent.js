@@ -1,6 +1,6 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/UIEvent
 
-var UIEvent = function UIEvent(pointer) {
+var UIEvent = function(pointer) {
     // Properties
     /*
 	Object.defineProperty(this, "cancelBubble", { //Not standardized, Deprecated
@@ -74,6 +74,12 @@ var UIEvent = function UIEvent(pointer) {
         CPP_DKDomUIEvent_initUIEvent(this.pointer)
     }
 
+	if(this.toString() === "[object Object]"){
+		this.toString = function(){
+			return "[object UIEvent]"
+		}
+	}
+	
     return Event.call(this, pointer)
 }
 UIEvent.prototype = Event.prototype

@@ -61,6 +61,12 @@ var WindowOrWorkerGlobalScope = function WindowOrWorkerGlobalScope(pointer) {
 		//TODO
     }
 	
+	if(this.toString() === "[object Object]"){
+		this.toString = function(){
+			return "[object WindowOrWorkerGlobalScope]"
+		}
+	}
+	
     return this;
 }
 

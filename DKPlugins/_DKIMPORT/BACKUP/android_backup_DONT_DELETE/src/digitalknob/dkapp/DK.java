@@ -43,7 +43,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 
-////////////////////////////////
 public class DK extends Activity
 {
 	public static DK instance;
@@ -56,9 +55,7 @@ public class DK extends Activity
 		System.loadLibrary("DKAndroid");
 	}
 
-	/////////////////////////////////////////////
-	@Override protected void onCreate(Bundle app) 
-	{
+	@Override protected void onCreate(Bundle app) {
 		Log.d("DK.java", "onCreate()");
 		super.onCreate(app);
 		instance = this;
@@ -96,9 +93,7 @@ public class DK extends Activity
 		}, 2000);
 	}
 
-	////////////////////////////////////
-	@Override protected void onDestroy()
-	{
+	@Override protected void onDestroy(){
 		Log.d("DK.java", "onDestroy()");
 		//CallCppFunction("DKAndroid_exit");
 		exitJNIBridge();
@@ -107,32 +102,24 @@ public class DK extends Activity
 		super.onDestroy();
 	}
 
-	//////////////////
-	public void Exit()
-	{
+	public void Exit(){
 		Log.d("DK.java", "Exit()");
 		onDestroy();
 	}
 	
-	/////////////////////////////////////
-	public void OpenActivity(String name)
-	{
+	public void OpenActivity(String name){
 		Log.d("DK.java", "OpenActivity("+name+")");
 		Intent intent = new Intent();
 		intent.setClassName("digitalknob.dkapp", "digitalknob.dkapp."+name);
 		startActivity(intent);
 	}
 
-	/////////////////////////////////////////
-	public void AttachFunction(String string)
-	{
+	public void AttachFunction(String string){
 		Log.d("DK.java", "AttachFunction("+string+")");
 		WebviewActivity.instance.AttachFunction(string);
 	}
 	
-	/////////////////////////
-	private void copyAssets()
-	{
+	private void copyAssets(){
 		Log.d("DK.java", "copyAssets()");
 		Log.i("DK.java", "Copying assets to storage . . .");
 		Context context = this.getApplicationContext();
@@ -150,17 +137,13 @@ public class DK extends Activity
 		}
 	}
 
-	///////////////////////////////////
-	private void copyAsset(String path)
-	{
+	private void copyAsset(String path){
 		Log.d("DK.java", "copyAsset("+path+")");
 		Log.i("DK.java", "Copying "+path+" to storage . . .");
 		copyFile(path, true);
 	}
 
-	//////////////////////////////////////////////////////////
-	private void copyFileOrDir(String path, boolean overwrite)
-	{
+	private void copyFileOrDir(String path, boolean overwrite){
 		//Log.d("DK.java", "copyFileOrDir("+path+",boolean)");	
 		if(path.equals("null")){ path = ""; }
 		Context context = this.getApplicationContext();
@@ -194,9 +177,7 @@ public class DK extends Activity
 		}
 	}
 
-	/////////////////////////////////////////////////////////
-	private void copyFile(String filename, boolean overwrite)
-	{
+	private void copyFile(String filename, boolean overwrite){
 		//Log.d("DK.java", "copyFile("+filename+",boolean)");
 		Context context = this.getApplicationContext();
 		int stringId = context.getApplicationInfo().labelRes;
@@ -228,9 +209,7 @@ public class DK extends Activity
 		}
 	}
 	
-	////////////////////////////
-	public void toggleKeyboard()
-	{
+	public void toggleKeyboard(){
 		Log.d("DK.java","toggleKeyborad()");
 		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 

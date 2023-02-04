@@ -1,6 +1,4 @@
-//////////////////////////////////
-function DKWebSocketsServer_init()
-{
+function DKWebSocketsServer_init(){
 	dk.create("DKWebSockets");
 	dk.create("DKWebSockets/DKWebSocketsServer.html", function(){
 		window.addEventListener("DKWebSockets_OnMessageFromClient", DKWebSocketsServer_onevent);
@@ -12,9 +10,7 @@ function DKWebSocketsServer_init()
 	});
 }
 
-/////////////////////////////////
-function DKWebSocketsServer_end()
-{
+function DKWebSocketsServer_end(){
 	window.removeEventListener("DKWebSockets_OnMessageFromClient", DKWebSocketsServer_onevent);
 	byId("DKWebSocketsServer_CloseServer").removeEventListener("click", DKWebSocketsServer_onevent);
 	byId("DKWebSocketsServer_CreateServer").removeEventListener("click", DKWebSocketsServer_onevent);
@@ -22,9 +18,7 @@ function DKWebSocketsServer_end()
 	dk.close("DKWebSocketsServer/DKWebSocketsServer.html");
 }
 
-//////////////////////////////////////////
-function DKWebSocketsServer_OnEvent(event)
-{
+function DKWebSocketsServer_OnEvent(event){
 	if(event.currentTarget.id === "DKWebSocketsServer_CreateServer"){
 		DKWebSocketsServer_CreateServer();
 	}
@@ -39,9 +33,7 @@ function DKWebSocketsServer_OnEvent(event)
 	}
 }
 
-//////////////////////////////////////////
-function DKWebSocketsServer_CreateServer()
-{
+function DKWebSocketsServer_CreateServer(){
 	if(!DK_GetValue("DKWebSocketsServer_IpAddress")){
 		console.warn("DKWebSocketsServer_CreateServer(): Please enter an ip address\n");
 		//return;
@@ -54,21 +46,15 @@ function DKWebSocketsServer_CreateServer()
 	DKWebSockets_CreateServer(DK_GetValue("DKWebSocketsServer_IpAddress"), Number(DK_GetValue("DKWebSocketsServer_Port")));
 }
 
-/////////////////////////////////////////
-function DKWebSocketsServer_CloseServer()
-{
+function DKWebSocketsServer_CloseServer(){
 	DKWebSockets_CloseServer();
 }
 
-/////////////////////////////////////////////
-function DKWebSocketsServer_MessageToClient()
-{
+function DKWebSocketsServer_MessageToClient(){
 	var message = DK_GetValue("DKWebSocketsServer_send");
 	DKWebSockets_MessageToClient(message);
 }
 
-////////////////////////////////////////////////////////
-function DKWebSocketsServer_OnMessageFromClient(message)
-{
+function DKWebSocketsServer_OnMessageFromClient(message){
 	byId("DKWebSocketsServer_receive").value = message;
 }

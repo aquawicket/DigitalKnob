@@ -1,6 +1,6 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent
 
-var MouseEvent = function MouseEvent(pointer) {
+var MouseEvent = function(pointer) {
     // Properties
     Object.defineProperty(this, "altKey", {
         //Read only
@@ -156,6 +156,12 @@ var MouseEvent = function MouseEvent(pointer) {
         CPP_DKDomMouseEvent_initMouseEvent(pointer)
     }
     
+	if(this.toString() === "[object Object]"){
+		this.toString = function(){
+			return "[object MouseEvent]"
+		}
+	}
+	
     return UIEvent.call(this, pointer)
 }
 MouseEvent.prototype = UIEvent.prototype

@@ -33,7 +33,7 @@ bool DKDom::Init(){
 	//Load the Duktape javascript DOM
 #ifdef DUKTAPE_DOM
 	DKClass::DKCreate("DKEventTarget");
-	DKClass::DKCreate("DKDuktape/DKGlobalEventHandlers.js");
+	DKClass::DKCreate("DKGlobalEventHandlers");
 	DKClass::DKCreate("DKEvent");
 	DKClass::DKCreate("DKUIEvent");
 #ifndef IOS
@@ -49,7 +49,7 @@ bool DKDom::Init(){
 
 	//Load the Duktape javascript DOM
 	DKClass::DKCreate("DKDomEventTarget");
-		DKClass::DKCreate("DKDom/DKDomGlobalEventHandlers.js");
+		DKClass::DKCreate("DKDomGlobalEventHandlers");
 		DKClass::DKCreate("DKDomXMLHttpRequestEventTarget");
 		DKClass::DKCreate("DKDomXMLHttpRequest");
 		DKClass::DKCreate("DKDomWindowEventHandlers");
@@ -65,17 +65,19 @@ bool DKDom::Init(){
 					DKClass::DKCreate("DKDomHTMLImageElement");
 					DKClass::DKCreate("DKDomHTMLScriptElement");
 					DKClass::DKCreate("DKDomHTMLSpanElement");
+			DKClass::DKCreate("DKDomDocument");
 		DKClass::DKCreate("DKDomCSSStyleDeclaration");
 			
-		//DKClass::DKCreate("DKDomWindowOrWorkerGlobalScope");
 		DKClass::DKCreate("DKDomDocumentOrShadowRoot");
-		DKClass::DKCreate("DKDom/DKDomWindowOrWorkerGlobalScope.js");
+		DKClass::DKCreate("DKDomWindowOrWorkerGlobalScope");
 		DKClass::DKCreate("DKDomWindow");
-			DKClass::DKCreate("DKDomDocument");
 			DKClass::DKCreate("DKDomConsole");
 			DKClass::DKCreate("DKDomLocation");
 			DKClass::DKCreate("DKDomNavigator");
 			DKClass::DKCreate("DKDomScreen");
+			
+		DKClass::DKCreate("DKDomHTMLDocument");
+		DKClass::DKCreate("DKDomHTMLBodyElement");
 		
 	return true;
 }

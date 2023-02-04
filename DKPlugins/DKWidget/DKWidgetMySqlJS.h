@@ -34,7 +34,7 @@
 #include "DKDuktape/DKDuktape.h"
 #include "DKWidget/DKWidget.h"
 
-/////////////////////////////////////////////////////////
+
 class DKWidgetMySqlJS : public DKObjectT<DKWidgetMySqlJS>
 {
 public:

@@ -1,4 +1,4 @@
-"use strict";
+//"use strict"; //FIXME: "use strict" breaks Duktape
 
 //https://goessner.net/articles/JsonPath/index.html#e2
 

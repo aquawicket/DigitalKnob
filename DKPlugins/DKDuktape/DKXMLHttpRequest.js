@@ -16,4 +16,10 @@ var XMLHttpRequest = function XMLHttpRequest() {
         this.responseText = CPP_DKXMLHttpRequest_send(this.method, this.url, this.async);
         this.onreadystatechange();
     }
+	
+	if(this.toString() === "[object Object]"){
+		this.toString = function(){
+			return "[object XMLHttpRequest]"
+		}
+	}
 }

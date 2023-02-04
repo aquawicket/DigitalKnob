@@ -42,7 +42,7 @@ typedef Rocket::Controls::ElementFormControlSelect DKElementFormControlSelect;
 typedef Rocket::Controls::ElementFormControlInput DKElementFormControlInput;
 typedef Rocket::Core::String DKCString;
 
-///////////////////////////////////////////
+
 class DKWidget : public DKObjectT<DKWidget>
 {
 public:

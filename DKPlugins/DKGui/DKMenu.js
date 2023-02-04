@@ -45,7 +45,7 @@ DKMenu.prototype.create = function DKMenu_create(parent) {
     return dkmenu
 }
 
-DKMenu.prototype.close = function DLMenu_close() {
+DKMenu.prototype.close = function DKMenu_close() {
 	//FIXME: events arn't getting removed
     //this.div.parentElement.removeChild(this.div)
     delete this.div
@@ -76,7 +76,7 @@ DKMenu.prototype.addItem = function DKMenu_addItem(label, callback) {
     this.div.dkmenuItem.style.borderLeftWidth = "0rem"
     this.div.dkmenuItem.style.borderRightWidth = "0rem"
     this.div.dkmenuItem.onmousedown = function onmousedown_callback() {
-        callback && callback()
+        //callback && callback()
         //event.stopPropagation()
     }
     this.div.appendChild(this.div.dkmenuItem)

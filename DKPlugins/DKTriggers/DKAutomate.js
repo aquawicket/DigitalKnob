@@ -1,6 +1,4 @@
-//////////////////////////
-function DKAutomate_init()
-{
+function DKAutomate_init(){
 	dk.create("DKAssets");
 	dk.create("DKTriggers/DKAutomate.html");
 	dk.create("DKTriggers/DKAutomate2.js", function(){
@@ -21,9 +19,7 @@ function DKAutomate_init()
 	});
 }
 
-/////////////////////////
-function DKAutomate_end()
-{
+function DKAutomate_end(){
 	byId("DKTriggers/DKAutomate.html", "keydown", DKAutomate_onevent);
 	//window.removeEventListener("midi", DKAutomate_onevent);
 	//window.removeEventListener("gui", DKAutomate_onevent); //all events
@@ -40,9 +36,7 @@ function DKAutomate_end()
 	dk.close("DKTriggers/DKAutomate.html");
 }
 
-//////////////////////////////////
-function DKAutomate_OnEvent(event)
-{
+function DKAutomate_OnEvent(event){
 	if(event.type === "keydown"){
 		DKTrigger_ProcessKeyDown(DK_GetValue(event));
 	}
@@ -102,17 +96,13 @@ function DKAutomate_OnEvent(event)
 	}
 }
 
-////////////////////////////////////
-function DKAutomate_NewTrigger(name)
-{
+function DKAutomate_NewTrigger(name){
 	DKTrigger_AddTrigger(name);
 	DKAutomate_UpdateValues();
 	DKAutomate_SelectValue(name);
 }
 
-//////////////////////////////////
-function DKAutomate_UpdateValues()
-{
+function DKAutomate_UpdateValues(){
 	byId("DKA-TriggerList").innerHTML = "";
 
 	if(!triggers){return;}
@@ -124,25 +114,19 @@ function DKAutomate_UpdateValues()
 	}
 }
 
-//////////////////////////////////////
-function DKAutomate_SelectValue(value)
-{
+function DKAutomate_SelectValue(value){
 	DKTrigger_SelectTrigger(value);
 	DKSendEvent("DKTriggers/DKAutomate2.html", "SelectTrigger", value);
 	DKAutomate_UpdateSelection(value);
 }
 
-////////////////////////////////
-function DKAutomate_CancelSave()
-{
+function DKAutomate_CancelSave(){
 	//DKTrigger_LoadTriggers();
 	DKSendEvent("DKTriggers/DKAutomate.html", "UpdateValues", "");
 	DKAutomate_SelectValue(current_trigger);
 }
 
-//////////////////////////////////////////
-function DKAutomate_UpdateSelection(value)
-{
+function DKAutomate_UpdateSelection(value){
 	if(!value){ return; }
 	var temp = DK_GetElements(byId("DKA-TriggerList"));
 	var options = temp.split(",");

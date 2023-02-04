@@ -81,7 +81,13 @@ var Location = function Location(pointer) {
         CPP_DKDomLocation_href(url);
         //TODO - https://developer.mozilla.org/en-US/docs/Web/API/Location/replace
     }
+	
+	if(this.toString() === "[object Object]"){
+		this.toString = function(){
+			return CPP_DKDomLocation_href();
+		}
+	}
 }
 
 var location = new Location("location");
-window.location = location;
+//window.location = location;

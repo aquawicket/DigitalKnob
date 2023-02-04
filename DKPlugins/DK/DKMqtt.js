@@ -1,4 +1,4 @@
-"use strict";
+//"use strict"; //FIXME: "use strict" breaks Duktape
 
 //http://www.steves-internet-guide.com/using-javascript-mqtt-client-websockets/
 dk.mqtt = DKPlugin(DKMqtt)

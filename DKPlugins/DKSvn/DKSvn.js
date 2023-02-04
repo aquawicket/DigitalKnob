@@ -1,8 +1,6 @@
 var SVN = "";
 
-/////////////////////
-function DKSvn_init()
-{
+function DKSvn_init(){
 	dk.create("DKThreadPool");
 
 	//console.log((DK_GetOS()+"\n");
@@ -24,21 +22,15 @@ function DKSvn_init()
 	DKSvn_ValidateSvn();
 }
 
-////////////////////
-function DKSvn_end()
-{
+function DKSvn_end(){
 
 }
 
-///////////////////////////////
-function DKSvn_OnEvent(event)
-{
+function DKSvn_OnEvent(event){
 
 }
 
-////////////////////////////
-function DKSvn_ValidateSvn()
-{
+function DKSvn_ValidateSvn(){
 	if(DK_GetBrowser() !== "Rml"){ return; }
 	console.log(("Looking for SVN\n");
 	//console.log((SVN+"\n");
@@ -52,9 +44,7 @@ function DKSvn_ValidateSvn()
 	}
 }
 
-///////////////////////////
-function DKSvn_InstallSvn()
-{
+function DKSvn_InstallSvn(){
 	if(DK_GetBrowser() !== "Rml"){ return; }
 	console.log(("Installing Svn\n");
 	var assets = DKAssets_LocalAssets();
@@ -78,9 +68,7 @@ function DKSvn_InstallSvn()
 	}
 }
 
-//////////////////////////
-function DKSvn_SvnUpdate()
-{
+function DKSvn_SvnUpdate(){
 	console.log(("Svn Update...\n");
 	DK_Execute(SVN +" cleanup "+DIGITALKNOB);
 	DK_Execute(SVN +" checkout https://github.com/aquawicket/DigitalKnob/trunk/ "+DIGITALKNOB);
@@ -98,9 +86,7 @@ function DKSvn_SvnUpdate()
 	}
 }
 
-//////////////////////////
-function DKSvn_SvnCommit()
-{
+function DKSvn_SvnCommit(){
 	console.log(("Svn Commit...\n");
 	DK_Execute(SVN +" cleanup "+DIGITALKNOB);
 	DK_Execute(SVN +" commit -m update "+DIGITALKNOB);

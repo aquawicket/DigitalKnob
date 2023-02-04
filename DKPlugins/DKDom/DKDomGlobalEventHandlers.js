@@ -965,6 +965,12 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         }
     });
 
+	if(this.toString() === "[object Object]"){
+		this.toString = function(){
+			return "[object GlobalEventHandlers]"
+		}
+	}
+	
     return this;
 }
 

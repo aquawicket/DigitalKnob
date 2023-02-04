@@ -25,6 +25,12 @@ var XMLHttpRequest = function XMLHttpRequest(pointer) {
         console.log("TODO: XMLHttpRequest.prototype.onreadystatechange()");
     }
 
+	if(this.toString() === "[object Object]"){
+		this.toString = function(){
+			return "[object XMLHttpRequest]"
+		}
+	}
+	
     return XMLHttpRequestEventTarget.call(this, pointer);
 }
 XMLHttpRequest.prototype = XMLHttpRequestEventTarget.prototype;

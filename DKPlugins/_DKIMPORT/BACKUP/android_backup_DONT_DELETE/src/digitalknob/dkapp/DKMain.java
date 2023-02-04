@@ -64,7 +64,7 @@ import java.io.File;
 import java.util.Date;
 import java.util.Properties;
 
-///////////////////////////////////////////////////////////////////////////////////////
+
 public class DKMain extends Activity implements View.OnTouchListener, View.OnKeyListener
 {
 	static{

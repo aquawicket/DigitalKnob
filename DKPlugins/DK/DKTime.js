@@ -1,4 +1,4 @@
-"use strict";
+//"use strict"; //FIXME: "use strict" breaks Duktape
 // https://developer.mozilla.org/en-US/docs/Web/API/HTMLTimeElement
 // https://flaviocopes.com/javascript-namespaces/
 

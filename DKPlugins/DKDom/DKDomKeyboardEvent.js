@@ -102,6 +102,12 @@ var KeyboardEvent = function KeyboardEvent(pointer) {
         }
     })
 
+	if(this.toString() === "[object Object]"){
+		this.toString = function(){
+			return "[object KeyboardEvent]"
+		}
+	}
+	
     return UIEvent.call(this, pointer)
 }
 KeyboardEvent.prototype = UIEvent.prototype

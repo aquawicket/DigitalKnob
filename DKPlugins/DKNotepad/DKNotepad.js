@@ -125,14 +125,16 @@ DKNotepad.prototype.helpmenu = function dk_notepad_helpmenu(instance, event) {
 }
 DKNotepad.prototype.rightclickmenu = function dk_notepad_rightclickmeny(instance, event) {
     event.preventDefault();
-    const menu = dk.menu.createInstance();
-    dk.menu.addItem(menu, "Cut", function dk_menu_cut() {
+    //const menu = dk.menu.createInstance();
+	//const menu = dk.menu.create();
+	const menu = DKMenu.prototype.create();
+    menu.addItem(menu, "Cut", function dk_menu_cut() {
         dk.clipboard.cut(instance.text);
     });
-    dk.menu.addItem(menu, "Copy", function dk_menu_copy() {
+    menu.addItem(menu, "Copy", function dk_menu_copy() {
         dk.clipboard.copy(instance.text);
     });
-    dk.menu.addItem(menu, "Paste", function dk_menu_paste() {
+    menu.addItem(menu, "Paste", function dk_menu_paste() {
         dk.clipboard.paste(instance.text);
     });
 }

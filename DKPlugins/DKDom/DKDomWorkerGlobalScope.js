@@ -18,6 +18,12 @@ var WorkerGlobalScope = function WorkerGlobalScope(pointer) {
 		//TODO
     }
 
+	if(this.toString() === "[object Object]"){
+		this.toString = function(){
+			return "[object WorkerGlobalScope]"
+		}
+	}
+	
     return this;
 }
 

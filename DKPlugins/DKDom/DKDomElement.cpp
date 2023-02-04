@@ -293,8 +293,6 @@ int DKDomElement::innerHTML(duk_context* ctx){
 	//get
 	if(!duk_is_string(ctx, 1)){
 		DKString innerHtml = element->GetInnerRML();
-		if(innerHtml.empty())
-			return true; //&& DKDEBUGRETURN(ctx, innerHTML);
 		duk_push_string(ctx, innerHtml.c_str());
 	}
 	//set
@@ -319,8 +317,6 @@ int DKDomElement::outerHTML(duk_context* ctx){
 	if(!duk_is_string(ctx, 1)){
 		DKString outerHtml;
 		DKRml::GetOuterHTML(element, outerHtml);
-		if(outerHtml.empty())
-			return true && DKDEBUGRETURN(ctx, outerHTML);
 		duk_push_string(ctx, outerHtml.c_str());
 	}
 	//set

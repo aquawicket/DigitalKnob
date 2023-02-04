@@ -39,11 +39,22 @@ var CSSStyleDeclaration = function CSSStyleDeclaration(pointer) {
         this[propertyName] = propertyValue;
     }
 	
+	if(this.toString() === "[object Object]"){
+		this.toString = function(){
+			return "[object CSSStyleDeclaration]"
+		}
+	}
+	
     const proxy = new Proxy(this,{
         has: function Proxy(target, key) {
             return key in target;
         },
         get: function Proxy(target, key, recv) {
+			//console.log(typeof target)
+			//console.log(typeof key)
+			//console.log(typeof recv)
+			//console.log(typeof target[key])
+
             //console.log("Style:get("+target+","+key+")")
             if (typeof target[key] === "function" || key === "pointer")
                 return target[key];
@@ -57,7 +68,10 @@ var CSSStyleDeclaration = function CSSStyleDeclaration(pointer) {
                     realKey = realKey.substr(0, i) + "-" + realKey.charAt(i).toLowerCase() + realKey.substr(i + 1, realKey.length)
                 }
             }
-            target[key] = CPP_DKDomCSSStyleDeclaration_getPropertyValue(target["pointer"], realKey)
+			if (typeof key !== "symbol")
+				target[key] = CPP_DKDomCSSStyleDeclaration_getPropertyValue(target["pointer"], realKey)
+			//else 
+			//	target[key] = undefined
             return target[key];
         },
         set: function Proxy(target, key, val, recv) {

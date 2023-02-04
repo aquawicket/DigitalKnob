@@ -283,7 +283,13 @@ var Navigator = function Navigator(pointer) {
         //Not standardized
         return "TODO";
     }
+	
+	if(this.toString() === "[object Object]"){
+		this.toString = function(){
+			return "[object Navigator]"
+		}
+	}
 }
 
 var navigator = new Navigator("navigator");
-window.navigator = navigator;
+//window.navigator = navigator;

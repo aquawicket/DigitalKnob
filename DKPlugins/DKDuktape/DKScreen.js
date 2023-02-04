@@ -87,9 +87,16 @@ var Screen = function Screen(pointer) {
         return CPP_DKScreen_unlockOrientation();
     }
 
+
+	if(this.toString() === "[object Object]"){
+		this.toString = function(){
+			return "[object Screen]"
+		}
+	}
+	
     return EventTarget.call(this, pointer);
 }
 Screen.prototype = EventTarget.prototype;
 
 var screen = new Screen("screen");
-window.screen = screen;
+//window.screen = screen;

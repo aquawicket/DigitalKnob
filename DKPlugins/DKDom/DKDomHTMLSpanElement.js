@@ -3,6 +3,12 @@
 
 var HTMLSpanElement = function HTMLSpanElement(pointer) {
  
+	if(this.toString() === "[object Object]"){
+		this.toString = function(){
+			return "[object HTMLSpanElement]"
+		}
+	}
+	
     return HTMLElement.call(this, pointer);
 }
 

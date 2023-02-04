@@ -30,7 +30,7 @@ function init_onevent(event) {
 if (DK_GetJSEngine() === "Duktape") {
     //C++: Create a window LoadPage() can support
     if (USE_RML && USE_CEF) {
-        console.log("Creating SDL -> Rocket -> Cef -> GUI\n");
+        console.log("Creating SDL -> Rml -> Cef -> GUI\n");
         CPP_DK_Create("DKWindow");
         CPP_DKWindow_Create();
         CPP_DK_Create("DKRocket");
@@ -47,7 +47,7 @@ if (DK_GetJSEngine() === "Duktape") {
         iframe.src = DKApp_url;
         CPP_DKCef_SetFocus(CPP_DKCef_GetCurrentBrowser());
     } else if (USE_RML) {
-        console.log("Creating SDL -> ROCKET -> GUI\n");
+        console.log("Creating SDL -> Rml -> GUI\n");
         CPP_DK_Create("DKWindow");
         CPP_DKWindow_Create();
         CPP_DK_Create("DKRml");

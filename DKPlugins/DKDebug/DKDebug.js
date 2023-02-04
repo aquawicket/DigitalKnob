@@ -1,4 +1,4 @@
-//"use strict";
+//"use strict"; //FIXME: "use strict" breaks Duktape
 
 function DKDebug(){}
 dk.debug = DKPlugin(DKDebug)

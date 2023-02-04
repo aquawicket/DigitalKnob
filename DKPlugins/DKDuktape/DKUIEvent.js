@@ -75,6 +75,13 @@ var UIEvent = function UIEvent(pointer) {
     }
     ;
 
+
+	if(this.toString() === "[object Object]"){
+		this.toString = function(){
+			return "[object UIEvent]"
+		}
+	}
+	
     return Event.call(this, pointer);
 };
 UIEvent.prototype = Event.prototype;

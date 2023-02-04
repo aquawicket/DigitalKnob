@@ -1,8 +1,6 @@
 var SVN = "";
 
-///////////////////////
-function SvnMenu_init()
-{
+function SvnMenu_init(){
 	dk.create("DKThreadPool");
 
 	//SVN(DK_GetOS()+"\n");
@@ -28,18 +26,14 @@ function SvnMenu_init()
 	});
 }
 
-//////////////////////
-function SvnMenu_end()
-{
+function SvnMenu_end(){
 	document.removeEventListener("mousedown", SvnMenu_onevent);
 	byId("Git Update").removeEventListener("click", SvnMenu_onevent);
 	byId("Git Commit").removeEventListener("click", SvnMenu_onevent);
 	dk.close("DKGit/SvnMenu.html");
 }
 
-///////////////////////////////
-function SvnMenu_OnEvent(event)
-{
+function SvnMenu_OnEvent(event){
 	if(event.currentTarget.id === "Git Update"){
 		DKThread_DKQueue("GitUpdate","SvnMenu_GitUpdate();");
 	}
@@ -55,9 +49,7 @@ function SvnMenu_OnEvent(event)
 	dk.close("DKGit/SvnMenu.js");
 }
 
-//////////////////////////////
-function SvnMenu_ValidateGit()
-{
+function SvnMenu_ValidateGit(){
 	if(DK_GetBrowser() !== "Rml"){ return; }
 	SVN("Looking for SVN\n");
 	//SVN(SVN+"\n");
@@ -71,9 +63,7 @@ function SvnMenu_ValidateGit()
 	}
 }
 
-/////////////////////////////
-function SvnMenu_InstallGit()
-{
+function SvnMenu_InstallGit(){
 	if(DK_GetBrowser() !== "Rml"){ return; }
 	SVN("Installing Git\n");
 	var assets = DKAssets_LocalAssets();
@@ -97,9 +87,7 @@ function SvnMenu_InstallGit()
 	}
 }
 
-////////////////////////////
-function SvnMenu_GitUpdate()
-{
+function SvnMenu_GitUpdate(){
 	if(DK_GetBrowser() !== "Cef" && DK_GetBrowser() !== "Rml"){
 		return;
 	}
@@ -134,9 +122,7 @@ function SvnMenu_GitUpdate()
 	}
 }
 
-////////////////////////////
-function SvnMenu_GitCommit()
-{
+function SvnMenu_GitCommit(){
 	if(DK_GetBrowser() !== "Cef" && DK_GetBrowser() !== "Rml"){
 		return;
 	}

@@ -6,9 +6,7 @@ include("../DK/DK.php");
 session_start();
 $link;
 
-//////////////////////
-function Query($query)
-{
+function Query($query){
 	if(!$query){ return; }
 	global $link;
 	
@@ -39,9 +37,7 @@ function Query($query)
 	}
 }
 
-///////////////////////////////////////////////////////
-function ConnectToServer($server, $username, $password)
-{
+function ConnectToServer($server, $username, $password){
 	if(!$server){ return; }
 	if(!$username){ return; }
 	if(!$password){ return; }
@@ -61,9 +57,7 @@ function ConnectToServer($server, $username, $password)
 	echo "DKERROR: ConnectToServer failed. \n";
 }
 
-//////////////////////////////////
-function SelectDatabase($database)
-{
+function SelectDatabase($database){
 	global $link;
 	if($link){
 		if(!$database){ return; }
@@ -77,9 +71,7 @@ function SelectDatabase($database)
 	echo "DKERROR: SelectDatabase failed \n";
 }
 
-/////////////////
-if($_GET["host"])
-{
+if($_GET["host"]){
 	$var = explode(",", $_GET["host"]);
 	if(!$var[0]){ echo "DKERROR: server variable empty"; }
 	if(!$var[1]){ echo "DKERROR: username variable empty"; }
@@ -91,9 +83,7 @@ if($_GET["host"])
 	die();
 }
 
-/////////////////////
-if($_GET["database"])
-{
+if($_GET["database"]){
 	if(!$_GET["database"]){ echo "DKERROR: database variable empty"; }
 	$_SESSION['database'] = $_GET["database"];	
 	ConnectToServer($_SESSION['server'], $_SESSION['username'], $_SESSION['password']);
@@ -101,9 +91,7 @@ if($_GET["database"])
 	die();
 }
 
-//////////////////
-if($_GET["Query"])
-{
+if($_GET["Query"]){
 	if(!$_GET["Query"]){ echo "DKERROR: query variable empty"; die(); }
 	$query = $_GET["Query"];
 	if($query === "Info"){

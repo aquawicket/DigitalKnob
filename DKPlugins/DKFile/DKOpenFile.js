@@ -1,4 +1,4 @@
-//"use_strict";
+//"use strict"; //FIXME: "use strict" breaks Duktape
 
 dk.openfile = new DKPlugin("dk_openfile");
 

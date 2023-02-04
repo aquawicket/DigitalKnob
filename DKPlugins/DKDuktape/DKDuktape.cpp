@@ -199,8 +199,13 @@ bool DKDuktape::AttachFunction(const DKString& name, duk_c_function func){
 		return DKERROR("ctx invalid\n");
 	duk_require_stack(ctx, 1);
 	duk_push_global_object(ctx);
+
 	duk_push_c_function(ctx, func, DUK_VARARGS);
-	duk_put_prop_string(ctx, -2, name.c_str());
+	duk_push_string(ctx, "name");
+	duk_push_string(ctx, name.c_str());
+	duk_def_prop(ctx, -3, DUK_DEFPROP_HAVE_VALUE | DUK_DEFPROP_FORCE);
+	duk_put_global_string(ctx, name.c_str());
+
 	functions.push_back(name+"()");
 	return true;
 }

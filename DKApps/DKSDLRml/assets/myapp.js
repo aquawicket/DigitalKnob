@@ -28,5 +28,6 @@
 const url = "DKWebTest/index.html"
 location.href = url
 
+DKPlugin("DK/DKPhp.js")
 DKPlugin("DKFile/DKFile.js")
 DKPlugin("DKDebug/DKDebug.js")

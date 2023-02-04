@@ -1,14 +1,10 @@
 //https://developers.facebook.com/docs/javascript
 
-//////////////////////////
-function DKFacebook_init()
-{
+function DKFacebook_init(){
 
 }
 
-//////////////////////////////////
-function DKFacebookLogin(Function)
-{
+function DKFacebookLogin(Function){
 	window.fbAsyncInit = function() {
 		FB.init({
 			appId      : '1514766155465090',
@@ -48,9 +44,7 @@ function DKFacebookLogin(Function)
 }
 
 // This is called with the results from from FB.getLoginStatus().
-///////////////////////////////////////
-function statusChangeCallback(response)
-{
+function statusChangeCallback(response){
     console.log('statusChangeCallback');
     console.log(response);
     // The response object is returned with a status field that lets the
@@ -82,9 +76,7 @@ function statusChangeCallback(response)
 // This function is called when someone finishes with the Login
 // Button.  See the onlogin handler attached to it in the sample
 // code below.
-//////////////////////////
-function checkLoginState()
-{
+function checkLoginState(){
 	FB.getLoginStatus(function(response) {
 		statusChangeCallback(response);
     });
@@ -92,18 +84,14 @@ function checkLoginState()
   
 // Here we run a very simple test of the Graph API after login is
 // successful.  See statusChangeCallback() for when this call is made.
-////////////////////
-function connected()
-{
+function connected(){
     console.log("Facebook: Welcome!  Fetching your information....\n");
     FB.api('/me', function(response) {
 		console.log("Successful login for: " + response.name+"\n");
     });
 }
 
-/////////////////////////////////////////////////////
-function DKFacebook_Query(query, parameter, Function)
-{
+function DKFacebook_Query(query, parameter, Function){
 	FB.api(query, function(response){
 		if (response.hasOwnProperty("error")) {
 			console.log("Error: " + response.error.message+"\n");

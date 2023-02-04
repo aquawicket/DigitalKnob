@@ -217,7 +217,7 @@ bool DKRml::LoadHtml(const DKString& html){
 	DKClass::DKCreate("DKDom");
 	DKString rval;
 	DKString document_address = elementToAddress(document);
-	DKDuktape::RunDuktape("var document = new Document(\"" + document_address + "\");", rval);
+	DKDuktape::RunDuktape("var document = new HTMLDocument(\"" + document_address + "\");", rval);
 	
 	Rml::XMLParser parser(ele);
 	parser.Parse(stream.get());

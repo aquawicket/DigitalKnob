@@ -22,6 +22,12 @@ var HTMLCollection = function HTMLCollection(pointers) {
         return null;
     }
 
+	if(this.toString() === "[object Object]"){
+		this.toString = function(){
+			return "[object HTMLCollection]"
+		}
+	}
+	
     return this;
 }
 

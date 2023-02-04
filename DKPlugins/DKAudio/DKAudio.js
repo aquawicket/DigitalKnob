@@ -1,8 +1,9 @@
-"use strict";
+//"use strict"; //FIXME: "use strict" breaks Duktape
 //https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement
 
 function DKAudio(){}
-dk.audio = new DKPlugin(DKAudio)//, "singleton")
+//dk.audio = new DKPlugin(DKAudio, "singleton") //FIXME: "singleton" breaks DUKTAPE
+dk.audio = new DKPlugin(DKAudio)
 
 
 DKAudio.prototype.init = function DKAudio_init(callback) {

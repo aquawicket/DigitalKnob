@@ -238,7 +238,14 @@ var HTMLElement = function HTMLElement(pointer) {
         console.log("HTMLElement.forceSpellCheck(): TODO");
     }
 
+	if(this.toString() === "[object Object]"){
+		this.toString = function(){
+			return "[object HTMLElement]"
+		}
+	}
+	
     return Element.call(this, pointer);
+	//return this;
 }
 
 // interface HTMLElement : Element

@@ -74,6 +74,13 @@ var HTMLScriptElement = function HTMLScriptElement(pointer) {
             return CPP_DKDomHTMLScriptElement_type(pointer);
         }
     });
+	
+	if(this.toString() === "[object Object]"){
+		this.toString = function(){
+			return "[object HTMLScriptElement]"
+		}
+	}
+	
     return HTMLElement.call(this, pointer);
 }
 

@@ -12,21 +12,21 @@ var Document = function Document(pointer)
             if (!address)
                 return;
             return new Element(address)
-        },
+        }
     })
     Object.defineProperty(this, "body", {
         get: function body() {
             var address = CPP_DKDomDocument_body()
             if (!address)
-                return;
-            return new HTMLElement(address)
-        },
+				return;
+            return new HTMLBodyElement(address)
+        }/*,
         set: function body() {
             if (!address)
                 return;
             return CPP_DKDomDocument_body(address)
             //TODO
-        }
+        }*/
     })
     //TODO
     Object.defineProperty(this, "characterSet", {
@@ -35,7 +35,7 @@ var Document = function Document(pointer)
             if (!address)
                 return;
             return new Element(address)
-        },
+        }
     })
     //TODO
     Object.defineProperty(this, "childElementCount", {
@@ -44,7 +44,7 @@ var Document = function Document(pointer)
             if (!address)
                 return;
             return new Element(address)
-        },
+        }
     })
     //TODO
     Object.defineProperty(this, "children", {
@@ -53,7 +53,7 @@ var Document = function Document(pointer)
             if (!address)
                 return;
             return new Element(address)
-        },
+        }
     })
     //TODO
     Object.defineProperty(this, "capatMode", {
@@ -62,7 +62,7 @@ var Document = function Document(pointer)
             if (!address)
                 return;
             return new Element(address)
-        },
+        }
     })
     //TODO
     //contentType 
@@ -72,7 +72,7 @@ var Document = function Document(pointer)
             var address = CPP_DKDomDocument_documentElement()
             if (!address)
                 return;
-            return new HTMLElement(address)
+            return new HTMLDocument(address)
         }
     })
     /*
@@ -107,6 +107,8 @@ var Document = function Document(pointer)
         var address = CPP_DKDomDocument_createElement(tag)
         if (!address)
             return undefined;
+		if (tag == "body")
+			return new HTMLBodyElement(address)
 		if (tag == "img")
 			return new HTMLImageElement(address)
 		if (tag == "script")
@@ -120,6 +122,8 @@ var Document = function Document(pointer)
         if (!address)
             return undefined;
         var element = new HTMLElement(address)
+		if(element.tag === "body")
+			return new HTMLBodyElement(address)
 		if(element.tag === "img")
 			return new HTMLImageElement(address)
 		if(element.tag === "script")
@@ -134,9 +138,17 @@ var Document = function Document(pointer)
             return;
         return new HTMLCollection(addresses)
     }
-    //return Node.call(this, pointer)
-    return HTMLElement.call(this, pointer)
-    //we have to call HTMLElement instead of Node for .style to work
+	
+	if(this.toString() === "[object Object]"){
+		this.toString = function(){
+			return "[object Document]"
+		}
+	}
+	
+    return HTMLElement.call(this, pointer)  //we have to call HTMLElement instead of Node for .style to work
+	//return Node.call(this, pointer)
+	//return this
+   
 }
 
 // https://dom.spec.whatwg.org/#interface-document

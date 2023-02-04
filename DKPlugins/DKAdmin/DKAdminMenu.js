@@ -1,6 +1,4 @@
-///////////////////////////
-function DKAdminMenu_init()
-{
+function DKAdminMenu_init(){
 	dk.create("DKAdmin/DKAdminMenu.html", function(){
 		document.addEventListener("mousedown", DKAdminMenu_onevent);
 		byId("OpenSource").addEventListener("click", DKAdminMenu_onevent);
@@ -25,9 +23,7 @@ function DKAdminMenu_init()
 	dk.create("DKGui/DKMenu.js", function(){});
 }
 
-//////////////////////////
-function DKAdminMenu_end()
-{
+function DKAdminMenu_end(){
 	document.removeEventListener("mousedown", DKAdminMenu_onevent);
 	byId("OpenSource").removeEventListener("click", DKAdminMenu_onevent);
 	byId("OpenDebug").removeEventListener("click", DKAdminMenu_onevent);
@@ -45,9 +41,7 @@ function DKAdminMenu_end()
 	dk.close("DKAdmin/DKAdminMenu.html");
 }
 
-///////////////////////////////////
-function DKAdminMenu_OnEvent(event)
-{
+function DKAdminMenu_OnEvent(event){
 	console.log("DKAdminMenu_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
 	
 	//selections
@@ -143,17 +137,13 @@ function DKAdminMenu_OnEvent(event)
 	dk.close("DKAdmin/DKAdminMenu.js");
 }
 
-/////////////////////////////////////
-function DKAdminMenu_Add(title, code)
-{
+function DKAdminMenu_Add(title, code){
 	//<div title="tooltip" id="FileExplorer" style="position:absolute;top:5rem;left:10rem;">File Explorer</div>
 	var ele = DK_CreateElement(byId("DKAdmin/DKAdminMenu.html"), "div", "DKAdminMenu_item");
 	ele.innerHTML = title;
 }
 
-/////////////////////////////////
-function DKAdminMenu_Run(command)
-{
+function DKAdminMenu_Run(command){
 	if(command.indexOf("http://") === 0 || command.indexOf("https://") === 0 || command.indexOf("file://") === 0 || command.indexOf("chrome://") === 0){
 		dk.create("DKGui/DKFrame.js", function(){
 			DKFrame_Iframe(command, command, 640, 480);

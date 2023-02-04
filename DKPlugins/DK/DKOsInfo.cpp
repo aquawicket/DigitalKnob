@@ -494,7 +494,6 @@ bool GetOSArchitecture(DKString& osarchitecture){
 #endif
 }
 
-////////////////////////////////////////////
 bool GetComputerName(DKString& computername){
 #if WIN
 	TCHAR computerName[MAX_COMPUTERNAME_LENGTH + 1];

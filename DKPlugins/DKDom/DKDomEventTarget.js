@@ -90,6 +90,13 @@ var EventTarget = function EventTarget(pointer) {
             return !event.defaultPrevented;
         }
     })
+	
+	if(this.toString() === "[object Object]"){
+		this.toString = function(){
+			return "[object EventTarget]"
+		}
+	}
+	
 	GlobalEventHandlers.call(this, pointer)
     return this;
 };

@@ -1,10 +1,7 @@
-//NOTE: use string removed for Duktape to work
-//"use strict";
-
-//NOTE: initiator moved to the bottom and "singleton" removed for Duktape to work
-//dk.file = DKPlugin(DKFile)
+//"use strict"; //FIXME: "use strict" breaks Duktape
 
 function DKFile(){}
+//dk.file = DKPlugin(DKFile, "singleton") //FIXME: "singleton" breaks Duktape
 dk.file = DKPlugin(DKFile)
 
 
@@ -127,22 +124,30 @@ if (!DUKTAPE) {
         for (var n = 0; n < folders.length; n++) {
             for (var nn = 0; nn < plugin_folders.length; nn++) {
                 if (CPP_DKFile_Exists(plugin_folders[nn] + "/" + folders[n])) {
-                    CPP_DKFile_CopyFolder(assets + "/" + folders[n], plugin_folders[nn] + "/" + folders[n], true, true);
-                }
+					if (CPP_DKFile_IsDirectory(plugin_folders[nn] + "/" + folders[n])) {
+						CPP_DKFile_CopyFolder(assets + "/" + folders[n], plugin_folders[nn] + "/" + folders[n], true, true);
+					}
+				}
             }
         }
     }
 }
 
-// dk.file.pullDKAssets(callback)
-DKFile.prototype.pullDKAssets = function DKFile_pullDKAssets(callback) {
-    console.log("Pulling assets from local repository");
-    dk.php.call("POST", "DKFile/DKFile.php", "pullDKAssets", function dk_php_pullDKAssets_callback(result) {
-        if (!result)
-            return error("pullDKAssets failed", callback);
-        callback && callback(result);
-        return result;
-    });
+if (!DUKTAPE) {
+	DKFile.prototype.pullDKAssets = function DKFile_pullDKAssets(callback) {
+		console.log("Pulling assets from local repository");
+		dk.php.call("POST", "DKFile/DKFile.php", "pullDKAssets", function dk_php_pullDKAssets_callback(result) {
+			if (!result)
+				return error("pullDKAssets failed", callback);
+			callback && callback(result);
+			return result;
+		});
+	}
+} else {
+	DKFile.prototype.pullDKAssets = function DKFile_pullDKAssets(callback) {
+		//This is the js->cpp method
+        return error("DKFile.prototype.pullDKAssets not implemented for DUKTAPE");
+	}
 }
 
 // dk.file.exists(path, callback)

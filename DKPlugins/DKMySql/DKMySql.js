@@ -1,8 +1,4 @@
-//BROWSER
-
-////////////////////////////////////////////////
-function DKMySql_Connect(host, name, pass, port)
-{
+function DKMySql_Connect(host, name, pass, port){
 	var send = online_assets+"/DKMySql/DKMySql.php?host=";
 	send += host;
 	if(port){
@@ -24,25 +20,19 @@ function DKMySql_Connect(host, name, pass, port)
 	return true;
 }
 
-///////////////////////////////
-function DKMySql_Database(name)
-{
+function DKMySql_Database(name){
 	var send = online_assets+"/DKMySql/DKMySql.php?database=";
 	send += name;
 	return ajaxGetUrl(send);
 }
 
-/////////////////////////////
-function DKMySql_Query(query)
-{
+function DKMySql_Query(query){
 	var send = online_assets+"/DKMySql/DKMySql.php?Query=";
 	send += query;
 	return ajaxGetUrl(send);
 }
 
-/////////////////////////
-function DKMySql_Prep(id)
-{
+function DKMySql_Prep(id){
 	//This should look at all the the "sql" tags and make sure the database has the (Database, Table and Field)
 	
 	var nodes = byId(id).getElementsByTagName("*");
@@ -61,9 +51,7 @@ function DKMySql_Prep(id)
 	}	
 }
 
-////////////////////////////////////////
-function DKMySql_PrepField(table, field)
-{
+function DKMySql_PrepField(table, field){
 	//TODO: put this somewhere else, gui elements will work with the current active database
 	// CHECK DATABASE //
 	/*
@@ -103,9 +91,7 @@ function DKMySql_PrepField(table, field)
 	}
 }
 
-//////////////////////////////////////
-function DKMySql_GetFirstRecordNum(id)
-{
+function DKMySql_GetFirstRecordNum(id){
 	//var nodes = byId(id).childNodes;
 	var nodes = byId(id).getElementsByTagName("*");
 	for(var i=0; i<nodes.length; i++){
@@ -124,9 +110,7 @@ function DKMySql_GetFirstRecordNum(id)
 	}
 }
 
-/////////////////////////////////////
-function DKMySql_GetLastRecordNum(id)
-{
+function DKMySql_GetLastRecordNum(id){
 	//var nodes = byId(id).childNodes;
 	var nodes = byId(id).getElementsByTagName("*");
 	for(var i=0; i<nodes.length; i++){
@@ -145,9 +129,7 @@ function DKMySql_GetLastRecordNum(id)
 	}
 }
 
-////////////////////////////////////////////////
-function DKMySql_GetPrevRecordNum(id, recordNum)
-{
+function DKMySql_GetPrevRecordNum(id, recordNum){
 	//var nodes = byId(id).childNodes;
 	var nodes = byId(id).getElementsByTagName("*");
 	for(var i=0; i<nodes.length; i++){
@@ -161,16 +143,13 @@ function DKMySql_GetPrevRecordNum(id, recordNum)
 			if(records.length > 2){
 				return records[1];
 			}
-			
 		}
 	}
 	
 	return 0;
 }
 
-////////////////////////////////////////////////
-function DKMySql_GetNextRecordNum(id, recordNum)
-{
+function DKMySql_GetNextRecordNum(id, recordNum){
 	//var nodes = byId(id).childNodes;
 	var nodes = byId(id).getElementsByTagName("*");
 	for(var i=0; i<nodes.length; i++){
@@ -191,9 +170,7 @@ function DKMySql_GetNextRecordNum(id, recordNum)
 	return 0;
 }
 
-//////////////////////////////////////////
-function DKMySql_LoadRecord(id, recordNum)
-{
+function DKMySql_LoadRecord(id, recordNum){
 	if(!recordNum){ return; }
 	var table;
 	var fields = [];
@@ -232,9 +209,7 @@ function DKMySql_LoadRecord(id, recordNum)
 	}
 }
 
-//////////////////////////////////////////
-function DKMySql_SaveRecord(id, recordNum)
-{
+function DKMySql_SaveRecord(id, recordNum){
 	//save any unmatching record fields
 	//var nodes = byId(id).childNodes;
 	var nodes = byId(id).getElementsByTagName("*");
@@ -260,9 +235,7 @@ function DKMySql_SaveRecord(id, recordNum)
 	}
 }
 
-////////////////////////////////////////////
-function DKMySql_DeleteRecord(id, recordNum)
-{
+function DKMySql_DeleteRecord(id, recordNum){
 	//save any unmatching record fields
 	//var nodes = byId(id).childNodes;
 	var nodes = byId(id).getElementsByTagName("*");
@@ -277,9 +250,7 @@ function DKMySql_DeleteRecord(id, recordNum)
 	}
 }
 
-///////////////////////////////////
-function DKMySql_Search(id, string)
-{
+function DKMySql_Search(id, string){
 	//save any unmatching record fields
 	//var nodes = byId(id).childNodes;
 	var nodes = byId(id).getElementsByTagName("*");

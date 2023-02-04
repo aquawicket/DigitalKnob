@@ -356,18 +356,19 @@ var Window = function Window(pointer)
     Window.prototype.setImmediate = function setImmediate() {}
     Window.prototype.setResizable = function setResizable() {}
     Window.prototype.sizeToContent = function sizeToContent() {}
-    Window.prototype.stop = function stop() {}
-	
-	/*
-	Window.prototype.toString = function toString(){
-		return "[object Window]"
-	}
-	*/
-	
+    Window.prototype.stop = function stop() {}	
     Window.prototype.updateCommands = function updateCommands() {}
     Window.prototype.XMLHttpRequest = function XMLHttpRequest(client) {
         return new XMLHttpRequest(client.pointer)
     }
+	
+	
+	if(this.toString() === "[object Object]"){
+		this.toString = function(){
+			return "[object Window]"
+		}
+	}
+	
     return EventTarget.call(this, pointer)
 }
 

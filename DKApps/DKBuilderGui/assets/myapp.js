@@ -18,7 +18,7 @@ myapp.loadFiles = function myapp_loadFiles() {
     DKPlugin("DKGui/DKConsole.js")
     DKPlugin("DKGui/DKGui.js")
     DKPlugin("DKGui/DKFrame.js")
-    //DKPlugin("DKGui/DKMenu.js")
+    DKPlugin("DKGui/DKMenu.js")
     DKPlugin("DKGui/DKMessageBox.js")
     DKPlugin("DKGui/DKDrag.js")
     //DKPlugin("DKGui/DKResize.js")
@@ -83,11 +83,14 @@ myapp.loadApp = function myapp_loadApp() {
 	/*
 	DKPlugin("DKCodeRunner/DKCodeRunner.js", function(){
 		DKCodeRunner.prototype.create();
-	})*/
+	})
+	*/
+	
 	
 	DKPlugin("DKOS/DKOS.js", function(){
 		DKOS.prototype.create();
 	})
+	
 }
 
 DUKTAPE && myapp.loadFiles();

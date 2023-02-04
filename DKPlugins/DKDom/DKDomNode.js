@@ -172,7 +172,14 @@ var Node = function Node(pointer) {
 		//TODO
     }
 
+	if(this.toString() === "[object Object]"){
+		this.toString = function(){
+			return "[object Node]"
+		}
+	}
+	
     return EventTarget.call(this, pointer)
+	//return this
 };
 
 // https://dom.spec.whatwg.org/#interface-node

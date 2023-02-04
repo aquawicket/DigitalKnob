@@ -18,6 +18,12 @@ var HTMLImageElement = function HTMLImageElement(pointer) {
 		}
     });
  
+	if(this.toString() === "[object Object]"){
+		this.toString = function(){
+			return "[object HTMLImageElement]"
+		}
+	}
+	
     return HTMLElement.call(this, pointer);
 }
 

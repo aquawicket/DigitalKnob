@@ -1,6 +1,4 @@
-/////////////////////////////
-function DKEditor_Menu_init()
-{
+function DKEditor_Menu_init(){
 	dk.create("DKEditor/DKEditor_Menu.html");
 	document.addEventListener("mousedown", DKEditor_Menu_onevent);
 	byId("DKEditor_Menu_Refresh").addEventListener("click", DKEditor_Menu_onevent);
@@ -33,9 +31,7 @@ function DKEditor_Menu_init()
 	*/
 }
 
-////////////////////////////
-function DKEditor_Menu_end()
-{
+function DKEditor_Menu_end(){
 	document.removeEventListener("mousedown", DKEditor_Menu_onevent);
 	byId("DKEditor_Menu_Refresh").removeEventListener("click", DKEditor_Menu_onevent);
 	byId("DKEditor_Menu_Reload").removeEventListener("click", DKEditor_Menu_onevent);
@@ -60,9 +56,7 @@ function DKEditor_Menu_end()
 	dk.close("DKEditor/DKEditor_Menu.html");
 }
 
-/////////////////////////////////////
-function DKEditor_Menu_OnEvent(event)
-{
+function DKEditor_Menu_OnEvent(event){
 	console.debug("DKEditor_Menu_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");	
 	if(event.currentTarget.id === "DKEditor_Menu_Command_Input"){
 		//TODO

@@ -1,22 +1,16 @@
-////////////////////////////
-function DKMidiDialog_init()
-{
+function DKMidiDialog_init(){
 	dk.create("DKMidi/DKMidiDialog.css");
 	dk.create("DKMidi/DKMidiDialog.html");
 	//DKMidiDialog_UpdatePorts();
 }
 
-///////////////////////////
-function DKMidiDialog_end()
-{
+function DKMidiDialog_end(){
 	//DKRemoveEvents(DKMidiDialog_onevent);
 	dk.close("DKMidi/DKMidiDialog.html");
 	dk.close("DKMidi/DKMidiDialog.css");
 }
 
-////////////////////////////////////
-function DKMidiDialog_OnEvent(event)
-{
+function DKMidiDialog_OnEvent(event){
 	if(event.currentTarget.id.includes("DKMidiDialogInput")){
 		DKMidiDialog_ToggleInput(DK_GetValue(event));
 		return;
@@ -28,9 +22,7 @@ function DKMidiDialog_OnEvent(event)
 	}
 }
 
-///////////////////////////////////
-function DKMidiDialog_UpdatePorts()
-{
+function DKMidiDialog_UpdatePorts(){
 	var inputs = DKMidi_GetMidiInputs();
 	var list = inputs.split(",");
 	byId("DKMidiDialogInputs").innerHTML = "";
@@ -53,16 +45,12 @@ function DKMidiDialog_UpdatePorts()
 	return true;
 }
 
-///////////////////////////////////////
-function DKMidiDialog_ToggleInput(name)
-{
+function DKMidiDialog_ToggleInput(name){
 	if(!DKMidi_ToggleMidiInput(name)){ return false; }
 	return true;
 }
 
-////////////////////////////////////////
-function DKMidiDialog_ToggleOutput(name)
-{
+function DKMidiDialog_ToggleOutput(name){
 	if(!DKMidi_ToggleMidiOutput(name)){ return false; }
 	return true;
 }

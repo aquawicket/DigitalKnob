@@ -1,4 +1,4 @@
-//"use strict";
+//"use strict"; //FIXME: "use strict" breaks Duktape
 
 const DEBUG = true;
 window.dk = new Object;

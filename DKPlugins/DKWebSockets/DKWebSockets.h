@@ -31,6 +31,7 @@
 #include "DK/DK.h"
 
 WARNING_DISABLE
+DISABLE_WARNING(4251)
 #include "src/uWS.h"
 WARNING_ENABLE
 

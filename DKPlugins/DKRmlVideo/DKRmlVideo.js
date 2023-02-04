@@ -1,100 +1,82 @@
-/////////////////////////////
-function DKRocketVideo_init()
-{
-	dk.create("DKRocketVideo/DKRocketVideo.html");
-	byId("DKRocketVideo_playpause").addEventListener("click", DKRocketVideo_onevent);
-	byId("DKRocketVideo_position").addEventListener("click", DKRocketVideo_onevent);
-	byId("DKRocketVideo_positiontrack").addEventListener("click", DKRocketVideo_onevent);
-	byId("DKRocketVideo_speaker").addEventListener("click", DKRocketVideo_onevent);
-	byId("DKRocketVideo_volume").addEventListener("click", DKRocketVideo_onevent);
-	byId("DKRocketVideo_volumetrack").addEventListener("click", DKRocketVideo_onevent);
+function DKRmlVideo_init(){
+	dk.create("DKRmlVideo/DKRmlVideo.html");
+	byId("DKRmlVideo_playpause").addEventListener("click", DKRmlVideo_onevent);
+	byId("DKRmlVideo_position").addEventListener("click", DKRmlVideo_onevent);
+	byId("DKRmlVideo_positiontrack").addEventListener("click", DKRmlVideo_onevent);
+	byId("DKRmlVideo_speaker").addEventListener("click", DKRmlVideo_onevent);
+	byId("DKRmlVideo_volume").addEventListener("click", DKRmlVideo_onevent);
+	byId("DKRmlVideo_volumetrack").addEventListener("click", DKRmlVideo_onevent);
 }
 
-////////////////////////////
-function DKRocketVideo_end()
-{
-	byId("DKRocketVideo_playpause").removeEventListener("click", DKRocketVideo_onevent);
-	byId("DKRocketVideo_position").removeEventListener("click", DKRocketVideo_onevent);
-	byId("DKRocketVideo_positiontrack").removeEventListener("click", DKRocketVideo_onevent);
-	byId("DKRocketVideo_speaker").removeEventListener("click", DKRocketVideo_onevent);
-	byId("DKRocketVideo_volume").removeEventListener("click", DKRocketVideo_onevent);
-	byId("DKRocketVideo_volumetrack").removeEventListener("click", DKRocketVideo_onevent);
-	dk.close("DKRocketVideo/DKRocketVideo.html");
+function DKRmlVideo_end(){
+	byId("DKRmlVideo_playpause").removeEventListener("click", DKRmlVideo_onevent);
+	byId("DKRmlVideo_position").removeEventListener("click", DKRmlVideo_onevent);
+	byId("DKRmlVideo_positiontrack").removeEventListener("click", DKRmlVideo_onevent);
+	byId("DKRmlVideo_speaker").removeEventListener("click", DKRmlVideo_onevent);
+	byId("DKRmlVideo_volume").removeEventListener("click", DKRmlVideo_onevent);
+	byId("DKRmlVideo_volumetrack").removeEventListener("click", DKRmlVideo_onevent);
+	dk.close("DKRmlVideo/DKRmlVideo.html");
 }
 
-/////////////////////////////////////
-function DKRocketVideo_OnEvent(event)
-{
-	if(event.currentTarget.id === "DKRocketVideo_playpause"){
-		DKRocketVideo_playpause();
+function DKRmlVideo_OnEvent(event){
+	if(event.currentTarget.id === "DKRmlVideo_playpause"){
+		DKRmlVideo_playpause();
 	}
-	if(event.currentTarget.id === "DKRocketVideo_position"){
-		DKRocketVideo_position();
+	if(event.currentTarget.id === "DKRmlVideo_position"){
+		DKRmlVideo_position();
 	}
-	if(event.currentTarget.id === "DKRocketVideo_positiontrack"){
-		DKRocketVideo_positiontrack();
+	if(event.currentTarget.id === "DKRmlVideo_positiontrack"){
+		DKRmlVideo_positiontrack();
 	}
-	if(event.currentTarget.id === "DKRocketVideo_speaker"){
-		DKRocketVideo_speaker();
+	if(event.currentTarget.id === "DKRmlVideo_speaker"){
+		DKRmlVideo_speaker();
 	}
-	if(event.currentTarget.id === "DKRocketVideo_volume"){
-		DKRocketVideo_volume();
+	if(event.currentTarget.id === "DKRmlVideo_volume"){
+		DKRmlVideo_volume();
 	}
-	if(event.currentTarget.id === "DKRocketVideo_volumetrack"){
-		DKRocketVideo_volumetrack();
+	if(event.currentTarget.id === "DKRmlVideo_volumetrack"){
+		DKRmlVideo_volumetrack();
 	}
 }
 
-//////////////////////////////////
-function DKRocketVideo_playpause()
-{
+function DKRmlVideo_playpause(){
 	//toggle play/pause
-	var src = byId("DKRocketVideo_playpause").src;
-	//console.log(("DKRocketVideo_playpause(): src="+src+"\n");
+	var src = byId("DKRmlVideo_playpause").src;
+	//console.log(("DKRmlVideo_playpause(): src="+src+"\n");
 	
 	if(src.indexOf("play.png") !== -1){
-		byId("DKRocketVideo_playpause").src = "DKRocketVideo/pause.png";
+		byId("DKRmlVideo_playpause").src = "DKRmlVideo/pause.png";
 	}
 	else{
-		byId("DKRocketVideo_playpause").src = "DKRocketVideo/play.png";
+		byId("DKRmlVideo_playpause").src = "DKRmlVideo/play.png";
 	}
 }
 
-/////////////////////////////////
-function DKRocketVideo_position()
-{
+function DKRmlVideo_position(){
 
 }
 
-//////////////////////////////////////
-function DKRocketVideo_positiontrack()
-{
+function DKRmlVideo_positiontrack(){
 	
 }
 
-////////////////////////////////
-function DKRocketVideo_speaker()
-{
+function DKRmlVideo_speaker(){
 	//toggle volume/mute
-	var src = byId("DKRocketVideo_speaker").src;
-	console.log(("DKRocketVideo_speaker(): src="+src+"\n");
+	var src = byId("DKRmlVideo_speaker").src;
+	console.log(("DKRmlVideo_speaker(): src="+src+"\n");
 	
 	if(src.indexOf("mute.png") !== -1){
-		byId("DKRocketVideo_speaker").src = "DKRocketVideo/volume3.png";
+		byId("DKRmlVideo_speaker").src = "DKRmlVideo/volume3.png";
 	}
 	else{
-		byId("DKRocketVideo_speaker").src = "DKRocketVideo/mute.png";
+		byId("DKRmlVideo_speaker").src = "DKRmlVideo/mute.png";
 	}
 }
 
-///////////////////////////////
-function DKRocketVideo_volume()
-{
+function DKRmlVideo_volume(){
 
 }
 
-////////////////////////////////////
-function DKRocketVideo_volumetrack()
-{
+function DKRmlVideo_volumetrack(){
 	
 }

@@ -306,6 +306,12 @@ var Element = function Element(pointer) {
     Element.prototype.toggleAttribute = function toggleAttribute() {//TODO
     }
 
+	if(this.toString() === "[object Object]"){
+		this.toString = function(){
+			return "[object Element]"
+		}
+	}
+	
     //GlobalEventHandlers
     return Node.call(this, pointer)
 

@@ -1,8 +1,10 @@
-"use strict";
-
-dk.php = DKPlugin(DKPhp, "singleton")
+//"use strict"; //FIXME: "use strict" breaks Duktape
 
 function DKPhp(){}
+
+//dk.php = DKPlugin(DKPhp, "singleton") //FIXME: "singleton" breaks Duktape
+dk.php = DKPlugin(DKPhp)
+
 
 // EXAMPLE
 //DKPhp.prototype.call("GET", "DK/DK.php", "Function", "args", "args", dkphp_callback);

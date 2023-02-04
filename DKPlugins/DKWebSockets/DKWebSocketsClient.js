@@ -1,8 +1,6 @@
 var websocket;
 
-//////////////////////////////////
-function DKWebSocketsClient_init()
-{
+function DKWebSocketsClient_init(){
 	dk.create("DKWebSockets/DKWebSocketsClient.html", function(){
 		window.addEventListener("DKWebSockets_OnMessageFromServer", DKWebSocketsClient_onevent);
 		byId("DKWebSocketsClient_CreateClient").addEventListener("click", DKWebSocketsClient_onevent);
@@ -11,9 +9,7 @@ function DKWebSocketsClient_init()
 	});
 }
 
-/////////////////////////////////
-function DKWebSocketsClient_end()
-{
+function DKWebSocketsClient_end(){
 	window.removeEventListener("DKWebSockets_OnMessageFromServer", DKWebSocketsClient_onevent);
 	byId("DKWebSocketsClient_CreateClient").removeEventListener("click", DKWebSocketsClient_onevent);
 	byId("DKWebSocketsClient_CloseClient").removeEventListener("click", DKWebSocketsClient_onevent);
@@ -21,9 +17,7 @@ function DKWebSocketsClient_end()
 	dk.close("DKWebSockets/DKWebSocketsClient.html");
 }
 
-//////////////////////////////////////////
-function DKWebSocketsClient_OnEvent(event)
-{
+function DKWebSocketsClient_OnEvent(event){
 	if(event.currentTarget.id === "DKWebSocketsClient_CreateClient"){
 		DKWebSocketsClient_CreateClient();
 	}
@@ -38,9 +32,7 @@ function DKWebSocketsClient_OnEvent(event)
 	}
 }
 
-//////////////////////////////////////////
-function DKWebSocketsClient_CreateClient()
-{
+function DKWebSocketsClient_CreateClient(){
 	if(!DK_GetValue("DKWebSocketsClient_Address")){
 		console.warn("DKWebSocketsClient_CreateClient(): please enter an address\n");
 		return;
@@ -71,9 +63,7 @@ function DKWebSocketsClient_CreateClient()
 	}
 }
 
-/////////////////////////////////////////
-function DKWebSocketsClient_CloseClient()
-{
+function DKWebSocketsClient_CloseClient(){
 	if(DK_GetBrowser() === "Rml"){
 		DKWebSockets_CloseClient();
 		return;
@@ -83,9 +73,7 @@ function DKWebSocketsClient_CloseClient()
 	websocket.close();
 }
 
-/////////////////////////////////////////////
-function DKWebSocketsClient_MessageToServer()
-{
+function DKWebSocketsClient_MessageToServer(){
 	var message = DK_GetValue("DKWebSocketsClient_send");
 	if(DK_GetBrowser() === "Rml"){
 		DKWebSockets_MessageToServer(message);
@@ -96,8 +84,6 @@ function DKWebSocketsClient_MessageToServer()
 	websocket.send(message);
 }
 
-////////////////////////////////////////////////////////
-function DKWebSocketsClient_OnMessageFromServer(message)
-{
+function DKWebSocketsClient_OnMessageFromServer(message){
 	byId("DKWebSocketsClient_receive").value = message;
 }

@@ -81,6 +81,12 @@ var XMLHttpRequestEventTarget = function XMLHttpRequestEventTarget(pointer) {
         }
     });
 
+	if(this.toString() === "[object Object]"){
+		this.toString = function(){
+			return "[object XMLHttpRequestEventTarget]"
+		}
+	}
+	
     return EventTarget.call(this, pointer);
 }
 

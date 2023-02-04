@@ -38,10 +38,8 @@ bool DKMySql::Init(){
 	
 	DKClass::DKCreate("DKCurl");
 #ifdef USE_mysql
-	if(mysql_init(&mysql)==NULL){
-		DKERROR("Failed to initate MySQL connection\n");
-		return false;
-	}
+	if(mysql_init(&mysql)==NULL)
+		return DKERROR("Failed to initate MySQL connection\n");
 #endif
 	return true;
 }
@@ -58,16 +56,11 @@ bool DKMySql::End(){
 }
 
 
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool DKMySql::Connect(const DKString& host, const DKString& name, const DKString& pass, const DKString& port)
-{
+bool DKMySql::Connect(const DKString& host, const DKString& name, const DKString& pass, const DKString& port){
 	DKDEBUGFUNC(host, name, pass, port);
 #ifdef USE_mysql
-	if(!mysql_real_connect(&mysql,host.c_str(),name.c_str(),pass.c_str(),NULL,port,NULL,0)){ 
-		DKERROR("Failed to connect to MySQL\n");
-		return false;
-	}
+	if(!mysql_real_connect(&mysql,host.c_str(),name.c_str(),pass.c_str(),NULL,port,NULL,0))
+		return DKERROR("Failed to connect to MySQL\n");
 #else
 
 	DKString response;
@@ -89,19 +82,15 @@ bool DKMySql::Connect(const DKString& host, const DKString& name, const DKString
 	}	
 #endif
 
-	DKERROR("Could not connect to MySql server\n");
-	return false;
+	return DKERROR("Could not connect to MySql server\n");
 }
 
-////////////////////////////////////////////////
-bool DKMySql::Database(const DKString& database)
-{
+bool DKMySql::Database(const DKString& database){
 	DKDEBUGFUNC(database);
 #ifdef USE_mysql
 	//Not setup
 #else
 	
-
 	DKString response;
 	DKString send = DKFile::online_assets+"/DKMySql/DKMySql.php?database=";
 	send += database;
@@ -112,18 +101,13 @@ bool DKMySql::Database(const DKString& database)
 	return false;
 }
 
-
-///////////////////////////////////////////////////////////
-bool DKMySql::Query(DKString query, DKStringArray& results)
-{
+bool DKMySql::Query(DKString query, DKStringArray& results){
 	DKDEBUGFUNC(query, "DKStringArray&");
 	results.clear();
 #ifdef USE_mysql
 	//if(mysql_real_query(&mysql,query.c_str(),strlen(query.c_str())) != 0){
-	if(mysql_query(&mysql,query.c_str()) != 0){
-		DKERROR( "\n Query failed: %s\n"/*,mysql_error(&mysql)*/);
-		return false;
-	}
+	if(mysql_query(&mysql,query.c_str()) != 0)
+		return DKERROR( "\n Query failed: %s\n"/*,mysql_error(&mysql)*/);
 
     //http://anaturb.net/MySQL/mysql_c.htm
 	MYSQL_RES *res;
@@ -142,10 +126,8 @@ bool DKMySql::Query(DKString query, DKStringArray& results)
 
 	DKCurl::Get("DKCurl0")->HttpToString(send,response);
 
-	if(has(response, "DKERROR")){
-		DKERROR(response+"\n");
-		return false;
-	}
+	if(has(response, "DKERROR"))
+		return DKERROR(response+"\n");
 
 	//split up the csv into a DKStringArray
 	std::istringstream ss(response);

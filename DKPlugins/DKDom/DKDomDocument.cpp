@@ -41,6 +41,7 @@ bool DKDomDocument::Init(){
 	DKDuktape::AttachFunction("CPP_DKDomDocument_getElementsByTagName", DKDomDocument::getElementsByTagName);
 	DKClass::DKCreate("DKDom/DKDomDocument.js");
 
+	/*
 	//Create DOM javascript instance of the document using the documents element address
 	if (DKClass::DKValid("DKRml,DKRml0")) {
 		DKString rval;
@@ -50,6 +51,7 @@ bool DKDomDocument::Init(){
 	DKDuktape* dt = DKDuktape::Get();
 	duk_eval_string(dt->ctx, "console.log('document = '+document)");
 	//duk_eval_string(dt->ctx, "console.log('document.getElementById = '+document.getElementById)");
+	*/
 	return true;
 }
 
@@ -69,8 +71,7 @@ int DKDomDocument::body(duk_context* ctx){
 int DKDomDocument::createElement(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString tag = duk_require_string(ctx, 0);
-	Rml::Element* doc = DKRml::Get()->document;
-	Rml::Element* element = doc->AppendChild(DKRml::Get()->document->CreateElement(tag.c_str()), true);
+	Rml::Element* element = DKRml::Get()->document->AppendChild(DKRml::Get()->document->CreateElement(tag.c_str()), false);
 	if(!element)
 		return DKERROR("DKDomDocument::createElement(): element invalid\n");
 	DKString elementAddress = DKRml::elementToAddress(element);

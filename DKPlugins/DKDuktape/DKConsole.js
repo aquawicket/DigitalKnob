@@ -75,9 +75,17 @@ var Console = function Console(pointer) {
 		msg = Console_HandleColor(msg)
         CPP_DKConsole_warn(msg + "\n");
     }
+	
+	// Chrome returns [object Object]
+	/*
+	if(this.toString() === "[object Object]"){
+		this.toString = function(){
+			return "[object Console]"
+		}
+	}
+	*/
 }
 
 
-
 var console = new Console("console");
-window.console = console;
+//window.console = console;

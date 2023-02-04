@@ -497,7 +497,7 @@ endfunction()
 ###############################################################################
 # dk_createOsMacros(func)
 #
-#	Prefix a function with OS_ macros. Calling the OS_function will only be called if the current OS or OS_HOST is true
+#	Prefix a function with <OS>_ macros. Calling the <OS>_function will only be called if the current <OS> or <OS_HOST> is true
 #
 #	@func	- The func of the function to create aliases for
 #
@@ -1306,15 +1306,15 @@ function(dk_disable plugin)
 	#if(target)
 		dk_unset(${ARGV1})
 		dk_unset(HAVE_${ARGV1})
-		# In c++ we can't use certian symbals in the preprocess or for macros. - must be turned to _
-		string(REPLACE "-" "_" argv1_macro "${ARGV1}")
+		# In c/c++ we can't use certian symbals in the preprocess or for macros. I.E. - must be turned to _
+		string(MAKE_C_IDENTIFIER ${ARGV1} argv1_macro)
 		dk_undefine(HAVE_${argv1_macro})
 		dk_undepend(${ARGV1})
 	else()
 		dk_unset(${plugin})
 		dk_unset(HAVE_${plugin})
-		# In c++ we can't use certian symbals in the preprocess or for macros. - must be turned to _
-		string(REPLACE "-" "_" plugin_macro "${plugin}")
+		# In c/c++ we can't use certian symbals in the preprocess or for macros. I.E. - must be turned to _
+		string(MAKE_C_IDENTIFIER ${plugin} plugin_macro)
 		dk_undefine(HAVE_${plugin_macro})
 		dk_undepend(${plugin})
 	endif()
@@ -3065,6 +3065,14 @@ function(dk_undepend plugin)
 		endif()
 	endif()
 	
+	dk_dump(plugin)
+	# remove from ${dkdepend_list}
+	list(FIND dkdepend_list ${plugin} index)
+	if(${index} GREATER -1)
+		# is was found, now remove
+		list(REMOVE_ITEM dkdepend_list ${plugin})
+	endif()
+	
 	dk_info("DISABLING ${ARGV}")
 	dk_set(dk_disabled_list ${dk_disabled_list} "${ARGV}")
 	if(${ARGC} GREATER 1)
@@ -3095,7 +3103,7 @@ function(dk_runDepends plugin)
 	unset(depends_script)
 	unset(index)
 	
-	set(keepCommands "if;IF;else;ELSE;find_library;FIND_LIBRARY;return;RETURN;dk_disable;dk_set;dk_makeDirectory;dk_findLibrary;dk_require")
+	set(keepCommands "if;IF;else;ELSE;find_library;FIND_LIBRARY;return;RETURN;dk_disable;dk_set;dk_makeDirectory;dk_findLibrary;dk_require;dk_undepend")
 	set(KEEPLINE 0)
 	foreach(line ${lines})
 		
@@ -3125,7 +3133,7 @@ function(dk_runDepends plugin)
 		endif()
 	endforeach()
 	
-	set(keepCommands "if;IF;else;ELSE;find_library;FIND_LIBRARY;return;RETURN;dk_enable;dk_disable;dk_depend;dk_set;message;dk_error;dk_warn;dk_info;dk_debug;dk_verbose;dk_trace;dk_makeDirectory;dk_findLibrary;dk_require") #dk_assert
+	set(keepCommands "if;IF;else;ELSE;find_library;FIND_LIBRARY;return;RETURN;dk_enable;dk_disable;dk_depend;dk_set;message;dk_error;dk_warn;dk_info;dk_debug;dk_verbose;dk_trace;dk_makeDirectory;dk_findLibrary;dk_require;dk_undepend")
 	set(KEEPLINE 0)
 	foreach(line ${lines})
 	
@@ -3158,7 +3166,7 @@ function(dk_runDepends plugin)
 	if(disable_script)
 		file(WRITE ${plugin_path}/DISABLES.TMP "${disable_script}")
 		INCLUDE(${plugin_path}/DISABLES.TMP)
-		dk_remove(${plugin_path}/DISABLES.TMP)
+		#dk_remove(${plugin_path}/DISABLES.TMP)
 	endif()
 	
 	if(depends_script)
@@ -3169,7 +3177,7 @@ function(dk_runDepends plugin)
 		endif()
 		file(WRITE ${plugin_path}/DEPENDS.TMP "${depends_script}")
 		INCLUDE(${plugin_path}/DEPENDS.TMP)
-		dk_remove(${plugin_path}/DEPENDS.TMP)
+		#dk_remove(${plugin_path}/DEPENDS.TMP)
 		if(${ARGC} GREATER 1)
 			dk_set(${ARGV1} OFF)
 		endif()
@@ -4225,31 +4233,33 @@ function(dk_import url)
 	dk_verbose("[${plugin_var}_BRANCH] =		${${plugin_var}_BRANCH}")
 	dk_verbose("[${plugin_var}_TAG] =			${${plugin_var}_TAG}")
 	
-	### .git
-	dk_getExtension(${url} extension)
-	if("${extension}" STREQUAL ".git")
-		if(NOT EXISTS ${${plugin_var}}/.git)
-			dk_set(CURRENT_DIR ${DIGITALKNOB}/${3RDPARTY})
-			if(EXISTS ${${plugin_var}})
-				dk_remove(${${plugin_var}})
-			endif()
-			if(NOT EXISTS ${${plugin_var}})
-				dk_makeDirectory(${${plugin_var}})
+	if(NOT DKOFFLINE)
+		### .git
+		dk_getExtension(${url} extension)
+		if("${extension}" STREQUAL ".git")
+			if(NOT EXISTS ${${plugin_var}}/.git)
+				dk_set(CURRENT_DIR ${DIGITALKNOB}/${3RDPARTY})
+				if(EXISTS ${${plugin_var}})
+					dk_remove(${${plugin_var}})
+				endif()
+				if(NOT EXISTS ${${plugin_var}})
+					dk_makeDirectory(${${plugin_var}})
+				endif()
+				dk_set(CURRENT_DIR ${${plugin_var}})
+				dk_command(${GIT_EXE} clone ${${plugin_var}_URL} ${${plugin_var}})
 			endif()
 			dk_set(CURRENT_DIR ${${plugin_var}})
-			dk_command(${GIT_EXE} clone ${${plugin_var}_URL} ${${plugin_var}})
+			dk_command(${GIT_EXE} checkout -- .)
+			dk_command(${GIT_EXE} checkout ${${plugin_var}_BRANCH})
+			dk_command(${GIT_EXE} pull)
+			if(${plugin_var}_TAG)
+				dk_command(${GIT_EXE} checkout ${${plugin_var}_TAG})
+			endif()
+		### download
+		else()
+			dk_verbose("dk_install(${plugin} ${ARGN})")
+			dk_install(${plugin} ${ARGN})
 		endif()
-		dk_set(CURRENT_DIR ${${plugin_var}})
-		dk_command(${GIT_EXE} checkout -- .)
-		dk_command(${GIT_EXE} checkout ${${plugin_var}_BRANCH})
-		dk_command(${GIT_EXE} pull)
-		if(${plugin_var}_TAG)
-			dk_command(${GIT_EXE} checkout ${${plugin_var}_TAG})
-		endif()
-	### download
-	else()
-		dk_verbose("dk_install(${plugin} ${ARGN})")
-		dk_install(${plugin} ${ARGN})
 	endif()
 	
 	dk_includes("${ARGN}" "PATCH" has_patch)

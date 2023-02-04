@@ -7,7 +7,6 @@ var rPath;
 
 //var DKSaveFile_callback;
 
-//////////////////////////
 function DKSaveFile_init() {
     dk.create("DKFile/DKSaveFile.css");
     dk.create("DKFile/DKSaveFile.html");
@@ -25,7 +24,6 @@ function DKSaveFile_init() {
     console.log(drives);
 }
 
-/////////////////////////
 function DKSaveFile_end() {
     byId("DKFile/DKSaveFile.html").removeEventListener("SetFile", DKSaveFile_onevent);
     byId("DKSaveFileCancel").removeEventListener("click", DKSaveFile_onevent);
@@ -36,7 +34,6 @@ function DKSaveFile_end() {
     dk.close("DKFile/DKSaveFile.css");
 }
 
-//////////////////////////////////
 function DKSaveFile_onevent(event) {
     //console.log("DKSaveFile_onevent("+event+")"); 
     //console.log("DKSaveFile_onevent("+event.type+","+event.value+")");
@@ -114,14 +111,12 @@ function DKSaveFile_onevent(event) {
 }
 
 /*
-//////////////////////////////////////
 function DKSaveFile_GetFIle(callback)
 {
 	DKSaveFile_callback = callback;
 }
 */
 
-//////////////////////////////////////
 function DKSaveFile_OpenFolder(path) {
     if (DKSaveFile_UpdatePath(path)) {
         return true;
@@ -129,7 +124,6 @@ function DKSaveFile_OpenFolder(path) {
     return false;
 }
 
-////////////////////////////////////
 function DKSaveFile_OpenFile(path) {
     if (DK_GetOS() === "Android") {
         aPath = path;
@@ -144,7 +138,6 @@ function DKSaveFile_OpenFile(path) {
     byId("DKSaveFilePath").value = aPath;
 }
 
-//////////////////////////////////////
 function DKSaveFile_UpdatePath(path) {
     if (!path)
         return error("path invalid");

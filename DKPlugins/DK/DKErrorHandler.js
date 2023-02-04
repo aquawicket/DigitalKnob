@@ -1,4 +1,4 @@
-//"use strict";
+//"use strict"; //FIXME: "use strict" breaks Duktape
 //https://stackoverflow.com/a/36317375/688352
 
 function DKErrorHandler(){}

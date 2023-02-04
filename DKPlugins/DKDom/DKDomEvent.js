@@ -1,7 +1,7 @@
 //https://developer.mozilla.org/en-US/docs/Web/API/Event
 
 //event_instances = [];
-var Event = function Event(pointer) //https://developer.mozilla.org/en-US/docs/Web/API/Event/Event
+var Event = function(pointer) //https://developer.mozilla.org/en-US/docs/Web/API/Event/Event
 {
     this.pointer = pointer;
 
@@ -158,6 +158,12 @@ var Event = function Event(pointer) //https://developer.mozilla.org/en-US/docs/W
         CPP_DKDomEvent_preventCapture(pointer)
     }
 
+	if(this.toString() === "[object Object]"){
+		this.toString = function(){
+			return "[object Event]"
+		}
+	}
+	
     //console.log("dispatching event")
     //this.currentTarget.dispatchEvent(this)
     //return this;

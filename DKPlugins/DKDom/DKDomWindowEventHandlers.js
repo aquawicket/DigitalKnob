@@ -166,6 +166,13 @@ var WindowEventHandlers = function WindowEventHandlers(pointer)
             this.unload_func = func
         }
     })
+	
+	if(this.toString() === "[object Object]"){
+		this.toString = function(){
+			return "[object WindowEventHandlers]"
+		}
+	}
+	
     return this
 }
 WindowEventHandlers.prototype = EventTarget.prototype

@@ -1,4 +1,4 @@
-"use strict";
+//"use strict"; //FIXME: "use strict" breaks Duktape
 
 DKAudioPlayer.prototype = Object.create(DKPlugin.prototype);
 function DKAudioPlayer(identifier) {

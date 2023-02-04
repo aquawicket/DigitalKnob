@@ -171,6 +171,12 @@ var Event = function Event(pointer) //https://developer.mozilla.org/en-US/docs/W
     }
     ;
 
+	if(this.toString() === "[object Object]"){
+		this.toString = function(){
+			return "[object Event]"
+		}
+	}
+	
     //console.log("dispatching event");
     //this.currentTarget.dispatchEvent(this);
     //return this;

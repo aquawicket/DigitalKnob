@@ -35,9 +35,7 @@
 
 DKString DKWidgetJS::htmlfile;
 
-///////////////////////
-bool DKWidgetJS::Init()
-{
+bool DKWidgetJS::Init(){
 	DKDEBUGFUNC();
 	//DKDuktape::AttachFunction("CPP_DKWidget_NewWidget", DKWidgetJS::NewWidget);
 	DKDuktape::AttachFunction("CPP_DKWidget_AddDragHandle", DKWidgetJS::AddDragHandle);
@@ -111,9 +109,7 @@ bool DKWidgetJS::Init()
 	return true;
 }
 
-///////////////////////////////////////////
-int DKWidgetJS::NewWidget(duk_context* ctx)
-{
+int DKWidgetJS::NewWidget(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
     DKString file = duk_require_string(ctx, 0);
 	DKString parent;
@@ -130,36 +126,28 @@ int DKWidgetJS::NewWidget(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////////
-int DKWidgetJS::Show(duk_context* ctx)
-{
+int DKWidgetJS::Show(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString string = duk_require_string(ctx, 0);
 	if(!DKWidget::Show(string)){ return 0; }
 	return 1;
 }
 
-//////////////////////////////////////
-int DKWidgetJS::Hide(duk_context* ctx)
-{
+int DKWidgetJS::Hide(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString string = duk_require_string(ctx, 0);
 	if(!DKWidget::Hide(string)){ return 0; }
 	return 1;
 }
 
-////////////////////////////////////////
-int DKWidgetJS::Toggle(duk_context* ctx)
-{
+int DKWidgetJS::Toggle(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString string = duk_require_string(ctx, 0);
 	if(!DKWidget::Toggle(string)){ return 0; }
 	return 1;
 }
 
-//////////////////////////////////////////////
-int DKWidgetJS::GetAttribute(duk_context* ctx)
-{
+int DKWidgetJS::GetAttribute(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKString param = duk_require_string(ctx, 1);
@@ -169,9 +157,7 @@ int DKWidgetJS::GetAttribute(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////////////////
-int DKWidgetJS::SetAttribute(duk_context* ctx)
-{
+int DKWidgetJS::SetAttribute(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKString param = duk_require_string(ctx, 1);
@@ -180,9 +166,7 @@ int DKWidgetJS::SetAttribute(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////////////
-int DKWidgetJS::GetValue(duk_context* ctx)
-{
+int DKWidgetJS::GetValue(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString evt = duk_require_string(ctx, 0);
 	//DKINFO("DKWidgetJS::GetValue("+evt+")\n");
@@ -210,9 +194,7 @@ int DKWidgetJS::GetValue(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////////////
-int DKWidgetJS::SetValue(duk_context* ctx)
-{
+int DKWidgetJS::SetValue(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKString value;
@@ -227,9 +209,7 @@ int DKWidgetJS::SetValue(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////////////////
-int DKWidgetJS::SetInnerHtml(duk_context* ctx)
-{
+int DKWidgetJS::SetInnerHtml(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKString value = duk_require_string(ctx, 1);
@@ -237,9 +217,7 @@ int DKWidgetJS::SetInnerHtml(duk_context* ctx)
 	return 1;
 }
 
-////////////////////////////////////////////////////
-int DKWidgetJS::SetInnerHtmlString(duk_context* ctx)
-{
+int DKWidgetJS::SetInnerHtmlString(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKString value = duk_require_string(ctx, 1);
@@ -247,9 +225,7 @@ int DKWidgetJS::SetInnerHtmlString(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////////////////
-int DKWidgetJS::GetInnerHtml(duk_context* ctx)
-{
+int DKWidgetJS::GetInnerHtml(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKString value;
@@ -258,9 +234,7 @@ int DKWidgetJS::GetInnerHtml(duk_context* ctx)
 	return 1;
 }
 
-////////////////////////////////////////////////////
-int DKWidgetJS::GetInnerHtmlString(duk_context* ctx)
-{
+int DKWidgetJS::GetInnerHtmlString(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKString value;
@@ -269,9 +243,7 @@ int DKWidgetJS::GetInnerHtmlString(duk_context* ctx)
 	return 1;
 }
 
-////////////////////////////////////////////////
-int DKWidgetJS::GetAvailableId(duk_context* ctx)
-{
+int DKWidgetJS::GetAvailableId(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKString out;
@@ -280,9 +252,7 @@ int DKWidgetJS::GetAvailableId(duk_context* ctx)
 	return 1;
 }
 
-///////////////////////////////////////////////
-int DKWidgetJS::CreateElement(duk_context* ctx)
-{
+int DKWidgetJS::CreateElement(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString parent = duk_require_string(ctx, 0);
 	DKString tag = duk_require_string(ctx, 1);
@@ -293,9 +263,7 @@ int DKWidgetJS::CreateElement(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////////////////////////
-int DKWidgetJS::CreateElementBefore(duk_context* ctx)
-{
+int DKWidgetJS::CreateElementBefore(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString parent = duk_require_string(ctx, 0);
 	DKString tag = duk_require_string(ctx, 1);
@@ -306,9 +274,7 @@ int DKWidgetJS::CreateElementBefore(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////////////////
-int DKWidgetJS::GetProperty(duk_context* ctx)
-{
+int DKWidgetJS::GetProperty(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKString param = duk_require_string(ctx, 1);
@@ -319,9 +285,7 @@ int DKWidgetJS::GetProperty(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////////////////
-int DKWidgetJS::SetProperty(duk_context* ctx)
-{
+int DKWidgetJS::SetProperty(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKString param = duk_require_string(ctx, 1);
@@ -330,9 +294,7 @@ int DKWidgetJS::SetProperty(duk_context* ctx)
 	return 1;
 }
 
-///////////////////////////////////////////
-int DKWidgetJS::GetParent(duk_context* ctx)
-{
+int DKWidgetJS::GetParent(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKString parent;
@@ -343,9 +305,7 @@ int DKWidgetJS::GetParent(duk_context* ctx)
 	return 1;
 }
 
-///////////////////////////////////////////////
-int DKWidgetJS::GetFirstChild(duk_context* ctx)
-{
+int DKWidgetJS::GetFirstChild(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKString child = DKWidget::GetFirstChild(id);
@@ -353,9 +313,7 @@ int DKWidgetJS::GetFirstChild(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////////////////
-int DKWidgetJS::GetLastChild(duk_context* ctx)
-{
+int DKWidgetJS::GetLastChild(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKString child = DKWidget::GetLastChild(id);
@@ -363,9 +321,7 @@ int DKWidgetJS::GetLastChild(duk_context* ctx)
 	return 1;
 }
 
-///////////////////////////////////////////////
-int DKWidgetJS::ValidateColor(duk_context* ctx)
-{
+int DKWidgetJS::ValidateColor(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString string = duk_require_string(ctx, 0);
 	if(!DKWidget::ValidateColor(string)){ string = ""; }
@@ -373,9 +329,7 @@ int DKWidgetJS::ValidateColor(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////////////////
-int DKWidgetJS::GetElements(duk_context* ctx)
-{
+int DKWidgetJS::GetElements(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKStringArray elements;
@@ -385,9 +339,7 @@ int DKWidgetJS::GetElements(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////////////////////
-int DKWidgetJS::GetMouseWindowX(duk_context* ctx)
-{
+int DKWidgetJS::GetMouseWindowX(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	int mouseX = 0;
 	DKWidget::GetMouseWindowX(mouseX);
@@ -395,9 +347,7 @@ int DKWidgetJS::GetMouseWindowX(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////////////////////
-int DKWidgetJS::GetMouseWindowY(duk_context* ctx)
-{
+int DKWidgetJS::GetMouseWindowY(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	int mouseY = 0;
 	DKWidget::GetMouseWindowY(mouseY);
@@ -405,9 +355,7 @@ int DKWidgetJS::GetMouseWindowY(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////////////////////
-int DKWidgetJS::GetMouseElementX(duk_context* ctx)
-{
+int DKWidgetJS::GetMouseElementX(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString element = duk_require_string(ctx, 0);
 	int winX = 0;
@@ -417,9 +365,7 @@ int DKWidgetJS::GetMouseElementX(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////////////////////
-int DKWidgetJS::GetMouseElementY(duk_context* ctx)
-{
+int DKWidgetJS::GetMouseElementY(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString element = duk_require_string(ctx, 0);
 	int winX = 0;
@@ -429,18 +375,14 @@ int DKWidgetJS::GetMouseElementY(duk_context* ctx)
 	return 1;
 }
 
-///////////////////////////////////////////////
-int DKWidgetJS::ElementExists(duk_context* ctx)
-{
+int DKWidgetJS::ElementExists(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	if(!DKWidget::GetElementById(id)){ return 0; }
 	return 1;
 }
 
-//////////////////////////////////////////////
-int DKWidgetJS::HasAttribute(duk_context* ctx)
-{
+int DKWidgetJS::HasAttribute(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKString attrib = duk_require_string(ctx, 1);
@@ -450,9 +392,7 @@ int DKWidgetJS::HasAttribute(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////////////////
-int DKWidgetJS::HasProperty(duk_context* ctx)
-{
+int DKWidgetJS::HasProperty(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKString property = duk_require_string(ctx, 1);
@@ -462,9 +402,7 @@ int DKWidgetJS::HasProperty(duk_context* ctx)
 	return 1;
 }
 
-////////////////////////////////////////////
-int DKWidgetJS::GetTagName(duk_context* ctx)
-{
+int DKWidgetJS::GetTagName(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	Rocket::Core::Element* element = DKWidget::GetElementById(id);
@@ -473,9 +411,7 @@ int DKWidgetJS::GetTagName(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////////////////
-int DKWidgetJS::AppendChild(duk_context* ctx)
-{
+int DKWidgetJS::AppendChild(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString parent = duk_require_string(ctx, 0);
 	DKString child = duk_require_string(ctx, 1);
@@ -483,9 +419,7 @@ int DKWidgetJS::AppendChild(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////////////////
-int DKWidgetJS::PrependChild(duk_context* ctx)
-{
+int DKWidgetJS::PrependChild(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString parent = duk_require_string(ctx, 0);
 	DKString child = duk_require_string(ctx, 1);
@@ -493,18 +427,14 @@ int DKWidgetJS::PrependChild(duk_context* ctx)
 	return 1;
 }
 
-///////////////////////////////////////////////
-int DKWidgetJS::RemoveElement(duk_context* ctx)
-{
+int DKWidgetJS::RemoveElement(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	if(!DKWidget::RemoveElement(id)){ return 0; }
 	return 1;
 }
 
-//////////////////////////////////////////////
-int DKWidgetJS::InsertBefore(duk_context* ctx)
-{
+int DKWidgetJS::InsertBefore(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString parent = duk_require_string(ctx, 0);
 	DKString child = duk_require_string(ctx, 1);
@@ -512,9 +442,7 @@ int DKWidgetJS::InsertBefore(duk_context* ctx)
 	return 1;
 }
 
-///////////////////////////////////////////////
-int DKWidgetJS::AddDragHandle(duk_context* ctx)
-{
+int DKWidgetJS::AddDragHandle(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString element = duk_require_string(ctx, 0);
 	DKString drag = duk_require_string(ctx, 1);
@@ -522,18 +450,14 @@ int DKWidgetJS::AddDragHandle(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////////////////////
-int DKWidgetJS::RemoveDragHandle(duk_context* ctx)
-{
+int DKWidgetJS::RemoveDragHandle(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString element = duk_require_string(ctx, 0);
 	if(!DKWidget::RemoveDragHandle(element)){ return 0; }
 	return 1;
 }
 
-/////////////////////////////////////////////////
-int DKWidgetJS::AddResizeHandle(duk_context* ctx)
-{
+int DKWidgetJS::AddResizeHandle(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString element = duk_require_string(ctx, 0);
 	DKString resize = duk_require_string(ctx, 1);
@@ -541,18 +465,14 @@ int DKWidgetJS::AddResizeHandle(duk_context* ctx)
 	return 1;
 }
 
-////////////////////////////////////////////////////
-int DKWidgetJS::RemoveResizeHandle(duk_context* ctx)
-{
+int DKWidgetJS::RemoveResizeHandle(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	if(!DKWidget::RemoveResizeHandle(id)){ return 0; }
 	return 1;
 }
 
-//////////////////////////////////////////////
-int DKWidgetJS::GetOffsetTop(duk_context* ctx)
-{
+int DKWidgetJS::GetOffsetTop(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	Rocket::Core::Element* element = DKWidget::GetElementById(id);
@@ -562,9 +482,7 @@ int DKWidgetJS::GetOffsetTop(duk_context* ctx)
 	return 1;
 }
 
-///////////////////////////////////////////////
-int DKWidgetJS::GetOffsetLeft(duk_context* ctx)
-{
+int DKWidgetJS::GetOffsetLeft(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	Rocket::Core::Element* element = DKWidget::GetElementById(id);
@@ -574,9 +492,7 @@ int DKWidgetJS::GetOffsetLeft(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////////////////////
-int DKWidgetJS::GetOffsetHeight(duk_context* ctx)
-{
+int DKWidgetJS::GetOffsetHeight(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	Rocket::Core::Element* element = DKWidget::GetElementById(id);
@@ -586,9 +502,7 @@ int DKWidgetJS::GetOffsetHeight(duk_context* ctx)
 	return 1;
 }
 
-////////////////////////////////////////////////
-int DKWidgetJS::GetOffsetWidth(duk_context* ctx)
-{
+int DKWidgetJS::GetOffsetWidth(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	Rocket::Core::Element* element = DKWidget::GetElementById(id);
@@ -598,9 +512,7 @@ int DKWidgetJS::GetOffsetWidth(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////////////////
-int DKWidgetJS::GetOuterHtml(duk_context* ctx)
-{
+int DKWidgetJS::GetOuterHtml(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKString string;
@@ -609,9 +521,7 @@ int DKWidgetJS::GetOuterHtml(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////////////////////
-int DKWidgetJS::RemoveAttribute(duk_context* ctx)
-{
+int DKWidgetJS::RemoveAttribute(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString element = duk_require_string(ctx, 0);
 	DKString attrib = duk_require_string(ctx, 1);
@@ -621,9 +531,7 @@ int DKWidgetJS::RemoveAttribute(duk_context* ctx)
 	return 0;
 }
 
-////////////////////////////////////////////////
-int DKWidgetJS::RemoveProperty(duk_context* ctx)
-{
+int DKWidgetJS::RemoveProperty(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString element = duk_require_string(ctx, 0);
 	DKString attrib = duk_require_string(ctx, 1);
@@ -633,9 +541,7 @@ int DKWidgetJS::RemoveProperty(duk_context* ctx)
 	return 0;
 }
 
-/////////////////////////////////////////////////
-int DKWidgetJS::GetFocusElement(duk_context* ctx)
-{
+int DKWidgetJS::GetFocusElement(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id;
 	if(!DKWidget::GetFocusElement(id)){ return 0; }
@@ -643,27 +549,21 @@ int DKWidgetJS::GetFocusElement(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////////////
-int DKWidgetJS::SetFocus(duk_context* ctx)
-{
+int DKWidgetJS::SetFocus(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id;
 	if(!DKWidget::SetFocus(id)){ return 0; }
 	return 1;
 }
 
-/////////////////////////////////////////
-int DKWidgetJS::Visible(duk_context* ctx)
-{
+int DKWidgetJS::Visible(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	if(!DKWidget::Visible(id)){ return 0; }
 	return 1;
 }
 
-/////////////////////////////////////////////
-int DKWidgetJS::WindowWidth(duk_context* ctx)
-{
+int DKWidgetJS::WindowWidth(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	int width;
 	if(!DKWindow::GetWidth(width)){ return 0; }
@@ -671,9 +571,7 @@ int DKWidgetJS::WindowWidth(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////////////////
-int DKWidgetJS::WindowHeight(duk_context* ctx)
-{
+int DKWidgetJS::WindowHeight(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	int height;
 	if(!DKWindow::GetHeight(height)){ return 0; }
@@ -681,9 +579,7 @@ int DKWidgetJS::WindowHeight(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////////////
-int DKWidgetJS::GetFile(duk_context* ctx)
-{
+int DKWidgetJS::GetFile(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKString file;
@@ -692,9 +588,7 @@ int DKWidgetJS::GetFile(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////////////
-int DKWidgetJS::SetFile(duk_context* ctx)
-{
+int DKWidgetJS::SetFile(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKString file = duk_require_string(ctx, 1);
@@ -702,9 +596,7 @@ int DKWidgetJS::SetFile(duk_context* ctx)
 	return 1;
 }
 
-///////////////////////////////////////////
-int DKWidgetJS::GetOption(duk_context* ctx)
-{
+int DKWidgetJS::GetOption(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	//DKINFO("DKWidgetJS::GetOption("+id+")\n");
@@ -714,9 +606,7 @@ int DKWidgetJS::GetOption(duk_context* ctx)
 	return 1;
 }
 
-///////////////////////////////////////////
-int DKWidgetJS::SetOption(duk_context* ctx)
-{
+int DKWidgetJS::SetOption(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	int n = duk_require_int(ctx, 1);
@@ -725,9 +615,7 @@ int DKWidgetJS::SetOption(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////////////////////
-int DKWidgetJS::GetHoverElement(duk_context* ctx)
-{
+int DKWidgetJS::GetHoverElement(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id;
 	if(!DKWidget::GetHoverElement(id)){	return 0; }
@@ -735,9 +623,7 @@ int DKWidgetJS::GetHoverElement(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////////////
-int DKWidgetJS::GetScale(duk_context* ctx)
-{
+int DKWidgetJS::GetScale(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString scale;
 	if(!DKWidget::GetProperty("html","font-size",scale)){ return 0; }
@@ -747,9 +633,7 @@ int DKWidgetJS::GetScale(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////////////
-int DKWidgetJS::SetScale(duk_context* ctx)
-{
+int DKWidgetJS::SetScale(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	double scale = duk_require_number(ctx, 0);
 	//DKINFO("DKWidgetJS::SetScale("+toString(scale)+")\n");
@@ -758,9 +642,7 @@ int DKWidgetJS::SetScale(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////////
-int DKWidgetJS::Cut(duk_context* ctx)
-{
+int DKWidgetJS::Cut(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	Rocket::Core::Element* element = DKWidget::GetElementById(id);
@@ -791,9 +673,7 @@ int DKWidgetJS::Cut(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////////
-int DKWidgetJS::Copy(duk_context* ctx)
-{
+int DKWidgetJS::Copy(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	Rocket::Core::Element* element = DKWidget::GetElementById(id);
@@ -812,9 +692,7 @@ int DKWidgetJS::Copy(duk_context* ctx)
 	return 1;
 }
 
-///////////////////////////////////////
-int DKWidgetJS::Paste(duk_context* ctx)
-{
+int DKWidgetJS::Paste(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	Rocket::Core::Element* element = DKWidget::GetElementById(id);
@@ -848,9 +726,7 @@ int DKWidgetJS::Paste(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////////////////
-int DKWidgetJS::ScrollToTop(duk_context* ctx)
-{
+int DKWidgetJS::ScrollToTop(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	if(!DKWidget::ScrollToTop(id)){
@@ -859,9 +735,7 @@ int DKWidgetJS::ScrollToTop(duk_context* ctx)
 	return 1;
 }
 
-////////////////////////////////////////////////
-int DKWidgetJS::ScrollToBottom(duk_context* ctx)
-{
+int DKWidgetJS::ScrollToBottom(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	if(!DKWidget::ScrollToBottom(id)){
@@ -870,18 +744,14 @@ int DKWidgetJS::ScrollToBottom(duk_context* ctx)
 	return 1;
 }
 
-//////////////////////////////////////////
-int DKWidgetJS::OpenLink(duk_context* ctx)
-{
+int DKWidgetJS::OpenLink(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString url = duk_require_string(ctx, 0);
 	DKUtil::Run(url, ""); 
 	return 1;
 }
 
-////////////////////////////////////////////////
-int DKWidgetJS::GetClientWidth(duk_context* ctx)
-{
+int DKWidgetJS::GetClientWidth(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKString value;
@@ -892,9 +762,7 @@ int DKWidgetJS::GetClientWidth(duk_context* ctx)
 	return 1;
 }
 
-/////////////////////////////////////////////////
-int DKWidgetJS::GetClientHeight(duk_context* ctx)
-{
+int DKWidgetJS::GetClientHeight(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString id = duk_require_string(ctx, 0);
 	DKString value;

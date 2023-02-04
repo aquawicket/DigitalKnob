@@ -1,4 +1,4 @@
-//"use strict";
+//"use strict"; //FIXME: "use strict" breaks Duktape
 // https://www.sitepoint.com/get-url-parameters-with-javascript/ 
 
 

@@ -1,6 +1,4 @@
-///////////////////////
-function DKAdmin_init()
-{
+function DKAdmin_init(){
 	dk.create("DKAdmin/DKAdmin.html");
 	byId("AdminBadge").addEventListener("click", DKAdmin_onevent);
 	
@@ -14,16 +12,12 @@ function DKAdmin_init()
 	}
 }
 
-//////////////////////
-function DKAdmin_end()
-{
+function DKAdmin_end(){
 	byId("AdminBadge").removeEventListener("click", DKAdmin_onevent);
 	dk.close("DKAdmin/DKAdmin.html");
 }
 
-///////////////////////////////
-function DKAdmin_OnEvent(event)
-{
+function DKAdmin_OnEvent(event){
 	console.log("DKAdmin_OnEvent("+event.currentTarget.id+","+event.type+","+event.value+")\n");
 	
 	if(event.currentTarget.id === "AdminBadge"){
