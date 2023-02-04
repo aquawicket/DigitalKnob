@@ -44,6 +44,8 @@ public:
 	int GetKeyModifiers();
     double GetElapsedTime();
     bool LogMessage(Rml::Log::Type type, const Rml::String& message);
+    void GetClipboardText(Rml::String& text);
+    void SetClipboardText(const Rml::String& text);
 };
 
 #endif //DKSDLRmlSystem_H

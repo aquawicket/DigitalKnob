@@ -3065,7 +3065,7 @@ function(dk_undepend plugin)
 		endif()
 	endif()
 	
-	dk_dump(plugin)
+	#dk_dump(plugin)
 	# remove from ${dkdepend_list}
 	list(FIND dkdepend_list ${plugin} index)
 	if(${index} GREATER -1)

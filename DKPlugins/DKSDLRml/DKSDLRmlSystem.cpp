@@ -340,3 +340,16 @@ bool RmlSDL2SystemInterface::LogMessage(Rml::Log::Type type, const Rml::String& 
 	};
 	return true;
 };
+
+
+void RmlSDL2SystemInterface::GetClipboardText(Rml::String& text) {
+    DKDEBUGFUNC(text);
+    DKINFO("RmlSDL2SystemInterface::GetClipboardText() \n");
+    text = SDL_GetClipboardText();
+}
+
+void RmlSDL2SystemInterface::SetClipboardText(const Rml::String& text) {
+    DKDEBUGFUNC(text);
+    DKINFO("RmlSDL2SystemInterface::SetClipboardText() \n");
+    SDL_SetClipboardText(text.c_str());
+}
