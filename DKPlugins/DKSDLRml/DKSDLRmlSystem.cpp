@@ -351,3 +351,13 @@ void RmlSDL2SystemInterface::SetClipboardText(const Rml::String& text) {
     if (SDL_SetClipboardText(text.c_str()) != 0)
         DKERROR("SDL_SetClipboardText() failed!: "+DKString(SDL_GetError()) + "\n");
 }
+
+void RmlSDL2SystemInterface::ActivateKeyboard(Rml::Vector2f caret_position, float line_height) {
+    DKDEBUGFUNC(caret_position, line_height);
+    SDL_StartTextInput();
+}
+
+void RmlSDL2SystemInterface::DeactivateKeyboard() {
+    DKDEBUGFUNC();
+    SDL_StopTextInput();
+}

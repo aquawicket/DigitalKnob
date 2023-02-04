@@ -44,8 +44,14 @@ public:
 	int GetKeyModifiers();
     double GetElapsedTime();
     bool LogMessage(Rml::Log::Type type, const Rml::String& message);
+
     void GetClipboardText(Rml::String& text);
     void SetClipboardText(const Rml::String& text);
+
+    // Activate keyboard (for touchscreen devices).
+    void ActivateKeyboard(Rml::Vector2f caret_position, float line_height);
+    // Deactivate keyboard (for touchscreen devices).
+    void DeactivateKeyboard();
 };
 
 #endif //DKSDLRmlSystem_H
