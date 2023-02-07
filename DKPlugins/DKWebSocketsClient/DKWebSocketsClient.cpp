@@ -35,6 +35,7 @@ uWS::Hub DKWebSocketsClient::clientHub;
 
 bool DKWebSocketsClient::Init(){
 	DKDEBUGFUNC();
+	DKINFO(toString(data, ",") + "\n");
 	DKApp::AppendLoopFunc(&DKWebSocketsClient::Loop, this);
 	return true;
 }
