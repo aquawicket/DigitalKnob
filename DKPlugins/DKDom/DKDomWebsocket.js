@@ -40,10 +40,10 @@ var WebSocket = function WebSocket(pointer) {
 
 	//// Instance methods ////
 	WebSocket.prototype.close = function close() {
-		//TODO
+		CPP_DKDomWebSocket_close()
     }
-	WebSocket.prototype.send = function send() {
-		//TODO
+	WebSocket.prototype.send = function send(message) {
+		CPP_DKDomWebSocket_send(message)
     }
 	
 	

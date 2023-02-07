@@ -36,18 +36,26 @@ DKPlugin("DKFile/DKFile.js")
 */
 
 /// WEBSOCKETS TEST ///
-var server = 1
+var server = 0
 if(server){
 	/// WEBSOCKETS SERVER TEST ///
-	//CPP_DK_Create("DKWebSockets")
-	//CPP_DK_Create("DKWebSockets/DKWebSocketsServer.js")
-	//DKWebSocketsServer_init()
 	var server = new WebSocketServer("ws://192.168.1.47:80");
 	server.start("192.168.1.47", "80");
 }
 else{
 	/// WEBSOCKETS CLIENT TEST ///
-	CPP_DK_Create("DKWebSockets")
-	CPP_DK_Create("DKWebSockets/DKWebSocketsClient.js")
-	DKWebSocketsClient_init()
+	var client = new WebSocket("ws://192.168.1.47:80");
+	client.onopen = function(event){
+		console.log("client.onopen("+event+")");
+	}
+	client.onmessage = function(event){
+		console.log("client.onmessage("+event+")");
+		//CPP_DKWebSocketsClient_OnMessageFromServer(e.data.toString());
+	}
+	client.onclose = function(event){
+		console.log("client.onclose("+event+")");
+	}
+	client.onerror = function(event){
+		console.log("client.onerror("+event+")");
+	}
 }
