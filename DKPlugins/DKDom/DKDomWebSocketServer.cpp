@@ -27,6 +27,7 @@
 #include "DK/DKApp.h"
 #include "DKDom/DKDom.h"
 #include "DKDom/DKDomWebSocketServer.h"
+#include "DKWebSockets/DKWebSockets.h"
 
 
 bool DKDomWebSocketServer::Init(){
@@ -52,18 +53,27 @@ int DKDomWebSocketServer::isConnected(duk_context* ctx){
 
 int DKDomWebSocketServer::disconnect(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	//TODO
+
+	// TODO
+	// bool DKWebSockets::Get()->CloseServer();
+	
 	return true;
 }
 
 int DKDomWebSocketServer::send(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	//TODO
+	
+	// TODO
+	// bool DKWebSockets::Get()->MessageToClient(message);
+
 	return true;
 }
 
 int DKDomWebSocketServer::start(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	//TODO
+
+	// TODO
+	// bool DKWebSockets::Get()->CreateServer(address, port);
+
 	return true;
 }

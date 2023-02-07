@@ -29,6 +29,7 @@
 #include "DK/DKApp.h"
 #include "DKDom/DKDom.h"
 #include "DKDom/DKDomWebSocket.h"
+#include "DKWebSockets/DKWebSockets.h"
 
 
 bool DKDomWebSocket::Init(){
@@ -88,12 +89,18 @@ int DKDomWebSocket::url(duk_context* ctx){
 
 int DKDomWebSocket::close(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	//TODO
+	
+	// TODO
+	// bool DKWebSockets::Get()->CloseClient();
+
 	return true;
 }
 
 int DKDomWebSocket::send(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	//TODO
+	
+	// TODO
+	// bool DKWebSockets::Get()->MessageToServer(message);
+
 	return true;
 }
