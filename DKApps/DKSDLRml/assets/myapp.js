@@ -36,7 +36,7 @@ DKPlugin("DKFile/DKFile.js")
 */
 
 /// WEBSOCKETS TEST ///
-var server = 0
+var server = 1
 if(server){
 	/// WEBSOCKETS SERVER TEST ///
 	var server = new WebSocketServer("ws://192.168.1.47:80");
