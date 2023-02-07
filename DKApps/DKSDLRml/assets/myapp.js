@@ -71,5 +71,5 @@ else{
 		console.log("client.onerror("+event+")");
 	}
 	
-	client.send("test message");
+	//client.send("test message");
 }
