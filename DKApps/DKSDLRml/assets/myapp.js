@@ -39,9 +39,10 @@ DKPlugin("DKFile/DKFile.js")
 var server = 1
 if(server){
 	/// WEBSOCKETS SERVER TEST ///
-	CPP_DK_Create("DKWebSockets")
-	CPP_DK_Create("DKWebSockets/DKWebSocketsServer.js")
-	DKWebSocketsServer_init()
+	//CPP_DK_Create("DKWebSockets")
+	//CPP_DK_Create("DKWebSockets/DKWebSocketsServer.js")
+	//DKWebSocketsServer_init()
+	var server = new WebSocketServer("ws://192.168.1.47:80");
 }
 else{
 	/// WEBSOCKETS CLIENT TEST ///
