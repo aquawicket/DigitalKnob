@@ -91,14 +91,14 @@ int DKDomWebSocket::url(duk_context* ctx){
 int DKDomWebSocket::open(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	if (!DKWebSocketsClient::CreateClient(address))
+	if (!DKWebSocketsClient::Get()->CreateClient(address))
 		return DKERROR("DKWebSockets::CreateClient() failed! \n");
 	return true;
 }
 
 int DKDomWebSocket::close(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	if (!DKWebSocketsClient::CloseClient())
+	if (!DKWebSocketsClient::Get()->CloseClient())
 		return DKERROR("DKWebSockets::CloseClient() failed! \n");
 	return true;
 }
@@ -106,7 +106,7 @@ int DKDomWebSocket::close(duk_context* ctx){
 int DKDomWebSocket::send(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString message = duk_require_string(ctx, 0);
-	if (!DKWebSocketsClient::MessageToServer(message))
+	if (!DKWebSocketsClient::Get()->MessageToServer(message))
 		return DKERROR("DKWebSockets::MessageToServer() failed! \n");
 	return true;
 }

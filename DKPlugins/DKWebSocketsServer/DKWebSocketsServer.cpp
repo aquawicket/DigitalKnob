@@ -27,12 +27,6 @@
 #include "DK/stdafx.h"
 #include "DKWebSocketsServer/DKWebSocketsServer.h"
 
-//SERVER
-DKString DKWebSocketsServer::serverAddress;
-int DKWebSocketsServer::serverPort = NULL;
-uWS::WebSocket<uWS::SERVER>* DKWebSocketsServer::serverWebSocket = NULL;
-uWS::Hub DKWebSocketsServer::serverHub;
-
 
 bool DKWebSocketsServer::Init(){
 	DKDEBUGFUNC();
@@ -60,7 +54,7 @@ bool DKWebSocketsServer::CreateServer(const DKString& address, const int& port){
 	serverAddress = address;
 	serverPort = port;
 
-	serverHub.onError([](void *user){
+	serverHub.onError([this](void *user){
 		DKDEBUGFUNC(user);
 		serverWebSocket = NULL;
 		switch ((long) user){
@@ -100,7 +94,7 @@ bool DKWebSocketsServer::CreateServer(const DKString& address, const int& port){
 		}
 	});
 
-	serverHub.onConnection([](uWS::WebSocket<uWS::SERVER> *ws, uWS::HttpRequest req){
+	serverHub.onConnection([this](uWS::WebSocket<uWS::SERVER> *ws, uWS::HttpRequest req){
 		DKDEBUGFUNC(ws, req);
 		serverWebSocket = ws;
 		switch ((long) ws->getUserData()) {
@@ -115,13 +109,13 @@ bool DKWebSocketsServer::CreateServer(const DKString& address, const int& port){
 		}
 	});
 
-	serverHub.onDisconnection([](uWS::WebSocket<uWS::SERVER> *ws, int code, char *message, size_t length) {
+	serverHub.onDisconnection([this](uWS::WebSocket<uWS::SERVER> *ws, int code, char *message, size_t length) {
 		DKDEBUGFUNC(ws, code, message, length);
 		serverWebSocket = NULL;
 		DKINFO("Client got disconnected with data:ws->getUserData(), code:"+toString(code)+", message:<"+DKString(message, length)+"> \n");
 	});
 
-	serverHub.onMessage([](uWS::WebSocket<uWS::SERVER> *ws, char *message, size_t length, uWS::OpCode opCode){
+	serverHub.onMessage([this](uWS::WebSocket<uWS::SERVER> *ws, char *message, size_t length, uWS::OpCode opCode){
 		DKDEBUGFUNC(ws, message, length, opCode);
 		MessageFromClient(ws, message, length, opCode);
 	});

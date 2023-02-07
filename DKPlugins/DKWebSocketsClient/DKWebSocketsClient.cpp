@@ -27,11 +27,6 @@
 #include "DK/stdafx.h"
 #include "DKWebSocketsClient/DKWebSocketsClient.h"
 
-//CLIENT
-DKString DKWebSocketsClient::clientAddress;
-uWS::WebSocket<uWS::CLIENT>* DKWebSocketsClient::clientWebSocket = NULL;
-uWS::Hub DKWebSocketsClient::clientHub;
-
 
 bool DKWebSocketsClient::Init(){
 	DKDEBUGFUNC();
@@ -57,17 +52,17 @@ bool DKWebSocketsClient::CreateClient(const DKString& address){
 	DKDEBUGFUNC(address);
 	clientAddress = address;
 
-	clientHub.onConnection([](uWS::WebSocket<uWS::CLIENT> *ws, uWS::HttpRequest req){
+	clientHub.onConnection([this](uWS::WebSocket<uWS::CLIENT> *ws, uWS::HttpRequest req){
 		DKDEBUGFUNC(ws, req);
 		clientWebSocket = ws;
 	});
 
-	clientHub.onDisconnection([](uWS::WebSocket<uWS::CLIENT> *ws, int code, char *message, size_t length) {
+	clientHub.onDisconnection([this](uWS::WebSocket<uWS::CLIENT> *ws, int code, char *message, size_t length) {
 		DKDEBUGFUNC(ws, code, message, length);
 		clientWebSocket = NULL;
 	});
 
-	clientHub.onError([](void *user){
+	clientHub.onError([this](void *user){
 		DKDEBUGFUNC(user);
 		clientWebSocket = NULL;
 		switch ((long) user){
@@ -107,7 +102,7 @@ bool DKWebSocketsClient::CreateClient(const DKString& address){
 		}
 	});
 
-	clientHub.onMessage([](uWS::WebSocket<uWS::CLIENT> *ws, char *message, size_t length, uWS::OpCode opCode){
+	clientHub.onMessage([this](uWS::WebSocket<uWS::CLIENT> *ws, char *message, size_t length, uWS::OpCode opCode){
 		DKDEBUGFUNC(ws, message, length, opCode);
 		MessageFromServer(ws, message, length, opCode);
 	});

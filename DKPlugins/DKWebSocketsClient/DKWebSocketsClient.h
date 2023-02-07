@@ -43,15 +43,14 @@ public:
 	bool End();
 	void Loop();
 
-	static bool CloseClient();
-	static bool CreateClient(const DKString& address);
-	static bool MessageFromServer(uWS::WebSocket<uWS::CLIENT>* ws, char *message, size_t length, uWS::OpCode opCode);
-	static bool MessageToServer(const DKString& message);
+	bool CloseClient();
+	bool CreateClient(const DKString& address);
+	bool MessageFromServer(uWS::WebSocket<uWS::CLIENT>* ws, char *message, size_t length, uWS::OpCode opCode);
+	bool MessageToServer(const DKString& message);
 
-	//CLIENT
-	static DKString clientAddress;
-	static uWS::Hub clientHub;
-	static uWS::WebSocket<uWS::CLIENT>* clientWebSocket;
+	DKString clientAddress;
+	uWS::Hub clientHub;
+	uWS::WebSocket<uWS::CLIENT>* clientWebSocket;
 };
 REGISTER_OBJECT(DKWebSocketsClient, true);
 
