@@ -168,7 +168,7 @@ int DKDomElement::closest(duk_context* ctx){
 	}
 	DKString elementAddress = DKRml::elementToAddress(closestElement);
 	duk_push_string(ctx, elementAddress.c_str());
-	return true && DKDEBUGRETURN(ctx, elementAddress);
+	return true;
 }
 
 int DKDomElement::getAttribute(duk_context* ctx){
@@ -185,12 +185,12 @@ int DKDomElement::getAttribute(duk_context* ctx){
 	if(!variant){ 
 		//DKERROR("variant invalid\n");
 		duk_push_undefined(ctx);
-		return true && DKDEBUGRETURN(ctx, "undefined");
+		return true;
 	}
 	Rml::String temp = element->GetAttribute(attribute.c_str())->Get<Rml::String>();
 	DKString value = temp;
 	duk_push_string(ctx, value.c_str());
-	return true && DKDEBUGRETURN(ctx, value);
+	return true;
 }
 
 int DKDomElement::getElementsByClassName(duk_context* ctx){
@@ -207,7 +207,7 @@ int DKDomElement::getElementsByClassName(duk_context* ctx){
 	element->GetElementsByClassName(elements, name.c_str());
 	if(elements.empty()){
 		duk_push_null(ctx);
-		return true && DKDEBUGRETURN(ctx, "empty");
+		return true;
 	}
 	DKString str;
 	for(unsigned int i=0; i<elements.size(); i++){
@@ -217,7 +217,7 @@ int DKDomElement::getElementsByClassName(duk_context* ctx){
 			str += ",";
 	}
 	duk_push_string(ctx, str.c_str());
-	return true && DKDEBUGRETURN(ctx, address, name, str);
+	return true;
 }
 
 int DKDomElement::getElementsByTagName(duk_context* ctx){
@@ -235,7 +235,7 @@ int DKDomElement::getElementsByTagName(duk_context* ctx){
 		elements.push_back(DKRml::Get()->document); //html tag
 	if(elements.empty()){
 		duk_push_null(ctx);
-		return true && DKDEBUGRETURN(ctx, "empty");
+		return true;
 	}
 	DKString str;
 	for(unsigned int i=0; i<elements.size(); i++){
@@ -245,7 +245,7 @@ int DKDomElement::getElementsByTagName(duk_context* ctx){
 			str += ",";
 	}
 	duk_push_string(ctx, str.c_str());
-	return true && DKDEBUGRETURN(ctx, str);
+	return true;
 }
 
 int DKDomElement::hasAttribute(duk_context* ctx){
@@ -260,10 +260,10 @@ int DKDomElement::hasAttribute(duk_context* ctx){
 	}
 	if(!element->HasAttribute(attribute.c_str())){ 
 		duk_push_boolean(ctx, false);
-		return true && DKDEBUGRETURN(ctx, false);
+		return true;
 	}
 	duk_push_boolean(ctx, true);
-	return true && DKDEBUGRETURN(ctx, true);
+	return true;
 }
 
 int DKDomElement::removeAttribute(duk_context* ctx){
@@ -300,7 +300,7 @@ int DKDomElement::innerHTML(duk_context* ctx){
 		DKString innerHTML = duk_require_string(ctx, 1);
 		element->SetInnerRML(innerHTML.c_str());
 	}
-	return true; //&& DKDEBUGRETURN(ctx, innerHTML);
+	return true;
 }
 
 // outerHTML:  https://developer.mozilla.org/en-US/docs/Web/API/Element/outerHTML
@@ -324,7 +324,7 @@ int DKDomElement::outerHTML(duk_context* ctx){
 		DKString outerHTML = duk_require_string(ctx, 1);
 		DKRml::SetOuterHTML(element, outerHTML.c_str());
 	}
-	return true && DKDEBUGRETURN(ctx, outerHTML);
+	return true;
 }
 
 int DKDomElement::querySelector(duk_context* ctx){
@@ -345,7 +345,7 @@ int DKDomElement::querySelector(duk_context* ctx){
 	}
 	DKString elementAddress = DKRml::elementToAddress(queryElement);
 	duk_push_string(ctx, elementAddress.c_str());
-	return true && DKDEBUGRETURN(ctx, elementAddress);
+	return true;
 }
 
 int DKDomElement::querySelectorAll(duk_context* ctx){
@@ -362,7 +362,7 @@ int DKDomElement::querySelectorAll(duk_context* ctx){
 	element->QuerySelectorAll(elements, selectors.c_str());
 	if(elements.empty()){
 		duk_push_null(ctx);
-		return true && DKDEBUGRETURN(ctx, "empty");
+		return true;
 	}
 	DKString str;
 	for(unsigned int i=0; i<elements.size(); i++){
@@ -372,7 +372,7 @@ int DKDomElement::querySelectorAll(duk_context* ctx){
 			str += ",";
 	}
 	duk_push_string(ctx, str.c_str());
-	return true && DKDEBUGRETURN(ctx, str);
+	return true;
 }
 
 int DKDomElement::scrollHeight(duk_context* ctx){
@@ -386,7 +386,7 @@ int DKDomElement::scrollHeight(duk_context* ctx){
 	}
 	float scrollHeight = element->GetScrollHeight();
 	duk_push_number(ctx, scrollHeight);
-	return true && DKDEBUGRETURN(ctx, scrollHeight);
+	return true;
 }
 
 int DKDomElement::scrollIntoView(duk_context* ctx){
@@ -419,7 +419,7 @@ int DKDomElement::scrollLeft(duk_context* ctx){
 	}
 	float scrollLeft = element->GetScrollLeft();
 	duk_push_number(ctx, scrollLeft);
-	return true && DKDEBUGRETURN(ctx, scrollLeft);
+	return true;
 }
 
 int DKDomElement::scrollTop(duk_context* ctx){
@@ -433,7 +433,7 @@ int DKDomElement::scrollTop(duk_context* ctx){
 	}
 	float scrollTop = element->GetScrollTop();
 	duk_push_number(ctx, scrollTop);
-	return true && DKDEBUGRETURN(ctx, scrollTop);
+	return true;
 }
 
 int DKDomElement::scrollWidth(duk_context* ctx){
@@ -447,7 +447,7 @@ int DKDomElement::scrollWidth(duk_context* ctx){
 	}
 	float scrollWidth = element->GetScrollWidth();
 	duk_push_number(ctx, scrollWidth);
-	return true && DKDEBUGRETURN(ctx, scrollWidth);
+	return true;
 }
 
 int DKDomElement::setAttribute(duk_context* ctx){
@@ -478,7 +478,7 @@ int DKDomElement::setAttribute(duk_context* ctx){
 	//if(same(attribute,"src")){
 	//	DKRml::Get()->dkRmlToRML.PostProcess(element);
 	//}
-	return true;//&& DKDEBUGRETURN(ctx, address, attribute, value);
+	return true;
 }
 
 int DKDomElement::tagName(duk_context* ctx){
@@ -491,5 +491,5 @@ int DKDomElement::tagName(duk_context* ctx){
 		return true;
 	}
 	duk_push_string(ctx, element->GetTagName().c_str());
-	return true && DKDEBUGRETURN(ctx, element->GetTagName());
+	return true;
 }
