@@ -1,5 +1,6 @@
 
 var WebSocketServer = function WebSocketServer(url) {
+	console.log("WebSocketServer("+url+")");
     this.url = url;
 
 	//// Instance properties ////
@@ -10,14 +11,17 @@ var WebSocketServer = function WebSocketServer(url) {
     })
 	
 	//// Instance methods ////
-	WebSocket.prototype.disconnect = function disconnect() {
-		//TODO
+	WebSocketServer.prototype.disconnect = function disconnect() {
+		console.log("WebSocket.prototype.disconnect()")
+		CPP_DKDomWebSocketServer_disconnect()
     }
-	WebSocket.prototype.send = function send() {
-		//TODO
+	WebSocketServer.prototype.send = function send(message) {
+		console.log("WebSocket.prototype.send("+message+")")
+		CPP_DKDomWebSocketServer_send(message)
     }	
-	WebSocket.prototype.start = function start() {
-		//TODO
+	WebSocketServer.prototype.start = function start(address, port) {
+		console.log("WebSocket.prototype.start("+address+","+port+")")
+		CPP_DKDomWebSocketServer_start(address, port);
     }	
 	
 	//// Events ////

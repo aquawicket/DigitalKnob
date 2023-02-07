@@ -2,6 +2,7 @@
 
 
 var WebSocket = function WebSocket(pointer) {
+	console.log("WebSocket("+pointer+")");
     this.pointer = pointer;
 
 	//// Instance properties ////
