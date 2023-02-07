@@ -10,6 +10,7 @@ CPP_DK_Create("DKSDLWindow")
 CPP_DK_Create("DKRml")
 location.href = url
 
+
 /*
 CPP_DK_Create("DK/DK.js")
 CPP_DK_Create("DK/DKPlugin.js")

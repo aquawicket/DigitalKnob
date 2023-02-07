@@ -26,7 +26,7 @@
 //https://github.com/uNetworking/uWebSockets/blob/master/tests/main.cpp
 #include "DK/stdafx.h"
 #include "DKWebSockets/DKWebSockets.h"
-
+#include "DKRml/DKRml.h"
 
 //SERVER
 DKString DKWebSockets::serverAddress;
@@ -89,25 +89,25 @@ bool DKWebSockets::CreateClient(const DKString& address){
 		clientWebSocket = NULL;
 		switch ((long) user){
 		case 1:
-			DKERROR("Client emitted error on invalid URI\n");
+			DKERROR("Client emitted error on invalid URI \n");
 			break;
 		case 2:
-			DKERROR("Client emitted error on resolve failure\n");
+			DKERROR("Client emitted error on resolve failure \n");
 			break;
 		case 3:
-			DKERROR("Client emitted error on connection timeout (non-SSL)\n");
+			DKERROR("Client emitted error on connection timeout (non-SSL) \n");
 			break;
 		case 5:
-			DKERROR("Client emitted error on connection timeout (SSL)\n");
+			DKERROR("Client emitted error on connection timeout (SSL) \n");
 			break;
 		case 6:
-			DKERROR("Client emitted error on HTTP response without upgrade (non-SSL)\n");
+			DKERROR("Client emitted error on HTTP response without upgrade (non-SSL) \n");
 			break;
 		case 7:
-			DKERROR("Client emitted error on HTTP response without upgrade (SSL)\n");
+			DKERROR("Client emitted error on HTTP response without upgrade (SSL) \n");
 			break;
 		case 10:
-			DKERROR("Client emitted error on poll error\n");
+			DKERROR("Client emitted error on poll error \n");
 			break;
 		case 11:
 			static int protocolErrorCount = 0;
@@ -132,7 +132,7 @@ bool DKWebSockets::CreateClient(const DKString& address){
 	clientHub.poll();
 	clientHub.connect(address, NULL);
 	
-	return DKINFO("DKWebSockets::CreateClient(): Client started...\n");
+	return DKINFO("DKWebSockets::CreateClient(): Client started... \n");
 }
 
 bool DKWebSockets::CreateServer(const DKString& address, const int& port){
@@ -145,32 +145,32 @@ bool DKWebSockets::CreateServer(const DKString& address, const int& port){
 		serverWebSocket = NULL;
 		switch ((long) user){
 		case 1:
-			DKERROR("Client emitted error on invalid URI\n");
+			DKERROR("Client emitted error on invalid URI \n");
 			break;
 		case 2:
-			DKERROR("Client emitted error on resolve failure\n");
+			DKERROR("Client emitted error on resolve failure \n");
 			break;
 		case 3:
-			DKERROR("Client emitted error on connection timeout (non-SSL)\n");
+			DKERROR("Client emitted error on connection timeout (non-SSL) \n");
 			break;
 		case 5:
-			DKERROR("Client emitted error on connection timeout (SSL)\n");
+			DKERROR("Client emitted error on connection timeout (SSL) \n");
 			break;
 		case 6:
-			DKERROR("Client emitted error on HTTP response without upgrade (non-SSL)\n");
+			DKERROR("Client emitted error on HTTP response without upgrade (non-SSL) \n");
 			break;
 		case 7:
-			DKERROR("Client emitted error on HTTP response without upgrade (SSL)\n");
+			DKERROR("Client emitted error on HTTP response without upgrade (SSL) \n");
 			break;
 		case 10:
-			DKERROR("Client emitted error on poll error\n");
+			DKERROR("Client emitted error on poll error \n");
 			break;
 		case 11:
 			static int protocolErrorCount = 0;
 			protocolErrorCount++;
-			DKERROR("Client emitted error on invalid protocol\n");
+			DKERROR("Client emitted error on invalid protocol \n");
 			if (protocolErrorCount > 1) {
-				DKERROR("FAILURE: "+toString(protocolErrorCount)+" errors emitted for one connection!\n");
+				DKERROR("FAILURE: "+toString(protocolErrorCount)+" errors emitted for one connection! \n");
 				exit(-1);
 			}
 			break;
@@ -185,20 +185,20 @@ bool DKWebSockets::CreateServer(const DKString& address, const int& port){
 		serverWebSocket = ws;
 		switch ((long) ws->getUserData()) {
 		case 8:
-			DKINFO("Client established a remote connection over non-SSL");
+			DKINFO("Client established a remote connection over non-SSL \n");
 			break;
 		case 9:
-			DKINFO("Client established a remote connection over SSL");
+			DKINFO("Client established a remote connection over SSL \n");
 			break;
 		default:
-			DKINFO("FAILURE: ws->getUserData() should not connect!");
+			DKINFO("FAILURE: ws->getUserData() should not connect! \n");
 		}
 	});
 
 	serverHub.onDisconnection([](uWS::WebSocket<uWS::SERVER> *ws, int code, char *message, size_t length) {
 		DKDEBUGFUNC(ws, code, message, length);
 		serverWebSocket = NULL;
-		DKINFO("Client got disconnected with data:ws->getUserData(), code:"+toString(code)+", message:<"+DKString(message, length)+">\n");
+		DKINFO("Client got disconnected with data:ws->getUserData(), code:"+toString(code)+", message:<"+DKString(message, length)+"> \n");
 	});
 
 	serverHub.onMessage([](uWS::WebSocket<uWS::SERVER> *ws, char *message, size_t length, uWS::OpCode opCode){
@@ -206,7 +206,7 @@ bool DKWebSockets::CreateServer(const DKString& address, const int& port){
 		MessageFromClient(ws, message, length, opCode);
 	});
 
-	return DKINFO("DKWebSockets::CreateServer(): Server started...\n");
+	return DKINFO("DKWebSockets::CreateServer(): Server started... \n");
 }
 
 void DKWebSockets::Loop(){
@@ -222,6 +222,7 @@ void DKWebSockets::Loop(){
 bool DKWebSockets::MessageFromClient(uWS::WebSocket<uWS::SERVER>* ws, char *message, size_t length, uWS::OpCode opCode){
 	DKDEBUGFUNC(ws, message, length, opCode);
 	DKString message_  = DKString(message).substr(0, length);
+	DKINFO("DKWebSockets::MessageFromClient(): "+message_+"\n");
 	DKEvents::SendEvent("window", "DKWebSockets_OnMessageFromClient", message_);
 	return true;
 }
@@ -229,6 +230,7 @@ bool DKWebSockets::MessageFromClient(uWS::WebSocket<uWS::SERVER>* ws, char *mess
 bool DKWebSockets::MessageFromServer(uWS::WebSocket<uWS::CLIENT>* ws, char *message, size_t length, uWS::OpCode opCode){
 	DKDEBUGFUNC(ws, message, length, opCode);
 	DKString message_  = DKString(message).substr(0, length);
+	DKINFO("DKWebSockets::MessageFromServer(): " + message_ + "\n");
 	DKEvents::SendEvent("window", "DKWebSockets_OnMessageFromServer", message_);
 	return true;
 }

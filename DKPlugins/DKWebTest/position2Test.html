@@ -1,0 +1,113 @@
+<html>
+<head>
+<title>Position 2 Test</title>
+</head>
+<body>
+
+<!-- Home -->
+<a href="index.html">home</a><br /><br />
+
+<!--
+rgb color spectrum
+-------------------------------
+1	Red 		= 255,   0, 0
+2	Orange		= 255, 127, 0
+3	Yellow		= 255, 255, 0
+4	Lime		= 127, 255, 0
+5	Green		=   0, 255, 0
+6	Teal		=   0, 255, 127
+7	BabyBlue	=   0, 255, 255
+8	Ocean		=	0, 127, 255
+9	Blue		=	0,   0, 255
+0	Purple		= 127,   0, 255
+11	Pink		= 255,   0, 255
+12 	Lipstick	= 255,   0, 127
+-->
+
+<div id="Red" style="position:absolute;background-color:rgb(255,0,0);"></div>
+<div id="Orange" style="position:absolute;background-color:rgb(255,127,0);"></div>
+<div id="Yellow" style="position:absolute;background-color:rgb(255,255,0);"></div>
+<div id="Lime" style="position:absolute;background-color:rgb(127,255,0);"></div>
+<div id="Green" style="position:absolute;background-color:rgb(0,255,0);"></div>
+<div id="Teal" style="position:absolute;background-color:rgb(0,255,127);"></div>
+<div id="BabyBlue" style="position:absolute;background-color:rgb(0,255,255);"></div>
+<div id="Ocean" style="position:absolute;background-color:rgb(0,127,255);"></div>
+<div id="Blue" style="position:absolute;background-color:rgb(0,0,255);"></div>
+<div id="Purple" style="position:absolute;background-color:rgb(127,0,255);"></div>
+<div id="Pink" style="position:absolute;background-color:rgb(255,0,255);"></div>
+<div id="Lipstick" style="position:absolute;background-color:rgb(255,0,127);"></div>
+
+<script>
+	function update(){
+		var x_multiplyer = (window.innerWidth / 2) / 12
+		var y_multiplyer = (window.innerHeight / 2) / 12
+
+		document.getElementById("Red").style.top = "1px";
+		document.getElementById("Red").style.bottom = "1px";
+		document.getElementById("Red").style.left = "1px";
+		document.getElementById("Red").style.right = "1px";
+
+		document.getElementById("Orange").style.top = y_multiplyer+"px";
+		document.getElementById("Orange").style.bottom = y_multiplyer+"px";
+		document.getElementById("Orange").style.left = x_multiplyer+"px";
+		document.getElementById("Orange").style.right = x_multiplyer+"px";
+
+		document.getElementById("Yellow").style.top = y_multiplyer*2+"px";
+		document.getElementById("Yellow").style.bottom = y_multiplyer*2+"px";
+		document.getElementById("Yellow").style.left = x_multiplyer*2+"px";
+		document.getElementById("Yellow").style.right = x_multiplyer*2+"px";
+
+		document.getElementById("Lime").style.top = y_multiplyer*3+"px";
+		document.getElementById("Lime").style.bottom = y_multiplyer*3+"px";
+		document.getElementById("Lime").style.left = x_multiplyer*3+"px";
+		document.getElementById("Lime").style.right = x_multiplyer*3+"px";
+
+		document.getElementById("Green").style.top = y_multiplyer*4+"px";
+		document.getElementById("Green").style.bottom = y_multiplyer*4+"px";
+		document.getElementById("Green").style.left = x_multiplyer*4+"px";
+		document.getElementById("Green").style.right = x_multiplyer*4+"px";
+
+		document.getElementById("Teal").style.top = y_multiplyer*5+"px";
+		document.getElementById("Teal").style.bottom = y_multiplyer*5+"px";
+		document.getElementById("Teal").style.left = x_multiplyer*5+"px";
+		document.getElementById("Teal").style.right = x_multiplyer*5+"px";
+
+		document.getElementById("BabyBlue").style.top = y_multiplyer*6+"px";
+		document.getElementById("BabyBlue").style.bottom = y_multiplyer*6+"px";
+		document.getElementById("BabyBlue").style.left = x_multiplyer*6+"px";
+		document.getElementById("BabyBlue").style.right = x_multiplyer*6+"px";
+
+		document.getElementById("Ocean").style.top = y_multiplyer*7+"px";
+		document.getElementById("Ocean").style.bottom = y_multiplyer*7+"px";
+		document.getElementById("Ocean").style.left = x_multiplyer*7+"px";
+		document.getElementById("Ocean").style.right = x_multiplyer*7+"px";
+
+		document.getElementById("Blue").style.top = y_multiplyer*8+"px";
+		document.getElementById("Blue").style.bottom = y_multiplyer*8+"px";
+		document.getElementById("Blue").style.left = x_multiplyer*8+"px";
+		document.getElementById("Blue").style.right = x_multiplyer*8+"px";
+
+		document.getElementById("Purple").style.top = y_multiplyer*9+"px";
+		document.getElementById("Purple").style.bottom = y_multiplyer*9+"px";
+		document.getElementById("Purple").style.left = x_multiplyer*9+"px";
+		document.getElementById("Purple").style.right = x_multiplyer*9+"px";
+
+		document.getElementById("Pink").style.top = y_multiplyer*10+"px";
+		document.getElementById("Pink").style.bottom = y_multiplyer*10+"px";
+		document.getElementById("Pink").style.left = x_multiplyer*10+"px";
+		document.getElementById("Pink").style.right = x_multiplyer*10+"px";
+
+		document.getElementById("Lipstick").style.top = y_multiplyer*11+"px";
+		document.getElementById("Lipstick").style.bottom = y_multiplyer*11+"px";
+		document.getElementById("Lipstick").style.left = x_multiplyer*11+"px";
+		document.getElementById("Lipstick").style.right = x_multiplyer*11+"px";
+	}
+
+	update()
+	window.onresize = function(event){
+		update()
+	}
+</script>
+
+</body>
+</html>

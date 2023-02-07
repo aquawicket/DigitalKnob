@@ -346,8 +346,7 @@ bool DKUtil::GetLocalIP(DKString& ip){
 	boost::asio::ip::tcp::endpoint endpoint = *it; 
 	ip = endpoint.address().to_string();
 	*/
-	ip = "boost depricated in the DKCore library";
-	return true;
+	return DKERROR("boost depricated in the DKCore library \n");
 }
 
 bool DKUtil::GetMousePos(int& x, int& y){

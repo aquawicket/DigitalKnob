@@ -72,16 +72,12 @@ WARNING_ENABLE
 #define DKREDINFO(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_INFO, DKERROR_COLOR);
 //#define DKWARNRTN(message, rtnval) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_WARN, DKWARN_COLOR, rtnval);
 
-#if WIN
-//#define DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, ...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
+#if _MSC_VER //Visual Studio Compiler
 #define DKDEBUGRETURN1(__FILE__, __LINE__, __FUNCTION__, ...) DebugReturn(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
-//#define DKDEBUGFUNC(...) DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
 #define DKDEBUGRETURN(...) DKDEBUGRETURN1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
 #elif APPLE || LINUX || ANDROID || EMSCRIPTEN
-//#define DKDEBUGFUNC(...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, ##__VA_ARGS__)
 #define DKDEBUGRETURN(...) DebugReturn(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, ##__VA_ARGS__)
 #else
-//#define DKDEBUGFUNC(...) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, "", DK_DEBUG)
 #define DKDEBUGRETURN(...) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, "", DK_DEBUG)
 #endif
 
@@ -213,7 +209,7 @@ void DebugFunc(const char* file, int line, const char* func, const DKString& nam
 
 template <typename... Args>
 bool DebugReturn(const char* file, int line, const char* func, const DKString& names, Args&&... args){
-	if (1)
+	if (1) //FIXME: DebugReturn() - Currently disabled
 		return true;
 	if (!DKUtil::InMainThread())
 		return true;
@@ -328,7 +324,7 @@ public:
 	//const Args&&... args;
 };
 
-//#if WIN
+
 #if _MSC_VER //Visual Studio Compiler
 	#define DKDEBUGFUNC2(__FILE__, __LINE__, __FUNCTION__, ...) logy _logy(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
 	#define DKDEBUGFUNC(...) DKDEBUGFUNC2(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
@@ -340,20 +336,5 @@ public:
 //////////////////////////////////////////////////////////////////////////////////////
 
 
-
-/*
-template <typename... Args>
-void Test(const char* file, int line, const char* func, const DKString& names, Args&&... args){
-	DKString str = "test";
-	DKLog::Log(file, line, func, str, DKDEBUG);
-}
-#define TEST1(__FILE__, __LINE__, __FUNCTION__, ...)  Test(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
-#define TEST(...) TEST1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
-void Runit(){
-	TEST(123);
-	TEST("123");
-	TEST();
-}
-*/
 
 #endif //DKLog_H

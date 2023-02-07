@@ -49,7 +49,6 @@ public:
 	int GetKeyNum();
 	static std::vector<DKEvents*> events;
 
-private:
 	DKEvents(){};
 	DKString id;
 	DKString type;

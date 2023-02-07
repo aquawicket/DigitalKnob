@@ -24,10 +24,28 @@
 * SOFTWARE.
 */
 
+DKPlugin("DKFile/DKFile.js")
+DKPlugin("DKDebug/DKDebug.js") //add dkpush, etc.
 
+/*
+/// WEB TEST ///
 const url = "DKWebTest/index.html"
 location.href = url
-
 DKPlugin("DK/DKPhp.js")
 DKPlugin("DKFile/DKFile.js")
-DKPlugin("DKDebug/DKDebug.js")
+*/
+
+/// WEBSOCKETS TEST ///
+var server = 1
+if(server){
+	/// WEBSOCKETS SERVER TEST ///
+	CPP_DK_Create("DKWebSockets")
+	CPP_DK_Create("DKWebSockets/DKWebSocketsServer.js")
+	DKWebSocketsServer_init()
+}
+else{
+	/// WEBSOCKETS CLIENT TEST ///
+	CPP_DK_Create("DKWebSockets")
+	CPP_DK_Create("DKWebSockets/DKWebSocketsClient.js")
+	DKWebSocketsClient_init()
+}

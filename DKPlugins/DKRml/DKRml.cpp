@@ -563,7 +563,6 @@ Rml::Event* DKRml::addressToEvent(const DKString& address) {
 	//Convert a string of an address back into a pointer
 	std::stringstream ss;
 	ss << address.substr(2, address.size() - 2);
-	//int tmp(0);
 	std::uint64_t tmp;
 	if (!(ss >> std::hex >> tmp)) {
 		DKERROR(address+": invalid address\n");

@@ -164,6 +164,13 @@ var Event = function(pointer) //https://developer.mozilla.org/en-US/docs/Web/API
 		}
 	}
 	
+	// Extra
+	///////////////////////////////////////////////
+	Event.prototype.getParameters = function getParameters() {
+        //Not standardized, Obsolete
+        CPP_DKDomEvent_getParameters(pointer)
+    }
+	
     //console.log("dispatching event")
     //this.currentTarget.dispatchEvent(this)
     //return this;

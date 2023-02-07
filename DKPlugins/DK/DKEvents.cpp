@@ -47,7 +47,7 @@ bool DKEvents::SendEvent(const DKString& id, const DKString& type, const DKStrin
 	if(type.empty())
 		return DKERROR("type is invalid! \n");
 	if(id.empty())
-		return DKERROR("id is invalie! \n");
+		return DKERROR("id is invalid! \n");
 	//call the function directly
 	for(unsigned int i = 0; i < events.size(); ++i){
 		if((same(events[i]->id, id)) && same(events[i]->type, type)){
