@@ -24,51 +24,37 @@
 * SOFTWARE.
 */
 
-DKPlugin("DKFile/DKFile.js")
-DKPlugin("DKDebug/DKDebug.js") //add dkpush, etc.
+#pragma once
+#ifndef DKWebSocketsServer_H
+#define DKWebSocketsServer_H
 
-/*
-/// WEB TEST ///
-const url = "DKWebTest/index.html"
-location.href = url
-DKPlugin("DK/DKPhp.js")
-DKPlugin("DKFile/DKFile.js")
-*/
+#include "DK/DK.h"
 
-/// WEBSOCKETS TEST ///
-CPP_DK_Create("DKWebSockets")
-var server = 0
-if(server){
-	/// WEBSOCKETS SERVER TEST ///
-	var server = new WebSocketServer("ws://192.168.1.47:80");
-	console.log("server = "+server)
-	server.onclose = function(event){
-		console.log("server.onclose("+event+")");
-	}
-	server.onmessage = function(event){
-		console.log("server.onmessage("+event+")");
-	}
-	server.onopen = function(event){
-		console.log("server.onopen("+event+")");
-	}
-	
-	server.start("192.168.1.47", "80");
-}
-else{
-	/// WEBSOCKETS CLIENT TEST ///
-	var client = new WebSocket("ws://192.168.1.47:80");
-	client.onopen = function(event){
-		console.log("client.onopen("+event+")");
-	}
-	client.onmessage = function(event){
-		console.log("client.onmessage("+event+")");
-	}
-	client.onclose = function(event){
-		console.log("client.onclose("+event+")");
-	}
-	client.onerror = function(event){
-		console.log("client.onerror("+event+")");
-	}
-	
-	client.send("test message");
-}
+WARNING_DISABLE
+DISABLE_WARNING(4251)
+#include "src/uWS.h"
+WARNING_ENABLE
+
+
+class DKWebSocketsServer : public DKObjectT<DKWebSocketsServer>
+{
+public:
+	bool Init();
+	bool End();
+	void Loop();
+
+	static bool CloseServer();
+	static bool CreateServer(const DKString& address, const int& port);
+	static bool MessageFromClient(uWS::WebSocket<uWS::SERVER>* ws, char *message, size_t length, uWS::OpCode opCode);
+	static bool MessageToClient(const DKString& message);
+
+	//SERVER
+	static DKString serverAddress;
+	static int serverPort;
+	static uWS::Hub serverHub;
+	static uWS::WebSocket<uWS::SERVER>* serverWebSocket;
+};
+REGISTER_OBJECT(DKWebSocketsServer, true);
+
+
+#endif //DKWebSocketsServer_H
