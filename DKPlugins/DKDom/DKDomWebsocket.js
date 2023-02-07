@@ -1,12 +1,13 @@
 //https://developer.mozilla.org/en-US/docs/Web/API/WebSocket
 
 
-var WebSocket = function WebSocket(pointer) {
-	console.log("WebSocket("+pointer+")");
-    this.pointer = pointer;
-	this.url = pointer;
+var WebSocket = function WebSocket(url) {
+	console.log("WebSocket("+url+")");
+	this.url = url;
 	
-	pointer = CPP_DKDomDocument_createElement("WebSocketServer");
+	var pointer = CPP_DKDomDocument_createElement("websocket");
+	this.pointer = pointer;
+	
 	CPP_DKDomWebSocket_open(url);
 
 	//// Instance properties ////
