@@ -43,6 +43,7 @@ if(server){
 	//CPP_DK_Create("DKWebSockets/DKWebSocketsServer.js")
 	//DKWebSocketsServer_init()
 	var server = new WebSocketServer("ws://192.168.1.47:80");
+	server.start("192.168.1.47", "80");
 }
 else{
 	/// WEBSOCKETS CLIENT TEST ///

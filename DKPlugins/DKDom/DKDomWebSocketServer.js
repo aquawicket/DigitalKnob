@@ -1,11 +1,11 @@
 
-var WebSocketServer = function WebSocketServer(pointer) {
-    this.pointer = pointer;
+var WebSocketServer = function WebSocketServer(url) {
+    this.url = url;
 
 	//// Instance properties ////
 	Object.defineProperty(this, "isConnected", {
         get: function isConnected() {
-            return CPP_DKDomWebSocketServer_isConnected(pointer)
+            return CPP_DKDomWebSocketServer_isConnected(url)
         }
     })
 	

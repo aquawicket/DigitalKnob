@@ -71,9 +71,9 @@ int DKDomWebSocketServer::send(duk_context* ctx){
 
 int DKDomWebSocketServer::start(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-
-	// TODO
-	// bool DKWebSockets::Get()->CreateServer(address, port);
-
+	DKString address = duk_require_string(ctx, 0);
+	DKString port = duk_require_string(ctx, 1);
+	if(!DKWebSockets::Get()->CreateServer(address, port))
+		return DKERROR("DKWebSockets::CreateServer() failed! \n");
 	return true;
 }
