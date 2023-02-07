@@ -40,6 +40,8 @@ var server = 0
 if(server){
 	/// WEBSOCKETS SERVER TEST ///
 	var server = new WebSocketServer("ws://192.168.1.47:80");
+	console.log("server = "+server)
+	console.log("JSON.stringify(server) = "+JSON.stringify(server))
 	server.onclose = function(event){
 		console.log("server.onclose("+event+")");
 	}
@@ -67,4 +69,6 @@ else{
 	client.onerror = function(event){
 		console.log("client.onerror("+event+")");
 	}
+	
+	client.send("test message");
 }

@@ -4,6 +4,8 @@
 var WebSocket = function WebSocket(pointer) {
 	console.log("WebSocket("+pointer+")");
     this.pointer = pointer;
+	
+	CPP_DKWebSockets_CreateClient(pointer);
 
 	//// Instance properties ////
 	Object.defineProperty(this, "binaryType", {
@@ -48,6 +50,7 @@ var WebSocket = function WebSocket(pointer) {
 	
 	
 	//// Events ////
+	/*
 	this.close_func = null;
     Object.defineProperty(this, "onclose", {
         get: function onclose() {
@@ -59,7 +62,9 @@ var WebSocket = function WebSocket(pointer) {
             this.close_func = func
         }
     });
-
+	*/
+	
+	/*
 	this.error_func = null;
     Object.defineProperty(this, "onerror", {
         get: function onerror() {
@@ -71,6 +76,7 @@ var WebSocket = function WebSocket(pointer) {
             this.error_func = func
         }
     });
+	*/
 
 	this.message_func = null;
     Object.defineProperty(this, "onmessage", {
@@ -101,7 +107,7 @@ var WebSocket = function WebSocket(pointer) {
 	if(this.toString() === "[object Object]")
 		this.toString = function(){	return "[object WebSocket]" }
 	
-    return this;
+    return EventTarget.call(this, pointer)
 }
 
 // https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler

@@ -1,7 +1,7 @@
 
-var WebSocketServer = function WebSocketServer(url) {
+var WebSocketServer = function WebSocketServer(pointer) {
 	console.log("WebSocketServer("+url+")");
-    this.url = url;
+    this.pointer = pointer;
 
 	//// Instance properties ////
 	Object.defineProperty(this, "isConnected", {
@@ -25,6 +25,7 @@ var WebSocketServer = function WebSocketServer(url) {
     }	
 	
 	//// Events ////
+	/*
 	this.close_func = null;
     Object.defineProperty(this, "onclose", {
         get: function onclose() {
@@ -36,6 +37,7 @@ var WebSocketServer = function WebSocketServer(url) {
             this.close_func = func
         }
     });
+	*/
 	
 	this.message_func = null;
     Object.defineProperty(this, "onmessage", {
@@ -66,7 +68,7 @@ var WebSocketServer = function WebSocketServer(url) {
 	if(this.toString() === "[object Object]")
 		this.toString = function(){	return "[object WebSocketServer]" }
 	
-    return this;
+	return EventTarget.call(this, pointer)
 }
 
 WebSocketServer.prototype = EventTarget.prototype;

@@ -44,6 +44,7 @@ bool DKDomWebSocket::Init(){
 	DKDuktape::AttachFunction("CPP_DKDomWebSocket_url", DKDomWebSocket::url);
 	
 	//// Instance methods ////
+	DKDuktape::AttachFunction("CPP_DKDomWebSocket_open", DKDomWebSocket::open);
 	DKDuktape::AttachFunction("CPP_DKDomWebSocket_close", DKDomWebSocket::close);
 	DKDuktape::AttachFunction("CPP_DKDomWebSocket_send", DKDomWebSocket::send);
 	
@@ -84,6 +85,14 @@ int DKDomWebSocket::readyState(duk_context* ctx){
 int DKDomWebSocket::url(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	//TODO
+	return true;
+}
+
+int DKDomWebSocket::open(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
+	DKString address = duk_require_string(ctx, 0);
+	if (!DKWebSockets::CreateClient(address))
+		return DKERROR("DKWebSockets::CreateClient() failed! \n");
 	return true;
 }
 

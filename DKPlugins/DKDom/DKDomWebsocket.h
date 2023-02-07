@@ -47,6 +47,7 @@ public:
 	static int url(duk_context* ctx);
 	
 	//// Instance methods ////
+	static int open(duk_context* ctx);
 	static int close(duk_context* ctx);
 	static int send(duk_context* ctx);
 	
