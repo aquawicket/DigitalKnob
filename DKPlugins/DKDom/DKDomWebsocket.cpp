@@ -33,7 +33,67 @@
 
 bool DKDomWebSocket::Init(){
 	DKDEBUGFUNC();
+	
+	//// Instance properties ////
+	DKDuktape::AttachFunction("CPP_DKDomWebSocket_binaryType", DKDomWebSocket::binaryType);
+	DKDuktape::AttachFunction("CPP_DKDomWebSocket_bufferedAmount", DKDomWebSocket::bufferedAmount);
+	DKDuktape::AttachFunction("CPP_DKDomWebSocket_extensions", DKDomWebSocket::extensions);
+	DKDuktape::AttachFunction("CPP_DKDomWebSocket_protocol", DKDomWebSocket::protocol);
+	DKDuktape::AttachFunction("CPP_DKDomWebSocket_readyState", DKDomWebSocket::readyState);
+	DKDuktape::AttachFunction("CPP_DKDomWebSocket_url", DKDomWebSocket::url);
+	
+	//// Instance methods ////
+	DKDuktape::AttachFunction("CPP_DKDomWebSocket_close", DKDomWebSocket::close);
+	DKDuktape::AttachFunction("CPP_DKDomWebSocket_send", DKDomWebSocket::send);
+	
 	DKClass::DKCreate("DKDom/DKDomWebSocket.js");
+	return true;
+}
 
+int DKDomWebSocket::binaryType(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
+	//TODO
+	return true;
+}
+
+int DKDomWebSocket::bufferedAmount(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
+	//TODO
+	return true;
+}
+
+int DKDomWebSocket::extensions(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
+	//TODO
+	return true;
+}
+
+int DKDomWebSocket::protocol(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
+	//TODO
+	return true;
+}
+
+int DKDomWebSocket::readyState(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
+	//TODO
+	return true;
+}
+
+int DKDomWebSocket::url(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
+	//TODO
+	return true;
+}
+
+int DKDomWebSocket::close(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
+	//TODO
+	return true;
+}
+
+int DKDomWebSocket::send(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
+	//TODO
 	return true;
 }
