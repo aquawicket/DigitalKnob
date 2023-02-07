@@ -39,7 +39,7 @@ DKPlugin("DKFile/DKFile.js")
 var server = 1
 if(server){
 	/// WEBSOCKETS SERVER TEST ///
-	CPP_DK_Create("DKWebSocketsServer");
+	//CPP_DK_Create("DKWebSocketsServer");
 	var server = new WebSocketServer("ws://192.168.1.47:80");
 	console.log("server = "+server)
 	server.onclose = function(event){
