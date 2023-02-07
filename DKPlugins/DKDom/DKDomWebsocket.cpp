@@ -29,7 +29,7 @@
 #include "DK/DKApp.h"
 #include "DKDom/DKDom.h"
 #include "DKDom/DKDomWebSocket.h"
-#include "DKWebSockets/DKWebSockets.h"
+#include "DKWebSocketsClient/DKWebSocketsClient.h"
 
 
 bool DKDomWebSocket::Init(){
@@ -91,14 +91,14 @@ int DKDomWebSocket::url(duk_context* ctx){
 int DKDomWebSocket::open(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	if (!DKWebSockets::CreateClient(address))
+	if (!DKWebSocketsClient::CreateClient(address))
 		return DKERROR("DKWebSockets::CreateClient() failed! \n");
 	return true;
 }
 
 int DKDomWebSocket::close(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	if (!DKWebSockets::CloseClient())
+	if (!DKWebSocketsClient::CloseClient())
 		return DKERROR("DKWebSockets::CloseClient() failed! \n");
 	return true;
 }
@@ -106,7 +106,7 @@ int DKDomWebSocket::close(duk_context* ctx){
 int DKDomWebSocket::send(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString message = duk_require_string(ctx, 0);
-	if (!DKWebSockets::MessageToServer(message))
+	if (!DKWebSocketsClient::MessageToServer(message))
 		return DKERROR("DKWebSockets::MessageToServer() failed! \n");
 	return true;
 }
