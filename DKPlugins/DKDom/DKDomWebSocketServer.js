@@ -1,6 +1,6 @@
 
 var WebSocketServer = function WebSocketServer(pointer) {
-	console.log("WebSocketServer("+url+")");
+	console.log("WebSocketServer("+pointer+")");
     this.pointer = pointer;
 
 	//// Instance properties ////
@@ -25,6 +25,7 @@ var WebSocketServer = function WebSocketServer(pointer) {
     }	
 	
 	//// Events ////
+	// NOTE: already included from DKDomGlobalEventHandlers.js
 	/*
 	this.close_func = null;
     Object.defineProperty(this, "onclose", {

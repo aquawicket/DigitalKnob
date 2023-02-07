@@ -5,7 +5,7 @@ var WebSocket = function WebSocket(pointer) {
 	console.log("WebSocket("+pointer+")");
     this.pointer = pointer;
 	
-	CPP_DKWebSockets_CreateClient(pointer);
+	CPP_DKDomWebSocket_open(pointer);
 
 	//// Instance properties ////
 	Object.defineProperty(this, "binaryType", {
@@ -50,6 +50,7 @@ var WebSocket = function WebSocket(pointer) {
 	
 	
 	//// Events ////
+	// NOTE: already included from DKDomGlobalEventHandlers.js
 	/*
 	this.close_func = null;
     Object.defineProperty(this, "onclose", {
@@ -64,6 +65,7 @@ var WebSocket = function WebSocket(pointer) {
     });
 	*/
 	
+	// NOTE: already included from DKDomGlobalEventHandlers.js
 	/*
 	this.error_func = null;
     Object.defineProperty(this, "onerror", {
