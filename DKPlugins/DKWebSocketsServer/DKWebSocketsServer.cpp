@@ -142,6 +142,7 @@ bool DKWebSocketsServer::MessageFromClient(uWS::WebSocket<uWS::SERVER>* ws, char
 	DKString message_  = DKString(message).substr(0, length);
 	DKINFO("DKWebSocketsServer::MessageFromClient(): "+message_+"\n");
 	DKEvents::SendEvent("window", "DKWebSocketsServer_OnMessageFromClient", message_);
+	//DKEvents::SendEvent(data[1], "onmessage", message_);
 	return true;
 }
 
