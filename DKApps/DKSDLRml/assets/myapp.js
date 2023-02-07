@@ -36,10 +36,20 @@ DKPlugin("DKFile/DKFile.js")
 */
 
 /// WEBSOCKETS TEST ///
-var server = 1
+var server = 0
 if(server){
 	/// WEBSOCKETS SERVER TEST ///
 	var server = new WebSocketServer("ws://192.168.1.47:80");
+	server.onclose = function(event){
+		console.log("server.onclose("+event+")");
+	}
+	server.onmessage = function(event){
+		console.log("server.onmessage("+event+")");
+	}
+	server.onopen = function(event){
+		console.log("server.onopen("+event+")");
+	}
+	
 	server.start("192.168.1.47", "80");
 }
 else{
@@ -50,7 +60,6 @@ else{
 	}
 	client.onmessage = function(event){
 		console.log("client.onmessage("+event+")");
-		//CPP_DKWebSocketsClient_OnMessageFromServer(e.data.toString());
 	}
 	client.onclose = function(event){
 		console.log("client.onclose("+event+")");
