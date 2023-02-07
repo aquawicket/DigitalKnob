@@ -4,8 +4,10 @@
 var WebSocket = function WebSocket(pointer) {
 	console.log("WebSocket("+pointer+")");
     this.pointer = pointer;
+	this.url = pointer;
 	
-	CPP_DKDomWebSocket_open(pointer);
+	pointer = CPP_DKDomDocument_createElement("WebSocketServer");
+	CPP_DKDomWebSocket_open(url);
 
 	//// Instance properties ////
 	Object.defineProperty(this, "binaryType", {

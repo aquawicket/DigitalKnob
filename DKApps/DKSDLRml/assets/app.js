@@ -6,6 +6,7 @@ const url = CPP_DKAssets_LocalAssets()+"index.html"
 //const url = CPP_DKAssets_LocalAssets()+"DKWebTest/objectTest.html"
 //const url = CPP_DKAssets_LocalAssets()+"DKWebTest/positionTest.html"
 //const url = CPP_DKAssets_LocalAssets()+"DKWebTest/windowTest.html"
+
 CPP_DK_Create("DKSDLWindow")
 CPP_DK_Create("DKRml")
 location.href = url
