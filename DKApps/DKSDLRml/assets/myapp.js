@@ -36,7 +36,7 @@ DKPlugin("DKFile/DKFile.js")
 */
 
 /// WEBSOCKETS TEST ///
-var server = 0
+var server = 1
 if(server){
 	/// WEBSOCKETS SERVER TEST ///
 	//CPP_DK_Create("DKWebSocketsServer");
@@ -56,7 +56,7 @@ if(server){
 }
 else{
 	/// WEBSOCKETS CLIENT TEST ///
-	CPP_DK_Create("DKWebSocketsClient")
+	//CPP_DK_Create("DKWebSocketsClient")
 	var client = new WebSocket("ws://192.168.1.47:80");
 	client.onopen = function(event){
 		console.log("client.onopen("+event+")");
