@@ -36,6 +36,7 @@ DKPlugin("DKFile/DKFile.js")
 */
 
 /// WEBSOCKETS TEST ///
+CPP_DK_Create("DKWebSockets")
 var server = 1
 if(server){
 	/// WEBSOCKETS SERVER TEST ///
