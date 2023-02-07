@@ -36,7 +36,16 @@ class DKDomWebSocketServer : public DKObjectT<DKDomWebSocketServer>
 public:
 	bool Init();
 
-	//TODO
+	//// Instance properties ////
+	static int isConnected(duk_context* ctx);
+	
+	//// Instance methods ////
+	static int disconnect(duk_context* ctx);
+	static int send(duk_context* ctx);
+	static int start(duk_context* ctx);
+	
+	//// Events ////
+	// implemented in DKDomWebSocketServer.js
 };
 
 REGISTER_OBJECT(DKDomWebSocketServer, true)

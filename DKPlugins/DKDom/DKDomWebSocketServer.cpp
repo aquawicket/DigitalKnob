@@ -32,8 +32,38 @@
 bool DKDomWebSocketServer::Init(){
 	DKDEBUGFUNC();
 	
-	//TODO
+	//// Instance properties ////
+	DKDuktape::AttachFunction("CPP_DKDomWebSocketServer_isConnected", DKDomWebSocketServer::isConnected);
+	
+	//// Instance methods ////
+	DKDuktape::AttachFunction("CPP_DKDomWebSocketServer_disconnect", DKDomWebSocketServer::disconnect);
+	DKDuktape::AttachFunction("CPP_DKDomWebSocketServer_send", DKDomWebSocketServer::send);
+	DKDuktape::AttachFunction("CPP_DKDomWebSocketServer_start", DKDomWebSocketServer::start);
 	
 	DKClass::DKCreate("DKDom/DKDomWebSocketServer.js");
+	return true;
+}
+
+int DKDomWebSocketServer::isConnected(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
+	//TODO
+	return true;
+}
+
+int DKDomWebSocketServer::disconnect(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
+	//TODO
+	return true;
+}
+
+int DKDomWebSocketServer::send(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
+	//TODO
+	return true;
+}
+
+int DKDomWebSocketServer::start(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
+	//TODO
 	return true;
 }
