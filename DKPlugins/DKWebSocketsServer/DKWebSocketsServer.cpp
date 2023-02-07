@@ -58,39 +58,39 @@ bool DKWebSocketsServer::CreateServer(const DKString& address, const int& port){
 		DKDEBUGFUNC(user);
 		serverWebSocket = NULL;
 		switch ((long) user){
-		case 1:
-			DKERROR("Client emitted error on invalid URI \n");
-			break;
-		case 2:
-			DKERROR("Client emitted error on resolve failure \n");
-			break;
-		case 3:
-			DKERROR("Client emitted error on connection timeout (non-SSL) \n");
-			break;
-		case 5:
-			DKERROR("Client emitted error on connection timeout (SSL) \n");
-			break;
-		case 6:
-			DKERROR("Client emitted error on HTTP response without upgrade (non-SSL) \n");
-			break;
-		case 7:
-			DKERROR("Client emitted error on HTTP response without upgrade (SSL) \n");
-			break;
-		case 10:
-			DKERROR("Client emitted error on poll error \n");
-			break;
-		case 11:
-			static int protocolErrorCount = 0;
-			protocolErrorCount++;
-			DKERROR("Client emitted error on invalid protocol \n");
-			if (protocolErrorCount > 1) {
-				DKERROR("FAILURE: "+toString(protocolErrorCount)+" errors emitted for one connection! \n");
-				exit(-1);
-			}
-			break;
-		//default:
-			//std::cout << "FAILURE: " << user << " should not emit error!" << std::endl;
-			//exit(-1);
+			case 1:
+				DKERROR("Client emitted error on invalid URI \n");
+				break;
+			case 2:
+				DKERROR("Client emitted error on resolve failure \n");
+				break;
+			case 3:
+				DKERROR("Client emitted error on connection timeout (non-SSL) \n");
+				break;
+			case 5:
+				DKERROR("Client emitted error on connection timeout (SSL) \n");
+				break;
+			case 6:
+				DKERROR("Client emitted error on HTTP response without upgrade (non-SSL) \n");
+				break;
+			case 7:
+				DKERROR("Client emitted error on HTTP response without upgrade (SSL) \n");
+				break;
+			case 10:
+				DKERROR("Client emitted error on poll error \n");
+				break;
+			case 11:
+				static int protocolErrorCount = 0;
+				protocolErrorCount++;
+				DKERROR("Client emitted error on invalid protocol \n");
+				if (protocolErrorCount > 1) {
+					DKERROR("FAILURE: "+toString(protocolErrorCount)+" errors emitted for one connection! \n");
+					exit(-1);
+				}
+				break;
+			//default:
+				//std::cout << "FAILURE: " << user << " should not emit error!" << std::endl;
+				//exit(-1);
 		}
 	});
 
@@ -98,14 +98,14 @@ bool DKWebSocketsServer::CreateServer(const DKString& address, const int& port){
 		DKDEBUGFUNC(ws, req);
 		serverWebSocket = ws;
 		switch ((long) ws->getUserData()) {
-		case 8:
-			DKINFO("Client established a remote connection over non-SSL \n");
-			break;
-		case 9:
-			DKINFO("Client established a remote connection over SSL \n");
-			break;
-		default:
-			DKINFO("FAILURE: ws->getUserData() should not connect! \n");
+			case 8:
+				DKINFO("Client established a remote connection over non-SSL \n");
+				break;
+			case 9:
+				DKINFO("Client established a remote connection over SSL \n");
+				break;
+			default:
+				DKINFO("FAILURE: ws->getUserData() should not connect! \n");
 		}
 	});
 
