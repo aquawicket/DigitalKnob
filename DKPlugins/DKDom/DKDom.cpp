@@ -78,6 +78,7 @@ bool DKDom::Init(){
 			
 		DKClass::DKCreate("DKDomHTMLDocument");
 		DKClass::DKCreate("DKDomHTMLBodyElement");
+		DKClass::DKCreate("DKDomWebSocket")
 		
 	return true;
 }
