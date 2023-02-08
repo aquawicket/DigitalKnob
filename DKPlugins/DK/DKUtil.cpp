@@ -351,7 +351,7 @@ bool DKUtil::GetLocalIP(DKString& ip){
 	#if WIN
 		return DKWindows::GetLocalIP(ip);
 	#else
-		return DKUnix::GetLocalIP(ip)
+		return DKUnix::GetLocalIP(ip);
 	#endif
 }
 
