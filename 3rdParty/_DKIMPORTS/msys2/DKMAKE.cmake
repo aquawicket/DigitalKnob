@@ -44,4 +44,6 @@ if(NOT EXISTS ${MSYS2}/mingw32/bin/gcc.exe)
 	dk_command(bash -c "pacman -S mingw-w64-i686-gcc --noconfirm")		# WIN32 builds
 endif()
 
-dk_command(bash -c "pacman -S mingw-w64-x86_64-autotools --noconfirm")	# used by giflib
+if(NOT EXISTS ${MSYS2}/usr/bin/automake)
+	dk_command(bash -c "pacman -S mingw-w64-x86_64-autotools --noconfirm")	# used by giflib
+endif()
