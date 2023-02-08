@@ -107,6 +107,9 @@ bool DKWebSocketsServer::CreateServer(const DKString& address, const int& port){
 			default:
 				DKINFO("FAILURE: ws->getUserData() should not connect! \n");
 		}
+		DKINFO("DKEvents::SendEvent("+data[1]+", \"open\", \"\"); \n")
+		DKEvents::SendEvent(data[1], "open", "");
+		DKEvents::SendEvent(data[1], "onopen", "");
 	});
 
 	serverHub.onDisconnection([this](uWS::WebSocket<uWS::SERVER> *ws, int code, char *message, size_t length) {
