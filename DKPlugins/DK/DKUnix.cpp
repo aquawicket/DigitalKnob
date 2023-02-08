@@ -33,6 +33,14 @@ WARNING_DISABLE
 #include <cstdlib>     // GetUsername()  std::getenv()
 #include <unistd.h>    // sleep()  / usleep()
 #include <termios.h>   // for system(), tcsetattr()
+
+#include <stdio.h>		// GetLocalIP()
+#include <string.h>		// GetLocalIP()
+#include <sys/types.h>	// GetLocalIP()
+#include <sys/socket.h>	// GetLocalIP()
+#include <netdb.h>		// GetLocalIP()
+#include <arpa/inet.h>	// GetLocalIP()
+#include <netinet/in.h>	// GetLocalIP()
 WARNING_ENABLE
 
 static struct termios current, old;
@@ -113,6 +121,58 @@ bool DKUnix::GetUsername(DKString& username){
 	return DKERROR("ERROR: cannot get username");
 	*/
 	return false;
+}
+
+// https://web.archive.org/web/20170515025821/http://beej.us/guide/bgnet/examples/showip.c
+bool DKUnix::GetLocalIP(DKString& ip){
+	DKDEBUGFUNC(ip);
+	
+	/*
+	struct addrinfo hints, *res, *p;
+	int status;
+	char ipstr[INET6_ADDRSTRLEN];
+
+	if (argc != 2) {
+	    fprintf(stderr,"usage: showip hostname\n");
+	    return 1;
+	}
+
+	memset(&hints, 0, sizeof hints);
+	hints.ai_family = AF_UNSPEC; // AF_INET or AF_INET6 to force version
+	hints.ai_socktype = SOCK_STREAM;
+
+	if ((status = getaddrinfo(argv[1], NULL, &hints, &res)) != 0) {
+		fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(status));
+		return 2;
+	}
+
+	printf("IP addresses for %s:\n\n", argv[1]);
+
+	for(p = res;p != NULL; p = p->ai_next) {
+		void *addr;
+		char *ipver;
+
+		// get the pointer to the address itself,
+		// different fields in IPv4 and IPv6:
+		if (p->ai_family == AF_INET) { // IPv4
+			struct sockaddr_in *ipv4 = (struct sockaddr_in *)p->ai_addr;
+			addr = &(ipv4->sin_addr);
+			ipver = "IPv4";
+		} else { // IPv6
+			struct sockaddr_in6 *ipv6 = (struct sockaddr_in6 *)p->ai_addr;
+			addr = &(ipv6->sin6_addr);
+			ipver = "IPv6";
+		}
+
+		// convert the IP to a string and print it:
+		inet_ntop(p->ai_family, addr, ipstr, sizeof ipstr);
+		printf("  %s: %s\n", ipver, ipstr);
+	}
+
+	freeaddrinfo(res); // free the linked list
+	*/
+	
+	return DKERROR("not implemented! \n");
 }
 
 char DKUnix::getch_(int echo) {

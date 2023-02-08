@@ -346,12 +346,18 @@ bool DKUtil::GetLocalIP(DKString& ip){
 	boost::asio::ip::tcp::endpoint endpoint = *it; 
 	ip = endpoint.address().to_string();
 	*/
-	return DKERROR("boost depricated in the DKCore library \n");
+	//return DKERROR("boost depricated in the DKCore library \n");
+	
+	#if WIN
+		return DKWindows::GetLocalIP(ip);
+	#else
+		return DKUnix::GetLocalIP(ip)
+	#endif
 }
 
 bool DKUtil::GetMousePos(int& x, int& y){
 	DKDEBUGFUNC(x, y);
-#	if WIN32
+#	if WIN
 		return DKWindows::GetMousePos(x, y);
 #	elif MAC
 		return DKMac::GetMousePos(x, y);

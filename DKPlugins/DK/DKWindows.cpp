@@ -43,6 +43,9 @@ WARNING_DISABLE
 //Monitor brightness
 #include "PhysicalMonitorEnumerationAPI.h"
 #include "HighLevelMonitorConfigurationAPI.h"
+
+#include <winsock2.h>		// GetLocalIP()
+#include <ws2tcpip.h>		// GetLocalIP()
 WARNING_ENABLE
 
 
@@ -303,6 +306,40 @@ bool DKWindows::GetLastError(DKString& error){
 	LocalFree(messageBuffer);
 	error = message;
 	return true;
+}
+
+// https://www.geekpage.jp/en/programming/winsock/getaddrinfo-0.php
+bool DKWindows::GetLocalIP(DKString& ip){
+	DKDEBUGFUNC(ip);
+	
+	/*
+	char *hostname = "localhost";
+	struct addrinfo hints, *res;
+	struct in_addr addr;
+	int err;
+
+	WSAData data;
+	WSAStartup(MAKEWORD(2,0), &data);
+
+	memset(&hints, 0, sizeof(hints));
+	hints.ai_socktype = SOCK_STREAM;
+	hints.ai_family = AF_INET;
+
+	if ((err = getaddrinfo(hostname, NULL, &hints, &res)) != 0) {
+	  printf("error %d\n", err);
+	  return 1;
+	}
+
+	addr.S_un = ((struct sockaddr_in *)(res->ai_addr))->sin_addr.S_un;
+
+	printf("ip address : %s\n", inet_ntoa(addr));
+
+	freeaddrinfo(res);
+
+	WSACleanup();
+	*/
+	
+	return DKERROR("not implemented! \n");
 }
 
 bool DKWindows::GetMousePos(int& x, int& y){

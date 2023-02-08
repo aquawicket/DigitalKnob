@@ -59,6 +59,7 @@ public:
 	static bool GetClipboard(DKString& text);
 	static bool GetKey(int& key);
 	static bool GetLastError(DKString& error);
+	static bool GetLocalIP(DKString& ip);
 	static bool GetMousePos(int& x, int& y);
 	static bool GetPixelFromImage(const DKString& image, int x, int y);
 	static bool GetPixelFromScreen(int x, int y, int& r, int& g, int& b);

@@ -36,8 +36,9 @@ char getche(void);
 class DKUnix{
 public:
 	static bool GetKey(int& key);
-	static bool Sleep(int milliseconds);
+	static bool GetLocalIP(DKString& ip);
 	static bool GetUsername(DKString& username);
+	static bool Sleep(int milliseconds);
 	static char getch_(int echo);
 	static void initTermios(int echo);
 	static void restoreTermios(void);
