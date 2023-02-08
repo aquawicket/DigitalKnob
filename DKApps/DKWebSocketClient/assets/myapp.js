@@ -24,10 +24,22 @@
 * SOFTWARE.
 */
 
-
-/// WEB TEST ///
-const url = "DKWebTest/index.html"
-location.href = url
-DKPlugin("DK/DKPhp.js")
 DKPlugin("DKFile/DKFile.js")
 DKPlugin("DKDebug/DKDebug.js") //add dkpush, etc.
+
+/// WEBSOCKETS CLIENT TEST ///
+var client = new WebSocket("ws://192.168.1.47:80");
+client.onopen = function(event){
+	console.log("client.onopen("+event+")");
+}
+client.onmessage = function(event){
+	console.log("client.onmessage("+event+")");
+}
+client.onclose = function(event){
+	console.log("client.onclose("+event+")");
+}
+client.onerror = function(event){
+	console.log("client.onerror("+event+")");
+}
+	
+//client.send("test message");
