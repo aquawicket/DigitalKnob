@@ -428,7 +428,7 @@ if(LINUX)
 	dk_disable(rmlui-d3d11)
 	dk_disable(sdl_rtf)
 	dk_disable(tesseract)			# requires leptonica
-	dk_disable(uwebsockets)			# requires openssl
+	#dk_disable(uwebsockets)			# requires openssl
 	dk_disable(waave)
 	dk_disable(x265)
 endif(LINUX)
