@@ -82,7 +82,6 @@ if(ANDROID)
 	dk_disable(DKScreenRecorder)	# requires opencv
 	dk_disable(DKSDLCef)			# requires cef_binary
 	dk_disable(DKSDLOsg)			# requires openscenegraph
-	#dk_disable(DKSDLVideo)			# requires ffmpeg
 	dk_disable(DKSDLWaave)			# requires waave
 	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSFMLRml)			# requires sfml
@@ -208,7 +207,6 @@ if(EMSCRIPTEN)
 	dk_disable(DKSDLAudio)
 	dk_disable(DKSDLCef)
 	dk_disable(DKSDLMetalWindow)
-	#dk_disable(DKSDLVideo)			# requires ffmpeg
 	dk_disable(DKSDLWaave)			# requires waave
 	dk_disable(DKSDLWav)
 	dk_disable(DKSFMLRml)
@@ -220,7 +218,6 @@ if(EMSCRIPTEN)
 	dk_disable(DKVncClient)			# case value evaluates to 4294967295, which cannot be narrowed to type 'int'
 	dk_disable(DKWebSockets)
 	dk_disable(dukluv)
-	#dk_disable(ffmpeg)
 	dk_disable(flac)				# ERROR: src/libFLAC/cpu.c:91:43 error: invalid output constraint '=a' in asm
 	dk_disable(fontconfig)
 	dk_disable(foundation)
@@ -278,7 +275,6 @@ if(EMSCRIPTEN)
 	dk_disable(vorbis)				# requires ogg
 	dk_disable(waave)
 	dk_disable(wasm3)
-	#dk_disable(x264)
 	dk_disable(x265)
 	dk_disable(xz)					# CMake Error: TEST_BIG_ENDIAN found no result!
 	dk_disable(zstd)				# error: call to undeclared function 'fileno'; ISO C99 and later do not support implicit function declarations
@@ -318,7 +314,6 @@ if(IOS OR IOSSIM)
 	dk_disable(DKScreenRecorder)	# requires opencv
 	dk_disable(DKSDLCef)			# requires cef_binary
 	dk_disable(DKSDLOsg)			# requires openscenegraph 
-	#dk_disable(DKSDLVideo)			# requires ffmpeg
 	dk_disable(DKSDLWaave)			# requires waave
 	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSFMLRml)			# requires sfml
@@ -329,7 +324,6 @@ if(IOS OR IOSSIM)
 	dk_disable(DKVncClient)			# requires libvncserver
 	dk_disable(DKVncServer)			# requires libvncserver
 	dk_disable(dukluv)
-	#dk_disable(ffmpeg)
 	dk_disable(fontconfig)
 	dk_disable(gdal)
 	dk_disable(gzip)
@@ -374,7 +368,6 @@ if(IOS OR IOSSIM)
 	dk_disable(tiff)				# install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executable target "fax2ps"
 	dk_disable(waave)				# ** BUILD FAILED ** src/audio_decoder.c
 	dk_disable(wasm3)				# CMake Error: install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executbale target "wasm3"
-	#dk_disable(x264)
 	dk_disable(x265)
 	dk_disable(zstd)
 endif(IOS OR IOSSIM)
@@ -392,7 +385,6 @@ endif()
 if(LINUX)
 	dk_disable(aubio)
 	dk_disable(boxer)				# error: can't create CMakeFiles/Boxer.dir/src/boxer_linux.cpp.o: No such file or directory
-	#dk_disable(DKCef)				# can't find glibconfig.h
 	dk_disable(DKHook)				# 'read' was not declared in this scope
 	dk_disable(DKJerryscript)		# requires jerryscript
 	dk_disable(DKOcr)				# requires tesseract
@@ -404,7 +396,6 @@ if(LINUX)
 	dk_disable(DKOSGVideo)			# TODO
 	dk_disable(DKOSGWidget)			# build errors
 	dk_disable(DKScreenRecorder)
-	#dk_disable(DKSDLVideo)			# requires ffmpeg
 	dk_disable(DKSDLWaave)			# requires waave
 	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSFMLRml)			# INCOMPLETE
@@ -413,7 +404,6 @@ if(LINUX)
 	dk_disable(DKUpdate)			# error: need to implement boost::placeholders
 	dk_disable(DKWebSockets)		# requires libwebsockets, uwebsockets
 	dk_disable(dukluv)
-	#dk_disable(ffmpeg)
 	dk_disable(fontconfig)
 	dk_disable(gdal)
 	dk_disable(gnutls)
@@ -426,12 +416,10 @@ if(LINUX)
 	dk_disable(libexpat)
 	dk_disable(libsndfile)			# requires opus
 	dk_disable(libtorrent)			# CMake Error: cannot find source file: deps/try_signal/try_singal.cpp
-	#dk_disable(libxinerama-dev)	# apt: Unable to locate package libXinerama-dev
 	dk_disable(libxml2)				# Not such file or directory
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(nasm)
 	dk_disable(openframeworks)		# error: tesselator.h: No such file or directory
-	#dk_disable(openssl)				# undefined reference errors
 	dk_disable(osgaudio)			# can't find libosg_osgAudiod.a
 	dk_disable(osgbullet)			# requires osgworks
 	dk_disable(osgrmlui)
@@ -442,7 +430,6 @@ if(LINUX)
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(uwebsockets)			# requires openssl
 	dk_disable(waave)
-	#dk_disable(x264)
 	dk_disable(x265)
 endif(LINUX)
 
@@ -459,7 +446,6 @@ if(MAC)
 	dk_disable(DKOSGVideo)			# TODO
 	dk_disable(DKOSGWidget)			# build errors
 	dk_disable(DKScreenRecorder)
-	#dk_disable(DKSDLVideo)			# requires ffmpeg
 	dk_disable(DKSDLWaave)			# requires waave
 	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSFMLRml)			# INCOMPLETE
@@ -468,7 +454,6 @@ if(MAC)
 	dk_disable(DKUpdate)			# Error: 'boost/thread/xtime.hpp:24 expected identifier TIME_UTC_=1
 	dk_disable(DKVncClient)			# case value evaluates to 4294967295, which cannot be narrowed to type 'int'
 	dk_disable(dukluv)
-	#dk_disable(ffmpeg)
 	dk_disable(flac)				# 'asm' undelcared identifier
 	dk_disable(fontconfig)
 	dk_disable(gdal)
@@ -497,7 +482,6 @@ if(MAC)
 	dk_disable(smpeg2)				# ** BUILD FAILED ** MPEGstream.cpp
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(waave)				# error: streaming_objet.h:59 field has incomplete type 'enum PixelFormat'
-	#dk_disable(x264)
 	dk_disable(x265)
 endif(MAC)
 
@@ -519,7 +503,6 @@ if(RASPBERRY)
 	dk_disable(DKOSGVideo)			# TODO
 	dk_disable(DKOSGWidget)			# build errors
 	dk_disable(DKScreenRecorder)	# requires opencv
-	#dk_disable(DKSDLVideo)			# requires ffmpeg
 	dk_disable(DKSDLWaave)			# requires waave
 	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSFMLRml)			# INCOMPLETE
@@ -531,7 +514,6 @@ if(RASPBERRY)
 	dk_disable(DKWebSockets)		# requires openssl
 	dk_disable(dukluv)
 	dk_disable(emsdk)				# 64bit source only
-	#dk_disable(ffmpeg)
 	dk_disable(fontconfig)
 	dk_disable(gdal)
 	dk_disable(gzip)
@@ -569,14 +551,12 @@ if(RASPBERRY)
 	dk_disable(upx)
 	dk_disable(uwebsockets)			# broken
 	dk_disable(waave)
-	#dk_disable(x264)
 	dk_disable(x265)
 endif(RASPBERRY)
 
 
 # Disabled for tinycore targets
 if(TINYCORE)
-	#dk_disable(giflib)			# need autotools
 	dk_disable(glew)
 	dk_disable(libasound2-dev)
 	dk_disable(libgl1-mesa-dev)	
@@ -608,7 +588,6 @@ if(WIN)
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKUpdate)			# build errors
 	dk_disable(dukluv)
-	#dk_disable(ffmpeg)				# FIXME:   check DKMake.cmake script.  msys2
 	dk_disable(fontconfig)
 	dk_disable(gdal)
 	dk_disable(gzip)
