@@ -14,7 +14,7 @@ set(HALT_ON_ERRORS				0		CACHE INTERNAL "")	# halt cmake build script on errors
 set(HALT_ON_WARNINGS			0		CACHE INTERNAL "")	# halt cmake build script on warnings
 set(INSTALL_DKLIBS              0		CACHE INTERNAL "")	# install header files and libraries to DKBIN directory
 set(MAC_TERMINAL_WRAPPER        1		CACHE INTERNAL "")	# open app with terminal
-set(DKOFFLINE					1		CACHE INTERNAL "")	# work offline. No Git remote commands or downloading files
+set(DKOFFLINE					0		CACHE INTERNAL "")	# work offline. No Git remote commands or downloading files
 set(PRINT_CALL_DETAILS 			1		CACHE INTERNAL "")	# print function call details
 set(PRINT_FILE_NAMES 			1 		CACHE INTERNAL "")	# print function call file names
 set(PRINT_FUNCTION_ARGUMENTS 	1 		CACHE INTERNAL "")	# print function call arguments
