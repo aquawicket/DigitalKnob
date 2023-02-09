@@ -23,7 +23,7 @@
 # SOFTWARE.
 include_guard()
 
-dk_disable(uwebsockets)				# working on libwebsockets for now
+#dk_disable(uwebsockets)				# working on libwebsockets for now
 
 
 # DISABLED FOR ALL TARGETS
