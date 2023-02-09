@@ -25,8 +25,8 @@
 */
 
 #pragma once
-#ifndef DKWebSocketsClient_H
-#define DKWebSocketsClient_H
+#ifndef DKUWebSocketsClient_H
+#define DKUWebSocketsClient_H
 
 #include "DK/DK.h"
 
@@ -36,7 +36,7 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
-class DKWebSocketsClient : public DKObjectT<DKWebSocketsClient>
+class DKUWebSocketsClient : public DKObjectT<DKUWebSocketsClient>
 {
 public:
 	bool Init();
@@ -52,7 +52,7 @@ public:
 	uWS::Hub clientHub;
 	uWS::WebSocket<uWS::CLIENT>* clientWebSocket;
 };
-REGISTER_OBJECT(DKWebSocketsClient, true);
+REGISTER_OBJECT(DKUWebSocketsClient, true);
 
 
-#endif //DKWebSocketsClient_H
+#endif //DKUWebSocketsClient_H

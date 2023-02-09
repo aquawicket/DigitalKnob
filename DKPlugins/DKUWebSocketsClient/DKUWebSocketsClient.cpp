@@ -25,30 +25,30 @@
 */
 //https://github.com/uNetworking/uWebSockets/blob/master/tests/main.cpp
 #include "DK/stdafx.h"
-#include "DKWebSocketsClient/DKWebSocketsClient.h"
+#include "DKUWebSocketsClient/DKUWebSocketsClient.h"
 
 
-bool DKWebSocketsClient::Init(){
+bool DKUWebSocketsClient::Init(){
 	DKDEBUGFUNC();
 	DKINFO(toString(data, ",") + "\n");
-	DKApp::AppendLoopFunc(&DKWebSocketsClient::Loop, this);
+	DKApp::AppendLoopFunc(&DKUWebSocketsClient::Loop, this);
 	return true;
 }
 
-bool DKWebSocketsClient::End(){
+bool DKUWebSocketsClient::End(){
 	DKDEBUGFUNC();
 	clientHub.getDefaultGroup<uWS::CLIENT>().close();
 	return true;
 }
 
-bool DKWebSocketsClient::CloseClient(){
+bool DKUWebSocketsClient::CloseClient(){
 	DKDEBUGFUNC();
 	clientHub.getDefaultGroup<uWS::CLIENT>().close();
 	clientWebSocket = NULL;
 	return DKINFO("Client closed \n");
 }
 
-bool DKWebSocketsClient::CreateClient(const DKString& address){
+bool DKUWebSocketsClient::CreateClient(const DKString& address){
 	DKDEBUGFUNC(address);
 	clientAddress = address;
 
@@ -110,25 +110,25 @@ bool DKWebSocketsClient::CreateClient(const DKString& address){
 	clientHub.poll();
 	clientHub.connect(address, NULL);
 	
-	return DKINFO("DKWebSocketsClient::CreateClient(): Client started... \n");
+	return DKINFO("DKUWebSocketsClient::CreateClient(): Client started... \n");
 }
 
-void DKWebSocketsClient::Loop(){
+void DKUWebSocketsClient::Loop(){
 	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 	if(!clientAddress.empty())
 		clientHub.poll();
 }
 
-bool DKWebSocketsClient::MessageFromServer(uWS::WebSocket<uWS::CLIENT>* ws, char *message, size_t length, uWS::OpCode opCode){
+bool DKUWebSocketsClient::MessageFromServer(uWS::WebSocket<uWS::CLIENT>* ws, char *message, size_t length, uWS::OpCode opCode){
 	DKDEBUGFUNC(ws, message, length, opCode);
 	DKString message_  = DKString(message).substr(0, length);
-	DKINFO("DKWebSocketsClient::MessageFromServer(): " + message_ + "\n");
-	//DKEvents::SendEvent("window", "DKWebSocketsClient_OnMessageFromServer", message_);
+	DKINFO("DKUWebSocketsClient::MessageFromServer(): " + message_ + "\n");
+	//DKEvents::SendEvent("window", "DKUWebSocketsClient_OnMessageFromServer", message_);
 	DKEvents::SendEvent(data[1], "onmessage", message_);
 	return true;
 }
 
-bool DKWebSocketsClient::MessageToServer(const DKString& message){
+bool DKUWebSocketsClient::MessageToServer(const DKString& message){
 	DKDEBUGFUNC(message);
 	std::vector<std::string> messages = {message};
 	std::vector<int> excludes;

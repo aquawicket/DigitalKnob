@@ -1,42 +1,42 @@
 var websocket;
 
-function DKWebSocketsClient_init(){
-	dk.create("DKWebSockets/DKWebSocketsClient.html", function(){
-		window.addEventListener("DKWebSockets_OnMessageFromServer", DKWebSocketsClient_onevent);
-		byId("DKWebSocketsClient_CreateClient").addEventListener("click", DKWebSocketsClient_onevent);
-		byId("DKWebSocketsClient_CloseClient").addEventListener("click", DKWebSocketsClient_onevent);
-		byId("DKWebSocketsClient_MessageToServer").addEventListener("click", DKWebSocketsClient_onevent);
+function DKUWebSocketsClient_init(){
+	dk.create("DKWebSockets/DKUWebSocketsClient.html", function(){
+		window.addEventListener("DKWebSockets_OnMessageFromServer", DKUWebSocketsClient_onevent);
+		byId("DKUWebSocketsClient_CreateClient").addEventListener("click", DKUWebSocketsClient_onevent);
+		byId("DKUWebSocketsClient_CloseClient").addEventListener("click", DKUWebSocketsClient_onevent);
+		byId("DKUWebSocketsClient_MessageToServer").addEventListener("click", DKUWebSocketsClient_onevent);
 	});
 }
 
-function DKWebSocketsClient_end(){
-	window.removeEventListener("DKWebSockets_OnMessageFromServer", DKWebSocketsClient_onevent);
-	byId("DKWebSocketsClient_CreateClient").removeEventListener("click", DKWebSocketsClient_onevent);
-	byId("DKWebSocketsClient_CloseClient").removeEventListener("click", DKWebSocketsClient_onevent);
-	byId("DKWebSocketsClient_MessageToServer").removeEventListener("click", DKWebSocketsClient_onevent);
-	dk.close("DKWebSockets/DKWebSocketsClient.html");
+function DKUWebSocketsClient_end(){
+	window.removeEventListener("DKWebSockets_OnMessageFromServer", DKUWebSocketsClient_onevent);
+	byId("DKUWebSocketsClient_CreateClient").removeEventListener("click", DKUWebSocketsClient_onevent);
+	byId("DKUWebSocketsClient_CloseClient").removeEventListener("click", DKUWebSocketsClient_onevent);
+	byId("DKUWebSocketsClient_MessageToServer").removeEventListener("click", DKUWebSocketsClient_onevent);
+	dk.close("DKWebSockets/DKUWebSocketsClient.html");
 }
 
-function DKWebSocketsClient_onevent(event){
-	if(event.currentTarget.id === "DKWebSocketsClient_CreateClient")
-		DKWebSocketsClient_CreateClient();
-	if(event.currentTarget.id === "DKWebSocketsClient_CloseClient")
-		DKWebSocketsClient_CloseClient();
-	if(event.currentTarget.id === "DKWebSocketsClient_MessageToServer")
-		DKWebSocketsClient_MessageToServer();
+function DKUWebSocketsClient_onevent(event){
+	if(event.currentTarget.id === "DKUWebSocketsClient_CreateClient")
+		DKUWebSocketsClient_CreateClient();
+	if(event.currentTarget.id === "DKUWebSocketsClient_CloseClient")
+		DKUWebSocketsClient_CloseClient();
+	if(event.currentTarget.id === "DKUWebSocketsClient_MessageToServer")
+		DKUWebSocketsClient_MessageToServer();
 	if(event.currentTarget.id === "DKWebSockets_OnMessageFromServer"){
 		console.log("event = "+event);
-		DKWebSocketsClient_OnMessageFromServer(event);
+		DKUWebSocketsClient_OnMessageFromServer(event);
 	}
 }
 
-function DKWebSocketsClient_CreateClient(){
-	byId("DKWebSocketsClient_Address").value = "ws://192.168.1.47:80"  //TEMPORARY
-	if(!byId("DKWebSocketsClient_Address").value){
-		console.warn("DKWebSocketsClient_CreateClient(): please enter an address\n");
+function DKUWebSocketsClient_CreateClient(){
+	byId("DKUWebSocketsClient_Address").value = "ws://192.168.1.47:80"  //TEMPORARY
+	if(!byId("DKUWebSocketsClient_Address").value){
+		console.warn("DKUWebSocketsClient_CreateClient(): please enter an address\n");
 		return;
 	}
-	url = byId("DKWebSocketsClient_Address").value;  //  ws://localhost:3000
+	url = byId("DKUWebSocketsClient_Address").value;  //  ws://localhost:3000
 	
 	if(DUKTAPE){
 		console.log("Connecting to WebSocket via C++...\n");
@@ -52,7 +52,7 @@ function DKWebSocketsClient_CreateClient(){
 	}
 	websocket.onmessage = function(e){
 		console.log("websocket.onmessage");
-		CPP_DKWebSocketsClient_OnMessageFromServer(e.data.toString());
+		CPP_DKUWebSocketsClient_OnMessageFromServer(e.data.toString());
 	}
 	websocket.onclose = function(e){
 		console.log("websocket.onclose");
@@ -62,7 +62,7 @@ function DKWebSocketsClient_CreateClient(){
 	}
 }
 
-function DKWebSocketsClient_CloseClient(){
+function DKUWebSocketsClient_CloseClient(){
 	if(DUKTAPE){
 		CPP_DKWebSockets_CloseClient();
 		return;
@@ -72,8 +72,8 @@ function DKWebSocketsClient_CloseClient(){
 	websocket.close();
 }
 
-function DKWebSocketsClient_MessageToServer(){
-	var message = byId("DKWebSocketsClient_send").value;
+function DKUWebSocketsClient_MessageToServer(){
+	var message = byId("DKUWebSocketsClient_send").value;
 	console.log("sending ... \n"+message)
 	if(DUKTAPE){
 		CPP_DKWebSockets_MessageToServer(message);
@@ -84,6 +84,6 @@ function DKWebSocketsClient_MessageToServer(){
 	websocket.send(message);
 }
 
-function DKWebSocketsClient_OnMessageFromServer(message){
-	byId("DKWebSocketsClient_receive").value = message;
+function DKUWebSocketsClient_OnMessageFromServer(message){
+	byId("DKUWebSocketsClient_receive").value = message;
 }
