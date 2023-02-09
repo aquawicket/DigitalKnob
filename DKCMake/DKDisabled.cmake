@@ -113,7 +113,7 @@ if(ANDROID)
 	dk_disable(libuv)				# error : incomplete definition of type 'struct ifaddrs'
 	dk_disable(libvncserver)
 	dk_disable(libwebp)
-	dk_disable(libwebsockets)		# compiling errors
+	#dk_disable(libwebsockets)		# compiling errors
 	dk_disable(libxml2)				# ../../configure: No such file or directory
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(ncurses)				# error: '..' is not recognized as an internal or external command
@@ -235,7 +235,7 @@ if(EMSCRIPTEN)
 	dk_disable(libsndfile)
 	dk_disable(libtorrent)
 	dk_disable(libuv)
-	dk_disable(libwebsockets)
+	#dk_disable(libwebsockets)
 	dk_disable(libxml2)				# fatal error: 'config.h' file not found
 	dk_disable(lighttpd)
 	dk_disable(kdevelop)
@@ -341,7 +341,7 @@ if(IOS OR IOSSIM)
 	dk_disable(libtorrent)			# Could not find BOOST
 	dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
 	dk_disable(libwebp)				# TIFF is disabled when statically linking
-	dk_disable(libwebsockets)		# compiling errors
+	#dk_disable(libwebsockets)		# compiling errors
 	dk_disable(libxml2)				# fatal error: 'config.h' file not found
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(lua)					# error:'system' is unavailable: not available on iOS
@@ -462,7 +462,7 @@ if(MAC)
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libexpat)
 	dk_disable(libtorrent)			# CMake Error: cannot find deps/try_signal/try_signal.cpp
-	dk_disable(libwebsockets)		# error: unknown type name 'lws_mutex_t'
+	#dk_disable(libwebsockets)		# error: unknown type name 'lws_mutex_t'
 	dk_disable(libxml2)				# fatal error: 'extra/stricmp.h' file not found
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(mlocate)				# Unable to locate a Java Runtime that supports apt
