@@ -27,7 +27,9 @@
 #include "DK/DKApp.h"
 #include "DKDom/DKDom.h"
 #include "DKDom/DKDomWebSocketServer.h"
-#include "DKWebSocketsServer/DKWebSocketsServer.h"
+
+// uwebsockets
+#include "DKUWebSocketsServer/DKUWebSocketsServer.h"
 
 
 bool DKDomWebSocketServer::Init(){
