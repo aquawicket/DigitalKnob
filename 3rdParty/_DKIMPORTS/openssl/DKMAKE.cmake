@@ -15,8 +15,8 @@ DEBUG_dk_include		(${OPENSSL}/${OS}/${DEBUG_DIR}/include)
 RELEASE_dk_include      (${OPENSSL}/${OS}/${RELEASE_DIR}/include)
 
 # libcrypto
-APPLE_dk_libDebug		(${OPENSSL}/${OS}/${DEBUG_DIR}/libcrypto.a)
-APPLE_dk_libRelease		(${OPENSSL}/${OS}/${RELEASE_DIR}/libcrypto.a)
+UNIX_dk_libDebug		(${OPENSSL}/${OS}/${DEBUG_DIR}/libcrypto.a)
+UNIX_dk_libRelease		(${OPENSSL}/${OS}/${RELEASE_DIR}/libcrypto.a)
 
 # libeay
 WIN32_dk_libDebug		(${OPENSSL}/lib/libeay32MTd.lib)
@@ -25,16 +25,8 @@ WIN64_dk_libDebug		(${OPENSSL}/lib64/libeay32MTd.lib)
 WIN64_dk_libRelease		(${OPENSSL}/lib64/libeay32MT.lib)
 
 # libssl
-ANDROID_dk_libDebug		(${OPENSSL}/${OS}/${DEBUG_DIR}/libssl.a)
-ANDROID_dk_libRelease	(${OPENSSL}/${OS}/${RELEASE_DIR}/libssl.a)
-APPLE_dk_libDebug		(${OPENSSL}/${OS}/${DEBUG_DIR}/libssl.a)
-APPLE_dk_libRelease		(${OPENSSL}/${OS}/${RELEASE_DIR}/libssl.a)
-EMSCRIPTEN_dk_libDebug	(${OPENSSL}/${OS}/${DEBUG_DIR}/libssl.a)
-EMSCRIPTEN_dk_libRelease(${OPENSSL}/${OS}/${RELEASE_DIR}/libssl.a)
-LINUX_dk_libDebug		(${OPENSSL}/${OS}/${DEBUG_DIR}/libssl.a)
-LINUX_dk_libRelease		(${OPENSSL}/${OS}/${RELEASE_DIR}/libssl.a)
-RASPBERRY_dk_libDebug	(${OPENSSL}/${OS}/${DEBUG_DIR}/libssl.a)
-RASPBERRY_dk_libRelease	(${OPENSSL}/${OS}/${RELEASE_DIR}/libssl.a)
+UNIX_dk_libDebug		(${OPENSSL}/${OS}/${DEBUG_DIR}/libssl.a)
+UNIX_dk_libRelease		(${OPENSSL}/${OS}/${RELEASE_DIR}/libssl.a)
 WIN32_dk_libDebug		(${OPENSSL}/lib/ssleay32MTd.lib)
 WIN32_dk_libRelease		(${OPENSSL}/lib/ssleay32MT.lib)
 WIN64_dk_libDebug		(${OPENSSL}/lib64/ssleay32MTd.lib)
