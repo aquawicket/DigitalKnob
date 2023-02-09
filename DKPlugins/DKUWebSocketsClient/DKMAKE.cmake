@@ -1,4 +1,4 @@
 dk_depend(uwebsockets)
 
-dk_generateCmake(DKWebSocketsClient)
-dk_assets(DKWebSocketsClient)
+dk_generateCmake(DKUWebSocketsClient)
+dk_assets(DKUWebSocketsClient)
