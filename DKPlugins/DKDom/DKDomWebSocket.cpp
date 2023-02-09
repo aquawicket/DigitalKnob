@@ -29,7 +29,7 @@
 #include "DK/DKApp.h"
 #include "DKDom/DKDom.h"
 #include "DKDom/DKDomWebSocket.h"
-#include "DKWebSocketsClient/DKWebSocketsClient.h"
+#include "DKUWebSocketsClient/DKUWebSocketsClient.h" //uwebsocket
 
 
 bool DKDomWebSocket::Init(){
@@ -91,14 +91,14 @@ int DKDomWebSocket::url(duk_context* ctx){
 int DKDomWebSocket::open(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	if (!DKWebSocketsClient::Get()->CreateClient(address))
+	if (!DKUWebSocketsClient::Get()->CreateClient(address)) //uwebsocket
 		return DKERROR("DKWebSockets::CreateClient() failed! \n");
 	return true;
 }
 
 int DKDomWebSocket::close(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	if (!DKWebSocketsClient::Get()->CloseClient())
+	if (!DKUWebSocketsClient::Get()->CloseClient()) //uwebsocket
 		return DKERROR("DKWebSockets::CloseClient() failed! \n");
 	return true;
 }
@@ -106,7 +106,7 @@ int DKDomWebSocket::close(duk_context* ctx){
 int DKDomWebSocket::send(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString message = duk_require_string(ctx, 0);
-	if (!DKWebSocketsClient::Get()->MessageToServer(message))
+	if (!DKUWebSocketsClient::Get()->MessageToServer(message)) //uwebsocket
 		return DKERROR("DKWebSockets::MessageToServer() failed! \n");
 	return true;
 }
