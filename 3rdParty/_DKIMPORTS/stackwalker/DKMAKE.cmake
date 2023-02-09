@@ -4,7 +4,7 @@
 # https://www.codeproject.com/KB/threads/StackWalker/stackwalker.zip
 # FIXME: Let's replace this with boost::stacktrace for cross platform support.
 # https://www.boost.org/doc/libs/1_75_0/doc/html/stacktrace.html
-if(NOT WIN_HOST)
+if(NOT WIN)
 	dk_undepend(stackwalker)
 	dk_return()
 endif()
