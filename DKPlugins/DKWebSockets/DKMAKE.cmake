@@ -6,7 +6,7 @@ IF(LINUX)
 ENDIF()
 
 dk_depend(libwebsockets)
-#dk_depend(uwebsockets)
+dk_depend(uwebsockets)
 IF(HAVE_DKDuktape)
 	dk_depend(DKDuktape)
 ENDIF()
