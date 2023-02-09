@@ -312,34 +312,23 @@ bool DKWindows::GetLastError(DKString& error){
 bool DKWindows::GetLocalIP(DKString& ip){
 	DKDEBUGFUNC(ip);
 	
-	/*
 	char *hostname = "localhost";
 	struct addrinfo hints, *res;
 	struct in_addr addr;
-	int err;
-
 	WSAData data;
 	WSAStartup(MAKEWORD(2,0), &data);
-
 	memset(&hints, 0, sizeof(hints));
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_family = AF_INET;
-
-	if ((err = getaddrinfo(hostname, NULL, &hints, &res)) != 0) {
-	  printf("error %d\n", err);
-	  return 1;
-	}
-
+	int err;
+	if ((err = getaddrinfo(hostname, NULL, &hints, &res)) != 0)
+	  return DKERROR("getaddrinfo() failed!: error "+toString(err)+"\n");
 	addr.S_un = ((struct sockaddr_in *)(res->ai_addr))->sin_addr.S_un;
-
-	printf("ip address : %s\n", inet_ntoa(addr));
-
+	ip = toString(inet_ntoa(addr));
+	DKINFO("ip address = " + ip + "\n");
 	freeaddrinfo(res);
-
 	WSACleanup();
-	*/
-	
-	return DKERROR("not implemented! \n");
+	return true;
 }
 
 bool DKWindows::GetMousePos(int& x, int& y){
