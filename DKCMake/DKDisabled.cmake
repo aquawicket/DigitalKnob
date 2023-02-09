@@ -428,7 +428,6 @@ if(LINUX)
 	dk_disable(rmlui-d3d11)
 	dk_disable(sdl_rtf)
 	dk_disable(tesseract)			# requires leptonica
-	#dk_disable(uwebsockets)			# requires openssl
 	dk_disable(waave)
 	dk_disable(x265)
 endif(LINUX)
@@ -549,7 +548,7 @@ if(RASPBERRY)
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(tiff)
 	dk_disable(upx)
-	dk_disable(uwebsockets)			# broken
+	#dk_disable(uwebsockets)
 	dk_disable(waave)
 	dk_disable(x265)
 endif(RASPBERRY)
