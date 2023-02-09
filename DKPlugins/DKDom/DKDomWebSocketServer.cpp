@@ -55,7 +55,7 @@ int DKDomWebSocketServer::isConnected(duk_context* ctx){
 
 int DKDomWebSocketServer::disconnect(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	if (!DKWebSocketsServer::Get()->CloseServer())
+	if (!DKUWebSocketsServer::Get()->CloseServer()) // uwebsockets
 		return DKERROR("DKWebSockets::CloseServer() failed! \n");
 	return true;
 }
@@ -63,7 +63,7 @@ int DKDomWebSocketServer::disconnect(duk_context* ctx){
 int DKDomWebSocketServer::send(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString message = duk_require_string(ctx, 0);
-	if (!DKWebSocketsServer::Get()->MessageToClient(message))
+	if (!DKUWebSocketsServer::Get()->MessageToClient(message)) // uwebsockets
 		return DKERROR("DKWebSockets::MessageToClient() failed! \n");
 	return true;
 }
@@ -72,7 +72,7 @@ int DKDomWebSocketServer::start(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	DKString port = duk_require_string(ctx, 1);
-	if(!DKWebSocketsServer::Get()->CreateServer(address, toInt(port)))
+	if(!DKUWebSocketsServer::Get()->CreateServer(address, toInt(port))) // uwebsockets
 		return DKERROR("DKWebSockets::CreateServer() failed! \n");
 	return true;
 }
