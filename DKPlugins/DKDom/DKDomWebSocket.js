@@ -8,7 +8,7 @@ var WebSocket = function WebSocket(url) {
 	var pointer = CPP_DKDomDocument_createElement("websocket");
 	this.pointer = pointer;
 	
-	CPP_DK_Create("DKWebSocketsClient,"+pointer);
+	CPP_DK_Create("DKUWebSocketsClient,"+pointer);
 	
 	CPP_DKDomWebSocket_open(url);
 
