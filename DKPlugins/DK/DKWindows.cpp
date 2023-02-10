@@ -308,13 +308,13 @@ bool DKWindows::GetLastError(DKString& error){
 	return true;
 }
 
-// https://learn.microsoft.com/en-us/windows/win32/api/ws2tcpip/nf-ws2tcpip-getaddrinfo
 bool DKWindows::GetLocalIP(DKString& ip){
 	DKDEBUGFUNC(ip);
 	
-	char* hostname = "localhost";// "www.contoso.com";
+	// https://learn.microsoft.com/en-us/windows/win32/api/ws2tcpip/nf-ws2tcpip-getaddrinfo
+	/*
+	char* hostname = "localhost";
 	char* servicename = "80";
-
 	WSADATA wsaData;
 	int iResult;
 	INT iRetval;
@@ -328,18 +328,6 @@ bool DKWindows::GetLocalIP(DKString& ip){
 	LPSOCKADDR sockaddr_ip;
 	char ipstringbuffer[46];
 	DWORD ipbufferlength = 46;
-
-	// Validate the parameters
-	/*
-	if (argc != 3) {
-		printf("usage: %s <hostname> <servicename>\n", argv[0]);
-		printf("getaddrinfo provides protocol-independent translation\n");
-		printf("   from an ANSI host name to an IP address\n");
-		printf("%s example usage\n", argv[0]);
-		printf("   %s www.contoso.com 0\n", argv[0]);
-		return 1;
-	}
-	*/
 
 	// Initialize Winsock
 	iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
@@ -459,6 +447,33 @@ bool DKWindows::GetLocalIP(DKString& ip){
 
 	freeaddrinfo(result);
 	WSACleanup();
+	return true;
+	*/
+	
+	// https://tangentsoft.com/wskfaq/examples/ipaddr.html
+	WSAData wsaData;
+	if (WSAStartup(MAKEWORD(1, 1), &wsaData) != 0)	
+		return DKERROR("WSAStartup() failed! \n");
+
+	char ac[80];
+	if (gethostname(ac, sizeof(ac)) == SOCKET_ERROR)
+		return DKERROR("gethostname() failed!: error "+ toString(WSAGetLastError()) +" \n");
+
+	DKINFO("Host name is "+toString(ac)+"\n");
+
+	struct hostent* phe = gethostbyname(ac);
+	if (phe == 0)
+		return DKERROR("gethostbyname() failed! \n");
+
+	for (int i = 0; phe->h_addr_list[i] != 0; ++i) {
+		struct in_addr addr;
+		memcpy(&addr, phe->h_addr_list[i], sizeof(struct in_addr));
+		DKINFO("Address "+toString(i)+":"+toString(inet_ntoa(addr))+"\n");
+		ip = toString(inet_ntoa(addr));
+	}
+
+	WSACleanup();
+
 	return true;
 }
 

@@ -1,4 +1,3 @@
-console.log("CPP_DK_GetLocalIP() = "+CPP_DK_GetLocalIP())
 const url = CPP_DKAssets_LocalAssets()+"index.html"
 //const url = CPP_DKAssets_LocalAssets()+"DKRmlElement/index.html"
 //const url = CPP_DKAssets_LocalAssets()+"DKWebTest/index.html"
