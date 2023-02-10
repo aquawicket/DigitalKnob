@@ -6,7 +6,7 @@ var WebSocketServer = function WebSocketServer(url) {
 	var pointer = CPP_DKDomDocument_createElement("websocketserver");
 	this.pointer = pointer;
 	
-	CPP_DK_Create("DKWebSocketsServer,"+pointer);
+	CPP_DK_Create("DKUWebSocketsServer,"+pointer);
 
 	//// Instance properties ////
 	Object.defineProperty(this, "isConnected", {
