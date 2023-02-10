@@ -312,8 +312,8 @@ bool DKWindows::GetLastError(DKString& error){
 bool DKWindows::GetLocalIP(DKString& ip){
 	DKDEBUGFUNC(ip);
 	
-	int argc = DKApp::argc;
-	char** argv = DKApp::argv;
+	char* hostname = "localhost";// "www.contoso.com";
+	char* servicename = "80";
 
 	WSADATA wsaData;
 	int iResult;
@@ -355,15 +355,15 @@ bool DKWindows::GetLocalIP(DKString& ip){
 	hints.ai_protocol = IPPROTO_TCP;
 
 	DKINFO("Calling getaddrinfo with following parameters:\n");
-	DKINFO("\tnodename = "+ toString(argv[1]) +"\n");
-	DKINFO("\tservname (or port) = "+toString(argv[2]) + "\n\n");
+	DKINFO("\tnodename = "+ toString(hostname) +"\n");
+	DKINFO("\tservname (or port) = "+toString(servicename) + "\n\n");
 
 	//--------------------------------
 	// Call getaddrinfo(). If the call succeeds,
 	// the result variable will hold a linked list
 	// of addrinfo structures containing response
 	// information
-	dwRetval = getaddrinfo(argv[1], argv[2], &hints, &result);
+	dwRetval = getaddrinfo(hostname, servicename, &hints, &result);
 	if (dwRetval != 0) {
 		WSACleanup();
 		return DKERROR("getaddrinfo failed with error: "+toString(dwRetval) + "\n");
@@ -454,7 +454,7 @@ bool DKWindows::GetLocalIP(DKString& ip){
 				break;
 		}
 		DKINFO("\tLength of this sockaddr: "+ toString(ptr->ai_addrlen) +"\n");
-		DKINFO("\tCanonical name: "+ toString(ptr->ai_canonname) +"\n");
+		//DKINFO("\tCanonical name: "+ toString(ptr->ai_canonname) +"\n");
 	}
 
 	freeaddrinfo(result);
