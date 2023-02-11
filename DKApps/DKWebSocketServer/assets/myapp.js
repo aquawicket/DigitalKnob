@@ -37,6 +37,12 @@ server.addEventListener("close", function onclose(event){
 	console.log("event.value = "+event.value);
 })
 
+//server.onerror = function onerror(event){
+server.addEventListener("error", function onerror(event){
+	console.log("server.onerror("+event+")");
+	console.log("event.value = "+event.value);
+})
+
 //server.oninit = function oninit(event){
 server.addEventListener("init", function oninit(event){
 	console.log("server.oninit("+event+")");

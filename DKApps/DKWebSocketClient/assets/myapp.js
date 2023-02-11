@@ -29,17 +29,28 @@ DKPlugin("DKDebug/DKDebug.js") //add dkpush, etc.
 
 /// WEBSOCKETS CLIENT TEST ///
 var client = new WebSocket("ws://192.168.1.47:80");
-client.onopen = function(event){
-	console.log("client.onopen("+event+")");
-}
-client.onmessage = function(event){
-	console.log("client.onmessage("+event+")");
-}
-client.onclose = function(event){
+
+//client.onclose = function onclose(event){
+client.addEventListener("close", function onclose(event){
 	console.log("client.onclose("+event+")");
-}
-client.onerror = function(event){
+	console.log("event.value = "+event.value);
+})
+
+//client.onerror = function onerror(event){
+client.addEventListener("error", function onerror(event){
 	console.log("client.onerror("+event+")");
-}
-	
-//client.send("test message");
+	console.log("event.value = "+event.value);
+})
+
+//client.onmessage = function onmessage(event){
+client.addEventListener("message", function onmessage(event){
+	console.log("client.onmessage("+event+")");
+	console.log("event.value = "+event.value);
+})
+
+//client.onopen = function onopen(event){
+client.addEventListener("open", function onopen(event){
+	console.log("client.onopen("+event+")");
+	console.log("event.value = "+event.value);
+	client.send("test message");
+})
