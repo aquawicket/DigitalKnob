@@ -26,6 +26,7 @@
 //https://github.com/uNetworking/uWebSockets/blob/master/tests/main.cpp
 #include "DK/stdafx.h"
 #include "DKUWebSocketsClient/DKUWebSocketsClient.h"
+#include "DKRml/DKRml.h"
 
 
 bool DKUWebSocketsClient::Init(){
@@ -54,16 +55,21 @@ bool DKUWebSocketsClient::CreateClient(const DKString& address){
 
 	clientHub.onConnection([this](uWS::WebSocket<uWS::CLIENT> *ws, uWS::HttpRequest req){
 		DKDEBUGFUNC(ws, req);
+		//DKINFO("clientHub.onConnection() \n");
 		clientWebSocket = ws;
+		DKRml::Get()->SendEvent(data[1], "open", "");
 	});
 
 	clientHub.onDisconnection([this](uWS::WebSocket<uWS::CLIENT> *ws, int code, char *message, size_t length) {
 		DKDEBUGFUNC(ws, code, message, length);
+		//DKINFO("clientHub.onDisconnection() \n");
 		clientWebSocket = NULL;
+		DKRml::Get()->SendEvent(data[1], "close", "");
 	});
 
 	clientHub.onError([this](void *user){
 		DKDEBUGFUNC(user);
+		//DKINFO("clientHub.onError() \n");
 		clientWebSocket = NULL;
 		switch ((long) user){
 			case 1:
@@ -100,16 +106,19 @@ bool DKUWebSocketsClient::CreateClient(const DKString& address){
 				//std::cout << "FAILURE: " << user << " should not emit error!" << std::endl;
 				//exit(-1);
 		}
+		DKRml::Get()->SendEvent(data[1], "error", "");
 	});
 
 	clientHub.onMessage([this](uWS::WebSocket<uWS::CLIENT> *ws, char *message, size_t length, uWS::OpCode opCode){
 		DKDEBUGFUNC(ws, message, length, opCode);
+		//DKINFO("clientHub.onMessage() \n");
 		MessageFromServer(ws, message, length, opCode);
 	});
 
 	clientHub.poll();
 	clientHub.connect(address, NULL);
 	
+	DKRml::Get()->SendEvent(data[1], "init", "");
 	return DKINFO("DKUWebSocketsClient::CreateClient(): Client started... \n");
 }
 
@@ -123,8 +132,7 @@ bool DKUWebSocketsClient::MessageFromServer(uWS::WebSocket<uWS::CLIENT>* ws, cha
 	DKDEBUGFUNC(ws, message, length, opCode);
 	DKString message_  = DKString(message).substr(0, length);
 	DKINFO("DKUWebSocketsClient::MessageFromServer(): " + message_ + "\n");
-	//DKEvents::SendEvent("window", "DKUWebSocketsClient_OnMessageFromServer", message_);
-	DKEvents::SendEvent(data[1], "onmessage", message_);
+	DKRml::Get()->SendEvent(data[1], "message", message_);
 	return true;
 }
 
