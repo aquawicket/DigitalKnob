@@ -56,6 +56,7 @@ bool DKUWebSocketsServer::CreateServer(const DKString& address, const int& port)
 
 	serverHub.onError([this](void *user){
 		DKDEBUGFUNC(user);
+		//DKINFO("serverHub.onError() \n");
 		serverWebSocket = NULL;
 		switch ((long) user){
 			case 1:
@@ -92,10 +93,12 @@ bool DKUWebSocketsServer::CreateServer(const DKString& address, const int& port)
 				//std::cout << "FAILURE: " << user << " should not emit error!" << std::endl;
 				//exit(-1);
 		}
+		DKEvents::SendEvent(data[1], "error", "");
 	});
 
 	serverHub.onConnection([this](uWS::WebSocket<uWS::SERVER> *ws, uWS::HttpRequest req){
 		DKDEBUGFUNC(ws, req);
+		//DKINFO("serverHub.onConnection() \n");
 		serverWebSocket = ws;
 		switch ((long) ws->getUserData()) {
 			case 8:
@@ -107,22 +110,24 @@ bool DKUWebSocketsServer::CreateServer(const DKString& address, const int& port)
 			default:
 				DKINFO("FAILURE: ws->getUserData() should not connect! \n");
 		}
-		DKINFO("DKEvents::SendEvent("+data[1]+", \"open\", \"\"); \n")
 		DKEvents::SendEvent(data[1], "open", "");
 	});
 
 	serverHub.onDisconnection([this](uWS::WebSocket<uWS::SERVER> *ws, int code, char *message, size_t length) {
 		DKDEBUGFUNC(ws, code, message, length);
+		//DKINFO("serverHub.onDisconnection() \n");
 		serverWebSocket = NULL;
+		DKRml::Get()->SendEvent(data[1], "close", "");
 		DKINFO("Client got disconnected with data:ws->getUserData(), code:"+toString(code)+", message:<"+DKString(message, length)+"> \n");
 	});
 
 	serverHub.onMessage([this](uWS::WebSocket<uWS::SERVER> *ws, char *message, size_t length, uWS::OpCode opCode){
 		DKDEBUGFUNC(ws, message, length, opCode);
+		//DKINFO("serverHub.onMessage() \n");
 		MessageFromClient(ws, message, length, opCode);
 	});
 
-	DKRml::Get()->SendEvent(data[1], "init", "test123");
+	DKRml::Get()->SendEvent(data[1], "init", "");
 	return DKINFO("DKUWebSocketsServer::CreateServer(): Server started... \n");
 }
 
@@ -137,10 +142,8 @@ void DKUWebSocketsServer::Loop(){
 bool DKUWebSocketsServer::MessageFromClient(uWS::WebSocket<uWS::SERVER>* ws, char *message, size_t length, uWS::OpCode opCode){
 	DKDEBUGFUNC(ws, message, length, opCode);
 	DKString message_  = DKString(message).substr(0, length);
+	DKRml::Get()->SendEvent(data[1], "message", message_);
 	DKINFO("DKUWebSocketsServer::MessageFromClient(): "+message_+"\n");
-	//DKEvents::SendEvent("window", "DKUWebSocketsServer_OnMessageFromClient", message_);
-	DKEvents::SendEvent(data[1], "onmessage", message_);
-	DKEvents::SendEvent(data[1], "message", message_);
 	return true;
 }
 
