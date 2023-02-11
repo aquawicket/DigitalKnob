@@ -27,6 +27,10 @@
 DKPlugin("DKFile/DKFile.js")
 DKPlugin("DKDebug/DKDebug.js") //add dkpush, etc.
 
+DKPlugin("DKUWebSocketsClient/DKUWebSocketsClient.js")
+DKUWebSocketsClient_init()
+
+/*
 /// WEBSOCKETS CLIENT TEST ///
 var client = new WebSocket("ws://192.168.1.47:80");
 
@@ -54,3 +58,4 @@ client.addEventListener("open", function onopen(event){
 	console.log("event.value = "+event.value);
 	client.send("test message");
 })
+*/
