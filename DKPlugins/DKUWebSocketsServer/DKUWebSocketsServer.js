@@ -1,3 +1,5 @@
+var server
+
 function DKUWebSocketsServer_init(){
 	dk.create("DKUWebSocketsServer");
 	dk.create("DKUWebSocketsServer/DKUWebSocketsServer.html", function(){
@@ -38,7 +40,7 @@ function DKUWebSocketsServer_CreateServer(){
 	console.log("DKUWebSocketsServer_CreateServer(): port = "+byId("DKUWebSocketsServer_Port").value+"\n");
 	
 	var local_ip = CPP_DK_GetLocalIP()
-	var server = new WebSocketServer("ws://"+local_ip+":80");
+	server = new WebSocketServer("ws://"+local_ip+":80");
 	
 	//server.onclose = function onclose(event){
 	server.addEventListener("close", function onclose(event){
