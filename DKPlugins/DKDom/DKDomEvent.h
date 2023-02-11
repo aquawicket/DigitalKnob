@@ -58,6 +58,9 @@ public:
 	// Obsolete properties
 	static int scoped(duk_context* ctx); //Read Only, Obsolete
 
+	// Custome propertiesadded by Digitalknob
+	static int value(duk_context* ctx);
+
 	// Methods
 	static int createEvent(duk_context* ctx); //Deprecated
 	static int composedPath(duk_context* ctx);

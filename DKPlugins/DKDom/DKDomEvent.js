@@ -121,6 +121,13 @@ var Event = function(pointer) //https://developer.mozilla.org/en-US/docs/Web/API
         }
     })
     //Read Only, Obsolete
+	
+	// Custom added by DigitalKnob
+	Object.defineProperty(this, "value", {
+        get: function value() {
+            return CPP_DKDomEvent_value(pointer)
+        }
+    })
 
     //Methods
     Event.prototype.createEvent = function createEvent() {

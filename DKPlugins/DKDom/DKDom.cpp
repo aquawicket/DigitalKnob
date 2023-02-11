@@ -65,10 +65,10 @@ bool DKDom::Init(){
 					DKClass::DKCreate("DKDomHTMLImageElement");
 					DKClass::DKCreate("DKDomHTMLScriptElement");
 					DKClass::DKCreate("DKDomHTMLSpanElement");
+			DKClass::DKCreate("DKDomDocumentOrShadowRoot");
 			DKClass::DKCreate("DKDomDocument");
 		DKClass::DKCreate("DKDomCSSStyleDeclaration");
 			
-		DKClass::DKCreate("DKDomDocumentOrShadowRoot");
 		DKClass::DKCreate("DKDomWindowOrWorkerGlobalScope");
 		DKClass::DKCreate("DKDomWindow");
 			DKClass::DKCreate("DKDomConsole");

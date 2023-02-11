@@ -74,9 +74,9 @@ bool DKDomEventTarget::OnEvent(DKEvents* event){
 	*/
 	DKString rmlEventAddress = event->data[0];
 	if (rmlEventAddress.empty()) {
-		DKERROR("event->data[0] invalid!\n");
-		DKWARN("using event->GetId() instead! \n");
-		rmlEventAddress = id;
+		return DKERROR("event->data[0] invalid!\n");
+		//DKWARN("using event->GetId() instead! \n");
+		//rmlEventAddress = id;
 	}
 	//This is current evaluated javascript side at DKDomEvent.js: DispatchEvent(pointer)
 	/*

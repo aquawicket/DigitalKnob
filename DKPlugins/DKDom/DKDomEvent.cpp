@@ -55,6 +55,9 @@ bool DKDomEvent::Init(){
 	// Obsolete properties
 	DKDuktape::AttachFunction("CPP_DKDomEvent_scoped", DKDomEvent::scoped);
 
+	// Custom properties added by DigitalKnob
+	DKDuktape::AttachFunction("CPP_DKDomEvent_value", DKDomEvent::value);
+
 	// Methods
 	DKDuktape::AttachFunction("CPP_DKDomEvent_createEvent", DKDomEvent::createEvent);
 	DKDuktape::AttachFunction("CPP_DKDomEvent_composedPath", DKDomEvent::composedPath);
@@ -316,6 +319,22 @@ int DKDomEvent::scoped(duk_context* ctx){
 	}
 	//TODO
 	return false;
+}
+
+
+// Custome properties added by Digitalknob
+//////////////////////////////////////////
+int DKDomEvent::value(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
+	DKString eventAddress = duk_require_string(ctx, 0);
+	Rml::Event* event = DKRml::addressToEvent(eventAddress);
+	if (!event) {
+		duk_push_undefined(ctx);
+		return DKERROR("DKDomEvent::value(): event invalid\n");
+	}
+	DKString value = event->GetParameter<DKString>("value", "nope");
+	duk_push_string(ctx, value.c_str());
+	return true;
 }
 
 

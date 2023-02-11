@@ -26,7 +26,7 @@
 //https://github.com/uNetworking/uWebSockets/blob/master/tests/main.cpp
 #include "DK/stdafx.h"
 #include "DKUWebSocketsServer/DKUWebSocketsServer.h"
-
+#include "DKRml/DKRml.h"
 
 bool DKUWebSocketsServer::Init(){
 	DKDEBUGFUNC();
@@ -109,7 +109,6 @@ bool DKUWebSocketsServer::CreateServer(const DKString& address, const int& port)
 		}
 		DKINFO("DKEvents::SendEvent("+data[1]+", \"open\", \"\"); \n")
 		DKEvents::SendEvent(data[1], "open", "");
-		DKEvents::SendEvent(data[1], "onopen", "");
 	});
 
 	serverHub.onDisconnection([this](uWS::WebSocket<uWS::SERVER> *ws, int code, char *message, size_t length) {
@@ -123,6 +122,7 @@ bool DKUWebSocketsServer::CreateServer(const DKString& address, const int& port)
 		MessageFromClient(ws, message, length, opCode);
 	});
 
+	DKRml::Get()->SendEvent(data[1], "init", "test123");
 	return DKINFO("DKUWebSocketsServer::CreateServer(): Server started... \n");
 }
 

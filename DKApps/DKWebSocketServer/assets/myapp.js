@@ -31,14 +31,23 @@ DKPlugin("DKDebug/DKDebug.js") //add dkpush, etc.
 var local_ip = CPP_DK_GetLocalIP()
 var server = new WebSocketServer("ws://"+local_ip+":80");
 console.log("server = "+server)
-server.onclose = function(event){
+
+server.addEventListener("init", function(event){
+	console.log("server.init("+event+")");
+	event.getParameters()
+	console.log('event.value = '+event.value)
+	console.log('event["value"] = '+event["value"])
+})
+/*
+server.addEventListener("close", function(){
 	console.log("server.onclose("+event+")");
-}
+})
 server.onmessage = function(event){
 	console.log("server.onmessage("+event+")");
 }
-server.onopen = function(event){
+server.addEventListener("open", function(event){
 	console.log("server.onopen("+event+")");
-}
+})
+*/
 	
 server.start(local_ip, "80");
