@@ -1,8 +1,9 @@
+var server
+
 function DKUWebSocketsServer_init(){
-	dk.create("DKWebSockets");
-	dk.create("DKWebSocketsJS");
-	dk.create("DKWebSockets/DKUWebSocketsServer.html", function(){
-		window.addEventListener("DKWebSockets_OnMessageFromClient", DKUWebSocketsServer_onevent);
+	dk.create("DKUWebSocketsServer");
+	//dk.create("DKWebSocketsJS");
+	dk.create("DKUWebSocketsServer/DKUWebSocketsServer.html", function(){
 		byId("DKUWebSocketsServer_CloseServer").addEventListener("click", DKUWebSocketsServer_onevent);
 		byId("DKUWebSocketsServer_CreateServer").addEventListener("click", DKUWebSocketsServer_onevent);
 		byId("DKUWebSocketsServer_MessageToClient").addEventListener("click", DKUWebSocketsServer_onevent);
@@ -12,7 +13,7 @@ function DKUWebSocketsServer_init(){
 }
 
 function DKUWebSocketsServer_end(){
-	window.removeEventListener("DKWebSockets_OnMessageFromClient", DKUWebSocketsServer_onevent);
+	//window.removeEventListener("DKWebSockets_OnMessageFromClient", DKUWebSocketsServer_onevent);
 	byId("DKUWebSocketsServer_CloseServer").removeEventListener("click", DKUWebSocketsServer_onevent);
 	byId("DKUWebSocketsServer_CreateServer").removeEventListener("click", DKUWebSocketsServer_onevent);
 	byId("DKUWebSocketsServer_MessageToClient").removeEventListener("click", DKUWebSocketsServer_onevent);
@@ -41,7 +42,9 @@ function DKUWebSocketsServer_onevent(event){
 }
 
 function DKUWebSocketsServer_CreateServer(){
-	byId("DKUWebSocketsServer_IpAddress").value = "192.168.1.47" //TEMPORARY
+	var local_ip = CPP_DK_GetLocalIP()
+	byId("DKUWebSocketsServer_IpAddress").value = local_ip
+	
 	if(!byId("DKUWebSocketsServer_IpAddress").value){
 		console.warn("DKUWebSocketsServer_CreateServer(): Please enter an ip address\n");
 		//return;
@@ -51,19 +54,49 @@ function DKUWebSocketsServer_CreateServer(){
 		return;
 	}
 	console.log("DKUWebSocketsServer_CreateServer(): port = "+byId("DKUWebSocketsServer_Port").value+"\n");
-	CPP_DKWebSockets_CreateServer(byId("DKUWebSocketsServer_IpAddress").value, Number(byId("DKUWebSocketsServer_Port").value));
+	
+	//CPP_DKWebSockets_CreateServer(byId("DKUWebSocketsServer_IpAddress").value, Number(byId("DKUWebSocketsServer_Port").value));
+	server = new WebSocketServer("ws://"+local_ip+":80");
+	
+	//server.onclose = function onclose(event){
+	server.addEventListener("close", function onclose(event){
+		console.log("server.onclose("+event+")");
+		console.log("event.value = "+event.value);
+	})
+
+	//server.onerror = function onerror(event){
+	server.addEventListener("error", function onerror(event){
+		console.log("server.onerror("+event+")");
+		console.log("event.value = "+event.value);
+	})
+
+	//server.oninit = function oninit(event){
+	server.addEventListener("init", function oninit(event){
+		console.log("server.oninit("+event+")");
+		console.log("event.value = "+event.value);
+	})
+
+	//server.onmessage = function onmessage(event){
+	server.addEventListener("message", function onmessage(event){
+		console.log("server.onmessage("+event+")");
+		console.log("event.value = "+event.value);
+		byId("DKUWebSocketsServer_receive").value = event.value;
+	})
+
+	//server.onopen = function onopen(event){
+	server.addEventListener("open", function onopen(event){
+		console.log("server.onopen("+event+")");
+		console.log("event.value = "+event.value);
+	})
+		
+	server.start(local_ip, "80");
 }
 
 function DKUWebSocketsServer_CloseServer(){
-	CPP_DKWebSockets_CloseServer();
+	server.close()
 }
 
 function DKUWebSocketsServer_MessageToClient(){
 	var message = byId("DKUWebSocketsServer_send").value;
-	CPP_DKWebSockets_MessageToClient(message);
-}
-
-function DKUWebSocketsServer_OnMessageFromClient(message){
-	console.log("DKUWebSocketsServer_OnMessageFromClient() = "+message);
-	byId("DKUWebSocketsServer_receive").value = message;
+	server.send(message)
 }

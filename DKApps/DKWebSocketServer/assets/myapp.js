@@ -27,6 +27,10 @@
 DKPlugin("DKFile/DKFile.js")
 DKPlugin("DKDebug/DKDebug.js") //add dkpush, etc.
 
+DKPlugin("DKUWebSocketsServer/DKUWebSocketsServer.js")
+DKUWebSocketsServer_init()
+
+/*
 /// WEBSOCKETS SERVER TEST ///
 var local_ip = CPP_DK_GetLocalIP()
 var server = new WebSocketServer("ws://"+local_ip+":80");
@@ -62,3 +66,4 @@ server.addEventListener("open", function onopen(event){
 })
 	
 server.start(local_ip, "80");
+*/
