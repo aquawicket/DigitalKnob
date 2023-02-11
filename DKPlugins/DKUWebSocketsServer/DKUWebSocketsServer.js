@@ -26,6 +26,7 @@ function DKUWebSocketsServer_onevent(event){
 		DKUWebSocketsServer_CloseServer();
 	if(event.currentTarget.id === "DKUWebSocketsServer_MessageToClient")
 		DKUWebSocketsServer_MessageToClient();
+	/*
 	if(event.type === "DKWebSockets_OnMessageFromClient"){
 		console.log("event = "+event)
 		console.log("event.type = "+event.type)
@@ -38,6 +39,7 @@ function DKUWebSocketsServer_onevent(event){
 		//console.log("getParameters = "+event.getParameters())
 		//DKUWebSocketsServer_OnMessageFromClient(event);
 	}
+	*/
 }
 
 function DKUWebSocketsServer_CreateServer(){
