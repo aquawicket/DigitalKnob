@@ -2,7 +2,6 @@ var server
 
 function DKUWebSocketsServer_init(){
 	dk.create("DKUWebSocketsServer");
-	//dk.create("DKWebSocketsJS");
 	dk.create("DKUWebSocketsServer/DKUWebSocketsServer.html", function(){
 		byId("DKUWebSocketsServer_CloseServer").addEventListener("click", DKUWebSocketsServer_onevent);
 		byId("DKUWebSocketsServer_CreateServer").addEventListener("click", DKUWebSocketsServer_onevent);
@@ -13,7 +12,6 @@ function DKUWebSocketsServer_init(){
 }
 
 function DKUWebSocketsServer_end(){
-	//window.removeEventListener("DKWebSockets_OnMessageFromClient", DKUWebSocketsServer_onevent);
 	byId("DKUWebSocketsServer_CloseServer").removeEventListener("click", DKUWebSocketsServer_onevent);
 	byId("DKUWebSocketsServer_CreateServer").removeEventListener("click", DKUWebSocketsServer_onevent);
 	byId("DKUWebSocketsServer_MessageToClient").removeEventListener("click", DKUWebSocketsServer_onevent);
@@ -27,18 +25,6 @@ function DKUWebSocketsServer_onevent(event){
 		DKUWebSocketsServer_CloseServer();
 	if(event.currentTarget.id === "DKUWebSocketsServer_MessageToClient")
 		DKUWebSocketsServer_MessageToClient();
-	if(event.type === "DKWebSockets_OnMessageFromClient"){
-		console.log("event = "+event)
-		console.log("event.type = "+event.type)
-		console.log("event.returnValue = "+event.returnValue)
-		console.log("event.toString = "+event.toString)
-		console.log("event.target = "+event.target)
-		console.log("event.target.value = "+event.target.value)
-		console.log("event.currentTarget = "+event.currentTarget)
-		console.log("event.currentTarget.id = "+event.currentTarget.id)
-		//console.log("getParameters = "+event.getParameters())
-		//DKUWebSocketsServer_OnMessageFromClient(event);
-	}
 }
 
 function DKUWebSocketsServer_CreateServer(){
@@ -93,7 +79,7 @@ function DKUWebSocketsServer_CreateServer(){
 }
 
 function DKUWebSocketsServer_CloseServer(){
-	server.close()
+	server.close() // TODO
 }
 
 function DKUWebSocketsServer_MessageToClient(){
