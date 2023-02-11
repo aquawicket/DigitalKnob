@@ -1,7 +1,7 @@
 function DKUWebSocketsServer_init(){
 	dk.create("DKWebSockets");
 	dk.create("DKWebSocketsJS");
-	dk.create("DKWebSockets/DKUWebSocketsServer.html", function(){
+	dk.create("DKUWebSocketsServer/DKUWebSocketsServer.html", function(){
 		window.addEventListener("DKWebSockets_OnMessageFromClient", DKUWebSocketsServer_onevent);
 		byId("DKUWebSocketsServer_CloseServer").addEventListener("click", DKUWebSocketsServer_onevent);
 		byId("DKUWebSocketsServer_CreateServer").addEventListener("click", DKUWebSocketsServer_onevent);
