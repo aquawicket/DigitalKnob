@@ -30,24 +30,29 @@ DKPlugin("DKDebug/DKDebug.js") //add dkpush, etc.
 /// WEBSOCKETS SERVER TEST ///
 var local_ip = CPP_DK_GetLocalIP()
 var server = new WebSocketServer("ws://"+local_ip+":80");
-console.log("server = "+server)
 
-server.addEventListener("init", function(event){
-	console.log("server.init("+event+")");
-	event.getParameters()
-	console.log('event.value = '+event.value)
-	console.log('event["value"] = '+event["value"])
-})
-/*
-server.addEventListener("close", function(){
+//server.onclose = function onclose(event){
+server.addEventListener("close", function onclose(event){
 	console.log("server.onclose("+event+")");
+	console.log("event.value = "+event.value);
 })
-server.onmessage = function(event){
+
+//server.oninit = function oninit(event){
+server.addEventListener("init", function oninit(event){
+	console.log("server.oninit("+event+")");
+	console.log("event.value = "+event.value);
+})
+
+//server.onmessage = function onmessage(event){
+server.addEventListener("message", function onmessage(event){
 	console.log("server.onmessage("+event+")");
-}
-server.addEventListener("open", function(event){
-	console.log("server.onopen("+event+")");
+	console.log("event.value = "+event.value);
 })
-*/
+
+//server.onopen = function onopen(event){
+server.addEventListener("open", function onopen(event){
+	console.log("server.onopen("+event+")");
+	console.log("event.value = "+event.value);
+})
 	
 server.start(local_ip, "80");
