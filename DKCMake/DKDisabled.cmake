@@ -112,10 +112,8 @@ if(ANDROID)
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libexpat)
 	dk_disable(libtorrent)			# Could not find BOOST
-	#dk_disable(libuv)				# error : incomplete definition of type 'struct ifaddrs'
 	dk_disable(libvncserver)
 	dk_disable(libwebp)
-	#dk_disable(libwebsockets)		# compiling errors
 	dk_disable(libxml2)				# ../../configure: No such file or directory
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(ncurses)				# error: '..' is not recognized as an internal or external command
@@ -126,7 +124,6 @@ if(ANDROID)
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	dk_disable(openmw)
 	dk_disable(openscenegraph)
-	#dk_disable(openssl)			# Perl v5.10.0 required
 	dk_disable(osgaudio)			# requires openscenegraph
 	dk_disable(osgbullet)			# requires bullet3, osgworks
 	dk_disable(osgrmlui)
@@ -141,7 +138,6 @@ if(ANDROID)
 	dk_disable(sfml)				# Unsupported compiler
 	dk_disable(smpeg2)				# error : ISO C++17 does not allow 'register' storage class specifier
 	dk_disable(tesseract)			# requires leptonica
-	#dk_disable(uwebsockets)			# Could NOT find OpenSSL
 	dk_disable(vorbis)				# configure: error: unrecognized option: `-DANDROID32'
 	dk_disable(waave)
 	dk_disable(wasm3)

@@ -1,3 +1,5 @@
+<!-- https://developer.android.com/guide/topics/manifest/manifest-intro -->
+
 <?xml version="1.0" encoding="utf-8"?>
 
     <!-- package="org.libsdl.app" -->
@@ -39,6 +41,8 @@
     <!-- <uses-feature
         android:name="android.hardware.microphone"
         android:required="false" /> -->
+		
+	<uses-permission android:name="android.permission.INTERNET" />
 
     <!-- Allow downloading to the external storage on Android 5.1 and older -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
