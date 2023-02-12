@@ -253,7 +253,7 @@ if(EMSCRIPTEN)
 	dk_disable(openblas)			# CMake Error: When cross compiling, a TARGET is required
 	dk_disable(opencv)				# ittnotify_config.h:376:12: error: call to undeclared function '__TBB_machine_fetchadd4'
 	dk_disable(openframeworks)
-	dk_disable(openssl)
+	#dk_disable(openssl)
 	dk_disable(opus)
 	dk_disable(osgaudio)			# missing osg cmake includes
 	dk_disable(osgbullet)			# missing osg cmake includes
@@ -273,7 +273,7 @@ if(EMSCRIPTEN)
 	dk_disable(smpeg2)				# ISO C++17 does not allow 'register' storage class specifier
 	dk_disable(system_configuration)
 	dk_disable(tesseract)			# missing <allheaders.h>
-	dk_disable(uwebsockets)         # requires openssl
+	#dk_disable(uwebsockets)         # requires openssl
 	dk_disable(vorbis)				# requires ogg
 	dk_disable(waave)
 	dk_disable(wasm3)
@@ -464,7 +464,6 @@ if(MAC)
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libexpat)
 	dk_disable(libtorrent)			# CMake Error: cannot find deps/try_signal/try_signal.cpp
-	#dk_disable(libwebsockets)		# error: unknown type name 'lws_mutex_t'
 	dk_disable(libxml2)				# fatal error: 'extra/stricmp.h' file not found
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(mlocate)				# Unable to locate a Java Runtime that supports apt
@@ -550,7 +549,6 @@ if(RASPBERRY)
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(tiff)
 	dk_disable(upx)
-	#dk_disable(uwebsockets)
 	dk_disable(waave)
 	dk_disable(x265)
 endif(RASPBERRY)
