@@ -46,6 +46,7 @@ if(WIN)
 	dk_depend(psapi.lib)	# GetProcessMemoryInfo()
 	dk_depend(pdh.lib)		# PdhOpenQueryA()
 	dk_depend(dxva2.dll)	# GetNumberOfPhysicalMonitorsFromHMONITOR()
+	dk_depend(ws2_32.lib)	# GetLocalIP()
 endif()
 
 dk_depend(backward-cpp)

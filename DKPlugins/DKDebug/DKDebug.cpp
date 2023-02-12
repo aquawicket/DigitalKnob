@@ -38,7 +38,9 @@ WARNING_DISABLE
 #include <stdio.h>
 #if WIN
 DISABLE_WARNING(4091)
-	#include "StackWalker.h"
+	#if HAVE_stackwalker
+		#include "StackWalker.h"
+	#endif
 	#include <tchar.h>
 	#include <fstream>
 #endif

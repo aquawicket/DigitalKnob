@@ -616,4 +616,5 @@ if(WIN_64)
 	dk_disable(opencv)				# error: Only SIMD128, AVX2 and NEON are supported in Winograd.
 	dk_disable(sdl_net)				# can't find "sys/ioctl.h"
 	dk_disable(smpeg2)				# fatal error C1083: Cannot open include file: 'unistd.h'
+	#dk_disable(stackwalker)
 endif(WIN_64)
