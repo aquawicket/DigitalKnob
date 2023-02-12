@@ -112,7 +112,7 @@ if(ANDROID)
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libexpat)
 	dk_disable(libtorrent)			# Could not find BOOST
-	dk_disable(libuv)				# error : incomplete definition of type 'struct ifaddrs'
+	#dk_disable(libuv)				# error : incomplete definition of type 'struct ifaddrs'
 	dk_disable(libvncserver)
 	dk_disable(libwebp)
 	#dk_disable(libwebsockets)		# compiling errors
