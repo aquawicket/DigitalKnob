@@ -2,7 +2,7 @@
 # https://www.openssl.org/
 # https://www.npcglib.org/~stathis/downloads/openssl-1.0.2h-vs2015.7z
 # https://github.com/openssl/openssl/issues/14131 # iOS & iOS-Simulator
-
+# https://blog.rplasil.name/2015/09/compiling-openssl-with-emscripten.html
 
 ### IMPORT ###
 UNIX_dk_import	(https://github.com/openssl/openssl.git)
