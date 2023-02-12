@@ -161,7 +161,8 @@ bool DKDuktape::Init(){
 				return DKERROR("Error in handle_file\n");
 		}
 #endif
-        DKString app = DKFile::local_assets+"app.js";
+        DKString app = DKFile::local_assets+"app.js"; //TODO: migrate to main.js filename
+		//DKString app = DKFile::local_assets+"main.js"; 
 		LoadFile(app);
 	}
 	
@@ -437,7 +438,8 @@ bool DKDuktape::Reload(){
 	//DEBUG
 	//list.clear();
 	//DKClass::GetObjects(list);
-    DKString app = DKFile::local_assets+"app.js";
+    DKString app = DKFile::local_assets+"app.js"; //TODO: migrate to main.js filename
+	//DKString app = DKFile::local_assets+"main.js";
 	LoadFile(app);
 	return true;
 }
