@@ -40,11 +40,12 @@ UNIX_RELEASE_dk_set	(OPENSSL_CMAKE -DOPENSSL_INCLUDE_DIR=${OPENSSL}/${OS}/${RELE
 WIN32_dk_set		(OPENSSL_CMAKE -DOPENSSL_INCLUDE_DIR=${OPENSSL}/include -DLIB_EAY_DEBUG=${OPENSSL}/lib/libeay32MTd.lib -DLIB_EAY_RELEASE=${OPENSSL}/lib/libeay32MT.lib -DSSL_EAY_DEBUG=${OPENSSL}/lib/ssleay32MTd.lib -DSSL_EAY_RELEASE=${OPENSSL}/lib/ssleay32MT.lib "-DCMAKE_C_FLAGS=-I${OPENSSL}/include" "-DCMAKE_CXX_FLAGS=-I${OPENSSL}/include")
 WIN64_dk_set		(OPENSSL_CMAKE -DOPENSSL_INCLUDE_DIR=${OPENSSL}/include -DLIB_EAY_DEBUG=${OPENSSL}/lib64/libeay32MTd.lib -DLIB_EAY_RELEASE=${OPENSSL}/lib64/libeay32MT.lib -DSSL_EAY_DEBUG=${OPENSSL}/lib64/ssleay32MTd.lib -DSSL_EAY_RELEASE=${OPENSSL}/lib64/ssleay32MT.lib "-DCMAKE_C_FLAGS=-I${OPENSSL}/include" "-DCMAKE_CXX_FLAGS=-I${OPENSSL}/include")
 
-
 ### GENERATE ###
 ### COMPILE ###
 DEBUG_dk_setPath				(${OPENSSL}/${OS}/${DEBUG_DIR})
-ANDROID_DEBUG_dk_queueShell		(../../Configure no-shared --debug)
+ANDROID_DEBUG_dk_queueShell		("export ANDROID_NDK_ROOT=${ANDROID-NDK}\n"
+"export PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/windows-x86_64/bin:$ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/bin:$PATH\n"
+"../../Configure no-shared --debug android-arm64")
 EMSCRIPTEN_DEBUG_dk_queueShell	(../../Configure no-shared --debug)
 IOS64_DEBUG_dk_queueShell		(../../Configure no-shared --debug ios64-xcrun)
 IOSSIM_DEBUG_dk_queueShell		(../../Configure no-shared --debug iossimulator-xcrun)
@@ -56,7 +57,7 @@ UNIX_DEBUG_dk_queueShell	(make)
 
 
 RELEASE_dk_setPath				(${OPENSSL}/${OS}/${RELEASE_DIR})
-ANDROID_RELEASE_dk_queueShell	(../../Configure no-shared --release)
+ANDROID_RELEASE_dk_queueShell	(../../Configure no-shared --release android-arm64)
 EMSCRIPTEN_RELEASE_dk_queueShell(../../Configure no-shared --release)
 IOS64_RELEASE_dk_queueShell		(../../Configure no-shared --release ios64-xcrun)
 IOSSIM_RELEASE_dk_queueShell	(../../Configure no-shared --release iossimulator-xcrun)
