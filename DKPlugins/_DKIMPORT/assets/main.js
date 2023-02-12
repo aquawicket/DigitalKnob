@@ -24,6 +24,11 @@
 * SOFTWARE.
 */
 
+// Do all C++ direct setup stuff here
+// index.html will load DK.js and DKPlugin.js 
+// then myapp.loadFiles() and  myapp.loadApp() will be called
+
+
 // executable app startup script
 var USE_CEF     = 0; //Use Cef browser
 var USE_RML     = 1; //Use Rml browser
