@@ -126,7 +126,7 @@ if(ANDROID)
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	dk_disable(openmw)
 	dk_disable(openscenegraph)
-	dk_disable(openssl)				# Perl v5.10.0 required
+	#dk_disable(openssl)			# Perl v5.10.0 required
 	dk_disable(osgaudio)			# requires openscenegraph
 	dk_disable(osgbullet)			# requires bullet3, osgworks
 	dk_disable(osgrmlui)
@@ -141,7 +141,7 @@ if(ANDROID)
 	dk_disable(sfml)				# Unsupported compiler
 	dk_disable(smpeg2)				# error : ISO C++17 does not allow 'register' storage class specifier
 	dk_disable(tesseract)			# requires leptonica
-	dk_disable(uwebsockets)			# Could NOT find OpenSSL
+	#dk_disable(uwebsockets)			# Could NOT find OpenSSL
 	dk_disable(vorbis)				# configure: error: unrecognized option: `-DANDROID32'
 	dk_disable(waave)
 	dk_disable(wasm3)
