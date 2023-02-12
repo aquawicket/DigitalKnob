@@ -1,5 +1,3 @@
-<!-- https://developer.android.com/guide/topics/manifest/manifest-intro -->
-
 <?xml version="1.0" encoding="utf-8"?>
 
     <!-- package="org.libsdl.app" -->
@@ -36,12 +34,13 @@
         android:name="android.hardware.type.pc"
         android:required="false" />
 
-    <!-- Audio recording support -->
+	<!-- Audio recording support -->
     <!-- if you want to capture audio, uncomment this. -->
-    <!-- <uses-feature
-        android:name="android.hardware.microphone"
-        android:required="false" /> -->
-		
+    <!-- <uses-feature android:name="android.hardware.microphone"
+			android:required="false" /> -->
+	
+	<!-- PERMISSIONS -->
+	<!-- https://gist.github.com/Watsonboy1989/fa01a6869d82062c770e137107693744 Permission list -->	
 	<uses-permission android:name="android.permission.INTERNET" />
 
     <!-- Allow downloading to the external storage on Android 5.1 and older -->
