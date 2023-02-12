@@ -43,9 +43,16 @@ WIN64_dk_set		(OPENSSL_CMAKE -DOPENSSL_INCLUDE_DIR=${OPENSSL}/include -DLIB_EAY_
 ### GENERATE ###
 ### COMPILE ###
 DEBUG_dk_setPath				(${OPENSSL}/${OS}/${DEBUG_DIR})
-ANDROID_DEBUG_dk_queueShell		("export ANDROID_NDK_ROOT=${ANDROID-NDK}\n"
-"export PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/windows-x86_64/bin:$ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/bin:$PATH\n"
-"../../Configure no-shared --debug android-arm64")
+ANDROID32_DEBUG_dk_queueShell(
+"export ANDROID_NDK_ROOT=${ANDROID-NDK}\n"
+"export PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/windows-x86_64/bin:$PATH\n"
+"export PATH=$ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/bin:$PATH\n"
+"../../Configure no-shared --debug android-arm -D__ANDROID_API__=31")
+ANDROID64_DEBUG_dk_queueShell(
+"export ANDROID_NDK_ROOT=${ANDROID-NDK}\n"
+"export PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/windows-x86_64/bin:$PATH\n"
+"export PATH=$ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/bin:$PATH\n"
+"../../Configure no-shared --debug android-arm64 -D__ANDROID_API__=31")
 EMSCRIPTEN_DEBUG_dk_queueShell	(../../Configure no-shared --debug)
 IOS64_DEBUG_dk_queueShell		(../../Configure no-shared --debug ios64-xcrun)
 IOSSIM_DEBUG_dk_queueShell		(../../Configure no-shared --debug iossimulator-xcrun)
@@ -53,11 +60,28 @@ LINUX_DEBUG_dk_queueShell		(../../Configure no-shared --debug)
 MAC_DEBUG_dk_queueShell			(../../Configure no-shared --debug)
 RASPBERRY_DEBUG_dk_queueShell	(../../Configure no-shared --debug)
 
-UNIX_DEBUG_dk_queueShell	(make)
+if(NOT ANDROID)
+	UNIX_DEBUG_dk_queueShell(make)
+else()
+	ANDROID_DEBUG_dk_queueShell(
+	"export ANDROID_NDK_ROOT=${ANDROID-NDK}\n"
+	"export PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/windows-x86_64/bin:$PATH\n"
+	"export PATH=$ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/bin:$PATH\n"
+	"make")
+endif()
 
 
 RELEASE_dk_setPath				(${OPENSSL}/${OS}/${RELEASE_DIR})
-ANDROID_RELEASE_dk_queueShell	(../../Configure no-shared --release android-arm64)
+ANDROID32_RELEASE_dk_queueShell(
+"export ANDROID_NDK_ROOT=${ANDROID-NDK}\n"
+"export PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/windows-x86_64/bin:$PATH\n"
+"export PATH=$ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/bin:$PATH\n"
+"../../Configure no-shared --release android-arm -D__ANDROID_API__=31")
+ANDROID64_RELEASE_dk_queueShell(
+"export ANDROID_NDK_ROOT=${ANDROID-NDK}\n"
+"export PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/windows-x86_64/bin:$PATH\n"
+"export PATH=$ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/bin:$PATH\n"
+"../../Configure no-shared --release android-arm64 -D__ANDROID_API__=31")
 EMSCRIPTEN_RELEASE_dk_queueShell(../../Configure no-shared --release)
 IOS64_RELEASE_dk_queueShell		(../../Configure no-shared --release ios64-xcrun)
 IOSSIM_RELEASE_dk_queueShell	(../../Configure no-shared --release iossimulator-xcrun)
@@ -65,7 +89,15 @@ LINUX_RELEASE_dk_queueShell		(../../Configure no-shared --release)
 MAC_RELEASE_dk_queueShell		(../../Configure no-shared --release)
 RASPBERRY_RELEASE_dk_queueShell	(../../Configure no-shared --release)
 
-UNIX_RELEASE_dk_queueShell	(make)
+if(NOT ANDROID)
+	UNIX_DEBUG_dk_queueShell(make)
+else()
+	ANDROID_DEBUG_dk_queueShell(
+	"export ANDROID_NDK_ROOT=${ANDROID-NDK}\n"
+	"export PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/windows-x86_64/bin:$PATH\n"
+	"export PATH=$ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/bin:$PATH\n"
+	"make")
+endif()
 
 
 
