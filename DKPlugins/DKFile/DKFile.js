@@ -397,7 +397,9 @@ if(typeof CPP_DKFile_FileToString === "function") {
 	DKFile.prototype.fileToString = function DKFile_fileToString(path, callback) {
         path = dk.file.validatepath(path);
         const str = CPP_DKFile_FileToString(path);
-        return callback(str);
+		if(callback)
+			return callback(str);
+		return str;
     }
 } 
 else {
