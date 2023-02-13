@@ -309,8 +309,10 @@ if (!dk.hasCPP()) {
                 if (end === -1)
                     end = str.length;
                 var out = str.substr(start + 1, end - start - 1);
-                replace(out, "\r", "");
-                replace(out, "\n", " ");
+                //replace(out, "\r", "");
+				out.replace("\r", "");
+                //replace(out, "\n", " ");
+				out.replace("\n", "");
                 out = out.trim();
                 return out;
             }
@@ -324,8 +326,10 @@ if (!dk.hasCPP()) {
             var start = str.indexOf(" ", begin);
             var end = str.indexOf("\n", start);
             var out = filestring.substr(start + 1, end - start - 1);
-            replace(out, "\r", "");
-            replace(out, "\n", "");
+            //replace(out, "\r", "");
+			out.replace("\r", "");
+            //replace(out, "\n", " ");
+			out.replace("\n", "");
             out = out.trim();
             return out;
         }

@@ -763,10 +763,12 @@ dk.iE = function dk_iE(){
 // dk.fileToString()
 if(typeof CPP_DKFile_FileToString === "function"){
 	dk.fileToString = function DKFile_fileToString(path, callback){
-		console.log("dk.fileToString()")
+		console.log("dk.fileToString("+path+")")
         //path = dk.validatepath(path);
         const str = CPP_DKFile_FileToString(path);
-        return callback(str);
+		if(callback)
+			return callback(str);
+		return str;
     }
 } else {
     dk.fileToString = function dk_fileToString(url, dk_fileToString_callback){
