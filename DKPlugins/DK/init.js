@@ -1,5 +1,5 @@
 //Validate settings
-if (DK_GetOS() === "Android" || DK_GetOS() === "iOS") {
+if(CPP_DK_GetOS() === "Android" || CPP_DK_GetOS() === "iOS") {
     USE_CEF = 0;
     USE_SDL = 1;
     USE_RML = 1;
@@ -19,15 +19,15 @@ function init_onevent(event) {
 
     if (event.type === "resize") {
         //NOTE: this is for SDL, OSG, ROCKET or any other created windows.
-        DK_CallFunc("DKSDLCef::OnResize", "SdlWindow,0,0," + String(CPP_DKWindow_GetWidth()) + "," + String(CPP_DKWindow_GetHeight()));
+        CPP_DK_CallFunc("DKSDLCef::OnResize", "SdlWindow,0,0," + String(CPP_DKWindow_GetWidth()) + "," + String(CPP_DKWindow_GetHeight()));
     }
     if (event.type === "keydown" && event.code === "Back") {
         //NOTE: this is the back button on Android
-        DK_Exit();
+        CPP_DK_Exit();
     }
 }
 
-if (DK_GetJSEngine() === "Duktape") {
+if(CPP_DK_GetJSEngine() === "Duktape") {
     //C++: Create a window LoadPage() can support
     if (USE_RML && USE_CEF) {
         console.log("Creating SDL -> Rml -> Cef -> GUI\n");
