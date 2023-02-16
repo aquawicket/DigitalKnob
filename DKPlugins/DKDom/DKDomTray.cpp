@@ -88,22 +88,22 @@ int DKDomTray::url(duk_context* ctx){
 int DKDomTray::open(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	if (!DKTray::Get()->CreateClient(address)) //uwebsocket
-		return DKERROR("DKTray::CreateClient() failed! \n");
+	//if (!DKTray::Get()->CreateClient(address)) //uwebsocket
+	//	return DKERROR("DKTray::CreateClient() failed! \n");
 	return true;
 }
 
 int DKDomTray::close(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	if (!DKUTraysClient::Get()->CloseClient()) //uwebsocket
-		return DKERROR("Tray::CloseClient() failed! \n");
+	//if (!DKUTraysClient::Get()->CloseClient()) //uwebsocket
+	//	return DKERROR("Tray::CloseClient() failed! \n");
 	return true;
 }
 
 int DKDomTray::send(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString message = duk_require_string(ctx, 0);
-	if (!DKTray::Get()->MessageToServer(message))
-		return DKERROR("DKTray::MessageToServer() failed! \n");
+	//if (!DKTray::Get()->MessageToServer(message))
+	//	return DKERROR("DKTray::MessageToServer() failed! \n");
 	return true;
 }
