@@ -39,17 +39,10 @@ public:
 	bool Init();
 	
 	//// Instance properties ////
-	static int binaryType(duk_context* ctx);
-	static int bufferedAmount(duk_context* ctx);
-	static int extensions(duk_context* ctx);
-	static int protocol(duk_context* ctx);
-	static int readyState(duk_context* ctx);
-	static int url(duk_context* ctx);
+	static int myProperty(duk_context* ctx);
 	
 	//// Instance methods ////
-	static int open(duk_context* ctx);
-	static int close(duk_context* ctx);
-	static int send(duk_context* ctx);
+	static int myMethod(duk_context* ctx);
 	
 	//// Events ////
 	// implemented in DKDomTray.js

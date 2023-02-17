@@ -33,77 +33,23 @@ bool DKDomTray::Init(){
 	DKDEBUGFUNC();
 	
 	//// Instance properties ////
-	DKDuktape::AttachFunction("CPP_DKDomTray_binaryType", DKDomTray::binaryType);
-	DKDuktape::AttachFunction("CPP_DKDomTray_bufferedAmount", DKDomTray::bufferedAmount);
-	DKDuktape::AttachFunction("CPP_DKDomTray_extensions", DKDomTray::extensions);
-	DKDuktape::AttachFunction("CPP_DKDomTray_protocol", DKDomTray::protocol);
-	DKDuktape::AttachFunction("CPP_DKDomTray_readyState", DKDomTray::readyState);
-	DKDuktape::AttachFunction("CPP_DKDomTray_url", DKDomTray::url);
+	DKDuktape::AttachFunction("CPP_DKDomTray_myProperty", DKDomTray::myProperty);
 	
 	//// Instance methods ////
-	DKDuktape::AttachFunction("CPP_DKDomTray_open", DKDomTray::open);
-	DKDuktape::AttachFunction("CPP_DKDomTray_close", DKDomTray::close);
-	DKDuktape::AttachFunction("CPP_DKDomTray_send", DKDomTray::send);
+	DKDuktape::AttachFunction("CPP_DKDomTray_myMethod", DKDomTray::myMethod);
 	
 	DKClass::DKCreate("DKDom/DKDomTray.js");
 	return true;
 }
 
-int DKDomTray::binaryType(duk_context* ctx){
+int DKDomTray::myProperty(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
-int DKDomTray::bufferedAmount(duk_context* ctx){
+int DKDomTray::myMethod(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	//TODO
-	return true;
-}
-
-int DKDomTray::extensions(duk_context* ctx){
-	DKDEBUGFUNC(ctx);
-	//TODO
-	return true;
-}
-
-int DKDomTray::protocol(duk_context* ctx){
-	DKDEBUGFUNC(ctx);
-	//TODO
-	return true;
-}
-
-int DKDomTray::readyState(duk_context* ctx){
-	DKDEBUGFUNC(ctx);
-	//TODO
-	return true;
-}
-
-int DKDomTray::url(duk_context* ctx){
-	DKDEBUGFUNC(ctx);
-	//TODO
-	return true;
-}
-
-int DKDomTray::open(duk_context* ctx){
-	DKDEBUGFUNC(ctx);
-	DKString address = duk_require_string(ctx, 0);
-	//if (!DKTray::Get()->CreateClient(address)) //uwebsocket
-	//	return DKERROR("DKTray::CreateClient() failed! \n");
-	return true;
-}
-
-int DKDomTray::close(duk_context* ctx){
-	DKDEBUGFUNC(ctx);
-	//if (!DKUTraysClient::Get()->CloseClient()) //uwebsocket
-	//	return DKERROR("Tray::CloseClient() failed! \n");
-	return true;
-}
-
-int DKDomTray::send(duk_context* ctx){
-	DKDEBUGFUNC(ctx);
-	DKString message = duk_require_string(ctx, 0);
-	//if (!DKTray::Get()->MessageToServer(message))
-	//	return DKERROR("DKTray::MessageToServer() failed! \n");
 	return true;
 }
