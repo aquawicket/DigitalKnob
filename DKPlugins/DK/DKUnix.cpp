@@ -153,10 +153,12 @@ bool DKUnix::GetLocalIP(DKString& ip){
     close(sock);
 
     char buf[INET_ADDRSTRLEN];
-    if (inet_ntop(AF_INET, &loopback.sin_addr, buf, INET_ADDRSTRLEN) == 0x0)
+    if (inet_ntop(AF_INET, &loopback.sin_addr, buf, INET_ADDRSTRLEN) == 0x0){
         return DKERROR("inet_ntop() failed! \n");
-	else
+	}
+	else{
 		ip = toString(buf);
+	}
     
 	//DKINFO("ip address = "+ip);
 	return true;
