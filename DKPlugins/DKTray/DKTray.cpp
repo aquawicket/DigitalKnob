@@ -36,12 +36,15 @@ DKString DKTray::icon;
 
 bool DKTray::Init(){
 	DKDEBUGFUNC();
+	DKINFO(toString(data, ",") + "\n");
+/*
 #if HAVE_DKDuktape
 	DKClass::DKCreate("DKTrayJS");
 #endif
 #if HAVE_DKCef
 	DKClass::DKCreate("DKTrayV8");
 #endif
+*/
 #if WIN
 
 	//HWND hwnd = ::GetActiveWindow();
