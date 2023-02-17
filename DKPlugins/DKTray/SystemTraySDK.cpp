@@ -298,7 +298,7 @@ BOOL CSystemTray::RemoveIcon()
 {
     m_bShowIconPending = FALSE;
 
-    if (!m_bEnabled || m_bRemoved)
+    if (!m_bEnabled || (m_bRemoved == TRUE))
         return TRUE;
 
     m_tnd.uFlags = 0;
