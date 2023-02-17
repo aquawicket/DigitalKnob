@@ -42,7 +42,7 @@ public:
 	static int myProperty(duk_context* ctx);
 	
 	//// Instance methods ////
-	static int myMethod(duk_context* ctx);
+	static int addItem(duk_context* ctx);
 	
 	//// Events ////
 	// implemented in DKDomTray.js

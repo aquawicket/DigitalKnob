@@ -16,8 +16,8 @@ var Tray = function Tray() {
 
 
 	//// Instance methods ////
-	Tray.prototype.myMethod = function myMethod() {
-		CPP_DKDomTray_myMethod()
+	Tray.prototype.addItem = function addItem(str, idNum) {
+		CPP_DKDomTray_addItem(str, idNum)
     }
 	
 	

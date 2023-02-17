@@ -36,7 +36,7 @@ bool DKDomTray::Init(){
 	DKDuktape::AttachFunction("CPP_DKDomTray_myProperty", DKDomTray::myProperty);
 	
 	//// Instance methods ////
-	DKDuktape::AttachFunction("CPP_DKDomTray_myMethod", DKDomTray::myMethod);
+	DKDuktape::AttachFunction("CPP_DKDomTray_addItem", DKDomTray::addItem);
 	
 	DKClass::DKCreate("DKDom/DKDomTray.js");
 	return true;
@@ -48,8 +48,11 @@ int DKDomTray::myProperty(duk_context* ctx){
 	return true;
 }
 
-int DKDomTray::myMethod(duk_context* ctx){
+int DKDomTray::addItem(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	//TODO
+	DKString name = duk_require_string(ctx, 0);
+	int id = duk_require_int(ctx, 1);
+	if(!DKTray::Get()->AddItem(name, id))
+		return DKERROR("DKTray::Get()->AddItem() failed! \n");
 	return true;
 }
