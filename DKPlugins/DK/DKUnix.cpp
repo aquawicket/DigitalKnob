@@ -34,6 +34,7 @@ WARNING_DISABLE
 #include <unistd.h>    // sleep()  / usleep()
 #include <termios.h>   // for system(), tcsetattr()
 
+#include <cstring>      // std::memset()
 #include <stdio.h>		// GetLocalIP()
 #include <string.h>		// GetLocalIP()
 #include <sys/types.h>	// GetLocalIP()
