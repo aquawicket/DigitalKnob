@@ -61,7 +61,7 @@ private:
 #endif
 
 };
-
-
 REGISTER_OBJECT(DKTray, true);
+
+
 #endif //DKTray_H
