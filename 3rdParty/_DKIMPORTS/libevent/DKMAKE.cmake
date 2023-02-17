@@ -1,6 +1,10 @@
 # https://github.com/libevent/libevent.git
 
 
+### DEPEND ###
+dk_depend(mbedtls)
+dk_depend(openssl)
+
 ### INSTALL ###
 dk_import(https://github.com/libevent/libevent.git)
 
@@ -14,7 +18,7 @@ WIN_dk_libRelease	(${LIBEVENT}/${OS}/${RELEASE_DIR}/event.lib)
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} ${LIBEVENT})
+dk_queueCommand(${DKCMAKE_BUILD} ${OPENSSL_CMAKE} ${LIBEVENT})
 
 
 ### COMPILE ###
