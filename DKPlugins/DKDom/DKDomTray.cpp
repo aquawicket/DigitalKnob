@@ -38,6 +38,7 @@ bool DKDomTray::Init(){
 	
 	//// Instance methods ////
 	DKDuktape::AttachFunction("CPP_DKDomTray_addItem", DKDomTray::addItem);
+	DKDuktape::AttachFunction("CPP_DKDomTray_setTooltip", DKDomTray::setTooltip);
 	
 	DKClass::DKCreate("DKDom/DKDomTray.js");
 	return true;
