@@ -27,6 +27,7 @@
 #include "DK/DKApp.h"
 #include "DKDom/DKDom.h"
 #include "DKDom/DKDomTray.h"
+#include "DKTray/DKTray.h"
 
 
 bool DKDomTray::Init(){
