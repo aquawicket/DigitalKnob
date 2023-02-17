@@ -27,6 +27,7 @@
 #include "DK/DKFile.h"
 #include "DKAssets/DKAssets.h"
 #include "DKTray/DKTray.h"
+#include "DKRml/DKRml.h"
 
 
 DKString DKTray::icon;
