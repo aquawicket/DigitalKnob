@@ -168,14 +168,11 @@ LRESULT DKTray::OnTrayNotification(UINT message, WPARAM wParam, LPARAM lParam){
 		//DKINFO(toString(LOWORD(wParam))+" : ");
 		//DKINFO(toString(LOWORD(lParam))+"\n");
 		if(LOWORD(wParam) == 130 && LOWORD(lParam) == 513)
-			//DKEvents::SendEvent("DKTray", "click", toString(1));
 			DKRml::Get()->SendEvent(DKTray::Get()->data[1], "click", toString(1));
 		if(LOWORD(wParam) == 130 && LOWORD(lParam) == 515)
-			//DKEvents::SendEvent("DKTray", "doubleclick", toString(1));
 			DKRml::Get()->SendEvent(DKTray::Get()->data[1], "doubleclick", toString(1));
 	}
 	if(message == WM_COMMAND)
-		//DKEvents::SendEvent("DKTray", toString(LOWORD(wParam)), "");
 		DKRml::Get()->SendEvent(DKTray::Get()->data[1], toString(LOWORD(wParam)), "");
 	return 0;
 }

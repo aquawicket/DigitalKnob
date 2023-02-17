@@ -375,13 +375,13 @@ bool DKFile::GetDirectoryContents(const DKString& path, DKStringArray& strings){
 bool DKFile::GetDrives(DKStringArray& strings){
 	DKDEBUGFUNC(strings);
 #if WIN32
-	//TCHAR szDrive[] = " A:";
-	DWORD drives = GetLogicalDrives();
+	//char szDrive[] = " A:";
+	unsigned long drives = GetLogicalDrives();
 	if(!drives)
 		return DKERROR("GetLogicalDrives() failed \n");
 	for (int i=0; i<26; i++){
 		if((drives & (1 << i ))){
-			TCHAR driveName[] = { static_cast<TCHAR>(TEXT('A') + i), TEXT(':'), TEXT('\0') };
+			char driveName[] = { static_cast<char>(TEXT('A') + i), TEXT(':'), TEXT('\0') };
 			strings.push_back(driveName);
 		}
 	}
