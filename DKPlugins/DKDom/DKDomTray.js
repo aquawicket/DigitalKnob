@@ -19,6 +19,9 @@ var Tray = function Tray() {
 	Tray.prototype.addItem = function addItem(str, idNum) {
 		CPP_DKDomTray_addItem(str, idNum)
     }
+	Tray.prototype.setTooltip = function setTooltip(str) {
+		CPP_DKDomTray_setTooltip(str)
+    }
 	
 	
 	//// Events ////

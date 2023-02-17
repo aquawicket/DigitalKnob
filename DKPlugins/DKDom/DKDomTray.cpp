@@ -57,3 +57,11 @@ int DKDomTray::addItem(duk_context* ctx){
 		return DKERROR("DKTray::Get()->AddItem() failed! \n");
 	return true;
 }
+
+int DKDomTray::setTooltip(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
+	DKString str = duk_require_string(ctx, 0);
+	if(!DKTray::Get()->SetTooltip(str))
+		return DKERROR("DKTray::Get()->SetTooltip() failed! \n");
+	return true;
+}
