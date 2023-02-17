@@ -1,3 +1,5 @@
+dk_depend(tray)
+
 IF(HAVE_DKDuktape)
 	dk_depend(DKDuktape)
 ENDIF()
