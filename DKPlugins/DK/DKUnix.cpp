@@ -123,11 +123,11 @@ bool DKUnix::GetUsername(DKString& username){
 	return false;
 }
 
-// https://web.archive.org/web/20170515025821/http://beej.us/guide/bgnet/examples/showip.c
-// https://stackoverflow.com/a/59025254/688352
 bool DKUnix::GetLocalIP(DKString& ip){
 	DKDEBUGFUNC(ip);
 	
+	// https://web.archive.org/web/20170515025821/http://beej.us/guide/bgnet/examples/showip.c
+	/*
 	struct addrinfo hints, *res, *p;
 	int status;
 	char ipstr[INET6_ADDRSTRLEN];
@@ -170,6 +170,45 @@ bool DKUnix::GetLocalIP(DKString& ip){
 	}
 
 	freeaddrinfo(res); // free the linked list
+	*/
+	
+	// https://stackoverflow.com/a/59025254/688352
+	int sock = socket(PF_INET, SOCK_DGRAM, 0);
+    sockaddr_in loopback;
+
+    if (sock == -1) {
+        std::cerr << "Could not socket\n";
+        return 1;
+    }
+
+    std::memset(&loopback, 0, sizeof(loopback));
+    loopback.sin_family = AF_INET;
+    loopback.sin_addr.s_addr = 1337;   // can be any IP address
+    loopback.sin_port = htons(9);      // using debug port
+
+    if (connect(sock, reinterpret_cast<sockaddr*>(&loopback), sizeof(loopback)) == -1) {
+        close(sock);
+        std::cerr << "Could not connect\n";
+        return 1;
+    }
+
+    socklen_t addrlen = sizeof(loopback);
+    if (getsockname(sock, reinterpret_cast<sockaddr*>(&loopback), &addrlen) == -1) {
+        close(sock);
+        std::cerr << "Could not getsockname\n";
+        return 1;
+    }
+
+    close(sock);
+
+    char buf[INET_ADDRSTRLEN];
+    if (inet_ntop(AF_INET, &loopback.sin_addr, buf, INET_ADDRSTRLEN) == 0x0) {
+        std::cerr << "Could not inet_ntop\n";
+        return 1;
+    } 
+	else {
+        std::cout << "Local ip address: " << buf << "\n";
+    }
 	
 	return;// DKERROR("not implemented! \n");
 }
