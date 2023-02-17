@@ -124,10 +124,10 @@ bool DKUnix::GetUsername(DKString& username){
 }
 
 // https://web.archive.org/web/20170515025821/http://beej.us/guide/bgnet/examples/showip.c
+// https://stackoverflow.com/a/59025254/688352
 bool DKUnix::GetLocalIP(DKString& ip){
 	DKDEBUGFUNC(ip);
 	
-	/*
 	struct addrinfo hints, *res, *p;
 	int status;
 	char ipstr[INET6_ADDRSTRLEN];
@@ -170,9 +170,8 @@ bool DKUnix::GetLocalIP(DKString& ip){
 	}
 
 	freeaddrinfo(res); // free the linked list
-	*/
 	
-	return DKERROR("not implemented! \n");
+	return;// DKERROR("not implemented! \n");
 }
 
 char DKUnix::getch_(int echo) {
