@@ -22,6 +22,12 @@ var Tray = function Tray() {
 	Tray.prototype.setTooltip = function setTooltip(str) {
 		CPP_DKDomTray_setTooltip(str)
     }
+	Tray.prototype.setIcon = function setIcon(file) {
+		CPP_DKDomTray_setIcon(file)
+    }
+	Tray.prototype.showBalloon = function showBalloon(file) {
+		CPP_DKDomTray_showBalloon(str)
+    }
 	
 	
 	//// Events ////

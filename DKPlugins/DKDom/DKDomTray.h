@@ -44,6 +44,8 @@ public:
 	//// Instance methods ////
 	static int addItem(duk_context* ctx);
 	static int setTooltip(duk_context* ctx);
+	static int setIcon(duk_context* ctx);
+	static int showBalloon(duk_context* ctx);
 	
 	//// Events ////
 	// implemented in DKDomTray.js

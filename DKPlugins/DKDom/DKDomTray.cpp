@@ -39,6 +39,8 @@ bool DKDomTray::Init(){
 	//// Instance methods ////
 	DKDuktape::AttachFunction("CPP_DKDomTray_addItem", DKDomTray::addItem);
 	DKDuktape::AttachFunction("CPP_DKDomTray_setTooltip", DKDomTray::setTooltip);
+	DKDuktape::AttachFunction("CPP_DKDomTray_setIcon", DKDomTray::setIcon);
+	DKDuktape::AttachFunction("CPP_DKDomTray_showBalloon", DKDomTray::showBalloon);
 	
 	DKClass::DKCreate("DKDom/DKDomTray.js");
 	return true;
@@ -64,5 +66,22 @@ int DKDomTray::setTooltip(duk_context* ctx){
 	DKString str = duk_require_string(ctx, 0);
 	if(!DKTray::Get()->SetTooltip(str))
 		return DKERROR("DKTray::Get()->SetTooltip() failed! \n");
+	return true;
+}
+
+int DKDomTray::setIcon(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
+	DKString file = duk_require_string(ctx, 0);
+	if(!DKTray::Get()->SetIcon(file))
+		return DKERROR("DKTray::Get()->SetIcon() failed! \n");
+	return true;
+}
+
+int DKDomTray::showBalloon(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
+	DKString string = duk_require_string(ctx, 0);
+	//int seconds = duk_require_int(ctx, 1);
+	if(!DKTray::Get()->ShowBalloon(string/*, seconds*/))
+		return DKERROR("DKTray::Get()->ShowBaloon() failed! \n");
 	return true;
 }
