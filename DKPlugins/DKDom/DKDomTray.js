@@ -26,7 +26,7 @@ var Tray = function Tray() {
 		CPP_DKDomTray_setIcon(file)
     }
 	Tray.prototype.showBalloon = function showBalloon(file) {
-		CPP_DKDomTray_showBalloon(str)
+		CPP_DKDomTray_showBalloon(file)
     }
 	
 	
