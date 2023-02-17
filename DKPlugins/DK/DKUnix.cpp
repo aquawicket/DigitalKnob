@@ -207,10 +207,11 @@ bool DKUnix::GetLocalIP(DKString& ip){
         return 1;
     } 
 	else {
+		ip = toString(buf);
         std::cout << "Local ip address: " << buf << "\n";
     }
 	
-	return;// DKERROR("not implemented! \n");
+	return true;// DKERROR("not implemented! \n");
 }
 
 char DKUnix::getch_(int echo) {
