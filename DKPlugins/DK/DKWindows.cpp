@@ -336,12 +336,10 @@ bool DKWindows::GetLocalIP(DKString& ip){
 	LPSOCKADDR sockaddr_ip;
 	char ipstringbuffer[46];
 	DWORD ipbufferlength = 46;
-
 	// Initialize Winsock
 	iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
 	if (iResult != 0)
 		return DKERROR("WSAStartup() failed!: error "+toString(iResult) + " \n");
-
 	//--------------------------------
 	// Setup the hints address info structure
 	// which is passed to the getaddrinfo() function
@@ -349,11 +347,9 @@ bool DKWindows::GetLocalIP(DKString& ip){
 	hints.ai_family = AF_UNSPEC;
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_protocol = IPPROTO_TCP;
-
 	DKINFO("Calling getaddrinfo with following parameters:\n");
 	DKINFO("\tnodename = "+ toString(hostname) +"\n");
 	DKINFO("\tservname (or port) = "+toString(servicename) + "\n\n");
-
 	//--------------------------------
 	// Call getaddrinfo(). If the call succeeds,
 	// the result variable will hold a linked list
@@ -364,9 +360,7 @@ bool DKWindows::GetLocalIP(DKString& ip){
 		WSACleanup();
 		return DKERROR("getaddrinfo failed with error: "+toString(dwRetval) + "\n");
 	}
-
 	DKINFO("getaddrinfo returned success \n");
-
 	// Retrieve each address and print out the hex bytes
 	for (ptr = result; ptr != NULL; ptr = ptr->ai_next) {
 
@@ -452,7 +446,6 @@ bool DKWindows::GetLocalIP(DKString& ip){
 		DKINFO("\tLength of this sockaddr: "+ toString(ptr->ai_addrlen) +"\n");
 		//DKINFO("\tCanonical name: "+ toString(ptr->ai_canonname) +"\n");
 	}
-
 	freeaddrinfo(result);
 	WSACleanup();
 	return true;
@@ -463,24 +456,19 @@ bool DKWindows::GetLocalIP(DKString& ip){
 	WSAData wsaData;
 	if (WSAStartup(MAKEWORD(1, 1), &wsaData) != 0)	
 		return DKERROR("WSAStartup() failed! \n");
-
 	char ac[80];
 	if (gethostname(ac, sizeof(ac)) == SOCKET_ERROR)
 		return DKERROR("gethostname() failed!: error "+ toString(WSAGetLastError()) +" \n");
-
 	DKINFO("Host name is "+toString(ac)+"\n");
-
 	struct hostent* phe = gethostbyname(ac);
 	if (phe == 0)
 		return DKERROR("gethostbyname() failed! \n");
-
 	for (int i = 0; phe->h_addr_list[i] != 0; ++i) {
 		struct in_addr addr;
 		memcpy(&addr, phe->h_addr_list[i], sizeof(struct in_addr));
 		DKINFO("Address "+toString(i)+":"+toString(inet_ntoa(addr))+"\n");
 		ip = toString(inet_ntoa(addr));
 	}
-
 	WSACleanup();
 	*/
 
@@ -488,10 +476,8 @@ bool DKWindows::GetLocalIP(DKString& ip){
 	int sock = socket(PF_INET, SOCK_DGRAM, 0);
 	sockaddr_in loopback;
 
-	if (sock == -1) {
-		std::cerr << "Could not socket\n";
-		return 1;
-	}
+	if (sock == -1)
+        return DKERROR("socket() failed! \n");
 
 	std::memset(&loopback, 0, sizeof(loopback));
 	loopback.sin_family = AF_INET;
@@ -500,29 +486,24 @@ bool DKWindows::GetLocalIP(DKString& ip){
 
 	if (connect(sock, reinterpret_cast<sockaddr*>(&loopback), sizeof(loopback)) == -1) {
 		closesocket(sock);
-		std::cerr << "Could not connect\n";
-		return 1;
+		return DKERROR("connect() failed! \n");
 	}
 
 	socklen_t addrlen = sizeof(loopback);
 	if (getsockname(sock, reinterpret_cast<sockaddr*>(&loopback), &addrlen) == -1) {
 		closesocket(sock);
-		std::cerr << "Could not getsockname\n";
-		return 1;
+		return DKERROR("getsockname() failed! \n");
 	}
 
 	closesocket(sock);
 
 	char buf[INET_ADDRSTRLEN];
-	if (inet_ntop(AF_INET, &loopback.sin_addr, buf, INET_ADDRSTRLEN) == 0x0) {
-		std::cerr << "Could not inet_ntop\n";
-		return 1;
-	}
-	else {
+	if (inet_ntop(AF_INET, &loopback.sin_addr, buf, INET_ADDRSTRLEN) == 0x0)
+		return DKERROR("inet_ntop() failed! \n");
+	else
 		ip = toString(buf);
-		std::cout << "Local ip address: " << buf << "\n";
-	}
 
+	//DKINFO("ip address = "+ip);
 	return true;
 }
 
@@ -540,11 +521,11 @@ bool DKWindows::GetPixelFromImage(const DKString& image, int x, int y){
 	DKDEBUGFUNC(image, x, y);
 	HANDLE hBmp = LoadImage(NULL, image.c_str(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 	if(NULL == hBmp)
-		return DKERROR("Could not load file\n");
+		return DKERROR("LoadImage() failed! \n");
 	HDC dcmem = CreateCompatibleDC(NULL);
 	if (NULL == SelectObject(dcmem, hBmp)){
 		DeleteDC(dcmem); 
-		return DKERROR("Could not select object\n");
+		return DKERROR("SelectObject() failed! \n");
 	}
 	BITMAP bm = BITMAP();
 	GetObject(hBmp, sizeof(bm), &bm);
@@ -614,14 +595,14 @@ bool DKWindows::GetScreenHeight(int& h){
 	if(!GetWindowRect(hDesktop, &desktop))
 		return DKERROR("GetWindowRect() failed\n");
 	h = desktop.bottom;
-	return true && DKDEBUGRETURN(h);
+	return true;// && DKDEBUGRETURN(h);
 }
 
 bool DKWindows::GetUsername(DKString& username){
 	DKDEBUGFUNC(username);
 	if(const char* usr_a = std::getenv("USERname")){
 		username = usr_a;
-		return true && DKDEBUGRETURN(username);
+		return true;// && DKDEBUGRETURN(username);
 	}
 	/*
 	TCHAR name[UNLEN + 1];

@@ -127,60 +127,12 @@ bool DKUnix::GetUsername(DKString& username){
 bool DKUnix::GetLocalIP(DKString& ip){
 	DKDEBUGFUNC(ip);
 	
-	// https://web.archive.org/web/20170515025821/http://beej.us/guide/bgnet/examples/showip.c
-	/*
-	struct addrinfo hints, *res, *p;
-	int status;
-	char ipstr[INET6_ADDRSTRLEN];
-
-	if (argc != 2) {
-	    fprintf(stderr,"usage: showip hostname\n");
-	    return 1;
-	}
-
-	memset(&hints, 0, sizeof hints);
-	hints.ai_family = AF_UNSPEC; // AF_INET or AF_INET6 to force version
-	hints.ai_socktype = SOCK_STREAM;
-
-	if ((status = getaddrinfo(argv[1], NULL, &hints, &res)) != 0) {
-		fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(status));
-		return 2;
-	}
-
-	printf("IP addresses for %s:\n\n", argv[1]);
-
-	for(p = res;p != NULL; p = p->ai_next) {
-		void *addr;
-		char *ipver;
-
-		// get the pointer to the address itself,
-		// different fields in IPv4 and IPv6:
-		if (p->ai_family == AF_INET) { // IPv4
-			struct sockaddr_in *ipv4 = (struct sockaddr_in *)p->ai_addr;
-			addr = &(ipv4->sin_addr);
-			ipver = "IPv4";
-		} else { // IPv6
-			struct sockaddr_in6 *ipv6 = (struct sockaddr_in6 *)p->ai_addr;
-			addr = &(ipv6->sin6_addr);
-			ipver = "IPv6";
-		}
-
-		// convert the IP to a string and print it:
-		inet_ntop(p->ai_family, addr, ipstr, sizeof ipstr);
-		printf("  %s: %s\n", ipver, ipstr);
-	}
-
-	freeaddrinfo(res); // free the linked list
-	*/
-	
 	// https://stackoverflow.com/a/59025254/688352
 	int sock = socket(PF_INET, SOCK_DGRAM, 0);
     sockaddr_in loopback;
 
-    if (sock == -1) {
-        std::cerr << "Could not socket\n";
-        return 1;
-    }
+    if (sock == -1)
+        return DKERROR("socket() failed! \n");
 
     std::memset(&loopback, 0, sizeof(loopback));
     loopback.sin_family = AF_INET;
@@ -189,30 +141,25 @@ bool DKUnix::GetLocalIP(DKString& ip){
 
     if (connect(sock, reinterpret_cast<sockaddr*>(&loopback), sizeof(loopback)) == -1) {
         close(sock);
-        std::cerr << "Could not connect\n";
-        return 1;
+        return DKERROR("connect() failed! \n");
     }
 
     socklen_t addrlen = sizeof(loopback);
     if (getsockname(sock, reinterpret_cast<sockaddr*>(&loopback), &addrlen) == -1) {
         close(sock);
-        std::cerr << "Could not getsockname\n";
-        return 1;
+        return DKERROR("getsockname() failed! \n");
     }
 
     close(sock);
 
     char buf[INET_ADDRSTRLEN];
-    if (inet_ntop(AF_INET, &loopback.sin_addr, buf, INET_ADDRSTRLEN) == 0x0) {
-        std::cerr << "Could not inet_ntop\n";
-        return 1;
-    } 
-	else {
+    if (inet_ntop(AF_INET, &loopback.sin_addr, buf, INET_ADDRSTRLEN) == 0x0)
+        return DKERROR("inet_ntop() failed! \n");
+	else
 		ip = toString(buf);
-        std::cout << "Local ip address: " << buf << "\n";
-    }
-	
-	return true;// DKERROR("not implemented! \n");
+    
+	//DKINFO("ip address = "+ip);
+	return true;
 }
 
 char DKUnix::getch_(int echo) {
