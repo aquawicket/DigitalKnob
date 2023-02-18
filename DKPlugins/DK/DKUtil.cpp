@@ -178,7 +178,7 @@ bool DKUtil::CallExit(){
 #	if ANDROID
 		CallJavaFunction("Exit","");
 #	endif
-#	if WIN32
+#	if WIN
 		if(GetCurrentThreadId() != DKUtil::mainThreadId){   //GetCurrentThreadId not available for android
 			DKWARN("DKApp::Exit(): Not called from the main thread\n");
 		}
