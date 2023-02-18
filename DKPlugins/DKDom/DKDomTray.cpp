@@ -38,6 +38,7 @@ bool DKDomTray::Init(){
 	
 	//// Instance methods ////
 	DKDuktape::AttachFunction("CPP_DKDomTray_addItem", DKDomTray::addItem);
+	DKDuktape::AttachFunction("CPP_DKDomTray_getIcon", DKDomTray::getIcon);
 	DKDuktape::AttachFunction("CPP_DKDomTray_setTooltip", DKDomTray::setTooltip);
 	DKDuktape::AttachFunction("CPP_DKDomTray_setIcon", DKDomTray::setIcon);
 	DKDuktape::AttachFunction("CPP_DKDomTray_showBalloon", DKDomTray::showBalloon);
@@ -58,6 +59,14 @@ int DKDomTray::addItem(duk_context* ctx){
 	int id = duk_require_int(ctx, 1);
 	if(!DKTray::Get()->AddItem(name, id))
 		return DKERROR("DKTray::Get()->AddItem() failed! \n");
+	return true;
+}
+
+int DKDomTray::getIcon(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
+	DKString file;
+	if(!DKTray::Get()->getIcon(file))
+		return DKERROR("DKTray::Get()->getIcon() failed! \n");
 	return true;
 }
 
