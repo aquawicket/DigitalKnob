@@ -65,8 +65,9 @@ int DKDomTray::addItem(duk_context* ctx){
 int DKDomTray::getIcon(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString file;
-	if(!DKTray::Get()->getIcon(file))
+	if(!DKTray::Get()->GetIcon(file))
 		return DKERROR("DKTray::Get()->getIcon() failed! \n");
+	duk_push_string(ctx, file.c_str());
 	return true;
 }
 
