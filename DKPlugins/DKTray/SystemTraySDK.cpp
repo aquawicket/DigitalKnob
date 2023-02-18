@@ -360,7 +360,7 @@ BOOL CSystemTray::SetIcon(HICON hIcon)
     m_tnd.uFlags = NIF_ICON;
     m_tnd.hIcon = hIcon;
 
-    if (m_bHidden)
+    if (m_bHidden == TRUE)
         return TRUE;
     else
         return Shell_NotifyIcon(NIM_MODIFY, &m_tnd);
