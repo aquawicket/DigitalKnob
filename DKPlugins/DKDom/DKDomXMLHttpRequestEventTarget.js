@@ -26,17 +26,6 @@ var XMLHttpRequestEventTarget = function XMLHttpRequestEventTarget(pointer) {
         }
     });
 	
-	this.error_func = null;
-    Object.defineProperty(this, "onerror", {
-        get: function onerror() {
-            return this.error_func;
-        },
-        set: function onerror(func) {
-            this.addEventListener("error", func);
-            this.error_func = func
-        }
-    });
-	
 	this.loadstart_func = null;
     Object.defineProperty(this, "onloadstart", {
         get: function onloadstart() {
