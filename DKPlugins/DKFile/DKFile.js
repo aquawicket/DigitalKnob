@@ -22,7 +22,7 @@ DKFile.prototype.init = function DKFile_init() {
     }
     if (dk.php) {
         dk.php.call("GET", "DKFile/DKFile.php", "getAssetsPath", function dk_php_getAssetsPath_callback(result) {
-            (dk.file.onlineAssets = result)
+            dk.file.onlineAssets = result
             //&& console.debug("dk.file.onlineAssets = " + result);
         });
     }
@@ -289,7 +289,7 @@ path = dk.file.validatepath(path);
 */
 
 if (!dk.hasCPP()) {
-    DKFile.prototype.getSetting = function DKFile_getSetting(file, param) {
+    DKFile.prototype.getSetting = function DKFile_getSetting(file, param, callback) {
         file = dk.file.validatepath(file);
         //file is ignored in browser. We use cookie instead.
         if (!file) {
@@ -297,41 +297,48 @@ if (!dk.hasCPP()) {
         } else {
             //If the variable looks like this: [VARIABLE]
             //then we return everything up to the next [VARIABLE] or to the end of the file.
-            var str = dk.fileToString(file);
-            if (!str)
-                return error("str invalid");
-            if (param.indexOf("[") !== -1 && param.indexOf("]") !== -1) {
-                var begin = str.indexOf(param);
-                if (begin === -1)
-                    return error("begin invalid");
-                var start = str.indexOf("]", begin);
-                var end = str.indexOf("[", start);
-                if (end === -1)
-                    end = str.length;
-                var out = str.substr(start + 1, end - start - 1);
-                //replace(out, "\r", "");
-				out.replace("\r", "");
-                //replace(out, "\n", " ");
-				out.replace("\n", "");
-                out = out.trim();
-                return out;
-            }
+            var str = dk.fileToString(file, function(str){ 
+				if (!str)
+					return error("str invalid");
+				if (param.indexOf("[") !== -1 && param.indexOf("]") !== -1) {
+					var begin = str.indexOf(param);
+					if (begin === -1)
+						return error("begin invalid");
+					var start = str.indexOf("]", begin);
+					var end = str.indexOf("[", start);
+					if (end === -1)
+						end = str.length;
+					var out = str.substr(start + 1, end - start - 1);
+					//replace(out, "\r", "");
+					out.replace("\r", "");
+					//replace(out, "\n", " ");
+					out.replace("\n", "");
+					out = out.trim();
+					//return out;
+					if(callback)
+						return callback(out);
+					return out;
+				}
 
-            //If the variable looks like this:  VARIABLE 
-            //then we return the rest of the line
-            var string = param + " ";
-            var begin = str.indexOf(string, 0);
-            if (begin === -1)
-                return error("begin invallid");
-            var start = str.indexOf(" ", begin);
-            var end = str.indexOf("\n", start);
-            var out = filestring.substr(start + 1, end - start - 1);
-            //replace(out, "\r", "");
-			out.replace("\r", "");
-            //replace(out, "\n", " ");
-			out.replace("\n", "");
-            out = out.trim();
-            return out;
+				//If the variable looks like this:  VARIABLE 
+				//then we return the rest of the line
+				var string = param + " ";
+				var begin = str.indexOf(string, 0);
+				if (begin === -1)
+					return error("begin invallid");
+				var start = str.indexOf(" ", begin);
+				var end = str.indexOf("\n", start);
+				var out = filestring.substr(start + 1, end - start - 1);
+				//replace(out, "\r", "");
+				out.replace("\r", "");
+				//replace(out, "\n", " ");
+				out.replace("\n", "");
+				out = out.trim();
+				//return out;
+				if(callback)
+					return callback(out);
+				return out;
+			});
         }
     }
 }

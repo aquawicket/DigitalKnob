@@ -20,7 +20,7 @@ var Tray = function Tray() {
 		CPP_DKDomTray_addItem(str, idNum)
     }
 	Tray.prototype.getIcon = function getIcon(str) {
-		return CPP_DKDomTray_getIcon()
+		CPP_DKDomTray_getIcon()
     }
 	Tray.prototype.setTooltip = function setTooltip(str) {
 		CPP_DKDomTray_setTooltip(str)
