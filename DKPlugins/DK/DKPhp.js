@@ -1,8 +1,4 @@
 //"use strict"; //FIXME: "use strict" breaks Duktape
-if(DUKTAPE)
-	return
-
-
 function DKPhp(){}
 
 //dk.php = DKPlugin(DKPhp, "singleton") //FIXME: "singleton" breaks Duktape
