@@ -10,20 +10,21 @@ DKFile.prototype.init = function DKFile_init() {
     //if (!DUKTAPE)
         dk.fileToString = dk.file.fileToString;
 
-    this.appFilename = "";
-    this.localAssets = "";
-    this.onlineAssets = "";
+    this.appFilename = ""
+    this.localAssets = ""
+	this.onlineAssets = location.href.substring(0, location.href.lastIndexOf("/")) + "/"
 
-    // FIXME - temporary
+	/*
     if (DUKTAPE) {
-        this.onlineAssets = //"C:/DKTasmota_Data/";
+        //this.onlineAssets = //"C:/DKTasmota_Data/"
 		console.log("look at DKFile.js line 23")
         return;
     }
+	*/
     if (dk.php) {
         dk.php.call("GET", "DKFile/DKFile.php", "getAssetsPath", function dk_php_getAssetsPath_callback(result) {
-            dk.file.onlineAssets = result
-            //&& console.debug("dk.file.onlineAssets = " + result);
+            dk.file.localAssets = result
+			//dk.file.onlineAssets = result
         });
     }
 }
