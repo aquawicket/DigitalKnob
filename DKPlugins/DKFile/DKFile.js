@@ -14,13 +14,6 @@ DKFile.prototype.init = function DKFile_init() {
     this.localAssets = ""
 	this.onlineAssets = location.href.substring(0, location.href.lastIndexOf("/")) + "/"
 
-	/*
-    if (DUKTAPE) {
-        //this.onlineAssets = //"C:/DKTasmota_Data/"
-		console.log("look at DKFile.js line 23")
-        return;
-    }
-	*/
     if (dk.php) {
         dk.php.call("GET", "DKFile/DKFile.php", "getAssetsPath", function dk_php_getAssetsPath_callback(result) {
             dk.file.localAssets = result
