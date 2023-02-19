@@ -567,7 +567,7 @@ if(WIN)
 	dk_disable(aubio)
 	dk_disable(bzip2)
 	dk_disable(diff-match-patch)
-	dk_disable(DKOcr)				# causing linking errors in tesseract
+	#dk_disable(DKOcr)				# causing linking errors in tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
 	dk_disable(DKOSGAudio)			# requires freealut
 	dk_disable(DKOSGCef)			# build errors
