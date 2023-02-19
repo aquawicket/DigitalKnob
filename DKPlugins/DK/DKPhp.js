@@ -1,4 +1,7 @@
 //"use strict"; //FIXME: "use strict" breaks Duktape
+if(DUKTAPE)
+	return
+
 
 function DKPhp(){}
 
