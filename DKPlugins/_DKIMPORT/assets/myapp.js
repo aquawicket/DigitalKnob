@@ -23,6 +23,16 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 // called from index.html
-console.log("Hello World!\n");
+
+function MyApp(){}
+const myapp = DKPlugin(MyApp);
+
+myapp.loadFiles = function myapp_loadFiles() {
+	console.log("myapp.loadFiles")
+}
+
+myapp.loadApp = function myapp_loadApp() {
+	console.log("myapp.loadApp")
+}
+
