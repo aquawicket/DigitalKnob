@@ -575,7 +575,7 @@ if(WIN)
 	dk_disable(DKOSGStats)			# build errors
 	dk_disable(DKOSGVideo)			# TODO
 	dk_disable(DKOSGWidget)			# build errors
-	dk_disable(DKScreenRecorder)
+	#dk_disable(DKScreenRecorder)
 	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSDLWaave)			# requires waave
 	dk_disable(DKSFMLRml)			# INCOMPLETE
