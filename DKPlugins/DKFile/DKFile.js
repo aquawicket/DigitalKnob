@@ -14,7 +14,8 @@ DKFile.prototype.init = function DKFile_init() {
     this.localAssets = ""
 	this.onlineAssets = location.href.substring(0, location.href.lastIndexOf("/")) + "/"
 
-    if (dk.php) {
+	// FIXME: !DUKTAPE because DKDomXMLHttpRequest is not complete
+    if (!DUKTAPE && dk.php) {
         dk.php.call("GET", "DKFile/DKFile.php", "getAssetsPath", function dk_php_getAssetsPath_callback(result) {
             dk.file.localAssets = result
 			//dk.file.onlineAssets = result
