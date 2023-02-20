@@ -604,6 +604,7 @@ DKDebug.prototype.reload = function DKDebug_reload() {
 }
 
 DKDebug.prototype.pushDKFiles = function DKDebug_pushDKFiles() {
+	DKPlugin("DKFile/DKFile.js")
     //This is the pure js method
     dk.file.pushDKAssets(function dk_php_pushDKAssetsCallback(rval) {
         console.log(rval);

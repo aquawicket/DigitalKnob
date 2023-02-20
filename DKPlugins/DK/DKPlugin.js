@@ -40,6 +40,19 @@ DKPlugin.fromFile = function DKPlugin_fromFile(args, DKPlugin_fromFile_callback)
     const url = args[0]
     const color = "color:rgb(200,100,200)"
     console.log("%c *** DKPlugin.fromFile(" + url + ") ***", color);
+	
+	////// .html //////
+	if(url.includes(".html")){
+		console.log("DKPlugin loading html file")
+		dk.create(url, function(){
+			DKPlugin_fromFile_callback()
+		})
+		return
+	}
+	
+	
+	////// .js //////
+	
     //update the current list of functions
     dk.getNewFuncs();
     //Is the javascript file already loaded?
