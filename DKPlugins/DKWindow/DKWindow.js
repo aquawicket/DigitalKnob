@@ -63,37 +63,37 @@ dk.window.isFullscreen = function dk_window_isFullscreen() {
     return true;
 }
 
-if (CPP_DK_GetBrowser() !== "CEF") {
+//if (CPP_DK_GetBrowser() !== "CEF") {
 	dk.window.setHeight = function dk_window_setHeight(h) {
         //FIXME - does not work
         window.resizeTo(dk.window.getWidth(), h);
         return false;
     }
-}
+//}
 
-if (CPP_DK_GetBrowser() !== "CEF") {
+//if (CPP_DK_GetBrowser() !== "CEF") {
 	dk.window.setWidth = function dk_window_setWidth(w) {
         //FIXME - does not work
         window.resizeTo(w, dk.window.getHeight());
         return false;
     }
-}
+//}
 
-if (CPP_DK_GetBrowser() !== "CEF") {
+//if (CPP_DK_GetBrowser() !== "CEF") {
 	dk.window.setX = function dk_window_setX(x) {
         //FIXME - does not work
         window.moveTo(x, dk.window.getY());
         return false;
     }
-}
+//}
 
-if (CPP_DK_GetBrowser() !== "CEF") {
+//if (CPP_DK_GetBrowser() !== "CEF") {
 	dk.window.setY = function dk_window_setY(y) {
         //FIXME - does not work
         window.moveTo(dk.window.getX(), y);
         return false;
     }
-}
+//}
 
 dk.window.windowed = function dk_window_windowed() {
     if (document.cancelFullScreen) {
