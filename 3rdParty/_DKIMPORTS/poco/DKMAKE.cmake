@@ -1,6 +1,11 @@
 # https://github.com/pocoproject/poco.git
 
 
+### DEPENDS ###
+dk_depend(iphlpapi.lib)
+dk_depend(ws2_32.lib)
+
+
 ### IMPORT ###
 dk_import(https://github.com/pocoproject/poco.git)
 
@@ -8,6 +13,9 @@ dk_import(https://github.com/pocoproject/poco.git)
 ### LINK ###
 dk_include				(${POCO}/include)
 dk_include				(${POCO}/${OS})
+dk_include				(${POCO}/Net/include)
+dk_include				(${POCO}/Foundation/include)
+dk_include				(${POCO}/Util/include)
 
 # PocoActiveRecord
 ANDROID_dk_libDebug		(${POCO}/${OS}/lib/${DEBUG_DIR}/PocoActiveRecordd.a)
