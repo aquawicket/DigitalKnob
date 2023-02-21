@@ -1,5 +1,3 @@
-// NOTICE:  migrating filename to "main.js"
-
 /*
 * This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
 *

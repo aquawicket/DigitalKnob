@@ -29,10 +29,9 @@ function MyApp(){}
 const myapp = DKPlugin(MyApp);
 
 myapp.loadFiles = function myapp_loadFiles() {
-	console.log("myapp.loadFiles")
+	console.log("\n<<< myapp.loadFiles >>>>")
 }
 
 myapp.loadApp = function myapp_loadApp() {
-	console.log("myapp.loadApp")
+	console.log("\n<<< myapp.loadApp >>>>")
 }
-
