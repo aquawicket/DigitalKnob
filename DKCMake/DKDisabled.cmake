@@ -23,13 +23,12 @@
 # SOFTWARE.
 include_guard()
 
-#dk_disable(uwebsockets)				# working on libwebsockets for now
-
 
 # DISABLED FOR ALL TARGETS
 dk_disable(bgfx)					# TODO
 dk_disable(DKPlugin1)				# TODO
 dk_disable(DKPlugin2)				# TODO
+dk_disable(DKWidget)				# DEPRECATED
 dk_disable(gradle)					# We don't need to build this from source
 dk_disable(java)					# TODO
 dk_disable(jpeg)					# DEPRECATED: using libjpeg_turbo instead

@@ -1,4 +1,4 @@
-~! THE LIST !~    02/09/21
+~! THE LIST !~    02/21/23
 
 *******************
 *** DIGITALKNOB ***
@@ -25,7 +25,6 @@ DKNotepadFile_Exit() breaks DK_Close()
 Get Copy and Paste working
 Remove save comfrimation and make a sparkle, or something
  
-convert DKSDLRocket in DKTestApps to DKSDLRml
 
 *** DKTUTORIAL ***
 DK1:   DKCmake build system
@@ -55,7 +54,7 @@ i.e.  DK_Function(var)
 ** Eliminate DKWidget
 Let continue to strip down DKWidget.js because it's all moving to DK.js and DKWidget is gone.
 
-*** ALWAYS ***
+*** Javascript ***
  replace all == with ===
  replace all != with !==
 
