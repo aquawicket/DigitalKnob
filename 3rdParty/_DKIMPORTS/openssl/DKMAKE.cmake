@@ -60,7 +60,7 @@ ANDROID64_DEBUG_dk_queueShell(
 "export PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/windows-x86_64/bin:$PATH\n"
 "export PATH=$ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/bin:$PATH\n"
 "../../Configure no-shared --debug android-arm64 -D__ANDROID_API__=31")
-#EMSCRIPTEN_DEBUG_dk_queueShell	(${EMCONFIGURE} ${OPENSSL}/Configure linux-x32 -no-asm -static -no-sock -no-afalgeng -DOPENSSL_SYS_NETWARE -DSIG_DFL=0 -DSIG_IGN=0 -DHAVE_FORK=0 -DOPENSSL_NO_AFALGENG=1 -DOPENSSL_NO_SPEED=1)
+EMSCRIPTEN_DEBUG_dk_queueShell	(${EMCONFIGURE} ${OPENSSL}/Configure linux-x32 -no-asm -static -no-sock -no-afalgeng -DOPENSSL_SYS_NETWARE -DSIG_DFL=0 -DSIG_IGN=0 -DHAVE_FORK=0 -DOPENSSL_NO_AFALGENG=1 -DOPENSSL_NO_SPEED=1)
 #EMSCRIPTEN_dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_OPENSSL=ON -DGIT_EXECUTABLE=${GIT_EXE} -DPYTHON_EXECUTABLE=${PYTHON3_APP} ${OPENSSL})
 
 IOS64_DEBUG_dk_queueShell		(../../Configure no-shared --debug ios64-xcrun)
