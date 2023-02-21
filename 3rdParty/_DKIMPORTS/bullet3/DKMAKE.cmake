@@ -1,4 +1,4 @@
-# https://github.com/bulletphysics/bullet3
+# https://github.com/bulletphysics/bullet3.git
 # https://code.google.com/archive/p/bullet
 # https://github.com/bulletphysics/bullet3/archive/refs/tags/2.82.zip
 # https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/bullet/bullet-2.82-r2704.zip

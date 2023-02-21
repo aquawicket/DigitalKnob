@@ -2,6 +2,7 @@
 
 
 ### IMPORT ###
+#dk_import(https://github.com/bombela/backward-cpp/archive/refs/tags/v1.6.zip)
 dk_import(https://github.com/bombela/backward-cpp.git)
 
 
