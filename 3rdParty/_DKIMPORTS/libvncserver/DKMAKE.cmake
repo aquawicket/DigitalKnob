@@ -17,6 +17,7 @@ dk_import(https://github.com/LibVNC/libvncserver.git)
 
 ### LINK ###
 dk_include						(${LIBVNCSERVER})
+dk_include						(${LIBVNCSERVER}/include)
 dk_include						(${LIBVNCSERVER}/examples)
 dk_include						(${LIBVNCSERVER}/${OS})
 ANDROID_DEBUG_dk_include		(${LIBVNCSERVER}/${OS}/${DEBUG_DIR})

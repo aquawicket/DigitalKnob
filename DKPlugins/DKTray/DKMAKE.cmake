@@ -1,4 +1,5 @@
 #dk_depend(tray)
+dk_depend(DKRml) # used for javascript events
 
 if(HAVE_DKDuktape)
 	dk_depend(DKDuktape)
