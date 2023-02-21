@@ -10,6 +10,7 @@ dk_set			(PYTHON ${3RDPARTY}/${PYTHON_FOLDER})
 WIN_dk_set		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18.msi)
 APPLE_dk_set	(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18-macosx10.9.pkg)
 WIN_dk_set		(PYTHON_APP ${PYTHON}/python.exe)
+EMSCRIPTEN_dk_set	(PYTHON_APP ${PYTHON}/python.exe) #FIXME
 APPLE_dk_set	(PYTHON_APP python)
 LINUX_dk_set	(PYTHON_APP python)
 RASPBERRY_dk_set(PYTHON_APP python)

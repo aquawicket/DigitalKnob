@@ -6,11 +6,15 @@
 
 ### DEPEND ###
 EMSCRIPTEN_dk_depend(openssl-cmake)
+EMSCRIPTEN_dk_depend(python3) #FIXME
 
 ### IMPORT ###
 UNIX_dk_import	(https://github.com/openssl/openssl.git)
 WIN_dk_import	(https://www.npcglib.org/~stathis/downloads/openssl-1.0.2h-vs2015.7z)
 
+if(EMSCRIPTEN)
+	dk_copy(${OPENSSL-CMAKE} ${OPENSSL})
+endif()
 
 ### LINK ###
 dk_include				(${OPENSSL}/include)
@@ -57,7 +61,7 @@ ANDROID64_DEBUG_dk_queueShell(
 "export PATH=$ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/bin:$PATH\n"
 "../../Configure no-shared --debug android-arm64 -D__ANDROID_API__=31")
 #EMSCRIPTEN_DEBUG_dk_queueShell	(${EMCONFIGURE} ${OPENSSL}/Configure linux-x32 -no-asm -static -no-sock -no-afalgeng -DOPENSSL_SYS_NETWARE -DSIG_DFL=0 -DSIG_IGN=0 -DHAVE_FORK=0 -DOPENSSL_NO_AFALGENG=1 -DOPENSSL_NO_SPEED=1)
-EMSCRIPTEN_dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_OPENSSL=ON -DGIT_EXECUTABLE=${GIT_EXE} -DPYTHON_EXECUTABLE=${PYTHON_EXE} ${OPENSSL})
+EMSCRIPTEN_dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_OPENSSL=ON -DGIT_EXECUTABLE=${GIT_EXE} -DPYTHON_EXECUTABLE=${PYTHON_APP} ${OPENSSL})
 
 IOS64_DEBUG_dk_queueShell		(../../Configure no-shared --debug ios64-xcrun)
 IOSSIM_DEBUG_dk_queueShell		(../../Configure no-shared --debug iossimulator-xcrun)
