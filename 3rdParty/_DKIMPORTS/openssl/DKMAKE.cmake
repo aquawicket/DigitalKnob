@@ -6,7 +6,7 @@
 
 ### DEPEND ###
 EMSCRIPTEN_dk_depend(openssl-cmake)
-EMSCRIPTEN_dk_depend(python3) #FIXME
+EMSCRIPTEN_dk_depend(python3)
 
 ### IMPORT ###
 UNIX_dk_import	(https://github.com/openssl/openssl.git)
