@@ -231,7 +231,7 @@ if(EMSCRIPTEN)
 	dk_disable(libexpat)
 	dk_disable(libsndfile)
 	dk_disable(libtorrent)
-	dk_disable(libuv)
+	#dk_disable(libuv)
 	#dk_disable(libwebsockets)
 	dk_disable(libxml2)				# fatal error: 'config.h' file not found
 	dk_disable(lighttpd)
