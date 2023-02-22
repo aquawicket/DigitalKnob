@@ -210,7 +210,6 @@ if(EMSCRIPTEN)
 	dk_disable(DKSFMLWindow)
 	dk_disable(DKThread)
 	dk_disable(DKTorrent)
-	dk_disable(DKTray)
 	dk_disable(DKUpdate)
 	dk_disable(DKVncClient)			# case value evaluates to 4294967295, which cannot be narrowed to type 'int'
 	dk_disable(DKWebSockets)
@@ -231,8 +230,6 @@ if(EMSCRIPTEN)
 	dk_disable(libexpat)
 	dk_disable(libsndfile)
 	dk_disable(libtorrent)
-	#dk_disable(libuv)
-	#dk_disable(libwebsockets)
 	dk_disable(libxml2)				# fatal error: 'config.h' file not found
 	dk_disable(lighttpd)
 	dk_disable(kdevelop)
@@ -248,13 +245,11 @@ if(EMSCRIPTEN)
 	dk_disable(openblas)			# CMake Error: When cross compiling, a TARGET is required
 	dk_disable(opencv)				# ittnotify_config.h:376:12: error: call to undeclared function '__TBB_machine_fetchadd4'
 	dk_disable(openframeworks)
-	#dk_disable(openssl)
 	dk_disable(opus)
 	dk_disable(osgaudio)			# missing osg cmake includes
 	dk_disable(osgbullet)			# missing osg cmake includes
 	dk_disable(osgrmlui)
 	dk_disable(osgworks)			# missing osg cmake includes
-	#dk_disable(poco)				# DirecotryWatcher.cpp:28:11 fatal eror: 'sys/inotify.h' file not found
 	dk_disable(podofo)				# requires fontconfig
 	dk_disable(quartz_core)
 	dk_disable(rmlui-d3d11)
@@ -268,7 +263,6 @@ if(EMSCRIPTEN)
 	dk_disable(smpeg2)				# ISO C++17 does not allow 'register' storage class specifier
 	dk_disable(system_configuration)
 	dk_disable(tesseract)			# missing <allheaders.h>
-	#dk_disable(uwebsockets)         # requires openssl
 	dk_disable(vorbis)				# requires ogg
 	dk_disable(waave)
 	dk_disable(wasm3)
@@ -338,7 +332,6 @@ if(IOS OR IOSSIM)
 	dk_disable(libtorrent)			# Could not find BOOST
 	dk_disable(libvncserver)		# error C2065: 'nonBlocking': undeclared identifier
 	dk_disable(libwebp)				# TIFF is disabled when statically linking
-	#dk_disable(libwebsockets)		# compiling errors
 	dk_disable(libxml2)				# fatal error: 'config.h' file not found
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(lua)					# error:'system' is unavailable: not available on iOS
@@ -530,7 +523,6 @@ if(RASPBERRY)
 	dk_disable(nasm)
 	dk_disable(opencv)				# build errors
 	dk_disable(openframeworks)		# error: cannot find opengles
-	#dk_disable(openssl)				# lots of undefined references
 	dk_disable(opus)
 	dk_disable(osgaudio)
 	dk_disable(osgbullet)			# requires osgworks
@@ -566,7 +558,6 @@ if(WIN)
 	dk_disable(aubio)
 	dk_disable(bzip2)
 	dk_disable(diff-match-patch)
-	#dk_disable(DKOcr)				# causing linking errors in tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
 	dk_disable(DKOSGAudio)			# requires freealut
 	dk_disable(DKOSGCef)			# build errors
@@ -574,7 +565,6 @@ if(WIN)
 	dk_disable(DKOSGStats)			# build errors
 	dk_disable(DKOSGVideo)			# TODO
 	dk_disable(DKOSGWidget)			# build errors
-	#dk_disable(DKScreenRecorder)
 	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSDLWaave)			# requires waave
 	dk_disable(DKSFMLRml)			# INCOMPLETE
@@ -611,5 +601,4 @@ if(WIN_64)
 	dk_disable(opencv)				# error: Only SIMD128, AVX2 and NEON are supported in Winograd.
 	dk_disable(sdl_net)				# can't find "sys/ioctl.h"
 	dk_disable(smpeg2)				# fatal error C1083: Cannot open include file: 'unistd.h'
-	#dk_disable(stackwalker)
 endif(WIN_64)
