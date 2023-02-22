@@ -530,7 +530,7 @@ if(RASPBERRY)
 	dk_disable(nasm)
 	dk_disable(opencv)				# build errors
 	dk_disable(openframeworks)		# error: cannot find opengles
-	dk_disable(openssl)				# lots of undefined references
+	#dk_disable(openssl)				# lots of undefined references
 	dk_disable(opus)
 	dk_disable(osgaudio)
 	dk_disable(osgbullet)			# requires osgworks
