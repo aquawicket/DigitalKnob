@@ -146,7 +146,7 @@ if(PocoJSON)
 	RASPBERRY_dk_libRelease	(${POCO}/${OS}/${RELEASE_DIR}/lib/libPocoJSON.a)
 	WIN_dk_libDebug			(${POCO}/${OS}/lib/${DEBUG_DIR}/PocoJSONmtd.lib)
 	WIN_dk_libRelease		(${POCO}/${OS}/lib/${RELEASE_DIR}/PocoJSONmt.lib)
-endi()
+endif()
 
 if(PocoMongoDB)
 	ANDROID_dk_libDebug		(${POCO}/${OS}/lib/${DEBUG_DIR}/PocoMongoDBd.a)
