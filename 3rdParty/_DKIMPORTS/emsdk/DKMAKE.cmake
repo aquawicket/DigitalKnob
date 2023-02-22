@@ -25,6 +25,7 @@ dkFileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL_IMAGE 
 dkFileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL_TTF = 1;" 	"var USE_SDL_TTF = false;")
 dkFileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL_NET = 1;" 	"var USE_SDL_NET = false;")
 dkFileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL_MIXER = 1;" 	"var USE_SDL_MIXER = false;")
+dkFileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_PTHREADS = false;" "var USE_PTHREADS = true;")
 
 
 #if(WIN_HOST)
