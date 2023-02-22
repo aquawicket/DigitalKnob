@@ -7,7 +7,7 @@ dk_depend(ws2_32.lib)
 
 
 ### IMPORT ###
-dk_import(https://github.com/pocoproject/poco.git)
+dk_import(https://github.com/pocoproject/poco.git PATCH)
 
 
 ### LINK ###
@@ -215,7 +215,11 @@ WIN_dk_libRelease		(${POCO}/${OS}/lib/${RELEASE_DIR}/PocoZipmt.lib)
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} -DPOCO_MT=ON ${POCO})
+if(EMSCRIPTEN)
+	dk_queueCommand(${DKCMAKE_BUILD} -DPOCO_MT=ON "-DCMAKE_CXX_FLAGS=-DPOCO_NO_INOTIFY=ON -DEMSCRIPTEN -DPOCO_NO_LINUX_IF_PACKET_H" ${POCO})
+else()
+	dk_queueCommand(${DKCMAKE_BUILD} -DPOCO_MT=ON ${POCO})
+endif()
 
 
 ### COMPILE ###

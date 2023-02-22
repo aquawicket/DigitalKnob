@@ -254,7 +254,7 @@ if(EMSCRIPTEN)
 	dk_disable(osgbullet)			# missing osg cmake includes
 	dk_disable(osgrmlui)
 	dk_disable(osgworks)			# missing osg cmake includes
-	dk_disable(poco)				# DirecotryWatcher.cpp:28:11 fatal eror: 'sys/inotify.h' file not found
+	#dk_disable(poco)				# DirecotryWatcher.cpp:28:11 fatal eror: 'sys/inotify.h' file not found
 	dk_disable(podofo)				# requires fontconfig
 	dk_disable(quartz_core)
 	dk_disable(rmlui-d3d11)
