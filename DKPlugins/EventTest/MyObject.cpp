@@ -25,7 +25,7 @@
 */
 //https://github.com/uNetworking/uWebSockets/blob/master/tests/main.cpp
 #include "DK/stdafx.h"
-#include "MyObject/MyObject.h"
+#include "EventTest/MyObject.h"
 
 
 bool MyObject::Init(){
