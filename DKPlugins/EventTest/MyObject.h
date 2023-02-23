@@ -36,6 +36,8 @@ class MyObject : public DKObjectT<MyObject>
 public:
 	bool Init();
 	bool End();
+	bool instance_value();
+	bool instance_test();
 	static int value(duk_context* ctx);
 	static int test(duk_context* ctx);
 };

@@ -119,6 +119,10 @@ bool DKDuktape::Init(){
 		ctx = duk_create_heap(NULL, NULL, NULL, my_udata, my_fatal);
 		if(!ctx)
 			return DKERROR("Failed to create a Duktape heap.\n");
+
+		//////////////////////////////////////////////////////////////////////////////////
+		DKDuktape::AttachFunction("CPP_Duktape_createDKObject", DKDuktape::createDKObject);
+
 #if DEBUG 
 		//FIXME: This should work as DKDEBUGFUNC() does. By Default, in DEBUG mode, DKDuktapeDebugger should
 		//display function calls. And /assets/settings.txt should have a [LOG_JS_DEBUG] entry allowing setting overwrite. etc.
@@ -167,9 +171,6 @@ bool DKDuktape::Init(){
 	}
 	
 	DKApp::AppendLoopFunc(&DKDuktape::EventLoop, this);
-
-	//////////////////////////////////////////////////////////////////////////////////
-	DKDuktape::AttachFunction("CPP_Duktape_createDKObject", DKDuktape::createDKObject);
 
 	return true;
 }

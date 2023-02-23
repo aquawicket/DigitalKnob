@@ -41,14 +41,30 @@ bool MyObject::End(){
 	return true;
 }
 
+bool MyObject::instance_value(){
+	DKINFO("MyObject::instance_value()\n");
+	return true;
+}
+
+bool MyObject::instance_test() {
+	DKINFO("MyObject::instance_test()\n");
+	return true;
+}
+
 int MyObject::value(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	//TODO
+	DKString address = duk_require_string(ctx, 0);
+	DKINFO("MyObject::value(): address = " + address + "\n");
+	//DKDuktape::Get()->addressToDKObject(address);
+	//object->instance_value();
 	return true;
 }
 
 int MyObject::test(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	//TODO
+	DKString address = duk_require_string(ctx, 0);
+	DKINFO("MyObject::value(): test = " + address + "\n");
+	//MyObject* object = (MyObject*)DKDuktape::addressToDKObject(address);
+	//object->instance_test();
 	return true;
 }
