@@ -32,7 +32,7 @@ bool MyObject::Init(){
 	DKDEBUGFUNC();
 	DKINFO(toString(data, ",") + "\n");
 	DKDuktape::AttachFunction("CPP_MyObject_value", MyObject::value);
-	DKDuktape::AttachFunction("CPP_MyObjectt_test", MyObject::test);
+	DKDuktape::AttachFunction("CPP_MyObject_test", MyObject::test);
 	return true;
 }
 

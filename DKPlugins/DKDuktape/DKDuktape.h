@@ -67,6 +67,8 @@ public:
 	static bool UnloadFile(const DKString& path);
 	static DKString eventToAddress(DKEvents* event);
 	static DKEvents* addressToEvent(const DKString& address);
+
+	static int createDKObject(duk_context* ctx);
 	static DKString dkobjectToAddress(DKObject* object);
 	static DKObject* addressToDKObject(const DKString& address);
 

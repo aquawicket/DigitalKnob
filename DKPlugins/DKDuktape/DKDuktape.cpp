@@ -167,6 +167,10 @@ bool DKDuktape::Init(){
 	}
 	
 	DKApp::AppendLoopFunc(&DKDuktape::EventLoop, this);
+
+	//////////////////////////////////////////////////////////////////////////////////
+	DKDuktape::AttachFunction("CPP_Duktape_createDKObject", DKDuktape::createDKObject);
+
 	return true;
 }
 
@@ -569,6 +573,17 @@ DKEvents* DKDuktape::addressToEvent(const DKString& address) {
 	//	return NULL;
 	//}
 	return event;
+}
+
+
+/////////////////////////////////////////////////
+int DKDuktape::createDKObject(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
+	DKString data = duk_require_string(ctx, 0);
+	DKObject* object = DKClass::DKCreate(data);
+	DKString address = dkobjectToAddress(object);
+	duk_push_string(ctx, address.c_str());
+	return true;
 }
 
 DKString DKDuktape::dkobjectToAddress(DKObject* object) {
