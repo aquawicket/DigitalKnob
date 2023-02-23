@@ -68,7 +68,8 @@ int DKDomCSSStyleDeclaration::getPropertyPriority(duk_context* ctx){
 int DKDomCSSStyleDeclaration::getPropertyValue(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rml::Element* element = DKRml::addressToElement(address);
+	//Rml::Element* element = DKRml::addressToElement(address);
+	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
 	if(!element){
 		DKERROR("DKDomCSSStyleDeclaration::getPropertyValue(): element invalid\n");
 		duk_push_boolean(ctx, false);
@@ -115,7 +116,8 @@ int DKDomCSSStyleDeclaration::item(duk_context* ctx) {
 int DKDomCSSStyleDeclaration::removeProperty(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rml::Element* element = DKRml::addressToElement(address);
+	//Rml::Element* element = DKRml::addressToElement(address);
+	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
 	if (!element) {
 		DKERROR("DKDomCSSStyleDeclaration::getPropertyValue(): element invalid\n");
 		duk_push_boolean(ctx, false);
@@ -144,7 +146,8 @@ int DKDomCSSStyleDeclaration::setProperty(duk_context* ctx){
 	if(duk_is_boolean(ctx, 2))
 		propertyValue = toString(duk_require_boolean(ctx, 2));
 	//DKString priority = duk_require_string(ctx, 3); //TODO
-	Rml::Element* element = DKRml::addressToElement(address);
+	//Rml::Element* element = DKRml::addressToElement(address);
+	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
 	if(element){
 		if(!propertyValue.empty()){
 			element->SetProperty(propertyName.c_str(), propertyValue.c_str());

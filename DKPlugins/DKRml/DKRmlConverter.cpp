@@ -124,7 +124,8 @@ bool DKRmlConverter::Hyperlink(DKEvents* event){
 	DKString elementAddress = event->GetId();
 	DKRml* dkRml = DKRml::Get("");
 	//Rml::ElementDocument* doc = dkRml->document; //unused code
-	Rml::Element* aElement = DKRml::addressToElement(elementAddress);
+	//Rml::Element* aElement = DKRml::addressToElement(elementAddress);
+	Rml::Element* aElement = (Rml::Element*)DKDuktape::addressToPointer(elementAddress);
 	DKString value = aElement->GetAttribute("href")->Get<Rml::String>();
 	DKINFO("DKWidget::Hyperlink: "+value+"\n");
 	//DKUtil::Run(value, "");

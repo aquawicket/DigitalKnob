@@ -449,7 +449,8 @@ bool DKRml::RegisterEvent(const DKString& elementAddress, const DKString& type){
 		return DKERROR(elementAddress +": elementAddress empty\n"); 
 	if(type.empty())
 		return DKERROR("type empty\n");
-	Rml::Element* element = addressToElement(elementAddress.c_str());
+	//Rml::Element* element = addressToElement(elementAddress.c_str());
+	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(elementAddress.c_str());
 
 
 	if(!element)
@@ -495,7 +496,8 @@ bool DKRml::SendEvent(const DKString& elementAddress, const DKString& type, cons
 		element = DKRml::Get()->document->GetContext()->GetRootElement();
 	}
 	else {
-		element = addressToElement(elementAddress);
+		//element = addressToElement(elementAddress);
+		element = (Rml::Element*)DKDuktape::addressToPointer(elementAddress);
 	}
 	if(!element)
 		return DKERROR("element invalid\n");
@@ -544,12 +546,13 @@ bool DKRml::UnregisterEvent(const DKString& elementAddress, const DKString& type
 		return DKERROR("elementAddress invalid");
 	if(type.empty())
 		return DKERROR("type invalid");
-	if (same(addressToElement(elementAddress)->GetId(), "window"))
-		return DKERROR("can not Unregister window event");
 	//if(!DKValid("DKRml0")){ return false; }
-	Rml::Element* element = addressToElement(elementAddress);
+	//Rml::Element* element = addressToElement(elementAddress);
+	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(elementAddress);
 	if(!element)
 		return DKERROR("element invalid");
+	if (same(element->GetId(), "window"))
+		return DKERROR("can not Unregister window event");
 	DKString _type = type;
 	if(same(type, "contextmenu"))
 		_type = "mouseup";
@@ -598,7 +601,6 @@ DKString DKRml::eventToAddress(Rml::Event* event) {
 #endif
 	return ss.str();
 }
-*/
 
 Rml::Element* DKRml::addressToElement(const DKString& address) {
 	//DKDEBUGFUNC(address);  //EXCESSIVE LOGGING
@@ -626,7 +628,6 @@ Rml::Element* DKRml::addressToElement(const DKString& address) {
 	return element;
 }
 
-/*
 DKString DKRml::elementToAddress(Rml::Element* element) {
 	//DKDEBUGFUNC(element);  //EXCESSIVE LOGGING
 	if (!element) {
