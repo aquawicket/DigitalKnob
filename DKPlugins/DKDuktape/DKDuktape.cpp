@@ -607,7 +607,7 @@ DKString DKDuktape::dkobjectToAddress(DKObject* object) {
 	return ss.str();
 }
 
-static DKObject* addressToDKObject(const DKString& address) {
+DKObject* DKDuktape::addressToDKObject(const DKString& address) {
 	//DKDEBUGFUNC(address);  //EXCESSIVE LOGGING
 	DKObject* object;
 	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {

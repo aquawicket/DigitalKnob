@@ -55,8 +55,8 @@ int MyObject::value(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	DKINFO("MyObject::value(): address = " + address + "\n");
-	//DKDuktape::Get()->addressToDKObject(address);
-	//object->instance_value();
+	MyObject* object = (MyObject*)DKDuktape::addressToDKObject(address);
+	object->instance_value();
 	return true;
 }
 
@@ -64,7 +64,7 @@ int MyObject::test(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	DKINFO("MyObject::value(): test = " + address + "\n");
-	//MyObject* object = (MyObject*)DKDuktape::addressToDKObject(address);
-	//object->instance_test();
+	MyObject* object = (MyObject*)DKDuktape::addressToDKObject(address);
+	object->instance_test();
 	return true;
 }

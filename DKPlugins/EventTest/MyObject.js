@@ -11,14 +11,14 @@ var MyObject = function MyObject(data) {
 	//// Instance properties ////
 	Object.defineProperty(this, "value", {
         get: function value() {
-            return CPP_MyObject_value()
+            return CPP_MyObject_value(pointer)
         }
     })
 	
 	//// Instance methods ////
 	MyObject.prototype.test = function test() {
 		console.log("MyObject.prototype.test()")
-		CPP_MyObject_test()
+		CPP_MyObject_test(pointer)
     }
 	
 	//// Instance events ////
