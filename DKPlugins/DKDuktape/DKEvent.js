@@ -107,7 +107,7 @@ var Event = function Event(pointer) //https://developer.mozilla.org/en-US/docs/W
     //Read Only
     Object.defineProperty(this, "type", {
         get: function type() {
-            return CPP_DKEvent_type(pointer);
+            return this.pointer//CPP_DKEvent_type(pointer);
         }
     });
     //Read Only
