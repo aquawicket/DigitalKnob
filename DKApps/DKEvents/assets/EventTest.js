@@ -19,7 +19,7 @@ var MyObject = function MyObject(data) {
 	//// Instance methods ////
 	MyObject.prototype.test = function test() {
 		console.log("MyObject.prototype.test()")
-		CPP_EventTest_test()
+		//CPP_EventTest_test()
     }
 	
 	//// Instance events ////
