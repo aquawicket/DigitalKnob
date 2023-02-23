@@ -2,6 +2,7 @@
 console.log("\n\n ___Event Test___");
 
 /////////// MyObjectA /////////////////////
+console.log("/////////// MyObjectA /////////////////////")
 function myCallbackA(){
 	console.log("myCallbackA()")
 }
@@ -15,10 +16,12 @@ const myEventA = new Event('myEventA')
 myObjectA.dispatchEvent(myEventA);
 myObjectA.removeEventListener('myEventA', myCallbackA)
 myObjectA.dispatchEvent(myEventA);
+console.log("\n\n")
 
 
 
 /////////// MyObjectB /////////////////////
+console.log("/////////// MyObjectB /////////////////////")
 function myCallbackB(){
 	console.log("myCallbackB()")
 }
@@ -32,3 +35,4 @@ const myEventB = new Event('myEventB')
 myObjectB.dispatchEvent(myEventB);
 myObjectB.removeEventListener('myEventB', myCallbackB)
 myObjectB.dispatchEvent(myEventB);
+console.log("\n\n")

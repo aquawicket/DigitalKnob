@@ -41,7 +41,7 @@ public:
 	static int value(duk_context* ctx);
 	static int test(duk_context* ctx);
 };
-REGISTER_OBJECT(MyObject, true);
+REGISTER_OBJECT(MyObject, false);
 
 
 #endif //MyObject_H
