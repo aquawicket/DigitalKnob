@@ -320,7 +320,8 @@ bool DKRml::LoadUrl(const DKString& url){
 
 void DKRml::ProcessEvent(Rml::Event& rmlEvent){
 	//DKDEBUGFUNC(rmlEvent);  //EXCESSIVE LOGGING
-	DKString rmlEventAddress = eventToAddress(&rmlEvent);
+	//DKString rmlEventAddress = eventToAddress(&rmlEvent);
+	DKString rmlEventAddress = DKDuktape::pointerToAddress(&rmlEvent);
 	//DKString code = "new Event("+rmlEventAddress+")";
 	//DKString rval;
 	//DKDuktape::Get()->RunDuktape(code, rval);
@@ -553,6 +554,7 @@ bool DKRml::UnregisterEvent(const DKString& elementAddress, const DKString& type
 	return true;
 }
 
+/*
 Rml::Event* DKRml::addressToEvent(const DKString& address) {
 	//DKDEBUGFUNC(address);  //EXCESSIVE LOGGING
 	Rml::Event* event;
@@ -591,6 +593,7 @@ DKString DKRml::eventToAddress(Rml::Event* event) {
 #endif
 	return ss.str();
 }
+*/
 
 Rml::Element* DKRml::addressToElement(const DKString& address) {
 	//DKDEBUGFUNC(address);  //EXCESSIVE LOGGING
