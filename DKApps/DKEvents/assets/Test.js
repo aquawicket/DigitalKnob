@@ -25,6 +25,9 @@ console.log("/////////// MyObjectB /////////////////////")
 function myCallbackB(){
 	console.log("myCallbackB()")
 }
+function myObjectB_onmessage(){
+	console.log("myObjectB_onmessage()")
+}
 const myObjectB = new MyObject('myObjectB')
 console.log("myObjectB = "+myObjectB)
 console.log("myObjectB.value = "+myObjectB.value)
@@ -35,4 +38,8 @@ const myEventB = new Event('myEventB')
 myObjectB.dispatchEvent(myEventB);
 myObjectB.removeEventListener('myEventB', myCallbackB)
 myObjectB.dispatchEvent(myEventB);
+
+myObjectB.onmessage = myObjectB_onmessage;
+const myEventB_onmessage = new Event('message')
+myObjectB.dispatchEvent(myEventB_onmessage);
 console.log("\n\n")
