@@ -30,6 +30,10 @@
 
 bool EventTest::Init(){
 	DKDEBUGFUNC();
+	
+	DKDuktape::AttachFunction("CPP_EventTest_value", EventTest::value);
+	DKDuktape::AttachFunction("CPP_EventTest_test", EventTest::test);
+	
 	return true;
 }
 
@@ -45,5 +49,18 @@ bool EventTest::value(){
 
 bool EventTest::test(){
 	DKDEBUGFUNC();
+	return true;
+}
+
+///////////////////////////////////////
+int EventTest::value(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
+	//TODO
+	return true;
+}
+
+int EventTest::test(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
+	//TODO
 	return true;
 }
