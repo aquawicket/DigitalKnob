@@ -99,9 +99,9 @@ MAC_RELEASE_dk_queueShell		(../../Configure no-shared --release)
 RASPBERRY_RELEASE_dk_queueShell	(../../Configure no-shared --release)
 
 if(NOT ANDROID)
-	UNIX_DEBUG_dk_queueShell(make)
+	UNIX_RELEASE_dk_queueShell(make)
 else()
-	ANDROID_DEBUG_dk_queueShell(
+	ANDROID_RELEASE_dk_queueShell(
 	"export ANDROID_NDK_ROOT=${ANDROID-NDK}\n"
 	"export PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/windows-x86_64/bin:$PATH\n"
 	"export PATH=$ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/bin:$PATH\n"
