@@ -38,7 +38,14 @@ var MyObject = function MyObject(data) {
 	if(this.toString() === "[object Object]")
 		this.toString = function(){	return "[object MyObject]" }
 	
-	return EventTarget.call(this, data)
+	return EventTarget.call(this, pointer)
 	
 }
 MyObject.prototype = EventTarget.prototype;
+
+function doEvent(address, type){
+	console.log("doEvent("+address+","+type+")")
+	const eventTarget = new EventTarget(address)
+	const event = new Event(type)
+	eventTarget.dispatchEvent(event)
+}
