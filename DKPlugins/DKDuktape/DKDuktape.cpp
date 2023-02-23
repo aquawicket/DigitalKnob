@@ -591,6 +591,15 @@ int DKDuktape::createDKObject(duk_context* ctx) {
 	return true;
 }
 
+bool DKDuktape::doEvent(const DKString& address, const DKString& type) {
+	DKDEBUGFUNC(address, type);
+	DKString code = "doEvent('"+address+"','"+type+"')";
+	DKString rval;
+	DKDuktape::RunDuktape(code, rval);
+	DKINFO("rval = " + rval + "\n");
+	return true;
+}
+
 DKString DKDuktape::dkobjectToAddress(DKObject* object) {
 	//DKDEBUGFUNC(event);  //EXCESSIVE LOGGING
 	if (!object) {

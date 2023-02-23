@@ -69,6 +69,7 @@ public:
 	static DKEvents* addressToEvent(const DKString& address);
 
 	static int createDKObject(duk_context* ctx);
+	static bool doEvent(const DKString& address, const DKString& type);
 	static DKString dkobjectToAddress(DKObject* object);
 	static DKObject* addressToDKObject(const DKString& address);
 

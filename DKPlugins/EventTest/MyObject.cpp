@@ -33,6 +33,8 @@ bool MyObject::Init(){
 	DKINFO(toString(data, ",") + "\n");
 	DKDuktape::AttachFunction("CPP_MyObject_value", MyObject::value);
 	DKDuktape::AttachFunction("CPP_MyObject_test", MyObject::test);
+
+	//instance_sendevent();
 	return true;
 }
 
@@ -48,6 +50,15 @@ bool MyObject::instance_value(){
 
 bool MyObject::instance_test() {
 	DKINFO("MyObject::instance_test("+data[1] + ")\n");
+	instance_sendevent();
+	return true;
+}
+
+bool MyObject::instance_sendevent() {
+	DKINFO("MyObject::instance_sendevent()\n");
+	DKString address = DKDuktape::dkobjectToAddress(this);
+	DKString type = "myEventB";
+	DKDuktape::doEvent(address, type);
 	return true;
 }
 

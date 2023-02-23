@@ -16,6 +16,7 @@ var EventFromCPP = function EventFromCPP(pointer, event)
 // https://dom.spec.whatwg.org/#interface-eventtarget
 instances = [];
 var EventTarget = function EventTarget(pointer) {
+	console.log("EventTarget("+pointer+")")
     this.pointer = pointer;
     for (var i = 0; i < instances.length; i++) {
         if (instances[i].pointer === pointer) {

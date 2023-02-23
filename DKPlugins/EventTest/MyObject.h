@@ -38,6 +38,7 @@ public:
 	bool End();
 	bool instance_value();
 	bool instance_test();
+	bool instance_sendevent();
 	static int value(duk_context* ctx);
 	static int test(duk_context* ctx);
 };
