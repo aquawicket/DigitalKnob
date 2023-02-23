@@ -51,7 +51,7 @@ bool DKUIEvent::Init(){
 int DKUIEvent::cancelBubble(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	Rml::Event* event = DKEvent::addressToEvent(eventAddress);
+	Rml::Event* event = (Rml::Event*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("DKUIEvent::cencelBubble(): event invalid\n");
 		duk_push_boolean(ctx, false);
@@ -71,7 +71,7 @@ int DKUIEvent::initUIEvent(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	/*
 	DKString eventAddress = duk_require_string(ctx, 0);
-	Rml::Event* event = DKRml::addressToEvent(eventAddress);
+	Rml::Event* event = (Rml::Event*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("DKUIEvent::initEvent(): event invalid\n");
 		duk_push_boolean(ctx, false);

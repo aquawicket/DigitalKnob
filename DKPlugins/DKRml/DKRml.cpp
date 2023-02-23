@@ -321,7 +321,6 @@ bool DKRml::LoadUrl(const DKString& url){
 
 void DKRml::ProcessEvent(Rml::Event& rmlEvent){
 	//DKDEBUGFUNC(rmlEvent);  //EXCESSIVE LOGGING
-	//DKString rmlEventAddress = eventToAddress(&rmlEvent);
 	DKString rmlEventAddress = DKDuktape::pointerToAddress(&rmlEvent);
 	//DKString code = "new Event("+rmlEventAddress+")";
 	//DKString rval;
@@ -561,93 +560,6 @@ bool DKRml::UnregisterEvent(const DKString& elementAddress, const DKString& type
 	element->RemoveEventListener(_type.c_str(), this, false);
 	return true;
 }
-
-/*
-Rml::Event* DKRml::addressToEvent(const DKString& address) {
-	//DKDEBUGFUNC(address);  //EXCESSIVE LOGGING
-	Rml::Event* event;
-	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {
-		DKERROR(address+" is invalid hex notation\n");
-		return NULL;
-	}
-	//Convert a string of an address back into a pointer
-	std::stringstream ss;
-	ss << address.substr(2, address.size() - 2);
-	std::uint64_t tmp;
-	if (!(ss >> std::hex >> tmp)) {
-		DKERROR(address+": invalid address\n");
-		return NULL;
-	}
-	event = reinterpret_cast<Rml::Event*>(tmp);
-	if (!event->GetCurrentElement()) {
-		DKERROR(address+": currentElement invalid\n");
-		return NULL;
-	}
-	return event;
-}
-
-DKString DKRml::eventToAddress(Rml::Event* event) {
-	//DKDEBUGFUNC(event);  //EXCESSIVE LOGGING
-	if (!event) {
-		DKERROR("invalid event\n");
-		return "";
-	}
-	std::stringstream ss;
-	const void* address = static_cast<const void*>(event);
-#if WIN
-	ss << "0x" << address;
-#else 
-	ss << address;
-#endif
-	return ss.str();
-}
-
-Rml::Element* DKRml::addressToElement(const DKString& address) {
-	//DKDEBUGFUNC(address);  //EXCESSIVE LOGGING
-	Rml::Element* element = nullptr;
-	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {
-		DKERROR(address+": the address is not a valid hex notation\n");
-		return NULL;
-	}
-	//Convert a string of an address back into a pointer
-	std::stringstream ss;
-	ss << address.substr(2, address.size() - 2);
-	std::uint64_t tmp;
-	if (!(ss >> std::hex >> tmp)) {
-		DKERROR(address + ": invalid address\n");
-		return NULL;
-	}
-	element = reinterpret_cast<Rml::Element*>(tmp);
-	
-	if (!element) {
-		DKERROR("invalid element\n");
-		return NULL;
-	}
-	if (element->GetTagName().empty())
-		return NULL;
-	return element;
-}
-
-DKString DKRml::elementToAddress(Rml::Element* element) {
-	//DKDEBUGFUNC(element);  //EXCESSIVE LOGGING
-	if (!element) {
-		DKERROR("invalid element\n");
-		return "";
-	}
-	std::stringstream ss;
-	const void* address = static_cast<const void*>(element);
-#if WIN
-	ss << "0x" << address;
-#else 
-	ss << address;
-#endif
-	if (same("0xDDDDDDDD", ss.str())) {
-		DKERROR("ss = 0xDDDDDDDD\n");
-		return "";
-	}
-	return ss.str();
-}
-*/
 
 //TODO
 bool DKRml::GetOuterHTML(Rml::Element* element, DKString& outerHtml) {

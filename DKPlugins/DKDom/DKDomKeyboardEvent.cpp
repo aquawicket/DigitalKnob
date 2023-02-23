@@ -84,7 +84,6 @@ bool DKDomKeyboardEvent::Init() {
 int DKDomKeyboardEvent::altKey(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	//Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	Rml::Event* event = (Rml::Event*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
 		duk_push_undefined(ctx);
@@ -98,7 +97,6 @@ int DKDomKeyboardEvent::altKey(duk_context* ctx) {
 int DKDomKeyboardEvent::code(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	//Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	Rml::Event* event = (Rml::Event*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
 		duk_push_undefined(ctx);
@@ -115,7 +113,6 @@ int DKDomKeyboardEvent::code(duk_context* ctx) {
 int DKDomKeyboardEvent::ctrlKey(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	//Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	Rml::Event* event = (Rml::Event*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
 		duk_push_undefined(ctx);
@@ -129,7 +126,6 @@ int DKDomKeyboardEvent::ctrlKey(duk_context* ctx) {
 int DKDomKeyboardEvent::isComposing(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	//Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	Rml::Event* event = (Rml::Event*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
 		duk_push_undefined(ctx);
@@ -144,7 +140,6 @@ int DKDomKeyboardEvent::isComposing(duk_context* ctx) {
 int DKDomKeyboardEvent::key(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	//Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	Rml::Event* event = (Rml::Event*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
 		duk_push_undefined(ctx);
@@ -161,7 +156,6 @@ int DKDomKeyboardEvent::key(duk_context* ctx) {
 int DKDomKeyboardEvent::locale(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	//Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	Rml::Event* event = (Rml::Event*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
 		duk_push_undefined(ctx);
@@ -176,7 +170,6 @@ int DKDomKeyboardEvent::locale(duk_context* ctx) {
 int DKDomKeyboardEvent::location(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	//Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	Rml::Event* event = (Rml::Event*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
 		duk_push_undefined(ctx);
@@ -193,7 +186,6 @@ int DKDomKeyboardEvent::location(duk_context* ctx) {
 int DKDomKeyboardEvent::metaKey(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	//Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	Rml::Event* event = (Rml::Event*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
 		duk_push_undefined(ctx);
@@ -207,7 +199,6 @@ int DKDomKeyboardEvent::metaKey(duk_context* ctx) {
 int DKDomKeyboardEvent::repeat(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	//Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	Rml::Event* event = (Rml::Event*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
 		duk_push_undefined(ctx);
@@ -222,7 +213,6 @@ int DKDomKeyboardEvent::repeat(duk_context* ctx) {
 int DKDomKeyboardEvent::shiftKey(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	//Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	Rml::Event* event = (Rml::Event*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
 		duk_push_undefined(ctx);
@@ -240,7 +230,6 @@ int DKDomKeyboardEvent::shiftKey(duk_context* ctx) {
 int DKDomKeyboardEvent::getModifierState(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	//Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	Rml::Event* event = (Rml::Event*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
 		duk_push_undefined(ctx);
@@ -278,7 +267,6 @@ int DKDomKeyboardEvent::getModifierState(duk_context* ctx) {
 int DKDomKeyboardEvent::initKeyEvent(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	//Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	Rml::Event* event = (Rml::Event*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
 		duk_push_undefined(ctx);
@@ -291,7 +279,6 @@ int DKDomKeyboardEvent::initKeyEvent(duk_context* ctx) {
 int DKDomKeyboardEvent::initKeyboardEvent(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	//Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	Rml::Event* event = (Rml::Event*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
 		duk_push_undefined(ctx);
@@ -307,7 +294,6 @@ int DKDomKeyboardEvent::initKeyboardEvent(duk_context* ctx) {
 int DKDomKeyboardEvent::char1(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	//Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	Rml::Event* event = (Rml::Event*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
 		duk_push_undefined(ctx);
@@ -320,7 +306,6 @@ int DKDomKeyboardEvent::char1(duk_context* ctx) {
 int DKDomKeyboardEvent::charCode(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	//Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	Rml::Event* event = (Rml::Event*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
 		duk_push_undefined(ctx);
@@ -333,7 +318,6 @@ int DKDomKeyboardEvent::charCode(duk_context* ctx) {
 int DKDomKeyboardEvent::keyCode(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	//Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	Rml::Event* event = (Rml::Event*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
 		duk_push_undefined(ctx);
@@ -350,7 +334,6 @@ int DKDomKeyboardEvent::keyCode(duk_context* ctx) {
 int DKDomKeyboardEvent::keyIdentifier(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	//Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	Rml::Event* event = (Rml::Event*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
 		duk_push_undefined(ctx);
@@ -367,7 +350,6 @@ int DKDomKeyboardEvent::keyIdentifier(duk_context* ctx) {
 int DKDomKeyboardEvent::keyLocation(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	//Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	Rml::Event* event = (Rml::Event*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
 		duk_push_undefined(ctx);
@@ -384,7 +366,6 @@ int DKDomKeyboardEvent::keyLocation(duk_context* ctx) {
 int DKDomKeyboardEvent::which(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	//Rml::Event* event = DKRml::addressToEvent(eventAddress);
 	Rml::Event* event = (Rml::Event*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
 		duk_push_undefined(ctx);

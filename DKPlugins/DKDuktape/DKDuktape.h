@@ -65,8 +65,6 @@ public:
 	static bool Trace();
 	static bool QueueDuktape(const DKString& code);
 	static bool UnloadFile(const DKString& path);
-	//static DKString eventToAddress(DKEvents* event);
-	//static DKEvents* addressToEvent(const DKString& address);
 
 	////////////////////////////////////////////
 	static int createDKObject(duk_context* ctx);
