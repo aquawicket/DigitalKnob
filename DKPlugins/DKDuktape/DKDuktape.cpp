@@ -586,7 +586,7 @@ int DKDuktape::createDKObject(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	DKString data = duk_require_string(ctx, 0);
 	DKObject* object = DKClass::DKCreate(data);
-	DKString address = dkobjectToAddress(object);
+	DKString address = pointerToAddress(object);
 	duk_push_string(ctx, address.c_str());
 	return true;
 }
@@ -600,14 +600,14 @@ bool DKDuktape::doEvent(const DKString& address, const DKString& type) {
 	return true;
 }
 
-DKString DKDuktape::dkobjectToAddress(DKObject* object) {
+DKString DKDuktape::pointerToAddress(void* pointer) {
 	//DKDEBUGFUNC(event);  //EXCESSIVE LOGGING
-	if (!object) {
-		DKERROR("DKDuktape::dkobjectToAddress(): invalid event\n");
+	if (!pointer) {
+		DKERROR("pointer invalid! \n");
 		return NULL;
 	}
 	std::stringstream ss;
-	const void* address = static_cast<const void*>(object);
+	const void* address = static_cast<const void*>(pointer);
 #if WIN
 	ss << "0x" << address;
 #else 
@@ -616,24 +616,23 @@ DKString DKDuktape::dkobjectToAddress(DKObject* object) {
 	return ss.str();
 }
 
-DKObject* DKDuktape::addressToDKObject(const DKString& address) {
+void* DKDuktape::addressToPointer(const DKString& address) {
 	//DKDEBUGFUNC(address);  //EXCESSIVE LOGGING
-	DKObject* object;
+	void* pointer;
 	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {
-		DKERROR("DKRml::addressToEvent(): the address is not a valid hex notation");
+		DKERROR("address is not a valid hex notation! \n");
 		return NULL;
 	}
 	//Convert a string of an address back into a pointer
 	std::stringstream ss;
 	ss << address.substr(2, address.size() - 2);
-	//int tmp(0);
 	std::uint64_t tmp;
 	if (!(ss >> std::hex >> tmp)) {
-		DKERROR("DKRml::addressToEvent(" + address + "): invalid address\n");
+		DKERROR("DKDuktape::addressToPointer(" + address + "): invalid address\n");
 		return NULL;
 	}
-	object = reinterpret_cast<DKObject*>(tmp);
-	return object;
+	pointer = reinterpret_cast<void*>(tmp);
+	return pointer;
 }
 
 

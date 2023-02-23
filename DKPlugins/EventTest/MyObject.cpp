@@ -30,11 +30,8 @@
 
 bool MyObject::Init(){
 	DKDEBUGFUNC();
-	DKINFO(toString(data, ",") + "\n");
 	DKDuktape::AttachFunction("CPP_MyObject_value", MyObject::value);
 	DKDuktape::AttachFunction("CPP_MyObject_test", MyObject::test);
-
-	//instance_sendevent();
 	return true;
 }
 
@@ -56,7 +53,7 @@ bool MyObject::instance_test() {
 
 bool MyObject::instance_sendevent() {
 	DKINFO("MyObject::instance_sendevent()\n");
-	DKString address = DKDuktape::dkobjectToAddress(this);
+	DKString address = DKDuktape::pointerToAddress(this);
 	DKString type = "myEventB";
 	DKDuktape::doEvent(address, type);
 	return true;
@@ -66,7 +63,7 @@ int MyObject::value(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	DKINFO("MyObject::value(): address = " + address + "\n");
-	MyObject* object = (MyObject*)DKDuktape::addressToDKObject(address);
+	MyObject* object = (MyObject*)DKDuktape::addressToPointer(address);
 	object->instance_value();
 	return true;
 }
@@ -75,7 +72,7 @@ int MyObject::test(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	DKINFO("MyObject::value(): test = " + address + "\n");
-	MyObject* object = (MyObject*)DKDuktape::addressToDKObject(address);
+	MyObject* object = (MyObject*)DKDuktape::addressToPointer(address);
 	object->instance_test();
 	return true;
 }

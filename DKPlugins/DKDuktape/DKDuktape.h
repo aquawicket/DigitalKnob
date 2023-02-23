@@ -68,10 +68,11 @@ public:
 	static DKString eventToAddress(DKEvents* event);
 	static DKEvents* addressToEvent(const DKString& address);
 
+	////////////////////////////////////////////
 	static int createDKObject(duk_context* ctx);
 	static bool doEvent(const DKString& address, const DKString& type);
-	static DKString dkobjectToAddress(DKObject* object);
-	static DKObject* addressToDKObject(const DKString& address);
+	static DKString pointerToAddress(void* pointer);
+	static void* addressToPointer(const DKString& address);
 
 	//TODO
 	//static void AttachFunction(const DKString& name, const DKString& object, duk_c_function func, int nargs);
