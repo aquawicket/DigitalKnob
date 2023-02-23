@@ -571,6 +571,42 @@ DKEvents* DKDuktape::addressToEvent(const DKString& address) {
 	return event;
 }
 
+DKString DKDuktape::dkobjectToAddress(DKObject* object) {
+	//DKDEBUGFUNC(event);  //EXCESSIVE LOGGING
+	if (!object) {
+		DKERROR("DKDuktape::dkobjectToAddress(): invalid event\n");
+		return NULL;
+	}
+	std::stringstream ss;
+	const void* address = static_cast<const void*>(object);
+#if WIN
+	ss << "0x" << address;
+#else 
+	ss << address;
+#endif
+	return ss.str();
+}
+
+static DKObject* addressToDKObject(const DKString& address) {
+	//DKDEBUGFUNC(address);  //EXCESSIVE LOGGING
+	DKObject* object;
+	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {
+		DKERROR("DKRml::addressToEvent(): the address is not a valid hex notation");
+		return NULL;
+	}
+	//Convert a string of an address back into a pointer
+	std::stringstream ss;
+	ss << address.substr(2, address.size() - 2);
+	//int tmp(0);
+	std::uint64_t tmp;
+	if (!(ss >> std::hex >> tmp)) {
+		DKERROR("DKRml::addressToEvent(" + address + "): invalid address\n");
+		return NULL;
+	}
+	object = reinterpret_cast<DKObject*>(tmp);
+	return object;
+}
+
 void DKDuktape::EventLoop(){
 	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 	if (!DKUtil::InMainThread()) {
