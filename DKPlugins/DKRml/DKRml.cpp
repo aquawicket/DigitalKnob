@@ -216,7 +216,8 @@ bool DKRml::LoadHtml(const DKString& html){
 	//Create DOM javascript instance of the document using the documents element address
 	DKClass::DKCreate("DKDom");
 	DKString rval;
-	DKString document_address = elementToAddress(document);
+	//DKString document_address = elementToAddress(document);
+	DKString document_address = DKDuktape::pointerToAddress(document);
 	DKDuktape::RunDuktape("var document = new HTMLDocument(\"" + document_address + "\");", rval);
 	
 	Rml::XMLParser parser(ele);
@@ -331,9 +332,11 @@ void DKRml::ProcessEvent(Rml::Event& rmlEvent){
 	if (!rmlEvent.GetTargetElement())
 		return;
 	Rml::Element* currentElement = rmlEvent.GetCurrentElement();
-	DKString currentElementAddress = elementToAddress(currentElement);
+	//DKString currentElementAddress = elementToAddress(currentElement);
+	DKString currentElementAddress = DKDuktape::pointerToAddress(currentElement);
 	Rml::Element* targetElement = rmlEvent.GetTargetElement();
-	DKString targetElementAddress = elementToAddress(targetElement);
+	//DKString targetElementAddress = elementToAddress(targetElement);
+	DKString targetElementAddress = DKDuktape::pointerToAddress(targetElement);
 	DKString type = rmlEvent.GetType();
 	//TODO: implement this
     //int phase = (int)rmlEvent.GetPhase(); //{ None, Capture = 1, Target = 2, Bubble = 4 };
@@ -447,6 +450,8 @@ bool DKRml::RegisterEvent(const DKString& elementAddress, const DKString& type){
 	if(type.empty())
 		return DKERROR("type empty\n");
 	Rml::Element* element = addressToElement(elementAddress.c_str());
+
+
 	if(!element)
 		return DKERROR("element invalid\n");
 	DKString _type = type;
@@ -621,6 +626,7 @@ Rml::Element* DKRml::addressToElement(const DKString& address) {
 	return element;
 }
 
+/*
 DKString DKRml::elementToAddress(Rml::Element* element) {
 	//DKDEBUGFUNC(element);  //EXCESSIVE LOGGING
 	if (!element) {
@@ -640,6 +646,7 @@ DKString DKRml::elementToAddress(Rml::Element* element) {
 	}
 	return ss.str();
 }
+*/
 
 //TODO
 bool DKRml::GetOuterHTML(Rml::Element* element, DKString& outerHtml) {

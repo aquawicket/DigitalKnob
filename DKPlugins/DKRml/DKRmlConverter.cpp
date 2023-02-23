@@ -280,7 +280,8 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 			aElements[i]->SetProperty("text-decoration", "underline");
 			DKString id = aElements[i]->GetId();
 			aElements[i]->AddEventListener("click", DKRml::Get(), false);
-			DKString elementAddress = DKRml::elementToAddress(aElements[i]);
+			//DKString elementAddress = DKRml::elementToAddress(aElements[i]);
+			DKString elementAddress = DKDuktape::pointerToAddress(aElements[i]);
 			DKEvents::AddEvent(elementAddress, "click", &DKRmlConverter::Hyperlink, this);
 		}
 	}

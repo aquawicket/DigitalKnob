@@ -129,7 +129,8 @@ int DKDomHTMLElement::offsetParent(duk_context* ctx){
 		DKERROR("DKDomElement::offsetParent(): offsetParent invalid, setting to parent\n");
 		offsetParent = element->GetParentNode();
 	}
-	const DKString string = DKRml::elementToAddress(offsetParent);
+	//const DKString string = DKRml::elementToAddress(offsetParent);
+	const DKString string = DKDuktape::pointerToAddress(offsetParent);
 	duk_push_string(ctx, string.c_str());
 	return true;
 }

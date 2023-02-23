@@ -166,7 +166,8 @@ int DKDomElement::closest(duk_context* ctx){
 		duk_push_undefined(ctx);
 		return DKERROR("DKDomElement::closest("+address+","+selector+"): closestElement invalid\n");
 	}
-	DKString elementAddress = DKRml::elementToAddress(closestElement);
+	//DKString elementAddress = DKRml::elementToAddress(closestElement);
+	DKString elementAddress = DKDuktape::pointerToAddress(closestElement);
 	duk_push_string(ctx, elementAddress.c_str());
 	return true;
 }
@@ -211,7 +212,8 @@ int DKDomElement::getElementsByClassName(duk_context* ctx){
 	}
 	DKString str;
 	for(unsigned int i=0; i<elements.size(); i++){
-		DKString elementAddress = DKRml::elementToAddress(elements[i]);
+		//DKString elementAddress = DKRml::elementToAddress(elements[i]);
+		DKString elementAddress = DKDuktape::pointerToAddress(elements[i]);
 		str += elementAddress;
 		if(i < elements.size()-1)
 			str += ",";
@@ -239,7 +241,8 @@ int DKDomElement::getElementsByTagName(duk_context* ctx){
 	}
 	DKString str;
 	for(unsigned int i=0; i<elements.size(); i++){
-		DKString elementAddress = DKRml::elementToAddress(elements[i]);
+		//DKString elementAddress = DKRml::elementToAddress(elements[i]);
+		DKString elementAddress = DKDuktape::pointerToAddress(elements[i]);
 		str += elementAddress;
 		if(i < elements.size()-1)
 			str += ",";
@@ -343,7 +346,8 @@ int DKDomElement::querySelector(duk_context* ctx){
 		DKERROR("queryElement invalid\n");
 		return true;
 	}
-	DKString elementAddress = DKRml::elementToAddress(queryElement);
+	//DKString elementAddress = DKRml::elementToAddress(queryElement);
+	DKString elementAddress = DKDuktape::pointerToAddress(queryElement);
 	duk_push_string(ctx, elementAddress.c_str());
 	return true;
 }
@@ -366,7 +370,8 @@ int DKDomElement::querySelectorAll(duk_context* ctx){
 	}
 	DKString str;
 	for(unsigned int i=0; i<elements.size(); i++){
-		DKString elementAddress = DKRml::elementToAddress(elements[i]);
+		//DKString elementAddress = DKRml::elementToAddress(elements[i]);
+		DKString elementAddress = DKDuktape::pointerToAddress(elements[i]);
 		str += elementAddress;
 		if(i < elements.size()-1)
 			str += ",";
