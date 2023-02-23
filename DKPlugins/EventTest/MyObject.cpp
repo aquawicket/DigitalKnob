@@ -42,12 +42,12 @@ bool MyObject::End(){
 }
 
 bool MyObject::instance_value(){
-	DKINFO("MyObject::instance_value()\n");
+	DKINFO("MyObject::instance_value("+data[0] + ")\n");
 	return true;
 }
 
 bool MyObject::instance_test() {
-	DKINFO("MyObject::instance_test()\n");
+	DKINFO("MyObject::instance_test("+data[1] + ")\n");
 	return true;
 }
 
