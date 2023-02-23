@@ -31,10 +31,24 @@
 bool MyObject::Init(){
 	DKDEBUGFUNC();
 	DKINFO(toString(data, ",") + "\n");
+	DKDuktape::AttachFunction("CPP_MyObject_value", MyObject::value);
+	DKDuktape::AttachFunction("CPP_MyObjectt_test", MyObject::test);
 	return true;
 }
 
 bool MyObject::End(){
 	DKDEBUGFUNC();
+	return true;
+}
+
+int MyObject::value(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
+	//TODO
+	return true;
+}
+
+int MyObject::test(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
+	//TODO
 	return true;
 }

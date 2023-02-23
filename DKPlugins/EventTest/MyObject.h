@@ -29,12 +29,15 @@
 #define MyObject_H
 
 #include "DK/DK.h"
+#include "DKDuktape/DKDuktape.h"
 
 class MyObject : public DKObjectT<MyObject>
 {
 public:
 	bool Init();
 	bool End();
+	static int value(duk_context* ctx);
+	static int test(duk_context* ctx);
 };
 REGISTER_OBJECT(MyObject, true);
 

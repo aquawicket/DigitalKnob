@@ -30,37 +30,10 @@
 
 bool EventTest::Init(){
 	DKDEBUGFUNC();
-	
-	DKDuktape::AttachFunction("CPP_EventTest_value", EventTest::cpp_value);
-	DKDuktape::AttachFunction("CPP_EventTest_test", EventTest::cpp_test);
-	
 	return true;
 }
 
 bool EventTest::End(){
 	DKDEBUGFUNC();
-	return true;
-}
-
-bool EventTest::value(){
-	DKDEBUGFUNC();
-	return true;
-}
-
-bool EventTest::test(){
-	DKDEBUGFUNC();
-	return true;
-}
-
-///////////////////////////////////////////
-int EventTest::cpp_value(duk_context* ctx){
-	DKDEBUGFUNC(ctx);
-	//TODO
-	return true;
-}
-
-int EventTest::cpp_test(duk_context* ctx){
-	DKDEBUGFUNC(ctx);
-	//TODO
 	return true;
 }

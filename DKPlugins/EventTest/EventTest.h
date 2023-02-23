@@ -29,7 +29,6 @@
 #define EventTest_H
 
 #include "DK/DK.h"
-#include "DKDuktape/DKDuktape.h"
 
 
 class EventTest : public DKObjectT<EventTest>
@@ -37,12 +36,6 @@ class EventTest : public DKObjectT<EventTest>
 public:
 	bool Init();
 	bool End();
-
-	bool value();
-	bool test();
-	
-	static int cpp_value(duk_context* ctx);
-	static int cpp_test(duk_context* ctx);
 };
 REGISTER_OBJECT(EventTest, true);
 
