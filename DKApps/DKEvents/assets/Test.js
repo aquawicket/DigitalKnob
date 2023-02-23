@@ -20,6 +20,10 @@ function myCallback(){
 	console.log("myCallback()")
 }
 const myObject = new MyObject('myObject')
+console.log("myObject = "+myObject)
+console.log("myObject.value = "+myObject.value)
+console.log("myObject.test() = "+myObject.test())
+
 myObject.addEventListener('myEvent', myCallback)
 const myEvent = new Event('myEvent')
 myObject.dispatchEvent(myEvent);
