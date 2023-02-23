@@ -216,7 +216,6 @@ bool DKDomWindow::Init(){
 	DKDuktape* dt = DKDuktape::Get();
 	if(DKClass::DKValid("DKRml,DKRml0")) {
 		Rml::Element* window = DKRml::Get()->document->GetContext()->GetRootElement(); //Root element that holds all the documents.
-		//DKString window_address = DKRml::Get()->elementToAddress(window);
 		DKString window_address = DKDuktape::pointerToAddress(window);
 		DKString var_window = "var window = new Window('" + window_address + "')";
 		duk_eval_string(dt->ctx, var_window.c_str());
@@ -676,7 +675,6 @@ int DKDomWindow::focus(duk_context* ctx){
 int DKDomWindow::getComputedStyle(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	//Rml::Element* element = DKRml::addressToElement(address);
 	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
 	if (!element) {
 		duk_push_undefined(ctx);

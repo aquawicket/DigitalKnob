@@ -61,7 +61,6 @@ int DKDomDocumentOrShadowRoot::activeElement(duk_context* ctx){
 		duk_push_null(ctx);
 		return DKERROR("DKDomDocumentOrShadowRoot::activeElement(): element invalid\n");
 	}
-	//DKString elementAddress = DKRml::elementToAddress(element);
 	DKString elementAddress = DKDuktape::pointerToAddress(element);
 	duk_push_string(ctx, elementAddress.c_str());
 	return true;
@@ -105,7 +104,6 @@ int DKDomDocumentOrShadowRoot::elementFromPoint(duk_context* ctx){
 	Rml::Element* hoverElement = DKRml::Get()->document->GetContext()->GetHoverElement();
 	if(!hoverElement)
 		return false;
-	//DKString elementAddress = DKRml::elementToAddress(hoverElement);
 	DKString elementAddress = DKDuktape::pointerToAddress(hoverElement);
 	duk_push_string(ctx, elementAddress.c_str());
 	return true;

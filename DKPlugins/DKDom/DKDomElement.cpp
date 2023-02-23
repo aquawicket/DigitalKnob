@@ -87,7 +87,6 @@ bool DKDomElement::GetElements(Rml::Element* parent, Rml::ElementList& elements)
 int DKDomElement::clientHeight(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	//Rml::Element* element = DKRml::addressToElement(address);
 	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
 	if(!element){
 		DKERROR("element invalid\n");
@@ -106,7 +105,6 @@ int DKDomElement::clientHeight(duk_context* ctx){
 int DKDomElement::clientLeft(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	//Rml::Element* element = DKRml::addressToElement(address);
 	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
 	if(!element){
 		DKERROR("element invalid\n");
@@ -123,7 +121,6 @@ int DKDomElement::clientLeft(duk_context* ctx){
 int DKDomElement::clientTop(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	//Rml::Element* element = DKRml::addressToElement(address);
 	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
 	if(!element){
 		DKERROR("element invalid\n");
@@ -140,7 +137,6 @@ int DKDomElement::clientTop(duk_context* ctx){
 int DKDomElement::clientWidth(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	//Rml::Element* element = DKRml::addressToElement(address);
 	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
 	if(!element){
 		DKERROR("element invalid\n");
@@ -160,7 +156,6 @@ int DKDomElement::closest(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	DKString selector = duk_require_string(ctx, 1);
-	//Rml::Element* element = DKRml::addressToElement(address);
 	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
 	if(!element){
 		duk_push_undefined(ctx);
@@ -171,7 +166,6 @@ int DKDomElement::closest(duk_context* ctx){
 		duk_push_undefined(ctx);
 		return DKERROR("DKDomElement::closest("+address+","+selector+"): closestElement invalid\n");
 	}
-	//DKString elementAddress = DKRml::elementToAddress(closestElement);
 	DKString elementAddress = DKDuktape::pointerToAddress(closestElement);
 	duk_push_string(ctx, elementAddress.c_str());
 	return true;
@@ -181,7 +175,6 @@ int DKDomElement::getAttribute(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	DKString attribute = duk_require_string(ctx, 1);
-	//Rml::Element* element = DKRml::addressToElement(address);
 	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
 	if(!element){
 		DKERROR("element invalid\n");
@@ -204,7 +197,6 @@ int DKDomElement::getElementsByClassName(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	DKString name = duk_require_string(ctx, 1);
-	//Rml::Element* element = DKRml::addressToElement(address);
 	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
 	if(!element){
 		DKERROR("element invalid\n");
@@ -219,7 +211,6 @@ int DKDomElement::getElementsByClassName(duk_context* ctx){
 	}
 	DKString str;
 	for(unsigned int i=0; i<elements.size(); i++){
-		//DKString elementAddress = DKRml::elementToAddress(elements[i]);
 		DKString elementAddress = DKDuktape::pointerToAddress(elements[i]);
 		str += elementAddress;
 		if(i < elements.size()-1)
@@ -232,7 +223,6 @@ int DKDomElement::getElementsByClassName(duk_context* ctx){
 int DKDomElement::getElementsByTagName(duk_context* ctx){
 	DKString address = duk_require_string(ctx, 0);
 	DKString name = duk_require_string(ctx, 1);
-	//Rml::Element* element = DKRml::addressToElement(address);
 	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
 	if(!element){
 		DKERROR("element invalid\n");
@@ -249,7 +239,6 @@ int DKDomElement::getElementsByTagName(duk_context* ctx){
 	}
 	DKString str;
 	for(unsigned int i=0; i<elements.size(); i++){
-		//DKString elementAddress = DKRml::elementToAddress(elements[i]);
 		DKString elementAddress = DKDuktape::pointerToAddress(elements[i]);
 		str += elementAddress;
 		if(i < elements.size()-1)
@@ -263,7 +252,6 @@ int DKDomElement::hasAttribute(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	DKString attribute = duk_require_string(ctx, 1);
-	//Rml::Element* element = DKRml::addressToElement(address);
 	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
 	if(!element){
 		DKERROR("element invalid\n");
@@ -282,7 +270,6 @@ int DKDomElement::removeAttribute(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	DKString attribute = duk_require_string(ctx, 1);
-	//Rml::Element* element = DKRml::addressToElement(address);
 	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
 	if (!element) {
 		DKERROR("element invalid\n");
@@ -297,7 +284,6 @@ int DKDomElement::removeAttribute(duk_context* ctx){
 int DKDomElement::innerHTML(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	//Rml::Element* element = DKRml::addressToElement(address);
 	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
 	if(!element){
 		DKERROR("element invalid\n");
@@ -321,7 +307,6 @@ int DKDomElement::innerHTML(duk_context* ctx){
 int DKDomElement::outerHTML(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	//Rml::Element* element = DKRml::addressToElement(address);
 	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
 	if(!element){
 		DKERROR("element invalid\n");
@@ -346,7 +331,6 @@ int DKDomElement::querySelector(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	DKString selectors = duk_require_string(ctx, 1);
-	//Rml::Element* element = DKRml::addressToElement(address);
 	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
 	if (!element) {
 		DKERROR("element invalid\n");
@@ -359,7 +343,6 @@ int DKDomElement::querySelector(duk_context* ctx){
 		DKERROR("queryElement invalid\n");
 		return true;
 	}
-	//DKString elementAddress = DKRml::elementToAddress(queryElement);
 	DKString elementAddress = DKDuktape::pointerToAddress(queryElement);
 	duk_push_string(ctx, elementAddress.c_str());
 	return true;
@@ -369,7 +352,6 @@ int DKDomElement::querySelectorAll(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	DKString selectors = duk_require_string(ctx, 1);
-	//Rml::Element* element = DKRml::addressToElement(address);
 	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
 	if (!element) {
 		DKERROR("element invalid\n");
@@ -384,7 +366,6 @@ int DKDomElement::querySelectorAll(duk_context* ctx){
 	}
 	DKString str;
 	for(unsigned int i=0; i<elements.size(); i++){
-		//DKString elementAddress = DKRml::elementToAddress(elements[i]);
 		DKString elementAddress = DKDuktape::pointerToAddress(elements[i]);
 		str += elementAddress;
 		if(i < elements.size()-1)
@@ -397,7 +378,6 @@ int DKDomElement::querySelectorAll(duk_context* ctx){
 int DKDomElement::scrollHeight(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	//Rml::Element* element = DKRml::addressToElement(address);
 	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
 	if (!element) {
 		DKERROR("element invalid\n");
@@ -412,7 +392,6 @@ int DKDomElement::scrollHeight(duk_context* ctx){
 int DKDomElement::scrollIntoView(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	//Rml::Element* element = DKRml::addressToElement(address);
 	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
 	if (!element) {
 		DKERROR("element invalid\n");
@@ -432,7 +411,6 @@ int DKDomElement::scrollIntoView(duk_context* ctx){
 int DKDomElement::scrollLeft(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	//Rml::Element* element = DKRml::addressToElement(address);
 	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
 	if (!element) {
 		DKERROR("element invalid\n");
@@ -447,7 +425,6 @@ int DKDomElement::scrollLeft(duk_context* ctx){
 int DKDomElement::scrollTop(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	//Rml::Element* element = DKRml::addressToElement(address);
 	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
 	if (!element) {
 		DKERROR("element invalid\n");
@@ -462,7 +439,6 @@ int DKDomElement::scrollTop(duk_context* ctx){
 int DKDomElement::scrollWidth(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	//Rml::Element* element = DKRml::addressToElement(address);
 	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
 	if (!element) {
 		DKERROR("element invalid\n");
@@ -490,7 +466,6 @@ int DKDomElement::setAttribute(duk_context* ctx){
 		duk_push_undefined(ctx);
 		return true;
 	}
-	//Rml::Element* element = DKRml::addressToElement(address);
 	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
 	if(!element){
 		DKERROR("element invalid\n");
@@ -509,7 +484,6 @@ int DKDomElement::setAttribute(duk_context* ctx){
 int DKDomElement::tagName(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	//Rml::Element* element = DKRml::addressToElement(address);
 	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
 	if(!element){
 		DKERROR("element invalid\n");

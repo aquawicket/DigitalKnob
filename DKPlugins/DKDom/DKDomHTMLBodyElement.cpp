@@ -39,7 +39,7 @@ bool DKDomHTMLBodyElement::Init(){
 	//Create DOM javascript instance of the document using the documents element address
 	if (DKClass::DKValid("DKRml,DKRml0")) {
 		DKString rval;
-		DKString document_address = DKRml::Get()->elementToAddress(DKRml::Get()->document);
+		DKString document_address = DKDutape::pointerToAddress(DKRml::Get()->document);
 		DKDuktape::RunDuktape("var document.body = new HTMLBodyElement(\"" + document_address + "\");", rval);
 	}
 	DKDuktape* dt = DKDuktape::Get();

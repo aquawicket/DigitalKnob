@@ -38,7 +38,6 @@ bool DKDomHTMLDocument::Init(){
 	//Create DOM javascript instance of the document using the documents element address
 	if (DKClass::DKValid("DKRml,DKRml0")) {
 		DKString rval;
-		//DKString document_address = DKRml::Get()->elementToAddress(DKRml::Get()->document);
 		DKString document_address = DKDuktape::pointerToAddress(DKRml::Get()->document);
 		DKDuktape::RunDuktape("var document = new HTMLDocument(\"" + document_address + "\");", rval);
 	}

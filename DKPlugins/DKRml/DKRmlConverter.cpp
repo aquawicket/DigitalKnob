@@ -124,7 +124,6 @@ bool DKRmlConverter::Hyperlink(DKEvents* event){
 	DKString elementAddress = event->GetId();
 	DKRml* dkRml = DKRml::Get("");
 	//Rml::ElementDocument* doc = dkRml->document; //unused code
-	//Rml::Element* aElement = DKRml::addressToElement(elementAddress);
 	Rml::Element* aElement = (Rml::Element*)DKDuktape::addressToPointer(elementAddress);
 	DKString value = aElement->GetAttribute("href")->Get<Rml::String>();
 	DKINFO("DKWidget::Hyperlink: "+value+"\n");
@@ -281,7 +280,6 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 			aElements[i]->SetProperty("text-decoration", "underline");
 			DKString id = aElements[i]->GetId();
 			aElements[i]->AddEventListener("click", DKRml::Get(), false);
-			//DKString elementAddress = DKRml::elementToAddress(aElements[i]);
 			DKString elementAddress = DKDuktape::pointerToAddress(aElements[i]);
 			DKEvents::AddEvent(elementAddress, "click", &DKRmlConverter::Hyperlink, this);
 		}
@@ -363,7 +361,7 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 		
 		//TODO: dispatch a script.onload event
 		scripts[i]->DispatchEvent(Rml::EventId::Load, Rml::Dictionary());
-		//DKEvents::SendEvent(DKRml::elementToAddress(scripts[i]), "load", "");
+		//DKEvents::SendEvent(DKDuktape::pointerToAddress(scripts[i]), "load", "");
 	}
 
 //DEBUG - Lets see the code

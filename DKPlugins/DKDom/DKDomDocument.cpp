@@ -45,7 +45,7 @@ bool DKDomDocument::Init(){
 	//Create DOM javascript instance of the document using the documents element address
 	if (DKClass::DKValid("DKRml,DKRml0")) {
 		DKString rval;
-		DKString document_address = DKRml::Get()->elementToAddress(DKRml::Get()->document);
+		DKString document_address = DKDuktape::pointerToAddress(DKRml::Get()->document);
 		DKDuktape::RunDuktape("var document = new Document(\"" + document_address + "\");", rval);
 	}
 	DKDuktape* dt = DKDuktape::Get();
@@ -63,7 +63,6 @@ int DKDomDocument::body(duk_context* ctx){
 		duk_push_null(ctx);
 		return DKERROR("DKDomDocument::body(): element invalid\n");
 	}
-	//DKString elementAddress = DKRml::elementToAddress(elements[0]);
 	DKString elementAddress = DKDuktape::pointerToAddress(elements[0]);
 	duk_push_string(ctx, elementAddress.c_str());
 	return true;
@@ -75,7 +74,6 @@ int DKDomDocument::createElement(duk_context* ctx){
 	Rml::Element* element = DKRml::Get()->document->AppendChild(DKRml::Get()->document->CreateElement(tag.c_str()), false);
 	if(!element)
 		return DKERROR("DKDomDocument::createElement(): element invalid\n");
-	//DKString elementAddress = DKRml::elementToAddress(element);
 	DKString elementAddress = DKDuktape::pointerToAddress(element);
 	duk_push_string(ctx, elementAddress.c_str());
 	return true;
@@ -88,7 +86,6 @@ int DKDomDocument::documentElement(duk_context* ctx){
 		duk_push_null(ctx);
 		return DKERROR("DKDomDocument::documentElement(): element invalid\n");
 	}
-	//DKString elementAddress = DKRml::elementToAddress(element);
 	DKString elementAddress = DKDuktape::pointerToAddress(element);
 	duk_push_string(ctx, elementAddress.c_str());
 	return true;
@@ -108,7 +105,6 @@ int DKDomDocument::getElementById(duk_context* ctx){
 		//DKERROR("DKDomDocument::getElementById(): element invalid\n");
 		return true;
 	}
-	//DKString elementAddress = DKRml::elementToAddress(element);
 	DKString elementAddress = DKDuktape::pointerToAddress(element);
 	duk_push_string(ctx, elementAddress.c_str());
 	return true;
@@ -127,8 +123,7 @@ int DKDomDocument::getElementsByTagName(duk_context* ctx){
 	DKStringArray elementAddresses;
 	for(unsigned int i = 0; i<elements.size(); i++)
 		elementAddresses.push_back(DKDuktape::pointerToAddress(elements[i]));
-		//elementAddresses.push_back(DKRml::elementToAddress(elements[i]));
-
+	
 	DKString list = toString(elementAddresses, ",");
 	duk_push_string(ctx, list.c_str());
 	return true;

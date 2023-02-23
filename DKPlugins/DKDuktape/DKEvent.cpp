@@ -161,7 +161,7 @@ int DKEvent::currentTarget(duk_context* ctx){
 	}
 
 	Rml::Element* currentElement = event->GetCurrentElement();
-	DKString currentElementAddress = DKRml::elementToAddress(currentElement);
+	DKString currentElementAddress = DKDuktape::pointerToAddress(currentElement);
 	if(currentElementAddress.empty()){ 
 		DKERROR("DKEvent::currentTarget(): currentElementAddress invalid\n");
 		return true; 
@@ -278,7 +278,7 @@ int DKEvent::srcElement(duk_context* ctx){
 		return true;
 	}
 	Rml::Element* srcElement = event->GetCurrentElement();
-	DKString srcElementAddress = DKRml::elementToAddress(srcElement);
+	DKString srcElementAddress = DKDuktape::pointerToAddress(srcElement);
 	if (srcElementAddress.empty()) {
 		DKERROR("DKEvent::srcElement(): srcElementAddress invalid\n");
 		return true;
@@ -299,7 +299,7 @@ int DKEvent::target(duk_context* ctx){
 		return true;
 	}
 	Rml::Element* targetElement = event->GetCurrentElement();
-	DKString targetElementAddress = DKRml::elementToAddress(targetElement);
+	DKString targetElementAddress = DKDuktape::pointerToAddress(targetElement);
 	if (targetElementAddress.empty()) {
 		DKERROR("DKEvent::target(): targetElementAddress invalid\n");
 		return true;

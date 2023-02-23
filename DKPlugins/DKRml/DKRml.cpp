@@ -216,7 +216,6 @@ bool DKRml::LoadHtml(const DKString& html){
 	//Create DOM javascript instance of the document using the documents element address
 	DKClass::DKCreate("DKDom");
 	DKString rval;
-	//DKString document_address = elementToAddress(document);
 	DKString document_address = DKDuktape::pointerToAddress(document);
 	DKDuktape::RunDuktape("var document = new HTMLDocument(\"" + document_address + "\");", rval);
 	
@@ -331,10 +330,8 @@ void DKRml::ProcessEvent(Rml::Event& rmlEvent){
 	if (!rmlEvent.GetTargetElement())
 		return;
 	Rml::Element* currentElement = rmlEvent.GetCurrentElement();
-	//DKString currentElementAddress = elementToAddress(currentElement);
 	DKString currentElementAddress = DKDuktape::pointerToAddress(currentElement);
 	Rml::Element* targetElement = rmlEvent.GetTargetElement();
-	//DKString targetElementAddress = elementToAddress(targetElement);
 	DKString targetElementAddress = DKDuktape::pointerToAddress(targetElement);
 	DKString type = rmlEvent.GetType();
 	//TODO: implement this
@@ -448,10 +445,7 @@ bool DKRml::RegisterEvent(const DKString& elementAddress, const DKString& type){
 		return DKERROR(elementAddress +": elementAddress empty\n"); 
 	if(type.empty())
 		return DKERROR("type empty\n");
-	//Rml::Element* element = addressToElement(elementAddress.c_str());
 	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(elementAddress.c_str());
-
-
 	if(!element)
 		return DKERROR("element invalid\n");
 	DKString _type = type;
@@ -495,7 +489,6 @@ bool DKRml::SendEvent(const DKString& elementAddress, const DKString& type, cons
 		element = DKRml::Get()->document->GetContext()->GetRootElement();
 	}
 	else {
-		//element = addressToElement(elementAddress);
 		element = (Rml::Element*)DKDuktape::addressToPointer(elementAddress);
 	}
 	if(!element)
@@ -546,7 +539,6 @@ bool DKRml::UnregisterEvent(const DKString& elementAddress, const DKString& type
 	if(type.empty())
 		return DKERROR("type invalid");
 	//if(!DKValid("DKRml0")){ return false; }
-	//Rml::Element* element = addressToElement(elementAddress);
 	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(elementAddress);
 	if(!element)
 		return DKERROR("element invalid");
