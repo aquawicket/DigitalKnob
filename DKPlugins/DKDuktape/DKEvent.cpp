@@ -327,7 +327,8 @@ int DKEvent::timeStamp(duk_context* ctx){
 int DKEvent::type(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	DKEvents* event = DKDuktape::addressToEvent(eventAddress);
+	//DKEvents* event = DKDuktape::addressToEvent(eventAddress);
+	DKEvents* event = (DKEvents*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("DKEvent::type(): event invalid\n");
 		duk_push_boolean(ctx, false);

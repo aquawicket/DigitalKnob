@@ -536,6 +536,7 @@ bool DKDuktape::UnloadFile(const DKString& path){
 	return false;
 }
 
+/*
 DKString DKDuktape::eventToAddress(DKEvents* event) {
 	//DKDEBUGFUNC(event);  //EXCESSIVE LOGGING
 	if (!event) {
@@ -575,7 +576,7 @@ DKEvents* DKDuktape::addressToEvent(const DKString& address) {
 	//}
 	return event;
 }
-
+*/
 
 
 
