@@ -499,7 +499,6 @@ if(RASPBERRY)
 	dk_disable(DKUpdate)			# compiling errors
 	dk_disable(DKVncClient)			# requires libvncserver
 	dk_disable(DKVncServer)			# requires libvncserver
-	dk_disable(DKWebSockets)		# requires openssl
 	dk_disable(dukluv)
 	dk_disable(emsdk)				# 64bit source only
 	dk_disable(fontconfig)

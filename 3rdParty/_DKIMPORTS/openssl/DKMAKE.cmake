@@ -91,7 +91,7 @@ ANDROID64_RELEASE_dk_queueShell(
 "export PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/windows-x86_64/bin:$PATH\n"
 "export PATH=$ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/bin:$PATH\n"
 "../../Configure no-shared --release android-arm64 -D__ANDROID_API__=31")
-EMSCRIPTEN_RELEASE_dk_queueShell(${EMCONFIGURE} ${OPENSSL}/Configure)
+#EMSCRIPTEN_RELEASE_dk_queueShell(${EMCONFIGURE} ${OPENSSL}/Configure)
 IOS64_RELEASE_dk_queueShell		(../../Configure no-shared --release ios64-xcrun)
 IOSSIM_RELEASE_dk_queueShell	(../../Configure no-shared --release iossimulator-xcrun)
 LINUX_RELEASE_dk_queueShell		(../../Configure no-shared --release)
