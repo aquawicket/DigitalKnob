@@ -5,8 +5,8 @@ var MyObject = function MyObject(data) {
 	console.log("MyObject("+data+")");
     this.data = data;
 	
-	//var pointer = CPP_EventTest_createNode("eventtest");
-	//this.pointer = pointer;
+	var pointer = CPP_Duktape_createDKObject("MyObject")
+	this.pointer = pointer;
 	
 	//// Instance properties ////
 	Object.defineProperty(this, "value", {

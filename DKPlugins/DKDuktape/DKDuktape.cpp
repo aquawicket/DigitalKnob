@@ -576,6 +576,10 @@ DKEvents* DKDuktape::addressToEvent(const DKString& address) {
 }
 
 
+
+
+
+
 /////////////////////////////////////////////////
 int DKDuktape::createDKObject(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
@@ -621,6 +625,16 @@ static DKObject* addressToDKObject(const DKString& address) {
 	object = reinterpret_cast<DKObject*>(tmp);
 	return object;
 }
+
+
+
+
+
+
+
+
+
+
 
 void DKDuktape::EventLoop(){
 	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
