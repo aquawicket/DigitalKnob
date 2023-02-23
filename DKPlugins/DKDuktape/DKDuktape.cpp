@@ -614,6 +614,10 @@ DKString DKDuktape::pointerToAddress(void* pointer) {
 #else 
 	ss << address;
 #endif
+	if (same("0xDDDDDDDD", ss.str())) {
+		DKERROR("ss = 0xDDDDDDDD\n");
+		return "";
+	}
 	return ss.str();
 }
 
@@ -633,6 +637,10 @@ void* DKDuktape::addressToPointer(const DKString& address) {
 		return NULL;
 	}
 	pointer = reinterpret_cast<void*>(tmp);
+	if (!pointer) {
+		DKERROR("pointer inavalid! \n");
+		return NULL;
+	}
 	return pointer;
 }
 
