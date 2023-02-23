@@ -1,0 +1,1 @@
+CPP_DK_Create("EventTest.js");
