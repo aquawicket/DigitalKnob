@@ -1,5 +1,4 @@
 // Event test
-console.log("\n\n ___Event Test___");
 
 ////////////////////////////////////////
 var MyObject = function MyObject(data) {
