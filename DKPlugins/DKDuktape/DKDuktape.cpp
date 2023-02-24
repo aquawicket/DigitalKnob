@@ -539,12 +539,12 @@ bool DKDuktape::UnloadFile(const DKString& path){
 
 
 /////////////////////////////////////////////////
-int DKDuktape::createDKObject(duk_context* ctx) {
-	DKDEBUGFUNC(ctx);
-	DKString data = duk_require_string(ctx, 0);
+int DKDuktape::createDKObject(duk_context* _ctx) {
+	DKDEBUGFUNC(_ctx);
+	DKString data = duk_require_string(_ctx, 0);
 	DKObject* object = DKClass::DKCreate(data);
 	DKString address = pointerToAddress(object);
-	duk_push_string(ctx, address.c_str());
+	duk_push_string(_ctx, address.c_str());
 	return true;
 }
 

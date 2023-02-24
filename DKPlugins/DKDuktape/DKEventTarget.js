@@ -83,3 +83,10 @@ var EventTarget = function EventTarget(pointer) {
 	GlobalEventHandlers.call(this, pointer);
     return this;
 };
+
+function doEvent(address, type){
+	console.log("doEvent("+address+","+type+")")
+	const eventTarget = new EventTarget(address)
+	const event = new Event(type)
+	eventTarget.dispatchEvent(event)
+}

@@ -5,20 +5,19 @@ var MyObject = function MyObject(data) {
 	console.log("MyObject("+data+")");
     this.data = data;
 	
-	var pointer = CPP_Duktape_createDKObject("MyObject")
-	this.pointer = pointer;
+	this.pointer = CPP_Duktape_createDKObject("MyObject")
 	
 	//// Instance properties ////
 	Object.defineProperty(this, "value", {
         get: function value() {
-            return CPP_MyObject_value(pointer)
+            return CPP_MyObject_value(this.pointer)
         }
     })
 	
 	//// Instance methods ////
 	MyObject.prototype.test = function test() {
 		console.log("MyObject.prototype.test()")
-		CPP_MyObject_test(pointer)
+		CPP_MyObject_test(this.pointer)
     }
 	
 	//// Instance events ////
@@ -38,14 +37,7 @@ var MyObject = function MyObject(data) {
 	if(this.toString() === "[object Object]")
 		this.toString = function(){	return "[object MyObject]" }
 	
-	return EventTarget.call(this, pointer)
+	return EventTarget.call(this, this.pointer)
 	
 }
 MyObject.prototype = EventTarget.prototype;
-
-function doEvent(address, type){
-	console.log("doEvent("+address+","+type+")")
-	const eventTarget = new EventTarget(address)
-	const event = new Event(type)
-	eventTarget.dispatchEvent(event)
-}

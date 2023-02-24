@@ -26,13 +26,22 @@
 //https://github.com/uNetworking/uWebSockets/blob/master/tests/main.cpp
 #include "DK/stdafx.h"
 #include "DKUWebSocketsServer/DKUWebSocketsServer.h"
-#include "DKRml/DKRml.h"
+//#include "DKRml/DKRml.h"
 
 
 bool DKUWebSocketsServer::Init(){
 	DKDEBUGFUNC();
 	DKINFO(toString(data, ",") + "\n");
 	DKApp::AppendLoopFunc(&DKUWebSocketsServer::Loop, this);
+
+#if HAVE_DKDuktape
+	////////////////// DUKTAPE //////////////////
+	DKDuktape::AttachFunction("CPP_DKUWebSocketsServer_isConnected", DKUWebSocketsServer::isConnected);
+	DKDuktape::AttachFunction("CPP_DKUWebSocketsServer_disconnect", DKUWebSocketsServer::disconnect);
+	DKDuktape::AttachFunction("CPP_DKUWebSocketsServer_send", DKUWebSocketsServer::send);
+	DKDuktape::AttachFunction("CPP_DKUWebSocketsServer_start", DKUWebSocketsServer::start);
+	//DKClass::DKCreate("DKUWebSocketsServer/WebSocketServer.js");
+#endif
 	return true;
 }
 
@@ -50,9 +59,9 @@ bool DKUWebSocketsServer::CloseServer(){
 	return DKINFO("Server closed \n");
 }
 
-bool DKUWebSocketsServer::CreateServer(const DKString& address, const int& port){
-	DKDEBUGFUNC(address, port);
-	serverAddress = address;
+bool DKUWebSocketsServer::CreateServer(const DKString& url, const int& port){
+	DKDEBUGFUNC(url, port);
+	serverAddress = url;
 	serverPort = port;
 
 	serverHub.onError([this](void *user){
@@ -93,7 +102,9 @@ bool DKUWebSocketsServer::CreateServer(const DKString& address, const int& port)
 				//std::cout << "FAILURE: " << user << " should not emit error!" << std::endl;
 				//exit(-1);
 		}
-		DKRml::Get()->SendEvent(data[1], "error", "");
+		//DKRml::Get()->SendEvent(data[1], "error", "");
+		DKString address = DKDuktape::pointerToAddress(this);
+		DKDuktape::doEvent(address, "error");
 	});
 
 	serverHub.onConnection([this](uWS::WebSocket<uWS::SERVER> *ws, uWS::HttpRequest req){
@@ -109,13 +120,15 @@ bool DKUWebSocketsServer::CreateServer(const DKString& address, const int& port)
 			default:
 				DKINFO("FAILURE: ws->getUserData() should not connect! \n");
 		}
-		DKRml::Get()->SendEvent(data[1], "open", "");
+		//DKRml::Get()->SendEvent(data[1], "open", "");
+		DKString address = DKDuktape::pointerToAddress(this);
+		DKDuktape::doEvent(address, "open");
 	});
 
 	serverHub.onDisconnection([this](uWS::WebSocket<uWS::SERVER> *ws, int code, char *message, size_t length) {
 		DKDEBUGFUNC(ws, code, message, length);
 		serverWebSocket = NULL;
-		DKRml::Get()->SendEvent(data[1], "close", "");
+		//DKRml::Get()->SendEvent(data[1], "close", "");
 		DKINFO("Client got disconnected with data:ws->getUserData(), code:"+toString(code)+", message:<"+DKString(message, length)+"> \n");
 	});
 
@@ -124,7 +137,10 @@ bool DKUWebSocketsServer::CreateServer(const DKString& address, const int& port)
 		MessageFromClient(ws, message, length, opCode);
 	});
 
-	DKRml::Get()->SendEvent(data[1], "init", "");
+	//DKRml::Get()->SendEvent(data[1], "init", "");
+	DKString address = DKDuktape::pointerToAddress(this);
+	DKDuktape::doEvent(address, "init");
+
 	return DKINFO("DKUWebSocketsServer::CreateServer(): Server started... \n");
 }
 
@@ -139,7 +155,10 @@ void DKUWebSocketsServer::Loop(){
 bool DKUWebSocketsServer::MessageFromClient(uWS::WebSocket<uWS::SERVER>* ws, char *message, size_t length, uWS::OpCode opCode){
 	DKDEBUGFUNC(ws, message, length, opCode);
 	DKString message_  = DKString(message).substr(0, length);
-	DKRml::Get()->SendEvent(data[1], "message", message_);
+	//DKRml::Get()->SendEvent(data[1], "message", message_);
+	DKString address = DKDuktape::pointerToAddress(this);
+	DKDuktape::doEvent(address, "message");
+
 	DKINFO("DKUWebSocketsServer::MessageFromClient(): "+message_+"\n");
 	return true;
 }
@@ -155,3 +174,45 @@ bool DKUWebSocketsServer::MessageToClient(const DKString& message){
 	serverWebSocket->finalizeMessage(prepared);
 	return true;
 }
+
+
+
+#if HAVE_DKDuktape
+////////////////// DUKTAPE //////////////////
+int DKUWebSocketsServer::isConnected(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
+	//TODO
+	return true;
+}
+
+int DKUWebSocketsServer::disconnect(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
+	DKString address = duk_require_string(ctx, 0);
+	DKUWebSocketsServer* object = (DKUWebSocketsServer*)DKDuktape::addressToPointer(address);
+	if (!object->CloseServer())
+		return DKERROR("object->CloseServer()() failed! \n");
+	return true;
+}
+
+int DKUWebSocketsServer::send(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
+	DKString address = duk_require_string(ctx, 0);
+	DKUWebSocketsServer* object = (DKUWebSocketsServer*)DKDuktape::addressToPointer(address);
+	DKString message = duk_require_string(ctx, 1);
+	if (!object->MessageToClient(message))
+		return DKERROR("object->MessageToClient() failed! \n");
+	return true;
+}
+
+int DKUWebSocketsServer::start(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
+	DKString address = duk_require_string(ctx, 0);
+	DKUWebSocketsServer* object = (DKUWebSocketsServer*)DKDuktape::addressToPointer(address);
+	DKString url = duk_require_string(ctx, 1);
+	DKString port = duk_require_string(ctx, 2);
+	if (!object->CreateServer(url, toInt(port)))
+		return DKERROR("object->CreateServer() failed! \n");
+	return true;
+}
+
+#endif

@@ -30,6 +30,10 @@
 
 #include "DK/DK.h"
 
+#if HAVE_DKDuktape
+	#include "DKDuktape/DKDuktape.h"
+#endif
+
 WARNING_DISABLE
 	//DISABLE_WARNING(4251)
 	#include "src/uWS.h"
@@ -44,7 +48,7 @@ public:
 	void Loop();
 
 	bool CloseServer();
-	bool CreateServer(const DKString& address, const int& port);
+	bool CreateServer(const DKString& url, const int& port);
 	bool MessageFromClient(uWS::WebSocket<uWS::SERVER>* ws, char *message, size_t length, uWS::OpCode opCode);
 	bool MessageToClient(const DKString& message);
 
@@ -52,6 +56,17 @@ public:
 	int serverPort;
 	uWS::Hub serverHub;
 	uWS::WebSocket<uWS::SERVER>* serverWebSocket;
+
+#if HAVE_DKDuktape
+	////////////////// DUKTAPE //////////////////
+	//// Instance properties ////
+	static int isConnected(duk_context* ctx);
+
+	//// Instance methods ////
+	static int disconnect(duk_context* ctx);
+	static int send(duk_context* ctx);
+	static int start(duk_context* ctx);
+#endif
 };
 REGISTER_OBJECT(DKUWebSocketsServer, true);
 
