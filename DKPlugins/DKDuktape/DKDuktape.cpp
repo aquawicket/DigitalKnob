@@ -548,8 +548,10 @@ int DKDuktape::createDKObject(duk_context* _ctx) {
 	return true;
 }
 
-bool DKDuktape::doEvent(const DKString& address, const DKString& type) {
-	DKDEBUGFUNC(address, type);
+//bool DKDuktape::doEvent(const DKString& address, const DKString& type) {
+bool DKDuktape::doEvent(const void* pointer, const DKString& type) {
+	DKDEBUGFUNC(pointer, type);
+	DKString address = pointerToAddress(pointer);
 	DKString code = "doEvent('"+address+"','"+type+"')";
 	DKString rval;
 	DKDuktape::RunDuktape(code, rval);
@@ -557,7 +559,7 @@ bool DKDuktape::doEvent(const DKString& address, const DKString& type) {
 	return true;
 }
 
-DKString DKDuktape::pointerToAddress(void* pointer) {
+DKString DKDuktape::pointerToAddress(const void* pointer) {
 	//DKDEBUGFUNC(event);  //EXCESSIVE LOGGING
 	if (!pointer) {
 		DKERROR("pointer invalid! \n");

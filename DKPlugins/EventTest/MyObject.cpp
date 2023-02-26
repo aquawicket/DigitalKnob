@@ -53,9 +53,10 @@ bool MyObject::instance_test() {
 
 bool MyObject::instance_sendevent() {
 	DKINFO("MyObject::instance_sendevent()\n");
-	DKString address = DKDuktape::pointerToAddress(this);
+	//DKString address = DKDuktape::pointerToAddress(this);
 	DKString type = "myEventB";
-	DKDuktape::doEvent(address, type);
+	//DKDuktape::doEvent(address, type);
+	DKDuktape::doEvent(this, type);
 	return true;
 }
 

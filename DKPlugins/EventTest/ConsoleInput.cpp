@@ -31,6 +31,7 @@
 bool ConsoleInput::Init(){
 	DKDEBUGFUNC();
 
+#if WIN
     // Get the standard input handle. 
     hStdin = GetStdHandle(STD_INPUT_HANDLE);
     if (hStdin == INVALID_HANDLE_VALUE)
@@ -44,6 +45,7 @@ bool ConsoleInput::Init(){
     DWORD fdwMode = ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT | ENABLE_INSERT_MODE | ENABLE_EXTENDED_FLAGS;
     if (!SetConsoleMode(hStdin, fdwMode))
         ErrorExit("SetConsoleMode");
+#endif
 
     DKApp::AppendLoopFunc(&ConsoleInput::Loop, this);
     return true;
@@ -52,14 +54,17 @@ bool ConsoleInput::Init(){
 bool ConsoleInput::End(){
 	DKDEBUGFUNC();
 
+#if WIN
     // Restore input mode on exit.
     SetConsoleMode(hStdin, fdwSaveOldMode);
+#endif
 
 	return true;
 }
 
 void ConsoleInput::Loop() {
 
+#if WIN
     DWORD lpcNumberOfEvents;
     GetNumberOfConsoleInputEvents(hStdin, &lpcNumberOfEvents);
     if (!lpcNumberOfEvents)
@@ -94,61 +99,65 @@ void ConsoleInput::Loop() {
                 break;
         }
     }
-}
-
-void ConsoleInput::ErrorExit(LPCSTR lpszMessage){
-    fprintf(stderr, "%s\n", lpszMessage);
-    // Restore input mode on exit.
-    SetConsoleMode(hStdin, fdwSaveOldMode);
-    ExitProcess(0);
-}
-
-void ConsoleInput::KeyEventProc(KEY_EVENT_RECORD ker){
-    if (ker.bKeyDown) {
-        DKINFO("KeyDown: vkk:"+toString(ker.wVirtualKeyCode)+", vsc:"+toString(ker.wVirtualScanCode) + "\n");
-        //TODO: send key down event
-    }
-    else {
-        DKINFO("KeyUp: vkk:" + toString(ker.wVirtualKeyCode) + ", vsc:" + toString(ker.wVirtualScanCode) + "\n");
-    }
-}
-
-void ConsoleInput::MouseEventProc(MOUSE_EVENT_RECORD mer){
-#ifndef MOUSE_HWHEELED
-#define MOUSE_HWHEELED 0x0008
 #endif
-    printf("Mouse event: ");
-    switch (mer.dwEventFlags){
-    case 0:
-        if (mer.dwButtonState == FROM_LEFT_1ST_BUTTON_PRESSED){
-            printf("left button press \n");
-        }
-        else if (mer.dwButtonState == RIGHTMOST_BUTTON_PRESSED){
-            printf("right button press \n");
-        }
-        else{
-            printf("button press\n");
-        }
-        break;
-    case DOUBLE_CLICK:
-        printf("double click\n");
-        break;
-    case MOUSE_HWHEELED:
-        printf("horizontal mouse wheel\n");
-        break;
-    case MOUSE_MOVED:
-        printf("mouse moved\n");
-        break;
-    case MOUSE_WHEELED:
-        printf("vertical mouse wheel\n");
-        break;
-    default:
-        printf("unknown\n");
-        break;
-    }
 }
 
-void ConsoleInput::ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD wbsr){
-    DKINFO("Resize event\n");
-    printf("Console screen buffer is %d columns by %d rows.\n", wbsr.dwSize.X, wbsr.dwSize.Y);
-}
+#if WIN
+    void ConsoleInput::ErrorExit(LPCSTR lpszMessage){
+        fprintf(stderr, "%s\n", lpszMessage);
+        // Restore input mode on exit.
+        SetConsoleMode(hStdin, fdwSaveOldMode);
+        ExitProcess(0);
+    }
+
+    void ConsoleInput::KeyEventProc(KEY_EVENT_RECORD ker){
+        if (ker.bKeyDown) {
+            DKINFO("KeyDown: vkk:"+toString(ker.wVirtualKeyCode)+", vsc:"+toString(ker.wVirtualScanCode) + "\n");
+            //TODO: send keydown event
+        }
+        else {
+            DKINFO("KeyUp: vkk:" + toString(ker.wVirtualKeyCode) + ", vsc:" + toString(ker.wVirtualScanCode) + "\n");
+            //TODO: send keyup event
+        }
+    }
+
+    void ConsoleInput::MouseEventProc(MOUSE_EVENT_RECORD mer){
+    #ifndef MOUSE_HWHEELED
+    #define MOUSE_HWHEELED 0x0008
+    #endif
+        printf("Mouse event: ");
+        switch (mer.dwEventFlags){
+        case 0:
+            if (mer.dwButtonState == FROM_LEFT_1ST_BUTTON_PRESSED){
+                printf("left button press \n");
+            }
+            else if (mer.dwButtonState == RIGHTMOST_BUTTON_PRESSED){
+                printf("right button press \n");
+            }
+            else{
+                printf("button press\n");
+            }
+            break;
+        case DOUBLE_CLICK:
+            printf("double click\n");
+            break;
+        case MOUSE_HWHEELED:
+            printf("horizontal mouse wheel\n");
+            break;
+        case MOUSE_MOVED:
+            printf("mouse moved\n");
+            break;
+        case MOUSE_WHEELED:
+            printf("vertical mouse wheel\n");
+            break;
+        default:
+            printf("unknown\n");
+            break;
+        }
+    }
+
+    void ConsoleInput::ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD wbsr){
+        DKINFO("Resize event\n");
+        printf("Console screen buffer is %d columns by %d rows.\n", wbsr.dwSize.X, wbsr.dwSize.Y);
+    }
+#endif

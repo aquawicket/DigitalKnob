@@ -31,9 +31,11 @@
 #include "DK/DK.h"
 #include "DKDuktape/DKDuktape.h"
 
-#include <windows.h>
-#include <tchar.h>
-#include <stdio.h>
+#if WIN
+	#include <windows.h>
+	#include <tchar.h>
+	#include <stdio.h>
+#endif
 
 
 class ConsoleInput : public DKObjectT<ConsoleInput>
@@ -43,13 +45,14 @@ public:
 	bool End();
 	void Loop();
 	
+#if WIN
 	HANDLE hStdin;
 	DWORD fdwSaveOldMode;
-	
 	void ErrorExit(LPCSTR);
 	void KeyEventProc(KEY_EVENT_RECORD);
 	void MouseEventProc(MOUSE_EVENT_RECORD);
 	void ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD);
+#endif
 };
 REGISTER_OBJECT(ConsoleInput, false);
 

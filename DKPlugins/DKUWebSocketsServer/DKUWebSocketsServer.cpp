@@ -103,8 +103,9 @@ bool DKUWebSocketsServer::CreateServer(const DKString& url, const int& port){
 				//exit(-1);
 		}
 		//DKRml::Get()->SendEvent(data[1], "error", "");
-		DKString address = DKDuktape::pointerToAddress(this);
-		DKDuktape::doEvent(address, "error");
+		//DKString address = DKDuktape::pointerToAddress(this);
+		//DKDuktape::doEvent(address, "error");
+		DKDuktape::doEvent(this, "error");
 	});
 
 	serverHub.onConnection([this](uWS::WebSocket<uWS::SERVER> *ws, uWS::HttpRequest req){
@@ -121,8 +122,9 @@ bool DKUWebSocketsServer::CreateServer(const DKString& url, const int& port){
 				DKINFO("FAILURE: ws->getUserData() should not connect! \n");
 		}
 		//DKRml::Get()->SendEvent(data[1], "open", "");
-		DKString address = DKDuktape::pointerToAddress(this);
-		DKDuktape::doEvent(address, "open");
+		//DKString address = DKDuktape::pointerToAddress(this);
+		//DKDuktape::doEvent(address, "open");
+		DKDuktape::doEvent(this, "open");
 	});
 
 	serverHub.onDisconnection([this](uWS::WebSocket<uWS::SERVER> *ws, int code, char *message, size_t length) {
@@ -138,8 +140,9 @@ bool DKUWebSocketsServer::CreateServer(const DKString& url, const int& port){
 	});
 
 	//DKRml::Get()->SendEvent(data[1], "init", "");
-	DKString address = DKDuktape::pointerToAddress(this);
-	DKDuktape::doEvent(address, "init");
+	//DKString address = DKDuktape::pointerToAddress(this);
+	//DKDuktape::doEvent(address, "init");
+	DKDuktape::doEvent(this, "init");
 
 	return DKINFO("DKUWebSocketsServer::CreateServer(): Server started... \n");
 }
@@ -156,8 +159,9 @@ bool DKUWebSocketsServer::MessageFromClient(uWS::WebSocket<uWS::SERVER>* ws, cha
 	DKDEBUGFUNC(ws, message, length, opCode);
 	DKString message_  = DKString(message).substr(0, length);
 	//DKRml::Get()->SendEvent(data[1], "message", message_);
-	DKString address = DKDuktape::pointerToAddress(this);
-	DKDuktape::doEvent(address, "message");
+	//DKString address = DKDuktape::pointerToAddress(this);
+	//DKDuktape::doEvent(address, "message");
+	DKDuktape::doEvent(this, "message");
 
 	DKINFO("DKUWebSocketsServer::MessageFromClient(): "+message_+"\n");
 	return true;

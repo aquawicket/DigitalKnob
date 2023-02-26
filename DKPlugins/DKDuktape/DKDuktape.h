@@ -68,8 +68,9 @@ public:
 
 	////////////////////////////////////////////
 	static int createDKObject(duk_context* _ctx);
-	static bool doEvent(const DKString& address, const DKString& type);
-	static DKString pointerToAddress(void* pointer);
+	//static bool doEvent(const DKString& address, const DKString& type);
+	static bool doEvent(const void* pointer, const DKString& type);
+	static DKString pointerToAddress(const void* pointer);
 	static void* addressToPointer(const DKString& address);
 
 	//TODO
