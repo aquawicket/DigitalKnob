@@ -41,6 +41,7 @@ class ConsoleInput : public DKObjectT<ConsoleInput>
 public:
 	bool Init();
 	bool End();
+	void Loop();
 	
 	HANDLE hStdin;
 	DWORD fdwSaveOldMode;

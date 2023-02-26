@@ -31,10 +31,6 @@
 bool ConsoleInput::Init(){
 	DKDEBUGFUNC();
 
-    DWORD cNumRead, fdwMode, i;
-    INPUT_RECORD irInBuf[128];
-    int counter = 0;
-
     // Get the standard input handle. 
     hStdin = GetStdHandle(STD_INPUT_HANDLE);
     if (hStdin == INVALID_HANDLE_VALUE)
@@ -45,23 +41,39 @@ bool ConsoleInput::Init(){
         ErrorExit("GetConsoleMode");
 
     // Enable the window and mouse input events. 
-    fdwMode = ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT | ENABLE_INSERT_MODE | ENABLE_EXTENDED_FLAGS;
+    DWORD fdwMode = ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT | ENABLE_INSERT_MODE | ENABLE_EXTENDED_FLAGS;
     if (!SetConsoleMode(hStdin, fdwMode))
         ErrorExit("SetConsoleMode");
 
-    // Loop to read and handle the next 500 input events. 
-    while (counter++ <= 500){
-        // Wait for the events. 
-        if (!ReadConsoleInput(
-            hStdin,      // input buffer handle 
-            irInBuf,     // buffer to read into 
-            128,         // size of read buffer 
-            &cNumRead)) // number of records read 
+    DKApp::AppendLoopFunc(&ConsoleInput::Loop, this);
+    return true;
+}
+
+bool ConsoleInput::End(){
+	DKDEBUGFUNC();
+
+    // Restore input mode on exit.
+    SetConsoleMode(hStdin, fdwSaveOldMode);
+
+	return true;
+}
+
+void ConsoleInput::Loop() {
+
+    DWORD cNumRead, fdwMode, i;
+    INPUT_RECORD irInBuf[128];
+
+    // Wait for the events. 
+    if (!ReadConsoleInput(
+        hStdin,      // input buffer handle 
+        irInBuf,     // buffer to read into 
+        128,         // size of read buffer 
+        &cNumRead)) // number of records read 
             ErrorExit("ReadConsoleInput");
 
-        // Dispatch the events to the appropriate handler. 
-        for (i = 0; i < cNumRead; i++){
-            switch (irInBuf[i].EventType){
+    // Dispatch the events to the appropriate handler. 
+    for (i = 0; i < cNumRead; i++) {
+        switch (irInBuf[i].EventType) {
             case KEY_EVENT: // keyboard input 
                 KeyEventProc(irInBuf[i].Event.KeyEvent);
                 break;
@@ -77,17 +89,8 @@ bool ConsoleInput::Init(){
             default:
                 ErrorExit("Unknown event type");
                 break;
-            }
         }
     }
-    // Restore input mode on exit.
-    SetConsoleMode(hStdin, fdwSaveOldMode);
-    return true;
-}
-
-bool ConsoleInput::End(){
-	DKDEBUGFUNC();
-	return true;
 }
 
 void ConsoleInput::ErrorExit(LPCSTR lpszMessage){
