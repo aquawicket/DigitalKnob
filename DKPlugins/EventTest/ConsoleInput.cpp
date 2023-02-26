@@ -28,7 +28,6 @@
 #include "EventTest/ConsoleInput.h"
 
 
-
 bool ConsoleInput::Init(){
 	DKDEBUGFUNC();
 
@@ -37,24 +36,20 @@ bool ConsoleInput::Init(){
     int counter = 0;
 
     // Get the standard input handle. 
-
     hStdin = GetStdHandle(STD_INPUT_HANDLE);
     if (hStdin == INVALID_HANDLE_VALUE)
         ErrorExit("GetStdHandle");
 
     // Save the current input mode, to be restored on exit. 
-
     if (!GetConsoleMode(hStdin, &fdwSaveOldMode))
         ErrorExit("GetConsoleMode");
 
     // Enable the window and mouse input events. 
-
     fdwMode = ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT | ENABLE_INSERT_MODE | ENABLE_EXTENDED_FLAGS;
     if (!SetConsoleMode(hStdin, fdwMode))
         ErrorExit("SetConsoleMode");
 
     // Loop to read and handle the next 500 input events. 
-
     while (counter++ <= 500){
         // Wait for the events. 
         if (!ReadConsoleInput(
