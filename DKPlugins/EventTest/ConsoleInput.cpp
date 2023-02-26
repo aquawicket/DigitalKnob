@@ -68,7 +68,7 @@ void ConsoleInput::Loop() {
         hStdin,      // input buffer handle 
         irInBuf,     // buffer to read into 
         128,         // size of read buffer 
-        &cNumRead)) // number of records read 
+        &cNumRead))  // number of records read 
             ErrorExit("ReadConsoleInput");
 
     // Dispatch the events to the appropriate handler. 
