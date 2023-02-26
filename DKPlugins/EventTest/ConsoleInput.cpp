@@ -62,7 +62,12 @@ void ConsoleInput::Loop() {
 
     DWORD cNumRead, fdwMode, i;
     INPUT_RECORD irInBuf[128];
-
+    DWORD lpcNumberOfEvents;
+    
+    GetNumberOfConsoleInputEvents(hStdin, &lpcNumberOfEvents);
+    if (!lpcNumberOfEvents)
+        return;
+   
     // Wait for the events. 
     if (!ReadConsoleInput(
         hStdin,      // input buffer handle 
