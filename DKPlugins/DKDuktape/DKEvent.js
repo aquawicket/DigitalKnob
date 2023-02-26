@@ -89,6 +89,7 @@ var Event = function Event(_type, _options) //https://developer.mozilla.org/en-U
             return new HTMLElement(elementPointer);
         }
     });
+	/*
     //Read Only
     Object.defineProperty(this, "target", {
         //Read Only
@@ -100,6 +101,7 @@ var Event = function Event(_type, _options) //https://developer.mozilla.org/en-U
             return new HTMLElement(elementPointer);
         }
     });
+	*/
     //Read Only
     Object.defineProperty(this, "timeStamp", {
         get: function timeStamp() {

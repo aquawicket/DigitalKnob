@@ -84,10 +84,10 @@ var EventTarget = function EventTarget(pointer) {
     return this;
 };
 
+////////////////////////////////
 function doEvent(address, type){
-	console.log("doEvent("+address+","+type+")")
-	const eventTarget = new EventTarget(address)
+	//console.log("doEvent("+address+","+type+")")
 	const event = new Event(type)
-	//event.target = eventTarget
-	eventTarget.dispatchEvent(event)
+	event.target = new EventTarget(address)
+	event.target.dispatchEvent(event)
 }
