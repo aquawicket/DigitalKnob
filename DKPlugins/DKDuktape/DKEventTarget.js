@@ -88,5 +88,6 @@ function doEvent(address, type){
 	console.log("doEvent("+address+","+type+")")
 	const eventTarget = new EventTarget(address)
 	const event = new Event(type)
+	//event.target = eventTarget
 	eventTarget.dispatchEvent(event)
 }

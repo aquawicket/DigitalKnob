@@ -117,3 +117,4 @@ var KeyboardEvent = function KeyboardEvent(_type, _options)
     return UIEvent.call(this, pointer);
 };
 KeyboardEvent.prototype = UIEvent.prototype;
+
