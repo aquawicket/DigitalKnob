@@ -90,6 +90,11 @@ bool ConsoleInput::Init(){
     return true;
 }
 
+bool ConsoleInput::End(){
+	DKDEBUGFUNC();
+	return true;
+}
+
 VOID ConsoleInput::ErrorExit(LPCSTR lpszMessage){
     fprintf(stderr, "%s\n", lpszMessage);
     // Restore input mode on exit.
