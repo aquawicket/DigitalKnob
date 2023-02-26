@@ -29,7 +29,7 @@
 #define ConsoleInput_H
 
 #include "DK/DK.h"
-//#include "DKDuktape/DKDuktape.h"
+#include "DKDuktape/DKDuktape.h"
 
 #include <windows.h>
 #include <tchar.h>

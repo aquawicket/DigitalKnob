@@ -60,15 +60,13 @@ bool ConsoleInput::End(){
 
 void ConsoleInput::Loop() {
 
-    DWORD cNumRead, fdwMode, i;
-    INPUT_RECORD irInBuf[128];
     DWORD lpcNumberOfEvents;
-    
     GetNumberOfConsoleInputEvents(hStdin, &lpcNumberOfEvents);
     if (!lpcNumberOfEvents)
         return;
-   
-    // Wait for the events. 
+
+    DWORD cNumRead, fdwMode, i;
+    INPUT_RECORD irInBuf[128];
     if (!ReadConsoleInput(
         hStdin,      // input buffer handle 
         irInBuf,     // buffer to read into 
@@ -108,6 +106,7 @@ void ConsoleInput::ErrorExit(LPCSTR lpszMessage){
 void ConsoleInput::KeyEventProc(KEY_EVENT_RECORD ker){
     if (ker.bKeyDown) {
         DKINFO("KeyDown: vkk:"+toString(ker.wVirtualKeyCode)+", vsc:"+toString(ker.wVirtualScanCode) + "\n");
+        //TODO: send key down event
     }
     else {
         DKINFO("KeyUp: vkk:" + toString(ker.wVirtualKeyCode) + ", vsc:" + toString(ker.wVirtualScanCode) + "\n");
