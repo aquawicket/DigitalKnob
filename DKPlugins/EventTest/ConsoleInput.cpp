@@ -90,21 +90,23 @@ bool ConsoleInput::End(){
 	return true;
 }
 
-VOID ConsoleInput::ErrorExit(LPCSTR lpszMessage){
+void ConsoleInput::ErrorExit(LPCSTR lpszMessage){
     fprintf(stderr, "%s\n", lpszMessage);
     // Restore input mode on exit.
     SetConsoleMode(hStdin, fdwSaveOldMode);
     ExitProcess(0);
 }
 
-VOID ConsoleInput::KeyEventProc(KEY_EVENT_RECORD ker){
-    printf("Key event: ");
-    if (ker.bKeyDown)
-        printf("key pressed\n");
-    else printf("key released\n");
+void ConsoleInput::KeyEventProc(KEY_EVENT_RECORD ker){
+    if (ker.bKeyDown) {
+        DKINFO("KeyDown: vkk:"+toString(ker.wVirtualKeyCode)+", vsc:"+toString(ker.wVirtualScanCode) + "\n");
+    }
+    else {
+        DKINFO("KeyUp: vkk:" + toString(ker.wVirtualKeyCode) + ", vsc:" + toString(ker.wVirtualScanCode) + "\n");
+    }
 }
 
-VOID ConsoleInput::MouseEventProc(MOUSE_EVENT_RECORD mer){
+void ConsoleInput::MouseEventProc(MOUSE_EVENT_RECORD mer){
 #ifndef MOUSE_HWHEELED
 #define MOUSE_HWHEELED 0x0008
 #endif
@@ -139,7 +141,7 @@ VOID ConsoleInput::MouseEventProc(MOUSE_EVENT_RECORD mer){
     }
 }
 
-VOID ConsoleInput::ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD wbsr){
-    printf("Resize event\n");
+void ConsoleInput::ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD wbsr){
+    DKINFO("Resize event\n");
     printf("Console screen buffer is %d columns by %d rows.\n", wbsr.dwSize.X, wbsr.dwSize.Y);
 }

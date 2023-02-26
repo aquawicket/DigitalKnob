@@ -45,10 +45,10 @@ public:
 	HANDLE hStdin;
 	DWORD fdwSaveOldMode;
 	
-	VOID ErrorExit(LPCSTR);
-	VOID KeyEventProc(KEY_EVENT_RECORD);
-	VOID MouseEventProc(MOUSE_EVENT_RECORD);
-	VOID ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD);
+	void ErrorExit(LPCSTR);
+	void KeyEventProc(KEY_EVENT_RECORD);
+	void MouseEventProc(MOUSE_EVENT_RECORD);
+	void ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD);
 };
 REGISTER_OBJECT(ConsoleInput, false);
 
