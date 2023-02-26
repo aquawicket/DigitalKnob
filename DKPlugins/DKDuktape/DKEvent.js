@@ -1,9 +1,11 @@
 //https://developer.mozilla.org/en-US/docs/Web/API/Event
 
 //event_instances = [];
-var Event = function Event(pointer) //https://developer.mozilla.org/en-US/docs/Web/API/Event/Event
+var Event = function Event(_type, _options) //https://developer.mozilla.org/en-US/docs/Web/API/Event/Event
 {
-    this.pointer = pointer;
+    this._type = _type;
+	this._options = _options;
+	const pointer = "";
 
     //Properties
     Object.defineProperty(this, "bubbles", {
@@ -107,7 +109,7 @@ var Event = function Event(pointer) //https://developer.mozilla.org/en-US/docs/W
     //Read Only
     Object.defineProperty(this, "type", {
         get: function type() {
-            return this.pointer//CPP_DKEvent_type(pointer);
+            return this._type//CPP_DKEvent_type(pointer);
         }
     });
     //Read Only
