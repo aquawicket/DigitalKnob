@@ -1,7 +1,12 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent
 // https://w3c.github.io/uievents/#interface-keyboardevent
 
-var KeyboardEvent = function KeyboardEvent(pointer) {
+var KeyboardEvent = function KeyboardEvent(_type, _options) 
+{
+	this._type = _type;
+	this._options = _options;
+	const pointer = "";
+	
     // Properties
     Object.defineProperty(this, "altKey", {
         get: function altKey() {

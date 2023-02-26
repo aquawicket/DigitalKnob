@@ -1,6 +1,11 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/UIEvent
 
-var UIEvent = function UIEvent(pointer) {
+var UIEvent = function UIEvent(_type, _options) 
+{	
+	this._type = _type;
+	this._options = _options;
+	const pointer = "";
+	
     // Properties
     /*
 	Object.defineProperty(this, "cancelBubble", { //Not standardized, Deprecated
@@ -82,6 +87,6 @@ var UIEvent = function UIEvent(pointer) {
 		}
 	}
 	
-    return Event.call(this, pointer);
+    return Event.call(this, _type, _options);
 };
 UIEvent.prototype = Event.prototype;
