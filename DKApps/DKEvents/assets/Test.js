@@ -58,12 +58,18 @@ console.log("\n")
 
 
 
-/////////// ConsoleInput /////////////////////
-CPP_DK_Create("ConsoleInput");
+/////////// ConsoleInput //////////////////
+console.log("/////////// ConsoleInput /////////////////////")
+CPP_DK_Create("EventTest/ConsoleInput.js");
+const myConsoleInput = new ConsoleInput('myConsoleInput')
+//console.log("myConsoleInput = "+myConsoleInput)
+//console.log("myConsoleInput.value = "+myConsoleInput.value)
+//console.log("myConsoleInput.test() = "+myConsoleInput.test())
+//console.log("\n")
+
 function onKeyDown(){
 	console.log("onKeyDown()\n")
 }
-const myEventTarget = new EventTarget("test")
-myEventTarget.addEventListener('keydown', onKeyDown)
-const myKeyDownEvent = new Event('keydown')
-myEventTarget.dispatchEvent(myKeyDownEvent);
+myConsoleInput.addEventListener('keydown', onKeyDown)
+//const myKeyDownEvent = new Event('keydown')
+//myEventTarget.dispatchEvent(myKeyDownEvent);
