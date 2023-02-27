@@ -1,6 +1,7 @@
 // Event test
 console.log("\n\n ___Event Test___\n");
 
+/*
 /////////// JSObject /////////////////////
 console.log("/////////// JSObject /////////////////////")
 const myJSObject = new JSObject('myJSObject')
@@ -8,16 +9,16 @@ const myJSObject = new JSObject('myJSObject')
 //console.log("myJSObject.value = "+myJSObject.value)
 //console.log("myJSObject.test() = "+myJSObject.test())
 //console.log("\n")
-function myJSObjectCallback(){
-	console.log("myJSObjectCallback()\n")
+function myJSCallback(){
+	console.log("myJSCallback()\n")
 }
-myJSObject.addEventListener('myJSEvent', myJSObjectCallback)
+myJSObject.addEventListener('myJSEvent', myJSCallback)
 const myJSEvent = new Event('myJSEvent')
 myJSObject.dispatchEvent(myJSEvent);
-myJSObject.removeEventListener('myJSEvent', myJSObjectCallback)
+myJSObject.removeEventListener('myJSEvent', myJSCallback)
 myJSObject.dispatchEvent(myJSEvent);
 console.log("\n")
-
+*/
 
 
 /////////// CPPObject /////////////////////
@@ -39,8 +40,8 @@ function myCPPObject_onmessage(){
 	console.log("myCPPObject_onmessage()\n")
 }
 myCPPObject.onmessage = myCPPObject_onmessage;
-//const myCPPEvent_onmessage = new Event('message')
-//myCPPObject.dispatchEvent(myCPPEvent_onmessage);
+const myCPPEvent_onmessage = new Event('message')
+myCPPObject.dispatchEvent(myCPPEvent_onmessage);
 /*
 function myCPPObject_ontest(){
 	console.log("myCPPObject_ontest()\n")
