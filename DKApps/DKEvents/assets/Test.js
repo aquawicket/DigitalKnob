@@ -71,5 +71,7 @@ function onKeyDown(){
 	console.log("onKeyDown()\n")
 }
 myConsoleInput.addEventListener('keydown', onKeyDown)
-//const myKeyDownEvent = new Event('keydown')
-//myEventTarget.dispatchEvent(myKeyDownEvent);
+function onKeyUp(){
+	console.log("onKeyUp()\n")
+}
+myConsoleInput.addEventListener('keyup', onKeyUp)
