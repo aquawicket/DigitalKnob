@@ -59,4 +59,4 @@ console.log("\n")
 
 
 /////////// ConsoleInput /////////////////////
-//CPP_DK_Create("ConsoleInput");
+CPP_DK_Create("ConsoleInput");
