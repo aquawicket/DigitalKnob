@@ -35,8 +35,9 @@
 	#include <windows.h>
 	#include <tchar.h>
 	#include <stdio.h>
+#else
+	#include <ncurses.h>
 #endif
-
 
 class ConsoleInput : public DKObjectT<ConsoleInput>
 {
