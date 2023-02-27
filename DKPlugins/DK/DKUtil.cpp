@@ -340,7 +340,7 @@ bool DKUtil::GetKey(int& key){
 	key = ::_getch();
 	return true;
 #elif !WIN
-	key = getch();
+	key = DKUnix::getch_(0);
 	return true;
 #else
 	return DKERROR("not implemented on this OS\n");
