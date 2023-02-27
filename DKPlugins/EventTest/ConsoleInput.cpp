@@ -113,11 +113,23 @@ void ConsoleInput::Loop() {
     void ConsoleInput::KeyEventProc(KEY_EVENT_RECORD ker){
         if (ker.bKeyDown) {
             //DKINFO("KeyDown: vkk:"+toString(ker.wVirtualKeyCode)+", vsc:"+toString(ker.wVirtualScanCode) + "\n");
-            DKDuktape::doEvent(this, "keydown");
+            //DKDuktape::doEvent(this, "keydown");
+            DKString address = DKDuktape::pointerToAddress(this);
+            DKString type = "keydown";
+            DKString code = "doKeyboardEvent('" + address + "','" + type + "')";
+            DKString rval;
+            DKDuktape::RunDuktape(code, rval);
+            DKINFO("rval = " + rval + "\n");
         }
         else {
             //DKINFO("KeyUp: vkk:" + toString(ker.wVirtualKeyCode) + ", vsc:" + toString(ker.wVirtualScanCode) + "\n");
-            DKDuktape::doEvent(this, "keyup");
+            //DKDuktape::doEvent(this, "keyup");
+            DKString address = DKDuktape::pointerToAddress(this);
+            DKString type = "keyup";
+            DKString code = "doKeyboardEvent('" + address + "','" + type + "')";
+            DKString rval;
+            DKDuktape::RunDuktape(code, rval);
+            DKINFO("rval = " + rval + "\n");
         }
     }
 
