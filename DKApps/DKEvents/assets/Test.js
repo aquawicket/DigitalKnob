@@ -1,21 +1,21 @@
 // Event test
 console.log("\n\n ___Event Test___\n");
 
-/////////// MyObjectA /////////////////////
-console.log("/////////// MyObjectA /////////////////////")
-const myObjectA = new MyObject('myObjectA')
-//console.log("myObjectA = "+myObjectA)
-//console.log("myObjectA.value = "+myObjectA.value)
-//console.log("myObjectA.test() = "+myObjectA.test())
+/////////// JSObject /////////////////////
+console.log("/////////// JSObject /////////////////////")
+const myJSObject = new JSObject('myJSObject')
+//console.log("myJSObject = "+myJSObject)
+//console.log("myJSObject.value = "+myJSObject.value)
+//console.log("myJSObject.test() = "+myJSObject.test())
 //console.log("\n")
-function myCallbackA(){
-	console.log("myCallbackA()\n")
+function myJSObjectCallback(){
+	console.log("myJSObjectCallback()\n")
 }
-myObjectA.addEventListener('myEventA', myCallbackA)
-const myEventA = new Event('myEventA')
-myObjectA.dispatchEvent(myEventA);
-myObjectA.removeEventListener('myEventA', myCallbackA)
-myObjectA.dispatchEvent(myEventA);
+myJSObject.addEventListener('myJSEvent', myJSObjectCallback)
+const myJSEvent = new Event('myJSEvent')
+myJSObject.dispatchEvent(myJSEvent);
+myJSObject.removeEventListener('myJSEvent', myJSObjectCallback)
+myJSObject.dispatchEvent(myJSEvent);
 console.log("\n")
 
 
