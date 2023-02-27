@@ -119,7 +119,7 @@ void ConsoleInput::Loop() {
             DKString code = "doKeyboardEvent('" + address + "','" + type + "')";
             DKString rval;
             DKDuktape::RunDuktape(code, rval);
-            DKINFO("rval = " + rval + "\n");
+            //DKINFO("rval = " + rval + "\n");
         }
         else {
             //DKINFO("KeyUp: vkk:" + toString(ker.wVirtualKeyCode) + ", vsc:" + toString(ker.wVirtualScanCode) + "\n");
@@ -129,7 +129,7 @@ void ConsoleInput::Loop() {
             DKString code = "doKeyboardEvent('" + address + "','" + type + "')";
             DKString rval;
             DKDuktape::RunDuktape(code, rval);
-            DKINFO("rval = " + rval + "\n");
+            //DKINFO("rval = " + rval + "\n");
         }
     }
 
