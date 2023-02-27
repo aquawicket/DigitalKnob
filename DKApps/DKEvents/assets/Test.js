@@ -45,14 +45,14 @@ function myCPPObject_onmessage(){
 myCPPObject.onmessage = myCPPObject_onmessage;
 const myCPPEvent_onmessage = new Event('message')
 myCPPObject.dispatchEvent(myCPPEvent_onmessage);
-/*
+
 function myCPPObject_ontest(){
 	console.log("myCPPObject_ontest()\n")
 }
 myCPPObject.ontest = myCPPObject_ontest;
 const myCPPEvent_ontest = new Event('test')
 myCPPObject.dispatchEvent(myCPPEvent_ontest);
-*/
+
 myCPPObject.test()
 console.log("\n")
 
@@ -60,3 +60,10 @@ console.log("\n")
 
 /////////// ConsoleInput /////////////////////
 CPP_DK_Create("ConsoleInput");
+function onKeyDown(){
+	console.log("onKeyDown()\n")
+}
+const myEventTarget = new EventTarget("test")
+myEventTarget.addEventListener('keydown', onKeyDown)
+const myKeyDownEvent = new Event('keydown')
+myEventTarget.dispatchEvent(myKeyDownEvent);
