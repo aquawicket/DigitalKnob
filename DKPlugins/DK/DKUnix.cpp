@@ -51,7 +51,7 @@ static struct termios current, old;
 #include <sys/types.h> //GetUsername()  getpwnam()
 */
 
-
+/*
 char getch(void) {
 	DKDEBUGFUNC();
 	return DKUnix::getch_(0);
@@ -61,6 +61,17 @@ char getche(void) {
 	DKDEBUGFUNC();
 	return DKUnix::getch_(1);
 }
+*/
+char dk_getch(void) {
+	DKDEBUGFUNC();
+	return DKUnix::getch_(0);
+}
+
+char dk_getche(void) {
+	DKDEBUGFUNC();
+	return DKUnix::getch_(1);
+}
+//////////////////////////////
 
 bool DKUnix::GetKey(int& key){
 	DKDEBUGFUNC(key);

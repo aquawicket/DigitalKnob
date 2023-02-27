@@ -30,8 +30,10 @@
 #define DKUnix_H
 
 
-char getch(void);
-char getche(void);
+//char getch(void);
+//char getche(void);
+char dk_getch(void);
+char dk_getche(void);
 
 class DKUnix{
 public:
