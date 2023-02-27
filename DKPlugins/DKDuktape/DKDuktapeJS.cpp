@@ -559,6 +559,7 @@ int DKDuktapeJS::GetClipboard(duk_context* ctx){
 	return 1;
 }
 
+/*
 int DKDuktapeJS::_getch(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 #if WIN32
@@ -579,6 +580,7 @@ int DKDuktapeJS::_getche(duk_context* ctx){
 	duk_push_int(ctx, key);
 	return 1;
 }
+*/
 
 int DKDuktapeJS::GetData(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
