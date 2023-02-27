@@ -455,7 +455,7 @@ if(MAC)
 	dk_disable(libxml2)				# fatal error: 'extra/stricmp.h' file not found
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(mlocate)				# Unable to locate a Java Runtime that supports apt
-	dk_disable(ncurses)				# error: C preprocessor "/lib/cpp" fails sanity check
+	#dk_disable(ncurses)				# error: C preprocessor "/lib/cpp" fails sanity check
 	dk_disable(openblas)
 	dk_disable(openframeworks)		# fatal error: /utils/ofConstants.h:183     'GL/glew.h' file not found
 	dk_disable(osgbullet)			# requires osgworks
