@@ -336,10 +336,10 @@ bool DKUtil::GetKey(int& key){
 #	endif
 */
 #if WIN
-	int key = ::_getch();
+	key = ::_getch();
 	return true;
 #elif !WIN
-	int key = getch();
+	key = getch();
 	return true;
 #else
 	return DKERROR("not implemented on this OS\n");
