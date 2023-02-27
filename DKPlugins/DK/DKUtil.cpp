@@ -36,7 +36,6 @@ WARNING_DISABLE
 	#include <sys/time.h>
 #endif
 #if WIN
-	//#include "conio.h"          //getch, getche
 	#include <shellapi.h> //DKFile::Execute()
 #endif
 #ifndef MAC
@@ -334,17 +333,6 @@ bool DKUtil::GetKey(int& key){
 #	else
 		return DKERROR("not implemented on this OS\n");
 #	endif
-/*
-#if WIN
-	key = ::_getch();
-	return true;
-#elif !WIN
-	key = DKUnix::getch_(0);
-	return true;
-#else
-	return DKERROR("not implemented on this OS\n");
-#endif
-*/
 }
 
 bool DKUtil::GetLocalIP(DKString& ip){
