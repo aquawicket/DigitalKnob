@@ -326,9 +326,9 @@ bool DKUtil::GetFrames(unsigned long& frames){
 
 bool DKUtil::GetKey(int& key){
 	DKDEBUGFUNC("key");
-#	if WIN32
+#	if WIN
 		return DKWindows::GetKey(key);
-#	elif !WIN32
+#	elif !WIN
 		return DKUnix::GetKey(key);
 #	else
 		return DKERROR("not implemented on this OS\n");
