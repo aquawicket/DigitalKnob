@@ -20,38 +20,35 @@ console.log("\n")
 
 
 
-/////////// MyObjectB /////////////////////
-console.log("/////////// MyObjectB /////////////////////")
-const myObjectB = new MyObject('myObjectB')
-//console.log("myObjectB = "+myObjectB)
-//console.log("myObjectB.value = "+myObjectB.value)
-//console.log("myObjectB.test() = "+myObjectB.test())
+/////////// CPPObject /////////////////////
+console.log("/////////// CPPObject /////////////////////")
+const myCPPObject = new CPPObject('myCPPObject')
+//console.log("myCPPObject = "+myCPPObject)
+//console.log("myCPPObject.value = "+myCPPObject.value)
+//console.log("myCPPObject.test() = "+myCPPObject.test())
 //console.log("\n")
-function myCallbackB(){
-	console.log("myCallbackB()\n")
+function myCPPCallback(){
+	console.log("myCPPCallback()\n")
 }
-myObjectB.addEventListener('myEventB', myCallbackB)
-//const myEventB = new Event('myEventB')
-//myObjectB.dispatchEvent(myEventB);
-//myObjectB.removeEventListener('myEventB', myCallbackB)
-//myObjectB.dispatchEvent(myEventB);
-function myObjectB_onmessage(){
-	console.log("myObjectB_onmessage()\n")
+myCPPObject.addEventListener('myCPPEvent', myCPPCallback)
+//const myCPPEvent = new Event('myCPPEvent')
+//myCPPObject.dispatchEvent(myCPPEvent);
+//myCPPObject.removeEventListener('myCPPEvent', myCPPCallback)
+//myCPPObject.dispatchEvent(myCPPEvent);
+function myCPPObject_onmessage(){
+	console.log("myCPPObject_onmessage()\n")
 }
-myObjectB.onmessage = myObjectB_onmessage;
-//const myEventB_onmessage = new Event('message')
-//myObjectB.dispatchEvent(myEventB_onmessage);
+myCPPObject.onmessage = myCPPObject_onmessage;
+//const myCPPEvent_onmessage = new Event('message')
+//myCPPObject.dispatchEvent(myCPPEvent_onmessage);
 /*
-function myObjectB_ontest(){
-	console.log("myObjectB_ontest()\n")
+function myCPPObject_ontest(){
+	console.log("myCPPObject_ontest()\n")
 }
-myObjectB.ontest = myObjectB_ontest;
-const myEventB_ontest = new Event('test')
-myObjectB.dispatchEvent(myEventB_ontest);
+myCPPObject.ontest = myCPPObject_ontest;
+const myCPPEvent_ontest = new Event('test')
+myCPPObject.dispatchEvent(myCPPEvent_ontest);
 */
-myObjectB.test()
+myCPPObject.test()
 console.log("\n")
 
-
-/////////// WebSocketServer /////////////////////
-console.log("/////////// WebSocketServer /////////////////////")
