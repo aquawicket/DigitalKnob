@@ -105,8 +105,8 @@ bool DKDuktapeJS::Init(){
 	DKDuktape::AttachFunction("CPP_DK_GetArgs",      DKDuktapeJS::GetArgs);
 	DKDuktape::AttachFunction("CPP_DK_GetBrowser",   DKDuktapeJS::GetBrowser);
 	DKDuktape::AttachFunction("CPP_DK_GetClipboard", DKDuktapeJS::GetClipboard);
-	DKDuktape::AttachFunction("CPP_DK_getch",        DKDuktapeJS::_getch);
-	DKDuktape::AttachFunction("CPP_DK_getche",       DKDuktapeJS::_getche);
+	//DKDuktape::AttachFunction("CPP_DK_getch",        DKDuktapeJS::_getch);
+	//DKDuktape::AttachFunction("CPP_DK_getche",       DKDuktapeJS::_getche);
 	DKDuktape::AttachFunction("CPP_DK_GetData",      DKDuktapeJS::GetData);
 	DKDuktape::AttachFunction("CPP_DK_GetDate", DKDuktapeJS::GetDate);
 	DKDuktape::AttachFunction("CPP_DK_GetEvents", DKDuktapeJS::GetEvents);
