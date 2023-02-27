@@ -75,7 +75,8 @@ char dk_getche(void) {
 
 bool DKUnix::GetKey(int& key){
 	DKDEBUGFUNC(key);
-	return getch();
+	//return getch();
+	return dk_getch();
 }
 
 bool DKUnix::Sleep(int milliseconds){
