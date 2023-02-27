@@ -1,23 +1,23 @@
-// Event test
+// CPPObject.ja
 
 ////////////////////////////////////////
-var MyObject = function MyObject(data) {
-	console.log("MyObject("+data+")");
+var CPPObject = function CPPObject(data) {
+	console.log("CPPObject("+data+")");
     this.data = data;
 	
-	this.pointer = CPP_Duktape_createDKObject("MyObject")
+	this.pointer = CPP_Duktape_createDKObject("CPPObject")
 	
 	//// Instance properties ////
 	Object.defineProperty(this, "value", {
         get: function value() {
-            return CPP_MyObject_value(this.pointer)
+            return CPP_CPPObject_value(this.pointer)
         }
     })
 	
 	//// Instance methods ////
-	MyObject.prototype.test = function test() {
-		console.log("MyObject.prototype.test()")
-		CPP_MyObject_test(this.pointer)
+	CPPObject.prototype.test = function test() {
+		console.log("CPPObject.prototype.test()")
+		CPP_CPPObject_test(this.pointer)
     }
 	
 	//// Instance events ////
@@ -35,9 +35,9 @@ var MyObject = function MyObject(data) {
 	
 	//// toString ////
 	if(this.toString() === "[object Object]")
-		this.toString = function(){	return "[object MyObject]" }
+		this.toString = function(){	return "[object CPPObject]" }
 	
 	return EventTarget.call(this, this.pointer)
 	
 }
-MyObject.prototype = EventTarget.prototype;
+CPPObject.prototype = EventTarget.prototype;

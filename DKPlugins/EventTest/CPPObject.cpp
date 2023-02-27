@@ -25,34 +25,34 @@
 */
 //https://github.com/uNetworking/uWebSockets/blob/master/tests/main.cpp
 #include "DK/stdafx.h"
-#include "EventTest/MyObject.h"
+#include "EventTest/CPPObject.h"
 
 
-bool MyObject::Init(){
+bool CPPObject::Init(){
 	DKDEBUGFUNC();
-	DKDuktape::AttachFunction("CPP_MyObject_value", MyObject::value);
-	DKDuktape::AttachFunction("CPP_MyObject_test", MyObject::test);
+	DKDuktape::AttachFunction("CPP_CPPObject_value", CPPObject::value);
+	DKDuktape::AttachFunction("CPP_CPPObject_test", CPPObject::test);
 	return true;
 }
 
-bool MyObject::End(){
+bool CPPObject::End(){
 	DKDEBUGFUNC();
 	return true;
 }
 
-bool MyObject::instance_value(){
-	DKINFO("MyObject::instance_value("+data[0] + ")\n");
+bool CPPObject::instance_value(){
+	DKINFO("CPPObject::instance_value("+data[0] + ")\n");
 	return true;
 }
 
-bool MyObject::instance_test() {
-	DKINFO("MyObject::instance_test("+data[1] + ")\n");
+bool CPPObject::instance_test() {
+	DKINFO("CPPObject::instance_test("+data[1] + ")\n");
 	instance_sendevent();
 	return true;
 }
 
-bool MyObject::instance_sendevent() {
-	DKINFO("MyObject::instance_sendevent()\n");
+bool CPPObject::instance_sendevent() {
+	DKINFO("CPPObject::instance_sendevent()\n");
 	//DKString address = DKDuktape::pointerToAddress(this);
 	DKString type = "myEventB";
 	//DKDuktape::doEvent(address, type);
@@ -60,20 +60,20 @@ bool MyObject::instance_sendevent() {
 	return true;
 }
 
-int MyObject::value(duk_context* ctx){
+int CPPObject::value(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	DKINFO("MyObject::value(): address = " + address + "\n");
-	MyObject* object = (MyObject*)DKDuktape::addressToPointer(address);
+	DKINFO("CPPObject::value(): address = " + address + "\n");
+	CPPObject* object = (CPPObject*)DKDuktape::addressToPointer(address);
 	object->instance_value();
 	return true;
 }
 
-int MyObject::test(duk_context* ctx){
+int CPPObject::test(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	DKINFO("MyObject::value(): test = " + address + "\n");
-	MyObject* object = (MyObject*)DKDuktape::addressToPointer(address);
+	DKINFO("CPPObject::value(): test = " + address + "\n");
+	CPPObject* object = (CPPObject*)DKDuktape::addressToPointer(address);
 	object->instance_test();
 	return true;
 }

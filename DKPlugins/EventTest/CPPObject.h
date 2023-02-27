@@ -25,13 +25,13 @@
 */
 
 #pragma once
-#ifndef MyObject_H
-#define MyObject_H
+#ifndef CPPObject_H
+#define CPPObject_H
 
 #include "DK/DK.h"
 #include "DKDuktape/DKDuktape.h"
 
-class MyObject : public DKObjectT<MyObject>
+class CPPObject : public DKObjectT<CPPObject>
 {
 public:
 	bool Init();
@@ -42,7 +42,7 @@ public:
 	static int value(duk_context* ctx);
 	static int test(duk_context* ctx);
 };
-REGISTER_OBJECT(MyObject, false);
+REGISTER_OBJECT(CPPObject, false);
 
 
-#endif //MyObject_H
+#endif //CPPObject_H
