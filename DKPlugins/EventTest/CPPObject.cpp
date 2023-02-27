@@ -53,9 +53,7 @@ bool CPPObject::instance_test() {
 
 bool CPPObject::instance_sendevent() {
 	DKINFO("CPPObject::instance_sendevent()\n");
-	//DKString address = DKDuktape::pointerToAddress(this);
-	DKString type = "myEventB";
-	//DKDuktape::doEvent(address, type);
+	DKString type = "myCPPEvent";
 	DKDuktape::doEvent(this, type);
 	return true;
 }
