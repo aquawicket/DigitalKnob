@@ -296,7 +296,8 @@ bool DKWindows::GetClipboard(DKString& text){
 
 bool DKWindows::GetKey(int& key){
 	DKDEBUGFUNC(key);
-	key = _getch();
+	//key = _getch();
+	key = ::_getch();
 	return true;
 }
 
