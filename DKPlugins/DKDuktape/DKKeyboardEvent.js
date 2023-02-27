@@ -118,3 +118,10 @@ var KeyboardEvent = function KeyboardEvent(_type, _options)
 };
 KeyboardEvent.prototype = UIEvent.prototype;
 
+////////////////////////////////////////
+function doKeyboardEvent(address, type){
+	//console.log("doKeyboardEvent("+address+","+type+")")
+	const event = new KeyboardEvent(type)
+	event.target = new EventTarget(address)
+	event.target.dispatchEvent(event)
+}

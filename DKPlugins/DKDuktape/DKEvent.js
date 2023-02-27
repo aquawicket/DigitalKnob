@@ -202,3 +202,11 @@ function DispatchEvent(pointer) {
         event.currentTarget.dispatchEvent(event);
     }
 }
+
+////////////////////////////////
+function doEvent(address, type){
+	//console.log("doEvent("+address+","+type+")")
+	const event = new Event(type)
+	event.target = new EventTarget(address)
+	event.target.dispatchEvent(event)
+}

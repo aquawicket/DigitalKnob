@@ -112,12 +112,12 @@ void ConsoleInput::Loop() {
 
     void ConsoleInput::KeyEventProc(KEY_EVENT_RECORD ker){
         if (ker.bKeyDown) {
-            DKINFO("KeyDown: vkk:"+toString(ker.wVirtualKeyCode)+", vsc:"+toString(ker.wVirtualScanCode) + "\n");
-            //TODO: send keydown event
+            //DKINFO("KeyDown: vkk:"+toString(ker.wVirtualKeyCode)+", vsc:"+toString(ker.wVirtualScanCode) + "\n");
+            DKDuktape::doEvent(this, "keydown");
         }
         else {
-            DKINFO("KeyUp: vkk:" + toString(ker.wVirtualKeyCode) + ", vsc:" + toString(ker.wVirtualScanCode) + "\n");
-            //TODO: send keyup event
+            //DKINFO("KeyUp: vkk:" + toString(ker.wVirtualKeyCode) + ", vsc:" + toString(ker.wVirtualScanCode) + "\n");
+            DKDuktape::doEvent(this, "keyup");
         }
     }
 
