@@ -39,9 +39,9 @@
 
 WARNING_DISABLE
 #include <signal.h>
-#if WIN32
-	#include "conio.h"          //getch, getche
-#endif
+//#if WIN32
+//	#include "conio.h"          //getch, getche
+//#endif
 WARNING_ENABLE
 
 

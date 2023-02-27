@@ -36,6 +36,7 @@ WARNING_DISABLE
 	#include <sys/time.h>
 #endif
 #if WIN
+	#include "conio.h"          //getch, getche
 	#include <shellapi.h> //DKFile::Execute()
 #endif
 #ifndef MAC
