@@ -1,9 +1,11 @@
 // Event test
 console.log("\n\n ___Event Test___\n");
 
-/*
+
+
 /////////// JSObject /////////////////////
 console.log("/////////// JSObject /////////////////////")
+CPP_DK_Create("EventTest/JSObject.js");
 const myJSObject = new JSObject('myJSObject')
 //console.log("myJSObject = "+myJSObject)
 //console.log("myJSObject.value = "+myJSObject.value)
@@ -18,11 +20,12 @@ myJSObject.dispatchEvent(myJSEvent);
 myJSObject.removeEventListener('myJSEvent', myJSCallback)
 myJSObject.dispatchEvent(myJSEvent);
 console.log("\n")
-*/
+
 
 
 /////////// CPPObject /////////////////////
 console.log("/////////// CPPObject /////////////////////")
+CPP_DK_Create("EventTest/CPPObject.js");
 const myCPPObject = new CPPObject('myCPPObject')
 //console.log("myCPPObject = "+myCPPObject)
 //console.log("myCPPObject.value = "+myCPPObject.value)
@@ -53,3 +56,7 @@ myCPPObject.dispatchEvent(myCPPEvent_ontest);
 myCPPObject.test()
 console.log("\n")
 
+
+
+/////////// ConsoleInput /////////////////////
+//CPP_DK_Create("ConsoleInput");
