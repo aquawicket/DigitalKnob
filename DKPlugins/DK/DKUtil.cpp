@@ -326,6 +326,7 @@ bool DKUtil::GetFrames(unsigned long& frames){
 
 bool DKUtil::GetKey(int& key){
 	DKDEBUGFUNC("key");
+/*
 #	if WIN
 		return DKWindows::GetKey(key);
 #	elif !WIN
@@ -333,6 +334,16 @@ bool DKUtil::GetKey(int& key){
 #	else
 		return DKERROR("not implemented on this OS\n");
 #	endif
+*/
+#if WIN
+	int key = ::_getch();
+	return true;
+#elif !WIN
+	int key = getch();
+	return true;
+#else
+	return DKERROR("not implemented on this OS\n");
+#endif
 }
 
 bool DKUtil::GetLocalIP(DKString& ip){
