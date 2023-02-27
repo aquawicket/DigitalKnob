@@ -6,7 +6,8 @@ var TYPE   = ""
 var LEVEL  = "RebuildAll";
 
 function getch(){
-	key = CPP_DK_getch()
+	//key = CPP_DK_getch()
+	key = CPP_DK_GetKey()
 	//console.log("key = "+key)
 	return key
 }
