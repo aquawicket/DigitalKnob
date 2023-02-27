@@ -25,10 +25,10 @@ include_guard()
 
 
 # DISABLED FOR ALL TARGETS
-dk_disable(bgfx)					# TODO
 dk_disable(DKPlugin1)				# TODO
 dk_disable(DKPlugin2)				# TODO
 dk_disable(DKWidget)				# DEPRECATED
+dk_disable(bgfx)					# TODO
 dk_disable(gradle)					# We don't need to build this from source
 dk_disable(java)					# TODO
 dk_disable(jpeg)					# DEPRECATED: using libjpeg_turbo instead
@@ -47,15 +47,6 @@ dk_disable(sw-client)				# DEPRECATED: requested by leptonica but not required
 
 # Disabled for Android targets
 if(ANDROID) 
-	dk_disable(android-java-tools) 	# download link broken
-	dk_disable(aom)					# build errors
-	dk_disable(aubio)				# build errors	
-	dk_disable(boxer)				# fatal error : 'boxer/boxer.h' file not found
-	dk_disable(bullet3)				# build errors
-	dk_disable(bzip2)				# 'make' is not recognized as an internal or external command
-	dk_disable(cryptopp)
-	dk_disable(curl)				# error : "strerror_r MUST be either POSIX, glibc style"
-	dk_disable(diff-match-patch)
 	dk_disable(DKArchive)			# requires libarchive
 	dk_disable(DKCef)				# requires cef_binary
 	dk_disable(DKCefChild)			# requires cef_binary
@@ -63,7 +54,6 @@ if(ANDROID)
 	dk_disable(DKHandles)			# could not find DKHandles
 	dk_disable(DKMidi)				# requires rtmidi
 	dk_disable(DKMySql)				# requires curl
-	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
 	dk_disable(DKOSGAudio)			# requires openscenegraph
 	dk_disable(DKOSGCef)			# requires openscenegraph
@@ -80,13 +70,14 @@ if(ANDROID)
 	dk_disable(DKOSGViewer)			# requires openscenegraph 
 	dk_disable(DKOSGWidget)			# requires openscenegraph 
 	dk_disable(DKOSGWindow)			# requires openscenegraph 
-	dk_disable(DKScreenRecorder)	# requires opencv
+	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKSDLCef)			# requires cef_binary
 	dk_disable(DKSDLOsg)			# requires openscenegraph
 	dk_disable(DKSDLWaave)			# requires waave
 	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSFMLRml)			# requires sfml
 	dk_disable(DKSFMLWindow)		# requires sfml
+	dk_disable(DKScreenRecorder)	# requires opencv
 	dk_disable(DKThread)			# requires threadpool
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKUpdate)			# requires DKCurl
@@ -94,6 +85,15 @@ if(ANDROID)
 	dk_disable(DKVncServer)			# requires libvncserver
 	dk_disable(DKWebSockets)		# requires libwebsockets or uwebsockets
 	dk_disable(DKWebview)			# compiling errors
+	dk_disable(android-java-tools) 	# download link broken
+	dk_disable(aom)					# build errors
+	dk_disable(aubio)				# build errors	
+	dk_disable(boxer)				# fatal error : 'boxer/boxer.h' file not found
+	dk_disable(bullet3)				# build errors
+	dk_disable(bzip2)				# 'make' is not recognized as an internal or external command
+	dk_disable(cryptopp)
+	dk_disable(curl)				# error : "strerror_r MUST be either POSIX, glibc style"
+	dk_disable(diff-match-patch)
 	dk_disable(dl)
 	dk_disable(dukluv)
 	dk_disable(ffmpeg)
@@ -153,6 +153,49 @@ endif(ANDROID_64)
 
 # Disabled for Emscripten targets
 if(EMSCRIPTEN) 
+	dk_disable(DKArchive)			# requires libarchive
+	dk_disable(DKAudio)
+	dk_disable(DKCef)
+	dk_disable(DKCefChild)
+	dk_disable(DKCrypto)
+	dk_disable(DKCurl)				# requires curl
+	dk_disable(DKDebug)				# DKDebug.cpp:158:10: fatal error: 'execinfo.h' file not found
+	dk_disable(DKHook)
+	dk_disable(DKImageMagick)
+	dk_disable(DKJerryscript)
+	dk_disable(DKMidi)
+	dk_disable(DKMySql)
+	dk_disable(DKOFWindow)
+	dk_disable(DKOSGAudio)
+	dk_disable(DKOSGCef)
+	dk_disable(DKOSGLights)
+	dk_disable(DKOSGManipulator)
+	dk_disable(DKOSGModel)
+	dk_disable(DKOSGNotify)
+	dk_disable(DKOSGPhysics)
+	dk_disable(DKOSGPicker)
+	dk_disable(DKOSGRml)
+	dk_disable(DKOSGStats)
+	dk_disable(DKOSGTerrain)
+	dk_disable(DKOSGVideo)
+	dk_disable(DKOSGViewer)
+	dk_disable(DKOSGWidget)
+	dk_disable(DKOSGWindow)
+	dk_disable(DKOcr)
+	dk_disable(DKRestart)
+	dk_disable(DKSDLAudio)
+	dk_disable(DKSDLCef)
+	dk_disable(DKSDLMetalWindow)
+	dk_disable(DKSDLWaave)			# requires waave
+	dk_disable(DKSDLWav)
+	dk_disable(DKSFMLRml)
+	dk_disable(DKSFMLWindow)
+	dk_disable(DKScreenRecorder)
+	dk_disable(DKThread)
+	dk_disable(DKTorrent)
+	dk_disable(DKUpdate)
+	dk_disable(DKVncClient)			# case value evaluates to 4294967295, which cannot be narrowed to type 'int'
+	dk_disable(DKWebSockets)
 	dk_disable(aom)
 	dk_disable(astyle)
 	dk_disable(aubio)
@@ -170,49 +213,6 @@ if(EMSCRIPTEN)
 	dk_disable(core_motion)
 	dk_disable(core_services)
 	dk_disable(core_video)
-	dk_disable(DKArchive)			# requires libarchive
-	dk_disable(DKAudio)
-	dk_disable(DKCef)
-	dk_disable(DKCefChild)
-	dk_disable(DKCurl)				# requires curl
-	dk_disable(DKCrypto)
-	dk_disable(DKDebug)				# DKDebug.cpp:158:10: fatal error: 'execinfo.h' file not found
-	dk_disable(DKJerryscript)
-	dk_disable(DKHook)
-	dk_disable(DKImageMagick)
-	dk_disable(DKMidi)
-	dk_disable(DKMySql)
-	dk_disable(DKOcr)
-	dk_disable(DKOFWindow)
-	dk_disable(DKOSGAudio)
-	dk_disable(DKOSGCef)
-	dk_disable(DKOSGLights)
-	dk_disable(DKOSGManipulator)
-	dk_disable(DKOSGModel)
-	dk_disable(DKOSGNotify)
-	dk_disable(DKOSGPhysics)
-	dk_disable(DKOSGPicker)
-	dk_disable(DKOSGRml)
-	dk_disable(DKOSGStats)
-	dk_disable(DKOSGTerrain)
-	dk_disable(DKOSGVideo)
-	dk_disable(DKOSGViewer)
-	dk_disable(DKOSGWidget)
-	dk_disable(DKOSGWindow)
-	dk_disable(DKRestart)
-	dk_disable(DKScreenRecorder)
-	dk_disable(DKSDLAudio)
-	dk_disable(DKSDLCef)
-	dk_disable(DKSDLMetalWindow)
-	dk_disable(DKSDLWaave)			# requires waave
-	dk_disable(DKSDLWav)
-	dk_disable(DKSFMLRml)
-	dk_disable(DKSFMLWindow)
-	dk_disable(DKThread)
-	dk_disable(DKTorrent)
-	dk_disable(DKUpdate)
-	dk_disable(DKVncClient)			# case value evaluates to 4294967295, which cannot be narrowed to type 'int'
-	dk_disable(DKWebSockets)
 	dk_disable(dukluv)
 	dk_disable(flac)				# ERROR: src/libFLAC/cpu.c:91:43 error: invalid output constraint '=a' in asm
 	dk_disable(fontconfig)
@@ -225,6 +225,7 @@ if(EMSCRIPTEN)
 	dk_disable(imagemagick)
 	dk_disable(iokit)
 	dk_disable(jasper)
+	dk_disable(kdevelop)
 	dk_disable(libarchive)			# /archive_write_set_format_7zip.c:1541:13:  error: implicit truncation from 'int' to a one-bit wide bit-filed
 	dk_disable(libcaca)
 	dk_disable(libexpat)
@@ -232,13 +233,12 @@ if(EMSCRIPTEN)
 	dk_disable(libtorrent)
 	dk_disable(libxml2)				# fatal error: 'config.h' file not found
 	dk_disable(lighttpd)
-	dk_disable(kdevelop)
 	dk_disable(m)
 	dk_disable(media_player)
 	dk_disable(metal)
 	dk_disable(metalKit)
-	dk_disable(msinttypes)
 	dk_disable(mlocate)
+	dk_disable(msinttypes)
 	dk_disable(nasm)
 	dk_disable(ncurses)
 	dk_disable(ogg)
@@ -274,18 +274,10 @@ endif()
 
 # Disabled for iOS and iOS-Simulator targets
 if(IOS OR IOSSIM)  
-	dk_disable(aom)					# build errors
-	dk_disable(aubio)				# build errors
-	dk_disable(boost)				# clang error: no such file or direcotry: libboost_atomic.a, libboost_chrono.a, etc, etc, etc
-	dk_disable(boxer)				# COCOA_LIBRARY not found
-	dk_disable(bullet3)				# OPENGL-NOTFOUND COCOA-NOTFOUND
-	dk_disable(bzip2)
-	dk_disable(cryptopp)			# ** BUILD FAILED ** /blake2b_simd.cpp
 	dk_disable(DKCef)				# requires cef_binary
 	dk_disable(DKCefChild)			# requires cef_binary
 	dk_disable(DKJerryscript)		# requires jerryscript
 	dk_disable(DKMidi)				# requires rtmidi
-	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
 	dk_disable(DKOSGAudio)			# requires openscenegraph
 	dk_disable(DKOSGCef)			# requires openscenegraph
@@ -302,18 +294,26 @@ if(IOS OR IOSSIM)
 	dk_disable(DKOSGViewer)			# requires openscenegraph 
 	dk_disable(DKOSGWidget)			# requires openscenegraph 
 	dk_disable(DKOSGWindow)			# requires openscenegraph 
-	dk_disable(DKScreenRecorder)	# requires opencv
+	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKSDLCef)			# requires cef_binary
 	dk_disable(DKSDLOsg)			# requires openscenegraph 
 	dk_disable(DKSDLWaave)			# requires waave
 	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSFMLRml)			# requires sfml
 	dk_disable(DKSFMLWindow)		# requires sfml
+	dk_disable(DKScreenRecorder)	# requires opencv
 	dk_disable(DKThread)			# requires threadpool
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKUpdate)			# build errors
 	dk_disable(DKVncClient)			# requires libvncserver
 	dk_disable(DKVncServer)			# requires libvncserver
+	dk_disable(aom)					# build errors
+	dk_disable(aubio)				# build errors
+	dk_disable(boost)				# clang error: no such file or direcotry: libboost_atomic.a, libboost_chrono.a, etc, etc, etc
+	dk_disable(boxer)				# COCOA_LIBRARY not found
+	dk_disable(bullet3)				# OPENGL-NOTFOUND COCOA-NOTFOUND
+	dk_disable(bzip2)
+	dk_disable(cryptopp)			# ** BUILD FAILED ** /blake2b_simd.cpp
 	dk_disable(dukluv)
 	dk_disable(fontconfig)
 	dk_disable(gdal)
@@ -373,11 +373,8 @@ endif()
 
 # Disabled for Linux targets
 if(LINUX)
-	dk_disable(aubio)
-	dk_disable(boxer)				# error: can't create CMakeFiles/Boxer.dir/src/boxer_linux.cpp.o: No such file or directory
 	dk_disable(DKHook)				# 'read' was not declared in this scope
 	dk_disable(DKJerryscript)		# requires jerryscript
-	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
 	dk_disable(DKOSGAudio)			# requires freealut
 	dk_disable(DKOSGCef)			# build errors
@@ -385,21 +382,24 @@ if(LINUX)
 	dk_disable(DKOSGStats)			# build errors
 	dk_disable(DKOSGVideo)			# TODO
 	dk_disable(DKOSGWidget)			# build errors
-	dk_disable(DKScreenRecorder)
+	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKSDLWaave)			# requires waave
 	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSFMLRml)			# INCOMPLETE
+	dk_disable(DKScreenRecorder)
 	dk_disable(DKThread)			# error: need to implement boost::placeholders
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKUpdate)			# error: need to implement boost::placeholders
 	dk_disable(DKWebSockets)		# requires libwebsockets, uwebsockets
+	dk_disable(aubio)
+	dk_disable(boxer)				# error: can't create CMakeFiles/Boxer.dir/src/boxer_linux.cpp.o: No such file or directory
 	dk_disable(dukluv)
 	dk_disable(fontconfig)
 	dk_disable(gdal)
 	dk_disable(gnutls)
 	dk_disable(gzip)
-	dk_disable(jerryscript)			# build errors
 	dk_disable(imagemagick)			# libimagemagik.a not found
+	dk_disable(jerryscript)			# build errors
 	dk_disable(kdevelop)			# permission denied
 	dk_disable(leptonica)			# build errors
 	dk_disable(libcaca)				# no CMakeLists.txt
@@ -425,8 +425,6 @@ endif(LINUX)
 
 # Disabled for Mac targets
 if(MAC) 
-	dk_disable(aubio)				# breaks DKCefV8
-	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
 	dk_disable(DKOSGAudio)			# requires freealut
 	dk_disable(DKOSGCef)			# build errors
@@ -434,14 +432,16 @@ if(MAC)
 	dk_disable(DKOSGStats)			# build errors
 	dk_disable(DKOSGVideo)			# TODO
 	dk_disable(DKOSGWidget)			# build errors
-	dk_disable(DKScreenRecorder)
+	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKSDLWaave)			# requires waave
 	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSFMLRml)			# INCOMPLETE
+	dk_disable(DKScreenRecorder)
 	dk_disable(DKThread)			# Error: 'boost/thread/xtime.hpp:24 expected identifier TIME_UTC_=1
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKUpdate)			# Error: 'boost/thread/xtime.hpp:24 expected identifier TIME_UTC_=1
 	dk_disable(DKVncClient)			# case value evaluates to 4294967295, which cannot be narrowed to type 'int'
+	dk_disable(aubio)				# breaks DKCefV8
 	dk_disable(dukluv)
 	dk_disable(flac)				# 'asm' undelcared identifier
 	dk_disable(fontconfig)
@@ -455,11 +455,10 @@ if(MAC)
 	dk_disable(libxml2)				# fatal error: 'extra/stricmp.h' file not found
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(mlocate)				# Unable to locate a Java Runtime that supports apt
-	#dk_disable(ncurses)				# error: C preprocessor "/lib/cpp" fails sanity check
 	dk_disable(openblas)
 	dk_disable(openframeworks)		# fatal error: /utils/ofConstants.h:183     'GL/glew.h' file not found
-	dk_disable(osgbullet)			# requires osgworks
 	dk_disable(osgaudio)			# opengl identifier errors
+	dk_disable(osgbullet)			# requires osgworks
 	dk_disable(osgrmlui)
 	dk_disable(osgworks)			# Error: 'osgworks-master/src/osgwTools/GeometeryModifier.cpp:64' no member named 'mergeGeode'
 	dk_disable(podofo)				# error: expected ';' at end of declaration
@@ -476,13 +475,9 @@ endif(MAC)
 
 # Disabled for Raspberry Pi targets
 if(RASPBERRY) 
-	dk_disable(aom)
-	dk_disable(aubio)
-	dk_disable(boxer)				# fatal error : 'boxer/boxer.h' file not found	
 	dk_disable(DKHook)				# 'read' was not declared in this scope
 	dk_disable(DKJerryscript)		# requires jerryscript
 	dk_disable(DKMidi)				# requires rtmidi
-	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
 	dk_disable(DKOSGAudio)			# requires osgaudio
 	dk_disable(DKOSGCef)			# build errors
@@ -490,15 +485,19 @@ if(RASPBERRY)
 	dk_disable(DKOSGStats)			# build errors
 	dk_disable(DKOSGVideo)			# TODO
 	dk_disable(DKOSGWidget)			# build errors
-	dk_disable(DKScreenRecorder)	# requires opencv
+	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKSDLWaave)			# requires waave
 	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSFMLRml)			# INCOMPLETE
+	dk_disable(DKScreenRecorder)	# requires opencv
 	dk_disable(DKThread)			# requires threadpool
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKUpdate)			# compiling errors
 	dk_disable(DKVncClient)			# requires libvncserver
 	dk_disable(DKVncServer)			# requires libvncserver
+	dk_disable(aom)
+	dk_disable(aubio)
+	dk_disable(boxer)				# fatal error : 'boxer/boxer.h' file not found	
 	dk_disable(dukluv)
 	dk_disable(emsdk)				# 64bit source only
 	dk_disable(fontconfig)
@@ -508,8 +507,6 @@ if(RASPBERRY)
 	dk_disable(java)
 	dk_disable(jerryscript)
 	dk_disable(kdevelop)
-	dk_disable(openblas)
-	dk_disable(openjdk)
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libexpat)
 	dk_disable(libgtk-3-dev)		# unable to download package
@@ -520,8 +517,10 @@ if(RASPBERRY)
 	dk_disable(libxml2)
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(nasm)
+	dk_disable(openblas)
 	dk_disable(opencv)				# build errors
 	dk_disable(openframeworks)		# error: cannot find opengles
+	dk_disable(openjdk)
 	dk_disable(opus)
 	dk_disable(osgaudio)
 	dk_disable(osgbullet)			# requires osgworks
@@ -553,10 +552,6 @@ endif()
 
 # Disabled for Windows targets
 if(WIN) 
-	dk_disable(aom)					# Perl is required to build libaom.
-	dk_disable(aubio)
-	dk_disable(bzip2)
-	dk_disable(diff-match-patch)
 	dk_disable(DKOFWindow)			# requires openframeworks
 	dk_disable(DKOSGAudio)			# requires freealut
 	dk_disable(DKOSGCef)			# build errors
@@ -564,12 +559,16 @@ if(WIN)
 	dk_disable(DKOSGStats)			# build errors
 	dk_disable(DKOSGVideo)			# TODO
 	dk_disable(DKOSGWidget)			# build errors
-	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSDLWaave)			# requires waave
+	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSFMLRml)			# INCOMPLETE
 	dk_disable(DKThread)			# build errors
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKUpdate)			# build errors
+	dk_disable(aom)					# Perl is required to build libaom.
+	dk_disable(aubio)
+	dk_disable(bzip2)
+	dk_disable(diff-match-patch)
 	dk_disable(dukluv)
 	dk_disable(fontconfig)
 	dk_disable(gdal)
