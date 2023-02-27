@@ -1,5 +1,5 @@
+# https://github.com/mirror/ncurses.git
 # https://invisible-island.net/ncurses/ncurses.html
-#
 # https://invisible-island.net/datafiles/release/ncurses.tar.gz
 
 if(WIN)
