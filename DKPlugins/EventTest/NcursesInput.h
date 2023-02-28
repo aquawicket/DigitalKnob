@@ -25,35 +25,22 @@
 */
 
 #pragma once
-#ifndef ConsoleInput_H
-#define ConsoleInput_H
+#ifndef NcursesInput_H
+#define NcursesInput_H
 
 #include "DK/DK.h"
 #include "DKDuktape/DKDuktape.h"
 
-#if WIN
-	#include <windows.h>
-	#include <tchar.h>
-	#include <stdio.h>
-#endif
 
-class ConsoleInput : public DKObjectT<ConsoleInput>
+class NcursesInput : public DKObjectT<NcursesInput>
 {
 public:
 	bool Init();
 	bool End();
 	void Loop();
 	
-#if WIN
-	HANDLE hStdin;
-	DWORD fdwSaveOldMode;
-	void ErrorExit(LPCSTR);
-	void KeyEventProc(KEY_EVENT_RECORD);
-	void MouseEventProc(MOUSE_EVENT_RECORD);
-	void ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD);
-#endif
 };
-REGISTER_OBJECT(ConsoleInput, false);
+REGISTER_OBJECT(NcursesInput, false);
 
 
-#endif //ConsoleInput_H
+#endif //NcursesInput_H

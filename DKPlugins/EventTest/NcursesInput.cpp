@@ -23,37 +23,28 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
+//https://github.com/uNetworking/uWebSockets/blob/master/tests/main.cpp
+#include "DK/stdafx.h"
+#include "EventTest/NcursesInput.h"
 
-#pragma once
-#ifndef ConsoleInput_H
-#define ConsoleInput_H
 
-#include "DK/DK.h"
-#include "DKDuktape/DKDuktape.h"
-
-#if WIN
-	#include <windows.h>
-	#include <tchar.h>
-	#include <stdio.h>
-#endif
-
-class ConsoleInput : public DKObjectT<ConsoleInput>
-{
-public:
-	bool Init();
-	bool End();
-	void Loop();
+bool NcursesInput::Init(){
+	DKDEBUGFUNC();
 	
-#if WIN
-	HANDLE hStdin;
-	DWORD fdwSaveOldMode;
-	void ErrorExit(LPCSTR);
-	void KeyEventProc(KEY_EVENT_RECORD);
-	void MouseEventProc(MOUSE_EVENT_RECORD);
-	void ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD);
-#endif
-};
-REGISTER_OBJECT(ConsoleInput, false);
+	//TODO
 
+    DKApp::AppendLoopFunc(&NcursesInput::Loop, this);
+    return true;
+}
 
-#endif //ConsoleInput_H
+bool NcursesInput::End(){
+	DKDEBUGFUNC();
+
+	//TODO
+	
+	return true;
+}
+
+void NcursesInput::Loop() {
+	//TODO
+}
