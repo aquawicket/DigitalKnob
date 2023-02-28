@@ -27,11 +27,31 @@
 #include "DK/stdafx.h"
 #include "EventTest/NcursesInput.h"
 
+#include <curses.h>
+
+#define WIDTH 30
+#define HEIGHT 10 
 
 bool NcursesInput::Init(){
 	DKDEBUGFUNC();
 	
-	//TODO
+	WINDOW *menu_win;
+	int highlight = 1;
+	int choice = 0;
+	int c;
+
+	initscr();
+	clear();
+	noecho();
+	cbreak();	/* Line buffering disabled. pass on everything */
+	int startx = (80 - WIDTH) / 2;
+	int starty = (24 - HEIGHT) / 2;
+		
+	menu_win = newwin(HEIGHT, WIDTH, starty, startx);
+	keypad(menu_win, TRUE);
+	mvprintw(0, 0, "Use arrow keys to go up and down, Press enter to select a choice");
+	refresh();
+	//print_menu(menu_win, highlight);
 
     DKApp::AppendLoopFunc(&NcursesInput::Loop, this);
     return true;
