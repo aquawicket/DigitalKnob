@@ -75,3 +75,23 @@ function onKeyUp(){
 	console.log("onKeyUp()\n")
 }
 myConsoleInput.addEventListener('keyup', onKeyUp)
+
+
+
+/////////// NcursesInput //////////////////
+console.log("/////////// NcursesInput /////////////////////")
+CPP_DK_Create("EventTest/NcursesInput.js");
+const myNcursesInput = new NcursesInput('myNcursesInput')
+//console.log("myNcursesInput = "+myNcursesInput)
+//console.log("myNcursesInput.value = "+myNcursesInput.value)
+//console.log("myNcursesInput.test() = "+myNcursesInput.test())
+//console.log("\n")
+
+function onKeyDown(){
+	console.log("onKeyDown()\n")
+}
+myNcursesInput.addEventListener('keydown', onKeyDown)
+function onKeyUp(){
+	console.log("onKeyUp()\n")
+}
+myNcursesInput.addEventListener('keyup', onKeyUp)
