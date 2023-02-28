@@ -36,7 +36,7 @@
 	#include <tchar.h>
 	#include <stdio.h>
 #else
-	//#include <curses.h>
+	#include <curses.h>
 #endif
 
 class ConsoleInput : public DKObjectT<ConsoleInput>
