@@ -2,7 +2,14 @@
 
 var MouseEvent = function(_type, _options, _pointer) {
 	//console.log("MouseEvent("+_type+","+_options+","+_pointer+")")
-    // Properties
+	
+	/*
+	this._type = _type;
+	this._options = _options;
+	this._pointer = _pointer;
+	*/
+	
+    //// Properties ////
     Object.defineProperty(this, "altKey", {
         //Read only
         get: function altKey() {
@@ -166,6 +173,7 @@ var MouseEvent = function(_type, _options, _pointer) {
     return UIEvent.call(this, _type, _options, _pointer)
 }
 MouseEvent.prototype = UIEvent.prototype
+
 
 /////////////////////////////////////////////////
 function doMouseEvent(_type, _options, _pointer){
