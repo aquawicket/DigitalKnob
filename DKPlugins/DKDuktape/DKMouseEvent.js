@@ -168,8 +168,8 @@ MouseEvent.prototype = UIEvent.prototype
 
 /////////////////////////////////////
 function doMouseEvent(address, type){
-	//console.log("doKeyboardEvent("+address+","+type+")")
-	const mouseevent = new Event(type) //new KeyboardEvent(type)
-	mouseevent.target = new EventTarget(address)
-	mouseevent.target.dispatchEvent(mouseevent)
+	//console.log("doMouseEvent("+address+","+type+")")
+	const event = new MouseEvent(type)
+	event.target = new EventTarget(address)
+	event.target.dispatchEvent(event)
 }

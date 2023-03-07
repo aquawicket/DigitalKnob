@@ -119,6 +119,7 @@ function onResize(event){
 myConsoleInput.addEventListener('resize', onResize)
 
 
+/*
 ///////////////////// NcursesInput ////////////////////////
 console.log("/////////// NcursesInput /////////////////////")
 CPP_DK_Create("EventTest/NcursesInput.js");
@@ -185,3 +186,4 @@ function onResize(event){
 	console.log("onResize() event.x="+event.x)
 }
 myNcursesInput.addEventListener('resize', onResize)
+*/
