@@ -111,33 +111,22 @@ void ConsoleInput::Loop() {
     }
 
     void ConsoleInput::KeyEventProc(KEY_EVENT_RECORD ker){
+        DKString address = DKDuktape::pointerToAddress(this);
+        DKString rval;
+        DKString code;
         if (ker.bKeyDown) {
-            //DKINFO("KeyDown: vkk:"+toString(ker.wVirtualKeyCode)+", vsc:"+toString(ker.wVirtualScanCode) + "\n");
-            //DKDuktape::doEvent(this, "keydown");
-            DKString address = DKDuktape::pointerToAddress(this);
-            DKString type = "keydown";
-            DKString code = "doKeyboardEvent('" + address + "','" + type + "')";
-            DKString rval;
+            code = "doKeyboardEvent('" + address + "','keydown')";
             DKDuktape::RunDuktape(code, rval);
-            //DKINFO("rval = " + rval + "\n");
 			
 			//Only fire keypress on alphanumeric keys.
             if (ker.uChar.AsciiChar < 32)
                 return;
-			type = "keypress";
-			code = "doKeyboardEvent('" + address + "','" + type + "')";
+			code = "doKeyboardEvent('" + address + "','keypress')";
 			DKDuktape::RunDuktape(code, rval);
-			//DKINFO("rval = " + rval + "\n");
         }
         else {
-            //DKINFO("KeyUp: vkk:" + toString(ker.wVirtualKeyCode) + ", vsc:" + toString(ker.wVirtualScanCode) + "\n");
-            //DKDuktape::doEvent(this, "keyup");
-            DKString address = DKDuktape::pointerToAddress(this);
-            DKString type = "keyup";
-            DKString code = "doKeyboardEvent('" + address + "','" + type + "')";
-            DKString rval;
+            code = "doKeyboardEvent('" + address + "','keyup')";
             DKDuktape::RunDuktape(code, rval);
-            //DKINFO("rval = " + rval + "\n");
         }
     }
 
@@ -145,10 +134,12 @@ void ConsoleInput::Loop() {
     #ifndef MOUSE_HWHEELED
     #define MOUSE_HWHEELED 0x0008
     #endif
+        DKString address = DKDuktape::pointerToAddress(this);
+        DKString rval;
+        DKString code;
 
         switch (mer.dwEventFlags){
 			case 0:
-				//printf("onmousedown\n");
 				
                 // To event.button
                 // 0 = Left button(primary)
@@ -157,66 +148,109 @@ void ConsoleInput::Loop() {
                 // 3 = X1 button(back)
                 // 4 = X2 button(forward)
 
-
                 if (mer.dwButtonState == FROM_LEFT_1ST_BUTTON_PRESSED) {  // 0x0001
                     buttons[0] = true;
+
                     printf("mousedown     button=0\n");
+                    code = "doMouseEvent('" + address + "','mousedown')";
+                    DKDuktape::RunDuktape(code, rval);
                 }
                 else if (buttons[0]) {
                     buttons[0] = false;
+
                     printf("mouseup     button=0\n");
+                    code = "doMouseEvent('" + address + "','mouseup')";
+                    DKDuktape::RunDuktape(code, rval);
+
                     printf("click     button=0\n");
+                    code = "doMouseEvent('" + address + "','click')";
+                    DKDuktape::RunDuktape(code, rval);
                 }
 
                 if (mer.dwButtonState == FROM_LEFT_2ND_BUTTON_PRESSED) {  // 0x0004
                     buttons[1] = true;
+
                     printf("mousedown     button=1\n");
+                    code = "doMouseEvent('" + address + "','mousedown')";
+                    DKDuktape::RunDuktape(code, rval);
                 }
                 else if (buttons[1]) {
                     buttons[1] = false;
+
                     printf("mouseup     button=1\n");
+                    code = "doMouseEvent('" + address + "','mouseup')";
+                    DKDuktape::RunDuktape(code, rval);
                 }
 
                 if (mer.dwButtonState == RIGHTMOST_BUTTON_PRESSED) {      // 0x0002
                     buttons[2] = true;
+
                     printf("mousedown     button=2\n");
+                    code = "doMouseEvent('" + address + "','mousedown')";
+                    DKDuktape::RunDuktape(code, rval);
                 }
                 else if (buttons[2]) {
                     buttons[2] = false;
+
                     printf("mouseup     button=2\n");
+                    code = "doMouseEvent('" + address + "','mouseup')";
+                    DKDuktape::RunDuktape(code, rval);
+
                     printf("contextmenu     button=2\n");
+                    code = "doMouseEvent('" + address + "','contextmenu')";
+                    DKDuktape::RunDuktape(code, rval);
                 }
 
                 if (mer.dwButtonState == FROM_LEFT_3RD_BUTTON_PRESSED) {  // 0x0008
                     buttons[3] = true;
+
                     printf("mousedown     button=3\n");
+                    code = "doMouseEvent('" + address + "','mousedown')";
+                    DKDuktape::RunDuktape(code, rval);
                 }
                 else if (buttons[3]) {
                     buttons[3] = false;
+
                     printf("mouseup     button=3\n");
+                    code = "doMouseEvent('" + address + "','mouseup')";
+                    DKDuktape::RunDuktape(code, rval);
                 }
 
                 if (mer.dwButtonState == FROM_LEFT_4TH_BUTTON_PRESSED) { // 0x0010
                     buttons[4] = true;
+
                     printf("mousedown     button=4\n");
+                    code = "doMouseEvent('" + address + "','mousedown')";
+                    DKDuktape::RunDuktape(code, rval);
                 }
                 else if (buttons[4]) {
                     buttons[4] = false;
+
                     printf("mouseup     button=4\n");
+                    code = "doMouseEvent('" + address + "','mouseup')";
+                    DKDuktape::RunDuktape(code, rval);
                 }
 				break;
 			case DOUBLE_CLICK:
 				printf("ondblclick \n");
+                code = "doMouseEvent('" + address + "','dblclick')";
+                DKDuktape::RunDuktape(code, rval);
 				break;
 			case MOUSE_HWHEELED:
 				printf("horizontal mouse wheel \n");
-				break;
-			case MOUSE_MOVED:
-				printf("onmousemove \n");
+                code = "doWheelEvent('" + address + "','wheel')";
+                DKDuktape::RunDuktape(code, rval);
 				break;
 			case MOUSE_WHEELED:
 				printf("vertical mouse wheel \n");
+                code = "doWheelEvent('" + address + "','wheel')";
+                DKDuktape::RunDuktape(code, rval);
 				break;
+            case MOUSE_MOVED:
+                printf("onmousemove \n");
+                code = "doMouseEvent('" + address + "','mousemove')";
+                DKDuktape::RunDuktape(code, rval);
+                break;
 			default:
 				printf("unknown \n");
 				break;
