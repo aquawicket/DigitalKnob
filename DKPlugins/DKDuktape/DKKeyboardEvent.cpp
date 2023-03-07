@@ -132,7 +132,7 @@ int DKKeyboardEvent::isComposing(duk_context* ctx){
 	}
 	bool isComposing = event->isComposing;
 	duk_push_boolean(ctx, isComposing);
-	return false;
+	return true;
 }
 
 int DKKeyboardEvent::key(duk_context* ctx){
@@ -160,7 +160,7 @@ int DKKeyboardEvent::locale(duk_context* ctx){
 	}
 	DKString locale = event->locale;
 	duk_push_string(ctx, locale.c_str());
-	return false;
+	return true;
 }
 
 int DKKeyboardEvent::location(duk_context* ctx){
@@ -174,7 +174,7 @@ int DKKeyboardEvent::location(duk_context* ctx){
 	}
 	int location = event->location;
 	duk_push_int(ctx, location);
-	return false;
+	return true;
 }
 
 int DKKeyboardEvent::metaKey(duk_context* ctx){
@@ -202,7 +202,7 @@ int DKKeyboardEvent::repeat(duk_context* ctx){
 	}
 	bool repeat = event->repeat;
 	duk_push_boolean(ctx, repeat);
-	return false;
+	return true;
 }
 
 int DKKeyboardEvent::shiftKey(duk_context* ctx){
@@ -233,7 +233,7 @@ int DKKeyboardEvent::getModifierState(duk_context* ctx){
 		return true;
 	}
 	//TODO
-	return false;
+	return true;
 }
 
 
@@ -250,7 +250,7 @@ int DKKeyboardEvent::initKeyEvent(duk_context* ctx){
 		return true;
 	}
 	//TODO
-	return false;
+	return true;
 }
 
 int DKKeyboardEvent::initKeyboardEvent(duk_context* ctx){
@@ -263,7 +263,7 @@ int DKKeyboardEvent::initKeyboardEvent(duk_context* ctx){
 		return true;
 	}
 	//TODO
-	return false;
+	return true;
 }
 
 
@@ -280,7 +280,7 @@ int DKKeyboardEvent::char1(duk_context* ctx){
 		return true;
 	}
 	//TODO
-	return false;
+	return true;
 }
 
 int DKKeyboardEvent::charCode(duk_context* ctx){
@@ -293,7 +293,7 @@ int DKKeyboardEvent::charCode(duk_context* ctx){
 		return true;
 	}
 	//TODO
-	return false;
+	return true;
 }
 
 int DKKeyboardEvent::keyCode(duk_context* ctx){
@@ -306,7 +306,7 @@ int DKKeyboardEvent::keyCode(duk_context* ctx){
 		return true;
 	}
 	// TODO
-	return false;
+	return true;
 }
 
 // Deprecated
@@ -333,7 +333,7 @@ int DKKeyboardEvent::keyLocation(duk_context* ctx){
 		return true;
 	}
 	//TODO
-	return false;
+	return true;
 }
 
 int DKKeyboardEvent::which(duk_context* ctx){
@@ -346,5 +346,5 @@ int DKKeyboardEvent::which(duk_context* ctx){
 		return true;
 	}
 	//TODO
-	return false;
+	return true;
 }

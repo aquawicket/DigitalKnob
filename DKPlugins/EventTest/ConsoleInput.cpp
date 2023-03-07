@@ -146,10 +146,10 @@ void ConsoleInput::KeyEventProc(KEY_EVENT_RECORD ker){
     metaKey = false; //FIXME: todo
 
     // repeat
-    if (ker.wRepeatCount > 0)
+    if (ker.wRepeatCount > 1)
         repeat = true;
     else
-        repeat == false;
+        repeat = false;
 
     // shiftKey
     if (ker.dwControlKeyState & SHIFT_PRESSED)
