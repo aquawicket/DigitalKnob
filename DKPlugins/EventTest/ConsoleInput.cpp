@@ -145,31 +145,81 @@ void ConsoleInput::Loop() {
     #ifndef MOUSE_HWHEELED
     #define MOUSE_HWHEELED 0x0008
     #endif
+
         switch (mer.dwEventFlags){
-        case 0:
-			printf("onmousedown\n");
-            if (mer.dwButtonState == FROM_LEFT_1ST_BUTTON_PRESSED){
-                printf("left button press \n");
-            }
-            else if (mer.dwButtonState == RIGHTMOST_BUTTON_PRESSED){
-                printf("oncontextmenu \n");
-            }
-            break;
-        case DOUBLE_CLICK:
-            printf("ondblclick \n");
-            break;
-        case MOUSE_HWHEELED:
-            printf("horizontal mouse wheel \n");
-            break;
-        case MOUSE_MOVED:
-            printf("onmousemove \n");
-            break;
-        case MOUSE_WHEELED:
-            printf("vertical mouse wheel \n");
-            break;
-        default:
-            printf("unknown \n");
-            break;
+			case 0:
+				//printf("onmousedown\n");
+				
+                // To event.button
+                // 0 = Left button(primary)
+                // 1 = Middle button(auxiliary)
+                // 2 = Right button(secondary)
+                // 3 = X1 button(back)
+                // 4 = X2 button(forward)
+
+
+                if (mer.dwButtonState == FROM_LEFT_1ST_BUTTON_PRESSED) {  // 0x0001
+                    buttons[0] = true;
+                    printf("mousedown     button=0\n");
+                }
+                else if (buttons[0]) {
+                    buttons[0] = false;
+                    printf("mouseup     button=0\n");
+                    printf("click     button=0\n");
+                }
+
+                if (mer.dwButtonState == FROM_LEFT_2ND_BUTTON_PRESSED) {  // 0x0004
+                    buttons[1] = true;
+                    printf("mousedown     button=1\n");
+                }
+                else if (buttons[1]) {
+                    buttons[1] = false;
+                    printf("mouseup     button=1\n");
+                }
+
+                if (mer.dwButtonState == RIGHTMOST_BUTTON_PRESSED) {      // 0x0002
+                    buttons[2] = true;
+                    printf("mousedown     button=2\n");
+                }
+                else if (buttons[2]) {
+                    buttons[2] = false;
+                    printf("mouseup     button=2\n");
+                    printf("contextmenu     button=2\n");
+                }
+
+                if (mer.dwButtonState == FROM_LEFT_3RD_BUTTON_PRESSED) {  // 0x0008
+                    buttons[3] = true;
+                    printf("mousedown     button=3\n");
+                }
+                else if (buttons[3]) {
+                    buttons[3] = false;
+                    printf("mouseup     button=3\n");
+                }
+
+                if (mer.dwButtonState == FROM_LEFT_4TH_BUTTON_PRESSED) { // 0x0010
+                    buttons[4] = true;
+                    printf("mousedown     button=4\n");
+                }
+                else if (buttons[4]) {
+                    buttons[4] = false;
+                    printf("mouseup     button=4\n");
+                }
+				break;
+			case DOUBLE_CLICK:
+				printf("ondblclick \n");
+				break;
+			case MOUSE_HWHEELED:
+				printf("horizontal mouse wheel \n");
+				break;
+			case MOUSE_MOVED:
+				printf("onmousemove \n");
+				break;
+			case MOUSE_WHEELED:
+				printf("vertical mouse wheel \n");
+				break;
+			default:
+				printf("unknown \n");
+				break;
         }
     }
 

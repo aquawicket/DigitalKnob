@@ -45,6 +45,7 @@ public:
 	void Loop();
 	
 #if WIN
+	bool buttons[5];
 	HANDLE hStdin;
 	DWORD fdwSaveOldMode;
 	void ErrorExit(LPCSTR);
