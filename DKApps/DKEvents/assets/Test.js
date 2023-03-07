@@ -75,6 +75,10 @@ function onKeyUp(){
 	console.log("onKeyUp()\n")
 }
 myConsoleInput.addEventListener('keyup', onKeyUp)
+function onKeyPress(){
+	console.log("onKeyPress()\n")
+}
+myConsoleInput.addEventListener('keypress', onKeyPress)
 
 
 

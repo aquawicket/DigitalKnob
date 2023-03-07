@@ -120,6 +120,12 @@ void ConsoleInput::Loop() {
             DKString rval;
             DKDuktape::RunDuktape(code, rval);
             //DKINFO("rval = " + rval + "\n");
+			
+			//FIXME: this should only fire on alphanumeric keys.  
+			type = "keypress";
+			code = "doKeyboardEvent('" + address + "','" + type + "')";
+			DKDuktape::RunDuktape(code, rval);
+			//DKINFO("rval = " + rval + "\n");
         }
         else {
             //DKINFO("KeyUp: vkk:" + toString(ker.wVirtualKeyCode) + ", vsc:" + toString(ker.wVirtualScanCode) + "\n");
