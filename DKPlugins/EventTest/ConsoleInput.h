@@ -47,8 +47,16 @@ public:
 #if WIN
 	// Keyboard
 	bool altKey;
+	DKString code;
+	bool ctrlKey;
+	bool isComposing;
 	char key;
-
+	DKString locale;
+	unsigned int location;
+	bool metaKey;
+	bool repeat;
+	bool shiftKey;
+	
 	// Mouse
 	unsigned int button;
 	bool buttons[5];

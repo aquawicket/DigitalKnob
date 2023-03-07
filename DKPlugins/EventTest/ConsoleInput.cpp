@@ -115,12 +115,47 @@ void ConsoleInput::KeyEventProc(KEY_EVENT_RECORD ker){
     DKString rval;
     DKString code;
 
+    // altKey
     if (ker.dwControlKeyState & RIGHT_ALT_PRESSED || ker.dwControlKeyState & LEFT_ALT_PRESSED)
         altKey = true;
     else
         altKey = false;
 
+    // code
+    code = "todo";
+
+    // ctrlKey
+    if (ker.dwControlKeyState & RIGHT_CTRL_PRESSED || ker.dwControlKeyState & LEFT_CTRL_PRESSED)
+        ctrlKey = true;
+    else
+        ctrlKey = false;
+
+    // isComposing
+    isComposing = false; //FIXME: todo
+
+    // key
     key = ker.uChar.AsciiChar;
+
+    // locale
+    locale = "todo";
+
+    // location
+    location = 0; //FIXME: todo
+
+    // metaKey
+    metaKey = false; //FIXME: todo
+
+    // repeat
+    if (ker.wRepeatCount > 0)
+        repeat = true;
+    else
+        repeat == false;
+
+    // shiftKey
+    if (ker.dwControlKeyState & SHIFT_PRESSED)
+        shiftKey = true;
+    else
+        shiftKey = false;
 
     if (ker.bKeyDown) {
         code = "doKeyboardEvent('keydown','','" + address + "')";

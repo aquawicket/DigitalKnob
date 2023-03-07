@@ -62,12 +62,12 @@ function onKeyDown(event){
 	console.log("onKeyDown() event.code="+event.code)
 	console.log("onKeyDown() event.ctrlKey="+event.ctrlKey)
 	console.log("onKeyDown() event.isComposing="+event.isComposing)
+	console.log("onKeyDown() event.key="+event.key)
 	console.log("onKeyDown() event.locale="+event.locale)
 	console.log("onKeyDown() event.location="+event.location)
 	console.log("onKeyDown() event.metaKey="+event.metaKey)
 	console.log("onKeyDown() event.repeat="+event.repeat)
 	console.log("onKeyDown() event.shiftKey="+event.shiftKey)
-	console.log("onKeyDown() event.key="+event.key)
 }
 myConsoleInput.addEventListener('keydown', onKeyDown)
 function onKeyUp(event){
