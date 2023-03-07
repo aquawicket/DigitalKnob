@@ -115,7 +115,13 @@ void ConsoleInput::KeyEventProc(KEY_EVENT_RECORD ker){
     DKString rval;
     DKString code;
 
+    if (ker.dwControlKeyState & RIGHT_ALT_PRESSED || ker.dwControlKeyState & LEFT_ALT_PRESSED)
+        altKey = true;
+    else
+        altKey = false;
+
     key = ker.uChar.AsciiChar;
+
     if (ker.bKeyDown) {
         code = "doKeyboardEvent('keydown','','" + address + "')";
         DKDuktape::RunDuktape(code, rval);

@@ -58,6 +58,8 @@ const myConsoleInput = new ConsoleInput('myConsoleInput')
 
 // Keyboard events
 function onKeyDown(event){
+	console.log("\n")
+	console.log("onKeyDown() event.altKey="+event.altKey)
 	console.log("onKeyDown() event.key="+event.key)
 }
 myConsoleInput.addEventListener('keydown', onKeyDown)

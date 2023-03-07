@@ -82,13 +82,14 @@ bool DKKeyboardEvent::Init(){
 int DKKeyboardEvent::altKey(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	DKEvents* event = (DKEvents*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleInput* event = (ConsoleInput*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	//TODO
+	bool altKey = event->altKey;
+	duk_push_boolean(ctx, altKey);
 	return true;
 }
 

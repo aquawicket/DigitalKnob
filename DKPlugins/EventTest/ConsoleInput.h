@@ -46,6 +46,7 @@ public:
 	
 #if WIN
 	// Keyboard
+	bool altKey;
 	char key;
 
 	// Mouse
