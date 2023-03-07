@@ -39,7 +39,7 @@ var EventTarget = function EventTarget(pointer) {
                 //Do not allow duplicate entries
                 this.listeners[type].push(callback);
             }
-            CPP_DKEventTarget_addEventListener(pointer, type, callback);
+            //CPP_DKEventTarget_addEventListener(pointer, type, callback);
             //Add or overwrite the event in RmlUi
         }
     });
@@ -54,7 +54,7 @@ var EventTarget = function EventTarget(pointer) {
                     //console.log(stack[i]);
                     stack.splice(i, 1);
                     this.listeners[type].splice(i, 1);
-                    CPP_DKEventTarget_removeEventListener(pointer, type, callback);
+                    //CPP_DKEventTarget_removeEventListener(pointer, type, callback);
                     //Remove the event in RmlUi
                     return;
                 }
