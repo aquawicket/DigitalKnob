@@ -67,6 +67,7 @@ const myConsoleInput = new ConsoleInput('myConsoleInput')
 //console.log("myConsoleInput.test() = "+myConsoleInput.test())
 //console.log("\n")
 
+// keyboard events
 function onKeyDown(){
 	console.log("onKeyDown()\n")
 }
@@ -80,6 +81,47 @@ function onKeyPress(){
 }
 myConsoleInput.addEventListener('keypress', onKeyPress)
 
+// mouse events
+function onClick(){
+	console.log("onClick()\n")
+}
+myConsoleInput.addEventListener('click', onClick)
+function onContextMenu(){
+	console.log("onContextMenu()\n")
+}
+myConsoleInput.addEventListener('contextmenu', onContextMenu)
+function onDblclick(){
+	console.log("onDblclick()\n")
+}
+myConsoleInput.addEventListener('dblclick', onDblclick)
+function onMouseDown(){
+	console.log("onMouseDown()\n")
+}
+myConsoleInput.addEventListener('mousedown', onMouseDown)
+function onMouseEnter(){
+	console.log("onMouseEnter()\n")
+}
+myConsoleInput.addEventListener('mouseenter', onMouseEnter)
+function onMouseLeave(){
+	console.log("onMouseLeave()\n")
+}
+myConsoleInput.addEventListener('mouseleave', onMouseLeave)
+function onMouseMove(){
+	console.log("onMouseMove()\n")
+}
+myConsoleInput.addEventListener('mousemove', onMouseMove)
+function onMouseOut(){
+	console.log("onMouseOut()\n")
+}
+myConsoleInput.addEventListener('mouseout', onMouseOut)
+function onMouseOver(){
+	console.log("onMouseOver()\n")
+}
+myConsoleInput.addEventListener('mouseover', onMouseOver)
+function onMouseUp(){
+	console.log("onMouseUp()\n")
+}
+myConsoleInput.addEventListener('mouseup', onMouseUp)
 
 
 /////////// NcursesInput //////////////////
