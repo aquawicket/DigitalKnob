@@ -251,7 +251,7 @@ void ConsoleInput::ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD wbsr){
     DKString rval;
     DKString code;
 	
-	DKINFO("resize     columns="+wbsr.dwSize.X+", rows="+wbsr.dwSize.Y+" \n");
+	DKINFO("resize     columns="+toString(wbsr.dwSize.X)+", rows="+toString(wbsr.dwSize.Y)+" \n");
 	code = "doMouseEvent('" + address + "','resize')";
     DKDuktape::RunDuktape(code, rval);
 }

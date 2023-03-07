@@ -7,7 +7,7 @@ console.log("/////////// JSObject /////////////////////")
 CPP_DK_Create("EventTest/JSObject.js");
 const myJSObject = new JSObject('myJSObject')
 
-function myJSCallback(){
+function myJSCallback(event){
 	console.log("myJSCallback()\n")
 }
 myJSObject.addEventListener('myJSEvent', myJSCallback)
@@ -32,14 +32,14 @@ myCPPObject.addEventListener('myCPPEvent', myCPPCallback)
 //myCPPObject.dispatchEvent(myCPPEvent);
 //myCPPObject.removeEventListener('myCPPEvent', myCPPCallback)
 //myCPPObject.dispatchEvent(myCPPEvent);
-function myCPPObject_onmessage(){
+function myCPPObject_onmessage(event){
 	console.log("myCPPObject_onmessage()\n")
 }
 myCPPObject.onmessage = myCPPObject_onmessage;
 const myCPPEvent_onmessage = new Event('message')
 myCPPObject.dispatchEvent(myCPPEvent_onmessage);
 
-function myCPPObject_ontest(){
+function myCPPObject_ontest(event){
 	console.log("myCPPObject_ontest()\n")
 }
 myCPPObject.ontest = myCPPObject_ontest;
@@ -57,63 +57,63 @@ CPP_DK_Create("EventTest/ConsoleInput.js");
 const myConsoleInput = new ConsoleInput('myConsoleInput')
 
 // Keyboard events
-function onKeyDown(){
-	console.log("onKeyDown()\n")
+function onKeyDown(event){
+	console.log("onKeyDown() event.key="+event.key)
 }
 myConsoleInput.addEventListener('keydown', onKeyDown)
-function onKeyUp(){
+function onKeyUp(event){
 	console.log("onKeyUp()\n")
 }
 myConsoleInput.addEventListener('keyup', onKeyUp)
-function onKeyPress(){
+function onKeyPress(event){
 	console.log("onKeyPress()\n")
 }
 myConsoleInput.addEventListener('keypress', onKeyPress)
 
 // Mouse events
-function onClick(){
+function onClick(event){
 	console.log("onClick()\n")
 }
 myConsoleInput.addEventListener('click', onClick)
-function onContextMenu(){
+function onContextMenu(event){
 	console.log("onContextMenu()\n")
 }
 myConsoleInput.addEventListener('contextmenu', onContextMenu)
-function onDblclick(){
+function onDblclick(event){
 	console.log("onDblclick()\n")
 }
 myConsoleInput.addEventListener('dblclick', onDblclick)
-function onMouseDown(){
+function onMouseDown(event){
 	console.log("onMouseDown()\n")
 }
 myConsoleInput.addEventListener('mousedown', onMouseDown)
-function onMouseEnter(){
+function onMouseEnter(event){
 	console.log("onMouseEnter()\n")
 }
 myConsoleInput.addEventListener('mouseenter', onMouseEnter)
-function onMouseLeave(){
+function onMouseLeave(event){
 	console.log("onMouseLeave()\n")
 }
 myConsoleInput.addEventListener('mouseleave', onMouseLeave)
-function onMouseMove(){
+function onMouseMove(event){
 	console.log("onMouseMove()\n")
 }
 myConsoleInput.addEventListener('mousemove', onMouseMove)
-function onMouseOut(){
+function onMouseOut(event){
 	console.log("onMouseOut()\n")
 }
 myConsoleInput.addEventListener('mouseout', onMouseOut)
-function onMouseOver(){
+function onMouseOver(event){
 	console.log("onMouseOver()\n")
 }
 myConsoleInput.addEventListener('mouseover', onMouseOver)
-function onMouseUp(){
+function onMouseUp(event){
 	console.log("onMouseUp()\n")
 }
 myConsoleInput.addEventListener('mouseup', onMouseUp)
 
 // Resize events
-function onResize(){
+function onResize(event){
 	console.log("onResize()\n")
 }
 myConsoleInput.addEventListener('resize', onResize)
@@ -125,63 +125,63 @@ CPP_DK_Create("EventTest/NcursesInput.js");
 const myNcursesInput = new NcursesInput('myNcursesInput')
 
 // Keyboard events
-function onKeyDown(){
-	console.log("onKeyDown()\n")
+function onKeyDown(event){
+	console.log("onKeyDown() event.key="+event.key)
 }
 myNcursesInput.addEventListener('keydown', onKeyDown)
-function onKeyUp(){
+function onKeyUp(event){
 	console.log("onKeyUp()\n")
 }
 myNcursesInput.addEventListener('keyup', onKeyUp)
-function onKeyPress(){
+function onKeyPress(event){
 	console.log("onKeyPress()\n")
 }
 myNcursesInput.addEventListener('keypress', onKeyPress)
 
 // Mouse events
-function onClick(){
+function onClick(event){
 	console.log("onClick()\n")
 }
 myNcursesInput.addEventListener('click', onClick)
-function onContextMenu(){
+function onContextMenu(event){
 	console.log("onContextMenu()\n")
 }
 myNcursesInput.addEventListener('contextmenu', onContextMenu)
-function onDblclick(){
+function onDblclick(event){
 	console.log("onDblclick()\n")
 }
 myNcursesInput.addEventListener('dblclick', onDblclick)
-function onMouseDown(){
+function onMouseDown(event){
 	console.log("onMouseDown()\n")
 }
 myNcursesInput.addEventListener('mousedown', onMouseDown)
-function onMouseEnter(){
+function onMouseEnter(event){
 	console.log("onMouseEnter()\n")
 }
 myNcursesInput.addEventListener('mouseenter', onMouseEnter)
-function onMouseLeave(){
+function onMouseLeave(event){
 	console.log("onMouseLeave()\n")
 }
 myNcursesInput.addEventListener('mouseleave', onMouseLeave)
-function onMouseMove(){
+function onMouseMove(event){
 	console.log("onMouseMove()\n")
 }
 myNcursesInput.addEventListener('mousemove', onMouseMove)
-function onMouseOut(){
+function onMouseOut(event){
 	console.log("onMouseOut()\n")
 }
 myNcursesInput.addEventListener('mouseout', onMouseOut)
-function onMouseOver(){
+function onMouseOver(event){
 	console.log("onMouseOver()\n")
 }
 myNcursesInput.addEventListener('mouseover', onMouseOver)
-function onMouseUp(){
+function onMouseUp(event){
 	console.log("onMouseUp()\n")
 }
 myNcursesInput.addEventListener('mouseup', onMouseUp)
 
 // Resize events
-function onResize(){
+function onResize(event){
 	console.log("onResize()\n")
 }
 myNcursesInput.addEventListener('resize', onResize)
