@@ -88,8 +88,6 @@ int DKKeyboardEvent::altKey(duk_context* ctx){
 		return true;
 	}
 	//TODO
-	//int altKey = "undefined"
-	//duk_push_boolean(ctx, altKey);
 	return true;
 }
 
