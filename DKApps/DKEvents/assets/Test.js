@@ -2,7 +2,6 @@
 console.log("\n\n ___Event Test___\n");
 
 
-
 ///////////////////// JSObject ////////////////////////
 console.log("/////////// JSObject /////////////////////")
 CPP_DK_Create("EventTest/JSObject.js");
@@ -113,6 +112,12 @@ function onMouseUp(){
 }
 myConsoleInput.addEventListener('mouseup', onMouseUp)
 
+// Resize events
+function onResize(){
+	console.log("onResize()\n")
+}
+myConsoleInput.addEventListener('resize', onResize)
+
 
 ///////////////////// NcursesInput ////////////////////////
 console.log("/////////// NcursesInput /////////////////////")
@@ -174,3 +179,9 @@ function onMouseUp(){
 	console.log("onMouseUp()\n")
 }
 myNcursesInput.addEventListener('mouseup', onMouseUp)
+
+// Resize events
+function onResize(){
+	console.log("onResize()\n")
+}
+myNcursesInput.addEventListener('resize', onResize)
