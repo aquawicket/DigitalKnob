@@ -33,6 +33,7 @@
 #include "DKDuktape/DKEventTarget.h"
 #include "DKDuktape/DKKeyboardEvent.h"
 #include "DKDuktape/DKKeyCodes.h"
+#include "EventTest/ConsoleInput.h"
 
 
 void mapKeys();
@@ -139,14 +140,13 @@ int DKKeyboardEvent::isComposing(duk_context* ctx){
 int DKKeyboardEvent::key(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	DKEvents* event = (DKEvents*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleInput* event = (ConsoleInput*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	Key key_identifier = (Key)std::stoi(event->data[0]);
-	DKString key = DKKeyCodes::keys[key_identifier].key;
+	DKString key = toString(event->key);
 	duk_push_string(ctx, key.c_str());
 	return true;
 }

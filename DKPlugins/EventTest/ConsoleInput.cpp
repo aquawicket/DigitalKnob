@@ -114,18 +114,20 @@ void ConsoleInput::KeyEventProc(KEY_EVENT_RECORD ker){
     DKString address = DKDuktape::pointerToAddress(this);
     DKString rval;
     DKString code;
+
+    key = ker.uChar.AsciiChar;
     if (ker.bKeyDown) {
-        code = "doKeyboardEvent('" + address + "','keydown')";
+        code = "doKeyboardEvent('keydown','','" + address + "')";
         DKDuktape::RunDuktape(code, rval);
 
 		//Only fire keypress on alphanumeric keys.
         if (ker.uChar.AsciiChar < 32)
             return;
-		code = "doKeyboardEvent('" + address + "','keypress')";
+		code = "doKeyboardEvent('keypress','','" + address + "')";
 		DKDuktape::RunDuktape(code, rval);
     }
     else {
-        code = "doKeyboardEvent('" + address + "','keyup')";
+        code = "doKeyboardEvent('keyup','','" + address + "')";
         DKDuktape::RunDuktape(code, rval);
     }
 }

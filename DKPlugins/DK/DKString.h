@@ -76,6 +76,7 @@ DKString toString(const unsigned long int& _ulongint);
 DKString toString(const unsigned long long int& _ulonglongint);
 
 DKString toString(const bool _bool);
+DKString toString(const char _char);
 DKString toString(const char* _charptr);
 DKString toString(const unsigned char* _uchar);
 DKString toString(void* _voidptr);

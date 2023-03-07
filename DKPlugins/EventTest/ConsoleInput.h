@@ -45,6 +45,10 @@ public:
 	void Loop();
 	
 #if WIN
+	// Keyboard
+	char key;
+
+	// Mouse
 	unsigned int button;
 	bool buttons[5];
 	HANDLE hStdin;

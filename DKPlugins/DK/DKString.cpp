@@ -165,6 +165,11 @@ DKString toString(const bool _bool){
 	return "false";
 }
 
+DKString toString(const char _char) {
+	//DKDEBUGFUNC(_char);
+	return std::string(1, _char);
+}
+
 DKString toString(const char* _charptr) {
 	//DKDEBUGFUNC(_charptr);
 	return _charptr;

@@ -177,7 +177,7 @@ MouseEvent.prototype = UIEvent.prototype
 
 /////////////////////////////////////////////////
 function doMouseEvent(_type, _options, _pointer){
-	console.log("doMouseEvent("+_type+","+_options+","+_pointer+")")
+	//console.log("doMouseEvent("+_type+","+_options+","+_pointer+")")
 	const event = new MouseEvent(_type, _options, _pointer)
 	event.target = new EventTarget(_pointer)
 	event.target.dispatchEvent(event)
