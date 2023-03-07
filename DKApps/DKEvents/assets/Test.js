@@ -3,14 +3,11 @@ console.log("\n\n ___Event Test___\n");
 
 
 
-/////////// JSObject /////////////////////
+///////////////////// JSObject ////////////////////////
 console.log("/////////// JSObject /////////////////////")
 CPP_DK_Create("EventTest/JSObject.js");
 const myJSObject = new JSObject('myJSObject')
-//console.log("myJSObject = "+myJSObject)
-//console.log("myJSObject.value = "+myJSObject.value)
-//console.log("myJSObject.test() = "+myJSObject.test())
-//console.log("\n")
+
 function myJSCallback(){
 	console.log("myJSCallback()\n")
 }
@@ -23,14 +20,11 @@ console.log("\n")
 
 
 
-/////////// CPPObject /////////////////////
+///////////////////// CPPObject ////////////////////////
 console.log("/////////// CPPObject /////////////////////")
 CPP_DK_Create("EventTest/CPPObject.js");
 const myCPPObject = new CPPObject('myCPPObject')
-//console.log("myCPPObject = "+myCPPObject)
-//console.log("myCPPObject.value = "+myCPPObject.value)
-//console.log("myCPPObject.test() = "+myCPPObject.test())
-//console.log("\n")
+
 function myCPPCallback(){
 	console.log("myCPPCallback()\n")
 }
@@ -58,16 +52,12 @@ console.log("\n")
 
 
 
-/////////// ConsoleInput //////////////////
+/////////////////// ConsoleInput //////////////////////////
 console.log("/////////// ConsoleInput /////////////////////")
 CPP_DK_Create("EventTest/ConsoleInput.js");
 const myConsoleInput = new ConsoleInput('myConsoleInput')
-//console.log("myConsoleInput = "+myConsoleInput)
-//console.log("myConsoleInput.value = "+myConsoleInput.value)
-//console.log("myConsoleInput.test() = "+myConsoleInput.test())
-//console.log("\n")
 
-// keyboard events
+// Keyboard events
 function onKeyDown(){
 	console.log("onKeyDown()\n")
 }
@@ -81,7 +71,7 @@ function onKeyPress(){
 }
 myConsoleInput.addEventListener('keypress', onKeyPress)
 
-// mouse events
+// Mouse events
 function onClick(){
 	console.log("onClick()\n")
 }
@@ -124,15 +114,12 @@ function onMouseUp(){
 myConsoleInput.addEventListener('mouseup', onMouseUp)
 
 
-/////////// NcursesInput //////////////////
+///////////////////// NcursesInput ////////////////////////
 console.log("/////////// NcursesInput /////////////////////")
 CPP_DK_Create("EventTest/NcursesInput.js");
 const myNcursesInput = new NcursesInput('myNcursesInput')
-//console.log("myNcursesInput = "+myNcursesInput)
-//console.log("myNcursesInput.value = "+myNcursesInput.value)
-//console.log("myNcursesInput.test() = "+myNcursesInput.test())
-//console.log("\n")
 
+// Keyboard events
 function onKeyDown(){
 	console.log("onKeyDown()\n")
 }
@@ -141,3 +128,49 @@ function onKeyUp(){
 	console.log("onKeyUp()\n")
 }
 myNcursesInput.addEventListener('keyup', onKeyUp)
+function onKeyPress(){
+	console.log("onKeyPress()\n")
+}
+myNcursesInput.addEventListener('keypress', onKeyPress)
+
+// Mouse events
+function onClick(){
+	console.log("onClick()\n")
+}
+myNcursesInput.addEventListener('click', onClick)
+function onContextMenu(){
+	console.log("onContextMenu()\n")
+}
+myNcursesInput.addEventListener('contextmenu', onContextMenu)
+function onDblclick(){
+	console.log("onDblclick()\n")
+}
+myNcursesInput.addEventListener('dblclick', onDblclick)
+function onMouseDown(){
+	console.log("onMouseDown()\n")
+}
+myNcursesInput.addEventListener('mousedown', onMouseDown)
+function onMouseEnter(){
+	console.log("onMouseEnter()\n")
+}
+myNcursesInput.addEventListener('mouseenter', onMouseEnter)
+function onMouseLeave(){
+	console.log("onMouseLeave()\n")
+}
+myNcursesInput.addEventListener('mouseleave', onMouseLeave)
+function onMouseMove(){
+	console.log("onMouseMove()\n")
+}
+myNcursesInput.addEventListener('mousemove', onMouseMove)
+function onMouseOut(){
+	console.log("onMouseOut()\n")
+}
+myNcursesInput.addEventListener('mouseout', onMouseOut)
+function onMouseOver(){
+	console.log("onMouseOver()\n")
+}
+myNcursesInput.addEventListener('mouseover', onMouseOver)
+function onMouseUp(){
+	console.log("onMouseUp()\n")
+}
+myNcursesInput.addEventListener('mouseup', onMouseUp)
