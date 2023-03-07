@@ -148,12 +148,14 @@ void ConsoleInput::MouseEventProc(MOUSE_EVENT_RECORD mer){
             // 4 = X2 button(forward)
 
             if (mer.dwButtonState == FROM_LEFT_1ST_BUTTON_PRESSED) {  // 0x0001
+                button = 0;
                 buttons[0] = true;
                 //DKINFO("mousedown     button=0\n");
                 code = "doMouseEvent('" + address + "','mousedown')";
                 DKDuktape::RunDuktape(code, rval);
             }
             else if (buttons[0]) {
+                button = 0;
                 buttons[0] = false;
                 //DKINFO("mouseup     button=0\n");
                 code = "doMouseEvent('" + address + "','mouseup')";
@@ -165,12 +167,14 @@ void ConsoleInput::MouseEventProc(MOUSE_EVENT_RECORD mer){
             }
 
             if (mer.dwButtonState == FROM_LEFT_2ND_BUTTON_PRESSED) {  // 0x0004
+                button = 1;
                 buttons[1] = true;
                 //DKINFO("mousedown     button=1\n");
                 code = "doMouseEvent('" + address + "','mousedown')";
                 DKDuktape::RunDuktape(code, rval);
             }
             else if (buttons[1]) {
+                button = 1;
                 buttons[1] = false;
                 //DKINFO("mouseup     button=1\n");
                 code = "doMouseEvent('" + address + "','mouseup')";
@@ -178,12 +182,14 @@ void ConsoleInput::MouseEventProc(MOUSE_EVENT_RECORD mer){
             }
 
             if (mer.dwButtonState == RIGHTMOST_BUTTON_PRESSED) {      // 0x0002
+                button = 2;
                 buttons[2] = true;
                 //DKINFO("mousedown     button=2\n");
                 code = "doMouseEvent('" + address + "','mousedown')";
                 DKDuktape::RunDuktape(code, rval);
             }
             else if (buttons[2]) {
+                button = 2;
                 buttons[2] = false;
                 //DKINFO("mouseup     button=2\n");
                 code = "doMouseEvent('" + address + "','mouseup')";
@@ -195,12 +201,14 @@ void ConsoleInput::MouseEventProc(MOUSE_EVENT_RECORD mer){
             }
 
             if (mer.dwButtonState == FROM_LEFT_3RD_BUTTON_PRESSED) {  // 0x0008
+                button = 3;
                 buttons[3] = true;
                 //DKINFO("mousedown     button=3\n");
                 code = "doMouseEvent('" + address + "','mousedown')";
                 DKDuktape::RunDuktape(code, rval);
             }
             else if (buttons[3]) {
+                button = 3;
                 buttons[3] = false;
                 //DKINFO("mouseup     button=3\n");
                 code = "doMouseEvent('" + address + "','mouseup')";
@@ -208,12 +216,14 @@ void ConsoleInput::MouseEventProc(MOUSE_EVENT_RECORD mer){
             }
 
             if (mer.dwButtonState == FROM_LEFT_4TH_BUTTON_PRESSED) { // 0x0010
+                button = 4;
                 buttons[4] = true;
                 //DKINFO("mousedown     button=4\n");
                 code = "doMouseEvent('" + address + "','mousedown')";
                 DKDuktape::RunDuktape(code, rval);
             }
             else if (buttons[4]) {
+                button = 4;
                 buttons[4] = false;
                 //DKINFO("mouseup     button=4\n");
                 code = "doMouseEvent('" + address + "','mouseup')";

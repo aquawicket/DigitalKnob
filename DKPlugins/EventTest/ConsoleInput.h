@@ -45,6 +45,7 @@ public:
 	void Loop();
 	
 #if WIN
+	unsigned int button;
 	bool buttons[5];
 	HANDLE hStdin;
 	DWORD fdwSaveOldMode;
