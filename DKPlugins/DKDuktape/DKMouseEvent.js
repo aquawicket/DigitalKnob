@@ -1,6 +1,6 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent
 
-var MouseEvent = function(pointer) {
+var MouseEvent = function(pointer, type) {
     // Properties
     Object.defineProperty(this, "altKey", {
         //Read only
@@ -169,7 +169,7 @@ MouseEvent.prototype = UIEvent.prototype
 /////////////////////////////////////
 function doMouseEvent(address, type){
 	console.log("doMouseEvent("+address+","+type+")")
-	const event = new MouseEvent(type)
+	const event = new MouseEvent(address, type)
 	event.target = new EventTarget(address)
 	event.target.dispatchEvent(event)
 }
