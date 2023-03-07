@@ -77,7 +77,7 @@ int DKMouseEvent::altKey(duk_context* ctx){
 	if (!event) {
 		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
-		return true && DKDEBUGRETURN(ctx, false);
+		return true;
 	}
 	//TODO
 	return true;
@@ -89,7 +89,7 @@ int DKMouseEvent::button(duk_context* ctx){
 	if (!event) {
 		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
-		return true && DKDEBUGRETURN(ctx, false);
+		return true;
 	}
 	//TODO
 	return true;
