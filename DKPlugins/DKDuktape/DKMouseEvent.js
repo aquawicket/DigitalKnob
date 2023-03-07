@@ -1,7 +1,7 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent
 
-var MouseEvent = function(pointer, type) {
-	console.log("MouseEvent("+pointer+","+type+")")
+var MouseEvent = function(type, options, pointer) {
+	console.log("MouseEvent("+type+","+options+","+pointer+")")
     // Properties
     Object.defineProperty(this, "altKey", {
         //Read only
@@ -12,7 +12,7 @@ var MouseEvent = function(pointer, type) {
     Object.defineProperty(this, "button", {
         //Read only
         get: function button() {
-            return CPP_DKMouseEvent_button(type)
+            return CPP_DKMouseEvent_button(pointer)
         }
     })
     Object.defineProperty(this, "buttons", {
@@ -163,14 +163,14 @@ var MouseEvent = function(pointer, type) {
 		}
 	}
 	
-    return UIEvent.call(this, pointer)
+    return UIEvent.call(this, type, options)
 }
 MouseEvent.prototype = UIEvent.prototype
 
 /////////////////////////////////////
 function doMouseEvent(pointer, type){
 	console.log("doMouseEvent("+pointer+","+type+")")
-	const event = new MouseEvent(type, pointer)
+	const event = new MouseEvent(type, "", pointer)
 	event.target = new EventTarget(pointer)
 	event.target.dispatchEvent(event)
 }

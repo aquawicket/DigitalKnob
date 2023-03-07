@@ -86,14 +86,12 @@ int DKMouseEvent::altKey(duk_context* ctx){
 
 int DKMouseEvent::button(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
-	//DKEvents* event = (DKEvents*)DKDuktape::addressToPointer(eventAddress);
 	ConsoleInput* event = (ConsoleInput*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	//TODO
 	unsigned int button = event->button;
 	duk_push_uint(ctx, button);
 	return true;
