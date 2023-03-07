@@ -121,7 +121,9 @@ void ConsoleInput::Loop() {
             DKDuktape::RunDuktape(code, rval);
             //DKINFO("rval = " + rval + "\n");
 			
-			//FIXME: this should only fire on alphanumeric keys.  
+			//Only fire keypress on alphanumeric keys.
+            if (ker.uChar.AsciiChar < 32)
+                return;
 			type = "keypress";
 			code = "doKeyboardEvent('" + address + "','" + type + "')";
 			DKDuktape::RunDuktape(code, rval);
