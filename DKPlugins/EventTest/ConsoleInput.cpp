@@ -145,33 +145,30 @@ void ConsoleInput::Loop() {
     #ifndef MOUSE_HWHEELED
     #define MOUSE_HWHEELED 0x0008
     #endif
-        printf("Mouse event: ");
         switch (mer.dwEventFlags){
         case 0:
+			printf("onmousedown\n");
             if (mer.dwButtonState == FROM_LEFT_1ST_BUTTON_PRESSED){
                 printf("left button press \n");
             }
             else if (mer.dwButtonState == RIGHTMOST_BUTTON_PRESSED){
-                printf("right button press \n");
-            }
-            else{
-                printf("button press\n");
+                printf("oncontextmenu \n");
             }
             break;
         case DOUBLE_CLICK:
-            printf("double click\n");
+            printf("ondblclick \n");
             break;
         case MOUSE_HWHEELED:
-            printf("horizontal mouse wheel\n");
+            printf("horizontal mouse wheel \n");
             break;
         case MOUSE_MOVED:
-            printf("mouse moved\n");
+            printf("onmousemove \n");
             break;
         case MOUSE_WHEELED:
-            printf("vertical mouse wheel\n");
+            printf("vertical mouse wheel \n");
             break;
         default:
-            printf("unknown\n");
+            printf("unknown \n");
             break;
         }
     }
