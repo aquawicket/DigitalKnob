@@ -46,6 +46,18 @@ var MouseEvent = function(_type, _options, _pointer) {
             return CPP_DKMouseEvent_ctrlKey(_pointer)
         }
     })
+	Object.defineProperty(this, "layerX", {
+        //Read only
+        get: function layerX() {
+            return CPP_DKMouseEvent_layerX(_pointer)
+        }
+    })
+	Object.defineProperty(this, "layerY", {
+        //Read only
+        get: function layerY() {
+            return CPP_DKMouseEvent_layerY(_pointer)
+        }
+    })
     Object.defineProperty(this, "metaKey", {
         //Read only
         get: function metaKey() {
@@ -88,12 +100,14 @@ var MouseEvent = function(_type, _options, _pointer) {
             return CPP_DKMouseEvent_pageY(_pointer)
         }
     })
+	/*
     Object.defineProperty(this, "region", {
         //Read only
         get: function region() {
-            return CPP_DKMouseEvent_pageX(_pointer)
+            return CPP_DKMouseEvent_region(_pointer)
         }
     })
+	*/
     Object.defineProperty(this, "relatedTarget", {
         //Read only
         get: function relatedTarget() {
@@ -118,16 +132,10 @@ var MouseEvent = function(_type, _options, _pointer) {
             return CPP_DKMouseEvent_shiftKey(_pointer)
         }
     })
-    Object.defineProperty(this, "which", {
-        //Read only
-        get: function which() {
-            return CPP_DKMouseEvent_which(_pointer)
-        }
-    })
     Object.defineProperty(this, "moxPressure", {
         //Read only,
         get: function moxPressure() {
-            return CPP_DKMouseEvent_pageX(_pointer)
+            return CPP_DKMouseEvent_moxPressure(_pointer)
         }
     })
     Object.defineProperty(this, "mozInputSource", {
@@ -142,6 +150,14 @@ var MouseEvent = function(_type, _options, _pointer) {
             return CPP_DKMouseEvent_webkitForce(_pointer)
         }
     })
+	/*
+	Object.defineProperty(this, "which", {
+        //Read only
+        get: function which() {
+            return CPP_DKMouseEvent_which(_pointer)
+        }
+    })
+	*/
     Object.defineProperty(this, "x", {
         //Read only
         get: function x() {

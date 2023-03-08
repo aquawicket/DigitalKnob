@@ -96,7 +96,7 @@ function printMouseEventProperties(event){
 	console.log("event.ctrlKey="+event.ctrlKey)
 	console.log("event.layerX="+event.layerX)
 	console.log("event.layerY="+event.layerY)
-	console.log("event.detail="+event.detail)
+	//console.log("event.detail="+event.detail)
 	console.log("event.metaKey="+event.metaKey)
 	console.log("event.movementX="+event.movementX)
 	console.log("event.movementY="+event.movementY)
@@ -111,9 +111,9 @@ function printMouseEventProperties(event){
 	console.log("event.mozPressure="+event.mozPressure)
 	console.log("event.mozInputSource="+event.mozInputSource)
 	console.log("event.webkitForce="+event.webkitForce)
+	//console.log("event.which="+event.which)
 	console.log("event.x="+event.x)
 	console.log("event.y="+event.y)
-	console.log("event.which="+event.which)
 }
 
 function onClick(event){
