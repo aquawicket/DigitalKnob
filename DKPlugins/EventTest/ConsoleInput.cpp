@@ -52,7 +52,7 @@ bool ConsoleInput::Init(){
 	code = "";
 	ctrlKey = false;
 	isComposing = false;
-	key = '';
+	key = ' ';
 	locale = "";
 	location = 0;
 	metaKey = false;
