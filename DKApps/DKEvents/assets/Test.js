@@ -57,73 +57,111 @@ CPP_DK_Create("EventTest/ConsoleInput.js");
 const myConsoleInput = new ConsoleInput('myConsoleInput')
 
 // Keyboard events
+function printKeyboardEventProperties(event){
+	console.log("event.altKey="+event.altKey)
+	console.log("event.code="+event.code)				//TODO
+	console.log("event.ctrlKey="+event.ctrlKey)
+	console.log("event.isComposing="+event.isComposing)	//TODO
+	console.log("event.key="+event.key)
+	console.log("event.locale="+event.locale)			//TODO
+	console.log("event.location="+event.location)		//TODO
+	console.log("event.metaKey="+event.metaKey)			//TODO
+	console.log("event.repeat="+event.repeat)
+	console.log("event.shiftKey="+event.shiftKey)
+}
+
 function onKeyDown(event){
-	console.log("onKeyDown() event.altKey="+event.altKey)
-	console.log("onKeyDown() event.code="+event.code)				//TODO
-	console.log("onKeyDown() event.ctrlKey="+event.ctrlKey)
-	console.log("onKeyDown() event.isComposing="+event.isComposing)	//TODO
-	console.log("onKeyDown() event.key="+event.key)
-	console.log("onKeyDown() event.locale="+event.locale)			//TODO
-	console.log("onKeyDown() event.location="+event.location)		//TODO
-	console.log("onKeyDown() event.metaKey="+event.metaKey)			//TODO
-	console.log("onKeyDown() event.repeat="+event.repeat)
-	console.log("onKeyDown() event.shiftKey="+event.shiftKey)
+	console.log("\n onKeyDown()")
+	printKeyboardEventProperties(event)
 }
 myConsoleInput.addEventListener('keydown', onKeyDown)
 function onKeyUp(event){
-	console.log("onKeyUp() event.key="+event.key)
+	console.log("\n onKeyUp()")
+	printKeyboardEventProperties(event)
 }
 myConsoleInput.addEventListener('keyup', onKeyUp)
 function onKeyPress(event){
-	console.log("onKeyPress() event.key="+event.key)
+	console.log("\n onKeyPress()")
+	printKeyboardEventProperties(event)
 }
 myConsoleInput.addEventListener('keypress', onKeyPress)
 
 // Mouse events
+function printMouseEventProperties(event){
+	console.log("event.altKey="+event.altKey)
+	console.log("event.button="+event.button)
+	console.log("event.buttons="+event.buttons)
+	console.log("event.clientX="+event.clientX)
+	console.log("event.clientY="+event.clientY)
+	console.log("event.ctrlKey="+event.ctrlKey)
+	console.log("event.detail="+event.detail)
+	console.log("event.metaKey="+event.metaKey)
+	console.log("event.offsetX="+event.offsetX)
+	console.log("event.offsetY="+event.offsetY)
+	console.log("event.pageX="+event.pageX)
+	console.log("event.pageY="+event.pageY)
+	console.log("event.relatedTarget="+event.relatedTarget)
+	console.log("event.screenX="+event.screenX)
+	console.log("event.screenY="+event.screenY)
+	console.log("event.shiftKey="+event.shiftKey)
+	console.log("event.which="+event.which)
+}
+
 function onClick(event){
-	console.log("onClick() event.button="+event.button)
+	console.log("\n onClick()")
+	printMouseEventProperties(event)
 }
 myConsoleInput.addEventListener('click', onClick)
 function onContextMenu(event){
-	console.log("onContextMenu() event.button="+event.button)
+	console.log("\n onContextMenu()")
+	printMouseEventProperties(event)
 }
 myConsoleInput.addEventListener('contextmenu', onContextMenu)
 function onDblclick(event){
-	console.log("onDblclick() event.button="+event.button)
+	console.log("\n onDblclick()")
+	printMouseEventProperties(event)
 }
 myConsoleInput.addEventListener('dblclick', onDblclick)
 function onMouseDown(event){
-	console.log("onMouseDown() event.button="+event.button)
+	console.log("\n onMouseDown()")
+	printMouseEventProperties(event)
 }
 myConsoleInput.addEventListener('mousedown', onMouseDown)
 function onMouseEnter(event){
-	console.log("onMouseEnter() event.button="+event.button)
+	console.log("\n onMouseEnter()")
+	printMouseEventProperties(event)
 }
 myConsoleInput.addEventListener('mouseenter', onMouseEnter)
 function onMouseLeave(event){
-	console.log("onMouseLeave() event.button="+event.button)
+	console.log("\n onMouseLeave()")
+	printMouseEventProperties(event)
 }
 myConsoleInput.addEventListener('mouseleave', onMouseLeave)
 function onMouseMove(event){
-	console.log("onMouseMove() event.button="+event.button)
+	console.log("\n onMouseMove()")
+	printMouseEventProperties(event)
 }
 myConsoleInput.addEventListener('mousemove', onMouseMove)
 function onMouseOut(event){
-	console.log("onMouseOut() event.button="+event.button)
+	console.log("\n onMouseOut()")
+	printMouseEventProperties(event)
 }
 myConsoleInput.addEventListener('mouseout', onMouseOut)
 function onMouseOver(event){
-	console.log("onMouseOver() event.button="+event.button)
+	console.log("\n onMouseOver()")
+	printMouseEventProperties(event)
 }
 myConsoleInput.addEventListener('mouseover', onMouseOver)
 function onMouseUp(event){
-	console.log("onMouseUp() event.button="+event.button)
+	console.log("\n onMouseUp()")
+	printMouseEventProperties(event)
 }
 myConsoleInput.addEventListener('mouseup', onMouseUp)
 
 // Resize events
 function onResize(event){
-	console.log("onResize() event.x="+event.x)
+	console.log("\n onResize()")
+	//printResizeEventProperties(event)
 }
 myConsoleInput.addEventListener('resize', onResize)
 
