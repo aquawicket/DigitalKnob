@@ -216,6 +216,7 @@ void ConsoleInput::KeyEventProc(KEY_EVENT_RECORD ker){
 }
 
 void ConsoleInput::MouseEventProc(MOUSE_EVENT_RECORD mer){
+    //DKINFO("ConsoleInput::MouseEventProc()\n");
 	#ifndef MOUSE_HWHEELED
 		#define MOUSE_HWHEELED 0x0008
 	#endif
