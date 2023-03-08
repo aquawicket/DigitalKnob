@@ -106,7 +106,7 @@ int DKMouseEvent::buttons(duk_context* ctx){
 	}
 	//bool buttons[5] = event->buttons;
 	// TODO
-	return false;
+	return true;
 }
 
 int DKMouseEvent::clientX(duk_context* ctx){
@@ -190,7 +190,7 @@ int DKMouseEvent::movementX(duk_context* ctx){
 		return true;
 	}
 	duk_push_int(ctx, event->movementX);
-	return false;
+	return true;
 }
 
 int DKMouseEvent::movementY(duk_context* ctx){
@@ -202,7 +202,7 @@ int DKMouseEvent::movementY(duk_context* ctx){
 		return true;
 	}
 	duk_push_int(ctx, event->movementY);
-	return false;
+	return true;
 }
 
 int DKMouseEvent::offsetX(duk_context* ctx){
@@ -214,7 +214,7 @@ int DKMouseEvent::offsetX(duk_context* ctx){
 		return true;
 	}
 	duk_push_int(ctx, event->offsetX);
-	return false;
+	return true;
 }
 
 int DKMouseEvent::offsetY(duk_context* ctx){
@@ -226,7 +226,7 @@ int DKMouseEvent::offsetY(duk_context* ctx){
 		return true;
 	}
 	duk_push_int(ctx, event->offsetY);
-	return false;
+	return true;
 }
 
 int DKMouseEvent::pageX(duk_context* ctx){
@@ -238,7 +238,7 @@ int DKMouseEvent::pageX(duk_context* ctx){
 		return true;
 	}
 	duk_push_int(ctx, event->pageX);
-	return false;
+	return true;
 }
 
 int DKMouseEvent::pageY(duk_context* ctx){
@@ -250,7 +250,7 @@ int DKMouseEvent::pageY(duk_context* ctx){
 		return true;
 	}
 	duk_push_int(ctx, event->pageY);
-	return false;
+	return true;
 }
 
 int DKMouseEvent::relatedTarget(duk_context* ctx){
@@ -262,7 +262,7 @@ int DKMouseEvent::relatedTarget(duk_context* ctx){
 		return true;
 	}
 	duk_push_string(ctx, event->relativeTarget.c_str());
-	return false;
+	return true;
 }
 
 int DKMouseEvent::screenX(duk_context* ctx){
@@ -316,7 +316,7 @@ int DKMouseEvent::mozPressure(duk_context* ctx){
 		return true;
 	}
 	duk_push_number(ctx, event->mozPressure);
-	return false;
+	return true;
 }
 
 int DKMouseEvent::mozInputSource(duk_context* ctx){
@@ -328,7 +328,7 @@ int DKMouseEvent::mozInputSource(duk_context* ctx){
 		return true;
 	}
 	duk_push_string(ctx, event->mozInputSource.c_str());
-	return false;
+	return true;
 }
 
 int DKMouseEvent::webkitForce(duk_context* ctx){
@@ -340,7 +340,7 @@ int DKMouseEvent::webkitForce(duk_context* ctx){
 		return true;
 	}
 	duk_push_uint(ctx, event->webkitForce);
-	return false;
+	return true;
 }
 
 int DKMouseEvent::x(duk_context* ctx){
@@ -378,7 +378,7 @@ int DKMouseEvent::getModifierState(duk_context* ctx){
 		return true;
 	}
 	//TODO
-	return false;
+	return true;
 }
 
 int DKMouseEvent::initMouseEvent(duk_context* ctx){
@@ -391,5 +391,5 @@ int DKMouseEvent::initMouseEvent(duk_context* ctx){
 		return true;
 	}
 	//TODO
-	return false;
+	return true;
 }

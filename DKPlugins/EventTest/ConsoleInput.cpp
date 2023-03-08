@@ -348,6 +348,14 @@ void ConsoleInput::MouseEventProc(MOUSE_EVENT_RECORD mer){
 
             clientX = mousex - rc.left;
             clientY = mousey - rc.top;
+            layerX = clientX;
+            layerY = clientY;
+            movementX = clientX - x;
+            movementY = clientY - y;
+            offsetX = clientX;
+            offsetY = clientY;
+            pageX = clientX;
+            pageY = clientY;
             x = clientX;
             y = clientY;
             
