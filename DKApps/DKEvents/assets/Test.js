@@ -68,6 +68,13 @@ function printKeyboardEventProperties(event){
 	console.log("event.metaKey="+event.metaKey)			//TODO
 	console.log("event.repeat="+event.repeat)
 	console.log("event.shiftKey="+event.shiftKey)
+	
+	//// Obsolete ////
+	//console.log("event.char="+event.char)
+	//console.log("event.charCode="+event.charCode)
+	//console.log("event.keyCode="+event.keyCode)
+	//console.log("event.keyIdentifier="+event.keyIdentifier)
+	//console.log("event.which="+event.which)
 }
 
 function onKeyDown(event){

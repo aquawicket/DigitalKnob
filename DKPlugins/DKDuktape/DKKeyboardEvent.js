@@ -10,75 +10,75 @@ var KeyboardEvent = function KeyboardEvent(_type, _options, _pointer) {
 	this._pointer = _pointer;
 	*/
 	
-    // Properties
+    //// Properties ////
     Object.defineProperty(this, "altKey", {
         get: function altKey() {
             return CPP_DKKeyboardEvent_altKey(_pointer);
         }
-    });
+    })
     Object.defineProperty(this, "code", {
         get: function code() {
             return CPP_DKKeyboardEvent_code(_pointer);
         }
-    });
+    })
     Object.defineProperty(this, "ctrlKey", {
         get: function ctrlKey() {
             return CPP_DKKeyboardEvent_ctrlKey(_pointer);
         }
-    });
+    })
     Object.defineProperty(this, "isComposing", {
         get: function isComposing() {
             return CPP_DKKeyboardEvent_isComposing(_pointer);
         }
-    });
+    })
     Object.defineProperty(this, "key", {
         get: function key() {
             return CPP_DKKeyboardEvent_key(_pointer);
         }
-    });
+    })
     Object.defineProperty(this, "locale", {
         get: function locale() {
             return CPP_DKKeyboardEvent_locale(_pointer);
         }
-    });
+    })
     Object.defineProperty(this, "location", {
         get: function location() {
             return CPP_DKKeyboardEvent_location(_pointer);
         }
-    });
+    })
     Object.defineProperty(this, "metaKey", {
         get: function metaKey() {
             return CPP_DKKeyboardEvent_metaKey(_pointer);
         }
-    });
+    })
     Object.defineProperty(this, "repeat", {
         get: function repeat() {
             return CPP_DKKeyboardEvent_repeat(_pointer);
         }
-    });
+    })
     Object.defineProperty(this, "shiftKey", {
         get: function shiftKey() {
             return CPP_DKKeyboardEvent_shiftKey(_pointer);
         }
-    });
+    })
 
-    // Methods
+    //// Methods ////
     KeyboardEvent.prototype.getModifierState = function getModifierState() {
         CPP_DKKeyboardEvent_getModifierState(_pointer);
     }
-    ;
 
-    // Obsolete methods
+    //// Obsolete Methods ////
+	/*
     KeyboardEvent.prototype.initKeyEvent = function initKeyEvent() {
         CPP_DKKeyboardEvent_initKeyEvent(_pointer);
     }
-    ;
     KeyboardEvent.prototype.initKeyboardEvent = function initKeyboardEvent() {
         CPP_DKKeyboardEvent_initKeyboardEvent(_pointer);
     }
-    ;
+	*/
 
-    //Obsolete properties
+    //// Obsolete Properties ////
+	/*
     Object.defineProperty(this, "char", {
         get: function char() {
             return CPP_DKKeyboardEvent_char(_pointer);
@@ -109,8 +109,9 @@ var KeyboardEvent = function KeyboardEvent(_type, _options, _pointer) {
             return CPP_DKKeyboardEvent_which(_pointer);
         }
     });
+	*/
 
-
+	//// toString ////
 	if(this.toString() === "[object Object]"){
 		this.toString = function(){
 			return "[object KeyboardEvent]"
