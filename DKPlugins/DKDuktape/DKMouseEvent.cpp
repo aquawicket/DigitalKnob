@@ -57,7 +57,7 @@ bool DKMouseEvent::Init(){
 	DKDuktape::AttachFunction("CPP_DKMouseEvent_screenY", DKMouseEvent::screenY);
 	DKDuktape::AttachFunction("CPP_DKMouseEvent_shiftKey", DKMouseEvent::shiftKey);
 	DKDuktape::AttachFunction("CPP_DKMouseEvent_mozPressure", DKMouseEvent::mozPressure);
-	DKDuktape::AttachFunction("CPP_DKMouseEvent_mozIputSource", DKMouseEvent::mozInputSource);
+	DKDuktape::AttachFunction("CPP_DKMouseEvent_mozInputSource", DKMouseEvent::mozInputSource);
 	DKDuktape::AttachFunction("CPP_DKMouseEvent_webkitForce", DKMouseEvent::webkitForce);
 	DKDuktape::AttachFunction("CPP_DKMouseEvent_x", DKMouseEvent::x);
 	DKDuktape::AttachFunction("CPP_DKMouseEvent_y", DKMouseEvent::y);
