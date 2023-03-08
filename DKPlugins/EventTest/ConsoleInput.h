@@ -58,8 +58,8 @@ public:
 	bool shiftKey;
 	
 	// Mouse
+	bool button_state[5];
 	unsigned int button;
-	unsigned int button_state[5];
 	unsigned int buttons;
 	unsigned int clientX;
 	unsigned int clientY;

@@ -233,136 +233,176 @@ void ConsoleInput::MouseEventProc(MOUSE_EVENT_RECORD mer){
             // 4 = X2 button(forward)
 
             // event.buttons
-            //  0: No button or un-initialized
-            //  1: Primary button(usually the left button)
+            //  0 : No button or un-initialized
+            //  1 : Primary button(usually the left button)
             //  2 : Secondary button(usually the right button)
             //  4 : Auxiliary button(usually the mouse wheel button or middle button)
             //  8 : 4th button(typically the "Browser Back" button)
             // 16 : 5th button(typically the "Browser Forward" button)
             buttons = 0;
-            if (mer.dwButtonState == FROM_LEFT_1ST_BUTTON_PRESSED) {  // 0x0001
-                button_state[0] = true;
-                button = 0;
+            if (mer.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED) {  // 0x0001
+                DKINFO("1 ");
                 buttons = buttons + 1;
-                //DKINFO("mousedown     button=0\n");
-                code = "doMouseEvent('mousedown','','" + address + "')";
-                DKDuktape::RunDuktape(code, rval);
+            }
+            else {
+                DKINFO("0 ");
+            }
+            if (mer.dwButtonState & FROM_LEFT_2ND_BUTTON_PRESSED) {  // 0x0004
+                DKINFO("2 ");
+                buttons = buttons + 4;
+            }
+            else {
+                DKINFO("0 ");
+            }
+            if (mer.dwButtonState & RIGHTMOST_BUTTON_PRESSED) {      // 0x0002
+                DKINFO("3 ");
+                buttons = buttons + 2;
+            }
+            else {
+                DKINFO("0 ");
+            }
+            if (mer.dwButtonState & FROM_LEFT_3RD_BUTTON_PRESSED) {  // 0x0008
+                DKINFO("4 ");
+                buttons = buttons + 8;
+            }
+            else {
+                DKINFO("0 ");
+            }
+            if (mer.dwButtonState & FROM_LEFT_4TH_BUTTON_PRESSED) {  // 0x0010
+                DKINFO("5 \n");
+                buttons = buttons + 16;
+            }
+            else {
+                DKINFO("0 \n");
+            }
+
+            if (mer.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED) {  // 0x0001
+                if (!button_state[0]) {
+                    button_state[0] = true;
+                    button = 0;
+                    code = "doMouseEvent('mousedown','','" + address + "')";
+                    DKDuktape::RunDuktape(code, rval);
+                    break;
+                }
             }
             else if (button_state[0]) {
                 button_state[0] = false;
                 button = 0;
-                //DKINFO("mouseup     button=0\n");
                 code = "doMouseEvent('mouseup','','" + address + "')";
                 DKDuktape::RunDuktape(code, rval);
 
-                //DKINFO("click     button=0\n");
-                code = "doMouseEvent('" + address + "','click')";
+                code = "doMouseEvent('click','','" + address + "')";
                 DKDuktape::RunDuktape(code, rval);
+                break;
             }
 
-            if (mer.dwButtonState == RIGHTMOST_BUTTON_PRESSED) {      // 0x0002
-                button_state[1] = true;
-                button = 2;
-                buttons = buttons + 2;
-                //DKINFO("mousedown     button=2\n");
-                code = "doMouseEvent('mousedown','','" + address + "')";
-                DKDuktape::RunDuktape(code, rval);
+            if ((mer.dwButtonState & RIGHTMOST_BUTTON_PRESSED)) {      // 0x0002
+                if (!button_state[1]) {
+                    button_state[1] = true;
+                    button = 2;
+                    code = "doMouseEvent('mousedown','','" + address + "')";
+                    DKDuktape::RunDuktape(code, rval);
+                    break;
+                }
             }
             else if (button_state[1]) {
                 button_state[1] = false;
                 button = 2;
-                //DKINFO("mouseup     button=2\n");
                 code = "doMouseEvent('mouseup','','" + address + "')";
                 DKDuktape::RunDuktape(code, rval);
 
-                //DKINFO("contextmenu     button=2\n");
-                code = "doMouseEvent('" + address + "','contextmenu')";
+                code = "doMouseEvent('contextmenu','','" + address + "')";
                 DKDuktape::RunDuktape(code, rval);
+                break;
             }
 
-            if (mer.dwButtonState == FROM_LEFT_2ND_BUTTON_PRESSED) {  // 0x0004
-                button_state[2] = true;
-                button = 1;
-                buttons = buttons + 4;
-                //DKINFO("mousedown     button=1\n");
-                code = "doMouseEvent('mousedown','','" + address + "')";
-                DKDuktape::RunDuktape(code, rval);
+            if (mer.dwButtonState & FROM_LEFT_2ND_BUTTON_PRESSED) {  // 0x0004
+                if (!button_state[2]) {
+                    button_state[2] = true;
+                    button = 1;
+                    code = "doMouseEvent('mousedown','','" + address + "')";
+                    DKDuktape::RunDuktape(code, rval);
+                    break;
+                }
             }
             else if (button_state[2]) {
                 button_state[2] = false;
                 button = 1;
-                //DKINFO("mouseup     button=1\n");
                 code = "doMouseEvent('mouseup','','" + address + "')";
                 DKDuktape::RunDuktape(code, rval);
+                break;
             }
 
-            if (mer.dwButtonState == FROM_LEFT_3RD_BUTTON_PRESSED) {  // 0x0008
-                button_state[3] = true;
-                button = 3;
-                buttons = buttons + 8;
-                //DKINFO("mousedown     button=3\n");
-                code = "doMouseEvent('mousedown','','" + address + "')";
-                DKDuktape::RunDuktape(code, rval);
+            if (mer.dwButtonState & FROM_LEFT_3RD_BUTTON_PRESSED) {  // 0x0008
+                if (!button_state[3]) {
+                    button_state[3] = true;
+                    button = 3;
+                    code = "doMouseEvent('mousedown','','" + address + "')";
+                    DKDuktape::RunDuktape(code, rval);
+                    break;
+                }
             }
             else if (button_state[3]) {
                 button_state[3] = false;
                 button = 3;
-                //DKINFO("mouseup     button=3\n");
                 code = "doMouseEvent('mouseup','','" + address + "')";
                 DKDuktape::RunDuktape(code, rval);
+                break;
             }
 
-            if (mer.dwButtonState == FROM_LEFT_4TH_BUTTON_PRESSED) { // 0x0010
-                button_state[4] = true;
-                button = 4;
-                buttons = buttons + 16;
-                //DKINFO("mousedown     button=4\n");
-                code = "doMouseEvent('mousedown','','" + address + "')";
-                DKDuktape::RunDuktape(code, rval);
+            if (mer.dwButtonState & FROM_LEFT_4TH_BUTTON_PRESSED) { // 0x0010
+                if (!button_state[4]) {
+                    button_state[4] = true;
+                    button = 4;
+                    code = "doMouseEvent('mousedown','','" + address + "')";
+                    DKDuktape::RunDuktape(code, rval);
+                    break;
+                }
             }
             else if (button_state[4]) {
                 button_state[4] = false;
                 button = 4;
-                //DKINFO("mouseup     button=4\n");
                 code = "doMouseEvent('mouseup','','" + address + "')";
                 DKDuktape::RunDuktape(code, rval);
+                break;
             }
 			break;
 		case DOUBLE_CLICK:
-			//DKINFO("ondblclick \n");
             code = "doMouseEvent('dblclick','','" + address + "')";
             DKDuktape::RunDuktape(code, rval);
 			break;
 		case MOUSE_HWHEELED: //horizontal mouse wheel
-			//DKINFO("onwheel \n");
+            button = 0;
             code = "doWheelEvent('wheel','','" + address + "')";
             DKDuktape::RunDuktape(code, rval);
 			break;
 		case MOUSE_WHEELED: //vertical mouse wheel
-			//DKINFO("onwheel \n");
+            button = 0;
             code = "doWheelEvent('wheel','','" + address + "')";
             DKDuktape::RunDuktape(code, rval);
 			break;
         case MOUSE_MOVED:
-            //DKINFO("onmousemove \n");
-            
-            // Cursor Position
-            //colume = mer.dwMousePosition.X;
-            //row = mer.dwMousePosition.Y;
+            //// Cursor Position ////
+            // colume = mer.dwMousePosition.X;
+            // row = mer.dwMousePosition.Y;
 
-            // Get window client rect screen position
+            //// Get window client rect screen position ////
             // https://stackoverflow.com/a/15734569/688352
             RECT rc;
             GetClientRect(GetConsoleWindow(), &rc); // get client coords
             ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rc.left)); // convert top-left
             ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rc.right)); // convert bottom-right
 
-            // Mouse Position
+            //// Mouse Position ////
             int mousex, mousey;
             DKUtil::GetMousePos(mousex, mousey);
 
             clientX = mousex - rc.left;
             clientY = mousey - rc.top;
+            if (clientX == x && clientY == y)
+                break;
+
+            button = 0;
             layerX = clientX;
             layerY = clientY;
             movementX = clientX - x;
