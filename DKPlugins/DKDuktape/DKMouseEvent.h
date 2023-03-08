@@ -38,7 +38,7 @@ class DKMouseEvent : public DKObjectT<DKMouseEvent>
 public:
 	bool Init();
 	
-	// Properties
+	//// Properties ////
 	static int altKey(duk_context* ctx);			//Read only
 	static int button(duk_context* ctx);			//Read only
 	static int buttons(duk_context* ctx);			//Read only
@@ -54,7 +54,6 @@ public:
 	static int offsetY(duk_context* ctx);			//Read only
 	static int pageX(duk_context* ctx);				//Read only
 	static int pageY(duk_context* ctx);				//Read only
-	//static int region(duk_context* ctx);			//Read only
 	static int relatedTarget(duk_context* ctx);		//Read only
 	static int screenX(duk_context* ctx);			//Read only
 	static int screenY(duk_context* ctx);			//Read only
@@ -62,11 +61,10 @@ public:
 	static int mozPressure(duk_context* ctx);		//Read only
 	static int mozInputSource(duk_context* ctx);	//Read only
 	static int webkitForce(duk_context* ctx);		//Read only
-	//static int which(duk_context* ctx);			//Read only
 	static int x(duk_context* ctx);					//Read only
 	static int y(duk_context* ctx);					//Read only
 
-	// Methods
+	//// Methods ////
 	static int getModifierState(duk_context* ctx);
 	static int initMouseEvent(duk_context* ctx);
 };

@@ -124,10 +124,10 @@ var MouseEvent = function(_type, _options, _pointer) {
             return CPP_DKMouseEvent_shiftKey(_pointer)
         }
     })
-    Object.defineProperty(this, "moxPressure", {
+    Object.defineProperty(this, "mozPressure", {
         //Read only,
-        get: function moxPressure() {
-            return CPP_DKMouseEvent_moxPressure(_pointer)
+        get: function mozPressure() {
+            return CPP_DKMouseEvent_mozPressure(_pointer)
         }
     })
     Object.defineProperty(this, "mozInputSource", {

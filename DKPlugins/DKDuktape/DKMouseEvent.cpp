@@ -35,7 +35,8 @@
 
 bool DKMouseEvent::Init(){
 	DKDEBUGFUNC();
-	// Properties
+
+	//// Properties ////
 	DKDuktape::AttachFunction("CPP_DKMouseEvent_altKey", DKMouseEvent::altKey);
 	DKDuktape::AttachFunction("CPP_DKMouseEvent_button", DKMouseEvent::button);
 	DKDuktape::AttachFunction("CPP_DKMouseEvent_buttons", DKMouseEvent::buttons);
@@ -51,19 +52,17 @@ bool DKMouseEvent::Init(){
 	DKDuktape::AttachFunction("CPP_DKMouseEvent_offsetY", DKMouseEvent::offsetY);
 	DKDuktape::AttachFunction("CPP_DKMouseEvent_pageX", DKMouseEvent::pageX);
 	DKDuktape::AttachFunction("CPP_DKMouseEvent_pageY", DKMouseEvent::pageY);
-	//DKDuktape::AttachFunction("CPP_DKMouseEvent_region", DKMouseEvent::region);
 	DKDuktape::AttachFunction("CPP_DKMouseEvent_relatedTarget", DKMouseEvent::relatedTarget);
 	DKDuktape::AttachFunction("CPP_DKMouseEvent_screenX", DKMouseEvent::screenX);
 	DKDuktape::AttachFunction("CPP_DKMouseEvent_screenY", DKMouseEvent::screenY);
 	DKDuktape::AttachFunction("CPP_DKMouseEvent_shiftKey", DKMouseEvent::shiftKey);
-	//DKDuktape::AttachFunction("CPP_DKMouseEvent_which", DKMouseEvent::which);
 	DKDuktape::AttachFunction("CPP_DKMouseEvent_mozPressure", DKMouseEvent::mozPressure);
 	DKDuktape::AttachFunction("CPP_DKMouseEvent_mozIputSource", DKMouseEvent::mozInputSource);
 	DKDuktape::AttachFunction("CPP_DKMouseEvent_webkitForce", DKMouseEvent::webkitForce);
 	DKDuktape::AttachFunction("CPP_DKMouseEvent_x", DKMouseEvent::x);
 	DKDuktape::AttachFunction("CPP_DKMouseEvent_y", DKMouseEvent::y);
 
-	// Methods
+	//// Methods ////
 	DKDuktape::AttachFunction("CPP_DKMouseEvent_getModifierState", DKMouseEvent::getModifierState);
 	DKDuktape::AttachFunction("CPP_DKMouseEvent_initMouseEvent", DKMouseEvent::initMouseEvent);
 
@@ -72,7 +71,7 @@ bool DKMouseEvent::Init(){
 }
 
 
-// Properties
+//// Properties ////
 int DKMouseEvent::altKey(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
 	ConsoleInput* event = (ConsoleInput*)DKDuktape::addressToPointer(eventAddress);
@@ -254,20 +253,6 @@ int DKMouseEvent::pageY(duk_context* ctx){
 	return false;
 }
 
-/*
-int DKMouseEvent::region(duk_context* ctx){
-	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleInput* event = (ConsoleInput*)DKDuktape::addressToPointer(eventAddress);
-	if (!event) {
-		DKERROR("event invalid! \n");
-		duk_push_boolean(ctx, false);
-		return true;
-	}
-	//TODO
-	return false;
-}
-*/
-
 int DKMouseEvent::relatedTarget(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
 	ConsoleInput* event = (ConsoleInput*)DKDuktape::addressToPointer(eventAddress);
@@ -358,20 +343,6 @@ int DKMouseEvent::webkitForce(duk_context* ctx){
 	return false;
 }
 
-/*
-int DKMouseEvent::which(duk_context* ctx){
-	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleInput* event = (ConsoleInput*)DKDuktape::addressToPointer(eventAddress);
-	if (!event) {
-		DKERROR("event invalid! \n");
-		duk_push_boolean(ctx, false);
-		return true;
-	}
-	//TODO
-	return false;
-}
-*/
-
 int DKMouseEvent::x(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
 	ConsoleInput* event = (ConsoleInput*)DKDuktape::addressToPointer(eventAddress);
@@ -397,8 +368,7 @@ int DKMouseEvent::y(duk_context* ctx){
 }
 
 
-// Methods
-///////////////////////////////////////////////////////
+//// Methods ////
 int DKMouseEvent::getModifierState(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
 	ConsoleInput* event = (ConsoleInput*)DKDuktape::addressToPointer(eventAddress);
