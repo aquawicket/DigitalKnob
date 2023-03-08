@@ -61,8 +61,6 @@ public:
 	static int shiftKey(duk_context* ctx);			//Read only
 	static int mozPressure(duk_context* ctx);		//Read only
 	static int mozInputSource(duk_context* ctx);	//Read only
-	static int mozPressure(duk_context* ctx);		//Read only
-	static int mozInputSource(duk_context* ctx);	//Read only
 	static int webkitForce(duk_context* ctx);		//Read only
 	//static int which(duk_context* ctx);			//Read only
 	static int x(duk_context* ctx);					//Read only
