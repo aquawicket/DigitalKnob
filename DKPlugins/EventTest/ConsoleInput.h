@@ -59,7 +59,8 @@ public:
 	
 	// Mouse
 	unsigned int button;
-	bool buttons[5];
+	unsigned int button_state[5];
+	unsigned int buttons;
 	unsigned int clientX;
 	unsigned int clientY;
 	int layerX;

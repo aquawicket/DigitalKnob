@@ -104,8 +104,8 @@ int DKMouseEvent::buttons(duk_context* ctx){
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	//bool buttons[5] = event->buttons;
-	// TODO
+	unsigned int buttons = event->buttons;
+	duk_push_uint(ctx, event->buttons);
 	return true;
 }
 
