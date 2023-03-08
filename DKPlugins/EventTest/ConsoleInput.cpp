@@ -46,7 +46,41 @@ bool ConsoleInput::Init(){
     if (!SetConsoleMode(hStdin, fdwMode))
         ErrorExit("SetConsoleMode");
 #endif
-
+	
+	// Keyboard
+	altKey = false;
+	code = "";
+	ctrlKey = false;
+	isComposing = false;
+	key = '';
+	locale = "";
+	location = 0;
+	metaKey = false;
+	repeat = false;
+	shiftKey = false;
+	
+	// Mouse
+	button = 0;
+	buttons = {false, false, false, false, false};
+	clientX = 0;
+	clientY = 0;
+	layerX = 0;
+	layerY = 0;
+	movementX = 0;
+	movementY = 0;
+	offsetX = 0;
+	offsetY = 0;
+	pageX = 0;
+	pageY = 0;
+	relativeTarget = "";
+	screenX = 0;
+	screenY = 0;
+	mozPressure = 0.0;
+	mozInputSource = "";
+	webkitForce = 0;
+	x = 0;
+	y = 0;
+	
     DKApp::AppendLoopFunc(&ConsoleInput::Loop, this);
     return true;
 }
