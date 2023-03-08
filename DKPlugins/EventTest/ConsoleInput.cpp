@@ -61,7 +61,11 @@ bool ConsoleInput::Init(){
 	
 	// Mouse
 	button = 0;
-	buttons = {false, false, false, false, false};
+	buttons[0] = false;
+	buttons[1] = false;
+	buttons[2] = false;
+	buttons[3] = false;
+	buttons[4] = false;
 	clientX = 0;
 	clientY = 0;
 	layerX = 0;
