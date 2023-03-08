@@ -100,14 +100,6 @@ var MouseEvent = function(_type, _options, _pointer) {
             return CPP_DKMouseEvent_pageY(_pointer)
         }
     })
-	/*
-    Object.defineProperty(this, "region", {
-        //Read only
-        get: function region() {
-            return CPP_DKMouseEvent_region(_pointer)
-        }
-    })
-	*/
     Object.defineProperty(this, "relatedTarget", {
         //Read only
         get: function relatedTarget() {
@@ -150,14 +142,6 @@ var MouseEvent = function(_type, _options, _pointer) {
             return CPP_DKMouseEvent_webkitForce(_pointer)
         }
     })
-	/*
-	Object.defineProperty(this, "which", {
-        //Read only
-        get: function which() {
-            return CPP_DKMouseEvent_which(_pointer)
-        }
-    })
-	*/
     Object.defineProperty(this, "x", {
         //Read only
         get: function x() {
@@ -171,7 +155,7 @@ var MouseEvent = function(_type, _options, _pointer) {
         }
     })
 
-    // Methods
+    //// Methods ////
     MouseEvent.prototype.getModifierState = function getModifierState() {
         CPP_DKMouseEvent_getModifierState(_pointer)
     }
@@ -180,6 +164,7 @@ var MouseEvent = function(_type, _options, _pointer) {
         CPP_DKMouseEvent_initMouseEvent(_pointer)
     }
     
+	//// toString ////
 	if(this.toString() === "[object Object]"){
 		this.toString = function(){
 			return "[object MouseEvent]"
