@@ -116,7 +116,7 @@ void ConsoleInput::KeyEventProc(KEY_EVENT_RECORD ker){
     DKString code;
 
     // altKey
-    if (ker.dwControlKeyState & RIGHT_ALT_PRESSED || ker.dwControlKeyState & LEFT_ALT_PRESSED)
+    if (ker.dwControlKeyState & LEFT_ALT_PRESSED || ker.dwControlKeyState & RIGHT_ALT_PRESSED)
         altKey = true;
     else
         altKey = false;
@@ -125,7 +125,7 @@ void ConsoleInput::KeyEventProc(KEY_EVENT_RECORD ker){
     code = "todo";
 
     // ctrlKey
-    if (ker.dwControlKeyState & RIGHT_CTRL_PRESSED || ker.dwControlKeyState & LEFT_CTRL_PRESSED)
+    if (ker.dwControlKeyState & LEFT_CTRL_PRESSED || ker.dwControlKeyState & RIGHT_CTRL_PRESSED)
         ctrlKey = true;
     else
         ctrlKey = false;
@@ -143,7 +143,10 @@ void ConsoleInput::KeyEventProc(KEY_EVENT_RECORD ker){
     location = 0; //FIXME: todo
 
     // metaKey
-    metaKey = false; //FIXME: todo
+    if (ker.wVirtualKeyCode == VK_LWIN || ker.wVirtualKeyCode == VK_RWIN)
+        metaKey = true;
+    else
+        metaKey = false;
 
     // repeat
     if (ker.wRepeatCount > 1)
