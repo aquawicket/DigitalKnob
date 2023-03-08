@@ -60,6 +60,25 @@ public:
 	// Mouse
 	unsigned int button;
 	bool buttons[5];
+	unsigned int clientX;
+	unsigned int clientY;
+	int layerX;
+	int layerY;
+	int movementX;
+	int movementY;
+	int offsetX;
+	int offsetY;
+	int pageX;
+	int pageY;
+	DKString relativeTarget;
+	unsigned int screenX;
+	unsigned int screenY;
+	float mozPressure;
+	DKString mozInputSource;
+	unsigned int webkitForce;
+	unsigned int x;
+	unsigned int y;
+
 	HANDLE hStdin;
 	DWORD fdwSaveOldMode;
 	void ErrorExit(LPCSTR);
