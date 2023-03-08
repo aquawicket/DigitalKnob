@@ -331,6 +331,26 @@ void ConsoleInput::MouseEventProc(MOUSE_EVENT_RECORD mer){
 			break;
         case MOUSE_MOVED:
             //DKINFO("onmousemove \n");
+            
+            // Cursor Position
+            //colume = mer.dwMousePosition.X;
+            //row = mer.dwMousePosition.Y;
+
+            // Get window client rect screen position
+            RECT rc;
+            GetClientRect(GetConsoleWindow(), &rc); // get client coords
+            ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rc.left)); // convert top-left
+            ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rc.right)); // convert bottom-right
+
+            // Mouse Position
+            int mousex, mousey;
+            DKUtil::GetMousePos(mousex, mousey);
+
+            clientX = mousex - rc.left;
+            clientY = mousey - rc.top;
+            x = clientX;
+            y = clientY;
+            
             code = "doMouseEvent('mousemove','','" + address + "')";
             DKDuktape::RunDuktape(code, rval);
             break;
