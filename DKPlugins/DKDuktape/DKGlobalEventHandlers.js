@@ -69,6 +69,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
             this.auxclick = func
         }
     });
+	/*
     this.blur = null;
     Object.defineProperty(this, "onblur", {
         configurable: true,
@@ -80,6 +81,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
             this.blur = func
         }
     });
+	*/
     this.error = null;
     Object.defineProperty(this, "onerror", {
         configurable: true,
