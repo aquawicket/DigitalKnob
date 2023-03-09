@@ -53,6 +53,6 @@ int DKFocusEvent::relatedTarget(duk_context* ctx){ //Read only
 		duk_push_undefined(ctx);
 		return true;
 	}
-	duk_push_int(ctx, event->relatedTarget);
+	duk_push_string(ctx, event->relatedTarget.c_str());
 	return true;
 }

@@ -95,6 +95,9 @@ bool ConsoleInput::Init(){
     //wheelDeltaX = 0;
     //wheelDeltaY = 0;
 
+    // FocusEvent
+    relatedTarget = "";
+
     DKApp::AppendLoopFunc(&ConsoleInput::Loop, this);
     return true;
 }
@@ -142,7 +145,7 @@ void ConsoleInput::Loop() {
     for (i = 0; i < cNumRead; i++) {
         switch (irInBuf[i].EventType) {
             case KEY_EVENT: // keyboard input 
-                KeyEventProc(irInBuf[i].Event.KeyEvent);
+                KeyboardEventProc(irInBuf[i].Event.KeyEvent);
                 break;
             case MOUSE_EVENT: // mouse input 
                 MouseEventProc(irInBuf[i].Event.MouseEvent);
@@ -150,7 +153,8 @@ void ConsoleInput::Loop() {
             case WINDOW_BUFFER_SIZE_EVENT: // scrn buf. resizing 
                 ResizeEventProc(irInBuf[i].Event.WindowBufferSizeEvent);
                 break;
-            case FOCUS_EVENT:  // disregard focus events 
+            case FOCUS_EVENT:  // disregard focus events
+                FocusEventProc(irInBuf[i].Event.FocusEvent);
             case MENU_EVENT:   // disregard menu events 
                 break;
             default:
@@ -169,7 +173,35 @@ void ConsoleInput::ErrorExit(LPCSTR lpszMessage){
     ExitProcess(0);
 }
 
-void ConsoleInput::KeyEventProc(KEY_EVENT_RECORD ker){
+void ConsoleInput::FocusEventProc(FOCUS_EVENT_RECORD fer) {
+    DKString address = DKDuktape::pointerToAddress(this);
+    DKString rval;
+    DKString code;
+
+    DKString setFocus = toString(fer.bSetFocus);
+    DKINFO("setFocus = " + setFocus + "\n");
+
+    if (!fer.bSetFocus) {
+        //1. blur: sent after element A loses focus.
+        code = "doFocusEvent('blur','','" + address + "')";
+        DKDuktape::RunDuktape(code, rval);
+
+        //2. focusout: sent after the blur event.
+        code = "doFocusEvent('focusout','','" + address + "')";
+        DKDuktape::RunDuktape(code, rval);
+    }
+    else {
+        //3. focus: sent after element B receives focus.
+        code = "doFocusEvent('focus','','" + address + "')";
+        DKDuktape::RunDuktape(code, rval);
+
+        //4. focusin: sent after the focus event.
+        code = "doFocusEvent('focusin','','" + address + "')";
+        DKDuktape::RunDuktape(code, rval);
+    }
+}
+
+void ConsoleInput::KeyboardEventProc(KEY_EVENT_RECORD ker){
     DKString address = DKDuktape::pointerToAddress(this);
     DKString rval;
     DKString code;

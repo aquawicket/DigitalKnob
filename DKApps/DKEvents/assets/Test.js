@@ -56,6 +56,7 @@ console.log("/////////// ConsoleInput /////////////////////")
 CPP_DK_Create("EventTest/ConsoleInput.js");
 const myConsoleInput = new ConsoleInput('myConsoleInput')
 
+
 // KeyboardEvents
 function printKeyboardEventProperties(event){
 	console.log("event.altKey="+event.altKey)
@@ -76,7 +77,6 @@ function printKeyboardEventProperties(event){
 	//console.log("event.keyIdentifier="+event.keyIdentifier)
 	//console.log("event.which="+event.which)
 }
-
 function onKeyDown(event){
 	console.log("\n onKeyDown()")
 	printKeyboardEventProperties(event)
@@ -93,8 +93,10 @@ function onKeyPress(event){
 }
 myConsoleInput.addEventListener('keypress', onKeyPress)
 
+
 // MouseEvents
 function printMouseEventProperties(event){
+	return;
 	console.log("event.altKey="+event.altKey)
 	console.log("event.button="+event.button)
 	console.log("event.buttons="+event.buttons)
@@ -120,7 +122,6 @@ function printMouseEventProperties(event){
 	console.log("event.x="+event.x)
 	console.log("event.y="+event.y)
 }
-
 function onClick(event){
 	console.log("\n onClick()")
 	printMouseEventProperties(event)
@@ -172,6 +173,7 @@ function onMouseUp(event){
 }
 myConsoleInput.addEventListener('mouseup', onMouseUp)
 
+
 // WheelEvents
 function printWheelEventProperties(event){
 	console.log("event.deltaX="+event.deltaX)
@@ -184,6 +186,34 @@ function onWheel(event){
 	printWheelEventProperties(event)
 }
 myConsoleInput.addEventListener('wheel', onWheel)
+
+
+// FocusEvents
+//1. blur: sent after element A loses focus.
+function onBlur(event){ 
+	console.log("\n onBlur()")
+	//printFocusEventProperties(event)
+}
+myConsoleInput.addEventListener('blur', onBlur)
+//2. focusout: sent after the blur event.
+function onFocusOut(event){
+	console.log("\n onFocusOut()")
+	//printFocusEventProperties(event)
+}
+myConsoleInput.addEventListener('focusout', onFocusOut)
+//3. focus: sent after element B receives focus.
+function onFocus(event){
+	console.log("\n onFocus()")
+	//printFocusEventProperties(event)
+}
+myConsoleInput.addEventListener('focus', onFocus)
+//4. focusin: sent after the focus event.
+function onFocusIn(event){
+	console.log("\n onFocusIn()")
+	//printFocusEventProperties(event)
+}
+myConsoleInput.addEventListener('focusin', onFocusIn)
+
 
 // Resize events
 function onResize(event){
