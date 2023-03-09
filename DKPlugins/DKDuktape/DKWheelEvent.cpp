@@ -60,10 +60,10 @@ int DKWheelEvent::deltaX(duk_context* ctx){
 	ConsoleInput* event = (ConsoleInput*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid! \n");
-		duk_push_boolean(ctx, false);
+		duk_push_undefined(ctx);
 		return true;
 	}
-	duk_push_boolean(ctx, event->deltaX);
+	duk_push_int(ctx, event->deltaX);
 	return true;
 }
 
@@ -72,10 +72,10 @@ int DKWheelEvent::deltaY(duk_context* ctx){
 	ConsoleInput* event = (ConsoleInput*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid! \n");
-		duk_push_boolean(ctx, false);
+		duk_push_undefined(ctx);
 		return true;
 	}
-	duk_push_uint(ctx, event->deltaY);
+	duk_push_int(ctx, event->deltaY);
 	return true;
 }
 
@@ -84,10 +84,10 @@ int DKWheelEvent::deltaZ(duk_context* ctx){
 	ConsoleInput* event = (ConsoleInput*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid! \n");
-		duk_push_boolean(ctx, false);
+		duk_push_undefined(ctx);
 		return true;
 	}
-	duk_push_uint(ctx, event->deltaZ);
+	duk_push_int(ctx, event->deltaZ);
 	return true;
 }
 
@@ -96,7 +96,7 @@ int DKWheelEvent::deltaMode(duk_context* ctx){
 	ConsoleInput* event = (ConsoleInput*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid! \n");
-		duk_push_boolean(ctx, false);
+		duk_push_undefined(ctx);
 		return true;
 	}
 	duk_push_uint(ctx, event->deltaMode);
@@ -110,7 +110,7 @@ int DKWheelEvent::wheelDelta(duk_context* ctx){
 	ConsoleInput* event = (ConsoleInput*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid! \n");
-		duk_push_boolean(ctx, false);
+		duk_push_undefined(ctx);
 		return true;
 	}
 	duk_push_uint(ctx, event->wheelDelta);
@@ -122,7 +122,7 @@ int DKWheelEvent::wheelDeltaX(duk_context* ctx){
 	ConsoleInput* event = (ConsoleInput*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid! \n");
-		duk_push_boolean(ctx, false);
+		duk_push_undefined(ctx);
 		return true;
 	}
 	duk_push_boolean(ctx, event->wheelDeltaX);
@@ -134,7 +134,7 @@ int DKWheelEvent::wheelDeltaY(duk_context* ctx) {
 	ConsoleInput* event = (ConsoleInput*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid! \n");
-		duk_push_boolean(ctx, false);
+		duk_push_undefined(ctx);
 		return true;
 	}
 	duk_push_int(ctx, event->wheelDeltaY);

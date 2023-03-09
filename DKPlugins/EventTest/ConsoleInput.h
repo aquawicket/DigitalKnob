@@ -45,7 +45,7 @@ public:
 	void Loop();
 	
 #if WIN
-	// Keyboard
+	// KeyboardEvent
 	bool altKey;
 	DKString code;
 	bool ctrlKey;
@@ -57,7 +57,7 @@ public:
 	bool repeat;
 	bool shiftKey;
 	
-	// Mouse
+	// MouseEvent
 	bool button_state[5];
 	unsigned int button;
 	unsigned int buttons;
@@ -79,6 +79,15 @@ public:
 	unsigned int webkitForce;
 	unsigned int x;
 	unsigned int y;
+
+	// WheelEvent
+	int deltaX;
+	int deltaY;
+	int deltaZ;
+	unsigned long deltaMode;
+	//int wheelDelta;
+	//int wheelDeltaX;
+	//int wheelDeltaY;
 
 	HANDLE hStdin;
 	DWORD fdwSaveOldMode;

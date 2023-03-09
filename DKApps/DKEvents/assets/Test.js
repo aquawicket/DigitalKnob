@@ -56,7 +56,7 @@ console.log("/////////// ConsoleInput /////////////////////")
 CPP_DK_Create("EventTest/ConsoleInput.js");
 const myConsoleInput = new ConsoleInput('myConsoleInput')
 
-// Keyboard events
+// KeyboardEvents
 function printKeyboardEventProperties(event){
 	console.log("event.altKey="+event.altKey)
 	console.log("event.code="+event.code)				//TODO
@@ -93,9 +93,8 @@ function onKeyPress(event){
 }
 myConsoleInput.addEventListener('keypress', onKeyPress)
 
-// Mouse events
+// MouseEvents
 function printMouseEventProperties(event){
-	//return;
 	console.log("event.altKey="+event.altKey)
 	console.log("event.button="+event.button)
 	console.log("event.buttons="+event.buttons)
@@ -172,9 +171,17 @@ function onMouseUp(event){
 	printMouseEventProperties(event)
 }
 myConsoleInput.addEventListener('mouseup', onMouseUp)
+
+// WheelEvents
+function printWheelEventProperties(event){
+	console.log("event.deltaX="+event.deltaX)
+	console.log("event.deltaY="+event.deltaY)
+	console.log("event.deltaZ="+event.deltaZ)
+	console.log("event.deltaMode="+event.deltaMode)
+}
 function onWheel(event){
 	console.log("\n onWheel()")
-	printMouseEventProperties(event)
+	printWheelEventProperties(event)
 }
 myConsoleInput.addEventListener('wheel', onWheel)
 

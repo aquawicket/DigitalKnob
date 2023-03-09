@@ -47,7 +47,7 @@ bool ConsoleInput::Init(){
         ErrorExit("SetConsoleMode");
 #endif
 	
-	// Keyboard
+	// KeyboardEvent
 	altKey = false;
 	code = "";
 	ctrlKey = false;
@@ -59,7 +59,7 @@ bool ConsoleInput::Init(){
 	repeat = false;
 	shiftKey = false;
 	
-	// Mouse
+	// MouseEvent
     button_state[0] = false;
     button_state[1] = false;
     button_state[2] = false;
@@ -85,7 +85,16 @@ bool ConsoleInput::Init(){
 	webkitForce = 0;
 	x = 0;
 	y = 0;
-	
+
+    // WheelEvent
+    deltaX = 0;
+    deltaY = 0;
+    deltaZ = 0;
+    deltaMode = 0;
+    //wheelDelta = 0;
+    //wheelDeltaX = 0;
+    //wheelDeltaY = 0;
+
     DKApp::AppendLoopFunc(&ConsoleInput::Loop, this);
     return true;
 }
@@ -385,11 +394,19 @@ void ConsoleInput::MouseEventProc(MOUSE_EVENT_RECORD mer){
 			break;
 		case MOUSE_HWHEELED: //horizontal mouse wheel
             button = 0;
+            if ((int32_t)mer.dwButtonState > 0)
+                deltaX = -100;
+            if ((int32_t)mer.dwButtonState < 0)
+                deltaX = 100;
             code = "doWheelEvent('wheel','','" + address + "')";
             DKDuktape::RunDuktape(code, rval);
 			break;
 		case MOUSE_WHEELED: //vertical mouse wheel
             button = 0;
+            if ((int32_t)mer.dwButtonState > 0)
+                deltaY = -100;
+            if ((int32_t)mer.dwButtonState < 0)
+                deltaY = 100;
             code = "doWheelEvent('wheel','','" + address + "')";
             DKDuktape::RunDuktape(code, rval);
 			break;
