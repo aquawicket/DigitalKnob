@@ -1192,8 +1192,7 @@ int DKDuktapeJS::setConsolePosition(duk_context* ctx) {
 	int y = duk_require_int(ctx, 1);
 	int w = duk_require_int(ctx, 2);
 	int h = duk_require_int(ctx, 3);
-	DKWindows::consoleWindow = GetConsoleWindow();
-	if (!MoveWindow(DKWindows::consoleWindow, x, y, w, h, TRUE))
+	if (!MoveWindow(GetConsoleWindow(), x, y, w, h, TRUE))
 		return DKERROR("MoveWindow() failed");
 	return true;
 #else

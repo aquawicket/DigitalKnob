@@ -123,12 +123,9 @@ bool ConsoleWindow::Init(){
 
 bool ConsoleWindow::End(){
 	DKDEBUGFUNC();
-
 #if WIN
-    // Restore input mode on exit.
-    SetConsoleMode(hStdin, fdwSaveOldMode);
+    SetConsoleMode(hStdin, fdwSaveOldMode); // Restore input mode on exit.
 #endif
-
 	return true;
 }
 
@@ -163,18 +160,18 @@ void ConsoleWindow::Loop() {
     // Dispatch the events to the appropriate handler. 
     for (i = 0; i < cNumRead; i++) {
         switch (irInBuf[i].EventType) {
-            case KEY_EVENT: // keyboard input 
+            case KEY_EVENT:
                 KeyboardEventProc(irInBuf[i].Event.KeyEvent);
                 break;
-            case MOUSE_EVENT: // mouse input 
+            case MOUSE_EVENT:
                 MouseEventProc(irInBuf[i].Event.MouseEvent);
                 break;
-            case WINDOW_BUFFER_SIZE_EVENT: // scrn buf. resizing 
+            case WINDOW_BUFFER_SIZE_EVENT:
                 ResizeEventProc(irInBuf[i].Event.WindowBufferSizeEvent);
                 break;
-            case FOCUS_EVENT:  // disregard focus events
+            case FOCUS_EVENT:
                 FocusEventProc(irInBuf[i].Event.FocusEvent);
-            case MENU_EVENT:   // disregard menu events 
+            case MENU_EVENT: // disregard menu events 
                 break;
             default:
                 ErrorExit("Unknown event type");
@@ -194,7 +191,7 @@ int ConsoleWindow::innerHeight(duk_context* ctx){ //Read only
 		return true;
 	}
     RECT rect;
-    GetClientRect(GetConsoleWindow(), &rect); // get client coords
+    GetClientRect(GetConsoleWindow(), &rect);
     ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
     ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
     unsigned int iHeight = rect.right - rect.left;
@@ -211,7 +208,7 @@ int ConsoleWindow::innerWidth(duk_context* ctx){ //Read only
 		return true;
 	}
     RECT rect;
-    GetClientRect(GetConsoleWindow(), &rect); // get client coords
+    GetClientRect(GetConsoleWindow(), &rect);
     ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
     ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
     unsigned int iWidth = rect.bottom - rect.top;
@@ -229,7 +226,8 @@ int ConsoleWindow::outerHeight(duk_context* ctx){ //Read only
 	}
 	RECT rect;
 	GetWindowRect(GetConsoleWindow(), &rect);
-	//duk_push_uint(ctx, oHeight);
+    unsigned int oHeight = rect.bottom - rect.top;
+	duk_push_uint(ctx, oHeight);
 	return true;
 }
 
@@ -243,7 +241,8 @@ int ConsoleWindow::outerWidth(duk_context* ctx){ //Read only
 	}
 	RECT rect;
 	GetWindowRect(GetConsoleWindow(), &rect);
-    //duk_push_uint(ctx, oWidth);
+    unsigned int oWidth = rect.right - rect.left;
+    duk_push_uint(ctx, oWidth);
 	return true;
 }
 
@@ -255,8 +254,12 @@ int ConsoleWindow::ScreenX(duk_context* ctx){ //Read only
 		duk_push_undefined(ctx);
 		return true;
 	}
-	// TODO
-    //duk_push_uint(ctx, sX);
+    RECT rect;
+    GetClientRect(GetConsoleWindow(), &rect);
+    ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
+    ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
+    unsigned int sX = rect.left;
+    duk_push_uint(ctx, sX);
 	return true;
 }
 
@@ -268,8 +271,12 @@ int ConsoleWindow::screenLeft(duk_context* ctx){ //Read only
 		duk_push_undefined(ctx);
 		return true;
 	}
-	// TODO
-    //duk_push_uint(ctx, sLeft);
+    RECT rect;
+    GetClientRect(GetConsoleWindow(), &rect);
+    ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
+    ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
+    unsigned int sLeft = rect.left;
+    duk_push_uint(ctx, sLeft);
 	return true;
 }
 
@@ -281,8 +288,12 @@ int ConsoleWindow::ScreenY(duk_context* ctx){ //Read only
 		duk_push_undefined(ctx);
 		return true;
 	}
-	// TODO
-    //duk_push_uint(ctx, sY);
+    RECT rect;
+    GetClientRect(GetConsoleWindow(), &rect);
+    ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
+    ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
+    unsigned int sY = rect.top;
+    duk_push_uint(ctx, sY);
 	return true;
 }
 
@@ -294,9 +305,13 @@ int ConsoleWindow::screenTop(duk_context* ctx){ //Read only
 		duk_push_undefined(ctx);
 		return true;
 	}
-	// TODO
-    //duk_push_uint(ctx, sTop);
-	return true;
+    RECT rect;
+    GetClientRect(GetConsoleWindow(), &rect);
+    ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
+    ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
+    unsigned int sTop = rect.top;
+    duk_push_uint(ctx, sTop);
+    return true;
 }
 
 //// Instance methods ////
@@ -341,7 +356,16 @@ int ConsoleWindow::moveBy(duk_context* ctx){
 		duk_push_undefined(ctx);
 		return true;
 	}
-	// TODO
+    int deltaX = duk_require_int(ctx, 0);
+    int deltaY = duk_require_int(ctx, 1);
+    RECT rect;
+    GetWindowRect(GetConsoleWindow(), &rect);
+    int X = rect.left + deltaX;
+    int Y = rect.top + deltaY;
+    int nWidth = rect.right - rect.left;
+    int nHeight = rect.bottom - rect.top;
+    if (!MoveWindow(GetConsoleWindow(), X, Y, nWidth, nHeight, TRUE))
+        return DKERROR("MoveWindow() failed");
 	return true;
 }
 int ConsoleWindow::moveTo(duk_context* ctx){
@@ -352,7 +376,16 @@ int ConsoleWindow::moveTo(duk_context* ctx){
 		duk_push_undefined(ctx);
 		return true;
 	}
-	// TODO
+    int x = duk_require_int(ctx, 0);
+    int y = duk_require_int(ctx, 1);
+    RECT rect;
+    GetWindowRect(GetConsoleWindow(), &rect);
+    int X = x;
+    int Y = y;
+    int nWidth = rect.right - rect.left;
+    int nHeight = rect.bottom - rect.top;
+    if (!MoveWindow(GetConsoleWindow(), X, Y, nWidth, nHeight, TRUE))
+        return DKERROR("MoveWindow() failed");
 	return true;
 }
 int ConsoleWindow::resizeBy(duk_context* ctx){
@@ -363,7 +396,16 @@ int ConsoleWindow::resizeBy(duk_context* ctx){
 		duk_push_undefined(ctx);
 		return true;
 	}
-	// TODO
+    int xDelta = duk_require_int(ctx, 0);
+    int yDelta = duk_require_int(ctx, 1);
+    RECT rect;
+    GetWindowRect(GetConsoleWindow(), &rect);
+    int X = rect.left;
+    int Y = rect.top;
+    int nWidth = rect.right - rect.left + xDelta;
+    int nHeight = rect.bottom - rect.top + yDelta;
+    if (!MoveWindow(GetConsoleWindow(), X, Y, nWidth, nHeight, TRUE))
+        return DKERROR("MoveWindow() failed");
 	return true;
 }
 int ConsoleWindow::resizeTo(duk_context* ctx){
@@ -374,8 +416,17 @@ int ConsoleWindow::resizeTo(duk_context* ctx){
 		duk_push_undefined(ctx);
 		return true;
 	}
-	// TODO
-	return true;
+    int width = duk_require_int(ctx, 0);
+    int height = duk_require_int(ctx, 1);
+    RECT rect;
+    GetWindowRect(GetConsoleWindow(), &rect);
+    int X = rect.left;
+    int Y = rect.top;
+    int nWidth = width;
+    int nHeight = height;
+    if (!MoveWindow(GetConsoleWindow(), X, Y, nWidth, nHeight, TRUE))
+        return DKERROR("MoveWindow() failed");
+    return true;
 }
 	
 	
