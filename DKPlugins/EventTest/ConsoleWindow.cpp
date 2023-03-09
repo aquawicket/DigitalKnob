@@ -36,6 +36,19 @@ bool ConsoleWindow::Init(){
 	DKDuktape::AttachFunction("CPP_ConsoleWindow_innerWidth", ConsoleWindow::innerWidth);
 	DKDuktape::AttachFunction("CPP_ConsoleWindow_outerHeight", ConsoleWindow::outerHeight);
 	DKDuktape::AttachFunction("CPP_ConsoleWindow_outerWidth", ConsoleWindow::outerWidth);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_screenX", ConsoleWindow::screenX);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_screenLeft", ConsoleWindow::screenLeft);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_screenY", ConsoleWindow::screenY);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_screenTop", ConsoleWindow::screenTop);
+	
+	//// Instance methods ////
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_blur", ConsoleWindow::blur);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_close", ConsoleWindow::close);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_focus", ConsoleWindow::focus);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_moveBy", ConsoleWindow::moveBy);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_moveTo", ConsoleWindow::moveTo);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_resizeBy", ConsoleWindow::resizeBy);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_resizeTo", ConsoleWindow::resizeTo);
 	
 #if WIN
     // Get the standard input handle. 
@@ -234,6 +247,137 @@ int ConsoleWindow::outerWidth(duk_context* ctx){ //Read only
 	return true;
 }
 
+int ConsoleWindow::screenX(duk_context* ctx){ //Read only
+	DKString eventAddress = duk_require_string(ctx, 0);
+	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	if (!event) {
+		DKERROR("event invalid! \n");
+		duk_push_undefined(ctx);
+		return true;
+	}
+	// TODO
+    //duk_push_uint(ctx, sX);
+	return true;
+}
+
+int ConsoleWindow::screenLeft(duk_context* ctx){ //Read only
+	DKString eventAddress = duk_require_string(ctx, 0);
+	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	if (!event) {
+		DKERROR("event invalid! \n");
+		duk_push_undefined(ctx);
+		return true;
+	}
+	// TODO
+    //duk_push_uint(ctx, sLeft);
+	return true;
+}
+
+int ConsoleWindow::screenY(duk_context* ctx){ //Read only
+	DKString eventAddress = duk_require_string(ctx, 0);
+	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	if (!event) {
+		DKERROR("event invalid! \n");
+		duk_push_undefined(ctx);
+		return true;
+	}
+	// TODO
+    //duk_push_uint(ctx, sY);
+	return true;
+}
+
+int ConsoleWindow::screenTop(duk_context* ctx){ //Read only
+	DKString eventAddress = duk_require_string(ctx, 0);
+	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	if (!event) {
+		DKERROR("event invalid! \n");
+		duk_push_undefined(ctx);
+		return true;
+	}
+	// TODO
+    //duk_push_uint(ctx, sTop);
+	return true;
+}
+
+//// Instance methods ////
+int ConsoleWindow::blur(duk_context* ctx){
+	DKString eventAddress = duk_require_string(ctx, 0);
+	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	if (!event) {
+		DKERROR("event invalid! \n");
+		duk_push_undefined(ctx);
+		return true;
+	}
+	// TODO
+	return true;
+}
+int ConsoleWindow::close(duk_context* ctx){
+	DKString eventAddress = duk_require_string(ctx, 0);
+	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	if (!event) {
+		DKERROR("event invalid! \n");
+		duk_push_undefined(ctx);
+		return true;
+	}
+	// TODO
+	return true;
+}
+int ConsoleWindow::focus(duk_context* ctx){
+	DKString eventAddress = duk_require_string(ctx, 0);
+	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	if (!event) {
+		DKERROR("event invalid! \n");
+		duk_push_undefined(ctx);
+		return true;
+	}
+	// TODO
+	return true;
+}
+int ConsoleWindow::moveBy(duk_context* ctx){
+	DKString eventAddress = duk_require_string(ctx, 0);
+	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	if (!event) {
+		DKERROR("event invalid! \n");
+		duk_push_undefined(ctx);
+		return true;
+	}
+	// TODO
+	return true;
+}
+int ConsoleWindow::moveTo(duk_context* ctx){
+	DKString eventAddress = duk_require_string(ctx, 0);
+	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	if (!event) {
+		DKERROR("event invalid! \n");
+		duk_push_undefined(ctx);
+		return true;
+	}
+	// TODO
+	return true;
+}
+int ConsoleWindow::resizeBy(duk_context* ctx){
+	DKString eventAddress = duk_require_string(ctx, 0);
+	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	if (!event) {
+		DKERROR("event invalid! \n");
+		duk_push_undefined(ctx);
+		return true;
+	}
+	// TODO
+	return true;
+}
+int ConsoleWindow::resizeTo(duk_context* ctx){
+	DKString eventAddress = duk_require_string(ctx, 0);
+	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	if (!event) {
+		DKERROR("event invalid! \n");
+		duk_push_undefined(ctx);
+		return true;
+	}
+	// TODO
+	return true;
+}
+	
 	
 #if WIN
 void ConsoleWindow::ErrorExit(LPCSTR lpszMessage){
