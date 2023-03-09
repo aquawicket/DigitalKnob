@@ -141,6 +141,7 @@ bool DKDuktape::Init(){
 #ifndef IOS
         DKClass::DKCreate("DKKeyboardEvent");
 		DKClass::DKCreate("DKMouseEvent");
+		DKClass::DKCreate("DKWheelEvent");
 #endif
 		DKClass::DKCreate("DKDuktape/DKWindow.js");
 		DKClass::DKCreate("DKConsole");

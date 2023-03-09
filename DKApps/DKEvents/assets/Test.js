@@ -172,6 +172,11 @@ function onMouseUp(event){
 	printMouseEventProperties(event)
 }
 myConsoleInput.addEventListener('mouseup', onMouseUp)
+function onWheel(event){
+	console.log("\n onWheel()")
+	printMouseEventProperties(event)
+}
+myConsoleInput.addEventListener('wheel', onWheel)
 
 // Resize events
 function onResize(event){
