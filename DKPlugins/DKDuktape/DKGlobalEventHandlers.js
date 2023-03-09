@@ -93,6 +93,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
             this.error = func
         }
     });
+	/*
     this.focus = null;
     Object.defineProperty(this, "onfocus", {
         configurable: true,
@@ -104,6 +105,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
             this.focus = func
         }
     });
+	*/
     this.canplay = null;
     Object.defineProperty(this, "oncanplay", {
         configurable: true,
@@ -148,6 +150,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
             this.click = func;
         }
     });
+	/*
     this.close = null;
     Object.defineProperty(this, "onclose", {
         configurable: true,
@@ -159,6 +162,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
             this.close = func
         }
     });
+	*/
     this.contextmenu = null;
     Object.defineProperty(this, "oncontextmenu", {
         configurable: true,
