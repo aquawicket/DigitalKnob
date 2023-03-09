@@ -216,8 +216,21 @@ int ConsoleWindow::innerWidth(duk_context* ctx){ //Read only
 }
 
 int ConsoleWindow::name(duk_context* ctx){
-    // TODO
-	return true;
+    //get
+    if (!duk_is_string(ctx, 0)) {
+        char _title[1024];
+        GetConsoleTitle(_title, sizeof(_title));
+        DKString title = _title;
+        duk_push_string(ctx, title.c_str());
+        return true;
+    }
+    //set
+    else {
+        DKString str = duk_require_string(ctx, 0);
+        if (!SetConsoleTitle(str.c_str()))
+            return DKERROR("SetConsoleTitle() failed! \n");
+        return true;
+    }
 }
 
 int ConsoleWindow::outerHeight(duk_context* ctx){ //Read only

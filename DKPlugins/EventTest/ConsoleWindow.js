@@ -31,7 +31,10 @@ var ConsoleWindow = function ConsoleWindow(data) {
 	Object.defineProperty(this, "name", {
         get: function name() {
             return CPP_ConsoleWindow_name()
-        }
+        },
+		set: function name(str) {
+			CPP_ConsoleWindow_name(str)
+		}
     })
 	Object.defineProperty(this, "outerHeight", { //Read only
         get: function outerHeight() {
