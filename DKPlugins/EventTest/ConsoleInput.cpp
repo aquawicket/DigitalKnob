@@ -178,8 +178,7 @@ void ConsoleInput::FocusEventProc(FOCUS_EVENT_RECORD fer) {
     DKString rval;
     DKString code;
 
-    DKString setFocus = toString(fer.bSetFocus);
-    DKINFO("setFocus = " + setFocus + "\n");
+    relatedTarget = address;
 
     if (!fer.bSetFocus) {
         //1. blur: sent after element A loses focus.
