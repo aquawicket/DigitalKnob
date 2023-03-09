@@ -47,6 +47,8 @@ public:
 	//// Instance properties ////
 	static int innerHeight(duk_context* ctx);
 	static int innerWidth(duk_context* ctx);
+	static int outerHeight(duk_context* ctx);
+	static int outerWidth(duk_context* ctx);
 	
 #if WIN
 	// KeyboardEvent

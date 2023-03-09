@@ -19,6 +19,16 @@ var ConsoleWindow = function ConsoleWindow(data)
             return CPP_ConsoleWindow_innerWidth(this.pointer)
         }
     })
+	Object.defineProperty(this, "outerHeight", {
+        get: function outerHeight() {
+            return CPP_ConsoleWindow_outerHeight(this.pointer)
+        }
+    })
+	Object.defineProperty(this, "outerWidth", {
+        get: function outerWidth() {
+            return CPP_ConsoleWindow_outerWidth(this.pointer)
+        }
+    })
 	
 	//// Instance methods ////
 	ConsoleWindow.prototype.test = function test() {

@@ -34,6 +34,8 @@ bool ConsoleWindow::Init(){
 	//// Instance properties ////
 	DKDuktape::AttachFunction("CPP_ConsoleWindow_innerHeight", ConsoleWindow::innerHeight);
 	DKDuktape::AttachFunction("CPP_ConsoleWindow_innerWidth", ConsoleWindow::innerWidth);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_outerHeight", ConsoleWindow::outerHeight);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_outerWidth", ConsoleWindow::outerWidth);
 	
 #if WIN
     // Get the standard input handle. 
@@ -178,11 +180,11 @@ int ConsoleWindow::innerHeight(duk_context* ctx){ //Read only
 		duk_push_undefined(ctx);
 		return true;
 	}
-    RECT rc;
-    GetClientRect(GetConsoleWindow(), &rc); // get client coords
-    ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rc.left)); // convert top-left
-    ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rc.right)); // convert bottom-right
-    unsigned int iHeight = rc.right - rc.left;
+    RECT rect;
+    GetClientRect(GetConsoleWindow(), &rect); // get client coords
+    ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
+    ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
+    unsigned int iHeight = rect.right - rect.left;
 	duk_push_uint(ctx, iHeight);
 	return true;
 }
@@ -195,12 +197,40 @@ int ConsoleWindow::innerWidth(duk_context* ctx){ //Read only
 		duk_push_undefined(ctx);
 		return true;
 	}
-    RECT rc;
-    GetClientRect(GetConsoleWindow(), &rc); // get client coords
-    ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rc.left)); // convert top-left
-    ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rc.right)); // convert bottom-right
-    unsigned int iWidth = rc.bottom - rc.top;
+    RECT rect;
+    GetClientRect(GetConsoleWindow(), &rect); // get client coords
+    ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
+    ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
+    unsigned int iWidth = rect.bottom - rect.top;
     duk_push_uint(ctx, iWidth);
+	return true;
+}
+
+int ConsoleWindow::outerHeight(duk_context* ctx){ //Read only
+	DKString eventAddress = duk_require_string(ctx, 0);
+	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	if (!event) {
+		DKERROR("event invalid! \n");
+		duk_push_undefined(ctx);
+		return true;
+	}
+	RECT rect;
+	GetWindowRect(GetConsoleWindow(), &rect);
+	//duk_push_uint(ctx, oHeight);
+	return true;
+}
+
+int ConsoleWindow::outerWidth(duk_context* ctx){ //Read only
+	DKString eventAddress = duk_require_string(ctx, 0);
+	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	if (!event) {
+		DKERROR("event invalid! \n");
+		duk_push_undefined(ctx);
+		return true;
+	}
+	RECT rect;
+	GetWindowRect(GetConsoleWindow(), &rect);
+    //duk_push_uint(ctx, oWidth);
 	return true;
 }
 
@@ -488,17 +518,17 @@ void ConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer){
 
             //// Get window client rect screen position ////
             // https://stackoverflow.com/a/15734569/688352
-            RECT rc;
-            GetClientRect(GetConsoleWindow(), &rc); // get client coords
-            ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rc.left)); // convert top-left
-            ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rc.right)); // convert bottom-right
+            RECT rect;
+            GetClientRect(GetConsoleWindow(), &rect); // get client coords
+            ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
+            ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
 
             //// Mouse Position ////
             int mousex, mousey;
             DKUtil::GetMousePos(mousex, mousey);
 
-            clientX = mousex - rc.left;
-            clientY = mousey - rc.top;
+            clientX = mousex - rect.left;
+            clientY = mousey - rect.top;
             if (clientX == x && clientY == y)
                 break;
 
