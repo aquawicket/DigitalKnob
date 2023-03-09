@@ -189,6 +189,7 @@ myConsoleInput.addEventListener('wheel', onWheel)
 
 
 // FocusEvents
+// https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent/relatedTarget
 //1. blur: sent after element A loses focus.
 function onBlur(event){ 
 	console.log("\n onBlur()")
