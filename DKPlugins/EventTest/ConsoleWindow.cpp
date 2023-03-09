@@ -223,8 +223,7 @@ int ConsoleWindow::ScreenX(duk_context* ctx){ //Read only
     GetClientRect(GetConsoleWindow(), &rect);
     ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
     ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
-    int sX = rect.left;
-    duk_push_int(ctx, sX);
+    duk_push_int(ctx, rect.left);
 	return true;
 }
 
@@ -233,8 +232,7 @@ int ConsoleWindow::screenLeft(duk_context* ctx){ //Read only
     GetClientRect(GetConsoleWindow(), &rect);
     ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
     ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
-    int sLeft = rect.left;
-    duk_push_int(ctx, sLeft);
+    duk_push_int(ctx, rect.left);
 	return true;
 }
 
@@ -243,8 +241,7 @@ int ConsoleWindow::ScreenY(duk_context* ctx){ //Read only
     GetClientRect(GetConsoleWindow(), &rect);
     ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
     ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
-    int sY = rect.top;
-    duk_push_int(ctx, sY);
+    duk_push_int(ctx, rect.top);
 	return true;
 }
 
@@ -253,22 +250,26 @@ int ConsoleWindow::screenTop(duk_context* ctx){ //Read only
     GetClientRect(GetConsoleWindow(), &rect);
     ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
     ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
-    int sTop = rect.top;
-    duk_push_int(ctx, sTop);
+    duk_push_int(ctx, rect.top);
     return true;
 }
 
 //// Instance methods ////
 int ConsoleWindow::blur(duk_context* ctx){
-	// TODO
+    if(ShowWindow(GetConsoleWindow(), SW_SHOWNOACTIVATE)){
+        //If the window was previously visible, the return value is nonzero.
+    }
+    else {
+        //If the window was previously hidden, the return value is zero.
+    }
 	return true;
 }
 int ConsoleWindow::close(duk_context* ctx){
-	// TODO
+    ShowWindow(GetConsoleWindow(), SW_HIDE);
 	return true;
 }
 int ConsoleWindow::focus(duk_context* ctx){
-	// TODO
+    ShowWindow(GetConsoleWindow(), SW_SHOW);
 	return true;
 }
 int ConsoleWindow::moveBy(duk_context* ctx){
