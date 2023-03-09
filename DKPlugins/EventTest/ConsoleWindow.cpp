@@ -178,7 +178,12 @@ int ConsoleWindow::innerHeight(duk_context* ctx){ //Read only
 		duk_push_undefined(ctx);
 		return true;
 	}
-	duk_push_string(ctx, event->innerHeight);
+    RECT rc;
+    GetClientRect(GetConsoleWindow(), &rc); // get client coords
+    ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rc.left)); // convert top-left
+    ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rc.right)); // convert bottom-right
+    unsigned int iHeight = rc.right - rc.left;
+	duk_push_uint(ctx, iHeight);
 	return true;
 }
 
@@ -190,7 +195,12 @@ int ConsoleWindow::innerWidth(duk_context* ctx){ //Read only
 		duk_push_undefined(ctx);
 		return true;
 	}
-	duk_push_string(ctx, event->innerWidth);
+    RECT rc;
+    GetClientRect(GetConsoleWindow(), &rc); // get client coords
+    ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rc.left)); // convert top-left
+    ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rc.right)); // convert bottom-right
+    unsigned int iWidth = rc.bottom - rc.top;
+    duk_push_uint(ctx, iWidth);
 	return true;
 }
 
