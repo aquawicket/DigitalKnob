@@ -191,8 +191,22 @@ int ConsoleWindow::closed(duk_context* ctx){ //Read only
 }
 
 int ConsoleWindow::fullScreen(duk_context* ctx){
-    // TODO
-	return true;
+    //get
+    if (!duk_is_boolean(ctx, 0)) {
+        // TODO
+        bool isFullScreen = false;
+        duk_push_boolean(ctx, isFullScreen);
+        return true;
+    }
+    //set
+    else {
+        bool fullscreen = duk_require_boolean(ctx, 0);
+        if(fullscreen)
+            ShowWindow(GetConsoleWindow(), SW_SHOWMAXIMIZED);
+        else
+            ShowWindow(GetConsoleWindow(), SW_SHOWNORMAL);
+        return true;
+    }
 }
 
 int ConsoleWindow::innerHeight(duk_context* ctx){ //Read only
