@@ -102,7 +102,18 @@ bool ConsoleInput::End(){
 }
 
 void ConsoleInput::Loop() {
-
+    /*
+    if (GetAsyncKeyState(VK_LBUTTON) & 0x01)
+        DKINFO("VK_LBUTTON \n");
+    if (GetAsyncKeyState(VK_RBUTTON) & 0x01)
+        DKINFO("VK_RBUTTON \n");
+    if (GetAsyncKeyState(VK_MBUTTON) & 0x01)
+        DKINFO("VK_MBUTTON \n");
+    if (GetAsyncKeyState(VK_XBUTTON1) & 0x01)
+        DKINFO("VK_XBUTTON1 \n");
+    if (GetAsyncKeyState(VK_XBUTTON2) & 0x01)
+        DKINFO("VK_XBUTTON2 \n");
+    */
 #if WIN
     DWORD lpcNumberOfEvents;
     GetNumberOfConsoleInputEvents(hStdin, &lpcNumberOfEvents);

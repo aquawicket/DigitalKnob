@@ -96,10 +96,9 @@ myConsoleInput.addEventListener('keypress', onKeyPress)
 // Mouse events
 function printMouseEventProperties(event){
 	//return;
-	//console.log("event.altKey="+event.altKey)
+	console.log("event.altKey="+event.altKey)
 	console.log("event.button="+event.button)
 	console.log("event.buttons="+event.buttons)
-	/*
 	console.log("event.clientX="+event.clientX)
 	console.log("event.clientY="+event.clientY)
 	console.log("event.ctrlKey="+event.ctrlKey)
@@ -121,7 +120,6 @@ function printMouseEventProperties(event){
 	console.log("event.webkitForce="+event.webkitForce)
 	console.log("event.x="+event.x)
 	console.log("event.y="+event.y)
-	*/
 }
 
 function onClick(event){
