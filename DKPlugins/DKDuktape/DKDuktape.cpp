@@ -138,6 +138,7 @@ bool DKDuktape::Init(){
 		DKClass::DKCreate("DKDuktape/DKGlobalEventHandlers.js");
 		DKClass::DKCreate("DKEvent");
 		DKClass::DKCreate("DKUIEvent");
+		DKClass::DKCreate("DKFocusEvent");
 #ifndef IOS
         DKClass::DKCreate("DKKeyboardEvent");
 		DKClass::DKCreate("DKMouseEvent");
