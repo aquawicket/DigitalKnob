@@ -216,13 +216,10 @@ myConsoleWindow.addEventListener('focusin', onFocusIn)
 
 
 // Resize events
-function printResizeEventProperties(event){
-	console.log("event.innerHeight="+event.innerHeight)
-	console.log("event.innerWidth="+event.innerWidth)
-}
 function onResize(event){
 	console.log("\n onResize()")
-	printResizeEventProperties(event)
+	console.log("myConsoleWindow.innerHeight="+myConsoleWindow.innerHeight)
+	console.log("myConsoleWindow.innerWidth="+myConsoleWindow.innerWidth)
 }
 myConsoleWindow.addEventListener('resize', onResize)
 
