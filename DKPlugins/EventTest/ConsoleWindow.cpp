@@ -32,6 +32,7 @@ bool ConsoleWindow::Init(){
 	DKDEBUGFUNC();
 
 	//// Instance properties ////
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_closed", ConsoleWindow::closed);
 	DKDuktape::AttachFunction("CPP_ConsoleWindow_innerHeight", ConsoleWindow::innerHeight);
 	DKDuktape::AttachFunction("CPP_ConsoleWindow_innerWidth", ConsoleWindow::innerWidth);
 	DKDuktape::AttachFunction("CPP_ConsoleWindow_outerHeight", ConsoleWindow::outerHeight);
@@ -182,6 +183,11 @@ void ConsoleWindow::Loop() {
 }
 
 //// Instance properties ////
+int ConsoleWindow::closed(duk_context* ctx){ //Read only
+    // TODO
+	return true;
+}
+
 int ConsoleWindow::innerHeight(duk_context* ctx){ //Read only
     RECT rect;
     GetClientRect(GetConsoleWindow(), &rect);
@@ -256,12 +262,7 @@ int ConsoleWindow::screenTop(duk_context* ctx){ //Read only
 
 //// Instance methods ////
 int ConsoleWindow::blur(duk_context* ctx){
-    if(ShowWindow(GetConsoleWindow(), SW_SHOWNOACTIVATE)){
-        //If the window was previously visible, the return value is nonzero.
-    }
-    else {
-        //If the window was previously hidden, the return value is zero.
-    }
+    ShowWindow(GetConsoleWindow(), SW_SHOWMINNOACTIVE);
 	return true;
 }
 int ConsoleWindow::close(duk_context* ctx){

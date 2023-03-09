@@ -229,7 +229,7 @@ function onResize(event){
 }
 myConsoleWindow.addEventListener('resize', onResize)
 
-//myConsoleWindow.blur()
+myConsoleWindow.blur()
 //myConsoleWindow.close()
 //myConsoleWindow.focus()
 

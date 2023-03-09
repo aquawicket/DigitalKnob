@@ -45,6 +45,7 @@ public:
 	void Loop();
 	
 	//// Instance properties ////
+	static int closed(duk_context* ctx);
 	static int innerHeight(duk_context* ctx);
 	static int innerWidth(duk_context* ctx);
 	static int outerHeight(duk_context* ctx);

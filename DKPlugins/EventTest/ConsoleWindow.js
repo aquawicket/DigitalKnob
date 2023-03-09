@@ -8,42 +8,47 @@ var ConsoleWindow = function ConsoleWindow(data) {
 	
 	
 	//// Instance properties ////
-	Object.defineProperty(this, "innerHeight", {
+	Object.defineProperty(this, "closed", { //Read only
+        get: function closed() {
+            return CPP_ConsoleWindow_closed()
+        }
+    })
+	Object.defineProperty(this, "innerHeight", { //Read only
         get: function innerHeight() {
             return CPP_ConsoleWindow_innerHeight()
         }
     })
-	Object.defineProperty(this, "innerWidth", {
+	Object.defineProperty(this, "innerWidth", { //Read only
         get: function innerWidth() {
             return CPP_ConsoleWindow_innerWidth()
         }
     })
-	Object.defineProperty(this, "outerHeight", {
+	Object.defineProperty(this, "outerHeight", { //Read only
         get: function outerHeight() {
             return CPP_ConsoleWindow_outerHeight()
         }
     })
-	Object.defineProperty(this, "outerWidth", {
+	Object.defineProperty(this, "outerWidth", { //Read only
         get: function outerWidth() {
             return CPP_ConsoleWindow_outerWidth()
         }
     })
-	Object.defineProperty(this, "screenX", {
+	Object.defineProperty(this, "screenX", { //Read only
         get: function screenX() {
             return CPP_ConsoleWindow_screenX()
         }
     })
-	Object.defineProperty(this, "screenLeft", {
+	Object.defineProperty(this, "screenLeft", { //Read only
         get: function screenLeft() {
             return CPP_ConsoleWindow_screenLeft()
         }
     })
-	Object.defineProperty(this, "screenY", {
+	Object.defineProperty(this, "screenY", { //Read only
         get: function screenY() {
             return CPP_ConsoleWindow_screenY()
         }
     })
-	Object.defineProperty(this, "screenTop", {
+	Object.defineProperty(this, "screenTop", { //Read only
         get: function screenTop() {
             return CPP_ConsoleWindow_screenTop()
         }
