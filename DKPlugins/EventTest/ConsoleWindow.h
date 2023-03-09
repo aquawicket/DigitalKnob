@@ -25,8 +25,8 @@
 */
 
 #pragma once
-#ifndef ConsoleInput_H
-#define ConsoleInput_H
+#ifndef ConsoleWindow_H
+#define ConsoleWindow_H
 
 #include "DK/DK.h"
 #include "DKDuktape/DKDuktape.h"
@@ -37,7 +37,7 @@
 	#include <stdio.h>
 #endif
 
-class ConsoleInput : public DKObjectT<ConsoleInput>
+class ConsoleWindow : public DKObjectT<ConsoleWindow>
 {
 public:
 	bool Init();
@@ -101,7 +101,7 @@ public:
 	void ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD);
 #endif
 };
-REGISTER_OBJECT(ConsoleInput, false);
+REGISTER_OBJECT(ConsoleWindow, false);
 
 
-#endif //ConsoleInput_H
+#endif //ConsoleWindow_H

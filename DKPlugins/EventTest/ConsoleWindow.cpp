@@ -25,10 +25,10 @@
 */
 //https://github.com/uNetworking/uWebSockets/blob/master/tests/main.cpp
 #include "DK/stdafx.h"
-#include "EventTest/ConsoleInput.h"
+#include "EventTest/ConsoleWindow.h"
 
 
-bool ConsoleInput::Init(){
+bool ConsoleWindow::Init(){
 	DKDEBUGFUNC();
 
 #if WIN
@@ -98,11 +98,11 @@ bool ConsoleInput::Init(){
     // FocusEvent
     relatedTarget = "";
 
-    DKApp::AppendLoopFunc(&ConsoleInput::Loop, this);
+    DKApp::AppendLoopFunc(&ConsoleWindow::Loop, this);
     return true;
 }
 
-bool ConsoleInput::End(){
+bool ConsoleWindow::End(){
 	DKDEBUGFUNC();
 
 #if WIN
@@ -113,7 +113,7 @@ bool ConsoleInput::End(){
 	return true;
 }
 
-void ConsoleInput::Loop() {
+void ConsoleWindow::Loop() {
     /*
     if (GetAsyncKeyState(VK_LBUTTON) & 0x01)
         DKINFO("VK_LBUTTON \n");
@@ -128,18 +128,18 @@ void ConsoleInput::Loop() {
     */
 #if WIN
     DWORD lpcNumberOfEvents;
-    GetNumberOfConsoleInputEvents(hStdin, &lpcNumberOfEvents);
+    GetNumberOfConsoleWindowEvents(hStdin, &lpcNumberOfEvents);
     if (!lpcNumberOfEvents)
         return;
 
     DWORD cNumRead, fdwMode, i;
     INPUT_RECORD irInBuf[128];
-    if (!ReadConsoleInput(
+    if (!ReadConsoleWindow(
         hStdin,      // input buffer handle 
         irInBuf,     // buffer to read into 
         128,         // size of read buffer 
         &cNumRead))  // number of records read 
-            ErrorExit("ReadConsoleInput");
+            ErrorExit("ReadConsoleWindow");
 
     // Dispatch the events to the appropriate handler. 
     for (i = 0; i < cNumRead; i++) {
@@ -166,14 +166,14 @@ void ConsoleInput::Loop() {
 }
 
 #if WIN
-void ConsoleInput::ErrorExit(LPCSTR lpszMessage){
+void ConsoleWindow::ErrorExit(LPCSTR lpszMessage){
     fprintf(stderr, "%s\n", lpszMessage);
     // Restore input mode on exit.
     SetConsoleMode(hStdin, fdwSaveOldMode);
     ExitProcess(0);
 }
 
-void ConsoleInput::FocusEventProc(FOCUS_EVENT_RECORD fer) {
+void ConsoleWindow::FocusEventProc(FOCUS_EVENT_RECORD fer) {
     DKString address = DKDuktape::pointerToAddress(this);
     DKString rval;
     DKString code;
@@ -200,7 +200,7 @@ void ConsoleInput::FocusEventProc(FOCUS_EVENT_RECORD fer) {
     }
 }
 
-void ConsoleInput::KeyboardEventProc(KEY_EVENT_RECORD ker){
+void ConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
     DKString address = DKDuktape::pointerToAddress(this);
     DKString rval;
     DKString code;
@@ -266,8 +266,8 @@ void ConsoleInput::KeyboardEventProc(KEY_EVENT_RECORD ker){
     }
 }
 
-void ConsoleInput::MouseEventProc(MOUSE_EVENT_RECORD mer){
-    //DKINFO("ConsoleInput::MouseEventProc()\n");
+void ConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer){
+    //DKINFO("ConsoleWindow::MouseEventProc()\n");
 	#ifndef MOUSE_HWHEELED
 		#define MOUSE_HWHEELED 0x0008
 	#endif
@@ -483,7 +483,7 @@ void ConsoleInput::MouseEventProc(MOUSE_EVENT_RECORD mer){
     }
 }
 
-void ConsoleInput::ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD wbsr){
+void ConsoleWindow::ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD wbsr){
 	DKString address = DKDuktape::pointerToAddress(this);
     DKString rval;
     DKString code;

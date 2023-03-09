@@ -51,10 +51,10 @@ console.log("\n")
 
 
 
-/////////////////// ConsoleInput //////////////////////////
-console.log("/////////// ConsoleInput /////////////////////")
-CPP_DK_Create("EventTest/ConsoleInput.js");
-const myConsoleInput = new ConsoleInput('myConsoleInput')
+/////////////////// ConsoleWindow //////////////////////////
+console.log("/////////// ConsoleWindow /////////////////////")
+CPP_DK_Create("EventTest/ConsoleWindow.js");
+const myConsoleWindow = new ConsoleWindow('myConsoleWindow')
 
 
 // KeyboardEvents
@@ -81,17 +81,17 @@ function onKeyDown(event){
 	console.log("\n onKeyDown()")
 	printKeyboardEventProperties(event)
 }
-myConsoleInput.addEventListener('keydown', onKeyDown)
+myConsoleWindow.addEventListener('keydown', onKeyDown)
 function onKeyUp(event){
 	console.log("\n onKeyUp()")
 	printKeyboardEventProperties(event)
 }
-myConsoleInput.addEventListener('keyup', onKeyUp)
+myConsoleWindow.addEventListener('keyup', onKeyUp)
 function onKeyPress(event){
 	console.log("\n onKeyPress()")
 	printKeyboardEventProperties(event)
 }
-myConsoleInput.addEventListener('keypress', onKeyPress)
+myConsoleWindow.addEventListener('keypress', onKeyPress)
 
 
 // MouseEvents
@@ -126,52 +126,52 @@ function onClick(event){
 	console.log("\n onClick()")
 	printMouseEventProperties(event)
 }
-myConsoleInput.addEventListener('click', onClick)
+myConsoleWindow.addEventListener('click', onClick)
 function onContextMenu(event){
 	console.log("\n onContextMenu()")
 	printMouseEventProperties(event)
 }
-myConsoleInput.addEventListener('contextmenu', onContextMenu)
+myConsoleWindow.addEventListener('contextmenu', onContextMenu)
 function onDblclick(event){
 	console.log("\n onDblclick()")
 	printMouseEventProperties(event)
 }
-myConsoleInput.addEventListener('dblclick', onDblclick)
+myConsoleWindow.addEventListener('dblclick', onDblclick)
 function onMouseDown(event){
 	console.log("\n onMouseDown()")
 	printMouseEventProperties(event)
 }
-myConsoleInput.addEventListener('mousedown', onMouseDown)
+myConsoleWindow.addEventListener('mousedown', onMouseDown)
 function onMouseEnter(event){
 	console.log("\n onMouseEnter()")
 	printMouseEventProperties(event)
 }
-myConsoleInput.addEventListener('mouseenter', onMouseEnter)
+myConsoleWindow.addEventListener('mouseenter', onMouseEnter)
 function onMouseLeave(event){
 	console.log("\n onMouseLeave()")
 	printMouseEventProperties(event)
 }
-myConsoleInput.addEventListener('mouseleave', onMouseLeave)
+myConsoleWindow.addEventListener('mouseleave', onMouseLeave)
 function onMouseMove(event){
 	console.log("\n onMouseMove()")
 	printMouseEventProperties(event)
 }
-myConsoleInput.addEventListener('mousemove', onMouseMove)
+myConsoleWindow.addEventListener('mousemove', onMouseMove)
 function onMouseOut(event){
 	console.log("\n onMouseOut()")
 	printMouseEventProperties(event)
 }
-myConsoleInput.addEventListener('mouseout', onMouseOut)
+myConsoleWindow.addEventListener('mouseout', onMouseOut)
 function onMouseOver(event){
 	console.log("\n onMouseOver()")
 	printMouseEventProperties(event)
 }
-myConsoleInput.addEventListener('mouseover', onMouseOver)
+myConsoleWindow.addEventListener('mouseover', onMouseOver)
 function onMouseUp(event){
 	console.log("\n onMouseUp()")
 	printMouseEventProperties(event)
 }
-myConsoleInput.addEventListener('mouseup', onMouseUp)
+myConsoleWindow.addEventListener('mouseup', onMouseUp)
 
 
 // WheelEvents
@@ -185,7 +185,7 @@ function onWheel(event){
 	console.log("\n onWheel()")
 	printWheelEventProperties(event)
 }
-myConsoleInput.addEventListener('wheel', onWheel)
+myConsoleWindow.addEventListener('wheel', onWheel)
 
 
 // FocusEvents
@@ -195,25 +195,25 @@ function onBlur(event){
 	console.log("\n onBlur()")
 	//printFocusEventProperties(event)
 }
-myConsoleInput.addEventListener('blur', onBlur)
+myConsoleWindow.addEventListener('blur', onBlur)
 //2. focusout: sent after the blur event.
 function onFocusOut(event){
 	console.log("\n onFocusOut()")
 	//printFocusEventProperties(event)
 }
-myConsoleInput.addEventListener('focusout', onFocusOut)
+myConsoleWindow.addEventListener('focusout', onFocusOut)
 //3. focus: sent after element B receives focus.
 function onFocus(event){
 	console.log("\n onFocus()")
 	//printFocusEventProperties(event)
 }
-myConsoleInput.addEventListener('focus', onFocus)
+myConsoleWindow.addEventListener('focus', onFocus)
 //4. focusin: sent after the focus event.
 function onFocusIn(event){
 	console.log("\n onFocusIn()")
 	//printFocusEventProperties(event)
 }
-myConsoleInput.addEventListener('focusin', onFocusIn)
+myConsoleWindow.addEventListener('focusin', onFocusIn)
 
 
 // Resize events
@@ -221,7 +221,7 @@ function onResize(event){
 	console.log("\n onResize()")
 	//printResizeEventProperties(event)
 }
-myConsoleInput.addEventListener('resize', onResize)
+myConsoleWindow.addEventListener('resize', onResize)
 
 
 /*
