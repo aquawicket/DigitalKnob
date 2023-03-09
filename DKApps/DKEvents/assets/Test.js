@@ -218,12 +218,18 @@ myConsoleWindow.addEventListener('focusin', onFocusIn)
 // Resize events
 function onResize(event){
 	console.log("\n onResize()")
+	console.log("myConsoleWindow.outerHeight="+myConsoleWindow.outerHeight)
+	console.log("myConsoleWindow.outerWidth="+myConsoleWindow.outerWidth)
 	console.log("myConsoleWindow.innerHeight="+myConsoleWindow.innerHeight)
 	console.log("myConsoleWindow.innerWidth="+myConsoleWindow.innerWidth)
+	console.log("myConsoleWindow.screenX="+myConsoleWindow.screenX)
+	console.log("myConsoleWindow.screenY="+myConsoleWindow.screenY)
+	console.log("myConsoleWindow.screenLeft="+myConsoleWindow.screenLeft)
+	console.log("myConsoleWindow.screenTop="+myConsoleWindow.screenTop)
 }
 myConsoleWindow.addEventListener('resize', onResize)
 
-myConsoleWindow.moveTo(100,100)
+
 /*
 ///////////////////// NcursesInput ////////////////////////
 console.log("/////////// NcursesInput /////////////////////")

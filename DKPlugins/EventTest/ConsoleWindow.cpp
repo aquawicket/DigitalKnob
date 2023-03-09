@@ -223,8 +223,8 @@ int ConsoleWindow::ScreenX(duk_context* ctx){ //Read only
     GetClientRect(GetConsoleWindow(), &rect);
     ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
     ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
-    unsigned int sX = rect.left;
-    duk_push_uint(ctx, sX);
+    int sX = rect.left;
+    duk_push_int(ctx, sX);
 	return true;
 }
 
@@ -233,8 +233,8 @@ int ConsoleWindow::screenLeft(duk_context* ctx){ //Read only
     GetClientRect(GetConsoleWindow(), &rect);
     ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
     ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
-    unsigned int sLeft = rect.left;
-    duk_push_uint(ctx, sLeft);
+    int sLeft = rect.left;
+    duk_push_int(ctx, sLeft);
 	return true;
 }
 
@@ -243,8 +243,8 @@ int ConsoleWindow::ScreenY(duk_context* ctx){ //Read only
     GetClientRect(GetConsoleWindow(), &rect);
     ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
     ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
-    unsigned int sY = rect.top;
-    duk_push_uint(ctx, sY);
+    int sY = rect.top;
+    duk_push_int(ctx, sY);
 	return true;
 }
 
@@ -253,8 +253,8 @@ int ConsoleWindow::screenTop(duk_context* ctx){ //Read only
     GetClientRect(GetConsoleWindow(), &rect);
     ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
     ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
-    unsigned int sTop = rect.top;
-    duk_push_uint(ctx, sTop);
+    int sTop = rect.top;
+    duk_push_int(ctx, sTop);
     return true;
 }
 
