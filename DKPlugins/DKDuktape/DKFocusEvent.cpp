@@ -30,7 +30,7 @@
 #include "DKDuktape/DKEvent.h"
 #include "DKDuktape/DKEventTarget.h"
 #include "DKDuktape/DKFocusEvent.h"
-#include "EventTest/ConsoleInput.h"
+#include "EventTest/ConsoleWindow.h"
 
 
 bool DKFocusEvent::Init(){
@@ -47,7 +47,7 @@ bool DKFocusEvent::Init(){
  //// Instance properties ////
 int DKFocusEvent::relatedTarget(duk_context* ctx){ //Read only
 	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleInput* event = (ConsoleInput*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid! \n");
 		duk_push_undefined(ctx);

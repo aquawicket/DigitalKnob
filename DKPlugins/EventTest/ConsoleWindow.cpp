@@ -128,13 +128,13 @@ void ConsoleWindow::Loop() {
     */
 #if WIN
     DWORD lpcNumberOfEvents;
-    GetNumberOfConsoleWindowEvents(hStdin, &lpcNumberOfEvents);
+    GetNumberOfConsoleInputEvents(hStdin, &lpcNumberOfEvents);
     if (!lpcNumberOfEvents)
         return;
 
     DWORD cNumRead, fdwMode, i;
     INPUT_RECORD irInBuf[128];
-    if (!ReadConsoleWindow(
+    if (!ReadConsoleInput(
         hStdin,      // input buffer handle 
         irInBuf,     // buffer to read into 
         128,         // size of read buffer 
