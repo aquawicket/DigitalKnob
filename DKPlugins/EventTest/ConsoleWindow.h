@@ -49,9 +49,9 @@ public:
 	static int innerWidth(duk_context* ctx);
 	static int outerHeight(duk_context* ctx);
 	static int outerWidth(duk_context* ctx);
-	static int screenX(duk_context* ctx);
+	static int ScreenX(duk_context* ctx);
 	static int screenLeft(duk_context* ctx);
-	static int screenY(duk_context* ctx);
+	static int ScreenY(duk_context* ctx);
 	static int screenTop(duk_context* ctx);
 	
 	//// Instance methods ////

@@ -36,9 +36,9 @@ bool ConsoleWindow::Init(){
 	DKDuktape::AttachFunction("CPP_ConsoleWindow_innerWidth", ConsoleWindow::innerWidth);
 	DKDuktape::AttachFunction("CPP_ConsoleWindow_outerHeight", ConsoleWindow::outerHeight);
 	DKDuktape::AttachFunction("CPP_ConsoleWindow_outerWidth", ConsoleWindow::outerWidth);
-	DKDuktape::AttachFunction("CPP_ConsoleWindow_screenX", ConsoleWindow::screenX);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_screenX", ConsoleWindow::ScreenX);
 	DKDuktape::AttachFunction("CPP_ConsoleWindow_screenLeft", ConsoleWindow::screenLeft);
-	DKDuktape::AttachFunction("CPP_ConsoleWindow_screenY", ConsoleWindow::screenY);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_screenY", ConsoleWindow::ScreenY);
 	DKDuktape::AttachFunction("CPP_ConsoleWindow_screenTop", ConsoleWindow::screenTop);
 	
 	//// Instance methods ////
@@ -247,7 +247,7 @@ int ConsoleWindow::outerWidth(duk_context* ctx){ //Read only
 	return true;
 }
 
-int ConsoleWindow::screenX(duk_context* ctx){ //Read only
+int ConsoleWindow::ScreenX(duk_context* ctx){ //Read only
 	DKString eventAddress = duk_require_string(ctx, 0);
 	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
@@ -273,7 +273,7 @@ int ConsoleWindow::screenLeft(duk_context* ctx){ //Read only
 	return true;
 }
 
-int ConsoleWindow::screenY(duk_context* ctx){ //Read only
+int ConsoleWindow::ScreenY(duk_context* ctx){ //Read only
 	DKString eventAddress = duk_require_string(ctx, 0);
 	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
