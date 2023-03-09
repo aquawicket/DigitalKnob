@@ -183,13 +183,6 @@ void ConsoleWindow::Loop() {
 
 //// Instance properties ////
 int ConsoleWindow::innerHeight(duk_context* ctx){ //Read only
-	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
-	if (!event) {
-		DKERROR("event invalid! \n");
-		duk_push_undefined(ctx);
-		return true;
-	}
     RECT rect;
     GetClientRect(GetConsoleWindow(), &rect);
     ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
@@ -200,13 +193,6 @@ int ConsoleWindow::innerHeight(duk_context* ctx){ //Read only
 }
 
 int ConsoleWindow::innerWidth(duk_context* ctx){ //Read only
-	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
-	if (!event) {
-		DKERROR("event invalid! \n");
-		duk_push_undefined(ctx);
-		return true;
-	}
     RECT rect;
     GetClientRect(GetConsoleWindow(), &rect);
     ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
@@ -217,13 +203,6 @@ int ConsoleWindow::innerWidth(duk_context* ctx){ //Read only
 }
 
 int ConsoleWindow::outerHeight(duk_context* ctx){ //Read only
-	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
-	if (!event) {
-		DKERROR("event invalid! \n");
-		duk_push_undefined(ctx);
-		return true;
-	}
 	RECT rect;
 	GetWindowRect(GetConsoleWindow(), &rect);
     unsigned int oHeight = rect.bottom - rect.top;
@@ -232,13 +211,6 @@ int ConsoleWindow::outerHeight(duk_context* ctx){ //Read only
 }
 
 int ConsoleWindow::outerWidth(duk_context* ctx){ //Read only
-	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
-	if (!event) {
-		DKERROR("event invalid! \n");
-		duk_push_undefined(ctx);
-		return true;
-	}
 	RECT rect;
 	GetWindowRect(GetConsoleWindow(), &rect);
     unsigned int oWidth = rect.right - rect.left;
@@ -247,13 +219,6 @@ int ConsoleWindow::outerWidth(duk_context* ctx){ //Read only
 }
 
 int ConsoleWindow::ScreenX(duk_context* ctx){ //Read only
-	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
-	if (!event) {
-		DKERROR("event invalid! \n");
-		duk_push_undefined(ctx);
-		return true;
-	}
     RECT rect;
     GetClientRect(GetConsoleWindow(), &rect);
     ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
@@ -264,13 +229,6 @@ int ConsoleWindow::ScreenX(duk_context* ctx){ //Read only
 }
 
 int ConsoleWindow::screenLeft(duk_context* ctx){ //Read only
-	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
-	if (!event) {
-		DKERROR("event invalid! \n");
-		duk_push_undefined(ctx);
-		return true;
-	}
     RECT rect;
     GetClientRect(GetConsoleWindow(), &rect);
     ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
@@ -281,13 +239,6 @@ int ConsoleWindow::screenLeft(duk_context* ctx){ //Read only
 }
 
 int ConsoleWindow::ScreenY(duk_context* ctx){ //Read only
-	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
-	if (!event) {
-		DKERROR("event invalid! \n");
-		duk_push_undefined(ctx);
-		return true;
-	}
     RECT rect;
     GetClientRect(GetConsoleWindow(), &rect);
     ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
@@ -298,13 +249,6 @@ int ConsoleWindow::ScreenY(duk_context* ctx){ //Read only
 }
 
 int ConsoleWindow::screenTop(duk_context* ctx){ //Read only
-	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
-	if (!event) {
-		DKERROR("event invalid! \n");
-		duk_push_undefined(ctx);
-		return true;
-	}
     RECT rect;
     GetClientRect(GetConsoleWindow(), &rect);
     ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
@@ -316,46 +260,18 @@ int ConsoleWindow::screenTop(duk_context* ctx){ //Read only
 
 //// Instance methods ////
 int ConsoleWindow::blur(duk_context* ctx){
-	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
-	if (!event) {
-		DKERROR("event invalid! \n");
-		duk_push_undefined(ctx);
-		return true;
-	}
 	// TODO
 	return true;
 }
 int ConsoleWindow::close(duk_context* ctx){
-	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
-	if (!event) {
-		DKERROR("event invalid! \n");
-		duk_push_undefined(ctx);
-		return true;
-	}
 	// TODO
 	return true;
 }
 int ConsoleWindow::focus(duk_context* ctx){
-	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
-	if (!event) {
-		DKERROR("event invalid! \n");
-		duk_push_undefined(ctx);
-		return true;
-	}
 	// TODO
 	return true;
 }
 int ConsoleWindow::moveBy(duk_context* ctx){
-	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
-	if (!event) {
-		DKERROR("event invalid! \n");
-		duk_push_undefined(ctx);
-		return true;
-	}
     int deltaX = duk_require_int(ctx, 0);
     int deltaY = duk_require_int(ctx, 1);
     RECT rect;
@@ -369,13 +285,6 @@ int ConsoleWindow::moveBy(duk_context* ctx){
 	return true;
 }
 int ConsoleWindow::moveTo(duk_context* ctx){
-	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
-	if (!event) {
-		DKERROR("event invalid! \n");
-		duk_push_undefined(ctx);
-		return true;
-	}
     int x = duk_require_int(ctx, 0);
     int y = duk_require_int(ctx, 1);
     RECT rect;
@@ -389,13 +298,6 @@ int ConsoleWindow::moveTo(duk_context* ctx){
 	return true;
 }
 int ConsoleWindow::resizeBy(duk_context* ctx){
-	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
-	if (!event) {
-		DKERROR("event invalid! \n");
-		duk_push_undefined(ctx);
-		return true;
-	}
     int xDelta = duk_require_int(ctx, 0);
     int yDelta = duk_require_int(ctx, 1);
     RECT rect;
@@ -409,13 +311,6 @@ int ConsoleWindow::resizeBy(duk_context* ctx){
 	return true;
 }
 int ConsoleWindow::resizeTo(duk_context* ctx){
-	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
-	if (!event) {
-		DKERROR("event invalid! \n");
-		duk_push_undefined(ctx);
-		return true;
-	}
     int width = duk_require_int(ctx, 0);
     int height = duk_require_int(ctx, 1);
     RECT rect;
