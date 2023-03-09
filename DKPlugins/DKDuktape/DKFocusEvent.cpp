@@ -36,7 +36,7 @@
 bool DKFocusEvent::Init(){
 	DKDEBUGFUNC();
 
-	 //// Instance properties ////
+	//// Instance properties ////
 	DKDuktape::AttachFunction("CPP_DKFocusEvent_relatedTarget", DKFocusEvent::relatedTarget); //Read only
 
 	DKClass::DKCreate("DKDuktape/DKFocusEvent.js");

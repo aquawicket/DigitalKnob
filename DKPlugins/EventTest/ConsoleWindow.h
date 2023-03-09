@@ -44,6 +44,10 @@ public:
 	bool End();
 	void Loop();
 	
+	//// Instance properties ////
+	static int innerHeight(duk_context* ctx);
+	static int innerWidth(duk_context* ctx);
+	
 #if WIN
 	// KeyboardEvent
 	bool altKey;

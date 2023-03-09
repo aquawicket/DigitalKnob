@@ -96,7 +96,6 @@ myConsoleWindow.addEventListener('keypress', onKeyPress)
 
 // MouseEvents
 function printMouseEventProperties(event){
-	return;
 	console.log("event.altKey="+event.altKey)
 	console.log("event.button="+event.button)
 	console.log("event.buttons="+event.buttons)

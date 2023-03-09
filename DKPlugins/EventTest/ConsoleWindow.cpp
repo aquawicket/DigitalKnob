@@ -31,6 +31,10 @@
 bool ConsoleWindow::Init(){
 	DKDEBUGFUNC();
 
+	//// Instance properties ////
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_innerHeight", ConsoleWindow::innerHeight);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_innerWidth", ConsoleWindow::innerWidth);
+	
 #if WIN
     // Get the standard input handle. 
     hStdin = GetStdHandle(STD_INPUT_HANDLE);
@@ -165,6 +169,32 @@ void ConsoleWindow::Loop() {
 #endif
 }
 
+//// Instance properties ////
+int ConsoleWindow::innerHeight(duk_context* ctx){ //Read only
+	DKString eventAddress = duk_require_string(ctx, 0);
+	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	if (!event) {
+		DKERROR("event invalid! \n");
+		duk_push_undefined(ctx);
+		return true;
+	}
+	duk_push_string(ctx, event->innerHeight);
+	return true;
+}
+
+int ConsoleWindow::innerWidth(duk_context* ctx){ //Read only
+	DKString eventAddress = duk_require_string(ctx, 0);
+	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	if (!event) {
+		DKERROR("event invalid! \n");
+		duk_push_undefined(ctx);
+		return true;
+	}
+	duk_push_string(ctx, event->innerWidth);
+	return true;
+}
+
+	
 #if WIN
 void ConsoleWindow::ErrorExit(LPCSTR lpszMessage){
     fprintf(stderr, "%s\n", lpszMessage);
@@ -293,39 +323,39 @@ void ConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer){
             // 16 : 5th button(typically the "Browser Forward" button)
             buttons = 0;
             if (mer.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED) {  // 0x0001
-                DKINFO("1 ");
+                //DKINFO("1 ");
                 buttons = buttons + 1;
             }
             else {
-                DKINFO("0 ");
+                //DKINFO("0 ");
             }
             if (mer.dwButtonState & FROM_LEFT_2ND_BUTTON_PRESSED) {  // 0x0004
-                DKINFO("2 ");
+                //DKINFO("2 ");
                 buttons = buttons + 4;
             }
             else {
-                DKINFO("0 ");
+                //DKINFO("0 ");
             }
             if (mer.dwButtonState & RIGHTMOST_BUTTON_PRESSED) {      // 0x0002
-                DKINFO("3 ");
+                //DKINFO("3 ");
                 buttons = buttons + 2;
             }
             else {
-                DKINFO("0 ");
+                //DKINFO("0 ");
             }
             if (mer.dwButtonState & FROM_LEFT_3RD_BUTTON_PRESSED) {  // 0x0008
-                DKINFO("4 ");
+                //DKINFO("4 ");
                 buttons = buttons + 8;
             }
             else {
-                DKINFO("0 ");
+                //DKINFO("0 ");
             }
             if (mer.dwButtonState & FROM_LEFT_4TH_BUTTON_PRESSED) {  // 0x0010
-                DKINFO("5 \n");
+                //DKINFO("5 \n");
                 buttons = buttons + 16;
             }
             else {
-                DKINFO("0 \n");
+                //DKINFO("0 \n");
             }
 
             if (mer.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED) {  // 0x0001
@@ -488,7 +518,7 @@ void ConsoleWindow::ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD wbsr){
     DKString rval;
     DKString code;
 	
-	DKINFO("resize     columns="+toString(wbsr.dwSize.X)+", rows="+toString(wbsr.dwSize.Y)+" \n");
+	//DKINFO("resize     columns="+toString(wbsr.dwSize.X)+", rows="+toString(wbsr.dwSize.Y)+" \n");
 	code = "doMouseEvent('resize','','" + address + "')";
     DKDuktape::RunDuktape(code, rval);
 }

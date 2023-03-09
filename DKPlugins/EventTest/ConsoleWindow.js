@@ -9,9 +9,14 @@ var ConsoleWindow = function ConsoleWindow(data)
 	this.pointer = CPP_Duktape_createDKObject("ConsoleWindow")
 	
 	//// Instance properties ////
-	Object.defineProperty(this, "value", {
-        get: function value() {
-            return CPP_ConsoleWindow_value(this.pointer)
+	Object.defineProperty(this, "innerHeight", {
+        get: function innerHeight() {
+            return CPP_ConsoleWindow_innerHeight(this.pointer)
+        }
+    })
+	Object.defineProperty(this, "innerWidth", {
+        get: function innerWidth() {
+            return CPP_ConsoleWindow_innerWidth(this.pointer)
         }
     })
 	
