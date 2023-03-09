@@ -33,8 +33,10 @@ bool ConsoleWindow::Init(){
 
 	//// Instance properties ////
 	DKDuktape::AttachFunction("CPP_ConsoleWindow_closed", ConsoleWindow::closed);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_fullScreen", ConsoleWindow::fullScreen);
 	DKDuktape::AttachFunction("CPP_ConsoleWindow_innerHeight", ConsoleWindow::innerHeight);
 	DKDuktape::AttachFunction("CPP_ConsoleWindow_innerWidth", ConsoleWindow::innerWidth);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_name", ConsoleWindow::name);
 	DKDuktape::AttachFunction("CPP_ConsoleWindow_outerHeight", ConsoleWindow::outerHeight);
 	DKDuktape::AttachFunction("CPP_ConsoleWindow_outerWidth", ConsoleWindow::outerWidth);
 	DKDuktape::AttachFunction("CPP_ConsoleWindow_screenX", ConsoleWindow::ScreenX);
@@ -188,6 +190,11 @@ int ConsoleWindow::closed(duk_context* ctx){ //Read only
 	return true;
 }
 
+int ConsoleWindow::fullScreen(duk_context* ctx){
+    // TODO
+	return true;
+}
+
 int ConsoleWindow::innerHeight(duk_context* ctx){ //Read only
     RECT rect;
     GetClientRect(GetConsoleWindow(), &rect);
@@ -205,6 +212,11 @@ int ConsoleWindow::innerWidth(duk_context* ctx){ //Read only
     ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
     unsigned int iWidth = rect.bottom - rect.top;
     duk_push_uint(ctx, iWidth);
+	return true;
+}
+
+int ConsoleWindow::name(duk_context* ctx){
+    // TODO
 	return true;
 }
 

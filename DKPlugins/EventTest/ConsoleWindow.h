@@ -46,8 +46,10 @@ public:
 	
 	//// Instance properties ////
 	static int closed(duk_context* ctx);
+	static int fullScreen(duk_context* ctx);
 	static int innerHeight(duk_context* ctx);
 	static int innerWidth(duk_context* ctx);
+	static int name(duk_context* ctx);
 	static int outerHeight(duk_context* ctx);
 	static int outerWidth(duk_context* ctx);
 	static int ScreenX(duk_context* ctx);
