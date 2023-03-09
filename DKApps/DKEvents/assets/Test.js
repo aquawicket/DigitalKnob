@@ -223,7 +223,7 @@ function onResize(event){
 }
 myConsoleWindow.addEventListener('resize', onResize)
 
-
+myConsoleWindow.moveTo(100,100)
 /*
 ///////////////////// NcursesInput ////////////////////////
 console.log("/////////// NcursesInput /////////////////////")

@@ -53,31 +53,31 @@ var ConsoleWindow = function ConsoleWindow(data) {
 	//// Instance methods ////
 	ConsoleWindow.prototype.blur = function blur() {
 		console.log("ConsoleWindow.prototype.blur()")
-		CPP_ConsoleWindow_blur(this.pointer)
+		CPP_ConsoleWindow_blur()
     }
 	ConsoleWindow.prototype.close = function close() {
 		console.log("ConsoleWindow.prototype.close()")
-		CPP_ConsoleWindow_close(this.pointer)
+		CPP_ConsoleWindow_close()
     }
 	ConsoleWindow.prototype.focus = function focus() {
 		console.log("ConsoleWindow.prototype.focus()")
-		CPP_ConsoleWindow_focus(this.pointer)
+		CPP_ConsoleWindow_focus()
     }
-	ConsoleWindow.prototype.moveBy = function moveBy() {
-		console.log("ConsoleWindow.prototype.moveBy()")
-		CPP_ConsoleWindow_moveBy(this.pointer)
+	ConsoleWindow.prototype.moveBy = function moveBy(deltaX, deltaY) {
+		console.log("ConsoleWindow.prototype.moveBy("+deltaX+", "+deltaY+")")
+		CPP_ConsoleWindow_moveBy(deltaX, deltaY)
     }
-	ConsoleWindow.prototype.moveTo = function moveTo() {
-		console.log("ConsoleWindow.prototype.moveTo()")
-		CPP_ConsoleWindow_moveTo(this.pointer)
+	ConsoleWindow.prototype.moveTo = function moveTo(x, y) {
+		console.log("ConsoleWindow.prototype.moveTo("+x+", "+y+")")
+		CPP_ConsoleWindow_moveTo(x, y)
     }
-	ConsoleWindow.prototype.resizeBy = function resizeBy() {
-		console.log("ConsoleWindow.prototype.resizeBy()")
-		CPP_ConsoleWindow_resizeBy(this.pointer)
+	ConsoleWindow.prototype.resizeBy = function resizeBy(xDelta, yDelta) {
+		console.log("ConsoleWindow.prototype.resizeBy("+xDelta+", "+yDelta+")")
+		CPP_ConsoleWindow_resizeBy(xDelta, yDelta)
     }
-	ConsoleWindow.prototype.resizeTo = function resizeTo() {
-		console.log("ConsoleWindow.prototype.resizeTo()")
-		CPP_ConsoleWindow_resizeTo(this.pointer)
+	ConsoleWindow.prototype.resizeTo = function resizeTo(width, height) {
+		console.log("ConsoleWindow.prototype.resizeTo("+width+", "+height+")")
+		CPP_ConsoleWindow_resizeTo(width, height)
     }
 	
 	
