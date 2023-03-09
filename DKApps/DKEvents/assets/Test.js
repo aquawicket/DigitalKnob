@@ -229,6 +229,7 @@ function onResize(event){
 }
 myConsoleWindow.addEventListener('resize', onResize)
 
+myConsoleWindow.blur()
 
 /*
 ///////////////////// NcursesInput ////////////////////////
