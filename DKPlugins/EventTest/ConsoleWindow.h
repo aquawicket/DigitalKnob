@@ -124,6 +124,7 @@ public:
 	void ErrorExit(LPCSTR);
 	void FocusEventProc(FOCUS_EVENT_RECORD);
 	void KeyboardEventProc(KEY_EVENT_RECORD);
+	void MenuEventProc(MENU_EVENT_RECORD);
 	void MouseEventProc(MOUSE_EVENT_RECORD);
 	void ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD);
 #endif

@@ -183,7 +183,9 @@ void ConsoleWindow::Loop() {
                 break;
             case FOCUS_EVENT:
                 FocusEventProc(irInBuf[i].Event.FocusEvent);
-            case MENU_EVENT: // disregard menu events 
+                break;
+            case MENU_EVENT: // disregard menu events
+                MenuEventProc(irInBuf[i].Event.MenuEvent);
                 break;
             default:
                 ErrorExit("Unknown event type");
@@ -502,7 +504,11 @@ void ConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
     }
 }
 
-void ConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer){
+void ConsoleWindow::MenuEventProc(MENU_EVENT_RECORD mer) {
+    DKINFO("ConsoleWindow::MenuEventProc() \n");
+}
+
+void ConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
     //DKINFO("ConsoleWindow::MouseEventProc()\n");
 	#ifndef MOUSE_HWHEELED
 		#define MOUSE_HWHEELED 0x0008
