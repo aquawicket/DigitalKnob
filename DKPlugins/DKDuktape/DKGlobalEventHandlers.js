@@ -1,4 +1,3 @@
-//https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers
 
 var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
     this.pointer = pointer;
