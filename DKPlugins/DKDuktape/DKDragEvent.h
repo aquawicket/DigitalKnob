@@ -42,8 +42,7 @@ public:
 	//// Instance properties ////
 	static int dataTransfer(duk_context* ctx);	//Read only
 };
-
-
 REGISTER_OBJECT(DKDragEvent, true)
+
 
 #endif //DKDragEvent_H

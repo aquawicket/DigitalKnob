@@ -36,108 +36,16 @@
 bool DKDragEvent::Init(){
 	DKDEBUGFUNC();
 
-	//// Properties ////
-	DKDuktape::AttachFunction("CPP_DKDragEvent_deltaX", DKDragEvent::deltaX);
-	DKDuktape::AttachFunction("CPP_DKDragEvent_deltaY", DKDragEvent::deltaY);
-	DKDuktape::AttachFunction("CPP_DKDragEvent_deltaZ", DKDragEvent::deltaZ);
-	DKDuktape::AttachFunction("CPP_DKDragEvent_deltaMode", DKDragEvent::deltaMode);
-	
-	//// Deprecated Properties ////
-	/*
-	DKDuktape::AttachFunction("CPP_DKDragEvent_wheelDelta", DKDragEvent::wheelDelta);
-	DKDuktape::AttachFunction("CPP_DKDragEvent_wheelDeltaX", DKDragEvent::wheelDeltaX);
-	DKDuktape::AttachFunction("CPP_DKDragEvent_wheelDeltaY", DKDragEvent::wheelDeltaY);
-	*/
+	//// Instance properties ////
+	DKDuktape::AttachFunction("CPP_DKDragEvent_dataTransfer", DKDragEvent::dataTransfer);
 
 	DKClass::DKCreate("DKDuktape/DKDragEvent.js");
 	return true;
 }
 
 
-//// Properties ////
-int DKDragEvent::deltaX(duk_context* ctx){
-	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
-	if (!event) {
-		DKERROR("event invalid! \n");
-		duk_push_undefined(ctx);
-		return true;
-	}
-	duk_push_int(ctx, event->deltaX);
+//// Instance properties ////
+int DKDragEvent::dataTransfer(duk_context* ctx){
+	// TODO
 	return true;
 }
-
-int DKDragEvent::deltaY(duk_context* ctx){
-	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
-	if (!event) {
-		DKERROR("event invalid! \n");
-		duk_push_undefined(ctx);
-		return true;
-	}
-	duk_push_int(ctx, event->deltaY);
-	return true;
-}
-
-int DKDragEvent::deltaZ(duk_context* ctx){
-	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
-	if (!event) {
-		DKERROR("event invalid! \n");
-		duk_push_undefined(ctx);
-		return true;
-	}
-	duk_push_int(ctx, event->deltaZ);
-	return true;
-}
-
-int DKDragEvent::deltaMode(duk_context* ctx){
-	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
-	if (!event) {
-		DKERROR("event invalid! \n");
-		duk_push_undefined(ctx);
-		return true;
-	}
-	duk_push_uint(ctx, event->deltaMode);
-	return true;
-}
-
-//// Deprecated Properties ////
-/*
-int DKDragEvent::wheelDelta(duk_context* ctx){
-	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
-	if (!event) {
-		DKERROR("event invalid! \n");
-		duk_push_undefined(ctx);
-		return true;
-	}
-	duk_push_uint(ctx, event->wheelDelta);
-	return true;
-}
-
-int DKDragEvent::wheelDeltaX(duk_context* ctx){
-	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
-	if (!event) {
-		DKERROR("event invalid! \n");
-		duk_push_undefined(ctx);
-		return true;
-	}
-	duk_push_boolean(ctx, event->wheelDeltaX);
-	return true;
-}
-
-int DKDragEvent::wheelDeltaY(duk_context* ctx) {
-	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
-	if (!event) {
-		DKERROR("event invalid! \n");
-		duk_push_undefined(ctx);
-		return true;
-	}
-	duk_push_int(ctx, event->wheelDeltaY);
-	return true;
-}
-*/
