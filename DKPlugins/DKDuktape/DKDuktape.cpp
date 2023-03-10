@@ -551,10 +551,10 @@ int DKDuktape::createDKObject(duk_context* _ctx) {
 	return true;
 }
 
-bool DKDuktape::doEvent(const DKString& type, const DKString& options, const void* pointer) {
+bool DKDuktape::dispatchEvent(const DKString& type, const DKString& options, const void* pointer) {
 	DKDEBUGFUNC(type, options, pointer);
 	DKString address = pointerToAddress(pointer);
-	DKString code = "doEvent('"+type+"','"+options+"','"+address+"')";
+	DKString code = "dispatchEvent('" + type + "','" + options + "','" + address + "')";
 	DKString rval;
 	DKDuktape::RunDuktape(code, rval);
 	DKINFO("rval = " + rval + "\n");

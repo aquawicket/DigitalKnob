@@ -102,7 +102,7 @@ bool DKUWebSocketsServer::CreateServer(const DKString& url, const int& port){
 				//std::cout << "FAILURE: " << user << " should not emit error!" << std::endl;
 				//exit(-1);
 		}
-		DKDuktape::doEvent("error", "", this);
+		DKDuktape::dispatchEvent("error", "", this);
 	});
 
 	serverHub.onConnection([this](uWS::WebSocket<uWS::SERVER> *ws, uWS::HttpRequest req){
@@ -118,13 +118,13 @@ bool DKUWebSocketsServer::CreateServer(const DKString& url, const int& port){
 			default:
 				DKINFO("FAILURE: ws->getUserData() should not connect! \n");
 		}
-		DKDuktape::doEvent("open", "", this);
+		DKDuktape::dispatchEvent("open", "", this);
 	});
 
 	serverHub.onDisconnection([this](uWS::WebSocket<uWS::SERVER> *ws, int code, char *message, size_t length) {
 		DKDEBUGFUNC(ws, code, message, length);
 		serverWebSocket = NULL;
-		DKDuktape::doEvent("close", "", this);
+		DKDuktape::dispatchEvent("close", "", this);
 		DKINFO("Client got disconnected with data:ws->getUserData(), code:"+toString(code)+", message:<"+DKString(message, length)+"> \n");
 	});
 
@@ -133,7 +133,7 @@ bool DKUWebSocketsServer::CreateServer(const DKString& url, const int& port){
 		MessageFromClient(ws, message, length, opCode);
 	});
 
-	DKDuktape::doEvent("init", "", this);
+	DKDuktape::dispatchEvent("init", "", this);
 	return DKINFO("DKUWebSocketsServer::CreateServer(): Server started... \n");
 }
 
@@ -148,8 +148,7 @@ void DKUWebSocketsServer::Loop(){
 bool DKUWebSocketsServer::MessageFromClient(uWS::WebSocket<uWS::SERVER>* ws, char *message, size_t length, uWS::OpCode opCode){
 	DKDEBUGFUNC(ws, message, length, opCode);
 	DKString message_  = DKString(message).substr(0, length);
-	DKDuktape::doEvent("message", "", this);
-
+	DKDuktape::dispatchEvent("message", "", this);
 	DKINFO("DKUWebSocketsServer::MessageFromClient(): "+message_+"\n");
 	return true;
 }
