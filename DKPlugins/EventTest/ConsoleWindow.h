@@ -66,6 +66,11 @@ public:
 	static int resizeBy(duk_context* ctx);
 	static int resizeTo(duk_context* ctx);
 	
+	// fullScreen
+	static WINDOWPLACEMENT wpc;
+	static LONG HWNDStyle;
+	static LONG HWNDStyleEx;
+
 #if WIN
 	// KeyboardEvent
 	bool altKey;

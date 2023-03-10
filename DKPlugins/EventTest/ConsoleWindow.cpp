@@ -27,6 +27,11 @@
 #include "DK/stdafx.h"
 #include "EventTest/ConsoleWindow.h"
 
+// fullScreen
+WINDOWPLACEMENT ConsoleWindow::wpc;
+LONG ConsoleWindow::HWNDStyle = 0;
+LONG ConsoleWindow::HWNDStyleEx = 0;
+
 
 bool ConsoleWindow::Init(){
 	DKDEBUGFUNC();
@@ -120,6 +125,10 @@ bool ConsoleWindow::Init(){
     // FocusEvent
     relatedTarget = "";
 
+    // fullScreen
+    HWNDStyle = 0;
+    HWNDStyleEx = 0;
+
     DKApp::AppendLoopFunc(&ConsoleWindow::Loop, this);
     return true;
 }
@@ -201,10 +210,34 @@ int ConsoleWindow::fullScreen(duk_context* ctx){
     //set
     else {
         bool fullscreen = duk_require_boolean(ctx, 0);
-        if(fullscreen)
+        if (fullscreen) {
+            GetWindowPlacement(GetConsoleWindow(), &wpc);
+            if (!HWNDStyle)
+                HWNDStyle = GetWindowLong(GetConsoleWindow(), GWL_STYLE);
+            if (!HWNDStyleEx)
+                HWNDStyleEx = GetWindowLong(GetConsoleWindow(), GWL_EXSTYLE);
+            LONG NewHWNDStyle = HWNDStyle;
+            NewHWNDStyle &= ~WS_BORDER;
+            NewHWNDStyle &= ~WS_DLGFRAME;
+            NewHWNDStyle &= ~WS_THICKFRAME;
+            LONG NewHWNDStyleEx = HWNDStyleEx;
+            NewHWNDStyleEx &= ~WS_EX_WINDOWEDGE;
+            SetWindowLong(GetConsoleWindow(), GWL_STYLE, NewHWNDStyle | WS_POPUP);
+            SetWindowLong(GetConsoleWindow(), GWL_EXSTYLE, NewHWNDStyleEx | WS_EX_TOPMOST);
             ShowWindow(GetConsoleWindow(), SW_SHOWMAXIMIZED);
-        else
+        }
+        else {
+            //if (!wpc)
+            //    GetWindowPlacement(GetConsoleWindow(), wpc);
+            if (!HWNDStyle)
+                HWNDStyle = GetWindowLong(GetConsoleWindow(), GWL_STYLE);
+            if (!HWNDStyleEx)
+                HWNDStyleEx = GetWindowLong(GetConsoleWindow(), GWL_EXSTYLE);
+            SetWindowLong(GetConsoleWindow(), GWL_STYLE, HWNDStyle);
+            SetWindowLong(GetConsoleWindow(), GWL_EXSTYLE, HWNDStyleEx);
             ShowWindow(GetConsoleWindow(), SW_SHOWNORMAL);
+            SetWindowPlacement(GetConsoleWindow(), &wpc);
+        }
         return true;
     }
 }

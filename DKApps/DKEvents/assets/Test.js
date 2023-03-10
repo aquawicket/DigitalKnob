@@ -232,7 +232,8 @@ myConsoleWindow.addEventListener('resize', onResize)
 //console.log("myConsoleWindow.name="+myConsoleWindow.name)
 //myConsoleWindow.name = "Test 123"
 //console.log("myConsoleWindow.name="+myConsoleWindow.name)
-myConsoleWindow.fullScreen = true;
+//myConsoleWindow.fullScreen = true;
+//myConsoleWindow.fullScreen = false;
 //myConsoleWindow.blur()
 //myConsoleWindow.close()
 //myConsoleWindow.focus()
