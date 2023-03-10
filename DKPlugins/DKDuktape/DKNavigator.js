@@ -1,289 +1,344 @@
-//https://developer.mozilla.org/en-US/docs/Web/API/Navigator
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Navigator
+// [OBJECT] https://html.spec.whatwg.org/multipage/system-state.html#the-navigator-object
+
 
 var Navigator = function Navigator(pointer) {
-    //Properties (Standard)
-    Object.defineProperty(this, "activeVRDisplays", {
-        //Read only
+    
+	////// Standard properties //////
+	// [Navigator.connection](Read only)(Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/connection
+	Object.defineProperty(this, "connection", {
         configurable: true,
         value: "TODO",
-    });
-    Object.defineProperty(this, "appCodeName", {
-        //Read only
-        configurable: true,
-        value: "Mozilla",
-    });
-    Object.defineProperty(this, "appName", {
-        //Read only
-        configurable: true,
-        value: "Netscape",
-    });
-    Object.defineProperty(this, "appVersion", {
-        //Read only
-        configurable: true,
-        value: "5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36 Rml/3.3",
-        //TODO - pull this value from C++
-    });
-    Object.defineProperty(this, "battery", {
-        //Read only
-        configurable: true,
-        value: "TODO",
-    });
-    Object.defineProperty(this, "connection", {
-        //Read only
-        configurable: true,
-        value: "TODO",
-    });
-    Object.defineProperty(this, "cookieEnabled", {
-        //Read only
+    })
+	// [Navigator.cookieEnabled](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/cookieEnabled
+	Object.defineProperty(this, "cookieEnabled", {
         configurable: true,
         value: "false",
-    });
-    Object.defineProperty(this, "geolocation", {
-        //Read only
+    })
+	// [Navigator.credentials](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/credentials
+	Object.defineProperty(this, "credentials", {
         configurable: true,
         value: "TODO",
-    });
-    Object.defineProperty(this, "hardwareConcurrency", {
-        //Read only
+    })
+	// [Navigator.deviceMemory](Read only)(Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/deviceMemory
+	Object.defineProperty(this, "deviceMemory", {
         configurable: true,
         value: "TODO",
-    });
-    Object.defineProperty(this, "javaEnabled", {
-        //Read only
+    })
+	// [Navigator.geolocation](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/geolocation
+	Object.defineProperty(this, "geolocation", {
         configurable: true,
         value: "TODO",
-    });
-    Object.defineProperty(this, "keyboard ", {
-        //Read only
+    })
+	// [Navigator.hid](Read only)(Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/hid
+	Object.defineProperty(this, "hid", {
         configurable: true,
         value: "TODO",
-    });
-    Object.defineProperty(this, "language", {
-        //Read only
+    })
+	// [Navigator.hardwareConcurrency](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/hardwareConcurrency
+	Object.defineProperty(this, "hardwareConcurrency", {
+        configurable: true,
+        value: "TODO",
+    })
+	// [Navigator.ink](Read only)(Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/ink
+	Object.defineProperty(this, "ink", {
+        configurable: true,
+        value: "TODO",
+    })
+	// [Navigator.keyboard](Read only)(Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/keyboard
+	Object.defineProperty(this, "keyboard ", {
+        configurable: true,
+        value: "TODO",
+    })
+	// [Navigator.language](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/language
+	Object.defineProperty(this, "language", {
         configurable: true,
         value: "en-US",
-    });
-    Object.defineProperty(this, "languages", {
-        //Read only
+    })
+	// [Navigator.languages](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/languages
+	Object.defineProperty(this, "languages", {
         configurable: true,
         value: "TODO",
-    });
-    Object.defineProperty(this, "locks", {
-        //Read only
+    })
+	// [Navigator.locks](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/locks
+	Object.defineProperty(this, "locks", {
         configurable: true,
         value: "TODO",
-    });
-    Object.defineProperty(this, "mediaCapabilities", {
-        //Read only
+    })
+	// [Navigator.maxTouchPoints](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/maxTouchPoints
+	Object.defineProperty(this, "maxTouchPoints", {
         configurable: true,
         value: "TODO",
-    });
-    Object.defineProperty(this, "maxTouchPoints", {
-        //Read only
+    })
+	// [Navigator.mediaCapabilities](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/mediaCapabilities
+	Object.defineProperty(this, "mediaCapabilities", {
         configurable: true,
         value: "TODO",
-    });
-    Object.defineProperty(this, "mimeTypes", {
-        //Read only
+    })
+	// [Navigator.mediaDevices](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/mediaDevices
+	Object.defineProperty(this, "mediaDevices", {
         configurable: true,
         value: "TODO",
-    });
-    Object.defineProperty(this, "onLine", {
-        //Read only
+    })
+	// [Navigator.mediaSession](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/mediaSession
+	Object.defineProperty(this, "mediaSession", {
         configurable: true,
         value: "TODO",
-    });
-    Object.defineProperty(this, "permissions", {
-        //Read only
+    })
+	// [Navigator.onLine](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/onLine
+	Object.defineProperty(this, "onLine", {
         configurable: true,
         value: "TODO",
-    });
-    Object.defineProperty(this, "platform", {
-        //Read only
-        configurable: true,
-        get: function platform() {
-            return CPP_DKNavigatorplatform();
-        }
-    });
-    Object.defineProperty(this, "plugins", {
-        //Read only
+    })
+	// [Navigator.pdfViewerEnabled](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/pdfViewerEnabled
+	Object.defineProperty(this, "pdfViewerEnabled", {
         configurable: true,
         value: "TODO",
-    });
-    Object.defineProperty(this, "product", {
-        //Read only
-        configurable: true,
-        value: "Duktape",
-    });
-    Object.defineProperty(this, "serviceWorker", {
-        //Read only
+    })
+	// [Navigator.permissions](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/permissions
+	Object.defineProperty(this, "permissions", {
         configurable: true,
         value: "TODO",
-    });
-    Object.defineProperty(this, "storage", {
-        //Read only
+    })
+	// [Navigator.permissions](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/presentation
+	Object.defineProperty(this, "presentation", {
         configurable: true,
         value: "TODO",
-    });
-    Object.defineProperty(this, "userAgent", {
-        //Read only
+    })
+	// [Navigator.serial](Read only)(Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/serial
+	Object.defineProperty(this, "serial", {
+        configurable: true,
+        value: "TODO",
+    })
+	// [Navigator.serviceWorker](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/serviceWorker
+	Object.defineProperty(this, "serviceWorker", {
+        configurable: true,
+        value: "TODO",
+    })
+	// [Navigator.storage](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/storage
+	Object.defineProperty(this, "storage", {
+        configurable: true,
+        value: "TODO",
+    })
+	// [Navigator.userActivation](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/userActivation
+	Object.defineProperty(this, "userActivation", {
+        configurable: true,
+        value: "TODO",
+    })
+	// [Navigator.userAgent](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/userAgent
+	Object.defineProperty(this, "userAgent", {
         configurable: true,
         value: "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36 Rml/3.3",
         //TODO - pull this value from C++
-    });
-    Object.defineProperty(this, "webdriver", {
-        //Read only
+    })
+	// [Navigator.userAgentData](Read only)(Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/userAgentData
+	Object.defineProperty(this, "userAgentData", {
         configurable: true,
         value: "TODO",
-    });
-    Object.defineProperty(this, "xr", {
-        //Read only
+    })
+	// [Navigator.virtualKeyboard](Read only)(Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/virtualKeyboard
+	Object.defineProperty(this, "virtualKeyboard", {
         configurable: true,
         value: "TODO",
-    });
-
-    //Properties (Non-standard)
-    Object.defineProperty(this, "buildID", {
-        //Not standardized
+    })
+	// [Navigator.webdriver](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/webdriver
+	Object.defineProperty(this, "webdriver", {
         configurable: true,
         value: "TODO",
-    });
-    Object.defineProperty(this, "credentials", {
-        //Not standardized	
+    })
+	// [Navigator.windowControlsOverlay](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/windowControlsOverlay
+	Object.defineProperty(this, "windowControlsOverlay", {
         configurable: true,
         value: "TODO",
-    });
-    Object.defineProperty(this, "deviceMemory", {
-        //Read only, Not standardized
+    })
+	// [Navigator.xr](Read only)(Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/xr
+	Object.defineProperty(this, "xr", {
         configurable: true,
         value: "TODO",
-    });
-    Object.defineProperty(this, "doNotTrack", {
-        //Not standardized
+    })
+	
+	////// Non-standard properties //////
+	// [Navigator.buildID](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/buildID
+	Object.defineProperty(this, "buildID", {
         configurable: true,
         value: "TODO",
-    });
-    Object.defineProperty(this, "mediaDevices", {
-        //Not standardized
+    })
+	// [Navigator.contacts](Read only)(Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/contacts
+	Object.defineProperty(this, "contacts", {
         configurable: true,
         value: "TODO",
-    });
-    Object.defineProperty(this, "mediaSession", {
+    })
+	// [Navigator.globalPrivacyControl](Non-standard)(Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/globalPrivacyControl
+	Object.defineProperty(this, "globalPrivacyControl", {
         configurable: true,
         value: "TODO",
-    });
+    })
+	// [Navigator.securitypolicy](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Navigator
+	Object.defineProperty(this, "securitypolicy", {
+        configurable: true,
+        value: "TODO",
+    })
+	// [Navigator.standalone](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Navigator
+	Object.defineProperty(this, "standalone", {
+        configurable: true,
+        value: "TODO",
+    })
+	// [Navigator.wakeLock](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/wakeLock
+	Object.defineProperty(this, "wakeLock", {
+        configurable: true,
+        value: "TODO",
+    })
+	
+	////// Deprecated properties //////
+	// [Navigator.appCodeName](Read only)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/appCodeName
+	Object.defineProperty(this, "appCodeName", {
+        configurable: true,
+        value: "Mozilla",
+    })
+	// [Navigator.appName](Read only)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/appName
+	Object.defineProperty(this, "appName", {
+        configurable: true,
+        value: "Netscape",
+    })
+	// [Navigator.appVersion](Read only)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/appVersion
+	Object.defineProperty(this, "appVersion", {
+        configurable: true,
+        value: "5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36 Rml/3.3",
+        //TODO - pull this value from C++
+    })
+	// [Navigator.activeVRDisplays](Read only)(Deprecated)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/activeVRDisplays
+	Object.defineProperty(this, "activeVRDisplays", {
+        configurable: true,
+        value: "TODO",
+    })
+	// [Navigator.doNotTrack](Read only)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/doNotTrack
+	Object.defineProperty(this, "doNotTrack", {
+        configurable: true,
+        value: "TODO",
+    })
+	// [Navigator.mimeTypes](Read only)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/mimeTypes
+	Object.defineProperty(this, "mimeTypes", {
+        configurable: true,
+        value: "TODO",
+    })
+	// [Navigator.oscpu](Read only)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/oscpu
+	Object.defineProperty(this, "oscpu", {
+        configurable: true,
+        value: "TODO",
+    })
+	// [Navigator.platform](Read only)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/platform
+	Object.defineProperty(this, "platform", {
+        configurable: true,
+        get: function platform() {
+            return CPP_DKNavigatorplatform()
+        }
+    })
+	// [Navigator.plugins](Read only)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/plugins
+	Object.defineProperty(this, "plugins", {
+        configurable: true,
+        value: "TODO",
+    })
+	// [Navigator.product](Read only)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/product
+	Object.defineProperty(this, "product", {
+        configurable: true,
+        value: "Duktape",
+    })
+	// [Navigator.productSub](Read only)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/productSub
+	Object.defineProperty(this, "productSub", {
+        configurable: true,
+        value: "TODO",
+    })
+	// [Navigator.vendor](Read only)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/vendor
+	Object.defineProperty(this, "vendor", {
+        configurable: true,
+        value: "TODO",
+    })
+	// [Navigator.vendorSub](Read only)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/vendorSub
+	Object.defineProperty(this, "vendorSub", {
+        configurable: true,
+        value: "TODO",
+    })
+	
+	////// Obsolete properties //////
+	/*
+	// [Navigator.battery]
+    Object.defineProperty(this, "battery", {
+        configurable: true,
+        value: "TODO",
+    })
+	// [Navigator.javaEnabled]
+    Object.defineProperty(this, "javaEnabled", {
+        configurable: true,
+        value: "TODO",
+    })
+	// [Navigator.mozNotification]
     Object.defineProperty(this, "mozNotification", {
-        //Obsolete
         configurable: true,
         value: "TODO",
-    });
+    })
+	// [Navigator.webkitNotification]
     Object.defineProperty(this, "webkitNotification", {
-        //Obsolete
         configurable: true,
         value: "TODO",
-    });
+    })
+	// [Navigator.mozSocial]
     Object.defineProperty(this, "mozSocial", {
-        //Not standardized
         configurable: true,
         value: "TODO",
-    });
-    Object.defineProperty(this, "oscpu", {
-        //Not standardized
-        configurable: true,
-        value: "TODO",
-    });
-    Object.defineProperty(this, "presentation", {
-        //Not standardized
-        configurable: true,
-        value: "TODO",
-    });
-    Object.defineProperty(this, "productSub", {
-        //Not standardized
-        configurable: true,
-        value: "TODO",
-    });
-    Object.defineProperty(this, "securitypolicy", {
-        //Not standardized
-        configurable: true,
-        value: "TODO",
-    });
-    Object.defineProperty(this, "standalone", {
-        //Not standardized
-        configurable: true,
-        value: "TODO",
-    });
+    })
+	// [Navigator.storageQuota]
     Object.defineProperty(this, "storageQuota", {
-        //Read only, Experimental
         configurable: true,
         value: "TODO",
-    });
-    Object.defineProperty(this, "vendor", {
-        //Not standardized
-        configurable: true,
-        value: "TODO",
-    });
-    Object.defineProperty(this, "vendorSub", {
-        //Not standardized
-        configurable: true,
-        value: "TODO",
-    });
+    })
+	// [Navigator.webkitPointer]
     Object.defineProperty(this, "webkitPointer", {
-        //Not standardized
         configurable: true,
         value: "TODO",
-    });
+    })
+	*/
 
-    //Methods (Standard)
+    ////// Instance methods //////
     Navigator.prototype.canShare = function canShare() {
-        //Experimental
-        return "TODO";
+        return "TODO"
     }
     Navigator.prototype.getVRDisplays = function getVRDisplays() {
-        //Experimental
-        return "TODO";
+        return "TODO"
     }
     Navigator.prototype.getUserMedia = function getUserMedia() {
-        //Experimental
-        return "TODO";
+        return "TODO"
     }
     Navigator.prototype.registerContentHandler = function registerContentHandler() {
-        //Obsolete
-        return "TODO";
+        return "TODO"
     }
     Navigator.prototype.registerProtocolHandler = function registerProtocolHandler() {
-        return "TODO";
+        return "TODO"
     }
     Navigator.prototype.requestMediaKeySystemAccess = function requestMediaKeySystemAccess() {
-        //Experimental
-        return "TODO";
+        return "TODO"
     }
     Navigator.prototype.sendBeacon = function sendBeacon() {
-        //Experimental
-        return "TODO";
+        return "TODO"
     }
     Navigator.prototype.share = function share() {
-        //Experimental
-        return "TODO";
+        return "TODO"
     }
     Navigator.prototype.taintEnabled = function taintEnabled() {
-        //Obsolete, Experimental
-        return "TODO";
+        return "TODO"
     }
     Navigator.prototype.vibrate = function vibrate() {
-        //Obsolete, Experimental
-        return "TODO";
+        return "TODO"
     }
 
     //Methods (Non-standard)
     Navigator.prototype.mozIsLocallyAvailable = function mozIsLocallyAvailable() {
-        //Not standardized
-        return "TODO";
+        return "TODO"
     }
     Navigator.prototype.mozPay = function mozPay() {
-        //Not standardized
-        return "TODO";
+        return "TODO"
     }
 	
+	////// toString //////
 	if(this.toString() === "[object Object]"){
 		this.toString = function(){
 			return "[object Navigator]"
@@ -291,5 +346,5 @@ var Navigator = function Navigator(pointer) {
 	}
 }
 
-var navigator = new Navigator("navigator");
-//window.navigator = navigator;
+var navigator = new Navigator("navigator")
+//window.navigator = navigator
