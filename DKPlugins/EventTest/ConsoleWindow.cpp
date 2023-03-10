@@ -432,20 +432,20 @@ void ConsoleWindow::FocusEventProc(FOCUS_EVENT_RECORD fer) {
 
     if (!fer.bSetFocus) {
         //1. blur: sent after element A loses focus.
-        code = "doFocusEvent('blur','','" + address + "')";
+        code = "dispatchFocusEvent('blur','','" + address + "')";
         DKDuktape::RunDuktape(code, rval);
 
         //2. focusout: sent after the blur event.
-        code = "doFocusEvent('focusout','','" + address + "')";
+        code = "dispatchFocusEvent('focusout','','" + address + "')";
         DKDuktape::RunDuktape(code, rval);
     }
     else {
         //3. focus: sent after element B receives focus.
-        code = "doFocusEvent('focus','','" + address + "')";
+        code = "dispatchFocusEvent('focus','','" + address + "')";
         DKDuktape::RunDuktape(code, rval);
 
         //4. focusin: sent after the focus event.
-        code = "doFocusEvent('focusin','','" + address + "')";
+        code = "dispatchFocusEvent('focusin','','" + address + "')";
         DKDuktape::RunDuktape(code, rval);
     }
 }
@@ -501,17 +501,17 @@ void ConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
         shiftKey = false;
 
     if (ker.bKeyDown) {
-        code = "doKeyboardEvent('keydown','','" + address + "')";
+        code = "dispatchKeyboardEvent('keydown','','" + address + "')";
         DKDuktape::RunDuktape(code, rval);
 
 		//Only fire keypress on alphanumeric keys.
         if (ker.uChar.AsciiChar < 32)
             return;
-		code = "doKeyboardEvent('keypress','','" + address + "')";
+		code = "dispatchKeyboardEvent('keypress','','" + address + "')";
 		DKDuktape::RunDuktape(code, rval);
     }
     else {
-        code = "doKeyboardEvent('keyup','','" + address + "')";
+        code = "dispatchKeyboardEvent('keyup','','" + address + "')";
         DKDuktape::RunDuktape(code, rval);
     }
 }
@@ -586,7 +586,7 @@ void ConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                 if (!button_state[0]) {
                     button_state[0] = true;
                     button = 0;
-                    code = "doMouseEvent('mousedown','','" + address + "')";
+                    code = "dispatchMouseEvent('mousedown','','" + address + "')";
                     DKDuktape::RunDuktape(code, rval);
                     break;
                 }
@@ -594,10 +594,10 @@ void ConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
             else if (button_state[0]) {
                 button_state[0] = false;
                 button = 0;
-                code = "doMouseEvent('mouseup','','" + address + "')";
+                code = "dispatchMouseEvent('mouseup','','" + address + "')";
                 DKDuktape::RunDuktape(code, rval);
 
-                code = "doMouseEvent('click','','" + address + "')";
+                code = "dispatchMouseEvent('click','','" + address + "')";
                 DKDuktape::RunDuktape(code, rval);
                 break;
             }
@@ -606,7 +606,7 @@ void ConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                 if (!button_state[1]) {
                     button_state[1] = true;
                     button = 2;
-                    code = "doMouseEvent('mousedown','','" + address + "')";
+                    code = "dispatchMouseEvent('mousedown','','" + address + "')";
                     DKDuktape::RunDuktape(code, rval);
                     break;
                 }
@@ -614,10 +614,10 @@ void ConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
             else if (button_state[1]) {
                 button_state[1] = false;
                 button = 2;
-                code = "doMouseEvent('mouseup','','" + address + "')";
+                code = "dispatchMouseEvent('mouseup','','" + address + "')";
                 DKDuktape::RunDuktape(code, rval);
 
-                code = "doMouseEvent('contextmenu','','" + address + "')";
+                code = "dispatchMouseEvent('contextmenu','','" + address + "')";
                 DKDuktape::RunDuktape(code, rval);
                 break;
             }
@@ -626,7 +626,7 @@ void ConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                 if (!button_state[2]) {
                     button_state[2] = true;
                     button = 1;
-                    code = "doMouseEvent('mousedown','','" + address + "')";
+                    code = "dispatchMouseEvent('mousedown','','" + address + "')";
                     DKDuktape::RunDuktape(code, rval);
                     break;
                 }
@@ -634,7 +634,7 @@ void ConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
             else if (button_state[2]) {
                 button_state[2] = false;
                 button = 1;
-                code = "doMouseEvent('mouseup','','" + address + "')";
+                code = "dispatchMouseEvent('mouseup','','" + address + "')";
                 DKDuktape::RunDuktape(code, rval);
                 break;
             }
@@ -643,7 +643,7 @@ void ConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                 if (!button_state[3]) {
                     button_state[3] = true;
                     button = 3;
-                    code = "doMouseEvent('mousedown','','" + address + "')";
+                    code = "dispatchMouseEvent('mousedown','','" + address + "')";
                     DKDuktape::RunDuktape(code, rval);
                     break;
                 }
@@ -651,7 +651,7 @@ void ConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
             else if (button_state[3]) {
                 button_state[3] = false;
                 button = 3;
-                code = "doMouseEvent('mouseup','','" + address + "')";
+                code = "dispatchMouseEvent('mouseup','','" + address + "')";
                 DKDuktape::RunDuktape(code, rval);
                 break;
             }
@@ -660,7 +660,7 @@ void ConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                 if (!button_state[4]) {
                     button_state[4] = true;
                     button = 4;
-                    code = "doMouseEvent('mousedown','','" + address + "')";
+                    code = "dispatchMouseEvent('mousedown','','" + address + "')";
                     DKDuktape::RunDuktape(code, rval);
                     break;
                 }
@@ -668,13 +668,13 @@ void ConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
             else if (button_state[4]) {
                 button_state[4] = false;
                 button = 4;
-                code = "doMouseEvent('mouseup','','" + address + "')";
+                code = "dispatchMouseEvent('mouseup','','" + address + "')";
                 DKDuktape::RunDuktape(code, rval);
                 break;
             }
 			break;
 		case DOUBLE_CLICK:
-            code = "doMouseEvent('dblclick','','" + address + "')";
+            code = "dispatchMouseEvent('dblclick','','" + address + "')";
             DKDuktape::RunDuktape(code, rval);
 			break;
 		case MOUSE_HWHEELED: //horizontal mouse wheel
@@ -683,7 +683,7 @@ void ConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                 deltaX = -100;
             if ((int32_t)mer.dwButtonState < 0)
                 deltaX = 100;
-            code = "doWheelEvent('wheel','','" + address + "')";
+            code = "dispatchWheelEvent('wheel','','" + address + "')";
             DKDuktape::RunDuktape(code, rval);
 			break;
 		case MOUSE_WHEELED: //vertical mouse wheel
@@ -692,7 +692,7 @@ void ConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                 deltaY = -100;
             if ((int32_t)mer.dwButtonState < 0)
                 deltaY = 100;
-            code = "doWheelEvent('wheel','','" + address + "')";
+            code = "dispatchWheelEvent('wheel','','" + address + "')";
             DKDuktape::RunDuktape(code, rval);
 			break;
         case MOUSE_MOVED:
@@ -728,7 +728,7 @@ void ConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
             x = clientX;
             y = clientY;
             
-            code = "doMouseEvent('mousemove','','" + address + "')";
+            code = "dispatchMouseEvent('mousemove','','" + address + "')";
             DKDuktape::RunDuktape(code, rval);
             break;
 		default:
@@ -743,7 +743,7 @@ void ConsoleWindow::ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD wbsr){
     DKString code;
     columns = wbsr.dwSize.X;
     rows = wbsr.dwSize.Y;
-	code = "doMouseEvent('resize','','" + address + "')";
+	code = "dispatchMouseEvent('resize','','" + address + "')";
     DKDuktape::RunDuktape(code, rval);
 }
 #endif

@@ -34,8 +34,8 @@ var DragEvent = function(_type, _dragEventInit, _pointer) {
 DragEvent.prototype = MouseEvent.prototype
 
 
-///////////////////////////////////////////////////////
-function doDragEvent(_type, _dragEventInit, _pointer) {
+/////////////////////////////////////////////////////////////
+function dispatchDragEvent(_type, _dragEventInit, _pointer) {
 	const event = new DragEvent(_type, _dragEventInit, _pointer)
 	event.target = new EventTarget(_pointer)
 	event.target.dispatchEvent(event)
