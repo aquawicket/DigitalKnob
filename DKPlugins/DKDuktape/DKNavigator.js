@@ -299,44 +299,89 @@ var Navigator = function Navigator(pointer) {
 	*/
 
     ////// Instance methods //////
+	// [Navigator.canShare()] https://developer.mozilla.org/en-US/docs/Web/API/Navigator/canShare
     Navigator.prototype.canShare = function canShare() {
         return "TODO"
     }
-    Navigator.prototype.getVRDisplays = function getVRDisplays() {
+	// [Navigator.clearAppBadge()](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/clearAppBadge
+	Navigator.prototype.clearAppBadge = function clearAppBadge() {
         return "TODO"
     }
-    Navigator.prototype.getUserMedia = function getUserMedia() {
+	// [Navigator.getAutoplayPolicy()](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Navigator/getAutoplayPolicy
+	Navigator.prototype.getAutoplayPolicy = function getAutoplayPolicy() {
         return "TODO"
     }
+	// [Navigator.getBattery()] https://developer.mozilla.org/en-US/docs/Web/API/Navigator/getBattery
+	Navigator.prototype.getBattery = function getBattery() {
+        return "TODO"
+    }
+	// [Navigator.registerProtocolHandler()] https://developer.mozilla.org/en-US/docs/Web/API/Navigator/registerProtocolHandler
+	Navigator.prototype.registerProtocolHandler = function registerProtocolHandler() {
+        return "TODO"
+    }
+	// [Navigator.unregisterProtocolHandler()]
+	Navigator.prototype.unregisterProtocolHandler = function unregisterProtocolHandler() {
+        return "TODO"
+    }
+	// [Navigator.requestMediaKeySystemAccess()]
+	Navigator.prototype.requestMediaKeySystemAccess = function requestMediaKeySystemAccess() {
+        return "TODO"
+    }
+	// [Navigator.requestMIDIAccess()]
+	Navigator.prototype.requestMIDIAccess = function requestMIDIAccess() {
+        return "TODO"
+    }
+	// [Navigator.sendBeacon()]
+	Navigator.prototype.sendBeacon = function sendBeacon() {
+        return "TODO"
+    }
+	// [Navigator.setAppBadge()](Experimental)
+	Navigator.prototype.setAppBadge = function sendBeacon() {
+        return "TODO"
+    }
+	// [Navigator.share()]
+	Navigator.prototype.share = function share() {
+        return "TODO"
+    }
+	// [Navigator.vibrate()]
+	Navigator.prototype.vibrate = function vibrate() {
+        return "TODO"
+    }
+	
+	////// Deprecated methods //////
+	// [Navigator.getVRDisplays()](Deprecated)(Non-standard)
+	Navigator.prototype.getVRDisplays = function getVRDisplays() {
+        return "TODO"
+    }
+	// [Navigator.getUserMedia()](Deprecated)
+	Navigator.prototype.getUserMedia = function getUserMedia() {
+        return "TODO"
+    }
+	// [Navigator.taintEnabled()](Deprecated)
+	Navigator.prototype.taintEnabled = function taintEnabled() {
+        return "TODO"
+    }
+	// [Navigator.javaEnabled()](Deprecated)
+	Navigator.prototype.javaEnabled = function javaEnabled() {
+        return "TODO"
+    }
+	
+	
+	////// Obsolete methods //////
+	/*
+	// [Navigator.registerContentHandler()]
     Navigator.prototype.registerContentHandler = function registerContentHandler() {
         return "TODO"
     }
-    Navigator.prototype.registerProtocolHandler = function registerProtocolHandler() {
-        return "TODO"
-    }
-    Navigator.prototype.requestMediaKeySystemAccess = function requestMediaKeySystemAccess() {
-        return "TODO"
-    }
-    Navigator.prototype.sendBeacon = function sendBeacon() {
-        return "TODO"
-    }
-    Navigator.prototype.share = function share() {
-        return "TODO"
-    }
-    Navigator.prototype.taintEnabled = function taintEnabled() {
-        return "TODO"
-    }
-    Navigator.prototype.vibrate = function vibrate() {
-        return "TODO"
-    }
-
-    //Methods (Non-standard)
+	// [Navigator.mozIsLocallyAvailable()]
     Navigator.prototype.mozIsLocallyAvailable = function mozIsLocallyAvailable() {
         return "TODO"
     }
+	// [Navigator.mozPay()]
     Navigator.prototype.mozPay = function mozPay() {
         return "TODO"
     }
+	*/
 	
 	////// toString //////
 	if(this.toString() === "[object Object]"){
