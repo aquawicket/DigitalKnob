@@ -195,7 +195,9 @@ void ConsoleWindow::Loop() {
 
 //// Instance properties ////
 int ConsoleWindow::closed(duk_context* ctx){ //Read only
-    // TODO
+	// TODO
+	bool isClosed = false;
+	duk_push_boolean(ctx, isClosed);
 	return true;
 }
 
