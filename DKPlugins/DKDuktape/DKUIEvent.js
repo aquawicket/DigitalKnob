@@ -1,43 +1,39 @@
-// https://developer.mozilla.org/en-US/docs/Web/API/UIEvent
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/UIEvent
+// [IDL] https://w3c.github.io/uievents/#idl-uievent
 
+
+// [UIEvent()] https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/UIEvent
 var UIEvent = function UIEvent(_type, _options, _pointer) {
-	//console.log("UIEvent("+_type+","+_options+","+_pointer+")")
 	
-	/*
-	this._type = _type;
-	this._options = _options;
-	this._pointer = _pointer;
-	*/
-	
-    //// Properties ////
+    ////// Instance properties //////
+	// [UIEvent.detail](Read only) https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/detail
     Object.defineProperty(this, "detail", {
-        //Read only
         get: function detail() {
             return CPP_DKUIEvent_detail(_pointer);
         }
     })
+	// [UIEvent.sourceCapabilities](Experimental)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/sourceCapabilities
     Object.defineProperty(this, "sourceCapabilities", {
-        //Read only
         get: function sourceCapabilities () {
             return CPP_DKUIEvent_sourceCapabilities(_pointer);
         }
     })
+	// [UIEvent.view](Read only) https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/view
 	Object.defineProperty(this, "view", {
-        //Read only
         get: function view() {
             return CPP_DKUIEvent_view(_pointer);
         }
     })
+	// [UIEvent.which](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/which
 	Object.defineProperty(this, "which", {
-        //Read only
         get: function which() {
             return CPP_DKUIEvent_which(_pointer);
         }
     })
 
-    //// Methods ////
+    ////// Methods //////
+	// [UIEvent.initUIEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/initUIEvent
     UIEvent.prototype.initUIEvent = function initUIEvent() {
-        //Deprecated
         CPP_DKUIEvent_initUIEvent(this._pointer);
     }
 
