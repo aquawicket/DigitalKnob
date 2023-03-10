@@ -3,12 +3,6 @@
 var MouseEvent = function(_type, _options, _pointer) {
 	//console.log("MouseEvent("+_type+","+_options+","+_pointer+")")
 	
-	/*
-	this._type = _type;
-	this._options = _options;
-	this._pointer = _pointer;
-	*/
-	
     //// Properties ////
     Object.defineProperty(this, "altKey", {
         //Read only
@@ -16,12 +10,25 @@ var MouseEvent = function(_type, _options, _pointer) {
             return CPP_DKMouseEvent_altKey(_pointer)
         }
     })
+	//// MouseEvent.button ////
+	//0. LeftButton
+	//1. MiddleButton
+	//2. RightButton
     Object.defineProperty(this, "button", {
         //Read only
         get: function button() {
             return CPP_DKMouseEvent_button(_pointer)
         }
     })
+	//// MouseEvent.buttons ////
+	//0. (No Buttons)
+	//1. LeftButton
+	//2. RightButton
+	//3. LeftButton + RightButton
+	//4. MiddleButton
+	//5. LeftButton + MiddleButton
+	//6. MiddleButton + RightButton
+	//7. LeftButton + MiddleButton + RightButton
     Object.defineProperty(this, "buttons", {
         //Read only
         get: function buttons() {
