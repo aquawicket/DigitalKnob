@@ -555,7 +555,7 @@ int DKDuktape::createDKObject(duk_context* _ctx) {
 bool DKDuktape::doEvent(const void* pointer, const DKString& type) {
 	DKDEBUGFUNC(pointer, type);
 	DKString address = pointerToAddress(pointer);
-	DKString code = "doEvent('"+address+"','"+type+"')";
+	DKString code = "doEvent('"+type+"','','"+address+"')";
 	DKString rval;
 	DKDuktape::RunDuktape(code, rval);
 	DKINFO("rval = " + rval + "\n");

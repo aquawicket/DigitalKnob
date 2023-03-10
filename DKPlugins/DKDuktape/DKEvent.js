@@ -213,6 +213,6 @@ function DispatchEvent(_pointer) {
 /////////////////////////////////////////////
 function doEvent(_type, _options, _pointer) {
 	const event = new Event(_type, _options, _pointer)
-	event.target = new EventTarget(address)
+	event.target = new EventTarget(_pointer)
 	event.target.dispatchEvent(event)
 }
