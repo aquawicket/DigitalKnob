@@ -13,6 +13,11 @@ var ConsoleWindow = function ConsoleWindow(data) {
             return CPP_ConsoleWindow_closed()
         }
     })
+	Object.defineProperty(this, "columns", { //Read only
+        get: function columns() {
+            return CPP_ConsoleWindow_columns()
+        }
+    })
 	Object.defineProperty(this, "fullScreen", {
         get: function fullScreen() {
             return CPP_ConsoleWindow_fullScreen()
@@ -47,6 +52,11 @@ var ConsoleWindow = function ConsoleWindow(data) {
 	Object.defineProperty(this, "outerWidth", { //Read only
         get: function outerWidth() {
             return CPP_ConsoleWindow_outerWidth()
+        }
+    })
+	Object.defineProperty(this, "rows", { //Read only
+        get: function rows() {
+            return CPP_ConsoleWindow_rows()
         }
     })
 	Object.defineProperty(this, "screenX", { //Read only

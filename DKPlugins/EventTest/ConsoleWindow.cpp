@@ -38,12 +38,14 @@ bool ConsoleWindow::Init(){
 
 	//// Instance properties ////
 	DKDuktape::AttachFunction("CPP_ConsoleWindow_closed", ConsoleWindow::closed);
+    DKDuktape::AttachFunction("CPP_ConsoleWindow_columns", ConsoleWindow::Columns);
 	DKDuktape::AttachFunction("CPP_ConsoleWindow_fullScreen", ConsoleWindow::fullScreen);
 	DKDuktape::AttachFunction("CPP_ConsoleWindow_innerHeight", ConsoleWindow::innerHeight);
 	DKDuktape::AttachFunction("CPP_ConsoleWindow_innerWidth", ConsoleWindow::innerWidth);
 	DKDuktape::AttachFunction("CPP_ConsoleWindow_name", ConsoleWindow::name);
 	DKDuktape::AttachFunction("CPP_ConsoleWindow_outerHeight", ConsoleWindow::outerHeight);
 	DKDuktape::AttachFunction("CPP_ConsoleWindow_outerWidth", ConsoleWindow::outerWidth);
+    DKDuktape::AttachFunction("CPP_ConsoleWindow_rows", ConsoleWindow::Rows);
 	DKDuktape::AttachFunction("CPP_ConsoleWindow_screenX", ConsoleWindow::ScreenX);
 	DKDuktape::AttachFunction("CPP_ConsoleWindow_screenLeft", ConsoleWindow::screenLeft);
 	DKDuktape::AttachFunction("CPP_ConsoleWindow_screenY", ConsoleWindow::ScreenY);
@@ -203,6 +205,11 @@ int ConsoleWindow::closed(duk_context* ctx){ //Read only
 	return true;
 }
 
+int ConsoleWindow::Columns(duk_context* ctx) { //Read only
+    duk_push_uint(ctx, ConsoleWindow::Get()->columns);
+    return true;
+}
+
 int ConsoleWindow::fullScreen(duk_context* ctx){
     //get
     if (!duk_is_boolean(ctx, 0)) {
@@ -298,6 +305,11 @@ int ConsoleWindow::outerWidth(duk_context* ctx){ //Read only
     unsigned int oWidth = rect.right - rect.left;
     duk_push_uint(ctx, oWidth);
 	return true;
+}
+
+int ConsoleWindow::Rows(duk_context* ctx) { //Read only
+    duk_push_uint(ctx, ConsoleWindow::Get()->rows);
+    return true;
 }
 
 int ConsoleWindow::ScreenX(duk_context* ctx){ //Read only
@@ -729,8 +741,8 @@ void ConsoleWindow::ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD wbsr){
 	DKString address = DKDuktape::pointerToAddress(this);
     DKString rval;
     DKString code;
-	
-	//DKINFO("resize     columns="+toString(wbsr.dwSize.X)+", rows="+toString(wbsr.dwSize.Y)+" \n");
+    columns = wbsr.dwSize.X;
+    rows = wbsr.dwSize.Y;
 	code = "doMouseEvent('resize','','" + address + "')";
     DKDuktape::RunDuktape(code, rval);
 }
