@@ -30,7 +30,7 @@
 #include "DKDuktape/DKEvent.h"
 #include "DKDuktape/DKEventTarget.h"
 #include "DKDuktape/DKDragEvent.h"
-#include "EventTest/ConsoleWindow.h"
+#include "DKDuktape/ConsoleWindow.h"
 
 
 bool DKDragEvent::Init(){

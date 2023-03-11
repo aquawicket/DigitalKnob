@@ -33,7 +33,7 @@
 #include "DKDuktape/DKEventTarget.h"
 #include "DKDuktape/DKKeyboardEvent.h"
 #include "DKDuktape/DKKeyCodes.h"
-#include "EventTest/ConsoleWindow.h"
+#include "DKDuktape/ConsoleWindow.h"
 
 
 void mapKeys();

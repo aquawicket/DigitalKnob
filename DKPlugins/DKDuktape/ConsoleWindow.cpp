@@ -25,7 +25,7 @@
 */
 //https://github.com/uNetworking/uWebSockets/blob/master/tests/main.cpp
 #include "DK/stdafx.h"
-#include "EventTest/ConsoleWindow.h"
+#include "DKDuktape/ConsoleWindow.h"
 
 // fullScreen
 WINDOWPLACEMENT ConsoleWindow::wpc;
