@@ -9,6 +9,7 @@ AesKeyGenParams
 ANGLE_instanced_arrays
 AnimationEffect
 AnimationTimeline
+	DocumentTimeline
 atob()
 AudioBuffer
 AudioData
@@ -111,6 +112,11 @@ DataTransfer
 DataTransferItem
 DataTransferItemList
 DecompressionStream
+DeviceMotionEventAcceleration
+DeviceMotionEventRotationRate
+DeviceProximityEvent
+DirectoryEntrySync
+DirectoryReaderSync
 Event
 	AnimationEvent
 	AnimationPlaybackEvent
@@ -123,6 +129,8 @@ Event
 	ContentVisibilityAutoStateChangedEvent
 	CookieChangeEvent
 	CustomEvent
+	DeviceMotionEvent
+	DeviceOrientationEvent
 	ExtendableEvent
 		BackgroundFetchEvent
 			BackgroundFetchUpdateUIEvent
@@ -170,6 +178,9 @@ EventTarget
 			Comment
 			Text
 				CDATASection
+		Document
+		DocumentFragment
+		DocumentType
 	Sensor
 		Accelerometer
 		AmbientLightSensor
@@ -188,17 +199,6 @@ Worklet
 
 
 /////////////////////////////////////////////////////////////////////////////////////
-DeviceMotionEvent
-DeviceMotionEventAcceleration
-DeviceMotionEventRotationRate
-DeviceOrientationEvent
-DeviceProximityEvent
-DirectoryEntrySync
-DirectoryReaderSync
-Document
-DocumentFragment
-DocumentTimeline
-DocumentType
 DOMError
 DOMException
 DOMHighResTimeStamp
