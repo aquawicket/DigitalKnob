@@ -76,6 +76,10 @@ bool ConsoleWindow::Init(){
     DWORD fdwMode = ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT | ENABLE_INSERT_MODE | ENABLE_EXTENDED_FLAGS;
     if (!SetConsoleMode(hStdin, fdwMode))
         ErrorExit("SetConsoleMode");
+	
+	// fullScreen
+    HWNDStyle = 0;
+    HWNDStyleEx = 0;
 #endif
 	
 	// KeyboardEvent
@@ -128,10 +132,6 @@ bool ConsoleWindow::Init(){
 
     // FocusEvent
     relatedTarget = "";
-
-    // fullScreen
-    HWNDStyle = 0;
-    HWNDStyleEx = 0;
 
     DKApp::AppendLoopFunc(&ConsoleWindow::Loop, this);
     return true;
@@ -224,54 +224,62 @@ int ConsoleWindow::fullScreen(duk_context* ctx){
     else {
         bool fullscreen = duk_require_boolean(ctx, 0);
         if (fullscreen) {
-            GetWindowPlacement(GetConsoleWindow(), &wpc);
-            if (!HWNDStyle)
-                HWNDStyle = GetWindowLong(GetConsoleWindow(), GWL_STYLE);
-            if (!HWNDStyleEx)
-                HWNDStyleEx = GetWindowLong(GetConsoleWindow(), GWL_EXSTYLE);
-            LONG NewHWNDStyle = HWNDStyle;
-            NewHWNDStyle &= ~WS_BORDER;
-            NewHWNDStyle &= ~WS_DLGFRAME;
-            NewHWNDStyle &= ~WS_THICKFRAME;
-            LONG NewHWNDStyleEx = HWNDStyleEx;
-            NewHWNDStyleEx &= ~WS_EX_WINDOWEDGE;
-            SetWindowLong(GetConsoleWindow(), GWL_STYLE, NewHWNDStyle | WS_POPUP);
-            SetWindowLong(GetConsoleWindow(), GWL_EXSTYLE, NewHWNDStyleEx | WS_EX_TOPMOST);
-            ShowWindow(GetConsoleWindow(), SW_SHOWMAXIMIZED);
+			#if WIN
+				GetWindowPlacement(GetConsoleWindow(), &wpc);
+				if (!HWNDStyle)
+					HWNDStyle = GetWindowLong(GetConsoleWindow(), GWL_STYLE);
+				if (!HWNDStyleEx)
+					HWNDStyleEx = GetWindowLong(GetConsoleWindow(), GWL_EXSTYLE);
+				LONG NewHWNDStyle = HWNDStyle;
+				NewHWNDStyle &= ~WS_BORDER;
+				NewHWNDStyle &= ~WS_DLGFRAME;
+				NewHWNDStyle &= ~WS_THICKFRAME;
+				LONG NewHWNDStyleEx = HWNDStyleEx;
+				NewHWNDStyleEx &= ~WS_EX_WINDOWEDGE;
+				SetWindowLong(GetConsoleWindow(), GWL_STYLE, NewHWNDStyle | WS_POPUP);
+				SetWindowLong(GetConsoleWindow(), GWL_EXSTYLE, NewHWNDStyleEx | WS_EX_TOPMOST);
+				ShowWindow(GetConsoleWindow(), SW_SHOWMAXIMIZED);
+			#endif
         }
         else {
             //if (!wpc)
             //    GetWindowPlacement(GetConsoleWindow(), wpc);
-            if (!HWNDStyle)
-                HWNDStyle = GetWindowLong(GetConsoleWindow(), GWL_STYLE);
-            if (!HWNDStyleEx)
-                HWNDStyleEx = GetWindowLong(GetConsoleWindow(), GWL_EXSTYLE);
-            SetWindowLong(GetConsoleWindow(), GWL_STYLE, HWNDStyle);
-            SetWindowLong(GetConsoleWindow(), GWL_EXSTYLE, HWNDStyleEx);
-            ShowWindow(GetConsoleWindow(), SW_SHOWNORMAL);
-            SetWindowPlacement(GetConsoleWindow(), &wpc);
+			#if WIN
+				if (!HWNDStyle)
+					HWNDStyle = GetWindowLong(GetConsoleWindow(), GWL_STYLE);
+				if (!HWNDStyleEx)
+					HWNDStyleEx = GetWindowLong(GetConsoleWindow(), GWL_EXSTYLE);
+				SetWindowLong(GetConsoleWindow(), GWL_STYLE, HWNDStyle);
+				SetWindowLong(GetConsoleWindow(), GWL_EXSTYLE, HWNDStyleEx);
+				ShowWindow(GetConsoleWindow(), SW_SHOWNORMAL);
+				SetWindowPlacement(GetConsoleWindow(), &wpc);
+			#endif
         }
         return true;
     }
 }
 
 int ConsoleWindow::innerHeight(duk_context* ctx){ //Read only
-    RECT rect;
-    GetClientRect(GetConsoleWindow(), &rect);
-    ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
-    ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
-    unsigned int iHeight = rect.right - rect.left;
-	duk_push_uint(ctx, iHeight);
+	#if WIN
+		RECT rect;
+		GetClientRect(GetConsoleWindow(), &rect);
+		ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
+		ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
+		unsigned int iHeight = rect.right - rect.left;
+		duk_push_uint(ctx, iHeight);
+	#endif
 	return true;
 }
 
 int ConsoleWindow::innerWidth(duk_context* ctx){ //Read only
-    RECT rect;
-    GetClientRect(GetConsoleWindow(), &rect);
-    ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
-    ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
-    unsigned int iWidth = rect.bottom - rect.top;
-    duk_push_uint(ctx, iWidth);
+	#if WIN
+		RECT rect;
+		GetClientRect(GetConsoleWindow(), &rect);
+		ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
+		ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
+		unsigned int iWidth = rect.bottom - rect.top;
+		duk_push_uint(ctx, iWidth);
+	#endif
 	return true;
 }
 
@@ -294,18 +302,22 @@ int ConsoleWindow::name(duk_context* ctx){
 }
 
 int ConsoleWindow::outerHeight(duk_context* ctx){ //Read only
-	RECT rect;
-	GetWindowRect(GetConsoleWindow(), &rect);
-    unsigned int oHeight = rect.bottom - rect.top;
-	duk_push_uint(ctx, oHeight);
+	#if WIN
+		RECT rect;
+		GetWindowRect(GetConsoleWindow(), &rect);
+		unsigned int oHeight = rect.bottom - rect.top;
+		duk_push_uint(ctx, oHeight);
+	#endif
 	return true;
 }
 
 int ConsoleWindow::outerWidth(duk_context* ctx){ //Read only
-	RECT rect;
-	GetWindowRect(GetConsoleWindow(), &rect);
-    unsigned int oWidth = rect.right - rect.left;
-    duk_push_uint(ctx, oWidth);
+	#if WIN
+		RECT rect;
+		GetWindowRect(GetConsoleWindow(), &rect);
+		unsigned int oWidth = rect.right - rect.left;
+		duk_push_uint(ctx, oWidth);
+	#endif
 	return true;
 }
 
@@ -315,104 +327,126 @@ int ConsoleWindow::Rows(duk_context* ctx) { //Read only
 }
 
 int ConsoleWindow::ScreenX(duk_context* ctx){ //Read only
-    RECT rect;
-    GetClientRect(GetConsoleWindow(), &rect);
-    ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
-    ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
-    duk_push_int(ctx, rect.left);
+	#if WIN
+		RECT rect;
+		GetClientRect(GetConsoleWindow(), &rect);
+		ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
+		ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
+		duk_push_int(ctx, rect.left);
+	#endif
 	return true;
 }
 
 int ConsoleWindow::screenLeft(duk_context* ctx){ //Read only
-    RECT rect;
-    GetClientRect(GetConsoleWindow(), &rect);
-    ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
-    ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
-    duk_push_int(ctx, rect.left);
+	#if WIN
+		RECT rect;
+		GetClientRect(GetConsoleWindow(), &rect);
+		ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
+		ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
+		duk_push_int(ctx, rect.left);
+	#endif
 	return true;
 }
 
 int ConsoleWindow::ScreenY(duk_context* ctx){ //Read only
-    RECT rect;
-    GetClientRect(GetConsoleWindow(), &rect);
-    ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
-    ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
-    duk_push_int(ctx, rect.top);
+	#if WIN
+		RECT rect;
+		GetClientRect(GetConsoleWindow(), &rect);
+		ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
+		ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
+		duk_push_int(ctx, rect.top);
+	#endif
 	return true;
 }
 
 int ConsoleWindow::screenTop(duk_context* ctx){ //Read only
-    RECT rect;
-    GetClientRect(GetConsoleWindow(), &rect);
-    ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
-    ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
-    duk_push_int(ctx, rect.top);
+	#if WIN
+		RECT rect;
+		GetClientRect(GetConsoleWindow(), &rect);
+		ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
+		ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
+		duk_push_int(ctx, rect.top);
+	#endif
     return true;
 }
 
 //// Instance methods ////
 int ConsoleWindow::blur(duk_context* ctx){
-    ShowWindow(GetConsoleWindow(), SW_SHOWMINNOACTIVE);
+	#if WIN
+		ShowWindow(GetConsoleWindow(), SW_SHOWMINNOACTIVE);
+	#endif
 	return true;
 }
 int ConsoleWindow::close(duk_context* ctx){
-    ShowWindow(GetConsoleWindow(), SW_HIDE);
+	#if WIN
+		ShowWindow(GetConsoleWindow(), SW_HIDE);
+	#endif
 	return true;
 }
 int ConsoleWindow::focus(duk_context* ctx){
-    ShowWindow(GetConsoleWindow(), SW_SHOW);
+	#if WIN
+		ShowWindow(GetConsoleWindow(), SW_SHOW);
+	#endif
 	return true;
 }
 int ConsoleWindow::moveBy(duk_context* ctx){
-    int deltaX = duk_require_int(ctx, 0);
-    int deltaY = duk_require_int(ctx, 1);
-    RECT rect;
-    GetWindowRect(GetConsoleWindow(), &rect);
-    int X = rect.left + deltaX;
-    int Y = rect.top + deltaY;
-    int nWidth = rect.right - rect.left;
-    int nHeight = rect.bottom - rect.top;
-    if (!MoveWindow(GetConsoleWindow(), X, Y, nWidth, nHeight, TRUE))
-        return DKERROR("MoveWindow() failed");
+	#if WIN
+		int deltaX = duk_require_int(ctx, 0);
+		int deltaY = duk_require_int(ctx, 1);
+		RECT rect;
+		GetWindowRect(GetConsoleWindow(), &rect);
+		int X = rect.left + deltaX;
+		int Y = rect.top + deltaY;
+		int nWidth = rect.right - rect.left;
+		int nHeight = rect.bottom - rect.top;
+		if (!MoveWindow(GetConsoleWindow(), X, Y, nWidth, nHeight, TRUE))
+			return DKERROR("MoveWindow() failed");
+	#endif
 	return true;
 }
 int ConsoleWindow::moveTo(duk_context* ctx){
-    int x = duk_require_int(ctx, 0);
-    int y = duk_require_int(ctx, 1);
-    RECT rect;
-    GetWindowRect(GetConsoleWindow(), &rect);
-    int X = x;
-    int Y = y;
-    int nWidth = rect.right - rect.left;
-    int nHeight = rect.bottom - rect.top;
-    if (!MoveWindow(GetConsoleWindow(), X, Y, nWidth, nHeight, TRUE))
-        return DKERROR("MoveWindow() failed");
+	#if WIN
+		int x = duk_require_int(ctx, 0);
+		int y = duk_require_int(ctx, 1);
+		RECT rect;
+		GetWindowRect(GetConsoleWindow(), &rect);
+		int X = x;
+		int Y = y;
+		int nWidth = rect.right - rect.left;
+		int nHeight = rect.bottom - rect.top;
+		if (!MoveWindow(GetConsoleWindow(), X, Y, nWidth, nHeight, TRUE))
+			return DKERROR("MoveWindow() failed");
+	#endif
 	return true;
 }
 int ConsoleWindow::resizeBy(duk_context* ctx){
-    int xDelta = duk_require_int(ctx, 0);
-    int yDelta = duk_require_int(ctx, 1);
-    RECT rect;
-    GetWindowRect(GetConsoleWindow(), &rect);
-    int X = rect.left;
-    int Y = rect.top;
-    int nWidth = rect.right - rect.left + xDelta;
-    int nHeight = rect.bottom - rect.top + yDelta;
-    if (!MoveWindow(GetConsoleWindow(), X, Y, nWidth, nHeight, TRUE))
-        return DKERROR("MoveWindow() failed");
+	#if WIN
+		int xDelta = duk_require_int(ctx, 0);
+		int yDelta = duk_require_int(ctx, 1);
+		RECT rect;
+		GetWindowRect(GetConsoleWindow(), &rect);
+		int X = rect.left;
+		int Y = rect.top;
+		int nWidth = rect.right - rect.left + xDelta;
+		int nHeight = rect.bottom - rect.top + yDelta;
+		if (!MoveWindow(GetConsoleWindow(), X, Y, nWidth, nHeight, TRUE))
+			return DKERROR("MoveWindow() failed");
+	#endif
 	return true;
 }
 int ConsoleWindow::resizeTo(duk_context* ctx){
-    int width = duk_require_int(ctx, 0);
-    int height = duk_require_int(ctx, 1);
-    RECT rect;
-    GetWindowRect(GetConsoleWindow(), &rect);
-    int X = rect.left;
-    int Y = rect.top;
-    int nWidth = width;
-    int nHeight = height;
-    if (!MoveWindow(GetConsoleWindow(), X, Y, nWidth, nHeight, TRUE))
-        return DKERROR("MoveWindow() failed");
+	#if WIN
+		int width = duk_require_int(ctx, 0);
+		int height = duk_require_int(ctx, 1);
+		RECT rect;
+		GetWindowRect(GetConsoleWindow(), &rect);
+		int X = rect.left;
+		int Y = rect.top;
+		int nWidth = width;
+		int nHeight = height;
+		if (!MoveWindow(GetConsoleWindow(), X, Y, nWidth, nHeight, TRUE))
+			return DKERROR("MoveWindow() failed");
+	#endif
     return true;
 }
 	

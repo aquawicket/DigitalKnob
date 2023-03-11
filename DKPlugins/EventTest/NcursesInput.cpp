@@ -28,8 +28,11 @@
 #include "EventTest/NcursesInput.h"
 
 #include <stdlib.h>
-#include <curses.h>
 #include <signal.h>
+
+#if !EMSCRIPTEN
+	#include <curses.h>
+#endif
 
 #define WIDTH 30
 #define HEIGHT 10 
