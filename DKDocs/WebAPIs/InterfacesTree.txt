@@ -117,6 +117,28 @@ DeviceMotionEventRotationRate
 DeviceProximityEvent
 DirectoryEntrySync
 DirectoryReaderSync
+DOMError
+DOMException
+DOMHighResTimeStamp
+DOMImplementation
+DOMMatrixReadOnly
+	DOMMatrix
+DOMParser
+DOMPointReadOnly
+	DOMPoint
+DOMQuad
+DOMRectReadOnly
+	DOMRect
+DOMStringList
+DOMStringMap
+DOMTokenList
+EcdhKeyDeriveParams
+EcdsaParams
+EcKeyGenParams
+EcKeyImportParams
+ElementInternals
+EncodedAudioChunk
+EncodedVideoChunk
 Event
 	AnimationEvent
 	AnimationPlaybackEvent
@@ -131,6 +153,7 @@ Event
 	CustomEvent
 	DeviceMotionEvent
 	DeviceOrientationEvent
+	ErrorEvent
 	ExtendableEvent
 		BackgroundFetchEvent
 			BackgroundFetchUpdateUIEvent
@@ -138,6 +161,9 @@ Event
 		ContentIndexEvent
 	UIEvent
 		CompositionEvent
+		MouseEvent
+			DragEvent
+EventCounts
 EventTarget
 	AbortSignal
 	Animation
@@ -157,6 +183,7 @@ EventTarget
 		ChannelSplitterNode
 		ConvolverNode
 		DelayNode
+		DynamicsCompressorNode
 	AudioTrackList
 	BackgroundFetchRegistration
 	BaseAudioContext
@@ -170,6 +197,7 @@ EventTarget
 	Clipboard
 	CookieStore
 	CSSPseudoElement
+	EventSource
 	MediaStreamTrack
 		CanvasCaptureMediaStreamTrack
 	Node
@@ -181,6 +209,7 @@ EventTarget
 		Document
 		DocumentFragment
 		DocumentType
+		Element
 	Sensor
 		Accelerometer
 		AmbientLightSensor
@@ -189,44 +218,6 @@ EventTarget
 	WorkerGlobalScope
 		AudioWorkletGlobalScope
 		DedicatedWorkerGlobalScope
-ReportBody
-	CSPViolationReportBody
-	DeprecationReportBody
-StyleSheet
-	CSSStyleSheet
-Worklet
-	AudioWorklet
-
-
-/////////////////////////////////////////////////////////////////////////////////////
-DOMError
-DOMException
-DOMHighResTimeStamp
-DOMImplementation
-DOMMatrix (WebKitCSSMatrix)
-DOMMatrixReadOnly
-DOMParser
-DOMPoint
-DOMPointReadOnly
-DOMQuad
-DOMRect
-DOMRectReadOnly
-DOMStringList
-DOMStringMap
-DOMTokenList
-DragEvent
-DynamicsCompressorNode
-EcdhKeyDeriveParams
-EcdsaParams
-EcKeyGenParams
-EcKeyImportParams
-Element
-ElementInternals
-EncodedAudioChunk
-EncodedVideoChunk
-ErrorEvent
-EventCounts
-EventSource
 EXT_blend_minmax
 EXT_color_buffer_float
 EXT_color_buffer_half_float
@@ -239,6 +230,16 @@ EXT_texture_compression_bptc
 EXT_texture_compression_rgtc
 EXT_texture_filter_anisotropic
 EXT_texture_norm16
+ReportBody
+	CSPViolationReportBody
+	DeprecationReportBody
+StyleSheet
+	CSSStyleSheet
+Worklet
+	AudioWorklet
+
+
+/////////////////////////////////////////////////////////////////////////////////////
 ExtendableCookieChangeEvent
 ExtendableMessageEvent
 EyeDropper
@@ -466,7 +467,6 @@ MIDIOutputMap
 MIDIPort
 MimeType
 MimeTypeArray
-MouseEvent
 MouseScrollEvent
 MSGestureEvent
 MSGraphicsTrust
