@@ -68,12 +68,6 @@ public:
 	static int resizeBy(duk_context* ctx);
 	static int resizeTo(duk_context* ctx);
 	
-	// fullScreen
-	static WINDOWPLACEMENT wpc;
-	static LONG HWNDStyle;
-	static LONG HWNDStyleEx;
-
-#if WIN
 	// KeyboardEvent
 	bool altKey;
 	DKString code;
@@ -125,6 +119,12 @@ public:
 	unsigned int columns;
 	unsigned int rows;
 
+#if WIN
+	// fullScreen
+	static WINDOWPLACEMENT wpc;
+	static LONG HWNDStyle;
+	static LONG HWNDStyleEx;
+	
 	HANDLE hStdin;
 	DWORD fdwSaveOldMode;
 	void ErrorExit(LPCSTR);

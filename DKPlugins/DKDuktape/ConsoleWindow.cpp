@@ -27,10 +27,12 @@
 #include "DK/stdafx.h"
 #include "DKDuktape/ConsoleWindow.h"
 
-// fullScreen
-WINDOWPLACEMENT ConsoleWindow::wpc;
-LONG ConsoleWindow::HWNDStyle = 0;
-LONG ConsoleWindow::HWNDStyleEx = 0;
+#if WIN
+	// fullScreen
+	WINDOWPLACEMENT ConsoleWindow::wpc;
+	LONG ConsoleWindow::HWNDStyle = 0;
+	LONG ConsoleWindow::HWNDStyleEx = 0;
+#endif
 
 
 bool ConsoleWindow::Init(){
