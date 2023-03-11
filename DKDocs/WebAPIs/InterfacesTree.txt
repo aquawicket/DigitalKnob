@@ -107,6 +107,10 @@ CSSValueList
 CSSVariableReferenceValue
 CustomElementRegistry
 CustomStateSet
+DataTransfer
+DataTransferItem
+DataTransferItemList
+DecompressionStream
 Event
 	AnimationEvent
 	AnimationPlaybackEvent
@@ -144,6 +148,7 @@ EventTarget
 		ChannelMergerNode
 		ChannelSplitterNode
 		ConvolverNode
+		DelayNode
 	AudioTrackList
 	BackgroundFetchRegistration
 	BaseAudioContext
@@ -170,27 +175,19 @@ EventTarget
 		AmbientLightSensor
 		OrientationSensor
 			AbsoluteOrientationSensor
+	WorkerGlobalScope
+		AudioWorkletGlobalScope
+		DedicatedWorkerGlobalScope
 ReportBody
 	CSPViolationReportBody
+	DeprecationReportBody
 StyleSheet
 	CSSStyleSheet
 Worklet
 	AudioWorklet
-WorkerGlobalScope
-	AudioWorkletGlobalScope
+
 
 /////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-DataTransfer
-DataTransferItem
-DataTransferItemList
-DecompressionStream
-DedicatedWorkerGlobalScope
-DelayNode
-DeprecationReportBody
 DeviceMotionEvent
 DeviceMotionEventAcceleration
 DeviceMotionEventRotationRate
