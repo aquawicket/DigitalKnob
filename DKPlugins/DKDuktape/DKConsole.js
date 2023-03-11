@@ -11,7 +11,6 @@ const Console_HandleColor = function Console_HandleColor(msg){
 	return msg;
 }
 
-// https://console.spec.whatwg.org/#console-namespace
 var Console = function Console(pointer) {
 	
 	////// Instance methods //////

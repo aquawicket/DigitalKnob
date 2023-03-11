@@ -184,6 +184,7 @@ var MouseEvent = function(_type, _options, _pointer) {
 MouseEvent.prototype = UIEvent.prototype
 
 
+// Called from C++ to dispatch Mouse events
 ////////////////////////////////////////////////////////
 function dispatchMouseEvent(_type, _options, _pointer) {
 	const event = new MouseEvent(_type, _options, _pointer)

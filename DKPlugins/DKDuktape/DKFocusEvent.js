@@ -24,6 +24,7 @@ var FocusEvent = function(_type, _options, _pointer) {
 FocusEvent.prototype = UIEvent.prototype
 
 
+// Called from C++ to dispatch Focus events
 ////////////////////////////////////////////////////////
 function dispatchFocusEvent(_type, _options, _pointer) {
 	const event = new FocusEvent(_type, _options, _pointer)

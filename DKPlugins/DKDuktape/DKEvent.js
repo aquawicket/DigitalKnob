@@ -191,7 +191,7 @@ var Event = function Event(_type, _options, _pointer) {
     //return this;
 }
 
-// Called from C++ to send events
+/*
 ///////////////////////////////
 function DispatchEvent(_pointer) {
     var event = new Event(_pointer);
@@ -207,7 +207,9 @@ function DispatchEvent(_pointer) {
         event.currentTarget.dispatchEvent(event);
     }
 }
+*/
 
+// Called from C++ to dispatch events
 ///////////////////////////////////////////////////
 function dispatchEvent(_type, _options, _pointer) {
 	const event = new Event(_type, _options, _pointer)

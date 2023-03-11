@@ -47,3 +47,12 @@ var UIEvent = function UIEvent(_type, _options, _pointer) {
     return Event.call(this, _type, _options, _pointer);
 };
 UIEvent.prototype = Event.prototype;
+
+
+// Called from C++ to dispatch UIEvents events
+/////////////////////////////////////////////////////
+function dispatchUIEvent(_type, _options, _pointer) {
+	const event = new UIEvent(_type, _options, _pointer)
+	event.target = new EventTarget(_pointer)
+	event.target.dispatchEvent(event)
+}

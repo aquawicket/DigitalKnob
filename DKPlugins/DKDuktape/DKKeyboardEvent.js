@@ -136,6 +136,7 @@ var KeyboardEvent = function KeyboardEvent(_type, _options, _pointer) {
 KeyboardEvent.prototype = UIEvent.prototype;
 
 
+// Called from C++ to dispatch Keyboard events
 ///////////////////////////////////////////////////////////
 function dispatchKeyboardEvent(_type, _options, _pointer) {
 	const event = new KeyboardEvent(_type, _options, _pointer)
