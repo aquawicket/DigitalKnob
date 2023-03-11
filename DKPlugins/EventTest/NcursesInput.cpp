@@ -30,7 +30,7 @@
 #include <stdlib.h>
 #include <signal.h>
 
-#if !WIN && !EMSCRIPTEN
+#if !WIN && !EMSCRIPTEN && !ANDROID
 	#include <curses.h>
 #endif
 
@@ -40,7 +40,7 @@
 bool NcursesInput::Init(){
 	DKDEBUGFUNC();
 
-#if !WIN && !EMSCRIPTEN	
+#if !WIN && !EMSCRIPTEN && !ANDROID
 	WINDOW *menu_win;
 	int highlight = 1;
 	int choice = 0;
