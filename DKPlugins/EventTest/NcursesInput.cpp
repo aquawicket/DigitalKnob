@@ -30,7 +30,7 @@
 #include <stdlib.h>
 #include <signal.h>
 
-#if !EMSCRIPTEN
+#if !WIN && !EMSCRIPTEN
 	#include <curses.h>
 #endif
 
@@ -39,13 +39,13 @@
 
 bool NcursesInput::Init(){
 	DKDEBUGFUNC();
-	
+
+#if !WIN && !EMSCRIPTEN	
 	WINDOW *menu_win;
 	int highlight = 1;
 	int choice = 0;
 	int c;
 
-#if !WIN
 	initscr();
 	clear();
 	noecho();
