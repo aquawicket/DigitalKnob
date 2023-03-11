@@ -27,6 +27,7 @@ BackgroundFetchRecord
 BarcodeDetector
 BarProp
 Blob
+	File
 BluetoothCharacteristicProperties
 BluetoothRemoteGATTDescriptor
 BluetoothRemoteGATTServer
@@ -55,6 +56,7 @@ CookieStoreManager
 CountQueuingStrategy
 createImageBitmap
 Credential
+	FederatedCredential
 CredentialsContainer
 crossOriginIsolated
 Crypto
@@ -159,8 +161,18 @@ Event
 			BackgroundFetchUpdateUIEvent
 		CanMakePaymentEvent
 		ContentIndexEvent
+		ExtendableCookieChangeEvent
+		ExtendableMessageEvent
+		FetchEvent
+	FontFaceSetLoadEvent
+	FormDataEvent
+	GamepadEvent
+	HashChangeEvent
+	HIDConnectionEvent
+	HIDInputReportEvent
 	UIEvent
 		CompositionEvent
+		FocusEvent
 		MouseEvent
 			DragEvent
 EventCounts
@@ -184,6 +196,7 @@ EventTarget
 		ConvolverNode
 		DelayNode
 		DynamicsCompressorNode
+		GainNode
 	AudioTrackList
 	BackgroundFetchRegistration
 	BaseAudioContext
@@ -198,6 +211,10 @@ EventTarget
 	CookieStore
 	CSSPseudoElement
 	EventSource
+	FileReader
+	FontFaceSet
+	HID
+	HIDDevice
 	MediaStreamTrack
 		CanvasCaptureMediaStreamTrack
 	Node
@@ -210,9 +227,14 @@ EventTarget
 		DocumentFragment
 		DocumentType
 		Element
+			HTMLElement
+				HTMLMediaElement
+					HTMLVideoElement
 	Sensor
 		Accelerometer
+			GravitySensor
 		AmbientLightSensor
+		Gyroscope
 		OrientationSensor
 			AbsoluteOrientationSensor
 	WorkerGlobalScope
@@ -230,51 +252,28 @@ EXT_texture_compression_bptc
 EXT_texture_compression_rgtc
 EXT_texture_filter_anisotropic
 EXT_texture_norm16
-ReportBody
-	CSPViolationReportBody
-	DeprecationReportBody
-StyleSheet
-	CSSStyleSheet
-Worklet
-	AudioWorklet
-
-
-/////////////////////////////////////////////////////////////////////////////////////
-ExtendableCookieChangeEvent
-ExtendableMessageEvent
 EyeDropper
 FeaturePolicy
-FederatedCredential
 fetch()
-FetchEvent
-File
 FileEntrySync
 FileList
-FileReader
 FileReaderSync
 FileSystem
-FileSystemDirectoryEntry
-FileSystemDirectoryHandle
 FileSystemDirectoryReader
 FileSystemEntry
-FileSystemFileEntry
-FileSystemFileHandle
+	FileSystemDirectoryEntry
+	FileSystemFileEntry
 FileSystemHandle
+	FileSystemDirectoryHandle
+	FileSystemFileHandle
 FileSystemSync
 FileSystemSyncAccessHandle
-FileSystemWritableFileStream
-FocusEvent
 FontData
 FontFace
-FontFaceSet
-FontFaceSetLoadEvent
 FormData
-FormDataEvent
 FragmentDirective
-GainNode
 Gamepad
 GamepadButton
-GamepadEvent
 GamepadHapticActuator
 GamepadPose
 Geolocation
@@ -282,19 +281,24 @@ GeolocationCoordinates
 GeolocationPosition
 GeolocationPositionError
 GestureEvent
-GravitySensor
-Gyroscope
-HashChangeEvent
 Headers
-HID
-HIDConnectionEvent
-HIDDevice
-HIDInputReportEvent
 History
 HkdfParams
 HmacImportParams
 HmacKeyGenParams
 HMDVRDevice
+ReportBody
+	CSPViolationReportBody
+	DeprecationReportBody
+StyleSheet
+	CSSStyleSheet
+Worklet
+	AudioWorklet
+WritableStream
+	FileSystemWritableFileStream
+
+/////////////////////////////////////////////////////////////////////////////////////
+
 HTMLAnchorElement
 HTMLAreaElement
 HTMLAudioElement
@@ -312,7 +316,6 @@ HTMLDialogElement
 HTMLDivElement
 HTMLDListElement
 HTMLDocument
-HTMLElement
 HTMLEmbedElement
 HTMLFieldSetElement
 HTMLFontElement
@@ -332,7 +335,6 @@ HTMLLIElement
 HTMLLinkElement
 HTMLMapElement
 HTMLMarqueeElement
-HTMLMediaElement
 HTMLMenuElement
 HTMLMenuItemElement
 HTMLMetaElement
@@ -370,7 +372,6 @@ HTMLTitleElement
 HTMLTrackElement
 HTMLUListElement
 HTMLUnknownElement
-HTMLVideoElement
 IDBCursor
 IDBCursorWithValue
 IDBDatabase
@@ -914,7 +915,6 @@ WindowControlsOverlayGeometryChangeEvent
 Worker
 WorkerLocation
 WorkerNavigator
-WritableStream
 WritableStreamDefaultController
 WritableStreamDefaultWriter
 XMLDocument
