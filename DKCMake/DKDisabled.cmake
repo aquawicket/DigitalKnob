@@ -194,6 +194,7 @@ if(EMSCRIPTEN)
 	dk_disable(DKThread)
 	dk_disable(DKTorrent)
 	dk_disable(DKUpdate)
+	dk_disable(DKUWebSocketsServer)
 	dk_disable(DKVncClient)			# case value evaluates to 4294967295, which cannot be narrowed to type 'int'
 	dk_disable(DKWebSockets)
 	dk_disable(aom)
@@ -263,6 +264,7 @@ if(EMSCRIPTEN)
 	dk_disable(smpeg2)				# ISO C++17 does not allow 'register' storage class specifier
 	dk_disable(system_configuration)
 	dk_disable(tesseract)			# missing <allheaders.h>
+	dk_disable(uwebsockets)
 	dk_disable(vorbis)				# requires ogg
 	dk_disable(waave)
 	dk_disable(wasm3)
