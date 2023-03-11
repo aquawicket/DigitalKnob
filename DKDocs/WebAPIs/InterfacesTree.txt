@@ -247,9 +247,23 @@ EventTarget
 				HTMLFontElement
 				HTMLFormElement
 				HTMLFrameSetElement
+				HTMLHeadElement
+				HTMLHeadingElement
+				HTMLHRElement
+				HTMLHtmlElement
+				HTMLIFrameElement
+				HTMLImageElement
+				HTMLInputElement
+				HTMLLabelElement
+				HTMLLegendElement
+				HTMLLIElement
+				HTMLLinkElement
+				HTMLMapElement
+				HTMLMarqueeElement
 				HTMLMediaElement
 					HTMLAudioElement
 					HTMLVideoElement
+				HTMLMenuElement
 		HTMLDocument
 	Sensor
 		Accelerometer
@@ -320,21 +334,7 @@ Worklet
 WritableStream
 	FileSystemWritableFileStream
 
-/////////////////////////////////////////////////////////////////////////////////////
-HTMLHeadElement
-HTMLHeadingElement
-HTMLHRElement
-HTMLHtmlElement
-HTMLIFrameElement
-HTMLImageElement
-HTMLInputElement
-HTMLLabelElement
-HTMLLegendElement
-HTMLLIElement
-HTMLLinkElement
-HTMLMapElement
-HTMLMarqueeElement
-HTMLMenuElement
+/////////////////////////////////// TODO //////////////////////////////////////////////////
 HTMLMenuItemElement
 HTMLMetaElement
 HTMLMeterElement
