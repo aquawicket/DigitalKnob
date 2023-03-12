@@ -58,6 +58,8 @@ CountQueuingStrategy
 createImageBitmap
 Credential
 	FederatedCredential
+	OTPCredential
+	PasswordCredential
 CredentialsContainer
 crossOriginIsolated
 Crypto
@@ -122,6 +124,7 @@ DirectoryEntrySync
 DirectoryReaderSync
 DOMError
 DOMException
+	OverconstrainedError
 DOMHighResTimeStamp
 DOMImplementation
 DOMMatrixReadOnly
@@ -166,6 +169,7 @@ Event
 		ExtendableMessageEvent
 		FetchEvent
 		InstallEvent
+		NotificationEvent
 	FontFaceSetLoadEvent
 	FormDataEvent
 	GamepadEvent
@@ -183,6 +187,10 @@ Event
 	MIDIMessageEvent
 	MSSiteModeEvent
 	MutationEvent
+	NavigationCurrentEntryChangeEvent
+	NDEFReadingEvent
+	OfflineAudioCompletionEvent
+	PageTransitionEvent
 	UIEvent
 		CompositionEvent
 		FocusEvent
@@ -206,6 +214,7 @@ EventTarget
 		AudioScheduledSourceNode
 			AudioBufferSourceNode
 			ConstantSourceNode
+			OscillatorNode
 		AudioWorkletNode
 		BiquadFilterNode
 		ChannelMergerNode
@@ -219,10 +228,12 @@ EventTarget
 		MediaStreamAudioDestinationNode
 		MediaStreamAudioSourceNode
 		MediaStreamTrackAudioSourceNode
+		PannerNode
 	AudioTrackList
 	BackgroundFetchRegistration
 	BaseAudioContext
 		AudioContext
+		OfflineAudioContext
 	BatteryManager
 	Bluetooth
 	BluetoothDevice
@@ -257,6 +268,10 @@ EventTarget
 	MIDIPort
 		MIDIInput
 		MIDIOutput
+	Navigation
+	NavigationHistoryEntry
+	NDEFReader
+	NetworkInformation
 	Node
 		Attr
 		CharacterData
@@ -341,6 +356,8 @@ EventTarget
 				HTMLUnknownElement
 			MathMLElement
 		HTMLDocument
+	Notification
+	OffscreenCanvas
 	Sensor
 		Accelerometer
 			GravitySensor
@@ -462,6 +479,29 @@ MSGraphicsTrust
 msWriteProfilerMark
 MutationObserver
 MutationRecord
+NamedNodeMap
+NavigationDestination
+NavigationPreloadManager
+NavigationTransition
+Navigator
+NavigatorUAData
+NDEFMessage
+NDEFRecord
+NodeIterator
+NodeList
+NotifyAudioAvailableEvent
+OES_element_index_uint
+OES_fbo_render_mipmap
+OES_standard_derivatives
+OES_texture_float
+OES_texture_float_linear
+OES_texture_half_float
+OES_texture_half_float_linear
+OES_vertex_array_object
+OffscreenCanvasRenderingContext2D
+origin
+OVR_multiview2
+PaintWorklet
 PerformanceEntry
 	LargestContentfulPaint
 	LayoutShift
@@ -477,47 +517,6 @@ WritableStream
 	FileSystemWritableFileStream
 
 /////////////////////////////////// TODO //////////////////////////////////////////////////
-NamedNodeMap
-NavigateEvent
-Navigation
-NavigationCurrentEntryChangeEvent
-NavigationDestination
-NavigationHistoryEntry
-NavigationPreloadManager
-NavigationTransition
-Navigator
-NavigatorUAData
-NDEFMessage
-NDEFReader
-NDEFReadingEvent
-NDEFRecord
-NetworkInformation
-NodeIterator
-NodeList
-Notification
-NotificationEvent
-NotifyAudioAvailableEvent
-OES_element_index_uint
-OES_fbo_render_mipmap
-OES_standard_derivatives
-OES_texture_float
-OES_texture_float_linear
-OES_texture_half_float
-OES_texture_half_float_linear
-OES_vertex_array_object
-OfflineAudioCompletionEvent
-OfflineAudioContext
-OffscreenCanvas
-OffscreenCanvasRenderingContext2D
-origin
-OscillatorNode
-OTPCredential
-OverconstrainedError
-OVR_multiview2
-PageTransitionEvent
-PaintWorklet
-PannerNode
-PasswordCredential
 Path2D
 PaymentAddress
 PaymentManager
