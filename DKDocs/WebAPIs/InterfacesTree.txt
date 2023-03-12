@@ -176,6 +176,9 @@ Event
 	MediaKeyMessageEvent
 	MediaQueryListEvent
 	MediaRecorderErrorEvent
+	MediaStreamEvent
+	MediaStreamTrackEvent
+	MessageEvent
 	UIEvent
 		CompositionEvent
 		FocusEvent
@@ -207,6 +210,9 @@ EventTarget
 		GainNode
 		IIRFilterNode
 		MediaElementAudioSourceNode
+		MediaStreamAudioDestinationNode
+		MediaStreamAudioSourceNode
+		MediaStreamTrackAudioSourceNode
 	AudioTrackList
 	BackgroundFetchRegistration
 	BaseAudioContext
@@ -239,6 +245,7 @@ EventTarget
 	MediaStream
 	MediaStreamTrack
 		CanvasCaptureMediaStreamTrack
+		MediaStreamTrackGenerator
 	Node
 		Attr
 		CharacterData
@@ -428,6 +435,12 @@ MediaList
 MediaMetadata
 MediaSession
 MediaSourceHandle
+MediaStreamTrackProcessor
+MediaTrackConstraints
+MediaTrackSettings
+MediaTrackSupportedConstraints
+MerchantValidationEvent
+MessageChannel
 PerformanceEntry
 	LargestContentfulPaint
 	LayoutShift
@@ -443,19 +456,6 @@ WritableStream
 	FileSystemWritableFileStream
 
 /////////////////////////////////// TODO //////////////////////////////////////////////////
-MediaStreamAudioDestinationNode
-MediaStreamAudioSourceNode
-MediaStreamEvent
-MediaStreamTrackAudioSourceNode
-MediaStreamTrackEvent
-MediaStreamTrackGenerator
-MediaStreamTrackProcessor
-MediaTrackConstraints
-MediaTrackSettings
-MediaTrackSupportedConstraints
-MerchantValidationEvent
-MessageChannel
-MessageEvent
 MessagePort
 Metadata
 MIDIAccess
