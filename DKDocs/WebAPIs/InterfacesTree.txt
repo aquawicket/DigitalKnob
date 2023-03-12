@@ -179,6 +179,10 @@ Event
 	MediaStreamEvent
 	MediaStreamTrackEvent
 	MessageEvent
+	MIDIConnectionEvent
+	MIDIMessageEvent
+	MSSiteModeEvent
+	MutationEvent
 	UIEvent
 		CompositionEvent
 		FocusEvent
@@ -186,6 +190,8 @@ Event
 		KeyboardEvent
 		MouseEvent
 			DragEvent
+		MSGestureEvent
+		MSManipulationEvent
 EventCounts
 EventTarget
 	AbortSignal
@@ -246,6 +252,11 @@ EventTarget
 	MediaStreamTrack
 		CanvasCaptureMediaStreamTrack
 		MediaStreamTrackGenerator
+	MessagePort
+	MIDIAccess
+	MIDIPort
+		MIDIInput
+		MIDIOutput
 	Node
 		Attr
 		CharacterData
@@ -441,6 +452,16 @@ MediaTrackSettings
 MediaTrackSupportedConstraints
 MerchantValidationEvent
 MessageChannel
+Metadata
+MIDIInputMap
+MIDIOutputMap
+MimeType
+MimeTypeArray
+MouseScrollEvent
+MSGraphicsTrust
+msWriteProfilerMark
+MutationObserver
+MutationRecord
 PerformanceEntry
 	LargestContentfulPaint
 	LayoutShift
@@ -456,27 +477,6 @@ WritableStream
 	FileSystemWritableFileStream
 
 /////////////////////////////////// TODO //////////////////////////////////////////////////
-MessagePort
-Metadata
-MIDIAccess
-MIDIConnectionEvent
-MIDIInput
-MIDIInputMap
-MIDIMessageEvent
-MIDIOutput
-MIDIOutputMap
-MIDIPort
-MimeType
-MimeTypeArray
-MouseScrollEvent
-MSGestureEvent
-MSGraphicsTrust
-MSManipulationEvent
-MSSiteModeEvent
-msWriteProfilerMark
-MutationEvent
-MutationObserver
-MutationRecord
 NamedNodeMap
 NavigateEvent
 Navigation
