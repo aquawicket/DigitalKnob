@@ -2,6 +2,7 @@ This is a list of all the interfaces (that is, types of objects) that are availa
 
 AbortController
 AbstractRange
+	Range
 AesCbcParams
 AesCtrParams
 AesGcmParams
@@ -60,6 +61,7 @@ Credential
 	FederatedCredential
 	OTPCredential
 	PasswordCredential
+	PublicKeyCredential
 CredentialsContainer
 crossOriginIsolated
 Crypto
@@ -170,6 +172,9 @@ Event
 		FetchEvent
 		InstallEvent
 		NotificationEvent
+		PaymentRequestEvent
+		PeriodicSyncEvent
+		PushEvent
 	FontFaceSetLoadEvent
 	FormDataEvent
 	GamepadEvent
@@ -191,6 +196,15 @@ Event
 	NDEFReadingEvent
 	OfflineAudioCompletionEvent
 	PageTransitionEvent
+	PaymentRequestUpdateEvent
+		PaymentMethodChangeEvent
+	PictureInPictureEvent
+	PopStateEvent
+	PresentationConnectionAvailableEvent
+	PresentationConnectionCloseEvent
+	ProgressEvent
+	PromiseRejectionEvent
+	RTCDataChannelEvent
 	UIEvent
 		CompositionEvent
 		FocusEvent
@@ -198,6 +212,7 @@ Event
 		KeyboardEvent
 		MouseEvent
 			DragEvent
+			PointerEvent
 		MSGestureEvent
 		MSManipulationEvent
 EventCounts
@@ -276,10 +291,12 @@ EventTarget
 		Attr
 		CharacterData
 			Comment
+			ProcessingInstruction
 			Text
 				CDATASection
 		Document
 		DocumentFragment
+			ShadowRoot
 		DocumentType
 		Element
 			HTMLElement
@@ -358,6 +375,20 @@ EventTarget
 		HTMLDocument
 	Notification
 	OffscreenCanvas
+	PaymentRequest
+	PaymentResponse
+	Performance
+	PermissionStatus
+	PictureInPictureWindow
+	PresentationAvailability
+	PresentationConnection
+	PresentationConnectionList
+	PresentationRequest
+	RemotePlayback
+	RTCDataChannel
+	RTCDtlsTransport
+	RTCDTMFSender
+	Screen
 	Sensor
 		Accelerometer
 			GravitySensor
@@ -367,6 +398,8 @@ EventTarget
 		Magnetometer
 		OrientationSensor
 			AbsoluteOrientationSensor
+			RelativeOrientationSensor
+	Window
 	WorkerGlobalScope
 		AudioWorkletGlobalScope
 		DedicatedWorkerGlobalScope
@@ -489,6 +522,7 @@ NDEFMessage
 NDEFRecord
 NodeIterator
 NodeList
+	RadioNodeList
 NotifyAudioAvailableEvent
 OES_element_index_uint
 OES_fbo_render_mipmap
@@ -502,87 +536,51 @@ OffscreenCanvasRenderingContext2D
 origin
 OVR_multiview2
 PaintWorklet
-PerformanceEntry
-	LargestContentfulPaint
-	LayoutShift
-ReportBody
-	CSPViolationReportBody
-	DeprecationReportBody
-	InterventionReportBody
-StyleSheet
-	CSSStyleSheet
-Worklet
-	AudioWorklet
-WritableStream
-	FileSystemWritableFileStream
-
-/////////////////////////////////// TODO //////////////////////////////////////////////////
 Path2D
 PaymentAddress
 PaymentManager
-PaymentMethodChangeEvent
-PaymentRequest
-PaymentRequestEvent
-PaymentRequestUpdateEvent
-PaymentResponse
 Pbkdf2Params
-Performance
-PerformanceElementTiming
-PerformanceEventTiming
-PerformanceLongTaskTiming
-PerformanceMark
-PerformanceMeasure
+PerformanceEntry
+	LargestContentfulPaint
+	LayoutShift
+	PerformanceElementTiming
+	PerformanceEventTiming
+	PerformanceLongTaskTiming
+	PerformanceMark
+	PerformanceMeasure
+	PerformanceResourceTiming
+		PerformanceNavigationTiming
+	PerformancePaintTiming
 PerformanceNavigation
-PerformanceNavigationTiming
 PerformanceObserver
 PerformanceObserverEntryList
-PerformancePaintTiming
-PerformanceResourceTiming
 PerformanceServerTiming
 PerformanceTiming
-PeriodicSyncEvent
 PeriodicSyncManager
 PeriodicWave
 Permissions
-PermissionStatus
-PictureInPictureEvent
-PictureInPictureWindow
 Plugin
 PluginArray
 Point
-PointerEvent
-PopStateEvent
-PositionSensorVRDevice
 Presentation
-PresentationAvailability
-PresentationConnection
-PresentationConnectionAvailableEvent
-PresentationConnectionCloseEvent
-PresentationConnectionList
 PresentationReceiver
-PresentationRequest
-ProcessingInstruction
-ProgressEvent
-PromiseRejectionEvent
-PublicKeyCredential
 PublicKeyCredentialRequestOptions
-PushEvent
 PushManager
 PushMessageData
 PushSubscription
 PushSubscriptionOptions
 queueMicrotask()
-RadioNodeList
-Range
 ReadableByteStreamController
 ReadableStream
 ReadableStreamBYOBReader
 ReadableStreamBYOBRequest
 ReadableStreamDefaultController
 ReadableStreamDefaultReader
-RelativeOrientationSensor
-RemotePlayback
 Report
+ReportBody
+	CSPViolationReportBody
+	DeprecationReportBody
+	InterventionReportBody
 reportError()
 ReportingObserver
 ReportingObserverOptions
@@ -596,10 +594,17 @@ RsaHashedKeyGenParams
 RsaOaepParams
 RsaPssParams
 RTCCertificate
-RTCDataChannel
-RTCDataChannelEvent
-RTCDtlsTransport
-RTCDTMFSender
+StyleSheet
+	CSSStyleSheet
+VRDisplay
+	PositionSensorVRDevice
+Worklet
+	AudioWorklet
+WritableStream
+	FileSystemWritableFileStream
+
+
+/////////////////////////////////// TODO //////////////////////////////////////////////////
 RTCDTMFToneChangeEvent
 RTCError
 RTCErrorEvent
@@ -637,7 +642,6 @@ RTCStatsReport
 RTCTrackEvent
 Sanitizer
 Scheduler
-Screen
 ScreenOrientation
 ScriptProcessorNode
 SecurityPolicyViolationEvent
@@ -653,7 +657,6 @@ ServiceWorkerGlobalScope
 ServiceWorkerRegistration
 setInterval()
 setTimeout()
-ShadowRoot
 SharedWorker
 SharedWorkerGlobalScope
 SourceBuffer
@@ -856,7 +859,6 @@ VideoTrack
 VideoTrackList
 VirtualKeyboard
 VisualViewport
-VRDisplay
 VRDisplayCapabilities
 VRDisplayEvent
 VREyeParameters
@@ -906,7 +908,6 @@ WebTransportBidirectionalStream
 WebTransportDatagramDuplexStream
 WebTransportError
 WheelEvent
-Window
 WindowClient
 WindowControlsOverlay
 WindowControlsOverlayGeometryChangeEvent
