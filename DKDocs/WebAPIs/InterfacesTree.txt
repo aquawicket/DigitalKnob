@@ -8,6 +8,7 @@ AesGcmParams
 AesKeyGenParams
 ANGLE_instanced_arrays
 AnimationEffect
+	KeyframeEffect
 AnimationTimeline
 	DocumentTimeline
 atob()
@@ -164,15 +165,20 @@ Event
 		ExtendableCookieChangeEvent
 		ExtendableMessageEvent
 		FetchEvent
+		InstallEvent
 	FontFaceSetLoadEvent
 	FormDataEvent
 	GamepadEvent
 	HashChangeEvent
 	HIDConnectionEvent
 	HIDInputReportEvent
+	IDBVersionChangeEvent
+	MediaKeyMessageEvent
 	UIEvent
 		CompositionEvent
 		FocusEvent
+		InputEvent
+		KeyboardEvent
 		MouseEvent
 			DragEvent
 EventCounts
@@ -197,6 +203,8 @@ EventTarget
 		DelayNode
 		DynamicsCompressorNode
 		GainNode
+		IIRFilterNode
+		MediaElementAudioSourceNode
 	AudioTrackList
 	BackgroundFetchRegistration
 	BaseAudioContext
@@ -215,6 +223,14 @@ EventTarget
 	FontFaceSet
 	HID
 	HIDDevice
+	IDBDatabase
+	IDBRequest
+		IDBOpenDBRequest
+	IDBTransaction
+	IdleDetector
+	Keyboard
+	MediaDevices
+	MediaKeySession
 	MediaStreamTrack
 		CanvasCaptureMediaStreamTrack
 	Node
@@ -299,12 +315,15 @@ EventTarget
 				HTMLTrackElement
 				HTMLUListElement
 				HTMLUnknownElement
+			MathMLElement
 		HTMLDocument
 	Sensor
 		Accelerometer
 			GravitySensor
+			LinearAccelerationSensor
 		AmbientLightSensor
 		Gyroscope
+		Magnetometer
 		OrientationSensor
 			AbsoluteOrientationSensor
 	WorkerGlobalScope
@@ -360,20 +379,8 @@ HMDVRDevice
 HTMLCollection
 	HTMLFormControlsCollection
 	HTMLOptionsCollection
-ReportBody
-	CSPViolationReportBody
-	DeprecationReportBody
-StyleSheet
-	CSSStyleSheet
-Worklet
-	AudioWorklet
-WritableStream
-	FileSystemWritableFileStream
-
-/////////////////////////////////// TODO //////////////////////////////////////////////////
 IDBCursor
-IDBCursorWithValue
-IDBDatabase
+	IDBCursorWithValue
 IDBFactory
 IDBFileHandle
 IDBFileRequest
@@ -382,13 +389,7 @@ IDBKeyRange
 IDBLocaleAwareKeyRange
 IDBMutableFile
 IDBObjectStore
-IDBOpenDBRequest
-IDBRequest
-IDBTransaction
-IDBVersionChangeEvent
 IdleDeadline
-IdleDetector
-IIRFilterNode
 ImageBitmap
 ImageBitmapRenderingContext
 ImageCapture
@@ -400,39 +401,39 @@ indexedDB
 Ink
 InkPresenter
 InputDeviceCapabilities
-InputDeviceInfo
-InputEvent
-InstallEvent
 IntersectionObserver
 IntersectionObserverEntry
-InterventionReportBody
 isSecureContext
-Keyboard
-KeyboardEvent
 KeyboardLayoutMap
-KeyframeEffect
 KHR_parallel_shader_compile
-LargestContentfulPaint
-LayoutShift
 LayoutShiftAttribution
-LinearAccelerationSensor
 Location
 Lock
 LockManager
-Magnetometer
-MathMLElement
 MediaCapabilities
 MediaDeviceInfo
-MediaDevices
-MediaElementAudioSourceNode
+	InputDeviceInfo
 MediaError
 MediaImage
-MediaKeyMessageEvent
 MediaKeys
-MediaKeySession
 MediaKeyStatusMap
 MediaKeySystemAccess
 MediaList
+PerformanceEntry
+	LargestContentfulPaint
+	LayoutShift
+ReportBody
+	CSPViolationReportBody
+	DeprecationReportBody
+	InterventionReportBody
+StyleSheet
+	CSSStyleSheet
+Worklet
+	AudioWorklet
+WritableStream
+	FileSystemWritableFileStream
+
+/////////////////////////////////// TODO //////////////////////////////////////////////////
 MediaMetadata
 MediaQueryList
 MediaQueryListEvent
@@ -528,7 +529,6 @@ PaymentResponse
 Pbkdf2Params
 Performance
 PerformanceElementTiming
-PerformanceEntry
 PerformanceEventTiming
 PerformanceLongTaskTiming
 PerformanceMark
