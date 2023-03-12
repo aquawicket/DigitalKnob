@@ -264,6 +264,41 @@ EventTarget
 					HTMLAudioElement
 					HTMLVideoElement
 				HTMLMenuElement
+				HTMLMenuItemElement
+				HTMLMetaElement
+				HTMLMeterElement
+				HTMLModElement
+				HTMLObjectElement
+				HTMLOListElement
+				HTMLOptGroupElement
+				HTMLOptionElement
+				HTMLOutputElement
+				HTMLParagraphElement
+				HTMLParamElement
+				HTMLPictureElement
+				HTMLPreElement
+				HTMLProgressElement
+				HTMLQuoteElement
+				HTMLScriptElement
+				HTMLSelectElement
+				HTMLShadowElement
+				HTMLSlotElement
+				HTMLSourceElement
+				HTMLSpanElement
+				HTMLStyleElement
+				HTMLTableCaptionElement
+				HTMLTableCellElement
+				HTMLTableColElement
+				HTMLTableElement
+				HTMLTableRowElement
+				HTMLTableSectionElement
+				HTMLTemplateElement
+				HTMLTextAreaElement
+				HTMLTimeElement
+				HTMLTitleElement
+				HTMLTrackElement
+				HTMLUListElement
+				HTMLUnknownElement
 		HTMLDocument
 	Sensor
 		Accelerometer
@@ -324,6 +359,7 @@ HmacKeyGenParams
 HMDVRDevice
 HTMLCollection
 	HTMLFormControlsCollection
+	HTMLOptionsCollection
 ReportBody
 	CSPViolationReportBody
 	DeprecationReportBody
@@ -335,42 +371,6 @@ WritableStream
 	FileSystemWritableFileStream
 
 /////////////////////////////////// TODO //////////////////////////////////////////////////
-HTMLMenuItemElement
-HTMLMetaElement
-HTMLMeterElement
-HTMLModElement
-HTMLObjectElement
-HTMLOListElement
-HTMLOptGroupElement
-HTMLOptionElement
-HTMLOptionsCollection
-HTMLOutputElement
-HTMLParagraphElement
-HTMLParamElement
-HTMLPictureElement
-HTMLPreElement
-HTMLProgressElement
-HTMLQuoteElement
-HTMLScriptElement
-HTMLSelectElement
-HTMLShadowElement
-HTMLSlotElement
-HTMLSourceElement
-HTMLSpanElement
-HTMLStyleElement
-HTMLTableCaptionElement
-HTMLTableCellElement
-HTMLTableColElement
-HTMLTableElement
-HTMLTableRowElement
-HTMLTableSectionElement
-HTMLTemplateElement
-HTMLTextAreaElement
-HTMLTimeElement
-HTMLTitleElement
-HTMLTrackElement
-HTMLUListElement
-HTMLUnknownElement
 IDBCursor
 IDBCursorWithValue
 IDBDatabase
