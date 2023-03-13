@@ -21,29 +21,43 @@ if(NOT EXISTS ${WEBIDLPEDIA}/DKWebAPIs/interfaces.txt)
 		
 		string(SUBSTRING "${filestring}" ${start} ${length} API)
 		
+		########################################################
 		## Web Authentication API
 		dk_includes("${API}" "Web Authentication" includes)
 		if(${includes})
 			set(API "Web Authentication API")
 		endif()
 		
-		## WebGL API
-		dk_includes("${API}" "WebGL" includes)
+		## WebCodecs API
+		dk_includes("${API}" "WebCodecs" includes)
 		if(${includes})
-			set(API "WebGL API")
+			set(API "WebCodecs API")
 		endif()
 		
-		## WebRTC API
+		## WebGL
+		dk_includes("${API}" "WebGL" includes)
+		if(${includes})
+			set(API "WebGL")
+		endif()
+		
+		## WebRTC
 		dk_includes("${API}" "WebRTC" includes)
 		if(${includes})
-			set(API "WebRTC API")
+			set(API "WebRTC")
 		endif()
 		
 		## WebXR Device API
-		dk_includes("${API}" "WebXR " includes)
+		dk_includes("${API}" "WebXR" includes)
 		if(${includes})
 			set(API "WebXR Device API")
 		endif()
+		
+		## XMLHttpRequest
+		dk_includes("${API}" "XMLHttpRequest" includes)
+		if(${includes})
+			set(API "XMLHttpRequest")
+		endif()
+		########################################################
 		
 		dk_includes("${APIS}" "${API}" includes)
 		if(${includes})
