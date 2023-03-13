@@ -33,6 +33,12 @@ if(NOT EXISTS ${WEBIDLPEDIA}/DKWebAPIs/interfaces.txt)
 			set(API "WebRTC API")
 		endif()
 		
+		## WebXR Device API
+		dk_includes("${API}" "WebXR " includes)
+		if(${includes})
+			set(API "WebXR Device API")
+		endif()
+		
 		dk_includes("${APIS}" "${API}" includes)
 		if(${includes})
 		
