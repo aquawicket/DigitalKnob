@@ -21,9 +21,19 @@ if(NOT EXISTS ${WEBIDLPEDIA}/DKWebAPIs/interfaces.txt)
 		
 		string(SUBSTRING "${filestring}" ${start} ${length} API)
 		
-		dk_set(APIS " ")
-		dk_includes("${APIS}" "${API}" includes)
+		## WebGL API
+		dk_includes("${API}" "WebGL" includes)
+		if(${includes})
+			dk_set(API "WebGL API")
+		endif()
 		
+		## WebRTC API
+		dk_includes("${API}" "WebRTC" includes)
+		if(${includes})
+			dk_set(API "WebRTC API")
+		endif()
+		
+		dk_includes("${APIS}" "${API}" includes)
 		if(${includes})
 		
 		else()
