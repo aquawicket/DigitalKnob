@@ -21,6 +21,12 @@ if(NOT EXISTS ${WEBIDLPEDIA}/DKWebAPIs/interfaces.txt)
 		
 		string(SUBSTRING "${filestring}" ${start} ${length} API)
 		
+		## Web Authentication API
+		dk_includes("${API}" "Web Authentication" includes)
+		if(${includes})
+			set(API "Web Authentication API")
+		endif()
+		
 		## WebGL API
 		dk_includes("${API}" "WebGL" includes)
 		if(${includes})
