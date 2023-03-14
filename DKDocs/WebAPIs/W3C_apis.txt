@@ -1,0 +1,305 @@
+WebGL ANGLE_instanced_arrays Khronos Ratified Extension Specification
+Accessible Rich Internet Applications (WAI-ARIA) 1.3
+AAC WebCodecs Registration
+DOM Standard
+Orientation Sensor
+HTML Standard
+Accelerometer
+Payment Handler API
+Private Network Access
+Web Cryptography API
+WebVTT: The Web Video Text Tracks Format
+Web Bluetooth
+WebUSB API
+Ambient Light Sensor
+Web Audio API
+Web Animations
+CSS Animations Level 1
+Web Animations Level 2
+CSS Animation Worklet API
+Manifest Incubations
+App History API
+Media Source Extensions™
+Web IDL Standard
+Web Authentication: An API for accessing Public Key Credentials - Level
+HTML Sanitizer API
+Attribution Reporting
+FLEDGE
+Media Capabilities
+Autoplay Policy Detection
+Audio Output Devices API
+Secure Payment Confirmation
+AVC (H.264) WebCodecs Registration
+Background Fetch
+Web Periodic Background Synchronization
+Accelerated Shape Detection in Images
+Font Metrics API Level 1
+Payment Method: Basic Card
+Battery Status API
+WebTransport
+CSS Font Loading Module Level 3
+WebSockets Standard
+MediaStream Recording
+File API
+CSS Layout API Level 1
+Fetch Standard
+CSSOM View Module
+Region Capture
+Streams Standard
+Content Security Policy Level 3
+CSS Object Model (CSSOM)
+CSS Animations Level 2
+CSS Typed OM Level 1
+CSS Color Module Level 5
+CSS Conditional Rules Module Level 3
+CSS Containment Module Level 3
+CSS Counter Styles Level 3
+CSS Fonts Module Level 4
+CSS Cascading and Inheritance Level 5
+CSS Nesting Module
+AnimationEvent
+CSS Parser API
+CSSColor
+CSS Properties and Values API Level 1
+CSS Pseudo-Elements Module Level 4
+CSS Cascading and Inheritance Level 6
+Scroll-linked Animations
+CSS Transitions Level 2
+CSS Device Adaptation Module Level 1
+Service Workers Nightly
+Media Capture and Streams
+Media Capture from DOM Elements
+The Capture-Handle Actions Mechanism
+Screen Capture
+Capture Handle - Bootstrapping Collaboration when Screensharing
+EditContext API
+Page Lifecycle
+Clipboard API and events
+Close Watcher API
+EyeDropper API
+UI Events
+Compression Streams
+Compute Pressure API
+Compute and System Pressure Level 1
+Network Information API
+MediaStream Image Capture
+Contact Picker API
+Content Index
+CSS Containment Module Level 2
+Cookie Store API
+Crash Reporting
+Trusted Types
+Credential Management Level 1
+WebRTC Encoded Transform
+Custom State Pseudo Class
+High Resolution Time
+Geometry Interfaces Module Level 1
+CSS Shared Element Transitions Module Level 1
+DataCue API
+Deprecation Reporting
+Accelerated Text Detection in Images
+DeviceOrientation Event Specification
+Device Posture API
+Digital Goods API
+File System Access
+Web App Manifest
+WebGL EXT_blend_minmax Khronos Ratified Extension Specification
+WebGL EXT_clip_cull_distance Extension Draft Specification
+WebGL EXT_color_buffer_float Extension Specification
+WebGL EXT_color_buffer_half_float Extension Specification
+WebGL EXT_disjoint_timer_query Extension Specification
+WebGL EXT_disjoint_timer_query_webgl2 Extension Specification
+WebGL EXT_float_blend Extension Specification
+WebGL EXT_frag_depth Khronos Ratified Extension Specification
+WebGL EXT_sRGB Extension Specification
+WebGL EXT_shader_texture_lod Khronos Ratified Extension Specification
+WebGL EXT_texture_compression_bptc Extension Specification
+WebGL EXT_texture_compression_rgtc Extension Specification
+WebGL EXT_texture_filter_anisotropic Khronos Ratified Extension Specification
+WebGL EXT_texture_norm16 Extension Specification
+Secure Curves in the Web Cryptography API
+EPUB Reading Systems 3.3
+File and Directory Entries API
+Event Timing API
+Federated Credential Management API
+Fenced frame
+Priority Hints
+File System Standard
+FLAC WebCodecs Registration
+WebGL Specification
+Web Serial API
+CSS Spatial Navigation Level 1
+Local Font Access API
+XMLHttpRequest Standard
+Text Fragments
+Fullscreen API Standard
+WebGL 2.0 Specification
+WebGPU
+Gamepad
+Gamepad Extensions
+Identity for WebRTC 1.0
+Reporting API
+Geolocation API
+Geolocation Sensor
+Notifications API Standard
+Scalable Vector Graphics (SVG) 2
+WebAssembly JavaScript Interface
+Global Privacy Control (GPC)
+Gyroscope
+WebHID API
+Client to Authenticator Protocol (CTAP)
+The &lt;model&gt; element
+MathMLElement
+Portals
+HEVC (H.265) WebCodecs Registration
+CSS Custom Highlight API Module Level 1
+Indexed Database API 3.0
+requestIdleCallback()
+Idle Detection API
+Image Resource
+Ink API
+DOM Parsing and Serialization
+Input Device Capabilities
+Federated Learning of Cohorts
+Intersection Observer
+Intervention Reporting
+Early detection of input events
+JSON-LD 1.1 Processing Algorithms and API
+JSON-LD 1.1 Framing
+WebGL KHR_parallel_shader_compile Extension Specification
+Keyboard Lock
+Keyboard Map
+Largest Contentful Paint
+Web App Launch Handler API
+Layout Instability API
+Web Locks API
+Web MIDI API
+Web Neural Network API
+Magnetometer
+MathML Core
+Encrypted Media Extensions
+Media Session Standard
+BrowserCaptureMediaStreamTrack
+MediaStreamTrack Insertable Media Processing using Streams
+Measure Memory API
+Media Capture Automation
+Generic Sensor API
+Web NFC
+CSS Regions Module Level 1
+Navigation API
+Navigation Timing Level 2
+WebDriver
+Badging API
+Device Memory
+Storage Standard
+User-Agent Client Hints
+Save Data API
+WebGL OES_draw_buffers_indexed Extension Specification
+WebGL OES_element_index_uint Khronos Ratified Extension Specification
+WebGL OES_fbo_render_mipmap Extension Specification
+WebGL OES_standard_derivatives Khronos Ratified Extension Specification
+WebGL OES_texture_float Khronos Ratified Extension Specification
+WebGL OES_texture_float_linear Khronos Ratified Extension Specification
+WebGL OES_texture_half_float Khronos Ratified Extension Specification
+WebGL OES_texture_half_float_linear Khronos Ratified Extension Specification
+WebGL OES_vertex_array_object Khronos Ratified Extension Specification
+WebOTP API
+WebGL OVR_multiview2 Extension Specification
+Private State Token API
+Opus WebCodecs Registration
+Screen Orientation
+CSS Painting API Level 1
+Payment Request API
+BasicCardChangeDetails
+Payment Request API 1.1
+Element Timing API
+Performance Timeline
+Frame Timing
+Long Tasks API
+User Timing Level 3
+Paint Timing 1
+Resource Timing
+Server Timing
+Permissions
+Permissions Policy
+Picture-in-Picture
+Pointer Events
+HTMLPortalElement
+Presentation API
+Compute Pressure Level 1
+JS Self-Profiling API
+Proximity Sensor
+Push API
+WebRTC: Real-Time Communication in Browsers
+Identifiers for WebRTC&#39;s Statistics API
+MediaStreamTrack Content Hints
+WebRTC 1.0: Real-Time Communication Between Browsers
+IceTransport Extensions for WebRTC
+WebRTC Priority Control API
+Referrer Policy
+Get Installed Related Apps API
+Remote Playback API
+Resize Observer
+SVG Animations
+CSS Masking Module Level 1
+Filter Effects Module Level 1
+SVG Markers
+Prioritized Task Scheduling
+Multi-Screen Window Placement
+The Screen Fold API
+Scripting Policy
+Scroll-driven Animations
+Selection API
+Web Share API
+Web Share Target API
+Web Speech API
+Web Background Synchronization
+Test Utils Standard
+Encoding Standard
+requestStorageAccessForOrigin API
+Touch Events - Level 2
+URL Standard
+URLPattern API
+CSS View Transitions Module Level 1
+Vibration API (Second Edition)
+HTMLVideoElement.requestVideoFrameCallback()
+Media Capture Depth Stream Extensions
+Media Playback Quality
+Viewport Capture
+VirtualKeyboard API
+WindowClient
+WebGL WEBGL_blend_equation_advanced_coherent Extension Draft Specification
+WebGL WEBGL_clip_cull_distance Extension Draft Specification
+WebGL WEBGL_color_buffer_float Extension Specification
+WebGL WEBGL_compressed_texture_astc Extension Specification
+WebGL WEBGL_compressed_texture_etc Extension Specification
+WebGL WEBGL_compressed_texture_etc1 Extension Specification
+WebGL WEBGL_compressed_texture_pvrtc Extension Specification
+WebGL WEBGL_compressed_texture_s3tc Khronos Ratified Extension Specification
+WebGL WEBGL_compressed_texture_s3tc_srgb Extension Specification
+WebGL WEBGL_debug_renderer_info Khronos Ratified Extension Specification
+WebGL WEBGL_debug_shaders Khronos Ratified Extension Specification
+WebGL WEBGL_depth_texture Khronos Ratified Extension Specification
+WebGL WEBGL_draw_buffers Khronos Ratified Extension Specification
+WebGL WEBGL_draw_instanced_base_vertex_base_instance Extension Draft Specification
+WebGL WEBGL_lose_context Khronos Ratified Extension Specification
+WebGL WEBGL_multi_draw Extension Specification
+WebGL WEBGL_multi_draw_instanced_base_vertex_base_instance Extension Draft Specification
+WebGL WEBGL_provoking_vertex Extension Specification
+Screen Wake Lock API
+Window Controls Overlay
+CompositionEvent
+WebXR Anchors Module
+WebXR Device API
+WebXR Depth Sensing Module
+WebXR Raw Camera Access Module
+WebXR Layers API Level 1
+WebXR DOM Overlays Module
+WebXR Augmented Reality Module - Level 1
+WebXR Hand Input Module - Level 1
+WebXR Hit Test Module
+WebXR Lighting Estimation API Level 1
+FontFacePalette
+Console Standard
+ArrayBuffer
+AnimationEffect
