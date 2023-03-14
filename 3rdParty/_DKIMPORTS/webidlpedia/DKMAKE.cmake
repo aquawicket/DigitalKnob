@@ -22,6 +22,7 @@ if(NOT EXISTS ${WEBIDLPEDIA}/DKWebAPIs/W3C_interfaces.txt)
 		string(SUBSTRING "${filestring}" ${start} ${length} API)
 		
 		########################################################
+		set(PROCESS_API_NAMES true)
 		if(${PROCESS_API_NAMES})
 		########################################################
 			## only " API" strings
