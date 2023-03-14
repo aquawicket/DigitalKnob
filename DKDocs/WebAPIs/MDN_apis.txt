@@ -1,16 +1,14 @@
-This is a list of all the APIs that are available.
-
-Audio Output Devices API
-Background Fetch API
-Background Sync
+Audio Output Devices API Experimental
+Background Fetch API Experimental
+Background Sync Experimental
 Background Tasks
-Barcode Detection API
+Barcode Detection API Experimental
 Battery API
 Beacon
-Bluetooth API
+Bluetooth API Experimental
 Broadcast Channel API
 CSS Counter Styles
-CSS Custom Highlight API
+CSS Custom Highlight API Experimental
 CSS Font Loading API
 CSS Painting API
 CSS Properties and Values API
@@ -21,15 +19,15 @@ Channel Messaging API
 Clipboard API
 Compression Streams API
 Console API
-Contact Picker API
-Content Index API
-Cookie Store API
+Contact Picker API Experimental
+Content Index API Experimental
+Cookie Store API Experimental
 Credential Management API
 DOM
 Device Orientation Events
 Encoding API
 Encrypted Media Extensions
-EyeDropper API
+EyeDropper API Experimental
 Fetch API
 File API
 File System Access API
@@ -40,38 +38,38 @@ Geolocation API
 Geometry Interfaces
 HTML DOM
 HTML Drag and Drop API
-HTML Sanitizer API
+HTML Sanitizer API Experimental
 History API
-Idle Detection API
-Image Capture API
+Idle Detection API Experimental
+Image Capture API Experimental
 IndexedDB
-Ink API
+Ink API Experimental
 Intersection Observer API
-Keyboard API
-Launch Handler API
-Layout Instability API
-Local Font Access API
+Keyboard API Experimental
+Launch Handler API Experimental
+Layout Instability API Experimental
+Local Font Access API Experimental
 Media Capabilities API
 Media Capture and Streams
 Media Session API
-Media Source Extensions
+Media Source Extensions Experimental
 MediaStream Recording
-Navigation API
-Network Information API
+Navigation API Experimental
+Network Information API Experimental
 Page Visibility API
-Payment Handler API
+Payment Handler API Experimental
 Payment Request API
 Performance API
-Periodic Background Sync
+Periodic Background Sync Experimental
 Permissions API
 Picture-in-Picture API
 Pointer Events
 Pointer Lock API
-Presentation API
+Presentation API Experimental
 Prioritized Task Scheduling API
-Proximity Events
+Proximity Events Experimental Deprecated
 Push API
-Reporting API
+Reporting API Experimental
 Resize Observer API
 Screen Capture API
 Screen Orientation API
@@ -87,11 +85,11 @@ Touch Events
 Trusted Types API
 UI Events
 URL API
-URL Pattern API
-User-Agent Client Hints API
+URL Pattern API Experimental
+User-Agent Client Hints API Experimental
 Vibration API
-View Transitions API
-VirtualKeyboard API
+View Transitions API Experimental
+VirtualKeyboard API Experimental
 Visual Viewport
 Web Animations
 Web Audio API
@@ -99,7 +97,7 @@ Web Authentication API
 Web Crypto API
 Web Locks API
 Web MIDI API
-Web NFC API
+Web NFC API Experimental
 Web Notifications
 Web Share API
 Web Speech API
@@ -107,14 +105,14 @@ Web Storage API
 Web Workers API
 WebCodecs API
 WebGL
-WebHID API
+WebHID API Experimental
 WebOTP API
 WebRTC
-WebTransport API
-WebUSB API
-WebVR API
+WebTransport API Experimental
+WebUSB API Experimental
+WebVR API Non-standard Deprecated
 WebVTT
-WebXR Device API
+WebXR Device API Experimental
 Websockets API
-Window Controls Overlay API
+Window Controls Overlay API Experimental
 XMLHttpRequest

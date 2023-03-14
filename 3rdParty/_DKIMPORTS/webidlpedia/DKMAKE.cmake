@@ -22,40 +22,51 @@ if(NOT EXISTS ${WEBIDLPEDIA}/DKWebAPIs/interfaces.txt)
 		string(SUBSTRING "${filestring}" ${start} ${length} API)
 		
 		########################################################
-		## Web Authentication API
-		dk_includes("${API}" "Web Authentication" includes)
-		if(${includes})
-			set(API "Web Authentication API")
-		endif()
-		
-		## WebCodecs API
-		dk_includes("${API}" "WebCodecs" includes)
-		if(${includes})
-			set(API "WebCodecs API")
-		endif()
-		
-		## WebGL
-		dk_includes("${API}" "WebGL" includes)
-		if(${includes})
-			set(API "WebGL")
-		endif()
-		
-		## WebRTC
-		dk_includes("${API}" "WebRTC" includes)
-		if(${includes})
-			set(API "WebRTC")
-		endif()
-		
-		## WebXR Device API
-		dk_includes("${API}" "WebXR" includes)
-		if(${includes})
-			set(API "WebXR Device API")
-		endif()
-		
-		## XMLHttpRequest
-		dk_includes("${API}" "XMLHttpRequest" includes)
-		if(${includes})
-			set(API "XMLHttpRequest")
+		if(${PROCESS_API_NAMES})
+		########################################################
+			## only " API" strings
+			dk_includes("${API}" " API" includes)
+			if(NOT ${includes})
+				continue()
+			endif()
+			
+			##############################
+			## Web Authentication API
+			dk_includes("${API}" "Web Authentication" includes)
+			if(${includes})
+				set(API "Web Authentication API")
+			endif()
+			
+			## WebCodecs API
+			dk_includes("${API}" "WebCodecs" includes)
+			if(${includes})
+				set(API "WebCodecs API")
+			endif()
+			
+			## WebGL
+			dk_includes("${API}" "WebGL" includes)
+			if(${includes})
+				set(API "WebGL")
+			endif()
+			
+			## WebRTC
+			dk_includes("${API}" "WebRTC" includes)
+			if(${includes})
+				set(API "WebRTC")
+			endif()
+			
+			## WebXR Device API
+			dk_includes("${API}" "WebXR" includes)
+			if(${includes})
+				set(API "WebXR Device API")
+			endif()
+			
+			## XMLHttpRequest
+			dk_includes("${API}" "XMLHttpRequest" includes)
+			if(${includes})
+				set(API "XMLHttpRequest")
+			endif()
+		########################################################
 		endif()
 		########################################################
 		
