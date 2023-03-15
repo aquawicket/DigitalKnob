@@ -1,4 +1,5 @@
 dk_depend(duktape)
+dk_depend(ncurses)
 dk_depend(DK)
 if(USE_babel)
 	dk_depend(babel)

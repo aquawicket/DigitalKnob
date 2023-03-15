@@ -27,6 +27,12 @@
 #include "DK/stdafx.h"
 #include "DKDuktape/ConsoleWindow.h"
 
+#if !WIN && !EMSCRIPTEN && !ANDROID
+	#include <stdlib.h>
+	#include <signal.h>
+	#include <curses.h>
+#endif
+
 #if WIN
 	// fullScreen
 	WINDOWPLACEMENT ConsoleWindow::wpc;
@@ -37,31 +43,13 @@
 
 bool ConsoleWindow::Init(){
 	DKDEBUGFUNC();
+	
+#if !WIN && !EMSCRIPTEN && !ANDROID
+	SCREEN *screen = newterm((char *) 0, stdout, stdin);
+	if(!screen)
+		return DKERROR("screen invalid! \n");
+#endif
 
-	//// Instance properties ////
-	DKDuktape::AttachFunction("CPP_ConsoleWindow_closed", ConsoleWindow::closed);
-    DKDuktape::AttachFunction("CPP_ConsoleWindow_columns", ConsoleWindow::Columns);
-	DKDuktape::AttachFunction("CPP_ConsoleWindow_fullScreen", ConsoleWindow::fullScreen);
-	DKDuktape::AttachFunction("CPP_ConsoleWindow_innerHeight", ConsoleWindow::innerHeight);
-	DKDuktape::AttachFunction("CPP_ConsoleWindow_innerWidth", ConsoleWindow::innerWidth);
-	DKDuktape::AttachFunction("CPP_ConsoleWindow_name", ConsoleWindow::name);
-	DKDuktape::AttachFunction("CPP_ConsoleWindow_outerHeight", ConsoleWindow::outerHeight);
-	DKDuktape::AttachFunction("CPP_ConsoleWindow_outerWidth", ConsoleWindow::outerWidth);
-    DKDuktape::AttachFunction("CPP_ConsoleWindow_rows", ConsoleWindow::Rows);
-	DKDuktape::AttachFunction("CPP_ConsoleWindow_screenX", ConsoleWindow::ScreenX);
-	DKDuktape::AttachFunction("CPP_ConsoleWindow_screenLeft", ConsoleWindow::screenLeft);
-	DKDuktape::AttachFunction("CPP_ConsoleWindow_screenY", ConsoleWindow::ScreenY);
-	DKDuktape::AttachFunction("CPP_ConsoleWindow_screenTop", ConsoleWindow::screenTop);
-	
-	//// Instance methods ////
-	DKDuktape::AttachFunction("CPP_ConsoleWindow_blur", ConsoleWindow::blur);
-	DKDuktape::AttachFunction("CPP_ConsoleWindow_close", ConsoleWindow::close);
-	DKDuktape::AttachFunction("CPP_ConsoleWindow_focus", ConsoleWindow::focus);
-	DKDuktape::AttachFunction("CPP_ConsoleWindow_moveBy", ConsoleWindow::moveBy);
-	DKDuktape::AttachFunction("CPP_ConsoleWindow_moveTo", ConsoleWindow::moveTo);
-	DKDuktape::AttachFunction("CPP_ConsoleWindow_resizeBy", ConsoleWindow::resizeBy);
-	DKDuktape::AttachFunction("CPP_ConsoleWindow_resizeTo", ConsoleWindow::resizeTo);
-	
 #if WIN
     // Get the standard input handle. 
     hStdin = GetStdHandle(STD_INPUT_HANDLE);
@@ -132,6 +120,30 @@ bool ConsoleWindow::Init(){
 
     // FocusEvent
     relatedTarget = "";
+
+	//// Instance properties ////
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_closed", ConsoleWindow::closed);
+    DKDuktape::AttachFunction("CPP_ConsoleWindow_columns", ConsoleWindow::Columns);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_fullScreen", ConsoleWindow::fullScreen);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_innerHeight", ConsoleWindow::innerHeight);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_innerWidth", ConsoleWindow::innerWidth);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_name", ConsoleWindow::name);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_outerHeight", ConsoleWindow::outerHeight);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_outerWidth", ConsoleWindow::outerWidth);
+    DKDuktape::AttachFunction("CPP_ConsoleWindow_rows", ConsoleWindow::Rows);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_screenX", ConsoleWindow::ScreenX);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_screenLeft", ConsoleWindow::screenLeft);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_screenY", ConsoleWindow::ScreenY);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_screenTop", ConsoleWindow::screenTop);
+	
+	//// Instance methods ////
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_blur", ConsoleWindow::blur);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_close", ConsoleWindow::close);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_focus", ConsoleWindow::focus);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_moveBy", ConsoleWindow::moveBy);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_moveTo", ConsoleWindow::moveTo);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_resizeBy", ConsoleWindow::resizeBy);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_resizeTo", ConsoleWindow::resizeTo);
 
     DKApp::AppendLoopFunc(&ConsoleWindow::Loop, this);
     return true;

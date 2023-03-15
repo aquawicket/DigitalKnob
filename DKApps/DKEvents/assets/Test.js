@@ -50,7 +50,6 @@ myCPPObject.test()
 console.log("\n")
 
 
-
 /////////////////// ConsoleWindow //////////////////////////
 console.log("/////////// ConsoleWindow /////////////////////")
 CPP_DK_Create("DKDuktape/ConsoleWindow.js");
@@ -240,72 +239,3 @@ myConsoleWindow.addEventListener('resize', onResize)
 //myConsoleWindow.close()
 //myConsoleWindow.focus()
 
-
-/*
-///////////////////// NcursesInput ////////////////////////
-console.log("/////////// NcursesInput /////////////////////")
-CPP_DK_Create("EventTest/NcursesInput.js");
-const myNcursesInput = new NcursesInput('myNcursesInput')
-
-// Keyboard events
-function onKeyDown(event){
-	console.log("onKeyDown() event.key="+event.key)
-}
-myNcursesInput.addEventListener('keydown', onKeyDown)
-function onKeyUp(event){
-	console.log("onKeyUp() event.key="+event.key)
-}
-myNcursesInput.addEventListener('keyup', onKeyUp)
-function onKeyPress(event){
-	console.log("onKeyPress() event.key="+event.key)
-}
-myNcursesInput.addEventListener('keypress', onKeyPress)
-
-// Mouse events
-function onClick(event){
-	console.log("onClick() event.button="+event.button)
-}
-myNcursesInput.addEventListener('click', onClick)
-function onContextMenu(event){
-	console.log("onContextMenu() event.button="+event.button)
-}
-myNcursesInput.addEventListener('contextmenu', onContextMenu)
-function onDblclick(event){
-	console.log("onDblclick() event.button="+event.button)
-}
-myNcursesInput.addEventListener('dblclick', onDblclick)
-function onMouseDown(event){
-	console.log("onMouseDown() event.button="+event.button)
-}
-myNcursesInput.addEventListener('mousedown', onMouseDown)
-function onMouseEnter(event){
-	console.log("onMouseEnter() event.button="+event.button)
-}
-myNcursesInput.addEventListener('mouseenter', onMouseEnter)
-function onMouseLeave(event){
-	console.log("onMouseLeave() event.button="+event.button)
-}
-myNcursesInput.addEventListener('mouseleave', onMouseLeave)
-function onMouseMove(event){
-	console.log("onMouseMove() event.button="+event.button)
-}
-myNcursesInput.addEventListener('mousemove', onMouseMove)
-function onMouseOut(event){
-	console.log("onMouseOut() event.button="+event.button)
-}
-myNcursesInput.addEventListener('mouseout', onMouseOut)
-function onMouseOver(event){
-	console.log("onMouseOver() event.button="+event.button)
-}
-myNcursesInput.addEventListener('mouseover', onMouseOver)
-function onMouseUp(event){
-	console.log("onMouseUp() event.button="+event.button)
-}
-myNcursesInput.addEventListener('mouseup', onMouseUp)
-
-// Resize events
-function onResize(event){
-	console.log("onResize() event.x="+event.x)
-}
-myNcursesInput.addEventListener('resize', onResize)
-*/
