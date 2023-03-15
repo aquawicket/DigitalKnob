@@ -53,7 +53,7 @@ console.log("\n")
 
 /////////////////// ConsoleWindow //////////////////////////
 console.log("/////////// ConsoleWindow /////////////////////")
-CPP_DK_Create("EventTest/ConsoleWindow.js");
+CPP_DK_Create("DKDuktape/ConsoleWindow.js");
 const myConsoleWindow = new ConsoleWindow('myConsoleWindow')
 
 
