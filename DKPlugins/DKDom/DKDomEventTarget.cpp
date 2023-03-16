@@ -72,35 +72,36 @@ bool DKDomEventTarget::OnEvent(DKEvents* event){
 		duk_get_prop_string(ctx, -1, jsreturn.c_str());
 	}
 	*/
+
+	/*
 	DKString rmlEventAddress = event->data[0];
 	if (rmlEventAddress.empty()) {
 		return DKERROR("event->data[0] invalid!\n");
 		//DKWARN("using event->GetId() instead! \n");
 		//rmlEventAddress = id;
 	}
-	//This is current evaluated javascript side at DKDomEvent.js: DispatchEvent(pointer)
-	/*
-	DKString newEvent;
-	if(same(type, "mousemove") || same(type, "mousedown") || same(type, "mouseup") || same(type, "click") || same(type, "dblclick") || same(type, "contextmenu")){
-		newEvent = "new MouseEvent(\"" + rmlEventAddress + "\")";
-	}
-	else if (same(type, "keydown") || same(type, "keyup") || same(type, "keypress"))
-	{
-		newEvent = "new KeyboardEvent(\"" + rmlEventAddress + "\")";
-	}
-	else{
-		newEvent = "new Event(\"" + rmlEventAddress + "\")";
-	}
-	//create the event
-	if(duk_peval_string(ctx, newEvent.c_str()) != 0)
-		DKDuktape::DumpError(newEvent);
 	*/
 
+	DKWARN("using event->GetId() instead! \n");
+	DKString rmlEventAddress = id;
 
-	//dispatch the event
-	DKString dispatchEvent = "DispatchEvent(\""+rmlEventAddress+"\")";
-	if(duk_peval_string(ctx, dispatchEvent.c_str()) != 0)
+	DKString options = "";
+	DKString dispatchEvent;
+	if(same(type, "mousemove") || same(type, "mousedown") || same(type, "mouseup") || same(type, "click") || same(type, "dblclick") || same(type, "contextmenu")){
+		dispatchEvent = "dispatchMouseEvent('" + type + "', '" + options + "', '" + rmlEventAddress + "')";
+	}
+	else if (same(type, "keydown") || same(type, "keyup") || same(type, "keypress")){
+		dispatchEvent = "dispatchKeyboardEvent('" + type + "', '" + options + "', '" + rmlEventAddress + "')";
+	}
+	else{
+		dispatchEvent = "dispatchEvent('" + type + "', '" + options + "', '" + rmlEventAddress + "')";
+		//dispatchEvent = "DispatchEvent(\"" + rmlEventAddress + "\")";
+	}
+
+	// Call Duktape
+	if (duk_peval_string(ctx, dispatchEvent.c_str()) != 0)
 		DKDuktape::DumpError(dispatchEvent);
+
 	duk_pop(ctx);  // pop result/error
 	return true;
 }

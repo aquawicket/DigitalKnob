@@ -18,18 +18,21 @@ instances = [];
 
 // [EventTarget()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/EventTarget
 var EventTarget = function EventTarget(pointer) {
-	
+	//console.log("new EventTarget("+pointer+")")
     this.pointer = pointer;
     for (var i = 0; i < instances.length; i++) {
+		//console.log("instances["+i+"].pointer = "+instances[i].pointer)
         if (instances[i].pointer === pointer)
             return instances[i]; //return already existing instance
     }
+	console.log("new EventTarget("+pointer+") instance")
     instances.push(this); //create instance
     this.listeners = {};
 	
 	// [EventTarget.addEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
     Object.defineProperty(this, "addEventListener", {
         value: function addEventListener(type, callback, useCapture) {
+			console.log("addEventListener("+type+", "+callback+", "+useCapture+")")
             if (!(type in this.listeners))
                 this.listeners[type] = [];
             if (this.listeners[type].indexOf(callback) === -1)
@@ -59,6 +62,8 @@ var EventTarget = function EventTarget(pointer) {
 	// [EventTarget.dispatchEvent()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent
     Object.defineProperty(this, "dispatchEvent", {
         value: function dispatchEvent(event) {
+			console.log("EventTarget.dispatchEvent()")
+			/*
 			if(!this){
 				console.error("dispatchEvent(): this invalid"); 
 				return false;
@@ -75,6 +80,13 @@ var EventTarget = function EventTarget(pointer) {
 				console.error("dispatchEvent(): event.type invalid"); 
 				return false;
 			}
+			*/
+			console.log("event.type = "+event.type)
+			console.log("this.listeners = "+this.listeners)
+
+			console.log("JSON.stringify(this.listeners) = "+JSON.stringify(this.listeners))
+
+  
             if(!(event.type in this.listeners))
                 return true;
 			
@@ -90,6 +102,7 @@ var EventTarget = function EventTarget(pointer) {
 			*/
 			
             var stack = this.listeners[event.type].slice()
+			console.log("stack = "+stack)
             for (var i = 0; i < stack.length; i++)
                 stack[i] && stack[i].call(this, event)
             return !event.defaultPrevented;
