@@ -321,6 +321,7 @@ bool DKRml::LoadUrl(const DKString& url){
 void DKRml::ProcessEvent(Rml::Event& rmlEvent){
 	//DKDEBUGFUNC(rmlEvent);  //EXCESSIVE LOGGING
 	DKString rmlEventAddress = DKDuktape::pointerToAddress(&rmlEvent);
+	Rml::Event* my_rmlEvent = (Rml::Event *)DKDuktape::addressToPointer(rmlEventAddress);
 	//DKString code = "new Event("+rmlEventAddress+")";
 	//DKString rval;
 	//DKDuktape::Get()->RunDuktape(code, rval);
@@ -388,6 +389,27 @@ void DKRml::ProcessEvent(Rml::Event& rmlEvent){
 		type = "contextmenu";
 	if (same(type, "change"))
 		type = "input";
+
+
+
+	DKString options = "";
+	DKString dispatchEvent;
+	if (same(type, "mousemove") || same(type, "mousedown") || same(type, "mouseup") || same(type, "click") || same(type, "dblclick") || same(type, "contextmenu")) {
+		dispatchEvent = "dispatchMouseEvent('" + type + "', '" + options + "', '" + rmlEventAddress + "')";
+	}
+	else if (same(type, "keydown") || same(type, "keyup") || same(type, "keypress")) {
+		dispatchEvent = "dispatchKeyboardEvent('" + type + "', '" + options + "', '" + rmlEventAddress + "')";
+	}
+	else {
+		dispatchEvent = "dispatchEvent('" + type + "', '" + options + "', '" + rmlEventAddress + "')";
+		//dispatchEvent = "DispatchEvent(\"" + rmlEventAddress + "\")";
+	}
+
+	// Call Duktape
+	DKString rval;
+	DKDuktape::RunDuktape(dispatchEvent.c_str(), rval);
+	return;
+
 
 	//DKINFO("event type = " + type+"\n");
 	for(unsigned int i = 0; i < DKEvents::events.size(); ++i){
