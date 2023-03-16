@@ -1,7 +1,10 @@
-// https://developer.mozilla.org/en-US/docs/Web/API/Node
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Node
+// [INTERFACE] https://dom.spec.whatwg.org/#interface-node
 
-// https://dom.spec.whatwg.org/#interface-node
+
 var Node = function Node(pointer) {
+	
+	////// Instance properties //////
     Object.defineProperty(this, "baseURI", {
         get: function baseURI() {
             return CPP_DKDomNode_baseURI(this.pointer)

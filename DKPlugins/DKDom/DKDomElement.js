@@ -1,11 +1,13 @@
-//https://developer.mozilla.org/en-US/docs/Web/API/Element
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Element
+// [INTERFACE] https://dom.spec.whatwg.org/#interface-element
 
-// https://dom.spec.whatwg.org/#interface-element
+
 var Element = function Element(pointer) {
 
     this.pointer = pointer
 
-    // Properties
+    ////// Instance properties //////
+	// [Element.attributes](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Element/attributes
     Object.defineProperty(this, "attributes", {
         get: function attributes() {
             return CPP_DKDomElement_attributes(pointer)
