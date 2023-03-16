@@ -89,7 +89,10 @@ var Node = function Node(pointer) {
     })
     Object.defineProperty(this, "parentElement", {
         get: function parentElement() {
-            return CPP_DKDomNode_parentElement(this.pointer)
+			var address = CPP_DKDomNode_parentElement(this.pointer)
+			if (!address)
+                return;
+            return new HTMLElement(address)
         }
     })
     Object.defineProperty(this, "previousSibling", {
