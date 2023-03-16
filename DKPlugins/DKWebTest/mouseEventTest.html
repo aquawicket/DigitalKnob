@@ -1,0 +1,42 @@
+<html>
+	<head>
+		<title>MouseEvent Test</title>
+	</head>
+	<body>
+
+		<!-- Home -->
+		<a id="home" href="index.html">home</a><br /><br />
+		<a style="font-weight:bold;font-size:20px;">MouseEvent Test</a><br /><br />
+		<br />
+
+		<!-- event object -->
+		<strong>event: </strong><a id="event">error</a><br /><br />
+
+		<!-- Instance properties -->
+		<a style="font-weight:bold;">Instance properties</a><br />
+		<strong>event.altKey: </strong><a id="event.altKey">error</a><br />
+		<strong>event.button: </strong><a id="event.button">error</a><br />
+		<strong>event.buttons: </strong><a id="event.buttons">error</a><br />
+		<strong>event.clientX: </strong><a id="event.clientX">error</a><br />
+		<strong>event.clientY: </strong><a id="event.clientY">error</a><br />
+		<strong>event.ctrlKey: </strong><a id="event.ctrlKey">error</a><br />
+		<strong>event.layerX: </strong><a id="event.layerX">error</a><br />
+		<strong>event.layerY: </strong><a id="event.layerY">error</a><br />
+
+		<script>
+		window.addEventListener("click", onMouseEvent, true);
+		function onMouseEvent(event){
+			console.log("onMouseEvent("+event+")");
+			document.getElementById("event").innerHTML = ""+event;
+			document.getElementById("event.altKey").innerHTML = event.altKey;
+			document.getElementById("event.button").innerHTML = event.button;
+			document.getElementById("event.buttons").innerHTML = event.buttons;
+			document.getElementById("event.clientX").innerHTML = event.clientX;
+			document.getElementById("event.clientY").innerHTML = event.clientY;
+			document.getElementById("event.ctrlKey").innerHTML = event.ctrlKey;
+			//document.getElementById("event.layerX").innerHTML = event.layerX;
+			//document.getElementById("event.layerY").innerHTML = event.layerY;
+		}
+		</script>
+	</body>
+</html>

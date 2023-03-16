@@ -102,6 +102,10 @@ int DKDomKeyboardEvent::code(duk_context* ctx) {
 		duk_push_undefined(ctx);
 		return DKERROR("event invalid\n");
 	}
+	if (event->GetType().empty()) {
+		duk_push_undefined(ctx);
+		return DKERROR("event->GetType().empty()\n");
+	}
 	Rml::Input::KeyIdentifier key_identifier = (Rml::Input::KeyIdentifier)event->GetParameter<int>("key_identifier", 0);
 	Key rml_key = rmlKey[key_identifier];
 	DKKeyCodes::KeyboardEventMap key = DKKeyCodes::keys[rml_key];
