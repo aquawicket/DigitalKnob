@@ -73,18 +73,18 @@ bool DKDomEventTarget::OnEvent(DKEvents* event){
 	}
 	*/
 
-	/*
+	
 	DKString rmlEventAddress = event->data[0];
 	if (rmlEventAddress.empty()) {
 		return DKERROR("event->data[0] invalid!\n");
 		//DKWARN("using event->GetId() instead! \n");
 		//rmlEventAddress = id;
 	}
-	*/
+	
 	
 
-	DKWARN("using event->GetId() instead! \n");
-	DKString rmlEventAddress = id;
+	//DKWARN("using event->GetId() instead! \n");
+	//DKString rmlEventAddress = id;
 
 	DKString options = "";
 	DKString dispatchEvent;
