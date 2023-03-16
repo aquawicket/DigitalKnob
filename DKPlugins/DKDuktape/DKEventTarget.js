@@ -21,25 +21,19 @@ var EventTarget = function EventTarget(pointer) {
 
     this.pointer = pointer;
     for (var i = 0; i < instances.length; i++) {
-        if (instances[i].pointer === pointer) {
+        if (instances[i].pointer === pointer)
             return instances[i]; //return already existing instance
-        }
     }
-    instances.push(this); //console.log("creating instance "+pointer);
-
-    //EventTarget.prototype.listeners = null;
+    instances.push(this); //create instance
     this.listeners = {};
 
 	// [EventTarget.addEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
     Object.defineProperty(this, "addEventListener", {
         value: function addEventListener(type, callback, useCapture) {
-            if (!(type in this.listeners)) {
+            if (!(type in this.listeners))
                 this.listeners[type] = [];
-            }
-            if (this.listeners[type].indexOf(callback) === -1) {
-                //Do not allow duplicate entries
-                this.listeners[type].push(callback);
-            }
+            if (this.listeners[type].indexOf(callback) === -1)
+                this.listeners[type].push(callback) //Do not allow duplicate entries
             //CPP_DKEventTarget_addEventListener(pointer, type, callback);
             //Add or overwrite the event in RmlUi
         }
@@ -47,9 +41,8 @@ var EventTarget = function EventTarget(pointer) {
 	// [EventTarget.removeEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener
     Object.defineProperty(this, "removeEventListener", {
         value: function removeEventListener(type, callback, useCapture) {
-            if (!(type in this.listeners)) {
+            if (!(type in this.listeners))
                 return;
-            }
             var stack = this.listeners[type];
             for (var i = 0, l = stack.length; i < l; i++) {
                 if (stack[i] === callback) {

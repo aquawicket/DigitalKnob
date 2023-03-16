@@ -1,4 +1,5 @@
-//https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
+// [INTERFACE] https://dom.spec.whatwg.org/#interface-eventtarget
 
 /*
 var stored_events = [];
@@ -13,18 +14,20 @@ var EventFromCPP = function EventFromCPP(pointer, event)
 }
 */
 
-// https://dom.spec.whatwg.org/#interface-eventtarget
 instances = [];
+
+// [EventTarget()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/EventTarget
 var EventTarget = function EventTarget(pointer) {
+	
     this.pointer = pointer;
     for (var i = 0; i < instances.length; i++) {
         if (instances[i].pointer === pointer)
             return instances[i]; //return already existing instance
     }
-    //console.log("creating instance "+pointer)
-    instances.push(this)
-    //EventTarget.prototype.listeners = null;
+    instances.push(this); //create instance
     this.listeners = {};
+	
+	// [EventTarget.addEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
     Object.defineProperty(this, "addEventListener", {
         value: function addEventListener(type, callback, useCapture) {
             if (!(type in this.listeners))
@@ -35,6 +38,7 @@ var EventTarget = function EventTarget(pointer) {
             //Add or overwrite the event in RmlUi
         }
     })
+	// [EventTarget.removeEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener
     Object.defineProperty(this, "removeEventListener", {
         value: function removeEventListener(type, callback, useCapture) {
             if (!(type in this.listeners))
@@ -52,6 +56,7 @@ var EventTarget = function EventTarget(pointer) {
             }
         }
     })
+	// [EventTarget.dispatchEvent()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent
     Object.defineProperty(this, "dispatchEvent", {
         value: function dispatchEvent(event) {
 			if(!this){
@@ -91,6 +96,7 @@ var EventTarget = function EventTarget(pointer) {
         }
     })
 	
+	////// toString //////
 	if(this.toString() === "[object Object]"){
 		this.toString = function(){
 			return "[object EventTarget]"
