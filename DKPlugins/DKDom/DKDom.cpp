@@ -57,7 +57,8 @@ bool DKDom::Init(){
 			DKClass::DKCreate("DKDomUIEvent");
 			DKClass::DKCreate("DKDomKeyboardEvent");
 			DKClass::DKCreate("DKDomMouseEvent");
-			
+		
+		DKClass::DKCreate("DKDomDOMTokenList");
 		DKClass::DKCreate("DKDomNode");
 			DKClass::DKCreate("DKDomElement");
 				DKClass::DKCreate("DKDomHTMLElement");

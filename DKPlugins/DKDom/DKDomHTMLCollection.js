@@ -15,7 +15,7 @@ var HTMLCollection = function HTMLCollection(pointers) {
         }
     })
 	
-	////// Methods //////
+	////// Instance methods //////
 	// [HTMLCollection.item()] https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection/item
     HTMLCollection.prototype.item = function item(index) {
         return this[index];
