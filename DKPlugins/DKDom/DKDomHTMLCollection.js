@@ -42,7 +42,4 @@ var HTMLCollection = function HTMLCollection(pointers) {
 	
     return this;
 }
-
-// https://dom.spec.whatwg.org/#interface-htmlcollection
-// interface HTMLCollection
 HTMLCollection.prototype = [];
