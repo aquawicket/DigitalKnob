@@ -30,12 +30,28 @@
 #include "DKDuktape/DKDuktape.h"
 
 
-//https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection
+//https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList
 class DKDomDOMTokenList : public DKObjectT<DKDomDOMTokenList>
 {
 public:
 	bool Init();
+
+	////// Instance properties //////
+	static int length(duk_context* ctx);	// (Read only) https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/length
+	static int value(duk_context* ctx);		// https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/value
 	
+	////// Instance methods //////
+	static int item(duk_context* ctx);		// https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/item
+	static int contains(duk_context* ctx);	// https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/contains
+	static int add(duk_context* ctx);		// https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/add
+	static int remove(duk_context* ctx);	// https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/remove
+	static int replace(duk_context* ctx);	// https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/replace
+	static int supports(duk_context* ctx);	// https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/supports
+	static int toggle(duk_context* ctx);	// https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/toggle
+	static int entries(duk_context* ctx);	// https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/entries
+	static int forEach(duk_context* ctx);	// https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/forEach
+	static int keys(duk_context* ctx);		// https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/keys
+	static int values(duk_context* ctx);	// https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/values
 };
 
 

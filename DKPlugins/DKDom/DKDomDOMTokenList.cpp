@@ -32,3 +32,71 @@ bool DKDomDOMTokenList::Init(){
 	DKClass::DKCreate("DKDom/DKDomDOMTokenList.js");
 	return true;
 }
+
+////// Instance properties //////
+int DKDomDOMTokenList::length(duk_context* ctx) {
+	//TODO
+	return true;
+}
+
+int DKDomDOMTokenList::value(duk_context* ctx) {
+	//TODO
+	return true;
+}
+
+
+////// Instance methods //////
+int DKDomDOMTokenList::item(duk_context* ctx) {
+	//TODO
+	return true;
+}
+
+int DKDomDOMTokenList::contains(duk_context* ctx) {
+	//TODO
+	return true;
+}
+
+int DKDomDOMTokenList::add(duk_context* ctx) {
+	//TODO
+	return true;
+}
+
+int DKDomDOMTokenList::remove(duk_context* ctx) {
+	//TODO
+	return true;
+}
+
+int DKDomDOMTokenList::replace(duk_context* ctx) {
+	//TODO
+	return true;
+}
+
+int DKDomDOMTokenList::supports(duk_context* ctx) {
+	//TODO
+	return true;
+}
+
+int DKDomDOMTokenList::toggle(duk_context* ctx) {
+	//TODO
+	return true;
+}
+
+int DKDomDOMTokenList::entries(duk_context* ctx) {
+	//TODO
+	return true;
+}
+
+int DKDomDOMTokenList::forEach(duk_context* ctx) {
+	//TODO
+	return true;
+}
+
+int DKDomDOMTokenList::keys(duk_context* ctx) {
+	//TODO
+	return true;
+}
+
+int DKDomDOMTokenList::values(duk_context* ctx) {
+	//TODO
+	return true;
+}
