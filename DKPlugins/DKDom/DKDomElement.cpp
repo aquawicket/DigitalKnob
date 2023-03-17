@@ -166,79 +166,31 @@ bool DKDomElement::Init(){
 }
 
 int DKDomElement::assignedSlot(duk_context* ctx) {
-	DKDEBUGFUNC(ctx);
-	DKString address = duk_require_string(ctx, 0);
-	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
-	if (!element) {
-		DKERROR("element invalid\n");
-		duk_push_undefined(ctx);
-		return true;
-	}
 	//TODO
 	return true;
 }
 
 int DKDomElement::attributes(duk_context* ctx) {
-	DKDEBUGFUNC(ctx);
-	DKString address = duk_require_string(ctx, 0);
-	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
-	if (!element) {
-		DKERROR("element invalid\n");
-		duk_push_undefined(ctx);
-		return true;
-	}
 	//TODO
 	return true;
 }
 
 int DKDomElement::childElementCount(duk_context* ctx) {
-	DKDEBUGFUNC(ctx);
-	DKString address = duk_require_string(ctx, 0);
-	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
-	if (!element) {
-		DKERROR("element invalid\n");
-		duk_push_undefined(ctx);
-		return true;
-	}
 	//TODO
 	return true;
 }
 
 int DKDomElement::children(duk_context* ctx) {
-	DKDEBUGFUNC(ctx);
-	DKString address = duk_require_string(ctx, 0);
-	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
-	if (!element) {
-		DKERROR("element invalid\n");
-		duk_push_undefined(ctx);
-		return true;
-	}
 	//TODO
 	return true;
 }
 
 int DKDomElement::classList(duk_context* ctx) {
-	DKDEBUGFUNC(ctx);
-	DKString address = duk_require_string(ctx, 0);
-	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
-	if (!element) {
-		DKERROR("element invalid\n");
-		duk_push_undefined(ctx);
-		return true;
-	}
 	//TODO
 	return true;
 }
 
 int DKDomElement::className(duk_context* ctx) {
-	DKDEBUGFUNC(ctx);
-	DKString address = duk_require_string(ctx, 0);
-	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
-	if (!element) {
-		DKERROR("element invalid\n");
-		duk_push_undefined(ctx);
-		return true;
-	}
 	//TODO
 	return true;
 }
@@ -312,40 +264,16 @@ int DKDomElement::clientWidth(duk_context* ctx){
 }
 
 int DKDomElement::elementTiming(duk_context* ctx) {
-	DKDEBUGFUNC(ctx);
-	DKString address = duk_require_string(ctx, 0);
-	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
-	if (!element) {
-		DKERROR("element invalid\n");
-		duk_push_undefined(ctx);
-		return true;
-	}
 	//TODO
 	return true;
 }
 
 int DKDomElement::firstElementChild(duk_context* ctx) {
-	DKDEBUGFUNC(ctx);
-	DKString address = duk_require_string(ctx, 0);
-	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
-	if (!element) {
-		DKERROR("element invalid\n");
-		duk_push_undefined(ctx);
-		return true;
-	}
 	//TODO
 	return true;
 }
 
 int DKDomElement::id(duk_context* ctx) {
-	DKDEBUGFUNC(ctx);
-	DKString address = duk_require_string(ctx, 0);
-	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
-	if (!element) {
-		DKERROR("element invalid\n");
-		duk_push_undefined(ctx);
-		return true;
-	}
 	//TODO
 	return true;
 }
