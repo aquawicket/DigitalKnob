@@ -7,18 +7,38 @@ var Element = function Element(pointer) {
     this.pointer = pointer
 
     ////// Instance properties //////
+	// [Element.assignedSlot](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Element/assignedSlot
+    Object.defineProperty(this, "assignedSlot", {
+        get: function assignedSlot() {
+            return CPP_DKDomElement_assignedSlot(pointer)
+        }
+    })
 	// [Element.attributes](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Element/attributes
     Object.defineProperty(this, "attributes", {
         get: function attributes() {
             return CPP_DKDomElement_attributes(pointer)
         }
     })
+	// [Element.childElementCount](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Element/childElementCount
+    Object.defineProperty(this, "childElementCount", {
+        get: function childElementCount() {
+            return CPP_DKDomElement_childElementCount(pointer)
+        }
+    })
+	// [Element.children](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Element/children
+    Object.defineProperty(this, "children", {
+        get: function children() {
+            return CPP_DKDomElement_children(pointer)
+        }
+    })
+	// [Element.classList](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Element/classList
     Object.defineProperty(this, "classList", {
         get: function classList() {
             return CPP_DKDomElement_classList(pointer)
         }
     })
-    Object.defineProperty(this, "className", {
+	// [Element.className] https://developer.mozilla.org/en-US/docs/Web/API/Element/className
+	Object.defineProperty(this, "className", {
         get: function className() {
             return CPP_DKDomElement_className(pointer)
         },
@@ -26,26 +46,54 @@ var Element = function Element(pointer) {
             return CPP_DKDomElement_className(pointer, val)
         }
     })
-    Object.defineProperty(this, "clientHeight", {
+	// [Element.clientHeight](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Element/clientHeight
+	Object.defineProperty(this, "clientHeight", {
         get: function clientHeight() {
             return CPP_DKDomElement_clientHeight(pointer)
         }
     })
-    Object.defineProperty(this, "clientLeft", {
+	// [Element.clientLeft](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Element/clientLeft
+	Object.defineProperty(this, "clientLeft", {
         get: function clientLeft() {
             return CPP_DKDomElement_clientLeft(pointer)
         }
     })
-    Object.defineProperty(this, "clientTop", {
+	// [Element.clientTop](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Element/clientTop
+	Object.defineProperty(this, "clientTop", {
         get: function clientTop() {
             return CPP_DKDomElement_clientTop(pointer)
         }
     })
+	// [Element.clientWidth](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Element/clientWidth
     Object.defineProperty(this, "clientWidth", {
         get: function clientWidth() {
             return CPP_DKDomElement_clientWidth(pointer)
         }
     })
+	// [Element.elementTiming](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Element/elementTiming
+	Object.defineProperty(this, "elementTiming", {
+        get: function elementTiming() {
+            return CPP_DKDomElement_elementTiming(pointer)
+        }
+    })
+	// [Element.firstElementChild](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Element/firstElementChild
+	Object.defineProperty(this, "firstElementChild", {
+        get: function firstElementChild() {
+            return CPP_DKDomElement_firstElementChild(pointer)
+        }
+    })
+	// [Element.id] https://developer.mozilla.org/en-US/docs/Web/API/Element/id
+	Object.defineProperty(this, "id", {
+        get: function id() {
+            return CPP_DKDomElement_getAttribute(pointer, "id")
+        },
+        set: function id(val) {
+            return CPP_DKDomElement_setAttribute(pointer, "id", val)
+        }
+    })
+	
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     Object.defineProperty(this, "computedName", {
         get: function computedName() {
             return CPP_DKDomElement_computedName(pointer)
@@ -54,14 +102,6 @@ var Element = function Element(pointer) {
     Object.defineProperty(this, "computedRole", {
         get: function computedRole() {
             return CPP_DKDomElement_computedRole(pointer)
-        }
-    })
-    Object.defineProperty(this, "id", {
-        get: function id() {
-            return CPP_DKDomElement_getAttribute(pointer, "id")
-        },
-        set: function id(val) {
-            return CPP_DKDomElement_setAttribute(pointer, "id", val)
         }
     })
     Object.defineProperty(this, "innerHTML", {
@@ -308,13 +348,13 @@ var Element = function Element(pointer) {
     Element.prototype.toggleAttribute = function toggleAttribute() {//TODO
     }
 
+	////// toString //////
 	if(this.toString() === "[object Object]"){
 		this.toString = function(){
 			return "[object Element]"
 		}
 	}
 	
-    //GlobalEventHandlers
     return Node.call(this, pointer)
 
     /*
@@ -356,7 +396,4 @@ var Element = function Element(pointer) {
 	})
 	*/
 }
-
-// https://dom.spec.whatwg.org/#interface-element
-// interface Element : Node
 Element.prototype = Node.prototype;
