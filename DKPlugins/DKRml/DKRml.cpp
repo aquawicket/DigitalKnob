@@ -89,17 +89,58 @@ bool DKRml::Init(){
 	if (!Rml::Debugger::Initialise(context))
 		return DKERROR("Rml::Debugger::Initialise(): failed\n");
 #endif
-	//Add missing stylesheet properties
+	//Add missing stylesheet properties to silence warnings
 	//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/background-repeat
-	/*Rml::PropertyId background_repeat =  unused code */ Rml::StyleSheetSpecification::RegisterProperty("background-repeat", "repeat", false)
+	Rml::StyleSheetSpecification::RegisterProperty("background-repeat", "repeat", false)
 		.AddParser("keyword", "repeat, space, round, no-repeat")
 		.AddParser("string")
-		.GetId(); //this supresses background-repeat warnings temporarily
+		.GetId();
 	//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/border-style
-	/* Rml::PropertyId border_style =  unused code */ Rml::StyleSheetSpecification::RegisterProperty("border-style", "none", false)
+	Rml::StyleSheetSpecification::RegisterProperty("border-style", "none", false)
 		.AddParser("keyword", "none, hidden")
 		.AddParser("string")
-		.GetId(); //this supresses border-style warnings temporarily
+		.GetId();
+	//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-type
+	Rml::StyleSheetSpecification::RegisterProperty("list-style-type", "none", false)
+		.AddParser("keyword", "none")
+		.AddParser("string")
+		.GetId();
+	//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/user-select
+	Rml::StyleSheetSpecification::RegisterProperty("-webkit-user-select", "none", false)
+		.AddParser("keyword", "none")
+		.AddParser("string")
+		.GetId();
+	//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/user-select
+	Rml::StyleSheetSpecification::RegisterProperty("-moz-user-select", "none", false)
+		.AddParser("keyword", "none")
+		.AddParser("string")
+		.GetId();
+	//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/user-select
+	Rml::StyleSheetSpecification::RegisterProperty("-ms-user-select", "none", false)
+		.AddParser("keyword", "none")
+		.AddParser("string")
+		.GetId();
+	//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/user-select
+	Rml::StyleSheetSpecification::RegisterProperty("user-select", "none", false)
+		.AddParser("keyword", "none")
+		.AddParser("string")
+		.GetId();
+	//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/content
+	Rml::StyleSheetSpecification::RegisterProperty("content", "none", false)
+		.AddParser("keyword", "none")
+		.AddParser("string")
+		.GetId();
+	//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/transform
+	Rml::StyleSheetSpecification::RegisterProperty("-webkit-transform", "none", false)
+		.AddParser("keyword", "none")
+		.AddParser("string")
+		.GetId();
+	//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/transform
+	Rml::StyleSheetSpecification::RegisterProperty("-ms-transform", "none", false)
+		.AddParser("keyword", "none")
+		.AddParser("string")
+		.GetId();
+
 
 	context->SetDocumentsBaseTag("html");
 	DKString rmlFonts = DKFile::local_assets+"DKRml";
@@ -108,7 +149,6 @@ bool DKRml::Init(){
 	DKEvents::AddRegisterEventFunc(&DKRml::RegisterEvent, this);
 	//DKEvents::AddUnegisterEventFunc(&DKRml::UnregisterEvent, this);
 	DKEvents::AddSendEventFunc(&DKRml::SendEvent, this);
-	//DKClass::DKCreate("DKRmlJS");  //NOTE: already call above.   around line 23
 	Rml::Factory::RegisterElementInstancer("html", new Rml::ElementInstancerGeneric<Rml::ElementDocument>);
 	Rml::XMLParser::RegisterNodeHandler("html", std::make_shared<Rml::XMLNodeHandlerBody>());
 	Rml::XMLParser::RegisterNodeHandler("head", std::make_shared<HeadInstancer>());
