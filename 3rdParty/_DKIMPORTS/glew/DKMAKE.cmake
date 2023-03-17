@@ -6,6 +6,9 @@ if(IOS OR IOSSIM OR ANDROID)
 	dk_return()
 endif()
 
+### DEPEND ###
+dk_depend(libglu1-mesa-dev)
+
 
 ### IMPORT ###
 dk_import(https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip)
