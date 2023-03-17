@@ -19,6 +19,7 @@ var Element = function Element(pointer) {
             return CPP_DKDomElement_attributes(pointer)
         }
     })
+	/*
 	// [Element.childElementCount](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Element/childElementCount
     Object.defineProperty(this, "childElementCount", {
         get: function childElementCount() {
@@ -31,10 +32,12 @@ var Element = function Element(pointer) {
             return CPP_DKDomElement_children(pointer)
         }
     })
+	*/
 	// [Element.classList](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Element/classList
     Object.defineProperty(this, "classList", {
         get: function classList() {
-            return CPP_DKDomElement_classList(pointer)
+            domTokenList = CPP_DKDomElement_classList(pointer)
+			return new DOMTokenList(domTokenList)
         }
     })
 	// [Element.className] https://developer.mozilla.org/en-US/docs/Web/API/Element/className
