@@ -79,26 +79,26 @@ int DKDomMouseEvent::altKey(duk_context* ctx){
 	if (!event) {
 		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
-		return true;
+		return true && DKDEBUGRETURN(ctx, false);
 	}
 	bool altKey = event->GetParameter<bool>("alt_key", 0);
 	duk_push_boolean(ctx, altKey);
-	return true;
+	return true && DKDEBUGRETURN(ctx, altKey);
 }
 
-int DKDomMouseEvent::button(duk_context* ctx) {
+int DKDomMouseEvent::button(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
 	Rml::Event* event = (Rml::Event*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
-		return true;
+		return true && DKDEBUGRETURN(ctx, false);
 	}
 	int button = event->GetParameter<int>("button", 0);
-	if (button == 1) { button = 2; } //renumber right button to 2
-	else if (button == 2) { button = 1; } //renunmber middle button to 1
+	if(button == 1){ button = 2; } //renumber right button to 2
+	else if(button == 2){ button = 1; } //renunmber middle button to 1
 	duk_push_int(ctx, button);
-	return true;
+	return true && DKDEBUGRETURN(ctx, button);
 }
 
 int DKDomMouseEvent::buttons(duk_context* ctx){
@@ -107,10 +107,10 @@ int DKDomMouseEvent::buttons(duk_context* ctx){
 	if (!event) {
 		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
-		return true;
+		return true && DKDEBUGRETURN(ctx, false);
 	}
 	//TODO
-	return true;
+	return false && DKDEBUGRETURN(ctx, false);
 }
 
 int DKDomMouseEvent::clientX(duk_context* ctx){
@@ -119,11 +119,11 @@ int DKDomMouseEvent::clientX(duk_context* ctx){
 	if (!event) {
 		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
-		return true;
+		return true && DKDEBUGRETURN(ctx, false);
 	}
 	int clientX = event->GetParameter<int>("mouse_x", 0);
 	duk_push_int(ctx, clientX);
-	return true;
+	return true && DKDEBUGRETURN(ctx, clientX);
 }
 
 int DKDomMouseEvent::clientY(duk_context* ctx){
@@ -132,11 +132,11 @@ int DKDomMouseEvent::clientY(duk_context* ctx){
 	if (!event) {
 		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
-		return true;
+		return true && DKDEBUGRETURN(ctx, false);
 	}
 	int clientY = event->GetParameter<int>("mouse_y", 0);
 	duk_push_int(ctx, clientY);
-	return true;
+	return true && DKDEBUGRETURN(ctx, clientY);
 }
 
 int DKDomMouseEvent::ctrlKey(duk_context* ctx){
@@ -145,11 +145,11 @@ int DKDomMouseEvent::ctrlKey(duk_context* ctx){
 	if (!event) {
 		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
-		return true;
+		return true && DKDEBUGRETURN(ctx, false);
 	}
 	bool ctrlKey = event->GetParameter<bool>("ctrl_key", 0);
 	duk_push_boolean(ctx, ctrlKey);
-	return true;
+	return true && DKDEBUGRETURN(ctx, ctrlKey);
 }
 
 int DKDomMouseEvent::metaKey(duk_context* ctx){
@@ -158,11 +158,11 @@ int DKDomMouseEvent::metaKey(duk_context* ctx){
 	if (!event) {
 		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
-		return true;
+		return true && DKDEBUGRETURN(ctx, false);
 	}
 	bool metaKey = event->GetParameter<bool>("meta_key", 0);
 	duk_push_boolean(ctx, metaKey);
-	return true;
+	return true && DKDEBUGRETURN(ctx, metaKey);
 }
 
 int DKDomMouseEvent::movementX(duk_context* ctx){
@@ -171,10 +171,10 @@ int DKDomMouseEvent::movementX(duk_context* ctx){
 	if (!event) {
 		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
-		return true;
+		return true && DKDEBUGRETURN(ctx, false);
 	}
 	//TODO
-	return true;
+	return false && DKDEBUGRETURN(ctx, false);
 }
 
 int DKDomMouseEvent::movementY(duk_context* ctx){
@@ -183,10 +183,10 @@ int DKDomMouseEvent::movementY(duk_context* ctx){
 	if (!event) {
 		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
-		return true;
+		return true && DKDEBUGRETURN(ctx, false);
 	}
 	//TODO
-	return true;
+	return false && DKDEBUGRETURN(ctx, false);
 }
 
 int DKDomMouseEvent::offsetX(duk_context* ctx){
@@ -195,10 +195,10 @@ int DKDomMouseEvent::offsetX(duk_context* ctx){
 	if (!event) {
 		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
-		return true;
+		return true && DKDEBUGRETURN(ctx, false);
 	}
 	//TODO
-	return true;
+	return false && DKDEBUGRETURN(ctx, false);
 }
 
 int DKDomMouseEvent::offsetY(duk_context* ctx){
@@ -207,10 +207,10 @@ int DKDomMouseEvent::offsetY(duk_context* ctx){
 	if (!event) {
 		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
-		return true;
+		return true && DKDEBUGRETURN(ctx, false);
 	}
 	//TODO
-	return true;
+	return false && DKDEBUGRETURN(ctx, false);
 }
 
 int DKDomMouseEvent::pageX(duk_context* ctx){
@@ -219,10 +219,10 @@ int DKDomMouseEvent::pageX(duk_context* ctx){
 	if (!event) {
 		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
-		return true;
+		return true && DKDEBUGRETURN(ctx, false);
 	}
 	//TODO
-	return true;
+	return false && DKDEBUGRETURN(ctx, false);
 }
 
 int DKDomMouseEvent::pageY(duk_context* ctx){
@@ -231,10 +231,10 @@ int DKDomMouseEvent::pageY(duk_context* ctx){
 	if (!event) {
 		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
-		return true;
+		return true && DKDEBUGRETURN(ctx, false);
 	}
 	//TODO
-	return true;
+	return false && DKDEBUGRETURN(ctx, false);
 }
 
 int DKDomMouseEvent::region(duk_context* ctx){
@@ -243,10 +243,10 @@ int DKDomMouseEvent::region(duk_context* ctx){
 	if (!event) {
 		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
-		return true;
+		return true && DKDEBUGRETURN(ctx, false);
 	}
 	//TODO
-	return true;
+	return false && DKDEBUGRETURN(ctx, false);
 }
 
 int DKDomMouseEvent::relatedTarget(duk_context* ctx){
@@ -255,10 +255,10 @@ int DKDomMouseEvent::relatedTarget(duk_context* ctx){
 	if (!event) {
 		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
-		return true;
+		return true && DKDEBUGRETURN(ctx, false);
 	}
 	//TODO
-	return true;
+	return false && DKDEBUGRETURN(ctx, false);
 }
 
 int DKDomMouseEvent::screenX(duk_context* ctx){
@@ -267,12 +267,12 @@ int DKDomMouseEvent::screenX(duk_context* ctx){
 	if (!event) {
 		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
-		return true;
+		return true && DKDEBUGRETURN(ctx, false);
 	}
 	int x, y;
 	DKUtil::GetMousePos(x, y);
 	duk_push_int(ctx, x);
-	return true;
+	return true && DKDEBUGRETURN(ctx, x);
 }
 
 int DKDomMouseEvent::screenY(duk_context* ctx){
@@ -281,12 +281,12 @@ int DKDomMouseEvent::screenY(duk_context* ctx){
 	if (!event) {
 		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
-		return true;
+		return true && DKDEBUGRETURN(ctx, false);
 	}
 	int x, y;
 	DKUtil::GetMousePos(x, y);
 	duk_push_int(ctx, y);
-	return true;
+	return true && DKDEBUGRETURN(ctx, y);
 }
 
 int DKDomMouseEvent::shiftKey(duk_context* ctx){
@@ -295,11 +295,11 @@ int DKDomMouseEvent::shiftKey(duk_context* ctx){
 	if (!event) {
 		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
-		return true;
+		return true && DKDEBUGRETURN(ctx, false);
 	}
 	bool shiftKey = event->GetParameter<bool>("shift_key", 0);
 	duk_push_boolean(ctx, shiftKey);
-	return true;
+	return true && DKDEBUGRETURN(ctx, shiftKey);
 }
 
 int DKDomMouseEvent::which(duk_context* ctx){
@@ -308,10 +308,10 @@ int DKDomMouseEvent::which(duk_context* ctx){
 	if (!event) {
 		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
-		return true;
+		return true && DKDEBUGRETURN(ctx, false);
 	}
 	//TODO
-	return true;
+	return false && DKDEBUGRETURN(ctx, false);
 }
 
 int DKDomMouseEvent::mozPressure(duk_context* ctx){
@@ -320,10 +320,10 @@ int DKDomMouseEvent::mozPressure(duk_context* ctx){
 	if (!event) {
 		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
-		return true;
+		return true && DKDEBUGRETURN(ctx, false);
 	}
 	//TODO
-	return true;
+	return false && DKDEBUGRETURN(ctx, false);
 }
 
 int DKDomMouseEvent::mozInputSource(duk_context* ctx){
@@ -332,10 +332,10 @@ int DKDomMouseEvent::mozInputSource(duk_context* ctx){
 	if (!event) {
 		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
-		return true;
+		return true && DKDEBUGRETURN(ctx, false);
 	}
 	//TODO
-	return true;
+	return false && DKDEBUGRETURN(ctx, false);
 }
 
 int DKDomMouseEvent::webkitForce(duk_context* ctx){
@@ -344,10 +344,10 @@ int DKDomMouseEvent::webkitForce(duk_context* ctx){
 	if (!event) {
 		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
-		return true;
+		return true && DKDEBUGRETURN(ctx, false);
 	}
 	//TODO
-	return true;
+	return false && DKDEBUGRETURN(ctx, false);
 }
 
 int DKDomMouseEvent::x(duk_context* ctx){
@@ -356,11 +356,11 @@ int DKDomMouseEvent::x(duk_context* ctx){
 	if (!event) {
 		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
-		return true;
+		return true && DKDEBUGRETURN(ctx, false);
 	}
 	int clientX = event->GetParameter<int>("mouse_x", 0);
 	duk_push_int(ctx, clientX);
-	return true;
+	return true && DKDEBUGRETURN(ctx, clientX);
 }
 
 int DKDomMouseEvent::y(duk_context* ctx){
@@ -369,11 +369,11 @@ int DKDomMouseEvent::y(duk_context* ctx){
 	if (!event) {
 		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
-		return true;
+		return true && DKDEBUGRETURN(ctx, false);
 	}
 	int clientY = event->GetParameter<int>("mouse_y", 0);
 	duk_push_int(ctx, clientY);
-	return true;
+	return true && DKDEBUGRETURN(ctx, clientY);
 }
 
 
@@ -385,10 +385,10 @@ int DKDomMouseEvent::getModifierState(duk_context* ctx){
 	if (!event) {
 		DKERROR("event invalid\n");
 		duk_push_boolean(ctx, false);
-		return true;
+		return true && DKDEBUGRETURN(ctx, false);
 	}
 	//TODO
-	return true;
+	return false && DKDEBUGRETURN(ctx, false);
 }
 
 int DKDomMouseEvent::initMouseEvent(duk_context* ctx){
@@ -401,5 +401,5 @@ int DKDomMouseEvent::initMouseEvent(duk_context* ctx){
 		return true;
 	}
 	//TODO
-	return true;
+	return false;
 }
