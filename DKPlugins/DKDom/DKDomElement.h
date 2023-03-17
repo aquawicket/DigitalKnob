@@ -39,21 +39,22 @@ class DKDomElement : public DKObjectT<DKDomElement>
 public:
 	bool Init();
 	
-	// Properties //
+	////// Instance properties //////
+	static int assignedSlot(duk_context* ctx);		//(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Element/assignedSlot
+	static int attributes(duk_context* ctx);		//(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Element/attributes
+	static int childElementCount(duk_context* ctx);	//(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Element/childElementCount
+	static int children(duk_context* ctx);			//(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Element/children
+	static int classList(duk_context* ctx);			//(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Element/classList
+	static int className(duk_context* ctx);			// https://developer.mozilla.org/en-US/docs/Web/API/Element/className
+	static int clientHeight(duk_context* ctx);		//(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Element/clientHeight
+	static int clientLeft(duk_context* ctx);		//(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Element/clientLeft
+	static int clientTop(duk_context* ctx);			//(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Element/clientTop
+	static int clientWidth(duk_context* ctx);		//(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Element/clientWidth
+	static int elementTiming(duk_context* ctx);		//(Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Element/elementTiming
+	static int firstElementChild(duk_context* ctx);	//(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Element/firstElementChild
+	static int id(duk_context* ctx);				// https://developer.mozilla.org/en-US/docs/Web/API/Element/id
+	static int innerHTML(duk_context* ctx);			// https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
 
-	//assignedSlot
-	//attributes
-	//childElementCount
-	//children
-	//classList
-	//className
-	static int clientHeight(duk_context* ctx);
-	static int clientLeft(duk_context* ctx);
-	static int clientTop(duk_context* ctx);
-	static int clientWidth(duk_context* ctx);
-	//firstElementChild
-	//id
-	static int innerHTML(duk_context* ctx);
 	//lastElementChild
 	//lastElementChild
 	//localName

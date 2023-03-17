@@ -33,17 +33,29 @@
 
 bool DKDomElement::Init(){
 	DKDEBUGFUNC();
+
+	////// Instance properties //////
+	DKDuktape::AttachFunction("CPP_DKDomElement_assignedSlot", DKDomElement::assignedSlot);
+	DKDuktape::AttachFunction("CPP_DKDomElement_attributes", DKDomElement::attributes);
+	DKDuktape::AttachFunction("CPP_DKDomElement_childElementCount", DKDomElement::childElementCount);
+	DKDuktape::AttachFunction("CPP_DKDomElement_children", DKDomElement::children);
+	DKDuktape::AttachFunction("CPP_DKDomElement_classList", DKDomElement::classList);
+	DKDuktape::AttachFunction("CPP_DKDomElement_className", DKDomElement::className);
 	DKDuktape::AttachFunction("CPP_DKDomElement_clientHeight", DKDomElement::clientHeight);
 	DKDuktape::AttachFunction("CPP_DKDomElement_clientLeft", DKDomElement::clientLeft);
 	DKDuktape::AttachFunction("CPP_DKDomElement_clientTop", DKDomElement::clientTop);
 	DKDuktape::AttachFunction("CPP_DKDomElement_clientWidth", DKDomElement::clientWidth);
+	DKDuktape::AttachFunction("CPP_DKDomElement_elementTiming", DKDomElement::elementTiming);
+	DKDuktape::AttachFunction("CPP_DKDomElement_firstElementChild", DKDomElement::firstElementChild);
+	DKDuktape::AttachFunction("CPP_DKDomElement_id", DKDomElement::id);
+	DKDuktape::AttachFunction("CPP_DKDomElement_innerHTML", DKDomElement::innerHTML);
+
 	DKDuktape::AttachFunction("CPP_DKDomElement_closest", DKDomElement::closest);
 	DKDuktape::AttachFunction("CPP_DKDomElement_getAttribute", DKDomElement::getAttribute);
 	DKDuktape::AttachFunction("CPP_DKDomElement_getElementsByClassName", DKDomElement::getElementsByClassName);
 	DKDuktape::AttachFunction("CPP_DKDomElement_getElementsByTagName", DKDomElement::getElementsByTagName);
 	DKDuktape::AttachFunction("CPP_DKDomElement_hasAttribute", DKDomElement::hasAttribute);
 	DKDuktape::AttachFunction("CPP_DKDomElement_removeAttribute", DKDomElement::removeAttribute);
-	DKDuktape::AttachFunction("CPP_DKDomElement_innerHTML", DKDomElement::innerHTML);
 	DKDuktape::AttachFunction("CPP_DKDomElement_outerHTML", DKDomElement::outerHTML);
 	DKDuktape::AttachFunction("CPP_DKDomElement_querySelector", DKDomElement::querySelector);
 	DKDuktape::AttachFunction("CPP_DKDomElement_querySelectorAll", DKDomElement::querySelectorAll);
@@ -59,30 +71,83 @@ bool DKDomElement::Init(){
 	return true;
 }
 
-/*
-bool DKDomElement::GetElements(Rml::Element* parent, Rml::ElementList& elements){
-	DKDEBUGFUNC(parent, elements);
-	if(!parent)
-		return false;
-	typedef std::queue<Rml::Element*> SearchQueue;
-	SearchQueue search_queue;
-
-	elements.push_back(DKRml::Get()->document->GetFirstChild()->GetParentNode()); //add the body tag first
-	for(int i = 0; i < parent->GetNumChildren(); ++i)
-		search_queue.push(parent->GetChild(i));
-
-	while(!search_queue.empty()){
-		Rml::Element* element = search_queue.front();
-		search_queue.pop();
-		if(!has(element->GetTagName(), "#"))
-			elements.push_back(element);
-		// Add all children to search.
-		for (int i = 0; i < element->GetNumChildren(); i++)
-			search_queue.push(element->GetChild(i));
+int DKDomElement::assignedSlot(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
+	DKString address = duk_require_string(ctx, 0);
+	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
+	if (!element) {
+		DKERROR("element invalid\n");
+		duk_push_undefined(ctx);
+		return true;
 	}
+	//TODO
 	return true;
 }
-*/
+
+int DKDomElement::attributes(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
+	DKString address = duk_require_string(ctx, 0);
+	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
+	if (!element) {
+		DKERROR("element invalid\n");
+		duk_push_undefined(ctx);
+		return true;
+	}
+	//TODO
+	return true;
+}
+
+int DKDomElement::childElementCount(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
+	DKString address = duk_require_string(ctx, 0);
+	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
+	if (!element) {
+		DKERROR("element invalid\n");
+		duk_push_undefined(ctx);
+		return true;
+	}
+	//TODO
+	return true;
+}
+
+int DKDomElement::children(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
+	DKString address = duk_require_string(ctx, 0);
+	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
+	if (!element) {
+		DKERROR("element invalid\n");
+		duk_push_undefined(ctx);
+		return true;
+	}
+	//TODO
+	return true;
+}
+
+int DKDomElement::classList(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
+	DKString address = duk_require_string(ctx, 0);
+	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
+	if (!element) {
+		DKERROR("element invalid\n");
+		duk_push_undefined(ctx);
+		return true;
+	}
+	//TODO
+	return true;
+}
+
+int DKDomElement::className(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
+	DKString address = duk_require_string(ctx, 0);
+	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
+	if (!element) {
+		DKERROR("element invalid\n");
+		duk_push_undefined(ctx);
+		return true;
+	}
+	//TODO
+	return true;
+}
 
 int DKDomElement::clientHeight(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
@@ -151,6 +216,72 @@ int DKDomElement::clientWidth(duk_context* ctx){
 	duk_push_int(ctx, clientWidth);
 	return true;
 }
+
+int DKDomElement::elementTiming(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
+	DKString address = duk_require_string(ctx, 0);
+	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
+	if (!element) {
+		DKERROR("element invalid\n");
+		duk_push_undefined(ctx);
+		return true;
+	}
+	//TODO
+	return true;
+}
+
+int DKDomElement::firstElementChild(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
+	DKString address = duk_require_string(ctx, 0);
+	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
+	if (!element) {
+		DKERROR("element invalid\n");
+		duk_push_undefined(ctx);
+		return true;
+	}
+	//TODO
+	return true;
+}
+
+int DKDomElement::id(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
+	DKString address = duk_require_string(ctx, 0);
+	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
+	if (!element) {
+		DKERROR("element invalid\n");
+		duk_push_undefined(ctx);
+		return true;
+	}
+	//TODO
+	return true;
+}
+
+int DKDomElement::innerHTML(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
+	DKString address = duk_require_string(ctx, 0);
+	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
+	if (!element) {
+		DKERROR("element invalid\n");
+		duk_push_undefined(ctx);
+		return true;
+	}
+	//get
+	if (!duk_is_string(ctx, 1)) {
+		DKString innerHtml = element->GetInnerRML();
+		duk_push_string(ctx, innerHtml.c_str());
+	}
+	//set
+	else {
+		DKString innerHTML = duk_require_string(ctx, 1);
+		element->SetInnerRML(innerHTML.c_str());
+	}
+	return true;
+}
+
+
+
+
+
 
 int DKDomElement::closest(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
@@ -278,28 +409,6 @@ int DKDomElement::removeAttribute(duk_context* ctx){
 	}
 	element->RemoveAttribute(attribute);
 	duk_push_boolean(ctx, true);
-	return true;
-}
-
-int DKDomElement::innerHTML(duk_context* ctx){
-	DKDEBUGFUNC(ctx);
-	DKString address = duk_require_string(ctx, 0);
-	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
-	if(!element){
-		DKERROR("element invalid\n");
-		duk_push_undefined(ctx);
-		return true;
-	}
-	//get
-	if(!duk_is_string(ctx, 1)){
-		DKString innerHtml = element->GetInnerRML();
-		duk_push_string(ctx, innerHtml.c_str());
-	}
-	//set
-	else{
-		DKString innerHTML = duk_require_string(ctx, 1);
-		element->SetInnerRML(innerHTML.c_str());
-	}
 	return true;
 }
 
@@ -493,3 +602,28 @@ int DKDomElement::tagName(duk_context* ctx){
 	duk_push_string(ctx, element->GetTagName().c_str());
 	return true;
 }
+
+/*
+bool DKDomElement::GetElements(Rml::Element* parent, Rml::ElementList& elements){
+	DKDEBUGFUNC(parent, elements);
+	if(!parent)
+		return false;
+	typedef std::queue<Rml::Element*> SearchQueue;
+	SearchQueue search_queue;
+
+	elements.push_back(DKRml::Get()->document->GetFirstChild()->GetParentNode()); //add the body tag first
+	for(int i = 0; i < parent->GetNumChildren(); ++i)
+		search_queue.push(parent->GetChild(i));
+
+	while(!search_queue.empty()){
+		Rml::Element* element = search_queue.front();
+		search_queue.pop();
+		if(!has(element->GetTagName(), "#"))
+			elements.push_back(element);
+		// Add all children to search.
+		for (int i = 0; i < element->GetNumChildren(); i++)
+			search_queue.push(element->GetChild(i));
+	}
+	return true;
+}
+*/
