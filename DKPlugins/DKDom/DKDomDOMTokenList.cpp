@@ -53,7 +53,7 @@ bool DKDomDOMTokenList::Init(){
 
 ////// Instance properties //////
 int DKDomDOMTokenList::length(duk_context* ctx) {
-	//TODO
+	DKTODO();
 	return true;
 }
 
