@@ -37,6 +37,7 @@ var Element = function Element(pointer) {
     Object.defineProperty(this, "classList", {
         get: function classList() {
             domTokenList = CPP_DKDomElement_classList(pointer)
+			console.log("domTokenList = "+domTokenList)
 			return new DOMTokenList(domTokenList)
         }
     })

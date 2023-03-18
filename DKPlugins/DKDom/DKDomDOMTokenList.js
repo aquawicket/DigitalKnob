@@ -1,14 +1,11 @@
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList
 // [INTERFACE] https://dom.spec.whatwg.org/#interface-domtokenlist
 
-var DOMTokenList = function DOMTokenList() {
+var DOMTokenList = function DOMTokenList(domTokenList) {
 	
-	/*
-	var arry = [];
-    for (var i = 0; i < arry.length; i++) {
-        //this.push(new HTMLElement(arry[i]));
-    }
-	*/
+	var arry = domTokenList.split(",");
+	for(var i=0; i<arry.length; i++)
+		this.push(arry[i])
 	
 	////// Instance properties //////
 	/*
