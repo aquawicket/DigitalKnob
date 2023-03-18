@@ -95,7 +95,189 @@ var Element = function Element(pointer) {
             return CPP_DKDomElement_setAttribute(pointer, "id", val)
         }
     })
+	// [Element.innerHTML] https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
+	Object.defineProperty(this, "innerHTML", {
+        get: function innerHTML() {
+            return CPP_DKDomElement_innerHTML(pointer)
+        },
+        set: function innerHTML(val) {
+            return CPP_DKDomElement_innerHTML(pointer, val)
+        }
+    })
+	// [Element.lastElementChild](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Element/lastElementChild
+	Object.defineProperty(this, "lastElementChild", {
+        get: function lastElementChild() {
+            return CPP_DKDomElement_lastElementChild(pointer)
+        }
+    })
+	// [Element.localName](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Element/localName
+	Object.defineProperty(this, "localName", {
+        get: function localName() {
+            return CPP_DKDomElement_localName(pointer)
+        }
+    })
+	// [Element.namespaceURI](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Element/namespaceURI
+	Object.defineProperty(this, "namespaceURI", {
+        get: function namespaceURI() {
+            return CPP_DKDomElement_namespaceURI(pointer)
+        }
+    })
+	// [Element.nextElementSibling](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Element/nextElementSibling
+	Object.defineProperty(this, "nextElementSibling", {
+        get: function nextElementSibling() {
+            return CPP_DKDomElement_nextElementSibling(pointer)
+        }
+    })
+	// [Element.outerHTML] https://developer.mozilla.org/en-US/docs/Web/API/Element/outerHTML
+	Object.defineProperty(this, "outerHTML", {
+        get: function outerHTML() {
+            return CPP_DKDomElement_outerHTML(pointer)
+        },
+        set: function outerHTML(val) {
+            return CPP_DKDomElement_outerHTML(pointer, val)
+        }
+    })
+	// [Element.part] https://developer.mozilla.org/en-US/docs/Web/API/Element/part
+	Object.defineProperty(this, "part", {
+        get: function part() {
+            return CPP_DKDomElement_part(pointer)
+        }
+    })
+	// [Element.prefix](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Element/prefix
+	Object.defineProperty(this, "prefix", {
+        get: function prefix() {
+            return CPP_DKDomElement_prefix(pointer)
+        }
+    })
+	// [Element.previousElementSibling](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Element/previousElementSibling
+	Object.defineProperty(this, "previousElementSibling", {
+        get: function previousElementSibling() {
+            return CPP_DKDomElement_previousElementSibling(pointer)
+        }
+    })
+	// [Element.scrollHeight](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollHeight
+	Object.defineProperty(this, "scrollHeight", {
+        get: function scrollHeight() {
+            return CPP_DKDomElement_scrollHeight(pointer)
+        }
+    })
+	// [Element.scrollLeft] https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollLeft
+	Object.defineProperty(this, "scrollLeft", {
+        get: function scrollLeft() {
+            return CPP_DKDomElement_scrollLeft(pointer)
+        },
+        set: function scrollLeft(val) {
+            return CPP_DKDomElement_scrollLeft(pointer, val)
+        }
+    })
+	// [Element.scrollLeftMax](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollLeftMax
+	Object.defineProperty(this, "scrollLeftMax", {
+        get: function scrollLeftMax() {
+            return CPP_DKDomElement_scrollLeftMax(pointer)
+        }
+    })
+	// [Element.scrollTop] https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTop
+	Object.defineProperty(this, "scrollTop", {
+        get: function scrollTop() {
+            return CPP_DKDomElement_scrollTop(pointer)
+        },
+        set: function scrollTop(val) {
+            return CPP_DKDomElement_scrollTop(pointer, val)
+        }
+    })
+	// [Element.scrollTopMax](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTopMax
+	Object.defineProperty(this, "scrollTopMax", {
+        get: function scrollTopMax() {
+            return CPP_DKDomElement_scrollTopMax(pointer)
+        }
+    })
+	// [Element.scrollWidth](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollWidth
+	Object.defineProperty(this, "scrollWidth", {
+        get: function scrollWidth() {
+            return CPP_DKDomElement_scrollWidth(pointer)
+        }
+    })
+	// [Element.shadowRoot](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Element/shadowRoot
+	Object.defineProperty(this, "shadowRoot", {
+        get: function shadowRoot() {
+            return CPP_DKDomElement_shadowRoot(pointer)
+        }
+    })
+	// [Element.slot] https://developer.mozilla.org/en-US/docs/Web/API/Element/slot
+	Object.defineProperty(this, "slot", {
+        get: function slot() {
+            return CPP_DKDomElement_slot(pointer)
+        },
+        set: function slot(val) {
+            return CPP_DKDomElement_slot(pointer, val)
+        }
+    })
+	// [Element.tagName](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Element/tagName
+	Object.defineProperty(this, "tagName", {
+        get: function tagName() {
+            return CPP_DKDomElement_tagName(pointer)
+        }
+    })
 	
+	
+	////// Instance properties included from ARIA //////
+	// TODO
+	
+	
+	////// Instance methods //////
+	// [Element.after()]
+	// [Element.attachShadow()]
+	// [Element.animate()]
+	// [Element.append()]
+	// [Element.before()]
+	// [Element.closest()]
+	// [Element.computedStyleMap()]
+	// [Element.getAnimations()]
+	// [Element.getAttribute()]
+	// [Element.getAttributeNames()]
+	// [Element.getAttributeNode()]
+	// [Element.getAttributeNodeNS()]
+	// [Element.getAttributeNS()]
+	// [Element.getBoundingClientRect()]
+	// [Element.getBoxQuads()](Experimental)
+	// [Element.getClientRects()]
+	// [Element.getElementsByClassName()]
+	// [Element.getElementsByTagName()]
+	// [Element.getElementsByTagNameNS()]
+	// [Element.hasAttribute()]
+	// [Element.hasAttributeNS()]
+	// [Element.hasAttributes()]
+	// [Element.hasPointerCapture()]
+	// [Element.insertAdjacentElement()]
+	// [Element.insertAdjacentHTML()]
+	// [Element.insertAdjacentText()]
+	// [Element.matches()]
+	// [Element.prepend()]
+	// [Element.querySelector()]
+	// [Element.querySelectorAll()]
+	// [Element.releasePointerCapture()]
+	// [Element.remove()]
+	// [Element.removeAttribute()]
+	// [Element.removeAttributeNode()]
+	// [Element.removeAttributeNS()]
+	// [Element.replaceChildren()]
+	// [Element.replaceWith()]
+	// [Element.requestFullscreen()]
+	// [Element.requestPointerLock()]
+	// [Element.scroll()]
+	// [Element.scrollBy()]
+	// [Element.scrollIntoView()]
+	// [Element.scrollIntoViewIfNeeded()](Non-standard)
+	// [Element.scrollTo()]
+	// [Element.setAttribute()]
+	// [Element.setAttributeNode()]
+	// [Element.setAttributeNodeNS()]
+	// [Element.setAttributeNS()]
+	// [Element.setCapture()](Non-standard)(Deprecated)
+	// [Element.setHTML()](Experimental)
+	// [Element.setPointerCapture()]
+	// [Element.toggleAttribute()]
+
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     Object.defineProperty(this, "computedName", {
@@ -108,99 +290,10 @@ var Element = function Element(pointer) {
             return CPP_DKDomElement_computedRole(pointer)
         }
     })
-    Object.defineProperty(this, "innerHTML", {
-        get: function innerHTML() {
-            return CPP_DKDomElement_innerHTML(pointer)
-        },
-        set: function innerHTML(val) {
-            return CPP_DKDomElement_innerHTML(pointer, val)
-        }
-    })
-    Object.defineProperty(this, "localName", {
-        get: function localName() {
-            return CPP_DKDomElement_localName(pointer)
-        }
-    })
-    Object.defineProperty(this, "namespaceURI", {
-        get: function namespaceURI() {
-            return CPP_DKDomElement_namespaceURI(pointer)
-        }
-    })
-    Object.defineProperty(this, "nextElementSibling", {
-        get: function nextElementSibling() {
-            return CPP_DKDomElement_nextElementSibling(pointer)
-        }
-    })
-    Object.defineProperty(this, "outerHTML", {
-        get: function outerHTML() {
-            return CPP_DKDomElement_outerHTML(pointer)
-        },
-        set: function outerHTML(val) {
-            return CPP_DKDomElement_outerHTML(pointer, val)
-        }
-    })
-    Object.defineProperty(this, "prefix", {
-        get: function prefix() {
-            return CPP_DKDomElement_prefix(pointer)
-        }
-    })
-    Object.defineProperty(this, "previousElementSibling", {
-        get: function previousElementSibling() {
-            return CPP_DKDomElement_previousElementSibling(pointer)
-        }
-    })
-    Object.defineProperty(this, "scrollHeight", {
-        get: function scrollHeight() {
-            return CPP_DKDomElement_scrollHeight(pointer)
-        }
-    })
-    Object.defineProperty(this, "scrollLeft", {
-        get: function scrollLeft() {
-            return CPP_DKDomElement_scrollLeft(pointer)
-        },
-        set: function scrollLeft(val) {
-            return CPP_DKDomElement_scrollLeft(pointer, val)
-        }
-    })
-    Object.defineProperty(this, "scrollLeftMax", {
-        get: function scrollLeftMax() {
-            return CPP_DKDomElement_scrollLeftMax(pointer)
-        }
-    })
-    Object.defineProperty(this, "scrollTop", {
-        get: function scrollTop() {
-            return CPP_DKDomElement_scrollTop(pointer)
-        },
-        set: function scrollTop(val) {
-            return CPP_DKDomElement_scrollTop(pointer, val)
-        }
-    })
-    Object.defineProperty(this, "scrollTopMax", {
-        get: function scrollTopMax() {
-            return CPP_DKDomElement_scrollTopMax(pointer)
-        }
-    })
-    Object.defineProperty(this, "scrollWidth", {
-        get: function scrollWidth() {
-            return CPP_DKDomElement_scrollWidth(pointer)
-        }
-    })
-    Object.defineProperty(this, "shadowRoot", {
-        get: function shadowRoot() {
-            return CPP_DKDomElement_shadowRoot(pointer)
-        }
-    })
+    
     Object.defineProperty(this, "openOrClosedShadowRoot", {
         get: function openOrClosedShadowRoot() {
             return CPP_DKDomElement_openOrClosedShadowRoot(pointer)
-        }
-    })
-    Object.defineProperty(this, "slot", {
-        get: function slot() {
-            return CPP_DKDomElement_slot(pointer)
-        },
-        set: function slot(val) {
-            return CPP_DKDomElement_slot(pointer, val)
         }
     })
     Object.defineProperty(this, "tabStop", {
@@ -209,11 +302,6 @@ var Element = function Element(pointer) {
         },
         set: function tabStop(val) {
             return CPP_DKDomElement_tabStop(pointer, val)
-        }
-    })
-    Object.defineProperty(this, "tagName", {
-        get: function tagName() {
-            return CPP_DKDomElement_tagName(pointer)
         }
     })
     Object.defineProperty(this, "undoManager", {
