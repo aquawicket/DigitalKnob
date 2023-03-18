@@ -24,6 +24,7 @@
 * SOFTWARE.
 */
 #include "DK/DKApp.h"
+#include "DKDom/DKDom.h"
 #include "DKDom/DKDomDOMTokenList.h"
 
 
@@ -71,11 +72,31 @@ int DKDomDOMTokenList::contains(duk_context* ctx) {
 }
 
 int DKDomDOMTokenList::add(duk_context* ctx) {
-	return DKTODO();
+	DKDEBUGFUNC(ctx);
+	DKString address = duk_require_string(ctx, 0);
+	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
+	if (!element) {
+		DKERROR("element invalid\n");
+		duk_push_undefined(ctx);
+		return true;
+	}
+	DKString token = duk_require_string(ctx, 1);
+	element->SetPseudoClass(token, true);
+	return true;
 }
 
 int DKDomDOMTokenList::remove(duk_context* ctx) {
-	return DKTODO();
+	DKDEBUGFUNC(ctx);
+	DKString address = duk_require_string(ctx, 0);
+	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
+	if (!element) {
+		DKERROR("element invalid\n");
+		duk_push_undefined(ctx);
+		return true;
+	}
+	DKString token = duk_require_string(ctx, 1);
+	element->SetPseudoClass(token, false);
+	return true;
 }
 
 int DKDomDOMTokenList::replace(duk_context* ctx) {
@@ -87,7 +108,15 @@ int DKDomDOMTokenList::supports(duk_context* ctx) {
 }
 
 int DKDomDOMTokenList::toggle(duk_context* ctx) {
-	return DKTODO();
+	DKDEBUGFUNC(ctx);
+	DKString address = duk_require_string(ctx, 0);
+	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
+	if (!element) {
+		DKERROR("element invalid\n");
+		duk_push_undefined(ctx);
+		return true;
+	}
+
 }
 
 int DKDomDOMTokenList::entries(duk_context* ctx) {
