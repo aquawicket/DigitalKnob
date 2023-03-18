@@ -70,7 +70,7 @@ WARNING_ENABLE
 #define   DKDEBUG(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_DEBUG);
 #define DKVERBOSE(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_VERBOSE);
 #define DKREDINFO(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_INFO, DKERROR_COLOR);
-#define    DKTODO() DKLog::Log(__FILE__, __LINE__, __FUNCTION__, DKString()+"TODO: "+__FUNCTION__+"()", DK_WARN);
+#define    DKTODO() DKLog::Log(__FILE__, __LINE__, __FUNCTION__, DKString()+"TODO: "+__FUNCTION__+"()\n", DK_WARN);
 //#define DKWARNRTN(message, rtnval) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_WARN, DKWARN_COLOR, rtnval);
 
 #if _MSC_VER //Visual Studio Compiler
