@@ -374,9 +374,9 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 //DEBUG - Lets see the code
 #if DEBUG
 	DKRml* dkRml = DKRml::Get();
-	Rml::ElementDocument* doc = dkRml->document;
-	DKString code = doc->GetContext()->GetRootElement()->GetInnerRML();
-	std::string::size_type = code.rfind("<html");
+	Rml::ElementDocument* _doc = dkRml->document;
+	DKString code = _doc->GetContext()->GetRootElement()->GetInnerRML();
+	std::string::size_type n = code.rfind("<html");
 	if(n < 0){
 		DKERROR("html tag not found\n");
 		return true;
