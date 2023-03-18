@@ -461,6 +461,7 @@ var Element = function Element(pointer) {
 	Element.prototype.requestPointerLock = function requestPointerLock(options) {
 		//TODO
     }
+	/*
 	// [Element.scroll()] https://developer.mozilla.org/en-US/docs/Web/API/Element/scroll
 	Element.prototype.scroll = function scroll(x-coord, y-coord) {
 		//TODO
@@ -469,6 +470,7 @@ var Element = function Element(pointer) {
 	Element.prototype.scrollBy = function scrollBy(x-coord, y-coord) {
 		//TODO
     }
+	*/
 	// [Element.scrollIntoView()] https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView
 	Element.prototype.scrollIntoView = function scrollIntoView(alignToTop) {
 		//TODO
@@ -477,10 +479,12 @@ var Element = function Element(pointer) {
 	Element.prototype.scrollIntoViewIfNeeded = function scrollIntoViewIfNeeded(centerIfNeeded) {
 		//TODO
     }
+	/*
 	// [Element.scrollTo()] https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTo
 	Element.prototype.scrollTo = function scrollTo(x-coord, y-coord) {
 		//TODO
     }
+	*/
 	// [Element.setAttribute()] https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttribute
 	Element.prototype.setAttribute = function setAttribute(name, value) {
         CPP_DKDomElement_setAttribute(this.pointer, name, value)
