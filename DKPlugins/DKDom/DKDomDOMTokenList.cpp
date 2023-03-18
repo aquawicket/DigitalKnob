@@ -53,68 +53,55 @@ bool DKDomDOMTokenList::Init(){
 
 ////// Instance properties //////
 int DKDomDOMTokenList::length(duk_context* ctx) {
-	DKTODO();
-	return true;
+	return DKTODO();
 }
 
 int DKDomDOMTokenList::value(duk_context* ctx) {
-	//TODO
-	return true;
+	return DKTODO();
 }
 
 
 ////// Instance methods //////
 int DKDomDOMTokenList::item(duk_context* ctx) {
-	//TODO
-	return true;
+	return DKTODO();
 }
 
 int DKDomDOMTokenList::contains(duk_context* ctx) {
-	//TODO
-	return true;
+	return DKTODO();
 }
 
 int DKDomDOMTokenList::add(duk_context* ctx) {
-	//TODO
-	return true;
+	return DKTODO();
 }
 
 int DKDomDOMTokenList::remove(duk_context* ctx) {
-	//TODO
-	return true;
+	return DKTODO();
 }
 
 int DKDomDOMTokenList::replace(duk_context* ctx) {
-	//TODO
-	return true;
+	return DKTODO();
 }
 
 int DKDomDOMTokenList::supports(duk_context* ctx) {
-	//TODO
-	return true;
+	return DKTODO();
 }
 
 int DKDomDOMTokenList::toggle(duk_context* ctx) {
-	//TODO
-	return true;
+	return DKTODO();
 }
 
 int DKDomDOMTokenList::entries(duk_context* ctx) {
-	//TODO
-	return true;
+	return DKTODO();
 }
 
 int DKDomDOMTokenList::forEach(duk_context* ctx) {
-	//TODO
-	return true;
+	return DKTODO();
 }
 
 int DKDomDOMTokenList::keys(duk_context* ctx) {
-	//TODO
-	return true;
+	return DKTODO();
 }
 
 int DKDomDOMTokenList::values(duk_context* ctx) {
-	//TODO
-	return true;
+	return DKTODO();
 }

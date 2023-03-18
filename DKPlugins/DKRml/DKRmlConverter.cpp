@@ -26,7 +26,7 @@
 #include "DK/stdafx.h"
 #include "DKRml/DKRmlConverter.h"
 #include "DK/DKLog.h"
-#ifdef HAVE_DKCurl
+#if HAVE_DKCurl
 	#include "DKCurl/DKCurl.h"
 #endif
 #include "DKDuktape/DKDuktape.h"
@@ -34,7 +34,7 @@
 #include "DKXml/DKXml.h"
 
 WARNING_DISABLE
-#ifdef HAVE_tidy_html5
+#if HAVE_tidy_html5
 	#include "tidy.h"
 	#include "tidybuffio.h"
 #endif
@@ -338,7 +338,7 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 		if(!src.empty()){
 			if(has(processed, src))
 				continue;
-#ifdef HAVE_DKCurl
+#if HAVE_DKCurl
 			if(has(path, "http://")){
 				DKString js;
 				DKClass::DKCreate("DKCurl");
@@ -372,7 +372,7 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 	}
 
 //DEBUG - Lets see the code
-#ifdef DKTODO
+#if DEBUG
 	DKRml* dkRml = DKRml::Get();
 	Rml::ElementDocument* doc = dkRml->document;
 	DKString code = doc->GetContext()->GetRootElement()->GetInnerRML();
