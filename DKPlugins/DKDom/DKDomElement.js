@@ -219,68 +219,8 @@ var Element = function Element(pointer) {
         }
     })
 	
-	
-	////// Instance properties included from ARIA //////
-	// TODO
-	
-	
-	////// Instance methods //////
-	// [Element.after()]
-	// [Element.attachShadow()]
-	// [Element.animate()]
-	// [Element.append()]
-	// [Element.before()]
-	// [Element.closest()]
-	// [Element.computedStyleMap()]
-	// [Element.getAnimations()]
-	// [Element.getAttribute()]
-	// [Element.getAttributeNames()]
-	// [Element.getAttributeNode()]
-	// [Element.getAttributeNodeNS()]
-	// [Element.getAttributeNS()]
-	// [Element.getBoundingClientRect()]
-	// [Element.getBoxQuads()](Experimental)
-	// [Element.getClientRects()]
-	// [Element.getElementsByClassName()]
-	// [Element.getElementsByTagName()]
-	// [Element.getElementsByTagNameNS()]
-	// [Element.hasAttribute()]
-	// [Element.hasAttributeNS()]
-	// [Element.hasAttributes()]
-	// [Element.hasPointerCapture()]
-	// [Element.insertAdjacentElement()]
-	// [Element.insertAdjacentHTML()]
-	// [Element.insertAdjacentText()]
-	// [Element.matches()]
-	// [Element.prepend()]
-	// [Element.querySelector()]
-	// [Element.querySelectorAll()]
-	// [Element.releasePointerCapture()]
-	// [Element.remove()]
-	// [Element.removeAttribute()]
-	// [Element.removeAttributeNode()]
-	// [Element.removeAttributeNS()]
-	// [Element.replaceChildren()]
-	// [Element.replaceWith()]
-	// [Element.requestFullscreen()]
-	// [Element.requestPointerLock()]
-	// [Element.scroll()]
-	// [Element.scrollBy()]
-	// [Element.scrollIntoView()]
-	// [Element.scrollIntoViewIfNeeded()](Non-standard)
-	// [Element.scrollTo()]
-	// [Element.setAttribute()]
-	// [Element.setAttributeNode()]
-	// [Element.setAttributeNodeNS()]
-	// [Element.setAttributeNS()]
-	// [Element.setCapture()](Non-standard)(Deprecated)
-	// [Element.setHTML()](Experimental)
-	// [Element.setPointerCapture()]
-	// [Element.toggleAttribute()]
-
-	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    Object.defineProperty(this, "computedName", {
+	/*
+	Object.defineProperty(this, "computedName", {
         get: function computedName() {
             return CPP_DKDomElement_computedName(pointer)
         }
@@ -290,7 +230,6 @@ var Element = function Element(pointer) {
             return CPP_DKDomElement_computedRole(pointer)
         }
     })
-    
     Object.defineProperty(this, "openOrClosedShadowRoot", {
         get: function openOrClosedShadowRoot() {
             return CPP_DKDomElement_openOrClosedShadowRoot(pointer)
@@ -340,105 +279,242 @@ var Element = function Element(pointer) {
             return CPP_DKDomElement_setAttribute(pointer, "value", val)
         }
     })
-
-    // Methods
-    Element.prototype.attachShadow = function attachShadow() {//TODO
+	*/
+	
+	
+	////// Instance properties included from ARIA //////
+	// TODO
+	
+	
+	////// Instance methods //////
+	// [Element.after()] https://developer.mozilla.org/en-US/docs/Web/API/Element/after
+	Element.prototype.after = function after(nodeN) {
+		//TODO 
+	}
+	// [Element.attachShadow()] https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow
+	Element.prototype.attachShadow = function attachShadow(options) {
+		//TODO 
+	}
+	// [Element.animate()] https://developer.mozilla.org/en-US/docs/Web/API/Element/animate
+	Element.prototype.animate = function animate(keyframes, options) {
+		//TODO
     }
-    Element.prototype.animate = function animate() {//TODO
+	// [Element.append()] https://developer.mozilla.org/en-US/docs/Web/API/Element/append
+	Element.prototype.append = function append(paramN) {
+		//TODO
     }
-    Element.prototype.closest = function closest() {//TODO
+	// [Element.before()] https://developer.mozilla.org/en-US/docs/Web/API/Element/before
+	Element.prototype.before = function before(paramN) {
+		//TODO
     }
-    Element.prototype.createShadowRoot = function createShadowRoot() {//TODO, Deprecated
+	// [Element.closest()] https://developer.mozilla.org/en-US/docs/Web/API/Element/closest
+	Element.prototype.closest = function closest(selectors) {
+		//TODO
     }
-    Element.prototype.computedStyleMap = function computedStyleMap() {//TODO
+	// [Element.computedStyleMap()] https://developer.mozilla.org/en-US/docs/Web/API/Element/computedStyleMap
+	Element.prototype.computedStyleMap = function computedStyleMap() {
+		//TODO
     }
-    Element.prototype.getAnimations = function getAnimations() {//TODO
+	// [Element.getAnimations()] https://developer.mozilla.org/en-US/docs/Web/API/Element/getAnimations
+	Element.prototype.getAnimations = function getAnimations(options) {
+		//TODO
     }
-    Element.prototype.getAttribute = function getAttribute(attribute) {
-        this[attribute] = CPP_DKDomElement_getAttribute(this.pointer, attribute)
-        if (!this[attribute])
+	// [Element.getAttribute()] https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttribute
+	Element.prototype.getAttribute = function getAttribute(attributeName) {
+        this[attributeName] = CPP_DKDomElement_getAttribute(this.pointer, attributeName)
+        if (!this[attributeName])
             return undefined;
-        return this[attribute];
+        return this[attributeName];
     }
-    Element.prototype.getAttributeNames = function getAttributeNames() {//TODO
+	// [Element.getAttributeNames()] https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttributeNames
+	Element.prototype.getAttributeNames = function getAttributeNames() {
+		//TODO
     }
-    Element.prototype.getAttributeNS = function getAttributeNS() {//TODO
+	// [Element.getAttributeNode()] https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttributeNode
+	Element.prototype.getAttributeNode = function getAttributeNode(attrName) {
+		//TODO
     }
-    Element.prototype.getBoundingClientRect = function getBoundingClientRect() {//TODO
+	// [Element.getAttributeNodeNS()] https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttributeNodeNS
+	Element.prototype.getAttributeNodeNS = function getAttributeNodeNS(namespace, nodeName) {
+		//TODO
     }
-    Element.prototype.getClientRects = function getClientRects() {//TODO
+	// [Element.getAttributeNS()] https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttributeNS
+	Element.prototype.getAttributeNS = function getAttributeNS(namespace, name) {
+		//TODO
     }
-    Element.prototype.getElementsByClassName = function getElementsByClassName(name) {
-        var addresses = CPP_DKDomElement_getElementsByClassName(this.pointer, name)
+	// [Element.getBoundingClientRect()] https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect
+	Element.prototype.getBoundingClientRect = function getBoundingClientRect() {
+		//TODO
+    }
+	// [Element.getBoxQuads()](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Element
+	Element.prototype.getBoxQuads = function getBoxQuads() {
+		//TODO
+    }
+	// [Element.getClientRects()] https://developer.mozilla.org/en-US/docs/Web/API/Element/getClientRects
+	Element.prototype.getClientRects = function getClientRects() {
+		//TODO
+    }
+	// [Element.getElementsByClassName()] https://developer.mozilla.org/en-US/docs/Web/API/Element/getElementsByClassName
+	Element.prototype.getElementsByClassName = function getElementsByClassName(names) {
+        var addresses = CPP_DKDomElement_getElementsByClassName(this.pointer, names)
         if (!addresses)
             return;
         return new HTMLCollection(addresses)
     }
-    Element.prototype.getElementsByTagName = function getElementsByTagName(tag) {
-        var addresses = CPP_DKDomElement_getElementsByTagName(this.pointer, tag)
+	// [Element.getElementsByTagName()] https://developer.mozilla.org/en-US/docs/Web/API/Element/getElementsByTagName
+	Element.prototype.getElementsByTagName = function getElementsByTagName(tagName) {
+        var addresses = CPP_DKDomElement_getElementsByTagName(this.pointer, tagName)
         if (!addresses)
             return;
         return new HTMLCollection(addresses)
     }
-    Element.prototype.getElementsByTagNameNS = function getElementsByTagNameNS() {//TODO
+	// [Element.getElementsByTagNameNS()] https://developer.mozilla.org/en-US/docs/Web/API/Element/getElementsByTagNameNS
+	Element.prototype.getElementsByTagNameNS = function getElementsByTagNameNS(namespaceURI, localName) {
+		//TODO
     }
-    Element.prototype.hasAttribute = function hasAttribute(attribute) {
-        if (CPP_DKDomElement_hasAttribute(this.pointer, attribute))
+	// [Element.hasAttribute()] https://developer.mozilla.org/en-US/docs/Web/API/Element/hasAttribute
+	Element.prototype.hasAttribute = function hasAttribute(name) {
+        if (CPP_DKDomElement_hasAttribute(this.pointer, name))
             return true
         return false
     }
-    Element.prototype.hasAttributeNS = function hasAttributeNS() {//TODO
+	// [Element.hasAttributeNS()] https://developer.mozilla.org/en-US/docs/Web/API/Element/hasAttributeNS
+	Element.prototype.hasAttributeNS = function hasAttributeNS(namespace,localName) {
+		//TODO
     }
-    Element.prototype.hasAttributes = function hasAttributes() {//TODO
+	// [Element.hasAttributes()] https://developer.mozilla.org/en-US/docs/Web/API/Element/hasAttributes
+	Element.prototype.hasAttributes = function hasAttributes() {
+		//TODO
     }
-    Element.prototype.insertAdjacentElement = function insertAdjacentElement() {//TODO
+	// [Element.hasPointerCapture()] https://developer.mozilla.org/en-US/docs/Web/API/Element/hasPointerCapture
+	Element.prototype.hasPointerCapture = function hasPointerCapture(pointerId) {
+		//TODO
     }
-    Element.prototype.insertAdjacentHTML = function insertAdjacentHTML() {//TODO
+	// [Element.insertAdjacentElement()] https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentElement
+	Element.prototype.insertAdjacentElement = function insertAdjacentElement(position, element) {
+		//TODO
     }
-    Element.prototype.insertAdjacentText = function insertAdjacentText() {//TODO
+	// [Element.insertAdjacentHTML()] https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML
+	Element.prototype.insertAdjacentHTML = function insertAdjacentHTML(position, text) {
+		//TODO
     }
-    Element.prototype.matches = function matches() {//TODO
+	// [Element.insertAdjacentText()] https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentText
+	Element.prototype.insertAdjacentText = function insertAdjacentText(where, data) {
+		//TODO
     }
-    Element.prototype.querySelector = function querySelector(selectors) {//TODO
+	// [Element.matches()] https://developer.mozilla.org/en-US/docs/Web/API/Element/matches
+	Element.prototype.matches = function matches(selectors) {
+		//TODO
+    }
+	// [Element.prepend()] https://developer.mozilla.org/en-US/docs/Web/API/Element/prepend
+	Element.prototype.prepend = function prepend(paramN) {
+		//TODO
+    }
+	// [Element.querySelector()] https://developer.mozilla.org/en-US/docs/Web/API/Element/querySelector
+	Element.prototype.querySelector = function querySelector(selectors) {//TODO
 		var address = CPP_DKDomElement_querySelector(this.pointer, selectors)
         if (!address)
             return;
         return new HTMLElement(address)
     }
-    Element.prototype.querySelectorAll = function querySelectorAll(selectors) {//TODO
+	// [Element.querySelectorAll()] https://developer.mozilla.org/en-US/docs/Web/API/Element/querySelectorAll
+	Element.prototype.querySelectorAll = function querySelectorAll(selectors) {//TODO
 		var addresses = CPP_DKDomElement_querySelectorAll(this.pointer, selectors)
         if (!addresses)
             return;
         return new HTMLCollection(addresses)
     }
-    Element.prototype.releasePointerCapture = function releasePointerCapture() {//TODO
+	// [Element.releasePointerCapture()] https://developer.mozilla.org/en-US/docs/Web/API/Element/releasePointerCapture
+	Element.prototype.releasePointerCapture = function releasePointerCapture(pointerId) {
+		//TODO
     }
-    Element.prototype.remove = function remove() {//TODO
+	// [Element.remove()] https://developer.mozilla.org/en-US/docs/Web/API/Element/remove
+	Element.prototype.remove = function remove() {
+		//TODO
     }
-    Element.prototype.removeAttribute = function removeAttribute() {
-        CPP_DKDomElement_removeAttribute(this.pointer, attribute)
+	// [Element.removeAttribute()] https://developer.mozilla.org/en-US/docs/Web/API/Element/removeAttribute
+	Element.prototype.removeAttribute = function removeAttribute(attrName) {
+        CPP_DKDomElement_removeAttribute(this.pointer, attrName)
         //returns undefined
     }
-    Element.prototype.removeAttributeNS = function removeAttributeNS() {//TODO
+	// [Element.removeAttributeNode()] https://developer.mozilla.org/en-US/docs/Web/API/Element/removeAttributeNode
+	Element.prototype.removeAttributeNode = function removeAttributeNode(attributeNode) {
+		//TODO
     }
-    Element.prototype.requestFullscreen = function requestFullscreen() {//TODO
+	// [Element.removeAttributeNS()] https://developer.mozilla.org/en-US/docs/Web/API/Element/removeAttributeNS
+	Element.prototype.removeAttributeNS = function removeAttributeNS(namespace, attrName) {
+		//TODO
     }
-    Element.prototype.requestPointerLock = function requestPointerLock() {//TODO
+	// [Element.replaceChildren()] https://developer.mozilla.org/en-US/docs/Web/API/Element/replaceChildren
+	Element.prototype.replaceChildren = function replaceChildren(paramN) {
+		//TODO
     }
-    Element.prototype.scrollIntoView = function scrollIntoView() {//TODO
+	// [Element.replaceWith()] https://developer.mozilla.org/en-US/docs/Web/API/Element/replaceWith
+	Element.prototype.replaceWith = function replaceWith(paramN) {
+		//TODO
     }
-    Element.prototype.setAttribute = function setAttribute(attribute, value) {
-        CPP_DKDomElement_setAttribute(this.pointer, attribute, value)
-        this[attribute] = value;
+	// [Element.requestFullscreen()] https://developer.mozilla.org/en-US/docs/Web/API/Element/requestFullscreen
+	Element.prototype.requestFullscreen = function requestFullscreen(options) {
+		//TODO
     }
-    Element.prototype.setAttributeNS = function setAttributeNS() {//TODO
+	// [Element.requestPointerLock()] https://developer.mozilla.org/en-US/docs/Web/API/Element/requestPointerLock
+	Element.prototype.requestPointerLock = function requestPointerLock(options) {
+		//TODO
     }
-    Element.prototype.setCapture = function setCapture() {//TODO
+	// [Element.scroll()] https://developer.mozilla.org/en-US/docs/Web/API/Element/scroll
+	Element.prototype.scroll = function scroll(x-coord, y-coord) {
+		//TODO
     }
-    Element.prototype.setPointerCapture = function setPointerCapture() {//TODO
+	// [Element.scrollBy()] https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollBy
+	Element.prototype.scrollBy = function scrollBy(x-coord, y-coord) {
+		//TODO
     }
-    Element.prototype.toggleAttribute = function toggleAttribute() {//TODO
+	// [Element.scrollIntoView()] https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView
+	Element.prototype.scrollIntoView = function scrollIntoView(alignToTop) {
+		//TODO
     }
+	// [Element.scrollIntoViewIfNeeded()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoViewIfNeeded
+	Element.prototype.scrollIntoViewIfNeeded = function scrollIntoViewIfNeeded(centerIfNeeded) {
+		//TODO
+    }
+	// [Element.scrollTo()] https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTo
+	Element.prototype.scrollTo = function scrollTo(x-coord, y-coord) {
+		//TODO
+    }
+	// [Element.setAttribute()] https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttribute
+	Element.prototype.setAttribute = function setAttribute(name, value) {
+        CPP_DKDomElement_setAttribute(this.pointer, name, value)
+        this[name] = value;
+    }
+	// [Element.setAttributeNode()] https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttributeNode
+	Element.prototype.setAttributeNode = function setAttributeNode(attribute) {
+		//TODO
+    }
+	// [Element.setAttributeNodeNS()] https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttributeNodeNS
+	Element.prototype.setAttributeNodeNS = function setAttributeNodeNS(attributeNode) {
+		//TODO
+    }
+	// [Element.setAttributeNS()] https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttributeNS
+	Element.prototype.setAttributeNS = function setAttributeNS(namespace, name, value) {
+		//TODO
+    }
+	// [Element.setCapture()](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Element/setCapture
+	Element.prototype.setCapture = function setCapture(retargetToElement) {
+		//TODO
+    }
+	// [Element.setHTML()](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Element/setHTML
+	Element.prototype.setHTML = function setHTML(input, options) {
+		//TODO
+    }
+	// [Element.setPointerCapture()] https://developer.mozilla.org/en-US/docs/Web/API/Element/setPointerCapture
+	Element.prototype.setPointerCapture = function setPointerCapture(pointerId) {
+		//TODO
+    }
+	// [Element.toggleAttribute()] https://developer.mozilla.org/en-US/docs/Web/API/Element/toggleAttribute
+	Element.prototype.toggleAttribute = function toggleAttribute(name, force) {
+		//TODO
+    }
+
 
 	////// toString //////
 	if(this.toString() === "[object Object]"){
