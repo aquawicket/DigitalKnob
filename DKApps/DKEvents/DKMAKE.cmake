@@ -1,4 +1,5 @@
 dk_depend(webidlpedia)
+dk_depend(webref)
 dk_depend(DKDuktape)
 dk_depend(DKDukDebugger)
 dk_depend(DK)
