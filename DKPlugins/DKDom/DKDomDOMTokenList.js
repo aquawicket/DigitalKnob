@@ -11,6 +11,7 @@ var DOMTokenList = function DOMTokenList() {
 	*/
 	
 	////// Instance properties //////
+	/*
 	// [DOMTokenList.length](Read only) https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/length
     Object.defineProperty(this, "length", {
         get: function length() {
@@ -18,6 +19,7 @@ var DOMTokenList = function DOMTokenList() {
 			//return CPP_DKDomDOMTokenList_length()
         }
     })
+	*/
 	// [DOMTokenList.value](Read only) https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/value
     Object.defineProperty(this, "value", {
         get: function value() {
