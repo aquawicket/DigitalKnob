@@ -50,13 +50,13 @@ var DOMTokenList = function DOMTokenList(pointer) {
 	// [DOMTokenList.add()] https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/add
     DOMTokenList.prototype.add = function add(tokenN) {
 		this.push(tokenN)
-        //return CPP_DKDomDOMTokenList_add(tokenN)
+        CPP_DKDomDOMTokenList_add(pointer, tokenN)
     }
 	// [DOMTokenList.remove()] https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/remove
     DOMTokenList.prototype.remove = function remove(tokenN) {
 		const index = this.indexOf(tokenN);
 		this.splice(index, 1);
-        //return CPP_DKDomDOMTokenList_remove(tokenN)
+        CPP_DKDomDOMTokenList_remove(pointer, tokenN)
     }
 	// [DOMTokenList.replace()] https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/replace
     DOMTokenList.prototype.replace = function replace(oldToken, newToken) {
@@ -77,11 +77,12 @@ var DOMTokenList = function DOMTokenList(pointer) {
 		const index = this.indexOf(token);
 		if(index === -1){
 			this.push(token)
+			CPP_DKDomDOMTokenList_add(pointer, token)
 			return true;
 		}
 		this.splice(index, 1);
+		CPP_DKDomDOMTokenList_remove(pointer, token)
 		return false;
-         //return CPP_DKDomDOMTokenList_toggle(token, force)
     }
 	// [DOMTokenList.entries()] https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/entries
     DOMTokenList.prototype.entries = function entries() {
