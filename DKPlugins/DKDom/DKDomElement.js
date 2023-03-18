@@ -36,9 +36,9 @@ var Element = function Element(pointer) {
 	// [Element.classList](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Element/classList
     Object.defineProperty(this, "classList", {
         get: function classList() {
-            domTokenList = CPP_DKDomElement_classList(pointer)
-			console.log("domTokenList = "+domTokenList)
-			return new DOMTokenList(domTokenList)
+            //domTokenList = CPP_DKDomElement_classList(pointer)
+			//console.log("domTokenList = "+domTokenList)
+			return new DOMTokenList(pointer)
         }
     })
 	// [Element.className] https://developer.mozilla.org/en-US/docs/Web/API/Element/className

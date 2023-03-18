@@ -1,7 +1,10 @@
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList
 // [INTERFACE] https://dom.spec.whatwg.org/#interface-domtokenlist
 
-var DOMTokenList = function DOMTokenList(domTokenList) {
+var DOMTokenList = function DOMTokenList(pointer) {
+	
+	domTokenList = CPP_DKDomElement_classList(pointer)
+	console.log("domTokenList = "+domTokenList)
 	
 	var arry = domTokenList.split(",");
 	for(var i=0; i<arry.length; i++)
@@ -69,6 +72,7 @@ var DOMTokenList = function DOMTokenList(domTokenList) {
     }
 	// [DOMTokenList.toggle()] https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/toggle
     DOMTokenList.prototype.toggle = function toggle(token, force) {
+		console.log("toggle("+token+")")
 		//TODO:  force
 		const index = this.indexOf(token);
 		if(index === -1){
