@@ -40,6 +40,12 @@
 #endif
 
 #define STR(x) #x
+#define STRS(str1,str2) str1 ## str2
+//#define JOIN(a,b) a ## b
+// https://stackoverflow.com/a/59157875/688352
+//#define JOIN_TWO(_1, _2) STR(_1) "." STR(_2)
+//#define JOIN_THREE(_1, _2, _3) STR(_1) "." STR(_2) "." STR(_3)
+
 
 // DKMESSAGE(<string>): pass a message string to the compiler
 #if defined(_MSC_VER)
@@ -79,11 +85,6 @@
 #define PRNT_NAME(x) printf("%s", #x)
 #define PRNT_NAME_VALUE(x) printf("%s=%s", #x, STR(x))
 #define PRNT_VALUE(x) printf(%s, STR(x))
-
-//#define JOIN(a,b) a ## b
-// https://stackoverflow.com/a/59157875/688352
-//#define JOIN_TWO(_1, _2) STR(_1) "." STR(_2)
-//#define JOIN_THREE(_1, _2, _3) STR(_1) "." STR(_2) "." STR(_3)
 
 
 // TODO: Cross-platform warnings
