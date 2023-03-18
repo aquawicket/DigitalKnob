@@ -1,3 +1,4 @@
+dk_depend(reffy)
 dk_depend(webidlpedia)
 dk_depend(webref)
 dk_depend(DKDuktape)
