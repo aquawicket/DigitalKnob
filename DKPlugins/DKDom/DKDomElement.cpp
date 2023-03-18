@@ -199,7 +199,7 @@ int DKDomElement::classList(duk_context* ctx) {
 	DKString _classList;
 	for (unsigned int n = 0; n < list.size(); ++n) {
 		_classList += list[n];
-		if (n < list.size())
+		if (n < list.size()-1)
 			_classList += ",";
 	}
 	duk_push_string(ctx, _classList.c_str());
