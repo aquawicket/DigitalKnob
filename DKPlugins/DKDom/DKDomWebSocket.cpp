@@ -23,72 +23,63 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
-//https://developer.mozilla.org/en-US/docs/Web/API/WebSocket
-
 #include "DK/DKApp.h"
 #include "DKDom/DKDom.h"
 #include "DKDom/DKDomWebSocket.h"
 #include "DKUWebSocketsClient/DKUWebSocketsClient.h" //uwebsocket
 
 
-bool DKDomWebSocket::Init(){
+bool DKDomWebSocket::Init() {
 	DKDEBUGFUNC();
 	
 	//// Instance properties ////
-	DKDuktape::AttachFunction("CPP_DKDomWebSocket_binaryType", DKDomWebSocket::binaryType);
-	DKDuktape::AttachFunction("CPP_DKDomWebSocket_bufferedAmount", DKDomWebSocket::bufferedAmount);
-	DKDuktape::AttachFunction("CPP_DKDomWebSocket_extensions", DKDomWebSocket::extensions);
-	DKDuktape::AttachFunction("CPP_DKDomWebSocket_protocol", DKDomWebSocket::protocol);
-	DKDuktape::AttachFunction("CPP_DKDomWebSocket_readyState", DKDomWebSocket::readyState);
-	DKDuktape::AttachFunction("CPP_DKDomWebSocket_url", DKDomWebSocket::url);
+	DKDuktape::AttachFunction("CPP_DKDomWebSocket_binaryType",		DKDomWebSocket::binaryType);
+	DKDuktape::AttachFunction("CPP_DKDomWebSocket_bufferedAmount",	DKDomWebSocket::bufferedAmount);
+	DKDuktape::AttachFunction("CPP_DKDomWebSocket_extensions",		DKDomWebSocket::extensions);
+	DKDuktape::AttachFunction("CPP_DKDomWebSocket_protocol",		DKDomWebSocket::protocol);
+	DKDuktape::AttachFunction("CPP_DKDomWebSocket_readyState",		DKDomWebSocket::readyState);
+	DKDuktape::AttachFunction("CPP_DKDomWebSocket_url",				DKDomWebSocket::url);
 	
 	//// Instance methods ////
-	DKDuktape::AttachFunction("CPP_DKDomWebSocket_open", DKDomWebSocket::open);
-	DKDuktape::AttachFunction("CPP_DKDomWebSocket_close", DKDomWebSocket::close);
-	DKDuktape::AttachFunction("CPP_DKDomWebSocket_send", DKDomWebSocket::send);
+	DKDuktape::AttachFunction("CPP_DKDomWebSocket_open",			DKDomWebSocket::open);
+	DKDuktape::AttachFunction("CPP_DKDomWebSocket_close",			DKDomWebSocket::close);
+	DKDuktape::AttachFunction("CPP_DKDomWebSocket_send",			DKDomWebSocket::send);
 	
 	DKClass::DKCreate("DKDom/DKDomWebSocket.js");
 	return true;
 }
 
-int DKDomWebSocket::binaryType(duk_context* ctx){
+int DKDomWebSocket::binaryType(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
-	//TODO
-	return true;
+	return DKTODO();
 }
 
-int DKDomWebSocket::bufferedAmount(duk_context* ctx){
+int DKDomWebSocket::bufferedAmount(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
-	//TODO
-	return true;
+	return DKTODO();
 }
 
-int DKDomWebSocket::extensions(duk_context* ctx){
+int DKDomWebSocket::extensions(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
-	//TODO
-	return true;
+	return DKTODO();
 }
 
-int DKDomWebSocket::protocol(duk_context* ctx){
+int DKDomWebSocket::protocol(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
-	//TODO
-	return true;
+	return DKTODO();
 }
 
-int DKDomWebSocket::readyState(duk_context* ctx){
+int DKDomWebSocket::readyState(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
-	//TODO
-	return true;
+	return DKTODO();
 }
 
-int DKDomWebSocket::url(duk_context* ctx){
+int DKDomWebSocket::url(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
-	//TODO
-	return true;
+	return DKTODO();
 }
 
-int DKDomWebSocket::open(duk_context* ctx){
+int DKDomWebSocket::open(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	if (!DKUWebSocketsClient::Get()->CreateClient(address)) //uwebsocket
@@ -96,14 +87,14 @@ int DKDomWebSocket::open(duk_context* ctx){
 	return true;
 }
 
-int DKDomWebSocket::close(duk_context* ctx){
+int DKDomWebSocket::close(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	if (!DKUWebSocketsClient::Get()->CloseClient()) //uwebsocket
 		return DKERROR("DKWebSockets::CloseClient() failed! \n");
 	return true;
 }
 
-int DKDomWebSocket::send(duk_context* ctx){
+int DKDomWebSocket::send(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	DKString message = duk_require_string(ctx, 0);
 	if (!DKUWebSocketsClient::Get()->MessageToServer(message)) //uwebsocket

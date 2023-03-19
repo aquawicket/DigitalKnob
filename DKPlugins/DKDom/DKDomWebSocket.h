@@ -23,9 +23,6 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
-//https://developer.mozilla.org/en-US/docs/Web/API/WebSocket
-
 #pragma once
 #ifndef DKDomWebSocket_H
 #define DKDomWebSocket_H
@@ -33,6 +30,7 @@
 #include "DKDuktape/DKDuktape.h"
 
 
+//https://developer.mozilla.org/en-US/docs/Web/API/WebSocket
 class DKDomWebSocket : public DKObjectT<DKDomWebSocket>
 {
 public:
@@ -54,7 +52,7 @@ public:
 	//// Events ////
 	// implemented in DKDomWebSocket.js
 };
-
 REGISTER_OBJECT(DKDomWebSocket, true)
+
 
 #endif //DKDomWebSocket_H

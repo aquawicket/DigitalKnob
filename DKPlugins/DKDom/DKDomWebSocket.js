@@ -1,43 +1,48 @@
-//https://developer.mozilla.org/en-US/docs/Web/API/WebSocket
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/WebSocket
+// [INTERFACE] https://websockets.spec.whatwg.org/#the-websocket-interface
 
 
+// [WebSocket()] https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/WebSocket
 var WebSocket = function WebSocket(url) {
 	console.log("WebSocket("+url+")");
 	this.url = url;
-	
 	var pointer = CPP_DKDomDocument_createElement("websocket");
 	this.pointer = pointer;
-	
 	CPP_DK_Create("DKUWebSocketsClient,"+pointer);
-	
 	CPP_DKDomWebSocket_open(url);
 
-	//// Instance properties ////
+	////// Instance properties //////
+	// [WebSocket.binaryType] https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/binaryType
 	Object.defineProperty(this, "binaryType", {
         get: function binaryType() {
             return CPP_DKDomWebSocket_binaryType(pointer)
         }
     })
+	// [WebSocket.bufferedAmount](Read only) https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/bufferedAmount
 	Object.defineProperty(this, "bufferedAmount", {
         get: function bufferedAmount() {
             return CPP_DKDomWebSocket_bufferedAmount(pointer)
         }
     })
+	// [WebSocket.extensions](Read only) https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/extensions
 	Object.defineProperty(this, "extensions", {
         get: function extensions() {
             return CPP_DKDomWebSocket_extensions(pointer)
         }
     })
+	// [WebSocket.protocol](Read only) https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/protocol
 	Object.defineProperty(this, "protocol", {
         get: function protocol() {
             return CPP_DKDomWebSocket_protocol(pointer)
         }
     })
+	// [WebSocket.readyState](Read only) https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/readyState
 	Object.defineProperty(this, "readyState", {
         get: function readyState() {
             return CPP_DKDomWebSocket_readyState(pointer)
         }
     })
+	// [WebSocket.url](Read only) https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/url
 	Object.defineProperty(this, "url", {
         get: function url() {
             return CPP_DKDomWebSocket_url(pointer)
@@ -45,7 +50,7 @@ var WebSocket = function WebSocket(url) {
     })
 	
 
-	//// Instance methods ////
+	////// Instance methods //////
 	WebSocket.prototype.close = function close() {
 		CPP_DKDomWebSocket_close()
     }
@@ -55,6 +60,13 @@ var WebSocket = function WebSocket(url) {
 	
 	
 	//// Events ////
+	// [close] https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/close_event
+	// [error] https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/error_event
+	// [message] https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/message_event
+	// [open] https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/open_event
+
+
+
 	// NOTE: already included from DKDomGlobalEventHandlers.js
 	/*
 	this.close_func = null;
@@ -116,6 +128,4 @@ var WebSocket = function WebSocket(url) {
 	
     return EventTarget.call(this, pointer)
 }
-
-// https://html.spec.whatwg.org/multipage/webappapis.html#eventhandler
 WebSocket.prototype = EventTarget.prototype;
