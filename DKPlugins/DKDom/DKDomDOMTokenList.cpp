@@ -32,21 +32,21 @@ bool DKDomDOMTokenList::Init(){
 	DKDEBUGFUNC();
 
 	////// Instance properties //////
-	DKDuktape::AttachFunction("CPP_DKDomDOMTokenList_length", DKDomDOMTokenList::length);
-	DKDuktape::AttachFunction("CPP_DKDomDOMTokenList_value", DKDomDOMTokenList::value);
+	DKDuktape::AttachFunction("CPP_DKDomDOMTokenList_length",	DKDomDOMTokenList::length);
+	DKDuktape::AttachFunction("CPP_DKDomDOMTokenList_value",	DKDomDOMTokenList::value);
 
 	////// Instance methods //////
-	DKDuktape::AttachFunction("CPP_DKDomDOMTokenList_item", DKDomDOMTokenList::item);
-	DKDuktape::AttachFunction("CPP_DKDomDOMTokenList_contains", DKDomDOMTokenList::contains);
-	DKDuktape::AttachFunction("CPP_DKDomDOMTokenList_add", DKDomDOMTokenList::add);
-	DKDuktape::AttachFunction("CPP_DKDomDOMTokenList_remove", DKDomDOMTokenList::remove);
-	DKDuktape::AttachFunction("CPP_DKDomDOMTokenList_replace", DKDomDOMTokenList::replace);
-	DKDuktape::AttachFunction("CPP_DKDomDOMTokenList_supports", DKDomDOMTokenList::supports);
-	DKDuktape::AttachFunction("CPP_DKDomDOMTokenList_toggle", DKDomDOMTokenList::toggle);
-	DKDuktape::AttachFunction("CPP_DKDomDOMTokenList_entries", DKDomDOMTokenList::entries);
-	DKDuktape::AttachFunction("CPP_DKDomDOMTokenList_forEach", DKDomDOMTokenList::forEach);
-	DKDuktape::AttachFunction("CPP_DKDomDOMTokenList_keys", DKDomDOMTokenList::keys);
-	DKDuktape::AttachFunction("CPP_DKDomDOMTokenList_values", DKDomDOMTokenList::values);
+	DKDuktape::AttachFunction("CPP_DKDomDOMTokenList_item",		DKDomDOMTokenList::item);
+	DKDuktape::AttachFunction("CPP_DKDomDOMTokenList_contains",	DKDomDOMTokenList::contains);
+	DKDuktape::AttachFunction("CPP_DKDomDOMTokenList_add",		DKDomDOMTokenList::add);
+	DKDuktape::AttachFunction("CPP_DKDomDOMTokenList_remove",	DKDomDOMTokenList::remove);
+	DKDuktape::AttachFunction("CPP_DKDomDOMTokenList_replace",	DKDomDOMTokenList::replace);
+	DKDuktape::AttachFunction("CPP_DKDomDOMTokenList_supports",	DKDomDOMTokenList::supports);
+	DKDuktape::AttachFunction("CPP_DKDomDOMTokenList_toggle",	DKDomDOMTokenList::toggle);
+	DKDuktape::AttachFunction("CPP_DKDomDOMTokenList_entries",	DKDomDOMTokenList::entries);
+	DKDuktape::AttachFunction("CPP_DKDomDOMTokenList_forEach",	DKDomDOMTokenList::forEach);
+	DKDuktape::AttachFunction("CPP_DKDomDOMTokenList_keys",		DKDomDOMTokenList::keys);
+	DKDuktape::AttachFunction("CPP_DKDomDOMTokenList_values",	DKDomDOMTokenList::values);
 
 	DKClass::DKCreate("DKDom/DKDomDOMTokenList.js");
 	return true;
@@ -54,20 +54,24 @@ bool DKDomDOMTokenList::Init(){
 
 ////// Instance properties //////
 int DKDomDOMTokenList::length(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	return DKTODO();
 }
 
 int DKDomDOMTokenList::value(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	return DKTODO();
 }
 
 
 ////// Instance methods //////
 int DKDomDOMTokenList::item(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	return DKTODO();
 }
 
 int DKDomDOMTokenList::contains(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	return DKTODO();
 }
 
@@ -100,37 +104,36 @@ int DKDomDOMTokenList::remove(duk_context* ctx) {
 }
 
 int DKDomDOMTokenList::replace(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	return DKTODO();
 }
 
 int DKDomDOMTokenList::supports(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	return DKTODO();
 }
 
 int DKDomDOMTokenList::toggle(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
-	DKString address = duk_require_string(ctx, 0);
-	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
-	if (!element) {
-		DKERROR("element invalid\n");
-		duk_push_undefined(ctx);
-		return true;
-	}
-
+	return DKTODO();
 }
 
 int DKDomDOMTokenList::entries(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	return DKTODO();
 }
 
 int DKDomDOMTokenList::forEach(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	return DKTODO();
 }
 
 int DKDomDOMTokenList::keys(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	return DKTODO();
 }
 
 int DKDomDOMTokenList::values(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	return DKTODO();
 }
