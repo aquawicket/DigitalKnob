@@ -1,6 +1,7 @@
 # https://en.wikipedia.org/wiki/Google_Chrome_version_history
 # https://cef-builds.spotifycdn.com/index.html
 #
+
 # WINDOWS 32
 # https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32.tar.bz2
 # https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32_minimal.tar.bz2
@@ -66,7 +67,15 @@ dk_depend(build-essential)
 dk_depend(libgtk2.0-dev)
 
 
-WIN32_dk_import			(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32.tar.bz2)
+#WIN32_dk_import		(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32.tar.bz2)
+#WIN32_dk_import		(https://cef-builds.spotifycdn.com/cef_binary_83.5.0+gbf03589+chromium-83.0.4103.106_windows32.tar.bz2)
+WIN32_dk_import			(https://cef-builds.spotifycdn.com/cef_binary_84.4.1+gfdc7504+chromium-84.0.4147.105_windows32.tar.bz2)
+#WIN32_dk_import		(https://cef-builds.spotifycdn.com/cef_binary_85.3.13+gcd6cbe0+chromium-85.0.4183.121_windows32.tar.bz2)
+#WIN32_dk_import		(https://cef-builds.spotifycdn.com/cef_binary_86.0.24+g85e79d4+chromium-86.0.4240.198_windows32.tar.bz2)
+#WIN32_dk_import		(https://cef-builds.spotifycdn.com/cef_binary_90.6.7+g19ba721+chromium-90.0.4430.212_windows32.tar.bz2)
+#WIN32_dk_import		(https://cef-builds.spotifycdn.com/cef_binary_97.1.9+ga00bca5+chromium-97.0.4692.99_windows32.tar.bz2)
+#WIN32_dk_import		(https://cef-builds.spotifycdn.com/cef_binary_111.2.6+g491d238+chromium-111.0.5563.65_windows32.tar.bz2)
+
 #WIN32_dk_download		(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32_debug_symbols.tar.bz2)
 #WIN32_dk_extract		(${DKDOWNLOADS}/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows32_debug_symbols.tar.bz2)
 WIN64_dk_import			(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows64.tar.bz2)

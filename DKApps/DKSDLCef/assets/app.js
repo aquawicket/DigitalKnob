@@ -1,5 +1,6 @@
 var USE_CEF = 1
-var url = "chrome://gpu";
+//var url = "chrome://gpu";
+var url = "https://pluto.tv";
 
 CPP_DK_Create("DKSDLWindow")
 CPP_DK_Create("DKSDLText")
