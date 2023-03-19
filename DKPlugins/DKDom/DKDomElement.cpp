@@ -167,21 +167,25 @@ bool DKDomElement::Init(){
 
 ////// Instance properties //////
 int DKDomElement::assignedSlot(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::attributes(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::childElementCount(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::children(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
@@ -207,6 +211,7 @@ int DKDomElement::classList(duk_context* ctx) {
 }
 
 int DKDomElement::className(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
@@ -280,16 +285,19 @@ int DKDomElement::clientWidth(duk_context* ctx){
 }
 
 int DKDomElement::elementTiming(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::firstElementChild(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::id(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
@@ -317,21 +325,25 @@ int DKDomElement::innerHTML(duk_context* ctx) {
 }
 
 int DKDomElement::lastElementChild(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::localName(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::namespaceURI(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::nextElementSibling(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
@@ -360,16 +372,19 @@ int DKDomElement::outerHTML(duk_context* ctx) {
 }
 
 int DKDomElement::part(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::prefix(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::previousElementSibling(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
@@ -403,6 +418,7 @@ int DKDomElement::scrollLeft(duk_context* ctx) {
 }
 
 int DKDomElement::scrollLeftMax(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
@@ -422,6 +438,7 @@ int DKDomElement::scrollTop(duk_context* ctx) {
 }
 
 int DKDomElement::scrollTopMax(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
@@ -441,11 +458,13 @@ int DKDomElement::scrollWidth(duk_context* ctx) {
 }
 
 int DKDomElement::shadowRoot(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::slot(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
@@ -466,191 +485,229 @@ int DKDomElement::tagName(duk_context* ctx) {
 
 ////// Instance properties included from ARIA //////
 int DKDomElement::ariaAtomic(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::ariaAutoComplete(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::ariaBusy(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::ariaChecked(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::ariaColCount(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::ariaColIndex(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::ariaColSpan(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::ariaCurrent(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::ariaDescription(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::ariaDisabled(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::ariaExpanded(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::ariaHasPopup(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::ariaHidden(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::ariaKeyShortcuts(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::ariaLabel(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::ariaLevel(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::ariaLive(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::ariaModal(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::ariaMultiline(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::ariaMultiSelectable(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::ariaOrientation(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::ariaPlaceholder(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::ariaPosInSet(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::ariaPressed(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::ariaReadOnly(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::ariaRelevant(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::ariaRequired(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::ariaRoleDescription(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::ariaRowCount(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::ariaRowIndex(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::ariaRowSpan(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::ariaSelected(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::ariaSetSize(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::ariaSort(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::ariaValueMax(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::ariaValueMin(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::ariaValueNow(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::ariaValueText(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
@@ -658,26 +715,31 @@ int DKDomElement::ariaValueText(duk_context* ctx) {
 
 ////// Instance methods //////
 int DKDomElement::after(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::attachShadow(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::animate(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::append(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::before(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
@@ -702,11 +764,13 @@ int DKDomElement::closest(duk_context* ctx){
 }
 
 int DKDomElement::computedStyleMap(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::getAnimations(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
@@ -734,36 +798,43 @@ int DKDomElement::getAttribute(duk_context* ctx){
 }
 
 int DKDomElement::getAttributeNames(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::getAttributeNode(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::getAttributeNodeNS(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::getAttributeNS(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::getBoundingClientRect(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::getBoxQuads(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::getClientRects(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
@@ -796,6 +867,7 @@ int DKDomElement::getElementsByClassName(duk_context* ctx){
 }
 
 int DKDomElement::getElementsByTagName(duk_context* ctx){
+	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
 	DKString name = duk_require_string(ctx, 1);
 	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
@@ -824,6 +896,7 @@ int DKDomElement::getElementsByTagName(duk_context* ctx){
 }
 
 int DKDomElement::getElementsByTagNameNS(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
@@ -847,41 +920,49 @@ int DKDomElement::hasAttribute(duk_context* ctx){
 }
 
 int DKDomElement::hasAttributeNS(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::hasAttributes(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::hasPointerCapture(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::insertAdjacentElement(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::insertAdjacentHTML(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::insertAdjacentText(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::matches(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::prepend(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
@@ -935,11 +1016,13 @@ int DKDomElement::querySelectorAll(duk_context* ctx) {
 }
 
 int DKDomElement::releasePointerCapture(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::remove(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
@@ -960,41 +1043,49 @@ int DKDomElement::removeAttribute(duk_context* ctx){
 }
 
 int DKDomElement::removeAttributeNode(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::removeAttributeNS(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::replaceChildren(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::replaceWith(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::requestFullscreen(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::requestPointerLock(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::scroll(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::scrollBy(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
@@ -1019,11 +1110,13 @@ int DKDomElement::scrollIntoView(duk_context* ctx) {
 }
 
 int DKDomElement::scrollIntoViewIfNeeded(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::scrollTo(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
@@ -1060,36 +1153,43 @@ int DKDomElement::setAttribute(duk_context* ctx) {
 }
 
 int DKDomElement::setAttributeNode(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::setAttributeNodeNS(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::setAttributeNS(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::setCapture(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::setHTML(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::setPointerCapture(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
 
 int DKDomElement::toggleAttribute(duk_context* ctx) {
+	DKDEBUGFUNC(ctx);
 	//TODO
 	return true;
 }
