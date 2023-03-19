@@ -158,6 +158,7 @@ bool ConsoleWindow::End(){
 }
 
 void ConsoleWindow::Loop() {
+    //DKDEBUGFUNC(); //EXCESSIVE LOGGING
     /*
     if (GetAsyncKeyState(VK_LBUTTON) & 0x01)
         DKINFO("VK_LBUTTON \n");
@@ -176,7 +177,9 @@ void ConsoleWindow::Loop() {
     if (!lpcNumberOfEvents)
         return;
 
-    DWORD cNumRead, fdwMode, i;
+    DWORD cNumRead;
+    DWORD fdwMode;
+    DWORD i;
     INPUT_RECORD irInBuf[128];
     if (!ReadConsoleInput(
         hStdin,      // input buffer handle 
@@ -212,19 +215,22 @@ void ConsoleWindow::Loop() {
 }
 
 //// Instance properties ////
-int ConsoleWindow::closed(duk_context* ctx){ //Read only
+int ConsoleWindow::closed(duk_context* ctx) {
+    DKDEBUGFUNC(ctx);
 	// TODO
 	bool isClosed = false;
 	duk_push_boolean(ctx, isClosed);
 	return true;
 }
 
-int ConsoleWindow::Columns(duk_context* ctx) { //Read only
+int ConsoleWindow::Columns(duk_context* ctx) {
+    DKDEBUGFUNC(ctx);
     duk_push_uint(ctx, ConsoleWindow::Get()->columns);
     return true;
 }
 
-int ConsoleWindow::fullScreen(duk_context* ctx){
+int ConsoleWindow::fullScreen(duk_context* ctx) {
+    DKDEBUGFUNC(ctx);
     //get
     if (!duk_is_boolean(ctx, 0)) {
         // TODO
@@ -271,7 +277,8 @@ int ConsoleWindow::fullScreen(duk_context* ctx){
     }
 }
 
-int ConsoleWindow::innerHeight(duk_context* ctx){ //Read only
+int ConsoleWindow::innerHeight(duk_context* ctx) {
+    DKDEBUGFUNC(ctx);
 	#if WIN
 		RECT rect;
 		GetClientRect(GetConsoleWindow(), &rect);
@@ -283,7 +290,8 @@ int ConsoleWindow::innerHeight(duk_context* ctx){ //Read only
 	return true;
 }
 
-int ConsoleWindow::innerWidth(duk_context* ctx){ //Read only
+int ConsoleWindow::innerWidth(duk_context* ctx) {
+    DKDEBUGFUNC(ctx);
 	#if WIN
 		RECT rect;
 		GetClientRect(GetConsoleWindow(), &rect);
@@ -295,7 +303,8 @@ int ConsoleWindow::innerWidth(duk_context* ctx){ //Read only
 	return true;
 }
 
-int ConsoleWindow::name(duk_context* ctx){
+int ConsoleWindow::name(duk_context* ctx) {
+    DKDEBUGFUNC(ctx);
     //get
     if (!duk_is_string(ctx, 0)) {
         char _title[1024];
@@ -317,7 +326,8 @@ int ConsoleWindow::name(duk_context* ctx){
     }
 }
 
-int ConsoleWindow::outerHeight(duk_context* ctx){ //Read only
+int ConsoleWindow::outerHeight(duk_context* ctx) {
+    DKDEBUGFUNC(ctx);
 	#if WIN
 		RECT rect;
 		GetWindowRect(GetConsoleWindow(), &rect);
@@ -327,7 +337,8 @@ int ConsoleWindow::outerHeight(duk_context* ctx){ //Read only
 	return true;
 }
 
-int ConsoleWindow::outerWidth(duk_context* ctx){ //Read only
+int ConsoleWindow::outerWidth(duk_context* ctx) {
+    DKDEBUGFUNC(ctx);
 	#if WIN
 		RECT rect;
 		GetWindowRect(GetConsoleWindow(), &rect);
@@ -337,12 +348,14 @@ int ConsoleWindow::outerWidth(duk_context* ctx){ //Read only
 	return true;
 }
 
-int ConsoleWindow::Rows(duk_context* ctx) { //Read only
+int ConsoleWindow::Rows(duk_context* ctx) {
+    DKDEBUGFUNC(ctx);
     duk_push_uint(ctx, ConsoleWindow::Get()->rows);
     return true;
 }
 
-int ConsoleWindow::ScreenX(duk_context* ctx){ //Read only
+int ConsoleWindow::ScreenX(duk_context* ctx) {
+    DKDEBUGFUNC(ctx);
 	#if WIN
 		RECT rect;
 		GetClientRect(GetConsoleWindow(), &rect);
@@ -353,7 +366,8 @@ int ConsoleWindow::ScreenX(duk_context* ctx){ //Read only
 	return true;
 }
 
-int ConsoleWindow::screenLeft(duk_context* ctx){ //Read only
+int ConsoleWindow::screenLeft(duk_context* ctx) {
+    DKDEBUGFUNC(ctx);
 	#if WIN
 		RECT rect;
 		GetClientRect(GetConsoleWindow(), &rect);
@@ -364,7 +378,8 @@ int ConsoleWindow::screenLeft(duk_context* ctx){ //Read only
 	return true;
 }
 
-int ConsoleWindow::ScreenY(duk_context* ctx){ //Read only
+int ConsoleWindow::ScreenY(duk_context* ctx) {
+    DKDEBUGFUNC(ctx);
 	#if WIN
 		RECT rect;
 		GetClientRect(GetConsoleWindow(), &rect);
@@ -375,7 +390,8 @@ int ConsoleWindow::ScreenY(duk_context* ctx){ //Read only
 	return true;
 }
 
-int ConsoleWindow::screenTop(duk_context* ctx){ //Read only
+int ConsoleWindow::screenTop(duk_context* ctx) {
+    DKDEBUGFUNC(ctx);
 	#if WIN
 		RECT rect;
 		GetClientRect(GetConsoleWindow(), &rect);
@@ -387,25 +403,29 @@ int ConsoleWindow::screenTop(duk_context* ctx){ //Read only
 }
 
 //// Instance methods ////
-int ConsoleWindow::blur(duk_context* ctx){
+int ConsoleWindow::blur(duk_context* ctx) {
+    DKDEBUGFUNC(ctx);
 	#if WIN
 		ShowWindow(GetConsoleWindow(), SW_SHOWMINNOACTIVE);
 	#endif
 	return true;
 }
-int ConsoleWindow::close(duk_context* ctx){
+int ConsoleWindow::close(duk_context* ctx) {
+    DKDEBUGFUNC(ctx);
 	#if WIN
 		ShowWindow(GetConsoleWindow(), SW_HIDE);
 	#endif
 	return true;
 }
-int ConsoleWindow::focus(duk_context* ctx){
+int ConsoleWindow::focus(duk_context* ctx) {
+    DKDEBUGFUNC(ctx);
 	#if WIN
 		ShowWindow(GetConsoleWindow(), SW_SHOW);
 	#endif
 	return true;
 }
-int ConsoleWindow::moveBy(duk_context* ctx){
+int ConsoleWindow::moveBy(duk_context* ctx) {
+    DKDEBUGFUNC(ctx);
 	#if WIN
 		int deltaX = duk_require_int(ctx, 0);
 		int deltaY = duk_require_int(ctx, 1);
@@ -420,7 +440,8 @@ int ConsoleWindow::moveBy(duk_context* ctx){
 	#endif
 	return true;
 }
-int ConsoleWindow::moveTo(duk_context* ctx){
+int ConsoleWindow::moveTo(duk_context* ctx) {
+    DKDEBUGFUNC(ctx);
 	#if WIN
 		int x = duk_require_int(ctx, 0);
 		int y = duk_require_int(ctx, 1);
@@ -435,7 +456,8 @@ int ConsoleWindow::moveTo(duk_context* ctx){
 	#endif
 	return true;
 }
-int ConsoleWindow::resizeBy(duk_context* ctx){
+int ConsoleWindow::resizeBy(duk_context* ctx) {
+    DKDEBUGFUNC(ctx);
 	#if WIN
 		int xDelta = duk_require_int(ctx, 0);
 		int yDelta = duk_require_int(ctx, 1);
@@ -450,7 +472,8 @@ int ConsoleWindow::resizeBy(duk_context* ctx){
 	#endif
 	return true;
 }
-int ConsoleWindow::resizeTo(duk_context* ctx){
+int ConsoleWindow::resizeTo(duk_context* ctx) {
+    DKDEBUGFUNC(ctx);
 	#if WIN
 		int width = duk_require_int(ctx, 0);
 		int height = duk_require_int(ctx, 1);
@@ -468,7 +491,8 @@ int ConsoleWindow::resizeTo(duk_context* ctx){
 	
 	
 #if WIN
-void ConsoleWindow::ErrorExit(LPCSTR lpszMessage){
+void ConsoleWindow::ErrorExit(LPCSTR lpszMessage) {
+    DKDEBUGFUNC(lpszMessage);
     fprintf(stderr, "%s\n", lpszMessage);
     // Restore input mode on exit.
     SetConsoleMode(hStdin, fdwSaveOldMode);
@@ -476,6 +500,7 @@ void ConsoleWindow::ErrorExit(LPCSTR lpszMessage){
 }
 
 void ConsoleWindow::FocusEventProc(FOCUS_EVENT_RECORD fer) {
+    DKDEBUGFUNC(fer);
     DKString address = DKDuktape::pointerToAddress(this);
     DKString rval;
     DKString code;
@@ -503,6 +528,7 @@ void ConsoleWindow::FocusEventProc(FOCUS_EVENT_RECORD fer) {
 }
 
 void ConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
+    DKDEBUGFUNC(ker);
     DKString address = DKDuktape::pointerToAddress(this);
     DKString rval;
     DKString code;
@@ -569,10 +595,12 @@ void ConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
 }
 
 void ConsoleWindow::MenuEventProc(MENU_EVENT_RECORD mer) {
+    DKDEBUGFUNC(mer);
     DKINFO("ConsoleWindow::MenuEventProc() \n");
 }
 
 void ConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
+    DKDEBUGFUNC(mer);
     //DKINFO("ConsoleWindow::MouseEventProc()\n");
 	#ifndef MOUSE_HWHEELED
 		#define MOUSE_HWHEELED 0x0008
@@ -789,7 +817,8 @@ void ConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
     }
 }
 
-void ConsoleWindow::ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD wbsr){
+void ConsoleWindow::ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD wbsr) {
+    DKDEBUGFUNC(wbsr);
 	DKString address = DKDuktape::pointerToAddress(this);
     DKString rval;
     DKString code;
