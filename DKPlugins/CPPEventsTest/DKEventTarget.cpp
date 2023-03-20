@@ -14,11 +14,11 @@ bool DKEventTarget::End(){
 	return true;
 }
 
-void DKEventTarget::addEventListener(/* type, listener */) {
+void DKEventTarget::addEventListener(const DKString& type/*, listener */) {
 	DKDEBUGFUNC();
 }
 
-void DKEventTarget::removeEventListener(/* type, listener */) {
+void DKEventTarget::removeEventListener(const DKString& type/*, listener */) {
 	DKDEBUGFUNC();
 }
 

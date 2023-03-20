@@ -13,9 +13,9 @@ public:
 	bool End();
 
 	////// Instance methods //////
-	void addEventListener(/* type, listener */);		// https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
-	void removeEventListener(/* type, listener */);		// https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener
-	void dispatchEvent(/* event */);					// https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent
+	void addEventListener(const DKString& type/*, listener */ );	// https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
+	void removeEventListener(const DKString& type/*, listener */);	// https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener
+	void dispatchEvent(/* event */);								// https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent
 };
 REGISTER_OBJECT(DKEventTarget, false);
 
