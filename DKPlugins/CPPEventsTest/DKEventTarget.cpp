@@ -13,3 +13,15 @@ bool DKEventTarget::End(){
 	DKINFO("DKEventTarget::End() \n");
 	return true;
 }
+
+void DKEventTarget::addEventListener(/* type, listener */) {
+	DKDEBUGFUNC();
+}
+
+void DKEventTarget::removeEventListener(/* type, listener */) {
+	DKDEBUGFUNC();
+}
+
+void DKEventTarget::dispatchEvent(/* event */) {
+	DKDEBUGFUNC();
+}
