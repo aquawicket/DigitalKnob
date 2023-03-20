@@ -6,6 +6,7 @@
 bool App::Init(){
 	DKDEBUGFUNC();
 	DKINFO("App::Init() \n");
+	DKClass::DKCreate("DKConsoleWindow");
 	return true;
 }
 
