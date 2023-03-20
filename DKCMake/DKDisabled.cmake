@@ -560,6 +560,7 @@ if(WIN)
 	dk_disable(DKOSGCef)			# build errors
 	dk_disable(DKOSGPhysics)		# requires bullet3
 	dk_disable(DKOSGStats)			# build errors
+	dk_disable(DKOSGViewer)			# requires openscenegraph
 	dk_disable(DKOSGVideo)			# TODO
 	dk_disable(DKOSGWidget)			# build errors
 	dk_disable(DKOSGWindow)			# requires openscenegraph
