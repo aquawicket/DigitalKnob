@@ -558,6 +558,7 @@ if(WIN)
 	dk_disable(DKOFWindow)			# requires openframeworks
 	dk_disable(DKOSGAudio)			# requires freealut
 	dk_disable(DKOSGCef)			# build errors
+	dk_disable(DKOSGNotify)			# requires openscenegraph
 	dk_disable(DKOSGPhysics)		# requires bullet3
 	dk_disable(DKOSGPicker)			# requires openscenegraph
 	dk_disable(DKOSGRml)			# requires openscenegraph
