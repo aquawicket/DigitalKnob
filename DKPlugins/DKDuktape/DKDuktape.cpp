@@ -88,6 +88,7 @@ fail:
 
 /*
 void duk_eval_file(duk_context* ctx, const char* path) {
+	DKDEBUGFUNC(ctx, path);
 	duk_push_string_file_raw(ctx, path, 0);
 	duk_push_string(ctx, path);
 	duk_compile(ctx, DUK_COMPILE_EVAL);
