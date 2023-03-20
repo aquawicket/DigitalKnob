@@ -180,7 +180,7 @@ void DKConsoleWindow::Loop() {
         return;
 
     DWORD cNumRead;
-    DWORD fdwMode;
+    //DWORD fdwMode;
     DWORD i;
     INPUT_RECORD irInBuf[128];
     if (!ReadConsoleInput(
