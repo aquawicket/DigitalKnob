@@ -1,14 +1,16 @@
 #include "DK/stdafx.h"
 
-#include "App/App.h"
+#include "App.h"
 
 
 bool App::Init(){
-	DKDEBUGFUNC();	
+	DKDEBUGFUNC();
+	DKINFO("App::Init()");
 	return true;
 }
 
 bool App::End(){
 	DKDEBUGFUNC();
+	DKINFO("App::End()");
 	return true;
 }
