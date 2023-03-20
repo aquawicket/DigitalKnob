@@ -590,6 +590,7 @@ if(WIN)
 	dk_disable(osgrmlui)
 	dk_disable(osgworks)			# osgwTools\GeometryModifier.cpp(64,13): error C2039: 'mergeGeode': is not a member of 'osgUtil::Optimizer::MergeGeometryVisitor'
 	dk_disable(php-src)
+	dk_disable(poco)
 	dk_disable(python3)
 	dk_disable(rmlui-d3d11)
 	dk_disable(sdl_rtf)
