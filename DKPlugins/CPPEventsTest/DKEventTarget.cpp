@@ -15,11 +15,11 @@ bool DKEventTarget::End(){
 }
 
 void DKEventTarget::addEventListener(const DKString& type/*, listener */) {
-	DKDEBUGFUNC();
+	DKDEBUGFUNC(type);
 }
 
 void DKEventTarget::removeEventListener(const DKString& type/*, listener */) {
-	DKDEBUGFUNC();
+	DKDEBUGFUNC(type);
 }
 
 void DKEventTarget::dispatchEvent(/* event */) {
