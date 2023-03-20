@@ -555,6 +555,7 @@ endif()
 # Disabled for Windows targets
 if(WIN) 
 	dk_disable(boost)				# error: cl command not found
+	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
 	dk_disable(DKOSGAudio)			# requires freealut
 	dk_disable(DKOSGCef)			# build errors
