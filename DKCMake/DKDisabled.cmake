@@ -562,6 +562,7 @@ if(WIN)
 	dk_disable(DKOSGStats)			# build errors
 	dk_disable(DKOSGVideo)			# TODO
 	dk_disable(DKOSGWidget)			# build errors
+	dk_disable(DKSDLVideo)			# error: 'av_mallocz_array': identifier not found
 	dk_disable(DKSDLWaave)			# requires waave
 	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKSFMLRml)			# INCOMPLETE
