@@ -140,9 +140,9 @@ DKApp::DKApp(int _argc, char** _argv) {
 	DKINFO("DKFile::exe_name = " + DKFile::exe_name + "\n");
 	DKINFO("DKFile::app_name = " + DKFile::app_name + "\n");
 	DKClass::DKCreate("DKAssets"); //Nothing will be logged to log.txt until here.
-	//if (DKClass::DKAvailable("App")) {
-	//	DKObject* app = DKClass::DKCreate("App"); //App.h/App.cpp (user code)
-	//}
+	if (DKClass::DKAvailable("App")) {
+		DKObject* app = DKClass::DKCreate("App"); //App.h/App.cpp (user code)
+	}
 	DKClass::DKCreate("DKDuktape");
 	DKClass::DKCreate("DKDebug");
 }

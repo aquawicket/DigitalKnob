@@ -5,12 +5,12 @@
 
 bool App::Init(){
 	DKDEBUGFUNC();
-	DKINFO("App::Init()");
+	DKINFO("App::Init() \n");
 	return true;
 }
 
 bool App::End(){
 	DKDEBUGFUNC();
-	DKINFO("App::End()");
+	DKINFO("App::End() \n");
 	return true;
 }
