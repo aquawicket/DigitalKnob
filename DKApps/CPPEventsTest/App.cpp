@@ -1,12 +1,16 @@
 #include "DK/stdafx.h"
 
 #include "App.h"
+#include "CPPEventsTest/DKEventTarget.h"
 #include "CPPEventsTest/DKConsoleWindow.h"
 
 
 bool App::Init() {
 	DKDEBUGFUNC();
 	DKINFO("App::Init() \n");
+	
+	DKClass::DKCreate("DKEventTarget");									// CPP
+	
 
 	// console.log("/////////// ConsoleWindow /////////////////////")	// JS
 	DKINFO("/////////// ConsoleWindow ///////////////////// \n");		// CPP
