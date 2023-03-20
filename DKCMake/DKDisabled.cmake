@@ -571,6 +571,7 @@ if(WIN)
 	dk_disable(DKOSGViewer)			# requires openscenegraph
 	dk_disable(DKOSGWidget)			# build errors
 	dk_disable(DKOSGWindow)			# requires openscenegraph
+	dk_disable(DKScreenRecorder)    # requires opencv
 	dk_disable(DKSDLOsg)			# requires openscenegraph
 	dk_disable(DKSDLVideo)			# error: 'av_mallocz_array': identifier not found
 	dk_disable(DKSDLWaave)			# requires waave
@@ -593,6 +594,7 @@ if(WIN)
 	dk_disable(libexpat)
 	dk_disable(libtorrent)			# Cannot find source file:  deps/try_signal/try_signal.cpp
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
+	dk_disable(opencv)
 	dk_disable(openblas)
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	dk_disable(openscenegraph)
@@ -605,6 +607,7 @@ if(WIN)
 	dk_disable(python3)
 	dk_disable(rmlui-d3d11)
 	dk_disable(sdl_rtf)
+	dk_disable(tesseract)
 	dk_disable(waave)				# error C2065: 'PIX_FMT_YUV420P': undeclared identifier.  https://sourceforge.net/p/guvcview/tickets/34/
 	dk_disable(x264)				# broken with new msys2,   check DKMAKE.cmake build script
 	dk_disable(x265)
