@@ -246,34 +246,34 @@ int DKConsoleWindow::fullScreen(duk_context* ctx) {
         bool fullscreen = duk_require_boolean(ctx, 0);
         if (fullscreen) {
 			#if WIN
-				GetWindowPlacement(GetDKConsoleWindow(), &wpc);
+				GetWindowPlacement(GetConsoleWindow(), &wpc);
 				if (!HWNDStyle)
-					HWNDStyle = GetWindowLong(GetDKConsoleWindow(), GWL_STYLE);
+					HWNDStyle = GetWindowLong(GetConsoleWindow(), GWL_STYLE);
 				if (!HWNDStyleEx)
-					HWNDStyleEx = GetWindowLong(GetDKConsoleWindow(), GWL_EXSTYLE);
+					HWNDStyleEx = GetWindowLong(GetConsoleWindow(), GWL_EXSTYLE);
 				LONG NewHWNDStyle = HWNDStyle;
 				NewHWNDStyle &= ~WS_BORDER;
 				NewHWNDStyle &= ~WS_DLGFRAME;
 				NewHWNDStyle &= ~WS_THICKFRAME;
 				LONG NewHWNDStyleEx = HWNDStyleEx;
 				NewHWNDStyleEx &= ~WS_EX_WINDOWEDGE;
-				SetWindowLong(GetDKConsoleWindow(), GWL_STYLE, NewHWNDStyle | WS_POPUP);
-				SetWindowLong(GetDKConsoleWindow(), GWL_EXSTYLE, NewHWNDStyleEx | WS_EX_TOPMOST);
-				ShowWindow(GetDKConsoleWindow(), SW_SHOWMAXIMIZED);
+				SetWindowLong(GetConsoleWindow(), GWL_STYLE, NewHWNDStyle | WS_POPUP);
+				SetWindowLong(GetConsoleWindow(), GWL_EXSTYLE, NewHWNDStyleEx | WS_EX_TOPMOST);
+				ShowWindow(GetConsoleWindow(), SW_SHOWMAXIMIZED);
 			#endif
         }
         else {
             //if (!wpc)
-            //    GetWindowPlacement(GetDKConsoleWindow(), wpc);
+            //    GetWindowPlacement(GetConsoleWindow(), wpc);
 			#if WIN
 				if (!HWNDStyle)
-					HWNDStyle = GetWindowLong(GetDKConsoleWindow(), GWL_STYLE);
+					HWNDStyle = GetWindowLong(GetConsoleWindow(), GWL_STYLE);
 				if (!HWNDStyleEx)
-					HWNDStyleEx = GetWindowLong(GetDKConsoleWindow(), GWL_EXSTYLE);
-				SetWindowLong(GetDKConsoleWindow(), GWL_STYLE, HWNDStyle);
-				SetWindowLong(GetDKConsoleWindow(), GWL_EXSTYLE, HWNDStyleEx);
-				ShowWindow(GetDKConsoleWindow(), SW_SHOWNORMAL);
-				SetWindowPlacement(GetDKConsoleWindow(), &wpc);
+					HWNDStyleEx = GetWindowLong(GetConsoleWindow(), GWL_EXSTYLE);
+				SetWindowLong(GetConsoleWindow(), GWL_STYLE, HWNDStyle);
+				SetWindowLong(GetConsoleWindow(), GWL_EXSTYLE, HWNDStyleEx);
+				ShowWindow(GetConsoleWindow(), SW_SHOWNORMAL);
+				SetWindowPlacement(GetConsoleWindow(), &wpc);
 			#endif
         }
         return true;
@@ -284,9 +284,9 @@ int DKConsoleWindow::innerHeight(duk_context* ctx) {
     DKDEBUGFUNC(ctx);
 	#if WIN
 		RECT rect;
-		GetClientRect(GetDKConsoleWindow(), &rect);
-		ClientToScreen(GetDKConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
-		ClientToScreen(GetDKConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
+		GetClientRect(GetConsoleWindow(), &rect);
+		ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
+		ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
 		unsigned int iHeight = rect.right - rect.left;
 		duk_push_uint(ctx, iHeight);
 	#endif
@@ -297,9 +297,9 @@ int DKConsoleWindow::innerWidth(duk_context* ctx) {
     DKDEBUGFUNC(ctx);
 	#if WIN
 		RECT rect;
-		GetClientRect(GetDKConsoleWindow(), &rect);
-		ClientToScreen(GetDKConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
-		ClientToScreen(GetDKConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
+		GetClientRect(GetConsoleWindow(), &rect);
+		ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
+		ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
 		unsigned int iWidth = rect.bottom - rect.top;
 		duk_push_uint(ctx, iWidth);
 	#endif
@@ -333,7 +333,7 @@ int DKConsoleWindow::outerHeight(duk_context* ctx) {
     DKDEBUGFUNC(ctx);
 	#if WIN
 		RECT rect;
-		GetWindowRect(GetDKConsoleWindow(), &rect);
+		GetWindowRect(GetConsoleWindow(), &rect);
 		unsigned int oHeight = rect.bottom - rect.top;
 		duk_push_uint(ctx, oHeight);
 	#endif
@@ -344,7 +344,7 @@ int DKConsoleWindow::outerWidth(duk_context* ctx) {
     DKDEBUGFUNC(ctx);
 	#if WIN
 		RECT rect;
-		GetWindowRect(GetDKConsoleWindow(), &rect);
+		GetWindowRect(GetConsoleWindow(), &rect);
 		unsigned int oWidth = rect.right - rect.left;
 		duk_push_uint(ctx, oWidth);
 	#endif
@@ -361,9 +361,9 @@ int DKConsoleWindow::ScreenX(duk_context* ctx) {
     DKDEBUGFUNC(ctx);
 	#if WIN
 		RECT rect;
-		GetClientRect(GetDKConsoleWindow(), &rect);
-		ClientToScreen(GetDKConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
-		ClientToScreen(GetDKConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
+		GetClientRect(GetConsoleWindow(), &rect);
+		ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
+		ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
 		duk_push_int(ctx, rect.left);
 	#endif
 	return true;
@@ -373,9 +373,9 @@ int DKConsoleWindow::screenLeft(duk_context* ctx) {
     DKDEBUGFUNC(ctx);
 	#if WIN
 		RECT rect;
-		GetClientRect(GetDKConsoleWindow(), &rect);
-		ClientToScreen(GetDKConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
-		ClientToScreen(GetDKConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
+		GetClientRect(GetConsoleWindow(), &rect);
+		ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
+		ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
 		duk_push_int(ctx, rect.left);
 	#endif
 	return true;
@@ -385,9 +385,9 @@ int DKConsoleWindow::ScreenY(duk_context* ctx) {
     DKDEBUGFUNC(ctx);
 	#if WIN
 		RECT rect;
-		GetClientRect(GetDKConsoleWindow(), &rect);
-		ClientToScreen(GetDKConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
-		ClientToScreen(GetDKConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
+		GetClientRect(GetConsoleWindow(), &rect);
+		ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
+		ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
 		duk_push_int(ctx, rect.top);
 	#endif
 	return true;
@@ -397,9 +397,9 @@ int DKConsoleWindow::screenTop(duk_context* ctx) {
     DKDEBUGFUNC(ctx);
 	#if WIN
 		RECT rect;
-		GetClientRect(GetDKConsoleWindow(), &rect);
-		ClientToScreen(GetDKConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
-		ClientToScreen(GetDKConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
+		GetClientRect(GetConsoleWindow(), &rect);
+		ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
+		ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
 		duk_push_int(ctx, rect.top);
 	#endif
     return true;
@@ -409,21 +409,21 @@ int DKConsoleWindow::screenTop(duk_context* ctx) {
 int DKConsoleWindow::blur(duk_context* ctx) {
     DKDEBUGFUNC(ctx);
 	#if WIN
-		ShowWindow(GetDKConsoleWindow(), SW_SHOWMINNOACTIVE);
+		ShowWindow(GetConsoleWindow(), SW_SHOWMINNOACTIVE);
 	#endif
 	return true;
 }
 int DKConsoleWindow::close(duk_context* ctx) {
     DKDEBUGFUNC(ctx);
 	#if WIN
-		ShowWindow(GetDKConsoleWindow(), SW_HIDE);
+		ShowWindow(GetConsoleWindow(), SW_HIDE);
 	#endif
 	return true;
 }
 int DKConsoleWindow::focus(duk_context* ctx) {
     DKDEBUGFUNC(ctx);
 	#if WIN
-		ShowWindow(GetDKConsoleWindow(), SW_SHOW);
+		ShowWindow(GetConsoleWindow(), SW_SHOW);
 	#endif
 	return true;
 }
@@ -433,12 +433,12 @@ int DKConsoleWindow::moveBy(duk_context* ctx) {
 		int deltaX = duk_require_int(ctx, 0);
 		int deltaY = duk_require_int(ctx, 1);
 		RECT rect;
-		GetWindowRect(GetDKConsoleWindow(), &rect);
+		GetWindowRect(GetConsoleWindow(), &rect);
 		int X = rect.left + deltaX;
 		int Y = rect.top + deltaY;
 		int nWidth = rect.right - rect.left;
 		int nHeight = rect.bottom - rect.top;
-		if (!MoveWindow(GetDKConsoleWindow(), X, Y, nWidth, nHeight, TRUE))
+		if (!MoveWindow(GetConsoleWindow(), X, Y, nWidth, nHeight, TRUE))
 			return DKERROR("MoveWindow() failed");
 	#endif
 	return true;
@@ -449,12 +449,12 @@ int DKConsoleWindow::moveTo(duk_context* ctx) {
 		int x = duk_require_int(ctx, 0);
 		int y = duk_require_int(ctx, 1);
 		RECT rect;
-		GetWindowRect(GetDKConsoleWindow(), &rect);
+		GetWindowRect(GetConsoleWindow(), &rect);
 		int X = x;
 		int Y = y;
 		int nWidth = rect.right - rect.left;
 		int nHeight = rect.bottom - rect.top;
-		if (!MoveWindow(GetDKConsoleWindow(), X, Y, nWidth, nHeight, TRUE))
+		if (!MoveWindow(GetConsoleWindow(), X, Y, nWidth, nHeight, TRUE))
 			return DKERROR("MoveWindow() failed");
 	#endif
 	return true;
@@ -465,12 +465,12 @@ int DKConsoleWindow::resizeBy(duk_context* ctx) {
 		int xDelta = duk_require_int(ctx, 0);
 		int yDelta = duk_require_int(ctx, 1);
 		RECT rect;
-		GetWindowRect(GetDKConsoleWindow(), &rect);
+		GetWindowRect(GetConsoleWindow(), &rect);
 		int X = rect.left;
 		int Y = rect.top;
 		int nWidth = rect.right - rect.left + xDelta;
 		int nHeight = rect.bottom - rect.top + yDelta;
-		if (!MoveWindow(GetDKConsoleWindow(), X, Y, nWidth, nHeight, TRUE))
+		if (!MoveWindow(GetConsoleWindow(), X, Y, nWidth, nHeight, TRUE))
 			return DKERROR("MoveWindow() failed");
 	#endif
 	return true;
@@ -481,12 +481,12 @@ int DKConsoleWindow::resizeTo(duk_context* ctx) {
 		int width = duk_require_int(ctx, 0);
 		int height = duk_require_int(ctx, 1);
 		RECT rect;
-		GetWindowRect(GetDKConsoleWindow(), &rect);
+		GetWindowRect(GetConsoleWindow(), &rect);
 		int X = rect.left;
 		int Y = rect.top;
 		int nWidth = width;
 		int nHeight = height;
-		if (!MoveWindow(GetDKConsoleWindow(), X, Y, nWidth, nHeight, TRUE))
+		if (!MoveWindow(GetConsoleWindow(), X, Y, nWidth, nHeight, TRUE))
 			return DKERROR("MoveWindow() failed");
 	#endif
     return true;
@@ -508,7 +508,7 @@ void DKConsoleWindow::FocusEventProc(FOCUS_EVENT_RECORD fer) {
     //DKString rval;
     //DKString code;
 
-    relatedTarget = address;
+    //relatedTarget = address;
 
     if (!fer.bSetFocus) {
         //1. blur: sent after element A loses focus.
@@ -786,9 +786,9 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
             //// Get window client rect screen position ////
             // https://stackoverflow.com/a/15734569/688352
             RECT rect;
-            GetClientRect(GetDKConsoleWindow(), &rect); // get client coords
-            ClientToScreen(GetDKConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
-            ClientToScreen(GetDKConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
+            GetClientRect(GetConsoleWindow(), &rect); // get client coords
+            ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.left)); // convert top-left
+            ClientToScreen(GetConsoleWindow(), reinterpret_cast<POINT*>(&rect.right)); // convert bottom-right
 
             //// Mouse Position ////
             int mousex, mousey;

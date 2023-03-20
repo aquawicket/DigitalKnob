@@ -43,6 +43,7 @@ public:
 	bool End();
 	void Loop();
 	
+	/*
 	//// Instance properties ////
 	static int closed(duk_context* ctx);
 	static int Columns(duk_context* ctx);
@@ -66,7 +67,8 @@ public:
 	static int moveTo(duk_context* ctx);
 	static int resizeBy(duk_context* ctx);
 	static int resizeTo(duk_context* ctx);
-	
+	*/
+
 	// KeyboardEvent
 	bool altKey;
 	DKString code;
