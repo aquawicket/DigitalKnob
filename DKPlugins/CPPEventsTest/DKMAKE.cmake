@@ -1,0 +1,2 @@
+dk_generateCmake(CPPEventsTest)
+dk_assets(CPPEventsTest)
