@@ -578,6 +578,7 @@ if(WIN)
 	dk_disable(gzip)
 	dk_disable(jasper)
 	dk_disable(libcaca)				# no CMakeLists.txt
+	dk_disable(libevent)
 	dk_disable(libexpat)
 	dk_disable(libtorrent)			# Cannot find source file:  deps/try_signal/try_signal.cpp
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
