@@ -582,11 +582,14 @@ if(WIN)
 	dk_disable(libexpat)
 	dk_disable(libtorrent)			# Cannot find source file:  deps/try_signal/try_signal.cpp
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
+	dk_disable(openblas)
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
+	dk_disable(openscenegraph)
 	dk_disable(osgaudio)			# openalpp\AudioBase.cpp(106,54): error C2440: '=': cannot convert from 'ALCcontext *' to 'openalpp::ALCcontext_struct *'
 	dk_disable(osgbullet)			# requires osgworks
 	dk_disable(osgrmlui)
 	dk_disable(osgworks)			# osgwTools\GeometryModifier.cpp(64,13): error C2039: 'mergeGeode': is not a member of 'osgUtil::Optimizer::MergeGeometryVisitor'
+	dk_disable(php-src)
 	dk_disable(rmlui-d3d11)
 	dk_disable(sdl_rtf)
 	dk_disable(waave)				# error C2065: 'PIX_FMT_YUV420P': undeclared identifier.  https://sourceforge.net/p/guvcview/tickets/34/
