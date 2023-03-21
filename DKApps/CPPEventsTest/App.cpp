@@ -9,6 +9,7 @@ bool App::Init() {
 	DKDEBUGFUNC();
 	DKINFO("App::Init() \n");
 	
+	DKClass::DKCreate("DKEvent");										// CPP
 	DKClass::DKCreate("DKEventTarget");									// CPP
 	
 
@@ -20,7 +21,7 @@ bool App::Init() {
 	DKObject* myConsoleWindow = DKClass::DKCreate("DKConsoleWindow");	// CPP
 
 	//myConsoleWindow.addEventListener('keydown', onKeyDown)			// JS
-	// TODO																// CPP
+	DKEventTarget::Get()->addEventListener("keydown");					// CPP
 
 	//myConsoleWindow.addEventListener('keyup', onKeyUp)				// JS
 	// TODO																// CPP
