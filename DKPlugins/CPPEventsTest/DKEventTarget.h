@@ -26,7 +26,15 @@ public:
 
 	////// Instance methods //////
 	// [EventTarget.addEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
-	static void addEventListener(const DKString& type, std::function<bool(DKEvent)> listener, void* pointer);
+	static void addEventListener(const DKString& type, std::function<bool(DKEvent)> listener, void* pointer){
+		DKDEBUGFUNC(type, listener, pointer);
+		Event event;
+		event.type = type;
+		event.listener = listener;
+		event.pointer = pointer;
+		events.push_back(event);
+	}
+	
 	// [EventTarget.removeEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener
 	static void removeEventListener(const DKString& type, std::function<bool(DKEvent)> listener, void* pointer);
 	// [EventTarget.dispatchEvent()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent

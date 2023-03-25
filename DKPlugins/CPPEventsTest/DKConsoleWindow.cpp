@@ -587,7 +587,6 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
     if (ker.bKeyDown) {
         //code = "dispatchKeyboardEvent('keydown','','" + address + "')";	// JS
 		//DKDuktape::RunDuktape(code, rval);								// JS
-		//DKEvent event("keydown", "", this);								// CPP
 		DKKeyboardEvent event("keydown", "", this);							// CPP
 		DKEventTarget::dispatchEvent(event);								// CPP
 
@@ -596,13 +595,13 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
             return;
 		//code = "dispatchKeyboardEvent('keypress','','" + address + "')";	// JS
 		//DKDuktape::RunDuktape(code, rval);								// JS
-		DKEvent eventB("keypress", "", this);								// CPP
+		DKKeyboardEvent eventB("keypress", "", this);						// CPP
 		DKEventTarget::dispatchEvent(eventB);								// CPP
     }
     else {
         //code = "dispatchKeyboardEvent('keyup','','" + address + "')";		// JS
         //DKDuktape::RunDuktape(code, rval);								// JS
-		DKEvent event("keyup", "", this);									// CPP
+		DKKeyboardEvent event("keyup", "", this);							// CPP
 		DKEventTarget::dispatchEvent(event);								// CPP
     }
 }
