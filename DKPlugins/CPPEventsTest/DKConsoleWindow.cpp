@@ -27,6 +27,7 @@
 #include "DK/stdafx.h"
 #include "CPPEventsTest/DKConsoleWindow.h"
 #include "CPPEventsTest/DKEventTarget.h"
+#include "CPPEventsTest/DKKeyboardEvent.h"
 
 #if !WIN && !EMSCRIPTEN && !ANDROID
 	#include <stdlib.h>
@@ -586,7 +587,8 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
     if (ker.bKeyDown) {
         //code = "dispatchKeyboardEvent('keydown','','" + address + "')";	// JS
 		//DKDuktape::RunDuktape(code, rval);								// JS
-		DKEvent event("keydown", "", this);									// CPP
+		//DKEvent event("keydown", "", this);								// CPP
+		DKKeyboardEvent event("keydown", "", this);							// CPP
 		DKEventTarget::dispatchEvent(event);								// CPP
 
 		//Only fire keypress on alphanumeric keys.
