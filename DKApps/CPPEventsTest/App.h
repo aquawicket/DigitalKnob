@@ -13,7 +13,7 @@ public:
 
 	////// KeyboardEvents //////
 	void printKeyboardEventProperties(/*event*/);
-	void onKeyDown(/*event*/);
+	static bool onKeyDown(/*event*/);
 	void onKeyUp(/*event*/);
 };
 REGISTER_OBJECT(App, false);

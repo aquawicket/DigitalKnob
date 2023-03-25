@@ -3,6 +3,13 @@
 #define DKEventTarget_H
 
 #include "DK/DK.h"
+#include "CPPEventsTest/DKEvent.h"
+
+struct Event { // This structure is named "event"
+  DKString type;
+  std::function<bool()> listener;
+  void* pointer;
+};
 
 
 // https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
@@ -13,9 +20,11 @@ public:
 	bool End();
 
 	////// Instance methods //////
-	void addEventListener(const DKString& type/*, listener */ );	// https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
-	void removeEventListener(const DKString& type/*, listener */);	// https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener
-	void dispatchEvent(/* event */);								// https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent
+	static void addEventListener(const DKString& type, std::function<bool()> listener, void* pointer);		// https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
+	static void removeEventListener(const DKString& type, std::function<bool()> listener, void* pointer);	// https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener
+	static void dispatchEvent(DKEvent event);																// https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent
+	
+	static std::vector<Event> events;
 };
 REGISTER_OBJECT(DKEventTarget, false);
 

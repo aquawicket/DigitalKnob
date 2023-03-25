@@ -26,6 +26,7 @@
 //https://github.com/uNetworking/uWebSockets/blob/master/tests/main.cpp
 #include "DK/stdafx.h"
 #include "CPPEventsTest/DKConsoleWindow.h"
+#include "CPPEventsTest/DKEventTarget.h"
 
 #if !WIN && !EMSCRIPTEN && !ANDROID
 	#include <stdlib.h>
@@ -583,8 +584,10 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
         shiftKey = false;
 
     if (ker.bKeyDown) {
-        //code = "dispatchKeyboardEvent('keydown','','" + address + "')";
-        //DKDuktape::RunDuktape(code, rval);
+        //code = "dispatchKeyboardEvent('keydown','','" + address + "')";	// JS
+		//DKDuktape::RunDuktape(code, rval);								// JS
+		DKEvent event("keydown", "", this);
+		DKEventTarget::dispatchEvent(event);								// CPP
 
 		//Only fire keypress on alphanumeric keys.
         if (ker.uChar.AsciiChar < 32)

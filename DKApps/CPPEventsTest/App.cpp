@@ -9,22 +9,22 @@ bool App::Init() {
 	DKDEBUGFUNC();
 	DKINFO("App::Init() \n");
 	
-	DKClass::DKCreate("DKEvent");										// CPP
-	DKClass::DKCreate("DKEventTarget");									// CPP
+	DKClass::DKCreate("DKEvent");													// CPP
+	DKClass::DKCreate("DKEventTarget");												// CPP
 	
 
-	// console.log("/////////// ConsoleWindow /////////////////////")	// JS
-	DKINFO("/////////// ConsoleWindow ///////////////////// \n");		// CPP
+	// console.log("/////////// ConsoleWindow /////////////////////")				// JS
+	DKINFO("/////////// ConsoleWindow ///////////////////// \n");					// CPP
 
-	// CPP_DK_Create("DKDuktape/ConsoleWindow.js");						// JS
-	// const myConsoleWindow = new ConsoleWindow('myConsoleWindow')		// JS
-	DKObject* myConsoleWindow = DKClass::DKCreate("DKConsoleWindow");	// CPP
+	// CPP_DK_Create("DKDuktape/ConsoleWindow.js");									// JS
+	// const myConsoleWindow = new ConsoleWindow('myConsoleWindow')					// JS
+	DKObject* myConsoleWindow = DKClass::DKCreate("DKConsoleWindow");				// CPP
 
-	//myConsoleWindow.addEventListener('keydown', onKeyDown)			// JS
-	DKEventTarget::Get()->addEventListener("keydown");					// CPP
+	//myConsoleWindow.addEventListener('keydown', onKeyDown)						// JS
+	DKEventTarget::addEventListener("keydown", &App::onKeyDown, myConsoleWindow);	// CPP
 
-	//myConsoleWindow.addEventListener('keyup', onKeyUp)				// JS
-	// TODO																// CPP
+	//myConsoleWindow.addEventListener('keyup', onKeyUp)							// JS
+	// TODO																			// CPP
 
 	// JS
 	/*
@@ -80,9 +80,10 @@ function onKeyDown(event){
 }
 */
 // CPP
-void App::onKeyDown(/*event*/) {
+bool App::onKeyDown(/*event*/) {
 	DKINFO("\n onKeyDown()");
-	printKeyboardEventProperties(/*event*/);
+	//printKeyboardEventProperties(/*event*/);
+	return true;
 }
 
 // JS

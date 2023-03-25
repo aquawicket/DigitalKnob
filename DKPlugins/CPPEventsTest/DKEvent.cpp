@@ -1,15 +1,8 @@
 #include "DK/stdafx.h"
 #include "CPPEventsTest/DKEvent.h"
 
-
-bool DKEvent::Init(){
-	DKDEBUGFUNC();
-	DKINFO("DKEvent::Init() \n");
-    return true;
-}
-
-bool DKEvent::End(){
-	DKDEBUGFUNC();
-	DKINFO("DKEvent::End() \n");
-	return true;
+DKEvent::DKEvent(DKString _type, DKString _options, void* _pointer){
+	type = _type;
+	options = _options;
+	pointer = _pointer;
 }

@@ -6,13 +6,70 @@
 
 
 // https://developer.mozilla.org/en-US/docs/Web/API/Event
-class DKEvent : public DKObjectT<DKEvent>
+class DKEvent
 {
 public:
-	bool Init();
-	bool End();
+	////// Constructor //////
+	// [Event()] https://developer.mozilla.org/en-US/docs/Web/API/Event/Event
+	DKEvent(DKString _type, DKString _options, void* _pointer);
+	
+	
+	////// Instance properties //////
+	// [Event.bubbles](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/bubbles
+	// TODO
+	// [Event.cancelable](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelable
+	// TODO
+	// [Event.composed](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/composed
+	// TODO
+	// [Event.currentTarget](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/currentTarget
+	// TODO
+	// [Event.defaultPrevented](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/defaultPrevented
+	// TODO
+	// [Event.eventPhase](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/eventPhase
+	// TODO
+	// [Event.isTrusted](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
+	// TODO
+	// [Event.target](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/target
+	// TODO
+	// [Event.timeStamp](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/timeStamp
+	// TODO
+	// [Event.type](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/type
+	DKString type;
+	
+	
+	////// Legacy and non-standard properties //////
+	// [Event.cancelBubble](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelBubble
+	// TODO
+	// [Event.explicitOriginalTarget](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/explicitOriginalTarget
+	// TODO
+	// [Event.originalTarget](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/explicitTarget
+	// TODO
+	// [Event.returnValue](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/returnValue
+	// TODO
+	// [Event.scoped](Read only)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/scoped
+	// TODO
+	
+	
+	////// Instance methods //////
+	// [Event.composedPath()] https://developer.mozilla.org/en-US/docs/Web/API/Event/composedPath
+	// TODO
+	// [Event.preventDefault()] https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault
+	// TODO
+	// [Event.stopImmediatePropagation()] https://developer.mozilla.org/en-US/docs/Web/API/Event/stopImmediatePropagation
+	// TODO
+	// [Event.stopPropagation()] https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation
+	// TODO
+
+
+	////// Deprecated methods //////
+	// [Event.initEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/initEvent
+	// TODO
+	
+	
+	////// DK properties //////
+	DKString options;
+	void* pointer;
 };
-REGISTER_OBJECT(DKEvent, false);
 
 
 #endif //DKEvent_H
