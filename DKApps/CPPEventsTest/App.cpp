@@ -24,7 +24,7 @@ bool App::Init() {
 	DKEventTarget::addEventListener("keydown", &App::onKeyDown, myConsoleWindow);	// CPP
 
 	//myConsoleWindow.addEventListener('keyup', onKeyUp)							// JS
-	DKEventTarget::addEventListener("keydown", &App::onKeyUp, myConsoleWindow);		// CPP
+	DKEventTarget::addEventListener("keyup", &App::onKeyUp, myConsoleWindow);		// CPP
 
 	// JS
 	/*
@@ -49,6 +49,37 @@ bool App::End(){
 	return true;
 }
 
+
+// JS 
+/*
+function printEventProperties(event){
+	console.log("event.bubbles="+event.bubbles)
+	console.log("event.cancelable="+event.cancelable)			
+	console.log("event.composed="+event.composed)
+	console.log("event.currentTarget="+event.currentTarget)
+	console.log("event.defaultPrevented="+event.defaultPrevented)
+	console.log("event.eventPhase="+event.eventPhase)
+	console.log("event.isTrusted="+event.isTrusted)
+	console.log("event.target="+event.target)
+	console.log("event.timeStamp="+event.timeStamp)
+	console.log("event.type="+event.type)
+}
+*/
+// CPP
+void App::printEventProperties(DKEvent event) {
+	DKINFO("event.bubbles=");//" + event.bubbles);
+	DKINFO("event.cancelable=");// +event.cancelable);
+	DKINFO("event.composed=");// +event.composed);
+	DKINFO("event.currentTarget=");// +event.currentTarget);
+	DKINFO("event.defaultPrevented=");// +event.defaultPrevented);
+	DKINFO("event.eventPhase=");// +event.eventPhase);
+	DKINFO("event.isTrusted=");// +event.isTrusted);
+	DKINFO("event.target=");// +event.target);
+	DKINFO("event.timeStamp=");// +event.timeStamp);
+	DKINFO("event.type=");// +event.type);
+}
+
+
 // JS 
 /*
 function printKeyboardEventProperties(event){
@@ -65,7 +96,7 @@ function printKeyboardEventProperties(event){
 }
 */
 // CPP
-void App::printKeyboardEventProperties(/*event*/) {
+void App::printKeyboardEventProperties(DKEvent event) {
 	DKINFO("event.altKey=");//" + event.altKey);
 	DKINFO("event.code=");// +event.code);
 	DKINFO("event.ctrlKey=");// +event.ctrlKey);
@@ -78,30 +109,36 @@ void App::printKeyboardEventProperties(/*event*/) {
 	DKINFO("event.shiftKey=");// +event.shiftKey);
 }
 
+
 // JS
 /*
 function onKeyDown(event){
 	console.log("\n onKeyDown()")
+	printEventProperties(event)
 	printKeyboardEventProperties(event)
 }
 */
 // CPP
-bool App::onKeyDown(/*event*/) {
+bool App::onKeyDown(DKEvent event) {
 	DKINFO("\n onKeyDown()");
-	//printKeyboardEventProperties(/*event*/);
+	printEventProperties(event);
+	//printKeyboardEventProperties(event);
 	return true;
 }
+
 
 // JS
 /*
 function onKeyUp(event){
 	console.log("\n onKeyUp()")
+	printEventProperties(event)
 	printKeyboardEventProperties(event)
 }
 */
 // CPP
-bool App::onKeyUp(/*event*/) {
+bool App::onKeyUp(DKEvent event) {
 	DKINFO("\n onKeyUp()");
-	//printKeyboardEventProperties(/*event*/);
+	printEventProperties(event);
+	//printKeyboardEventProperties(event);
 	return true;
 }

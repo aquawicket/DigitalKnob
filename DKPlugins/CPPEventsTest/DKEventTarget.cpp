@@ -17,7 +17,7 @@ bool DKEventTarget::End(){
 	return true;
 }
 
-void DKEventTarget::addEventListener(const DKString& type, std::function<bool()> listener, void* pointer) {
+void DKEventTarget::addEventListener(const DKString& type, std::function<bool(DKEvent)> listener, void* pointer) {
 	DKDEBUGFUNC(type, listener, pointer);
 	Event event;
 	event.type = type;
@@ -26,7 +26,7 @@ void DKEventTarget::addEventListener(const DKString& type, std::function<bool()>
 	events.push_back(event);
 }
 
-void DKEventTarget::removeEventListener(const DKString& type, std::function<bool()> listener, void* pointer) {
+void DKEventTarget::removeEventListener(const DKString& type, std::function<bool(DKEvent)> listener, void* pointer) {
 	DKDEBUGFUNC(type, listener, pointer);
 }
 
@@ -44,7 +44,7 @@ void DKEventTarget::dispatchEvent(DKEvent event) {
 		*/
 		if(event.type == events[n].type && event.pointer == events[n].pointer){
 			//DKINFO("type and pointer match \n");
-			events[n].listener();
+			events[n].listener(event);
 		}
 	}
 }

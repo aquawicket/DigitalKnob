@@ -12,9 +12,10 @@ public:
 	bool End();
 
 	////// KeyboardEvents //////
-	static void printKeyboardEventProperties(/*event*/);
-	static bool onKeyDown(/*event*/);
-	static void onKeyUp(/*event*/);
+	static void printEventProperties(DKEvent event);
+	static void printKeyboardEventProperties(DKEvent event);
+	static bool onKeyDown(DKEvent event);
+	static bool onKeyUp(DKEvent event);
 };
 REGISTER_OBJECT(App, false);
 
