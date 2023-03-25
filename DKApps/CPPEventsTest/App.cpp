@@ -67,16 +67,16 @@ function printEventProperties(event){
 */
 // CPP
 void App::printEventProperties(DKEvent event) {
-	DKINFO("event.bubbles=");//" + event.bubbles);
-	DKINFO("event.cancelable=");// +event.cancelable);
-	DKINFO("event.composed=");// +event.composed);
-	DKINFO("event.currentTarget=");// +event.currentTarget);
-	DKINFO("event.defaultPrevented=");// +event.defaultPrevented);
-	DKINFO("event.eventPhase=");// +event.eventPhase);
-	DKINFO("event.isTrusted=");// +event.isTrusted);
-	DKINFO("event.target=");// +event.target);
-	DKINFO("event.timeStamp=");// +event.timeStamp);
-	DKINFO("event.type=");// +event.type);
+	DKINFO("event.bubbles="+toString(event.bubbles)+"\n");
+	DKINFO("event.cancelable="+toString(event.cancelable)+"\n");
+	DKINFO("event.composed="+toString(event.composed)+"\n");
+	//DKINFO("event.currentTarget="+toString(event.currentTarget)+"\n");
+	DKINFO("event.defaultPrevented="+toString(event.defaultPrevented)+"\n");
+	DKINFO("event.eventPhase="+toString(event.eventPhase)+"\n");
+	DKINFO("event.isTrusted="+toString(event.isTrusted)+"\n");
+	//DKINFO("event.target="+toString(event.target)+"\n");
+	DKINFO("event.timeStamp="+toString(event.timeStamp)+"\n");
+	DKINFO("event.type="+event.type+"\n");
 }
 
 
@@ -97,16 +97,18 @@ function printKeyboardEventProperties(event){
 */
 // CPP
 void App::printKeyboardEventProperties(DKEvent event) {
-	DKINFO("event.altKey=");//" + event.altKey);
-	DKINFO("event.code=");// +event.code);
-	DKINFO("event.ctrlKey=");// +event.ctrlKey);
-	DKINFO("event.isComposing=");// +event.isComposing);
-	DKINFO("event.key=");// +event.key);
-	DKINFO("event.locale=");// +event.locale);
-	DKINFO("event.location=");// +event.location);
-	DKINFO("event.metaKey=");// +event.metaKey);
-	DKINFO("event.repeat=");// +event.repeat);
-	DKINFO("event.shiftKey=");// +event.shiftKey);
+	/*
+	DKINFO("event.altKey="+event.altKey+"\n");
+	DKINFO("event.code="+event.code+"\n");
+	DKINFO("event.ctrlKey="+event.ctrlKey+"\n");
+	DKINFO("event.isComposing="+event.isComposing+"\n");
+	DKINFO("event.key="+event.key+"\n");
+	DKINFO("event.locale="+event.locale+"\n");
+	DKINFO("event.location="+event.location+"\n");
+	DKINFO("event.metaKey="+event.metaKey+"\n");
+	DKINFO("event.repeat="+event.repeat+"\n");
+	DKINFO("event.shiftKey="+event.shiftKey+"\n");
+	*/
 }
 
 
@@ -120,7 +122,7 @@ function onKeyDown(event){
 */
 // CPP
 bool App::onKeyDown(DKEvent event) {
-	DKINFO("\n onKeyDown()");
+	DKINFO("onKeyDown() \n");
 	printEventProperties(event);
 	//printKeyboardEventProperties(event);
 	return true;
@@ -137,7 +139,7 @@ function onKeyUp(event){
 */
 // CPP
 bool App::onKeyUp(DKEvent event) {
-	DKINFO("\n onKeyUp()");
+	DKINFO("onKeyUp() \n");
 	printEventProperties(event);
 	//printKeyboardEventProperties(event);
 	return true;

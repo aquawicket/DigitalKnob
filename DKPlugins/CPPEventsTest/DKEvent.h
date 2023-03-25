@@ -16,23 +16,23 @@ public:
 	
 	////// Instance properties //////
 	// [Event.bubbles](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/bubbles
-	// TODO
+	bool bubbles;
 	// [Event.cancelable](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelable
-	// TODO
+	bool cancelable;
 	// [Event.composed](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/composed
-	// TODO
+	bool composed;
 	// [Event.currentTarget](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/currentTarget
 	// TODO
 	// [Event.defaultPrevented](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/defaultPrevented
-	// TODO
+	bool defaultPrevented;
 	// [Event.eventPhase](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/eventPhase
-	// TODO
+	int eventPhase;
 	// [Event.isTrusted](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
-	// TODO
+	bool isTrusted;
 	// [Event.target](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/target
 	// TODO
 	// [Event.timeStamp](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/timeStamp
-	// TODO
+	unsigned long timeStamp;
 	// [Event.type](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/type
 	DKString type;
 	
