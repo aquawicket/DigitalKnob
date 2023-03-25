@@ -12,9 +12,9 @@ public:
 	bool End();
 
 	////// KeyboardEvents //////
-	void printKeyboardEventProperties(/*event*/);
+	static void printKeyboardEventProperties(/*event*/);
 	static bool onKeyDown(/*event*/);
-	void onKeyUp(/*event*/);
+	static void onKeyUp(/*event*/);
 };
 REGISTER_OBJECT(App, false);
 

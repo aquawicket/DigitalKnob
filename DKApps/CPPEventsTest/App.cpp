@@ -24,7 +24,7 @@ bool App::Init() {
 	DKEventTarget::addEventListener("keydown", &App::onKeyDown, myConsoleWindow);	// CPP
 
 	//myConsoleWindow.addEventListener('keyup', onKeyUp)							// JS
-	// TODO																			// CPP
+	DKEventTarget::addEventListener("keydown", &App::onKeyUp, myConsoleWindow);		// CPP
 
 	// JS
 	/*
@@ -40,6 +40,12 @@ bool App::Init() {
 	// CPP
 	/* TODO */
 
+	return true;
+}
+
+bool App::End(){
+	DKDEBUGFUNC();
+	DKINFO("App::End() \n");
 	return true;
 }
 
@@ -94,13 +100,8 @@ function onKeyUp(event){
 }
 */
 // CPP
-void App::onKeyUp(/*event*/) {
+bool App::onKeyUp(/*event*/) {
 	DKINFO("\n onKeyUp()");
-	printKeyboardEventProperties(/*event*/);
-}
-
-bool App::End(){
-	DKDEBUGFUNC();
-	DKINFO("App::End() \n");
+	//printKeyboardEventProperties(/*event*/);
 	return true;
 }

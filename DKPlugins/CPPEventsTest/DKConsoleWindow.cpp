@@ -586,18 +586,22 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
     if (ker.bKeyDown) {
         //code = "dispatchKeyboardEvent('keydown','','" + address + "')";	// JS
 		//DKDuktape::RunDuktape(code, rval);								// JS
-		DKEvent event("keydown", "", this);
+		DKEvent event("keydown", "", this);									// CPP
 		DKEventTarget::dispatchEvent(event);								// CPP
 
 		//Only fire keypress on alphanumeric keys.
         if (ker.uChar.AsciiChar < 32)
             return;
-		//code = "dispatchKeyboardEvent('keypress','','" + address + "')";
-		//DKDuktape::RunDuktape(code, rval);
+		//code = "dispatchKeyboardEvent('keypress','','" + address + "')";	// JS
+		//DKDuktape::RunDuktape(code, rval);								// JS
+		DKEvent event("keypress", "", this);								// CPP
+		DKEventTarget::dispatchEvent(event);								// CPP
     }
     else {
-        //code = "dispatchKeyboardEvent('keyup','','" + address + "')";
-        //DKDuktape::RunDuktape(code, rval);
+        //code = "dispatchKeyboardEvent('keyup','','" + address + "')";		// JS
+        //DKDuktape::RunDuktape(code, rval);								// JS
+		DKEvent event("keyup", "", this);									// CPP
+		DKEventTarget::dispatchEvent(event);								// CPP
     }
 }
 
