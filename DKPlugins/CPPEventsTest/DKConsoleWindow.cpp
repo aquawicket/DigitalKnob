@@ -27,7 +27,7 @@
 #include "DK/stdafx.h"
 #include "CPPEventsTest/DKConsoleWindow.h"
 #include "CPPEventsTest/DKEventTarget.h"
-
+#include "CPPEventsTest/DKKeyboardEvent.h"
 
 #if !WIN && !EMSCRIPTEN && !ANDROID
 	#include <stdlib.h>
@@ -588,6 +588,16 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
         //code = "dispatchKeyboardEvent('keydown','','" + address + "')";	// JS
 		//DKDuktape::RunDuktape(code, rval);								// JS
 		DKKeyboardEvent event("keydown", "", this);							// CPP
+		event.altKey = altKey;
+		event.code = code;
+		event.ctrlKey = ctrlKey;
+		event.isComposing = isComposing;
+		event.key = key;
+		event.locale = locale;
+		event.location = location;
+		event.metaKey = metaKey;
+		event.repeat = repeat;
+		event.shiftKey = shiftKey;
 		DKEventTarget::dispatchEvent(event);								// CPP
 
 		//Only fire keypress on alphanumeric keys.
@@ -596,12 +606,32 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
 		//code = "dispatchKeyboardEvent('keypress','','" + address + "')";	// JS
 		//DKDuktape::RunDuktape(code, rval);								// JS
 		DKKeyboardEvent eventB("keypress", "", this);						// CPP
+		eventB.altKey = altKey;
+		eventB.code = code;
+		eventB.ctrlKey = ctrlKey;
+		eventB.isComposing = isComposing;
+		eventB.key = key;
+		eventB.locale = locale;
+		eventB.location = location;
+		eventB.metaKey = metaKey;
+		eventB.repeat = repeat;
+		eventB.shiftKey = shiftKey;
 		DKEventTarget::dispatchEvent(eventB);								// CPP
     }
     else {
         //code = "dispatchKeyboardEvent('keyup','','" + address + "')";		// JS
         //DKDuktape::RunDuktape(code, rval);								// JS
 		DKKeyboardEvent event("keyup", "", this);							// CPP
+		event.altKey = altKey;
+		event.code = code;
+		event.ctrlKey = ctrlKey;
+		event.isComposing = isComposing;
+		event.key = key;
+		event.locale = locale;
+		event.location = location;
+		event.metaKey = metaKey;
+		event.repeat = repeat;
+		event.shiftKey = shiftKey;
 		DKEventTarget::dispatchEvent(event);								// CPP
     }
 }
