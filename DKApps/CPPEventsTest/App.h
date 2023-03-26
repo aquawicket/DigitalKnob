@@ -13,9 +13,9 @@ public:
 
 	////// KeyboardEvents //////
 	static void printEventProperties(DKEvent event);
-	static void printKeyboardEventProperties(DKEvent event);
-	static bool onKeyDown(DKEvent event);
-	static bool onKeyUp(DKEvent event);
+	static void printKeyboardEventProperties(DKKeyboardEvent event);
+	static bool onKeyDown(DKKeyboardEvent event);
+	static bool onKeyUp(DKKeyboardEvent event);
 };
 REGISTER_OBJECT(App, false);
 

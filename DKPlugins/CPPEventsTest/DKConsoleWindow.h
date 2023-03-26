@@ -29,6 +29,7 @@
 #define DKConsoleWindow_H
 
 #include "DK/DK.h"
+#include "CPPEventsTest/DKKeyboardEvent.h"
 
 #if WIN
 	#include <windows.h>

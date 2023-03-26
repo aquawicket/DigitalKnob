@@ -4,15 +4,7 @@
 
 #include "DK/DK.h"
 #include "CPPEventsTest/DKEvent.h"
-#include "CPPEventsTest/DKKeyboardEvent.h"
 
-/*
-struct Event {
-	DKString type;
-	std::function<bool(DKEvent)> listener;
-	void* pointer;
-};
-*/
 
 template <typename EventType>
 struct EventObject {
@@ -20,7 +12,6 @@ struct EventObject {
     std::function<void(EventType)> listener;
     void* pointer;
 };
-
 
 // https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
 class DKEventTarget : public DKObjectT<DKEventTarget>
@@ -36,36 +27,39 @@ public:
 	////// Instance methods //////
 	// [EventTarget.addEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
 	template <typename EventType>
-	static void addEventListener(std::string type, std::function<void(EventType)> listener, void* pointer){
+	static void addEventListener(const DKString& type, std::function<void(EventType)> listener, void* pointer){
 		DKDEBUGFUNC(type, listener, pointer);
-		//EventObject event;
-		//event.type = type;
-		//event.listener = listener;
-		//event.pointer = pointer;
-		//events.push_back(event);
+		EventObject<EventType> eventObj;
+        eventObj.type = type;
+        eventObj.listener = listener;
+        eventObj.pointer = pointer;
+        events<EventType>.push_back(eventObj);
 	}
 	// [EventTarget.removeEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener
-	/*
-	static void removeEventListener(const DKString& type, std::function<bool(DKEvent)> listener, void* pointer){
+	template <typename EventType>
+	static void removeEventListener(const DKString& type, std::function<void(EventType)> listener, void* pointer){
 		DKDEBUGFUNC(type, listener, pointer);
 		// TODO
 	}
-	*/
 	// [EventTarget.dispatchEvent()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent
 	template <typename EventType>
     static void dispatchEvent(EventType event){
+		DKDEBUGFUNC(event);
         for (auto& eventObj : events<EventType>) {
-            eventObj.listener(event);
+			if(eventObj.type == event.type && eventObj.pointer == event.pointer)
+				eventObj.listener(event);
         }
     }
 	
 	
-	////// DK properties //////
-	//static std::vector<Event> events;
-	
+	////// DK properties //////	
 	template <typename EventType>
 	static std::vector<EventObject<EventType>> events;
 };
+
+template <typename EventType>
+std::vector<EventObject<EventType>> DKEventTarget::events;
+
 REGISTER_OBJECT(DKEventTarget, false);
 
 

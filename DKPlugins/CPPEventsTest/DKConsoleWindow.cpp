@@ -27,7 +27,7 @@
 #include "DK/stdafx.h"
 #include "CPPEventsTest/DKConsoleWindow.h"
 #include "CPPEventsTest/DKEventTarget.h"
-#include "CPPEventsTest/DKKeyboardEvent.h"
+
 
 #if !WIN && !EMSCRIPTEN && !ANDROID
 	#include <stdlib.h>
