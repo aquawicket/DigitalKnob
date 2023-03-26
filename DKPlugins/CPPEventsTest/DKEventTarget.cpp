@@ -2,7 +2,8 @@
 #include "CPPEventsTest/DKEventTarget.h"
 
 
-std::vector<Event> DKEventTarget::events;
+template <typename EventType>
+std::vector<EventObject<EventType>> DKEventTarget::events;
 
 
 bool DKEventTarget::Init(){

@@ -6,11 +6,19 @@
 #include "CPPEventsTest/DKEvent.h"
 #include "CPPEventsTest/DKKeyboardEvent.h"
 
-
+/*
 struct Event {
 	DKString type;
 	std::function<bool(DKEvent)> listener;
 	void* pointer;
+};
+*/
+
+template <typename EventType>
+struct EventObject {
+    std::string type;
+    std::function<void(EventType)> listener;
+    void* pointer;
 };
 
 
@@ -27,7 +35,8 @@ public:
 
 	////// Instance methods //////
 	// [EventTarget.addEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
-	static void addEventListener(const DKString& type, std::function<bool(DKEvent)> listener, void* pointer){
+	template <typename EventType>
+	static void addEventListener(std::string type, std::function<void(EventType)> listener, void* pointer){
 		DKDEBUGFUNC(type, listener, pointer);
 		Event event;
 		event.type = type;
@@ -36,23 +45,26 @@ public:
 		events.push_back(event);
 	}
 	// [EventTarget.removeEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener
+	/*
 	static void removeEventListener(const DKString& type, std::function<bool(DKEvent)> listener, void* pointer){
 		DKDEBUGFUNC(type, listener, pointer);
 		// TODO
 	}
+	*/
 	// [EventTarget.dispatchEvent()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent
-	static void dispatchEvent(DKEvent event){
-		DKDEBUGFUNC(event);
-		for (unsigned int n = 0; n < events.size(); ++n) {
-			if (event.type == events[n].type && event.pointer == events[n].pointer) {
-				events[n].listener(event);
-			}
-		}
-	}
+	template <typename EventType>
+    static void dispatchEvent(EventType event){
+        for (auto& eventObj : events<EventType>) {
+            eventObj.listener(event);
+        }
+    }
 	
 	
 	////// DK properties //////
-	static std::vector<Event> events;
+	//static std::vector<Event> events;
+	
+	template <typename EventType>
+	static std::vector<EventObject<EventType>> events;
 };
 REGISTER_OBJECT(DKEventTarget, false);
 
