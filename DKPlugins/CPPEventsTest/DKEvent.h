@@ -11,7 +11,21 @@ class DKEvent
 public:
 	////// Constructor //////
 	// [Event()] https://developer.mozilla.org/en-US/docs/Web/API/Event/Event
-	DKEvent(DKString _type, DKString _options, void* _pointer);
+	DKEvent(DKString _type, DKString _options, void* _pointer){
+		bubbles = false;
+		cancelable = false;
+		composed = false;
+		currentTarget = _pointer;
+		defaultPrevented = false;
+		eventPhase = 0;
+		isTrusted = false;
+		target = _pointer;
+		timeStamp = 0;
+		type = _type;
+		
+		options = _options;
+		pointer = _pointer;
+	}
 	
 	
 	////// Instance properties //////
@@ -22,7 +36,7 @@ public:
 	// [Event.composed](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/composed
 	bool composed;
 	// [Event.currentTarget](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/currentTarget
-	// TODO
+	void* currentTarget;
 	// [Event.defaultPrevented](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/defaultPrevented
 	bool defaultPrevented;
 	// [Event.eventPhase](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/eventPhase
@@ -30,7 +44,7 @@ public:
 	// [Event.isTrusted](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
 	bool isTrusted;
 	// [Event.target](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/target
-	// TODO
+	void* target;
 	// [Event.timeStamp](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/timeStamp
 	unsigned long timeStamp;
 	// [Event.type](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/type
