@@ -2,8 +2,8 @@
 
 #include "App.h"
 #include "JSEventsTest/DKEventTarget.h"
-#include "CPPEventsTest/DKConsoleWindow.h"
-#include "CPPEventsTest/DKKeyboardEvent.h"
+#include "JSEventsTest/DKConsoleWindow.h"
+#include "JSEventsTest/DKKeyboardEvent.h"
 
 
 bool App::Init() {
