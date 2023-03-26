@@ -38,11 +38,11 @@ public:
 	template <typename EventType>
 	static void addEventListener(std::string type, std::function<void(EventType)> listener, void* pointer){
 		DKDEBUGFUNC(type, listener, pointer);
-		Event event;
-		event.type = type;
-		event.listener = listener;
-		event.pointer = pointer;
-		events.push_back(event);
+		//EventObject event;
+		//event.type = type;
+		//event.listener = listener;
+		//event.pointer = pointer;
+		//events.push_back(event);
 	}
 	// [EventTarget.removeEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener
 	/*

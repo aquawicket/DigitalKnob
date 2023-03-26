@@ -21,10 +21,10 @@ bool App::Init() {
 	DKObject* myConsoleWindow = DKClass::DKCreate("DKConsoleWindow");				// CPP
 
 	//myConsoleWindow.addEventListener('keydown', onKeyDown)						// JS
-	DKEventTarget::addEventListener("keydown", &App::onKeyDown, myConsoleWindow);	// CPP
+	DKEventTarget::addEventListener<DKKeyboardEvent>("keydown", &App::onKeyDown, myConsoleWindow);	// CPP
 
 	//myConsoleWindow.addEventListener('keyup', onKeyUp)							// JS
-	DKEventTarget::addEventListener("keyup", &App::onKeyUp, myConsoleWindow);		// CPP
+	DKEventTarget::addEventListener<DKKeyboardEvent>("keyup", &App::onKeyUp, myConsoleWindow);		// CPP
 
 	// JS
 	/*
