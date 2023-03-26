@@ -1,5 +1,5 @@
 #include "DK/stdafx.h"
-#include "CPPEventsTest/DKEventTarget.h"
+#include "JSEventsTest/DKEventTarget.h"
 
 bool DKEventTarget::Init(){
 	DKDEBUGFUNC();

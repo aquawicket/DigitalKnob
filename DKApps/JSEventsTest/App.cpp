@@ -1,7 +1,7 @@
 #include "DK/stdafx.h"
 
 #include "App.h"
-#include "CPPEventsTest/DKEventTarget.h"
+#include "JSEventsTest/DKEventTarget.h"
 #include "CPPEventsTest/DKConsoleWindow.h"
 #include "CPPEventsTest/DKKeyboardEvent.h"
 

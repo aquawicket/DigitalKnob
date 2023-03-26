@@ -25,9 +25,9 @@
 */
 //https://github.com/uNetworking/uWebSockets/blob/master/tests/main.cpp
 #include "DK/stdafx.h"
-#include "CPPEventsTest/DKConsoleWindow.h"
-#include "CPPEventsTest/DKEventTarget.h"
-#include "CPPEventsTest/DKKeyboardEvent.h"
+#include "JSEventsTest/DKConsoleWindow.h"
+#include "JSEventsTest/DKEventTarget.h"
+#include "JSEventsTest/DKKeyboardEvent.h"
 
 #if !WIN && !EMSCRIPTEN && !ANDROID
 	#include <stdlib.h>

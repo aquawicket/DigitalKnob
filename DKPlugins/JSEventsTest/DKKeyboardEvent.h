@@ -3,7 +3,7 @@
 #define DKKeyboardEvent_H
 
 #include "DK/DK.h"
-#include "CPPEventsTest/DKEvent.h"
+#include "JSEventsTest/DKEvent.h"
 
 
 // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent

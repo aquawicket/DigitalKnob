@@ -3,7 +3,7 @@
 #define DKEventTarget_H
 
 #include "DK/DK.h"
-#include "CPPEventsTest/DKEvent.h"
+#include "JSEventsTest/DKEvent.h"
 
 
 template <typename EventType>
