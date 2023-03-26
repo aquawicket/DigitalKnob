@@ -4,6 +4,7 @@
 
 #include "DK/DK.h"
 #include "CPPEventsTest/DKEvent.h"
+#include "CPPEventsTest/DKKeyboardEvent.h"
 
 
 struct Event {
@@ -34,11 +35,20 @@ public:
 		event.pointer = pointer;
 		events.push_back(event);
 	}
-	
 	// [EventTarget.removeEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener
-	static void removeEventListener(const DKString& type, std::function<bool(DKEvent)> listener, void* pointer);
+	static void removeEventListener(const DKString& type, std::function<bool(DKEvent)> listener, void* pointer){
+		DKDEBUGFUNC(type, listener, pointer);
+		// TODO
+	}
 	// [EventTarget.dispatchEvent()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent
-	static void dispatchEvent(DKEvent event);
+	static void dispatchEvent(DKEvent event){
+		DKDEBUGFUNC(event);
+		for (unsigned int n = 0; n < events.size(); ++n) {
+			if (event.type == events[n].type && event.pointer == events[n].pointer) {
+				events[n].listener(event);
+			}
+		}
+	}
 	
 	
 	////// DK properties //////
