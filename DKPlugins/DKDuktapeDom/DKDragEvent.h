@@ -24,35 +24,25 @@
 * SOFTWARE.
 */
 
-#ifdef HAVE_DKDuktape 
+// https://developer.mozilla.org/en-US/docs/Web/API/DragEvent
+// https://html.spec.whatwg.org/multipage/dnd.html#the-dragevent-interface
+
 #pragma once
-#ifndef DKConsole_H
-#define DKConsole_H
+#ifndef DKDragEvent_H
+#define DKDragEvent_H
 
 #include "DKDuktape/DKDuktape.h"
 
 
-class DKConsole : public DKObjectT<DKConsole>
+class DKDragEvent : public DKObjectT<DKDragEvent>
 {
 public:
 	bool Init();
 	
-	static int _assert(duk_context* ctx);
-	static int clear(duk_context* ctx);
-	static int debug(duk_context* ctx);
-	static int error(duk_context* ctx);
-	static int exception(duk_context* ctx);
-	static int group(duk_context* ctx);
-	static int groupCollapsed(duk_context* ctx);
-	static int groupEnd(duk_context* ctx);
-	static int info(duk_context* ctx);
-	static int log(duk_context* ctx);
-	static int trace(duk_context* ctx);
-	static int warn(duk_context* ctx);
+	//// Instance properties ////
+	static int dataTransfer(duk_context* ctx);	//Read only
 };
+REGISTER_OBJECT(DKDragEvent, true)
 
 
-REGISTER_OBJECT(DKConsole, true)
-
-#endif //DKConsole_H
-#endif //HAVE_DKDuktape
+#endif //DKDragEvent_H

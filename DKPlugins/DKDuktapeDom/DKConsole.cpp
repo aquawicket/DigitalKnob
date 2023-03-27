@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-#ifdef HAVE_DKDuktape
+#ifdef HAVE_DKDuktape 
 #include "DK/DKApp.h"
 #include "DKDuktapeDom/DKConsole.h"
 
@@ -43,7 +43,7 @@ bool DKConsole::Init(){
 	DKDuktape::AttachFunction("CPP_DKConsole_log", DKConsole::log);
 	DKDuktape::AttachFunction("CPP_DKConsole_trace", DKConsole::trace);
 	DKDuktape::AttachFunction("CPP_DKConsole_warn", DKConsole::warn);
-	DKClass::DKCreate("DKDuktapeDom/DKConsole.js");
+	DKClass::DKCreate("DKDuktape/DKConsole.js");
 	return true;
 }
 
