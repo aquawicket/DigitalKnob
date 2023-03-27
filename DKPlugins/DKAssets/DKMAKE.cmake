@@ -1,5 +1,5 @@
 dk_depend(DKArchive)
-dk_depend(DKDuktapeB)
+dk_depend(DKDuktape)
 #IF(HAVE_DKDuktape)
 #	dk_depend(DKDuktape)
 #ENDIF()

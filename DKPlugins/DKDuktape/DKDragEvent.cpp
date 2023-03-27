@@ -46,6 +46,6 @@ bool DKDragEvent::Init(){
 
 //// Instance properties ////
 int DKDragEvent::dataTransfer(duk_context* ctx){
-	// TODO
-	return true;
+	DKDEBUGFUNC(ctx);
+	return DKTODO();
 }
