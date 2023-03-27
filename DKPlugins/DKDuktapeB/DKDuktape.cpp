@@ -132,24 +132,24 @@ bool DKDuktape::Init(){
 		DKClass::DKCreate("DKDuktapeJS");
 
 #ifdef USE_DuktapeDom
-		DKClass::DKCreate("DKDuktapeDom");
+		//DKClass::DKCreate("DKDuktapeDom");
 #else
 		//Load the Duktape javascript DOM
-		DKClass::DKCreate("DKEventTarget");
-		DKClass::DKCreate("DKDuktape/DKGlobalEventHandlers.js");
-		DKClass::DKCreate("DKEvent");
-		DKClass::DKCreate("DKUIEvent");
-		DKClass::DKCreate("DKFocusEvent");
+		//DKClass::DKCreate("DKEventTarget");
+		//DKClass::DKCreate("DKDuktape/DKGlobalEventHandlers.js");
+		//DKClass::DKCreate("DKEvent");
+		//DKClass::DKCreate("DKUIEvent");
+		//DKClass::DKCreate("DKFocusEvent");
 #ifndef IOS
-        DKClass::DKCreate("DKKeyboardEvent");
-		DKClass::DKCreate("DKMouseEvent");
-		DKClass::DKCreate("DKWheelEvent");
+        //DKClass::DKCreate("DKKeyboardEvent");
+		//DKClass::DKCreate("DKMouseEvent");
+		//DKClass::DKCreate("DKWheelEvent");
 #endif
-		DKClass::DKCreate("DKDuktape/DKWindow.js");
-		DKClass::DKCreate("DKConsole");
-		DKClass::DKCreate("DKNavigator");
-		DKClass::DKCreate("DKScreen");
-		DKClass::DKCreate("DKXMLHttpRequest");
+		//DKClass::DKCreate("DKDuktape/DKWindow.js");
+		//DKClass::DKCreate("DKConsole");
+		//DKClass::DKCreate("DKNavigator");
+		//DKClass::DKCreate("DKScreen");
+		//DKClass::DKCreate("DKXMLHttpRequest");
 #endif
 
 		//Register javascript Timers: setTimeout, clearTimeout, setInterval, clearInterval
