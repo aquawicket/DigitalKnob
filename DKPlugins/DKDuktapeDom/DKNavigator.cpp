@@ -26,7 +26,7 @@
 
 #ifdef HAVE_DKDuktape 
 #include "DK/DKApp.h"
-#include "DKDuktape/DKNavigator.h"
+#include "DKDuktapeDom/DKNavigator.h"
 
 
 bool DKNavigator::Init(){

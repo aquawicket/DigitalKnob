@@ -29,11 +29,11 @@
 // https://w3c.github.io/uievents/#interface-keyboardevent
 
 #include "DK/DKApp.h"
-#include "DKDuktape/DKEvent.h"
-#include "DKDuktape/DKEventTarget.h"
-#include "DKDuktape/DKKeyboardEvent.h"
-#include "DKDuktape/DKKeyCodes.h"
-#include "DKDuktape/ConsoleWindow.h"
+#include "DKDuktapeDom/DKEvent.h"
+#include "DKDuktapeDom/DKEventTarget.h"
+#include "DKDuktapeDom/DKKeyboardEvent.h"
+#include "DKDuktapeDom/DKKeyCodes.h"
+#include "DKDuktapeDom/ConsoleWindow.h"
 
 
 void mapKeys();

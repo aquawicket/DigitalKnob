@@ -27,10 +27,10 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent
 
 #include "DK/DKApp.h"
-#include "DKDuktape/DKEvent.h"
-#include "DKDuktape/DKEventTarget.h"
-#include "DKDuktape/DKMouseEvent.h"
-#include "DKDuktape/ConsoleWindow.h"
+#include "DKDuktapeDom/DKEvent.h"
+#include "DKDuktapeDom/DKEventTarget.h"
+#include "DKDuktapeDom/DKMouseEvent.h"
+#include "DKDuktapeDom/ConsoleWindow.h"
 
 
 bool DKMouseEvent::Init(){

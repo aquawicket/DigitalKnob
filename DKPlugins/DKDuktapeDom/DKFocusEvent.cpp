@@ -27,10 +27,10 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent
 
 #include "DK/DKApp.h"
-#include "DKDuktape/DKEvent.h"
-#include "DKDuktape/DKEventTarget.h"
-#include "DKDuktape/DKFocusEvent.h"
-#include "DKDuktape/ConsoleWindow.h"
+#include "DKDuktapeDom/DKEvent.h"
+#include "DKDuktapeDom/DKEventTarget.h"
+#include "DKDuktapeDom/DKFocusEvent.h"
+#include "DKDuktapeDom/ConsoleWindow.h"
 
 
 bool DKFocusEvent::Init(){

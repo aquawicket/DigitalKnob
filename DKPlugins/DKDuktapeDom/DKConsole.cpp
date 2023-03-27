@@ -26,7 +26,7 @@
 
 #ifdef HAVE_DKDuktape 
 #include "DK/DKApp.h"
-#include "DKDuktape/DKConsole.h"
+#include "DKDuktapeDom/DKConsole.h"
 
 
 bool DKConsole::Init(){
