@@ -133,6 +133,7 @@ bool DKDuktape::Init(){
 
 #ifdef USE_DuktapeDom
 		DKClass::DKCreate("DKDuktapeDom");
+/*
 #else
 		//Load the Duktape javascript DOM
 		DKClass::DKCreate("DKEventTarget");
@@ -150,6 +151,7 @@ bool DKDuktape::Init(){
 		DKClass::DKCreate("DKNavigator");
 		DKClass::DKCreate("DKScreen");
 		DKClass::DKCreate("DKXMLHttpRequest");
+*/
 #endif
 
 		//Register javascript Timers: setTimeout, clearTimeout, setInterval, clearInterval

@@ -1,4 +1,5 @@
 dk_depend(DKDuktape)
+dk_depend(DKDuktapeDom)
 dk_depend(DKDukDebugger)
 dk_depend(DK)
 dk_depend(DKArchive)
