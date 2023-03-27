@@ -29,7 +29,7 @@
 #ifndef DKNavigator_H
 #define DKNavigator_H
 
-#include "DKDuktapeDom/DKDuktapeDom.h"
+#include "DKDuktape/DKDuktape.h"
 
 
 class DKNavigator : public DKObjectT<DKNavigator>

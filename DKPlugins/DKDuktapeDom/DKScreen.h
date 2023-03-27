@@ -31,7 +31,7 @@
 #ifndef DKScreen_H
 #define DKScreen_H
 
-#include "DKDuktapeDom/DKDuktapeDom.h"
+#include "DKDuktape/DKDuktape.h"
 
 
 class DKScreen : public DKObjectT<DKScreen>

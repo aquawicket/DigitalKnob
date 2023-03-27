@@ -1,80 +1,58 @@
-// https://developer.mozilla.org/en-US/docs/Web/API/UIEvent
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/UIEvent
+// [IDL] https://w3c.github.io/uievents/#idl-uievent
 
-var UIEvent = function UIEvent(pointer) {
-    // Properties
-    /*
-	Object.defineProperty(this, "cancelBubble", { //Not standardized, Deprecated
-		get: function cancelBubble(){ 
-			return CPP_DKUIEvent_cancelBubble(pointer);
-		}
-		set: function cancelBubble(flag){ 
-			return CPP_DKUIEvent_cancelBubble(pointer, flag);
-		}
-	});
-	*/
+
+// [UIEvent()] https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/UIEvent
+var UIEvent = function UIEvent(_type, _options, _pointer) {
+	
+    ////// Instance properties //////
+	// [UIEvent.detail](Read only) https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/detail
     Object.defineProperty(this, "detail", {
-        //Read only
         get: function detail() {
-            return CPP_DKUIEvent_detail(pointer);
+            return CPP_DKUIEvent_detail(_pointer);
         }
-    });
-    Object.defineProperty(this, "isChar", {
-        //Read only
-        get: function isChar() {
-            return CPP_DKUIEvent_isChar(pointer);
-        }
-    });
-    Object.defineProperty(this, "layerX", {
-        //Read only
-        get: function layerX() {
-            return CPP_DKUIEvent_layerX(pointer);
-        }
-    });
-    Object.defineProperty(this, "layerY", {
-        //Read only
-        get: function layerY() {
-            return CPP_DKUIEvent_layerY(pointer);
-        }
-    });
-    /*
-	Object.defineProperty(this, "pageX", { //Read only
-		get: function pageX(){ 
-			return CPP_DKUIEvent_pageX(pointer);
-		}
-	});
-	Object.defineProperty(this, "pageY", { //Read only
-		get: function pageY(){ 
-			return CPP_DKUIEvent_pageY(pointer);
-		}
-	});
-	*/
+    })
+	// [UIEvent.sourceCapabilities](Experimental)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/sourceCapabilities
     Object.defineProperty(this, "sourceCapabilities", {
-        //Read only
-        get: function sourceCapabilities() {
-            return CPP_DKUIEvent_sourceCapabilities(pointer);
+        get: function sourceCapabilities () {
+            return CPP_DKUIEvent_sourceCapabilities(_pointer);
         }
-    });
-    Object.defineProperty(this, "view", {
-        //Read only
+    })
+	// [UIEvent.view](Read only) https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/view
+	Object.defineProperty(this, "view", {
         get: function view() {
-            return CPP_DKUIEvent_view(pointer);
+            return CPP_DKUIEvent_view(_pointer);
         }
-    });
-    /*
-	Object.defineProperty(this, "which", { //Read only
-		get: function which(){ 
-			return CPP_DKUIEvent_which(pointer);
-		}
-	});
-	*/
+    })
+	// [UIEvent.which](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/which
+	Object.defineProperty(this, "which", {
+        get: function which() {
+            return CPP_DKUIEvent_which(_pointer);
+        }
+    })
 
-    // Methods
+    ////// Methods //////
+	// [UIEvent.initUIEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/initUIEvent
     UIEvent.prototype.initUIEvent = function initUIEvent() {
-        //Deprecated
-        CPP_DKUIEvent_initUIEvent(this.pointer);
+        CPP_DKUIEvent_initUIEvent(this._pointer);
     }
-    ;
 
-    return Event.call(this, pointer);
+	//// toString ////
+	if(this.toString() === "[object Object]"){
+		this.toString = function(){
+			return "[object UIEvent]"
+		}
+	}
+	
+    return Event.call(this, _type, _options, _pointer);
 };
 UIEvent.prototype = Event.prototype;
+
+
+// Called from C++ to dispatch UIEvents events
+/////////////////////////////////////////////////////
+function dispatchUIEvent(_type, _options, _pointer) {
+	const event = new UIEvent(_type, _options, _pointer)
+	event.target = new EventTarget(_pointer)
+	event.target.dispatchEvent(event)
+}

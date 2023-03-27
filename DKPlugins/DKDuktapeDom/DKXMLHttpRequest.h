@@ -29,7 +29,7 @@
 #ifndef DKXMLHttpRequest_H
 #define DKXMLHttpRequest_H
 
-#include "DKDuktapeDom/DKDuktapeDom.h"
+#include "DKDuktape/DKDuktape.h"
 
 
 class DKXMLHttpRequest : public DKObjectT<DKXMLHttpRequest>

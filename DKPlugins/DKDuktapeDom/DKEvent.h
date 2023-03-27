@@ -30,7 +30,7 @@
 #ifndef DKEvent_H
 #define DKEvent_H
 
-#include "DKDuktapeDom/DKDuktapeDom.h"
+#include "DKDuktape/DKDuktape.h"
 
 
 class DKEvent : public DKObjectT<DKEvent>

@@ -1,4 +1,3 @@
-//https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers
 
 var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
     this.pointer = pointer;
@@ -69,6 +68,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
             this.auxclick = func
         }
     });
+	/*
     this.blur = null;
     Object.defineProperty(this, "onblur", {
         configurable: true,
@@ -80,6 +80,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
             this.blur = func
         }
     });
+	*/
     this.error = null;
     Object.defineProperty(this, "onerror", {
         configurable: true,
@@ -91,6 +92,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
             this.error = func
         }
     });
+	/*
     this.focus = null;
     Object.defineProperty(this, "onfocus", {
         configurable: true,
@@ -102,6 +104,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
             this.focus = func
         }
     });
+	*/
     this.canplay = null;
     Object.defineProperty(this, "oncanplay", {
         configurable: true,
@@ -146,6 +149,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
             this.click = func;
         }
     });
+	/*
     this.close = null;
     Object.defineProperty(this, "onclose", {
         configurable: true,
@@ -157,6 +161,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
             this.close = func
         }
     });
+	*/
     this.contextmenu = null;
     Object.defineProperty(this, "oncontextmenu", {
         configurable: true,
@@ -949,5 +954,11 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
             this.waiting = func
         }
     });
+	
+	if(this.toString() === "[object Object]"){
+		this.toString = function(){
+			return "[object GlobalEventHandlers]"
+		}
+	}
 }
 GlobalEventHandlers.prototype = EventTarget.prototype;

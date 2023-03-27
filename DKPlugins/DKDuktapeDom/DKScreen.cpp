@@ -53,7 +53,7 @@ bool DKScreen::Init(){
 	DKDuktape::AttachFunction("CPP_DKScreen_lockOrientation", DKScreen::lockOrientation);
 	DKDuktape::AttachFunction("CPP_DKScreen_unlockOrientations", DKScreen::unlockOrientation);
 
-	DKClass::DKCreate("DKDuktapeDom/DKScreen.js");
+	DKClass::DKCreate("DKDuktape/DKScreen.js");
 	return true;
 }
 

@@ -32,7 +32,8 @@
 #include "DKDuktapeDom/DKEvent.h"
 #include "DKDuktapeDom/DKEventTarget.h"
 #include "DKDuktapeDom/DKKeyboardEvent.h"
-#include "DKDuktape/DKKeyCodes.h"
+#include "DKDuktapeDom/DKKeyCodes.h"
+#include "DKDuktapeDom/ConsoleWindow.h"
 
 
 void mapKeys();
@@ -67,7 +68,7 @@ bool DKKeyboardEvent::Init(){
 	DKDuktape::AttachFunction("CPP_DKKeyboardEvent_keyLocation", DKKeyboardEvent::keyLocation);
 	DKDuktape::AttachFunction("CPP_DKKeyboardEvent_which", DKKeyboardEvent::which);
 
-	DKClass::DKCreate("DKDuktapeDom/DKKeyboardEvent.js");
+	DKClass::DKCreate("DKDuktape/DKKeyboardEvent.js");
 
 	DKKeyCodes::mapKeys();
 	return true;
@@ -81,29 +82,27 @@ bool DKKeyboardEvent::Init(){
 int DKKeyboardEvent::altKey(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	DKEvents* event = (DKEvents*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
-		DKERROR("DKKeyboardEvent::altKey(): event invalid\n");
+		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	//TODO
-	//int altKey = "undefined"
-	//duk_push_boolean(ctx, altKey);
+	bool altKey = event->altKey;
+	duk_push_boolean(ctx, altKey);
 	return true;
 }
 
 int DKKeyboardEvent::code(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	DKEvents* event = (DKEvents*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
-		DKERROR("DKKeyboardEvent::code(): event invalid\n");
+		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	Key key_identifier = (Key)std::stoi(event->data[0]);
-	DKString code = DKKeyCodes::keys[key_identifier].code;
+	DKString code = event->code;
 	duk_push_string(ctx, code.c_str());
 	return true;
 }
@@ -111,44 +110,41 @@ int DKKeyboardEvent::code(duk_context* ctx){
 int DKKeyboardEvent::ctrlKey(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	DKEvents* event = (DKEvents*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
-		DKERROR("DKKeyboardEvent::ctrlKey(): event invalid\n");
+		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	//TODO
-	//bool ctrlKey = keys[(Key)std::stoi(event->data[0])].ctrlKey;
-	//duk_push_boolean(ctx, ctrlKey);
+	bool ctrlKey = event->ctrlKey;
+	duk_push_boolean(ctx, ctrlKey);
 	return true;
 }
 
 int DKKeyboardEvent::isComposing(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	DKEvents* event = (DKEvents*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
-		DKERROR("DKKeyboardEvent::isComposing(): event invalid\n");
+		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	//TODO
-	//bool isComposing = keys[(Key)std::stoi(event->data[0])].isComposing;
-	//duk_push_boolean(ctx, isComposing);
-	return false;
+	bool isComposing = event->isComposing;
+	duk_push_boolean(ctx, isComposing);
+	return true;
 }
 
 int DKKeyboardEvent::key(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	DKEvents* event = (DKEvents*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
-		DKERROR("DKKeyboardEvent::code(): event invalid\n");
+		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	Key key_identifier = (Key)std::stoi(event->data[0]);
-	DKString key = DKKeyCodes::keys[key_identifier].key;
+	DKString key = toString(event->key);
 	duk_push_string(ctx, key.c_str());
 	return true;
 }
@@ -156,75 +152,70 @@ int DKKeyboardEvent::key(duk_context* ctx){
 int DKKeyboardEvent::locale(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	DKEvents* event = (DKEvents*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
-		DKERROR("DKKeyboardEvent::locale(): event invalid\n");
+		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	//TODO
-	//DKString locale = keys[(Key)std::stoi(event->data[0])].locale;
-	//duk_push_string(ctx, locale.c_str());
-	return false;
+	DKString locale = event->locale;
+	duk_push_string(ctx, locale.c_str());
+	return true;
 }
 
 int DKKeyboardEvent::location(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	DKEvents* event = (DKEvents*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
-		DKERROR("DKKeyboardEvent::location(): event invalid\n");
+		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	Key key_identifier = (Key)std::stoi(event->data[0]);
-	int location = DKKeyCodes::keys[key_identifier].location;
+	int location = event->location;
 	duk_push_int(ctx, location);
-	return false;
+	return true;
 }
 
 int DKKeyboardEvent::metaKey(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	DKEvents* event = (DKEvents*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
-		DKERROR("DKKeyboardEvent::metaKey(): event invalid\n");
+		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	//TODO
-	//bool metaKey = keys[(Key)std::stoi(event->data[0])].metaKey;
-	//duk_push_boolean(ctx, metaKey);
+	bool metaKey = event->metaKey;
+	duk_push_boolean(ctx, metaKey);
 	return true;
 }
 
 int DKKeyboardEvent::repeat(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	DKEvents* event = (DKEvents*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
-		DKERROR("DKKeyboardEvent::repeat(): event invalid\n");
+		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	//TODO
-	//bool repeat = keys[(Key)std::stoi(event->data[0])].repeat;
-	//duk_push_boolean(ctx, repeat);
-	return false;
+	bool repeat = event->repeat;
+	duk_push_boolean(ctx, repeat);
+	return true;
 }
 
 int DKKeyboardEvent::shiftKey(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	DKEvents* event = (DKEvents*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
-		DKERROR("DKKeyboardEvent::shiftKey(): event invalid\n");
+		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	//TODO
-	//bool shiftKey = keys[(Key)std::stoi(event->data[0])].shiftKey;
-	//duk_push_boolean(ctx, shiftKey);
+	bool shiftKey = event->shiftKey;
+	duk_push_boolean(ctx, shiftKey);
 	return true;
 }
 
@@ -235,14 +226,14 @@ int DKKeyboardEvent::shiftKey(duk_context* ctx){
 int DKKeyboardEvent::getModifierState(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	DKEvents* event = (DKEvents*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
-		DKERROR("DKKeyboardEvent::getModifierState(): event invalid\n");
+		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
 	//TODO
-	return false;
+	return true;
 }
 
 
@@ -252,31 +243,27 @@ int DKKeyboardEvent::getModifierState(duk_context* ctx){
 int DKKeyboardEvent::initKeyEvent(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	DKEvents* event = (DKEvents*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
-		DKERROR("DKKeyboardEvent::initKeyEvent(): event invalid\n");
+		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
 	//TODO
-	//bool ctrlKe;
-	//duk_push_boolean(ctx, ctrlKey);
-	return false;
+	return true;
 }
 
 int DKKeyboardEvent::initKeyboardEvent(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	DKEvents* event = (DKEvents*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
-		DKERROR("DKKeyboardEvent::initKeyboardEvent(): event invalid\n");
+		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
 	//TODO
-	//bool ctrlKey = event->GetParameter<bool>("ctrl_key", 0);
-	//duk_push_boolean(ctx, ctrlKey);
-	return false;
+	return true;
 }
 
 
@@ -286,89 +273,78 @@ int DKKeyboardEvent::initKeyboardEvent(duk_context* ctx){
 int DKKeyboardEvent::char1(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	DKEvents* event = (DKEvents*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
-		DKERROR("DKKeyboardEvent::char1(): event invalid\n");
+		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
 	//TODO
-	//bool char1 = event->GetParameter<bool>("char", 0);
-	//duk_push_int(ctx, char1);
-	return false;
+	return true;
 }
 
 int DKKeyboardEvent::charCode(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	DKEvents* event = (DKEvents*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
-		DKERROR("DKKeyboardEvent::charCode(): event invalid\n");
+		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
 	//TODO
-	//int charCode = keys[(Key)std::stoi(event->data[0])].charCode;
-	//duk_push_int(ctx, charCode);
-	return false;
+	return true;
 }
 
 int DKKeyboardEvent::keyCode(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	DKEvents* event = (DKEvents*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
-		DKERROR("DKKeyboardEvent::keyCode(): event invalid\n");
+		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	Key key_identifier = (Key)std::stoi(event->data[0]);
-	duk_push_int(ctx, key_identifier);
-	return false;
+	// TODO
+	return true;
 }
 
 // Deprecated
 int DKKeyboardEvent::keyIdentifier(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	DKEvents* event = (DKEvents*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
-		DKERROR("DKKeyboardEvent::keyIdentifier(): event invalid\n");
+		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
-	Key key_identifier = (Key)std::stoi(event->data[0]);
-	DKString key = DKKeyCodes::keys[key_identifier].key;
-	duk_push_string(ctx, key.c_str());
+	//TODO
 	return true;
 }
 
 int DKKeyboardEvent::keyLocation(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	DKEvents* event = (DKEvents*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
-		DKERROR("DKKeyboardEvent::char1(): event invalid\n");
+		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
 	//TODO
-	//bool char1 = event->GetParameter<bool>("char", 0);
-	//duk_push_int(ctx, char1);
-	return false;
+	return true;
 }
 
 int DKKeyboardEvent::which(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	DKEvents* event = (DKEvents*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
 	if (!event) {
-		DKERROR("DKKeyboardEvent::which(): event invalid\n");
+		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
 		return true;
 	}
 	//TODO
-	//bool char1 = event->GetParameter<bool>("char", 0);
-	//duk_push_int(ctx, char1);
-	return false;
+	return true;
 }

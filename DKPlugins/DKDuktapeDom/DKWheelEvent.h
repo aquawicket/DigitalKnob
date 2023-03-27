@@ -24,50 +24,35 @@
 * SOFTWARE.
 */
 
-// https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent
-// https://w3c.github.io/uievents/#interface-keyboardevent
+// https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent
 
 #pragma once
-#ifndef DKKeyboardEvent_H
-#define DKKeyboardEvent_H
+#ifndef DKWheelEvent_H
+#define DKWheelEvent_H
 
 #include "DKDuktape/DKDuktape.h"
 
 
-class DKKeyboardEvent : public DKObjectT<DKKeyboardEvent>
+class DKWheelEvent : public DKObjectT<DKWheelEvent>
 {
 public:
 	bool Init();
 	
-	// Properties
-	static int altKey(duk_context* ctx);
-	static int code(duk_context* ctx);
-	static int ctrlKey(duk_context* ctx);
-	static int isComposing(duk_context* ctx);
-	static int key(duk_context* ctx);
-	static int locale(duk_context* ctx);
-	static int location(duk_context* ctx);
-	static int metaKey(duk_context* ctx);
-	static int repeat(duk_context* ctx);
-	static int shiftKey(duk_context* ctx);
-
-	// Methods
-	static int getModifierState(duk_context* ctx);
-
-	// Obsolete methods
-	static int initKeyEvent(duk_context* ctx);
-	static int initKeyboardEvent(duk_context* ctx);
-
-	//Obsolete properties
-	static int char1(duk_context* ctx);
-	static int charCode(duk_context* ctx);
-	static int keyCode(duk_context* ctx);
-	static int keyIdentifier(duk_context* ctx);
-	static int keyLocation(duk_context* ctx);
-	static int which(duk_context* ctx);
+	//// Properties ////
+	static int deltaX(duk_context* ctx);			//Read only
+	static int deltaY(duk_context* ctx);			//Read only
+	static int deltaZ(duk_context* ctx);			//Read only
+	static int deltaMode(duk_context* ctx);			//Read only
+	
+	//// Deprecated Properties ////
+	/*
+	static int wheelDelta(duk_context* ctx);		//Read only
+	static int wheelDeltaX(duk_context* ctx);		//Read only
+	static int wheelDeltaY(duk_context* ctx);		//Read only
+	*/
 };
 
 
-REGISTER_OBJECT(DKKeyboardEvent, true)
+REGISTER_OBJECT(DKWheelEvent, true)
 
-#endif //DKKeyboardEvent_H
+#endif //DKWheelEvent_H
