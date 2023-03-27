@@ -37,14 +37,18 @@ bool DKDuktapeDom::Init(){
 	DKClass::DKCreate("DKDuktapeDom/DKGlobalEventHandlers.js");
 	DKClass::DKCreate("DKEvent");
 	DKClass::DKCreate("DKUIEvent");
+	DKClass::DKCreate("DKFocusEvent");
 #ifndef IOS
     DKClass::DKCreate("DKKeyboardEvent");
+	DKClass::DKCreate("DKMouseEvent");
+	DKClass::DKCreate("DKWheelEvent");
 #endif
 	DKClass::DKCreate("DKDuktapeDom/DKWindow.js");
 	DKClass::DKCreate("DKConsole");
 	DKClass::DKCreate("DKNavigator");
 	DKClass::DKCreate("DKScreen");
 	DKClass::DKCreate("DKXMLHttpRequest");
+		
 
 	//create global window 
 	DKDuktape* dt = DKDuktape::Get();
