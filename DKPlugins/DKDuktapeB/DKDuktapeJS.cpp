@@ -35,7 +35,7 @@
 #include "DK/DKUnix.h"
 #include "DK/DKUtil.h"
 #include "DK/DKTextColor.h"
-#include "DKDuktape/DKDuktapeJS.h"
+#include "DKDuktapeB/DKDuktapeJS.h"
 
 WARNING_DISABLE
 #include <signal.h>

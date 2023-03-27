@@ -26,8 +26,8 @@
 
 #include "DK/stdafx.h"
 #include "DK/DKFile.h"
-#include "DKDuktape/DKDuktape.h"
-#include "DKDuktape/DKJavascript.h"
+#include "DKDuktapeB/DKDuktape.h"
+#include "DKDuktapeB/DKJavascript.h"
 
 
 bool DKJavascript::Init(){

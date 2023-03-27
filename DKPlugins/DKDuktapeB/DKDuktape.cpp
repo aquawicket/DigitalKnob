@@ -26,7 +26,7 @@
 
 #include "DK/stdafx.h"
 #include "DK/DKFile.h"
-#include "DKDuktape/DKDuktape.h"
+#include "DKDuktapeB/DKDuktape.h"
 //#include "DKDuktapeDebugger/DKDuktapeDebugger.h"
 
 WARNING_DISABLE

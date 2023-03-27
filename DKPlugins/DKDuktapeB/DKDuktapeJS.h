@@ -30,7 +30,7 @@
 #ifndef DKDuktapeJS_H
 #define DKDuktapeJS_H
 
-#include "DKDuktape/DKDuktape.h"
+#include "DKDuktapeB/DKDuktape.h"
 
 
 class DKDuktapeJS : public DKObjectT<DKDuktapeJS>
