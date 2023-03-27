@@ -27,10 +27,10 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/DragEvent
 
 #include "DK/DKApp.h"
-#include "DKDuktapeDom/DKEvent.h"
-#include "DKDuktapeDom/DKEventTarget.h"
-#include "DKDuktapeDom/DKDragEvent.h"
-#include "DKDuktapeDom/ConsoleWindow.h"
+#include "DKDuktape/DKEvent.h"
+#include "DKDuktape/DKEventTarget.h"
+#include "DKDuktape/DKDragEvent.h"
+#include "DKDuktape/ConsoleWindow.h"
 
 
 bool DKDragEvent::Init(){

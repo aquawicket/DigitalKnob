@@ -28,7 +28,7 @@
 
 #ifdef HAVE_DKDuktape 
 #include "DK/DKApp.h"
-#include "DKDuktapeDom/DKScreen.h"
+#include "DKDuktape/DKScreen.h"
 
 
 bool DKScreen::Init(){

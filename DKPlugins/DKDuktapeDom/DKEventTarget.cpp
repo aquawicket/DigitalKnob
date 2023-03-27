@@ -27,7 +27,7 @@
 //https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
 
 #include "DK/DKApp.h"
-#include "DKDuktapeDom/DKEventTarget.h"
+#include "DKDuktape/DKEventTarget.h"
 
 
 bool DKEventTarget::Init(){

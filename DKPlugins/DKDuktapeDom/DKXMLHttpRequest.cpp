@@ -26,7 +26,7 @@
 
 #ifdef HAVE_DKDuktape 
 #include "DK/DKApp.h"
-#include "DKDuktapeDom/DKXMLHttpRequest.h"
+#include "DKDuktape/DKXMLHttpRequest.h"
 #include "DK/DKFile.h"
 
 

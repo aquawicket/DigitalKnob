@@ -25,7 +25,7 @@
 */
 //https://github.com/uNetworking/uWebSockets/blob/master/tests/main.cpp
 #include "DK/stdafx.h"
-#include "DKDuktapeDom/ConsoleWindow.h"
+#include "DKDuktape/ConsoleWindow.h"
 
 #if !WIN && !EMSCRIPTEN && !ANDROID
 	#include <stdlib.h>

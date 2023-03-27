@@ -27,7 +27,7 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/Event
 
 #include "DK/DKApp.h"
-#include "DKDuktapeDom/DKEvent.h"
+#include "DKDuktape/DKEvent.h"
 #include "DK/DKEvents.h"
 //#include "DKDom/DKElement.h"
 

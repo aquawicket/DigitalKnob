@@ -27,8 +27,8 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/UIEvent
 
 #include "DK/DKApp.h"
-#include "DKDuktapeDom/DKUIEvent.h"
-#include "DKDuktapeDom/DKEvent.h"
+#include "DKDuktape/DKUIEvent.h"
+#include "DKDuktape/DKEvent.h"
 //#include "DKRml/DKRml.h"
 
 
