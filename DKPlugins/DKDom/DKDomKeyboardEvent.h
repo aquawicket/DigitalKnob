@@ -32,7 +32,7 @@
 #define DKDomKeyboardEvent_H
 
 #include "DKDuktape/DKDuktape.h"
-#include "DKDuktape/DKKeyCodes.h"
+#include "DKDuktapeDom/DKKeyCodes.h"
 
 
 class DKDomKeyboardEvent : public DKObjectT<DKDomKeyboardEvent>
