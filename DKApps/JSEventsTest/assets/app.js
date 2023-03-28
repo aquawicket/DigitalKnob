@@ -5,5 +5,6 @@ CPP_DK_Create("JSEventsTest/DKGlobalEventHandlers.js");
 CPP_DK_Create("DKUIEvent");
 CPP_DK_Create("DKKeyboardEvent");
 CPP_DK_Create("DKMouseEvent");
+CPP_DK_Create("DKWheelEvent");
 CPP_DK_Create("DKFocusEvent");
 CPP_DK_Create("Test.js");
