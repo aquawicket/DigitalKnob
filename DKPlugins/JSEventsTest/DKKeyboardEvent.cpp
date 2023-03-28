@@ -29,11 +29,11 @@
 // https://w3c.github.io/uievents/#interface-keyboardevent
 
 #include "DK/DKApp.h"
-#include "DKDuktapeDom/DKEvent.h"
-#include "DKDuktapeDom/DKEventTarget.h"
-#include "DKDuktapeDom/DKKeyboardEvent.h"
-#include "DKDuktapeDom/DKKeyCodes.h"
-#include "DKDuktapeDom/ConsoleWindow.h"
+#include "JSEventsTest/DKEvent.h"
+#include "JSEventsTest/DKEventTarget.h"
+#include "JSEventsTest/DKKeyboardEvent.h"
+#include "JSEventsTest/DKKeyCodes.h"
+#include "JSEventsTest/ConsoleWindow.h"
 
 
 void mapKeys();
@@ -68,7 +68,7 @@ bool DKKeyboardEvent::Init(){
 	DKDuktape::AttachFunction("CPP_DKKeyboardEvent_keyLocation", DKKeyboardEvent::keyLocation);
 	DKDuktape::AttachFunction("CPP_DKKeyboardEvent_which", DKKeyboardEvent::which);
 
-	DKClass::DKCreate("DKDuktapeDom/DKKeyboardEvent.js");
+	DKClass::DKCreate("JSEventsTest/DKKeyboardEvent.js");
 
 	DKKeyCodes::mapKeys();
 	return true;
