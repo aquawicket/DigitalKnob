@@ -44,7 +44,7 @@ function onKeyPress(event){
 }
 myConsoleWindow.addEventListener('keypress', onKeyPress)
 
-
+/*
 // MouseEvents
 function printMouseEventProperties(event){
 	console.log("event.altKey="+event.altKey)
@@ -191,3 +191,4 @@ myConsoleWindow.addEventListener('resize', onResize)
 //myConsoleWindow.close()
 //myConsoleWindow.focus()
 
+*/
