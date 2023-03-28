@@ -41,7 +41,7 @@ bool DKUIEvent::Init(){
 	// Methods
 	DKDuktape::AttachFunction("CPP_DKUIEvent_initUIEvent", DKUIEvent::initUIEvent);
 
-	DKClass::DKCreate("DKDuktape/DKUIEvent.js");
+	DKClass::DKCreate("DKDuktapeDom/DKUIEvent.js");
 	return true;
 }
 

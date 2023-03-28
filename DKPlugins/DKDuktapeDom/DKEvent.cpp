@@ -72,7 +72,7 @@ bool DKEvent::Init(){
 	// Extra
 	DKDuktape::AttachFunction("CPP_DKEvent_getParameters", DKEvent::getParameters);
 
-	DKClass::DKCreate("DKDuktape/DKEvent.js");
+	DKClass::DKCreate("DKDuktapeDom/DKEvent.js");
 	return true;
 }
 

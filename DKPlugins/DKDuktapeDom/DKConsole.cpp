@@ -43,7 +43,7 @@ bool DKConsole::Init(){
 	DKDuktape::AttachFunction("CPP_DKConsole_log", DKConsole::log);
 	DKDuktape::AttachFunction("CPP_DKConsole_trace", DKConsole::trace);
 	DKDuktape::AttachFunction("CPP_DKConsole_warn", DKConsole::warn);
-	DKClass::DKCreate("DKDuktape/DKConsole.js");
+	DKClass::DKCreate("DKDuktapeDom/DKConsole.js");
 	return true;
 }
 

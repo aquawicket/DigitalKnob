@@ -68,7 +68,7 @@ bool DKKeyboardEvent::Init(){
 	DKDuktape::AttachFunction("CPP_DKKeyboardEvent_keyLocation", DKKeyboardEvent::keyLocation);
 	DKDuktape::AttachFunction("CPP_DKKeyboardEvent_which", DKKeyboardEvent::which);
 
-	DKClass::DKCreate("DKDuktape/DKKeyboardEvent.js");
+	DKClass::DKCreate("DKDuktapeDom/DKKeyboardEvent.js");
 
 	DKKeyCodes::mapKeys();
 	return true;

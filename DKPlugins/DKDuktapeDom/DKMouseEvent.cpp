@@ -66,7 +66,7 @@ bool DKMouseEvent::Init(){
 	DKDuktape::AttachFunction("CPP_DKMouseEvent_getModifierState", DKMouseEvent::getModifierState);
 	DKDuktape::AttachFunction("CPP_DKMouseEvent_initMouseEvent", DKMouseEvent::initMouseEvent);
 
-	DKClass::DKCreate("DKDuktape/DKMouseEvent.js");
+	DKClass::DKCreate("DKDuktapeDom/DKMouseEvent.js");
 	return true;
 }
 

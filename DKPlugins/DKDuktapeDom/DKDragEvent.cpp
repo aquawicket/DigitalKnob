@@ -39,7 +39,7 @@ bool DKDragEvent::Init(){
 	//// Instance properties ////
 	DKDuktape::AttachFunction("CPP_DKDragEvent_dataTransfer", DKDragEvent::dataTransfer);
 
-	DKClass::DKCreate("DKDuktape/DKDragEvent.js");
+	DKClass::DKCreate("DKDuktapeDom/DKDragEvent.js");
 	return true;
 }
 

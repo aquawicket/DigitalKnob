@@ -49,7 +49,7 @@ bool DKWheelEvent::Init(){
 	DKDuktape::AttachFunction("CPP_DKWheelEvent_wheelDeltaY", DKWheelEvent::wheelDeltaY);
 	*/
 
-	DKClass::DKCreate("DKDuktape/DKWheelEvent.js");
+	DKClass::DKCreate("DKDuktapeDom/DKWheelEvent.js");
 	return true;
 }
 

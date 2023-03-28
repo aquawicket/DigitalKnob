@@ -131,7 +131,7 @@ bool DKDuktape::Init(){
 #endif
 		DKClass::DKCreate("DKDuktapeJS");
 
-#ifdef USE_DuktapeDom
+#ifdef HAVE_DKDuktapeDom
 		DKClass::DKCreate("DKDuktapeDom");
 /*
 #else
