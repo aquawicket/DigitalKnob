@@ -25,9 +25,7 @@
 */
 //https://github.com/uNetworking/uWebSockets/blob/master/tests/main.cpp
 #include "DK/stdafx.h"
-#include "JSEventsTest/DKConsoleWindow.h"
-#include "JSEventsTest/DKEventTarget.h"
-#include "JSEventsTest/DKKeyboardEvent.h"
+#include "JSEventsTest/ConsoleWindow.h"
 
 #if !WIN && !EMSCRIPTEN && !ANDROID
 	#include <stdlib.h>
@@ -37,15 +35,14 @@
 
 #if WIN
 	// fullScreen
-	WINDOWPLACEMENT DKConsoleWindow::wpc;
-	LONG DKConsoleWindow::HWNDStyle = 0;
-	LONG DKConsoleWindow::HWNDStyleEx = 0;
+	WINDOWPLACEMENT ConsoleWindow::wpc;
+	LONG ConsoleWindow::HWNDStyle = 0;
+	LONG ConsoleWindow::HWNDStyleEx = 0;
 #endif
 
 
-bool DKConsoleWindow::Init(){
+bool ConsoleWindow::Init(){
 	DKDEBUGFUNC();
-	DKINFO("DKConsoleWindow::Init() \n");
 	
 #if !WIN && !EMSCRIPTEN && !ANDROID
 	SCREEN *screen = newterm((char *) 0, stdout, stdin);
@@ -125,36 +122,34 @@ bool DKConsoleWindow::Init(){
     relatedTarget = "";
 
 	//// Instance properties ////
-	/*
-	DKDuktape::AttachFunction("CPP_DKConsoleWindow_closed", DKConsoleWindow::closed);
-    DKDuktape::AttachFunction("CPP_DKConsoleWindow_columns", DKConsoleWindow::Columns);
-	DKDuktape::AttachFunction("CPP_DKConsoleWindow_fullScreen", DKConsoleWindow::fullScreen);
-	DKDuktape::AttachFunction("CPP_DKConsoleWindow_innerHeight", DKConsoleWindow::innerHeight);
-	DKDuktape::AttachFunction("CPP_DKConsoleWindow_innerWidth", DKConsoleWindow::innerWidth);
-	DKDuktape::AttachFunction("CPP_DKConsoleWindow_name", DKConsoleWindow::name);
-	DKDuktape::AttachFunction("CPP_DKConsoleWindow_outerHeight", DKConsoleWindow::outerHeight);
-	DKDuktape::AttachFunction("CPP_DKConsoleWindow_outerWidth", DKConsoleWindow::outerWidth);
-    DKDuktape::AttachFunction("CPP_DKConsoleWindow_rows", DKConsoleWindow::Rows);
-	DKDuktape::AttachFunction("CPP_DKConsoleWindow_screenX", DKConsoleWindow::ScreenX);
-	DKDuktape::AttachFunction("CPP_DKConsoleWindow_screenLeft", DKConsoleWindow::screenLeft);
-	DKDuktape::AttachFunction("CPP_DKConsoleWindow_screenY", DKConsoleWindow::ScreenY);
-	DKDuktape::AttachFunction("CPP_DKConsoleWindow_screenTop", DKConsoleWindow::screenTop);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_closed", ConsoleWindow::closed);
+    DKDuktape::AttachFunction("CPP_ConsoleWindow_columns", ConsoleWindow::Columns);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_fullScreen", ConsoleWindow::fullScreen);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_innerHeight", ConsoleWindow::innerHeight);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_innerWidth", ConsoleWindow::innerWidth);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_name", ConsoleWindow::name);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_outerHeight", ConsoleWindow::outerHeight);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_outerWidth", ConsoleWindow::outerWidth);
+    DKDuktape::AttachFunction("CPP_ConsoleWindow_rows", ConsoleWindow::Rows);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_screenX", ConsoleWindow::ScreenX);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_screenLeft", ConsoleWindow::screenLeft);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_screenY", ConsoleWindow::ScreenY);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_screenTop", ConsoleWindow::screenTop);
 	
 	//// Instance methods ////
-	DKDuktape::AttachFunction("CPP_DKConsoleWindow_blur", DKConsoleWindow::blur);
-	DKDuktape::AttachFunction("CPP_DKConsoleWindow_close", DKConsoleWindow::close);
-	DKDuktape::AttachFunction("CPP_DKConsoleWindow_focus", DKConsoleWindow::focus);
-	DKDuktape::AttachFunction("CPP_DKConsoleWindow_moveBy", DKConsoleWindow::moveBy);
-	DKDuktape::AttachFunction("CPP_DKConsoleWindow_moveTo", DKConsoleWindow::moveTo);
-	DKDuktape::AttachFunction("CPP_DKConsoleWindow_resizeBy", DKConsoleWindow::resizeBy);
-	DKDuktape::AttachFunction("CPP_DKConsoleWindow_resizeTo", DKConsoleWindow::resizeTo);
-	*/
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_blur", ConsoleWindow::blur);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_close", ConsoleWindow::close);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_focus", ConsoleWindow::focus);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_moveBy", ConsoleWindow::moveBy);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_moveTo", ConsoleWindow::moveTo);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_resizeBy", ConsoleWindow::resizeBy);
+	DKDuktape::AttachFunction("CPP_ConsoleWindow_resizeTo", ConsoleWindow::resizeTo);
 
-    DKApp::AppendLoopFunc(&DKConsoleWindow::Loop, this);
+    DKApp::AppendLoopFunc(&ConsoleWindow::Loop, this);
     return true;
 }
 
-bool DKConsoleWindow::End(){
+bool ConsoleWindow::End(){
 	DKDEBUGFUNC();
 #if WIN
     SetConsoleMode(hStdin, fdwSaveOldMode); // Restore input mode on exit.
@@ -162,7 +157,7 @@ bool DKConsoleWindow::End(){
 	return true;
 }
 
-void DKConsoleWindow::Loop() {
+void ConsoleWindow::Loop() {
     //DKDEBUGFUNC(); //EXCESSIVE LOGGING
     /*
     if (GetAsyncKeyState(VK_LBUTTON) & 0x01)
@@ -183,7 +178,7 @@ void DKConsoleWindow::Loop() {
         return;
 
     DWORD cNumRead;
-    //DWORD fdwMode;
+    DWORD fdwMode;
     DWORD i;
     INPUT_RECORD irInBuf[128];
     if (!ReadConsoleInput(
@@ -191,7 +186,7 @@ void DKConsoleWindow::Loop() {
         irInBuf,     // buffer to read into 
         128,         // size of read buffer 
         &cNumRead))  // number of records read 
-            ErrorExit("ReadDKConsoleWindow");
+            ErrorExit("ReadConsoleWindow");
 
     // Dispatch the events to the appropriate handler. 
     for (i = 0; i < cNumRead; i++) {
@@ -219,9 +214,8 @@ void DKConsoleWindow::Loop() {
 #endif
 }
 
-/*
 //// Instance properties ////
-int DKConsoleWindow::closed(duk_context* ctx) {
+int ConsoleWindow::closed(duk_context* ctx) {
     DKDEBUGFUNC(ctx);
 	// TODO
 	bool isClosed = false;
@@ -229,13 +223,13 @@ int DKConsoleWindow::closed(duk_context* ctx) {
 	return true;
 }
 
-int DKConsoleWindow::Columns(duk_context* ctx) {
+int ConsoleWindow::Columns(duk_context* ctx) {
     DKDEBUGFUNC(ctx);
-    duk_push_uint(ctx, DKConsoleWindow::Get()->columns);
+    duk_push_uint(ctx, ConsoleWindow::Get()->columns);
     return true;
 }
 
-int DKConsoleWindow::fullScreen(duk_context* ctx) {
+int ConsoleWindow::fullScreen(duk_context* ctx) {
     DKDEBUGFUNC(ctx);
     //get
     if (!duk_is_boolean(ctx, 0)) {
@@ -283,7 +277,7 @@ int DKConsoleWindow::fullScreen(duk_context* ctx) {
     }
 }
 
-int DKConsoleWindow::innerHeight(duk_context* ctx) {
+int ConsoleWindow::innerHeight(duk_context* ctx) {
     DKDEBUGFUNC(ctx);
 	#if WIN
 		RECT rect;
@@ -296,7 +290,7 @@ int DKConsoleWindow::innerHeight(duk_context* ctx) {
 	return true;
 }
 
-int DKConsoleWindow::innerWidth(duk_context* ctx) {
+int ConsoleWindow::innerWidth(duk_context* ctx) {
     DKDEBUGFUNC(ctx);
 	#if WIN
 		RECT rect;
@@ -309,7 +303,7 @@ int DKConsoleWindow::innerWidth(duk_context* ctx) {
 	return true;
 }
 
-int DKConsoleWindow::name(duk_context* ctx) {
+int ConsoleWindow::name(duk_context* ctx) {
     DKDEBUGFUNC(ctx);
     //get
     if (!duk_is_string(ctx, 0)) {
@@ -332,7 +326,7 @@ int DKConsoleWindow::name(duk_context* ctx) {
     }
 }
 
-int DKConsoleWindow::outerHeight(duk_context* ctx) {
+int ConsoleWindow::outerHeight(duk_context* ctx) {
     DKDEBUGFUNC(ctx);
 	#if WIN
 		RECT rect;
@@ -343,7 +337,7 @@ int DKConsoleWindow::outerHeight(duk_context* ctx) {
 	return true;
 }
 
-int DKConsoleWindow::outerWidth(duk_context* ctx) {
+int ConsoleWindow::outerWidth(duk_context* ctx) {
     DKDEBUGFUNC(ctx);
 	#if WIN
 		RECT rect;
@@ -354,13 +348,13 @@ int DKConsoleWindow::outerWidth(duk_context* ctx) {
 	return true;
 }
 
-int DKConsoleWindow::Rows(duk_context* ctx) {
+int ConsoleWindow::Rows(duk_context* ctx) {
     DKDEBUGFUNC(ctx);
-    duk_push_uint(ctx, DKConsoleWindow::Get()->rows);
+    duk_push_uint(ctx, ConsoleWindow::Get()->rows);
     return true;
 }
 
-int DKConsoleWindow::ScreenX(duk_context* ctx) {
+int ConsoleWindow::ScreenX(duk_context* ctx) {
     DKDEBUGFUNC(ctx);
 	#if WIN
 		RECT rect;
@@ -372,7 +366,7 @@ int DKConsoleWindow::ScreenX(duk_context* ctx) {
 	return true;
 }
 
-int DKConsoleWindow::screenLeft(duk_context* ctx) {
+int ConsoleWindow::screenLeft(duk_context* ctx) {
     DKDEBUGFUNC(ctx);
 	#if WIN
 		RECT rect;
@@ -384,7 +378,7 @@ int DKConsoleWindow::screenLeft(duk_context* ctx) {
 	return true;
 }
 
-int DKConsoleWindow::ScreenY(duk_context* ctx) {
+int ConsoleWindow::ScreenY(duk_context* ctx) {
     DKDEBUGFUNC(ctx);
 	#if WIN
 		RECT rect;
@@ -396,7 +390,7 @@ int DKConsoleWindow::ScreenY(duk_context* ctx) {
 	return true;
 }
 
-int DKConsoleWindow::screenTop(duk_context* ctx) {
+int ConsoleWindow::screenTop(duk_context* ctx) {
     DKDEBUGFUNC(ctx);
 	#if WIN
 		RECT rect;
@@ -409,28 +403,28 @@ int DKConsoleWindow::screenTop(duk_context* ctx) {
 }
 
 //// Instance methods ////
-int DKConsoleWindow::blur(duk_context* ctx) {
+int ConsoleWindow::blur(duk_context* ctx) {
     DKDEBUGFUNC(ctx);
 	#if WIN
 		ShowWindow(GetConsoleWindow(), SW_SHOWMINNOACTIVE);
 	#endif
 	return true;
 }
-int DKConsoleWindow::close(duk_context* ctx) {
+int ConsoleWindow::close(duk_context* ctx) {
     DKDEBUGFUNC(ctx);
 	#if WIN
 		ShowWindow(GetConsoleWindow(), SW_HIDE);
 	#endif
 	return true;
 }
-int DKConsoleWindow::focus(duk_context* ctx) {
+int ConsoleWindow::focus(duk_context* ctx) {
     DKDEBUGFUNC(ctx);
 	#if WIN
 		ShowWindow(GetConsoleWindow(), SW_SHOW);
 	#endif
 	return true;
 }
-int DKConsoleWindow::moveBy(duk_context* ctx) {
+int ConsoleWindow::moveBy(duk_context* ctx) {
     DKDEBUGFUNC(ctx);
 	#if WIN
 		int deltaX = duk_require_int(ctx, 0);
@@ -446,7 +440,7 @@ int DKConsoleWindow::moveBy(duk_context* ctx) {
 	#endif
 	return true;
 }
-int DKConsoleWindow::moveTo(duk_context* ctx) {
+int ConsoleWindow::moveTo(duk_context* ctx) {
     DKDEBUGFUNC(ctx);
 	#if WIN
 		int x = duk_require_int(ctx, 0);
@@ -462,7 +456,7 @@ int DKConsoleWindow::moveTo(duk_context* ctx) {
 	#endif
 	return true;
 }
-int DKConsoleWindow::resizeBy(duk_context* ctx) {
+int ConsoleWindow::resizeBy(duk_context* ctx) {
     DKDEBUGFUNC(ctx);
 	#if WIN
 		int xDelta = duk_require_int(ctx, 0);
@@ -478,7 +472,7 @@ int DKConsoleWindow::resizeBy(duk_context* ctx) {
 	#endif
 	return true;
 }
-int DKConsoleWindow::resizeTo(duk_context* ctx) {
+int ConsoleWindow::resizeTo(duk_context* ctx) {
     DKDEBUGFUNC(ctx);
 	#if WIN
 		int width = duk_require_int(ctx, 0);
@@ -494,10 +488,10 @@ int DKConsoleWindow::resizeTo(duk_context* ctx) {
 	#endif
     return true;
 }
-*/	
+	
 	
 #if WIN
-void DKConsoleWindow::ErrorExit(LPCSTR lpszMessage) {
+void ConsoleWindow::ErrorExit(LPCSTR lpszMessage) {
     DKDEBUGFUNC(lpszMessage);
     fprintf(stderr, "%s\n", lpszMessage);
     // Restore input mode on exit.
@@ -505,39 +499,39 @@ void DKConsoleWindow::ErrorExit(LPCSTR lpszMessage) {
     ExitProcess(0);
 }
 
-void DKConsoleWindow::FocusEventProc(FOCUS_EVENT_RECORD fer) {
+void ConsoleWindow::FocusEventProc(FOCUS_EVENT_RECORD fer) {
     DKDEBUGFUNC(fer);
-    //DKString address = DKDuktape::pointerToAddress(this);
-    //DKString rval;
-    //DKString code;
+    DKString address = DKDuktape::pointerToAddress(this);
+    DKString rval;
+    DKString code;
 
-    //relatedTarget = address;
+    relatedTarget = address;
 
     if (!fer.bSetFocus) {
         //1. blur: sent after element A loses focus.
-        //code = "dispatchFocusEvent('blur','','" + address + "')";
-        //DKDuktape::RunDuktape(code, rval);
+        code = "dispatchFocusEvent('blur','','" + address + "')";
+        DKDuktape::RunDuktape(code, rval);
 
         //2. focusout: sent after the blur event.
-        //code = "dispatchFocusEvent('focusout','','" + address + "')";
-        //DKDuktape::RunDuktape(code, rval);
+        code = "dispatchFocusEvent('focusout','','" + address + "')";
+        DKDuktape::RunDuktape(code, rval);
     }
     else {
         //3. focus: sent after element B receives focus.
-        //code = "dispatchFocusEvent('focus','','" + address + "')";
-        //DKDuktape::RunDuktape(code, rval);
+        code = "dispatchFocusEvent('focus','','" + address + "')";
+        DKDuktape::RunDuktape(code, rval);
 
         //4. focusin: sent after the focus event.
-        //code = "dispatchFocusEvent('focusin','','" + address + "')";
-        //DKDuktape::RunDuktape(code, rval);
+        code = "dispatchFocusEvent('focusin','','" + address + "')";
+        DKDuktape::RunDuktape(code, rval);
     }
 }
 
-void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
+void ConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
     DKDEBUGFUNC(ker);
-    //DKString address = DKDuktape::pointerToAddress(this);
-    //DKString rval;
-    //DKString code;
+    DKString address = DKDuktape::pointerToAddress(this);
+    DKString rval;
+    DKString code;
 
     // altKey
     if (ker.dwControlKeyState & LEFT_ALT_PRESSED || ker.dwControlKeyState & RIGHT_ALT_PRESSED)
@@ -585,71 +579,35 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
         shiftKey = false;
 
     if (ker.bKeyDown) {
-        //code = "dispatchKeyboardEvent('keydown','','" + address + "')";	// JS
-		//DKDuktape::RunDuktape(code, rval);								// JS
-		DKKeyboardEvent event("keydown", "", this);							// CPP
-		event.altKey = altKey;
-		event.code = code;
-		event.ctrlKey = ctrlKey;
-		event.isComposing = isComposing;
-		event.key = key;
-		event.locale = locale;
-		event.location = location;
-		event.metaKey = metaKey;
-		event.repeat = repeat;
-		event.shiftKey = shiftKey;
-		DKEventTarget::dispatchEvent(event);								// CPP
+        code = "dispatchKeyboardEvent('keydown','','" + address + "')";
+        DKDuktape::RunDuktape(code, rval);
 
 		//Only fire keypress on alphanumeric keys.
         if (ker.uChar.AsciiChar < 32)
             return;
-		//code = "dispatchKeyboardEvent('keypress','','" + address + "')";	// JS
-		//DKDuktape::RunDuktape(code, rval);								// JS
-		DKKeyboardEvent eventB("keypress", "", this);						// CPP
-		eventB.altKey = altKey;
-		eventB.code = code;
-		eventB.ctrlKey = ctrlKey;
-		eventB.isComposing = isComposing;
-		eventB.key = key;
-		eventB.locale = locale;
-		eventB.location = location;
-		eventB.metaKey = metaKey;
-		eventB.repeat = repeat;
-		eventB.shiftKey = shiftKey;
-		DKEventTarget::dispatchEvent(eventB);								// CPP
+		code = "dispatchKeyboardEvent('keypress','','" + address + "')";
+		DKDuktape::RunDuktape(code, rval);
     }
     else {
-        //code = "dispatchKeyboardEvent('keyup','','" + address + "')";		// JS
-        //DKDuktape::RunDuktape(code, rval);								// JS
-		DKKeyboardEvent event("keyup", "", this);							// CPP
-		event.altKey = altKey;
-		event.code = code;
-		event.ctrlKey = ctrlKey;
-		event.isComposing = isComposing;
-		event.key = key;
-		event.locale = locale;
-		event.location = location;
-		event.metaKey = metaKey;
-		event.repeat = repeat;
-		event.shiftKey = shiftKey;
-		DKEventTarget::dispatchEvent(event);								// CPP
+        code = "dispatchKeyboardEvent('keyup','','" + address + "')";
+        DKDuktape::RunDuktape(code, rval);
     }
 }
 
-void DKConsoleWindow::MenuEventProc(MENU_EVENT_RECORD mer) {
+void ConsoleWindow::MenuEventProc(MENU_EVENT_RECORD mer) {
     DKDEBUGFUNC(mer);
-    DKINFO("DKConsoleWindow::MenuEventProc() \n");
+    DKINFO("ConsoleWindow::MenuEventProc() \n");
 }
 
-void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
+void ConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
     DKDEBUGFUNC(mer);
-    //DKINFO("DKConsoleWindow::MouseEventProc()\n");
+    //DKINFO("ConsoleWindow::MouseEventProc()\n");
 	#ifndef MOUSE_HWHEELED
 		#define MOUSE_HWHEELED 0x0008
 	#endif
-    //DKString address = DKDuktape::pointerToAddress(this);
-    //DKString rval;
-    //DKString code;
+    DKString address = DKDuktape::pointerToAddress(this);
+    DKString rval;
+    DKString code;
 
     switch (mer.dwEventFlags){
 		case 0:
@@ -708,19 +666,19 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                 if (!button_state[0]) {
                     button_state[0] = true;
                     button = 0;
-                    //code = "dispatchMouseEvent('mousedown','','" + address + "')";
-                    //DKDuktape::RunDuktape(code, rval);
+                    code = "dispatchMouseEvent('mousedown','','" + address + "')";
+                    DKDuktape::RunDuktape(code, rval);
                     break;
                 }
             }
             else if (button_state[0]) {
                 button_state[0] = false;
                 button = 0;
-                //code = "dispatchMouseEvent('mouseup','','" + address + "')";
-                //DKDuktape::RunDuktape(code, rval);
+                code = "dispatchMouseEvent('mouseup','','" + address + "')";
+                DKDuktape::RunDuktape(code, rval);
 
-                //code = "dispatchMouseEvent('click','','" + address + "')";
-                //DKDuktape::RunDuktape(code, rval);
+                code = "dispatchMouseEvent('click','','" + address + "')";
+                DKDuktape::RunDuktape(code, rval);
                 break;
             }
 
@@ -728,19 +686,19 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                 if (!button_state[1]) {
                     button_state[1] = true;
                     button = 2;
-                    //code = "dispatchMouseEvent('mousedown','','" + address + "')";
-                    //DKDuktape::RunDuktape(code, rval);
+                    code = "dispatchMouseEvent('mousedown','','" + address + "')";
+                    DKDuktape::RunDuktape(code, rval);
                     break;
                 }
             }
             else if (button_state[1]) {
                 button_state[1] = false;
                 button = 2;
-                //code = "dispatchMouseEvent('mouseup','','" + address + "')";
-                //DKDuktape::RunDuktape(code, rval);
+                code = "dispatchMouseEvent('mouseup','','" + address + "')";
+                DKDuktape::RunDuktape(code, rval);
 
-                //code = "dispatchMouseEvent('contextmenu','','" + address + "')";
-                //DKDuktape::RunDuktape(code, rval);
+                code = "dispatchMouseEvent('contextmenu','','" + address + "')";
+                DKDuktape::RunDuktape(code, rval);
                 break;
             }
 
@@ -748,16 +706,16 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                 if (!button_state[2]) {
                     button_state[2] = true;
                     button = 1;
-                    //code = "dispatchMouseEvent('mousedown','','" + address + "')";
-                    //DKDuktape::RunDuktape(code, rval);
+                    code = "dispatchMouseEvent('mousedown','','" + address + "')";
+                    DKDuktape::RunDuktape(code, rval);
                     break;
                 }
             }
             else if (button_state[2]) {
                 button_state[2] = false;
                 button = 1;
-                //code = "dispatchMouseEvent('mouseup','','" + address + "')";
-                //DKDuktape::RunDuktape(code, rval);
+                code = "dispatchMouseEvent('mouseup','','" + address + "')";
+                DKDuktape::RunDuktape(code, rval);
                 break;
             }
 
@@ -765,16 +723,16 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                 if (!button_state[3]) {
                     button_state[3] = true;
                     button = 3;
-                    //code = "dispatchMouseEvent('mousedown','','" + address + "')";
-                    //DKDuktape::RunDuktape(code, rval);
+                    code = "dispatchMouseEvent('mousedown','','" + address + "')";
+                    DKDuktape::RunDuktape(code, rval);
                     break;
                 }
             }
             else if (button_state[3]) {
                 button_state[3] = false;
                 button = 3;
-                //code = "dispatchMouseEvent('mouseup','','" + address + "')";
-                //DKDuktape::RunDuktape(code, rval);
+                code = "dispatchMouseEvent('mouseup','','" + address + "')";
+                DKDuktape::RunDuktape(code, rval);
                 break;
             }
 
@@ -782,22 +740,22 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                 if (!button_state[4]) {
                     button_state[4] = true;
                     button = 4;
-                    //code = "dispatchMouseEvent('mousedown','','" + address + "')";
-                    //DKDuktape::RunDuktape(code, rval);
+                    code = "dispatchMouseEvent('mousedown','','" + address + "')";
+                    DKDuktape::RunDuktape(code, rval);
                     break;
                 }
             }
             else if (button_state[4]) {
                 button_state[4] = false;
                 button = 4;
-                //code = "dispatchMouseEvent('mouseup','','" + address + "')";
-                //DKDuktape::RunDuktape(code, rval);
+                code = "dispatchMouseEvent('mouseup','','" + address + "')";
+                DKDuktape::RunDuktape(code, rval);
                 break;
             }
 			break;
 		case DOUBLE_CLICK:
-            //code = "dispatchMouseEvent('dblclick','','" + address + "')";
-            //DKDuktape::RunDuktape(code, rval);
+            code = "dispatchMouseEvent('dblclick','','" + address + "')";
+            DKDuktape::RunDuktape(code, rval);
 			break;
 		case MOUSE_HWHEELED: //horizontal mouse wheel
             button = 0;
@@ -805,8 +763,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                 deltaX = -100;
             if ((int32_t)mer.dwButtonState < 0)
                 deltaX = 100;
-            //code = "dispatchWheelEvent('wheel','','" + address + "')";
-            //DKDuktape::RunDuktape(code, rval);
+            code = "dispatchWheelEvent('wheel','','" + address + "')";
+            DKDuktape::RunDuktape(code, rval);
 			break;
 		case MOUSE_WHEELED: //vertical mouse wheel
             button = 0;
@@ -814,8 +772,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                 deltaY = -100;
             if ((int32_t)mer.dwButtonState < 0)
                 deltaY = 100;
-            //code = "dispatchWheelEvent('wheel','','" + address + "')";
-            //DKDuktape::RunDuktape(code, rval);
+            code = "dispatchWheelEvent('wheel','','" + address + "')";
+            DKDuktape::RunDuktape(code, rval);
 			break;
         case MOUSE_MOVED:
             //// Cursor Position ////
@@ -850,8 +808,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
             x = clientX;
             y = clientY;
             
-            //code = "dispatchMouseEvent('mousemove','','" + address + "')";
-            //DKDuktape::RunDuktape(code, rval);
+            code = "dispatchMouseEvent('mousemove','','" + address + "')";
+            DKDuktape::RunDuktape(code, rval);
             break;
 		default:
 			DKERROR("unknown event! \n");
@@ -859,14 +817,14 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
     }
 }
 
-void DKConsoleWindow::ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD wbsr) {
+void ConsoleWindow::ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD wbsr) {
     DKDEBUGFUNC(wbsr);
-	//DKString address = DKDuktape::pointerToAddress(this);
-    //DKString rval;
-    //DKString code;
+	DKString address = DKDuktape::pointerToAddress(this);
+    DKString rval;
+    DKString code;
     columns = wbsr.dwSize.X;
     rows = wbsr.dwSize.Y;
-	//code = "dispatchMouseEvent('resize','','" + address + "')";
-    //DKDuktape::RunDuktape(code, rval);
+	code = "dispatchMouseEvent('resize','','" + address + "')";
+    DKDuktape::RunDuktape(code, rval);
 }
 #endif

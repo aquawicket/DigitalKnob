@@ -25,10 +25,11 @@
 */
 
 #pragma once
-#ifndef DKConsoleWindow_H
-#define DKConsoleWindow_H
+#ifndef ConsoleWindow_H
+#define ConsoleWindow_H
 
 #include "DK/DK.h"
+#include "DKDuktape/DKDuktape.h"
 
 #if WIN
 	#include <windows.h>
@@ -36,14 +37,13 @@
 	#include <stdio.h>
 #endif
 
-class DKConsoleWindow : public DKObjectT<DKConsoleWindow>
+class ConsoleWindow : public DKObjectT<ConsoleWindow>
 {
 public:
 	bool Init();
 	bool End();
 	void Loop();
 	
-	/*
 	//// Instance properties ////
 	static int closed(duk_context* ctx);
 	static int Columns(duk_context* ctx);
@@ -67,8 +67,7 @@ public:
 	static int moveTo(duk_context* ctx);
 	static int resizeBy(duk_context* ctx);
 	static int resizeTo(duk_context* ctx);
-	*/
-
+	
 	// KeyboardEvent
 	bool altKey;
 	DKString code;
@@ -136,7 +135,7 @@ public:
 	void ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD);
 #endif
 };
-REGISTER_OBJECT(DKConsoleWindow, false);
+REGISTER_OBJECT(ConsoleWindow, false);
 
 
-#endif //DKConsoleWindow_H
+#endif //ConsoleWindow_H
