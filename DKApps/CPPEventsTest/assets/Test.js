@@ -2,7 +2,28 @@
 console.log("\n\n ___JS Event Test___\n");
 
 
-
+//////////////// GENERIC EVENT //////////////////////////////
+function printEventProperties(event){
+	console.log("event.bubbles="+event.bubbles)
+	console.log("event.cancelable="+event.cancelable)
+	console.log("event.composed="+event.composed)
+	console.log("event.currentTarget="+event.currentTarget)
+	console.log("event.defaultPrevented="+event.defaultPrevented)
+	console.log("event.eventPhase="+event.eventPhase)			
+	console.log("event.isTrusted="+event.isTrusted)		
+	console.log("event.target="+event.target)			
+	console.log("event.timeStamp="+event.timeStamp)
+	console.log("event.type="+event.type)
+}
+function onGeneric(event){
+	console.log("\n onGeneric()")
+	printEventProperties(event)
+}
+const pointer = "123"
+const event = new Event('generic', '', pointer)
+event.target = new EventTarget(pointer)
+event.target.addEventListener('generic', onGeneric)
+event.target.dispatchEvent(event)
 
 
 
@@ -12,16 +33,7 @@ CPP_DK_Create("CPPEventsTest/DKConsoleWindow.js");
 const myConsoleWindow = new DKConsoleWindow('myConsoleWindow')
 
 
-//////////////// GENERIC EVENT //////////////////////////////
-function onGeneric(event){
-	console.log("\n onGeneric()")
-	//printEventProperties(event)
-}
-myConsoleWindow.addEventListener('generic', onGeneric)
 
-const event = new Event('generic', '', myConsoleWindow)
-event.target = new EventTarget(myConsoleWindow)
-event.target.dispatchEvent(event)
 
 
 /*
