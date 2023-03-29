@@ -1,73 +1,87 @@
-/*
-* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
-*
-* For the latest information, see https://github.com/aquawicket/DigitalKnob
-*
-* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
-*
-* Permission is hereby granted, free of charge, to any person obtaining a copy
-* of this software and associated documentation files(the "Software"), to deal
-* in the Software without restriction, including without limitation the rights
-* to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
-* copies of the Software, and to permit persons to whom the Software is
-* furnished to do so, subject to the following conditions :
-*
-* The above copyright notice and this permission notice shall be included in all
-* copies or substantial portions of the Software.
-*
-* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-* SOFTWARE.
-*/
-
-// https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent
-// https://w3c.github.io/uievents/#interface-keyboardevent
-
 #pragma once
 #ifndef DKKeyboardEvent_H
 #define DKKeyboardEvent_H
 
-#include "DKDuktape/DKDuktape.h"
+#include "DK/DK.h"
+#include "JSEventsTest/DKEvent.h"
 
 
-class DKKeyboardEvent : public DKObjectT<DKKeyboardEvent>
+// https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent
+class DKKeyboardEvent : public DKEvent
 {
 public:
-	bool Init();
+	////// Constructor //////
+	// [KeyboardEvent()] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/KeyboardEvent
+	DKKeyboardEvent(DKString _type, DKString _options, void* _pointer) : DKEvent(_type, _options, _pointer) {
+		altKey = false;
+		code = "TODO";
+		ctrlKey = false;
+		isComposing = false;
+		key = "TODO";
+		locale = "TODO";
+		location = 0;
+		metaKey = false;
+		repeat = false;
+		shiftKey = false;
+	}
 	
-	// Properties
-	static int altKey(duk_context* ctx);
-	static int code(duk_context* ctx);
-	static int ctrlKey(duk_context* ctx);
-	static int isComposing(duk_context* ctx);
-	static int key(duk_context* ctx);
-	static int locale(duk_context* ctx);
-	static int location(duk_context* ctx);
-	static int metaKey(duk_context* ctx);
-	static int repeat(duk_context* ctx);
-	static int shiftKey(duk_context* ctx);
-
-	// Methods
-	static int getModifierState(duk_context* ctx);
-
-	// Obsolete methods
-	static int initKeyEvent(duk_context* ctx);
-	static int initKeyboardEvent(duk_context* ctx);
-
-	//Obsolete properties
-	static int char1(duk_context* ctx);
-	static int charCode(duk_context* ctx);
-	static int keyCode(duk_context* ctx);
-	static int keyIdentifier(duk_context* ctx);
-	static int keyLocation(duk_context* ctx);
-	static int which(duk_context* ctx);
+	
+	////// Constants //////
+	// [DOM_KEY_LOCATION_STANDARD]	0x00
+	// [DOM_KEY_LOCATION_LEFT]		0x01
+	// [DOM_KEY_LOCATION_RIGHT]		0x02
+	// [DOM_KEY_LOCATION_NUMPAD]	0x03
+	
+	
+	////// Instance properties //////
+	// [KeyboardEvent.altKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/altKey
+	bool altKey;
+	// [KeyboardEvent.code](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code
+	DKString code;
+	// [KeyboardEvent.ctrlKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/ctrlKey
+	bool ctrlKey;
+	// [KeyboardEvent.isComposing](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/isComposing
+	bool isComposing;
+	// [KeyboardEvent.key](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key
+	DKString key;
+	// [KeyboardEvent.locale](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/locale
+	DKString locale;
+	// [KeyboardEvent.location](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/location
+	unsigned int location;
+	// [KeyboardEvent.metaKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/metaKey
+	bool metaKey;
+	// [KeyboardEvent.repeat](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/repeat
+	bool repeat;
+	// [KeyboardEvent.shiftKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/shiftKey
+	bool shiftKey;
+	
+	
+	////// Instance methods //////
+	// [KeyboardEvent.getModifierState()] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/getModifierState
+	
+	
+	////// Obsolete methods //////
+	// [KeyboardEvent.initKeyEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/initKeyEvent
+	// [KeyboardEvent.initKeyboardEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/initKeyboardEvent
+	
+	
+	////// Obsolete properties //////
+	// [KeyboardEvent.char](Non-standard)(Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/char
+	// [KeyboardEvent.charCode](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/charCode
+	// [KeyboardEvent.keyCode](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode
+	// [KeyboardEvent.keyIdentifier](Non-standard)(Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyIdentifier
+	// [KeyboardEvent.keyLocation](Non-standard)(Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyLocation
+	// [KeyboardEvent.which](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/which
+	
+	
+	////// Events //////
+	// [keydown] https://developer.mozilla.org/en-US/docs/Web/API/Element/keydown_event
+	// [keyup] https://developer.mozilla.org/en-US/docs/Web/API/Element/keyup_event
+	
+	
+	////// Obsolete events //////
+	// [keypress](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Element/keypress_event
 };
 
-
-REGISTER_OBJECT(DKKeyboardEvent, true)
 
 #endif //DKKeyboardEvent_H
