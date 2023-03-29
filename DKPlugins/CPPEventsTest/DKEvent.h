@@ -25,6 +25,23 @@ public:
 		
 		options = _options;
 		pointer = _pointer;
+		//address = _address;
+	}
+	DKEvent(DKString _type, DKString _options, DKString _address){
+		bubbles = false;
+		cancelable = false;
+		composed = false;
+		//currentTarget = _pointer;
+		defaultPrevented = false;
+		eventPhase = 0;
+		isTrusted = false;
+		//target = _pointer;
+		timeStamp = 0;
+		type = _type;
+		
+		options = _options;
+		//pointer = _pointer;
+		address = _address;
 	}
 	
 	
@@ -83,6 +100,7 @@ public:
 	////// DK properties //////
 	DKString options;
 	void* pointer;
+	DKString address;
 };
 
 

@@ -5,7 +5,9 @@
 
 // [Event()] https://developer.mozilla.org/en-US/docs/Web/API/Event/Event
 var Event = function Event(_type, _options, _pointer) {
+	console.log("Event("+_type+","+ _options+","+ _pointer+")")
 	
+	this.address = CPP_DKEvent(_type, _options, _pointer);
     this._type = _type;
 	this._options = _options;
 	this._pointer = _pointer;
@@ -14,19 +16,19 @@ var Event = function Event(_type, _options, _pointer) {
 	// [Event.bubbles](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/bubbles
     Object.defineProperty(this, "bubbles", {
         get: function bubbles() {
-            return CPP_DKEvent_bubbles(_pointer);
+            return CPP_DKEvent_bubbles(this.address);
         }
     });
 	// [Event.cancelable](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelable
     Object.defineProperty(this, "cancelable", {
         get: function cancelable() {
-            return CPP_DKEvent_cancelable(_pointer);
+            return CPP_DKEvent_cancelable(this.address);
         }
     });
     // [Event.composed](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/composed
     Object.defineProperty(this, "composed", {
         get: function composed() {
-            return CPP_DKEvent_composed(_pointer);
+            return CPP_DKEvent_composed(this.address);
         }
     });
     // [Event.currentTarget](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/currentTarget
@@ -45,19 +47,19 @@ var Event = function Event(_type, _options, _pointer) {
 	// [Event.defaultPrevented](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/defaultPrevented
 	Object.defineProperty(this, "defaultPrevented", {
         get: function defaultPrevented() {
-            return CPP_DKEvent_defaultPrevented(_pointer);
+            return CPP_DKEvent_defaultPrevented(this.address);
         }
     });
 	// [Event.eventPhase](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/eventPhase
 	Object.defineProperty(this, "eventPhase", {
         get: function eventPhase() {
-            return CPP_DKEvent_eventPhase(_pointer);
+            return CPP_DKEvent_eventPhase(this.address);
         }
     });
 	// [Event.isTrusted](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
 	Object.defineProperty(this, "isTrusted", {
         get: function isTrusted() {
-            return CPP_DKEvent_isTrusted(_pointer);
+            return CPP_DKEvent_isTrusted(this.address);
         }
     });
 	// [Event.target](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/target
@@ -65,7 +67,7 @@ var Event = function Event(_type, _options, _pointer) {
     Object.defineProperty(this, "target", {
         //Read Only
         get: function target() {
-            var elementPointer = CPP_DKEvent_target(_pointer);
+            var elementPointer = CPP_DKEvent_target(this.address);
             if (!elementPointer) {
                 return;
             }
@@ -76,13 +78,14 @@ var Event = function Event(_type, _options, _pointer) {
 	// [Event.timeStamp](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/timeStamp
 	Object.defineProperty(this, "timeStamp", {
         get: function timeStamp() {
-            return CPP_DKEvent_timeStamp(_pointer);
+            return CPP_DKEvent_timeStamp(this.address);
         }
     });
 	// [Event.type](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/type
 	Object.defineProperty(this, "type", {
         get: function type() {
-            return this._type//CPP_DKEvent_type(_pointer);
+            //return this._type
+			return CPP_DKEvent_type(this.address);
         }
     });
     
@@ -90,31 +93,31 @@ var Event = function Event(_type, _options, _pointer) {
 	// [Event.cancelBubble](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelBubble
     Object.defineProperty(this, "cancelBubble", {
         set: function cancelBubble(flag) {
-            return CPP_DKEvent_cancelBubble(_pointer, flag);
+            return CPP_DKEvent_cancelBubble(this.address, flag);
         }
     });
 	// [Event.explicitOriginalTarget](Read only)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Event/explicitOriginalTarget
 	Object.defineProperty(this, "explicitOriginalTarget", {
         get: function explicitOriginalTarget() {
-            return CPP_DKEvent_explicitOriginalTarget(_pointer);
+            return CPP_DKEvent_explicitOriginalTarget(this.address);
         }
     });
 	// [Event.originalTarget](Read only)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Event/originalTarget
 	Object.defineProperty(this, "originalTarget", {
         get: function originalTarget() {
-            return CPP_DKEvent_originalTarget(_pointer);
+            return CPP_DKEvent_originalTarget(this.address);
         }
     });
 	// [Event.originalTarget](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/returnValue
 	Object.defineProperty(this, "returnValue", {
         get: function returnValue() {
-            return CPP_DKEvent_returnValue(_pointer);
+            return CPP_DKEvent_returnValue(this.address);
         }
     });
 	// [Event.scoped](Read only)(Deprecated)
 	Object.defineProperty(this, "scoped", {
         get: function scoped() {
-            return CPP_DKEvent_scoped(_pointer);
+            return CPP_DKEvent_scoped(this.address);
         }
     });
 	
@@ -122,12 +125,12 @@ var Event = function Event(_type, _options, _pointer) {
 	/*
 	Object.defineProperty(this, "deepPath", {
         get: function deepPath(){
-            return CPP_DKEvent_deepPath(_pointer);
+            return CPP_DKEvent_deepPath(this.address);
         }
     });
     Object.defineProperty(this, "srcElement", {
         get: function srcElement() {
-            var elementPointer = CPP_DKEvent_srcElement(_pointer);
+            var elementPointer = CPP_DKEvent_srcElement(this.address);
             if (!elementPointer) {
                 return;
             }
@@ -143,39 +146,39 @@ var Event = function Event(_type, _options, _pointer) {
     }
 	// [Event.preventDefault()] https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault
 	Event.prototype.preventDefault = function preventDefault() {
-        CPP_DKEvent_preventDefault(_pointer);
+        CPP_DKEvent_preventDefault(this.address);
     }
 	// [Event.stopImmediatePropagation()] https://developer.mozilla.org/en-US/docs/Web/API/Event/stopImmediatePropagation
 	Event.prototype.stopImmediatePropagation = function stopImmediatePropagation() {
-        CPP_DKEvent_stopImmediatePropagation(_pointer);
+        CPP_DKEvent_stopImmediatePropagation(this.address);
     }
 	// [Event.stopPropagation()] https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation
 	Event.prototype.stopPropagation = function stopPropagation() {
-        CPP_DKEvent_stopPropagation(_pointer);
+        CPP_DKEvent_stopPropagation(this.address);
     }
 	
 	////// Deprecated methods //////
 	// [Event.initEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/initEvent
 	Event.prototype.initEvent = function initEvent() {
-        CPP_DKEvent_initEvent(_pointer);
+        CPP_DKEvent_initEvent(this.address);
     }
 	
 	////// Obsolete methods //////
 	/*
     Event.prototype.createEvent = function createEvent() {
-        CPP_DKEvent_createEvent(_pointer);
+        CPP_DKEvent_createEvent(this.address);
     }
     Event.prototype.composedPath = function composedPath() {
-        CPP_DKEvent_composedPath(_pointer);
+        CPP_DKEvent_composedPath(this.address);
     }
     Event.prototype.getPreventDefault = function getPreventDefault() {
-        CPP_DKEvent_getPreventDefault(_pointer);
+        CPP_DKEvent_getPreventDefault(this.address);
     }
     Event.prototype.preventBubble = function preventBubble() {
-        CPP_DKEvent_preventBubble(_pointer);
+        CPP_DKEvent_preventBubble(this.address);
     }
     Event.prototype.preventCapture = function preventCapture() {
-        CPP_DKEvent_preventCapture(_pointer);
+        CPP_DKEvent_preventCapture(this.address);
     }
 	*/
 
