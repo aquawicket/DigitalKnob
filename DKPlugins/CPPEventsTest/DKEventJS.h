@@ -6,12 +6,16 @@
 #include "CPPEventsTest/DKEvent.h"
 #include "CPPEventsTest/DKEventTarget.h"
 
-
+// [Event] https://developer.mozilla.org/en-US/docs/Web/API/Event
 class DKEventJS : public DKObjectT<DKEventJS>
 {
 public:
 	bool Init(){
-		DKDuktape::AttachFunction("CPP_DKEvent", DKEventJS::constructor);
+		
+		////// Constructor //////
+		DKDuktape::AttachFunction("CPP_DKEvent", DKEventJS::constructor); // [Event()] https://developer.mozilla.org/en-US/docs/Web/API/Event/Event
+		
+		////// Instance properties //////
 		DKDuktape::AttachFunction("CPP_DKEvent_bubbles", DKEventJS::bubbles);
 		DKDuktape::AttachFunction("CPP_DKEvent_cancelable", DKEventJS::cancelable);
 		DKDuktape::AttachFunction("CPP_DKEvent_composed", DKEventJS::composed);
@@ -22,9 +26,30 @@ public:
 		DKDuktape::AttachFunction("CPP_DKEvent_target", DKEventJS::target);
 		DKDuktape::AttachFunction("CPP_DKEvent_timeStamp", DKEventJS::timeStamp);
 		DKDuktape::AttachFunction("CPP_DKEvent_type", DKEventJS::type);
+		
+		////// Legacy and non-standard properties //////
+		DKDuktape::AttachFunction("CPP_DKEvent_cancelBubble", DKEventJS::cancelBubble);
+		DKDuktape::AttachFunction("CPP_DKEvent_explicitOriginalTarget", DKEventJS::explicitOriginalTarget);
+		DKDuktape::AttachFunction("CPP_DKEvent_originalTarget", DKEventJS::originalTarget);
+		DKDuktape::AttachFunction("CPP_DKEvent_returnValue", DKEventJS::returnValue);
+		DKDuktape::AttachFunction("CPP_DKEvent_scoped", DKEventJS::scoped);
+		
+		/*
+		////// Instance methods //////
+		DKDuktape::AttachFunction("CPP_DKEvent_composedPath", DKEventJS::composedPath);
+		DKDuktape::AttachFunction("CPP_DKEvent_preventDefault", DKEventJS::preventDefault);
+		DKDuktape::AttachFunction("CPP_DKEvent_stopImmediatePropagation", DKEventJS::stopImmediatePropagation);
+		DKDuktape::AttachFunction("CPP_DKEvent_stopPropagation", DKEventJS::stopPropagation);
+		
+		////// Deprecated methods //////
+		DKDuktape::AttachFunction("CPP_DKEvent_initEvent", DKEventJS::initEvent);
+		*/
+		
 		return true;
 	}
 	
+	
+	////// Constructor //////
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
@@ -37,10 +62,15 @@ public:
 		duk_push_string(ctx, eventAddress.c_str());	
 		return true;
 	}
+	
+	
+	////// Instance properties //////
 	static int bubbles(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKEvent* event = (DKEvent*)DKDuktape::addressToPointer(eventAddress);
+		if (duk_is_boolean(ctx, 1))
+			event->bubbles = duk_to_boolean(ctx, 1);
 		duk_push_boolean(ctx, event->bubbles);	
 		return true;
 	}
@@ -62,7 +92,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKEvent* event = (DKEvent*)DKDuktape::addressToPointer(eventAddress);
-		//duk_push_string(ctx, event->currentTarget);	
+		duk_push_string(ctx, event->currentTargetAddress.c_str());	
 		return true;
 	}
 	static int defaultPrevented(duk_context* ctx){
@@ -90,7 +120,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKEvent* event = (DKEvent*)DKDuktape::addressToPointer(eventAddress);
-		//duk_push_string(ctx, event->target);	
+		duk_push_string(ctx, event->targetAddress.c_str());	
 		return true;
 	}
 	static int timeStamp(duk_context* ctx){
@@ -107,6 +137,64 @@ public:
 		duk_push_string(ctx, event->type.c_str());	
 		return true;
 	}
+	
+	
+	////// Legacy and non-standard properties //////
+	static int cancelBubble(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString eventAddress = duk_require_string(ctx, 0);
+		DKEvent* event = (DKEvent*)DKDuktape::addressToPointer(eventAddress);
+		/*
+		if (duk_is_boolean(ctx, 1))
+			event->cancelBubble = duk_to_boolean(ctx, 1);
+		duk_push_boolean(ctx, event->cancelBubble);	
+		return true;
+		*/
+		return DKTODO();
+	}
+	static int explicitOriginalTarget(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString eventAddress = duk_require_string(ctx, 0);
+		DKEvent* event = (DKEvent*)DKDuktape::addressToPointer(eventAddress);
+		/*
+		duk_push_boolean(ctx, event->explicitOriginalTarget);	
+		return true;
+		*/
+		return DKTODO();
+	}
+	static int originalTarget(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString eventAddress = duk_require_string(ctx, 0);
+		DKEvent* event = (DKEvent*)DKDuktape::addressToPointer(eventAddress);
+		/*
+		duk_push_boolean(ctx, event->originalTarget);	
+		return true;
+		*/
+		return DKTODO();
+	}
+	static int returnValue(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString eventAddress = duk_require_string(ctx, 0);
+		DKEvent* event = (DKEvent*)DKDuktape::addressToPointer(eventAddress);
+		/*
+		if (duk_is_boolean(ctx, 1))
+			event->returnValue = duk_to_boolean(ctx, 1);
+		duk_push_boolean(ctx, event->returnValue);	
+		return true;
+		*/
+		return DKTODO();
+	}
+	static int scoped(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString eventAddress = duk_require_string(ctx, 0);
+		DKEvent* event = (DKEvent*)DKDuktape::addressToPointer(eventAddress);
+		/*
+		duk_push_boolean(ctx, event->scoped);	
+		return true;
+		*/
+		return DKTODO();
+	}
+	
 };
 REGISTER_OBJECT(DKEventJS, true)
 

@@ -11,7 +11,7 @@ function printEventProperties(event){
 	console.log("event.defaultPrevented="+event.defaultPrevented)
 	console.log("event.eventPhase="+event.eventPhase)			
 	console.log("event.isTrusted="+event.isTrusted)		
-	//console.log("event.target="+event.target)			
+	console.log("event.target="+event.target)			
 	console.log("event.timeStamp="+event.timeStamp)
 	console.log("event.type="+event.type)
 }
@@ -21,7 +21,8 @@ function onGeneric(event){
 }
 const pointer = "123"
 const event = new Event('generic', '', pointer)
-event.target = new EventTarget(pointer)
+//event.bubbles = true;
+//event.target = new EventTarget(pointer)
 event.target.addEventListener('generic', onGeneric)
 event.target.dispatchEvent(event)
 

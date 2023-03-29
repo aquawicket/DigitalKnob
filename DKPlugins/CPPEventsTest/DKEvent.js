@@ -4,19 +4,23 @@
 //event_instances = [];
 
 // [Event()] https://developer.mozilla.org/en-US/docs/Web/API/Event/Event
-var Event = function Event(_type, _options, _pointer) {
-	console.log("Event("+_type+","+ _options+","+ _pointer+")")
+var Event = function Event(type, options, targetAddress) {
+	console.log("Event("+type+","+options+","+targetAddress+")")
 	
-	this.address = CPP_DKEvent(_type, _options, _pointer);
-    //this._type = _type;
-	//this._options = _options;
-	//this._pointer = _pointer;
+	//this.target = new EventTarget(targetAddress);
+	this.address = CPP_DKEvent(type, options, targetAddress);
+    //this.type = type;
+	//this.options = options;
+	//this.targetAddress = targetAddress;
 	
     ////// Instance properties //////
 	// [Event.bubbles](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/bubbles
     Object.defineProperty(this, "bubbles", {
         get: function bubbles() {
             return CPP_DKEvent_bubbles(this.address);
+        },
+		set: function bubbles(flag) {
+            return CPP_DKEvent_bubbles(this.address, flag);
         }
     });
 	// [Event.cancelable](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelable
@@ -34,14 +38,12 @@ var Event = function Event(_type, _options, _pointer) {
     // [Event.currentTarget](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/currentTarget
     Object.defineProperty(this, "currentTarget", {
         get: function currentTarget() {
-			return window;
-			/*
-            var elementPointer = CPP_DKEvent_currentTarget(_pointer);
-            if (!elementPointer) {
+            var targetAddress = CPP_DKEvent_currentTarget(this.address);
+            if (!targetAddress) {
                 return;
             }
-            return new HTMLElement(elementPointer);
-			*/
+            //return new HTMLElement(targetAddress);
+			return new EventTarget(targetAddress);
         }
     });
 	// [Event.defaultPrevented](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/defaultPrevented
@@ -63,18 +65,16 @@ var Event = function Event(_type, _options, _pointer) {
         }
     });
 	// [Event.target](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/target
-	/*
     Object.defineProperty(this, "target", {
-        //Read Only
         get: function target() {
-            var elementPointer = CPP_DKEvent_target(this.address);
-            if (!elementPointer) {
+            var targetAddress = CPP_DKEvent_target(this.address);
+            if (!targetAddress) {
                 return;
             }
-            return new HTMLElement(elementPointer);
+            //return new HTMLElement(targetAddress);
+			return new EventTarget(targetAddress);
         }
     });
-	*/
 	// [Event.timeStamp](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/timeStamp
 	Object.defineProperty(this, "timeStamp", {
         get: function timeStamp() {
@@ -89,10 +89,14 @@ var Event = function Event(_type, _options, _pointer) {
         }
     });
     
+	
     ////// Legacy and non-standard properties //////
-	// [Event.cancelBubble](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelBubble
+	// [Event.cancelBubble] https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelBubble
     Object.defineProperty(this, "cancelBubble", {
-        set: function cancelBubble(flag) {
+        get: function cancelBubble() {
+            return CPP_DKEvent_cancelBubble(this.address);
+        },
+		set: function cancelBubble(flag) {
             return CPP_DKEvent_cancelBubble(this.address, flag);
         }
     });
@@ -108,10 +112,13 @@ var Event = function Event(_type, _options, _pointer) {
             return CPP_DKEvent_originalTarget(this.address);
         }
     });
-	// [Event.originalTarget](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/returnValue
+	// [Event.returnValue](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/returnValue
 	Object.defineProperty(this, "returnValue", {
         get: function returnValue() {
             return CPP_DKEvent_returnValue(this.address);
+        },
+		set: function returnValue(flag) {
+            return CPP_DKEvent_returnValue(this.address, flag);
         }
     });
 	// [Event.scoped](Read only)(Deprecated)
@@ -142,7 +149,10 @@ var Event = function Event(_type, _options, _pointer) {
     ////// Instance methods //////
 	// [Event.composedPath()] https://developer.mozilla.org/en-US/docs/Web/API/Event/composedPath
 	Event.prototype.composedPath = function composedPath() {
-        //TODO
+        // TODO
+		CPP_DKEvent_composedPath(this.address);
+		// Return value
+		// An array of EventTarget objects representing the objects on which an event listener will be invoked.
     }
 	// [Event.preventDefault()] https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault
 	Event.prototype.preventDefault = function preventDefault() {
@@ -159,17 +169,14 @@ var Event = function Event(_type, _options, _pointer) {
 	
 	////// Deprecated methods //////
 	// [Event.initEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/initEvent
-	Event.prototype.initEvent = function initEvent() {
-        CPP_DKEvent_initEvent(this.address);
+	Event.prototype.initEvent = function initEvent(type, bubbles, cancelable) {
+        CPP_DKEvent_initEvent(this.address, type, bubbles, cancelable);
     }
 	
 	////// Obsolete methods //////
 	/*
     Event.prototype.createEvent = function createEvent() {
         CPP_DKEvent_createEvent(this.address);
-    }
-    Event.prototype.composedPath = function composedPath() {
-        CPP_DKEvent_composedPath(this.address);
     }
     Event.prototype.getPreventDefault = function getPreventDefault() {
         CPP_DKEvent_getPreventDefault(this.address);

@@ -26,6 +26,7 @@ public:
 		options = _options;
 		pointer = _pointer;
 		//targetAddress = _targetAddress;
+		//currentTargetAddress = _targetAddress;
 	}
 	DKEvent(DKString _type, DKString _options, DKString _targetAddress){
 		bubbles = false;
@@ -42,6 +43,7 @@ public:
 		options = _options;
 		//pointer = _pointer;
 		targetAddress = _targetAddress;
+		currentTargetAddress = _targetAddress;
 	}
 	
 	
@@ -101,6 +103,7 @@ public:
 	DKString options;
 	void* pointer;
 	DKString targetAddress;
+	DKString currentTargetAddress;
 };
 
 
