@@ -4,6 +4,7 @@
 
 #include "DK/DK.h"
 #include "CPPEventsTest/DKEvent.h"
+#include "DKDuktape/DKDuktape.h"
 
 
 template <typename EventType>

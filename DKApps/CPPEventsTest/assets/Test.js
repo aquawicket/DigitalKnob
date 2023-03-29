@@ -2,10 +2,27 @@
 console.log("\n\n ___JS Event Test___\n");
 
 
+
+
+
+
 /////////////////// ConsoleWindow //////////////////////////
 console.log("/////////// ConsoleWindow /////////////////////")
 CPP_DK_Create("CPPEventsTest/DKConsoleWindow.js");
 const myConsoleWindow = new DKConsoleWindow('myConsoleWindow')
+
+
+//////////////// GENERIC EVENT //////////////////////////////
+function onGeneric(event){
+	console.log("\n onGeneric()")
+	//printEventProperties(event)
+}
+myConsoleWindow.addEventListener('generic', onGeneric)
+
+const event = new Event('generic', '', myConsoleWindow)
+event.target = new EventTarget(myConsoleWindow)
+event.target.dispatchEvent(event)
+
 
 /*
 // KeyboardEvents

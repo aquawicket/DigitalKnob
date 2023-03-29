@@ -10,8 +10,13 @@ bool App::Init() {
 	DKDEBUGFUNC();
 	DKINFO("App::Init() \n");
 	
-	DKClass::DKCreate("DKEvent");																	// CPP
+	//DKClass::DKCreate("DKEvent");																	// CPP
 	DKClass::DKCreate("DKEventTarget");																// CPP
+	
+	//////////// GENERIC EVENT
+	DKEventTarget::addEventListener<DKEvent>("generic", &App::onGeneric, this);						// CPP
+	DKEvent event("generic", "", this);																// CPP
+	DKEventTarget::dispatchEvent(event);															// CPP
 	
 	// console.log("/////////// ConsoleWindow /////////////////////")								// JS
 	DKINFO("/////////// ConsoleWindow ///////////////////// \n");									// CPP
@@ -24,7 +29,7 @@ bool App::Init() {
 	DKEventTarget::addEventListener<DKKeyboardEvent>("keydown", &App::onKeyDown, myConsoleWindow);	// CPP
 
 	//myConsoleWindow.addEventListener('keyup', onKeyUp)											// JS
-	DKEventTarget::addEventListener<DKKeyboardEvent>("keyup", &App::onKeyUp, myConsoleWindow);		// CPP
+	//DKEventTarget::addEventListener<DKKeyboardEvent>("keyup", &App::onKeyUp, myConsoleWindow);	// CPP
 
 	// JS
 	/*
@@ -144,5 +149,13 @@ bool App::onKeyUp(DKKeyboardEvent event) {
 	DKINFO("onKeyUp() \n");
 	printEventProperties(event);
 	printKeyboardEventProperties(event);
+	return true;
+}
+
+// CPP
+bool App::onGeneric(DKEvent event) {
+	DKDEBUGFUNC(event);
+	DKINFO("onGeneric() \n");
+	printEventProperties(event);
 	return true;
 }

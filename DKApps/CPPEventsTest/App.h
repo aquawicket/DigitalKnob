@@ -16,6 +16,7 @@ public:
 	static void printKeyboardEventProperties(DKKeyboardEvent event);
 	static bool onKeyDown(DKKeyboardEvent event);
 	static bool onKeyUp(DKKeyboardEvent event);
+	static bool onGeneric(DKEvent event);
 };
 REGISTER_OBJECT(App, false);
 
