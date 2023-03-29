@@ -1,13 +1,13 @@
 // Event test
 console.log("\n\n ___JS Event Test___\n");
 
-/*
+
 /////////////////// ConsoleWindow //////////////////////////
 console.log("/////////// ConsoleWindow /////////////////////")
-CPP_DK_Create("JSEventsTest/ConsoleWindow.js");
-const myConsoleWindow = new ConsoleWindow('myConsoleWindow')
+CPP_DK_Create("CPPEventsTest/DKConsoleWindow.js");
+const myConsoleWindow = new DKConsoleWindow('myConsoleWindow')
 
-
+/*
 // KeyboardEvents
 function printKeyboardEventProperties(event){
 	console.log("event.altKey="+event.altKey)
