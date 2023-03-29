@@ -38,6 +38,7 @@ class DKEventTargetJS : public DKObjectT<DKEventTargetJS>
 {
 public:
 	bool Init(){
+		DKClass::DKCreate("JSEventsTest/DKEventTarget.js");
 		return true;
 	}
 	

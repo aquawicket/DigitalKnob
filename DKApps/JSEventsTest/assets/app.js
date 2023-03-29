@@ -1,6 +1,6 @@
 CPP_DK_Create("DKConsole");
-CPP_DK_Create("JSEventsTest/DKEvent.js");
-CPP_DK_Create("JSEventsTest/DKEventTarget.js");
+CPP_DK_Create("DKEventJS");
+CPP_DK_Create("DKEventTargetJS");
 CPP_DK_Create("JSEventsTest/DKGlobalEventHandlers.js");
 CPP_DK_Create("DKUIEvent");
 CPP_DK_Create("DKKeyboardEvent");
