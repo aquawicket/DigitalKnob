@@ -27,14 +27,14 @@
 //#ifdef HAVE_DKDuktape
 
 #pragma once
-#ifndef DKEventJS_H
-#define DKEventJS_H
+#ifndef DKEventTargetJS_H
+#define DKEventTargetJS_H
 
 #include "DKDuktape/DKDuktape.h"
 #include "JSEventsTest/DKEvent.h"
 
 
-class DKEventJS : public DKObjectT<DKEventJS>
+class DKEventTargetJS : public DKObjectT<DKEventTargetJS>
 {
 public:
 	bool Init(){
@@ -44,6 +44,6 @@ public:
 };
 
 
-REGISTER_OBJECT(DKEventJS, true)
+REGISTER_OBJECT(DKEventTargetJS, true)
 
-#endif //DKEventJS_H
+#endif //DKEventTargetJS_H
