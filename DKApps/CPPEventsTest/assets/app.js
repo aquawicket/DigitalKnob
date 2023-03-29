@@ -1,1 +1,1 @@
-// TODO
+CPP_DK_Create("Test.js");
