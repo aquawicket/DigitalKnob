@@ -25,9 +25,9 @@ public:
 		
 		options = _options;
 		pointer = _pointer;
-		//address = _address;
+		//targetAddress = _targetAddress;
 	}
-	DKEvent(DKString _type, DKString _options, DKString _address){
+	DKEvent(DKString _type, DKString _options, DKString _targetAddress){
 		bubbles = false;
 		cancelable = false;
 		composed = false;
@@ -41,7 +41,7 @@ public:
 		
 		options = _options;
 		//pointer = _pointer;
-		address = _address;
+		targetAddress = _targetAddress;
 	}
 	
 	
@@ -100,7 +100,7 @@ public:
 	////// DK properties //////
 	DKString options;
 	void* pointer;
-	DKString address;
+	DKString targetAddress;
 };
 
 

@@ -8,9 +8,9 @@ var Event = function Event(_type, _options, _pointer) {
 	console.log("Event("+_type+","+ _options+","+ _pointer+")")
 	
 	this.address = CPP_DKEvent(_type, _options, _pointer);
-    this._type = _type;
-	this._options = _options;
-	this._pointer = _pointer;
+    //this._type = _type;
+	//this._options = _options;
+	//this._pointer = _pointer;
 	
     ////// Instance properties //////
 	// [Event.bubbles](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/bubbles

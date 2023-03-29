@@ -29,16 +29,14 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
 		DKString options = duk_require_string(ctx, 1);
-		DKString address = duk_require_string(ctx, 2);
-		DKINFO("CPP_DKEvent("+type+","+options+","+address+")\n");
+		DKString targetAddress = duk_require_string(ctx, 2);
+		DKINFO("CPP_DKEvent("+type+","+options+","+targetAddress+")\n");
 		
-		DKEvent* event = new DKEvent(type, options, address);
+		DKEvent* event = new DKEvent(type, options, targetAddress);
 		DKString eventAddress = DKDuktape::pointerToAddress(event);
 		duk_push_string(ctx, eventAddress.c_str());	
-		return DKTODO();
+		return true;
 	}
-	
-	//template <typename EventType>
 	static int bubbles(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
