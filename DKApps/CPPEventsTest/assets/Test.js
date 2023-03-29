@@ -33,11 +33,14 @@ function onKeyDown(event){
 	printKeyboardEventProperties(event)
 }
 myConsoleWindow.addEventListener('keydown', onKeyDown)
+*/
 function onKeyUp(event){
 	console.log("\n onKeyUp()")
-	printKeyboardEventProperties(event)
+	//printKeyboardEventProperties(event)
 }
 myConsoleWindow.addEventListener('keyup', onKeyUp)
+
+/*
 function onKeyPress(event){
 	console.log("\n onKeyPress()")
 	printKeyboardEventProperties(event)
