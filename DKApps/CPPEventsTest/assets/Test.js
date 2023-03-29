@@ -5,6 +5,7 @@ console.log("\n\n ___JS Event Test___\n");
 //////////////// GENERIC EVENT //////////////////////////////
 function printEventProperties(event){
 	console.log("event.bubbles="+event.bubbles)
+	/*
 	console.log("event.cancelable="+event.cancelable)
 	console.log("event.composed="+event.composed)
 	console.log("event.currentTarget="+event.currentTarget)
@@ -14,6 +15,7 @@ function printEventProperties(event){
 	console.log("event.target="+event.target)			
 	console.log("event.timeStamp="+event.timeStamp)
 	console.log("event.type="+event.type)
+	*/
 }
 function onGeneric(event){
 	console.log("\n onGeneric()")
