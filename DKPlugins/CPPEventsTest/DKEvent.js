@@ -7,7 +7,8 @@
 var Event = function Event(type, options) {
 	console.log("Event("+type+","+options+")")
 	
-	this.address = CPP_DKEvent(type, options);
+	if(!this.address)
+		this.address = CPP_DKEvent(type, options);
 	
     //this.type = type;
 	//this.options = options;

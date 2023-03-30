@@ -37,8 +37,7 @@ const myConsoleWindow = new DKConsoleWindow('myConsoleWindow')
 // KeyboardEvents
 function printKeyboardEventProperties(keyevent){
 	console.log("keyevent.altKey="+keyevent.altKey)
-	console.log("keyevent.code="+keyevent.code)		
-/*	
+	console.log("keyevent.code="+keyevent.code)			
 	console.log("keyevent.ctrlKey="+keyevent.ctrlKey)
 	console.log("keyevent.isComposing="+keyevent.isComposing)
 	console.log("keyevent.key="+keyevent.key)
@@ -47,14 +46,6 @@ function printKeyboardEventProperties(keyevent){
 	console.log("keyevent.metaKey="+keyevent.metaKey)
 	console.log("keyevent.repeat="+keyevent.repeat)
 	console.log("keyevent.shiftKey="+keyevent.shiftKey)
-	*/
-	
-	//// Obsolete ////
-	//console.log("event.char="+event.char)
-	//console.log("event.charCode="+event.charCode)
-	//console.log("event.keyCode="+event.keyCode)
-	//console.log("event.keyIdentifier="+event.keyIdentifier)
-	//console.log("event.which="+event.which)
 }
 
 /*
@@ -64,14 +55,11 @@ function onKeyDown(event){
 }
 myConsoleWindow.addEventListener('keydown', onKeyDown)
 */
-function onKeyUp(event){
-	console.log("onKeyUp("+event+")")
-	//const ev = new Event(event, '');
-	const ev = new KeyboardEvent(event, '');
-	console.log("ev = "+ev);
-	
-	printEventProperties(ev)
-	printKeyboardEventProperties(ev)
+function onKeyUp(type){
+	console.log("onKeyUp("+type+")")
+	const event = new KeyboardEvent(type, '');
+	printEventProperties(event)
+	printKeyboardEventProperties(event)
 }
 myConsoleWindow.addEventListener('keyup', onKeyUp)
 
