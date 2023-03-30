@@ -34,22 +34,18 @@ CPP_DK_Create("CPPEventsTest/DKConsoleWindow.js");
 const myConsoleWindow = new DKConsoleWindow('myConsoleWindow')
 
 
-
-
-
-/*
 // KeyboardEvents
-function printKeyboardEventProperties(event){
-	console.log("event.altKey="+event.altKey)
-	console.log("event.code="+event.code)				//TODO
-	console.log("event.ctrlKey="+event.ctrlKey)
-	console.log("event.isComposing="+event.isComposing)	//TODO
-	console.log("event.key="+event.key)
-	console.log("event.locale="+event.locale)			//TODO
-	console.log("event.location="+event.location)		//TODO
-	console.log("event.metaKey="+event.metaKey)			//TODO
-	console.log("event.repeat="+event.repeat)
-	console.log("event.shiftKey="+event.shiftKey)
+function printKeyboardEventProperties(keyevent){
+	console.log("keyevent.altKey="+keyevent.altKey)
+	console.log("keyevent.code="+keyevent.code)				//TODO
+	console.log("keyevent.ctrlKey="+keyevent.ctrlKey)
+	console.log("keyevent.isComposing="+keyevent.isComposing)	//TODO
+	console.log("keyevent.key="+keyevent.key)
+	console.log("keyevent.locale="+keyevent.locale)			//TODO
+	console.log("keyevent.location="+keyevent.location)		//TODO
+	console.log("keyevent.metaKey="+keyevent.metaKey)			//TODO
+	console.log("keyevent.repeat="+keyevent.repeat)
+	console.log("keyevent.shiftKey="+keyevent.shiftKey)
 	
 	//// Obsolete ////
 	//console.log("event.char="+event.char)
@@ -58,6 +54,8 @@ function printKeyboardEventProperties(event){
 	//console.log("event.keyIdentifier="+event.keyIdentifier)
 	//console.log("event.which="+event.which)
 }
+
+/*
 function onKeyDown(event){
 	console.log("\n onKeyDown()")
 	printKeyboardEventProperties(event)
@@ -66,10 +64,12 @@ myConsoleWindow.addEventListener('keydown', onKeyDown)
 */
 function onKeyUp(event){
 	console.log("onKeyUp("+event+")")
-	const ev = new Event(event, '');
+	//const ev = new Event(event, '');
+	const ev = new KeyboardEvent(event, '');
 	console.log("ev = "+ev);
 	
 	printEventProperties(ev)
+	printKeyboardEventProperties(ev)
 }
 myConsoleWindow.addEventListener('keyup', onKeyUp)
 
