@@ -1,10 +1,10 @@
 // DKConsoleWindow.js
 
-//////////////////////////////////////////////////
+//////////////////////////////////////////////////////
 var DKConsoleWindow = function DKConsoleWindow(data) {
 	console.log("DKConsoleWindow("+data+")");
     this.data = data;
-	this.pointer = CPP_Duktape_createDKObject("DKConsoleWindow")
+	this.address = CPP_Duktape_createDKObject("DKConsoleWindow")
 	
 	
 	//// Instance properties ////
@@ -123,6 +123,6 @@ var DKConsoleWindow = function DKConsoleWindow(data) {
 	if(this.toString() === "[object Object]")
 		this.toString = function(){	return "[object DKConsoleWindow]" }
 	
-	return EventTarget.call(this, this.pointer)
+	return EventTarget.call(this, this.address)
 }
 DKConsoleWindow.prototype = EventTarget.prototype;
