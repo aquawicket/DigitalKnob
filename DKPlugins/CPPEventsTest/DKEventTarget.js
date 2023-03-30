@@ -5,6 +5,7 @@ instances = [];
 
 // [EventTarget()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/EventTarget
 var EventTarget = function EventTarget(address) {
+	console.log("EventTarget("+address+")")
 
     this.address = address;
     for (var i = 0; i < instances.length; i++) {
@@ -56,7 +57,7 @@ var EventTarget = function EventTarget(address) {
                 stack[i].call(this, event);
             }
             
-			CPP_DKEventTarget_dispatchEvent(this.address, event);
+			CPP_DKEventTarget_dispatchEvent(this.address, event.address);
 			return !event.defaultPrevented;
         }
     });

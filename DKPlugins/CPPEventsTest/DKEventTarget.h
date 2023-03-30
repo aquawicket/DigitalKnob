@@ -39,6 +39,7 @@ public:
 	template <typename EventType>
 	static void addEventListener(const DKString& type, std::function<void(EventType)> listener, const DKString& address){
 		DKDEBUGFUNC(type, listener, address);
+		DKINFO("DKEventTarget.h: addEventListener("+type+", listener, "+address+") \n");
 		EventObject<EventType> eventObj;
         eventObj.type = type;
         eventObj.listener = listener;
@@ -48,15 +49,17 @@ public:
 	
 	// [EventTarget.removeEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener
 	template <typename EventType>
-	static void removeEventListener(const DKString& type, std::function<void(EventType)> listener, void* pointer){
-		DKDEBUGFUNC(type, listener, pointer);
-		// TODO
+	static void removeEventListener(const DKString& type, std::function<void(EventType)> listener, const DKString& address){
+		DKDEBUGFUNC(type, listener, address);
+		DKINFO("DKEventTarget.h: removeEventListener("+type+", listener, "+address+") \n");
+		DKTODO();
 	}
 	
 	// [EventTarget.dispatchEvent()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent
 	template <typename EventType>
     static void dispatchEvent(EventType event, const DKString& address){
 		DKDEBUGFUNC(event, address);
+		DKINFO("DKEventTarget.h: dispatchEvent("+event.type+", "+address+") \n");
         for (auto& eventObj : events<EventType>) {
 			if(eventObj.type == event.type && eventObj.address == address)
 				eventObj.listener(event);

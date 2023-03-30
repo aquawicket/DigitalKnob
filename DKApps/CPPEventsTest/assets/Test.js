@@ -16,8 +16,8 @@ function printEventProperties(event){
 	console.log("event.type="+event.type)
 }
 function onGeneric(event){
-	console.log("\n onGeneric()")
-	printEventProperties(event)
+	console.log("onGeneric()")
+	//printEventProperties(event)
 }
 const pointer = "123"
 const event = new Event('generic', '')
@@ -65,8 +65,8 @@ function onKeyDown(event){
 myConsoleWindow.addEventListener('keydown', onKeyDown)
 */
 function onKeyUp(event){
-	console.log("\n onKeyUp()")
-	//printKeyboardEventProperties(event)
+	console.log("onKeyUp()")
+	printKeyboardEventProperties(event)
 }
 myConsoleWindow.addEventListener('keyup', onKeyUp)
 

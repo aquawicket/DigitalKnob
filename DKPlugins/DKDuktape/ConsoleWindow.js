@@ -4,7 +4,8 @@
 var ConsoleWindow = function ConsoleWindow(data) {
 	console.log("ConsoleWindow("+data+")");
     this.data = data;
-	this.pointer = CPP_Duktape_createDKObject("ConsoleWindow")
+	this.address = CPP_Duktape_createDKObject("ConsoleWindow")
+	console.log("JS ConsoleWindow address = "+this.address)
 	
 	
 	//// Instance properties ////
@@ -123,6 +124,6 @@ var ConsoleWindow = function ConsoleWindow(data) {
 	if(this.toString() === "[object Object]")
 		this.toString = function(){	return "[object ConsoleWindow]" }
 	
-	return EventTarget.call(this, this.pointer)
+	return EventTarget.call(this, this.address)
 }
 ConsoleWindow.prototype = EventTarget.prototype;
