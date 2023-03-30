@@ -20,7 +20,7 @@ function onGeneric(event){
 	printEventProperties(event)
 }
 const pointer = "123"
-const event = new Event('generic', '')//, pointer)
+const event = new Event('generic', '')
 //event.bubbles = true;
 const target = new EventTarget(pointer)
 target.addEventListener('generic', onGeneric)
