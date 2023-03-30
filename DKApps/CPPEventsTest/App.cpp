@@ -4,6 +4,7 @@
 #include "CPPEventsTest/DKEventTarget.h"
 #include "CPPEventsTest/DKConsoleWindow.h"
 #include "CPPEventsTest/DKKeyboardEvent.h"
+#include "DKDuktape/DKDuktape.h"
 
 
 bool App::Init() {
@@ -14,9 +15,10 @@ bool App::Init() {
 	DKClass::DKCreate("DKEventTarget");																// CPP
 	
 	//////////// GENERIC EVENT
-	DKEventTarget::addEventListener<DKEvent>("generic", &App::onGeneric, this);						// CPP
+	DKString address = DKDuktape::pointerToAddress(this);
+	DKEventTarget::addEventListener<DKEvent>("generic", &App::onGeneric, address);					// CPP
 	DKEvent event("generic", "");																	// CPP
-	DKEventTarget::dispatchEvent(event, this);														// CPP
+	DKEventTarget::dispatchEvent(event, address);													// CPP
 	
 	// console.log("/////////// ConsoleWindow /////////////////////")								// JS
 	DKINFO("/////////// ConsoleWindow ///////////////////// \n");									// CPP
@@ -26,7 +28,8 @@ bool App::Init() {
 	DKObject* myConsoleWindow = DKClass::DKCreate("DKConsoleWindow");								// CPP
 
 	//myConsoleWindow.addEventListener('keydown', onKeyDown)										// JS
-	DKEventTarget::addEventListener<DKKeyboardEvent>("keydown", &App::onKeyDown, myConsoleWindow);	// CPP
+	DKString addressB = DKDuktape::pointerToAddress(myConsoleWindow);	
+	DKEventTarget::addEventListener<DKKeyboardEvent>("keydown", &App::onKeyDown, addressB);			// CPP
 
 	//myConsoleWindow.addEventListener('keyup', onKeyUp)											// JS
 	//DKEventTarget::addEventListener<DKKeyboardEvent>("keyup", &App::onKeyUp, myConsoleWindow);	// CPP

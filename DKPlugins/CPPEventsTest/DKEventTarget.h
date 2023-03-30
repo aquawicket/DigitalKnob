@@ -9,9 +9,10 @@
 
 template <typename EventType>
 struct EventObject {
-    std::string type;
+    DKString type;
     std::function<void(EventType)> listener;
     void* pointer;
+	DKString address;
 };
 
 // https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
@@ -35,6 +36,7 @@ public:
 
 	////// Instance methods //////
 	// [EventTarget.addEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
+	/*
 	template <typename EventType>
 	static void addEventListener(const DKString& type, std::function<void(EventType)> listener, void* pointer){
 		DKDEBUGFUNC(type, listener, pointer);
@@ -44,18 +46,40 @@ public:
         eventObj.pointer = pointer;
         events<EventType>.push_back(eventObj);
 	}
+	*/
+	template <typename EventType>
+	static void addEventListener(const DKString& type, std::function<void(EventType)> listener, const DKString& address){
+		DKDEBUGFUNC(type, listener, address);
+		EventObject<EventType> eventObj;
+        eventObj.type = type;
+        eventObj.listener = listener;
+        eventObj.address = address;
+        events<EventType>.push_back(eventObj);
+	}
+	
 	// [EventTarget.removeEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener
 	template <typename EventType>
 	static void removeEventListener(const DKString& type, std::function<void(EventType)> listener, void* pointer){
 		DKDEBUGFUNC(type, listener, pointer);
 		// TODO
 	}
+	
 	// [EventTarget.dispatchEvent()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent
+	/*
 	template <typename EventType>
     static void dispatchEvent(EventType event, void* pointer){
-		DKDEBUGFUNC(event);
+		DKDEBUGFUNC(event, pointer);
         for (auto& eventObj : events<EventType>) {
 			if(eventObj.type == event.type && eventObj.pointer == pointer)
+				eventObj.listener(event);
+        }
+    }
+	*/
+	template <typename EventType>
+    static void dispatchEvent(EventType event, const DKString& address){
+		DKDEBUGFUNC(event, address);
+        for (auto& eventObj : events<EventType>) {
+			if(eventObj.type == event.type && eventObj.address == address)
 				eventObj.listener(event);
         }
     }

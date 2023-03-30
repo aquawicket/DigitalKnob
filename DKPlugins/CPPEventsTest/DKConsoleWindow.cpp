@@ -28,6 +28,7 @@
 #include "CPPEventsTest/DKConsoleWindow.h"
 #include "CPPEventsTest/DKEventTarget.h"
 #include "CPPEventsTest/DKKeyboardEvent.h"
+#include "DKDuktape/DKDuktape.h"
 
 #if !WIN && !EMSCRIPTEN && !ANDROID
 	#include <stdlib.h>
@@ -535,7 +536,7 @@ void DKConsoleWindow::FocusEventProc(FOCUS_EVENT_RECORD fer) {
 
 void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
     DKDEBUGFUNC(ker);
-    //DKString address = DKDuktape::pointerToAddress(this);
+    DKString address = DKDuktape::pointerToAddress(this);
     //DKString rval;
     //DKString code;
 
@@ -598,7 +599,7 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
 		event.metaKey = metaKey;
 		event.repeat = repeat;
 		event.shiftKey = shiftKey;
-		DKEventTarget::dispatchEvent(event, this);							// CPP
+		DKEventTarget::dispatchEvent(event, address);						// CPP
 
 		//Only fire keypress on alphanumeric keys.
         if (ker.uChar.AsciiChar < 32)
@@ -616,7 +617,7 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
 		eventB.metaKey = metaKey;
 		eventB.repeat = repeat;
 		eventB.shiftKey = shiftKey;
-		DKEventTarget::dispatchEvent(eventB, this);							// CPP
+		DKEventTarget::dispatchEvent(eventB, address);						// CPP
     }
     else {
         //code = "dispatchKeyboardEvent('keyup','','" + address + "')";		// JS
@@ -632,7 +633,7 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
 		event.metaKey = metaKey;
 		event.repeat = repeat;
 		event.shiftKey = shiftKey;
-		DKEventTarget::dispatchEvent(event, this);							// CPP
+		DKEventTarget::dispatchEvent(event, address);						// CPP
     }
 }
 

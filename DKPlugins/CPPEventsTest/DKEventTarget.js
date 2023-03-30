@@ -17,17 +17,20 @@ var EventTarget = function EventTarget(address) {
 	// [EventTarget.addEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
     Object.defineProperty(this, "addEventListener", {
         value: function addEventListener(type, callback, useCapture) {
+			/*
             if (!(type in this.listeners))
                 this.listeners[type] = [];
             if (this.listeners[type].indexOf(callback) === -1)
                 this.listeners[type].push(callback) //Do not allow duplicate entries
-            //CPP_DKEventTarget_addEventListener(this.address, type, callback);
+			*/
+            CPP_DKEventTarget_addEventListener(this.address, type, callback);
             //Add or overwrite the event in RmlUi
         }
     });
 	// [EventTarget.removeEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener
     Object.defineProperty(this, "removeEventListener", {
         value: function removeEventListener(type, callback, useCapture) {
+			/*
             if (!(type in this.listeners))
                 return;
             var stack = this.listeners[type];
@@ -41,11 +44,14 @@ var EventTarget = function EventTarget(address) {
                     return;
                 }
             }
+			*/
+			CPP_DKEventTarget_removeEventListener(this.address, type, callback);
         }
     });
 	// [EventTarget.dispatchEvent()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent
     Object.defineProperty(this, "dispatchEvent", {
         value: function dispatchEvent(event) {
+			/*
             if (!(event.type in this.listeners)) {
                 return true;
             }
@@ -54,6 +60,8 @@ var EventTarget = function EventTarget(address) {
                 stack[i].call(this, event);
             }
             return !event.defaultPrevented;
+			*/
+			CPP_DKEventTarget_dispatchEvent(this.address, event);
         }
     });
 
