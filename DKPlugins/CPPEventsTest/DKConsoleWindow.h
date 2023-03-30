@@ -136,7 +136,7 @@ public:
 	void ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD);
 #endif
 };
-REGISTER_OBJECT(DKConsoleWindow, false);
+REGISTER_OBJECT(DKConsoleWindow, true);
 
 
 #endif //DKConsoleWindow_H

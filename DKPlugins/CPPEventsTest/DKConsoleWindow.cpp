@@ -152,6 +152,10 @@ bool DKConsoleWindow::Init(){
 	*/
 
     DKApp::AppendLoopFunc(&DKConsoleWindow::Loop, this);
+	
+	DKString address = DKDuktape::pointerToAddress(this);
+	DKINFO("CPP ConsoleWindow address = "+address+"\n");
+	
     return true;
 }
 

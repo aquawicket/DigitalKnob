@@ -45,6 +45,13 @@ public:
         eventObj.listener = listener;
         eventObj.address = address;
         events<EventType>.push_back(eventObj);
+		
+		/// Print event list
+		unsigned int i=0;
+		for (auto& eventObj : events<EventType>) {
+			DKINFO("event["+toString(i)+"] = ("+eventObj.type+","+eventObj.address+") \n");
+			i++;
+        }
 	}
 	
 	// [EventTarget.removeEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener
@@ -59,7 +66,7 @@ public:
 	template <typename EventType>
     static void dispatchEvent(EventType event, const DKString& address){
 		DKDEBUGFUNC(event, address);
-		DKINFO("DKEventTarget.h: dispatchEvent("+event.type+", "+address+") \n");
+		DKINFO("DKEventTarget.h: dispatchEvent("+event.type+", "+address+") \n");	
         for (auto& eventObj : events<EventType>) {
 			if(eventObj.type == event.type && eventObj.address == address)
 				eventObj.listener(event);
@@ -75,7 +82,7 @@ public:
 template <typename EventType>
 std::vector<EventObject<EventType>> DKEventTarget::events;
 
-REGISTER_OBJECT(DKEventTarget, false);
+REGISTER_OBJECT(DKEventTarget, true);
 
 
 #endif //DKEventTarget_H

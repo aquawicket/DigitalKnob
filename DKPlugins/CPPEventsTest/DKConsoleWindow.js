@@ -5,7 +5,7 @@ var DKConsoleWindow = function DKConsoleWindow(data) {
 	console.log("DKConsoleWindow("+data+")");
     this.data = data;
 	this.address = CPP_Duktape_createDKObject("DKConsoleWindow")
-	console.log("this.address = "+this.address)
+	console.log("JS ConsoleWindow address = "+this.address)
 	
 	
 	//// Instance properties ////

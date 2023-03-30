@@ -4,6 +4,7 @@
 
 #include "DKDuktape/DKDuktape.h"
 #include "CPPEventsTest/DKEvent.h"
+#include "CPPEventsTest/DKKeyboardEvent.h"
 #include "CPPEventsTest/DKEventTarget.h"
 
 // How to persist Duktape/C arguments across calls
@@ -40,8 +41,17 @@ public:
 		DKString targetAddress = duk_require_string(ctx, 0);
 		DKString type = duk_require_string(ctx, 1);
 		duk_require_function(ctx, 2);
-		DKINFO("DKEventTargetJS::addEventListener("+targetAddress+", "+type+", function)\n");
-		DKEventTarget::addEventListener<DKEvent>(type, &DKEventTargetJS::onEvent, targetAddress);	
+		DKINFO("DKEventTargetJS::addEventListener("+targetAddress+", "+type+", DKEventTargetJS::onEvent)\n");
+		
+		DKString cb = type+"_callback";
+		DKINFO("cb = "+cb+"\n");
+		duk_dup(ctx, 2);
+		duk_put_global_string(ctx, cb.c_str());
+
+		if(same(type, "keyup"))
+			DKEventTarget::addEventListener<DKKeyboardEvent>(type, &DKEventTargetJS::onEvent, targetAddress);
+		else
+			DKEventTarget::addEventListener<DKEvent>(type, &DKEventTargetJS::onEvent, targetAddress);	
 		return DKTODO();
 	}
 	static int removeEventListener(duk_context* ctx){
@@ -49,7 +59,7 @@ public:
 		DKString targetAddress = duk_require_string(ctx, 0);
 		DKString type = duk_require_string(ctx, 1);
 		duk_require_function(ctx, 2);
-		DKINFO("DKEventTargetJS::removeEventListener("+targetAddress+", "+type+", function)\n");
+		DKINFO("DKEventTargetJS::removeEventListener("+targetAddress+", "+type+", DKEventTargetJS::onEvent)\n");
 		DKEventTarget::removeEventListener<DKEvent>(type, &DKEventTargetJS::onEvent, targetAddress);	
 		return DKTODO();
 	}
@@ -65,7 +75,14 @@ public:
 	// CPP
 	static bool onEvent(DKEvent event) {
 		DKDEBUGFUNC(event);
-		DKINFO("onEvent() \n");
+		DKINFO("onEvent("+event.type+") \n");
+		
+		DKString cb = event.type+"_callback";
+		DKINFO("cb = "+cb+"\n");
+		duk_get_global_string(DKDuktape::ctx, cb.c_str());
+		//duk_push_null(DKDuktape::ctx);
+		//duk_put_global_string(DKDuktape::ctx, cb.c_str());
+		duk_call(DKDuktape::ctx, 0);
 		return true;
 	}
 };

@@ -2,7 +2,7 @@ include_guard()
 
 #################### GLOBAL DKCMake SETTINGS ############################
 set(BACKUP_APP_EXECUTABLES		1		CACHE INTERNAL "")	# backup previous app executable when rebuilding
-#set(BACKUP_APP_USER_DATA		0		CACHE INTERNAL "")	# preserve assets/USER folder when building 
+#set(BACKUP_APP_USER_DATA		0		CACHE INTERNAL "")	# preserve assets/USER folder when building
 set(BYPASS_DISABLE				0		CACHE INTERNAL "")	# bypass dk_disable() commands
 set(DKDEBUGFUNC_ENABLED			0		CACHE INTERNAL "")	# enable DKDEBUGFUNC() function to print function calls
 set(DKDEBUG_ENABLED				1		CACHE INTERNAL "")	# enable dk_debug() functions
@@ -14,7 +14,7 @@ set(HALT_ON_ERRORS				0		CACHE INTERNAL "")	# halt cmake build script on errors
 set(HALT_ON_WARNINGS			0		CACHE INTERNAL "")	# halt cmake build script on warnings
 set(INSTALL_DKLIBS              0		CACHE INTERNAL "")	# install header files and libraries to DKBIN directory
 set(MAC_TERMINAL_WRAPPER        1		CACHE INTERNAL "")	# open app with terminal
-set(DKOFFLINE					0		CACHE INTERNAL "")	# work offline. No Git remote commands or downloading files
+set(DKOFFLINE					1		CACHE INTERNAL "")	# work offline. No Git remote commands or downloading files
 set(PRINT_CALL_DETAILS 			1		CACHE INTERNAL "")	# print function call details
 set(PRINT_FILE_NAMES 			1 		CACHE INTERNAL "")	# print function call file names
 set(PRINT_FUNCTION_ARGUMENTS 	1 		CACHE INTERNAL "")	# print function call arguments
@@ -78,5 +78,9 @@ dk_load(DKVariables)
 include(${DKCMAKE}/functions/dk_importVariables.cmake)
 #dk_load(dk_findFiles)
 
+# flag arnings
+if(${DKOFFLINE})
+	dk_warn("!!!!!!!!!! WORKING IN DKOFFLINE MODE !!!!!!!!!")
+endif()
 
 # POST DEFINED VARIABLES
