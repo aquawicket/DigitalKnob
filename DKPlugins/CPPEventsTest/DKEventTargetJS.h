@@ -80,6 +80,11 @@ public:
 		DKString cb = event.type+"_callback";
 		DKINFO("cb = "+cb+"\n");
 		duk_get_global_string(DKDuktape::ctx, cb.c_str());
+		
+		//DKString ev = "Event('"+event.type+"','')";
+		//DKString ev = "test";
+		//duk_push_string(DKDuktape::ctx, ev.c_str());  //push event parameter
+		
 		//duk_push_null(DKDuktape::ctx);
 		//duk_put_global_string(DKDuktape::ctx, cb.c_str());
 		duk_call(DKDuktape::ctx, 0);
