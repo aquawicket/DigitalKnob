@@ -36,17 +36,6 @@ public:
 
 	////// Instance methods //////
 	// [EventTarget.addEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
-	/*
-	template <typename EventType>
-	static void addEventListener(const DKString& type, std::function<void(EventType)> listener, void* pointer){
-		DKDEBUGFUNC(type, listener, pointer);
-		EventObject<EventType> eventObj;
-        eventObj.type = type;
-        eventObj.listener = listener;
-        eventObj.pointer = pointer;
-        events<EventType>.push_back(eventObj);
-	}
-	*/
 	template <typename EventType>
 	static void addEventListener(const DKString& type, std::function<void(EventType)> listener, const DKString& address){
 		DKDEBUGFUNC(type, listener, address);
@@ -65,16 +54,6 @@ public:
 	}
 	
 	// [EventTarget.dispatchEvent()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent
-	/*
-	template <typename EventType>
-    static void dispatchEvent(EventType event, void* pointer){
-		DKDEBUGFUNC(event, pointer);
-        for (auto& eventObj : events<EventType>) {
-			if(eventObj.type == event.type && eventObj.pointer == pointer)
-				eventObj.listener(event);
-        }
-    }
-	*/
 	template <typename EventType>
     static void dispatchEvent(EventType event, const DKString& address){
 		DKDEBUGFUNC(event, address);

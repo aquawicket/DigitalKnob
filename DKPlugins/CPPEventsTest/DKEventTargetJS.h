@@ -34,14 +34,22 @@ public:
 	////// Instance methods //////
 	static int addEventListener(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		DKString targetAddress = duk_require_string(ctx, 0);
+		DKString type = duk_require_string(ctx, 1);
+		//DKEventTarget::addEventListener<DKEvent>(type, &App::onGeneric, targetAddress);	
 		return DKTODO();
 	}
 	static int removeEventListener(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		DKString targetAddress = duk_require_string(ctx, 0);
+		DKString type = duk_require_string(ctx, 1);
+		//DKEventTarget::removeEventListener<DKEvent>(type, &App::onGeneric, targetAddress);
 		return DKTODO();
 	}
 	static int dispatchEvent(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		DKString targetAddress = duk_require_string(ctx, 0);
+		//DKEventTarget::dispatchEvent(event, targetAddress);
 		return DKTODO();
 	}	
 };
