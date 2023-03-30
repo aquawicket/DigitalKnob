@@ -54,10 +54,6 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
 		DKString options = duk_require_string(ctx, 1);
-		//DKString targetAddress = duk_require_string(ctx, 2);
-		//DKINFO("CPP_DKEvent("+type+","+options+","+targetAddress+")\n");
-		//DKEvent* event = new DKEvent(type, options, targetAddress);
-		
 		DKINFO("CPP_DKEvent("+type+","+options+")\n");
 		DKEvent* event = new DKEvent(type, options);
 		DKString eventAddress = DKDuktape::pointerToAddress(event);

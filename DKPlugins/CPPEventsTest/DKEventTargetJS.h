@@ -36,6 +36,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString targetAddress = duk_require_string(ctx, 0);
 		DKString type = duk_require_string(ctx, 1);
+		duk_require_function(ctx, 2);
 		//DKEventTarget::addEventListener<DKEvent>(type, &App::onGeneric, targetAddress);	
 		return DKTODO();
 	}
@@ -43,6 +44,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString targetAddress = duk_require_string(ctx, 0);
 		DKString type = duk_require_string(ctx, 1);
+		duk_require_function(ctx, 2);
 		//DKEventTarget::removeEventListener<DKEvent>(type, &App::onGeneric, targetAddress);
 		return DKTODO();
 	}
