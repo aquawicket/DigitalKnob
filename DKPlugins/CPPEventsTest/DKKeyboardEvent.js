@@ -5,6 +5,7 @@
 var KeyboardEvent = function KeyboardEvent(type, options) {
 	console.log("KeyboardEvent("+type+","+options+")")
 	
+	this.address = CPP_DKKeyboardEvent(type, options);
 	
 	////// Constants //////
 	// [DOM_KEY_LOCATION_STANDARD]	0x00

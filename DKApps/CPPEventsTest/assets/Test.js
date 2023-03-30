@@ -37,15 +37,17 @@ const myConsoleWindow = new DKConsoleWindow('myConsoleWindow')
 // KeyboardEvents
 function printKeyboardEventProperties(keyevent){
 	console.log("keyevent.altKey="+keyevent.altKey)
-	console.log("keyevent.code="+keyevent.code)				//TODO
+	console.log("keyevent.code="+keyevent.code)		
+/*	
 	console.log("keyevent.ctrlKey="+keyevent.ctrlKey)
-	console.log("keyevent.isComposing="+keyevent.isComposing)	//TODO
+	console.log("keyevent.isComposing="+keyevent.isComposing)
 	console.log("keyevent.key="+keyevent.key)
-	console.log("keyevent.locale="+keyevent.locale)			//TODO
-	console.log("keyevent.location="+keyevent.location)		//TODO
-	console.log("keyevent.metaKey="+keyevent.metaKey)			//TODO
+	console.log("keyevent.locale="+keyevent.locale)
+	console.log("keyevent.location="+keyevent.location)
+	console.log("keyevent.metaKey="+keyevent.metaKey)
 	console.log("keyevent.repeat="+keyevent.repeat)
 	console.log("keyevent.shiftKey="+keyevent.shiftKey)
+	*/
 	
 	//// Obsolete ////
 	//console.log("event.char="+event.char)
