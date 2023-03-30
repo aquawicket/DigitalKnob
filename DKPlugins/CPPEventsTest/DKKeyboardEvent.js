@@ -5,10 +5,8 @@
 var KeyboardEvent = function KeyboardEvent(type, options) {
 	console.log("KeyboardEvent("+type+","+options+")")
 	
-	//this.address = CPP_DKEvent(type, options);
-
-
-    ////// Constants //////
+	
+	////// Constants //////
 	// [DOM_KEY_LOCATION_STANDARD]	0x00
 	// [DOM_KEY_LOCATION_LEFT]		0x01
 	// [DOM_KEY_LOCATION_RIGHT]		0x02
@@ -123,6 +121,6 @@ var KeyboardEvent = function KeyboardEvent(type, options) {
 		}
 	}
 	
-	return Event.call(this, _type, _options)
+	return Event.call(this, type, options)
 };
 KeyboardEvent.prototype = Event.prototype;

@@ -88,6 +88,21 @@ public:
 		duk_call(DKDuktape::ctx, 1);  //1 = num or args
 		return true;
 	}
+	static bool onKeyboardEvent(DKKeyboardEvent event) {
+		DKDEBUGFUNC(event);
+		DKINFO("onEvent("+event.type+") \n");
+		
+		DKString cb = event.type+"_callback";
+		DKINFO("cb = "+cb+"\n");
+		duk_get_global_string(DKDuktape::ctx, cb.c_str());
+		
+		duk_push_string(DKDuktape::ctx, event.type.c_str());  //push event parameter
+		
+		//duk_push_null(DKDuktape::ctx);
+		//duk_put_global_string(DKDuktape::ctx, cb.c_str());
+		duk_call(DKDuktape::ctx, 1);  //1 = num or args
+		return true;
+	}
 };
 REGISTER_OBJECT(DKEventTargetJS, true)
 
