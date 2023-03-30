@@ -587,7 +587,7 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
     if (ker.bKeyDown) {
         //code = "dispatchKeyboardEvent('keydown','','" + address + "')";	// JS
 		//DKDuktape::RunDuktape(code, rval);								// JS
-		DKKeyboardEvent event("keydown", "", this);							// CPP
+		DKKeyboardEvent event("keydown", "");								// CPP
 		event.altKey = altKey;
 		event.code = code;
 		event.ctrlKey = ctrlKey;
@@ -598,14 +598,14 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
 		event.metaKey = metaKey;
 		event.repeat = repeat;
 		event.shiftKey = shiftKey;
-		DKEventTarget::dispatchEvent(event);								// CPP
+		DKEventTarget::dispatchEvent(event, this);							// CPP
 
 		//Only fire keypress on alphanumeric keys.
         if (ker.uChar.AsciiChar < 32)
             return;
 		//code = "dispatchKeyboardEvent('keypress','','" + address + "')";	// JS
 		//DKDuktape::RunDuktape(code, rval);								// JS
-		DKKeyboardEvent eventB("keypress", "", this);						// CPP
+		DKKeyboardEvent eventB("keypress", "");								// CPP
 		eventB.altKey = altKey;
 		eventB.code = code;
 		eventB.ctrlKey = ctrlKey;
@@ -616,12 +616,12 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
 		eventB.metaKey = metaKey;
 		eventB.repeat = repeat;
 		eventB.shiftKey = shiftKey;
-		DKEventTarget::dispatchEvent(eventB);								// CPP
+		DKEventTarget::dispatchEvent(eventB, this);							// CPP
     }
     else {
         //code = "dispatchKeyboardEvent('keyup','','" + address + "')";		// JS
         //DKDuktape::RunDuktape(code, rval);								// JS
-		DKKeyboardEvent event("keyup", "", this);							// CPP
+		DKKeyboardEvent event("keyup", "");									// CPP
 		event.altKey = altKey;
 		event.code = code;
 		event.ctrlKey = ctrlKey;
@@ -632,7 +632,7 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
 		event.metaKey = metaKey;
 		event.repeat = repeat;
 		event.shiftKey = shiftKey;
-		DKEventTarget::dispatchEvent(event);								// CPP
+		DKEventTarget::dispatchEvent(event, this);							// CPP
     }
 }
 

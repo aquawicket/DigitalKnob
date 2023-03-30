@@ -44,10 +44,10 @@ public:
 	}
 	// [EventTarget.dispatchEvent()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent
 	template <typename EventType>
-    static void dispatchEvent(EventType event){
+    static void dispatchEvent(EventType event, void* pointer){
 		DKDEBUGFUNC(event);
         for (auto& eventObj : events<EventType>) {
-			if(eventObj.type == event.type && eventObj.pointer == event.pointer)
+			if(eventObj.type == event.type && eventObj.pointer == pointer)
 				eventObj.listener(event);
         }
     }

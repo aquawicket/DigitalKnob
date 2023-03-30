@@ -11,6 +11,7 @@ class DKEvent
 public:
 	////// Constructor //////
 	// [Event()] https://developer.mozilla.org/en-US/docs/Web/API/Event/Event
+	/*
 	DKEvent(DKString _type, DKString _options, void* _pointer){
 		bubbles = false;
 		cancelable = false;
@@ -44,6 +45,24 @@ public:
 		//pointer = _pointer;
 		targetAddress = _targetAddress;
 		currentTargetAddress = _targetAddress;
+	}
+	*/
+	DKEvent(DKString _type, DKString _options){
+		bubbles = false;
+		cancelable = false;
+		composed = false;
+		//currentTarget = _pointer;
+		defaultPrevented = false;
+		eventPhase = 0;
+		isTrusted = false;
+		//target = _pointer;
+		timeStamp = 0;
+		type = _type;
+		
+		options = _options;
+		//pointer = _pointer;
+		//targetAddress = _targetAddress;
+		//currentTargetAddress = _targetAddress;
 	}
 	
 	

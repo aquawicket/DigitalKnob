@@ -4,10 +4,13 @@
 //event_instances = [];
 
 // [Event()] https://developer.mozilla.org/en-US/docs/Web/API/Event/Event
-var Event = function Event(type, options, targetAddress) {
-	console.log("Event("+type+","+options+","+targetAddress+")")
+var Event = function Event(type, options){ //, targetAddress) {
+	//console.log("Event("+type+","+options+","+targetAddress+")")
+	console.log("Event("+type+","+options+")")
 	
-	this.address = CPP_DKEvent(type, options, targetAddress);
+	//this.address = CPP_DKEvent(type, options, targetAddress);
+	this.address = CPP_DKEvent(type, options);
+	
     //this.type = type;
 	//this.options = options;
 	//this.targetAddress = targetAddress;

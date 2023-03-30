@@ -12,7 +12,21 @@ class DKKeyboardEvent : public DKEvent
 public:
 	////// Constructor //////
 	// [KeyboardEvent()] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/KeyboardEvent
+	/*
 	DKKeyboardEvent(DKString _type, DKString _options, void* _pointer) : DKEvent(_type, _options, _pointer) {
+		altKey = false;
+		code = "TODO";
+		ctrlKey = false;
+		isComposing = false;
+		key = "TODO";
+		locale = "TODO";
+		location = 0;
+		metaKey = false;
+		repeat = false;
+		shiftKey = false;
+	}
+	*/
+	DKKeyboardEvent(DKString _type, DKString _options) : DKEvent(_type, _options) {
 		altKey = false;
 		code = "TODO";
 		ctrlKey = false;

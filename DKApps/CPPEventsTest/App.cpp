@@ -15,8 +15,8 @@ bool App::Init() {
 	
 	//////////// GENERIC EVENT
 	DKEventTarget::addEventListener<DKEvent>("generic", &App::onGeneric, this);						// CPP
-	DKEvent event("generic", "", this);																// CPP
-	DKEventTarget::dispatchEvent(event);															// CPP
+	DKEvent event("generic", "");																	// CPP
+	DKEventTarget::dispatchEvent(event, this);														// CPP
 	
 	// console.log("/////////// ConsoleWindow /////////////////////")								// JS
 	DKINFO("/////////// ConsoleWindow ///////////////////// \n");									// CPP
