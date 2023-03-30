@@ -1,27 +1,14 @@
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
 // [INTERFACE] https://dom.spec.whatwg.org/#interface-eventtarget
 
-/*
-var stored_events = [];
-var EventFromCPP = function EventFromCPP(pointer, event)
-{
-	//console.warn("EventFromCPP("+pointer+","+event.type+")");
-	for(var i=0; i<stored_events.length; i++){
-		if(pointer === stored_events[i].pointer){
-			stored_events[i].dispatchEvent(event);
-		}
-	}
-}
-*/
-
 instances = [];
 
 // [EventTarget()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/EventTarget
-var EventTarget = function EventTarget(pointer) {
+var EventTarget = function EventTarget(address) {
 
-    this.pointer = pointer;
+    this.address = address;
     for (var i = 0; i < instances.length; i++) {
-        if (instances[i].pointer === pointer)
+        if (instances[i].address === address)
             return instances[i]; //return already existing instance
     }
     instances.push(this); //create instance
@@ -34,7 +21,7 @@ var EventTarget = function EventTarget(pointer) {
                 this.listeners[type] = [];
             if (this.listeners[type].indexOf(callback) === -1)
                 this.listeners[type].push(callback) //Do not allow duplicate entries
-            //CPP_DKEventTarget_addEventListener(pointer, type, callback);
+            //CPP_DKEventTarget_addEventListener(this.address, type, callback);
             //Add or overwrite the event in RmlUi
         }
     });
@@ -49,7 +36,7 @@ var EventTarget = function EventTarget(pointer) {
                     //console.log(stack[i]);
                     stack.splice(i, 1);
                     this.listeners[type].splice(i, 1);
-                    //CPP_DKEventTarget_removeEventListener(pointer, type, callback);
+                    //CPP_DKEventTarget_removeEventListener(this.address, type, callback);
                     //Remove the event in RmlUi
                     return;
                 }
@@ -77,6 +64,6 @@ var EventTarget = function EventTarget(pointer) {
 		}
 	}
 	
-	GlobalEventHandlers.call(this, pointer);
+	GlobalEventHandlers.call(this, this.address);
     return this;
 };
