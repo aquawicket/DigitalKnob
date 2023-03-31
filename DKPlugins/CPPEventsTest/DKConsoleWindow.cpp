@@ -592,7 +592,7 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
     if (ker.bKeyDown) {
         //code = "dispatchKeyboardEvent('keydown','','" + address + "')";	// JS
 		//DKDuktape::RunDuktape(code, rval);								// JS
-		DKKeyboardEvent* event = new DKKeyboardEvent("keydown", "");			// CPP
+		DKKeyboardEvent* event = new DKKeyboardEvent("keydown", "");		// CPP
 		event->altKey = altKey;
 		event->code = code;
 		event->ctrlKey = ctrlKey;
@@ -604,6 +604,7 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
 		event->repeat = repeat;
 		event->shiftKey = shiftKey;
 		DKEventTarget::dispatchEvent(event, address);						// CPP
+		delete event;
 
 		//Only fire keypress on alphanumeric keys.
         if (ker.uChar.AsciiChar < 32)
@@ -622,11 +623,12 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
 		eventB->repeat = repeat;
 		eventB->shiftKey = shiftKey;
 		DKEventTarget::dispatchEvent(eventB, address);						// CPP
+		delete eventB;
     }
     else {
         //code = "dispatchKeyboardEvent('keyup','','" + address + "')";		// JS
         //DKDuktape::RunDuktape(code, rval);								// JS
-		DKKeyboardEvent* event = new DKKeyboardEvent("keyup", "");									// CPP
+		DKKeyboardEvent* event = new DKKeyboardEvent("keyup", "");			// CPP
 		event->altKey = altKey;
 		event->code = code;
 		event->ctrlKey = ctrlKey;
@@ -638,6 +640,7 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
 		event->repeat = repeat;
 		event->shiftKey = shiftKey;
 		DKEventTarget::dispatchEvent(event, address);						// CPP
+		delete event;
     }
 }
 
