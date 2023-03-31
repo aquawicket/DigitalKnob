@@ -17,7 +17,7 @@ bool App::Init() {
 	//////////// GENERIC EVENT
 	DKString address = DKDuktape::pointerToAddress(this);
 	DKEventTarget::addEventListener<DKEvent>("generic", &App::onGeneric, address);					// CPP
-	DKEvent event("generic", "");																	// CPP
+	DKEvent* event = new DKEvent("generic", "");													// CPP
 	DKEventTarget::dispatchEvent(event, address);													// CPP
 	
 	// console.log("/////////// ConsoleWindow /////////////////////")								// JS
