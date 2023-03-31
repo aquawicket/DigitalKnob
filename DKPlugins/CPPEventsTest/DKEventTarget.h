@@ -11,8 +11,8 @@ template <typename EventType>
 struct EventObject {
     DKString type;
     std::function<void(EventType*)> listener;
-    void* pointer;
-	DKString address;
+    //void* pointer;
+	DKString eventTargetAddress;
 };
 
 // https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
@@ -37,39 +37,39 @@ public:
 	////// Instance methods //////
 	// [EventTarget.addEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
 	template <typename EventType>
-	static void addEventListener(const DKString& type, std::function<void(EventType*)> listener, const DKString& address){
-		DKDEBUGFUNC(type, listener, address);
-		DKINFO("DKEventTarget.h: addEventListener("+type+", listener, "+address+") \n");
+	static void addEventListener(const DKString& type, std::function<void(EventType*)> listener, const DKString& eventTargetAddress){
+		DKDEBUGFUNC(type, listener, eventTargetAddress);
+		DKINFO("DKEventTarget.h: addEventListener("+type+", listener, "+eventTargetAddress+") \n");
 		EventObject<EventType> eventObj;
         eventObj.type = type;
         eventObj.listener = listener;
-        eventObj.address = address;
+        eventObj.eventTargetAddress = eventTargetAddress;
         events<EventType>.push_back(eventObj);
 		
 		/// Print event list
 		unsigned int i=0;
 		for (auto& eventObj : events<EventType>) {
-			DKINFO("event["+toString(i)+"] = ("+eventObj.type+","+eventObj.address+") \n");
+			DKINFO("event["+toString(i)+"] = ("+eventObj.type+","+eventObj.eventTargetAddress+") \n");
 			i++;
         }
 	}
 	
 	// [EventTarget.removeEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener
 	template <typename EventType>
-	static void removeEventListener(const DKString& type, std::function<void(EventType*)> listener, const DKString& address){
-		DKDEBUGFUNC(type, listener, address);
-		DKINFO("DKEventTarget.h: removeEventListener("+type+", listener, "+address+") \n");
+	static void removeEventListener(const DKString& type, std::function<void(EventType*)> listener, const DKString& eventTargetAddress){
+		DKDEBUGFUNC(type, listener, eventTargetAddress);
+		DKINFO("DKEventTarget.h: removeEventListener("+type+", listener, "+eventTargetAddress+") \n");
 		DKTODO();
 	}
 	
 	// [EventTarget.dispatchEvent()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent
 	template <typename EventType>
-    static void dispatchEvent(EventType* event, const DKString& address){
-		DKDEBUGFUNC(event, address);
-		DKINFO("DKEventTarget.h: dispatchEvent("+event->type+", "+address+") \n");	
+    static void dispatchEvent(EventType* event, const DKString& eventTargetAddress){
+		DKDEBUGFUNC(event, eventTargetAddress);
+		DKINFO("DKEventTarget.h: dispatchEvent("+event->type+", "+eventTargetAddress+") \n");	
         for (auto& eventObj : events<EventType>) {
-			DKINFO("event("+eventObj.type+", "+eventObj.address+") \n");	
-			if(eventObj.type == event->type && eventObj.address == address)
+			DKINFO("event("+eventObj.type+", "+eventObj.eventTargetAddress+") \n");	
+			if(eventObj.type == event->type && eventObj.eventTargetAddress == eventTargetAddress)
 				eventObj.listener(event);
         }
     }
