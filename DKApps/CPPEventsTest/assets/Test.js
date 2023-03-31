@@ -55,9 +55,9 @@ function onKeyDown(event){
 }
 myConsoleWindow.addEventListener('keydown', onKeyDown)
 */
-function onKeyUp(type){
-	console.log("onKeyUp("+type+")")
-	const event = new KeyboardEvent(type, '');
+function onKeyUp(eventAddress){
+	console.log("onKeyUp("+eventAddress+")")
+	const event = new KeyboardEvent('', '', eventAddress);
 	printEventProperties(event)
 	printKeyboardEventProperties(event)
 }

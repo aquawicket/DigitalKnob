@@ -2,10 +2,16 @@
 // [INTERFACE] https://w3c.github.io/uievents/#interface-keyboardevent
 
 // [KeyboardEvent()] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/KeyboardEvent
-var KeyboardEvent = function KeyboardEvent(type, options) {
-	console.log("KeyboardEvent("+type+","+options+")")
+var KeyboardEvent = function KeyboardEvent(type, options, address) {
+	console.log("KeyboardEvent("+type+","+options+","+address+")")
 	
-	this.address = CPP_DKKeyboardEvent(type, options);
+	if(!address){
+		if(!this.address)
+			this.address = CPP_DKKeyboardEvent(type, options);
+	}
+	else{
+		this.address = address;
+	}
 	
 	////// Constants //////
 	// [DOM_KEY_LOCATION_STANDARD]	0x00

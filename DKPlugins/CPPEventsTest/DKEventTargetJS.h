@@ -78,9 +78,10 @@ public:
 		DKINFO("onEvent("+event->type+") \n");
 		
 		// call the js callback function
+		DKString eventAddress = DKDuktape::pointerToAddress(event);
 		DKString cb = event->type+"_callback";
 		duk_get_global_string(DKDuktape::ctx, cb.c_str());
-		duk_push_string(DKDuktape::ctx, event->type.c_str());  //push event parameter
+		duk_push_string(DKDuktape::ctx, eventAddress.c_str());  //push event parameter
 		//duk_push_null(DKDuktape::ctx);
 		//duk_put_global_string(DKDuktape::ctx, cb.c_str());
 		duk_call(DKDuktape::ctx, 1);  //1 = num or args
