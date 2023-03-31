@@ -592,17 +592,17 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
     if (ker.bKeyDown) {
         //code = "dispatchKeyboardEvent('keydown','','" + address + "')";	// JS
 		//DKDuktape::RunDuktape(code, rval);								// JS
-		DKKeyboardEvent event("keydown", "");								// CPP
-		event.altKey = altKey;
-		event.code = code;
-		event.ctrlKey = ctrlKey;
-		event.isComposing = isComposing;
-		event.key = key;
-		event.locale = locale;
-		event.location = location;
-		event.metaKey = metaKey;
-		event.repeat = repeat;
-		event.shiftKey = shiftKey;
+		DKKeyboardEvent* event = new DKKeyboardEvent("keydown", "");			// CPP
+		event->altKey = altKey;
+		event->code = code;
+		event->ctrlKey = ctrlKey;
+		event->isComposing = isComposing;
+		event->key = key;
+		event->locale = locale;
+		event->location = location;
+		event->metaKey = metaKey;
+		event->repeat = repeat;
+		event->shiftKey = shiftKey;
 		DKEventTarget::dispatchEvent(event, address);						// CPP
 
 		//Only fire keypress on alphanumeric keys.
@@ -610,33 +610,33 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
             return;
 		//code = "dispatchKeyboardEvent('keypress','','" + address + "')";	// JS
 		//DKDuktape::RunDuktape(code, rval);								// JS
-		DKKeyboardEvent eventB("keypress", "");								// CPP
-		eventB.altKey = altKey;
-		eventB.code = code;
-		eventB.ctrlKey = ctrlKey;
-		eventB.isComposing = isComposing;
-		eventB.key = key;
-		eventB.locale = locale;
-		eventB.location = location;
-		eventB.metaKey = metaKey;
-		eventB.repeat = repeat;
-		eventB.shiftKey = shiftKey;
+		DKKeyboardEvent* eventB = new DKKeyboardEvent("keypress", "");		// CPP
+		eventB->altKey = altKey;
+		eventB->code = code;
+		eventB->ctrlKey = ctrlKey;
+		eventB->isComposing = isComposing;
+		eventB->key = key;
+		eventB->locale = locale;
+		eventB->location = location;
+		eventB->metaKey = metaKey;
+		eventB->repeat = repeat;
+		eventB->shiftKey = shiftKey;
 		DKEventTarget::dispatchEvent(eventB, address);						// CPP
     }
     else {
         //code = "dispatchKeyboardEvent('keyup','','" + address + "')";		// JS
         //DKDuktape::RunDuktape(code, rval);								// JS
-		DKKeyboardEvent event("keyup", "");									// CPP
-		event.altKey = altKey;
-		event.code = code;
-		event.ctrlKey = ctrlKey;
-		event.isComposing = isComposing;
-		event.key = key;
-		event.locale = locale;
-		event.location = location;
-		event.metaKey = metaKey;
-		event.repeat = repeat;
-		event.shiftKey = shiftKey;
+		DKKeyboardEvent* event = new DKKeyboardEvent("keyup", "");									// CPP
+		event->altKey = altKey;
+		event->code = code;
+		event->ctrlKey = ctrlKey;
+		event->isComposing = isComposing;
+		event->key = key;
+		event->locale = locale;
+		event->location = location;
+		event->metaKey = metaKey;
+		event->repeat = repeat;
+		event->shiftKey = shiftKey;
 		DKEventTarget::dispatchEvent(event, address);						// CPP
     }
 }

@@ -43,8 +43,8 @@ public:
 		duk_require_function(ctx, 2);
 		DKINFO("DKEventTargetJS::addEventListener("+targetAddress+", "+type+", DKEventTargetJS::onEvent)\n");
 		
+		// store the js callback function
 		DKString cb = type+"_callback";
-		DKINFO("cb = "+cb+"\n");
 		duk_dup(ctx, 2);
 		duk_put_global_string(ctx, cb.c_str());
 
@@ -73,31 +73,14 @@ public:
 	}
 	
 	// CPP
-	static bool onEvent(DKEvent event) {
+	static bool onEvent(DKEvent* event) {
 		DKDEBUGFUNC(event);
-		DKINFO("onEvent("+event.type+") \n");
+		DKINFO("onEvent("+event->type+") \n");
 		
-		DKString cb = event.type+"_callback";
-		DKINFO("cb = "+cb+"\n");
+		// call the js callback function
+		DKString cb = event->type+"_callback";
 		duk_get_global_string(DKDuktape::ctx, cb.c_str());
-		
-		duk_push_string(DKDuktape::ctx, event.type.c_str());  //push event parameter
-		
-		//duk_push_null(DKDuktape::ctx);
-		//duk_put_global_string(DKDuktape::ctx, cb.c_str());
-		duk_call(DKDuktape::ctx, 1);  //1 = num or args
-		return true;
-	}
-	static bool onKeyboardEvent(DKKeyboardEvent event) {
-		DKDEBUGFUNC(event);
-		DKINFO("onEvent("+event.type+") \n");
-		
-		DKString cb = event.type+"_callback";
-		DKINFO("cb = "+cb+"\n");
-		duk_get_global_string(DKDuktape::ctx, cb.c_str());
-		
-		duk_push_string(DKDuktape::ctx, event.type.c_str());  //push event parameter
-		
+		duk_push_string(DKDuktape::ctx, event->type.c_str());  //push event parameter
 		//duk_push_null(DKDuktape::ctx);
 		//duk_put_global_string(DKDuktape::ctx, cb.c_str());
 		duk_call(DKDuktape::ctx, 1);  //1 = num or args
