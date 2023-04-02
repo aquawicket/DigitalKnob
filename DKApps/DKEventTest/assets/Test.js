@@ -33,6 +33,13 @@ console.log("/////////// ConsoleWindow /////////////////////")
 CPP_DK_Create("DKEventTest/DKConsoleWindow.js");
 const myConsoleWindow = new DKConsoleWindow('myConsoleWindow')
 
+// UIEvents
+function printUIEventProperties(uievent){
+	console.log("uievent.detail="+uievent.detail)
+	console.log("uievent.sourceCapabilities="+uievent.sourceCapabilities)			
+	console.log("uievent.view="+uievent.view)
+	console.log("uievent.which="+uievent.which)
+}
 
 // KeyboardEvents
 function printKeyboardEventProperties(keyevent){
@@ -61,6 +68,7 @@ function onKeyUp(eventAddress){
 	console.log("onKeyUp("+eventAddress+")")
 	const event = new KeyboardEvent('', '', eventAddress);
 	printEventProperties(event)
+	printUIEventProperties(event)
 	printKeyboardEventProperties(event)
 }
 myConsoleWindow.addEventListener('keyup', onKeyUp)

@@ -11,30 +11,22 @@ bool App::Init() {
 	DKDEBUGFUNC();
 	DKINFO("App::Init() \n");
 	
-	//DKClass::DKCreate("DKEvent");																	// CPP
-	DKClass::DKCreate("DKEventTarget");																// CPP
+	DKClass::DKCreate("DKEventTarget");															
 	
 	//////////// GENERIC EVENT
 	DKString address = DKDuktape::pointerToAddress(this);
-	DKEventTarget::addEventListener<DKEvent>("generic", &App::onGeneric, address);					// CPP
-	DKEvent* event = new DKEvent("generic", "");													// CPP
-	DKEventTarget::dispatchEvent(event, address);													// CPP
+	DKEventTarget::addEventListener<DKEvent>("generic", &App::onGeneric, address);					
+	DKEvent* event = new DKEvent("generic", "");												
+	DKEventTarget::dispatchEvent(event, address);													
 	
-	// console.log("/////////// ConsoleWindow /////////////////////")								// JS
-	DKINFO("/////////// ConsoleWindow ///////////////////// \n");									// CPP
 
-	// CPP_DK_Create("DKDuktape/ConsoleWindow.js");													// JS
-	// const myConsoleWindow = new ConsoleWindow('myConsoleWindow')									// JS
-	DKObject* myConsoleWindow = DKClass::DKCreate("DKConsoleWindow");								// CPP
-
-	//myConsoleWindow.addEventListener('keydown', onKeyDown)										// JS
+	DKINFO("/////////// ConsoleWindow ///////////////////// \n");
+	DKObject* myConsoleWindow = DKClass::DKCreate("DKConsoleWindow");
 	DKString addressB = DKDuktape::pointerToAddress(myConsoleWindow);	
-	DKEventTarget::addEventListener<DKKeyboardEvent>("keydown", &App::onKeyDown, addressB);			// CPP
+	DKEventTarget::addEventListener<DKKeyboardEvent>("keydown", &App::onKeyDown, addressB);
 
-	//myConsoleWindow.addEventListener('keyup', onKeyUp)											// JS
-	//DKEventTarget::addEventListener<DKKeyboardEvent>("keyup", &App::onKeyUp, myConsoleWindow);	// CPP
+	//DKEventTarget::addEventListener<DKKeyboardEvent>("keyup", &App::onKeyUp, myConsoleWindow);
 
-	// JS
 	/*
 	//console.log("myConsoleWindow.name="+myConsoleWindow.name)
 	//myConsoleWindow.name = "Test 123"
@@ -45,8 +37,6 @@ bool App::Init() {
 	//myConsoleWindow.close()
 	//myConsoleWindow.focus()
 	*/
-	// CPP
-	/* TODO */
 
 	return true;
 }
@@ -57,23 +47,6 @@ bool App::End(){
 	return true;
 }
 
-
-// JS 
-/*
-function printEventProperties(event){
-	console.log("event.bubbles="+event.bubbles)
-	console.log("event.cancelable="+event.cancelable)			
-	console.log("event.composed="+event.composed)
-	console.log("event.currentTarget="+event.currentTarget)
-	console.log("event.defaultPrevented="+event.defaultPrevented)
-	console.log("event.eventPhase="+event.eventPhase)
-	console.log("event.isTrusted="+event.isTrusted)
-	console.log("event.target="+event.target)
-	console.log("event.timeStamp="+event.timeStamp)
-	console.log("event.type="+event.type)
-}
-*/
-// CPP
 void App::printEventProperties(DKEvent* event) {
 	DKDEBUGFUNC(event);
 	DKINFO("event->bubbles="+toString(event->bubbles)+"\n");
@@ -88,23 +61,14 @@ void App::printEventProperties(DKEvent* event) {
 	DKINFO("event->type="+event->type+"\n");
 }
 
-
-// JS 
-/*
-function printKeyboardEventProperties(keyevent){
-	console.log("keyevent.altKey="+keyevent.altKey)
-	console.log("keyevent.code="+keyevent.code)			
-	console.log("keyevent.ctrlKey="+keyevent.ctrlKey)
-	console.log("keyevent.isComposing="+keyevent.isComposing)
-	console.log("keyevent.key="+keyevent.key)
-	console.log("keyevent.locale="+keyevent.locale)
-	console.log("keyevent.location="+keyevent.location)
-	console.log("keyevent.metaKey="+keyevent.metaKey)
-	console.log("keyevent.repeat="+keyevent.repeat)
-	console.log("keyevent.shiftKey="+keyevent.shiftKey)
+void App::printUIEventProperties(DKUIEvent* uievent) {
+	DKDEBUGFUNC(uievent);
+	DKINFO("uievent->detail="+toString(uievent->detail)+"\n");
+	//DKINFO("uievent->sourceCapabilities="+toString(uievent->sourceCapabilities)+"\n");
+	//DKINFO("uievent->view="+toString(uievent->view)+"\n");
+	DKINFO("uievent->which="+toString(uievent->which)+"\n");
 }
-*/
-// CPP
+
 void App::printKeyboardEventProperties(DKKeyboardEvent* keyevent) {
 	DKDEBUGFUNC(keyevent);
 	DKINFO("keyevent->altKey="+toString(keyevent->altKey)+"\n");
@@ -119,46 +83,27 @@ void App::printKeyboardEventProperties(DKKeyboardEvent* keyevent) {
 	DKINFO("keyevent->shiftKey="+toString(keyevent->shiftKey)+"\n");
 }
 
-
-// JS
-/*
-function onKeyDown(event){
-	console.log("\n onKeyDown()")
-	printEventProperties(event)
-	printKeyboardEventProperties(event)
-}
-*/
-// CPP
-bool App::onKeyDown(DKKeyboardEvent* keyevent) {
-	DKDEBUGFUNC(keyevent);
-	DKINFO("onKeyDown() \n");
-	printEventProperties(keyevent);
-	printKeyboardEventProperties(keyevent);
-	return true;
-}
-
-
-// JS
-/*
-function onKeyUp(event){
-	console.log("\n onKeyUp()")
-	printEventProperties(event)
-	printKeyboardEventProperties(event)
-}
-*/
-// CPP
-bool App::onKeyUp(DKKeyboardEvent* keyevent) {
-	DKDEBUGFUNC(keyevent);
-	DKINFO("onKeyUp() \n");
-	printEventProperties(keyevent);
-	printKeyboardEventProperties(keyevent);
-	return true;
-}
-
-// CPP
 bool App::onGeneric(DKEvent* event) {
 	DKDEBUGFUNC(event);
 	DKINFO("onGeneric() \n");
 	printEventProperties(event);
+	return true;
+}
+
+bool App::onKeyDown(DKKeyboardEvent* keyevent) {
+	DKDEBUGFUNC(keyevent);
+	DKINFO("onKeyDown() \n");
+	printEventProperties(keyevent);
+	printUIEventProperties(keyevent);
+	printKeyboardEventProperties(keyevent);
+	return true;
+}
+
+bool App::onKeyUp(DKKeyboardEvent* keyevent) {
+	DKDEBUGFUNC(keyevent);
+	DKINFO("onKeyUp() \n");
+	printEventProperties(keyevent);
+	printUIEventProperties(keyevent);
+	printKeyboardEventProperties(keyevent);
 	return true;
 }

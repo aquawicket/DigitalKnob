@@ -13,6 +13,7 @@ public:
 
 	////// KeyboardEvents //////
 	static void printEventProperties(DKEvent* event);
+	static void printUIEventProperties(DKUIEvent* uievent);
 	static void printKeyboardEventProperties(DKKeyboardEvent* keyevent);
 	static bool onKeyDown(DKKeyboardEvent* keyevent);
 	static bool onKeyUp(DKKeyboardEvent* keyevent);
