@@ -1,3 +1,3 @@
 dk_depend(DK)
-dk_generateCmake(CPPEventsTest)
-dk_assets(CPPEventsTest)
+dk_generateCmake(DKEventTest)
+dk_assets(DKEventTest)
