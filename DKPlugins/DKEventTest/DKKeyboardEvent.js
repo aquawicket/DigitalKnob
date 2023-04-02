@@ -128,6 +128,6 @@ var KeyboardEvent = function KeyboardEvent(type, options, address) {
 		}
 	}
 	
-	return Event.call(this, type, options)
+	return UIEvent.call(this, type, options)
 };
-KeyboardEvent.prototype = Event.prototype;
+KeyboardEvent.prototype = UIEvent.prototype;
