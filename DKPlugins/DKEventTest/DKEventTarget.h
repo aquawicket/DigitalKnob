@@ -11,7 +11,6 @@ template <typename EventType>
 struct EventObject {
     DKString type;
     std::function<void(EventType*)> listener;
-    //void* pointer;
 	DKString eventTargetAddress;
 };
 
@@ -78,10 +77,24 @@ public:
 	////// DK properties //////	
 	template <typename EventType>
 	static std::vector<EventObject<EventType>> events;
+
+	/*
+	// TODO: std::map <DKString, EventType> event_type;
+	// EXAMPLE: event_type["generic"] = DKEvent;
+	// EXAMPLE: event_type["keydown"] = DKKeyboardEvent;
+	template <typename EventType>
+	static std::map<DKString, EventType> event_type;
+	*/
 };
 
 template <typename EventType>
 std::vector<EventObject<EventType>> DKEventTarget::events;
+
+/*
+// TODO: std::map <DKString, EventType> event_type;
+template <typename EventType>
+std::map<DKString, EventType> DKEventTarget::event_type;
+*/
 
 REGISTER_OBJECT(DKEventTarget, true);
 

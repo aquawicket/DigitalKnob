@@ -82,7 +82,7 @@ public:
 		DKString cb = event->type+"_callback";
 		duk_get_global_string(DKDuktape::ctx, cb.c_str());
 		
-		// TODO: push new Event() object
+		// TODO: push new Event('','',eventAddress) object
 		//DKString evt = "new KeyboardEvent('', '', '"+eventAddress+"')";
 		
 		duk_push_string(DKDuktape::ctx, eventAddress.c_str());  //push event parameter
