@@ -81,10 +81,19 @@ public:
 		DKString eventAddress = DKDuktape::pointerToAddress(event);
 		DKString cb = event->type+"_callback";
 		duk_get_global_string(DKDuktape::ctx, cb.c_str());
+		
+		// TODO: push new Event() object
+		//DKString evt = "new KeyboardEvent('', '', '"+eventAddress+"')";
+		
 		duk_push_string(DKDuktape::ctx, eventAddress.c_str());  //push event parameter
 		//duk_push_null(DKDuktape::ctx);
 		//duk_put_global_string(DKDuktape::ctx, cb.c_str());
-		duk_call(DKDuktape::ctx, 1);  //1 = num or args
+		
+		//duk_call(DKDuktape::ctx, 1);  
+		if(duk_pcall(DKDuktape::ctx, 1) != 0){ //1 = num or args
+			DKDuktape::DumpError(eventAddress);
+		}
+	
 		return true;
 	}
 };
