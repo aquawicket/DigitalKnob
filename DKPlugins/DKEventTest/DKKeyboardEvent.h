@@ -3,16 +3,16 @@
 #define DKKeyboardEvent_H
 
 #include "DK/DK.h"
-#include "DKEventTest/DKEvent.h"
+#include "DKEventTest/DKUIEvent.h"
 
 
 // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent
-class DKKeyboardEvent : public DKEvent
+class DKKeyboardEvent : public DKUIEvent
 {
 public:
 	////// Constructor //////
 	// [KeyboardEvent()] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/KeyboardEvent
-	DKKeyboardEvent(DKString _type, DKString _options) : DKEvent(_type, _options) {
+	DKKeyboardEvent(DKString _type, DKString _options) : DKUIEvent(_type, _options) {
 		altKey = false;
 		code = "TODO";
 		ctrlKey = false;
