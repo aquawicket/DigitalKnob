@@ -1,9 +1,9 @@
 CPP_DK_Create("DKConsole");
 CPP_DK_Create("DKEventJS");
-CPP_DK_Create("CPPEventsTest/DKEvent.js");
+CPP_DK_Create("DKEventTest/DKEvent.js");
 CPP_DK_Create("DKKeyboardEventJS");
-CPP_DK_Create("CPPEventsTest/DKKeyboardEvent.js");
+CPP_DK_Create("DKEventTest/DKKeyboardEvent.js");
 CPP_DK_Create("DKEventTargetJS");
-CPP_DK_Create("CPPEventsTest/DKEventTarget.js");
-CPP_DK_Create("CPPEventsTest/DKGlobalEventHandlers.js");
+CPP_DK_Create("DKEventTest/DKEventTarget.js");
+CPP_DK_Create("DKEventTest/DKGlobalEventHandlers.js");
 CPP_DK_Create("Test.js");

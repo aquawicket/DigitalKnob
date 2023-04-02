@@ -30,7 +30,7 @@ target.dispatchEvent(event)
 
 /////////////////// ConsoleWindow //////////////////////////
 console.log("/////////// ConsoleWindow /////////////////////")
-CPP_DK_Create("CPPEventsTest/DKConsoleWindow.js");
+CPP_DK_Create("DKEventTest/DKConsoleWindow.js");
 const myConsoleWindow = new DKConsoleWindow('myConsoleWindow')
 
 
