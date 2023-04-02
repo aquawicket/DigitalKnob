@@ -63,10 +63,10 @@ function onKeyDown(event){
 myConsoleWindow.addEventListener('keydown', onKeyDown)
 */
 
-function onKeyUp(eventAddress){
+function onKeyUp(event){
 	// TODO: receive a new Event() object
-	console.log("onKeyUp("+eventAddress+")")
-	const event = new KeyboardEvent('', '', eventAddress);
+	console.log("onKeyUp("+event+")")
+	//const event = new KeyboardEvent('', '', eventAddress);
 	printEventProperties(event)
 	printUIEventProperties(event)
 	printKeyboardEventProperties(event)

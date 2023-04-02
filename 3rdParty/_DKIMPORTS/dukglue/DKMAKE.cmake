@@ -6,4 +6,4 @@ dk_depend(duktape)
 
 dk_import(https://github.com/Aloshi/dukglue.git)
 
-dk_include(${DUKGLUE}/include/dukglue)
+dk_include(${DUKGLUE}/include)

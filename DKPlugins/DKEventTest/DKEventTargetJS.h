@@ -7,6 +7,8 @@
 #include "DKEventTest/DKKeyboardEvent.h"
 #include "DKEventTest/DKEventTarget.h"
 
+#include "dukglue/dukglue.h"
+
 // How to persist Duktape/C arguments across calls
 // https://wiki.duktape.org/howtonativepersistentreferences#:~:text=When%20a%20Duktape%2FC%20function,safely%20work%20with%20the%20arguments.
 
@@ -84,15 +86,22 @@ public:
 		
 		// TODO: push new Event('','',eventAddress) object
 		//DKString evt = "new KeyboardEvent('', '', '"+eventAddress+"')";
+		// template parameter is return type
+		DKString eventObjStr = "var eventObj = new KeyboardEvent('', '', '"+eventAddress+"'); eventObj;";  // returns eventObj
+		DukValue eventObj = dukglue_peval<DukValue>(DKDuktape::ctx, eventObjStr.c_str());
 		
-		duk_push_string(DKDuktape::ctx, eventAddress.c_str());  //push event parameter
+		//duk_push_string(DKDuktape::ctx, eventAddress.c_str());  //push event parameter
+		dukglue_push(DKDuktape::ctx, eventObj);
+		
 		//duk_push_null(DKDuktape::ctx);
 		//duk_put_global_string(DKDuktape::ctx, cb.c_str());
 		
-		//duk_call(DKDuktape::ctx, 1);  
-		if(duk_pcall(DKDuktape::ctx, 1) != 0){ //1 = num or args
-			DKDuktape::DumpError(eventAddress);
-		}
+		duk_call(DKDuktape::ctx, 1);  
+		//if(duk_pcall(DKDuktape::ctx, 1) != 0){ //1 = num or args
+		//	DKDuktape::DumpError(eventAddress);
+		//}
+		
+		//dukglue_pcall(DKDuktape::ctx, 1, eventObj);
 	
 		return true;
 	}
