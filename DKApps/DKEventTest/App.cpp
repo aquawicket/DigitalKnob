@@ -1,9 +1,9 @@
 #include "DK/stdafx.h"
 
 #include "App.h"
-#include "CPPEventsTest/DKEventTarget.h"
-#include "CPPEventsTest/DKConsoleWindow.h"
-#include "CPPEventsTest/DKKeyboardEvent.h"
+#include "DKEventTest/DKEventTarget.h"
+#include "DKEventTest/DKConsoleWindow.h"
+#include "DKEventTest/DKKeyboardEvent.h"
 #include "DKDuktape/DKDuktape.h"
 
 
