@@ -3,9 +3,9 @@
 #define DKEventTargetJS_H
 
 #include "DKDuktape/DKDuktape.h"
-#include "CPPEventsTest/DKEvent.h"
-#include "CPPEventsTest/DKKeyboardEvent.h"
-#include "CPPEventsTest/DKEventTarget.h"
+#include "DKEventTest/DKEvent.h"
+#include "DKEventTest/DKKeyboardEvent.h"
+#include "DKEventTest/DKEventTarget.h"
 
 // How to persist Duktape/C arguments across calls
 // https://wiki.duktape.org/howtonativepersistentreferences#:~:text=When%20a%20Duktape%2FC%20function,safely%20work%20with%20the%20arguments.

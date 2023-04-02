@@ -3,8 +3,8 @@
 #define DKKeyboardEventJS_H
 
 #include "DKDuktape/DKDuktape.h"
-#include "CPPEventsTest/DKEvent.h"
-#include "CPPEventsTest/DKEventTarget.h"
+#include "DKEventTest/DKEvent.h"
+#include "DKEventTest/DKEventTarget.h"
 
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent
 // [INTERFACE] https://w3c.github.io/uievents/#interface-keyboardevent

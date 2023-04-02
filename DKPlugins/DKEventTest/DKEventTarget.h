@@ -3,7 +3,7 @@
 #define DKEventTarget_H
 
 #include "DK/DK.h"
-#include "CPPEventsTest/DKEvent.h"
+#include "DKEventTest/DKEvent.h"
 #include "DKDuktape/DKDuktape.h"
 
 

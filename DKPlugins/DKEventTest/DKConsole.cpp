@@ -26,7 +26,7 @@
 
 #ifdef HAVE_DKDuktape 
 #include "DK/DKApp.h"
-#include "CPPEventsTest/DKConsole.h"
+#include "DKEventTest/DKConsole.h"
 
 
 bool DKConsole::Init(){

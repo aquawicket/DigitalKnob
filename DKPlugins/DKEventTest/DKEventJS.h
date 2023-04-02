@@ -3,8 +3,8 @@
 #define DKEventJS_H
 
 #include "DKDuktape/DKDuktape.h"
-#include "CPPEventsTest/DKEvent.h"
-#include "CPPEventsTest/DKEventTarget.h"
+#include "DKEventTest/DKEvent.h"
+#include "DKEventTest/DKEventTarget.h"
 
 // [Event] https://developer.mozilla.org/en-US/docs/Web/API/Event
 class DKEventJS : public DKObjectT<DKEventJS>
