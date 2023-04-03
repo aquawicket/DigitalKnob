@@ -5,7 +5,7 @@
 
 // [Event()] https://developer.mozilla.org/en-US/docs/Web/API/Event/Event
 var Event = function Event(type, options, address) {
-	console.log("Event("+type+","+options+","+address+")")
+	//console.log("Event("+type+","+options+","+address+")")
 	
 	if(!address){
 		if(!this.address)
@@ -225,6 +225,7 @@ function DispatchEvent(_pointer) {
 }
 */
 
+/*
 // Called from C++ to dispatch events
 ///////////////////////////////////////////////////
 function dispatchEvent(_type, _options, _pointer) {
@@ -232,3 +233,4 @@ function dispatchEvent(_type, _options, _pointer) {
 	event.target = new EventTarget(_pointer)
 	event.target.dispatchEvent(event)
 }
+*/
