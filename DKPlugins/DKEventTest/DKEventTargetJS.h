@@ -3,13 +3,13 @@
 #define DKEventTargetJS_H
 
 #include "DKDuktape/DKDuktape.h"
-#include "DKEventTest/DKEvent.h"
-#include "DKEventTest/DKKeyboardEvent.h"
 #include "DKEventTest/DKEventTarget.h"
 
+/*
 WARNING_DISABLE
 #include "dukglue/dukglue.h"
 WARNING_ENABLE
+*/
 
 // How to persist Duktape/C arguments across calls
 // https://wiki.duktape.org/howtonativepersistentreferences#:~:text=When%20a%20Duktape%2FC%20function,safely%20work%20with%20the%20arguments.
@@ -51,49 +51,8 @@ public:
 		DKString cb = type+"_callback";
 		duk_dup(ctx, 2);
 		duk_put_global_string(ctx, cb.c_str());
-
-		// FIXME: EventTarget shouldn't need to know about UIEvent, KeyboardEvent, MouseEvent, ect.
-		//////////////////////////////////////////////////////////////////////////////////////////////////////
-		// set event Type
-		//if(same(type, "keydown") || same(type, "keyup") || same(type, "keypress"))
-		//	DKEventTarget::addEventListener<DKKeyboardEvent>(type, &DKEventTargetJS::onEvent, targetAddress);
-		//else
-		//	DKEventTarget::addEventListener<DKEvent>(type, &DKEventTargetJS::onEvent, targetAddress);
 		
 		DKEventTarget::CallAddEventListenerFunc(type, type, targetAddress);
-		// IDEA: Each EventType could provide it's own addEventListener function
-		//     Then using a lookup table, the appropriate function can be called.
-		//
-		//	EXAMPLE:  DKKeyboardEvent.h
-		//	bool DKKeyboardEvent::addEventListener(type, targetAddress){
-		//		DKEventTarget::addEventListener<DKKeyboardEvent>(type, &DKKeyboardEvent::onKeyboardEvent, targetAddress);
-		//	}
-		//		
-		//	static bool onEvent(DKKeyboardEvent* event) {
-		//		DKDEBUGFUNC(event);
-		//
-		//		// get the globally stored js callback function
-		//		DKString eventAddress = DKDuktape::pointerToAddress(event);
-		//		DKString cb = event->type+"_callback";
-		//		duk_get_global_string(DKDuktape::ctx, cb.c_str());
-		//
-		//		// create and push the Event(eventAddress) object		
-		//		DKString eventObjStr = "var eventObj = new KeyboardEvent('', '', '"+eventAddress+"'); eventObj;";  // returns eventObj
-		//		DukValue eventObj = dukglue_peval<DukValue>(DKDuktape::ctx, eventObjStr.c_str());
-		//		dukglue_push(DKDuktape::ctx, eventObj);	 //push event object
-		//
-		//		// call callback function
-		//		if(duk_pcall(DKDuktape::ctx, 1) != 0){ //1 = num or args
-		//			DKDuktape::DumpError(eventAddress);
-		//		}
-		//		return true;
-		//	}
-		//
-		// THEN: DKEventTarget.h could have a std::map to links event types to which Event class function to call 
-		//
-		//   
-		//
-		//////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		return true;
 	}
@@ -103,7 +62,7 @@ public:
 		DKString type = duk_require_string(ctx, 1);
 		duk_require_function(ctx, 2);
 		DKINFO("DKEventTargetJS::removeEventListener("+targetAddress+", "+type+", DKEventTargetJS::onEvent)\n");
-		DKEventTarget::removeEventListener<DKEvent>(type, &DKEventTargetJS::onEvent, targetAddress);	
+		//DKEventTarget::removeEventListener<DKEvent>(type, &DKEventTargetJS::onEvent, targetAddress);	
 		return DKTODO();
 	}
 	static int dispatchEvent(duk_context* ctx){
@@ -114,42 +73,6 @@ public:
 		
 		DKEvent* event = (DKEvent*)DKDuktape::addressToPointer(eventAddress);
 		DKEventTarget::dispatchEvent(event, targetAddress);
-		return true;
-	}
-	
-	// CPP
-	static bool onEvent(DKEvent* event) {
-		DKDEBUGFUNC(event);
-		DKINFO("onEvent("+event->type+") \n");
-		
-		// get the globally stored js callback function
-		DKString eventAddress = DKDuktape::pointerToAddress(event);
-		DKString cb = event->type+"_callback";
-		duk_get_global_string(DKDuktape::ctx, cb.c_str());
-		
-		// FIXME: EventTarget shouldn't need to know about UIEvent, KeyboardEvent, MouseEvent, ect.
-		///////////////////////////////////////////////////////////////////////////////////////////////
-		// get event Type
-		DKString eventType;
-		if(same(event->type, "keydown") || same(event->type, "keyup") || same(event->type, "keypress"))
-			eventType = "KeyboardEvent";
-		else
-			eventType = "Event";
-		
-		// create and push the Event(eventAddress) object		
-		DKString eventObjStr = "var eventObj = new "+eventType+"('', '', '"+eventAddress+"'); eventObj;";  // returns eventObj
-		DukValue eventObj = dukglue_peval<DukValue>(DKDuktape::ctx, eventObjStr.c_str());
-		dukglue_push(DKDuktape::ctx, eventObj);	 //push event object
-		///////////////////////////////////////////////////////////////////////////////////////////////
-		
-		//duk_push_null(DKDuktape::ctx);
-		//duk_put_global_string(DKDuktape::ctx, cb.c_str());
-		
-		// call callback function
-		if(duk_pcall(DKDuktape::ctx, 1) != 0){ //1 = num or args
-			DKDuktape::DumpError(eventAddress);
-		}
-	
 		return true;
 	}
 };

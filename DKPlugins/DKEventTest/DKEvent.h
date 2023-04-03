@@ -28,7 +28,6 @@ public:
 		//pointer = _pointer;
 		//targetAddress = _targetAddress;
 		//currentTargetAddress = _targetAddress;
-		DKEventTarget::LinkAddEventListenerFunc("generic", &DKEvent::addEventListener, this);
 	}
 	
 	
@@ -89,19 +88,6 @@ public:
 	void* pointer;
 	DKString targetAddress;
 	DKString currentTargetAddress;
-	
-	
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	bool addEventListener(const DKString& _type, const DKString& eventTargetAddress){
-		DKEventTarget::addEventListener<DKEvent>(_type, &DKEvent::onEvent, eventTargetAddress);
-		return true;
-	}
-	
-	static bool onEvent(DKEvent* event) {
-		DKDEBUGFUNC(event);
-		DKINFO("onEvent("+event->type+") \n");
-		return true;
-	}
 };
 
 

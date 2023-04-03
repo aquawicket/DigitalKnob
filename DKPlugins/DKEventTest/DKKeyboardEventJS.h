@@ -4,6 +4,11 @@
 
 #include "DKDuktape/DKDuktape.h"
 
+WARNING_DISABLE
+#include "dukglue/dukglue.h"
+WARNING_ENABLE
+
+
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent
 // [INTERFACE] https://w3c.github.io/uievents/#interface-keyboardevent
 class DKKeyboardEventJS : public DKObjectT<DKKeyboardEventJS>
@@ -37,6 +42,12 @@ public:
 		
 		////// Instance methods //////
 		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_getModifierState", DKKeyboardEventJS::getModifierState);
+		
+		
+		////// Register Events //////
+		DKEventTarget::LinkAddEventListenerFunc("keydown", &DKKeyboardEventJS::addEventListener, this);
+		DKEventTarget::LinkAddEventListenerFunc("keyup", &DKKeyboardEventJS::addEventListener, this);
+		DKEventTarget::LinkAddEventListenerFunc("keypress", &DKKeyboardEventJS::addEventListener, this);
 		
 		return true;
 	}
@@ -136,6 +147,40 @@ public:
 		DKKeyboardEvent* event = (DKKeyboardEvent*)DKDuktape::addressToPointer(eventAddress);
 		*/
 		return DKTODO();
+	}
+
+
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	bool addEventListener(const DKString& _type, const DKString& eventTargetAddress){
+		DKEventTarget::addEventListener<DKKeyboardEvent>(_type, &DKKeyboardEventJS::onKeyboardEvent, eventTargetAddress);
+		return true;
+	}
+	
+	static bool onKeyboardEvent(DKKeyboardEvent* event) {
+		DKDEBUGFUNC(event);
+		DKINFO("onKeyboardEvent("+event->type+") \n");
+		
+		// get the globally stored js callback function
+		DKString eventAddress = DKDuktape::pointerToAddress(event);
+		DKString cb = event->type+"_callback";
+		duk_get_global_string(DKDuktape::ctx, cb.c_str());
+		
+		// create and push the Event(eventAddress) object		
+		DKString eventObjStr = "var eventObj = new KeyboardEvent('', '', '"+eventAddress+"'); eventObj;";  // returns eventObj
+		DukValue eventObj = dukglue_peval<DukValue>(DKDuktape::ctx, eventObjStr.c_str());
+		dukglue_push(DKDuktape::ctx, eventObj);	 //push event object
+		
+		// delete duktape callback
+		//duk_push_null(DKDuktape::ctx);
+		//duk_put_global_string(DKDuktape::ctx, cb.c_str());
+		
+		// call callback function
+		if(duk_pcall(DKDuktape::ctx, 1) != 0){ //1 = num or args
+			DKDuktape::DumpError(eventAddress);
+		}
+	
+		return true;
 	}	
 	
 };

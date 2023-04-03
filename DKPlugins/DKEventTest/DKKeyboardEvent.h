@@ -23,10 +23,6 @@ public:
 		metaKey = false;
 		repeat = false;
 		shiftKey = false;
-		
-		DKEventTarget::LinkAddEventListenerFunc("keydown", &DKKeyboardEvent::addEventListener, this);
-		DKEventTarget::LinkAddEventListenerFunc("keyup", &DKKeyboardEvent::addEventListener, this);
-		DKEventTarget::LinkAddEventListenerFunc("keypress", &DKKeyboardEvent::addEventListener, this);
 	}
 	
 	
@@ -85,19 +81,6 @@ public:
 	
 	////// Obsolete events //////
 	// [keypress](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Element/keypress_event
-	
-	
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	bool addEventListener(const DKString& _type, const DKString& eventTargetAddress){
-		DKEventTarget::addEventListener<DKKeyboardEvent>(_type, &DKKeyboardEvent::onKeyboardEvent, eventTargetAddress);
-		return true;
-	}
-	
-	static bool onKeyboardEvent(DKKeyboardEvent* event) {
-		DKDEBUGFUNC(event);
-		DKINFO("onKeyboardEvent("+event->type+") \n");
-		return true;
-	}
 };
 
 
