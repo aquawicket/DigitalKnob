@@ -25,9 +25,9 @@ public:
 		DKDuktape::AttachFunction("CPP_DKEventTarget_dispatchEvent", DKEventTargetJS::dispatchEvent);
 		
 		
-		////// Load .js file
+		////// Load .js files
 		DKClass::DKCreate("DKEventTest/DKEventTarget.js");
-		
+		DKClass::DKCreate("DKEventTest/DKGlobalEventHandlers.js");
 		return true;
 	}
 	

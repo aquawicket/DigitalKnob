@@ -26,7 +26,7 @@ public:
 		DKDuktape::AttachFunction("CPP_DKUIEvent_initUIEvent", DKUIEventJS::initUIEvent);
 		
 		
-		////// Load .js file
+		////// Load .js files
 		DKClass::DKCreate("DKEventTest/DKUIEvent.js");
 		
 		return true;

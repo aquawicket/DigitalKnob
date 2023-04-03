@@ -53,7 +53,7 @@ public:
 		DKEventTarget::LinkAddEventListenerFunc("generic", &DKEventJS::addEventListener, this);
 		
 		
-		////// Load .js file
+		////// Load .js files
 		DKClass::DKCreate("DKEventTest/DKEvent.js");
 		
 		return true;
