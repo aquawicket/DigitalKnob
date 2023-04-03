@@ -100,17 +100,17 @@ public:
 		return true;
 	}
 	
-	static bool CallAddEventListenerFunc(const DKString& name, const DKString& type, const DKString& eventTargetAddress){
-		DKDEBUGFUNC(name, type, eventTargetAddress);
-		//DKINFO("DKEventTarget::CallAddEventListenerFunc("+name+", "+type+", "+eventTargetAddress+") \n");
+	static bool CallAddEventListenerFunc(const DKString& type, const DKString& eventTargetAddress){
+		DKDEBUGFUNC(type, eventTargetAddress);
+		//DKINFO("DKEventTarget::CallAddEventListenerFunc("+type+", "+eventTargetAddress+") \n");
 		if(!addEventListenerMap)
 			return DKERROR("addEventListenerMap invalid! \n");
 		if(addEventListenerMap->empty())
 			return DKERROR("addEventListenerMap empty! \n");
-		if(addEventListenerMap->find(name) == addEventListenerMap->end())
-			return DKERROR(name+" not registered to a function! \n");
+		if(addEventListenerMap->find(type) == addEventListenerMap->end())
+			return DKERROR(type+" not registered to a function! \n");
 		//	return DKERROR(name+"() function not registered \n");
-		return (*addEventListenerMap)[name](type, eventTargetAddress);
+		return (*addEventListenerMap)[type](type, eventTargetAddress);
 	}
 };
 
