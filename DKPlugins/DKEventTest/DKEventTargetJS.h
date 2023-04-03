@@ -18,10 +18,15 @@ public:
 		////// Constructor //////
 		DKDuktape::AttachFunction("CPP_DKEventTarget", DKEventTargetJS::constructor); // [EventTarget()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/EventTarget
 		
+		
 		////// Instance methods //////
 		DKDuktape::AttachFunction("CPP_DKEventTarget_addEventListener", DKEventTargetJS::addEventListener);
 		DKDuktape::AttachFunction("CPP_DKEventTarget_removeEventListener", DKEventTargetJS::removeEventListener);
 		DKDuktape::AttachFunction("CPP_DKEventTarget_dispatchEvent", DKEventTargetJS::dispatchEvent);
+		
+		
+		////// Load .js file
+		DKClass::DKCreate("DKEventTest/DKEventTarget.js");
 		
 		return true;
 	}

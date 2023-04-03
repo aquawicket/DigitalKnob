@@ -25,6 +25,10 @@ public:
 		////// Instance methods //////
 		DKDuktape::AttachFunction("CPP_DKUIEvent_initUIEvent", DKUIEventJS::initUIEvent);
 		
+		
+		////// Load .js file
+		DKClass::DKCreate("DKEventTest/DKUIEvent.js");
+		
 		return true;
 	}
 	

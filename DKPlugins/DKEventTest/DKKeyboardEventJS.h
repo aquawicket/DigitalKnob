@@ -49,6 +49,10 @@ public:
 		DKEventTarget::LinkAddEventListenerFunc("keyup", &DKKeyboardEventJS::addEventListener, this);
 		DKEventTarget::LinkAddEventListenerFunc("keypress", &DKKeyboardEventJS::addEventListener, this);
 		
+		
+		////// Load .js file
+		DKClass::DKCreate("DKEventTest/DKKeyboardEvent.js");
+		
 		return true;
 	}
 	
