@@ -46,7 +46,7 @@
 
 bool DKConsoleWindow::Init(){
 	DKDEBUGFUNC();
-	DKINFO("DKConsoleWindow::Init() \n");
+	//DKINFO("DKConsoleWindow::Init() \n");
 	
 #if !WIN && !EMSCRIPTEN && !ANDROID
 	SCREEN *screen = newterm((char *) 0, stdout, stdin);
