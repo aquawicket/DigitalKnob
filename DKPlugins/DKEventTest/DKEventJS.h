@@ -49,8 +49,9 @@ public:
 		*/
 		
 		
-		////// Register Events //////
+		////// Register Add/Remove Listener Functions //////
 		DKEventTarget::LinkAddEventListenerFunc("generic", &DKEventJS::addEventListener, this);
+		DKEventTarget::LinkRemoveEventListenerFunc("generic", &DKEventJS::removeEventListener, this);
 		
 		
 		////// Load .js files
@@ -208,6 +209,11 @@ public:
 	/////////////////////////////////////////////////////////////////////////////////
 	bool addEventListener(const DKString& _type, const DKString& eventTargetAddress){
 		DKEventTarget::addEventListener<DKEvent>(_type, &DKEventJS::onEvent, eventTargetAddress);
+		return true;
+	}
+	
+	bool removeEventListener(const DKString& _type, const DKString& eventTargetAddress){
+		DKEventTarget::removeEventListener<DKEvent>(_type, &DKEventJS::onEvent, eventTargetAddress);
 		return true;
 	}
 	

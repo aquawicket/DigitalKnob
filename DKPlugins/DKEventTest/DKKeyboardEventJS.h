@@ -44,10 +44,13 @@ public:
 		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_getModifierState", DKKeyboardEventJS::getModifierState);
 		
 		
-		////// Register Events //////
+		////// Register Add/Remove Listener Functions //////
 		DKEventTarget::LinkAddEventListenerFunc("keydown", &DKKeyboardEventJS::addEventListener, this);
 		DKEventTarget::LinkAddEventListenerFunc("keyup", &DKKeyboardEventJS::addEventListener, this);
 		DKEventTarget::LinkAddEventListenerFunc("keypress", &DKKeyboardEventJS::addEventListener, this);
+		DKEventTarget::LinkRemoveEventListenerFunc("keydown", &DKKeyboardEventJS::removeEventListener, this);
+		DKEventTarget::LinkRemoveEventListenerFunc("keyup", &DKKeyboardEventJS::removeEventListener, this);
+		DKEventTarget::LinkRemoveEventListenerFunc("keypress", &DKKeyboardEventJS::removeEventListener, this);
 		
 		
 		////// Load .js files
@@ -158,6 +161,11 @@ public:
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	bool addEventListener(const DKString& _type, const DKString& eventTargetAddress){
 		DKEventTarget::addEventListener<DKKeyboardEvent>(_type, &DKKeyboardEventJS::onKeyboardEvent, eventTargetAddress);
+		return true;
+	}
+	
+	bool removeEventListener(const DKString& _type, const DKString& eventTargetAddress){
+		DKEventTarget::removeEventListener<DKKeyboardEvent>(_type, &DKKeyboardEventJS::onKeyboardEvent, eventTargetAddress);
 		return true;
 	}
 	

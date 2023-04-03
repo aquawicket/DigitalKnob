@@ -8,6 +8,9 @@
 typedef std::function<bool(const DKString&, const DKString&)> AddEventListenerFunc;
 typedef std::map<DKString, AddEventListenerFunc> AddEventListenerMap;
 
+typedef std::function<bool(const DKString&, const DKString&)> RemoveEventListenerFunc;
+typedef std::map<DKString, RemoveEventListenerFunc> RemoveEventListenerMap;
+
 template <typename EventType>
 struct EventObject {
     DKString type;
@@ -83,6 +86,7 @@ public:
 	static std::vector<EventObject<EventType>> events;
 	
 	static AddEventListenerMap* addEventListenerMap;
+	static RemoveEventListenerMap* removeEventListenerMap;
 	
 	template<class T>
 	static bool LinkAddEventListenerFunc(const DKString& name, bool (T::*func) (const DKString&, const DKString&), T* _this){
@@ -90,13 +94,7 @@ public:
 		//DKINFO("DKEventTarget::LinkAddEventListenerFunc("+name+", func(DKString,DKString)) \n");
 		if(!addEventListenerMap)
 			addEventListenerMap = new AddEventListenerMap();
-		//if(HasFunc(name))
-		//    return DKERROR(name+"() function already registered\n");
 		(*addEventListenerMap)[name] = std::bind(func, _this, std::placeholders::_1, std::placeholders::_2);
-		
-		if(!addEventListenerMap)
-			return DKERROR("addEventListenerMap invalid! \n");
-		
 		return true;
 	}
 	
@@ -109,8 +107,29 @@ public:
 			return DKERROR("addEventListenerMap empty! \n");
 		if(addEventListenerMap->find(type) == addEventListenerMap->end())
 			return DKERROR(type+" not registered to a function! \n");
-		//	return DKERROR(name+"() function not registered \n");
 		return (*addEventListenerMap)[type](type, eventTargetAddress);
+	}
+	
+	template<class T>
+	static bool LinkRemoveEventListenerFunc(const DKString& name, bool (T::*func) (const DKString&, const DKString&), T* _this){
+		DKDEBUGFUNC(name);//, func, _this);
+		//DKINFO("DKEventTarget::LinkRemoveEventListenerFunc("+name+", func(DKString,DKString)) \n");
+		if(!removeEventListenerMap)
+			removeEventListenerMap = new RemoveEventListenerMap();
+		(*removeEventListenerMap)[name] = std::bind(func, _this, std::placeholders::_1, std::placeholders::_2);
+		return true;
+	}
+	
+	static bool CallRemoveEventListenerFunc(const DKString& type, const DKString& eventTargetAddress){
+		DKDEBUGFUNC(type, eventTargetAddress);
+		//DKINFO("DKEventTarget::CallRemoveEventListenerFunc("+type+", "+eventTargetAddress+") \n");
+		if(!removeEventListenerMap)
+			return DKERROR("removeEventListenerMap invalid! \n");
+		if(removeEventListenerMap->empty())
+			return DKERROR("removeEventListenerMap empty! \n");
+		if(removeEventListenerMap->find(type) == removeEventListenerMap->end())
+			return DKERROR(type+" not registered to a function! \n");
+		return (*removeEventListenerMap)[type](type, eventTargetAddress);
 	}
 };
 
