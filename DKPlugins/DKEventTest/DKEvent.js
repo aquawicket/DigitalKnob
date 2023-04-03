@@ -201,36 +201,4 @@ var Event = function Event(type, options, address) {
 			return "[object Event]"
 		}
 	}
-	
-    //console.log("dispatching event");
-    //this.currentTarget.dispatchEvent(this);
-    //return this;
 }
-
-/*
-///////////////////////////////
-function DispatchEvent(_pointer) {
-    var event = new Event(_pointer);
-    //console.log("DispatchEvent("+pointer+"): event.type = "+event.type);
-
-    if (event.type === "mousemove" || event.type === "mouseover" || event.type === "mousedown" || event.type === "mouseup" || event.type === "click" || event.type === "dblclick" || event.type === "contextmenu") {
-        var mouseEvent = new MouseEvent(_type, _options, _pointer);
-        mouseEvent.currentTarget.dispatchEvent(mouseEvent);
-    } else if (event.type === "keydown" || event.type === "keyup" || event.type === "keypress") {
-        var keyboardEvent = new KeyboardEvent(pointer);
-        keyboardEvent.currentTarget.dispatchEvent(keyboardEvent);
-    } else {
-        event.currentTarget.dispatchEvent(event);
-    }
-}
-*/
-
-/*
-// Called from C++ to dispatch events
-///////////////////////////////////////////////////
-function dispatchEvent(_type, _options, _pointer) {
-	const event = new Event(_type, _options, _pointer)
-	event.target = new EventTarget(_pointer)
-	event.target.dispatchEvent(event)
-}
-*/
