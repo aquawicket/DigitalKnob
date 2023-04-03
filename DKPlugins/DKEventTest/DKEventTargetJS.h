@@ -47,7 +47,6 @@ public:
 		// store the js callback function
 		// How to persist Duktape/C arguments across calls
 		// https://wiki.duktape.org/howtonativepersistentreferences#:~:text=When%20a%20Duktape%2FC%20function,safely%20work%20with%20the%20arguments.
-		//DKString cb = type+"_callback";
 		DKString cb = targetAddress+"_"+type+"_callback";
 		duk_dup(ctx, 2);
 		duk_put_global_string(ctx, cb.c_str());
@@ -66,7 +65,6 @@ public:
 		// remove the js callback function
 		// How to persist Duktape/C arguments across calls
 		// https://wiki.duktape.org/howtonativepersistentreferences#:~:text=When%20a%20Duktape%2FC%20function,safely%20work%20with%20the%20arguments.
-		//DKString cb = type+"_callback";
 		DKString cb = targetAddress+"_"+type+"_callback";
 		duk_push_null(ctx);
 		duk_put_global_string(ctx, cb.c_str());
