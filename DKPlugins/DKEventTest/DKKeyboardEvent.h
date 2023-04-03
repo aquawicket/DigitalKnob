@@ -23,7 +23,7 @@ public:
 		repeat = false;
 		shiftKey = false;
 		
-		//DKEventTarget::LinkAddEventListenerFunc("keydown", &DKKeyboardEvent::addEventListener, this);
+		DKEventTarget::LinkAddEventListenerFunc("keydown", &DKKeyboardEvent::addEventListener, this);
 	}
 	
 	
@@ -85,9 +85,8 @@ public:
 	
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	/*
-	bool addEventListener(const DKString& type, const DKString& eventTargetAddress){
-		DKEventTarget::addEventListener<DKKeyboardEvent>(type, &DKKeyboardEvent::onKeyboardEvent, eventTargetAddress);
+	bool addEventListener(const DKString& _type, const DKString& eventTargetAddress){
+		DKEventTarget::addEventListener<DKKeyboardEvent>(_type, &DKKeyboardEvent::onKeyboardEvent, eventTargetAddress);
 		return DKTODO();
 	}
 	
@@ -96,7 +95,6 @@ public:
 		DKINFO("onKeyboardEvent("+event->type+") \n");
 		return DKTODO();
 	}
-	*/
 };
 
 

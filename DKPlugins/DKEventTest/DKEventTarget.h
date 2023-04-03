@@ -84,9 +84,8 @@ public:
 	template <typename EventType>
 	static std::vector<EventObject<EventType>> events;
 	
-	//static AddEventListenerMap* addEventListenerMap;
+	static AddEventListenerMap* addEventListenerMap;
 	
-	/*
 	template<class T>
 	static bool LinkAddEventListenerFunc(const DKString& name, bool (T::*func) (const DKString&, const DKString&), T* _this){
 		DKDEBUGFUNC(name);//, func, _this);
@@ -99,7 +98,6 @@ public:
 		//	return DKERROR("failed to register "+name+"() function \n");
 		return true;
 	}
-	*/
 };
 
 template <typename EventType>
