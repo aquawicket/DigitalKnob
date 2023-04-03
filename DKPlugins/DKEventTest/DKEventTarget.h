@@ -8,15 +8,13 @@
 typedef std::function<bool(const DKString&, const DKString&)> AddEventListenerFunc;
 typedef std::map<DKString, AddEventListenerFunc> AddEventListenerMap;
 
-
-
-
 template <typename EventType>
 struct EventObject {
     DKString type;
     std::function<void(EventType*)> listener;
 	DKString eventTargetAddress;
 };
+
 
 // https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
 class DKEventTarget : public DKObjectT<DKEventTarget>
@@ -89,21 +87,35 @@ public:
 	template<class T>
 	static bool LinkAddEventListenerFunc(const DKString& name, bool (T::*func) (const DKString&, const DKString&), T* _this){
 		DKDEBUGFUNC(name);//, func, _this);
+		DKINFO("DKEventTarget::LinkAddEventListenerFunc("+name+", func(DKString,DKString)) \n");
 		if(!addEventListenerMap)
 			addEventListenerMap = new AddEventListenerMap();
 		//if(HasFunc(name))
 		//    return DKERROR(name+"() function already registered\n");
 		(*addEventListenerMap)[name] = std::bind(func, _this, std::placeholders::_1, std::placeholders::_2);
-		//if(!HasFunc(name))
-		//	return DKERROR("failed to register "+name+"() function \n");
+		
+		if(!addEventListenerMap)
+			return DKERROR("addEventListenerMap invalid! \n");
+		
 		return true;
+	}
+	
+	static bool CallAddEventListenerFunc(const DKString& name, const DKString& type, const DKString& eventTargetAddress){
+		DKDEBUGFUNC(name, type, eventTargetAddress);
+		DKINFO("DKEventTarget::CallAddEventListenerFunc("+name+", "+type+", "+eventTargetAddress+") \n");
+		if(!addEventListenerMap)
+			return DKERROR("addEventListenerMap invalid! \n");
+		if(addEventListenerMap->empty())
+			return DKERROR("addEventListenerMap empty! \n");
+		if(addEventListenerMap->find(name) == addEventListenerMap->end())
+			return DKERROR(name+" not registered to a function! \n");
+		//	return DKERROR(name+"() function not registered \n");
+		return (*addEventListenerMap)[name](type, eventTargetAddress);
 	}
 };
 
 template <typename EventType>
 std::vector<EventObject<EventType>> DKEventTarget::events;
-
-//AddEventListenerMap* DKEventTarget::addEventListenerMap = NULL;
 
 
 REGISTER_OBJECT(DKEventTarget, true);

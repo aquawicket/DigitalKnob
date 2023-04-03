@@ -55,11 +55,12 @@ public:
 		// FIXME: EventTarget shouldn't need to know about UIEvent, KeyboardEvent, MouseEvent, ect.
 		//////////////////////////////////////////////////////////////////////////////////////////////////////
 		// set event Type
-		if(same(type, "keydown") || same(type, "keyup") || same(type, "keypress"))
-			DKEventTarget::addEventListener<DKKeyboardEvent>(type, &DKEventTargetJS::onEvent, targetAddress);
-		else
-			DKEventTarget::addEventListener<DKEvent>(type, &DKEventTargetJS::onEvent, targetAddress);
+		//if(same(type, "keydown") || same(type, "keyup") || same(type, "keypress"))
+		//	DKEventTarget::addEventListener<DKKeyboardEvent>(type, &DKEventTargetJS::onEvent, targetAddress);
+		//else
+		//	DKEventTarget::addEventListener<DKEvent>(type, &DKEventTargetJS::onEvent, targetAddress);
 		
+		DKEventTarget::CallAddEventListenerFunc(type, type, targetAddress);
 		// IDEA: Each EventType could provide it's own addEventListener function
 		//     Then using a lookup table, the appropriate function can be called.
 		//

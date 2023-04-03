@@ -12,6 +12,7 @@ public:
 	////// Constructor //////
 	// [KeyboardEvent()] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/KeyboardEvent
 	DKKeyboardEvent(DKString _type, DKString _options) : DKUIEvent(_type, _options) {
+		DKINFO("DKKeyboardEvent("+_type+", "+_options+") \n");
 		altKey = false;
 		code = "TODO";
 		ctrlKey = false;
@@ -24,6 +25,8 @@ public:
 		shiftKey = false;
 		
 		DKEventTarget::LinkAddEventListenerFunc("keydown", &DKKeyboardEvent::addEventListener, this);
+		DKEventTarget::LinkAddEventListenerFunc("keyup", &DKKeyboardEvent::addEventListener, this);
+		DKEventTarget::LinkAddEventListenerFunc("keypress", &DKKeyboardEvent::addEventListener, this);
 	}
 	
 	
@@ -87,13 +90,13 @@ public:
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	bool addEventListener(const DKString& _type, const DKString& eventTargetAddress){
 		DKEventTarget::addEventListener<DKKeyboardEvent>(_type, &DKKeyboardEvent::onKeyboardEvent, eventTargetAddress);
-		return DKTODO();
+		return true;
 	}
 	
 	static bool onKeyboardEvent(DKKeyboardEvent* event) {
 		DKDEBUGFUNC(event);
 		DKINFO("onKeyboardEvent("+event->type+") \n");
-		return DKTODO();
+		return true;
 	}
 };
 
