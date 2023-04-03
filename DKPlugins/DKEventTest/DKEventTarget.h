@@ -23,7 +23,7 @@ public:
 	// [EventTarget()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/EventTarget
 	bool Init(){
 		DKDEBUGFUNC();
-		DKINFO("DKEventTarget::Init() \n");
+		//DKINFO("DKEventTarget::Init() \n");
 		return true;
 	}
 	bool End(){
@@ -46,11 +46,13 @@ public:
         events<EventType>.push_back(eventObj);
 		
 		/// Print event list
+		/*
 		unsigned int i=0;
 		for (auto& eventObj : events<EventType>) {
 			DKINFO("event["+toString(i)+"] = ("+eventObj.type+","+eventObj.eventTargetAddress+") \n");
 			i++;
         }
+		*/
 	}
 	
 	// [EventTarget.removeEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener
@@ -77,24 +79,11 @@ public:
 	////// DK properties //////	
 	template <typename EventType>
 	static std::vector<EventObject<EventType>> events;
-
-	/*
-	// TODO: std::map <DKString, EventType> event_type;
-	// EXAMPLE: event_type["generic"] = DKEvent;
-	// EXAMPLE: event_type["keydown"] = DKKeyboardEvent;
-	template <typename EventType>
-	static std::map<DKString, EventType> event_type;
-	*/
 };
 
 template <typename EventType>
 std::vector<EventObject<EventType>> DKEventTarget::events;
 
-/*
-// TODO: std::map <DKString, EventType> event_type;
-template <typename EventType>
-std::map<DKString, EventType> DKEventTarget::event_type;
-*/
 
 REGISTER_OBJECT(DKEventTarget, true);
 
