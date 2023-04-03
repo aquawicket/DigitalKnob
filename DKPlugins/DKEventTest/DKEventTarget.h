@@ -69,7 +69,7 @@ public:
 		DKDEBUGFUNC(event, eventTargetAddress);
 		DKINFO("DKEventTarget.h: dispatchEvent("+event->type+", "+eventTargetAddress+") \n");	
         for (auto& eventObj : events<EventType>) {
-			DKINFO("event("+eventObj.type+", "+eventObj.eventTargetAddress+") \n");	
+			//DKINFO("event("+eventObj.type+", "+eventObj.eventTargetAddress+") \n");	
 			if(eventObj.type == event->type && eventObj.eventTargetAddress == eventTargetAddress)
 				eventObj.listener(event);
         }
