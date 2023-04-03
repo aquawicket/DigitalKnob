@@ -3,26 +3,13 @@
 #define DKEventTarget_H
 
 #include "DK/DK.h"
-#include "DKEventTest/DKEvent.h"
-#include "DKDuktape/DKDuktape.h"
 
-/*
+
 typedef std::function<bool(const DKString&, const DKString&)> AddEventListenerFunc;
 typedef std::map<DKString, AddEventListenerFunc> AddEventListenerMap;
-template<class T>
-static bool AddEventListenerFunc(const DKString& name, bool (T::*func) (const DKString&, const DKString&), T* _this){
-	DKDEBUGFUNC(name);//, func, _this);
-    if(!functions)
-        functions = new DKFunctionMap();
-    if(HasFunc(name))
-        return DKERROR(name+"() function already registered\n");
-	//functions[name] = std::bind(func, _this, dk_placeholders::_1, dk_placeholders::_2); //as variable
-	(*functions)[name] = std::bind(func, _this, dk_placeholders::_1, dk_placeholders::_2); //as pointer
-	if(!HasFunc(name))
-		return DKERROR("failed to register "+name+"() function \n");
-	return true;
-}
-*/
+
+
+
 
 template <typename EventType>
 struct EventObject {
@@ -96,10 +83,29 @@ public:
 	////// DK properties //////	
 	template <typename EventType>
 	static std::vector<EventObject<EventType>> events;
+	
+	//static AddEventListenerMap* addEventListenerMap;
+	
+	/*
+	template<class T>
+	static bool LinkAddEventListenerFunc(const DKString& name, bool (T::*func) (const DKString&, const DKString&), T* _this){
+		DKDEBUGFUNC(name);//, func, _this);
+		if(!addEventListenerMap)
+			addEventListenerMap = new AddEventListenerMap();
+		//if(HasFunc(name))
+		//    return DKERROR(name+"() function already registered\n");
+		(*addEventListenerMap)[name] = std::bind(func, _this, std::placeholders::_1, std::placeholders::_2);
+		//if(!HasFunc(name))
+		//	return DKERROR("failed to register "+name+"() function \n");
+		return true;
+	}
+	*/
 };
 
 template <typename EventType>
 std::vector<EventObject<EventType>> DKEventTarget::events;
+
+//AddEventListenerMap* DKEventTarget::addEventListenerMap = NULL;
 
 
 REGISTER_OBJECT(DKEventTarget, true);

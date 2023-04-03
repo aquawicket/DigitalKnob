@@ -3,8 +3,6 @@
 #define DKKeyboardEventJS_H
 
 #include "DKDuktape/DKDuktape.h"
-#include "DKEventTest/DKEvent.h"
-#include "DKEventTest/DKEventTarget.h"
 
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent
 // [INTERFACE] https://w3c.github.io/uievents/#interface-keyboardevent
@@ -133,8 +131,10 @@ public:
 	////// Instance methods //////
 	static int getModifierState(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		/*
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKKeyboardEvent* event = (DKKeyboardEvent*)DKDuktape::addressToPointer(eventAddress);
+		*/
 		return DKTODO();
 	}	
 	

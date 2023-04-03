@@ -3,8 +3,6 @@
 #define DKUIEventJS_H
 
 #include "DKDuktape/DKDuktape.h"
-#include "DKEventTest/DKEvent.h"
-#include "DKEventTest/DKEventTarget.h"
 
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/UIEvent
 // [INTERFACE] https://w3c.github.io/uievents/#idl-uievent
@@ -54,16 +52,20 @@ public:
 	}
 	static int sourceCapabilities(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		/*
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKUIEvent* event = (DKUIEvent*)DKDuktape::addressToPointer(eventAddress);
-		//duk_push_???(ctx, event->sourceCapabilities.c_str());	
+		duk_push_???(ctx, event->sourceCapabilities.c_str());	
+		*/
 		return DKTODO();
 	}
 	static int view(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		/*
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKUIEvent* event = (DKUIEvent*)DKDuktape::addressToPointer(eventAddress);
-		//duk_push_???(ctx, event->view);	
+		duk_push_???(ctx, event->view);
+		*/
 		return DKTODO();
 	}
 	static int which(duk_context* ctx){
@@ -78,8 +80,10 @@ public:
 	////// Instance methods //////
 	static int initUIEvent(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		/*
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKUIEvent* event = (DKUIEvent*)DKDuktape::addressToPointer(eventAddress);
+		*/
 		return DKTODO();
 	}	
 	

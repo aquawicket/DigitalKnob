@@ -1,10 +1,6 @@
 #include "DK/stdafx.h"
 
 #include "App.h"
-#include "DKEventTest/DKEventTarget.h"
-#include "DKEventTest/DKConsoleWindow.h"
-#include "DKEventTest/DKKeyboardEvent.h"
-#include "DKDuktape/DKDuktape.h"
 
 
 bool App::Init() {

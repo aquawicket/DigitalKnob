@@ -2,7 +2,6 @@
 #ifndef DKUIEvent_H
 #define DKUIEvent_H
 
-#include "DK/DK.h"
 #include "DKEventTest/DKEvent.h"
 
 

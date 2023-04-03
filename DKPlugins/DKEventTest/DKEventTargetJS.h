@@ -7,7 +7,9 @@
 #include "DKEventTest/DKKeyboardEvent.h"
 #include "DKEventTest/DKEventTarget.h"
 
+WARNING_DISABLE
 #include "dukglue/dukglue.h"
+WARNING_ENABLE
 
 // How to persist Duktape/C arguments across calls
 // https://wiki.duktape.org/howtonativepersistentreferences#:~:text=When%20a%20Duktape%2FC%20function,safely%20work%20with%20the%20arguments.

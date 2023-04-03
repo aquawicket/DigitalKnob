@@ -3,8 +3,6 @@
 #define DKEventJS_H
 
 #include "DKDuktape/DKDuktape.h"
-#include "DKEventTest/DKEvent.h"
-#include "DKEventTest/DKEventTarget.h"
 
 // [Event] https://developer.mozilla.org/en-US/docs/Web/API/Event
 class DKEventJS : public DKObjectT<DKEventJS>
@@ -140,9 +138,9 @@ public:
 	////// Legacy and non-standard properties //////
 	static int cancelBubble(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		/*
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKEvent* event = (DKEvent*)DKDuktape::addressToPointer(eventAddress);
-		/*
 		if (duk_is_boolean(ctx, 1))
 			event->cancelBubble = duk_to_boolean(ctx, 1);
 		duk_push_boolean(ctx, event->cancelBubble);	
@@ -152,9 +150,9 @@ public:
 	}
 	static int explicitOriginalTarget(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		/*
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKEvent* event = (DKEvent*)DKDuktape::addressToPointer(eventAddress);
-		/*
 		duk_push_boolean(ctx, event->explicitOriginalTarget);	
 		return true;
 		*/
@@ -162,9 +160,9 @@ public:
 	}
 	static int originalTarget(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		/*
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKEvent* event = (DKEvent*)DKDuktape::addressToPointer(eventAddress);
-		/*
 		duk_push_boolean(ctx, event->originalTarget);	
 		return true;
 		*/
@@ -172,9 +170,9 @@ public:
 	}
 	static int returnValue(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		/*
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKEvent* event = (DKEvent*)DKDuktape::addressToPointer(eventAddress);
-		/*
 		if (duk_is_boolean(ctx, 1))
 			event->returnValue = duk_to_boolean(ctx, 1);
 		duk_push_boolean(ctx, event->returnValue);	
@@ -184,9 +182,9 @@ public:
 	}
 	static int scoped(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		/*
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKEvent* event = (DKEvent*)DKDuktape::addressToPointer(eventAddress);
-		/*
 		duk_push_boolean(ctx, event->scoped);	
 		return true;
 		*/

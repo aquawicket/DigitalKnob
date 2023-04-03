@@ -2,7 +2,6 @@
 #ifndef DKKeyboardEvent_H
 #define DKKeyboardEvent_H
 
-#include "DK/DK.h"
 #include "DKEventTest/DKUIEvent.h"
 
 
@@ -23,6 +22,8 @@ public:
 		metaKey = false;
 		repeat = false;
 		shiftKey = false;
+		
+		//DKEventTarget::LinkAddEventListenerFunc("keydown", &DKKeyboardEvent::addEventListener, this);
 	}
 	
 	
@@ -84,7 +85,8 @@ public:
 	
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	static bool addEventListener(const DKString& type, const DKString& eventTargetAddress){
+	/*
+	bool addEventListener(const DKString& type, const DKString& eventTargetAddress){
 		DKEventTarget::addEventListener<DKKeyboardEvent>(type, &DKKeyboardEvent::onKeyboardEvent, eventTargetAddress);
 		return DKTODO();
 	}
@@ -94,6 +96,7 @@ public:
 		DKINFO("onKeyboardEvent("+event->type+") \n");
 		return DKTODO();
 	}
+	*/
 };
 
 
