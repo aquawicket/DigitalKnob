@@ -1,19 +1,22 @@
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
 // [INTERFACE] https://dom.spec.whatwg.org/#interface-eventtarget
 
-instances = [];
+//instances = [];
 
 // [EventTarget()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/EventTarget
 var EventTarget = function EventTarget(address) {
 	console.log("EventTarget("+address+")")
 
     this.address = address;
+	
+	/*
     for (var i = 0; i < instances.length; i++) {
         if (instances[i].address === address)
             return instances[i]; //return already existing instance
     }
     instances.push(this); //create instance
     this.listeners = {};
+	*/
 
 	// [EventTarget.addEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
     Object.defineProperty(this, "addEventListener", {

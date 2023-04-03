@@ -58,15 +58,15 @@ function printKeyboardEventProperties(keyevent){
 	console.log("keyevent.shiftKey="+keyevent.shiftKey)
 }
 
-/*
+
 function onKeyDown(event){
-	console.log("\n onKeyDown()")
+	console.log("onKeyDown("+event+")")
 	printEventProperties(event)
 	printUIEventProperties(event)
 	printKeyboardEventProperties(event)
 }
 myConsoleWindow.addEventListener('keydown', onKeyDown)
-*/
+
 
 function onKeyUp(event){
 	console.log("onKeyUp("+event+")")
