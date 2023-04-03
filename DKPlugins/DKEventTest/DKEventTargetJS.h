@@ -50,11 +50,43 @@ public:
 		duk_dup(ctx, 2);
 		duk_put_global_string(ctx, cb.c_str());
 
+		// FIXME: EventTarget shouldn't need to know about UIEvent, KeyboardEvent, MouseEvent, ect.
+		//////////////////////////////////////////////////////////////////////////////////////////////////////
 		// set event Type
 		if(same(type, "keydown") || same(type, "keyup") || same(type, "keypress"))
 			DKEventTarget::addEventListener<DKKeyboardEvent>(type, &DKEventTargetJS::onEvent, targetAddress);
 		else
-			DKEventTarget::addEventListener<DKEvent>(type, &DKEventTargetJS::onEvent, targetAddress);	
+			DKEventTarget::addEventListener<DKEvent>(type, &DKEventTargetJS::onEvent, targetAddress);
+		
+		// IDEA: Each EventType could provide it's own addEventListener function
+		//     Then using a lookup table, the appropriate function can be called.
+		//
+		//	EXAMPLE:  DKKeyboardEvent.h
+		//	bool DKKeyboardEvent::addEventListener(type, targetAddress){
+		//		DKEventTarget::addEventListener<DKKeyboardEvent>(type, &DKKeyboardEvent::onKeyboardEvent, targetAddress);
+		//	}
+		//		
+		//	static bool onEvent(DKKeyboardEvent* event) {
+		//		DKDEBUGFUNC(event);
+		//
+		//		// get the globally stored js callback function
+		//		DKString eventAddress = DKDuktape::pointerToAddress(event);
+		//		DKString cb = event->type+"_callback";
+		//		duk_get_global_string(DKDuktape::ctx, cb.c_str());
+		//
+		//		// create and push the Event(eventAddress) object		
+		//		DKString eventObjStr = "var eventObj = new KeyboardEvent('', '', '"+eventAddress+"'); eventObj;";  // returns eventObj
+		//		DukValue eventObj = dukglue_peval<DukValue>(DKDuktape::ctx, eventObjStr.c_str());
+		//		dukglue_push(DKDuktape::ctx, eventObj);	 //push event object
+		//
+		//		// call callback function
+		//		if(duk_pcall(DKDuktape::ctx, 1) != 0){ //1 = num or args
+		//			DKDuktape::DumpError(eventAddress);
+		//		}
+		//		return true;
+		//	}
+		//////////////////////////////////////////////////////////////////////////////////////////////////////
+		
 		return true;
 	}
 	static int removeEventListener(duk_context* ctx){
@@ -87,6 +119,8 @@ public:
 		DKString cb = event->type+"_callback";
 		duk_get_global_string(DKDuktape::ctx, cb.c_str());
 		
+		// FIXME: EventTarget shouldn't need to know about UIEvent, KeyboardEvent, MouseEvent, ect.
+		///////////////////////////////////////////////////////////////////////////////////////////////
 		// get event Type
 		DKString eventType;
 		if(same(event->type, "keydown") || same(event->type, "keyup") || same(event->type, "keypress"))
@@ -98,6 +132,7 @@ public:
 		DKString eventObjStr = "var eventObj = new "+eventType+"('', '', '"+eventAddress+"'); eventObj;";  // returns eventObj
 		DukValue eventObj = dukglue_peval<DukValue>(DKDuktape::ctx, eventObjStr.c_str());
 		dukglue_push(DKDuktape::ctx, eventObj);	 //push event object
+		///////////////////////////////////////////////////////////////////////////////////////////////
 		
 		//duk_push_null(DKDuktape::ctx);
 		//duk_put_global_string(DKDuktape::ctx, cb.c_str());
