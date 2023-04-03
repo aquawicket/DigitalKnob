@@ -2,7 +2,7 @@
 console.log("\n\n ___JS Event Test___\n");
 
 
-//////////////// GENERIC EVENT //////////////////////////////
+// Event
 function printEventProperties(event){
 	console.log("event.bubbles="+event.bubbles)
 	console.log("event.cancelable="+event.cancelable)
@@ -15,14 +15,17 @@ function printEventProperties(event){
 	console.log("event.timeStamp="+event.timeStamp)
 	console.log("event.type="+event.type)
 }
+
 function onGeneric(event){
-	console.log("onGeneric()")
-	//printEventProperties(event)
+	console.log("onGeneric("+event+")")
+	printEventProperties(event)
 }
-const pointer = "123"
+
+// create the EventTarget
+const target = new EventTarget("0x00000000")
+
+// create and dispatch the event
 const event = new Event('generic', '')
-//event.bubbles = true;
-const target = new EventTarget(pointer)
 target.addEventListener('generic', onGeneric)
 target.dispatchEvent(event)
 
@@ -33,7 +36,7 @@ console.log("/////////// ConsoleWindow /////////////////////")
 CPP_DK_Create("DKEventTest/DKConsoleWindow.js");
 const myConsoleWindow = new DKConsoleWindow('myConsoleWindow')
 
-// UIEvents
+// UIEvent
 function printUIEventProperties(uievent){
 	console.log("uievent.detail="+uievent.detail)
 	console.log("uievent.sourceCapabilities="+uievent.sourceCapabilities)			
@@ -41,7 +44,7 @@ function printUIEventProperties(uievent){
 	console.log("uievent.which="+uievent.which)
 }
 
-// KeyboardEvents
+// KeyboardEvent
 function printKeyboardEventProperties(keyevent){
 	console.log("keyevent.altKey="+keyevent.altKey)
 	console.log("keyevent.code="+keyevent.code)			
@@ -58,15 +61,15 @@ function printKeyboardEventProperties(keyevent){
 /*
 function onKeyDown(event){
 	console.log("\n onKeyDown()")
+	printEventProperties(event)
+	printUIEventProperties(event)
 	printKeyboardEventProperties(event)
 }
 myConsoleWindow.addEventListener('keydown', onKeyDown)
 */
 
 function onKeyUp(event){
-	// TODO: receive a new Event() object
 	console.log("onKeyUp("+event+")")
-	//const event = new KeyboardEvent('', '', eventAddress);
 	printEventProperties(event)
 	printUIEventProperties(event)
 	printKeyboardEventProperties(event)
@@ -76,6 +79,8 @@ myConsoleWindow.addEventListener('keyup', onKeyUp)
 /*
 function onKeyPress(event){
 	console.log("\n onKeyPress()")
+	printEventProperties(event)
+	printUIEventProperties(event)
 	printKeyboardEventProperties(event)
 }
 myConsoleWindow.addEventListener('keypress', onKeyPress)

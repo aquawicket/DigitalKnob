@@ -50,11 +50,12 @@ public:
 		duk_dup(ctx, 2);
 		duk_put_global_string(ctx, cb.c_str());
 
-		if(same(type, "keyup"))
+		// set event Type
+		if(same(type, "keydown") || same(type, "keyup") || same(type, "keypress"))
 			DKEventTarget::addEventListener<DKKeyboardEvent>(type, &DKEventTargetJS::onEvent, targetAddress);
 		else
 			DKEventTarget::addEventListener<DKEvent>(type, &DKEventTargetJS::onEvent, targetAddress);	
-		return DKTODO();
+		return true;
 	}
 	static int removeEventListener(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -70,8 +71,10 @@ public:
 		DKString targetAddress = duk_require_string(ctx, 0);
 		DKString eventAddress = duk_require_string(ctx, 1);
 		DKINFO("DKEventTargetJS::dispatchEvent("+targetAddress+", "+eventAddress+")\n");
-		//DKEventTarget::dispatchEvent(event, targetAddress);
-		return DKTODO();
+		
+		DKEvent* event = (DKEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKEventTarget::dispatchEvent(event, targetAddress);
+		return true;
 	}
 	
 	// CPP
@@ -79,29 +82,30 @@ public:
 		DKDEBUGFUNC(event);
 		DKINFO("onEvent("+event->type+") \n");
 		
-		// call the js callback function
+		// get the globally stored js callback function
 		DKString eventAddress = DKDuktape::pointerToAddress(event);
 		DKString cb = event->type+"_callback";
 		duk_get_global_string(DKDuktape::ctx, cb.c_str());
 		
-		// TODO: push new Event('','',eventAddress) object
-		//DKString evt = "new KeyboardEvent('', '', '"+eventAddress+"')";
-		// template parameter is return type
-		DKString eventObjStr = "var eventObj = new KeyboardEvent('', '', '"+eventAddress+"'); eventObj;";  // returns eventObj
-		DukValue eventObj = dukglue_peval<DukValue>(DKDuktape::ctx, eventObjStr.c_str());
+		// get event Type
+		DKString eventType;
+		if(same(event->type, "keydown") || same(event->type, "keyup") || same(event->type, "keypress"))
+			eventType = "KeyboardEvent";
+		else
+			eventType = "Event";
 		
-		//duk_push_string(DKDuktape::ctx, eventAddress.c_str());  //push event parameter
-		dukglue_push(DKDuktape::ctx, eventObj);
+		// create and push the Event(eventAddress) object		
+		DKString eventObjStr = "var eventObj = new "+eventType+"('', '', '"+eventAddress+"'); eventObj;";  // returns eventObj
+		DukValue eventObj = dukglue_peval<DukValue>(DKDuktape::ctx, eventObjStr.c_str());
+		dukglue_push(DKDuktape::ctx, eventObj);	 //push event object
 		
 		//duk_push_null(DKDuktape::ctx);
 		//duk_put_global_string(DKDuktape::ctx, cb.c_str());
 		
-		duk_call(DKDuktape::ctx, 1);  
-		//if(duk_pcall(DKDuktape::ctx, 1) != 0){ //1 = num or args
-		//	DKDuktape::DumpError(eventAddress);
-		//}
-		
-		//dukglue_pcall(DKDuktape::ctx, 1, eventObj);
+		// call callback function
+		if(duk_pcall(DKDuktape::ctx, 1) != 0){ //1 = num or args
+			DKDuktape::DumpError(eventAddress);
+		}
 	
 		return true;
 	}
