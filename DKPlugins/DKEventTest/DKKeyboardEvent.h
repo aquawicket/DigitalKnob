@@ -81,6 +81,19 @@ public:
 	
 	////// Obsolete events //////
 	// [keypress](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Element/keypress_event
+	
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	static bool addEventListener(const DKString& type, const DKString& eventTargetAddress){
+		DKEventTarget::addEventListener<DKKeyboardEvent>(type, &DKKeyboardEvent::onKeyboardEvent, eventTargetAddress);
+		return DKTODO();
+	}
+	
+	static bool onKeyboardEvent(DKKeyboardEvent* event) {
+		DKDEBUGFUNC(event);
+		DKINFO("onKeyboardEvent("+event->type+") \n");
+		return DKTODO();
+	}
 };
 
 

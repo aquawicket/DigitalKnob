@@ -6,6 +6,23 @@
 #include "DKEventTest/DKEvent.h"
 #include "DKDuktape/DKDuktape.h"
 
+/*
+typedef std::function<bool(const DKString&, const DKString&)> AddEventListenerFunc;
+typedef std::map<DKString, AddEventListenerFunc> AddEventListenerMap;
+template<class T>
+static bool AddEventListenerFunc(const DKString& name, bool (T::*func) (const DKString&, const DKString&), T* _this){
+	DKDEBUGFUNC(name);//, func, _this);
+    if(!functions)
+        functions = new DKFunctionMap();
+    if(HasFunc(name))
+        return DKERROR(name+"() function already registered\n");
+	//functions[name] = std::bind(func, _this, dk_placeholders::_1, dk_placeholders::_2); //as variable
+	(*functions)[name] = std::bind(func, _this, dk_placeholders::_1, dk_placeholders::_2); //as pointer
+	if(!HasFunc(name))
+		return DKERROR("failed to register "+name+"() function \n");
+	return true;
+}
+*/
 
 template <typename EventType>
 struct EventObject {

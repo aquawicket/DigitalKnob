@@ -85,6 +85,11 @@ public:
 		//		}
 		//		return true;
 		//	}
+		//
+		// THEN: DKEventTarget.h could have a std::map to links event types to which Event class function to call 
+		//
+		//   
+		//
 		//////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		return true;
