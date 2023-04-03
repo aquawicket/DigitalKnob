@@ -13,8 +13,9 @@ bool App::Init() {
 	DKEventTarget::addEventListener<DKEvent>("generic", &App::onGeneric, address);					
 	DKEvent* event = new DKEvent("generic", "");												
 	DKEventTarget::dispatchEvent(event, address);													
+	DKEventTarget::removeEventListener<DKEvent>("generic", &App::onGeneric, address);	
+	DKEventTarget::dispatchEvent(event, address);
 	
-
 	DKINFO("/////////// ConsoleWindow ///////////////////// \n");
 	DKObject* myConsoleWindow = DKClass::DKCreate("DKConsoleWindow");
 	DKString addressB = DKDuktape::pointerToAddress(myConsoleWindow);	
@@ -47,11 +48,11 @@ void App::printEventProperties(DKEvent* event) {
 	DKINFO("event->bubbles="+toString(event->bubbles)+"\n");
 	DKINFO("event->cancelable="+toString(event->cancelable)+"\n");
 	DKINFO("event->composed="+toString(event->composed)+"\n");
-	//DKINFO("event->currentTarget="+toString(event->currentTarget)+"\n");
+	DKINFO("event->currentTarget="+event->currentTarget+"\n");
 	DKINFO("event->defaultPrevented="+toString(event->defaultPrevented)+"\n");
 	DKINFO("event->eventPhase="+toString(event->eventPhase)+"\n");
 	DKINFO("event->isTrusted="+toString(event->isTrusted)+"\n");
-	//DKINFO("event->target="+toString(event->target)+"\n");
+	DKINFO("event->target="+event->target+"\n");
 	DKINFO("event->timeStamp="+toString(event->timeStamp)+"\n");
 	DKINFO("event->type="+event->type+"\n");
 }

@@ -102,7 +102,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKEvent* event = (DKEvent*)DKDuktape::addressToPointer(eventAddress);
-		duk_push_string(ctx, event->currentTargetAddress.c_str());	
+		duk_push_string(ctx, event->currentTarget.c_str());	
 		return true;
 	}
 	static int defaultPrevented(duk_context* ctx){
@@ -130,7 +130,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKEvent* event = (DKEvent*)DKDuktape::addressToPointer(eventAddress);
-		duk_push_string(ctx, event->targetAddress.c_str());	
+		duk_push_string(ctx, event->target.c_str());	
 		return true;
 	}
 	static int timeStamp(duk_context* ctx){
@@ -223,17 +223,14 @@ public:
 		
 		// get the globally stored js callback function
 		DKString eventAddress = DKDuktape::pointerToAddress(event);
-		DKString cb = event->type+"_callback";
+		//DKString cb = event->type+"_callback";
+		DKString cb = event->target+"_"+event->type+"_callback";
 		duk_get_global_string(DKDuktape::ctx, cb.c_str());
 		
 		// create and push the Event(eventAddress) object		
 		DKString eventObjStr = "var eventObj = new Event('', '', '"+eventAddress+"'); eventObj;";  // returns eventObj
 		DukValue eventObj = dukglue_peval<DukValue>(DKDuktape::ctx, eventObjStr.c_str());
 		dukglue_push(DKDuktape::ctx, eventObj);	 //push event object
-		
-		// delete duktape callback
-		//duk_push_null(DKDuktape::ctx);
-		//duk_put_global_string(DKDuktape::ctx, cb.c_str());
 		
 		// call callback function
 		if(duk_pcall(DKDuktape::ctx, 1) != 0){ //1 = num or args

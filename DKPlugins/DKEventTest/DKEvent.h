@@ -16,11 +16,11 @@ public:
 		bubbles = false;
 		cancelable = false;
 		composed = false;
-		//currentTarget = _pointer;
+		currentTarget = "";
 		defaultPrevented = false;
 		eventPhase = 0;
 		isTrusted = false;
-		//target = _pointer;
+		target = "";
 		timeStamp = 0;
 		type = _type;
 		
@@ -39,7 +39,7 @@ public:
 	// [Event.composed](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/composed
 	bool composed;
 	// [Event.currentTarget](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/currentTarget
-	void* currentTarget;
+	DKString currentTarget;
 	// [Event.defaultPrevented](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/defaultPrevented
 	bool defaultPrevented;
 	// [Event.eventPhase](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/eventPhase
@@ -47,7 +47,7 @@ public:
 	// [Event.isTrusted](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
 	bool isTrusted;
 	// [Event.target](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/target
-	void* target;
+	DKString target;
 	// [Event.timeStamp](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/timeStamp
 	unsigned long timeStamp;
 	// [Event.type](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/type

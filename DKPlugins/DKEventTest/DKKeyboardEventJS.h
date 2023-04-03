@@ -175,17 +175,14 @@ public:
 		
 		// get the globally stored js callback function
 		DKString eventAddress = DKDuktape::pointerToAddress(event);
-		DKString cb = event->type+"_callback";
+		//DKString cb = event->type+"_callback";
+		DKString cb = event->target+"_"+event->type+"_callback";
 		duk_get_global_string(DKDuktape::ctx, cb.c_str());
 		
 		// create and push the Event(eventAddress) object		
 		DKString eventObjStr = "var eventObj = new KeyboardEvent('', '', '"+eventAddress+"'); eventObj;";  // returns eventObj
 		DukValue eventObj = dukglue_peval<DukValue>(DKDuktape::ctx, eventObjStr.c_str());
 		dukglue_push(DKDuktape::ctx, eventObj);	 //push event object
-		
-		// delete duktape callback
-		//duk_push_null(DKDuktape::ctx);
-		//duk_put_global_string(DKDuktape::ctx, cb.c_str());
 		
 		// call callback function
 		if(duk_pcall(DKDuktape::ctx, 1) != 0){ //1 = num or args

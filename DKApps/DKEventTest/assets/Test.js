@@ -28,6 +28,8 @@ const target = new EventTarget("0x00000000")
 const event = new Event('generic', '')
 target.addEventListener('generic', onGeneric)
 target.dispatchEvent(event)
+target.removeEventListener('generic', onGeneric)
+target.dispatchEvent(event)
 
 
 

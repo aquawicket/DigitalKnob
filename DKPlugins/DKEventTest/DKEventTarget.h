@@ -65,13 +65,12 @@ public:
 	static void removeEventListener(const DKString& type, std::function<void(EventType*)> listener, const DKString& eventTargetAddress){
 		DKDEBUGFUNC(type, listener, eventTargetAddress);
 		//DKINFO("DKEventTarget.h: removeEventListener("+type+", listener, "+eventTargetAddress+") \n");
-		for (auto& eventObj : events<EventType>) {
-			//DKINFO("event("+eventObj.type+", "+eventObj.eventTargetAddress+") \n");	
-			if(eventObj.type == type && eventObj.eventTargetAddress == eventTargetAddress){// && eventObj.listener == listener)
-				DKINFO("DKTODO: remove event listener from EventObject vector \n");
-				//events<EventType>.erase(eventObj);
-			}
-        }
+		for(auto it = events<EventType>.begin(); it != events<EventType>.end();){
+			if(it->type == type && it->eventTargetAddress == eventTargetAddress) // && it->listener == listener)
+				it = events<EventType>.erase(it);
+			else
+				++it;
+		}
 	}
 	
 	// [EventTarget.dispatchEvent()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent
@@ -79,10 +78,13 @@ public:
     static void dispatchEvent(EventType* event, const DKString& eventTargetAddress){
 		DKDEBUGFUNC(event, eventTargetAddress);
 		//DKINFO("DKEventTarget.h: dispatchEvent("+event->type+", "+eventTargetAddress+") \n");	
-        for (auto& eventObj : events<EventType>) {
+		for (auto& eventObj : events<EventType>) {
 			//DKINFO("event("+eventObj.type+", "+eventObj.eventTargetAddress+") \n");	
-			if(eventObj.type == event->type && eventObj.eventTargetAddress == eventTargetAddress)
+			if(eventObj.type == event->type && eventObj.eventTargetAddress == eventTargetAddress){
+				event->currentTarget = eventTargetAddress;
+				event->target = eventTargetAddress;
 				eventObj.listener(event);
+			}
         }
     }
 	
