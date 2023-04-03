@@ -40,7 +40,7 @@ public:
 		DKString targetAddress = duk_require_string(ctx, 0);
 		DKString type = duk_require_string(ctx, 1);
 		duk_require_function(ctx, 2);
-		DKINFO("DKEventTargetJS::addEventListener("+targetAddress+", "+type+", DKEventTargetJS::onEvent)\n");
+		//DKINFO("DKEventTargetJS::addEventListener("+targetAddress+", "+type+", DKEventTargetJS::onEvent)\n");
 		
 		// store the js callback function
 		DKString cb = type+"_callback";
@@ -64,7 +64,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString targetAddress = duk_require_string(ctx, 0);
 		DKString eventAddress = duk_require_string(ctx, 1);
-		DKINFO("DKEventTargetJS::dispatchEvent("+targetAddress+", "+eventAddress+")\n");
+		//DKINFO("DKEventTargetJS::dispatchEvent("+targetAddress+", "+eventAddress+")\n");
 		
 		DKEvent* event = (DKEvent*)DKDuktape::addressToPointer(eventAddress);
 		DKEventTarget::dispatchEvent(event, targetAddress);

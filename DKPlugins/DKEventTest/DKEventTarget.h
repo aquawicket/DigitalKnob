@@ -40,7 +40,7 @@ public:
 	template <typename EventType>
 	static void addEventListener(const DKString& type, std::function<void(EventType*)> listener, const DKString& eventTargetAddress){
 		DKDEBUGFUNC(type, listener, eventTargetAddress);
-		DKINFO("DKEventTarget.h: addEventListener("+type+", listener, "+eventTargetAddress+") \n");
+		//DKINFO("DKEventTarget.h: addEventListener("+type+", listener, "+eventTargetAddress+") \n");
 		EventObject<EventType> eventObj;
         eventObj.type = type;
         eventObj.listener = listener;
@@ -69,7 +69,7 @@ public:
 	template <typename EventType>
     static void dispatchEvent(EventType* event, const DKString& eventTargetAddress){
 		DKDEBUGFUNC(event, eventTargetAddress);
-		DKINFO("DKEventTarget.h: dispatchEvent("+event->type+", "+eventTargetAddress+") \n");	
+		//DKINFO("DKEventTarget.h: dispatchEvent("+event->type+", "+eventTargetAddress+") \n");	
         for (auto& eventObj : events<EventType>) {
 			//DKINFO("event("+eventObj.type+", "+eventObj.eventTargetAddress+") \n");	
 			if(eventObj.type == event->type && eventObj.eventTargetAddress == eventTargetAddress)
@@ -87,7 +87,7 @@ public:
 	template<class T>
 	static bool LinkAddEventListenerFunc(const DKString& name, bool (T::*func) (const DKString&, const DKString&), T* _this){
 		DKDEBUGFUNC(name);//, func, _this);
-		DKINFO("DKEventTarget::LinkAddEventListenerFunc("+name+", func(DKString,DKString)) \n");
+		//DKINFO("DKEventTarget::LinkAddEventListenerFunc("+name+", func(DKString,DKString)) \n");
 		if(!addEventListenerMap)
 			addEventListenerMap = new AddEventListenerMap();
 		//if(HasFunc(name))
@@ -102,7 +102,7 @@ public:
 	
 	static bool CallAddEventListenerFunc(const DKString& name, const DKString& type, const DKString& eventTargetAddress){
 		DKDEBUGFUNC(name, type, eventTargetAddress);
-		DKINFO("DKEventTarget::CallAddEventListenerFunc("+name+", "+type+", "+eventTargetAddress+") \n");
+		//DKINFO("DKEventTarget::CallAddEventListenerFunc("+name+", "+type+", "+eventTargetAddress+") \n");
 		if(!addEventListenerMap)
 			return DKERROR("addEventListenerMap invalid! \n");
 		if(addEventListenerMap->empty())

@@ -3,10 +3,6 @@
 #define App_H
 
 #include "DK/DK.h"
-#include "DKEventTest/DKEventTarget.h"
-#include "DKEventTest/DKConsoleWindow.h"
-#include "DKEventTest/DKKeyboardEvent.h"
-#include "DKDuktape/DKDuktape.h"
 
 
 class App : public DKObjectT<App>

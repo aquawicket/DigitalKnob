@@ -2,14 +2,12 @@
 
 #include "App.h"
 
-
 bool App::Init() {
 	DKDEBUGFUNC();
 	DKINFO("App::Init() \n");
 	
 	DKClass::DKCreate("DKEventTarget");															
 	
-	/*
 	//////////// GENERIC EVENT
 	DKString address = DKDuktape::pointerToAddress(this);
 	DKEventTarget::addEventListener<DKEvent>("generic", &App::onGeneric, address);					
@@ -21,7 +19,6 @@ bool App::Init() {
 	DKObject* myConsoleWindow = DKClass::DKCreate("DKConsoleWindow");
 	DKString addressB = DKDuktape::pointerToAddress(myConsoleWindow);	
 	DKEventTarget::addEventListener<DKKeyboardEvent>("keydown", &App::onKeyDown, addressB);
-	*/
 	
 	//DKEventTarget::addEventListener<DKKeyboardEvent>("keyup", &App::onKeyUp, myConsoleWindow);
 
