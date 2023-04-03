@@ -67,12 +67,10 @@ public:
 		//DKINFO("DKEventTarget.h: removeEventListener("+type+", listener, "+eventTargetAddress+") \n");
 		for (auto& eventObj : events<EventType>) {
 			//DKINFO("event("+eventObj.type+", "+eventObj.eventTargetAddress+") \n");	
-			
 			if(eventObj.type == type && eventObj.eventTargetAddress == eventTargetAddress){// && eventObj.listener == listener)
 				DKINFO("DKTODO: remove event listener from EventObject vector \n");
 				//events<EventType>.erase(eventObj);
 			}
-			
         }
 	}
 	
