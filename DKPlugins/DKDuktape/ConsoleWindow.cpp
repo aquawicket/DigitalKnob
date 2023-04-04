@@ -100,7 +100,7 @@ bool ConsoleWindow::Init(){
 	offsetY = 0;
 	pageX = 0;
 	pageY = 0;
-	relativeTarget = "";
+	relatedTarget = "";
 	screenX = 0;
 	screenY = 0;
 	mozPressure = 0.0;

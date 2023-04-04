@@ -113,7 +113,7 @@ public:
 	//int wheelDeltaY;
 
 	// FocusEvent
-	DKString relatedTarget;
+	//DKString relatedTarget;
 
 	// ResizeEvent
 	unsigned int columns;

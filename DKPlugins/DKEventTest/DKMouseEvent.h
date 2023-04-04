@@ -13,9 +13,9 @@ public:
 	// [MouseEvent()] https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/MouseEvent
 	DKMouseEvent(DKString _type, DKString _options) : DKUIEvent(_type, _options) {
 		DKINFO("DKMouseEvent("+_type+", "+_options+") \n");
-		altKey = false;				
+		altKey = false;		
 		button = 0;
-		buttons 0;
+		buttons = 0;
 		clientX = 0;
 		clientY = 0;
 		ctrlKey = false;
