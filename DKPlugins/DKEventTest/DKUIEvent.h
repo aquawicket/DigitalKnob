@@ -22,12 +22,20 @@ public:
 	////// Instance properties //////
 	// [UIEvent.detail](Read only) https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/detail
 	unsigned int detail;
-	// [UIEvent.sourceCapabilities](Experimental)(Read only)
+	// [UIEvent.sourceCapabilities](Experimental)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/sourceCapabilities
 	void* sourceCapabilities;
-	// [UIEvent.view](Read only)
+	// [UIEvent.view](Read only) https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/view
 	void* view;
-	// [UIEvent.which](Deprecated)(Read only)
+	// [UIEvent.which](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/which
 	unsigned int which;
+	
+	
+	////// Instance methods //////
+	// [UIEvent.initUIEvent()](Deprecated)
+	
+	
+	////// Events //////
+	// [error] https://developer.mozilla.org/en-US/docs/Web/API/Element/error_event
 };
 
 

@@ -56,15 +56,15 @@ public:
 	
 	////// Legacy and non-standard properties //////
 	// [Event.cancelBubble](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelBubble
-	// TODO
+	bool cancelBubble;
 	// [Event.explicitOriginalTarget](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/explicitOriginalTarget
-	// TODO
-	// [Event.originalTarget](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/explicitTarget
-	// TODO
+	DKString explicitOriginalTarget;
+	// [Event.originalTarget](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/originalTarget
+	DKString originalTarget;
 	// [Event.returnValue](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/returnValue
-	// TODO
+	bool returnValue;
 	// [Event.scoped](Read only)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/scoped
-	// TODO
+	bool scoped;
 	
 	
 	////// Instance methods //////
@@ -83,11 +83,22 @@ public:
 	// TODO
 	
 	
+	////// Events //////
+	// [afterscriptexecute] https://developer.mozilla.org/en-US/docs/Web/API/Element/afterscriptexecute_event
+	// [beforematch] https://developer.mozilla.org/en-US/docs/Web/API/Element/beforematch_event
+	// [beforescriptexecute] https://developer.mozilla.org/en-US/docs/Web/API/Element/beforescriptexecute_event
+	// [error] https://developer.mozilla.org/en-US/docs/Web/API/Element/error_event
+	// [fullscreenchange] https://developer.mozilla.org/en-US/docs/Web/API/Element/fullscreenchange_event
+	// [fullscreenerror] https://developer.mozilla.org/en-US/docs/Web/API/Element/fullscreenerror_event
+	// [scroll] https://developer.mozilla.org/en-US/docs/Web/API/Element/scroll_event
+	// [scrollend] https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollend_event
+	
+	
 	////// DK properties //////
 	DKString options;
-	void* pointer;
-	DKString targetAddress;
-	DKString currentTargetAddress;
+	//void* pointer;
+	//DKString targetAddress;
+	//DKString currentTargetAddress;
 };
 
 
