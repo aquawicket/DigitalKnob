@@ -34,7 +34,7 @@ public:
 		scoped = false;
 		
 		////// DK properties //////
-		options = _options;
+		options = _options; // TODO
 	}
 	
 	
@@ -96,7 +96,7 @@ public:
 	////// Deprecated methods //////
 	// [Event.initEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/initEvent
 	void initEvent() {
-		DKTODO();
+		DKDEPRECATED();
 	}
 	
 	

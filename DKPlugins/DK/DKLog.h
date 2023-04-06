@@ -71,6 +71,7 @@ WARNING_ENABLE
 #define DKVERBOSE(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_VERBOSE);
 #define DKREDINFO(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_INFO, DKERROR_COLOR);
 #define    DKTODO() DKLog::Log(__FILE__, __LINE__, __FUNCTION__, DKString()+"TODO: "+__FUNCTION__+"()\n", DK_WARN);
+#define    DKDEPRECATED() DKLog::Log(__FILE__, __LINE__, __FUNCTION__, DKString()+"DEPRECATED: "+__FUNCTION__+"()\n", DK_WARN);
 //#define DKWARNRTN(message, rtnval) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_WARN, DKWARN_COLOR, rtnval);
 
 #if _MSC_VER //Visual Studio Compiler
