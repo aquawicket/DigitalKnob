@@ -58,10 +58,12 @@ public:
 	}
 	// [UIEvent.sourceCapabilities](Experimental)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/sourceCapabilities
 	static int sourceCapabilities(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
 		return DKTODO();
 	}
 	// [UIEvent.view](Read only) https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/view
 	static int view(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
 		return DKTODO();
 	}
 	// [UIEvent.which](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/which
@@ -77,6 +79,7 @@ public:
 	////// Instance methods //////
 	// [UIEvent.initUIEvent()](Deprecated)
 	static int initUIEvent(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
 		return DKDEPRECATED();
 	}	
 	

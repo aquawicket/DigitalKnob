@@ -7,7 +7,7 @@
 
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent
 // [INTERFACE] https://w3c.github.io/uievents/#interface-wheelevent
-class DKWheelEvent : public DKUIEvent
+class DKWheelEvent : public DKMouseEvent
 {
 public:
 	////// Constructor //////
@@ -18,7 +18,7 @@ public:
 		////// Instance properties //////
 		deltaX = 0.0;
 		deltaY = 0.0;
-		deltaZ = 0.0
+		deltaZ = 0.0;
 		deltaMode = 0;
 		wheelDelta = 0;
 		wheelDeltaX = 0;

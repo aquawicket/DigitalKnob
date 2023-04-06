@@ -189,22 +189,27 @@ public:
 	////// Legacy and non-standard properties //////
 	// [Event.cancelBubble](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelBubble
 	static int cancelBubble(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
 		return DKDEPRECATED();
 	}
 	// [Event.explicitOriginalTarget](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/explicitOriginalTarget
 	static int explicitOriginalTarget(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
 		return DKTODO();
 	}
 	// [Event.originalTarget](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/originalTarget
 	static int originalTarget(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
 		return DKTODO();
 	}
 	// [Event.returnValue](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/returnValue
 	static int returnValue(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
 		return DKDEPRECATED();
 	}
 	// [Event.scoped](Read only)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/scoped
 	static int scoped(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
 		return DKDEPRECATED();
 	}
 	
@@ -212,18 +217,22 @@ public:
 	////// Instance methods //////
 	// [Event.composedPath()] https://developer.mozilla.org/en-US/docs/Web/API/Event/composedPath
 	static int composedPath(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
 		return DKTODO();
 	}
 	// [Event.preventDefault()] https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault
 	static int preventDefault(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
 		return DKTODO();
 	}
 	// [Event.stopImmediatePropagation()] https://developer.mozilla.org/en-US/docs/Web/API/Event/stopImmediatePropagation
 	static int stopImmediatePropagation(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
 		return DKTODO();
 	}
 	// [Event.stopPropagation()] https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation
 	static int stopPropagation(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
 		return DKTODO();
 	}
 	
@@ -231,6 +240,7 @@ public:
 	////// Deprecated methods //////
 	// [Event.initEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/initEvent
 	static int initEvent(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
 		return DKDEPRECATED();
 	}
 	

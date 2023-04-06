@@ -327,10 +327,12 @@ public:
 	////// Instance methods //////
 	// [MouseEvent.getModifierState()] https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/getModifierState
 	static int getModifierState(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
 		return DKTODO();
 	}
 	// [MouseEvent.initMouseEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/initMouseEvent
 	static int initMouseEvent(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
 		return DKDEPRECATED();
 	}
 

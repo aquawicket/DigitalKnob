@@ -190,6 +190,7 @@ public:
 	////// Instance methods //////
 	// [KeyboardEvent.getModifierState()] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/getModifierState
 	static int getModifierState(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
 		return DKTODO();
 	}
 
@@ -197,10 +198,12 @@ public:
 	////// Obsolete methods //////
 	// [KeyboardEvent.initKeyEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/initKeyEvent
 	static int initKeyEvent(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
 		return DKDEPRECATED();
 	}
 	// [KeyboardEvent.initKeyboardEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/initKeyboardEvent
 	static int initKeyboardEvent(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
 		return DKDEPRECATED();
 	}
 	

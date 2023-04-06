@@ -8,7 +8,6 @@ bool App::Init() {
 	
 	DKClass::DKCreate("DKEventTarget");															
 	
-
 	////// Event //////
 	DKString thisAddress = DKDuktape::pointerToAddress(this);
 	DKEventTarget::addEventListener<DKEvent>("generic", &App::ongeneric, thisAddress);					
