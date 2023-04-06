@@ -8,7 +8,7 @@ var MouseEvent = function MouseEvent(type, options, address) {
 	
 	if(address)
 		this.address = address;
-	else
+	if(!this.address)
 		this.address = CPP_DKMouseEvent(type, options);
 		
 	

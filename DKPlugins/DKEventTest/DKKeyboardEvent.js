@@ -8,7 +8,7 @@ var KeyboardEvent = function KeyboardEvent(type, options, address) {
 	
 	if(address)
 		this.address = address;
-	else
+	if(!this.address)
 		this.address = CPP_DKKeyboardEvent(type, options);
 	
 	////// Constants //////

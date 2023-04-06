@@ -8,7 +8,7 @@ var Event = function Event(type, options, address) {
 	
 	if(address)
 		this.address = address;
-	else
+	if(!this.address)
 		this.address = CPP_DKEvent(type, options);
 	
 	
