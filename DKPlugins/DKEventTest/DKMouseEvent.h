@@ -13,6 +13,12 @@ public:
 	// [MouseEvent()] https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/MouseEvent
 	DKMouseEvent(DKString _type, DKString _options) : DKUIEvent(_type, _options) {
 		DKINFO("DKMouseEvent("+_type+", "+_options+") \n");
+		
+		////// Static properties //////
+		// WEBKIT_FORCE_AT_MOUSE_DOWN
+		// WEBKIT_FORCE_AT_FORCE_MOUSE_DOWN
+		
+		////// Instance properties //////
 		altKey = false;		
 		button = 0;
 		buttons = 0;
@@ -40,8 +46,8 @@ public:
 	}
 	
 	////// Static properties //////
-	// [MouseEvent.WEBKIT_FORCE_AT_MOUSE_DOWN](Non-standard)(Read only) 
-	// [MouseEvent.WEBKIT_FORCE_AT_FORCE_MOUSE_DOWN](Non-standard)(Read only)
+	// [MouseEvent.WEBKIT_FORCE_AT_MOUSE_DOWN](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/WEBKIT_FORCE_AT_MOUSE_DOWN
+	// [MouseEvent.WEBKIT_FORCE_AT_FORCE_MOUSE_DOWN](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/WEBKIT_FORCE_AT_FORCE_MOUSE_DOWN
 	
 	
 	////// Instance properties //////
@@ -97,7 +103,13 @@ public:
 	
 	////// Instance methods //////
 	// [MouseEvent.getModifierState()] https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/getModifierState
+	void getModifierState() {
+		DKTODO();
+	}
 	// [MouseEvent.initMouseEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/initMouseEvent
+	void initMouseEvent() {
+		DKTODO();
+	}
 	
 	
 	////// Events //////

@@ -514,8 +514,6 @@ void DKConsoleWindow::ErrorExit(LPCSTR lpszMessage) {
 void DKConsoleWindow::FocusEventProc(FOCUS_EVENT_RECORD fer) {
     DKDEBUGFUNC(fer);
     //DKString address = DKDuktape::pointerToAddress(this);
-    //DKString rval;
-    //DKString code;
 
     //relatedTarget = address;
 
@@ -542,8 +540,6 @@ void DKConsoleWindow::FocusEventProc(FOCUS_EVENT_RECORD fer) {
 void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
     DKDEBUGFUNC(ker);
     DKString address = DKDuktape::pointerToAddress(this);
-    //DKString rval;
-    //DKString code;
 
     // altKey
     if (ker.dwControlKeyState & LEFT_ALT_PRESSED || ker.dwControlKeyState & RIGHT_ALT_PRESSED)
@@ -591,57 +587,51 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
         shiftKey = false;
 
     if (ker.bKeyDown) {
-        //code = "dispatchKeyboardEvent('keydown','','" + address + "')";	// JS
-		//DKDuktape::RunDuktape(code, rval);								// JS
-		DKKeyboardEvent* event = new DKKeyboardEvent("keydown", "");		// CPP
-		event->altKey = altKey;
-		event->code = code;
-		event->ctrlKey = ctrlKey;
-		event->isComposing = isComposing;
-		event->key = key;
-		event->locale = locale;
-		event->location = location;
-		event->metaKey = metaKey;
-		event->repeat = repeat;
-		event->shiftKey = shiftKey;
-		DKEventTarget::dispatchEvent(event, address);						// CPP
-		delete event;
+		DKKeyboardEvent* keydown_event = new DKKeyboardEvent("keydown", "");
+		keydown_event->altKey = altKey;
+		keydown_event->code = code;
+		keydown_event->ctrlKey = ctrlKey;
+		keydown_event->isComposing = isComposing;
+		keydown_event->key = key;
+		keydown_event->locale = locale;
+		keydown_event->location = location;
+		keydown_event->metaKey = metaKey;
+		keydown_event->repeat = repeat;
+		keydown_event->shiftKey = shiftKey;
+		DKEventTarget::dispatchEvent(keydown_event, address);
+		delete keydown_event;
 
 		//Only fire keypress on alphanumeric keys.
         if (ker.uChar.AsciiChar < 32)
             return;
-		//code = "dispatchKeyboardEvent('keypress','','" + address + "')";	// JS
-		//DKDuktape::RunDuktape(code, rval);								// JS
-		DKKeyboardEvent* eventB = new DKKeyboardEvent("keypress", "");		// CPP
-		eventB->altKey = altKey;
-		eventB->code = code;
-		eventB->ctrlKey = ctrlKey;
-		eventB->isComposing = isComposing;
-		eventB->key = key;
-		eventB->locale = locale;
-		eventB->location = location;
-		eventB->metaKey = metaKey;
-		eventB->repeat = repeat;
-		eventB->shiftKey = shiftKey;
-		DKEventTarget::dispatchEvent(eventB, address);
-		delete eventB;
+		DKKeyboardEvent* keypress_event = new DKKeyboardEvent("keypress", "");
+		keypress_event->altKey = altKey;
+		keypress_event->code = code;
+		keypress_event->ctrlKey = ctrlKey;
+		keypress_event->isComposing = isComposing;
+		keypress_event->key = key;
+		keypress_event->locale = locale;
+		keypress_event->location = location;
+		keypress_event->metaKey = metaKey;
+		keypress_event->repeat = repeat;
+		keypress_event->shiftKey = shiftKey;
+		DKEventTarget::dispatchEvent(keypress_event, address);
+		delete keypress_event;
     }
     else {
-        //code = "dispatchKeyboardEvent('keyup','','" + address + "')";
-        //DKDuktape::RunDuktape(code, rval);
-		DKKeyboardEvent* event = new DKKeyboardEvent("keyup", "");
-		event->altKey = altKey;
-		event->code = code;
-		event->ctrlKey = ctrlKey;
-		event->isComposing = isComposing;
-		event->key = key;
-		event->locale = locale;
-		event->location = location;
-		event->metaKey = metaKey;
-		event->repeat = repeat;
-		event->shiftKey = shiftKey;
-		DKEventTarget::dispatchEvent(event, address);
-		delete event;
+		DKKeyboardEvent* keyup_event = new DKKeyboardEvent("keyup", "");
+		keyup_event->altKey = altKey;
+		keyup_event->code = code;
+		keyup_event->ctrlKey = ctrlKey;
+		keyup_event->isComposing = isComposing;
+		keyup_event->key = key;
+		keyup_event->locale = locale;
+		keyup_event->location = location;
+		keyup_event->metaKey = metaKey;
+		keyup_event->repeat = repeat;
+		keyup_event->shiftKey = shiftKey;
+		DKEventTarget::dispatchEvent(keyup_event, address);
+		delete keyup_event;
     }
 }
 
@@ -657,8 +647,6 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 		#define MOUSE_HWHEELED 0x0008
 	#endif
     DKString address = DKDuktape::pointerToAddress(this);
-    //DKString rval;
-    //DKString code;
 
     switch (mer.dwEventFlags){
 		case 0:
@@ -717,24 +705,32 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                 if (!button_state[0]) {
                     button_state[0] = true;
                     button = 0;
-                    //code = "dispatchMouseEvent('mousedown','','" + address + "')";
-                    //DKDuktape::RunDuktape(code, rval);
-					DKMouseEvent* event = new DKMouseEvent("mousedown", "");
-					event->button = button;
-					event->buttons = buttons;
-					DKEventTarget::dispatchEvent(event, address);
-					delete event;
+
+					DKMouseEvent* mousedown_event = new DKMouseEvent("mousedown", "");
+					mousedown_event->button = button;
+					mousedown_event->buttons = buttons;
+					DKEventTarget::dispatchEvent(mousedown_event, address);
+					delete mousedown_event;
+					
                     break;
                 }
             }
             else if (button_state[0]) {
                 button_state[0] = false;
                 button = 0;
-                //code = "dispatchMouseEvent('mouseup','','" + address + "')";
-                //DKDuktape::RunDuktape(code, rval);
 
-                //code = "dispatchMouseEvent('click','','" + address + "')";
-                //DKDuktape::RunDuktape(code, rval);
+				DKMouseEvent* mouseup_event = new DKMouseEvent("mouseup", "");
+				mouseup_event->button = button;
+				mouseup_event->buttons = buttons;
+				DKEventTarget::dispatchEvent(mouseup_event, address);
+				delete mouseup_event;
+
+				DKMouseEvent* click_event = new DKMouseEvent("click", "");
+				click_event->button = button;
+				click_event->buttons = buttons;
+				DKEventTarget::dispatchEvent(click_event, address);
+				delete click_event;
+				
                 break;
             }
 
@@ -742,19 +738,32 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                 if (!button_state[1]) {
                     button_state[1] = true;
                     button = 2;
-                    //code = "dispatchMouseEvent('mousedown','','" + address + "')";
-                    //DKDuktape::RunDuktape(code, rval);
+					
+					DKMouseEvent* mousedown_event = new DKMouseEvent("mousedown", "");
+					mousedown_event->button = button;
+					mousedown_event->buttons = buttons;
+					DKEventTarget::dispatchEvent(mousedown_event, address);
+					delete mousedown_event;
+				
                     break;
                 }
             }
             else if (button_state[1]) {
                 button_state[1] = false;
                 button = 2;
-                //code = "dispatchMouseEvent('mouseup','','" + address + "')";
-                //DKDuktape::RunDuktape(code, rval);
 
-                //code = "dispatchMouseEvent('contextmenu','','" + address + "')";
-                //DKDuktape::RunDuktape(code, rval);
+				DKMouseEvent* mouseup_event = new DKMouseEvent("mouseup", "");
+				mouseup_event->button = button;
+				mouseup_event->buttons = buttons;
+				DKEventTarget::dispatchEvent(mouseup_event, address);
+				delete mouseup_event;
+
+				DKMouseEvent* contextmenu_event = new DKMouseEvent("contextmenu", "");
+				contextmenu_event->button = button;
+				contextmenu_event->buttons = buttons;
+				DKEventTarget::dispatchEvent(contextmenu_event, address);
+				delete contextmenu_event;
+				
                 break;
             }
 
@@ -762,16 +771,26 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                 if (!button_state[2]) {
                     button_state[2] = true;
                     button = 1;
-                    //code = "dispatchMouseEvent('mousedown','','" + address + "')";
-                    //DKDuktape::RunDuktape(code, rval);
+                    
+					DKMouseEvent* mousedown_event = new DKMouseEvent("mousedown", "");
+					mousedown_event->button = button;
+					mousedown_event->buttons = buttons;
+					DKEventTarget::dispatchEvent(mousedown_event, address);
+					delete mousedown_event;
+					
                     break;
                 }
             }
             else if (button_state[2]) {
                 button_state[2] = false;
                 button = 1;
-                //code = "dispatchMouseEvent('mouseup','','" + address + "')";
-                //DKDuktape::RunDuktape(code, rval);
+                
+				DKMouseEvent* mouseup_event = new DKMouseEvent("mouseup", "");
+				mouseup_event->button = button;
+				mouseup_event->buttons = buttons;
+				DKEventTarget::dispatchEvent(mouseup_event, address);
+				delete mouseup_event;
+				
                 break;
             }
 
@@ -779,16 +798,26 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                 if (!button_state[3]) {
                     button_state[3] = true;
                     button = 3;
-                    //code = "dispatchMouseEvent('mousedown','','" + address + "')";
-                    //DKDuktape::RunDuktape(code, rval);
+                    
+					DKMouseEvent* mousedown_event = new DKMouseEvent("mousedown", "");
+					mousedown_event->button = button;
+					mousedown_event->buttons = buttons;
+					DKEventTarget::dispatchEvent(mousedown_event, address);
+					delete mousedown_event;
+					
                     break;
                 }
             }
             else if (button_state[3]) {
                 button_state[3] = false;
                 button = 3;
-                //code = "dispatchMouseEvent('mouseup','','" + address + "')";
-                //DKDuktape::RunDuktape(code, rval);
+                
+				DKMouseEvent* mouseup_event = new DKMouseEvent("mouseup", "");
+				mouseup_event->button = button;
+				mouseup_event->buttons = buttons;
+				DKEventTarget::dispatchEvent(mouseup_event, address);
+				delete mouseup_event;
+				
                 break;
             }
 
@@ -796,22 +825,35 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                 if (!button_state[4]) {
                     button_state[4] = true;
                     button = 4;
-                    //code = "dispatchMouseEvent('mousedown','','" + address + "')";
-                    //DKDuktape::RunDuktape(code, rval);
+                    
+					DKMouseEvent* mousedown_event = new DKMouseEvent("mousedown", "");
+					mousedown_event->button = button;
+					mousedown_event->buttons = buttons;
+					DKEventTarget::dispatchEvent(mousedown_event, address);
+					delete mousedown_event;
+					
                     break;
                 }
             }
             else if (button_state[4]) {
                 button_state[4] = false;
                 button = 4;
-                //code = "dispatchMouseEvent('mouseup','','" + address + "')";
-                //DKDuktape::RunDuktape(code, rval);
+                
+				DKMouseEvent* mouseup_event = new DKMouseEvent("mouseup", "");
+				mouseup_event->button = button;
+				mouseup_event->buttons = buttons;
+				DKEventTarget::dispatchEvent(mouseup_event, address);
+				delete mouseup_event;
+				
                 break;
             }
 			break;
 		case DOUBLE_CLICK:
-            //code = "dispatchMouseEvent('dblclick','','" + address + "')";
-            //DKDuktape::RunDuktape(code, rval);
+			DKMouseEvent* dblclick_event = new DKMouseEvent("dblclick", "");
+			dblclick_event->button = button;
+			dblclick_event->buttons = buttons;
+			DKEventTarget::dispatchEvent(dblclick_event, address);
+			delete dblclick_event;
 			break;
 		case MOUSE_HWHEELED: //horizontal mouse wheel
             button = 0;
@@ -864,8 +906,12 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
             x = clientX;
             y = clientY;
             
-            //code = "dispatchMouseEvent('mousemove','','" + address + "')";
-            //DKDuktape::RunDuktape(code, rval);
+			DKMouseEvent* mousemove_event = new DKMouseEvent("mousemove", "");
+			mousemove_event->button = button;
+			mousemove_event->buttons = buttons;
+			DKEventTarget::dispatchEvent(mousemove_event, address);
+			delete mousemove_event;
+				
             break;
 		default:
 			DKERROR("unknown event! \n");
@@ -876,8 +922,6 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 void DKConsoleWindow::ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD wbsr) {
     DKDEBUGFUNC(wbsr);
 	//DKString address = DKDuktape::pointerToAddress(this);
-    //DKString rval;
-    //DKString code;
     columns = wbsr.dwSize.X;
     rows = wbsr.dwSize.Y;
 	//code = "dispatchMouseEvent('resize','','" + address + "')";

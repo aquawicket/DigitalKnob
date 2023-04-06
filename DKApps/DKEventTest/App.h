@@ -31,14 +31,30 @@ public:
 	
 	
 	////// KeyboardEvent //////
-	static void printKeyboardEventProperties(DKKeyboardEvent* keyevent);
-	static bool onkeydown(DKKeyboardEvent* keyevent);
-	static bool onkeyup(DKKeyboardEvent* keyevent);
-	static bool onkeypress(DKKeyboardEvent* keyevent);
+	static void printKeyboardEventProperties(DKKeyboardEvent* keyboardevent);
+	static bool onkeydown(DKKeyboardEvent* keyboardevent);
+	static bool onkeyup(DKKeyboardEvent* keyboardevent);
+	static bool onkeypress(DKKeyboardEvent* keyboardevent);
 	
 	
 	////// MouseEvent //////
 	static void printMouseEventProperties(DKMouseEvent* mouseevent);
+	static bool onauxclick(DKMouseEvent* mouseevent);
+	static bool onclick(DKMouseEvent* mouseevent);
+	static bool oncontextmenu(DKMouseEvent* mouseevent);
+	static bool ondblclick(DKMouseEvent* mouseevent);
+	static bool onDOMActivate(DKMouseEvent* mouseevent);
+	static bool onmousedown(DKMouseEvent* mouseevent);
+	static bool onmouseenter(DKMouseEvent* mouseevent);
+	static bool onmouseleave(DKMouseEvent* mouseevent);
+	static bool onmousemove(DKMouseEvent* mouseevent);
+	static bool onmouseout(DKMouseEvent* mouseevent);
+	static bool onmouseover(DKMouseEvent* mouseevent);
+	static bool onmouseup(DKMouseEvent* mouseevent);
+	static bool onwebkitmouseforcechanged(DKMouseEvent* mouseevent);
+	static bool onwebkitmouseforcedown(DKMouseEvent* mouseevent);
+	static bool onwebkitmouseforceup(DKMouseEvent* mouseevent);
+	static bool onwebkitmouseforcewillbegin(DKMouseEvent* mouseevent);
 	
 };
 REGISTER_OBJECT(App, false);
