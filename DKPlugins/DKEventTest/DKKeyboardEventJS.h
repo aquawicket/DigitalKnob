@@ -9,8 +9,8 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
+// [W3C] https://w3c.github.io/uievents/#events-keyboardevents
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent
-// [INTERFACE] https://w3c.github.io/uievents/#interface-keyboardevent
 class DKKeyboardEventJS : public DKObjectT<DKKeyboardEventJS>
 {
 public:

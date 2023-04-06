@@ -4,8 +4,9 @@
 
 #include "DKDuktape/DKDuktape.h"
 
+
+// [W3C] https://w3c.github.io/uievents
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/UIEvent
-// [INTERFACE] https://w3c.github.io/uievents/#idl-uievent
 class DKUIEventJS : public DKObjectT<DKUIEventJS>
 {
 public:
@@ -26,6 +27,24 @@ public:
 		DKDuktape::AttachFunction("CPP_DKUIEvent_initUIEvent", 			DKUIEventJS::initUIEvent);
 		
 		
+		////// Events //////
+		// [abort] https://w3c.github.io/uievents/#event-type-abort
+		DKEventTarget::LinkAddEventListenerFunc		("abort", 	&DKUIEventJS::addEventListener, 	this);
+		DKEventTarget::LinkRemoveEventListenerFunc	("abort", 	&DKUIEventJS::removeEventListener, 	this);
+		// [error] https://w3c.github.io/uievents/#event-type-error
+		DKEventTarget::LinkAddEventListenerFunc		("error", 	&DKUIEventJS::addEventListener, 	this);
+		DKEventTarget::LinkRemoveEventListenerFunc	("error", 	&DKUIEventJS::removeEventListener, 	this);
+		// [load] https://w3c.github.io/uievents/#event-type-load
+		DKEventTarget::LinkAddEventListenerFunc		("load", 	&DKUIEventJS::addEventListener, 	this);
+		DKEventTarget::LinkRemoveEventListenerFunc	("load", 	&DKUIEventJS::removeEventListener, 	this);
+		// [select] https://w3c.github.io/uievents/#event-type-select
+		DKEventTarget::LinkAddEventListenerFunc		("select", 	&DKUIEventJS::addEventListener, 	this);
+		DKEventTarget::LinkRemoveEventListenerFunc	("select", 	&DKUIEventJS::removeEventListener, 	this);
+		// [unload] https://w3c.github.io/uievents/#event-type-unload
+		DKEventTarget::LinkAddEventListenerFunc		("unload", 	&DKUIEventJS::addEventListener, 	this);
+		DKEventTarget::LinkRemoveEventListenerFunc	("unload", 	&DKUIEventJS::removeEventListener, 	this);
+	
+	
 		////// Load .js files
 		DKClass::DKCreate("DKEventTest/DKUIEvent.js");
 		

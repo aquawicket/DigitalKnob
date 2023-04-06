@@ -1,5 +1,5 @@
+// [W3C] https://w3c.github.io/uievents
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/UIEvent
-// [INTERFACE] https://w3c.github.io/uievents/#idl-uievent
 
 
 // [UIEvent()] https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/UIEvent

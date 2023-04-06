@@ -1,5 +1,5 @@
+// [W3C] https://w3c.github.io/uievents/#events-mouseevents
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent
-// [INTERFACE] https://w3c.github.io/uievents/#interface-keyboardevent
 
 
 // [MouseEvent()] https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/MouseEvent

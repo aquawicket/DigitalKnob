@@ -9,8 +9,8 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
+// [W3C] https://w3c.github.io/uievents/#events-wheelevents
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent
-// [INTERFACE] https://w3c.github.io/uievents/#interface-wheelevent
 class DKWheelEventJS : public DKObjectT<DKWheelEventJS>
 {
 public:

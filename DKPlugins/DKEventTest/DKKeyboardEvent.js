@@ -1,5 +1,5 @@
+// [W3C] https://w3c.github.io/uievents/#events-keyboardevents
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent
-// [INTERFACE] https://w3c.github.io/uievents/#interface-keyboardevent
 
 
 // [KeyboardEvent()] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/KeyboardEvent

@@ -1,5 +1,5 @@
+// [W3C] https://w3c.github.io/uievents/#events-wheelevents
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent
-// [INTERFACE] https://w3c.github.io/uievents/#interface-wheelevent
 
 
 // [WheelEvent()] https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent/WheelEvent

@@ -9,8 +9,8 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
+// [W3C] https://w3c.github.io/uievents/#events-mouseevents
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent
-// [INTERFACE] https://w3c.github.io/uievents/#interface-keyboardevent
 class DKMouseEventJS : public DKObjectT<DKMouseEventJS>
 {
 public:

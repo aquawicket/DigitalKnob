@@ -9,14 +9,15 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
-// [Event] https://developer.mozilla.org/en-US/docs/Web/API/Event
+// [INTERFACE] https://dom.spec.whatwg.org/#interface-event
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Event
 class DKEventJS : public DKObjectT<DKEventJS>
 {
 public:
 	bool Init(){
 		
 		////// Constructor //////
-		DKDuktape::AttachFunction("CPP_DKEvent", DKEventJS::constructor); // [Event()] https://developer.mozilla.org/en-US/docs/Web/API/Event/Event
+		DKDuktape::AttachFunction("CPP_DKEvent", DKEventJS::constructor);
 		
 		
 		////// Instance properties //////

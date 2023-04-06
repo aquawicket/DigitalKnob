@@ -5,7 +5,8 @@
 #include "DKEventTest/DKUIEvent.h"
 
 
-// https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent
+// [W3C] https://w3c.github.io/uievents/#events-keyboardevents
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent
 class DKKeyboardEvent : public DKUIEvent
 {
 public:

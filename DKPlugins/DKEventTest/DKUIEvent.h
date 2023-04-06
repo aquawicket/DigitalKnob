@@ -5,7 +5,8 @@
 #include "DKEventTest/DKEvent.h"
 
 
-// https://developer.mozilla.org/en-US/docs/Web/API/UIEvent
+// [W3C] https://w3c.github.io/uievents
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/UIEvent
 class DKUIEvent : public DKEvent
 {
 public:
@@ -40,7 +41,11 @@ public:
 	
 	
 	////// Events //////
-	// [error] https://developer.mozilla.org/en-US/docs/Web/API/Element/error_event
+	// [abort] https://w3c.github.io/uievents/#event-type-abort
+	// [error] https://w3c.github.io/uievents/#event-type-error
+	// [load] https://w3c.github.io/uievents/#event-type-load
+	// [select] https://w3c.github.io/uievents/#event-type-select
+	// [unload] https://w3c.github.io/uievents/#event-type-unload
 };
 
 
