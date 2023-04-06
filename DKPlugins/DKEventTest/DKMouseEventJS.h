@@ -59,53 +59,53 @@ public:
 	
 		////// Events //////
 		// [auxclick] https://developer.mozilla.org/en-US/docs/Web/API/Element/auxclick_event
-		DKEventTarget::LinkAddEventListenerFunc("auxclick", &DKMouseEventJS::addEventListener, this);
-		DKEventTarget::LinkRemoveEventListenerFunc("auxclick", &DKMouseEventJS::removeEventListener, this);
+		DKEventTarget::LinkAddEventListenerFunc		("auxclick", 					&DKMouseEventJS::addEventListener, 		this);
+		DKEventTarget::LinkRemoveEventListenerFunc	("auxclick", 					&DKMouseEventJS::removeEventListener, 	this);
 		// [click] https://developer.mozilla.org/en-US/docs/Web/API/Element/click_event
-		DKEventTarget::LinkAddEventListenerFunc("click", &DKMouseEventJS::addEventListener, this);
-		DKEventTarget::LinkRemoveEventListenerFunc("click", &DKMouseEventJS::removeEventListener, this);
+		DKEventTarget::LinkAddEventListenerFunc		("click", 						&DKMouseEventJS::addEventListener, 		this);
+		DKEventTarget::LinkRemoveEventListenerFunc	("click", 						&DKMouseEventJS::removeEventListener, 	this);
 		// [contextmenu] https://developer.mozilla.org/en-US/docs/Web/API/Element/contextmenu_event
-		DKEventTarget::LinkAddEventListenerFunc("contextmenu", &DKMouseEventJS::addEventListener, this);
-		DKEventTarget::LinkRemoveEventListenerFunc("contextmenu", &DKMouseEventJS::removeEventListener, this);
+		DKEventTarget::LinkAddEventListenerFunc		("contextmenu", 				&DKMouseEventJS::addEventListener, 		this);
+		DKEventTarget::LinkRemoveEventListenerFunc	("contextmenu", 				&DKMouseEventJS::removeEventListener, 	this);
 		// [dblclick] https://developer.mozilla.org/en-US/docs/Web/API/Element/dblclick_event
-		DKEventTarget::LinkAddEventListenerFunc("dblclick", &DKMouseEventJS::addEventListener, this);
-		DKEventTarget::LinkRemoveEventListenerFunc("dblclick", &DKMouseEventJS::removeEventListener, this);
+		DKEventTarget::LinkAddEventListenerFunc		("dblclick", 					&DKMouseEventJS::addEventListener, 		this);
+		DKEventTarget::LinkRemoveEventListenerFunc	("dblclick", 					&DKMouseEventJS::removeEventListener, 	this);
 		// [DOMActivate](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Element/DOMActivate_event
-		DKEventTarget::LinkAddEventListenerFunc("DOMActivate", &DKMouseEventJS::addEventListener, this);
-		DKEventTarget::LinkRemoveEventListenerFunc("DOMActivate", &DKMouseEventJS::removeEventListener, this);
+		DKEventTarget::LinkAddEventListenerFunc		("DOMActivate", 				&DKMouseEventJS::addEventListener, 		this);
+		DKEventTarget::LinkRemoveEventListenerFunc	("DOMActivate", 				&DKMouseEventJS::removeEventListener, 	this);
 		// [mousedown] https://developer.mozilla.org/en-US/docs/Web/API/Element/mousedown_event
-		DKEventTarget::LinkAddEventListenerFunc("mousedown", &DKMouseEventJS::addEventListener, this);
-		DKEventTarget::LinkRemoveEventListenerFunc("mousedown", &DKMouseEventJS::removeEventListener, this);
+		DKEventTarget::LinkAddEventListenerFunc		("mousedown", 					&DKMouseEventJS::addEventListener, 		this);
+		DKEventTarget::LinkRemoveEventListenerFunc	("mousedown", 					&DKMouseEventJS::removeEventListener, 	this);
 		// [mouseenter] https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseenter_event
-		DKEventTarget::LinkAddEventListenerFunc("mouseenter", &DKMouseEventJS::addEventListener, this);
-		DKEventTarget::LinkRemoveEventListenerFunc("mouseenter", &DKMouseEventJS::removeEventListener, this);
+		DKEventTarget::LinkAddEventListenerFunc		("mouseenter", 					&DKMouseEventJS::addEventListener, 		this);
+		DKEventTarget::LinkRemoveEventListenerFunc	("mouseenter", 					&DKMouseEventJS::removeEventListener, 	this);
 		// [mouseleave] https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseleave_event
-		DKEventTarget::LinkAddEventListenerFunc("mouseleave", &DKMouseEventJS::addEventListener, this);
-		DKEventTarget::LinkRemoveEventListenerFunc("mouseleave", &DKMouseEventJS::removeEventListener, this);
+		DKEventTarget::LinkAddEventListenerFunc		("mouseleave", 					&DKMouseEventJS::addEventListener, 		this);
+		DKEventTarget::LinkRemoveEventListenerFunc	("mouseleave",			 		&DKMouseEventJS::removeEventListener, 	this);
 		// [mousemove] https://developer.mozilla.org/en-US/docs/Web/API/Element/mousemove_event
-		DKEventTarget::LinkAddEventListenerFunc("mousemove", &DKMouseEventJS::addEventListener, this);
-		DKEventTarget::LinkRemoveEventListenerFunc("mousemove", &DKMouseEventJS::removeEventListener, this);
+		DKEventTarget::LinkAddEventListenerFunc		("mousemove", 					&DKMouseEventJS::addEventListener, 		this);
+		DKEventTarget::LinkRemoveEventListenerFunc	("mousemove", 					&DKMouseEventJS::removeEventListener, 	this);
 		// [mouseout] https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseout_event
-		DKEventTarget::LinkAddEventListenerFunc("mouseout", &DKMouseEventJS::addEventListener, this);
-		DKEventTarget::LinkRemoveEventListenerFunc("mouseout", &DKMouseEventJS::removeEventListener, this);
+		DKEventTarget::LinkAddEventListenerFunc		("mouseout", 					&DKMouseEventJS::addEventListener, 		this);
+		DKEventTarget::LinkRemoveEventListenerFunc	("mouseout", 					&DKMouseEventJS::removeEventListener, 	this);
 		// [mouseover] https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseover_event
-		DKEventTarget::LinkAddEventListenerFunc("mouseover", &DKMouseEventJS::addEventListener, this);
-		DKEventTarget::LinkRemoveEventListenerFunc("mouseover", &DKMouseEventJS::removeEventListener, this);
+		DKEventTarget::LinkAddEventListenerFunc		("mouseover", 					&DKMouseEventJS::addEventListener,		this);
+		DKEventTarget::LinkRemoveEventListenerFunc	("mouseover", 					&DKMouseEventJS::removeEventListener, 	this);
 		// [mouseup] https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseup_event
-		DKEventTarget::LinkAddEventListenerFunc("mouseup", &DKMouseEventJS::addEventListener, this);
-		DKEventTarget::LinkRemoveEventListenerFunc("mouseup", &DKMouseEventJS::removeEventListener, this);
+		DKEventTarget::LinkAddEventListenerFunc		("mouseup", 					&DKMouseEventJS::addEventListener, 		this);
+		DKEventTarget::LinkRemoveEventListenerFunc	("mouseup", 					&DKMouseEventJS::removeEventListener, 	this);
 		// [webkitmouseforcechanged](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Element/webkitmouseforcechanged_event
-		DKEventTarget::LinkAddEventListenerFunc("webkitmouseforcechanged", &DKMouseEventJS::addEventListener, this);
-		DKEventTarget::LinkRemoveEventListenerFunc("webkitmouseforcechanged", &DKMouseEventJS::removeEventListener, this);
+		DKEventTarget::LinkAddEventListenerFunc		("webkitmouseforcechanged", 	&DKMouseEventJS::addEventListener, 		this);
+		DKEventTarget::LinkRemoveEventListenerFunc	("webkitmouseforcechanged", 	&DKMouseEventJS::removeEventListener, 	this);
 		// [webkitmouseforcedown](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Element/webkitmouseforcedown_event
-		DKEventTarget::LinkAddEventListenerFunc("webkitmouseforcedown", &DKMouseEventJS::addEventListener, this);
-		DKEventTarget::LinkRemoveEventListenerFunc("webkitmouseforcedown", &DKMouseEventJS::removeEventListener, this);
+		DKEventTarget::LinkAddEventListenerFunc		("webkitmouseforcedown", 		&DKMouseEventJS::addEventListener, 		this);
+		DKEventTarget::LinkRemoveEventListenerFunc	("webkitmouseforcedown", 		&DKMouseEventJS::removeEventListener, 	this);
 		// [webkitmouseforceup](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Element/webkitmouseforceup_event
-		DKEventTarget::LinkAddEventListenerFunc("webkitmouseforceup", &DKMouseEventJS::addEventListener, this);
-		DKEventTarget::LinkRemoveEventListenerFunc("webkitmouseforceup", &DKMouseEventJS::removeEventListener, this);
+		DKEventTarget::LinkAddEventListenerFunc		("webkitmouseforceup", 			&DKMouseEventJS::addEventListener,		this);
+		DKEventTarget::LinkRemoveEventListenerFunc	("webkitmouseforceup", 			&DKMouseEventJS::removeEventListener, 	this);
 		// [webkitmouseforcewillbegin](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Element/webkitmouseforcewillbegin_event
-		DKEventTarget::LinkAddEventListenerFunc("webkitmouseforcewillbegin", &DKMouseEventJS::addEventListener, this);
-		DKEventTarget::LinkRemoveEventListenerFunc("webkitmouseforcewillbegin", &DKMouseEventJS::removeEventListener, this);
+		DKEventTarget::LinkAddEventListenerFunc		("webkitmouseforcewillbegin",	&DKMouseEventJS::addEventListener,		this);
+		DKEventTarget::LinkRemoveEventListenerFunc	("webkitmouseforcewillbegin",	&DKMouseEventJS::removeEventListener,	this);
 	
 
 		////// Load .js files //////

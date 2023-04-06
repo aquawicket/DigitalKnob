@@ -21,36 +21,66 @@ public:
 		
 		
 		////// Constants //////
-		// [DOM_KEY_LOCATION_STANDARD]	0x00
-		// [DOM_KEY_LOCATION_LEFT]		0x01
-		// [DOM_KEY_LOCATION_RIGHT]		0x02
-		// [DOM_KEY_LOCATION_NUMPAD]	0x03
+		////// Keyboard locations //////
+		// [DOM_KEY_LOCATION_STANDARD]	0x00 https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent#keyboard_locations
+		// [DOM_KEY_LOCATION_LEFT]		0x01 https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent#keyboard_locations
+		// [DOM_KEY_LOCATION_RIGHT]		0x02 https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent#keyboard_locations
+		// [DOM_KEY_LOCATION_NUMPAD]	0x03 https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent#keyboard_locations
 	
 	
 		////// Instance properties //////
-		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_altKey", DKKeyboardEventJS::altKey);
-		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_code", DKKeyboardEventJS::code);
-		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_ctrlKey", DKKeyboardEventJS::ctrlKey);
-		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_isComposing", DKKeyboardEventJS::isComposing);
-		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_key", DKKeyboardEventJS::key);
-		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_locale", DKKeyboardEventJS::locale);
-		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_location", DKKeyboardEventJS::location);
-		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_metaKey", DKKeyboardEventJS::metaKey);
-		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_repeat", DKKeyboardEventJS::repeat);
-		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_shiftKey", DKKeyboardEventJS::shiftKey);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_altKey",			DKKeyboardEventJS::altKey);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_code",			DKKeyboardEventJS::code);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_ctrlKey",		DKKeyboardEventJS::ctrlKey);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_isComposing", 	DKKeyboardEventJS::isComposing);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_key", 			DKKeyboardEventJS::key);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_locale",			DKKeyboardEventJS::locale);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_location", 		DKKeyboardEventJS::location);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_metaKey", 		DKKeyboardEventJS::metaKey);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_repeat",			DKKeyboardEventJS::repeat);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_shiftKey",		DKKeyboardEventJS::shiftKey);
 		
 		
 		////// Instance methods //////
+		// [KeyboardEvent.getModifierState()] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/getModifierState
 		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_getModifierState", DKKeyboardEventJS::getModifierState);
 		
 		
-		////// Register Add/Remove Listener Functions //////
-		DKEventTarget::LinkAddEventListenerFunc("keydown", &DKKeyboardEventJS::addEventListener, this);
-		DKEventTarget::LinkAddEventListenerFunc("keyup", &DKKeyboardEventJS::addEventListener, this);
-		DKEventTarget::LinkAddEventListenerFunc("keypress", &DKKeyboardEventJS::addEventListener, this);
-		DKEventTarget::LinkRemoveEventListenerFunc("keydown", &DKKeyboardEventJS::removeEventListener, this);
-		DKEventTarget::LinkRemoveEventListenerFunc("keyup", &DKKeyboardEventJS::removeEventListener, this);
-		DKEventTarget::LinkRemoveEventListenerFunc("keypress", &DKKeyboardEventJS::removeEventListener, this);
+		////// Obsolete methods //////
+		// [KeyboardEvent.initKeyEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/initKeyEvent
+		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_initKeyEvent", DKKeyboardEventJS::initKeyEvent);
+		// [KeyboardEvent.initKeyboardEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/initKeyboardEvent
+		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_initKeyboardEvent", DKKeyboardEventJS::initKeyboardEvent);
+
+	
+		////// Obsolete properties //////
+		// [KeyboardEvent.char](Non-standard)(Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/char
+		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_char",			DKKeyboardEventJS::char);
+		// [KeyboardEvent.charCode](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/charCode
+		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_charCode",		DKKeyboardEventJS::charCode);
+		// [KeyboardEvent.keyCode](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode
+		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_keyCode",		DKKeyboardEventJS::keyCode);
+		// [KeyboardEvent.keyIdentifier](Non-standard)(Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyIdentifier
+		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_keyIdentifier",	DKKeyboardEventJS::keyIdentifier);
+		// [KeyboardEvent.keyLocation](Non-standard)(Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyLocation
+		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_keyLocation",	DKKeyboardEventJS::keyLocation);
+		// [KeyboardEvent.which](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/which
+		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_which",			DKKeyboardEventJS::which);
+		
+		
+		////// Events //////
+		// [keydown] https://developer.mozilla.org/en-US/docs/Web/API/Element/keydown_event
+		DKEventTarget::LinkAddEventListenerFunc		("keydown", 	&DKKeyboardEventJS::addEventListener, 		this);
+		DKEventTarget::LinkRemoveEventListenerFunc	("keydown", 	&DKKeyboardEventJS::removeEventListener, 	this);
+		// [keyup] https://developer.mozilla.org/en-US/docs/Web/API/Element/keyup_event
+		DKEventTarget::LinkAddEventListenerFunc		("keyup", 		&DKKeyboardEventJS::addEventListener, 		this);
+		DKEventTarget::LinkRemoveEventListenerFunc	("keyup", 		&DKKeyboardEventJS::removeEventListener, 	this);
+		
+		
+		////// Obsolete events //////
+		// [keypress](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Element/keypress_event
+		DKEventTarget::LinkAddEventListenerFunc		("keypress", 	&DKKeyboardEventJS::addEventListener, 		this);
+		DKEventTarget::LinkRemoveEventListenerFunc	("keypress",	&DKKeyboardEventJS::removeEventListener, 	this);
 		
 		
 		////// Load .js files

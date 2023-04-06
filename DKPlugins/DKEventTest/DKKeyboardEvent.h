@@ -13,24 +13,35 @@ public:
 	// [KeyboardEvent()] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/KeyboardEvent
 	DKKeyboardEvent(DKString _type, DKString _options) : DKUIEvent(_type, _options) {
 		DKINFO("DKKeyboardEvent("+_type+", "+_options+") \n");
+		
+		////// Instance properties //////
 		altKey = false;
-		code = "TODO";
+		code = "";
 		ctrlKey = false;
 		isComposing = false;
-		key = "TODO";
-		locale = "TODO";
+		key = "";
+		locale = "";
 		location = 0;
 		metaKey = false;
 		repeat = false;
 		shiftKey = false;
+		
+		////// Obsolete properties //////
+		_char = "";
+		charCode = 0;
+		keyCode = 0;
+		keyIdentifier = "";
+		keyLocation = 0;
+		which = 0;
 	}
 	
 	
 	////// Constants //////
-	// [DOM_KEY_LOCATION_STANDARD]	0x00
-	// [DOM_KEY_LOCATION_LEFT]		0x01
-	// [DOM_KEY_LOCATION_RIGHT]		0x02
-	// [DOM_KEY_LOCATION_NUMPAD]	0x03
+	////// Keyboard locations //////
+	// [DOM_KEY_LOCATION_STANDARD]	0x00 https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent#keyboard_locations
+	// [DOM_KEY_LOCATION_LEFT]		0x01 https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent#keyboard_locations
+	// [DOM_KEY_LOCATION_RIGHT]		0x02 https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent#keyboard_locations
+	// [DOM_KEY_LOCATION_NUMPAD]	0x03 https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent#keyboard_locations
 	
 	
 	////// Instance properties //////
@@ -58,20 +69,35 @@ public:
 	
 	////// Instance methods //////
 	// [KeyboardEvent.getModifierState()] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/getModifierState
+	void getModifierState() {
+		DKTODO();
+	}
 	
 	
 	////// Obsolete methods //////
 	// [KeyboardEvent.initKeyEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/initKeyEvent
+	void initKeyEvent() {
+		DKTODO();
+	}
 	// [KeyboardEvent.initKeyboardEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/initKeyboardEvent
+	void initKeyboardEvent() {
+		DKTODO();
+	}
 	
 	
 	////// Obsolete properties //////
 	// [KeyboardEvent.char](Non-standard)(Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/char
+	DKString _char;
 	// [KeyboardEvent.charCode](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/charCode
+	unsigned int charCode;
 	// [KeyboardEvent.keyCode](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode
+	unsigned int keyCode;
 	// [KeyboardEvent.keyIdentifier](Non-standard)(Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyIdentifier
+	DKString keyIdentifier;
 	// [KeyboardEvent.keyLocation](Non-standard)(Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyLocation
+	unsigned int keyLocation;
 	// [KeyboardEvent.which](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/which
+	unsigned int which;
 	
 	
 	////// Events //////

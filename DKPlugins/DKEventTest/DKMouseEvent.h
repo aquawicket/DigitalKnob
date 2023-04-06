@@ -14,10 +14,6 @@ public:
 	DKMouseEvent(DKString _type, DKString _options) : DKUIEvent(_type, _options) {
 		DKINFO("DKMouseEvent("+_type+", "+_options+") \n");
 		
-		////// Static properties //////
-		// WEBKIT_FORCE_AT_MOUSE_DOWN
-		// WEBKIT_FORCE_AT_FORCE_MOUSE_DOWN
-		
 		////// Instance properties //////
 		altKey = false;		
 		button = 0;
