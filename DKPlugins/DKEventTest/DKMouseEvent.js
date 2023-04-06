@@ -7,11 +7,11 @@
 var MouseEvent = function MouseEvent(type, options, address) {
 	console.log("MouseEvent("+type+","+options+","+address+")")
 	
-	if(!address && !this.address)
-		this.address = CPP_DKMouseEvent(type, options);
-	else
+	if(address)
 		this.address = address;
-	
+	else
+		this.address = CPP_DKMouseEvent(type, options);
+		
 	
 	////// Static properties //////
 	// [MouseEvent.WEBKIT_FORCE_AT_MOUSE_DOWN](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/WEBKIT_FORCE_AT_MOUSE_DOWN

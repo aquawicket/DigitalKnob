@@ -8,7 +8,7 @@ bool App::Init() {
 	
 	DKClass::DKCreate("DKEventTarget");															
 	
-	
+	/*
 	////// Event //////
 	DKString thisAddress = DKDuktape::pointerToAddress(this);
 	DKEventTarget::addEventListener<DKEvent>("generic", &App::ongeneric, thisAddress);					
@@ -45,17 +45,6 @@ bool App::Init() {
 	DKEventTarget::addEventListener<DKMouseEvent>("webkitmouseforcedown", 		&App::onwebkitmouseforcedown, 		consoleWindowAddress);
 	DKEventTarget::addEventListener<DKMouseEvent>("webkitmouseforceup",			&App::onwebkitmouseforceup, 		consoleWindowAddress);
 	DKEventTarget::addEventListener<DKMouseEvent>("webkitmouseforcewillbegin",	&App::onwebkitmouseforcewillbegin,	consoleWindowAddress);
-	
-
-	/*
-	//console.log("myConsoleWindow.name="+myConsoleWindow.name)
-	//myConsoleWindow.name = "Test 123"
-	//console.log("myConsoleWindow.name="+myConsoleWindow.name)
-	//myConsoleWindow.fullScreen = true;
-	//myConsoleWindow.fullScreen = false;
-	//myConsoleWindow.blur()
-	//myConsoleWindow.close()
-	//myConsoleWindow.focus()
 	*/
 
 	return true;
