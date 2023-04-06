@@ -283,6 +283,7 @@ function onmousewheel(event){
 	printEventProperties(event)
 	printUIEventProperties(event)
 	printMouseEventProperties(event)
+	printWheelEventProperties(event)
 }
 myConsoleWindow.addEventListener('mousewheel', onmousewheel)
 // [wheel] https://developer.mozilla.org/en-US/docs/Web/API/Element/wheel_event
@@ -291,5 +292,6 @@ function onwheel(event){
 	printEventProperties(event)
 	printUIEventProperties(event)
 	printMouseEventProperties(event)
+	printWheelEventProperties(event)
 }
 myConsoleWindow.addEventListener('wheel', onwheel)
