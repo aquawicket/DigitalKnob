@@ -61,6 +61,14 @@ public:
 	static void printWheelEventProperties(DKWheelEvent* wheelevent);
 	static bool onmousewheel(DKWheelEvent* wheelevent);
 	static bool onwheel(DKWheelEvent* wheelevent);
+	
+	
+	////// FocusEvent //////
+	static void printFocusEventProperties(DKFocusEvent* focusevent);
+	static bool onblur(DKFocusEvent* focusevent);
+	static bool onfocus(DKFocusEvent* focusevent);
+	static bool onfocusin(DKFocusEvent* focusevent);
+	static bool onfocusout(DKFocusEvent* focusevent);
 };
 REGISTER_OBJECT(App, false);
 

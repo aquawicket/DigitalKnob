@@ -30,6 +30,7 @@
 #include "DKEventTest/DKKeyboardEvent.h"
 #include "DKEventTest/DKMouseEvent.h"
 #include "DKEventTest/DKWheelEvent.h"
+#include "DKEventTest/DKFocusEvent.h"
 #include "DKDuktape/DKDuktape.h"
 
 #if !WIN && !EMSCRIPTEN && !ANDROID
@@ -514,27 +515,34 @@ void DKConsoleWindow::ErrorExit(LPCSTR lpszMessage) {
 
 void DKConsoleWindow::FocusEventProc(FOCUS_EVENT_RECORD fer) {
     DKDEBUGFUNC(fer);
-    //DKString address = DKDuktape::pointerToAddress(this);
-
-    //relatedTarget = address;
+    DKString address = DKDuktape::pointerToAddress(this);
+    relatedTarget = address;
 
     if (!fer.bSetFocus) {
         //1. blur: sent after element A loses focus.
-        //code = "dispatchFocusEvent('blur','','" + address + "')";
-        //DKDuktape::RunDuktape(code, rval);
+		DKFocusEvent* blur_event = new DKFocusEvent("blur", "");
+		blur_event->relatedTarget = relatedTarget;
+		DKEventTarget::dispatchEvent(blur_event, address);
+		delete blur_event;
 
         //2. focusout: sent after the blur event.
-        //code = "dispatchFocusEvent('focusout','','" + address + "')";
-        //DKDuktape::RunDuktape(code, rval);
+        DKFocusEvent* focusout_event = new DKFocusEvent("focusout", "");
+		focusout_event->relatedTarget = relatedTarget;
+		DKEventTarget::dispatchEvent(focusout_event, address);
+		delete focusout_event;
     }
     else {
         //3. focus: sent after element B receives focus.
-        //code = "dispatchFocusEvent('focus','','" + address + "')";
-        //DKDuktape::RunDuktape(code, rval);
+        DKFocusEvent* focus_event = new DKFocusEvent("focus", "");
+		focus_event->relatedTarget = relatedTarget;
+		DKEventTarget::dispatchEvent(focus_event, address);
+		delete focus_event;
 
         //4. focusin: sent after the focus event.
-        //code = "dispatchFocusEvent('focusin','','" + address + "')";
-        //DKDuktape::RunDuktape(code, rval);
+        DKFocusEvent* focusin_event = new DKFocusEvent("focusin", "");
+		focusin_event->relatedTarget = relatedTarget;
+		DKEventTarget::dispatchEvent(focusin_event, address);
+		delete focusin_event;
     }
 }
 

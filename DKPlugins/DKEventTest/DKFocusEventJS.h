@@ -66,7 +66,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKFocusEvent* event = (DKFocusEvent*)DKDuktape::addressToPointer(eventAddress);
-		duk_push_boolean(ctx, event->relatedTarget);	
+		duk_push_string(ctx, event->relatedTarget.c_str());	
 		return true;
 	}
 

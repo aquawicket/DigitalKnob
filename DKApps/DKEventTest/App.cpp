@@ -50,6 +50,13 @@ bool App::Init() {
 	DKEventTarget::addEventListener<DKWheelEvent>("mousewheel", &App::onmousewheel,	consoleWindowAddress);
 	DKEventTarget::addEventListener<DKWheelEvent>("wheel", 		&App::onwheel,		consoleWindowAddress);
 	
+	
+	////// FocusEvent //////
+	DKEventTarget::addEventListener<DKFocusEvent>("blur", 		&App::onblur,		consoleWindowAddress);
+	DKEventTarget::addEventListener<DKFocusEvent>("focus", 		&App::onfocus,		consoleWindowAddress);
+	DKEventTarget::addEventListener<DKFocusEvent>("focusin", 	&App::onfocusin,	consoleWindowAddress);
+	DKEventTarget::addEventListener<DKFocusEvent>("focusout", 	&App::onfocusout,	consoleWindowAddress);
+	
 	return true;
 }
 
@@ -394,5 +401,46 @@ bool App::onwheel(DKWheelEvent* wheelevent) {
 	printUIEventProperties(wheelevent);
 	printMouseEventProperties(wheelevent);
 	printWheelEventProperties(wheelevent);
+	return true;
+}
+
+
+////// FocusEvent //////
+void App::printFocusEventProperties(DKFocusEvent* focusevent) {
+	DKDEBUGFUNC(focusevent);
+	
+	////// Instance properties //////
+	DKINFO("focusevent->relatedTarget = "	+toString(focusevent->relatedTarget)	+"\n");
+}
+bool App::onblur(DKFocusEvent* focusevent) {
+	DKDEBUGFUNC(focusevent);
+	DKINFO("onblur() \n");
+	printEventProperties(focusevent);
+	printUIEventProperties(focusevent);
+	printFocusEventProperties(focusevent);
+	return true;
+}
+bool App::onfocus(DKFocusEvent* focusevent) {
+	DKDEBUGFUNC(focusevent);
+	DKINFO("onfocus() \n");
+	printEventProperties(focusevent);
+	printUIEventProperties(focusevent);
+	printFocusEventProperties(focusevent);
+	return true;
+}
+bool App::onfocusin(DKFocusEvent* focusevent) {
+	DKDEBUGFUNC(focusevent);
+	DKINFO("onfocusin() \n");
+	printEventProperties(focusevent);
+	printUIEventProperties(focusevent);
+	printFocusEventProperties(focusevent);
+	return true;
+}
+bool App::onfocusout(DKFocusEvent* focusevent) {
+	DKDEBUGFUNC(focusevent);
+	DKINFO("onfocusout() \n");
+	printEventProperties(focusevent);
+	printUIEventProperties(focusevent);
+	printFocusEventProperties(focusevent);
 	return true;
 }
