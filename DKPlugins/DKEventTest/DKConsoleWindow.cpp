@@ -28,6 +28,7 @@
 #include "DKEventTest/DKConsoleWindow.h"
 #include "DKEventTest/DKEventTarget.h"
 #include "DKEventTest/DKKeyboardEvent.h"
+#include "DKEventTest/DKMouseEvent.h"
 #include "DKDuktape/DKDuktape.h"
 
 #if !WIN && !EMSCRIPTEN && !ANDROID
@@ -622,13 +623,13 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
 		eventB->metaKey = metaKey;
 		eventB->repeat = repeat;
 		eventB->shiftKey = shiftKey;
-		DKEventTarget::dispatchEvent(eventB, address);						// CPP
+		DKEventTarget::dispatchEvent(eventB, address);
 		delete eventB;
     }
     else {
-        //code = "dispatchKeyboardEvent('keyup','','" + address + "')";		// JS
-        //DKDuktape::RunDuktape(code, rval);								// JS
-		DKKeyboardEvent* event = new DKKeyboardEvent("keyup", "");			// CPP
+        //code = "dispatchKeyboardEvent('keyup','','" + address + "')";
+        //DKDuktape::RunDuktape(code, rval);
+		DKKeyboardEvent* event = new DKKeyboardEvent("keyup", "");
 		event->altKey = altKey;
 		event->code = code;
 		event->ctrlKey = ctrlKey;
@@ -639,7 +640,7 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
 		event->metaKey = metaKey;
 		event->repeat = repeat;
 		event->shiftKey = shiftKey;
-		DKEventTarget::dispatchEvent(event, address);						// CPP
+		DKEventTarget::dispatchEvent(event, address);
 		delete event;
     }
 }
@@ -655,7 +656,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 	#ifndef MOUSE_HWHEELED
 		#define MOUSE_HWHEELED 0x0008
 	#endif
-    //DKString address = DKDuktape::pointerToAddress(this);
+    DKString address = DKDuktape::pointerToAddress(this);
     //DKString rval;
     //DKString code;
 
@@ -718,6 +719,11 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                     button = 0;
                     //code = "dispatchMouseEvent('mousedown','','" + address + "')";
                     //DKDuktape::RunDuktape(code, rval);
+					DKMouseEvent* event = new DKMouseEvent("mousedown", "");
+					event->button = button;
+					event->buttons = buttons;
+					DKEventTarget::dispatchEvent(event, address);
+					delete event;
                     break;
                 }
             }

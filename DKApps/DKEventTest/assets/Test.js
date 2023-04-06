@@ -1,8 +1,8 @@
-// Event test
+////// JS Event test //////
 console.log("\n\n ___JS Event Test___\n");
 
 
-// Event
+////// Event ///////
 function printEventProperties(event){
 	console.log("event.bubbles="+event.bubbles)
 	console.log("event.cancelable="+event.cancelable)
@@ -16,8 +16,8 @@ function printEventProperties(event){
 	console.log("event.type="+event.type)
 }
 
-function onGeneric(event){
-	console.log("onGeneric("+event+")")
+function ongeneric(event){
+	console.log("ongeneric("+event+")")
 	printEventProperties(event)
 }
 
@@ -26,9 +26,9 @@ const target = new EventTarget("0x00000000")
 
 // create and dispatch the event
 const event = new Event('generic', '')
-target.addEventListener('generic', onGeneric)
+target.addEventListener('generic', ongeneric)
 target.dispatchEvent(event)
-target.removeEventListener('generic', onGeneric)
+target.removeEventListener('generic', ongeneric)
 target.dispatchEvent(event)
 
 
@@ -38,7 +38,7 @@ console.log("/////////// ConsoleWindow /////////////////////")
 CPP_DK_Create("DKEventTest/DKConsoleWindow.js");
 const myConsoleWindow = new DKConsoleWindow('myConsoleWindow')
 
-// UIEvent
+////// UIEvent //////
 function printUIEventProperties(uievent){
 	console.log("uievent.detail="+uievent.detail)
 	console.log("uievent.sourceCapabilities="+uievent.sourceCapabilities)			
@@ -46,7 +46,7 @@ function printUIEventProperties(uievent){
 	console.log("uievent.which="+uievent.which)
 }
 
-// KeyboardEvent
+////// KeyboardEvent ///////
 function printKeyboardEventProperties(keyevent){
 	console.log("keyevent.altKey="+keyevent.altKey)
 	console.log("keyevent.code="+keyevent.code)			
@@ -60,30 +60,206 @@ function printKeyboardEventProperties(keyevent){
 	console.log("keyevent.shiftKey="+keyevent.shiftKey)
 }
 
-
-function onKeyDown(event){
-	console.log("onKeyDown("+event+")")
+function onkeydown(event){
+	console.log("onkeydown("+event+")")
 	printEventProperties(event)
 	printUIEventProperties(event)
 	printKeyboardEventProperties(event)
 }
-myConsoleWindow.addEventListener('keydown', onKeyDown)
+myConsoleWindow.addEventListener('keydown', onkeydown)
 
-
-function onKeyUp(event){
-	console.log("onKeyUp("+event+")")
+function onkeyup(event){
+	console.log("onkeyup("+event+")")
 	printEventProperties(event)
 	printUIEventProperties(event)
 	printKeyboardEventProperties(event)
 }
-myConsoleWindow.addEventListener('keyup', onKeyUp)
+myConsoleWindow.addEventListener('keyup', onkeyup)
 
-/*
-function onKeyPress(event){
-	console.log("\n onKeyPress()")
+function onkeypress(event){
+	console.log("onkeypress("+event+")")
 	printEventProperties(event)
 	printUIEventProperties(event)
 	printKeyboardEventProperties(event)
 }
-myConsoleWindow.addEventListener('keypress', onKeyPress)
-*/
+myConsoleWindow.addEventListener('keypress', onkeypress)
+
+
+////// MouseEvent //////
+function printMouseEventProperties(mouseevent){
+	
+	////// Static properties //////
+	//console.log("mouseevent.WEBKIT_FORCE_AT_MOUSE_DOWN="+mouseevent.WEBKIT_FORCE_AT_MOUSE_DOWN)
+	//console.log("mouseevent.WEBKIT_FORCE_AT_FORCE_MOUSE_DOWN="+mouseevent.WEBKIT_FORCE_AT_FORCE_MOUSE_DOWN)
+	
+	////// Instance properties //////
+	console.log("mouseevent.altKey="+mouseevent.altKey)
+	console.log("mouseevent.button="+mouseevent.button)
+	console.log("mouseevent.buttons="+mouseevent.buttons)
+	console.log("mouseevent.clientX="+mouseevent.clientX)
+	console.log("mouseevent.clientY="+mouseevent.clientY)
+	console.log("mouseevent.ctrlKey="+mouseevent.ctrlKey)
+	console.log("mouseevent.layerX="+mouseevent.layerX)
+	console.log("mouseevent.layerY="+mouseevent.layerY)
+	console.log("mouseevent.metaKey="+mouseevent.metaKey)
+	console.log("mouseevent.movementX="+mouseevent.movementX)
+	console.log("mouseevent.movementY="+mouseevent.movementY)
+	console.log("mouseevent.offsetX="+mouseevent.offsetX)
+	console.log("mouseevent.offsetY="+mouseevent.offsetY)
+	console.log("mouseevent.pageX="+mouseevent.pageX)
+	console.log("mouseevent.pageY="+mouseevent.pageY)
+	console.log("mouseevent.relatedTarget="+mouseevent.relatedTarget)
+	console.log("mouseevent.screenX="+mouseevent.screenX)
+	console.log("mouseevent.screenY="+mouseevent.screenY)
+	console.log("mouseevent.shiftKey="+mouseevent.shiftKey)
+	console.log("mouseevent.mozPressure="+mouseevent.mozPressure)
+	console.log("mouseevent.mozInputSource="+mouseevent.mozInputSource)
+	console.log("mouseevent.webkitForce="+mouseevent.webkitForce)
+	console.log("mouseevent.x="+mouseevent.x)
+	console.log("mouseevent.y="+mouseevent.y)
+}
+
+////// MouseEvents //////
+// [auxclick] https://developer.mozilla.org/en-US/docs/Web/API/Element/auxclick_event
+function onauxclick(event){
+	console.log("onauxclick("+event+")")
+	printEventProperties(event)
+	printUIEventProperties(event)
+	printMouseEventProperties(event)
+}
+myConsoleWindow.addEventListener('auxclick', onauxclick)
+
+// [click] https://developer.mozilla.org/en-US/docs/Web/API/Element/click_event
+function onclick(event){
+	console.log("onclick("+event+")")
+	printEventProperties(event)
+	printUIEventProperties(event)
+	printMouseEventProperties(event)
+}
+myConsoleWindow.addEventListener('click', onclick)
+
+// [contextmenu] https://developer.mozilla.org/en-US/docs/Web/API/Element/contextmenu_event
+function oncontextmenu(event){
+	console.log("oncontextmenu("+event+")")
+	printEventProperties(event)
+	printUIEventProperties(event)
+	printMouseEventProperties(event)
+}
+myConsoleWindow.addEventListener('contextmenu', oncontextmenu)
+
+// [dblclick] https://developer.mozilla.org/en-US/docs/Web/API/Element/dblclick_event
+function ondblclick(event){
+	console.log("ondblclick("+event+")")
+	printEventProperties(event)
+	printUIEventProperties(event)
+	printMouseEventProperties(event)
+}
+myConsoleWindow.addEventListener('dblclick', ondblclick)
+
+// [DOMActivate](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Element/DOMActivate_event
+function onDOMActivate(event){
+	console.log("onDOMActivate("+event+")")
+	printEventProperties(event)
+	printUIEventProperties(event)
+	printMouseEventProperties(event)
+}
+myConsoleWindow.addEventListener('DOMActivate', onDOMActivate)
+
+// [mousedown] https://developer.mozilla.org/en-US/docs/Web/API/Element/mousedown_event
+function onmousedown(event){
+	console.log("onmousedown("+event+")")
+	printEventProperties(event)
+	printUIEventProperties(event)
+	printMouseEventProperties(event)
+}
+myConsoleWindow.addEventListener('mousedown', onmousedown)
+
+// [mouseenter] https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseenter_event
+function onmouseenter(event){
+	console.log("onmouseenter("+event+")")
+	printEventProperties(event)
+	printUIEventProperties(event)
+	printMouseEventProperties(event)
+}
+myConsoleWindow.addEventListener('mouseenter', onmouseenter)
+
+// [mouseleave] https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseleave_event
+function onmouseleave(event){
+	console.log("onmouseleave("+event+")")
+	printEventProperties(event)
+	printUIEventProperties(event)
+	printMouseEventProperties(event)
+}
+myConsoleWindow.addEventListener('mouseleave', onmouseleave)
+
+// [mousemove] https://developer.mozilla.org/en-US/docs/Web/API/Element/mousemove_event
+function onmousemove(event){
+	console.log("onmousemove("+event+")")
+	printEventProperties(event)
+	printUIEventProperties(event)
+	printMouseEventProperties(event)
+}
+myConsoleWindow.addEventListener('mousemove', onmousemove)
+
+// [mouseout] https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseout_event
+function onmouseout(event){
+	console.log("onmouseout("+event+")")
+	printEventProperties(event)
+	printUIEventProperties(event)
+	printMouseEventProperties(event)
+}
+myConsoleWindow.addEventListener('mouseout', onmouseout)
+
+// [mouseover] https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseover_event
+function onmouseover(event){
+	console.log("onmouseover("+event+")")
+	printEventProperties(event)
+	printUIEventProperties(event)
+	printMouseEventProperties(event)
+}
+myConsoleWindow.addEventListener('mouseover', onmouseover)
+
+// [mouseup] https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseup_event
+function onmouseup(event){
+	console.log("onmouseup("+event+")")
+	printEventProperties(event)
+	printUIEventProperties(event)
+	printMouseEventProperties(event)
+}
+myConsoleWindow.addEventListener('mouseup', onmouseup)
+
+// [webkitmouseforcechanged](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Element/webkitmouseforcechanged_event
+function onwebkitmouseforcechanged(event){
+	console.log("onwebkitmouseforcechanged("+event+")")
+	printEventProperties(event)
+	printUIEventProperties(event)
+	printMouseEventProperties(event)
+}
+myConsoleWindow.addEventListener('webkitmouseforcechanged', onwebkitmouseforcechanged)
+
+// [webkitmouseforcedown](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Element/webkitmouseforcedown_event
+function onwebkitmouseforcedown(event){
+	console.log("onwebkitmouseforcedown("+event+")")
+	printEventProperties(event)
+	printUIEventProperties(event)
+	printMouseEventProperties(event)
+}
+myConsoleWindow.addEventListener('webkitmouseforcedown', onwebkitmouseforcedown)
+
+// [webkitmouseforceup](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Element/webkitmouseforceup_event
+function onwebkitmouseforceup(event){
+	console.log("onwebkitmouseforceup("+event+")")
+	printEventProperties(event)
+	printUIEventProperties(event)
+	printMouseEventProperties(event)
+}
+myConsoleWindow.addEventListener('webkitmouseforceup', onwebkitmouseforceup)
+
+// [webkitmouseforcewillbegin](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Element/webkitmouseforcewillbegin_event
+function onwebkitmouseforcewillbegin(event){
+	console.log("onwebkitmouseforcewillbegin("+event+")")
+	printEventProperties(event)
+	printUIEventProperties(event)
+	printMouseEventProperties(event)
+}
+myConsoleWindow.addEventListener('webkitmouseforcewillbegin', onwebkitmouseforcewillbegin)

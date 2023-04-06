@@ -8,20 +8,22 @@ bool App::Init() {
 	
 	DKClass::DKCreate("DKEventTarget");															
 	
-	//////////// GENERIC EVENT
-	DKString address = DKDuktape::pointerToAddress(this);
-	DKEventTarget::addEventListener<DKEvent>("generic", &App::onGeneric, address);					
+	////// Event //////
+	DKString thisAddress = DKDuktape::pointerToAddress(this);
+	DKEventTarget::addEventListener<DKEvent>("generic", &App::ongeneric, thisAddress);					
 	DKEvent* event = new DKEvent("generic", "");												
-	DKEventTarget::dispatchEvent(event, address);													
-	DKEventTarget::removeEventListener<DKEvent>("generic", &App::onGeneric, address);	
-	DKEventTarget::dispatchEvent(event, address);
+	DKEventTarget::dispatchEvent(event, thisAddress);													
+	DKEventTarget::removeEventListener<DKEvent>("generic", &App::ongeneric, thisAddress);	
+	DKEventTarget::dispatchEvent(event, thisAddress);
 	
 	DKINFO("/////////// ConsoleWindow ///////////////////// \n");
 	DKObject* myConsoleWindow = DKClass::DKCreate("DKConsoleWindow");
-	DKString addressB = DKDuktape::pointerToAddress(myConsoleWindow);	
-	DKEventTarget::addEventListener<DKKeyboardEvent>("keydown", &App::onKeyDown, addressB);
+	DKString consoleWindowAddress = DKDuktape::pointerToAddress(myConsoleWindow);
 	
-	//DKEventTarget::addEventListener<DKKeyboardEvent>("keyup", &App::onKeyUp, myConsoleWindow);
+	////// KeyboardEvent ///////
+	DKEventTarget::addEventListener<DKKeyboardEvent>("keydown", &App::onkeydown, consoleWindowAddress);
+	DKEventTarget::addEventListener<DKKeyboardEvent>("keyup", &App::onkeyup, consoleWindowAddress);
+	DKEventTarget::addEventListener<DKKeyboardEvent>("keyup", &App::onkeypress, consoleWindowAddress);
 
 	/*
 	//console.log("myConsoleWindow.name="+myConsoleWindow.name)
@@ -43,6 +45,8 @@ bool App::End(){
 	return true;
 }
 
+
+////// Event //////
 void App::printEventProperties(DKEvent* event) {
 	DKDEBUGFUNC(event);
 	DKINFO("event->bubbles="+toString(event->bubbles)+"\n");
@@ -57,6 +61,15 @@ void App::printEventProperties(DKEvent* event) {
 	DKINFO("event->type="+event->type+"\n");
 }
 
+bool App::ongeneric(DKEvent* event) {
+	DKDEBUGFUNC(event);
+	DKINFO("ongeneric() \n");
+	printEventProperties(event);
+	return true;
+}
+
+
+////// UIEvent //////
 void App::printUIEventProperties(DKUIEvent* uievent) {
 	DKDEBUGFUNC(uievent);
 	DKINFO("uievent->detail="+toString(uievent->detail)+"\n");
@@ -65,6 +78,8 @@ void App::printUIEventProperties(DKUIEvent* uievent) {
 	DKINFO("uievent->which="+toString(uievent->which)+"\n");
 }
 
+
+////// KeyboardEvent //////
 void App::printKeyboardEventProperties(DKKeyboardEvent* keyevent) {
 	DKDEBUGFUNC(keyevent);
 	DKINFO("keyevent->altKey="+toString(keyevent->altKey)+"\n");
@@ -79,16 +94,9 @@ void App::printKeyboardEventProperties(DKKeyboardEvent* keyevent) {
 	DKINFO("keyevent->shiftKey="+toString(keyevent->shiftKey)+"\n");
 }
 
-bool App::onGeneric(DKEvent* event) {
-	DKDEBUGFUNC(event);
-	DKINFO("onGeneric() \n");
-	printEventProperties(event);
-	return true;
-}
-
-bool App::onKeyDown(DKKeyboardEvent* keyevent) {
+bool App::onkeydown(DKKeyboardEvent* keyevent) {
 	DKDEBUGFUNC(keyevent);
-	DKINFO("onKeyDown() \n");
+	DKINFO("onkeydown() \n");
 	printEventProperties(keyevent);
 	printUIEventProperties(keyevent);
 	printKeyboardEventProperties(keyevent);
@@ -97,9 +105,25 @@ bool App::onKeyDown(DKKeyboardEvent* keyevent) {
 
 bool App::onKeyUp(DKKeyboardEvent* keyevent) {
 	DKDEBUGFUNC(keyevent);
-	DKINFO("onKeyUp() \n");
+	DKINFO("onkeyup() \n");
 	printEventProperties(keyevent);
 	printUIEventProperties(keyevent);
 	printKeyboardEventProperties(keyevent);
 	return true;
+}
+
+bool App::onkeypress(DKKeyboardEvent* keyevent) {
+	DKDEBUGFUNC(keyevent);
+	DKINFO("onkeypress() \n");
+	printEventProperties(keyevent);
+	printUIEventProperties(keyevent);
+	printKeyboardEventProperties(keyevent);
+	return true;
+}
+
+
+////// MouseEvent //////
+void App::printMouseEventProperties(DKMouseEvent* mouseevent) {
+	DKDEBUGFUNC(mouseevent);
+	DKTODO();
 }
