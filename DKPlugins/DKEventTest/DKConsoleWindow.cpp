@@ -848,13 +848,14 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                 break;
             }
 			break;
-		case DOUBLE_CLICK:
+		case DOUBLE_CLICK: {
 			DKMouseEvent* dblclick_event = new DKMouseEvent("dblclick", "");
 			dblclick_event->button = button;
 			dblclick_event->buttons = buttons;
 			DKEventTarget::dispatchEvent(dblclick_event, address);
 			delete dblclick_event;
 			break;
+		}
 		case MOUSE_HWHEELED: //horizontal mouse wheel
             button = 0;
             if ((int32_t)mer.dwButtonState > 0)
@@ -873,7 +874,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
             //code = "dispatchWheelEvent('wheel','','" + address + "')";
             //DKDuktape::RunDuktape(code, rval);
 			break;
-        case MOUSE_MOVED:
+        case MOUSE_MOVED: {
             //// Cursor Position ////
             // colume = mer.dwMousePosition.X;
             // row = mer.dwMousePosition.Y;
@@ -913,6 +914,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 			delete mousemove_event;
 				
             break;
+		}
 		default:
 			DKERROR("unknown event! \n");
 			break;
