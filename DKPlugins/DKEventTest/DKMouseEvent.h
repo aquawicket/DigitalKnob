@@ -104,7 +104,7 @@ public:
 	}
 	// [MouseEvent.initMouseEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/initMouseEvent
 	void initMouseEvent() {
-		DKTODO();
+		DKDEPRECATED();
 	}
 	
 	

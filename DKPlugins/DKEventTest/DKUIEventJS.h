@@ -12,18 +12,18 @@ public:
 	bool Init(){
 		
 		////// Constructor //////
-		DKDuktape::AttachFunction("CPP_DKUIEvent", DKUIEventJS::constructor);
+		DKDuktape::AttachFunction("CPP_DKUIEvent", 						DKUIEventJS::constructor);
 	
 	
 		////// Instance properties //////
-		DKDuktape::AttachFunction("CPP_DKUIEvent_detail", DKUIEventJS::detail);
-		DKDuktape::AttachFunction("CPP_DKUIEvent_sourceCapabilities", DKUIEventJS::sourceCapabilities);
-		DKDuktape::AttachFunction("CPP_DKUIEvent_view", DKUIEventJS::view);
-		DKDuktape::AttachFunction("CPP_DKUIEvent_which", DKUIEventJS::which);
+		DKDuktape::AttachFunction("CPP_DKUIEvent_detail", 				DKUIEventJS::detail);
+		DKDuktape::AttachFunction("CPP_DKUIEvent_sourceCapabilities", 	DKUIEventJS::sourceCapabilities);
+		DKDuktape::AttachFunction("CPP_DKUIEvent_view", 				DKUIEventJS::view);
+		DKDuktape::AttachFunction("CPP_DKUIEvent_which", 				DKUIEventJS::which);
 
 		
 		////// Instance methods //////
-		DKDuktape::AttachFunction("CPP_DKUIEvent_initUIEvent", DKUIEventJS::initUIEvent);
+		DKDuktape::AttachFunction("CPP_DKUIEvent_initUIEvent", 			DKUIEventJS::initUIEvent);
 		
 		
 		////// Load .js files
@@ -34,6 +34,7 @@ public:
 	
 	
 	////// Constructor //////
+	// [UIEvent()] https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/UIEvent
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
@@ -47,6 +48,7 @@ public:
 	
 	
 	////// Instance properties //////
+	// [UIEvent.detail](Read only) https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/detail
 	static int detail(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
@@ -54,41 +56,28 @@ public:
 		duk_push_uint(ctx, event->detail);	
 		return true;
 	}
+	// [UIEvent.sourceCapabilities](Experimental)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/sourceCapabilities
 	static int sourceCapabilities(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		/*
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKUIEvent* event = (DKUIEvent*)DKDuktape::addressToPointer(eventAddress);
-		duk_push_???(ctx, event->sourceCapabilities.c_str());	
-		*/
 		return DKTODO();
 	}
+	// [UIEvent.view](Read only) https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/view
 	static int view(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		/*
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKUIEvent* event = (DKUIEvent*)DKDuktape::addressToPointer(eventAddress);
-		duk_push_???(ctx, event->view);
-		*/
 		return DKTODO();
 	}
+	// [UIEvent.which](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/which
 	static int which(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKUIEvent* event = (DKUIEvent*)DKDuktape::addressToPointer(eventAddress);
 		duk_push_uint(ctx, event->which);	
-		return true;
+		return DKDEPRECATED();
 	}
 	
 	
 	////// Instance methods //////
+	// [UIEvent.initUIEvent()](Deprecated)
 	static int initUIEvent(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		/*
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKUIEvent* event = (DKUIEvent*)DKDuktape::addressToPointer(eventAddress);
-		*/
-		return DKTODO();
+		return DKDEPRECATED();
 	}	
 	
 };

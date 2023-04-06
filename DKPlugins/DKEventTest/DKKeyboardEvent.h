@@ -77,11 +77,11 @@ public:
 	////// Obsolete methods //////
 	// [KeyboardEvent.initKeyEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/initKeyEvent
 	void initKeyEvent() {
-		DKTODO();
+		DKDEPRECATED();
 	}
 	// [KeyboardEvent.initKeyboardEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/initKeyboardEvent
 	void initKeyboardEvent() {
-		DKTODO();
+		DKDEPRECATED();
 	}
 	
 	

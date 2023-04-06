@@ -26,8 +26,8 @@ public:
 	
 	
 		////// Instance properties //////
-		DKDuktape::AttachFunction("CPP_DKMouseEvent_altKey", 		DKMouseEventJS::altKey); 			// [MouseEvent.altKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/altKey
-		DKDuktape::AttachFunction("CPP_DKMouseEvent_button", 		DKMouseEventJS::button); 			// [MouseEvent.button](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button
+		DKDuktape::AttachFunction("CPP_DKMouseEvent_altKey", 		DKMouseEventJS::altKey); 			// [MouseEvent.altKey](Read only)
+		DKDuktape::AttachFunction("CPP_DKMouseEvent_button", 		DKMouseEventJS::button); 			// [MouseEvent.button](Read only)
 		DKDuktape::AttachFunction("CPP_DKMouseEvent_buttons",		DKMouseEventJS::buttons); 			// [MouseEvent.buttons](Read only)
 		DKDuktape::AttachFunction("CPP_DKMouseEvent_clientX", 		DKMouseEventJS::clientX); 			// [MouseEvent.clientX](Read only)
 		DKDuktape::AttachFunction("CPP_DKMouseEvent_clientY", 		DKMouseEventJS::clientY); 			// [MouseEvent.clientY](Read only)
@@ -288,7 +288,7 @@ public:
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKMouseEvent* event = (DKMouseEvent*)DKDuktape::addressToPointer(eventAddress);
 		duk_push_number(ctx, event->mozPressure);	
-		return true;
+		return DKDEPRECATED();
 	}
 	// [MouseEvent.mozInputSource](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/mozInputSource
 	static int mozInputSource(duk_context* ctx){
@@ -327,22 +327,13 @@ public:
 	////// Instance methods //////
 	// [MouseEvent.getModifierState()] https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/getModifierState
 	static int getModifierState(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		/*
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKMouseEvent* event = (DKMouseEvent*)DKDuktape::addressToPointer(eventAddress);
-		*/
 		return DKTODO();
 	}
 	// [MouseEvent.initMouseEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/initMouseEvent
 	static int initMouseEvent(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		/*
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKMouseEvent* event = (DKMouseEvent*)DKDuktape::addressToPointer(eventAddress);
-		*/
-		return DKTODO();
+		return DKDEPRECATED();
 	}
+
 
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

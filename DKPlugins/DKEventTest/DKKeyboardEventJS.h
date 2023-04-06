@@ -91,6 +91,7 @@ public:
 	
 	
 	////// Constructor //////
+	// [KeyboardEvent()] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/KeyboardEvent
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
@@ -104,6 +105,7 @@ public:
 	
 	
 	////// Instance properties //////
+	// [KeyboardEvent.altKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/altKey
 	static int altKey(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
@@ -111,6 +113,7 @@ public:
 		duk_push_boolean(ctx, event->altKey);	
 		return true;
 	}
+	// [KeyboardEvent.code](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code
 	static int code(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
@@ -118,6 +121,7 @@ public:
 		duk_push_string(ctx, event->code.c_str());	
 		return true;
 	}
+	// [KeyboardEvent.ctrlKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/ctrlKey
 	static int ctrlKey(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
@@ -125,6 +129,7 @@ public:
 		duk_push_boolean(ctx, event->ctrlKey);	
 		return true;
 	}
+	// [KeyboardEvent.isComposing](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/isComposing
 	static int isComposing(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
@@ -132,6 +137,7 @@ public:
 		duk_push_boolean(ctx, event->isComposing);	
 		return true;
 	}
+	// [KeyboardEvent.key](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key
 	static int key(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
@@ -139,6 +145,7 @@ public:
 		duk_push_string(ctx, event->key.c_str());	
 		return true;
 	}
+	// [KeyboardEvent.locale](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/locale
 	static int locale(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
@@ -146,6 +153,7 @@ public:
 		duk_push_string(ctx, event->locale.c_str());	
 		return true;
 	}
+	// [KeyboardEvent.location](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/location
 	static int location(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
@@ -153,6 +161,7 @@ public:
 		duk_push_int(ctx, event->location);	
 		return true;
 	}
+	// [KeyboardEvent.metaKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/metaKey
 	static int metaKey(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
@@ -160,6 +169,7 @@ public:
 		duk_push_boolean(ctx, event->metaKey);	
 		return true;
 	}
+	// [KeyboardEvent.repeat](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/repeat
 	static int repeat(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
@@ -167,6 +177,7 @@ public:
 		duk_push_boolean(ctx, event->repeat);	
 		return true;
 	}
+	// [KeyboardEvent.shiftKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/shiftKey
 	static int shiftKey(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
@@ -177,8 +188,8 @@ public:
 	
 	
 	////// Instance methods //////
+	// [KeyboardEvent.getModifierState()] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/getModifierState
 	static int getModifierState(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
 		return DKTODO();
 	}
 
@@ -186,13 +197,11 @@ public:
 	////// Obsolete methods //////
 	// [KeyboardEvent.initKeyEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/initKeyEvent
 	static int initKeyEvent(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		return DKTODO();
+		return DKDEPRECATED();
 	}
 	// [KeyboardEvent.initKeyboardEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/initKeyboardEvent
 	static int initKeyboardEvent(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		return DKTODO();
+		return DKDEPRECATED();
 	}
 	
 	
@@ -203,7 +212,7 @@ public:
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKKeyboardEvent* event = (DKKeyboardEvent*)DKDuktape::addressToPointer(eventAddress);
 		duk_push_string(ctx, event->_char.c_str());	
-		return true;
+		return DKDEPRECATED();
 	}
 	// [KeyboardEvent.charCode](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/charCode
 	static int charCode(duk_context* ctx){
@@ -211,7 +220,7 @@ public:
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKKeyboardEvent* event = (DKKeyboardEvent*)DKDuktape::addressToPointer(eventAddress);
 		duk_push_uint(ctx, event->charCode);	
-		return true;
+		return DKDEPRECATED();
 	}
 	// [KeyboardEvent.keyCode](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode
 	static int keyCode(duk_context* ctx){
@@ -219,7 +228,7 @@ public:
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKKeyboardEvent* event = (DKKeyboardEvent*)DKDuktape::addressToPointer(eventAddress);
 		duk_push_uint(ctx, event->keyCode);	
-		return true;
+		return DKDEPRECATED();
 	}
 	// [KeyboardEvent.keyIdentifier](Non-standard)(Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyIdentifier
 	static int keyIdentifier(duk_context* ctx){
@@ -227,7 +236,7 @@ public:
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKKeyboardEvent* event = (DKKeyboardEvent*)DKDuktape::addressToPointer(eventAddress);
 		duk_push_string(ctx, event->keyIdentifier.c_str());	
-		return true;
+		return DKDEPRECATED();
 	}
 	// [KeyboardEvent.keyLocation](Non-standard)(Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyLocation
 	static int keyLocation(duk_context* ctx){
@@ -235,7 +244,7 @@ public:
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKKeyboardEvent* event = (DKKeyboardEvent*)DKDuktape::addressToPointer(eventAddress);
 		duk_push_uint(ctx, event->keyLocation);	
-		return true;
+		return DKDEPRECATED();
 	}
 	// [KeyboardEvent.which](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/which
 	static int which(duk_context* ctx){
@@ -243,7 +252,7 @@ public:
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKKeyboardEvent* event = (DKKeyboardEvent*)DKDuktape::addressToPointer(eventAddress);
 		duk_push_uint(ctx, event->which);	
-		return true;
+		return DKDEPRECATED();
 	}
 
 

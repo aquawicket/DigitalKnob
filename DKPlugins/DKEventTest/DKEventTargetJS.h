@@ -17,9 +17,9 @@ public:
 		
 		
 		////// Instance methods //////
-		DKDuktape::AttachFunction("CPP_DKEventTarget_addEventListener", DKEventTargetJS::addEventListener);
-		DKDuktape::AttachFunction("CPP_DKEventTarget_removeEventListener", DKEventTargetJS::removeEventListener);
-		DKDuktape::AttachFunction("CPP_DKEventTarget_dispatchEvent", DKEventTargetJS::dispatchEvent);
+		DKDuktape::AttachFunction("CPP_DKEventTarget_addEventListener", 	DKEventTargetJS::addEventListener);
+		DKDuktape::AttachFunction("CPP_DKEventTarget_removeEventListener", 	DKEventTargetJS::removeEventListener);
+		DKDuktape::AttachFunction("CPP_DKEventTarget_dispatchEvent", 		DKEventTargetJS::dispatchEvent);
 		
 		
 		////// Load .js files
@@ -37,6 +37,7 @@ public:
 	
 	
 	////// Instance methods //////
+	// [EventTarget.addEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
 	static int addEventListener(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString targetAddress = duk_require_string(ctx, 0);
@@ -55,6 +56,7 @@ public:
 		
 		return true;
 	}
+	// [EventTarget.removeEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener
 	static int removeEventListener(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString targetAddress = duk_require_string(ctx, 0);
@@ -73,6 +75,7 @@ public:
 
 		return true;
 	}
+	// [EventTarget.dispatchEvent()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent
 	static int dispatchEvent(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString targetAddress = duk_require_string(ctx, 0);

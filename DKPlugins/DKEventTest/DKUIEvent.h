@@ -12,6 +12,8 @@ public:
 	////// Constructor //////
 	// [UIEvent()] https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/UIEvent
 	DKUIEvent(DKString _type, DKString _options) : DKEvent(_type, _options) {
+		
+		////// Instance properties //////
 		detail = 0;
 		sourceCapabilities = "";
 		view = "";
@@ -33,7 +35,7 @@ public:
 	////// Instance methods //////
 	// [UIEvent.initUIEvent()](Deprecated)
 	void initUIEvent(){
-		DKTODO();
+		DKDEPRECATED();
 	}
 	
 	

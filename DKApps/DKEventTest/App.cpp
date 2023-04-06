@@ -8,7 +8,7 @@ bool App::Init() {
 	
 	DKClass::DKCreate("DKEventTarget");															
 	
-	/*
+	
 	////// Event //////
 	DKString thisAddress = DKDuktape::pointerToAddress(this);
 	DKEventTarget::addEventListener<DKEvent>("generic", &App::ongeneric, thisAddress);					
@@ -45,7 +45,6 @@ bool App::Init() {
 	DKEventTarget::addEventListener<DKMouseEvent>("webkitmouseforcedown", 		&App::onwebkitmouseforcedown, 		consoleWindowAddress);
 	DKEventTarget::addEventListener<DKMouseEvent>("webkitmouseforceup",			&App::onwebkitmouseforceup, 		consoleWindowAddress);
 	DKEventTarget::addEventListener<DKMouseEvent>("webkitmouseforcewillbegin",	&App::onwebkitmouseforcewillbegin,	consoleWindowAddress);
-	*/
 
 	return true;
 }
@@ -62,23 +61,23 @@ void App::printEventProperties(DKEvent* event) {
 	DKDEBUGFUNC(event);
 	
 	////// Instance properties //////
-	DKINFO("event->bubbles="			+toString(event->bubbles)			+"\n");
-	DKINFO("event->cancelable="			+toString(event->cancelable)		+"\n");
-	DKINFO("event->composed="			+toString(event->composed)			+"\n");
-	DKINFO("event->currentTarget="		+toString(event->currentTarget)		+"\n");
-	DKINFO("event->defaultPrevented="	+toString(event->defaultPrevented)	+"\n");
-	DKINFO("event->eventPhase="			+toString(event->eventPhase)		+"\n");
-	DKINFO("event->isTrusted="			+toString(event->isTrusted)			+"\n");
-	DKINFO("event->target="				+toString(event->target)			+"\n");
-	DKINFO("event->timeStamp="			+toString(event->timeStamp)			+"\n");
-	DKINFO("event->type="				+toString(event->type)				+"\n");
+	DKINFO("event->bubbles = "					+toString(event->bubbles)				+"\n");
+	DKINFO("event->cancelable = "				+toString(event->cancelable)			+"\n");
+	DKINFO("event->composed = "					+toString(event->composed)				+"\n");
+	DKINFO("event->currentTarget = "			+toString(event->currentTarget)			+"\n");
+	DKINFO("event->defaultPrevented = "			+toString(event->defaultPrevented)		+"\n");
+	DKINFO("event->eventPhase = "				+toString(event->eventPhase)			+"\n");
+	DKINFO("event->isTrusted = "				+toString(event->isTrusted)				+"\n");
+	DKINFO("event->target = "					+toString(event->target)				+"\n");
+	DKINFO("event->timeStamp = "				+toString(event->timeStamp)				+"\n");
+	DKINFO("event->type = "						+toString(event->type)					+"\n");
 	
 	////// Legacy and non-standard properties //////
-	DKINFO("event->cancelBubble="			+toString(event->cancelBubble)			+"\n");
-	DKINFO("event->explicitOriginalTarget="	+toString(event->explicitOriginalTarget)+"\n");
-	DKINFO("event->originalTarget="			+toString(event->originalTarget)		+"\n");
-	DKINFO("event->returnValue="			+toString(event->returnValue)			+"\n");
-	DKINFO("event->scoped="					+toString(event->scoped)				+"\n");
+	DKINFO("event->cancelBubble = "				+toString(event->cancelBubble)			+"\n");
+	DKINFO("event->explicitOriginalTarget = "	+toString(event->explicitOriginalTarget)+"\n");
+	DKINFO("event->originalTarget = "			+toString(event->originalTarget)		+"\n");
+	DKINFO("event->returnValue = "				+toString(event->returnValue)			+"\n");
+	DKINFO("event->scoped = "					+toString(event->scoped)				+"\n");
 }
 bool App::ongeneric(DKEvent* event) {
 	DKDEBUGFUNC(event);
@@ -139,26 +138,38 @@ bool App::onscrollend(DKEvent* event) {
 ////// UIEvent //////
 void App::printUIEventProperties(DKUIEvent* uievent) {
 	DKDEBUGFUNC(uievent);
-	DKINFO("uievent->detail="				+toString(uievent->detail)				+"\n");
-	DKINFO("uievent->sourceCapabilities="	+toString(uievent->sourceCapabilities)	+"\n");
-	DKINFO("uievent->view="					+toString(uievent->view)				+"\n");
-	DKINFO("uievent->which="				+toString(uievent->which)				+"\n");
+	
+	////// Instance properties //////
+	DKINFO("uievent->detail = "				+toString(uievent->detail)				+"\n");
+	DKINFO("uievent->sourceCapabilities = "	+toString(uievent->sourceCapabilities)	+"\n");
+	DKINFO("uievent->view = "				+toString(uievent->view)				+"\n");
+	DKINFO("uievent->which = "				+toString(uievent->which)				+"\n");
 }
 
 
 ////// KeyboardEvent //////
 void App::printKeyboardEventProperties(DKKeyboardEvent* keyboardevent) {
 	DKDEBUGFUNC(keyboardevent);
-	DKINFO("keyboardevent->altKey="		+toString(keyboardevent->altKey)		+"\n");
-	DKINFO("keyboardevent->code="		+toString(keyboardevent->code)			+"\n");
-	DKINFO("keyboardevent->ctrlKey="	+toString(keyboardevent->ctrlKey)		+"\n");
-	DKINFO("keyboardevent->isComposing="+toString(keyboardevent->isComposing)	+"\n");
-	DKINFO("keyboardevent->key="		+toString(keyboardevent->key)			+"\n");
-	DKINFO("keyboardevent->locale="		+toString(keyboardevent->locale)		+"\n");
-	DKINFO("keyboardevent->location="	+toString(keyboardevent->location)		+"\n");
-	DKINFO("keyboardevent->metaKey="	+toString(keyboardevent->metaKey)		+"\n");
-	DKINFO("keyboardevent->repeat="		+toString(keyboardevent->repeat)		+"\n");
-	DKINFO("keyboardevent->shiftKey="	+toString(keyboardevent->shiftKey)		+"\n");
+	
+	////// Instance properties //////
+	DKINFO("keyboardevent->altKey = "		+toString(keyboardevent->altKey)		+"\n");
+	DKINFO("keyboardevent->code = "			+toString(keyboardevent->code)			+"\n");
+	DKINFO("keyboardevent->ctrlKey = "		+toString(keyboardevent->ctrlKey)		+"\n");
+	DKINFO("keyboardevent->isComposing = "	+toString(keyboardevent->isComposing)	+"\n");
+	DKINFO("keyboardevent->key = "			+toString(keyboardevent->key)			+"\n");
+	DKINFO("keyboardevent->locale = "		+toString(keyboardevent->locale)		+"\n");
+	DKINFO("keyboardevent->location = "		+toString(keyboardevent->location)		+"\n");
+	DKINFO("keyboardevent->metaKey = "		+toString(keyboardevent->metaKey)		+"\n");
+	DKINFO("keyboardevent->repeat = "		+toString(keyboardevent->repeat)		+"\n");
+	DKINFO("keyboardevent->shiftKey = "		+toString(keyboardevent->shiftKey)		+"\n");
+	
+	////// Obsolete properties //////
+	DKINFO("keyboardevent->char = "			+toString(keyboardevent->_char)			+"\n");
+	DKINFO("keyboardevent->charCode = "		+toString(keyboardevent->charCode)		+"\n");
+	DKINFO("keyboardevent->keyCode = "		+toString(keyboardevent->keyCode)		+"\n");
+	DKINFO("keyboardevent->keyIdentifier = "+toString(keyboardevent->keyIdentifier)	+"\n");
+	DKINFO("keyboardevent->keyLocation = "	+toString(keyboardevent->keyLocation)	+"\n");
+	DKINFO("keyboardevent->which = "		+toString(keyboardevent->which)			+"\n");
 }
 bool App::onkeydown(DKKeyboardEvent* keyboardevent) {
 	DKDEBUGFUNC(keyboardevent);
@@ -191,34 +202,34 @@ void App::printMouseEventProperties(DKMouseEvent* mouseevent) {
 	DKDEBUGFUNC(mouseevent);
 	
 	////// Static properties //////
-	//DKINFO("mouseevent->WEBKIT_FORCE_AT_MOUSE_DOWN="+toString(mouseevent->WEBKIT_FORCE_AT_MOUSE_DOWN)+"\n");
-	//DKINFO("mouseevent->WEBKIT_FORCE_AT_FORCE_MOUSE_DOWN="+toString(mouseevent->WEBKIT_FORCE_AT_FORCE_MOUSE_DOWN)+"\n");
+	//DKINFO("mouseevent->WEBKIT_FORCE_AT_MOUSE_DOWN = "		+toString(mouseevent->WEBKIT_FORCE_AT_MOUSE_DOWN)+"\n");
+	//DKINFO("mouseevent->WEBKIT_FORCE_AT_FORCE_MOUSE_DOWN = "	+toString(mouseevent->WEBKIT_FORCE_AT_FORCE_MOUSE_DOWN)+"\n");
 	
 	////// Instance properties //////
-	DKINFO("mouseevent->altKey="		+toString(mouseevent->altKey)			+"\n");
-	DKINFO("mouseevent->button="		+toString(mouseevent->button)			+"\n");
-	DKINFO("mouseevent->buttons="		+toString(mouseevent->buttons)			+"\n");
-	DKINFO("mouseevent->clientX="		+toString(mouseevent->clientX)			+"\n");
-	DKINFO("mouseevent->clientY="		+toString(mouseevent->clientY)			+"\n");
-	DKINFO("mouseevent->ctrlKey="		+toString(mouseevent->ctrlKey)			+"\n");
-	DKINFO("mouseevent->layerX="		+toString(mouseevent->layerX)			+"\n");
-	DKINFO("mouseevent->layerY="		+toString(mouseevent->layerY)			+"\n");
-	DKINFO("mouseevent->metaKey="		+toString(mouseevent->metaKey)			+"\n");
-	DKINFO("mouseevent->movementX="		+toString(mouseevent->movementX)		+"\n");
-	DKINFO("mouseevent->movementY="		+toString(mouseevent->movementY)		+"\n");
-	DKINFO("mouseevent->offsetX="		+toString(mouseevent->offsetX)			+"\n");
-	DKINFO("mouseevent->offsetY="		+toString(mouseevent->offsetY)			+"\n");
-	DKINFO("mouseevent->pageX="			+toString(mouseevent->pageX)			+"\n");
-	DKINFO("mouseevent->pageY="			+toString(mouseevent->pageY)			+"\n");
-	DKINFO("mouseevent->relatedTarget="	+toString(mouseevent->relatedTarget)	+"\n");
-	DKINFO("mouseevent->screenX="		+toString(mouseevent->screenX)			+"\n");
-	DKINFO("mouseevent->screenY="		+toString(mouseevent->screenY)			+"\n");
-	DKINFO("mouseevent->shiftKey="		+toString(mouseevent->shiftKey)			+"\n");
-	DKINFO("mouseevent->mozPressure="	+toString(mouseevent->mozPressure)		+"\n");
-	DKINFO("mouseevent->mozInputSource="+toString(mouseevent->mozInputSource)	+"\n");
-	DKINFO("mouseevent->webkitForce="	+toString(mouseevent->webkitForce)		+"\n");
-	DKINFO("mouseevent->x="				+toString(mouseevent->x)				+"\n");
-	DKINFO("mouseevent->y="				+toString(mouseevent->y)				+"\n");
+	DKINFO("mouseevent->altKey = "			+toString(mouseevent->altKey)			+"\n");
+	DKINFO("mouseevent->button = "			+toString(mouseevent->button)			+"\n");
+	DKINFO("mouseevent->buttons = "			+toString(mouseevent->buttons)			+"\n");
+	DKINFO("mouseevent->clientX = "			+toString(mouseevent->clientX)			+"\n");
+	DKINFO("mouseevent->clientY = "			+toString(mouseevent->clientY)			+"\n");
+	DKINFO("mouseevent->ctrlKey = "			+toString(mouseevent->ctrlKey)			+"\n");
+	DKINFO("mouseevent->layerX = "			+toString(mouseevent->layerX)			+"\n");
+	DKINFO("mouseevent->layerY = "			+toString(mouseevent->layerY)			+"\n");
+	DKINFO("mouseevent->metaKey = "			+toString(mouseevent->metaKey)			+"\n");
+	DKINFO("mouseevent->movementX = "		+toString(mouseevent->movementX)		+"\n");
+	DKINFO("mouseevent->movementY = "		+toString(mouseevent->movementY)		+"\n");
+	DKINFO("mouseevent->offsetX = "			+toString(mouseevent->offsetX)			+"\n");
+	DKINFO("mouseevent->offsetY = "			+toString(mouseevent->offsetY)			+"\n");
+	DKINFO("mouseevent->pageX = "			+toString(mouseevent->pageX)			+"\n");
+	DKINFO("mouseevent->pageY = "			+toString(mouseevent->pageY)			+"\n");
+	DKINFO("mouseevent->relatedTarget = "	+toString(mouseevent->relatedTarget)	+"\n");
+	DKINFO("mouseevent->screenX = "			+toString(mouseevent->screenX)			+"\n");
+	DKINFO("mouseevent->screenY = "			+toString(mouseevent->screenY)			+"\n");
+	DKINFO("mouseevent->shiftKey = "		+toString(mouseevent->shiftKey)			+"\n");
+	DKINFO("mouseevent->mozPressure = "		+toString(mouseevent->mozPressure)		+"\n");
+	DKINFO("mouseevent->mozInputSource = "	+toString(mouseevent->mozInputSource)	+"\n");
+	DKINFO("mouseevent->webkitForce = "		+toString(mouseevent->webkitForce)		+"\n");
+	DKINFO("mouseevent->x = "				+toString(mouseevent->x)				+"\n");
+	DKINFO("mouseevent->y = "				+toString(mouseevent->y)				+"\n");
 }
 bool App::onauxclick(DKMouseEvent* mouseevent) {
 	DKDEBUGFUNC(mouseevent);
