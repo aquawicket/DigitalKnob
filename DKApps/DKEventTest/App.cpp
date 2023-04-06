@@ -8,7 +8,7 @@ bool App::Init() {
 	
 	DKClass::DKCreate("DKEventTarget");															
 	
-	/*
+
 	////// Event //////
 	DKString thisAddress = DKDuktape::pointerToAddress(this);
 	DKEventTarget::addEventListener<DKEvent>("generic", &App::ongeneric, thisAddress);					
@@ -45,7 +45,11 @@ bool App::Init() {
 	DKEventTarget::addEventListener<DKMouseEvent>("webkitmouseforcedown", 		&App::onwebkitmouseforcedown, 		consoleWindowAddress);
 	DKEventTarget::addEventListener<DKMouseEvent>("webkitmouseforceup",			&App::onwebkitmouseforceup, 		consoleWindowAddress);
 	DKEventTarget::addEventListener<DKMouseEvent>("webkitmouseforcewillbegin",	&App::onwebkitmouseforcewillbegin,	consoleWindowAddress);
-	*/
+	
+	
+	////// WheelEvent //////
+	DKEventTarget::addEventListener<DKWheelEvent>("mousewheel", &App::onmousewheel,	consoleWindowAddress);
+	DKEventTarget::addEventListener<DKWheelEvent>("wheel", 		&App::onwheel,		consoleWindowAddress);
 	
 	return true;
 }
@@ -358,5 +362,38 @@ bool App::onwebkitmouseforcewillbegin(DKMouseEvent* mouseevent) {
 	printEventProperties(mouseevent);
 	printUIEventProperties(mouseevent);
 	printMouseEventProperties(mouseevent);
+	return true;
+}
+
+
+///// WheelEvent //////
+void App::printWheelEventProperties(DKWheelEvent* wheelevent) {
+	DKDEBUGFUNC(wheelevent);
+	
+	////// Instance properties //////
+	DKINFO("wheelevent->deltaX = "		+toString(wheelevent->deltaX)		+"\n");
+	DKINFO("wheelevent->deltaY = "		+toString(wheelevent->deltaY)		+"\n");
+	DKINFO("wheelevent->deltaZ = "		+toString(wheelevent->deltaZ)		+"\n");
+	DKINFO("wheelevent->deltaMode = "	+toString(wheelevent->deltaMode)	+"\n");
+	DKINFO("wheelevent->wheelDelta = "	+toString(wheelevent->wheelDelta)	+"\n");
+	DKINFO("wheelevent->wheelDeltaX = "	+toString(wheelevent->wheelDeltaX)	+"\n");
+	DKINFO("wheelevent->wheelDeltaY = "	+toString(wheelevent->wheelDeltaY)	+"\n");
+}
+bool App::onmousewheel(DKWheelEvent* wheelevent) {
+	DKDEBUGFUNC(wheelevent);
+	DKINFO("onmousewheel() \n");
+	printEventProperties(wheelevent);
+	printUIEventProperties(wheelevent);
+	printMouseEventProperties(wheelevent);
+	printWheelEventProperties(wheelevent);
+	return true;
+}
+bool App::onwheel(DKWheelEvent* wheelevent) {
+	DKDEBUGFUNC(wheelevent);
+	DKINFO("onwheel() \n");
+	printEventProperties(wheelevent);
+	printUIEventProperties(wheelevent);
+	printMouseEventProperties(wheelevent);
+	printWheelEventProperties(wheelevent);
 	return true;
 }

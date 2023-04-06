@@ -109,9 +109,9 @@ public:
 	int deltaY;
 	int deltaZ;
 	unsigned long deltaMode;
-	//int wheelDelta;
-	//int wheelDeltaX;
-	//int wheelDeltaY;
+	int wheelDelta;
+	int wheelDeltaX;
+	int wheelDeltaY;
 
 	// FocusEvent
 	//DKString relatedTarget;

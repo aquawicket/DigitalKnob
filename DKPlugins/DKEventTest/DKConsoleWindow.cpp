@@ -29,6 +29,7 @@
 #include "DKEventTest/DKEventTarget.h"
 #include "DKEventTest/DKKeyboardEvent.h"
 #include "DKEventTest/DKMouseEvent.h"
+#include "DKEventTest/DKWheelEvent.h"
 #include "DKDuktape/DKDuktape.h"
 
 #if !WIN && !EMSCRIPTEN && !ANDROID
@@ -119,9 +120,9 @@ bool DKConsoleWindow::Init(){
     deltaY = 0;
     deltaZ = 0;
     deltaMode = 0;
-    //wheelDelta = 0;
-    //wheelDeltaX = 0;
-    //wheelDeltaY = 0;
+    wheelDelta = 0;
+    wheelDeltaX = 0;
+    wheelDeltaY = 0;
 
     // FocusEvent
     //relatedTarget = "";
@@ -856,24 +857,32 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 			delete dblclick_event;
 			break;
 		}
-		case MOUSE_HWHEELED: //horizontal mouse wheel
+		case MOUSE_HWHEELED: { //horizontal mouse wheel
             button = 0;
             if ((int32_t)mer.dwButtonState > 0)
                 deltaX = -100;
             if ((int32_t)mer.dwButtonState < 0)
                 deltaX = 100;
-            //code = "dispatchWheelEvent('wheel','','" + address + "')";
-            //DKDuktape::RunDuktape(code, rval);
+            DKWheelEvent* wheel_event = new DKWheelEvent("wheel", "");
+			wheel_event->button = button;
+			wheel_event->deltaX = deltaX;
+			DKEventTarget::dispatchEvent(wheel_event, address);
+			delete wheel_event;
 			break;
-		case MOUSE_WHEELED: //vertical mouse wheel
+		}
+		case MOUSE_WHEELED: { //vertical mouse wheel
             button = 0;
             if ((int32_t)mer.dwButtonState > 0)
                 deltaY = -100;
             if ((int32_t)mer.dwButtonState < 0)
                 deltaY = 100;
-            //code = "dispatchWheelEvent('wheel','','" + address + "')";
-            //DKDuktape::RunDuktape(code, rval);
+			DKWheelEvent* wheel_event = new DKWheelEvent("wheel", "");
+			wheel_event->button = button;
+			wheel_event->deltaY = deltaY;
+			DKEventTarget::dispatchEvent(wheel_event, address);
+			delete wheel_event;
 			break;
+		}
         case MOUSE_MOVED: {
             //// Cursor Position ////
             // colume = mer.dwMousePosition.X;

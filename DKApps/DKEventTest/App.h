@@ -56,6 +56,11 @@ public:
 	static bool onwebkitmouseforceup(DKMouseEvent* mouseevent);
 	static bool onwebkitmouseforcewillbegin(DKMouseEvent* mouseevent);
 	
+	
+	///// WheelEvent //////
+	static void printWheelEventProperties(DKWheelEvent* wheelevent);
+	static bool onmousewheel(DKWheelEvent* wheelevent);
+	static bool onwheel(DKWheelEvent* wheelevent);
 };
 REGISTER_OBJECT(App, false);
 
