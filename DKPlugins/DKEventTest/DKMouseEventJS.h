@@ -26,35 +26,35 @@ public:
 	
 	
 		////// Instance properties //////
-		DKDuktape::AttachFunction("CPP_DKMouseEvent_altKey", DKMouseEventJS::altKey); 					// [MouseEvent.altKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/altKey
-		DKDuktape::AttachFunction("CPP_DKMouseEvent_button", DKMouseEventJS::button); 					// [MouseEvent.button](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button
-		DKDuktape::AttachFunction("CPP_DKMouseEvent_buttons", DKMouseEventJS::buttons); 				// [MouseEvent.buttons](Read only)
-		DKDuktape::AttachFunction("CPP_DKMouseEvent_clientX", DKMouseEventJS::clientX); 				// [MouseEvent.clientX](Read only)
-		DKDuktape::AttachFunction("CPP_DKMouseEvent_clientY", DKMouseEventJS::clientY); 				// [MouseEvent.clientY](Read only)
-		DKDuktape::AttachFunction("CPP_DKMouseEvent_ctrlKey", DKMouseEventJS::ctrlKey); 				// [MouseEvent.ctrlKey](Read only)
-		DKDuktape::AttachFunction("CPP_DKMouseEvent_layerX", DKMouseEventJS::layerX); 					// [MouseEvent.layerX](Non-standard)(Read only)
-		DKDuktape::AttachFunction("CPP_DKMouseEvent_layerY", DKMouseEventJS::layerY); 					// [MouseEvent.layerY](Non-standard)(Read only)
-		DKDuktape::AttachFunction("CPP_DKMouseEvent_metaKey", DKMouseEventJS::metaKey); 				// [MouseEvent.metaKey](Read only)
-		DKDuktape::AttachFunction("CPP_DKMouseEvent_movementX", DKMouseEventJS::movementX);				// [MouseEvent.movementX](Read only)
-		DKDuktape::AttachFunction("CPP_DKMouseEvent_movementY", DKMouseEventJS::movementY); 			// [MouseEvent.movementY](Read only)
-		DKDuktape::AttachFunction("CPP_DKMouseEvent_offsetX", DKMouseEventJS::offsetX); 				// [MouseEvent.offsetX](Read only)
-		DKDuktape::AttachFunction("CPP_DKMouseEvent_offsetY", DKMouseEventJS::offsetY); 				// [MouseEvent.offsetY](Read only)
-		DKDuktape::AttachFunction("CPP_DKMouseEvent_pageX", DKMouseEventJS::pageX); 					// [MouseEvent.pageX](Read only)
-		DKDuktape::AttachFunction("CPP_DKMouseEvent_pageY", DKMouseEventJS::pageY); 					// [MouseEvent.pageY](Read only)
+		DKDuktape::AttachFunction("CPP_DKMouseEvent_altKey", 		DKMouseEventJS::altKey); 			// [MouseEvent.altKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/altKey
+		DKDuktape::AttachFunction("CPP_DKMouseEvent_button", 		DKMouseEventJS::button); 			// [MouseEvent.button](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button
+		DKDuktape::AttachFunction("CPP_DKMouseEvent_buttons",		DKMouseEventJS::buttons); 			// [MouseEvent.buttons](Read only)
+		DKDuktape::AttachFunction("CPP_DKMouseEvent_clientX", 		DKMouseEventJS::clientX); 			// [MouseEvent.clientX](Read only)
+		DKDuktape::AttachFunction("CPP_DKMouseEvent_clientY", 		DKMouseEventJS::clientY); 			// [MouseEvent.clientY](Read only)
+		DKDuktape::AttachFunction("CPP_DKMouseEvent_ctrlKey", 		DKMouseEventJS::ctrlKey); 			// [MouseEvent.ctrlKey](Read only)
+		DKDuktape::AttachFunction("CPP_DKMouseEvent_layerX", 		DKMouseEventJS::layerX); 			// [MouseEvent.layerX](Non-standard)(Read only)
+		DKDuktape::AttachFunction("CPP_DKMouseEvent_layerY", 		DKMouseEventJS::layerY); 			// [MouseEvent.layerY](Non-standard)(Read only)
+		DKDuktape::AttachFunction("CPP_DKMouseEvent_metaKey", 		DKMouseEventJS::metaKey); 			// [MouseEvent.metaKey](Read only)
+		DKDuktape::AttachFunction("CPP_DKMouseEvent_movementX",		DKMouseEventJS::movementX);			// [MouseEvent.movementX](Read only)
+		DKDuktape::AttachFunction("CPP_DKMouseEvent_movementY",		DKMouseEventJS::movementY); 		// [MouseEvent.movementY](Read only)
+		DKDuktape::AttachFunction("CPP_DKMouseEvent_offsetX", 		DKMouseEventJS::offsetX); 			// [MouseEvent.offsetX](Read only)
+		DKDuktape::AttachFunction("CPP_DKMouseEvent_offsetY", 		DKMouseEventJS::offsetY); 			// [MouseEvent.offsetY](Read only)
+		DKDuktape::AttachFunction("CPP_DKMouseEvent_pageX", 		DKMouseEventJS::pageX); 			// [MouseEvent.pageX](Read only)
+		DKDuktape::AttachFunction("CPP_DKMouseEvent_pageY",			DKMouseEventJS::pageY); 			// [MouseEvent.pageY](Read only)
 		DKDuktape::AttachFunction("CPP_DKMouseEvent_relatedTarget", DKMouseEventJS::relatedTarget);		// [MouseEvent.relatedTarget](Read only)
-		DKDuktape::AttachFunction("CPP_DKMouseEvent_screenX", DKMouseEventJS::screenX); 				// [MouseEvent.screenX](Read only)
-		DKDuktape::AttachFunction("CPP_DKMouseEvent_screenY", DKMouseEventJS::screenY); 				// [MouseEvent.screenY](Read only)
-		DKDuktape::AttachFunction("CPP_DKMouseEvent_shiftKey", DKMouseEventJS::shiftKey); 				// [MouseEvent.shiftKey](Read only)
-		DKDuktape::AttachFunction("CPP_DKMouseEvent_mozPressure", DKMouseEventJS::mozPressure); 		// [MouseEvent.mozPressure](Non-standard)(Deprecated)(Read only)
-		DKDuktape::AttachFunction("CPP_DKMouseEvent_mozInputSource", DKMouseEventJS::mozInputSource);	// [MouseEvent.mozInputSource](Non-standard)(Read only)
-		DKDuktape::AttachFunction("CPP_DKMouseEvent_webkitForce", DKMouseEventJS::webkitForce); 		// [MouseEvent.webkitForce](Non-standard)(Read only)
-		DKDuktape::AttachFunction("CPP_DKMouseEvent_x", DKMouseEventJS::x); 							// [MouseEvent.x](Read only)
-		DKDuktape::AttachFunction("CPP_DKMouseEvent_y", DKMouseEventJS::y); 							// [MouseEvent.y](Read only)
+		DKDuktape::AttachFunction("CPP_DKMouseEvent_screenX",		DKMouseEventJS::screenX); 			// [MouseEvent.screenX](Read only)
+		DKDuktape::AttachFunction("CPP_DKMouseEvent_screenY", 		DKMouseEventJS::screenY); 			// [MouseEvent.screenY](Read only)
+		DKDuktape::AttachFunction("CPP_DKMouseEvent_shiftKey", 		DKMouseEventJS::shiftKey); 			// [MouseEvent.shiftKey](Read only)
+		DKDuktape::AttachFunction("CPP_DKMouseEvent_mozPressure", 	DKMouseEventJS::mozPressure); 		// [MouseEvent.mozPressure](Non-standard)(Deprecated)(Read only)
+		DKDuktape::AttachFunction("CPP_DKMouseEvent_mozInputSource",DKMouseEventJS::mozInputSource);	// [MouseEvent.mozInputSource](Non-standard)(Read only)
+		DKDuktape::AttachFunction("CPP_DKMouseEvent_webkitForce", 	DKMouseEventJS::webkitForce); 		// [MouseEvent.webkitForce](Non-standard)(Read only)
+		DKDuktape::AttachFunction("CPP_DKMouseEvent_x", 			DKMouseEventJS::x); 				// [MouseEvent.x](Read only)
+		DKDuktape::AttachFunction("CPP_DKMouseEvent_y", 			DKMouseEventJS::y); 				// [MouseEvent.y](Read only)
 	
 
 		////// Instance methods //////
-		DKDuktape::AttachFunction("CPP_DKMouseEvent_getModifierState", DKMouseEventJS::getModifierState);	// [MouseEvent.getModifierState()] 
-		DKDuktape::AttachFunction("CPP_DKMouseEvent_initMouseEvent", DKMouseEventJS::initMouseEvent);		// [MouseEvent.initMouseEvent()](Deprecated)
+		DKDuktape::AttachFunction("CPP_DKMouseEvent_getModifierState",	DKMouseEventJS::getModifierState);	// [MouseEvent.getModifierState()] 
+		DKDuktape::AttachFunction("CPP_DKMouseEvent_initMouseEvent",	DKMouseEventJS::initMouseEvent);	// [MouseEvent.initMouseEvent()](Deprecated)
 	
 	
 		////// Events //////
