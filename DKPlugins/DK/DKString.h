@@ -67,6 +67,7 @@ bool has(const DKString& search, const DKString& forthis);
 int substr_count(const DKString& search, const DKString& forthis);
 
 // https://www.cplusplus.com/reference/string/to_string/
+DKString toString(const DKString& _str);
 DKString toString(const int& _int);
 DKString toString(const long& _long);
 DKString toString(const float& _float);

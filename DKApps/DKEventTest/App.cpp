@@ -8,6 +8,7 @@ bool App::Init() {
 	
 	DKClass::DKCreate("DKEventTarget");															
 	
+	
 	////// Event //////
 	DKString thisAddress = DKDuktape::pointerToAddress(this);
 	DKEventTarget::addEventListener<DKEvent>("generic", &App::ongeneric, thisAddress);					
@@ -20,10 +21,11 @@ bool App::Init() {
 	DKObject* myConsoleWindow = DKClass::DKCreate("DKConsoleWindow");
 	DKString consoleWindowAddress = DKDuktape::pointerToAddress(myConsoleWindow);
 	
+	
 	////// KeyboardEvent ///////
 	DKEventTarget::addEventListener<DKKeyboardEvent>("keydown", &App::onkeydown, consoleWindowAddress);
 	DKEventTarget::addEventListener<DKKeyboardEvent>("keyup", &App::onkeyup, consoleWindowAddress);
-	DKEventTarget::addEventListener<DKKeyboardEvent>("keyup", &App::onkeypress, consoleWindowAddress);
+	DKEventTarget::addEventListener<DKKeyboardEvent>("keypress", &App::onkeypress, consoleWindowAddress);
 
 	/*
 	//console.log("myConsoleWindow.name="+myConsoleWindow.name)
@@ -49,6 +51,8 @@ bool App::End(){
 ////// Event //////
 void App::printEventProperties(DKEvent* event) {
 	DKDEBUGFUNC(event);
+	
+	////// Instance properties //////
 	DKINFO("event->bubbles="+toString(event->bubbles)+"\n");
 	DKINFO("event->cancelable="+toString(event->cancelable)+"\n");
 	DKINFO("event->composed="+toString(event->composed)+"\n");
@@ -59,11 +63,65 @@ void App::printEventProperties(DKEvent* event) {
 	DKINFO("event->target="+event->target+"\n");
 	DKINFO("event->timeStamp="+toString(event->timeStamp)+"\n");
 	DKINFO("event->type="+event->type+"\n");
+	
+	////// Legacy and non-standard properties //////
+	DKINFO("event->cancelBubble="+toString(event->cancelBubble)+"\n");
+	DKINFO("event->explicitOriginalTarget="+toString(event->explicitOriginalTarget)+"\n");
+	DKINFO("event->originalTarget="+toString(event->originalTarget)+"\n");
+	DKINFO("event->returnValue="+toString(event->returnValue)+"\n");
+	DKINFO("event->scoped="+toString(event->scoped)+"\n");
 }
-
 bool App::ongeneric(DKEvent* event) {
 	DKDEBUGFUNC(event);
 	DKINFO("ongeneric() \n");
+	printEventProperties(event);
+	return true;
+}
+bool App::onafterscriptexecute(DKEvent* event) {
+	DKDEBUGFUNC(event);
+	DKINFO("onafterscriptexecute() \n");
+	printEventProperties(event);
+	return true;
+}
+bool App::onbeforematch(DKEvent* event) {
+	DKDEBUGFUNC(event);
+	DKINFO("onbeforematch() \n");
+	printEventProperties(event);
+	return true;
+}
+bool App::onbeforescriptexecute(DKEvent* event) {
+	DKDEBUGFUNC(event);
+	DKINFO("onbeforescriptexecute() \n");
+	printEventProperties(event);
+	return true;
+}
+bool App::onerror(DKEvent* event) {
+	DKDEBUGFUNC(event);
+	DKINFO("onerror() \n");
+	printEventProperties(event);
+	return true;
+}
+bool App::onfullscreenchange(DKEvent* event) {
+	DKDEBUGFUNC(event);
+	DKINFO("onfullscreenchange() \n");
+	printEventProperties(event);
+	return true;
+}
+bool App::onfullscreenerror(DKEvent* event) {
+	DKDEBUGFUNC(event);
+	DKINFO("onfullscreenerror() \n");
+	printEventProperties(event);
+	return true;
+}
+bool App::onscroll(DKEvent* event) {
+	DKDEBUGFUNC(event);
+	DKINFO("onscroll() \n");
+	printEventProperties(event);
+	return true;
+}
+bool App::onscrollend(DKEvent* event) {
+	DKDEBUGFUNC(event);
+	DKINFO("onscrollend() \n");
 	printEventProperties(event);
 	return true;
 }
@@ -73,8 +131,8 @@ bool App::ongeneric(DKEvent* event) {
 void App::printUIEventProperties(DKUIEvent* uievent) {
 	DKDEBUGFUNC(uievent);
 	DKINFO("uievent->detail="+toString(uievent->detail)+"\n");
-	//DKINFO("uievent->sourceCapabilities="+toString(uievent->sourceCapabilities)+"\n");
-	//DKINFO("uievent->view="+toString(uievent->view)+"\n");
+	DKINFO("uievent->sourceCapabilities="+toString(uievent->sourceCapabilities)+"\n");
+	DKINFO("uievent->view="+toString(uievent->view)+"\n");
 	DKINFO("uievent->which="+toString(uievent->which)+"\n");
 }
 
@@ -103,7 +161,7 @@ bool App::onkeydown(DKKeyboardEvent* keyevent) {
 	return true;
 }
 
-bool App::onKeyUp(DKKeyboardEvent* keyevent) {
+bool App::onkeyup(DKKeyboardEvent* keyevent) {
 	DKDEBUGFUNC(keyevent);
 	DKINFO("onkeyup() \n");
 	printEventProperties(keyevent);

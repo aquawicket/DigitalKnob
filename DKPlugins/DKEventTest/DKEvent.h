@@ -13,6 +13,8 @@ public:
 	////// Constructor //////
 	// [Event()] https://developer.mozilla.org/en-US/docs/Web/API/Event/Event
 	DKEvent(DKString _type, DKString _options){
+		
+		////// Instance properties //////
 		bubbles = false;
 		cancelable = false;
 		composed = false;
@@ -24,10 +26,15 @@ public:
 		timeStamp = 0;
 		type = _type;
 		
+		////// Legacy and non-standard properties //////
+		cancelBubble = false;
+		explicitOriginalTarget = "";
+		originalTarget = "";
+		returnValue = false;
+		scoped = false;
+		
+		////// DK properties //////
 		options = _options;
-		//pointer = _pointer;
-		//targetAddress = _targetAddress;
-		//currentTargetAddress = _targetAddress;
 	}
 	
 	
@@ -69,18 +76,28 @@ public:
 	
 	////// Instance methods //////
 	// [Event.composedPath()] https://developer.mozilla.org/en-US/docs/Web/API/Event/composedPath
-	// TODO
+	void composedPath() {
+		DKTODO();
+	}
 	// [Event.preventDefault()] https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault
-	// TODO
+	void preventDefault() {
+		DKTODO();
+	}
 	// [Event.stopImmediatePropagation()] https://developer.mozilla.org/en-US/docs/Web/API/Event/stopImmediatePropagation
-	// TODO
+	void stopImmediatePropagation() {
+		DKTODO();
+	}
 	// [Event.stopPropagation()] https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation
-	// TODO
+	void stopPropagation() {
+		DKTODO();
+	}
 
 
 	////// Deprecated methods //////
 	// [Event.initEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/initEvent
-	// TODO
+	void initEvent() {
+		DKTODO();
+	}
 	
 	
 	////// Events //////
@@ -96,9 +113,6 @@ public:
 	
 	////// DK properties //////
 	DKString options;
-	//void* pointer;
-	//DKString targetAddress;
-	//DKString currentTargetAddress;
 };
 
 

@@ -74,6 +74,10 @@ int substr_count(const DKString& search, const DKString& forthis) {
 	return occurrences;
 }
 
+DKString toString(const DKString& _str){
+		return _str;
+}
+
 DKString toString(const int& _int) {
 	//DKDEBUGFUNC(_int);
 	/*
