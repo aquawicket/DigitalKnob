@@ -1,23 +1,16 @@
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Event
 // [INTERFACE] https://dom.spec.whatwg.org/#interface-event
 
-//event_instances = [];
 
 // [Event()] https://developer.mozilla.org/en-US/docs/Web/API/Event/Event
 var Event = function Event(type, options, address) {
 	//console.log("Event("+type+","+options+","+address+")")
 	
-	if(!address){
-		if(!this.address)
-			this.address = CPP_DKEvent(type, options);
-	}
-	else{
+	if(address)
 		this.address = address;
-	}
+	else
+		this.address = CPP_DKEvent(type, options);
 	
-    //this.type = type;
-	//this.options = options;
-	//this.targetAddress = targetAddress;
 	
     ////// Instance properties //////
 	// [Event.bubbles](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/bubbles

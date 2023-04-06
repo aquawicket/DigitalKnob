@@ -4,15 +4,12 @@
 
 // [UIEvent()] https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/UIEvent
 var UIEvent = function UIEvent(type, options, address) {
-	console.log("UIEvent("+type+","+options+","+address+")")
+	//console.log("UIEvent("+type+","+options+","+address+")")
 	
-	if(!address){
-		if(!this.address)
-			this.address = CPP_DKUIEvent(type, options);
-	}
-	else{
+	if(address)
 		this.address = address;
-	}
+	else
+		this.address = CPP_DKUIEvent(type, options);
 	
 	
 	////// Instance properties //////

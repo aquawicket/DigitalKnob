@@ -2,10 +2,9 @@
 // [INTERFACE] https://w3c.github.io/uievents/#interface-keyboardevent
 
 
-////// Constructor //////
 // [MouseEvent()] https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/MouseEvent
 var MouseEvent = function MouseEvent(type, options, address) {
-	console.log("MouseEvent("+type+","+options+","+address+")")
+	//console.log("MouseEvent("+type+","+options+","+address+")")
 	
 	if(address)
 		this.address = address;

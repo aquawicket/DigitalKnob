@@ -11,7 +11,7 @@ const Console_HandleColor = function Console_HandleColor(msg){
 	return msg;
 }
 
-var Console = function Console(pointer) {
+var Console = function Console(address) {
 	
 	////// Instance methods //////
 	// [console.assert()] https://developer.mozilla.org/en-US/docs/Web/API/console/assert
