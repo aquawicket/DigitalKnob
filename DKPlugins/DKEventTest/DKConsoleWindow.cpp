@@ -105,7 +105,7 @@ bool DKConsoleWindow::Init(){
 	offsetY = 0;
 	pageX = 0;
 	pageY = 0;
-	relativeTarget = "";
+	relatedTarget = "";
 	screenX = 0;
 	screenY = 0;
 	mozPressure = 0.0;
@@ -124,7 +124,7 @@ bool DKConsoleWindow::Init(){
     //wheelDeltaY = 0;
 
     // FocusEvent
-    relatedTarget = "";
+    //relatedTarget = "";
 
 	//// Instance properties ////
 	/*

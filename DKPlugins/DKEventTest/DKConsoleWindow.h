@@ -95,7 +95,7 @@ public:
 	int offsetY;
 	int pageX;
 	int pageY;
-	DKString relativeTarget;
+	DKString relatedTarget;
 	unsigned int screenX;
 	unsigned int screenY;
 	float mozPressure;
@@ -114,7 +114,7 @@ public:
 	//int wheelDeltaY;
 
 	// FocusEvent
-	DKString relatedTarget;
+	//DKString relatedTarget;
 
 	// ResizeEvent
 	unsigned int columns;
