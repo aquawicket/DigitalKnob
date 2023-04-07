@@ -4,6 +4,12 @@
 
 #include "DKDuktape/DKDuktape.h"
 
+WARNING_DISABLE
+//#include "dukglue/dukglue.h"
+#include "dukglue/public_util.h"
+#include "dukglue/dukvalue.h"
+WARNING_ENABLE
+
 
 // [W3C] https://w3c.github.io/uievents
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/UIEvent
@@ -100,8 +106,41 @@ public:
 	static int initUIEvent(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		return DKDEPRECATED();
-	}	
+	}
 	
+	
+	
+	/////////////////////////////////////////////////////////////////////////////////
+	bool addEventListener(const DKString& _type, const DKString& eventTargetAddress){
+		DKEventTarget::addEventListener<DKEvent>(_type, &DKEventJS::onEvent, eventTargetAddress);
+		return true;
+	}
+	
+	bool removeEventListener(const DKString& _type, const DKString& eventTargetAddress){
+		DKEventTarget::removeEventListener<DKEvent>(_type, &DKEventJS::onEvent, eventTargetAddress);
+		return true;
+	}
+	
+	static bool onUIEvent(DKUIEvent* event) {
+		DKDEBUGFUNC(event);
+		DKINFO("onUIEvent("+event->type+") \n");
+		
+		// get the globally stored js callback function
+		DKString eventAddress = DKDuktape::pointerToAddress(event);
+		DKString cb = event->target+"_"+event->type+"_callback";
+		duk_get_global_string(DKDuktape::ctx, cb.c_str());
+		
+		// create and push the Event(eventAddress) object		
+		DKString eventObjStr = "var eventObj = new UIEvent('', '', '"+eventAddress+"'); eventObj;";
+		DukValue eventObj = dukglue_peval<DukValue>(DKDuktape::ctx, eventObjStr.c_str());
+		dukglue_push(DKDuktape::ctx, eventObj);
+		
+		// call callback function
+		if(duk_pcall(DKDuktape::ctx, 1) != 0) //1 = num or args
+			DKDuktape::DumpError(eventAddress);
+	
+		return true;
+	}
 };
 REGISTER_OBJECT(DKUIEventJS, true)
 

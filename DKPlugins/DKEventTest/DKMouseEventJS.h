@@ -5,7 +5,9 @@
 #include "DKDuktape/DKDuktape.h"
 
 WARNING_DISABLE
-#include "dukglue/dukglue.h"
+//#include "dukglue/dukglue.h"
+#include "dukglue/public_util.h"
+#include "dukglue/dukvalue.h"
 WARNING_ENABLE
 
 
@@ -359,18 +361,16 @@ public:
 		duk_get_global_string(DKDuktape::ctx, cb.c_str());
 		
 		// create and push the Event(eventAddress) object		
-		DKString eventObjStr = "var eventObj = new MouseEvent('', '', '"+eventAddress+"'); eventObj;";  // returns eventObj
+		DKString eventObjStr = "var eventObj = new MouseEvent('', '', '"+eventAddress+"'); eventObj;";
 		DukValue eventObj = dukglue_peval<DukValue>(DKDuktape::ctx, eventObjStr.c_str());
-		dukglue_push(DKDuktape::ctx, eventObj);	 //push event object
+		dukglue_push(DKDuktape::ctx, eventObj);
 		
 		// call callback function
-		if(duk_pcall(DKDuktape::ctx, 1) != 0){ //1 = num or args
+		if(duk_pcall(DKDuktape::ctx, 1) != 0) //1 = num or args
 			DKDuktape::DumpError(eventAddress);
-		}
 	
 		return true;
 	}	
-	
 };
 REGISTER_OBJECT(DKMouseEventJS, true)
 
