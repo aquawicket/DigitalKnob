@@ -436,6 +436,7 @@ bool App::onbeforeinput(DKInputEvent* inputevent) {
 	printEventProperties(inputevent);
 	printUIEventProperties(inputevent);
 	printInputEventProperties(inputevent);
+	return true;
 }
 bool App::oninput(DKInputEvent* inputevent) {
 	DKDEBUGFUNC(inputevent);
@@ -443,6 +444,7 @@ bool App::oninput(DKInputEvent* inputevent) {
 	printEventProperties(inputevent);
 	printUIEventProperties(inputevent);
 	printInputEventProperties(inputevent);
+	return true;
 }
 
 ////// KeyboardEvent //////
