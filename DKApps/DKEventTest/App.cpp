@@ -162,9 +162,9 @@ bool App::onscrollend(DKEvent* event) {
 
 
 ////// CustomEvent //////
-void APP::printCustomEventProperties(DKCustomEvent* customevent) {
+void App::printCustomEventProperties(DKCustomEvent* customevent) {
 	////// Instance properties //////
-	DKINFO("uievent->detail = "				+toString(uievent->detail)				+"\n");
+	DKINFO("customevent->detail = "	+toString(customevent->detail)	+"\n");
 }
 
 ////// EventTarget //////
