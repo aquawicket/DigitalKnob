@@ -10,10 +10,10 @@ bool App::Init() {
 	
 	////// Event //////
 	DKString thisAddress = DKDuktape::pointerToAddress(this);
-	DKEventTarget::addEventListener<DKEvent>("generic", &App::ongeneric, thisAddress);					
-	DKEvent* event = new DKEvent("generic", "");												
+	DKEventTarget::addEventListener<DKEvent>("genericb", &App::ongeneric, thisAddress);					
+	DKEvent* event = new DKEvent("genericb", "");												
 	DKEventTarget::dispatchEvent(event, thisAddress);													
-	DKEventTarget::removeEventListener<DKEvent>("generic", &App::ongeneric, thisAddress);	
+	DKEventTarget::removeEventListener<DKEvent>("genericb", &App::ongeneric, thisAddress);	
 	DKEventTarget::dispatchEvent(event, thisAddress);
 	
 	DKINFO("/////////// ConsoleWindow ///////////////////// \n");
