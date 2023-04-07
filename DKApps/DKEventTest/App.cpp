@@ -425,7 +425,7 @@ void App::printInputEventProperties(DKInputEvent* inputevent) {
 	DKDEBUGFUNC(inputevent);
 	
 	////// Instance properties //////
-	//DKINFO("inputevent->data = "		+toString(inputevent->data)				+"\n");
+	//DKINFO("inputevent->data = "		+toString(inputevent->data)				+"\n"); //FIXME: data is already a member of DKObject
 	DKINFO("inputevent->dataTransfer = "+toString(inputevent->dataTransfer)		+"\n");
 	DKINFO("inputevent->inputType = "	+toString(inputevent->inputType)		+"\n");
 	DKINFO("inputevent->isComposing = "	+toString(inputevent->isComposing)		+"\n");
@@ -499,7 +499,7 @@ bool App::onkeypress(DKKeyboardEvent* keyboardevent) {
 void App::printCompositionEventProperties(DKCompositionEvent* compositionevent) {
 	DKDEBUGFUNC(compositionevent);
 	////// Instance properties //////
-	DKINFO("compositionevent->data = "	+toString(compositionevent->data)	+"\n");
+	//DKINFO("compositionevent->data = "	+toString(compositionevent->data)	+"\n"); //FIXME: data is already a member of DKObject
 	DKINFO("compositionevent->locale = "+toString(compositionevent->locale)	+"\n");
 }
 bool App::oncompositionstart(DKCompositionEvent* compositionevent) {
