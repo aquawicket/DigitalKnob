@@ -11,7 +11,7 @@ public:
 	bool Init();
 	bool End();
 
-
+	// https://dom.spec.whatwg.org
 	////// Event //////
 	static void printEventProperties(DKEvent* event);
 	static bool ongeneric(DKEvent* event);
@@ -25,16 +25,24 @@ public:
 	static bool onscrollend(DKEvent* event);
 	
 	
+	////// CustomEvent //////
+	static void printCustomEventProperties(DKCustomEvent* customevent);
+	
+	////// EventTarget //////
+	
+	
+	// https://w3c.github.io/uievents
 	////// UIEvent //////
 	static void printUIEventProperties(DKUIEvent* uievent);
 	//static bool onerror(DKEvent* event);
 	
 	
-	////// KeyboardEvent //////
-	static void printKeyboardEventProperties(DKKeyboardEvent* keyboardevent);
-	static bool onkeydown(DKKeyboardEvent* keyboardevent);
-	static bool onkeyup(DKKeyboardEvent* keyboardevent);
-	static bool onkeypress(DKKeyboardEvent* keyboardevent);
+	////// FocusEvent //////
+	static void printFocusEventProperties(DKFocusEvent* focusevent);
+	static bool onblur(DKFocusEvent* focusevent);
+	static bool onfocus(DKFocusEvent* focusevent);
+	static bool onfocusin(DKFocusEvent* focusevent);
+	static bool onfocusout(DKFocusEvent* focusevent);
 	
 	
 	////// MouseEvent //////
@@ -63,12 +71,23 @@ public:
 	static bool onwheel(DKWheelEvent* wheelevent);
 	
 	
-	////// FocusEvent //////
-	static void printFocusEventProperties(DKFocusEvent* focusevent);
-	static bool onblur(DKFocusEvent* focusevent);
-	static bool onfocus(DKFocusEvent* focusevent);
-	static bool onfocusin(DKFocusEvent* focusevent);
-	static bool onfocusout(DKFocusEvent* focusevent);
+	////// InputEvent //////
+	static void printInputEventProperties(DKInputEvent* inputevent);
+	static bool onbeforeinput(DKInputEvent* inputevent);
+	static bool oninput(DKInputEvent* inputevent);
+	
+	////// KeyboardEvent //////
+	static void printKeyboardEventProperties(DKKeyboardEvent* keyboardevent);
+	static bool onkeydown(DKKeyboardEvent* keyboardevent);
+	static bool onkeyup(DKKeyboardEvent* keyboardevent);
+	static bool onkeypress(DKKeyboardEvent* keyboardevent);	
+	
+	
+	///// CompositionEvent //////
+	static void printCompositionEventProperties(DKCompositionEvent* compositionevent);
+	static bool oncompositionstart(DKCompositionEvent* compositionevent);
+	static bool oncompositionupdate(DKCompositionEvent* compositionevent);
+	static bool oncompositionend(DKCompositionEvent* compositionevent);
 };
 REGISTER_OBJECT(App, false);
 

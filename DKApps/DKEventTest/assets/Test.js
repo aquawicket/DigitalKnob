@@ -5,28 +5,37 @@ console.log("\n\n ___JS Event Test___\n");
 ////// Event ///////
 function printEventProperties(event){
 	////// Instance properties //////
-	console.log("event.bubbles="				+event.bubbles)
-	console.log("event.cancelable="				+event.cancelable)
-	console.log("event.composed="				+event.composed)
-	console.log("event.currentTarget="			+event.currentTarget)
-	console.log("event.defaultPrevented="		+event.defaultPrevented)
-	console.log("event.eventPhase="				+event.eventPhase)			
-	console.log("event.isTrusted="				+event.isTrusted)		
-	console.log("event.target="					+event.target)			
-	console.log("event.timeStamp="				+event.timeStamp)
-	console.log("event.type="					+event.type)
+	console.log("event.bubbles = "					+event.bubbles)
+	console.log("event.cancelable = "				+event.cancelable)
+	console.log("event.composed = "					+event.composed)
+	console.log("event.currentTarget = "			+event.currentTarget)
+	console.log("event.defaultPrevented = "			+event.defaultPrevented)
+	console.log("event.eventPhase = "				+event.eventPhase)			
+	console.log("event.isTrusted = "				+event.isTrusted)		
+	console.log("event.target = "					+event.target)			
+	console.log("event.timeStamp = "				+event.timeStamp)
+	console.log("event.type = "						+event.type)
 	////// Legacy and non-standard properties //////
-	console.log("event.cancelBubble="			+event.cancelBubble)
-	console.log("event.explicitOriginalTarget="	+event.explicitOriginalTarget)
-	console.log("event.originalTarget="			+event.originalTarget)
-	console.log("event.returnValue="			+event.returnValue)
-	console.log("event.scoped="					+event.scoped)
+	console.log("event.cancelBubble = "				+event.cancelBubble)
+	console.log("event.explicitOriginalTarget = "	+event.explicitOriginalTarget)
+	console.log("event.originalTarget = "			+event.originalTarget)
+	console.log("event.returnValue = "				+event.returnValue)
+	console.log("event.scoped = "					+event.scoped)
 }
 function ongeneric(event){
 	console.log("ongeneric("+event+")")
 	printEventProperties(event)
 }
 
+
+////// CustomEvent //////
+function printCustomEventProperties(customevent){
+	////// Instance properties //////
+	console.log("customevent.detail = "	+customevent.detail)
+}
+
+
+////// EventTarget //////
 // create the EventTarget
 const target = new EventTarget("0x00000000")
 
@@ -44,13 +53,14 @@ console.log("/////////// ConsoleWindow /////////////////////")
 CPP_DK_Create("DKEventTest/DKConsoleWindow.js");
 const myConsoleWindow = new DKConsoleWindow('myConsoleWindow')
 
+
 ////// UIEvent //////
 function printUIEventProperties(uievent){
 	////// Instance properties //////
-	console.log("uievent.detail="				+uievent.detail)
-	console.log("uievent.sourceCapabilities="	+uievent.sourceCapabilities)			
-	console.log("uievent.view="					+uievent.view)
-	console.log("uievent.which="				+uievent.which)
+	console.log("uievent.detail = "				+uievent.detail)
+	console.log("uievent.sourceCapabilities = "	+uievent.sourceCapabilities)			
+	console.log("uievent.view = "				+uievent.view)
+	console.log("uievent.which = "				+uievent.which)
 }
 // [error] https://developer.mozilla.org/en-US/docs/Web/API/Element/error_event
 function onerror(event){
@@ -59,83 +69,76 @@ function onerror(event){
 	printUIEventProperties(event)
 }
 
-////// KeyboardEvent ///////
-function printKeyboardEventProperties(keyboardevent){
+
+////// FocusEvent ///////
+function printFocusEventProperties(focusevent){
 	////// Instance properties //////
-	console.log("keyboardevent.altKey="			+keyboardevent.altKey)
-	console.log("keyboardevent.code="			+keyboardevent.code)			
-	console.log("keyboardevent.ctrlKey="		+keyboardevent.ctrlKey)
-	console.log("keyboardevent.isComposing="	+keyboardevent.isComposing)
-	console.log("keyboardevent.key="			+keyboardevent.key)
-	console.log("keyboardevent.locale="			+keyboardevent.locale)
-	console.log("keyboardevent.location="		+keyboardevent.location)
-	console.log("keyboardevent.metaKey="		+keyboardevent.metaKey)
-	console.log("keyboardevent.repeat="			+keyboardevent.repeat)
-	console.log("keyboardevent.shiftKey="		+keyboardevent.shiftKey)
-	////// Obsolete properties //////
-	console.log("keyboardevent.char="			+keyboardevent.char)
-	console.log("keyboardevent.charCode="		+keyboardevent.charCode)
-	console.log("keyboardevent.keyCode="		+keyboardevent.keyCode)
-	console.log("keyboardevent.keyIdentifier="	+keyboardevent.keyIdentifier)
-	console.log("keyboardevent.keyLocation="	+keyboardevent.keyLocation)
-	console.log("keyboardevent.which="			+keyboardevent.which)
+	console.log("focusevent.relatedTarget = "	+focusevent.relatedTarget)
 }
-// [keydown] https://developer.mozilla.org/en-US/docs/Web/API/Element/keydown_event
-function onkeydown(event){
-	console.log("onkeydown("+event+")")
+// [blur] https://developer.mozilla.org/en-US/docs/Web/API/Element/blur_event
+function onblur(event){
+	console.log("onblur("+event+")")
 	printEventProperties(event)
 	printUIEventProperties(event)
-	printKeyboardEventProperties(event)
+	printFocusEventProperties(event)
 }
-myConsoleWindow.addEventListener('keydown', onkeydown)
-// [keyup] https://developer.mozilla.org/en-US/docs/Web/API/Element/keyup_event
-function onkeyup(event){
-	console.log("onkeyup("+event+")")
+myConsoleWindow.addEventListener('blur', onblur)
+// [focus] https://developer.mozilla.org/en-US/docs/Web/API/Element/focus_event
+function onfocus(event){
+	console.log("onfocus("+event+")")
 	printEventProperties(event)
 	printUIEventProperties(event)
-	printKeyboardEventProperties(event)
+	printFocusEventProperties(event)
 }
-myConsoleWindow.addEventListener('keyup', onkeyup)
-// [keypress](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Element/keypress_event
-function onkeypress(event){
-	console.log("onkeypress("+event+")")
+myConsoleWindow.addEventListener('focus', onfocus)
+// [focusin] https://developer.mozilla.org/en-US/docs/Web/API/Element/focusin_event
+function onfocusin(event){
+	console.log("onfocusin("+event+")")
 	printEventProperties(event)
 	printUIEventProperties(event)
-	printKeyboardEventProperties(event)
+	printFocusEventProperties(event)
 }
-myConsoleWindow.addEventListener('keypress', onkeypress)
+myConsoleWindow.addEventListener('focusin', onfocusin)
+// [focusout] https://developer.mozilla.org/en-US/docs/Web/API/Element/focusout_event
+function onfocusout(event){
+	console.log("onfocusout("+event+")")
+	printEventProperties(event)
+	printUIEventProperties(event)
+	printFocusEventProperties(event)
+}
+myConsoleWindow.addEventListener('focusout', onfocusout)
 
 
 ////// MouseEvent //////
 function printMouseEventProperties(mouseevent){
 	////// Static properties //////
-	//console.log("mouseevent.WEBKIT_FORCE_AT_MOUSE_DOWN="+mouseevent.WEBKIT_FORCE_AT_MOUSE_DOWN)
-	//console.log("mouseevent.WEBKIT_FORCE_AT_FORCE_MOUSE_DOWN="+mouseevent.WEBKIT_FORCE_AT_FORCE_MOUSE_DOWN)
+	//console.log("mouseevent.WEBKIT_FORCE_AT_MOUSE_DOWN = "+mouseevent.WEBKIT_FORCE_AT_MOUSE_DOWN)
+	//console.log("mouseevent.WEBKIT_FORCE_AT_FORCE_MOUSE_DOWN = "+mouseevent.WEBKIT_FORCE_AT_FORCE_MOUSE_DOWN)
 	////// Instance properties //////
-	console.log("mouseevent.altKey="		+mouseevent.altKey)
-	console.log("mouseevent.button="		+mouseevent.button)
-	console.log("mouseevent.buttons="		+mouseevent.buttons)
-	console.log("mouseevent.clientX="		+mouseevent.clientX)
-	console.log("mouseevent.clientY="		+mouseevent.clientY)
-	console.log("mouseevent.ctrlKey="		+mouseevent.ctrlKey)
-	console.log("mouseevent.layerX="		+mouseevent.layerX)
-	console.log("mouseevent.layerY="		+mouseevent.layerY)
-	console.log("mouseevent.metaKey="		+mouseevent.metaKey)
-	console.log("mouseevent.movementX="		+mouseevent.movementX)
-	console.log("mouseevent.movementY="		+mouseevent.movementY)
-	console.log("mouseevent.offsetX="		+mouseevent.offsetX)
-	console.log("mouseevent.offsetY="		+mouseevent.offsetY)
-	console.log("mouseevent.pageX="			+mouseevent.pageX)
-	console.log("mouseevent.pageY="			+mouseevent.pageY)
-	console.log("mouseevent.relatedTarget="	+mouseevent.relatedTarget)
-	console.log("mouseevent.screenX="		+mouseevent.screenX)
-	console.log("mouseevent.screenY="		+mouseevent.screenY)
-	console.log("mouseevent.shiftKey="		+mouseevent.shiftKey)
-	console.log("mouseevent.mozPressure="	+mouseevent.mozPressure)
-	console.log("mouseevent.mozInputSource="+mouseevent.mozInputSource)
-	console.log("mouseevent.webkitForce="	+mouseevent.webkitForce)
-	console.log("mouseevent.x="				+mouseevent.x)
-	console.log("mouseevent.y="				+mouseevent.y)
+	console.log("mouseevent.altKey = "			+mouseevent.altKey)
+	console.log("mouseevent.button = "			+mouseevent.button)
+	console.log("mouseevent.buttons = "			+mouseevent.buttons)
+	console.log("mouseevent.clientX = "			+mouseevent.clientX)
+	console.log("mouseevent.clientY = "			+mouseevent.clientY)
+	console.log("mouseevent.ctrlKey = "			+mouseevent.ctrlKey)
+	console.log("mouseevent.layerX = "			+mouseevent.layerX)
+	console.log("mouseevent.layerY = "			+mouseevent.layerY)
+	console.log("mouseevent.metaKey = "			+mouseevent.metaKey)
+	console.log("mouseevent.movementX = "		+mouseevent.movementX)
+	console.log("mouseevent.movementY = "		+mouseevent.movementY)
+	console.log("mouseevent.offsetX = "			+mouseevent.offsetX)
+	console.log("mouseevent.offsetY = "			+mouseevent.offsetY)
+	console.log("mouseevent.pageX = "			+mouseevent.pageX)
+	console.log("mouseevent.pageY = "			+mouseevent.pageY)
+	console.log("mouseevent.relatedTarget = "	+mouseevent.relatedTarget)
+	console.log("mouseevent.screenX = "			+mouseevent.screenX)
+	console.log("mouseevent.screenY = "			+mouseevent.screenY)
+	console.log("mouseevent.shiftKey = "		+mouseevent.shiftKey)
+	console.log("mouseevent.mozPressure = "		+mouseevent.mozPressure)
+	console.log("mouseevent.mozInputSource = "	+mouseevent.mozInputSource)
+	console.log("mouseevent.webkitForce = "		+mouseevent.webkitForce)
+	console.log("mouseevent.x = "				+mouseevent.x)
+	console.log("mouseevent.y = "				+mouseevent.y)
 }
 // [auxclick] https://developer.mozilla.org/en-US/docs/Web/API/Element/auxclick_event
 function onauxclick(event){
@@ -270,12 +273,12 @@ myConsoleWindow.addEventListener('webkitmouseforcewillbegin', onwebkitmouseforce
 ////// WheelEvent //////
 function printWheelEventProperties(wheelevent){
 	////// Instance properties //////
-	console.log("wheelevent.deltaX="		+wheelevent.deltaX)
-	console.log("wheelevent.deltaY="		+wheelevent.deltaY)
-	console.log("wheelevent.deltaZ="		+wheelevent.deltaZ)
-	console.log("wheelevent.wheelDelta="	+wheelevent.wheelDelta)
-	console.log("wheelevent.wheelDeltaX="	+wheelevent.wheelDeltaX)
-	console.log("wheelevent.wheelDeltaY="	+wheelevent.wheelDeltaY)
+	console.log("wheelevent.deltaX = "		+wheelevent.deltaX)
+	console.log("wheelevent.deltaY = "		+wheelevent.deltaY)
+	console.log("wheelevent.deltaZ = "		+wheelevent.deltaZ)
+	console.log("wheelevent.wheelDelta = "	+wheelevent.wheelDelta)
+	console.log("wheelevent.wheelDeltaX = "	+wheelevent.wheelDeltaX)
+	console.log("wheelevent.wheelDeltaY = "	+wheelevent.wheelDeltaY)
 }
 // [mousewheel] https://developer.mozilla.org/en-US/docs/Web/API/Element/mousewheel_event
 function onmousewheel(event){
@@ -297,40 +300,106 @@ function onwheel(event){
 myConsoleWindow.addEventListener('wheel', onwheel)
 
 
-////// FocusEvent ///////
-function printFocusEventProperties(focusevent){
+////// InputEvent //////
+function printInputEventProperties(inputevent){
 	////// Instance properties //////
-	console.log("focusevent.relatedTarget="	+focusevent.relatedTarget)
+	console.log("inputevent.data = "		+inputevent.data)
+	console.log("inputevent.dataTransfer = "+inputevent.dataTransfer)
+	console.log("inputevent.inputType = "	+inputevent.inputType)
+	console.log("inputevent.isComposing = "	+inputevent.isComposing)
 }
-// [blur] https://developer.mozilla.org/en-US/docs/Web/API/Element/blur_event
-function onblur(event){
-	console.log("onblur("+event+")")
+// [beforeinput] https://w3c.github.io/uievents/#event-type-beforeinput
+function onbeforeinput(event){
+	console.log("onbeforeinput("+event+")")
 	printEventProperties(event)
 	printUIEventProperties(event)
-	printFocusEventProperties(event)
+	printInputEventProperties(event)
 }
-myConsoleWindow.addEventListener('blur', onblur)
-// [focus] https://developer.mozilla.org/en-US/docs/Web/API/Element/focus_event
-function onfocus(event){
-	console.log("onfocus("+event+")")
+myConsoleWindow.addEventListener('beforeinput', onbeforeinput)
+// [input] https://w3c.github.io/uievents/#event-type-input
+function oninput(event){
+	console.log("oninput("+event+")")
 	printEventProperties(event)
 	printUIEventProperties(event)
-	printFocusEventProperties(event)
+	printInputEventProperties(event)
 }
-myConsoleWindow.addEventListener('focus', onfocus)
-// [focusin] https://developer.mozilla.org/en-US/docs/Web/API/Element/focusin_event
-function onfocusin(event){
-	console.log("onfocusin("+event+")")
+myConsoleWindow.addEventListener('input', oninput)
+
+
+////// KeyboardEvent ///////
+function printKeyboardEventProperties(keyboardevent){
+	////// Instance properties //////
+	console.log("keyboardevent.altKey = "		+keyboardevent.altKey)
+	console.log("keyboardevent.code = "			+keyboardevent.code)			
+	console.log("keyboardevent.ctrlKey = "		+keyboardevent.ctrlKey)
+	console.log("keyboardevent.isComposing = "	+keyboardevent.isComposing)
+	console.log("keyboardevent.key = "			+keyboardevent.key)
+	console.log("keyboardevent.locale = "		+keyboardevent.locale)
+	console.log("keyboardevent.location = "		+keyboardevent.location)
+	console.log("keyboardevent.metaKey = "		+keyboardevent.metaKey)
+	console.log("keyboardevent.repeat = "		+keyboardevent.repeat)
+	console.log("keyboardevent.shiftKey = "		+keyboardevent.shiftKey)
+	////// Obsolete properties //////
+	console.log("keyboardevent.char = "			+keyboardevent.char)
+	console.log("keyboardevent.charCode = "		+keyboardevent.charCode)
+	console.log("keyboardevent.keyCode = "		+keyboardevent.keyCode)
+	console.log("keyboardevent.keyIdentifier = "+keyboardevent.keyIdentifier)
+	console.log("keyboardevent.keyLocation = "	+keyboardevent.keyLocation)
+	console.log("keyboardevent.which = "		+keyboardevent.which)
+}
+// [keydown] https://developer.mozilla.org/en-US/docs/Web/API/Element/keydown_event
+function onkeydown(event){
+	console.log("onkeydown("+event+")")
 	printEventProperties(event)
 	printUIEventProperties(event)
-	printFocusEventProperties(event)
+	printKeyboardEventProperties(event)
 }
-myConsoleWindow.addEventListener('focusin', onfocusin)
-// [focusout] https://developer.mozilla.org/en-US/docs/Web/API/Element/focusout_event
-function onfocusout(event){
-	console.log("onfocusout("+event+")")
+myConsoleWindow.addEventListener('keydown', onkeydown)
+// [keyup] https://developer.mozilla.org/en-US/docs/Web/API/Element/keyup_event
+function onkeyup(event){
+	console.log("onkeyup("+event+")")
 	printEventProperties(event)
 	printUIEventProperties(event)
-	printFocusEventProperties(event)
+	printKeyboardEventProperties(event)
 }
-myConsoleWindow.addEventListener('focusout', onfocusout)
+myConsoleWindow.addEventListener('keyup', onkeyup)
+// [keypress](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Element/keypress_event
+function onkeypress(event){
+	console.log("onkeypress("+event+")")
+	printEventProperties(event)
+	printUIEventProperties(event)
+	printKeyboardEventProperties(event)
+}
+myConsoleWindow.addEventListener('keypress', onkeypress)
+
+
+///// CompositionEvent //////
+function printCompositionEventProperties(compositionevent){
+	////// Instance properties //////
+	console.log("compositionevent.data = "		+compositionevent.data)
+	console.log("compositionevent.locale = "	+compositionevent.locale)
+}
+// [compositionstart] https://w3c.github.io/uievents/#event-type-compositionstart
+function oncompositionstart(event){
+	console.log("oncompositionstart("+event+")")
+	printEventProperties(event)
+	printUIEventProperties(event)
+	printCompositionEventProperties(event)
+}
+myConsoleWindow.addEventListener('compositionstart', oncompositionstart)
+// [compositionupdate] https://w3c.github.io/uievents/#event-type-compositionupdate
+function oncompositionupdate(event){
+	console.log("oncompositionupdate("+event+")")
+	printEventProperties(event)
+	printUIEventProperties(event)
+	printCompositionEventProperties(event)
+}
+myConsoleWindow.addEventListener('compositionupdate', oncompositionupdate)
+// [compositionend] https://w3c.github.io/uievents/#event-type-compositionend
+function oncompositionend(event){
+	console.log("oncompositionend("+event+")")
+	printEventProperties(event)
+	printUIEventProperties(event)
+	printCompositionEventProperties(event)
+}
+myConsoleWindow.addEventListener('compositionend', oncompositionend)

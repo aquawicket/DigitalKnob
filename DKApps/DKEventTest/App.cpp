@@ -21,10 +21,20 @@ bool App::Init() {
 	DKString consoleWindowAddress = DKDuktape::pointerToAddress(myConsoleWindow);
 	
 	
-	////// KeyboardEvent ///////
-	DKEventTarget::addEventListener<DKKeyboardEvent>("keydown", 	&App::onkeydown, 	consoleWindowAddress);
-	DKEventTarget::addEventListener<DKKeyboardEvent>("keyup", 		&App::onkeyup, 		consoleWindowAddress);
-	DKEventTarget::addEventListener<DKKeyboardEvent>("keypress", 	&App::onkeypress, 	consoleWindowAddress);
+	////// CustomEvent ///////
+	
+	
+	////// EventTarget //////
+	
+	
+	////// UIEvent ///////
+	
+	
+	////// FocusEvent //////
+	DKEventTarget::addEventListener<DKFocusEvent>("blur", 		&App::onblur,		consoleWindowAddress);
+	DKEventTarget::addEventListener<DKFocusEvent>("focus", 		&App::onfocus,		consoleWindowAddress);
+	DKEventTarget::addEventListener<DKFocusEvent>("focusin", 	&App::onfocusin,	consoleWindowAddress);
+	DKEventTarget::addEventListener<DKFocusEvent>("focusout", 	&App::onfocusout,	consoleWindowAddress);
 	
 	
 	////// MouseEvent ///////
@@ -51,11 +61,16 @@ bool App::Init() {
 	DKEventTarget::addEventListener<DKWheelEvent>("wheel", 		&App::onwheel,		consoleWindowAddress);
 	
 	
-	////// FocusEvent //////
-	DKEventTarget::addEventListener<DKFocusEvent>("blur", 		&App::onblur,		consoleWindowAddress);
-	DKEventTarget::addEventListener<DKFocusEvent>("focus", 		&App::onfocus,		consoleWindowAddress);
-	DKEventTarget::addEventListener<DKFocusEvent>("focusin", 	&App::onfocusin,	consoleWindowAddress);
-	DKEventTarget::addEventListener<DKFocusEvent>("focusout", 	&App::onfocusout,	consoleWindowAddress);
+	////// InputEvent //////
+	
+	
+	////// KeyboardEvent ///////
+	DKEventTarget::addEventListener<DKKeyboardEvent>("keydown", 	&App::onkeydown, 	consoleWindowAddress);
+	DKEventTarget::addEventListener<DKKeyboardEvent>("keyup", 		&App::onkeyup, 		consoleWindowAddress);
+	DKEventTarget::addEventListener<DKKeyboardEvent>("keypress", 	&App::onkeypress, 	consoleWindowAddress);
+	
+	
+	////// CompositionEvent //////
 	
 	return true;
 }
@@ -146,6 +161,15 @@ bool App::onscrollend(DKEvent* event) {
 }
 
 
+////// CustomEvent //////
+void APP::printCustomEventProperties(DKCustomEvent* customevent) {
+	////// Instance properties //////
+	DKINFO("uievent->detail = "				+toString(uievent->detail)				+"\n");
+}
+
+////// EventTarget //////
+
+
 ////// UIEvent //////
 void App::printUIEventProperties(DKUIEvent* uievent) {
 	DKDEBUGFUNC(uievent);
@@ -158,52 +182,43 @@ void App::printUIEventProperties(DKUIEvent* uievent) {
 }
 
 
-////// KeyboardEvent //////
-void App::printKeyboardEventProperties(DKKeyboardEvent* keyboardevent) {
-	DKDEBUGFUNC(keyboardevent);
+////// FocusEvent //////
+void App::printFocusEventProperties(DKFocusEvent* focusevent) {
+	DKDEBUGFUNC(focusevent);
 	
 	////// Instance properties //////
-	DKINFO("keyboardevent->altKey = "		+toString(keyboardevent->altKey)		+"\n");
-	DKINFO("keyboardevent->code = "			+toString(keyboardevent->code)			+"\n");
-	DKINFO("keyboardevent->ctrlKey = "		+toString(keyboardevent->ctrlKey)		+"\n");
-	DKINFO("keyboardevent->isComposing = "	+toString(keyboardevent->isComposing)	+"\n");
-	DKINFO("keyboardevent->key = "			+toString(keyboardevent->key)			+"\n");
-	DKINFO("keyboardevent->locale = "		+toString(keyboardevent->locale)		+"\n");
-	DKINFO("keyboardevent->location = "		+toString(keyboardevent->location)		+"\n");
-	DKINFO("keyboardevent->metaKey = "		+toString(keyboardevent->metaKey)		+"\n");
-	DKINFO("keyboardevent->repeat = "		+toString(keyboardevent->repeat)		+"\n");
-	DKINFO("keyboardevent->shiftKey = "		+toString(keyboardevent->shiftKey)		+"\n");
-	
-	////// Obsolete properties //////
-	DKINFO("keyboardevent->char = "			+toString(keyboardevent->_char)			+"\n");
-	DKINFO("keyboardevent->charCode = "		+toString(keyboardevent->charCode)		+"\n");
-	DKINFO("keyboardevent->keyCode = "		+toString(keyboardevent->keyCode)		+"\n");
-	DKINFO("keyboardevent->keyIdentifier = "+toString(keyboardevent->keyIdentifier)	+"\n");
-	DKINFO("keyboardevent->keyLocation = "	+toString(keyboardevent->keyLocation)	+"\n");
-	DKINFO("keyboardevent->which = "		+toString(keyboardevent->which)			+"\n");
+	DKINFO("focusevent->relatedTarget = "	+toString(focusevent->relatedTarget)	+"\n");
 }
-bool App::onkeydown(DKKeyboardEvent* keyboardevent) {
-	DKDEBUGFUNC(keyboardevent);
-	DKINFO("onkeydown() \n");
-	printEventProperties(keyboardevent);
-	printUIEventProperties(keyboardevent);
-	printKeyboardEventProperties(keyboardevent);
+bool App::onblur(DKFocusEvent* focusevent) {
+	DKDEBUGFUNC(focusevent);
+	DKINFO("onblur() \n");
+	printEventProperties(focusevent);
+	printUIEventProperties(focusevent);
+	printFocusEventProperties(focusevent);
 	return true;
 }
-bool App::onkeyup(DKKeyboardEvent* keyboardevent) {
-	DKDEBUGFUNC(keyboardevent);
-	DKINFO("onkeyup() \n");
-	printEventProperties(keyboardevent);
-	printUIEventProperties(keyboardevent);
-	printKeyboardEventProperties(keyboardevent);
+bool App::onfocus(DKFocusEvent* focusevent) {
+	DKDEBUGFUNC(focusevent);
+	DKINFO("onfocus() \n");
+	printEventProperties(focusevent);
+	printUIEventProperties(focusevent);
+	printFocusEventProperties(focusevent);
 	return true;
 }
-bool App::onkeypress(DKKeyboardEvent* keyboardevent) {
-	DKDEBUGFUNC(keyboardevent);
-	DKINFO("onkeypress() \n");
-	printEventProperties(keyboardevent);
-	printUIEventProperties(keyboardevent);
-	printKeyboardEventProperties(keyboardevent);
+bool App::onfocusin(DKFocusEvent* focusevent) {
+	DKDEBUGFUNC(focusevent);
+	DKINFO("onfocusin() \n");
+	printEventProperties(focusevent);
+	printUIEventProperties(focusevent);
+	printFocusEventProperties(focusevent);
+	return true;
+}
+bool App::onfocusout(DKFocusEvent* focusevent) {
+	DKDEBUGFUNC(focusevent);
+	DKINFO("onfocusout() \n");
+	printEventProperties(focusevent);
+	printUIEventProperties(focusevent);
+	printFocusEventProperties(focusevent);
 	return true;
 }
 
@@ -405,42 +420,109 @@ bool App::onwheel(DKWheelEvent* wheelevent) {
 }
 
 
-////// FocusEvent //////
-void App::printFocusEventProperties(DKFocusEvent* focusevent) {
-	DKDEBUGFUNC(focusevent);
+////// InputEvent //////
+void App::printInputEventProperties(DKInputEvent* inputevent) {
+	DKDEBUGFUNC(inputevent);
 	
 	////// Instance properties //////
-	DKINFO("focusevent->relatedTarget = "	+toString(focusevent->relatedTarget)	+"\n");
+	//DKINFO("inputevent->data = "		+toString(inputevent->data)				+"\n");
+	DKINFO("inputevent->dataTransfer = "+toString(inputevent->dataTransfer)		+"\n");
+	DKINFO("inputevent->inputType = "	+toString(inputevent->inputType)		+"\n");
+	DKINFO("inputevent->isComposing = "	+toString(inputevent->isComposing)		+"\n");
 }
-bool App::onblur(DKFocusEvent* focusevent) {
-	DKDEBUGFUNC(focusevent);
-	DKINFO("onblur() \n");
-	printEventProperties(focusevent);
-	printUIEventProperties(focusevent);
-	printFocusEventProperties(focusevent);
+bool App::onbeforeinput(DKInputEvent* inputevent) {
+	DKDEBUGFUNC(inputevent);
+	DKINFO("onbeforeinput() \n");
+	printEventProperties(inputevent);
+	printUIEventProperties(inputevent);
+	printInputEventProperties(inputevent);
+}
+bool App::oninput(DKInputEvent* inputevent) {
+	DKDEBUGFUNC(inputevent);
+	DKINFO("oninput() \n");
+	printEventProperties(inputevent);
+	printUIEventProperties(inputevent);
+	printInputEventProperties(inputevent);
+}
+
+////// KeyboardEvent //////
+void App::printKeyboardEventProperties(DKKeyboardEvent* keyboardevent) {
+	DKDEBUGFUNC(keyboardevent);
+	
+	////// Instance properties //////
+	DKINFO("keyboardevent->altKey = "		+toString(keyboardevent->altKey)		+"\n");
+	DKINFO("keyboardevent->code = "			+toString(keyboardevent->code)			+"\n");
+	DKINFO("keyboardevent->ctrlKey = "		+toString(keyboardevent->ctrlKey)		+"\n");
+	DKINFO("keyboardevent->isComposing = "	+toString(keyboardevent->isComposing)	+"\n");
+	DKINFO("keyboardevent->key = "			+toString(keyboardevent->key)			+"\n");
+	DKINFO("keyboardevent->locale = "		+toString(keyboardevent->locale)		+"\n");
+	DKINFO("keyboardevent->location = "		+toString(keyboardevent->location)		+"\n");
+	DKINFO("keyboardevent->metaKey = "		+toString(keyboardevent->metaKey)		+"\n");
+	DKINFO("keyboardevent->repeat = "		+toString(keyboardevent->repeat)		+"\n");
+	DKINFO("keyboardevent->shiftKey = "		+toString(keyboardevent->shiftKey)		+"\n");
+	
+	////// Obsolete properties //////
+	DKINFO("keyboardevent->char = "			+toString(keyboardevent->_char)			+"\n");
+	DKINFO("keyboardevent->charCode = "		+toString(keyboardevent->charCode)		+"\n");
+	DKINFO("keyboardevent->keyCode = "		+toString(keyboardevent->keyCode)		+"\n");
+	DKINFO("keyboardevent->keyIdentifier = "+toString(keyboardevent->keyIdentifier)	+"\n");
+	DKINFO("keyboardevent->keyLocation = "	+toString(keyboardevent->keyLocation)	+"\n");
+	DKINFO("keyboardevent->which = "		+toString(keyboardevent->which)			+"\n");
+}
+bool App::onkeydown(DKKeyboardEvent* keyboardevent) {
+	DKDEBUGFUNC(keyboardevent);
+	DKINFO("onkeydown() \n");
+	printEventProperties(keyboardevent);
+	printUIEventProperties(keyboardevent);
+	printKeyboardEventProperties(keyboardevent);
 	return true;
 }
-bool App::onfocus(DKFocusEvent* focusevent) {
-	DKDEBUGFUNC(focusevent);
-	DKINFO("onfocus() \n");
-	printEventProperties(focusevent);
-	printUIEventProperties(focusevent);
-	printFocusEventProperties(focusevent);
+bool App::onkeyup(DKKeyboardEvent* keyboardevent) {
+	DKDEBUGFUNC(keyboardevent);
+	DKINFO("onkeyup() \n");
+	printEventProperties(keyboardevent);
+	printUIEventProperties(keyboardevent);
+	printKeyboardEventProperties(keyboardevent);
 	return true;
 }
-bool App::onfocusin(DKFocusEvent* focusevent) {
-	DKDEBUGFUNC(focusevent);
-	DKINFO("onfocusin() \n");
-	printEventProperties(focusevent);
-	printUIEventProperties(focusevent);
-	printFocusEventProperties(focusevent);
+bool App::onkeypress(DKKeyboardEvent* keyboardevent) {
+	DKDEBUGFUNC(keyboardevent);
+	DKINFO("onkeypress() \n");
+	printEventProperties(keyboardevent);
+	printUIEventProperties(keyboardevent);
+	printKeyboardEventProperties(keyboardevent);
 	return true;
 }
-bool App::onfocusout(DKFocusEvent* focusevent) {
-	DKDEBUGFUNC(focusevent);
-	DKINFO("onfocusout() \n");
-	printEventProperties(focusevent);
-	printUIEventProperties(focusevent);
-	printFocusEventProperties(focusevent);
+
+
+////// CompositionEvent //////
+void App::printCompositionEventProperties(DKCompositionEvent* compositionevent) {
+	DKDEBUGFUNC(compositionevent);
+	////// Instance properties //////
+	DKINFO("compositionevent->data = "	+toString(compositionevent->data)	+"\n");
+	DKINFO("compositionevent->locale = "+toString(compositionevent->locale)	+"\n");
+}
+bool App::oncompositionstart(DKCompositionEvent* compositionevent) {
+	DKDEBUGFUNC(compositionevent);
+	DKINFO("oncompositionstart() \n");
+	printEventProperties(compositionevent);
+	printUIEventProperties(compositionevent);
+	printCompositionEventProperties(compositionevent);
+	return true;
+}
+bool App::oncompositionupdate(DKCompositionEvent* compositionevent) {
+	DKDEBUGFUNC(compositionevent);
+	DKINFO("oncompositionupdate() \n");
+	printEventProperties(compositionevent);
+	printUIEventProperties(compositionevent);
+	printCompositionEventProperties(compositionevent);
+	return true;
+}
+bool App::oncompositionend(DKCompositionEvent* compositionevent) {
+	DKDEBUGFUNC(compositionevent);
+	DKINFO("oncompositionend() \n");
+	printEventProperties(compositionevent);
+	printUIEventProperties(compositionevent);
+	printCompositionEventProperties(compositionevent);
 	return true;
 }
