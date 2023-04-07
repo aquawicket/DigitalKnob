@@ -5,9 +5,7 @@
 #include "DKDuktape/DKDuktape.h"
 
 WARNING_DISABLE
-//#include "dukglue/dukglue.h"
-#include "dukglue/public_util.h"
-#include "dukglue/dukvalue.h"
+#include "dukglue/dukglue.h"
 WARNING_ENABLE
 
 
@@ -23,7 +21,7 @@ public:
 	
 	
 		////// Instance properties //////
-		DKDuktape::AttachFunction("CPP_DKInputEvent_data",			DKInputEventJS::data);
+		//DKDuktape::AttachFunction("CPP_DKInputEvent_data",			DKInputEventJS::data); //FIXME: data is already a member of DKObject
 		DKDuktape::AttachFunction("CPP_DKInputEvent_dataTransfer",	DKInputEventJS::dataTransfer);
 		DKDuktape::AttachFunction("CPP_DKInputEvent_inputType",		DKInputEventJS::inputType);
 		DKDuktape::AttachFunction("CPP_DKInputEvent_isComposing", 	DKInputEventJS::isComposing);
@@ -66,6 +64,7 @@ public:
 	
 	////// Instance properties //////
 	// [InputEvent.data](Read only) https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/data
+	/* //FIXME: data is already a member of DKObject
 	static int data(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
@@ -73,6 +72,7 @@ public:
 		duk_push_string(ctx, event->data.c_str());	
 		return true;
 	}
+	*/
 	// [InputEvent.dataTransfer](Read only) https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/dataTransfer
 	static int dataTransfer(duk_context* ctx){
 		DKDEBUGFUNC(ctx);

@@ -16,7 +16,7 @@ public:
 		DKINFO("DKInputEvent("+_type+", "+_options+") \n");
 		
 		////// Instance properties //////
-		data = "";
+		//data = ""; //FIXME: data is already a member of DKObject
 		dataTransfer = "";
 		inputType = "";
 		isComposing = false;
@@ -25,7 +25,7 @@ public:
 
 	////// Instance properties //////
 	// [InputEvent.data](Read only) https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/data
-	DKString data;
+	//DKString data; //FIXME: data is already a member of DKObject
 	// [InputEvent.dataTransfer](Read only) https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/dataTransfer
 	DKString dataTransfer;
 	// [InputEvent.inputType](Read only) https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/inputType
