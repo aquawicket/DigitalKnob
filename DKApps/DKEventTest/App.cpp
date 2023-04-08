@@ -8,12 +8,13 @@ bool App::Init() {
 	
 	DKClass::DKCreate("DKEventTarget");															
 	
+	/*
 	////// Event //////
 	DKString thisAddress = DKDuktape::pointerToAddress(this);
-	DKEventTarget::addEventListener<DKEvent>("genericb", &App::ongeneric, thisAddress);					
-	DKEvent* event = new DKEvent("genericb", "");												
+	DKEventTarget::addEventListener<DKEvent>("generic", &App::ongeneric, thisAddress);					
+	DKEvent* event = new DKEvent("generic", "");												
 	DKEventTarget::dispatchEvent(event, thisAddress);													
-	DKEventTarget::removeEventListener<DKEvent>("genericb", &App::ongeneric, thisAddress);	
+	DKEventTarget::removeEventListener<DKEvent>("generic", &App::ongeneric, thisAddress);	
 	DKEventTarget::dispatchEvent(event, thisAddress);
 	
 	DKINFO("/////////// ConsoleWindow ///////////////////// \n");
@@ -71,6 +72,7 @@ bool App::Init() {
 	
 	
 	////// CompositionEvent //////
+	*/
 	
 	return true;
 }

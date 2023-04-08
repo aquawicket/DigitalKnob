@@ -72,17 +72,14 @@ public:
 		
 		////// Events //////
 		// [keydown] https://developer.mozilla.org/en-US/docs/Web/API/Element/keydown_event
-		DKEventTarget::LinkAddEventListenerFunc		("keydown", 	&DKKeyboardEventJS::addEventListener, 		this);
-		DKEventTarget::LinkRemoveEventListenerFunc	("keydown", 	&DKKeyboardEventJS::removeEventListener, 	this);
+		registerEventType("keydown");
 		// [keyup] https://developer.mozilla.org/en-US/docs/Web/API/Element/keyup_event
-		DKEventTarget::LinkAddEventListenerFunc		("keyup", 		&DKKeyboardEventJS::addEventListener, 		this);
-		DKEventTarget::LinkRemoveEventListenerFunc	("keyup", 		&DKKeyboardEventJS::removeEventListener, 	this);
+		registerEventType("keyup");
 		
 		
 		////// Obsolete events //////
 		// [keypress](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Element/keypress_event
-		DKEventTarget::LinkAddEventListenerFunc		("keypress", 	&DKKeyboardEventJS::addEventListener, 		this);
-		DKEventTarget::LinkRemoveEventListenerFunc	("keypress",	&DKKeyboardEventJS::removeEventListener, 	this);
+		registerEventType("keypress");
 		
 		
 		////// Load .js files
@@ -99,6 +96,7 @@ public:
 		DKString type = duk_require_string(ctx, 0);
 		DKString options = duk_require_string(ctx, 1);
 		DKINFO("CPP_DKKeyboardEvent("+type+","+options+")\n");
+		DKKeyboardEventJS::Get()->registerEventType(type);
 		DKKeyboardEvent* event = new DKKeyboardEvent(type, options);
 		DKString eventAddress = DKDuktape::pointerToAddress(event);
 		duk_push_string(ctx, eventAddress.c_str());	
@@ -261,7 +259,13 @@ public:
 	}
 
 
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////
+	bool registerEventType(const DKString& _type){
+		DKEventTarget::LinkAddEventListenerFunc		(_type, &DKKeyboardEventJS::addEventListener, 		this);
+		DKEventTarget::LinkRemoveEventListenerFunc	(_type,	&DKKeyboardEventJS::removeEventListener, 	this);
+		return true;
+	}
+	
 	bool addEventListener(const DKString& _type, const DKString& eventTargetAddress){
 		DKEventTarget::addEventListener<DKKeyboardEvent>(_type, &DKKeyboardEventJS::onKeyboardEvent, eventTargetAddress);
 		return true;

@@ -6,6 +6,7 @@
 var Event = function Event(type, options, address) {
 	//console.log("Event("+type+","+options+","+address+")")
 	
+	options = JSON.stringify(options)
 	if(address)
 		this.address = address;
 	if(!this.address)

@@ -35,20 +35,15 @@ public:
 		
 		////// Events //////
 		// [abort] https://w3c.github.io/uievents/#event-type-abort
-		DKEventTarget::LinkAddEventListenerFunc		("abort", 	&DKUIEventJS::addEventListener, 	this);
-		DKEventTarget::LinkRemoveEventListenerFunc	("abort", 	&DKUIEventJS::removeEventListener, 	this);
+		registerEventType("abort");
 		// [error] https://w3c.github.io/uievents/#event-type-error
-		DKEventTarget::LinkAddEventListenerFunc		("error", 	&DKUIEventJS::addEventListener, 	this);
-		DKEventTarget::LinkRemoveEventListenerFunc	("error", 	&DKUIEventJS::removeEventListener, 	this);
+		registerEventType("error");
 		// [load] https://w3c.github.io/uievents/#event-type-load
-		DKEventTarget::LinkAddEventListenerFunc		("load", 	&DKUIEventJS::addEventListener, 	this);
-		DKEventTarget::LinkRemoveEventListenerFunc	("load", 	&DKUIEventJS::removeEventListener, 	this);
+		registerEventType("load");
 		// [select] https://w3c.github.io/uievents/#event-type-select
-		DKEventTarget::LinkAddEventListenerFunc		("select", 	&DKUIEventJS::addEventListener, 	this);
-		DKEventTarget::LinkRemoveEventListenerFunc	("select", 	&DKUIEventJS::removeEventListener, 	this);
+		registerEventType("select");
 		// [unload] https://w3c.github.io/uievents/#event-type-unload
-		DKEventTarget::LinkAddEventListenerFunc		("unload", 	&DKUIEventJS::addEventListener, 	this);
-		DKEventTarget::LinkRemoveEventListenerFunc	("unload", 	&DKUIEventJS::removeEventListener, 	this);
+		registerEventType("unload");
 	
 	
 		////// Load .js files
@@ -65,6 +60,7 @@ public:
 		DKString type = duk_require_string(ctx, 0);
 		DKString options = duk_require_string(ctx, 1);
 		DKINFO("CPP_DKUIEvent("+type+","+options+")\n");
+		DKUIEventJS::Get()->registerEventType(type);
 		DKUIEvent* event = new DKUIEvent(type, options);
 		DKString eventAddress = DKDuktape::pointerToAddress(event);
 		duk_push_string(ctx, eventAddress.c_str());	
@@ -110,14 +106,20 @@ public:
 	
 	
 	
-	/////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////////////
+	bool registerEventType(const DKString& _type){
+		DKEventTarget::LinkAddEventListenerFunc		(_type, &DKUIEventJS::addEventListener, 	this);
+		DKEventTarget::LinkRemoveEventListenerFunc	(_type,	&DKUIEventJS::removeEventListener, 	this);
+		return true;
+	}
+	
 	bool addEventListener(const DKString& _type, const DKString& eventTargetAddress){
-		DKEventTarget::addEventListener<DKEvent>(_type, &DKEventJS::onEvent, eventTargetAddress);
+		DKEventTarget::addEventListener<DKUIEvent>(_type, &DKUIEventJS::onUIEvent, eventTargetAddress);
 		return true;
 	}
 	
 	bool removeEventListener(const DKString& _type, const DKString& eventTargetAddress){
-		DKEventTarget::removeEventListener<DKEvent>(_type, &DKEventJS::onEvent, eventTargetAddress);
+		DKEventTarget::removeEventListener<DKUIEvent>(_type, &DKUIEventJS::onUIEvent, eventTargetAddress);
 		return true;
 	}
 	

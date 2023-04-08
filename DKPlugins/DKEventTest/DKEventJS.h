@@ -55,33 +55,23 @@ public:
 		
 		
 		////// Events //////
-		DKEventTarget::LinkAddEventListenerFunc		("generic", 			&DKEventJS::addEventListener, 		this);
-		DKEventTarget::LinkRemoveEventListenerFunc	("generic",				&DKEventJS::removeEventListener, 	this);
 		// [afterscriptexecute] https://developer.mozilla.org/en-US/docs/Web/API/Element/afterscriptexecute_event
-		DKEventTarget::LinkAddEventListenerFunc		("afterscriptexecute",	&DKEventJS::addEventListener,		this);
-		DKEventTarget::LinkRemoveEventListenerFunc	("afterscriptexecute",	&DKEventJS::removeEventListener, 	this);
+		registerEventType("afterscriptexecute");
 		// [beforematch] https://developer.mozilla.org/en-US/docs/Web/API/Element/beforematch_event
-		DKEventTarget::LinkAddEventListenerFunc		("beforematch", 		&DKEventJS::addEventListener, 		this);
-		DKEventTarget::LinkRemoveEventListenerFunc	("beforematch", 		&DKEventJS::removeEventListener, 	this);
+		registerEventType("beforematch");
 		// [beforescriptexecute] https://developer.mozilla.org/en-US/docs/Web/API/Element/beforescriptexecute_event
-		DKEventTarget::LinkAddEventListenerFunc		("beforescriptexecute", &DKEventJS::addEventListener, 		this);
-		DKEventTarget::LinkRemoveEventListenerFunc	("beforescriptexecute", &DKEventJS::removeEventListener, 	this);
+		registerEventType("beforescriptexecute");
 		// [error] https://developer.mozilla.org/en-US/docs/Web/API/Element/error_event
-		DKEventTarget::LinkAddEventListenerFunc		("error", 				&DKEventJS::addEventListener, 		this);
-		DKEventTarget::LinkRemoveEventListenerFunc	("error", 				&DKEventJS::removeEventListener, 	this);
+		registerEventType("error");
 		// [fullscreenchange] https://developer.mozilla.org/en-US/docs/Web/API/Element/fullscreenchange_event
-		DKEventTarget::LinkAddEventListenerFunc		("fullscreenchange", 	&DKEventJS::addEventListener, 		this);
-		DKEventTarget::LinkRemoveEventListenerFunc	("fullscreenchange", 	&DKEventJS::removeEventListener, 	this);
+		registerEventType("fullscreenchange");
 		// [fullscreenerror] https://developer.mozilla.org/en-US/docs/Web/API/Element/fullscreenerror_event
-		DKEventTarget::LinkAddEventListenerFunc		("fullscreenerror",		&DKEventJS::addEventListener, 		this);
-		DKEventTarget::LinkRemoveEventListenerFunc	("fullscreenerror", 	&DKEventJS::removeEventListener, 	this);
+		registerEventType("fullscreenerror");
 		// [scroll] https://developer.mozilla.org/en-US/docs/Web/API/Element/scroll_event
-		DKEventTarget::LinkAddEventListenerFunc		("scroll", 				&DKEventJS::addEventListener, 		this);
-		DKEventTarget::LinkRemoveEventListenerFunc	("scroll", 				&DKEventJS::removeEventListener, 	this);
+		registerEventType("scroll");
 		// [scrollend] https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollend_event
-		DKEventTarget::LinkAddEventListenerFunc		("scrollend", 			&DKEventJS::addEventListener, 		this);
-		DKEventTarget::LinkRemoveEventListenerFunc	("scrollend", 			&DKEventJS::removeEventListener, 	this);
-	
+		registerEventType("scrollend");
+
 		
 		////// Load .js files
 		DKClass::DKCreate("DKEventTest/DKEvent.js");
@@ -97,6 +87,7 @@ public:
 		DKString type = duk_require_string(ctx, 0);
 		DKString options = duk_require_string(ctx, 1);
 		DKINFO("CPP_DKEvent("+type+","+options+")\n");
+		DKEventJS::Get()->registerEventType(type);
 		DKEvent* event = new DKEvent(type, options);
 		DKString eventAddress = DKDuktape::pointerToAddress(event);
 		duk_push_string(ctx, eventAddress.c_str());	
@@ -249,7 +240,13 @@ public:
 	
 	
 	
-	/////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////////////
+	bool registerEventType(const DKString& _type){
+		DKEventTarget::LinkAddEventListenerFunc		(_type, &DKEventJS::addEventListener, 		this);
+		DKEventTarget::LinkRemoveEventListenerFunc	(_type,	&DKEventJS::removeEventListener, 	this);
+		return true;
+	}
+	
 	bool addEventListener(const DKString& _type, const DKString& eventTargetAddress){
 		DKEventTarget::addEventListener<DKEvent>(_type, &DKEventJS::onEvent, eventTargetAddress);
 		return true;

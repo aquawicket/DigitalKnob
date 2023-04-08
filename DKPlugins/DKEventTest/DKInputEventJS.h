@@ -34,13 +34,11 @@ public:
 		
 		////// Events //////
 		// [beforeinput] https://w3c.github.io/uievents/#event-type-beforeinput
-		DKEventTarget::LinkAddEventListenerFunc		("beforeinput", 	&DKInputEventJS::addEventListener, 		this);
-		DKEventTarget::LinkRemoveEventListenerFunc	("beforeinput", 	&DKInputEventJS::removeEventListener, 	this);
+		registerEventType("beforeinput");
 		// [input] https://developer.mozilla.org/en-US/docs/Web/API/Element/keyup_event
-		DKEventTarget::LinkAddEventListenerFunc		("input", 			&DKInputEventJS::addEventListener, 		this);
-		DKEventTarget::LinkRemoveEventListenerFunc	("input", 			&DKInputEventJS::removeEventListener, 	this);
-		
-		
+		registerEventType("input");
+
+			
 		////// Load .js files
 		DKClass::DKCreate("DKEventTest/DKInputEvent.js");
 		
@@ -55,6 +53,7 @@ public:
 		DKString type = duk_require_string(ctx, 0);
 		DKString options = duk_require_string(ctx, 1);
 		DKINFO("CPP_DKInputEvent("+type+","+options+")\n");
+		DKInputEventJS::Get()->registerEventType(type);
 		DKInputEvent* event = new DKInputEvent(type, options);
 		DKString eventAddress = DKDuktape::pointerToAddress(event);
 		duk_push_string(ctx, eventAddress.c_str());	
@@ -108,7 +107,13 @@ public:
 
 
 
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////////////////
+	bool registerEventType(const DKString& _type){
+		DKEventTarget::LinkAddEventListenerFunc		(_type, &DKInputEventJS::addEventListener, 		this);
+		DKEventTarget::LinkRemoveEventListenerFunc	(_type,	&DKInputEventJS::removeEventListener, 	this);
+		return true;
+	}
+	
 	bool addEventListener(const DKString& _type, const DKString& eventTargetAddress){
 		DKEventTarget::addEventListener<DKInputEvent>(_type, &DKInputEventJS::onInputEvent, eventTargetAddress);
 		return true;

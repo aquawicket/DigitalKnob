@@ -6,6 +6,8 @@
 var CustomEvent = function CustomEvent(type, options, address) {
 	//console.log("CustomEvent("+type+","+options+","+address+")")
 	
+	options = JSON.stringify(options);
+	
 	if(address)
 		this.address = address;
 	if(!this.address)

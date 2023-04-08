@@ -28,18 +28,14 @@ public:
 		
 		////// Events //////
 		// [blur] https://developer.mozilla.org/en-US/docs/Web/API/Element/blur_event
-		DKEventTarget::LinkAddEventListenerFunc		("blur", 		&DKFocusEventJS::addEventListener, 		this);
-		DKEventTarget::LinkRemoveEventListenerFunc	("blur", 		&DKFocusEventJS::removeEventListener, 	this);
+		registerEventType("blur");
 		// [focus] https://developer.mozilla.org/en-US/docs/Web/API/Element/focus_event
-		DKEventTarget::LinkAddEventListenerFunc		("focus", 		&DKFocusEventJS::addEventListener, 		this);
-		DKEventTarget::LinkRemoveEventListenerFunc	("focus", 		&DKFocusEventJS::removeEventListener, 	this);
+		registerEventType("focus");
 		// [focusin] https://developer.mozilla.org/en-US/docs/Web/API/Element/focusin_event
-		DKEventTarget::LinkAddEventListenerFunc		("focusin", 	&DKFocusEventJS::addEventListener, 		this);
-		DKEventTarget::LinkRemoveEventListenerFunc	("focusin",		&DKFocusEventJS::removeEventListener, 	this);
+		registerEventType("focusin");
 		// [focusout] https://developer.mozilla.org/en-US/docs/Web/API/Element/focusout_event
-		DKEventTarget::LinkAddEventListenerFunc		("focusout", 	&DKFocusEventJS::addEventListener, 		this);
-		DKEventTarget::LinkRemoveEventListenerFunc	("focusout", 	&DKFocusEventJS::removeEventListener, 	this);
-		
+		registerEventType("focusout");
+	
 		
 		////// Load .js files
 		DKClass::DKCreate("DKEventTest/DKFocusEvent.js");
@@ -55,6 +51,7 @@ public:
 		DKString type = duk_require_string(ctx, 0);
 		DKString options = duk_require_string(ctx, 1);
 		DKINFO("CPP_DKFocusEvent("+type+","+options+")\n");
+		DKFocusEventJS::Get()->registerEventType(type);
 		DKFocusEvent* event = new DKFocusEvent(type, options);
 		DKString eventAddress = DKDuktape::pointerToAddress(event);
 		duk_push_string(ctx, eventAddress.c_str());	
@@ -73,7 +70,13 @@ public:
 	}
 
 
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////////////////
+	bool registerEventType(const DKString& _type){
+		DKEventTarget::LinkAddEventListenerFunc		(_type, &DKFocusEventJS::addEventListener, 		this);
+		DKEventTarget::LinkRemoveEventListenerFunc	(_type,	&DKFocusEventJS::removeEventListener, 	this);
+		return true;
+	}
+	
 	bool addEventListener(const DKString& _type, const DKString& eventTargetAddress){
 		DKEventTarget::addEventListener<DKFocusEvent>(_type, &DKFocusEventJS::onFocusEvent, eventTargetAddress);
 		return true;

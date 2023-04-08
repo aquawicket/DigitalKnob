@@ -34,11 +34,9 @@ public:
 	
 		////// Events //////
 		// [mousewheel](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Element/mousewheel_event
-		DKEventTarget::LinkAddEventListenerFunc		("mousewheel", 	&DKWheelEventJS::addEventListener, 		this);
-		DKEventTarget::LinkRemoveEventListenerFunc	("mousewheel", 	&DKWheelEventJS::removeEventListener, 	this);
+		registerEventType("mousewheel");
 		// [wheel] https://developer.mozilla.org/en-US/docs/Web/API/Element/wheel_event
-		DKEventTarget::LinkAddEventListenerFunc		("wheel", 		&DKWheelEventJS::addEventListener, 		this);
-		DKEventTarget::LinkRemoveEventListenerFunc	("wheel", 		&DKWheelEventJS::removeEventListener, 	this);
+		registerEventType("wheel");
 
 
 		////// Load .js files //////
@@ -55,6 +53,7 @@ public:
 		DKString type = duk_require_string(ctx, 0);
 		DKString options = duk_require_string(ctx, 1);
 		DKINFO("CPP_DKWheelEvent("+type+","+options+")\n");
+		DKWheelEventJS::Get()->registerEventType(type);
 		DKWheelEvent* event = new DKWheelEvent(type, options);
 		DKString eventAddress = DKDuktape::pointerToAddress(event);
 		duk_push_string(ctx, eventAddress.c_str());	
@@ -122,7 +121,13 @@ public:
 	
 
 
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////////////////
+	bool registerEventType(const DKString& _type){
+		DKEventTarget::LinkAddEventListenerFunc		(_type, &DKWheelEventJS::addEventListener, 		this);
+		DKEventTarget::LinkRemoveEventListenerFunc	(_type,	&DKWheelEventJS::removeEventListener, 	this);
+		return true;
+	}
+	
 	bool addEventListener(const DKString& _type, const DKString& eventTargetAddress){
 		DKEventTarget::addEventListener<DKWheelEvent>(_type, &DKWheelEventJS::onWheelEvent, eventTargetAddress);
 		return true;

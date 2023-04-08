@@ -32,14 +32,11 @@ public:
 		
 		////// Events //////
 		// [compositionstart] https://w3c.github.io/uievents/#event-type-compositionstart
-		DKEventTarget::LinkAddEventListenerFunc		("compositionstart", 	&DKCompositionEventJS::addEventListener, 		this);
-		DKEventTarget::LinkRemoveEventListenerFunc	("compositionstart", 	&DKCompositionEventJS::removeEventListener, 	this);
+		registerEventType("compositionstart");
 		// [compositionupdate] https://w3c.github.io/uievents/#event-type-compositionupdate
-		DKEventTarget::LinkAddEventListenerFunc		("compositionupdate", 	&DKCompositionEventJS::addEventListener, 		this);
-		DKEventTarget::LinkRemoveEventListenerFunc	("compositionupdate", 	&DKCompositionEventJS::removeEventListener, 	this);
+		registerEventType("compositionupdate");
 		// [compositionend] https://w3c.github.io/uievents/#event-type-compositionend
-		DKEventTarget::LinkAddEventListenerFunc		("compositionend", 		&DKCompositionEventJS::addEventListener, 		this);
-		DKEventTarget::LinkRemoveEventListenerFunc	("compositionend", 		&DKCompositionEventJS::removeEventListener, 	this);
+		registerEventType("compositionend");
 		
 		
 		////// Load .js files
@@ -56,6 +53,7 @@ public:
 		DKString type = duk_require_string(ctx, 0);
 		DKString options = duk_require_string(ctx, 1);
 		DKINFO("CPP_DKCompositionEvent("+type+","+options+")\n");
+		DKCompositionEventJS::Get()->registerEventType(type);
 		DKCompositionEvent* event = new DKCompositionEvent(type, options);
 		DKString eventAddress = DKDuktape::pointerToAddress(event);
 		duk_push_string(ctx, eventAddress.c_str());	
@@ -93,7 +91,13 @@ public:
 
 
 
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////
+	bool registerEventType(const DKString& _type){
+		DKEventTarget::LinkAddEventListenerFunc		(_type, &DKCompositionEventJS::addEventListener, 	this);
+		DKEventTarget::LinkRemoveEventListenerFunc	(_type,	&DKCompositionEventJS::removeEventListener, this);
+		return true;
+	}
+	
 	bool addEventListener(const DKString& _type, const DKString& eventTargetAddress){
 		DKEventTarget::addEventListener<DKCompositionEvent>(_type, &DKCompositionEventJS::onCompositionEvent, eventTargetAddress);
 		return true;

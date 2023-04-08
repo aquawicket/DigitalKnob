@@ -44,6 +44,7 @@ public:
 		DKString type = duk_require_string(ctx, 0);
 		DKString options = duk_require_string(ctx, 1);
 		DKINFO("CPP_DKCustomEvent("+type+","+options+")\n");
+		DKCustomEventJS::Get()->registerEventType(type);
 		DKCustomEvent* event = new DKCustomEvent(type, options);
 		DKString eventAddress = DKDuktape::pointerToAddress(event);
 		duk_push_string(ctx, eventAddress.c_str());	
@@ -71,7 +72,13 @@ public:
 	
 	
 	
-	/////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////////////////
+	bool registerEventType(const DKString& _type){
+		DKEventTarget::LinkAddEventListenerFunc		(_type, &DKCustomEventJS::addEventListener, 	this);
+		DKEventTarget::LinkRemoveEventListenerFunc	(_type,	&DKCustomEventJS::removeEventListener, 	this);
+		return true;
+	}
+	
 	bool addEventListener(const DKString& _type, const DKString& eventTargetAddress){
 		DKEventTarget::addEventListener<DKCustomEvent>(_type, &DKCustomEventJS::onCustomEvent, eventTargetAddress);
 		return true;
