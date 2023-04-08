@@ -90,7 +90,7 @@ public:
 		DKEventJS::Get()->registerEventType(type);
 		DKEvent* event = new DKEvent(type, options);
 		DKString eventAddress = DKDuktape::pointerToAddress(event);
-		DKEventTarget::LinkDispatchEventFunc(eventAddress ,&DKEventJS::dispatchEvent, DKEventJS::Get());
+		DKEventTarget::LinkDispatchEventFunc(eventAddress, &DKEventJS::dispatchEvent, DKEventJS::Get());
 		duk_push_string(ctx, eventAddress.c_str());	
 		return true;
 	}
@@ -246,7 +246,6 @@ public:
 		DKINFO("DKEventJS::registerEventType("+_type+") \n");
 		DKEventTarget::LinkAddEventListenerFunc		(_type, &DKEventJS::addEventListener, 		this);
 		DKEventTarget::LinkRemoveEventListenerFunc	(_type,	&DKEventJS::removeEventListener, 	this);
-		
 		return true;
 	}
 	

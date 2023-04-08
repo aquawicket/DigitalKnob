@@ -51,11 +51,12 @@ public:
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
-		DKString options = duk_require_string(ctx, 1);
+		DKString options = "";//duk_require_string(ctx, 1);
 		DKINFO("CPP_DKCompositionEvent("+type+","+options+")\n");
 		DKCompositionEventJS::Get()->registerEventType(type);
 		DKCompositionEvent* event = new DKCompositionEvent(type, options);
 		DKString eventAddress = DKDuktape::pointerToAddress(event);
+		DKEventTarget::LinkDispatchEventFunc(eventAddress, &DKCompositionEventJS::dispatchEvent, DKCompositionEventJS::Get());
 		duk_push_string(ctx, eventAddress.c_str());	
 		return true;
 	}
@@ -105,6 +106,13 @@ public:
 	
 	bool removeEventListener(const DKString& _type, const DKString& eventTargetAddress){
 		DKEventTarget::removeEventListener<DKCompositionEvent>(_type, &DKCompositionEventJS::onCompositionEvent, eventTargetAddress);
+		return true;
+	}
+	
+	bool dispatchEvent(const DKString& eventAddress, const DKString& eventTargetAddress){
+		DKINFO("DKCompositionEventJS::dispatchEvent("+eventAddress+", "+eventTargetAddress+") \n");
+		DKCompositionEvent* event = (DKCompositionEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKEventTarget::dispatchEvent(event, eventTargetAddress);
 		return true;
 	}
 	

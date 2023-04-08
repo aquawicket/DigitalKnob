@@ -51,11 +51,12 @@ public:
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
-		DKString options = duk_require_string(ctx, 1);
+		DKString options = "";//duk_require_string(ctx, 1);
 		DKINFO("CPP_DKInputEvent("+type+","+options+")\n");
 		DKInputEventJS::Get()->registerEventType(type);
 		DKInputEvent* event = new DKInputEvent(type, options);
 		DKString eventAddress = DKDuktape::pointerToAddress(event);
+		DKEventTarget::LinkDispatchEventFunc(eventAddress, &DKInputEventJS::dispatchEvent, DKInputEventJS::Get());
 		duk_push_string(ctx, eventAddress.c_str());	
 		return true;
 	}
@@ -121,6 +122,13 @@ public:
 	
 	bool removeEventListener(const DKString& _type, const DKString& eventTargetAddress){
 		DKEventTarget::removeEventListener<DKInputEvent>(_type, &DKInputEventJS::onInputEvent, eventTargetAddress);
+		return true;
+	}
+	
+	bool dispatchEvent(const DKString& eventAddress, const DKString& eventTargetAddress){
+		DKINFO("DKInputEventJS::dispatchEvent("+eventAddress+", "+eventTargetAddress+") \n");
+		DKInputEvent* event = (DKInputEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKEventTarget::dispatchEvent(event, eventTargetAddress);
 		return true;
 	}
 	

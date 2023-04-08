@@ -106,11 +106,12 @@ public:
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
-		DKString options = duk_require_string(ctx, 1);
+		DKString options = "";//duk_require_string(ctx, 1);
 		DKINFO("CPP_DKMouseEvent("+type+","+options+")\n");
 		DKMouseEventJS::Get()->registerEventType(type);
 		DKMouseEvent* event = new DKMouseEvent(type, options);
 		DKString eventAddress = DKDuktape::pointerToAddress(event);
+		DKEventTarget::LinkDispatchEventFunc(eventAddress, &DKMouseEventJS::dispatchEvent, DKMouseEventJS::Get());
 		duk_push_string(ctx, eventAddress.c_str());	
 		return true;
 	}
@@ -339,6 +340,13 @@ public:
 	
 	bool removeEventListener(const DKString& _type, const DKString& eventTargetAddress){
 		DKEventTarget::removeEventListener<DKMouseEvent>(_type, &DKMouseEventJS::onMouseEvent, eventTargetAddress);
+		return true;
+	}
+	
+	bool dispatchEvent(const DKString& eventAddress, const DKString& eventTargetAddress){
+		DKINFO("DKMouseEventJS::dispatchEvent("+eventAddress+", "+eventTargetAddress+") \n");
+		DKMouseEvent* event = (DKMouseEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKEventTarget::dispatchEvent(event, eventTargetAddress);
 		return true;
 	}
 	

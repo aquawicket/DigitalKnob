@@ -51,11 +51,12 @@ public:
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
-		DKString options = duk_require_string(ctx, 1);
+		DKString options = "";//duk_require_string(ctx, 1);
 		DKINFO("CPP_DKWheelEvent("+type+","+options+")\n");
 		DKWheelEventJS::Get()->registerEventType(type);
 		DKWheelEvent* event = new DKWheelEvent(type, options);
 		DKString eventAddress = DKDuktape::pointerToAddress(event);
+		DKEventTarget::LinkDispatchEventFunc(eventAddress, &DKWheelEventJS::dispatchEvent, DKWheelEventJS::Get());
 		duk_push_string(ctx, eventAddress.c_str());	
 		return true;
 	}
@@ -135,6 +136,13 @@ public:
 	
 	bool removeEventListener(const DKString& _type, const DKString& eventTargetAddress){
 		DKEventTarget::removeEventListener<DKWheelEvent>(_type, &DKWheelEventJS::onWheelEvent, eventTargetAddress);
+		return true;
+	}
+	
+	bool dispatchEvent(const DKString& eventAddress, const DKString& eventTargetAddress){
+		DKINFO("DKWheelEventJS::dispatchEvent("+eventAddress+", "+eventTargetAddress+") \n");
+		DKWheelEvent* event = (DKWheelEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKEventTarget::dispatchEvent(event, eventTargetAddress);
 		return true;
 	}
 	

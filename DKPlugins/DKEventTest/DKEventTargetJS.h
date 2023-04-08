@@ -83,10 +83,6 @@ public:
 		DKString eventAddress = duk_require_string(ctx, 1);
 		DKINFO("DKEventTargetJS::dispatchEvent("+targetAddress+", "+eventAddress+")\n");
 		
-		//DKEvent* event = (DKEvent*)DKDuktape::addressToPointer(eventAddress);
-		//DKEventTarget::dispatchEvent(event, targetAddress);
-		//DKINFO("DKEventTargetJS::dispatchEvent() type = "+evnt-type+"\n");
-		
 		DKEventTarget::CallDispatchEventFunc(eventAddress, targetAddress);
 		
 		return true;
