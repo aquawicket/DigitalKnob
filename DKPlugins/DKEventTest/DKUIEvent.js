@@ -6,6 +6,7 @@
 var UIEvent = function UIEvent(type, options, address) {
 	//console.log("UIEvent("+type+","+options+","+address+")")
 	
+	options = JSON.stringify(options)
 	if(address)
 		this.address = address;
 	if(!this.address)

@@ -6,6 +6,7 @@
 var FocusEvent = function FocusEvent(type, options, address) {
 	//console.log("FocusEvent("+type+","+options+","+address+")")
 	
+	options = JSON.stringify(options)
 	if(address)
 		this.address = address;
 	if(!this.address)
