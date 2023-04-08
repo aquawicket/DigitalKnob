@@ -72,7 +72,7 @@ public:
 		// [scrollend] https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollend_event
 		registerEventType("scrollend");
 
-		
+			
 		////// Load .js files
 		DKClass::DKCreate("DKEventTest/DKEvent.js");
 		
@@ -85,11 +85,12 @@ public:
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
-		DKString options = duk_require_string(ctx, 1);
+		DKString options = "";//duk_require_string(ctx, 1);
 		DKINFO("CPP_DKEvent("+type+","+options+")\n");
 		DKEventJS::Get()->registerEventType(type);
 		DKEvent* event = new DKEvent(type, options);
 		DKString eventAddress = DKDuktape::pointerToAddress(event);
+		DKEventTarget::LinkDispatchEventFunc(eventAddress ,&DKEventJS::dispatchEvent, DKEventJS::Get());
 		duk_push_string(ctx, eventAddress.c_str());	
 		return true;
 	}
@@ -242,24 +243,35 @@ public:
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////
 	bool registerEventType(const DKString& _type){
+		DKINFO("DKEventJS::registerEventType("+_type+") \n");
 		DKEventTarget::LinkAddEventListenerFunc		(_type, &DKEventJS::addEventListener, 		this);
 		DKEventTarget::LinkRemoveEventListenerFunc	(_type,	&DKEventJS::removeEventListener, 	this);
+		
 		return true;
 	}
 	
 	bool addEventListener(const DKString& _type, const DKString& eventTargetAddress){
+		DKINFO("DKEventJS::addEventListener("+_type+", "+eventTargetAddress+") \n");
 		DKEventTarget::addEventListener<DKEvent>(_type, &DKEventJS::onEvent, eventTargetAddress);
 		return true;
 	}
 	
 	bool removeEventListener(const DKString& _type, const DKString& eventTargetAddress){
+		DKINFO("DKEventJS::removeEventListener("+_type+", "+eventTargetAddress+") \n");
 		DKEventTarget::removeEventListener<DKEvent>(_type, &DKEventJS::onEvent, eventTargetAddress);
+		return true;
+	}
+	
+	bool dispatchEvent(const DKString& eventAddress, const DKString& eventTargetAddress){
+		DKINFO("DKEventJS::dispatchEvent("+eventAddress+", "+eventTargetAddress+") \n");
+		DKEvent* event = (DKEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKEventTarget::dispatchEvent(event, eventTargetAddress);
 		return true;
 	}
 	
 	static bool onEvent(DKEvent* event) {
 		DKDEBUGFUNC(event);
-		DKINFO("onEvent("+event->type+") \n");
+		DKINFO("DKEventJS::onEvent("+event->type+") \n");
 		
 		// get the globally stored js callback function
 		DKString eventAddress = DKDuktape::pointerToAddress(event);

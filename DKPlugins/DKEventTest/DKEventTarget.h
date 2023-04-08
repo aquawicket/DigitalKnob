@@ -11,11 +11,14 @@ typedef std::map<DKString, AddEventListenerFunc> AddEventListenerMap;
 typedef std::function<bool(const DKString&, const DKString&)> RemoveEventListenerFunc;
 typedef std::map<DKString, RemoveEventListenerFunc> RemoveEventListenerMap;
 
+typedef std::function<bool(const DKString&, const DKString&)> DispatchEventFunc;
+typedef std::map<DKString, DispatchEventFunc> DispatchEventMap;
+
 template <typename EventType>
 struct EventObject {
     DKString type;
-    std::function<void(EventType*)> listener;
 	DKString eventTargetAddress;
+    std::function<void(EventType*)> listener;
 };
 
 
@@ -43,7 +46,7 @@ public:
 	template <typename EventType>
 	static void addEventListener(const DKString& type, std::function<void(EventType*)> listener, const DKString& eventTargetAddress){
 		DKDEBUGFUNC(type, listener, eventTargetAddress);
-		//DKINFO("DKEventTarget.h: addEventListener("+type+", listener, "+eventTargetAddress+") \n");
+		DKINFO("DKEventTarget::addEventListener("+type+", listener, "+eventTargetAddress+") \n");
 		EventObject<EventType> eventObj;
         eventObj.type = type;
         eventObj.listener = listener;
@@ -64,7 +67,7 @@ public:
 	template <typename EventType>
 	static void removeEventListener(const DKString& type, std::function<void(EventType*)> listener, const DKString& eventTargetAddress){
 		DKDEBUGFUNC(type, listener, eventTargetAddress);
-		//DKINFO("DKEventTarget.h: removeEventListener("+type+", listener, "+eventTargetAddress+") \n");
+		//DKINFO("DKEventTarget::removeEventListener("+type+", listener, "+eventTargetAddress+") \n");
 		for(auto it = events<EventType>.begin(); it != events<EventType>.end();){
 			if(it->type == type && it->eventTargetAddress == eventTargetAddress) // && it->listener == listener)
 				it = events<EventType>.erase(it);
@@ -77,10 +80,11 @@ public:
 	template <typename EventType>
     static void dispatchEvent(EventType* event, const DKString& eventTargetAddress){
 		DKDEBUGFUNC(event, eventTargetAddress);
-		//DKINFO("DKEventTarget.h: dispatchEvent("+event->type+", "+eventTargetAddress+") \n");	
+		DKINFO("DKEventTarget::dispatchEvent("+event->type+", "+eventTargetAddress+") \n");	
 		for (auto& eventObj : events<EventType>) {
-			//DKINFO("event("+eventObj.type+", "+eventObj.eventTargetAddress+") \n");	
+			DKINFO("	eventObj("+eventObj.type+", "+eventObj.eventTargetAddress+") \n");	
 			if(eventObj.type == event->type && eventObj.eventTargetAddress == eventTargetAddress){
+				DKINFO("		event("+event->type+") \n");	
 				event->currentTarget = eventTargetAddress;
 				event->target = eventTargetAddress;
 				eventObj.listener(event);
@@ -95,6 +99,7 @@ public:
 	
 	static AddEventListenerMap* addEventListenerMap;
 	static RemoveEventListenerMap* removeEventListenerMap;
+	static DispatchEventMap* dispatchEventMap;
 	
 	template<class T>
 	static bool LinkAddEventListenerFunc(const DKString& name, bool (T::*func) (const DKString&, const DKString&), T* _this){
@@ -138,6 +143,27 @@ public:
 		if(removeEventListenerMap->find(type) == removeEventListenerMap->end())
 			return DKERROR(type+" not registered to a function! \n");
 		return (*removeEventListenerMap)[type](type, eventTargetAddress);
+	}
+	
+	template<class T>
+	static bool LinkDispatchEventFunc(const DKString& name, bool (T::*func) (const DKString&, const DKString&), T* _this){
+		DKDEBUGFUNC(name);//, func, _this);
+		//DKINFO("DKEventTarget::LinkDispatchEventFunc("+name+", func(DKString,DKString)) \n");
+		if(!dispatchEventMap)
+			dispatchEventMap = new DispatchEventMap();
+		(*dispatchEventMap)[name] = std::bind(func, _this, std::placeholders::_1, std::placeholders::_2);
+		return true;
+	}
+	static bool CallDispatchEventFunc(const DKString& eventAddress, const DKString& eventTargetAddress){
+		DKDEBUGFUNC(eventAddress, eventTargetAddress);
+		//DKINFO("DKEventTarget::CallDispatchEventFunc("+eventAddress+", "+eventTargetAddress+") \n");
+		if(!dispatchEventMap)
+			return DKERROR("dispatchEventMap invalid! \n");
+		if(dispatchEventMap->empty())
+			return DKERROR("dispatchEventMap empty! \n");
+		if(dispatchEventMap->find(eventAddress) == dispatchEventMap->end())
+			return DKERROR(eventAddress+" not registered to a function! \n");
+		return (*dispatchEventMap)[eventAddress](eventAddress, eventTargetAddress);
 	}
 };
 

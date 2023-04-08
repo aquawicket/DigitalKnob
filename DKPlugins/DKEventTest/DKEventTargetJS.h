@@ -49,6 +49,7 @@ public:
 		// How to persist Duktape/C arguments across calls
 		// https://wiki.duktape.org/howtonativepersistentreferences#:~:text=When%20a%20Duktape%2FC%20function,safely%20work%20with%20the%20arguments.
 		DKString cb = targetAddress+"_"+type+"_callback";
+		DKINFO("DKEventTargetJS::addEventListener() -> "+cb+" \n")
 		duk_dup(ctx, 2);
 		duk_put_global_string(ctx, cb.c_str());
 		
@@ -80,10 +81,14 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString targetAddress = duk_require_string(ctx, 0);
 		DKString eventAddress = duk_require_string(ctx, 1);
-		//DKINFO("DKEventTargetJS::dispatchEvent("+targetAddress+", "+eventAddress+")\n");
+		DKINFO("DKEventTargetJS::dispatchEvent("+targetAddress+", "+eventAddress+")\n");
 		
-		DKEvent* event = (DKEvent*)DKDuktape::addressToPointer(eventAddress);
-		DKEventTarget::dispatchEvent(event, targetAddress);
+		//DKEvent* event = (DKEvent*)DKDuktape::addressToPointer(eventAddress);
+		//DKEventTarget::dispatchEvent(event, targetAddress);
+		//DKINFO("DKEventTargetJS::dispatchEvent() type = "+evnt-type+"\n");
+		
+		DKEventTarget::CallDispatchEventFunc(eventAddress, targetAddress);
+		
 		return true;
 	}
 };
