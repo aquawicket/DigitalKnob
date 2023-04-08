@@ -1,7 +1,15 @@
 // create EventTarget
 const obj = new EventTarget("myEventTarget");
 
+console.log('\n');
+//const myEvent = new Event('myevent');
+obj.addEventListener('myevent', function(){
+	console.log('myevent')
+})
+obj.dispatchEvent(new Event('myevent'));
 
+
+/*
 // Event
 console.log('\n');
 const myEvent = new Event('myevent');
@@ -81,3 +89,4 @@ obj.addEventListener('mycompositionevent', function(){
 	console.log('mycompositionevent')
 })
 obj.dispatchEvent(myCompositionEvent);
+*/
