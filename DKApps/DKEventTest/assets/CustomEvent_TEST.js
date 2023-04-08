@@ -1,6 +1,5 @@
 // create EventTarget
-const obj = new EventTarget("myEventTarget");	// WORKS
-//const obj = new EventTarget();				// DOES NOT WORK
+const obj = new EventTarget();
 
 // WORKS
 console.log('\n');
@@ -12,11 +11,11 @@ obj.dispatchEvent(myEventA);
 
 // WORKS
 console.log('\n');
-const myEventB = new Event('myeventB');
+const myEventB = new CustomEvent('myeventB');
 obj.addEventListener('myeventB', function(){
 	console.log('myeventB')
 })
-obj.dispatchEvent(new Event('myeventB'));
+obj.dispatchEvent(new CustomEvent('myeventB'));
 
 // DOES NOT WORK
 console.log('\n');

@@ -13,7 +13,7 @@ public:
 	bool Init(){
 		
 		////// Constructor //////
-		DKDuktape::AttachFunction("CPP_DKEventTarget", DKEventTargetJS::constructor); // [EventTarget()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/EventTarget
+		DKDuktape::AttachFunction("CPP_DKEventTarget", DKEventTargetJS::constructor);
 		
 		
 		////// Instance methods //////
@@ -32,6 +32,10 @@ public:
 	////// Constructor //////
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		DKINFO("CPP_DKEventTarget()\n");
+		DKEventTarget* eventTarget = new DKEventTarget();
+		DKString eventTargetAddress = DKDuktape::pointerToAddress(eventTarget);
+		duk_push_string(ctx, eventTargetAddress.c_str());	
 		return DKTODO();
 	}
 	

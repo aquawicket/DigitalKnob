@@ -6,7 +6,10 @@
 var EventTarget = function EventTarget(address) {
 	//console.log("EventTarget("+address+")")
 
-    this.address = address;
+    if(address)
+		this.address = address;
+	if(!this.address)
+		this.address = CPP_DKEventTarget();
 	
 	/*
     for (var i = 0; i < instances.length; i++) {
