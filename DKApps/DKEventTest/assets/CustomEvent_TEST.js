@@ -1,12 +1,34 @@
 // create EventTarget
-const obj = new EventTarget("myEventTarget");
+const obj = new EventTarget("myEventTarget");	// WORKS
+//const obj = new EventTarget();				// DOES NOT WORK
 
+// WORKS
 console.log('\n');
-//const myEvent = new Event('myevent');
-obj.addEventListener('myevent', function(){
-	console.log('myevent')
+const myEventA = new Event('myeventA');
+obj.addEventListener('myeventA', function(){
+	console.log('myeventA')
 })
-obj.dispatchEvent(new Event('myevent'));
+obj.dispatchEvent(myEventA);
+
+// WORKS
+console.log('\n');
+const myEventB = new Event('myeventB');
+obj.addEventListener('myeventB', function(){
+	console.log('myeventB')
+})
+obj.dispatchEvent(new Event('myeventB'));
+
+// DOES NOT WORK
+console.log('\n');
+//const myEventC = new Event('myeventC');
+obj.addEventListener('myeventC', function(){
+	console.log('myeventC')
+})
+obj.dispatchEvent(new Event('myeventC'));
+
+
+
+
 
 
 /*
