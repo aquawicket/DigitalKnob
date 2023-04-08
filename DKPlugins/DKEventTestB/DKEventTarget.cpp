@@ -1,4 +1,4 @@
-#include "DKEventTest/DKEventTarget.h"
+#include "DKEventTestB/DKEventTarget.h"
 
 AddEventListenerMap* DKEventTarget::addEventListenerMap = NULL;
 RemoveEventListenerMap* DKEventTarget::removeEventListenerMap = NULL;
