@@ -45,7 +45,7 @@ public:
 		DKCustomEventJS::Get()->registerEventType(type);
 		DKCustomEvent* event = new DKCustomEvent(type, options);
 		DKString eventAddress = DKDuktape::pointerToAddress(event);
-		DKEventTarget::LinkDispatchEventFunc(eventAddress, &DKCustomEventJS::dispatchEvent, DKCustomEventJS::Get());
+		//DKEventTarget::LinkDispatchEventFunc(eventAddress, &DKCustomEventJS::dispatchEvent, DKCustomEventJS::Get());
 		duk_push_string(ctx, eventAddress.c_str());	
 		return true;
 	}
@@ -74,27 +74,27 @@ public:
 	//////////////////////////////////////////////////////////////////////////////////////////////////////
 	bool registerEventType(const DKString& _type){
 		DKINFO("DKCustomEventJS::registerEventType("+_type+") \n");
-		DKEventTarget::LinkAddEventListenerFunc		(_type, &DKCustomEventJS::addEventListener, 	this);
-		DKEventTarget::LinkRemoveEventListenerFunc	(_type,	&DKCustomEventJS::removeEventListener, 	this);
+		//DKEventTarget::LinkAddEventListenerFunc		(_type, &DKCustomEventJS::addEventListener, 	this);
+		//DKEventTarget::LinkRemoveEventListenerFunc	(_type,	&DKCustomEventJS::removeEventListener, 	this);
 		return true;
 	}
 	
 	bool addEventListener(const DKString& _type, const DKString& eventTargetAddress){
 		DKINFO("DKCustomEventJS::addEventListener("+_type+", "+eventTargetAddress+") \n");
-		DKEventTarget::addEventListener<DKCustomEvent>(_type, &DKCustomEventJS::onCustomEvent, eventTargetAddress);
+		//DKEventTarget::addEventListener<DKCustomEvent>(_type, &DKCustomEventJS::onCustomEvent, eventTargetAddress);
 		return true;
 	}
 	
 	bool removeEventListener(const DKString& _type, const DKString& eventTargetAddress){
 		DKINFO("DKCustomEventJS::removeEventListener("+_type+", "+eventTargetAddress+") \n");
-		DKEventTarget::removeEventListener<DKCustomEvent>(_type, &DKCustomEventJS::onCustomEvent, eventTargetAddress);
+		//DKEventTarget::removeEventListener<DKCustomEvent>(_type, &DKCustomEventJS::onCustomEvent, eventTargetAddress);
 		return true;
 	}
 	
 	bool dispatchEvent(const DKString& eventAddress, const DKString& eventTargetAddress){
 		DKINFO("DKCustomEventJS::dispatchEvent("+eventAddress+", "+eventTargetAddress+") \n");
 		DKCustomEvent* event = (DKCustomEvent*)DKDuktape::addressToPointer(eventAddress);
-		DKEventTarget::dispatchEvent(event, eventTargetAddress);
+		//DKEventTarget::dispatchEvent(event, eventTargetAddress);
 		return true;
 	}
 	

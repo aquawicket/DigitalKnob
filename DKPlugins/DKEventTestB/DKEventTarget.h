@@ -3,8 +3,9 @@
 #define DKEventTarget_H
 
 #include "DK/DK.h"
+#include "DKEventTestB/DKEvent.h"
 
-
+/*
 typedef std::function<bool(const DKString&, const DKString&)> AddEventListenerFunc;
 typedef std::map<DKString, AddEventListenerFunc> AddEventListenerMap;
 
@@ -13,12 +14,12 @@ typedef std::map<DKString, RemoveEventListenerFunc> RemoveEventListenerMap;
 
 typedef std::function<bool(const DKString&, const DKString&)> DispatchEventFunc;
 typedef std::map<DKString, DispatchEventFunc> DispatchEventMap;
+*/
 
-template <typename EventType>
 struct EventObject {
     DKString type;
 	DKString eventTargetAddress;
-    std::function<void(EventType*)> listener;
+    std::function<void(DKEvent*)> listener;
 };
 
 
@@ -43,20 +44,19 @@ public:
 
 	////// Instance methods //////
 	// [EventTarget.addEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
-	template <typename EventType>
-	static void addEventListener(const DKString& type, std::function<void(EventType*)> listener, const DKString& eventTargetAddress){
+	static void addEventListener(const DKString& type, std::function<void(DKEvent*)> listener, const DKString& eventTargetAddress){
 		DKDEBUGFUNC(type, listener, eventTargetAddress);
 		DKINFO("DKEventTarget::addEventListener("+type+", listener, "+eventTargetAddress+") \n");
-		EventObject<EventType> eventObj;
+		EventObject eventObj;
         eventObj.type = type;
         eventObj.listener = listener;
         eventObj.eventTargetAddress = eventTargetAddress;
-        events<EventType>.push_back(eventObj);
+        events.push_back(eventObj);
 		
 		/// Print event list
 		/*
 		unsigned int i=0;
-		for (auto& eventObj : events<EventType>) {
+		for (auto& eventObj : events) {
 			DKINFO("event["+toString(i)+"] = ("+eventObj.type+","+eventObj.eventTargetAddress+") \n");
 			i++;
         }
@@ -64,24 +64,22 @@ public:
 	}
 	
 	// [EventTarget.removeEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener
-	template <typename EventType>
-	static void removeEventListener(const DKString& type, std::function<void(EventType*)> listener, const DKString& eventTargetAddress){
+	static void removeEventListener(const DKString& type, std::function<void(DKEvent*)> listener, const DKString& eventTargetAddress){
 		DKDEBUGFUNC(type, listener, eventTargetAddress);
 		//DKINFO("DKEventTarget::removeEventListener("+type+", listener, "+eventTargetAddress+") \n");
-		for(auto it = events<EventType>.begin(); it != events<EventType>.end();){
+		for(auto it = events.begin(); it != events.end();){
 			if(it->type == type && it->eventTargetAddress == eventTargetAddress) // && it->listener == listener)
-				it = events<EventType>.erase(it);
+				it = events.erase(it);
 			else
 				++it;
 		}
 	}
 	
 	// [EventTarget.dispatchEvent()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent
-	template <typename EventType>
-    static void dispatchEvent(EventType* event, const DKString& eventTargetAddress){
+    static void dispatchEvent(DKEvent* event, const DKString& eventTargetAddress){
 		DKDEBUGFUNC(event, eventTargetAddress);
 		DKINFO("DKEventTarget::dispatchEvent("+event->type+", "+eventTargetAddress+") \n");	
-		for (auto& eventObj : events<EventType>) {
+		for (auto& eventObj : events) {
 			DKINFO("	eventObj("+eventObj.type+", "+eventObj.eventTargetAddress+") \n");	
 			if(eventObj.type == event->type && eventObj.eventTargetAddress == eventTargetAddress){
 				DKINFO("		event("+event->type+") \n");	
@@ -94,9 +92,9 @@ public:
 	
 	
 	////// DK properties //////	
-	template <typename EventType>
-	static std::vector<EventObject<EventType>> events;
+	static std::vector<EventObject> events;
 	
+	/*
 	static AddEventListenerMap* addEventListenerMap;
 	static RemoveEventListenerMap* removeEventListenerMap;
 	static DispatchEventMap* dispatchEventMap;
@@ -165,10 +163,10 @@ public:
 			return DKERROR(eventAddress+" not registered to a function! \n");
 		return (*dispatchEventMap)[eventAddress](eventAddress, eventTargetAddress);
 	}
+	*/
 };
 
-template <typename EventType>
-std::vector<EventObject<EventType>> DKEventTarget::events;
+
 
 
 REGISTER_OBJECT(DKEventTarget, true);

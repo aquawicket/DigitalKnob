@@ -3,7 +3,7 @@
 #define DKEvent_H
 
 #include "DK/DK.h"
-#include "DKEventTestB/DKEventTarget.h"
+//#include "DKEventTestB/DKEventTarget.h"
 
 
 // [INTERFACE] https://dom.spec.whatwg.org/#interface-event

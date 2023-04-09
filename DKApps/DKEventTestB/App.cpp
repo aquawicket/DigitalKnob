@@ -8,24 +8,15 @@ bool App::Init() {
 	
 	DKClass::DKCreate("DKEventTarget");															
 	
-	/*
 	////// Event //////
 	DKString thisAddress = DKDuktape::pointerToAddress(this);
-	DKEventTarget::addEventListener<DKEvent>("generic", &App::ongeneric, thisAddress);					
+	DKEventTarget::addEventListener("generic", &App::ongeneric, thisAddress);					
 	DKEvent* event = new DKEvent("generic", "");												
 	DKEventTarget::dispatchEvent(event, thisAddress);													
-	DKEventTarget::removeEventListener<DKEvent>("generic", &App::ongeneric, thisAddress);	
+	DKEventTarget::removeEventListener("generic", &App::ongeneric, thisAddress);	
 	DKEventTarget::dispatchEvent(event, thisAddress);
 	
-	DKINFO("/////////// ConsoleWindow ///////////////////// \n");
-	DKObject* myConsoleWindow = DKClass::DKCreate("DKConsoleWindow");
-	DKString consoleWindowAddress = DKDuktape::pointerToAddress(myConsoleWindow);
-	
-	
 	////// CustomEvent ///////
-	
-
-	*/
 	
 	return true;
 }

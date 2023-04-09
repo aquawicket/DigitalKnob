@@ -1,4 +1,4 @@
-
+/*
 // https://console.spec.whatwg.org
 CPP_DK_Create("DKConsole");
 
@@ -8,3 +8,4 @@ CPP_DK_Create("DKCustomEventJS");
 CPP_DK_Create("DKEventTargetJS");
 
 CPP_DK_Create("Test.js");
+*/

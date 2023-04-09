@@ -57,7 +57,7 @@ public:
 		duk_dup(ctx, 2);
 		duk_put_global_string(ctx, cb.c_str());
 		
-		DKEventTarget::CallAddEventListenerFunc(type, targetAddress);
+		//DKEventTarget::CallAddEventListenerFunc(type, targetAddress);
 		
 		return true;
 	}
@@ -76,7 +76,7 @@ public:
 		duk_push_null(ctx);
 		duk_put_global_string(ctx, cb.c_str());
 		
-		DKEventTarget::CallRemoveEventListenerFunc(type, targetAddress);
+		//DKEventTarget::CallRemoveEventListenerFunc(type, targetAddress);
 
 		return true;
 	}
@@ -87,7 +87,7 @@ public:
 		DKString eventAddress = duk_require_string(ctx, 1);
 		DKINFO("DKEventTargetJS::dispatchEvent("+targetAddress+", "+eventAddress+")\n");
 		
-		DKEventTarget::CallDispatchEventFunc(eventAddress, targetAddress);
+		//DKEventTarget::CallDispatchEventFunc(eventAddress, targetAddress);
 		
 		return true;
 	}
