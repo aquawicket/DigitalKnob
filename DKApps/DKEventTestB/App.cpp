@@ -21,25 +21,6 @@ bool App::Init() {
 	myTargetC.addEventListener("eventC", &App::onevent);
 	myTargetC.dispatchEvent(&eventC);
 	
-	/*	
-	////// Event //////
-	DKEventTarget::addEventListener("generic", &App::ongeneric, thisAddress);					
-	DKEvent* event = new DKEvent("generic", "");												
-	DKEventTarget::dispatchEvent(event, thisAddress);													
-	DKEventTarget::removeEventListener("generic", &App::ongeneric, thisAddress);	
-	DKEventTarget::dispatchEvent(event, thisAddress);
-	
-	////// CustomEvent ///////
-	DKEventTarget::addEventListener("custom", &App::oncustom, thisAddress);					
-	DKCustomEvent* customevent = new DKCustomEvent("custom", "");												
-	DKEventTarget::dispatchEvent(customevent, thisAddress);													
-	DKEventTarget::removeEventListener("custom", &App::oncustom, thisAddress);	
-	DKEventTarget::dispatchEvent(customevent, thisAddress);
-
-	DKEventTarget::addEventListener("customB", &App::oncustom, thisAddress);																
-	DKEventTarget::dispatchEvent(new DKCustomEvent("customB", ""), thisAddress);													
-	*/
-	
 	return true;
 }
 

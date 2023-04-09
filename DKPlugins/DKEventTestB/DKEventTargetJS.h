@@ -36,7 +36,7 @@ public:
 		DKEventTarget* eventTarget = new DKEventTarget();
 		DKString eventTargetAddress = DKDuktape::pointerToAddress(eventTarget);
 		duk_push_string(ctx, eventTargetAddress.c_str());	
-		return DKTODO();
+		return true;
 	}
 	
 	
@@ -47,7 +47,7 @@ public:
 		DKString targetAddress = duk_require_string(ctx, 0);
 		DKString type = duk_require_string(ctx, 1);
 		duk_require_function(ctx, 2);
-		//DKINFO("DKEventTargetJS::addEventListener("+targetAddress+", "+type+", callback)\n");
+		DKINFO("DKEventTargetJS::addEventListener("+targetAddress+", "+type+", callback)\n");
 		
 		// store the js callback function
 		// How to persist Duktape/C arguments across calls
@@ -57,7 +57,8 @@ public:
 		duk_dup(ctx, 2);
 		duk_put_global_string(ctx, cb.c_str());
 		
-		//DKEventTarget::addEventListener(type, ???, targetAddress);
+		DKEventTarget* eventTarget = (DKEventTarget*)DKDuktape::addressToPointer(targetAddress);
+		eventTarget->addEventListener(type, &DKEventTargetJS::onevent);
 		
 		return true;
 	}
@@ -67,7 +68,7 @@ public:
 		DKString targetAddress = duk_require_string(ctx, 0);
 		DKString type = duk_require_string(ctx, 1);
 		duk_require_function(ctx, 2);
-		//DKINFO("DKEventTargetJS::removeEventListener("+targetAddress+", "+type+", callback)\n");
+		DKINFO("DKEventTargetJS::removeEventListener("+targetAddress+", "+type+", callback)\n");
 		
 		// remove the js callback function
 		// How to persist Duktape/C arguments across calls
@@ -76,7 +77,8 @@ public:
 		duk_push_null(ctx);
 		duk_put_global_string(ctx, cb.c_str());
 		
-		//DKEventTarget::CallRemoveEventListenerFunc(type, targetAddress);
+		DKEventTarget* eventTarget = (DKEventTarget*)DKDuktape::addressToPointer(targetAddress);
+		eventTarget->removeEventListener(type, &DKEventTargetJS::onevent);
 
 		return true;
 	}
@@ -87,9 +89,16 @@ public:
 		DKString eventAddress = duk_require_string(ctx, 1);
 		DKINFO("DKEventTargetJS::dispatchEvent("+targetAddress+", "+eventAddress+")\n");
 		
-		//DKEventTarget::CallDispatchEventFunc(eventAddress, targetAddress);
+		DKEventTarget* eventTarget = (DKEventTarget*)DKDuktape::addressToPointer(targetAddress);
+		DKEvent* event = (DKEvent*)DKDuktape::addressToPointer(eventAddress);
+		eventTarget->dispatchEvent(event);
 		
 		return true;
+	}
+	
+	static void onevent(DKEvent* event) {
+		DKDEBUGFUNC(event);
+		DKINFO("onevent() \n");
 	}
 };
 REGISTER_OBJECT(DKEventTargetJS, true)
