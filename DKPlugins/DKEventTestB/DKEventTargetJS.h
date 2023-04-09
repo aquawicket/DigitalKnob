@@ -57,7 +57,7 @@ public:
 		duk_dup(ctx, 2);
 		duk_put_global_string(ctx, cb.c_str());
 		
-		//DKEventTarget::CallAddEventListenerFunc(type, targetAddress);
+		//DKEventTarget::addEventListener(type, ???, targetAddress);
 		
 		return true;
 	}
