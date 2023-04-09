@@ -16,6 +16,11 @@ bool App::Init() {
 	myTargetB.addEventListener("eventB", &App::onevent);
 	myTargetB.dispatchEvent(eventB);
 	
+	DKEventTarget myTargetC;
+	DKEvent eventC("eventC", "");
+	myTargetC.addEventListener("eventC", &App::onevent);
+	myTargetC.dispatchEvent(&eventC);
+	
 	/*	
 	////// Event //////
 	DKEventTarget::addEventListener("generic", &App::ongeneric, thisAddress);					
