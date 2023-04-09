@@ -4,6 +4,7 @@
 
 #include "DK/DK.h"
 #include "DKEventTestB/DKEvent.h"
+#include "DKDuktape/DKDuktape.h"
 
 /*
 typedef std::function<bool(const DKString&, const DKString&)> AddEventListenerFunc;
@@ -44,7 +45,8 @@ public:
 
 	////// Instance methods //////
 	// [EventTarget.addEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
-	static void addEventListener(const DKString& type, std::function<void(DKEvent*)> listener, const DKString& eventTargetAddress){
+	void addEventListener(const DKString& type, std::function<void(DKEvent*)> listener){
+		DKString eventTargetAddress = DKDuktape::pointerToAddress(this);
 		DKDEBUGFUNC(type, listener, eventTargetAddress);
 		DKINFO("DKEventTarget::addEventListener("+type+", listener, "+eventTargetAddress+") \n");
 		EventObject eventObj;
@@ -64,7 +66,8 @@ public:
 	}
 	
 	// [EventTarget.removeEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener
-	static void removeEventListener(const DKString& type, std::function<void(DKEvent*)> listener, const DKString& eventTargetAddress){
+	void removeEventListener(const DKString& type, std::function<void(DKEvent*)> listener){
+		DKString eventTargetAddress = DKDuktape::pointerToAddress(this);
 		DKDEBUGFUNC(type, listener, eventTargetAddress);
 		//DKINFO("DKEventTarget::removeEventListener("+type+", listener, "+eventTargetAddress+") \n");
 		for(auto it = events.begin(); it != events.end();){
@@ -76,7 +79,8 @@ public:
 	}
 	
 	// [EventTarget.dispatchEvent()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent
-    static void dispatchEvent(DKEvent* event, const DKString& eventTargetAddress){
+    void dispatchEvent(DKEvent* event){
+		DKString eventTargetAddress = DKDuktape::pointerToAddress(this);
 		DKDEBUGFUNC(event, eventTargetAddress);
 		DKINFO("DKEventTarget::dispatchEvent("+event->type+", "+eventTargetAddress+") \n");	
 		for (auto& eventObj : events) {

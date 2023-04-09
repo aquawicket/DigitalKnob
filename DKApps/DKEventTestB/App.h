@@ -14,7 +14,7 @@ public:
 	// https://dom.spec.whatwg.org
 	////// Event //////
 	static void printEventProperties(DKEvent* event);
-	static bool ongeneric(DKEvent* event);
+	static bool onevent(DKEvent* event);
 
 	
 	////// CustomEvent //////

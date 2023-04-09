@@ -6,11 +6,17 @@ bool App::Init() {
 	DKDEBUGFUNC();
 	DKINFO("App::Init() \n");
 	
-	DKClass::DKCreate("DKEventTarget");															
+	DKEventTarget* myTargetA = new DKEventTarget();
+	DKEvent* eventA = new DKEvent("eventA", "");
+	myTargetA->addEventListener("eventA", &App::onevent);
+	myTargetA->dispatchEvent(eventA);
 	
-	/*
-	DKString thisAddress = DKDuktape::pointerToAddress(this);
+	DKEventTarget myTargetB;
+	DKEvent* eventB = new DKEvent("eventB", "");
+	myTargetB.addEventListener("eventB", &App::onevent);
+	myTargetB.dispatchEvent(eventB);
 	
+	/*	
 	////// Event //////
 	DKEventTarget::addEventListener("generic", &App::ongeneric, thisAddress);					
 	DKEvent* event = new DKEvent("generic", "");												
@@ -62,9 +68,9 @@ void App::printEventProperties(DKEvent* event) {
 	DKINFO("event->returnValue = "				+toString(event->returnValue)			+"\n");
 	DKINFO("event->scoped = "					+toString(event->scoped)				+"\n");
 }
-bool App::ongeneric(DKEvent* event) {
+bool App::onevent(DKEvent* event) {
 	DKDEBUGFUNC(event);
-	DKINFO("ongeneric() \n");
+	DKINFO("onevent() \n");
 	printEventProperties(event);
 	return true;
 }
