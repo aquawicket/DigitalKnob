@@ -5,9 +5,7 @@
 #include "DKDuktape/DKDuktape.h"
 
 WARNING_DISABLE
-//#include "dukglue/dukglue.h"
-#include "dukglue/public_util.h"
-#include "dukglue/dukvalue.h"
+#include "dukglue/dukglue.h"
 WARNING_ENABLE
 
 
