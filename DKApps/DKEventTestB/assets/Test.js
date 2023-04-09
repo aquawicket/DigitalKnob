@@ -55,6 +55,11 @@ obj.addEventListener('customevent', function(event){
 obj.dispatchEvent(myCustomEvent);
 
 
+/////////////////// ConsoleWindow //////////////////////////
+console.log("/////////// ConsoleWindow /////////////////////")
+CPP_DK_Create("DKEventTestB/DKConsoleWindow.js");
+const myConsoleWindow = new DKConsoleWindow('myConsoleWindow')
+
 
 ////// UIEvent //////
 function printUIEventProperties(uievent){
