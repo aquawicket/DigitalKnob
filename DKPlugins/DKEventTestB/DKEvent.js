@@ -4,7 +4,7 @@
 
 // [Event()] https://developer.mozilla.org/en-US/docs/Web/API/Event/Event
 var Event = function Event(type, options, address) {
-	console.log("Event("+type+","+options+","+address+")")
+	//console.log("Event("+type+","+options+","+address+")")
 	
 	if(address)
 		this.address = address;

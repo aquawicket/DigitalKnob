@@ -6,7 +6,6 @@
 var FocusEvent = function FocusEvent(type, options, address) {
 	//console.log("FocusEvent("+type+","+options+","+address+")")
 	
-	options = JSON.stringify(options)
 	if(address)
 		this.address = address;
 	if(!this.address)
@@ -16,10 +15,10 @@ var FocusEvent = function FocusEvent(type, options, address) {
 	////// Instance properties //////
 	// [FocusEvent.relatedTarget](Read only)
 	Object.defineProperty(this, "relatedTarget", {
-        get: function relatedTarget() {
-            return CPP_DKFocusEvent_relatedTarget(this.address);
-        }
-    });
+        get: function relatedTarget() { return CPP_DKFocusEvent_relatedTarget(this.address) },
+		set: function relatedTarget(v) { return CPP_DKFocusEvent_relatedTarget(this.address, v) },
+		configurable: true
+    })
 	
 
 	////// Events //////
@@ -36,6 +35,12 @@ var FocusEvent = function FocusEvent(type, options, address) {
 		}
 	}
 	
-	return UIEvent.call(this, type, options)
+
+	var event = UIEvent.call(this, type, options)
+	
+	// Make properties (Read Only) after assignment
+	Object.defineProperty(this, "relatedTarget",  { set: undefined })
+	
+	return event
 };
 FocusEvent.prototype = UIEvent.prototype;

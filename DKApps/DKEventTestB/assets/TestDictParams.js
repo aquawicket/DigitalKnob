@@ -52,10 +52,10 @@ obj.dispatchEvent(myCustomEvent);
 ////// UIEvent //////
 function printUIEventProperties(uievent){
 	////// Instance properties //////
-	console.log("uievent.detail = "	+uievent.detail)
+	console.log("uievent.detail = "				+uievent.detail)
 	console.log("uievent.sourceCapabilities = "	+uievent.sourceCapabilities)
-	console.log("uievent.view = "	+uievent.view)
-	console.log("uievent.which = "	+uievent.which)
+	console.log("uievent.view = "				+uievent.view)
+	console.log("uievent.which = "				+uievent.which)
 }
 
 console.log('\n');
@@ -66,7 +66,7 @@ function onuievent(event){
 }
 
 const myUIEvent = new UIEvent('uievent', {
-	//detail: 2,
+	detail: 2,
 	bubbles: true,
 	cancelable: true,
 	composed: true

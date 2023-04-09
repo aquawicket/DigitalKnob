@@ -4,7 +4,7 @@
 
 // [CustomEvent()] https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent
 var CustomEvent = function CustomEvent(type, options, address) {
-	console.log("CustomEvent("+type+","+options+","+address+")")
+	//console.log("CustomEvent("+type+","+options+","+address+")")
 	
 	if(address)
 		this.address = address;
