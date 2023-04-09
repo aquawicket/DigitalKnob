@@ -98,7 +98,7 @@ public:
 	
 	static void onevent(DKEvent* event) {
 		DKDEBUGFUNC(event);
-		DKINFO("onevent() \n");
+		DKINFO("DKEventTargetJS::onevent() \n");
 		
 		// get the globally stored js callback function
 		DKString eventAddress = DKDuktape::pointerToAddress(event);
@@ -106,7 +106,8 @@ public:
 		duk_get_global_string(DKDuktape::ctx, cb.c_str());
 		
 		// create and push the Event(eventAddress) object		
-		DKString eventObjStr = "var eventObj = new Event('', '', '"+eventAddress+"'); eventObj;";
+		//DKString eventObjStr = "var eventObj = new Event('', '', '"+eventAddress+"'); eventObj;";
+		DKString eventObjStr = "var eventObj = new "+event->eventClass+"('', '', '"+eventAddress+"'); eventObj;";
 		DukValue eventObj = dukglue_peval<DukValue>(DKDuktape::ctx, eventObjStr.c_str());
 		dukglue_push(DKDuktape::ctx, eventObj);
 		
