@@ -59,7 +59,7 @@ obj.dispatchEvent(myCustomEvent);
 
 /////////////////// ConsoleWindow //////////////////////////
 console.log("/////////// ConsoleWindow /////////////////////")
-CPP_DK_Create("DKEventTestB/DKConsoleWindow.js");
+CPP_DK_Create("DKEventTest/DKConsoleWindow.js");
 const myConsoleWindow = new DKConsoleWindow('myConsoleWindow')
 
 
