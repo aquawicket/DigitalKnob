@@ -21,7 +21,7 @@ var MouseEvent = function MouseEvent(type, options, address) {
 	// [MouseEvent.altKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/altKey
 	Object.defineProperty(this, "altKey", {
         get: function altKey() 		{ return CPP_DKMouseEvent_altKey(this.address) },
-		get: function altKey(state) { return CPP_DKMouseEvent_altKey(this.address, state) },
+		set: function altKey(flag)	{ return CPP_DKMouseEvent_altKey(this.address, flag) },
 		configurable: true
     })
 	// [MouseEvent.button](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button
@@ -35,19 +35,19 @@ var MouseEvent = function MouseEvent(type, options, address) {
 	// [MouseEvent.clientX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/clientX
 	Object.defineProperty(this, "clientX", {
         get: function clientX()		{ return CPP_DKMouseEvent_clientX(this.address) },
-		get: function clientX(x) 	{ return CPP_DKMouseEvent_clientX(this.address, x) },
+		set: function clientX(num) 	{ return CPP_DKMouseEvent_clientX(this.address, num) },
 		configurable: true
     })
 	// [MouseEvent.clientY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/clientY
 	Object.defineProperty(this, "clientY", {
         get: function clientY() 	{ return CPP_DKMouseEvent_clientY(this.address) },
-		get: function clientY(y) 	{ return CPP_DKMouseEvent_clientY(this.address, y) },
+		set: function clientY(num) 	{ return CPP_DKMouseEvent_clientY(this.address, num) },
 		configurable: true
     })
 	// [MouseEvent.ctrlKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/ctrlKey
 	Object.defineProperty(this, "ctrlKey", {
         get: function ctrlKey()		{ return CPP_DKMouseEvent_ctrlKey(this.address) },
-		get: function ctrlKey(state){ return CPP_DKMouseEvent_ctrlKey(this.address, state) },
+		set: function ctrlKey(flag)	{ return CPP_DKMouseEvent_ctrlKey(this.address, flag) },
 		configurable: true
     })
 	// [MouseEvent.layerX](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/layerX
@@ -61,7 +61,7 @@ var MouseEvent = function MouseEvent(type, options, address) {
 	// [MouseEvent.metaKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/metaKey
 	Object.defineProperty(this, "metaKey", {
         get: function metaKey() 	{ return CPP_DKMouseEvent_metaKey(this.address) },
-		get: function metaKey(state){ return CPP_DKMouseEvent_metaKey(this.address, state) },
+		set: function metaKey(flag) { return CPP_DKMouseEvent_metaKey(this.address, flag) },
 		configurable: true
     })
 	// [MouseEvent.movementX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/movementX
@@ -103,7 +103,7 @@ var MouseEvent = function MouseEvent(type, options, address) {
 	// [MouseEvent.shiftKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/shiftKey
 	Object.defineProperty(this, "shiftKey", {
         get: function shiftKey() 		{ return CPP_DKMouseEvent_shiftKey(this.address) },
-		get: function shiftKey(state)	{ return CPP_DKMouseEvent_shiftKey(this.address, state) },
+		set: function shiftKey(flag)	{ return CPP_DKMouseEvent_shiftKey(this.address, flag) },
 		configurable: true
     })
 	// [MouseEvent.mozPressure](Non-standard)(Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/mozPressure
