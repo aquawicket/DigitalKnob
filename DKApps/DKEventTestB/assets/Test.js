@@ -53,3 +53,22 @@ obj.addEventListener('customevent', function(event){
 	printCustomEventProperties(event)
 })
 obj.dispatchEvent(myCustomEvent);
+
+
+
+////// UIEvent //////
+function printUIEventProperties(uievent){
+	////// Instance properties //////
+	console.log("uievent.detail = "				+uievent.detail)
+	console.log("uievent.sourceCapabilities = "	+uievent.sourceCapabilities)			
+	console.log("uievent.view = "				+uievent.view)
+	console.log("uievent.which = "				+uievent.which)
+}
+console.log('\n');
+const myUIEvent = new UIEvent('uievent');
+obj.addEventListener('uievent', function(event){
+	console.log('onuievent')
+	printEventProperties(event)
+	printUIEventProperties(event)
+})
+obj.dispatchEvent(myUIEvent);
