@@ -521,6 +521,7 @@ void DKConsoleWindow::FocusEventProc(FOCUS_EVENT_RECORD fer) {
     if (!fer.bSetFocus) {
         //1. blur: sent after element A loses focus.
 		DKFocusEvent* blur_event = new DKFocusEvent("blur", "");
+		//blur_event->eventClass = "FocusEvent";
 		blur_event->relatedTarget = relatedTarget;
 		DKEventTarget* eventTarget = (DKEventTarget*)this;
 		eventTarget->dispatchEvent(blur_event);
@@ -536,6 +537,7 @@ void DKConsoleWindow::FocusEventProc(FOCUS_EVENT_RECORD fer) {
     else {
         //3. focus: sent after element B receives focus.
         DKFocusEvent* focus_event = new DKFocusEvent("focus", "");
+		//focus_event->eventClass = "FocusEvent";
 		focus_event->relatedTarget = relatedTarget;
 		DKEventTarget* eventTarget = (DKEventTarget*)this;
 		eventTarget->dispatchEvent(focus_event);

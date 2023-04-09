@@ -43,7 +43,7 @@ public:
 		DKString options = "";//duk_require_string(ctx, 1);
 		DKINFO("CPP_DKCustomEvent("+type+","+options+")\n");
 		DKCustomEvent* event = new DKCustomEvent(type, options);
-		event->eventClass = "CustomEvent";
+		//event->eventClass = "CustomEvent";
 		DKString eventAddress = DKDuktape::pointerToAddress(event);
 		duk_push_string(ctx, eventAddress.c_str());	
 		return true;

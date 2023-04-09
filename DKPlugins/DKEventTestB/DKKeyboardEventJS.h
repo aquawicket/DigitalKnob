@@ -92,7 +92,7 @@ public:
 		DKString options = "";//duk_require_string(ctx, 1);
 		DKINFO("CPP_DKKeyboardEvent("+type+","+options+")\n");
 		DKKeyboardEvent* event = new DKKeyboardEvent(type, options);
-		event->eventClass = "KeyboardEvent";
+		//event->eventClass = "KeyboardEvent";
 		DKString eventAddress = DKDuktape::pointerToAddress(event);
 		duk_push_string(ctx, eventAddress.c_str());	
 		return true;

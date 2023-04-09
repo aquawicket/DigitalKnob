@@ -15,6 +15,9 @@ public:
 	DKKeyboardEvent(DKString _type, DKString _options) : DKUIEvent(_type, _options) {
 		DKINFO("DKKeyboardEvent("+_type+", "+_options+") \n");
 		
+		if(eventClass.empty())
+			eventClass = "KeyboardEvent";
+		
 		////// Instance properties //////
 		altKey = false;
 		code = "";

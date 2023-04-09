@@ -15,6 +15,9 @@ public:
 	DKInputEvent(DKString _type, DKString _options) : DKUIEvent(_type, _options) {
 		DKINFO("DKInputEvent("+_type+", "+_options+") \n");
 		
+		if(eventClass.empty())
+			eventClass = "InputEvent";
+		
 		////// Instance properties //////
 		//data = ""; //FIXME: data is already a member of DKObject
 		dataTransfer = "";

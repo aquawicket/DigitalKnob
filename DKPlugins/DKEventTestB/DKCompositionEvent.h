@@ -15,6 +15,9 @@ public:
 	DKCompositionEvent(DKString _type, DKString _options) : DKUIEvent(_type, _options) {
 		DKINFO("DKCompositionEvent("+_type+", "+_options+") \n");
 		
+		if(eventClass.empty())
+			eventClass = "CompositionEvent";
+		
 		////// Instance properties //////
 		//data = ""; //FIXME: data is already a member of DKObject
 		locale = "";

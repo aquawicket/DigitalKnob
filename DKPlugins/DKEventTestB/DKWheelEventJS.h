@@ -50,7 +50,7 @@ public:
 		DKString options = "";//duk_require_string(ctx, 1);
 		DKINFO("CPP_DKWheelEvent("+type+","+options+")\n");
 		DKWheelEvent* event = new DKWheelEvent(type, options);
-		event->eventClass = "WheelEvent";
+		//event->eventClass = "WheelEvent";
 		DKString eventAddress = DKDuktape::pointerToAddress(event);
 		duk_push_string(ctx, eventAddress.c_str());	
 		return true;

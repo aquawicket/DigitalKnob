@@ -54,7 +54,7 @@ public:
 		DKString options = "";//duk_require_string(ctx, 1);
 		DKINFO("CPP_DKUIEvent("+type+","+options+")\n");
 		DKUIEvent* event = new DKUIEvent(type, options);
-		event->eventClass = "UIEvent";
+		//event->eventClass = "UIEvent";
 		DKString eventAddress = DKDuktape::pointerToAddress(event);
 		duk_push_string(ctx, eventAddress.c_str());	
 		return true;

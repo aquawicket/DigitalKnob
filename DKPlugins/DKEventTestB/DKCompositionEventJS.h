@@ -51,7 +51,7 @@ public:
 		DKString options = "";//duk_require_string(ctx, 1);
 		DKINFO("CPP_DKCompositionEvent("+type+","+options+")\n");
 		DKCompositionEvent* event = new DKCompositionEvent(type, options);
-		event->eventClass = "CompositionEvent";
+		//event->eventClass = "CompositionEvent";
 		DKString eventAddress = DKDuktape::pointerToAddress(event);
 		duk_push_string(ctx, eventAddress.c_str());	
 		return true;
