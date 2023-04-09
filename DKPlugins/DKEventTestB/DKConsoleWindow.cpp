@@ -522,26 +522,26 @@ void DKConsoleWindow::FocusEventProc(FOCUS_EVENT_RECORD fer) {
         //1. blur: sent after element A loses focus.
 		DKFocusEvent* blur_event = new DKFocusEvent("blur", "");
 		blur_event->relatedTarget = relatedTarget;
-		DKEventTarget::dispatchEvent(blur_event, address);
+		//DKEventTarget::dispatchEvent(blur_event, address);
 		delete blur_event;
 
         //2. focusout: sent after the blur event.
         DKFocusEvent* focusout_event = new DKFocusEvent("focusout", "");
 		focusout_event->relatedTarget = relatedTarget;
-		DKEventTarget::dispatchEvent(focusout_event, address);
+		//DKEventTarget::dispatchEvent(focusout_event, address);
 		delete focusout_event;
     }
     else {
         //3. focus: sent after element B receives focus.
         DKFocusEvent* focus_event = new DKFocusEvent("focus", "");
 		focus_event->relatedTarget = relatedTarget;
-		DKEventTarget::dispatchEvent(focus_event, address);
+		//DKEventTarget::dispatchEvent(focus_event, address);
 		delete focus_event;
 
         //4. focusin: sent after the focus event.
         DKFocusEvent* focusin_event = new DKFocusEvent("focusin", "");
 		focusin_event->relatedTarget = relatedTarget;
-		DKEventTarget::dispatchEvent(focusin_event, address);
+		//DKEventTarget::dispatchEvent(focusin_event, address);
 		delete focusin_event;
     }
 }
@@ -607,7 +607,7 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
 		keydown_event->metaKey = metaKey;
 		keydown_event->repeat = repeat;
 		keydown_event->shiftKey = shiftKey;
-		DKEventTarget::dispatchEvent(keydown_event, address);
+		//DKEventTarget::dispatchEvent(keydown_event, address);
 		delete keydown_event;
 
 		//Only fire keypress on alphanumeric keys.
@@ -624,7 +624,7 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
 		keypress_event->metaKey = metaKey;
 		keypress_event->repeat = repeat;
 		keypress_event->shiftKey = shiftKey;
-		DKEventTarget::dispatchEvent(keypress_event, address);
+		//DKEventTarget::dispatchEvent(keypress_event, address);
 		delete keypress_event;
     }
     else {
@@ -639,7 +639,7 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
 		keyup_event->metaKey = metaKey;
 		keyup_event->repeat = repeat;
 		keyup_event->shiftKey = shiftKey;
-		DKEventTarget::dispatchEvent(keyup_event, address);
+		//DKEventTarget::dispatchEvent(keyup_event, address);
 		delete keyup_event;
     }
 }
@@ -718,7 +718,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 					DKMouseEvent* mousedown_event = new DKMouseEvent("mousedown", "");
 					mousedown_event->button = button;
 					mousedown_event->buttons = buttons;
-					DKEventTarget::dispatchEvent(mousedown_event, address);
+					//DKEventTarget::dispatchEvent(mousedown_event, address);
 					delete mousedown_event;
 					
                     break;
@@ -731,13 +731,13 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				DKMouseEvent* mouseup_event = new DKMouseEvent("mouseup", "");
 				mouseup_event->button = button;
 				mouseup_event->buttons = buttons;
-				DKEventTarget::dispatchEvent(mouseup_event, address);
+				//DKEventTarget::dispatchEvent(mouseup_event, address);
 				delete mouseup_event;
 
 				DKMouseEvent* click_event = new DKMouseEvent("click", "");
 				click_event->button = button;
 				click_event->buttons = buttons;
-				DKEventTarget::dispatchEvent(click_event, address);
+				//DKEventTarget::dispatchEvent(click_event, address);
 				delete click_event;
 				
                 break;
@@ -751,7 +751,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 					DKMouseEvent* mousedown_event = new DKMouseEvent("mousedown", "");
 					mousedown_event->button = button;
 					mousedown_event->buttons = buttons;
-					DKEventTarget::dispatchEvent(mousedown_event, address);
+					//DKEventTarget::dispatchEvent(mousedown_event, address);
 					delete mousedown_event;
 				
                     break;
@@ -764,13 +764,13 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				DKMouseEvent* mouseup_event = new DKMouseEvent("mouseup", "");
 				mouseup_event->button = button;
 				mouseup_event->buttons = buttons;
-				DKEventTarget::dispatchEvent(mouseup_event, address);
+				//DKEventTarget::dispatchEvent(mouseup_event, address);
 				delete mouseup_event;
 
 				DKMouseEvent* contextmenu_event = new DKMouseEvent("contextmenu", "");
 				contextmenu_event->button = button;
 				contextmenu_event->buttons = buttons;
-				DKEventTarget::dispatchEvent(contextmenu_event, address);
+				//DKEventTarget::dispatchEvent(contextmenu_event, address);
 				delete contextmenu_event;
 				
                 break;
@@ -784,7 +784,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 					DKMouseEvent* mousedown_event = new DKMouseEvent("mousedown", "");
 					mousedown_event->button = button;
 					mousedown_event->buttons = buttons;
-					DKEventTarget::dispatchEvent(mousedown_event, address);
+					//DKEventTarget::dispatchEvent(mousedown_event, address);
 					delete mousedown_event;
 					
                     break;
@@ -797,7 +797,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				DKMouseEvent* mouseup_event = new DKMouseEvent("mouseup", "");
 				mouseup_event->button = button;
 				mouseup_event->buttons = buttons;
-				DKEventTarget::dispatchEvent(mouseup_event, address);
+				//DKEventTarget::dispatchEvent(mouseup_event, address);
 				delete mouseup_event;
 				
                 break;
@@ -811,7 +811,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 					DKMouseEvent* mousedown_event = new DKMouseEvent("mousedown", "");
 					mousedown_event->button = button;
 					mousedown_event->buttons = buttons;
-					DKEventTarget::dispatchEvent(mousedown_event, address);
+					//DKEventTarget::dispatchEvent(mousedown_event, address);
 					delete mousedown_event;
 					
                     break;
@@ -824,7 +824,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				DKMouseEvent* mouseup_event = new DKMouseEvent("mouseup", "");
 				mouseup_event->button = button;
 				mouseup_event->buttons = buttons;
-				DKEventTarget::dispatchEvent(mouseup_event, address);
+				//DKEventTarget::dispatchEvent(mouseup_event, address);
 				delete mouseup_event;
 				
                 break;
@@ -838,7 +838,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 					DKMouseEvent* mousedown_event = new DKMouseEvent("mousedown", "");
 					mousedown_event->button = button;
 					mousedown_event->buttons = buttons;
-					DKEventTarget::dispatchEvent(mousedown_event, address);
+					//DKEventTarget::dispatchEvent(mousedown_event, address);
 					delete mousedown_event;
 					
                     break;
@@ -851,7 +851,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				DKMouseEvent* mouseup_event = new DKMouseEvent("mouseup", "");
 				mouseup_event->button = button;
 				mouseup_event->buttons = buttons;
-				DKEventTarget::dispatchEvent(mouseup_event, address);
+				//DKEventTarget::dispatchEvent(mouseup_event, address);
 				delete mouseup_event;
 				
                 break;
@@ -861,7 +861,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 			DKMouseEvent* dblclick_event = new DKMouseEvent("dblclick", "");
 			dblclick_event->button = button;
 			dblclick_event->buttons = buttons;
-			DKEventTarget::dispatchEvent(dblclick_event, address);
+			//DKEventTarget::dispatchEvent(dblclick_event, address);
 			delete dblclick_event;
 			break;
 		}
@@ -874,7 +874,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
             DKWheelEvent* wheel_event = new DKWheelEvent("wheel", "");
 			wheel_event->button = button;
 			wheel_event->deltaX = deltaX;
-			DKEventTarget::dispatchEvent(wheel_event, address);
+			//DKEventTarget::dispatchEvent(wheel_event, address);
 			delete wheel_event;
 			break;
 		}
@@ -887,7 +887,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 			DKWheelEvent* wheel_event = new DKWheelEvent("wheel", "");
 			wheel_event->button = button;
 			wheel_event->deltaY = deltaY;
-			DKEventTarget::dispatchEvent(wheel_event, address);
+			//DKEventTarget::dispatchEvent(wheel_event, address);
 			delete wheel_event;
 			break;
 		}
@@ -927,7 +927,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 			DKMouseEvent* mousemove_event = new DKMouseEvent("mousemove", "");
 			mousemove_event->button = button;
 			mousemove_event->buttons = buttons;
-			DKEventTarget::dispatchEvent(mousemove_event, address);
+			//DKEventTarget::dispatchEvent(mousemove_event, address);
 			delete mousemove_event;
 				
             break;
