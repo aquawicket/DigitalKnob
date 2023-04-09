@@ -6,6 +6,7 @@ bool App::Init() {
 	DKDEBUGFUNC();
 	DKINFO("App::Init() \n");
 	
+	/*
 	////// Event //////
 	DKINFO("\n");
 	DKEventTarget* myTargetA = new DKEventTarget();
@@ -40,6 +41,7 @@ bool App::Init() {
 	DKINFO("\n");
 	myTargetA->addEventListener("customeventA", &App::oncustom);
 	myTargetA->dispatchEvent(new DKCustomEvent("customeventA", ""));
+	*/
 	
 	return true;
 }

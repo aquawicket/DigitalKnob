@@ -6,12 +6,13 @@
 var CustomEvent = function CustomEvent(type, options, address) {
 	//console.log("CustomEvent("+type+","+options+","+address+")")
 	
+	
 	//options = JSON.stringify(options);
 	if(address)
 		this.address = address;
 	if(!this.address)
 		this.address = CPP_DKCustomEvent(type, options);
-	
+
 	
 	////// Instance properties //////
 	// [CustomEvent.detail](Read only)

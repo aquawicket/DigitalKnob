@@ -15,4 +15,5 @@ CPP_DK_Create("DKInputEventJS");
 CPP_DK_Create("DKKeyboardEventJS");
 CPP_DK_Create("DKCompositionEventJS");
 
-CPP_DK_Create("Test.js");
+//CPP_DK_Create("Test.js");
+CPP_DK_Create("TestDictParams.js");

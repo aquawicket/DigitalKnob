@@ -4,7 +4,8 @@
 
 // [Event()] https://developer.mozilla.org/en-US/docs/Web/API/Event/Event
 var Event = function Event(type, options, address) {
-	//console.log("Event("+type+","+options+","+address+")")
+	console.log("Event("+type+","+options+","+address+")")
+	
 	
 	//options = JSON.stringify(options)
 	if(address)
@@ -13,22 +14,28 @@ var Event = function Event(type, options, address) {
 		this.address = CPP_DKEvent(type, options);
 	
 	
+	/*
+	for(var key in options) {
+		var value = options[key];
+		this.key = value;
+		console.log(key+ "=" +value)
+		// do something with "key" and "value" variables
+	}
+	*/
+	
     ////// Instance properties //////
 	// [Event.bubbles](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/bubbles
     Object.defineProperty(this, "bubbles", {
-        get: function bubbles() {
-            return CPP_DKEvent_bubbles(this.address);
-        },
-		set: function bubbles(flag) {
-            return CPP_DKEvent_bubbles(this.address, flag);
-        }
-    });
+        get: function bubbles()		{ return CPP_DKEvent_bubbles(this.address) },
+		set: function bubbles(flag) { return CPP_DKEvent_bubbles(this.address, flag) },
+		configurable: true
+    })
 	// [Event.cancelable](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelable
     Object.defineProperty(this, "cancelable", {
-        get: function cancelable() {
-            return CPP_DKEvent_cancelable(this.address);
-        }
-    });
+        get: function cancelable()		{ return CPP_DKEvent_cancelable(this.address) },
+		set: function cancelable(flag)	{ return CPP_DKEvent_cancelable(this.address, flag) },
+		configurable: true
+    })
     // [Event.composed](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/composed
     Object.defineProperty(this, "composed", {
         get: function composed() {
@@ -195,4 +202,11 @@ var Event = function Event(type, options, address) {
 			return "[object Event]"
 		}
 	}
+	
+	// assign options
+	Object.assign(this, options);
+	
+	// Make properties (Read Only) after assignment
+	Object.defineProperty(this, "bubbles", 		{ set: undefined })
+	Object.defineProperty(this, "cancelable", 	{ set: undefined })
 }
