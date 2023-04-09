@@ -309,3 +309,32 @@ const myKeyboardEvent = new KeyboardEvent('keyboardevent', {
 })
 obj.addEventListener('keyboardevent', onkeyboardevent)
 obj.dispatchEvent(myKeyboardEvent);
+
+
+
+////// CompositionEvent //////
+function printCompositionEventProperties(compositionevent){
+	////// Instance properties //////
+	console.log("compositionevent.data = "	+compositionevent.data)
+	console.log("compositionevent.locale = "+compositionevent.locale)
+}
+console.log('\n');
+function oncompositionevent(event){
+	console.log('oncompositionevent')
+	printEventProperties(event)
+	printUIEventProperties(event)
+	printCompositionEventProperties(event)
+}
+const myCompositionEvent = new CompositionEvent('compositionevent', {
+	data: "CHANGED",
+	
+	detail: 99,
+	//view: [object Window],
+	//sourceCapabilities: [object InputDeviceCapabilities],
+	
+	bubbles: true,
+	cancelable: true,
+	composed: true
+})
+obj.addEventListener('compositionevent', oncompositionevent)
+obj.dispatchEvent(myCompositionEvent);

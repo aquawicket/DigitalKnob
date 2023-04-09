@@ -21,7 +21,7 @@ public:
 	
 	
 		////// Instance properties //////
-		//DKDuktape::AttachFunction("CPP_DKCompositionEvent_data",	DKCompositionEventJS::data); //FIXME: data is already a member of DKObject
+		DKDuktape::AttachFunction("CPP_DKCompositionEvent_data",	DKCompositionEventJS::_data); //FIXME: data is already a member of DKObject
 		DKDuktape::AttachFunction("CPP_DKCompositionEvent_locale",	DKCompositionEventJS::locale);
 
 
@@ -60,8 +60,8 @@ public:
 	
 	////// Instance properties //////
 	// [CompositionEvent.data](Read only) https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/data
-	/* //FIXME: data is already a member of DKObject
-	static int data(duk_context* ctx){
+	//FIXME: data is already a member of DKObject
+	static int _data(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKCompositionEvent* event = (DKCompositionEvent*)DKDuktape::addressToPointer(eventAddress);
@@ -70,7 +70,6 @@ public:
 		duk_push_string(ctx, event->data.c_str());	
 		return true;
 	}
-	*/
 	// [CompositionEvent.locale](Read only)(Deprecated)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/locale
 	static int locale(duk_context* ctx){
 		DKDEBUGFUNC(ctx);

@@ -18,14 +18,14 @@ public:
 		eventClass = "CompositionEvent";
 		
 		////// Instance properties //////
-		//data = ""; //FIXME: data is already a member of DKObject
+		data = "";
 		locale = "";
 	}
 	
 
 	////// Instance properties //////
 	// [CompositionEvent.data](Read only) https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/data
-	//DKString data; //FIXME: data is already a member of DKObject
+	DKString data;
 	// [CompositionEvent.locale](Read only)(Deprecated)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/locale
 	DKString locale;
 
