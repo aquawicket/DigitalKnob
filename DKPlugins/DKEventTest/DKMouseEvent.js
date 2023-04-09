@@ -100,7 +100,7 @@ var MouseEvent = function MouseEvent(type, options, address) {
     })
 	// [MouseEvent.screenY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/screenY
 	Object.defineProperty(this, "screenY", {
-        get: function screenY() 	{ return CPP_DKMouseEvent_screenY(this.address) }
+        get: function screenY() 	{ return CPP_DKMouseEvent_screenY(this.address) },
 		set: function screenY(num)	{ return CPP_DKMouseEvent_screenY(this.address, num) },
 		configurable: true
     })

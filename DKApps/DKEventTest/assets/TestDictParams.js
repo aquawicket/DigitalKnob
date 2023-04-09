@@ -161,7 +161,15 @@ const myMouseEvent = new MouseEvent('mouseevent', {
 	metaKey: true,
 	screenX: 99,
 	screenY: 99,
-	shiftKey: true
+	shiftKey: true,
+	
+	detail: 99,
+	//view: [object Window],
+	//sourceCapabilities: [object InputDeviceCapabilities],
+	
+	bubbles: true,
+	cancelable: true,
+	composed: true
 })
 
 
