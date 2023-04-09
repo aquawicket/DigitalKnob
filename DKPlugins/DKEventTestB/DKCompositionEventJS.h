@@ -65,6 +65,8 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKCompositionEvent* event = (DKCompositionEvent*)DKDuktape::addressToPointer(eventAddress);
+		if (duk_is_string(ctx, 1))
+			event->data = duk_to_string(ctx, 1);
 		duk_push_string(ctx, event->data.c_str());	
 		return true;
 	}

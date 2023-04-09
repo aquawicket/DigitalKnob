@@ -34,7 +34,7 @@ var InputEvent = function InputEvent(type, options, address) {
 	// [InputEvent.isComposing](Read only) https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/isComposing
 	Object.defineProperty(this, "isComposing", {
         get: function isComposing() 	{ return CPP_DKInputEvent_isComposing(this.address) },
-		set: function isComposing(flag) { return CPP_DKInputEvent_isComposing(this.address flag) },
+		set: function isComposing(flag) { return CPP_DKInputEvent_isComposing(this.address, flag) },
 		configurable: true
     })
 	
