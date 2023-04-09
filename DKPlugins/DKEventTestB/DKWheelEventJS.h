@@ -62,6 +62,8 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKWheelEvent* event = (DKWheelEvent*)DKDuktape::addressToPointer(eventAddress);
+		if (duk_is_number(ctx, 1))
+			event->deltaX = duk_to_number(ctx, 1);
 		duk_push_number(ctx, event->deltaX);	
 		return true;
 	}
@@ -70,6 +72,8 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKWheelEvent* event = (DKWheelEvent*)DKDuktape::addressToPointer(eventAddress);
+		if (duk_is_number(ctx, 1))
+			event->deltaY = duk_to_number(ctx, 1);
 		duk_push_number(ctx, event->deltaY);	
 		return true;
 	}
@@ -78,6 +82,8 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKWheelEvent* event = (DKWheelEvent*)DKDuktape::addressToPointer(eventAddress);
+		if (duk_is_number(ctx, 1))
+			event->deltaZ = duk_to_number(ctx, 1);
 		duk_push_number(ctx, event->deltaZ);	
 		return true;
 	}
@@ -86,6 +92,8 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKWheelEvent* event = (DKWheelEvent*)DKDuktape::addressToPointer(eventAddress);
+		if (duk_is_number(ctx, 1))
+			event->deltaMode = duk_to_uint(ctx, 1);
 		duk_push_uint(ctx, event->deltaMode);	
 		return true;
 	}

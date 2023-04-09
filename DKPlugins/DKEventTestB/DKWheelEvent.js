@@ -63,6 +63,14 @@ var WheelEvent = function WheelEvent(type, options, address) {
 		}
 	}
 	
-	return MouseEvent.call(this, type, options)
+	var event = MouseEvent.call(this, type, options)
+	
+	// Make properties (Read Only) after assignment
+	Object.defineProperty(this, "deltaX", 	 { set: undefined })
+	Object.defineProperty(this, "deltaY", 	 { set: undefined })
+	Object.defineProperty(this, "deltaZ", 	 { set: undefined })
+	Object.defineProperty(this, "deltaMode", { set: undefined })
+	
+	return event
 };
 WheelEvent.prototype = MouseEvent.prototype;
