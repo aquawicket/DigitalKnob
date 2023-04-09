@@ -154,23 +154,17 @@ function onmouseevent(event){
 	printMouseEventProperties(event)
 }
 const myMouseEvent = new MouseEvent('mouseevent', {
+	altKey: true,
 	clientX: 99,
 	clientY: 99,
 	ctrlKey: true,
-	shiftKey: true,
-	altKey: true,
 	metaKey: true,
 	screenX: 99,
-	screenY: 99//,
-	
-	//detail: 99,
-	//view: [object Window],
-	//sourceCapabilities: [object InputDeviceCapabilities],
-	
-	//bubbles: true,
-	//cancelable: true,
-	//composed: true
+	screenY: 99,
+	shiftKey: true
 })
+
+
 obj.addEventListener('mouseevent', onmouseevent)
 obj.dispatchEvent(myMouseEvent);
 

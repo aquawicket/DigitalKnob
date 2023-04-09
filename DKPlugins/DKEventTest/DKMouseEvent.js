@@ -94,11 +94,15 @@ var MouseEvent = function MouseEvent(type, options, address) {
     })
 	// [MouseEvent.screenX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/screenX
 	Object.defineProperty(this, "screenX", {
-        get: function screenX() { return CPP_DKMouseEvent_screenX(this.address) }
+        get: function screenX()		{ return CPP_DKMouseEvent_screenX(this.address) },
+		set: function screenX(num)	{ return CPP_DKMouseEvent_screenX(this.address, num) },
+		configurable: true
     })
 	// [MouseEvent.screenY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/screenY
 	Object.defineProperty(this, "screenY", {
-        get: function screenY() { return CPP_DKMouseEvent_screenY(this.address) }
+        get: function screenY() 	{ return CPP_DKMouseEvent_screenY(this.address) }
+		set: function screenY(num)	{ return CPP_DKMouseEvent_screenY(this.address, num) },
+		configurable: true
     })
 	// [MouseEvent.shiftKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/shiftKey
 	Object.defineProperty(this, "shiftKey", {
