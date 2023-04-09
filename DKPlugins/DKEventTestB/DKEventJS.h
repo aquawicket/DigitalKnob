@@ -110,6 +110,8 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKEvent* event = (DKEvent*)DKDuktape::addressToPointer(eventAddress);
+		if (duk_is_boolean(ctx, 1))
+			event->composed = duk_to_boolean(ctx, 1);
 		duk_push_boolean(ctx, event->composed);	
 		return true;
 	}

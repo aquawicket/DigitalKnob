@@ -26,8 +26,8 @@ var Event = function Event(type, options, address) {
     ////// Instance properties //////
 	// [Event.bubbles](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/bubbles
     Object.defineProperty(this, "bubbles", {
-        get: function bubbles()		{ return CPP_DKEvent_bubbles(this.address) },
-		set: function bubbles(flag) { return CPP_DKEvent_bubbles(this.address, flag) },
+        get: function bubbles()			{ return CPP_DKEvent_bubbles(this.address) },
+		set: function bubbles(flag)		{ return CPP_DKEvent_bubbles(this.address, flag) },
 		configurable: true
     })
 	// [Event.cancelable](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelable
@@ -38,10 +38,10 @@ var Event = function Event(type, options, address) {
     })
     // [Event.composed](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/composed
     Object.defineProperty(this, "composed", {
-        get: function composed() {
-            return CPP_DKEvent_composed(this.address);
-        }
-    });
+        get: function composed() 		{ return CPP_DKEvent_composed(this.address) }
+		set: function composed(flag)	{ return CPP_DKEvent_composed(this.address, flag) },
+		configurable: true
+    })
     // [Event.currentTarget](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/currentTarget
     Object.defineProperty(this, "currentTarget", {
         get: function currentTarget() {
