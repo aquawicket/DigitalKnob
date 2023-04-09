@@ -28,7 +28,7 @@ public:
 	}
 	bool End(){
 		DKDEBUGFUNC();
-		DKINFO("DKEventTarget::End() \n");
+		//DKINFO("DKEventTarget::End() \n");
 		return true;
 	}
 
@@ -38,7 +38,7 @@ public:
 	void addEventListener(const DKString& type, std::function<void(DKEvent*)> listener){
 		DKString eventTargetAddress = DKDuktape::pointerToAddress(this);
 		DKDEBUGFUNC(type, listener, eventTargetAddress);
-		DKINFO("DKEventTarget::addEventListener("+type+", listener, "+eventTargetAddress+") \n");
+		//DKINFO("DKEventTarget::addEventListener("+type+", listener, "+eventTargetAddress+") \n");
 		EventObject eventObj;
         eventObj.type = type;
         eventObj.listener = listener;
@@ -59,7 +59,7 @@ public:
 	void removeEventListener(const DKString& type, std::function<void(DKEvent*)> listener){
 		DKString eventTargetAddress = DKDuktape::pointerToAddress(this);
 		DKDEBUGFUNC(type, listener, eventTargetAddress);
-		DKINFO("DKEventTarget::removeEventListener("+type+", listener, "+eventTargetAddress+") \n");
+		//DKINFO("DKEventTarget::removeEventListener("+type+", listener, "+eventTargetAddress+") \n");
 		for(auto it = events.begin(); it != events.end();){
 			if(it->type == type && it->eventTargetAddress == eventTargetAddress) // && it->listener == listener)
 				it = events.erase(it);
@@ -72,7 +72,7 @@ public:
     void dispatchEvent(DKEvent* event){
 		DKString eventTargetAddress = DKDuktape::pointerToAddress(this);
 		DKDEBUGFUNC(event, eventTargetAddress);
-		DKINFO("DKEventTarget::dispatchEvent("+event->type+", "+eventTargetAddress+") \n");	
+		//DKINFO("DKEventTarget::dispatchEvent("+event->type+", "+eventTargetAddress+") \n");	
 		for (auto& eventObj : events) {
 			//DKINFO("	eventObj("+eventObj.type+", "+eventObj.eventTargetAddress+") \n");	
 			if(eventObj.type == event->type && eventObj.eventTargetAddress == eventTargetAddress){

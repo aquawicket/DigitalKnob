@@ -15,8 +15,7 @@ public:
 	DKWheelEvent(DKString _type, DKString _options) : DKMouseEvent(_type, _options) {
 		DKINFO("DKWheelEvent("+_type+", "+_options+") \n");
 		
-		if(eventClass.empty())
-			eventClass = "WheelEvent";
+		eventClass = "WheelEvent";
 		
 		////// Instance properties //////
 		deltaX = 0.0;

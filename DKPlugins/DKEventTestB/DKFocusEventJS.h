@@ -46,7 +46,6 @@ public:
 		DKString options = "";//duk_require_string(ctx, 1);
 		DKINFO("CPP_DKFocusEvent("+type+","+options+")\n");
 		DKFocusEvent* event = new DKFocusEvent(type, options);
-		//event->eventClass = "FocusEvent";
 		DKString eventAddress = DKDuktape::pointerToAddress(event);
 		duk_push_string(ctx, eventAddress.c_str());	
 		return true;

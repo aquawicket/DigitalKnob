@@ -15,8 +15,7 @@ public:
 	DKMouseEvent(DKString _type, DKString _options) : DKUIEvent(_type, _options) {
 		DKINFO("DKMouseEvent("+_type+", "+_options+") \n");
 		
-		if(eventClass.empty())
-			eventClass = "MouseEvent";
+		eventClass = "MouseEvent";
 		
 		////// Instance properties //////
 		altKey = false;		

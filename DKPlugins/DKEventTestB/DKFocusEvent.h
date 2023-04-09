@@ -15,8 +15,7 @@ public:
 	DKFocusEvent(DKString _type, DKString _options) : DKUIEvent(_type, _options) {
 		DKINFO("DKFocusEvent("+_type+", "+_options+") \n");
 		
-		if(eventClass.empty())
-			eventClass = "FocusEvent";
+		eventClass = "FocusEvent";
 		
 		////// Instance properties //////
 		relatedTarget = "";

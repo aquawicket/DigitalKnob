@@ -14,8 +14,7 @@ public:
 	// [CustomEvent()] https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent
 	DKCustomEvent(DKString _type, DKString _options) : DKEvent(_type, _options) {
 		
-		if(eventClass.empty())
-			eventClass = "CustomEvent";
+		eventClass = "CustomEvent";
 		
 		////// Instance properties //////
 		detail = "test";

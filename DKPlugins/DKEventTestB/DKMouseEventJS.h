@@ -91,7 +91,6 @@ public:
 		DKString options = "";//duk_require_string(ctx, 1);
 		DKINFO("CPP_DKMouseEvent("+type+","+options+")\n");
 		DKMouseEvent* event = new DKMouseEvent(type, options);
-		//event->eventClass = "MouseEvent";
 		DKString eventAddress = DKDuktape::pointerToAddress(event);
 		duk_push_string(ctx, eventAddress.c_str());	
 		return true;
