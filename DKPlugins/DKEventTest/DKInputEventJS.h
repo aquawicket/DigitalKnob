@@ -21,7 +21,7 @@ public:
 	
 	
 		////// Instance properties //////
-		//DKDuktape::AttachFunction("CPP_DKInputEvent_data",			DKInputEventJS::data); //FIXME: data is already a member of DKObject
+		DKDuktape::AttachFunction("CPP_DKInputEvent_data",			DKInputEventJS::_data); //FIXME: data is already a member of DKObject
 		DKDuktape::AttachFunction("CPP_DKInputEvent_dataTransfer",	DKInputEventJS::dataTransfer);
 		DKDuktape::AttachFunction("CPP_DKInputEvent_inputType",		DKInputEventJS::inputType);
 		DKDuktape::AttachFunction("CPP_DKInputEvent_isComposing", 	DKInputEventJS::isComposing);
@@ -60,8 +60,8 @@ public:
 	
 	////// Instance properties //////
 	// [InputEvent.data](Read only) https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/data
-	/* //FIXME: data is already a member of DKObject
-	static int data(duk_context* ctx){
+	//FIXME: data is already a member of DKObject
+	static int _data(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKInputEvent* event = (DKInputEvent*)DKDuktape::addressToPointer(eventAddress);
@@ -70,7 +70,6 @@ public:
 		duk_push_string(ctx, event->data.c_str());	
 		return true;
 	}
-	*/
 	// [InputEvent.dataTransfer](Read only) https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/dataTransfer
 	static int dataTransfer(duk_context* ctx){
 		DKDEBUGFUNC(ctx);

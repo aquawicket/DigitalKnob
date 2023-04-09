@@ -176,3 +176,82 @@ const myMouseEvent = new MouseEvent('mouseevent', {
 obj.addEventListener('mouseevent', onmouseevent)
 obj.dispatchEvent(myMouseEvent);
 
+
+
+////// WheelEvent //////
+function printWheelEventProperties(wheelevent){
+	////// Instance properties //////
+	console.log("wheelevent.deltaX = "		+wheelevent.deltaX)
+	console.log("wheelevent.deltaY = "		+wheelevent.deltaY)
+	console.log("wheelevent.deltaZ = "		+wheelevent.deltaZ)
+	console.log("wheelevent.deltaMode = "	+wheelevent.deltaMode)
+	console.log("wheelevent.wheelDelta = "	+wheelevent.wheelDelta)
+	console.log("wheelevent.wheelDeltaX = "	+wheelevent.wheelDeltaX)
+	console.log("wheelevent.wheelDeltaY = "	+wheelevent.wheelDeltaY)
+}
+
+console.log('\n');
+function onwheelevent(event){
+	console.log('onwheelevent')
+	printEventProperties(event)
+	printUIEventProperties(event)
+	printWheelEventProperties(event)
+}
+const myWheelEvent = new WheelEvent('wheelevent', {
+	deltaX: 9.9,
+	deltaY: 9.9,
+	deltaZ: 9.9,
+	deltaMode: 9,
+	
+	altKey: true,
+	clientX: 99,
+	clientY: 99,
+	ctrlKey: true,
+	metaKey: true,
+	screenX: 99,
+	screenY: 99,
+	shiftKey: true,
+	
+	detail: 99,
+	//view: [object Window],
+	//sourceCapabilities: [object InputDeviceCapabilities],
+	
+	bubbles: true,
+	cancelable: true,
+	composed: true
+})
+obj.addEventListener('wheelevent', onwheelevent)
+obj.dispatchEvent(myWheelEvent);
+
+
+
+////// InputEvent //////
+function printInputEventProperties(inputevent){
+	////// Instance properties //////
+	console.log("inputevent.data = "		+inputevent.data)
+	console.log("inputevent.dataTransfer = "+inputevent.dataTransfer)
+	console.log("inputevent.inputType = "	+inputevent.inputType)
+	console.log("inputevent.isComposing = "	+inputevent.isComposing)
+}
+console.log('\n');
+function oninputevent(event){
+	console.log('oninputevent')
+	printEventProperties(event)
+	printUIEventProperties(event)
+	printInputEventProperties(event)
+}
+const myInputEvent = new InputEvent('inputevent', {
+	inputType: "CHANGED",
+	data: "CHANGED",
+	isComposing: true,
+	
+	detail: 99,
+	//view: [object Window],
+	//sourceCapabilities: [object InputDeviceCapabilities],
+	
+	bubbles: true,
+	cancelable: true,
+	composed: true
+})
+obj.addEventListener('inputevent', oninputevent)
+obj.dispatchEvent(myInputEvent);
