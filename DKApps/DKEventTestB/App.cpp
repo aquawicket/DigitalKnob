@@ -6,6 +6,7 @@ bool App::Init() {
 	DKDEBUGFUNC();
 	DKINFO("App::Init() \n");
 	
+	////// Event //////
 	DKINFO("\n");
 	DKEventTarget* myTargetA = new DKEventTarget();
 	DKEvent* eventA = new DKEvent("eventA", "");
@@ -23,6 +24,22 @@ bool App::Init() {
 	DKEvent eventC("eventC", "");
 	myTargetC.addEventListener("eventC", &App::onevent);
 	myTargetC.dispatchEvent(&eventC);
+	
+	DKINFO("\n");
+	DKEventTarget* myTargetE = new DKEventTarget();
+	myTargetE->addEventListener("eventE", &App::onevent);
+	myTargetE->dispatchEvent(new DKEvent("eventE", ""));
+	
+	DKINFO("\n");
+	DKEventTarget* myTargetF = new DKEventTarget();
+	myTargetF->addEventListener("eventF", &App::onevent);
+	myTargetF->dispatchEvent(&DKEvent("eventF", ""));
+	
+	
+	////// CustomEvent //////
+	DKINFO("\n");
+	myTargetA->addEventListener("customeventA", &App::oncustom);
+	myTargetA->dispatchEvent(new DKCustomEvent("customeventA", ""));
 	
 	return true;
 }
