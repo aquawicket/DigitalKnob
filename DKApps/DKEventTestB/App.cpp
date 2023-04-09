@@ -6,16 +6,19 @@ bool App::Init() {
 	DKDEBUGFUNC();
 	DKINFO("App::Init() \n");
 	
+	DKINFO("\n");
 	DKEventTarget* myTargetA = new DKEventTarget();
 	DKEvent* eventA = new DKEvent("eventA", "");
 	myTargetA->addEventListener("eventA", &App::onevent);
 	myTargetA->dispatchEvent(eventA);
 	
+	DKINFO("\n");
 	DKEventTarget myTargetB;
 	DKEvent* eventB = new DKEvent("eventB", "");
 	myTargetB.addEventListener("eventB", &App::onevent);
 	myTargetB.dispatchEvent(eventB);
 	
+	DKINFO("\n");
 	DKEventTarget myTargetC;
 	DKEvent eventC("eventC", "");
 	myTargetC.addEventListener("eventC", &App::onevent);
@@ -56,7 +59,7 @@ void App::printEventProperties(DKEvent* event) {
 }
 bool App::onevent(DKEvent* event) {
 	DKDEBUGFUNC(event);
-	DKINFO("onevent() \n");
+	DKINFO("cpp->onevent() \n");
 	printEventProperties(event);
 	return true;
 }

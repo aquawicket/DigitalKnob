@@ -85,7 +85,7 @@ public:
 		DKString type = duk_require_string(ctx, 0);
 		DKString options = "";//duk_require_string(ctx, 1);
 		DKINFO("CPP_DKEvent("+type+","+options+")\n");
-		DKEventJS::Get()->registerEventType(type);
+		//DKEventJS::Get()->registerEventType(type);
 		DKEvent* event = new DKEvent(type, options);
 		DKString eventAddress = DKDuktape::pointerToAddress(event);
 		//DKEventTarget::LinkDispatchEventFunc(eventAddress, &DKEventJS::dispatchEvent, DKEventJS::Get());
