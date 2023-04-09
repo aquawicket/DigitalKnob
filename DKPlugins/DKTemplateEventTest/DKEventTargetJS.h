@@ -3,7 +3,7 @@
 #define DKEventTargetJS_H
 
 #include "DKDuktape/DKDuktape.h"
-#include "DKEventTest/DKEventTarget.h"
+#include "DKTemplateEventTest/DKEventTarget.h"
 
 
 // [EventTarget] https://developer.mozilla.org/en-US/docs/Web/API/Event
@@ -23,8 +23,8 @@ public:
 		
 		
 		////// Load .js files
-		DKClass::DKCreate("DKEventTest/DKEventTarget.js");
-		DKClass::DKCreate("DKEventTest/DKGlobalEventHandlers.js");
+		DKClass::DKCreate("DKTemplateEventTest/DKEventTarget.js");
+		DKClass::DKCreate("DKTemplateEventTest/DKGlobalEventHandlers.js");
 		return true;
 	}
 	

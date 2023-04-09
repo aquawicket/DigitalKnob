@@ -47,7 +47,7 @@ public:
 	
 	
 		////// Load .js files
-		DKClass::DKCreate("DKEventTest/DKUIEvent.js");
+		DKClass::DKCreate("DKTemplateEventTest/DKUIEvent.js");
 		
 		return true;
 	}

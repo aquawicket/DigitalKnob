@@ -25,12 +25,12 @@
 */
 //https://github.com/uNetworking/uWebSockets/blob/master/tests/main.cpp
 #include "DK/stdafx.h"
-#include "DKEventTest/DKConsoleWindow.h"
-#include "DKEventTest/DKEventTarget.h"
-#include "DKEventTest/DKKeyboardEvent.h"
-#include "DKEventTest/DKMouseEvent.h"
-#include "DKEventTest/DKWheelEvent.h"
-#include "DKEventTest/DKFocusEvent.h"
+#include "DKTemplateEventTest/DKConsoleWindow.h"
+#include "DKTemplateEventTest/DKEventTarget.h"
+#include "DKTemplateEventTest/DKKeyboardEvent.h"
+#include "DKTemplateEventTest/DKMouseEvent.h"
+#include "DKTemplateEventTest/DKWheelEvent.h"
+#include "DKTemplateEventTest/DKFocusEvent.h"
 #include "DKDuktape/DKDuktape.h"
 
 #if !WIN && !EMSCRIPTEN && !ANDROID

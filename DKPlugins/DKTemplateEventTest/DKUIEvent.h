@@ -2,7 +2,7 @@
 #ifndef DKUIEvent_H
 #define DKUIEvent_H
 
-#include "DKEventTest/DKEvent.h"
+#include "DKTemplateEventTest/DKEvent.h"
 
 
 // [W3C] https://w3c.github.io/uievents

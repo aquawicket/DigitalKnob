@@ -83,7 +83,7 @@ public:
 		
 		
 		////// Load .js files
-		DKClass::DKCreate("DKEventTest/DKKeyboardEvent.js");
+		DKClass::DKCreate("DKTemplateEventTest/DKKeyboardEvent.js");
 		
 		return true;
 	}

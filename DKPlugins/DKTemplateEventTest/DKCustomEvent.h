@@ -2,7 +2,7 @@
 #ifndef DKCustomEvent_H
 #define DKCustomEvent_H
 
-#include "DKEventTest/DKEvent.h"
+#include "DKTemplateEventTest/DKEvent.h"
 
 
 // [INTERFACE] https://dom.spec.whatwg.org/#interface-customevent

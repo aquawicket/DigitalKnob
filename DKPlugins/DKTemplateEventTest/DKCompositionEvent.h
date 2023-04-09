@@ -2,7 +2,7 @@
 #ifndef DKCompositionEvent_H
 #define DKCompositionEvent_H
 
-#include "DKEventTest/DKUIEvent.h"
+#include "DKTemplateEventTest/DKUIEvent.h"
 
 
 // [W3C] https://w3c.github.io/uievents/#events-compositionevents

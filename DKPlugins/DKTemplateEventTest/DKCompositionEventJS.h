@@ -40,7 +40,7 @@ public:
 		
 		
 		////// Load .js files
-		DKClass::DKCreate("DKEventTest/DKCompositionEvent.js");
+		DKClass::DKCreate("DKTemplateEventTest/DKCompositionEvent.js");
 		
 		return true;
 	}

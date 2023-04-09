@@ -95,7 +95,7 @@ public:
 	
 
 		////// Load .js files //////
-		DKClass::DKCreate("DKEventTest/DKMouseEvent.js");
+		DKClass::DKCreate("DKTemplateEventTest/DKMouseEvent.js");
 		
 		return true;
 	}

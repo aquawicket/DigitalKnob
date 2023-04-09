@@ -38,7 +38,7 @@ public:
 	
 		
 		////// Load .js files
-		DKClass::DKCreate("DKEventTest/DKFocusEvent.js");
+		DKClass::DKCreate("DKTemplateEventTest/DKFocusEvent.js");
 		
 		return true;
 	}
