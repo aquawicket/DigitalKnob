@@ -8,9 +8,9 @@ CPP_DK_Create("DKEventTargetJS");
 
 // https://w3c.github.io/uievents
 CPP_DK_Create("DKUIEventJS");
-//CPP_DK_Create("DKFocusEventJS");
-//CPP_DK_Create("DKMouseEventJS");
-//CPP_DK_Create("DKWheelEventJS");
+CPP_DK_Create("DKFocusEventJS");
+CPP_DK_Create("DKMouseEventJS");
+CPP_DK_Create("DKWheelEventJS");
 //CPP_DK_Create("DKInputEventJS");
 //CPP_DK_Create("DKKeyboardEventJS");
 //CPP_DK_Create("DKCompositionEventJS");
