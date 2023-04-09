@@ -65,6 +65,8 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKInputEvent* event = (DKInputEvent*)DKDuktape::addressToPointer(eventAddress);
+		if (duk_is_string(ctx, 1))
+			event->data = duk_to_string(ctx, 1);
 		duk_push_string(ctx, event->data.c_str());	
 		return true;
 	}
@@ -82,6 +84,8 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKInputEvent* event = (DKInputEvent*)DKDuktape::addressToPointer(eventAddress);
+		if (duk_is_string(ctx, 1))
+			event->inputType = duk_to_string(ctx, 1);
 		duk_push_string(ctx, event->inputType.c_str());	
 		return true;
 	}
@@ -90,6 +94,8 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKInputEvent* event = (DKInputEvent*)DKDuktape::addressToPointer(eventAddress);
+		if (duk_is_boolean(ctx, 1))
+			event->isComposing = duk_to_boolean(ctx, 1);
 		duk_push_boolean(ctx, event->isComposing);	
 		return true;
 	}
