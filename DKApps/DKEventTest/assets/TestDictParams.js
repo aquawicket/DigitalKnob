@@ -288,7 +288,7 @@ function onkeyboardevent(event){
 const myKeyboardEvent = new KeyboardEvent('keyboardevent', {
 	key: "CHANGED",
 	code: "CHANGED",
-	location: "CHANGED",
+	location: 99, 
 	repeat: true,
 	isComposing: true,
 	//charCode: 99,
