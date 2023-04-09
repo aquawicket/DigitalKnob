@@ -5,14 +5,19 @@ const obj = new EventTarget();
 console.log('\n');
 const myEventA = new Event('myeventA');
 obj.addEventListener('myeventA', function(e){
+	console.log('onmyeventA')
 	console.log('e = '+e)
-	console.log('myeventA')
+	console.log('e.type = '+e.type)
+	console.log('e.target = '+e.target)
 })
 obj.dispatchEvent(myEventA);
 
 console.log('\n');
 obj.addEventListener('myeventB', function(e){
-	console.log('myeventB')
+	console.log('onmyeventB')
+	console.log('e = '+e)
+	console.log('e.type = '+e.type)
+	console.log('e.target = '+e.target)
 })
 obj.dispatchEvent(new Event('myeventB'));
 
@@ -21,9 +26,10 @@ obj.dispatchEvent(new Event('myeventB'));
 console.log('\n');
 const myCustomEvent = new CustomEvent('customevent');
 obj.addEventListener('customevent', function(e){
+	console.log('oncustomevent')
 	console.log('e = '+e)
 	console.log('e.type = '+e.type)
+	console.log('e.target = '+e.target)
 	console.log('e.detail = '+e.detail)
-	console.log('customevent')
 })
 obj.dispatchEvent(myCustomEvent);
