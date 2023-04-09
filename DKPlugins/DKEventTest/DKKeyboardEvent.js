@@ -73,8 +73,8 @@ var KeyboardEvent = function KeyboardEvent(type, options, address) {
     })
 	// [KeyboardEvent.shiftKey](Read only)
 	Object.defineProperty(this, "shiftKey", {
-        get: function shiftKey() { return CPP_DKKeyboardEvent_shiftKey(this.address) },
-		get: function shiftKey(flag) { return CPP_DKKeyboardEvent_shiftKey(this.address, flag) },
+        get: function shiftKey()	 { return CPP_DKKeyboardEvent_shiftKey(this.address) },
+		set: function shiftKey(flag) { return CPP_DKKeyboardEvent_shiftKey(this.address, flag) },
 		configurable: true
     })
 	

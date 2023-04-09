@@ -255,3 +255,57 @@ const myInputEvent = new InputEvent('inputevent', {
 })
 obj.addEventListener('inputevent', oninputevent)
 obj.dispatchEvent(myInputEvent);
+
+
+////// KeyboardEvent //////
+function printKeyboardEventProperties(keyboardevent){
+	////// Instance properties //////
+	console.log("keyboardevent.altKey = "		+keyboardevent.altKey)
+	console.log("keyboardevent.code = "			+keyboardevent.code)			
+	console.log("keyboardevent.ctrlKey = "		+keyboardevent.ctrlKey)
+	console.log("keyboardevent.isComposing = "	+keyboardevent.isComposing)
+	console.log("keyboardevent.key = "			+keyboardevent.key)
+	console.log("keyboardevent.locale = "		+keyboardevent.locale)
+	console.log("keyboardevent.location = "		+keyboardevent.location)
+	console.log("keyboardevent.metaKey = "		+keyboardevent.metaKey)
+	console.log("keyboardevent.repeat = "		+keyboardevent.repeat)
+	console.log("keyboardevent.shiftKey = "		+keyboardevent.shiftKey)
+	////// Obsolete properties //////
+	console.log("keyboardevent.char = "			+keyboardevent.char)
+	console.log("keyboardevent.charCode = "		+keyboardevent.charCode)
+	console.log("keyboardevent.keyCode = "		+keyboardevent.keyCode)
+	console.log("keyboardevent.keyIdentifier = "+keyboardevent.keyIdentifier)
+	console.log("keyboardevent.keyLocation = "	+keyboardevent.keyLocation)
+	console.log("keyboardevent.which = "		+keyboardevent.which)
+}
+console.log('\n');
+function onkeyboardevent(event){
+	console.log('onkeyboardevent')
+	printEventProperties(event)
+	printUIEventProperties(event)
+	printKeyboardEventProperties(event)
+}
+const myKeyboardEvent = new KeyboardEvent('keyboardevent', {
+	key: "CHANGED",
+	code: "CHANGED",
+	location: "CHANGED",
+	repeat: true,
+	isComposing: true,
+	//charCode: 99,
+	//keyCode: 99;
+	//which: 99;
+	ctrlKey: true,
+	shiftKey: true,
+	altKey: true,
+	metaKey: true,
+
+	detail: 99,
+	//view: [object Window],
+	//sourceCapabilities: [object InputDeviceCapabilities],
+	
+	bubbles: true,
+	cancelable: true,
+	composed: true
+})
+obj.addEventListener('keyboardevent', onkeyboardevent)
+obj.dispatchEvent(myKeyboardEvent);
