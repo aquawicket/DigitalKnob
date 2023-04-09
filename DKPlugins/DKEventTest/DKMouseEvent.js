@@ -169,15 +169,15 @@ var MouseEvent = function MouseEvent(type, options, address) {
 	var event = UIEvent.call(this, type, options)
 	
 	// Make properties (Read Only) after assignment
+	Object.defineProperty(this, "altKey ", 		{ set: undefined })
 	Object.defineProperty(this, "clientX",  	{ set: undefined })
 	Object.defineProperty(this, "clientY",  	{ set: undefined })
 	Object.defineProperty(this, "ctrlKey ", 	{ set: undefined })
-	Object.defineProperty(this, "shiftKey ", 	{ set: undefined })
-	Object.defineProperty(this, "altKey ", 		{ set: undefined })
 	Object.defineProperty(this, "metaKey ", 	{ set: undefined })
 	Object.defineProperty(this, "screenX",  	{ set: undefined })
 	Object.defineProperty(this, "screenY",  	{ set: undefined })
+	Object.defineProperty(this, "shiftKey ", 	{ set: undefined })
 	
 	return event
-};
-MouseEvent.prototype = UIEvent.prototype;
+}
+MouseEvent.prototype = UIEvent.prototype

@@ -29,7 +29,7 @@ const myEvent = new Event('event', {
 	bubbles: true,
 	cancelable: true,
 	composed: true
-});
+})
 obj.addEventListener('event', onevent)
 obj.dispatchEvent(myEvent);
 
@@ -53,7 +53,7 @@ const myCustomEvent = new CustomEvent('customevent', {
 	bubbles: true,
 	cancelable: true,
 	composed: true
-});
+})
 obj.addEventListener('customevent', oncustomevent)
 obj.dispatchEvent(myCustomEvent);
 
@@ -81,7 +81,7 @@ const myUIEvent = new UIEvent('uievent', {
 	bubbles: true,
 	cancelable: true,
 	composed: true
-});
+})
 obj.addEventListener('uievent', onuievent)
 obj.dispatchEvent(myUIEvent);
 
@@ -109,7 +109,7 @@ const myFocusEvent = new FocusEvent('focusevent', {
 	bubbles: true,
 	cancelable: true,
 	composed: true
-});
+})
 obj.addEventListener('focusevent', onfocusevent)
 obj.dispatchEvent(myFocusEvent);
 
@@ -161,16 +161,16 @@ const myMouseEvent = new MouseEvent('mouseevent', {
 	altKey: true,
 	metaKey: true,
 	screenX: 99,
-	screenY: 99,
+	screenY: 99//,
 	
-	detail: 99,
+	//detail: 99,
 	//view: [object Window],
 	//sourceCapabilities: [object InputDeviceCapabilities],
 	
-	bubbles: true,
-	cancelable: true,
-	composed: true
-});
+	//bubbles: true,
+	//cancelable: true,
+	//composed: true
+})
 obj.addEventListener('mouseevent', onmouseevent)
 obj.dispatchEvent(myMouseEvent);
 
