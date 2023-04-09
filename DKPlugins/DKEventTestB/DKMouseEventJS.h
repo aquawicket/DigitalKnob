@@ -103,6 +103,8 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKMouseEvent* event = (DKMouseEvent*)DKDuktape::addressToPointer(eventAddress);
+		if (duk_is_boolean(ctx, 1))
+			event->altKey = duk_to_boolean(ctx, 1);
 		duk_push_boolean(ctx, event->altKey);	
 		return true;
 	}
@@ -127,6 +129,8 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKMouseEvent* event = (DKMouseEvent*)DKDuktape::addressToPointer(eventAddress);
+		if (duk_is_number(ctx, 1))
+			event->clientX = duk_to_uint(ctx, 1);
 		duk_push_uint(ctx, event->clientX);	
 		return true;
 	}
@@ -135,6 +139,8 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKMouseEvent* event = (DKMouseEvent*)DKDuktape::addressToPointer(eventAddress);
+		if (duk_is_number(ctx, 1))
+			event->clientY = duk_to_uint(ctx, 1);
 		duk_push_uint(ctx, event->clientY);	
 		return true;
 	}
@@ -143,6 +149,8 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKMouseEvent* event = (DKMouseEvent*)DKDuktape::addressToPointer(eventAddress);
+		if (duk_is_boolean(ctx, 1))
+			event->ctrlKey = duk_to_boolean(ctx, 1);
 		duk_push_boolean(ctx, event->ctrlKey);	
 		return true;
 	}
@@ -167,6 +175,8 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKMouseEvent* event = (DKMouseEvent*)DKDuktape::addressToPointer(eventAddress);
+		if (duk_is_boolean(ctx, 1))
+			event->metaKey = duk_to_boolean(ctx, 1);
 		duk_push_boolean(ctx, event->metaKey);	
 		return true;
 	}
@@ -231,6 +241,8 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKMouseEvent* event = (DKMouseEvent*)DKDuktape::addressToPointer(eventAddress);
+		if (duk_is_number(ctx, 1))
+			event->screenX = duk_to_uint(ctx, 1);
 		duk_push_uint(ctx, event->screenX);	
 		return true;
 	}
@@ -239,6 +251,8 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKMouseEvent* event = (DKMouseEvent*)DKDuktape::addressToPointer(eventAddress);
+		if (duk_is_number(ctx, 1))
+			event->screenY = duk_to_uint(ctx, 1);
 		duk_push_uint(ctx, event->screenY);	
 		return true;
 	}
@@ -247,6 +261,8 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKMouseEvent* event = (DKMouseEvent*)DKDuktape::addressToPointer(eventAddress);
+		if (duk_is_boolean(ctx, 1))
+			event->shiftKey = duk_to_boolean(ctx, 1);
 		duk_push_boolean(ctx, event->shiftKey);	
 		return true;
 	}
