@@ -56,9 +56,8 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKCustomEvent* event = (DKCustomEvent*)DKDuktape::addressToPointer(eventAddress);
-		
-		DKDuktape::DumpStack(ctx);
-	
+
+		//DKDuktape::DumpStack(ctx);
 		if(duk_is_object(ctx, 1))
 			DKWARN("detail is an object")
 		if (duk_is_string(ctx, 1))

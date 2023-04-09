@@ -35,12 +35,6 @@ var CustomEvent = function CustomEvent(type, options, address) {
 		}
 	}
 	
-	// assign options
-	Object.assign(this, options); //FIXME: NOT WORKING
-	
-	// Make properties (Read Only) after assignment
-	//Object.defineProperty(this, "detail", { set: undefined })
-	
 	return Event.call(this, type, options)
 };
 CustomEvent.prototype = Event.prototype;
