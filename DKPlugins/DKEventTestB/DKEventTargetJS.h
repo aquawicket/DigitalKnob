@@ -99,6 +99,20 @@ public:
 	static void onevent(DKEvent* event) {
 		DKDEBUGFUNC(event);
 		DKINFO("onevent() \n");
+		
+		// get the globally stored js callback function
+		DKString eventAddress = DKDuktape::pointerToAddress(event);
+		DKString cb = event->target+"_"+event->type+"_callback";
+		duk_get_global_string(DKDuktape::ctx, cb.c_str());
+		
+		// create and push the Event(eventAddress) object		
+		DKString eventObjStr = "var eventObj = new Event('', '', '"+eventAddress+"'); eventObj;";
+		DukValue eventObj = dukglue_peval<DukValue>(DKDuktape::ctx, eventObjStr.c_str());
+		dukglue_push(DKDuktape::ctx, eventObj);
+		
+		// call callback function
+		if(duk_pcall(DKDuktape::ctx, 1) != 0) //1 = num or args
+			DKDuktape::DumpError(eventAddress);
 	}
 };
 REGISTER_OBJECT(DKEventTargetJS, true)

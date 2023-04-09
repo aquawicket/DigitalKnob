@@ -53,6 +53,7 @@ public:
 		
 		
 		////// Events //////
+		/*
 		// [afterscriptexecute] https://developer.mozilla.org/en-US/docs/Web/API/Element/afterscriptexecute_event
 		registerEventType("afterscriptexecute");
 		// [beforematch] https://developer.mozilla.org/en-US/docs/Web/API/Element/beforematch_event
@@ -69,6 +70,7 @@ public:
 		registerEventType("scroll");
 		// [scrollend] https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollend_event
 		registerEventType("scrollend");
+		*/
 
 			
 		////// Load .js files
@@ -240,10 +242,11 @@ public:
 	
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////
+	/*
 	bool registerEventType(const DKString& _type){
 		DKINFO("DKEventJS::registerEventType("+_type+") \n");
-		//DKEventTarget::LinkAddEventListenerFunc		(_type, &DKEventJS::addEventListener, 		this);
-		//DKEventTarget::LinkRemoveEventListenerFunc	(_type,	&DKEventJS::removeEventListener, 	this);
+		DKEventTarget::LinkAddEventListenerFunc		(_type, &DKEventJS::addEventListener, 		this);
+		DKEventTarget::LinkRemoveEventListenerFunc	(_type,	&DKEventJS::removeEventListener, 	this);
 		return true;
 	}
 	
@@ -285,7 +288,8 @@ public:
 			DKDuktape::DumpError(eventAddress);
 	
 		return true;
-	}	
+	}
+	*/
 };
 REGISTER_OBJECT(DKEventJS, true)
 

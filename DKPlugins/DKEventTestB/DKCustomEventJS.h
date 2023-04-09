@@ -72,6 +72,7 @@ public:
 	
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////
+	/*
 	bool registerEventType(const DKString& _type){
 		DKINFO("DKCustomEventJS::registerEventType("+_type+") \n");
 		//DKEventTarget::LinkAddEventListenerFunc		(_type, &DKCustomEventJS::addEventListener, 	this);
@@ -118,6 +119,7 @@ public:
 	
 		return true;
 	}
+	*/
 };
 REGISTER_OBJECT(DKCustomEventJS, true)
 
