@@ -35,6 +35,11 @@ var CustomEvent = function CustomEvent(type, options, address) {
 		}
 	}
 	
-	return Event.call(this, type, options)
+	var event = Event.call(this, type, options)
+	
+	// Make properties (Read Only) after assignment
+	Object.defineProperty(this, "detail", 		{ set: undefined })
+	
+	return event
 };
 CustomEvent.prototype = Event.prototype;

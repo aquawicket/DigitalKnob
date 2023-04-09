@@ -66,6 +66,8 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKUIEvent* event = (DKUIEvent*)DKDuktape::addressToPointer(eventAddress);
+		if (duk_is_uint(ctx, 1))
+			event->detail = duk_to_uint(ctx, 1);
 		duk_push_uint(ctx, event->detail);	
 		return true;
 	}

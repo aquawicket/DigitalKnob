@@ -31,6 +31,9 @@ console.log('\n');
 function oncustomevent(event){
 	console.log('oncustomevent')
 	printEventProperties(event)
+	console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+	event.detail = "FIXME"
+	printEventProperties(event)
 	printCustomEventProperties(event)
 }
 
@@ -44,4 +47,30 @@ const myCustomEvent = new CustomEvent('customevent', {
 });
 obj.addEventListener('customevent', oncustomevent)
 obj.dispatchEvent(myCustomEvent);
+
+
+////// UIEvent //////
+function printUIEventProperties(uievent){
+	////// Instance properties //////
+	console.log("uievent.detail = "	+uievent.detail)
+	console.log("uievent.sourceCapabilities = "	+uievent.sourceCapabilities)
+	console.log("uievent.view = "	+uievent.view)
+	console.log("uievent.which = "	+uievent.which)
+}
+
+console.log('\n');
+function onuievent(event){
+	console.log('onuievent')
+	printEventProperties(event)
+	printUIEventProperties(event)
+}
+
+const myUIEvent = new UIEvent('uievent', {
+	//detail: 2,
+	bubbles: true,
+	cancelable: true,
+	composed: true
+});
+obj.addEventListener('uievent', onuievent)
+obj.dispatchEvent(myUIEvent);
 
