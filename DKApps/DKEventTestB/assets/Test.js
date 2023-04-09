@@ -77,3 +77,42 @@ obj.addEventListener('uievent', function(event){
 	printUIEventProperties(event)
 })
 obj.dispatchEvent(myUIEvent);
+
+
+////// FocusEvent ///////
+function printFocusEventProperties(focusevent){
+	////// Instance properties //////
+	console.log("focusevent.relatedTarget = "	+focusevent.relatedTarget)
+}
+// [blur] https://developer.mozilla.org/en-US/docs/Web/API/Element/blur_event
+function onblur(event){
+	console.log("onblur("+event+")")
+	printEventProperties(event)
+	printUIEventProperties(event)
+	printFocusEventProperties(event)
+}
+myConsoleWindow.addEventListener('blur', onblur)
+// [focus] https://developer.mozilla.org/en-US/docs/Web/API/Element/focus_event
+function onfocus(event){
+	console.log("onfocus("+event+")")
+	printEventProperties(event)
+	printUIEventProperties(event)
+	printFocusEventProperties(event)
+}
+myConsoleWindow.addEventListener('focus', onfocus)
+// [focusin] https://developer.mozilla.org/en-US/docs/Web/API/Element/focusin_event
+function onfocusin(event){
+	console.log("onfocusin("+event+")")
+	printEventProperties(event)
+	printUIEventProperties(event)
+	printFocusEventProperties(event)
+}
+myConsoleWindow.addEventListener('focusin', onfocusin)
+// [focusout] https://developer.mozilla.org/en-US/docs/Web/API/Element/focusout_event
+function onfocusout(event){
+	console.log("onfocusout("+event+")")
+	printEventProperties(event)
+	printUIEventProperties(event)
+	printFocusEventProperties(event)
+}
+myConsoleWindow.addEventListener('focusout', onfocusout)
