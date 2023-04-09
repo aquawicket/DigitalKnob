@@ -347,6 +347,14 @@ bool DKDuktape::DumpError(const DKString& code){
 	return true;
 }
 
+bool DKDuktape::DumpStack(duk_context* _ctx){
+	DKDEBUGFUNC(_ctx);
+	duk_push_context_dump(_ctx);
+	fprintf(stdout, "%s\n", duk_safe_to_string(_ctx, -1));
+	duk_pop(_ctx);
+	return true;
+}
+
 bool DKDuktape::FileLoaded(const DKString& path){
 	DKDEBUGFUNC(path);
 	for(unsigned int i = 0; i < filelist.size(); ++i){

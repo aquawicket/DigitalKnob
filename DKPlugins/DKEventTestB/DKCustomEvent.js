@@ -4,10 +4,8 @@
 
 // [CustomEvent()] https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent
 var CustomEvent = function CustomEvent(type, options, address) {
-	//console.log("CustomEvent("+type+","+options+","+address+")")
+	console.log("CustomEvent("+type+","+options+","+address+")")
 	
-	
-	//options = JSON.stringify(options);
 	if(address)
 		this.address = address;
 	if(!this.address)
@@ -17,10 +15,10 @@ var CustomEvent = function CustomEvent(type, options, address) {
 	////// Instance properties //////
 	// [CustomEvent.detail](Read only)
 	Object.defineProperty(this, "detail", {
-        get: function detail() {
-            return CPP_DKCustomEvent_detail(this.address);
-        }
-    });
+        get: function detail()		{ return JSON.parse(CPP_DKCustomEvent_detail(this.address)) },
+		set: function detail(str)	{ return JSON.parse(CPP_DKCustomEvent_detail(this.address, JSON.stringify(str))) },
+		configurable: true
+    })
 	
 
     ////// Instance methods //////
@@ -36,6 +34,12 @@ var CustomEvent = function CustomEvent(type, options, address) {
 			return "[object CustomEvent]"
 		}
 	}
+	
+	// assign options
+	Object.assign(this, options); //FIXME: NOT WORKING
+	
+	// Make properties (Read Only) after assignment
+	//Object.defineProperty(this, "detail", { set: undefined })
 	
 	return Event.call(this, type, options)
 };

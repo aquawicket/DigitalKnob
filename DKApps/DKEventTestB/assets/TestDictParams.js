@@ -35,6 +35,9 @@ function oncustomevent(event){
 }
 
 const myCustomEvent = new CustomEvent('customevent', {
+	detail: {
+		username: "aquawicket"
+	},
 	bubbles: true,
 	cancelable: true,
 	composed: true

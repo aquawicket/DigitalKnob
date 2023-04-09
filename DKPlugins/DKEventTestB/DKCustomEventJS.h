@@ -4,6 +4,7 @@
 
 #include "DKDuktape/DKDuktape.h"
 
+
 WARNING_DISABLE
 #include "dukglue/dukglue.h"
 WARNING_ENABLE
@@ -55,6 +56,13 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
 		DKCustomEvent* event = (DKCustomEvent*)DKDuktape::addressToPointer(eventAddress);
+		
+		DKDuktape::DumpStack(ctx);
+	
+		if(duk_is_object(ctx, 1))
+			DKWARN("detail is an object")
+		if (duk_is_string(ctx, 1))
+			event->detail = duk_to_string(ctx, 1);
 		duk_push_string(ctx, event->detail.c_str());	
 		return true;
 	}

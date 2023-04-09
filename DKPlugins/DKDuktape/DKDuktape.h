@@ -56,6 +56,7 @@ public:
 	static bool CallInit(const DKString& file);
 	static void my_fatal(void* udata, const char* msg);
 	static bool DumpError(const DKString& code);
+	static bool DumpStack(duk_context* _ctx);
 	static bool FileLoaded(const DKString& path);
 	static bool LoadFile(const DKString& path);
 	static bool LoadJSString(const DKString& url, const DKString& string);
