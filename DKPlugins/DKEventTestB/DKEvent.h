@@ -38,6 +38,8 @@ public:
 		options = _options; // TODO
 	}
 	
+	virtual ~DKEvent(){}
+	
 	
 	////// Instance properties //////
 	// [Event.bubbles](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/bubbles

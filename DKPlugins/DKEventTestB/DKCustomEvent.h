@@ -15,7 +15,7 @@ public:
 	DKCustomEvent(DKString _type, DKString _options) : DKEvent(_type, _options) {
 		
 		////// Instance properties //////
-		detail = "";
+		detail = "test";
 	}
 	
 	

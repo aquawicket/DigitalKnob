@@ -19,6 +19,7 @@ public:
 	
 	////// CustomEvent //////
 	static void printCustomEventProperties(DKCustomEvent* customevent);
+	static bool oncustom(DKEvent* event);
 };
 REGISTER_OBJECT(App, false);
 

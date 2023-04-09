@@ -8,8 +8,10 @@ bool App::Init() {
 	
 	DKClass::DKCreate("DKEventTarget");															
 	
-	////// Event //////
+	/*
 	DKString thisAddress = DKDuktape::pointerToAddress(this);
+	
+	////// Event //////
 	DKEventTarget::addEventListener("generic", &App::ongeneric, thisAddress);					
 	DKEvent* event = new DKEvent("generic", "");												
 	DKEventTarget::dispatchEvent(event, thisAddress);													
@@ -17,6 +19,15 @@ bool App::Init() {
 	DKEventTarget::dispatchEvent(event, thisAddress);
 	
 	////// CustomEvent ///////
+	DKEventTarget::addEventListener("custom", &App::oncustom, thisAddress);					
+	DKCustomEvent* customevent = new DKCustomEvent("custom", "");												
+	DKEventTarget::dispatchEvent(customevent, thisAddress);													
+	DKEventTarget::removeEventListener("custom", &App::oncustom, thisAddress);	
+	DKEventTarget::dispatchEvent(customevent, thisAddress);
+
+	DKEventTarget::addEventListener("customB", &App::oncustom, thisAddress);																
+	DKEventTarget::dispatchEvent(new DKCustomEvent("customB", ""), thisAddress);													
+	*/
 	
 	return true;
 }
@@ -62,4 +73,11 @@ bool App::ongeneric(DKEvent* event) {
 void App::printCustomEventProperties(DKCustomEvent* customevent) {
 	////// Instance properties //////
 	DKINFO("customevent->detail = "	+toString(customevent->detail)	+"\n");
+}
+bool App::oncustom(DKEvent* event) {
+	DKDEBUGFUNC(event);
+	DKINFO("oncustom() \n");
+	printEventProperties(event);
+	printCustomEventProperties(dynamic_cast<DKCustomEvent*>(event));
+	return true;
 }
