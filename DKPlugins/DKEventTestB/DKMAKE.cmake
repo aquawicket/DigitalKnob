@@ -1,3 +1,3 @@
 dk_depend(DK)
-dk_generateCmake(DKEventTest)
-dk_assets(DKEventTest)
+dk_generateCmake(DKEventTestB)
+dk_assets(DKEventTestB)
