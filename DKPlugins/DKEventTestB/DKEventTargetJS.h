@@ -23,8 +23,8 @@ public:
 		
 		
 		////// Load .js files
-		DKClass::DKCreate("DKEventTest/DKEventTarget.js");
-		DKClass::DKCreate("DKEventTest/DKGlobalEventHandlers.js");
+		DKClass::DKCreate("DKEventTestB/DKEventTarget.js");
+		DKClass::DKCreate("DKEventTestB/DKGlobalEventHandlers.js");
 		return true;
 	}
 	

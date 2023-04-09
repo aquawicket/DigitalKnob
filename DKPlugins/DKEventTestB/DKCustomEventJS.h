@@ -31,7 +31,7 @@ public:
 		
 	
 		////// Load .js files
-		DKClass::DKCreate("DKEventTest/DKCustomEvent.js");
+		DKClass::DKCreate("DKEventTestB/DKCustomEvent.js");
 		
 		return true;
 	}
