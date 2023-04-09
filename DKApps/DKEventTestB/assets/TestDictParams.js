@@ -31,14 +31,13 @@ console.log('\n');
 function oncustomevent(event){
 	console.log('oncustomevent')
 	printEventProperties(event)
-	event.bubbles = false;
-	printEventProperties(event)
 	printCustomEventProperties(event)
 }
 
 const myCustomEvent = new CustomEvent('customevent', {
 	bubbles: true,
-	cancelable: true
+	cancelable: true,
+	composed: true
 });
 obj.addEventListener('customevent', oncustomevent)
 obj.dispatchEvent(myCustomEvent);
