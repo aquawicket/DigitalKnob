@@ -143,7 +143,7 @@ public:
 		DKPointerEvent* event = (DKPointerEvent*)DKDuktape::addressToPointer(eventAddress);
 		if (duk_is_string(ctx, 1))
 			event->pointerType = duk_to_string(ctx, 1);
-		duk_push_uint(ctx, event->pointerType.c_str());	
+		duk_push_uint(ctx, event->pointerType);	
 		return true;
 	}
 	// [PointerEvent.isPrimary](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/isPrimary
