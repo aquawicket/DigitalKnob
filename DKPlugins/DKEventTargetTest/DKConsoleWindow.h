@@ -39,7 +39,6 @@
 	#include <curses.h>
 #endif
 
-class DKApp;
 
 class DKConsoleWindow : public DKWindow
 {
