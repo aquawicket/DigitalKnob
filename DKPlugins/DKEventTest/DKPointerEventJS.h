@@ -31,9 +31,12 @@ public:
 		DKDuktape::AttachFunction("CPP_DKPointerEvent_twist", 				DKPointerEventJS::twist);
 		DKDuktape::AttachFunction("CPP_DKPointerEvent_pointerType", 		DKPointerEventJS::pointerType);
 		
-		////// Events //////
-
-
+		
+		////// Instance methods //////
+		DKDuktape::AttachFunction("CPP_DKPointerEvent_getCoalescedEvents", 	DKPointerEventJS::getCoalescedEvents);
+		DKDuktape::AttachFunction("CPP_DKPointerEvent_getPredictedEvents", 	DKPointerEventJS::getPredictedEvents);
+		
+		
 		////// Load .js files //////
 		DKClass::DKCreate("DKEventTest/DKPointerEvent.js");
 		
