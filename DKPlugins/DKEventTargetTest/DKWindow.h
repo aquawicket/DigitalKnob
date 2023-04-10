@@ -19,7 +19,7 @@ public:
 		clientInformation = "";
 		closed = false;
 		credentialless = false;
-		crypto = false;
+		crypto = "";
 		customElements = "";
 		document = "";
 		frameElement = "";
@@ -70,6 +70,14 @@ public:
 		
 		
 		////// Deprecated properties //////
+		content = "";
+		defaultStatus = "";
+		event = "";
+		external = "";
+		orientation = 0;
+		returnValue = "";
+		sidebar = "";
+		status = "";
 		
 		
 		////// Deprecated methods ///////
@@ -191,20 +199,40 @@ public:
 	
 	////// Deprecated properties //////
 	// [Window.content and Window._content](Deprecated)(Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window
+	DKString content;
 	// [Window.defaultStatus](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/defaultStatus
+	DKString defaultStatus;
 	// [Window.event](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/event
+	DKString event;
 	// [Window.external](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/external
+	DKString external;
 	// [Window.orientation](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/orientation
+	int orientation;
 	// [Window.returnValue](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window
+	DKString returnValue;
 	// [Window.sidebar](Deprecated)(Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/sidebar
+	DKString sidebar;
 	// [Window.status](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/status
+	DKString status;
 	
 	
 	////// Instance methods //////
-	// [Window.atob()] https://developer.mozilla.org/en-US/docs/Web/API/atob
+	// [Window.atob()] https://developer.mozilla.org/en-US/docs/Web/API/atob'
+	void atob() {
+		DKTODO();
+	}
 	// [Window.alert()] https://developer.mozilla.org/en-US/docs/Web/API/alert
+	void alert() {
+		DKTODO();
+	}
 	// [Window.blur()] https://developer.mozilla.org/en-US/docs/Web/API/blur
+	void blur() {
+		DKTODO();
+	}
 	// [Window.btoa()] https://developer.mozilla.org/en-US/docs/Web/API/btoa
+	void btoa() {
+		DKTODO();
+	}
 	// [Window.cancelAnimationFrame()] https://developer.mozilla.org/en-US/docs/Web/API/cancelAnimationFrame
 	// [Window.cancelIdleCallback()] https://developer.mozilla.org/en-US/docs/Web/API/cancelIdleCallback
 	// [Window.clearImmediate()] https://developer.mozilla.org/en-US/docs/Web/API/clearImmediate
