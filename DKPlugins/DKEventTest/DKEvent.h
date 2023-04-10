@@ -25,7 +25,9 @@ public:
 		eventPhase = 0;
 		isTrusted = false;
 		target = "";
-		timeStamp = 0;
+		long ticks;
+		DKUtil::GetTicks(ticks);
+		timeStamp = ticks / 1000000.0;
 		type = _type;
 		
 		////// Legacy and non-standard properties //////
@@ -60,7 +62,7 @@ public:
 	// [Event.target](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/target
 	DKString target;
 	// [Event.timeStamp](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/timeStamp
-	unsigned long timeStamp;
+	double timeStamp;
 	// [Event.type](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/type
 	DKString type;
 	
