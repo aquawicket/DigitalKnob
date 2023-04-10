@@ -17,7 +17,7 @@ public:
 		eventClass = "CustomEvent";
 		
 		////// Instance properties //////
-		detail = "test";
+		detail = "{}";
 	}
 	
 	

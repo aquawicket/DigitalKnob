@@ -528,7 +528,7 @@ void DKConsoleWindow::FocusEventProc(FOCUS_EVENT_RECORD fer) {
         //3. focus: sent after element B receives focus.
         DKFocusEvent* focus_event = new DKFocusEvent("focus", "");
 		focus_event->relatedTarget = relatedTarget;
-		eventTarget->dispatchEvent(focus_event);
+		this->dispatchEvent(focus_event);
 		delete focus_event;
 
         //4. focusin: sent after the focus event.
