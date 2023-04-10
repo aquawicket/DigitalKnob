@@ -507,7 +507,7 @@ void DKConsoleWindow::ErrorExit(LPCSTR lpszMessage) {
 
 void DKConsoleWindow::FocusEventProc(FOCUS_EVENT_RECORD fer) {
     DKDEBUGFUNC(fer);
-	DKEventTarget* eventTarget = (DKEventTarget*)this;
+	//DKEventTarget* eventTarget = (DKEventTarget*)this;
     DKString address = DKDuktape::pointerToAddress(this);
     relatedTarget = address;
 
@@ -515,13 +515,13 @@ void DKConsoleWindow::FocusEventProc(FOCUS_EVENT_RECORD fer) {
         //1. blur: sent after element A loses focus.
 		DKFocusEvent* blur_event = new DKFocusEvent("blur", "");
 		blur_event->relatedTarget = relatedTarget;
-		eventTarget->dispatchEvent(blur_event);
+		this->dispatchEvent(blur_event);
 		delete blur_event;
 
         //2. focusout: sent after the blur event.
         DKFocusEvent* focusout_event = new DKFocusEvent("focusout", "");
 		focusout_event->relatedTarget = relatedTarget;
-		eventTarget->dispatchEvent(focusout_event);
+		this->dispatchEvent(focusout_event);
 		delete focusout_event;
     }
     else {
@@ -534,7 +534,7 @@ void DKConsoleWindow::FocusEventProc(FOCUS_EVENT_RECORD fer) {
         //4. focusin: sent after the focus event.
         DKFocusEvent* focusin_event = new DKFocusEvent("focusin", "");
 		focusin_event->relatedTarget = relatedTarget;
-		eventTarget->dispatchEvent(focusin_event);
+		this->dispatchEvent(focusin_event);
 		delete focusin_event;
     }
 }
