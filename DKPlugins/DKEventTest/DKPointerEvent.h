@@ -19,7 +19,14 @@ public:
 		
 		////// Instance properties //////
 		pointerId = 0;
-
+		width = 0;
+		height = 0;
+		pressure = 0.0;
+		tangentialPressure = 0.0;
+		tiltX = 0;
+		tiltY = 0;
+		twist = 0;
+		isPrimary = false;
 	}
 	
 	
@@ -27,19 +34,34 @@ public:
 	// [PointerEvent.pointerId](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/pointerId
 	unsigned int pointerId;
 	// [PointerEvent.width](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/width
+	unsigned int width;
 	// [PointerEvent.height](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/height
+	unsigned int height;
 	// [PointerEvent.pressure](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/pressure
+	float pressure;
 	// [PointerEvent.tangentialPressure) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/tangentialPressure
+	float tangentialPressure;
 	// [PointerEvent.tiltX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/tiltX
+	int tiltX;
 	// [PointerEvent.tiltY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/tiltY
+	int tiltY;
 	// [PointerEvent.twist](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/twist
+	unsigned int twist;
 	// [PointerEvent.pointerType](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/pointerType
+	DKString pointerType;
 	// [PointerEvent.isPrimary](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/isPrimary
+	bool isPrimary;
 
 
 	////// Instance methods //////
 	// [PointerEvent.getCoalescedEvents()] https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/getCoalescedEvents
+	void getCoalescedEvents(){
+		DKTODO();
+	}
 	// [PointerEvent.getPredictedEvents()] https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent
+	void getPredictedEvents(){
+		DKTODO();
+	}
 	
 	
 	////// Events //////
