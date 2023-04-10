@@ -75,6 +75,11 @@ public:
 	
 	////// Instance methods //////
 	// [PointerEvent.getCoalescedEvents()] https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/getCoalescedEvents
+	/*
+	void getCoalescedEvents() {
+		DKTODO();
+	}
+	*/
 	// [PointerEvent.getPredictedEvents()] https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent
 	
 };
