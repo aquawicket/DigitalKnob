@@ -214,6 +214,7 @@ Event
 		MouseEvent
 			DragEvent
 			PointerEvent
+			WheelEvent
 		MSGestureEvent
 		MSManipulationEvent
 EventCounts
@@ -907,7 +908,6 @@ WebTransport
 WebTransportBidirectionalStream
 WebTransportDatagramDuplexStream
 WebTransportError
-WheelEvent
 WindowClient
 WindowControlsOverlay
 WindowControlsOverlayGeometryChangeEvent
