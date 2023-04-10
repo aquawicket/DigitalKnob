@@ -48,8 +48,10 @@ public:
 		
 		#if !WIN && !EMSCRIPTEN && !ANDROID
 			SCREEN *screen = newterm((char *) 0, stdout, stdin);
-			if(!screen)
-				return DKERROR("screen invalid! \n");
+			if(!screen){
+				DKERROR("screen invalid! \n");
+				return;
+			}
 		#endif
 
 		#if WIN
