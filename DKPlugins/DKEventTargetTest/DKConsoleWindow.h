@@ -35,6 +35,8 @@
 	#include <windows.h>
 	#include <tchar.h>
 	#include <stdio.h>
+#else	
+	#include <curses.h>
 #endif
 
 class DKConsoleWindow : public DKWindow
