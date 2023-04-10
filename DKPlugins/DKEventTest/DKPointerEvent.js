@@ -55,10 +55,15 @@ var PointerEvent = function PointerEvent(type, options, address) {
     })
 
 
-	
 	////// Instance methods //////
 	// [PointerEvent.getCoalescedEvents()] https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/getCoalescedEvents
+	PointerEvent.prototype.getCoalescedEvents = function getCoalescedEvents() {
+        CPP_PointerEvent_getCoalescedEvents(this.address);
+    }
 	// [PointerEvent.getPredictedEvents()] https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent
+	PointerEvent.prototype.getPredictedEvents = function getPredictedEvents() {
+        CPP_PointerEvent_getPredictedEvents(this.address);
+    }
 	
 	
 	////// Events //////
