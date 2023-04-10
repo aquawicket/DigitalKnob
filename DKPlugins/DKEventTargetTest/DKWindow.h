@@ -18,6 +18,9 @@ public:
 		
 		
 		////// Deprecated properties //////
+		
+		
+		////// Deprecated methods ///////
 
 	}
 	
@@ -88,6 +91,152 @@ public:
 	// [Window.returnValue](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window
 	// [Window.sidebar](Deprecated)(Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/sidebar
 	// [Window.status](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/status
+	
+	
+	////// Instance methods //////
+	// [Window.atob()] https://developer.mozilla.org/en-US/docs/Web/API/atob
+	// [Window.alert()] https://developer.mozilla.org/en-US/docs/Web/API/alert
+	// [Window.blur()] https://developer.mozilla.org/en-US/docs/Web/API/blur
+	// [Window.btoa()] https://developer.mozilla.org/en-US/docs/Web/API/btoa
+	// [Window.cancelAnimationFrame()] https://developer.mozilla.org/en-US/docs/Web/API/cancelAnimationFrame
+	// [Window.cancelIdleCallback()] https://developer.mozilla.org/en-US/docs/Web/API/cancelIdleCallback
+	// [Window.clearImmediate()] https://developer.mozilla.org/en-US/docs/Web/API/clearImmediate
+	// [Window.clearInterval()] https://developer.mozilla.org/en-US/docs/Web/API/clearInterval
+	// [Window.clearTimeout()] https://developer.mozilla.org/en-US/docs/Web/API/clearTimeout
+	// [Window.close()] https://developer.mozilla.org/en-US/docs/Web/API/close
+	// [Window.confirm()] https://developer.mozilla.org/en-US/docs/Web/API/confirm
+	// [Window.createImageBitmap()] https://developer.mozilla.org/en-US/docs/Web/API/createImageBitmap
+	// [Window.dump()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/dump
+	// [Window.fetch()] https://developer.mozilla.org/en-US/docs/Web/API/fetch
+	// [Window.find()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/find
+	// [Window.focus()] https://developer.mozilla.org/en-US/docs/Web/API/focus
+	// [Window.getComputedStyle()] https://developer.mozilla.org/en-US/docs/Web/API/getComputedStyle
+	// [Window.getDefaultComputedStyle()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/getDefaultComputedStyle
+	// [Window.getSelection()] https://developer.mozilla.org/en-US/docs/Web/API/getSelection
+	// [Window.matchMedia()] https://developer.mozilla.org/en-US/docs/Web/API/matchMedia
+	// [Window.moveBy()] https://developer.mozilla.org/en-US/docs/Web/API/moveBy
+	// [Window.moveTo()] https://developer.mozilla.org/en-US/docs/Web/API/moveTo
+	// [Window.open()] https://developer.mozilla.org/en-US/docs/Web/API/open
+	// [Window.postMessage()] https://developer.mozilla.org/en-US/docs/Web/API/postMessage
+	// [Window.print()] https://developer.mozilla.org/en-US/docs/Web/API/print
+	// [Window.prompt()] https://developer.mozilla.org/en-US/docs/Web/API/prompt
+	// [Window.queryLocalFonts()](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/queryLocalFonts
+	// [Window.reportError()] https://developer.mozilla.org/en-US/docs/Web/API/reportError
+	// [Window.requestAnimationFrame()] https://developer.mozilla.org/en-US/docs/Web/API/requestAnimationFrame
+	// [Window.requestIdleCallback()] https://developer.mozilla.org/en-US/docs/Web/API/requestIdleCallback
+	// [Window.resizeBy()] https://developer.mozilla.org/en-US/docs/Web/API/resizeBy
+	// [Window.resizeTo()] https://developer.mozilla.org/en-US/docs/Web/API/resizeTo
+	// [Window.scroll()] https://developer.mozilla.org/en-US/docs/Web/API/scroll
+	// [Window.scrollBy()] https://developer.mozilla.org/en-US/docs/Web/API/scrollBy
+	// [Window.scrollByLines()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/scrollByLines
+	// [Window.scrollByPages()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/scrollByPages
+	// [Window.scrollTo()] https://developer.mozilla.org/en-US/docs/Web/API/scrollTo
+	// [Window.setImmediate()] https://developer.mozilla.org/en-US/docs/Web/API/setImmediate
+	// [Window.setInterval()] https://developer.mozilla.org/en-US/docs/Web/API/setInterval
+	// [Window.setResizable()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/setResizable
+	// [Window.setTimeout()] https://developer.mozilla.org/en-US/docs/Web/API/setTimeout
+	// [Window.sizeToContent()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/sizeToContent
+	// [Window.showOpenFilePicker()](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/showOpenFilePicker
+	// [Window.showSaveFilePicker()](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/showSaveFilePicker
+	// [Window.showDirectoryPicker()](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/showDirectoryPicker
+	// [Window.stop()] https://developer.mozilla.org/en-US/docs/Web/API/stop
+	// [Window.updateCommands()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/updateCommands
+	
+	
+	////// Deprecated methods //////
+	// [Window.back()](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/back
+	// [Window.captureEvents()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/captureEvents
+	// [Window.forward()](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/forward
+	// [Window.releaseEvents()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/releaseEvents
+	// [Window.showModalDialog()](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/showModalDialog
+
+
+	////// Events //////
+	// [error] https://developer.mozilla.org/en-US/docs/Web/API/Window/error_event
+	// [languagechange] https://developer.mozilla.org/en-US/docs/Web/API/Window/languagechange_event
+	// [devicemotion] https://developer.mozilla.org/en-US/docs/Web/API/Window/devicemotion_event
+	// [deviceorientation] https://developer.mozilla.org/en-US/docs/Web/API/Window/deviceorientation_event
+	// [resize] https://developer.mozilla.org/en-US/docs/Web/API/Window/resize_event
+	// [storage] https://developer.mozilla.org/en-US/docs/Web/API/Window/storage_event
+	
+	
+	////// Animation events //////
+	// [animationcancel] https://developer.mozilla.org/en-US/docs/Web/API/Element/animationcancel_event
+	// [animationend] https://developer.mozilla.org/en-US/docs/Web/API/Element/animationend_event
+	// [animationiteration] https://developer.mozilla.org/en-US/docs/Web/API/Element/animationiteration_event
+	// [animationstart] https://developer.mozilla.org/en-US/docs/Web/API/Element/animationstart_event
+	
+	
+	////// Clipboard events //////
+	// [copy] https://developer.mozilla.org/en-US/docs/Web/API/Window/copy_event
+	// [cut] https://developer.mozilla.org/en-US/docs/Web/API/Window/cut_event
+	// [paste] https://developer.mozilla.org/en-US/docs/Web/API/Window/paste_event
+	
+	
+	////// Connection events //////
+	// [offline] https://developer.mozilla.org/en-US/docs/Web/API/Window/offline_event
+	// [online] https://developer.mozilla.org/en-US/docs/Web/API/Window/online_event
+	
+	
+	////// Focus events //////
+	// [blur] https://developer.mozilla.org/en-US/docs/Web/API/Window/blur_event
+	// [focus] https://developer.mozilla.org/en-US/docs/Web/API/Window/focus_event
+	
+	
+	////// Gamepad events //////
+	// [gamepadconnected] https://developer.mozilla.org/en-US/docs/Web/API/Window/gamepadconnected_event
+	// [gamepaddisconnected] https://developer.mozilla.org/en-US/docs/Web/API/Window/gamepaddisconnected_event
+	
+	
+	////// History events //////
+	// [hashchange] https://developer.mozilla.org/en-US/docs/Web/API/Window/hashchange_event
+	// [pagehide] https://developer.mozilla.org/en-US/docs/Web/API/Window/pagehide_event
+	// [pageshow] https://developer.mozilla.org/en-US/docs/Web/API/Window/pageshow_event
+	// [popstate] https://developer.mozilla.org/en-US/docs/Web/API/Window/popstate_event
+	
+	
+	////// Load & unload events //////
+	// [beforeunload] https://developer.mozilla.org/en-US/docs/Web/API/Window/beforeunload_event
+	// [DOMContentLoaded] https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
+	// [load] https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
+	// [unload] https://developer.mozilla.org/en-US/docs/Web/API/Window/unload_event
+	
+	
+	////// Manifest events //////
+	// [appinstalled] https://developer.mozilla.org/en-US/docs/Web/API/Window/appinstalled_event
+	// [beforeinstallprompt] https://developer.mozilla.org/en-US/docs/Web/API/Window/beforeinstallprompt_event
+	
+	
+	////// Messaging events //////
+	// [message] https://developer.mozilla.org/en-US/docs/Web/API/Window/message_event
+	// [messageerror] https://developer.mozilla.org/en-US/docs/Web/API/Window/messageerror_event
+	
+	
+	////// Print events //////
+	// [afterprint] https://developer.mozilla.org/en-US/docs/Web/API/Window/afterprint_event
+	// [beforeprint] https://developer.mozilla.org/en-US/docs/Web/API/Window/beforeprint_event
+	
+	
+	////// Promise rejection events //////
+	// [rejectionhandled] https://developer.mozilla.org/en-US/docs/Web/API/Window/rejectionhandled_event
+	// [unhandledrejection] https://developer.mozilla.org/en-US/docs/Web/API/Window/unhandledrejection_event
+	
+	
+	////// Transition events //////
+	// [transitioncancel] https://developer.mozilla.org/en-US/docs/Web/API/Element/transitioncancel_event
+	// [transitionend] https://developer.mozilla.org/en-US/docs/Web/API/Element/transitionend_event
+	// [transitionrun] https://developer.mozilla.org/en-US/docs/Web/API/Element/transitionrun_event
+	// [transitionstart] https://developer.mozilla.org/en-US/docs/Web/API/Element/transitionstart_event
+	
+	
+	////// Deprecated events //////
+	// [orientationchange](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/orientationchange_event
+	// [vrdisplayactivate](Deprecated)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/vrdisplayactivate_event
+	// [vrdisplayconnect](Deprecated)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/vrdisplayconnect_event
+	// [vrdisplaydisconnect](Deprecated)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/vrdisplaydisconnect_event
+	// [vrdisplaydeactivate](Deprecated)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/vrdisplaydeactivate_event
+	// [vrdisplaypresentchange](Deprecated)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/vrdisplaypresentchange_event
+
 };
 
 
