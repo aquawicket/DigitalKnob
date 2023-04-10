@@ -26,6 +26,7 @@ public:
 		tiltX = 0;
 		tiltY = 0;
 		twist = 0;
+		pointerType = "";
 		isPrimary = false;
 	}
 	
