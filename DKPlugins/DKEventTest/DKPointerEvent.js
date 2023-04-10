@@ -14,22 +14,46 @@ var PointerEvent = function PointerEvent(type, options, address) {
 	
 	////// Instance properties //////
 	// [PointerEvent.pointerId](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/pointerId
-	// [PointerEvent.width](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/width
-	// [PointerEvent.height](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/height
-	// [PointerEvent.pressure](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/pressure
-	// [PointerEvent.tangentialPressure) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/tangentialPressure
-	// [PointerEvent.tiltX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/tiltX
-	// [PointerEvent.tiltY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/tiltY
-	// [PointerEvent.twist](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/twist
-	// [PointerEvent.pointerType](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/pointerType
-	// [PointerEvent.isPrimary](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/isPrimary
-	/*
-	Object.defineProperty(this, "???", {
-        get: function ???() 	{ return CPP_DKPointerEvent_???(this.address) },
-		set: function ???(??) 	{ return CPP_DKPointerEvent_???(this.address, ??) },
-		configurable: true
+	Object.defineProperty(this, "pointerId", {
+        get: function pointerId() 	{ return CPP_DKPointerEvent_pointerId(this.address) }
     })
-	*/
+	// [PointerEvent.width](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/width
+	Object.defineProperty(this, "width", {
+        get: function width() 	{ return CPP_DKPointerEvent_width(this.address) }
+    })
+	// [PointerEvent.height](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/height
+	Object.defineProperty(this, "height", {
+        get: function height() 	{ return CPP_DKPointerEvent_height(this.address) }
+    })
+	// [PointerEvent.pressure](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/pressure
+	Object.defineProperty(this, "pressure", {
+        get: function pressure() 	{ return CPP_DKPointerEvent_pressure(this.address) }
+    })
+	// [PointerEvent.tangentialPressure) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/tangentialPressure
+	Object.defineProperty(this, "tangentialPressure", {
+        get: function tangentialPressure() 	{ return CPP_DKPointerEvent_tangentialPressure(this.address) }
+    })
+	// [PointerEvent.tiltX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/tiltX
+	Object.defineProperty(this, "tiltX", {
+        get: function tiltX() 	{ return CPP_DKPointerEvent_tiltX(this.address) }
+    })
+	// [PointerEvent.tiltY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/tiltY
+	Object.defineProperty(this, "tiltY", {
+        get: function tiltY() 	{ return CPP_DKPointerEvent_tiltY(this.address) }
+    })
+	// [PointerEvent.twist](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/twist
+	Object.defineProperty(this, "twist", {
+        get: function twist() 	{ return CPP_DKPointerEvent_twist(this.address) }
+    })
+	// [PointerEvent.pointerType](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/pointerType
+	Object.defineProperty(this, "pointerType", {
+        get: function pointerType() 	{ return CPP_DKPointerEvent_pointerType(this.address) }
+    })
+	// [PointerEvent.isPrimary](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/isPrimary
+	Object.defineProperty(this, "isPrimary", {
+        get: function isPrimary() 	{ return CPP_DKPointerEvent_isPrimary(this.address) }
+    })
+
 
 	
 	////// Instance methods //////
