@@ -78,11 +78,8 @@ public:
 		returnValue = "";
 		sidebar = "";
 		status = "";
-		
-		
-		////// Deprecated methods ///////
-
 	}
+	
 	
 	////// Instance properties //////
 	// [Window.caches](Read only) https://developer.mozilla.org/en-US/docs/Web/API/caches
@@ -217,7 +214,7 @@ public:
 	
 	
 	////// Instance methods //////
-	// [Window.atob()] https://developer.mozilla.org/en-US/docs/Web/API/atob'
+	// [Window.atob()] https://developer.mozilla.org/en-US/docs/Web/API/atob
 	void atob() {
 		DKTODO();
 	}
@@ -234,56 +231,200 @@ public:
 		DKTODO();
 	}
 	// [Window.cancelAnimationFrame()] https://developer.mozilla.org/en-US/docs/Web/API/cancelAnimationFrame
+	void cancelAnimationFrame() {
+		DKTODO();
+	}
 	// [Window.cancelIdleCallback()] https://developer.mozilla.org/en-US/docs/Web/API/cancelIdleCallback
+	void cancelIdleCallback() {
+		DKTODO();
+	}
 	// [Window.clearImmediate()] https://developer.mozilla.org/en-US/docs/Web/API/clearImmediate
+	void clearImmediate() {
+		DKTODO();
+	}
 	// [Window.clearInterval()] https://developer.mozilla.org/en-US/docs/Web/API/clearInterval
+	void clearInterval() {
+		DKTODO();
+	}
 	// [Window.clearTimeout()] https://developer.mozilla.org/en-US/docs/Web/API/clearTimeout
+	void clearTimeout() {
+		DKTODO();
+	}
 	// [Window.close()] https://developer.mozilla.org/en-US/docs/Web/API/close
+	void close() {
+		DKTODO();
+	}
 	// [Window.confirm()] https://developer.mozilla.org/en-US/docs/Web/API/confirm
+	void confirm() {
+		DKTODO();
+	}
 	// [Window.createImageBitmap()] https://developer.mozilla.org/en-US/docs/Web/API/createImageBitmap
+	void createImageBitmap() {
+		DKTODO();
+	}
 	// [Window.dump()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/dump
+	void dump() {
+		DKTODO();
+	}
 	// [Window.fetch()] https://developer.mozilla.org/en-US/docs/Web/API/fetch
+	void fetch() {
+		DKTODO();
+	}
 	// [Window.find()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/find
+	void find() {
+		DKTODO();
+	}
 	// [Window.focus()] https://developer.mozilla.org/en-US/docs/Web/API/focus
+	void focus() {
+		DKTODO();
+	}
 	// [Window.getComputedStyle()] https://developer.mozilla.org/en-US/docs/Web/API/getComputedStyle
+	void getComputedStyle() {
+		DKTODO();
+	}
 	// [Window.getDefaultComputedStyle()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/getDefaultComputedStyle
+	void getDefaultComputedStyle() {
+		DKTODO();
+	}
 	// [Window.getSelection()] https://developer.mozilla.org/en-US/docs/Web/API/getSelection
+	void getSelection() {
+		DKTODO();
+	}
 	// [Window.matchMedia()] https://developer.mozilla.org/en-US/docs/Web/API/matchMedia
+	void matchMedia() {
+		DKTODO();
+	}
 	// [Window.moveBy()] https://developer.mozilla.org/en-US/docs/Web/API/moveBy
+	void moveBy() {
+		DKTODO();
+	}
 	// [Window.moveTo()] https://developer.mozilla.org/en-US/docs/Web/API/moveTo
+	void moveTo() {
+		DKTODO();
+	}
 	// [Window.open()] https://developer.mozilla.org/en-US/docs/Web/API/open
+	void open() {
+		DKTODO();
+	}
 	// [Window.postMessage()] https://developer.mozilla.org/en-US/docs/Web/API/postMessage
+	void postMessage() {
+		DKTODO();
+	}
 	// [Window.print()] https://developer.mozilla.org/en-US/docs/Web/API/print
+	void print() {
+		DKTODO();
+	}
 	// [Window.prompt()] https://developer.mozilla.org/en-US/docs/Web/API/prompt
+	void prompt() {
+		DKTODO();
+	}
 	// [Window.queryLocalFonts()](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/queryLocalFonts
+	void queryLocalFonts() {
+		DKTODO();
+	}
 	// [Window.reportError()] https://developer.mozilla.org/en-US/docs/Web/API/reportError
+	void reportError() {
+		DKTODO();
+	}
 	// [Window.requestAnimationFrame()] https://developer.mozilla.org/en-US/docs/Web/API/requestAnimationFrame
+	void requestAnimationFrame() {
+		DKTODO();
+	}
 	// [Window.requestIdleCallback()] https://developer.mozilla.org/en-US/docs/Web/API/requestIdleCallback
+	void requestIdleCallback() {
+		DKTODO();
+	}
 	// [Window.resizeBy()] https://developer.mozilla.org/en-US/docs/Web/API/resizeBy
+	void resizeBy() {
+		DKTODO();
+	}
 	// [Window.resizeTo()] https://developer.mozilla.org/en-US/docs/Web/API/resizeTo
+	void resizeTo() {
+		DKTODO();
+	}
 	// [Window.scroll()] https://developer.mozilla.org/en-US/docs/Web/API/scroll
+	void scroll() {
+		DKTODO();
+	}
 	// [Window.scrollBy()] https://developer.mozilla.org/en-US/docs/Web/API/scrollBy
+	void scrollBy() {
+		DKTODO();
+	}
 	// [Window.scrollByLines()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/scrollByLines
+	void scrollByLines() {
+		DKTODO();
+	}
 	// [Window.scrollByPages()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/scrollByPages
+	void scrollByPages() {
+		DKTODO();
+	}
 	// [Window.scrollTo()] https://developer.mozilla.org/en-US/docs/Web/API/scrollTo
+	void scrollTo() {
+		DKTODO();
+	}
 	// [Window.setImmediate()] https://developer.mozilla.org/en-US/docs/Web/API/setImmediate
+	void setImmediate() {
+		DKTODO();
+	}
 	// [Window.setInterval()] https://developer.mozilla.org/en-US/docs/Web/API/setInterval
+	void setInterval() {
+		DKTODO();
+	}
 	// [Window.setResizable()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/setResizable
+	void setResizable() {
+		DKTODO();
+	}
 	// [Window.setTimeout()] https://developer.mozilla.org/en-US/docs/Web/API/setTimeout
+	void setTimeout() {
+		DKTODO();
+	}
 	// [Window.sizeToContent()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/sizeToContent
+	void sizeToContent() {
+		DKTODO();
+	}
 	// [Window.showOpenFilePicker()](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/showOpenFilePicker
+	void showOpenFilePicker() {
+		DKTODO();
+	}
 	// [Window.showSaveFilePicker()](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/showSaveFilePicker
+	void showSaveFilePicker() {
+		DKTODO();
+	}
 	// [Window.showDirectoryPicker()](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/showDirectoryPicker
+	void showDirectoryPicker() {
+		DKTODO();
+	}
 	// [Window.stop()] https://developer.mozilla.org/en-US/docs/Web/API/stop
+	void stop() {
+		DKTODO();
+	}
 	// [Window.updateCommands()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/updateCommands
+	void updateCommands() {
+		DKTODO();
+	}
 	
 	
 	////// Deprecated methods //////
 	// [Window.back()](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/back
+	void back() {
+		DKTODO();
+	}
 	// [Window.captureEvents()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/captureEvents
+	void captureEvents() {
+		DKTODO();
+	}
 	// [Window.forward()](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/forward
+	void forward() {
+		DKTODO();
+	}
 	// [Window.releaseEvents()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/releaseEvents
+	void releaseEvents() {
+		DKTODO();
+	}
 	// [Window.showModalDialog()](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/showModalDialog
+	void showModalDialog() {
+		DKTODO();
+	}
 
 
 	////// Events //////
