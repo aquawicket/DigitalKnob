@@ -21,8 +21,10 @@ public:
 	
 	
 		////// Instance properties //////
-		//DKDuktape::AttachFunction("CPP_DKPointerEvent_???", 		DKPointerEventJS::???); 		// [PointerEvent.deltaX](Read only)
-
+		DKDuktape::AttachFunction("CPP_DKPointerEvent_pointerId", 	DKPointerEventJS::pointerId);
+		DKDuktape::AttachFunction("CPP_DKPointerEvent_width", 		DKPointerEventJS::width);
+		DKDuktape::AttachFunction("CPP_DKPointerEvent_height", 		DKPointerEventJS::height);
+		DKDuktape::AttachFunction("CPP_DKPointerEvent_pressure", 	DKPointerEventJS::pressure);
 	
 	
 		////// Events //////
@@ -52,26 +54,51 @@ public:
 	
 	////// Instance properties //////
 	// [PointerEvent.pointerId](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/pointerId
+	static int pointerId(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString eventAddress = duk_require_string(ctx, 0);
+		DKPointerEvent* event = (DKPointerEvent*)DKDuktape::addressToPointer(eventAddress);
+		if (duk_is_number(ctx, 1))
+			event->pointerId = duk_to_uint(ctx, 1);
+		duk_push_uint(ctx, event->pointerId);	
+		return true;
+	}
 	// [PointerEvent.width](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/width
+	static int width(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString eventAddress = duk_require_string(ctx, 0);
+		DKPointerEvent* event = (DKPointerEvent*)DKDuktape::addressToPointer(eventAddress);
+		if (duk_is_number(ctx, 1))
+			event->width = duk_to_uint(ctx, 1);
+		duk_push_uint(ctx, event->width);	
+		return true;
+	}
 	// [PointerEvent.height](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/height
+	static int height(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString eventAddress = duk_require_string(ctx, 0);
+		DKPointerEvent* event = (DKPointerEvent*)DKDuktape::addressToPointer(eventAddress);
+		if (duk_is_number(ctx, 1))
+			event->height = duk_to_uint(ctx, 1);
+		duk_push_uint(ctx, event->height);	
+		return true;
+	}
 	// [PointerEvent.pressure](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/pressure
+	static int pressure(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString eventAddress = duk_require_string(ctx, 0);
+		DKPointerEvent* event = (DKPointerEvent*)DKDuktape::addressToPointer(eventAddress);
+		if (duk_is_number(ctx, 1))
+			event->pressure = duk_to_number(ctx, 1);
+		duk_push_number(ctx, event->pressure);	
+		return true;
+	}
 	// [PointerEvent.tangentialPressure) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/tangentialPressure
 	// [PointerEvent.tiltX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/tiltX
 	// [PointerEvent.tiltY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/tiltY
 	// [PointerEvent.twist](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/twist
 	// [PointerEvent.pointerType](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/pointerType
 	// [PointerEvent.isPrimary](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/isPrimary
-	/*
-	static int ???(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKPointerEvent* event = (DKPointerEvent*)DKDuktape::addressToPointer(eventAddress);
-		if (duk_is_number(ctx, 1))
-			event->??? = duk_to_number(ctx, 1);
-		duk_push_number(ctx, event->???);	
-		return true;
-	}
-	*/
 	
 	////// Instance methods //////
 	// [PointerEvent.getCoalescedEvents()] https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/getCoalescedEvents
