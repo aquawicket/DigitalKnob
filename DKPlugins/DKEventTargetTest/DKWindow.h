@@ -2,7 +2,6 @@
 #ifndef DKWindow_H
 #define DKWindow_H
 
-#include "DK/DK.h"
 #include "DKEventTargetTest/DKEventTarget.h"
 
 
