@@ -43,7 +43,7 @@ obj.dispatchEvent(new Event('myeventB'));
 ////// CustomEvent //////
 function printCustomEventProperties(customevent){
 	////// Instance properties //////
-	console.log("customevent.detail = "	+customevent.detail)
+	//console.log("customevent.detail = "	+customevent.detail)
 }
 
 console.log('\n');

@@ -15,22 +15,12 @@ struct EventObject {
 
 
 // https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
-class DKEventTarget// : public DKObjectT<DKEventTarget>
+class DKEventTarget
 {
 public:
 
 	////// Constructor //////
 	// [EventTarget()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/EventTarget
-	bool Init(){
-		DKDEBUGFUNC();
-		//DKINFO("DKEventTarget::Init() \n");
-		return true;
-	}
-	bool End(){
-		DKDEBUGFUNC();
-		//DKINFO("DKEventTarget::End() \n");
-		return true;
-	}
 
 
 	////// Instance methods //////
