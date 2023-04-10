@@ -1,4 +1,4 @@
-// [W3C] https://w3c.github.io/uievents/#events-wheelevents
+// [W3C] https://w3c.github.io/pointerevents
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent
 
 
