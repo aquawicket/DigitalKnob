@@ -60,7 +60,7 @@ public:
 			GetWindowRect(GetConsoleWindow(), &rect);
 			int nWidth = rect.right - rect.left;
 			int nHeight = rect.bottom - rect.top;
-			if (!MoveWindow(GetConsoleWindow(), X, Y, nWidth, nHeight, TRUE)){
+			if (!MoveWindow(GetConsoleWindow(), x, y, nWidth, nHeight, TRUE)){
 				DKERROR("MoveWindow() failed");
 				return;
 			}
