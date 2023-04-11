@@ -17,19 +17,19 @@ var Event = function Event(type, options, address) {
     Object.defineProperty(this, "bubbles", {
         get: function bubbles()			{ return CPP_DKEvent_bubbles(this.address) },
 		set: function bubbles(flag)		{ return CPP_DKEvent_bubbles(this.address, flag) },
-		configurable: true
+		configurable: true,
     })
 	// [Event.cancelable](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelable
     Object.defineProperty(this, "cancelable", {
         get: function cancelable()		{ return CPP_DKEvent_cancelable(this.address) },
 		set: function cancelable(flag)	{ return CPP_DKEvent_cancelable(this.address, flag) },
-		configurable: true
+		configurable: true,
     })
     // [Event.composed](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/composed
     Object.defineProperty(this, "composed", {
         get: function composed() 		{ return CPP_DKEvent_composed(this.address) },
 		set: function composed(flag)	{ return CPP_DKEvent_composed(this.address, flag) },
-		configurable: true
+		configurable: true,
     })
     // [Event.currentTarget](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/currentTarget
     Object.defineProperty(this, "currentTarget", {
@@ -39,19 +39,19 @@ var Event = function Event(type, options, address) {
                 return;
             //return new HTMLElement(targetAddress);
 			return new EventTarget(targetAddress);
-        }
+        },
     });
 	// [Event.defaultPrevented](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/defaultPrevented
 	Object.defineProperty(this, "defaultPrevented", {
-        get: function defaultPrevented() {	return CPP_DKEvent_defaultPrevented(this.address) }
+        get: function defaultPrevented() {	return CPP_DKEvent_defaultPrevented(this.address) },
     })
 	// [Event.eventPhase](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/eventPhase
 	Object.defineProperty(this, "eventPhase", {
-        get: function eventPhase() { return CPP_DKEvent_eventPhase(this.address) }
+        get: function eventPhase() { return CPP_DKEvent_eventPhase(this.address) },
     })
 	// [Event.isTrusted](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
 	Object.defineProperty(this, "isTrusted", {
-        get: function isTrusted() { return CPP_DKEvent_isTrusted(this.address) }
+        get: function isTrusted() { return CPP_DKEvent_isTrusted(this.address) },
     })
 	// [Event.target](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/target
     Object.defineProperty(this, "target", {
@@ -61,15 +61,15 @@ var Event = function Event(type, options, address) {
                 return;
             //return new HTMLElement(targetAddress);
 			return new EventTarget(targetAddress);
-        }
+        },
     })
 	// [Event.timeStamp](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/timeStamp
 	Object.defineProperty(this, "timeStamp", {
-        get: function timeStamp() { return CPP_DKEvent_timeStamp(this.address) }
+        get: function timeStamp() { return CPP_DKEvent_timeStamp(this.address) },
     })
 	// [Event.type](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/type
 	Object.defineProperty(this, "type", {
-        get: function type() { return CPP_DKEvent_type(this.address) }
+        get: function type() { return CPP_DKEvent_type(this.address) },
     })
     
 	
@@ -77,30 +77,31 @@ var Event = function Event(type, options, address) {
 	// [Event.cancelBubble] https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelBubble
     Object.defineProperty(this, "cancelBubble", {
         get: function cancelBubble()	{ return CPP_DKEvent_cancelBubble(this.address) },
-		set: function cancelBubble(flag){ return CPP_DKEvent_cancelBubble(this.address, flag) }
+		set: function cancelBubble(flag){ return CPP_DKEvent_cancelBubble(this.address, flag) },
     })
 	// [Event.explicitOriginalTarget](Read only)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Event/explicitOriginalTarget
 	Object.defineProperty(this, "explicitOriginalTarget", {
-        get: function explicitOriginalTarget() { return CPP_DKEvent_explicitOriginalTarget(this.address) }
+        get: function explicitOriginalTarget() { return CPP_DKEvent_explicitOriginalTarget(this.address) },
     })
 	// [Event.originalTarget](Read only)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Event/originalTarget
 	Object.defineProperty(this, "originalTarget", {
-        get: function originalTarget() { return CPP_DKEvent_originalTarget(this.address) }
+        get: function originalTarget() { return CPP_DKEvent_originalTarget(this.address) },
     })
 	// [Event.returnValue](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/returnValue
 	Object.defineProperty(this, "returnValue", {
         get: function returnValue()		{ return CPP_DKEvent_returnValue(this.address) },
-		set: function returnValue(flag) { return CPP_DKEvent_returnValue(this.address, flag) }
+		set: function returnValue(flag) { return CPP_DKEvent_returnValue(this.address, flag) },
     })
 	// [Event.scoped](Read only)(Deprecated)
 	Object.defineProperty(this, "scoped", {
-        get: function scoped() { return CPP_DKEvent_scoped(this.address) }
+        get: function scoped() { return CPP_DKEvent_scoped(this.address) },
     })
+	
 	
 	////// Obsolete properties //////
 	/*
 	Object.defineProperty(this, "deepPath", {
-        get: function deepPath(){ return CPP_DKEvent_deepPath(this.address) }
+        get: function deepPath(){ return CPP_DKEvent_deepPath(this.address) },
     })
     Object.defineProperty(this, "srcElement", {
         get: function srcElement() {
@@ -108,9 +109,10 @@ var Event = function Event(type, options, address) {
             if (!elementPointer)
                 return;
             return new HTMLElement(elementPointer);
-        }
+        },
     });
 	*/
+
 
     ////// Instance methods //////
 	// [Event.composedPath()] https://developer.mozilla.org/en-US/docs/Web/API/Event/composedPath
@@ -133,11 +135,13 @@ var Event = function Event(type, options, address) {
         CPP_DKEvent_stopPropagation(this.address);
     }
 	
+	
 	////// Deprecated methods //////
 	// [Event.initEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/initEvent
 	Event.prototype.initEvent = function initEvent(type, bubbles, cancelable) {
         CPP_DKEvent_initEvent(this.address, type, bubbles, cancelable);
     }
+	
 	
 	////// Obsolete methods //////
 	/*
@@ -155,12 +159,11 @@ var Event = function Event(type, options, address) {
     }
 	*/
 
+
 	////// toString //////
-	if(this.toString() === "[object Object]"){
-		this.toString = function(){
-			return "[object Event]"
-		}
-	}
+	if(this.toString() === "[object Object]")
+		this.toString = function(){ return "[object Event]" }
+
 	
 	// assign options
 	Object.assign(this, options);

@@ -17,11 +17,11 @@ var CompositionEvent = function CompositionEvent(type, options, address) {
 	Object.defineProperty(this, "data", {
         get: function data()	{ return CPP_DKCompositionEvent_data(this.address) },
 		set: function data(str) { return CPP_DKCompositionEvent_data(this.address, str) },
-		configurable: true
+		configurable: true,
     })
 	// [CompositionEvent.locale](Read only) https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/locale
 	Object.defineProperty(this, "locale", {
-        get: function locale() { return CPP_DKCompositionEvent_locale(this.address) }
+        get: function locale() { return CPP_DKCompositionEvent_locale(this.address) },
     })
 	
 

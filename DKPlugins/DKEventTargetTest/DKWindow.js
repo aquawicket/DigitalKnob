@@ -111,7 +111,7 @@ var Window = function Window(address) {
 	// [Window.location] https://developer.mozilla.org/en-US/docs/Web/API/Window/location
 	Object.defineProperty(this, "location", {
         get: function location()	{ return CPP_DKWindow_location(this.address) },
-		set: function location(str)	{ return CPP_DKWindow_location(this.address, str) }
+		set: function location(str)	{ return CPP_DKWindow_location(this.address, str) },
     })
 	// [Window.locationbar](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/locationbar
 	Object.defineProperty(this, "locationbar", {
@@ -141,7 +141,12 @@ var Window = function Window(address) {
 	// [Window.name] https://developer.mozilla.org/en-US/docs/Web/API/Window/name
 	Object.defineProperty(this, "name", {
         get: function name()	{ return CPP_DKWindow_name(this.address) },
-		set: function name(str)	{ return CPP_DKWindow_name(this.address, str) }
+		set: function name(str)	{ return CPP_DKWindow_name(this.address, str) },
+    })
+	// [Window.navigation](Read only)(Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Window/navigation
+	Object.defineProperty(this, "navigation", {
+        get: function navigation()		{ return CPP_DKWindow_navigation(this.address) },
+		//set: function navigation(str)	{ return CPP_DKWindow_navigation(this.address, str) },
     })
 	
 

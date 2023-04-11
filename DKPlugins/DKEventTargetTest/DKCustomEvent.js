@@ -17,7 +17,7 @@ var CustomEvent = function CustomEvent(type, options, address) {
 	Object.defineProperty(this, "detail", {
         get: function detail()		{ return JSON.parse(CPP_DKCustomEvent_detail(this.address)) },
 		set: function detail(str)	{ return JSON.parse(CPP_DKCustomEvent_detail(this.address, JSON.stringify(str))) },
-		configurable: true
+		configurable: true,
     })
 	
 
