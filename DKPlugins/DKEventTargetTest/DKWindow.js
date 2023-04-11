@@ -342,7 +342,7 @@ var Window = function Window(address) {
     }
 	// [Window.alert()] https://developer.mozilla.org/en-US/docs/Web/API/Window/alert
 	Window.prototype.alert = function alert(message) {
-		CPP_DKWindow_atob(this.address, message)
+		CPP_DKWindow_alert(this.address, message)
     }
 	// [Window.blur()] https://developer.mozilla.org/en-US/docs/Web/API/Window/blur
 	Window.prototype.blur = function blur() {
@@ -354,7 +354,7 @@ var Window = function Window(address) {
     }
 	// [Window.cancelAnimationFrame()] https://developer.mozilla.org/en-US/docs/Web/API/Window/cancelAnimationFrame
 	Window.prototype.cancelAnimationFrame = function cancelAnimationFrame(requestID) {
-		return CPP_DKWindow_cancelAnimationFrame(this.address, requestID)
+		CPP_DKWindow_cancelAnimationFrame(this.address, requestID)
     }
 	// [Window.cancelIdleCallback()] https://developer.mozilla.org/en-US/docs/Web/API/Window/cancelIdleCallback
 	// [Window.clearImmediate()] https://developer.mozilla.org/en-US/docs/Web/API/Window/clearImmediate
