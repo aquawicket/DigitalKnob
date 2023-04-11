@@ -13,13 +13,13 @@ public:
 
 	// https://dom.spec.whatwg.org
 	////// Event //////
-	static void printEventProperties(DKEvent* event);
-	static bool onevent(DKEvent* event);
+	static void printEventProperties(DKEvent& event);
+	static bool onevent(DKEvent& event);
 
 	
 	////// CustomEvent //////
-	static void printCustomEventProperties(DKCustomEvent* customevent);
-	static bool oncustom(DKEvent* event);
+	static void printCustomEventProperties(DKCustomEvent& customevent);
+	static bool oncustom(DKEvent& event);
 };
 REGISTER_OBJECT(App, false);
 

@@ -6,42 +6,41 @@ bool App::Init() {
 	DKDEBUGFUNC();
 	DKINFO("App::Init() \n");
 	
-	/*
 	////// Event //////
 	DKINFO("\n");
-	DKEventTarget* myTargetA = new DKEventTarget();
-	DKEvent* eventA = new DKEvent("eventA", "");
-	myTargetA->addEventListener("eventA", &App::onevent);
-	myTargetA->dispatchEvent(eventA);
+	DKEventTarget myTargetA;									// EventTarget as 	value
+	DKEvent eventA("eventA", "");								// Event as 		value
+	myTargetA.addEventListener("eventA", &App::onevent);
+	myTargetA.dispatchEvent(eventA);
 	
 	DKINFO("\n");
-	DKEventTarget myTargetB;
-	DKEvent* eventB = new DKEvent("eventB", "");
-	myTargetB.addEventListener("eventB", &App::onevent);
-	myTargetB.dispatchEvent(eventB);
+	DKEventTarget* myTargetB = new DKEventTarget();  			// EventTarget as 	pointer
+	DKEvent eventB("eventB", "");								// Event as 		value
+	myTargetB->addEventListener("eventB", &App::onevent);
+	myTargetB->dispatchEvent(eventB);
 	
 	DKINFO("\n");
-	DKEventTarget myTargetC;
-	DKEvent eventC("eventC", "");
+	DKEventTarget myTargetC;									// EventTarget as 	value
+	DKEvent* eventC = new DKEvent("eventC", "");				// Event as 		pointer
 	myTargetC.addEventListener("eventC", &App::onevent);
-	myTargetC.dispatchEvent(&eventC);
+	myTargetC.dispatchEvent(eventC);
 	
 	DKINFO("\n");
-	DKEventTarget* myTargetE = new DKEventTarget();
-	myTargetE->addEventListener("eventE", &App::onevent);
-	myTargetE->dispatchEvent(new DKEvent("eventE", ""));
+	DKEventTarget* myTargetD = new DKEventTarget();				// EventTarget as 	pointer
+	DKEvent* eventD = new DKEvent("eventD", "");				// Event as 		pointer
+	myTargetD->addEventListener("eventD", &App::onevent);
+	myTargetD->dispatchEvent(eventD);
 	
 	DKINFO("\n");
-	DKEventTarget* myTargetF = new DKEventTarget();
-	myTargetF->addEventListener("eventF", &App::onevent);
-	myTargetF->dispatchEvent(&DKEvent("eventF", ""));
-	
+	DKEventTarget myTargetE;
+	myTargetE.addEventListener("eventE", &App::onevent);
+	myTargetE.dispatchEvent(DKEvent("eventE", ""));				// Event created within dispatchEvent function
+		
 	
 	////// CustomEvent //////
 	DKINFO("\n");
-	myTargetA->addEventListener("customeventA", &App::oncustom);
-	myTargetA->dispatchEvent(new DKCustomEvent("customeventA", ""));
-	*/
+	myTargetA.addEventListener("customeventA", &App::oncustom);
+	myTargetA.dispatchEvent(DKCustomEvent("customeventA", ""));
 	
 	return true;
 }
@@ -54,29 +53,29 @@ bool App::End(){
 
 
 ////// Event //////
-void App::printEventProperties(DKEvent* event) {
+void App::printEventProperties(DKEvent& event) {
 	DKDEBUGFUNC(event);
 	
 	////// Instance properties //////
-	DKINFO("event->bubbles = "					+toString(event->bubbles)				+"\n");
-	DKINFO("event->cancelable = "				+toString(event->cancelable)			+"\n");
-	DKINFO("event->composed = "					+toString(event->composed)				+"\n");
-	DKINFO("event->currentTarget = "			+toString(event->currentTarget)			+"\n");
-	DKINFO("event->defaultPrevented = "			+toString(event->defaultPrevented)		+"\n");
-	DKINFO("event->eventPhase = "				+toString(event->eventPhase)			+"\n");
-	DKINFO("event->isTrusted = "				+toString(event->isTrusted)				+"\n");
-	DKINFO("event->target = "					+toString(event->target)				+"\n");
-	DKINFO("event->timeStamp = "				+toString(event->timeStamp)				+"\n");
-	DKINFO("event->type = "						+toString(event->type)					+"\n");
+	DKINFO("event.bubbles = "				+toString(event.bubbles)			+"\n");
+	DKINFO("event.cancelable = "			+toString(event.cancelable)			+"\n");
+	DKINFO("event.composed = "				+toString(event.composed)			+"\n");
+	DKINFO("event.currentTarget = "			+toString(event.currentTarget)		+"\n");
+	DKINFO("event.defaultPrevented = "		+toString(event.defaultPrevented)	+"\n");
+	DKINFO("event.eventPhase = "			+toString(event.eventPhase)			+"\n");
+	DKINFO("event.isTrusted = "				+toString(event.isTrusted)			+"\n");
+	DKINFO("event.target = "				+toString(event.target)				+"\n");
+	DKINFO("event.timeStamp = "				+toString(event.timeStamp)			+"\n");
+	DKINFO("event.type = "					+toString(event.type)				+"\n");
 	
 	////// Legacy and non-standard properties //////
-	DKINFO("event->cancelBubble = "				+toString(event->cancelBubble)			+"\n");
-	DKINFO("event->explicitOriginalTarget = "	+toString(event->explicitOriginalTarget)+"\n");
-	DKINFO("event->originalTarget = "			+toString(event->originalTarget)		+"\n");
-	DKINFO("event->returnValue = "				+toString(event->returnValue)			+"\n");
-	DKINFO("event->scoped = "					+toString(event->scoped)				+"\n");
+	DKINFO("event.cancelBubble = "			+toString(event.cancelBubble)			+"\n");
+	DKINFO("event.explicitOriginalTarget = "+toString(event.explicitOriginalTarget)	+"\n");
+	DKINFO("event.originalTarget = "		+toString(event.originalTarget)			+"\n");
+	DKINFO("event.returnValue = "			+toString(event.returnValue)			+"\n");
+	DKINFO("event.scoped = "				+toString(event.scoped)					+"\n");
 }
-bool App::onevent(DKEvent* event) {
+bool App::onevent(DKEvent& event) {
 	DKDEBUGFUNC(event);
 	DKINFO("cpp->onevent() \n");
 	printEventProperties(event);
@@ -84,14 +83,14 @@ bool App::onevent(DKEvent* event) {
 }
 
 ////// CustomEvent //////
-void App::printCustomEventProperties(DKCustomEvent* customevent) {
+void App::printCustomEventProperties(DKCustomEvent& customevent) {
 	////// Instance properties //////
-	DKINFO("customevent->detail = "	+toString(customevent->detail)	+"\n");
+	DKINFO("customevent.detail = "	+toString(customevent.detail)	+"\n");
 }
-bool App::oncustom(DKEvent* event) {
+bool App::oncustom(DKEvent& event) {
 	DKDEBUGFUNC(event);
-	DKINFO("oncustom() \n");
+	DKINFO("cpp->oncustom() \n");
 	printEventProperties(event);
-	printCustomEventProperties(dynamic_cast<DKCustomEvent*>(event));
+	printCustomEventProperties(dynamic_cast<DKCustomEvent&>(event));
 	return true;
 }

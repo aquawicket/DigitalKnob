@@ -75,6 +75,9 @@ public:
 			}
         }
     }
+	void dispatchEvent(DKEvent* event){
+		dispatchEvent(*event);
+	}
 	
 	
 	////// DK properties //////	
