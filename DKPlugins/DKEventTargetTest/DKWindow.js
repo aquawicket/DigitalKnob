@@ -53,7 +53,52 @@ var Window = function Window(address) {
         get: function devicePixelRatio()		{ return CPP_DKWindow_devicePixelRatio(this.address) },
 		//set: function devicePixelRatio(num)	{ return CPP_DKWindow_devicePixelRatio(this.address, num) },
     })
-
+	// [Window.document](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/document
+	Object.defineProperty(this, "document", {
+        get: function document()		{ return CPP_DKWindow_document(this.address) },
+		//set: function document(str)	{ return CPP_DKWindow_document(this.address, str) },
+    })
+	// [Window.frameElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/frameElement
+	Object.defineProperty(this, "frameElement", {
+        get: function frameElement()		{ return CPP_DKWindow_frameElement(this.address) },
+		//set: function frameElement(str)	{ return CPP_DKWindow_frameElement(this.address, str) },
+    })
+	// [Window.frames](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/frames
+	Object.defineProperty(this, "frames", {
+        get: function frames()		{ return CPP_DKWindow_frames(this.address) },
+		//set: function frames(str)	{ return CPP_DKWindow_frames(this.address, str) },
+    })
+	// [Window.fullScreen](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/fullScreen
+	Object.defineProperty(this, "fullScreen", {
+        get: function fullScreen()		{ return CPP_DKWindow_fullScreen(this.address) },
+		set: function fullScreen(str)	{ return CPP_DKWindow_fullScreen(this.address, str) },
+    })
+	// [Window.history](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/History
+	Object.defineProperty(this, "history", {
+        get: function history()		{ return CPP_DKWindow_history(this.address) },
+		//set: function history(str){ return CPP_DKWindow_history(this.address, str) },
+    })
+	// [Window.indexedDB](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/indexedDB
+	Object.defineProperty(this, "indexedDB", {
+        get: function indexedDB()		{ return CPP_DKWindow_indexedDB(this.address) },
+		//set: function indexedDB(str)	{ return CPP_DKWindow_indexedDB(this.address, str) },
+    })
+	// [Window.innerHeight](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/innerHeight
+	Object.defineProperty(this, "innerHeight", {
+        get: function innerHeight()		{ return CPP_DKWindow_innerHeight(this.address) },
+		//set: function innerHeight(num){ return CPP_DKWindow_innerHeight(this.address, num) },
+    })
+	// [Window.innerWidth](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/innerWidth
+	Object.defineProperty(this, "innerWidth", {
+        get: function innerWidth()		{ return CPP_DKWindow_innerWidth(this.address) },
+		//set: function innerWidth(num){ return CPP_DKWindow_innerWidth(this.address, num) },
+    })
+	// [Window.isSecureContext](Read only) https://developer.mozilla.org/en-US/docs/Web/API/isSecureContext
+	Object.defineProperty(this, "isSecureContext", {
+        get: function isSecureContext()		{ return CPP_DKWindow_isSecureContext(this.address) },
+		//set: function isSecureContext(num){ return CPP_DKWindow_isSecureContext(this.address, num) },
+    })
+	
 
 	////// Deprecated properties //////
 	
