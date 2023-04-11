@@ -103,6 +103,21 @@ var Window = function Window(address) {
         get: function launchQueue()		{ return CPP_DKWindow_launchQueue(this.address) },
 		//set: function launchQueue(str){ return CPP_DKWindow_launchQueue(this.address, str) },
     })
+	// [Window.length](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/length
+	Object.defineProperty(this, "length", {
+        get: function length()		{ return CPP_DKWindow_length(this.address) },
+		//set: function length(num)	{ return CPP_DKWindow_length(this.address, num) },
+    })
+	// [Window.location] https://developer.mozilla.org/en-US/docs/Web/API/Window/location
+	Object.defineProperty(this, "location", {
+        get: function location()	{ return CPP_DKWindow_location(this.address) },
+		set: function location(str)	{ return CPP_DKWindow_location(this.address, str) },
+    })
+	// [Window.locationbar](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/locationbar
+	Object.defineProperty(this, "locationbar", {
+        get: function locationbar()		{ return CPP_DKWindow_locationbar(this.address) },
+		//set: function locationbar(str){ return CPP_DKWindow_locationbar(this.address, str) },
+    })
 	
 
 	////// Deprecated properties //////
