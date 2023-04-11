@@ -13,6 +13,7 @@ public:
 	DKWindow() : DKEventTarget() {
 		
 		eventTargetClass = "Window";
+		eventTargetAddress = DKDuktape::pointerToAddress(this);
 		
 		////// Instance properties //////
 		caches = "";

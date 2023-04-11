@@ -3,6 +3,7 @@
 #define DKEvent_H
 
 #include "DK/DK.h"
+#include "DKDuktape/DKDuktape.h"
 
 
 // [INTERFACE] https://dom.spec.whatwg.org/#interface-event
@@ -15,6 +16,7 @@ public:
 	DKEvent(DKString _type, DKString _options){
 		
 		eventClass = "Event";
+		eventAddress = DKDuktape::pointerToAddress(this);
 		
 		////// Instance properties //////
 		bubbles = false;
@@ -119,6 +121,7 @@ public:
 	
 	////// DK properties //////
 	DKString eventClass;
+	DKString eventAddress;
 	DKString options;
 };
 

@@ -21,15 +21,18 @@ public:
 
 	////// Constructor //////
 	// [EventTarget()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/EventTarget
-	DKEventTarget();
+	DKEventTarget() {
+		eventTargetClass = "EventTarget";
+		eventTargetAddress = DKDuktape::pointerToAddress(this);
+	}
 
+	virtual ~DKEventTarget(){}
 
 	////// Instance methods //////
 	// [EventTarget.addEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
 	void addEventListener(const DKString& type, std::function<void(DKEvent*)> listener){
-		DKString eventTargetAddress = DKDuktape::pointerToAddress(this);
-		DKDEBUGFUNC(type, listener, eventTargetAddress);
-		DKINFO("DKEventTarget::addEventListener("+type+", listener, "+eventTargetAddress+") \n");
+		DKDEBUGFUNC(type, listener);
+		//DKINFO("DKEventTarget::addEventListener("+type+", listener, "+eventTargetAddress+") \n");
 		EventObject eventObj;
         eventObj.type = type;
         eventObj.listener = listener;
@@ -48,9 +51,8 @@ public:
 	
 	// [EventTarget.removeEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener
 	void removeEventListener(const DKString& type, std::function<void(DKEvent*)> listener){
-		DKString eventTargetAddress = DKDuktape::pointerToAddress(this);
-		DKDEBUGFUNC(type, listener, eventTargetAddress);
-		DKINFO("DKEventTarget::removeEventListener("+type+", listener, "+eventTargetAddress+") \n");
+		DKDEBUGFUNC(type, listener);
+		//DKINFO("DKEventTarget::removeEventListener("+type+", listener, "+eventTargetAddress+") \n");
 		for(auto it = events.begin(); it != events.end();){
 			if(it->type == type && it->eventTargetAddress == eventTargetAddress) // && it->listener == listener)
 				it = events.erase(it);
@@ -61,9 +63,8 @@ public:
 	
 	// [EventTarget.dispatchEvent()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent
     void dispatchEvent(DKEvent* event){
-		DKString eventTargetAddress = DKDuktape::pointerToAddress(this);
-		DKDEBUGFUNC(event, eventTargetAddress);
-		DKINFO("DKEventTarget::dispatchEvent("+event->type+", "+eventTargetAddress+") \n");	
+		DKDEBUGFUNC(event);
+		//DKINFO("DKEventTarget::dispatchEvent("+event->type+", "+eventTargetAddress+") \n");	
 		for (auto& eventObj : events) {
 			//DKINFO("	eventObj("+eventObj.type+", "+eventObj.eventTargetAddress+") \n");	
 			if(eventObj.type == event->type && eventObj.eventTargetAddress == eventTargetAddress){
@@ -79,7 +80,7 @@ public:
 	////// DK properties //////	
 	static std::vector<EventObject> events;
 	DKString eventTargetClass;
-
+	DKString eventTargetAddress;
 };
 
 

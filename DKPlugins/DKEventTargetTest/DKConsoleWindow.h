@@ -53,32 +53,6 @@ public:
 	}
 	
 	void Loop();
-	
-	/*
-	//// Instance properties ////
-	static int closed(duk_context* ctx);
-	static int Columns(duk_context* ctx);
-	static int fullScreen(duk_context* ctx);
-	static int innerHeight(duk_context* ctx);
-	static int innerWidth(duk_context* ctx);
-	static int name(duk_context* ctx);
-	static int outerHeight(duk_context* ctx);
-	static int outerWidth(duk_context* ctx);
-	static int Rows(duk_context* ctx);
-	static int ScreenX(duk_context* ctx);
-	static int screenLeft(duk_context* ctx);
-	static int ScreenY(duk_context* ctx);
-	static int screenTop(duk_context* ctx);
-	
-	//// Instance methods ////
-	static int blur(duk_context* ctx);
-	static int close(duk_context* ctx);
-	static int focus(duk_context* ctx);
-	static int moveBy(duk_context* ctx);
-	static int moveTo(duk_context* ctx);
-	static int resizeBy(duk_context* ctx);
-	static int resizeTo(duk_context* ctx);
-	*/
 
 	// KeyboardEvent
 	bool altKey;
