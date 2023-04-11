@@ -16,6 +16,7 @@ public:
 		DKINFO("DKKeyboardEvent("+_type+", "+_options+") \n");
 		
 		eventClass = "KeyboardEvent";
+		eventAddress = DKDuktape::pointerToAddress(this);
 		
 		////// Instance properties //////
 		altKey = false;

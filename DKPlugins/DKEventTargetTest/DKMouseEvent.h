@@ -16,6 +16,7 @@ public:
 		DKINFO("DKMouseEvent("+_type+", "+_options+") \n");
 		
 		eventClass = "MouseEvent";
+		eventAddress = DKDuktape::pointerToAddress(this);
 		
 		////// Instance properties //////
 		altKey = false;		

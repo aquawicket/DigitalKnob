@@ -16,6 +16,7 @@ public:
 		DKINFO("DKFocusEvent("+_type+", "+_options+") \n");
 		
 		eventClass = "FocusEvent";
+		eventAddress = DKDuktape::pointerToAddress(this);
 		
 		////// Instance properties //////
 		relatedTarget = "";

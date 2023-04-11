@@ -16,6 +16,7 @@ public:
 		DKINFO("DKWheelEvent("+_type+", "+_options+") \n");
 		
 		eventClass = "WheelEvent";
+		eventAddress = DKDuktape::pointerToAddress(this);
 		
 		////// Instance properties //////
 		deltaX = 0.0;

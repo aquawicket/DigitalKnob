@@ -14,6 +14,7 @@ public:
 	////// Constructor //////
 	// [Event()] https://developer.mozilla.org/en-US/docs/Web/API/Event/Event
 	DKEvent(DKString _type, DKString _options){
+		DKINFO("DKEvent("+_type+", "+_options+") \n");
 		
 		eventClass = "Event";
 		eventAddress = DKDuktape::pointerToAddress(this);

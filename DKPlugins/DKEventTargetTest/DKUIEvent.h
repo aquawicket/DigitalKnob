@@ -13,8 +13,10 @@ public:
 	////// Constructor //////
 	// [UIEvent()] https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/UIEvent
 	DKUIEvent(DKString _type, DKString _options) : DKEvent(_type, _options) {
+		DKINFO("DKUIEvent("+_type+", "+_options+") \n");
 		
 		eventClass = "UIEvent";
+		eventAddress = DKDuktape::pointerToAddress(this);
 		
 		////// Instance properties //////
 		detail = 0;
