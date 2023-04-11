@@ -10,7 +10,7 @@
 struct EventObject {
     DKString type;
 	DKString eventTargetAddress;
-    std::function<void(DKEvent*)> listener;
+    std::function<void(DKEvent&)> listener;
 };
 
 
@@ -30,7 +30,7 @@ public:
 
 	////// Instance methods //////
 	// [EventTarget.addEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
-	void addEventListener(const DKString& type, std::function<void(DKEvent*)> listener){
+	void addEventListener(const DKString& type, std::function<void(DKEvent&)> listener){
 		DKDEBUGFUNC(type, listener);
 		//DKINFO("DKEventTarget::addEventListener("+type+", listener, "+eventTargetAddress+") \n");
 		EventObject eventObj;
@@ -50,7 +50,7 @@ public:
 	}
 	
 	// [EventTarget.removeEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener
-	void removeEventListener(const DKString& type, std::function<void(DKEvent*)> listener){
+	void removeEventListener(const DKString& type, std::function<void(DKEvent&)> listener){
 		DKDEBUGFUNC(type, listener);
 		//DKINFO("DKEventTarget::removeEventListener("+type+", listener, "+eventTargetAddress+") \n");
 		for(auto it = events.begin(); it != events.end();){
@@ -62,15 +62,15 @@ public:
 	}
 	
 	// [EventTarget.dispatchEvent()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent
-    void dispatchEvent(DKEvent* event){
+    void dispatchEvent(DKEvent& event){
 		DKDEBUGFUNC(event);
-		//DKINFO("DKEventTarget::dispatchEvent("+event->type+", "+eventTargetAddress+") \n");	
+		//DKINFO("DKEventTarget::dispatchEvent("+event.type+", "+eventTargetAddress+") \n");	
 		for (auto& eventObj : events) {
 			//DKINFO("	eventObj("+eventObj.type+", "+eventObj.eventTargetAddress+") \n");	
-			if(eventObj.type == event->type && eventObj.eventTargetAddress == eventTargetAddress){
-				//DKINFO("		event("+event->type+") \n");	
-				event->currentTarget = eventTargetAddress;
-				event->target = eventTargetAddress;
+			if(eventObj.type == event.type && eventObj.eventTargetAddress == eventTargetAddress){
+				//DKINFO("		event("+event.type+") \n");	
+				event.currentTarget = eventTargetAddress;
+				event.target = eventTargetAddress;
 				eventObj.listener(event);
 			}
         }
