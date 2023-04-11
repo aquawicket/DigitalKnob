@@ -117,4 +117,7 @@ bool toStringArray(DKStringArray& arry, const DKString& str, const DKString& sep
 //bool ArrayToString(const DKStringArray& arry, DKString& str, const char* seperator);
 //DKStringArray getSettingsFromString(const DKString& filestring, const DKString& setting);
 
+DKString pointerToAddress(const void* pointer);
+static void* addressToPointer(const DKString& address);
+
 #endif //DKString_H

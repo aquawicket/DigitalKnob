@@ -55,7 +55,7 @@ public:
 		DKINFO("CPP_DKCompositionEvent("+type+","+options+")\n");
 		DKCompositionEventJS::Get()->registerEventType(type);
 		DKCompositionEvent* event = new DKCompositionEvent(type, options);
-		DKString eventAddress = DKDuktape::pointerToAddress(event);
+		DKString eventAddress = pointerToAddress(event);
 		DKEventTarget::LinkDispatchEventFunc(eventAddress, &DKCompositionEventJS::dispatchEvent, DKCompositionEventJS::Get());
 		duk_push_string(ctx, eventAddress.c_str());	
 		return true;
@@ -68,7 +68,7 @@ public:
 	static int data(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKCompositionEvent* event = (DKCompositionEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKCompositionEvent* event = (DKCompositionEvent*)addressToPointer(eventAddress);
 		duk_push_string(ctx, event->data.c_str());	
 		return true;
 	}
@@ -77,7 +77,7 @@ public:
 	static int locale(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKCompositionEvent* event = (DKCompositionEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKCompositionEvent* event = (DKCompositionEvent*)addressToPointer(eventAddress);
 		duk_push_string(ctx, event->locale.c_str());	
 		return true;
 	}
@@ -111,7 +111,7 @@ public:
 	
 	bool dispatchEvent(const DKString& eventAddress, const DKString& eventTargetAddress){
 		DKINFO("DKCompositionEventJS::dispatchEvent("+eventAddress+", "+eventTargetAddress+") \n");
-		DKCompositionEvent* event = (DKCompositionEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKCompositionEvent* event = (DKCompositionEvent*)addressToPointer(eventAddress);
 		DKEventTarget::dispatchEvent(event, eventTargetAddress);
 		return true;
 	}
@@ -121,7 +121,7 @@ public:
 		DKINFO("onCompositionEvent("+event->type+") \n");
 		
 		// get the globally stored js callback function
-		DKString eventAddress = DKDuktape::pointerToAddress(event);
+		DKString eventAddress = pointerToAddress(event);
 		DKString cb = event->target+"_"+event->type+"_callback";
 		duk_get_global_string(DKDuktape::ctx, cb.c_str());
 		

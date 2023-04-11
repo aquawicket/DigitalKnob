@@ -55,7 +55,7 @@ public:
 		DKINFO("CPP_DKWheelEvent("+type+","+options+")\n");
 		DKWheelEventJS::Get()->registerEventType(type);
 		DKWheelEvent* event = new DKWheelEvent(type, options);
-		DKString eventAddress = DKDuktape::pointerToAddress(event);
+		DKString eventAddress = pointerToAddress(event);
 		DKEventTarget::LinkDispatchEventFunc(eventAddress, &DKWheelEventJS::dispatchEvent, DKWheelEventJS::Get());
 		duk_push_string(ctx, eventAddress.c_str());	
 		return true;
@@ -67,7 +67,7 @@ public:
 	static int deltaX(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKWheelEvent* event = (DKWheelEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKWheelEvent* event = (DKWheelEvent*)addressToPointer(eventAddress);
 		duk_push_number(ctx, event->deltaX);	
 		return true;
 	}
@@ -75,7 +75,7 @@ public:
 	static int deltaY(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKWheelEvent* event = (DKWheelEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKWheelEvent* event = (DKWheelEvent*)addressToPointer(eventAddress);
 		duk_push_number(ctx, event->deltaY);	
 		return true;
 	}
@@ -83,7 +83,7 @@ public:
 	static int deltaZ(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKWheelEvent* event = (DKWheelEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKWheelEvent* event = (DKWheelEvent*)addressToPointer(eventAddress);
 		duk_push_number(ctx, event->deltaZ);	
 		return true;
 	}
@@ -91,7 +91,7 @@ public:
 	static int deltaMode(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKWheelEvent* event = (DKWheelEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKWheelEvent* event = (DKWheelEvent*)addressToPointer(eventAddress);
 		duk_push_uint(ctx, event->deltaMode);	
 		return true;
 	}
@@ -99,7 +99,7 @@ public:
 	static int wheelDelta(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKWheelEvent* event = (DKWheelEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKWheelEvent* event = (DKWheelEvent*)addressToPointer(eventAddress);
 		duk_push_int(ctx, event->wheelDelta);	
 		return DKDEPRECATED();
 	}
@@ -107,7 +107,7 @@ public:
 	static int wheelDeltaX(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKWheelEvent* event = (DKWheelEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKWheelEvent* event = (DKWheelEvent*)addressToPointer(eventAddress);
 		duk_push_int(ctx, event->wheelDeltaX);	
 		return DKDEPRECATED();
 	}
@@ -115,7 +115,7 @@ public:
 	static int wheelDeltaY(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKWheelEvent* event = (DKWheelEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKWheelEvent* event = (DKWheelEvent*)addressToPointer(eventAddress);
 		duk_push_int(ctx, event->wheelDeltaY);	
 		return DKDEPRECATED();
 	}
@@ -141,7 +141,7 @@ public:
 	
 	bool dispatchEvent(const DKString& eventAddress, const DKString& eventTargetAddress){
 		DKINFO("DKWheelEventJS::dispatchEvent("+eventAddress+", "+eventTargetAddress+") \n");
-		DKWheelEvent* event = (DKWheelEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKWheelEvent* event = (DKWheelEvent*)addressToPointer(eventAddress);
 		DKEventTarget::dispatchEvent(event, eventTargetAddress);
 		return true;
 	}
@@ -151,7 +151,7 @@ public:
 		DKINFO("onWheelEvent("+event->type+") \n");
 		
 		// get the globally stored js callback function
-		DKString eventAddress = DKDuktape::pointerToAddress(event);
+		DKString eventAddress = pointerToAddress(event);
 		DKString cb = event->target+"_"+event->type+"_callback";
 		duk_get_global_string(DKDuktape::ctx, cb.c_str());
 		

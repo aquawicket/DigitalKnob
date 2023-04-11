@@ -16,7 +16,7 @@ public:
 		DKINFO("DKCompositionEvent("+_type+", "+_options+") \n");
 		
 		eventClass = "CompositionEvent";
-		eventAddress = DKDuktape::pointerToAddress(this);
+		eventAddress = pointerToAddress(this);
 		
 		////// Instance properties //////
 		data = "";

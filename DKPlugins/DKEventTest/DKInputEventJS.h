@@ -52,7 +52,7 @@ public:
 		DKString options = "";//duk_require_string(ctx, 1);
 		DKINFO("CPP_DKInputEvent("+type+","+options+")\n");
 		DKInputEvent* event = new DKInputEvent(type, options);
-		DKString eventAddress = DKDuktape::pointerToAddress(event);
+		DKString eventAddress = pointerToAddress(event);
 		duk_push_string(ctx, eventAddress.c_str());	
 		return true;
 	}
@@ -64,7 +64,7 @@ public:
 	static int _data(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKInputEvent* event = (DKInputEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKInputEvent* event = (DKInputEvent*)addressToPointer(eventAddress);
 		if (duk_is_string(ctx, 1))
 			event->data = duk_to_string(ctx, 1);
 		duk_push_string(ctx, event->data.c_str());	
@@ -74,7 +74,7 @@ public:
 	static int dataTransfer(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKInputEvent* event = (DKInputEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKInputEvent* event = (DKInputEvent*)addressToPointer(eventAddress);
 		duk_push_string(ctx, event->dataTransfer.c_str());	
 		return true;
 	}
@@ -82,7 +82,7 @@ public:
 	static int inputType(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKInputEvent* event = (DKInputEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKInputEvent* event = (DKInputEvent*)addressToPointer(eventAddress);
 		if (duk_is_string(ctx, 1))
 			event->inputType = duk_to_string(ctx, 1);
 		duk_push_string(ctx, event->inputType.c_str());	
@@ -92,7 +92,7 @@ public:
 	static int isComposing(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKInputEvent* event = (DKInputEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKInputEvent* event = (DKInputEvent*)addressToPointer(eventAddress);
 		if (duk_is_boolean(ctx, 1))
 			event->isComposing = duk_to_boolean(ctx, 1);
 		duk_push_boolean(ctx, event->isComposing);	

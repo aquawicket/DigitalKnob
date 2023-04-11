@@ -46,7 +46,7 @@ public:
 		DKINFO("CPP_DKCustomEvent("+type+","+options+")\n");
 		DKCustomEventJS::Get()->registerEventType(type);
 		DKCustomEvent* event = new DKCustomEvent(type, options);
-		DKString eventAddress = DKDuktape::pointerToAddress(event);
+		DKString eventAddress = pointerToAddress(event);
 		DKEventTarget::LinkDispatchEventFunc(eventAddress, &DKCustomEventJS::dispatchEvent, DKCustomEventJS::Get());
 		duk_push_string(ctx, eventAddress.c_str());	
 		return true;
@@ -58,7 +58,7 @@ public:
 	static int detail(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKCustomEvent* event = (DKCustomEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKCustomEvent* event = (DKCustomEvent*)addressToPointer(eventAddress);
 		duk_push_string(ctx, event->detail.c_str());	
 		return true;
 	}
@@ -95,7 +95,7 @@ public:
 	
 	bool dispatchEvent(const DKString& eventAddress, const DKString& eventTargetAddress){
 		DKINFO("DKCustomEventJS::dispatchEvent("+eventAddress+", "+eventTargetAddress+") \n");
-		DKCustomEvent* event = (DKCustomEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKCustomEvent* event = (DKCustomEvent*)addressToPointer(eventAddress);
 		DKEventTarget::dispatchEvent(event, eventTargetAddress);
 		return true;
 	}
@@ -105,7 +105,7 @@ public:
 		DKINFO("DKCustomEventJS::onCustomEvent("+event->type+") \n");
 		
 		// get the globally stored js callback function
-		DKString eventAddress = DKDuktape::pointerToAddress(event);
+		DKString eventAddress = pointerToAddress(event);
 		DKString cb = event->target+"_"+event->type+"_callback";
 		duk_get_global_string(DKDuktape::ctx, cb.c_str());
 		

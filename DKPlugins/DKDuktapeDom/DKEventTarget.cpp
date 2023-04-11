@@ -75,7 +75,7 @@ bool DKEventTarget::OnEvent(DKEvents* event){
 	*/
 
 	//DKString eventAddress = event->data[0];
-	DKString eventAddress = DKDuktape::pointerToAddress(event);
+	DKString eventAddress = pointerToAddress(event);
 
 	//This is current evaluated javascript side at DKEvent.js: DispatchEvent(pointer)
 	/*

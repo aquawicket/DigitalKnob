@@ -17,7 +17,7 @@ public:
 		DKINFO("DKEvent("+_type+", "+_options+") \n");
 		
 		eventClass = "Event";
-		eventAddress = DKDuktape::pointerToAddress(this);
+		eventAddress = pointerToAddress(this);
 		
 		////// Instance properties //////
 		bubbles = false;

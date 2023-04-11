@@ -256,7 +256,7 @@ bool DKRml::LoadHtml(const DKString& html){
 	//Create DOM javascript instance of the document using the documents element address
 	DKClass::DKCreate("DKDom");
 	DKString rval;
-	DKString document_address = DKDuktape::pointerToAddress(document);
+	DKString document_address = pointerToAddress(document);
 	DKDuktape::RunDuktape("var document = new HTMLDocument(\"" + document_address + "\");", rval);
 	
 	Rml::XMLParser parser(ele);
@@ -360,7 +360,7 @@ bool DKRml::LoadUrl(const DKString& url){
 
 void DKRml::ProcessEvent(Rml::Event& rmlEvent){
 	//DKDEBUGFUNC(rmlEvent);  //EXCESSIVE LOGGING
-	DKString rmlEventAddress = DKDuktape::pointerToAddress(&rmlEvent);
+	DKString rmlEventAddress = pointerToAddress(&rmlEvent);
 	//DKString code = "new Event("+rmlEventAddress+")";
 	//DKString rval;
 	//DKDuktape::Get()->RunDuktape(code, rval);
@@ -370,9 +370,9 @@ void DKRml::ProcessEvent(Rml::Event& rmlEvent){
 	if (!rmlEvent.GetTargetElement())
 		return;
 	Rml::Element* currentElement = rmlEvent.GetCurrentElement();
-	DKString currentElementAddress = DKDuktape::pointerToAddress(currentElement);
+	DKString currentElementAddress = pointerToAddress(currentElement);
 	Rml::Element* targetElement = rmlEvent.GetTargetElement();
-	DKString targetElementAddress = DKDuktape::pointerToAddress(targetElement);
+	DKString targetElementAddress = pointerToAddress(targetElement);
 	DKString type = rmlEvent.GetType();
 	//TODO: implement this
     //int phase = (int)rmlEvent.GetPhase(); //{ None, Capture = 1, Target = 2, Bubble = 4 };
@@ -485,7 +485,7 @@ bool DKRml::RegisterEvent(const DKString& elementAddress, const DKString& type){
 		return DKERROR(elementAddress +": elementAddress empty\n"); 
 	if(type.empty())
 		return DKERROR("type empty\n");
-	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(elementAddress.c_str());
+	Rml::Element* element = (Rml::Element*)addressToPointer(elementAddress.c_str());
 	if(!element)
 		return DKERROR("element invalid\n");
 	DKString _type = type;
@@ -529,7 +529,7 @@ bool DKRml::SendEvent(const DKString& elementAddress, const DKString& type, cons
 		element = DKRml::Get()->document->GetContext()->GetRootElement();
 	}
 	else {
-		element = (Rml::Element*)DKDuktape::addressToPointer(elementAddress);
+		element = (Rml::Element*)addressToPointer(elementAddress);
 	}
 	if(!element)
 		return DKERROR("element invalid\n");
@@ -579,7 +579,7 @@ bool DKRml::UnregisterEvent(const DKString& elementAddress, const DKString& type
 	if(type.empty())
 		return DKERROR("type invalid");
 	//if(!DKValid("DKRml0")){ return false; }
-	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(elementAddress);
+	Rml::Element* element = (Rml::Element*)addressToPointer(elementAddress);
 	if(!element)
 		return DKERROR("element invalid");
 	if (same(element->GetId(), "window"))

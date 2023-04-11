@@ -23,7 +23,7 @@ public:
 	// [EventTarget()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/EventTarget
 	DKEventTarget() {
 		eventTargetClass = "EventTarget";
-		eventTargetAddress = DKDuktape::pointerToAddress(this);
+		eventTargetAddress = pointerToAddress(this);
 	}
 
 	virtual ~DKEventTarget(){}

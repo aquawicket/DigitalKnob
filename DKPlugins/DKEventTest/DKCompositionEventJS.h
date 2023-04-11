@@ -52,7 +52,7 @@ public:
 		DKINFO("CPP_DKCompositionEvent("+type+","+options+")\n");
 		DKCompositionEvent* event = new DKCompositionEvent(type, options);
 		//event->eventClass = "CompositionEvent";
-		DKString eventAddress = DKDuktape::pointerToAddress(event);
+		DKString eventAddress = pointerToAddress(event);
 		duk_push_string(ctx, eventAddress.c_str());	
 		return true;
 	}
@@ -64,7 +64,7 @@ public:
 	static int _data(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKCompositionEvent* event = (DKCompositionEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKCompositionEvent* event = (DKCompositionEvent*)addressToPointer(eventAddress);
 		if (duk_is_string(ctx, 1))
 			event->data = duk_to_string(ctx, 1);
 		duk_push_string(ctx, event->data.c_str());	
@@ -74,7 +74,7 @@ public:
 	static int locale(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKCompositionEvent* event = (DKCompositionEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKCompositionEvent* event = (DKCompositionEvent*)addressToPointer(eventAddress);
 		duk_push_string(ctx, event->locale.c_str());	
 		return true;
 	}

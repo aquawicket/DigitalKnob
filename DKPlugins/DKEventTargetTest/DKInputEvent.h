@@ -16,7 +16,7 @@ public:
 		DKINFO("DKInputEvent("+_type+", "+_options+") \n");
 		
 		eventClass = "InputEvent";
-		eventAddress = DKDuktape::pointerToAddress(this);
+		eventAddress = pointerToAddress(this);
 		
 		////// Instance properties //////
 		data = "";

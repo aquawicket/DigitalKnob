@@ -53,7 +53,7 @@ public:
 		DKINFO("CPP_DKFocusEvent("+type+","+options+")\n");
 		DKFocusEventJS::Get()->registerEventType(type);
 		DKFocusEvent* event = new DKFocusEvent(type, options);
-		DKString eventAddress = DKDuktape::pointerToAddress(event);
+		DKString eventAddress = pointerToAddress(event);
 		DKEventTarget::LinkDispatchEventFunc(eventAddress, &DKFocusEventJS::dispatchEvent, DKFocusEventJS::Get());
 		duk_push_string(ctx, eventAddress.c_str());	
 		return true;
@@ -65,7 +65,7 @@ public:
 	static int relatedTarget(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKFocusEvent* event = (DKFocusEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKFocusEvent* event = (DKFocusEvent*)addressToPointer(eventAddress);
 		duk_push_string(ctx, event->relatedTarget.c_str());	
 		return true;
 	}
@@ -90,7 +90,7 @@ public:
 	
 	bool dispatchEvent(const DKString& eventAddress, const DKString& eventTargetAddress){
 		DKINFO("DKFocusEventJS::dispatchEvent("+eventAddress+", "+eventTargetAddress+") \n");
-		DKFocusEvent* event = (DKFocusEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKFocusEvent* event = (DKFocusEvent*)addressToPointer(eventAddress);
 		DKEventTarget::dispatchEvent(event, eventTargetAddress);
 		return true;
 	}
@@ -100,7 +100,7 @@ public:
 		DKINFO("onFocusEvent("+event->type+") \n");
 		
 		// get the globally stored js callback function
-		DKString eventAddress = DKDuktape::pointerToAddress(event);
+		DKString eventAddress = pointerToAddress(event);
 		DKString cb = event->target+"_"+event->type+"_callback";
 		duk_get_global_string(DKDuktape::ctx, cb.c_str());
 		

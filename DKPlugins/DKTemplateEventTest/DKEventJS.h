@@ -89,7 +89,7 @@ public:
 		DKINFO("CPP_DKEvent("+type+","+options+")\n");
 		DKEventJS::Get()->registerEventType(type);
 		DKEvent* event = new DKEvent(type, options);
-		DKString eventAddress = DKDuktape::pointerToAddress(event);
+		DKString eventAddress = pointerToAddress(event);
 		DKEventTarget::LinkDispatchEventFunc(eventAddress, &DKEventJS::dispatchEvent, DKEventJS::Get());
 		duk_push_string(ctx, eventAddress.c_str());	
 		return true;
@@ -101,7 +101,7 @@ public:
 	static int bubbles(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKEvent* event = (DKEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
 		if (duk_is_boolean(ctx, 1))
 			event->bubbles = duk_to_boolean(ctx, 1);
 		duk_push_boolean(ctx, event->bubbles);	
@@ -111,7 +111,7 @@ public:
 	static int cancelable(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKEvent* event = (DKEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
 		duk_push_boolean(ctx, event->cancelable);	
 		return true;
 	}
@@ -119,7 +119,7 @@ public:
 	static int composed(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKEvent* event = (DKEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
 		duk_push_boolean(ctx, event->composed);	
 		return true;
 	}
@@ -127,7 +127,7 @@ public:
 	static int currentTarget(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKEvent* event = (DKEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
 		duk_push_string(ctx, event->currentTarget.c_str());	
 		return true;
 	}
@@ -135,7 +135,7 @@ public:
 	static int defaultPrevented(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKEvent* event = (DKEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
 		duk_push_boolean(ctx, event->defaultPrevented);	
 		return true;
 	}
@@ -143,7 +143,7 @@ public:
 	static int eventPhase(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKEvent* event = (DKEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
 		duk_push_number(ctx, event->eventPhase);	
 		return true;
 	}
@@ -151,7 +151,7 @@ public:
 	static int isTrusted(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKEvent* event = (DKEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
 		duk_push_boolean(ctx, event->isTrusted);	
 		return true;
 	}
@@ -159,7 +159,7 @@ public:
 	static int target(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKEvent* event = (DKEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
 		duk_push_string(ctx, event->target.c_str());	
 		return true;
 	}
@@ -167,7 +167,7 @@ public:
 	static int timeStamp(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKEvent* event = (DKEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
 		duk_push_number(ctx, event->timeStamp);	
 		return true;
 	}
@@ -175,7 +175,7 @@ public:
 	static int type(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKEvent* event = (DKEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
 		duk_push_string(ctx, event->type.c_str());	
 		return true;
 	}
@@ -263,7 +263,7 @@ public:
 	
 	bool dispatchEvent(const DKString& eventAddress, const DKString& eventTargetAddress){
 		DKINFO("DKEventJS::dispatchEvent("+eventAddress+", "+eventTargetAddress+") \n");
-		DKEvent* event = (DKEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
 		DKEventTarget::dispatchEvent(event, eventTargetAddress);
 		return true;
 	}
@@ -273,7 +273,7 @@ public:
 		DKINFO("DKEventJS::onEvent("+event->type+") \n");
 		
 		// get the globally stored js callback function
-		DKString eventAddress = DKDuktape::pointerToAddress(event);
+		DKString eventAddress = pointerToAddress(event);
 		DKString cb = event->target+"_"+event->type+"_callback";
 		duk_get_global_string(DKDuktape::ctx, cb.c_str());
 		

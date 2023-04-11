@@ -44,7 +44,7 @@ public:
 		DKString options = "";//duk_require_string(ctx, 1);
 		DKINFO("CPP_DKCustomEvent("+type+","+options+")\n");
 		DKCustomEvent* event = new DKCustomEvent(type, options);
-		DKString eventAddress = DKDuktape::pointerToAddress(event);
+		DKString eventAddress = pointerToAddress(event);
 		duk_push_string(ctx, eventAddress.c_str());	
 		return true;
 	}
@@ -55,7 +55,7 @@ public:
 	static int detail(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKCustomEvent* event = (DKCustomEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKCustomEvent* event = (DKCustomEvent*)addressToPointer(eventAddress);
 
 		//DKDuktape::DumpStack(ctx);
 		if(duk_is_object(ctx, 1))

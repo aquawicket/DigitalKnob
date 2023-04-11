@@ -43,7 +43,7 @@ public:
 		DKString options = "";//duk_require_string(ctx, 1);
 		DKINFO("CPP_Template("+type+","+options+")\n");
 		Template* event = new Template(type, options);
-		DKString eventAddress = DKDuktape::pointerToAddress(event);
+		DKString eventAddress = pointerToAddress(event);
 		duk_push_string(ctx, eventAddress.c_str());	
 		return true;
 	}
@@ -55,7 +55,7 @@ public:
 	static int ???(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		Template* event = (Template*)DKDuktape::addressToPointer(eventAddress);
+		Template* event = (Template*)addressToPointer(eventAddress);
 		if (duk_is_number(ctx, 1))
 			event->??? = duk_to_number(ctx, 1);
 		duk_push_number(ctx, event->???);	

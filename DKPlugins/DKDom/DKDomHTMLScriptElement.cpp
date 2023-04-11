@@ -41,7 +41,7 @@ bool DKDomHTMLScriptElement::Init(){
 int DKDomHTMLScriptElement::async(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
+	Rml::Element* element = (Rml::Element*)addressToPointer(address);
 	if (!element) {
 		duk_push_undefined(ctx);
 		return DKERROR("element invalid\n");

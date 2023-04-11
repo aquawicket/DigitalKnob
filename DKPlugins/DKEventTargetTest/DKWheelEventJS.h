@@ -50,7 +50,7 @@ public:
 		DKString options = "";//duk_require_string(ctx, 1);
 		DKINFO("CPP_DKWheelEvent("+type+","+options+")\n");
 		DKWheelEvent* event = new DKWheelEvent(type, options);
-		DKString eventAddress = DKDuktape::pointerToAddress(event);
+		DKString eventAddress = pointerToAddress(event);
 		duk_push_string(ctx, eventAddress.c_str());	
 		return true;
 	}
@@ -61,7 +61,7 @@ public:
 	static int deltaX(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKWheelEvent* event = (DKWheelEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKWheelEvent* event = (DKWheelEvent*)addressToPointer(eventAddress);
 		if (duk_is_number(ctx, 1))
 			event->deltaX = duk_to_number(ctx, 1);
 		duk_push_number(ctx, event->deltaX);	
@@ -71,7 +71,7 @@ public:
 	static int deltaY(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKWheelEvent* event = (DKWheelEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKWheelEvent* event = (DKWheelEvent*)addressToPointer(eventAddress);
 		if (duk_is_number(ctx, 1))
 			event->deltaY = duk_to_number(ctx, 1);
 		duk_push_number(ctx, event->deltaY);	
@@ -81,7 +81,7 @@ public:
 	static int deltaZ(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKWheelEvent* event = (DKWheelEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKWheelEvent* event = (DKWheelEvent*)addressToPointer(eventAddress);
 		if (duk_is_number(ctx, 1))
 			event->deltaZ = duk_to_number(ctx, 1);
 		duk_push_number(ctx, event->deltaZ);	
@@ -91,7 +91,7 @@ public:
 	static int deltaMode(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKWheelEvent* event = (DKWheelEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKWheelEvent* event = (DKWheelEvent*)addressToPointer(eventAddress);
 		if (duk_is_number(ctx, 1))
 			event->deltaMode = duk_to_uint(ctx, 1);
 		duk_push_uint(ctx, event->deltaMode);	
@@ -101,7 +101,7 @@ public:
 	static int wheelDelta(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKWheelEvent* event = (DKWheelEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKWheelEvent* event = (DKWheelEvent*)addressToPointer(eventAddress);
 		duk_push_int(ctx, event->wheelDelta);	
 		return DKDEPRECATED();
 	}
@@ -109,7 +109,7 @@ public:
 	static int wheelDeltaX(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKWheelEvent* event = (DKWheelEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKWheelEvent* event = (DKWheelEvent*)addressToPointer(eventAddress);
 		duk_push_int(ctx, event->wheelDeltaX);	
 		return DKDEPRECATED();
 	}
@@ -117,7 +117,7 @@ public:
 	static int wheelDeltaY(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKWheelEvent* event = (DKWheelEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKWheelEvent* event = (DKWheelEvent*)addressToPointer(eventAddress);
 		duk_push_int(ctx, event->wheelDeltaY);	
 		return DKDEPRECATED();
 	}

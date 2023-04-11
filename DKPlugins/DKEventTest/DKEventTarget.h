@@ -36,7 +36,7 @@ public:
 	////// Instance methods //////
 	// [EventTarget.addEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
 	void addEventListener(const DKString& type, std::function<void(DKEvent*)> listener){
-		DKString eventTargetAddress = DKDuktape::pointerToAddress(this);
+		DKString eventTargetAddress = pointerToAddress(this);
 		DKDEBUGFUNC(type, listener, eventTargetAddress);
 		//DKINFO("DKEventTarget::addEventListener("+type+", listener, "+eventTargetAddress+") \n");
 		EventObject eventObj;
@@ -57,7 +57,7 @@ public:
 	
 	// [EventTarget.removeEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener
 	void removeEventListener(const DKString& type, std::function<void(DKEvent*)> listener){
-		DKString eventTargetAddress = DKDuktape::pointerToAddress(this);
+		DKString eventTargetAddress = pointerToAddress(this);
 		DKDEBUGFUNC(type, listener, eventTargetAddress);
 		//DKINFO("DKEventTarget::removeEventListener("+type+", listener, "+eventTargetAddress+") \n");
 		for(auto it = events.begin(); it != events.end();){
@@ -70,7 +70,7 @@ public:
 	
 	// [EventTarget.dispatchEvent()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent
     void dispatchEvent(DKEvent* event){
-		DKString eventTargetAddress = DKDuktape::pointerToAddress(this);
+		DKString eventTargetAddress = pointerToAddress(this);
 		DKDEBUGFUNC(event, eventTargetAddress);
 		//DKINFO("DKEventTarget::dispatchEvent("+event->type+", "+eventTargetAddress+") \n");	
 		for (auto& eventObj : events) {

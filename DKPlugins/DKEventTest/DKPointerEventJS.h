@@ -52,7 +52,7 @@ public:
 		DKString options = "";//duk_require_string(ctx, 1);
 		DKINFO("CPP_DKPointerEvent("+type+","+options+")\n");
 		DKPointerEvent* event = new DKPointerEvent(type, options);
-		DKString eventAddress = DKDuktape::pointerToAddress(event);
+		DKString eventAddress = pointerToAddress(event);
 		duk_push_string(ctx, eventAddress.c_str());	
 		return true;
 	}
@@ -63,7 +63,7 @@ public:
 	static int pointerId(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKPointerEvent* event = (DKPointerEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKPointerEvent* event = (DKPointerEvent*)addressToPointer(eventAddress);
 		if (duk_is_number(ctx, 1))
 			event->pointerId = duk_to_uint(ctx, 1);
 		duk_push_uint(ctx, event->pointerId);	
@@ -73,7 +73,7 @@ public:
 	static int width(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKPointerEvent* event = (DKPointerEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKPointerEvent* event = (DKPointerEvent*)addressToPointer(eventAddress);
 		if (duk_is_number(ctx, 1))
 			event->width = duk_to_uint(ctx, 1);
 		duk_push_uint(ctx, event->width);	
@@ -83,7 +83,7 @@ public:
 	static int height(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKPointerEvent* event = (DKPointerEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKPointerEvent* event = (DKPointerEvent*)addressToPointer(eventAddress);
 		if (duk_is_number(ctx, 1))
 			event->height = duk_to_uint(ctx, 1);
 		duk_push_uint(ctx, event->height);	
@@ -93,7 +93,7 @@ public:
 	static int pressure(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKPointerEvent* event = (DKPointerEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKPointerEvent* event = (DKPointerEvent*)addressToPointer(eventAddress);
 		if (duk_is_number(ctx, 1))
 			event->pressure = duk_to_number(ctx, 1);
 		duk_push_number(ctx, event->pressure);	
@@ -103,7 +103,7 @@ public:
 	static int tangentialPressure(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKPointerEvent* event = (DKPointerEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKPointerEvent* event = (DKPointerEvent*)addressToPointer(eventAddress);
 		if (duk_is_number(ctx, 1))
 			event->tangentialPressure = duk_to_number(ctx, 1);
 		duk_push_number(ctx, event->tangentialPressure);	
@@ -113,7 +113,7 @@ public:
 	static int tiltX(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKPointerEvent* event = (DKPointerEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKPointerEvent* event = (DKPointerEvent*)addressToPointer(eventAddress);
 		if (duk_is_number(ctx, 1))
 			event->tiltX = duk_to_int(ctx, 1);
 		duk_push_int(ctx, event->tiltX);	
@@ -123,7 +123,7 @@ public:
 	static int tiltY(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKPointerEvent* event = (DKPointerEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKPointerEvent* event = (DKPointerEvent*)addressToPointer(eventAddress);
 		if (duk_is_number(ctx, 1))
 			event->tiltY = duk_to_int(ctx, 1);
 		duk_push_int(ctx, event->tiltY);	
@@ -133,7 +133,7 @@ public:
 	static int twist(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKPointerEvent* event = (DKPointerEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKPointerEvent* event = (DKPointerEvent*)addressToPointer(eventAddress);
 		if (duk_is_number(ctx, 1))
 			event->twist = duk_to_uint(ctx, 1);
 		duk_push_uint(ctx, event->twist);	
@@ -143,7 +143,7 @@ public:
 	static int pointerType(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKPointerEvent* event = (DKPointerEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKPointerEvent* event = (DKPointerEvent*)addressToPointer(eventAddress);
 		if (duk_is_string(ctx, 1))
 			event->pointerType = duk_to_string(ctx, 1);
 		duk_push_string(ctx, event->pointerType.c_str());	
@@ -153,7 +153,7 @@ public:
 	static int isPrimary(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKPointerEvent* event = (DKPointerEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKPointerEvent* event = (DKPointerEvent*)addressToPointer(eventAddress);
 		if (duk_is_boolean(ctx, 1))
 			event->isPrimary = duk_to_boolean(ctx, 1);
 		duk_push_boolean(ctx, event->isPrimary);	

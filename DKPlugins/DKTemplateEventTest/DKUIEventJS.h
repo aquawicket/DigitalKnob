@@ -62,7 +62,7 @@ public:
 		DKINFO("CPP_DKUIEvent("+type+","+options+")\n");
 		DKUIEventJS::Get()->registerEventType(type);
 		DKUIEvent* event = new DKUIEvent(type, options);
-		DKString eventAddress = DKDuktape::pointerToAddress(event);
+		DKString eventAddress = pointerToAddress(event);
 		DKEventTarget::LinkDispatchEventFunc(eventAddress, &DKUIEventJS::dispatchEvent, DKUIEventJS::Get());
 		duk_push_string(ctx, eventAddress.c_str());	
 		return true;
@@ -74,7 +74,7 @@ public:
 	static int detail(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKUIEvent* event = (DKUIEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKUIEvent* event = (DKUIEvent*)addressToPointer(eventAddress);
 		duk_push_uint(ctx, event->detail);	
 		return true;
 	}
@@ -92,7 +92,7 @@ public:
 	static int which(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKUIEvent* event = (DKUIEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKUIEvent* event = (DKUIEvent*)addressToPointer(eventAddress);
 		duk_push_uint(ctx, event->which);	
 		return DKDEPRECATED();
 	}
@@ -126,7 +126,7 @@ public:
 	
 	bool dispatchEvent(const DKString& eventAddress, const DKString& eventTargetAddress){
 		DKINFO("DKUIEventJS::dispatchEvent("+eventAddress+", "+eventTargetAddress+") \n");
-		DKUIEvent* event = (DKUIEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKUIEvent* event = (DKUIEvent*)addressToPointer(eventAddress);
 		DKEventTarget::dispatchEvent(event, eventTargetAddress);
 		return true;
 	}
@@ -136,7 +136,7 @@ public:
 		DKINFO("onUIEvent("+event->type+") \n");
 		
 		// get the globally stored js callback function
-		DKString eventAddress = DKDuktape::pointerToAddress(event);
+		DKString eventAddress = pointerToAddress(event);
 		DKString cb = event->target+"_"+event->type+"_callback";
 		duk_get_global_string(DKDuktape::ctx, cb.c_str());
 		

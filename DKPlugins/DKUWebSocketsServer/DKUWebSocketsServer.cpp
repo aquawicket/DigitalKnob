@@ -178,7 +178,7 @@ int DKUWebSocketsServer::isConnected(duk_context* ctx) {
 int DKUWebSocketsServer::disconnect(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	DKUWebSocketsServer* object = (DKUWebSocketsServer*)DKDuktape::addressToPointer(address);
+	DKUWebSocketsServer* object = (DKUWebSocketsServer*)addressToPointer(address);
 	if (!object->CloseServer())
 		return DKERROR("object->CloseServer()() failed! \n");
 	return true;
@@ -187,7 +187,7 @@ int DKUWebSocketsServer::disconnect(duk_context* ctx) {
 int DKUWebSocketsServer::send(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	DKUWebSocketsServer* object = (DKUWebSocketsServer*)DKDuktape::addressToPointer(address);
+	DKUWebSocketsServer* object = (DKUWebSocketsServer*)addressToPointer(address);
 	DKString message = duk_require_string(ctx, 1);
 	if (!object->MessageToClient(message))
 		return DKERROR("object->MessageToClient() failed! \n");
@@ -197,7 +197,7 @@ int DKUWebSocketsServer::send(duk_context* ctx) {
 int DKUWebSocketsServer::start(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	DKUWebSocketsServer* object = (DKUWebSocketsServer*)DKDuktape::addressToPointer(address);
+	DKUWebSocketsServer* object = (DKUWebSocketsServer*)addressToPointer(address);
 	DKString url = duk_require_string(ctx, 1);
 	DKString port = duk_require_string(ctx, 2);
 	if (!object->CreateServer(url, toInt(port)))

@@ -156,7 +156,7 @@ bool DKConsoleWindow::Init(){
 
     DKApp::AppendLoopFunc(&DKConsoleWindow::Loop, this);
 	
-	DKString address = DKDuktape::pointerToAddress(this);
+	DKString address = pointerToAddress(this);
 	DKINFO("CPP ConsoleWindow address = "+address+"\n");
 	
     return true;
@@ -516,7 +516,7 @@ void DKConsoleWindow::ErrorExit(LPCSTR lpszMessage) {
 void DKConsoleWindow::FocusEventProc(FOCUS_EVENT_RECORD fer) {
     DKDEBUGFUNC(fer);
 	DKEventTarget* eventTarget = (DKEventTarget*)this;
-    DKString address = DKDuktape::pointerToAddress(this);
+    DKString address = pointerToAddress(this);
     relatedTarget = address;
 
     if (!fer.bSetFocus) {
@@ -657,7 +657,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 		#define MOUSE_HWHEELED 0x0008
 	#endif
 	DKEventTarget* eventTarget = (DKEventTarget*)this;
-    //DKString address = DKDuktape::pointerToAddress(this);
+    //DKString address = pointerToAddress(this);
 
     switch (mer.dwEventFlags){
 		case 0:
@@ -942,7 +942,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 
 void DKConsoleWindow::ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD wbsr) {
     DKDEBUGFUNC(wbsr);
-	//DKString address = DKDuktape::pointerToAddress(this);
+	//DKString address = pointerToAddress(this);
     columns = wbsr.dwSize.X;
     rows = wbsr.dwSize.Y;
 	//code = "dispatchMouseEvent('resize','','" + address + "')";

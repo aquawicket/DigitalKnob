@@ -573,7 +573,8 @@ bool DKDuktape::dispatchEvent(const DKString& type, const DKString& options, con
 	return true;
 }
 
-DKString DKDuktape::pointerToAddress(const void* pointer) {
+/*
+DKString pointerToAddress(const void* pointer) {
 	//DKDEBUGFUNC(event);  //EXCESSIVE LOGGING
 	if (!pointer) {
 		DKERROR("pointer invalid! \n");
@@ -593,7 +594,7 @@ DKString DKDuktape::pointerToAddress(const void* pointer) {
 	return ss.str();
 }
 
-void* DKDuktape::addressToPointer(const DKString& address) {
+void* addressToPointer(const DKString& address) {
 	//DKDEBUGFUNC(address);  //EXCESSIVE LOGGING
 	void* pointer;
 	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {
@@ -605,7 +606,7 @@ void* DKDuktape::addressToPointer(const DKString& address) {
 	ss << address.substr(2, address.size() - 2);
 	std::uint64_t tmp;
 	if (!(ss >> std::hex >> tmp)) {
-		DKERROR("DKDuktape::addressToPointer(" + address + "): invalid address\n");
+		DKERROR("addressToPointer(" + address + "): invalid address\n");
 		return NULL;
 	}
 	pointer = reinterpret_cast<void*>(tmp);
@@ -616,6 +617,7 @@ void* DKDuktape::addressToPointer(const DKString& address) {
 	return pointer;
 }
 
+*/
 
 
 

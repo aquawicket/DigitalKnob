@@ -55,7 +55,7 @@ public:
 		DKINFO("CPP_DKInputEvent("+type+","+options+")\n");
 		DKInputEventJS::Get()->registerEventType(type);
 		DKInputEvent* event = new DKInputEvent(type, options);
-		DKString eventAddress = DKDuktape::pointerToAddress(event);
+		DKString eventAddress = pointerToAddress(event);
 		DKEventTarget::LinkDispatchEventFunc(eventAddress, &DKInputEventJS::dispatchEvent, DKInputEventJS::Get());
 		duk_push_string(ctx, eventAddress.c_str());	
 		return true;
@@ -68,7 +68,7 @@ public:
 	static int data(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKInputEvent* event = (DKInputEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKInputEvent* event = (DKInputEvent*)addressToPointer(eventAddress);
 		duk_push_string(ctx, event->data.c_str());	
 		return true;
 	}
@@ -77,7 +77,7 @@ public:
 	static int dataTransfer(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKInputEvent* event = (DKInputEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKInputEvent* event = (DKInputEvent*)addressToPointer(eventAddress);
 		duk_push_string(ctx, event->dataTransfer.c_str());	
 		return true;
 	}
@@ -85,7 +85,7 @@ public:
 	static int inputType(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKInputEvent* event = (DKInputEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKInputEvent* event = (DKInputEvent*)addressToPointer(eventAddress);
 		duk_push_string(ctx, event->inputType.c_str());	
 		return true;
 	}
@@ -93,7 +93,7 @@ public:
 	static int isComposing(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKInputEvent* event = (DKInputEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKInputEvent* event = (DKInputEvent*)addressToPointer(eventAddress);
 		duk_push_boolean(ctx, event->isComposing);	
 		return true;
 	}
@@ -127,7 +127,7 @@ public:
 	
 	bool dispatchEvent(const DKString& eventAddress, const DKString& eventTargetAddress){
 		DKINFO("DKInputEventJS::dispatchEvent("+eventAddress+", "+eventTargetAddress+") \n");
-		DKInputEvent* event = (DKInputEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKInputEvent* event = (DKInputEvent*)addressToPointer(eventAddress);
 		DKEventTarget::dispatchEvent(event, eventTargetAddress);
 		return true;
 	}
@@ -137,7 +137,7 @@ public:
 		DKINFO("onInputEvent("+event->type+") \n");
 		
 		// get the globally stored js callback function
-		DKString eventAddress = DKDuktape::pointerToAddress(event);
+		DKString eventAddress = pointerToAddress(event);
 		DKString cb = event->target+"_"+event->type+"_callback";
 		duk_get_global_string(DKDuktape::ctx, cb.c_str());
 		

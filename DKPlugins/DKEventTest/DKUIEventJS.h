@@ -54,7 +54,7 @@ public:
 		DKString options = "";//duk_require_string(ctx, 1);
 		DKINFO("CPP_DKUIEvent("+type+","+options+")\n");
 		DKUIEvent* event = new DKUIEvent(type, options);
-		DKString eventAddress = DKDuktape::pointerToAddress(event);
+		DKString eventAddress = pointerToAddress(event);
 		duk_push_string(ctx, eventAddress.c_str());	
 		return true;
 	}
@@ -65,7 +65,7 @@ public:
 	static int detail(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKUIEvent* event = (DKUIEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKUIEvent* event = (DKUIEvent*)addressToPointer(eventAddress);
 		if (duk_is_number(ctx, 1))
 			event->detail = duk_to_uint(ctx, 1);
 		duk_push_uint(ctx, event->detail);	
@@ -85,7 +85,7 @@ public:
 	static int which(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKUIEvent* event = (DKUIEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKUIEvent* event = (DKUIEvent*)addressToPointer(eventAddress);
 		duk_push_uint(ctx, event->which);	
 		return DKDEPRECATED();
 	}

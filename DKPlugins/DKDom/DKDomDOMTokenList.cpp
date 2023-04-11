@@ -78,7 +78,7 @@ int DKDomDOMTokenList::contains(duk_context* ctx) {
 int DKDomDOMTokenList::add(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
+	Rml::Element* element = (Rml::Element*)addressToPointer(address);
 	if (!element) {
 		DKERROR("element invalid\n");
 		duk_push_undefined(ctx);
@@ -92,7 +92,7 @@ int DKDomDOMTokenList::add(duk_context* ctx) {
 int DKDomDOMTokenList::remove(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
+	Rml::Element* element = (Rml::Element*)addressToPointer(address);
 	if (!element) {
 		DKERROR("element invalid\n");
 		duk_push_undefined(ctx);

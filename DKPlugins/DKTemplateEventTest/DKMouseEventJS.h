@@ -110,7 +110,7 @@ public:
 		DKINFO("CPP_DKMouseEvent("+type+","+options+")\n");
 		DKMouseEventJS::Get()->registerEventType(type);
 		DKMouseEvent* event = new DKMouseEvent(type, options);
-		DKString eventAddress = DKDuktape::pointerToAddress(event);
+		DKString eventAddress = pointerToAddress(event);
 		DKEventTarget::LinkDispatchEventFunc(eventAddress, &DKMouseEventJS::dispatchEvent, DKMouseEventJS::Get());
 		duk_push_string(ctx, eventAddress.c_str());	
 		return true;
@@ -122,7 +122,7 @@ public:
 	static int altKey(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKMouseEvent* event = (DKMouseEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
 		duk_push_boolean(ctx, event->altKey);	
 		return true;
 	}
@@ -130,7 +130,7 @@ public:
 	static int button(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKMouseEvent* event = (DKMouseEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
 		duk_push_uint(ctx, event->button);	
 		return true;
 	}
@@ -138,7 +138,7 @@ public:
 	static int buttons(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKMouseEvent* event = (DKMouseEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
 		duk_push_uint(ctx, event->buttons);	
 		return true;
 	}
@@ -146,7 +146,7 @@ public:
 	static int clientX(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKMouseEvent* event = (DKMouseEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
 		duk_push_uint(ctx, event->clientX);	
 		return true;
 	}
@@ -154,7 +154,7 @@ public:
 	static int clientY(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKMouseEvent* event = (DKMouseEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
 		duk_push_uint(ctx, event->clientY);	
 		return true;
 	}
@@ -162,7 +162,7 @@ public:
 	static int ctrlKey(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKMouseEvent* event = (DKMouseEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
 		duk_push_boolean(ctx, event->ctrlKey);	
 		return true;
 	}
@@ -170,7 +170,7 @@ public:
 	static int layerX(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKMouseEvent* event = (DKMouseEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
 		duk_push_int(ctx, event->layerX);	
 		return true;
 	}
@@ -178,7 +178,7 @@ public:
 	static int layerY(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKMouseEvent* event = (DKMouseEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
 		duk_push_int(ctx, event->layerY);	
 		return true;
 	}
@@ -186,7 +186,7 @@ public:
 	static int metaKey(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKMouseEvent* event = (DKMouseEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
 		duk_push_boolean(ctx, event->metaKey);	
 		return true;
 	}
@@ -194,7 +194,7 @@ public:
 	static int movementX(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKMouseEvent* event = (DKMouseEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
 		duk_push_int(ctx, event->movementX);	
 		return true;
 	}
@@ -202,7 +202,7 @@ public:
 	static int movementY(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKMouseEvent* event = (DKMouseEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
 		duk_push_int(ctx, event->movementY);	
 		return true;
 	}
@@ -210,7 +210,7 @@ public:
 	static int offsetX(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKMouseEvent* event = (DKMouseEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
 		duk_push_int(ctx, event->offsetX);	
 		return true;
 	}
@@ -218,7 +218,7 @@ public:
 	static int offsetY(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKMouseEvent* event = (DKMouseEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
 		duk_push_int(ctx, event->offsetY);	
 		return true;
 	}
@@ -226,7 +226,7 @@ public:
 	static int pageX(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKMouseEvent* event = (DKMouseEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
 		duk_push_int(ctx, event->pageX);	
 		return true;
 	}
@@ -234,7 +234,7 @@ public:
 	static int pageY(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKMouseEvent* event = (DKMouseEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
 		duk_push_int(ctx, event->pageY);	
 		return true;
 	}
@@ -242,7 +242,7 @@ public:
 	static int relatedTarget(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKMouseEvent* event = (DKMouseEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
 		duk_push_string(ctx, event->relatedTarget.c_str());	
 		return true;
 	}
@@ -250,7 +250,7 @@ public:
 	static int screenX(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKMouseEvent* event = (DKMouseEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
 		duk_push_uint(ctx, event->screenX);	
 		return true;
 	}
@@ -258,7 +258,7 @@ public:
 	static int screenY(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKMouseEvent* event = (DKMouseEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
 		duk_push_uint(ctx, event->screenY);	
 		return true;
 	}
@@ -266,7 +266,7 @@ public:
 	static int shiftKey(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKMouseEvent* event = (DKMouseEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
 		duk_push_boolean(ctx, event->shiftKey);	
 		return true;
 	}
@@ -274,7 +274,7 @@ public:
 	static int mozPressure(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKMouseEvent* event = (DKMouseEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
 		duk_push_number(ctx, event->mozPressure);	
 		return DKDEPRECATED();
 	}
@@ -282,7 +282,7 @@ public:
 	static int mozInputSource(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKMouseEvent* event = (DKMouseEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
 		duk_push_string(ctx, event->mozInputSource.c_str());	
 		return true;
 	}
@@ -290,7 +290,7 @@ public:
 	static int webkitForce(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKMouseEvent* event = (DKMouseEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
 		duk_push_uint(ctx, event->webkitForce);	
 		return true;
 	}
@@ -298,7 +298,7 @@ public:
 	static int x(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKMouseEvent* event = (DKMouseEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
 		duk_push_uint(ctx, event->x);	
 		return true;
 	}
@@ -306,7 +306,7 @@ public:
 	static int y(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKMouseEvent* event = (DKMouseEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
 		duk_push_uint(ctx, event->y);	
 		return true;
 	}
@@ -345,7 +345,7 @@ public:
 	
 	bool dispatchEvent(const DKString& eventAddress, const DKString& eventTargetAddress){
 		DKINFO("DKMouseEventJS::dispatchEvent("+eventAddress+", "+eventTargetAddress+") \n");
-		DKMouseEvent* event = (DKMouseEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
 		DKEventTarget::dispatchEvent(event, eventTargetAddress);
 		return true;
 	}
@@ -355,7 +355,7 @@ public:
 		DKINFO("onMouseEvent("+event->type+") \n");
 		
 		// get the globally stored js callback function
-		DKString eventAddress = DKDuktape::pointerToAddress(event);
+		DKString eventAddress = pointerToAddress(event);
 		DKString cb = event->target+"_"+event->type+"_callback";
 		duk_get_global_string(DKDuktape::ctx, cb.c_str());
 		

@@ -35,7 +35,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKINFO("CPP_DKConsoleWindow()\n");
 		DKConsoleWindow* consolewindow = new DKConsoleWindow();
-		DKString eventTargetAddress = DKDuktape::pointerToAddress(consolewindow);
+		DKString eventTargetAddress = pointerToAddress(consolewindow);
 		duk_push_string(ctx, eventTargetAddress.c_str());	
 		return true;
 	}
@@ -45,7 +45,7 @@ public:
 	static int columns(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKConsoleWindow* eventTarget = (DKConsoleWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKConsoleWindow* eventTarget = (DKConsoleWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_number(ctx, 1))
 			eventTarget->columns = duk_to_uint(ctx, 1);
 		duk_push_uint(ctx, eventTarget->columns);	
@@ -54,7 +54,7 @@ public:
 	static int rows(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKConsoleWindow* eventTarget = (DKConsoleWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKConsoleWindow* eventTarget = (DKConsoleWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_number(ctx, 1))
 			eventTarget->rows = duk_to_uint(ctx, 1);
 		duk_push_uint(ctx, eventTarget->rows);	

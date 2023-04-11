@@ -16,7 +16,7 @@ public:
 		DKINFO("DKCustomEvent("+_type+", "+_options+") \n");
 		
 		eventClass = "CustomEvent";
-		eventAddress = DKDuktape::pointerToAddress(this);
+		eventAddress = pointerToAddress(this);
 		
 		////// Instance properties //////
 		detail = "{}";

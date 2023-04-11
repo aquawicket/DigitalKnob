@@ -47,7 +47,7 @@ bool DKFocusEvent::Init(){
  //// Instance properties ////
 int DKFocusEvent::relatedTarget(duk_context* ctx){ //Read only
 	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid! \n");
 		duk_push_undefined(ctx);

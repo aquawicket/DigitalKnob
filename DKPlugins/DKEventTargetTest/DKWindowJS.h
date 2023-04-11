@@ -101,7 +101,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKINFO("CPP_DKWindow()\n");
 		DKWindow* _window = new DKWindow();
-		DKString eventTargetAddress = DKDuktape::pointerToAddress(_window);
+		DKString eventTargetAddress = pointerToAddress(_window);
 		duk_push_string(ctx, eventTargetAddress.c_str());	
 		return true;
 	}
@@ -112,7 +112,7 @@ public:
 	static int caches(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_string(ctx, 1))
 			eventTarget->caches = duk_to_string(ctx, 1);
 		duk_push_string(ctx, eventTarget->caches.c_str());	
@@ -122,7 +122,7 @@ public:
 	static int clientInformation(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_string(ctx, 1))
 			eventTarget->caches = duk_to_string(ctx, 1);
 		duk_push_string(ctx, eventTarget->caches.c_str());	
@@ -132,7 +132,7 @@ public:
 	static int closed(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_boolean(ctx, 1))
 			eventTarget->closed = duk_to_boolean(ctx, 1);
 		duk_push_boolean(ctx, eventTarget->closed);	
@@ -142,7 +142,7 @@ public:
 	static int console(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_string(ctx, 1))
 			eventTarget->console = duk_to_string(ctx, 1);
 		duk_push_string(ctx, eventTarget->console.c_str());	
@@ -152,7 +152,7 @@ public:
 	static int credentialless(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_boolean(ctx, 1))
 			eventTarget->credentialless = duk_to_boolean(ctx, 1);
 		duk_push_boolean(ctx, eventTarget->credentialless);	
@@ -162,7 +162,7 @@ public:
 	static int crypto(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_string(ctx, 1))
 			eventTarget->crypto = duk_to_string(ctx, 1);
 		duk_push_string(ctx, eventTarget->crypto.c_str());	
@@ -172,7 +172,7 @@ public:
 	static int customElements(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_string(ctx, 1))
 			eventTarget->customElements = duk_to_string(ctx, 1);
 		duk_push_string(ctx, eventTarget->customElements.c_str());	
@@ -182,7 +182,7 @@ public:
 	static int devicePixelRatio(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_number(ctx, 1))
 			eventTarget->devicePixelRatio = duk_to_number(ctx, 1);
 		duk_push_number(ctx, eventTarget->devicePixelRatio);	
@@ -192,7 +192,7 @@ public:
 	static int document(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_string(ctx, 1))
 			eventTarget->document = duk_to_string(ctx, 1);
 		duk_push_string(ctx, eventTarget->document.c_str());	
@@ -202,7 +202,7 @@ public:
 	static int frameElement(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_string(ctx, 1))
 			eventTarget->frameElement = duk_to_string(ctx, 1);
 		duk_push_string(ctx, eventTarget->frameElement.c_str());	
@@ -212,7 +212,7 @@ public:
 	static int frames(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_string(ctx, 1))
 			eventTarget->frames = duk_to_string(ctx, 1);
 		duk_push_string(ctx, eventTarget->frames.c_str());	
@@ -222,7 +222,7 @@ public:
 	static int fullScreen(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_boolean(ctx, 1))
 			eventTarget->fullScreen = duk_to_boolean(ctx, 1);
 		duk_push_boolean(ctx, eventTarget->fullScreen);	
@@ -232,7 +232,7 @@ public:
 	static int history(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_string(ctx, 1))
 			eventTarget->history = duk_to_string(ctx, 1);
 		duk_push_string(ctx, eventTarget->history.c_str());	
@@ -242,7 +242,7 @@ public:
 	static int indexedDB(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_string(ctx, 1))
 			eventTarget->indexedDB = duk_to_string(ctx, 1);
 		duk_push_string(ctx, eventTarget->indexedDB.c_str());	
@@ -252,7 +252,7 @@ public:
 	static int innerHeight(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_number(ctx, 1))
 			eventTarget->innerHeight = duk_to_uint(ctx, 1);
 		duk_push_uint(ctx, eventTarget->innerHeight);	
@@ -262,7 +262,7 @@ public:
 	static int innerWidth(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_number(ctx, 1))
 			eventTarget->innerWidth = duk_to_uint(ctx, 1);
 		duk_push_uint(ctx, eventTarget->innerWidth);	
@@ -272,7 +272,7 @@ public:
 	static int isSecureContext(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_boolean(ctx, 1))
 			eventTarget->isSecureContext = duk_to_boolean(ctx, 1);
 		duk_push_boolean(ctx, eventTarget->isSecureContext);	
@@ -282,7 +282,7 @@ public:
 	static int launchQueue(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_string(ctx, 1))
 			eventTarget->launchQueue = duk_to_string(ctx, 1);
 		duk_push_string(ctx, eventTarget->launchQueue.c_str());	
@@ -292,7 +292,7 @@ public:
 	static int length(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_number(ctx, 1))
 			eventTarget->length = duk_to_uint(ctx, 1);
 		duk_push_uint(ctx, eventTarget->length);	
@@ -302,7 +302,7 @@ public:
 	static int location(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_string(ctx, 1))
 			eventTarget->location = duk_to_string(ctx, 1);
 		duk_push_string(ctx, eventTarget->location.c_str());	
@@ -312,7 +312,7 @@ public:
 	static int locationbar(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_string(ctx, 1))
 			eventTarget->locationbar = duk_to_string(ctx, 1);
 		duk_push_string(ctx, eventTarget->locationbar.c_str());	
@@ -322,7 +322,7 @@ public:
 	static int localStorage(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_string(ctx, 1))
 			eventTarget->localStorage = duk_to_string(ctx, 1);
 		duk_push_string(ctx, eventTarget->localStorage.c_str());	
@@ -332,7 +332,7 @@ public:
 	static int menubar(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_string(ctx, 1))
 			eventTarget->menubar = duk_to_string(ctx, 1);
 		duk_push_string(ctx, eventTarget->menubar.c_str());	
@@ -342,7 +342,7 @@ public:
 	static int mozInnerScreenX(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_number(ctx, 1))
 			eventTarget->mozInnerScreenX = duk_to_number(ctx, 1);
 		duk_push_number(ctx, eventTarget->mozInnerScreenX);	
@@ -352,7 +352,7 @@ public:
 	static int mozInnerScreenY(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_number(ctx, 1))
 			eventTarget->mozInnerScreenY = duk_to_number(ctx, 1);
 		duk_push_number(ctx, eventTarget->mozInnerScreenY);	
@@ -362,7 +362,7 @@ public:
 	static int name(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_string(ctx, 1))
 			eventTarget->name = duk_to_string(ctx, 1);
 		duk_push_string(ctx, eventTarget->name.c_str());	
@@ -372,7 +372,7 @@ public:
 	static int navigation(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_string(ctx, 1))
 			eventTarget->navigation = duk_to_string(ctx, 1);
 		duk_push_string(ctx, eventTarget->navigation.c_str());	
@@ -382,7 +382,7 @@ public:
 	static int navigator(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_string(ctx, 1))
 			eventTarget->navigator = duk_to_string(ctx, 1);
 		duk_push_string(ctx, eventTarget->navigator.c_str());	
@@ -392,7 +392,7 @@ public:
 	static int opener(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_string(ctx, 1))
 			eventTarget->opener = duk_to_string(ctx, 1);
 		duk_push_string(ctx, eventTarget->opener.c_str());	
@@ -402,7 +402,7 @@ public:
 	static int origin(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_string(ctx, 1))
 			eventTarget->origin = duk_to_string(ctx, 1);
 		duk_push_string(ctx, eventTarget->origin.c_str());	
@@ -412,7 +412,7 @@ public:
 	static int outerHeight(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_number(ctx, 1))
 			eventTarget->outerHeight = duk_to_uint(ctx, 1);
 		duk_push_uint(ctx, eventTarget->outerHeight);	
@@ -422,7 +422,7 @@ public:
 	static int outerWidth(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_number(ctx, 1))
 			eventTarget->outerWidth = duk_to_uint(ctx, 1);
 		duk_push_uint(ctx, eventTarget->outerWidth);	
@@ -432,7 +432,7 @@ public:
 	static int pageXOffset(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_number(ctx, 1))
 			eventTarget->pageXOffset = duk_to_uint(ctx, 1);
 		duk_push_uint(ctx, eventTarget->pageXOffset);	
@@ -442,7 +442,7 @@ public:
 	static int pageYOffset(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_number(ctx, 1))
 			eventTarget->pageYOffset = duk_to_uint(ctx, 1);
 		duk_push_uint(ctx, eventTarget->pageYOffset);	
@@ -452,7 +452,7 @@ public:
 	static int parent(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_string(ctx, 1))
 			eventTarget->parent = duk_to_string(ctx, 1);
 		duk_push_string(ctx, eventTarget->parent.c_str());	
@@ -462,7 +462,7 @@ public:
 	static int performance(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_string(ctx, 1))
 			eventTarget->performance = duk_to_string(ctx, 1);
 		duk_push_string(ctx, eventTarget->performance.c_str());	
@@ -472,7 +472,7 @@ public:
 	static int personalbar(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_string(ctx, 1))
 			eventTarget->personalbar = duk_to_string(ctx, 1);
 		duk_push_string(ctx, eventTarget->personalbar.c_str());	
@@ -482,7 +482,7 @@ public:
 	static int scheduler(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_string(ctx, 1))
 			eventTarget->scheduler = duk_to_string(ctx, 1);
 		duk_push_string(ctx, eventTarget->scheduler.c_str());	
@@ -492,7 +492,7 @@ public:
 	static int screen(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_string(ctx, 1))
 			eventTarget->screen = duk_to_string(ctx, 1);
 		duk_push_string(ctx, eventTarget->screen.c_str());	
@@ -502,7 +502,7 @@ public:
 	static int screenX(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_number(ctx, 1))
 			eventTarget->screenX = duk_to_int(ctx, 1);
 		duk_push_int(ctx, eventTarget->screenX);	
@@ -512,7 +512,7 @@ public:
 	static int screenY(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_number(ctx, 1))
 			eventTarget->screenY = duk_to_int(ctx, 1);
 		duk_push_int(ctx, eventTarget->screenY);	
@@ -522,7 +522,7 @@ public:
 	static int scrollbars(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_string(ctx, 1))
 			eventTarget->scrollbars = duk_to_string(ctx, 1);
 		duk_push_string(ctx, eventTarget->scrollbars.c_str());	
@@ -532,7 +532,7 @@ public:
 	static int scrollMaxX(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_number(ctx, 1))
 			eventTarget->scrollMaxX = duk_to_uint(ctx, 1);
 		duk_push_uint(ctx, eventTarget->scrollMaxX);	
@@ -542,7 +542,7 @@ public:
 	static int scrollMaxY(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_number(ctx, 1))
 			eventTarget->scrollMaxY = duk_to_uint(ctx, 1);
 		duk_push_uint(ctx, eventTarget->scrollMaxY);	
@@ -552,7 +552,7 @@ public:
 	static int scrollX(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_number(ctx, 1))
 			eventTarget->scrollX = duk_to_uint(ctx, 1);
 		duk_push_uint(ctx, eventTarget->scrollX);	
@@ -562,7 +562,7 @@ public:
 	static int scrollY(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_number(ctx, 1))
 			eventTarget->scrollY = duk_to_uint(ctx, 1);
 		duk_push_uint(ctx, eventTarget->scrollY);	
@@ -572,7 +572,7 @@ public:
 	static int self(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_string(ctx, 1))
 			eventTarget->self = duk_to_string(ctx, 1);
 		duk_push_string(ctx, eventTarget->self.c_str());	
@@ -582,7 +582,7 @@ public:
 	static int sessionStorage(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_string(ctx, 1))
 			eventTarget->sessionStorage = duk_to_string(ctx, 1);
 		duk_push_string(ctx, eventTarget->sessionStorage.c_str());	
@@ -592,7 +592,7 @@ public:
 	static int speechSynthesis(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_string(ctx, 1))
 			eventTarget->speechSynthesis = duk_to_string(ctx, 1);
 		duk_push_string(ctx, eventTarget->speechSynthesis.c_str());	
@@ -602,7 +602,7 @@ public:
 	static int statusbar(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_string(ctx, 1))
 			eventTarget->statusbar = duk_to_string(ctx, 1);
 		duk_push_string(ctx, eventTarget->statusbar.c_str());	
@@ -612,7 +612,7 @@ public:
 	static int toolbar(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_string(ctx, 1))
 			eventTarget->toolbar = duk_to_string(ctx, 1);
 		duk_push_string(ctx, eventTarget->toolbar.c_str());	
@@ -622,7 +622,7 @@ public:
 	static int top(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_string(ctx, 1))
 			eventTarget->top = duk_to_string(ctx, 1);
 		duk_push_string(ctx, eventTarget->top.c_str());	
@@ -632,7 +632,7 @@ public:
 	static int visualViewport(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_string(ctx, 1))
 			eventTarget->visualViewport = duk_to_string(ctx, 1);
 		duk_push_string(ctx, eventTarget->visualViewport.c_str());	
@@ -642,7 +642,7 @@ public:
 	static int window(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_string(ctx, 1))
 			eventTarget->window = duk_to_string(ctx, 1);
 		duk_push_string(ctx, eventTarget->window.c_str());	
@@ -653,7 +653,7 @@ public:
 	static int windows(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if (duk_is_string(ctx, 1))
 			eventTarget->windows = duk_to_string(ctx, 1);
 		duk_push_string(ctx, eventTarget->windows.c_str());	
@@ -672,7 +672,7 @@ public:
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
 		int x = duk_require_int(ctx, 1);
 		int y = duk_require_int(ctx, 2);
-		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		if(!eventTarget->moveTo(x, y))
 			return DKERROR("moveTo() failed! \n");
 		return true;

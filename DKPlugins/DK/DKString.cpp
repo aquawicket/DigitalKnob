@@ -493,3 +493,46 @@ DKStringArray getSettingsFromString(const DKString& filestring, const DKString& 
 #endif
 }
 */
+
+DKString pointerToAddress(const void* pointer) {
+	//DKDEBUGFUNC(event);  //EXCESSIVE LOGGING
+	if (!pointer) {
+		DKERROR("pointer invalid! \n");
+		return NULL;
+	}
+	std::stringstream ss;
+	const void* address = static_cast<const void*>(pointer);
+#if WIN
+	ss << "0x" << address;
+#else 
+	ss << address;
+#endif
+	if (same("0xDDDDDDDD", ss.str())) {
+		DKERROR("ss = 0xDDDDDDDD\n");
+		return "";
+	}
+	return ss.str();
+}
+
+void* addressToPointer(const DKString& address) {
+	//DKDEBUGFUNC(address);  //EXCESSIVE LOGGING
+	void* pointer;
+	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {
+		DKERROR("address is not a valid hex notation! \n");
+		return NULL;
+	}
+	//Convert a string of an address back into a pointer
+	std::stringstream ss;
+	ss << address.substr(2, address.size() - 2);
+	std::uint64_t tmp;
+	if (!(ss >> std::hex >> tmp)) {
+		DKERROR("addressToPointer(" + address + "): invalid address\n");
+		return NULL;
+	}
+	pointer = reinterpret_cast<void*>(tmp);
+	if (!pointer) {
+		DKERROR("pointer inavalid! \n");
+		return NULL;
+	}
+	return pointer;
+}

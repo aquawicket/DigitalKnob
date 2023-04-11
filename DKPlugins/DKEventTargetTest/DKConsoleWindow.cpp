@@ -51,7 +51,7 @@ DKConsoleWindow::DKConsoleWindow() : DKWindow() {
 	DKINFO("DKConsoleWindow::DKConsoleWindow() \n");
 	
 	eventTargetClass = "ConsoleWindow";
-	eventTargetAddress = DKDuktape::pointerToAddress(this);
+	eventTargetAddress = pointerToAddress(this);
 		
 	#if !WIN && !EMSCRIPTEN && !ANDROID
 		SCREEN *screen = newterm((char *) 0, stdout, stdin);

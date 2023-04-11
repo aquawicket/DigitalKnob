@@ -74,7 +74,7 @@ bool DKMouseEvent::Init(){
 //// Properties ////
 int DKMouseEvent::altKey(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
@@ -86,7 +86,7 @@ int DKMouseEvent::altKey(duk_context* ctx){
 
 int DKMouseEvent::button(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
@@ -98,7 +98,7 @@ int DKMouseEvent::button(duk_context* ctx){
 
 int DKMouseEvent::buttons(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
@@ -111,7 +111,7 @@ int DKMouseEvent::buttons(duk_context* ctx){
 
 int DKMouseEvent::clientX(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
@@ -123,7 +123,7 @@ int DKMouseEvent::clientX(duk_context* ctx){
 
 int DKMouseEvent::clientY(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
@@ -135,7 +135,7 @@ int DKMouseEvent::clientY(duk_context* ctx){
 
 int DKMouseEvent::ctrlKey(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
@@ -147,7 +147,7 @@ int DKMouseEvent::ctrlKey(duk_context* ctx){
 
 int DKMouseEvent::layerX(duk_context* ctx) {
 	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
@@ -159,7 +159,7 @@ int DKMouseEvent::layerX(duk_context* ctx) {
 
 int DKMouseEvent::layerY(duk_context* ctx) {
 	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
@@ -171,7 +171,7 @@ int DKMouseEvent::layerY(duk_context* ctx) {
 
 int DKMouseEvent::metaKey(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
@@ -183,7 +183,7 @@ int DKMouseEvent::metaKey(duk_context* ctx){
 
 int DKMouseEvent::movementX(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
@@ -195,7 +195,7 @@ int DKMouseEvent::movementX(duk_context* ctx){
 
 int DKMouseEvent::movementY(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
@@ -207,7 +207,7 @@ int DKMouseEvent::movementY(duk_context* ctx){
 
 int DKMouseEvent::offsetX(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
@@ -219,7 +219,7 @@ int DKMouseEvent::offsetX(duk_context* ctx){
 
 int DKMouseEvent::offsetY(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
@@ -231,7 +231,7 @@ int DKMouseEvent::offsetY(duk_context* ctx){
 
 int DKMouseEvent::pageX(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
@@ -243,7 +243,7 @@ int DKMouseEvent::pageX(duk_context* ctx){
 
 int DKMouseEvent::pageY(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
@@ -255,7 +255,7 @@ int DKMouseEvent::pageY(duk_context* ctx){
 
 int DKMouseEvent::relatedTarget(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
@@ -267,7 +267,7 @@ int DKMouseEvent::relatedTarget(duk_context* ctx){
 
 int DKMouseEvent::screenX(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
@@ -282,7 +282,7 @@ int DKMouseEvent::screenX(duk_context* ctx){
 
 int DKMouseEvent::screenY(duk_context* ctx) {
 	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
@@ -297,7 +297,7 @@ int DKMouseEvent::screenY(duk_context* ctx) {
 
 int DKMouseEvent::shiftKey(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
@@ -309,7 +309,7 @@ int DKMouseEvent::shiftKey(duk_context* ctx){
 
 int DKMouseEvent::mozPressure(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
@@ -321,7 +321,7 @@ int DKMouseEvent::mozPressure(duk_context* ctx){
 
 int DKMouseEvent::mozInputSource(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
@@ -333,7 +333,7 @@ int DKMouseEvent::mozInputSource(duk_context* ctx){
 
 int DKMouseEvent::webkitForce(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
@@ -345,7 +345,7 @@ int DKMouseEvent::webkitForce(duk_context* ctx){
 
 int DKMouseEvent::x(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
@@ -357,7 +357,7 @@ int DKMouseEvent::x(duk_context* ctx){
 
 int DKMouseEvent::y(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
@@ -371,7 +371,7 @@ int DKMouseEvent::y(duk_context* ctx){
 //// Methods ////
 int DKMouseEvent::getModifierState(duk_context* ctx){
 	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);
@@ -384,7 +384,7 @@ int DKMouseEvent::getModifierState(duk_context* ctx){
 int DKMouseEvent::initMouseEvent(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString eventAddress = duk_require_string(ctx, 0);
-	ConsoleWindow* event = (ConsoleWindow*)DKDuktape::addressToPointer(eventAddress);
+	ConsoleWindow* event = (ConsoleWindow*)addressToPointer(eventAddress);
 	if (!event) {
 		DKERROR("event invalid! \n");
 		duk_push_boolean(ctx, false);

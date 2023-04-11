@@ -46,7 +46,7 @@ public:
 		DKString options = "";//duk_require_string(ctx, 1);
 		DKINFO("CPP_DKFocusEvent("+type+","+options+")\n");
 		DKFocusEvent* event = new DKFocusEvent(type, options);
-		DKString eventAddress = DKDuktape::pointerToAddress(event);
+		DKString eventAddress = pointerToAddress(event);
 		duk_push_string(ctx, eventAddress.c_str());	
 		return true;
 	}
@@ -57,7 +57,7 @@ public:
 	static int relatedTarget(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
-		DKFocusEvent* event = (DKFocusEvent*)DKDuktape::addressToPointer(eventAddress);
+		DKFocusEvent* event = (DKFocusEvent*)addressToPointer(eventAddress);
 		if (duk_is_string(ctx, 1))
 			event->relatedTarget = duk_to_string(ctx, 1);
 		duk_push_string(ctx, event->relatedTarget.c_str());	

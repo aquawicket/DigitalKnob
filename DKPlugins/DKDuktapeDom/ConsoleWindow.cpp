@@ -501,7 +501,7 @@ void ConsoleWindow::ErrorExit(LPCSTR lpszMessage) {
 
 void ConsoleWindow::FocusEventProc(FOCUS_EVENT_RECORD fer) {
     DKDEBUGFUNC(fer);
-    DKString address = DKDuktape::pointerToAddress(this);
+    DKString address = pointerToAddress(this);
     DKString rval;
     DKString code;
 
@@ -529,7 +529,7 @@ void ConsoleWindow::FocusEventProc(FOCUS_EVENT_RECORD fer) {
 
 void ConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
     DKDEBUGFUNC(ker);
-    DKString address = DKDuktape::pointerToAddress(this);
+    DKString address = pointerToAddress(this);
     DKString rval;
     DKString code;
 
@@ -605,7 +605,7 @@ void ConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 	#ifndef MOUSE_HWHEELED
 		#define MOUSE_HWHEELED 0x0008
 	#endif
-    DKString address = DKDuktape::pointerToAddress(this);
+    DKString address = pointerToAddress(this);
     DKString rval;
     DKString code;
 
@@ -819,7 +819,7 @@ void ConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 
 void ConsoleWindow::ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD wbsr) {
     DKDEBUGFUNC(wbsr);
-	DKString address = DKDuktape::pointerToAddress(this);
+	DKString address = pointerToAddress(this);
     DKString rval;
     DKString code;
     columns = wbsr.dwSize.X;

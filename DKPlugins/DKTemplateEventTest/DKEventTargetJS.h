@@ -34,7 +34,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKINFO("CPP_DKEventTarget()\n");
 		DKEventTarget* eventTarget = new DKEventTarget();
-		DKString eventTargetAddress = DKDuktape::pointerToAddress(eventTarget);
+		DKString eventTargetAddress = pointerToAddress(eventTarget);
 		duk_push_string(ctx, eventTargetAddress.c_str());	
 		return DKTODO();
 	}

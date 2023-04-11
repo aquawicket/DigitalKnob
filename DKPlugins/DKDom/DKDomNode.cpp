@@ -92,7 +92,7 @@ int DKDomNode::baseURIObject(duk_context* ctx){
 int DKDomNode::childNodes(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
+	Rml::Element* element = (Rml::Element*)addressToPointer(address);
 	if (!element)
 		return DKERROR("DKDomNode::childNodes(): element invalid\n");
 	int num = element->GetNumChildren();
@@ -106,7 +106,7 @@ int DKDomNode::childNodes(duk_context* ctx){
 	}
 	DKString str;
 	for (unsigned int i = 0; i < elements.size(); i++) {
-		DKString elementAddress = DKDuktape::pointerToAddress(elements[i]);
+		DKString elementAddress = pointerToAddress(elements[i]);
 		str += elementAddress;
 		if (i < elements.size() - 1) { str += ","; }
 	}
@@ -117,13 +117,13 @@ int DKDomNode::childNodes(duk_context* ctx){
 int DKDomNode::firstChild(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
+	Rml::Element* element = (Rml::Element*)addressToPointer(address);
 	if (!element)
 		return DKERROR("DKDomNode::firstChild(): element invalid\n");
 	Rml::Element* firstChild = element->GetFirstChild();
 	if (!firstChild)
 		return DKERROR("DKDomNode::firstChild(): firstChild invalid\n");
-	DKString elementAddress = DKDuktape::pointerToAddress(firstChild);
+	DKString elementAddress = pointerToAddress(firstChild);
 	duk_push_string(ctx, elementAddress.c_str());
 	return true;
 }
@@ -137,13 +137,13 @@ int DKDomNode::isConnected(duk_context* ctx){
 int DKDomNode::lastChild(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
+	Rml::Element* element = (Rml::Element*)addressToPointer(address);
 	if (!element)
 		return DKERROR("DKDomNode::lastChild(): element invalid\n");
 	Rml::Element* lastChild = element->GetLastChild();
 	if (!lastChild)
 		return DKERROR("DKDomNode::lastChild(): lastChild invalid\n");
-	DKString elementAddress = DKDuktape::pointerToAddress(lastChild);
+	DKString elementAddress = pointerToAddress(lastChild);
 	duk_push_string(ctx, elementAddress.c_str());
 	return true;
 }
@@ -151,13 +151,13 @@ int DKDomNode::lastChild(duk_context* ctx){
 int DKDomNode::nextSibling(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
+	Rml::Element* element = (Rml::Element*)addressToPointer(address);
 	if (!element)
 		return DKERROR("element invalid\n");
 	Rml::Element* nextSibling = element->GetNextSibling();
 	if (!nextSibling)
 		return DKERROR("nextSibling invalid\n");
-	DKString elementAddress = DKDuktape::pointerToAddress(nextSibling);
+	DKString elementAddress = pointerToAddress(nextSibling);
 	duk_push_string(ctx, elementAddress.c_str());
 	return true;
 }
@@ -183,13 +183,13 @@ int DKDomNode::nodeValue(duk_context* ctx){
 int DKDomNode::ownerDocument(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
+	Rml::Element* element = (Rml::Element*)addressToPointer(address);
 	if (!element)
 		return DKERROR("element invalid\n");
 	Rml::Element* ownerDocument = element->GetOwnerDocument();
 	if (!ownerDocument)
 		return DKERROR("ownerDocument invalid\n");
-	DKString ownerDocumentAddress = DKDuktape::pointerToAddress(ownerDocument);
+	DKString ownerDocumentAddress = pointerToAddress(ownerDocument);
 	duk_push_string(ctx, ownerDocumentAddress.c_str());
 	return true;
 }
@@ -197,13 +197,13 @@ int DKDomNode::ownerDocument(duk_context* ctx){
 int DKDomNode::parentNode(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
+	Rml::Element* element = (Rml::Element*)addressToPointer(address);
 	if (!element)
 		return DKERROR("element invalid\n"); 
 	Rml::Element* parentNode = element->GetParentNode();
 	if (!parentNode)
 		return DKERROR("parentNode invalid\n");
-	DKString parentAddress = DKDuktape::pointerToAddress(parentNode);
+	DKString parentAddress = pointerToAddress(parentNode);
 	if (parentAddress.empty())
 		return DKERROR("parentAddress invalid\n");
 	duk_push_string(ctx, parentAddress.c_str());
@@ -214,13 +214,13 @@ int DKDomNode::parentNode(duk_context* ctx){
 int DKDomNode::parentElement(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
+	Rml::Element* element = (Rml::Element*)addressToPointer(address);
 	if (!element)
 		return DKERROR("DKDomNode::parentElement(): element invalid\n");
 	Rml::Element* parentNode = element->GetParentNode();
 	if (!parentNode)
 		return DKERROR("DKDomNode::parentElement(): parentNode invalid\n");
-	DKString parentAddress = DKDuktape::pointerToAddress(parentNode);
+	DKString parentAddress = pointerToAddress(parentNode);
 	duk_push_string(ctx, parentAddress.c_str());
 	//TODO: check this on javascript side if it is an instance of Element
 	return true;
@@ -229,13 +229,13 @@ int DKDomNode::parentElement(duk_context* ctx){
 int DKDomNode::previousSibling(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
+	Rml::Element* element = (Rml::Element*)addressToPointer(address);
 	if (!element)
 		return DKERROR("element invalid\n");
 	Rml::Element* previousSibling = element->GetPreviousSibling();
 	if (!previousSibling)
 		return DKERROR("previousSibling invalid\n");
-	DKString elementAddress = DKDuktape::pointerToAddress(previousSibling);
+	DKString elementAddress = pointerToAddress(previousSibling);
 	duk_push_string(ctx, elementAddress.c_str());
 	return true;
 }
@@ -278,11 +278,11 @@ int DKDomNode::rootNode(duk_context* ctx){
 int DKDomNode::appendChild(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
+	Rml::Element* element = (Rml::Element*)addressToPointer(address);
 	if(!element)
 		return DKERROR("DKDomNode::appendChild(): element invalid\n");
 	DKString childAddress = duk_require_string(ctx, 1);
-	Rml::Element* child = (Rml::Element*)DKDuktape::addressToPointer(childAddress);
+	Rml::Element* child = (Rml::Element*)addressToPointer(childAddress);
 	if(!child)
 		return DKERROR("DKDomNode::appendChild(): child invalid\n");
 	if(!element->AppendChild(child->GetParentNode()->RemoveChild(child), true))
@@ -314,11 +314,11 @@ int DKDomNode::compareDocumentPosition(duk_context* ctx){
 int DKDomNode::contains(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
+	Rml::Element* element = (Rml::Element*)addressToPointer(address);
 	if (!element)
 		return DKERROR("DKDomNode::contains(): element invalid\n");
 	DKString nodeAddress = duk_require_string(ctx, 1);
-	Rml::Element* node = (Rml::Element*)DKDuktape::addressToPointer(nodeAddress);
+	Rml::Element* node = (Rml::Element*)addressToPointer(nodeAddress);
 	if(!node)
 		return DKERROR("DKDomNode::contains(): node invalid\n");
 	while(node){
@@ -345,7 +345,7 @@ int DKDomNode::getRootNode(duk_context* ctx){
 int DKDomNode::hasChildNodes(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
+	Rml::Element* element = (Rml::Element*)addressToPointer(address);
 	if (!element)
 		return DKERROR("element invalid\n");
 	bool hasChildNodes = element->HasChildNodes();
@@ -356,15 +356,15 @@ int DKDomNode::hasChildNodes(duk_context* ctx){
 int DKDomNode::insertBefore(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
+	Rml::Element* element = (Rml::Element*)addressToPointer(address);
 	if (!element)
 		return DKERROR("element invalid\n");	
 	DKString childAddress = duk_require_string(ctx, 1);
-	Rml::Element* child = (Rml::Element*)DKDuktape::addressToPointer(childAddress);
+	Rml::Element* child = (Rml::Element*)addressToPointer(childAddress);
 	if(!child)
 		return DKERROR("child invalid\n");
 	DKString adjacentAddress = duk_require_string(ctx, 2);
-	Rml::Element* adjacentElement = (Rml::Element*)DKDuktape::addressToPointer(adjacentAddress);
+	Rml::Element* adjacentElement = (Rml::Element*)addressToPointer(adjacentAddress);
 	if(!adjacentElement)
 		return DKERROR("adjacentElement invalid\n");
 	if(!element->InsertBefore(child->GetParentNode()->RemoveChild(child), adjacentElement))
@@ -416,11 +416,11 @@ int DKDomNode::normalize(duk_context* ctx){
 int DKDomNode::removeChild(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
+	Rml::Element* element = (Rml::Element*)addressToPointer(address);
 	if(!element)
 		return DKERROR("DKDomNode::removeChild(): element invalid\n");
 	DKString childAddress = duk_require_string(ctx, 1);
-	Rml::Element* child = (Rml::Element*)DKDuktape::addressToPointer(childAddress);
+	Rml::Element* child = (Rml::Element*)addressToPointer(childAddress);
 	if(!child)
 		return DKERROR("DKDomNode::removeChild(): child invalid\n");
 	//DKINFO("element->RemoveChild(child): " + element->GetTagName() + "->(" + child->GetTagName() + ")\n");
@@ -433,15 +433,15 @@ int DKDomNode::removeChild(duk_context* ctx){
 int DKDomNode::replaceChild(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	DKString address = duk_require_string(ctx, 0);
-	Rml::Element* element = (Rml::Element*)DKDuktape::addressToPointer(address);
+	Rml::Element* element = (Rml::Element*)addressToPointer(address);
 	if (!element)
 		return DKERROR("element invalid\n");	
 	DKString newChildAddress = duk_require_string(ctx, 1);
-	Rml::Element* newChild = (Rml::Element*)DKDuktape::addressToPointer(newChildAddress);
+	Rml::Element* newChild = (Rml::Element*)addressToPointer(newChildAddress);
 	if(!newChild)
 		return DKERROR("newChild invalid\n");
 	DKString oldChildAddress = duk_require_string(ctx, 2);
-	Rml::Element* oldChild = (Rml::Element*)DKDuktape::addressToPointer(oldChildAddress);
+	Rml::Element* oldChild = (Rml::Element*)addressToPointer(oldChildAddress);
 	if(!oldChild)
 		return DKERROR("oldChild invalid\n");
 	if(!element->ReplaceChild(newChild->GetParentNode()->RemoveChild(newChild), oldChild))

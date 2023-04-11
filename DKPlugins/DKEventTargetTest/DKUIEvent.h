@@ -16,7 +16,7 @@ public:
 		DKINFO("DKUIEvent("+_type+", "+_options+") \n");
 		
 		eventClass = "UIEvent";
-		eventAddress = DKDuktape::pointerToAddress(this);
+		eventAddress = pointerToAddress(this);
 		
 		////// Instance properties //////
 		detail = 0;
