@@ -11,7 +11,7 @@ class DKWindow : public DKEventTarget
 {
 public:
 	DKWindow() : DKEventTarget() {
-		
+		DKDEBUGFUNC();
 		eventTargetClass = "Window";
 		eventTargetAddress = pointerToAddress(this);
 		
@@ -217,190 +217,237 @@ public:
 	////// Instance methods //////
 	// [Window.atob()] https://developer.mozilla.org/en-US/docs/Web/API/Window/atob
 	virtual bool atob(DKString& encodedData) {
+		DKDEBUGFUNC(encodedData);
 		return DKTODO();
 	}
 	// [Window.alert()] https://developer.mozilla.org/en-US/docs/Web/API/Window/alert
 	virtual bool alert(DKString& message) {
+		DKDEBUGFUNC(message);
 		return DKTODO();
 	}
 	// [Window.blur()] https://developer.mozilla.org/en-US/docs/Web/API/Window/blur
 	virtual bool blur() {
+		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	// [Window.btoa()] https://developer.mozilla.org/en-US/docs/Web/API/Window/btoa
 	virtual bool btoa(DKString& stringToEncode) {
+		DKDEBUGFUNC(stringToEncode);
 		return DKTODO();
 	}
 	// [Window.cancelAnimationFrame()] https://developer.mozilla.org/en-US/docs/Web/API/Window/cancelAnimationFrame
 	virtual bool cancelAnimationFrame(DKString& requestID) {
+		DKDEBUGFUNC(requestID);
 		return DKTODO();
 	}
 	// [Window.cancelIdleCallback()] https://developer.mozilla.org/en-US/docs/Web/API/Window/cancelIdleCallback
 	virtual bool cancelIdleCallback(DKString& handle) {
+		DKDEBUGFUNC(handle);
 		return DKTODO();
 	}
 	// [Window.clearImmediate()] https://developer.mozilla.org/en-US/docs/Web/API/Window/clearImmediate
 	virtual bool clearImmediate(DKString& immediateID) {
+		DKDEBUGFUNC(immediateID);
 		return DKTODO();
 	}
 	// [Window.clearInterval()] https://developer.mozilla.org/en-US/docs/Web/API/Window/clearInterval
 	virtual bool clearInterval(DKString& intervalID) {
+		DKDEBUGFUNC(intervalID);
 		return DKTODO();
 	}
 	// [Window.clearTimeout()] https://developer.mozilla.org/en-US/docs/Web/API/Window/clearTimeout
 	virtual bool clearTimeout(DKString& timeoutID) {
+		DKDEBUGFUNC(timeoutID);
 		return DKTODO();
 	}
 	// [Window.close()] https://developer.mozilla.org/en-US/docs/Web/API/Window/close
 	virtual bool close() {
+		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	// [Window.confirm()] https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm
 	virtual bool confirm(DKString& message) {
+		DKDEBUGFUNC(message);
 		return DKTODO();
 	}
 	// [Window.createImageBitmap()] https://developer.mozilla.org/en-US/docs/Web/API/createImageBitmap
 	virtual bool createImageBitmap() {
+		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	// [Window.dump()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/dump
 	virtual bool dump(DKString& message) {
+		DKDEBUGFUNC(message);
 		return DKTODO();
 	}
 	// [Window.fetch()] https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch
 	virtual bool fetch() {
+		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	// [Window.find()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/find
 	virtual bool find() {
+		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	// [Window.focus()] https://developer.mozilla.org/en-US/docs/Web/API/Window/focus
 	virtual bool focus() {
+		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	// [Window.getComputedStyle()] https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
 	virtual bool getComputedStyle() {
+		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	// [Window.getDefaultComputedStyle()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/getDefaultComputedStyle
 	virtual bool getDefaultComputedStyle() {
+		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	// [Window.getSelection()] https://developer.mozilla.org/en-US/docs/Web/API/Window/getSelection
 	virtual bool getSelection() {
+		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	// [Window.matchMedia()] https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia
 	virtual bool matchMedia(DKString& mediaQueryString) {
+		DKDEBUGFUNC(mediaQueryString);
 		return DKTODO();
 	}
 	// [Window.moveBy()] https://developer.mozilla.org/en-US/docs/Web/API/Window/moveBy
 	virtual bool moveBy(int& deltaX, int& deltaY) {
+		DKDEBUGFUNC(deltaX, deltaY);
 		return DKTODO();
 	}
 	// [Window.moveTo()] https://developer.mozilla.org/en-US/docs/Web/API/Window/moveTo
 	virtual bool moveTo(int& x, int& y) {
+		DKDEBUGFUNC(x, y);
 		return DKTODO();
 	}
 	// [Window.open()] https://developer.mozilla.org/en-US/docs/Web/API/Window/open
 	virtual bool open() {
+		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	// [Window.postMessage()] https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage
 	virtual bool postMessage() {
+		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	// [Window.print()] https://developer.mozilla.org/en-US/docs/Web/API/Window/print
 	virtual bool print() {
+		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	// [Window.prompt()] https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt
 	virtual bool prompt() {
+		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	// [Window.queryLocalFonts()](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Window/queryLocalFonts
 	virtual bool queryLocalFonts() {
+		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	// [Window.reportError()] https://developer.mozilla.org/en-US/docs/Web/API/reportError
 	virtual bool reportError() {
+		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	// [Window.requestAnimationFrame()] https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame
 	virtual bool requestAnimationFrame() {
+		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	// [Window.requestIdleCallback()] https://developer.mozilla.org/en-US/docs/Web/API/Window/requestIdleCallback
 	virtual bool requestIdleCallback() {
+		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	// [Window.resizeBy()] https://developer.mozilla.org/en-US/docs/Web/API/Window/resizeBy
 	virtual bool resizeBy(int& xDelta, int& yDelta) {
+		DKDEBUGFUNC(xDelta, yDelta);
 		return DKTODO();
 	}
 	// [Window.resizeTo()] https://developer.mozilla.org/en-US/docs/Web/API/Window/resizeTo
 	virtual bool resizeTo(int& width, int& height) {
+		DKDEBUGFUNC(width, height);
 		return DKTODO();
 	}
 	// [Window.scroll()] https://developer.mozilla.org/en-US/docs/Web/API/Window/scroll
 	virtual bool scroll() {
+		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	// [Window.scrollBy()] https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollBy
 	virtual bool scrollBy() {
+		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	// [Window.scrollByLines()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollByLines
 	virtual bool scrollByLines() {
+		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	// [Window.scrollByPages()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollByPages
 	virtual bool scrollByPages() {
+		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	// [Window.scrollTo()] https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollTo
 	virtual bool scrollTo() {
+		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	// [Window.setImmediate()] https://developer.mozilla.org/en-US/docs/Web/API/Window/setImmediate
 	virtual bool setImmediate() {
+		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	// [Window.setInterval()] https://developer.mozilla.org/en-US/docs/Web/API/Window/setInterval
 	virtual bool setInterval() {
+		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	// [Window.setResizable()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window
 	virtual bool setResizable() {
+		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	// [Window.setTimeout()] https://developer.mozilla.org/en-US/docs/Web/API/Window/setTimeout
 	virtual bool setTimeout() {
+		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	// [Window.sizeToContent()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/sizeToContent
 	virtual bool sizeToContent() {
+		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	// [Window.showOpenFilePicker()](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Window/showOpenFilePicker
 	virtual bool showOpenFilePicker() {
+		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	// [Window.showSaveFilePicker()](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Window/showSaveFilePicker
 	virtual bool showSaveFilePicker() {
+		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	// [Window.showDirectoryPicker()](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Window/showDirectoryPicker
 	virtual bool showDirectoryPicker() {
+		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	// [Window.stop()] https://developer.mozilla.org/en-US/docs/Web/API/Window/stop
 	virtual bool stop() {
+		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	// [Window.updateCommands()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/updateCommands
 	virtual bool updateCommands(DKString& sCommandName) {
+		DKDEBUGFUNC(sCommandName);
 		return DKTODO();
 	}
 	
@@ -408,22 +455,27 @@ public:
 	////// Deprecated methods //////
 	// [Window.back()](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/back
 	virtual bool back() {
+		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	// [Window.captureEvents()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/captureEvents
 	virtual bool captureEvents() {
+		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	// [Window.forward()](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/forward
 	virtual bool forward() {
+		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	// [Window.releaseEvents()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/releaseEvents
 	virtual bool releaseEvents(DKString& eventType) {
+		DKDEBUGFUNC(eventType);
 		return DKTODO();
 	}
 	// [Window.showModalDialog()](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/showModalDialog
 	virtual bool showModalDialog() {
+		DKDEBUGFUNC();
 		return DKTODO();
 	}
 
