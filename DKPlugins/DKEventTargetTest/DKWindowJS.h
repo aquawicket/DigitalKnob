@@ -673,7 +673,8 @@ public:
 		int x = duk_require_int(ctx, 1);
 		int y = duk_require_int(ctx, 2);
 		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
-		eventTarget->moveTo(x, y);
+		if(!eventTarget->moveTo(x, y))
+			return DKERROR("moveTo() failed! \n");
 		return true;
 	}
 	
