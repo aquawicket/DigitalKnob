@@ -15,8 +15,8 @@ var Window = function Window(address) {
 	////// Instance properties //////
 	// [Window.caches](Read only)
 	Object.defineProperty(this, "caches", {
-        get: function caches()		{ return JSON.parse(CPP_DKWindow_caches(this.address)) },
-		//set: function caches(str)	{ return JSON.parse(CPP_DKWindow_caches(this.address, JSON.stringify(str))) },
+        get: function caches()		{ return CPP_DKWindow_caches(this.address) },
+		//set: function caches(str)	{ return CPP_DKWindow_caches(this.address, str) },
 		configurable: true
     })
 

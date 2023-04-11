@@ -58,9 +58,18 @@ obj.dispatchEvent(myCustomEvent);
 
 
 ////// ConsoleWindow //////
+function printWindowProperties(window){
+	////// Instance properties //////
+	console.log("window.caches = "	+window.caches)
+}
+function printConsoleWindowProperties(consolewindow){
+	////// Instance properties //////
+	console.log("consolewindow.columns = "	+consolewindow.columns)
+	console.log("consolewindow.rows = "		+consolewindow.rows)
+}
 const myConsoleWindow = new DKConsoleWindow()
-console.log("myConsoleWindow.columns = "+myConsoleWindow.columns)
-console.log("myConsoleWindow.rows = "	+myConsoleWindow.rows)
+printWindowProperties(myConsoleWindow)
+printConsoleWindowProperties(myConsoleWindow)
 
 
 

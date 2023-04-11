@@ -130,9 +130,9 @@ public:
 	// [Window.menubar](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/menubar
 	DKString menubar;
 	// [Window.mozInnerScreenX](Read only)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/mozInnerScreenX
-	float mozInnerScreenX;
+	double mozInnerScreenX;
 	// [Window.mozInnerScreenY](Read only)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/mozInnerScreenY
-	float mozInnerScreenY;
+	double mozInnerScreenY;
 	// [Window.name] https://developer.mozilla.org/en-US/docs/Web/API/Window/name
 	DKString name;
 	// [Window.navigation](Read only)(Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Window/navigation

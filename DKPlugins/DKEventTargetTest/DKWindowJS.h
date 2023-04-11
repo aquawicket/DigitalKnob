@@ -38,7 +38,6 @@ public:
 		DKDuktape::AttachFunction("CPP_DKWindow_innerHeight", DKWindowJS::innerHeight);
 		DKDuktape::AttachFunction("CPP_DKWindow_innerWidth", DKWindowJS::innerWidth);
 		DKDuktape::AttachFunction("CPP_DKWindow_isSecureContext", DKWindowJS::isSecureContext);
-		/*
 		DKDuktape::AttachFunction("CPP_DKWindow_launchQueue", DKWindowJS::launchQueue);
 		DKDuktape::AttachFunction("CPP_DKWindow_length", DKWindowJS::length);
 		DKDuktape::AttachFunction("CPP_DKWindow_location", DKWindowJS::location);
@@ -52,6 +51,7 @@ public:
 		DKDuktape::AttachFunction("CPP_DKWindow_navigator", DKWindowJS::navigator);
 		DKDuktape::AttachFunction("CPP_DKWindow_opener", DKWindowJS::opener);
 		DKDuktape::AttachFunction("CPP_DKWindow_origin", DKWindowJS::origin);
+		/*
 		DKDuktape::AttachFunction("CPP_DKWindow_outerHeight", DKWindowJS::outerHeight);
 		DKDuktape::AttachFunction("CPP_DKWindow_outerWidth", DKWindowJS::outerWidth);
 		DKDuktape::AttachFunction("CPP_DKWindow_pageXOffset", DKWindowJS::pageXOffset);
@@ -268,6 +268,136 @@ public:
 		if (duk_is_boolean(ctx, 1))
 			eventTarget->isSecureContext = duk_to_boolean(ctx, 1);
 		duk_push_boolean(ctx, eventTarget->isSecureContext);	
+		return true;
+	}
+	// [Window.launchQueue](Read only)(Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Window/launchQueue
+	static int launchQueue(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString eventTargetAddress = duk_require_string(ctx, 0);
+		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		if (duk_is_string(ctx, 1))
+			eventTarget->launchQueue = duk_to_string(ctx, 1);
+		duk_push_string(ctx, eventTarget->launchQueue.c_str());	
+		return true;
+	}
+	// [Window.length](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/length
+	static int length(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString eventTargetAddress = duk_require_string(ctx, 0);
+		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		if (duk_is_number(ctx, 1))
+			eventTarget->length = duk_to_uint(ctx, 1);
+		duk_push_uint(ctx, eventTarget->length);	
+		return true;
+	}
+	// [Window.location] https://developer.mozilla.org/en-US/docs/Web/API/Window/location
+	static int location(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString eventTargetAddress = duk_require_string(ctx, 0);
+		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		if (duk_is_string(ctx, 1))
+			eventTarget->location = duk_to_string(ctx, 1);
+		duk_push_string(ctx, eventTarget->location.c_str());	
+		return true;
+	}
+	// [Window.locationbar](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/locationbar
+	static int locationbar(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString eventTargetAddress = duk_require_string(ctx, 0);
+		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		if (duk_is_string(ctx, 1))
+			eventTarget->locationbar = duk_to_string(ctx, 1);
+		duk_push_string(ctx, eventTarget->locationbar.c_str());	
+		return true;
+	}
+	// [Window.localStorage](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+	static int localStorage(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString eventTargetAddress = duk_require_string(ctx, 0);
+		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		if (duk_is_string(ctx, 1))
+			eventTarget->localStorage = duk_to_string(ctx, 1);
+		duk_push_string(ctx, eventTarget->localStorage.c_str());	
+		return true;
+	}
+	// [Window.menubar](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/menubar
+	static int menubar(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString eventTargetAddress = duk_require_string(ctx, 0);
+		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		if (duk_is_string(ctx, 1))
+			eventTarget->menubar = duk_to_string(ctx, 1);
+		duk_push_string(ctx, eventTarget->menubar.c_str());	
+		return true;
+	}
+	// [Window.mozInnerScreenX](Read only)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/mozInnerScreenX
+	static int mozInnerScreenX(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString eventTargetAddress = duk_require_string(ctx, 0);
+		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		if (duk_is_number(ctx, 1))
+			eventTarget->mozInnerScreenX = duk_to_number(ctx, 1);
+		duk_push_number(ctx, eventTarget->mozInnerScreenX);	
+		return true;
+	}
+	// [Window.mozInnerScreenY](Read only)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/mozInnerScreenY
+	static int mozInnerScreenY(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString eventTargetAddress = duk_require_string(ctx, 0);
+		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		if (duk_is_number(ctx, 1))
+			eventTarget->mozInnerScreenY = duk_to_number(ctx, 1);
+		duk_push_number(ctx, eventTarget->mozInnerScreenY);	
+		return true;
+	}
+	// [Window.name] https://developer.mozilla.org/en-US/docs/Web/API/Window/name
+	static int name(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString eventTargetAddress = duk_require_string(ctx, 0);
+		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		if (duk_is_string(ctx, 1))
+			eventTarget->name = duk_to_string(ctx, 1);
+		duk_push_string(ctx, eventTarget->name.c_str());	
+		return true;
+	}
+	// [Window.navigation](Read only)(Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Window/navigation
+	static int navigation(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString eventTargetAddress = duk_require_string(ctx, 0);
+		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		if (duk_is_string(ctx, 1))
+			eventTarget->navigation = duk_to_string(ctx, 1);
+		duk_push_string(ctx, eventTarget->navigation.c_str());	
+		return true;
+	}
+	// [Window.navigator](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/navigator
+	static int navigator(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString eventTargetAddress = duk_require_string(ctx, 0);
+		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		if (duk_is_string(ctx, 1))
+			eventTarget->navigator = duk_to_string(ctx, 1);
+		duk_push_string(ctx, eventTarget->navigator.c_str());	
+		return true;
+	}
+	// [Window.opener] https://developer.mozilla.org/en-US/docs/Web/API/Window/opener
+	static int opener(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString eventTargetAddress = duk_require_string(ctx, 0);
+		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		if (duk_is_string(ctx, 1))
+			eventTarget->opener = duk_to_string(ctx, 1);
+		duk_push_string(ctx, eventTarget->opener.c_str());	
+		return true;
+	}
+	// [Window.origin](Read only) https://developer.mozilla.org/en-US/docs/Web/API/origin
+	static int origin(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString eventTargetAddress = duk_require_string(ctx, 0);
+		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		if (duk_is_string(ctx, 1))
+			eventTarget->origin = duk_to_string(ctx, 1);
+		duk_push_string(ctx, eventTarget->origin.c_str());	
 		return true;
 	}
 	
