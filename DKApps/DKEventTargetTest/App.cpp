@@ -31,6 +31,7 @@ bool App::Init() {
 	myTargetD->addEventListener("eventD", &App::onevent);
 	myTargetD->dispatchEvent(eventD);
 	
+	/*
 	DKINFO("\n");
 	DKEventTarget myTargetE;
 	myTargetE.addEventListener("eventE", &App::onevent);
@@ -40,6 +41,7 @@ bool App::Init() {
 	DKEventTarget myTargetF;
 	myTargetF.addEventListener("eventF", &App::onevent);
 	myTargetF.dispatchEvent(&DKEvent("eventF", ""));			// Event as reference, created within dispatchEvent function	// warning C4238:
+	*/
 	
 	DKINFO("\n");
 	DKEventTarget myTargetG;
