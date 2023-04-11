@@ -259,7 +259,7 @@ public:
 	void confirm() {
 		DKTODO();
 	}
-	// [Window.createImageBitmap()] https://developer.mozilla.org/en-US/docs/Web/API/Window/createImageBitmap
+	// [Window.createImageBitmap()] https://developer.mozilla.org/en-US/docs/Web/API/createImageBitmap
 	void createImageBitmap() {
 		DKTODO();
 	}
@@ -324,7 +324,7 @@ public:
 	void queryLocalFonts() {
 		DKTODO();
 	}
-	// [Window.reportError()] https://developer.mozilla.org/en-US/docs/Web/API/Window/reportError
+	// [Window.reportError()] https://developer.mozilla.org/en-US/docs/Web/API/reportError
 	void reportError() {
 		DKTODO();
 	}

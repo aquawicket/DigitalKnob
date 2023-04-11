@@ -369,29 +369,89 @@ var Window = function Window(address) {
 		CPP_DKWindow_clearInterval(this.address, intervalID)
     }
 	// [Window.clearTimeout()] https://developer.mozilla.org/en-US/docs/Web/API/Window/clearTimeout
+	Window.prototype.clearTimeout = function clearTimeout(timeoutID) {
+		CPP_DKWindow_clearTimeout(this.address, timeoutID)
+    }
 	// [Window.close()] https://developer.mozilla.org/en-US/docs/Web/API/Window/close
+	Window.prototype.close = function close() {
+		CPP_DKWindow_close(this.address)
+    }
 	// [Window.confirm()] https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm
-	// [Window.createImageBitmap()] https://developer.mozilla.org/en-US/docs/Web/API/Window/createImageBitmap
+	Window.prototype.confirm = function confirm(message) {
+		return CPP_DKWindow_confirm(this.address, message)
+    }
+	// [Window.createImageBitmap()] https://developer.mozilla.org/en-US/docs/Web/API/createImageBitmap
+	Window.prototype.createImageBitmap = function createImageBitmap() {
+		// TODO
+    }
 	// [Window.dump()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/dump
+	Window.prototype.dump = function dump(message) {
+		CPP_DKWindow_dump(this.address, message)
+    }
 	// [Window.fetch()] https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch
+	Window.prototype.fetch = function fetch() {
+		// TODO
+    }
 	// [Window.find()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/find
+	Window.prototype.find = function find() {
+		// TODO
+    }
 	// [Window.focus()] https://developer.mozilla.org/en-US/docs/Web/API/Window/focus
+	Window.prototype.focus = function focus() {
+		CPP_DKWindow_focus(this.address)
+    }
 	// [Window.getComputedStyle()] https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
+	Window.prototype.getComputedStyle = function getComputedStyle() {
+		// TODO
+    }
 	// [Window.getDefaultComputedStyle()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/getDefaultComputedStyle
+	Window.prototype.getDefaultComputedStyle = function getDefaultComputedStyle() {
+		// TODO
+    }
 	// [Window.getSelection()] https://developer.mozilla.org/en-US/docs/Web/API/Window/getSelection
+	Window.prototype.getSelection = function getSelection() {
+		// TODO
+    }
 	// [Window.matchMedia()] https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia
+	Window.prototype.matchMedia = function matchMedia() {
+		// TODO
+    }
 	// [Window.moveBy()] https://developer.mozilla.org/en-US/docs/Web/API/Window/moveBy
+	Window.prototype.moveBy = function moveBy(deltaX, deltaY) {
+		CPP_DKWindow_moveBy(this.address, deltaX, deltaY)
+    }
 	// [Window.moveTo()] https://developer.mozilla.org/en-US/docs/Web/API/Window/moveTo
 	Window.prototype.moveTo = function moveTo(x, y) {
 		CPP_DKWindow_moveTo(this.address, x, y)
     }
 	// [Window.open()] https://developer.mozilla.org/en-US/docs/Web/API/Window/open
+	Window.prototype.open = function open() {
+		// TODO
+    }
 	// [Window.postMessage()] https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage
+	Window.prototype.postMessage = function postMessage() {
+		// TODO
+    }
 	// [Window.print()] https://developer.mozilla.org/en-US/docs/Web/API/Window/print
+	Window.prototype.print = function print() {
+		CPP_DKWindow_print(this.address)
+    }
 	// [Window.prompt()] https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt
+	Window.prototype.prompt = function prompt() {
+		// TODO
+    }
 	// [Window.queryLocalFonts()](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Window/queryLocalFonts
-	// [Window.reportError()] https://developer.mozilla.org/en-US/docs/Web/API/Window/reportError
+	Window.prototype.queryLocalFonts = function queryLocalFonts() {
+		// TODO
+    }
+	// [Window.reportError()] https://developer.mozilla.org/en-US/docs/Web/API/reportError
+	Window.prototype.reportError = function reportError() {
+		// TODO
+    }
 	// [Window.requestAnimationFrame()] https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame
+	Window.prototype.requestAnimationFrame = function requestAnimationFrame() {
+		// TODO
+    }
 	// [Window.requestIdleCallback()] https://developer.mozilla.org/en-US/docs/Web/API/Window/requestIdleCallback
 	// [Window.resizeBy()] https://developer.mozilla.org/en-US/docs/Web/API/Window/resizeBy
 	// [Window.resizeTo()] https://developer.mozilla.org/en-US/docs/Web/API/Window/resizeTo
