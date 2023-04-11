@@ -12,7 +12,7 @@ class DKWindow : public DKEventTarget
 public:
 	DKWindow() : DKEventTarget() {
 		
-		//eventTargetClass = "Window";
+		eventTargetClass = "Window";
 		
 		////// Instance properties //////
 		caches = "";
