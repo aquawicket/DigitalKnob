@@ -48,7 +48,7 @@ public:
 	bool Init();
 	bool End();
 	
-	int blur() {
+	bool blur() {
 		DKDEBUGFUNC();
 		#if WIN
 			ShowWindow(GetConsoleWindow(), SW_SHOWMINNOACTIVE);
