@@ -148,7 +148,7 @@ void DKUWebSocketsServer::Loop(){
 bool DKUWebSocketsServer::MessageFromClient(uWS::WebSocket<uWS::SERVER>* ws, char *message, size_t length, uWS::OpCode opCode){
 	DKDEBUGFUNC(ws, message, length, opCode);
 	DKString message_  = DKString(message).substr(0, length);
-	DKDuktape::dispatchEvent("message", "", this);
+	//DKDuktape::dispatchEvent("message", "", this);
 	DKINFO("DKUWebSocketsServer::MessageFromClient(): "+message_+"\n");
 	return true;
 }
