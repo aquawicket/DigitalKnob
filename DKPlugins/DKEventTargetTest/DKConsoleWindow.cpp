@@ -132,32 +132,9 @@ DKConsoleWindow::DKConsoleWindow() : DKWindow() {
 	// FocusEvent
 	//relatedTarget = "";
 	
+	//// Instance properties ////
 	columns = 0;
 	rows = 0;
-
-	//// Instance properties ////
-	/*
-	DKDuktape::AttachFunction("CPP_DKConsoleWindow_closed", DKConsoleWindow::closed);
-	DKDuktape::AttachFunction("CPP_DKConsoleWindow_fullScreen", DKConsoleWindow::fullScreen);
-	DKDuktape::AttachFunction("CPP_DKConsoleWindow_innerHeight", DKConsoleWindow::innerHeight);
-	DKDuktape::AttachFunction("CPP_DKConsoleWindow_innerWidth", DKConsoleWindow::innerWidth);
-	DKDuktape::AttachFunction("CPP_DKConsoleWindow_name", DKConsoleWindow::name);
-	DKDuktape::AttachFunction("CPP_DKConsoleWindow_outerHeight", DKConsoleWindow::outerHeight);
-	DKDuktape::AttachFunction("CPP_DKConsoleWindow_outerWidth", DKConsoleWindow::outerWidth);
-	DKDuktape::AttachFunction("CPP_DKConsoleWindow_screenX", DKConsoleWindow::ScreenX);
-	DKDuktape::AttachFunction("CPP_DKConsoleWindow_screenLeft", DKConsoleWindow::screenLeft);
-	DKDuktape::AttachFunction("CPP_DKConsoleWindow_screenY", DKConsoleWindow::ScreenY);
-	DKDuktape::AttachFunction("CPP_DKConsoleWindow_screenTop", DKConsoleWindow::screenTop);
-		
-	//// Instance methods ////
-	DKDuktape::AttachFunction("CPP_DKConsoleWindow_blur", DKConsoleWindow::blur);
-	DKDuktape::AttachFunction("CPP_DKConsoleWindow_close", DKConsoleWindow::close);
-	DKDuktape::AttachFunction("CPP_DKConsoleWindow_focus", DKConsoleWindow::focus);
-	DKDuktape::AttachFunction("CPP_DKConsoleWindow_moveBy", DKConsoleWindow::moveBy);
-	DKDuktape::AttachFunction("CPP_DKConsoleWindow_moveTo", DKConsoleWindow::moveTo);
-	DKDuktape::AttachFunction("CPP_DKConsoleWindow_resizeBy", DKConsoleWindow::resizeBy);
-	DKDuktape::AttachFunction("CPP_DKConsoleWindow_resizeTo", DKConsoleWindow::resizeTo);
-	*/
 
 	DKApp::AppendLoopFunc(&DKConsoleWindow::Loop, this);
 }
@@ -222,14 +199,6 @@ void DKConsoleWindow::Loop() {
 
 /*
 //// Instance properties ////
-int DKConsoleWindow::closed(duk_context* ctx) {
-    DKDEBUGFUNC(ctx);
-	// TODO
-	bool isClosed = false;
-	duk_push_boolean(ctx, isClosed);
-	return true;
-}
-
 int DKConsoleWindow::fullScreen(duk_context* ctx) {
     DKDEBUGFUNC(ctx);
     //get
@@ -428,22 +397,6 @@ int DKConsoleWindow::moveBy(duk_context* ctx) {
 		GetWindowRect(GetConsoleWindow(), &rect);
 		int X = rect.left + deltaX;
 		int Y = rect.top + deltaY;
-		int nWidth = rect.right - rect.left;
-		int nHeight = rect.bottom - rect.top;
-		if (!MoveWindow(GetConsoleWindow(), X, Y, nWidth, nHeight, TRUE))
-			return DKERROR("MoveWindow() failed");
-	#endif
-	return true;
-}
-int DKConsoleWindow::moveTo(duk_context* ctx) {
-    DKDEBUGFUNC(ctx);
-	#if WIN
-		int x = duk_require_int(ctx, 0);
-		int y = duk_require_int(ctx, 1);
-		RECT rect;
-		GetWindowRect(GetConsoleWindow(), &rect);
-		int X = x;
-		int Y = y;
 		int nWidth = rect.right - rect.left;
 		int nHeight = rect.bottom - rect.top;
 		if (!MoveWindow(GetConsoleWindow(), X, Y, nWidth, nHeight, TRUE))

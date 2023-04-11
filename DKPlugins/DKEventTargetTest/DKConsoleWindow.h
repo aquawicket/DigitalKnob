@@ -52,7 +52,7 @@ public:
 		#endif
 	}
 	
-	void moveTo(int x, int y){
+	bool moveTo(int x, int y){
 		DKDEBUGFUNC(x, y);
 		DKINFO("DKConsoleWindow::moveTo("+toString(x)+", "+toString(y)+") \n");
 		#if WIN
@@ -61,10 +61,10 @@ public:
 			int nWidth = rect.right - rect.left;
 			int nHeight = rect.bottom - rect.top;
 			if (!MoveWindow(GetConsoleWindow(), x, y, nWidth, nHeight, TRUE)){
-				DKERROR("MoveWindow() failed");
-				return;
+				return DKERROR("MoveWindow() failed");
 			}
 		#endif
+		return true;
 	}
 	
 	void Loop();
