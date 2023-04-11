@@ -49,6 +49,8 @@
 DKConsoleWindow::DKConsoleWindow() : DKWindow() {
 	DKDEBUGFUNC();
 	//DKINFO("DKConsoleWindow::Init() \n");
+	
+	eventTargetClass = "ConsoleWindow";
 		
 	#if !WIN && !EMSCRIPTEN && !ANDROID
 		SCREEN *screen = newterm((char *) 0, stdout, stdin);
