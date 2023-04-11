@@ -419,7 +419,7 @@ public:
 		return DKTODO();
 	}
 	// [Window.releaseEvents()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/releaseEvents
-	virtual bool releaseEvents() {
+	virtual bool releaseEvents(DKString& eventType) {
 		return DKTODO();
 	}
 	// [Window.showModalDialog()](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/showModalDialog
