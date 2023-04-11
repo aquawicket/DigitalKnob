@@ -31,22 +31,24 @@ bool App::Init() {
 	myTargetD->addEventListener("eventD", &App::onevent);
 	myTargetD->dispatchEvent(eventD);
 	
-	/*
 	DKINFO("\n");
 	DKEventTarget myTargetE;
 	myTargetE.addEventListener("eventE", &App::onevent);
-	myTargetE.dispatchEvent(DKEvent("eventE", ""));				// Event as value, created within dispatchEvent function		// warning C4239:
+	myTargetE.dispatchEvent(new DKEvent("eventE", ""));			// Event as new pointer, created within dispatchEvent function
 	
+	/*
 	DKINFO("\n");
 	DKEventTarget myTargetF;
 	myTargetF.addEventListener("eventF", &App::onevent);
-	myTargetF.dispatchEvent(&DKEvent("eventF", ""));			// Event as reference, created within dispatchEvent function	// warning C4238:
-	*/
+	myTargetF.dispatchEvent(DKEvent("eventF", ""));				// Event as value, created within dispatchEvent function		// warning C4239:
 	
 	DKINFO("\n");
 	DKEventTarget myTargetG;
 	myTargetG.addEventListener("eventG", &App::onevent);
-	myTargetG.dispatchEvent(new DKEvent("eventG", ""));			// Event as pointer, created within dispatchEvent function
+	myTargetG.dispatchEvent(&DKEvent("eventG", ""));			// Event as reference, created within dispatchEvent function	// warning C4238:
+	*/
+	
+	
 		
 	
 	////// CustomEvent //////
