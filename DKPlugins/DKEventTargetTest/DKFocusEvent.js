@@ -17,7 +17,7 @@ var FocusEvent = function FocusEvent(type, options, address) {
 	Object.defineProperty(this, "relatedTarget", {
         get: function relatedTarget() { return CPP_DKFocusEvent_relatedTarget(this.address) },
 		set: function relatedTarget(v) { return CPP_DKFocusEvent_relatedTarget(this.address, v) },
-		configurable: true
+		configurable: true,
     })
 	
 
@@ -29,11 +29,8 @@ var FocusEvent = function FocusEvent(type, options, address) {
 	
 	
 	////// toString //////
-	if(this.toString() === "[object Object]"){
-		this.toString = function(){
-			return "[object FocusEvent]"
-		}
-	}
+	if(this.toString() === "[object Object]")
+		this.toString = function(){ return "[object FocusEvent]" }
 	
 
 	var event = UIEvent.call(this, type, options)

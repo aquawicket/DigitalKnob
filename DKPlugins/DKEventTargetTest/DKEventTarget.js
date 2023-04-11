@@ -30,7 +30,7 @@ var EventTarget = function EventTarget(address) {
                 this.listeners[type].push(callback) //Do not allow duplicate entries
 			*/
             CPP_DKEventTarget_addEventListener(this.address, type, callback);
-        }
+        },
     });
 	// [EventTarget.removeEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener
     Object.defineProperty(this, "removeEventListener", {
@@ -49,7 +49,7 @@ var EventTarget = function EventTarget(address) {
             }
 			*/
 			CPP_DKEventTarget_removeEventListener(this.address, type, callback);
-        }
+        },
     });
 	// [EventTarget.dispatchEvent()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent
     Object.defineProperty(this, "dispatchEvent", {
@@ -65,15 +65,13 @@ var EventTarget = function EventTarget(address) {
             */
 			CPP_DKEventTarget_dispatchEvent(this.address, event.address);
 			return !event.defaultPrevented;
-        }
+        },
     });
 
+
 	////// toString //////
-	if(this.toString() === "[object Object]"){
-		this.toString = function(){
-			return "[object EventTarget]"
-		}
-	}
+	if(this.toString() === "[object Object]")
+		this.toString = function(){	return "[object EventTarget]" }
 	
 	GlobalEventHandlers.call(this, this.address);
     return this;

@@ -11,7 +11,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onabort(func) {
             this.addEventListener("abort", func);
             this.abort = func
-        }
+        },
     });
     this.animationcancel = null;
     Object.defineProperty(this, "onanimationcancel", {
@@ -22,7 +22,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onanimationcancel(func) {
             this.addEventListener("animationcancel", func);
             this.animationcancel = func
-        }
+        },
     });
     this.animationend = null;
     Object.defineProperty(this, "onanimationend", {
@@ -33,7 +33,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onanimationend(func) {
             this.addEventListener("animationend", func);
             this.animationend = func
-        }
+        },
     });
     this.animationiteration = null;
     Object.defineProperty(this, "onanimationiteration", {
@@ -44,7 +44,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onanimationiteration(func) {
             this.addEventListener("animationiteration", func);
             this.animationiteration = func
-        }
+        },
     });
     this.animationstart = null;
     Object.defineProperty(this, "onanimationstart", {
@@ -55,7 +55,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onanimationstart(func) {
             this.addEventListener("animationstart", func);
             this.animationstart = func
-        }
+        },
     });
     this.auxclick = null;
     Object.defineProperty(this, "onauxclick", {
@@ -66,7 +66,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onauxclick(func) {
             this.addEventListener("auxclick", func);
             this.auxclick = func
-        }
+        },
     });
 	/*
     this.blur = null;
@@ -78,7 +78,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onblur(func) {
             this.addEventListener("blur", func);
             this.blur = func
-        }
+        },
     });
 	*/
     this.error = null;
@@ -90,7 +90,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onerror(func) {
             this.addEventListener("error", func);
             this.error = func
-        }
+        },
     });
 	/*
     this.focus = null;
@@ -102,7 +102,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onfocus(func) {
             this.addEventListener("focus", func);
             this.focus = func
-        }
+        },
     });
 	*/
     this.canplay = null;
@@ -114,7 +114,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function oncanplay(func) {
             this.addEventListener("canplay", func);
             this.canplay = func
-        }
+        },
     });
     this.canplaythrough = null;
     Object.defineProperty(this, "oncanplaythrough", {
@@ -125,7 +125,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function oncanplaythrough(func) {
             this.addEventListener("canplaythrough", func);
             this.canplaythrough = func
-        }
+        },
     });
     this.change = null;
     Object.defineProperty(this, "onchange", {
@@ -136,7 +136,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onchange(func) {
             this.addEventListener("change", func);
             this.change = func
-        }
+        },
     });
     this.click = null;
     Object.defineProperty(this, "onclick", {
@@ -147,7 +147,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onclick(func) {
             this.addEventListener("click", func);
             this.click = func;
-        }
+        },
     });
 	/*
     this.close = null;
@@ -159,7 +159,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onclose(func) {
             this.addEventListener("close", func);
             this.close = func
-        }
+        },
     });
 	*/
     this.contextmenu = null;
@@ -171,7 +171,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function oncontextmenu(func) {
             this.addEventListener("contextmenu", func);
             this.contextmenu = func
-        }
+        },
     });
     this.cuechange = null;
     Object.defineProperty(this, "oncuechange", {
@@ -182,7 +182,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function oncuechange(func) {
             this.addEventListener("cuechange", func);
             this.cuechange = func
-        }
+        },
     });
     this.dblclick = null;
     Object.defineProperty(this, "ondblclick", {
@@ -193,7 +193,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function ondblclick(func) {
             this.addEventListener("dblclick", func);
             this.dblclick = func
-        }
+        },
     });
     this.drag = null;
     Object.defineProperty(this, "ondrag", {
@@ -204,7 +204,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function ondrag(func) {
             this.addEventListener("drag", func);
             this.drag = func
-        }
+        },
     });
     this.dragend = null;
     Object.defineProperty(this, "ondragend", {
@@ -215,7 +215,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function ondragend(func) {
             this.addEventListener("dragend", func);
             this.dragend = func
-        }
+        },
     });
     this.dragenter = null;
     Object.defineProperty(this, "ondragenter", {
@@ -226,7 +226,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function ondragenter(func) {
             this.addEventListener("dragenter", func);
             this.dragenter = func
-        }
+        },
     });
     this.dragexit = null;
     Object.defineProperty(this, "ondragexit", {
@@ -237,7 +237,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function ondragexit(func) {
             this.addEventListener("dragexit", func);
             this.dragexit = func
-        }
+        },
     });
     this.dragleave = null;
     Object.defineProperty(this, "ondragleave", {
@@ -248,7 +248,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function ondragleave(func) {
             this.addEventListener("dragleave", func);
             this.dragleave = func
-        }
+        },
     });
     this.dragover = null;
     Object.defineProperty(this, "ondragover", {
@@ -259,7 +259,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function ondragover(func) {
             this.addEventListener("dragover", func);
             this.dragover = func
-        }
+        },
     });
     this.dragstart = null;
     Object.defineProperty(this, "ondragstart", {
@@ -270,7 +270,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function ondragstart(func) {
             this.addEventListener("dragstart", func);
             this.dragstart = func
-        }
+        },
     });
     this.drop = null;
     Object.defineProperty(this, "ondrop", {
@@ -281,7 +281,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function ondrop(func) {
             this.addEventListener("drop", func);
             this.drop = func
-        }
+        },
     });
     this.durationchange = null;
     Object.defineProperty(this, "ondurationchange", {
@@ -292,7 +292,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function ondurationchange(func) {
             this.addEventListener("durationchange", func);
             this.durationchange = func
-        }
+        },
     });
     this.emptied = null;
     Object.defineProperty(this, "onemptied", {
@@ -303,7 +303,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onemptied(func) {
             this.addEventListener("emptied", func);
             this.emptied = func
-        }
+        },
     });
     this.ended = null;
     Object.defineProperty(this, "onended", {
@@ -314,7 +314,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onended(func) {
             this.addEventListener("ended", func);
             this.ended = func
-        }
+        },
     });
     this.gotpointercapture = null;
     Object.defineProperty(this, "ongotpointercapture", {
@@ -325,7 +325,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function ongotpointercapture(func) {
             this.addEventListener("gotpointercapture", func);
             this.gotpointercapture = func
-        }
+        },
     });
     this.input = null;
     Object.defineProperty(this, "oninput", {
@@ -336,7 +336,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function oninput(func) {
             this.addEventListener("input", func);
             this.input = func
-        }
+        },
     });
     this.invalid = null;
     Object.defineProperty(this, "oninvalid", {
@@ -347,7 +347,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function oninvalid(func) {
             this.addEventListener("invalid", func);
             this.invalid = func
-        }
+        },
     });
     this.keydown = null;
     Object.defineProperty(this, "onkeydown", {
@@ -358,7 +358,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onkeydown(func) {
             this.addEventListener("keydown", func);
             this.keydown = func
-        }
+        },
     });
     this.keypress = null;
     Object.defineProperty(this, "onkeypress", {
@@ -369,7 +369,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onkeypress(func) {
             this.addEventListener("keypress", func);
             this.keypress = func
-        }
+        },
     });
     this.keyup = null;
     Object.defineProperty(this, "onkeyup", {
@@ -380,7 +380,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onkeyup(func) {
             this.addEventListener("keyup", func);
             this.keyup = func
-        }
+        },
     });
     this.load = null;
     Object.defineProperty(this, "onload", {
@@ -391,7 +391,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onload(func) {
             this.addEventListener("load", func);
             this.load = func
-        }
+        },
     });
     this.loadeddata = null;
     Object.defineProperty(this, "onloadeddata", {
@@ -402,7 +402,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onloadeddata(func) {
             this.addEventListener("loadeddata", func);
             this.loadeddata = func
-        }
+        },
     });
     this.loadedmetadata = null;
     Object.defineProperty(this, "onloadedmetadata", {
@@ -413,7 +413,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onloadedmetadata(func) {
             this.addEventListener("loadedmetadata", func);
             this.loadedmetadata = func
-        }
+        },
     });
     this.loadend = null;
     Object.defineProperty(this, "onloadend", {
@@ -424,7 +424,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onloadend(func) {
             this.addEventListener("loadend", func);
             this.loadend = func
-        }
+        },
     });
     this.loadstart = null;
     Object.defineProperty(this, "onloadstart", {
@@ -435,7 +435,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onloadstart(func) {
             this.addEventListener("loadstart", func);
             this.loadstart = func
-        }
+        },
     });
     this.lostpointercapture = null;
     Object.defineProperty(this, "onlostpointercapture", {
@@ -446,7 +446,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onlostpointercapture(func) {
             this.addEventListener("lostpointercapture", func);
             this.lostpointercapture = func
-        }
+        },
     });
     this.mousedown = null;
     Object.defineProperty(this, "onmousedown", {
@@ -457,7 +457,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onmousedown(func) {
             this.addEventListener("mousedown", func);
             this.mousedown = func
-        }
+        },
     });
     this.mouseenter = null;
     Object.defineProperty(this, "onmouseenter", {
@@ -468,7 +468,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onmouseenter(func) {
             this.addEventListener("mouseenter", func);
             this.mouseenter = func
-        }
+        },
     });
     this.mouseleave = null;
     Object.defineProperty(this, "onmouseleave", {
@@ -479,7 +479,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onmouseleave(func) {
             this.addEventListener("mouseleave", func);
             this.mouseleave = func
-        }
+        },
     });
     this.mousemove = null;
     Object.defineProperty(this, "onmousemove", {
@@ -490,7 +490,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onmousemove(func) {
             this.addEventListener("mousemove", func);
             this.mousemove = func
-        }
+        },
     });
     this.mouseout = null;
     Object.defineProperty(this, "onmouseout", {
@@ -501,7 +501,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onmouseout(func) {
             this.addEventListener("mouseout", func);
             this.mouseout = func
-        }
+        },
     });
     this.mouseover = null;
     Object.defineProperty(this, "onmouseover", {
@@ -512,7 +512,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onmouseover(func) {
             this.addEventListener("mouseover", func);
             this.mouseover = func
-        }
+        },
     });
     this.mouseup = null;
     Object.defineProperty(this, "onmouseup", {
@@ -523,7 +523,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onmouseup(func) {
             this.addEventListener("mouseup", func);
             this.mouseup = func
-        }
+        },
     });
     this.mousewheel = null;
     Object.defineProperty(this, "onmousewheel", {
@@ -534,7 +534,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onmousewheel(func) {
             this.addEventListener("mousewheel", func);
             this.mousewheel = func
-        }
+        },
     });
     this.wheel = null;
     Object.defineProperty(this, "onwheel", {
@@ -545,7 +545,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onwheel(func) {
             this.addEventListener("wheel", func);
             this.wheel = func
-        }
+        },
     });
     this.pause = null;
     Object.defineProperty(this, "onpause", {
@@ -556,7 +556,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onpause(func) {
             this.addEventListener("pause", func);
             this.pause = func
-        }
+        },
     });
     this.play = null;
     Object.defineProperty(this, "onplay", {
@@ -567,7 +567,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onplay(func) {
             this.addEventListener("play", func);
             this.play = func
-        }
+        },
     });
     this.playing = null;
     Object.defineProperty(this, "onplaying", {
@@ -578,7 +578,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onplaying(func) {
             this.addEventListener("playing", func);
             this.playing = func
-        }
+        },
     });
     this.pointerdown = null;
     Object.defineProperty(this, "onpointerdown", {
@@ -589,7 +589,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onpointerdown(func) {
             this.addEventListener("pointerdown", func);
             this.pointerdown = func
-        }
+        },
     });
     this.pointermov = null;
     Object.defineProperty(this, "onpointermove", {
@@ -600,7 +600,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onpointermove(func) {
             this.addEventListener("pointermov", func);
             this.pointermov = func
-        }
+        },
     });
     this.pointerup = null;
     Object.defineProperty(this, "onpointerup", {
@@ -611,7 +611,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onpointerup(func) {
             this.addEventListener("pointerup", func);
             this.pointerup = func
-        }
+        },
     });
     this.pointercancel = null;
     Object.defineProperty(this, "onpointercancel", {
@@ -622,7 +622,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onpointercancel(func) {
             this.addEventListener("pointercancel", func);
             this.pointercancel = func
-        }
+        },
     });
     this.pointerover = null;
     Object.defineProperty(this, "onpointerover", {
@@ -633,7 +633,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onpointerover(func) {
             this.addEventListener("pointerover", func);
             this.pointerover = func
-        }
+        },
     });
     this.pointerout = null;
     Object.defineProperty(this, "onpointerout", {
@@ -644,7 +644,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onpointerout(func) {
             this.addEventListener("pointerout", func);
             this.pointerout = func
-        }
+        },
     });
     this.pointerenter = null;
     Object.defineProperty(this, "onpointerenter", {
@@ -655,7 +655,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onpointerenter(func) {
             this.addEventListener("pointerenter", func);
             this.pointerenter = func
-        }
+        },
     });
     this.pointerleave = null;
     Object.defineProperty(this, "onpointerleave", {
@@ -666,7 +666,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onpointerleave(func) {
             this.addEventListener("pointerleave", func);
             this.pointerleave = func
-        }
+        },
     });
     this.pointerlockchange = null;
     Object.defineProperty(this, "onpointerlockchange", {
@@ -677,7 +677,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onpointerlockchange(func) {
             this.addEventListener("pointerlockchange", func);
             this.pointerlockchange = func
-        }
+        },
     });
     this.pointerlockerror = null;
     Object.defineProperty(this, "onpointerlockerror", {
@@ -688,7 +688,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onpointerlockerror(func) {
             this.addEventListener("pointerlockerror", func);
             this.pointerlockerror = func
-        }
+        },
     });
     this.progress = null;
     Object.defineProperty(this, "onprogress", {
@@ -699,7 +699,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onprogress(func) {
             this.addEventListener("progress", func);
             this.progress = func
-        }
+        },
     });
     this.ratechange = null;
     Object.defineProperty(this, "onratechange", {
@@ -710,7 +710,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onratechange(func) {
             this.addEventListener("ratechange", func);
             this.ratechange = func
-        }
+        },
     });
     this.reset = null;
     Object.defineProperty(this, "onreset", {
@@ -721,7 +721,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onreset(func) {
             this.addEventListener("reset", func);
             this.reset = func
-        }
+        },
     });
     this.resize = null;
     Object.defineProperty(this, "onresize", {
@@ -732,7 +732,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onresize(func) {
             this.addEventListener("resize", func);
             this.resize = func
-        }
+        },
     });
     this.scroll = null;
     Object.defineProperty(this, "onscroll", {
@@ -743,7 +743,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onscroll(func) {
             this.addEventListener("scroll", func);
             this.scroll = func
-        }
+        },
     });
     this.seeked = null;
     Object.defineProperty(this, "onseeked", {
@@ -754,7 +754,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onseeked(func) {
             this.addEventListener("seeked", func);
             this.seeked = func
-        }
+        },
     });
     this.seeking = null;
     Object.defineProperty(this, "onseeking", {
@@ -765,7 +765,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onseeking(func) {
             this.addEventListener("seeking", func);
             this.seeking = func
-        }
+        },
     });
     this.select = null;
     Object.defineProperty(this, "onselect", {
@@ -776,7 +776,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onselect(func) {
             this.addEventListener("select", func);
             this.select = func
-        }
+        },
     });
     this.selectstart = null;
     Object.defineProperty(this, "onselectstart", {
@@ -787,7 +787,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onselectstart(func) {
             this.addEventListener("selectstart", func);
             this.selectstart = func
-        }
+        },
     });
     this.selectionchange = null;
     Object.defineProperty(this, "onselectionchange", {
@@ -798,7 +798,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onselectionchange(func) {
             this.addEventListener("selectionchange", func);
             this.selectionchange = func
-        }
+        },
     });
     this.show = null;
     Object.defineProperty(this, "onshow", {
@@ -809,7 +809,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onshow(func) {
             this.addEventListener("show", func);
             this.show = func
-        }
+        },
     });
     this.sort = null;
     Object.defineProperty(this, "onsort", {
@@ -820,7 +820,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onsort(func) {
             this.addEventListener("sort", func);
             this.sort = func
-        }
+        },
     });
     this.stalled = null;
     Object.defineProperty(this, "onstalled", {
@@ -831,7 +831,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onstalled(func) {
             this.addEventListener("stalled", func);
             this.stalled = func
-        }
+        },
     });
     this.submit = null;
     Object.defineProperty(this, "onsubmit", {
@@ -842,7 +842,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onsubmit(func) {
             this.addEventListener("submit", func);
             this.submit = func
-        }
+        },
     });
     this.suspend = null;
     Object.defineProperty(this, "onsuspend", {
@@ -853,7 +853,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onsuspend(func) {
             this.addEventListener("suspend", func);
             this.suspend = func
-        }
+        },
     });
     this.timeupdate = null;
     Object.defineProperty(this, "ontimeupdate", {
@@ -864,7 +864,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function ontimeupdate(func) {
             this.addEventListener("timeupdate", func);
             this.timeupdate = func
-        }
+        },
     });
     this.volumechange = null;
     Object.defineProperty(this, "onvolumechange", {
@@ -875,7 +875,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onvolumechange(func) {
             this.addEventListener("volumechange", func);
             this.volumechange = func
-        }
+        },
     });
     this.touchcancel = null;
     Object.defineProperty(this, "ontouchcancel", {
@@ -886,7 +886,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function ontouchcancel(func) {
             this.addEventListener("touchcancel", func);
             this.touchcancel = func
-        }
+        },
     });
     this.touchend = null;
     Object.defineProperty(this, "ontouchend", {
@@ -897,7 +897,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function ontouchend(func) {
             this.addEventListener("touchend", func);
             this.touchend = func
-        }
+        },
     });
     this.touchmove = null;
     Object.defineProperty(this, "ontouchmove", {
@@ -908,7 +908,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function ontouchmove(func) {
             this.addEventListener("touchmove", func);
             this.touchmove = func
-        }
+        },
     });
     this.ontouchstart = null;
     Object.defineProperty(this, "ontouchstart", {
@@ -919,7 +919,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function ontouchstart(func) {
             this.addEventListener("touchstart", func);
             this.touchstart = func
-        }
+        },
     });
     this.transitioncancel = null;
     Object.defineProperty(this, "ontransitioncancel", {
@@ -930,7 +930,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function ontransitioncancel(func) {
             this.addEventListener("transitioncancel", func);
             this.transitioncancel = func
-        }
+        },
     });
     this.transitionend = null;
     Object.defineProperty(this, "ontransitionend", {
@@ -941,7 +941,7 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function ontransitionend(func) {
             this.addEventListener("transitionend", func);
             this.transitionend = func
-        }
+        },
     });
     this.waiting = null;
     Object.defineProperty(this, "onwaiting", {
@@ -952,13 +952,12 @@ var GlobalEventHandlers = function GlobalEventHandlers(pointer) {
         set: function onwaiting(func) {
             this.addEventListener("waiting", func);
             this.waiting = func
-        }
+        },
     });
 	
-	if(this.toString() === "[object Object]"){
-		this.toString = function(){
-			return "[object GlobalEventHandlers]"
-		}
-	}
+	
+	////// toString //////
+	if(this.toString() === "[object Object]")
+		this.toString = function(){ return "[object GlobalEventHandlers]" }
 }
 GlobalEventHandlers.prototype = EventTarget.prototype;
