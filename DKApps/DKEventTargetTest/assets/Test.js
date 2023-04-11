@@ -59,6 +59,8 @@ obj.dispatchEvent(myCustomEvent);
 
 ////// ConsoleWindow //////
 const myConsoleWindow = new DKConsoleWindow()
+console.log("myConsoleWindow.columns = "+myConsoleWindow.columns)
+console.log("myConsoleWindow.rows = "	+myConsoleWindow.rows)
 
 
 

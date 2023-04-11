@@ -17,6 +17,11 @@ public:
 		////// Constructor //////
 		DKDuktape::AttachFunction("CPP_DKConsoleWindow", DKConsoleWindowJS::constructor);
 		
+		
+		////// Instance properties //////
+		DKDuktape::AttachFunction("CPP_DKConsoleWindow_columns", DKConsoleWindowJS::columns);
+		DKDuktape::AttachFunction("CPP_DKConsoleWindow_rows", DKConsoleWindowJS::rows);	
+			
 			
 		////// Load .js files
 		DKClass::DKCreate("DKEventTargetTest/DKConsoleWindow.js");
@@ -26,7 +31,6 @@ public:
 	
 	
 	////// Constructor //////
-	// [Event()] https://developer.mozilla.org/en-US/docs/Web/API/Event/Event
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKINFO("CPP_DKConsoleWindow()\n");
@@ -35,6 +39,28 @@ public:
 		duk_push_string(ctx, eventTargetAddress.c_str());	
 		return true;
 	}
+	
+	
+	////// Instance properties //////
+	static int columns(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString eventTargetAddress = duk_require_string(ctx, 0);
+		DKConsoleWindow* eventTarget = (DKConsoleWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		if (duk_is_number(ctx, 1))
+			eventTarget->columns = duk_to_uint(ctx, 1);
+		duk_push_uint(ctx, eventTarget->columns);	
+		return true;
+	}
+	static int rows(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString eventTargetAddress = duk_require_string(ctx, 0);
+		DKConsoleWindow* eventTarget = (DKConsoleWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		if (duk_is_number(ctx, 1))
+			eventTarget->rows = duk_to_uint(ctx, 1);
+		duk_push_uint(ctx, eventTarget->rows);	
+		return true;
+	}
+	
 
 };
 REGISTER_OBJECT(DKConsoleWindowJS, true)

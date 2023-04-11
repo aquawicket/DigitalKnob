@@ -131,18 +131,19 @@ DKConsoleWindow::DKConsoleWindow() : DKWindow() {
 
 	// FocusEvent
 	//relatedTarget = "";
+	
+	columns = 0;
+	rows = 0;
 
 	//// Instance properties ////
 	/*
 	DKDuktape::AttachFunction("CPP_DKConsoleWindow_closed", DKConsoleWindow::closed);
-	DKDuktape::AttachFunction("CPP_DKConsoleWindow_columns", DKConsoleWindow::Columns);
 	DKDuktape::AttachFunction("CPP_DKConsoleWindow_fullScreen", DKConsoleWindow::fullScreen);
 	DKDuktape::AttachFunction("CPP_DKConsoleWindow_innerHeight", DKConsoleWindow::innerHeight);
 	DKDuktape::AttachFunction("CPP_DKConsoleWindow_innerWidth", DKConsoleWindow::innerWidth);
 	DKDuktape::AttachFunction("CPP_DKConsoleWindow_name", DKConsoleWindow::name);
 	DKDuktape::AttachFunction("CPP_DKConsoleWindow_outerHeight", DKConsoleWindow::outerHeight);
 	DKDuktape::AttachFunction("CPP_DKConsoleWindow_outerWidth", DKConsoleWindow::outerWidth);
-	DKDuktape::AttachFunction("CPP_DKConsoleWindow_rows", DKConsoleWindow::Rows);
 	DKDuktape::AttachFunction("CPP_DKConsoleWindow_screenX", DKConsoleWindow::ScreenX);
 	DKDuktape::AttachFunction("CPP_DKConsoleWindow_screenLeft", DKConsoleWindow::screenLeft);
 	DKDuktape::AttachFunction("CPP_DKConsoleWindow_screenY", DKConsoleWindow::ScreenY);
@@ -159,9 +160,6 @@ DKConsoleWindow::DKConsoleWindow() : DKWindow() {
 	*/
 
 	DKApp::AppendLoopFunc(&DKConsoleWindow::Loop, this);
-	
-	DKString address = DKDuktape::pointerToAddress(this);
-	DKINFO("CPP ConsoleWindow address = "+address+"\n");
 }
 
 
@@ -230,12 +228,6 @@ int DKConsoleWindow::closed(duk_context* ctx) {
 	bool isClosed = false;
 	duk_push_boolean(ctx, isClosed);
 	return true;
-}
-
-int DKConsoleWindow::Columns(duk_context* ctx) {
-    DKDEBUGFUNC(ctx);
-    duk_push_uint(ctx, DKConsoleWindow::Get()->columns);
-    return true;
 }
 
 int DKConsoleWindow::fullScreen(duk_context* ctx) {
@@ -355,12 +347,6 @@ int DKConsoleWindow::outerWidth(duk_context* ctx) {
 		duk_push_uint(ctx, oWidth);
 	#endif
 	return true;
-}
-
-int DKConsoleWindow::Rows(duk_context* ctx) {
-    DKDEBUGFUNC(ctx);
-    duk_push_uint(ctx, DKConsoleWindow::Get()->rows);
-    return true;
 }
 
 int DKConsoleWindow::ScreenX(duk_context* ctx) {
@@ -510,7 +496,7 @@ void DKConsoleWindow::ErrorExit(LPCSTR lpszMessage) {
 
 void DKConsoleWindow::FocusEventProc(FOCUS_EVENT_RECORD fer) {
     DKDEBUGFUNC(fer);
-    relatedTarget = eventTargetAddress;
+	relatedTarget = eventTargetAddress;
 
     if (!fer.bSetFocus) {
         //1. blur: sent after element A loses focus.
@@ -596,6 +582,12 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
 		keydown_event.metaKey = metaKey;
 		keydown_event.repeat = repeat;
 		keydown_event.shiftKey = shiftKey;
+		//keydown_event._char = _char;
+		//keydown_event.charCode = charCode;
+		//keydown_event.keyCode = keyCode;
+		//keydown_event.keyIdentifier = keyIdentifier;
+		//keydown_event.keyLocation = keyLocation;
+		//keydown_event.which = which;
 		dispatchEvent(keydown_event);
 
 		//Only fire keypress on alphanumeric keys.
@@ -612,6 +604,12 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
 		keypress_event.metaKey = metaKey;
 		keypress_event.repeat = repeat;
 		keypress_event.shiftKey = shiftKey;
+		//keydown_event._char = _char;
+		//keydown_event.charCode = charCode;
+		//keydown_event.keyCode = keyCode;
+		//keydown_event.keyIdentifier = keyIdentifier;
+		//keydown_event.keyLocation = keyLocation;
+		//keydown_event.which = which;
 		dispatchEvent(keypress_event);
     }
     else {
@@ -626,6 +624,12 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
 		keyup_event.metaKey = metaKey;
 		keyup_event.repeat = repeat;
 		keyup_event.shiftKey = shiftKey;
+		//keydown_event._char = _char;
+		//keydown_event.charCode = charCode;
+		//keydown_event.keyCode = keyCode;
+		//keydown_event.keyIdentifier = keyIdentifier;
+		//keydown_event.keyLocation = keyLocation;
+		//keydown_event.which = which;
 		dispatchEvent(keyup_event);
     }
 }
@@ -701,8 +705,30 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                     button = 0;
 
 					DKMouseEvent mousedown_event("mousedown", "");
+					mousedown_event.altKey = altKey;
 					mousedown_event.button = button;
 					mousedown_event.buttons = buttons;
+					mousedown_event.clientX = clientX;
+					mousedown_event.clientY = clientY;
+					mousedown_event.ctrlKey = ctrlKey;
+					mousedown_event.layerX = layerX;
+					mousedown_event.layerY = layerY;
+					mousedown_event.metaKey = metaKey;
+					mousedown_event.movementX = movementX;
+					mousedown_event.movementY = movementY;
+					mousedown_event.offsetX = offsetX;
+					mousedown_event.offsetY = offsetY;
+					mousedown_event.pageX = pageX;
+					mousedown_event.pageY = pageY;
+					mousedown_event.relatedTarget = relatedTarget;
+					mousedown_event.screenX = screenX;
+					mousedown_event.screenY = screenY;
+					mousedown_event.shiftKey = shiftKey;
+					mousedown_event.mozPressure = mozPressure;
+					mousedown_event.mozInputSource = mozInputSource;
+					mousedown_event.webkitForce = webkitForce;
+					mousedown_event.x = x;
+					mousedown_event.y = y;
 					dispatchEvent(mousedown_event);
 					
                     break;
@@ -713,13 +739,57 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                 button = 0;
 
 				DKMouseEvent mouseup_event("mouseup", "");
+				mouseup_event.altKey = altKey;
 				mouseup_event.button = button;
 				mouseup_event.buttons = buttons;
+				mouseup_event.clientX = clientX;
+				mouseup_event.clientY = clientY;
+				mouseup_event.ctrlKey = ctrlKey;
+				mouseup_event.layerX = layerX;
+				mouseup_event.layerY = layerY;
+				mouseup_event.metaKey = metaKey;
+				mouseup_event.movementX = movementX;
+				mouseup_event.movementY = movementY;
+				mouseup_event.offsetX = offsetX;
+				mouseup_event.offsetY = offsetY;
+				mouseup_event.pageX = pageX;
+				mouseup_event.pageY = pageY;
+				mouseup_event.relatedTarget = relatedTarget;
+				mouseup_event.screenX = screenX;
+				mouseup_event.screenY = screenY;
+				mouseup_event.shiftKey = shiftKey;
+				mouseup_event.mozPressure = mozPressure;
+				mouseup_event.mozInputSource = mozInputSource;
+				mouseup_event.webkitForce = webkitForce;
+				mouseup_event.x = x;
+				mouseup_event.y = y;
 				dispatchEvent(mouseup_event);
 
 				DKMouseEvent click_event("click", "");
+				click_event.altKey = altKey;
 				click_event.button = button;
 				click_event.buttons = buttons;
+				click_event.clientX = clientX;
+				click_event.clientY = clientY;
+				click_event.ctrlKey = ctrlKey;
+				click_event.layerX = layerX;
+				click_event.layerY = layerY;
+				click_event.metaKey = metaKey;
+				click_event.movementX = movementX;
+				click_event.movementY = movementY;
+				click_event.offsetX = offsetX;
+				click_event.offsetY = offsetY;
+				click_event.pageX = pageX;
+				click_event.pageY = pageY;
+				click_event.relatedTarget = relatedTarget;
+				click_event.screenX = screenX;
+				click_event.screenY = screenY;
+				click_event.shiftKey = shiftKey;
+				click_event.mozPressure = mozPressure;
+				click_event.mozInputSource = mozInputSource;
+				click_event.webkitForce = webkitForce;
+				click_event.x = x;
+				click_event.y = y;
 				dispatchEvent(click_event);
 				
                 break;
@@ -731,8 +801,30 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                     button = 2;
 					
 					DKMouseEvent mousedown_event("mousedown", "");
+					mousedown_event.altKey = altKey;
 					mousedown_event.button = button;
 					mousedown_event.buttons = buttons;
+					mousedown_event.clientX = clientX;
+					mousedown_event.clientY = clientY;
+					mousedown_event.ctrlKey = ctrlKey;
+					mousedown_event.layerX = layerX;
+					mousedown_event.layerY = layerY;
+					mousedown_event.metaKey = metaKey;
+					mousedown_event.movementX = movementX;
+					mousedown_event.movementY = movementY;
+					mousedown_event.offsetX = offsetX;
+					mousedown_event.offsetY = offsetY;
+					mousedown_event.pageX = pageX;
+					mousedown_event.pageY = pageY;
+					mousedown_event.relatedTarget = relatedTarget;
+					mousedown_event.screenX = screenX;
+					mousedown_event.screenY = screenY;
+					mousedown_event.shiftKey = shiftKey;
+					mousedown_event.mozPressure = mozPressure;
+					mousedown_event.mozInputSource = mozInputSource;
+					mousedown_event.webkitForce = webkitForce;
+					mousedown_event.x = x;
+					mousedown_event.y = y;
 					dispatchEvent(mousedown_event);
 				
                     break;
@@ -743,13 +835,57 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                 button = 2;
 
 				DKMouseEvent mouseup_event("mouseup", "");
+				mouseup_event.altKey = altKey;
 				mouseup_event.button = button;
 				mouseup_event.buttons = buttons;
+				mouseup_event.clientX = clientX;
+				mouseup_event.clientY = clientY;
+				mouseup_event.ctrlKey = ctrlKey;
+				mouseup_event.layerX = layerX;
+				mouseup_event.layerY = layerY;
+				mouseup_event.metaKey = metaKey;
+				mouseup_event.movementX = movementX;
+				mouseup_event.movementY = movementY;
+				mouseup_event.offsetX = offsetX;
+				mouseup_event.offsetY = offsetY;
+				mouseup_event.pageX = pageX;
+				mouseup_event.pageY = pageY;
+				mouseup_event.relatedTarget = relatedTarget;
+				mouseup_event.screenX = screenX;
+				mouseup_event.screenY = screenY;
+				mouseup_event.shiftKey = shiftKey;
+				mouseup_event.mozPressure = mozPressure;
+				mouseup_event.mozInputSource = mozInputSource;
+				mouseup_event.webkitForce = webkitForce;
+				mouseup_event.x = x;
+				mouseup_event.y = y;
 				dispatchEvent(mouseup_event);
 
 				DKMouseEvent contextmenu_event("contextmenu", "");
+				contextmenu_event.altKey = altKey;
 				contextmenu_event.button = button;
 				contextmenu_event.buttons = buttons;
+				contextmenu_event.clientX = clientX;
+				contextmenu_event.clientY = clientY;
+				contextmenu_event.ctrlKey = ctrlKey;
+				contextmenu_event.layerX = layerX;
+				contextmenu_event.layerY = layerY;
+				contextmenu_event.metaKey = metaKey;
+				contextmenu_event.movementX = movementX;
+				contextmenu_event.movementY = movementY;
+				contextmenu_event.offsetX = offsetX;
+				contextmenu_event.offsetY = offsetY;
+				contextmenu_event.pageX = pageX;
+				contextmenu_event.pageY = pageY;
+				contextmenu_event.relatedTarget = relatedTarget;
+				contextmenu_event.screenX = screenX;
+				contextmenu_event.screenY = screenY;
+				contextmenu_event.shiftKey = shiftKey;
+				contextmenu_event.mozPressure = mozPressure;
+				contextmenu_event.mozInputSource = mozInputSource;
+				contextmenu_event.webkitForce = webkitForce;
+				contextmenu_event.x = x;
+				contextmenu_event.y = y;
 				dispatchEvent(contextmenu_event);
 				
                 break;
@@ -761,8 +897,30 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                     button = 1;
                     
 					DKMouseEvent mousedown_event("mousedown", "");
+					mousedown_event.altKey = altKey;
 					mousedown_event.button = button;
 					mousedown_event.buttons = buttons;
+					mousedown_event.clientX = clientX;
+					mousedown_event.clientY = clientY;
+					mousedown_event.ctrlKey = ctrlKey;
+					mousedown_event.layerX = layerX;
+					mousedown_event.layerY = layerY;
+					mousedown_event.metaKey = metaKey;
+					mousedown_event.movementX = movementX;
+					mousedown_event.movementY = movementY;
+					mousedown_event.offsetX = offsetX;
+					mousedown_event.offsetY = offsetY;
+					mousedown_event.pageX = pageX;
+					mousedown_event.pageY = pageY;
+					mousedown_event.relatedTarget = relatedTarget;
+					mousedown_event.screenX = screenX;
+					mousedown_event.screenY = screenY;
+					mousedown_event.shiftKey = shiftKey;
+					mousedown_event.mozPressure = mozPressure;
+					mousedown_event.mozInputSource = mozInputSource;
+					mousedown_event.webkitForce = webkitForce;
+					mousedown_event.x = x;
+					mousedown_event.y = y;
 					dispatchEvent(mousedown_event);
 					
                     break;
@@ -773,8 +931,30 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                 button = 1;
                 
 				DKMouseEvent mouseup_event("mouseup", "");
+				mouseup_event.altKey = altKey;
 				mouseup_event.button = button;
 				mouseup_event.buttons = buttons;
+				mouseup_event.clientX = clientX;
+				mouseup_event.clientY = clientY;
+				mouseup_event.ctrlKey = ctrlKey;
+				mouseup_event.layerX = layerX;
+				mouseup_event.layerY = layerY;
+				mouseup_event.metaKey = metaKey;
+				mouseup_event.movementX = movementX;
+				mouseup_event.movementY = movementY;
+				mouseup_event.offsetX = offsetX;
+				mouseup_event.offsetY = offsetY;
+				mouseup_event.pageX = pageX;
+				mouseup_event.pageY = pageY;
+				mouseup_event.relatedTarget = relatedTarget;
+				mouseup_event.screenX = screenX;
+				mouseup_event.screenY = screenY;
+				mouseup_event.shiftKey = shiftKey;
+				mouseup_event.mozPressure = mozPressure;
+				mouseup_event.mozInputSource = mozInputSource;
+				mouseup_event.webkitForce = webkitForce;
+				mouseup_event.x = x;
+				mouseup_event.y = y;
 				dispatchEvent(mouseup_event);
 				
                 break;
@@ -786,8 +966,30 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                     button = 3;
                     
 					DKMouseEvent mousedown_event("mousedown", "");
+					mousedown_event.altKey = altKey;
 					mousedown_event.button = button;
 					mousedown_event.buttons = buttons;
+					mousedown_event.clientX = clientX;
+					mousedown_event.clientY = clientY;
+					mousedown_event.ctrlKey = ctrlKey;
+					mousedown_event.layerX = layerX;
+					mousedown_event.layerY = layerY;
+					mousedown_event.metaKey = metaKey;
+					mousedown_event.movementX = movementX;
+					mousedown_event.movementY = movementY;
+					mousedown_event.offsetX = offsetX;
+					mousedown_event.offsetY = offsetY;
+					mousedown_event.pageX = pageX;
+					mousedown_event.pageY = pageY;
+					mousedown_event.relatedTarget = relatedTarget;
+					mousedown_event.screenX = screenX;
+					mousedown_event.screenY = screenY;
+					mousedown_event.shiftKey = shiftKey;
+					mousedown_event.mozPressure = mozPressure;
+					mousedown_event.mozInputSource = mozInputSource;
+					mousedown_event.webkitForce = webkitForce;
+					mousedown_event.x = x;
+					mousedown_event.y = y;
 					dispatchEvent(mousedown_event);
 					
                     break;
@@ -798,8 +1000,30 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                 button = 3;
                 
 				DKMouseEvent mouseup_event("mouseup", "");
+				mouseup_event.altKey = altKey;
 				mouseup_event.button = button;
 				mouseup_event.buttons = buttons;
+				mouseup_event.clientX = clientX;
+				mouseup_event.clientY = clientY;
+				mouseup_event.ctrlKey = ctrlKey;
+				mouseup_event.layerX = layerX;
+				mouseup_event.layerY = layerY;
+				mouseup_event.metaKey = metaKey;
+				mouseup_event.movementX = movementX;
+				mouseup_event.movementY = movementY;
+				mouseup_event.offsetX = offsetX;
+				mouseup_event.offsetY = offsetY;
+				mouseup_event.pageX = pageX;
+				mouseup_event.pageY = pageY;
+				mouseup_event.relatedTarget = relatedTarget;
+				mouseup_event.screenX = screenX;
+				mouseup_event.screenY = screenY;
+				mouseup_event.shiftKey = shiftKey;
+				mouseup_event.mozPressure = mozPressure;
+				mouseup_event.mozInputSource = mozInputSource;
+				mouseup_event.webkitForce = webkitForce;
+				mouseup_event.x = x;
+				mouseup_event.y = y;
 				dispatchEvent(mouseup_event);
 				
                 break;
@@ -811,8 +1035,30 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                     button = 4;
                     
 					DKMouseEvent mousedown_event("mousedown", "");
+					mousedown_event.altKey = altKey;
 					mousedown_event.button = button;
 					mousedown_event.buttons = buttons;
+					mousedown_event.clientX = clientX;
+					mousedown_event.clientY = clientY;
+					mousedown_event.ctrlKey = ctrlKey;
+					mousedown_event.layerX = layerX;
+					mousedown_event.layerY = layerY;
+					mousedown_event.metaKey = metaKey;
+					mousedown_event.movementX = movementX;
+					mousedown_event.movementY = movementY;
+					mousedown_event.offsetX = offsetX;
+					mousedown_event.offsetY = offsetY;
+					mousedown_event.pageX = pageX;
+					mousedown_event.pageY = pageY;
+					mousedown_event.relatedTarget = relatedTarget;
+					mousedown_event.screenX = screenX;
+					mousedown_event.screenY = screenY;
+					mousedown_event.shiftKey = shiftKey;
+					mousedown_event.mozPressure = mozPressure;
+					mousedown_event.mozInputSource = mozInputSource;
+					mousedown_event.webkitForce = webkitForce;
+					mousedown_event.x = x;
+					mousedown_event.y = y;
 					dispatchEvent(mousedown_event);
 					
                     break;
@@ -823,8 +1069,30 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                 button = 4;
                 
 				DKMouseEvent mouseup_event("mouseup", "");
+				mouseup_event.altKey = altKey;
 				mouseup_event.button = button;
 				mouseup_event.buttons = buttons;
+				mouseup_event.clientX = clientX;
+				mouseup_event.clientY = clientY;
+				mouseup_event.ctrlKey = ctrlKey;
+				mouseup_event.layerX = layerX;
+				mouseup_event.layerY = layerY;
+				mouseup_event.metaKey = metaKey;
+				mouseup_event.movementX = movementX;
+				mouseup_event.movementY = movementY;
+				mouseup_event.offsetX = offsetX;
+				mouseup_event.offsetY = offsetY;
+				mouseup_event.pageX = pageX;
+				mouseup_event.pageY = pageY;
+				mouseup_event.relatedTarget = relatedTarget;
+				mouseup_event.screenX = screenX;
+				mouseup_event.screenY = screenY;
+				mouseup_event.shiftKey = shiftKey;
+				mouseup_event.mozPressure = mozPressure;
+				mouseup_event.mozInputSource = mozInputSource;
+				mouseup_event.webkitForce = webkitForce;
+				mouseup_event.x = x;
+				mouseup_event.y = y;
 				dispatchEvent(mouseup_event);
 				
                 break;
@@ -832,8 +1100,30 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 			break;
 		case DOUBLE_CLICK: {
 			DKMouseEvent dblclick_event("dblclick", "");
+			dblclick_event.altKey = altKey;
 			dblclick_event.button = button;
 			dblclick_event.buttons = buttons;
+			dblclick_event.clientX = clientX;
+			dblclick_event.clientY = clientY;
+			dblclick_event.ctrlKey = ctrlKey;
+			dblclick_event.layerX = layerX;
+			dblclick_event.layerY = layerY;
+			dblclick_event.metaKey = metaKey;
+			dblclick_event.movementX = movementX;
+			dblclick_event.movementY = movementY;
+			dblclick_event.offsetX = offsetX;
+			dblclick_event.offsetY = offsetY;
+			dblclick_event.pageX = pageX;
+			dblclick_event.pageY = pageY;
+			dblclick_event.relatedTarget = relatedTarget;
+			dblclick_event.screenX = screenX;
+			dblclick_event.screenY = screenY;
+			dblclick_event.shiftKey = shiftKey;
+			dblclick_event.mozPressure = mozPressure;
+			dblclick_event.mozInputSource = mozInputSource;
+			dblclick_event.webkitForce = webkitForce;
+			dblclick_event.x = x;
+			dblclick_event.y = y;
 			dispatchEvent(dblclick_event);
 			break;
 		}
@@ -844,8 +1134,31 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
             if ((int32_t)mer.dwButtonState < 0)
                 deltaX = 100;
             DKWheelEvent wheel_event("wheel", "");
-			wheel_event.button = button;
 			wheel_event.deltaX = deltaX;
+			wheel_event.altKey = altKey;
+			wheel_event.button = button;
+			wheel_event.buttons = buttons;
+			wheel_event.clientX = clientX;
+			wheel_event.clientY = clientY;
+			wheel_event.ctrlKey = ctrlKey;
+			wheel_event.layerX = layerX;
+			wheel_event.layerY = layerY;
+			wheel_event.metaKey = metaKey;
+			wheel_event.movementX = movementX;
+			wheel_event.movementY = movementY;
+			wheel_event.offsetX = offsetX;
+			wheel_event.offsetY = offsetY;
+			wheel_event.pageX = pageX;
+			wheel_event.pageY = pageY;
+			wheel_event.relatedTarget = relatedTarget;
+			wheel_event.screenX = screenX;
+			wheel_event.screenY = screenY;
+			wheel_event.shiftKey = shiftKey;
+			wheel_event.mozPressure = mozPressure;
+			wheel_event.mozInputSource = mozInputSource;
+			wheel_event.webkitForce = webkitForce;
+			wheel_event.x = x;
+			wheel_event.y = y;
 			dispatchEvent(wheel_event);
 			break;
 		}
@@ -856,8 +1169,31 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
             if ((int32_t)mer.dwButtonState < 0)
                 deltaY = 100;
 			DKWheelEvent wheel_event("wheel", "");
-			wheel_event.button = button;
 			wheel_event.deltaY = deltaY;
+			wheel_event.altKey = altKey;
+			wheel_event.button = button;
+			wheel_event.buttons = buttons;
+			wheel_event.clientX = clientX;
+			wheel_event.clientY = clientY;
+			wheel_event.ctrlKey = ctrlKey;
+			wheel_event.layerX = layerX;
+			wheel_event.layerY = layerY;
+			wheel_event.metaKey = metaKey;
+			wheel_event.movementX = movementX;
+			wheel_event.movementY = movementY;
+			wheel_event.offsetX = offsetX;
+			wheel_event.offsetY = offsetY;
+			wheel_event.pageX = pageX;
+			wheel_event.pageY = pageY;
+			wheel_event.relatedTarget = relatedTarget;
+			wheel_event.screenX = screenX;
+			wheel_event.screenY = screenY;
+			wheel_event.shiftKey = shiftKey;
+			wheel_event.mozPressure = mozPressure;
+			wheel_event.mozInputSource = mozInputSource;
+			wheel_event.webkitForce = webkitForce;
+			wheel_event.x = x;
+			wheel_event.y = y;
 			dispatchEvent(wheel_event);
 			break;
 		}
@@ -895,8 +1231,30 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
             y = clientY;
             
 			DKMouseEvent mousemove_event("mousemove", "");
+			mousemove_event.altKey = altKey;
 			mousemove_event.button = button;
 			mousemove_event.buttons = buttons;
+			mousemove_event.clientX = clientX;
+			mousemove_event.clientY = clientY;
+			mousemove_event.ctrlKey = ctrlKey;
+			mousemove_event.layerX = layerX;
+			mousemove_event.layerY = layerY;
+			mousemove_event.metaKey = metaKey;
+			mousemove_event.movementX = movementX;
+			mousemove_event.movementY = movementY;
+			mousemove_event.offsetX = offsetX;
+			mousemove_event.offsetY = offsetY;
+			mousemove_event.pageX = pageX;
+			mousemove_event.pageY = pageY;
+			mousemove_event.relatedTarget = relatedTarget;
+			mousemove_event.screenX = screenX;
+			mousemove_event.screenY = screenY;
+			mousemove_event.shiftKey = shiftKey;
+			mousemove_event.mozPressure = mozPressure;
+			mousemove_event.mozInputSource = mozInputSource;
+			mousemove_event.webkitForce = webkitForce;
+			mousemove_event.x = x;
+			mousemove_event.y = y;
 			dispatchEvent(mousemove_event);
 				
             break;
@@ -909,7 +1267,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 
 void DKConsoleWindow::ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD wbsr) {
     DKDEBUGFUNC(wbsr);
-
+	DKWARN("DKConsoleWindow::ResizeEventProc()\n");
     columns = wbsr.dwSize.X;
     rows = wbsr.dwSize.Y;
 

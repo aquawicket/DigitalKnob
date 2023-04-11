@@ -40,12 +40,12 @@ bool App::Init() {
 	DKINFO("\n");
 	DKEventTarget myTargetF;
 	myTargetF.addEventListener("eventF", &App::onevent);
-	myTargetF.dispatchEvent(DKEvent("eventF", ""));				// Event as value, created within dispatchEvent function		// warning C4239:
+	myTargetF.dispatchEvent(DKEvent("eventF", ""));				// Event as value, created within dispatchEvent function		// Error C4239:
 	
 	DKINFO("\n");
 	DKEventTarget myTargetG;
 	myTargetG.addEventListener("eventG", &App::onevent);
-	myTargetG.dispatchEvent(&DKEvent("eventG", ""));			// Event as reference, created within dispatchEvent function	// warning C4238:
+	myTargetG.dispatchEvent(&DKEvent("eventG", ""));			// Event as reference, created within dispatchEvent function	// Error C4238:
 	*/
 	
 	
@@ -107,6 +107,6 @@ bool App::oncustom(DKEvent& event) {
 	DKDEBUGFUNC(event);
 	DKINFO("cpp->oncustom() \n");
 	printEventProperties(event);
-	printCustomEventProperties(dynamic_cast<DKCustomEvent&>(event));
+	printCustomEventProperties(dynamic_cast<DKCustomEvent&>(event));	//FIXME: try to remove the need for dynamic_cast
 	return true;
 }

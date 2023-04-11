@@ -65,6 +65,12 @@ public:
 	bool metaKey;
 	bool repeat;
 	bool shiftKey;
+	//DKString _char;
+	//unsigned int charCode;
+	//unsigned int keyCode;
+	//DKString keyIdentifier;
+	//unsigned int keyLocation;
+	//unsigned int which;
 	
 	// MouseEvent
 	bool button_state[5];
