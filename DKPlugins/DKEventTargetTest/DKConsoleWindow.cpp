@@ -48,7 +48,7 @@
 
 DKConsoleWindow::DKConsoleWindow() : DKWindow() {
 	DKDEBUGFUNC();
-	//DKINFO("DKConsoleWindow::Init() \n");
+	DKINFO("DKConsoleWindow::DKConsoleWindow() \n");
 	
 	eventTargetClass = "ConsoleWindow";
 	eventTargetAddress = DKDuktape::pointerToAddress(this);
@@ -138,6 +138,27 @@ DKConsoleWindow::DKConsoleWindow() : DKWindow() {
 
 	DKApp::AppendLoopFunc(&DKConsoleWindow::Loop, this);
 }
+
+DKConsoleWindow::~DKConsoleWindow() {
+	DKDEBUGFUNC();
+	DKINFO("DKConsoleWindow::~DKConsoleWindow() \n");
+	#if WIN
+		SetConsoleMode(hStdin, fdwSaveOldMode); // Restore input mode on exit.
+	#endif
+}
+
+bool DKConsoleWindow::Init() {
+	DKDEBUGFUNC();
+	DKINFO("DKConsoleWindow::Init() \n");
+	return true;
+}
+
+bool DKConsoleWindow::End() {
+	DKDEBUGFUNC();
+	DKINFO("DKConsoleWindow::End() \n");
+	return true;
+}
+
 
 
 void DKConsoleWindow::Loop() {

@@ -302,7 +302,7 @@ public:
 	// [Window.moveTo()] https://developer.mozilla.org/en-US/docs/Web/API/moveTo
 	virtual bool moveTo(int x, int y) {
 		DKINFO("DKWindow::moveTo("+toString(x)+", "+toString(y)+") \n");
-		return true;
+		return DKTODO();
 	}
 	// [Window.open()] https://developer.mozilla.org/en-US/docs/Web/API/open
 	void open() {

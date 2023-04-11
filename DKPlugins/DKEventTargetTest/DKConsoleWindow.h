@@ -44,13 +44,9 @@ class DKConsoleWindow : public DKWindow, public DKObjectT<DKConsoleWindow>
 {
 public:
 	DKConsoleWindow();
-	
-	~DKConsoleWindow(){
-		DKDEBUGFUNC();
-		#if WIN
-			SetConsoleMode(hStdin, fdwSaveOldMode); // Restore input mode on exit.
-		#endif
-	}
+	~DKConsoleWindow();
+	bool Init();
+	bool End();
 	
 	bool moveTo(int x, int y){
 		DKDEBUGFUNC(x, y);
