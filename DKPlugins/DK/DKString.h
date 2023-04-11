@@ -118,6 +118,6 @@ bool toStringArray(DKStringArray& arry, const DKString& str, const DKString& sep
 //DKStringArray getSettingsFromString(const DKString& filestring, const DKString& setting);
 
 DKString pointerToAddress(const void* pointer);
-static void* addressToPointer(const DKString& address);
+void* addressToPointer(const DKString& address);
 
 #endif //DKString_H
