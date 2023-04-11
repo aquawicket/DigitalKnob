@@ -4,7 +4,7 @@
 
 // [Window()] https://developer.mozilla.org/en-US/docs/Web/API/Window
 var Window = function Window(address) {
-	//console.log("Window()")
+	//console.log("Window("+address+")")
 	
 	if(address)
 		this.address = address;
@@ -22,11 +22,10 @@ var Window = function Window(address) {
 
 	
 	////// toString //////
-	if(this.toString() === "[object Object]"){
-		this.toString = function(){
-			return "[object Window]"
-		}
-	}
+	//// toString ////
+	if(this.toString() === "[object Object]")
+		this.toString = function(){	return "[object Window]" }
+	
 	
 	var eventTarget = EventTarget.call(this)
 	
