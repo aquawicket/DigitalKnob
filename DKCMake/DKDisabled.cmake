@@ -27,6 +27,7 @@ include_guard()
 # DISABLED FOR ALL TARGETS
 dk_disable(DKPlugin1)				# TODO
 dk_disable(DKPlugin2)				# TODO
+dk_disable(DKRmlTestElements)		# build errors
 dk_disable(DKWidget)				# DEPRECATED
 dk_disable(bgfx)					# TODO
 dk_disable(gradle)					# We don't need to build this from source
