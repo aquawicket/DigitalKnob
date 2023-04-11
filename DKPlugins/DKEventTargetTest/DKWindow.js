@@ -118,6 +118,16 @@ var Window = function Window(address) {
         get: function locationbar()		{ return CPP_DKWindow_locationbar(this.address) },
 		//set: function locationbar(str){ return CPP_DKWindow_locationbar(this.address, str) },
     })
+	// [Window.localStorage](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+	Object.defineProperty(this, "localStorage", {
+        get: function localStorage()		{ return CPP_DKWindow_localStorage(this.address) },
+		//set: function localStorage(str)	{ return CPP_DKWindow_localStorage(this.address, str) },
+    })
+	// [Window.menubar](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/menubar
+	Object.defineProperty(this, "menubar", {
+        get: function menubar()			{ return CPP_DKWindow_menubar(this.address) },
+		//set: function menubar(str)	{ return CPP_DKWindow_menubar(this.address, str) },
+    })
 	
 
 	////// Deprecated properties //////
