@@ -300,7 +300,8 @@ public:
 		DKTODO();
 	}
 	// [Window.moveTo()] https://developer.mozilla.org/en-US/docs/Web/API/moveTo
-	void moveTo() {
+	void moveTo(x, y) {
+		DKINFO("DKWindow::moveTo("+toString(x)+", "+toString(y)+") \n");
 		DKTODO();
 	}
 	// [Window.open()] https://developer.mozilla.org/en-US/docs/Web/API/open

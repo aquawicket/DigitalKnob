@@ -48,10 +48,27 @@ var Window = function Window(address) {
         get: function customElements()		{ return CPP_DKWindow_customElements(this.address) },
 		//set: function customElements(str)	{ return CPP_DKWindow_customElements(this.address, str) },
     })
+	// [Window.devicePixelRatio](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio
+	Object.defineProperty(this, "devicePixelRatio", {
+        get: function devicePixelRatio()		{ return CPP_DKWindow_devicePixelRatio(this.address) },
+		//set: function devicePixelRatio(num)	{ return CPP_DKWindow_devicePixelRatio(this.address, num) },
+    })
 
+
+	////// Deprecated properties //////
+	
+	
+	////// Instance methods //////
+	// [Window.moveTo()] https://developer.mozilla.org/en-US/docs/Web/API/Window/moveTo
+	Window.prototype.moveTo = function moveTo(x, y) {
+		CPP_DKWindow_moveTo(this.address, x, y)
+    }
+	
+	
+	////// Deprecated methods //////
+	
 	
 	////// toString //////
-	//// toString ////
 	if(this.toString() === "[object Object]")
 		this.toString = function(){	return "[object Window]" }
 	

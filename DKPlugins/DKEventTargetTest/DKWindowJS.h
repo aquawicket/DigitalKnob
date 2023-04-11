@@ -78,6 +78,16 @@ public:
 		//DKDuktape::AttachFunction("CPP_DKWindow_windows", DKWindowJS::windows);
 	
 		
+		////// Deprecated properties //////
+		
+		
+		////// Instance methods //////
+		DKDuktape::AttachFunction("CPP_DKWindow_moveTo", DKWindowJS::moveTo);
+		
+		
+		////// Deprecated methods //////
+		
+		
 		////// Load .js files
 		DKClass::DKCreate("DKEventTargetTest/DKWindow.js");
 		
@@ -650,6 +660,25 @@ public:
 		return true;
 	}
 	*/
+	
+	
+	////// Deprecated properties //////
+	
+	
+	////// Instance methods //////
+	// [Window.moveTo()] https://developer.mozilla.org/en-US/docs/Web/API/moveTo
+	static int moveTo(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString eventTargetAddress = duk_require_string(ctx, 0);
+		int x = duk_require_int(ctx, 1);
+		int y = duk_require_int(ctx, 2);
+		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		eventTarget->moveTo(x, y);
+		return true;
+	}
+	
+	
+	////// Deprecated methods //////
 	
 };
 REGISTER_OBJECT(DKWindowJS, true)
