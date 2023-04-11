@@ -177,7 +177,7 @@ public:
 		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
 		if (duk_is_number(ctx, 1))
 			eventTarget->devicePixelRatio = duk_to_number(ctx, 1);
-		duk_push_number(ctx, eventTarget->devicePixelRatio.c_str());	
+		duk_push_number(ctx, eventTarget->devicePixelRatio);	
 		return true;
 	}
 	// [Window.document](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/document
