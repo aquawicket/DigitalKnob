@@ -15,6 +15,9 @@ CPP_DK_Create("DKInputEventJS");
 CPP_DK_Create("DKKeyboardEventJS");
 CPP_DK_Create("DKCompositionEventJS");
 
+// https://html.spec.whatwg.org/
+CPP_DK_Create("DKWindowJS");
+
 // DigitalKnob
 CPP_DK_Create("DKConsoleWindowJS");
 
