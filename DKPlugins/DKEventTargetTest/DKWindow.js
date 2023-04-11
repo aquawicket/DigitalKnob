@@ -16,8 +16,12 @@ var Window = function Window(address) {
 	// [Window.caches](Read only)
 	Object.defineProperty(this, "caches", {
         get: function caches()		{ return CPP_DKWindow_caches(this.address) },
-		//set: function caches(str)	{ return CPP_DKWindow_caches(this.address, str) },
-		configurable: true
+		set: function caches(str)	{ return CPP_DKWindow_caches(this.address, str) },
+    })
+	// [Window.clientInformation](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/navigator
+	Object.defineProperty(this, "clientInformation", {
+        get: function clientInformation()		{ return CPP_DKWindow_clientInformation(this.address) },
+		set: function clientInformation(str)	{ return CPP_DKWindow_clientInformation(this.address, str) },
     })
 
 	
@@ -27,11 +31,6 @@ var Window = function Window(address) {
 		this.toString = function(){	return "[object Window]" }
 	
 	
-	var eventTarget = EventTarget.call(this)
-	
-	// Make properties (Read Only) after assignment
-	//Object.defineProperty(this, "???", 		{ set: undefined })
-	
-	return eventTarget
+	return EventTarget.call(this)
 };
 Window.prototype = EventTarget.prototype;

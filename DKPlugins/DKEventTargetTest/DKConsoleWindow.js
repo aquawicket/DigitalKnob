@@ -30,11 +30,6 @@ var DKConsoleWindow = function DKConsoleWindow(address) {
 		this.toString = function(){	return "[object DKConsoleWindow]" }
 	
 	
-	var eventTarget = Window.call(this, this.address)
-	
-	// Make properties (Read Only) after assignment
-	//Object.defineProperty(this, "???", 		{ set: undefined })
-	
-	return eventTarget
+	return Window.call(this, this.address)
 }
 DKConsoleWindow.prototype = Window.prototype;
