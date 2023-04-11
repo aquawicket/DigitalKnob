@@ -216,84 +216,84 @@ public:
 	
 	////// Instance methods //////
 	// [Window.atob()] https://developer.mozilla.org/en-US/docs/Web/API/Window/atob
-	void atob() {
-		DKTODO();
+	virtual bool atob() {
+		return DKTODO();
 	}
 	// [Window.alert()] https://developer.mozilla.org/en-US/docs/Web/API/Window/alert
-	void alert() {
-		DKTODO();
+	virtual bool alert() {
+		return DKTODO();
 	}
 	// [Window.blur()] https://developer.mozilla.org/en-US/docs/Web/API/Window/blur
-	void blur() {
-		DKTODO();
+	virtual bool blur() {
+		return DKTODO();
 	}
 	// [Window.btoa()] https://developer.mozilla.org/en-US/docs/Web/API/Window/btoa
-	void btoa() {
-		DKTODO();
+	virtual bool btoa() {
+		return DKTODO();
 	}
 	// [Window.cancelAnimationFrame()] https://developer.mozilla.org/en-US/docs/Web/API/Window/cancelAnimationFrame
-	void cancelAnimationFrame() {
-		DKTODO();
+	virtual bool cancelAnimationFrame() {
+		return DKTODO();
 	}
 	// [Window.cancelIdleCallback()] https://developer.mozilla.org/en-US/docs/Web/API/Window/cancelIdleCallback
-	void cancelIdleCallback() {
-		DKTODO();
+	virtual bool cancelIdleCallback() {
+		return DKTODO();
 	}
 	// [Window.clearImmediate()] https://developer.mozilla.org/en-US/docs/Web/API/Window/clearImmediate
-	void clearImmediate() {
-		DKTODO();
+	virtual bool clearImmediate() {
+		return DKTODO();
 	}
 	// [Window.clearInterval()] https://developer.mozilla.org/en-US/docs/Web/API/Window/clearInterval
-	void clearInterval() {
-		DKTODO();
+	virtual bool clearInterval() {
+		return DKTODO();
 	}
 	// [Window.clearTimeout()] https://developer.mozilla.org/en-US/docs/Web/API/Window/clearTimeout
-	void clearTimeout() {
-		DKTODO();
+	virtual bool clearTimeout() {
+		return DKTODO();
 	}
 	// [Window.close()] https://developer.mozilla.org/en-US/docs/Web/API/Window/close
-	void close() {
-		DKTODO();
+	virtual bool close() {
+		return DKTODO();
 	}
 	// [Window.confirm()] https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm
-	void confirm() {
-		DKTODO();
+	virtual bool confirm() {
+		return DKTODO();
 	}
 	// [Window.createImageBitmap()] https://developer.mozilla.org/en-US/docs/Web/API/createImageBitmap
-	void createImageBitmap() {
-		DKTODO();
+	virtual bool createImageBitmap() {
+		return DKTODO();
 	}
 	// [Window.dump()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/dump
-	void dump() {
-		DKTODO();
+	virtual bool dump() {
+		return DKTODO();
 	}
 	// [Window.fetch()] https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch
-	void fetch() {
-		DKTODO();
+	virtual bool fetch() {
+		return DKTODO();
 	}
 	// [Window.find()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/find
-	void find() {
-		DKTODO();
+	virtual bool find() {
+		return DKTODO();
 	}
 	// [Window.focus()] https://developer.mozilla.org/en-US/docs/Web/API/Window/focus
-	void focus() {
-		DKTODO();
+	virtual bool focus() {
+		return DKTODO();
 	}
 	// [Window.getComputedStyle()] https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
-	void getComputedStyle() {
-		DKTODO();
+	virtual bool getComputedStyle() {
+		return DKTODO();
 	}
 	// [Window.getDefaultComputedStyle()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/getDefaultComputedStyle
-	void getDefaultComputedStyle() {
-		DKTODO();
+	virtual bool getDefaultComputedStyle() {
+		return DKTODO();
 	}
 	// [Window.getSelection()] https://developer.mozilla.org/en-US/docs/Web/API/Window/getSelection
-	void getSelection() {
-		DKTODO();
+	virtual bool getSelection() {
+		return DKTODO();
 	}
 	// [Window.matchMedia()] https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia
-	void matchMedia() {
-		DKTODO();
+	virtual bool matchMedia() {
+		return DKTODO();
 	}
 	// [Window.moveBy()] https://developer.mozilla.org/en-US/docs/Web/API/Window/moveBy
 	virtual bool moveBy(int deltaX, int deltaY) {
@@ -304,127 +304,127 @@ public:
 		return DKTODO();
 	}
 	// [Window.open()] https://developer.mozilla.org/en-US/docs/Web/API/Window/open
-	void open() {
-		DKTODO();
+	virtual bool open() {
+		return DKTODO();
 	}
 	// [Window.postMessage()] https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage
-	void postMessage() {
-		DKTODO();
+	virtual bool postMessage() {
+		return DKTODO();
 	}
 	// [Window.print()] https://developer.mozilla.org/en-US/docs/Web/API/Window/print
-	void print() {
-		DKTODO();
+	virtual bool print() {
+		return DKTODO();
 	}
 	// [Window.prompt()] https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt
-	void prompt() {
-		DKTODO();
+	virtual bool prompt() {
+		return DKTODO();
 	}
 	// [Window.queryLocalFonts()](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Window/queryLocalFonts
-	void queryLocalFonts() {
-		DKTODO();
+	virtual bool queryLocalFonts() {
+		return DKTODO();
 	}
 	// [Window.reportError()] https://developer.mozilla.org/en-US/docs/Web/API/reportError
-	void reportError() {
-		DKTODO();
+	virtual bool reportError() {
+		return DKTODO();
 	}
 	// [Window.requestAnimationFrame()] https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame
-	void requestAnimationFrame() {
-		DKTODO();
+	virtual bool requestAnimationFrame() {
+		return DKTODO();
 	}
 	// [Window.requestIdleCallback()] https://developer.mozilla.org/en-US/docs/Web/API/Window/requestIdleCallback
-	void requestIdleCallback() {
-		DKTODO();
+	virtual bool requestIdleCallback() {
+		return DKTODO();
 	}
 	// [Window.resizeBy()] https://developer.mozilla.org/en-US/docs/Web/API/Window/resizeBy
-	void resizeBy() {
-		DKTODO();
+	virtual bool resizeBy() {
+		return DKTODO();
 	}
 	// [Window.resizeTo()] https://developer.mozilla.org/en-US/docs/Web/API/Window/resizeTo
-	void resizeTo() {
-		DKTODO();
+	virtual bool resizeTo() {
+		return DKTODO();
 	}
 	// [Window.scroll()] https://developer.mozilla.org/en-US/docs/Web/API/Window/scroll
-	void scroll() {
-		DKTODO();
+	virtual bool scroll() {
+		return DKTODO();
 	}
 	// [Window.scrollBy()] https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollBy
-	void scrollBy() {
-		DKTODO();
+	virtual bool scrollBy() {
+		return DKTODO();
 	}
 	// [Window.scrollByLines()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollByLines
-	void scrollByLines() {
-		DKTODO();
+	virtual bool scrollByLines() {
+		return DKTODO();
 	}
 	// [Window.scrollByPages()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollByPages
-	void scrollByPages() {
-		DKTODO();
+	virtual bool scrollByPages() {
+		return DKTODO();
 	}
 	// [Window.scrollTo()] https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollTo
-	void scrollTo() {
-		DKTODO();
+	virtual bool scrollTo() {
+		return DKTODO();
 	}
 	// [Window.setImmediate()] https://developer.mozilla.org/en-US/docs/Web/API/Window/setImmediate
-	void setImmediate() {
-		DKTODO();
+	virtual bool setImmediate() {
+		return DKTODO();
 	}
 	// [Window.setInterval()] https://developer.mozilla.org/en-US/docs/Web/API/Window/setInterval
-	void setInterval() {
-		DKTODO();
+	virtual bool setInterval() {
+		return DKTODO();
 	}
 	// [Window.setResizable()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/setResizable
-	void setResizable() {
-		DKTODO();
+	virtual bool setResizable() {
+		return DKTODO();
 	}
 	// [Window.setTimeout()] https://developer.mozilla.org/en-US/docs/Web/API/Window/setTimeout
-	void setTimeout() {
-		DKTODO();
+	virtual bool setTimeout() {
+		return DKTODO();
 	}
 	// [Window.sizeToContent()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/sizeToContent
-	void sizeToContent() {
-		DKTODO();
+	virtual bool sizeToContent() {
+		return DKTODO();
 	}
 	// [Window.showOpenFilePicker()](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Window/showOpenFilePicker
-	void showOpenFilePicker() {
-		DKTODO();
+	virtual bool showOpenFilePicker() {
+		return DKTODO();
 	}
 	// [Window.showSaveFilePicker()](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Window/showSaveFilePicker
-	void showSaveFilePicker() {
-		DKTODO();
+	virtual bool showSaveFilePicker() {
+		return DKTODO();
 	}
 	// [Window.showDirectoryPicker()](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Window/showDirectoryPicker
-	void showDirectoryPicker() {
-		DKTODO();
+	virtual bool showDirectoryPicker() {
+		return DKTODO();
 	}
 	// [Window.stop()] https://developer.mozilla.org/en-US/docs/Web/API/Window/stop
-	void stop() {
-		DKTODO();
+	virtual bool stop() {
+		return DKTODO();
 	}
 	// [Window.updateCommands()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/updateCommands
-	void updateCommands() {
-		DKTODO();
+	virtual bool updateCommands() {
+		return DKTODO();
 	}
 	
 	
 	////// Deprecated methods //////
 	// [Window.back()](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/back
-	void back() {
-		DKTODO();
+	virtual bool back() {
+		return DKTODO();
 	}
 	// [Window.captureEvents()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/captureEvents
-	void captureEvents() {
-		DKTODO();
+	virtual bool captureEvents() {
+		return DKTODO();
 	}
 	// [Window.forward()](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/forward
-	void forward() {
-		DKTODO();
+	virtual bool forward() {
+		return DKTODO();
 	}
 	// [Window.releaseEvents()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/releaseEvents
-	void releaseEvents() {
-		DKTODO();
+	virtual bool releaseEvents() {
+		return DKTODO();
 	}
 	// [Window.showModalDialog()](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/showModalDialog
-	void showModalDialog() {
-		DKTODO();
+	virtual bool showModalDialog() {
+		return DKTODO();
 	}
 
 

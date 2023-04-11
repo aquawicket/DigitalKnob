@@ -386,62 +386,6 @@ int DKConsoleWindow::screenTop(duk_context* ctx) {
 	#endif
     return true;
 }
-
-//// Instance methods ////
-int DKConsoleWindow::blur(duk_context* ctx) {
-    DKDEBUGFUNC(ctx);
-	#if WIN
-		ShowWindow(GetConsoleWindow(), SW_SHOWMINNOACTIVE);
-	#endif
-	return true;
-}
-int DKConsoleWindow::close(duk_context* ctx) {
-    DKDEBUGFUNC(ctx);
-	#if WIN
-		ShowWindow(GetConsoleWindow(), SW_HIDE);
-	#endif
-	return true;
-}
-int DKConsoleWindow::focus(duk_context* ctx) {
-    DKDEBUGFUNC(ctx);
-	#if WIN
-		ShowWindow(GetConsoleWindow(), SW_SHOW);
-	#endif
-	return true;
-}
-
-int DKConsoleWindow::resizeBy(duk_context* ctx) {
-    DKDEBUGFUNC(ctx);
-	#if WIN
-		int xDelta = duk_require_int(ctx, 0);
-		int yDelta = duk_require_int(ctx, 1);
-		RECT rect;
-		GetWindowRect(GetConsoleWindow(), &rect);
-		int X = rect.left;
-		int Y = rect.top;
-		int nWidth = rect.right - rect.left + xDelta;
-		int nHeight = rect.bottom - rect.top + yDelta;
-		if (!MoveWindow(GetConsoleWindow(), X, Y, nWidth, nHeight, TRUE))
-			return DKERROR("MoveWindow() failed");
-	#endif
-	return true;
-}
-int DKConsoleWindow::resizeTo(duk_context* ctx) {
-    DKDEBUGFUNC(ctx);
-	#if WIN
-		int width = duk_require_int(ctx, 0);
-		int height = duk_require_int(ctx, 1);
-		RECT rect;
-		GetWindowRect(GetConsoleWindow(), &rect);
-		int X = rect.left;
-		int Y = rect.top;
-		int nWidth = width;
-		int nHeight = height;
-		if (!MoveWindow(GetConsoleWindow(), X, Y, nWidth, nHeight, TRUE))
-			return DKERROR("MoveWindow() failed");
-	#endif
-    return true;
-}
 */	
 	
 #if WIN

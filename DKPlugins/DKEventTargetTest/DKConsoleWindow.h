@@ -48,8 +48,29 @@ public:
 	bool Init();
 	bool End();
 	
+	int blur() {
+		DKDEBUGFUNC();
+		#if WIN
+			ShowWindow(GetConsoleWindow(), SW_SHOWMINNOACTIVE);
+		#endif
+		return true;
+	}
+	bool close() {
+		DKDEBUGFUNC();
+		#if WIN
+			ShowWindow(GetConsoleWindow(), SW_HIDE);
+		#endif
+		return true;
+	}
+	bool focus() {
+		DKDEBUGFUNC();
+		#if WIN
+			ShowWindow(GetConsoleWindow(), SW_SHOW);
+		#endif
+		return true;
+	}
 	bool moveBy(int deltaX, int deltaY) {
-		DKDEBUGFUNC(ctx);
+		DKDEBUGFUNC(deltaX, deltaY);
 		#if WIN
 			RECT rect;
 			GetWindowRect(GetConsoleWindow(), &rect);
@@ -72,6 +93,34 @@ public:
 			if (!MoveWindow(GetConsoleWindow(), x, y, nWidth, nHeight, TRUE)){
 				return DKERROR("MoveWindow() failed");
 			}
+		#endif
+		return true;
+	}
+	bool resizeBy(int xDelta, int yDelta) {
+		DKDEBUGFUNC(xDelta, yDelta);
+		#if WIN
+			RECT rect;
+			GetWindowRect(GetConsoleWindow(), &rect);
+			int X = rect.left;
+			int Y = rect.top;
+			int nWidth = rect.right - rect.left + xDelta;
+			int nHeight = rect.bottom - rect.top + yDelta;
+			if (!MoveWindow(GetConsoleWindow(), X, Y, nWidth, nHeight, TRUE))
+				return DKERROR("MoveWindow() failed");
+		#endif
+		return true;
+	}
+	bool resizeTo(int width, int height) {
+		DKDEBUGFUNC(width, height);
+		#if WIN
+			RECT rect;
+			GetWindowRect(GetConsoleWindow(), &rect);
+			int X = rect.left;
+			int Y = rect.top;
+			int nWidth = width;
+			int nHeight = height;
+			if (!MoveWindow(GetConsoleWindow(), X, Y, nWidth, nHeight, TRUE))
+				return DKERROR("MoveWindow() failed");
 		#endif
 		return true;
 	}
