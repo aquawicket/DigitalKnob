@@ -111,7 +111,7 @@ var Window = function Window(address) {
 	// [Window.location] https://developer.mozilla.org/en-US/docs/Web/API/Window/location
 	Object.defineProperty(this, "location", {
         get: function location()	{ return CPP_DKWindow_location(this.address) },
-		set: function location(str)	{ return CPP_DKWindow_location(this.address, str) },
+		set: function location(str)	{ return CPP_DKWindow_location(this.address, str) }
     })
 	// [Window.locationbar](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/locationbar
 	Object.defineProperty(this, "locationbar", {
@@ -127,6 +127,21 @@ var Window = function Window(address) {
 	Object.defineProperty(this, "menubar", {
         get: function menubar()			{ return CPP_DKWindow_menubar(this.address) },
 		//set: function menubar(str)	{ return CPP_DKWindow_menubar(this.address, str) },
+    })
+	// [Window.mozInnerScreenX](Read only)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/mozInnerScreenX
+	Object.defineProperty(this, "mozInnerScreenX", {
+        get: function mozInnerScreenX()		{ return CPP_DKWindow_mozInnerScreenX(this.address) },
+		//set: function mozInnerScreenX(num){ return CPP_DKWindow_mozInnerScreenX(this.address, num) },
+    })
+	// [Window.mozInnerScreenY](Read only)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/mozInnerScreenY
+	Object.defineProperty(this, "mozInnerScreenY", {
+        get: function mozInnerScreenY()		{ return CPP_DKWindow_mozInnerScreenY(this.address) },
+		//set: function mozInnerScreenY(num){ return CPP_DKWindow_mozInnerScreenY(this.address, num) },
+    })
+	// [Window.name] https://developer.mozilla.org/en-US/docs/Web/API/Window/name
+	Object.defineProperty(this, "name", {
+        get: function name()	{ return CPP_DKWindow_name(this.address) },
+		set: function name(str)	{ return CPP_DKWindow_name(this.address, str) }
     })
 	
 
