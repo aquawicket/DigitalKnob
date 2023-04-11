@@ -27,6 +27,7 @@ include_guard()
 # DISABLED FOR ALL TARGETS
 dk_disable(DKPlugin1)				# TODO
 dk_disable(DKPlugin2)				# TODO
+dk_disable(DKRmlIframe)		# build errors
 dk_disable(DKRmlTestElements)		# build errors
 dk_disable(DKWidget)				# DEPRECATED
 dk_disable(bgfx)					# TODO
