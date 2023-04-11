@@ -24,6 +24,7 @@ public:
 		DKDuktape::AttachFunction("CPP_DKWindow_caches", DKWindowJS::caches);
 		DKDuktape::AttachFunction("CPP_DKWindow_clientInformation", DKWindowJS::clientInformation);
 		DKDuktape::AttachFunction("CPP_DKWindow_closed", DKWindowJS::closed);
+		/*
 		DKDuktape::AttachFunction("CPP_DKWindow_console", DKWindowJS::console);
 		DKDuktape::AttachFunction("CPP_DKWindow_credentialless", DKWindowJS::credentialless);
 		DKDuktape::AttachFunction("CPP_DKWindow_crypto", DKWindowJS::crypto);
@@ -76,6 +77,7 @@ public:
 		DKDuktape::AttachFunction("CPP_DKWindow_visualViewport", DKWindowJS::visualViewport);
 		DKDuktape::AttachFunction("CPP_DKWindow_window", DKWindowJS::window);
 		DKDuktape::AttachFunction("CPP_DKWindow_windows", DKWindowJS::windows);
+		*/
 	
 		
 		////// Load .js files
@@ -118,7 +120,16 @@ public:
 		duk_push_string(ctx, eventTarget->caches.c_str());	
 		return true;
 	}
-
+	// [Window.closed](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/closed
+	static int closed(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString eventTargetAddress = duk_require_string(ctx, 0);
+		DKWindow* eventTarget = (DKWindow*)DKDuktape::addressToPointer(eventTargetAddress);
+		if (duk_is_boolean(ctx, 1))
+			eventTarget->closed = duk_to_boolean(ctx, 1);
+		duk_push_string(ctx, eventTarget->closed.c_str());	
+		return true;
+	}
 
 };
 REGISTER_OBJECT(DKWindowJS, true)
