@@ -124,7 +124,8 @@ bool DKUWebSocketsServer::CreateServer(const DKString& url, const int& port){
 	serverHub.onDisconnection([this](uWS::WebSocket<uWS::SERVER> *ws, int code, char *message, size_t length) {
 		DKDEBUGFUNC(ws, code, message, length);
 		serverWebSocket = NULL;
-		DKDuktape::dispatchEvent("close", "", this);
+		DKTODO();
+		//DKDuktape::dispatchEvent("close", "", this);
 		DKINFO("Client got disconnected with data:ws->getUserData(), code:"+toString(code)+", message:<"+DKString(message, length)+"> \n");
 	});
 
@@ -148,6 +149,7 @@ void DKUWebSocketsServer::Loop(){
 bool DKUWebSocketsServer::MessageFromClient(uWS::WebSocket<uWS::SERVER>* ws, char *message, size_t length, uWS::OpCode opCode){
 	DKDEBUGFUNC(ws, message, length, opCode);
 	DKString message_  = DKString(message).substr(0, length);
+	DKTODO();
 	//DKDuktape::dispatchEvent("message", "", this);
 	DKINFO("DKUWebSocketsServer::MessageFromClient(): "+message_+"\n");
 	return true;
