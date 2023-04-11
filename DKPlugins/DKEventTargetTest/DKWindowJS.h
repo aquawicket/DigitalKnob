@@ -666,6 +666,17 @@ public:
 	
 	
 	////// Instance methods //////
+	// [Window.moveBy()] https://developer.mozilla.org/en-US/docs/Web/API/moveBy
+	static int moveBy(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString eventTargetAddress = duk_require_string(ctx, 0);
+		int deltaX = duk_require_int(ctx, 1);
+		int deltaY = duk_require_int(ctx, 2);
+		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
+		if(!eventTarget->moveBy(deltaX, deltaY))
+			return DKERROR("moveBy() failed! \n");
+		return true;
+	}
 	// [Window.moveTo()] https://developer.mozilla.org/en-US/docs/Web/API/moveTo
 	static int moveTo(duk_context* ctx){
 		DKDEBUGFUNC(ctx);

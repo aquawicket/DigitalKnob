@@ -296,12 +296,11 @@ public:
 		DKTODO();
 	}
 	// [Window.moveBy()] https://developer.mozilla.org/en-US/docs/Web/API/Window/moveBy
-	void moveBy() {
-		DKTODO();
+	virtual bool moveBy(int deltaX, int deltaY) {
+		return DKTODO();
 	}
 	// [Window.moveTo()] https://developer.mozilla.org/en-US/docs/Web/API/Window/moveTo
 	virtual bool moveTo(int x, int y) {
-		DKINFO("DKWindow::moveTo("+toString(x)+", "+toString(y)+") \n");
 		return DKTODO();
 	}
 	// [Window.open()] https://developer.mozilla.org/en-US/docs/Web/API/Window/open

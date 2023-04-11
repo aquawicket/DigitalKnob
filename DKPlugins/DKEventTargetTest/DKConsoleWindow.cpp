@@ -409,22 +409,7 @@ int DKConsoleWindow::focus(duk_context* ctx) {
 	#endif
 	return true;
 }
-int DKConsoleWindow::moveBy(duk_context* ctx) {
-    DKDEBUGFUNC(ctx);
-	#if WIN
-		int deltaX = duk_require_int(ctx, 0);
-		int deltaY = duk_require_int(ctx, 1);
-		RECT rect;
-		GetWindowRect(GetConsoleWindow(), &rect);
-		int X = rect.left + deltaX;
-		int Y = rect.top + deltaY;
-		int nWidth = rect.right - rect.left;
-		int nHeight = rect.bottom - rect.top;
-		if (!MoveWindow(GetConsoleWindow(), X, Y, nWidth, nHeight, TRUE))
-			return DKERROR("MoveWindow() failed");
-	#endif
-	return true;
-}
+
 int DKConsoleWindow::resizeBy(duk_context* ctx) {
     DKDEBUGFUNC(ctx);
 	#if WIN

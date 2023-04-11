@@ -48,9 +48,22 @@ public:
 	bool Init();
 	bool End();
 	
+	bool moveBy(int deltaX, int deltaY) {
+		DKDEBUGFUNC(ctx);
+		#if WIN
+			RECT rect;
+			GetWindowRect(GetConsoleWindow(), &rect);
+			int X = rect.left + deltaX;
+			int Y = rect.top + deltaY;
+			int nWidth = rect.right - rect.left;
+			int nHeight = rect.bottom - rect.top;
+			if (!MoveWindow(GetConsoleWindow(), X, Y, nWidth, nHeight, TRUE))
+				return DKERROR("MoveWindow() failed");
+		#endif
+		return true;
+	}
 	bool moveTo(int x, int y){
 		DKDEBUGFUNC(x, y);
-		DKINFO("DKConsoleWindow::moveTo("+toString(x)+", "+toString(y)+") \n");
 		#if WIN
 			RECT rect;
 			GetWindowRect(GetConsoleWindow(), &rect);
