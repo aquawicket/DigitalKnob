@@ -69,7 +69,7 @@ public:
 		#endif
 		return true;
 	}
-	bool moveBy(int deltaX, int deltaY) {
+	bool moveBy(int& deltaX, int& deltaY) {
 		DKDEBUGFUNC(deltaX, deltaY);
 		#if WIN
 			RECT rect;
@@ -83,7 +83,7 @@ public:
 		#endif
 		return true;
 	}
-	bool moveTo(int x, int y){
+	bool moveTo(int& x, int& y){
 		DKDEBUGFUNC(x, y);
 		#if WIN
 			RECT rect;
@@ -96,7 +96,7 @@ public:
 		#endif
 		return true;
 	}
-	bool resizeBy(int xDelta, int yDelta) {
+	bool resizeBy(int& xDelta, int& yDelta) {
 		DKDEBUGFUNC(xDelta, yDelta);
 		#if WIN
 			RECT rect;
@@ -110,7 +110,7 @@ public:
 		#endif
 		return true;
 	}
-	bool resizeTo(int width, int height) {
+	bool resizeTo(int& width, int& height) {
 		DKDEBUGFUNC(width, height);
 		#if WIN
 			RECT rect;

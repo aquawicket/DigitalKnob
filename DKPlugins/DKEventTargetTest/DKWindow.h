@@ -216,11 +216,11 @@ public:
 	
 	////// Instance methods //////
 	// [Window.atob()] https://developer.mozilla.org/en-US/docs/Web/API/Window/atob
-	virtual bool atob() {
+	virtual bool atob(DKString& encodedData) {
 		return DKTODO();
 	}
 	// [Window.alert()] https://developer.mozilla.org/en-US/docs/Web/API/Window/alert
-	virtual bool alert() {
+	virtual bool alert(DKString& message) {
 		return DKTODO();
 	}
 	// [Window.blur()] https://developer.mozilla.org/en-US/docs/Web/API/Window/blur
@@ -228,27 +228,27 @@ public:
 		return DKTODO();
 	}
 	// [Window.btoa()] https://developer.mozilla.org/en-US/docs/Web/API/Window/btoa
-	virtual bool btoa() {
+	virtual bool btoa(DKString& stringToEncode) {
 		return DKTODO();
 	}
 	// [Window.cancelAnimationFrame()] https://developer.mozilla.org/en-US/docs/Web/API/Window/cancelAnimationFrame
-	virtual bool cancelAnimationFrame() {
+	virtual bool cancelAnimationFrame(DKString& requestID) {
 		return DKTODO();
 	}
 	// [Window.cancelIdleCallback()] https://developer.mozilla.org/en-US/docs/Web/API/Window/cancelIdleCallback
-	virtual bool cancelIdleCallback() {
+	virtual bool cancelIdleCallback(DKString& handle) {
 		return DKTODO();
 	}
 	// [Window.clearImmediate()] https://developer.mozilla.org/en-US/docs/Web/API/Window/clearImmediate
-	virtual bool clearImmediate() {
+	virtual bool clearImmediate(DKString& immediateID) {
 		return DKTODO();
 	}
 	// [Window.clearInterval()] https://developer.mozilla.org/en-US/docs/Web/API/Window/clearInterval
-	virtual bool clearInterval() {
+	virtual bool clearInterval(DKString& intervalID) {
 		return DKTODO();
 	}
 	// [Window.clearTimeout()] https://developer.mozilla.org/en-US/docs/Web/API/Window/clearTimeout
-	virtual bool clearTimeout() {
+	virtual bool clearTimeout(DKString& timeoutID) {
 		return DKTODO();
 	}
 	// [Window.close()] https://developer.mozilla.org/en-US/docs/Web/API/Window/close
@@ -256,7 +256,7 @@ public:
 		return DKTODO();
 	}
 	// [Window.confirm()] https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm
-	virtual bool confirm() {
+	virtual bool confirm(DKString& message) {
 		return DKTODO();
 	}
 	// [Window.createImageBitmap()] https://developer.mozilla.org/en-US/docs/Web/API/createImageBitmap
@@ -264,7 +264,7 @@ public:
 		return DKTODO();
 	}
 	// [Window.dump()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/dump
-	virtual bool dump() {
+	virtual bool dump(DKString& message) {
 		return DKTODO();
 	}
 	// [Window.fetch()] https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch
@@ -292,15 +292,15 @@ public:
 		return DKTODO();
 	}
 	// [Window.matchMedia()] https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia
-	virtual bool matchMedia() {
+	virtual bool matchMedia(DKString& mediaQueryString) {
 		return DKTODO();
 	}
 	// [Window.moveBy()] https://developer.mozilla.org/en-US/docs/Web/API/Window/moveBy
-	virtual bool moveBy(int deltaX, int deltaY) {
+	virtual bool moveBy(int& deltaX, int& deltaY) {
 		return DKTODO();
 	}
 	// [Window.moveTo()] https://developer.mozilla.org/en-US/docs/Web/API/Window/moveTo
-	virtual bool moveTo(int x, int y) {
+	virtual bool moveTo(int& x, int& y) {
 		return DKTODO();
 	}
 	// [Window.open()] https://developer.mozilla.org/en-US/docs/Web/API/Window/open
@@ -336,11 +336,11 @@ public:
 		return DKTODO();
 	}
 	// [Window.resizeBy()] https://developer.mozilla.org/en-US/docs/Web/API/Window/resizeBy
-	virtual bool resizeBy() {
+	virtual bool resizeBy(int& xDelta, int& yDelta) {
 		return DKTODO();
 	}
 	// [Window.resizeTo()] https://developer.mozilla.org/en-US/docs/Web/API/Window/resizeTo
-	virtual bool resizeTo() {
+	virtual bool resizeTo(int& width, int& height) {
 		return DKTODO();
 	}
 	// [Window.scroll()] https://developer.mozilla.org/en-US/docs/Web/API/Window/scroll
@@ -371,7 +371,7 @@ public:
 	virtual bool setInterval() {
 		return DKTODO();
 	}
-	// [Window.setResizable()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/setResizable
+	// [Window.setResizable()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window
 	virtual bool setResizable() {
 		return DKTODO();
 	}
@@ -400,7 +400,7 @@ public:
 		return DKTODO();
 	}
 	// [Window.updateCommands()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/updateCommands
-	virtual bool updateCommands() {
+	virtual bool updateCommands(DKString& sCommandName) {
 		return DKTODO();
 	}
 	
