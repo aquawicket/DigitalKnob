@@ -75,7 +75,7 @@ public:
 		DKDuktape::AttachFunction("CPP_DKWindow_top", DKWindowJS::top);
 		DKDuktape::AttachFunction("CPP_DKWindow_visualViewport", DKWindowJS::visualViewport);
 		DKDuktape::AttachFunction("CPP_DKWindow_window", DKWindowJS::window);
-		DKDuktape::AttachFunction("CPP_DKWindow_windows", DKWindowJS::windows);
+		//DKDuktape::AttachFunction("CPP_DKWindow_windows", DKWindowJS::windows);
 	
 		
 		////// Load .js files
@@ -639,6 +639,7 @@ public:
 		return true;
 	}
 	// [window[0], window[1], etc.] https://developer.mozilla.org/en-US/docs/Web/API/Window
+	/*
 	static int windows(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
@@ -648,6 +649,7 @@ public:
 		duk_push_string(ctx, eventTarget->windows.c_str());	
 		return true;
 	}
+	*/
 	
 };
 REGISTER_OBJECT(DKWindowJS, true)
