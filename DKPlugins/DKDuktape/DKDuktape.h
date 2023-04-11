@@ -69,10 +69,6 @@ public:
 
 	////////////////////////////////////////////
 	static int createDKObject(duk_context* _ctx);
-	//static bool doEvent(const DKString& type, const DKString& options, const void* pointer);
-	static bool dispatchEvent(const DKString& type, const DKString& options, const void* pointer);
-	//static DKString pointerToAddress(const void* pointer);
-	//static void* addressToPointer(const DKString& address);
 
 	//TODO
 	//static void AttachFunction(const DKString& name, const DKString& object, duk_c_function func, int nargs);

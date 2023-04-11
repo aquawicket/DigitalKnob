@@ -556,68 +556,13 @@ bool DKDuktape::UnloadFile(const DKString& path){
 int DKDuktape::createDKObject(duk_context* _ctx) {
 	DKDEBUGFUNC(_ctx);
 	DKString data = duk_require_string(_ctx, 0);
-	//DKObject* object = DKClass::DKCreate(data);
 	void* object = (void*)DKClass::DKCreate(data);
 	DKString address = pointerToAddress(object);
 	duk_push_string(_ctx, address.c_str());
 	return true;
 }
 
-bool DKDuktape::dispatchEvent(const DKString& type, const DKString& options, const void* pointer) {
-	DKDEBUGFUNC(type, options, pointer);
-	DKString address = pointerToAddress(pointer);
-	DKString code = "dispatchEvent('" + type + "','" + options + "','" + address + "')";
-	DKString rval;
-	DKDuktape::RunDuktape(code, rval);
-	DKINFO("rval = " + rval + "\n");
-	return true;
-}
 
-/*
-DKString pointerToAddress(const void* pointer) {
-	//DKDEBUGFUNC(event);  //EXCESSIVE LOGGING
-	if (!pointer) {
-		DKERROR("pointer invalid! \n");
-		return NULL;
-	}
-	std::stringstream ss;
-	const void* address = static_cast<const void*>(pointer);
-#if WIN
-	ss << "0x" << address;
-#else 
-	ss << address;
-#endif
-	if (same("0xDDDDDDDD", ss.str())) {
-		DKERROR("ss = 0xDDDDDDDD\n");
-		return "";
-	}
-	return ss.str();
-}
-
-void* addressToPointer(const DKString& address) {
-	//DKDEBUGFUNC(address);  //EXCESSIVE LOGGING
-	void* pointer;
-	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {
-		DKERROR("address is not a valid hex notation! \n");
-		return NULL;
-	}
-	//Convert a string of an address back into a pointer
-	std::stringstream ss;
-	ss << address.substr(2, address.size() - 2);
-	std::uint64_t tmp;
-	if (!(ss >> std::hex >> tmp)) {
-		DKERROR("addressToPointer(" + address + "): invalid address\n");
-		return NULL;
-	}
-	pointer = reinterpret_cast<void*>(tmp);
-	if (!pointer) {
-		DKERROR("pointer inavalid! \n");
-		return NULL;
-	}
-	return pointer;
-}
-
-*/
 
 
 
