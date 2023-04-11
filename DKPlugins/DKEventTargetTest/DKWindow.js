@@ -293,6 +293,46 @@ var Window = function Window(address) {
 	
 
 	////// Deprecated properties //////
+	// [Window.content and Window._content](Deprecated)(Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window
+	Object.defineProperty(this, "content", {
+        get: function content()		{ return CPP_DKWindow_content(this.address) },
+		//set: function content(str){ return CPP_DKWindow_content(this.address, str) },
+    })
+	// [Window.defaultStatus](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/defaultStatus
+	Object.defineProperty(this, "defaultStatus", {
+        get: function defaultStatus()		{ return CPP_DKWindow_defaultStatus(this.address) },
+		set: function defaultStatus(str)	{ return CPP_DKWindow_defaultStatus(this.address, str) },
+    })
+	// [Window.event](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/event
+	Object.defineProperty(this, "event", {
+        get: function event()		{ return CPP_DKWindow_event(this.address) },
+		//set: function event(str)	{ return CPP_DKWindow_event(this.address, str) },
+    })
+	// [Window.external](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/external
+	Object.defineProperty(this, "external", {
+        get: function external()		{ return CPP_DKWindow_external(this.address) },
+		//set: function external(str)	{ return CPP_DKWindow_external(this.address, str) },
+    })
+	// [Window.orientation](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/orientation
+	Object.defineProperty(this, "orientation", {
+        get: function orientation()		{ return CPP_DKWindow_orientation(this.address) },
+		//set: function orientation(num){ return CPP_DKWindow_orientation(this.address, num) },
+    })
+	// [Window.returnValue](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window
+	Object.defineProperty(this, "returnValue", {
+        get: function returnValue()		{ return CPP_DKWindow_returnValue(this.address) },
+		set: function returnValue(str){ return CPP_DKWindow_returnValue(this.address, str) },
+    })
+	// [Window.sidebar](Deprecated)(Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/sidebar
+	Object.defineProperty(this, "sidebar", {
+        get: function sidebar()		{ return CPP_DKWindow_sidebar(this.address) },
+		//set: function sidebar(str){ return CPP_DKWindow_sidebar(this.address, str) },
+    })
+	// [Window.status](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/status
+	Object.defineProperty(this, "status", {
+        get: function status()		{ return CPP_DKWindow_status(this.address) },
+		set: function status(str)	{ return CPP_DKWindow_status(this.address, str) },
+    })
 	
 	
 	////// Instance methods //////
