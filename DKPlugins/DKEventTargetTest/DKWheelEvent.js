@@ -17,37 +17,37 @@ var WheelEvent = function WheelEvent(type, options, address) {
 	Object.defineProperty(this, "deltaX", {
         get: function deltaX() 		{ return CPP_DKWheelEvent_deltaX(this.address) },
 		set: function deltaX(num) 	{ return CPP_DKWheelEvent_deltaX(this.address, num) },
-		configurable: true
+		configurable: true,
     })
 	// [WheelEvent.deltaY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent/deltaY
 	Object.defineProperty(this, "deltaY", {
         get: function deltaY()		{ return CPP_DKWheelEvent_deltaY(this.address) },
 		set: function deltaY(num) 	{ return CPP_DKWheelEvent_deltaY(this.address, num) },
-		configurable: true
+		configurable: true,
     })
 	// [WheelEvent.deltaZ](Read only) https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent/deltaZ
 	Object.defineProperty(this, "deltaZ", {
         get: function deltaZ() 	{ return CPP_DKWheelEvent_deltaZ(this.address) },
 		set: function deltaZ(z) { return CPP_DKWheelEvent_deltaZ(this.address, z) },
-		configurable: true
+		configurable: true,
     })
 	// [WheelEvent.deltaMode](Read only) https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent/deltaMode
 	Object.defineProperty(this, "deltaMode", {
         get: function deltaMode()	{ return CPP_DKWheelEvent_deltaMode(this.address) },
 		set: function deltaMode(num){ return CPP_DKWheelEvent_deltaMode(this.address, num) },
-		configurable: true
+		configurable: true,
     })
 	// [WheelEvent.wheelDelta](Read only)(Deprecated)(Non-standard)
 	Object.defineProperty(this, "wheelDelta", {
-        get: function wheelDelta() { return CPP_DKWheelEvent_wheelDelta(this.address) }
+        get: function wheelDelta() { return CPP_DKWheelEvent_wheelDelta(this.address) },
     })
 	// [WheelEvent.wheelDeltaX](Read only)(Deprecated)(Non-standard)
 	Object.defineProperty(this, "wheelDeltaX", {
-        get: function wheelDeltaX() { return CPP_DKWheelEvent_wheelDeltaX(this.address) }
+        get: function wheelDeltaX() { return CPP_DKWheelEvent_wheelDeltaX(this.address) },
     })
 	// [WheelEvent.wheelDeltaY](Read only)(Deprecated)(Non-standard)
 	Object.defineProperty(this, "wheelDeltaY", {
-        get: function wheelDeltaY() { return CPP_DKWheelEvent_wheelDeltaY(this.address) }
+        get: function wheelDeltaY() { return CPP_DKWheelEvent_wheelDeltaY(this.address) },
     })
 	
 
@@ -57,11 +57,9 @@ var WheelEvent = function WheelEvent(type, options, address) {
 	
 	
 	////// toString //////
-	if(this.toString() === "[object Object]"){
-		this.toString = function(){
-			return "[object WheelEvent]"
-		}
-	}
+	if(this.toString() === "[object Object]")
+		this.toString = function(){ return "[object WheelEvent]" }
+		
 	
 	var event = MouseEvent.call(this, type, options)
 	

@@ -17,61 +17,61 @@ var PointerEvent = function PointerEvent(type, options, address) {
 	Object.defineProperty(this, "pointerId", {
         get: function pointerId()		{ return CPP_DKPointerEvent_pointerId(this.address) },
 		set: function pointerId(num)	{ return CPP_DKPointerEvent_pointerId(this.address, num) },
-		configurable: true
+		configurable: true,
     })
 	// [PointerEvent.width](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/width
 	Object.defineProperty(this, "width", {
         get: function width()	{ return CPP_DKPointerEvent_width(this.address) },
 		set: function width(num){ return CPP_DKPointerEvent_width(this.address, num) },
-		configurable: true
+		configurable: true,
     })
 	// [PointerEvent.height](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/height
 	Object.defineProperty(this, "height", {
         get: function height()		{ return CPP_DKPointerEvent_height(this.address) },
 		set: function height(num) 	{ return CPP_DKPointerEvent_height(this.address, num) },
-		configurable: true
+		configurable: true,
     })
 	// [PointerEvent.pressure](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/pressure
 	Object.defineProperty(this, "pressure", {
         get: function pressure() 	{ return CPP_DKPointerEvent_pressure(this.address) },
 		set: function pressure(num) 	{ return CPP_DKPointerEvent_pressure(this.address, num) },
-		configurable: true
+		configurable: true,
     })
 	// [PointerEvent.tangentialPressure) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/tangentialPressure
 	Object.defineProperty(this, "tangentialPressure", {
         get: function tangentialPressure() 		{ return CPP_DKPointerEvent_tangentialPressure(this.address) },
 		set: function tangentialPressure(num) 	{ return CPP_DKPointerEvent_tangentialPressure(this.address, num) },
-		configurable: true
+		configurable: true,
     })
 	// [PointerEvent.tiltX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/tiltX
 	Object.defineProperty(this, "tiltX", {
         get: function tiltX() 	{ return CPP_DKPointerEvent_tiltX(this.address) },
 		set: function tiltX(num) { return CPP_DKPointerEvent_tiltX(this.address, num) },
-		configurable: true
+		configurable: true,
     })
 	// [PointerEvent.tiltY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/tiltY
 	Object.defineProperty(this, "tiltY", {
         get: function tiltY() 		{ return CPP_DKPointerEvent_tiltY(this.address) },
 		set: function tiltY(num) 	{ return CPP_DKPointerEvent_tiltY(this.address, num) },
-		configurable: true
+		configurable: true,
     })
 	// [PointerEvent.twist](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/twist
 	Object.defineProperty(this, "twist", {
         get: function twist() 		{ return CPP_DKPointerEvent_twist(this.address) },
 		set: function twist(num) 	{ return CPP_DKPointerEvent_twist(this.address, num) },
-		configurable: true
+		configurable: true,
     })
 	// [PointerEvent.pointerType](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/pointerType
 	Object.defineProperty(this, "pointerType", {
         get: function pointerType() 	{ return CPP_DKPointerEvent_pointerType(this.address) },
 		set: function pointerType(str) 	{ return CPP_DKPointerEvent_pointerType(this.address, str) },
-		configurable: true
+		configurable: true,
     })
 	// [PointerEvent.isPrimary](Read only) https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/isPrimary
 	Object.defineProperty(this, "isPrimary", {
         get: function isPrimary() 		{ return CPP_DKPointerEvent_isPrimary(this.address) },
 		set: function isPrimary(flag) 	{ return CPP_DKPointerEvent_isPrimary(this.address, flag) },
-		configurable: true
+		configurable: true,
     })
 
 
@@ -101,11 +101,9 @@ var PointerEvent = function PointerEvent(type, options, address) {
 
 	
 	////// toString //////
-	if(this.toString() === "[object Object]"){
-		this.toString = function(){
-			return "[object PointerEvent]"
-		}
-	}
+	if(this.toString() === "[object Object]")
+		this.toString = function(){ return "[object PointerEvent]" }
+	
 	
 	var event = MouseEvent.call(this, type, options)
 	

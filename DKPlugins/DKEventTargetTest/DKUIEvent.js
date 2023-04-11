@@ -17,23 +17,23 @@ var UIEvent = function UIEvent(type, options, address) {
 	Object.defineProperty(this, "detail", {
         get: function detail() 		{ return CPP_DKUIEvent_detail(this.address) },
 		set: function detail(num)	{ return CPP_DKUIEvent_detail(this.address, num) },
-		configurable: true
+		configurable: true,
     })
 	// [UIEvent.sourceCapabilities](Read only)
 	Object.defineProperty(this, "sourceCapabilities", {
         get: function sourceCapabilities()	{ return CPP_DKUIEvent_sourceCapabilities(this.address) },
 		set: function sourceCapabilities(v)	{ return CPP_DKUIEvent_sourceCapabilities(this.address, v) },
-		configurable: true
+		configurable: true,
     })
 	// [UIEvent.view](Read only)
 	Object.defineProperty(this, "view", {
         get: function view() { return CPP_DKUIEvent_view(this.address) },
 		set: function view(num)	{ return CPP_DKUIEvent_view(this.address, num) },
-		configurable: true
+		configurable: true,
     })
 	// [UIEvent.which](Read only)
 	Object.defineProperty(this, "which", {
-        get: function which() { return CPP_DKUIEvent_which(this.address) }
+        get: function which() { return CPP_DKUIEvent_which(this.address) },
     })
 	
 
@@ -45,11 +45,8 @@ var UIEvent = function UIEvent(type, options, address) {
 	
 	
 	////// toString //////
-	if(this.toString() === "[object Object]"){
-		this.toString = function(){
-			return "[object UIEvent]"
-		}
-	}
+	if(this.toString() === "[object Object]")
+		this.toString = function(){ return "[object UIEvent]" }
 	
 	
 	var event = Event.call(this, type, options)

@@ -18,7 +18,7 @@ var Template = function Template(type, options, address) {
 	Object.defineProperty(this, "???", {
         get: function ???() 	{ return CPP_Template_???(this.address) },
 		set: function ???(??) 	{ return CPP_Template_???(this.address, ??) },
-		configurable: true
+		configurable: true,
     })
 	*/
 
@@ -37,11 +37,9 @@ var Template = function Template(type, options, address) {
 
 	
 	////// toString //////
-	if(this.toString() === "[object Object]"){
-		this.toString = function(){
-			return "[object Template]"
-		}
-	}
+	if(this.toString() === "[object Object]")
+		this.toString = function(){ return "[object Template]" }
+
 	
 	var event = Event.call(this, type, options)
 	

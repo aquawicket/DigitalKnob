@@ -17,25 +17,23 @@ var InputEvent = function InputEvent(type, options, address) {
 	Object.defineProperty(this, "data", {
         get: function data() 	{ return CPP_DKInputEvent_data(this.address) },
 		set: function data(str) { return CPP_DKInputEvent_data(this.address, str) },
-		configurable: true
+		configurable: true,
     })
 	// [InputEvent.dataTransfer](Read only) https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/dataTransfer
 	Object.defineProperty(this, "dataTransfer", {
-        get: function dataTransfer() {
-            return CPP_DKInputEvent_dataTransfer(this.address)
-        }
+        get: function dataTransfer() { return CPP_DKInputEvent_dataTransfer(this.address) },
     })
 	// [InputEvent.inputType](Read only) https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/inputType
 	Object.defineProperty(this, "inputType", {
         get: function inputType()	{ return CPP_DKInputEvent_inputType(this.address) },
 		set: function inputType(str){ return CPP_DKInputEvent_inputType(this.address, str) },
-		configurable: true
+		configurable: true,
     })
 	// [InputEvent.isComposing](Read only) https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/isComposing
 	Object.defineProperty(this, "isComposing", {
         get: function isComposing() 	{ return CPP_DKInputEvent_isComposing(this.address) },
 		set: function isComposing(flag) { return CPP_DKInputEvent_isComposing(this.address, flag) },
-		configurable: true
+		configurable: true,
     })
 	
 
@@ -52,11 +50,9 @@ var InputEvent = function InputEvent(type, options, address) {
 	
 	
 	////// toString //////
-	if(this.toString() === "[object Object]"){
-		this.toString = function(){
-			return "[object InputEvent]"
-		}
-	}
+	if(this.toString() === "[object Object]")
+		this.toString = function(){ return "[object InputEvent]" }
+	
 	
 	var event = UIEvent.call(this, type, options)
 	

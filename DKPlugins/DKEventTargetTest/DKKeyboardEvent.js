@@ -23,59 +23,59 @@ var KeyboardEvent = function KeyboardEvent(type, options, address) {
 	Object.defineProperty(this, "altKey", {
         get: function altKey() 		{ return CPP_DKKeyboardEvent_altKey(this.address) },
 		set: function altKey(flag) 	{ return CPP_DKKeyboardEvent_altKey(this.address, flag) },
-		configurable: true
+		configurable: true,
     })
 	// [KeyboardEvent.code](Read only)
 	Object.defineProperty(this, "code", {
         get: function code() 	{ return CPP_DKKeyboardEvent_code(this.address) },
 		set: function code(str) { return CPP_DKKeyboardEvent_code(this.address, str) },
-		configurable: true
+		configurable: true,
     })
 	// [KeyboardEvent.ctrlKey](Read only)
 	Object.defineProperty(this, "ctrlKey", {
         get: function ctrlKey()		{ return CPP_DKKeyboardEvent_ctrlKey(this.address) },
 		set: function ctrlKey(flag) { return CPP_DKKeyboardEvent_ctrlKey(this.address, flag) },
-		configurable: true
+		configurable: true,
     })
 	// [KeyboardEvent.isComposing](Read only)
 	Object.defineProperty(this, "isComposing", {
         get: function isComposing() 	{ return CPP_DKKeyboardEvent_isComposing(this.address) },
 		set: function isComposing(flag) { return CPP_DKKeyboardEvent_isComposing(this.address, flag) },
-		configurable: true
+		configurable: true,
     })
 	// [KeyboardEvent.key](Read only)
 	Object.defineProperty(this, "key", {
         get: function key() 	{ return CPP_DKKeyboardEvent_key(this.address) },
 		set: function key(str) 	{ return CPP_DKKeyboardEvent_key(this.address, str) },
-		configurable: true
+		configurable: true,
     })
 	// [KeyboardEvent.locale](Read only)
 	Object.defineProperty(this, "locale", {
-        get: function locale() { return CPP_DKKeyboardEvent_locale(this.address) }
+        get: function locale() { return CPP_DKKeyboardEvent_locale(this.address) },
     })
 	// [KeyboardEvent.location](Read only)
 	Object.defineProperty(this, "location", {
         get: function location() 	{ return CPP_DKKeyboardEvent_location(this.address) },
 		set: function location(num) { return CPP_DKKeyboardEvent_location(this.address, num) },
-		configurable: true
+		configurable: true,
     })
 	// [KeyboardEvent.metaKey](Read only)
 	Object.defineProperty(this, "metaKey", {
         get: function metaKey() 	{ return CPP_DKKeyboardEvent_metaKey(this.address) },
 		set: function metaKey(flag) { return CPP_DKKeyboardEvent_metaKey(this.address, flag) },
-		configurable: true
+		configurable: true,
     })
 	// [KeyboardEvent.repeat](Read only)
 	Object.defineProperty(this, "repeat", {
         get: function repeat() 		{ return CPP_DKKeyboardEvent_repeat(this.address) },
 		set: function repeat(flag) 	{ return CPP_DKKeyboardEvent_repeat(this.address, flag) },
-		configurable: true
+		configurable: true,
     })
 	// [KeyboardEvent.shiftKey](Read only)
 	Object.defineProperty(this, "shiftKey", {
         get: function shiftKey()	 { return CPP_DKKeyboardEvent_shiftKey(this.address) },
 		set: function shiftKey(flag) { return CPP_DKKeyboardEvent_shiftKey(this.address, flag) },
-		configurable: true
+		configurable: true,
     })
 	
 
@@ -118,11 +118,9 @@ var KeyboardEvent = function KeyboardEvent(type, options, address) {
 	
 	
 	////// toString //////
-	if(this.toString() === "[object Object]"){
-		this.toString = function(){
-			return "[object KeyboardEvent]"
-		}
-	}
+	if(this.toString() === "[object Object]")
+		this.toString = function(){ return "[object KeyboardEvent]" }
+	
 	
 	var event = UIEvent.call(this, type, options)
 	
