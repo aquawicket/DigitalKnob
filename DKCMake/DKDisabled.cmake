@@ -31,6 +31,7 @@ dk_disable(DKRmlAudio)				# build errors
 dk_disable(DKRmlElement)			# build errors
 dk_disable(DKRmlIframe)				# build errors
 dk_disable(DKRmlTestElements)		# build errors
+dk_disable(DKTemplateEventTest)		# DEPRECATED: using DKEventTargetTest instead
 dk_disable(DKWidget)				# DEPRECATED
 dk_disable(bgfx)					# TODO
 dk_disable(gradle)					# We don't need to build this from source

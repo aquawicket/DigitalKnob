@@ -2,7 +2,7 @@
 #ifndef Template_H
 #define Template_H
 
-#include "DKEventTest/DKMouseEvent.h"
+#include "DKEventTargetTest/DKEvent.h"
 
 
 // [W3C] ???
