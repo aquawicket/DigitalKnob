@@ -39,11 +39,8 @@ var CompositionEvent = function CompositionEvent(type, options, address) {
 	
 	
 	////// toString //////
-	if(this.toString() === "[object Object]"){
-		this.toString = function(){
-			return "[object CompositionEvent]"
-		}
-	}
+	if(this.toString() === "[object Object]")
+		this.toString = function(){ return "[object CompositionEvent]" }
 	
 	
 	var event = UIEvent.call(this, type, options)

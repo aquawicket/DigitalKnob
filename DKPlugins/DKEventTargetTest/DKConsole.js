@@ -137,11 +137,8 @@ var Console = function Console(address) {
 	////// toString //////
 	//NOTE: Chrome returns [object Object]
 	/*
-	if(this.toString() === "[object Object]"){
-		this.toString = function(){
-			return "[object Console]"
-		}
-	}
+	if(this.toString() === "[object Object]")
+		this.toString = function(){ return "[object Console]" }
 	*/
 }
 
