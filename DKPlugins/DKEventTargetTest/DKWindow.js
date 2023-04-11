@@ -336,56 +336,71 @@ var Window = function Window(address) {
 	
 	
 	////// Instance methods //////
-	// [Window.atob()] https://developer.mozilla.org/en-US/docs/Web/API/atob
-	// [Window.alert()] https://developer.mozilla.org/en-US/docs/Web/API/alert
-	// [Window.blur()] https://developer.mozilla.org/en-US/docs/Web/API/blur
-	// [Window.btoa()] https://developer.mozilla.org/en-US/docs/Web/API/btoa
-	// [Window.cancelAnimationFrame()] https://developer.mozilla.org/en-US/docs/Web/API/cancelAnimationFrame
-	// [Window.cancelIdleCallback()] https://developer.mozilla.org/en-US/docs/Web/API/cancelIdleCallback
-	// [Window.clearImmediate()] https://developer.mozilla.org/en-US/docs/Web/API/clearImmediate
-	// [Window.clearInterval()] https://developer.mozilla.org/en-US/docs/Web/API/clearInterval
-	// [Window.clearTimeout()] https://developer.mozilla.org/en-US/docs/Web/API/clearTimeout
-	// [Window.close()] https://developer.mozilla.org/en-US/docs/Web/API/close
-	// [Window.confirm()] https://developer.mozilla.org/en-US/docs/Web/API/confirm
-	// [Window.createImageBitmap()] https://developer.mozilla.org/en-US/docs/Web/API/createImageBitmap
-	// [Window.dump()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/dump
-	// [Window.fetch()] https://developer.mozilla.org/en-US/docs/Web/API/fetch
-	// [Window.find()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/find
-	// [Window.focus()] https://developer.mozilla.org/en-US/docs/Web/API/focus
-	// [Window.getComputedStyle()] https://developer.mozilla.org/en-US/docs/Web/API/getComputedStyle
-	// [Window.getDefaultComputedStyle()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/getDefaultComputedStyle
-	// [Window.getSelection()] https://developer.mozilla.org/en-US/docs/Web/API/getSelection
-	// [Window.matchMedia()] https://developer.mozilla.org/en-US/docs/Web/API/matchMedia
-	// [Window.moveBy()] https://developer.mozilla.org/en-US/docs/Web/API/moveBy
+	// [Window.atob()] https://developer.mozilla.org/en-US/docs/Web/API/Window/atob
+	Window.prototype.atob = function atob(encodedData) {
+		return CPP_DKWindow_atob(this.address, encodedData)
+    }
+	// [Window.alert()] https://developer.mozilla.org/en-US/docs/Web/API/Window/alert
+	Window.prototype.alert = function alert(message) {
+		CPP_DKWindow_atob(this.address, message)
+    }
+	// [Window.blur()] https://developer.mozilla.org/en-US/docs/Web/API/Window/blur
+	Window.prototype.blur = function blur() {
+		CPP_DKWindow_blur(this.address)
+    }
+	// [Window.btoa()] https://developer.mozilla.org/en-US/docs/Web/API/Window/btoa
+	Window.prototype.btob = function btob(stringToEncode) {
+		return CPP_DKWindow_btob(this.address, stringToEncode)
+    }
+	// [Window.cancelAnimationFrame()] https://developer.mozilla.org/en-US/docs/Web/API/Window/cancelAnimationFrame
+	Window.prototype.cancelAnimationFrame = function cancelAnimationFrame(requestID) {
+		return CPP_DKWindow_cancelAnimationFrame(this.address, requestID)
+    }
+	// [Window.cancelIdleCallback()] https://developer.mozilla.org/en-US/docs/Web/API/Window/cancelIdleCallback
+	// [Window.clearImmediate()] https://developer.mozilla.org/en-US/docs/Web/API/Window/clearImmediate
+	// [Window.clearInterval()] https://developer.mozilla.org/en-US/docs/Web/API/Window/clearInterval
+	// [Window.clearTimeout()] https://developer.mozilla.org/en-US/docs/Web/API/Window/clearTimeout
+	// [Window.close()] https://developer.mozilla.org/en-US/docs/Web/API/Window/close
+	// [Window.confirm()] https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm
+	// [Window.createImageBitmap()] https://developer.mozilla.org/en-US/docs/Web/API/Window/createImageBitmap
+	// [Window.dump()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/dump
+	// [Window.fetch()] https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch
+	// [Window.find()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/find
+	// [Window.focus()] https://developer.mozilla.org/en-US/docs/Web/API/Window/focus
+	// [Window.getComputedStyle()] https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
+	// [Window.getDefaultComputedStyle()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/getDefaultComputedStyle
+	// [Window.getSelection()] https://developer.mozilla.org/en-US/docs/Web/API/Window/getSelection
+	// [Window.matchMedia()] https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia
+	// [Window.moveBy()] https://developer.mozilla.org/en-US/docs/Web/API/Window/moveBy
 	// [Window.moveTo()] https://developer.mozilla.org/en-US/docs/Web/API/Window/moveTo
 	Window.prototype.moveTo = function moveTo(x, y) {
 		CPP_DKWindow_moveTo(this.address, x, y)
     }
-	// [Window.open()] https://developer.mozilla.org/en-US/docs/Web/API/open
-	// [Window.postMessage()] https://developer.mozilla.org/en-US/docs/Web/API/postMessage
-	// [Window.print()] https://developer.mozilla.org/en-US/docs/Web/API/print
-	// [Window.prompt()] https://developer.mozilla.org/en-US/docs/Web/API/prompt
-	// [Window.queryLocalFonts()](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/queryLocalFonts
-	// [Window.reportError()] https://developer.mozilla.org/en-US/docs/Web/API/reportError
-	// [Window.requestAnimationFrame()] https://developer.mozilla.org/en-US/docs/Web/API/requestAnimationFrame
-	// [Window.requestIdleCallback()] https://developer.mozilla.org/en-US/docs/Web/API/requestIdleCallback
-	// [Window.resizeBy()] https://developer.mozilla.org/en-US/docs/Web/API/resizeBy
-	// [Window.resizeTo()] https://developer.mozilla.org/en-US/docs/Web/API/resizeTo
-	// [Window.scroll()] https://developer.mozilla.org/en-US/docs/Web/API/scroll
-	// [Window.scrollBy()] https://developer.mozilla.org/en-US/docs/Web/API/scrollBy
-	// [Window.scrollByLines()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/scrollByLines
-	// [Window.scrollByPages()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/scrollByPages
-	// [Window.scrollTo()] https://developer.mozilla.org/en-US/docs/Web/API/scrollTo
-	// [Window.setImmediate()] https://developer.mozilla.org/en-US/docs/Web/API/setImmediate
-	// [Window.setInterval()] https://developer.mozilla.org/en-US/docs/Web/API/setInterval
-	// [Window.setResizable()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/setResizable
-	// [Window.setTimeout()] https://developer.mozilla.org/en-US/docs/Web/API/setTimeout
-	// [Window.sizeToContent()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/sizeToContent
-	// [Window.showOpenFilePicker()](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/showOpenFilePicker
-	// [Window.showSaveFilePicker()](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/showSaveFilePicker
-	// [Window.showDirectoryPicker()](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/showDirectoryPicker
-	// [Window.stop()] https://developer.mozilla.org/en-US/docs/Web/API/stop
-	// [Window.updateCommands()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/updateCommands
+	// [Window.open()] https://developer.mozilla.org/en-US/docs/Web/API/Window/open
+	// [Window.postMessage()] https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage
+	// [Window.print()] https://developer.mozilla.org/en-US/docs/Web/API/Window/print
+	// [Window.prompt()] https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt
+	// [Window.queryLocalFonts()](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Window/queryLocalFonts
+	// [Window.reportError()] https://developer.mozilla.org/en-US/docs/Web/API/Window/reportError
+	// [Window.requestAnimationFrame()] https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame
+	// [Window.requestIdleCallback()] https://developer.mozilla.org/en-US/docs/Web/API/Window/requestIdleCallback
+	// [Window.resizeBy()] https://developer.mozilla.org/en-US/docs/Web/API/Window/resizeBy
+	// [Window.resizeTo()] https://developer.mozilla.org/en-US/docs/Web/API/Window/resizeTo
+	// [Window.scroll()] https://developer.mozilla.org/en-US/docs/Web/API/Window/scroll
+	// [Window.scrollBy()] https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollBy
+	// [Window.scrollByLines()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollByLines
+	// [Window.scrollByPages()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollByPages
+	// [Window.scrollTo()] https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollTo
+	// [Window.setImmediate()] https://developer.mozilla.org/en-US/docs/Web/API/Window/setImmediate
+	// [Window.setInterval()] https://developer.mozilla.org/en-US/docs/Web/API/Window/setInterval
+	// [Window.setResizable()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/setResizable
+	// [Window.setTimeout()] https://developer.mozilla.org/en-US/docs/Web/API/Window/setTimeout
+	// [Window.sizeToContent()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/sizeToContent
+	// [Window.showOpenFilePicker()](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Window/showOpenFilePicker
+	// [Window.showSaveFilePicker()](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Window/showSaveFilePicker
+	// [Window.showDirectoryPicker()](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Window/showDirectoryPicker
+	// [Window.stop()] https://developer.mozilla.org/en-US/docs/Web/API/Window/stop
+	// [Window.updateCommands()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/updateCommands
 	
 	
 	////// Deprecated methods //////
