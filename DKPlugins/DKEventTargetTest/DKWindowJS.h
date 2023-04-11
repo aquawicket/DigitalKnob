@@ -695,8 +695,9 @@ public:
 	static int dump(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
+		DKString message = duk_require_string(ctx, 1);
 		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if(!eventTarget->dump())
+		if(!eventTarget->dump(message))
 			return DKERROR("dump() failed! \n");
 		return true;
 	}
