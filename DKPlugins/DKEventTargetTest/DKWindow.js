@@ -357,8 +357,17 @@ var Window = function Window(address) {
 		CPP_DKWindow_cancelAnimationFrame(this.address, requestID)
     }
 	// [Window.cancelIdleCallback()] https://developer.mozilla.org/en-US/docs/Web/API/Window/cancelIdleCallback
+	Window.prototype.cancelIdleCallback = function cancelIdleCallback(handle) {
+		CPP_DKWindow_cancelIdleCallback(this.address, handle)
+    }
 	// [Window.clearImmediate()] https://developer.mozilla.org/en-US/docs/Web/API/Window/clearImmediate
+	Window.prototype.clearImmediate = function clearImmediate(immediateID) {
+		CPP_DKWindow_clearImmediate(this.address, immediateID)
+    }
 	// [Window.clearInterval()] https://developer.mozilla.org/en-US/docs/Web/API/Window/clearInterval
+	Window.prototype.clearInterval = function clearInterval(intervalID) {
+		CPP_DKWindow_clearInterval(this.address, intervalID)
+    }
 	// [Window.clearTimeout()] https://developer.mozilla.org/en-US/docs/Web/API/Window/clearTimeout
 	// [Window.close()] https://developer.mozilla.org/en-US/docs/Web/API/Window/close
 	// [Window.confirm()] https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm
