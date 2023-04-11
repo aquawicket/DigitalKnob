@@ -328,9 +328,9 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 		DKString inner = scripts[i]->GetInnerRML();
 
 		// html escape sequences
-		replace(inner, "&amp;", "\&");
-		replace(inner, "&lt;", "\<");
-		replace(inner, "&gt;", "\>");
+		replace(inner, "&amp;", "&");
+		replace(inner, "&lt;", "<");
+		replace(inner, "&gt;", ">");
 		replace(inner, "&quot;", "\"");
 		replace(inner, "&apos;", "\'");
 
