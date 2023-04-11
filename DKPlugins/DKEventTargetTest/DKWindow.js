@@ -454,7 +454,13 @@ var Window = function Window(address) {
     }
 	// [Window.requestIdleCallback()] https://developer.mozilla.org/en-US/docs/Web/API/Window/requestIdleCallback
 	// [Window.resizeBy()] https://developer.mozilla.org/en-US/docs/Web/API/Window/resizeBy
+	Window.prototype.resizeBy = function resizeBy(xDelta, yDelta) {
+		CPP_DKWindow_resizeBy(this.address, xDelta, yDelta)
+    }
 	// [Window.resizeTo()] https://developer.mozilla.org/en-US/docs/Web/API/Window/resizeTo
+	Window.prototype.resizeTo = function resizeTo(width, height) {
+		CPP_DKWindow_resizeTo(this.address, width, height)
+    }
 	// [Window.scroll()] https://developer.mozilla.org/en-US/docs/Web/API/Window/scroll
 	// [Window.scrollBy()] https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollBy
 	// [Window.scrollByLines()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollByLines
@@ -486,5 +492,5 @@ var Window = function Window(address) {
 	
 	
 	return EventTarget.call(this)
-};
-Window.prototype = EventTarget.prototype;
+}
+Window.prototype = EventTarget.prototype

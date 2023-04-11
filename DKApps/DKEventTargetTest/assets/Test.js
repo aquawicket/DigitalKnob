@@ -119,7 +119,8 @@ function printConsoleWindowProperties(consolewindow){
 	console.log("consolewindow.rows = "		+consolewindow.rows)
 }
 const myConsoleWindow = new DKConsoleWindow()
-myConsoleWindow.moveTo(100,100)
+myConsoleWindow.moveTo(10,10)
+myConsoleWindow.resizeTo(800,600)
 printWindowProperties(myConsoleWindow)
 printConsoleWindowProperties(myConsoleWindow)
 

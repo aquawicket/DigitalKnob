@@ -82,7 +82,14 @@ public:
 		
 		
 		////// Instance methods //////
+		DKDuktape::AttachFunction("CPP_DKWindow_blur", DKWindowJS::blur);
+		DKDuktape::AttachFunction("CPP_DKWindow_close", DKWindowJS::close);
+		DKDuktape::AttachFunction("CPP_DKWindow_dump", DKWindowJS::dump);
+		DKDuktape::AttachFunction("CPP_DKWindow_focus", DKWindowJS::focus);
+		DKDuktape::AttachFunction("CPP_DKWindow_moveBy", DKWindowJS::moveBy);
 		DKDuktape::AttachFunction("CPP_DKWindow_moveTo", DKWindowJS::moveTo);
+		DKDuktape::AttachFunction("CPP_DKWindow_resizeBy", DKWindowJS::resizeBy);
+		DKDuktape::AttachFunction("CPP_DKWindow_resizeTo", DKWindowJS::resizeTo);
 		
 		
 		////// Deprecated methods //////
