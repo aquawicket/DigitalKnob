@@ -601,34 +601,32 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
 		//Only fire keypress on alphanumeric keys.
         if (ker.uChar.AsciiChar < 32)
             return;
-		DKKeyboardEvent* keypress_event = new DKKeyboardEvent("keypress", "");
-		keypress_event->altKey = altKey;
-		keypress_event->code = code;
-		keypress_event->ctrlKey = ctrlKey;
-		keypress_event->isComposing = isComposing;
-		keypress_event->key = key;
-		keypress_event->locale = locale;
-		keypress_event->location = location;
-		keypress_event->metaKey = metaKey;
-		keypress_event->repeat = repeat;
-		keypress_event->shiftKey = shiftKey;
-		this->dispatchEvent(keypress_event);
-		delete keypress_event;
+		DKKeyboardEvent keypress_event("keypress", "");
+		keypress_event.altKey = altKey;
+		keypress_event.code = code;
+		keypress_event.ctrlKey = ctrlKey;
+		keypress_event.isComposing = isComposing;
+		keypress_event.key = key;
+		keypress_event.locale = locale;
+		keypress_event.location = location;
+		keypress_event.metaKey = metaKey;
+		keypress_event.repeat = repeat;
+		keypress_event.shiftKey = shiftKey;
+		dispatchEvent(&keypress_event);
     }
     else {
-		DKKeyboardEvent* keyup_event = new DKKeyboardEvent("keyup", "");
-		keyup_event->altKey = altKey;
-		keyup_event->code = code;
-		keyup_event->ctrlKey = ctrlKey;
-		keyup_event->isComposing = isComposing;
-		keyup_event->key = key;
-		keyup_event->locale = locale;
-		keyup_event->location = location;
-		keyup_event->metaKey = metaKey;
-		keyup_event->repeat = repeat;
-		keyup_event->shiftKey = shiftKey;
-		this->dispatchEvent(keyup_event);
-		delete keyup_event;
+		DKKeyboardEvent keyup_event("keyup", "");
+		keyup_event.altKey = altKey;
+		keyup_event.code = code;
+		keyup_event.ctrlKey = ctrlKey;
+		keyup_event.isComposing = isComposing;
+		keyup_event.key = key;
+		keyup_event.locale = locale;
+		keyup_event.location = location;
+		keyup_event.metaKey = metaKey;
+		keyup_event.repeat = repeat;
+		keyup_event.shiftKey = shiftKey;
+		dispatchEvent(&keyup_event);
     }
 }
 
@@ -702,11 +700,10 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                     button_state[0] = true;
                     button = 0;
 
-					DKMouseEvent* mousedown_event = new DKMouseEvent("mousedown", "");
-					mousedown_event->button = button;
-					mousedown_event->buttons = buttons;
-					this->dispatchEvent(mousedown_event);
-					delete mousedown_event;
+					DKMouseEvent mousedown_event("mousedown", "");
+					mousedown_event.button = button;
+					mousedown_event.buttons = buttons;
+					dispatchEvent(&mousedown_event);
 					
                     break;
                 }
@@ -715,11 +712,10 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
                 button_state[0] = false;
                 button = 0;
 
-				DKMouseEvent* mouseup_event = new DKMouseEvent("mouseup", "");
-				mouseup_event->button = button;
-				mouseup_event->buttons = buttons;
-				this->dispatchEvent(mouseup_event);
-				delete mouseup_event;
+				DKMouseEvent mouseup_event("mouseup", "");
+				mouseup_event.button = button;
+				mouseup_event.buttons = buttons;
+				dispatchEvent(&mouseup_event);
 
 				DKMouseEvent* click_event = new DKMouseEvent("click", "");
 				click_event->button = button;
