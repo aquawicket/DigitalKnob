@@ -405,6 +405,7 @@ if(LINUX)
 	dk_disable(kdevelop)			# permission denied
 	dk_disable(leptonica)			# build errors
 	dk_disable(libcaca)				# no CMakeLists.txt
+	dk_disable(libevent)			# libmbedtls.a, needed by 'bin/bench_cascade'.
 	dk_disable(libexpat)
 	dk_disable(libsndfile)			# requires opus
 	dk_disable(libtorrent)			# CMake Error: cannot find source file: deps/try_signal/try_singal.cpp
