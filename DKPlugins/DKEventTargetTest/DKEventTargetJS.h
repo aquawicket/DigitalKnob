@@ -32,7 +32,7 @@ public:
 	////// Constructor //////
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		//DKINFO("CPP_DKEventTarget()\n");
+		DKINFO("CPP_DKEventTarget()\n");
 		DKEventTarget* eventTarget = new DKEventTarget();
 		DKString eventTargetAddress = DKDuktape::pointerToAddress(eventTarget);
 		duk_push_string(ctx, eventTargetAddress.c_str());	

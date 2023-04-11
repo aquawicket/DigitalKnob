@@ -1,10 +1,14 @@
 // DKConsoleWindow.js
 
-//////////////////////////////////////////////////////
-var DKConsoleWindow = function DKConsoleWindow(data) {
-	console.log("DKConsoleWindow("+data+")");
-    this.data = data;
-	this.address = CPP_Duktape_createDKObject("DKConsoleWindow")
+/////////////////////////////////////////////////////////
+var DKConsoleWindow = function DKConsoleWindow(address) {
+	console.log("DKConsoleWindow("+address+")");
+
+	if(address)
+		this.address = address;
+	if(!this.address)
+		this.address = CPP_DKConsoleWindow();
+	
 	console.log("JS ConsoleWindow address = "+this.address)
 	
 	

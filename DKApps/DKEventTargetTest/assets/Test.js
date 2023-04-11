@@ -57,10 +57,8 @@ obj.dispatchEvent(myCustomEvent);
 
 
 
-/////////////////// ConsoleWindow //////////////////////////
-console.log("/////////// ConsoleWindow /////////////////////")
-CPP_DK_Create("DKEventTargetTest/DKConsoleWindow.js");
-const myConsoleWindow = new DKConsoleWindow('myConsoleWindow')
+////// ConsoleWindow //////
+const myConsoleWindow = new DKConsoleWindow()
 
 
 
@@ -74,12 +72,12 @@ function printUIEventProperties(uievent){
 }
 console.log('\n');
 const myUIEvent = new UIEvent('uievent');
-obj.addEventListener('uievent', function(event){
+myConsoleWindow.addEventListener('uievent', function(event){
 	console.log('onuievent')
 	printEventProperties(event)
 	printUIEventProperties(event)
 })
-obj.dispatchEvent(myUIEvent);
+myConsoleWindow.dispatchEvent(myUIEvent);
 
 
 
