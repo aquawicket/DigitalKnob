@@ -97,7 +97,7 @@ public:
 	// [Window.customElements](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/customElements
 	DKString customElements;
 	// [Window.devicePixelRatio](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio
-	float devicePixelRatio;
+	double devicePixelRatio;
 	// [Window.document](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/document
 	DKString document;
 	// [Window.frameElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/frameElement
