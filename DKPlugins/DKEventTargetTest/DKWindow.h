@@ -300,7 +300,7 @@ public:
 		DKTODO();
 	}
 	// [Window.moveTo()] https://developer.mozilla.org/en-US/docs/Web/API/moveTo
-	void moveTo(x, y) {
+	virtual void moveTo(int x, int y) {
 		DKINFO("DKWindow::moveTo("+toString(x)+", "+toString(y)+") \n");
 		DKTODO();
 	}
