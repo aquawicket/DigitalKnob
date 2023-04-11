@@ -98,6 +98,11 @@ var Window = function Window(address) {
         get: function isSecureContext()		{ return CPP_DKWindow_isSecureContext(this.address) },
 		//set: function isSecureContext(num){ return CPP_DKWindow_isSecureContext(this.address, num) },
     })
+	// [Window.launchQueue](Read only)(Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Window/launchQueue
+	Object.defineProperty(this, "launchQueue", {
+        get: function launchQueue()		{ return CPP_DKWindow_launchQueue(this.address) },
+		//set: function launchQueue(str){ return CPP_DKWindow_launchQueue(this.address, str) },
+    })
 	
 
 	////// Deprecated properties //////
