@@ -1,6 +1,3 @@
-// create EventTarget
-const obj = new EventTarget();
-
 
 ////// Event ///////
 function printEventProperties(event){
