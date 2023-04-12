@@ -34,7 +34,8 @@ public:
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKINFO("CPP_DKConsoleWindow()\n");
-		DKConsoleWindow* consolewindow = new DKConsoleWindow();
+		//DKConsoleWindow* consolewindow = new DKConsoleWindow();
+		DKConsoleWindow* consolewindow = (DKConsoleWindow*)DKClass::DKCreate("DKConsoleWindow");
 		DKString eventTargetAddress = pointerToAddress(consolewindow);
 		duk_push_string(ctx, eventTargetAddress.c_str());	
 		return true;

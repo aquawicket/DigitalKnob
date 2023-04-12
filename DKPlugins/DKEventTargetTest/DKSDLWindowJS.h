@@ -30,7 +30,7 @@ public:
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKINFO("CPP_DKSDLWindow()\n");
-		DKSDLWindow* sdlwindow = new DKSDLWindow();
+		DKSDLWindow* sdlwindow = (DKSDLWindow*)DKClass::DKCreate("DKSDLWindow");
 		DKString eventTargetAddress = pointerToAddress(sdlwindow);
 		duk_push_string(ctx, eventTargetAddress.c_str());	
 		return true;
