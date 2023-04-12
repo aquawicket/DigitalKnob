@@ -2,6 +2,7 @@ dk_depend(dukglue)
 dk_depend(DKDuktape)
 
 dk_depend(DK)
+dk_depend(DKAssets)
 dk_depend(DKConsole)
 
 dk_depend(DKEvent)
