@@ -3,6 +3,8 @@
 #define App_H
 
 #include "DK/DK.h"
+#include "DKEvent/DKEvent.h"
+#include "DKCustomEvent/DKCustomEvent.h"
 
 
 class App : public DKObjectT<App>
