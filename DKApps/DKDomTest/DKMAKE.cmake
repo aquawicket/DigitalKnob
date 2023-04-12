@@ -16,3 +16,5 @@ dk_depend(DKWheelEvent)
 dk_depend(DKInputEvent)
 dk_depend(DKKeyboardEvent)
 dk_depend(DKCompositionEvent)
+
+dk_depend(DKWindow)
