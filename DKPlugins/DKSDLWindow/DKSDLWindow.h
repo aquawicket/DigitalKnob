@@ -44,6 +44,10 @@ public:
 	bool Init();
 	bool End();
 
+	// TODO: virtual functions from DKWindow
+	// outerWidth
+	// outerHeight
+
 	bool TestInt(const void* input, void* output);
 	bool TestString(const void* input, void* output);
 	bool TestReturnInt(const void* input, void* output);
