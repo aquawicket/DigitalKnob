@@ -1,3 +1,5 @@
+#if HAVE_DKDuktape
+
 #pragma once
 #ifndef DKEventJS_H
 #define DKEventJS_H
@@ -236,3 +238,4 @@ REGISTER_OBJECT(DKEventJS, true)
 
 
 #endif //DKEventJS_H
+#endif //HAVE_DKDuktape
