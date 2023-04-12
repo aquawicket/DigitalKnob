@@ -3,8 +3,7 @@
 #define DKEventTarget_H
 
 #include "DK/DK.h"
-#include "DKEventTargetTest/DKEvent.h"
-#include "DKDuktape/DKDuktape.h"
+#include "DKEvent/DKEvent.h"
 
 
 struct EventObject {
