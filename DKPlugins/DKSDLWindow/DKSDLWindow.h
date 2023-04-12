@@ -34,10 +34,13 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 #include "DK/DK.h"
+#include "DKWindow/DKWindow.h"
 
 
-class DKSDLWindow : public DKObjectT<DKSDLWindow>{
+class DKSDLWindow : public DKWindow, public DKObjectT<DKSDLWindow>
+{
 public:
+	DKSDLWindow();
 	bool Init();
 	bool End();
 

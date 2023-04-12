@@ -44,6 +44,10 @@ std::map<int, int> DKSDLWindow::sdlCharCode;
 std::map<int, int> DKSDLWindow::sdlShiftCharCode;
 std::map<int, int> DKSDLWindow::sdlMacCode;
 
+DKSDLWindow::DKSDLWindow() : DKWindow() { 
+	DKDEBUGFUNC();
+}
+
 bool DKSDLWindow::Init(){
     DKDEBUGFUNC();
 	SDL_SetMainReady(); //Bypass SDL_main() //https://wiki.libsdl.org/SDL_SetMainReady
