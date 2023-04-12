@@ -2,6 +2,7 @@
 #ifndef DKSDLWindowJS_H
 #define DKSDLWindowJS_H
 
+#include "DKSDLWindow/DKSDLWindow.h"
 #include "DKDuktape/DKDuktape.h"
 
 WARNING_DISABLE

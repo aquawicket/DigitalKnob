@@ -1,4 +1,5 @@
 dk_depend(dukglue)
 dk_depend(DK)
+dk_depend(DKSDLWindow)
 dk_generateCmake(DKEventTargetTest)
 dk_assets(DKEventTargetTest)
