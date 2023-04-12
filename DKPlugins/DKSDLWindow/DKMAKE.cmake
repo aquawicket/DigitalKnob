@@ -9,3 +9,4 @@ if(IOS)
 endif()
 
 dk_generateCmake(DKSDLWindow)
+dk_assets(DKSDLWindow)
