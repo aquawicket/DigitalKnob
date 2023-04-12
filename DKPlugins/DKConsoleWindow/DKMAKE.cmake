@@ -1,4 +1,4 @@
-dk_depend(DKEventTarget)
+dk_depend(DKWindow)
 dk_depend(DKFocusEvent)
 dk_depend(DKMouseEvent)
 dk_depend(DKWheelEvent)
