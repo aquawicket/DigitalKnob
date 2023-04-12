@@ -7,6 +7,9 @@
 #include "DKDuktape/DKDuktape.h"
 #include "DKEventTarget/DKEventTarget.h"
 
+WARNING_DISABLE
+#include "dukglue/dukglue.h"
+WARNING_ENABLE
 
 // [EventTarget] https://developer.mozilla.org/en-US/docs/Web/API/Event
 class DKEventTargetJS : public DKObjectT<DKEventTargetJS>

@@ -6,10 +6,6 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-WARNING_DISABLE
-#include "dukglue/dukglue.h"
-WARNING_ENABLE
-
 
 // [W3C] https://w3c.github.io/uievents/#events-compositionevents
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent

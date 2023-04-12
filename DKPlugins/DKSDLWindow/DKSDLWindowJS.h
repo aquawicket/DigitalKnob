@@ -1,14 +1,11 @@
-/*
+#if HAVE_DKDuktape
+
 #pragma once
 #ifndef DKSDLWindowJS_H
 #define DKSDLWindowJS_H
 
 #include "DKSDLWindow/DKSDLWindow.h"
 #include "DKDuktape/DKDuktape.h"
-
-WARNING_DISABLE
-#include "dukglue/dukglue.h"
-WARNING_ENABLE
 
 
 class DKSDLWindowJS : public DKObjectT<DKSDLWindowJS>
@@ -21,7 +18,7 @@ public:
 			
 			
 		////// Load .js files
-		DKClass::DKCreate("DKEventTargetTest/DKSDLWindow.js");
+		DKClass::DKCreate("DKSDLWindow/DKSDLWindow.js");
 		
 		return true;
 	}
@@ -42,4 +39,4 @@ REGISTER_OBJECT(DKSDLWindowJS, true)
 
 
 #endif //DKSDLWindowJS_H
-*/
+#endif //HAVE_DKDuktape
