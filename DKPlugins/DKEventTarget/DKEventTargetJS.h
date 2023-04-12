@@ -5,7 +5,7 @@
 #define DKEventTargetJS_H
 
 #include "DKDuktape/DKDuktape.h"
-#include "DKEventTargetT/DKEventTarget.h"
+#include "DKEventTarget/DKEventTarget.h"
 
 
 // [EventTarget] https://developer.mozilla.org/en-US/docs/Web/API/Event
