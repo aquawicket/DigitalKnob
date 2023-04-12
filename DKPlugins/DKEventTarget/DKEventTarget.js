@@ -74,6 +74,6 @@ var EventTarget = function EventTarget(address) {
 		this.toString = function(){	return "[object EventTarget]" }
 	
 	
-	GlobalEventHandlers.call(this, this.address);
+	//GlobalEventHandlers.call(this, this.address);
     return this;
 };
