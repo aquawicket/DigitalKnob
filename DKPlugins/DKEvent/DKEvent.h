@@ -3,7 +3,6 @@
 #define DKEvent_H
 
 #include "DK/DK.h"
-#include "DKDuktape/DKDuktape.h"
 
 
 // [INTERFACE] https://dom.spec.whatwg.org/#interface-event

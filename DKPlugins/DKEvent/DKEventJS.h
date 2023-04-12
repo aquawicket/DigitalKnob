@@ -4,6 +4,8 @@
 #ifndef DKEventJS_H
 #define DKEventJS_H
 
+
+
 #include "DKDuktape/DKDuktape.h"
 
 WARNING_DISABLE
@@ -237,5 +239,5 @@ public:
 REGISTER_OBJECT(DKEventJS, true)
 
 
-#endif //DKEventJS_H
 #endif //HAVE_DKDuktape
+#endif //DKEventJS_H
