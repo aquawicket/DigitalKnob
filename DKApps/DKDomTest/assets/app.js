@@ -20,7 +20,7 @@ CPP_DK_Create("DKCompositionEventJS");
 CPP_DK_Create("DKWindowJS");
 
 // DigitalKnob
-//CPP_DK_Create("DKConsoleWindowJS");
+CPP_DK_Create("DKConsoleWindowJS");
 //CPP_DK_Create("DKSDLWindowJS");
 
 
