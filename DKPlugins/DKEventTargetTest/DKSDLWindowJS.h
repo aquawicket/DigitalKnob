@@ -1,3 +1,4 @@
+/*
 #pragma once
 #ifndef DKSDLWindowJS_H
 #define DKSDLWindowJS_H
@@ -41,3 +42,4 @@ REGISTER_OBJECT(DKSDLWindowJS, true)
 
 
 #endif //DKSDLWindowJS_H
+*/
