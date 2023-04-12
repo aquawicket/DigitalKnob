@@ -10,3 +10,4 @@ dk_depend(DKCustomEvent)
 dk_depend(DKEventTarget)
 
 dk_depend(DKUIEvent)
+dk_depend(DKFocusEvent)
