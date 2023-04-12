@@ -6,6 +6,7 @@ bool App::Init() {
 	DKDEBUGFUNC();
 	DKINFO("App::Init() \n");
 	
+	/*
 	////// Event //////
 	DKINFO("\n");
 	DKEventTarget myTargetA;									// EventTarget as 	value
@@ -36,27 +37,14 @@ bool App::Init() {
 	myTargetE.addEventListener("eventE", &App::onevent);
 	myTargetE.dispatchEvent(new DKEvent("eventE", ""));			// Event as new pointer, created within dispatchEvent function
 	
-	/*
-	DKINFO("\n");
-	DKEventTarget myTargetF;
-	myTargetF.addEventListener("eventF", &App::onevent);
-	myTargetF.dispatchEvent(DKEvent("eventF", ""));				// Event as value, created within dispatchEvent function		// Error C4239:
-	
-	DKINFO("\n");
-	DKEventTarget myTargetG;
-	myTargetG.addEventListener("eventG", &App::onevent);
-	myTargetG.dispatchEvent(&DKEvent("eventG", ""));			// Event as reference, created within dispatchEvent function	// Error C4238:
-	*/
-	
-	
-		
-	
+
 	////// CustomEvent //////
 	DKINFO("\n");
 	myTargetA.addEventListener("customevent", &App::oncustom);
 	DKCustomEvent customevent("customevent", "");
 	customevent.detail = "{name : 'mycustomevent'}";
 	myTargetA.dispatchEvent(customevent);
+	*/
 	
 	return true;
 }
