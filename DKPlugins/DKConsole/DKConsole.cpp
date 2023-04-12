@@ -26,7 +26,7 @@
 
 #ifdef HAVE_DKDuktape 
 #include "DK/DKApp.h"
-#include "DKEventTargetTest/DKConsole.h"
+#include "DKConsole/DKConsole.h"
 
 
 bool DKConsole::Init(){
@@ -43,7 +43,7 @@ bool DKConsole::Init(){
 	DKDuktape::AttachFunction("CPP_DKConsole_log", DKConsole::log);
 	DKDuktape::AttachFunction("CPP_DKConsole_trace", DKConsole::trace);
 	DKDuktape::AttachFunction("CPP_DKConsole_warn", DKConsole::warn);
-	DKClass::DKCreate("DKEventTargetTest/DKConsole.js");
+	DKClass::DKCreate("DKConsole/DKConsole.js");
 	return true;
 }
 
