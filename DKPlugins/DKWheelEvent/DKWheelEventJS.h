@@ -36,7 +36,7 @@ public:
 
 
 		////// Load .js files //////
-		DKClass::DKCreate("DKEventTargetTest/DKWheelEvent.js");
+		DKClass::DKCreate("DKWheelEvent/DKWheelEvent.js");
 		
 		return true;
 	}

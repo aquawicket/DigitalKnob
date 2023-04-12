@@ -2,7 +2,7 @@
 #ifndef DKWheelEvent_H
 #define DKWheelEvent_H
 
-#include "DKEventTargetTest/DKMouseEvent.h"
+#include "DKMouseEvent/DKMouseEvent.h"
 
 
 // [W3C] https://w3c.github.io/uievents/#events-wheelevents
