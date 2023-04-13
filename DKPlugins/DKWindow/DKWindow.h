@@ -5,6 +5,8 @@
 #include "DKEventTarget/DKEventTarget.h"
 #include <optional>
 
+#define GET false
+#define SET true
 
 // [INTERFACE] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-window-object
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Window
@@ -85,7 +87,7 @@ public:
 	
 	////// Instance properties //////
 	// [Window.caches](Read only) https://developer.mozilla.org/en-US/docs/Web/API/caches
-	DKString caches; 
+	virtual bool caches(DKString&, bool) { return false; }
 	// [Window.clientInformation](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/navigator
 	DKString clientInformation;
 	// [Window.closed](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/closed
@@ -143,12 +145,9 @@ public:
 	// [Window.opener] https://developer.mozilla.org/en-US/docs/Web/API/Window/opener
 	DKString opener;
 	// [Window.origin](Read only) https://developer.mozilla.org/en-US/docs/Web/API/origin
-	DKString origin;
+	virtual bool origin(DKString&, bool) { return false; }
 	// [Window.outerHeight](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/outerHeight
-	//unsigned int outerHeight;
-	virtual bool outerHeight(bool set, unsigned int& _outerHeight) {
-		return true;
-	}
+	virtual bool outerHeight(unsigned int&, bool) { return false; }
 	// [Window.outerWidth](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/outerWidth
 	unsigned int outerWidth;
 	// [Window.pageXOffset](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/pageXOffset

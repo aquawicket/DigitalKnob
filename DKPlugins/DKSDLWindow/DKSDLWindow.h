@@ -45,7 +45,7 @@ public:
 	bool End();
 
 	// TODO: virtual functions from DKWindow
-	bool outerHeight(bool set, unsigned int& _outerHeight) {
+	bool outerHeight(unsigned int& _outerHeight, bool set = false) {
 		if(set){
 			int w;
 			SDL_GetWindowSize(window, &w, NULL);

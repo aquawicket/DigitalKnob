@@ -21,7 +21,7 @@ CPP_DK_Create("DKWindowJS");
 
 // ConsoleWindow
 CPP_DK_Create("DKConsoleWindowJS");
-//CPP_DK_Create("ConsoleWindowTest.js");
+CPP_DK_Create("ConsoleWindowTest.js");
 
 // SDLWindow
 CPP_DK_Create("DKSDLWindowJS");

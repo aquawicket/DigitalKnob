@@ -423,13 +423,10 @@ public:
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
 		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
 		unsigned int _outerHeight;
-		if (duk_is_number(ctx, 1)){
+		if (duk_is_number(ctx, 1))
 			_outerHeight = duk_to_uint(ctx, 1);
-			eventTarget->outerHeight(true, _outerHeight);
-		}
-		else{
-			eventTarget->outerHeight(false, _outerHeight);
-		}
+		if(!eventTarget->outerHeight(_outerHeight, duk_is_number(ctx, 1)))
+			return false;
 		duk_push_uint(ctx, _outerHeight);
 		return true;
 	}
