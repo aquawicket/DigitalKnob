@@ -3,6 +3,7 @@
 #define DKWindow_H
 
 #include "DKEventTarget/DKEventTarget.h"
+#include <optional>
 
 
 // [INTERFACE] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-window-object
@@ -43,7 +44,7 @@ public:
 		navigator = "";
 		opener = "";
 		origin = "";
-		outerHeight = 0;
+		//outerHeight = 0;
 		outerWidth = 0;
 		pageXOffset = 0;
 		pageYOffset = 0;
@@ -144,7 +145,10 @@ public:
 	// [Window.origin](Read only) https://developer.mozilla.org/en-US/docs/Web/API/origin
 	DKString origin;
 	// [Window.outerHeight](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/outerHeight
-	unsigned int outerHeight;
+	//unsigned int outerHeight;
+	virtual bool outerHeight(bool set, unsigned int& _outerHeight) {
+		return true;
+	}
 	// [Window.outerWidth](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/outerWidth
 	unsigned int outerWidth;
 	// [Window.pageXOffset](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/pageXOffset

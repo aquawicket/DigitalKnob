@@ -62,3 +62,6 @@ function printSDLWindowProperties(consolewindow){
 const mySDLWindow = new DKSDLWindow()
 printWindowProperties(mySDLWindow)
 printSDLWindowProperties(mySDLWindow)
+mySDLWindow.outerHeight = 300;
+printWindowProperties(mySDLWindow)
+printSDLWindowProperties(mySDLWindow)

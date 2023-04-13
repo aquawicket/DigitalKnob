@@ -45,8 +45,19 @@ public:
 	bool End();
 
 	// TODO: virtual functions from DKWindow
-	// outerWidth
-	// outerHeight
+	bool outerHeight(bool set, unsigned int& _outerHeight) {
+		if(set){
+			int w;
+			SDL_GetWindowSize(window, &w, NULL);
+			SDL_SetWindowSize(window, w, (int)_outerHeight);
+		}
+		else{
+			int sdl_outerHeight;
+			SDL_GetWindowSize(window, NULL, &sdl_outerHeight);
+			_outerHeight = (unsigned int)sdl_outerHeight;
+		}
+		return true;
+	}
 
 	bool TestInt(const void* input, void* output);
 	bool TestString(const void* input, void* output);

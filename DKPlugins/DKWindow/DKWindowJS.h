@@ -422,9 +422,15 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
 		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_number(ctx, 1))
-			eventTarget->outerHeight = duk_to_uint(ctx, 1);
-		duk_push_uint(ctx, eventTarget->outerHeight);	
+		unsigned int _outerHeight;
+		if (duk_is_number(ctx, 1)){
+			_outerHeight = duk_to_uint(ctx, 1);
+			eventTarget->outerHeight(true, _outerHeight);
+		}
+		else{
+			eventTarget->outerHeight(false, _outerHeight);
+		}
+		duk_push_uint(ctx, _outerHeight);
 		return true;
 	}
 	// [Window.outerWidth](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/outerWidth
