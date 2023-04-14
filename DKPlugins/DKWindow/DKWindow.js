@@ -161,12 +161,12 @@ var Window = function Window(address) {
 	// [Window.origin](Read only) https://developer.mozilla.org/en-US/docs/Web/API/origin
 	Object.defineProperty(this, "origin", {
         get: function origin()		{ return CPP_DKWindow_origin(this.address) },
-		set: function origin(str)	{ return CPP_DKWindow_origin(this.address, str) },
+		//set: function origin(str)	{ return CPP_DKWindow_origin(this.address, str) },
     })
 	// [Window.outerHeight](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/outerHeight
 	Object.defineProperty(this, "outerHeight", {
         get: function outerHeight()		{ return CPP_DKWindow_outerHeight(this.address) },
-		set: function outerHeight(num){ return CPP_DKWindow_outerHeight(this.address, num) },
+		//set: function outerHeight(num){ return CPP_DKWindow_outerHeight(this.address, num) },
     })
 	// [Window.outerWidth](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/outerWidth
 	Object.defineProperty(this, "outerWidth", {

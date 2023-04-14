@@ -196,7 +196,7 @@ public:
 	// [Window.window](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/window
 	virtual bool window(DKString&, bool) { return false; }
 	// [window[0], window[1], etc.] https://developer.mozilla.org/en-US/docs/Web/API/Window
-	//DKStringArray windows;
+	virtual bool windows(DKString&, bool) { return false; }
 
 	
 	////// Deprecated properties //////
