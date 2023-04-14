@@ -77,7 +77,7 @@ public:
 		DKDuktape::AttachFunction("CPP_DKWindow_top", 				DKWindowJS::top);
 		DKDuktape::AttachFunction("CPP_DKWindow_visualViewport", 	DKWindowJS::visualViewport);
 		DKDuktape::AttachFunction("CPP_DKWindow_window", 			DKWindowJS::window);
-		//DKDuktape::AttachFunction("CPP_DKWindow_windows", 		DKWindowJS::windows);
+		DKDuktape::AttachFunction("CPP_DKWindow_windows", 			DKWindowJS::windows);
 	
 		
 		////// Deprecated properties //////
@@ -115,8 +115,6 @@ public:
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
 		return (DKWindow*)addressToPointer(eventTargetAddress);
 	}
-	
-	
 	static bool GetBool(duk_context* ctx){
 		if (duk_is_boolean(ctx, 1))
 			return duk_to_boolean(ctx, 1);
@@ -733,14 +731,14 @@ public:
 	static int blur(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(!eventTarget(ctx)->blur())
-			return DKERROR("blur() failed! \n");
+			return false;
 		return true;
 	}
 	// [Window.close()] https://developer.mozilla.org/en-US/docs/Web/API/moveBy
 	static int close(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(!eventTarget(ctx)->close())
-			return DKERROR("close() failed! \n");
+			return false;
 		return true;
 	}
 	// [Window.dump()] https://developer.mozilla.org/en-US/docs/Web/API/moveBy
@@ -748,14 +746,14 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString message = duk_require_string(ctx, 1);
 		if(!eventTarget(ctx)->dump(message))
-			return DKERROR("dump() failed! \n");
+			return false;
 		return true;
 	}
 	// [Window.focus()] https://developer.mozilla.org/en-US/docs/Web/API/moveBy
 	static int focus(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(!eventTarget(ctx)->focus())
-			return DKERROR("focus() failed! \n");
+			return false;
 		return true;
 	}
 	// [Window.moveBy()] https://developer.mozilla.org/en-US/docs/Web/API/moveBy
@@ -764,7 +762,7 @@ public:
 		int deltaX = duk_require_int(ctx, 1);
 		int deltaY = duk_require_int(ctx, 2);
 		if(!eventTarget(ctx)->moveBy(deltaX, deltaY))
-			return DKERROR("moveBy() failed! \n");
+			return false;
 		return true;
 	}
 	// [Window.moveTo()] https://developer.mozilla.org/en-US/docs/Web/API/moveTo
@@ -773,7 +771,7 @@ public:
 		int x = duk_require_int(ctx, 1);
 		int y = duk_require_int(ctx, 2);
 		if(!eventTarget(ctx)->moveTo(x, y))
-			return DKERROR("moveTo() failed! \n");
+			return false;
 		return true;
 	}
 	// [Window.resizeBy()] https://developer.mozilla.org/en-US/docs/Web/API/resizeBy
@@ -782,7 +780,7 @@ public:
 		int xDelta = duk_require_int(ctx, 1);
 		int yDelta = duk_require_int(ctx, 2);
 		if(!eventTarget(ctx)->resizeBy(xDelta, yDelta))
-			return DKERROR("resizeBy() failed! \n");
+			return false;
 		return true;
 	}
 	// [Window.resizeTo()] https://developer.mozilla.org/en-US/docs/Web/API/resizeTo
@@ -791,12 +789,48 @@ public:
 		int width = duk_require_int(ctx, 1);
 		int height = duk_require_int(ctx, 2);
 		if(!eventTarget(ctx)->resizeTo(width, height))
-			return DKERROR("resizeTo() failed! \n");
+			return false;
 		return true;
 	}
 	
 	
 	////// Deprecated methods //////
+	// [Window.back()](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/back
+	static int back(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		if(!eventTarget(ctx)->back())
+			return false;
+		return true;
+	}
+	// [Window.captureEvents()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/captureEvents
+	static int captureEvents(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		if(!eventTarget(ctx)->captureEvents())
+			return false;
+		return true;
+	}
+	// [Window.forward()](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/forward
+	static int forward(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		if(!eventTarget(ctx)->forward())
+			return false;
+		return true;
+	}
+	// [Window.releaseEvents()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/releaseEvents
+	static int releaseEvents(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString eventType = duk_require_string(ctx, 1);
+		if(!eventTarget(ctx)->releaseEvents(eventType))
+			return false;
+		return true;
+	}
+	// [Window.showModalDialog()](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/showModalDialog
+	static int showModalDialog(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		if(!eventTarget(ctx)->showModalDialog())
+			return false;
+		return true;
+	}
 	
 };
 REGISTER_OBJECT(DKWindowJS, true)
