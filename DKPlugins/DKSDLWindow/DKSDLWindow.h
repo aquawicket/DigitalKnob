@@ -78,9 +78,9 @@ public:
 	// [Window.outerHeight](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/outerHeight
 	bool outerHeight(unsigned int& _outerHeight, bool set = false) {
 		if(set){
-			int w;
-			SDL_GetWindowSize(window, &w, NULL);
-			SDL_SetWindowSize(window, w, (int)_outerHeight);
+			int width;
+			SDL_GetWindowSize(window, &width, NULL);
+			SDL_SetWindowSize(window, width, (int)_outerHeight);
 		}
 		else{
 			int sdl_outerHeight;
@@ -90,6 +90,19 @@ public:
 		return true;
 	}
 	// [Window.outerWidth](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/outerWidth
+	bool outerWidth(unsigned int& _outerWidth, bool set = false) {
+		if(set){
+			int height;
+			SDL_GetWindowSize(window, NULL, &height);
+			SDL_SetWindowSize(window, (int)_outerWidth, height);
+		}
+		else{
+			int sdl_outerWidth;
+			SDL_GetWindowSize(window, &sdl_outerWidth, NULL);
+			_outerWidth = (unsigned int)sdl_outerWidth;
+		}
+		return true;
+	}
 	// [Window.pageXOffset](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/pageXOffset
 	// [Window.pageYOffset](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset
 	// [Window.parent](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/parent
