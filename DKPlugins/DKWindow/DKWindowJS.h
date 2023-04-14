@@ -103,6 +103,37 @@ public:
 		return true;
 	}
 	
+	static DKWindow* eventTarget(duk_context* ctx){
+		DKString eventTargetAddress = duk_require_string(ctx, 0);
+		return (DKWindow*)addressToPointer(eventTargetAddress);
+	}
+	
+	
+	static bool GetBool(duk_context* ctx){
+		if (duk_is_boolean(ctx, 1))
+			return duk_to_boolean(ctx, 1);
+		return false;
+	}
+	static double GetDouble(duk_context* ctx){
+		if (duk_is_number(ctx, 1))
+			return duk_to_number(ctx, 1);
+		return 0.0;
+	}
+	static int GetInt(duk_context* ctx){
+		if (duk_is_number(ctx, 1))
+			return duk_to_int(ctx, 1);
+		return 0;
+	}
+	static DKString GetString(duk_context* ctx){
+		if (duk_is_string(ctx, 1))
+			return duk_to_string(ctx, 1);
+		return "";
+	}
+	static unsigned int GetUint(duk_context* ctx){
+		if (duk_is_number(ctx, 1))
+			return duk_to_uint(ctx, 1);
+		return 0;
+	}
 	
 	////// Constructor //////
 	// [Event()] https://developer.mozilla.org/en-US/docs/Web/API/Event/Event
@@ -111,7 +142,7 @@ public:
 		DKINFO("CPP_DKWindow()\n");
 		DKWindow* _window = new DKWindow();
 		DKString eventTargetAddress = pointerToAddress(_window);
-		duk_push_string(ctx, eventTargetAddress.c_str());	
+		duk_push_string(ctx, eventTargetAddress.c_str());
 		return true;
 	}
 	
@@ -120,544 +151,487 @@ public:
 	// [Window.caches](Read only) https://developer.mozilla.org/en-US/docs/Web/API/caches
 	static int caches(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_string(ctx, 1))
-			eventTarget->caches = duk_to_string(ctx, 1);
-		duk_push_string(ctx, eventTarget->caches.c_str());	
+		DKString _caches = GetString(ctx);
+		if(!eventTarget(ctx)->caches(_caches, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _caches);
 		return true;
 	}
 	// [Window.clientInformation](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/navigator
 	static int clientInformation(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_string(ctx, 1))
-			eventTarget->caches = duk_to_string(ctx, 1);
-		duk_push_string(ctx, eventTarget->caches.c_str());	
+		DKString _clientInformation = GetString(ctx);
+		if(!eventTarget(ctx)->clientInformation(_clientInformation, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _clientInformation);
 		return true;
 	}
 	// [Window.closed](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/closed
 	static int closed(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_boolean(ctx, 1))
-			eventTarget->closed = duk_to_boolean(ctx, 1);
-		duk_push_boolean(ctx, eventTarget->closed);	
+		bool _closed = GetBool(ctx);
+		if(!eventTarget(ctx)->closed(_closed, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _closed);
 		return true;
 	}
 	// [Window.console](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/console
 	static int console(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_string(ctx, 1))
-			eventTarget->console = duk_to_string(ctx, 1);
-		duk_push_string(ctx, eventTarget->console.c_str());	
+		DKString _console = GetString(ctx);
+		if(!eventTarget(ctx)->console(_console, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _console);
 		return true;
 	}
 	// [Window.credentialless](Read only)(Experimental)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/credentialless
 	static int credentialless(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_boolean(ctx, 1))
-			eventTarget->credentialless = duk_to_boolean(ctx, 1);
-		duk_push_boolean(ctx, eventTarget->credentialless);	
+		bool _credentialless = GetBool(ctx);
+		if(!eventTarget(ctx)->credentialless(_credentialless, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _credentialless);
 		return true;
 	}
 	// [Window.crypto](Read only) https://developer.mozilla.org/en-US/docs/Web/API/crypto_property
 	static int crypto(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_string(ctx, 1))
-			eventTarget->crypto = duk_to_string(ctx, 1);
-		duk_push_string(ctx, eventTarget->crypto.c_str());	
+		DKString _crypto = GetString(ctx);
+		if(!eventTarget(ctx)->crypto(_crypto, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _crypto);
 		return true;
 	}
 	// [Window.customElements](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/customElements
 	static int customElements(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_string(ctx, 1))
-			eventTarget->customElements = duk_to_string(ctx, 1);
-		duk_push_string(ctx, eventTarget->customElements.c_str());	
+		DKString _customElements = GetString(ctx);
+		if(!eventTarget(ctx)->customElements(_customElements, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _customElements);
 		return true;
 	}
 	// [Window.devicePixelRatio](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio
 	static int devicePixelRatio(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_number(ctx, 1))
-			eventTarget->devicePixelRatio = duk_to_number(ctx, 1);
-		duk_push_number(ctx, eventTarget->devicePixelRatio);	
+		double _devicePixelRatio = GetDouble(ctx);
+		if(!eventTarget(ctx)->devicePixelRatio(_devicePixelRatio, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _devicePixelRatio);
 		return true;
 	}
 	// [Window.document](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/document
 	static int document(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_string(ctx, 1))
-			eventTarget->document = duk_to_string(ctx, 1);
-		duk_push_string(ctx, eventTarget->document.c_str());	
+		DKString _document = GetString(ctx);
+		if(!eventTarget(ctx)->document(_document, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _document);
 		return true;
 	}
 	// [Window.frameElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/frameElement
 	static int frameElement(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_string(ctx, 1))
-			eventTarget->frameElement = duk_to_string(ctx, 1);
-		duk_push_string(ctx, eventTarget->frameElement.c_str());	
+		DKString _frameElement = GetString(ctx);
+		if(!eventTarget(ctx)->frameElement(_frameElement, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _frameElement);
 		return true;
 	}
 	// [Window.frames](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/frames
 	static int frames(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_string(ctx, 1))
-			eventTarget->frames = duk_to_string(ctx, 1);
-		duk_push_string(ctx, eventTarget->frames.c_str());	
+		DKString _frames = GetString(ctx);
+		if(!eventTarget(ctx)->frames(_frames, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _frames);
 		return true;
 	}
 	// [Window.fullScreen](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/fullScreen
 	static int fullScreen(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_boolean(ctx, 1))
-			eventTarget->fullScreen = duk_to_boolean(ctx, 1);
-		duk_push_boolean(ctx, eventTarget->fullScreen);	
+		bool _fullScreen = GetBool(ctx);
+		if(!eventTarget(ctx)->fullScreen(_fullScreen, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _fullScreen);
 		return true;
 	}
 	// [Window.history](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/History
 	static int history(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_string(ctx, 1))
-			eventTarget->history = duk_to_string(ctx, 1);
-		duk_push_string(ctx, eventTarget->history.c_str());	
+		DKString _history = GetString(ctx);
+		if(!eventTarget(ctx)->history(_history, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _history);
 		return true;
 	}
 	// [Window.indexedDB](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/indexedDB
 	static int indexedDB(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_string(ctx, 1))
-			eventTarget->indexedDB = duk_to_string(ctx, 1);
-		duk_push_string(ctx, eventTarget->indexedDB.c_str());	
+		DKString _indexedDB = GetString(ctx);
+		if(!eventTarget(ctx)->indexedDB(_indexedDB, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _indexedDB);
 		return true;
 	}
 	// [Window.innerHeight](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/innerHeight
 	static int innerHeight(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_number(ctx, 1))
-			eventTarget->innerHeight = duk_to_uint(ctx, 1);
-		duk_push_uint(ctx, eventTarget->innerHeight);	
+		unsigned int _innerHeight = GetUint(ctx);
+		if(!eventTarget(ctx)->innerHeight(_innerHeight, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _innerHeight);
 		return true;
 	}
 	// [Window.innerWidth](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/innerWidth
 	static int innerWidth(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_number(ctx, 1))
-			eventTarget->innerWidth = duk_to_uint(ctx, 1);
-		duk_push_uint(ctx, eventTarget->innerWidth);	
+		unsigned int _innerWidth = GetUint(ctx);
+		if(!eventTarget(ctx)->innerWidth(_innerWidth, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _innerWidth);
 		return true;
 	}
 	// [Window.isSecureContext](Read only) https://developer.mozilla.org/en-US/docs/Web/API/isSecureContext
 	static int isSecureContext(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_boolean(ctx, 1))
-			eventTarget->isSecureContext = duk_to_boolean(ctx, 1);
-		duk_push_boolean(ctx, eventTarget->isSecureContext);	
+		bool _isSecureContext = GetBool(ctx);
+		if(!eventTarget(ctx)->isSecureContext(_isSecureContext, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _isSecureContext);
 		return true;
 	}
 	// [Window.launchQueue](Read only)(Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Window/launchQueue
 	static int launchQueue(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_string(ctx, 1))
-			eventTarget->launchQueue = duk_to_string(ctx, 1);
-		duk_push_string(ctx, eventTarget->launchQueue.c_str());	
+		DKString _launchQueue = GetString(ctx);
+		if(!eventTarget(ctx)->launchQueue(_launchQueue, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _launchQueue);
 		return true;
 	}
 	// [Window.length](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/length
 	static int length(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_number(ctx, 1))
-			eventTarget->length = duk_to_uint(ctx, 1);
-		duk_push_uint(ctx, eventTarget->length);	
+		unsigned int _length = GetUint(ctx);
+		if(!eventTarget(ctx)->length(_length, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _length);
 		return true;
 	}
 	// [Window.location] https://developer.mozilla.org/en-US/docs/Web/API/Window/location
 	static int location(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_string(ctx, 1))
-			eventTarget->location = duk_to_string(ctx, 1);
-		duk_push_string(ctx, eventTarget->location.c_str());	
+		DKString _location = GetString(ctx);
+		if(!eventTarget(ctx)->location(_location, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _location);
 		return true;
 	}
 	// [Window.locationbar](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/locationbar
 	static int locationbar(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_string(ctx, 1))
-			eventTarget->locationbar = duk_to_string(ctx, 1);
-		duk_push_string(ctx, eventTarget->locationbar.c_str());	
+		DKString _locationbar = GetString(ctx);
+		if(!eventTarget(ctx)->locationbar(_locationbar, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _locationbar);
 		return true;
 	}
 	// [Window.localStorage](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
 	static int localStorage(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_string(ctx, 1))
-			eventTarget->localStorage = duk_to_string(ctx, 1);
-		duk_push_string(ctx, eventTarget->localStorage.c_str());	
+		DKString _localStorage = GetString(ctx);
+		if(!eventTarget(ctx)->localStorage(_localStorage, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _localStorage);
 		return true;
 	}
 	// [Window.menubar](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/menubar
 	static int menubar(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_string(ctx, 1))
-			eventTarget->menubar = duk_to_string(ctx, 1);
-		duk_push_string(ctx, eventTarget->menubar.c_str());	
+		DKString _menubar = GetString(ctx);
+		if(!eventTarget(ctx)->menubar(_menubar, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _menubar);
 		return true;
 	}
 	// [Window.mozInnerScreenX](Read only)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/mozInnerScreenX
 	static int mozInnerScreenX(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_number(ctx, 1))
-			eventTarget->mozInnerScreenX = duk_to_number(ctx, 1);
-		duk_push_number(ctx, eventTarget->mozInnerScreenX);	
+		double _mozInnerScreenX = GetDouble(ctx);
+		if(!eventTarget(ctx)->mozInnerScreenX(_mozInnerScreenX, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _mozInnerScreenX);
 		return true;
 	}
 	// [Window.mozInnerScreenY](Read only)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/mozInnerScreenY
 	static int mozInnerScreenY(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_number(ctx, 1))
-			eventTarget->mozInnerScreenY = duk_to_number(ctx, 1);
-		duk_push_number(ctx, eventTarget->mozInnerScreenY);	
+		double _mozInnerScreenY = GetDouble(ctx);
+		if(!eventTarget(ctx)->mozInnerScreenY(_mozInnerScreenY, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _mozInnerScreenY);
 		return true;
 	}
 	// [Window.name] https://developer.mozilla.org/en-US/docs/Web/API/Window/name
 	static int name(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_string(ctx, 1))
-			eventTarget->name = duk_to_string(ctx, 1);
-		duk_push_string(ctx, eventTarget->name.c_str());	
+		DKString _name = GetString(ctx);
+		if(!eventTarget(ctx)->name(_name, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _name);
 		return true;
 	}
 	// [Window.navigation](Read only)(Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Window/navigation
 	static int navigation(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_string(ctx, 1))
-			eventTarget->navigation = duk_to_string(ctx, 1);
-		duk_push_string(ctx, eventTarget->navigation.c_str());	
+		DKString _name = GetString(ctx);
+		if(!eventTarget(ctx)->name(_name, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _name);
 		return true;
 	}
 	// [Window.navigator](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/navigator
 	static int navigator(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_string(ctx, 1))
-			eventTarget->navigator = duk_to_string(ctx, 1);
-		duk_push_string(ctx, eventTarget->navigator.c_str());	
+		DKString _navigator = GetString(ctx);
+		if(!eventTarget(ctx)->navigator(_navigator, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _navigator);
 		return true;
 	}
 	// [Window.opener] https://developer.mozilla.org/en-US/docs/Web/API/Window/opener
 	static int opener(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_string(ctx, 1))
-			eventTarget->opener = duk_to_string(ctx, 1);
-		duk_push_string(ctx, eventTarget->opener.c_str());	
+		DKString _opener = GetString(ctx);
+		if(!eventTarget(ctx)->opener(_opener, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _opener);
 		return true;
 	}
 	// [Window.origin](Read only) https://developer.mozilla.org/en-US/docs/Web/API/origin
 	static int origin(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_string(ctx, 1))
-			eventTarget->origin = duk_to_string(ctx, 1);
-		duk_push_string(ctx, eventTarget->origin.c_str());	
+		DKString _origin = GetString(ctx);
+		if(!eventTarget(ctx)->origin(_origin, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _origin);
 		return true;
 	}
 	// [Window.outerHeight](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/outerHeight
 	static int outerHeight(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		unsigned int _outerHeight;
-		if (duk_is_number(ctx, 1))
-			_outerHeight = duk_to_uint(ctx, 1);
-		if(!eventTarget->outerHeight(_outerHeight, duk_is_number(ctx, 1)))
+		unsigned int _outerHeight = GetUint(ctx);
+		if(!eventTarget(ctx)->outerHeight(_outerHeight, duk_is_valid_index(ctx, 1)))
 			return false;
-		duk_push_uint(ctx, _outerHeight);
+		dukglue_push(ctx, _outerHeight);
 		return true;
 	}
 	// [Window.outerWidth](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/outerWidth
 	static int outerWidth(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_number(ctx, 1))
-			eventTarget->outerWidth = duk_to_uint(ctx, 1);
-		duk_push_uint(ctx, eventTarget->outerWidth);	
+		unsigned int _outerWidth = GetUint(ctx);
+		if(!eventTarget(ctx)->outerWidth(_outerWidth, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _outerWidth);
 		return true;
 	}
 	// [Window.pageXOffset](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/pageXOffset
 	static int pageXOffset(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_number(ctx, 1))
-			eventTarget->pageXOffset = duk_to_uint(ctx, 1);
-		duk_push_uint(ctx, eventTarget->pageXOffset);	
+		unsigned int _pageXOffset = GetUint(ctx);
+		if(!eventTarget(ctx)->pageXOffset(_pageXOffset, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _pageXOffset);
 		return true;
 	}
 	// [Window.pageYOffset](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset
 	static int pageYOffset(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_number(ctx, 1))
-			eventTarget->pageYOffset = duk_to_uint(ctx, 1);
-		duk_push_uint(ctx, eventTarget->pageYOffset);	
+		unsigned int _pageYOffset = GetUint(ctx);
+		if(!eventTarget(ctx)->pageYOffset(_pageYOffset, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _pageYOffset);
 		return true;
 	}
 	// [Window.parent](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/parent
 	static int parent(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_string(ctx, 1))
-			eventTarget->parent = duk_to_string(ctx, 1);
-		duk_push_string(ctx, eventTarget->parent.c_str());	
+		DKString _parent = GetString(ctx);
+		if(!eventTarget(ctx)->parent(_parent, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _parent);
 		return true;
 	}
 	// [Window.performance](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/performance
 	static int performance(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_string(ctx, 1))
-			eventTarget->performance = duk_to_string(ctx, 1);
-		duk_push_string(ctx, eventTarget->performance.c_str());	
+		DKString _performance = GetString(ctx);
+		if(!eventTarget(ctx)->performance(_performance, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _performance);
 		return true;
 	}
 	// [Window.personalbar](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/personalbar
 	static int personalbar(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_string(ctx, 1))
-			eventTarget->personalbar = duk_to_string(ctx, 1);
-		duk_push_string(ctx, eventTarget->personalbar.c_str());	
+		DKString _personalbar = GetString(ctx);
+		if(!eventTarget(ctx)->personalbar(_personalbar, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _personalbar);
 		return true;
 	}
 	// [Window.scheduler](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/scheduler
 	static int scheduler(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_string(ctx, 1))
-			eventTarget->scheduler = duk_to_string(ctx, 1);
-		duk_push_string(ctx, eventTarget->scheduler.c_str());	
+		DKString _scheduler = GetString(ctx);
+		if(!eventTarget(ctx)->scheduler(_scheduler, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _scheduler);
 		return true;
 	}
 	// [Window.screen](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/screen
 	static int screen(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_string(ctx, 1))
-			eventTarget->screen = duk_to_string(ctx, 1);
-		duk_push_string(ctx, eventTarget->screen.c_str());	
+		DKString _screen = GetString(ctx);
+		if(!eventTarget(ctx)->screen(_screen, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _screen);
 		return true;
 	}
 	// [Window.screenX and Window.screenLeft](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/screenX
 	static int screenX(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_number(ctx, 1))
-			eventTarget->screenX = duk_to_int(ctx, 1);
-		duk_push_int(ctx, eventTarget->screenX);	
+		int _screenX = GetInt(ctx);
+		if(!eventTarget(ctx)->screenX(_screenX, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _screenX);
 		return true;
 	}
 	// [Window.screenY and Window.screenTop](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/screenY
 	static int screenY(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_number(ctx, 1))
-			eventTarget->screenY = duk_to_int(ctx, 1);
-		duk_push_int(ctx, eventTarget->screenY);	
+		int _screenY = GetInt(ctx);
+		if(!eventTarget(ctx)->screenY(_screenY, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _screenY);
 		return true;
 	}
 	// [Window.scrollbars](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollbars
 	static int scrollbars(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_string(ctx, 1))
-			eventTarget->scrollbars = duk_to_string(ctx, 1);
-		duk_push_string(ctx, eventTarget->scrollbars.c_str());	
+		DKString _scrollbars = GetString(ctx);
+		if(!eventTarget(ctx)->scrollbars(_scrollbars, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _scrollbars);
 		return true;
 	}
 	// [Window.scrollMaxX](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollMaxX
 	static int scrollMaxX(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_number(ctx, 1))
-			eventTarget->scrollMaxX = duk_to_uint(ctx, 1);
-		duk_push_uint(ctx, eventTarget->scrollMaxX);	
+		unsigned int _scrollMaxX = GetUint(ctx);
+		if(!eventTarget(ctx)->scrollMaxX(_scrollMaxX, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _scrollMaxX);
 		return true;
 	}
 	// [Window.scrollMaxY](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollMaxY
 	static int scrollMaxY(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_number(ctx, 1))
-			eventTarget->scrollMaxY = duk_to_uint(ctx, 1);
-		duk_push_uint(ctx, eventTarget->scrollMaxY);	
+		unsigned int _scrollMaxY = GetUint(ctx);
+		if(!eventTarget(ctx)->scrollMaxY(_scrollMaxY, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _scrollMaxY);
 		return true;
 	}
 	// [Window.scrollX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollX
 	static int scrollX(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_number(ctx, 1))
-			eventTarget->scrollX = duk_to_uint(ctx, 1);
-		duk_push_uint(ctx, eventTarget->scrollX);	
+		unsigned int _scrollX = GetUint(ctx);
+		if(!eventTarget(ctx)->scrollX(_scrollX, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _scrollX);
 		return true;
 	}
 	// [Window.scrollY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollY
 	static int scrollY(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_number(ctx, 1))
-			eventTarget->scrollY = duk_to_uint(ctx, 1);
-		duk_push_uint(ctx, eventTarget->scrollY);	
+		unsigned int _scrollY = GetUint(ctx);
+		if(!eventTarget(ctx)->scrollY(_scrollY, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _scrollY);
 		return true;
 	}
 	// [Window.self](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/self
 	static int self(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_string(ctx, 1))
-			eventTarget->self = duk_to_string(ctx, 1);
-		duk_push_string(ctx, eventTarget->self.c_str());	
+		DKString _self = GetString(ctx);
+		if(!eventTarget(ctx)->self(_self, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _self);
 		return true;
 	}
 	// [Window.sessionStorage] https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage
 	static int sessionStorage(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_string(ctx, 1))
-			eventTarget->sessionStorage = duk_to_string(ctx, 1);
-		duk_push_string(ctx, eventTarget->sessionStorage.c_str());	
+		DKString _sessionStorage = GetString(ctx);
+		if(!eventTarget(ctx)->sessionStorage(_sessionStorage, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _sessionStorage);
 		return true;
 	}
 	// [Window.speechSynthesis](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/speechSynthesis
 	static int speechSynthesis(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_string(ctx, 1))
-			eventTarget->speechSynthesis = duk_to_string(ctx, 1);
-		duk_push_string(ctx, eventTarget->speechSynthesis.c_str());	
+		DKString _speechSynthesis = GetString(ctx);
+		if(!eventTarget(ctx)->speechSynthesis(_speechSynthesis, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _speechSynthesis);
 		return true;
 	}
 	// [Window.statusbar](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/statusbar
 	static int statusbar(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_string(ctx, 1))
-			eventTarget->statusbar = duk_to_string(ctx, 1);
-		duk_push_string(ctx, eventTarget->statusbar.c_str());	
+		DKString _statusbar = GetString(ctx);
+		if(!eventTarget(ctx)->statusbar(_statusbar, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _statusbar);
 		return true;
 	}
 	// [Window.toolbar](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/toolbar
 	static int toolbar(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_string(ctx, 1))
-			eventTarget->toolbar = duk_to_string(ctx, 1);
-		duk_push_string(ctx, eventTarget->toolbar.c_str());	
+		DKString _toolbar = GetString(ctx);
+		if(!eventTarget(ctx)->toolbar(_toolbar, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _toolbar);
 		return true;
 	}
 	// [Window.top](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/top
 	static int top(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_string(ctx, 1))
-			eventTarget->top = duk_to_string(ctx, 1);
-		duk_push_string(ctx, eventTarget->top.c_str());	
+		DKString _top = GetString(ctx);
+		if(!eventTarget(ctx)->top(_top, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _top);
 		return true;
 	}
 	// [Window.visualViewport](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/visualViewport
 	static int visualViewport(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_string(ctx, 1))
-			eventTarget->visualViewport = duk_to_string(ctx, 1);
-		duk_push_string(ctx, eventTarget->visualViewport.c_str());	
+		DKString _visualViewport = GetString(ctx);
+		if(!eventTarget(ctx)->visualViewport(_visualViewport, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _visualViewport);
 		return true;
 	}
 	// [Window.window](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/window
 	static int window(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKWindow* eventTarget = (DKWindow*)addressToPointer(eventTargetAddress);
-		if (duk_is_string(ctx, 1))
-			eventTarget->window = duk_to_string(ctx, 1);
-		duk_push_string(ctx, eventTarget->window.c_str());	
+		DKString _window = GetString(ctx);
+		if(!eventTarget(ctx)->window(_window, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _window);
 		return true;
 	}
 	// [window[0], window[1], etc.] https://developer.mozilla.org/en-US/docs/Web/API/Window

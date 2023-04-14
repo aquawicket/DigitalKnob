@@ -19,69 +19,70 @@ public:
 		eventTargetAddress = pointerToAddress(this);
 		
 		////// Instance properties //////
-		caches = "";
-		clientInformation = "";
-		closed = false;
-		credentialless = false;
-		crypto = "";
-		customElements = "";
-		document = "";
-		frameElement = "";
-		frames = "";
-		fullScreen = false;
-		history = "";
-		indexedDB = "";
-		innerHeight = 0;
-		innerWidth = 0;
-		isSecureContext = false;
-		launchQueue = "";
-		length = 0;
-		location = "";
-		locationbar = "";
-		localStorage = "";
-		mozInnerScreenX = 0.0;
-		mozInnerScreenY = 0.0;
-		name = "";
-		navigation = "";
-		navigator = "";
-		opener = "";
-		origin = "";
+		//caches = "";
+		//clientInformation = "";
+		//closed = false;
+		//console = "";
+		//credentialless = false;
+		//crypto = "";
+		//customElements = "";
+		//document = "";
+		//frameElement = "";
+		//frames = "";
+		//fullScreen = false;
+		//history = "";
+		//indexedDB = "";
+		//innerHeight = 0;
+		//innerWidth = 0;
+		//isSecureContext = false;
+		//launchQueue = "";
+		//length = 0;
+		//location = "";
+		//locationbar = "";
+		//localStorage = "";
+		//mozInnerScreenX = 0.0;
+		//mozInnerScreenY = 0.0;
+		//name = "";
+		//navigation = "";
+		//navigator = "";
+		//opener = "";
+		//origin = "";
 		//outerHeight = 0;
-		outerWidth = 0;
-		pageXOffset = 0;
-		pageYOffset = 0;
-		parent = "";
-		performance = "";
-		personalbar = "";
-		scheduler = "";
-		screen = "";
-		screenX = 0;
-		screenY = 0;
-		scrollbars = "";
-		scrollMaxX = 0;
-		scrollMaxY = 0;
-		scrollX = 0;
-		scrollY = 0;
-		self = "";
-		sessionStorage = "";
-		speechSynthesis = "";
-		statusbar = "";
-		toolbar = "";
-		top = "";
-		visualViewport = "";
-		window = "";
+		//outerWidth = 0;
+		//pageXOffset = 0;
+		//pageYOffset = 0;
+		//parent = "";
+		//performance = "";
+		//personalbar = "";
+		//scheduler = "";
+		//screen = "";
+		//screenX = 0;
+		//screenY = 0;
+		//scrollbars = "";
+		//scrollMaxX = 0;
+		//scrollMaxY = 0;
+		//scrollX = 0;
+		//scrollY = 0;
+		//self = "";
+		//sessionStorage = "";
+		//speechSynthesis = "";
+		//statusbar = "";
+		//toolbar = "";
+		//top = "";
+		//visualViewport = "";
+		//window = "";
 		//windows = "";
 		
 		
 		////// Deprecated properties //////
-		content = "";
-		defaultStatus = "";
-		event = "";
-		external = "";
-		orientation = 0;
-		returnValue = "";
-		sidebar = "";
-		status = "";
+		//content = "";
+		//defaultStatus = "";
+		//event = "";
+		//external = "";
+		//orientation = 0;
+		//returnValue = "";
+		//sidebar = "";
+		//status = "";
 	}
 	
 	
@@ -89,132 +90,132 @@ public:
 	// [Window.caches](Read only) https://developer.mozilla.org/en-US/docs/Web/API/caches
 	virtual bool caches(DKString&, bool) { return false; }
 	// [Window.clientInformation](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/navigator
-	DKString clientInformation;
+	virtual bool clientInformation(DKString&, bool) { return false; }
 	// [Window.closed](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/closed
-	bool closed;
+	virtual bool closed(bool&, bool) { return false; }
 	// [Window.console](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/console
-	DKString console;
+	virtual bool console(DKString&, bool) { return false; }
 	// [Window.credentialless](Read only)(Experimental)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/credentialless
-	bool credentialless;
+	virtual bool credentialless(bool&, bool) { return false; }
 	// [Window.crypto](Read only) https://developer.mozilla.org/en-US/docs/Web/API/crypto_property
-	DKString crypto;
+	virtual bool crypto(DKString&, bool) { return false; }
 	// [Window.customElements](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/customElements
-	DKString customElements;
+	virtual bool customElements(DKString&, bool) { return false; }
 	// [Window.devicePixelRatio](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio
-	double devicePixelRatio;
+	virtual bool devicePixelRatio(double&, bool) { return false; }
 	// [Window.document](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/document
-	DKString document;
+	virtual bool document(DKString&, bool) { return false; }
 	// [Window.frameElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/frameElement
-	DKString frameElement;
+	virtual bool frameElement(DKString&, bool) { return false; }
 	// [Window.frames](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/frames
-	DKString frames;
+	virtual bool frames(DKString&, bool) { return false; }
 	// [Window.fullScreen](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/fullScreen
-	bool fullScreen;
+	virtual bool fullScreen(bool&, bool) { return false; }
 	// [Window.history](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/History
-	DKString history;
+	virtual bool history(DKString&, bool) { return false; }
 	// [Window.indexedDB](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/indexedDB
-	DKString indexedDB;
+	virtual bool indexedDB(DKString&, bool) { return false; }
 	// [Window.innerHeight](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/innerHeight
-	unsigned int innerHeight;
+	virtual bool innerHeight(unsigned int&, bool) { return false; }
 	// [Window.innerWidth](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/innerWidth
-	unsigned int innerWidth;
+	virtual bool innerWidth(unsigned int&, bool) { return false; }
 	// [Window.isSecureContext](Read only) https://developer.mozilla.org/en-US/docs/Web/API/isSecureContext
-	bool isSecureContext;
+	virtual bool isSecureContext(bool&, bool) { return false; }
 	// [Window.launchQueue](Read only)(Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Window/launchQueue
-	DKString launchQueue;
+	virtual bool launchQueue(DKString&, bool) { return false; }
 	// [Window.length](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/length
-	unsigned int length;
+	virtual bool length(unsigned int&, bool) { return false; }
 	// [Window.location] https://developer.mozilla.org/en-US/docs/Web/API/Window/location
-	DKString location;
+	virtual bool location(DKString&, bool) { return false; }
 	// [Window.locationbar](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/locationbar
-	DKString locationbar;
+	virtual bool locationbar(DKString&, bool) { return false; }
 	// [Window.localStorage](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
-	DKString localStorage;
+	virtual bool localStorage(DKString&, bool) { return false; }
 	// [Window.menubar](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/menubar
-	DKString menubar;
+	virtual bool menubar(DKString&, bool) { return false; }
 	// [Window.mozInnerScreenX](Read only)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/mozInnerScreenX
-	double mozInnerScreenX;
+	virtual bool mozInnerScreenX(double&, bool) { return false; }
 	// [Window.mozInnerScreenY](Read only)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/mozInnerScreenY
-	double mozInnerScreenY;
+	virtual bool mozInnerScreenY(double&, bool) { return false; }
 	// [Window.name] https://developer.mozilla.org/en-US/docs/Web/API/Window/name
-	DKString name;
+	virtual bool name(DKString&, bool) { return false; }
 	// [Window.navigation](Read only)(Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Window/navigation
-	DKString navigation;
+	virtual bool navigation(DKString&, bool) { return false; }
 	// [Window.navigator](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/navigator
-	DKString navigator;
+	virtual bool navigator(DKString&, bool) { return false; }
 	// [Window.opener] https://developer.mozilla.org/en-US/docs/Web/API/Window/opener
-	DKString opener;
+	virtual bool opener(DKString&, bool) { return false; }
 	// [Window.origin](Read only) https://developer.mozilla.org/en-US/docs/Web/API/origin
 	virtual bool origin(DKString&, bool) { return false; }
 	// [Window.outerHeight](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/outerHeight
 	virtual bool outerHeight(unsigned int&, bool) { return false; }
 	// [Window.outerWidth](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/outerWidth
-	unsigned int outerWidth;
+	virtual bool outerWidth(unsigned int&, bool) { return false; }
 	// [Window.pageXOffset](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/pageXOffset
-	unsigned int pageXOffset;
+	virtual bool pageXOffset(unsigned int&, bool) { return false; }
 	// [Window.pageYOffset](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset
-	unsigned int pageYOffset;
+	virtual bool pageYOffset(unsigned int&, bool) { return false; }
 	// [Window.parent](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/parent
-	DKString parent;
+	virtual bool parent(DKString&, bool) { return false; }
 	// [Window.performance](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/performance
-	DKString performance;
+	virtual bool performance(DKString&, bool) { return false; }
 	// [Window.personalbar](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/personalbar
-	DKString personalbar;
+	virtual bool personalbar(DKString&, bool) { return false; }
 	// [Window.scheduler](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/scheduler
-	DKString scheduler;
+	virtual bool scheduler(DKString&, bool) { return false; }
 	// [Window.screen](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/screen
-	DKString screen;
+	virtual bool screen(DKString&, bool) { return false; }
 	// [Window.screenX and Window.screenLeft](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/screenX
-	int screenX;
+	virtual bool screenX(int&, bool) { return false; }
 	// [Window.screenY and Window.screenTop](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/screenY
-	int screenY;
+	virtual bool screenY(int&, bool) { return false; }
 	// [Window.scrollbars](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollbars
-	DKString scrollbars;
+	virtual bool scrollbars(DKString&, bool) { return false; }
 	// [Window.scrollMaxX](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollMaxX
-	unsigned int scrollMaxX;
+	virtual bool scrollMaxX(unsigned int&, bool) { return false; }
 	// [Window.scrollMaxY](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollMaxY
-	unsigned int scrollMaxY;
+	virtual bool scrollMaxY(unsigned int&, bool) { return false; }
 	// [Window.scrollX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollX
-	unsigned int scrollX;
+	virtual bool scrollX(unsigned int&, bool) { return false; }
 	// [Window.scrollY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollY
-	unsigned int scrollY;
+	virtual bool scrollY(unsigned int&, bool) { return false; }
 	// [Window.self](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/self
-	DKString self;
+	virtual bool self(DKString&, bool) { return false; }
 	// [Window.sessionStorage] https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage
-	DKString sessionStorage;
+	virtual bool sessionStorage(DKString&, bool) { return false; }
 	// [Window.speechSynthesis](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/speechSynthesis
-	DKString speechSynthesis;
+	virtual bool speechSynthesis(DKString&, bool) { return false; }
 	// [Window.statusbar](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/statusbar
-	DKString statusbar;
+	virtual bool statusbar(DKString&, bool) { return false; }
 	// [Window.toolbar](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/toolbar
-	DKString toolbar;
+	virtual bool toolbar(DKString&, bool) { return false; }
 	// [Window.top](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/top
-	DKString top;
+	virtual bool top(DKString&, bool) { return false; }
 	// [Window.visualViewport](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/visualViewport
-	DKString visualViewport;
+	virtual bool visualViewport(DKString&, bool) { return false; }
 	// [Window.window](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/window
-	DKString window;
+	virtual bool window(DKString&, bool) { return false; }
 	// [window[0], window[1], etc.] https://developer.mozilla.org/en-US/docs/Web/API/Window
-	DKStringArray windows;
+	//DKStringArray windows;
 
 	
 	////// Deprecated properties //////
 	// [Window.content and Window._content](Deprecated)(Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window
-	DKString content;
+	virtual bool content(DKString&, bool) { return false; }
 	// [Window.defaultStatus](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/defaultStatus
-	DKString defaultStatus;
+	virtual bool defaultStatus(DKString&, bool) { return false; }
 	// [Window.event](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/event
-	DKString event;
+	virtual bool event(DKString&, bool) { return false; }
 	// [Window.external](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/external
-	DKString external;
+	virtual bool external(DKString&, bool) { return false; }
 	// [Window.orientation](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/orientation
-	int orientation;
+	virtual bool orientation(int&, bool) { return false; }
 	// [Window.returnValue](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window
-	DKString returnValue;
+	virtual bool returnValue(DKString&, bool) { return false; }
 	// [Window.sidebar](Deprecated)(Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/sidebar
-	DKString sidebar;
+	virtual bool sidebar(DKString&, bool) { return false; }
 	// [Window.status](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/status
-	DKString status;
+	virtual bool status(DKString&, bool) { return false; }
 	
 	
 	////// Instance methods //////
