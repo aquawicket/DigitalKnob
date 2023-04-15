@@ -1,29 +1,29 @@
 #pragma once
-#ifndef DKWheelEventJS_H
-#define DKWheelEventJS_H
+#ifndef DKWheelEventDUK_H
+#define DKWheelEventDUK_H
 
 #include "DKDuktape/DKDuktape.h"
 
 
 // [W3C] https://w3c.github.io/uievents/#events-wheelevents
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent
-class DKWheelEventJS : public DKObjectT<DKWheelEventJS>
+class DKWheelEventDUK : public DKObjectT<DKWheelEventDUK>
 {
 public:
 	bool Init(){
 		
 		////// Constructor //////
-		DKDuktape::AttachFunction("CPP_DKWheelEvent", DKWheelEventJS::constructor);
+		DKDuktape::AttachFunction("CPP_DKWheelEventDUK", DKWheelEventDUK::constructor);
 	
 	
 		////// Instance properties //////
-		DKDuktape::AttachFunction("CPP_DKWheelEvent_deltaX", 		DKWheelEventJS::deltaX); 		// [WheelEvent.deltaX](Read only)
-		DKDuktape::AttachFunction("CPP_DKWheelEvent_deltaY", 		DKWheelEventJS::deltaY); 		// [WheelEvent.deltaY](Read only)
-		DKDuktape::AttachFunction("CPP_DKWheelEvent_deltaZ",		DKWheelEventJS::deltaZ); 		// [WheelEvent.deltaZ](Read only)
-		DKDuktape::AttachFunction("CPP_DKWheelEvent_deltaMode", 	DKWheelEventJS::deltaMode); 	// [WheelEvent.deltaMode](Read only)
-		DKDuktape::AttachFunction("CPP_DKWheelEvent_wheelDelta", 	DKWheelEventJS::wheelDelta); 	// [WheelEvent.wheelDelta](Read only)(Deprecated)(Non-standard)
-		DKDuktape::AttachFunction("CPP_DKWheelEvent_wheelDeltaX", 	DKWheelEventJS::wheelDeltaX); 	// [WheelEvent.wheelDeltaX](Read only)(Deprecated)(Non-standard)
-		DKDuktape::AttachFunction("CPP_DKWheelEvent_wheelDeltaY", 	DKWheelEventJS::wheelDeltaY); 	// [WheelEvent.wheelDeltaY](Read only)(Deprecated)(Non-standard)
+		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_deltaX", 		DKWheelEventDUK::deltaX); 		// [WheelEvent.deltaX](Read only)
+		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_deltaY", 		DKWheelEventDUK::deltaY); 		// [WheelEvent.deltaY](Read only)
+		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_deltaZ",		DKWheelEventDUK::deltaZ); 		// [WheelEvent.deltaZ](Read only)
+		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_deltaMode", 	DKWheelEventDUK::deltaMode); 	// [WheelEvent.deltaMode](Read only)
+		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_wheelDelta", 	DKWheelEventDUK::wheelDelta); 	// [WheelEvent.wheelDelta](Read only)(Deprecated)(Non-standard)
+		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_wheelDeltaX", 	DKWheelEventDUK::wheelDeltaX); 	// [WheelEvent.wheelDeltaX](Read only)(Deprecated)(Non-standard)
+		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_wheelDeltaY", 	DKWheelEventDUK::wheelDeltaY); 	// [WheelEvent.wheelDeltaY](Read only)(Deprecated)(Non-standard)
 	
 	
 		////// Events //////
@@ -32,7 +32,7 @@ public:
 
 
 		////// Load .js files //////
-		DKClass::DKCreate("DKWheelEvent/DKWheelEvent.js");
+		DKClass::DKCreate("DKWheelEvent/DKWheelEventDUK.js");
 		
 		return true;
 	}
@@ -44,7 +44,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
 		DKString options = "";//duk_require_string(ctx, 1);
-		DKINFO("CPP_DKWheelEvent("+type+","+options+")\n");
+		DKINFO("CPP_DKWheelEventDUK("+type+","+options+")\n");
 		DKWheelEvent* event = new DKWheelEvent(type, options);
 		DKString eventAddress = pointerToAddress(event);
 		duk_push_string(ctx, eventAddress.c_str());	
@@ -119,7 +119,7 @@ public:
 	}
 	
 };
-REGISTER_OBJECT(DKWheelEventJS, true)
+REGISTER_OBJECT(DKWheelEventDUK, true)
 
 
-#endif //DKWheelEventJS_H
+#endif //DKWheelEventDUK_H
