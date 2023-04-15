@@ -81,7 +81,33 @@ public:
 	// [Window.opener] https://developer.mozilla.org/en-US/docs/Web/API/Window/opener
 	// [Window.origin](Read only) https://developer.mozilla.org/en-US/docs/Web/API/origin
 	// [Window.outerHeight](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/outerHeight
+	bool outerHeight(unsigned int& _outerHeight, bool set = false) {
+		if(set){
+			return DKTODO();
+		}
+		else{
+			#if WIN
+				RECT rect;
+				GetWindowRect(GetConsoleWindow(), &rect);
+				_outerHeight = rect.bottom - rect.top;
+			#endif
+		}
+		return true;
+	}
 	// [Window.outerWidth](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/outerWidth
+	bool outerWidth(unsigned int& _outerWidth, bool set = false) {
+		if(set){
+			return DKTODO();
+		}
+		else{
+			#if WIN
+				RECT rect;
+				GetWindowRect(GetConsoleWindow(), &rect);
+				_outerWidth = rect.right - rect.left;
+			#endif
+		}
+		return true;
+	}
 	// [Window.pageXOffset](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/pageXOffset
 	// [Window.pageYOffset](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset
 	// [Window.parent](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/parent
