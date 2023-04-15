@@ -9,14 +9,14 @@ var FocusEvent = function FocusEvent(type, options, address) {
 	if(address)
 		this.address = address;
 	if(!this.address)
-		this.address = CPP_DKFocusEvent(type, options);
+		this.address = CPP_DKFocusEventDUK(type, options);
 	
 
 	////// Instance properties //////
 	// [FocusEvent.relatedTarget](Read only)
 	Object.defineProperty(this, "relatedTarget", {
-        get: function relatedTarget() { return CPP_DKFocusEvent_relatedTarget(this.address) },
-		set: function relatedTarget(v) { return CPP_DKFocusEvent_relatedTarget(this.address, v) },
+        get: function relatedTarget() { return CPP_DKFocusEventDUK_relatedTarget(this.address) },
+		set: function relatedTarget(v) { return CPP_DKFocusEventDUK_relatedTarget(this.address, v) },
 		configurable: true,
     })
 	

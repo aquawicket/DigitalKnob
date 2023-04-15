@@ -1,25 +1,25 @@
 #if HAVE_DKDuktape
 
 #pragma once
-#ifndef DKFocusEventJS_H
-#define DKFocusEventJS_H
+#ifndef DKFocusEventDUK_H
+#define DKFocusEventDUK_H
 
 #include "DKDuktape/DKDuktape.h"
 
 
 // [W3C] https://w3c.github.io/uievents/#events-focusevent
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent
-class DKFocusEventJS : public DKObjectT<DKFocusEventJS>
+class DKFocusEventDUK : public DKObjectT<DKFocusEventDUK>
 {
 public:
 	bool Init(){
 		
 		////// Constructor //////
-		DKDuktape::AttachFunction("CPP_DKFocusEvent", DKFocusEventJS::constructor);
+		DKDuktape::AttachFunction("CPP_DKFocusEventDUK", DKFocusEventDUK::constructor);
 		
 	
 		////// Instance properties //////
-		DKDuktape::AttachFunction("CPP_DKFocusEvent_relatedTarget",	DKFocusEventJS::relatedTarget);
+		DKDuktape::AttachFunction("CPP_DKFocusEventDUK_relatedTarget",	DKFocusEventDUK::relatedTarget);
 
 		
 		////// Events //////
@@ -30,7 +30,7 @@ public:
 	
 		
 		////// Load .js files
-		DKClass::DKCreate("DKFocusEvent/DKFocusEvent.js");
+		DKClass::DKCreate("DKFocusEvent/DKFocusEventDUK.js");
 		
 		return true;
 	}
@@ -42,7 +42,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
 		DKString options = "";//duk_require_string(ctx, 1);
-		DKINFO("CPP_DKFocusEvent("+type+","+options+")\n");
+		DKINFO("CPP_DKFocusEventDUK("+type+","+options+")\n");
 		DKFocusEvent* event = new DKFocusEvent(type, options);
 		DKString eventAddress = pointerToAddress(event);
 		duk_push_string(ctx, eventAddress.c_str());	
@@ -63,8 +63,8 @@ public:
 	}
 	
 };
-REGISTER_OBJECT(DKFocusEventJS, true)
+REGISTER_OBJECT(DKFocusEventDUK, true)
 
 
-#endif //DKFocusEventJS_H
+#endif //DKFocusEventDUK_H
 #endif //HAVE_DKDuktape
