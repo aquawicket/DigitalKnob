@@ -1,19 +1,19 @@
 #pragma once
-#ifndef DKKeyboardEventJS_H
-#define DKKeyboardEventJS_H
+#ifndef DKKeyboardEventDUK_H
+#define DKKeyboardEventDUK_H
 
 #include "DKDuktape/DKDuktape.h"
 
 
 // [W3C] https://w3c.github.io/uievents/#events-keyboardevents
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent
-class DKKeyboardEventJS : public DKObjectT<DKKeyboardEventJS>
+class DKKeyboardEventDUK : public DKObjectT<DKKeyboardEventDUK>
 {
 public:
 	bool Init(){
 		
 		////// Constructor //////
-		DKDuktape::AttachFunction("CPP_DKKeyboardEvent", DKKeyboardEventJS::constructor);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK", DKKeyboardEventDUK::constructor);
 		
 		
 		////// Constants //////
@@ -25,43 +25,43 @@ public:
 	
 	
 		////// Instance properties //////
-		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_altKey",			DKKeyboardEventJS::altKey);
-		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_code",			DKKeyboardEventJS::code);
-		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_ctrlKey",		DKKeyboardEventJS::ctrlKey);
-		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_isComposing", 	DKKeyboardEventJS::isComposing);
-		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_key", 			DKKeyboardEventJS::key);
-		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_locale",			DKKeyboardEventJS::locale);
-		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_location", 		DKKeyboardEventJS::location);
-		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_metaKey", 		DKKeyboardEventJS::metaKey);
-		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_repeat",			DKKeyboardEventJS::repeat);
-		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_shiftKey",		DKKeyboardEventJS::shiftKey);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_altKey",			DKKeyboardEventDUK::altKey);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_code",			DKKeyboardEventDUK::code);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_ctrlKey",		DKKeyboardEventDUK::ctrlKey);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_isComposing", 	DKKeyboardEventDUK::isComposing);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_key", 			DKKeyboardEventDUK::key);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_locale",			DKKeyboardEventDUK::locale);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_location", 		DKKeyboardEventDUK::location);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_metaKey", 		DKKeyboardEventDUK::metaKey);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_repeat",			DKKeyboardEventDUK::repeat);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_shiftKey",		DKKeyboardEventDUK::shiftKey);
 		
 		
 		////// Instance methods //////
 		// [KeyboardEvent.getModifierState()] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/getModifierState
-		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_getModifierState", DKKeyboardEventJS::getModifierState);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_getModifierState", DKKeyboardEventDUK::getModifierState);
 		
 		
 		////// Obsolete methods //////
 		// [KeyboardEvent.initKeyEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/initKeyEvent
-		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_initKeyEvent", DKKeyboardEventJS::initKeyEvent);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_initKeyEvent", DKKeyboardEventDUK::initKeyEvent);
 		// [KeyboardEvent.initKeyboardEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/initKeyboardEvent
-		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_initKeyboardEvent", DKKeyboardEventJS::initKeyboardEvent);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_initKeyboardEvent", DKKeyboardEventDUK::initKeyboardEvent);
 
 	
 		////// Obsolete properties //////
 		// [KeyboardEvent.char](Non-standard)(Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/char
-		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_char",			DKKeyboardEventJS::_char);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_char",			DKKeyboardEventDUK::_char);
 		// [KeyboardEvent.charCode](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/charCode
-		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_charCode",		DKKeyboardEventJS::charCode);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_charCode",		DKKeyboardEventDUK::charCode);
 		// [KeyboardEvent.keyCode](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode
-		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_keyCode",		DKKeyboardEventJS::keyCode);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_keyCode",		DKKeyboardEventDUK::keyCode);
 		// [KeyboardEvent.keyIdentifier](Non-standard)(Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyIdentifier
-		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_keyIdentifier",	DKKeyboardEventJS::keyIdentifier);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_keyIdentifier",	DKKeyboardEventDUK::keyIdentifier);
 		// [KeyboardEvent.keyLocation](Non-standard)(Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyLocation
-		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_keyLocation",	DKKeyboardEventJS::keyLocation);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_keyLocation",	DKKeyboardEventDUK::keyLocation);
 		// [KeyboardEvent.which](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/which
-		DKDuktape::AttachFunction("CPP_DKKeyboardEvent_which",			DKKeyboardEventJS::which);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_which",			DKKeyboardEventDUK::which);
 		
 		
 		////// Events //////
@@ -74,7 +74,7 @@ public:
 		
 		
 		////// Load .js files
-		DKClass::DKCreate("DKKeyboardEvent/DKKeyboardEvent.js");
+		DKClass::DKCreate("DKKeyboardEvent/DKKeyboardEventDUK.js");
 		
 		return true;
 	}
@@ -86,7 +86,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
 		DKString options = "";//duk_require_string(ctx, 1);
-		DKINFO("CPP_DKKeyboardEvent("+type+","+options+")\n");
+		DKINFO("CPP_DKKeyboardEventDUK("+type+","+options+")\n");
 		DKKeyboardEvent* event = new DKKeyboardEvent(type, options);
 		DKString eventAddress = pointerToAddress(event);
 		duk_push_string(ctx, eventAddress.c_str());	
@@ -267,7 +267,7 @@ public:
 	}
 
 };
-REGISTER_OBJECT(DKKeyboardEventJS, true)
+REGISTER_OBJECT(DKKeyboardEventDUK, true)
 
 
-#endif //DKKeyboardEventJS_H
+#endif //DKKeyboardEventDUK_H

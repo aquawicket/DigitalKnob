@@ -13,7 +13,7 @@ CPP_DK_Create("DKFocusEventDUK");
 CPP_DK_Create("DKMouseEventDUK");
 CPP_DK_Create("DKWheelEventDUK");
 CPP_DK_Create("DKInputEventDUK");
-CPP_DK_Create("DKKeyboardEventJS");
+CPP_DK_Create("DKKeyboardEventDUK");
 CPP_DK_Create("DKCompositionEventJS");
 
 // https://html.spec.whatwg.org/
