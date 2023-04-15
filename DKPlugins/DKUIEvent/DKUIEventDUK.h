@@ -1,32 +1,32 @@
 #if HAVE_DKDuktape
 
 #pragma once
-#ifndef DKUIEventJS_H
-#define DKUIEventJS_H
+#ifndef DKUIEventDUK_H
+#define DKUIEventDUK_H
 
 #include "DKDuktape/DKDuktape.h"
 
 
 // [W3C] https://w3c.github.io/uievents
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/UIEvent
-class DKUIEventJS : public DKObjectT<DKUIEventJS>
+class DKUIEventDUK : public DKObjectT<DKUIEventDUK>
 {
 public:
 	bool Init(){
 		
 		////// Constructor //////
-		DKDuktape::AttachFunction("CPP_DKUIEvent", 						DKUIEventJS::constructor);
+		DKDuktape::AttachFunction("CPP_DKUIEventDUK", 						DKUIEventDUK::constructor);
 	
 	
 		////// Instance properties //////
-		DKDuktape::AttachFunction("CPP_DKUIEvent_detail", 				DKUIEventJS::detail);
-		DKDuktape::AttachFunction("CPP_DKUIEvent_sourceCapabilities", 	DKUIEventJS::sourceCapabilities);
-		DKDuktape::AttachFunction("CPP_DKUIEvent_view", 				DKUIEventJS::view);
-		DKDuktape::AttachFunction("CPP_DKUIEvent_which", 				DKUIEventJS::which);
+		DKDuktape::AttachFunction("CPP_DKUIEventDUK_detail", 				DKUIEventDUK::detail);
+		DKDuktape::AttachFunction("CPP_DKUIEventDUK_sourceCapabilities", 	DKUIEventDUK::sourceCapabilities);
+		DKDuktape::AttachFunction("CPP_DKUIEventDUK_view", 				DKUIEventDUK::view);
+		DKDuktape::AttachFunction("CPP_DKUIEventDUK_which", 				DKUIEventDUK::which);
 
 		
 		////// Instance methods //////
-		DKDuktape::AttachFunction("CPP_DKUIEvent_initUIEvent", 			DKUIEventJS::initUIEvent);
+		DKDuktape::AttachFunction("CPP_DKUIEventDUK_initUIEvent", 			DKUIEventDUK::initUIEvent);
 		
 		
 		////// Events //////
@@ -38,7 +38,7 @@ public:
 	
 	
 		////// Load .js files
-		DKClass::DKCreate("DKUIEvent/DKUIEvent.js");
+		DKClass::DKCreate("DKUIEvent/DKUIEventDUK.js");
 		
 		return true;
 	}
@@ -50,7 +50,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
 		DKString options = "";//duk_require_string(ctx, 1);
-		DKINFO("CPP_DKUIEvent("+type+","+options+")\n");
+		DKINFO("CPP_DKUIEventDUK("+type+","+options+")\n");
 		DKUIEvent* event = new DKUIEvent(type, options);
 		DKString eventAddress = pointerToAddress(event);
 		duk_push_string(ctx, eventAddress.c_str());	
@@ -97,8 +97,8 @@ public:
 	}
 
 };
-REGISTER_OBJECT(DKUIEventJS, true)
+REGISTER_OBJECT(DKUIEventDUK, true)
 
 
-#endif //DKUIEventJS_H
+#endif //DKUIEventDUK_H
 #endif //HAVE_DKDuktape

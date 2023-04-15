@@ -9,38 +9,38 @@ var UIEvent = function UIEvent(type, options, address) {
 	if(address)
 		this.address = address;
 	if(!this.address)
-		this.address = CPP_DKUIEvent(type, options);
+		this.address = CPP_DKUIEventDUK(type, options);
 	
 	
 	////// Instance properties //////
 	// [UIEvent.detail](Read only)
 	Object.defineProperty(this, "detail", {
-        get: function detail() 		{ return CPP_DKUIEvent_detail(this.address) },
-		set: function detail(num)	{ return CPP_DKUIEvent_detail(this.address, num) },
+        get: function detail() 		{ return CPP_DKUIEventDUK_detail(this.address) },
+		set: function detail(num)	{ return CPP_DKUIEventDUK_detail(this.address, num) },
 		configurable: true,
     })
 	// [UIEvent.sourceCapabilities](Read only)
 	Object.defineProperty(this, "sourceCapabilities", {
-        get: function sourceCapabilities()	{ return CPP_DKUIEvent_sourceCapabilities(this.address) },
-		set: function sourceCapabilities(v)	{ return CPP_DKUIEvent_sourceCapabilities(this.address, v) },
+        get: function sourceCapabilities()	{ return CPP_DKUIEventDUK_sourceCapabilities(this.address) },
+		set: function sourceCapabilities(v)	{ return CPP_DKUIEventDUK_sourceCapabilities(this.address, v) },
 		configurable: true,
     })
 	// [UIEvent.view](Read only)
 	Object.defineProperty(this, "view", {
-        get: function view() { return CPP_DKUIEvent_view(this.address) },
-		set: function view(num)	{ return CPP_DKUIEvent_view(this.address, num) },
+        get: function view() { return CPP_DKUIEventDUK_view(this.address) },
+		set: function view(num)	{ return CPP_DKUIEventDUK_view(this.address, num) },
 		configurable: true,
     })
 	// [UIEvent.which](Read only)
 	Object.defineProperty(this, "which", {
-        get: function which() { return CPP_DKUIEvent_which(this.address) },
+        get: function which() { return CPP_DKUIEventDUK_which(this.address) },
     })
 	
 
     ////// Instance methods //////
 	// [UIEvent.initUIEvent()](Deprecated)
 	UIEvent.prototype.initUIEvent = function initUIEvent() {
-		CPP_DKUIEvent_initUIEvent(this.address);
+		CPP_DKUIEventDUK_initUIEvent(this.address);
     }
 	
 	
