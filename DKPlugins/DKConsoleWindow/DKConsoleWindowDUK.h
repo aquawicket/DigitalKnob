@@ -1,6 +1,6 @@
 #pragma once
-#ifndef DKConsoleWindowJS_H
-#define DKConsoleWindowJS_H
+#ifndef DKConsoleWindowDUK_H
+#define DKConsoleWindowDUK_H
 
 #include "DKDuktape/DKDuktape.h"
 
@@ -9,22 +9,22 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
-class DKConsoleWindowJS : public DKObjectT<DKConsoleWindowJS>
+class DKConsoleWindowDUK : public DKObjectT<DKConsoleWindowDUK>
 {
 public:
 	bool Init(){
 		
 		////// Constructor //////
-		DKDuktape::AttachFunction("CPP_DKConsoleWindow", DKConsoleWindowJS::constructor);
+		DKDuktape::AttachFunction("CPP_DKConsoleWindowDUK", DKConsoleWindowDUK::constructor);
 		
 		
 		////// Instance properties //////
-		DKDuktape::AttachFunction("CPP_DKConsoleWindow_columns", DKConsoleWindowJS::columns);
-		DKDuktape::AttachFunction("CPP_DKConsoleWindow_rows", DKConsoleWindowJS::rows);	
+		DKDuktape::AttachFunction("CPP_DKConsoleWindowDUK_columns", DKConsoleWindowDUK::columns);
+		DKDuktape::AttachFunction("CPP_DKConsoleWindowDUK_rows", DKConsoleWindowDUK::rows);	
 			
 			
 		////// Load .js files
-		DKClass::DKCreate("DKConsoleWindow/DKConsoleWindow.js");
+		DKClass::DKCreate("DKConsoleWindow/DKConsoleWindowDUK.js");
 		
 		return true;
 	}
@@ -33,7 +33,7 @@ public:
 	////// Constructor //////
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKINFO("CPP_DKConsoleWindow()\n");
+		DKINFO("CPP_DKConsoleWindowDUK()\n");
 		//DKConsoleWindow* consolewindow = new DKConsoleWindow();
 		DKConsoleWindow* consolewindow = (DKConsoleWindow*)DKClass::DKCreate("DKConsoleWindow");
 		DKString eventTargetAddress = pointerToAddress(consolewindow);
@@ -64,7 +64,7 @@ public:
 	
 
 };
-REGISTER_OBJECT(DKConsoleWindowJS, true)
+REGISTER_OBJECT(DKConsoleWindowDUK, true)
 
 
-#endif //DKConsoleWindowJS_H
+#endif //DKConsoleWindowDUK_H

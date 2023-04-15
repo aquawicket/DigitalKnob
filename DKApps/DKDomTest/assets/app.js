@@ -20,7 +20,7 @@ CPP_DK_Create("DKCompositionEventDUK");
 CPP_DK_Create("DKWindowDUK");
 
 // ConsoleWindow
-CPP_DK_Create("DKConsoleWindowJS");
+CPP_DK_Create("DKConsoleWindowDUK");
 CPP_DK_Create("ConsoleWindowTest.js");
 
 // SDLWindow

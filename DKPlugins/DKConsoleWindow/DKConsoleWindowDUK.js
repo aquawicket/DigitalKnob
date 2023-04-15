@@ -7,17 +7,17 @@ var DKConsoleWindow = function DKConsoleWindow(address) {
 	if(address)
 		this.address = address;
 	if(!this.address)
-		this.address = CPP_DKConsoleWindow();
+		this.address = CPP_DKConsoleWindowDUK();
 	
 	console.log("JS ConsoleWindow address = "+this.address)
 	
 	
 	//// Instance properties ////
 	Object.defineProperty(this, "columns", { //Read only
-        get: function columns() { return CPP_DKConsoleWindow_columns(this.address) },
+        get: function columns() { return CPP_DKConsoleWindowDUK_columns(this.address) },
     })
 	Object.defineProperty(this, "rows", { //Read only
-        get: function rows() { return CPP_DKConsoleWindow_rows(this.address) },
+        get: function rows() { return CPP_DKConsoleWindowDUK_rows(this.address) },
     })
 
 	
