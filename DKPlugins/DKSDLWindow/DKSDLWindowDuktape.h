@@ -1,20 +1,20 @@
 #if HAVE_DKDuktape
 
 #pragma once
-#ifndef DKSDLWindowJS_H
-#define DKSDLWindowJS_H
+#ifndef DKSDLWindowDuktape_H
+#define DKSDLWindowDuktape_H
 
 #include "DKSDLWindow/DKSDLWindow.h"
 #include "DKDuktape/DKDuktape.h"
 
 
-class DKSDLWindowJS : public DKObjectT<DKSDLWindowJS>
+class DKSDLWindowDuktape : public DKObjectT<DKSDLWindowDuktape>
 {
 public:
 	bool Init(){
 		
 		////// Constructor //////
-		DKDuktape::AttachFunction("CPP_DKSDLWindow", DKSDLWindowJS::constructor);
+		DKDuktape::AttachFunction("CPP_DKSDLWindow", DKSDLWindowDuktape::constructor);
 			
 			
 		////// Load .js files
@@ -35,8 +35,8 @@ public:
 	}
 	
 };
-REGISTER_OBJECT(DKSDLWindowJS, true)
+REGISTER_OBJECT(DKSDLWindowDuktape, true)
 
 
-#endif //DKSDLWindowJS_H
+#endif //DKSDLWindowDuktape_H
 #endif //HAVE_DKDuktape
