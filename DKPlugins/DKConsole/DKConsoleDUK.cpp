@@ -23,12 +23,13 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
 #ifdef HAVE_DKDuktape 
 #include "DK/DKApp.h"
 #include "DKConsole/DKConsoleDUK.h"
 
 
+// [W3C] https://console.spec.whatwg.org/
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Console
 bool DKConsoleDUK::Init(){
 	DKDEBUGFUNC();
 	
@@ -39,15 +40,23 @@ bool DKConsoleDUK::Init(){
 	DKDuktape::AttachFunction("CPP_DKConsoleDUK_countReset", 	DKConsoleDUK::countReset);		// [console.countReset()] https://developer.mozilla.org/en-US/docs/Web/API/console/countReset
 	DKDuktape::AttachFunction("CPP_DKConsoleDUK_debug", 		DKConsoleDUK::debug);			// [console.debug()] https://developer.mozilla.org/en-US/docs/Web/API/console/debug
 	DKDuktape::AttachFunction("CPP_DKConsoleDUK_dir", 			DKConsoleDUK::dir);				// [console.dir()] https://developer.mozilla.org/en-US/docs/Web/API/console/dir
-	DKDuktape::AttachFunction("CPP_DKConsoleDUK_error", 		DKConsoleDUK::error);
-	DKDuktape::AttachFunction("CPP_DKConsoleDUK_exception", 	DKConsoleDUK::exception);
-	DKDuktape::AttachFunction("CPP_DKConsoleDUK_group", 		DKConsoleDUK::group);
-	DKDuktape::AttachFunction("CPP_DKConsoleDUK_groupCollapsed",DKConsoleDUK::groupCollapsed);
-	DKDuktape::AttachFunction("CPP_DKConsoleDUK_groupEnd", 		DKConsoleDUK::groupEnd);
-	DKDuktape::AttachFunction("CPP_DKConsoleDUK_info", 			DKConsoleDUK::info);
-	DKDuktape::AttachFunction("CPP_DKConsoleDUK_log", 			DKConsoleDUK::log);
-	DKDuktape::AttachFunction("CPP_DKConsoleDUK_trace", 		DKConsoleDUK::trace);
-	DKDuktape::AttachFunction("CPP_DKConsoleDUK_warn", 			DKConsoleDUK::warn);
+	DKDuktape::AttachFunction("CPP_DKConsoleDUK_dirxml", 		DKConsoleDUK::dirxml);			// [console.dirxml()] https://developer.mozilla.org/en-US/docs/Web/API/console/dirxml
+	DKDuktape::AttachFunction("CPP_DKConsoleDUK_error", 		DKConsoleDUK::error);			// [console.error()] https://developer.mozilla.org/en-US/docs/Web/API/console/error
+	DKDuktape::AttachFunction("CPP_DKConsoleDUK_exception", 	DKConsoleDUK::exception);		// [console.exception()](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/console/exception
+	DKDuktape::AttachFunction("CPP_DKConsoleDUK_group", 		DKConsoleDUK::group);			// [console.group()] https://developer.mozilla.org/en-US/docs/Web/API/console/group
+	DKDuktape::AttachFunction("CPP_DKConsoleDUK_groupCollapsed",DKConsoleDUK::groupCollapsed);	// [console.groupCollapsed()] https://developer.mozilla.org/en-US/docs/Web/API/console/groupCollapsed
+	DKDuktape::AttachFunction("CPP_DKConsoleDUK_groupEnd", 		DKConsoleDUK::groupEnd);		// [console.groupEnd()] https://developer.mozilla.org/en-US/docs/Web/API/console/groupEnd
+	DKDuktape::AttachFunction("CPP_DKConsoleDUK_info", 			DKConsoleDUK::info);			// [console.info()] https://developer.mozilla.org/en-US/docs/Web/API/console/info
+	DKDuktape::AttachFunction("CPP_DKConsoleDUK_log", 			DKConsoleDUK::log);				// [console.log()] https://developer.mozilla.org/en-US/docs/Web/API/console/log
+	DKDuktape::AttachFunction("CPP_DKConsoleDUK_profile", 		DKConsoleDUK::profile);			// [console.profile()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/console/profile
+	DKDuktape::AttachFunction("CPP_DKConsoleDUK_profileEnd", 	DKConsoleDUK::profileEnd);		// [console.profileEnd()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/console/profileEnd
+	DKDuktape::AttachFunction("CPP_DKConsoleDUK_table", 		DKConsoleDUK::table);			// [console.table()] https://developer.mozilla.org/en-US/docs/Web/API/console/table
+	DKDuktape::AttachFunction("CPP_DKConsoleDUK_time", 			DKConsoleDUK::time);			// [console.time()] https://developer.mozilla.org/en-US/docs/Web/API/console/time
+	DKDuktape::AttachFunction("CPP_DKConsoleDUK_timeEnd", 		DKConsoleDUK::timeEnd);			// [console.timeEnd()] https://developer.mozilla.org/en-US/docs/Web/API/console/timeEnd
+	DKDuktape::AttachFunction("CPP_DKConsoleDUK_timeLog", 		DKConsoleDUK::timeLog);			// [console.timeLog()] https://developer.mozilla.org/en-US/docs/Web/API/console/timeLog
+	DKDuktape::AttachFunction("CPP_DKConsoleDUK_timeStamp", 	DKConsoleDUK::timeStamp);		// [console.timeStamp()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/console/timeStamp
+	DKDuktape::AttachFunction("CPP_DKConsoleDUK_trace", 		DKConsoleDUK::trace);			// [console.trace() https://developer.mozilla.org/en-US/docs/Web/API/console/trace
+	DKDuktape::AttachFunction("CPP_DKConsoleDUK_warn", 			DKConsoleDUK::warn);			// [console.warn() https://developer.mozilla.org/en-US/docs/Web/API/console/warn
 	
 	DKClass::DKCreate("DKConsole/DKConsoleDUK.js");
 	return true;
@@ -97,7 +106,11 @@ int DKConsoleDUK::debug(duk_context* ctx){
 int DKConsoleDUK::dir(duk_context* ctx){
 	return DKTODO();
 }
-
+// [console.dirxml()] https://developer.mozilla.org/en-US/docs/Web/API/console/dirxml
+int DKConsoleDUK::dirxml(duk_context* ctx){
+	return DKTODO();
+}
+// [console.error()] https://developer.mozilla.org/en-US/docs/Web/API/console/error
 int DKConsoleDUK::error(duk_context* ctx){
 	DKString string;
 	if(duk_is_string(ctx, 0))
@@ -109,7 +122,7 @@ int DKConsoleDUK::error(duk_context* ctx){
 	DKERROR(string);
 	return true;
 }
-
+// [console.exception()](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/console/exception
 int DKConsoleDUK::exception(duk_context* ctx){
 	DKString string;
 	if(duk_is_string(ctx, 0))
@@ -121,7 +134,7 @@ int DKConsoleDUK::exception(duk_context* ctx){
 	DKERROR(string);
 	return true;
 }
-
+// [console.group()] https://developer.mozilla.org/en-US/docs/Web/API/console/group
 int DKConsoleDUK::group(duk_context* ctx){
 	DKString string;
 	if(duk_is_string(ctx, 0))
@@ -133,7 +146,7 @@ int DKConsoleDUK::group(duk_context* ctx){
 	DKINFO(string);
 	return true;
 }
-
+// [console.groupCollapsed()] https://developer.mozilla.org/en-US/docs/Web/API/console/groupCollapsed
 int DKConsoleDUK::groupCollapsed(duk_context* ctx){
 	DKString string;
 	if(duk_is_string(ctx, 0))
@@ -145,7 +158,7 @@ int DKConsoleDUK::groupCollapsed(duk_context* ctx){
 	DKINFO(string);
 	return true;
 }
-
+// [console.groupEnd()] https://developer.mozilla.org/en-US/docs/Web/API/console/groupEnd
 int DKConsoleDUK::groupEnd(duk_context* ctx){
 	DKString string;
 	if(duk_is_string(ctx, 0))
@@ -157,7 +170,7 @@ int DKConsoleDUK::groupEnd(duk_context* ctx){
 	DKINFO(string);
 	return true;
 }
-
+// [console.info()] https://developer.mozilla.org/en-US/docs/Web/API/console/info
 int DKConsoleDUK::info(duk_context* ctx){
 	DKString string;
 	if(duk_is_string(ctx, 0))
@@ -169,7 +182,7 @@ int DKConsoleDUK::info(duk_context* ctx){
 	DKINFO(string);
 	return true;
 }
-
+// [console.log()] https://developer.mozilla.org/en-US/docs/Web/API/console/log
 int DKConsoleDUK::log(duk_context* ctx){
 	DKString string;
 	if (duk_is_string(ctx, 0))
@@ -181,7 +194,35 @@ int DKConsoleDUK::log(duk_context* ctx){
 	DKINFO(string);
 	return true;
 }
-
+// [console.profile()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/console/profile
+int DKConsoleDUK::profile(duk_context* ctx){
+	return DKTODO();
+}
+// [console.profileEnd()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/console/profileEnd
+int DKConsoleDUK::profileEnd(duk_context* ctx){
+	return DKTODO();
+}
+// [console.table()] https://developer.mozilla.org/en-US/docs/Web/API/console/table
+int DKConsoleDUK::table(duk_context* ctx){
+	return DKTODO();
+}
+// [console.time()] https://developer.mozilla.org/en-US/docs/Web/API/console/time
+int DKConsoleDUK::time(duk_context* ctx){
+	return DKTODO();
+}
+// [console.timeEnd()] https://developer.mozilla.org/en-US/docs/Web/API/console/timeEnd
+int DKConsoleDUK::timeEnd(duk_context* ctx){
+	return DKTODO();
+}
+// [console.timeLog()] https://developer.mozilla.org/en-US/docs/Web/API/console/timeLog
+int DKConsoleDUK::timeLog(duk_context* ctx){
+	return DKTODO();
+}
+// [console.timeStamp()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/console/timeStamp
+int DKConsoleDUK::timeStamp(duk_context* ctx){
+	return DKTODO();
+}
+// [console.trace() https://developer.mozilla.org/en-US/docs/Web/API/console/trace
 int DKConsoleDUK::trace(duk_context* ctx){
 	DKString string;
 	if(duk_is_string(ctx, 0))
@@ -193,7 +234,7 @@ int DKConsoleDUK::trace(duk_context* ctx){
 	DKWARN(string);
 	return true;
 }
-
+// [console.warn() https://developer.mozilla.org/en-US/docs/Web/API/console/warn
 int DKConsoleDUK::warn(duk_context* ctx){
 	DKString string;
 	if(duk_is_string(ctx, 0))
