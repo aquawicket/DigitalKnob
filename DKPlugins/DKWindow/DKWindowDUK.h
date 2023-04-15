@@ -1,8 +1,8 @@
 #if HAVE_DKDuktape
 
 #pragma once
-#ifndef DKWindowJS_H
-#define DKWindowJS_H
+#ifndef DKWindowDUK_H
+#define DKWindowDUK_H
 
 #include "DKDuktape/DKDuktape.h"
 
@@ -13,100 +13,100 @@ WARNING_ENABLE
 
 // [INTERFACE] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-window-object
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Window
-class DKWindowJS : public DKObjectT<DKWindowJS>
+class DKWindowDUK : public DKObjectT<DKWindowDUK>
 {
 public:
 	bool Init(){
 		
 		////// Constructor //////
-		DKDuktape::AttachFunction("CPP_DKWindow", DKWindowJS::constructor);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK", DKWindowDUK::constructor);
 		
 		
 		////// Instance properties //////
-		DKDuktape::AttachFunction("CPP_DKWindow_caches", 			DKWindowJS::caches);
-		DKDuktape::AttachFunction("CPP_DKWindow_clientInformation", DKWindowJS::clientInformation);
-		DKDuktape::AttachFunction("CPP_DKWindow_closed", 			DKWindowJS::closed);
-		DKDuktape::AttachFunction("CPP_DKWindow_console", 			DKWindowJS::console);
-		DKDuktape::AttachFunction("CPP_DKWindow_credentialless", 	DKWindowJS::credentialless);
-		DKDuktape::AttachFunction("CPP_DKWindow_crypto", 			DKWindowJS::crypto);
-		DKDuktape::AttachFunction("CPP_DKWindow_customElements", 	DKWindowJS::customElements);
-		DKDuktape::AttachFunction("CPP_DKWindow_devicePixelRatio", 	DKWindowJS::devicePixelRatio);
-		DKDuktape::AttachFunction("CPP_DKWindow_document", 			DKWindowJS::document);
-		DKDuktape::AttachFunction("CPP_DKWindow_frameElement", 		DKWindowJS::frameElement);
-		DKDuktape::AttachFunction("CPP_DKWindow_frames", 			DKWindowJS::frames);
-		DKDuktape::AttachFunction("CPP_DKWindow_fullScreen", 		DKWindowJS::fullScreen);
-		DKDuktape::AttachFunction("CPP_DKWindow_history", 			DKWindowJS::history);
-		DKDuktape::AttachFunction("CPP_DKWindow_indexedDB", 		DKWindowJS::indexedDB);
-		DKDuktape::AttachFunction("CPP_DKWindow_innerHeight", 		DKWindowJS::innerHeight);
-		DKDuktape::AttachFunction("CPP_DKWindow_innerWidth", 		DKWindowJS::innerWidth);
-		DKDuktape::AttachFunction("CPP_DKWindow_isSecureContext", 	DKWindowJS::isSecureContext);
-		DKDuktape::AttachFunction("CPP_DKWindow_launchQueue", 		DKWindowJS::launchQueue);
-		DKDuktape::AttachFunction("CPP_DKWindow_length", 			DKWindowJS::length);
-		DKDuktape::AttachFunction("CPP_DKWindow_location", 			DKWindowJS::location);
-		DKDuktape::AttachFunction("CPP_DKWindow_locationbar", 		DKWindowJS::locationbar);
-		DKDuktape::AttachFunction("CPP_DKWindow_localStorage", 		DKWindowJS::localStorage);
-		DKDuktape::AttachFunction("CPP_DKWindow_menubar", 			DKWindowJS::menubar);
-		DKDuktape::AttachFunction("CPP_DKWindow_mozInnerScreenX", 	DKWindowJS::mozInnerScreenX);
-		DKDuktape::AttachFunction("CPP_DKWindow_mozInnerScreenY", 	DKWindowJS::mozInnerScreenY);
-		DKDuktape::AttachFunction("CPP_DKWindow_name", 				DKWindowJS::name);
-		DKDuktape::AttachFunction("CPP_DKWindow_navigation", 		DKWindowJS::navigation);
-		DKDuktape::AttachFunction("CPP_DKWindow_navigator", 		DKWindowJS::navigator);
-		DKDuktape::AttachFunction("CPP_DKWindow_opener", 			DKWindowJS::opener);
-		DKDuktape::AttachFunction("CPP_DKWindow_origin", 			DKWindowJS::origin);
-		DKDuktape::AttachFunction("CPP_DKWindow_outerHeight", 		DKWindowJS::outerHeight);
-		DKDuktape::AttachFunction("CPP_DKWindow_outerWidth", 		DKWindowJS::outerWidth);
-		DKDuktape::AttachFunction("CPP_DKWindow_pageXOffset", 		DKWindowJS::pageXOffset);
-		DKDuktape::AttachFunction("CPP_DKWindow_pageYOffset", 		DKWindowJS::pageYOffset);
-		DKDuktape::AttachFunction("CPP_DKWindow_parent", 			DKWindowJS::parent);
-		DKDuktape::AttachFunction("CPP_DKWindow_performance", 		DKWindowJS::performance);
-		DKDuktape::AttachFunction("CPP_DKWindow_personalbar", 		DKWindowJS::personalbar);
-		DKDuktape::AttachFunction("CPP_DKWindow_scheduler", 		DKWindowJS::scheduler);
-		DKDuktape::AttachFunction("CPP_DKWindow_screen",			DKWindowJS::screen);
-		DKDuktape::AttachFunction("CPP_DKWindow_screenX", 			DKWindowJS::screenX);
-		DKDuktape::AttachFunction("CPP_DKWindow_screenY", 			DKWindowJS::screenY);
-		DKDuktape::AttachFunction("CPP_DKWindow_scrollbars", 		DKWindowJS::scrollbars);
-		DKDuktape::AttachFunction("CPP_DKWindow_scrollMaxX", 		DKWindowJS::scrollMaxX);
-		DKDuktape::AttachFunction("CPP_DKWindow_scrollMaxY", 		DKWindowJS::scrollMaxY);
-		DKDuktape::AttachFunction("CPP_DKWindow_scrollX", 			DKWindowJS::scrollX);
-		DKDuktape::AttachFunction("CPP_DKWindow_scrollY", 			DKWindowJS::scrollY);
-		DKDuktape::AttachFunction("CPP_DKWindow_self", 				DKWindowJS::self);
-		DKDuktape::AttachFunction("CPP_DKWindow_sessionStorage", 	DKWindowJS::sessionStorage);
-		DKDuktape::AttachFunction("CPP_DKWindow_speechSynthesis",	DKWindowJS::speechSynthesis);
-		DKDuktape::AttachFunction("CPP_DKWindow_statusbar", 		DKWindowJS::statusbar);
-		DKDuktape::AttachFunction("CPP_DKWindow_toolbar", 			DKWindowJS::toolbar);
-		DKDuktape::AttachFunction("CPP_DKWindow_top", 				DKWindowJS::top);
-		DKDuktape::AttachFunction("CPP_DKWindow_visualViewport", 	DKWindowJS::visualViewport);
-		DKDuktape::AttachFunction("CPP_DKWindow_window", 			DKWindowJS::window);
-		DKDuktape::AttachFunction("CPP_DKWindow_windows", 			DKWindowJS::windows);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_caches", 			DKWindowDUK::caches);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_clientInformation", DKWindowDUK::clientInformation);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_closed", 			DKWindowDUK::closed);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_console", 			DKWindowDUK::console);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_credentialless", 	DKWindowDUK::credentialless);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_crypto", 			DKWindowDUK::crypto);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_customElements", 	DKWindowDUK::customElements);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_devicePixelRatio", 	DKWindowDUK::devicePixelRatio);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_document", 			DKWindowDUK::document);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_frameElement", 		DKWindowDUK::frameElement);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_frames", 			DKWindowDUK::frames);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_fullScreen", 		DKWindowDUK::fullScreen);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_history", 			DKWindowDUK::history);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_indexedDB", 			DKWindowDUK::indexedDB);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_innerHeight", 		DKWindowDUK::innerHeight);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_innerWidth", 		DKWindowDUK::innerWidth);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_isSecureContext", 	DKWindowDUK::isSecureContext);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_launchQueue", 		DKWindowDUK::launchQueue);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_length", 			DKWindowDUK::length);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_location", 			DKWindowDUK::location);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_locationbar", 		DKWindowDUK::locationbar);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_localStorage", 		DKWindowDUK::localStorage);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_menubar", 			DKWindowDUK::menubar);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_mozInnerScreenX", 	DKWindowDUK::mozInnerScreenX);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_mozInnerScreenY", 	DKWindowDUK::mozInnerScreenY);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_name", 				DKWindowDUK::name);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_navigation", 		DKWindowDUK::navigation);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_navigator", 			DKWindowDUK::navigator);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_opener", 			DKWindowDUK::opener);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_origin", 			DKWindowDUK::origin);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_outerHeight", 		DKWindowDUK::outerHeight);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_outerWidth", 		DKWindowDUK::outerWidth);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_pageXOffset", 		DKWindowDUK::pageXOffset);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_pageYOffset", 		DKWindowDUK::pageYOffset);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_parent", 			DKWindowDUK::parent);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_performance", 		DKWindowDUK::performance);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_personalbar", 		DKWindowDUK::personalbar);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_scheduler", 			DKWindowDUK::scheduler);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_screen",				DKWindowDUK::screen);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_screenX", 			DKWindowDUK::screenX);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_screenY", 			DKWindowDUK::screenY);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_scrollbars", 		DKWindowDUK::scrollbars);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_scrollMaxX", 		DKWindowDUK::scrollMaxX);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_scrollMaxY", 		DKWindowDUK::scrollMaxY);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_scrollX", 			DKWindowDUK::scrollX);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_scrollY", 			DKWindowDUK::scrollY);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_self", 				DKWindowDUK::self);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_sessionStorage", 	DKWindowDUK::sessionStorage);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_speechSynthesis",	DKWindowDUK::speechSynthesis);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_statusbar", 			DKWindowDUK::statusbar);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_toolbar", 			DKWindowDUK::toolbar);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_top", 				DKWindowDUK::top);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_visualViewport", 	DKWindowDUK::visualViewport);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_window", 			DKWindowDUK::window);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_windows", 			DKWindowDUK::windows);
 	
 		
 		////// Deprecated properties //////
-		DKDuktape::AttachFunction("CPP_DKWindow_content", 		DKWindowJS::content);
-		DKDuktape::AttachFunction("CPP_DKWindow_defaultStatus", DKWindowJS::defaultStatus);
-		DKDuktape::AttachFunction("CPP_DKWindow_event", 		DKWindowJS::event);
-		DKDuktape::AttachFunction("CPP_DKWindow_external", 		DKWindowJS::external);
-		DKDuktape::AttachFunction("CPP_DKWindow_orientation", 	DKWindowJS::orientation);
-		DKDuktape::AttachFunction("CPP_DKWindow_returnValue", 	DKWindowJS::returnValue);
-		DKDuktape::AttachFunction("CPP_DKWindow_sidebar", 		DKWindowJS::sidebar);
-		DKDuktape::AttachFunction("CPP_DKWindow_status", 		DKWindowJS::status);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_content", 		DKWindowDUK::content);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_defaultStatus", DKWindowDUK::defaultStatus);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_event", 			DKWindowDUK::event);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_external", 		DKWindowDUK::external);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_orientation", 	DKWindowDUK::orientation);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_returnValue", 	DKWindowDUK::returnValue);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_sidebar", 		DKWindowDUK::sidebar);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_status", 		DKWindowDUK::status);
 		
 		
 		////// Instance methods //////
-		DKDuktape::AttachFunction("CPP_DKWindow_blur", 		DKWindowJS::blur);
-		DKDuktape::AttachFunction("CPP_DKWindow_close",		DKWindowJS::close);
-		DKDuktape::AttachFunction("CPP_DKWindow_dump", 		DKWindowJS::dump);
-		DKDuktape::AttachFunction("CPP_DKWindow_focus", 	DKWindowJS::focus);
-		DKDuktape::AttachFunction("CPP_DKWindow_moveBy", 	DKWindowJS::moveBy);
-		DKDuktape::AttachFunction("CPP_DKWindow_moveTo", 	DKWindowJS::moveTo);
-		DKDuktape::AttachFunction("CPP_DKWindow_resizeBy", 	DKWindowJS::resizeBy);
-		DKDuktape::AttachFunction("CPP_DKWindow_resizeTo", 	DKWindowJS::resizeTo);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_blur", 		DKWindowDUK::blur);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_close",		DKWindowDUK::close);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_dump", 		DKWindowDUK::dump);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_focus", 		DKWindowDUK::focus);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_moveBy", 	DKWindowDUK::moveBy);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_moveTo", 	DKWindowDUK::moveTo);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_resizeBy", 	DKWindowDUK::resizeBy);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_resizeTo", 	DKWindowDUK::resizeTo);
 		
 		
 		////// Deprecated methods //////
 		
 		
 		////// Load .js files
-		DKClass::DKCreate("DKWindow/DKWindow.js");
+		DKClass::DKCreate("DKWindow/DKWindowDUK.js");
 		
 		return true;
 	}
@@ -145,7 +145,7 @@ public:
 	// [Event()] https://developer.mozilla.org/en-US/docs/Web/API/Event/Event
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKINFO("CPP_DKWindow()\n");
+		DKINFO("CPP_DKWindowDUK()\n");
 		DKWindow* _window = new DKWindow();
 		DKString eventTargetAddress = pointerToAddress(_window);
 		duk_push_string(ctx, eventTargetAddress.c_str());
@@ -833,8 +833,8 @@ public:
 	}
 	
 };
-REGISTER_OBJECT(DKWindowJS, true)
+REGISTER_OBJECT(DKWindowDUK, true)
 
 
-#endif //DKWindowJS_H
+#endif //DKWindowDUK_H
 #endif //HAVE_DKDuktape

@@ -17,7 +17,7 @@ CPP_DK_Create("DKKeyboardEventDUK");
 CPP_DK_Create("DKCompositionEventDUK");
 
 // https://html.spec.whatwg.org/
-CPP_DK_Create("DKWindowJS");
+CPP_DK_Create("DKWindowDUK");
 
 // ConsoleWindow
 CPP_DK_Create("DKConsoleWindowJS");
