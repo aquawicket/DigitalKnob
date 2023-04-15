@@ -15,39 +15,39 @@ public:
 	bool Init(){
 		
 		////// Constructor //////
-		DKDuktape::AttachFunction("CPP_DKEvent", DKEventDUK::constructor);
+		DKDuktape::AttachFunction("CPP_DKEventDUKDUK", DKEventDUK::constructor);
 		
 		
 		////// Instance properties //////
-		DKDuktape::AttachFunction("CPP_DKEvent_bubbles", DKEventDUK::bubbles);
-		DKDuktape::AttachFunction("CPP_DKEvent_cancelable", DKEventDUK::cancelable);
-		DKDuktape::AttachFunction("CPP_DKEvent_composed", DKEventDUK::composed);
-		DKDuktape::AttachFunction("CPP_DKEvent_currentTarget", DKEventDUK::currentTarget);
-		DKDuktape::AttachFunction("CPP_DKEvent_defaultPrevented", DKEventDUK::defaultPrevented);
-		DKDuktape::AttachFunction("CPP_DKEvent_eventPhase", DKEventDUK::eventPhase);
-		DKDuktape::AttachFunction("CPP_DKEvent_isTrusted", DKEventDUK::isTrusted);
-		DKDuktape::AttachFunction("CPP_DKEvent_target", DKEventDUK::target);
-		DKDuktape::AttachFunction("CPP_DKEvent_timeStamp", DKEventDUK::timeStamp);
-		DKDuktape::AttachFunction("CPP_DKEvent_type", DKEventDUK::type);
+		DKDuktape::AttachFunction("CPP_DKEventDUK_bubbles", DKEventDUK::bubbles);
+		DKDuktape::AttachFunction("CPP_DKEventDUK_cancelable", DKEventDUK::cancelable);
+		DKDuktape::AttachFunction("CPP_DKEventDUK_composed", DKEventDUK::composed);
+		DKDuktape::AttachFunction("CPP_DKEventDUK_currentTarget", DKEventDUK::currentTarget);
+		DKDuktape::AttachFunction("CPP_DKEventDUK_defaultPrevented", DKEventDUK::defaultPrevented);
+		DKDuktape::AttachFunction("CPP_DKEventDUK_eventPhase", DKEventDUK::eventPhase);
+		DKDuktape::AttachFunction("CPP_DKEventDUK_isTrusted", DKEventDUK::isTrusted);
+		DKDuktape::AttachFunction("CPP_DKEventDUK_target", DKEventDUK::target);
+		DKDuktape::AttachFunction("CPP_DKEventDUK_timeStamp", DKEventDUK::timeStamp);
+		DKDuktape::AttachFunction("CPP_DKEventDUK_type", DKEventDUK::type);
 		
 		
 		////// Legacy and non-standard properties //////
-		DKDuktape::AttachFunction("CPP_DKEvent_cancelBubble", DKEventDUK::cancelBubble);
-		DKDuktape::AttachFunction("CPP_DKEvent_explicitOriginalTarget", DKEventDUK::explicitOriginalTarget);
-		DKDuktape::AttachFunction("CPP_DKEvent_originalTarget", DKEventDUK::originalTarget);
-		DKDuktape::AttachFunction("CPP_DKEvent_returnValue", DKEventDUK::returnValue);
-		DKDuktape::AttachFunction("CPP_DKEvent_scoped", DKEventDUK::scoped);
+		DKDuktape::AttachFunction("CPP_DKEventDUK_cancelBubble", DKEventDUK::cancelBubble);
+		DKDuktape::AttachFunction("CPP_DKEventDUK_explicitOriginalTarget", DKEventDUK::explicitOriginalTarget);
+		DKDuktape::AttachFunction("CPP_DKEventDUK_originalTarget", DKEventDUK::originalTarget);
+		DKDuktape::AttachFunction("CPP_DKEventDUK_returnValue", DKEventDUK::returnValue);
+		DKDuktape::AttachFunction("CPP_DKEventDUK_scoped", DKEventDUK::scoped);
 		
 
 		////// Instance methods //////
-		DKDuktape::AttachFunction("CPP_DKEvent_composedPath", DKEventDUK::composedPath);
-		DKDuktape::AttachFunction("CPP_DKEvent_preventDefault", DKEventDUK::preventDefault);
-		DKDuktape::AttachFunction("CPP_DKEvent_stopImmediatePropagation", DKEventDUK::stopImmediatePropagation);
-		DKDuktape::AttachFunction("CPP_DKEvent_stopPropagation", DKEventDUK::stopPropagation);
+		DKDuktape::AttachFunction("CPP_DKEventDUK_composedPath", DKEventDUK::composedPath);
+		DKDuktape::AttachFunction("CPP_DKEventDUK_preventDefault", DKEventDUK::preventDefault);
+		DKDuktape::AttachFunction("CPP_DKEventDUK_stopImmediatePropagation", DKEventDUK::stopImmediatePropagation);
+		DKDuktape::AttachFunction("CPP_DKEventDUK_stopPropagation", DKEventDUK::stopPropagation);
 		
 		
 		////// Deprecated methods //////
-		DKDuktape::AttachFunction("CPP_DKEvent_initEvent", DKEventDUK::initEvent);
+		DKDuktape::AttachFunction("CPP_DKEventDUK_initEvent", DKEventDUK::initEvent);
 		
 		
 		////// Events //////
@@ -74,7 +74,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
 		DKString options = "";//duk_require_string(ctx, 1);
-		DKINFO("CPP_DKEvent("+type+","+options+")\n");
+		DKINFO("CPP_DKEventDUK("+type+","+options+")\n");
 		DKEvent* event = new DKEvent(type, options);
 		DKString eventAddress = pointerToAddress(event);
 		duk_push_string(ctx, eventAddress.c_str());	
