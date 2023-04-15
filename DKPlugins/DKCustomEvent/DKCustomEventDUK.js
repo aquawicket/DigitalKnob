@@ -9,14 +9,14 @@ var CustomEvent = function CustomEvent(type, options, address) {
 	if(address)
 		this.address = address;
 	if(!this.address)
-		this.address = CPP_DKCustomEvent(type, options);
+		this.address = CPP_DKCustomEventDUK(type, options);
 
 	
 	////// Instance properties //////
 	// [CustomEvent.detail](Read only)
 	Object.defineProperty(this, "detail", {
-        get: function detail()		{ return JSON.parse(CPP_DKCustomEvent_detail(this.address)) },
-		set: function detail(str)	{ return JSON.parse(CPP_DKCustomEvent_detail(this.address, JSON.stringify(str))) },
+        get: function detail()		{ return JSON.parse(CPP_DKCustomEventDUK_detail(this.address)) },
+		set: function detail(str)	{ return JSON.parse(CPP_DKCustomEventDUK_detail(this.address, JSON.stringify(str))) },
 		configurable: true,
     })
 	
@@ -24,7 +24,7 @@ var CustomEvent = function CustomEvent(type, options, address) {
     ////// Instance methods //////
 	// [CustomEvent.initCustomEvent()](Deprecated)
 	CustomEvent.prototype.initCustomEvent = function initCustomEvent() {
-		CPP_DKCustomEvent_initCustomEvent(this.address);
+		CPP_DKCustomEventDUK_initCustomEvent(this.address);
     }
 	
 	

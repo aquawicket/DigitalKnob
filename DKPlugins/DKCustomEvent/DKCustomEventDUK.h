@@ -1,33 +1,33 @@
 #if HAVE_DKDuktape
 
 #pragma once
-#ifndef DKCustomEventJS_H
-#define DKCustomEventJS_H
+#ifndef DKCustomEventDUK_H
+#define DKCustomEventDUK_H
 
 #include "DKDuktape/DKDuktape.h"
 
 
 // [INTERFACE] https://dom.spec.whatwg.org/#interface-customevent
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent
-class DKCustomEventJS : public DKObjectT<DKCustomEventJS>
+class DKCustomEventDUK : public DKObjectT<DKCustomEventDUK>
 {
 public:
 	bool Init(){
 		
 		////// Constructor //////
-		DKDuktape::AttachFunction("CPP_DKCustomEvent", 					DKCustomEventJS::constructor);
+		DKDuktape::AttachFunction("CPP_DKCustomEvent", 					DKCustomEventDUK::constructor);
 	
 	
 		////// Instance properties //////
-		DKDuktape::AttachFunction("CPP_DKCustomEvent_detail", 			DKCustomEventJS::detail);
+		DKDuktape::AttachFunction("CPP_DKCustomEvent_detail", 			DKCustomEventDUK::detail);
 
 		
 		////// Instance methods //////
-		DKDuktape::AttachFunction("CPP_DKCustomEvent_initCustomEvent", 	DKCustomEventJS::initCustomEvent);
+		DKDuktape::AttachFunction("CPP_DKCustomEvent_initCustomEvent", 	DKCustomEventDUK::initCustomEvent);
 		
 	
 		////// Load .js files
-		DKClass::DKCreate("DKCustomEvent/DKCustomEvent.js");
+		DKClass::DKCreate("DKCustomEvent/DKCustomEventDUK.js");
 		
 		return true;
 	}
@@ -72,8 +72,8 @@ public:
 	}
 
 };
-REGISTER_OBJECT(DKCustomEventJS, true)
+REGISTER_OBJECT(DKCustomEventDUK, true)
 
 
-#endif //DKCustomEventJS_H
+#endif //DKCustomEventDUK_H
 #endif //HAVE_DKDuktape
