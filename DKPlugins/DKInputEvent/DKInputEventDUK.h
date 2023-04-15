@@ -1,31 +1,31 @@
 #pragma once
-#ifndef DKInputEventJS_H
-#define DKInputEventJS_H
+#ifndef DKInputEventDUK_H
+#define DKInputEventDUK_H
 
 #include "DKDuktape/DKDuktape.h"
 
 
 // [W3C] https://w3c.github.io/uievents/#events-inputevents
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/InputEvent
-class DKInputEventJS : public DKObjectT<DKInputEventJS>
+class DKInputEventDUK : public DKObjectT<DKInputEventDUK>
 {
 public:
 	bool Init(){
 		
 		////// Constructor //////
-		DKDuktape::AttachFunction("CPP_DKInputEvent", DKInputEventJS::constructor);
+		DKDuktape::AttachFunction("CPP_DKInputEventDUK", DKInputEventDUK::constructor);
 	
 	
 		////// Instance properties //////
-		DKDuktape::AttachFunction("CPP_DKInputEvent_data",			DKInputEventJS::_data); //FIXME: data is already a member of DKObject
-		DKDuktape::AttachFunction("CPP_DKInputEvent_dataTransfer",	DKInputEventJS::dataTransfer);
-		DKDuktape::AttachFunction("CPP_DKInputEvent_inputType",		DKInputEventJS::inputType);
-		DKDuktape::AttachFunction("CPP_DKInputEvent_isComposing", 	DKInputEventJS::isComposing);
+		DKDuktape::AttachFunction("CPP_DKInputEventDUK_data",			DKInputEventDUK::_data); //FIXME: data is already a member of DKObject
+		DKDuktape::AttachFunction("CPP_DKInputEventDUK_dataTransfer",	DKInputEventDUK::dataTransfer);
+		DKDuktape::AttachFunction("CPP_DKInputEventDUK_inputType",		DKInputEventDUK::inputType);
+		DKDuktape::AttachFunction("CPP_DKInputEventDUK_isComposing", 	DKInputEventDUK::isComposing);
 
 		
 		////// Instance methods //////
 		// [InputEvent.getTargetRanges()] https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/getTargetRanges
-		DKDuktape::AttachFunction("CPP_DKInputEvent_getTargetRanges", DKInputEventJS::getTargetRanges);
+		DKDuktape::AttachFunction("CPP_DKInputEventDUK_getTargetRanges", DKInputEventDUK::getTargetRanges);
 
 		
 		////// Events //////
@@ -34,7 +34,7 @@ public:
 
 			
 		////// Load .js files
-		DKClass::DKCreate("DKInputEvent/DKInputEvent.js");
+		DKClass::DKCreate("DKInputEvent/DKInputEventDUK.js");
 		
 		return true;
 	}
@@ -46,7 +46,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
 		DKString options = "";//duk_require_string(ctx, 1);
-		DKINFO("CPP_DKInputEvent("+type+","+options+")\n");
+		DKINFO("CPP_DKInputEventDUK("+type+","+options+")\n");
 		DKInputEvent* event = new DKInputEvent(type, options);
 		DKString eventAddress = pointerToAddress(event);
 		duk_push_string(ctx, eventAddress.c_str());	
@@ -104,7 +104,7 @@ public:
 	}
 
 };
-REGISTER_OBJECT(DKInputEventJS, true)
+REGISTER_OBJECT(DKInputEventDUK, true)
 
 
-#endif //DKInputEventJS_H
+#endif //DKInputEventDUK_H
