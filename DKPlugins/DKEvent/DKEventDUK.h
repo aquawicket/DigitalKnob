@@ -1,53 +1,53 @@
 #if HAVE_DKDuktape
 
 #pragma once
-#ifndef DKEventJS_H
-#define DKEventJS_H
+#ifndef DKEventDUK_H
+#define DKEventDUK_H
 
 #include "DKDuktape/DKDuktape.h"
 
 
 // [INTERFACE] https://dom.spec.whatwg.org/#interface-event
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Event
-class DKEventJS : public DKObjectT<DKEventJS>
+class DKEventDUK : public DKObjectT<DKEventDUK>
 {
 public:
 	bool Init(){
 		
 		////// Constructor //////
-		DKDuktape::AttachFunction("CPP_DKEvent", DKEventJS::constructor);
+		DKDuktape::AttachFunction("CPP_DKEvent", DKEventDUK::constructor);
 		
 		
 		////// Instance properties //////
-		DKDuktape::AttachFunction("CPP_DKEvent_bubbles", DKEventJS::bubbles);
-		DKDuktape::AttachFunction("CPP_DKEvent_cancelable", DKEventJS::cancelable);
-		DKDuktape::AttachFunction("CPP_DKEvent_composed", DKEventJS::composed);
-		DKDuktape::AttachFunction("CPP_DKEvent_currentTarget", DKEventJS::currentTarget);
-		DKDuktape::AttachFunction("CPP_DKEvent_defaultPrevented", DKEventJS::defaultPrevented);
-		DKDuktape::AttachFunction("CPP_DKEvent_eventPhase", DKEventJS::eventPhase);
-		DKDuktape::AttachFunction("CPP_DKEvent_isTrusted", DKEventJS::isTrusted);
-		DKDuktape::AttachFunction("CPP_DKEvent_target", DKEventJS::target);
-		DKDuktape::AttachFunction("CPP_DKEvent_timeStamp", DKEventJS::timeStamp);
-		DKDuktape::AttachFunction("CPP_DKEvent_type", DKEventJS::type);
+		DKDuktape::AttachFunction("CPP_DKEvent_bubbles", DKEventDUK::bubbles);
+		DKDuktape::AttachFunction("CPP_DKEvent_cancelable", DKEventDUK::cancelable);
+		DKDuktape::AttachFunction("CPP_DKEvent_composed", DKEventDUK::composed);
+		DKDuktape::AttachFunction("CPP_DKEvent_currentTarget", DKEventDUK::currentTarget);
+		DKDuktape::AttachFunction("CPP_DKEvent_defaultPrevented", DKEventDUK::defaultPrevented);
+		DKDuktape::AttachFunction("CPP_DKEvent_eventPhase", DKEventDUK::eventPhase);
+		DKDuktape::AttachFunction("CPP_DKEvent_isTrusted", DKEventDUK::isTrusted);
+		DKDuktape::AttachFunction("CPP_DKEvent_target", DKEventDUK::target);
+		DKDuktape::AttachFunction("CPP_DKEvent_timeStamp", DKEventDUK::timeStamp);
+		DKDuktape::AttachFunction("CPP_DKEvent_type", DKEventDUK::type);
 		
 		
 		////// Legacy and non-standard properties //////
-		DKDuktape::AttachFunction("CPP_DKEvent_cancelBubble", DKEventJS::cancelBubble);
-		DKDuktape::AttachFunction("CPP_DKEvent_explicitOriginalTarget", DKEventJS::explicitOriginalTarget);
-		DKDuktape::AttachFunction("CPP_DKEvent_originalTarget", DKEventJS::originalTarget);
-		DKDuktape::AttachFunction("CPP_DKEvent_returnValue", DKEventJS::returnValue);
-		DKDuktape::AttachFunction("CPP_DKEvent_scoped", DKEventJS::scoped);
+		DKDuktape::AttachFunction("CPP_DKEvent_cancelBubble", DKEventDUK::cancelBubble);
+		DKDuktape::AttachFunction("CPP_DKEvent_explicitOriginalTarget", DKEventDUK::explicitOriginalTarget);
+		DKDuktape::AttachFunction("CPP_DKEvent_originalTarget", DKEventDUK::originalTarget);
+		DKDuktape::AttachFunction("CPP_DKEvent_returnValue", DKEventDUK::returnValue);
+		DKDuktape::AttachFunction("CPP_DKEvent_scoped", DKEventDUK::scoped);
 		
 
 		////// Instance methods //////
-		DKDuktape::AttachFunction("CPP_DKEvent_composedPath", DKEventJS::composedPath);
-		DKDuktape::AttachFunction("CPP_DKEvent_preventDefault", DKEventJS::preventDefault);
-		DKDuktape::AttachFunction("CPP_DKEvent_stopImmediatePropagation", DKEventJS::stopImmediatePropagation);
-		DKDuktape::AttachFunction("CPP_DKEvent_stopPropagation", DKEventJS::stopPropagation);
+		DKDuktape::AttachFunction("CPP_DKEvent_composedPath", DKEventDUK::composedPath);
+		DKDuktape::AttachFunction("CPP_DKEvent_preventDefault", DKEventDUK::preventDefault);
+		DKDuktape::AttachFunction("CPP_DKEvent_stopImmediatePropagation", DKEventDUK::stopImmediatePropagation);
+		DKDuktape::AttachFunction("CPP_DKEvent_stopPropagation", DKEventDUK::stopPropagation);
 		
 		
 		////// Deprecated methods //////
-		DKDuktape::AttachFunction("CPP_DKEvent_initEvent", DKEventJS::initEvent);
+		DKDuktape::AttachFunction("CPP_DKEvent_initEvent", DKEventDUK::initEvent);
 		
 		
 		////// Events //////
@@ -62,7 +62,7 @@ public:
 		
 			
 		////// Load .js files
-		DKClass::DKCreate("DKEvent/DKEvent.js");
+		DKClass::DKCreate("DKEvent/DKEventDUK.js");
 		
 		return true;
 	}
@@ -230,8 +230,8 @@ public:
 	}
 
 };
-REGISTER_OBJECT(DKEventJS, true)
+REGISTER_OBJECT(DKEventDUK, true)
 
 
-#endif //DKEventJS_H
+#endif //DKEventDUK_H
 #endif //HAVE_DKDuktape

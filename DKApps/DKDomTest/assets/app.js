@@ -2,7 +2,7 @@
 CPP_DK_Create("DKConsoleDUK");
 
 // https://dom.spec.whatwg.org
-CPP_DK_Create("DKEventJS");
+CPP_DK_Create("DKEventDUK");
 CPP_DK_Create("DKCustomEventJS");
 CPP_DK_Create("DKEventTargetJS");
 //CPP_DK_Create("EventTest.js");
