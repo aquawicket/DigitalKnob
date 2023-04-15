@@ -26,13 +26,13 @@
 
 #ifdef HAVE_DKDuktape 
 #pragma once
-#ifndef DKConsole_H
-#define DKConsole_H
+#ifndef DKConsoleDuktape_H
+#define DKConsoleDuktape_H
 
 #include "DKDuktape/DKDuktape.h"
 
 
-class DKConsole : public DKObjectT<DKConsole>
+class DKConsoleDuktape : public DKObjectT<DKConsoleDuktape>
 {
 public:
 	bool Init();
@@ -52,7 +52,7 @@ public:
 };
 
 
-REGISTER_OBJECT(DKConsole, true)
+REGISTER_OBJECT(DKConsoleDuktape, true)
 
-#endif //DKConsole_H
+#endif //DKConsoleDuktape_H
 #endif //HAVE_DKDuktape

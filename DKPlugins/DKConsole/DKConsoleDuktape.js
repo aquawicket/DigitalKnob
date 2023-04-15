@@ -19,11 +19,11 @@ var Console = function Console(address) {
 		msg = Console_HandleColor(msg)
         //if (assertion)
         //    return;
-        CPP_DKConsole_assert(msg + "\n");
+        CPP_DKConsoleDuktape_assert(msg + "\n");
     }
 	// [console.clear()] https://developer.mozilla.org/en-US/docs/Web/API/console/clear
     Console.prototype.clear = function clear() {
-        CPP_DKConsole_clear();
+        CPP_DKConsoleDuktape_clear();
     }
 	// [console.count()] https://developer.mozilla.org/en-US/docs/Web/API/console/count
 	Console.prototype.count = function count() {
@@ -36,7 +36,7 @@ var Console = function Console(address) {
 	// [console.debug()] https://developer.mozilla.org/en-US/docs/Web/API/console/debug
     Console.prototype.debug = function debug(msg) {
 		msg = Console_HandleColor(msg)
-        CPP_DKConsole_debug(msg + "\n");
+        CPP_DKConsoleDuktape_debug(msg + "\n");
     }
 	// [console.dir()] https://developer.mozilla.org/en-US/docs/Web/API/console/dir
 	Console.prototype.dir = function dir() {
@@ -50,7 +50,7 @@ var Console = function Console(address) {
     Console.prototype.error = function error(msg) {
 		msg = Console_HandleColor(msg)
 		if(!msg){
-			CPP_DKConsole_error("msg invalid \n");
+			CPP_DKConsoleDuktape_error("msg invalid \n");
 			return;
 		}
 		const err = new Error(msg);
@@ -63,37 +63,37 @@ var Console = function Console(address) {
 					return error("err.stack invalid"); // browser too old
 			}
 		}
-		CPP_DKConsole_error(err.stack+"\n");
+		CPP_DKConsoleDuktape_error(err.stack+"\n");
     }
 	// [console.exception()](Non-standard)(Deprecated) "An alias for error()."
     Console.prototype.exception = function exception(msg) {
 		msg = Console_HandleColor(msg)
-        CPP_DKConsole_exception(msg + "\n");
+        CPP_DKConsoleDuktape_exception(msg + "\n");
     }
 	// [console.group()] https://developer.mozilla.org/en-US/docs/Web/API/console/group
     Console.prototype.group = function group(msg) {
 		msg = Console_HandleColor(msg)
-        CPP_DKConsole_group(msg + "\n");
+        CPP_DKConsoleDuktape_group(msg + "\n");
     }
 	// [console.groupCollapsed()] https://developer.mozilla.org/en-US/docs/Web/API/console/groupCollapsed
     Console.prototype.groupCollapsed = function groupCollapsed(msg) {
 		msg = Console_HandleColor(msg)
-        CPP_DKConsole_groupCollapsed(msg + "\n");
+        CPP_DKConsoleDuktape_groupCollapsed(msg + "\n");
     }
 	// [console.groupEnd()] https://developer.mozilla.org/en-US/docs/Web/API/console/groupEnd
     Console.prototype.groupEnd = function groupEnd(msg) {
 		msg = Console_HandleColor(msg)
-        CPP_DKConsole_groupEnd(msg + "\n");
+        CPP_DKConsoleDuktape_groupEnd(msg + "\n");
     }
 	// [console.info()] https://developer.mozilla.org/en-US/docs/Web/API/console/info
     Console.prototype.info = function info(msg) {
 		msg = Console_HandleColor(msg)
-        CPP_DKConsole_info(msg + "\n");
+        CPP_DKConsoleDuktape_info(msg + "\n");
     }
 	// [console.log()] https://developer.mozilla.org/en-US/docs/Web/API/console/log
     Console.prototype.log = function log(msg) {
 		msg = Console_HandleColor(msg)
-        CPP_DKConsole_log(msg + "\n");
+        CPP_DKConsoleDuktape_log(msg + "\n");
     }
 	// [console.profile()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/console/profile
 	Console.prototype.profile = function profile() {
@@ -126,12 +126,12 @@ var Console = function Console(address) {
 	// [console.trace()] https://developer.mozilla.org/en-US/docs/Web/API/console/trace
     Console.prototype.trace = function trace(msg) {
 		msg = Console_HandleColor(msg)
-		CPP_DKConsole_trace(msg + "\n");
+		CPP_DKConsoleDuktape_trace(msg + "\n");
     }
 	// [console.warn()] https://developer.mozilla.org/en-US/docs/Web/API/console/warn
     Console.prototype.warn = function warn(msg) {
 		msg = Console_HandleColor(msg)
-        CPP_DKConsole_warn(msg + "\n");
+        CPP_DKConsoleDuktape_warn(msg + "\n");
     }
 	
 	////// toString //////
