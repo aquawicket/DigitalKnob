@@ -5,7 +5,7 @@ var DKSDLWindow = function DKSDLWindow(address) {
 	if(address)
 		this.address = address;
 	if(!this.address)
-		this.address = CPP_DKSDLWindow();
+		this.address = CPP_DKSDLWindowDUK();
 	
 	
 	//// toString ////

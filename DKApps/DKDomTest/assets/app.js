@@ -24,5 +24,5 @@ CPP_DK_Create("DKConsoleWindowDUK");
 CPP_DK_Create("ConsoleWindowTest.js");
 
 // SDLWindow
-CPP_DK_Create("DKSDLWindowDuktape");
+CPP_DK_Create("DKSDLWindowDUK");
 CPP_DK_Create("SDLWindowTest.js");
