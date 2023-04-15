@@ -1,5 +1,5 @@
 // https://console.spec.whatwg.org
-CPP_DK_Create("DKConsoleDuktape");
+CPP_DK_Create("DKConsoleDUK");
 
 // https://dom.spec.whatwg.org
 CPP_DK_Create("DKEventJS");

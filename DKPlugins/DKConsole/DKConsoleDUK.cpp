@@ -26,29 +26,37 @@
 
 #ifdef HAVE_DKDuktape 
 #include "DK/DKApp.h"
-#include "DKConsoleDuktape/DKConsoleDuktape.h"
+#include "DKConsole/DKConsoleDUK.h"
 
 
-bool DKConsoleDuktape::Init(){
+bool DKConsoleDUK::Init(){
 	DKDEBUGFUNC();
-	DKDuktape::AttachFunction("CPP_DKConsoleDuktape_assert",			DKConsoleDuktape::_assert);
-	DKDuktape::AttachFunction("CPP_DKConsoleDuktape_clear", 			DKConsoleDuktape::clear);
-	DKDuktape::AttachFunction("CPP_DKConsoleDuktape_debug", 			DKConsoleDuktape::debug);
-	DKDuktape::AttachFunction("CPP_DKConsoleDuktape_error", 			DKConsoleDuktape::error);
-	DKDuktape::AttachFunction("CPP_DKConsoleDuktape_exception", 		DKConsoleDuktape::exception);
-	DKDuktape::AttachFunction("CPP_DKConsoleDuktape_group", 			DKConsoleDuktape::group);
-	DKDuktape::AttachFunction("CPP_DKConsoleDuktape_groupCollapsed",	DKConsoleDuktape::groupCollapsed);
-	DKDuktape::AttachFunction("CPP_DKConsoleDuktape_groupEnd", 			DKConsoleDuktape::groupEnd);
-	DKDuktape::AttachFunction("CPP_DKConsoleDuktape_info", 				DKConsoleDuktape::info);
-	DKDuktape::AttachFunction("CPP_DKConsoleDuktape_log", 				DKConsoleDuktape::log);
-	DKDuktape::AttachFunction("CPP_DKConsoleDuktape_trace", 			DKConsoleDuktape::trace);
-	DKDuktape::AttachFunction("CPP_DKConsoleDuktape_warn", 				DKConsoleDuktape::warn);
 	
-	DKClass::DKCreate("DKConsole/DKConsole.js");
+	////// Instance methods //////
+	DKDuktape::AttachFunction("CPP_DKConsoleDUK_assert",		DKConsoleDUK::_assert); 		// [console.assert()] https://developer.mozilla.org/en-US/docs/Web/API/console/assert
+	DKDuktape::AttachFunction("CPP_DKConsoleDUK_clear", 		DKConsoleDUK::clear);			// [console.clear()] https://developer.mozilla.org/en-US/docs/Web/API/console/clear
+	DKDuktape::AttachFunction("CPP_DKConsoleDUK_count", 		DKConsoleDUK::count);			// [console.count()] https://developer.mozilla.org/en-US/docs/Web/API/console/count
+	DKDuktape::AttachFunction("CPP_DKConsoleDUK_countReset", 	DKConsoleDUK::countReset);		// [console.countReset()] https://developer.mozilla.org/en-US/docs/Web/API/console/countReset
+	DKDuktape::AttachFunction("CPP_DKConsoleDUK_debug", 		DKConsoleDUK::debug);			// [console.debug()] https://developer.mozilla.org/en-US/docs/Web/API/console/debug
+	DKDuktape::AttachFunction("CPP_DKConsoleDUK_dir", 			DKConsoleDUK::dir);				// [console.dir()] https://developer.mozilla.org/en-US/docs/Web/API/console/dir
+	DKDuktape::AttachFunction("CPP_DKConsoleDUK_error", 		DKConsoleDUK::error);
+	DKDuktape::AttachFunction("CPP_DKConsoleDUK_exception", 	DKConsoleDUK::exception);
+	DKDuktape::AttachFunction("CPP_DKConsoleDUK_group", 		DKConsoleDUK::group);
+	DKDuktape::AttachFunction("CPP_DKConsoleDUK_groupCollapsed",DKConsoleDUK::groupCollapsed);
+	DKDuktape::AttachFunction("CPP_DKConsoleDUK_groupEnd", 		DKConsoleDUK::groupEnd);
+	DKDuktape::AttachFunction("CPP_DKConsoleDUK_info", 			DKConsoleDUK::info);
+	DKDuktape::AttachFunction("CPP_DKConsoleDUK_log", 			DKConsoleDUK::log);
+	DKDuktape::AttachFunction("CPP_DKConsoleDUK_trace", 		DKConsoleDUK::trace);
+	DKDuktape::AttachFunction("CPP_DKConsoleDUK_warn", 			DKConsoleDUK::warn);
+	
+	DKClass::DKCreate("DKConsole/DKConsoleDUK.js");
 	return true;
 }
 
-int DKConsoleDuktape::_assert(duk_context* ctx){
+
+////// Instance methods //////
+// [console.assert()] https://developer.mozilla.org/en-US/docs/Web/API/console/assert
+int DKConsoleDUK::_assert(duk_context* ctx){
 	DKString string;
 	if(duk_is_string(ctx, 0))
 		string = duk_require_string(ctx, 0);
@@ -59,14 +67,22 @@ int DKConsoleDuktape::_assert(duk_context* ctx){
 	DKERROR(string);
 	return true;
 }
-
-int DKConsoleDuktape::clear(duk_context* ctx){
+// [console.clear()] https://developer.mozilla.org/en-US/docs/Web/API/console/clear
+int DKConsoleDUK::clear(duk_context* ctx){
 	int rtnvalue = DKUtil::System("cls", rtnvalue);
 	duk_push_int(ctx, rtnvalue);
 	return true;
 }
-
-int DKConsoleDuktape::debug(duk_context* ctx){
+// [console.count()] https://developer.mozilla.org/en-US/docs/Web/API/console/count
+int DKConsoleDUK::count(duk_context* ctx){
+	return DKTODO();
+}
+// [console.countReset()] https://developer.mozilla.org/en-US/docs/Web/API/console/countReset
+int DKConsoleDUK::countReset(duk_context* ctx){
+	return DKTODO();
+}
+// [console.debug()] https://developer.mozilla.org/en-US/docs/Web/API/console/debug
+int DKConsoleDUK::debug(duk_context* ctx){
 	DKString string;
 	if(duk_is_string(ctx, 0))
 		string = duk_require_string(ctx, 0);
@@ -77,8 +93,12 @@ int DKConsoleDuktape::debug(duk_context* ctx){
 	DKDEBUG(string);
 	return true;
 }
+// [console.dir()] https://developer.mozilla.org/en-US/docs/Web/API/console/dir
+int DKConsoleDUK::dir(duk_context* ctx){
+	return DKTODO();
+}
 
-int DKConsoleDuktape::error(duk_context* ctx){
+int DKConsoleDUK::error(duk_context* ctx){
 	DKString string;
 	if(duk_is_string(ctx, 0))
 		string = duk_require_string(ctx, 0);
@@ -90,7 +110,7 @@ int DKConsoleDuktape::error(duk_context* ctx){
 	return true;
 }
 
-int DKConsoleDuktape::exception(duk_context* ctx){
+int DKConsoleDUK::exception(duk_context* ctx){
 	DKString string;
 	if(duk_is_string(ctx, 0))
 		string = duk_require_string(ctx, 0);
@@ -102,7 +122,7 @@ int DKConsoleDuktape::exception(duk_context* ctx){
 	return true;
 }
 
-int DKConsoleDuktape::group(duk_context* ctx){
+int DKConsoleDUK::group(duk_context* ctx){
 	DKString string;
 	if(duk_is_string(ctx, 0))
 		string = duk_require_string(ctx, 0);
@@ -114,7 +134,7 @@ int DKConsoleDuktape::group(duk_context* ctx){
 	return true;
 }
 
-int DKConsoleDuktape::groupCollapsed(duk_context* ctx){
+int DKConsoleDUK::groupCollapsed(duk_context* ctx){
 	DKString string;
 	if(duk_is_string(ctx, 0))
 		string = duk_require_string(ctx, 0);
@@ -126,7 +146,7 @@ int DKConsoleDuktape::groupCollapsed(duk_context* ctx){
 	return true;
 }
 
-int DKConsoleDuktape::groupEnd(duk_context* ctx){
+int DKConsoleDUK::groupEnd(duk_context* ctx){
 	DKString string;
 	if(duk_is_string(ctx, 0))
 		string = duk_require_string(ctx, 0);
@@ -138,7 +158,7 @@ int DKConsoleDuktape::groupEnd(duk_context* ctx){
 	return true;
 }
 
-int DKConsoleDuktape::info(duk_context* ctx){
+int DKConsoleDUK::info(duk_context* ctx){
 	DKString string;
 	if(duk_is_string(ctx, 0))
 		string = duk_require_string(ctx, 0);
@@ -150,7 +170,7 @@ int DKConsoleDuktape::info(duk_context* ctx){
 	return true;
 }
 
-int DKConsoleDuktape::log(duk_context* ctx){
+int DKConsoleDUK::log(duk_context* ctx){
 	DKString string;
 	if (duk_is_string(ctx, 0))
 		string = duk_require_string(ctx, 0);
@@ -162,7 +182,7 @@ int DKConsoleDuktape::log(duk_context* ctx){
 	return true;
 }
 
-int DKConsoleDuktape::trace(duk_context* ctx){
+int DKConsoleDUK::trace(duk_context* ctx){
 	DKString string;
 	if(duk_is_string(ctx, 0))
 		string = duk_require_string(ctx, 0);
@@ -174,7 +194,7 @@ int DKConsoleDuktape::trace(duk_context* ctx){
 	return true;
 }
 
-int DKConsoleDuktape::warn(duk_context* ctx){
+int DKConsoleDUK::warn(duk_context* ctx){
 	DKString string;
 	if(duk_is_string(ctx, 0))
 		string = duk_require_string(ctx, 0);
