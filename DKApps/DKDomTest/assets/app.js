@@ -14,7 +14,7 @@ CPP_DK_Create("DKMouseEventDUK");
 CPP_DK_Create("DKWheelEventDUK");
 CPP_DK_Create("DKInputEventDUK");
 CPP_DK_Create("DKKeyboardEventDUK");
-CPP_DK_Create("DKCompositionEventJS");
+CPP_DK_Create("DKCompositionEventDUK");
 
 // https://html.spec.whatwg.org/
 CPP_DK_Create("DKWindowJS");

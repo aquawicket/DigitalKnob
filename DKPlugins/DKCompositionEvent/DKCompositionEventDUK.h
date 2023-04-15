@@ -1,31 +1,31 @@
 #if HAVE_DKDuktape
 
 #pragma once
-#ifndef DKCompositionEventJS_H
-#define DKCompositionEventJS_H
+#ifndef DKCompositionEventDUK_H
+#define DKCompositionEventDUK_H
 
 #include "DKDuktape/DKDuktape.h"
 
 
 // [W3C] https://w3c.github.io/uievents/#events-compositionevents
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent
-class DKCompositionEventJS : public DKObjectT<DKCompositionEventJS>
+class DKCompositionEventDUK : public DKObjectT<DKCompositionEventDUK>
 {
 public:
 	bool Init(){
 		
 		////// Constructor //////
-		DKDuktape::AttachFunction("CPP_DKCompositionEvent", DKCompositionEventJS::constructor);
+		DKDuktape::AttachFunction("CPP_DKCompositionEventDUK", DKCompositionEventDUK::constructor);
 	
 	
 		////// Instance properties //////
-		DKDuktape::AttachFunction("CPP_DKCompositionEvent_data",	DKCompositionEventJS::_data); //FIXME: data is already a member of DKObject
-		DKDuktape::AttachFunction("CPP_DKCompositionEvent_locale",	DKCompositionEventJS::locale);
+		DKDuktape::AttachFunction("CPP_DKCompositionEventDUK_data",	DKCompositionEventDUK::_data); //FIXME: data is already a member of DKObject
+		DKDuktape::AttachFunction("CPP_DKCompositionEventDUK_locale",	DKCompositionEventDUK::locale);
 
 
 		////// Instance methods //////
 		// [CompositionEvent.initCompositionEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/initCompositionEvent
-		DKDuktape::AttachFunction("CPP_DKCompositionEvent_initCompositionEvent", DKCompositionEventJS::initCompositionEvent);
+		DKDuktape::AttachFunction("CPP_DKCompositionEventDUK_initCompositionEvent", DKCompositionEventDUK::initCompositionEvent);
 
 		
 		////// Events //////
@@ -35,7 +35,7 @@ public:
 		
 		
 		////// Load .js files
-		DKClass::DKCreate("DKCompositionEvent/DKCompositionEvent.js");
+		DKClass::DKCreate("DKCompositionEvent/DKCompositionEventDUK.js");
 		
 		return true;
 	}
@@ -47,7 +47,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
 		DKString options = "";//duk_require_string(ctx, 1);
-		DKINFO("CPP_DKCompositionEvent("+type+","+options+")\n");
+		DKINFO("CPP_DKCompositionEventDUK("+type+","+options+")\n");
 		DKCompositionEvent* event = new DKCompositionEvent(type, options);
 		//event->eventClass = "CompositionEvent";
 		DKString eventAddress = pointerToAddress(event);
@@ -86,8 +86,8 @@ public:
 	}
 
 };
-REGISTER_OBJECT(DKCompositionEventJS, true)
+REGISTER_OBJECT(DKCompositionEventDUK, true)
 
 
-#endif //DKCompositionEventJS_H
+#endif //DKCompositionEventDUK_H
 #endif //HAVE_DKDuktape

@@ -9,26 +9,26 @@ var CompositionEvent = function CompositionEvent(type, options, address) {
 	if(address)
 		this.address = address
 	if(!this.address)
-		this.address = CPP_DKCompositionEvent(type, options)
+		this.address = CPP_DKCompositionEventDUK(type, options)
 	
 
 	////// Instance properties //////
 	// [CompositionEvent.data](Read only) https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/data
 	Object.defineProperty(this, "data", {
-        get: function data()	{ return CPP_DKCompositionEvent_data(this.address) },
-		set: function data(str) { return CPP_DKCompositionEvent_data(this.address, str) },
+        get: function data()	{ return CPP_DKCompositionEventDUK_data(this.address) },
+		set: function data(str) { return CPP_DKCompositionEventDUK_data(this.address, str) },
 		configurable: true,
     })
 	// [CompositionEvent.locale](Read only) https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/locale
 	Object.defineProperty(this, "locale", {
-        get: function locale() { return CPP_DKCompositionEvent_locale(this.address) },
+        get: function locale() { return CPP_DKCompositionEventDUK_locale(this.address) },
     })
 	
 
     ////// Instance methods //////
 	// [CompositionEvent.initCompositionEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/initCompositionEvent
 	CompositionEvent.prototype.initCompositionEvent = function initCompositionEvent() {
-		CPP_DKCompositionEvent_initCompositionEvent(this.address)
+		CPP_DKCompositionEventDUK_initCompositionEvent(this.address)
     }
 	
 	
