@@ -15,3 +15,7 @@ function printScreenProperties(screen){
 	console.log("screen.mozEnabled = "		+screen.mozEnabled)		// [Screen.mozEnabled](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Screen/mozEnabled
 	console.log("screen.mozBrightness = "	+screen.mozBrightness)	// [Screen.mozBrightness](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Screen/mozBrightness
 }
+
+
+const screen = new Screen()
+printScreenProperties(screen)
