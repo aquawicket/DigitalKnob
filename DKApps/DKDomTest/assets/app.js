@@ -19,6 +19,13 @@ CPP_DK_Create("DKCompositionEventDUK");
 // https://html.spec.whatwg.org/
 CPP_DK_Create("DKWindowDUK");
 
+// https://w3c.github.io/csswg-drafts/cssom-view/#the-screen-interface
+CPP_DK_Create("DKScreenDUK");
+
+// https://html.spec.whatwg.org/multipage/system-state.html#the-navigator-object
+CPP_DK_Create("DKNavigatorDUK");
+
+
 // ConsoleWindow
 CPP_DK_Create("DKConsoleWindowDUK");
 CPP_DK_Create("ConsoleWindowTest.js");

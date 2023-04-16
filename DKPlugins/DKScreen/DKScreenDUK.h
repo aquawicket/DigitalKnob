@@ -19,7 +19,7 @@ public:
 	bool Init(){
 		
 		////// Constructor //////
-		DKDuktape::AttachFunction("CPP_DKWindowDUK", DKWindowDUK::constructor);
+		DKDuktape::AttachFunction("CPP_DKScreenDUK", DKScreenDUK::constructor);
 		
 		////// Instance properties //////
 		// [Screen.availTop](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Screen/availTop
