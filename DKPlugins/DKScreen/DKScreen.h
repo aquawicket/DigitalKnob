@@ -40,7 +40,7 @@ public:
 	// [Screen.left](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Screen/left
 	virtual bool left(unsigned int&, bool) { return false; }
 	// [Screen.orientation] https://developer.mozilla.org/en-US/docs/Web/API/Screen/orientation
-	virtual bool left(DKString&, bool) { return false; }
+	virtual bool orientation(DKString&, bool) { return false; }
 	// [Screen.pixelDepth] https://developer.mozilla.org/en-US/docs/Web/API/Screen/pixelDepth
 	virtual bool pixelDepth(unsigned int&, bool) { return false; }
 	// [Screen.top](Deprecated)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Screen/top
