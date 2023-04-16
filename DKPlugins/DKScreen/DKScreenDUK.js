@@ -1,20 +1,15 @@
-#pragma once
-#ifndef DKScreen_H
-#define DKScreen_H
-
-#include "DK/DK.h"
-#include "DKEventTarget/DKEventTarget.h"
-
-
 // [INTERFACE] https://w3c.github.io/csswg-drafts/cssom-view/#the-screen-interface
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Screen
-class DKScreen : public DKEventTarget
-{
-public:
-	DKScreen() : DKEventTarget() {
-		DKDEBUGFUNC();
-	}
+
+
+var Screen = function Screen(address) {
+	//console.log("Screen("+address+")")
 	
+	if(address)
+		this.address = address;
+	if(!this.address)
+		this.address = CPP_DKScreenDUK();
+
 	
 	////// Instance properties //////
 	// [Screen.availTop](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Screen/availTop
@@ -39,8 +34,13 @@ public:
 	
 	////// Events //////
 	// [orientationchange](Deprecated)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Screen/orientationchange_event
-
-};
-
-
-#endif //DKScreen_H
+	
+	
+	////// toString //////
+	if(this.toString() === "[object Object]")
+		this.toString = function(){	return "[object Screen]" }
+	
+	
+	return EventTarget.call(this)
+}
+Screen.prototype = EventTarget.prototype
