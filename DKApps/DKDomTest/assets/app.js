@@ -21,6 +21,7 @@ CPP_DK_Create("DKWindowDUK");
 
 // https://w3c.github.io/csswg-drafts/cssom-view/#the-screen-interface
 CPP_DK_Create("DKScreenDUK");
+CPP_DK_Create("ScreenTest.js");
 
 // https://html.spec.whatwg.org/multipage/system-state.html#the-navigator-object
 CPP_DK_Create("DKNavigatorDUK");
