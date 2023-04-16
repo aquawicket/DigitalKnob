@@ -85,8 +85,8 @@ public:
 	static int GetObjects(duk_context* ctx);
 	static int GetPixelUnderMouse(duk_context* ctx);
 	static int GetProcessList(duk_context* ctx);
-	static int GetScreenHeight(duk_context* ctx);
-	static int GetScreenWidth(duk_context* ctx);
+	//static int GetScreenHeight(duk_context* ctx);
+	//static int GetScreenWidth(duk_context* ctx);
 	static int GetTicks(duk_context* ctx);
 	static int GetTime(duk_context* ctx);
 	static int GetType(duk_context* ctx);

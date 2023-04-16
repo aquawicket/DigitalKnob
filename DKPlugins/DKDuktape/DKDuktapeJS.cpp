@@ -123,8 +123,8 @@ bool DKDuktapeJS::Init(){
 	DKDuktape::AttachFunction("CPP_DK_GetObjects", DKDuktapeJS::GetObjects);
 	DKDuktape::AttachFunction("CPP_DK_GetPixelUnderMouse", DKDuktapeJS::GetPixelUnderMouse);
 	DKDuktape::AttachFunction("CPP_DK_GetProcessList", DKDuktapeJS::GetProcessList);
-	DKDuktape::AttachFunction("CPP_DK_GetScreenHeight", DKDuktapeJS::GetScreenHeight);
-	DKDuktape::AttachFunction("CPP_DK_GetScreenWidth", DKDuktapeJS::GetScreenWidth);
+	//DKDuktape::AttachFunction("CPP_DK_GetScreenHeight", DKDuktapeJS::GetScreenHeight);
+	//DKDuktape::AttachFunction("CPP_DK_GetScreenWidth", DKDuktapeJS::GetScreenWidth);
 	DKDuktape::AttachFunction("CPP_DK_GetTicks", DKDuktapeJS::GetTicks);
 	DKDuktape::AttachFunction("CPP_DK_GetTime", DKDuktapeJS::GetTime);
 	DKDuktape::AttachFunction("CPP_DK_GetType", DKDuktapeJS::GetType);
@@ -737,7 +737,7 @@ int DKDuktapeJS::GetProcessList(duk_context* ctx){
 	duk_push_string(ctx, list.c_str());
 	return 1;
 }
-
+/*
 int DKDuktapeJS::GetScreenHeight(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
 	int h;
@@ -754,7 +754,7 @@ int DKDuktapeJS::GetScreenWidth(duk_context* ctx){
 		return 0;
 	duk_push_int(ctx, w);
 	return 1;
-}
+*/
 
 int DKDuktapeJS::GetTicks(duk_context* ctx){
 	DKDEBUGFUNC(ctx);

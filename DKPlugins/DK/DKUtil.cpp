@@ -396,7 +396,7 @@ bool DKUtil::GetProcessList(DKString& list){
 #	endif
 }
 
-bool DKUtil::GetScreenHeight(int& h){
+bool DKUtil::GetScreenHeight(unsigned int& h){
 #	if WIN32
 		return DKWindows::GetScreenHeight(h) && DKDEBUGRETURN(h);
 #	elif MAC
@@ -412,7 +412,7 @@ bool DKUtil::GetScreenHeight(int& h){
 #	endif
 }
 
-bool DKUtil::GetScreenWidth(int& w){
+bool DKUtil::GetScreenWidth(unsigned int& w){
 #	if WIN32
 		return DKWindows::GetScreenWidth(w) && DKDEBUGRETURN(w);
 #	elif MAC

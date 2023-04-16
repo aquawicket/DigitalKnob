@@ -28,7 +28,15 @@ public:
 	// [Screen.colorDepth] https://developer.mozilla.org/en-US/docs/Web/API/Screen/colorDepth
 	virtual bool colorDepth(unsigned int&, bool) { return false; }
 	// [Screen.height] https://developer.mozilla.org/en-US/docs/Web/API/Screen/height
-	virtual bool height(unsigned int&, bool) { return false; }
+	virtual bool height(unsigned int& _height, bool set) {
+		if(set){
+			return DKTODO();
+		}
+		else{
+			return DKUtil::GetScreenHeight(_height);
+		}
+		return false; 
+	}
 	// [Screen.left](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Screen/left
 	virtual bool left(unsigned int&, bool) { return false; }
 	// [Screen.orientation] https://developer.mozilla.org/en-US/docs/Web/API/Screen/orientation
@@ -38,7 +46,15 @@ public:
 	// [Screen.top](Deprecated)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Screen/top
 	virtual bool top(unsigned int&, bool) { return false; }
 	// [Screen.width] https://developer.mozilla.org/en-US/docs/Web/API/Screen/width
-	virtual bool width(unsigned int&, bool) { return false; }
+	virtual bool width(unsigned int& _width, bool set) { 
+		if(set){
+			return DKTODO();
+		}
+		else{
+			return DKUtil::GetScreenWidth(_width);
+		}
+		return false; 
+	}
 	// [Screen.mozEnabled](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Screen/mozEnabled
 	virtual bool mozEnabled(bool&, bool) { return false; }
 	// [Screen.mozBrightness](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Screen/mozBrightness
