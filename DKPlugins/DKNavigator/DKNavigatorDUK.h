@@ -19,7 +19,7 @@ public:
 	bool Init(){
 		
 		////// Constructor //////
-		DKDuktape::AttachFunction("CPP_DKNavigatorDUK", DKWindowDUK::constructor);
+		DKDuktape::AttachFunction("CPP_DKNavigatorDUK", DKNavigatorDUK::constructor);
 		
 
 		

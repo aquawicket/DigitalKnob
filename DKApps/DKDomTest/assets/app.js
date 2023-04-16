@@ -25,6 +25,8 @@ CPP_DK_Create("DKScreenDUK");
 // https://html.spec.whatwg.org/multipage/system-state.html#the-navigator-object
 CPP_DK_Create("DKNavigatorDUK");
 
+// https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-location-interface
+CPP_DK_Create("DKLocationDUK");
 
 // ConsoleWindow
 CPP_DK_Create("DKConsoleWindowDUK");

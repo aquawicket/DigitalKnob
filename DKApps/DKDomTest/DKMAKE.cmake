@@ -20,6 +20,7 @@ dk_depend(DKCompositionEvent)
 dk_depend(DKWindow)
 dk_depend(DKScreen)
 dk_depend(DKNavigator)
+dk_depend(DKLocation)
 
 dk_depend(DKConsoleWindow)
 dk_depend(DKSDLWindow)
