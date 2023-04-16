@@ -3,7 +3,6 @@
 #define DKNavigator_H
 
 #include "DK/DK.h"
-#include "DKEventTarget/DKEventTarget.h"
 
 
 // [INTERFACE] https://html.spec.whatwg.org/multipage/system-state.html#the-navigator-object
