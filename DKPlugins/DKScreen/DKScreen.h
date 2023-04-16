@@ -3,6 +3,7 @@
 #define DKScreen_H
 
 #include "DK/DK.h"
+#include "DKEventTarget/DKEventTarget.h"
 
 
 // [INTERFACE] https://w3c.github.io/csswg-drafts/cssom-view/#the-screen-interface
