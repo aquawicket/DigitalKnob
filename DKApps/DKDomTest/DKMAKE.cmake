@@ -18,5 +18,6 @@ dk_depend(DKKeyboardEvent)
 dk_depend(DKCompositionEvent)
 
 dk_depend(DKWindow)
+dk_depend(DKScreen)
 dk_depend(DKConsoleWindow)
 dk_depend(DKSDLWindow)
