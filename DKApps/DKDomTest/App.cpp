@@ -90,6 +90,7 @@ bool App::onevent(DKEvent& event) {
 }
 */
 
+/*
 ////// CustomEvent //////
 void App::printCustomEventProperties(DKCustomEvent& customevent) {
 	////// Instance properties //////
@@ -102,3 +103,4 @@ bool App::oncustom(DKEvent& event) {
 	printCustomEventProperties(dynamic_cast<DKCustomEvent&>(event));	//FIXME: try to remove the need for dynamic_cast
 	return true;
 }
+*/

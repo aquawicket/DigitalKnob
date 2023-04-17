@@ -14,30 +14,30 @@ public:
 		DKINFO("\n");
 		DKEventTarget myTargetA;									// EventTarget as 	value
 		DKEvent eventA("eventA", "");								// Event as 		value
-		myTargetA.addEventListener("eventA", &App::onevent);
+		myTargetA.addEventListener("eventA", &TEST_Event::onevent);
 		myTargetA.dispatchEvent(eventA);
 		
 		DKINFO("\n");
 		DKEventTarget* myTargetB = new DKEventTarget();  			// EventTarget as 	pointer
 		DKEvent eventB("eventB", "");								// Event as 		value
-		myTargetB->addEventListener("eventB", &App::onevent);
+		myTargetB->addEventListener("eventB", &TEST_Event::onevent);
 		myTargetB->dispatchEvent(eventB);
 		
 		DKINFO("\n");
 		DKEventTarget myTargetC;									// EventTarget as 	value
 		DKEvent* eventC = new DKEvent("eventC", "");				// Event as 		pointer
-		myTargetC.addEventListener("eventC", &App::onevent);
+		myTargetC.addEventListener("eventC", &TEST_Event::onevent);
 		myTargetC.dispatchEvent(eventC);
 		
 		DKINFO("\n");
 		DKEventTarget* myTargetD = new DKEventTarget();				// EventTarget as 	pointer
 		DKEvent* eventD = new DKEvent("eventD", "");				// Event as 		pointer
-		myTargetD->addEventListener("eventD", &App::onevent);
+		myTargetD->addEventListener("eventD", &TEST_Event::onevent);
 		myTargetD->dispatchEvent(eventD);
 		
 		DKINFO("\n");
 		DKEventTarget myTargetE;
-		myTargetE.addEventListener("eventE", &App::onevent);
+		myTargetE.addEventListener("eventE", &TEST_Event::onevent);
 		myTargetE.dispatchEvent(new DKEvent("eventE", ""));			// Event as new pointer, created within dispatchEvent function
 		return true;
 	}
