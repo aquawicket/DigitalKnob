@@ -32,6 +32,9 @@ CPP_DK_Create("DKNavigatorDUK");
 // https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-location-interface
 CPP_DK_Create("DKLocationDUK");
 
+// https://dom.spec.whatwg.org/#interface-node
+CPP_DK_Create("DKNodeDUK");
+
 // ConsoleWindow
 CPP_DK_Create("DKConsoleWindowDUK");
 CPP_DK_Create("ConsoleWindowTest.js");
