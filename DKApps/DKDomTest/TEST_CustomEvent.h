@@ -13,7 +13,7 @@ public:
 		////// CustomEvent //////
 		DKINFO("\n");
 		DKEventTarget myTargetA;
-		myTargetA.addEventListener("customevent", &TEST_CustomEvent::oncustom);
+		//myTargetA.addEventListener("customevent", &TEST_CustomEvent::oncustom);
 		DKCustomEvent customevent("customevent", "");
 		customevent.detail = "{name : 'mycustomevent'}";
 		myTargetA.dispatchEvent(customevent);
