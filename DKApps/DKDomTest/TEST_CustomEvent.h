@@ -4,6 +4,7 @@
 
 #include "DK/DK.h"
 #include "DKCustomEvent/DKCustomEvent.h"
+#include "TEST_Event.h"
 
 
 class TEST_CustomEvent : public DKObjectT<TEST_CustomEvent>
@@ -32,7 +33,7 @@ public:
 	static bool oncustom(DKEvent& event) {
 		DKDEBUGFUNC(event);
 		DKINFO("cpp->oncustom() \n");
-		//printEventProperties(event);
+		TEST_Event::printEventProperties(event);
 		printCustomEventProperties(dynamic_cast<DKCustomEvent&>(event));	//FIXME: try to remove the need for dynamic_cast
 		return true;
 	}
