@@ -1,11 +1,13 @@
 #include "DK/stdafx.h"
 
 #include "App.h"
+#include "TEST_Event.h"
 
 bool App::Init() {
 	DKDEBUGFUNC();
 	DKINFO("App::Init() \n");
 	
+	DKClass::DKCreate("TEST_Event");
 	/*
 	////// Event //////
 	DKINFO("\n");
@@ -57,6 +59,7 @@ bool App::End(){
 
 
 ////// Event //////
+/*
 void App::printEventProperties(DKEvent& event) {
 	DKDEBUGFUNC(event);
 	
@@ -85,6 +88,7 @@ bool App::onevent(DKEvent& event) {
 	printEventProperties(event);
 	return true;
 }
+*/
 
 ////// CustomEvent //////
 void App::printCustomEventProperties(DKCustomEvent& customevent) {
