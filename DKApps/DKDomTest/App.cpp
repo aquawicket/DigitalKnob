@@ -11,13 +11,13 @@
 #include "TEST_EventTarget.h"
 
 // https://w3c.github.io/uievents
-#include "TEST_UIEvent"
-#include "TEST_FocusEvent"
-#include "TEST_MouseEvent"
-#include "TEST_WheelEvent"
-#include "TEST_InputEvent"
-#include "TEST_KeyboardEvent"
-#include "TEST_CompositionEvent"
+#include "TEST_UIEvent.h"
+#include "TEST_FocusEvent.h"
+#include "TEST_MouseEvent.h"
+#include "TEST_WheelEvent.h"
+#include "TEST_InputEvent.h"
+#include "TEST_KeyboardEvent.h"
+#include "TEST_CompositionEvent.h"
 
 
 bool App::Init() {
