@@ -13,7 +13,7 @@ public:
 		////// CustomEvent //////
 		DKINFO("\n");
 		DKEventTarget myTargetA;
-		//myTargetA.addEventListener("customevent", &TEST_CustomEvent::oncustom);
+		myTargetA.addEventListener("customevent", &TEST_CustomEvent::oncustom);
 		DKCustomEvent customevent("customevent", "");
 		customevent.detail = "{name : 'mycustomevent'}";
 		myTargetA.dispatchEvent(customevent);
@@ -25,11 +25,11 @@ public:
 	}
 
 	////// CustomEvent //////
-	void printCustomEventProperties(DKCustomEvent& customevent) {
+	static void printCustomEventProperties(DKCustomEvent& customevent) {
 		////// Instance properties //////
 		DKINFO("customevent.detail = "	+toString(customevent.detail)	+"\n");
 	}
-	bool oncustom(DKEvent& event) {
+	static bool oncustom(DKEvent& event) {
 		DKDEBUGFUNC(event);
 		DKINFO("cpp->oncustom() \n");
 		//printEventProperties(event);
