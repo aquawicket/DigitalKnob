@@ -24,7 +24,7 @@ public:
 		
 		////// Instance properties //////
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_caches", 			DKWindowDUK::caches);
-		DKDuktape::AttachFunction("CPP_DKWindowDUK_clientInformation", DKWindowDUK::clientInformation);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_clientInformation", 	DKWindowDUK::clientInformation);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_closed", 			DKWindowDUK::closed);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_console", 			DKWindowDUK::console);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_credentialless", 	DKWindowDUK::credentialless);
@@ -105,7 +105,7 @@ public:
 		////// Deprecated methods //////
 		
 		
-		////// Load .js files
+		////// Load .js files //////
 		DKClass::DKCreate("DKWindow/DKWindowDUK.js");
 		
 		return true;
