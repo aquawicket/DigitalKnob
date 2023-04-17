@@ -19,8 +19,8 @@ bool App::Init() {
 	// https://w3c.github.io/uievents
 	DKClass::DKCreate("TEST_UIEvent");
 	DKClass::DKCreate("TEST_FocusEvent");
-	//DKClass::DKCreate("TEST_MouseEvent");
-	//DKClass::DKCreate("TEST_WheelEvent");
+	DKClass::DKCreate("TEST_MouseEvent");
+	DKClass::DKCreate("TEST_WheelEvent");
 	//DKClass::DKCreate("TEST_InputEvent");
 	//DKClass::DKCreate("TEST_KeyboardEvent");
 	//DKClass::DKCreate("TEST_CompositionEvent");
