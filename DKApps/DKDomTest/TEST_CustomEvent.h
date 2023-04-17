@@ -12,6 +12,7 @@ public:
 	bool Init(){
 		////// CustomEvent //////
 		DKINFO("\n");
+		DKEventTarget myTargetA;
 		myTargetA.addEventListener("customevent", &TEST_CustomEvent::oncustom);
 		DKCustomEvent customevent("customevent", "");
 		customevent.detail = "{name : 'mycustomevent'}";
