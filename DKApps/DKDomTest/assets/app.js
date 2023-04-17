@@ -4,10 +4,10 @@ CPP_DK_Create("TEST_Console.js");
 
 // https://dom.spec.whatwg.org
 CPP_DK_Create("DKEventDUK");
-CPP_DK_Create("TEST_Event.js");
 CPP_DK_Create("DKCustomEventDUK");
-CPP_DK_Create("TEST_CustomEvent.js");
 CPP_DK_Create("DKEventTargetDUK");
+CPP_DK_Create("TEST_Event.js");
+CPP_DK_Create("TEST_CustomEvent.js");
 CPP_DK_Create("TEST_EventTarget.js");
 
 // https://w3c.github.io/uievents
