@@ -6,7 +6,7 @@
 #define TEST_Console_H
 
 #include "DK/DK.h"
-//#include "DKConsole/DKConsole.h"	// TODO
+#include "DKConsole/DKConsole.h"
 
 
 class TEST_Console : public DKObjectT<TEST_Console>
