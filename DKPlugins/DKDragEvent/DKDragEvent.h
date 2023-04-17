@@ -1,55 +1,41 @@
 #pragma once
-#ifndef DKWheelEvent_H
-#define DKWheelEvent_H
+#ifndef DKDragEvent_H
+#define DKDragEvent_H
 
 #include "DKMouseEvent/DKMouseEvent.h"
 
 
-// [W3C] https://w3c.github.io/uievents/#events-wheelevents
-// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent
-class DKWheelEvent : public DKMouseEvent
+// [IDL] https://html.spec.whatwg.org/multipage/dnd.html#the-dragevent-interface
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/DragEvent
+class DKDragEvent : public DKMouseEvent
 {
 public:
 	////// Constructor //////
-	// [WheelEvent()] https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent/WheelEvent
-	DKWheelEvent(DKString _type, DKString _options) : DKMouseEvent(_type, _options) {
-		DKINFO("DKWheelEvent("+_type+", "+_options+") \n");
+	// [DragEvent()] https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/DragEvent
+	DKDragEvent(DKString _type, DKString _options) : DKMouseEvent(_type, _options) {
+		DKINFO("DKDragEvent("+_type+", "+_options+") \n");
 		
-		eventClass = "WheelEvent";
+		eventClass = "DragEvent";
 		eventAddress = pointerToAddress(this);
 		
 		////// Instance properties //////
-		deltaX = 0.0;
-		deltaY = 0.0;
-		deltaZ = 0.0;
-		deltaMode = 0;
-		wheelDelta = 0;
-		wheelDeltaX = 0;
-		wheelDeltaY = 0;
+		// [DragEvent.dataTransfer](Read only) https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer
 	}
 	
 	
 	////// Instance properties //////
-	// [WheelEvent.deltaX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent/deltaX
-	double deltaX;
-	// [WheelEvent.deltaY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent/deltaY
-	double deltaY;
-	// [WheelEvent.deltaZ](Read only) https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent/deltaZ
-	double deltaZ;
-	// [WheelEvent.deltaMode](Read only) https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent/deltaMode
-	unsigned int deltaMode;
-	// [WheelEvent.wheelDelta](Read only)(Deprecated)(Non-standard)
-	int wheelDelta;
-	// [WheelEvent.wheelDeltaX](Read only)(Deprecated)(Non-standard)
-	int wheelDeltaX;
-	// [WheelEvent.wheelDeltaY](Read only)(Deprecated)(Non-standard)
-	int wheelDeltaY;
-
+	// [DragEvent.dataTransfer](Read only) https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer
 	
-	////// Events //////
-	// [mousewheel](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Element/mousewheel_event
-	// [wheel] https://developer.mozilla.org/en-US/docs/Web/API/Element/wheel_event
+	
+	////// Event types //////
+	// [drag] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/drag_event
+	// [dragend] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragend_event
+	// [dragenter] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragenter_event
+	// [dragleave] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragleave_event
+	// [dragover] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragover_event
+	// [dragstart] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragstart_event
+	// [drop] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/drop_event
 };
 
 
-#endif //DKWheelEvent_H
+#endif //DKDragEvent_H

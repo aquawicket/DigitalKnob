@@ -1,51 +1,50 @@
 #pragma once
-#ifndef DKWheelEventDUK_H
-#define DKWheelEventDUK_H
+#ifndef DKDragEventDUK_H
+#define DKDragEventDUK_H
 
 #include "DKDuktape/DKDuktape.h"
 
 
-// [W3C] https://w3c.github.io/uievents/#events-wheelevents
-// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent
-class DKWheelEventDUK : public DKObjectT<DKWheelEventDUK>
+// [IDL] https://html.spec.whatwg.org/multipage/dnd.html#the-dragevent-interface
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/DragEvent
+class DKDragEventDUK : public DKObjectT<DKDragEventDUK>
 {
 public:
 	bool Init(){
 		
 		////// Constructor //////
-		DKDuktape::AttachFunction("CPP_DKWheelEventDUK", DKWheelEventDUK::constructor);
+		DKDuktape::AttachFunction("CPP_DKDragEventDUK", DKDragEventDUK::constructor);
 	
 	
 		////// Instance properties //////
-		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_deltaX", 		DKWheelEventDUK::deltaX); 		// [WheelEvent.deltaX](Read only)
-		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_deltaY", 		DKWheelEventDUK::deltaY); 		// [WheelEvent.deltaY](Read only)
-		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_deltaZ",		DKWheelEventDUK::deltaZ); 		// [WheelEvent.deltaZ](Read only)
-		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_deltaMode", 	DKWheelEventDUK::deltaMode); 	// [WheelEvent.deltaMode](Read only)
-		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_wheelDelta", 	DKWheelEventDUK::wheelDelta); 	// [WheelEvent.wheelDelta](Read only)(Deprecated)(Non-standard)
-		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_wheelDeltaX", 	DKWheelEventDUK::wheelDeltaX); 	// [WheelEvent.wheelDeltaX](Read only)(Deprecated)(Non-standard)
-		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_wheelDeltaY", 	DKWheelEventDUK::wheelDeltaY); 	// [WheelEvent.wheelDeltaY](Read only)(Deprecated)(Non-standard)
+		// [DragEvent.dataTransfer](Read only) https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer
+
+		
+		////// Event types //////
+		// [drag] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/drag_event
+		// [dragend] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragend_event
+		// [dragenter] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragenter_event
+		// [dragleave] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragleave_event
+		// [dragover] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragover_event
+		// [dragstart] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragstart_event
+		// [drop] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/drop_event
 	
 	
-		////// Events //////
-		// [mousewheel](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Element/mousewheel_event
-		// [wheel] https://developer.mozilla.org/en-US/docs/Web/API/Element/wheel_event
-
-
 		////// Load .js files //////
-		DKClass::DKCreate("DKWheelEvent/DKWheelEventDUK.js");
+		DKClass::DKCreate("DKDragEvent/DKDragEventDUK.js");
 		
 		return true;
 	}
 	
 	
 	////// Constructor //////
-	// [WheelEvent()] https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent/WheelEvent
+	// [DragEvent()] https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/DragEvent
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
 		DKString options = "";//duk_require_string(ctx, 1);
-		DKINFO("CPP_DKWheelEventDUK("+type+","+options+")\n");
-		DKWheelEvent* event = new DKWheelEvent(type, options);
+		DKINFO("CPP_DKDragEventDUK("+type+","+options+")\n");
+		DKDragEvent* event = new DKDragEvent(type, options);
 		DKString eventAddress = pointerToAddress(event);
 		duk_push_string(ctx, eventAddress.c_str());	
 		return true;
@@ -53,73 +52,20 @@ public:
 	
 	
 	////// Instance properties //////
-	// [WheelEvent.deltaX](Read only)
-	static int deltaX(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKWheelEvent* event = (DKWheelEvent*)addressToPointer(eventAddress);
-		if (duk_is_number(ctx, 1))
-			event->deltaX = duk_to_number(ctx, 1);
-		duk_push_number(ctx, event->deltaX);	
-		return true;
-	}
-	// [WheelEvent.deltaY](Read only)
-	static int deltaY(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKWheelEvent* event = (DKWheelEvent*)addressToPointer(eventAddress);
-		if (duk_is_number(ctx, 1))
-			event->deltaY = duk_to_number(ctx, 1);
-		duk_push_number(ctx, event->deltaY);	
-		return true;
-	}
-	// [WheelEvent.deltaZ](Read only)
-	static int deltaZ(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKWheelEvent* event = (DKWheelEvent*)addressToPointer(eventAddress);
-		if (duk_is_number(ctx, 1))
-			event->deltaZ = duk_to_number(ctx, 1);
-		duk_push_number(ctx, event->deltaZ);	
-		return true;
-	}
-	// [WheelEvent.deltaMode](Read only)
-	static int deltaMode(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKWheelEvent* event = (DKWheelEvent*)addressToPointer(eventAddress);
-		if (duk_is_number(ctx, 1))
-			event->deltaMode = duk_to_uint(ctx, 1);
-		duk_push_uint(ctx, event->deltaMode);	
-		return true;
-	}
-	// [WheelEvent.wheelDelta](Read only)(Deprecated)(Non-standard)
-	static int wheelDelta(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKWheelEvent* event = (DKWheelEvent*)addressToPointer(eventAddress);
-		duk_push_int(ctx, event->wheelDelta);	
-		return DKDEPRECATED();
-	}
-	// [WheelEvent.wheelDeltaX](Read only)(Deprecated)(Non-standard)
-	static int wheelDeltaX(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKWheelEvent* event = (DKWheelEvent*)addressToPointer(eventAddress);
-		duk_push_int(ctx, event->wheelDeltaX);	
-		return DKDEPRECATED();
-	}
-	// [WheelEvent.wheelDeltaY](Read only)(Deprecated)(Non-standard)
-	static int wheelDeltaY(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKWheelEvent* event = (DKWheelEvent*)addressToPointer(eventAddress);
-		duk_push_int(ctx, event->wheelDeltaY);	
-		return DKDEPRECATED();
-	}
+	// [DragEvent.dataTransfer](Read only) https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer
+	
+	
+	////// Event types //////
+	// [drag] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/drag_event
+	// [dragend] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragend_event
+	// [dragenter] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragenter_event
+	// [dragleave] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragleave_event
+	// [dragover] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragover_event
+	// [dragstart] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragstart_event
+	// [drop] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/drop_event
 	
 };
-REGISTER_OBJECT(DKWheelEventDUK, true)
+REGISTER_OBJECT(DKDragEventDUK, true)
 
 
-#endif //DKWheelEventDUK_H
+#endif //DKDragEventDUK_H
