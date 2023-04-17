@@ -2,6 +2,7 @@
 
 #include "App.h"
 #include "TEST_Event.h"
+#include "TEST_CustomEvent.h"
 
 bool App::Init() {
 	DKDEBUGFUNC();
