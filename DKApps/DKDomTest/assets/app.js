@@ -16,6 +16,9 @@ CPP_DK_Create("DKInputEventDUK");
 CPP_DK_Create("DKKeyboardEventDUK");
 CPP_DK_Create("DKCompositionEventDUK");
 
+// https://html.spec.whatwg.org/multipage/dnd.html#the-dragevent-interface
+CPP_DK_Create("DKDragEventDUK");
+
 // https://html.spec.whatwg.org/
 CPP_DK_Create("DKWindowDUK");
 

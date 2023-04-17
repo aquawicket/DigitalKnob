@@ -17,6 +17,8 @@ dk_depend(DKInputEvent)
 dk_depend(DKKeyboardEvent)
 dk_depend(DKCompositionEvent)
 
+dk_depend(DKDragEvent)
+
 dk_depend(DKWindow)
 dk_depend(DKScreen)
 dk_depend(DKNavigator)
