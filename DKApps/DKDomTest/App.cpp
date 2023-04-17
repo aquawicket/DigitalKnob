@@ -41,11 +41,11 @@
 #include "TEST_Document.h"
 
 
-// ConsoleWindow
-#include "TEST_ConsoleWindow.h"
+// DKConsoleWindow
+#include "TEST_DKConsoleWindow.h"
 
-// SDLWindow
-#include "TEST_SDLWindow.h"
+// DKSDLWindow
+#include "TEST_DKSDLWindow.h"
 
 
 ///////////////////////////////////////
@@ -91,11 +91,11 @@ bool App::Init() {
 	DKClass::DKCreate("TEST_Document");
 	
 	
-	// ConsoleWindow
-	DKClass::DKCreate("TEST_ConsoleWindow");
+	// DKConsoleWindow
+	DKClass::DKCreate("TEST_DKConsoleWindow");
 
-	// SDLWindow
-	DKClass::DKCreate("TEST_SDLWindow");
+	// DKSDLWindow
+	DKClass::DKCreate("TEST_DKSDLWindow");
 
 	return true;
 }
