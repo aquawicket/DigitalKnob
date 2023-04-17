@@ -1,4 +1,4 @@
-dk_depend(DKEventTarget)
+dk_depend(DKNode)
 
-dk_generateCmake(DKNode)
-dk_assets(DKNode)
+dk_generateCmake(DKDocument)
+dk_assets(DKDocument)

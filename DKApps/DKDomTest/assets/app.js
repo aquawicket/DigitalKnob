@@ -35,6 +35,9 @@ CPP_DK_Create("DKLocationDUK");
 // https://dom.spec.whatwg.org/#interface-node
 CPP_DK_Create("DKNodeDUK");
 
+// https://dom.spec.whatwg.org/#interface-document
+CPP_DK_Create("DKDocumentDUK");
+
 // ConsoleWindow
 CPP_DK_Create("DKConsoleWindowDUK");
 CPP_DK_Create("ConsoleWindowTest.js");

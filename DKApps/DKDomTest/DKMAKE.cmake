@@ -25,6 +25,7 @@ dk_depend(DKNavigator)
 dk_depend(DKLocation)
 
 dk_depend(DKNode)
+dk_depend(DKDocument)
 
 dk_depend(DKConsoleWindow)
 dk_depend(DKSDLWindow)
