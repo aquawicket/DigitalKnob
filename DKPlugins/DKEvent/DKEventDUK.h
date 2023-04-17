@@ -15,7 +15,7 @@ public:
 	bool Init(){
 		
 		////// Constructor //////
-		DKDuktape::AttachFunction("CPP_DKEventDUKDUK", DKEventDUK::constructor);
+		DKDuktape::AttachFunction("CPP_DKEventDUK", DKEventDUK::constructor);
 		
 		
 		////// Instance properties //////
