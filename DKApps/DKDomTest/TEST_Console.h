@@ -3,7 +3,7 @@
 #define TEST_Console_H
 
 #include "DK/DK.h"
-#include "DKConsole/DKConsole.h"
+//#include "DKConsole/DKConsole.h"	// TODO
 
 
 class TEST_Console : public DKObjectT<TEST_Console>
