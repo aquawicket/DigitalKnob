@@ -8,6 +8,7 @@ bool App::Init() {
 	DKINFO("App::Init() \n");
 	
 	DKClass::DKCreate("TEST_Event");
+	DKClass::DKCreate("TEST_CustomEvent");
 	/*
 	////// Event //////
 	DKINFO("\n");
