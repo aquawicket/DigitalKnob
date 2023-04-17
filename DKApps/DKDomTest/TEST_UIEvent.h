@@ -10,6 +10,7 @@ class TEST_UIEvent : public DKObjectT<TEST_UIEvent>
 {
 public:
 	bool Init(){
+		DKINFO("////// TEST_UIEvent.h ////// \n");
 		return DKTODO();
 	}
 	

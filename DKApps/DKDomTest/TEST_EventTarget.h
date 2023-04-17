@@ -10,6 +10,7 @@ class TEST_EventTarget : public DKObjectT<TEST_EventTarget>
 {
 public:
 	bool Init(){
+		DKINFO("////// TEST_EventTarget.h ////// \n");
 		return DKTODO();
 	}
 	

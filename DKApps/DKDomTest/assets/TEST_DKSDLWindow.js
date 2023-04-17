@@ -1,3 +1,5 @@
+console.log("////// TEST_DKSDLWindow.js //////")
+
 ////// Window //////
 function printWindowProperties(window){
 	////// Instance properties //////

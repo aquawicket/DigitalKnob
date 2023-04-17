@@ -10,6 +10,7 @@ class TEST_KeyboardEvent : public DKObjectT<TEST_KeyboardEvent>
 {
 public:
 	bool Init(){
+		DKINFO("////// TEST_KeyboardEvent.h ////// \n");
 		return DKTODO();
 	}
 	

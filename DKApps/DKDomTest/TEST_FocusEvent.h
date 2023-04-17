@@ -10,6 +10,7 @@ class TEST_FocusEvent : public DKObjectT<TEST_FocusEvent>
 {
 public:
 	bool Init(){
+		DKINFO("////// TEST_FocusEvent.h ////// \n");
 		return DKTODO();
 	}
 	

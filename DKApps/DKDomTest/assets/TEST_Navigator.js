@@ -1,3 +1,3 @@
-// TEST_Navigator.js
+console.log("////// TEST_Navigator.js //////")
 
 // TODO

@@ -1,3 +1,3 @@
-// TEST_DragEvent.js
+console.log("////// TEST_DragEvent.js //////")
 
 // TODO

@@ -10,6 +10,7 @@ class TEST_Node : public DKObjectT<TEST_Node>
 {
 public:
 	bool Init(){
+		DKINFO("////// TEST_Node.h ////// \n");
 		return DKTODO();
 	}
 	

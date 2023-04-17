@@ -1,3 +1,5 @@
+console.log("////// TEST_Screen.js //////")
+
 ////// Screen //////
 function printScreenProperties(screen){
 	////// Instance properties //////

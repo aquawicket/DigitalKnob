@@ -1,3 +1,3 @@
-// TEST_CustomEvent.js
+console.log("////// TEST_CustomEvent.js //////")
 
 // TODO

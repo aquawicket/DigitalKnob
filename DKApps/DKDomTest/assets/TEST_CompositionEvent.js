@@ -1,3 +1,3 @@
-// TEST_CompositionEvent.js
+console.log("////// TEST_CompositionEvent.js //////")
 
 // TODO

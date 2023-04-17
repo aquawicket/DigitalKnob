@@ -1,3 +1,3 @@
-// TEST_InputEvent.js
+console.log("////// TEST_InputEvent.js //////")
 
 // TODO

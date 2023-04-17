@@ -10,6 +10,7 @@ class TEST_Location : public DKObjectT<TEST_Location>
 {
 public:
 	bool Init(){
+		DKINFO("////// TEST_Location.h ////// \n");
 		return DKTODO();
 	}
 	

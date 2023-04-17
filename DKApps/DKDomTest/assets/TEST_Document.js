@@ -1,3 +1,3 @@
-// TEST_Document.js
+console.log("////// TEST_Document.js //////")
 
 // TODO

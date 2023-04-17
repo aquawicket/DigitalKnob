@@ -10,6 +10,7 @@ class TEST_MouseEvent : public DKObjectT<TEST_MouseEvent>
 {
 public:
 	bool Init(){
+		DKINFO("////// TEST_MouseEvent.h ////// \n");
 		return DKTODO();
 	}
 	

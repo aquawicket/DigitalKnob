@@ -10,6 +10,7 @@ class TEST_Document : public DKObjectT<TEST_Document>
 {
 public:
 	bool Init(){
+		DKINFO("////// TEST_Document.h ////// \n");
 		return DKTODO();
 	}
 	

@@ -1,3 +1,4 @@
+console.log("////// TEST_DKConsoleWindow.js //////")
 
 ////// Event ///////
 function printEventProperties(event){

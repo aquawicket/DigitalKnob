@@ -1,3 +1,5 @@
+console.log("////// TEST_Event.js //////")
+
 // create EventTarget
 const obj = new EventTarget();
 

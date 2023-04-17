@@ -10,6 +10,8 @@ class TEST_Event : public DKObjectT<TEST_Event>
 {
 public:
 	bool Init(){
+		DKINFO("////// TEST_Event.h ////// \n");
+		
 		////// Event //////
 		DKINFO("\n");
 		DKEventTarget myTargetA;									// EventTarget as 	value

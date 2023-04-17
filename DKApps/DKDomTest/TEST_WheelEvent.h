@@ -10,6 +10,7 @@ class TEST_WheelEvent : public DKObjectT<TEST_WheelEvent>
 {
 public:
 	bool Init(){
+		DKINFO("////// TEST_WheelEvent.h ////// \n");
 		return DKTODO();
 	}
 	

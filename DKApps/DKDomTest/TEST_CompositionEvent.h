@@ -10,6 +10,7 @@ class TEST_CompositionEvent : public DKObjectT<TEST_CompositionEvent>
 {
 public:
 	bool Init(){
+		DKINFO("////// TEST_CompositionEvent.h ////// \n");
 		return DKTODO();
 	}
 	

@@ -1,3 +1,3 @@
-// TEST_KeyboardEvent.js
+console.log("////// TEST_KeyboardEvent.js //////")
 
 // TODO

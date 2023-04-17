@@ -1,3 +1,3 @@
-// TEST_UIEvent.js
+console.log("////// TEST_UIEvent.js //////")
 
 // TODO

@@ -11,6 +11,8 @@ class TEST_CustomEvent : public DKObjectT<TEST_CustomEvent>
 {
 public:
 	bool Init(){
+		DKINFO("////// TEST_CustomEvent.h ////// \n");
+		
 		////// CustomEvent //////
 		DKINFO("\n");
 		DKEventTarget myTargetA;
