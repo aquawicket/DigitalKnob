@@ -143,6 +143,22 @@ public:
 		// [Document.createExpression()] https://developer.mozilla.org/en-US/docs/Web/API/Document/createExpression
 		// [Document.createNSResolver()] https://developer.mozilla.org/en-US/docs/Web/API/Document/createNSResolver
 		// [Document.evaluate()] https://developer.mozilla.org/en-US/docs/Web/API/Document/evaluate
+		
+		
+		////// Extension for HTML documents //////
+		// [Document.clear()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/clear
+		// [Document.close()] https://developer.mozilla.org/en-US/docs/Web/API/Document/close
+		// [Document.execCommand()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand
+		// [Document.getElementsByName()] https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByName
+		// [Document.hasFocus()] https://developer.mozilla.org/en-US/docs/Web/API/Document/hasFocus
+		// [Document.open()] https://developer.mozilla.org/en-US/docs/Web/API/Document/open
+		// [Document.queryCommandEnabled()](Deprecated)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Document/queryCommandEnabled
+		// [Document.queryCommandIndeterm()](Deprecated)
+		// [Document.queryCommandState()](Deprecated)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Document/queryCommandState
+		// [Document.queryCommandSupported()](Deprecated)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Document/queryCommandSupported
+		// [Document.queryCommandValue()](Deprecated)
+		// [Document.write()] https://developer.mozilla.org/en-US/docs/Web/API/Document/write
+		// [Document.writeln()] https://developer.mozilla.org/en-US/docs/Web/API/Document/writeln
 	}
 	
 	
@@ -271,6 +287,22 @@ public:
 	// [Document.createExpression()] https://developer.mozilla.org/en-US/docs/Web/API/Document/createExpression
 	// [Document.createNSResolver()] https://developer.mozilla.org/en-US/docs/Web/API/Document/createNSResolver
 	// [Document.evaluate()] https://developer.mozilla.org/en-US/docs/Web/API/Document/evaluate
+	
+	
+	////// Extension for HTML documents //////
+	// [Document.clear()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/clear
+	// [Document.close()] https://developer.mozilla.org/en-US/docs/Web/API/Document/close
+	// [Document.execCommand()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand
+	// [Document.getElementsByName()] https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByName
+	// [Document.hasFocus()] https://developer.mozilla.org/en-US/docs/Web/API/Document/hasFocus
+	// [Document.open()] https://developer.mozilla.org/en-US/docs/Web/API/Document/open
+	// [Document.queryCommandEnabled()](Deprecated)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Document/queryCommandEnabled
+	// [Document.queryCommandIndeterm()](Deprecated)
+	// [Document.queryCommandState()](Deprecated)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Document/queryCommandState
+	// [Document.queryCommandSupported()](Deprecated)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Document/queryCommandSupported
+	// [Document.queryCommandValue()](Deprecated)
+	// [Document.write()] https://developer.mozilla.org/en-US/docs/Web/API/Document/write
+	// [Document.writeln()] https://developer.mozilla.org/en-US/docs/Web/API/Document/writeln
 };
 
 
