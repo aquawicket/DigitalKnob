@@ -1,8 +1,23 @@
 #include "DK/stdafx.h"
 
 #include "App.h"
+
+// https://console.spec.whatwg.org
+#include "TEST_Console.h"
+
+// https://dom.spec.whatwg.org
 #include "TEST_Event.h"
 #include "TEST_CustomEvent.h"
+#include "TEST_EventTarget.h"
+
+// https://w3c.github.io/uievents
+#include "TEST_UIEvent"
+#include "TEST_FocusEvent"
+#include "TEST_MouseEvent"
+#include "TEST_WheelEvent"
+#include "TEST_InputEvent"
+#include "TEST_KeyboardEvent"
+#include "TEST_CompositionEvent"
 
 
 bool App::Init() {
