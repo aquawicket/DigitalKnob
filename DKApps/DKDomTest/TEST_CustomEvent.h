@@ -39,7 +39,7 @@ public:
 	}
 
 };
-REGISTER_OBJECT(TEST_CustomEvent, false);
+REGISTER_OBJECT(TEST_CustomEvent, true);
 
 
 #endif //TEST_CustomEvent_H

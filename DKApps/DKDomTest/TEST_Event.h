@@ -78,7 +78,7 @@ public:
 	}
 
 };
-REGISTER_OBJECT(TEST_Event, false);
+REGISTER_OBJECT(TEST_Event, true);
 
 
 #endif //TEST_Event_H

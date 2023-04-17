@@ -12,7 +12,7 @@ public:
 	bool End();
 
 };
-REGISTER_OBJECT(App, false);
+REGISTER_OBJECT(App, true);
 
 
 #endif //App_H

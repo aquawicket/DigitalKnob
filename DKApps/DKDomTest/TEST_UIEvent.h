@@ -1,0 +1,25 @@
+#pragma once
+#ifndef TEST_UIEvent_H
+#define TEST_UIEvent_H
+
+#include "DK/DK.h"
+#include "DKConsole/DKConsole.h"
+
+
+class TEST_UIEvent : public DKObjectT<TEST_UIEvent>
+{
+public:
+	bool Init(){
+		return DKTODO();
+	}
+	
+	bool End(){
+		return DKTODO();
+	}
+
+
+};
+REGISTER_OBJECT(TEST_UIEvent, true);
+
+
+#endif //TEST_UIEvent_H
