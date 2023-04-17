@@ -155,6 +155,77 @@ var Document = function Document(address) {
 	// [Document.write()] https://developer.mozilla.org/en-US/docs/Web/API/Document/write
 	// [Document.writeln()] https://developer.mozilla.org/en-US/docs/Web/API/Document/writeln
 		
+	
+	////// Events //////
+	// [afterscriptexecute](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Document/afterscriptexecute_event
+	// [beforescriptexecute](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Document/beforescriptexecute_event
+	// [securitypolicyviolation]
+	// [scroll] https://developer.mozilla.org/en-US/docs/Web/API/Document/scroll_event
+	// [visibilitychange] https://developer.mozilla.org/en-US/docs/Web/API/Document/visibilitychange_event
+	// [wheel] https://developer.mozilla.org/en-US/docs/Web/API/Element/wheel_event
+		
+	////// Animation events //////
+	// [animationcancel] https://developer.mozilla.org/en-US/docs/Web/API/Element/animationcancel_event
+	// [animationend] https://developer.mozilla.org/en-US/docs/Web/API/Element/animationend_event
+	// [animationiteration] https://developer.mozilla.org/en-US/docs/Web/API/Element/animationiteration_event
+	// [animationstart] https://developer.mozilla.org/en-US/docs/Web/API/Element/animationstart_event
+		
+	////// Clipboard events //////
+	// [copy] https://developer.mozilla.org/en-US/docs/Web/API/Document/copy_event
+	// [cut] https://developer.mozilla.org/en-US/docs/Web/API/Document/cut_event
+	// [paste] https://developer.mozilla.org/en-US/docs/Web/API/Document/paste_event
+		
+	////// Drag & drop events //////
+	// [drag] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/drag_event
+	// [dragend] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragend_event
+	// [dragenter] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragenter_event
+	// [dragleave] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragleave_event
+	// [dragover] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragover_event
+	// [dragstart] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragstart_event
+	// [drop] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/drop_event
+		
+	////// Fullscreen events //////
+	// [fullscreenchange] https://developer.mozilla.org/en-US/docs/Web/API/Document/fullscreenchange_event
+	// [fullscreenerror] https://developer.mozilla.org/en-US/docs/Web/API/Document/fullscreenerror_event
+		
+	////// Keyboard events //////
+	// [keydown] https://developer.mozilla.org/en-US/docs/Web/API/Element/keydown_event
+	// [keypress](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Element/keypress_event
+	// [keyup] https://developer.mozilla.org/en-US/docs/Web/API/Element/keyup_event
+		
+	////// Load & unload events //////
+	// [DOMContentLoaded] https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
+	// [readystatechange] https://developer.mozilla.org/en-US/docs/Web/API/Document/readystatechange_event
+		
+	////// Pointer events //////
+	// [gotpointercapture] https://developer.mozilla.org/en-US/docs/Web/API/Element/gotpointercapture_event
+	// [lostpointercapture] https://developer.mozilla.org/en-US/docs/Web/API/Document/lostpointercapture_event
+	// [pointercancel] https://developer.mozilla.org/en-US/docs/Web/API/Element/pointercancel_event
+	// [pointerdown] https://developer.mozilla.org/en-US/docs/Web/API/Element/pointerdown_event
+	// [pointerenter] https://developer.mozilla.org/en-US/docs/Web/API/Element/pointerenter_event
+	// [pointerleave] https://developer.mozilla.org/en-US/docs/Web/API/Element/pointerleave_event
+	// [pointerlockchange] https://developer.mozilla.org/en-US/docs/Web/API/Document/pointerlockchange_event
+	// [pointerlockerror] https://developer.mozilla.org/en-US/docs/Web/API/Document/pointerlockerror_event
+	// [pointermove] https://developer.mozilla.org/en-US/docs/Web/API/Element/pointermove_event
+	// [pointerout] https://developer.mozilla.org/en-US/docs/Web/API/Element/pointerout_event
+	// [pointerover] https://developer.mozilla.org/en-US/docs/Web/API/Element/pointerover_event
+	// [pointerup] https://developer.mozilla.org/en-US/docs/Web/API/Element/pointerup_event
+		
+	////// Selection events //////
+	// [selectionchange] https://developer.mozilla.org/en-US/docs/Web/API/Document/selectionchange_event
+		
+	////// Touch events //////
+	// [touchcancel] https://developer.mozilla.org/en-US/docs/Web/API/Element/touchcancel_event
+	// [touchend] https://developer.mozilla.org/en-US/docs/Web/API/Element/touchend_event
+	// [touchmove] https://developer.mozilla.org/en-US/docs/Web/API/Element/touchmove_event
+	// [touchstart] https://developer.mozilla.org/en-US/docs/Web/API/Element/touchstart_event
+		
+	////// Transition events //////
+	// [transitioncancel] https://developer.mozilla.org/en-US/docs/Web/API/Element/transitioncancel_event
+	// [transitionend] https://developer.mozilla.org/en-US/docs/Web/API/Element/transitionend_event
+	// [transitionrun] https://developer.mozilla.org/en-US/docs/Web/API/Element/transitionrun_event
+	// [transitionstart] https://developer.mozilla.org/en-US/docs/Web/API/Element/transitionstart_event
+		
 		
 	////// toString //////
 	if(this.toString() === "[object Object]")
