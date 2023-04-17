@@ -3,7 +3,7 @@
 #define TEST_WheelEvent_H
 
 #include "DK/DK.h"
-#include "DKConsole/DKConsole.h"
+#include "DKWheelEvent/DKWheelEvent.h"
 
 
 class TEST_WheelEvent : public DKObjectT<TEST_WheelEvent>

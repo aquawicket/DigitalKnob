@@ -3,7 +3,7 @@
 #define TEST_KeyboardEvent_H
 
 #include "DK/DK.h"
-#include "DKConsole/DKConsole.h"
+#include "DKKeyboardEvent/DKKeyboardEvent.h"
 
 
 class TEST_KeyboardEvent : public DKObjectT<TEST_KeyboardEvent>

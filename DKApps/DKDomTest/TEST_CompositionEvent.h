@@ -3,7 +3,7 @@
 #define TEST_CompositionEvent_H
 
 #include "DK/DK.h"
-#include "DKConsole/DKConsole.h"
+#include "DKCompositionEvent/DKCompositionEvent.h"
 
 
 class TEST_CompositionEvent : public DKObjectT<TEST_CompositionEvent>

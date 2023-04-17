@@ -3,7 +3,7 @@
 #define TEST_MouseEvent_H
 
 #include "DK/DK.h"
-#include "DKConsole/DKConsole.h"
+#include "DKMouseEvent/DKMouseEvent.h"
 
 
 class TEST_MouseEvent : public DKObjectT<TEST_MouseEvent>

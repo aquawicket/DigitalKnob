@@ -3,7 +3,7 @@
 #define TEST_InputEvent_H
 
 #include "DK/DK.h"
-#include "DKConsole/DKConsole.h"
+#include "DKInputEvent/DKInputEvent.h"
 
 
 class TEST_InputEvent : public DKObjectT<TEST_InputEvent>

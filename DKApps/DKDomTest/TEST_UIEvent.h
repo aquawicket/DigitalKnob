@@ -3,7 +3,7 @@
 #define TEST_UIEvent_H
 
 #include "DK/DK.h"
-#include "DKConsole/DKConsole.h"
+#include "DKUIEvent/DKUIEvent.h"
 
 
 class TEST_UIEvent : public DKObjectT<TEST_UIEvent>

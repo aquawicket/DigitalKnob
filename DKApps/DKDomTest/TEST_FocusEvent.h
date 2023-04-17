@@ -3,7 +3,7 @@
 #define TEST_FocusEvent_H
 
 #include "DK/DK.h"
-#include "DKConsole/DKConsole.h"
+#include "DKFocusEvent/DKFocusEvent.h"
 
 
 class TEST_FocusEvent : public DKObjectT<TEST_FocusEvent>
