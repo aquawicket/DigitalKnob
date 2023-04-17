@@ -19,82 +19,102 @@ public:
 	////// Instance properties //////
 	// [Screen.availTop](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Screen/availTop
 	virtual bool availTop(unsigned int& _availTop, bool set) { 
-		if(set)
+		if(set){
 			return DKTODO();
-		else
+		}
+		else{
 			return 0;
+		}
 		return false; 
 	}
 	// [Screen.availLeft](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Screen/availLeft
 	virtual bool availLeft(unsigned int& _availLeft, bool set) { 
-		if(set)
+		if(set){
 			return DKTODO();
-		else
+		}
+		else{
 			return 0;
+		}
 		return false;
 	}
 	// [Screen.availHeight] https://developer.mozilla.org/en-US/docs/Web/API/Screen/availHeight
 	virtual bool availHeight(unsigned int& _availHeight, bool set) { 
-		if(set)
+		if(set){
 			return DKTODO();
-		else
+		}
+		else{
 			return DKTODO();
+		}
 		return false;
 	}
 	// [Screen.availWidth] https://developer.mozilla.org/en-US/docs/Web/API/Screen/availWidth
 	virtual bool availWidth(unsigned int& _availWidth, bool set) { 
-		if(set)
+		if(set){
 			return DKTODO();
-		else
+		}
+		else{
 			return DKTODO();
+		}
 		return false;
 	}
 	// [Screen.colorDepth] https://developer.mozilla.org/en-US/docs/Web/API/Screen/colorDepth
 	virtual bool colorDepth(unsigned int& _colorDepth, bool set) { 
-		if(set)
+		if(set){
 			return DKTODO();
-		else
+		}
+		else{
 			return DKTODO();
+		}
 		return false;
 	}
 	// [Screen.height] https://developer.mozilla.org/en-US/docs/Web/API/Screen/height
 	virtual bool height(unsigned int& _height, bool set) {
-		if(set)
+		if(set){
 			return DKTODO();
-		else
+		}
+		else{
 			return DKUtil::GetScreenHeight(_height);
+		}
 		return false; 
 	}
 	// [Screen.left](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Screen/left
 	virtual bool left(unsigned int& _left, bool set) { 
-		if(set)
+		if(set){
 			return DKTODO();
-		else
+		}
+		else{
 			return DKTODO();
+		}
 		return false;
 	}
 	// [Screen.orientation] https://developer.mozilla.org/en-US/docs/Web/API/Screen/orientation
 	virtual bool orientation(DKString& _orientation, bool set) { 
-		if(set)
+		if(set){
 			return DKTODO();
-		else
+		}
+		else{
 			return DKTODO();
+		}
 		return false;
 	}
 	// [Screen.pixelDepth] https://developer.mozilla.org/en-US/docs/Web/API/Screen/pixelDepth
 	virtual bool pixelDepth(unsigned int& _pixelDepth, bool set) { 
-		if(set)
+		if(set){
 			return DKTODO();
-		else
+		}
+		else{
 			return DKTODO();
+		}
 		return false;
 	}
 	// [Screen.top](Deprecated)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Screen/top
 	virtual bool top(unsigned int& _top, bool set) { 
-		if(set)
+		if(set){
 			return DKTODO();
-		else
+		}
+		else{
 			return DKTODO();
+		}
 		return false;
 	}
 	// [Screen.width] https://developer.mozilla.org/en-US/docs/Web/API/Screen/width
@@ -109,18 +129,22 @@ public:
 	}
 	// [Screen.mozEnabled](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Screen/mozEnabled
 	virtual bool mozEnabled(bool& _mozEnabled, bool set) { 
-		if(set)
+		if(set){
 			return DKTODO();
-		else
+		}
+		else{
 			return DKTODO();
+		}
 		return false;
 	}
 	// [Screen.mozBrightness](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Screen/mozBrightness
 	virtual bool mozBrightness(unsigned int& _mozBrightness, bool set) { 
-		if(set)
+		if(set){
 			return DKTODO();
-		else
+		}
+		else{
 			return DKTODO();
+		}
 		return false;
 	}
 	
