@@ -1,3 +1,10 @@
 console.log("////// TEST_CompositionEvent.js //////")
 
-// TODO
+// create EventTarget
+const eventTarget = new EventTarget();
+
+
+////// CompositionEvent ///////
+function printCompositionEventProperties(event){
+	
+}
