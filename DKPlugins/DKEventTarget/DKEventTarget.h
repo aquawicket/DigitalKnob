@@ -13,7 +13,7 @@ struct EventObject {
 };
 
 
-// https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
 class DKEventTarget
 {
 public:
