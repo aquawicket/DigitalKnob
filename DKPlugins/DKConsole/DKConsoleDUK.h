@@ -29,7 +29,9 @@
 #ifndef DKConsoleDUK_H
 #define DKConsoleDUK_H
 
+#include "DKConsole/DKConsole.h"
 #include "DKDuktape/DKDuktape.h"
+
 
 
 // [W3C] https://console.spec.whatwg.org/
@@ -201,7 +203,8 @@ public:
 			string = toString(duk_require_boolean(ctx, 0));
 		if(duk_is_number(ctx, 0))
 			string = toString(duk_require_int(ctx, 0));
-		DKINFO(string);
+		//DKINFO(string);
+		DKConsole::info(string);
 		return true;
 	}
 	// [console.log()] https://developer.mozilla.org/en-US/docs/Web/API/console/log
@@ -213,7 +216,8 @@ public:
 			string = toString(duk_require_boolean(ctx, 0));
 		if (duk_is_number(ctx, 0))
 			string = toString(duk_require_int(ctx, 0));
-		DKINFO(string);
+		//DKINFO(string);
+		DKConsole::log(string);
 		return true;
 	}
 	// [console.profile()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/console/profile

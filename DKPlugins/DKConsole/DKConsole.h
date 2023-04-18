@@ -19,7 +19,7 @@ public:
 	
 	////// Instance methods //////
 	// [console.assert()] https://developer.mozilla.org/en-US/docs/Web/API/console/assert
-	virtual bool _assert(DKString& string) {
+	static bool _assert(DKString& string) {
 		DKDEBUGFUNC();
 		DKERROR(string);
 		return true;
@@ -36,7 +36,17 @@ public:
 	// [console.groupCollapsed()] https://developer.mozilla.org/en-US/docs/Web/API/console/groupCollapsed
 	// [console.groupEnd()] https://developer.mozilla.org/en-US/docs/Web/API/console/groupEnd
 	// [console.info()] https://developer.mozilla.org/en-US/docs/Web/API/console/info
+	static bool info(DKString& string) {
+		DKDEBUGFUNC();
+		DKINFO(string);
+		return true;
+	}
 	// [console.log()] https://developer.mozilla.org/en-US/docs/Web/API/console/log
+	static bool log(DKString& string) {
+		DKDEBUGFUNC();
+		DKINFO(string);
+		return true;
+	}
 	// [console.profile()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/console/profile
 	// [console.profileEnd()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/console/profileEnd
 	// [console.table()] https://developer.mozilla.org/en-US/docs/Web/API/console/table
