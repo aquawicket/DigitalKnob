@@ -39,6 +39,8 @@ public:
 		// [console.timeStamp()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/console/timeStamp
 		// [console.trace() https://developer.mozilla.org/en-US/docs/Web/API/console/trace
 		// [console.warn() https://developer.mozilla.org/en-US/docs/Web/API/console/warn
+		
+		return true;
 	}
 	
 	bool End(){
