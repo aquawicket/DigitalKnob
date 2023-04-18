@@ -5,6 +5,7 @@ console.log("////// TEST_Console.js //////")
 
 ////// Instance methods //////
 // [console.assert()] https://developer.mozilla.org/en-US/docs/Web/API/console/assert
+console.assert("assert test")
 // [console.clear()] https://developer.mozilla.org/en-US/docs/Web/API/console/clear
 // [console.count()] https://developer.mozilla.org/en-US/docs/Web/API/console/count
 // [console.countReset()] https://developer.mozilla.org/en-US/docs/Web/API/console/countReset
