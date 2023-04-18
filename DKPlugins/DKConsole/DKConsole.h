@@ -25,6 +25,11 @@ public:
 		return true;
 	}
 	// [console.clear()] https://developer.mozilla.org/en-US/docs/Web/API/console/clear
+	static bool clear() {
+		DKDEBUGFUNC();
+		int rtnvalue = DKUtil::System("cls", rtnvalue);
+		return true;
+	}
 	// [console.count()] https://developer.mozilla.org/en-US/docs/Web/API/console/count
 	// [console.countReset()] https://developer.mozilla.org/en-US/docs/Web/API/console/countReset
 	// [console.debug()] https://developer.mozilla.org/en-US/docs/Web/API/console/debug

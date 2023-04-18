@@ -97,13 +97,13 @@ public:
 			string = toString(duk_require_boolean(ctx, 0));
 		if(duk_is_number(ctx, 0))
 			string = toString(duk_require_int(ctx, 0));
-		DKERROR(string);
+		//DKERROR(string);
+		DKConsole::_assert(string);
 		return true;
 	}
 	// [console.clear()] https://developer.mozilla.org/en-US/docs/Web/API/console/clear
 	static int clear(duk_context* ctx){
-		int rtnvalue = DKUtil::System("cls", rtnvalue);
-		duk_push_int(ctx, rtnvalue);
+		DKConsole::clear();
 		return true;
 	}
 	// [console.count()] https://developer.mozilla.org/en-US/docs/Web/API/console/count
