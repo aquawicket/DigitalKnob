@@ -204,8 +204,8 @@ bool DKVncClient::TestInt(int& input, int& output){
 	DKDEBUGFUNC(input, output);
 	if(DKClass::HasFunc("DKSdlWindow::TestInt"))
 		return DKClass::CallFunc("DKSdlWindow::TestInt", &input, &output);
-	if(DKClass::HasFunc("DKSFMLWindow::TestInt"))
-		return DKClass::CallFunc("DKSFMLWindow::TestInt", &input, &output);
+	if(DKClass::HasFunc("DKSfmlWindow::TestInt"))
+		return DKClass::CallFunc("DKSfmlWindow::TestInt", &input, &output);
 	return DKERROR("DKWindow::TestInt(): No function available\n");
 }
 
@@ -213,8 +213,8 @@ bool DKVncClient::TestString(DKString& input, DKString& output){
 	DKDEBUGFUNC(input, output);
 	if(DKClass::HasFunc("DKSdlWindow::TestString"))
 		return DKClass::CallFunc("DKSdlWindow::TestString", &input, &output);
-	if(DKClass::HasFunc("DKSFMLWindow::TestString"))
-		return DKClass::CallFunc("DKSFMLWindow::TestString", &input, &output);
+	if(DKClass::HasFunc("DKSfmlWindow::TestString"))
+		return DKClass::CallFunc("DKSfmlWindow::TestString", &input, &output);
 	return DKERROR("No function available\n");
 }
 
@@ -222,8 +222,8 @@ bool DKVncClient::TestReturnInt(int& output){
 	DKDEBUGFUNC(output);
 	if(DKClass::HasFunc("DKSdlWindow::TestReturnInt"))
 		return DKClass::CallFunc("DKSdlWindow::TestReturnInt", NULL, &output);
-	if(DKClass::HasFunc("DKSFMLWindow::TestReturnInt"))
-		return DKClass::CallFunc("DKSFMLWindow::TestReturnInt", NULL, &output);
+	if(DKClass::HasFunc("DKSfmlWindow::TestReturnInt"))
+		return DKClass::CallFunc("DKSfmlWindow::TestReturnInt", NULL, &output);
 	return DKERROR("No function available\n");
 }
 
@@ -231,8 +231,8 @@ bool DKVncClient::TestReturnString(DKString& output){
 	DKDEBUGFUNC(output);
 	if(DKClass::HasFunc("DKSdlWindow::TestReturnString"))
 		return DKClass::CallFunc("DKSdlWindow::TestReturnString", NULL, &output);
-	if(DKClass::HasFunc("DKSFMLWindow::TestReturnString"))
-		return DKClass::CallFunc("DKSFMLWindow::TestReturnString", NULL, &output);
+	if(DKClass::HasFunc("DKSfmlWindow::TestReturnString"))
+		return DKClass::CallFunc("DKSfmlWindow::TestReturnString", NULL, &output);
 	return DKERROR("No function available\n");
 }
 

@@ -1,5 +1,5 @@
 dk_depend(DKAssets)
-dk_depend(DKSFMLWindow)
+dk_depend(DKSfmlWindow)
 dk_depend(DKRml)
 
-dk_generateCmake(DKSFMLRml)
+dk_generateCmake(DKSfmlRml)

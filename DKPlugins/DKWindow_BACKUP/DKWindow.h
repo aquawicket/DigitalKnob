@@ -25,7 +25,7 @@
 */
 
 // This is a Switch plugin..  
-// To links to DKCEFWindow, DKOSGWindow, DKSdlWindow and DKSFMLWindow
+// To links to DKCEFWindow, DKOSGWindow, DKSdlWindow and DKSfmlWindow
 // When we call DKWindow commands, this class will determine the proper window system to use. 
 #pragma once
 #ifndef DKWindow_H

@@ -25,8 +25,8 @@
 */
 
 #pragma once
-#ifndef DKSFMLWindow_H
-#define DKSFMLWindow_H
+#ifndef DKSfmlWindow_H
+#define DKSfmlWindow_H
 
 #include "DK/DK.h"
 
@@ -39,7 +39,7 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
-class DKSFMLWindow : public DKObjectT<DKSFMLWindow>
+class DKSfmlWindow : public DKObjectT<DKSfmlWindow>
 {
 public:
 	bool Init();
@@ -107,6 +107,6 @@ public:
 	}
 };
 
-REGISTER_OBJECT(DKSFMLWindow, true)
+REGISTER_OBJECT(DKSfmlWindow, true)
 
-#endif //DKSFMLWindow_H
+#endif //DKSfmlWindow_H

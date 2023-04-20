@@ -27,7 +27,7 @@
 #include "DK/DK.h"
 #include "DK/DKString.h"
 #include "DKSFMLRml/DKSFMLRmlRenderer.h"
-#include "DKSFMLWindow/DKSFMLWindow.h"
+#include "DKSfmlWindow/DKSfmlWindow.h"
 
 WARNING_DISABLE
 #include <RmlUi/Core.h>
@@ -340,7 +340,7 @@ void RmlSFMLRenderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, in
 	//DKDEBUGFUNC(vertices, num_vertices, indices, num_indices, texture, translation);  //EXCESSIVE LOGGING
 #if !defined(IOS) && !defined(ANDROID)
     // DISABLE SFML Shaders
-	DKSFMLWindow* dkSfmlWindow = DKSFMLWindow::Instance("DKSFMLWindow0");
+	DKSfmlWindow* dkSfmlWindow = DKSfmlWindow::Instance("DKSfmlWindow0");
 	if(!has(dkSfmlWindow->gl_vendor, "Microsoft")){
 		glUseProgramObjectARB = (PFNGLUSEPROGRAMOBJECTARBPROC) SFML_GL_GetProcAddress("glUseProgramObjectARB");
 		glUseProgramObjectARB(0);  //FIXME: this crashes on Microsoft Generic GDI drivers

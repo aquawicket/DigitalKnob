@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 #include "DK/stdafx.h"
-#include "DKSFMLWindow/DKSFMLWindow.h"
+#include "DKSfmlWindow/DKSfmlWindow.h"
 
 WARNING_DISABLE
 #include <SFML/Window.hpp>
@@ -32,55 +32,55 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
-//std::vector<boost::function<bool(sf::Event& e)> > DKSFMLWindow::event_funcs;
-//std::vector<boost::function<void()> > DKSFMLWindow::draw_funcs;
-std::vector<std::function<bool(sf::Event& e)> > DKSFMLWindow::event_funcs;
-std::vector<std::function<void()> > DKSFMLWindow::draw_funcs;
+//std::vector<boost::function<bool(sf::Event& e)> > DKSfmlWindow::event_funcs;
+//std::vector<boost::function<void()> > DKSfmlWindow::draw_funcs;
+std::vector<std::function<bool(sf::Event& e)> > DKSfmlWindow::event_funcs;
+std::vector<std::function<void()> > DKSfmlWindow::draw_funcs;
 
-bool DKSFMLWindow::Init(){
+bool DKSfmlWindow::Init(){
 	DKDEBUGFUNC();
 	window.create(sf::VideoMode({ 800, 600 }), "Window_0");
-	DKClass::RegisterFunc("DKSFMLWindow::TestInt", &DKSFMLWindow::TestInt, this);
-	DKClass::RegisterFunc("DKSFMLWindow::TestString", &DKSFMLWindow::TestString, this);
-	DKClass::RegisterFunc("DKSFMLWindow::TestReturnInt", &DKSFMLWindow::TestReturnInt, this);
-	DKClass::RegisterFunc("DKSFMLWindow::TestReturnString", &DKSFMLWindow::TestReturnString, this);
+	DKClass::RegisterFunc("DKSfmlWindow::TestInt", &DKSfmlWindow::TestInt, this);
+	DKClass::RegisterFunc("DKSfmlWindow::TestString", &DKSfmlWindow::TestString, this);
+	DKClass::RegisterFunc("DKSfmlWindow::TestReturnInt", &DKSfmlWindow::TestReturnInt, this);
+	DKClass::RegisterFunc("DKSfmlWindow::TestReturnString", &DKSfmlWindow::TestReturnString, this);
 
-	DKClass::RegisterFunc("DKSFMLWindow::Fullscreen", &DKSFMLWindow::Fullscreen, this);
-	DKClass::RegisterFunc("DKSFMLWindow::GetClipboard", &DKSFMLWindow::GetClipboard, this);
-	DKClass::RegisterFunc("DKSFMLWindow::GetHandle", &DKSFMLWindow::GetHandle, this);
-	DKClass::RegisterFunc("DKSFMLWindow::GetHeight", &DKSFMLWindow::GetHeight, this);
-	DKClass::RegisterFunc("DKSFMLWindow::GetMouseX", &DKSFMLWindow::GetMouseX, this);
-	DKClass::RegisterFunc("DKSFMLWindow::GetMouseY", &DKSFMLWindow::GetMouseY, this);
-	DKClass::RegisterFunc("DKSFMLWindow::GetWidth", &DKSFMLWindow::GetWidth, this);
-	DKClass::RegisterFunc("DKSFMLWindow::GetX", &DKSFMLWindow::GetX, this);
-	DKClass::RegisterFunc("DKSFMLWindow::GetY", &DKSFMLWindow::GetY, this);
-	DKClass::RegisterFunc("DKSFMLWindow::Hide", &DKSFMLWindow::Hide, this);
-	DKClass::RegisterFunc("DKSFMLWindow::IsFullscreen", &DKSFMLWindow::IsFullscreen, this);
-	DKClass::RegisterFunc("DKSFMLWindow::IsVisible", &DKSFMLWindow::IsVisible, this);
-	DKClass::RegisterFunc("DKSFMLWindow::MessageBox", &DKSFMLWindow::MessageBox, this);
-	DKClass::RegisterFunc("DKSFMLWindow::Minimize", &DKSFMLWindow::Minimize, this);
-	DKClass::RegisterFunc("DKSFMLWindow::Restore", &DKSFMLWindow::Restore, this);
-	DKClass::RegisterFunc("DKSFMLWindow::SetClipboard", &DKSFMLWindow::SetClipboard, this);
-	DKClass::RegisterFunc("DKSFMLWindow::SetHeight", &DKSFMLWindow::SetHeight, this);
-	DKClass::RegisterFunc("DKSFMLWindow::SetIcon", &DKSFMLWindow::SetIcon, this);
-	DKClass::RegisterFunc("DKSFMLWindow::SetWidth", &DKSFMLWindow::SetWidth, this);
-	DKClass::RegisterFunc("DKSFMLWindow::SetX", &DKSFMLWindow::SetX, this);
-	DKClass::RegisterFunc("DKSFMLWindow::SetY", &DKSFMLWindow::SetY, this);
-	DKClass::RegisterFunc("DKSFMLWindow::Show", &DKSFMLWindow::Show, this);
-	DKClass::RegisterFunc("DKSFMLWindow::Windowed", &DKSFMLWindow::Windowed, this);
+	DKClass::RegisterFunc("DKSfmlWindow::Fullscreen", &DKSfmlWindow::Fullscreen, this);
+	DKClass::RegisterFunc("DKSfmlWindow::GetClipboard", &DKSfmlWindow::GetClipboard, this);
+	DKClass::RegisterFunc("DKSfmlWindow::GetHandle", &DKSfmlWindow::GetHandle, this);
+	DKClass::RegisterFunc("DKSfmlWindow::GetHeight", &DKSfmlWindow::GetHeight, this);
+	DKClass::RegisterFunc("DKSfmlWindow::GetMouseX", &DKSfmlWindow::GetMouseX, this);
+	DKClass::RegisterFunc("DKSfmlWindow::GetMouseY", &DKSfmlWindow::GetMouseY, this);
+	DKClass::RegisterFunc("DKSfmlWindow::GetWidth", &DKSfmlWindow::GetWidth, this);
+	DKClass::RegisterFunc("DKSfmlWindow::GetX", &DKSfmlWindow::GetX, this);
+	DKClass::RegisterFunc("DKSfmlWindow::GetY", &DKSfmlWindow::GetY, this);
+	DKClass::RegisterFunc("DKSfmlWindow::Hide", &DKSfmlWindow::Hide, this);
+	DKClass::RegisterFunc("DKSfmlWindow::IsFullscreen", &DKSfmlWindow::IsFullscreen, this);
+	DKClass::RegisterFunc("DKSfmlWindow::IsVisible", &DKSfmlWindow::IsVisible, this);
+	DKClass::RegisterFunc("DKSfmlWindow::MessageBox", &DKSfmlWindow::MessageBox, this);
+	DKClass::RegisterFunc("DKSfmlWindow::Minimize", &DKSfmlWindow::Minimize, this);
+	DKClass::RegisterFunc("DKSfmlWindow::Restore", &DKSfmlWindow::Restore, this);
+	DKClass::RegisterFunc("DKSfmlWindow::SetClipboard", &DKSfmlWindow::SetClipboard, this);
+	DKClass::RegisterFunc("DKSfmlWindow::SetHeight", &DKSfmlWindow::SetHeight, this);
+	DKClass::RegisterFunc("DKSfmlWindow::SetIcon", &DKSfmlWindow::SetIcon, this);
+	DKClass::RegisterFunc("DKSfmlWindow::SetWidth", &DKSfmlWindow::SetWidth, this);
+	DKClass::RegisterFunc("DKSfmlWindow::SetX", &DKSfmlWindow::SetX, this);
+	DKClass::RegisterFunc("DKSfmlWindow::SetY", &DKSfmlWindow::SetY, this);
+	DKClass::RegisterFunc("DKSfmlWindow::Show", &DKSfmlWindow::Show, this);
+	DKClass::RegisterFunc("DKSfmlWindow::Windowed", &DKSfmlWindow::Windowed, this);
 
-	DKApp::AppendLoopFunc(&DKSFMLWindow::Process, this);
-	DKSFMLWindow::AddEventFunc(&DKSFMLWindow::handle, this);
+	DKApp::AppendLoopFunc(&DKSfmlWindow::Process, this);
+	DKSfmlWindow::AddEventFunc(&DKSfmlWindow::handle, this);
 	return true;
 }
 
-bool DKSFMLWindow::End(){
+bool DKSfmlWindow::End(){
 	DKDEBUGFUNC();
 	window.close();
 	return true;
 }
 
-void DKSFMLWindow::Process(){
+void DKSfmlWindow::Process(){
 	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 	sf::Event e;
 	while(window.pollEvent(e)){
@@ -102,7 +102,7 @@ void DKSFMLWindow::Process(){
 	window.display();
 }
 
-bool DKSFMLWindow::handle(sf::Event& e){
+bool DKSfmlWindow::handle(sf::Event& e){
 	DKDEBUGFUNC(e);
 	if(e.type == sf::Event::Closed){
 		DKApp::Exit();
@@ -111,7 +111,7 @@ bool DKSFMLWindow::handle(sf::Event& e){
 	return false; //allow event to continue
 }
 
-bool DKSFMLWindow::TestInt(const void* input, void* output){
+bool DKSfmlWindow::TestInt(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	int in = *(int*)input;
 	int out = in;
@@ -119,7 +119,7 @@ bool DKSFMLWindow::TestInt(const void* input, void* output){
 	return true;
 }
 
-bool DKSFMLWindow::TestString(const void* input, void* output){
+bool DKSfmlWindow::TestString(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	std::string in = *(std::string*)input;
 	std::string out = in;
@@ -127,21 +127,21 @@ bool DKSFMLWindow::TestString(const void* input, void* output){
 	return true;
 }
 
-bool DKSFMLWindow::TestReturnInt(const void* input, void* output){
+bool DKSfmlWindow::TestReturnInt(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	int var = 1234;
 	*(int*)output = var;
 	return true;
 }
 
-bool DKSFMLWindow::TestReturnString(const void* input, void* output){
+bool DKSfmlWindow::TestReturnString(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	std::string var = "Return test";
 	*(std::string*)output = var;
 	return true;
 }
 
-bool DKSFMLWindow::Fullscreen(const void* input, void* output){
+bool DKSfmlWindow::Fullscreen(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 #if WIN32
 	HWND hwnd = window.getSystemHandle();
@@ -176,7 +176,7 @@ bool DKSFMLWindow::Fullscreen(const void* input, void* output){
 #endif
 }
 
-bool DKSFMLWindow::GetClipboard(const void* input, void* output){
+bool DKSfmlWindow::GetClipboard(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	DKString text;
 	if(!DKUtil::GetClipboard(text))
@@ -185,7 +185,7 @@ bool DKSFMLWindow::GetClipboard(const void* input, void* output){
 	return true;
 }
 
-bool DKSFMLWindow::GetHandle(const void* input, void* output){
+bool DKSfmlWindow::GetHandle(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 #if WIN32
 	HWND hwnd = window.getSystemHandle();
@@ -211,14 +211,14 @@ bool DKSFMLWindow::GetHandle(const void* input, void* output){
 #endif
 }
 
-bool DKSFMLWindow::GetHeight(const void* input, void* output){
+bool DKSfmlWindow::GetHeight(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	sf::Vector2u size = window.getSize();
 	*(int*)output = size.y;
 	return true;
 }
 
-bool DKSFMLWindow::GetMouseX(const void* input, void* output){
+bool DKSfmlWindow::GetMouseX(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 #if WIN32
 	POINT p;
@@ -250,7 +250,7 @@ bool DKSFMLWindow::GetMouseX(const void* input, void* output){
 #endif
 }
 
-bool DKSFMLWindow::GetMouseY(const void* input, void* output){
+bool DKSfmlWindow::GetMouseY(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 #if WIN
 	POINT p;
@@ -282,34 +282,34 @@ bool DKSFMLWindow::GetMouseY(const void* input, void* output){
 #endif
 }
 
-bool DKSFMLWindow::GetWidth(const void* input, void* output){
+bool DKSfmlWindow::GetWidth(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	sf::Vector2u size = window.getSize();
 	*(int*)output = size.x;
 	return true;
 }
 
-bool DKSFMLWindow::GetX(const void* input, void* output){
+bool DKSfmlWindow::GetX(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	sf::Vector2i position = window.getPosition();
 	*(int*)output = position.x;
 	return true;
 }
 
-bool DKSFMLWindow::GetY(const void* input, void* output){
+bool DKSfmlWindow::GetY(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	sf::Vector2i position = window.getPosition();
 	*(int*)output = position.x;
 	return true;
 }
 
-bool DKSFMLWindow::Hide(const void* input, void* output){
+bool DKSfmlWindow::Hide(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	window.setVisible(false);
 	return true;
 }
 
-bool DKSFMLWindow::IsFullscreen(const void* input, void* output){
+bool DKSfmlWindow::IsFullscreen(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 #if WIN32
 	HWND hwnd = window.getSystemHandle();
@@ -345,7 +345,7 @@ bool DKSFMLWindow::IsFullscreen(const void* input, void* output){
 #endif
 }
 
-bool DKSFMLWindow::IsVisible(const void* input, void* output){
+bool DKSfmlWindow::IsVisible(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 #if WIN32
 	HWND hwnd = window.getSystemHandle();
@@ -371,13 +371,13 @@ bool DKSFMLWindow::IsVisible(const void* input, void* output){
 #endif
 }
 
-bool DKSFMLWindow::MessageBox(const void* input, void* output){
+bool DKSfmlWindow::MessageBox(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	//TODO
 	return DKERROR("not implemented on this OS\n");
 }
 
-bool DKSFMLWindow::Minimize(const void* input, void* output){
+bool DKSfmlWindow::Minimize(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 #if WIN32
 	HWND hwnd = window.getSystemHandle();
@@ -402,7 +402,7 @@ bool DKSFMLWindow::Minimize(const void* input, void* output){
 #endif
 }
 
-bool DKSFMLWindow::Restore(const void* input, void* output){
+bool DKSfmlWindow::Restore(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 #if WIN32
 	HWND hwnd = window.getSystemHandle();
@@ -432,13 +432,13 @@ bool DKSFMLWindow::Restore(const void* input, void* output){
 #endif
 }
 
-bool DKSFMLWindow::SetClipboard(const void* input, void* output){
+bool DKSfmlWindow::SetClipboard(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	//TODO
 	return DKERROR("not implemented on this OS\n");
 }
 
-bool DKSFMLWindow::SetHeight(const void* input, void* output){
+bool DKSfmlWindow::SetHeight(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	sf::Vector2u size = window.getSize();
 	size.y = *(int*)input;
@@ -446,7 +446,7 @@ bool DKSFMLWindow::SetHeight(const void* input, void* output){
 	return true;
 }
 
-bool DKSFMLWindow::SetIcon(const void* input, void* output){
+bool DKSfmlWindow::SetIcon(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 #if WIN32
 	HWND hwnd = window.getSystemHandle();
@@ -479,7 +479,7 @@ bool DKSFMLWindow::SetIcon(const void* input, void* output){
 #endif
 }
 
-bool DKSFMLWindow::SetWidth(const void* input, void* output){
+bool DKSfmlWindow::SetWidth(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	sf::Vector2u size = window.getSize();
 	size.x = *(int*)input;
@@ -487,7 +487,7 @@ bool DKSFMLWindow::SetWidth(const void* input, void* output){
 	return true;
 }
 
-bool DKSFMLWindow::SetX(const void* input, void* output){
+bool DKSfmlWindow::SetX(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	sf::Vector2i position = window.getPosition();
 	position.x = *(int*)input;
@@ -495,7 +495,7 @@ bool DKSFMLWindow::SetX(const void* input, void* output){
 	return true;
 }
 
-bool DKSFMLWindow::SetY(const void* input, void* output){
+bool DKSfmlWindow::SetY(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	sf::Vector2i position = window.getPosition();
 	position.y = *(int*)input;
@@ -503,7 +503,7 @@ bool DKSFMLWindow::SetY(const void* input, void* output){
 	return true;
 }
 
-bool DKSFMLWindow::Show(const void* input, void* output){
+bool DKSfmlWindow::Show(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 #if WIN32
 	HWND hwnd = window.getSystemHandle();
@@ -527,7 +527,7 @@ bool DKSFMLWindow::Show(const void* input, void* output){
 #endif
 }
 
-bool DKSFMLWindow::Windowed(const void* input, void* output){
+bool DKSfmlWindow::Windowed(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 #if WIN32
 	HWND hwnd = window.getSystemHandle();
