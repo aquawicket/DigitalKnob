@@ -25,8 +25,8 @@
 */
 
 #pragma once
-#ifndef DKSDLCef_H
-#define DKSDLCef_H
+#ifndef DKSdlCef_H
+#define DKSdlCef_H
 
 WARNING_DISABLE
 	#include <list>
@@ -43,13 +43,13 @@ WARNING_ENABLE
 #include "DK/DK.h"
 #include "DK/DKApp.h"
 #include "DKCef/DKCef.h"
-#include "DKSDLCef/DKSDLCefKeyboard.h"
+#include "DKSdlCef/DKSdlCefKeyboard.h"
 #include "DKSdlWindow/DKSdlWindow.h"
 
 
-class DKSDLCefHandler;
+class DKSdlCefHandler;
 
-class DKSDLCef : public DKObjectT<DKSDLCef>
+class DKSdlCef : public DKObjectT<DKSdlCef>
 {
 public:
 	bool Init();
@@ -70,12 +70,12 @@ public:
 	SDL_Texture* popup_image;
 	DKCef* dkCef;
 	CefRect popup_rect;
-	DKSDLCefHandler* cefHandler;
-	DKSDLCefKeyboard _keyAdapter;
+	DKSdlCefHandler* cefHandler;
+	DKSdlCefKeyboard _keyAdapter;
 	bool _mouseLMBdown;
 	float _scrollFactor;
 };
 
-REGISTER_OBJECT(DKSDLCef, true);
+REGISTER_OBJECT(DKSdlCef, true);
 
-#endif //DKSDLCef_H
+#endif //DKSdlCef_H

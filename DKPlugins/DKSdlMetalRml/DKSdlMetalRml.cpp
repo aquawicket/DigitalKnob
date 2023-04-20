@@ -27,10 +27,10 @@
 #include "SDL.h"
 #include "DK/DKFile.h"
 #include "DKAssets/DKAssets.h"
-#include "DKSDLMetalRml/DKSDLMetalRml.h"
+#include "DKSdlMetalRml/DKSdlMetalRml.h"
 
 
-bool DKSDLMetalRml::Init(){
+bool DKSdlMetalRml::Init(){
 	DKDEBUGFUNC();
 	//Android SDL_TEXTINPUT events not working
 	//SDL_StartTextInput(); 
@@ -38,7 +38,7 @@ bool DKSDLMetalRml::Init(){
 	dkSdlWindow = DKSdlWindow::Instance("DKSdlWindow0");
 	dkRml = DKRml::Instance("DKRml0");
 	if(!dkSdlWindow || !dkRml)
-		return DKERROR("DKSDLMetalRml::Init(): INVALID OBJECTS\n");
+		return DKERROR("DKSdlMetalRml::Init(): INVALID OBJECTS\n");
 #ifdef RML_SHELL_RENDER
 	Renderer = new ShellRenderInterfaceOpenGL();
 #else
@@ -47,18 +47,18 @@ bool DKSDLMetalRml::Init(){
 	SystemInterface = new RmlSDL2SystemInterface();
 	Rml::SetRenderInterface(Renderer);
     Rml::SetSystemInterface(SystemInterface);
-	DKSdlWindow::AddEventFunc(&DKSDLMetalRml::Handle, this);
-	DKSdlWindow::AddRenderFunc(&DKSDLMetalRml::Render, this);
-	DKSdlWindow::AddUpdateFunc(&DKSDLMetalRml::Update, this);
+	DKSdlWindow::AddEventFunc(&DKSdlMetalRml::Handle, this);
+	DKSdlWindow::AddRenderFunc(&DKSdlMetalRml::Render, this);
+	DKSdlWindow::AddUpdateFunc(&DKSdlMetalRml::Update, this);
 	return true;
 }
 
-bool DKSDLMetalRml::End(){
+bool DKSdlMetalRml::End(){
 	DKDEBUGFUNC();
 	return true;
 }
 
-bool DKSDLMetalRml::Handle(SDL_Event *event) {
+bool DKSdlMetalRml::Handle(SDL_Event *event) {
 	//DKDEBUGFUNC(event);  //EXCESSIVE LOGGING
 	if(!dkRml->document)
 		return DKERROR("dkRml->document invalid");
@@ -91,7 +91,7 @@ bool DKSDLMetalRml::Handle(SDL_Event *event) {
             break;
 #if ANDROID
         case SDL_KEYDOWN:
-			//DKINFO("DKSDLMetalRml::SDL_KEYDOWN("+toString((int)event->key.keysym.sym)+")\n");
+			//DKINFO("DKSdlMetalRml::SDL_KEYDOWN("+toString((int)event->key.keysym.sym)+")\n");
 			dkRml->context->ProcessKeyDown(SystemInterface->TranslateKey(event->key.keysym.sym), SystemInterface->GetKeyModifiers());
 			if(event->key.keysym.sym == 13) //enter
 				dkRml->context->ProcessTextInput("\n");
@@ -135,11 +135,11 @@ bool DKSDLMetalRml::Handle(SDL_Event *event) {
 		}
 #endif
 		case SDL_TEXTINPUT:
-			//DKINFO("DKSDLMetalRml::SDL_TEXTINPUT("+DKString(event->text.text)+")\n");
+			//DKINFO("DKSdlMetalRml::SDL_TEXTINPUT("+DKString(event->text.text)+")\n");
 			dkRml->context->ProcessTextInput(event->text.text);
 			break;
 		case SDL_TEXTEDITING:
-			//DKINFO("DKSDLMetalRml::SDL_TEXTEDITING()\n");
+			//DKINFO("DKSdlMetalRml::SDL_TEXTEDITING()\n");
 			break;	
 		case SDL_KEYUP:
 			//dkRml->context->ProcessKeyUp((Rml::Input::KeyIdentifier)DKSdlWindow::sdlKeyCode[event->key.keysym.sym], SystemInterface->GetKeyModifiers());
@@ -151,7 +151,7 @@ bool DKSDLMetalRml::Handle(SDL_Event *event) {
 	return false; //allow event to continue
 }
 
-void DKSDLMetalRml::Render(){
+void DKSdlMetalRml::Render(){
     //DKDEBUGFUNC();  //EXCESSIVE LOGGING
 	if(dkSdlWindow->width != dkRml->context->GetDimensions().x || dkSdlWindow->height != dkRml->context->GetDimensions().y){
 		dkRml->context->SetDimensions(Rml::Vector2i(dkSdlWindow->width, dkSdlWindow->height));
@@ -162,6 +162,6 @@ void DKSDLMetalRml::Render(){
 	dkRml->context->Render();
 }
 
-void DKSDLMetalRml::Update(){
+void DKSdlMetalRml::Update(){
 	dkRml->context->Update();
 }

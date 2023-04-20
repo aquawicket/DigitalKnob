@@ -27,8 +27,8 @@
 //https://github.com/ashafiei/dranger-ffmpeg-tuto
 //http://dranger.com/ffmpeg/
 #pragma once
-#ifndef DKSDLWaave_H
-#define DKSDLWaave_H
+#ifndef DKSdlWaave_H
+#define DKSdlWaave_H
 
 #include "DK/DK.h"
 
@@ -37,7 +37,7 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
-class DKSDLWaave : public DKObjectT<DKSDLWaave>
+class DKSdlWaave : public DKObjectT<DKSdlWaave>
 {
 public:
 	bool Init();
@@ -51,5 +51,5 @@ public:
 };
 
 
-REGISTER_OBJECT(DKSDLWaave, true)
-#endif //DKSDLWaave_H
+REGISTER_OBJECT(DKSdlWaave, true)
+#endif //DKSdlWaave_H

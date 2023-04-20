@@ -266,7 +266,7 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 		data += src;
 		DKClass::CallFunc("DKCef::NewBrowser", &data, NULL);
 		
-		//DKClass::CallFunc("DKSDLCef::OnResize", &data, NULL); //call OnResize in DKCef window handler
+		//DKClass::CallFunc("DKSdlCef::OnResize", &data, NULL); //call OnResize in DKCef window handler
 		processed += id+",";
 	}
 	*/
@@ -401,7 +401,7 @@ bool DKRmlConverter::ResizeIframe(DKEvents* event){
 	DKString iWidth = toString(iframe->GetClientWidth());
 	DKString iHeight = toString(iframe->GetClientHeight());
 	DKString data = id+","+iTop+","+iLeft+","+iWidth+","+iHeight;
-	DKClass::CallFunc("DKSDLCef::OnResize", &data, NULL); //call OnResize in DKCef window handler
+	DKClass::CallFunc("DKSdlCef::OnResize", &data, NULL); //call OnResize in DKCef window handler
 	return true;
 }
 
@@ -416,7 +416,7 @@ bool DKRmlConverter::ClickIframe(DKEvents* event){
 	DKString iWidth = toString(iframe->GetClientWidth());
 	DKString iHeight = toString(iframe->GetClientHeight());
 	DKString _data = id+","+iTop+","+iLeft+","+iWidth+","+iHeight;
-	DKClass::CallFunc("DKSDLCef::OnClick", &_data, NULL); //call OnResize in DKCef window handler
+	DKClass::CallFunc("DKSdlCef::OnClick", &_data, NULL); //call OnResize in DKCef window handler
 	return true;
 }
 
@@ -431,7 +431,7 @@ bool DKRmlConverter::MouseOverIframe(DKEvents* event){
 	DKString iWidth = toString(iframe->GetClientWidth());
 	DKString iHeight = toString(iframe->GetClientHeight());
 	DKString _data = id+","+iTop+","+iLeft+","+iWidth+","+iHeight;
-	DKClass::CallFunc("DKSDLCef::OnMouseOver", &_data, NULL); //call OnResize in DKCef window handler
+	DKClass::CallFunc("DKSdlCef::OnMouseOver", &_data, NULL); //call OnResize in DKCef window handler
 	return true;
 }
 

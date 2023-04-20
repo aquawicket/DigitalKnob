@@ -449,7 +449,7 @@ bool DKDuktape::Reload(){
 			if(has(list[i],"DKJS")){ continue; }
 			if(has(list[i],"Rocket")){ continue; }
 			if(has(list[i],"DKCef")){ continue; }
-			if(has(list[i],"DKSDLCef")){ continue; }
+			if(has(list[i],"DKSdlCef")){ continue; }
 		}
 		//DKINFO("DKDuktape::Reload(): "+list[i]+"\n"); //DEBUG
 		DKClass::DKClose(list[i]);

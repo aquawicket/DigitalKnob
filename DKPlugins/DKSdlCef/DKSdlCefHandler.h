@@ -25,8 +25,8 @@
 */
 
 #pragma once
-#ifndef DKSDLCefHandler_H
-#define DKSDLCefHandler_H
+#ifndef DKSdlCefHandler_H
+#define DKSdlCefHandler_H
 
 WARNING_DISABLE
 	#include <list>
@@ -57,9 +57,9 @@ WARNING_ENABLE
 #include "DK/DK.h"
 #include "DK/DKApp.h"
 #include "DKCef/DKCef.h"
-#include "DKSDLCef/DKSDLCefKeyboard.h"
+#include "DKSdlCef/DKSdlCefKeyboard.h"
 #include "DKSdlWindow/DKSdlWindow.h"
-#include "DKSDLCef/DKSDLCef.h"
+#include "DKSdlCef/DKSdlCef.h"
 
 
 class SourceCallback : public CefStringVisitor 
@@ -77,7 +77,7 @@ private:
 
 
 
-class DKSDLCefHandler : public CefClient,
+class DKSdlCefHandler : public CefClient,
 						//public CefAccessibilityHandler, //Error: cannot instantiate abstract class
 						public CefContextMenuHandler,
 						public CefDialogHandler,
@@ -100,10 +100,10 @@ class DKSDLCefHandler : public CefClient,
 {
 public:
 
-	DKSDLCefHandler();
-	~DKSDLCefHandler();
-	static DKSDLCefHandler* g_instance;
-	static DKSDLCefHandler* GetInstance(); //Provide access to the single global instance of this object.
+	DKSdlCefHandler();
+	~DKSdlCefHandler();
+	static DKSdlCefHandler* g_instance;
+	static DKSdlCefHandler* GetInstance(); //Provide access to the single global instance of this object.
 	
 	//List of existing browser windows. Only accessed on the CEF UI thread.
 	typedef std::vector<CefRefPtr<CefBrowser>> BrowserList;
@@ -112,7 +112,7 @@ public:
 
 	DKSdlWindow* dkSdlWindow;
 	DKCef* dkCef;
-	DKSDLCef* dkSdlCef;
+	DKSdlCef* dkSdlCef;
 	std::vector<SDL_Texture*> cef_texture;
 
 	// CefAccessibilityHandler
@@ -296,7 +296,7 @@ public:
 	bool IsClosing() const { return is_closing_; }
 	//bool OnRequestGeolocationPermission(CefRefPtr<CefBrowser> browser, const CefString& requesting_url, int request_id, CefRefPtr<CefGeolocationCallback> callback);
 	
-	IMPLEMENT_REFCOUNTING(DKSDLCefHandler);
+	IMPLEMENT_REFCOUNTING(DKSdlCefHandler);
 };
 
-#endif //DKSDLCefHandler_H
+#endif //DKSdlCefHandler_H

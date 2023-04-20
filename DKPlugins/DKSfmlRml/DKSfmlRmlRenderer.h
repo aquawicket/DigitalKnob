@@ -24,8 +24,8 @@
 * SOFTWARE.
 */
 #pragma once
-#ifndef DKSFMLRmlRenderer_H
-#define DKSFMLRmlRenderer_H
+#ifndef DKSfmlRmlRenderer_H
+#define DKSfmlRmlRenderer_H
 
 // NOTE: uncomment this only when you want to use the
 // OpenGL Extension Wrangler Library (GLEW)
@@ -96,4 +96,4 @@ private:
 #endif
 };
 
-#endif //DKSFMLRmlRenderer_H
+#endif //DKSfmlRmlRenderer_H

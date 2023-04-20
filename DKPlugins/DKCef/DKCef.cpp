@@ -323,8 +323,8 @@ bool DKCef::Init(){
 		return DKERROR("CefInitialize error");
 	DKUtil::GetThreadId(cefThreadId); //store the main Cef threadId
 	if (DKClass::DKValid("DKSdlWindow,DKSdlWindow0")) {
-		if(DKClass::DKAvailable("DKSDLCef")){
-			DKClass::DKCreate("DKSDLCef");
+		if(DKClass::DKAvailable("DKSdlCef")){
+			DKClass::DKCreate("DKSdlCef");
 			//NewBrowser(id, top, left, width, height, url);
 		}
 	}

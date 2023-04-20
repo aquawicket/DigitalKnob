@@ -24,18 +24,18 @@
 * SOFTWARE.
 */
 #pragma once
-#ifndef DKSDLCefKeyboard_H
-#define DKSDLCefKeyboard_H
+#ifndef DKSdlCefKeyboard_H
+#define DKSdlCefKeyboard_H
 
 #include "DK/DK.h"
 
 
-class DKSDLCefKeyboard
+class DKSdlCefKeyboard
 {
 public:
-	DKSDLCefKeyboard(){};
+	DKSdlCefKeyboard(){};
     int getCefModifiers(int modKeyMask);
 };
 
 
-#endif //DKSDLCefKeyboard_H
+#endif //DKSdlCefKeyboard_H

@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-#include "DKSDLCefKeyboard.h"
+#include "DKSdlCefKeyboard.h"
 
 WARNING_DISABLE
 	#include "include/internal/cef_types.h"
@@ -37,7 +37,7 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
-int DKSDLCefKeyboard::getCefModifiers(int modKeyMask){
+int DKSdlCefKeyboard::getCefModifiers(int modKeyMask){
 	DKDEBUGFUNC(modKeyMask);
 	int modifiers = 0;
     if (modKeyMask & KMOD_CTRL)

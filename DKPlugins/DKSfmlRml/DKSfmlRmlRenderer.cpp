@@ -26,7 +26,7 @@
 
 #include "DK/DK.h"
 #include "DK/DKString.h"
-#include "DKSFMLRml/DKSFMLRmlRenderer.h"
+#include "DKSfmlRml/DKSfmlRmlRenderer.h"
 #include "DKSfmlWindow/DKSfmlWindow.h"
 
 WARNING_DISABLE

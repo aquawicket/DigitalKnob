@@ -79,14 +79,14 @@ void DKSdlRmlOpenGL::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int
 		//Cef
 		//The id is mapped to the texture in texture_name
 		//If the id contains [CEF] , it is a cef image
-		//Update the texture with DKSDLCef::GetTexture(id);
+		//Update the texture with DKSdlCef::GetTexture(id);
 		///////////////////////////////////////////////////////////
         if (has(texture_name[texture], "[CEF]")) {
 			DKString id = texture_name[texture];
             replace(id, "[CEF]", "");
 			struct DKTexture{ SDL_Texture* texture; };
 			DKTexture output;
-            if (DKClass::CallFunc("DKSDLCef::GetTexture", &id, &output))
+            if (DKClass::CallFunc("DKSdlCef::GetTexture", &id, &output))
                 sdl_texture = output.texture;
 		}
 		if(!sdl_texture)

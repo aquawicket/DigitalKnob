@@ -35,8 +35,8 @@ bool DKAudio::Init(){
 		DKClass::DKCreate("DKSdlAudio");
 		return true;
 	}
-	if(DKClass::DKAvailable("DKSDLWav")){
-		DKClass::DKCreate("DKSDLWav");
+	if(DKClass::DKAvailable("DKSdlWav")){
+		DKClass::DKCreate("DKSdlWav");
 		return true;
 	}
 	if(DKClass::DKAvailable("DKOSGAudio")){
@@ -51,7 +51,7 @@ bool DKAudio::End(){
 	DKClass::DKClose("DKAudioJS");
 	DKClass::DKClose("DKAudioV8");
 	DKClass::DKClose("DKSdlAudio");
-	DKClass::DKClose("DKSDLWav");
+	DKClass::DKClose("DKSdlWav");
 	DKClass::DKClose("DKOSGAudio");
 	return true;
 }
@@ -60,8 +60,8 @@ bool DKAudio::GetDuration(int& duration){
 	DKDEBUGFUNC(duration);
 	if(DKClass::HasFunc("DKSdlAudio::GetDuration"))
 		return DKClass::CallFunc("DKSdlAudio::GetDuration", NULL, &duration);
-	if(DKClass::HasFunc("DKSDLWav::GetDuration"))
-		return DKClass::CallFunc("DKSDLWav::GetDuration", NULL, &duration);
+	if(DKClass::HasFunc("DKSdlWav::GetDuration"))
+		return DKClass::CallFunc("DKSdlWav::GetDuration", NULL, &duration);
 	if (DKClass::HasFunc("DKOSGAudio::GetDuration"))
 		return DKClass::CallFunc("DKOSGAudio::GetDuration", NULL, &duration);
 	return DKERROR("No GetDuration funtion available\n");
@@ -71,8 +71,8 @@ bool DKAudio::GetTime(int& time){
 	DKDEBUGFUNC(time);
 	if(DKClass::HasFunc("DKSdlAudio::GetTime"))
 		return DKClass::CallFunc("DKSdlAudio::GetTime", NULL, &time);
-	if(DKClass::HasFunc("DKSDLWav::GetTime"))
-		return DKClass::CallFunc("DKSDLWav::GetTime", NULL, &time);
+	if(DKClass::HasFunc("DKSdlWav::GetTime"))
+		return DKClass::CallFunc("DKSdlWav::GetTime", NULL, &time);
 	if (DKClass::HasFunc("DKOSGAudio::GetTime"))
 		return DKClass::CallFunc("DKOSGAudio::GetTime", NULL, &time);
 	return DKERROR("No GetTime funtion available\n");
@@ -82,8 +82,8 @@ bool DKAudio::GetVolume(int& volume){
 	DKDEBUGFUNC(volume);
 	if(DKClass::HasFunc("DKSdlAudio::GetVolume"))
 		return DKClass::CallFunc("DKSdlAudio::GetVolume", NULL, &volume);
-	if(DKClass::HasFunc("DKSDLWav::GetVolume"))
-		return DKClass::CallFunc("DKSDLWav::GetVolume", NULL, &volume);
+	if(DKClass::HasFunc("DKSdlWav::GetVolume"))
+		return DKClass::CallFunc("DKSdlWav::GetVolume", NULL, &volume);
 	if (DKClass::HasFunc("DKOSGAudio::GetVolume"))
 		return DKClass::CallFunc("DKOSGAudio::GetVolume", NULL, &volume);
 	return DKERROR("No GetVolume funtion available\n");
@@ -93,8 +93,8 @@ bool DKAudio::Mute(){
 	DKDEBUGFUNC();
 	if(DKClass::HasFunc("DKSdlAudio::Mute"))
 		return DKClass::CallFunc("DKSdlAudio::Mute");
-	if(DKClass::HasFunc("DKSDLWav::Mute"))
-		return DKClass::CallFunc("DKSDLWav::Mute");
+	if(DKClass::HasFunc("DKSdlWav::Mute"))
+		return DKClass::CallFunc("DKSdlWav::Mute");
 	if (DKClass::HasFunc("DKOSGAudio::Mute"))
 		return DKClass::CallFunc("DKOSGAudio::Mute");
 	return DKERROR("No Mute funtion available\n");
@@ -104,8 +104,8 @@ bool DKAudio::OpenMusic(DKString& file){
 	DKDEBUGFUNC(file);
 	if(DKClass::HasFunc("DKSdlAudio::OpenMusic"))
 		return DKClass::CallFunc("DKSdlAudio::OpenMusic", &file);
-	if(DKClass::HasFunc("DKSDLWav::OpenMusic"))
-		return DKClass::CallFunc("DKSDLWav::OpenMusic", &file);
+	if(DKClass::HasFunc("DKSdlWav::OpenMusic"))
+		return DKClass::CallFunc("DKSdlWav::OpenMusic", &file);
 	if (DKClass::HasFunc("DKOSGAudio::OpenMusic"))
 		return DKClass::CallFunc("DKOSGAudio::OpenMusic", &file);
 	return DKERROR("No OpenMusic funtion available\n");
@@ -115,8 +115,8 @@ bool DKAudio::Pause(DKString& file){
 	DKDEBUGFUNC(file);
 	if(DKClass::HasFunc("DKSdlAudio::Pause"))
 		return DKClass::CallFunc("DKSdlAudio::Pause", &file);
-	if(DKClass::HasFunc("DKSDLWav::Pause"))
-		return DKClass::CallFunc("DKSDLWav::Pause", &file);
+	if(DKClass::HasFunc("DKSdlWav::Pause"))
+		return DKClass::CallFunc("DKSdlWav::Pause", &file);
 	if (DKClass::HasFunc("DKOSGAudio::Pause"))
 		return DKClass::CallFunc("DKOSGAudio::Pause", &file);
 	return DKERROR("No Pause funtion available\n");
@@ -126,8 +126,8 @@ bool DKAudio::PlaySound(const DKString& file){
 	DKDEBUGFUNC(file);
 	if(DKClass::HasFunc("DKSdlAudio::PlaySound"))
 		return DKClass::CallFunc("DKSdlAudio::PlaySound", &file);
-	if(DKClass::HasFunc("DKSDLWav::PlaySound"))
-		return DKClass::CallFunc("DKSDLWav::PlaySound", &file);
+	if(DKClass::HasFunc("DKSdlWav::PlaySound"))
+		return DKClass::CallFunc("DKSdlWav::PlaySound", &file);
 	if (DKClass::HasFunc("DKOSGAudio::PlaySound"))
 		return DKClass::CallFunc("DKOSGAudio::PlaySound", &file);
 	return DKERROR("No PlaySound funtion available\n");
@@ -137,8 +137,8 @@ bool DKAudio::Resume(DKString& file){
 	DKDEBUGFUNC(file);
 	if(DKClass::HasFunc("DKSdlAudio::Resume"))
 		return DKClass::CallFunc("DKSdlAudio::Resume", &file);
-	if(DKClass::HasFunc("DKSDLWav::Resume"))
-		return DKClass::CallFunc("DKSDLWav::Resume", &file);
+	if(DKClass::HasFunc("DKSdlWav::Resume"))
+		return DKClass::CallFunc("DKSdlWav::Resume", &file);
 	if (DKClass::HasFunc("DKOSGAudio::Resume"))
 		return DKClass::CallFunc("DKOSGAudio::Resume", &file);
 	return DKERROR("No Resume funtion available\n");
@@ -148,8 +148,8 @@ bool DKAudio::SetTime(int& seconds){
 	DKDEBUGFUNC(seconds);
 	if(DKClass::HasFunc("DKSdlAudio::SetTime"))
 		return DKClass::CallFunc("DKSdlAudio::SetTime", &seconds);
-	if(DKClass::HasFunc("DKSDLWav::SetTime"))
-		return DKClass::CallFunc("DKSDLWav::SetTime", &seconds);
+	if(DKClass::HasFunc("DKSdlWav::SetTime"))
+		return DKClass::CallFunc("DKSdlWav::SetTime", &seconds);
 	if(DKClass::HasFunc("DKOSGAudio::SetTime"))
 		return DKClass::CallFunc("DKOSGAudio::SetTime", &seconds);
 	return DKERROR("No SetTime funtion available\n");
@@ -159,8 +159,8 @@ bool DKAudio::SetVolume(int& volume){
 	DKDEBUGFUNC(volume);
 	if(DKClass::HasFunc("DKSdlAudio::SetVolume"))
 		return DKClass::CallFunc("DKSdlAudio::SetVolume", &volume);
-	if(DKClass::HasFunc("DKSDLWav::SetVolume"))
-		return DKClass::CallFunc("DKSDLWav::SetVolume", &volume);
+	if(DKClass::HasFunc("DKSdlWav::SetVolume"))
+		return DKClass::CallFunc("DKSdlWav::SetVolume", &volume);
 	if(DKClass::HasFunc("DKOSGAudio::SetVolume"))
 		return DKClass::CallFunc("DKOSGAudio::SetVolume", &volume);
 	return DKERROR("No SetVolume funtion available\n");
@@ -170,8 +170,8 @@ bool DKAudio::UnMute(){
 	DKDEBUGFUNC();
 	if(DKClass::HasFunc("DKSdlAudio::UnMute"))
 		return DKClass::CallFunc("DKSdlAudio::UnMute");
-	if(DKClass::HasFunc("DKSDLWav::UnMute"))
-		return DKClass::CallFunc("DKSDLWav::UnMute");
+	if(DKClass::HasFunc("DKSdlWav::UnMute"))
+		return DKClass::CallFunc("DKSdlWav::UnMute");
 	if (DKClass::HasFunc("DKOSGAudio::UnMute"))
 		return DKClass::CallFunc("DKOSGAudio::UnMute");
 	return DKERROR("No UnMute funtion available\n");

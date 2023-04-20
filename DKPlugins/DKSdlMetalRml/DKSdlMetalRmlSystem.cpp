@@ -27,7 +27,7 @@ WARNING_DISABLE
 #include <RmlUi/Core.h>
 WARNING_ENABLE
 
-#include "DKSDLMetalRml/DKSDLMetalRmlSystem.h"
+#include "DKSdlMetalRml/DKSdlMetalRmlSystem.h"
 
 
 Rml::Input::KeyIdentifier RmlSDL2SystemInterface::TranslateKey(SDL_Keycode sdlkey){

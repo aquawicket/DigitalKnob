@@ -24,8 +24,8 @@
 * SOFTWARE.
 */
 #pragma once
-#ifndef DKSFMLRmlSystem_H
-#define DKSFMLRmlSystem_H
+#ifndef DKSfmlRmlSystem_H
+#define DKSfmlRmlSystem_H
 
 #include "DK/DK.h"
 
@@ -49,4 +49,4 @@ private:
 	sf::Clock timer;
 };
 
-#endif //DKSFMLRmlSystem_H
+#endif //DKSfmlRmlSystem_H

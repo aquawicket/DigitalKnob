@@ -26,8 +26,8 @@
 
 //https://gist.github.com/armornick/3447121
 #pragma once
-#ifndef DKSDLWav_H
-#define DKSDLWav_H
+#ifndef DKSdlWav_H
+#define DKSdlWav_H
 
 WARNING_DISABLE
 #include "SDL.h"
@@ -36,7 +36,7 @@ WARNING_ENABLE
 #include "DK/DK.h"
 
 
-class DKSDLWav : public DKObjectT<DKSDLWav>
+class DKSdlWav : public DKObjectT<DKSdlWav>
 {
 public:
 	bool Init();
@@ -52,5 +52,5 @@ public:
 };
 
 
-REGISTER_OBJECT(DKSDLWav, true);
-#endif //DKSDLWav_H
+REGISTER_OBJECT(DKSdlWav, true);
+#endif //DKSdlWav_H

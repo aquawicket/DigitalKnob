@@ -24,12 +24,12 @@
 * SOFTWARE.
 */
 #ifndef HAVE_sdl_ttf
-#	error "DKSDLText requires sdl_ttf library"
+#	error "DKSdlText requires sdl_ttf library"
 #endif 
 
 #pragma once
-#ifndef DKSDLText_H
-#define DKSDLText_H
+#ifndef DKSdlText_H
+#define DKSdlText_H
 
 #include "DK/DK.h"
 #include "DKSdlWindow/DKSdlWindow.h"
@@ -39,7 +39,7 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
-class DKSDLText : public DKObjectT<DKSDLText>
+class DKSdlText : public DKObjectT<DKSdlText>
 {
 public:
 	bool Init();
@@ -56,5 +56,5 @@ public:
 };
 
 
-REGISTER_OBJECT(DKSDLText, true)
-#endif //DKSDLText_H
+REGISTER_OBJECT(DKSdlText, true)
+#endif //DKSdlText_H

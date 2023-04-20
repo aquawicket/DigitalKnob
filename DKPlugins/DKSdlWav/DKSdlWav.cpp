@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 #include "DK/stdafx.h"
-#include "DKSDLWave/DKSDLWav.h"
+#include "DKSdlWave/DKSdlWav.h"
 #include "DK/DKFile.h"
 
 WARNING_DISABLE
@@ -65,21 +65,21 @@ typedef struct privateAudioDevice{
 } PrivateAudioDevice;
 
 
-bool DKSDLWav::Init(){
+bool DKSdlWav::Init(){
 	if(SDL_Init(SDL_INIT_AUDIO) < 0)
 		return DKERROR("Could not Init SDL_Audio\n");
 	InitAudio();
-	DKClass::RegisterFunc("DKSDLWav::PlaySound", &DKSDLWav::PlaySound, this);
-	DKClass::RegisterFunc("DKSDLWav::OpenMusic", &DKSDLWav::OpenMusic, this);
+	DKClass::RegisterFunc("DKSdlWav::PlaySound", &DKSdlWav::PlaySound, this);
+	DKClass::RegisterFunc("DKSdlWav::OpenMusic", &DKSdlWav::OpenMusic, this);
 	return true;
 }
 
-bool DKSDLWav::End(){
+bool DKSdlWav::End(){
 	endAudio();
 	return true;
 }
 
-bool DKSDLWav::InitAudio(){
+bool DKSdlWav::InitAudio(){
     Sound* global;
     gDevice = static_cast<PrivateAudioDevice*>(calloc(1, sizeof(PrivateAudioDevice)));
 
@@ -125,7 +125,7 @@ bool DKSDLWav::InitAudio(){
 	return true;
 }
 
-bool DKSDLWav::EndAudio(){
+bool DKSdlWav::EndAudio(){
     if(gDevice->audioEnabled){
         SDL_PauseAudioDevice(gDevice->device, 1);
         freeSound((Sound *) (gDevice->want).userdata);
@@ -137,7 +137,7 @@ bool DKSDLWav::EndAudio(){
 	return true;
 }
 
-bool DKSDLWav::playSound(const char* filename, int volume){
+bool DKSdlWav::playSound(const char* filename, int volume){
     Sound * snd;
 
     if(!gDevice->audioEnabled)
@@ -152,7 +152,7 @@ bool DKSDLWav::playSound(const char* filename, int volume){
 	return true;
 }
 
-bool DKSDLWav::OpenMusic(const char* filename, int volume){
+bool DKSdlWav::OpenMusic(const char* filename, int volume){
     Sound * global;
     Sound * snd;
     uint8_t music;
@@ -191,14 +191,14 @@ bool DKSDLWav::OpenMusic(const char* filename, int volume){
 	return true;
 }
 
-bool DKSDLWav::PlaySound(const void* input, void* output){
+bool DKSdlWav::PlaySound(const void* input, void* output){
 	DKString path = *(DKString*)input;
 	if(!DKFile::VerifyPath(path)){ return false; }
 	playSound(path.c_str(), SDL_MIX_MAXVOLUME);
 	return true;
 }
 
-bool DKSDLWav::OpenMusic(const void* input, void* output){
+bool DKSdlWav::OpenMusic(const void* input, void* output){
 	DKString path = *(DKString*)input;
 	if(!DKFile::VerifyPath(path)){ return false; }
 	OpenMusic(path.c_str(), SDL_MIX_MAXVOLUME);

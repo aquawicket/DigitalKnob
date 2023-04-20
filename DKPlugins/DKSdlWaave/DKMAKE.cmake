@@ -1,6 +1,6 @@
 dk_depend(waave)
 dk_depend(DKVideo)
-dk_depend(DKSDLWaave)
+dk_depend(DKSdlWaave)
 
-dk_generateCmake(DKSDLWaave)
-dk_assets(DKSDLWaave)
+dk_generateCmake(DKSdlWaave)
+dk_assets(DKSdlWaave)

@@ -27,8 +27,8 @@
 //https://github.com/ashafiei/dranger-ffmpeg-tuto
 //http://dranger.com/ffmpeg/
 #pragma once
-#ifndef DKSDLVideo_H
-#define DKSDLVideo_H
+#ifndef DKSdlVideo_H
+#define DKSdlVideo_H
 
 #include "DK/DK.h"
 
@@ -63,7 +63,7 @@ typedef struct _AudioPacket {
 } AudioPacket;
 
 
-class DKSDLVideo : public DKObjectT<DKSDLVideo>
+class DKSdlVideo : public DKObjectT<DKSdlVideo>
 {
 public:
 	bool Init();
@@ -146,5 +146,5 @@ public:
 };
 
 
-REGISTER_OBJECT(DKSDLVideo, true)
-#endif //DKSDLVideo_H
+REGISTER_OBJECT(DKSdlVideo, true)
+#endif //DKSdlVideo_H

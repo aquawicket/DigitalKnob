@@ -28,8 +28,8 @@
 #include "DK/DKApp.h"
 #include "DK/DKFile.h"
 #include "DK/DKLog.h"
-#include "DKSDLCef/DKSDLCef.h"
-#include "DKSDLCef/DKSDLCefHandler.h"
+#include "DKSdlCef/DKSdlCef.h"
+#include "DKSdlCef/DKSdlCefHandler.h"
 #if WIN
 	#include "DK/DKWindows.h"
 #endif
@@ -43,7 +43,7 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
-bool DKSDLCef::Init() {
+bool DKSdlCef::Init() {
 	DKDEBUGFUNC();
 	popup_image = NULL;
 	dkSdlWindow = DKSdlWindow::Instance("DKSdlWindow0");
@@ -57,25 +57,25 @@ bool DKSDLCef::Init() {
 	_mouseLMBdown = false;
 	_scrollFactor = 120.0f;
 
-	DKSdlWindow::AddEventFunc(&DKSDLCef::Handle, this);
-	DKSdlWindow::AddRenderFuncFirst(&DKSDLCef::Draw, this);
-	DKClass::RegisterFunc("DKSDLCef::OnClick", &DKSDLCef::OnClick, this);
-	DKClass::RegisterFunc("DKSDLCef::OnMouseOver", &DKSDLCef::OnMouseOver, this);
-	DKClass::RegisterFunc("DKSDLCef::OnResize", &DKSDLCef::OnResize, this);
-	DKClass::RegisterFunc("DKSDLCef::GetTexture", &DKSDLCef::GetTexture, this);
+	DKSdlWindow::AddEventFunc(&DKSdlCef::Handle, this);
+	DKSdlWindow::AddRenderFuncFirst(&DKSdlCef::Draw, this);
+	DKClass::RegisterFunc("DKSdlCef::OnClick", &DKSdlCef::OnClick, this);
+	DKClass::RegisterFunc("DKSdlCef::OnMouseOver", &DKSdlCef::OnMouseOver, this);
+	DKClass::RegisterFunc("DKSdlCef::OnResize", &DKSdlCef::OnResize, this);
+	DKClass::RegisterFunc("DKSdlCef::GetTexture", &DKSdlCef::GetTexture, this);
 	return true;
 }
 
-bool DKSDLCef::End() {
+bool DKSdlCef::End() {
 	DKDEBUGFUNC();
-	DKApp::RemoveLoopFunc(&DKSDLCefHandler::DoFrame, cefHandler);
-	DKClass::UnregisterFunc("DKSDLCef::OnResize");
-	DKClass::UnregisterFunc("DKSDLCef::GetTexture");
+	DKApp::RemoveLoopFunc(&DKSdlCefHandler::DoFrame, cefHandler);
+	DKClass::UnregisterFunc("DKSdlCef::OnResize");
+	DKClass::UnregisterFunc("DKSdlCef::GetTexture");
 	cefHandler = NULL;
 	return true;
 }
 
-bool DKSDLCef::GetCefMouseButton(const int& button, CefBrowserHost::MouseButtonType& type) {
+bool DKSdlCef::GetCefMouseButton(const int& button, CefBrowserHost::MouseButtonType& type) {
 	DKDEBUGFUNC(button, type);
 	if(button == 1){ type = MBT_LEFT; }
 	if(button == 2){ type = MBT_MIDDLE; }
@@ -83,7 +83,7 @@ bool DKSDLCef::GetCefMouseButton(const int& button, CefBrowserHost::MouseButtonT
 	return true;
 }
 
-bool DKSDLCef::GetScrollDeltas(SDL_Event* event, float &deltaX, float &deltaY) {
+bool DKSdlCef::GetScrollDeltas(SDL_Event* event, float &deltaX, float &deltaY) {
 	DKDEBUGFUNC(event, deltaX, deltaY);
 	deltaX = 0.0f;
 	deltaY = 0.0f;
@@ -98,7 +98,7 @@ bool DKSDLCef::GetScrollDeltas(SDL_Event* event, float &deltaX, float &deltaY) {
 	return deltaX != 0.0f || deltaY != 0.0f;
 }
 
-bool DKSDLCef::GetTexture(const void* input, void* output) {
+bool DKSdlCef::GetTexture(const void* input, void* output) {
 	DKString id = *(DKString*)input;
 	//DKDEBUGFUNC(id, "void* output"); // EXCESSIVE LOGGING
 	//replace(id, "[CEF]", "");
@@ -116,13 +116,13 @@ bool DKSDLCef::GetTexture(const void* input, void* output) {
 	return true;
 }
 
-bool DKSDLCef::Handle(SDL_Event* event) {
+bool DKSdlCef::Handle(SDL_Event* event) {
 	//DKDEBUGFUNC(event);  //EXCESSIVE LOGGING
 	int browser_index;
 	if (!dkCef->GetCurrentBrowser(browser_index))
 		return false;// DKERROR("browser_index is invalid\n");
 	
-	//DKINFO("DKSDLCef::Handle(): GetCurrentBrowser = "+toString(i)+"\n");
+	//DKINFO("DKSdlCef::Handle(): GetCurrentBrowser = "+toString(i)+"\n");
 	//DKINFO("number_of_browsers = "+toString(dkCef->GetBrowsers())+"\n");
 	//DKINFO("current_browser = "+toString(dkCef->GetCurrentBrowser())+"\n");
 	//switch(event->type){
@@ -145,7 +145,7 @@ bool DKSDLCef::Handle(SDL_Event* event) {
 
 	switch(event->type){
 		case SDL_MOUSEBUTTONDOWN:{
-			//DKINFO("DKSDLCef::Handle(): CurrentBrowser = "+toString(i)+"\n");
+			//DKINFO("DKSdlCef::Handle(): CurrentBrowser = "+toString(i)+"\n");
 			int clicks = 1;
 			if(event->button.clicks == 2)// double click
 				clicks = 2;
@@ -348,7 +348,7 @@ bool DKSDLCef::Handle(SDL_Event* event) {
 	return false;
 }
 
-bool DKSDLCef::OnClick(const void* input, void* output) {
+bool DKSdlCef::OnClick(const void* input, void* output) {
 	DKDEBUGFUNC(input, output);
 	DKString str = *(DKString*)input;
 	DKStringArray arry;
@@ -362,7 +362,7 @@ bool DKSDLCef::OnClick(const void* input, void* output) {
 	return false;
 }
 
-bool DKSDLCef::OnMouseOver(const void* input, void* output) {
+bool DKSdlCef::OnMouseOver(const void* input, void* output) {
 	DKDEBUGFUNC(input, output);
 	DKString str = *(DKString*)input;
 	DKStringArray arry;
@@ -376,12 +376,12 @@ bool DKSDLCef::OnMouseOver(const void* input, void* output) {
 	return true; 
 }
 
-bool DKSDLCef::OnResize(const void* input, void* output) {
+bool DKSdlCef::OnResize(const void* input, void* output) {
 	DKDEBUGFUNC(input, output);
 	DKString str = *(DKString*)input;
 	DKStringArray arry;
 	toStringArray(arry,str,","); // id,top,left,width,height
-	//DKINFO("DKSDLCef::OnResize("+arry[0]+","+arry[1]+","+arry[2]+","+arry[3]+","+arry[4]+")\n");
+	//DKINFO("DKSdlCef::OnResize("+arry[0]+","+arry[1]+","+arry[2]+","+arry[3]+","+arry[4]+")\n");
 	int browser;
 	if(!dkCef->GetBrowserNumber(arry[0], browser))
 		return DKERROR("browser is invalid\n");
@@ -405,19 +405,19 @@ bool DKSDLCef::OnResize(const void* input, void* output) {
 	return true;
 }
 
-bool DKSDLCef::SetupCef() {
+bool DKSdlCef::SetupCef() {
 	DKDEBUGFUNC();
-	cefHandler = new DKSDLCefHandler();
+	cefHandler = new DKSdlCefHandler();
 	cefHandler->dkSdlWindow = dkSdlWindow;
 	cefHandler->dkCef = dkCef;
 	cefHandler->dkSdlCef = this;
 	dkCef->cefHandler = cefHandler;
-	DKApp::AppendLoopFunc(&DKSDLCefHandler::DoFrame, cefHandler);
+	DKApp::AppendLoopFunc(&DKSdlCefHandler::DoFrame, cefHandler);
 	//CefRunMessageLoop();
 	return true;
 }
 
-bool DKSDLCef::TransparentPixel(SDL_Event *event) {
+bool DKSdlCef::TransparentPixel(SDL_Event *event) {
 	DKDEBUGFUNC(event);
 	// TODO
 	/*
@@ -436,7 +436,7 @@ bool DKSDLCef::TransparentPixel(SDL_Event *event) {
 	return false;
 }
 
-bool DKSDLCef::Draw() {
+bool DKSdlCef::Draw() {
 	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 	if (DKClass::DKValid("DKRml,DKRml0"))
 		return false; //We have a valid DKRml instance, so we are drawing to rml textures instead of striaght to SDL

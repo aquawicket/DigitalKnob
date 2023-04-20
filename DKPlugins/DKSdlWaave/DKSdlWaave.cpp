@@ -25,21 +25,21 @@
 */
 
 #include "DK/stdafx.h"
-#include "DKSDLVideo/DKSDLWaave.h"
+#include "DKSdlVideo/DKSdlWaave.h"
 #include "DK/DKFile.h"
 #include "DKSdlWindow/DKSdlWindow.h"
 
 
-bool DKSDLWaave::Init(){
+bool DKSdlWaave::Init(){
 	DKDEBUGFUNC();
 	stream = NULL;
 	streamObj = NULL;
-	DKSdlWindow::AddEventFunc(&DKSDLWaave::handle, this);
-	DKClass::RegisterFunc("DKSDLWaave::Play", &DKSDLWaave::Play, this);
+	DKSdlWindow::AddEventFunc(&DKSdlWaave::handle, this);
+	DKClass::RegisterFunc("DKSdlWaave::Play", &DKSdlWaave::Play, this);
 	return true;
 }
 
-bool DKSDLWaave::End(){
+bool DKSdlWaave::End(){
 	DKDEBUGFUNC();
 	if(stream)
 		WV_closeStream(stream);
@@ -53,7 +53,7 @@ bool DKSDLWaave::End(){
 	return true;
 }
 
-bool DKSDLWaave::Handle(SDL_Event *event){
+bool DKSdlWaave::Handle(SDL_Event *event){
 	DKDEBUGFUNC(event);
 	if(event->type == WV_REFRESH_EVENT){
 		WV_refreshVideoFrame(event);
@@ -61,7 +61,7 @@ bool DKSDLWaave::Handle(SDL_Event *event){
 	}
 	else if (event->type == WV_EOF_EVENT){
 		//closePlayer();
-		DKINFO("DKSDLWaave::handle(): end of file\n");
+		DKINFO("DKSdlWaave::handle(): end of file\n");
 		if (stream)
 			WV_closeStream(stream);
 		if (streamObj) //close the streaming object
@@ -72,7 +72,7 @@ bool DKSDLWaave::Handle(SDL_Event *event){
 	return false;
 }
 
-bool DKSDLWaave::Play(const void* input, void* output){
+bool DKSdlWaave::Play(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	DKString path = *(DKString*)input;
 	if(!DKFile::VerifyPath(path))

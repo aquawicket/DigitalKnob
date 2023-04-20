@@ -26,13 +26,13 @@
 #include "DK/stdafx.h"
 #include "DK/DKFile.h"
 #include "DKAssets/DKAssets.h"
-#include "DKSFMLRml/DKSFMLRml.h"
+#include "DKSfmlRml/DKSfmlRml.h"
 
 WARNING_DISABLE
 //#include "SFML.h"
 WARNING_ENABLE
 
-bool DKSFMLRml::Init(){
+bool DKSfmlRml::Init(){
 	DKDEBUGFUNC();
 	//Android SFML_TEXTINPUT events not working
 	//SFML_StartTextInput(); 
@@ -53,18 +53,18 @@ bool DKSFMLRml::Init(){
 	systemInterface = new RmlSFMLSystemInterface();
 	Rml::SetRenderInterface(renderer);
     Rml::SetSystemInterface(systemInterface);
-	DKSfmlWindow::AddEventFunc(&DKSFMLRml::Handle, this);
-	//DKSfmlWindow::AddRenderFunc(&DKSFMLRml::Render, this);
-	//DKSfmlWindow::AddUpdateFunc(&DKSFMLRml::Update, this);
+	DKSfmlWindow::AddEventFunc(&DKSfmlRml::Handle, this);
+	//DKSfmlWindow::AddRenderFunc(&DKSfmlRml::Render, this);
+	//DKSfmlWindow::AddUpdateFunc(&DKSfmlRml::Update, this);
 	return true;
 }
 
-bool DKSFMLRml::End(){
+bool DKSfmlRml::End(){
 	DKDEBUGFUNC();
 	return true;
 }
 
-bool DKSFMLRml::Handle(sf::Event& event) {
+bool DKSfmlRml::Handle(sf::Event& event) {
 	//DKDEBUGFUNC(event);  //EXCESSIVE LOGGING
 	if(!dkRml->document)
 		return DKERROR("dkRml->document invalid! \n");
@@ -97,7 +97,7 @@ bool DKSFMLRml::Handle(sf::Event& event) {
             break;
 #if ANDROID
 		case sf::Event::KeyPressed:
-			//DKINFO("DKSFMLRml::SFML_KEYDOWN("+toString((int)event->key.keysym.sym)+")\n");
+			//DKINFO("DKSfmlRml::SFML_KEYDOWN("+toString((int)event->key.keysym.sym)+")\n");
 			dkRml->context->ProcessKeyDown(systemInterface->TranslateKey(event->key.keysym.sym), systemInterface->GetKeyModifiers());
 			if(event.key.code == 13) //enter
 				dkRml->context->ProcessTextInput("\n");
@@ -141,11 +141,11 @@ bool DKSFMLRml::Handle(sf::Event& event) {
 		}
 #endif
 		case sf::Event::TextEntered:
-			//DKINFO("DKSFMLRml::SFML_TEXTINPUT("+DKString(event->text.text)+")\n");
+			//DKINFO("DKSfmlRml::SFML_TEXTINPUT("+DKString(event->text.text)+")\n");
 			//dkRml->context->ProcessTextInput(event.text);
 			break;
 		//case sf::Event::TextEvent
-		//	DKINFO("DKSFMLRml::SFML_TEXTEDITING()\n");
+		//	DKINFO("DKSfmlRml::SFML_TEXTEDITING()\n");
 		//	break;	
 		case sf::Event::KeyReleased:
 			//dkRml->context->ProcessKeyUp((Rml::Input::KeyIdentifier)DKSfmlWindow::SFMLKeyCode[event->key.keysym.sym], systemInterface->GetKeyModifiers());
@@ -157,7 +157,7 @@ bool DKSFMLRml::Handle(sf::Event& event) {
 	return false; //allow event to continue
 }
 
-void DKSFMLRml::Render(){
+void DKSfmlRml::Render(){
     //DKDEBUGFUNC();  //EXCESSIVE LOGGING
 	if(dkSFMLWindow->width != dkRml->context->GetDimensions().x || dkSFMLWindow->height != dkRml->context->GetDimensions().y){
 		dkRml->context->SetDimensions(Rml::Vector2i(dkSFMLWindow->width, dkSFMLWindow->height));
@@ -168,6 +168,6 @@ void DKSFMLRml::Render(){
 	dkRml->context->Render();
 }
 
-void DKSFMLRml::Update(){
+void DKSfmlRml::Update(){
 	dkRml->context->Update();
 }

@@ -25,8 +25,8 @@
 */
 
 #pragma once
-#ifndef DKSDLMetalRml_H
-#define DKSDLMetalRml_H
+#ifndef DKSdlMetalRml_H
+#define DKSdlMetalRml_H
 
 WARNING_DISABLE
 #include <RmlUi/Core.h>
@@ -35,14 +35,14 @@ WARNING_ENABLE
 #include "DK/DK.h"
 #include "DKSdlWindow/DKSdlWindow.h"
 #include "DKRml/DKRml.h"
-#include "DKSDLMetalRml/DKSDLMetalRmlSystem.h"
-#include "DKSDLMetalRml/DKSDLMetalRmlRenderer.h"
+#include "DKSdlMetalRml/DKSdlMetalRmlSystem.h"
+#include "DKSdlMetalRml/DKSdlMetalRmlRenderer.h"
 
 //#include "ShellRenderInterfaceOpenGL.h"
 //#define RML_SHELL_RENDER 1
 
 
-class DKSDLMetalRml : public DKObjectT<DKSDLMetalRml>
+class DKSdlMetalRml : public DKObjectT<DKSdlMetalRml>
 {
 public:
 	bool Init();
@@ -64,5 +64,5 @@ public:
 };
 
 
-REGISTER_OBJECT(DKSDLMetalRml, true)
-#endif //DKSDLMetalRml_H
+REGISTER_OBJECT(DKSdlMetalRml, true)
+#endif //DKSdlMetalRml_H

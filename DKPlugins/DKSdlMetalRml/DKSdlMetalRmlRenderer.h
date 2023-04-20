@@ -25,8 +25,8 @@
 */
 
 #pragma once
-#ifndef DKSDLMetalRmlRenderer_H
-#define DKSDLMetalRmlRenderer_H
+#ifndef DKSdlMetalRmlRenderer_H
+#define DKSdlMetalRmlRenderer_H
 
 WARNING_DISABLE
 #include <RmlUi/Core.h>
@@ -76,4 +76,4 @@ private:
 #endif
 };
 
-#endif //DKSDLMetalRmlRenderer_H
+#endif //DKSdlMetalRmlRenderer_H

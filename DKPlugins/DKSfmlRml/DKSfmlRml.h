@@ -25,8 +25,8 @@
 */
 
 #pragma once
-#ifndef DKSFMLRml_H
-#define DKSFMLRml_H
+#ifndef DKSfmlRml_H
+#define DKSfmlRml_H
 
 WARNING_DISABLE
 #include "RmlUi/Core.h"
@@ -35,14 +35,14 @@ WARNING_ENABLE
 #include "DK/DK.h"
 #include "DKSfmlWindow/DKSfmlWindow.h"
 #include "DKRml/DKRml.h"
-#include "DKSFMLRml/DKSFMLRmlSystem.h"
-#include "DKSFMLRml/DKSFMLRmlRenderer.h"
+#include "DKSfmlRml/DKSfmlRmlSystem.h"
+#include "DKSfmlRml/DKSfmlRmlRenderer.h"
 
 //#include "ShellRenderInterfaceOpenGL.h"
 //#define RML_SHELL_RENDER 1
 
 
-class DKSFMLRml : public DKObjectT<DKSFMLRml>
+class DKSfmlRml : public DKObjectT<DKSfmlRml>
 {
 public:
 	bool Init();
@@ -62,5 +62,5 @@ public:
 #endif
 	RmlSFMLSystemInterface* systemInterface;
 };
-REGISTER_OBJECT(DKSFMLRml, true)
-#endif //DKSFMLRml_H
+REGISTER_OBJECT(DKSfmlRml, true)
+#endif //DKSfmlRml_H

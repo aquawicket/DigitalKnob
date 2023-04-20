@@ -110,7 +110,7 @@ public:
 	CefRefPtr<CefBrowser> current_browser;
 	int keyboardFocus;
 	static CefRefPtr<DKCefApp> cefApp;
-	static CefRefPtr<CefClient> cefHandler; //external handler  (DKCEFWindow, DKSDLCef or DKOSGCef)
+	static CefRefPtr<CefClient> cefHandler; //external handler  (DKCEFWindow, DKSdlCef or DKOSGCef)
 	DKCEFWindow* dkCefWindow;
 	static unsigned long cefThreadId;
 	DialogCallback* fileDialogCallback;

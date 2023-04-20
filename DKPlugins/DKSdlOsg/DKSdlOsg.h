@@ -25,8 +25,8 @@
 */
 
 #pragma once
-#ifndef DKSDLOsg_H
-#define DKSDLOsg_H
+#ifndef DKSdlOsg_H
+#define DKSdlOsg_H
 
 WARNING_DISABLE
 #include <osgViewer/Viewer>
@@ -44,7 +44,7 @@ WARNING_ENABLE
 #include "DKSdlWindow/DKSdlWindow.h"
 
 
-class DKSDLOsg : public DKObjectT<DKSDLOsg>
+class DKSdlOsg : public DKObjectT<DKSdlOsg>
 {
 public:
 	bool Init();
@@ -60,5 +60,5 @@ public:
 };
 
 
-REGISTER_OBJECT(DKSDLOsg, true)
-#endif //DKSDLOsg_H
+REGISTER_OBJECT(DKSdlOsg, true)
+#endif //DKSdlOsg_H

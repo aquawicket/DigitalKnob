@@ -25,8 +25,8 @@
 */
 
 #pragma once
-#ifndef DKSDLMetalRmlSystem_H
-#define DKSDLMetalRmlSystem_H
+#ifndef DKSdlMetalRmlSystem_H
+#define DKSdlMetalRmlSystem_H
 
 WARNING_DISABLE
 #include <RmlUi/Core.h>
@@ -46,4 +46,4 @@ public:
     bool LogMessage(Rml::Log::Type type, const Rml::String& message);
 };
 
-#endif //DKSDLMetalRmlSystem_H
+#endif //DKSdlMetalRmlSystem_H

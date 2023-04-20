@@ -31,7 +31,7 @@ WARNING_ENABLE
 
 #include "DK/DK.h"
 #include "DK/DKString.h"
-#include "DKSDLMetalRml/DKSDLMetalRmlRenderer.h"
+#include "DKSdlMetalRml/DKSdlMetalRmlRenderer.h"
 #include "DKSdlWindow/DKSdlWindow.h"
 
 #if !defined(IOS) && !defined(ANDROID)
@@ -77,7 +77,7 @@ void RmlSDL2Renderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, in
 		//Cef
 		//The id is mapped to the texture in texture_name
 		//If the id contains iframe_ , it is a cef image
-		//Update the texture with DKSDLCef::GetTexture(id);
+		//Update the texture with DKSdlCef::GetTexture(id);
 		///////////////////////////////////////////////////////////
 		if(has(texture_name[texture],"iframe_")){
 			DKString id = texture_name[texture];
@@ -85,7 +85,7 @@ void RmlSDL2Renderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, in
 			
 			struct DKTexture{ SDL_Texture* texture; };
 			DKTexture output;
-			if(!DKClass::CallFunc("DKSDLCef::GetTexture", &id, &output))
+			if(!DKClass::CallFunc("DKSdlCef::GetTexture", &id, &output))
                 return;
 			sdl_texture = output.texture;
 		}

@@ -2,5 +2,5 @@ dk_depend(ffmpeg)
 dk_depend(DKVideo)
 dk_depend(DKSdlWindow)
 
-dk_generateCmake(DKSDLVideo)
-dk_assets(DKSDLVideo)
+dk_generateCmake(DKSdlVideo)
+dk_assets(DKSdlVideo)

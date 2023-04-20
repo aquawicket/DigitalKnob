@@ -24,11 +24,11 @@
 * SOFTWARE.
 */
 #include "DK/stdafx.h"
-#include "DKSDLOsg/DKSDLOsg.h"
+#include "DKSdlOsg/DKSdlOsg.h"
 #include "DKSdlWindow/DKSdlWindow.h"
 
 
-bool DKSDLOsg::Init(){
+bool DKSdlOsg::Init(){
 	DKDEBUGFUNC();
 	
 	 // init SDL
@@ -46,7 +46,7 @@ bool DKSDLOsg::Init(){
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_EGL, 1);
 	
-	sdl_window = SDL_CreateWindow("DKSDLOsg", 0, 0, 800, 600, SDL_WINDOW_OPENGL);
+	sdl_window = SDL_CreateWindow("DKSdlOsg", 0, 0, 800, 600, SDL_WINDOW_OPENGL);
     */
     DKClass::DKCreate("DKSdlWindow");
     sdl_window = DKSdlWindow::Get()->window;
@@ -70,18 +70,18 @@ bool DKSDLOsg::Init(){
     osg_viewer.addEventHandler(new osgViewer::StatsHandler);
     osg_viewer.realize();
 	
-    DKSdlWindow::AddEventFunc(&DKSDLOsg::OnEvent, this);
-    DKSdlWindow::AddRenderFunc(&DKSDLOsg::OnRender, this);
-    DKSdlWindow::AddUpdateFunc(&DKSDLOsg::OnUpdate, this);
+    DKSdlWindow::AddEventFunc(&DKSdlOsg::OnEvent, this);
+    DKSdlWindow::AddRenderFunc(&DKSdlOsg::OnRender, this);
+    DKSdlWindow::AddUpdateFunc(&DKSdlOsg::OnUpdate, this);
 	return true;
 }
 
-bool DKSDLOsg::End(){
+bool DKSdlOsg::End(){
 	DKDEBUGFUNC();
 	return true;
 }
 
-osg::Node* DKSDLOsg::createScene(){
+osg::Node* DKSdlOsg::createScene(){
     DKDEBUGFUNC();
     // create drawable geometry object
     osg::Geometry* pGeo = new osg::Geometry;
@@ -119,7 +119,7 @@ osg::Node* DKSDLOsg::createScene(){
     return pGeode;
 }
 
-bool DKSDLOsg::OnEvent(SDL_Event* event) {
+bool DKSdlOsg::OnEvent(SDL_Event* event) {
     switch (event->type) {
         case SDL_MOUSEMOTION:
             osg_graphicsWindow->getEventQueue()->mouseMotion(event->motion.x, event->motion.y);
@@ -146,11 +146,11 @@ bool DKSDLOsg::OnEvent(SDL_Event* event) {
 }
 
 
-bool DKSDLOsg::OnRender() {
+bool DKSdlOsg::OnRender() {
 	SDL_GL_SwapWindow(sdl_window);
     return true;
 }
 
-void DKSDLOsg::OnUpdate() {
+void DKSdlOsg::OnUpdate() {
     osg_viewer.frame(); // draw the new frame
 }
