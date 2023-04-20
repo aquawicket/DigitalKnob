@@ -40,6 +40,9 @@
 // https://dom.spec.whatwg.org/#interface-document
 #include "TEST_Document.h"
 
+// https://dom.spec.whatwg.org/#interface-element
+#include "TEST_Element.h"
+
 
 // DKConsoleWindow
 #include "TEST_DKConsoleWindow.h"
