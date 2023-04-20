@@ -32,7 +32,7 @@
 #define DKSDLText_H
 
 #include "DK/DK.h"
-#include "DKSDLWindow/DKSDLWindow.h"
+#include "DKSdlWindow/DKSdlWindow.h"
 
 WARNING_DISABLE
 #include "SDL_ttf.h"
@@ -48,7 +48,7 @@ public:
 	bool SetText(const DKString& text);
 	bool Render();
 
-	DKSDLWindow* dkSdlWindow;
+	DKSdlWindow* dkSdlWindow;
 	TTF_Font* font;
 	SDL_Texture* texture;
 	SDL_Surface* surface;

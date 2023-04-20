@@ -27,14 +27,14 @@
 #include "DK/stdafx.h"
 #include "DKSDLVideo/DKSDLWaave.h"
 #include "DK/DKFile.h"
-#include "DKSDLWindow/DKSDLWindow.h"
+#include "DKSdlWindow/DKSdlWindow.h"
 
 
 bool DKSDLWaave::Init(){
 	DKDEBUGFUNC();
 	stream = NULL;
 	streamObj = NULL;
-	DKSDLWindow::AddEventFunc(&DKSDLWaave::handle, this);
+	DKSdlWindow::AddEventFunc(&DKSDLWaave::handle, this);
 	DKClass::RegisterFunc("DKSDLWaave::Play", &DKSDLWaave::Play, this);
 	return true;
 }
@@ -84,8 +84,8 @@ bool DKSDLWaave::Play(const void* input, void* output){
 	int streamType = WV_getStreamType(stream);
 
 	if(streamType == WV_STREAM_TYPE_VIDEO || streamType == WV_STREAM_TYPE_AUDIOVIDEO){
-		//SDL_RenderClear(DKSDLWindow::Get("")->sdlren);
-		streamObj = WV_getStreamRendererObj(DKSDLWindow::Get("")->sdlren, NULL, NULL);
+		//SDL_RenderClear(DKSdlWindow::Get("")->sdlren);
+		streamObj = WV_getStreamRendererObj(DKSdlWindow::Get("")->sdlren, NULL, NULL);
 		WV_setStreamingMethod(stream, streamObj);
 	}
 
@@ -95,8 +95,8 @@ bool DKSDLWaave::Play(const void* input, void* output){
 	if(streamObj){
 		int winWidth = streamObj->srcWidth;
 		int winHeight = streamObj->srcHeight;
-		SDL_SetWindowSize(DKSDLWindow::Get("")->sdlwin, winWidth, winHeight);
-		WV_resetStreamRendererOutput(streamObj, DKSDLWindow::Get("")->sdlren, NULL); //!! update the object !!
+		SDL_SetWindowSize(DKSdlWindow::Get("")->sdlwin, winWidth, winHeight);
+		WV_resetStreamRendererOutput(streamObj, DKSdlWindow::Get("")->sdlren, NULL); //!! update the object !!
 	}
 
 	WV_playStream(stream);

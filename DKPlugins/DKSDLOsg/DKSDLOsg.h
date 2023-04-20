@@ -41,7 +41,7 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 #include "DK/DK.h"
-#include "DKSDLWindow/DKSDLWindow.h"
+#include "DKSdlWindow/DKSdlWindow.h"
 
 
 class DKSDLOsg : public DKObjectT<DKSDLOsg>

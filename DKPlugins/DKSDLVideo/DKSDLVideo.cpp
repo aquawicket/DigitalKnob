@@ -29,7 +29,7 @@
 #include "DK/stdafx.h"
 #include "DKSDLVideo/DKSDLVideo.h"
 #include "DK/DKFile.h"
-#include "DKSDLWindow/DKSDLWindow.h"
+#include "DKSdlWindow/DKSdlWindow.h"
 
 AVFrame DKSDLVideo::wanted_frame;
 AudioPacket DKSDLVideo::audioq;
@@ -37,7 +37,7 @@ AudioPacket DKSDLVideo::audioq;
 bool DKSDLVideo::Init() {
 	DKDEBUGFUNC();
 
-	//DKSDLWindow::AddEventFunc(&DKSDLVideo::OnEvent, this);
+	//DKSdlWindow::AddEventFunc(&DKSDLVideo::OnEvent, this);
 	
 	OpenFile(DKFile::local_assets+"/DKSDLVideo/test.mp4");
 	return true;

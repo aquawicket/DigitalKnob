@@ -25,8 +25,8 @@
 */
 
 #pragma once
-#ifndef DKSDLWindow_H
-#define DKSDLWindow_H
+#ifndef DKSdlWindow_H
+#define DKSdlWindow_H
 
 //#define SDL_MAIN_HANDLED 1 //Bypass SDL_main() //https://wiki.libsdl.org/SDL_SetMainReady
 WARNING_DISABLE
@@ -37,10 +37,10 @@ WARNING_ENABLE
 #include "DKWindow/DKWindow.h"
 
 
-class DKSDLWindow : public DKWindow, public DKObjectT<DKSDLWindow>
+class DKSdlWindow : public DKWindow, public DKObjectT<DKSdlWindow>
 {
 public:
-	DKSDLWindow();
+	DKSdlWindow();
 	bool Init();
 	bool End();
 
@@ -283,6 +283,6 @@ public:
 	}
 };
 
-REGISTER_OBJECT(DKSDLWindow, true)
+REGISTER_OBJECT(DKSdlWindow, true)
 
-#endif //DKSDLWindow_H
+#endif //DKSdlWindow_H

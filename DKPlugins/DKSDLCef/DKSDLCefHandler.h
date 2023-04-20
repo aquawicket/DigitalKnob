@@ -58,7 +58,7 @@ WARNING_ENABLE
 #include "DK/DKApp.h"
 #include "DKCef/DKCef.h"
 #include "DKSDLCef/DKSDLCefKeyboard.h"
-#include "DKSDLWindow/DKSDLWindow.h"
+#include "DKSdlWindow/DKSdlWindow.h"
 #include "DKSDLCef/DKSDLCef.h"
 
 
@@ -110,7 +110,7 @@ public:
 	BrowserList browser_list_;
 	bool is_closing_;
 
-	DKSDLWindow* dkSdlWindow;
+	DKSdlWindow* dkSdlWindow;
 	DKCef* dkCef;
 	DKSDLCef* dkSdlCef;
 	std::vector<SDL_Texture*> cef_texture;

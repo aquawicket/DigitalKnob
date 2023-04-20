@@ -25,7 +25,7 @@
 */
 #include "DK/stdafx.h"
 #include "DKSDLOsg/DKSDLOsg.h"
-#include "DKSDLWindow/DKSDLWindow.h"
+#include "DKSdlWindow/DKSdlWindow.h"
 
 
 bool DKSDLOsg::Init(){
@@ -48,8 +48,8 @@ bool DKSDLOsg::Init(){
 	
 	sdl_window = SDL_CreateWindow("DKSDLOsg", 0, 0, 800, 600, SDL_WINDOW_OPENGL);
     */
-    DKClass::DKCreate("DKSDLWindow");
-    sdl_window = DKSDLWindow::Get()->window;
+    DKClass::DKCreate("DKSdlWindow");
+    sdl_window = DKSdlWindow::Get()->window;
 	
 	// Create an OpenGL context associated with the window.
 	SDL_GLContext glcontext = SDL_GL_CreateContext(sdl_window);
@@ -70,9 +70,9 @@ bool DKSDLOsg::Init(){
     osg_viewer.addEventHandler(new osgViewer::StatsHandler);
     osg_viewer.realize();
 	
-    DKSDLWindow::AddEventFunc(&DKSDLOsg::OnEvent, this);
-    DKSDLWindow::AddRenderFunc(&DKSDLOsg::OnRender, this);
-    DKSDLWindow::AddUpdateFunc(&DKSDLOsg::OnUpdate, this);
+    DKSdlWindow::AddEventFunc(&DKSDLOsg::OnEvent, this);
+    DKSdlWindow::AddRenderFunc(&DKSDLOsg::OnRender, this);
+    DKSdlWindow::AddUpdateFunc(&DKSDLOsg::OnUpdate, this);
 	return true;
 }
 

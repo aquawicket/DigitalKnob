@@ -35,7 +35,7 @@ bool DKSDLMetalRml::Init(){
 	//Android SDL_TEXTINPUT events not working
 	//SDL_StartTextInput(); 
 	//SDL_EventState(SDL_TEXTINPUT, SDL_ENABLE);
-	dkSdlWindow = DKSDLWindow::Instance("DKSDLWindow0");
+	dkSdlWindow = DKSdlWindow::Instance("DKSdlWindow0");
 	dkRml = DKRml::Instance("DKRml0");
 	if(!dkSdlWindow || !dkRml)
 		return DKERROR("DKSDLMetalRml::Init(): INVALID OBJECTS\n");
@@ -47,9 +47,9 @@ bool DKSDLMetalRml::Init(){
 	SystemInterface = new RmlSDL2SystemInterface();
 	Rml::SetRenderInterface(Renderer);
     Rml::SetSystemInterface(SystemInterface);
-	DKSDLWindow::AddEventFunc(&DKSDLMetalRml::Handle, this);
-	DKSDLWindow::AddRenderFunc(&DKSDLMetalRml::Render, this);
-	DKSDLWindow::AddUpdateFunc(&DKSDLMetalRml::Update, this);
+	DKSdlWindow::AddEventFunc(&DKSDLMetalRml::Handle, this);
+	DKSdlWindow::AddRenderFunc(&DKSDLMetalRml::Render, this);
+	DKSdlWindow::AddUpdateFunc(&DKSDLMetalRml::Update, this);
 	return true;
 }
 
@@ -98,38 +98,38 @@ bool DKSDLMetalRml::Handle(SDL_Event *event) {
             break;
 #else
 		case SDL_KEYDOWN:{
-			//DKINFO("DKSDLWindow::SDL_KEYDOWN("+toString(event->key.keysym.sym)+")\n");
+			//DKINFO("DKSdlWindow::SDL_KEYDOWN("+toString(event->key.keysym.sym)+")\n");
 			/*
 			if(event->key.keysym.sym == 0){ return true; }
 			if(event->key.keysym.sym > 96 && event->key.keysym.sym < 123){ //letter
 				if(event->key.keysym.mod & KMOD_SHIFT && event->key.keysym.mod & KMOD_CAPS){ //both = lowercase
-					//DKEvent::SendEvent("window", "keypress", toString(DKSDLWindow::sdlCharCode[event->key.keysym.sym]));
-					dkRml->context->ProcessTextInput(DKSDLWindow::sdlCharCode[event->key.keysym.sym]);
+					//DKEvent::SendEvent("window", "keypress", toString(DKSdlWindow::sdlCharCode[event->key.keysym.sym]));
+					dkRml->context->ProcessTextInput(DKSdlWindow::sdlCharCode[event->key.keysym.sym]);
 				}
 				else if(event->key.keysym.mod & KMOD_SHIFT || event->key.keysym.mod & KMOD_CAPS){ //1 = uppercase
-					//DKEvent::SendEvent("window", "keypress", toString(DKSDLWindow::sdlShiftCharCode[event->key.keysym.sym]));
-					dkRml->context->ProcessTextInput(DKSDLWindow::sdlShiftCharCode[event->key.keysym.sym]);
+					//DKEvent::SendEvent("window", "keypress", toString(DKSdlWindow::sdlShiftCharCode[event->key.keysym.sym]));
+					dkRml->context->ProcessTextInput(DKSdlWindow::sdlShiftCharCode[event->key.keysym.sym]);
 				}
 				else{
-					//DKEvent::SendEvent("window", "keypress", toString(DKSDLWindow::sdlCharCode[event->key.keysym.sym])); //lowercase
-					dkRml->context->ProcessTextInput(DKSDLWindow::sdlCharCode[event->key.keysym.sym]);
+					//DKEvent::SendEvent("window", "keypress", toString(DKSdlWindow::sdlCharCode[event->key.keysym.sym])); //lowercase
+					dkRml->context->ProcessTextInput(DKSdlWindow::sdlCharCode[event->key.keysym.sym]);
 				}
 			}
 			else if(event->key.keysym.mod & KMOD_SHIFT){ //other character keys
-				//DKEvent::SendEvent("window", "keypress", toString(DKSDLWindow::sdlShiftCharCode[event->key.keysym.sym])); //shifted symbol
-				dkRml->context->ProcessTextInput(DKSDLWindow::sdlShiftCharCode[event->key.keysym.sym]);
+				//DKEvent::SendEvent("window", "keypress", toString(DKSdlWindow::sdlShiftCharCode[event->key.keysym.sym])); //shifted symbol
+				dkRml->context->ProcessTextInput(DKSdlWindow::sdlShiftCharCode[event->key.keysym.sym]);
 			}
 			else{
-				//DKEvent::SendEvent("window", "keypress", toString(DKSDLWindow::sdlCharCode[event->key.keysym.sym])); //symbol
-				dkRml->context->ProcessTextInput(DKSDLWindow::sdlCharCode[event->key.keysym.sym]);
+				//DKEvent::SendEvent("window", "keypress", toString(DKSdlWindow::sdlCharCode[event->key.keysym.sym])); //symbol
+				dkRml->context->ProcessTextInput(DKSdlWindow::sdlCharCode[event->key.keysym.sym]);
 			}
 			*/
-			//DKEvent::SendEvent("window", "keydown", toString(DKSDLWindow::sdlKeyCode[event->key.keysym.sym])); //keycode
-			//dkRml->context->ProcessKeyDown((Rml::Input::KeyIdentifier)DKSDLWindow::sdlKeyCode[event->key.keysym.sym], SystemInterface->GetKeyModifiers());
+			//DKEvent::SendEvent("window", "keydown", toString(DKSdlWindow::sdlKeyCode[event->key.keysym.sym])); //keycode
+			//dkRml->context->ProcessKeyDown((Rml::Input::KeyIdentifier)DKSdlWindow::sdlKeyCode[event->key.keysym.sym], SystemInterface->GetKeyModifiers());
 			dkRml->context->ProcessKeyDown(SystemInterface->TranslateKey(event->key.keysym.sym), SystemInterface->GetKeyModifiers());
 			//TODO: If enter is pressed, send enter event on ProcessTextInput
 			if(event->key.keysym.sym == 13) //Enter key
-			//dkRml->context->ProcessTextInput(DKSDLWindow::sdlCharCode[event->key.keysym.sym]); //TEST
+			//dkRml->context->ProcessTextInput(DKSdlWindow::sdlCharCode[event->key.keysym.sym]); //TEST
 			dkRml->context->ProcessTextInput("\n"); //TEST2
 			return false; //allow event to continue
 		}
@@ -142,7 +142,7 @@ bool DKSDLMetalRml::Handle(SDL_Event *event) {
 			//DKINFO("DKSDLMetalRml::SDL_TEXTEDITING()\n");
 			break;	
 		case SDL_KEYUP:
-			//dkRml->context->ProcessKeyUp((Rml::Input::KeyIdentifier)DKSDLWindow::sdlKeyCode[event->key.keysym.sym], SystemInterface->GetKeyModifiers());
+			//dkRml->context->ProcessKeyUp((Rml::Input::KeyIdentifier)DKSdlWindow::sdlKeyCode[event->key.keysym.sym], SystemInterface->GetKeyModifiers());
 			dkRml->context->ProcessKeyUp(SystemInterface->TranslateKey(event->key.keysym.sym), SystemInterface->GetKeyModifiers());
 			break;
             default:

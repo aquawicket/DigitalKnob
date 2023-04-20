@@ -66,8 +66,8 @@ bool DKTray::Init(){
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[TRAYED]", trayed);
 	if(same(trayed,"ON")){
 		//CSystemTray::MinimiseToTray(hwnd);
-		if(DKClass::HasFunc("DKSDLWindow::Hide"))
-			DKClass::CallFunc("DKSDLWindow::Hide", NULL, NULL);
+		if(DKClass::HasFunc("DKSdlWindow::Hide"))
+			DKClass::CallFunc("DKSdlWindow::Hide", NULL, NULL);
 		else if(DKClass::HasFunc("DKOSGWindow::Hide"))
 			DKClass::CallFunc("DKOSGWindow::Hide", NULL, NULL);
 		else

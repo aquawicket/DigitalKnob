@@ -252,13 +252,13 @@ bool DKLinux::KeyIsDown(int& key){
 bool DKLinux::GetClipboard(DKString& text){
 	DKDEBUGFUNC(text);
 	//TODO
-	return DKClass::CallFunc("DKSDLWindow::GetClipboard", NULL, &text);
+	return DKClass::CallFunc("DKSdlWindow::GetClipboard", NULL, &text);
 }
 
 bool DKLinux::SetClipboard(const DKString& text){
 	DKDEBUGFUNC(text);
 	//TODO
-	return DKClass::CallFunc("DKSDLWindow::SetClipboard", &text);
+	return DKClass::CallFunc("DKSdlWindow::SetClipboard", &text);
 }
 
 bool DKLinux::SetVolume(double nVolume){

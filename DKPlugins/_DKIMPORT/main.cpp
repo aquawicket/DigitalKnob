@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-#if HAVE_DKSDLWindow
+#if HAVE_DKSdlWindow
 	#if !IOS && !ANDROID
 		#define SDL_MAIN_HANDLED
 	#else
@@ -36,7 +36,7 @@
 #include "assets.h"
 
 int main(int argc, char** argv) {
-	#if HAVE_DKSDLWindow
+	#if HAVE_DKSdlWindow
 		#if !IOS && !EMSCRIPTEN
 			SDL_SetMainReady();
 		#endif

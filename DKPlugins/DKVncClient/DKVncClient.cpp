@@ -47,7 +47,7 @@ struct { int sdl; int rfb; } buttonMapping[]={
 int DKVncClient::enableResizable = 0, DKVncClient::viewOnly, DKVncClient::buttonMask;
 int DKVncClient::realWidth, DKVncClient::realHeight, DKVncClient::bytesPerPixel, DKVncClient::rowStride;
 int DKVncClient::rightShiftKeyDown, DKVncClient::leftShiftKeyDown;
-DKSDLWindow* DKVncClient::dkSdlWindow;
+DKSdlWindow* DKVncClient::dkSdlWindow;
 const char* DKVncClient::pass;
 int DKVncClient::message_wait = 1;
 SDL_Texture* DKVncClient::tex = NULL;
@@ -99,7 +99,7 @@ bool DKVncClient::Init(){
 	if(!vnc_cursor.empty())
 		cursor = toBool(vnc_cursor);
 	
-	dkSdlWindow = DKSDLWindow::Instance("DKSDLWindow0");
+	dkSdlWindow = DKSdlWindow::Instance("DKSdlWindow0");
 
 	SDL_SetEventFilter(NULL, NULL);
 
@@ -183,8 +183,8 @@ bool DKVncClient::Init(){
 		}
 	}
 	else{
-		DKSDLWindow::AddEventFunc(&DKVncClient::handle, this);
-		DKSDLWindow::AddRenderFunc(&DKVncClient::draw, this);
+		DKSdlWindow::AddEventFunc(&DKVncClient::handle, this);
+		DKSdlWindow::AddRenderFunc(&DKVncClient::draw, this);
 	}
 	
 	if(!Connect(server_ip, server_password))
@@ -202,8 +202,8 @@ bool DKVncClient::End(){
 
 bool DKVncClient::TestInt(int& input, int& output){
 	DKDEBUGFUNC(input, output);
-	if(DKClass::HasFunc("DKSDLWindow::TestInt"))
-		return DKClass::CallFunc("DKSDLWindow::TestInt", &input, &output);
+	if(DKClass::HasFunc("DKSdlWindow::TestInt"))
+		return DKClass::CallFunc("DKSdlWindow::TestInt", &input, &output);
 	if(DKClass::HasFunc("DKSFMLWindow::TestInt"))
 		return DKClass::CallFunc("DKSFMLWindow::TestInt", &input, &output);
 	return DKERROR("DKWindow::TestInt(): No function available\n");
@@ -211,8 +211,8 @@ bool DKVncClient::TestInt(int& input, int& output){
 
 bool DKVncClient::TestString(DKString& input, DKString& output){
 	DKDEBUGFUNC(input, output);
-	if(DKClass::HasFunc("DKSDLWindow::TestString"))
-		return DKClass::CallFunc("DKSDLWindow::TestString", &input, &output);
+	if(DKClass::HasFunc("DKSdlWindow::TestString"))
+		return DKClass::CallFunc("DKSdlWindow::TestString", &input, &output);
 	if(DKClass::HasFunc("DKSFMLWindow::TestString"))
 		return DKClass::CallFunc("DKSFMLWindow::TestString", &input, &output);
 	return DKERROR("No function available\n");
@@ -220,8 +220,8 @@ bool DKVncClient::TestString(DKString& input, DKString& output){
 
 bool DKVncClient::TestReturnInt(int& output){
 	DKDEBUGFUNC(output);
-	if(DKClass::HasFunc("DKSDLWindow::TestReturnInt"))
-		return DKClass::CallFunc("DKSDLWindow::TestReturnInt", NULL, &output);
+	if(DKClass::HasFunc("DKSdlWindow::TestReturnInt"))
+		return DKClass::CallFunc("DKSdlWindow::TestReturnInt", NULL, &output);
 	if(DKClass::HasFunc("DKSFMLWindow::TestReturnInt"))
 		return DKClass::CallFunc("DKSFMLWindow::TestReturnInt", NULL, &output);
 	return DKERROR("No function available\n");
@@ -229,8 +229,8 @@ bool DKVncClient::TestReturnInt(int& output){
 
 bool DKVncClient::TestReturnString(DKString& output){
 	DKDEBUGFUNC(output);
-	if(DKClass::HasFunc("DKSDLWindow::TestReturnString"))
-		return DKClass::CallFunc("DKSDLWindow::TestReturnString", NULL, &output);
+	if(DKClass::HasFunc("DKSdlWindow::TestReturnString"))
+		return DKClass::CallFunc("DKSdlWindow::TestReturnString", NULL, &output);
 	if(DKClass::HasFunc("DKSFMLWindow::TestReturnString"))
 		return DKClass::CallFunc("DKSFMLWindow::TestReturnString", NULL, &output);
 	return DKERROR("No function available\n");

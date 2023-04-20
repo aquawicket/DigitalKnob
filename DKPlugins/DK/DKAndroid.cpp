@@ -114,7 +114,7 @@ extern "C" {
 		jdata.env = env;
 		jdata.cls = cls;
 		jdata.array = array;
-		DKClass::DKCreate("DKSDLWindowAndroid");
+		DKClass::DKCreate("DKSdlWindowAndroid");
 		DKClass::CallFunc("DKAndroid_onInitSDL", &jdata);
 	}
 

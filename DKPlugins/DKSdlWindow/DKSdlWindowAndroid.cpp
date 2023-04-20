@@ -26,7 +26,7 @@
 
 #if ANDROID
 #include "DK/stdafx.h"
-#include "DKSDLWindow/DKSDLWindowAndroid.h"
+#include "DKSdlWindow/DKSdlWindowAndroid.h"
 #include "DK/DKAndroid.h"
 
 WARNING_DISABLE
@@ -63,41 +63,41 @@ extern "C" {
 	extern JNIEXPORT jstring JNICALL Java_org_libsdl_app_SDLActivity_nativeGetHint(JNIEnv* env, jclass cls, jstring name);
 }
 
-bool DKSDLWindowAndroid::Init(){
+bool DKSdlWindowAndroid::Init(){
 	DKDEBUGFUNC();
-	DKClass::RegisterFunc("DKAndroid_onAccel", &DKSDLWindowAndroid::onAccel, this);
-	//DKClass::RegisterFunc("DKAndroid_onAddJoystick", &DKSDLWindowAndroid::onAddJoystick, this);
-	DKClass::RegisterFunc("DKAndroid_onCommitText", &DKSDLWindowAndroid::onCommitText, this);
-	DKClass::RegisterFunc("DKAndroid_onDropFile", &DKSDLWindowAndroid::onDropFile, this);
-	DKClass::RegisterFunc("DKAndroid_onGetHint", &DKSDLWindowAndroid::onGetHint, this);
-	//DKClass::RegisterFunc("DKAndroid_onHat", &DKSDLWindowAndroid::onHat, this);
-	DKClass::RegisterFunc("DKAndroid_onInitSDL", &DKSDLWindowAndroid::onInitSDL, this);
-	//DKClass::RegisterFunc("DKAndroid_onJoy", &DKSDLWindowAndroid::onJoy, this);
-	DKClass::RegisterFunc("DKAndroid_onKeyDown", &DKSDLWindowAndroid::onKeyDown, this);
-	DKClass::RegisterFunc("DKAndroid_onKeyUp", &DKSDLWindowAndroid::onKeyUp, this);
-	DKClass::RegisterFunc("DKAndroid_onKeyboardFocusLost", &DKSDLWindowAndroid::onKeyboardFocusLost, this);
-	DKClass::RegisterFunc("DKAndroid_onLowMemory", &DKSDLWindowAndroid::onLowMemory, this);
-	DKClass::RegisterFunc("DKAndroid_onMouse", &DKSDLWindowAndroid::onMouse, this);
-	//DKClass::RegisterFunc("DKAndroid_onPadDown", &DKSDLWindowAndroid::onPadDown, this);
-	//DKClass::RegisterFunc("DKAndroid_onPadUp", &DKSDLWindowAndroid::onPadUp, this);
-	DKClass::RegisterFunc("DKAndroid_onPause", &DKSDLWindowAndroid::onPause, this);
-	DKClass::RegisterFunc("DKAndroid_onQuit", &DKSDLWindowAndroid::onQuit, this);
-	//DKClass::RegisterFunc("DKAndroid_onRemoveJoystick", &DKSDLWindowAndroid::onRemoveJoystick, this);
-	DKClass::RegisterFunc("DKAndroid_onResize", &DKSDLWindowAndroid::onResize, this);
-	DKClass::RegisterFunc("DKAndroid_onResume", &DKSDLWindowAndroid::onResume, this);
-	//DKClass::RegisterFunc("DKAndroid_onSetComposingText", &DKSDLWindowAndroid::onSetComposingText, this);
-	DKClass::RegisterFunc("DKAndroid_onSurfaceChanged", &DKSDLWindowAndroid::onSurfaceChanged, this);
-	DKClass::RegisterFunc("DKAndroid_onSurfaceDestroyed", &DKSDLWindowAndroid::onSurfaceDestroyed, this);
-	DKClass::RegisterFunc("DKAndroid_onTouch", &DKSDLWindowAndroid::onTouch, this);
+	DKClass::RegisterFunc("DKAndroid_onAccel", &DKSdlWindowAndroid::onAccel, this);
+	//DKClass::RegisterFunc("DKAndroid_onAddJoystick", &DKSdlWindowAndroid::onAddJoystick, this);
+	DKClass::RegisterFunc("DKAndroid_onCommitText", &DKSdlWindowAndroid::onCommitText, this);
+	DKClass::RegisterFunc("DKAndroid_onDropFile", &DKSdlWindowAndroid::onDropFile, this);
+	DKClass::RegisterFunc("DKAndroid_onGetHint", &DKSdlWindowAndroid::onGetHint, this);
+	//DKClass::RegisterFunc("DKAndroid_onHat", &DKSdlWindowAndroid::onHat, this);
+	DKClass::RegisterFunc("DKAndroid_onInitSDL", &DKSdlWindowAndroid::onInitSDL, this);
+	//DKClass::RegisterFunc("DKAndroid_onJoy", &DKSdlWindowAndroid::onJoy, this);
+	DKClass::RegisterFunc("DKAndroid_onKeyDown", &DKSdlWindowAndroid::onKeyDown, this);
+	DKClass::RegisterFunc("DKAndroid_onKeyUp", &DKSdlWindowAndroid::onKeyUp, this);
+	DKClass::RegisterFunc("DKAndroid_onKeyboardFocusLost", &DKSdlWindowAndroid::onKeyboardFocusLost, this);
+	DKClass::RegisterFunc("DKAndroid_onLowMemory", &DKSdlWindowAndroid::onLowMemory, this);
+	DKClass::RegisterFunc("DKAndroid_onMouse", &DKSdlWindowAndroid::onMouse, this);
+	//DKClass::RegisterFunc("DKAndroid_onPadDown", &DKSdlWindowAndroid::onPadDown, this);
+	//DKClass::RegisterFunc("DKAndroid_onPadUp", &DKSdlWindowAndroid::onPadUp, this);
+	DKClass::RegisterFunc("DKAndroid_onPause", &DKSdlWindowAndroid::onPause, this);
+	DKClass::RegisterFunc("DKAndroid_onQuit", &DKSdlWindowAndroid::onQuit, this);
+	//DKClass::RegisterFunc("DKAndroid_onRemoveJoystick", &DKSdlWindowAndroid::onRemoveJoystick, this);
+	DKClass::RegisterFunc("DKAndroid_onResize", &DKSdlWindowAndroid::onResize, this);
+	DKClass::RegisterFunc("DKAndroid_onResume", &DKSdlWindowAndroid::onResume, this);
+	//DKClass::RegisterFunc("DKAndroid_onSetComposingText", &DKSdlWindowAndroid::onSetComposingText, this);
+	DKClass::RegisterFunc("DKAndroid_onSurfaceChanged", &DKSdlWindowAndroid::onSurfaceChanged, this);
+	DKClass::RegisterFunc("DKAndroid_onSurfaceDestroyed", &DKSdlWindowAndroid::onSurfaceDestroyed, this);
+	DKClass::RegisterFunc("DKAndroid_onTouch", &DKSdlWindowAndroid::onTouch, this);
 	return true;
 }
 
-bool DKSDLWindowAndroid::End(){
+bool DKSdlWindowAndroid::End(){
 	DKDEBUGFUNC();
 	return true;
 }
 	
-bool DKSDLWindowAndroid::onInitSDL(const void* input, void* output){
+bool DKSdlWindowAndroid::onInitSDL(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	JavaData jd = *(JavaData*)input;
 
@@ -162,7 +162,7 @@ bool DKSDLWindowAndroid::onInitSDL(const void* input, void* output){
 	//we just run our own loop after this..   for now.  (DKApp::Loop), it's called from SDLActivity.jave as  CallCppFunction("loop")
 }
 
-bool DKSDLWindowAndroid::onDropFile(const void* input, void* output){
+bool DKSdlWindowAndroid::onDropFile(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	JavaData jd = *(JavaData*)input;
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
@@ -173,7 +173,7 @@ bool DKSDLWindowAndroid::onDropFile(const void* input, void* output){
 	return true;
 }
 
-bool DKSDLWindowAndroid::onResize(const void* input, void* output){
+bool DKSdlWindowAndroid::onResize(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	JavaData jd = *(JavaData*)input;
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
@@ -188,7 +188,7 @@ bool DKSDLWindowAndroid::onResize(const void* input, void* output){
 }
 
 /*
-bool DKSDLWindowAndroid::onPadDown(const void* input, void* output){
+bool DKSdlWindowAndroid::onPadDown(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	JavaData jd = *(JavaData*)input;
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
@@ -206,7 +206,7 @@ bool DKSDLWindowAndroid::onPadDown(const void* input, void* output){
 	return true;
 }
 
-bool DKSDLWindowAndroid::onPadUp(const void* input, void* output){
+bool DKSdlWindowAndroid::onPadUp(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	JavaData jd = *(JavaData*)input;
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
@@ -224,7 +224,7 @@ bool DKSDLWindowAndroid::onPadUp(const void* input, void* output){
 	return true;
 }
 
-bool DKSDLWindowAndroid::onJoy(const void* input, void* output){
+bool DKSdlWindowAndroid::onJoy(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	JavaData jd = *(JavaData*)input;
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
@@ -237,7 +237,7 @@ bool DKSDLWindowAndroid::onJoy(const void* input, void* output){
 	return true;
 }
 
-bool DKSDLWindowAndroid::onHat(const void* input, void* output){
+bool DKSdlWindowAndroid::onHat(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	JavaData jd = *(JavaData*)input;
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
@@ -251,7 +251,7 @@ bool DKSDLWindowAndroid::onHat(const void* input, void* output){
 	return true;
 }
 
-bool DKSDLWindowAndroid::onAddJoystick(const void* input, void* output){
+bool DKSdlWindowAndroid::onAddJoystick(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	JavaData jd = *(JavaData*)input;
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
@@ -274,7 +274,7 @@ bool DKSDLWindowAndroid::onAddJoystick(const void* input, void* output){
 	return true;
 }
 
-bool DKSDLWindowAndroid::onRemoveJoystick(const void* input, void* output){
+bool DKSdlWindowAndroid::onRemoveJoystick(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	JavaData jd = *(JavaData*)input;
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
@@ -292,21 +292,21 @@ bool DKSDLWindowAndroid::onRemoveJoystick(const void* input, void* output){
 }
 */
 
-bool DKSDLWindowAndroid::onSurfaceChanged(const void* input, void* output){
+bool DKSdlWindowAndroid::onSurfaceChanged(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	JavaData jd = *(JavaData*)input;
     Java_org_libsdl_app_SDLActivity_onNativeSurfaceChanged(jd.env, jd.cls);
 	return true;
 }
 
-bool DKSDLWindowAndroid::onSurfaceDestroyed(const void* input, void* output){
+bool DKSdlWindowAndroid::onSurfaceDestroyed(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	JavaData jd = *(JavaData*)input;
     Java_org_libsdl_app_SDLActivity_onNativeSurfaceDestroyed(jd.env, jd.cls);
 	return true;
 }
 
-bool DKSDLWindowAndroid::onKeyDown(const void* input, void* output){
+bool DKSdlWindowAndroid::onKeyDown(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	JavaData jd = *(JavaData*)input;
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
@@ -322,7 +322,7 @@ bool DKSDLWindowAndroid::onKeyDown(const void* input, void* output){
 	return true;
 }
 
-bool DKSDLWindowAndroid::onKeyUp(const void* input, void* output){
+bool DKSdlWindowAndroid::onKeyUp(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	JavaData jd = *(JavaData*)input;
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
@@ -338,14 +338,14 @@ bool DKSDLWindowAndroid::onKeyUp(const void* input, void* output){
 	return true;
 }
 
-bool DKSDLWindowAndroid::onKeyboardFocusLost(const void* input, void* output){
+bool DKSdlWindowAndroid::onKeyboardFocusLost(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	JavaData jd = *(JavaData*)input;
     Java_org_libsdl_app_SDLActivity_onNativeKeyboardFocusLost(jd.env, jd.cls);
 	return true;
 }
 
-bool DKSDLWindowAndroid::onTouch(const void* input, void* output){
+bool DKSdlWindowAndroid::onTouch(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	JavaData jd = *(JavaData*)input;
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
@@ -361,7 +361,7 @@ bool DKSDLWindowAndroid::onTouch(const void* input, void* output){
 	return true;
 }
 
-bool DKSDLWindowAndroid::onMouse(const void* input, void* output){
+bool DKSdlWindowAndroid::onMouse(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	JavaData jd = *(JavaData*)input;
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
@@ -375,7 +375,7 @@ bool DKSDLWindowAndroid::onMouse(const void* input, void* output){
 	return true;
 }
 
-bool DKSDLWindowAndroid::onAccel(const void* input, void* output){
+bool DKSdlWindowAndroid::onAccel(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	JavaData jd = *(JavaData*)input;
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
@@ -388,21 +388,21 @@ bool DKSDLWindowAndroid::onAccel(const void* input, void* output){
 	return true;
 }
 
-bool DKSDLWindowAndroid::onLowMemory(const void* input, void* output){
+bool DKSdlWindowAndroid::onLowMemory(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	JavaData jd = *(JavaData*)input;
     Java_org_libsdl_app_SDLActivity_nativeLowMemory(jd.env, jd.cls);
 	return true;
 }
 
-bool DKSDLWindowAndroid::onQuit(const void* input, void* output){
+bool DKSdlWindowAndroid::onQuit(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	JavaData jd = *(JavaData*)input;
     Java_org_libsdl_app_SDLActivity_nativeQuit(jd.env, jd.cls);
 	return true;
 }
 
-bool DKSDLWindowAndroid::onPause(const void* input, void* output){
+bool DKSdlWindowAndroid::onPause(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	DKApp::paused = true;
 	JavaData jd = *(JavaData*)input;
@@ -410,7 +410,7 @@ bool DKSDLWindowAndroid::onPause(const void* input, void* output){
 	return true;
 }
 
-bool DKSDLWindowAndroid::onResume(const void* input, void* output){
+bool DKSdlWindowAndroid::onResume(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	JavaData jd = *(JavaData*)input;
     Java_org_libsdl_app_SDLActivity_nativeResume(jd.env, jd.cls);
@@ -418,7 +418,7 @@ bool DKSDLWindowAndroid::onResume(const void* input, void* output){
 	return true;
 }
 
-bool DKSDLWindowAndroid::onCommitText(const void* input, void* output){
+bool DKSdlWindowAndroid::onCommitText(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	JavaData jd = *(JavaData*)input;
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
@@ -431,7 +431,7 @@ bool DKSDLWindowAndroid::onCommitText(const void* input, void* output){
 }
 
 /*
-bool DKSDLWindowAndroid::onSetComposingText(const void* input, void* output){
+bool DKSdlWindowAndroid::onSetComposingText(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	JavaData jd = *(JavaData*)input;
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);
@@ -444,7 +444,7 @@ bool DKSDLWindowAndroid::onSetComposingText(const void* input, void* output){
 }
 */
 
-bool DKSDLWindowAndroid::onGetHint(const void* input, void* output){
+bool DKSdlWindowAndroid::onGetHint(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	JavaData jd = *(JavaData*)input;
 	const char* _data = jd.env->GetStringUTFChars(jd.data,JNI_FALSE);

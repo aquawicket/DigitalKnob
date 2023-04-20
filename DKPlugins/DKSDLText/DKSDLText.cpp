@@ -30,9 +30,9 @@
 
 bool DKSDLText::Init(){
 	DKDEBUGFUNC();
-	if(!DKSDLWindow::Valid("DKSDLWindow0"))
+	if(!DKSdlWindow::Valid("DKSdlWindow0"))
 		return DKERROR("DKSDKWindow::Valid() failed\n");
-	dkSdlWindow = DKSDLWindow::Get("DKSDLWindow0");
+	dkSdlWindow = DKSdlWindow::Get("DKSdlWindow0");
 	if(!dkSdlWindow)
 		return DKERROR("SDL window not available \n");
 	TTF_Init();
@@ -42,7 +42,7 @@ bool DKSDLText::Init(){
     color.g = 0;
     color.b = 0;
 	SetText(toString("Test String"));
-	DKSDLWindow::AddRenderFunc(&DKSDLText::Render, this);
+	DKSdlWindow::AddRenderFunc(&DKSDLText::Render, this);
 	return true;
 }
 

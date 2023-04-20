@@ -118,8 +118,8 @@ bool DKHandles::DoMouseUp() {
 	//DKWindow::GetHandle((void*&)hwnd);
 	if(DKClass::HasFunc("DKCEFWindow::GetHandle"))
 		DKClass::CallFunc("DKCEFWindow::GetHandle", NULL, &hwnd);
-	if(DKClass::HasFunc("DKSDLWindow::GetHandle"))
-		DKClass::CallFunc("DKSDLWindow::GetHandle", NULL, &hwnd);
+	if(DKClass::HasFunc("DKSdlWindow::GetHandle"))
+		DKClass::CallFunc("DKSdlWindow::GetHandle", NULL, &hwnd);
 	if(!hwnd)
 		return DKERROR("hwnd is NULL\n");
 	::ShowWindow(hwnd, SW_SHOWNORMAL);
@@ -491,8 +491,8 @@ bool DKHandles::StartSearch() {
 	//DKWindow::GetHandle((void*&)hwnd);
 	if(DKClass::HasFunc("DKCEFWindow::GetHandle"))
 		DKClass::CallFunc("DKCEFWindow::GetHandle", NULL, &hwnd);
-	if(DKClass::HasFunc("DKSDLWindow::GetHandle"))
-		DKClass::CallFunc("DKSDLWindow::GetHandle", NULL, &hwnd);
+	if(DKClass::HasFunc("DKSdlWindow::GetHandle"))
+		DKClass::CallFunc("DKSdlWindow::GetHandle", NULL, &hwnd);
 	if(!hwnd)
 		return DKERROR("hwnd is NULL\n");
 	hMouseHook = SetWindowsHookEx(WH_MOUSE_LL, &SearchProc, DKWindows::hInstance, NULL);

@@ -25,8 +25,8 @@
 */
 
 #pragma once
-#ifndef DKSDLWindow_H
-#define DKSDLWindow_H
+#ifndef DKSdlWindow_H
+#define DKSdlWindow_H
 
 #include "DK/DK.h"
 
@@ -35,7 +35,7 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
-class DKSDLWindow : public DKObjectT<DKSDLWindow>{
+class DKSdlWindow : public DKObjectT<DKSdlWindow>{
 public:
 	bool Init();
 	bool End();
@@ -125,6 +125,6 @@ public:
 	}
 };
 
-REGISTER_OBJECT(DKSDLWindow, true)
+REGISTER_OBJECT(DKSdlWindow, true)
 
-#endif //DKSDLWindow_H
+#endif //DKSdlWindow_H

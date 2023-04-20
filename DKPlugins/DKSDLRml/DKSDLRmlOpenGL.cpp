@@ -29,7 +29,7 @@
 #include "DK/DK.h"
 #include "DK/DKString.h"
 #include "DKSDLRml/DKSDLRmlOpenGL.h"
-#include "DKSDLWindow/DKSDLWindow.h"
+#include "DKSdlWindow/DKSdlWindow.h"
 
 WARNING_DISABLE
 #include <RmlUi/Core.h>
@@ -53,8 +53,8 @@ void DKSDLRmlOpenGL::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int
 	//DKDEBUGFUNC(vertices, num_vertices, indices, num_indices, texture, translation);  //EXCESSIVE LOGGING
 #if !defined(IOS) && !defined(ANDROID)
     // DISABLE SDL Shaders
-	//DKSDLWindow* dkSdlWindow = DKSDLWindow::Instance("DKSDLWindow0");
-	//if(!has(DKSDLWindow::Instance("DKSDLWindow0")->gl_vendor, "Microsoft")){
+	//DKSdlWindow* dkSdlWindow = DKSdlWindow::Instance("DKSdlWindow0");
+	//if(!has(DKSdlWindow::Instance("DKSdlWindow0")->gl_vendor, "Microsoft")){
 		glUseProgramObjectARB = (PFNGLUSEPROGRAMOBJECTARBPROC) SDL_GL_GetProcAddress("glUseProgramObjectARB");
 		glUseProgramObjectARB(0);  //FIXME: this crashes on Microsoft Generic GDI drivers
 	//}

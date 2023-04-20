@@ -1,24 +1,24 @@
 #if HAVE_DKDuktape
 
 #pragma once
-#ifndef DKSDLWindowDUK_H
-#define DKSDLWindowDUK_H
+#ifndef DKSdlWindowDUK_H
+#define DKSdlWindowDUK_H
 
-#include "DKSDLWindow/DKSDLWindow.h"
+#include "DKSdlWindow/DKSdlWindow.h"
 #include "DKDuktape/DKDuktape.h"
 
 
-class DKSDLWindowDUK : public DKObjectT<DKSDLWindowDUK>
+class DKSdlWindowDUK : public DKObjectT<DKSdlWindowDUK>
 {
 public:
 	bool Init(){
 		
 		////// Constructor //////
-		DKDuktape::AttachFunction("CPP_DKSDLWindowDUK", DKSDLWindowDUK::constructor);
+		DKDuktape::AttachFunction("CPP_DKSdlWindowDUK", DKSdlWindowDUK::constructor);
 			
 			
 		////// Load .js files
-		DKClass::DKCreate("DKSDLWindow/DKSDLWindowDUK.js");
+		DKClass::DKCreate("DKSdlWindow/DKSdlWindowDUK.js");
 		
 		return true;
 	}
@@ -27,16 +27,16 @@ public:
 	////// Constructor //////
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKINFO("CPP_DKSDLWindowDUK()\n");
-		DKSDLWindow* sdlwindow = (DKSDLWindow*)DKClass::DKCreate("DKSDLWindow");
+		DKINFO("CPP_DKSdlWindowDUK()\n");
+		DKSdlWindow* sdlwindow = (DKSdlWindow*)DKClass::DKCreate("DKSdlWindow");
 		DKString eventTargetAddress = pointerToAddress(sdlwindow);
 		duk_push_string(ctx, eventTargetAddress.c_str());	
 		return true;
 	}
 	
 };
-REGISTER_OBJECT(DKSDLWindowDUK, true)
+REGISTER_OBJECT(DKSdlWindowDUK, true)
 
 
-#endif //DKSDLWindowDUK_H
+#endif //DKSdlWindowDUK_H
 #endif //HAVE_DKDuktape

@@ -33,7 +33,7 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 #include "DK/DK.h"
-#include "DKSDLWindow/DKSDLWindow.h"
+#include "DKSdlWindow/DKSdlWindow.h"
 #include "DKRml/DKRml.h"
 #include "DKSDLRml/DKSDLRmlSystem.h"
 
@@ -64,7 +64,7 @@ public:
 	//void ProcessEvent(Rml::Core::Event& event);
 	
 	DKRml* dkRml;
-	DKSDLWindow* dkSdlWindow;
+	DKSdlWindow* dkSdlWindow;
 	
 #	if USE_DKSDLRMLRENDERER
 		DKSDLRmlRenderer* Renderer;

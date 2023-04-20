@@ -44,7 +44,7 @@ WARNING_ENABLE
 #include "DK/DKApp.h"
 #include "DKCef/DKCef.h"
 #include "DKSDLCef/DKSDLCefKeyboard.h"
-#include "DKSDLWindow/DKSDLWindow.h"
+#include "DKSdlWindow/DKSdlWindow.h"
 
 
 class DKSDLCefHandler;
@@ -66,7 +66,7 @@ public:
 	bool TransparentPixel(SDL_Event *event);
 	bool Draw();
 	
-	DKSDLWindow* dkSdlWindow;
+	DKSdlWindow* dkSdlWindow;
 	SDL_Texture* popup_image;
 	DKCef* dkCef;
 	CefRect popup_rect;

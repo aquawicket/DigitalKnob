@@ -903,7 +903,7 @@ void DKCEFWindow::OnCursorChange(CefRefPtr<CefBrowser> browser, CefCursorHandle 
 	DKDEBUGFUNC(browser, cursor, type, custom_cursor_info);
 #if WIN32
 	HWND hwnd;
-	if (!DKClass::CallFunc("DKSDLWindow::GetHandle", NULL, &hwnd)) {
+	if (!DKClass::CallFunc("DKSdlWindow::GetHandle", NULL, &hwnd)) {
 		DKERROR("DKClass::CallFunc() failed\n");
 		return; 
 	}

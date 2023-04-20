@@ -46,7 +46,7 @@ WARNING_ENABLE
 bool DKSDLCef::Init() {
 	DKDEBUGFUNC();
 	popup_image = NULL;
-	dkSdlWindow = DKSDLWindow::Instance("DKSDLWindow0");
+	dkSdlWindow = DKSdlWindow::Instance("DKSdlWindow0");
 	//id = data[1];
 	dkCef = DKCef::Get();
 	if(!dkSdlWindow)
@@ -57,8 +57,8 @@ bool DKSDLCef::Init() {
 	_mouseLMBdown = false;
 	_scrollFactor = 120.0f;
 
-	DKSDLWindow::AddEventFunc(&DKSDLCef::Handle, this);
-	DKSDLWindow::AddRenderFuncFirst(&DKSDLCef::Draw, this);
+	DKSdlWindow::AddEventFunc(&DKSDLCef::Handle, this);
+	DKSdlWindow::AddRenderFuncFirst(&DKSDLCef::Draw, this);
 	DKClass::RegisterFunc("DKSDLCef::OnClick", &DKSDLCef::OnClick, this);
 	DKClass::RegisterFunc("DKSDLCef::OnMouseOver", &DKSDLCef::OnMouseOver, this);
 	DKClass::RegisterFunc("DKSDLCef::OnResize", &DKSDLCef::OnResize, this);
@@ -211,19 +211,19 @@ bool DKSDLCef::Handle(SDL_Event* event) {
 			/*
 			DKINFO("SDL_KEYDOWN: event->key.keysym.sym = "+toString(event->key.keysym.sym)+"\n");
 			DKINFO("SDL_KEYDOWN: event->key.keysym.scancode = "+toString(event->key.keysym.scancode)+"\n");
-			DKINFO("SDL_KEYDOWN: sdlKeyCode[event->key.keysym.sym] = "+toString(DKSDLWindow::sdlKeyCode[event->key.keysym.sym])+"\n");
-			DKINFO("SDL_KEYDOWN: sdlCharCode[event->key.keysym.sym] = "+toString(DKSDLWindow::sdlCharCode[event->key.keysym.sym])+"\n");
-			DKINFO("SDL_KEYDOWN: sdlShiftCharCode[event->key.keysym.sym] = "+toString(DKSDLWindow::sdlShiftCharCode[event->key.keysym.sym])+"\n");
+			DKINFO("SDL_KEYDOWN: sdlKeyCode[event->key.keysym.sym] = "+toString(DKSdlWindow::sdlKeyCode[event->key.keysym.sym])+"\n");
+			DKINFO("SDL_KEYDOWN: sdlCharCode[event->key.keysym.sym] = "+toString(DKSdlWindow::sdlCharCode[event->key.keysym.sym])+"\n");
+			DKINFO("SDL_KEYDOWN: sdlShiftCharCode[event->key.keysym.sym] = "+toString(DKSdlWindow::sdlShiftCharCode[event->key.keysym.sym])+"\n");
 			*/
 			
 			CefKeyEvent KeyEvent;
        		KeyEvent.type = KEYEVENT_KEYDOWN;
 			//KeyEvent.type = KEYEVENT_RAWKEYDOWN;
-			KeyEvent.windows_key_code = DKSDLWindow::sdlKeyCode[event->key.keysym.sym];
+			KeyEvent.windows_key_code = DKSdlWindow::sdlKeyCode[event->key.keysym.sym];
 #if MAC
-			KeyEvent.native_key_code = DKSDLWindow::sdlMacCode[event->key.keysym.sym];
+			KeyEvent.native_key_code = DKSdlWindow::sdlMacCode[event->key.keysym.sym];
 #endif
-			//KeyEvent.unmodified_character = DKSDLWindow::sdlKeyCode[event->key.keysym.sym];
+			//KeyEvent.unmodified_character = DKSdlWindow::sdlKeyCode[event->key.keysym.sym];
        		KeyEvent.modifiers = _keyAdapter.getCefModifiers(event->key.keysym.mod);
 		
 			//DKINFO("RAWKEYDOWN: windows_key_code = "+toString(KeyEvent.windows_key_code)+"\n");
@@ -236,25 +236,25 @@ bool DKSDLCef::Handle(SDL_Event* event) {
       		
 			if(event->key.keysym.sym > 96 && event->key.keysym.sym < 123){ //letter
 				if(event->key.keysym.mod & KMOD_SHIFT && event->key.keysym.mod & KMOD_CAPS){ //both = lowercase
-					charKeyEvent.windows_key_code = DKSDLWindow::sdlCharCode[event->key.keysym.sym];
-					charKeyEvent.character = (char16)DKSDLWindow::sdlCharCode[event->key.keysym.sym];
+					charKeyEvent.windows_key_code = DKSdlWindow::sdlCharCode[event->key.keysym.sym];
+					charKeyEvent.character = (char16)DKSdlWindow::sdlCharCode[event->key.keysym.sym];
 				}
 				else if(event->key.keysym.mod & KMOD_SHIFT || event->key.keysym.mod & KMOD_CAPS){ //1 = uppercase
-					charKeyEvent.windows_key_code = DKSDLWindow::sdlShiftCharCode[event->key.keysym.sym];
-					charKeyEvent.character = (char16)DKSDLWindow::sdlShiftCharCode[event->key.keysym.sym];
+					charKeyEvent.windows_key_code = DKSdlWindow::sdlShiftCharCode[event->key.keysym.sym];
+					charKeyEvent.character = (char16)DKSdlWindow::sdlShiftCharCode[event->key.keysym.sym];
 				}
 				else{
-					charKeyEvent.windows_key_code = DKSDLWindow::sdlCharCode[event->key.keysym.sym]; // lowercase
-					charKeyEvent.character = (char16)DKSDLWindow::sdlCharCode[event->key.keysym.sym];
+					charKeyEvent.windows_key_code = DKSdlWindow::sdlCharCode[event->key.keysym.sym]; // lowercase
+					charKeyEvent.character = (char16)DKSdlWindow::sdlCharCode[event->key.keysym.sym];
 				}
 			}
 			else if(event->key.keysym.mod & KMOD_SHIFT){ //other character keys
-				charKeyEvent.windows_key_code = DKSDLWindow::sdlShiftCharCode[event->key.keysym.sym]; //shifted symbol
-				charKeyEvent.character = (char16)DKSDLWindow::sdlShiftCharCode[event->key.keysym.sym]; //shifted symbol
+				charKeyEvent.windows_key_code = DKSdlWindow::sdlShiftCharCode[event->key.keysym.sym]; //shifted symbol
+				charKeyEvent.character = (char16)DKSdlWindow::sdlShiftCharCode[event->key.keysym.sym]; //shifted symbol
 			}
 			else{
-				charKeyEvent.windows_key_code = DKSDLWindow::sdlCharCode[event->key.keysym.sym]; //symbol
-				charKeyEvent.character = (char16)DKSDLWindow::sdlCharCode[event->key.keysym.sym]; //symbol
+				charKeyEvent.windows_key_code = DKSdlWindow::sdlCharCode[event->key.keysym.sym]; //symbol
+				charKeyEvent.character = (char16)DKSdlWindow::sdlCharCode[event->key.keysym.sym]; //symbol
 			}
 
 			//DKINFO("CHAR: windows_key_code = "+toString(charKeyEvent.windows_key_code)+"\n");
@@ -268,11 +268,11 @@ bool DKSDLCef::Handle(SDL_Event* event) {
 				return false;
 			CefKeyEvent KeyEvent;
        		KeyEvent.type = KEYEVENT_KEYUP;
-			KeyEvent.windows_key_code = DKSDLWindow::sdlKeyCode[event->key.keysym.sym];
+			KeyEvent.windows_key_code = DKSdlWindow::sdlKeyCode[event->key.keysym.sym];
 #			ifdef MAC
-				KeyEvent.native_key_code = DKSDLWindow::sdlMacCode[event->key.keysym.sym];
+				KeyEvent.native_key_code = DKSdlWindow::sdlMacCode[event->key.keysym.sym];
 #			endif
-			//KeyEvent.unmodified_character = DKSDLWindow::sdlKeyCode[event->key.keysym.sym];
+			//KeyEvent.unmodified_character = DKSdlWindow::sdlKeyCode[event->key.keysym.sym];
        		KeyEvent.modifiers = _keyAdapter.getCefModifiers(event->key.keysym.mod);
 
 			//DKINFO("KEYUP: windows_key_code = "+toString(KeyEvent.windows_key_code)+"\n");

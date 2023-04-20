@@ -28,7 +28,7 @@
 #define DKVncClient_H
 
 #include "DK/DK.h"
-#include "DKSDLWindow/DKSDLWindow.h"
+#include "DKSdlWindow/DKSdlWindow.h"
 #if LINUX
 typedef unsigned long z_size_t;
 #endif
@@ -66,7 +66,7 @@ public:
 	static char* password(rfbClient *cl);
 	static bool ValidateAspectRatio(rfbClient *cl);
 
-	static DKSDLWindow* dkSdlWindow;
+	static DKSdlWindow* dkSdlWindow;
 	static SDL_Texture *tex;
 	static rfbClient* cl;
 	static int enableResizable, viewOnly, buttonMask;

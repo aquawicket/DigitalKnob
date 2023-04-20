@@ -26,15 +26,15 @@
 
 #if ANDROID
 #pragma once
-#ifndef DKSDLWindowAndroid_H
-#define DKSDLWindowAndroid_H
+#ifndef DKSdlWindowAndroid_H
+#define DKSdlWindowAndroid_H
 
 WARNING_DISABLE
 #include <jni.h>
 WARNING_ENABLE
 
 
-class DKSDLWindowAndroid : public DKObjectT<DKSDLWindowAndroid>
+class DKSdlWindowAndroid : public DKObjectT<DKSdlWindowAndroid>
 {
 public:
 	bool Init();
@@ -66,6 +66,6 @@ public:
 	bool onTouch(const void* input, void* output);
 };
 
-REGISTER_OBJECT(DKSDLWindowAndroid, true)
-#endif //DKSDLWindowAndroid_H
+REGISTER_OBJECT(DKSdlWindowAndroid, true)
+#endif //DKSdlWindowAndroid_H
 #endif //ANDROID

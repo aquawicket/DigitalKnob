@@ -33,7 +33,7 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 #include "DK/DK.h"
-#include "DKSDLWindow/DKSDLWindow.h"
+#include "DKSdlWindow/DKSdlWindow.h"
 #include "DKRml/DKRml.h"
 #include "DKSDLMetalRml/DKSDLMetalRmlSystem.h"
 #include "DKSDLMetalRml/DKSDLMetalRmlRenderer.h"
@@ -53,7 +53,7 @@ public:
 	void Update();
 	//void ProcessEvent(Rml::Core::Event& event);
 	
-	DKSDLWindow* dkSdlWindow;
+	DKSdlWindow* dkSdlWindow;
 	DKRml* dkRml;
 #ifdef RML_SHELL_RENDER
 	ShellRenderInterfaceOpenGL* Renderer;
