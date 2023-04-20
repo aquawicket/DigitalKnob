@@ -90,7 +90,7 @@ int DKDomScreen::colorDepth(duk_context* ctx){
 
 int DKDomScreen::height(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	int height;
+	unsigned int height;
 	if (!DKUtil::GetScreenHeight(height))
 		return DKERROR("DKUtil::GetScreenHeight() failed! \n");
 	duk_push_number(ctx, height);
@@ -123,7 +123,7 @@ int DKDomScreen::top(duk_context* ctx){
 
 int DKDomScreen::width(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
-	int width;
+	unsigned int width;
 	if(!DKUtil::GetScreenWidth(width))
 		return DKERROR("DKUtil::GetScreenWidth() failed! \n");
 	duk_push_number(ctx, width);

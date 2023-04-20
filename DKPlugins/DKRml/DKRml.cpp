@@ -72,11 +72,11 @@ bool DKRml::Init(){
 		if(!Rml::Initialise())
 			return DKERROR("Rml::Initialise(): failed \n");
 		int w;
-		if(!DKWindow::GetWidth(w))
-			return DKERROR("DKWindow::GetWidth() failed! \n");
+		//if(!DKWindow::GetWidth(w))
+		//	return DKERROR("DKWindow::GetWidth() failed! \n");
 		int h;
-		if(!DKWindow::GetHeight(h))
-			return DKERROR("DKWindow::GetHeight() failed! \n");
+		//if(!DKWindow::GetHeight(h))
+		//	return DKERROR("DKWindow::GetHeight() failed! \n");
 		context = Rml::CreateContext("default", Rml::Vector2i(w, h));
 	}
 	else if(DKClass::DKAvailable("DKOSGRml")){
