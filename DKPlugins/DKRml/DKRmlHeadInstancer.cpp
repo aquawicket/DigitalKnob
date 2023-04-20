@@ -146,8 +146,8 @@ bool HeadInstancer::ElementEnd(Rml::XMLParser* parser, const Rml::String& name){
 	return true;
 }
 
-bool HeadInstancer::ElementData(Rml::XMLParser* parser, const Rml::String& data, Rml::XMLDataType RMLUI_UNUSED_PARAMETER(type)){
-	RMLUI_UNUSED(type);
+bool HeadInstancer::ElementData(Rml::XMLParser* parser, const Rml::String& data, Rml::XMLDataType type){
+	//RMLUI_UNUSED(type);
 	const Rml::String& tag = parser->GetParseFrame()->tag;
 
 	// Store the title
