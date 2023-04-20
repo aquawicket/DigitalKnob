@@ -17,7 +17,7 @@ const sdl_x_offset = 0
 const sdl_y_offest = 30
 const sdl_width_offset = 1
 const sdl_height_offset = -70//-30
-CPP_DK_Create("DKSDLWindow")
+CPP_DK_Create("DKSdlWindow")
 CPP_DK_Create("DKRml")
 window.resizeTo(sdl_width+sdl_width_offset, sdl_height+sdl_height_offset)
 window.moveTo(sdl_x+sdl_x_offset, sdl_y+sdl_y_offest)

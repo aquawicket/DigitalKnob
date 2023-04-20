@@ -76,10 +76,10 @@ if(ANDROID)
 	dk_disable(DKOSGWidget)			# requires openscenegraph 
 	dk_disable(DKOSGWindow)			# requires openscenegraph 
 	dk_disable(DKOcr)				# requires tesseract
-	dk_disable(DKSDLCef)			# requires cef_binary
-	dk_disable(DKSDLOsg)			# requires openscenegraph
-	dk_disable(DKSDLWaave)			# requires waave
-	dk_disable(DKSDLWav)			# build errors
+	dk_disable(DKSdlCef)			# requires cef_binary
+	dk_disable(DKSdlOsg)			# requires openscenegraph
+	dk_disable(DKSdlWaave)			# requires waave
+	dk_disable(DKSdlWav)			# build errors
 	dk_disable(DKSFMLRml)			# requires sfml
 	dk_disable(DKSFMLWindow)		# requires sfml
 	dk_disable(DKScreenRecorder)	# requires opencv
@@ -137,7 +137,7 @@ if(ANDROID)
 	dk_disable(rmlui-d3d11)
 	dk_disable(rtaudio)				# build errors
 	dk_disable(rtmidi)				# ALSA API requested but no ALSA dev libraries found
-	dk_disable(sdl-gpu)				# The target "SDL_gpu" does not exist in the project
+	dk_disable(sdl-gpu)				# The target "Sdl_gpu" does not exist in the project
 	dk_disable(sdl_rtf)
 	dk_disable(sfml)				# Unsupported compiler
 	dk_disable(smpeg2)				# error : ISO C++17 does not allow 'register' storage class specifier
@@ -188,11 +188,11 @@ if(EMSCRIPTEN)
 	dk_disable(DKOSGWindow)
 	dk_disable(DKOcr)
 	dk_disable(DKRestart)
-	dk_disable(DKSDLAudio)
-	dk_disable(DKSDLCef)
-	dk_disable(DKSDLMetalWindow)
-	dk_disable(DKSDLWaave)			# requires waave
-	dk_disable(DKSDLWav)
+	dk_disable(DKSdlAudio)
+	dk_disable(DKSdlCef)
+	dk_disable(DKSdlMetalWindow)
+	dk_disable(DKSdlWaave)			# requires waave
+	dk_disable(DKSdlWav)
 	dk_disable(DKSFMLRml)
 	dk_disable(DKSFMLWindow)
 	dk_disable(DKScreenRecorder)
@@ -302,10 +302,10 @@ if(IOS OR IOSSIM)
 	dk_disable(DKOSGWidget)			# requires openscenegraph 
 	dk_disable(DKOSGWindow)			# requires openscenegraph 
 	dk_disable(DKOcr)				# requires tesseract
-	dk_disable(DKSDLCef)			# requires cef_binary
-	dk_disable(DKSDLOsg)			# requires openscenegraph 
-	dk_disable(DKSDLWaave)			# requires waave
-	dk_disable(DKSDLWav)			# build errors
+	dk_disable(DKSdlCef)			# requires cef_binary
+	dk_disable(DKSdlOsg)			# requires openscenegraph 
+	dk_disable(DKSdlWaave)			# requires waave
+	dk_disable(DKSdlWav)			# build errors
 	dk_disable(DKSFMLRml)			# requires sfml
 	dk_disable(DKSFMLWindow)		# requires sfml
 	dk_disable(DKScreenRecorder)	# requires opencv
@@ -390,8 +390,8 @@ if(LINUX)
 	dk_disable(DKOSGVideo)			# TODO
 	dk_disable(DKOSGWidget)			# build errors
 	dk_disable(DKOcr)				# requires tesseract
-	dk_disable(DKSDLWaave)			# requires waave
-	dk_disable(DKSDLWav)			# build errors
+	dk_disable(DKSdlWaave)			# requires waave
+	dk_disable(DKSdlWav)			# build errors
 	dk_disable(DKSFMLRml)			# INCOMPLETE
 	dk_disable(DKScreenRecorder)
 	dk_disable(DKThread)			# error: need to implement boost::placeholders
@@ -441,8 +441,8 @@ if(MAC)
 	dk_disable(DKOSGVideo)			# TODO
 	dk_disable(DKOSGWidget)			# build errors
 	dk_disable(DKOcr)				# requires tesseract
-	dk_disable(DKSDLWaave)			# requires waave
-	dk_disable(DKSDLWav)			# build errors
+	dk_disable(DKSdlWaave)			# requires waave
+	dk_disable(DKSdlWav)			# build errors
 	dk_disable(DKSFMLRml)			# INCOMPLETE
 	dk_disable(DKScreenRecorder)
 	dk_disable(DKThread)			# Error: 'boost/thread/xtime.hpp:24 expected identifier TIME_UTC_=1
@@ -494,8 +494,8 @@ if(RASPBERRY)
 	dk_disable(DKOSGVideo)			# TODO
 	dk_disable(DKOSGWidget)			# build errors
 	dk_disable(DKOcr)				# requires tesseract
-	dk_disable(DKSDLWaave)			# requires waave
-	dk_disable(DKSDLWav)			# build errors
+	dk_disable(DKSdlWaave)			# requires waave
+	dk_disable(DKSdlWav)			# build errors
 	dk_disable(DKSFMLRml)			# INCOMPLETE
 	dk_disable(DKScreenRecorder)	# requires opencv
 	dk_disable(DKThread)			# requires threadpool
@@ -579,10 +579,10 @@ if(WIN)
 	dk_disable(DKOSGWidget)			# build errors
 	dk_disable(DKOSGWindow)			# requires openscenegraph
 	dk_disable(DKScreenRecorder)    # requires opencv
-	dk_disable(DKSDLOsg)			# requires openscenegraph
-	dk_disable(DKSDLVideo)			# error: 'av_mallocz_array': identifier not found
-	dk_disable(DKSDLWaave)			# requires waave
-	dk_disable(DKSDLWav)			# build errors
+	dk_disable(DKSdlOsg)			# requires openscenegraph
+	dk_disable(DKSdlVideo)			# error: 'av_mallocz_array': identifier not found
+	dk_disable(DKSdlWaave)			# requires waave
+	dk_disable(DKSdlWav)			# build errors
 	dk_disable(DKSFMLRml)			# INCOMPLETE
 	dk_disable(DKThread)			# build errors
 	dk_disable(DKTorrent)			# requires libtorrent

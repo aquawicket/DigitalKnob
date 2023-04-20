@@ -1,11 +1,11 @@
 //CPP_DK_Create("DKDebug")
-CPP_DK_Create("DKSDLWindow")
+CPP_DK_Create("DKSdlWindow")
 CPP_DK_Create("DKRml")
 
 const url = CPP_DKAssets_LocalAssets()+"DKWebTest/index.html"
 location.href = url
 
-//// Resize SDLRml window
+//// Resize DKSdlWindow
 /*
 const sdl_x = window.screen.width / 2
 const sdl_y = 0

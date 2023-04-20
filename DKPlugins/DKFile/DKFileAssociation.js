@@ -142,8 +142,8 @@ DKFileAssociation.prototype.openaudio = function DKFileAssociation_openaudio(pat
     });
     //dk.create("DKOSGAudio,"+file+",DKOSGWindow,"+path);
     //DKOSGAudio_Play("DKOSGAudio,"+file);
-    //dk.create("DKSDLAudio,"+file+",DKSDLWindow,"+path);
-    //DKSDLAudio_Play("DKSDLAudio,"+file);
+    //dk.create("DKSdlAudio,"+file+",DKSdlWindow,"+path);
+    //DKSdlAudio_Play("DKSdlAudio,"+file);
 }
 
 DKFileAssociation.prototype.openvideo = function DKFileAssociation_openvideo(path) {

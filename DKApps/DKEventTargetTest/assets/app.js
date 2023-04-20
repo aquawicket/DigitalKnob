@@ -20,7 +20,7 @@ CPP_DK_Create("DKWindowJS");
 
 // DigitalKnob
 CPP_DK_Create("DKConsoleWindowJS");
-//CPP_DK_Create("DKSDLWindowJS");
+//CPP_DK_Create("DKSdlWindowJS");
 
 CPP_DK_Create("Test.js");
 //CPP_DK_Create("SDLWindowTest.js");

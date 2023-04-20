@@ -1,1 +1,1 @@
-CPP_DK_Create("DKSDLVideo")
+CPP_DK_Create("DKSdlVideo")

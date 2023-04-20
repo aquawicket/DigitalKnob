@@ -19,7 +19,7 @@ function init_onevent(event) {
 
     if (event.type === "resize") {
         //NOTE: this is for SDL, OSG, ROCKET or any other created windows.
-        CPP_DK_CallFunc("DKSDLCef::OnResize", "SdlWindow,0,0," + String(CPP_DKWindow_GetWidth()) + "," + String(CPP_DKWindow_GetHeight()));
+        CPP_DK_CallFunc("DKSdlCef::OnResize", "SdlWindow,0,0," + String(CPP_DKWindow_GetWidth()) + "," + String(CPP_DKWindow_GetHeight()));
     }
     if (event.type === "keydown" && event.code === "Back") {
         //NOTE: this is the back button on Android
@@ -30,7 +30,7 @@ function init_onevent(event) {
 if(CPP_DK_GetJSEngine() === "Duktape") {
     //C++: Create a window LoadPage() can support
     if (USE_RML && USE_CEF) {
-        console.log("Creating SDL -> Rml -> Cef -> GUI\n");
+        console.log("Creating Sdl -> Rml -> Cef -> GUI\n");
         CPP_DK_Create("DKWindow");
         CPP_DKWindow_Create();
         CPP_DK_Create("DKRocket");
@@ -47,13 +47,13 @@ if(CPP_DK_GetJSEngine() === "Duktape") {
         iframe.src = DKApp_url;
         CPP_DKCef_SetFocus(CPP_DKCef_GetCurrentBrowser());
     } else if (USE_RML) {
-        console.log("Creating SDL -> Rml -> GUI\n");
+        console.log("Creating Sdl -> Rml -> GUI\n");
         CPP_DK_Create("DKWindow");
         CPP_DKWindow_Create();
         CPP_DK_Create("DKRml");
         CPP_DKRml_LoadUrl("index.html");
     } else if (USE_SDL && USE_CEF) {
-        console.log("Creating SDL -> CEF -> GUI\n");
+        console.log("Creating Sdl -> CEF -> GUI\n");
         CPP_DK_Create("DKWindow");
         CPP_DKWindow_Create();
         var width = CPP_DKWindow_GetWidth();
@@ -62,7 +62,7 @@ if(CPP_DK_GetJSEngine() === "Duktape") {
         CPP_DKCef_NewBrowser("SdlWindow", 0, 0, width, height, DKApp_url);
         CPP_DKCef_SetFocus(0);
         window.addEventListener("resize", init_onevent);
-        DK_CallFunc("DKSDLCef::OnResize", "SdlWindow,0,0," + String(CPP_DKWindow_GetWidth()) + "," + String(CPP_DKWindow_GetHeight()));
+        DK_CallFunc("DKSdlCef::OnResize", "SdlWindow,0,0," + String(CPP_DKWindow_GetWidth()) + "," + String(CPP_DKWindow_GetHeight()));
     } else if (USE_CEF) {
         console.log("Creating CEF -> GUI\n");
         var assets = DKAssets_LocalAssets();

@@ -1,18 +1,18 @@
 
-var DKSDLWindow = function DKSDLWindow(address) {
-	console.log("DKSDLWindow("+address+")");
+var DKSdlWindow = function DKSdlWindow(address) {
+	console.log("DKSdlWindow("+address+")");
 
 	if(address)
 		this.address = address;
 	if(!this.address)
-		this.address = CPP_DKSDLWindowDUK();
+		this.address = CPP_DKSdlWindowDUK();
 	
 	
 	//// toString ////
 	if(this.toString() === "[object Object]")
-		this.toString = function(){	return "[object DKSDLWindow]" }
+		this.toString = function(){	return "[object DKSdlWindow]" }
 	
 	
 	return Window.call(this, this.address)
 }
-DKSDLWindow.prototype = Window.prototype;
+DKSdlWindow.prototype = Window.prototype;

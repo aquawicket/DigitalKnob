@@ -35,12 +35,12 @@ if '%choice%'=='3' goto dkbuilder
 if '%choice%'=='4' goto dkbuildergui
 :: if '%choice%'=='5' goto 01_DKCore
 :: if '%choice%'=='6' goto 01_DKJavascript
-:: if '%choice%'=='7' goto 01_DKSDL
-:: if '%choice%'=='8' goto 01_DKSDLRml
+:: if '%choice%'=='7' goto 01_DKSdl
+:: if '%choice%'=='8' goto 01_DKSdlRml
 :: if '%choice%'=='9' goto 01_DKCef
-:: if '%choice%'=='10' goto 01_DKSDLCef
-:: if '%choice%'=='11' goto 01_DKSDLText
-:: if '%choice%'=='12' goto 01_DKSDLRmlCef
+:: if '%choice%'=='10' goto 01_DKSdlCef
+:: if '%choice%'=='11' goto 01_DKSdlText
+:: if '%choice%'=='12' goto 01_DKSdlRmlCef
 :: if '%choice%'=='13' goto 01_DKTestAll
 if '%choice%'=='5' goto clearscreen
 if '%choice%'=='6' goto end

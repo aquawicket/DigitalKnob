@@ -1,3 +1,3 @@
-//CPP_DK_Create("DKSDLWindow")
-//CPP_DK_Create("DKSDLText")
-CPP_DK_Create("DKSDLOsg")
+//CPP_DK_Create("DKSdlWindow")
+//CPP_DK_Create("DKSdlText")
+CPP_DK_Create("DKSdlOsg")

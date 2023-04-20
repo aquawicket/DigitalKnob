@@ -5,8 +5,8 @@ const url = CPP_DKAssets_LocalAssets()+"DKWebTest/index.html"
 
 ////// RmlUi
 //if(CPP_DK_GetBrowser() === "RML"){
-	CPP_DK_Create("DKSDLWindow")    //DO NOT Create DKSDLWindow directly
-	CPP_DK_Create("DKSDLText")
+	CPP_DK_Create("DKSdlWindow")    //DO NOT Create DKSdlWindow directly
+	CPP_DK_Create("DKSdlText")
 	CPP_DK_Create("DKRml")
 //}
 
@@ -39,7 +39,7 @@ window.addEventListener("keydown", function mykeydown(event){
 })
 
 window.addEventListener("resize", function onresize(event){
-	//CPP_DKCef_SetSize("CefSDL", 100, 100)
+	//CPP_DKCef_SetSize("SdlCef", 100, 100)
 	var width = CPP_DKWindow_GetWidth()
 	var height = CPP_DKWindow_GetHeight()
 	var iframe = document.getElementById("CefBrowserTab0")
