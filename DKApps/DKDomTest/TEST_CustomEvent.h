@@ -22,10 +22,6 @@ public:
 		myTargetA.dispatchEvent(customevent);
 		return true;
 	}
-	
-	bool End(){
-		return DKTODO();
-	}
 
 	////// CustomEvent //////
 	static void printCustomEventProperties(DKCustomEvent& customevent) {

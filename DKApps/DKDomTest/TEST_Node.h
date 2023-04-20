@@ -13,10 +13,6 @@ public:
 		DKINFO("////// TEST_Node.h ////// \n");
 		return DKTODO();
 	}
-	
-	bool End(){
-		return DKTODO();
-	}
 
 };
 REGISTER_OBJECT(TEST_Node, true);

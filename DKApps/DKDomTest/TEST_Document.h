@@ -228,10 +228,6 @@ public:
 		
 		return DKTODO();
 	}
-	
-	bool End(){
-		return DKTODO();
-	}
 
 };
 REGISTER_OBJECT(TEST_Document, true);

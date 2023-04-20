@@ -21,15 +21,9 @@ public:
 		// [EventTarget.addEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
 		// [EventTarget.removeEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener
 		// [EventTarget.dispatchEvent()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent
-	
-	
-		return DKTODO();
-	}
-	
-	bool End(){
-		return DKTODO();
-	}
 
+		return DKTODO();
+	}
 
 };
 REGISTER_OBJECT(TEST_EventTarget, true);

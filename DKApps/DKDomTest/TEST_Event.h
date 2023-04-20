@@ -43,10 +43,6 @@ public:
 		myTargetE.dispatchEvent(new DKEvent("eventE", ""));			// Event as new pointer, created within dispatchEvent function
 		return true;
 	}
-	
-	bool End(){
-		return DKTODO();
-	}
 
 	// https://dom.spec.whatwg.org
 	////// Event //////

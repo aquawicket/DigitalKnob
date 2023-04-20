@@ -44,10 +44,6 @@ public:
 		return true;
 	}
 	
-	bool End(){
-		return DKTODO();
-	}
-
 };
 REGISTER_OBJECT(TEST_Console, true);
 

@@ -28,14 +28,8 @@ public:
 		// [focusin] https://developer.mozilla.org/en-US/docs/Web/API/Element/focusin_event
 		// [focusout] https://developer.mozilla.org/en-US/docs/Web/API/Element/focusout_event
 	
-	
 		return DKTODO();
 	}
-	
-	bool End(){
-		return DKTODO();
-	}
-
 
 };
 REGISTER_OBJECT(TEST_FocusEvent, true);

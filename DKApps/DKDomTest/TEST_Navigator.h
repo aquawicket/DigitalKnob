@@ -13,10 +13,6 @@ public:
 		DKINFO("////// TEST_Navigator.h ////// \n");
 		return DKTODO();
 	}
-	
-	bool End(){
-		return DKTODO();
-	}
 
 };
 REGISTER_OBJECT(TEST_Navigator, true);

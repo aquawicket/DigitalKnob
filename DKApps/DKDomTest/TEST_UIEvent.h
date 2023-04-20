@@ -13,11 +13,6 @@ public:
 		DKINFO("////// TEST_UIEvent.h ////// \n");
 		return DKTODO();
 	}
-	
-	bool End(){
-		return DKTODO();
-	}
-
 
 };
 REGISTER_OBJECT(TEST_UIEvent, true);

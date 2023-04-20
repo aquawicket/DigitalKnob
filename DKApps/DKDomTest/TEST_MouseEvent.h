@@ -13,11 +13,6 @@ public:
 		DKINFO("////// TEST_MouseEvent.h ////// \n");
 		return DKTODO();
 	}
-	
-	bool End(){
-		return DKTODO();
-	}
-
 
 };
 REGISTER_OBJECT(TEST_MouseEvent, true);
