@@ -8,5 +8,5 @@ if(IOS)
 	dk_set(PLUGINS_FILE "${ios_sdl2main} ${PLUGINS_FILE}")
 endif()
 
-dk_generateCmake(DKSDLWindow)
-dk_assets(DKSDLWindow)
+dk_generateCmake(DKSdlWindow)
+dk_assets(DKSdlWindow)
