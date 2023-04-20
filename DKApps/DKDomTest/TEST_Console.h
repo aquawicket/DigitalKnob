@@ -17,7 +17,8 @@ public:
 		
 		////// Instance methods //////
 		// [console.assert()] https://developer.mozilla.org/en-US/docs/Web/API/console/assert
-		DKConsole::_assert(DKString("assert test \n"));
+		DKString assert_string = "assert test \n";
+		DKConsole::_assert(assert_string);
 		// [console.clear()] https://developer.mozilla.org/en-US/docs/Web/API/console/clear
 		// [console.count()] https://developer.mozilla.org/en-US/docs/Web/API/console/count
 		// [console.countReset()] https://developer.mozilla.org/en-US/docs/Web/API/console/countReset
