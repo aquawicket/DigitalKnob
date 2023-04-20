@@ -25,12 +25,12 @@
 */
 
 #include "DK/stdafx.h"
-#include "DKOSGAudio/DKOSGAudio.h"
-#include "DKOSGWindow/DKOSGWindow.h"
+#include "DKOsgAudio/DKOsgAudio.h"
+#include "DKOsgWindow/DKOsgWindow.h"
 #include "DKAssets/DKAssets.h"
 
 
-bool DKOSGAudio::Init(){
+bool DKOsgAudio::Init(){
 	if(instance_count == 1){ //only initiate on first instance
 		osgAudio::SoundManager::instance()->init(32); 
 		osgAudio::SoundManager::instance()->getEnvironment()->setGain(1.0); 
@@ -38,16 +38,16 @@ bool DKOSGAudio::Init(){
 		osgAudio::SoundManager::instance()->getEnvironment()->setDopplerFactor(1);
 	}
 	Create();
-	DKClass::RegisterFunc("DKOSGAudio::PlaySound", &DKOSGAudio::PlaySound, this);
-	DKClass::RegisterFunc("DKOSGAudio::OpenMusic", &DKOSGAudio::OpenMusic, this);
+	DKClass::RegisterFunc("DKOsgAudio::PlaySound", &DKOsgAudio::PlaySound, this);
+	DKClass::RegisterFunc("DKOsgAudio::OpenMusic", &DKOsgAudio::OpenMusic, this);
 	return true;
 }
 
-bool DKOSGAudio::End(){
+bool DKOsgAudio::End(){
 	musicSoundState->setPlay( false ); 
 	//sample = nullptr;
 	sample = NULL;
-	DKOSGWindow::Instance("DKOSGWindow")->root->removeChild(sound_node);
+	DKOsgWindow::Instance("DKOsgWindow")->root->removeChild(sound_node);
 	osgAudio::SoundManager::instance()->removeSoundState(musicSoundState);
 	//musicSoundState = nullptr;
 	musicSoundState = NULL;
@@ -62,7 +62,7 @@ bool DKOSGAudio::End(){
 	return true;
 }
 
-bool DKOSGAudio::Create(){
+bool DKOsgAudio::Create(){
 	/*
 	DKString path = data[3];
 	if(!DKAssets::VerifyPath(path))
@@ -73,7 +73,7 @@ bool DKOSGAudio::Create(){
 	osgAudio::SoundManager::instance()->addSoundState( musicSoundState );
 	sound_node = new osgAudio::SoundNode;
 	sound_node->setSoundState(musicSoundState); 
-	DKOSGWindow::Instance("DKOSGWindow")->root->addChild(sound_node);
+	DKOsgWindow::Instance("DKOsgWindow")->root->addChild(sound_node);
 	//sample = new osgAudio::Sample(path);
 	//musicSoundState->setSample( sample );
 	musicSoundState->setLooping( false ); 
@@ -84,7 +84,7 @@ bool DKOSGAudio::Create(){
 	return true;
 }
 
-void* DKOSGAudio::PlaySound(void* data){
+void* DKOsgAudio::PlaySound(void* data){
 	DKString path = *static_cast<DKString*>(data);
 	if(!DKAssets::VerifyPath(path))
 		return DKERROR("Could not find "+path+"\n");
@@ -93,7 +93,7 @@ void* DKOSGAudio::PlaySound(void* data){
 	musicSoundState->setPlay( true );
 }
 
-void* DKOSGAudio::OpenMusic(void* data){
+void* DKOsgAudio::OpenMusic(void* data){
 	//TODO - the sample sound be preloaded for music or somehting..   IDK...  read how SDL does it different
 	DKString path = *static_cast<DKString*>(data);
 	if(!DKAssets::VerifyPath(path)){

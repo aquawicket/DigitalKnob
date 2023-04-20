@@ -328,9 +328,9 @@ bool DKCef::Init(){
 			//NewBrowser(id, top, left, width, height, url);
 		}
 	}
-	else if(DKClass::DKValid("DKOSGWindow,DKOSGWindow0")){
-		if(DKClass::DKAvailable("DKOSGCef")){
-			DKClass::DKCreate("DKOSGCef");
+	else if(DKClass::DKValid("DKOsgWindow,DKOsgWindow0")){
+		if(DKClass::DKAvailable("DKOsgCef")){
+			DKClass::DKCreate("DKOsgCef");
 			//NewBrowser(id, top, left, width, height, url);
 		}
 	}

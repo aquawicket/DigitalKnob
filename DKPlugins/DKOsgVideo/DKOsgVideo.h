@@ -24,8 +24,8 @@
 * SOFTWARE.
 */
 #pragma once
-#ifndef DKOSGVideo_H
-#define DKOSGVideo_H
+#ifndef DKOsgVideo_H
+#define DKOsgVideo_H
 #include "DK/DK.h"
 
 WARNING_DISABLE
@@ -35,7 +35,7 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
-class DKOSGVideo : public DKObjectT<DKOSGVideo>
+class DKOsgVideo : public DKObjectT<DKOsgVideo>
 {
 public:
 	bool Init();
@@ -45,24 +45,24 @@ public:
 	void Play(const DKString& file);
 };
 
-REGISTER_OBJECT(DKOSGVideo, true)
+REGISTER_OBJECT(DKOsgVideo, true)
 
 #define DKVIDEO_LOAD_DLLS() \
     class DK_VIDEO_LOAD{ \
     public: \
         DK_VIDEO_LOAD() \
         { \
-            DKOSGVideo::loaddlls(); \
+            DKOsgVideo::loaddlls(); \
 		} \
     }; \
 static DK_VIDEO_LOAD global_DK_VIDEO_LOAD;
  
 //#ifdef USE_osgdb_ffmpeg
 #ifndef ANDROID
-	//#include "DKOSGVideo.h"
+	//#include "DKOsgVideo.h"
 	DKVIDEO_LOAD_DLLS()
 	USE_OSGPLUGIN(ffmpeg)
 #endif
 //#endif
 
-#endif //DKOSGVideo_H
+#endif //DKOsgVideo_H

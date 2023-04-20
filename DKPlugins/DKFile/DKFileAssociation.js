@@ -128,8 +128,8 @@ DKFileAssociation.prototype.openimage = function DKFileAssociation_openimage(pat
 }
 
 DKFileAssociation.prototype.openmodel = function DKFileAssociation_openmodel(path) {
-    dk.create("DKOSGManipulator,,DKOSGWindow", function dk_create_callback() {});
-    dk.create("DKOSGModel,,DKWindow," + path, function dk_create_callback() {});
+    dk.create("DKOsgManipulator,,DKOsgWindow", function dk_create_callback() {});
+    dk.create("DKOsgModel,,DKWindow," + path, function dk_create_callback() {});
 }
 
 DKFileAssociation.prototype.openaudio = function DKFileAssociation_openaudio(path) {
@@ -140,8 +140,8 @@ DKFileAssociation.prototype.openaudio = function DKFileAssociation_openaudio(pat
     dk.create("DKAudio", function dk_create_callback() {
         dk.audio.playSound(path);
     });
-    //dk.create("DKOSGAudio,"+file+",DKOSGWindow,"+path);
-    //DKOSGAudio_Play("DKOSGAudio,"+file);
+    //dk.create("DKOsgAudio,"+file+",DKOsgWindow,"+path);
+    //DKOsgAudio_Play("DKOsgAudio,"+file);
     //dk.create("DKSdlAudio,"+file+",DKSdlWindow,"+path);
     //DKSdlAudio_Play("DKSdlAudio,"+file);
 }

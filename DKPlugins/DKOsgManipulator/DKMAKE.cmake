@@ -1,4 +1,4 @@
-dk_depend(DKOSGWindow)
+dk_depend(DKOsgWindow)
 #dk_depend(openscenegraph osgManipulator)
 
-dk_generateCmake(DKOSGManipulator)
+dk_generateCmake(DKOsgManipulator)

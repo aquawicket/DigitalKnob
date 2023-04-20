@@ -24,8 +24,8 @@
 * SOFTWARE.
 */
 #include "DK/stdafx.h"
-#include "DKOSGTerrain/DKOSGTerrain.h"
-#include "DKOSGWindow/DKOSGWindow.h"
+#include "DKOsgTerrain/DKOsgTerrain.h"
+#include "DKOsgWindow/DKOsgWindow.h"
 
 WARNING_DISABLE
 #include <osg/ShapeDrawable>
@@ -34,20 +34,20 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
-bool DKOSGTerrain::Init(){
+bool DKOsgTerrain::Init(){
 	osg::Vec3 center(0.0f,0.0f,0.0f);
 	float radius = 100.0f;
     terrain = createBase(center-osg::Vec3(0.0f,0.0f,radius*0.1),radius);
-	DKOSGWindow::Instance("DKOSGWindow")->world->addChild(terrain);
+	DKOsgWindow::Instance("DKOsgWindow")->world->addChild(terrain);
 	return true;
 }
 
-bool DKOSGTerrain::End(){
-	DKOSGWindow::Instance("DKOSGWindow")->world->removeChild(terrain);
+bool DKOsgTerrain::End(){
+	DKOsgWindow::Instance("DKOsgWindow")->world->removeChild(terrain);
 	return true;
 }
 
-osg::Node* DKOSGTerrain::createBase(const osg::Vec3& center,float radius){
+osg::Node* DKOsgTerrain::createBase(const osg::Vec3& center,float radius){
     osg::Geode* geode = new osg::Geode;
     
     // set up the texture of the base.

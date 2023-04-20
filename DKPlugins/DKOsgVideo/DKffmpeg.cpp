@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 #include "DK/stdafx.h"
-#include "DKOSGVideo/DKffmpeg.h"
+#include "DKOsgVideo/DKffmpeg.h"
 
 
 void MovieEventHandler::set(osg::Node* node){

@@ -24,8 +24,8 @@
 * SOFTWARE.
 */
 #pragma once
-#ifndef DKOSGCefKeyboard_H
-#define DKOSGCefKeyboard_H
+#ifndef DKOsgCefKeyboard_H
+#define DKOsgCefKeyboard_H
 #include "DK/DK.h"
 
 WARNING_DISABLE
@@ -33,15 +33,15 @@ WARNING_DISABLE
 //WARING_ENABLE
 
 
-class DKOSGCefKeyboard
+class DKOsgCefKeyboard
 {
 public:
 
-	DKOSGCefKeyboard(){
+	DKOsgCefKeyboard(){
 		DKDEBUGFUNC();
 	};
     unsigned int getCefModifiers(int modKeyMask);
 };
 
 
-#endif //DKOSGCefKeyboard_H
+#endif //DKOsgCefKeyboard_H

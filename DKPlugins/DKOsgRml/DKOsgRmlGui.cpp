@@ -24,9 +24,9 @@
 * SOFTWARE.
 */
 #include "DK/stdafx.h"
-#include "DKOSGRml/DKOSGRmlGui.h"
-#include "DKOSGViewer/DKOSGViewer.h"
-#include "DKOSGWindow/DKOSGWindow.h"
+#include "DKOsgRml/DKOsgRmlGui.h"
+#include "DKOsgViewer/DKOsgViewer.h"
+#include "DKOsgWindow/DKOsgWindow.h"
 #include "DKRml/DKRml.h"
 
 WARNING_DISABLE
@@ -86,7 +86,7 @@ DKRmlGuiNode::DKRmlGuiNode(const std::string& contextname, bool debug)
     , mGUIEventHandler(new GUIEventHandler(this))
 {
 	DK_UNUSED(debug);
-	_renderer = dynamic_cast<DKOSGRmlRender*>(Rml::GetRenderInterface());
+	_renderer = dynamic_cast<DKOsgRmlRender*>(Rml::GetRenderInterface());
     if(_renderer == NULL)
 		DKERROR("GuiNode::GuiNode() _renderer invalid! \n");
 
@@ -101,8 +101,8 @@ DKRmlGuiNode::DKRmlGuiNode(const std::string& contextname, bool debug)
     //setNumChildrenRequiringEventTraversal(getNumChildrenRequiringEventTraversal() + 1);
 
     // create libRml context for this gui
-	unsigned int width = DKOSGWindow::Get("DKOSGWindow0")->width;
-	unsigned int height = DKOSGWindow::Get("DKOSGWindow0")->height;
+	unsigned int width = DKOsgWindow::Get("DKOsgWindow0")->width;
+	unsigned int height = DKOsgWindow::Get("DKOsgWindow0")->height;
 	//osg::GraphicsContext::WindowingSystemInterface* wsi = osg::GraphicsContext::getWindowingSystemInterface();
     //if(wsi){ wsi->getScreenResolution(osg::GraphicsContext::ScreenIdentifier(0), width, height); }
 

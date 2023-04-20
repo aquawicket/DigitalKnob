@@ -24,8 +24,8 @@
 * SOFTWARE.
 */
 #pragma once
-#ifndef DKOSGTerrain_H
-#define DKOSGTerrain_H
+#ifndef DKOsgTerrain_H
+#define DKOsgTerrain_H
 #include "DK/DK.h"
 
 WARNING_DISABLE
@@ -33,7 +33,7 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
-class DKOSGTerrain : public DKObjectT<DKOSGTerrain>  
+class DKOsgTerrain : public DKObjectT<DKOsgTerrain>  
 {
 public:
 	bool Init();
@@ -44,5 +44,5 @@ private:
 	osg::ref_ptr<osg::Node> terrain;
 };
 
-REGISTER_OBJECT(DKOSGTerrain, true);
-#endif //DKOSGTerrain_H
+REGISTER_OBJECT(DKOsgTerrain, true);
+#endif //DKOsgTerrain_H

@@ -60,7 +60,7 @@ bool DKTray::Init(){
 		return DKERROR("TrayIcon invalid\n");
 
 	setCallback(&OnTrayNotification);
-	//TrayIcon.SetTargetWnd(DKOSGWindow::Instance("DKOSGWindow")->hwnd); //This actually breaks it
+	//TrayIcon.SetTargetWnd(DKOsgWindow::Instance("DKOsgWindow")->hwnd); //This actually breaks it
 
 	DKString trayed;
 	DKFile::GetSetting(DKFile::local_assets+"settings.txt", "[TRAYED]", trayed);
@@ -68,8 +68,8 @@ bool DKTray::Init(){
 		//CSystemTray::MinimiseToTray(hwnd);
 		if(DKClass::HasFunc("DKSdlWindow::Hide"))
 			DKClass::CallFunc("DKSdlWindow::Hide", NULL, NULL);
-		else if(DKClass::HasFunc("DKOSGWindow::Hide"))
-			DKClass::CallFunc("DKOSGWindow::Hide", NULL, NULL);
+		else if(DKClass::HasFunc("DKOsgWindow::Hide"))
+			DKClass::CallFunc("DKOsgWindow::Hide", NULL, NULL);
 		else
 			DKERROR("DKWindow::Hide() - No function available\n");
 	}

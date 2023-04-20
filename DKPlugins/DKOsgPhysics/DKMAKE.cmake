@@ -6,7 +6,7 @@
 #endif()
 
 dk_depend(osgbullet)
-dk_depend(DKOSGModel)
+dk_depend(DKOsgModel)
 ###osgWorks
 dk_depend(osgworks osgwControls)
 dk_depend(osgworks osgwMx)
@@ -35,4 +35,4 @@ dk_depend(osgbullet osgbInteraction)
 dk_depend(osgbullet osgdb_osgbdynamics)
 dk_depend(osgbullet osgdb_sgb)
 
-dk_generateCmake(DKOSGPhysics)
+dk_generateCmake(DKOsgPhysics)

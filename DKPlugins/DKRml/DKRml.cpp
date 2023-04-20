@@ -66,7 +66,7 @@ bool DKRml::Init(){
 		Rml::SetFileInterface(dkRmlFile);
 	}
 
-	//Create DKSdlRml or DKOSGRml
+	//Create DKSdlRml or DKOsgRml
 	if(DKClass::DKAvailable("DKSdlRml")){
 		DKClass::DKCreate("DKSdlRml");
 		if(!Rml::Initialise())
@@ -79,8 +79,8 @@ bool DKRml::Init(){
 		//	return DKERROR("DKWindow::GetHeight() failed! \n");
 		context = Rml::CreateContext("default", Rml::Vector2i(w, h));
 	}
-	else if(DKClass::DKAvailable("DKOSGRml")){
-		DKClass::DKCreate("DKOSGRml");
+	else if(DKClass::DKAvailable("DKOsgRml")){
+		DKClass::DKCreate("DKOsgRml");
 	}
 	else{
 		return DKERROR("No registered window found \n");

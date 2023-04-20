@@ -24,10 +24,10 @@
 * SOFTWARE.
 */
 #pragma once
-#ifndef DKOSGWidget_H
-#define DKOSGWidget_H
+#ifndef DKOsgWidget_H
+#define DKOsgWidget_H
 
-#include "DKOSGWindow/DKOSGWindow.h"
+#include "DKOsgWindow/DKOsgWindow.h"
 
 WARNING_DISABLE
 #include <osgWidget/Window>
@@ -36,16 +36,16 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
-class DKOSGWidget : public osg::Referenced
+class DKOsgWidget : public osg::Referenced
 {
 public: 
-	DKOSGWidget(); 
-	~DKOSGWidget();
-	bool SetupWidget(DKOSGWindow* window);
+	DKOsgWidget(); 
+	~DKOsgWidget();
+	bool SetupWidget(DKOsgWindow* window);
 
 	osg::ref_ptr<osgWidget::WindowManager> wm;
 	osg::ref_ptr<osg::Camera> wmcamera;
 	osg::ref_ptr<osgWidget::Window> wmcanvas;
 };
 
-#endif //DKOSGWidget_H
+#endif //DKOsgWidget_H

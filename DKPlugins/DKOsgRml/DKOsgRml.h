@@ -24,17 +24,17 @@
 * SOFTWARE.
 */
 #pragma once
-#ifndef DKOSGRml_H
-#define DKOSGRml_H
-#include "DKOSGViewer/DKOSGViewer.h"
-#include "DKOSGWindow/DKOSGWindow.h"
+#ifndef DKOsgRml_H
+#define DKOsgRml_H
+#include "DKOsgViewer/DKOsgViewer.h"
+#include "DKOsgWindow/DKOsgWindow.h"
 #include "DKRml/DKRml.h"
-#include "DKOSGRml/DKOSGRmlGui.h"
-#include "DKOSGRml/DKOSGRmlSystem.h"
+#include "DKOsgRml/DKOsgRmlGui.h"
+#include "DKOsgRml/DKOsgRmlSystem.h"
 #include "DK/DKEvents.h"
 
 
-class DKOSGRml : public DKObjectT<DKOSGRml>
+class DKOsgRml : public DKObjectT<DKOsgRml>
 {
 public:
 	bool Init();
@@ -43,14 +43,14 @@ public:
 	bool SetupRml();
 	void OnResize(DKEvents* event);
 
-	DKOSGViewer* dkOsgViewer;
-	DKOSGWindow* dkOsgWindow;
+	DKOsgViewer* dkOsgViewer;
+	DKOsgWindow* dkOsgWindow;
 	DKRml* dkRml;
 	DKRmlGuiNode* guinode;
-	static DKOSGRmlRender* guirender;
-	static DKOSGRmlSystem* guisystem;
+	static DKOsgRmlRender* guirender;
+	static DKOsgRmlSystem* guisystem;
 	osg::ref_ptr<osg::Camera> guicam;
 };
 
-REGISTER_OBJECT(DKOSGRml, true)
-#endif //DKOSGRml_H
+REGISTER_OBJECT(DKOsgRml, true)
+#endif //DKOsgRml_H

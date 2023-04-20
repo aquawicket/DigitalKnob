@@ -60,21 +60,21 @@ if(ANDROID)
 	dk_disable(DKMidi)				# requires rtmidi
 	dk_disable(DKMySql)				# requires curl
 	dk_disable(DKOFWindow)			# requires openframeworks
-	dk_disable(DKOSGAudio)			# requires openscenegraph
-	dk_disable(DKOSGCef)			# requires openscenegraph
-	dk_disable(DKOSGLights)			# requires openscenegraph
-	dk_disable(DKOSGManipulator)	# requires openscenegraph
-	dk_disable(DKOSGModel)			# requires openscenegraph
-	dk_disable(DKOSGNotify)			# requires openscenegraph
-	dk_disable(DKOSGPhysics)		# requires openscenegraph
-	dk_disable(DKOSGPicker)			# requires openscenegraph
-	dk_disable(DKOSGRml)			# requires openscenegraph
-	dk_disable(DKOSGStats)			# requires openscenegraph
-	dk_disable(DKOSGTerrain)		# requires openscenegraph
-	dk_disable(DKOSGVideo)			# requires openscenegraph
-	dk_disable(DKOSGViewer)			# requires openscenegraph 
-	dk_disable(DKOSGWidget)			# requires openscenegraph 
-	dk_disable(DKOSGWindow)			# requires openscenegraph 
+	dk_disable(DKOsgAudio)			# requires openscenegraph
+	dk_disable(DKOsgCef)			# requires openscenegraph
+	dk_disable(DKOsgLights)			# requires openscenegraph
+	dk_disable(DKOsgManipulator)	# requires openscenegraph
+	dk_disable(DKOsgModel)			# requires openscenegraph
+	dk_disable(DKOsgNotify)			# requires openscenegraph
+	dk_disable(DKOsgPhysics)		# requires openscenegraph
+	dk_disable(DKOsgPicker)			# requires openscenegraph
+	dk_disable(DKOsgRml)			# requires openscenegraph
+	dk_disable(DKOsgStats)			# requires openscenegraph
+	dk_disable(DKOsgTerrain)		# requires openscenegraph
+	dk_disable(DKOsgVideo)			# requires openscenegraph
+	dk_disable(DKOsgViewer)			# requires openscenegraph 
+	dk_disable(DKOsgWidget)			# requires openscenegraph 
+	dk_disable(DKOsgWindow)			# requires openscenegraph 
 	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKSdlCef)			# requires cef_binary
 	dk_disable(DKSdlOsg)			# requires openscenegraph
@@ -171,21 +171,21 @@ if(EMSCRIPTEN)
 	dk_disable(DKMidi)
 	dk_disable(DKMySql)
 	dk_disable(DKOFWindow)
-	dk_disable(DKOSGAudio)
-	dk_disable(DKOSGCef)
-	dk_disable(DKOSGLights)
-	dk_disable(DKOSGManipulator)
-	dk_disable(DKOSGModel)
-	dk_disable(DKOSGNotify)
-	dk_disable(DKOSGPhysics)
-	dk_disable(DKOSGPicker)
-	dk_disable(DKOSGRml)
-	dk_disable(DKOSGStats)
-	dk_disable(DKOSGTerrain)
-	dk_disable(DKOSGVideo)
-	dk_disable(DKOSGViewer)
-	dk_disable(DKOSGWidget)
-	dk_disable(DKOSGWindow)
+	dk_disable(DKOsgAudio)
+	dk_disable(DKOsgCef)
+	dk_disable(DKOsgLights)
+	dk_disable(DKOsgManipulator)
+	dk_disable(DKOsgModel)
+	dk_disable(DKOsgNotify)
+	dk_disable(DKOsgPhysics)
+	dk_disable(DKOsgPicker)
+	dk_disable(DKOsgRml)
+	dk_disable(DKOsgStats)
+	dk_disable(DKOsgTerrain)
+	dk_disable(DKOsgVideo)
+	dk_disable(DKOsgViewer)
+	dk_disable(DKOsgWidget)
+	dk_disable(DKOsgWindow)
 	dk_disable(DKOcr)
 	dk_disable(DKRestart)
 	dk_disable(DKSdlAudio)
@@ -286,21 +286,21 @@ if(IOS OR IOSSIM)
 	dk_disable(DKJerryscript)		# requires jerryscript
 	dk_disable(DKMidi)				# requires rtmidi
 	dk_disable(DKOFWindow)			# requires openframeworks
-	dk_disable(DKOSGAudio)			# requires openscenegraph
-	dk_disable(DKOSGCef)			# requires openscenegraph
-	dk_disable(DKOSGLights)			# requires openscenegraph
-	dk_disable(DKOSGManipulator)	# requires openscenegraph
-	dk_disable(DKOSGModel)			# requires openscenegraph
-	dk_disable(DKOSGNotify)			# requires openscenegraph
-	dk_disable(DKOSGPhysics)		# requires openscenegraph
-	dk_disable(DKOSGPicker)			# requires openscenegraph
-	dk_disable(DKOSGRml)			# requires openscenegraph
-	dk_disable(DKOSGStats)			# requires openscenegraph
-	dk_disable(DKOSGTerrain)		# requires openscenegraph
-	dk_disable(DKOSGVideo)			# requires openscenegraph
-	dk_disable(DKOSGViewer)			# requires openscenegraph 
-	dk_disable(DKOSGWidget)			# requires openscenegraph 
-	dk_disable(DKOSGWindow)			# requires openscenegraph 
+	dk_disable(DKOsgAudio)			# requires openscenegraph
+	dk_disable(DKOsgCef)			# requires openscenegraph
+	dk_disable(DKOsgLights)			# requires openscenegraph
+	dk_disable(DKOsgManipulator)	# requires openscenegraph
+	dk_disable(DKOsgModel)			# requires openscenegraph
+	dk_disable(DKOsgNotify)			# requires openscenegraph
+	dk_disable(DKOsgPhysics)		# requires openscenegraph
+	dk_disable(DKOsgPicker)			# requires openscenegraph
+	dk_disable(DKOsgRml)			# requires openscenegraph
+	dk_disable(DKOsgStats)			# requires openscenegraph
+	dk_disable(DKOsgTerrain)		# requires openscenegraph
+	dk_disable(DKOsgVideo)			# requires openscenegraph
+	dk_disable(DKOsgViewer)			# requires openscenegraph 
+	dk_disable(DKOsgWidget)			# requires openscenegraph 
+	dk_disable(DKOsgWindow)			# requires openscenegraph 
 	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKSdlCef)			# requires cef_binary
 	dk_disable(DKSdlOsg)			# requires openscenegraph 
@@ -383,12 +383,12 @@ if(LINUX)
 	dk_disable(DKHook)				# 'read' was not declared in this scope
 	dk_disable(DKJerryscript)		# requires jerryscript
 	dk_disable(DKOFWindow)			# requires openframeworks
-	dk_disable(DKOSGAudio)			# requires freealut
-	dk_disable(DKOSGCef)			# build errors
-	dk_disable(DKOSGPhysics)		# requires bullet3
-	dk_disable(DKOSGStats)			# build errors
-	dk_disable(DKOSGVideo)			# TODO
-	dk_disable(DKOSGWidget)			# build errors
+	dk_disable(DKOsgAudio)			# requires freealut
+	dk_disable(DKOsgCef)			# build errors
+	dk_disable(DKOsgPhysics)		# requires bullet3
+	dk_disable(DKOsgStats)			# build errors
+	dk_disable(DKOsgVideo)			# TODO
+	dk_disable(DKOsgWidget)			# build errors
 	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKSdlWaave)			# requires waave
 	dk_disable(DKSdlWav)			# build errors
@@ -434,12 +434,12 @@ endif(LINUX)
 # Disabled for Mac targets
 if(MAC) 
 	dk_disable(DKOFWindow)			# requires openframeworks
-	dk_disable(DKOSGAudio)			# requires freealut
-	dk_disable(DKOSGCef)			# build errors
-	dk_disable(DKOSGPhysics)		# requires bullet3
-	dk_disable(DKOSGStats)			# build errors
-	dk_disable(DKOSGVideo)			# TODO
-	dk_disable(DKOSGWidget)			# build errors
+	dk_disable(DKOsgAudio)			# requires freealut
+	dk_disable(DKOsgCef)			# build errors
+	dk_disable(DKOsgPhysics)		# requires bullet3
+	dk_disable(DKOsgStats)			# build errors
+	dk_disable(DKOsgVideo)			# TODO
+	dk_disable(DKOsgWidget)			# build errors
 	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKSdlWaave)			# requires waave
 	dk_disable(DKSdlWav)			# build errors
@@ -487,12 +487,12 @@ if(RASPBERRY)
 	dk_disable(DKJerryscript)		# requires jerryscript
 	dk_disable(DKMidi)				# requires rtmidi
 	dk_disable(DKOFWindow)			# requires openframeworks
-	dk_disable(DKOSGAudio)			# requires osgaudio
-	dk_disable(DKOSGCef)			# build errors
-	dk_disable(DKOSGPhysics)		# requires bullet3
-	dk_disable(DKOSGStats)			# build errors
-	dk_disable(DKOSGVideo)			# TODO
-	dk_disable(DKOSGWidget)			# build errors
+	dk_disable(DKOsgAudio)			# requires osgaudio
+	dk_disable(DKOsgCef)			# build errors
+	dk_disable(DKOsgPhysics)		# requires bullet3
+	dk_disable(DKOsgStats)			# build errors
+	dk_disable(DKOsgVideo)			# TODO
+	dk_disable(DKOsgWidget)			# build errors
 	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKSdlWaave)			# requires waave
 	dk_disable(DKSdlWav)			# build errors
@@ -563,21 +563,21 @@ if(WIN)
 	dk_disable(boost)				# error: cl command not found
 	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKOFWindow)			# requires openframeworks
-	dk_disable(DKOSGAudio)			# requires freealut
-	dk_disable(DKOSGCef)			# build errors
-	dk_disable(DKOSGLights)			# requires openscenegraph
-	dk_disable(DKOSGManipulator)	# requires openscenegraph
-	dk_disable(DKOSGModel)			# requires openscenegraph
-	dk_disable(DKOSGNotify)			# requires openscenegraph
-	dk_disable(DKOSGPhysics)		# requires bullet3
-	dk_disable(DKOSGPicker)			# requires openscenegraph
-	dk_disable(DKOSGRml)			# requires openscenegraph
-	dk_disable(DKOSGStats)			# build errors
-	dk_disable(DKOSGTerrain)		# requires openscenegraph
-	dk_disable(DKOSGVideo)			# TODO
-	dk_disable(DKOSGViewer)			# requires openscenegraph
-	dk_disable(DKOSGWidget)			# build errors
-	dk_disable(DKOSGWindow)			# requires openscenegraph
+	dk_disable(DKOsgAudio)			# requires freealut
+	dk_disable(DKOsgCef)			# build errors
+	dk_disable(DKOsgLights)			# requires openscenegraph
+	dk_disable(DKOsgManipulator)	# requires openscenegraph
+	dk_disable(DKOsgModel)			# requires openscenegraph
+	dk_disable(DKOsgNotify)			# requires openscenegraph
+	dk_disable(DKOsgPhysics)		# requires bullet3
+	dk_disable(DKOsgPicker)			# requires openscenegraph
+	dk_disable(DKOsgRml)			# requires openscenegraph
+	dk_disable(DKOsgStats)			# build errors
+	dk_disable(DKOsgTerrain)		# requires openscenegraph
+	dk_disable(DKOsgVideo)			# TODO
+	dk_disable(DKOsgViewer)			# requires openscenegraph
+	dk_disable(DKOsgWidget)			# build errors
+	dk_disable(DKOsgWindow)			# requires openscenegraph
 	dk_disable(DKScreenRecorder)    # requires opencv
 	dk_disable(DKSdlOsg)			# requires openscenegraph
 	dk_disable(DKSdlVideo)			# error: 'av_mallocz_array': identifier not found

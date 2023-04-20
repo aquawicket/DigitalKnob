@@ -25,20 +25,20 @@
 */
 #ifdef USE_DKDuktape 
 #pragma once
-#ifndef DKOSGModelJS_H
-#define DKOSGModelJS_H
+#ifndef DKOsgModelJS_H
+#define DKOsgModelJS_H
 
 #include "DKDuktape/DKDuktape.h"
 
 
-class DKOSGModelJS : public DKObjectT<DKOSGModelJS>
+class DKOsgModelJS : public DKObjectT<DKOsgModelJS>
 {
 public:
 	bool Init();
 	//static int NewModel(duk_context* ctx);
 };
 
-REGISTER_OBJECT(DKOSGModelJS, true)
+REGISTER_OBJECT(DKOsgModelJS, true)
 
-#endif //DKOSGModelJS_H
+#endif //DKOsgModelJS_H
 #endif //USE_DKDuktape

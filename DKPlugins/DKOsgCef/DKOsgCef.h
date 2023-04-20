@@ -24,13 +24,13 @@
 * SOFTWARE.
 */
 #pragma once
-#ifndef DKOSGCef_H
-#define DKOSGCef_H
+#ifndef DKOsgCef_H
+#define DKOsgCef_H
 #include "DK/DK.h"
 #include "DK/DKApp.h"
-#include "DKOSGCef/DKOSGCefKeyboard.h"
+#include "DKOsgCef/DKOsgCefKeyboard.h"
 #include "DKCef/DKCef.h"
-#include "DKOSGWindow/DKOSGWindow.h"
+#include "DKOsgWindow/DKOsgWindow.h"
 
 WARNING_DISABLE
 #include <osg/MatrixTransform>
@@ -42,9 +42,9 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
-class DKOSGCefHandler;
+class DKOsgCefHandler;
 
-class DKOSGCef : public osgGA::GUIEventHandler, public DKObjectT<DKOSGCef>
+class DKOsgCef : public osgGA::GUIEventHandler, public DKObjectT<DKOsgCef>
 {
 public:
 	bool Init();
@@ -63,30 +63,30 @@ public:
 	void setSize(unsigned int width, unsigned int height);
 
 	DKString id;
-	DKOSGWindow* dkOsgWindow;
+	DKOsgWindow* dkOsgWindow;
 	DKCef* dkCef;
 	bool _mouseLMBdown;
-	DKOSGCefKeyboard _keyAdapter;
+	DKOsgCefKeyboard _keyAdapter;
 	float _scrollFactor;
 
 	osg::ref_ptr<osg::Camera> cefCam;
 	osg::ref_ptr<osg::Image> cef_image;
-	DKOSGCefHandler* cefHandler;
+	DKOsgCefHandler* cefHandler;
 	osg::MatrixTransform* modelViewMat;
 };
 
 
-class DKOSGCefHandler : public CefClient, public CefRenderHandler, 
+class DKOsgCefHandler : public CefClient, public CefRenderHandler, 
 	public CefLoadHandler, public CefLifeSpanHandler, public CefContextMenuHandler,
 	public CefDownloadHandler, public CefDisplayHandler
 {
 public:
-	DKOSGCefHandler(osg::Image* cef_image){ 
+	DKOsgCefHandler(osg::Image* cef_image){ 
 		DKDEBUGFUNC(cef_image);
 		this->cef_image = cef_image; 
 	}
 	osg::Image* cef_image;
-	DKOSGCef* dkosgcef;
+	DKOsgCef* dkosgcef;
 
 	virtual CefRefPtr<CefContextMenuHandler> GetContextMenuHandler(){ 
 		DKDEBUGFUNC(); 
@@ -160,7 +160,7 @@ public:
 		bool* no_javascript_access) {
 			//DKDEBUGFUNC(browser, frame, target_url, target_frame_name, target_disposition, user_gesture, popupFeatures, windowInfo, client, settings, no_javascript_access);
 			//windowInfo.windowless_rendering_enabled = TRUE;
-			//DKOSGCef::Instance("DKOSGCef")->NewBrowser();
+			//DKOsgCef::Instance("DKOsgCef")->NewBrowser();
 			return false;
 	}
 
@@ -181,9 +181,9 @@ public:
 		SendEvent("GLOBAL", "DKCef_ContextMenu", data);
 	}
 
-	IMPLEMENT_REFCOUNTING(DKOSGCefHandler);
+	IMPLEMENT_REFCOUNTING(DKOsgCefHandler);
 };
 
-REGISTER_OBJECT(DKOSGCef, true);
+REGISTER_OBJECT(DKOsgCef, true);
 
-#endif //DKOSGCef_H
+#endif //DKOsgCef_H

@@ -24,8 +24,8 @@
 * SOFTWARE.
 */
 #pragma once
-#ifndef DKOSGRmlSystem_H
-#define DKOSGRmlSystem_H
+#ifndef DKOsgRmlSystem_H
+#define DKOsgRmlSystem_H
 
 WARNING_DISABLE
 #include <RmlUi/Core.h>
@@ -34,10 +34,10 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
-class DKOSGRmlSystem : public Rml::SystemInterface
+class DKOsgRmlSystem : public Rml::SystemInterface
 {
 public:
-	DKOSGRmlSystem();
+	DKOsgRmlSystem();
     virtual double GetElapsedTime();
 
 	/// Translate the input string into the translated string.
@@ -58,4 +58,4 @@ public:
 private:
       osg::Timer_t _timer;
 };
-#endif //DKOSGRmlSystem_H
+#endif //DKOsgRmlSystem_H

@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 #include "DK/stdafx.h"
-#include "DKOSGViewer/DKOSGViewer.h"
+#include "DKOsgViewer/DKOsgViewer.h"
 //#include "DK/DKApp.h"
 #include "DK/DKUtil.h"
 #include "DK/DKFile.h"
@@ -35,11 +35,11 @@ WARNING_DISABLE
 //WARING_ENABLE
 
 
-bool DKOSGViewer::Init(){
-	DKClass::DKCreate("DKOSGNotify");
+bool DKOsgViewer::Init(){
+	DKClass::DKCreate("DKOsgNotify");
 	DKClass::DKCreate("DKGLInfo");
 	viewer = new osgViewer::CompositeViewer;
-	DKApp::AppendLoopFunc(&DKOSGViewer::DoFrame, this);
+	DKApp::AppendLoopFunc(&DKOsgViewer::DoFrame, this);
 	//viewer->setRunMaxFrameRate(60.00);
 	//viewer->setRunFrameScheme(osgViewer::ViewerBase::ON_DEMAND);
 	viewer->setRunFrameScheme(osgViewer::ViewerBase::CONTINUOUS);
@@ -47,11 +47,11 @@ bool DKOSGViewer::Init(){
 	return true;
 }
 
-bool DKOSGViewer::End(){
+bool DKOsgViewer::End(){
 	return true;
 }
 
-void DKOSGViewer::DoFrame(){
+void DKOsgViewer::DoFrame(){
 	if(viewer->isRealized()){
 		//TODO: this should be moved into DKAssets
 		/*
@@ -67,17 +67,17 @@ void DKOSGViewer::DoFrame(){
 		DKApp::active = false;
 }
 
-bool DKOSGViewer::Realize(){
+bool DKOsgViewer::Realize(){
 	if(!viewer->isRealized())
 		viewer->realize();
 	if(!viewer->isRealized())
-		return DKERROR("DKOSGViewer::Realize(): multiviewer->realize() failed! \n");
+		return DKERROR("DKOsgViewer::Realize(): multiviewer->realize() failed! \n");
 	viewer->setKeyEventSetsDone(0); //Don't close OSG with ESC key
 	DKINFO("multiviewer->realize() success\n");
 	return true;
 }
 
-bool DKOSGViewer::AppendDataPath(const DKString& datapath){
+bool DKOsgViewer::AppendDataPath(const DKString& datapath){
 	osgDB::FilePathList fl = osgDB::getDataFilePathList();
 	if(std::find(fl.begin(), fl.end(), datapath) == fl.end()){
 		fl.push_back(datapath);

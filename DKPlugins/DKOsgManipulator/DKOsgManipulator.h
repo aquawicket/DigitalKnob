@@ -24,15 +24,15 @@
 * SOFTWARE.
 */
 #pragma once
-#ifndef DKOSGManipulator_H
-#define DKOSGManipulator_H
+#ifndef DKOsgManipulator_H
+#define DKOsgManipulator_H
 
 WARNING_DISABLE
 #include <osgGA/TrackballManipulator>
 WARNING_ENABLE
 
 
-class DKOSGManipulator : public DKObjectT<DKOSGManipulator>
+class DKOsgManipulator : public DKObjectT<DKOsgManipulator>
 {
 public:
 	bool Init();
@@ -41,6 +41,6 @@ public:
 	osg::ref_ptr<osgGA::TrackballManipulator> tb;
 };
 
-REGISTER_OBJECT(DKOSGManipulator, true);
+REGISTER_OBJECT(DKOsgManipulator, true);
 
-#endif //DKOSGManipulator_H
+#endif //DKOsgManipulator_H

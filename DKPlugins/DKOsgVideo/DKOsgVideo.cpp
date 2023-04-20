@@ -24,11 +24,11 @@
 * SOFTWARE.
 */
 #include "DK/stdafx.h"
-#include "DKOSGVideo/DKOSGVideo.h"
-#include "DKOSGVideo/DKffmpeg.h"
+#include "DKOsgVideo/DKOsgVideo.h"
+#include "DKOsgVideo/DKffmpeg.h"
 #include "DK/DKFile.h"
 #include "DKAssets/DKAssets.h"
-#include "DKOSGWindow/DKOSGWindow.h"
+#include "DKOsgWindow/DKOsgWindow.h"
 
 WARNING_DISABLE
 #if WIN
@@ -43,18 +43,18 @@ WARNING_ENABLE
 // then we can check for ffmpeg files against portable apps
 //
 
-bool DKOSGVideo::Init(){
+bool DKOsgVideo::Init(){
 	DKDEBUGFUNC();
-	DKClass::DKCreate("DKOSGVideoJS");
+	DKClass::DKCreate("DKOsgVideoJS");
 	return true;
 }
 
-bool DKOSGVideo::End(){
+bool DKOsgVideo::End(){
 	DKDEBUGFUNC();
 	return true;
 }
 
-void DKOSGVideo::loaddlls(){
+void DKOsgVideo::loaddlls(){
 #if WIN
 	//delay loading the DLL to move it's locations
 	//DKClass::DKCreate("DKAssets");
@@ -112,33 +112,33 @@ void DKOSGVideo::loaddlls(){
 }
 
 /*
-void DKOSGVideo::unloaddlls(){
+void DKOsgVideo::unloaddlls(){
 #if WIN
 	//if(!__FUnloadDelayLoadedDLL2("avutil-54.dll"))
-	//	DKERROR("DKOSGVideo::loaddlls(): avutil-54.dll did not unload \n");
+	//	DKERROR("DKOsgVideo::loaddlls(): avutil-54.dll did not unload \n");
     if(!__FUnloadDelayLoadedDLL2("avdevice-56.dll"))
-		DKERROR("DKOSGVideo::loaddlls(): avdevice-56.dll did not unload \n");
+		DKERROR("DKOsgVideo::loaddlls(): avdevice-56.dll did not unload \n");
 	if(!__FUnloadDelayLoadedDLL2("avfilter-5.dll"))
-		DKERROR("DKOSGVideo::loaddlls(): avfilter-5.dll did not unload \n");
+		DKERROR("DKOsgVideo::loaddlls(): avfilter-5.dll did not unload \n");
 	if(!__FUnloadDelayLoadedDLL2("swscale-3.dll"))
-		DKERROR("DKOSGVideo::loaddlls(): swscale-3.dll did not unload \n");
+		DKERROR("DKOsgVideo::loaddlls(): swscale-3.dll did not unload \n");
 	if(!__FUnloadDelayLoadedDLL2("postproc-53.dll"))
-		DKERROR("DKOSGVideo::loaddlls(): postproc-53.dll did not unload \n");
+		DKERROR("DKOsgVideo::loaddlls(): postproc-53.dll did not unload \n");
 	if(!__FUnloadDelayLoadedDLL2("avformat-56.dll"))
-		DKERROR("DKOSGVideo::loaddlls(): avformat-56.dll did not unload \n");
+		DKERROR("DKOsgVideo::loaddlls(): avformat-56.dll did not unload \n");
 	if(!__FUnloadDelayLoadedDLL2("avcodec-56.dll"))
-		DKERROR("DKOSGVideo::loaddlls(): avcodec-56.dll did not unload \n");
+		DKERROR("DKOsgVideo::loaddlls(): avcodec-56.dll did not unload \n");
 	if(!__FUnloadDelayLoadedDLL2("swresample-1.dll"))
-		DKERROR("DKOSGVideo::loaddlls(): swresample-1.dll did not unload \n");
+		DKERROR("DKOsgVideo::loaddlls(): swresample-1.dll did not unload \n");
 	if(!__FUnloadDelayLoadedDLL2("avutil-54.dll"))
-		DKERROR("DKOSGVideo::loaddlls(): avutil-54.dll did not unload \n");
+		DKERROR("DKOsgVideo::loaddlls(): avutil-54.dll did not unload \n");
 #endif //WIN32
 }
 */
 
-void DKOSGVideo::Play(const DKString& file){
+void DKOsgVideo::Play(const DKString& file){
 	DKDEBUGFUNC(file);
-	osg::Group* theRoot = DKOSGWindow::Instance("DKOSGWindow")->world;
+	osg::Group* theRoot = DKOsgWindow::Instance("DKOsgWindow")->world;
 	bool useTextureRectangle = true;
     bool useShader = false;
 	bool fullscreen = 0;

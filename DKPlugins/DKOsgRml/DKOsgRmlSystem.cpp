@@ -24,29 +24,29 @@
 * SOFTWARE.
 */
 #include "DK/stdafx.h"
-#include "DKOSGRml/DKOSGRmlSystem.h"
+#include "DKOsgRml/DKOsgRmlSystem.h"
 
 WARNING_DISABLE
 #include <iostream>
 WARNING_ENABLE
 
 
-DKOSGRmlSystem::DKOSGRmlSystem() : _timer(osg::Timer::instance()->tick()){
+DKOsgRmlSystem::DKOsgRmlSystem() : _timer(osg::Timer::instance()->tick()){
 	DKDEBUGFUNC();
 }
 
-double DKOSGRmlSystem::GetElapsedTime(){
+double DKOsgRmlSystem::GetElapsedTime(){
 	//DKDEBUGFUNC(); //EXCESSIVE LOGGING
 	return (float)osg::Timer::instance()->time_s();
 }
 
-int DKOSGRmlSystem::TranslateString(Rml::String& translated, const Rml::String& input){
+int DKOsgRmlSystem::TranslateString(Rml::String& translated, const Rml::String& input){
 	DKDEBUGFUNC(translated, input);
 	translated = input;
 	return 0;
 }
 
-bool DKOSGRmlSystem::LogMessage(Rml::Log::Type type, const Rml::String& message){
+bool DKOsgRmlSystem::LogMessage(Rml::Log::Type type, const Rml::String& message){
 	//DKDEBUGFUNC(type, message);  //EXCESSIVE LOGGING
 	if (has(message, "Loaded font face"))
 		type = Rml::Log::LT_DEBUG;

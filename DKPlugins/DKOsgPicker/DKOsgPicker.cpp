@@ -25,28 +25,28 @@
 */
 #include "DK/stdafx.h"
 //#ifdef USE_osgFX
-#include "DKOSGPicker/DKOSGPicker.h"
-#include "DKOSGWindow/DKOSGWindow.h"
+#include "DKOsgPicker/DKOsgPicker.h"
+#include "DKOsgWindow/DKOsgWindow.h"
 
 
-bool DKOSGPicker::Init(){
+bool DKOsgPicker::Init(){
 	outline = new osgFX::Outline;
 	//dkWindow->world->addChild(outline.get());
-	DKOSGWindow::Instance(data[1])->world->addChild(outline.get());
+	DKOsgWindow::Instance(data[1])->world->addChild(outline.get());
 
 	outline->setWidth(5);
 	outline->setColor(osg::Vec4(1,0,0,1));
 
-	DKOSGWindow::Instance(data[1])->view->addEventHandler(this);
+	DKOsgWindow::Instance(data[1])->view->addEventHandler(this);
 	return true;
 }
 
-DKOSGPicker::~DKOSGPicker(){
+DKOsgPicker::~DKOsgPicker(){
 	outline = NULL;
-	DKOSGWindow::Instance(data[1])->view->removeEventHandler(this);
+	DKOsgWindow::Instance(data[1])->view->removeEventHandler(this);
 }
 
-bool DKOSGPicker::handle(const osgGA::GUIEventAdapter& ea,osgGA::GUIActionAdapter& aa){
+bool DKOsgPicker::handle(const osgGA::GUIEventAdapter& ea,osgGA::GUIActionAdapter& aa){
 	if(ea.getEventType() == osgGA::GUIEventAdapter::PUSH){
 		osgViewer::View* view = dynamic_cast<osgViewer::View*>(&aa);
 		if (view){
@@ -63,7 +63,7 @@ bool DKOSGPicker::handle(const osgGA::GUIEventAdapter& ea,osgGA::GUIActionAdapte
 	return false;
 }
 
-void DKOSGPicker::pick(osgViewer::View* view, const osgGA::GUIEventAdapter& ea){
+void DKOsgPicker::pick(osgViewer::View* view, const osgGA::GUIEventAdapter& ea){
 
 	outline->removeChildren(0, outline->getNumChildren());
 
@@ -134,7 +134,7 @@ void DKOSGPicker::pick(osgViewer::View* view, const osgGA::GUIEventAdapter& ea){
     DKINFO(gdlist);
 }
 
-void DKOSGPicker::remove(osgViewer::View* view, const osgGA::GUIEventAdapter& ea){
+void DKOsgPicker::remove(osgViewer::View* view, const osgGA::GUIEventAdapter& ea){
 	outline->removeChildren(0, outline->getNumChildren());
     osgUtil::LineSegmentIntersector::Intersections intersections;
 
@@ -157,7 +157,7 @@ void DKOSGPicker::remove(osgViewer::View* view, const osgGA::GUIEventAdapter& ea
 	}
 }
 
-void DKOSGPicker::setLabel(const DKString& name){
+void DKOsgPicker::setLabel(const DKString& name){
 	DK_UNUSED(name);
 	//if (_updateText.get()) _updateText->setText(name);
 }

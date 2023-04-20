@@ -24,18 +24,18 @@
 * SOFTWARE.
 */
 #include "DK/stdafx.h"
-#include "DKOSGWindow/DKOSGWindow.h"
+#include "DKOsgWindow/DKOsgWindow.h"
 
 
-DKOSGWidget::DKOSGWidget(){
-
-}
-
-DKOSGWidget::~DKOSGWidget(){
+DKOsgWidget::DKOsgWidget(){
 
 }
 
-bool DKOSGWidget::SetupWidget(DKOSGWindow* window){
+DKOsgWidget::~DKOsgWidget(){
+
+}
+
+bool DKOsgWidget::SetupWidget(DKOsgWindow* window){
 	/*
     wm = new osgWidget::WindowManager(
                                       window->view,

@@ -24,8 +24,8 @@
 * SOFTWARE.
 */
 #pragma once
-#ifndef DKOSGStats_H
-#define DKOSGStats_H
+#ifndef DKOsgStats_H
+#define DKOsgStats_H
 #include "DK/DK.h"
 
 WARNING_DISABLE
@@ -35,7 +35,7 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
-class DKOSGStats : public DKObjectT<DKOSGStats> 
+class DKOsgStats : public DKObjectT<DKOsgStats> 
 {
 public:
 	bool Init();
@@ -46,5 +46,5 @@ private:
 	osg::ref_ptr<osgViewer::StatsHandler> stats;
 };
 
-REGISTER_OBJECT(DKOSGStats, true);
-#endif //DKOSGStats_H
+REGISTER_OBJECT(DKOsgStats, true);
+#endif //DKOsgStats_H

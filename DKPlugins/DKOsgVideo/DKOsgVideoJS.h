@@ -25,13 +25,13 @@
 */
 #ifdef USE_DKDuktape 
 #pragma once
-#ifndef DKOSGVideoJS_H
-#define DKOSGVideoJS_H
+#ifndef DKOsgVideoJS_H
+#define DKOsgVideoJS_H
 
 #include "DKDuktape/DKDuktape.h"
 
 
-class DKOSGVideoJS : public DKObjectT<DKOSGVideoJS>
+class DKOsgVideoJS : public DKObjectT<DKOsgVideoJS>
 {
 public:
 	bool Init();
@@ -39,6 +39,6 @@ public:
 };
 
 
-REGISTER_OBJECT(DKOSGVideoJS, true)
-#endif //DKOSGVideoJS_H
+REGISTER_OBJECT(DKOsgVideoJS, true)
+#endif //DKOsgVideoJS_H
 #endif //USE_DKDuktape

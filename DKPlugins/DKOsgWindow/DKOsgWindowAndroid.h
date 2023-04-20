@@ -25,15 +25,15 @@
 */
 #if ANDROID
 #pragma once
-#ifndef DKOSGWindowAndroid_H
-#define DKOSGWindowAndroid_H
+#ifndef DKOsgWindowAndroid_H
+#define DKOsgWindowAndroid_H
 
 WARNING_DISABLE
 #include <jni.h>
 WARNING_ENABLE
 
 
-class DKOSGWindowAndroid : public DKObjectT<DKOSGWindowAndroid>
+class DKOsgWindowAndroid : public DKObjectT<DKOsgWindowAndroid>
 {
 public:
 	void Init();
@@ -68,6 +68,6 @@ public:
 	void* onMouseMove(void* data);
 };
 	
-REGISTER_OBJECT(DKOSGWindowAndroid, true)
-#endif //DKOSGWindowAndroid_H
+REGISTER_OBJECT(DKOsgWindowAndroid, true)
+#endif //DKOsgWindowAndroid_H
 #endif //ANDROID

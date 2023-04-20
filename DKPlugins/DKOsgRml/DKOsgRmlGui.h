@@ -24,11 +24,11 @@
 * SOFTWARE.
 */
 #pragma once
-#ifndef DKOSGRmlGui_H
-#define DKOSGRmlGui_H
+#ifndef DKOsgRmlGui_H
+#define DKOsgRmlGui_H
 
 #include "DK/DKLog.h"
-#include "DKOSGRml/DKOSGRmlRender.h"
+#include "DKOsgRml/DKOsgRmlRender.h"
 
 WARNING_DISABLE
 #include <RmlUi/Core.h>
@@ -87,7 +87,7 @@ public:
     // Transform osg mouse position into libRml screen coordinates
     void mousePosition(osgViewer::View* view, const osgGA::GUIEventAdapter& ea, const osg::NodePath& nodePath, int& x, int &y);
     unsigned int _previousTraversalNumber; // number of last frame so we don't update multiple times per frame
-	DKOSGRmlRender* _renderer; // DKRml render interface singleton  
+	DKOsgRmlRender* _renderer; // DKRml render interface singleton  
     Rml::Context* _context; // context of this gui (one per gui)
 	DKRmlEventListener* _contextEventListener;
     osg::ref_ptr<osg::Camera> _camera; // camera to render to (can be NULL)
@@ -102,4 +102,4 @@ public:
 	virtual bool handle(const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa, osg::Object*, osg::NodeVisitor* nv);
 };
 
-#endif //DKOSGRmlGui_H
+#endif //DKOsgRmlGui_H

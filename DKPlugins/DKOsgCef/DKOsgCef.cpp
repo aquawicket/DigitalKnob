@@ -28,7 +28,7 @@
 #include "DK/DKClass.h"
 #include "DK/DKFile.h"
 #include "DK/DKLog.h"
-#include "DKOSGCef/DKOSGCef.h"
+#include "DKOsgCef/DKOsgCef.h"
 #if WIN
 	#include "DK/DKWindows.h"
 #endif
@@ -41,12 +41,12 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
-bool DKOSGCef::Init(){
+bool DKOsgCef::Init(){
 	DKDEBUGFUNC();
-	dkOsgWindow = DKOSGWindow::Instance("DKOSGWindow0");
+	dkOsgWindow = DKOsgWindow::Instance("DKOsgWindow0");
 	dkCef = DKCef::Instance("DKCef");
 	if(!dkOsgWindow || !dkCef)
-		return DKERROR("DKOSGCef::Init(): INVALID OBJECTS \n");
+		return DKERROR("DKOsgCef::Init(): INVALID OBJECTS \n");
 	id = data[1];
 	cef_image = NULL;
 	SetupOsg();
@@ -55,14 +55,14 @@ bool DKOSGCef::Init(){
 	_scrollFactor = 70.0f;
 	dkCef->inFocus = true;
 	dkOsgWindow->view->addEventHandler(this);
-	DKClass::RegisterFunc(id+"::OnResize", &DKOSGCef::OnResize, this);
-	DKClass::RegisterFunc("DKOSGCef::GetTexture", &DKOSGCef::GetTexture, this);
+	DKClass::RegisterFunc(id+"::OnResize", &DKOsgCef::OnResize, this);
+	DKClass::RegisterFunc("DKOsgCef::GetTexture", &DKOsgCef::GetTexture, this);
 	return true;
 }
 
-bool DKOSGCef::End(){
+bool DKOsgCef::End(){
 	DKDEBUGFUNC();
-	DKApp::RemoveLoopFunc(&DKOSGCefHandler::DoFrame, cefHandler);
+	DKApp::RemoveLoopFunc(&DKOsgCefHandler::DoFrame, cefHandler);
 	//dkOsgWindow->view->removeEventHandler(this); //crash
 	dkOsgWindow->root->removeChild(modelViewMat);
 	modelViewMat = NULL;
@@ -70,10 +70,10 @@ bool DKOSGCef::End(){
 	return true;
 }
 
-void* DKOSGCef::OnResize(void* data){
+void* DKOsgCef::OnResize(void* data){
 	DKDEBUGFUNC(data);
 	DKString str = *static_cast<DKString*>(data);
-	//DKWARN("DKOSGCef::OnResize("+str+")\n");
+	//DKWARN("DKOsgCef::OnResize("+str+")\n");
 
 	DKStringArray arry;
 	toStringArray(arry,str,",");
@@ -103,10 +103,10 @@ void* DKOSGCef::OnResize(void* data){
 	return NULL;
 }
 
-void* DKOSGCef::GetTexture(void*){
+void* DKOsgCef::GetTexture(void*){
 	//DKDEBUGFUNC();  //EXCESSIVE LOGGING
 	if(!cef_image){
-		DKERROR("DKOSGCef::GetTexture(): cef_image invalid \n");
+		DKERROR("DKOsgCef::GetTexture(): cef_image invalid \n");
 		return NULL;
 	}
 	if(!cef_image->getImageSizeInBytes())
@@ -114,7 +114,7 @@ void* DKOSGCef::GetTexture(void*){
 	return static_cast<void*>(cef_image);
 }
 
-void DKOSGCef::SetupOsg(){
+void DKOsgCef::SetupOsg(){
 	DKDEBUGFUNC();
 	cefCam = dkOsgWindow->view->getCamera();
 	cefCam->setRenderOrder(osg::Camera::POST_RENDER);
@@ -245,23 +245,23 @@ void DKOSGCef::SetupOsg(){
 	*/
 
 	//modelViewMat->addChild(cefCam);
-	//cefCam->setGraphicsContext(DKOSGWindow::Instance("DKOSGWindow")->gc); // same graphics context as main camera
+	//cefCam->setGraphicsContext(DKOsgWindow::Instance("DKOsgWindow")->gc); // same graphics context as main camera
 	//cefCam->addChild(modelViewMat);
-	//DKOSGWindow::Instance("DKOSGWindow")->root->addChild(cefCam);
+	//DKOsgWindow::Instance("DKOsgWindow")->root->addChild(cefCam);
 
 	//dkOsgWindow->root->addChild(modelViewMat);
 }
 
-void DKOSGCef::SetupCef(){
+void DKOsgCef::SetupCef(){
 	DKDEBUGFUNC();
-	cefHandler = new DKOSGCefHandler(cef_image);
+	cefHandler = new DKOsgCefHandler(cef_image);
 	cefHandler->dkosgcef = this;
 	DKCef::cefHandler = cefHandler;
 	dkCef->NewBrowser();
-	DKApp::AddLoopFunc("RENDER", &DKOSGCefHandler::DoFrame, cefHandler);
+	DKApp::AddLoopFunc("RENDER", &DKOsgCefHandler::DoFrame, cefHandler);
 }
 
-bool DKOSGCef::handle(const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa){
+bool DKOsgCef::handle(const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa){
 	//DKDEBUGFUNC(ea, aa);
 	if(ea.getHandled())
 		return false;
@@ -328,7 +328,7 @@ bool DKOSGCef::handle(const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter&
 			/// Handle keyboard input
 			CefKeyEvent KeyEvent;
        		KeyEvent.type = KEYEVENT_KEYDOWN;
-			KeyEvent.windows_key_code = DKOSGWindow::osgKeyCode[ea.getUnmodifiedKey()];
+			KeyEvent.windows_key_code = DKOsgWindow::osgKeyCode[ea.getUnmodifiedKey()];
        		KeyEvent.modifiers = _keyAdapter.getCefModifiers(ea.getModKeyMask());
       		dkCef->current_browser->GetHost()->SendKeyEvent(KeyEvent);
 
@@ -338,20 +338,20 @@ bool DKOSGCef::handle(const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter&
       		
 			if(ea.getUnmodifiedKey() > 96 && ea.getUnmodifiedKey() < 123){ //letter
 				if(ea.getModKeyMask() & osgGA::GUIEventAdapter::MODKEY_SHIFT && ea.getModKeyMask() & osgGA::GUIEventAdapter::MODKEY_CAPS_LOCK){ //both = lowercase
-					charKeyEvent.windows_key_code = DKOSGWindow::osgCharCode[ea.getUnmodifiedKey()];
+					charKeyEvent.windows_key_code = DKOsgWindow::osgCharCode[ea.getUnmodifiedKey()];
 				}
 				else if(ea.getModKeyMask() & osgGA::GUIEventAdapter::MODKEY_SHIFT || ea.getModKeyMask() & osgGA::GUIEventAdapter::MODKEY_CAPS_LOCK){ //1 = uppercase
-					charKeyEvent.windows_key_code = DKOSGWindow::osgShiftCharCode[ea.getUnmodifiedKey()];
+					charKeyEvent.windows_key_code = DKOsgWindow::osgShiftCharCode[ea.getUnmodifiedKey()];
 				}
 				else{
-					charKeyEvent.windows_key_code = DKOSGWindow::osgCharCode[ea.getUnmodifiedKey()]; // lowercase
+					charKeyEvent.windows_key_code = DKOsgWindow::osgCharCode[ea.getUnmodifiedKey()]; // lowercase
 				}
 			}
 			else if(ea.getModKeyMask() & osgGA::GUIEventAdapter::MODKEY_SHIFT){ //other character keys
-				charKeyEvent.windows_key_code = DKOSGWindow::osgShiftCharCode[ea.getUnmodifiedKey()]; //shifted symbol
+				charKeyEvent.windows_key_code = DKOsgWindow::osgShiftCharCode[ea.getUnmodifiedKey()]; //shifted symbol
 			}
 			else{
-				charKeyEvent.windows_key_code = DKOSGWindow::osgCharCode[ea.getUnmodifiedKey()]; //symbol
+				charKeyEvent.windows_key_code = DKOsgWindow::osgCharCode[ea.getUnmodifiedKey()]; //symbol
 			}
 
 			dkCef->current_browser->GetHost()->SendKeyEvent(charKeyEvent);
@@ -363,7 +363,7 @@ bool DKOSGCef::handle(const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter&
 
 			CefKeyEvent KeyEvent;
        		KeyEvent.type = KEYEVENT_KEYUP;
-			KeyEvent.windows_key_code = DKOSGWindow::osgKeyCode[ea.getUnmodifiedKey()];
+			KeyEvent.windows_key_code = DKOsgWindow::osgKeyCode[ea.getUnmodifiedKey()];
        		KeyEvent.modifiers = _keyAdapter.getCefModifiers(ea.getModKeyMask());
       		dkCef->current_browser->GetHost()->SendKeyEvent(KeyEvent);
 			return true;
@@ -408,7 +408,7 @@ bool DKOSGCef::handle(const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter&
 	return false; //allow event to continue
 }
 
-bool DKOSGCef::transparentPixel(osgViewer::View* view, const osgGA::GUIEventAdapter& ea){
+bool DKOsgCef::transparentPixel(osgViewer::View* view, const osgGA::GUIEventAdapter& ea){
 	//DKDEBUGFUNC(view, ea);
 	osg::Image* image = cef_image.get();/*cefHandler->getImage();*/
 	if (image && image->getPixelFormat()){
@@ -424,12 +424,12 @@ bool DKOSGCef::transparentPixel(osgViewer::View* view, const osgGA::GUIEventAdap
 	return false;
 }
 
-CefBrowserHost::MouseButtonType DKOSGCef::getCefMouseButton(int button){
+CefBrowserHost::MouseButtonType DKOsgCef::getCefMouseButton(int button){
 	DKDEBUGFUNC(button);
 	return button == osgGA::GUIEventAdapter::LEFT_MOUSE_BUTTON ? MBT_LEFT : button == osgGA::GUIEventAdapter::RIGHT_MOUSE_BUTTON ? MBT_RIGHT : MBT_MIDDLE;
 }
 
-bool DKOSGCef::getScrollDeltas(const osgGA::GUIEventAdapter& ea, float &deltaX, float &deltaY){
+bool DKOsgCef::getScrollDeltas(const osgGA::GUIEventAdapter& ea, float &deltaX, float &deltaY){
 	//DKDEBUGFUNC(ea, deltaX, deltaY);
 	if (ea.getScrollingDeltaX() != 0 || ea.getScrollingDeltaY() != 0){
 		deltaX = ea.getScrollingDeltaX();

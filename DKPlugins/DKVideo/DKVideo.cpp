@@ -30,7 +30,7 @@
 bool DKVideo::Init(){
 	DKDEBUGFUNC();
 	DKClass::DKCreate("DKVideoJS");
-	DKClass::DKCreate("DKOSGVideo");
+	DKClass::DKCreate("DKOsgVideo");
 	DKClass::DKCreate("DKSdlVideo");
 	return true;
 }
@@ -39,7 +39,7 @@ bool DKVideo::Play(DKString& file){
 	DKDEBUGFUNC();
 	if(DKClass::HasFunc("DKSdlVideo::Play"))
 		return DKClass::CallFunc("DKSdlVideo::Play", &file, NULL);
-	if(DKClass::HasFunc("DKOSGVideo::Play"))
-		return DKClass::CallFunc("DKOSGVideo::Play", &file, NULL);
+	if(DKClass::HasFunc("DKOsgVideo::Play"))
+		return DKClass::CallFunc("DKOsgVideo::Play", &file, NULL);
 	return DKERROR("DKVideo::Play() - No function available\n");
 }

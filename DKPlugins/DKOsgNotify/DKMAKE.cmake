@@ -1,3 +1,3 @@
-dk_depend(DKOSGViewer)
+dk_depend(DKOsgViewer)
 
-dk_generateCmake(DKOSGNotify)
+dk_generateCmake(DKOsgNotify)

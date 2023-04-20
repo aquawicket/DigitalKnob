@@ -1,3 +1,3 @@
-dk_depend(DKOSGWindow)
+dk_depend(DKOsgWindow)
 
-dk_generateCmake(DKOSGTerrain)
+dk_generateCmake(DKOsgTerrain)

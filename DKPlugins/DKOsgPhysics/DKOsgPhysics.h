@@ -24,10 +24,10 @@
 * SOFTWARE.
 */
 #pragma once
-#ifndef DKOSGPhysics_H
-#define DKOSGPhysics_H
+#ifndef DKOsgPhysics_H
+#define DKOsgPhysics_H
 #include "DK/DK.h"
-#include "DKOSGModel/DKOSGModel.h"
+#include "DKOsgModel/DKOsgModel.h"
 
 WARNING_DISABLE
 #include <osgDB/ReadFile>
@@ -56,7 +56,7 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
-class DKOSGPhysics : public DKObjectT<DKOSGPhysics>
+class DKOsgPhysics : public DKObjectT<DKOsgPhysics>
 {
 
 public:
@@ -64,7 +64,7 @@ public:
 	bool End();
 	
 	void Process();
-	bool AddModel(const DKOSGModel* model); //add existing model to physics
+	bool AddModel(const DKOsgModel* model); //add existing model to physics
 	bool makeModel(osg::Group* theRoot, const std::string& fileName, osg::Vec3 pos);
 
 //#ifdef USE_osgbDynamics 
@@ -87,5 +87,5 @@ private:
 
 };
 
-REGISTER_OBJECT(DKOSGPhysics, true);
-#endif //DKOSGPhysics
+REGISTER_OBJECT(DKOsgPhysics, true);
+#endif //DKOsgPhysics

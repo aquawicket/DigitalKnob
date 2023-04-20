@@ -24,20 +24,20 @@
 * SOFTWARE.
 */
 #include "DK/stdafx.h"
-#include "DKOSGRml/DKOSGRml.h"
+#include "DKOsgRml/DKOsgRml.h"
 
 //WARINING_DISABLE
 #include <osg/State>
 WARNING_ENABLE
 
 
-DKOSGRmlRender* DKOSGRml::guirender = NULL;
-DKOSGRmlSystem* DKOSGRml::guisystem = NULL;
+DKOsgRmlRender* DKOsgRml::guirender = NULL;
+DKOsgRmlSystem* DKOsgRml::guisystem = NULL;
 
-bool DKOSGRml::Init(){
+bool DKOsgRml::Init(){
 	//link objects
-	dkOsgViewer = DKOSGViewer::Get("DKOSGViewer0");
-	dkOsgWindow = DKOSGWindow::Get("DKOSGWindow0");
+	dkOsgViewer = DKOsgViewer::Get("DKOsgViewer0");
+	dkOsgWindow = DKOsgWindow::Get("DKOsgWindow0");
 	dkRml = DKRml::Instance("DKRml0");
 	if(!dkOsgViewer)
 		return DKERROR("dkOsgViewer invalid \n");
@@ -58,11 +58,11 @@ bool DKOSGRml::Init(){
 #endif
 
 	dkRml->context = guinode->getContext();
-	//AddEvent("GLOBAL", "resize", &DKOSGRml::OnResize, this);
+	//AddEvent("GLOBAL", "resize", &DKOsgRml::OnResize, this);
 	return true;
 }
 
-bool DKOSGRml::End(){
+bool DKOsgRml::End(){
 	if(guicam){
 		//dkOsgWindow->root->removeChild(guicam);
 		//guicam->removeChild(guinode); 
@@ -79,13 +79,13 @@ bool DKOSGRml::End(){
 	return true;
 }
 
-bool DKOSGRml::SetupRml(){
+bool DKOsgRml::SetupRml(){
 	if(!guirender){
-		guirender = new DKOSGRmlRender();
+		guirender = new DKOsgRmlRender();
 		Rml::SetRenderInterface(guirender);
 	}
 	if(!guisystem){
-		guisystem = new DKOSGRmlSystem();
+		guisystem = new DKOsgRmlSystem();
 		Rml::SetSystemInterface(guisystem);
 	}
 	Rml::Initialise();
@@ -101,8 +101,8 @@ bool DKOSGRml::SetupRml(){
 
 	/*
 	{ //PIP window
-		//FIXME - work to be done here and DKOSGWindow::CreatePIP()
-		guinode = new DKOSGRml::GuiNode(title.c_str(), true); //true = rocket debugger
+		//FIXME - work to be done here and DKOsgWindow::CreatePIP()
+		guinode = new DKOsgRml::GuiNode(title.c_str(), true); //true = rocket debugger
 		guicam = new osg::Camera();
 		guicam->setClearMask(GL_DEPTH_BUFFER_BIT);
 		guicam->setRenderOrder(osg::Camera::POST_RENDER, 100);
@@ -124,9 +124,9 @@ bool DKOSGRml::SetupRml(){
 	return true;
 }
 
-void DKOSGRml::OnResize(DKEvents* event){
+void DKOsgRml::OnResize(DKEvents* event){
 	DKStringArray arry;
 	toStringArray(arry, event->data[0], ",");
-	DKINFO("DKOSGRml::OnResize("+arry[0]+","+arry[1]+")\n");
+	DKINFO("DKOsgRml::OnResize("+arry[0]+","+arry[1]+")\n");
 	guinode->setScreenSize(toInt(arry[0]), toInt(arry[1]));
 }

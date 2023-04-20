@@ -24,8 +24,8 @@
 * SOFTWARE.
 */
 #pragma once
-#ifndef DKOSGLights_H
-#define DKOSGLights_H
+#ifndef DKOsgLights_H
+#define DKOsgLights_H
 #include "DK/DK.h"
 
 WARNING_DISABLE
@@ -33,7 +33,7 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
-class DKOSGLights : public DKObjectT<DKOSGLights>
+class DKOsgLights : public DKObjectT<DKOsgLights>
 {
 public:
 	bool Init();
@@ -43,6 +43,6 @@ private:
 };
 
 
-REGISTER_OBJECT(DKOSGLights, true);
+REGISTER_OBJECT(DKOsgLights, true);
 
-#endif //DKOSGLights_H
+#endif //DKOsgLights_H

@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 #include "DK/stdafx.h"
-#include "DKOSGNotify/DKOSGNotify.h"
+#include "DKOsgNotify/DKOsgNotify.h"
 #include "DKAssets/DKAssets.h"
 #include "DK/DKFile.h"
 
@@ -33,7 +33,7 @@ WARNING_DISABLE
 //WARING_ENABLE
 
 
-bool DKOSGNotify::Init(){
+bool DKOsgNotify::Init(){
 	osg::setNotifyHandler(this);
 #ifdef DEBUG
     osg::setNotifyLevel(osg::INFO);
@@ -43,17 +43,17 @@ bool DKOSGNotify::Init(){
 	return true;
 }
 
-bool DKOSGNotify::End(){
+bool DKOsgNotify::End(){
 	return true;
 }
 
-bool DKOSGNotify::AttachNotify(osg::NotifyHandler* panel){
+bool DKOsgNotify::AttachNotify(osg::NotifyHandler* panel){
 	if(!panel){return false;}
 	notifys.push_back(panel);
 	return true;
 }
 
-bool DKOSGNotify::RemoveNotify(osg::NotifyHandler* panel){
+bool DKOsgNotify::RemoveNotify(osg::NotifyHandler* panel){
 	if(!panel){return false;}
 	for(unsigned int i = 0; i < notifys.size(); i++){
 		if(panel == notifys[i]){
@@ -65,7 +65,7 @@ bool DKOSGNotify::RemoveNotify(osg::NotifyHandler* panel){
 	return false;
 }
 
-void DKOSGNotify::notify(osg::NotifySeverity severity, const char *message){
+void DKOsgNotify::notify(osg::NotifySeverity severity, const char *message){
 	//FIXME - We get empty messages sometimes..  why?
 	if(message && message[0] == '\0')
 		return;
@@ -75,7 +75,7 @@ void DKOSGNotify::notify(osg::NotifySeverity severity, const char *message){
 	}
 }
 
-void DKOSGNotify::output(osg::NotifySeverity severity, const char *message){
+void DKOsgNotify::output(osg::NotifySeverity severity, const char *message){
 	switch(severity){
 		case osg::DEBUG_FP:
 			DKDEBUG(message);

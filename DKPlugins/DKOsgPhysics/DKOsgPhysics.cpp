@@ -24,41 +24,41 @@
 * SOFTWARE.
 */
 #include "DK/stdafx.h"
-#include "DKOSGPhysics/DKOSGPhysics.h"
-#include "DKOSGWindow/DKOSGWindow.h"
+#include "DKOsgPhysics/DKOsgPhysics.h"
+#include "DKOsgWindow/DKOsgWindow.h"
 
 
-bool DKOSGPhysics::Init(){
+bool DKOsgPhysics::Init(){
 //#ifdef USE_osgbDynamics 
-	InitPhysics(DKOSGWindow::Instance("DKOSGWindow")->view);
-	AddLaunchBall(DKOSGWindow::Instance("DKOSGWindow")->view,DKOSGWindow::Instance("DKOSGWindow")->world);
-	//AddDragHandler(DKOSGWindow::Instance("DKOSGWindow")->view);
-	Ground(DKOSGWindow::Instance("DKOSGWindow")->world);
+	InitPhysics(DKOsgWindow::Instance("DKOsgWindow")->view);
+	AddLaunchBall(DKOsgWindow::Instance("DKOsgWindow")->view,DKOsgWindow::Instance("DKOsgWindow")->world);
+	//AddDragHandler(DKOsgWindow::Instance("DKOsgWindow")->view);
+	Ground(DKOsgWindow::Instance("DKOsgWindow")->world);
 	Start();
 	return true;
 //#endif //USE_osgbDynamics
 }
 
-bool DKOSGPhysics::End(){
+bool DKOsgPhysics::End(){
 //#ifdef USE_osgbDynamics
 	Kill();
 	return true;
 //#endif
 }
 
-void DKOSGPhysics::Process(){
+void DKOsgPhysics::Process(){
 //#ifdef USE_osgbDynamics 
 	TripleBufferMotionStateUpdate( msl, &tBuf );
 //#endif
 }
 
 //FIXME - models already created in DKModel.  Change to -> AddPhysics(DKModel*) ???
-bool DKOSGPhysics::AddModel(const DKOSGModel* model){
+bool DKOsgPhysics::AddModel(const DKOsgModel* model){
 	//TODO
 	return false;
 }
 
-bool DKOSGPhysics::makeModel(osg::Group* world, const std::string& fileName, osg::Vec3 pos){
+bool DKOsgPhysics::makeModel(osg::Group* world, const std::string& fileName, osg::Vec3 pos){
 //#ifdef USE_osgbDynamics 
 	osg::ref_ptr<osg::Node> modelNode(NULL);
 
@@ -95,7 +95,7 @@ bool DKOSGPhysics::makeModel(osg::Group* world, const std::string& fileName, osg
     amt->setUserData( new osgbCollision::RefRigidBody(rb));
     bw->addRigidBody( rb );
 	
-	DKOSGWindow::Instance("DKOSGWindow")->world->addChild(amt.release());
+	DKOsgWindow::Instance("DKOsgWindow")->world->addChild(amt.release());
 	index++;
 
 	//amt is a osg::Transform*..   I think we can position it this way
@@ -105,23 +105,23 @@ bool DKOSGPhysics::makeModel(osg::Group* world, const std::string& fileName, osg
 
 //#ifdef USE_osgbDynamics 
 
-void DKOSGPhysics::Start(){
+void DKOsgPhysics::Start(){
 	pt->setProcessorAffinity(0);
     pt->start();
 }
 
-void DKOSGPhysics::Kill(){
-	DKOSGWindow::Instance("DKOSGWindow")->view->removeEventHandler(lh);
+void DKOsgPhysics::Kill(){
+	DKOsgWindow::Instance("DKOsgWindow")->view->removeEventHandler(lh);
 	pt->stopPhysics();
 	pt->join();
 }
 
-bool DKOSGPhysics::Ground(osg::Group* world){
-	DKOSGWindow::Instance("DKOSGWindow")->world->addChild(osgbDynamics::generateGroundPlane(osg::Vec4(0.f, 0.f, 1000.f, 0.f), bw));
+bool DKOsgPhysics::Ground(osg::Group* world){
+	DKOsgWindow::Instance("DKOsgWindow")->world->addChild(osgbDynamics::generateGroundPlane(osg::Vec4(0.f, 0.f, 1000.f, 0.f), bw));
 	return true;
 }
 
-bool DKOSGPhysics::InitPhysics(osgViewer::Viewer* view){
+bool DKOsgPhysics::InitPhysics(osgViewer::Viewer* view){
 	tBuf.resize(65536); // Increase triple buffer size to hold lots of transform data
 
 	btDefaultCollisionConfiguration * collisionConfiguration = new btDefaultCollisionConfiguration();
@@ -143,7 +143,7 @@ bool DKOSGPhysics::InitPhysics(osgViewer::Viewer* view){
 	return true;
 }
 
-bool DKOSGPhysics::AddLaunchBall(osgViewer::Viewer* view, osg::Group* world){
+bool DKOsgPhysics::AddLaunchBall(osgViewer::Viewer* view, osg::Group* world){
 	// Ball Launch handler
 	osg::Group* launchHandlerAttachPoint = new osg::Group; 
 	world->addChild(launchHandlerAttachPoint);
@@ -154,14 +154,14 @@ bool DKOSGPhysics::AddLaunchBall(osgViewer::Viewer* view, osg::Group* world){
     geode->addDrawable(osgwTools::makeGeodesicSphere(radius));
     lh->setLaunchModel(geode, new btSphereShape(radius));
     lh->setInitialVelocity(600.);
-    DKOSGWindow::Instance("DKOSGWindow")->view->addEventHandler(lh);
+    DKOsgWindow::Instance("DKOsgWindow")->view->addEventHandler(lh);
 	srh->setLaunchHandler(lh);
 
 	lh->setThreadedPhysicsSupport(pt, &tBuf, &msl);
 	return true;
 }
 
-bool DKOSGPhysics::AddDragHandler(osgViewer::Viewer* view){
+bool DKOsgPhysics::AddDragHandler(osgViewer::Viewer* view){
 	// Drag Handler
 	osgbInteraction::DragHandler* dh = new osgbInteraction::DragHandler(bw, view->getCamera());
     view->addEventHandler(dh);

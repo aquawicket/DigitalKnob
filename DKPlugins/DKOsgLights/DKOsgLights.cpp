@@ -24,15 +24,15 @@
 * SOFTWARE.
 */
 #include "DK/stdafx.h"
-#include "DKOSGLights/DKOSGLights.h"
-#include "DKOSGWindow/DKOSGWindow.h"
+#include "DKOsgLights/DKOsgLights.h"
+#include "DKOsgWindow/DKOsgWindow.h"
 
 WARNING_DISABLE
 #include <osg/Point>
 WARNING_ENABLE
 
 
-bool DKOSGLights::Init(){
+bool DKOsgLights::Init(){
 	osg::Light* pLight = new osg::Light;
     pLight->setLightNum( 4 );                        
 	pLight->setPosition(osg::Vec4(1.0f,0.0f,1.0f,1.0f));  // last param    w = 0.0 directional light (direction) w = 1.0 point light (position)
@@ -45,15 +45,15 @@ bool DKOSGLights::Init(){
     // light source
     osg::LightSource* pLightSource = new osg::LightSource;    
     pLightSource->setLight( pLight );
-    DKOSGWindow::Instance("DKOSGWindow")->world->addChild( pLightSource );
+    DKOsgWindow::Instance("DKOsgWindow")->world->addChild( pLightSource );
 
-	DKOSGWindow::Instance("DKOSGWindow")->world->getOrCreateStateSet()->setMode( GL_LIGHT4, osg::StateAttribute::ON );
+	DKOsgWindow::Instance("DKOsgWindow")->world->getOrCreateStateSet()->setMode( GL_LIGHT4, osg::StateAttribute::ON );
 	return true;
 }
 
-osg::Node* DKOSGLights::createLights(){
+osg::Node* DKOsgLights::createLights(){
 	osg::StateSet* rootStateSet = new osg::StateSet;
-    DKOSGWindow::Instance("DKOSGWindow")->world->setStateSet(rootStateSet);
+    DKOsgWindow::Instance("DKOsgWindow")->world->setStateSet(rootStateSet);
 
     osg::Group* lightGroup = new osg::Group;
 

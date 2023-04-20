@@ -23,7 +23,7 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-#include "DKOSGCef/DKOSGCefKeyboard.h"
+#include "DKOsgCef/DKOsgCefKeyboard.h"
 
 WARNING_DISABLE
 #include "include/internal/cef_types.h"
@@ -35,7 +35,7 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
-unsigned int DKOSGCefKeyboard::getCefModifiers(int modKeyMask){
+unsigned int DKOsgCefKeyboard::getCefModifiers(int modKeyMask){
 	DKDEBUGFUNC(modKeyMask);
 	int modifiers = 0;
     if (modKeyMask & osgGA::GUIEventAdapter::MODKEY_CTRL)

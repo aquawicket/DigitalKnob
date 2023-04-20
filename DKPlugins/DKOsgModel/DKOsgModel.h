@@ -24,26 +24,26 @@
 * SOFTWARE.
 */
 #pragma once
-#ifndef DKOSGModel_H
-#define DKOSGModel_H
+#ifndef DKOsgModel_H
+#define DKOsgModel_H
 #include "DK/DK.h"
-#include "DKOSGWindow/DKOSGWindow.h"
+#include "DKOsgWindow/DKOsgWindow.h"
 
 WARNING_DISABLE
 #include <osg/Referenced>
 WARNING_ENABLE
 
 
-class DKOSGModel : public DKObjectT<DKOSGModel>
+class DKOsgModel : public DKObjectT<DKOsgModel>
 {
 public:
 	bool Init();
 	bool End();
 
-	bool Create(DKOSGWindow* window, osg::Group* theRoot, const DKString& file, osg::Vec3 pos);
+	bool Create(DKOsgWindow* window, osg::Group* theRoot, const DKString& file, osg::Vec3 pos);
 	osg::ref_ptr<osg::Node> modelNode;
 	osg::Group* theRoot;
 };
 
-REGISTER_OBJECT(DKOSGModel, false);
-#endif //DKOSGModel_H
+REGISTER_OBJECT(DKOsgModel, false);
+#endif //DKOsgModel_H

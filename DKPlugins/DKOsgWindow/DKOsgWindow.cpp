@@ -24,24 +24,24 @@
 * SOFTWARE.
 */
 #include "DK/stdafx.h"
-#include "DKOSGWindow/DKOSGWindow.h"
+#include "DKOsgWindow/DKOsgWindow.h"
 #include "DK/DKFile.h"
 #include "DKAssets/DKAssets.h"
 
 
 const unsigned int MASK_2D = 0xF0000000;
-std::map<int,int> DKOSGWindow::osgKeyCode;
-std::map<int,int> DKOSGWindow::osgCharCode;
-std::map<int,int> DKOSGWindow::osgShiftCharCode;
-std::map<int,int> DKOSGWindow::osgMouse;
+std::map<int,int> DKOsgWindow::osgKeyCode;
+std::map<int,int> DKOsgWindow::osgCharCode;
+std::map<int,int> DKOsgWindow::osgShiftCharCode;
+std::map<int,int> DKOsgWindow::osgMouse;
 
-bool DKOSGWindow::Init(){
+bool DKOsgWindow::Init(){
 	DKDEBUGFUNC();
 #if ANDROID
-	DKClass::DKCreate("DKOSGWindowAndroid");
+	DKClass::DKCreate("DKOsgWindowAndroid");
 #endif	
 	//link objects
-	dkOsgViewer = DKOSGViewer::Instance("DKOSGViewer0");
+	dkOsgViewer = DKOsgViewer::Instance("DKOsgViewer0");
 	if(!dkOsgViewer)
 		return DKERROR("dkOsgViewer invalid \n");
 	lastMouseX = 0;
@@ -51,28 +51,28 @@ bool DKOSGWindow::Init(){
 	DKFile::RemoveExtention(title);
 	CreateWin(title, 0, 0, 0, 0);
 
-	DKClass::RegisterFunc("DKOSGWindow::TestInt", &DKOSGWindow::TestInt, this);
-    DKClass::RegisterFunc("DKOSGWindow::TestString", &DKOSGWindow::TestString, this);
-    DKClass::RegisterFunc("DKOSGWindow::TestReturnInt", &DKOSGWindow::TestReturnInt, this);
-    DKClass::RegisterFunc("DKOSGWindow::TestReturnString", &DKOSGWindow::TestReturnString, this);
-	DKClass::RegisterFunc("DKOSGWindow::GetX", &DKOSGWindow::GetX, this);
-	DKClass::RegisterFunc("DKOSGWindow::GetY", &DKOSGWindow::GetY, this);
-	DKClass::RegisterFunc("DKOSGWindow::SetX", &DKOSGWindow::SetX, this);
-	DKClass::RegisterFunc("DKOSGWindow::SetY", &DKOSGWindow::SetY, this);
-	DKClass::RegisterFunc("DKOSGWindow::GetWidth", &DKOSGWindow::GetWidth, this);
-	DKClass::RegisterFunc("DKOSGWindow::GetHeight", &DKOSGWindow::GetHeight, this);
-	DKClass::RegisterFunc("DKOSGWindow::SetWidth", &DKOSGWindow::SetWidth, this);
-	DKClass::RegisterFunc("DKOSGWindow::SetHeight", &DKOSGWindow::SetHeight, this);
-	DKClass::RegisterFunc("DKOSGWindow::GetScreenWidth", &DKOSGWindow::GetScreenWidth, this);
-	DKClass::RegisterFunc("DKOSGWindow::GetScreenHeight", &DKOSGWindow::GetScreenHeight, this);
-	DKClass::RegisterFunc("DKOSGWindow::GetMouseX", &DKOSGWindow::GetMouseX, this);
-	DKClass::RegisterFunc("DKOSGWindow::GetMouseY", &DKOSGWindow::GetMouseY, this);
-	DKClass::RegisterFunc("DKOSGWindow::GetHwnd", &DKOSGWindow::GetHwnd, this);
+	DKClass::RegisterFunc("DKOsgWindow::TestInt", &DKOsgWindow::TestInt, this);
+    DKClass::RegisterFunc("DKOsgWindow::TestString", &DKOsgWindow::TestString, this);
+    DKClass::RegisterFunc("DKOsgWindow::TestReturnInt", &DKOsgWindow::TestReturnInt, this);
+    DKClass::RegisterFunc("DKOsgWindow::TestReturnString", &DKOsgWindow::TestReturnString, this);
+	DKClass::RegisterFunc("DKOsgWindow::GetX", &DKOsgWindow::GetX, this);
+	DKClass::RegisterFunc("DKOsgWindow::GetY", &DKOsgWindow::GetY, this);
+	DKClass::RegisterFunc("DKOsgWindow::SetX", &DKOsgWindow::SetX, this);
+	DKClass::RegisterFunc("DKOsgWindow::SetY", &DKOsgWindow::SetY, this);
+	DKClass::RegisterFunc("DKOsgWindow::GetWidth", &DKOsgWindow::GetWidth, this);
+	DKClass::RegisterFunc("DKOsgWindow::GetHeight", &DKOsgWindow::GetHeight, this);
+	DKClass::RegisterFunc("DKOsgWindow::SetWidth", &DKOsgWindow::SetWidth, this);
+	DKClass::RegisterFunc("DKOsgWindow::SetHeight", &DKOsgWindow::SetHeight, this);
+	DKClass::RegisterFunc("DKOsgWindow::GetScreenWidth", &DKOsgWindow::GetScreenWidth, this);
+	DKClass::RegisterFunc("DKOsgWindow::GetScreenHeight", &DKOsgWindow::GetScreenHeight, this);
+	DKClass::RegisterFunc("DKOsgWindow::GetMouseX", &DKOsgWindow::GetMouseX, this);
+	DKClass::RegisterFunc("DKOsgWindow::GetMouseY", &DKOsgWindow::GetMouseY, this);
+	DKClass::RegisterFunc("DKOsgWindow::GetHwnd", &DKOsgWindow::GetHwnd, this);
 	MapInputs();
 	return true;
 }
 
-bool DKOSGWindow::CreateWin(const DKString& title, const int& x, const int& y, const int& w, const int& h){
+bool DKOsgWindow::CreateWin(const DKString& title, const int& x, const int& y, const int& w, const int& h){
 	DKDEBUGFUNC(title, x, y, w, h);
 	mTitle = title;
 	winX = x;
@@ -108,7 +108,7 @@ bool DKOSGWindow::CreateWin(const DKString& title, const int& x, const int& y, c
 	return true;
 }
 
-bool DKOSGWindow::CreateView(){
+bool DKOsgWindow::CreateView(){
 	DKDEBUGFUNC();
 	unsigned int screen = 0;
 	view = new osgViewer::Viewer;
@@ -227,12 +227,12 @@ bool DKOSGWindow::CreateView(){
 	osg::Vec4 color(0.7,0.7,0.7,1.0); //light grey
 	view->getCamera()->setClearColor(color); 
 
-	DKDEBUG("DKOSGWindow::CreateView()  created window width:"+toString(width)+" height:"+toString(height)+"\n");
+	DKDEBUG("DKOsgWindow::CreateView()  created window width:"+toString(width)+" height:"+toString(height)+"\n");
 	return true;
 }
 
 /*
-bool DKOSGWindow::CreatePIP(const int& x, const int& y, const int& w, const int& h, DKOSGWindow* parent){
+bool DKOsgWindow::CreatePIP(const int& x, const int& y, const int& w, const int& h, DKOsgWindow* parent){
 	DKDEBUGFUNC(x, y, w, h, parent);
 	winX = x;
 	winY = y;
@@ -264,7 +264,7 @@ bool DKOSGWindow::CreatePIP(const int& x, const int& y, const int& w, const int&
 	if(!gc.valid())
 		return DKERROR("Error: GraphicsContext invalid \n");
 
-	//FIXME - work to be done here and DKOSGWindow::CreatePIP()
+	//FIXME - work to be done here and DKOsgWindow::CreatePIP()
 	DKLog("Creating Window. \n");
 	winX = x;
 	winY = y;
@@ -293,7 +293,7 @@ bool DKOSGWindow::CreatePIP(const int& x, const int& y, const int& w, const int&
 }
 */
 
-bool DKOSGWindow::SetTitle(const DKString& title){
+bool DKOsgWindow::SetTitle(const DKString& title){
 	DKDEBUGFUNC(title);
 #if DESKTOP
 	//Set Window Title
@@ -305,24 +305,24 @@ bool DKOSGWindow::SetTitle(const DKString& title){
 	}
 	return true;
 #else
-	return DKERROR("DKOSGWindow::SetTitle is not implemented on this OS. \n");
+	return DKERROR("DKOsgWindow::SetTitle is not implemented on this OS. \n");
 #endif
 }
 
-bool DKOSGWindow::SetIcon(const DKString& file){
+bool DKOsgWindow::SetIcon(const DKString& file){
 	DKDEBUGFUNC(file);
 #if WIN
 	HICON hIcon = (HICON)LoadImage(NULL, file.c_str(), IMAGE_ICON, 32, 32, LR_LOADFROMFILE);
 	SendMessage( hwnd, WM_SETICON, ICON_SMALL, (LPARAM)hIcon );
 	return true;
 #else
-	return DKERROR("DKOSGWindow::SetIcon is not implemented on this OS. \n");
+	return DKERROR("DKOsgWindow::SetIcon is not implemented on this OS. \n");
 #endif
 }
 
 
 #if WIN
-bool DKOSGWindow::SetHwnd(){
+bool DKOsgWindow::SetHwnd(){
 	DKDEBUGFUNC();
 	/*
 	typedef osgViewer::Viewer::Windows Windows;
@@ -343,7 +343,7 @@ bool DKOSGWindow::SetHwnd(){
 }
 #endif
 
-int DKOSGWindow::getNumScreens(){
+int DKOsgWindow::getNumScreens(){
 	DKDEBUGFUNC();
     osg::GraphicsContext::WindowingSystemInterface* wsi = osg::GraphicsContext::getWindowingSystemInterface();
     osg::GraphicsContext::ScreenIdentifier si;
@@ -351,15 +351,15 @@ int DKOSGWindow::getNumScreens(){
     return wsi->getNumScreens(si);
 }
 
-bool DKOSGWindow::handle(const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter&){
+bool DKOsgWindow::handle(const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter&){
 	//DKDEBUGFUNC(ea);
 	return handle(ea);
 }
 
-bool DKOSGWindow::handle(const osgGA::GUIEventAdapter& ea){
+bool DKOsgWindow::handle(const osgGA::GUIEventAdapter& ea){
 	//DKDEBUGFUNC(ea);
 	if(ea.getEventType() == osgGA::GUIEventAdapter::KEYDOWN){ 
-		//DKDEBUG("DKOSGWindow::KEYDOWN("+toString(ea.getUnmodifiedKey())+")\n");
+		//DKDEBUG("DKOsgWindow::KEYDOWN("+toString(ea.getUnmodifiedKey())+")\n");
 		if(ea.getUnmodifiedKey() > 96 && ea.getUnmodifiedKey() < 123){ //letter
 			if(ea.getModKeyMask() & osgGA::GUIEventAdapter::MODKEY_SHIFT && ea.getModKeyMask() & osgGA::GUIEventAdapter::MODKEY_CAPS_LOCK){ //both = lowercase
 				DKEvents::SendEvent("GLOBAL", "keypress", toString(osgCharCode[ea.getUnmodifiedKey()]));
@@ -485,7 +485,7 @@ bool DKOSGWindow::handle(const osgGA::GUIEventAdapter& ea){
     return false; //alow event to continue
 }
 
-bool DKOSGWindow::TestInt(const void* input, void* output) {
+bool DKOsgWindow::TestInt(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     int in = *(int*)input;
     int out = in;
@@ -493,7 +493,7 @@ bool DKOSGWindow::TestInt(const void* input, void* output) {
     return true;
 }
 
-bool DKOSGWindow::TestString(const void* input, void* output) {
+bool DKOsgWindow::TestString(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     std::string in = *(std::string*)input;
     std::string out = in;
@@ -501,7 +501,7 @@ bool DKOSGWindow::TestString(const void* input, void* output) {
     return true;
 }
 
-bool DKOSGWindow::TestReturnInt(const void* input, void* output) {
+bool DKOsgWindow::TestReturnInt(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     DK_UNUSED(input);
     int var = 1234;
@@ -509,7 +509,7 @@ bool DKOSGWindow::TestReturnInt(const void* input, void* output) {
     return true;
 }
 
-bool DKOSGWindow::TestReturnString(const void* input, void* output) {
+bool DKOsgWindow::TestReturnString(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     DK_UNUSED(input);
     std::string var = "Return test";
@@ -517,19 +517,19 @@ bool DKOSGWindow::TestReturnString(const void* input, void* output) {
     return true;
 }
 
-bool DKOSGWindow::GetX(const void* input, void* output){
+bool DKOsgWindow::GetX(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	*(int*)output = traits->x;
 	return true;
 }
 
-bool DKOSGWindow::GetY(const void* input, void* output){
+bool DKOsgWindow::GetY(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	*(int*)output = traits->y;
 	return true;
 }
 
-bool DKOSGWindow::SetX(const void* input, void* output){
+bool DKOsgWindow::SetX(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	int x = *(int*)input;
 	osgViewer::GraphicsWindow* gw = dynamic_cast<osgViewer::GraphicsWindow*>(view->getCamera()->getGraphicsContext());
@@ -537,7 +537,7 @@ bool DKOSGWindow::SetX(const void* input, void* output){
 	return true;
 }
 
-bool DKOSGWindow::SetY(const void* input, void* output){
+bool DKOsgWindow::SetY(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	int y = *(int*)input;
 	osgViewer::GraphicsWindow* gw = dynamic_cast<osgViewer::GraphicsWindow*>(view->getCamera()->getGraphicsContext());
@@ -545,19 +545,19 @@ bool DKOSGWindow::SetY(const void* input, void* output){
 	return true;
 }
 
-bool DKOSGWindow::GetWidth(const void* input, void* output){
+bool DKOsgWindow::GetWidth(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	*(int*)output = traits->width;
 	return true;
 }
 
-bool DKOSGWindow::GetHeight(const void* input, void* output){
+bool DKOsgWindow::GetHeight(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	*(int*)output = traits->height;
 	return true;
 }
 
-bool DKOSGWindow::SetWidth(const void* input, void* output){
+bool DKOsgWindow::SetWidth(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	int width = *(int*)input;
 	osgViewer::GraphicsWindow* gw = dynamic_cast<osgViewer::GraphicsWindow*>(view->getCamera()->getGraphicsContext());
@@ -565,7 +565,7 @@ bool DKOSGWindow::SetWidth(const void* input, void* output){
 	return true;
 }
 
-bool DKOSGWindow::SetHeight(const void* input, void* output){
+bool DKOsgWindow::SetHeight(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	int height = *(int*)input;
 	osgViewer::GraphicsWindow* gw = dynamic_cast<osgViewer::GraphicsWindow*>(view->getCamera()->getGraphicsContext());
@@ -573,7 +573,7 @@ bool DKOSGWindow::SetHeight(const void* input, void* output){
 	return true;
 }
 
-bool DKOSGWindow::GetScreenWidth(const void* input, void* output){
+bool DKOsgWindow::GetScreenWidth(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	osg::GraphicsContext::WindowingSystemInterface* wsi = osg::GraphicsContext::getWindowingSystemInterface();
 	osg::GraphicsContext::ScreenIdentifier si;
@@ -583,7 +583,7 @@ bool DKOSGWindow::GetScreenWidth(const void* input, void* output){
 	return true;
 }
 
-bool DKOSGWindow::GetScreenHeight(const void* input, void* output){
+bool DKOsgWindow::GetScreenHeight(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	osg::GraphicsContext::WindowingSystemInterface* wsi = osg::GraphicsContext::getWindowingSystemInterface();
 	osg::GraphicsContext::ScreenIdentifier si;
@@ -593,29 +593,29 @@ bool DKOSGWindow::GetScreenHeight(const void* input, void* output){
 	return true;
 }
 
-bool DKOSGWindow::GetMouseX(const void* input, void* output){
+bool DKOsgWindow::GetMouseX(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	*(int*)output = lastMouseX;
 	return true;
 }
 
-bool DKOSGWindow::GetMouseY(const void* input, void* output){
+bool DKOsgWindow::GetMouseY(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 	*(int*)output = lastMouseY;
 	return true;
 }
 
-bool DKOSGWindow::GetHwnd(const void* input, void* output){
+bool DKOsgWindow::GetHwnd(const void* input, void* output){
 	DKDEBUGFUNC(input, output);
 #if WIN
 	*(HWND*)output = hwnd;
 	return true;
 #else
-	return DKERROR("DKOSGWindow::GetHwnd(): This OS does not have and HWND handle");
+	return DKERROR("DKOsgWindow::GetHwnd(): This OS does not have and HWND handle");
 #endif
 }
 
-void DKOSGWindow::MapInputs(){
+void DKOsgWindow::MapInputs(){
 	DKDEBUGFUNC();
 	osgKeyCode[65307] = 27; //esc
 	osgKeyCode[65470] = 112; //f1

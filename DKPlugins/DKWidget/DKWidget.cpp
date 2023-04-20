@@ -1253,10 +1253,10 @@ bool DKWidget::GetMouseWindowX(int& x_out){
 	if(!DKUtil::GetMousePos(mouseX, mouseY)){ return false; }
 
 	//Dynamic cast a DKOject to it's class
-	//DKOSGWindow* window = dynamic_cast<DKOSGWindow*>(DKCreate("MainWindow"));
+	//DKOsgWindow* window = dynamic_cast<DKOsgWindow*>(DKCreate("MainWindow"));
 	//mouseX -= window->traits->x;
 #if DESKTOP
-	//mouseX -= DKOSGWindow::Get("DKOSGWindow")->traits->x;
+	//mouseX -= DKOsgWindow::Get("DKOsgWindow")->traits->x;
 	int x;
 	if(!DKWindow::GetX(x))
 		return 0;
@@ -1274,10 +1274,10 @@ bool DKWidget::GetMouseWindowY(int& y_out){
 	if(!DKUtil::GetMousePos(mouseX, mouseY)){ return 0; }
 
 	//Dynamic cast a DKOject to it's class
-	//DKOSGWindow* window = dynamic_cast<DKOSGWindow*>(DKCreate("MainWindow"));
+	//DKOsgWindow* window = dynamic_cast<DKOsgWindow*>(DKCreate("MainWindow"));
 	//mouseY -= window->traits->y;
 #if DESKTOP
-	//mouseY -= DKOSGWindow::Get("DKOSGWindow")->traits->y;
+	//mouseY -= DKOsgWindow::Get("DKOsgWindow")->traits->y;
 	int y;
 	if(!DKWindow::GetY(y)){ return false; }
 	mouseY -= y;
@@ -1321,9 +1321,9 @@ bool DKWidget::GetMouseElementPosition(Rocket::Core::Element* element, int& x_ou
 			if(GetProperty(ele,"right",temp)){
 
 				//Dynamic cast a DKOject to it's class
-				//DKOSGWindow* window = dynamic_cast<DKOSGWindow*>(DKCreate("MainWindow"));
+				//DKOsgWindow* window = dynamic_cast<DKOsgWindow*>(DKCreate("MainWindow"));
 				//int w_width = window->width;
-				//int w_width = DKOSGWindow::Get("DKOSGWindow")->width;
+				//int w_width = DKOsgWindow::Get("DKOsgWindow")->width;
 				int w_width;
 				if(!DKWindow::GetWidth(w_width)){ return false; }
 
@@ -1336,9 +1336,9 @@ bool DKWidget::GetMouseElementPosition(Rocket::Core::Element* element, int& x_ou
 			if(GetProperty(ele,"bottom",temp)){
 
 				//Dynamic cast a DKOject to it's class
-				//DKOSGWindow* window = dynamic_cast<DKOSGWindow*>(DKCreate("MainWindow"));
+				//DKOsgWindow* window = dynamic_cast<DKOsgWindow*>(DKCreate("MainWindow"));
 				//int w_height = window->height;
-				//int w_height = DKOSGWindow::Get("DKOSGWindow")->height;
+				//int w_height = DKOsgWindow::Get("DKOsgWindow")->height;
 				int w_height;
 				DKWindow::GetHeight(w_height);
 

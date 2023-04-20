@@ -24,8 +24,8 @@
 * SOFTWARE.
 */
 #pragma once
-#ifndef DKOSGWindow_H
-#define DKOSGWindow_H
+#ifndef DKOsgWindow_H
+#define DKOsgWindow_H
 
 WARNING_DISABLE
 	#if WIN
@@ -46,10 +46,10 @@ WARNING_ENABLE
 #include "DK/DKLog.h"
 #include "DK/DKString.h"
 #include "DK/DKApp.h"
-#include "DKOSGViewer/DKOSGViewer.h"
+#include "DKOsgViewer/DKOsgViewer.h"
 
 
-class DKOSGWindow : public osgGA::GUIEventHandler, public DKObjectT<DKOSGWindow>
+class DKOsgWindow : public osgGA::GUIEventHandler, public DKObjectT<DKOsgWindow>
 {
 public:
 	bool Init();
@@ -75,7 +75,7 @@ public:
 	bool GetMouseY(const void* input, void* output);
 	bool GetHwnd(const void* input, void* output);
 
-	DKOSGViewer* dkOsgViewer;
+	DKOsgViewer* dkOsgViewer;
 	osg::ref_ptr<osg::GraphicsContext> gc;
 	osg::ref_ptr<osg::GraphicsContext::Traits> traits;
 	osg::ref_ptr<osg::Group> root;
@@ -106,7 +106,7 @@ public:
 #endif
 	
 private:
-	//bool CreatePIP(const int& x, const int& y, const int& w, const int& h, DKOSGWindow* parent);
+	//bool CreatePIP(const int& x, const int& y, const int& w, const int& h, DKOsgWindow* parent);
 	int lastMouseX;
 	int lastMouseY;
 	virtual bool handle(const osgGA::GUIEventAdapter& ea,osgGA::GUIActionAdapter&);
@@ -116,5 +116,5 @@ private:
 	osg::ref_ptr<osg::GraphicsContext::WindowingSystemInterface> wsi;
 };
 
-REGISTER_OBJECT(DKOSGWindow, true)
-#endif //DKOSGWindow_H
+REGISTER_OBJECT(DKOsgWindow, true)
+#endif //DKOsgWindow_H

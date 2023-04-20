@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 #include "DK/stdafx.h"
-#include "DKOSGViewer/DKGLInfo.h"
+#include "DKOsgViewer/DKGLInfo.h"
 
 WARNING_DISABLE
 #include <osg/FragmentProgram>

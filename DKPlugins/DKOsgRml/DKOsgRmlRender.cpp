@@ -24,8 +24,8 @@
 * SOFTWARE.
 */
 #include "DK/stdafx.h"
-#include "DKOSGRml/DKOSGRmlRender.h"
-#include "DKOSGViewer/DKGLInfo.h"
+#include "DKOsgRml/DKOsgRmlRender.h"
+#include "DKOsgViewer/DKGLInfo.h"
 
 WARNING_DISABLE
 #include <osg/BlendFunc>
@@ -46,7 +46,7 @@ WARNING_ENABLE
 
 std::string uniformName = "LibRmlPosition";
 
-DKOSGRmlRender::DKOSGRmlRender():
+DKOsgRmlRender::DKOsgRmlRender():
 	_scissorsEnabled(false),
 	_fullScreen(false),
 	_geode(new osg::Geode()),
@@ -54,11 +54,11 @@ DKOSGRmlRender::DKOSGRmlRender():
 		_geode->setDataVariance(osg::Object::DYNAMIC);
 }
 
-DKOSGRmlRender::~DKOSGRmlRender(){
+DKOsgRmlRender::~DKOsgRmlRender(){
 
 }
 
-void DKOSGRmlRender::setRenderTarget(osg::Group* grp, int w, int h, bool fullscreen){
+void DKOsgRmlRender::setRenderTarget(osg::Group* grp, int w, int h, bool fullscreen){
 	_fullScreen = fullscreen;
 	_screenWidth = w;
 	_screenHeight = h;
@@ -121,12 +121,12 @@ void DKOSGRmlRender::setRenderTarget(osg::Group* grp, int w, int h, bool fullscr
 	_geode->removeDrawables(0, _geode->getNumDrawables());
 }
 
-osg::Group* DKOSGRmlRender::getRenderTarget() const{
+osg::Group* DKOsgRmlRender::getRenderTarget() const{
 	return _renderTarget;
 }
 
 /*
-osg::Object* DKOSGRmlRender::createGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rml::TextureHandle texture, bool useVBOs){
+osg::Object* DKOsgRmlRender::createGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rml::TextureHandle texture, bool useVBOs){
 	osg::Geometry* geometry = new osg::Geometry();
 	geometry->setUseDisplayList(false);
 	geometry->setUseVertexBufferObjects(useVBOs);
@@ -188,7 +188,7 @@ osg::Object* DKOSGRmlRender::createGeometry(Rml::Vertex* vertices, int num_verti
 /// @param[in] num_indices The number of indices passed to the function. This will always be a multiple of three.
 /// @param[in] texture The texture to be applied to the geometry. This may be NULL, in which case the geometry is untextured.
 /// @param[in] translation The translation to apply to the geometry.
-void DKOSGRmlRender::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rml::TextureHandle texture, const Rml::Vector2f& translation){
+void DKOsgRmlRender::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rml::TextureHandle texture, const Rml::Vector2f& translation){
 	osg::Geometry* geometry = static_cast<osg::Geometry*>(createGeometry(vertices, num_vertices, indices, num_indices, texture, false));
 	osg::MatrixTransform* trans = new osg::MatrixTransform();
 	trans->setMatrix(osg::Matrix::translate(osg::Vec3(translation.x, translation.y, 0)));
@@ -211,7 +211,7 @@ void DKOSGRmlRender::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int
 /// @param[in] num_indices The number of indices passed to the function. This will always be a multiple of three.
 /// @param[in] texture The texture to be applied to the geometry. This may be NULL, in which case the geometry is untextured.
 /// @return The application-specific compiled geometry. Compiled geometry will be stored and rendered using RenderCompiledGeometry() in future calls, and released with ReleaseCompiledGeometry() when it is no longer needed.
-Rml::CompiledGeometryHandle DKOSGRmlRender::CompileGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rml::TextureHandle texture){
+Rml::CompiledGeometryHandle DKOsgRmlRender::CompileGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rml::TextureHandle texture){
 	osg::Geometry* node = static_cast<osg::Geometry*>(createGeometry(vertices, num_vertices, indices, num_indices, texture, true));
 	node->ref();
 	osg::Uniform* posuni = new osg::Uniform(osg::Uniform::FLOAT_VEC2, uniformName);
@@ -222,7 +222,7 @@ Rml::CompiledGeometryHandle DKOSGRmlRender::CompileGeometry(Rml::Vertex* vertice
 /// Called by Rml when it wants to render application-compiled geometry.
 /// @param[in] geometry The application-specific compiled geometry to render.
 /// @param[in] translation The translation to apply to the geometry.
-void DKOSGRmlRender::RenderCompiledGeometry(Rml::CompiledGeometryHandle geo, const Rml::Vector2f& translation){
+void DKOsgRmlRender::RenderCompiledGeometry(Rml::CompiledGeometryHandle geo, const Rml::Vector2f& translation){
 	osg::Geometry* geometry = reinterpret_cast<osg::Geometry*>(geo);
 	osg::StateSet* ss = geometry->getOrCreateStateSet();
 	osg::Uniform* uni = ss->getUniform(uniformName);
@@ -242,7 +242,7 @@ void DKOSGRmlRender::RenderCompiledGeometry(Rml::CompiledGeometryHandle geo, con
 
 /// Called by Rml when it wants to release application-compiled geometry.
 /// @param[in] geometry The application-specific compiled geometry to release.
-void DKOSGRmlRender::ReleaseCompiledGeometry(Rml::CompiledGeometryHandle geo){
+void DKOsgRmlRender::ReleaseCompiledGeometry(Rml::CompiledGeometryHandle geo){
 	osg::Geometry* geometry = reinterpret_cast<osg::Geometry*>(geo);
 	if(geometry->getNumParents() != 0){
 		assert(geometry->getNumParents() == 1);
@@ -255,7 +255,7 @@ void DKOSGRmlRender::ReleaseCompiledGeometry(Rml::CompiledGeometryHandle geo){
 
 /// Called by Rml when it wants to enable or disable scissoring to clip content.
 /// @param[in] enable True if scissoring is to enabled, false if it is to be disabled.
-void DKOSGRmlRender::EnableScissorRegion(bool enable){
+void DKOsgRmlRender::EnableScissorRegion(bool enable){
 	// cannot use scissors when rendering to in-scene geometry
 	if(_fullScreen)
 		_scissorsEnabled = enable;
@@ -266,11 +266,11 @@ void DKOSGRmlRender::EnableScissorRegion(bool enable){
 /// @param[in] y The top-most pixel to be rendered. All pixels to the top of this should be clipped.
 /// @param[in] width The width of the scissored region. All pixels to the right of (x + width) should be clipped.
 /// @param[in] height The height of the scissored region. All pixels to below (y + height) should be clipped.
-void DKOSGRmlRender::SetScissorRegion(int x, int y, int width, int height){
+void DKOsgRmlRender::SetScissorRegion(int x, int y, int width, int height){
 	_scissorTest = new osg::Scissor(x, _screenHeight - y - height, width, height);
 }
 
-void DKOSGRmlRender::AddTexture(Rml::TextureHandle& texture_handle, osg::Image* image){
+void DKOsgRmlRender::AddTexture(Rml::TextureHandle& texture_handle, osg::Image* image){
 	osg::ref_ptr<osg::Texture2D> texture = new osg::Texture2D();
 	texture->setResizeNonPowerOfTwoHint(false);
 	texture->setImage(image);
@@ -293,7 +293,7 @@ void DKOSGRmlRender::AddTexture(Rml::TextureHandle& texture_handle, osg::Image* 
 /// @param[out] texture_dimensions The variable to write the dimensions of the loaded texture.
 /// @param[in] source The application-defined image source, joined with the path of the referencing document.
 /// @return True if the load attempt succeeded and the handle and dimensions are valid, false if not.
-bool DKOSGRmlRender::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vector2i& texture_dimensions, const Rml::String& source){
+bool DKOsgRmlRender::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vector2i& texture_dimensions, const Rml::String& source){
 	std::string src = source.CString();
 	// Hack: Sometimes libRml attaches that string to paths, sometimes it doesn't (when cloning elements)
     /*
@@ -327,7 +327,7 @@ bool DKOSGRmlRender::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vector
 /// @param[in] source The raw 8-bit texture data. Each pixel is made up of four 8-bit values, indicating red, green, blue and alpha in that order.
 /// @param[in] source_dimensions The dimensions, in pixels, of the source data.
 /// @return True if the texture generation succeeded and the handle is valid, false if not.
-bool DKOSGRmlRender::GenerateTexture(Rml::TextureHandle& texture_handle, const Rml::byte* source, const Rml::Vector2i& source_dimensions){
+bool DKOsgRmlRender::GenerateTexture(Rml::TextureHandle& texture_handle, const Rml::byte* source, const Rml::Vector2i& source_dimensions){
 	osg::ref_ptr<osg::Image> img = new osg::Image();
 	int w = source_dimensions.x;
 	int h = source_dimensions.y;
@@ -339,13 +339,13 @@ bool DKOSGRmlRender::GenerateTexture(Rml::TextureHandle& texture_handle, const R
 
 /// Called by Rml when a loaded texture is no longer required.
 /// @param texture The texture handle to release.
-void DKOSGRmlRender::ReleaseTexture(Rml::TextureHandle th){
+void DKOsgRmlRender::ReleaseTexture(Rml::TextureHandle th){
 	osg::Texture2D* texture = reinterpret_cast<osg::Texture2D*>(th);
 	texture->unref();
 }
 
 /// Called when this render interface is released.
-void DKOSGRmlRender::Release(){
+void DKOsgRmlRender::Release(){
 
 }
 
@@ -356,17 +356,17 @@ void DKOSGRmlRender::Release(){
 
 
 #else //!USE_SHADERS
-DKOSGRmlRender::DKOSGRmlRender() : _scissorsEnabled(false), _fullScreen(false){
+DKOsgRmlRender::DKOsgRmlRender() : _scissorsEnabled(false), _fullScreen(false){
 
 }
 
-DKOSGRmlRender::~DKOSGRmlRender(){
+DKOsgRmlRender::~DKOsgRmlRender(){
 	//delete _renderTarget;
 	//delete _renderTargetStateSet;
 }
 
-void DKOSGRmlRender::setRenderTarget(osg::Group* grp, int w, int h, bool fullscreen){
-	//DKINFO("DKOSGRmlRender::setRenderTarget() width:"+toString(w)+" height:"+toString(h));
+void DKOsgRmlRender::setRenderTarget(osg::Group* grp, int w, int h, bool fullscreen){
+	//DKINFO("DKOsgRmlRender::setRenderTarget() width:"+toString(w)+" height:"+toString(h));
 	_fullScreen = fullscreen;
 	_screenWidth = w;
 	_screenHeight = h;
@@ -391,7 +391,7 @@ void DKOSGRmlRender::setRenderTarget(osg::Group* grp, int w, int h, bool fullscr
 	}
 }
 
-osg::Group* DKOSGRmlRender::getRenderTarget() const{
+osg::Group* DKOsgRmlRender::getRenderTarget() const{
 	return _renderTarget;
 }
 
@@ -403,13 +403,13 @@ osg::Group* DKOSGRmlRender::getRenderTarget() const{
 /// @param[in] num_indices The number of indices passed to the function. This will always be a multiple of three.
 /// @param[in] texture The texture to be applied to the geometry. This may be NULL, in which case the geometry is untextured.
 /// @param[in] translation The translation to apply to the geometry.
-void DKOSGRmlRender::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rml::TextureHandle texture, const Rml::Vector2f& translation){
+void DKOsgRmlRender::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rml::TextureHandle texture, const Rml::Vector2f& translation){
 	//Cef
 	///////////////////////////////////////////////////////////
 	/*
 	if(has(texture_name[texture],"iframe_")){
 		//return;
-		osg::Image* cef_image = static_cast<osg::Image*>(DKClass::CallFunc("DKOSGCef::GetTexture"));
+		osg::Image* cef_image = static_cast<osg::Image*>(DKClass::CallFunc("DKOsgCef::GetTexture"));
 		if(!cef_image)
 			return; 
 		osg::ref_ptr<osg::Texture2D> cef_texture = new osg::Texture2D();//LEAK
@@ -483,7 +483,7 @@ void DKOSGRmlRender::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int
 
 /// Called by Rml when it wants to enable or disable scissoring to clip content.
 /// @param[in] enable True if scissoring is to enabled, false if it is to be disabled.
-void DKOSGRmlRender::EnableScissorRegion(bool enable){
+void DKOsgRmlRender::EnableScissorRegion(bool enable){
 	if(_fullScreen)
 		_scissorsEnabled = enable;
 	
@@ -494,11 +494,11 @@ void DKOSGRmlRender::EnableScissorRegion(bool enable){
 /// @param[in] y The top-most pixel to be rendered. All pixels to the top of this should be clipped.
 /// @param[in] width The width of the scissored region. All pixels to the right of (x + width) should be clipped.
 /// @param[in] height The height of the scissored region. All pixels to below (y + height) should be clipped.
-void DKOSGRmlRender::SetScissorRegion(int x, int y, int width, int height){
+void DKOsgRmlRender::SetScissorRegion(int x, int y, int width, int height){
 	_scissorTest = new osg::Scissor(x, _screenHeight - y - height, width, height);
 }
 
-void DKOSGRmlRender::AddTexture(Rml::TextureHandle& texture_handle, osg::Image* image){
+void DKOsgRmlRender::AddTexture(Rml::TextureHandle& texture_handle, osg::Image* image){
 	osg::ref_ptr<osg::Texture2D> texture = new osg::Texture2D();//LEAK
 	texture->setResizeNonPowerOfTwoHint(false);
 	texture->setImage(image);
@@ -523,7 +523,7 @@ void DKOSGRmlRender::AddTexture(Rml::TextureHandle& texture_handle, osg::Image* 
 /// @param[out] texture_dimensions The variable to write the dimensions of the loaded texture.
 /// @param[in] source The application-defined image source, joined with the path of the referencing document.
 /// @return True if the load attempt succeeded and the handle and dimensions are valid, false if not.
-bool DKOSGRmlRender::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vector2i& texture_dimensions, const Rml::String& source){
+bool DKOsgRmlRender::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vector2i& texture_dimensions, const Rml::String& source){
 	DKString src = source;
 	//CEF Texture
 	if(has(src,"iframe_")){
@@ -560,7 +560,7 @@ bool DKOSGRmlRender::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vector
 /// @param[in] source The raw 8-bit texture data. Each pixel is made up of four 8-bit values, indicating red, green, blue and alpha in that order.
 /// @param[in] source_dimensions The dimensions, in pixels, of the source data.
 /// @return True if the texture generation succeeded and the handle is valid, false if not.
-bool DKOSGRmlRender::GenerateTexture(Rml::TextureHandle& texture_handle, const Rml::byte* source, const Rml::Vector2i& source_dimensions){
+bool DKOsgRmlRender::GenerateTexture(Rml::TextureHandle& texture_handle, const Rml::byte* source, const Rml::Vector2i& source_dimensions){
 	osg::ref_ptr<osg::Image> img = new osg::Image();//LEAK
 	int w = source_dimensions.x;
 	int h = source_dimensions.y;
@@ -572,13 +572,13 @@ bool DKOSGRmlRender::GenerateTexture(Rml::TextureHandle& texture_handle, const R
 
 /// Called by Rml when a loaded texture is no longer required.
 /// @param texture The texture handle to release.
-void DKOSGRmlRender::ReleaseTexture(Rml::TextureHandle th){
+void DKOsgRmlRender::ReleaseTexture(Rml::TextureHandle th){
 	osg::Texture2D* texture = reinterpret_cast<osg::Texture2D*>(th);
 	texture->unref();
 }
 
 /// Called when this render interface is released.
-void DKOSGRmlRender::Release(){
+void DKOsgRmlRender::Release(){
 
 }
 

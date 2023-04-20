@@ -25,8 +25,8 @@
 */
 
 #pragma once
-#ifndef DKOSGAudio_H
-#define DKOSGAudio_H
+#ifndef DKOsgAudio_H
+#define DKOsgAudio_H
 #include "DK/DK.h"
 
 WARNING_DISABLE
@@ -38,7 +38,7 @@ WARNING_DISABLE
 //WARING_ENABLE
 
 
-class DKOSGAudio : public DKObjectT<DKOSGAudio>
+class DKOsgAudio : public DKObjectT<DKOsgAudio>
 {
 public:
 	bool Init();
@@ -53,5 +53,5 @@ public:
 	osg::ref_ptr<osgAudio::SoundState> musicSoundState;
 };
 
-REGISTER_OBJECT(DKOSGAudio, false)
-#endif //DKOSGAudio_H
+REGISTER_OBJECT(DKOsgAudio, false)
+#endif //DKOsgAudio_H

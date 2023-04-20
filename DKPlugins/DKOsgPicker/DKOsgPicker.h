@@ -25,8 +25,8 @@
 */
 //#ifdef USE_osgFX
 #pragma once
-#ifndef DKOSGPicker_H
-#define DKOSGPicker_H
+#ifndef DKOsgPicker_H
+#define DKOsgPicker_H
 
 #include "DK/DK.h"
 
@@ -36,12 +36,12 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
-class DKOSGPicker : public osgGA::GUIEventHandler, public DKObjectT<DKOSGPicker> 
+class DKOsgPicker : public osgGA::GUIEventHandler, public DKObjectT<DKOsgPicker> 
 {
 public:
 	bool Init();
 	
-	~DKOSGPicker();
+	~DKOsgPicker();
 
 private:
     bool handle(const osgGA::GUIEventAdapter& ea,osgGA::GUIActionAdapter& aa);
@@ -52,6 +52,6 @@ private:
     osg::ref_ptr<osgText::Text> _updateText;
 };
 
-REGISTER_OBJECT(DKOSGPicker, true);
-#endif //DKOSGPicker_H
+REGISTER_OBJECT(DKOsgPicker, true);
+#endif //DKOsgPicker_H
 //#endif //USE_osgFX

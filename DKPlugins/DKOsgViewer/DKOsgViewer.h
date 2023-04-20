@@ -24,8 +24,8 @@
 * SOFTWARE.
 */
 #pragma once
-#ifndef DKOSGViewer_H
-#define DKOSGViewer_H
+#ifndef DKOsgViewer_H
+#define DKOsgViewer_H
 #include "DK/DK.h"
 
 WARNING_DISABLE
@@ -155,7 +155,7 @@ WARNING_ENABLE
 	#endif
 	#ifdef HAVE_osgdb_ffmpeg
 		#ifndef ANDROID
-			#include "DKOSGVideo/DKOSGVideo.h"
+			#include "DKOsgVideo/DKOsgVideo.h"
 			//DKVIDEO_LOAD_DLLS()
 			//USE_OSGPLUGIN(ffmpeg)
 		#endif
@@ -322,7 +322,7 @@ WARNING_ENABLE
 #endif //DKAPP
 
 
-class DKOSGViewer : public DKObjectT<DKOSGViewer>
+class DKOsgViewer : public DKObjectT<DKOsgViewer>
 {
 public:
 	bool Init();
@@ -333,7 +333,7 @@ public:
 	osg::ref_ptr<osgViewer::CompositeViewer> viewer;
 	static bool AppendDataPath(const DKString& datapath);
 };
-REGISTER_OBJECT(DKOSGViewer, true);
+REGISTER_OBJECT(DKOsgViewer, true);
 
 
-#endif //DKOSGViewer_H
+#endif //DKOsgViewer_H

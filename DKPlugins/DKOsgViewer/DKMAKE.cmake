@@ -121,4 +121,4 @@ dk_depend(openscenegraph)
 #dk_depend(openscenegraph osgdb_zip)
 
 
-dk_generateCmake(DKOSGViewer)
+dk_generateCmake(DKOsgViewer)

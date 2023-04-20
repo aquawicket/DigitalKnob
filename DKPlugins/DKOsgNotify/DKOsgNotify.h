@@ -24,8 +24,8 @@
 * SOFTWARE.
 */
 #pragma once
-#ifndef DKOSGNotify_H
-#define DKOSGNotify_H
+#ifndef DKOsgNotify_H
+#define DKOsgNotify_H
 #include "DK/DK.h"
 
 WARNING_DISABLE
@@ -36,7 +36,7 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
-class DKOSGNotify : public DKObjectT<DKOSGNotify>, public osg::NotifyHandler
+class DKOsgNotify : public DKObjectT<DKOsgNotify>, public osg::NotifyHandler
 {
 public:
 	bool Init();
@@ -52,5 +52,5 @@ private:
 };
 
 
-REGISTER_OBJECT(DKOSGNotify, true);
-#endif //DKOSGNotify_H
+REGISTER_OBJECT(DKOsgNotify, true);
+#endif //DKOsgNotify_H

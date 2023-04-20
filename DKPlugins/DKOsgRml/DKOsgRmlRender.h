@@ -24,8 +24,8 @@
 * SOFTWARE.
 */
 #pragma once
-#ifndef DKOSGRmlRender_H
-#define DKOSGRmlRender_H
+#ifndef DKOsgRmlRender_H
+#define DKOsgRmlRender_H
 
 WARNING_DISABLE
 #include <RmlUi/Core.h>
@@ -38,11 +38,11 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
-class DKOSGRmlRender : public Rml::RenderInterface
+class DKOsgRmlRender : public Rml::RenderInterface
 {
 public:
-	DKOSGRmlRender();
-	~DKOSGRmlRender();
+	DKOsgRmlRender();
+	~DKOsgRmlRender();
 
 	void setRenderTarget(osg::Group* grp, int w, int h, bool fullscreen);
 	osg::Group* getRenderTarget() const;
@@ -69,4 +69,4 @@ private:
 	std::map<Rml::TextureHandle, DKString> texture_name; //texture to name map
 };
 
-#endif //DKOSGRmlRender_H
+#endif //DKOsgRmlRender_H

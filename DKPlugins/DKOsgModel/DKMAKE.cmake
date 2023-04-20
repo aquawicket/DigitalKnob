@@ -1,4 +1,4 @@
-dk_depend(DKOSGWindow)
+dk_depend(DKOsgWindow)
 #dk_depend(openscenegraph osgdb_3dc)
 #if(NOT ANDROID)
 #	dk_depend(openscenegraph osgdb_3ds)
@@ -33,4 +33,4 @@ dk_depend(DKOSGWindow)
 #dk_depend(openscenegraph osgdb_deprecated_osg)
 
 
-dk_generateCmake(DKOSGModel)
+dk_generateCmake(DKOsgModel)

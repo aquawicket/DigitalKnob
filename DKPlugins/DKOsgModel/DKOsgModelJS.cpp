@@ -24,20 +24,20 @@
 * SOFTWARE.
 */
 #ifdef USE_DKDuktape 
-#include "DKOSGModel/DKOSGModel.h"
-#include "DKOSGModel/DKOSGModelJS.h"
-#include "DKOSGWindow/DKOSGWindow.h"
+#include "DKOsgModel/DKOsgModel.h"
+#include "DKOsgModel/DKOsgModelJS.h"
+#include "DKOsgWindow/DKOsgWindow.h"
 
 
-bool DKOSGModelJS::Init(){
-	//DKDuktape::AttachFunction("DKOSGModel_NewModel", DKOSGModelJS::NewModel, 1);
+bool DKOsgModelJS::Init(){
+	//DKDuktape::AttachFunction("DKOsgModel_NewModel", DKOsgModelJS::NewModel, 1);
 	return true;
 }
 
 /*
-int DKOSGModelJS::NewModel(duk_context* ctx){
+int DKOsgModelJS::NewModel(duk_context* ctx){
 	DKString file = duk_require_string(ctx, 0);
-	DKCreate("DKOSGModel,,DKOSGWindow,"+file);
+	DKCreate("DKOsgModel,,DKOsgWindow,"+file);
 	return 1;
 }
 */

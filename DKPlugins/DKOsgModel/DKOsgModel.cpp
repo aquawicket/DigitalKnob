@@ -24,8 +24,8 @@
 * SOFTWARE.
 */
 #include "DK/stdafx.h"
-#include "DKOSGModel/DKOSGModel.h"
-#include "DKOSGWindow/DKOSGWindow.h"
+#include "DKOsgModel/DKOsgModel.h"
+#include "DKOsgWindow/DKOsgWindow.h"
 #include "DK/DKFile.h"
 #include "DK/DKString.h"
 #include "DKAssets/DKAssets.h"
@@ -40,21 +40,21 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
-bool DKOSGModel::Init(){
+bool DKOsgModel::Init(){
 	DKDEBUGFUNC();
 	modelNode = NULL;
-	Create(DKOSGWindow::Get("DKOSGWindow0"), DKOSGWindow::Get("DKOSGWindow0")->world, data[1], osg::Vec3(0, 0, 70));
+	Create(DKOsgWindow::Get("DKOsgWindow0"), DKOsgWindow::Get("DKOsgWindow0")->world, data[1], osg::Vec3(0, 0, 70));
 	return true;
 }
 
-bool DKOSGModel::End(){
+bool DKOsgModel::End(){
 	DKDEBUGFUNC();
 	this->theRoot->removeChild(modelNode);
 	modelNode = NULL;
 	return true;
 }
 
-bool DKOSGModel::Create(DKOSGWindow* window, osg::Group* theRoot, const DKString& file,  osg::Vec3 pos){
+bool DKOsgModel::Create(DKOsgWindow* window, osg::Group* theRoot, const DKString& file,  osg::Vec3 pos){
 	DKDEBUGFUNC(window, theRoot, file, pos);
 	//DKLog("Loading Model "+file+"\n");
 	this->theRoot = theRoot;

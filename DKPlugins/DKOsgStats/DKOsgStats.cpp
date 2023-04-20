@@ -24,14 +24,14 @@
 * SOFTWARE.
 */
 #include "DK/stdafx.h"
-#include "DKOSGStats/DKOSGStats.h"
-#include "DKOSGWindow/DKOSGWindow.h"
+#include "DKOsgStats/DKOsgStats.h"
+#include "DKOsgWindow/DKOsgWindow.h"
 
 
-bool DKOSGStats::Init(){
+bool DKOsgStats::Init(){
 //#ifdef USE_osgText
 	stats = new osgViewer::StatsHandler();
-	DKOSGWindow::Instance("DKOSGWindow")->view->addEventHandler(stats);
+	DKOsgWindow::Instance("DKOsgWindow")->view->addEventHandler(stats);
 #ifndef ANDROID
 	stats->setKeyEventTogglesOnScreenStats(osgGA::GUIEventAdapter::KEY_F1);
 #endif
@@ -42,13 +42,13 @@ bool DKOSGStats::Init(){
 //#endif
 }
 
-bool DKOSGStats::End(){
-	//DKOSGWindow::Instance("DKOSGWindow")->view->removeEventHandler(stats);
+bool DKOsgStats::End(){
+	//DKOsgWindow::Instance("DKOsgWindow")->view->removeEventHandler(stats);
 	stats = NULL;
 	return true;
 }
 
-bool DKOSGStats::Toggle(){
+bool DKOsgStats::Toggle(){
 	// TODO
 	return DKERROR("not implemented \n");
 }
