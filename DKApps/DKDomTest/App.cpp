@@ -47,8 +47,8 @@
 // DKConsoleWindow
 #include "TEST_DKConsoleWindow.h"
 
-// DKSDLWindow
-#include "TEST_DKSDLWindow.h"
+// DKSdlWindow
+#include "TEST_DKSdlWindow.h"
 
 
 ///////////////////////////////////////
