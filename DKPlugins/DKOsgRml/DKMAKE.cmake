@@ -1,0 +1,10 @@
+dk_depend(DKRml)
+dk_depend(DKOSGWindow)
+#dk_depend(openscenegraph osgdb_jpeg)
+#dk_depend(openscenegraph osgdb_gif)
+#dk_depend(openscenegraph osgdb_tiff)
+#dk_depend(openscenegraph osgdb_bmp)
+#dk_depend(openscenegraph osgdb_png)
+#dk_depend(openscenegraph osgdb_freetype)
+
+dk_generateCmake(DKOSGRml)
