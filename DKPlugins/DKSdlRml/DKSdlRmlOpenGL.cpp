@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-//#if USE_DKSDLRMLOPENGL
+//#if USE_DKSdlRMLOPENGL
 
 #include "DK/DK.h"
 #include "DK/DKString.h"
@@ -286,4 +286,4 @@ void DKSdlRmlOpenGL::ReleaseTexture(Rml::TextureHandle texture_handle){
     SDL_DestroyTexture((SDL_Texture*) texture_handle);
 }
 
-//#endif //USE_DKSDLRMLOPENGL
+//#endif //USE_DKSdlRMLOPENGL

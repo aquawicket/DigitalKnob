@@ -37,17 +37,17 @@ WARNING_ENABLE
 #include "DKRml/DKRml.h"
 #include "DKSdlRml/DKSdlRmlSystem.h"
 
-#define USE_DKSDLRMLRENDERER 1
-//#define USE_DKSDLRMLOPENGL 1
-//#define USE_DKSDLRMLSHELL 1
+#define USE_DKSdlRMLRENDERER 1
+//#define USE_DKSdlRMLOPENGL 1
+//#define USE_DKSdlRMLSHELL 1
 
-#if USE_DKSDLRMLRENDERER
+#if USE_DKSdlRMLRENDERER
 #	include "DKSdlRml/DKSdlRmlRenderer.h"
 #endif
-#if USE_DKSDLRMLOPENGL
+#if USE_DKSdlRMLOPENGL
 #	include "DKSdlRml/DKSdlRmlOpenGL.h"
 #endif
-#if USE_DKSDLRMLSHELL
+#if USE_DKSdlRMLSHELL
 #	include "ShellRenderInterfaceOpenGL.h"
 #endif
 
@@ -66,11 +66,11 @@ public:
 	DKRml* dkRml;
 	DKSdlWindow* dkSdlWindow;
 	
-#	if USE_DKSDLRMLRENDERER
+#	if USE_DKSdlRMLRENDERER
 		DKSdlRmlRenderer* Renderer;
-#	elif USE_DKSDLRMLOPENGL
+#	elif USE_DKSdlRMLOPENGL
 		DKSdlRmlOpenGL* Renderer;
-#	elif USE_DKSDLRMLSHELL
+#	elif USE_DKSdlRMLSHELL
 		ShellRenderInterfaceOpenGL* Renderer;
 #	endif
 

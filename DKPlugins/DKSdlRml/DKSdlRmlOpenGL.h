@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-//#ifdef USE_DKSDLRMLOPENGL
+//#ifdef USE_DKSdlRMLOPENGL
 #pragma once
 #ifndef DKSdlRmlOpenGL_H
 #define DKSdlRmlOpenGL_H
@@ -78,6 +78,6 @@ private:
 #endif
 };
 
-#endif //USE_DKSDLRMLOPENGL
+#endif //USE_DKSdlRMLOPENGL
 
 //#endif //DKSdlRmlRenderer_H

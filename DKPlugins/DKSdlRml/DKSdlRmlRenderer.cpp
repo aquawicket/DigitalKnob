@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-//#if USE_DKSDLRMLRENDERER
+//#if USE_DKSdlRMLRENDERER
 
 #include "DK/DK.h"
 #include "DKSdlRml/DKSdlRmlRenderer.h"
@@ -216,4 +216,4 @@ void DKSdlRmlRenderer::SetTransform(const Rml::Matrix4f* transform){
     DKDEBUGFUNC(transform);
 }
 
-//#endif //USE_DKSDLRMLRENDERER
+//#endif //USE_DKSdlRMLRENDERER

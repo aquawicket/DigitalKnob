@@ -24,10 +24,10 @@
 * SOFTWARE.
 */
 
-//#if USE_DKSDLRMLRENDERER
+//#if USE_DKSdlRMLRENDERER
 
-#ifndef DKSDLRMLRENDERER_H
-#define DKSDLRMLRENDERER_H
+#ifndef DKSdlRMLRENDERER_H
+#define DKSdlRMLRENDERER_H
 
 WARNING_DISABLE
 #include "SDL.h"
@@ -76,6 +76,6 @@ private:
 	std::map<Rml::TextureHandle, DKString> texture_name; //texture to name map
 };
 
-#endif //DKSDLRMLRENDERER_H
+#endif //DKSdlRMLRENDERER_H
 
-//#endif //USE_DKSDLRMLRENDERER
+//#endif //USE_DKSdlRMLRENDERER

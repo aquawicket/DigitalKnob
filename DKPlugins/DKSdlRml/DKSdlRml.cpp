@@ -42,11 +42,11 @@ bool DKSdlRml::Init(){
 	dkRml = DKRml::Instance("DKRml0");
 	if(!dkSdlWindow || !dkRml)
 		return DKERROR("DKSdlRml::Init(): INVALID OBJECTS\n");
-#ifdef USE_DKSDLRMLRENDERER
+#ifdef USE_DKSdlRMLRENDERER
 	Renderer = new DKSdlRmlRenderer(dkSdlWindow->renderer, dkSdlWindow->window);
-#elif USE_DKSDLRMLOPENGL
+#elif USE_DKSdlRMLOPENGL
 	Renderer = new DKSdlRmlOpenGL(dkSdlWindow->renderer, dkSdlWindow->window);
-#elif USE_DKSDLRMLSHELL
+#elif USE_DKSdlRMLSHELL
 	Renderer = new ShellRenderInterfaceOpenGL();
 #endif
 	SystemInterface = new RmlSDL2SystemInterface();
