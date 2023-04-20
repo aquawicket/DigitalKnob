@@ -1,4 +1,5 @@
 dk_depend(duktape)
+dk_depend(dukglue)
 dk_depend(ncurses)
 dk_depend(DK)
 if(USE_babel)
