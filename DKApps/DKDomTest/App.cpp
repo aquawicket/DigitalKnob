@@ -93,12 +93,19 @@ bool App::Init() {
 	// https://dom.spec.whatwg.org/#interface-document
 	DKClass::DKCreate("TEST_Document");
 	
+	// https://dom.spec.whatwg.org/#interface-element
+	DKClass::DKCreate("TEST_Element");
+	
+	
 	
 	// DKConsoleWindow
 	DKClass::DKCreate("TEST_DKConsoleWindow");
 
-	// DKSDLWindow
-	DKClass::DKCreate("TEST_DKSDLWindow");
+	// DKSdlWindow
+	DKClass::DKCreate("TEST_DKSdlWindow");
+	
+	// DKRmlDocument
+	DKClass::DKCreate("TEST_DKRmlDocument");
 
 	return true;
 }

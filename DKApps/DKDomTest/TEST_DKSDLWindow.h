@@ -1,21 +1,21 @@
 #pragma once
-#ifndef TEST_DKSDLWindow_H
-#define TEST_DKSDLWindow_H
+#ifndef TEST_DKSdlWindow_H
+#define TEST_DKSdlWindow_H
 
 #include "DK/DK.h"
-#include "DKSDLWindow/DKSDLWindow.h"
+#include "DKSdlWindow/DKSdlWindow.h"
 
 
-class TEST_DKSDLWindow : public DKObjectT<TEST_DKSDLWindow>
+class TEST_DKSdlWindow : public DKObjectT<TEST_DKSdlWindow>
 {
 public:
 	bool Init(){
-		DKINFO("////// TEST_DKSDLWindow.h ////// \n");
+		DKINFO("////// TEST_DKSdlWindow.h ////// \n");
 		return DKTODO();
 	}
 
 };
-REGISTER_OBJECT(TEST_DKSDLWindow, true);
+REGISTER_OBJECT(TEST_DKSdlWindow, true);
 
 
-#endif //TEST_DKSDLWindow_H
+#endif //TEST_DKSdlWindow_H
