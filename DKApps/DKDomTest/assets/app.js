@@ -54,6 +54,12 @@ CPP_DK_Create("TEST_Node.js");
 CPP_DK_Create("DKDocumentDUK");
 CPP_DK_Create("TEST_Document.js");
 
+// https://dom.spec.whatwg.org/#interface-element
+//CPP_DK_Create("DKElementDUK");  // TODO
+CPP_DK_Create("TEST_Element.js");
+
+
+
 // ConsoleWindow
 CPP_DK_Create("DKConsoleWindowDUK");
 CPP_DK_Create("TEST_DKConsoleWindow.js");
