@@ -71,10 +71,10 @@ bool DKRml::Init(){
 		DKClass::DKCreate("DKSDLRml");
 		if(!Rml::Initialise())
 			return DKERROR("Rml::Initialise(): failed \n");
-		int w;
+		int w = 800;
 		//if(!DKWindow::GetWidth(w))
 		//	return DKERROR("DKWindow::GetWidth() failed! \n");
-		int h;
+		int h = 600;
 		//if(!DKWindow::GetHeight(h))
 		//	return DKERROR("DKWindow::GetHeight() failed! \n");
 		context = Rml::CreateContext("default", Rml::Vector2i(w, h));
