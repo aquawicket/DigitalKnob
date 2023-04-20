@@ -86,7 +86,61 @@ public:
 		// [Element.ariaValueNow] https://developer.mozilla.org/en-US/docs/Web/API/Element/ariaValueNow
 		// [Element.ariaValueText] https://developer.mozilla.org/en-US/docs/Web/API/Element/ariaValueText
 
-
+		
+		////// Instance methods //////
+		// [Element.after()] https://developer.mozilla.org/en-US/docs/Web/API/Element/after
+		// [Element.attachShadow()] https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow
+		// [Element.animate()] https://developer.mozilla.org/en-US/docs/Web/API/Element/animate
+		// [Element.append()] https://developer.mozilla.org/en-US/docs/Web/API/Element/append
+		// [Element.before()] https://developer.mozilla.org/en-US/docs/Web/API/Element/before
+		// [Element.closest()] https://developer.mozilla.org/en-US/docs/Web/API/Element/closest
+		// [Element.computedStyleMap()] https://developer.mozilla.org/en-US/docs/Web/API/Element/computedStyleMap
+		// [Element.getAnimations()] https://developer.mozilla.org/en-US/docs/Web/API/Element/getAnimations
+		// [Element.getAttribute()] https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttribute
+		// [Element.getAttributeNames()] https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttributeNames
+		// [Element.getAttributeNode()] https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttributeNode
+		// [Element.getAttributeNodeNS()] https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttributeNodeNS
+		// [Element.getAttributeNS()] https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttributeNS
+		// [Element.getBoundingClientRect()] https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect
+		// [Element.getBoxQuads()](Experimental)
+		// [Element.getClientRects()] https://developer.mozilla.org/en-US/docs/Web/API/Element/getClientRects
+		// [Element.getElementsByClassName()] https://developer.mozilla.org/en-US/docs/Web/API/Element/getElementsByClassName
+		// [Element.getElementsByTagName()] https://developer.mozilla.org/en-US/docs/Web/API/Element/getElementsByTagName
+		// [Element.getElementsByTagNameNS()] https://developer.mozilla.org/en-US/docs/Web/API/Element/getElementsByTagNameNS
+		// [Element.hasAttribute()] https://developer.mozilla.org/en-US/docs/Web/API/Element/hasAttribute
+		// [Element.hasAttributeNS()] https://developer.mozilla.org/en-US/docs/Web/API/Element/hasAttributeNS
+		// [Element.hasAttributes()] https://developer.mozilla.org/en-US/docs/Web/API/Element/hasAttributes
+		// [Element.hasPointerCapture()] https://developer.mozilla.org/en-US/docs/Web/API/Element/hasPointerCapture
+		// [Element.insertAdjacentElement()] https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentElement
+		// [Element.insertAdjacentHTML()] https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML
+		// [Element.insertAdjacentText()] https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentText
+		// [Element.matches()] https://developer.mozilla.org/en-US/docs/Web/API/Element/matches
+		// [Element.prepend()] https://developer.mozilla.org/en-US/docs/Web/API/Element/prepend
+		// [Element.querySelector()] https://developer.mozilla.org/en-US/docs/Web/API/Element/querySelector
+		// [Element.querySelectorAll()] https://developer.mozilla.org/en-US/docs/Web/API/Element/querySelectorAll
+		// [Element.releasePointerCapture()] https://developer.mozilla.org/en-US/docs/Web/API/Element/releasePointerCapture
+		// [Element.remove()] https://developer.mozilla.org/en-US/docs/Web/API/Element/remove
+		// [Element.removeAttribute()] https://developer.mozilla.org/en-US/docs/Web/API/Element/removeAttribute
+		// [Element.removeAttributeNode()] https://developer.mozilla.org/en-US/docs/Web/API/Element/removeAttributeNode
+		// [Element.removeAttributeNS()] https://developer.mozilla.org/en-US/docs/Web/API/Element/removeAttributeNS
+		// [Element.replaceChildren()] https://developer.mozilla.org/en-US/docs/Web/API/Element/replaceChildren
+		// [Element.replaceWith()] https://developer.mozilla.org/en-US/docs/Web/API/Element/replaceWith
+		// [Element.requestFullscreen()] https://developer.mozilla.org/en-US/docs/Web/API/Element/requestFullscreen
+		// [Element.requestPointerLock()] https://developer.mozilla.org/en-US/docs/Web/API/Element/requestPointerLock
+		// [Element.scroll()] https://developer.mozilla.org/en-US/docs/Web/API/Element/scroll
+		// [Element.scrollBy()] https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollBy
+		// [Element.scrollIntoView()] https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView
+		// [Element.scrollIntoViewIfNeeded()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoViewIfNeeded
+		// [Element.scrollTo()] https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTo
+		// [Element.setAttribute()] https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttribute
+		// [Element.setAttributeNode()] https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttributeNode
+		// [Element.setAttributeNodeNS()] https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttributeNodeNS
+		// [Element.setAttributeNS()] https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttributeNS
+		// [Element.setCapture()](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Element/setCapture
+		// [Element.setHTML()](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Element/setHTML
+		// [Element.setPointerCapture()] https://developer.mozilla.org/en-US/docs/Web/API/Element/setPointerCapture
+		// [Element.toggleAttribute()] https://developer.mozilla.org/en-US/docs/Web/API/Element/toggleAttribute
+		
 		return DKTODO();
 	}
 
