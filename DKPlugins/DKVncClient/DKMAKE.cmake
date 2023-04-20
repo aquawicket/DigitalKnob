@@ -1,6 +1,6 @@
 #dk_depend(libvncserver-master)
 dk_depend(libvncserver)
-dk_depend(DKSDLWindow)
+dk_depend(DKSdlWindow)
 IF(HAVE_DKDuktape)
 	dk_depend(DKDuktape)
 ENDIF()

@@ -66,9 +66,9 @@ bool DKRml::Init(){
 		Rml::SetFileInterface(dkRmlFile);
 	}
 
-	//Create DKSDLRml or DKOSGRml
-	if(DKClass::DKAvailable("DKSDLRml")){
-		DKClass::DKCreate("DKSDLRml");
+	//Create DKSdlRml or DKOSGRml
+	if(DKClass::DKAvailable("DKSdlRml")){
+		DKClass::DKCreate("DKSdlRml");
 		if(!Rml::Initialise())
 			return DKERROR("Rml::Initialise(): failed \n");
 		int w = 800;

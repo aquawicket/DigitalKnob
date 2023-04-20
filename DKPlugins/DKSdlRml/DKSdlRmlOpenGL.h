@@ -26,8 +26,8 @@
 
 //#ifdef USE_DKSDLRMLOPENGL
 #pragma once
-#ifndef DKSDLRmlOpenGL_H
-#define DKSDLRmlOpenGL_H
+#ifndef DKSdlRmlOpenGL_H
+#define DKSdlRmlOpenGL_H
 
 //#include "DK/DK.h"
 
@@ -48,10 +48,10 @@ extern "C" {
 WARNING_ENABLE
 
 
-class DKSDLRmlOpenGL : public Rml::RenderInterface
+class DKSdlRmlOpenGL : public Rml::RenderInterface
 {
 public:
-	DKSDLRmlOpenGL(SDL_Renderer* renderer, SDL_Window* screen);
+	DKSdlRmlOpenGL(SDL_Renderer* renderer, SDL_Window* screen);
 
 	/// Called by Rml when it wants to render geometry that it does not wish to optimise.
 	virtual void RenderGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rml::TextureHandle texture, const Rml::Vector2f& translation);
@@ -80,4 +80,4 @@ private:
 
 #endif //USE_DKSDLRMLOPENGL
 
-//#endif //DKSDLRmlRenderer_H
+//#endif //DKSdlRmlRenderer_H

@@ -25,8 +25,8 @@
 */
 
 #pragma once
-#ifndef DKSDLRml_H
-#define DKSDLRml_H
+#ifndef DKSdlRml_H
+#define DKSdlRml_H
 
 WARNING_DISABLE
 #include <RmlUi/Core.h>
@@ -35,24 +35,24 @@ WARNING_ENABLE
 #include "DK/DK.h"
 #include "DKSdlWindow/DKSdlWindow.h"
 #include "DKRml/DKRml.h"
-#include "DKSDLRml/DKSDLRmlSystem.h"
+#include "DKSdlRml/DKSdlRmlSystem.h"
 
 #define USE_DKSDLRMLRENDERER 1
 //#define USE_DKSDLRMLOPENGL 1
 //#define USE_DKSDLRMLSHELL 1
 
 #if USE_DKSDLRMLRENDERER
-#	include "DKSDLRml/DKSDLRmlRenderer.h"
+#	include "DKSdlRml/DKSdlRmlRenderer.h"
 #endif
 #if USE_DKSDLRMLOPENGL
-#	include "DKSDLRml/DKSDLRmlOpenGL.h"
+#	include "DKSdlRml/DKSdlRmlOpenGL.h"
 #endif
 #if USE_DKSDLRMLSHELL
 #	include "ShellRenderInterfaceOpenGL.h"
 #endif
 
 
-class DKSDLRml : public DKObjectT<DKSDLRml>
+class DKSdlRml : public DKObjectT<DKSdlRml>
 {
 public:
 	bool Init();
@@ -67,9 +67,9 @@ public:
 	DKSdlWindow* dkSdlWindow;
 	
 #	if USE_DKSDLRMLRENDERER
-		DKSDLRmlRenderer* Renderer;
+		DKSdlRmlRenderer* Renderer;
 #	elif USE_DKSDLRMLOPENGL
-		DKSDLRmlOpenGL* Renderer;
+		DKSdlRmlOpenGL* Renderer;
 #	elif USE_DKSDLRMLSHELL
 		ShellRenderInterfaceOpenGL* Renderer;
 #	endif
@@ -78,5 +78,5 @@ public:
 };
 
 
-REGISTER_OBJECT(DKSDLRml, true)
-#endif //DKSDLRml_H
+REGISTER_OBJECT(DKSdlRml, true)
+#endif //DKSdlRml_H

@@ -25,8 +25,8 @@
 */
 
 #pragma once
-#ifndef DKSDLRmlSystem_H
-#define DKSDLRmlSystem_H
+#ifndef DKSdlRmlSystem_H
+#define DKSdlRmlSystem_H
 
 #include "DK/DK.h"
 
@@ -54,4 +54,4 @@ public:
     void DeactivateKeyboard();
 };
 
-#endif //DKSDLRmlSystem_H
+#endif //DKSdlRmlSystem_H

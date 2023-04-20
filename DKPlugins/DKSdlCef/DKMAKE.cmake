@@ -10,7 +10,7 @@ IF(IOSSIM)
 	RETURN()
 ENDIF()
 
-dk_depend(DKSDLWindow)
+dk_depend(DKSdlWindow)
 dk_depend(DKCef)
 dk_depend(DKCefChild)
 dk_depend(DKAssets)

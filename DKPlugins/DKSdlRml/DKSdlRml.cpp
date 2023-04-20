@@ -26,14 +26,14 @@
 #include "DK/stdafx.h"
 #include "DK/DKFile.h"
 #include "DKAssets/DKAssets.h"
-#include "DKSDLRml/DKSDLRml.h"
+#include "DKSdlRml/DKSdlRml.h"
 
 WARNING_DISABLE
 #include "SDL.h"
 WARNING_ENABLE
 
 
-bool DKSDLRml::Init(){
+bool DKSdlRml::Init(){
 	DKDEBUGFUNC();
 	//Android SDL_TEXTINPUT events not working
 	//SDL_StartTextInput(); 
@@ -41,29 +41,29 @@ bool DKSDLRml::Init(){
 	dkSdlWindow = DKSdlWindow::Instance("DKSdlWindow0");
 	dkRml = DKRml::Instance("DKRml0");
 	if(!dkSdlWindow || !dkRml)
-		return DKERROR("DKSDLRml::Init(): INVALID OBJECTS\n");
+		return DKERROR("DKSdlRml::Init(): INVALID OBJECTS\n");
 #ifdef USE_DKSDLRMLRENDERER
-	Renderer = new DKSDLRmlRenderer(dkSdlWindow->renderer, dkSdlWindow->window);
+	Renderer = new DKSdlRmlRenderer(dkSdlWindow->renderer, dkSdlWindow->window);
 #elif USE_DKSDLRMLOPENGL
-	Renderer = new DKSDLRmlOpenGL(dkSdlWindow->renderer, dkSdlWindow->window);
+	Renderer = new DKSdlRmlOpenGL(dkSdlWindow->renderer, dkSdlWindow->window);
 #elif USE_DKSDLRMLSHELL
 	Renderer = new ShellRenderInterfaceOpenGL();
 #endif
 	SystemInterface = new RmlSDL2SystemInterface();
 	Rml::SetRenderInterface(Renderer);
     Rml::SetSystemInterface(SystemInterface);
-	DKSdlWindow::AddEventFunc(&DKSDLRml::Handle, this);
-	DKSdlWindow::AddRenderFunc(&DKSDLRml::Render, this);
-	DKSdlWindow::AddUpdateFunc(&DKSDLRml::Update, this);
+	DKSdlWindow::AddEventFunc(&DKSdlRml::Handle, this);
+	DKSdlWindow::AddRenderFunc(&DKSdlRml::Render, this);
+	DKSdlWindow::AddUpdateFunc(&DKSdlRml::Update, this);
 	return true;
 }
 
-bool DKSDLRml::End(){
+bool DKSdlRml::End(){
 	DKDEBUGFUNC();
 	return true;
 }
 
-bool DKSDLRml::Handle(SDL_Event *event) {
+bool DKSdlRml::Handle(SDL_Event *event) {
 	//DKDEBUGFUNC(event);  //EXCESSIVE LOGGING
 	if(!dkRml->document)
 		return DKERROR("dkRml->document invalid\n");
@@ -96,7 +96,7 @@ bool DKSDLRml::Handle(SDL_Event *event) {
             break;
 #if ANDROID
         case SDL_KEYDOWN:
-			//DKINFO("DKSDLRml::SDL_KEYDOWN("+toString((int)event->key.keysym.sym)+")\n");
+			//DKINFO("DKSdlRml::SDL_KEYDOWN("+toString((int)event->key.keysym.sym)+")\n");
 			dkRml->context->ProcessKeyDown(SystemInterface->TranslateKey(event->key.keysym.sym), SystemInterface->GetKeyModifiers());
 			if(event->key.keysym.sym == 13) //enter
 				dkRml->context->ProcessTextInput("\n");
@@ -140,11 +140,11 @@ bool DKSDLRml::Handle(SDL_Event *event) {
 		}
 #endif
 		case SDL_TEXTINPUT:
-			//DKINFO("DKSDLRml::SDL_TEXTINPUT("+DKString(event->text.text)+")\n");
+			//DKINFO("DKSdlRml::SDL_TEXTINPUT("+DKString(event->text.text)+")\n");
 			dkRml->context->ProcessTextInput(event->text.text);
 			break;
 		case SDL_TEXTEDITING:
-			//DKINFO("DKSDLRml::SDL_TEXTEDITING()\n");
+			//DKINFO("DKSdlRml::SDL_TEXTEDITING()\n");
 			break;	
 		case SDL_KEYUP:
 			//dkRml->context->ProcessKeyUp((Rml::Input::KeyIdentifier)DKSdlWindow::sdlKeyCode[event->key.keysym.sym], SystemInterface->GetKeyModifiers());
@@ -156,7 +156,7 @@ bool DKSDLRml::Handle(SDL_Event *event) {
 	return false; //allow event to continue
 }
 
-bool DKSDLRml::Render(){
+bool DKSdlRml::Render(){
     //DKDEBUGFUNC();  //EXCESSIVE LOGGING
 	if(dkSdlWindow->width != dkRml->context->GetDimensions().x || dkSdlWindow->height != dkRml->context->GetDimensions().y){
 		dkRml->context->SetDimensions(Rml::Vector2i(dkSdlWindow->width, dkSdlWindow->height));
@@ -168,7 +168,7 @@ bool DKSDLRml::Render(){
 	return true;
 }
 
-void DKSDLRml::Update(){
+void DKSdlRml::Update(){
 	if(!DKApp::active)
 		return;
 	dkRml->context->Update();

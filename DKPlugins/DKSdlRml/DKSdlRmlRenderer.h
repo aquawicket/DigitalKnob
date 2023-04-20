@@ -35,10 +35,10 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
-class DKSDLRmlRenderer : public Rml::RenderInterface
+class DKSdlRmlRenderer : public Rml::RenderInterface
 {
 public:
-    DKSDLRmlRenderer(SDL_Renderer* renderer, SDL_Window* screen);
+    DKSdlRmlRenderer(SDL_Renderer* renderer, SDL_Window* screen);
 
 	/// Called by RmlUi when it wants to render geometry that it does not wish to optimise.
 	void RenderGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rml::TextureHandle texture, const Rml::Vector2f& translation) override;
