@@ -1,4 +1,4 @@
-console.log("////// TEST_DKSDLWindow.js //////")
+console.log("////// TEST_DKSdlWindow.js //////")
 
 ////// Window //////
 function printWindowProperties(window){
@@ -56,14 +56,14 @@ function printWindowProperties(window){
 	console.log("window.window = "				+window.window)
 	//console.log("window.windows = "			+window.windows)
 }
-function printSDLWindowProperties(consolewindow){
+function printSdlWindowProperties(consolewindow){
 	////// Instance properties //////
 	// TODO
 }
 
-const mySDLWindow = new DKSDLWindow()
-printWindowProperties(mySDLWindow)
-printSDLWindowProperties(mySDLWindow)
-mySDLWindow.outerHeight = 300;
-printWindowProperties(mySDLWindow)
-printSDLWindowProperties(mySDLWindow)
+const mySdlWindow = new DKSdlWindow()
+printWindowProperties(mySdlWindow)
+printSdlWindowProperties(mySdlWindow)
+mySdlWindow.outerHeight = 300;
+printWindowProperties(mySdlWindow)
+printSdlWindowProperties(mySdlWindow)
