@@ -5,7 +5,7 @@
 #include "DKEventTargetTest/DKUIEvent.h"
 
 
-// [W3C] https://w3c.github.io/uievents/#events-mouseevents
+// [IDL] https://w3c.github.io/uievents/#events-mouseevents
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent
 class DKMouseEvent : public DKUIEvent
 {
