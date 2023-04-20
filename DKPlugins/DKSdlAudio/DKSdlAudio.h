@@ -26,8 +26,8 @@
 
 //https://gist.github.com/armornick/3447121
 #pragma once
-#ifndef DKSDLAudio_H
-#define DKSDLAudio_H
+#ifndef DKSdlAudio_H
+#define DKSdlAudio_H
 
 WARNING_DISABLE
 #include "SDL.h"
@@ -43,7 +43,7 @@ struct track{
 	int position;
 };
 
-class DKSDLAudio : public DKObjectT<DKSDLAudio>
+class DKSdlAudio : public DKObjectT<DKSdlAudio>
 {
 public:
 	bool Init();
@@ -68,5 +68,5 @@ public:
 };
 
 
-REGISTER_OBJECT(DKSDLAudio, true);
-#endif //DKSDLAudio_H
+REGISTER_OBJECT(DKSdlAudio, true);
+#endif //DKSdlAudio_H
