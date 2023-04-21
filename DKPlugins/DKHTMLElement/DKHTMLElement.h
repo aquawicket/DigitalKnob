@@ -2,7 +2,7 @@
 #ifndef DKHTMLElement_H
 #define DKHTMLElement_H
 
-#include "DKNode/DKNode.h"
+#include "DKElement/DKElement.h"
 
 
 // [IDL] https://html.spec.whatwg.org/multipage/dom.html#htmlelement
