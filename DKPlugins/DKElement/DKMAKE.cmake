@@ -1,3 +1,4 @@
-# DKElement
+dk_depend(DKNode)
 
-# TODO
+dk_generateCmake(DKElement)
+dk_assets(DKElement)
