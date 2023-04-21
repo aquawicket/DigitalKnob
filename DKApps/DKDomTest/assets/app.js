@@ -58,6 +58,9 @@ CPP_DK_Create("TEST_Document.js");
 //CPP_DK_Create("DKElementDUK");  // TODO
 CPP_DK_Create("TEST_Element.js");
 
+// https://html.spec.whatwg.org/multipage/dom.html#htmlelement
+//CPP_DK_Create("DKHTMLElementDUK");  // TODO
+CPP_DK_Create("TEST_HTMLElement.js");
 
 
 // ConsoleWindow

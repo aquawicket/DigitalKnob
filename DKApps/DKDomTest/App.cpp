@@ -43,6 +43,9 @@
 // https://dom.spec.whatwg.org/#interface-element
 #include "TEST_Element.h"
 
+// https://html.spec.whatwg.org/multipage/dom.html#htmlelement
+#include "TEST_HTMLElement.h"
+
 
 // DKConsoleWindow
 #include "TEST_DKConsoleWindow.h"
@@ -96,6 +99,8 @@ bool App::Init() {
 	// https://dom.spec.whatwg.org/#interface-element
 	DKClass::DKCreate("TEST_Element");
 	
+	// https://html.spec.whatwg.org/multipage/dom.html#htmlelement
+	DKClass::DKCreate("TEST_HTMLElement");
 	
 	
 	// DKConsoleWindow
