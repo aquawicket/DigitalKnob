@@ -1,3 +1,4 @@
-# DKHTMLElement
+dk_depend(DKElement)
 
-# TODO
+dk_generateCmake(DKHTMLElement)
+dk_assets(DKHTMLElement)
