@@ -583,7 +583,8 @@ if(WIN)
 	dk_disable(DKSdlVideo)			# error: 'av_mallocz_array': identifier not found
 	dk_disable(DKSdlWaave)			# requires waave
 	dk_disable(DKSdlWav)			# build errors
-	dk_disable(DKSFMLRml)			# INCOMPLETE
+	dk_disable(DKSfmlRml)			# INCOMPLETE
+	dk_disable(DKSfmlWindow)			# INCOMPLETE
 	dk_disable(DKThread)			# build errors
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKUpdate)			# build errors
