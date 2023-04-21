@@ -3,7 +3,7 @@
 #define TEST_Element_H
 
 #include "DK/DK.h"
-//#include "DKElement/DKElement.h"	//TODO
+#include "DKElement/DKElement.h"
 
 
 class TEST_Element : public DKObjectT<TEST_Element>
