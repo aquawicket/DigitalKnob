@@ -5,13 +5,13 @@
 #include "DKNode/DKNode.h"
 
 
-// [IDL] 
+// [IDL] https://dom.spec.whatwg.org/#interface-element
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Element
 class DKElement : public DKNode
 {
 public:
 	////// Constructor //////
-	// [Element()] https://developer.mozilla.org/en-US/docs/Web/API/Element/Element
+	// [Element()]
 	DKElement() : DKNode() {
 		DKDEBUGFUNC();
 		eventTargetClass = "Element";

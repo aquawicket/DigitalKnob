@@ -1,9 +1,9 @@
-// [IDL] 
+// [IDL] https://dom.spec.whatwg.org/#interface-element
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Element
 
 
 ////// Constructor //////
-// [Element()] https://developer.mozilla.org/en-US/docs/Web/API/Element/Element
+// [Element()]
 var Element = function Element(address) {
 	//console.log("Element("+address+")")
 	

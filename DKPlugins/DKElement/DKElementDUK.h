@@ -11,7 +11,7 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
-// [IDL] 
+// [IDL] https://dom.spec.whatwg.org/#interface-element
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Element
 class DKElementDUK : public DKObjectT<DKElementDUK>
 {
@@ -19,7 +19,7 @@ public:
 	bool Init(){
 		
 		////// Constructor //////
-		DKDuktape::AttachFunction("CPP_DKElementDUK", DKElementDUK::constructor);		// [Element()] https://developer.mozilla.org/en-US/docs/Web/API/Element/Element
+		DKDuktape::AttachFunction("CPP_DKElementDUK", DKElementDUK::constructor);	// [Element()]
 		
 		
 		////// Instance properties //////
