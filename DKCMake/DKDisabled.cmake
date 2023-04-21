@@ -59,7 +59,7 @@ if(ANDROID)
 	dk_disable(DKHandles)			# could not find DKHandles
 	dk_disable(DKMidi)				# requires rtmidi
 	dk_disable(DKMySql)				# requires curl
-	dk_disable(DKOFWindow)			# requires openframeworks
+	dk_disable(DKOfWindow)			# requires openframeworks
 	dk_disable(DKOsgAudio)			# requires openscenegraph
 	dk_disable(DKOsgCef)			# requires openscenegraph
 	dk_disable(DKOsgLights)			# requires openscenegraph
@@ -170,7 +170,7 @@ if(EMSCRIPTEN)
 	dk_disable(DKJerryscript)
 	dk_disable(DKMidi)
 	dk_disable(DKMySql)
-	dk_disable(DKOFWindow)
+	dk_disable(DKOfWindow)
 	dk_disable(DKOsgAudio)
 	dk_disable(DKOsgCef)
 	dk_disable(DKOsgLights)
@@ -285,7 +285,7 @@ if(IOS OR IOSSIM)
 	dk_disable(DKCefChild)			# requires cef_binary
 	dk_disable(DKJerryscript)		# requires jerryscript
 	dk_disable(DKMidi)				# requires rtmidi
-	dk_disable(DKOFWindow)			# requires openframeworks
+	dk_disable(DKOfWindow)			# requires openframeworks
 	dk_disable(DKOsgAudio)			# requires openscenegraph
 	dk_disable(DKOsgCef)			# requires openscenegraph
 	dk_disable(DKOsgLights)			# requires openscenegraph
@@ -382,7 +382,7 @@ endif()
 if(LINUX)
 	dk_disable(DKHook)				# 'read' was not declared in this scope
 	dk_disable(DKJerryscript)		# requires jerryscript
-	dk_disable(DKOFWindow)			# requires openframeworks
+	dk_disable(DKOfWindow)			# requires openframeworks
 	dk_disable(DKOsgAudio)			# requires freealut
 	dk_disable(DKOsgCef)			# build errors
 	dk_disable(DKOsgPhysics)		# requires bullet3
@@ -433,7 +433,7 @@ endif(LINUX)
 
 # Disabled for Mac targets
 if(MAC) 
-	dk_disable(DKOFWindow)			# requires openframeworks
+	dk_disable(DKOfWindow)			# requires openframeworks
 	dk_disable(DKOsgAudio)			# requires freealut
 	dk_disable(DKOsgCef)			# build errors
 	dk_disable(DKOsgPhysics)		# requires bullet3
@@ -486,7 +486,7 @@ if(RASPBERRY)
 	dk_disable(DKHook)				# 'read' was not declared in this scope
 	dk_disable(DKJerryscript)		# requires jerryscript
 	dk_disable(DKMidi)				# requires rtmidi
-	dk_disable(DKOFWindow)			# requires openframeworks
+	dk_disable(DKOfWindow)			# requires openframeworks
 	dk_disable(DKOsgAudio)			# requires osgaudio
 	dk_disable(DKOsgCef)			# build errors
 	dk_disable(DKOsgPhysics)		# requires bullet3
@@ -562,7 +562,7 @@ endif()
 if(WIN) 
 	dk_disable(boost)				# error: cl command not found
 	dk_disable(DKOcr)				# requires tesseract
-	dk_disable(DKOFWindow)			# requires openframeworks
+	dk_disable(DKOfWindow)			# requires openframeworks
 	dk_disable(DKOsgAudio)			# requires freealut
 	dk_disable(DKOsgCef)			# build errors
 	dk_disable(DKOsgLights)			# requires openscenegraph
