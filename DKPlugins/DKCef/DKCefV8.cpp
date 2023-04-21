@@ -325,7 +325,7 @@ bool DKCefV8::GetPixelUnderMouse(CefArgs args, CefReturn retval){
 
 bool DKCefV8::GetScreenHeight(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
-	int h;
+	unsigned int h;
 	if(!DKUtil::GetScreenHeight(h)){ return false; }
 	if(!retval->SetInt(0, h)){ return false; }
 	return true;
@@ -333,7 +333,7 @@ bool DKCefV8::GetScreenHeight(CefArgs args, CefReturn retval){
 
 bool DKCefV8::GetScreenWidth(CefArgs args, CefReturn retval){
 	DKDEBUGFUNC(args, retval);
-	int w;
+	unsigned int w;
 	if(!DKUtil::GetScreenWidth(w)){ return false; }
 	if(!retval->SetInt(0, w)){ return false; }
 	return true;
