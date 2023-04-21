@@ -2,15 +2,15 @@
 
 #include "App.h"
 
-// https://console.spec.whatwg.org
+// [Console] https://console.spec.whatwg.org
 #include "TEST_Console.h"
 
-// https://dom.spec.whatwg.org
+// [DOM] https://dom.spec.whatwg.org
 #include "TEST_Event.h"
 #include "TEST_CustomEvent.h"
 #include "TEST_EventTarget.h"
 
-// https://w3c.github.io/uievents
+// [UIEvents] https://w3c.github.io/uievents
 #include "TEST_UIEvent.h"
 #include "TEST_FocusEvent.h"
 #include "TEST_MouseEvent.h"
@@ -19,31 +19,31 @@
 #include "TEST_KeyboardEvent.h"
 #include "TEST_CompositionEvent.h"
 
-// https://html.spec.whatwg.org/multipage/dnd.html#the-dragevent-interface
+// [DragEvent] https://html.spec.whatwg.org/multipage/dnd.html#the-dragevent-interface
 #include "TEST_DragEvent.h"
 
-// https://html.spec.whatwg.org/
+// [Window] https://html.spec.whatwg.org/
 #include "TEST_Window.h"
 
-// https://w3c.github.io/csswg-drafts/cssom-view/#the-screen-interface
+// [Screen] https://w3c.github.io/csswg-drafts/cssom-view/#the-screen-interface
 #include "TEST_Screen.h"
 
-// https://html.spec.whatwg.org/multipage/system-state.html#the-navigator-object
+// [Navigator] https://html.spec.whatwg.org/multipage/system-state.html#the-navigator-object
 #include "TEST_Navigator.h"
 
-// https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-location-interface
+// [Location] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-location-interface
 #include "TEST_Location.h"
 
-// https://dom.spec.whatwg.org/#interface-node
+// [Node] https://dom.spec.whatwg.org/#interface-node
 #include "TEST_Node.h"
 
-// https://dom.spec.whatwg.org/#interface-document
+// [Document] https://dom.spec.whatwg.org/#interface-document
 #include "TEST_Document.h"
 
-// https://dom.spec.whatwg.org/#interface-element
+// [Element] https://dom.spec.whatwg.org/#interface-element
 #include "TEST_Element.h"
 
-// https://html.spec.whatwg.org/multipage/dom.html#htmlelement
+// [HtmlElement] https://html.spec.whatwg.org/multipage/dom.html#htmlelement
 #include "TEST_HTMLElement.h"
 
 
@@ -53,20 +53,23 @@
 // DKSdlWindow
 #include "TEST_DKSdlWindow.h"
 
+// DKRmlDocument
+#include "TEST_DKRmlDocument.h"
+
 
 ///////////////////////////////////////
 bool App::Init() {
 	DKDEBUGFUNC();
 	
-	// https://console.spec.whatwg.org
+	// [Console] https://console.spec.whatwg.org
 	DKClass::DKCreate("TEST_Console");
 	
-	// https://dom.spec.whatwg.org
+	// [DOM] https://dom.spec.whatwg.org
 	DKClass::DKCreate("TEST_Event");
 	DKClass::DKCreate("TEST_CustomEvent");
 	DKClass::DKCreate("TEST_EventTarget");
 	
-	// https://w3c.github.io/uievents
+	// [UIEvents] https://w3c.github.io/uievents
 	DKClass::DKCreate("TEST_UIEvent");
 	DKClass::DKCreate("TEST_FocusEvent");
 	DKClass::DKCreate("TEST_MouseEvent");
@@ -75,31 +78,31 @@ bool App::Init() {
 	DKClass::DKCreate("TEST_KeyboardEvent");
 	DKClass::DKCreate("TEST_CompositionEvent");
 	
-	// https://html.spec.whatwg.org/multipage/dnd.html#the-dragevent-interface
+	// [DragEvent] https://html.spec.whatwg.org/multipage/dnd.html#the-dragevent-interface
 	DKClass::DKCreate("TEST_DragEvent");
 	
-	// https://html.spec.whatwg.org/
+	// [Window] https://html.spec.whatwg.org/
 	DKClass::DKCreate("TEST_Window");
 
-	// https://w3c.github.io/csswg-drafts/cssom-view/#the-screen-interface
+	// [Screen] https://w3c.github.io/csswg-drafts/cssom-view/#the-screen-interface
 	DKClass::DKCreate("TEST_Screen");
 
-	// https://html.spec.whatwg.org/multipage/system-state.html#the-navigator-object
+	// [Navigator] https://html.spec.whatwg.org/multipage/system-state.html#the-navigator-object
 	DKClass::DKCreate("TEST_Navigator");
 	
-	// https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-location-interface
+	// [Location] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-location-interface
 	DKClass::DKCreate("TEST_Location");
 
-	// https://dom.spec.whatwg.org/#interface-node
+	// [Node] https://dom.spec.whatwg.org/#interface-node
 	DKClass::DKCreate("TEST_Node");
 
-	// https://dom.spec.whatwg.org/#interface-document
+	// [Document] https://dom.spec.whatwg.org/#interface-document
 	DKClass::DKCreate("TEST_Document");
 	
-	// https://dom.spec.whatwg.org/#interface-element
+	// [Element] https://dom.spec.whatwg.org/#interface-element
 	DKClass::DKCreate("TEST_Element");
 	
-	// https://html.spec.whatwg.org/multipage/dom.html#htmlelement
+	// [HTMLElement] https://html.spec.whatwg.org/multipage/dom.html#htmlelement
 	DKClass::DKCreate("TEST_HTMLElement");
 	
 	
