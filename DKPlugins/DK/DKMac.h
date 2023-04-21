@@ -36,8 +36,8 @@ public:
 	static bool GetKey(int& key);
 	static bool GetMousePos(int& x, int& y);
 	static bool SetMousePos(const int& x, const int& y);
-	static bool GetScreenWidth(int& w);
-	static bool GetScreenHeight(int& h);
+	static bool GetScreenWidth(unsigned int& w);
+	static bool GetScreenHeight(unsigned int& h);
 	static bool GetUsername(DKString& username);
 	static bool LeftPress();
 	static bool LeftRelease();
