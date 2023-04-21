@@ -813,8 +813,10 @@ bool DKVncClient::ValidateAspectRatio(rfbClient *cl){
 
 	float height = (float)cl->height / delta;
 	DKINFO("DKVncClient::ValidateAspectRatio(): "+toString(cl->height)+" / "+toString(delta)+" = "+toString(height)+"\n");
-	DKWindow::SetHeight((int&)height);
-	dkSdlWindow->height = (int)height;
+	
+	// FIXME
+	//DKWindow::SetHeight((int&)height);
+	//dkSdlWindow->height = (int)height;
 
 	int w, h;
 	SDL_GetWindowSize(dkSdlWindow->window, &w, &h);
