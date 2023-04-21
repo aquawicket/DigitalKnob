@@ -108,8 +108,8 @@ bool DKVncServer::Init() {
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[VNC_PASSWORD]", password);
 	if(password.empty())
 		DKWARN("WARNING! No password set in settings file!\n");
-	int desktopWidth;
-	int desktopHeight;
+	unsigned int desktopWidth;
+	unsigned int desktopHeight;
 	DKUtil::GetScreenWidth(desktopWidth);
 	DKUtil::GetScreenHeight(desktopHeight);
 
