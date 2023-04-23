@@ -2,7 +2,7 @@
 #ifndef DKMouseEvent_H
 #define DKMouseEvent_H
 
-#include "DKEventTargetTest/DKUIEvent.h"
+#include "DKUIEvent/DKUIEvent.h"
 
 
 // [IDL] https://w3c.github.io/uievents/#events-mouseevents

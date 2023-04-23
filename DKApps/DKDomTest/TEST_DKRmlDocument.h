@@ -3,7 +3,7 @@
 #define TEST_DKRmlDocument_H
 
 #include "DK/DK.h"
-#include "DKRmlDocument/DKRmlDocument.h"
+//#include "DKRmlDocument/DKRmlDocument.h"	// TODO
 
 
 class TEST_DKRmlDocument : public DKObjectT<TEST_DKRmlDocument>
