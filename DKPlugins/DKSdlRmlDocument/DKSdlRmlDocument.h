@@ -25,8 +25,8 @@
 */
 
 #pragma once
-#ifndef DKSdlRml_H
-#define DKSdlRml_H
+#ifndef DKSdlRmlDocument_H
+#define DKSdlRmlDocument_H
 
 WARNING_DISABLE
 #include <RmlUi/Core.h>
@@ -34,25 +34,25 @@ WARNING_ENABLE
 
 #include "DK/DK.h"
 #include "DKSdlWindow/DKSdlWindow.h"
-#include "DKRml/DKRml.h"
-#include "DKSdlRml/DKSdlRmlSystem.h"
+#include "DKRmlDocument/DKRmlDocument.h"
+#include "DKSdlRmlDocument/DKSdlRmlSystem.h"
 
-#define USE_DKSdlRMLRENDERER 1
-//#define USE_DKSdlRMLOPENGL 1
-//#define USE_DKSdlRMLSHELL 1
+#define USE_DKSDLRMLRENDERER 1
+//#define USE_DKSDLRMLOPENGL 1
+//#define USE_DKSDLRMLSHELL 1
 
-#if USE_DKSdlRMLRENDERER
-#	include "DKSdlRml/DKSdlRmlRenderer.h"
+#if USE_DKSDLRMLRENDERER
+#	include "DKSdlRmlDocument/DKSdlRmlRenderer.h"
 #endif
-#if USE_DKSdlRMLOPENGL
-#	include "DKSdlRml/DKSdlRmlOpenGL.h"
+#if USE_DKSDLRMLOPENGL
+#	include "DKSdlRmlDocument/DKSdlRmlOpenGL.h"
 #endif
-#if USE_DKSdlRMLSHELL
+#if USE_DKSDLRMLSHELL
 #	include "ShellRenderInterfaceOpenGL.h"
 #endif
 
 
-class DKSdlRml : public DKObjectT<DKSdlRml>
+class DKSdlRmlDocument : public DKObjectT<DKSdlRmlDocument>
 {
 public:
 	bool Init();
@@ -63,7 +63,7 @@ public:
 	void Update();
 	//void ProcessEvent(Rml::Core::Event& event);
 	
-	DKRml* dkRml;
+	DKRmlDocument* dkRmlDocument;
 	DKSdlWindow* dkSdlWindow;
 	
 #	if USE_DKSdlRMLRENDERER
@@ -78,5 +78,5 @@ public:
 };
 
 
-REGISTER_OBJECT(DKSdlRml, true)
-#endif //DKSdlRml_H
+REGISTER_OBJECT(DKSdlRmlDocument, true)
+#endif //DKSdlRmlDocument_H

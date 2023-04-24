@@ -26,80 +26,80 @@
 #include "DK/stdafx.h"
 #include "DK/DKFile.h"
 #include "DKAssets/DKAssets.h"
-#include "DKSdlRml/DKSdlRml.h"
+#include "DKSdlRmlDocument/DKSdlRmlDocument.h"
 
 WARNING_DISABLE
 #include "SDL.h"
 WARNING_ENABLE
 
 
-bool DKSdlRml::Init(){
+bool DKSdlRmlDocument::Init(){
 	DKDEBUGFUNC();
 	//Android SDL_TEXTINPUT events not working
 	//SDL_StartTextInput(); 
 	//SDL_EventState(SDL_TEXTINPUT, SDL_ENABLE);
 	dkSdlWindow = DKSdlWindow::Instance("DKSdlWindow0");
-	dkRml = DKRml::Instance("DKRml0");
-	if(!dkSdlWindow || !dkRml)
-		return DKERROR("DKSdlRml::Init(): INVALID OBJECTS\n");
-#ifdef USE_DKSdlRMLRENDERER
+	dkRmlDocument = DKRmlDocument::Instance("DKRmlDocument0");
+	if(!dkSdlWindow || !dkRmlDocument)
+		return DKERROR("DKSdlRmlDocument::Init(): INVALID OBJECTS\n");
+#ifdef USE_DKSDLRMLRENDERER
 	Renderer = new DKSdlRmlRenderer(dkSdlWindow->renderer, dkSdlWindow->window);
-#elif USE_DKSdlRMLOPENGL
+#elif USE_DKSDLRMLOPENGL
 	Renderer = new DKSdlRmlOpenGL(dkSdlWindow->renderer, dkSdlWindow->window);
-#elif USE_DKSdlRMLSHELL
+#elif USE_DKSDLRMLSHELL
 	Renderer = new ShellRenderInterfaceOpenGL();
 #endif
 	SystemInterface = new RmlSDL2SystemInterface();
 	Rml::SetRenderInterface(Renderer);
     Rml::SetSystemInterface(SystemInterface);
-	DKSdlWindow::AddEventFunc(&DKSdlRml::Handle, this);
-	DKSdlWindow::AddRenderFunc(&DKSdlRml::Render, this);
-	DKSdlWindow::AddUpdateFunc(&DKSdlRml::Update, this);
+	DKSdlWindow::AddEventFunc(&DKSdlRmlDocument::Handle, this);
+	DKSdlWindow::AddRenderFunc(&DKSdlRmlDocument::Render, this);
+	DKSdlWindow::AddUpdateFunc(&DKSdlRmlDocument::Update, this);
 	return true;
 }
 
-bool DKSdlRml::End(){
+bool DKSdlRmlDocument::End(){
 	DKDEBUGFUNC();
 	return true;
 }
 
-bool DKSdlRml::Handle(SDL_Event *event) {
+bool DKSdlRmlDocument::Handle(SDL_Event *event) {
 	//DKDEBUGFUNC(event);  //EXCESSIVE LOGGING
-	if(!dkRml->document)
-		return DKERROR("dkRml->document invalid\n");
+	if(!dkRmlDocument->document)
+		return DKERROR("dkRmlDocument->document invalid\n");
 	Rml::Element* hover;
 	switch(event->type){
 		case SDL_MOUSEMOTION:
-			dkRml->context->ProcessMouseMove(event->motion.x, event->motion.y, SystemInterface->GetKeyModifiers());
+			dkRmlDocument->context->ProcessMouseMove(event->motion.x, event->motion.y, SystemInterface->GetKeyModifiers());
 			//if we clicked an element, end the event.
-			hover = dkRml->context->GetHoverElement();
+			hover = dkRmlDocument->context->GetHoverElement();
 			if(hover && (!has(hover->GetId(), "iframe_")))
 				return true;
             break;   
 		case SDL_MOUSEBUTTONDOWN:
-            dkRml->context->ProcessMouseButtonDown(SystemInterface->TranslateMouseButton(event->button.button), SystemInterface->GetKeyModifiers());
+            dkRmlDocument->context->ProcessMouseButtonDown(SystemInterface->TranslateMouseButton(event->button.button), SystemInterface->GetKeyModifiers());
             //if we clicked an element, end the event.
-			hover = dkRml->context->GetHoverElement();
+			hover = dkRmlDocument->context->GetHoverElement();
 			if(hover && (!has(hover->GetId(), "iframe_")))
 				return true;
 			break;
         case SDL_MOUSEBUTTONUP:
-            dkRml->context->ProcessMouseButtonUp(SystemInterface->TranslateMouseButton(event->button.button), SystemInterface->GetKeyModifiers());
+            dkRmlDocument->context->ProcessMouseButtonUp(SystemInterface->TranslateMouseButton(event->button.button), SystemInterface->GetKeyModifiers());
 			//if we clicked an element, end the event.
-			hover = dkRml->context->GetHoverElement();
+			hover = dkRmlDocument->context->GetHoverElement();
 			if(hover && (!has(hover->GetId(), "iframe_"))){
 				//return true;
 			}
 			break;
         case SDL_MOUSEWHEEL:
-            dkRml->context->ProcessMouseWheel(event->wheel.y * (float)- 1.0, SystemInterface->GetKeyModifiers());
+            dkRmlDocument->context->ProcessMouseWheel(event->wheel.y * (float)- 1.0, SystemInterface->GetKeyModifiers());
             break;
 #if ANDROID
         case SDL_KEYDOWN:
-			//DKINFO("DKSdlRml::SDL_KEYDOWN("+toString((int)event->key.keysym.sym)+")\n");
-			dkRml->context->ProcessKeyDown(SystemInterface->TranslateKey(event->key.keysym.sym), SystemInterface->GetKeyModifiers());
+			//DKINFO("DKSdlRmlDocument::SDL_KEYDOWN("+toString((int)event->key.keysym.sym)+")\n");
+			dkRmlDocument->context->ProcessKeyDown(SystemInterface->TranslateKey(event->key.keysym.sym), SystemInterface->GetKeyModifiers());
 			if(event->key.keysym.sym == 13) //enter
-				dkRml->context->ProcessTextInput("\n");
+				dkRmlDocument->context->ProcessTextInput("\n");
             break;
 #else
 		case SDL_KEYDOWN:{
@@ -109,46 +109,46 @@ bool DKSdlRml::Handle(SDL_Event *event) {
 			if(event->key.keysym.sym > 96 && event->key.keysym.sym < 123){ //letter
 				if(event->key.keysym.mod & KMOD_SHIFT && event->key.keysym.mod & KMOD_CAPS){ //both = lowercase
 					//DKEvent::SendEvent("window", "keypress", toString(DKSdlWindow::sdlCharCode[event->key.keysym.sym]));
-					dkRml->context->ProcessTextInput(DKSdlWindow::sdlCharCode[event->key.keysym.sym]);
+					dkRmlDocument->context->ProcessTextInput(DKSdlWindow::sdlCharCode[event->key.keysym.sym]);
 				}
 				else if(event->key.keysym.mod & KMOD_SHIFT || event->key.keysym.mod & KMOD_CAPS){ //1 = uppercase
 					//DKEvent::SendEvent("window", "keypress", toString(DKSdlWindow::sdlShiftCharCode[event->key.keysym.sym]));
-					dkRml->context->ProcessTextInput(DKSdlWindow::sdlShiftCharCode[event->key.keysym.sym]);
+					dkRmlDocument->context->ProcessTextInput(DKSdlWindow::sdlShiftCharCode[event->key.keysym.sym]);
 				}
 				else{
 					//DKEvent::SendEvent("window", "keypress", toString(DKSdlWindow::sdlCharCode[event->key.keysym.sym])); //lowercase
-					dkRml->context->ProcessTextInput(DKSdlWindow::sdlCharCode[event->key.keysym.sym]);
+					dkRmlDocument->context->ProcessTextInput(DKSdlWindow::sdlCharCode[event->key.keysym.sym]);
 				}
 			}
 			else if(event->key.keysym.mod & KMOD_SHIFT){ //other character keys
 				//DKEvent::SendEvent("window", "keypress", toString(DKSdlWindow::sdlShiftCharCode[event->key.keysym.sym])); //shifted symbol
-				dkRml->context->ProcessTextInput(DKSdlWindow::sdlShiftCharCode[event->key.keysym.sym]);
+				dkRmlDocument->context->ProcessTextInput(DKSdlWindow::sdlShiftCharCode[event->key.keysym.sym]);
 			}
 			else{
 				//DKEvent::SendEvent("window", "keypress", toString(DKSdlWindow::sdlCharCode[event->key.keysym.sym])); //symbol
-				dkRml->context->ProcessTextInput(DKSdlWindow::sdlCharCode[event->key.keysym.sym]);
+				dkRmlDocument->context->ProcessTextInput(DKSdlWindow::sdlCharCode[event->key.keysym.sym]);
 			}
 			*/
 			//DKEvent::SendEvent("window", "keydown", toString(DKSdlWindow::sdlKeyCode[event->key.keysym.sym])); //keycode
-			//dkRml->context->ProcessKeyDown((Rml::Input::KeyIdentifier)DKSdlWindow::sdlKeyCode[event->key.keysym.sym], SystemInterface->GetKeyModifiers());
-			dkRml->context->ProcessKeyDown(SystemInterface->TranslateKey(event->key.keysym.sym), SystemInterface->GetKeyModifiers());
+			//dkRmlDocument->context->ProcessKeyDown((Rml::Input::KeyIdentifier)DKSdlWindow::sdlKeyCode[event->key.keysym.sym], SystemInterface->GetKeyModifiers());
+			dkRmlDocument->context->ProcessKeyDown(SystemInterface->TranslateKey(event->key.keysym.sym), SystemInterface->GetKeyModifiers());
 			//TODO: If enter is pressed, send enter event on ProcessTextInput
 			if(event->key.keysym.sym == 13) //Enter key
-			//dkRml->context->ProcessTextInput(DKSdlWindow::sdlCharCode[event->key.keysym.sym]); //TEST
-			dkRml->context->ProcessTextInput("\n"); //TEST2
+			//dkRmlDocument->context->ProcessTextInput(DKSdlWindow::sdlCharCode[event->key.keysym.sym]); //TEST
+			dkRmlDocument->context->ProcessTextInput("\n"); //TEST2
 			return false; //allow event to continue
 		}
 #endif
 		case SDL_TEXTINPUT:
-			//DKINFO("DKSdlRml::SDL_TEXTINPUT("+DKString(event->text.text)+")\n");
-			dkRml->context->ProcessTextInput(event->text.text);
+			//DKINFO("DKSdlRmlDocument::SDL_TEXTINPUT("+DKString(event->text.text)+")\n");
+			dkRmlDocument->context->ProcessTextInput(event->text.text);
 			break;
 		case SDL_TEXTEDITING:
-			//DKINFO("DKSdlRml::SDL_TEXTEDITING()\n");
+			//DKINFO("DKSdlRmlDocument::SDL_TEXTEDITING()\n");
 			break;	
 		case SDL_KEYUP:
-			//dkRml->context->ProcessKeyUp((Rml::Input::KeyIdentifier)DKSdlWindow::sdlKeyCode[event->key.keysym.sym], SystemInterface->GetKeyModifiers());
-			dkRml->context->ProcessKeyUp(SystemInterface->TranslateKey(event->key.keysym.sym), SystemInterface->GetKeyModifiers());
+			//dkRmlDocument->context->ProcessKeyUp((Rml::Input::KeyIdentifier)DKSdlWindow::sdlKeyCode[event->key.keysym.sym], SystemInterface->GetKeyModifiers());
+			dkRmlDocument->context->ProcessKeyUp(SystemInterface->TranslateKey(event->key.keysym.sym), SystemInterface->GetKeyModifiers());
 			break;
             default:
                 break;
@@ -156,20 +156,20 @@ bool DKSdlRml::Handle(SDL_Event *event) {
 	return false; //allow event to continue
 }
 
-bool DKSdlRml::Render(){
+bool DKSdlRmlDocument::Render(){
     //DKDEBUGFUNC();  //EXCESSIVE LOGGING
-	if(dkSdlWindow->width != dkRml->context->GetDimensions().x || dkSdlWindow->height != dkRml->context->GetDimensions().y){
-		dkRml->context->SetDimensions(Rml::Vector2i(dkSdlWindow->width, dkSdlWindow->height));
+	if(dkSdlWindow->width != dkRmlDocument->context->GetDimensions().x || dkSdlWindow->height != dkRmlDocument->context->GetDimensions().y){
+		dkRmlDocument->context->SetDimensions(Rml::Vector2i(dkSdlWindow->width, dkSdlWindow->height));
 		// Reset blending and draw a fake point just outside the screen to let SDL know that it needs to reset its state in case it wants to render a texture 
 		SDL_SetRenderDrawBlendMode(dkSdlWindow->renderer, SDL_BLENDMODE_NONE);
 		SDL_RenderDrawPoint(dkSdlWindow->renderer, -1, -1);
 	}
-	dkRml->context->Render();
+	dkRmlDocument->context->Render();
 	return true;
 }
 
-void DKSdlRml::Update(){
+void DKSdlRmlDocument::Update(){
 	if(!DKApp::active)
 		return;
-	dkRml->context->Update();
+	dkRmlDocument->context->Update();
 }
