@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-#include "DKSdlRml/DKSdlRmlSystem.h"
+#include "DKSdlRmlDocument/DKSdlRmlSystem.h"
 
 WARNING_DISABLE
 #include <RmlUi/Core.h>

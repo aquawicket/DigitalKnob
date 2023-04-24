@@ -27,7 +27,7 @@
 //#if USE_DKSdlRMLRENDERER
 
 #include "DK/DK.h"
-#include "DKSdlRml/DKSdlRmlRenderer.h"
+#include "DKSdlRmlDocument/DKSdlRmlRenderer.h"
 
 WARNING_DISABLE
 #include "SDL_image.h"

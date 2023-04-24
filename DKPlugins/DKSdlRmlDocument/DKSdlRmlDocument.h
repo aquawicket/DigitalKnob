@@ -66,11 +66,11 @@ public:
 	DKRmlDocument* dkRmlDocument;
 	DKSdlWindow* dkSdlWindow;
 	
-#	if USE_DKSdlRMLRENDERER
+#	if USE_DKSDLRMLRENDERER
 		DKSdlRmlRenderer* Renderer;
-#	elif USE_DKSdlRMLOPENGL
+#	elif USE_DKSDLRMLOPENGL
 		DKSdlRmlOpenGL* Renderer;
-#	elif USE_DKSdlRMLSHELL
+#	elif USE_DKSDLRMLSHELL
 		ShellRenderInterfaceOpenGL* Renderer;
 #	endif
 

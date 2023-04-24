@@ -28,7 +28,7 @@
 
 #include "DK/DK.h"
 #include "DK/DKString.h"
-#include "DKSdlRml/DKSdlRmlOpenGL.h"
+#include "DKSdlRmlDocument/DKSdlRmlOpenGL.h"
 #include "DKSdlWindow/DKSdlWindow.h"
 
 WARNING_DISABLE
