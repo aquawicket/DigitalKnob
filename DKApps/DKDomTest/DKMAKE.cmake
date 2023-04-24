@@ -29,4 +29,5 @@ dk_depend(DKDocument)
 
 dk_depend(DKConsoleWindow)
 dk_depend(DKSdlWindow)
+dk_depend(DKSdlRml)
 dk_depend(DKRmlDocument)
