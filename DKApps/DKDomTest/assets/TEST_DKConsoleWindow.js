@@ -1,84 +1,5 @@
 console.log("////// TEST_DKConsoleWindow.js //////")
 
-////// Event ///////
-function printEventProperties(event){
-	////// Instance properties //////
-	console.log("event.bubbles = "					+event.bubbles)
-	console.log("event.cancelable = "				+event.cancelable)
-	console.log("event.composed = "					+event.composed)
-	console.log("event.currentTarget = "			+event.currentTarget)
-	console.log("event.defaultPrevented = "			+event.defaultPrevented)
-	console.log("event.eventPhase = "				+event.eventPhase)			
-	console.log("event.isTrusted = "				+event.isTrusted)		
-	console.log("event.target = "					+event.target)			
-	console.log("event.timeStamp = "				+event.timeStamp)
-	console.log("event.type = "						+event.type)
-	////// Legacy and non-standard properties //////
-	console.log("event.cancelBubble = "				+event.cancelBubble)
-	console.log("event.explicitOriginalTarget = "	+event.explicitOriginalTarget)
-	console.log("event.originalTarget = "			+event.originalTarget)
-	console.log("event.returnValue = "				+event.returnValue)
-	console.log("event.scoped = "					+event.scoped)
-}
-
-/*
-////// Window //////
-function printWindowProperties(window){
-	////// Instance properties //////
-	console.log("window.caches = "				+window.caches)
-	console.log("window.clientInformation = "	+window.clientInformation)
-	console.log("window.closed = "				+window.closed)
-	console.log("window.credentialless = "		+window.credentialless)
-	console.log("window.crypto = "				+window.crypto)
-	console.log("window.customElements = "		+window.customElements)
-	console.log("window.document = "			+window.document)
-	console.log("window.frameElement = "		+window.frameElement)
-	console.log("window.frames = "				+window.frames)
-	console.log("window.fullScreen = "			+window.fullScreen)
-	console.log("window.history = "				+window.history)
-	console.log("window.indexedDB = "			+window.indexedDB)
-	console.log("window.innerHeight = "			+window.innerHeight)
-	console.log("window.innerWidth = "			+window.innerWidth)
-	console.log("window.isSecureContext = "		+window.isSecureContext)
-	console.log("window.launchQueue = "			+window.launchQueue)
-	console.log("window.length = "				+window.length)
-	console.log("window.location = "			+window.location)
-	console.log("window.locationbar = "			+window.locationbar)
-	console.log("window.localStorage = "		+window.localStorage)
-	console.log("window.mozInnerScreenX = "		+window.mozInnerScreenX)
-	console.log("window.mozInnerScreenY = "		+window.mozInnerScreenY)
-	console.log("window.name = "				+window.name)
-	console.log("window.navigation = "			+window.navigation)
-	console.log("window.navigator = "			+window.navigator)
-	console.log("window.opener = "				+window.opener)
-	console.log("window.origin = "				+window.origin)
-	console.log("window.outerHeight = "			+window.outerHeight)
-	console.log("window.outerWidth = "			+window.outerWidth)
-	console.log("window.pageXOffset = "			+window.pageXOffset)
-	console.log("window.pageYOffset = "			+window.pageYOffset)
-	console.log("window.parent = "				+window.parent)
-	console.log("window.performance = "			+window.performance)
-	console.log("window.personalbar = "			+window.personalbar)
-	console.log("window.scheduler = "			+window.scheduler)
-	console.log("window.screen = "				+window.screen)
-	console.log("window.screenX = "				+window.screenX)
-	console.log("window.screenY = "				+window.screenY)
-	console.log("window.scrollbars = "			+window.scrollbars)
-	console.log("window.scrollMaxX = "			+window.scrollMaxX)
-	console.log("window.scrollMaxY = "			+window.scrollMaxY)
-	console.log("window.scrollX = "				+window.scrollX)
-	console.log("window.scrollY = "				+window.scrollY)
-	console.log("window.self = "				+window.self)
-	console.log("window.sessionStorage = "		+window.sessionStorage)
-	console.log("window.speechSynthesis = "		+window.speechSynthesis)
-	console.log("window.statusbar = "			+window.statusbar)
-	console.log("window.toolbar = "				+window.toolbar)
-	console.log("window.top = "					+window.top)
-	console.log("window.visualViewport = "		+window.visualViewport)
-	console.log("window.window = "				+window.window)
-	//console.log("window.windows = "			+window.windows)
-}
-*/
 function printConsoleWindowProperties(consolewindow){
 	////// Instance properties //////
 	console.log("consolewindow.columns = "	+consolewindow.columns)
@@ -95,91 +16,48 @@ const myConsoleWindow = new DKConsoleWindow()
 //myConsoleWindow.blur()
 //myConsoleWindow.focus()
 //myConsoleWindow.close()
-printWindowProperties(myConsoleWindow)
+printWindowProperties(myConsoleWindow)			//requires TEST_Window.js
 printConsoleWindowProperties(myConsoleWindow)
 
 
 
-////// UIEvent //////
-function printUIEventProperties(uievent){
-	////// Instance properties //////
-	console.log("uievent.detail = "				+uievent.detail)
-	console.log("uievent.sourceCapabilities = "	+uievent.sourceCapabilities)			
-	console.log("uievent.view = "				+uievent.view)
-	console.log("uievent.which = "				+uievent.which)
-}
 
-////// FocusEvent ///////
-function printFocusEventProperties(focusevent){
-	////// Instance properties //////
-	console.log("focusevent.relatedTarget = "	+focusevent.relatedTarget)
-}
 // [blur] https://developer.mozilla.org/en-US/docs/Web/API/Element/blur_event
 function onblur(event){
 	console.log("onblur("+event+")")
-	printEventProperties(event)
-	printUIEventProperties(event)
-	printFocusEventProperties(event)
+	printEventProperties(event)			//requires TEST_Event.js
+	printUIEventProperties(event)		//requires TEST_UIEvent.js
+	printFocusEventProperties(event)	//requires TEST_FocusEvent.js
 }
 myConsoleWindow.addEventListener('blur', onblur)
 // [focus] https://developer.mozilla.org/en-US/docs/Web/API/Element/focus_event
 function onfocus(event){
 	console.log("onfocus("+event+")")
-	printEventProperties(event)
-	printUIEventProperties(event)
-	printFocusEventProperties(event)
+	printEventProperties(event)			//requires TEST_Event.js
+	printUIEventProperties(event)		//requires TEST_UIEvent.js
+	printFocusEventProperties(event)	//requires TEST_FocusEvent.js
 }
 myConsoleWindow.addEventListener('focus', onfocus)
 // [focusin] https://developer.mozilla.org/en-US/docs/Web/API/Element/focusin_event
 function onfocusin(event){
 	console.log("onfocusin("+event+")")
-	printEventProperties(event)
-	printUIEventProperties(event)
-	printFocusEventProperties(event)
+	printEventProperties(event)			//requires TEST_Event.js
+	printUIEventProperties(event)		//requires TEST_UIEvent.js
+	printFocusEventProperties(event)	//requires TEST_FocusEvent.js
 }
 myConsoleWindow.addEventListener('focusin', onfocusin)
 // [focusout] https://developer.mozilla.org/en-US/docs/Web/API/Element/focusout_event
 function onfocusout(event){
 	console.log("onfocusout("+event+")")
-	printEventProperties(event)
-	printUIEventProperties(event)
-	printFocusEventProperties(event)
+	printEventProperties(event)			//requires TEST_Event.js
+	printUIEventProperties(event)		//requires TEST_UIEvent.js
+	printFocusEventProperties(event)	//requires TEST_FocusEvent.js
 }
 myConsoleWindow.addEventListener('focusout', onfocusout)
 
 
 
-////// MouseEvent //////
-function printMouseEventProperties(mouseevent){
-	////// Static properties //////
-	//console.log("mouseevent.WEBKIT_FORCE_AT_MOUSE_DOWN = "+mouseevent.WEBKIT_FORCE_AT_MOUSE_DOWN)
-	//console.log("mouseevent.WEBKIT_FORCE_AT_FORCE_MOUSE_DOWN = "+mouseevent.WEBKIT_FORCE_AT_FORCE_MOUSE_DOWN)
-	////// Instance properties //////
-	console.log("mouseevent.altKey = "			+mouseevent.altKey)
-	console.log("mouseevent.button = "			+mouseevent.button)
-	console.log("mouseevent.buttons = "			+mouseevent.buttons)
-	console.log("mouseevent.clientX = "			+mouseevent.clientX)
-	console.log("mouseevent.clientY = "			+mouseevent.clientY)
-	console.log("mouseevent.ctrlKey = "			+mouseevent.ctrlKey)
-	console.log("mouseevent.layerX = "			+mouseevent.layerX)
-	console.log("mouseevent.layerY = "			+mouseevent.layerY)
-	console.log("mouseevent.metaKey = "			+mouseevent.metaKey)
-	console.log("mouseevent.movementX = "		+mouseevent.movementX)
-	console.log("mouseevent.movementY = "		+mouseevent.movementY)
-	console.log("mouseevent.offsetX = "			+mouseevent.offsetX)
-	console.log("mouseevent.offsetY = "			+mouseevent.offsetY)
-	console.log("mouseevent.pageX = "			+mouseevent.pageX)
-	console.log("mouseevent.pageY = "			+mouseevent.pageY)
-	console.log("mouseevent.relatedTarget = "	+mouseevent.relatedTarget)
-	console.log("mouseevent.screenX = "			+mouseevent.screenX)
-	console.log("mouseevent.screenY = "			+mouseevent.screenY)
-	console.log("mouseevent.shiftKey = "		+mouseevent.shiftKey)
-	console.log("mouseevent.mozPressure = "		+mouseevent.mozPressure)
-	console.log("mouseevent.mozInputSource = "	+mouseevent.mozInputSource)
-	console.log("mouseevent.webkitForce = "		+mouseevent.webkitForce)
-	console.log("mouseevent.x = "				+mouseevent.x)
-	console.log("mouseevent.y = "				+mouseevent.y)
-}
+
 // [auxclick] https://developer.mozilla.org/en-US/docs/Web/API/Element/auxclick_event
 function onauxclick(event){
 	console.log("onauxclick("+event+")")
@@ -311,17 +189,7 @@ myConsoleWindow.addEventListener('webkitmouseforcewillbegin', onwebkitmouseforce
 
 
 
-////// WheelEvent //////
-function printWheelEventProperties(wheelevent){
-	////// Instance properties //////
-	console.log("wheelevent.deltaX = "		+wheelevent.deltaX)
-	console.log("wheelevent.deltaY = "		+wheelevent.deltaY)
-	console.log("wheelevent.deltaZ = "		+wheelevent.deltaZ)
-	console.log("wheelevent.deltaMode = "	+wheelevent.deltaMode)
-	console.log("wheelevent.wheelDelta = "	+wheelevent.wheelDelta)
-	console.log("wheelevent.wheelDeltaX = "	+wheelevent.wheelDeltaX)
-	console.log("wheelevent.wheelDeltaY = "	+wheelevent.wheelDeltaY)
-}
+
 // [mousewheel] https://developer.mozilla.org/en-US/docs/Web/API/Element/mousewheel_event
 function onmousewheel(event){
 	console.log("onmousewheel("+event+")")
@@ -343,14 +211,7 @@ myConsoleWindow.addEventListener('wheel', onwheel)
 
 
 
-////// InputEvent //////
-function printInputEventProperties(inputevent){
-	////// Instance properties //////
-	console.log("inputevent.data = "		+inputevent.data)
-	console.log("inputevent.dataTransfer = "+inputevent.dataTransfer)
-	console.log("inputevent.inputType = "	+inputevent.inputType)
-	console.log("inputevent.isComposing = "	+inputevent.isComposing)
-}
+
 // [beforeinput] https://w3c.github.io/uievents/#event-type-beforeinput
 function onbeforeinput(event){
 	console.log("onbeforeinput("+event+")")

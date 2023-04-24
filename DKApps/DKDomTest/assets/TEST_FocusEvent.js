@@ -1,7 +1,14 @@
+// [IDL] https://w3c.github.io/uievents/#events-focusevent
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent
 console.log("////// TEST_FocusEvent.js //////")
 
-// [W3C] https://w3c.github.io/uievents/#events-focusevent
-// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent
+
+////// FocusEvent ///////
+function printFocusEventProperties(focusevent){
+	////// Instance properties //////
+	console.log("focusevent.relatedTarget = "	+focusevent.relatedTarget)
+}
+
 
 
 ////// Constructor //////

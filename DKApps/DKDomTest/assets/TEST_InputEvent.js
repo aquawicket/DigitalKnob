@@ -1,5 +1,16 @@
 console.log("////// TEST_InputEvent.js //////")
 
+
+////// InputEvent //////
+function printInputEventProperties(inputevent){
+	////// Instance properties //////
+	console.log("inputevent.data = "		+inputevent.data)
+	console.log("inputevent.dataTransfer = "+inputevent.dataTransfer)
+	console.log("inputevent.inputType = "	+inputevent.inputType)
+	console.log("inputevent.isComposing = "	+inputevent.isComposing)
+}
+
+
 ////// Constructor //////
 // [InputEvent()] https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/InputEvent
 	
