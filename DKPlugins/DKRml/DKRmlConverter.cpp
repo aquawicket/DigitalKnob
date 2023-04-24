@@ -373,6 +373,7 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 
 //DEBUG - Lets see the code
 #if DEBUG
+	/*
 	DKRml* dkRml = DKRml::Get();
 	Rml::ElementDocument* _doc = dkRml->document;
 	DKString code = _doc->GetContext()->GetRootElement()->GetInnerRML();
@@ -386,6 +387,7 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 	DKINFO("########## Post DKRmlConverter::PostProcess CODE ##########\n");
 	DKINFO(code+"\n");
 	DKINFO("##########################################################\n");
+	*/
 #endif
 	return true;
 }
