@@ -47,13 +47,14 @@
 #include "TEST_HTMLElement.h"
 
 
-// DKConsoleWindow
+////// DigitalKnob //////
+// [DKConsoleWindow]
 #include "TEST_DKConsoleWindow.h"
 
-// DKSdlWindow
+// [DKSdlWindow]
 #include "TEST_DKSdlWindow.h"
 
-// DKRmlDocument
+// [DKRmlDocument]
 #include "TEST_DKRmlDocument.h"
 
 
@@ -106,13 +107,14 @@ bool App::Init() {
 	DKClass::DKCreate("TEST_HTMLElement");
 	
 	
-	// DKConsoleWindow
+	////// DigitalKnob //////
+	// [DKConsoleWindow]
 	DKClass::DKCreate("TEST_DKConsoleWindow");
 
-	// DKSdlWindow
+	// [DKSdlWindow]
 	DKClass::DKCreate("TEST_DKSdlWindow");
 	
-	// DKRmlDocument
+	// [DKRmlDocument]
 	DKClass::DKCreate("TEST_DKRmlDocument");
 
 	return true;

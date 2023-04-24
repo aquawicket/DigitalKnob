@@ -63,14 +63,15 @@ CPP_DK_Create("DKHTMLElementDUK");  // TODO
 CPP_DK_Create("TEST_HTMLElement.js");
 
 
-// DKConsoleWindow
+////// DigitalKnob //////
+// [DKConsoleWindow]
 CPP_DK_Create("DKConsoleWindowDUK");
 CPP_DK_Create("TEST_DKConsoleWindow.js");
 
-// DKSdlWindow
+// [DKSdlWindow]
 CPP_DK_Create("DKSdlWindowDUK");
 CPP_DK_Create("TEST_DKSdlWindow.js");
 
-// DKRmlDocument
+// [DKRmlDocument]
 CPP_DK_Create("DKRmlDocumentDUK");
 CPP_DK_Create("TEST_DKRmlDocument.js");
