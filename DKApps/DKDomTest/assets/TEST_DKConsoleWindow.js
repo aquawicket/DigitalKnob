@@ -21,6 +21,7 @@ function printEventProperties(event){
 	console.log("event.scoped = "					+event.scoped)
 }
 
+/*
 ////// Window //////
 function printWindowProperties(window){
 	////// Instance properties //////
@@ -77,6 +78,7 @@ function printWindowProperties(window){
 	console.log("window.window = "				+window.window)
 	//console.log("window.windows = "			+window.windows)
 }
+*/
 function printConsoleWindowProperties(consolewindow){
 	////// Instance properties //////
 	console.log("consolewindow.columns = "	+consolewindow.columns)
