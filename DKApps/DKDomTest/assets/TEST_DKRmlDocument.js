@@ -1,5 +1,9 @@
 console.log("////// TEST_DKRmlDocument.js //////")
 
+
+const myRmlDocument = new DKRmlDocument()
+
+
 ////// Instance properties //////
 // [Document.activeElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement
 // [Document.adoptedStyleSheets] https://developer.mozilla.org/en-US/docs/Web/API/Document/adoptedStyleSheets
