@@ -77,8 +77,8 @@ bool DKRmlDocument::Init(){
 	}
 
 	//Create DKSdlRml or DKOsgRml
-	if(DKClass::DKAvailable("DKSdlRml")){
-		DKClass::DKCreate("DKSdlRml");
+	if(DKClass::DKAvailable("DKSdlRmlDocument")){
+		DKClass::DKCreate("DKSdlRmlDocument");
 		if(!Rml::Initialise())
 			return DKERROR("Rml::Initialise(): failed \n");
 		int w = 800;
