@@ -21,7 +21,7 @@ printConsoleWindowProperties(myConsoleWindow)
 
 
 
-
+////// FocusEvent //////
 // [blur] https://developer.mozilla.org/en-US/docs/Web/API/Element/blur_event
 function onblur(event){
 	console.log("onblur("+event+")")
@@ -57,7 +57,7 @@ myConsoleWindow.addEventListener('focusout', onfocusout)
 
 
 
-
+////// MouseEvent //////
 // [auxclick] https://developer.mozilla.org/en-US/docs/Web/API/Element/auxclick_event
 function onauxclick(event){
 	console.log("onauxclick("+event+")")
@@ -189,7 +189,7 @@ myConsoleWindow.addEventListener('webkitmouseforcewillbegin', onwebkitmouseforce
 
 
 
-
+////// WheelEvent //////
 // [mousewheel] https://developer.mozilla.org/en-US/docs/Web/API/Element/mousewheel_event
 function onmousewheel(event){
 	console.log("onmousewheel("+event+")")
@@ -211,7 +211,7 @@ myConsoleWindow.addEventListener('wheel', onwheel)
 
 
 
-
+////// InputEvent //////
 // [beforeinput] https://w3c.github.io/uievents/#event-type-beforeinput
 function onbeforeinput(event){
 	console.log("onbeforeinput("+event+")")
@@ -231,27 +231,7 @@ myConsoleWindow.addEventListener('input', oninput)
 
 
 
-////// KeyboardEvent ///////
-function printKeyboardEventProperties(keyboardevent){
-	////// Instance properties //////
-	console.log("keyboardevent.altKey = "		+keyboardevent.altKey)
-	console.log("keyboardevent.code = "			+keyboardevent.code)			
-	console.log("keyboardevent.ctrlKey = "		+keyboardevent.ctrlKey)
-	console.log("keyboardevent.isComposing = "	+keyboardevent.isComposing)
-	console.log("keyboardevent.key = "			+keyboardevent.key)
-	console.log("keyboardevent.locale = "		+keyboardevent.locale)
-	console.log("keyboardevent.location = "		+keyboardevent.location)
-	console.log("keyboardevent.metaKey = "		+keyboardevent.metaKey)
-	console.log("keyboardevent.repeat = "		+keyboardevent.repeat)
-	console.log("keyboardevent.shiftKey = "		+keyboardevent.shiftKey)
-	////// Obsolete properties //////
-	console.log("keyboardevent.char = "			+keyboardevent.char)
-	console.log("keyboardevent.charCode = "		+keyboardevent.charCode)
-	console.log("keyboardevent.keyCode = "		+keyboardevent.keyCode)
-	console.log("keyboardevent.keyIdentifier = "+keyboardevent.keyIdentifier)
-	console.log("keyboardevent.keyLocation = "	+keyboardevent.keyLocation)
-	console.log("keyboardevent.which = "		+keyboardevent.which)
-}
+////// KeyboardEvent //////
 // [keydown] https://developer.mozilla.org/en-US/docs/Web/API/Element/keydown_event
 function onkeydown(event){
 	console.log("onkeydown("+event+")")
@@ -279,12 +259,7 @@ myConsoleWindow.addEventListener('keypress', onkeypress)
 
 
 
-///// CompositionEvent //////
-function printCompositionEventProperties(compositionevent){
-	////// Instance properties //////
-	console.log("compositionevent.data = "		+compositionevent.data)
-	console.log("compositionevent.locale = "	+compositionevent.locale)
-}
+////// CompositionEvent //////
 // [compositionstart] https://w3c.github.io/uievents/#event-type-compositionstart
 function oncompositionstart(event){
 	console.log("oncompositionstart("+event+")")

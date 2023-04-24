@@ -4,7 +4,9 @@ console.log("////// TEST_CompositionEvent.js //////")
 const eventTarget = new EventTarget();
 
 
-////// CompositionEvent ///////
-function printCompositionEventProperties(event){
-	
+///// CompositionEvent //////
+function printCompositionEventProperties(compositionevent){
+	////// Instance properties //////
+	console.log("compositionevent.data = "		+compositionevent.data)
+	console.log("compositionevent.locale = "	+compositionevent.locale)
 }

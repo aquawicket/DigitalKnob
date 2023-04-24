@@ -1,5 +1,28 @@
 console.log("////// TEST_KeyboardEvent.js //////")
 
+
+////// KeyboardEvent ///////
+function printKeyboardEventProperties(keyboardevent){
+	////// Instance properties //////
+	console.log("keyboardevent.altKey = "		+keyboardevent.altKey)
+	console.log("keyboardevent.code = "			+keyboardevent.code)			
+	console.log("keyboardevent.ctrlKey = "		+keyboardevent.ctrlKey)
+	console.log("keyboardevent.isComposing = "	+keyboardevent.isComposing)
+	console.log("keyboardevent.key = "			+keyboardevent.key)
+	console.log("keyboardevent.locale = "		+keyboardevent.locale)
+	console.log("keyboardevent.location = "		+keyboardevent.location)
+	console.log("keyboardevent.metaKey = "		+keyboardevent.metaKey)
+	console.log("keyboardevent.repeat = "		+keyboardevent.repeat)
+	console.log("keyboardevent.shiftKey = "		+keyboardevent.shiftKey)
+	////// Obsolete properties //////
+	console.log("keyboardevent.char = "			+keyboardevent.char)
+	console.log("keyboardevent.charCode = "		+keyboardevent.charCode)
+	console.log("keyboardevent.keyCode = "		+keyboardevent.keyCode)
+	console.log("keyboardevent.keyIdentifier = "+keyboardevent.keyIdentifier)
+	console.log("keyboardevent.keyLocation = "	+keyboardevent.keyLocation)
+	console.log("keyboardevent.which = "		+keyboardevent.which)
+}
+
 ////// Constructor //////
 // [KeyboardEvent()] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/KeyboardEvent
 		
