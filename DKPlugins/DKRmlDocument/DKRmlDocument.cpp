@@ -49,6 +49,16 @@ WARNING_DISABLE
 
 DKRmlFile* DKRmlDocument::dkRmlFile = NULL;
 
+
+DKRmlDocument::DKRmlDocument() : DKDocument() {
+	DKDEBUGFUNC();
+}
+
+DKRmlDocument::~DKRmlDocument() {
+	DKDEBUGFUNC();
+}
+
+
 bool DKRmlDocument::Init(){
 	DKDEBUGFUNC();
 	DKClass::DKCreate("DKRmlJS");

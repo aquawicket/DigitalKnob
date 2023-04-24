@@ -32,6 +32,7 @@
 
 #include "DK/DK.h"
 #include "DKWindow/DKWindow.h"
+#include "DKDocument/DKDocument.h"
 #include "DKRmlDocument/DKRmlFile.h"
 #include "DKRmlDocument/DKRmlConverter.h"
 
@@ -40,10 +41,13 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
-class DKRmlDocument : public Rml::EventListener, public DKObjectT<DKRmlDocument> {
+class DKRmlDocument : public Rml::EventListener, public DKDocument, public DKObjectT<DKRmlDocument> {
 public:
+	DKRmlDocument();
+	~DKRmlDocument();
 	bool Init();
 	bool End();
+	
 	bool GetSourceCode(DKString& source_code);
 	bool LoadFont(const DKString& file);
 	bool LoadFonts(DKString& directory);
