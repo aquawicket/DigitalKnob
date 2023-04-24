@@ -25,8 +25,8 @@
 */
 #ifdef HAVE_DKDuktape
 #include "DK/stdafx.h"
-#include "DKRml/DKRml.h"
-#include "DKRml/DKRmlJS.h"
+#include "DKRmlDocument/DKRmlDocument.h"
+#include "DKRmlDocument/DKRmlJS.h"
 
 
 bool DKRmlJS::Init() {
@@ -41,37 +41,37 @@ bool DKRmlJS::Init() {
 
 int DKRmlJS::DebuggerOff(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
-	DKRml::Get()->DebuggerOff();
+	DKRmlDocument::Get()->DebuggerOff();
 	return false;
 }
 
 int DKRmlJS::DebuggerOn(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
-	DKRml::Get()->DebuggerOn();
+	DKRmlDocument::Get()->DebuggerOn();
 	return false;
 }
 
 int DKRmlJS::DebuggerToggle(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
-	DKRml::Get()->DebuggerToggle();
+	DKRmlDocument::Get()->DebuggerToggle();
 	return true;
 }
 
 int DKRmlJS::LoadUrl(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	DKString file = duk_require_string(ctx, 0);
-	if (!DKRml::Get()->LoadUrl(file))
-		return DKERROR("DKRml::Get()->LoadUrl() failed! \n");
+	if (!DKRmlDocument::Get()->LoadUrl(file))
+		return DKERROR("DKRmlDocument::Get()->LoadUrl() failed! \n");
 	return true;
 }
 
 int DKRmlJS::PostProcess(duk_context* ctx) {
 	DKDEBUGFUNC(ctx);
 	Rml::ElementList elements;
-	DKRml::Get()->document->GetElementsByTagName(elements, "body");
+	DKRmlDocument::Get()->document->GetElementsByTagName(elements, "body");
 	if(!elements[0])
 		return DKERROR("body element invalid\n");
-	DKRml::Get()->dkRmlConverter.PostProcess(elements[0]);
+	DKRmlDocument::Get()->dkRmlConverter.PostProcess(elements[0]);
 	return true;
 }
 

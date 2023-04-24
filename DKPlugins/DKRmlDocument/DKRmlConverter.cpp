@@ -24,13 +24,13 @@
 * SOFTWARE.
 */
 #include "DK/stdafx.h"
-#include "DKRml/DKRmlConverter.h"
+#include "DKRmlDocument/DKRmlConverter.h"
 #include "DK/DKLog.h"
 #if HAVE_DKCurl
 	#include "DKCurl/DKCurl.h"
 #endif
 #include "DKDuktape/DKDuktape.h"
-#include "DKRml/DKRml.h"
+#include "DKRmlDocument/DKRmlDocument.h"
 #include "DKXml/DKXml.h"
 
 WARNING_DISABLE
@@ -122,13 +122,13 @@ bool DKRmlConverter::HtmlToRml(const DKString& html, DKString& rml){
 bool DKRmlConverter::Hyperlink(DKEvents* event){
 	DKDEBUGFUNC(event);
 	DKString elementAddress = event->GetId();
-	DKRml* dkRml = DKRml::Get("");
+	DKRmlDocument* dkRmlDocument = DKRmlDocument::Get("");
 	//Rml::ElementDocument* doc = dkRml->document; //unused code
 	Rml::Element* aElement = (Rml::Element*)addressToPointer(elementAddress);
 	DKString value = aElement->GetAttribute("href")->Get<Rml::String>();
 	DKINFO("DKWidget::Hyperlink: "+value+"\n");
 	//DKUtil::Run(value, "");
-	dkRml->LoadUrl(value);
+	dkRmlDocument->LoadUrl(value);
 	return true;
 }
 
@@ -150,8 +150,8 @@ bool DKRmlConverter::IndexToRml(const DKString& html, DKString& rml){
 	rml = "<rml>\n"+rml+"</rml>";
 	
 	replace(rml, "<head />", "<head></head>");
-	DKString rml_css = DKFile::local_assets+"DKRml/DKRml.css"; //add DKRml.css to the head tag
-	replace(rml, "<head>", "<head><link id=\"DKRml/DKRml.css\" type=\"text/css\" href=\""+rml_css+"\"></link>");
+	DKString rml_css = DKFile::local_assets+"DKRmlDocument/DKRml.css"; //add DKRml.css to the head tag
+	replace(rml, "<head>", "<head><link id=\"DKRmlDocument/DKRml.css\" type=\"text/css\" href=\""+rml_css+"\"></link>");
 
 	//replace quotes with apostrophes, pugixml will remove quotes inside nodes.
 	//FIXME: code like jSFunc('"+var_in_quotes+"') will NOT work. 
@@ -173,7 +173,7 @@ bool DKRmlConverter::IndexToRml(const DKString& html, DKString& rml){
 	//xml.PrependNode("//head","link");
 	//xml.SetAttributes("//head/link[1]","rel","stylesheet");
 	//xml.SetAttributes("//head/link[1]","type","text/css");
-	//xml.SetAttributes("//head/link[1]","href","DKRml/DKRml.css");
+	//xml.SetAttributes("//head/link[1]","href","DKRmlDocument/DKRml.css");
 
 	//Rml cannot read nodes outside of the body, so add a html node we can work with.
 	//xml.PrependNode("//body", "html"); 
@@ -188,7 +188,7 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 	if(!element)
 		return DKERROR("element invalid\n");
 	//we actually want the parent if it has one
-	Rml::Element* doc = DKRml::Get()->document;
+	Rml::Element* doc = DKRmlDocument::Get()->document;
 	if(element != doc && element->GetParentNode())
 		element = element->GetParentNode();
 
@@ -279,7 +279,7 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 			aElements[i]->SetProperty("color", "rgb(0,0,255)");
 			aElements[i]->SetProperty("text-decoration", "underline");
 			DKString id = aElements[i]->GetId();
-			aElements[i]->AddEventListener("click", DKRml::Get(), false);
+			aElements[i]->AddEventListener("click", DKRmlDocument::Get(), false);
 			DKString elementAddress = pointerToAddress(aElements[i]);
 			DKEvents::AddEvent(elementAddress, "click", &DKRmlConverter::Hyperlink, this);
 		}
@@ -309,13 +309,13 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 		DKString href = links[i]->GetAttribute("href")->Get<Rml::String>();
 		if(has(processed, href))
 			continue;
-		//replace(href, DKRml::Get()->_path, "");
+		//replace(href, DKRmlDocument::Get()->_path, "");
 		processed += href + ",";
 		DKClass::DKCreate(href);
 	}
 	// <script> tags
 	//get the path from the url
-	DKString path = DKRml::Get()->href;
+	DKString path = DKRmlDocument::Get()->href;
 	std::string::size_type found = path.find_last_of("/");
 	path = path.substr(0,found);
 	path += "/";
@@ -352,7 +352,7 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 #endif
 			if(!has(path, "http://")) {
 				processed += src+",";
-				//DKString app = DKRml::Get()->workingPath +src;
+				//DKString app = DKRmlDocument::Get()->workingPath +src;
 				//DKDuktape::LoadFile(app);
 				DKClass::DKCreate(src);
 			}
@@ -373,8 +373,8 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 
 //DEBUG - Lets see the code
 #if DEBUG
-	DKRml* dkRml = DKRml::Get();
-	Rml::ElementDocument* _doc = dkRml->document;
+	DKRmlDocument* dkRmlDocument = DKRmlDocument::Get();
+	Rml::ElementDocument* _doc = dkRmlDocument->document;
 	DKString code = _doc->GetContext()->GetRootElement()->GetInnerRML();
 	std::string::size_type n = code.rfind("<html");
 	if(n < 0){
@@ -393,8 +393,8 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 bool DKRmlConverter::ResizeIframe(DKEvents* event){
 	DKDEBUGFUNC(event);
 	DKString id = event->GetId();
-	DKRml* dkRml = DKRml::Get();
-	Rml::ElementDocument* doc = dkRml->document;
+	DKRmlDocument* dkRmlDocument = DKRmlDocument::Get();
+	Rml::ElementDocument* doc = dkRmlDocument->document;
 	Rml::Element* iframe = doc->GetElementById(id.c_str());
 	DKString iTop = toString(iframe->GetAbsoluteTop());
 	DKString iLeft = toString(iframe->GetAbsoluteLeft());
@@ -408,8 +408,8 @@ bool DKRmlConverter::ResizeIframe(DKEvents* event){
 bool DKRmlConverter::ClickIframe(DKEvents* event){
 	DKDEBUGFUNC(event);
 	DKString id = event->GetId();
-	DKRml* dkRml = DKRml::Get("");
-	Rml::ElementDocument* doc = dkRml->document;
+	DKRmlDocument* dkRmlDocument = DKRmlDocument::Get("");
+	Rml::ElementDocument* doc = dkRmlDocument->document;
 	Rml::Element* iframe = doc->GetElementById(id.c_str());
 	DKString iTop = toString(iframe->GetAbsoluteTop());
 	DKString iLeft = toString(iframe->GetAbsoluteLeft());
@@ -423,8 +423,8 @@ bool DKRmlConverter::ClickIframe(DKEvents* event){
 bool DKRmlConverter::MouseOverIframe(DKEvents* event){
 	DKDEBUGFUNC(event);
 	DKString id = event->GetId();
-	DKRml* dkRml = DKRml::Get("");
-	Rml::ElementDocument* doc = dkRml->document;
+	DKRmlDocument* dkRmlDocument = DKRmlDocument::Get("");
+	Rml::ElementDocument* doc = dkRmlDocument->document;
 	Rml::Element* iframe = doc->GetElementById(id.c_str());
 	DKString iTop = toString(iframe->GetAbsoluteTop());
 	DKString iLeft = toString(iframe->GetAbsoluteLeft());

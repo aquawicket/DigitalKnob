@@ -24,8 +24,8 @@
 * SOFTWARE.
 */
 #include "DK/stdafx.h"
-#include "DKRml/DKRmlFile.h"
-#include "DKRml/DKRml.h"
+#include "DKRmlDocument/DKRmlFile.h"
+#include "DKRmlDocument/DKRmlDocument.h"
 #ifdef HAVE_DKCurl
 	#include "DKCurl/DKCurl.h"
 #endif
@@ -42,18 +42,18 @@ Rml::FileHandle DKRmlFile::Open(const Rml::String& path){
 		//absolute path
 	}
 	else if(has(_url,"//")){ //could be //www.site.com/style.css or //site.com/style.css
-		//_url = DKRml::Get()->protocol+":"+_url;
-		return DKERROR("DKRml::LoadUrl(): no protocol specified\n"); //absolute path without protocol
+		//_url = DKRmlDocument::Get()->protocol+":"+_url;
+		return DKERROR("DKRmlDocument::LoadUrl(): no protocol specified\n"); //absolute path without protocol
 	}
 	else{
-		if(DKFile::PathExists(DKRml::Get()->workingPath+_url))
-			_url = DKRml::Get()->workingPath+_url;
+		if(DKFile::PathExists(DKRmlDocument::Get()->workingPath+_url))
+			_url = DKRmlDocument::Get()->workingPath+_url;
 		else if(!DKFile::VerifyPath(_url)){
 			return DKERROR("could not locate path ("+_url+")");
 		}
 		//if(_url.find("/home") == std::string::npos) //url may have unix home directory
-		//	_url = DKRml::Get()->workingPath+_url;
-		//return DKERROR("DKRml::LoadUrl(): cannot load relative paths\n");
+		//	_url = DKRmlDocument::Get()->workingPath+_url;
+		//return DKERROR("DKRmlDocument::LoadUrl(): cannot load relative paths\n");
 	}
 	if(has(_url,"://")){
 		DKFile::MakeDir(DKFile::local_assets+"Cache");

@@ -25,7 +25,7 @@
 */
 
 #include "DK/stdafx.h"
-#include "DKRml/DKRmlHeadInstancer.h"
+#include "DKRmlDocument/DKRmlHeadInstancer.h"
 
 WARNING_DISABLE
 #include <RmlUi/Core/StringUtilities.h>

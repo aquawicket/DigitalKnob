@@ -47,7 +47,7 @@ WARNING_DISABLE
 #define DRAG_FIX 1
 
 
-DKRmlFile* DKRml::dkRmlFile = NULL;
+DKRmlFile* DKRmlDocument::dkRmlFile = NULL;
 
 bool DKRmlDocument::Init(){
 	DKDEBUGFUNC();
