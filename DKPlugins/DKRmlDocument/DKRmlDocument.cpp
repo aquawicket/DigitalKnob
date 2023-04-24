@@ -174,7 +174,7 @@ bool DKRmlDocument::Init(){
 	DKFile::FileToString(workingPath +"DKRmlDocument/blank.html", html);
 	DKFile::ChDir(workingPath);
 	LoadHtml(html);
-	DKClass::DKCreate("DKDom");
+	//DKClass::DKCreate("DKDom");
 	return true;
 }
 
