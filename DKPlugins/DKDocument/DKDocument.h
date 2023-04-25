@@ -20,7 +20,6 @@ public:
 		
 		////// Instance properties //////
 		// [Document.activeElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement
-		virtual bool activeElement(DKString&, bool) { return false; }
 		// [Document.adoptedStyleSheets] https://developer.mozilla.org/en-US/docs/Web/API/Document/adoptedStyleSheets
 		// [Document.body] https://developer.mozilla.org/en-US/docs/Web/API/Document/body
 		// [Document.characterSet](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/characterSet
@@ -236,6 +235,9 @@ public:
 	
 	////// Instance properties //////
 	// [Document.activeElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement
+	virtual bool activeElement(DKString&, bool) { 
+		return false; 
+	}
 	// [Document.adoptedStyleSheets] https://developer.mozilla.org/en-US/docs/Web/API/Document/adoptedStyleSheets
 	// [Document.body] https://developer.mozilla.org/en-US/docs/Web/API/Document/body
 	// [Document.characterSet](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/characterSet

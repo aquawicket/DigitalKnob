@@ -3,10 +3,7 @@
 #define DKNode_H
 
 #include "DKEventTarget/DKEventTarget.h"
-#include <optional>
 
-#define GET false
-#define SET true
 
 // [IDL] https://dom.spec.whatwg.org/#interface-node
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Node
@@ -54,9 +51,9 @@ public:
 
 	}
 	
-	
 	////// Instance properties //////
 	// [Node.baseURI](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Node/baseURI
+	virtual bool baseURI(DKString&, bool) { return false; }
 	// [Node.childNodes](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Node/childNodes
 	// [Node.firstChild](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Node/firstChild
 	// [Node.isConnected](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Node/isConnected
