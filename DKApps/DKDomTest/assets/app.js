@@ -55,11 +55,11 @@ CPP_DK_Create("DKDocumentDUK");
 CPP_DK_Create("TEST_Document.js");
 
 // [Element] https://dom.spec.whatwg.org/#interface-element
-CPP_DK_Create("DKElementDUK");  // TODO
+CPP_DK_Create("DKElementDUK");
 CPP_DK_Create("TEST_Element.js");
 
 // [HTMLElement] https://html.spec.whatwg.org/multipage/dom.html#htmlelement
-CPP_DK_Create("DKHTMLElementDUK");  // TODO
+CPP_DK_Create("DKHTMLElementDUK");
 CPP_DK_Create("TEST_HTMLElement.js");
 
 
