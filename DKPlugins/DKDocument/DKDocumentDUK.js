@@ -15,6 +15,10 @@ var Document = function Document(address) {
 	
 	////// Instance properties //////
 	// [Document.activeElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement
+	Object.defineProperty(this, "activeElement", {
+        get: function activeElement()		{ return CPP_DKDocumentDUK_activeElement(this.address) },
+		//set: function activeElement(data)	{ return CPP_DKDocumentDUK_activeElement(this.address, data) },
+    })
 	// [Document.adoptedStyleSheets] https://developer.mozilla.org/en-US/docs/Web/API/Document/adoptedStyleSheets
 	// [Document.body] https://developer.mozilla.org/en-US/docs/Web/API/Document/body
 	// [Document.characterSet](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/characterSet
