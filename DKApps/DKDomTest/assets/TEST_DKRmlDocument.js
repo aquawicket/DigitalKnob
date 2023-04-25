@@ -1,7 +1,6 @@
 console.log("////// TEST_DKRmlDocument.js //////")
 
 
-
 function printRmlDocumentProperties(rmlDocument){
 	////// Instance properties //////
 	// TODO
@@ -10,5 +9,5 @@ function printRmlDocumentProperties(rmlDocument){
 
 /////////////////////////////////////////
 const myRmlDocument = new DKRmlDocument()
-//printDocumentProperties(myRmlDocument)
-//printRmlDocumentProperties(myRmlDocument)
+printRmlDocumentProperties(myRmlDocument)
+printDocumentProperties(myRmlDocument)		//requires TEST_Document.js
