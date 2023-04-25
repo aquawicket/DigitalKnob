@@ -15,13 +15,14 @@ var CompositionEvent = function CompositionEvent(type, options, address) {
 	////// Instance properties //////
 	// [CompositionEvent.data](Read only) https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/data
 	Object.defineProperty(this, "data", {
-        get: function data()	{ return CPP_DKCompositionEventDUK_data(this.address) },
-		set: function data(str) { return CPP_DKCompositionEventDUK_data(this.address, str) },
+        get: function data()		{ return CPP_DKCompositionEventDUK_data(this.address) },
+		set: function data(data) 	{ return CPP_DKCompositionEventDUK_data(this.address, data) },
 		configurable: true,
     })
 	// [CompositionEvent.locale](Read only) https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/locale
 	Object.defineProperty(this, "locale", {
-        get: function locale() { return CPP_DKCompositionEventDUK_locale(this.address) },
+        get: function locale() 		{ return CPP_DKCompositionEventDUK_locale(this.address) },
+		//set: function locale(data) 	{ return CPP_DKCompositionEventDUK_locale(this.address, data) },
     })
 	
 
