@@ -16,110 +16,174 @@ var Document = function Document(address) {
 	////// Instance properties //////
 	// [Document.activeElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement
 	Object.defineProperty(this, "activeElement", {
-        get: function activeElement()		{ return CPP_DKDocumentDUK_activeElement(this.address) },
-		//set: function activeElement(data)	{ return CPP_DKDocumentDUK_activeElement(this.address, data) },
+        get: function activeElement()					{ return CPP_DKDocumentDUK_activeElement(this.address) },
+		//set: function activeElement(data)				{ return CPP_DKDocumentDUK_activeElement(this.address, data) },
     })
 	// [Document.adoptedStyleSheets] https://developer.mozilla.org/en-US/docs/Web/API/Document/adoptedStyleSheets
 	Object.defineProperty(this, "adoptedStyleSheets", {
-        get: function adoptedStyleSheets()		{ return CPP_DKDocumentDUK_adoptedStyleSheets(this.address) },
-		//set: function adoptedStyleSheets(data){ return CPP_DKDocumentDUK_adoptedStyleSheets(this.address, data) },
+        get: function adoptedStyleSheets()				{ return CPP_DKDocumentDUK_adoptedStyleSheets(this.address) },
+		//set: function adoptedStyleSheets(data)		{ return CPP_DKDocumentDUK_adoptedStyleSheets(this.address, data) },
     })
 	// [Document.body] https://developer.mozilla.org/en-US/docs/Web/API/Document/body
 	Object.defineProperty(this, "body", {
-        get: function body()		{ return CPP_DKDocumentDUK_body(this.address) },
-		//set: function body(data)	{ return CPP_DKDocumentDUK_body(this.address, data) },
+        get: function body()							{ return CPP_DKDocumentDUK_body(this.address) },
+		//set: function body(data)						{ return CPP_DKDocumentDUK_body(this.address, data) },
     })
 	// [Document.characterSet](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/characterSet
 	Object.defineProperty(this, "characterSet", {
-        get: function characterSet()		{ return CPP_DKDocumentDUK_characterSet(this.address) },
-		//set: function characterSet(data)	{ return CPP_DKDocumentDUK_characterSet(this.address, data) },
+        get: function characterSet()					{ return CPP_DKDocumentDUK_characterSet(this.address) },
+		//set: function characterSet(data)				{ return CPP_DKDocumentDUK_characterSet(this.address, data) },
     })
 	// [Document.childElementCount](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/childElementCount
 	Object.defineProperty(this, "childElementCount", {
-        get: function childElementCount()		{ return CPP_DKDocumentDUK_childElementCount(this.address) },
-		//set: function childElementCount(data)	{ return CPP_DKDocumentDUK_childElementCount(this.address, data) },
+        get: function childElementCount()				{ return CPP_DKDocumentDUK_childElementCount(this.address) },
+		//set: function childElementCount(data)			{ return CPP_DKDocumentDUK_childElementCount(this.address, data) },
     })
 	// [Document.children](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/children
 	Object.defineProperty(this, "children", {
-        get: function children()		{ return CPP_DKDocumentDUK_children(this.address) },
-		//set: function children(data)	{ return CPP_DKDocumentDUK_children(this.address, data) },
+        get: function children()						{ return CPP_DKDocumentDUK_children(this.address) },
+		//set: function children(data)					{ return CPP_DKDocumentDUK_children(this.address, data) },
     })
 	// [Document.compatMode](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/compatMode
 	Object.defineProperty(this, "compatMode", {
-        get: function compatMode()		{ return CPP_DKDocumentDUK_compatMode(this.address) },
-		//set: function compatMode(data){ return CPP_DKDocumentDUK_compatMode(this.address, data) },
+        get: function compatMode()						{ return CPP_DKDocumentDUK_compatMode(this.address) },
+		//set: function compatMode(data)				{ return CPP_DKDocumentDUK_compatMode(this.address, data) },
     })
 	// [Document.contentType](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/contentType
 	Object.defineProperty(this, "contentType", {
-        get: function contentType()			{ return CPP_DKDocumentDUK_contentType(this.address) },
-		//set: function contentType(data)	{ return CPP_DKDocumentDUK_contentType(this.address, data) },
+        get: function contentType()						{ return CPP_DKDocumentDUK_contentType(this.address) },
+		//set: function contentType(data)				{ return CPP_DKDocumentDUK_contentType(this.address, data) },
     })
 	// [Document.currentScript](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/currentScript
 	Object.defineProperty(this, "currentScript", {
-        get: function currentScript()		{ return CPP_DKDocumentDUK_currentScript(this.address) },
-		//set: function currentScript(data)	{ return CPP_DKDocumentDUK_currentScript(this.address, data) },
+        get: function currentScript()					{ return CPP_DKDocumentDUK_currentScript(this.address) },
+		//set: function currentScript(data)				{ return CPP_DKDocumentDUK_currentScript(this.address, data) },
     })
 	// [Document.doctype](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/doctype
 	Object.defineProperty(this, "doctype", {
-        get: function doctype()			{ return CPP_DKDocumentDUK_doctype(this.address) },
-		//set: function doctype(data)	{ return CPP_DKDocumentDUK_doctype(this.address, data) },
+        get: function doctype()							{ return CPP_DKDocumentDUK_doctype(this.address) },
+		//set: function doctype(data)					{ return CPP_DKDocumentDUK_doctype(this.address, data) },
     })
 	// [Document.documentElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/documentElement
 	Object.defineProperty(this, "documentElement", {
-        get: function documentElement()			{ return CPP_DKDocumentDUK_documentElement(this.address) },
-		//set: function documentElement(data)	{ return CPP_DKDocumentDUK_documentElement(this.address, data) },
+        get: function documentElement()					{ return CPP_DKDocumentDUK_documentElement(this.address) },
+		//set: function documentElement(data)			{ return CPP_DKDocumentDUK_documentElement(this.address, data) },
     })
 	// [Document.documentURI](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/documentURI
 	Object.defineProperty(this, "documentURI", {
-        get: function documentURI()			{ return CPP_DKDocumentDUK_documentURI(this.address) },
-		//set: function documentURI(data)	{ return CPP_DKDocumentDUK_documentURI(this.address, data) },
+        get: function documentURI()						{ return CPP_DKDocumentDUK_documentURI(this.address) },
+		//set: function documentURI(data)				{ return CPP_DKDocumentDUK_documentURI(this.address, data) },
     })
 	// [Document.embeds](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/embeds
 	Object.defineProperty(this, "embeds", {
-        get: function embeds()			{ return CPP_DKDocumentDUK_embeds(this.address) },
-		//set: function embeds(data)	{ return CPP_DKDocumentDUK_embeds(this.address, data) },
+        get: function embeds()							{ return CPP_DKDocumentDUK_embeds(this.address) },
+		//set: function embeds(data)					{ return CPP_DKDocumentDUK_embeds(this.address, data) },
     })
 	// [Document.firstElementChild](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/firstElementChild
 	Object.defineProperty(this, "firstElementChild", {
-        get: function firstElementChild()		{ return CPP_DKDocumentDUK_firstElementChild(this.address) },
-		//set: function firstElementChild(data)	{ return CPP_DKDocumentDUK_firstElementChild(this.address, data) },
+        get: function firstElementChild()				{ return CPP_DKDocumentDUK_firstElementChild(this.address) },
+		//set: function firstElementChild(data)			{ return CPP_DKDocumentDUK_firstElementChild(this.address, data) },
     })
 	// [Document.fonts] https://developer.mozilla.org/en-US/docs/Web/API/Document/fonts
 	Object.defineProperty(this, "fonts", {
-        get: function fonts()		{ return CPP_DKDocumentDUK_fonts(this.address) },
-		//set: function fonts(data)	{ return CPP_DKDocumentDUK_fonts(this.address, data) },
+        get: function fonts()							{ return CPP_DKDocumentDUK_fonts(this.address) },
+		//set: function fonts(data)						{ return CPP_DKDocumentDUK_fonts(this.address, data) },
     })
 	// [Document.forms](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/forms
 	Object.defineProperty(this, "forms", {
-        get: function forms()		{ return CPP_DKDocumentDUK_forms(this.address) },
-		//set: function forms(data)	{ return CPP_DKDocumentDUK_forms(this.address, data) },
+        get: function forms()							{ return CPP_DKDocumentDUK_forms(this.address) },
+		//set: function forms(data)						{ return CPP_DKDocumentDUK_forms(this.address, data) },
     })
 	// [Document.fragmentDirective](Read only)(Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Document/fragmentDirective
 	Object.defineProperty(this, "fragmentDirective", {
-        get: function fragmentDirective()		{ return CPP_DKDocumentDUK_fragmentDirective(this.address) },
-		//set: function fragmentDirective(data)	{ return CPP_DKDocumentDUK_fragmentDirective(this.address, data) },
+        get: function fragmentDirective()				{ return CPP_DKDocumentDUK_fragmentDirective(this.address) },
+		//set: function fragmentDirective(data)			{ return CPP_DKDocumentDUK_fragmentDirective(this.address, data) },
     })
 	// [Document.fullscreenElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/fullscreenElement
 	Object.defineProperty(this, "fullscreenElement", {
-        get: function fullscreenElement()		{ return CPP_DKDocumentDUK_fullscreenElement(this.address) },
-		//set: function fullscreenElement(data)	{ return CPP_DKDocumentDUK_fullscreenElement(this.address, data) },
+        get: function fullscreenElement()				{ return CPP_DKDocumentDUK_fullscreenElement(this.address) },
+		//set: function fullscreenElement(data)			{ return CPP_DKDocumentDUK_fullscreenElement(this.address, data) },
     })
 	// [Document.head](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/head
+	Object.defineProperty(this, "head", {
+        get: function head()							{ return CPP_DKDocumentDUK_head(this.address) },
+		//set: function head(data)						{ return CPP_DKDocumentDUK_head(this.address, data) },
+    })
 	// [Document.hidden](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/hidden
+	Object.defineProperty(this, "hidden", {
+        get: function hidden()							{ return CPP_DKDocumentDUK_hidden(this.address) },
+		//set: function hidden(data)					{ return CPP_DKDocumentDUK_hidden(this.address, data) },
+    })
 	// [Document.images](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/images
+	Object.defineProperty(this, "images", {
+        get: function images()							{ return CPP_DKDocumentDUK_images(this.address) },
+		//set: function images(data)					{ return CPP_DKDocumentDUK_images(this.address, data) },
+    })
 	// [Document.implementation](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/implementation
+	Object.defineProperty(this, "implementation", {
+        get: function implementation()					{ return CPP_DKDocumentDUK_implementation(this.address) },
+		//set: function implementation(data)			{ return CPP_DKDocumentDUK_implementation(this.address, data) },
+    })
 	// [Document.lastElementChild](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/lastElementChild
+	Object.defineProperty(this, "lastElementChild", {
+        get: function lastElementChild()				{ return CPP_DKDocumentDUK_lastElementChild(this.address) },
+		//set: function lastElementChild(data)			{ return CPP_DKDocumentDUK_lastElementChild(this.address, data) },
+    })
 	// [Document.links](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/links
+	Object.defineProperty(this, "links", {
+        get: function links()							{ return CPP_DKDocumentDUK_links(this.address) },
+		//set: function links(data)						{ return CPP_DKDocumentDUK_links(this.address, data) },
+    })
 	// [Document.pictureInPictureElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/pictureInPictureElement
+	Object.defineProperty(this, "pictureInPictureElement", {
+        get: function pictureInPictureElement()			{ return CPP_DKDocumentDUK_pictureInPictureElement(this.address) },
+		//set: function pictureInPictureElement(data)	{ return CPP_DKDocumentDUK_pictureInPictureElement(this.address, data) },
+    })
 	// [Document.pictureInPictureEnabled](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/pictureInPictureEnabled
+	Object.defineProperty(this, "pictureInPictureEnabled", {
+        get: function pictureInPictureEnabled()			{ return CPP_DKDocumentDUK_pictureInPictureEnabled(this.address) },
+		//set: function pictureInPictureEnabled(data)	{ return CPP_DKDocumentDUK_pictureInPictureEnabled(this.address, data) },
+    })
 	// [Document.plugins](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/plugins
+	Object.defineProperty(this, "plugins", {
+        get: function plugins()							{ return CPP_DKDocumentDUK_plugins(this.address) },
+		//set: function plugins(data)					{ return CPP_DKDocumentDUK_plugins(this.address, data) },
+    })
 	// [Document.pointerLockElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/pointerLockElement
+	Object.defineProperty(this, "pointerLockElement", {
+        get: function pointerLockElement()				{ return CPP_DKDocumentDUK_pointerLockElement(this.address) },
+		//set: function pointerLockElement(data)		{ return CPP_DKDocumentDUK_pointerLockElement(this.address, data) },
+    })
 	// [Document.featurePolicy Experimental](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/featurePolicy
+	Object.defineProperty(this, "featurePolicy", {
+        get: function featurePolicy()					{ return CPP_DKDocumentDUK_featurePolicy(this.address) },
+		//set: function featurePolicy(data)				{ return CPP_DKDocumentDUK_featurePolicy(this.address, data) },
+    })
 	// [Document.scripts](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/scripts
+	Object.defineProperty(this, "scripts", {
+        get: function scripts()							{ return CPP_DKDocumentDUK_scripts(this.address) },
+		//set: function scripts(data)					{ return CPP_DKDocumentDUK_scripts(this.address, data) },
+    })
 	// [Document.scrollingElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/scrollingElement
+	Object.defineProperty(this, "scrollingElement", {
+        get: function scrollingElement()				{ return CPP_DKDocumentDUK_scrollingElement(this.address) },
+		//set: function scrollingElement(data)			{ return CPP_DKDocumentDUK_scrollingElement(this.address, data) },
+    })
 	// [Document.styleSheets](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/styleSheets
+	Object.defineProperty(this, "styleSheets", {
+        get: function styleSheets()						{ return CPP_DKDocumentDUK_styleSheets(this.address) },
+		//set: function styleSheets(data)				{ return CPP_DKDocumentDUK_styleSheets(this.address, data) },
+    })
 	// [Document.timeline](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/timeline
+	Object.defineProperty(this, "timeline", {
+        get: function timeline()						{ return CPP_DKDocumentDUK_timeline(this.address) },
+		//set: function timeline(data)					{ return CPP_DKDocumentDUK_timeline(this.address, data) },
+    })
 	// [Document.visibilityState](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/visibilityState
+	Object.defineProperty(this, "visibilityState", {
+        get: function visibilityState()					{ return CPP_DKDocumentDUK_visibilityState(this.address) },
+		//set: function visibilityState(data)			{ return CPP_DKDocumentDUK_visibilityState(this.address, data) },
+    })
 	
 	
 	////// Extensions for HTMLDocument //////
