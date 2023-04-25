@@ -23,7 +23,7 @@ public:
 		
 		
 		////// Instance properties //////
-		// [Document.activeElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_activeElement", 	DKDocumentDUK::activeElement);	// [Document.activeElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement
 		// [Document.adoptedStyleSheets] https://developer.mozilla.org/en-US/docs/Web/API/Document/adoptedStyleSheets
 		// [Document.body] https://developer.mozilla.org/en-US/docs/Web/API/Document/body
 		// [Document.characterSet](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/characterSet
@@ -285,6 +285,14 @@ public:
 	
 	////// Instance properties //////
 	// [Document.activeElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement
+	static int activeElement(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _activeElement = GetString(ctx);
+		if(!eventTarget(ctx)->activeElement(_activeElement, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _activeElement);
+		return true;
+	}
 	// [Document.adoptedStyleSheets] https://developer.mozilla.org/en-US/docs/Web/API/Document/adoptedStyleSheets
 	// [Document.body] https://developer.mozilla.org/en-US/docs/Web/API/Document/body
 	// [Document.characterSet](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/characterSet
