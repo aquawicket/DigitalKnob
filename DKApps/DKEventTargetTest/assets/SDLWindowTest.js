@@ -1,1 +1,0 @@
-const mySdlWindow = new DKSdlWindow()
