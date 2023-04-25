@@ -85,7 +85,9 @@ public:
 	
 	////// Instance properties //////
 	// [Window.caches](Read only) https://developer.mozilla.org/en-US/docs/Web/API/caches
-	virtual bool caches(DKString&, bool) { return false; }
+	virtual bool caches(DKString&, bool) { 
+		return false; 
+	}
 	// [Window.clientInformation](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/navigator
 	virtual bool clientInformation(DKString&, bool) { return false; }
 	// [Window.closed](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/closed
