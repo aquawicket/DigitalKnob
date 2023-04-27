@@ -36,7 +36,7 @@
 	#include <tchar.h>
 	#include <stdio.h>
 #else
-	#if !ANDROID && !EMSCRIPTEN && !IOS
+	#if !ANDROID && !EMSCRIPTEN && !IOS && !IOSSIM  //FIXME: IOSSIM should be included in IOS defines
 		#include <curses.h>
 	#endif
 #endif
