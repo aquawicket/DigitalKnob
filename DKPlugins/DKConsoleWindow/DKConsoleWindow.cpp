@@ -53,7 +53,7 @@ DKConsoleWindow::DKConsoleWindow() : DKWindow() {
 	eventTargetClass = "ConsoleWindow";
 	eventTargetAddress = pointerToAddress(this);
 		
-	#if !WIN && !EMSCRIPTEN && !ANDROID
+	#if !WIN && !EMSCRIPTEN && !ANDROID && !IOS
 		SCREEN *screen = newterm((char *) 0, stdout, stdin);
 		if(!screen){
 			DKERROR("screen invalid! \n");
