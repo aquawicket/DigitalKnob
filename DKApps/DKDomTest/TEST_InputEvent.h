@@ -1,4 +1,4 @@
-// [W3C] https://w3c.github.io/uievents/#events-inputevents
+// [IDL] https://w3c.github.io/uievents/#events-inputevents
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/InputEvent
 #pragma once
 #ifndef TEST_InputEvent_H

@@ -1,3 +1,5 @@
+// [IDL] https://w3c.github.io/uievents/#events-inputevents
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/InputEvent
 console.log("////// TEST_InputEvent.js //////")
 
 

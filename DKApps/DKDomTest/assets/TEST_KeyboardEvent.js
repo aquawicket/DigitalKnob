@@ -1,3 +1,5 @@
+// [IDL] https://w3c.github.io/uievents/#events-keyboardevents
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent
 console.log("////// TEST_KeyboardEvent.js //////")
 
 

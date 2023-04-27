@@ -1,4 +1,7 @@
+// [IDL] https://w3c.github.io/uievents/#events-mouseevents
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent
 console.log("////// TEST_MouseEvent.js //////")
+
 
 ////// MouseEvent //////
 function printMouseEventProperties(mouseevent){

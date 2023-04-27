@@ -1,6 +1,6 @@
-console.log("////// TEST_DragEvent.js //////")
 // [IDL] https://html.spec.whatwg.org/multipage/dnd.html#the-dragevent-interface
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/DragEvent
+console.log("////// TEST_DragEvent.js //////")
 
 
 ////// Constructor //////

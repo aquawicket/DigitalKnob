@@ -2,6 +2,7 @@
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Element
 console.log("////// TEST_Element.js //////")
 
+
 ////// Instance properties //////
 // [Element.assignedSlot](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Element/assignedSlot
 // [Element.attributes](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Element/attributes

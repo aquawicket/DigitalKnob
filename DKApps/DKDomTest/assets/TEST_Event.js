@@ -1,4 +1,7 @@
+// [IDL] https://dom.spec.whatwg.org/#interface-event
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Event
 console.log("////// TEST_Event.js //////")
+
 
 // create EventTarget
 const eventTarget = new EventTarget();

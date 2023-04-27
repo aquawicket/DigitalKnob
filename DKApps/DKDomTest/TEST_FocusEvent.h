@@ -1,4 +1,4 @@
-// [W3C] https://w3c.github.io/uievents/#events-focusevent
+// [IDL] https://w3c.github.io/uievents/#events-focusevent
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent
 #pragma once
 #ifndef TEST_FocusEvent_H
