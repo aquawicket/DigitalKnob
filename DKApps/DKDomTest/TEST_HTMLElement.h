@@ -1,3 +1,5 @@
+// [IDL] https://html.spec.whatwg.org/multipage/dom.html#htmlelement
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement
 #pragma once
 #ifndef TEST_HTMLElement_H
 #define TEST_HTMLElement_H
@@ -6,8 +8,6 @@
 #include "DKHTMLElement/DKHTMLElement.h"
 
 
-// [IDL] https://html.spec.whatwg.org/multipage/dom.html#htmlelement
-// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement
 class TEST_HTMLElement : public DKObjectT<TEST_HTMLElement>
 {
 public:

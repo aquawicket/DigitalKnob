@@ -1,4 +1,4 @@
-// [W3C] https://console.spec.whatwg.org/
+// [IDL] https://console.spec.whatwg.org/
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Console
 #pragma once
 #ifndef TEST_Console_H

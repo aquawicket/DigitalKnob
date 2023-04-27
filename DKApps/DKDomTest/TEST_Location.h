@@ -1,3 +1,5 @@
+// [IDL] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-location-interface
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Location
 #pragma once
 #ifndef TEST_Location_H
 #define TEST_Location_H
@@ -6,8 +8,6 @@
 #include "DKLocation/DKLocation.h"
 
 
-// [IDL] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-location-interface
-// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Location
 class TEST_Location : public DKObjectT<TEST_Location>
 {
 public:

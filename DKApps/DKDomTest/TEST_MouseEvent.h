@@ -1,3 +1,5 @@
+// [IDL] https://w3c.github.io/uievents/#events-mouseevents
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent
 #pragma once
 #ifndef TEST_MouseEvent_H
 #define TEST_MouseEvent_H
@@ -6,8 +8,6 @@
 #include "DKMouseEvent/DKMouseEvent.h"
 
 
-// [IDL] https://w3c.github.io/uievents/#events-mouseevents
-// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent
 class TEST_MouseEvent : public DKObjectT<TEST_MouseEvent>
 {
 public:

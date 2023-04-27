@@ -1,4 +1,4 @@
-// [W3C] https://w3c.github.io/uievents/#events-wheelevents
+// [IDL] https://w3c.github.io/uievents/#events-wheelevents
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent
 #pragma once
 #ifndef DKWheelEvent_H

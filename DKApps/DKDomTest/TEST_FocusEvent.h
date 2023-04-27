@@ -1,3 +1,5 @@
+// [W3C] https://w3c.github.io/uievents/#events-focusevent
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent
 #pragma once
 #ifndef TEST_FocusEvent_H
 #define TEST_FocusEvent_H
@@ -6,8 +8,6 @@
 #include "DKFocusEvent/DKFocusEvent.h"
 
 
-// [W3C] https://w3c.github.io/uievents/#events-focusevent
-// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent
 class TEST_FocusEvent : public DKObjectT<TEST_FocusEvent>
 {
 public:

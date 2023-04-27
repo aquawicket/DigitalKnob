@@ -1,3 +1,5 @@
+// [IDL] https://dom.spec.whatwg.org/#interface-event
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Event
 #pragma once
 #ifndef TEST_Event_H
 #define TEST_Event_H

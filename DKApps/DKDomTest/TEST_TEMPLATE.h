@@ -1,4 +1,3 @@
-// TEST_TEMPLATE
 // [IDL]
 // [MDN]
 

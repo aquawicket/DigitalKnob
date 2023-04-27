@@ -1,3 +1,5 @@
+// [IDL] https://w3c.github.io/uievents
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/UIEvent
 #pragma once
 #ifndef TEST_UIEvent_H
 #define TEST_UIEvent_H

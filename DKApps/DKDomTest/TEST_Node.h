@@ -1,3 +1,5 @@
+// [IDL] https://dom.spec.whatwg.org/#interface-node
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Node
 #pragma once
 #ifndef TEST_Node_H
 #define TEST_Node_H

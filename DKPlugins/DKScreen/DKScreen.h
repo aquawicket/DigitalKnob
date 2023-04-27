@@ -1,4 +1,4 @@
-// [INTERFACE] https://w3c.github.io/csswg-drafts/cssom-view/#the-screen-interface
+// [IDL] https://w3c.github.io/csswg-drafts/cssom-view/#the-screen-interface
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Screen
 #pragma once
 #ifndef DKScreen_H

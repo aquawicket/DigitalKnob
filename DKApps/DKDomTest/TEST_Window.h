@@ -1,3 +1,5 @@
+// [IDL] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-window-object
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Window
 #pragma once
 #ifndef TEST_Window_H
 #define TEST_Window_H

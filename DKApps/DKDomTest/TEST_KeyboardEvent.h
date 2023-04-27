@@ -1,3 +1,5 @@
+// [IDL] https://w3c.github.io/uievents/#events-keyboardevents
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent
 #pragma once
 #ifndef TEST_KeyboardEvent_H
 #define TEST_KeyboardEvent_H
@@ -6,8 +8,6 @@
 #include "DKKeyboardEvent/DKKeyboardEvent.h"
 
 
-// [IDL] https://w3c.github.io/uievents/#events-keyboardevents
-// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent
 class TEST_KeyboardEvent : public DKObjectT<TEST_KeyboardEvent>
 {
 public:
