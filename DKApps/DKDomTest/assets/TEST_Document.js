@@ -1,11 +1,14 @@
+// [IDL] https://dom.spec.whatwg.org/#interface-document
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Document
 console.log("////// TEST_Document.js //////")
+
 
 function printDocumentProperties(document){
 	////// Instance properties //////
-	console.log("document.activeElement = "			+document.activeElement)		// [Document.activeElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement
-	//console.log("document.adoptedStyleSheets = "	+document.adoptedStyleSheets)	// [Document.adoptedStyleSheets] https://developer.mozilla.org/en-US/docs/Web/API/Document/adoptedStyleSheets
-	//console.log("document.body = "				+document.body)					// [Document.body] https://developer.mozilla.org/en-US/docs/Web/API/Document/body
-	// [Document.characterSet](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/characterSet
+	console.log("document.activeElement = "		+document.activeElement)		// [Document.activeElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement
+	console.log("document.adoptedStyleSheets = "+document.adoptedStyleSheets)	// [Document.adoptedStyleSheets] https://developer.mozilla.org/en-US/docs/Web/API/Document/adoptedStyleSheets
+	console.log("document.body = "				+document.body)					// [Document.body] https://developer.mozilla.org/en-US/docs/Web/API/Document/body
+	console.log("document.characterSet = "		+document.characterSet)			// [Document.characterSet](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/characterSet
 	// [Document.childElementCount](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/childElementCount
 	// [Document.children](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/children
 	// [Document.compatMode](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/compatMode

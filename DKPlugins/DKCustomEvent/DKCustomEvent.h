@@ -5,7 +5,7 @@
 #include "DKEvent/DKEvent.h"
 
 
-// [INTERFACE] https://dom.spec.whatwg.org/#interface-customevent
+// [IDL] https://dom.spec.whatwg.org/#interface-customevent
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent
 class DKCustomEvent : public DKEvent
 {
