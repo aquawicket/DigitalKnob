@@ -32,14 +32,14 @@ WARNING_DISABLE
 #import <UIKit/UIKit.h>
 WARNING_ENABLE
 
-bool DKIos::GetScreenHeight(int& h){
+bool DKIos::GetScreenHeight(unsigned int& h){
 	CGRect screenRect = [[UIScreen mainScreen] bounds];
 	CGFloat screenHeight = screenRect.size.height;
 	h = screenHeight;
 	return true;
 }
 
-bool DKIos::GetScreenWidth(int& w){
+bool DKIos::GetScreenWidth(unsigned int& w){
 	CGRect screenRect = [[UIScreen mainScreen] bounds];
 	CGFloat screenWidth = screenRect.size.width;
 	w = screenWidth;
