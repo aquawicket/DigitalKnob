@@ -264,7 +264,7 @@ bool DKAndroid::GetMousePos(int& x, int& y){
 	return true;
 }
 
-bool DKAndroid::GetScreenHeight(int& h) {
+bool DKAndroid::GetScreenHeight(unsigned int& h) {
 	DKDEBUGFUNC(h);
 	// https://stackoverflow.com/a/12134363/688352
 	/*
@@ -285,7 +285,7 @@ bool DKAndroid::GetScreenHeight(int& h) {
 #endif
 }
 
-bool DKAndroid::GetScreenWidth(int& w){
+bool DKAndroid::GetScreenWidth(unsigned int& w){
 	DKDEBUGFUNC(w);
 	// https://stackoverflow.com/a/12134363/688352
 	/*
