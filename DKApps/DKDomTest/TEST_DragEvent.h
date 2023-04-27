@@ -1,3 +1,5 @@
+// [IDL] https://html.spec.whatwg.org/multipage/dnd.html#the-dragevent-interface
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/DragEvent
 #pragma once
 #ifndef TEST_DragEvent_H
 #define TEST_DragEvent_H
@@ -5,8 +7,7 @@
 #include "DK/DK.h"
 #include "DKDragEvent/DKDragEvent.h"
 
-// [IDL] https://html.spec.whatwg.org/multipage/dnd.html#the-dragevent-interface
-// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/DragEvent
+
 class TEST_DragEvent : public DKObjectT<TEST_DragEvent>
 {
 public:

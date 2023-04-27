@@ -1,3 +1,5 @@
+// [W3C] https://w3c.github.io/uievents/#events-wheelevents
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent
 #pragma once
 #ifndef DKWheelEvent_H
 #define DKWheelEvent_H
@@ -5,8 +7,6 @@
 #include "DKMouseEvent/DKMouseEvent.h"
 
 
-// [W3C] https://w3c.github.io/uievents/#events-wheelevents
-// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent
 class DKWheelEvent : public DKMouseEvent
 {
 public:

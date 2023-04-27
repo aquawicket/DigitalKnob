@@ -1,3 +1,5 @@
+// [INTERFACE] https://w3c.github.io/csswg-drafts/cssom-view/#the-screen-interface
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Screen
 #pragma once
 #ifndef DKScreen_H
 #define DKScreen_H
@@ -6,8 +8,6 @@
 #include "DKEventTarget/DKEventTarget.h"
 
 
-// [INTERFACE] https://w3c.github.io/csswg-drafts/cssom-view/#the-screen-interface
-// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Screen
 class DKScreen : public DKEventTarget
 {
 public:

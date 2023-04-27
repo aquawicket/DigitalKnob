@@ -1,6 +1,5 @@
 // [W3C] https://console.spec.whatwg.org/
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Console
-
 #pragma once
 #ifndef TEST_Console_H
 #define TEST_Console_H

@@ -1,3 +1,5 @@
+// [IDL] https://dom.spec.whatwg.org/#interface-document
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Document
 #pragma once
 #ifndef TEST_Document_H
 #define TEST_Document_H

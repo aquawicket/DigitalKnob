@@ -1,3 +1,5 @@
+// [IDL] https://dom.spec.whatwg.org/#interface-node
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Node
 #pragma once
 #ifndef DKNode_H
 #define DKNode_H
@@ -5,8 +7,6 @@
 #include "DKEventTarget/DKEventTarget.h"
 
 
-// [IDL] https://dom.spec.whatwg.org/#interface-node
-// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Node
 class DKNode : public DKEventTarget
 {
 public:

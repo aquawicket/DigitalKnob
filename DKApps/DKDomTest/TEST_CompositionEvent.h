@@ -1,3 +1,5 @@
+// [IDL] https://w3c.github.io/uievents/#events-compositionevents
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent
 #pragma once
 #ifndef TEST_CompositionEvent_H
 #define TEST_CompositionEvent_H

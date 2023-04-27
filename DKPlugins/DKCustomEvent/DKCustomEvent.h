@@ -1,3 +1,5 @@
+// [IDL] https://dom.spec.whatwg.org/#interface-customevent
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent
 #pragma once
 #ifndef DKCustomEvent_H
 #define DKCustomEvent_H
@@ -5,8 +7,6 @@
 #include "DKEvent/DKEvent.h"
 
 
-// [IDL] https://dom.spec.whatwg.org/#interface-customevent
-// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent
 class DKCustomEvent : public DKEvent
 {
 public:

@@ -1,3 +1,5 @@
+// [IDL] https://w3c.github.io/uievents/#events-mouseevents
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent
 #pragma once
 #ifndef DKMouseEvent_H
 #define DKMouseEvent_H
@@ -5,8 +7,6 @@
 #include "DKUIEvent/DKUIEvent.h"
 
 
-// [IDL] https://w3c.github.io/uievents/#events-mouseevents
-// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent
 class DKMouseEvent : public DKUIEvent
 {
 public:

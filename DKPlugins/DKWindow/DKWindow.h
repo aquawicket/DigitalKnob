@@ -1,3 +1,5 @@
+// [IDL] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-window-object
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Window
 #pragma once
 #ifndef DKWindow_H
 #define DKWindow_H
@@ -5,8 +7,6 @@
 #include "DKEventTarget/DKEventTarget.h"
 
 
-// [IDL] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-window-object
-// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Window
 class DKWindow : public DKEventTarget
 {
 public:

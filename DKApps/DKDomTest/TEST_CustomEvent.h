@@ -1,3 +1,5 @@
+// [IDL] https://dom.spec.whatwg.org/#interface-customevent
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent
 #pragma once
 #ifndef TEST_CustomEvent_H
 #define TEST_CustomEvent_H

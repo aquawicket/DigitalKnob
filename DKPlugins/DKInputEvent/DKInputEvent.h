@@ -1,3 +1,5 @@
+// [IDL] https://w3c.github.io/uievents/#events-inputevents
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/InputEvent
 #pragma once
 #ifndef DKInputEvent_H
 #define DKInputEvent_H
@@ -5,8 +7,6 @@
 #include "DKUIEvent/DKUIEvent.h"
 
 
-// [W3C] https://w3c.github.io/uievents/#events-inputevents
-// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/InputEvent
 class DKInputEvent : public DKUIEvent
 {
 public:

@@ -1,3 +1,5 @@
+// [W3C] https://w3c.github.io/uievents
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/UIEvent
 #pragma once
 #ifndef DKUIEvent_H
 #define DKUIEvent_H
@@ -5,8 +7,6 @@
 #include "DKEvent/DKEvent.h"
 
 
-// [W3C] https://w3c.github.io/uievents
-// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/UIEvent
 class DKUIEvent : public DKEvent
 {
 public:

@@ -1,3 +1,5 @@
+// [IDL] https://dom.spec.whatwg.org/#interface-event
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Event
 #pragma once
 #ifndef DKEvent_H
 #define DKEvent_H
@@ -5,8 +7,6 @@
 #include "DK/DK.h"
 
 
-// [INTERFACE] https://dom.spec.whatwg.org/#interface-event
-// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Event
 class DKEvent
 {
 public:

@@ -1,3 +1,5 @@
+// [IDL] https://w3c.github.io/uievents/#events-keyboardevents
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent
 #pragma once
 #ifndef DKKeyboardEvent_H
 #define DKKeyboardEvent_H
@@ -5,8 +7,6 @@
 #include "DKUIEvent/DKUIEvent.h"
 
 
-// [IDL] https://w3c.github.io/uievents/#events-keyboardevents
-// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent
 class DKKeyboardEvent : public DKUIEvent
 {
 public:

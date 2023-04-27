@@ -1,3 +1,5 @@
+// [IDL] https://w3c.github.io/uievents/#events-compositionevents
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent
 #pragma once
 #ifndef DKCompositionEvent_H
 #define DKCompositionEvent_H
@@ -5,8 +7,6 @@
 #include "DKUIEvent/DKUIEvent.h"
 
 
-// [IDL] https://w3c.github.io/uievents/#events-compositionevents
-// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent
 class DKCompositionEvent : public DKUIEvent
 {
 public:
