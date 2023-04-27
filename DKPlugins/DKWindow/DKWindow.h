@@ -5,89 +5,23 @@
 #include "DKEventTarget/DKEventTarget.h"
 
 
-// [INTERFACE] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-window-object
+// [IDL] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-window-object
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Window
 class DKWindow : public DKEventTarget
 {
 public:
+	////// Constructor //////
+	// [Window()] 
 	DKWindow() : DKEventTarget() {
 		DKDEBUGFUNC();
 		eventTargetClass = "Window";
 		eventTargetAddress = pointerToAddress(this);
-		
-		////// Instance properties //////
-		//caches = "";
-		//clientInformation = "";
-		//closed = false;
-		//console = "";
-		//credentialless = false;
-		//crypto = "";
-		//customElements = "";
-		//document = "";
-		//frameElement = "";
-		//frames = "";
-		//fullScreen = false;
-		//history = "";
-		//indexedDB = "";
-		//innerHeight = 0;
-		//innerWidth = 0;
-		//isSecureContext = false;
-		//launchQueue = "";
-		//length = 0;
-		//location = "";
-		//locationbar = "";
-		//localStorage = "";
-		//mozInnerScreenX = 0.0;
-		//mozInnerScreenY = 0.0;
-		//name = "";
-		//navigation = "";
-		//navigator = "";
-		//opener = "";
-		//origin = "";
-		//outerHeight = 0;
-		//outerWidth = 0;
-		//pageXOffset = 0;
-		//pageYOffset = 0;
-		//parent = "";
-		//performance = "";
-		//personalbar = "";
-		//scheduler = "";
-		//screen = "";
-		//screenX = 0;
-		//screenY = 0;
-		//scrollbars = "";
-		//scrollMaxX = 0;
-		//scrollMaxY = 0;
-		//scrollX = 0;
-		//scrollY = 0;
-		//self = "";
-		//sessionStorage = "";
-		//speechSynthesis = "";
-		//statusbar = "";
-		//toolbar = "";
-		//top = "";
-		//visualViewport = "";
-		//window = "";
-		//windows = "";
-		
-		
-		////// Deprecated properties //////
-		//content = "";
-		//defaultStatus = "";
-		//event = "";
-		//external = "";
-		//orientation = 0;
-		//returnValue = "";
-		//sidebar = "";
-		//status = "";
 	}
 	
 	
 	////// Instance properties //////
 	// [Window.caches](Read only) https://developer.mozilla.org/en-US/docs/Web/API/caches
-	virtual bool caches(DKString&, bool) { 
-		return false; 
-	}
+	virtual bool caches(DKString&, bool) { return false; }
 	// [Window.clientInformation](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/navigator
 	virtual bool clientInformation(DKString&, bool) { return false; }
 	// [Window.closed](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/closed
