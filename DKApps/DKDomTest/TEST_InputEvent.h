@@ -37,6 +37,19 @@ public:
 		return DKTODO();
 	}
 	
+	static void printInputEventProperties(DKInputEvent& inputevent){
+		DKDEBUGFUNC(inputevent);
+		DKTODO();
+	}
+	
+	static bool oninputevent(DKEvent& event){
+		DKDEBUGFUNC(event);
+		DKINFO("TEST_InputEvent::oninputevent() \n");
+		printInputEventProperties(dynamic_cast<DKInputEvent&>(event));			//TODO: try to remove the need for dynamic_cast
+		TEST_UIEvent::printUIEventProperties(dynamic_cast<DKUIEvent&>(event));	//TODO: try to remove the need for dynamic_cast
+		TEST_Event::printEventProperties(event);
+		return true;
+	}
 };
 REGISTER_OBJECT(TEST_InputEvent, true);
 

@@ -30,7 +30,20 @@ public:
 	
 		return DKTODO();
 	}
-
+	
+	static void printFocusEventProperties(DKFocusEvent& focusevent){
+		DKDEBUGFUNC(focusevent);
+		DKTODO();
+	}
+	
+	static bool onfocusevent(DKEvent& event){
+		DKDEBUGFUNC(event);
+		DKINFO("TEST_FocusEvent::onfocusevent() \n");
+		printFocusEventProperties(dynamic_cast<DKFocusEvent&>(event));			//TODO: try to remove the need for dynamic_cast
+		TEST_UIEvent::printUIEventProperties(dynamic_cast<DKUIEvent&>(event));	//TODO: try to remove the need for dynamic_cast
+		TEST_Event::printEventProperties(event);
+		return true;
+	}
 };
 REGISTER_OBJECT(TEST_FocusEvent, true);
 

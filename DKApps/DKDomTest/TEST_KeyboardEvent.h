@@ -68,7 +68,20 @@ public:
 	
 		return DKTODO();
 	}
+	
+	static void printKeyboardEventProperties(DKKeyboardEvent& keyboardevent){
+		DKDEBUGFUNC(keyboardevent);
+		DKTODO();
+	}
 
+	static bool onkeyboardevent(DKEvent& event){
+		DKDEBUGFUNC(event);
+		DKINFO("TEST_KeyboardEvent::onkeyboardevent() \n");
+		printKeyboardEventProperties(dynamic_cast<DKKeyboardEvent&>(event));	//TODO: try to remove the need for dynamic_cast
+		TEST_UIEvent::printUIEventProperties(dynamic_cast<DKUIEvent&>(event));	//TODO: try to remove the need for dynamic_cast
+		TEST_Event::printEventProperties(event);
+		return true;
+	}
 };
 REGISTER_OBJECT(TEST_KeyboardEvent, true);
 

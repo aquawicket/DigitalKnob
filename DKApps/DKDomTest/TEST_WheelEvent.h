@@ -16,6 +16,20 @@ public:
 		return DKTODO();
 	}
 
+	static void printWheelEventProperties(DKWheelEvent& wheelevent){
+		DKDEBUGFUNC(wheelevent);
+		DKTODO();
+	}
+
+	static bool onwheelevent(DKEvent& event){
+		DKDEBUGFUNC(event);
+		DKINFO("TEST_WheelEvent::onwheelevent() \n");
+		printWheelEventProperties(dynamic_cast<DKWheelEvent&>(event));	//TODO: try to remove the need for dynamic_cast
+		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent&>(event));	//TODO: try to remove the need for dynamic_cast
+		TEST_UIEvent::printUIEventProperties(dynamic_cast<DKUIEvent&>(event));	//TODO: try to remove the need for dynamic_cast
+		TEST_Event::printEventProperties(event);
+		return true;
+	}
 };
 REGISTER_OBJECT(TEST_WheelEvent, true);
 

@@ -29,7 +29,20 @@ public:
 	
 		return DKTODO();
 	}
-
+	
+	static void printDragEventProperties(DKDragEvent& dragevent){
+		DKDEBUGFUNC(dragevent);
+		DKTODO();
+	}
+	
+	static bool ondragevent(DKEvent& event){
+		DKDEBUGFUNC(event);
+		DKINFO("TEST_DragEvent::ondragevent() \n");
+		printDragEventProperties(dynamic_cast<DKDragEvent&>(event));			//TODO: try to remove the need for dynamic_cast
+		TEST_UIEvent::printUIEventProperties(dynamic_cast<DKUIEvent&>(event));	//TODO: try to remove the need for dynamic_cast
+		TEST_Event::printEventProperties(event);
+		return true;
+	}
 };
 REGISTER_OBJECT(TEST_DragEvent, true);
 

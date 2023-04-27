@@ -72,6 +72,19 @@ public:
 		return DKTODO();
 	}
 
+	static void printMouseEventProperties(DKMouseEvent& mouseevent){
+		DKDEBUGFUNC(mouseevent);
+		DKTODO();
+	}
+
+	static bool onmouseevent(DKEvent& event){
+		DKDEBUGFUNC(event);
+		DKINFO("TEST_MouseEvent::onmouseevent() \n");
+		printMouseEventProperties(dynamic_cast<DKMouseEvent&>(event));	//TODO: try to remove the need for dynamic_cast
+		TEST_UIEvent::printUIEventProperties(dynamic_cast<DKUIEvent&>(event));	//TODO: try to remove the need for dynamic_cast
+		TEST_Event::printEventProperties(event);
+		return true;
+	}
 };
 REGISTER_OBJECT(TEST_MouseEvent, true);
 
