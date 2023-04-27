@@ -106,6 +106,14 @@ public:
 	
 	////// Instance properties //////
 	// [Node.baseURI](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Node/baseURI
+	static int baseURI(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _baseURI = GetString(ctx);
+		if(!eventTarget(ctx)->baseURI(_baseURI, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _baseURI);
+		return true;
+	}
 	// [Node.childNodes](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Node/childNodes
 	// [Node.firstChild](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Node/firstChild
 	// [Node.isConnected](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Node/isConnected
@@ -123,6 +131,13 @@ public:
 	
 	////// Instance methods //////
 	// [Node.appendChild()] https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild
+	static int appendChild(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString aChild = duk_require_string(ctx, 1);
+		if(!eventTarget(ctx)->appendChild(aChild))
+			return false;
+		return true;
+	}
 	// [Node.cloneNode()] https://developer.mozilla.org/en-US/docs/Web/API/Node/cloneNode
 	// [Node.compareDocumentPosition()] https://developer.mozilla.org/en-US/docs/Web/API/Node/compareDocumentPosition
 	// [Node.contains()] https://developer.mozilla.org/en-US/docs/Web/API/Node/contains
