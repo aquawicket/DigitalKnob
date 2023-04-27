@@ -52,8 +52,8 @@ public:
 
 	////// Instance methods //////
 	// [Node.appendChild()] https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild
-	virtual bool appendChild() {
-		DKDEBUGFUNC();
+	virtual bool appendChild(DKString& aChild) {
+		DKDEBUGFUNC(aChild);
 		return DKTODO();
 	}
 	// [Node.cloneNode()] https://developer.mozilla.org/en-US/docs/Web/API/Node/cloneNode
