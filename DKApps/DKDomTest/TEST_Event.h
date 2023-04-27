@@ -45,7 +45,6 @@ public:
 		return true;
 	}
 
-
 	static void printEventProperties(DKEvent& event){
 		DKDEBUGFUNC(event);
 	
@@ -68,9 +67,10 @@ public:
 		DKINFO("event.returnValue = "			+toString(event.returnValue)			+"\n");	// [Event.returnValue](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/returnValue
 		DKINFO("event.scoped = "				+toString(event.scoped)					+"\n");	// [Event.scoped](Read only)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/scoped
 	}
+	
 	static bool onevent(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKINFO("cpp->onevent() \n");
+		DKINFO("TEST_Event::onevent() \n");
 		printEventProperties(event);
 		return true;
 	}

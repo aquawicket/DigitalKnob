@@ -15,7 +15,6 @@ public:
 	bool Init(){
 		DKINFO("////// TEST_CustomEvent.h ////// \n");
 		
-		////// CustomEvent //////
 		DKINFO("\n");
 		DKEventTarget myTargetA;
 		myTargetA.addEventListener("customevent", &TEST_CustomEvent::oncustomevent);
@@ -25,16 +24,16 @@ public:
 		return true;
 	}
 
-	////// CustomEvent //////
 	static void printCustomEventProperties(DKCustomEvent& customevent) {
 		////// Instance properties //////
 		DKINFO("customevent.detail = "	+toString(customevent.detail)	+"\n");
 	}
+	
 	static bool oncustomevent(DKEvent& event) {
 		DKDEBUGFUNC(event);
-		DKINFO("TEST_CustomEvent::oncustom() \n");
-		TEST_Event::printEventProperties(event);
+		DKINFO("TEST_CustomEvent::oncustomevent() \n");
 		printCustomEventProperties(dynamic_cast<DKCustomEvent&>(event));	//TODO: try to remove the need for dynamic_cast
+		TEST_Event::printEventProperties(event);
 		return true;
 	}
 
