@@ -14,7 +14,6 @@ public:
 	bool Init(){
 		DKINFO("////// TEST_Event.h ////// \n");
 		
-		////// Event //////
 		DKINFO("\n");
 		DKEventTarget myTargetA;									// EventTarget as 	value
 		DKEvent eventA("eventA", "");								// Event as 		value
@@ -46,8 +45,7 @@ public:
 		return true;
 	}
 
-	// https://dom.spec.whatwg.org
-	////// Event //////
+
 	static void printEventProperties(DKEvent& event){
 		DKDEBUGFUNC(event);
 	
