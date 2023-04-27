@@ -276,8 +276,8 @@ public:
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKINFO("CPP_DKDocumentDUK()\n");
-		DKDocument* _node = new DKDocument();
-		DKString eventTargetAddress = pointerToAddress(_node);
+		DKDocument* _document = new DKDocument();
+		DKString eventTargetAddress = pointerToAddress(_document);
 		duk_push_string(ctx, eventTargetAddress.c_str());
 		return true;
 	}
