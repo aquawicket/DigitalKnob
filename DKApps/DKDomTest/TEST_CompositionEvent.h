@@ -6,6 +6,7 @@
 
 #include "DK/DK.h"
 #include "DKCompositionEvent/DKCompositionEvent.h"
+#include "TEST_UIEvent.h"
 #include "TEST_Event.h"
 
 
@@ -30,7 +31,6 @@ public:
 		TEST_Event::printEventProperties(event);
 		return true;
 	}
-
 };
 REGISTER_OBJECT(TEST_CompositionEvent, true);
 
