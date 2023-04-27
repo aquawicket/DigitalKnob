@@ -41,7 +41,7 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
-class DKRmlDocument : public Rml::EventListener, public DKDocument, public DKObjectT<DKRmlDocument> {
+class DKRmlDocument : public DKDocument, public Rml::EventListener, public DKObjectT<DKRmlDocument> {
 public:
 	DKRmlDocument();
 	~DKRmlDocument();
