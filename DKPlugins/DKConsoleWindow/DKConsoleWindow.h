@@ -35,8 +35,10 @@
 	#include <windows.h>
 	#include <tchar.h>
 	#include <stdio.h>
-#else	
-	#include <curses.h>
+#else
+	#if !ANDROID
+		#include <curses.h>
+	#endif
 #endif
 
 
