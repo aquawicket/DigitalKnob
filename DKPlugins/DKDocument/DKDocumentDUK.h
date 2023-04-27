@@ -287,9 +287,14 @@ public:
 	// [Document.activeElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement
 	static int activeElement(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		DKString eventTargetAddress = duk_require_string(ctx, 0);
+		DKDocument* document = (DKDocument*)addressToPointer(eventTargetAddress);
+
 		DKString _activeElement = GetString(ctx);
-		if(!eventTarget(ctx)->activeElement(_activeElement, duk_is_valid_index(ctx, 1)))
+		bool Set = duk_is_valid_index(ctx, 1);
+		if(!document->activeElement(_activeElement, Set))
 			return false;
+
 		dukglue_push(ctx, _activeElement);
 		return true;
 	}

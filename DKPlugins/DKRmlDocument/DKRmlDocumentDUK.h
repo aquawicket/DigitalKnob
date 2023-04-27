@@ -28,8 +28,8 @@ public:
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKINFO("CPP_DKRmlDocumentDUK()\n");
-		DKRmlDocument* rmlDocument = (DKRmlDocument*)DKClass::DKCreate("DKRmlDocument");
-		DKString eventTargetAddress = pointerToAddress(rmlDocument);
+		DKRmlDocument* _dkRmlDocument = (DKRmlDocument*)DKClass::DKCreate("DKRmlDocument");
+		DKString eventTargetAddress = pointerToAddress(_dkRmlDocument);
 		duk_push_string(ctx, eventTargetAddress.c_str());	
 		return true;
 	}

@@ -491,6 +491,6 @@ var Window = function Window(address) {
 		this.toString = function(){	return "[object Window]" }
 	
 	
-	return EventTarget.call(this)
+	return EventTarget.call(this, this.address)
 }
 Window.prototype = EventTarget.prototype

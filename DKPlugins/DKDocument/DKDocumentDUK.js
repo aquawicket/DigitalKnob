@@ -368,6 +368,6 @@ var Document = function Document(address) {
 		this.toString = function(){	return "[object Document]" }
 	
 	
-	return Node.call(this)
+	return Node.call(this, this.address)
 }
 Document.prototype = Node.prototype

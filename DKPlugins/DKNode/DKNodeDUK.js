@@ -52,6 +52,6 @@ var Node = function Node(address) {
 		this.toString = function(){	return "[object Node]" }
 	
 	
-	return EventTarget.call(this)
+	return EventTarget.call(this, this.address)
 }
 Node.prototype = EventTarget.prototype
