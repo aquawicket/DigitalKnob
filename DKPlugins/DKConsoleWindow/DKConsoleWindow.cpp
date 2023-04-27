@@ -33,7 +33,7 @@
 #include "DKKeyboardEvent/DKKeyboardEvent.h"
 #include "DKDuktape/DKDuktape.h"
 
-#if !WIN && !EMSCRIPTEN && !ANDROID
+#if !WIN && !EMSCRIPTEN && !ANDROID && !IOS
 	#include <stdlib.h>
 	#include <signal.h>
 	#include <curses.h>
