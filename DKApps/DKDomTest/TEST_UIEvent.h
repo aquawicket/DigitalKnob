@@ -20,8 +20,8 @@ public:
 		DKDEBUGFUNC(uievent);
 		DKTODO();
 	}
-	static bool onuievent(DKUIEvent& uievent){
-		DKDEBUGFUNC(uievent);
+	static bool onuievent(DKEvent& event){
+		DKDEBUGFUNC(event);
 		DKINFO("TEST_UIEvent::onuievent() \n");
 		printUIEventProperties(dynamic_cast<DKUIEvent&>(event));		//TODO: try to remove the need for dynamic_cast
 		TEST_Event::printEventProperties(event);
