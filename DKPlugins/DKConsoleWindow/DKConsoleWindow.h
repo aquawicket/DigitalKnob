@@ -36,7 +36,7 @@
 	#include <tchar.h>
 	#include <stdio.h>
 #else
-	#if !ANDROID && !EMSCRIPTEN
+	#if !ANDROID && !EMSCRIPTEN && !IOS
 		#include <curses.h>
 	#endif
 #endif
