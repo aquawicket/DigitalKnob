@@ -303,10 +303,50 @@ public:
 		return true;
 	}
 	// [Document.body] https://developer.mozilla.org/en-US/docs/Web/API/Document/body
+	static int body(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _body = GetString(ctx);
+		if(!eventTarget(ctx)->body(_body, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _body);
+		return true;
+	}
 	// [Document.characterSet](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/characterSet
+	static int characterSet(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _characterSet = GetString(ctx);
+		if(!eventTarget(ctx)->characterSet(_characterSet, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _characterSet);
+		return true;
+	}
 	// [Document.childElementCount](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/childElementCount
+	static int childElementCount(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _childElementCount = GetUint(ctx);
+		if(!eventTarget(ctx)->childElementCount(_childElementCount, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _childElementCount);
+		return true;
+	}
 	// [Document.children](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/children
+	static int characterSet(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _children = GetString(ctx);
+		if(!eventTarget(ctx)->children(_children, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _children);
+		return true;
+	}
 	// [Document.compatMode](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/compatMode
+	static int compatMode(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _compatMode = GetString(ctx);
+		if(!eventTarget(ctx)->compatMode(_compatMode, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _compatMode);
+		return true;
+	}
 	// [Document.contentType](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/contentType
 	// [Document.currentScript](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/currentScript
 	// [Document.doctype](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/doctype
