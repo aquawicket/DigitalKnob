@@ -375,8 +375,32 @@ public:
 		return true;
 	}
 	// [Document.documentElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/documentElement
+	static int documentElement(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _documentElement = GetString(ctx);
+		if(!eventTarget(ctx)->documentElement(_documentElement, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _documentElement);
+		return true;
+	}
 	// [Document.documentURI](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/documentURI
+	static int documentURI(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _documentURI = GetString(ctx);
+		if(!eventTarget(ctx)->documentURI(_documentURI, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _documentURI);
+		return true;
+	}
 	// [Document.embeds](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/embeds
+	static int embeds(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _embeds = GetString(ctx);
+		if(!eventTarget(ctx)->embeds(_embeds, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _embeds);
+		return true;
+	}
 	// [Document.firstElementChild](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/firstElementChild
 	// [Document.fonts] https://developer.mozilla.org/en-US/docs/Web/API/Document/fonts
 	// [Document.forms](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/forms
