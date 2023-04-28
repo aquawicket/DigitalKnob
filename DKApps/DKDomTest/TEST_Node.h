@@ -19,7 +19,7 @@ public:
 	
 	static void printNodeProperties(DKNode& node){
 		DKDEBUGFUNC(node);
-	
+		/*
 		////// Instance properties //////
 		DKINFO("node.baseURI = "		+toString(node.baseURI)			+"\n");	// [Node.baseURI](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Node/baseURI
 		DKINFO("node.childNodes = "		+toString(node.childNodes)		+"\n");	// [Node.childNodes](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Node/childNodes
@@ -35,6 +35,7 @@ public:
 		DKINFO("node.parentElement = "	+toString(node.parentElement)	+"\n");	// [Node.parentElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Node/parentElement
 		DKINFO("node.previousSibling = "+toString(node.previousSibling)	+"\n");	// [Node.previousSibling](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Node/previousSibling
 		DKINFO("node.textContent = "	+toString(node.textContent)		+"\n");	// [Node.textContent] https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent
+		*/
 	}
 
 };
