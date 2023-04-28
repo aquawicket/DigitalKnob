@@ -330,7 +330,7 @@ public:
 		return true;
 	}
 	// [Document.children](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/children
-	static int characterSet(duk_context* ctx){
+	static int children(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString _children = GetString(ctx);
 		if(!eventTarget(ctx)->children(_children, duk_is_valid_index(ctx, 1)))
@@ -348,8 +348,32 @@ public:
 		return true;
 	}
 	// [Document.contentType](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/contentType
+	static int contentType(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _contentType = GetString(ctx);
+		if(!eventTarget(ctx)->contentType(_contentType, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _contentType);
+		return true;
+	}
 	// [Document.currentScript](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/currentScript
+	static int currentScript(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _currentScript = GetString(ctx);
+		if(!eventTarget(ctx)->currentScript(_currentScript, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _currentScript);
+		return true;
+	}
 	// [Document.doctype](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/doctype
+	static int doctype(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _doctype = GetString(ctx);
+		if(!eventTarget(ctx)->doctype(_doctype, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _doctype);
+		return true;
+	}
 	// [Document.documentElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/documentElement
 	// [Document.documentURI](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/documentURI
 	// [Document.embeds](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/embeds
