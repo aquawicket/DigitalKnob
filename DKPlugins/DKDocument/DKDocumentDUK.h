@@ -23,8 +23,8 @@ public:
 		
 		
 		////// Instance properties //////
-		DKDuktape::AttachFunction("CPP_DKDocumentDUK_activeElement", 	DKDocumentDUK::activeElement);	// [Document.activeElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement
-		// [Document.adoptedStyleSheets] https://developer.mozilla.org/en-US/docs/Web/API/Document/adoptedStyleSheets
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_activeElement", 		DKDocumentDUK::activeElement);		// [Document.activeElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_adoptedStyleSheets", 	DKDocumentDUK::adoptedStyleSheets);	// [Document.adoptedStyleSheets] https://developer.mozilla.org/en-US/docs/Web/API/Document/adoptedStyleSheets
 		// [Document.body] https://developer.mozilla.org/en-US/docs/Web/API/Document/body
 		// [Document.characterSet](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/characterSet
 		// [Document.childElementCount](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/childElementCount
