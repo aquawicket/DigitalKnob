@@ -20,3 +20,4 @@ function printNodeProperties(node){
 	console.log("node.previousSibling = "	+node.previousSibling)	// [Node.previousSibling](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Node/previousSibling
 	console.log("node.textContent = "		+node.textContent)		// [Node.textContent] https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent
 }
+
