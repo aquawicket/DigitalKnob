@@ -287,18 +287,21 @@ public:
 	// [Document.activeElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement
 	static int activeElement(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		DKDocument* document = (DKDocument*)addressToPointer(eventTargetAddress);
-
 		DKString _activeElement = GetString(ctx);
-		bool Set = duk_is_valid_index(ctx, 1);
-		if(!document->activeElement(_activeElement, Set))
+		if(!eventTarget(ctx)->activeElement(_activeElement, duk_is_valid_index(ctx, 1)))
 			return false;
-
 		dukglue_push(ctx, _activeElement);
 		return true;
 	}
 	// [Document.adoptedStyleSheets] https://developer.mozilla.org/en-US/docs/Web/API/Document/adoptedStyleSheets
+	static int adoptedStyleSheets(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _adoptedStyleSheets = GetString(ctx);
+		if(!eventTarget(ctx)->adoptedStyleSheets(_adoptedStyleSheets, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _adoptedStyleSheets);
+		return true;
+	}
 	// [Document.body] https://developer.mozilla.org/en-US/docs/Web/API/Document/body
 	// [Document.characterSet](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/characterSet
 	// [Document.childElementCount](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/childElementCount
