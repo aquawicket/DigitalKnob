@@ -23,79 +23,79 @@ public:
 		
 		
 		////// Instance properties //////
-		DKDuktape::AttachFunction("CPP_DKDocumentDUK_activeElement", 		DKDocumentDUK::activeElement);		// [Document.activeElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement
-		DKDuktape::AttachFunction("CPP_DKDocumentDUK_adoptedStyleSheets", 	DKDocumentDUK::adoptedStyleSheets);	// [Document.adoptedStyleSheets] https://developer.mozilla.org/en-US/docs/Web/API/Document/adoptedStyleSheets
-		// [Document.body] https://developer.mozilla.org/en-US/docs/Web/API/Document/body
-		// [Document.characterSet](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/characterSet
-		// [Document.childElementCount](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/childElementCount
-		// [Document.children](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/children
-		// [Document.compatMode](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/compatMode
-		// [Document.contentType](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/contentType
-		// [Document.currentScript](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/currentScript
-		// [Document.doctype](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/doctype
-		// [Document.documentElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/documentElement
-		// [Document.documentURI](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/documentURI
-		// [Document.embeds](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/embeds
-		// [Document.firstElementChild](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/firstElementChild
-		// [Document.fonts] https://developer.mozilla.org/en-US/docs/Web/API/Document/fonts
-		// [Document.forms](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/forms
-		// [Document.fragmentDirective](Read only)(Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Document/fragmentDirective
-		// [Document.fullscreenElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/fullscreenElement
-		// [Document.head](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/head
-		// [Document.hidden](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/hidden
-		// [Document.images](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/images
-		// [Document.implementation](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/implementation
-		// [Document.lastElementChild](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/lastElementChild
-		// [Document.links](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/links
-		// [Document.pictureInPictureElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/pictureInPictureElement
-		// [Document.pictureInPictureEnabled](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/pictureInPictureEnabled
-		// [Document.plugins](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/plugins
-		// [Document.pointerLockElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/pointerLockElement
-		// [Document.featurePolicy Experimental](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/featurePolicy
-		// [Document.scripts](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/scripts
-		// [Document.scrollingElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/scrollingElement
-		// [Document.styleSheets](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/styleSheets
-		// [Document.timeline](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/timeline
-		// [Document.visibilityState](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/visibilityState
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_activeElement", 			DKDocumentDUK::activeElement);			// [Document.activeElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_adoptedStyleSheets", 		DKDocumentDUK::adoptedStyleSheets);		// [Document.adoptedStyleSheets] https://developer.mozilla.org/en-US/docs/Web/API/Document/adoptedStyleSheets
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_body", 					DKDocumentDUK::body);					// [Document.body] https://developer.mozilla.org/en-US/docs/Web/API/Document/body
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_characterSet", 			DKDocumentDUK::characterSet);			// [Document.characterSet](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/characterSet
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_childElementCount", 		DKDocumentDUK::childElementCount);		// [Document.childElementCount](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/childElementCount
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_children", 				DKDocumentDUK::children);				// [Document.children](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/children
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_compatMode", 				DKDocumentDUK::compatMode);				// [Document.compatMode](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/compatMode
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_contentType", 				DKDocumentDUK::contentType);			// [Document.contentType](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/contentType
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_currentScript", 			DKDocumentDUK::currentScript);			// [Document.currentScript](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/currentScript
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_doctype", 					DKDocumentDUK::doctype);				// [Document.doctype](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/doctype
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_documentElement", 			DKDocumentDUK::documentElement);		// [Document.documentElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/documentElement
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_documentURI", 				DKDocumentDUK::documentURI);			// [Document.documentURI](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/documentURI
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_embeds", 					DKDocumentDUK::embeds);					// [Document.embeds](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/embeds
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_firstElementChild", 		DKDocumentDUK::firstElementChild);		// [Document.firstElementChild](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/firstElementChild
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_fonts", 					DKDocumentDUK::fonts);					// [Document.fonts] https://developer.mozilla.org/en-US/docs/Web/API/Document/fonts
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_forms", 					DKDocumentDUK::forms);					// [Document.forms](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/forms
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_fragmentDirective", 		DKDocumentDUK::fragmentDirective);		// [Document.fragmentDirective](Read only)(Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Document/fragmentDirective
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_fullscreenElement", 		DKDocumentDUK::fullscreenElement);		// [Document.fullscreenElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/fullscreenElement
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_head", 					DKDocumentDUK::head);					// [Document.head](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/head
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_hidden", 					DKDocumentDUK::hidden);					// [Document.hidden](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/hidden
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_images", 					DKDocumentDUK::images);					// [Document.images](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/images
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_implementation", 			DKDocumentDUK::implementation);			// [Document.implementation](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/implementation
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_lastElementChild", 		DKDocumentDUK::lastElementChild);		// [Document.lastElementChild](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/lastElementChild
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_links", 					DKDocumentDUK::links);					// [Document.links](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/links
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_pictureInPictureElement", 	DKDocumentDUK::pictureInPictureElement);// [Document.pictureInPictureElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/pictureInPictureElement
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_pictureInPictureEnabled", 	DKDocumentDUK::pictureInPictureEnabled);// [Document.pictureInPictureEnabled](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/pictureInPictureEnabled
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_plugins", 					DKDocumentDUK::plugins);				// [Document.plugins](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/plugins
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_pointerLockElement", 		DKDocumentDUK::pointerLockElement);		// [Document.pointerLockElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/pointerLockElement
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_featurePolicy", 			DKDocumentDUK::featurePolicy);			// [Document.featurePolicy](Experimental](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/featurePolicy
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_scripts", 					DKDocumentDUK::scripts);				// [Document.scripts](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/scripts
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_scrollingElement", 		DKDocumentDUK::scrollingElement);		// [Document.scrollingElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/scrollingElement
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_styleSheets", 				DKDocumentDUK::styleSheets);			// [Document.styleSheets](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/styleSheets
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_timeline", 				DKDocumentDUK::timeline);				// [Document.timeline](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/timeline
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_visibilityState", 			DKDocumentDUK::visibilityState);		// [Document.visibilityState](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/visibilityState
 	
 		
 		////// Extensions for HTMLDocument //////
-		// [Document.cookie] https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie
-		// [Document.defaultView](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
-		// [Document.designMode] https://developer.mozilla.org/en-US/docs/Web/API/Document/designMode
-		// [Document.dir] https://developer.mozilla.org/en-US/docs/Web/API/Document/dir
-		// [Document.domain](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/domain
-		// [Document.fullscreenEnabled](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/fullscreenEnabled
-		// [Document.lastModified](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/lastModified
-		// [Document.location](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/location
-		// [Document.readyState](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/readyState
-		// [Document.referrer](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/referrer
-		// [Document.title] https://developer.mozilla.org/en-US/docs/Web/API/Document/title
-		// [Document.URL](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/URL
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_cookie", 					DKDocumentDUK::cookie);					// [Document.cookie] https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_defaultView", 				DKDocumentDUK::defaultView);			// [Document.defaultView](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_designMode", 				DKDocumentDUK::designMode);				// [Document.designMode] https://developer.mozilla.org/en-US/docs/Web/API/Document/designMode
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_dir", 						DKDocumentDUK::dir);					// [Document.dir] https://developer.mozilla.org/en-US/docs/Web/API/Document/dir
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_domain", 					DKDocumentDUK::domain);					// [Document.domain](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/domain
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_fullscreenEnabled", 		DKDocumentDUK::fullscreenEnabled);		// [Document.fullscreenEnabled](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/fullscreenEnabled
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_lastModified", 			DKDocumentDUK::lastModified);			// [Document.lastModified](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/lastModified
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_location", 				DKDocumentDUK::location);				// [Document.location](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/location
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_readyState", 				DKDocumentDUK::readyState);				// [Document.readyState](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/readyState
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_referrer", 				DKDocumentDUK::referrer);				// [Document.referrer](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/referrer
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_title", 					DKDocumentDUK::title);					// [Document.title] https://developer.mozilla.org/en-US/docs/Web/API/Document/title
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_URL", 						DKDocumentDUK::URL);					// [Document.URL](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/URL
 		
 		
 		////// Deprecated properties //////
-		// [Document.alinkColor](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/alinkColor
-		// [Document.all](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/all
-		// [Document.anchors](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/anchors
-		// [Document.applets](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/applets
-		// [Document.bgColor](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/bgColor
-		// [Document.charset](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/characterSet
-		// [Document.fgColor](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/fgColor
-		// [Document.fullscreen](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/fullscreen
-		// [Document.height](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Element/clientHeight
-		// [Document.inputEncoding](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/characterSet
-		// [Document.lastStyleSheetSet](Deprecated)(Read only)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Document/lastStyleSheetSet
-		// [Document.linkColor](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/linkColor
-		// [Document.preferredStyleSheetSet](Deprecated)(Read only)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Document/preferredStyleSheetSet
-		// [Document.rootElement](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/rootElement
-		// [Document.selectedStyleSheetSet](Deprecated)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Document/selectedStyleSheetSet
-		// [Document.styleSheetSets](Deprecated)(Read only)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Document/styleSheetSets
-		// [Document.vlinkColor](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/vlinkColor
-		// [Document.width](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Element/clientWidth
-		// [Document.xmlEncoding](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/xmlEncoding
-		// [Document.xmlStandalone](Deprecated)
-		// [Document.xmlVersion](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/xmlVersion
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_alinkColor", 				DKDocumentDUK::alinkColor);				// [Document.alinkColor](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/alinkColor
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_all", 						DKDocumentDUK::all);					// [Document.all](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/all
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_anchors", 					DKDocumentDUK::anchors);				// [Document.anchors](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/anchors
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_applets", 					DKDocumentDUK::applets);				// [Document.applets](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/applets
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_bgColor", 					DKDocumentDUK::bgColor);				// [Document.bgColor](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/bgColor
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_charset", 					DKDocumentDUK::charset);				// [Document.charset](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/characterSet
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_fgColor", 					DKDocumentDUK::fgColor);				// [Document.fgColor](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/fgColor
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_fullscreen", 				DKDocumentDUK::fullscreen);				// [Document.fullscreen](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/fullscreen
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_height", 					DKDocumentDUK::height);					// [Document.height](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Element/clientHeight
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_inputEncoding", 			DKDocumentDUK::inputEncoding);			// [Document.inputEncoding](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/characterSet
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_lastStyleSheetSet", 		DKDocumentDUK::lastStyleSheetSet);		// [Document.lastStyleSheetSet](Deprecated)(Read only)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Document/lastStyleSheetSet
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_linkColor", 				DKDocumentDUK::linkColor);				// [Document.linkColor](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/linkColor
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_preferredStyleSheetSet", 	DKDocumentDUK::preferredStyleSheetSet);	// [Document.preferredStyleSheetSet](Deprecated)(Read only)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Document/preferredStyleSheetSet
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_rootElement", 				DKDocumentDUK::rootElement);			// [Document.rootElement](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/rootElement
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_selectedStyleSheetSet", 	DKDocumentDUK::selectedStyleSheetSet);	// [Document.selectedStyleSheetSet](Deprecated)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Document/selectedStyleSheetSet
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_styleSheetSets", 			DKDocumentDUK::styleSheetSets);			// [Document.styleSheetSets](Deprecated)(Read only)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Document/styleSheetSets
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_vlinkColor", 				DKDocumentDUK::vlinkColor);				// [Document.vlinkColor](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/vlinkColor
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_width", 					DKDocumentDUK::width);					// [Document.width](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Element/clientWidth
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_xmlEncoding", 				DKDocumentDUK::xmlEncoding);			// [Document.xmlEncoding](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/xmlEncoding
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_xmlStandalone", 			DKDocumentDUK::xmlStandalone);			// [Document.xmlStandalone](Deprecated)
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_xmlVersion", 				DKDocumentDUK::xmlVersion);				// [Document.xmlVersion](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/xmlVersion
 		
 		
 		////// Instance methods //////
