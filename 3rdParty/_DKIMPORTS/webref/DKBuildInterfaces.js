@@ -3,11 +3,15 @@ console.log("////// DKBuildInterfaces.js //////\n");
 const path = require('path');
 const fs = require('fs');
 
-// remove temp.txt
-fs.unlink('temp.txt', (err) => {
-	if (err) throw err;
-	//console.log('temp.txt was deleted');
-}); 
+if (fs.existsSync('temp.txt')) {
+    // remove temp.txt
+	fs.unlink('temp.txt', (err) => {
+		if (err) throw err;
+		//console.log('temp.txt was deleted');
+	}); 
+}
+  
+
 
 
 // set directoryPath
