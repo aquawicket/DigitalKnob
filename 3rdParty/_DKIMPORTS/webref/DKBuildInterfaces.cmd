@@ -8,3 +8,5 @@ set "NODE_EXE=%NODE_DIR%\node.exe"
 ::call %NPM_EXE% install glob --save
 
 %NODE_EXE% DKBuildInterfaces.js
+
+pause
