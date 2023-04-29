@@ -58,7 +58,7 @@ public:
 		DKDuktape::AttachFunction("CPP_DKDocumentDUK_timeline", 				DKDocumentDUK::timeline);				// [Document.timeline](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/timeline
 		DKDuktape::AttachFunction("CPP_DKDocumentDUK_visibilityState", 			DKDocumentDUK::visibilityState);		// [Document.visibilityState](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/visibilityState
 	
-		
+		/*
 		////// Extensions for HTMLDocument //////
 		DKDuktape::AttachFunction("CPP_DKDocumentDUK_cookie", 					DKDocumentDUK::cookie);					// [Document.cookie] https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie
 		DKDuktape::AttachFunction("CPP_DKDocumentDUK_defaultView", 				DKDocumentDUK::defaultView);			// [Document.defaultView](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
@@ -96,7 +96,7 @@ public:
 		DKDuktape::AttachFunction("CPP_DKDocumentDUK_xmlEncoding", 				DKDocumentDUK::xmlEncoding);			// [Document.xmlEncoding](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/xmlEncoding
 		DKDuktape::AttachFunction("CPP_DKDocumentDUK_xmlStandalone", 			DKDocumentDUK::xmlStandalone);			// [Document.xmlStandalone](Deprecated)
 		DKDuktape::AttachFunction("CPP_DKDocumentDUK_xmlVersion", 				DKDocumentDUK::xmlVersion);				// [Document.xmlVersion](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/xmlVersion
-		
+		*/
 		
 		////// Instance methods //////
 		// [Document.adoptNode()] https://developer.mozilla.org/en-US/docs/Web/API/Document/adoptNode
