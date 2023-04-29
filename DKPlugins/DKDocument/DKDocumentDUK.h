@@ -323,7 +323,7 @@ public:
 	// [Document.childElementCount](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/childElementCount
 	static int childElementCount(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _childElementCount = GetUint(ctx);
+		unsigned int _childElementCount = GetUint(ctx);
 		if(!eventTarget(ctx)->childElementCount(_childElementCount, duk_is_valid_index(ctx, 1)))
 			return false;
 		dukglue_push(ctx, _childElementCount);

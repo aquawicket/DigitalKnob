@@ -29,7 +29,7 @@ public:
 	// [Document.characterSet](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/characterSet
 	virtual bool characterSet(DKString&, bool) { return false; }
 	// [Document.childElementCount](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/childElementCount
-	virtual bool characterSet(unsigned int&, bool) { return false; }
+	virtual bool childElementCount(unsigned int&, bool) { return false; }
 	// [Document.children](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/children
 	virtual bool children(DKString&, bool) { return false; }
 	// [Document.compatMode](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/compatMode
@@ -53,23 +53,41 @@ public:
 	// [Document.forms](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/forms
 	virtual bool forms(DKString&, bool) { return false; }
 	// [Document.fragmentDirective](Read only)(Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Document/fragmentDirective
+	virtual bool fragmentDirective(DKString&, bool) { return false; }
 	// [Document.fullscreenElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/fullscreenElement
+	virtual bool fullscreenElement(DKString&, bool) { return false; }
 	// [Document.head](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/head
+	virtual bool head(DKString&, bool) { return false; }
 	// [Document.hidden](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/hidden
+	virtual bool hidden(bool&, bool) { return false; }
 	// [Document.images](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/images
+	virtual bool images(DKString&, bool) { return false; }
 	// [Document.implementation](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/implementation
+	virtual bool implementation(DKString&, bool) { return false; }
 	// [Document.lastElementChild](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/lastElementChild
+	virtual bool lastElementChild(DKString&, bool) { return false; }
 	// [Document.links](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/links
+	virtual bool links(DKString&, bool) { return false; }
 	// [Document.pictureInPictureElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/pictureInPictureElement
+	virtual bool pictureInPictureElement(DKString&, bool) { return false; }
 	// [Document.pictureInPictureEnabled](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/pictureInPictureEnabled
+	virtual bool pictureInPictureEnabled(bool&, bool) { return false; }
 	// [Document.plugins](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/plugins
+	virtual bool plugins(DKString&, bool) { return false; }
 	// [Document.pointerLockElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/pointerLockElement
+	virtual bool pointerLockElement(DKString&, bool) { return false; }
 	// [Document.featurePolicy Experimental](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/featurePolicy
+	virtual bool featurePolicy(DKString&, bool) { return false; }
 	// [Document.scripts](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/scripts
+	virtual bool scripts(DKString&, bool) { return false; }
 	// [Document.scrollingElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/scrollingElement
+	virtual bool scrollingElement(DKString&, bool) { return false; }
 	// [Document.styleSheets](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/styleSheets
+	virtual bool styleSheets(DKString&, bool) { return false; }
 	// [Document.timeline](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/timeline
+	virtual bool timeline(DKString&, bool) { return false; }
 	// [Document.visibilityState](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/visibilityState
+	virtual bool visibilityState(DKString&, bool) { return false; }
 
 
 	////// Extensions for HTMLDocument //////
