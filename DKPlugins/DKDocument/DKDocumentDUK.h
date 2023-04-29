@@ -402,12 +402,68 @@ public:
 		return true;
 	}
 	// [Document.firstElementChild](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/firstElementChild
+	static int firstElementChild(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _firstElementChild = GetString(ctx);
+		if(!eventTarget(ctx)->firstElementChild(_firstElementChild, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _firstElementChild);
+		return true;
+	}
 	// [Document.fonts] https://developer.mozilla.org/en-US/docs/Web/API/Document/fonts
+	static int fonts(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _fonts = GetString(ctx);
+		if(!eventTarget(ctx)->fonts(_fonts, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _fonts);
+		return true;
+	}
 	// [Document.forms](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/forms
+	static int forms(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _forms = GetString(ctx);
+		if(!eventTarget(ctx)->forms(_forms, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _forms);
+		return true;
+	}
 	// [Document.fragmentDirective](Read only)(Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Document/fragmentDirective
+	static int fragmentDirective(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _fragmentDirective = GetString(ctx);
+		if(!eventTarget(ctx)->fragmentDirective(_fragmentDirective, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _fragmentDirective);
+		return true;
+	}
 	// [Document.fullscreenElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/fullscreenElement
+	static int fullscreenElement(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _fullscreenElement = GetString(ctx);
+		if(!eventTarget(ctx)->fullscreenElement(_fullscreenElement, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _fullscreenElement);
+		return true;
+	}
 	// [Document.head](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/head
+	static int head(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _head = GetString(ctx);
+		if(!eventTarget(ctx)->head(_head, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _head);
+		return true;
+	}
 	// [Document.hidden](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/hidden
+	static int hidden(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _hidden = GetBool(ctx);
+		if(!eventTarget(ctx)->hidden(_hidden, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _hidden);
+		return true;
+	}
 	// [Document.images](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/images
 	// [Document.implementation](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/implementation
 	// [Document.lastElementChild](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/lastElementChild
