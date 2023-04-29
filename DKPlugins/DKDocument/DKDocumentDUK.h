@@ -458,26 +458,138 @@ public:
 	// [Document.hidden](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/hidden
 	static int hidden(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _hidden = GetBool(ctx);
+		bool _hidden = GetBool(ctx);
 		if(!eventTarget(ctx)->hidden(_hidden, duk_is_valid_index(ctx, 1)))
 			return false;
 		dukglue_push(ctx, _hidden);
 		return true;
 	}
 	// [Document.images](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/images
+	static int images(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _images = GetString(ctx);
+		if(!eventTarget(ctx)->images(_images, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _images);
+		return true;
+	}
 	// [Document.implementation](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/implementation
+	static int implementation(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _implementation = GetString(ctx);
+		if(!eventTarget(ctx)->implementation(_implementation, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _implementation);
+		return true;
+	}
 	// [Document.lastElementChild](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/lastElementChild
+	static int lastElementChild(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _lastElementChild = GetString(ctx);
+		if(!eventTarget(ctx)->lastElementChild(_lastElementChild, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _lastElementChild);
+		return true;
+	}
 	// [Document.links](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/links
+	static int links(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _links = GetString(ctx);
+		if(!eventTarget(ctx)->links(_links, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _links);
+		return true;
+	}
 	// [Document.pictureInPictureElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/pictureInPictureElement
+	static int pictureInPictureElement(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _pictureInPictureElement = GetString(ctx);
+		if(!eventTarget(ctx)->pictureInPictureElement(_pictureInPictureElement, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _pictureInPictureElement);
+		return true;
+	}
 	// [Document.pictureInPictureEnabled](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/pictureInPictureEnabled
+	static int pictureInPictureEnabled(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		bool _pictureInPictureEnabled = GetBool(ctx);
+		if(!eventTarget(ctx)->pictureInPictureEnabled(_pictureInPictureEnabled, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _pictureInPictureEnabled);
+		return true;
+	}
 	// [Document.plugins](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/plugins
+	static int plugins(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _plugins = GetString(ctx);
+		if(!eventTarget(ctx)->plugins(_plugins, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _plugins);
+		return true;
+	}
 	// [Document.pointerLockElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/pointerLockElement
-	// [Document.featurePolicy Experimental](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/featurePolicy
+	static int pointerLockElement(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _pointerLockElement = GetString(ctx);
+		if(!eventTarget(ctx)->pointerLockElement(_pointerLockElement, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _pointerLockElement);
+		return true;
+	}
+	// [Document.featurePolicy](Experimental](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/featurePolicy
+	static int featurePolicy(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _featurePolicy = GetString(ctx);
+		if(!eventTarget(ctx)->featurePolicy(_featurePolicy, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _featurePolicy);
+		return true;
+	}
 	// [Document.scripts](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/scripts
+	static int scripts(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _scripts = GetString(ctx);
+		if(!eventTarget(ctx)->scripts(_scripts, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _scripts);
+		return true;
+	}
 	// [Document.scrollingElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/scrollingElement
+	static int scrollingElement(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _scrollingElement = GetString(ctx);
+		if(!eventTarget(ctx)->scrollingElement(_scrollingElement, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _scrollingElement);
+		return true;
+	}
 	// [Document.styleSheets](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/styleSheets
+	static int styleSheets(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _styleSheets = GetString(ctx);
+		if(!eventTarget(ctx)->styleSheets(_styleSheets, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _styleSheets);
+		return true;
+	}
 	// [Document.timeline](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/timeline
+	static int timeline(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _timeline = GetString(ctx);
+		if(!eventTarget(ctx)->timeline(_timeline, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _timeline);
+		return true;
+	}
 	// [Document.visibilityState](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/visibilityState
+	static int visibilityState(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _visibilityState = GetString(ctx);
+		if(!eventTarget(ctx)->visibilityState(_visibilityState, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _visibilityState);
+		return true;
+	}
 	
 	
 	////// Extensions for HTMLDocument //////
