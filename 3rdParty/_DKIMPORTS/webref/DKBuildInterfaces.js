@@ -1,6 +1,7 @@
 console.log("////// DKBuildInterfaces.js //////\n");
 
 const glob = require("glob");
+const fs = require("fs");
 
 glob("*.js", (error, filesWithJs)=>{
   if(error){

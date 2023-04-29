@@ -8,3 +8,6 @@ dk_import(https://nodejs.org/dist/v19.8.1/node-v19.8.1-win-x64.zip)
 dk_setEnv("PATH" "${NODEJS}")
 dk_set(NODE_EXE ${NODEJS}/node.exe)
 dk_set(NPM_EXE ${NODEJS}/npm.cmd)
+
+dk_command(${NPM_EXE} init -y)
+dk_command(${NPM_EXE} install glob)
