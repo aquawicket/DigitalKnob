@@ -2,7 +2,7 @@
 
 dk_depend(nodejs)
 
-dk_import(https://github.com/w3c/webref.git BRANCH curated)
+dk_import(https://github.com/w3c/webref.git BRANCH curated PATCH)
 
 
 ### Build Interface Tree ###
