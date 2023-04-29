@@ -8,4 +8,4 @@ glob("*.js", (error, filesWithJs)=>{
     console.log(error)
   }
   console.log(filesWithJs)
-}
+})

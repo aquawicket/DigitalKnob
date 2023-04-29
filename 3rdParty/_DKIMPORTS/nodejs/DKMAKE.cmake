@@ -9,5 +9,4 @@ dk_setEnv("PATH" "${NODEJS}")
 dk_set(NODE_EXE ${NODEJS}/node.exe)
 dk_set(NPM_EXE ${NODEJS}/npm.cmd)
 
-dk_command(${NPM_EXE} init -y)
-dk_command(${NPM_EXE} install glob)
+dk_command(${NPM_EXE} install --save glob -g)
