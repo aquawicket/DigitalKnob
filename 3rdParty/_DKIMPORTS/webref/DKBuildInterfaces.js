@@ -46,6 +46,7 @@ fs.readdir(directoryPath, function (err, files) {
     } 
     files.forEach(function (file) {
 		var filepath = directoryPath+'/'+file
+		var interface = file.slice(0, -4);
         
 		/*
 		fs.appendFile("temp.txt", file+"\n", (err) => {
@@ -56,10 +57,22 @@ fs.readdir(directoryPath, function (err, files) {
 		
 		// print file lines
 		fs.readFile(filepath, 'utf-8', (err, data) => {
-			console.log('\n////// '+file+' //////'); 
+			
 			const lines = data.split('\n')
-			for (let line of lines)
+			
+			// print base interfaces
+			for (let line of lines){
+				if(!line.includes('interface'))
+					continue;
+				if(line.includes(':'))
+					continue;
+				if(line.includes('partial'))
+					continue;
+				if(line.includes('mixin'))
+					continue;
+				console.log('\n////// '+interface+' //////'); 
 				console.log(line)
+			}
 		});
     });
 });
