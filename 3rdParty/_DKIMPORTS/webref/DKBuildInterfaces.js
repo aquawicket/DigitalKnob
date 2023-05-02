@@ -26,43 +26,30 @@ async function processLineByLine(file) {
 
 
 if (fs.existsSync('temp.txt')) {
-    // remove temp.txt
-	fs.unlink('temp.txt', (err) => {
-		if (err) throw err;
-		//console.log('temp.txt was deleted');
-	}); 
+	fs.unlinkSync('temp.txt')
 }
   
-
 
 
 // set directoryPath
 const directoryPath = path.join(__dirname, '/ed/idlnames');
 
-//passsing directoryPath and callback function
-fs.readdir(directoryPath, function (err, files) {
-    if (err) {
-        return console.log('Unable to scan directory: ' + err);
-    } 
-    files.forEach(function (file) {
+var interfaces = {}
+
+var files = fs.readdirSync(directoryPath);
+
+files.forEach(file => {
+	let fileStat = fs.statSync(directoryPath + '/' + file).isDirectory();
+	if(!fileStat) {
 		var filepath = directoryPath+'/'+file
 		var interface = file.slice(0, -4);
-        
-		/*
-		fs.appendFile("temp.txt", file+"\n", (err) => {
-			if (err) console.log(err);
-			//console.log("Successfully Written to File.");
-		});
-		*/
-		
-		// print file lines
-		fs.readFile(filepath, 'utf-8', (err, data) => {
-			
-			const lines = data.split('\n')
-			
-			// print base interfaces
-			for (let line of lines){
+
+		var data = fs.readFileSync(filepath, 'utf-8')
+		const lines = data.split('\n')
+		for (let line of lines){
 				if(!line.includes('interface'))
+					continue;
+				if(!line.includes(interface))
 					continue;
 				if(line.includes(':'))
 					continue;
@@ -70,9 +57,18 @@ fs.readdir(directoryPath, function (err, files) {
 					continue;
 				if(line.includes('mixin'))
 					continue;
-				console.log('\n////// '+interface+' //////'); 
-				console.log(line)
+				if(line.includes('//'))
+					continue;
+				if(line.includes('*'))
+					continue;
+				
+				interfaces[interface] = {};	
 			}
-		});
-    });
+	}
 });
+
+
+var interfaces_string = JSON.stringify(interfaces);
+console.log("interfaces_string = "+interfaces_string)
+
+
