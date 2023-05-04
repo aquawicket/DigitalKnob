@@ -30,9 +30,9 @@ public:
 		DKINFO("wheelevent.deltaY = "		+toString(wheelevent.deltaY)		+"\n");
 		DKINFO("wheelevent.deltaZ = "		+toString(wheelevent.deltaZ)		+"\n");
 		DKINFO("wheelevent.deltaMode = "	+toString(wheelevent.deltaMode)		+"\n");
-		DKINFO("wheelevent.wheelDelta = "	+toString(wheelevent.wheelDelta)	+"\n");
-		DKINFO("wheelevent.wheelDeltaX = "	+toString(wheelevent.wheelDeltaX)	+"\n");
-		DKINFO("wheelevent.wheelDeltaY = "	+toString(wheelevent.wheelDeltaY)	+"\n");
+		//DKINFO("wheelevent.wheelDelta = "	+toString(wheelevent.wheelDelta)	+"\n");
+		//DKINFO("wheelevent.wheelDeltaX = "+toString(wheelevent.wheelDeltaX)	+"\n");
+		//DKINFO("wheelevent.wheelDeltaY = "+toString(wheelevent.wheelDeltaY)	+"\n");
 	}
 
 	static bool onwheelevent(DKEvent& event){

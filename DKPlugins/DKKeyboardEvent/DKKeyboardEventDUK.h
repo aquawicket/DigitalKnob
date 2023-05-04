@@ -57,7 +57,7 @@ public:
 		// [KeyboardEvent.keyCode](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode
 		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_keyCode",		DKKeyboardEventDUK::keyCode);
 		// [KeyboardEvent.keyIdentifier](Non-standard)(Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyIdentifier
-		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_keyIdentifier",	DKKeyboardEventDUK::keyIdentifier);
+		//DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_keyIdentifier",	DKKeyboardEventDUK::keyIdentifier);
 		// [KeyboardEvent.keyLocation](Non-standard)(Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyLocation
 		//DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_keyLocation",	DKKeyboardEventDUK::keyLocation);
 		// [KeyboardEvent.which](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/which

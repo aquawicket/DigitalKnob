@@ -27,8 +27,8 @@ public:
 	static void printCompositionEventProperties(DKCompositionEvent& compositionevent){
 		DKDEBUGFUNC(compositionevent);
 		////// Instance properties //////
-		DKINFO("compositionevent.data = "	+toString(compositionevent.data)	+"\n");
-		DKINFO("compositionevent.locale = "	+toString(compositionevent.locale)	+"\n");
+		DKINFO("compositionevent.data = "		+toString(compositionevent.data)	+"\n");
+		//DKINFO("compositionevent.locale = "	+toString(compositionevent.locale)	+"\n");
 	}
 	
 	static bool oncompositionevent(DKEvent& event){
