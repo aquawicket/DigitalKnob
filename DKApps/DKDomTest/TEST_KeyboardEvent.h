@@ -37,7 +37,7 @@ public:
 		DKINFO("keyboardevent.repeat = "		+toString(keyboardevent.repeat)			+"\n");
 		DKINFO("keyboardevent.shiftKey = "		+toString(keyboardevent.shiftKey)		+"\n");
 		////// Obsolete properties //////
-		DKINFO("keyboardevent.char = "			+toString(keyboardevent.char)			+"\n");
+		DKINFO("keyboardevent.char = "			+toString(keyboardevent._char)			+"\n");
 		DKINFO("keyboardevent.charCode = "		+toString(keyboardevent.charCode)		+"\n");
 		DKINFO("keyboardevent.keyCode = "		+toString(keyboardevent.keyCode)		+"\n");
 		DKINFO("keyboardevent.keyIdentifier = "	+toString(keyboardevent.keyIdentifier)	+"\n");
