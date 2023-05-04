@@ -61,10 +61,10 @@ public:
 		DKINFO("event.type = "					+toString(event.type)					+"\n");	// [Event.type](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/type
 		////// Legacy and non-standard properties //////
 		DKINFO("event.cancelBubble = "			+toString(event.cancelBubble)			+"\n");	// [Event.cancelBubble](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelBubble
-		DKINFO("event.explicitOriginalTarget = "+toString(event.explicitOriginalTarget)	+"\n");	// [Event.explicitOriginalTarget](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/explicitOriginalTarget
-		DKINFO("event.originalTarget = "		+toString(event.originalTarget)			+"\n");	// [Event.originalTarget](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/originalTarget
+		//DKINFO("event.explicitOriginalTarget = "+toString(event.explicitOriginalTarget)	+"\n");	// [Event.explicitOriginalTarget](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/explicitOriginalTarget
+		//DKINFO("event.originalTarget = "		+toString(event.originalTarget)			+"\n");	// [Event.originalTarget](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/originalTarget
 		DKINFO("event.returnValue = "			+toString(event.returnValue)			+"\n");	// [Event.returnValue](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/returnValue
-		DKINFO("event.scoped = "				+toString(event.scoped)					+"\n");	// [Event.scoped](Read only)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/scoped
+		//DKINFO("event.scoped = "				+toString(event.scoped)					+"\n");	// [Event.scoped](Read only)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/scoped
 	}
 	
 	static bool onevent(DKEvent& event){

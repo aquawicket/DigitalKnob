@@ -1,4 +1,5 @@
-// [IDL] https://dom.spec.whatwg.org/#interface-event
+// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/Event.idl
+// [SOURCE] https://dom.spec.whatwg.org/#interface-event
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Event
 #pragma once
 #ifndef DKEvent_H
@@ -6,13 +7,15 @@
 
 #include "DK/DK.h"
 
+// [IDL]
+// [Exposed=*]
+// interface Event {
 class DKEvent
 {
 public:
-	////// Constructor //////
-	// [Event()] https://developer.mozilla.org/en-US/docs/Web/API/Event/Event
-	DKEvent(DKString _type, DKString _options){
-		DKINFO("DKEvent("+_type+", "+_options+") \n");
+	// constructor(DOMString type, optional EventInit eventInitDict = {});  // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Event/Event
+	DKEvent(DKString _type, DKString _eventInitDict){
+		DKINFO("DKEvent("+_type+", "+_eventInitDict+") \n");
 		
 		eventClass = "Event";
 		eventAddress = pointerToAddress(this);
@@ -23,90 +26,88 @@ public:
 		
 		type = _type;
 		
-		////// DK properties //////
-		options = _options; // TODO
+		eventInitDict = _eventInitDict;
 	}
 	
 	virtual ~DKEvent(){}
 	
+	// readonly attribute DOMString type;
+	DKString type = ""; 				// [Event.type](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/type
 	
-	////// Instance properties //////
-	// [Event.bubbles](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/bubbles
-	bool bubbles = false;
-	// [Event.cancelable](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelable
-	bool cancelable = false;
-	// [Event.composed](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/composed
-	bool composed = false;
-	// [Event.currentTarget](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/currentTarget
-	DKString currentTarget = "";
-	// [Event.defaultPrevented](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/defaultPrevented
-	bool defaultPrevented = false;
-	// [Event.eventPhase](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/eventPhase
-	int eventPhase = 0;
-	// [Event.isTrusted](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
-	bool isTrusted = false;
-	// [Event.target](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/target
-	DKString target = "";
-	// [Event.timeStamp](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/timeStamp
-	double timeStamp = 0;
-	// [Event.type](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/type
-	DKString type = "";
+	// readonly attribute EventTarget? target;
+	DKString target = ""; 				// [Event.target](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/target
 	
+	// readonly attribute EventTarget? srcElement; // legacy
+	DKString srcElement = "";
 	
-	////// Legacy and non-standard properties //////
-	// [Event.cancelBubble](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelBubble
-	bool cancelBubble = false;
-	// [Event.explicitOriginalTarget](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/explicitOriginalTarget
-	DKString explicitOriginalTarget = "";
-	// [Event.originalTarget](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/originalTarget
-	DKString originalTarget = "";
-	// [Event.returnValue](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/returnValue
-	bool returnValue = false;
-	// [Event.scoped](Read only)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/scoped
-	bool scoped = false;
+	// readonly attribute EventTarget? currentTarget;
+	DKString currentTarget = ""; 		// [Event.currentTarget](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/currentTarget
 	
-	
-	////// Instance methods //////
-	// [Event.composedPath()] https://developer.mozilla.org/en-US/docs/Web/API/Event/composedPath
-	void composedPath() {
+	// sequence<EventTarget> composedPath();
+	void composedPath() {				// [Event.composedPath()] https://developer.mozilla.org/en-US/docs/Web/API/Event/composedPath
 		DKTODO();
 	}
-	// [Event.preventDefault()] https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault
-	void preventDefault() {
+	
+	// const unsigned short NONE = 0;
+	
+	// const unsigned short CAPTURING_PHASE = 1;
+	
+	// const unsigned short AT_TARGET = 2;
+	
+	// const unsigned short BUBBLING_PHASE = 3;
+	
+	// readonly attribute unsigned short eventPhase;
+	int eventPhase = 0;					// [Event.eventPhase](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/eventPhase
+	
+	// undefined stopPropagation();
+	void stopPropagation() {			// [Event.stopPropagation()] https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation
 		DKTODO();
 	}
-	// [Event.stopImmediatePropagation()] https://developer.mozilla.org/en-US/docs/Web/API/Event/stopImmediatePropagation
-	void stopImmediatePropagation() {
+	
+	// attribute boolean cancelBubble; // legacy alias of .stopPropagation()
+	bool cancelBubble = false;			// [Event.cancelBubble](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelBubble
+	
+	// undefined stopImmediatePropagation();
+	void stopImmediatePropagation() {	// [Event.stopImmediatePropagation()] https://developer.mozilla.org/en-US/docs/Web/API/Event/stopImmediatePropagation
 		DKTODO();
 	}
-	// [Event.stopPropagation()] https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation
-	void stopPropagation() {
+	
+	// readonly attribute boolean bubbles;
+	bool bubbles = false;				// [Event.bubbles](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/bubbles
+	
+	// readonly attribute boolean cancelable;
+	bool cancelable = false;			// [Event.cancelable](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelable
+	
+	// attribute boolean returnValue;  // legacy
+	bool returnValue = false;			// [Event.returnValue](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/returnValue
+	
+	// undefined preventDefault();
+	void preventDefault() {				// [Event.preventDefault()] https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault
 		DKTODO();
 	}
-
-
-	////// Deprecated methods //////
-	// [Event.initEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/initEvent
-	void initEvent() {
+	
+	// readonly attribute boolean defaultPrevented;
+	bool defaultPrevented = false;		// [Event.defaultPrevented](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/defaultPrevented
+	
+	// readonly attribute boolean composed;
+	bool composed = false;				// [Event.composed](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/composed
+	
+	// [LegacyUnforgeable] readonly attribute boolean isTrusted;
+	bool isTrusted = false;				// [Event.isTrusted](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
+	
+	// readonly attribute DOMHighResTimeStamp timeStamp;
+	double timeStamp = 0;				// [Event.timeStamp](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/timeStamp
+	
+	// undefined initEvent(DOMString type, optional boolean bubbles = false, optional boolean cancelable = false); // legacy
+	void initEvent() {					// [Event.initEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/initEvent
 		DKDEPRECATED();
 	}
-	
-	
-	////// Events //////
-	// [afterscriptexecute] https://developer.mozilla.org/en-US/docs/Web/API/Element/afterscriptexecute_event
-	// [beforematch] https://developer.mozilla.org/en-US/docs/Web/API/Element/beforematch_event
-	// [beforescriptexecute] https://developer.mozilla.org/en-US/docs/Web/API/Element/beforescriptexecute_event
-	// [error] https://developer.mozilla.org/en-US/docs/Web/API/Element/error_event
-	// [fullscreenchange] https://developer.mozilla.org/en-US/docs/Web/API/Element/fullscreenchange_event
-	// [fullscreenerror] https://developer.mozilla.org/en-US/docs/Web/API/Element/fullscreenerror_event
-	// [scroll] https://developer.mozilla.org/en-US/docs/Web/API/Element/scroll_event
-	// [scrollend] https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollend_event
 	
 	
 	////// DK properties //////
 	DKString eventClass = "";
 	DKString eventAddress = "";
-	DKString options = "";
+	DKString eventInitDict = "{}";
 };
 
 
