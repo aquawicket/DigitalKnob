@@ -1,4 +1,5 @@
-// [IDL] https://dom.spec.whatwg.org/#interface-eventtarget
+// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/EventTarget.idl
+// [SOURCE] https://dom.spec.whatwg.org/#interface-eventtarget
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
 #pragma once
 #ifndef DKEventTarget_H
@@ -7,7 +8,6 @@
 #include "DK/DK.h"
 #include "DKEvent/DKEvent.h"
 
-
 struct EventObject {
     DKString type;
 	DKString eventTargetAddress;
@@ -15,22 +15,22 @@ struct EventObject {
 };
 
 
+// Source: DOM Standard (https://dom.spec.whatwg.org/)
+// [Exposed=*]
+// interface EventTarget {
 class DKEventTarget
 {
 public:
 
-	////// Constructor //////
-	// [EventTarget()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/EventTarget
-	DKEventTarget() {
+	// constructor();
+	DKEventTarget() { // [EventTarget()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/EventTarget
 		eventTargetClass = "EventTarget";
 		eventTargetAddress = pointerToAddress(this);
 	}
-
 	virtual ~DKEventTarget(){}
 
-	////// Instance methods //////
-	// [EventTarget.addEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
-	void addEventListener(const DKString& type, std::function<void(DKEvent&)> listener){
+	// undefined addEventListener(DOMString type, EventListener? callback, optional (AddEventListenerOptions or boolean) options = {});
+	void addEventListener(const DKString& type, std::function<void(DKEvent&)> listener){ // [EventTarget.addEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
 		DKDEBUGFUNC(type, listener);
 		//DKINFO("DKEventTarget::addEventListener("+type+", listener, "+eventTargetAddress+") \n");
 		EventObject eventObj;
@@ -49,8 +49,8 @@ public:
 		*/
 	}
 	
-	// [EventTarget.removeEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener
-	void removeEventListener(const DKString& type, std::function<void(DKEvent&)> listener){
+	// undefined removeEventListener(DOMString type, EventListener? callback, optional (EventListenerOptions or boolean) options = {});
+	void removeEventListener(const DKString& type, std::function<void(DKEvent&)> listener){ // [EventTarget.removeEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener
 		DKDEBUGFUNC(type, listener);
 		//DKINFO("DKEventTarget::removeEventListener("+type+", listener, "+eventTargetAddress+") \n");
 		for(auto it = events.begin(); it != events.end();){
@@ -61,8 +61,8 @@ public:
 		}
 	}
 	
-	// [EventTarget.dispatchEvent()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent
-    void dispatchEvent(DKEvent& event){
+	// boolean dispatchEvent(Event event);
+    void dispatchEvent(DKEvent& event){	// [EventTarget.dispatchEvent()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent
 		DKDEBUGFUNC(event);
 		//DKINFO("DKEventTarget::dispatchEvent("+event.type+", "+eventTargetAddress+") \n");	
 		for (auto& eventObj : events) {
@@ -75,9 +75,7 @@ public:
 			}
         }
     }
-	void dispatchEvent(DKEvent* event){
-		dispatchEvent(*event);
-	}
+	void dispatchEvent(DKEvent* event){	dispatchEvent(*event); }
 	
 	
 	////// DK properties //////	

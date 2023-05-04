@@ -7,7 +7,7 @@
 
 #include "DK/DK.h"
 
-// [IDL]
+// Source: DOM Standard (https://dom.spec.whatwg.org/)
 // [Exposed=*]
 // interface Event {
 class DKEvent
@@ -28,7 +28,6 @@ public:
 		
 		eventInitDict = _eventInitDict;
 	}
-	
 	virtual ~DKEvent(){}
 	
 	// readonly attribute DOMString type;
