@@ -480,7 +480,7 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
 		keydown_event.ctrlKey = ctrlKey;
 		keydown_event.isComposing = isComposing;
 		keydown_event.key = key;
-		keydown_event.locale = locale;
+		//keydown_event.locale = locale;
 		keydown_event.location = location;
 		keydown_event.metaKey = metaKey;
 		keydown_event.repeat = repeat;
@@ -502,7 +502,7 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
 		keypress_event.ctrlKey = ctrlKey;
 		keypress_event.isComposing = isComposing;
 		keypress_event.key = key;
-		keypress_event.locale = locale;
+		//keypress_event.locale = locale;
 		keypress_event.location = location;
 		keypress_event.metaKey = metaKey;
 		keypress_event.repeat = repeat;
@@ -522,7 +522,7 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
 		keyup_event.ctrlKey = ctrlKey;
 		keyup_event.isComposing = isComposing;
 		keyup_event.key = key;
-		keyup_event.locale = locale;
+		//keyup_event.locale = locale;
 		keyup_event.location = location;
 		keyup_event.metaKey = metaKey;
 		keyup_event.repeat = repeat;
