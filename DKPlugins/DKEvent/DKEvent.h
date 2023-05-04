@@ -6,7 +6,6 @@
 
 #include "DK/DK.h"
 
-
 class DKEvent
 {
 public:
@@ -18,26 +17,11 @@ public:
 		eventClass = "Event";
 		eventAddress = pointerToAddress(this);
 		
-		////// Instance properties //////
-		bubbles = false;
-		cancelable = false;
-		composed = false;
-		currentTarget = "";
-		defaultPrevented = false;
-		eventPhase = 0;
-		isTrusted = false;
-		target = "";
 		long ticks;
 		DKUtil::GetTicks(ticks);
 		timeStamp = ticks / 1000000.0;
-		type = _type;
 		
-		////// Legacy and non-standard properties //////
-		cancelBubble = false;
-		explicitOriginalTarget = "";
-		originalTarget = "";
-		returnValue = false;
-		scoped = false;
+		type = _type;
 		
 		////// DK properties //////
 		options = _options; // TODO
@@ -48,38 +32,38 @@ public:
 	
 	////// Instance properties //////
 	// [Event.bubbles](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/bubbles
-	bool bubbles;
+	bool bubbles = false;
 	// [Event.cancelable](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelable
-	bool cancelable;
+	bool cancelable = false;
 	// [Event.composed](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/composed
-	bool composed;
+	bool composed = false;
 	// [Event.currentTarget](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/currentTarget
-	DKString currentTarget;
+	DKString currentTarget = "";
 	// [Event.defaultPrevented](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/defaultPrevented
-	bool defaultPrevented;
+	bool defaultPrevented = false;
 	// [Event.eventPhase](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/eventPhase
-	int eventPhase;
+	int eventPhase = 0;
 	// [Event.isTrusted](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
-	bool isTrusted;
+	bool isTrusted = false;
 	// [Event.target](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/target
-	DKString target;
+	DKString target = "";
 	// [Event.timeStamp](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/timeStamp
-	double timeStamp;
+	double timeStamp = 0;
 	// [Event.type](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/type
-	DKString type;
+	DKString type = "";
 	
 	
 	////// Legacy and non-standard properties //////
 	// [Event.cancelBubble](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelBubble
-	bool cancelBubble;
+	bool cancelBubble = false;
 	// [Event.explicitOriginalTarget](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/explicitOriginalTarget
-	DKString explicitOriginalTarget;
+	DKString explicitOriginalTarget = "";
 	// [Event.originalTarget](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/originalTarget
-	DKString originalTarget;
+	DKString originalTarget = "";
 	// [Event.returnValue](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/returnValue
-	bool returnValue;
+	bool returnValue = false;
 	// [Event.scoped](Read only)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/scoped
-	bool scoped;
+	bool scoped = false;
 	
 	
 	////// Instance methods //////
@@ -120,9 +104,9 @@ public:
 	
 	
 	////// DK properties //////
-	DKString eventClass;
-	DKString eventAddress;
-	DKString options;
+	DKString eventClass = "";
+	DKString eventAddress = "";
+	DKString options = "";
 };
 
 
