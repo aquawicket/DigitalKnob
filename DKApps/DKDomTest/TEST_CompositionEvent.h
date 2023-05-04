@@ -15,12 +15,20 @@ class TEST_CompositionEvent : public DKObjectT<TEST_CompositionEvent>
 public:
 	bool Init(){
 		DKINFO("////// TEST_CompositionEvent.h ////// \n");
-		return DKTODO();
+		
+		DKINFO("\n");
+		DKEventTarget myEventTarget;
+		myEventTarget.addEventListener("compositionevent", &TEST_CompositionEvent::oncompositionevent);
+		DKCompositionEvent compositionevent("compositionevent", "");
+		myEventTarget.dispatchEvent(compositionevent);
+		return true;
 	}
 	
 	static void printCompositionEventProperties(DKCompositionEvent& compositionevent){
 		DKDEBUGFUNC(compositionevent);
-		DKTODO();
+		////// Instance properties //////
+		DKINFO("compositionevent.data = "	+toString(compositionevent.data)	+"\n");
+		DKINFO("compositionevent.locale = "	+toString(compositionevent.locale)	+"\n");
 	}
 	
 	static bool oncompositionevent(DKEvent& event){

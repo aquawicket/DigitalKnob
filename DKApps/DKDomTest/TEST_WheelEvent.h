@@ -25,15 +25,22 @@ public:
 
 	static void printWheelEventProperties(DKWheelEvent& wheelevent){
 		DKDEBUGFUNC(wheelevent);
-		DKTODO();
+		////// Instance properties //////
+		DKINFO("wheelevent.deltaX = "		+toSring(wheelevent.deltaX)		+"\n");
+		DKINFO("wheelevent.deltaY = "		+toSring(wheelevent.deltaY)		+"\n");
+		DKINFO("wheelevent.deltaZ = "		+toSring(wheelevent.deltaZ)		+"\n");
+		DKINFO("wheelevent.deltaMode = "	+toSring(wheelevent.deltaMode)	+"\n");
+		DKINFO("wheelevent.wheelDelta = "	+toSring(wheelevent.wheelDelta)	+"\n");
+		DKINFO("wheelevent.wheelDeltaX = "	+toSring(wheelevent.wheelDeltaX)+"\n");
+		DKINFO("wheelevent.wheelDeltaY = "	+toSring(wheelevent.wheelDeltaY)+"\n");
 	}
 
 	static bool onwheelevent(DKEvent& event){
 		DKDEBUGFUNC(event);
 		DKINFO("TEST_WheelEvent::onwheelevent() \n");
-		printWheelEventProperties(dynamic_cast<DKWheelEvent&>(event));	//TODO: try to remove the need for dynamic_cast
+		printWheelEventProperties(dynamic_cast<DKWheelEvent&>(event));					//TODO: try to remove the need for dynamic_cast
 		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent&>(event));	//TODO: try to remove the need for dynamic_cast
-		TEST_UIEvent::printUIEventProperties(dynamic_cast<DKUIEvent&>(event));	//TODO: try to remove the need for dynamic_cast
+		TEST_UIEvent::printUIEventProperties(dynamic_cast<DKUIEvent&>(event));			//TODO: try to remove the need for dynamic_cast
 		TEST_Event::printEventProperties(event);
 		return true;
 	}

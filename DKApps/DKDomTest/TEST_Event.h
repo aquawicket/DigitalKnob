@@ -48,7 +48,6 @@ public:
 
 	static void printEventProperties(DKEvent& event){
 		DKDEBUGFUNC(event);
-	
 		////// Instance properties //////
 		DKINFO("event.bubbles = "				+toString(event.bubbles)				+"\n");	// [Event.bubbles](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/bubbles
 		DKINFO("event.cancelable = "			+toString(event.cancelable)				+"\n");	// [Event.cancelable](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelable
@@ -60,7 +59,6 @@ public:
 		DKINFO("event.target = "				+toString(event.target)					+"\n");	// [Event.target](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/target
 		DKINFO("event.timeStamp = "				+toString(event.timeStamp)				+"\n");	// [Event.timeStamp](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/timeStamp
 		DKINFO("event.type = "					+toString(event.type)					+"\n");	// [Event.type](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/type
-		
 		////// Legacy and non-standard properties //////
 		DKINFO("event.cancelBubble = "			+toString(event.cancelBubble)			+"\n");	// [Event.cancelBubble](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelBubble
 		DKINFO("event.explicitOriginalTarget = "+toString(event.explicitOriginalTarget)	+"\n");	// [Event.explicitOriginalTarget](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/explicitOriginalTarget

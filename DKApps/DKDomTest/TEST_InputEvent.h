@@ -12,34 +12,24 @@ class TEST_InputEvent : public DKObjectT<TEST_InputEvent>
 {
 public:
 	bool Init(){
+		DKDEBUGFUNC();
 		DKINFO("////// TEST_InputEvent.h ////// \n");
-		
-		////// Constructor //////
-		// [InputEvent()] https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/InputEvent
 	
-		
-		////// Instance properties //////
-		// [InputEvent.data](Read only) https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/data
-		// [InputEvent.dataTransfer](Read only) https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/dataTransfer
-		// [InputEvent.inputType](Read only) https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/inputType
-		// [InputEvent.isComposing](Read only) https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/isComposing
-	
-	
-		////// Instance methods //////
-		// [InputEvent.getTargetRanges()] https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/getTargetRanges
-	
-	
-		////// Events //////
-		// [beforeinput] https://w3c.github.io/uievents/#event-type-beforeinput
-		// [input] https://w3c.github.io/uievents/#event-type-input
-	
-	
-		return DKTODO();
+		DKINFO("\n");
+		DKEventTarget myEventTarget;
+		myEventTarget.addEventListener("inputevent", &TEST_InputEvent::oninputevent);
+		DKInputEvent inputevent("inputevent", "");
+		myEventTarget.dispatchEvent(inputevent);
+		return true;
 	}
 	
 	static void printInputEventProperties(DKInputEvent& inputevent){
 		DKDEBUGFUNC(inputevent);
-		DKTODO();
+		////// Instance properties //////
+		DKINFO("inputevent.data = "			+toString(inputevent.data)			+"\n");
+		DKINFO("inputevent.dataTransfer = "	+toString(inputevent.dataTransfer)	+"\n");
+		DKINFO("inputevent.inputType = "	+toString(inputevent.inputType)		+"\n");
+		DKINFO("inputevent.isComposing = "	+toString(inputevent.isComposing)	+"\n");
 	}
 	
 	static bool oninputevent(DKEvent& event){
