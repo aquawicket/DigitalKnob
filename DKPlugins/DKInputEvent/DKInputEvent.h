@@ -1,4 +1,5 @@
-// [IDL] https://w3c.github.io/uievents/#events-inputevents
+// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/InputEvent.idl
+// [SOURCE] https://w3c.github.io/uievents/#events-inputevents
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/InputEvent
 #pragma once
 #ifndef DKInputEvent_H
@@ -6,41 +7,38 @@
 
 #include "DKUIEvent/DKUIEvent.h"
 
-
+// Source: UI Events (https://www.w3.org/TR/uievents/)
+// [Exposed=Window]
+// interface InputEvent : UIEvent {
 class DKInputEvent : public DKUIEvent
 {
 public:
-	////// Constructor //////
-	// [InputEvent()] https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/InputEvent
-	DKInputEvent(DKString _type, DKString _options) : DKUIEvent(_type, _options) {
-		DKINFO("DKInputEvent("+_type+", "+_options+") \n");
+	// constructor(DOMString type, optional InputEventInit eventInitDict = {});
+	DKInputEvent(DKString _type, DKString _eventInitDict) : DKUIEvent(_type, _eventInitDict) { // [InputEvent()] https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/InputEvent
+		DKINFO("DKInputEvent("+_type+", "+_eventInitDict+") \n");
 		
 		eventClass = "InputEvent";
 		eventAddress = pointerToAddress(this);
 	}
 	
-
-	////// Instance properties //////
-	// [InputEvent.data](Read only) https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/data
-	DKString data = "";
-	// [InputEvent.dataTransfer](Read only) https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/dataTransfer
-	DKString dataTransfer = "";
-	// [InputEvent.inputType](Read only) https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/inputType
-	DKString inputType = "";
-	// [InputEvent.isComposing](Read only) https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/isComposing
-	bool isComposing = false;
-
+	// readonly attribute DOMString? data;
+	DKString data = ""; // [InputEvent.data](Read only) https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/data
 	
-	////// Instance methods //////
-	// [InputEvent.getTargetRanges()] https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/getTargetRanges
-	void getTargetRanges() {
-		DKTODO();
-	}
-
+	//readonly attribute boolean isComposing;
+	bool isComposing = false; // [InputEvent.isComposing](Read only) https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/isComposing
 	
-	////// Events //////
-	// [beforeinput] https://w3c.github.io/uievents/#event-type-beforeinput
-	// [input] https://w3c.github.io/uievents/#event-type-input
+	//readonly attribute DOMString inputType;
+	DKString inputType = ""; // [InputEvent.inputType](Read only) https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/inputType
+	
+	// Source: Input Events Level 2 (https://www.w3.org/TR/input-events-2/)
+	// partial interface InputEvent {
+	//    	readonly attribute DataTransfer? dataTransfer;
+			DKString dataTransfer = ""; // [InputEvent.dataTransfer](Read only) https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/dataTransfer
+	//    	sequence<StaticRange> getTargetRanges();
+			void getTargetRanges() { // [InputEvent.getTargetRanges()] https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/getTargetRanges
+				DKTODO();
+			}
+	// };
 };
 
 
