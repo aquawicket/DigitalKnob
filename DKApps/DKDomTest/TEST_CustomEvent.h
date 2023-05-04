@@ -16,15 +16,16 @@ public:
 		DKINFO("////// TEST_CustomEvent.h ////// \n");
 		
 		DKINFO("\n");
-		DKEventTarget myTargetA;
-		myTargetA.addEventListener("customevent", &TEST_CustomEvent::oncustomevent);
+		DKEventTarget myEventTarget;
+		myEventTarget.addEventListener("customevent", &TEST_CustomEvent::oncustomevent);
 		DKCustomEvent customevent("customevent", "");
 		customevent.detail = "{name : 'mycustomevent'}";
-		myTargetA.dispatchEvent(customevent);
+		myEventTarget.dispatchEvent(customevent);
 		return true;
 	}
 
 	static void printCustomEventProperties(DKCustomEvent& customevent) {
+		DKDEBUGFUNC(customevent)
 		////// Instance properties //////
 		DKINFO("customevent.detail = "	+toString(customevent.detail)	+"\n");
 	}

@@ -13,13 +13,24 @@ class TEST_UIEvent : public DKObjectT<TEST_UIEvent>
 public:
 	bool Init(){
 		DKINFO("////// TEST_UIEvent.h ////// \n");
-		return DKTODO();
+		
+		DKINFO("\n");
+		DKEventTarget myEventTarget;
+		myEventTarget.addEventListener("uievent", &TEST_UIEvent::onuievent);
+		DKUIEvent uievent("uievent", "");
+		myEventTarget.dispatchEvent(uievent);
+		return true;
 	}
 	
 	static void printUIEventProperties(DKUIEvent& uievent){
 		DKDEBUGFUNC(uievent);
-		DKTODO();
+		////// Instance properties //////
+		DKINFO("uievent.detail = "				+toString(uievent.detail)				+"\n");
+		DKINFO("uievent.sourceCapabilities = "	+toString(uievent.sourceCapabilities)	+"\n");
+		DKINFO("uievent.view = "				+toString(uievent.view)					+"\n");
+		DKINFO("uievent.which = "				+toString(uievent.which)				+"\n");
 	}
+	
 	static bool onuievent(DKEvent& event){
 		DKDEBUGFUNC(event);
 		DKINFO("TEST_UIEvent::onuievent() \n");
