@@ -12,75 +12,50 @@ class TEST_MouseEvent : public DKObjectT<TEST_MouseEvent>
 {
 public:
 	bool Init(){
+		DKDEBUGFUNC();
 		DKINFO("////// TEST_MouseEvent.h ////// \n");
 		
-		////// Static properties //////
-		// [MouseEvent.WEBKIT_FORCE_AT_MOUSE_DOWN](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/WEBKIT_FORCE_AT_MOUSE_DOWN
-		// [MouseEvent.WEBKIT_FORCE_AT_FORCE_MOUSE_DOWN](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/WEBKIT_FORCE_AT_FORCE_MOUSE_DOWN
-	
-	
-		////// Instance properties //////
-		// [MouseEvent.altKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/altKey
-		// [MouseEvent.button](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button
-		// [MouseEvent.buttons](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/buttons
-		// [MouseEvent.clientX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/clientX
-		// [MouseEvent.clientY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/clientY
-		// [MouseEvent.ctrlKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/ctrlKey
-		// [MouseEvent.layerX](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/layerX
-		// [MouseEvent.layerY](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/layerY
-		// [MouseEvent.metaKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/metaKey
-		// [MouseEvent.movementX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/movementX
-		// [MouseEvent.movementY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/movementY
-		// [MouseEvent.offsetX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/offsetX
-		// [MouseEvent.offsetY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/offsetY
-		// [MouseEvent.pageX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/pageX
-		// [MouseEvent.pageY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/pageY
-		// [MouseEvent.relatedTarget](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/relatedTarget
-		// [MouseEvent.screenX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/screenX
-		// [MouseEvent.screenY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/screenY
-		// [MouseEvent.shiftKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/shiftKey
-		// [MouseEvent.mozPressure](Non-standard)(Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/mozPressure
-		// [MouseEvent.mozInputSource](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/mozInputSource
-		// [MouseEvent.webkitForce](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/webkitForce
-		// [MouseEvent.x](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/x
-		// [MouseEvent.y](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/y
-	
-		
-		////// Instance methods //////
-		// [MouseEvent.getModifierState()] https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/getModifierState
-		// [MouseEvent.initMouseEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/initMouseEvent
-
-		
-		////// Events //////
-		// [auxclick] https://developer.mozilla.org/en-US/docs/Web/API/Element/auxclick_event
-		// [click] https://developer.mozilla.org/en-US/docs/Web/API/Element/click_event
-		// [contextmenu] https://developer.mozilla.org/en-US/docs/Web/API/Element/contextmenu_event
-		// [dblclick] https://developer.mozilla.org/en-US/docs/Web/API/Element/dblclick_event
-		// [DOMActivate](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Element/DOMActivate_event
-		// [mousedown] https://developer.mozilla.org/en-US/docs/Web/API/Element/mousedown_event
-		// [mouseenter] https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseenter_event
-		// [mouseleave] https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseleave_event
-		// [mousemove] https://developer.mozilla.org/en-US/docs/Web/API/Element/mousemove_event
-		// [mouseout] https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseout_event
-		// [mouseover] https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseover_event
-		// [mouseup] https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseup_event
-		// [webkitmouseforcechanged](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Element/webkitmouseforcechanged_event
-		// [webkitmouseforcedown](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Element/webkitmouseforcedown_event
-		// [webkitmouseforceup](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Element/webkitmouseforceup_event
-		// [webkitmouseforcewillbegin](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Element/webkitmouseforcewillbegin_event
-	
-		return DKTODO();
+		DKINFO("\n");
+		DKEventTarget myEventTarget;
+		myEventTarget.addEventListener("mouseevent", &TEST_MouseEvent::onmouseevent);
+		DKMouseEvent mouseevent("mouseevent", "");
+		myEventTarget.dispatchEvent(mouseevent);
+		return true;	
 	}
 
 	static void printMouseEventProperties(DKMouseEvent& mouseevent){
 		DKDEBUGFUNC(mouseevent);
-		DKTODO();
+		////// Instance properties //////
+		DKINFO("mouseevent.altKey = "			+toString(mouseevent.altKey)		+"\n");
+		DKINFO("mouseevent.button = "			+toString(mouseevent.button)		+"\n");
+		DKINFO("mouseevent.buttons = "			+toString(mouseevent.buttons)		+"\n");
+		DKINFO("mouseevent.clientX = "			+toString(mouseevent.clientX)		+"\n");
+		DKINFO("mouseevent.clientY = "			+toString(mouseevent.clientY)		+"\n");
+		DKINFO("mouseevent.ctrlKey = "			+toString(mouseevent.ctrlKey)		+"\n");
+		DKINFO("mouseevent.layerX = "			+toString(mouseevent.layerX)		+"\n");
+		DKINFO("mouseevent.layerY = "			+toString(mouseevent.layerY)		+"\n");
+		DKINFO("mouseevent.metaKey = "			+toString(mouseevent.metaKey)		+"\n");
+		DKINFO("mouseevent.movementX = "		+toString(mouseevent.movementX)		+"\n");
+		DKINFO("mouseevent.movementY = "		+toString(mouseevent.movementY)		+"\n");
+		DKINFO("mouseevent.offsetX = "			+toString(mouseevent.offsetX)		+"\n");
+		DKINFO("mouseevent.offsetY = "			+toString(mouseevent.offsetY)		+"\n");
+		DKINFO("mouseevent.pageX = "			+toString(mouseevent.pageX)			+"\n");
+		DKINFO("mouseevent.pageY = "			+toString(mouseevent.pageY)			+"\n");
+		DKINFO("mouseevent.relatedTarget = "	+toString(mouseevent.relatedTarget)	+"\n");
+		DKINFO("mouseevent.screenX = "			+toString(mouseevent.screenX)		+"\n");
+		DKINFO("mouseevent.screenY = "			+toString(mouseevent.screenY)		+"\n");
+		DKINFO("mouseevent.shiftKey = "			+toString(mouseevent.shiftKey)		+"\n");
+		DKINFO("mouseevent.mozPressure = "		+toString(mouseevent.mozPressure)	+"\n");
+		DKINFO("mouseevent.mozInputSource = "	+toString(mouseevent.mozInputSource)+"\n");
+		DKINFO("mouseevent.webkitForce = "		+toString(mouseevent.webkitForce)	+"\n");
+		DKINFO("mouseevent.x = "				+toString(mouseevent.x)				+"\n");
+		DKINFO("mouseevent.y = "				+toString(mouseevent.y)				+"\n");
 	}
 
 	static bool onmouseevent(DKEvent& event){
 		DKDEBUGFUNC(event);
 		DKINFO("TEST_MouseEvent::onmouseevent() \n");
-		printMouseEventProperties(dynamic_cast<DKMouseEvent&>(event));	//TODO: try to remove the need for dynamic_cast
+		printMouseEventProperties(dynamic_cast<DKMouseEvent&>(event));			//TODO: try to remove the need for dynamic_cast
 		TEST_UIEvent::printUIEventProperties(dynamic_cast<DKUIEvent&>(event));	//TODO: try to remove the need for dynamic_cast
 		TEST_Event::printEventProperties(event);
 		return true;
