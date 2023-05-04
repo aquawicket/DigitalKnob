@@ -79,7 +79,7 @@ public:
 			void initKeyboardEvent() { // [KeyboardEvent.initKeyboardEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/initKeyboardEvent
 				DKDEPRECATED();
 			}
-	//};
+	// };
 	
 	// Source: UI Events (https://www.w3.org/TR/uievents/)
 	// partial interface KeyboardEvent {
@@ -88,7 +88,7 @@ public:
 			unsigned int charCode = 0; // [KeyboardEvent.charCode](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/charCode
 	//		readonly attribute unsigned long keyCode;
 			unsigned int keyCode = 0; // [KeyboardEvent.keyCode](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode
-	};
+	// };
 };
 
 

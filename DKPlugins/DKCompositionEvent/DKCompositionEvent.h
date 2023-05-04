@@ -1,4 +1,5 @@
-// [IDL] https://w3c.github.io/uievents/#events-compositionevents
+// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/CompositionEvent.idl
+// [SOURCE] https://w3c.github.io/uievents/#events-compositionevents
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent
 #pragma once
 #ifndef DKCompositionEvent_H
@@ -6,39 +7,35 @@
 
 #include "DKUIEvent/DKUIEvent.h"
 
-
+// Source: UI Events (https://www.w3.org/TR/uievents/)
+// [Exposed=Window]
+// interface CompositionEvent : UIEvent {
 class DKCompositionEvent : public DKUIEvent
 {
 public:
-	////// Constructor //////
-	// [CompositionEvent()] https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/CompositionEvent
-	DKCompositionEvent(DKString _type, DKString _options) : DKUIEvent(_type, _options) {
-		DKINFO("DKCompositionEvent("+_type+", "+_options+") \n");
+	// constructor(DOMString type, optional CompositionEventInit eventInitDict = {});
+	DKCompositionEvent(DKString _type, DKString _eventInitDict) : DKUIEvent(_type, _eventInitDict) { // [CompositionEvent()] https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/CompositionEvent
+		DKINFO("DKCompositionEvent("+_type+", "+_eventInitDict+") \n");
 		
 		eventClass = "CompositionEvent";
 		eventAddress = pointerToAddress(this);
 	}
 	
-
-	////// Instance properties //////
-	// [CompositionEvent.data](Read only) https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/data
-	DKString data = "";
-	// [CompositionEvent.locale](Read only)(Deprecated)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/locale
-	DKString locale = "";
-
-
+	// readonly attribute DOMString data;
+	DKString data = ""; // [CompositionEvent.data](Read only) https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/data
 	
-	////// Instance methods //////
-	// [CompositionEvent.initCompositionEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/initCompositionEvent
-	void initCompositionEvent() {
-		DKTODO();
-	}
-
-	
-	////// Events //////
-	// [compositionstart] https://w3c.github.io/uievents/#event-type-compositionstart
-	// [compositionupdate] https://w3c.github.io/uievents/#event-type-compositionupdate
-	// [compositionend] https://w3c.github.io/uievents/#event-type-compositionend
+	// Source: UI Events (https://www.w3.org/TR/uievents/)
+	// partial interface CompositionEvent {
+	//		// Originally introduced (and deprecated) in this specification
+	//		undefined initCompositionEvent(DOMString typeArg,
+	//		optional boolean bubblesArg = false,
+	//		optional boolean cancelableArg = false,
+	//		optional WindowProxy? viewArg = null,
+	//		optional DOMString dataArg = "");
+			void initCompositionEvent() { // [CompositionEvent.initCompositionEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/initCompositionEvent
+				DKTODO();
+			}
+	// };
 };
 
 
