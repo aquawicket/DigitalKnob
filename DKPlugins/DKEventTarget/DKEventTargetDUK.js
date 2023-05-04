@@ -1,8 +1,12 @@
+// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/EventTarget.idl
+// [SOURCE] https://dom.spec.whatwg.org/#interface-eventtarget
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
-// [INTERFACE] https://dom.spec.whatwg.org/#interface-eventtarget
 
 
-// [EventTarget()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/EventTarget
+// Source: DOM Standard (https://dom.spec.whatwg.org/)
+// [Exposed=*]
+// interface EventTarget {
+// constructor();
 var EventTarget = function EventTarget(address) {
 	//console.log("EventTarget("+address+")")
 
@@ -20,7 +24,7 @@ var EventTarget = function EventTarget(address) {
     this.listeners = {};
 	*/
 
-	// [EventTarget.addEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
+	// undefined addEventListener(DOMString type, EventListener? callback, optional (AddEventListenerOptions or boolean) options = {});
     Object.defineProperty(this, "addEventListener", {
         value: function addEventListener(type, callback, useCapture) {
             /*
@@ -32,7 +36,8 @@ var EventTarget = function EventTarget(address) {
             CPP_DKEventTargetDUK_addEventListener(this.address, type, callback);
         },
     });
-	// [EventTarget.removeEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener
+	
+	// undefined removeEventListener(DOMString type, EventListener? callback, optional (EventListenerOptions or boolean) options = {});
     Object.defineProperty(this, "removeEventListener", {
         value: function removeEventListener(type, callback, useCapture) {
 			/*
@@ -51,7 +56,8 @@ var EventTarget = function EventTarget(address) {
 			CPP_DKEventTargetDUK_removeEventListener(this.address, type, callback);
         },
     });
-	// [EventTarget.dispatchEvent()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent
+	
+	// boolean dispatchEvent(Event event);
     Object.defineProperty(this, "dispatchEvent", {
         value: function dispatchEvent(event) {
 			/*

@@ -1,3 +1,6 @@
+// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/EventTarget.idl
+// [SOURCE] https://dom.spec.whatwg.org/#interface-eventtarget
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
 #if HAVE_DKDuktape
 
 #pragma once
@@ -11,30 +14,36 @@ WARNING_DISABLE
 #include "dukglue/dukglue.h"
 WARNING_ENABLE
 
-// [EventTarget] https://developer.mozilla.org/en-US/docs/Web/API/Event
+
+// Source: DOM Standard (https://dom.spec.whatwg.org/)
+// [Exposed=*]
+// interface EventTarget {
 class DKEventTargetDUK : public DKObjectT<DKEventTargetDUK>
 {
 public:
 	bool Init(){
 		
-		////// Constructor //////
+		// constructor();
 		DKDuktape::AttachFunction("CPP_DKEventTargetDUK", DKEventTargetDUK::constructor);
 		
-		
-		////// Instance methods //////
+		// undefined addEventListener(DOMString type, EventListener? callback, optional (AddEventListenerOptions or boolean) options = {});
 		DKDuktape::AttachFunction("CPP_DKEventTargetDUK_addEventListener", 		DKEventTargetDUK::addEventListener);
+		
+		// undefined removeEventListener(DOMString type, EventListener? callback, optional (EventListenerOptions or boolean) options = {});
 		DKDuktape::AttachFunction("CPP_DKEventTargetDUK_removeEventListener", 	DKEventTargetDUK::removeEventListener);
+		
+		// boolean dispatchEvent(Event event);
 		DKDuktape::AttachFunction("CPP_DKEventTargetDUK_dispatchEvent", 		DKEventTargetDUK::dispatchEvent);
 		
 		
-		////// Load .js files
+		////// Load .js files //////
 		DKClass::DKCreate("DKEventTarget/DKEventTargetDUK.js");
 		//DKClass::DKCreate("DKEventTarget/DKGlobalEventHandlersDUK.js");
 		return true;
 	}
 	
 	
-	////// Constructor //////
+	// constructor();
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKINFO("CPP_DKEventTargetDUK()\n");
@@ -44,9 +53,7 @@ public:
 		return true;
 	}
 	
-	
-	////// Instance methods //////
-	// [EventTarget.addEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
+	// undefined addEventListener(DOMString type, EventListener? callback, optional (AddEventListenerOptions or boolean) options = {});
 	static int addEventListener(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString targetAddress = duk_require_string(ctx, 0);
@@ -67,7 +74,8 @@ public:
 		
 		return true;
 	}
-	// [EventTarget.removeEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener
+	
+	// undefined removeEventListener(DOMString type, EventListener? callback, optional (EventListenerOptions or boolean) options = {});
 	static int removeEventListener(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString targetAddress = duk_require_string(ctx, 0);
@@ -87,7 +95,8 @@ public:
 
 		return true;
 	}
-	// [EventTarget.dispatchEvent()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent
+	
+	// boolean dispatchEvent(Event event);
 	static int dispatchEvent(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString targetAddress = duk_require_string(ctx, 0);
