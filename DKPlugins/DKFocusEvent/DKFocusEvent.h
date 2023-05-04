@@ -13,7 +13,7 @@
 class DKFocusEvent : public DKUIEvent
 {
 public:
-	//constructor(DOMString type, optional FocusEventInit eventInitDict = {});
+	// constructor(DOMString type, optional FocusEventInit eventInitDict = {});
 	DKFocusEvent(DKString _type, DKString _eventInitDict) : DKUIEvent(_type, _eventInitDict) { // [FocusEvent()] https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent/FocusEvent
 		DKINFO("DKFocusEvent("+_type+", "+_eventInitDict+") \n");
 		
@@ -21,7 +21,7 @@ public:
 		eventAddress = pointerToAddress(this);
 	}
 	
-	//readonly attribute EventTarget? relatedTarget;
+	// readonly attribute EventTarget? relatedTarget;
 	DKString relatedTarget = ""; // [FocusEvent.relatedTarget] https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent/relatedTarget
 };
 

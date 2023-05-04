@@ -1,39 +1,34 @@
-// [W3C] https://w3c.github.io/uievents/#events-focusevent
+// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/FocusEvent.idl
+// [SOURCE] https://w3c.github.io/uievents/#events-focusevent
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent
 
 
-// [FocusEvent()] https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent/FocusEvent
-var FocusEvent = function FocusEvent(type, options, address) {
-	//console.log("FocusEvent("+type+","+options+","+address+")")
+// Source: UI Events (https://www.w3.org/TR/uievents/)
+// [Exposed=Window]
+// interface FocusEvent : UIEvent {
+// constructor(DOMString type, optional FocusEventInit eventInitDict = {});
+var FocusEvent = function FocusEvent(type, eventInitDict, address) {
+	//console.log("FocusEvent("+type+","+eventInitDict+","+address+")")
 	
 	if(address)
 		this.address = address;
 	if(!this.address)
-		this.address = CPP_DKFocusEventDUK(type, options);
+		this.address = CPP_DKFocusEventDUK(type, eventInitDict);
 	
-
-	////// Instance properties //////
-	// [FocusEvent.relatedTarget](Read only)
+	
+	// readonly attribute EventTarget? relatedTarget;
 	Object.defineProperty(this, "relatedTarget", {
         get: function relatedTarget() { return CPP_DKFocusEventDUK_relatedTarget(this.address) },
 		set: function relatedTarget(v) { return CPP_DKFocusEventDUK_relatedTarget(this.address, v) },
 		configurable: true,
     })
-	
 
-	////// Events //////
-	// [blur] https://developer.mozilla.org/en-US/docs/Web/API/Element/blur_event
-	// [focus] https://developer.mozilla.org/en-US/docs/Web/API/Element/focus_event
-	// [focusin] https://developer.mozilla.org/en-US/docs/Web/API/Element/focusin_event
-	// [focusout] https://developer.mozilla.org/en-US/docs/Web/API/Element/focusout_event
-	
-	
+
 	////// toString //////
 	if(this.toString() === "[object Object]")
 		this.toString = function(){ return "[object FocusEvent]" }
 	
-
-	var event = UIEvent.call(this, type, options)
+	var event = UIEvent.call(this, type, eventInitDict)
 	
 	// Make properties (Read Only) after assignment
 	Object.defineProperty(this, "relatedTarget",  { set: undefined })

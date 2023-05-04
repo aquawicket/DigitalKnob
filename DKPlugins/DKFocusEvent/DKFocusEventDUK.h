@@ -1,3 +1,6 @@
+// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/FocusEvent.idl
+// [SOURCE] https://w3c.github.io/uievents/#events-focusevent
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent
 #if HAVE_DKDuktape
 
 #pragma once
@@ -7,37 +10,29 @@
 #include "DKDuktape/DKDuktape.h"
 
 
-// [W3C] https://w3c.github.io/uievents/#events-focusevent
-// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent
+// Source: UI Events (https://www.w3.org/TR/uievents/)
+// [Exposed=Window]
+// interface FocusEvent : UIEvent {
 class DKFocusEventDUK : public DKObjectT<DKFocusEventDUK>
 {
 public:
 	bool Init(){
 		
-		////// Constructor //////
+		// constructor(DOMString type, optional FocusEventInit eventInitDict = {});
 		DKDuktape::AttachFunction("CPP_DKFocusEventDUK", DKFocusEventDUK::constructor);
 		
-	
-		////// Instance properties //////
+		// readonly attribute EventTarget? relatedTarget;
 		DKDuktape::AttachFunction("CPP_DKFocusEventDUK_relatedTarget",	DKFocusEventDUK::relatedTarget);
-
-		
-		////// Events //////
-		// [blur] https://developer.mozilla.org/en-US/docs/Web/API/Element/blur_event
-		// [focus] https://developer.mozilla.org/en-US/docs/Web/API/Element/focus_event
-		// [focusin] https://developer.mozilla.org/en-US/docs/Web/API/Element/focusin_event
-		// [focusout] https://developer.mozilla.org/en-US/docs/Web/API/Element/focusout_event
 	
 		
-		////// Load .js files
+		////// Load .js files //////
 		DKClass::DKCreate("DKFocusEvent/DKFocusEventDUK.js");
 		
 		return true;
 	}
 	
 	
-	////// Constructor //////
-	// [FocusEvent()] https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent/FocusEvent
+	// constructor(DOMString type, optional FocusEventInit eventInitDict = {});
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
@@ -49,9 +44,7 @@ public:
 		return true;
 	}
 	
-	
-	////// Instance properties //////
-	// [FocusEvent.relatedTarget](Read only) https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent/relatedTarget
+	// readonly attribute EventTarget? relatedTarget;
 	static int relatedTarget(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
