@@ -17,24 +17,18 @@ public:
 		
 		eventClass = "UIEvent";
 		eventAddress = pointerToAddress(this);
-		
-		////// Instance properties //////
-		detail = 0;
-		sourceCapabilities = "";
-		view = "";
-		which = 0;
 	}
 	
 	
 	////// Instance properties //////
 	// [UIEvent.detail](Read only) https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/detail
-	unsigned int detail;
+	unsigned int detail = 0;
 	// [UIEvent.sourceCapabilities](Experimental)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/sourceCapabilities
-	DKString sourceCapabilities;
+	DKString sourceCapabilities = "";
 	// [UIEvent.view](Read only) https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/view
-	DKString view;
+	DKString view = "";
 	// [UIEvent.which](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/which
-	unsigned int which;
+	unsigned int which = 0;
 	
 	
 	////// Instance methods //////

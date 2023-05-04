@@ -17,15 +17,12 @@ public:
 		
 		eventClass = "CustomEvent";
 		eventAddress = pointerToAddress(this);
-		
-		////// Instance properties //////
-		detail = "{}";
 	}
 	
 	
 	////// Instance properties //////
 	// [CustomEvent.detail](Read only) https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/detail
-	DKString detail;
+	DKString detail = "{}";
 
 	
 	////// Instance methods //////
