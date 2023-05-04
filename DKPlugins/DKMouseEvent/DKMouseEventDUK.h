@@ -28,8 +28,8 @@ public:
 		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_clientX", 		DKMouseEventDUK::clientX); 			// [MouseEvent.clientX](Read only)
 		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_clientY", 		DKMouseEventDUK::clientY); 			// [MouseEvent.clientY](Read only)
 		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_ctrlKey", 		DKMouseEventDUK::ctrlKey); 			// [MouseEvent.ctrlKey](Read only)
-		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_layerX", 		DKMouseEventDUK::layerX); 			// [MouseEvent.layerX](Non-standard)(Read only)
-		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_layerY", 		DKMouseEventDUK::layerY); 			// [MouseEvent.layerY](Non-standard)(Read only)
+		//DKDuktape::AttachFunction("CPP_DKMouseEventDUK_layerX", 		DKMouseEventDUK::layerX); 			// [MouseEvent.layerX](Non-standard)(Read only)
+		//DKDuktape::AttachFunction("CPP_DKMouseEventDUK_layerY", 		DKMouseEventDUK::layerY); 			// [MouseEvent.layerY](Non-standard)(Read only)
 		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_metaKey", 		DKMouseEventDUK::metaKey); 			// [MouseEvent.metaKey](Read only)
 		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_movementX",		DKMouseEventDUK::movementX);		// [MouseEvent.movementX](Read only)
 		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_movementY",		DKMouseEventDUK::movementY); 		// [MouseEvent.movementY](Read only)
@@ -150,6 +150,7 @@ public:
 		duk_push_boolean(ctx, event->ctrlKey);	
 		return true;
 	}
+	/*
 	// [MouseEvent.layerX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/layerX
 	static int layerX(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -166,6 +167,7 @@ public:
 		duk_push_int(ctx, event->layerY);	
 		return true;
 	}
+	*/
 	// [MouseEvent.metaKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/metaKey
 	static int metaKey(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
