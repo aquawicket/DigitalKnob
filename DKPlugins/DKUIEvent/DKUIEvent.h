@@ -1,4 +1,5 @@
-// [IDL] https://w3c.github.io/uievents
+// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/UIEvent.idl
+// [SOURCE] https://w3c.github.io/uievents
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/UIEvent
 #pragma once
 #ifndef DKUIEvent_H
@@ -7,43 +8,47 @@
 #include "DKEvent/DKEvent.h"
 
 
+// Source: UI Events (https://www.w3.org/TR/uievents/)
+// [Exposed=Window]
+// interface UIEvent : Event {
 class DKUIEvent : public DKEvent
 {
 public:
-	////// Constructor //////
-	// [UIEvent()] https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/UIEvent
-	DKUIEvent(DKString _type, DKString _options) : DKEvent(_type, _options) {
-		DKINFO("DKUIEvent("+_type+", "+_options+") \n");
+	//constructor(DOMString type, optional UIEventInit eventInitDict = {});
+	DKUIEvent(DKString _type, DKString _eventInitDict) : DKEvent(_type, _eventInitDict) { // [UIEvent()] https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/UIEvent
+		DKINFO("DKUIEvent("+_type+", "+_eventInitDict+") \n");
 		
 		eventClass = "UIEvent";
 		eventAddress = pointerToAddress(this);
 	}
 	
+	// readonly attribute Window? view;
+	DKString view = ""; // [UIEvent.view](Read only) https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/view
 	
-	////// Instance properties //////
-	// [UIEvent.detail](Read only) https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/detail
-	unsigned int detail = 0;
-	// [UIEvent.sourceCapabilities](Experimental)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/sourceCapabilities
-	DKString sourceCapabilities = "";
-	// [UIEvent.view](Read only) https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/view
-	DKString view = "";
-	// [UIEvent.which](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/which
-	unsigned int which = 0;
+	// readonly attribute long detail;
+	unsigned int detail = 0; // [UIEvent.detail](Read only) https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/detail
 	
+	// Source: Input Device Capabilities (https://wicg.github.io/input-device-capabilities/)
+	// partial interface UIEvent {
+	// 		readonly attribute InputDeviceCapabilities? sourceCapabilities;
+			DKString sourceCapabilities = ""; // [UIEvent.sourceCapabilities](Experimental)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/sourceCapabilities
+	// };
 	
-	////// Instance methods //////
-	// [UIEvent.initUIEvent()](Deprecated)
-	void initUIEvent(){
-		DKDEPRECATED();
-	}
+	// Source: UI Events (https://www.w3.org/TR/uievents/)
+	// partial interface UIEvent {
+	// 		Deprecated in this specification
+	//		undefined initUIEvent(DOMString typeArg, optional boolean bubblesArg = false, optional boolean cancelableArg = false, optional Window? viewArg = null, optional long detailArg = 0);
+			void initUIEvent(){
+				DKDEPRECATED();
+			}
+	//	};
 	
-	
-	////// Events //////
-	// [abort] https://w3c.github.io/uievents/#event-type-abort
-	// [error] https://w3c.github.io/uievents/#event-type-error
-	// [load] https://w3c.github.io/uievents/#event-type-load
-	// [select] https://w3c.github.io/uievents/#event-type-select
-	// [unload] https://w3c.github.io/uievents/#event-type-unload
+	// Source: UI Events (https://www.w3.org/TR/uievents/)
+	// partial interface UIEvent {
+	//		The following support legacy user agents
+	//		readonly attribute unsigned long which;
+			unsigned int which = 0; // [UIEvent.which](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/which
+	// };
 };
 
 
