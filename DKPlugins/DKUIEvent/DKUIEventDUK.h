@@ -1,3 +1,6 @@
+// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/UIEvent.idl
+// [SOURCE] https://w3c.github.io/uievents
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/UIEvent
 #if HAVE_DKDuktape
 
 #pragma once
@@ -7,45 +10,52 @@
 #include "DKDuktape/DKDuktape.h"
 
 
-// [W3C] https://w3c.github.io/uievents
-// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/UIEvent
+// Source: UI Events (https://www.w3.org/TR/uievents/)
+// [Exposed=Window]
+// interface UIEvent : Event {
 class DKUIEventDUK : public DKObjectT<DKUIEventDUK>
 {
 public:
 	bool Init(){
 		
-		////// Constructor //////
-		DKDuktape::AttachFunction("CPP_DKUIEventDUK", 						DKUIEventDUK::constructor);
+		//constructor(DOMString type, optional UIEventInit eventInitDict = {});
+		DKDuktape::AttachFunction("CPP_DKUIEventDUK", 			DKUIEventDUK::constructor);
 	
-	
-		////// Instance properties //////
-		DKDuktape::AttachFunction("CPP_DKUIEventDUK_detail", 				DKUIEventDUK::detail);
-		DKDuktape::AttachFunction("CPP_DKUIEventDUK_sourceCapabilities", 	DKUIEventDUK::sourceCapabilities);
-		DKDuktape::AttachFunction("CPP_DKUIEventDUK_view", 				DKUIEventDUK::view);
-		DKDuktape::AttachFunction("CPP_DKUIEventDUK_which", 				DKUIEventDUK::which);
-
+		// readonly attribute Window? view;
+		DKDuktape::AttachFunction("CPP_DKUIEventDUK_view", 		DKUIEventDUK::view);
 		
-		////// Instance methods //////
-		DKDuktape::AttachFunction("CPP_DKUIEventDUK_initUIEvent", 			DKUIEventDUK::initUIEvent);
+		// readonly attribute long detail;
+		DKDuktape::AttachFunction("CPP_DKUIEventDUK_detail", 	DKUIEventDUK::detail);
 		
+		// Source: Input Device Capabilities (https://wicg.github.io/input-device-capabilities/)
+		// partial interface UIEvent {
+		// 		readonly attribute InputDeviceCapabilities? sourceCapabilities;
+				DKDuktape::AttachFunction("CPP_DKUIEventDUK_sourceCapabilities", 	DKUIEventDUK::sourceCapabilities);
+		// };
 		
-		////// Events //////
-		// [abort] https://w3c.github.io/uievents/#event-type-abort
-		// [error] https://w3c.github.io/uievents/#event-type-error
-		// [load] https://w3c.github.io/uievents/#event-type-load
-		// [select] https://w3c.github.io/uievents/#event-type-select
-		// [unload] https://w3c.github.io/uievents/#event-type-unload
+		// Source: UI Events (https://www.w3.org/TR/uievents/)
+		// partial interface UIEvent {
+		// 		Deprecated in this specification
+		//		undefined initUIEvent(DOMString typeArg, optional boolean bubblesArg = false, optional boolean cancelableArg = false, optional Window? viewArg = null, optional long detailArg = 0);
+				DKDuktape::AttachFunction("CPP_DKUIEventDUK_initUIEvent", 			DKUIEventDUK::initUIEvent);
+		//	};
+	
+		// Source: UI Events (https://www.w3.org/TR/uievents/)
+		// partial interface UIEvent {
+		//		The following support legacy user agents
+		//		readonly attribute unsigned long which;
+				DKDuktape::AttachFunction("CPP_DKUIEventDUK_which", 				DKUIEventDUK::which);
+		// };
 	
 	
-		////// Load .js files
+		////// Load .js files //////
 		DKClass::DKCreate("DKUIEvent/DKUIEventDUK.js");
 		
 		return true;
 	}
 	
 	
-	////// Constructor //////
-	// [UIEvent()] https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/UIEvent
+	//constructor(DOMString type, optional UIEventInit eventInitDict = {});
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
@@ -57,9 +67,13 @@ public:
 		return true;
 	}
 	
+	// readonly attribute Window? view;
+	static int view(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		return DKTODO();
+	}
 	
-	////// Instance properties //////
-	// [UIEvent.detail](Read only) https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/detail
+	// readonly attribute long detail;
 	static int detail(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
@@ -69,33 +83,38 @@ public:
 		duk_push_uint(ctx, event->detail);	
 		return true;
 	}
-	// [UIEvent.sourceCapabilities](Experimental)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/sourceCapabilities
-	static int sourceCapabilities(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		return DKTODO();
-	}
-	// [UIEvent.view](Read only) https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/view
-	static int view(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		return DKTODO();
-	}
-	// [UIEvent.which](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/which
-	static int which(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKUIEvent* event = (DKUIEvent*)addressToPointer(eventAddress);
-		duk_push_uint(ctx, event->which);	
-		return DKDEPRECATED();
-	}
 	
+	// Source: Input Device Capabilities (https://wicg.github.io/input-device-capabilities/)
+	// partial interface UIEvent {
+	// 		readonly attribute InputDeviceCapabilities? sourceCapabilities;
+			static int sourceCapabilities(duk_context* ctx){
+				DKDEBUGFUNC(ctx);
+				return DKTODO();
+			}
+	// };
 	
-	////// Instance methods //////
-	// [UIEvent.initUIEvent()](Deprecated)
-	static int initUIEvent(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		return DKDEPRECATED();
-	}
-
+	// Source: UI Events (https://www.w3.org/TR/uievents/)
+	// partial interface UIEvent {
+	// 		Deprecated in this specification
+	//		undefined initUIEvent(DOMString typeArg, optional boolean bubblesArg = false, optional boolean cancelableArg = false, optional Window? viewArg = null, optional long detailArg = 0);
+			static int initUIEvent(duk_context* ctx){
+				DKDEBUGFUNC(ctx);
+				return DKDEPRECATED();
+			}
+	//	};
+	
+	// Source: UI Events (https://www.w3.org/TR/uievents/)
+	// partial interface UIEvent {
+	//		The following support legacy user agents
+	//		readonly attribute unsigned long which;
+			static int which(duk_context* ctx){
+				DKDEBUGFUNC(ctx);
+				DKString eventAddress = duk_require_string(ctx, 0);
+				DKUIEvent* event = (DKUIEvent*)addressToPointer(eventAddress);
+				duk_push_uint(ctx, event->which);	
+				return DKDEPRECATED();
+			}
+	// };	
 };
 REGISTER_OBJECT(DKUIEventDUK, true)
 

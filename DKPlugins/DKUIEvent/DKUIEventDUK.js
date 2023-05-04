@@ -1,8 +1,12 @@
-// [W3C] https://w3c.github.io/uievents
+// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/UIEvent.idl
+// [SOURCE] https://w3c.github.io/uievents
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/UIEvent
 
 
-// [UIEvent()] https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/UIEvent
+// Source: UI Events (https://www.w3.org/TR/uievents/)
+// [Exposed=Window]
+// interface UIEvent : Event {
+//constructor(DOMString type, optional UIEventInit eventInitDict = {});
 var UIEvent = function UIEvent(type, options, address) {
 	//console.log("UIEvent("+type+","+options+","+address+")")
 	
@@ -11,39 +15,49 @@ var UIEvent = function UIEvent(type, options, address) {
 	if(!this.address)
 		this.address = CPP_DKUIEventDUK(type, options);
 	
-	
-	////// Instance properties //////
-	// [UIEvent.detail](Read only)
-	Object.defineProperty(this, "detail", {
-        get: function detail() 		{ return CPP_DKUIEventDUK_detail(this.address) },
-		set: function detail(num)	{ return CPP_DKUIEventDUK_detail(this.address, num) },
-		configurable: true,
-    })
-	// [UIEvent.sourceCapabilities](Read only)
-	Object.defineProperty(this, "sourceCapabilities", {
-        get: function sourceCapabilities()	{ return CPP_DKUIEventDUK_sourceCapabilities(this.address) },
-		set: function sourceCapabilities(v)	{ return CPP_DKUIEventDUK_sourceCapabilities(this.address, v) },
-		configurable: true,
-    })
-	// [UIEvent.view](Read only)
+	// readonly attribute Window? view;
 	Object.defineProperty(this, "view", {
         get: function view() { return CPP_DKUIEventDUK_view(this.address) },
 		set: function view(num)	{ return CPP_DKUIEventDUK_view(this.address, num) },
 		configurable: true,
     })
-	// [UIEvent.which](Read only)
-	Object.defineProperty(this, "which", {
-        get: function which() { return CPP_DKUIEventDUK_which(this.address) },
+	
+	// readonly attribute long detail;
+	Object.defineProperty(this, "detail", {
+        get: function detail() 		{ return CPP_DKUIEventDUK_detail(this.address) },
+		set: function detail(num)	{ return CPP_DKUIEventDUK_detail(this.address, num) },
+		configurable: true,
     })
 	
+	// Source: Input Device Capabilities (https://wicg.github.io/input-device-capabilities/)
+	// partial interface UIEvent {
+	// 		readonly attribute InputDeviceCapabilities? sourceCapabilities;
+			Object.defineProperty(this, "sourceCapabilities", {
+				get: function sourceCapabilities()	{ return CPP_DKUIEventDUK_sourceCapabilities(this.address) },
+				set: function sourceCapabilities(v)	{ return CPP_DKUIEventDUK_sourceCapabilities(this.address, v) },
+				configurable: true,
+			})
+	// };
+		
+	// Source: UI Events (https://www.w3.org/TR/uievents/)
+	// partial interface UIEvent {
+	// 		Deprecated in this specification
+	//		undefined initUIEvent(DOMString typeArg, optional boolean bubblesArg = false, optional boolean cancelableArg = false, optional Window? viewArg = null, optional long detailArg = 0);
+			UIEvent.prototype.initUIEvent = function initUIEvent() {
+				CPP_DKUIEventDUK_initUIEvent(this.address);
+			}
+	//	};
+		
+	// Source: UI Events (https://www.w3.org/TR/uievents/)
+	// partial interface UIEvent {
+	//		The following support legacy user agents
+	//		readonly attribute unsigned long which;
+			Object.defineProperty(this, "which", {
+				get: function which() { return CPP_DKUIEventDUK_which(this.address) },
+			})
+	// };	
+		
 
-    ////// Instance methods //////
-	// [UIEvent.initUIEvent()](Deprecated)
-	UIEvent.prototype.initUIEvent = function initUIEvent() {
-		CPP_DKUIEventDUK_initUIEvent(this.address);
-    }
-	
-	
 	////// toString //////
 	if(this.toString() === "[object Object]")
 		this.toString = function(){ return "[object UIEvent]" }
