@@ -17,15 +17,12 @@ public:
 		
 		eventClass = "FocusEvent";
 		eventAddress = pointerToAddress(this);
-		
-		////// Instance properties //////
-		relatedTarget = "";
 	}
 	
 	
 	////// Instance properties //////
 	// [FocusEvent.relatedTarget] https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent/relatedTarget
-	DKString relatedTarget;
+	DKString relatedTarget = "";
 
 	
 	////// Events //////

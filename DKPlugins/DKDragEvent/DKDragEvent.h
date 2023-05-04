@@ -17,9 +17,6 @@ public:
 		
 		eventClass = "DragEvent";
 		eventAddress = pointerToAddress(this);
-		
-		////// Instance properties //////
-		// [DragEvent.dataTransfer](Read only) https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer
 	}
 	
 	

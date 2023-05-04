@@ -17,18 +17,14 @@ public:
 		
 		eventClass = "CompositionEvent";
 		eventAddress = pointerToAddress(this);
-		
-		////// Instance properties //////
-		data = "";
-		locale = "";
 	}
 	
 
 	////// Instance properties //////
 	// [CompositionEvent.data](Read only) https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/data
-	DKString data;
+	DKString data = "";
 	// [CompositionEvent.locale](Read only)(Deprecated)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/locale
-	DKString locale;
+	DKString locale = "";
 
 
 	

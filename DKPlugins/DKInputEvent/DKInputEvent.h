@@ -17,24 +17,18 @@ public:
 		
 		eventClass = "InputEvent";
 		eventAddress = pointerToAddress(this);
-		
-		////// Instance properties //////
-		data = "";
-		dataTransfer = "";
-		inputType = "";
-		isComposing = false;
 	}
 	
 
 	////// Instance properties //////
 	// [InputEvent.data](Read only) https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/data
-	DKString data;
+	DKString data = "";
 	// [InputEvent.dataTransfer](Read only) https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/dataTransfer
-	DKString dataTransfer;
+	DKString dataTransfer = "";
 	// [InputEvent.inputType](Read only) https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/inputType
-	DKString inputType;
+	DKString inputType = "";
 	// [InputEvent.isComposing](Read only) https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/isComposing
-	bool isComposing;
+	bool isComposing = false;
 
 	
 	////// Instance methods //////

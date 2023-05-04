@@ -17,33 +17,24 @@ public:
 		
 		eventClass = "WheelEvent";
 		eventAddress = pointerToAddress(this);
-		
-		////// Instance properties //////
-		deltaX = 0.0;
-		deltaY = 0.0;
-		deltaZ = 0.0;
-		deltaMode = 0;
-		wheelDelta = 0;
-		wheelDeltaX = 0;
-		wheelDeltaY = 0;
 	}
 	
 	
 	////// Instance properties //////
 	// [WheelEvent.deltaX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent/deltaX
-	double deltaX;
+	double deltaX = 0.0;
 	// [WheelEvent.deltaY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent/deltaY
-	double deltaY;
+	double deltaY = 0.0;
 	// [WheelEvent.deltaZ](Read only) https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent/deltaZ
-	double deltaZ;
+	double deltaZ = 0.0;
 	// [WheelEvent.deltaMode](Read only) https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent/deltaMode
-	unsigned int deltaMode;
+	unsigned int deltaMode = 0;
 	// [WheelEvent.wheelDelta](Read only)(Deprecated)(Non-standard)
-	int wheelDelta;
+	int wheelDelta = 0;
 	// [WheelEvent.wheelDeltaX](Read only)(Deprecated)(Non-standard)
-	int wheelDeltaX;
+	int wheelDeltaX = 0;
 	// [WheelEvent.wheelDeltaY](Read only)(Deprecated)(Non-standard)
-	int wheelDeltaY;
+	int wheelDeltaY = 0;
 
 	
 	////// Events //////

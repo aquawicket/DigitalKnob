@@ -17,32 +17,6 @@ public:
 		
 		eventClass = "MouseEvent";
 		eventAddress = pointerToAddress(this);
-		
-		////// Instance properties //////
-		altKey = false;		
-		button = 0;
-		buttons = 0;
-		clientX = 0;
-		clientY = 0;
-		ctrlKey = false;
-		layerX = 0;
-		layerY = 0;
-		metaKey = false;
-		movementX = 0;
-		movementY = 0;
-		offsetX = 0;
-		offsetY = 0;
-		pageX = 0;
-		pageY = 0;
-		relatedTarget = "";
-		screenX = 0;
-		screenY = 0;
-		shiftKey = false;
-		mozPressure = 0.0;
-		mozInputSource = "";
-		webkitForce = 0;
-		x = 0;
-		y = 0;
 	}
 	
 	////// Static properties //////
@@ -52,53 +26,53 @@ public:
 	
 	////// Instance properties //////
 	// [MouseEvent.altKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/altKey
-	bool altKey;
+	bool altKey = false;
 	// [MouseEvent.button](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button
-	unsigned int button;
+	unsigned int button = 0;
 	// [MouseEvent.buttons](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/buttons
-	unsigned int buttons;
+	unsigned int buttons = 0;
 	// [MouseEvent.clientX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/clientX
-	unsigned int clientX;
+	unsigned int clientX = 0;
 	// [MouseEvent.clientY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/clientY
-	unsigned int clientY;
+	unsigned int clientY = 0;
 	// [MouseEvent.ctrlKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/ctrlKey
-	bool ctrlKey;
+	bool ctrlKey = false;
 	// [MouseEvent.layerX](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/layerX
-	int layerX;
+	int layerX = 0;
 	// [MouseEvent.layerY](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/layerY
-	int layerY;
+	int layerY = 0;
 	// [MouseEvent.metaKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/metaKey
-	bool metaKey;
+	bool metaKey = false;
 	// [MouseEvent.movementX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/movementX
-	int movementX;
+	int movementX = 0;
 	// [MouseEvent.movementY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/movementY
-	int movementY;
+	int movementY = 0;
 	// [MouseEvent.offsetX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/offsetX
-	int offsetX;
+	int offsetX = 0;
 	// [MouseEvent.offsetY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/offsetY
-	int offsetY;
+	int offsetY = 0;
 	// [MouseEvent.pageX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/pageX
-	int pageX;
+	int pageX = 0;
 	// [MouseEvent.pageY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/pageY
-	int pageY;
+	int pageY = 0;
 	// [MouseEvent.relatedTarget](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/relatedTarget
-	DKString relatedTarget;
+	DKString relatedTarget = "";
 	// [MouseEvent.screenX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/screenX
-	unsigned int screenX;
+	unsigned int screenX = 0;
 	// [MouseEvent.screenY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/screenY
-	unsigned int screenY;
+	unsigned int screenY = 0;
 	// [MouseEvent.shiftKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/shiftKey
-	bool shiftKey;
+	bool shiftKey = false;
 	// [MouseEvent.mozPressure](Non-standard)(Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/mozPressure
-	float mozPressure;
+	float mozPressure = 0.0;
 	// [MouseEvent.mozInputSource](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/mozInputSource
-	DKString mozInputSource;
+	DKString mozInputSource = "";
 	// [MouseEvent.webkitForce](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/webkitForce
-	unsigned int webkitForce;
+	unsigned int webkitForce = 0;
 	// [MouseEvent.x](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/x
-	unsigned int x;
+	unsigned int x = 0;
 	// [MouseEvent.y](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/y
-	unsigned int y;		
+	unsigned int y = 0;		
 	
 	
 	////// Instance methods //////
