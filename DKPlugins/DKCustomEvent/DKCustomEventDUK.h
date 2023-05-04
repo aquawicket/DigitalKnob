@@ -1,3 +1,6 @@
+// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/CustomEvent.idl
+// [SOURCE] https://dom.spec.whatwg.org/#interface-customevent
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent
 #if HAVE_DKDuktape
 
 #pragma once
@@ -7,34 +10,31 @@
 #include "DKDuktape/DKDuktape.h"
 
 
-// [INTERFACE] https://dom.spec.whatwg.org/#interface-customevent
-// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent
+// Source: DOM Standard (https://dom.spec.whatwg.org/)
+// [Exposed=*]
+// interface CustomEvent : Event {
 class DKCustomEventDUK : public DKObjectT<DKCustomEventDUK>
 {
 public:
 	bool Init(){
 		
-		////// Constructor //////
+		// constructor(DOMString type, optional CustomEventInit eventInitDict = {});
 		DKDuktape::AttachFunction("CPP_DKCustomEvent", 					DKCustomEventDUK::constructor);
-	
-	
-		////// Instance properties //////
+
+		// readonly attribute any detail;
 		DKDuktape::AttachFunction("CPP_DKCustomEvent_detail", 			DKCustomEventDUK::detail);
 
-		
-		////// Instance methods //////
+		// undefined initCustomEvent(DOMString type, optional boolean bubbles = false, optional boolean cancelable = false, optional any detail = null); // legacy
 		DKDuktape::AttachFunction("CPP_DKCustomEvent_initCustomEvent", 	DKCustomEventDUK::initCustomEvent);
 		
 	
-		////// Load .js files
+		////// Load .js files //////
 		DKClass::DKCreate("DKCustomEvent/DKCustomEventDUK.js");
 		
 		return true;
 	}
 	
-	
-	////// Constructor //////
-	// [CustomEvent()] https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent
+	// constructor(DOMString type, optional CustomEventInit eventInitDict = {});
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
@@ -46,9 +46,7 @@ public:
 		return true;
 	}
 	
-	
-	////// Instance properties //////
-	// [CustomEvent.detail](Read only) https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/detail
+	// readonly attribute any detail;
 	static int detail(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
@@ -63,9 +61,7 @@ public:
 		return true;
 	}
 
-
-	////// Instance methods //////
-	// [CustomEvent.initCustomEvent()](Deprecated)
+	// undefined initCustomEvent(DOMString type, optional boolean bubbles = false, optional boolean cancelable = false, optional any detail = null); // legacy
 	static int initCustomEvent(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		return DKDEPRECATED();
