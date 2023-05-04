@@ -1,3 +1,6 @@
+// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/Event.idl
+// [SOURCE] https://dom.spec.whatwg.org/#interface-event
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Event
 #if HAVE_DKDuktape
 
 #pragma once
@@ -6,61 +9,80 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-
-// [INTERFACE] https://dom.spec.whatwg.org/#interface-event
-// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Event
+// Source: DOM Standard (https://dom.spec.whatwg.org/)
+// [Exposed=*]
+// interface Event {
 class DKEventDUK : public DKObjectT<DKEventDUK>
 {
 public:
 	bool Init(){
 		
-		////// Constructor //////
-		DKDuktape::AttachFunction("CPP_DKEventDUK", DKEventDUK::constructor);
+		// constructor(DOMString type, optional EventInit eventInitDict = {});
+		DKDuktape::AttachFunction("CPP_DKEventDUK", DKEventDUK::constructor); 
 		
-		
-		////// Instance properties //////
-		DKDuktape::AttachFunction("CPP_DKEventDUK_bubbles", DKEventDUK::bubbles);
-		DKDuktape::AttachFunction("CPP_DKEventDUK_cancelable", DKEventDUK::cancelable);
-		DKDuktape::AttachFunction("CPP_DKEventDUK_composed", DKEventDUK::composed);
-		DKDuktape::AttachFunction("CPP_DKEventDUK_currentTarget", DKEventDUK::currentTarget);
-		DKDuktape::AttachFunction("CPP_DKEventDUK_defaultPrevented", DKEventDUK::defaultPrevented);
-		DKDuktape::AttachFunction("CPP_DKEventDUK_eventPhase", DKEventDUK::eventPhase);
-		DKDuktape::AttachFunction("CPP_DKEventDUK_isTrusted", DKEventDUK::isTrusted);
-		DKDuktape::AttachFunction("CPP_DKEventDUK_target", DKEventDUK::target);
-		DKDuktape::AttachFunction("CPP_DKEventDUK_timeStamp", DKEventDUK::timeStamp);
+		// readonly attribute DOMString type;
 		DKDuktape::AttachFunction("CPP_DKEventDUK_type", DKEventDUK::type);
 		
+		// readonly attribute EventTarget? target;
+		DKDuktape::AttachFunction("CPP_DKEventDUK_target", DKEventDUK::target);
 		
-		////// Legacy and non-standard properties //////
-		DKDuktape::AttachFunction("CPP_DKEventDUK_cancelBubble", DKEventDUK::cancelBubble);
-		DKDuktape::AttachFunction("CPP_DKEventDUK_explicitOriginalTarget", DKEventDUK::explicitOriginalTarget);
-		DKDuktape::AttachFunction("CPP_DKEventDUK_originalTarget", DKEventDUK::originalTarget);
-		DKDuktape::AttachFunction("CPP_DKEventDUK_returnValue", DKEventDUK::returnValue);
-		DKDuktape::AttachFunction("CPP_DKEventDUK_scoped", DKEventDUK::scoped);
+		// readonly attribute EventTarget? srcElement; // legacy
+		DKDuktape::AttachFunction("CPP_DKEventDUK_srcElement", DKEventDUK::srcElement);
 		
-
-		////// Instance methods //////
+		// readonly attribute EventTarget? currentTarget;
+		DKDuktape::AttachFunction("CPP_DKEventDUK_currentTarget", DKEventDUK::currentTarget);
+		
+		// sequence<EventTarget> composedPath();
 		DKDuktape::AttachFunction("CPP_DKEventDUK_composedPath", DKEventDUK::composedPath);
-		DKDuktape::AttachFunction("CPP_DKEventDUK_preventDefault", DKEventDUK::preventDefault);
-		DKDuktape::AttachFunction("CPP_DKEventDUK_stopImmediatePropagation", DKEventDUK::stopImmediatePropagation);
+		
+		// const unsigned short NONE = 0;
+	
+		// const unsigned short CAPTURING_PHASE = 1;
+	
+		// const unsigned short AT_TARGET = 2;
+	
+		// const unsigned short BUBBLING_PHASE = 3;
+		
+		// readonly attribute unsigned short eventPhase;
+		DKDuktape::AttachFunction("CPP_DKEventDUK_eventPhase", DKEventDUK::eventPhase);
+		
+		// undefined stopPropagation();
 		DKDuktape::AttachFunction("CPP_DKEventDUK_stopPropagation", DKEventDUK::stopPropagation);
 		
+		// attribute boolean cancelBubble; // legacy alias of .stopPropagation()
+		DKDuktape::AttachFunction("CPP_DKEventDUK_cancelBubble", DKEventDUK::cancelBubble);
 		
-		////// Deprecated methods //////
+		// undefined stopImmediatePropagation();
+		DKDuktape::AttachFunction("CPP_DKEventDUK_stopImmediatePropagation", DKEventDUK::stopImmediatePropagation);
+		
+		// readonly attribute boolean bubbles;
+		DKDuktape::AttachFunction("CPP_DKEventDUK_bubbles", DKEventDUK::bubbles);
+		
+		// readonly attribute boolean cancelable;
+		DKDuktape::AttachFunction("CPP_DKEventDUK_cancelable", DKEventDUK::cancelable);
+		
+		// attribute boolean returnValue;  // legacy
+		DKDuktape::AttachFunction("CPP_DKEventDUK_returnValue", DKEventDUK::returnValue);
+		
+		// undefined preventDefault();
+		DKDuktape::AttachFunction("CPP_DKEventDUK_preventDefault", DKEventDUK::preventDefault);
+		
+		// readonly attribute boolean defaultPrevented;
+		DKDuktape::AttachFunction("CPP_DKEventDUK_defaultPrevented", DKEventDUK::defaultPrevented);
+		
+		// readonly attribute boolean composed;
+		DKDuktape::AttachFunction("CPP_DKEventDUK_composed", DKEventDUK::composed);
+		
+		// [LegacyUnforgeable] readonly attribute boolean isTrusted;
+		DKDuktape::AttachFunction("CPP_DKEventDUK_isTrusted", DKEventDUK::isTrusted);
+		
+		// readonly attribute DOMHighResTimeStamp timeStamp;
+		DKDuktape::AttachFunction("CPP_DKEventDUK_timeStamp", DKEventDUK::timeStamp);
+		
+		// undefined initEvent(DOMString type, optional boolean bubbles = false, optional boolean cancelable = false); // legacy
 		DKDuktape::AttachFunction("CPP_DKEventDUK_initEvent", DKEventDUK::initEvent);
 		
 		
-		////// Events //////
-		// [afterscriptexecute] https://developer.mozilla.org/en-US/docs/Web/API/Element/afterscriptexecute_event
-		// [beforematch] https://developer.mozilla.org/en-US/docs/Web/API/Element/beforematch_event
-		// [beforescriptexecute] https://developer.mozilla.org/en-US/docs/Web/API/Element/beforescriptexecute_event
-		// [error] https://developer.mozilla.org/en-US/docs/Web/API/Element/error_event
-		// [fullscreenchange] https://developer.mozilla.org/en-US/docs/Web/API/Element/fullscreenchange_event
-		// [fullscreenerror] https://developer.mozilla.org/en-US/docs/Web/API/Element/fullscreenerror_event
-		// [scroll] https://developer.mozilla.org/en-US/docs/Web/API/Element/scroll_event
-		// [scrollend] https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollend_event
-		
-			
 		////// Load .js files
 		DKClass::DKCreate("DKEvent/DKEventDUK.js");
 		
@@ -68,8 +90,7 @@ public:
 	}
 	
 	
-	////// Constructor //////
-	// [Event()] https://developer.mozilla.org/en-US/docs/Web/API/Event/Event
+	// constructor(DOMString type, optional EventInit eventInitDict = {});
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
@@ -81,9 +102,84 @@ public:
 		return true;
 	}
 	
+	// readonly attribute DOMString type;
+	static int type(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString eventAddress = duk_require_string(ctx, 0);
+		DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
+		duk_push_string(ctx, event->type.c_str());	
+		return true;
+	}
 	
-	////// Instance properties //////
-	// [Event.bubbles](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/bubbles
+	// readonly attribute EventTarget? target;
+	static int target(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString eventAddress = duk_require_string(ctx, 0);
+		DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
+		duk_push_string(ctx, event->target.c_str());	
+		return true;
+	}
+	
+	// readonly attribute EventTarget? srcElement; // legacy
+	static int srcElement(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString eventAddress = duk_require_string(ctx, 0);
+		DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
+		duk_push_string(ctx, event->srcElement.c_str());	
+		return true;
+	}
+	
+	// readonly attribute EventTarget? currentTarget;
+	static int currentTarget(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString eventAddress = duk_require_string(ctx, 0);
+		DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
+		duk_push_string(ctx, event->currentTarget.c_str());	
+		return true;
+	}
+	
+	// sequence<EventTarget> composedPath();
+	static int composedPath(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		return DKTODO();
+	}
+	
+	// const unsigned short NONE = 0;
+	
+	// const unsigned short CAPTURING_PHASE = 1;
+	
+	// const unsigned short AT_TARGET = 2;
+	
+	// const unsigned short BUBBLING_PHASE = 3;
+	
+	// readonly attribute unsigned short eventPhase;
+	static int eventPhase(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString eventAddress = duk_require_string(ctx, 0);
+		DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
+		duk_push_number(ctx, event->eventPhase);	
+		return true;
+	}
+	
+	// undefined stopPropagation();
+	static int stopPropagation(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		return DKTODO();
+	}
+	
+	// attribute boolean cancelBubble; // legacy alias of .stopPropagation()
+	static int cancelBubble(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		return DKDEPRECATED();
+	}
+	
+	// undefined stopImmediatePropagation();
+	static int stopImmediatePropagation(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		return DKTODO();
+	}
+	
+	// readonly attribute boolean bubbles;
 	static int bubbles(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
@@ -93,7 +189,8 @@ public:
 		duk_push_boolean(ctx, event->bubbles);	
 		return true;
 	}
-	// [Event.cancelable](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelable
+	
+	// readonly attribute boolean cancelable;
 	static int cancelable(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
@@ -103,7 +200,29 @@ public:
 		duk_push_boolean(ctx, event->cancelable);	
 		return true;
 	}
-	// [Event.composed](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/composed
+	
+	// attribute boolean returnValue;  // legacy
+	static int returnValue(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		return DKDEPRECATED();
+	}
+	
+	// undefined preventDefault();
+	static int preventDefault(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		return DKTODO();
+	}
+	
+	// readonly attribute boolean defaultPrevented;
+	static int defaultPrevented(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString eventAddress = duk_require_string(ctx, 0);
+		DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
+		duk_push_boolean(ctx, event->defaultPrevented);	
+		return true;
+	}
+	
+	// readonly attribute boolean composed;
 	static int composed(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
@@ -113,31 +232,8 @@ public:
 		duk_push_boolean(ctx, event->composed);	
 		return true;
 	}
-	// [Event.currentTarget](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/currentTarget
-	static int currentTarget(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
-		duk_push_string(ctx, event->currentTarget.c_str());	
-		return true;
-	}
-	// [Event.defaultPrevented](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/defaultPrevented
-	static int defaultPrevented(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
-		duk_push_boolean(ctx, event->defaultPrevented);	
-		return true;
-	}
-	// [Event.eventPhase](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/eventPhase
-	static int eventPhase(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
-		duk_push_number(ctx, event->eventPhase);	
-		return true;
-	}
-	// [Event.isTrusted](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
+	
+	// [LegacyUnforgeable] readonly attribute boolean isTrusted;
 	static int isTrusted(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
@@ -145,15 +241,8 @@ public:
 		duk_push_boolean(ctx, event->isTrusted);	
 		return true;
 	}
-	// [Event.target](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/target
-	static int target(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
-		duk_push_string(ctx, event->target.c_str());	
-		return true;
-	}
-	// [Event.timeStamp](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/timeStamp
+	
+	// readonly attribute DOMHighResTimeStamp timeStamp;
 	static int timeStamp(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
@@ -161,74 +250,12 @@ public:
 		duk_push_number(ctx, event->timeStamp);	
 		return true;
 	}
-	// [Event.type](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/type
-	static int type(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
-		duk_push_string(ctx, event->type.c_str());	
-		return true;
-	}
 	
-	
-	////// Legacy and non-standard properties //////
-	// [Event.cancelBubble](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelBubble
-	static int cancelBubble(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		return DKDEPRECATED();
-	}
-	// [Event.explicitOriginalTarget](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/explicitOriginalTarget
-	static int explicitOriginalTarget(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		return DKTODO();
-	}
-	// [Event.originalTarget](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/originalTarget
-	static int originalTarget(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		return DKTODO();
-	}
-	// [Event.returnValue](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/returnValue
-	static int returnValue(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		return DKDEPRECATED();
-	}
-	// [Event.scoped](Read only)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/scoped
-	static int scoped(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		return DKDEPRECATED();
-	}
-	
-	
-	////// Instance methods //////
-	// [Event.composedPath()] https://developer.mozilla.org/en-US/docs/Web/API/Event/composedPath
-	static int composedPath(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		return DKTODO();
-	}
-	// [Event.preventDefault()] https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault
-	static int preventDefault(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		return DKTODO();
-	}
-	// [Event.stopImmediatePropagation()] https://developer.mozilla.org/en-US/docs/Web/API/Event/stopImmediatePropagation
-	static int stopImmediatePropagation(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		return DKTODO();
-	}
-	// [Event.stopPropagation()] https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation
-	static int stopPropagation(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		return DKTODO();
-	}
-	
-	
-	////// Deprecated methods //////
-	// [Event.initEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/initEvent
+	// undefined initEvent(DOMString type, optional boolean bubbles = false, optional boolean cancelable = false); // legacy
 	static int initEvent(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		return DKDEPRECATED();
 	}
-
 };
 REGISTER_OBJECT(DKEventDUK, true)
 
