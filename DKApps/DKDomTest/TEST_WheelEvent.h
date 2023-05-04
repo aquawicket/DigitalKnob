@@ -26,13 +26,13 @@ public:
 	static void printWheelEventProperties(DKWheelEvent& wheelevent){
 		DKDEBUGFUNC(wheelevent);
 		////// Instance properties //////
-		DKINFO("wheelevent.deltaX = "		+toSring(wheelevent.deltaX)		+"\n");
-		DKINFO("wheelevent.deltaY = "		+toSring(wheelevent.deltaY)		+"\n");
-		DKINFO("wheelevent.deltaZ = "		+toSring(wheelevent.deltaZ)		+"\n");
-		DKINFO("wheelevent.deltaMode = "	+toSring(wheelevent.deltaMode)	+"\n");
-		DKINFO("wheelevent.wheelDelta = "	+toSring(wheelevent.wheelDelta)	+"\n");
-		DKINFO("wheelevent.wheelDeltaX = "	+toSring(wheelevent.wheelDeltaX)+"\n");
-		DKINFO("wheelevent.wheelDeltaY = "	+toSring(wheelevent.wheelDeltaY)+"\n");
+		DKINFO("wheelevent.deltaX = "		+toString(wheelevent.deltaX)		+"\n");
+		DKINFO("wheelevent.deltaY = "		+toString(wheelevent.deltaY)		+"\n");
+		DKINFO("wheelevent.deltaZ = "		+toString(wheelevent.deltaZ)		+"\n");
+		DKINFO("wheelevent.deltaMode = "	+toString(wheelevent.deltaMode)		+"\n");
+		DKINFO("wheelevent.wheelDelta = "	+toString(wheelevent.wheelDelta)	+"\n");
+		DKINFO("wheelevent.wheelDeltaX = "	+toString(wheelevent.wheelDeltaX)	+"\n");
+		DKINFO("wheelevent.wheelDeltaY = "	+toString(wheelevent.wheelDeltaY)	+"\n");
 	}
 
 	static bool onwheelevent(DKEvent& event){
