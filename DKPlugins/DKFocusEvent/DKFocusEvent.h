@@ -1,4 +1,5 @@
-// [IDL] https://w3c.github.io/uievents/#events-focusevent
+// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/FocusEvent.idl
+// [SOURCE] https://w3c.github.io/uievents/#events-focusevent
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent
 #pragma once
 #ifndef DKFocusEvent_H
@@ -6,30 +7,22 @@
 
 #include "DKUIEvent/DKUIEvent.h"
 
-
+// Source: UI Events (https://www.w3.org/TR/uievents/)
+// [Exposed=Window]
+// interface FocusEvent : UIEvent {
 class DKFocusEvent : public DKUIEvent
 {
 public:
-	////// Constructor //////
-	// [FocusEvent()] https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent/FocusEvent
-	DKFocusEvent(DKString _type, DKString _options) : DKUIEvent(_type, _options) {
-		DKINFO("DKFocusEvent("+_type+", "+_options+") \n");
+	//constructor(DOMString type, optional FocusEventInit eventInitDict = {});
+	DKFocusEvent(DKString _type, DKString _eventInitDict) : DKUIEvent(_type, _eventInitDict) { // [FocusEvent()] https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent/FocusEvent
+		DKINFO("DKFocusEvent("+_type+", "+_eventInitDict+") \n");
 		
 		eventClass = "FocusEvent";
 		eventAddress = pointerToAddress(this);
 	}
 	
-	
-	////// Instance properties //////
-	// [FocusEvent.relatedTarget] https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent/relatedTarget
-	DKString relatedTarget = "";
-
-	
-	////// Events //////
-	// [blur] https://developer.mozilla.org/en-US/docs/Web/API/Element/blur_event
-	// [focus] https://developer.mozilla.org/en-US/docs/Web/API/Element/focus_event
-	// [focusin] https://developer.mozilla.org/en-US/docs/Web/API/Element/focusin_event
-	// [focusout] https://developer.mozilla.org/en-US/docs/Web/API/Element/focusout_event
+	//readonly attribute EventTarget? relatedTarget;
+	DKString relatedTarget = ""; // [FocusEvent.relatedTarget] https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent/relatedTarget
 };
 
 
