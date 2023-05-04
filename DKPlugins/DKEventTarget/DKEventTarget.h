@@ -82,8 +82,8 @@ public:
 	
 	////// DK properties //////	
 	static std::vector<EventObject> events;
-	DKString eventTargetClass;
-	DKString eventTargetAddress;
+	DKString eventTargetClass = "";
+	DKString eventTargetAddress = "";
 };
 
 
