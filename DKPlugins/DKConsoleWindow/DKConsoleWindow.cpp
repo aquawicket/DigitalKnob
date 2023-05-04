@@ -1140,8 +1140,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 			mousemove_event.clientX = clientX;
 			mousemove_event.clientY = clientY;
 			mousemove_event.ctrlKey = ctrlKey;
-			mousemove_event.layerX = layerX;
-			mousemove_event.layerY = layerY;
+			//mousemove_event.layerX = layerX;
+			//mousemove_event.layerY = layerY;
 			mousemove_event.metaKey = metaKey;
 			mousemove_event.movementX = movementX;
 			mousemove_event.movementY = movementY;
@@ -1153,9 +1153,9 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 			mousemove_event.screenX = screenX;
 			mousemove_event.screenY = screenY;
 			mousemove_event.shiftKey = shiftKey;
-			mousemove_event.mozPressure = mozPressure;
-			mousemove_event.mozInputSource = mozInputSource;
-			mousemove_event.webkitForce = webkitForce;
+			//mousemove_event.mozPressure = mozPressure;
+			//mousemove_event.mozInputSource = mozInputSource;
+			//mousemove_event.webkitForce = webkitForce;
 			mousemove_event.x = x;
 			mousemove_event.y = y;
 			dispatchEvent(mousemove_event);
