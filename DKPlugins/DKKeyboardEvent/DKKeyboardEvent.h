@@ -1,4 +1,5 @@
-// [IDL] https://w3c.github.io/uievents/#events-keyboardevents
+// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/KeyboardEvent.idl
+// [SOURCE] https://w3c.github.io/uievents/#events-keyboardevents
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent
 #pragma once
 #ifndef DKKeyboardEvent_H
@@ -7,90 +8,87 @@
 #include "DKUIEvent/DKUIEvent.h"
 
 
+// Source: UI Events (https://www.w3.org/TR/uievents/)
+// [Exposed=Window]
+// interface KeyboardEvent : UIEvent {
 class DKKeyboardEvent : public DKUIEvent
 {
 public:
-	////// Constructor //////
-	// [KeyboardEvent()] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/KeyboardEvent
-	DKKeyboardEvent(DKString _type, DKString _options) : DKUIEvent(_type, _options) {
-		DKINFO("DKKeyboardEvent("+_type+", "+_options+") \n");
+	// constructor(DOMString type, optional KeyboardEventInit eventInitDict = {});
+	DKKeyboardEvent(DKString _type, DKString _eventInitDict) : DKUIEvent(_type, _eventInitDict) { // [KeyboardEvent()] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/KeyboardEvent
+		DKINFO("DKKeyboardEvent("+_type+", "+_eventInitDict+") \n");
 		
 		eventClass = "KeyboardEvent";
 		eventAddress = pointerToAddress(this);
 	}
 	
+	// KeyLocationCode
+	// const unsigned long DOM_KEY_LOCATION_STANDARD = 0x00;
 	
-	////// Constants //////
-	////// Keyboard locations //////
-	// [DOM_KEY_LOCATION_STANDARD]	0x00 https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent#keyboard_locations
-	// [DOM_KEY_LOCATION_LEFT]		0x01 https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent#keyboard_locations
-	// [DOM_KEY_LOCATION_RIGHT]		0x02 https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent#keyboard_locations
-	// [DOM_KEY_LOCATION_NUMPAD]	0x03 https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent#keyboard_locations
+	// const unsigned long DOM_KEY_LOCATION_LEFT = 0x01;
 	
+	// const unsigned long DOM_KEY_LOCATION_RIGHT = 0x02;
 	
-	////// Instance properties //////
-	// [KeyboardEvent.altKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/altKey
-	bool altKey = false;
-	// [KeyboardEvent.code](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code
-	DKString code = "";
-	// [KeyboardEvent.ctrlKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/ctrlKey
-	bool ctrlKey = false;
-	// [KeyboardEvent.isComposing](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/isComposing
-	bool isComposing = false;
-	// [KeyboardEvent.key](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key
-	DKString key = "";
-	// [KeyboardEvent.locale](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/locale
-	DKString locale = "";
-	// [KeyboardEvent.location](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/location
-	unsigned int location = 0;
-	// [KeyboardEvent.metaKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/metaKey
-	bool metaKey = false;
-	// [KeyboardEvent.repeat](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/repeat
-	bool repeat = false;
-	// [KeyboardEvent.shiftKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/shiftKey
-	bool shiftKey = false;
+	// const unsigned long DOM_KEY_LOCATION_NUMPAD = 0x03;
 	
+	// readonly attribute DOMString key;
+	DKString key = ""; // [KeyboardEvent.key](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key
 	
-	////// Instance methods //////
-	// [KeyboardEvent.getModifierState()] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/getModifierState
-	void getModifierState() {
+	// readonly attribute DOMString code;
+	DKString code = ""; // [KeyboardEvent.code](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code
+	
+	// readonly attribute unsigned long location;
+	unsigned int location = 0; // [KeyboardEvent.location](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/location
+	
+	// readonly attribute boolean ctrlKey;
+	bool ctrlKey = false; // [KeyboardEvent.ctrlKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/ctrlKey
+	
+	// readonly attribute boolean shiftKey;
+	bool shiftKey = false; // [KeyboardEvent.shiftKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/shiftKey
+	
+	// readonly attribute boolean altKey;
+	bool altKey = false; // [KeyboardEvent.altKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/altKey
+	
+	// readonly attribute boolean metaKey;
+	bool metaKey = false; // [KeyboardEvent.metaKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/metaKey
+  
+	// readonly attribute boolean repeat;
+	bool repeat = false; // [KeyboardEvent.repeat](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/repeat
+	
+	// readonly attribute boolean isComposing;
+	bool isComposing = false; // [KeyboardEvent.isComposing](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/isComposing
+	
+	// boolean getModifierState(DOMString keyArg);
+	void getModifierState() { // [KeyboardEvent.getModifierState()] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/getModifierState
 		DKTODO();
 	}
 	
+	// Source: UI Events (https://www.w3.org/TR/uievents/)
+	// partial interface KeyboardEvent {
+	//		// Originally introduced (and deprecated) in this specification
+	//		undefined initKeyboardEvent(DOMString typeArg,
+	// 		optional boolean bubblesArg = false,
+	// 		optional boolean cancelableArg = false,
+	//		optional Window? viewArg = null,
+	//		optional DOMString keyArg = "",
+	//		optional unsigned long locationArg = 0,
+	//		optional boolean ctrlKey = false,
+	//		optional boolean altKey = false,
+	//		optional boolean shiftKey = false,
+	//		optional boolean metaKey = false);
+			void initKeyboardEvent() { // [KeyboardEvent.initKeyboardEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/initKeyboardEvent
+				DKDEPRECATED();
+			}
+	//};
 	
-	////// Obsolete methods //////
-	// [KeyboardEvent.initKeyEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/initKeyEvent
-	void initKeyEvent() {
-		DKDEPRECATED();
-	}
-	// [KeyboardEvent.initKeyboardEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/initKeyboardEvent
-	void initKeyboardEvent() {
-		DKDEPRECATED();
-	}
-	
-	
-	////// Obsolete properties //////
-	// [KeyboardEvent.char](Non-standard)(Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/char
-	DKString _char = "";
-	// [KeyboardEvent.charCode](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/charCode
-	unsigned int charCode = 0;
-	// [KeyboardEvent.keyCode](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode
-	unsigned int keyCode = 0;
-	// [KeyboardEvent.keyIdentifier](Non-standard)(Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyIdentifier
-	DKString keyIdentifier = "";
-	// [KeyboardEvent.keyLocation](Non-standard)(Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyLocation
-	unsigned int keyLocation = 0;
-	// [KeyboardEvent.which](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/which
-	unsigned int which = 0;
-	
-	
-	////// Events //////
-	// [keydown] https://developer.mozilla.org/en-US/docs/Web/API/Element/keydown_event
-	// [keyup] https://developer.mozilla.org/en-US/docs/Web/API/Element/keyup_event
-	
-	
-	////// Obsolete events //////
-	// [keypress](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Element/keypress_event
+	// Source: UI Events (https://www.w3.org/TR/uievents/)
+	// partial interface KeyboardEvent {
+	//		// The following support legacy user agents
+	//		readonly attribute unsigned long charCode;
+			unsigned int charCode = 0; // [KeyboardEvent.charCode](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/charCode
+	//		readonly attribute unsigned long keyCode;
+			unsigned int keyCode = 0; // [KeyboardEvent.keyCode](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode
+	};
 };
 
 

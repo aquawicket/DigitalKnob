@@ -31,21 +31,21 @@ public:
 		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_layerX", 		DKMouseEventDUK::layerX); 			// [MouseEvent.layerX](Non-standard)(Read only)
 		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_layerY", 		DKMouseEventDUK::layerY); 			// [MouseEvent.layerY](Non-standard)(Read only)
 		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_metaKey", 		DKMouseEventDUK::metaKey); 			// [MouseEvent.metaKey](Read only)
-		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_movementX",		DKMouseEventDUK::movementX);			// [MouseEvent.movementX](Read only)
+		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_movementX",		DKMouseEventDUK::movementX);		// [MouseEvent.movementX](Read only)
 		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_movementY",		DKMouseEventDUK::movementY); 		// [MouseEvent.movementY](Read only)
 		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_offsetX", 		DKMouseEventDUK::offsetX); 			// [MouseEvent.offsetX](Read only)
 		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_offsetY", 		DKMouseEventDUK::offsetY); 			// [MouseEvent.offsetY](Read only)
-		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_pageX", 		DKMouseEventDUK::pageX); 			// [MouseEvent.pageX](Read only)
+		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_pageX", 			DKMouseEventDUK::pageX); 			// [MouseEvent.pageX](Read only)
 		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_pageY",			DKMouseEventDUK::pageY); 			// [MouseEvent.pageY](Read only)
-		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_relatedTarget", DKMouseEventDUK::relatedTarget);		// [MouseEvent.relatedTarget](Read only)
+		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_relatedTarget", 	DKMouseEventDUK::relatedTarget);	// [MouseEvent.relatedTarget](Read only)
 		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_screenX",		DKMouseEventDUK::screenX); 			// [MouseEvent.screenX](Read only)
 		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_screenY", 		DKMouseEventDUK::screenY); 			// [MouseEvent.screenY](Read only)
-		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_shiftKey", 		DKMouseEventDUK::shiftKey); 			// [MouseEvent.shiftKey](Read only)
-		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_mozPressure", 	DKMouseEventDUK::mozPressure); 		// [MouseEvent.mozPressure](Non-standard)(Deprecated)(Read only)
-		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_mozInputSource",DKMouseEventDUK::mozInputSource);	// [MouseEvent.mozInputSource](Non-standard)(Read only)
-		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_webkitForce", 	DKMouseEventDUK::webkitForce); 		// [MouseEvent.webkitForce](Non-standard)(Read only)
-		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_x", 			DKMouseEventDUK::x); 				// [MouseEvent.x](Read only)
-		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_y", 			DKMouseEventDUK::y); 				// [MouseEvent.y](Read only)
+		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_shiftKey", 		DKMouseEventDUK::shiftKey); 		// [MouseEvent.shiftKey](Read only)
+		//DKDuktape::AttachFunction("CPP_DKMouseEventDUK_mozPressure", 	DKMouseEventDUK::mozPressure); 		// [MouseEvent.mozPressure](Non-standard)(Deprecated)(Read only)
+		//DKDuktape::AttachFunction("CPP_DKMouseEventDUK_mozInputSource",	DKMouseEventDUK::mozInputSource);	// [MouseEvent.mozInputSource](Non-standard)(Read only)
+		//DKDuktape::AttachFunction("CPP_DKMouseEventDUK_webkitForce", 	DKMouseEventDUK::webkitForce); 		// [MouseEvent.webkitForce](Non-standard)(Read only)
+		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_x", 				DKMouseEventDUK::x); 				// [MouseEvent.x](Read only)
+		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_y", 				DKMouseEventDUK::y); 				// [MouseEvent.y](Read only)
 	
 
 		////// Instance methods //////
@@ -262,6 +262,7 @@ public:
 		duk_push_boolean(ctx, event->shiftKey);	
 		return true;
 	}
+	/*
 	// [MouseEvent.mozPressure](Non-standard)(Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/mozPressure
 	static int mozPressure(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -286,6 +287,7 @@ public:
 		duk_push_uint(ctx, event->webkitForce);	
 		return true;
 	}
+	*/
 	// [MouseEvent.x](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/x
 	static int x(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
