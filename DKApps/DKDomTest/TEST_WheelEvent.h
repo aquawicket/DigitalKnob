@@ -12,8 +12,15 @@ class TEST_WheelEvent : public DKObjectT<TEST_WheelEvent>
 {
 public:
 	bool Init(){
+		DKDEBUGFUNC();
 		DKINFO("////// TEST_WheelEvent.h ////// \n");
-		return DKTODO();
+		
+		DKINFO("\n");
+		DKEventTarget myEventTarget;
+		myEventTarget.addEventListener("wheelevent", &TEST_WheelEvent::onwheelevent);
+		DKWheelEvent wheelevent("wheelevent", "");
+		myEventTarget.dispatchEvent(wheelevent);
+		return true;
 	}
 
 	static void printWheelEventProperties(DKWheelEvent& wheelevent){
