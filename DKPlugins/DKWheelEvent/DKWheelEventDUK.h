@@ -21,9 +21,9 @@ public:
 		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_deltaY", 		DKWheelEventDUK::deltaY); 		// [WheelEvent.deltaY](Read only)
 		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_deltaZ",		DKWheelEventDUK::deltaZ); 		// [WheelEvent.deltaZ](Read only)
 		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_deltaMode", 	DKWheelEventDUK::deltaMode); 	// [WheelEvent.deltaMode](Read only)
-		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_wheelDelta", 	DKWheelEventDUK::wheelDelta); 	// [WheelEvent.wheelDelta](Read only)(Deprecated)(Non-standard)
-		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_wheelDeltaX", 	DKWheelEventDUK::wheelDeltaX); 	// [WheelEvent.wheelDeltaX](Read only)(Deprecated)(Non-standard)
-		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_wheelDeltaY", 	DKWheelEventDUK::wheelDeltaY); 	// [WheelEvent.wheelDeltaY](Read only)(Deprecated)(Non-standard)
+		//DKDuktape::AttachFunction("CPP_DKWheelEventDUK_wheelDelta", 	DKWheelEventDUK::wheelDelta); 	// [WheelEvent.wheelDelta](Read only)(Deprecated)(Non-standard)
+		//DKDuktape::AttachFunction("CPP_DKWheelEventDUK_wheelDeltaX", 	DKWheelEventDUK::wheelDeltaX); 	// [WheelEvent.wheelDeltaX](Read only)(Deprecated)(Non-standard)
+		//DKDuktape::AttachFunction("CPP_DKWheelEventDUK_wheelDeltaY", 	DKWheelEventDUK::wheelDeltaY); 	// [WheelEvent.wheelDeltaY](Read only)(Deprecated)(Non-standard)
 	
 	
 		////// Events //////
@@ -93,6 +93,7 @@ public:
 		duk_push_uint(ctx, event->deltaMode);	
 		return true;
 	}
+	/*
 	// [WheelEvent.wheelDelta](Read only)(Deprecated)(Non-standard)
 	static int wheelDelta(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -117,6 +118,7 @@ public:
 		duk_push_int(ctx, event->wheelDeltaY);	
 		return DKDEPRECATED();
 	}
+	*/
 	
 };
 REGISTER_OBJECT(DKWheelEventDUK, true)
