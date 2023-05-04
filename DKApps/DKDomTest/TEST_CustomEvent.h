@@ -13,6 +13,7 @@ class TEST_CustomEvent : public DKObjectT<TEST_CustomEvent>
 {
 public:
 	bool Init(){
+		DKDEBUGFUNC();
 		DKINFO("////// TEST_CustomEvent.h ////// \n");
 		
 		DKINFO("\n");
@@ -25,7 +26,7 @@ public:
 	}
 
 	static void printCustomEventProperties(DKCustomEvent& customevent) {
-		DKDEBUGFUNC(customevent)
+		DKDEBUGFUNC(customevent);
 		////// Instance properties //////
 		DKINFO("customevent.detail = "	+toString(customevent.detail)	+"\n");
 	}
