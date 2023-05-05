@@ -1,167 +1,161 @@
-// [W3C] https://w3c.github.io/uievents/#events-mouseevents
+// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/MouseEvent.idl
+// [SOURCE] https://w3c.github.io/uievents/#events-mouseevents
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent
 
 
-// [MouseEvent()] https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/MouseEvent
-var MouseEvent = function MouseEvent(type, options, address) {
-	//console.log("MouseEvent("+type+","+options+","+address+")")
+// Source: UI Events (https://www.w3.org/TR/uievents/)
+// [Exposed=Window]
+// interface MouseEvent : UIEvent {
+// constructor(DOMString type, optional MouseEventInit eventInitDict = {});
+var MouseEvent = function MouseEvent(type, eventInitDict, address) {
+	//console.log("MouseEvent("+type+","+eventInitDict+","+address+")")
 	
 	if(address)
 		this.address = address
 	if(!this.address)
-		this.address = CPP_DKMouseEventDUK(type, options)
+		this.address = CPP_DKMouseEventDUK(type, eventInitDict)
 		
-	
-	////// Static properties //////
-	// [MouseEvent.WEBKIT_FORCE_AT_MOUSE_DOWN](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/WEBKIT_FORCE_AT_MOUSE_DOWN
-	// [MouseEvent.WEBKIT_FORCE_AT_FORCE_MOUSE_DOWN](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/WEBKIT_FORCE_AT_FORCE_MOUSE_DOWN
-	
-	
-	////// Instance properties //////
-	// [MouseEvent.altKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/altKey
-	Object.defineProperty(this, "altKey", {
-        get: function altKey() 		{ return CPP_DKMouseEventDUK_altKey(this.address) },
-		set: function altKey(flag)	{ return CPP_DKMouseEventDUK_altKey(this.address, flag) },
-		configurable: true,
-    })
-	// [MouseEvent.button](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button
-	Object.defineProperty(this, "button", {
-        get: function button() { return CPP_DKMouseEventDUK_button(this.address) },
-    })
-	// [MouseEvent.buttons](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/buttons
-	Object.defineProperty(this, "buttons", {
-        get: function buttons() { return CPP_DKMouseEventDUK_buttons(this.address) },
-    })
-	// [MouseEvent.clientX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/clientX
-	Object.defineProperty(this, "clientX", {
-        get: function clientX()		{ return CPP_DKMouseEventDUK_clientX(this.address) },
-		set: function clientX(num) 	{ return CPP_DKMouseEventDUK_clientX(this.address, num) },
-		configurable: true,
-    })
-	// [MouseEvent.clientY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/clientY
-	Object.defineProperty(this, "clientY", {
-        get: function clientY() 	{ return CPP_DKMouseEventDUK_clientY(this.address) },
-		set: function clientY(num) 	{ return CPP_DKMouseEventDUK_clientY(this.address, num) },
-		configurable: true,
-    })
-	// [MouseEvent.ctrlKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/ctrlKey
-	Object.defineProperty(this, "ctrlKey", {
-        get: function ctrlKey()		{ return CPP_DKMouseEventDUK_ctrlKey(this.address) },
-		set: function ctrlKey(flag)	{ return CPP_DKMouseEventDUK_ctrlKey(this.address, flag) },
-		configurable: true,
-    })
-	// [MouseEvent.layerX](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/layerX
-	Object.defineProperty(this, "layerX", {
-        get: function layerX() { return CPP_DKMouseEventDUK_layerX(this.address) },
-    })
-	// [MouseEvent.layerY](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/layerY
-	Object.defineProperty(this, "layerY", {
-        get: function layerY() { return CPP_DKMouseEventDUK_layerY(this.address) },
-    })
-	// [MouseEvent.metaKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/metaKey
-	Object.defineProperty(this, "metaKey", {
-        get: function metaKey() 	{ return CPP_DKMouseEventDUK_metaKey(this.address) },
-		set: function metaKey(flag) { return CPP_DKMouseEventDUK_metaKey(this.address, flag) },
-		configurable: true,
-    })
-	// [MouseEvent.movementX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/movementX
-	Object.defineProperty(this, "movementX", {
-        get: function movementX() { return CPP_DKMouseEventDUK_movementX(this.address) },
-    })
-	// [MouseEvent.movementY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/movementY
-	Object.defineProperty(this, "movementY", {
-        get: function movementY() { return CPP_DKMouseEventDUK_movementY(this.address) },
-    })
-	// [MouseEvent.offsetX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/offsetX
-	Object.defineProperty(this, "offsetX", {
-        get: function offsetX() { return CPP_DKMouseEventDUK_offsetX(this.address) },
-    })
-	// [MouseEvent.offsetY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/offsetY
-	Object.defineProperty(this, "offsetY", {
-        get: function offsetY() { return CPP_DKMouseEventDUK_offsetY(this.address) },
-    })
-	// [MouseEvent.pageX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/pageX
-	Object.defineProperty(this, "pageX", {
-        get: function pageX() { return CPP_DKMouseEventDUK_pageX(this.address) },
-    })
-	// [MouseEvent.pageY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/pageY
-	Object.defineProperty(this, "pageY", {
-        get: function pageY() { return CPP_DKMouseEventDUK_pageY(this.address) },
-    })
-	// [MouseEvent.relatedTarget](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/relatedTarget
-	Object.defineProperty(this, "relatedTarget", {
-        get: function relatedTarget() { return CPP_DKMouseEventDUK_relatedTarget(this.address) },
-    })
-	// [MouseEvent.screenX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/screenX
+	// readonly attribute long screenX;
 	Object.defineProperty(this, "screenX", {
         get: function screenX()		{ return CPP_DKMouseEventDUK_screenX(this.address) },
 		set: function screenX(num)	{ return CPP_DKMouseEventDUK_screenX(this.address, num) },
 		configurable: true,
     })
-	// [MouseEvent.screenY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/screenY
+	
+	// readonly attribute long screenY;
 	Object.defineProperty(this, "screenY", {
         get: function screenY() 	{ return CPP_DKMouseEventDUK_screenY(this.address) },
 		set: function screenY(num)	{ return CPP_DKMouseEventDUK_screenY(this.address, num) },
 		configurable: true,
     })
-	// [MouseEvent.shiftKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/shiftKey
+	
+	// readonly attribute long clientX;
+	Object.defineProperty(this, "clientX", {
+        get: function clientX()		{ return CPP_DKMouseEventDUK_clientX(this.address) },
+		set: function clientX(num) 	{ return CPP_DKMouseEventDUK_clientX(this.address, num) },
+		configurable: true,
+    })
+	
+	// readonly attribute long clientY;
+	Object.defineProperty(this, "clientY", {
+        get: function clientY() 	{ return CPP_DKMouseEventDUK_clientY(this.address) },
+		set: function clientY(num) 	{ return CPP_DKMouseEventDUK_clientY(this.address, num) },
+		configurable: true,
+    })
+	
+	// readonly attribute boolean ctrlKey;
+	Object.defineProperty(this, "ctrlKey", {
+        get: function ctrlKey()		{ return CPP_DKMouseEventDUK_ctrlKey(this.address) },
+		set: function ctrlKey(flag)	{ return CPP_DKMouseEventDUK_ctrlKey(this.address, flag) },
+		configurable: true,
+    })
+	
+	// readonly attribute boolean shiftKey;
 	Object.defineProperty(this, "shiftKey", {
         get: function shiftKey() 		{ return CPP_DKMouseEventDUK_shiftKey(this.address) },
 		set: function shiftKey(flag)	{ return CPP_DKMouseEventDUK_shiftKey(this.address, flag) },
 		configurable: true,
     })
-	// [MouseEvent.mozPressure](Non-standard)(Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/mozPressure
-	Object.defineProperty(this, "mozPressure", {
-        get: function mozPressure() { return CPP_DKMouseEventDUK_mozPressure(this.address) },
-    })
-	// [MouseEvent.mozInputSource](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/mozInputSource
-	Object.defineProperty(this, "mozInputSource", {
-        get: function mozInputSource() { return CPP_DKMouseEventDUK_mozInputSource(this.address) },
-    })
-	// [MouseEvent.webkitForce](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/webkitForce
-	Object.defineProperty(this, "webkitForce", {
-        get: function webkitForce() { return CPP_DKMouseEventDUK_webkitForce(this.address) },
-    })
-	// [MouseEvent.x](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/x
-	Object.defineProperty(this, "x", {
-        get: function x() { return CPP_DKMouseEventDUK_x(this.address) },
-    })
-	// [MouseEvent.y](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/y
-	Object.defineProperty(this, "y", {
-        get: function y() { return CPP_DKMouseEventDUK_y(this.address) },
+	
+	// readonly attribute boolean altKey;
+	Object.defineProperty(this, "altKey", {
+        get: function altKey() 		{ return CPP_DKMouseEventDUK_altKey(this.address) },
+		set: function altKey(flag)	{ return CPP_DKMouseEventDUK_altKey(this.address, flag) },
+		configurable: true,
     })
 	
-		
-    ////// Instance methods //////
-	// [MouseEvent.getModifierState()] https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/getModifierState
+	// readonly attribute boolean metaKey;
+	Object.defineProperty(this, "metaKey", {
+        get: function metaKey() 	{ return CPP_DKMouseEventDUK_metaKey(this.address) },
+		set: function metaKey(flag) { return CPP_DKMouseEventDUK_metaKey(this.address, flag) },
+		configurable: true,
+    })
+	
+	// readonly attribute short button;
+	Object.defineProperty(this, "button", {
+        get: function button() { return CPP_DKMouseEventDUK_button(this.address) },
+    })
+	
+	// readonly attribute unsigned short buttons;
+	Object.defineProperty(this, "buttons", {
+        get: function buttons() { return CPP_DKMouseEventDUK_buttons(this.address) },
+    })
+	
+	// readonly attribute EventTarget? relatedTarget;
+	Object.defineProperty(this, "relatedTarget", {
+        get: function relatedTarget() { return CPP_DKMouseEventDUK_relatedTarget(this.address) },
+    })
+	
+	// boolean getModifierState(DOMString keyArg);
 	MouseEvent.prototype.getModifierState = function getModifierState() {
 		CPP_DKMouseEventDUK_getModifierState(this.address)
     }
-	// [MouseEvent.initMouseEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/initMouseEvent
-	MouseEvent.prototype.initMouseEvent = function initMouseEvent() {
-		CPP_DKMouseEventDUK_initMouseEvent(this.address)
-    }
-
-
-	////// Events //////
-	// [auxclick] https://developer.mozilla.org/en-US/docs/Web/API/Element/auxclick_event
-	// [click] https://developer.mozilla.org/en-US/docs/Web/API/Element/click_event
-	// [contextmenu] https://developer.mozilla.org/en-US/docs/Web/API/Element/contextmenu_event
-	// [dblclick] https://developer.mozilla.org/en-US/docs/Web/API/Element/dblclick_event
-	// [DOMActivate](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Element/DOMActivate_event
-	// [mousedown] https://developer.mozilla.org/en-US/docs/Web/API/Element/mousedown_event
-	// [mouseenter] https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseenter_event
-	// [mouseleave] https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseleave_event
-	// [mousemove] https://developer.mozilla.org/en-US/docs/Web/API/Element/mousemove_event
-	// [mouseout] https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseout_event
-	// [mouseover] https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseover_event
-	// [mouseup] https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseup_event
-	// [webkitmouseforcechanged](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Element/webkitmouseforcechanged_event
-	// [webkitmouseforcedown](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Element/webkitmouseforcedown_event
-	// [webkitmouseforceup](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Element/webkitmouseforceup_event
-	// [webkitmouseforcewillbegin](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Element/webkitmouseforcewillbegin_event
 	
 	
+	// Source: CSSOM View Module (https://www.w3.org/TR/cssom-view-1/)
+	// partial interface MouseEvent {
+	//  	readonly attribute double pageX;
+			Object.defineProperty(this, "pageX", {
+				get: function pageX() { return CPP_DKMouseEventDUK_pageX(this.address) },
+			})
+	//  	readonly attribute double pageY;
+			Object.defineProperty(this, "pageY", {
+				get: function pageY() { return CPP_DKMouseEventDUK_pageY(this.address) },
+			})
+	//  	readonly attribute double x;
+			Object.defineProperty(this, "x", {
+				get: function x() { return CPP_DKMouseEventDUK_x(this.address) },
+			})
+	//  	readonly attribute double y;
+			Object.defineProperty(this, "y", {
+				get: function y() { return CPP_DKMouseEventDUK_y(this.address) },
+			})
+	//  	readonly attribute double offsetX; 
+			Object.defineProperty(this, "offsetX", {
+				get: function offsetX() { return CPP_DKMouseEventDUK_offsetX(this.address) },
+			})
+	//  	readonly attribute double offsetY;
+			Object.defineProperty(this, "offsetY", {
+				get: function offsetY() { return CPP_DKMouseEventDUK_offsetY(this.address) },
+			})	
+	// };
+		
+	// Source: Pointer Lock 2.0 (https://www.w3.org/TR/pointerlock-2/)
+	// partial interface MouseEvent {
+	//   	readonly attribute double movementX;
+			Object.defineProperty(this, "movementX", {
+				get: function movementX() { return CPP_DKMouseEventDUK_movementX(this.address) },
+			})
+	//   	readonly attribute double movementY;
+			Object.defineProperty(this, "movementY", {
+				get: function movementY() { return CPP_DKMouseEventDUK_movementY(this.address) },
+			})
+	// };
+		
+	// Source: UI Events (https://www.w3.org/TR/uievents/)
+	// partial interface MouseEvent {
+	//		Deprecated in this specification
+	//	  	undefined initMouseEvent(DOMString typeArg,
+	//		optional boolean bubblesArg = false,
+	//		optional boolean cancelableArg = false,
+	//		optional Window? viewArg = null,
+	//		optional long detailArg = 0,
+	//		optional long screenXArg = 0,
+	//		optional long screenYArg = 0,
+	//		optional long clientXArg = 0,
+	//		optional long clientYArg = 0,
+	//		optional boolean ctrlKeyArg = false,
+	//		optional boolean altKeyArg = false,
+	//		optional boolean shiftKeyArg = false,
+	//		optional boolean metaKeyArg = false,
+	//		optional short buttonArg = 0,
+	//		optional EventTarget? relatedTargetArg = null);
+			MouseEvent.prototype.initMouseEvent = function initMouseEvent() {
+				CPP_DKMouseEventDUK_initMouseEvent(this.address)
+			}
+	// };
+	
+
 	////// toString //////
 	if(this.toString() === "[object Object]")
 		this.toString = function(){ return "[object MouseEvent]" }
