@@ -1,3 +1,6 @@
+// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/InputEvent.idl
+// [SOURCE] https://w3c.github.io/uievents/#events-inputevents
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/InputEvent
 #pragma once
 #ifndef DKInputEventDUK_H
 #define DKInputEventDUK_H
@@ -5,43 +8,43 @@
 #include "DKDuktape/DKDuktape.h"
 
 
-// [W3C] https://w3c.github.io/uievents/#events-inputevents
-// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/InputEvent
+// Source: UI Events (https://www.w3.org/TR/uievents/)
+// [Exposed=Window]
+// interface InputEvent : UIEvent {
 class DKInputEventDUK : public DKObjectT<DKInputEventDUK>
 {
 public:
 	bool Init(){
 		
-		////// Constructor //////
-		DKDuktape::AttachFunction("CPP_DKInputEventDUK", DKInputEventDUK::constructor);
+		// constructor(DOMString type, optional InputEventInit eventInitDict = {});
+		DKDuktape::AttachFunction("CPP_DKInputEventDUK", 				DKInputEventDUK::constructor);
 	
-	
-		////// Instance properties //////
+		// readonly attribute DOMString? data;
 		DKDuktape::AttachFunction("CPP_DKInputEventDUK_data",			DKInputEventDUK::_data); //FIXME: data is already a member of DKObject
-		DKDuktape::AttachFunction("CPP_DKInputEventDUK_dataTransfer",	DKInputEventDUK::dataTransfer);
-		DKDuktape::AttachFunction("CPP_DKInputEventDUK_inputType",		DKInputEventDUK::inputType);
+		
+		// readonly attribute boolean isComposing;
 		DKDuktape::AttachFunction("CPP_DKInputEventDUK_isComposing", 	DKInputEventDUK::isComposing);
-
 		
-		////// Instance methods //////
-		// [InputEvent.getTargetRanges()] https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/getTargetRanges
-		DKDuktape::AttachFunction("CPP_DKInputEventDUK_getTargetRanges", DKInputEventDUK::getTargetRanges);
-
+		// readonly attribute DOMString inputType;
+		DKDuktape::AttachFunction("CPP_DKInputEventDUK_inputType",		DKInputEventDUK::inputType);
 		
-		////// Events //////
-		// [beforeinput] https://w3c.github.io/uievents/#event-type-beforeinput
-		// [input] https://developer.mozilla.org/en-US/docs/Web/API/Element/keyup_event
+		// Source: Input Events Level 2 (https://www.w3.org/TR/input-events-2/)
+		// partial interface InputEvent {
+		//    	readonly attribute DataTransfer? dataTransfer;
+				DKDuktape::AttachFunction("CPP_DKInputEventDUK_dataTransfer",	DKInputEventDUK::dataTransfer);
+		//    	sequence<StaticRange> getTargetRanges();
+				DKDuktape::AttachFunction("CPP_DKInputEventDUK_getTargetRanges", DKInputEventDUK::getTargetRanges);
+		// };
+		
 
-			
-		////// Load .js files
+		////// Load .js files //////
 		DKClass::DKCreate("DKInputEvent/DKInputEventDUK.js");
 		
 		return true;
 	}
 	
 	
-	////// Constructor //////
-	// [InputEvent()] https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/InputEvent
+	// constructor(DOMString type, optional InputEventInit eventInitDict = {});
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
@@ -53,10 +56,7 @@ public:
 		return true;
 	}
 	
-	
-	////// Instance properties //////
-	// [InputEvent.data](Read only) https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/data
-	//FIXME: data is already a member of DKObject
+	// readonly attribute DOMString? data;
 	static int _data(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
@@ -66,25 +66,8 @@ public:
 		duk_push_string(ctx, event->data.c_str());	
 		return true;
 	}
-	// [InputEvent.dataTransfer](Read only) https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/dataTransfer
-	static int dataTransfer(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKInputEvent* event = (DKInputEvent*)addressToPointer(eventAddress);
-		duk_push_string(ctx, event->dataTransfer.c_str());	
-		return true;
-	}
-	// [InputEvent.inputType](Read only) https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/inputType
-	static int inputType(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKInputEvent* event = (DKInputEvent*)addressToPointer(eventAddress);
-		if (duk_is_string(ctx, 1))
-			event->inputType = duk_to_string(ctx, 1);
-		duk_push_string(ctx, event->inputType.c_str());	
-		return true;
-	}
-	// [InputEvent.isComposing](Read only) https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/isComposing
+	
+	//readonly attribute boolean isComposing;
 	static int isComposing(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
@@ -94,15 +77,34 @@ public:
 		duk_push_boolean(ctx, event->isComposing);	
 		return true;
 	}
-
 	
-	////// Instance methods //////
-	// [InputEvent.getTargetRanges()] https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/getTargetRanges
-	static int getTargetRanges(duk_context* ctx){
+	//readonly attribute DOMString inputType;
+	static int inputType(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		return DKTODO();
+		DKString eventAddress = duk_require_string(ctx, 0);
+		DKInputEvent* event = (DKInputEvent*)addressToPointer(eventAddress);
+		if (duk_is_string(ctx, 1))
+			event->inputType = duk_to_string(ctx, 1);
+		duk_push_string(ctx, event->inputType.c_str());	
+		return true;
 	}
-
+	
+	// Source: Input Events Level 2 (https://www.w3.org/TR/input-events-2/)
+	// partial interface InputEvent {
+	//    	readonly attribute DataTransfer? dataTransfer;
+			static int dataTransfer(duk_context* ctx){
+				DKDEBUGFUNC(ctx);
+				DKString eventAddress = duk_require_string(ctx, 0);
+				DKInputEvent* event = (DKInputEvent*)addressToPointer(eventAddress);
+				duk_push_string(ctx, event->dataTransfer.c_str());	
+				return true;
+			}
+	//    	sequence<StaticRange> getTargetRanges();
+			static int getTargetRanges(duk_context* ctx){
+				DKDEBUGFUNC(ctx);
+				return DKTODO();
+			}
+	// };
 };
 REGISTER_OBJECT(DKInputEventDUK, true)
 
