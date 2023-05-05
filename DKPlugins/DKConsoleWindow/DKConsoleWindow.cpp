@@ -480,17 +480,10 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
 		keydown_event.ctrlKey = ctrlKey;
 		keydown_event.isComposing = isComposing;
 		keydown_event.key = key;
-		//keydown_event.locale = locale;
 		keydown_event.location = location;
 		keydown_event.metaKey = metaKey;
 		keydown_event.repeat = repeat;
 		keydown_event.shiftKey = shiftKey;
-		//keydown_event._char = _char;
-		//keydown_event.charCode = charCode;
-		//keydown_event.keyCode = keyCode;
-		//keydown_event.keyIdentifier = keyIdentifier;
-		//keydown_event.keyLocation = keyLocation;
-		//keydown_event.which = which;
 		dispatchEvent(keydown_event);
 
 		//Only fire keypress on alphanumeric keys.
@@ -502,17 +495,10 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
 		keypress_event.ctrlKey = ctrlKey;
 		keypress_event.isComposing = isComposing;
 		keypress_event.key = key;
-		//keypress_event.locale = locale;
 		keypress_event.location = location;
 		keypress_event.metaKey = metaKey;
 		keypress_event.repeat = repeat;
 		keypress_event.shiftKey = shiftKey;
-		//keydown_event._char = _char;
-		//keydown_event.charCode = charCode;
-		//keydown_event.keyCode = keyCode;
-		//keydown_event.keyIdentifier = keyIdentifier;
-		//keydown_event.keyLocation = keyLocation;
-		//keydown_event.which = which;
 		dispatchEvent(keypress_event);
     }
     else {
@@ -522,17 +508,10 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
 		keyup_event.ctrlKey = ctrlKey;
 		keyup_event.isComposing = isComposing;
 		keyup_event.key = key;
-		//keyup_event.locale = locale;
 		keyup_event.location = location;
 		keyup_event.metaKey = metaKey;
 		keyup_event.repeat = repeat;
 		keyup_event.shiftKey = shiftKey;
-		//keydown_event._char = _char;
-		//keydown_event.charCode = charCode;
-		//keydown_event.keyCode = keyCode;
-		//keydown_event.keyIdentifier = keyIdentifier;
-		//keydown_event.keyLocation = keyLocation;
-		//keydown_event.which = which;
 		dispatchEvent(keyup_event);
     }
 }
@@ -614,8 +593,6 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 					mousedown_event.clientX = clientX;
 					mousedown_event.clientY = clientY;
 					mousedown_event.ctrlKey = ctrlKey;
-					//mousedown_event.layerX = layerX;
-					//mousedown_event.layerY = layerY;
 					mousedown_event.metaKey = metaKey;
 					mousedown_event.movementX = movementX;
 					mousedown_event.movementY = movementY;
@@ -627,9 +604,6 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 					mousedown_event.screenX = screenX;
 					mousedown_event.screenY = screenY;
 					mousedown_event.shiftKey = shiftKey;
-					//mousedown_event.mozPressure = mozPressure;
-					//mousedown_event.mozInputSource = mozInputSource;
-					//mousedown_event.webkitForce = webkitForce;
 					mousedown_event.x = x;
 					mousedown_event.y = y;
 					dispatchEvent(mousedown_event);
@@ -648,8 +622,6 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				mouseup_event.clientX = clientX;
 				mouseup_event.clientY = clientY;
 				mouseup_event.ctrlKey = ctrlKey;
-				//mouseup_event.layerX = layerX;
-				//mouseup_event.layerY = layerY;
 				mouseup_event.metaKey = metaKey;
 				mouseup_event.movementX = movementX;
 				mouseup_event.movementY = movementY;
@@ -661,9 +633,6 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				mouseup_event.screenX = screenX;
 				mouseup_event.screenY = screenY;
 				mouseup_event.shiftKey = shiftKey;
-				//mouseup_event.mozPressure = mozPressure;
-				//mouseup_event.mozInputSource = mozInputSource;
-				//mouseup_event.webkitForce = webkitForce;
 				mouseup_event.x = x;
 				mouseup_event.y = y;
 				dispatchEvent(mouseup_event);
@@ -675,8 +644,6 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				click_event.clientX = clientX;
 				click_event.clientY = clientY;
 				click_event.ctrlKey = ctrlKey;
-				//click_event.layerX = layerX;
-				//click_event.layerY = layerY;
 				click_event.metaKey = metaKey;
 				click_event.movementX = movementX;
 				click_event.movementY = movementY;
@@ -688,9 +655,6 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				click_event.screenX = screenX;
 				click_event.screenY = screenY;
 				click_event.shiftKey = shiftKey;
-				//click_event.mozPressure = mozPressure;
-				//click_event.mozInputSource = mozInputSource;
-				//click_event.webkitForce = webkitForce;
 				click_event.x = x;
 				click_event.y = y;
 				dispatchEvent(click_event);
@@ -710,8 +674,6 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 					mousedown_event.clientX = clientX;
 					mousedown_event.clientY = clientY;
 					mousedown_event.ctrlKey = ctrlKey;
-					//mousedown_event.layerX = layerX;
-					//mousedown_event.layerY = layerY;
 					mousedown_event.metaKey = metaKey;
 					mousedown_event.movementX = movementX;
 					mousedown_event.movementY = movementY;
@@ -723,9 +685,6 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 					mousedown_event.screenX = screenX;
 					mousedown_event.screenY = screenY;
 					mousedown_event.shiftKey = shiftKey;
-					//mousedown_event.mozPressure = mozPressure;
-					//mousedown_event.mozInputSource = mozInputSource;
-					//mousedown_event.webkitForce = webkitForce;
 					mousedown_event.x = x;
 					mousedown_event.y = y;
 					dispatchEvent(mousedown_event);
@@ -744,8 +703,6 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				mouseup_event.clientX = clientX;
 				mouseup_event.clientY = clientY;
 				mouseup_event.ctrlKey = ctrlKey;
-				//mouseup_event.layerX = layerX;
-				//mouseup_event.layerY = layerY;
 				mouseup_event.metaKey = metaKey;
 				mouseup_event.movementX = movementX;
 				mouseup_event.movementY = movementY;
@@ -757,9 +714,6 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				mouseup_event.screenX = screenX;
 				mouseup_event.screenY = screenY;
 				mouseup_event.shiftKey = shiftKey;
-				//mouseup_event.mozPressure = mozPressure;
-				//mouseup_event.mozInputSource = mozInputSource;
-				//mouseup_event.webkitForce = webkitForce;
 				mouseup_event.x = x;
 				mouseup_event.y = y;
 				dispatchEvent(mouseup_event);
@@ -771,8 +725,6 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				contextmenu_event.clientX = clientX;
 				contextmenu_event.clientY = clientY;
 				contextmenu_event.ctrlKey = ctrlKey;
-				//contextmenu_event.layerX = layerX;
-				//contextmenu_event.layerY = layerY;
 				contextmenu_event.metaKey = metaKey;
 				contextmenu_event.movementX = movementX;
 				contextmenu_event.movementY = movementY;
@@ -784,9 +736,6 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				contextmenu_event.screenX = screenX;
 				contextmenu_event.screenY = screenY;
 				contextmenu_event.shiftKey = shiftKey;
-				//contextmenu_event.mozPressure = mozPressure;
-				//contextmenu_event.mozInputSource = mozInputSource;
-				//contextmenu_event.webkitForce = webkitForce;
 				contextmenu_event.x = x;
 				contextmenu_event.y = y;
 				dispatchEvent(contextmenu_event);
@@ -806,8 +755,6 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 					mousedown_event.clientX = clientX;
 					mousedown_event.clientY = clientY;
 					mousedown_event.ctrlKey = ctrlKey;
-					//mousedown_event.layerX = layerX;
-					//mousedown_event.layerY = layerY;
 					mousedown_event.metaKey = metaKey;
 					mousedown_event.movementX = movementX;
 					mousedown_event.movementY = movementY;
@@ -819,9 +766,6 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 					mousedown_event.screenX = screenX;
 					mousedown_event.screenY = screenY;
 					mousedown_event.shiftKey = shiftKey;
-					//mousedown_event.mozPressure = mozPressure;
-					//mousedown_event.mozInputSource = mozInputSource;
-					//mousedown_event.webkitForce = webkitForce;
 					mousedown_event.x = x;
 					mousedown_event.y = y;
 					dispatchEvent(mousedown_event);
@@ -840,8 +784,6 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				mouseup_event.clientX = clientX;
 				mouseup_event.clientY = clientY;
 				mouseup_event.ctrlKey = ctrlKey;
-				//mouseup_event.layerX = layerX;
-				//mouseup_event.layerY = layerY;
 				mouseup_event.metaKey = metaKey;
 				mouseup_event.movementX = movementX;
 				mouseup_event.movementY = movementY;
@@ -853,9 +795,6 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				mouseup_event.screenX = screenX;
 				mouseup_event.screenY = screenY;
 				mouseup_event.shiftKey = shiftKey;
-				//mouseup_event.mozPressure = mozPressure;
-				//mouseup_event.mozInputSource = mozInputSource;
-				//mouseup_event.webkitForce = webkitForce;
 				mouseup_event.x = x;
 				mouseup_event.y = y;
 				dispatchEvent(mouseup_event);
@@ -875,8 +814,6 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 					mousedown_event.clientX = clientX;
 					mousedown_event.clientY = clientY;
 					mousedown_event.ctrlKey = ctrlKey;
-					//mousedown_event.layerX = layerX;
-					//mousedown_event.layerY = layerY;
 					mousedown_event.metaKey = metaKey;
 					mousedown_event.movementX = movementX;
 					mousedown_event.movementY = movementY;
@@ -888,9 +825,6 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 					mousedown_event.screenX = screenX;
 					mousedown_event.screenY = screenY;
 					mousedown_event.shiftKey = shiftKey;
-					//mousedown_event.mozPressure = mozPressure;
-					//mousedown_event.mozInputSource = mozInputSource;
-					//mousedown_event.webkitForce = webkitForce;
 					mousedown_event.x = x;
 					mousedown_event.y = y;
 					dispatchEvent(mousedown_event);
@@ -909,8 +843,6 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				mouseup_event.clientX = clientX;
 				mouseup_event.clientY = clientY;
 				mouseup_event.ctrlKey = ctrlKey;
-				//mouseup_event.layerX = layerX;
-				//mouseup_event.layerY = layerY;
 				mouseup_event.metaKey = metaKey;
 				mouseup_event.movementX = movementX;
 				mouseup_event.movementY = movementY;
@@ -922,9 +854,6 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				mouseup_event.screenX = screenX;
 				mouseup_event.screenY = screenY;
 				mouseup_event.shiftKey = shiftKey;
-				//mouseup_event.mozPressure = mozPressure;
-				//mouseup_event.mozInputSource = mozInputSource;
-				//mouseup_event.webkitForce = webkitForce;
 				mouseup_event.x = x;
 				mouseup_event.y = y;
 				dispatchEvent(mouseup_event);
@@ -944,8 +873,6 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 					mousedown_event.clientX = clientX;
 					mousedown_event.clientY = clientY;
 					mousedown_event.ctrlKey = ctrlKey;
-					//mousedown_event.layerX = layerX;
-					//mousedown_event.layerY = layerY;
 					mousedown_event.metaKey = metaKey;
 					mousedown_event.movementX = movementX;
 					mousedown_event.movementY = movementY;
@@ -957,9 +884,6 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 					mousedown_event.screenX = screenX;
 					mousedown_event.screenY = screenY;
 					mousedown_event.shiftKey = shiftKey;
-					//mousedown_event.mozPressure = mozPressure;
-					//mousedown_event.mozInputSource = mozInputSource;
-					//mousedown_event.webkitForce = webkitForce;
 					mousedown_event.x = x;
 					mousedown_event.y = y;
 					dispatchEvent(mousedown_event);
@@ -978,8 +902,6 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				mouseup_event.clientX = clientX;
 				mouseup_event.clientY = clientY;
 				mouseup_event.ctrlKey = ctrlKey;
-				//mouseup_event.layerX = layerX;
-				//mouseup_event.layerY = layerY;
 				mouseup_event.metaKey = metaKey;
 				mouseup_event.movementX = movementX;
 				mouseup_event.movementY = movementY;
@@ -991,9 +913,6 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				mouseup_event.screenX = screenX;
 				mouseup_event.screenY = screenY;
 				mouseup_event.shiftKey = shiftKey;
-				//mouseup_event.mozPressure = mozPressure;
-				//mouseup_event.mozInputSource = mozInputSource;
-				//mouseup_event.webkitForce = webkitForce;
 				mouseup_event.x = x;
 				mouseup_event.y = y;
 				dispatchEvent(mouseup_event);
@@ -1009,8 +928,6 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 			dblclick_event.clientX = clientX;
 			dblclick_event.clientY = clientY;
 			dblclick_event.ctrlKey = ctrlKey;
-			//dblclick_event.layerX = layerX;
-			//dblclick_event.layerY = layerY;
 			dblclick_event.metaKey = metaKey;
 			dblclick_event.movementX = movementX;
 			dblclick_event.movementY = movementY;
@@ -1022,9 +939,6 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 			dblclick_event.screenX = screenX;
 			dblclick_event.screenY = screenY;
 			dblclick_event.shiftKey = shiftKey;
-			//dblclick_event.mozPressure = mozPressure;
-			//dblclick_event.mozInputSource = mozInputSource;
-			//dblclick_event.webkitForce = webkitForce;
 			dblclick_event.x = x;
 			dblclick_event.y = y;
 			dispatchEvent(dblclick_event);
@@ -1044,8 +958,6 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 			wheel_event.clientX = clientX;
 			wheel_event.clientY = clientY;
 			wheel_event.ctrlKey = ctrlKey;
-			//wheel_event.layerX = layerX;
-			//wheel_event.layerY = layerY;
 			wheel_event.metaKey = metaKey;
 			wheel_event.movementX = movementX;
 			wheel_event.movementY = movementY;
@@ -1057,9 +969,6 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 			wheel_event.screenX = screenX;
 			wheel_event.screenY = screenY;
 			wheel_event.shiftKey = shiftKey;
-			//wheel_event.mozPressure = mozPressure;
-			//wheel_event.mozInputSource = mozInputSource;
-			//wheel_event.webkitForce = webkitForce;
 			wheel_event.x = x;
 			wheel_event.y = y;
 			dispatchEvent(wheel_event);
@@ -1079,8 +988,6 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 			wheel_event.clientX = clientX;
 			wheel_event.clientY = clientY;
 			wheel_event.ctrlKey = ctrlKey;
-			//wheel_event.layerX = layerX;
-			//wheel_event.layerY = layerY;
 			wheel_event.metaKey = metaKey;
 			wheel_event.movementX = movementX;
 			wheel_event.movementY = movementY;
@@ -1092,9 +999,6 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 			wheel_event.screenX = screenX;
 			wheel_event.screenY = screenY;
 			wheel_event.shiftKey = shiftKey;
-			//wheel_event.mozPressure = mozPressure;
-			//wheel_event.mozInputSource = mozInputSource;
-			//wheel_event.webkitForce = webkitForce;
 			wheel_event.x = x;
 			wheel_event.y = y;
 			dispatchEvent(wheel_event);
@@ -1140,8 +1044,6 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 			mousemove_event.clientX = clientX;
 			mousemove_event.clientY = clientY;
 			mousemove_event.ctrlKey = ctrlKey;
-			//mousemove_event.layerX = layerX;
-			//mousemove_event.layerY = layerY;
 			mousemove_event.metaKey = metaKey;
 			mousemove_event.movementX = movementX;
 			mousemove_event.movementY = movementY;
@@ -1153,9 +1055,6 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 			mousemove_event.screenX = screenX;
 			mousemove_event.screenY = screenY;
 			mousemove_event.shiftKey = shiftKey;
-			//mousemove_event.mozPressure = mozPressure;
-			//mousemove_event.mozInputSource = mozInputSource;
-			//mousemove_event.webkitForce = webkitForce;
 			mousemove_event.x = x;
 			mousemove_event.y = y;
 			dispatchEvent(mousemove_event);

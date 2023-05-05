@@ -23,7 +23,7 @@ public:
 		DKDuktape::AttachFunction("CPP_DKConsoleWindowDUK_rows", DKConsoleWindowDUK::rows);	
 			
 			
-		////// Load .js files
+		////// Load .js files //////
 		DKClass::DKCreate("DKConsoleWindow/DKConsoleWindowDUK.js");
 		
 		return true;
