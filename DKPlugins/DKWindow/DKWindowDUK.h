@@ -104,7 +104,7 @@ public:
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_frameElement", 		DKWindowDUK::frameElement);
 		
 		// WindowProxy? open(optional USVString url = "", optional DOMString target = "_blank", optional [LegacyNullToEmptyString] DOMString features = "");
-		DKDuktape::AttachFunction("CPP_DKWindowDUK_open", 				DKWindowDUK::open);
+		//DKDuktape::AttachFunction("CPP_DKWindowDUK_open", 				DKWindowDUK::open); // TODO
 		
 		//Since this is the global object, the IDL named getter adds a NamedPropertiesObject exotic
 		//object on the prototype chain. Indeed, this does not make the global object an exotic object.
@@ -201,20 +201,20 @@ public:
 		// [SecureContext]
 		// partial interface Window {
 		//		Promise<sequence<FileSystemFileHandle>> showOpenFilePicker(optional OpenFilePickerOptions options = {});
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_showOpenFilePicker", 	DKWindowDUK::showOpenFilePicker);
+				//DKDuktape::AttachFunction("CPP_DKWindowDUK_showOpenFilePicker", 	DKWindowDUK::showOpenFilePicker);  // TODO
 		//
 		//		Promise<FileSystemFileHandle> showSaveFilePicker(optional SaveFilePickerOptions options = {});
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_showSaveFilePicker", 	DKWindowDUK::showSaveFilePicker);
+				//DKDuktape::AttachFunction("CPP_DKWindowDUK_showSaveFilePicker", 	DKWindowDUK::showSaveFilePicker);  // TODO
 		//
 		//		Promise<FileSystemDirectoryHandle> showDirectoryPicker(optional DirectoryPickerOptions options = {});
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_showDirectoryPicker", 	DKWindowDUK::showDirectoryPicker);
+				//DKDuktape::AttachFunction("CPP_DKWindowDUK_showDirectoryPicker", 	DKWindowDUK::showDirectoryPicker);  // TODO
 		// };
 		
 		// Source: Local Font Access API (https://wicg.github.io/local-font-access/)
 		// [SecureContext]
 		// partial interface Window {
 		//		Promise<sequence<FontData>> queryLocalFonts(optional QueryOptions options = {});
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_queryLocalFonts", 		DKWindowDUK::queryLocalFonts);
+				//DKDuktape::AttachFunction("CPP_DKWindowDUK_queryLocalFonts", 		DKWindowDUK::queryLocalFonts); // TODO
 		// };
 		
 		// Source: Manifest Incubations (https://wicg.github.io/manifest-incubations/)
@@ -248,13 +248,13 @@ public:
 		// Source: CSS Object Model (CSSOM) (https://www.w3.org/TR/cssom-1/)
 		// partial interface Window {
 		//		[NewObject] CSSStyleDeclaration getComputedStyle(Element elt, optional CSSOMString? pseudoElt);
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_getComputedStyle", 	DKWindowDUK::getComputedStyle);
+				//DKDuktape::AttachFunction("CPP_DKWindowDUK_getComputedStyle", 	DKWindowDUK::getComputedStyle); 	// TODO
 		// };
 	
 		// Source: CSSOM View Module (https://www.w3.org/TR/cssom-view-1/)
 		// partial interface Window {
 		//		[NewObject] MediaQueryList matchMedia(CSSOMString query);
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_matchMedia", 		DKWindowDUK::matchMedia);
+				//DKDuktape::AttachFunction("CPP_DKWindowDUK_matchMedia", 		DKWindowDUK::matchMedia);	 // TODO
 		//
 		//		[SameObject, Replaceable] readonly attribute Screen screen;
 				DKDuktape::AttachFunction("CPP_DKWindowDUK_screen",				DKWindowDUK::screen);
@@ -297,28 +297,28 @@ public:
 		//
 		//		undefined scroll(optional ScrollToOptions options = {});
 		//		undefined scroll(unrestricted double x, unrestricted double y);
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_scroll", 			DKWindowDUK::scroll);
+				// DKDuktape::AttachFunction("CPP_DKWindowDUK_scroll", 			DKWindowDUK::scroll);		// TODO
 		//
 		//		undefined scrollTo(optional ScrollToOptions options = {});
 		//		undefined scrollTo(unrestricted double x, unrestricted double y);
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_scrollTo", 			DKWindowDUK::scrollTo);
+				// DKDuktape::AttachFunction("CPP_DKWindowDUK_scrollTo", 			DKWindowDUK::scrollTo);		// TODO
 				
 		//		undefined scrollBy(optional ScrollToOptions options = {});
 		//		undefined scrollBy(unrestricted double x, unrestricted double y);
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_scrollBy", 			DKWindowDUK::scrollBy);
+				// DKDuktape::AttachFunction("CPP_DKWindowDUK_scrollBy", 			DKWindowDUK::scrollBy);		// TODO
 		///
 		//		// client
 		//		[Replaceable] readonly attribute long screenX;
 				DKDuktape::AttachFunction("CPP_DKWindowDUK_screenX", 			DKWindowDUK::screenX);
 		//
 		//		[Replaceable] readonly attribute long screenLeft;
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_screenLeft", 		DKWindowDUK::screenLeft);
+				// DKDuktape::AttachFunction("CPP_DKWindowDUK_screenLeft", 		DKWindowDUK::screenLeft);		// TODO
 		//
 		//		[Replaceable] readonly attribute long screenY;
 				DKDuktape::AttachFunction("CPP_DKWindowDUK_screenY", 			DKWindowDUK::screenY);
 		//
 		//		[Replaceable] readonly attribute long screenTop;
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_screenTop", 			DKWindowDUK::screenTop);
+				// DKDuktape::AttachFunction("CPP_DKWindowDUK_screenTop", 			DKWindowDUK::screenTop);	// TODO
 		//
 		//		[Replaceable] readonly attribute long outerWidth;
 				DKDuktape::AttachFunction("CPP_DKWindowDUK_outerWidth", 		DKWindowDUK::outerWidth);
@@ -348,16 +348,16 @@ public:
 		// Source: requestIdleCallback() (https://www.w3.org/TR/requestidlecallback/)
 		// partial interface Window {
 		//		unsigned long requestIdleCallback(IdleRequestCallback callback, optional IdleRequestOptions options = {});
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_requestIdleCallback", 	DKWindowDUK::requestIdleCallback);
+				// DKDuktape::AttachFunction("CPP_DKWindowDUK_requestIdleCallback", 	DKWindowDUK::requestIdleCallback);		// TODO
 		//
 		//		undefined cancelIdleCallback(unsigned long handle);
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_cancelIdleCallback", 	DKWindowDUK::cancelIdleCallback);
+				// DKDuktape::AttachFunction("CPP_DKWindowDUK_cancelIdleCallback", 	DKWindowDUK::cancelIdleCallback);			// TODO
 		// };
 	
 		// Source: Selection API (https://www.w3.org/TR/selection-api/)
 		// partial interface Window {
 		//		Selection? getSelection();
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_getSelection", 			DKWindowDUK::getSelection);
+				// DKDuktape::AttachFunction("CPP_DKWindowDUK_getSelection", 			DKWindowDUK::getSelection);			// TODO
 		// };
 
 		// Source: Window Management (https://www.w3.org/TR/window-management/)
