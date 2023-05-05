@@ -111,9 +111,9 @@ public:
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
-		DKString options = "";//duk_require_string(ctx, 1);
-		DKINFO("CPP_DKMouseEventDUK("+type+","+options+")\n");
-		DKMouseEvent* event = new DKMouseEvent(type, options);
+		DKString eventInitDict = "";//duk_require_string(ctx, 1);
+		DKINFO("CPP_DKMouseEventDUK("+type+","+eventInitDict+")\n");
+		DKMouseEvent* event = new DKMouseEvent(type, eventInitDict);
 		DKString eventAddress = pointerToAddress(event);
 		duk_push_string(ctx, eventAddress.c_str());	
 		return true;

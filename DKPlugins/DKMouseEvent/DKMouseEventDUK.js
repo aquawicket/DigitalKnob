@@ -161,7 +161,7 @@ var MouseEvent = function MouseEvent(type, eventInitDict, address) {
 		this.toString = function(){ return "[object MouseEvent]" }
 	
 
-	var event = UIEvent.call(this, type, options)
+	var event = UIEvent.call(this, type, eventInitDict)
 	
 	// Make properties (Read Only) after assignment
 	Object.defineProperty(this, "altKey ", 		{ set: undefined })

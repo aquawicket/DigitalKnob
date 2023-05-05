@@ -188,7 +188,6 @@ function onwebkitmouseforcewillbegin(event){
 myConsoleWindow.addEventListener('webkitmouseforcewillbegin', onwebkitmouseforcewillbegin)
 
 
-
 ////// WheelEvent //////
 // [mousewheel] https://developer.mozilla.org/en-US/docs/Web/API/Element/mousewheel_event
 function onmousewheel(event){
@@ -208,7 +207,6 @@ function onwheel(event){
 	printUIEventProperties(event)
 }
 myConsoleWindow.addEventListener('wheel', onwheel)
-
 
 
 ////// InputEvent //////
