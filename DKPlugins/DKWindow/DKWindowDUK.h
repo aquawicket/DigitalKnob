@@ -23,36 +23,36 @@ public:
 		
 		
 		////// Instance properties //////
-		DKDuktape::AttachFunction("CPP_DKWindowDUK_caches", 			DKWindowDUK::caches);
+		//DKDuktape::AttachFunction("CPP_DKWindowDUK_caches", 			DKWindowDUK::caches);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_clientInformation", 	DKWindowDUK::clientInformation);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_closed", 			DKWindowDUK::closed);
-		DKDuktape::AttachFunction("CPP_DKWindowDUK_console", 			DKWindowDUK::console);
-		DKDuktape::AttachFunction("CPP_DKWindowDUK_credentialless", 	DKWindowDUK::credentialless);
-		DKDuktape::AttachFunction("CPP_DKWindowDUK_crypto", 			DKWindowDUK::crypto);
+		//DKDuktape::AttachFunction("CPP_DKWindowDUK_console", 			DKWindowDUK::console);
+		//DKDuktape::AttachFunction("CPP_DKWindowDUK_credentialless", 	DKWindowDUK::credentialless);
+		//DKDuktape::AttachFunction("CPP_DKWindowDUK_crypto", 			DKWindowDUK::crypto);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_customElements", 	DKWindowDUK::customElements);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_devicePixelRatio", 	DKWindowDUK::devicePixelRatio);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_document", 			DKWindowDUK::document);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_frameElement", 		DKWindowDUK::frameElement);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_frames", 			DKWindowDUK::frames);
-		DKDuktape::AttachFunction("CPP_DKWindowDUK_fullScreen", 		DKWindowDUK::fullScreen);
+		//DKDuktape::AttachFunction("CPP_DKWindowDUK_fullScreen", 		DKWindowDUK::fullScreen);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_history", 			DKWindowDUK::history);
-		DKDuktape::AttachFunction("CPP_DKWindowDUK_indexedDB", 			DKWindowDUK::indexedDB);
+		//DKDuktape::AttachFunction("CPP_DKWindowDUK_indexedDB", 		DKWindowDUK::indexedDB);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_innerHeight", 		DKWindowDUK::innerHeight);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_innerWidth", 		DKWindowDUK::innerWidth);
-		DKDuktape::AttachFunction("CPP_DKWindowDUK_isSecureContext", 	DKWindowDUK::isSecureContext);
+		//DKDuktape::AttachFunction("CPP_DKWindowDUK_isSecureContext", 	DKWindowDUK::isSecureContext);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_launchQueue", 		DKWindowDUK::launchQueue);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_length", 			DKWindowDUK::length);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_location", 			DKWindowDUK::location);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_locationbar", 		DKWindowDUK::locationbar);
-		DKDuktape::AttachFunction("CPP_DKWindowDUK_localStorage", 		DKWindowDUK::localStorage);
+		//DKDuktape::AttachFunction("CPP_DKWindowDUK_localStorage", 	DKWindowDUK::localStorage);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_menubar", 			DKWindowDUK::menubar);
-		DKDuktape::AttachFunction("CPP_DKWindowDUK_mozInnerScreenX", 	DKWindowDUK::mozInnerScreenX);
-		DKDuktape::AttachFunction("CPP_DKWindowDUK_mozInnerScreenY", 	DKWindowDUK::mozInnerScreenY);
+		//DKDuktape::AttachFunction("CPP_DKWindowDUK_mozInnerScreenX", 	DKWindowDUK::mozInnerScreenX);
+		//DKDuktape::AttachFunction("CPP_DKWindowDUK_mozInnerScreenY", 	DKWindowDUK::mozInnerScreenY);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_name", 				DKWindowDUK::name);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_navigation", 		DKWindowDUK::navigation);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_navigator", 			DKWindowDUK::navigator);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_opener", 			DKWindowDUK::opener);
-		DKDuktape::AttachFunction("CPP_DKWindowDUK_origin", 			DKWindowDUK::origin);
+		//DKDuktape::AttachFunction("CPP_DKWindowDUK_origin", 			DKWindowDUK::origin);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_outerHeight", 		DKWindowDUK::outerHeight);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_outerWidth", 		DKWindowDUK::outerWidth);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_pageXOffset", 		DKWindowDUK::pageXOffset);
@@ -70,31 +70,31 @@ public:
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_scrollX", 			DKWindowDUK::scrollX);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_scrollY", 			DKWindowDUK::scrollY);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_self", 				DKWindowDUK::self);
-		DKDuktape::AttachFunction("CPP_DKWindowDUK_sessionStorage", 	DKWindowDUK::sessionStorage);
+		//DKDuktape::AttachFunction("CPP_DKWindowDUK_sessionStorage", 	DKWindowDUK::sessionStorage);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_speechSynthesis",	DKWindowDUK::speechSynthesis);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_statusbar", 			DKWindowDUK::statusbar);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_toolbar", 			DKWindowDUK::toolbar);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_top", 				DKWindowDUK::top);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_visualViewport", 	DKWindowDUK::visualViewport);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_window", 			DKWindowDUK::window);
-		DKDuktape::AttachFunction("CPP_DKWindowDUK_windows", 			DKWindowDUK::windows);
+		//DKDuktape::AttachFunction("CPP_DKWindowDUK_windows", 			DKWindowDUK::windows);
 	
 		
 		////// Deprecated properties //////
-		DKDuktape::AttachFunction("CPP_DKWindowDUK_content", 		DKWindowDUK::content);
-		DKDuktape::AttachFunction("CPP_DKWindowDUK_defaultStatus", DKWindowDUK::defaultStatus);
+		//DKDuktape::AttachFunction("CPP_DKWindowDUK_content", 		DKWindowDUK::content);
+		//DKDuktape::AttachFunction("CPP_DKWindowDUK_defaultStatus", DKWindowDUK::defaultStatus);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_event", 			DKWindowDUK::event);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_external", 		DKWindowDUK::external);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_orientation", 	DKWindowDUK::orientation);
-		DKDuktape::AttachFunction("CPP_DKWindowDUK_returnValue", 	DKWindowDUK::returnValue);
-		DKDuktape::AttachFunction("CPP_DKWindowDUK_sidebar", 		DKWindowDUK::sidebar);
+		//DKDuktape::AttachFunction("CPP_DKWindowDUK_returnValue", 	DKWindowDUK::returnValue);
+		//DKDuktape::AttachFunction("CPP_DKWindowDUK_sidebar", 		DKWindowDUK::sidebar);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_status", 		DKWindowDUK::status);
 		
 		
 		////// Instance methods //////
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_blur", 		DKWindowDUK::blur);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_close",		DKWindowDUK::close);
-		DKDuktape::AttachFunction("CPP_DKWindowDUK_dump", 		DKWindowDUK::dump);
+		//DKDuktape::AttachFunction("CPP_DKWindowDUK_dump", 		DKWindowDUK::dump);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_focus", 		DKWindowDUK::focus);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_moveBy", 	DKWindowDUK::moveBy);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_moveTo", 	DKWindowDUK::moveTo);
@@ -154,6 +154,7 @@ public:
 	
 	
 	////// Instance properties //////
+	/*
 	// [Window.caches](Read only) https://developer.mozilla.org/en-US/docs/Web/API/caches
 	static int caches(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -163,6 +164,7 @@ public:
 		dukglue_push(ctx, _caches);
 		return true;
 	}
+	*/
 	// [Window.clientInformation](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/navigator
 	static int clientInformation(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -181,6 +183,7 @@ public:
 		dukglue_push(ctx, _closed);
 		return true;
 	}
+	/*
 	// [Window.console](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/console
 	static int console(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -199,6 +202,7 @@ public:
 		dukglue_push(ctx, _credentialless);
 		return true;
 	}
+	
 	// [Window.crypto](Read only) https://developer.mozilla.org/en-US/docs/Web/API/crypto_property
 	static int crypto(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -208,6 +212,7 @@ public:
 		dukglue_push(ctx, _crypto);
 		return true;
 	}
+	*/
 	// [Window.customElements](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/customElements
 	static int customElements(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -253,6 +258,7 @@ public:
 		dukglue_push(ctx, _frames);
 		return true;
 	}
+	/*
 	// [Window.fullScreen](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/fullScreen
 	static int fullScreen(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -262,6 +268,7 @@ public:
 		dukglue_push(ctx, _fullScreen);
 		return true;
 	}
+	*/
 	// [Window.history](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/History
 	static int history(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -271,6 +278,7 @@ public:
 		dukglue_push(ctx, _history);
 		return true;
 	}
+	/*
 	// [Window.indexedDB](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/indexedDB
 	static int indexedDB(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -280,6 +288,7 @@ public:
 		dukglue_push(ctx, _indexedDB);
 		return true;
 	}
+	*/
 	// [Window.innerHeight](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/innerHeight
 	static int innerHeight(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -298,6 +307,7 @@ public:
 		dukglue_push(ctx, _innerWidth);
 		return true;
 	}
+	/*
 	// [Window.isSecureContext](Read only) https://developer.mozilla.org/en-US/docs/Web/API/isSecureContext
 	static int isSecureContext(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -307,6 +317,7 @@ public:
 		dukglue_push(ctx, _isSecureContext);
 		return true;
 	}
+	*/
 	// [Window.launchQueue](Read only)(Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Window/launchQueue
 	static int launchQueue(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -343,6 +354,7 @@ public:
 		dukglue_push(ctx, _locationbar);
 		return true;
 	}
+	/*
 	// [Window.localStorage](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
 	static int localStorage(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -352,6 +364,7 @@ public:
 		dukglue_push(ctx, _localStorage);
 		return true;
 	}
+	*/
 	// [Window.menubar](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/menubar
 	static int menubar(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -361,6 +374,7 @@ public:
 		dukglue_push(ctx, _menubar);
 		return true;
 	}
+	/*
 	// [Window.mozInnerScreenX](Read only)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Window/mozInnerScreenX
 	static int mozInnerScreenX(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -379,6 +393,7 @@ public:
 		dukglue_push(ctx, _mozInnerScreenY);
 		return true;
 	}
+	*/
 	// [Window.name] https://developer.mozilla.org/en-US/docs/Web/API/Window/name
 	static int name(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -415,6 +430,7 @@ public:
 		dukglue_push(ctx, _opener);
 		return true;
 	}
+	/*
 	// [Window.origin](Read only) https://developer.mozilla.org/en-US/docs/Web/API/origin
 	static int origin(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -424,6 +440,7 @@ public:
 		dukglue_push(ctx, _origin);
 		return true;
 	}
+	*/
 	// [Window.outerHeight](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/outerHeight
 	static int outerHeight(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
