@@ -58,15 +58,15 @@ public:
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_pageXOffset", 		DKWindowDUK::pageXOffset);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_pageYOffset", 		DKWindowDUK::pageYOffset);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_parent", 			DKWindowDUK::parent);
-		DKDuktape::AttachFunction("CPP_DKWindowDUK_performance", 		DKWindowDUK::performance);
+		//DKDuktape::AttachFunction("CPP_DKWindowDUK_performance", 		DKWindowDUK::performance);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_personalbar", 		DKWindowDUK::personalbar);
-		DKDuktape::AttachFunction("CPP_DKWindowDUK_scheduler", 			DKWindowDUK::scheduler);
+		//DKDuktape::AttachFunction("CPP_DKWindowDUK_scheduler", 		DKWindowDUK::scheduler);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_screen",				DKWindowDUK::screen);
-		DKDuktape::AttachFunction("CPP_DKWindowDUK_screenX", 			DKWindowDUK::screenX);
-		DKDuktape::AttachFunction("CPP_DKWindowDUK_screenY", 			DKWindowDUK::screenY);
+		//DKDuktape::AttachFunction("CPP_DKWindowDUK_screenX", 			DKWindowDUK::screenX);
+		//DKDuktape::AttachFunction("CPP_DKWindowDUK_screenY", 			DKWindowDUK::screenY);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_scrollbars", 		DKWindowDUK::scrollbars);
-		DKDuktape::AttachFunction("CPP_DKWindowDUK_scrollMaxX", 		DKWindowDUK::scrollMaxX);
-		DKDuktape::AttachFunction("CPP_DKWindowDUK_scrollMaxY", 		DKWindowDUK::scrollMaxY);
+		//DKDuktape::AttachFunction("CPP_DKWindowDUK_scrollMaxX", 		DKWindowDUK::scrollMaxX);
+		//DKDuktape::AttachFunction("CPP_DKWindowDUK_scrollMaxY", 		DKWindowDUK::scrollMaxY);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_scrollX", 			DKWindowDUK::scrollX);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_scrollY", 			DKWindowDUK::scrollY);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_self", 				DKWindowDUK::self);
@@ -82,7 +82,7 @@ public:
 		
 		////// Deprecated properties //////
 		//DKDuktape::AttachFunction("CPP_DKWindowDUK_content", 		DKWindowDUK::content);
-		//DKDuktape::AttachFunction("CPP_DKWindowDUK_defaultStatus", DKWindowDUK::defaultStatus);
+		//DKDuktape::AttachFunction("CPP_DKWindowDUK_defaultStatus",DKWindowDUK::defaultStatus);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_event", 			DKWindowDUK::event);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_external", 		DKWindowDUK::external);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_orientation", 	DKWindowDUK::orientation);
@@ -94,7 +94,7 @@ public:
 		////// Instance methods //////
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_blur", 		DKWindowDUK::blur);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_close",		DKWindowDUK::close);
-		//DKDuktape::AttachFunction("CPP_DKWindowDUK_dump", 		DKWindowDUK::dump);
+		//DKDuktape::AttachFunction("CPP_DKWindowDUK_dump", 	DKWindowDUK::dump);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_focus", 		DKWindowDUK::focus);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_moveBy", 	DKWindowDUK::moveBy);
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_moveTo", 	DKWindowDUK::moveTo);
@@ -486,6 +486,7 @@ public:
 		dukglue_push(ctx, _parent);
 		return true;
 	}
+	/*
 	// [Window.performance](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/performance
 	static int performance(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -495,6 +496,7 @@ public:
 		dukglue_push(ctx, _performance);
 		return true;
 	}
+	*/
 	// [Window.personalbar](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/personalbar
 	static int personalbar(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -504,6 +506,7 @@ public:
 		dukglue_push(ctx, _personalbar);
 		return true;
 	}
+	/*
 	// [Window.scheduler](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/scheduler
 	static int scheduler(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -513,6 +516,7 @@ public:
 		dukglue_push(ctx, _scheduler);
 		return true;
 	}
+	*/
 	// [Window.screen](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/screen
 	static int screen(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -522,6 +526,7 @@ public:
 		dukglue_push(ctx, _screen);
 		return true;
 	}
+	/*
 	// [Window.screenX and Window.screenLeft](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/screenX
 	static int screenX(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -540,6 +545,7 @@ public:
 		dukglue_push(ctx, _screenY);
 		return true;
 	}
+	*/
 	// [Window.scrollbars](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollbars
 	static int scrollbars(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
