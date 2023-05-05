@@ -13,11 +13,13 @@ var Window = function Window(address) {
 
 	
 	////// Instance properties //////
+	/*
 	// [Window.caches](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/caches
 	Object.defineProperty(this, "caches", {
         get: function caches()					{ return CPP_DKWindowDUK_caches(this.address) },
 		//set: function caches(data)			{ return CPP_DKWindowDUK_caches(this.address, data) },
     })
+	*/
 	// [Window.clientInformation](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/clientInformation
 	Object.defineProperty(this, "clientInformation", {
         get: function clientInformation()		{ return CPP_DKWindowDUK_clientInformation(this.address) },
