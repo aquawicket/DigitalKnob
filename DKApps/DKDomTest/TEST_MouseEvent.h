@@ -32,8 +32,6 @@ public:
 		DKINFO("mouseevent.clientX = "			+toString(mouseevent.clientX)		+"\n");
 		DKINFO("mouseevent.clientY = "			+toString(mouseevent.clientY)		+"\n");
 		DKINFO("mouseevent.ctrlKey = "			+toString(mouseevent.ctrlKey)		+"\n");
-		//DKINFO("mouseevent.layerX = "			+toString(mouseevent.layerX)		+"\n");
-		//DKINFO("mouseevent.layerY = "			+toString(mouseevent.layerY)		+"\n");
 		DKINFO("mouseevent.metaKey = "			+toString(mouseevent.metaKey)		+"\n");
 		DKINFO("mouseevent.movementX = "		+toString(mouseevent.movementX)		+"\n");
 		DKINFO("mouseevent.movementY = "		+toString(mouseevent.movementY)		+"\n");
@@ -45,9 +43,6 @@ public:
 		DKINFO("mouseevent.screenX = "			+toString(mouseevent.screenX)		+"\n");
 		DKINFO("mouseevent.screenY = "			+toString(mouseevent.screenY)		+"\n");
 		DKINFO("mouseevent.shiftKey = "			+toString(mouseevent.shiftKey)		+"\n");
-		//DKINFO("mouseevent.mozPressure = "	+toString(mouseevent.mozPressure)	+"\n");
-		//DKINFO("mouseevent.mozInputSource = "	+toString(mouseevent.mozInputSource)+"\n");
-		//DKINFO("mouseevent.webkitForce = "	+toString(mouseevent.webkitForce)	+"\n");
 		DKINFO("mouseevent.x = "				+toString(mouseevent.x)				+"\n");
 		DKINFO("mouseevent.y = "				+toString(mouseevent.y)				+"\n");
 	}
