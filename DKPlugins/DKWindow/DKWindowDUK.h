@@ -577,6 +577,7 @@ public:
 		dukglue_push(ctx, _self);
 		return true;
 	}
+	/*
 	// [Window.sessionStorage] https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage
 	static int sessionStorage(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -586,6 +587,7 @@ public:
 		dukglue_push(ctx, _sessionStorage);
 		return true;
 	}
+	*/
 	// [Window.speechSynthesis](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/speechSynthesis
 	static int speechSynthesis(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -640,6 +642,7 @@ public:
 		dukglue_push(ctx, _window);
 		return true;
 	}
+	/*
 	// [window[0], window[1], etc.] https://developer.mozilla.org/en-US/docs/Web/API/Window
 	static int windows(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -670,6 +673,7 @@ public:
 		dukglue_push(ctx, _defaultStatus);
 		return true;
 	}
+	*/
 	// [Window.event](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/event
 	static int event(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -697,6 +701,7 @@ public:
 		dukglue_push(ctx, _orientation);
 		return true;
 	}
+	/*
 	// [Window.returnValue](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window
 	static int returnValue(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -715,6 +720,7 @@ public:
 		dukglue_push(ctx, _sidebar);
 		return true;
 	}
+	*/
 	// [Window.status](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/status
 	static int status(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -741,6 +747,7 @@ public:
 			return false;
 		return true;
 	}
+	/*
 	// [Window.dump()] https://developer.mozilla.org/en-US/docs/Web/API/moveBy
 	static int dump(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -749,6 +756,7 @@ public:
 			return false;
 		return true;
 	}
+	*/
 	// [Window.focus()] https://developer.mozilla.org/en-US/docs/Web/API/moveBy
 	static int focus(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -795,6 +803,7 @@ public:
 	
 	
 	////// Deprecated methods //////
+	/*
 	// [Window.back()](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/back
 	static int back(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -802,6 +811,7 @@ public:
 			return false;
 		return true;
 	}
+	*/
 	// [Window.captureEvents()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/captureEvents
 	static int captureEvents(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -809,6 +819,7 @@ public:
 			return false;
 		return true;
 	}
+	/*
 	// [Window.forward()](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/forward
 	static int forward(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -816,6 +827,7 @@ public:
 			return false;
 		return true;
 	}
+	*/
 	// [Window.releaseEvents()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/releaseEvents
 	static int releaseEvents(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -824,6 +836,7 @@ public:
 			return false;
 		return true;
 	}
+	/*
 	// [Window.showModalDialog()](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/showModalDialog
 	static int showModalDialog(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -831,6 +844,7 @@ public:
 			return false;
 		return true;
 	}
+	*/
 	
 };
 REGISTER_OBJECT(DKWindowDUK, true)
