@@ -555,6 +555,7 @@ public:
 		dukglue_push(ctx, _scrollbars);
 		return true;
 	}
+	/*
 	// [Window.scrollMaxX](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollMaxX
 	static int scrollMaxX(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -573,6 +574,7 @@ public:
 		dukglue_push(ctx, _scrollMaxY);
 		return true;
 	}
+	*/
 	// [Window.scrollX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollX
 	static int scrollX(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
