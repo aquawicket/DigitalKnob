@@ -1,3 +1,6 @@
+// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/WheelEvent.idl
+// [SOURCE] https://w3c.github.io/uievents/#events-wheelevents
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent
 #pragma once
 #ifndef DKWheelEventDUK_H
 #define DKWheelEventDUK_H
@@ -5,31 +8,36 @@
 #include "DKDuktape/DKDuktape.h"
 
 
-// [W3C] https://w3c.github.io/uievents/#events-wheelevents
-// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent
+// Source: UI Events (https://www.w3.org/TR/uievents/)
+// [Exposed=Window]
+// interface WheelEvent : MouseEvent {
 class DKWheelEventDUK : public DKObjectT<DKWheelEventDUK>
 {
 public:
 	bool Init(){
 		
-		////// Constructor //////
+		// constructor(DOMString type, optional WheelEventInit eventInitDict = {});
 		DKDuktape::AttachFunction("CPP_DKWheelEventDUK", DKWheelEventDUK::constructor);
 	
+		// DeltaModeCode
+		// const unsigned long DOM_DELTA_PIXEL = 0x00;
+		
+		// const unsigned long DOM_DELTA_LINE  = 0x01;
+		
+		// const unsigned long DOM_DELTA_PAGE  = 0x02;
 	
-		////// Instance properties //////
-		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_deltaX", 		DKWheelEventDUK::deltaX); 		// [WheelEvent.deltaX](Read only)
-		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_deltaY", 		DKWheelEventDUK::deltaY); 		// [WheelEvent.deltaY](Read only)
-		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_deltaZ",		DKWheelEventDUK::deltaZ); 		// [WheelEvent.deltaZ](Read only)
-		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_deltaMode", 	DKWheelEventDUK::deltaMode); 	// [WheelEvent.deltaMode](Read only)
-		//DKDuktape::AttachFunction("CPP_DKWheelEventDUK_wheelDelta", 	DKWheelEventDUK::wheelDelta); 	// [WheelEvent.wheelDelta](Read only)(Deprecated)(Non-standard)
-		//DKDuktape::AttachFunction("CPP_DKWheelEventDUK_wheelDeltaX", 	DKWheelEventDUK::wheelDeltaX); 	// [WheelEvent.wheelDeltaX](Read only)(Deprecated)(Non-standard)
-		//DKDuktape::AttachFunction("CPP_DKWheelEventDUK_wheelDeltaY", 	DKWheelEventDUK::wheelDeltaY); 	// [WheelEvent.wheelDeltaY](Read only)(Deprecated)(Non-standard)
-	
-	
-		////// Events //////
-		// [mousewheel](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Element/mousewheel_event
-		// [wheel] https://developer.mozilla.org/en-US/docs/Web/API/Element/wheel_event
-
+		// readonly attribute double deltaX;
+		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_deltaX", 		DKWheelEventDUK::deltaX); 
+		
+		// readonly attribute double deltaY;
+		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_deltaY", 		DKWheelEventDUK::deltaY); 
+		
+		// readonly attribute double deltaZ;
+		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_deltaZ",		DKWheelEventDUK::deltaZ); 
+		
+		// readonly attribute unsigned long deltaMode;
+		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_deltaMode", 	DKWheelEventDUK::deltaMode);
+		
 
 		////// Load .js files //////
 		DKClass::DKCreate("DKWheelEvent/DKWheelEventDUK.js");
@@ -38,8 +46,7 @@ public:
 	}
 	
 	
-	////// Constructor //////
-	// [WheelEvent()] https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent/WheelEvent
+	// constructor(DOMString type, optional WheelEventInit eventInitDict = {});
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
@@ -51,9 +58,14 @@ public:
 		return true;
 	}
 	
-	
-	////// Instance properties //////
-	// [WheelEvent.deltaX](Read only)
+	// DeltaModeCode
+	// const unsigned long DOM_DELTA_PIXEL = 0x00;
+		
+	// const unsigned long DOM_DELTA_LINE  = 0x01;
+		
+	// const unsigned long DOM_DELTA_PAGE  = 0x02;
+		
+	// readonly attribute double deltaX;
 	static int deltaX(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
@@ -63,7 +75,8 @@ public:
 		duk_push_number(ctx, event->deltaX);	
 		return true;
 	}
-	// [WheelEvent.deltaY](Read only)
+	
+	// readonly attribute double deltaY;
 	static int deltaY(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
@@ -73,7 +86,8 @@ public:
 		duk_push_number(ctx, event->deltaY);	
 		return true;
 	}
-	// [WheelEvent.deltaZ](Read only)
+		
+	// readonly attribute double deltaZ;
 	static int deltaZ(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
@@ -82,8 +96,9 @@ public:
 			event->deltaZ = duk_to_number(ctx, 1);
 		duk_push_number(ctx, event->deltaZ);	
 		return true;
-	}
-	// [WheelEvent.deltaMode](Read only)
+	}	
+		
+	// readonly attribute unsigned long deltaMode;
 	static int deltaMode(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString eventAddress = duk_require_string(ctx, 0);
@@ -92,34 +107,7 @@ public:
 			event->deltaMode = duk_to_uint(ctx, 1);
 		duk_push_uint(ctx, event->deltaMode);	
 		return true;
-	}
-	/*
-	// [WheelEvent.wheelDelta](Read only)(Deprecated)(Non-standard)
-	static int wheelDelta(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKWheelEvent* event = (DKWheelEvent*)addressToPointer(eventAddress);
-		duk_push_int(ctx, event->wheelDelta);	
-		return DKDEPRECATED();
-	}
-	// [WheelEvent.wheelDeltaX](Read only)(Deprecated)(Non-standard)
-	static int wheelDeltaX(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKWheelEvent* event = (DKWheelEvent*)addressToPointer(eventAddress);
-		duk_push_int(ctx, event->wheelDeltaX);	
-		return DKDEPRECATED();
-	}
-	// [WheelEvent.wheelDeltaY](Read only)(Deprecated)(Non-standard)
-	static int wheelDeltaY(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKWheelEvent* event = (DKWheelEvent*)addressToPointer(eventAddress);
-		duk_push_int(ctx, event->wheelDeltaY);	
-		return DKDEPRECATED();
-	}
-	*/
-	
+	}	
 };
 REGISTER_OBJECT(DKWheelEventDUK, true)
 

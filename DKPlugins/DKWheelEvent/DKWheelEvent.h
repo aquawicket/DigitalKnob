@@ -13,7 +13,7 @@
 class DKWheelEvent : public DKMouseEvent
 {
 public:
-	//constructor(DOMString type, optional WheelEventInit eventInitDict = {});
+	// constructor(DOMString type, optional WheelEventInit eventInitDict = {});
 	DKWheelEvent(DKString _type, DKString _eventInitDict) : DKMouseEvent(_type, _eventInitDict) { // [WheelEvent()] https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent/WheelEvent
 		DKINFO("DKWheelEvent("+_type+", "+_eventInitDict+") \n");
 		
