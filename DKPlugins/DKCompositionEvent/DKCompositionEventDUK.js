@@ -1,8 +1,12 @@
-// [W3C] https://w3c.github.io/uievents/#events-compositionevents
+// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/CompositionEvent.idl
+// [SOURCE] https://w3c.github.io/uievents/#events-compositionevents
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent
 
 
-// [CompositionEvent()] https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/CompositionEvent
+// Source: UI Events (https://www.w3.org/TR/uievents/)
+// [Exposed=Window]
+// interface CompositionEvent : UIEvent {
+// constructor(DOMString type, optional CompositionEventInit eventInitDict = {});
 var CompositionEvent = function CompositionEvent(type, options, address) {
 	//console.log("CompositionEvent("+type+","+options+","+address+")")
 	
@@ -12,33 +16,27 @@ var CompositionEvent = function CompositionEvent(type, options, address) {
 		this.address = CPP_DKCompositionEventDUK(type, options)
 	
 
-	////// Instance properties //////
-	// [CompositionEvent.data](Read only) https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/data
+	// readonly attribute DOMString data;
 	Object.defineProperty(this, "data", {
         get: function data()		{ return CPP_DKCompositionEventDUK_data(this.address) },
 		set: function data(data) 	{ return CPP_DKCompositionEventDUK_data(this.address, data) },
 		configurable: true,
     })
-	// [CompositionEvent.locale](Read only) https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/locale
-	Object.defineProperty(this, "locale", {
-        get: function locale() 		{ return CPP_DKCompositionEventDUK_locale(this.address) },
-		//set: function locale(data) 	{ return CPP_DKCompositionEventDUK_locale(this.address, data) },
-    })
 	
+	// Source: UI Events (https://www.w3.org/TR/uievents/)
+	// partial interface CompositionEvent {
+	//		// Originally introduced (and deprecated) in this specification
+	//		undefined initCompositionEvent(DOMString typeArg,
+	//		optional boolean bubblesArg = false,
+	//		optional boolean cancelableArg = false,
+	//		optional WindowProxy? viewArg = null,
+	//		optional DOMString dataArg = "");
+			CompositionEvent.prototype.initCompositionEvent = function initCompositionEvent() {
+				CPP_DKCompositionEventDUK_initCompositionEvent(this.address)
+			}
+	// };
+		
 
-    ////// Instance methods //////
-	// [CompositionEvent.initCompositionEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/initCompositionEvent
-	CompositionEvent.prototype.initCompositionEvent = function initCompositionEvent() {
-		CPP_DKCompositionEventDUK_initCompositionEvent(this.address)
-    }
-	
-	
-	////// Events //////
-	// [compositionstart] https://w3c.github.io/uievents/#event-type-compositionstart
-	// [compositionupdate] https://w3c.github.io/uievents/#event-type-compositionupdate
-	// [compositionend] https://w3c.github.io/uievents/#event-type-compositionend
-	
-	
 	////// toString //////
 	if(this.toString() === "[object Object]")
 		this.toString = function(){ return "[object CompositionEvent]" }
