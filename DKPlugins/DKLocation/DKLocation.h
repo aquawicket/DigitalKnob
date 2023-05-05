@@ -1,4 +1,5 @@
-// [IDL] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-location-interface
+// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/Location.idl
+// [SOURCE] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-location-interface
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Location
 #pragma once
 #ifndef DKLocation_H
@@ -6,29 +7,59 @@
 
 #include "DK/DK.h"
 
-
+// Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
+// [Exposed=Window]
+// interface Location { // but see also additional creation steps and overridden internal methods
 class DKLocation
 {
 public:
+	// [LegacyUnforgeable] stringifier attribute USVString href;
+	virtual bool href(DKString&, bool) { return false; }  // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-href
+	
+	// [LegacyUnforgeable] readonly attribute USVString origin;
+	virtual bool origin(DKString&, bool) { return false; } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-origin
+	
+	// [LegacyUnforgeable] attribute USVString protocol;
+	virtual bool protocol(DKString&, bool) { return false; } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-protocol
+	
+	// [LegacyUnforgeable] attribute USVString host;
+	virtual bool host(DKString&, bool) { return false; } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-host
+	
+	// [LegacyUnforgeable] attribute USVString hostname;
+	virtual bool hostname(DKString&, bool) { return false; } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-hostname
+	
+	// [LegacyUnforgeable] attribute USVString port;
+	virtual bool port(DKString&, bool) { return false; } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-port
+	
+	// [LegacyUnforgeable] attribute USVString pathname;
+	virtual bool pathname(DKString&, bool) { return false; } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-pathname
+	
+	// [LegacyUnforgeable] attribute USVString search;
+	virtual bool search(DKString&, bool) { return false; } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-search
+	
+	// [LegacyUnforgeable] attribute USVString hash;
+	virtual bool hash(DKString&, bool) { return false; } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-hash
 
-	////// Instance properties //////
-	// [Location.ancestorOrigins] https://developer.mozilla.org/en-US/docs/Web/API/Location/ancestorOrigins
-	// [Location.href] https://developer.mozilla.org/en-US/docs/Web/API/Location/href
-	// [Location.protocol] https://developer.mozilla.org/en-US/docs/Web/API/Location/protocol
-	// [Location.host] https://developer.mozilla.org/en-US/docs/Web/API/Location/host
-	// [Location.hostname] https://developer.mozilla.org/en-US/docs/Web/API/Location/hostname
-	// [Location.port] https://developer.mozilla.org/en-US/docs/Web/API/Location/port
-	// [Location.pathname] https://developer.mozilla.org/en-US/docs/Web/API/Location/pathname
-	// [Location.search] https://developer.mozilla.org/en-US/docs/Web/API/Location/search
-	// [Location.hash] https://developer.mozilla.org/en-US/docs/Web/API/Location/hash
-	// [Location.origin](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Location/origin
+	// [LegacyUnforgeable] undefined assign(USVString url);
+	virtual bool assign(DKString& url) { // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-assign
+		DKDEBUGFUNC();
+		return DKTODO();
+	}
 	
+	// [LegacyUnforgeable] undefined replace(USVString url);
+	virtual bool replace(DKString& url) { // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-replace
+		DKDEBUGFUNC();
+		return DKTODO();
+	}
 	
-	////// Instance methods //////
-	// [Location.assign()] https://developer.mozilla.org/en-US/docs/Web/API/Location/assign
-	// [Location.reload()] https://developer.mozilla.org/en-US/docs/Web/API/Location/reload
-	// [Location.replace()] https://developer.mozilla.org/en-US/docs/Web/API/Location/replace
-	// [Location.toString()] https://developer.mozilla.org/en-US/docs/Web/API/Location/toString
+	// [LegacyUnforgeable] undefined reload();
+	virtual bool reload() { // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-reload
+		DKDEBUGFUNC();
+		return DKTODO();
+	}
+	
+	// [LegacyUnforgeable, SameObject] readonly attribute DOMStringList ancestorOrigins;
+	virtual bool ancestorOrigins(DKString&, bool) { return false; } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-ancestororigins
 };
 
 
