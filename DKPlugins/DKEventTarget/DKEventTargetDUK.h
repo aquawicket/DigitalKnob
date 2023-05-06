@@ -121,11 +121,11 @@ public:
 		
 		// create and push the Event(eventAddress) object		
 		//DKString eventObjStr = "var eventObj = new Event('', '', '"+eventAddress+"'); eventObj;";
-		if (event.eventClass.empty()) {
-			DKERROR("event->eventClass invalid! \n");
+		if (event.interfaceName.empty()) {
+			DKERROR("event->interfaceName invalid! \n");
 			return;
 		}
-		DKString eventObjStr = "var eventObj = new "+event.eventClass+"('', '', '"+eventAddress+"'); eventObj;";
+		DKString eventObjStr = "var eventObj = new "+event.interfaceName+"('', '', '"+eventAddress+"'); eventObj;";
 		DukValue eventObj = dukglue_peval<DukValue>(DKDuktape::ctx, eventObjStr.c_str());
 		dukglue_push(DKDuktape::ctx, eventObj);
 		
