@@ -4,8 +4,8 @@
 #if HAVE_DKDuktape
 
 #pragma once
-#ifndef DKRmlLocationDUK_H
-#define DKRmlLocationDUK_H
+#ifndef DKLocationDUK_H
+#define DKLocationDUK_H
 
 #include "DKDuktape/DKDuktape.h"
 
@@ -17,62 +17,62 @@ WARNING_ENABLE
 // Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
 // [Exposed=Window]
 // interface Location { // but see also additional creation steps and overridden internal methods
-class DKRmlLocationDUK : public DKObjectT<DKRmlLocationDUK>
+class DKLocationDUK : public DKObjectT<DKLocationDUK>
 {
 public:
 	bool Init(){
 		
-		DKDuktape::AttachFunction("CPP_DKRmlLocationDUK", DKRmlLocationDUK::constructor);
+		DKDuktape::AttachFunction("CPP_DKLocationDUK", DKLocationDUK::constructor);
 		
 		// [LegacyUnforgeable] stringifier attribute USVString href;
-		DKDuktape::AttachFunction("CPP_DKRmlLocationDUK_href", DKRmlLocationDUK::href);
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_href", DKLocationDUK::href);
 		
 		// [LegacyUnforgeable] readonly attribute USVString origin;
-		DKDuktape::AttachFunction("CPP_DKRmlLocationDUK_origin", DKRmlLocationDUK::origin);
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_origin", DKLocationDUK::origin);
 		
 		// [LegacyUnforgeable] attribute USVString protocol;
-		DKDuktape::AttachFunction("CPP_DKRmlLocationDUK_protocol", DKRmlLocationDUK::protocol);
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_protocol", DKLocationDUK::protocol);
 		
 		// [LegacyUnforgeable] attribute USVString host;
-		DKDuktape::AttachFunction("CPP_DKRmlLocationDUK_host", DKRmlLocationDUK::host);
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_host", DKLocationDUK::host);
 		
 		// [LegacyUnforgeable] attribute USVString hostname;
-		DKDuktape::AttachFunction("CPP_DKRmlLocationDUK_hostname", DKRmlLocationDUK::hostname);
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_hostname", DKLocationDUK::hostname);
 		
 		// [LegacyUnforgeable] attribute USVString port;
-		DKDuktape::AttachFunction("CPP_DKRmlLocationDUK_port", DKRmlLocationDUK::port);
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_port", DKLocationDUK::port);
 		
 		// [LegacyUnforgeable] attribute USVString pathname;
-		DKDuktape::AttachFunction("CPP_DKRmlLocationDUK_pathname", DKRmlLocationDUK::pathname);
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_pathname", DKLocationDUK::pathname);
 		
 		// [LegacyUnforgeable] attribute USVString search;
-		DKDuktape::AttachFunction("CPP_DKRmlLocationDUK_search", DKRmlLocationDUK::search);
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_search", DKLocationDUK::search);
 		
 		// [LegacyUnforgeable] attribute USVString hash;
-		DKDuktape::AttachFunction("CPP_DKRmlLocationDUK_hash", DKRmlLocationDUK::hash);
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_hash", DKLocationDUK::hash);
 		
 		// [LegacyUnforgeable] undefined assign(USVString url);
-		DKDuktape::AttachFunction("CPP_DKRmlLocationDUK_assign", DKRmlLocationDUK::assign);
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_assign", DKLocationDUK::assign);
 		
 		// [LegacyUnforgeable] undefined replace(USVString url);
-		DKDuktape::AttachFunction("CPP_DKRmlLocationDUK_replace", DKRmlLocationDUK::replace);
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_replace", DKLocationDUK::replace);
 		
 		// [LegacyUnforgeable] undefined reload();
-		DKDuktape::AttachFunction("CPP_DKRmlLocationDUK_reload", DKRmlLocationDUK::reload);
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_reload", DKLocationDUK::reload);
 		
 		// [LegacyUnforgeable, SameObject] readonly attribute DOMStringList ancestorOrigins;
-		DKDuktape::AttachFunction("CPP_DKRmlLocationDUK_ancestorOrigins", DKRmlLocationDUK::ancestorOrigins);
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_ancestorOrigins", DKLocationDUK::ancestorOrigins);
 		
 		
 		////// Load .js files //////
-		DKClass::DKCreate("DKRmlLocation/DKRmlLocationDUK.js");
+		DKClass::DKCreate("DKLocation/DKLocationDUK.js");
 		
 		return true;
 	}
 	
-	static DKRmlLocation* eventTarget(duk_context* ctx){
+	static DKLocation* eventTarget(duk_context* ctx){
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		return (DKRmlLocation*)addressToPointer(eventTargetAddress);
+		return (DKLocation*)addressToPointer(eventTargetAddress);
 	}
 	static bool GetBool(duk_context* ctx){
 		if (duk_is_boolean(ctx, 1))
@@ -102,8 +102,8 @@ public:
 	
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKINFO("CPP_DKRmlLocationDUK()\n");
-		DKRmlLocation* _location = new DKRmlLocation();
+		DKINFO("CPP_DKLocationDUK()\n");
+		DKLocation* _location = new DKLocation();
 		DKString eventTargetAddress = pointerToAddress(_location);
 		duk_push_string(ctx, eventTargetAddress.c_str());
 		return true;
@@ -236,8 +236,8 @@ public:
 	}
 	
 };
-REGISTER_OBJECT(DKRmlLocationDUK, true)
+REGISTER_OBJECT(DKLocationDUK, true)
 
 
-#endif //DKRmlLocationDUK_H
+#endif //DKLocationDUK_H
 #endif //HAVE_DKDuktape

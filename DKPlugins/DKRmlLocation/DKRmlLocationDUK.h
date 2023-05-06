@@ -1,24 +1,24 @@
 #if HAVE_DKDuktape
 
 #pragma once
-#ifndef DKRmlDocumentDUK_H
-#define DKRmlDocumentDUK_H
+#ifndef DKRmlLocationDUK_H
+#define DKRmlLocationDUK_H
 
-#include "DKRmlDocument/DKRmlDocument.h"
+#include "DKRmlLocation/DKRmlLocation.h"
 #include "DKDuktape/DKDuktape.h"
 
 
-class DKRmlDocumentDUK : public DKObjectT<DKRmlDocumentDUK>
+class DKRmlLocationDUK : public DKObjectT<DKRmlLocationDUK>
 {
 public:
 	bool Init(){
 		
 		////// Constructor //////
-		DKDuktape::AttachFunction("CPP_DKRmlDocumentDUK", DKRmlDocumentDUK::constructor);
+		DKDuktape::AttachFunction("CPP_DKRmlLocationDUK", DKRmlLocationDUK::constructor);
 			
 			
 		////// Load .js files
-		DKClass::DKCreate("DKRmlDocument/DKRmlDocumentDUK.js");
+		DKClass::DKCreate("DKRmlLocation/DKRmlLocationDUK.js");
 		
 		return true;
 	}
@@ -27,16 +27,16 @@ public:
 	////// Constructor //////
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKINFO("CPP_DKRmlDocumentDUK()\n");
-		DKRmlDocument* _dkRmlDocument = (DKRmlDocument*)DKClass::DKCreate("DKRmlDocument");
-		DKString eventTargetAddress = pointerToAddress(_dkRmlDocument);
+		DKINFO("CPP_DKRmlLocationDUK()\n");
+		DKRmlLocation* _dkRmlLocation = (DKRmlLocation*)DKClass::DKCreate("DKRmlLocation");
+		DKString eventTargetAddress = pointerToAddress(_dkRmlLocation);
 		duk_push_string(ctx, eventTargetAddress.c_str());	
 		return true;
 	}
 	
 };
-REGISTER_OBJECT(DKRmlDocumentDUK, true)
+REGISTER_OBJECT(DKRmlLocationDUK, true)
 
 
-#endif //DKRmlDocumentDUK_H
+#endif //DKRmlLocationDUK_H
 #endif //HAVE_DKDuktape
