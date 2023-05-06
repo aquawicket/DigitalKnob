@@ -6,19 +6,19 @@
 #define DKScreen_H
 
 #include "DK/DK.h"
-#include "DKEventTarget/DKEventTarget.h"
+//#include "DKEventTarget/DKEventTarget.h"
 
 
 class DKScreen// : public DKEventTarget
 {
 public:
-	DKScreen()// : DKEventTarget() {
+	DKScreen(){ // : DKEventTarget() {
 		DKDEBUGFUNC();
 		interfaceName = "Screen";
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKScreen("+interfaceAddress+") \n");
 	}
-	
+	virtual ~DKScreen() {}
 	
 	////// Instance properties //////
 	// [Screen.availTop](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Screen/availTop
