@@ -31,74 +31,78 @@ public:
 	virtual ~DKEvent(){}
 	
 	// readonly attribute DOMString type;
-	DKString type = ""; 				// [Event.type](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/type
+	DKString type = ""; // https://dom.spec.whatwg.org/#dom-event-type
 	
 	// readonly attribute EventTarget? target;
-	DKString target = ""; 				// [Event.target](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/target
+	DKString target = ""; // https://dom.spec.whatwg.org/#dom-event-target
 	
 	// readonly attribute EventTarget? srcElement; // legacy
-	DKString srcElement = "";
+	DKString srcElement = ""; // https://dom.spec.whatwg.org/#dom-event-srcelement
 	
 	// readonly attribute EventTarget? currentTarget;
-	DKString currentTarget = ""; 		// [Event.currentTarget](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/currentTarget
+	DKString currentTarget = ""; // https://dom.spec.whatwg.org/#dom-event-currenttarget
 	
 	// sequence<EventTarget> composedPath();
-	void composedPath() {				// [Event.composedPath()] https://developer.mozilla.org/en-US/docs/Web/API/Event/composedPath
+	void composedPath() { // https://dom.spec.whatwg.org/#dom-event-composedpath
 		DKTODO();
 	}
 	
 	// const unsigned short NONE = 0;
+	// TODO //https://dom.spec.whatwg.org/#dom-event-none
 	
 	// const unsigned short CAPTURING_PHASE = 1;
+	// TODO // https://dom.spec.whatwg.org/#dom-event-capturing_phase
 	
 	// const unsigned short AT_TARGET = 2;
+	// TODO // https://dom.spec.whatwg.org/#dom-event-at_target
 	
 	// const unsigned short BUBBLING_PHASE = 3;
+	// TODO // https://dom.spec.whatwg.org/#dom-event-bubbling_phase
 	
 	// readonly attribute unsigned short eventPhase;
-	int eventPhase = 0;					// [Event.eventPhase](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/eventPhase
+	int eventPhase = 0; // https://dom.spec.whatwg.org/#dom-event-eventphase
 	
 	// undefined stopPropagation();
-	void stopPropagation() {			// [Event.stopPropagation()] https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation
+	void stopPropagation() { // https://dom.spec.whatwg.org/#dom-event-stoppropagation
 		DKTODO();
 	}
 	
 	// attribute boolean cancelBubble; // legacy alias of .stopPropagation()
-	bool cancelBubble = false;			// [Event.cancelBubble](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelBubble
+	bool cancelBubble = false; // https://dom.spec.whatwg.org/#dom-event-cancelbubble
 	
 	// undefined stopImmediatePropagation();
-	void stopImmediatePropagation() {	// [Event.stopImmediatePropagation()] https://developer.mozilla.org/en-US/docs/Web/API/Event/stopImmediatePropagation
+	void stopImmediatePropagation() { // https://dom.spec.whatwg.org/#dom-event-stopimmediatepropagation
 		DKTODO();
 	}
 	
 	// readonly attribute boolean bubbles;
-	bool bubbles = false;				// [Event.bubbles](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/bubbles
+	bool bubbles = false; // https://dom.spec.whatwg.org/#dom-event-bubbles
 	
 	// readonly attribute boolean cancelable;
-	bool cancelable = false;			// [Event.cancelable](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelable
+	bool cancelable = false; // https://dom.spec.whatwg.org/#dom-event-cancelable
 	
 	// attribute boolean returnValue;  // legacy
-	bool returnValue = false;			// [Event.returnValue](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/returnValue
+	bool returnValue = false; // https://dom.spec.whatwg.org/#dom-event-returnvalue
 	
 	// undefined preventDefault();
-	void preventDefault() {				// [Event.preventDefault()] https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault
+	void preventDefault() { // https://dom.spec.whatwg.org/#dom-event-preventdefault
 		DKTODO();
 	}
 	
 	// readonly attribute boolean defaultPrevented;
-	bool defaultPrevented = false;		// [Event.defaultPrevented](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/defaultPrevented
+	bool defaultPrevented = false; // https://dom.spec.whatwg.org/#dom-event-defaultprevented
 	
 	// readonly attribute boolean composed;
-	bool composed = false;				// [Event.composed](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/composed
+	bool composed = false; // https://dom.spec.whatwg.org/#dom-event-composed
 	
 	// [LegacyUnforgeable] readonly attribute boolean isTrusted;
-	bool isTrusted = false;				// [Event.isTrusted](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
+	bool isTrusted = false; // https://dom.spec.whatwg.org/#dom-event-istrusted
 	
 	// readonly attribute DOMHighResTimeStamp timeStamp;
-	double timeStamp = 0;				// [Event.timeStamp](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/timeStamp
+	double timeStamp = 0; // https://dom.spec.whatwg.org/#dom-event-timestamp
 	
 	// undefined initEvent(DOMString type, optional boolean bubbles = false, optional boolean cancelable = false); // legacy
-	void initEvent() {					// [Event.initEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/initEvent
+	void initEvent() { // https://dom.spec.whatwg.org/#dom-event-initevent
 		DKDEPRECATED();
 	}
 	

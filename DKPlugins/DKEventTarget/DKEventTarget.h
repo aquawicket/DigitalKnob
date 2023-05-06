@@ -26,6 +26,7 @@ public:
 	DKEventTarget() { // [EventTarget()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/EventTarget
 		interfaceName = "EventTarget";
 		interfaceAddress = pointerToAddress(this);
+		DKINFO("DKEventTarget("+interfaceAddress+") \n");
 	}
 	virtual ~DKEventTarget(){}
 

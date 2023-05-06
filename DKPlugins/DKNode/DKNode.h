@@ -18,6 +18,7 @@ public:
 		DKDEBUGFUNC();
 		interfaceName = "Node";
 		interfaceAddress = pointerToAddress(this);
+		DKINFO("DKNode("+interfaceAddress+") \n");
 	}
 	
 	// const unsigned short ELEMENT_NODE = 1;

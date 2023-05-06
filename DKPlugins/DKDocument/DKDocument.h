@@ -14,23 +14,24 @@ class DKDocument : public DKNode
 {
 public:
 	// constructor();
-	DKDocument() : DKNode() { // [Document()] https://developer.mozilla.org/en-US/docs/Web/API/Document/Document
+	DKDocument() : DKNode() { // https://dom.spec.whatwg.org/#dom-document-document
 		DKDEBUGFUNC();
 		interfaceName = "Document";
 		interfaceAddress = pointerToAddress(this);
+		DKINFO("DKDocument("+interfaceAddress+") \n");
 	}
 	
 	// [SameObject] readonly attribute DOMImplementation implementation;
-	virtual bool implementation(DKString&, bool) { return false; } // [Document.implementation](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/implementation
+	virtual bool implementation(DKString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-implementation
 	
 	// readonly attribute USVString URL;
-	virtual bool URL(DKString&, bool) { return false; } // [Document.URL](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/URL
+	virtual bool URL(DKString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-url
 
 	// readonly attribute USVString documentURI;
-	virtual bool documentURI(DKString&, bool) { return false; } // [Document.documentURI](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/documentURI
+	virtual bool documentURI(DKString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-documenturi
 	
 	// readonly attribute DOMString compatMode;
-	virtual bool compatMode(DKString&, bool) { return false; } // [Document.compatMode](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/compatMode
+	virtual bool compatMode(DKString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-compatmode
 	
 	// readonly attribute DOMString characterSet;
 	virtual bool characterSet(DKString&, bool) { return false; } // [Document.characterSet](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/characterSet
