@@ -13,8 +13,12 @@
 class DKLocation
 {
 public:
+	virtual ~DKLocation() {}
+
 	// [LegacyUnforgeable] stringifier attribute USVString href;
-	virtual bool href(DKString&, bool) { return false; }  // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-href
+	virtual bool href(DKString&, bool) { 
+		return false;
+	}  // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-href
 	
 	// [LegacyUnforgeable] readonly attribute USVString origin;
 	virtual bool origin(DKString&, bool) { return false; } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-origin
