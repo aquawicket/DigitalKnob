@@ -1,4 +1,5 @@
-// [IDL] https://dom.spec.whatwg.org/#interface-element
+// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/Element.idl
+// [SOURCE] https://dom.spec.whatwg.org/#interface-element
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Element
 #pragma once
 #ifndef TEST_Element_H

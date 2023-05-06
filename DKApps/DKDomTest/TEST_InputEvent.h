@@ -1,4 +1,5 @@
-// [IDL] https://w3c.github.io/uievents/#events-inputevents
+// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/InputEvent.idl
+// [SOURCE] https://w3c.github.io/uievents/#events-inputevents
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/InputEvent
 #pragma once
 #ifndef TEST_InputEvent_H

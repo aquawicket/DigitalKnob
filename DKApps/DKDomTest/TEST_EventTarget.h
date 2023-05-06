@@ -1,4 +1,5 @@
-// [IDL] https://dom.spec.whatwg.org/#interface-eventtarget
+// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/EventTarget.idl
+// [SOURCE] https://dom.spec.whatwg.org/#interface-eventtarget
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
 #pragma once
 #ifndef TEST_EventTarget_H

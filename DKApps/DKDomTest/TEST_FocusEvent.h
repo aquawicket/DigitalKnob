@@ -1,4 +1,5 @@
-// [IDL] https://w3c.github.io/uievents/#events-focusevent
+// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/FocusEvent.idl
+// [SOURCE] https://w3c.github.io/uievents/#events-focusevent
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent
 #pragma once
 #ifndef TEST_FocusEvent_H

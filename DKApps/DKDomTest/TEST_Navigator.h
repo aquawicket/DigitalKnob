@@ -1,4 +1,5 @@
-// [IDL] https://html.spec.whatwg.org/multipage/system-state.html#the-navigator-object
+// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/Navigator.idl
+// [SOURCE] https://html.spec.whatwg.org/multipage/system-state.html#the-navigator-object
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Navigator
 #pragma once
 #ifndef TEST_Navigator_H

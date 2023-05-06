@@ -1,4 +1,5 @@
-// [IDL] https://html.spec.whatwg.org/multipage/dom.html#htmlelement
+// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/HTMLElement.idl
+// [SOURCE] https://html.spec.whatwg.org/multipage/dom.html#htmlelement
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement
 #pragma once
 #ifndef TEST_HTMLElement_H

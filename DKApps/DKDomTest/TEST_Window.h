@@ -1,4 +1,5 @@
-// [IDL] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-window-object
+// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/Window.idl
+// [SOURCE] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-window-object
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Window
 #pragma once
 #ifndef TEST_Window_H

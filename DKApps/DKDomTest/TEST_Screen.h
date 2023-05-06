@@ -1,4 +1,5 @@
-// [IDL] https://w3c.github.io/csswg-drafts/cssom-view/#the-screen-interface
+// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/Screen.idl
+// [SOURCE] https://w3c.github.io/csswg-drafts/cssom-view/#the-screen-interface
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Screen
 #pragma once
 #ifndef TEST_Screen_H

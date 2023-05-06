@@ -1,4 +1,5 @@
-// [IDL] https://w3c.github.io/uievents/#events-wheelevents
+// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/WheelEvent.idl
+// [SOURCE] https://w3c.github.io/uievents/#events-wheelevents
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent
 #pragma once
 #ifndef TEST_WheelEvent_H

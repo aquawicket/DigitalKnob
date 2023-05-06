@@ -1,4 +1,5 @@
-// [IDL] https://html.spec.whatwg.org/multipage/dnd.html#the-dragevent-interface
+// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/DragEvent.idl
+// [SOURCE] https://html.spec.whatwg.org/multipage/dnd.html#the-dragevent-interface
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/DragEvent
 #pragma once
 #ifndef TEST_DragEvent_H
