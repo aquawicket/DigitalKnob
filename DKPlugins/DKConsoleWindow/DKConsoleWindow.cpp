@@ -103,8 +103,8 @@ DKConsoleWindow::DKConsoleWindow() : DKWindow() {
 	buttons = 0;
 	clientX = 0;
 	clientY = 0;
-	layerX = 0;
-	layerY = 0;
+	//layerX = 0;
+	//layerY = 0;
 	movementX = 0;
 	movementY = 0;
 	offsetX = 0;
@@ -114,9 +114,9 @@ DKConsoleWindow::DKConsoleWindow() : DKWindow() {
 	relatedTarget = "";
 	screenX = 0;
 	screenY = 0;
-	mozPressure = 0.0;
-	mozInputSource = "";
-	webkitForce = 0;
+	//mozPressure = 0.0;
+	//mozInputSource = "";
+	//webkitForce = 0;
 	x = 0;
 	y = 0;
 
@@ -1022,20 +1022,20 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 
             clientX = mousex - rect.left;
             clientY = mousey - rect.top;
-            if (clientX == x && clientY == y)
+            if (clientX == _x && clientY == _y)
                 break;
 
             button = 0;
-            layerX = clientX;
-            layerY = clientY;
-            movementX = clientX - x;
-            movementY = clientY - y;
+            //layerX = clientX;
+            //layerY = clientY;
+            movementX = clientX - _x;
+            movementY = clientY - _y;
             offsetX = clientX;
             offsetY = clientY;
             pageX = clientX;
             pageY = clientY;
-            x = clientX;
-            y = clientY;
+            _x = clientX;
+            _y = clientY;
             
 			DKMouseEvent mousemove_event("mousemove", "");
 			mousemove_event.altKey = altKey;
@@ -1055,8 +1055,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 			mousemove_event.screenX = screenX;
 			mousemove_event.screenY = screenY;
 			mousemove_event.shiftKey = shiftKey;
-			mousemove_event.x = x;
-			mousemove_event.y = y;
+			mousemove_event.x = _x;
+			mousemove_event.y = _y;
 			dispatchEvent(mousemove_event);
 				
             break;

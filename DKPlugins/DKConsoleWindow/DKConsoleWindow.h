@@ -200,14 +200,14 @@ public:
 		return true;
 	}
 	// [Window.moveTo()] https://developer.mozilla.org/en-US/docs/Web/API/Window/moveTo
-	bool moveTo(int& x, int& y){
-		DKDEBUGFUNC(x, y);
+	bool moveTo(int& x, int& _y){
+		DKDEBUGFUNC(x, _y);
 		#if WIN
 			RECT rect;
 			GetWindowRect(GetConsoleWindow(), &rect);
 			int nWidth = rect.right - rect.left;
 			int nHeight = rect.bottom - rect.top;
-			if (!MoveWindow(GetConsoleWindow(), x, y, nWidth, nHeight, TRUE)){
+			if (!MoveWindow(GetConsoleWindow(), x, _y, nWidth, nHeight, TRUE)){
 				return DKERROR("MoveWindow() failed");
 			}
 		#endif
@@ -303,8 +303,8 @@ public:
 	unsigned int buttons;
 	unsigned int clientX;
 	unsigned int clientY;
-	int layerX;
-	int layerY;
+	//int layerX;
+	//int layerY;
 	int movementX;
 	int movementY;
 	int offsetX;
@@ -314,11 +314,11 @@ public:
 	DKString relatedTarget;
 	unsigned int screenX;
 	unsigned int screenY;
-	float mozPressure;
-	DKString mozInputSource;
-	unsigned int webkitForce;
-	unsigned int x;
-	unsigned int y;
+	//float mozPressure;
+	//DKString mozInputSource;
+	//unsigned int webkitForce;
+	unsigned int _x;
+	unsigned int _y;
 
 	// WheelEvent
 	int deltaX;
