@@ -17,8 +17,8 @@ public:
 	DKFocusEvent(DKString _type, DKString _eventInitDict) : DKUIEvent(_type, _eventInitDict) { // [FocusEvent()] https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent/FocusEvent
 		DKINFO("DKFocusEvent("+_type+", "+_eventInitDict+") \n");
 		
-		eventClass = "FocusEvent";
-		eventAddress = pointerToAddress(this);
+		interfaceName = "FocusEvent";
+		interfaceAddress = pointerToAddress(this);
 	}
 	
 	// readonly attribute EventTarget? relatedTarget;

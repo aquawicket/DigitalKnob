@@ -17,8 +17,8 @@ public:
 	DKInputEvent(DKString _type, DKString _eventInitDict) : DKUIEvent(_type, _eventInitDict) { // [InputEvent()] https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/InputEvent
 		DKINFO("DKInputEvent("+_type+", "+_eventInitDict+") \n");
 		
-		eventClass = "InputEvent";
-		eventAddress = pointerToAddress(this);
+		interfaceName = "InputEvent";
+		interfaceAddress = pointerToAddress(this);
 	}
 	
 	// readonly attribute DOMString? data;

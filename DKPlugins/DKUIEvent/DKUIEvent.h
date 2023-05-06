@@ -18,8 +18,8 @@ public:
 	DKUIEvent(DKString _type, DKString _eventInitDict) : DKEvent(_type, _eventInitDict) { // [UIEvent()] https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/UIEvent
 		DKINFO("DKUIEvent("+_type+", "+_eventInitDict+") \n");
 		
-		eventClass = "UIEvent";
-		eventAddress = pointerToAddress(this);
+		interfaceName = "UIEvent";
+		interfaceAddress = pointerToAddress(this);
 	}
 	
 	// readonly attribute Window? view;

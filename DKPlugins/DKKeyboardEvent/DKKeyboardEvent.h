@@ -17,8 +17,8 @@ public:
 	// constructor(DOMString type, optional KeyboardEventInit eventInitDict = {});
 	DKKeyboardEvent(DKString _type, DKString _eventInitDict) : DKUIEvent(_type, _eventInitDict) { // [KeyboardEvent()] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/KeyboardEvent
 		DKINFO("DKKeyboardEvent("+_type+", "+_eventInitDict+") \n");
-		eventClass = "KeyboardEvent";
-		eventAddress = pointerToAddress(this);
+		interfaceName = "KeyboardEvent";
+		interfaceAddress = pointerToAddress(this);
 	}
 	
 	// KeyLocationCode

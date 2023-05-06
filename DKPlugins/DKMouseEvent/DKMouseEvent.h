@@ -17,8 +17,8 @@ public:
 	DKMouseEvent(DKString _type, DKString _eventInitDict) : DKUIEvent(_type, _eventInitDict) { // [MouseEvent()] https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/MouseEvent
 		DKINFO("DKMouseEvent("+_type+", "+_eventInitDict+") \n");
 		
-		eventClass = "MouseEvent";
-		eventAddress = pointerToAddress(this);
+		interfaceName = "MouseEvent";
+		interfaceAddress = pointerToAddress(this);
 	}
 	
 	// readonly attribute long screenX;

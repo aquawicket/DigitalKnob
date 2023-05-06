@@ -17,8 +17,8 @@ public:
 	DKCustomEvent(DKString _type, DKString _options) : DKEvent(_type, _options) { // [CustomEvent()] https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent
 		DKINFO("DKCustomEvent("+_type+", "+_options+") \n");
 		
-		eventClass = "CustomEvent";
-		eventAddress = pointerToAddress(this);
+		interfaceName = "CustomEvent";
+		interfaceAddress = pointerToAddress(this);
 	}
 	
 	// readonly attribute any detail;
