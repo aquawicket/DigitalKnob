@@ -33,6 +33,7 @@
 #include "DK/DK.h"
 #include "DKWindow/DKWindow.h"
 #include "DKDocument/DKDocument.h"
+#include "DKLocation/DKLocation.h"
 #include "DKRmlDocument/DKRmlFile.h"
 #include "DKRmlDocument/DKRmlConverter.h"
 
@@ -41,7 +42,7 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
-class DKRmlDocument : public DKDocument, public Rml::EventListener, public DKObjectT<DKRmlDocument> {
+class DKRmlDocument : public DKDocument, public DKLocation, public Rml::EventListener, public DKObjectT<DKRmlDocument> {
 public:
 	DKRmlDocument();
 	~DKRmlDocument();

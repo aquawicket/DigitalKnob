@@ -50,7 +50,7 @@ WARNING_DISABLE
 DKRmlFile* DKRmlDocument::dkRmlFile = NULL;
 
 
-DKRmlDocument::DKRmlDocument() : DKDocument() {
+DKRmlDocument::DKRmlDocument() : DKDocument(), DKLocation() {
 	DKDEBUGFUNC();
 }
 
@@ -208,7 +208,7 @@ bool DKRmlDocument::GetSourceCode(DKString& source_code) {
 		return DKWARN("html tag not found\n");
 
 	source_code = source_code.substr(n);
-	replace(source_code, "<", "\n<"); //put all tags on a new line
+	//	replace(source_code, "<", "\n<"); //put all tags on a new line
 	DKINFO("################## Last <html> node from RmlUi ##################\n");
 	DKINFO(source_code+"\n");
 	DKINFO("#################################################################\n");
