@@ -13,6 +13,11 @@
 class DKLocation
 {
 public:
+	DKLocation(){
+		DKDEBUGFUNC();
+		interface = "Location";
+		interfaceAddress = pointerToAddress(this);
+	}
 	virtual ~DKLocation() {}
 
 	// [LegacyUnforgeable] stringifier attribute USVString href;
@@ -64,6 +69,11 @@ public:
 	
 	// [LegacyUnforgeable, SameObject] readonly attribute DOMStringList ancestorOrigins;
 	virtual bool ancestorOrigins(DKString&, bool) { return false; } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-ancestororigins
+
+
+	////// DK properties //////
+	DKString interface = "";
+	DKString interfaceAddress = "";
 };
 
 

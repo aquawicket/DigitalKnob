@@ -7,7 +7,7 @@
 // [Exposed=Window]
 // interface Location { // but see also additional creation steps and overridden internal methods
 var Location = function Location(address) {
-	//console.log("Location("+address+")")
+	console.log("Location("+address+")")
 	
 	if(address)
 		this.address = address;

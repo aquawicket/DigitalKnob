@@ -50,8 +50,8 @@ DKConsoleWindow::DKConsoleWindow() : DKWindow() {
 	DKDEBUGFUNC();
 	DKINFO("DKConsoleWindow::DKConsoleWindow() \n");
 	
-	eventTargetClass = "ConsoleWindow";
-	eventTargetAddress = pointerToAddress(this);
+	interfaceName = "ConsoleWindow";
+	interfaceAddress = pointerToAddress(this);
 		
 	#if !WIN && !EMSCRIPTEN && !ANDROID && !IOS
 		SCREEN *screen = newterm((char *) 0, stdout, stdin);
@@ -399,7 +399,7 @@ void DKConsoleWindow::ErrorExit(LPCSTR lpszMessage) {
 
 void DKConsoleWindow::FocusEventProc(FOCUS_EVENT_RECORD fer) {
     DKDEBUGFUNC(fer);
-	relatedTarget = eventTargetAddress;
+	relatedTarget = interfaceAddress;
 
     if (!fer.bSetFocus) {
         //1. blur: sent after element A loses focus.

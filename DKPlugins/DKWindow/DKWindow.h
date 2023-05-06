@@ -17,8 +17,8 @@ class DKWindow : public DKEventTarget
 public:
 	DKWindow() : DKEventTarget() {
 		DKDEBUGFUNC();
-		eventTargetClass = "Window";
-		eventTargetAddress = pointerToAddress(this);
+		interfaceName = "Window";
+		interfaceAddress = pointerToAddress(this);
 	}
 	
 	// the current browsing context

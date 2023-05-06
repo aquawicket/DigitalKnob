@@ -16,8 +16,8 @@ public:
 
 	DKNode() : DKEventTarget() {
 		DKDEBUGFUNC();
-		eventTargetClass = "Node";
-		eventTargetAddress = pointerToAddress(this);
+		interfaceName = "Node";
+		interfaceAddress = pointerToAddress(this);
 	}
 	
 	// const unsigned short ELEMENT_NODE = 1;

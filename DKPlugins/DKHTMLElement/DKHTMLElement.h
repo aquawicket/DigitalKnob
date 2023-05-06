@@ -14,8 +14,8 @@ public:
 	// [HTMLElement()] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/HTMLElement
 	DKHTMLElement() : DKElement() {
 		DKDEBUGFUNC();
-		eventTargetClass = "HTMLElement";
-		eventTargetAddress = pointerToAddress(this);		
+		interfaceName = "HTMLElement";
+		interfaceAddress = pointerToAddress(this);		
 	}
 	
 	

@@ -16,8 +16,8 @@ public:
 	// constructor();
 	DKDocument() : DKNode() { // [Document()] https://developer.mozilla.org/en-US/docs/Web/API/Document/Document
 		DKDEBUGFUNC();
-		eventTargetClass = "Document";
-		eventTargetAddress = pointerToAddress(this);
+		interfaceName = "Document";
+		interfaceAddress = pointerToAddress(this);
 	}
 	
 	// [SameObject] readonly attribute DOMImplementation implementation;

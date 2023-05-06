@@ -14,8 +14,8 @@ public:
 	// [Element()]
 	DKElement() : DKNode() {
 		DKDEBUGFUNC();
-		eventTargetClass = "Element";
-		eventTargetAddress = pointerToAddress(this);
+		interfaceName = "Element";
+		interfaceAddress = pointerToAddress(this);
 	}
 	
 	
