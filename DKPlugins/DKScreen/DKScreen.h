@@ -19,7 +19,7 @@ public:
 	////// Instance properties //////
 	// [Screen.availTop](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Screen/availTop
 	virtual bool availTop(unsigned int& _availTop, bool set) {
-		DKDEBUGFUNC(_availTop, set)
+		DKDEBUGFUNC(_availTop, set);
 		if(set){
 			return DKTODO();
 		}
@@ -30,7 +30,7 @@ public:
 	}
 	// [Screen.availLeft](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Screen/availLeft
 	virtual bool availLeft(unsigned int& _availLeft, bool set) { 
-		DKDEBUGFUNC(_availLeft, set)
+		DKDEBUGFUNC(_availLeft, set);
 		if(set){
 			return DKTODO();
 		}
@@ -41,7 +41,7 @@ public:
 	}
 	// [Screen.availHeight] https://developer.mozilla.org/en-US/docs/Web/API/Screen/availHeight
 	virtual bool availHeight(unsigned int& _availHeight, bool set) { 
-		DKDEBUGFUNC(_availHeight, set)
+		DKDEBUGFUNC(_availHeight, set);
 		if(set){
 			return DKTODO();
 		}
@@ -52,7 +52,7 @@ public:
 	}
 	// [Screen.availWidth] https://developer.mozilla.org/en-US/docs/Web/API/Screen/availWidth
 	virtual bool availWidth(unsigned int& _availWidth, bool set) { 
-		DKDEBUGFUNC(_availWidth, set)
+		DKDEBUGFUNC(_availWidth, set);
 		if(set){
 			return DKTODO();
 		}
@@ -63,7 +63,7 @@ public:
 	}
 	// [Screen.colorDepth] https://developer.mozilla.org/en-US/docs/Web/API/Screen/colorDepth
 	virtual bool colorDepth(unsigned int& _colorDepth, bool set) {
-		DKDEBUGFUNC(_colorDepth, set)
+		DKDEBUGFUNC(_colorDepth, set);
 		if(set){
 			return DKTODO();
 		}
@@ -74,7 +74,7 @@ public:
 	}
 	// [Screen.height] https://developer.mozilla.org/en-US/docs/Web/API/Screen/height
 	virtual bool height(unsigned int& _height, bool set) {
-		DKDEBUGFUNC(_height, set)
+		DKDEBUGFUNC(_height, set);
 		if(set){
 			return DKTODO();
 		}
@@ -85,7 +85,7 @@ public:
 	}
 	// [Screen.left](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Screen/left
 	virtual bool left(unsigned int& _left, bool set) {
-		DKDEBUGFUNC(_left, set)
+		DKDEBUGFUNC(_left, set);
 		if(set){
 			return DKTODO();
 		}
@@ -96,7 +96,7 @@ public:
 	}
 	// [Screen.orientation] https://developer.mozilla.org/en-US/docs/Web/API/Screen/orientation
 	virtual bool orientation(DKString& _orientation, bool set) {
-		DKDEBUGFUNC(_orientation, set)
+		DKDEBUGFUNC(_orientation, set);
 		if(set){
 			return DKTODO();
 		}
@@ -107,7 +107,7 @@ public:
 	}
 	// [Screen.pixelDepth] https://developer.mozilla.org/en-US/docs/Web/API/Screen/pixelDepth
 	virtual bool pixelDepth(unsigned int& _pixelDepth, bool set) { 
-		DKDEBUGFUNC(_pixelDepth, set)
+		DKDEBUGFUNC(_pixelDepth, set);
 		if(set){
 			return DKTODO();
 		}
@@ -118,7 +118,7 @@ public:
 	}
 	// [Screen.top](Deprecated)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Screen/top
 	virtual bool top(unsigned int& _top, bool set) {
-		DKDEBUGFUNC(_top, set)
+		DKDEBUGFUNC(_top, set);
 		if(set){
 			return DKTODO();
 		}
@@ -129,7 +129,7 @@ public:
 	}
 	// [Screen.width] https://developer.mozilla.org/en-US/docs/Web/API/Screen/width
 	virtual bool width(unsigned int& _width, bool set) {
-		DKDEBUGFUNC(_width, set)
+		DKDEBUGFUNC(_width, set);
 		if(set){
 			return DKTODO();
 		}
@@ -140,7 +140,7 @@ public:
 	}
 	// [Screen.mozEnabled](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Screen/mozEnabled
 	virtual bool mozEnabled(bool& _mozEnabled, bool set) {
-		DKDEBUGFUNC(_mozEnabled, set)
+		DKDEBUGFUNC(_mozEnabled, set);
 		if(set){
 			return DKTODO();
 		}
@@ -151,7 +151,7 @@ public:
 	}
 	// [Screen.mozBrightness](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Screen/mozBrightness
 	virtual bool mozBrightness(unsigned int& _mozBrightness, bool set) { 
-		DKDEBUGFUNC(_mozBrightness, set)
+		DKDEBUGFUNC(_mozBrightness, set);
 		if(set){
 			return DKTODO();
 		}

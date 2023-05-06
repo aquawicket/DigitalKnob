@@ -51,13 +51,13 @@ public:
 
 	// [LegacyUnforgeable] undefined assign(USVString url);
 	virtual bool assign(DKString& url) { // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-assign
-		DKDEBUGFUNC();
+		DKDEBUGFUNC(url);
 		return DKTODO();
 	}
 	
 	// [LegacyUnforgeable] undefined replace(USVString url);
 	virtual bool replace(DKString& url) { // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-replace
-		DKDEBUGFUNC();
+		DKDEBUGFUNC(url);
 		return DKTODO();
 	}
 	
