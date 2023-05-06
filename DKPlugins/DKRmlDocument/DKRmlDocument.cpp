@@ -339,7 +339,7 @@ bool DKRmlDocument::LoadUrl(const DKString& url){
 	std::string::size_type found = _url.find_last_of("/");
 	workingPath = _url.substr(0, found + 1);
 	DKINFO("DKRmlDocument::LoadUrl(): workingPath: " + workingPath + "\n");
-	DKINFO("DKRmlDocument::LoadUrl(): href: " + href + "\n");
+	DKINFO("DKRmlDocument::LoadUrl(): href_: " + href_ + "\n");
 	//get the protocol
 	std::string::size_type n = _url.find(":");
 	protocol = _url.substr(0,n);
