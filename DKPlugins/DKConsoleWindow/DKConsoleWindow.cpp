@@ -50,7 +50,7 @@ DKConsoleWindow::DKConsoleWindow() : DKWindow() {
 	DKDEBUGFUNC();
 	interfaceName = "ConsoleWindow";
 	interfaceAddress = pointerToAddress(this);
-	DKINFO("DKConsoleWindow("interfaceAddress") \n");
+	DKINFO("DKConsoleWindow("+interfaceAddress+") \n");
 		
 	#if !WIN && !EMSCRIPTEN && !ANDROID && !IOS
 		SCREEN *screen = newterm((char *) 0, stdout, stdin);

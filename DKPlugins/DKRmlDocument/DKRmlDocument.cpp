@@ -52,9 +52,9 @@ DKRmlFile* DKRmlDocument::dkRmlFile = NULL;
 
 DKRmlDocument::DKRmlDocument() : DKDocument(), DKLocation() {
 	DKDEBUGFUNC();
-	interfaceName = "RmlDocument";
-	interfaceAddress = pointerToAddress(this);
-	DKINFO("DKRmlDocument("interfaceAddress") \n");
+	//interfaceName = "RmlDocument";
+	//interfaceAddress = pointerToAddress(this);
+	//DKINFO("DKRmlDocument("interfaceAddress") \n");
 }
 
 DKRmlDocument::~DKRmlDocument() {
