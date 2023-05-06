@@ -14,7 +14,7 @@ class DKFocusEvent : public DKUIEvent
 {
 public:
 	// constructor(DOMString type, optional FocusEventInit eventInitDict = {});
-	DKFocusEvent(DKString _type, DKString _eventInitDict) : DKUIEvent(_type, _eventInitDict) { // [FocusEvent()] https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent/FocusEvent
+	DKFocusEvent(DKString _type, DKString _eventInitDict) : DKUIEvent(_type, _eventInitDict) { // https://w3c.github.io/uievents/#dom-focusevent-focusevent
 		DKDEBUGFUNC(_type, _eventInitDict);
 		interfaceName = "FocusEvent";
 		interfaceAddress = pointerToAddress(this);
@@ -23,7 +23,7 @@ public:
 	virtual ~DKFocusEvent(){}
 	
 	// readonly attribute EventTarget? relatedTarget;
-	DKString relatedTarget = ""; // [FocusEvent.relatedTarget] https://developer.mozilla.org/en-US/docs/Web/API/FocusEvent/relatedTarget
+	DKString relatedTarget = ""; // https://w3c.github.io/uievents/#dom-focusevent-relatedtarget
 };
 
 
