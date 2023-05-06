@@ -1,3 +1,6 @@
+// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/Location.idl
+// [SOURCE] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-location-interface
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Location
 #if HAVE_DKDuktape
 
 #pragma once
@@ -11,45 +14,62 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
-// [INTERFACE] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-location-interface
-// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Location
+// Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
+// [Exposed=Window]
+// interface Location { // but see also additional creation steps and overridden internal methods
 class DKLocationDUK : public DKObjectT<DKLocationDUK>
 {
 public:
 	bool Init(){
 		
-		////// Constructor //////
 		DKDuktape::AttachFunction("CPP_DKLocationDUK", DKLocationDUK::constructor);
 		
+		// [LegacyUnforgeable] stringifier attribute USVString href;
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_href", DKLocationDUK::href);
 		
-		////// Instance properties //////
-		// [Location.ancestorOrigins] https://developer.mozilla.org/en-US/docs/Web/API/Location/ancestorOrigins
-		// [Location.href] https://developer.mozilla.org/en-US/docs/Web/API/Location/href
-		// [Location.protocol] https://developer.mozilla.org/en-US/docs/Web/API/Location/protocol
-		// [Location.host] https://developer.mozilla.org/en-US/docs/Web/API/Location/host
-		// [Location.hostname] https://developer.mozilla.org/en-US/docs/Web/API/Location/hostname
-		// [Location.port] https://developer.mozilla.org/en-US/docs/Web/API/Location/port
-		// [Location.pathname] https://developer.mozilla.org/en-US/docs/Web/API/Location/pathname
-		// [Location.search] https://developer.mozilla.org/en-US/docs/Web/API/Location/search
-		// [Location.hash] https://developer.mozilla.org/en-US/docs/Web/API/Location/hash
-		// [Location.origin](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Location/origin
+		// [LegacyUnforgeable] readonly attribute USVString origin;
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_origin", DKLocationDUK::origin);
+		
+		// [LegacyUnforgeable] attribute USVString protocol;
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_protocol", DKLocationDUK::protocol);
+		
+		// [LegacyUnforgeable] attribute USVString host;
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_host", DKLocationDUK::host);
+		
+		// [LegacyUnforgeable] attribute USVString hostname;
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_hostname", DKLocationDUK::hostname);
+		
+		// [LegacyUnforgeable] attribute USVString port;
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_port", DKLocationDUK::port);
+		
+		// [LegacyUnforgeable] attribute USVString pathname;
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_pathname", DKLocationDUK::pathname);
+		
+		// [LegacyUnforgeable] attribute USVString search;
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_search", DKLocationDUK::search);
+		
+		// [LegacyUnforgeable] attribute USVString hash;
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_hash", DKLocationDUK::hash);
+		
+		// [LegacyUnforgeable] undefined assign(USVString url);
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_assign", DKLocationDUK::assign);
+		
+		// [LegacyUnforgeable] undefined replace(USVString url);
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_replace", DKLocationDUK::replace);
+		
+		// [LegacyUnforgeable] undefined reload();
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_reload", DKLocationDUK::reload);
+		
+		// [LegacyUnforgeable, SameObject] readonly attribute DOMStringList ancestorOrigins;
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_ancestorOrigins", DKLocationDUK::ancestorOrigins);
 		
 		
-		////// Instance methods //////
-		// [Location.assign()] https://developer.mozilla.org/en-US/docs/Web/API/Location/assign
-		// [Location.reload()] https://developer.mozilla.org/en-US/docs/Web/API/Location/reload
-		// [Location.replace()] https://developer.mozilla.org/en-US/docs/Web/API/Location/replace
-		// [Location.toString()] https://developer.mozilla.org/en-US/docs/Web/API/Location/toString
-		
-		
-		////// Load .js files
+		////// Load .js files //////
 		DKClass::DKCreate("DKLocation/DKLocationDUK.js");
 		
 		return true;
 	}
 	
-	////// Constructor //////
-	// [Location()]
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKINFO("CPP_DKLocationDUK()\n");
@@ -59,25 +79,131 @@ public:
 		return true;
 	}
 	
+	// [LegacyUnforgeable] stringifier attribute USVString href;
+	static int href(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _href = GetString(ctx);
+		if(!eventTarget(ctx)->href(_href, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _href);
+		return true;
+	}
 	
-	////// Instance properties //////
-	// [Location.ancestorOrigins] https://developer.mozilla.org/en-US/docs/Web/API/Location/ancestorOrigins
-	// [Location.href] https://developer.mozilla.org/en-US/docs/Web/API/Location/href
-	// [Location.protocol] https://developer.mozilla.org/en-US/docs/Web/API/Location/protocol
-	// [Location.host] https://developer.mozilla.org/en-US/docs/Web/API/Location/host
-	// [Location.hostname] https://developer.mozilla.org/en-US/docs/Web/API/Location/hostname
-	// [Location.port] https://developer.mozilla.org/en-US/docs/Web/API/Location/port
-	// [Location.pathname] https://developer.mozilla.org/en-US/docs/Web/API/Location/pathname
-	// [Location.search] https://developer.mozilla.org/en-US/docs/Web/API/Location/search
-	// [Location.hash] https://developer.mozilla.org/en-US/docs/Web/API/Location/hash
-	// [Location.origin](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Location/origin
-		
-		
-	////// Instance methods //////
-	// [Location.assign()] https://developer.mozilla.org/en-US/docs/Web/API/Location/assign
-	// [Location.reload()] https://developer.mozilla.org/en-US/docs/Web/API/Location/reload
-	// [Location.replace()] https://developer.mozilla.org/en-US/docs/Web/API/Location/replace
-	// [Location.toString()] https://developer.mozilla.org/en-US/docs/Web/API/Location/toString
+	// [LegacyUnforgeable] readonly attribute USVString origin;
+	static int origin(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _origin = GetString(ctx);
+		if(!eventTarget(ctx)->origin(_href, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _origin);
+		return true;
+	}
+	
+	// [LegacyUnforgeable] attribute USVString protocol;
+	static int protocol(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _protocol = GetString(ctx);
+		if(!eventTarget(ctx)->protocol(_href, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _protocol);
+		return true;
+	}
+	
+	// [LegacyUnforgeable] attribute USVString host;
+	static int host(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _host = GetString(ctx);
+		if(!eventTarget(ctx)->host(_href, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _host);
+		return true;
+	}
+	
+	// [LegacyUnforgeable] attribute USVString hostname;
+	static int hostname(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _hostname = GetString(ctx);
+		if(!eventTarget(ctx)->hostname(_href, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _hostname);
+		return true;
+	}
+	
+	// [LegacyUnforgeable] attribute USVString port;
+	static int port(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _port = GetString(ctx);
+		if(!eventTarget(ctx)->port(_href, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _port);
+		return true;
+	}
+	
+	// [LegacyUnforgeable] attribute USVString pathname;
+	static int pathname(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _pathname = GetString(ctx);
+		if(!eventTarget(ctx)->pathname(_href, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _pathname);
+		return true;
+	}
+	
+	// [LegacyUnforgeable] attribute USVString search;
+	static int search(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _search = GetString(ctx);
+		if(!eventTarget(ctx)->search(_href, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _search);
+		return true;
+	}
+	
+	// [LegacyUnforgeable] attribute USVString hash;
+	static int hash(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _hash = GetString(ctx);
+		if(!eventTarget(ctx)->hash(_href, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _hash);
+		return true;
+	}
+	
+	// [LegacyUnforgeable] undefined assign(USVString url);
+	static int assign(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString url = GetString(ctx);
+		if(!eventTarget(ctx)->assign(url))
+			return false;
+		return true;
+	}
+	
+	// [LegacyUnforgeable] undefined replace(USVString url);
+	static int replace(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString url = GetString(ctx);
+		if(!eventTarget(ctx)->replace(url))
+			return false;
+		return true;
+	}
+	
+	// [LegacyUnforgeable] undefined reload();
+	static int replace(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		if(!eventTarget(ctx)->reload())
+			return false;
+		return true;
+	}
+	
+	// [LegacyUnforgeable, SameObject] readonly attribute DOMStringList ancestorOrigins;
+	static int ancestorOrigins(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _ancestorOrigins = GetString(ctx);
+		if(!eventTarget(ctx)->ancestorOrigins(_ancestorOrigins, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _ancestorOrigins);
+		return true;
+	}
 	
 };
 REGISTER_OBJECT(DKLocationDUK, true)
