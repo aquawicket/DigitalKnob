@@ -12,7 +12,8 @@ var DKRmlDocument = function DKRmlDocument(address) {
 	if(this.toString() === "[object Object]")
 		this.toString = function(){	return "[object DKRmlDocument]" }
 	
-
+	Location.call(this, this.address)
 	return Document.call(this, this.address)
+	
 }
-DKRmlDocument.prototype = Document.prototype;
+DKRmlDocument.prototype = Document.prototype = Location.prototype;

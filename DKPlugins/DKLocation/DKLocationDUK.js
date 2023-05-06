@@ -17,8 +17,14 @@ var Location = function Location(address) {
 
 	// [LegacyUnforgeable] stringifier attribute USVString href;
 	Object.defineProperty(this, "href", {
-        get: function href()				{ return CPP_DKLocationDUK_href(this.address) },
-		set: function href(data)			{ return CPP_DKLocationDUK_href(this.address, data) },
+        get: function href(){
+			console.log('-> CPP_DKLocationDUK_href('+this.address+')')
+			return CPP_DKLocationDUK_href(this.address) 
+		},
+		set: function href(data){ 
+			console.log('-> CPP_DKLocationDUK_href('+this.address+', '+data+')')
+			return CPP_DKLocationDUK_href(this.address, data) 
+		},
     })
 	
 	// [LegacyUnforgeable] readonly attribute USVString origin;
