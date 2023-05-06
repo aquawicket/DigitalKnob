@@ -16,8 +16,8 @@ public:
 	//constructor(DOMString type, optional DragEventInit eventInitDict = {});
 	DKDragEvent(DKString _type, DKString _eventInitDict) : DKMouseEvent(_type, _eventInitDict) { // [DragEvent()] https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/DragEvent
 		DKINFO("DKDragEvent("+_type+", "+_eventInitDict+") \n");
-		eventClass = "DragEvent";
-		eventAddress = pointerToAddress(this);
+		interfaceName = "DragEvent";
+		interfaceAddress = pointerToAddress(this);
 	}
 	
 	// readonly attribute DataTransfer? dataTransfer;
