@@ -117,8 +117,8 @@ DKConsoleWindow::DKConsoleWindow() : DKWindow() {
 	//mozPressure = 0.0;
 	//mozInputSource = "";
 	//webkitForce = 0;
-	x = 0;
-	y = 0;
+	_x = 0;
+	_y = 0;
 
 	// WheelEvent
 	deltaX = 0;
@@ -604,8 +604,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 					mousedown_event.screenX = screenX;
 					mousedown_event.screenY = screenY;
 					mousedown_event.shiftKey = shiftKey;
-					mousedown_event.x = x;
-					mousedown_event.y = y;
+					mousedown_event.x = _x;
+					mousedown_event.y = _y;
 					dispatchEvent(mousedown_event);
 					
                     break;
@@ -633,8 +633,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				mouseup_event.screenX = screenX;
 				mouseup_event.screenY = screenY;
 				mouseup_event.shiftKey = shiftKey;
-				mouseup_event.x = x;
-				mouseup_event.y = y;
+				mouseup_event.x = _x;
+				mouseup_event.y = _y;
 				dispatchEvent(mouseup_event);
 
 				DKMouseEvent click_event("click", "");
@@ -655,8 +655,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				click_event.screenX = screenX;
 				click_event.screenY = screenY;
 				click_event.shiftKey = shiftKey;
-				click_event.x = x;
-				click_event.y = y;
+				click_event.x = _x;
+				click_event.y = _y;
 				dispatchEvent(click_event);
 				
                 break;
@@ -685,8 +685,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 					mousedown_event.screenX = screenX;
 					mousedown_event.screenY = screenY;
 					mousedown_event.shiftKey = shiftKey;
-					mousedown_event.x = x;
-					mousedown_event.y = y;
+					mousedown_event.x = _x;
+					mousedown_event.y = _y;
 					dispatchEvent(mousedown_event);
 				
                     break;
@@ -714,8 +714,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				mouseup_event.screenX = screenX;
 				mouseup_event.screenY = screenY;
 				mouseup_event.shiftKey = shiftKey;
-				mouseup_event.x = x;
-				mouseup_event.y = y;
+				mouseup_event.x = _x;
+				mouseup_event.y = _y;
 				dispatchEvent(mouseup_event);
 
 				DKMouseEvent contextmenu_event("contextmenu", "");
@@ -736,8 +736,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				contextmenu_event.screenX = screenX;
 				contextmenu_event.screenY = screenY;
 				contextmenu_event.shiftKey = shiftKey;
-				contextmenu_event.x = x;
-				contextmenu_event.y = y;
+				contextmenu_event.x = _x;
+				contextmenu_event.y = _y;
 				dispatchEvent(contextmenu_event);
 				
                 break;
@@ -766,8 +766,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 					mousedown_event.screenX = screenX;
 					mousedown_event.screenY = screenY;
 					mousedown_event.shiftKey = shiftKey;
-					mousedown_event.x = x;
-					mousedown_event.y = y;
+					mousedown_event.x = _x;
+					mousedown_event.y = _y;
 					dispatchEvent(mousedown_event);
 					
                     break;
@@ -795,8 +795,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				mouseup_event.screenX = screenX;
 				mouseup_event.screenY = screenY;
 				mouseup_event.shiftKey = shiftKey;
-				mouseup_event.x = x;
-				mouseup_event.y = y;
+				mouseup_event.x = _x;
+				mouseup_event.y = _y;
 				dispatchEvent(mouseup_event);
 				
                 break;
@@ -825,8 +825,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 					mousedown_event.screenX = screenX;
 					mousedown_event.screenY = screenY;
 					mousedown_event.shiftKey = shiftKey;
-					mousedown_event.x = x;
-					mousedown_event.y = y;
+					mousedown_event.x = _x;
+					mousedown_event.y = _y;
 					dispatchEvent(mousedown_event);
 					
                     break;
@@ -854,8 +854,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				mouseup_event.screenX = screenX;
 				mouseup_event.screenY = screenY;
 				mouseup_event.shiftKey = shiftKey;
-				mouseup_event.x = x;
-				mouseup_event.y = y;
+				mouseup_event.x = _x;
+				mouseup_event.y = _y;
 				dispatchEvent(mouseup_event);
 				
                 break;
@@ -884,8 +884,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 					mousedown_event.screenX = screenX;
 					mousedown_event.screenY = screenY;
 					mousedown_event.shiftKey = shiftKey;
-					mousedown_event.x = x;
-					mousedown_event.y = y;
+					mousedown_event.x = _x;
+					mousedown_event.y = _y;
 					dispatchEvent(mousedown_event);
 					
                     break;
@@ -913,8 +913,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				mouseup_event.screenX = screenX;
 				mouseup_event.screenY = screenY;
 				mouseup_event.shiftKey = shiftKey;
-				mouseup_event.x = x;
-				mouseup_event.y = y;
+				mouseup_event.x = _x;
+				mouseup_event.y = _y;
 				dispatchEvent(mouseup_event);
 				
                 break;
@@ -939,8 +939,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 			dblclick_event.screenX = screenX;
 			dblclick_event.screenY = screenY;
 			dblclick_event.shiftKey = shiftKey;
-			dblclick_event.x = x;
-			dblclick_event.y = y;
+			dblclick_event.x = _x;
+			dblclick_event.y = _y;
 			dispatchEvent(dblclick_event);
 			break;
 		}
@@ -969,8 +969,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 			wheel_event.screenX = screenX;
 			wheel_event.screenY = screenY;
 			wheel_event.shiftKey = shiftKey;
-			wheel_event.x = x;
-			wheel_event.y = y;
+			wheel_event.x = _x;
+			wheel_event.y = _y;
 			dispatchEvent(wheel_event);
 			break;
 		}
@@ -999,8 +999,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 			wheel_event.screenX = screenX;
 			wheel_event.screenY = screenY;
 			wheel_event.shiftKey = shiftKey;
-			wheel_event.x = x;
-			wheel_event.y = y;
+			wheel_event.x = _x;
+			wheel_event.y = _y;
 			dispatchEvent(wheel_event);
 			break;
 		}
