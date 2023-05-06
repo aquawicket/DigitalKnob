@@ -1,5 +1,4 @@
-// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/UIEvent.idl
-// [SOURCE] https://w3c.github.io/uievents
+// [IDL] https://w3c.github.io/uievents/#idl-uievent
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/UIEvent
 #pragma once
 #ifndef DKUIEvent_H
@@ -15,7 +14,7 @@ class DKUIEvent : public DKEvent
 {
 public:
 	//constructor(DOMString type, optional UIEventInit eventInitDict = {});
-	DKUIEvent(DKString _type, DKString _eventInitDict) : DKEvent(_type, _eventInitDict) {
+	DKUIEvent(DKString _type, DKString _eventInitDict) : DKEvent(_type, _eventInitDict) { // https://w3c.github.io/uievents/#dom-uievent-uievent
 		DKDEBUGFUNC(_type, _eventInitDict);
 		interfaceName = "UIEvent";
 		interfaceAddress = pointerToAddress(this);

@@ -1,5 +1,4 @@
-// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/Event.idl
-// [SOURCE] https://dom.spec.whatwg.org/#interface-event
+// [IDL] https://dom.spec.whatwg.org/#interface-event
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Event
 #pragma once
 #ifndef DKEvent_H

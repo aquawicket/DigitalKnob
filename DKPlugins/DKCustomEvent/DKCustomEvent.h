@@ -1,5 +1,4 @@
-// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/CustomEvent.idl
-// [SOURCE] https://dom.spec.whatwg.org/#interface-customevent
+// [IDL] https://dom.spec.whatwg.org/#interface-customevent
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent
 #pragma once
 #ifndef DKCustomEvent_H
@@ -14,7 +13,7 @@ class DKCustomEvent : public DKEvent
 {
 public:
 	// constructor(DOMString type, optional CustomEventInit eventInitDict = {});
-	DKCustomEvent(DKString _type, DKString _eventInitDict) : DKEvent(_type, _eventInitDict) {
+	DKCustomEvent(DKString _type, DKString _eventInitDict) : DKEvent(_type, _eventInitDict) { // https://dom.spec.whatwg.org/#dom-customevent-customevent
 		DKDEBUGFUNC(_type, _eventInitDict);
 		interfaceName = "CustomEvent";
 		interfaceAddress = pointerToAddress(this);
