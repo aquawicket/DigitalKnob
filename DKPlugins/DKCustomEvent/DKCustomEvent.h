@@ -16,11 +16,11 @@ public:
 	// constructor(DOMString type, optional CustomEventInit eventInitDict = {});
 	DKCustomEvent(DKString _type, DKString _eventInitDict) : DKEvent(_type, _eventInitDict) { // [CustomEvent()] https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent
 		DKDEBUGFUNC(_type, _eventInitDict);
-		//DKINFO("DKCustomEvent("+_type+", "+_options+") \n");
 		interfaceName = "CustomEvent";
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKCustomEvent("+interfaceAddress+") \n");
 	}
+	virtual ~DKCustomEvent(){}
 	
 	// readonly attribute any detail;
 	DKString detail = "{}";	// [CustomEvent.detail](Read only) https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/detail

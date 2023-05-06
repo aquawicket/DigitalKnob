@@ -16,11 +16,11 @@ public:
 	// constructor(DOMString type, optional WheelEventInit eventInitDict = {});
 	DKWheelEvent(DKString _type, DKString _eventInitDict) : DKMouseEvent(_type, _eventInitDict) { // [WheelEvent()] https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent/WheelEvent
 		DKDEBUGFUNC(_type, _eventInitDict);
-		//DKINFO("DKWheelEvent("+_type+", "+_eventInitDict+") \n");
 		interfaceName = "WheelEvent";
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKWheelEvent("+interfaceAddress+") \n");
 	}
+	virtual ~DKWheelEvent(){}
 	
 	// DeltaModeCode
 	// const unsigned long DOM_DELTA_PIXEL = 0x00;

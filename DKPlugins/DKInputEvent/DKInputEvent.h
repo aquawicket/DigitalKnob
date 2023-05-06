@@ -16,11 +16,11 @@ public:
 	// constructor(DOMString type, optional InputEventInit eventInitDict = {});
 	DKInputEvent(DKString _type, DKString _eventInitDict) : DKUIEvent(_type, _eventInitDict) { // [InputEvent()] https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/InputEvent
 		DKDEBUGFUNC(_type, _eventInitDict);
-		//DKINFO("DKInputEvent("+_type+", "+_eventInitDict+") \n");
 		interfaceName = "InputEvent";
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKInputEvent("+interfaceAddress+") \n");
 	}
+	virtual ~DKInputEvent(){}
 	
 	// readonly attribute DOMString? data;
 	DKString data = ""; // [InputEvent.data](Read only) https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/data

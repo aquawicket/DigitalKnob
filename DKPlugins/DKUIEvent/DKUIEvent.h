@@ -17,11 +17,11 @@ public:
 	//constructor(DOMString type, optional UIEventInit eventInitDict = {});
 	DKUIEvent(DKString _type, DKString _eventInitDict) : DKEvent(_type, _eventInitDict) { // [UIEvent()] https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/UIEvent
 		DKDEBUGFUNC(_type, _eventInitDict);
-		//DKINFO("DKUIEvent("+_type+", "+_eventInitDict+") \n");
 		interfaceName = "UIEvent";
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKUIEvent("+interfaceAddress+") \n");
 	}
+	virtual ~DKUIEvent(){}
 	
 	// readonly attribute Window? view;
 	DKString view = ""; // [UIEvent.view](Read only) https://developer.mozilla.org/en-US/docs/Web/API/UIEvent/view

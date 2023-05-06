@@ -16,7 +16,6 @@ public:
 	// constructor(DOMString type, optional EventInit eventInitDict = {});  // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Event/Event
 	DKEvent(DKString _type, DKString _eventInitDict){
 		DKDEBUGFUNC(_type, _eventInitDict);
-		//DKINFO("DKEvent("+_type+", "+_eventInitDict+") \n");
 		interfaceName = "Event";
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKEvent("+interfaceAddress+") \n");

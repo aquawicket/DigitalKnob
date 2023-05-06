@@ -17,11 +17,11 @@ public:
 	// constructor(DOMString type, optional KeyboardEventInit eventInitDict = {});
 	DKKeyboardEvent(DKString _type, DKString _eventInitDict) : DKUIEvent(_type, _eventInitDict) { // [KeyboardEvent()] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/KeyboardEvent
 		DKDEBUGFUNC(_type, _eventInitDict);
-		//DKINFO("DKKeyboardEvent("+_type+", "+_eventInitDict+") \n");
 		interfaceName = "KeyboardEvent";
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKKeyboardEvent("+interfaceAddress+") \n");
 	}
+	virtual ~DKKeyboardEvent(){}
 	
 	// KeyLocationCode
 	// const unsigned long DOM_KEY_LOCATION_STANDARD = 0x00;

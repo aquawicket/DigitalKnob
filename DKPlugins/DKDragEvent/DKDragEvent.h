@@ -19,6 +19,7 @@ public:
 		interfaceName = "DragEvent";
 		interfaceAddress = pointerToAddress(this);
 	}
+	virtual ~DKDragEvent(){}
 	
 	// readonly attribute DataTransfer? dataTransfer;
 	DKString dataTransfer = ""; // [DragEvent.dataTransfer](Read only) https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer

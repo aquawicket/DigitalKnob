@@ -23,7 +23,7 @@ class DKEventTarget
 public:
 
 	// constructor();
-	DKEventTarget() { // [EventTarget()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/EventTarget
+	DKEventTarget() { // https://dom.spec.whatwg.org/#dom-eventtarget-eventtarget
 		DKDEBUGFUNC();
 		interfaceName = "EventTarget";
 		interfaceAddress = pointerToAddress(this);
@@ -32,7 +32,7 @@ public:
 	virtual ~DKEventTarget(){}
 
 	// undefined addEventListener(DOMString type, EventListener? callback, optional (AddEventListenerOptions or boolean) options = {});
-	void addEventListener(const DKString& type, std::function<void(DKEvent&)> listener){ // [EventTarget.addEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
+	void addEventListener(const DKString& type, std::function<void(DKEvent&)> listener){ // https://dom.spec.whatwg.org/#dom-eventtarget-addeventlistener
 		DKDEBUGFUNC(type, listener);
 		//DKINFO("DKEventTarget::addEventListener("+type+", listener) \n");
 		EventObject eventObj;
@@ -52,7 +52,7 @@ public:
 	}
 	
 	// undefined removeEventListener(DOMString type, EventListener? callback, optional (EventListenerOptions or boolean) options = {});
-	void removeEventListener(const DKString& type, std::function<void(DKEvent&)> listener){ // [EventTarget.removeEventListener()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener
+	void removeEventListener(const DKString& type, std::function<void(DKEvent&)> listener){ // https://dom.spec.whatwg.org/#dom-eventtarget-removeeventlistener
 		DKDEBUGFUNC(type, listener);
 		//DKINFO("DKEventTarget::removeEventListener("+type+", listener) \n");
 		for(auto it = events.begin(); it != events.end();){
@@ -64,7 +64,7 @@ public:
 	}
 	
 	// boolean dispatchEvent(Event event);
-    void dispatchEvent(DKEvent& event){	// [EventTarget.dispatchEvent()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent
+    void dispatchEvent(DKEvent& event){	// https://dom.spec.whatwg.org/#dom-eventtarget-dispatchevent
 		DKDEBUGFUNC(event);
 		//DKINFO("DKEventTarget::dispatchEvent("+event+") \n");	
 		for (auto& eventObj : events) {

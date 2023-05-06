@@ -21,6 +21,7 @@ public:
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKCompositionEvent("+interfaceAddress+") \n");
 	}
+	virtual ~DKCompositionEvent(){}
 	
 	// readonly attribute DOMString data;
 	DKString data = ""; // [CompositionEvent.data](Read only) https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/data
