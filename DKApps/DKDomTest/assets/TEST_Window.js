@@ -1,4 +1,5 @@
-// [IDL] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-window-object
+// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/Window.idl
+// [SOURCE] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-window-object
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Window
 console.log("////// TEST_Window.js //////")
 
@@ -57,4 +58,6 @@ function printWindowProperties(window){
 	console.log("window.visualViewport = "		+window.visualViewport)
 	console.log("window.window = "				+window.window)
 	//console.log("window.windows = "			+window.windows)
+	
+	printEventTargetProperties(window) // TODO
 }

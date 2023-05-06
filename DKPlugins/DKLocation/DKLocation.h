@@ -15,7 +15,7 @@ class DKLocation
 public:
 	DKLocation(){
 		DKDEBUGFUNC();
-		interface = "Location";
+		interfaceName = "Location";
 		interfaceAddress = pointerToAddress(this);
 	}
 	virtual ~DKLocation() {}
