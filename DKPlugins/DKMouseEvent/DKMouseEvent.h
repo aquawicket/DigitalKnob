@@ -1,5 +1,4 @@
-// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/MouseEvent.idl
-// [SOURCE] https://w3c.github.io/uievents/#events-mouseevents
+// [IDL] https://w3c.github.io/uievents/#idl-mouseevent
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent
 #pragma once
 #ifndef DKMouseEvent_H
@@ -14,7 +13,7 @@ class DKMouseEvent : public DKUIEvent
 {
 public:
 	// constructor(DOMString type, optional MouseEventInit eventInitDict = {});
-	DKMouseEvent(DKString _type, DKString _eventInitDict) : DKUIEvent(_type, _eventInitDict) { // [MouseEvent()] https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/MouseEvent
+	DKMouseEvent(DKString _type, DKString _eventInitDict) : DKUIEvent(_type, _eventInitDict) { // https://w3c.github.io/uievents/#dom-mouseevent-mouseevent
 		DKDEBUGFUNC(_type, _eventInitDict);
 		interfaceName = "MouseEvent";
 		interfaceAddress = pointerToAddress(this);
@@ -23,40 +22,40 @@ public:
 	virtual ~DKMouseEvent(){}
 	
 	// readonly attribute long screenX;
-	unsigned int screenX = 0; // [MouseEvent.screenX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/screenX
+	unsigned int screenX = 0; // https://w3c.github.io/uievents/#dom-mouseevent-screenx
 	
 	// readonly attribute long screenY;
-	unsigned int screenY = 0; // [MouseEvent.screenY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/screenY
+	unsigned int screenY = 0; // https://w3c.github.io/uievents/#dom-mouseevent-screeny
 	
 	// readonly attribute long clientX;
-	unsigned int clientX = 0; // [MouseEvent.clientX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/clientX
+	unsigned int clientX = 0; // https://w3c.github.io/uievents/#dom-mouseevent-clientx
 	
 	// readonly attribute long clientY;
-	unsigned int clientY = 0; // [MouseEvent.clientY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/clientY
+	unsigned int clientY = 0; // https://w3c.github.io/uievents/#dom-mouseevent-clienty
 	 
 	// readonly attribute boolean ctrlKey;
-	bool ctrlKey = false; // [MouseEvent.ctrlKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/ctrlKey
+	bool ctrlKey = false; // https://w3c.github.io/uievents/#dom-mouseevent-ctrlkey
 	
 	// readonly attribute boolean shiftKey;
-	bool shiftKey = false; // [MouseEvent.shiftKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/shiftKey
+	bool shiftKey = false; // https://w3c.github.io/uievents/#dom-mouseevent-shiftkey
 	
 	// readonly attribute boolean altKey;
-	bool altKey = false; // [MouseEvent.altKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/altKey
+	bool altKey = false; // https://w3c.github.io/uievents/#dom-mouseevent-altkey
 	
 	// readonly attribute boolean metaKey;
-	bool metaKey = false; // [MouseEvent.metaKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/metaKey
+	bool metaKey = false; // https://w3c.github.io/uievents/#dom-mouseevent-metakey
 	
 	// readonly attribute short button;
-	unsigned int button = 0; // [MouseEvent.button](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button
+	unsigned int button = 0; // https://w3c.github.io/uievents/#dom-mouseevent-button
 	
 	// readonly attribute unsigned short buttons;
-	unsigned int buttons = 0; // [MouseEvent.buttons](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/buttons
+	unsigned int buttons = 0; // https://w3c.github.io/uievents/#dom-mouseevent-buttons
 	
 	// readonly attribute EventTarget? relatedTarget;
-	DKString relatedTarget = ""; // [MouseEvent.relatedTarget](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/relatedTarget
+	DKString relatedTarget = ""; // https://w3c.github.io/uievents/#dom-mouseevent-relatedtarget
 	
 	// boolean getModifierState(DOMString keyArg);
-	void getModifierState() { // [MouseEvent.getModifierState()] https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/getModifierState
+	void getModifierState() { // https://w3c.github.io/uievents/#dom-mouseevent-getmodifierstate
 		DKTODO();
 	}
 	
