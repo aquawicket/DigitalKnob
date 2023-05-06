@@ -14,4 +14,5 @@ printDocumentProperties(myRmlDocument)		//requires TEST_Document.js
 
 console.log("myRmlDocument.href = " +myRmlDocument.href)
 const url = CPP_DKAssets_LocalAssets()+"index.html"
-myRmlDocument.href = url
+console.log("url = "+url)
+myRmlDocument.href = url;

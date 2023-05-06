@@ -3,5 +3,9 @@
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Location
 console.log("////// TEST_Location.js //////")
 
+function printLocationProperties(location){
+	console.log("location.href = "	+location.href)	
+}
 
-// TODO
+const myLocation = new Location();
+printLocationProperties(myLocation)
