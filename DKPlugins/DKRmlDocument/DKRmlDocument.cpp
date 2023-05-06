@@ -329,7 +329,7 @@ bool DKRmlDocument::LoadUrl(const DKString& url){
 	DKDEBUGFUNC(url);
 	DKString _url = url;
 	if(has(_url,":/")) //could be http:// , https://, file:/// or C:/
-		href = _url; //absolute path including protocol
+		href_ = _url; //absolute path including protocol
 	else if(has(_url,"//")){ //could be //www.site.com/style.css or //site.com/style.css
 		return DKERROR("no protocol specified\n"); //absolute path without protocol
 	}

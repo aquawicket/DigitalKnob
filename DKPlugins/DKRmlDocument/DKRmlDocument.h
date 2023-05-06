@@ -49,16 +49,17 @@ public:
 	bool Init();
 	bool End();
 	
+	/*
 	bool href(DKString& _href, bool set = false) {
 		if(set){
 			LoadUrl(_href);
 		}
 		else{
-			_href = href;
+			//_href = href;
 		}
 		return true;
 	}
-	
+	*/
 	
 	bool GetSourceCode(DKString& source_code);
 	bool LoadFont(const DKString& file);
@@ -74,7 +75,7 @@ public:
 	bool UnregisterEvent(const DKString& elementAddress, const DKString& type);
 	static bool GetOuterHTML(Rml::Element* element, DKString& outerHtml);
 	static bool SetOuterHTML(Rml::Element* element, const DKString& outerHtml);
-	DKString href;
+	DKString href_;
 	DKString protocol;
 	DKString _path;
 	DKString workingPath;

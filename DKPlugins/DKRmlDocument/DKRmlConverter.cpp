@@ -315,7 +315,7 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 	}
 	// <script> tags
 	//get the path from the url
-	DKString path = DKRmlDocument::Get()->href;
+	DKString path = DKRmlDocument::Get()->href_;
 	std::string::size_type found = path.find_last_of("/");
 	path = path.substr(0,found);
 	path += "/";
