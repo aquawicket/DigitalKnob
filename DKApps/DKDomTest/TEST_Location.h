@@ -35,7 +35,6 @@ public:
 	
 		return DKTODO();
 	}
-
 };
 REGISTER_OBJECT(TEST_Location, true);
 

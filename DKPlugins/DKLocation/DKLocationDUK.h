@@ -70,6 +70,36 @@ public:
 		return true;
 	}
 	
+	static DKLocation* eventTarget(duk_context* ctx){
+		DKString eventTargetAddress = duk_require_string(ctx, 0);
+		return (DKLocation*)addressToPointer(eventTargetAddress);
+	}
+	static bool GetBool(duk_context* ctx){
+		if (duk_is_boolean(ctx, 1))
+			return duk_to_boolean(ctx, 1);
+		return false;
+	}
+	static double GetDouble(duk_context* ctx){
+		if (duk_is_number(ctx, 1))
+			return duk_to_number(ctx, 1);
+		return 0.0;
+	}
+	static int GetInt(duk_context* ctx){
+		if (duk_is_number(ctx, 1))
+			return duk_to_int(ctx, 1);
+		return 0;
+	}
+	static DKString GetString(duk_context* ctx){
+		if (duk_is_string(ctx, 1))
+			return duk_to_string(ctx, 1);
+		return "";
+	}
+	static unsigned int GetUint(duk_context* ctx){
+		if (duk_is_number(ctx, 1))
+			return duk_to_uint(ctx, 1);
+		return 0;
+	}
+	
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKINFO("CPP_DKLocationDUK()\n");
@@ -93,7 +123,7 @@ public:
 	static int origin(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString _origin = GetString(ctx);
-		if(!eventTarget(ctx)->origin(_href, duk_is_valid_index(ctx, 1)))
+		if(!eventTarget(ctx)->origin(_origin, duk_is_valid_index(ctx, 1)))
 			return false;
 		dukglue_push(ctx, _origin);
 		return true;
@@ -103,7 +133,7 @@ public:
 	static int protocol(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString _protocol = GetString(ctx);
-		if(!eventTarget(ctx)->protocol(_href, duk_is_valid_index(ctx, 1)))
+		if(!eventTarget(ctx)->protocol(_protocol, duk_is_valid_index(ctx, 1)))
 			return false;
 		dukglue_push(ctx, _protocol);
 		return true;
@@ -113,7 +143,7 @@ public:
 	static int host(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString _host = GetString(ctx);
-		if(!eventTarget(ctx)->host(_href, duk_is_valid_index(ctx, 1)))
+		if(!eventTarget(ctx)->host(_host, duk_is_valid_index(ctx, 1)))
 			return false;
 		dukglue_push(ctx, _host);
 		return true;
@@ -123,7 +153,7 @@ public:
 	static int hostname(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString _hostname = GetString(ctx);
-		if(!eventTarget(ctx)->hostname(_href, duk_is_valid_index(ctx, 1)))
+		if(!eventTarget(ctx)->hostname(_hostname, duk_is_valid_index(ctx, 1)))
 			return false;
 		dukglue_push(ctx, _hostname);
 		return true;
@@ -133,7 +163,7 @@ public:
 	static int port(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString _port = GetString(ctx);
-		if(!eventTarget(ctx)->port(_href, duk_is_valid_index(ctx, 1)))
+		if(!eventTarget(ctx)->port(_port, duk_is_valid_index(ctx, 1)))
 			return false;
 		dukglue_push(ctx, _port);
 		return true;
@@ -143,7 +173,7 @@ public:
 	static int pathname(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString _pathname = GetString(ctx);
-		if(!eventTarget(ctx)->pathname(_href, duk_is_valid_index(ctx, 1)))
+		if(!eventTarget(ctx)->pathname(_pathname, duk_is_valid_index(ctx, 1)))
 			return false;
 		dukglue_push(ctx, _pathname);
 		return true;
@@ -153,7 +183,7 @@ public:
 	static int search(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString _search = GetString(ctx);
-		if(!eventTarget(ctx)->search(_href, duk_is_valid_index(ctx, 1)))
+		if(!eventTarget(ctx)->search(_search, duk_is_valid_index(ctx, 1)))
 			return false;
 		dukglue_push(ctx, _search);
 		return true;
@@ -163,7 +193,7 @@ public:
 	static int hash(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString _hash = GetString(ctx);
-		if(!eventTarget(ctx)->hash(_href, duk_is_valid_index(ctx, 1)))
+		if(!eventTarget(ctx)->hash(_hash, duk_is_valid_index(ctx, 1)))
 			return false;
 		dukglue_push(ctx, _hash);
 		return true;
@@ -188,7 +218,7 @@ public:
 	}
 	
 	// [LegacyUnforgeable] undefined reload();
-	static int replace(duk_context* ctx){
+	static int reload(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(!eventTarget(ctx)->reload())
 			return false;
