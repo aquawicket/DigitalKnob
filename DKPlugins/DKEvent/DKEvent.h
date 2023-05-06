@@ -17,8 +17,8 @@ public:
 	DKEvent(DKString _type, DKString _eventInitDict){
 		DKINFO("DKEvent("+_type+", "+_eventInitDict+") \n");
 		
-		eventClass = "Event";
-		eventAddress = pointerToAddress(this);
+		interfaceName = "Event";
+		interfaceAddress = pointerToAddress(this);
 		
 		long ticks;
 		DKUtil::GetTicks(ticks);
@@ -104,8 +104,8 @@ public:
 	
 	
 	////// DK properties //////
-	DKString eventClass = "";
-	DKString eventAddress = "";
+	DKString interfaceName = "";
+	DKString interfaceAddress = "";
 	DKString eventInitDict = "{}";
 };
 
