@@ -92,9 +92,9 @@ public:
 	// [Window.outerWidth](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/outerWidth
 	bool outerWidth(unsigned int& _outerWidth, bool set = false) {
 		if(set){
-			int height;
-			SDL_GetWindowSize(window, NULL, &height);
-			SDL_SetWindowSize(window, (int)_outerWidth, height);
+			int _height;
+			SDL_GetWindowSize(window, NULL, &_height);
+			SDL_SetWindowSize(window, (int)_outerWidth, _height);
 		}
 		else{
 			int sdl_outerWidth;
