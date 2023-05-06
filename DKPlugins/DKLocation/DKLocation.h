@@ -72,7 +72,7 @@ public:
 
 
 	////// DK properties //////
-	DKString interface = "";
+	DKString interfaceName = "";
 	DKString interfaceAddress = "";
 };
 
