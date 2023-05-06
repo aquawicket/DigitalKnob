@@ -50,11 +50,11 @@ WARNING_DISABLE
 DKRmlFile* DKRmlDocument::dkRmlFile = NULL;
 
 
-DKRmlDocument::DKRmlDocument() : DKDocument(), DKLocation() {
+DKRmlDocument::DKRmlDocument() : DKDocument() {
 	DKDEBUGFUNC();
-	//interfaceName = "RmlDocument";
-	//interfaceAddress = pointerToAddress(this);
-	//DKINFO("DKRmlDocument("interfaceAddress") \n");
+	interfaceName = "RmlDocument";
+	interfaceAddress = pointerToAddress(this);
+	DKINFO("DKRmlDocument("+interfaceAddress+") \n");
 }
 
 DKRmlDocument::~DKRmlDocument() {
