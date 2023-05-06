@@ -14,7 +14,7 @@ class DKCustomEvent : public DKEvent
 {
 public:
 	// constructor(DOMString type, optional CustomEventInit eventInitDict = {});
-	DKCustomEvent(DKString _type, DKString _eventInitDict) : DKEvent(_type, _eventInitDict) { // [CustomEvent()] https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent
+	DKCustomEvent(DKString _type, DKString _eventInitDict) : DKEvent(_type, _eventInitDict) {
 		DKDEBUGFUNC(_type, _eventInitDict);
 		interfaceName = "CustomEvent";
 		interfaceAddress = pointerToAddress(this);
@@ -23,10 +23,10 @@ public:
 	virtual ~DKCustomEvent(){}
 	
 	// readonly attribute any detail;
-	DKString detail = "{}";	// [CustomEvent.detail](Read only) https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/detail
+	DKString detail = "{}";	// https://dom.spec.whatwg.org/#dom-customevent-detail
 
 	// undefined initCustomEvent(DOMString type, optional boolean bubbles = false, optional boolean cancelable = false, optional any detail = null); // legacy
-	void initCustomEvent(){	// [CustomEvent.initCustomEvent()](Deprecated)
+	void initCustomEvent(){	// https://dom.spec.whatwg.org/#dom-customevent-initcustomevent
 		DKDEPRECATED();
 	}
 };
