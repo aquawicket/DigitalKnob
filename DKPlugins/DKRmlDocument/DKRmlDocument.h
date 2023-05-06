@@ -49,17 +49,15 @@ public:
 	bool Init();
 	bool End();
 	
-	/*
 	bool href(DKString& _href, bool set = false) {
 		if(set){
 			LoadUrl(_href);
 		}
 		else{
-			//_href = href;
+			_href = href_;
 		}
 		return true;
 	}
-	*/
 	
 	bool GetSourceCode(DKString& source_code);
 	bool LoadFont(const DKString& file);
