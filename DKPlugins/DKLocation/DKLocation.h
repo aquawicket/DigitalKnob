@@ -17,6 +17,7 @@ public:
 		DKDEBUGFUNC();
 		interfaceName = "Location";
 		interfaceAddress = pointerToAddress(this);
+		DKINFO("DKLocation("+interfaceAddress+") \n");
 	}
 	virtual ~DKLocation() {}
 
