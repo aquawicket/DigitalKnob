@@ -78,9 +78,9 @@ public:
 	// [Window.outerHeight](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/outerHeight
 	bool outerHeight(unsigned int& _outerHeight, bool set = false) {
 		if(set){
-			int width;
-			SDL_GetWindowSize(window, &width, NULL);
-			SDL_SetWindowSize(window, width, (int)_outerHeight);
+			int _width;
+			SDL_GetWindowSize(window, &_width, NULL);
+			SDL_SetWindowSize(window, _width, (int)_outerHeight);
 		}
 		else{
 			int sdl_outerHeight;
