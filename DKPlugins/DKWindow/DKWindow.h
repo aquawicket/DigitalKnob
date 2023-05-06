@@ -19,6 +19,7 @@ public:
 		DKDEBUGFUNC();
 		interfaceName = "Window";
 		interfaceAddress = pointerToAddress(this);
+		DKINFO("DKWindow("+interfaceAddress+") \n");
 	}
 	
 	// the current browsing context

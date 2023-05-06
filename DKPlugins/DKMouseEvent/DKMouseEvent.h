@@ -15,10 +15,11 @@ class DKMouseEvent : public DKUIEvent
 public:
 	// constructor(DOMString type, optional MouseEventInit eventInitDict = {});
 	DKMouseEvent(DKString _type, DKString _eventInitDict) : DKUIEvent(_type, _eventInitDict) { // [MouseEvent()] https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/MouseEvent
-		DKINFO("DKMouseEvent("+_type+", "+_eventInitDict+") \n");
-		
+		DKDEBUGFUNC(_type, _eventInitDict);
+		//DKINFO("DKMouseEvent("+_type+", "+_eventInitDict+") \n");
 		interfaceName = "MouseEvent";
 		interfaceAddress = pointerToAddress(this);
+		DKINFO("DKMouseEvent("+interfaceAddress+") \n");
 	}
 	
 	// readonly attribute long screenX;

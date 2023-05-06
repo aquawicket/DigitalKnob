@@ -15,10 +15,11 @@ class DKInputEvent : public DKUIEvent
 public:
 	// constructor(DOMString type, optional InputEventInit eventInitDict = {});
 	DKInputEvent(DKString _type, DKString _eventInitDict) : DKUIEvent(_type, _eventInitDict) { // [InputEvent()] https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/InputEvent
-		DKINFO("DKInputEvent("+_type+", "+_eventInitDict+") \n");
-		
+		DKDEBUGFUNC(_type, _eventInitDict);
+		//DKINFO("DKInputEvent("+_type+", "+_eventInitDict+") \n");
 		interfaceName = "InputEvent";
 		interfaceAddress = pointerToAddress(this);
+		DKINFO("DKInputEvent("+interfaceAddress+") \n");
 	}
 	
 	// readonly attribute DOMString? data;

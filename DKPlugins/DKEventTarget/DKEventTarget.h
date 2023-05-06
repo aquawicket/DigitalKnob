@@ -24,6 +24,7 @@ public:
 
 	// constructor();
 	DKEventTarget() { // [EventTarget()] https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/EventTarget
+		DKDEBUGFUNC();
 		interfaceName = "EventTarget";
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKEventTarget("+interfaceAddress+") \n");
