@@ -7,6 +7,7 @@
 
 #include "DK/DK.h"
 #include "DKLocation/DKLocation.h"
+#include "DKRmlDocument/DKRmlDocument.h"
 
 // Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
 // [Exposed=Window]
@@ -23,8 +24,14 @@ public:
 	virtual ~DKRmlLocation() {}
 
 	// [LegacyUnforgeable] stringifier attribute USVString href;
-	virtual bool href(DKString&, bool) { 
-		return DKTODO();
+	virtual bool href(DKString& url, bool set) {
+		if (set) {
+			DKRmlDocument::Get()->LoadUrl(url);
+		}
+		else {
+			url = DKRmlDocument::Get()->href_;
+		}
+		return true;
 	}  // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-href
 	
 	// [LegacyUnforgeable] readonly attribute USVString origin;
