@@ -14,7 +14,7 @@
 class DKRmlLocation : public DKLocation
 {
 public:
-	DKRmlLocation(){
+	DKRmlLocation() : DKLocation() {
 		DKDEBUGFUNC();
 		interfaceName = "RmlLocation";
 		interfaceAddress = pointerToAddress(this);
