@@ -1,19 +1,17 @@
 
-var DKRmlDocument = function DKRmlDocument(address) {
-	console.log("DKRmlDocument("+address+")");
+var DKRmlLocation = function DKRmlLocation(address) {
+	console.log("DKRmlLocation("+address+")");
 
 	if(address)
 		this.address = address;
 	if(!this.address)
-		this.address = CPP_DKRmlDocumentDUK();
+		this.address = CPP_DKRmlLocationDUK();
 	
 	
 	//// toString ////
 	if(this.toString() === "[object Object]")
-		this.toString = function(){	return "[object DKRmlDocument]" }
+		this.toString = function(){	return "[object DKRmlLocation]" }
 	
-	Location.call(this, this.address)
-	return Document.call(this, this.address)
-	
+	return Location.call(this, this.address)
 }
-DKRmlDocument.prototype = Document.prototype = Location.prototype;
+DKRmlLocation.prototype = Location.prototype;
