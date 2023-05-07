@@ -11,7 +11,7 @@
 // Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
 // [Exposed=Window]
 // interface Location { // but see also additional creation steps and overridden internal methods
-class DKRmlLocation : public DKLocation
+class DKRmlLocation : public DKLocation, public DKObjectT<DKRmlLocation>
 {
 public:
 	DKRmlLocation() : DKLocation() {
@@ -72,6 +72,6 @@ public:
 	// [LegacyUnforgeable, SameObject] readonly attribute DOMStringList ancestorOrigins;
 	virtual bool ancestorOrigins(DKString&, bool) { return DKTODO(); } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-ancestororigins
 };
-
+REGISTER_OBJECT(DKRmlLocation, true);
 
 #endif //DKLocation_H
