@@ -1,5 +1,4 @@
-// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/Console.idl
-// [SOURCE] https://console.spec.whatwg.org/
+// [IDL] https://console.spec.whatwg.org/#console-namespace
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Console
 #pragma once
 #ifndef TEST_Console_H

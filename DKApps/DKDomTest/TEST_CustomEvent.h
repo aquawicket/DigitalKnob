@@ -1,7 +1,5 @@
-// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/CustomEvent.idl
-// [SOURCE] https://dom.spec.whatwg.org/#interface-customevent
+// [IDL] https://dom.spec.whatwg.org/#interface-customevent
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent
-#pragma once
 #ifndef TEST_CustomEvent_H
 #define TEST_CustomEvent_H
 
