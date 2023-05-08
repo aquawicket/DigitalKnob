@@ -7,6 +7,10 @@
 
 #include "DKDuktape/DKDuktape.h"
 
+WARNING_DISABLE
+#include "dukglue/dukglue.h"
+WARNING_ENABLE
+
 // Source: UI Events (https://www.w3.org/TR/uievents/)
 // [Exposed=Window]
 // interface MouseEvent : UIEvent {
@@ -107,130 +111,113 @@ public:
 	}
 	
 	
+	static DKMouseEvent* mouseEvent(duk_context* ctx){
+		DKString mouseEventAddress = duk_require_string(ctx, 0);
+		return (DKMouseEvent*)addressToPointer(mouseEventAddress);
+	}
+	
 	// constructor(DOMString type, optional MouseEventInit eventInitDict = {});
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
 		DKString eventInitDict = "";//duk_require_string(ctx, 1);
 		DKINFO("CPP_DKMouseEventDUK("+type+","+eventInitDict+")\n");
-		DKMouseEvent* event = new DKMouseEvent(type, eventInitDict);
-		DKString eventAddress = pointerToAddress(event);
-		duk_push_string(ctx, eventAddress.c_str());	
+		DKMouseEvent* mouseEvent = new DKMouseEvent(type, eventInitDict);
+		DKString mouseEventAddress = pointerToAddress(mouseEvent);
+		dukglue_push(ctx, mouseEventAddress);
 		return true;
 	}
 	
 	// readonly attribute long screenX;
 	static int screenX(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
 		if (duk_is_number(ctx, 1))
-			event->screenX = duk_to_uint(ctx, 1);
-		duk_push_uint(ctx, event->screenX);	
+			mouseEvent(ctx)->screenX = duk_to_uint(ctx, 1);
+		dukglue_push(ctx, mouseEvent(ctx)->screenX);
 		return true;
 	}
 	
 	// readonly attribute long screenY;
 	static int screenY(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
 		if (duk_is_number(ctx, 1))
-			event->screenY = duk_to_uint(ctx, 1);
-		duk_push_uint(ctx, event->screenY);	
+			mouseEvent(ctx)->screenY = duk_to_uint(ctx, 1);
+		dukglue_push(ctx, mouseEvent(ctx)->screenY);	
 		return true;
 	}
 	
 	// readonly attribute long clientX;
 	static int clientX(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
 		if (duk_is_number(ctx, 1))
-			event->clientX = duk_to_uint(ctx, 1);
-		duk_push_uint(ctx, event->clientX);	
+			mouseEvent(ctx)->clientX = duk_to_uint(ctx, 1);
+		dukglue_push(ctx, mouseEvent(ctx)->clientX);	
 		return true;
 	}
 	
 	// readonly attribute long clientY;
 	static int clientY(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
 		if (duk_is_number(ctx, 1))
-			event->clientY = duk_to_uint(ctx, 1);
-		duk_push_uint(ctx, event->clientY);	
+			mouseEvent(ctx)->clientY = duk_to_uint(ctx, 1);
+		dukglue_push(ctx, mouseEvent(ctx)->clientY);	
 		return true;
 	}
 	
 	// readonly attribute boolean ctrlKey;
 	static int ctrlKey(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
 		if (duk_is_boolean(ctx, 1))
-			event->ctrlKey = duk_to_boolean(ctx, 1);
-		duk_push_boolean(ctx, event->ctrlKey);	
+			mouseEvent(ctx)->ctrlKey = duk_to_boolean(ctx, 1);
+		dukglue_push(ctx, mouseEvent(ctx)->ctrlKey);	
 		return true;
 	}
 	
 	// readonly attribute boolean shiftKey;
 	static int shiftKey(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
 		if (duk_is_boolean(ctx, 1))
-			event->shiftKey = duk_to_boolean(ctx, 1);
-		duk_push_boolean(ctx, event->shiftKey);	
+			mouseEvent(ctx)->shiftKey = duk_to_boolean(ctx, 1);
+		dukglue_push(ctx, mouseEvent(ctx)->shiftKey);	
 		return true;
 	}
 	
 	// readonly attribute boolean altKey;
 	static int altKey(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
 		if (duk_is_boolean(ctx, 1))
-			event->altKey = duk_to_boolean(ctx, 1);
-		duk_push_boolean(ctx, event->altKey);	
+			mouseEvent(ctx)->altKey = duk_to_boolean(ctx, 1);
+		dukglue_push(ctx, mouseEvent(ctx)->altKey);	
 		return true;
 	}
 	
 	// readonly attribute boolean metaKey;
 	static int metaKey(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
 		if (duk_is_boolean(ctx, 1))
-			event->metaKey = duk_to_boolean(ctx, 1);
-		duk_push_boolean(ctx, event->metaKey);	
+			mouseEvent(ctx)->metaKey = duk_to_boolean(ctx, 1);
+		dukglue_push(ctx, mouseEvent(ctx)->metaKey);	
 		return true;
 	}
 	
 	// readonly attribute short button;
 	static int button(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
-		duk_push_uint(ctx, event->button);	
+		dukglue_push(ctx, mouseEvent(ctx)->button);	
 		return true;
 	}
 	
 	// readonly attribute unsigned short buttons;
 	static int buttons(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
-		duk_push_uint(ctx, event->buttons);	
+		dukglue_push(ctx, mouseEvent(ctx)->buttons);	
 		return true;
 	}
 	
 	// readonly attribute EventTarget? relatedTarget;
 	static int relatedTarget(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
-		duk_push_string(ctx, event->relatedTarget.c_str());	
+		dukglue_push(ctx, mouseEvent(ctx)->relatedTarget);	
 		return true;
 	}
 	
@@ -245,49 +232,37 @@ public:
 	//  	readonly attribute double pageX;
 			static int pageX(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				DKString eventAddress = duk_require_string(ctx, 0);
-				DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
-				duk_push_int(ctx, event->pageX);	
+				dukglue_push(ctx, mouseEvent(ctx)->pageX);	
 				return true;
 			}
 	//  	readonly attribute double pageY;
 			static int pageY(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				DKString eventAddress = duk_require_string(ctx, 0);
-				DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
-				duk_push_int(ctx, event->pageY);	
+				dukglue_push(ctx, mouseEvent(ctx)->pageY);	
 				return true;
 			}
 	//  	readonly attribute double x;
 			static int x(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				DKString eventAddress = duk_require_string(ctx, 0);
-				DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
-				duk_push_uint(ctx, event->x);	
+				dukglue_push(ctx, mouseEvent(ctx)->x);	
 				return true;
 			}
 	//  	readonly attribute double y;
 			static int y(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				DKString eventAddress = duk_require_string(ctx, 0);
-				DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
-				duk_push_uint(ctx, event->y);	
+				dukglue_push(ctx, mouseEvent(ctx)->y);	
 				return true;
 			}
 	//  	readonly attribute double offsetX; 
 			static int offsetX(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				DKString eventAddress = duk_require_string(ctx, 0);
-				DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
-				duk_push_int(ctx, event->offsetX);	
+				dukglue_push(ctx, mouseEvent(ctx)->offsetX);	
 				return true;
 			}
 	//  	readonly attribute double offsetY;
 			static int offsetY(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				DKString eventAddress = duk_require_string(ctx, 0);
-				DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
-				duk_push_int(ctx, event->offsetY);	
+				dukglue_push(ctx, mouseEvent(ctx)->offsetY);	
 				return true;
 			}
 	// };
@@ -297,17 +272,13 @@ public:
 	//   	readonly attribute double movementX;
 			static int movementX(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				DKString eventAddress = duk_require_string(ctx, 0);
-				DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
-				duk_push_int(ctx, event->movementX);	
+				dukglue_push(ctx, mouseEvent(ctx)->movementX);	
 				return true;
 			}
 	//   	readonly attribute double movementY;
 			static int movementY(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				DKString eventAddress = duk_require_string(ctx, 0);
-				DKMouseEvent* event = (DKMouseEvent*)addressToPointer(eventAddress);
-				duk_push_int(ctx, event->movementY);	
+				dukglue_push(ctx, mouseEvent(ctx)->movementY);	
 				return true;
 			}
 	// };

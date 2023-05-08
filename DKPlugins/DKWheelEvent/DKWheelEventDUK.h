@@ -7,6 +7,9 @@
 
 #include "DKDuktape/DKDuktape.h"
 
+WARNING_DISABLE
+#include "dukglue/dukglue.h"
+WARNING_ENABLE
 
 // Source: UI Events (https://www.w3.org/TR/uievents/)
 // [Exposed=Window]
@@ -46,15 +49,20 @@ public:
 	}
 	
 	
+	static DKWheelEvent* wheelEvent(duk_context* ctx){
+		DKString wheelEventAddress = duk_require_string(ctx, 0);
+		return (DKWheelEvent*)addressToPointer(wheelEventAddress);
+	}
+	
 	// constructor(DOMString type, optional WheelEventInit eventInitDict = {});
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
-		DKString options = "";//duk_require_string(ctx, 1);
-		DKINFO("CPP_DKWheelEventDUK("+type+","+options+")\n");
-		DKWheelEvent* event = new DKWheelEvent(type, options);
-		DKString eventAddress = pointerToAddress(event);
-		duk_push_string(ctx, eventAddress.c_str());	
+		DKString eventInitDict = "";//duk_require_string(ctx, 1);
+		DKINFO("CPP_DKWheelEventDUK("+type+","+eventInitDict+")\n");
+		DKWheelEvent* wheelEvent = new DKWheelEvent(type, eventInitDict);
+		DKString wheelEventAddress = pointerToAddress(wheelEvent);
+		dukglue_push(ctx, wheelEventAddress);	
 		return true;
 	}
 	
@@ -68,44 +76,36 @@ public:
 	// readonly attribute double deltaX;
 	static int deltaX(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKWheelEvent* event = (DKWheelEvent*)addressToPointer(eventAddress);
 		if (duk_is_number(ctx, 1))
-			event->deltaX = duk_to_number(ctx, 1);
-		duk_push_number(ctx, event->deltaX);	
+			wheelEvent(ctx)->deltaX = duk_to_number(ctx, 1);
+		dukglue_push(ctx, wheelEvent(ctx)->deltaX);	
 		return true;
 	}
 	
 	// readonly attribute double deltaY;
 	static int deltaY(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKWheelEvent* event = (DKWheelEvent*)addressToPointer(eventAddress);
 		if (duk_is_number(ctx, 1))
-			event->deltaY = duk_to_number(ctx, 1);
-		duk_push_number(ctx, event->deltaY);	
+			wheelEvent(ctx)->deltaY = duk_to_number(ctx, 1);
+		dukglue_push(ctx, wheelEvent(ctx)->deltaY);	
 		return true;
 	}
 		
 	// readonly attribute double deltaZ;
 	static int deltaZ(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKWheelEvent* event = (DKWheelEvent*)addressToPointer(eventAddress);
 		if (duk_is_number(ctx, 1))
-			event->deltaZ = duk_to_number(ctx, 1);
-		duk_push_number(ctx, event->deltaZ);	
+			wheelEvent(ctx)->deltaZ = duk_to_number(ctx, 1);
+		dukglue_push(ctx, wheelEvent(ctx)->deltaZ);	
 		return true;
 	}	
 		
 	// readonly attribute unsigned long deltaMode;
 	static int deltaMode(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKWheelEvent* event = (DKWheelEvent*)addressToPointer(eventAddress);
 		if (duk_is_number(ctx, 1))
-			event->deltaMode = duk_to_uint(ctx, 1);
-		duk_push_uint(ctx, event->deltaMode);	
+			wheelEvent(ctx)->deltaMode = duk_to_uint(ctx, 1);
+		dukglue_push(ctx, wheelEvent(ctx)->deltaMode);	
 		return true;
 	}	
 };
