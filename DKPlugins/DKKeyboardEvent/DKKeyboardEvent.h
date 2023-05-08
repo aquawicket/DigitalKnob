@@ -1,5 +1,4 @@
-// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/KeyboardEvent.idl
-// [SOURCE] https://w3c.github.io/uievents/#events-keyboardevents
+// [IDL] https://w3c.github.io/uievents/#idl-keyboardevent
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent
 #pragma once
 #ifndef DKKeyboardEvent_H
