@@ -35,7 +35,7 @@ WARNING_DISABLE
 #include <osgAudio/Source.h>
 #include <osgAudio/Sample.h>
 #include <osg/DeleteHandler>
-//WARING_ENABLE
+WARNING_ENABLE
 
 
 class DKOsgAudio : public DKObjectT<DKOsgAudio>

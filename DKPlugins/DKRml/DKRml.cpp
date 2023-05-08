@@ -33,7 +33,7 @@ WARNING_DISABLE
 #include <Core/PluginRegistry.h>
 #include <Core/XMLNodeHandlerDefault.h>
 #include <Core/XMLNodeHandlerBody.h>
-//WARNING_EABLE
+WARNING_ENABLE
 
 #include "DKRml/DKRml.h"
 #include "DKWindow/DKWindow.h"

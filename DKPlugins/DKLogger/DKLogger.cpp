@@ -30,7 +30,7 @@
 
 WARNING_DISABLE
 #include <cstring>
-//WARING_ENABLE
+WARNING_ENABLE
 
 
 /*

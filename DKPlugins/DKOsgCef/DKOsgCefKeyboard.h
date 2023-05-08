@@ -30,7 +30,7 @@
 
 WARNING_DISABLE
 #include <osgGA/GUIEventAdapter>
-//WARING_ENABLE
+WARNING_ENABLE
 
 
 class DKOsgCefKeyboard

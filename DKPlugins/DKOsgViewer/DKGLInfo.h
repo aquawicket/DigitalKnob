@@ -32,7 +32,7 @@
 WARNING_DISABLE
 #include <osg/Uniform>
 #include <osg/Texture>
-//WARING_ENABLE
+WARNING_ENABLE
 
 
 class DKGLInfo : public DKObjectT<DKGLInfo>

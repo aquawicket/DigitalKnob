@@ -30,7 +30,7 @@
 
 WARNING_DISABLE
 #include <iostream>
-//WARING_ENABLE
+WARNING_ENABLE
 
 
 bool DKOsgNotify::Init(){

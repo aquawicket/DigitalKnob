@@ -32,7 +32,7 @@
 WARNING_DISABLE
 #include <osgDB/FileUtils>
 #include <osgDB/FileNameUtils>
-//WARING_ENABLE
+WARNING_ENABLE
 
 
 bool DKOsgViewer::Init(){

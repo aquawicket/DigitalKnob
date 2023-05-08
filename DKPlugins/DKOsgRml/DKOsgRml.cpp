@@ -26,7 +26,7 @@
 #include "DK/stdafx.h"
 #include "DKOsgRml/DKOsgRml.h"
 
-//WARINING_DISABLE
+WARINING_DISABLE
 #include <osg/State>
 WARNING_ENABLE
 
