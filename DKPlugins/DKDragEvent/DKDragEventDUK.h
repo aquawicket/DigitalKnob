@@ -4,6 +4,9 @@
 
 #include "DKDuktape/DKDuktape.h"
 
+WARNING_DISABLE
+#include "dukglue/dukglue.h"
+WARNING_ENABLE
 
 // [IDL] https://html.spec.whatwg.org/multipage/dnd.html#the-dragevent-interface
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/DragEvent
@@ -37,16 +40,21 @@ public:
 	}
 	
 	
+	static DKDragEvent* dragEvent(duk_context* ctx){
+		DKString dragEventAddress = duk_require_string(ctx, 0);
+		return (DKDragEvent*)addressToPointer(dragEventAddress);
+	}
+	
 	////// Constructor //////
 	// [DragEvent()] https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/DragEvent
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
-		DKString options = "";//duk_require_string(ctx, 1);
-		DKINFO("CPP_DKDragEventDUK("+type+","+options+")\n");
-		DKDragEvent* event = new DKDragEvent(type, options);
-		DKString eventAddress = pointerToAddress(event);
-		duk_push_string(ctx, eventAddress.c_str());	
+		DKString eventInitDict = "";//duk_require_string(ctx, 1);
+		DKINFO("CPP_DKDragEventDUK("+type+","+eventInitDict+")\n");
+		DKDragEvent* dragEvent = new DKDragEvent(type, eventInitDict);
+		DKString dragEventAddress = pointerToAddress(dragEvent);
+		dukglue_push(ctx, dragEventAddress);	
 		return true;
 	}
 	
