@@ -1,3 +1,6 @@
+// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/DragEvent.idl
+// [SOURCE] https://html.spec.whatwg.org/multipage/dnd.html#the-dragevent-interface
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/DragEvent
 #pragma once
 #ifndef DKDragEventDUK_H
 #define DKDragEventDUK_H
@@ -8,29 +11,18 @@ WARNING_DISABLE
 #include "dukglue/dukglue.h"
 WARNING_ENABLE
 
-// [IDL] https://html.spec.whatwg.org/multipage/dnd.html#the-dragevent-interface
-// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/DragEvent
+// Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
+// [Exposed=Window]
+// interface DragEvent : MouseEvent {
 class DKDragEventDUK : public DKObjectT<DKDragEventDUK>
 {
 public:
 	bool Init(){
 		
-		////// Constructor //////
+		//constructor(DOMString type, optional DragEventInit eventInitDict = {});
 		DKDuktape::AttachFunction("CPP_DKDragEventDUK", DKDragEventDUK::constructor);
 	
-	
-		////// Instance properties //////
-		// [DragEvent.dataTransfer](Read only) https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer
-
-		
-		////// Event types //////
-		// [drag] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/drag_event
-		// [dragend] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragend_event
-		// [dragenter] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragenter_event
-		// [dragleave] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragleave_event
-		// [dragover] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragover_event
-		// [dragstart] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragstart_event
-		// [drop] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/drop_event
+		// TODO
 	
 	
 		////// Load .js files //////
@@ -45,8 +37,7 @@ public:
 		return (DKDragEvent*)addressToPointer(dragEventAddress);
 	}
 	
-	////// Constructor //////
-	// [DragEvent()] https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/DragEvent
+	//constructor(DOMString type, optional DragEventInit eventInitDict = {});
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
@@ -59,18 +50,7 @@ public:
 	}
 	
 	
-	////// Instance properties //////
-	// [DragEvent.dataTransfer](Read only) https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer
-	
-	
-	////// Event types //////
-	// [drag] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/drag_event
-	// [dragend] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragend_event
-	// [dragenter] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragenter_event
-	// [dragleave] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragleave_event
-	// [dragover] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragover_event
-	// [dragstart] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragstart_event
-	// [drop] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/drop_event
+	// TODO
 	
 };
 REGISTER_OBJECT(DKDragEventDUK, true)

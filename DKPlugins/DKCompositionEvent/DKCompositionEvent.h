@@ -16,7 +16,6 @@ public:
 	// constructor(DOMString type, optional CompositionEventInit eventInitDict = {});
 	DKCompositionEvent(DKString _type, DKString _eventInitDict) : DKUIEvent(_type, _eventInitDict) { // [CompositionEvent()] https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/CompositionEvent
 		DKDEBUGFUNC(_type, _eventInitDict);
-		//DKINFO("DKCompositionEvent("+_type+", "+_eventInitDict+") \n");
 		interfaceName = "CompositionEvent";
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKCompositionEvent("+interfaceAddress+") \n");
