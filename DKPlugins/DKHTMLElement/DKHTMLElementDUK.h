@@ -6,10 +6,6 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-WARNING_DISABLE
-	#include "dukglue/dukglue.h"
-WARNING_ENABLE
-
 
 // [IDL] https://html.spec.whatwg.org/multipage/dom.html#htmlelement
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement

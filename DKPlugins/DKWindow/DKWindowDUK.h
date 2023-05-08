@@ -9,10 +9,6 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-WARNING_DISABLE
-#include "dukglue/dukglue.h"
-WARNING_ENABLE
-
 
 // Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
 // [Global=Window,

@@ -1,4 +1,3 @@
-dk_depend(dukglue)
 dk_depend(webref)
 dk_depend(DKDuktape)
 

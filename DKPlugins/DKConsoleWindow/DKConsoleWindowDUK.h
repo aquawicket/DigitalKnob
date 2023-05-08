@@ -4,10 +4,6 @@
 
 #include "DKDuktape/DKDuktape.h"
 
-WARNING_DISABLE
-#include "dukglue/dukglue.h"
-WARNING_ENABLE
-
 
 class DKConsoleWindowDUK : public DKObjectT<DKConsoleWindowDUK>
 {
