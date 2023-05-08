@@ -34,40 +34,58 @@ public:
 	virtual bool compatMode(DKString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-compatmode
 	
 	// readonly attribute DOMString characterSet;
-	virtual bool characterSet(DKString&, bool) { return false; } // [Document.characterSet](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/characterSet
+	virtual bool characterSet(DKString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-characterset
 	
 	// readonly attribute DOMString charset; // legacy alias of .characterSet
-	virtual bool charset(DKString&, bool) { return false; } // [Document.charset](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/charset
+	virtual bool charset(DKString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-charset
 	
 	// readonly attribute DOMString inputEncoding; // legacy alias of .characterSet
-	virtual bool inputEncoding(DKString&, bool) { return false; } // [Document.inputEncoding](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/inputEncoding
+	virtual bool inputEncoding(DKString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-inputencoding
 	
 	// readonly attribute DOMString contentType;
-	virtual bool contentType(DKString&, bool) { return false; } // [Document.contentType](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/contentType
+	virtual bool contentType(DKString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-contenttype
 	
 	// readonly attribute DocumentType? doctype;
-	virtual bool doctype(DKString&, bool) { return false; } // [Document.doctype](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/doctype
+	virtual bool doctype(DKString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-doctype
 	
 	// readonly attribute Element? documentElement;
-	virtual bool documentElement(DKString&, bool) { return false; } // [Document.documentElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/documentElement
+	virtual bool documentElement(DKString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-documentelement
 	
 	// HTMLCollection getElementsByTagName(DOMString qualifiedName);
-	// TODO
+	virtual bool getElementsByTagName(DKString& _qualifiedName, DKString& _getElementsByTagName){ // https://dom.spec.whatwg.org/#dom-document-getelementsbytagname
+		DKDEBUGFUNC(_qualifiedName, _getElementsByTagName)
+		return DKTODO();
+	}
 	
 	// HTMLCollection getElementsByTagNameNS(DOMString? namespace, DOMString localName);
-	// TODO
+	virtual bool getElementsByTagNameNS(DKString& _namespace, DKString& _localName, DKString& _getElementsByTagNameNS){ // https://dom.spec.whatwg.org/#dom-document-getelementsbytagnamens
+		DKDEBUGFUNC(_namespace, _localName, _getElementsByTagNameNS)
+		return DKTODO();
+	}
 	
 	// HTMLCollection getElementsByClassName(DOMString classNames);
-	// TODO
+	virtual bool getElementsByClassName(DKString& _classNames, DKString& _getElementsByClassName){ https://dom.spec.whatwg.org/#dom-document-getelementsbyclassname
+		DKDEBUGFUNC(_namespace, _localName, _getElementsByClassName)
+		return DKTODO();
+	}
 	
 	// [CEReactions, NewObject] Element createElement(DOMString localName, optional (DOMString or ElementCreationOptions) options = {});
-	// TODO
+	virtual bool createElement(DKString& _localName, DKString& _options, DKString& _createElement){ // https://dom.spec.whatwg.org/#dom-document-createelement
+		DKDEBUGFUNC(_localName, _options, _createElement)
+		return DKTODO();
+	}
 	
 	// [CEReactions, NewObject] Element createElementNS(DOMString? namespace, DOMString qualifiedName, optional (DOMString or ElementCreationOptions) options = {});
-	// TODO
+	virtual bool createElementNS(DKString& _namespace, DKString& _qualifiedName, DKString& _options, DKString& _createElementNS){ // https://dom.spec.whatwg.org/#dom-document-createelementns
+		DKDEBUGFUNC(_namespace, _qualifiedName, _options, _createElementNS)
+		return DKTODO();
+	}
 	
 	// [NewObject] DocumentFragment createDocumentFragment();
-	// TODO
+	virtual bool createDocumentFragment(DKString& _createDocumentFragment){
+		DKDEBUGFUNC(_createDocumentFragment)
+		return DKTODO();
+	}
 	
 	// [NewObject] Text createTextNode(DOMString data);
 	// TODO
