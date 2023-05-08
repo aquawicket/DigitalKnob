@@ -9,6 +9,9 @@
 
 #include "DKDuktape/DKDuktape.h"
 
+WARNING_DISABLE
+#include "dukglue/dukglue.h"
+WARNING_ENABLE
 
 // Source: UI Events (https://www.w3.org/TR/uievents/)
 // [Exposed=Window]
@@ -43,27 +46,29 @@ public:
 	}
 	
 	
+	static DKCompositionEvent* compositionEvent(duk_context* ctx){
+		DKString compositionEventAddress = duk_require_string(ctx, 0);
+		return (DKCompositionEvent*)addressToPointer(compositionEventAddress);
+	}
+	
 	// constructor(DOMString type, optional CompositionEventInit eventInitDict = {});
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
-		DKString options = "";//duk_require_string(ctx, 1);
-		DKINFO("CPP_DKCompositionEventDUK("+type+","+options+")\n");
-		DKCompositionEvent* event = new DKCompositionEvent(type, options);
-		//event->eventClass = "CompositionEvent";
-		DKString eventAddress = pointerToAddress(event);
-		duk_push_string(ctx, eventAddress.c_str());	
+		DKString eventInitDict = "";//duk_require_string(ctx, 1);
+		DKINFO("CPP_DKCompositionEventDUK("+type+","+eventInitDict+")\n");
+		DKCompositionEvent* compositionEvent = new DKCompositionEvent(type, eventInitDict);
+		DKString compositionEventAddress = pointerToAddress(compositionEvent);
+		dukglue_push(ctx, compositionEventAddress);	
 		return true;
 	}
 	
 	// readonly attribute DOMString data;
 	static int _data(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKCompositionEvent* event = (DKCompositionEvent*)addressToPointer(eventAddress);
 		if (duk_is_string(ctx, 1))
-			event->data = duk_to_string(ctx, 1);
-		duk_push_string(ctx, event->data.c_str());	
+			compositionEvent(ctx)->data = duk_to_string(ctx, 1);
+		dukglue_push(ctx, compositionEvent(ctx)->data);	
 		return true;
 	}
 	
