@@ -1,5 +1,4 @@
-// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/Document.idl
-// [SOURCE] https://dom.spec.whatwg.org/#interface-document
+// [IDL] https://dom.spec.whatwg.org/#interface-document
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Document
 #pragma once
 #ifndef DKDocument_H
