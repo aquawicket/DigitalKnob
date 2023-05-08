@@ -317,8 +317,8 @@ public:
 	//float mozPressure;
 	//DKString mozInputSource;
 	//unsigned int webkitForce;
-	unsigned int _x;
-	unsigned int _y;
+	unsigned int x;
+	unsigned int y;
 
 	// WheelEvent
 	int deltaX;
