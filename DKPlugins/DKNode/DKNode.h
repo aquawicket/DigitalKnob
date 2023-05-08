@@ -35,7 +35,7 @@ public:
 	// const unsigned short NOTATION_NODE = 12; // legacy
 	
 	// readonly attribute unsigned short nodeType;
-	virtual bool nodeType(DKString&, bool) { return false; } // [Node.nodeType](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType
+	virtual bool nodeType(unsigned int&, bool) { return false; } // [Node.nodeType](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType
 	
 	// readonly attribute DOMString nodeName;
 	virtual bool nodeName(DKString&, bool) { return false; } // [Node.nodeName](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeName
@@ -50,8 +50,8 @@ public:
 	virtual bool ownerDocument(DKString&, bool) { return false; } // [Node.ownerDocument](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Node/ownerDocument
 	
 	// Node getRootNode(optional GetRootNodeOptions options = {});
-	virtual bool getRootNode() { // [Node.getRootNode()] https://developer.mozilla.org/en-US/docs/Web/API/Node/getRootNode
-		DKDEBUGFUNC();
+	virtual bool getRootNode(DKString& _options, DKString& _node) { // [Node.getRootNode()] https://developer.mozilla.org/en-US/docs/Web/API/Node/getRootNode
+		DKDEBUGFUNC(_options, _node);
 		return DKTODO();
 	}
 	
@@ -62,8 +62,8 @@ public:
 	virtual bool parentElement(DKString&, bool) { return false; } // [Node.parentElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Node/parentElement
 	
 	// boolean hasChildNodes();
-	virtual bool hasChildNodes() { // [Node.hasChildNodes()] https://developer.mozilla.org/en-US/docs/Web/API/Node/hasChildNodes
-		DKDEBUGFUNC();
+	virtual bool hasChildNodes(bool& _hasChildNodes) { // [Node.hasChildNodes()] https://developer.mozilla.org/en-US/docs/Web/API/Node/hasChildNodes
+		DKDEBUGFUNC(_hasChildNodes);
 		return DKTODO();
 	}
 	
@@ -95,20 +95,20 @@ public:
 	}
 
 	// [CEReactions, NewObject] Node cloneNode(optional boolean deep = false);
-	virtual bool cloneNode() { // [Node.cloneNode()] https://developer.mozilla.org/en-US/docs/Web/API/Node/cloneNode
-		DKDEBUGFUNC();
+	virtual bool cloneNode(bool& _deep, DKString& _node) { // [Node.cloneNode()] https://developer.mozilla.org/en-US/docs/Web/API/Node/cloneNode
+		DKDEBUGFUNC(_deep, _node);
 		return DKTODO();
 	}
 	
 	// boolean isEqualNode(Node? otherNode);
-	virtual bool isEqualNode() { // [Node.isEqualNode()] https://developer.mozilla.org/en-US/docs/Web/API/Node/isEqualNode
-		DKDEBUGFUNC();
+	virtual bool isEqualNode(DKString& _otherNode, bool& _isEqualNode) { // [Node.isEqualNode()] https://developer.mozilla.org/en-US/docs/Web/API/Node/isEqualNode
+		DKDEBUGFUNC(_otherNode, _isEqualNode);
 		return DKTODO();
 	}
 	
 	// boolean isSameNode(Node? otherNode); // legacy alias of ===
-	virtual bool isSameNode() { // [Node.isSameNode()] https://developer.mozilla.org/en-US/docs/Web/API/Node/isSameNode
-		DKDEBUGFUNC();
+	virtual bool isSameNode(DKString& _otherNode, bool& _isSameNode) { // [Node.isSameNode()] https://developer.mozilla.org/en-US/docs/Web/API/Node/isSameNode
+		DKDEBUGFUNC(_otherNode, _isSameNode);
 		return DKTODO();
 	}
 
@@ -120,56 +120,56 @@ public:
 	// const unsigned short DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC = 0x20;
 	
 	// unsigned short compareDocumentPosition(Node other);
-	virtual bool compareDocumentPosition() { // [Node.compareDocumentPosition()] https://developer.mozilla.org/en-US/docs/Web/API/Node/compareDocumentPosition
-		DKDEBUGFUNC();
+	virtual bool compareDocumentPosition(DKString& _other, unsigned int _compareDocumentPosition) { // [Node.compareDocumentPosition()] https://developer.mozilla.org/en-US/docs/Web/API/Node/compareDocumentPosition
+		DKDEBUGFUNC(_other, _compareDocumentPosition);
 		return DKTODO();
 	}
 	
 	// boolean contains(Node? other);
-	virtual bool contains() { // [Node.contains()] https://developer.mozilla.org/en-US/docs/Web/API/Node/contains
-		DKDEBUGFUNC();
+	virtual bool contains(DKString& _other, bool& _contains) { // [Node.contains()] https://developer.mozilla.org/en-US/docs/Web/API/Node/contains
+		DKDEBUGFUNC(_other, _contains);
 		return DKTODO();
 	}
 	
 	// DOMString? lookupPrefix(DOMString? namespace);
-	virtual bool lookupPrefix() { // [Node.lookupPrefix()] https://developer.mozilla.org/en-US/docs/Web/API/Node/lookupPrefix
-		DKDEBUGFUNC();
+	virtual bool lookupPrefix(DKString& _namespace, DKString& _lookupPrefix) { // [Node.lookupPrefix()] https://developer.mozilla.org/en-US/docs/Web/API/Node/lookupPrefix
+		DKDEBUGFUNC(_namespace, _lookupPrefix);
 		return DKTODO();
 	}
 	
 	// DOMString? lookupNamespaceURI(DOMString? prefix);
-	virtual bool lookupNamespaceURI() { // [Node.lookupNamespaceURI()] https://developer.mozilla.org/en-US/docs/Web/API/Node/lookupNamespaceURI
-		DKDEBUGFUNC();
+	virtual bool lookupNamespaceURI(DKString& _prefix, DKString& _lookupNamespaceURI) { // [Node.lookupNamespaceURI()] https://developer.mozilla.org/en-US/docs/Web/API/Node/lookupNamespaceURI
+		DKDEBUGFUNC(_prefix, _lookupNamespaceURI);
 		return DKTODO();
 	}
 	
 	// boolean isDefaultNamespace(DOMString? namespace);
-	virtual bool isDefaultNamespace() { // [Node.isDefaultNamespace()] https://developer.mozilla.org/en-US/docs/Web/API/Node/isDefaultNamespace
-		DKDEBUGFUNC();
+	virtual bool isDefaultNamespace(DKString& _namespace, bool& _isDefaultNamespace) { // [Node.isDefaultNamespace()] https://developer.mozilla.org/en-US/docs/Web/API/Node/isDefaultNamespace
+		DKDEBUGFUNC(_namespace, _isDefaultNamespace);
 		return DKTODO();
 	}
 	
 	// [CEReactions] Node insertBefore(Node node, Node? child);
-	virtual bool insertBefore() { // [Node.insertBefore()] https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore
-		DKDEBUGFUNC();
+	virtual bool insertBefore(DKString& _node, DKString& _child, DKString& _insertBefore) { // [Node.insertBefore()] https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore
+		DKDEBUGFUNC(_node, _child, _insertBefore);
 		return DKTODO();
 	}
 	
 	// [CEReactions] Node appendChild(Node node);
-	virtual bool appendChild(DKString& aChild) { // [Node.appendChild()] https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild
-		DKDEBUGFUNC(aChild);
+	virtual bool appendChild(DKString& _node, DKString& _appendChild) { // [Node.appendChild()] https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild
+		DKDEBUGFUNC(_node, _appendChild);
 		return DKTODO();
 	}
 	
 	// [CEReactions] Node replaceChild(Node node, Node child);
-	virtual bool replaceChild() { // [Node.replaceChild()] https://developer.mozilla.org/en-US/docs/Web/API/Node/replaceChild
-		DKDEBUGFUNC();
+	virtual bool replaceChild(DKString& _node, DKString& _child, DKString& _replaceChild) { // [Node.replaceChild()] https://developer.mozilla.org/en-US/docs/Web/API/Node/replaceChild
+		DKDEBUGFUNC(_node, _child, _replaceChild);
 		return DKTODO();
 	}
 	
 	// [CEReactions] Node removeChild(Node child);
-	virtual bool removeChild() { // [Node.removeChild()] https://developer.mozilla.org/en-US/docs/Web/API/Node/removeChild
-		DKDEBUGFUNC();
+	virtual bool removeChild(DKString& _child, DKString& _removeChild) { // [Node.removeChild()] https://developer.mozilla.org/en-US/docs/Web/API/Node/removeChild
+		DKDEBUGFUNC(_child, _removeChild);
 		return DKTODO();
 	}
 };
