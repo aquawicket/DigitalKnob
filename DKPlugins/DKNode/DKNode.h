@@ -95,8 +95,8 @@ public:
 	}
 
 	// [CEReactions, NewObject] Node cloneNode(optional boolean deep = false);
-	virtual bool cloneNode(bool& _deep, DKString& _node) { // [Node.cloneNode()] https://developer.mozilla.org/en-US/docs/Web/API/Node/cloneNode
-		DKDEBUGFUNC(_deep, _node);
+	virtual bool cloneNode(bool& _deep, DKString& _cloneNode) { // [Node.cloneNode()] https://developer.mozilla.org/en-US/docs/Web/API/Node/cloneNode
+		DKDEBUGFUNC(_deep, _cloneNode);
 		return DKTODO();
 	}
 	

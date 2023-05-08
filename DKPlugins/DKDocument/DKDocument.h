@@ -88,34 +88,64 @@ public:
 	}
 	
 	// [NewObject] Text createTextNode(DOMString data);
-	// TODO
+	virtual bool createTextNode(DKString& _data, DKString& _createTextNode){
+		DKDEBUGFUNC(_data, _createTextNode);
+		return DKTODO();
+	}
 	
 	// [NewObject] CDATASection createCDATASection(DOMString data);
-	// TODO
+	virtual bool createCDATASection(DKString& _data, DKString& _createCDATASection){
+		DKDEBUGFUNC(_data, _createCDATASection);
+		return DKTODO();
+	}
 	
 	// [NewObject] Comment createComment(DOMString data);
-	// TODO
+	virtual bool createComment(DKString& _data, DKString& _createComment){
+		DKDEBUGFUNC(_data, _createComment);
+		return DKTODO();
+	}
 	
 	// [NewObject] ProcessingInstruction createProcessingInstruction(DOMString target, DOMString data);
-	// TODO
+	virtual bool createProcessingInstruction(DKString& _target, DKString& _data, DKString& _createProcessingInstruction){
+		DKDEBUGFUNC(_target, _data, _createProcessingInstruction);
+		return DKTODO();
+	}
 	
 	// [CEReactions, NewObject] Node importNode(Node node, optional boolean deep = false);
-	// TODO
+	virtual bool importNode(DKString& _node, bool& _deep, DKString& _importNode){
+		DKDEBUGFUNC(_node, _deep, _importNode);
+		return DKTODO();
+	}
 	
 	// [CEReactions] Node adoptNode(Node node);
-	// TODO
+	virtual bool adoptNode(DKString& _node, DKString& _adoptNode){
+		DKDEBUGFUNC(_node, _adoptNode);
+		return DKTODO();
+	}
 	
 	// [NewObject] Attr createAttribute(DOMString localName);
-	// TODO
+	virtual bool createAttribute(DKString& _localName, DKString& _createAttribute){
+		DKDEBUGFUNC(_localName, _createAttribute);
+		return DKTODO();
+	}
 	
 	// [NewObject] Attr createAttributeNS(DOMString? namespace, DOMString qualifiedName);
-	// TODO
+	virtual bool createAttributeNS(DKString& _namespace, DKString& _qualifiedName, DKString& _createAttributeNS){
+		DKDEBUGFUNC(_namespace, _qualifiedName, _createAttributeNS);
+		return DKTODO();
+	}
 	
 	// [NewObject] Event createEvent(DOMString interface); // legacy
-	// TODO
+	virtual bool createEvent(DKString& _interface, DKString& _createEvent){
+		DKDEBUGFUNC(_interface, _createEvent);
+		return DKTODO();
+	}
 	
 	// [NewObject] Range createRange();
-	// TODO
+	virtual bool createRange(DKString& _createRange){
+		DKDEBUGFUNC(_createRange);
+		return DKTODO();
+	}
 	
 	// NodeFilter.SHOW_ALL = 0xFFFFFFFF
 	// [NewObject] NodeIterator createNodeIterator(Node root, optional unsigned long whatToShow = 0xFFFFFFFF, optional NodeFilter? filter = null);
@@ -164,38 +194,6 @@ public:
 	//		attribute EventHandler onfullscreenerror;
 	//		// TODO
 	//};
-	
-	
-	
-	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	virtual bool activeElement(DKString&, bool) { return false; } // [Document.activeElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement
-	virtual bool adoptedStyleSheets(DKString&, bool) { return false; } // [Document.adoptedStyleSheets] https://developer.mozilla.org/en-US/docs/Web/API/Document/adoptedStyleSheets
-	virtual bool body(DKString&, bool) { return false; } // [Document.body] https://developer.mozilla.org/en-US/docs/Web/API/Document/body
-	virtual bool childElementCount(unsigned int&, bool) { return false; } // [Document.childElementCount](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/childElementCount
-	virtual bool children(DKString&, bool) { return false; } // [Document.children](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/children
-	virtual bool currentScript(DKString&, bool) { return false; } // [Document.currentScript](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/currentScript
-	virtual bool embeds(DKString&, bool) { return false; } // [Document.embeds](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/embeds
-	virtual bool featurePolicy(DKString&, bool) { return false; } // [Document.featurePolicy Experimental](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/featurePolicy
-	virtual bool firstElementChild(DKString&, bool) { return false; } // [Document.firstElementChild](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/firstElementChild
-	virtual bool fonts(DKString&, bool) { return false; } // [Document.fonts] https://developer.mozilla.org/en-US/docs/Web/API/Document/fonts
-	virtual bool forms(DKString&, bool) { return false; } // [Document.forms](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/forms
-	virtual bool fragmentDirective(DKString&, bool) { return false; } // [Document.fragmentDirective](Read only)(Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Document/fragmentDirective
-	virtual bool fullscreenElement(DKString&, bool) { return false; } // [Document.fullscreenElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/fullscreenElement
-	virtual bool head(DKString&, bool) { return false; } // [Document.head](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/head
-	virtual bool hidden(bool&, bool) { return false; } // [Document.hidden](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/hidden
-	virtual bool images(DKString&, bool) { return false; } // [Document.images](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/images	
-	virtual bool lastElementChild(DKString&, bool) { return false; } // [Document.lastElementChild](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/lastElementChild
-	virtual bool links(DKString&, bool) { return false; } // [Document.links](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/links
-	virtual bool pictureInPictureElement(DKString&, bool) { return false; } // [Document.pictureInPictureElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/pictureInPictureElement
-	virtual bool pictureInPictureEnabled(bool&, bool) { return false; } // [Document.pictureInPictureEnabled](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/pictureInPictureEnabled
-	virtual bool plugins(DKString&, bool) { return false; } // [Document.plugins](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/plugins
-	virtual bool pointerLockElement(DKString&, bool) { return false; } // [Document.pointerLockElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/pointerLockElement
-	virtual bool scripts(DKString&, bool) { return false; } // [Document.scripts](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/scripts
-	virtual bool scrollingElement(DKString&, bool) { return false; } // [Document.scrollingElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/scrollingElement
-	virtual bool styleSheets(DKString&, bool) { return false; } // [Document.styleSheets](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/styleSheets
-	virtual bool timeline(DKString&, bool) { return false; } // [Document.timeline](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/timeline
-	virtual bool visibilityState(DKString&, bool) { return false; } // [Document.visibilityState](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/visibilityState
 };
 
 

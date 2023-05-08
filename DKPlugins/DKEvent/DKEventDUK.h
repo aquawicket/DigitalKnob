@@ -89,6 +89,10 @@ public:
 		return true;
 	}
 	
+	static DKEvent* event(duk_context* ctx){
+		DKString eventAddress = duk_require_string(ctx, 0);
+		return (DKEvent*)addressToPointer(eventAddress);
+	}
 	
 	// constructor(DOMString type, optional EventInit eventInitDict = {});
 	static int constructor(duk_context* ctx){
@@ -105,36 +109,28 @@ public:
 	// readonly attribute DOMString type;
 	static int type(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
-		duk_push_string(ctx, event->type.c_str());	
+		duk_push_string(ctx, event(ctx)->type.c_str());	
 		return true;
 	}
 	
 	// readonly attribute EventTarget? target;
 	static int target(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
-		duk_push_string(ctx, event->target.c_str());	
+		duk_push_string(ctx, event(ctx)->target.c_str());	
 		return true;
 	}
 	
 	// readonly attribute EventTarget? srcElement; // legacy
 	static int srcElement(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
-		duk_push_string(ctx, event->srcElement.c_str());	
+		duk_push_string(ctx, event(ctx)->srcElement.c_str());	
 		return true;
 	}
 	
 	// readonly attribute EventTarget? currentTarget;
 	static int currentTarget(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
-		duk_push_string(ctx, event->currentTarget.c_str());	
+		duk_push_string(ctx, event(ctx)->currentTarget.c_str());	
 		return true;
 	}
 	
@@ -155,9 +151,7 @@ public:
 	// readonly attribute unsigned short eventPhase;
 	static int eventPhase(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
-		duk_push_number(ctx, event->eventPhase);	
+		duk_push_number(ctx, event(ctx)->eventPhase);	
 		return true;
 	}
 	
@@ -182,22 +176,18 @@ public:
 	// readonly attribute boolean bubbles;
 	static int bubbles(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
 		if (duk_is_boolean(ctx, 1))
-			event->bubbles = duk_to_boolean(ctx, 1);
-		duk_push_boolean(ctx, event->bubbles);	
+			event(ctx)->bubbles = duk_to_boolean(ctx, 1);
+		duk_push_boolean(ctx, event(ctx)->bubbles);	
 		return true;
 	}
 	
 	// readonly attribute boolean cancelable;
 	static int cancelable(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
 		if (duk_is_boolean(ctx, 1))
-			event->cancelable = duk_to_boolean(ctx, 1);
-		duk_push_boolean(ctx, event->cancelable);	
+			event(ctx)->cancelable = duk_to_boolean(ctx, 1);
+		duk_push_boolean(ctx, event(ctx)->cancelable);	
 		return true;
 	}
 	
@@ -216,38 +206,30 @@ public:
 	// readonly attribute boolean defaultPrevented;
 	static int defaultPrevented(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
-		duk_push_boolean(ctx, event->defaultPrevented);	
+		duk_push_boolean(ctx, event(ctx)->defaultPrevented);	
 		return true;
 	}
 	
 	// readonly attribute boolean composed;
 	static int composed(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
 		if (duk_is_boolean(ctx, 1))
-			event->composed = duk_to_boolean(ctx, 1);
-		duk_push_boolean(ctx, event->composed);	
+			event(ctx)->composed = duk_to_boolean(ctx, 1);
+		duk_push_boolean(ctx, event(ctx)->composed);	
 		return true;
 	}
 	
 	// [LegacyUnforgeable] readonly attribute boolean isTrusted;
 	static int isTrusted(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
-		duk_push_boolean(ctx, event->isTrusted);	
+		duk_push_boolean(ctx, event(ctx)->isTrusted);	
 		return true;
 	}
 	
 	// readonly attribute DOMHighResTimeStamp timeStamp;
 	static int timeStamp(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
-		duk_push_number(ctx, event->timeStamp);	
+		duk_push_number(ctx, event(ctx)->timeStamp);	
 		return true;
 	}
 	
