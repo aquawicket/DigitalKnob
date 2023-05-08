@@ -29,9 +29,9 @@
 #include "DK/DK.h"
 
 WARNING_DISABLE
-#ifdef USE_osgDB
-	#include <osgDB/Registry>
-#endif
+	#ifdef USE_osgDB
+		#include <osgDB/Registry>
+	#endif
 WARNING_ENABLE
 
 

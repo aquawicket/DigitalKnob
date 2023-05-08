@@ -29,15 +29,15 @@
 #include "DK/DK.h"
 
 WARNING_DISABLE
-#include <osgViewer/CompositeViewer>
+	#include <osgViewer/CompositeViewer>
 WARNING_ENABLE
 
 #ifdef DKAPP
 	WARNING_DISABLE
-	#ifdef HAVE_osgDB
-	#include <osgDB/Registry>
-	#include <osgWidget/Util>
-	#endif
+		#ifdef HAVE_osgDB
+		#include <osgDB/Registry>
+		#include <osgWidget/Util>
+		#endif
 	WARNING_ENABLE
 
 	// osgWrappers

@@ -30,11 +30,11 @@
 #include "DK/DK.h"
 
 WARNING_DISABLE
-#include <osgAudio/SoundManager.h>
-#include <osgAudio/SoundNode.h>
-#include <osgAudio/Source.h>
-#include <osgAudio/Sample.h>
-#include <osg/DeleteHandler>
+	#include <osgAudio/SoundManager.h>
+	#include <osgAudio/SoundNode.h>
+	#include <osgAudio/Source.h>
+	#include <osgAudio/Sample.h>
+	#include <osg/DeleteHandler>
 WARNING_ENABLE
 
 

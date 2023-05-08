@@ -30,14 +30,17 @@
 #ifndef DKDuktape_H
 #define DKDuktape_H
 
+#define DKHAVE_DKDuktape 1
+
 #include "DK/DK.h"
 #include "DK/DKEvents.h"
 
 WARNING_DISABLE
 	#include "duktape.h"
+	#include "dukglue/dukglue.h"
 WARNING_ENABLE
 
-#define DKHAVE_DKDuktape 1
+
 
 /* Flags for duk_push_string_file_raw() */
 #define DUK_STRING_PUSH_SAFE              (1 << 0)    /* no error if file does not exist */

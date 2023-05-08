@@ -30,29 +30,29 @@
 #include "DKOsgModel/DKOsgModel.h"
 
 WARNING_DISABLE
-#include <osgDB/ReadFile>
-#include <osgViewer/Viewer>
-//#ifdef USE_osgwTools
-#include <osgwTools/Shapes.h>
-#include <osgwTools/AbsoluteModelTransform.h>
-//#endif
-//#ifdef USE_osgbDynamics 
-#include <osgbDynamics/GroundPlane.h>
-#include <osgbDynamics/MotionState.h>
-#include <osgbDynamics/RigidBody.h>
-#include <osgbDynamics/TripleBuffer.h>
-#include <osgbDynamics/PhysicsThread.h>
-//#endif
-//#ifdef USE_osgbCollision
-#include <osgbCollision/RefBulletObject.h>
-#include <osgbCollision/Utils.h>
-//#endif
-//#ifdef USE_osgbInteraction
-#include <osgbInteraction/LaunchHandler.h>
-#include <osgbInteraction/SaveRestoreHandler.h>
-#include <osgbInteraction/DragHandler.h>
-//#endif
-#include <btBulletDynamicsCommon.h>
+	#include <osgDB/ReadFile>
+	#include <osgViewer/Viewer>
+	//#ifdef USE_osgwTools
+	#include <osgwTools/Shapes.h>
+	#include <osgwTools/AbsoluteModelTransform.h>
+	//#endif
+	//#ifdef USE_osgbDynamics 
+	#include <osgbDynamics/GroundPlane.h>
+	#include <osgbDynamics/MotionState.h>
+	#include <osgbDynamics/RigidBody.h>
+	#include <osgbDynamics/TripleBuffer.h>
+	#include <osgbDynamics/PhysicsThread.h>
+	//#endif
+	//#ifdef USE_osgbCollision
+	#include <osgbCollision/RefBulletObject.h>
+	#include <osgbCollision/Utils.h>
+	//#endif
+	//#ifdef USE_osgbInteraction
+	#include <osgbInteraction/LaunchHandler.h>
+	#include <osgbInteraction/SaveRestoreHandler.h>
+	#include <osgbInteraction/DragHandler.h>
+	//#endif
+	#include <btBulletDynamicsCommon.h>
 WARNING_ENABLE
 
 

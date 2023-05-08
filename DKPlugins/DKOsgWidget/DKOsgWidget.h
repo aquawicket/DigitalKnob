@@ -30,9 +30,9 @@
 #include "DKOsgWindow/DKOsgWindow.h"
 
 WARNING_DISABLE
-#include <osgWidget/Window>
-#include <osgWidget/WindowManager>
-#include <osgWidget/ViewerEventHandlers>
+	#include <osgWidget/Window>
+	#include <osgWidget/WindowManager>
+	#include <osgWidget/ViewerEventHandlers>
 WARNING_ENABLE
 
 

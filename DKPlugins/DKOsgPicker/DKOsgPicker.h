@@ -31,8 +31,8 @@
 #include "DK/DK.h"
 
 WARNING_DISABLE
-#include <osgViewer/ViewerEventHandlers>
-#include <osgFX/Outline>
+	#include <osgViewer/ViewerEventHandlers>
+	#include <osgFX/Outline>
 WARNING_ENABLE
 
 

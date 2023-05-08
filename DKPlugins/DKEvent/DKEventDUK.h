@@ -10,7 +10,7 @@
 #include "DKDuktape/DKDuktape.h"
 
 WARNING_DISABLE
-#include "dukglue/dukglue.h"
+	#include "dukglue/dukglue.h"
 WARNING_ENABLE
 
 // Source: DOM Standard (https://dom.spec.whatwg.org/)

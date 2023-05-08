@@ -28,7 +28,7 @@
 #define DKOsgManipulator_H
 
 WARNING_DISABLE
-#include <osgGA/TrackballManipulator>
+	#include <osgGA/TrackballManipulator>
 WARNING_ENABLE
 
 

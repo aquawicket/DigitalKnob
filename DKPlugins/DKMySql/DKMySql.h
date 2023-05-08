@@ -31,28 +31,25 @@
 #include "DK/DK.h"
 
 WARNING_DISABLE
-//#if defined (WIN32) || defined (WIN64)
-  //#include <winsock.h>
-  //#pragma warning (disable: 4514 4786)
-  //#pragma warning( push, 3 )
-//#endif
+	//#if defined (WIN32) || defined (WIN64)
+	  //#include <winsock.h>
+	  //#pragma warning (disable: 4514 4786)
+	  //#pragma warning( push, 3 )
+	//#endif
 
-//#include <stdio.h>
-//#include <string.h>
+	//#include <stdio.h>
+	//#include <string.h>
 
-#if !defined (WIN32) && !defined (WIN64)
-  #include <unistd.h>
-#endif
+	#if !defined (WIN32) && !defined (WIN64)
+	  #include <unistd.h>
+	#endif
+
+	#ifdef USE_mysql
+		#include "mysql.h"
+	#else
+		#include "DKCurl/DKCurl.h"
+	#endif
 WARNING_ENABLE
-
-
-#ifdef USE_mysql
-	WARNING_DISABLE
-	#include "mysql.h"
-	WARNING_ENABLE
-#else
-	#include "DKCurl/DKCurl.h"
-#endif
 
 
 class DKMySql : public DKObjectT<DKMySql> 

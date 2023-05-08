@@ -29,7 +29,7 @@
 #include "DK/DK.h"
 
 WARNING_DISABLE
-#include <osgGA/GUIEventAdapter>
+	#include <osgGA/GUIEventAdapter>
 WARNING_ENABLE
 
 

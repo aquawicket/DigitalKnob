@@ -30,7 +30,7 @@
 #include "DKOsgWindow/DKOsgWindow.h"
 
 WARNING_DISABLE
-#include <osg/Referenced>
+	#include <osg/Referenced>
 WARNING_ENABLE
 
 

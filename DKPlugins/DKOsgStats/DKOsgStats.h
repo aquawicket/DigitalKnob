@@ -29,9 +29,9 @@
 #include "DK/DK.h"
 
 WARNING_DISABLE
-#include <osg/ref_ptr>
-#include <osgViewer/Viewer>
-#include <osgViewer/ViewerEventHandlers>
+	#include <osg/ref_ptr>
+	#include <osgViewer/Viewer>
+	#include <osgViewer/ViewerEventHandlers>
 WARNING_ENABLE
 
 

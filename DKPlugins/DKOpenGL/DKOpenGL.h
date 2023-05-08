@@ -31,34 +31,34 @@
 #include "DK/DK.h"
 
 WARNING_DISABLE
-#ifdef __has_include
-	#if __has_include(<GL/glew.h>)
-		#include <GL/glew.h>					// glew
-	#endif
+	#ifdef __has_include
+		#if __has_include(<GL/glew.h>)
+			#include <GL/glew.h>					// glew
+		#endif
 
-	#if __has_include(<GL/gl.h>)
-		#include <GL/gl.h>						// OpenGL
-	#elif __has_include(<OpenGL/gl.h>)
-		#include <OpenGL/gl.h>					// OpenGL
-	#elif __has_include(<GLES2/gl2.h>)
-		#include <GLES2/gl2.h>					// OpenGLES 2
-	#elif __has_include(<OpenGLES/ES2/gl.h>)
-		#include <OpenGLES/ES2/gl.h>			// OpenGLES 2
-	#elif __has_include(<GLES/gl.h>)
-		#include <GLES/gl.h>					// OpenGLES 1
-	#elif __has_include(<OpenGLES/ES1/gl.h>)
-		#include <OpenGLES/ES1/gl.h>			// OpenGLES 1
-	#else
-		//#error No suitable OpenGL/GLES headers found
-		DKMESSAGE("No suitable OpenGL/GLES headers found")
+		#if __has_include(<GL/gl.h>)
+			#include <GL/gl.h>						// OpenGL
+		#elif __has_include(<OpenGL/gl.h>)
+			#include <OpenGL/gl.h>					// OpenGL
+		#elif __has_include(<GLES2/gl2.h>)
+			#include <GLES2/gl2.h>					// OpenGLES 2
+		#elif __has_include(<OpenGLES/ES2/gl.h>)
+			#include <OpenGLES/ES2/gl.h>			// OpenGLES 2
+		#elif __has_include(<GLES/gl.h>)
+			#include <GLES/gl.h>					// OpenGLES 1
+		#elif __has_include(<OpenGLES/ES1/gl.h>)
+			#include <OpenGLES/ES1/gl.h>			// OpenGLES 1
+		#else
+			//#error No suitable OpenGL/GLES headers found
+			DKMESSAGE("No suitable OpenGL/GLES headers found")
+		#endif
+		
+		#if __has_include(<GL/glu.h>)
+			#include <GL/glu.h>						// glu
+		#elif __has_include(<OpenGL/glu.h>)
+			#include <OpenGL/glu.h>					// glu
+		#endif
 	#endif
-	
-	#if __has_include(<GL/glu.h>)
-		#include <GL/glu.h>						// glu
-	#elif __has_include(<OpenGL/glu.h>)
-		#include <OpenGL/glu.h>					// glu
-	#endif
-#endif
 WARNING_ENABLE
 
 

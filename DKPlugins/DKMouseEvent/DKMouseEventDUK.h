@@ -8,7 +8,7 @@
 #include "DKDuktape/DKDuktape.h"
 
 WARNING_DISABLE
-#include "dukglue/dukglue.h"
+	#include "dukglue/dukglue.h"
 WARNING_ENABLE
 
 // Source: UI Events (https://www.w3.org/TR/uievents/)

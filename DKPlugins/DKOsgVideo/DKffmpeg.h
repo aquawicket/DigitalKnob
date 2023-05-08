@@ -28,24 +28,24 @@
 #define DKffmpeg_H
 
 WARNING_DISABLE
-#include <osgViewer/Viewer>
-#include <osgViewer/ViewerEventHandlers>
-#include <osgDB/ReadFile>
-#include <osg/Geode>
-#include <osg/Geometry>
-#include <osg/StateSet>
-#include <osg/Material>
-#include <osg/Texture2D>
-#include <osg/TextureRectangle>
-#include <osg/TextureCubeMap>
-#include <osg/TexMat>
-#include <osg/CullFace>
-#include <osg/ImageStream>
-#include <osg/io_utils>
-#include <osgGA/TrackballManipulator>
-#include <osgGA/StateSetManipulator>
-#include <osgGA/EventVisitor>
-#include <iostream>
+	#include <osgViewer/Viewer>
+	#include <osgViewer/ViewerEventHandlers>
+	#include <osgDB/ReadFile>
+	#include <osg/Geode>
+	#include <osg/Geometry>
+	#include <osg/StateSet>
+	#include <osg/Material>
+	#include <osg/Texture2D>
+	#include <osg/TextureRectangle>
+	#include <osg/TextureCubeMap>
+	#include <osg/TexMat>
+	#include <osg/CullFace>
+	#include <osg/ImageStream>
+	#include <osg/io_utils>
+	#include <osgGA/TrackballManipulator>
+	#include <osgGA/StateSetManipulator>
+	#include <osgGA/EventVisitor>
+	#include <iostream>
 WARNING_ENABLE
 
 

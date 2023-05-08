@@ -30,8 +30,8 @@
 #include "DK/DK.h"
 
 WARNING_DISABLE
-#include <osg/Uniform>
-#include <osg/Texture>
+	#include <osg/Uniform>
+	#include <osg/Texture>
 WARNING_ENABLE
 
 

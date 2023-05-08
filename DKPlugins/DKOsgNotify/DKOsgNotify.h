@@ -29,10 +29,10 @@
 #include "DK/DK.h"
 
 WARNING_DISABLE
-#if ANDROID
-	#include <android/log.h>
-#endif
-#include <osg/Notify>
+	#if ANDROID
+		#include <android/log.h>
+	#endif
+	#include <osg/Notify>
 WARNING_ENABLE
 
 

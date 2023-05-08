@@ -30,10 +30,10 @@
 #include "DKDuktape/DKDuktape.h"
 
 WARNING_DISABLE
-#include <iostream>
-#include <map>
-#include <string>
-#include <iterator>
+	#include <iostream>
+	#include <map>
+	#include <string>
+	#include <iterator>
 WARNING_ENABLE
 
 

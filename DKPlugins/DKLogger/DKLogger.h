@@ -30,19 +30,19 @@
 
 /*
 WARNING_DISABLE
-#include <stdio.h>
-#include <iostream>
-#if MAC
-	#import <Foundation/Foundation.h>
-#endif
-#if IOS
-	#import <Foundation/Foundation.h>
-#else 
-	#include <fstream>
-#endif
-#if ANDROID
-	#include <android/log.h>
-#endif
+	#include <stdio.h>
+	#include <iostream>
+	#if MAC
+		#import <Foundation/Foundation.h>
+	#endif
+	#if IOS
+		#import <Foundation/Foundation.h>
+	#else 
+		#include <fstream>
+	#endif
+	#if ANDROID
+		#include <android/log.h>
+	#endif
 WARNING_ENABLE
 
 #include "DKString.h"
