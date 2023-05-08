@@ -3,11 +3,6 @@
 console.log("////// TEST_Event.js //////")
 
 
-// create EventTarget
-const eventTarget = new EventTarget();
-
-
-////// Event ///////
 function printEventProperties(event){
 	////// Instance properties //////
 	console.log("event.bubbles = "					+event.bubbles)					// [Event.bubbles](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/bubbles
@@ -27,6 +22,9 @@ function printEventProperties(event){
 	console.log("event.returnValue = "				+event.returnValue)				// [Event.returnValue](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/returnValue
 	console.log("event.scoped = "					+event.scoped)					// [Event.scoped](Read only)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/scoped
 }
+
+// create EventTarget
+const eventTarget = new EventTarget();
 
 console.log('\n');
 const myEventA = new Event('myeventA');
