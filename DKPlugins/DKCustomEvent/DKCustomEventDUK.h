@@ -50,7 +50,7 @@ public:
 		DKINFO("CPP_DKCustomEvent("+type+","+eventInitDict+")\n");
 		DKCustomEvent* customEvent = new DKCustomEvent(type, eventInitDict);
 		DKString customEventAddress = pointerToAddress(customEvent);
-		duk_push_string(ctx, customEventAddress.c_str());	
+		dukglue_push(ctx, customEventAddress);
 		return true;
 	}
 	
@@ -61,7 +61,7 @@ public:
 			DKWARN("detail is an object")
 		if (duk_is_string(ctx, 1))
 			customEvent(ctx)->detail = duk_to_string(ctx, 1);
-		duk_push_string(ctx, customEvent(ctx)->detail.c_str());	
+		dukglue_push(ctx, customEvent(ctx)->detail);
 		return true;
 	}
 

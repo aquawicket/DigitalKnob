@@ -69,8 +69,8 @@ public:
 		DKString eventInitDict = "";//duk_require_string(ctx, 1);
 		DKINFO("CPP_DKUIEventDUK("+type+","+eventInitDict+")\n");
 		DKUIEvent* uiEvent = new DKUIEvent(type, eventInitDict);
-		DKString uiEventAddress = pointerToAddress(uiEvent);
-		duk_push_string(ctx, uiEventAddress.c_str());	
+		DKString uiEventAddress = pointerToAddress(uiEvent);	
+		dukglue_push(ctx, uiEventAddress);
 		return true;
 	}
 	
@@ -85,7 +85,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		if (duk_is_number(ctx, 1))
 			uiEvent(ctx)->detail = duk_to_uint(ctx, 1);
-		duk_push_uint(ctx, uiEvent(ctx)->detail);	
+		dukglue_push(ctx, uiEvent(ctx)->detail);
 		return true;
 	}
 	
@@ -114,7 +114,7 @@ public:
 	//		readonly attribute unsigned long which;
 			static int which(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				duk_push_uint(ctx, uiEvent(ctx)->which);	
+				dukglue_push(ctx, uiEvent(ctx)->which);				
 				return DKDEPRECATED();
 			}
 	// };	
