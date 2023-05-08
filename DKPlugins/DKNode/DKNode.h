@@ -120,7 +120,7 @@ public:
 	// const unsigned short DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC = 0x20;
 	
 	// unsigned short compareDocumentPosition(Node other);
-	virtual bool compareDocumentPosition(DKString& _other, unsigned int _compareDocumentPosition) { // [Node.compareDocumentPosition()] https://developer.mozilla.org/en-US/docs/Web/API/Node/compareDocumentPosition
+	virtual bool compareDocumentPosition(DKString& _other, unsigned int& _compareDocumentPosition) { // [Node.compareDocumentPosition()] https://developer.mozilla.org/en-US/docs/Web/API/Node/compareDocumentPosition
 		DKDEBUGFUNC(_other, _compareDocumentPosition);
 		return DKTODO();
 	}
