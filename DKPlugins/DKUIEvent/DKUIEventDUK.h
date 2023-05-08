@@ -9,6 +9,9 @@
 
 #include "DKDuktape/DKDuktape.h"
 
+WARNING_DISABLE
+#include "dukglue/dukglue.h"
+WARNING_ENABLE
 
 // Source: UI Events (https://www.w3.org/TR/uievents/)
 // [Exposed=Window]
@@ -54,16 +57,20 @@ public:
 		return true;
 	}
 	
+	static DKUIEvent* uiEvent(duk_context* ctx){
+		DKString uiEventAddress = duk_require_string(ctx, 0);
+		return (DKUIEvent*)addressToPointer(uiEventAddress);
+	}
 	
 	//constructor(DOMString type, optional UIEventInit eventInitDict = {});
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
-		DKString options = "";//duk_require_string(ctx, 1);
-		DKINFO("CPP_DKUIEventDUK("+type+","+options+")\n");
-		DKUIEvent* event = new DKUIEvent(type, options);
-		DKString eventAddress = pointerToAddress(event);
-		duk_push_string(ctx, eventAddress.c_str());	
+		DKString eventInitDict = "";//duk_require_string(ctx, 1);
+		DKINFO("CPP_DKUIEventDUK("+type+","+eventInitDict+")\n");
+		DKUIEvent* uiEvent = new DKUIEvent(type, eventInitDict);
+		DKString uiEventAddress = pointerToAddress(uiEvent);
+		duk_push_string(ctx, uiEventAddress.c_str());	
 		return true;
 	}
 	
@@ -76,11 +83,9 @@ public:
 	// readonly attribute long detail;
 	static int detail(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKUIEvent* event = (DKUIEvent*)addressToPointer(eventAddress);
 		if (duk_is_number(ctx, 1))
-			event->detail = duk_to_uint(ctx, 1);
-		duk_push_uint(ctx, event->detail);	
+			uiEvent(ctx)->detail = duk_to_uint(ctx, 1);
+		duk_push_uint(ctx, uiEvent(ctx)->detail);	
 		return true;
 	}
 	
@@ -109,9 +114,7 @@ public:
 	//		readonly attribute unsigned long which;
 			static int which(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				DKString eventAddress = duk_require_string(ctx, 0);
-				DKUIEvent* event = (DKUIEvent*)addressToPointer(eventAddress);
-				duk_push_uint(ctx, event->which);	
+				duk_push_uint(ctx, uiEvent(ctx)->which);	
 				return DKDEPRECATED();
 			}
 	// };	

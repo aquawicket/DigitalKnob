@@ -9,6 +9,9 @@
 
 #include "DKDuktape/DKDuktape.h"
 
+WARNING_DISABLE
+#include "dukglue/dukglue.h"
+WARNING_ENABLE
 
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // [Exposed=*]
@@ -34,30 +37,31 @@ public:
 		return true;
 	}
 	
+	static DKCustomEvent* customEvent(duk_context* ctx){
+		DKString customEventAddress = duk_require_string(ctx, 0);
+		return (DKCustomEvent*)addressToPointer(customEventAddress);
+	}
+	
 	// constructor(DOMString type, optional CustomEventInit eventInitDict = {});
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
-		DKString options = "";//duk_require_string(ctx, 1);
-		DKINFO("CPP_DKCustomEvent("+type+","+options+")\n");
-		DKCustomEvent* event = new DKCustomEvent(type, options);
-		DKString eventAddress = pointerToAddress(event);
-		duk_push_string(ctx, eventAddress.c_str());	
+		DKString eventInitDict = "";//duk_require_string(ctx, 1);
+		DKINFO("CPP_DKCustomEvent("+type+","+eventInitDict+")\n");
+		DKCustomEvent* customEvent = new DKCustomEvent(type, eventInitDict);
+		DKString customEventAddress = pointerToAddress(customEvent);
+		duk_push_string(ctx, customEventAddress.c_str());	
 		return true;
 	}
 	
 	// readonly attribute any detail;
 	static int detail(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKCustomEvent* event = (DKCustomEvent*)addressToPointer(eventAddress);
-
-		//DKDuktape::DumpStack(ctx);
 		if(duk_is_object(ctx, 1))
 			DKWARN("detail is an object")
 		if (duk_is_string(ctx, 1))
-			event->detail = duk_to_string(ctx, 1);
-		duk_push_string(ctx, event->detail.c_str());	
+			customEvent(ctx)->detail = duk_to_string(ctx, 1);
+		duk_push_string(ctx, customEvent(ctx)->detail.c_str());	
 		return true;
 	}
 

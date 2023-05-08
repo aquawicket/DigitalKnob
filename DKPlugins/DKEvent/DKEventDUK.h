@@ -9,6 +9,10 @@
 
 #include "DKDuktape/DKDuktape.h"
 
+WARNING_DISABLE
+#include "dukglue/dukglue.h"
+WARNING_ENABLE
+
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // [Exposed=*]
 // interface Event {
@@ -98,39 +102,39 @@ public:
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
-		DKString options = "";//duk_require_string(ctx, 1);
-		DKINFO("CPP_DKEventDUK("+type+","+options+")\n");
-		DKEvent* event = new DKEvent(type, options);
+		DKString eventInitDict = "";//duk_require_string(ctx, 1);
+		DKINFO("CPP_DKEventDUK("+type+","+eventInitDict+")\n");
+		DKEvent* event = new DKEvent(type, eventInitDict);
 		DKString eventAddress = pointerToAddress(event);
-		duk_push_string(ctx, eventAddress.c_str());	
+		dukglue_push(ctx, eventAddress);
 		return true;
 	}
 	
 	// readonly attribute DOMString type;
 	static int type(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		duk_push_string(ctx, event(ctx)->type.c_str());	
+		dukglue_push(ctx, event(ctx)->type);
 		return true;
 	}
 	
 	// readonly attribute EventTarget? target;
 	static int target(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		duk_push_string(ctx, event(ctx)->target.c_str());	
+		dukglue_push(ctx, event(ctx)->target);
 		return true;
 	}
 	
 	// readonly attribute EventTarget? srcElement; // legacy
 	static int srcElement(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		duk_push_string(ctx, event(ctx)->srcElement.c_str());	
+		dukglue_push(ctx, event(ctx)->srcElement);
 		return true;
 	}
 	
 	// readonly attribute EventTarget? currentTarget;
 	static int currentTarget(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		duk_push_string(ctx, event(ctx)->currentTarget.c_str());	
+		dukglue_push(ctx, event(ctx)->currentTarget);		
 		return true;
 	}
 	
@@ -151,7 +155,7 @@ public:
 	// readonly attribute unsigned short eventPhase;
 	static int eventPhase(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		duk_push_number(ctx, event(ctx)->eventPhase);	
+		dukglue_push(ctx, event(ctx)->eventPhase);
 		return true;
 	}
 	
@@ -178,7 +182,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		if (duk_is_boolean(ctx, 1))
 			event(ctx)->bubbles = duk_to_boolean(ctx, 1);
-		duk_push_boolean(ctx, event(ctx)->bubbles);	
+		dukglue_push(ctx, event(ctx)->bubbles);
 		return true;
 	}
 	
@@ -187,7 +191,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		if (duk_is_boolean(ctx, 1))
 			event(ctx)->cancelable = duk_to_boolean(ctx, 1);
-		duk_push_boolean(ctx, event(ctx)->cancelable);	
+		dukglue_push(ctx, event(ctx)->cancelable);
 		return true;
 	}
 	
@@ -206,7 +210,7 @@ public:
 	// readonly attribute boolean defaultPrevented;
 	static int defaultPrevented(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		duk_push_boolean(ctx, event(ctx)->defaultPrevented);	
+		dukglue_push(ctx, event(ctx)->defaultPrevented);		
 		return true;
 	}
 	
@@ -215,28 +219,28 @@ public:
 		DKDEBUGFUNC(ctx);
 		if (duk_is_boolean(ctx, 1))
 			event(ctx)->composed = duk_to_boolean(ctx, 1);
-		duk_push_boolean(ctx, event(ctx)->composed);	
+		dukglue_push(ctx, event(ctx)->composed);
 		return true;
 	}
 	
 	// [LegacyUnforgeable] readonly attribute boolean isTrusted;
 	static int isTrusted(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		duk_push_boolean(ctx, event(ctx)->isTrusted);	
+		dukglue_push(ctx, event(ctx)->isTrusted);
 		return true;
 	}
 	
 	// readonly attribute DOMHighResTimeStamp timeStamp;
 	static int timeStamp(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		duk_push_number(ctx, event(ctx)->timeStamp);	
+		dukglue_push(ctx, event(ctx)->timeStamp);		
 		return true;
 	}
 	
 	// undefined initEvent(DOMString type, optional boolean bubbles = false, optional boolean cancelable = false); // legacy
 	static int initEvent(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		return DKDEPRECATED();
+		return DKTODO();
 	}
 };
 REGISTER_OBJECT(DKEventDUK, true)
