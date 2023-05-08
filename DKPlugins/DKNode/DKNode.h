@@ -1,5 +1,4 @@
-// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/Node.idl
-// [SOURCE] https://dom.spec.whatwg.org/#interface-node
+// [IDL] https://dom.spec.whatwg.org/#interface-node
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Node
 #pragma once
 #ifndef DKNode_H
