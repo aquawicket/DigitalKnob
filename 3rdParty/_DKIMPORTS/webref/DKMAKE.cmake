@@ -6,7 +6,9 @@ dk_import(https://github.com/w3c/webref.git BRANCH curated PATCH)
 
 
 ### Build Interface Tree ###
-dk_command(${NODE_EXE} ${WEBREF}/DKBuildInterfaces.js)
+if(WIN)
+	dk_command(${NODE_EXE} ${WEBREF}/DKBuildInterfaces.js)
+endif()
 
 #dk_makeDirectory(${WEBREF}/DKWebAPIs)
 #dk_remove(${WEBREF}/DKWebAPIs/interfaces.txt NOERROR)
