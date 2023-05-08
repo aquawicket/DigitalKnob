@@ -53,37 +53,37 @@ public:
 	
 	// HTMLCollection getElementsByTagName(DOMString qualifiedName);
 	virtual bool getElementsByTagName(DKString& _qualifiedName, DKString& _getElementsByTagName){ // https://dom.spec.whatwg.org/#dom-document-getelementsbytagname
-		DKDEBUGFUNC(_qualifiedName, _getElementsByTagName)
+		DKDEBUGFUNC(_qualifiedName, _getElementsByTagName);
 		return DKTODO();
 	}
 	
 	// HTMLCollection getElementsByTagNameNS(DOMString? namespace, DOMString localName);
 	virtual bool getElementsByTagNameNS(DKString& _namespace, DKString& _localName, DKString& _getElementsByTagNameNS){ // https://dom.spec.whatwg.org/#dom-document-getelementsbytagnamens
-		DKDEBUGFUNC(_namespace, _localName, _getElementsByTagNameNS)
+		DKDEBUGFUNC(_namespace, _localName, _getElementsByTagNameNS);
 		return DKTODO();
 	}
 	
 	// HTMLCollection getElementsByClassName(DOMString classNames);
-	virtual bool getElementsByClassName(DKString& _classNames, DKString& _getElementsByClassName){ https://dom.spec.whatwg.org/#dom-document-getelementsbyclassname
-		DKDEBUGFUNC(_namespace, _localName, _getElementsByClassName)
+	virtual bool getElementsByClassName(DKString& _classNames, DKString& _getElementsByClassName){ //https://dom.spec.whatwg.org/#dom-document-getelementsbyclassname
+		DKDEBUGFUNC(_classNames, _getElementsByClassName);
 		return DKTODO();
 	}
 	
 	// [CEReactions, NewObject] Element createElement(DOMString localName, optional (DOMString or ElementCreationOptions) options = {});
 	virtual bool createElement(DKString& _localName, DKString& _options, DKString& _createElement){ // https://dom.spec.whatwg.org/#dom-document-createelement
-		DKDEBUGFUNC(_localName, _options, _createElement)
+		DKDEBUGFUNC(_localName, _options, _createElement);
 		return DKTODO();
 	}
 	
 	// [CEReactions, NewObject] Element createElementNS(DOMString? namespace, DOMString qualifiedName, optional (DOMString or ElementCreationOptions) options = {});
 	virtual bool createElementNS(DKString& _namespace, DKString& _qualifiedName, DKString& _options, DKString& _createElementNS){ // https://dom.spec.whatwg.org/#dom-document-createelementns
-		DKDEBUGFUNC(_namespace, _qualifiedName, _options, _createElementNS)
+		DKDEBUGFUNC(_namespace, _qualifiedName, _options, _createElementNS);
 		return DKTODO();
 	}
 	
 	// [NewObject] DocumentFragment createDocumentFragment();
 	virtual bool createDocumentFragment(DKString& _createDocumentFragment){
-		DKDEBUGFUNC(_createDocumentFragment)
+		DKDEBUGFUNC(_createDocumentFragment);
 		return DKTODO();
 	}
 	
