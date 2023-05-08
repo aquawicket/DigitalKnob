@@ -173,7 +173,7 @@ bool DKRmlDocument::Init(){
 	//Rml::Factory::RegisterElementInstancer("custom", custom_instancer.get());
 
 	DKString html;
-	DKString workingPath = DKFile::local_assets;
+	workingPath = DKFile::local_assets;
 	DKFile::FileToString(workingPath +"DKRmlDocument/blank.html", html);
 	DKFile::ChDir(workingPath);
 	LoadHtml(html);
@@ -399,7 +399,7 @@ void DKRmlDocument::ProcessEvent(Rml::Event& rmlEvent){
 	if(!rval.empty()){ DKINFO("DKRmlDocument::ProcessEvent(): rval = "+rval+"\n"); }
 	*/
 	// If the event bubbles up, ignore elements underneith 
-	Rml::Context* context = document->GetContext();
+	context = document->GetContext();
 	Rml::Element* hoverElement = NULL;
 	if (context)
 		hoverElement = context->GetHoverElement();
