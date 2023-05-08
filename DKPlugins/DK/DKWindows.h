@@ -44,7 +44,7 @@ static PDH_HQUERY cpuQuery;
 static PDH_HCOUNTER cpuTotal;
 static ULARGE_INTEGER lastCPU, lastSysCPU, lastUserCPU;
 static int numProcessors;
-static HANDLE _self;
+static HANDLE _handle;
 static bool cpuInit = false;
 
 class DKWindows{

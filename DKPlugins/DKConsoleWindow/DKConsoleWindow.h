@@ -185,13 +185,13 @@ public:
 	// [Window.getSelection()] https://developer.mozilla.org/en-US/docs/Web/API/Window/getSelection
 	// [Window.matchMedia()] https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia
 	// [Window.moveBy()] https://developer.mozilla.org/en-US/docs/Web/API/Window/moveBy
-	bool moveBy(int& deltaX, int& deltaY) {
-		DKDEBUGFUNC(deltaX, deltaY);
+	bool moveBy(int& _deltaX, int& _deltaY) {
+		DKDEBUGFUNC(_deltaX, _deltaY);
 		#if WIN
 			RECT rect;
 			GetWindowRect(GetConsoleWindow(), &rect);
-			int X = rect.left + deltaX;
-			int Y = rect.top + deltaY;
+			int X = rect.left + _deltaX;
+			int Y = rect.top + _deltaY;
 			int nWidth = rect.right - rect.left;
 			int nHeight = rect.bottom - rect.top;
 			if (!MoveWindow(GetConsoleWindow(), X, Y, nWidth, nHeight, TRUE))
@@ -200,14 +200,14 @@ public:
 		return true;
 	}
 	// [Window.moveTo()] https://developer.mozilla.org/en-US/docs/Web/API/Window/moveTo
-	bool moveTo(int& x, int& _y){
-		DKDEBUGFUNC(x, _y);
+	bool moveTo(int& _x, int& _y){
+		DKDEBUGFUNC(_x, _y);
 		#if WIN
 			RECT rect;
 			GetWindowRect(GetConsoleWindow(), &rect);
 			int nWidth = rect.right - rect.left;
 			int nHeight = rect.bottom - rect.top;
-			if (!MoveWindow(GetConsoleWindow(), x, _y, nWidth, nHeight, TRUE)){
+			if (!MoveWindow(GetConsoleWindow(), _x, _y, nWidth, nHeight, TRUE)){
 				return DKERROR("MoveWindow() failed");
 			}
 		#endif
@@ -222,30 +222,30 @@ public:
 	// [Window.requestAnimationFrame()] https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame
 	// [Window.requestIdleCallback()] https://developer.mozilla.org/en-US/docs/Web/API/Window/requestIdleCallback
 	// [Window.resizeBy()] https://developer.mozilla.org/en-US/docs/Web/API/Window/resizeBy
-	bool resizeBy(int& xDelta, int& yDelta) {
-		DKDEBUGFUNC(xDelta, yDelta);
+	bool resizeBy(int& _xDelta, int& _yDelta) {
+		DKDEBUGFUNC(_xDelta, _yDelta);
 		#if WIN
 			RECT rect;
 			GetWindowRect(GetConsoleWindow(), &rect);
 			int X = rect.left;
 			int Y = rect.top;
-			int nWidth = rect.right - rect.left + xDelta;
-			int nHeight = rect.bottom - rect.top + yDelta;
+			int nWidth = rect.right - rect.left + _xDelta;
+			int nHeight = rect.bottom - rect.top + _yDelta;
 			if (!MoveWindow(GetConsoleWindow(), X, Y, nWidth, nHeight, TRUE))
 				return DKERROR("MoveWindow() failed");
 		#endif
 		return true;
 	}
 	// [Window.resizeTo()] https://developer.mozilla.org/en-US/docs/Web/API/Window/resizeTo
-	bool resizeTo(int& width, int& height) {
-		DKDEBUGFUNC(width, height);
+	bool resizeTo(int& _width, int& _height) {
+		DKDEBUGFUNC(_width, _height);
 		#if WIN
 			RECT rect;
 			GetWindowRect(GetConsoleWindow(), &rect);
 			int X = rect.left;
 			int Y = rect.top;
-			int nWidth = width;
-			int nHeight = height;
+			int nWidth = _width;
+			int nHeight = _height;
 			if (!MoveWindow(GetConsoleWindow(), X, Y, nWidth, nHeight, TRUE))
 				return DKERROR("MoveWindow() failed");
 		#endif
