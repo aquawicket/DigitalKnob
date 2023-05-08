@@ -7,6 +7,9 @@
 
 #include "DKDuktape/DKDuktape.h"
 
+WARNING_DISABLE
+#include "dukglue/dukglue.h"
+WARNING_ENABLE
 
 // Source: UI Events (https://www.w3.org/TR/uievents/)
 // [Exposed=Window]
@@ -91,15 +94,20 @@ public:
 	}
 	
 	
+	static DKKeyboardEvent* keyboardEvent(duk_context* ctx){
+		DKString keyboardEventAddress = duk_require_string(ctx, 0);
+		return (DKKeyboardEvent*)addressToPointer(keyboardEventAddress);
+	}
+	
 	// constructor(DOMString type, optional KeyboardEventInit eventInitDict = {});
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
-		DKString options = "";//duk_require_string(ctx, 1);
-		DKINFO("CPP_DKKeyboardEventDUK("+type+","+options+")\n");
-		DKKeyboardEvent* event = new DKKeyboardEvent(type, options);
-		DKString eventAddress = pointerToAddress(event);
-		duk_push_string(ctx, eventAddress.c_str());	
+		DKString eventInitDict = "";//duk_require_string(ctx, 1);
+		DKINFO("CPP_DKKeyboardEventDUK("+type+","+eventInitDict+")\n");
+		DKKeyboardEvent* keyboardEvent = new DKKeyboardEvent(type, eventInitDict);
+		DKString keyboardEventAddress = pointerToAddress(keyboardEvent);
+		dukglue_push(ctx, keyboardEventAddress);	
 		return true;
 	}
 	
@@ -115,99 +123,81 @@ public:
 	// readonly attribute DOMString key;
 	static int key(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKKeyboardEvent* event = (DKKeyboardEvent*)addressToPointer(eventAddress);
 		if (duk_is_string(ctx, 1))
-			event->key = duk_to_string(ctx, 1);
-		duk_push_string(ctx, event->key.c_str());	
+			keyboardEvent(ctx)->key = duk_to_string(ctx, 1);
+		dukglue_push(ctx, keyboardEvent(ctx)->key);	
 		return true;
 	}
 	
 	// readonly attribute DOMString code;
 	static int code(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKKeyboardEvent* event = (DKKeyboardEvent*)addressToPointer(eventAddress);
 		if (duk_is_string(ctx, 1))
-			event->code = duk_to_string(ctx, 1);
-		duk_push_string(ctx, event->code.c_str());	
+			keyboardEvent(ctx)->code = duk_to_string(ctx, 1);
+		dukglue_push(ctx, keyboardEvent(ctx)->code);	
 		return true;
 	}
 	
 	// readonly attribute unsigned long location;
 	static int location(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKKeyboardEvent* event = (DKKeyboardEvent*)addressToPointer(eventAddress);
 		if (duk_is_number(ctx, 1))
-			event->location = duk_to_int(ctx, 1);
-		duk_push_int(ctx, event->location);	
+			keyboardEvent(ctx)->location = duk_to_int(ctx, 1);
+		dukglue_push(ctx, keyboardEvent(ctx)->location);	
 		return true;
 	}
 	
 	// readonly attribute boolean ctrlKey;
 	static int ctrlKey(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKKeyboardEvent* event = (DKKeyboardEvent*)addressToPointer(eventAddress);
 		if (duk_is_boolean(ctx, 1))
-			event->ctrlKey = duk_to_boolean(ctx, 1);
-		duk_push_boolean(ctx, event->ctrlKey);	
+			keyboardEvent(ctx)->ctrlKey = duk_to_boolean(ctx, 1);
+		dukglue_push(ctx, keyboardEvent(ctx)->ctrlKey);	
 		return true;
 	}
 	
 	// readonly attribute boolean shiftKey;
 	static int shiftKey(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKKeyboardEvent* event = (DKKeyboardEvent*)addressToPointer(eventAddress);
 		if (duk_is_boolean(ctx, 1))
-			event->shiftKey = duk_to_boolean(ctx, 1);
-		duk_push_boolean(ctx, event->shiftKey);	
+			keyboardEvent(ctx)->shiftKey = duk_to_boolean(ctx, 1);
+		dukglue_push(ctx, keyboardEvent(ctx)->shiftKey);	
 		return true;
 	}
 	
 	// readonly attribute boolean altKey;
 	static int altKey(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKKeyboardEvent* event = (DKKeyboardEvent*)addressToPointer(eventAddress);
 		if (duk_is_boolean(ctx, 1))
-			event->altKey = duk_to_boolean(ctx, 1);
-		duk_push_boolean(ctx, event->altKey);	
+			keyboardEvent(ctx)->altKey = duk_to_boolean(ctx, 1);
+		dukglue_push(ctx, keyboardEvent(ctx)->altKey);	
 		return true;
 	}
 	
 	// readonly attribute boolean metaKey;
 	static int metaKey(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKKeyboardEvent* event = (DKKeyboardEvent*)addressToPointer(eventAddress);
 		if (duk_is_boolean(ctx, 1))
-			event->metaKey = duk_to_boolean(ctx, 1);
-		duk_push_boolean(ctx, event->metaKey);	
+			keyboardEvent(ctx)->metaKey = duk_to_boolean(ctx, 1);
+		dukglue_push(ctx, keyboardEvent(ctx)->metaKey);	
 		return true;
 	}
 	
 	// readonly attribute boolean repeat;
 	static int repeat(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKKeyboardEvent* event = (DKKeyboardEvent*)addressToPointer(eventAddress);
 		if (duk_is_boolean(ctx, 1))
-			event->repeat = duk_to_boolean(ctx, 1);
-		duk_push_boolean(ctx, event->repeat);	
+			keyboardEvent(ctx)->repeat = duk_to_boolean(ctx, 1);
+		dukglue_push(ctx, keyboardEvent(ctx)->repeat);	
 		return true;
 	}
 	
 	// readonly attribute boolean isComposing;
 	static int isComposing(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventAddress = duk_require_string(ctx, 0);
-		DKKeyboardEvent* event = (DKKeyboardEvent*)addressToPointer(eventAddress);
 		if (duk_is_boolean(ctx, 1))
-			event->isComposing = duk_to_boolean(ctx, 1);
-		duk_push_boolean(ctx, event->isComposing);	
+			keyboardEvent(ctx)->isComposing = duk_to_boolean(ctx, 1);
+		dukglue_push(ctx, keyboardEvent(ctx)->isComposing);	
 		return true;
 	}
 	
@@ -242,17 +232,13 @@ public:
 	//		readonly attribute unsigned long charCode;
 			static int charCode(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				DKString eventAddress = duk_require_string(ctx, 0);
-				DKKeyboardEvent* event = (DKKeyboardEvent*)addressToPointer(eventAddress);
-				duk_push_uint(ctx, event->charCode);	
+				dukglue_push(ctx, keyboardEvent(ctx)->charCode);	
 				return DKDEPRECATED();
 			}
 	//		readonly attribute unsigned long keyCode;
 			static int keyCode(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				DKString eventAddress = duk_require_string(ctx, 0);
-				DKKeyboardEvent* event = (DKKeyboardEvent*)addressToPointer(eventAddress);
-				duk_push_uint(ctx, event->keyCode);	
+				dukglue_push(ctx, keyboardEvent(ctx)->keyCode);	
 				return DKDEPRECATED();
 			}
 	// };
