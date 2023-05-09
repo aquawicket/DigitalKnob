@@ -51,10 +51,10 @@ public:
 		DKDuktape::AttachFunction("CPP_DKDocumentDUK_documentElement", DKDocumentDUK::documentElement);
 		
 		// HTMLCollection getElementsByTagName(DOMString qualifiedName);
-		//DKDuktape::AttachFunction("CPP_DKDocumentDUK_getElementsByTagName", DKDocumentDUK::getElementsByTagName);
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_getElementsByTagName", DKDocumentDUK::getElementsByTagName);
 		
 		// HTMLCollection getElementsByTagNameNS(DOMString? namespace, DOMString localName);
-		//DKDuktape::AttachFunction("CPP_DKDocumentDUK_getElementsByTagNameNS", DKDocumentDUK::getElementsByTagNameNS);
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_getElementsByTagNameNS", DKDocumentDUK::getElementsByTagNameNS);
 		
 		// HTMLCollection getElementsByClassName(DOMString classNames);
 		//DKDuktape::AttachFunction("CPP_DKDocumentDUK_getElementsByClassName", DKDocumentDUK::getElementsByClassName);
@@ -158,29 +158,29 @@ public:
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
 		return (DKDocument*)addressToPointer(eventTargetAddress);
 	}
-	static bool GetBool(duk_context* ctx){
-		if (duk_is_boolean(ctx, 1))
-			return duk_to_boolean(ctx, 1);
+	static bool GetBool(duk_context* ctx, int index = 1){
+		if (duk_is_boolean(ctx, index))
+			return duk_to_boolean(ctx, index);
 		return false;
 	}
-	static double GetDouble(duk_context* ctx){
-		if (duk_is_number(ctx, 1))
-			return duk_to_number(ctx, 1);
+	static double GetDouble(duk_context* ctx, int index = 1){
+		if (duk_is_number(ctx, index))
+			return duk_to_number(ctx, index);
 		return 0.0;
 	}
-	static int GetInt(duk_context* ctx){
-		if (duk_is_number(ctx, 1))
-			return duk_to_int(ctx, 1);
+	static int GetInt(duk_context* ctx, int index = 1){
+		if (duk_is_number(ctx, index))
+			return duk_to_int(ctx, index);
 		return 0;
 	}
-	static DKString GetString(duk_context* ctx){
-		if (duk_is_string(ctx, 1))
-			return duk_to_string(ctx, 1);
+	static DKString GetString(duk_context* ctx, int index = 1){
+		if (duk_is_string(ctx, index))
+			return duk_to_string(ctx, index);
 		return "";
 	}
-	static unsigned int GetUint(duk_context* ctx){
-		if (duk_is_number(ctx, 1))
-			return duk_to_uint(ctx, 1);
+	static unsigned int GetUint(duk_context* ctx, int index = 1){
+		if (duk_is_number(ctx, index))
+			return duk_to_uint(ctx, index);
 		return 0;
 	}
 	
@@ -295,19 +295,63 @@ public:
 	}
 	
 	// HTMLCollection getElementsByTagName(DOMString qualifiedName);
-	//TODO
+	static int getElementsByTagName(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _qualifiedName = GetString(ctx);
+		DKString _getElementsByTagName;
+		if(!eventTarget(ctx)->getElementsByTagName(_qualifiedName, _getElementsByTagName))
+			return false;
+		dukglue_push(ctx, _getElementsByTagName);	
+		return true;
+	}
 	
 	// HTMLCollection getElementsByTagNameNS(DOMString? namespace, DOMString localName);
-	// TODO
+	static int getElementsByTagNameNS(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _namespace = GetString(ctx);
+		DKString _localName = GetString(ctx, 2);
+		DKString _getElementsByTagNameNS;
+		if(!eventTarget(ctx)->getElementsByTagNameNS(_namespace, _localName, _getElementsByTagNameNS))
+			return false;
+		dukglue_push(ctx, _getElementsByTagNameNS);	
+		return true;
+	}
 	
 	// HTMLCollection getElementsByClassName(DOMString classNames);
-	// TODO
+	static int getElementsByClassName(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _classNames = GetString(ctx);
+		DKString _getElementsByClassName;
+		if(!eventTarget(ctx)->getElementsByClassName(_classNames, _getElementsByClassName))
+			return false;
+		dukglue_push(ctx, _getElementsByClassName);	
+		return true;
+	}
 	
 	// [CEReactions, NewObject] Element createElement(DOMString localName, optional (DOMString or ElementCreationOptions) options = {});
-	// TODO
+	static int createElement(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _localName = GetString(ctx, 1);
+		DKString _options = GetString(ctx, 2);
+		DKString _createElement;
+		if(!eventTarget(ctx)->createElement(_localName, _options, _createElement))
+			return false;
+		dukglue_push(ctx, _createElement);	
+		return true;
+	}
 	
 	// [CEReactions, NewObject] Element createElementNS(DOMString? namespace, DOMString qualifiedName, optional (DOMString or ElementCreationOptions) options = {});
-	// TODO
+	static int createElementNS(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _namespace = GetString(ctx, 1);
+		DKString _qualifiedName = GetString(ctx, 2);
+		DKString _options = GetString(ctx, 3);
+		DKString _createElementNS;
+		if(!eventTarget(ctx)->createElementNS(_namespace, _qualifiedName, _options, _createElementNS))
+			return false;
+		dukglue_push(ctx, _createElementNS);	
+		return true;
+	}
 	
 	// [NewObject] DocumentFragment createDocumentFragment();
 	// TODO
