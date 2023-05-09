@@ -57,54 +57,54 @@ public:
 		DKDuktape::AttachFunction("CPP_DKDocumentDUK_getElementsByTagNameNS", DKDocumentDUK::getElementsByTagNameNS);
 		
 		// HTMLCollection getElementsByClassName(DOMString classNames);
-		//DKDuktape::AttachFunction("CPP_DKDocumentDUK_getElementsByClassName", DKDocumentDUK::getElementsByClassName);
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_getElementsByClassName", DKDocumentDUK::getElementsByClassName);
 		
 		// [CEReactions, NewObject] Element createElement(DOMString localName, optional (DOMString or ElementCreationOptions) options = {});
-		//DKDuktape::AttachFunction("CPP_DKDocumentDUK_createElement", DKDocumentDUK::createElement);
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_createElement", DKDocumentDUK::createElement);
 		
 		// [CEReactions, NewObject] Element createElementNS(DOMString? namespace, DOMString qualifiedName, optional (DOMString or ElementCreationOptions) options = {});
-		//DKDuktape::AttachFunction("CPP_DKDocumentDUK_createElementNS", DKDocumentDUK::createElementNS);
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_createElementNS", DKDocumentDUK::createElementNS);
 		
 		// [NewObject] DocumentFragment createDocumentFragment();
-		//DKDuktape::AttachFunction("CPP_DKDocumentDUK_createDocumentFragment", DKDocumentDUK::createDocumentFragment);
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_createDocumentFragment", DKDocumentDUK::createDocumentFragment);
 		
 		// [NewObject] Text createTextNode(DOMString data);
-		//DKDuktape::AttachFunction("CPP_DKDocumentDUK_createTextNode", DKDocumentDUK::createTextNode);
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_createTextNode", DKDocumentDUK::createTextNode);
 		
 		// [NewObject] CDATASection createCDATASection(DOMString data);
-		//DKDuktape::AttachFunction("CPP_DKDocumentDUK_createCDATASection", DKDocumentDUK::createCDATASection);
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_createCDATASection", DKDocumentDUK::createCDATASection);
 		
 		// [NewObject] Comment createComment(DOMString data);
-		//DKDuktape::AttachFunction("CPP_DKDocumentDUK_createComment", DKDocumentDUK::createComment);
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_createComment", DKDocumentDUK::createComment);
 		
 		// [NewObject] ProcessingInstruction createProcessingInstruction(DOMString target, DOMString data);
-		//DKDuktape::AttachFunction("CPP_DKDocumentDUK_createProcessingInstruction", DKDocumentDUK::createProcessingInstruction);
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_createProcessingInstruction", DKDocumentDUK::createProcessingInstruction);
 		
 		// [CEReactions, NewObject] Node importNode(Node node, optional boolean deep = false);
-		//DKDuktape::AttachFunction("CPP_DKDocumentDUK_importNode", DKDocumentDUK::importNode);
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_importNode", DKDocumentDUK::importNode);
 		
 		// [CEReactions] Node adoptNode(Node node);
-		//DKDuktape::AttachFunction("CPP_DKDocumentDUK_adoptNode", DKDocumentDUK::adoptNode);
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_adoptNode", DKDocumentDUK::adoptNode);
 		
 		// [NewObject] Attr createAttribute(DOMString localName);
-		//DKDuktape::AttachFunction("CPP_DKDocumentDUK_createAttribute", DKDocumentDUK::createAttribute);
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_createAttribute", DKDocumentDUK::createAttribute);
 		
 		// [NewObject] Attr createAttributeNS(DOMString? namespace, DOMString qualifiedName);
-		//DKDuktape::AttachFunction("CPP_DKDocumentDUK_createAttributeNS", DKDocumentDUK::createAttributeNS);
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_createAttributeNS", DKDocumentDUK::createAttributeNS);
 		
 		// [NewObject] Event createEvent(DOMString interface); // legacy
-		//DKDuktape::AttachFunction("CPP_DKDocumentDUK_createEvent", DKDocumentDUK::createEvent);
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_createEvent", DKDocumentDUK::createEvent);
 		
 		// [NewObject] Range createRange();
-		//DKDuktape::AttachFunction("CPP_DKDocumentDUK_createRange", DKDocumentDUK::createRange);
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_createRange", DKDocumentDUK::createRange);
 		
 		// NodeFilter.SHOW_ALL = 0xFFFFFFFF
 		
 		// [NewObject] NodeIterator createNodeIterator(Node root, optional unsigned long whatToShow = 0xFFFFFFFF, optional NodeFilter? filter = null);
-		//DKDuktape::AttachFunction("CPP_DKDocumentDUK_createNodeIterator", DKDocumentDUK::createNodeIterator);
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_createNodeIterator", DKDocumentDUK::createNodeIterator);
 	
 		// [NewObject] TreeWalker createTreeWalker(Node root, optional unsigned long whatToShow = 0xFFFFFFFF, optional NodeFilter? filter = null);
-		//DKDuktape::AttachFunction("CPP_DKDocumentDUK_createTreeWalker", DKDocumentDUK::createTreeWalker);
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_createTreeWalker", DKDocumentDUK::createTreeWalker);
 		
 	// };
 	  
@@ -123,28 +123,28 @@ public:
 		// Source: Font Metrics API Level 1 (https://drafts.css-houdini.org/font-metrics-api-1/)
 		// partial interface Document {
 		//		FontMetrics measureElement(Element element);
-				//DKDuktape::AttachFunction("CPP_DKDocumentDUK_measureElement", DKDocumentDUK::measureElement);
+				DKDuktape::AttachFunction("CPP_DKDocumentDUK_measureElement", DKDocumentDUK::measureElement);
 		//
 		//		FontMetrics measureText(DOMString text, StylePropertyMapReadOnly styleMap);
-				//DKDuktape::AttachFunction("CPP_DKDocumentDUK_measureText", DKDocumentDUK::measureText);
+				DKDuktape::AttachFunction("CPP_DKDocumentDUK_measureText", DKDocumentDUK::measureText);
 		//};
 	
 		// Source: Fullscreen API Standard (https://fullscreen.spec.whatwg.org/)
 		// partial interface Document {
 		//		[LegacyLenientSetter] readonly attribute boolean fullscreenEnabled;
-				//DKDuktape::AttachFunction("CPP_DKDocumentDUK_fullscreenEnabled", DKDocumentDUK::fullscreenEnabled);
+				DKDuktape::AttachFunction("CPP_DKDocumentDUK_fullscreenEnabled", DKDocumentDUK::fullscreenEnabled);
 		//		
 		//		[LegacyLenientSetter, Unscopable] readonly attribute boolean fullscreen; // historical
-				//DKDuktape::AttachFunction("CPP_DKDocumentDUK_fullscreen", DKDocumentDUK::fullscreen);
+				DKDuktape::AttachFunction("CPP_DKDocumentDUK_fullscreen", DKDocumentDUK::fullscreen);
 		//
 		//		Promise<undefined> exitFullscreen();
-				//DKDuktape::AttachFunction("CPP_DKDocumentDUK_exitFullscreen", DKDocumentDUK::exitFullscreen);
+				DKDuktape::AttachFunction("CPP_DKDocumentDUK_exitFullscreen", DKDocumentDUK::exitFullscreen);
 		//
 		//		attribute EventHandler onfullscreenchange;
-				//DKDuktape::AttachFunction("CPP_DKDocumentDUK_onfullscreenchange", DKDocumentDUK::onfullscreenchange);
+				DKDuktape::AttachFunction("CPP_DKDocumentDUK_onfullscreenchange", DKDocumentDUK::onfullscreenchange);
 		//
 		//		attribute EventHandler onfullscreenerror;
-				//DKDuktape::AttachFunction("CPP_DKDocumentDUK_onfullscreenerror", DKDocumentDUK::onfullscreenerror);
+				DKDuktape::AttachFunction("CPP_DKDocumentDUK_onfullscreenerror", DKDocumentDUK::onfullscreenerror);
 		//};
 	
 	
@@ -354,46 +354,155 @@ public:
 	}
 	
 	// [NewObject] DocumentFragment createDocumentFragment();
-	// TODO
+	static int createDocumentFragment(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _createDocumentFragment;
+		if(!eventTarget(ctx)->createDocumentFragment(_createDocumentFragment))
+			return false;
+		dukglue_push(ctx, _createDocumentFragment);	
+		return true;
+	}
 	
 	// [NewObject] Text createTextNode(DOMString data);
-	// TODO
+	static int createTextNode(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _data = GetString(ctx, 1);
+		DKString _createTextNode;
+		if(!eventTarget(ctx)->createTextNode(_data, _createTextNode))
+			return false;
+		dukglue_push(ctx, _createTextNode);	
+		return true;
+	}
 	
 	// [NewObject] CDATASection createCDATASection(DOMString data);
-	// TODO
+	static int createCDATASection(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _data = GetString(ctx, 1);
+		DKString _createCDATASection;
+		if(!eventTarget(ctx)->createCDATASection(_data, _createCDATASection))
+			return false;
+		dukglue_push(ctx, _createCDATASection);	
+		return true;
+	}
 	
 	// [NewObject] Comment createComment(DOMString data);
-	// TODO
+	static int createComment(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _data = GetString(ctx, 1);
+		DKString _createComment;
+		if(!eventTarget(ctx)->createComment(_data, _createComment))
+			return false;
+		dukglue_push(ctx, _createComment);	
+		return true;
+	}
 	
 	// [NewObject] ProcessingInstruction createProcessingInstruction(DOMString target, DOMString data);
-	// TODO
+	static int createProcessingInstruction(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _target = GetString(ctx, 1);
+		DKString _data = GetSring(ctx, 2);
+		DKString _createProcessingInstruction;
+		if(!eventTarget(ctx)->createProcessingInstruction(_target, _data, _createProcessingInstruction))
+			return false;
+		dukglue_push(ctx, _createProcessingInstruction);	
+		return true;
+	}
 	
 	// [CEReactions, NewObject] Node importNode(Node node, optional boolean deep = false);
-	// TODO
+	static int importNode(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _node = GetString(ctx, 1);
+		bool _deep = GetBool(ctx, 2);
+		DKString _importNode;
+		if(!eventTarget(ctx)->importNode(_node, _deep, _importNode))
+			return false;
+		dukglue_push(ctx, _importNode);	
+		return true;
+	}
 	
 	// [CEReactions] Node adoptNode(Node node);
-	// TODO
+	static int adoptNode(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _node = GetString(ctx, 1);
+		DKString _adoptNode;
+		if(!eventTarget(ctx)->adoptNode(_node, _adoptNode))
+			return false;
+		dukglue_push(ctx, _adoptNode);	
+		return true;
+	}
 	
 	// [NewObject] Attr createAttribute(DOMString localName);
-	// TODO
+	static int createAttribute(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _localName = GetString(ctx, 1);
+		DKString _createAttribute;
+		if(!eventTarget(ctx)->createAttribute(_localName, _createAttribute))
+			return false;
+		dukglue_push(ctx, _createAttribute);	
+		return true;
+	}
 	
 	// [NewObject] Attr createAttributeNS(DOMString? namespace, DOMString qualifiedName);
-	// TODO
+	static int createAttributeNS(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _namespace = GetString(ctx, 1);
+		DKString _qualifiedName = GetString(ctx, 2);
+		DKString _createAttributeNS;
+		if(!eventTarget(ctx)->createAttributeNS(_namespace, _qualifiedName, _createAttributeNS))
+			return false;
+		dukglue_push(ctx, _createAttributeNS);	
+		return true;
+	}
 	
 	// [NewObject] Event createEvent(DOMString interface); // legacy
-	// TODO
+	static int createEvent(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _interface = GetString(ctx, 1);
+		DKString _createEvent;
+		if(!eventTarget(ctx)->createEvent(_interface, _createEvent))
+			return false;
+		dukglue_push(ctx, _createEvent);	
+		return true;
+	}
 	
 	// [NewObject] Range createRange();
-	// TODO
+	static int createRange(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _createRange;
+		if(!eventTarget(ctx)->createRange(_createRange))
+			return false;
+		dukglue_push(ctx, _createRange);	
+		return true;
+	}
 	
 		// NodeFilter.SHOW_ALL = 0xFFFFFFFF
 	// TODO 
 	
 	// [NewObject] NodeIterator createNodeIterator(Node root, optional unsigned long whatToShow = 0xFFFFFFFF, optional NodeFilter? filter = null);
-	// TODO
+	static int createNodeIterator(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _root = GetString(ctx, 1);
+		unsigned int _whatToShow = GetUint(ctx, 2);
+		DKString _filter = GetString(ctx, 3);
+		DKString _createNodeIterator;
+		if(!eventTarget(ctx)->createNodeIterator(_root, _whatToShow, _filter, _createNodeIterator))
+			return false;
+		dukglue_push(ctx, _createNodeIterator);	
+		return true;
+	}
 	
 	// [NewObject] TreeWalker createTreeWalker(Node root, optional unsigned long whatToShow = 0xFFFFFFFF, optional NodeFilter? filter = null);
-	// TODO
+	static int createTreeWalker(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _root = GetString(ctx, 1);
+		unsigned int _whatToShow = GetUint(ctx, 2);
+		DKString _filter = GetString(ctx, 3);
+		DKString _createTreeWalker;
+		if(!eventTarget(ctx)->createTreeWalker(_root, _whatToShow, _filter, _createTreeWalker))
+			return false;
+		dukglue_push(ctx, _createTreeWalker);	
+		return true;
+	}
 
 // };
 
@@ -412,10 +521,27 @@ public:
 	// Source: Font Metrics API Level 1 (https://drafts.css-houdini.org/font-metrics-api-1/)
 	// partial interface Document {
 	//		FontMetrics measureElement(Element element);
-			// TODO
+			static int measureElement(duk_context* ctx){
+				DKDEBUGFUNC(ctx);
+				DKString _element = GetString(ctx, 1);
+				DKString _measureElement;
+				if(!eventTarget(ctx)->measureElement(_element, _measureElement))
+					return false;
+				dukglue_push(ctx, _measureElement);	
+				return true;
+			}
 	//
 	//		FontMetrics measureText(DOMString text, StylePropertyMapReadOnly styleMap);
-			// TODO
+			static int measureText(duk_context* ctx){
+				DKDEBUGFUNC(ctx);
+				DKString _text = GetString(ctx, 1);
+				DKString _styleMap = GetString(ctx, 2);
+				DKString _measureText;
+				if(!eventTarget(ctx)->measureText(_text, _styleMap, _measureText))
+					return false;
+				dukglue_push(ctx, _measureText);	
+				return true;
+			}
 	//};
 
 	// Source: Fullscreen API Standard (https://fullscreen.spec.whatwg.org/)
@@ -424,16 +550,44 @@ public:
 			// TODO
 	//		
 	//		[LegacyLenientSetter, Unscopable] readonly attribute boolean fullscreen; // historical
-			// TODO
+			static int fullscreen(duk_context* ctx){
+				DKDEBUGFUNC(ctx);
+				bool _fullscreen = GetBool(ctx);
+				if(!eventTarget(ctx)->fullscreen(_fullscreen, duk_is_valid_index(ctx, 1)))
+					return false;
+				dukglue_push(ctx, _fullscreen);
+				return true;
+			}
 	//
 	//		Promise<undefined> exitFullscreen();
-			// TODO
+			static int exitFullscreen(duk_context* ctx){
+				DKDEBUGFUNC(ctx);
+				DKString _exitFullscreen;
+				if(!eventTarget(ctx)->exitFullscreen(_exitFullscreen))
+					return false;
+				dukglue_push(ctx, _exitFullscreen);	
+				return true;
+			}
 	//
 	//		attribute EventHandler onfullscreenchange;
-			// TODO
+			static int onfullscreenchange(duk_context* ctx){
+				DKDEBUGFUNC(ctx);
+				DKString _onfullscreenchange = GetString(ctx);
+				if(!eventTarget(ctx)->onfullscreenchange(_onfullscreenchange, duk_is_valid_index(ctx, 1)))
+					return false;
+				dukglue_push(ctx, _onfullscreenchange);
+				return true;
+			}
 	//
 	//		attribute EventHandler onfullscreenerror;
-	//		// TODO
+			static int onfullscreenerror(duk_context* ctx){
+				DKDEBUGFUNC(ctx);
+				DKString _onfullscreenerror = GetString(ctx);
+				if(!eventTarget(ctx)->onfullscreenerror(_onfullscreenerror, duk_is_valid_index(ctx, 1)))
+					return false;
+				dukglue_push(ctx, _onfullscreenerror);
+				return true;
+			}
 	//};
 };
 REGISTER_OBJECT(DKDocumentDUK, true)
