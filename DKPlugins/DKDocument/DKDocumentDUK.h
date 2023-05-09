@@ -547,7 +547,14 @@ public:
 	// Source: Fullscreen API Standard (https://fullscreen.spec.whatwg.org/)
 	// partial interface Document {
 	//		[LegacyLenientSetter] readonly attribute boolean fullscreenEnabled;
-			// TODO
+			static int fullscreenEnabled(duk_context* ctx){
+				DKDEBUGFUNC(ctx);
+				bool _fullscreenEnabled = GetBool(ctx);
+				if(!eventTarget(ctx)->fullscreenEnabled(_fullscreenEnabled, duk_is_valid_index(ctx, 1)))
+					return false;
+				dukglue_push(ctx, _fullscreenEnabled);
+				return true;
+			}
 	//		
 	//		[LegacyLenientSetter, Unscopable] readonly attribute boolean fullscreen; // historical
 			static int fullscreen(duk_context* ctx){
