@@ -184,19 +184,213 @@ public:
 		return 0;
 	}
 	
-	////// Constructor //////
+	// constructor();
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKINFO("CPP_DKDocumentDUK()\n");
-		DKDocument* _document = new DKDocument();
-		DKString eventTargetAddress = pointerToAddress(_document);
-		duk_push_string(ctx, eventTargetAddress.c_str());
+		DKDocument* document = new DKDocument();
+		DKString eventTargetAddress = pointerToAddress(document);
+		dukglue_push(ctx, eventTargetAddress);
 		return true;
 	}
 	
+	// [SameObject] readonly attribute DOMImplementation implementation;
+	static int implementation(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _implementation = GetString(ctx);
+		if(!eventTarget(ctx)->implementation(_implementation, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _implementation);
+		return true;
+	}
 	
+	// readonly attribute USVString URL;
+	static int URL(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _URL = GetString(ctx);
+		if(!eventTarget(ctx)->URL(_URL, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _URL);
+		return true;
+	}
+	
+	// readonly attribute USVString documentURI;
+	static int documentURI(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _documentURI = GetString(ctx);
+		if(!eventTarget(ctx)->documentURI(_documentURI, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _documentURI);
+		return true;
+	}
+	
+	// readonly attribute DOMString compatMode;
+	static int compatMode(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _compatMode = GetString(ctx);
+		if(!eventTarget(ctx)->compatMode(_compatMode, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _compatMode);
+		return true;
+	}
+	
+	// readonly attribute DOMString characterSet;
+	static int characterSet(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _characterSet = GetString(ctx);
+		if(!eventTarget(ctx)->characterSet(_characterSet, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _characterSet);
+		return true;
+	}
+	
+	// readonly attribute DOMString charset; // legacy alias of .characterSet
+	static int charset(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _charset = GetString(ctx);
+		if(!eventTarget(ctx)->charset(_charset, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _charset);
+		return true;
+	}
+	
+	// readonly attribute DOMString inputEncoding; // legacy alias of .characterSet
+	static int inputEncoding(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _inputEncoding = GetString(ctx);
+		if(!eventTarget(ctx)->inputEncoding(_inputEncoding, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _inputEncoding);
+		return true;
+	}
+	
+	// readonly attribute DOMString contentType;
+	static int contentType(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _contentType = GetString(ctx);
+		if(!eventTarget(ctx)->contentType(_contentType, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _contentType);
+		return true;
+	}
+	
+	// readonly attribute DocumentType? doctype;
+	static int doctype(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _doctype = GetString(ctx);
+		if(!eventTarget(ctx)->doctype(_doctype, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _doctype);
+		return true;
+	}
+	
+	// readonly attribute Element? documentElement;
+	static int documentElement(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _documentElement = GetString(ctx);
+		if(!eventTarget(ctx)->documentElement(_documentElement, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _documentElement);
+		return true;
+	}
+	
+	// HTMLCollection getElementsByTagName(DOMString qualifiedName);
+	//TODO
+	
+	// HTMLCollection getElementsByTagNameNS(DOMString? namespace, DOMString localName);
 	// TODO
 	
+	// HTMLCollection getElementsByClassName(DOMString classNames);
+	// TODO
+	
+	// [CEReactions, NewObject] Element createElement(DOMString localName, optional (DOMString or ElementCreationOptions) options = {});
+	// TODO
+	
+	// [CEReactions, NewObject] Element createElementNS(DOMString? namespace, DOMString qualifiedName, optional (DOMString or ElementCreationOptions) options = {});
+	// TODO
+	
+	// [NewObject] DocumentFragment createDocumentFragment();
+	// TODO
+	
+	// [NewObject] Text createTextNode(DOMString data);
+	// TODO
+	
+	// [NewObject] CDATASection createCDATASection(DOMString data);
+	// TODO
+	
+	// [NewObject] Comment createComment(DOMString data);
+	// TODO
+	
+	// [NewObject] ProcessingInstruction createProcessingInstruction(DOMString target, DOMString data);
+	// TODO
+	
+	// [CEReactions, NewObject] Node importNode(Node node, optional boolean deep = false);
+	// TODO
+	
+	// [CEReactions] Node adoptNode(Node node);
+	// TODO
+	
+	// [NewObject] Attr createAttribute(DOMString localName);
+	// TODO
+	
+	// [NewObject] Attr createAttributeNS(DOMString? namespace, DOMString qualifiedName);
+	// TODO
+	
+	// [NewObject] Event createEvent(DOMString interface); // legacy
+	// TODO
+	
+	// [NewObject] Range createRange();
+	// TODO
+	
+		// NodeFilter.SHOW_ALL = 0xFFFFFFFF
+	// TODO 
+	
+	// [NewObject] NodeIterator createNodeIterator(Node root, optional unsigned long whatToShow = 0xFFFFFFFF, optional NodeFilter? filter = null);
+	// TODO
+	
+	// [NewObject] TreeWalker createTreeWalker(Node root, optional unsigned long whatToShow = 0xFFFFFFFF, optional NodeFilter? filter = null);
+	// TODO
+
+// };
+
+		// Source: DOM Standard (https://dom.spec.whatwg.org/)
+	// Document includes NonElementParentNode;
+
+	// Source: DOM Standard (https://dom.spec.whatwg.org/)
+	// Document includes DocumentOrShadowRoot;
+
+	// Source: DOM Standard (https://dom.spec.whatwg.org/)
+	// Document includes ParentNode;
+
+	// Source: DOM Standard (https://dom.spec.whatwg.org/)
+	// Document includes XPathEvaluatorBase;
+	
+	// Source: Font Metrics API Level 1 (https://drafts.css-houdini.org/font-metrics-api-1/)
+	// partial interface Document {
+	//		FontMetrics measureElement(Element element);
+			// TODO
+	//
+	//		FontMetrics measureText(DOMString text, StylePropertyMapReadOnly styleMap);
+			// TODO
+	//};
+
+	// Source: Fullscreen API Standard (https://fullscreen.spec.whatwg.org/)
+	// partial interface Document {
+	//		[LegacyLenientSetter] readonly attribute boolean fullscreenEnabled;
+			// TODO
+	//		
+	//		[LegacyLenientSetter, Unscopable] readonly attribute boolean fullscreen; // historical
+			// TODO
+	//
+	//		Promise<undefined> exitFullscreen();
+			// TODO
+	//
+	//		attribute EventHandler onfullscreenchange;
+			// TODO
+	//
+	//		attribute EventHandler onfullscreenerror;
+	//		// TODO
+	//};
 };
 REGISTER_OBJECT(DKDocumentDUK, true)
 
