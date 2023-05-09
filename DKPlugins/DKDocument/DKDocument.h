@@ -150,10 +150,16 @@ public:
 	// TODO 
 	
 	// [NewObject] NodeIterator createNodeIterator(Node root, optional unsigned long whatToShow = 0xFFFFFFFF, optional NodeFilter? filter = null);
-	// TODO
+	virtual bool createNodeIterator(DKString& _root, unsigned int& _whatToShow, DKString& _filter, DKString& _createNodeIterator){
+		DKDEBUGFUNC(_root, _whatToShow, _filter, _createNodeIterator);
+		return DKTODO();
+	}
 	
 	// [NewObject] TreeWalker createTreeWalker(Node root, optional unsigned long whatToShow = 0xFFFFFFFF, optional NodeFilter? filter = null);
-	// TODO
+	virtual bool createTreeWalker(DKString& _root, unsigned int& _whatToShow, DKString& _filter, DKString& _createTreeWalker){
+		DKDEBUGFUNC(_root, _whatToShow, _filter, _createTreeWalker);
+		return DKTODO();
+	}
 
 // };
   
