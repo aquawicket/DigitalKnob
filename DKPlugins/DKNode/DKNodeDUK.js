@@ -2,7 +2,9 @@
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Node
 
 
-// [Node()]
+// Source: DOM Standard (https://dom.spec.whatwg.org/)
+// [Exposed=Window]
+// interface Node : EventTarget {
 var Node = function Node(address) {
 	//console.log("Node("+address+")")
 	
@@ -10,47 +12,32 @@ var Node = function Node(address) {
 		this.address = address;
 	if(!this.address)
 		this.address = CPP_DKNodeDUK();
-
-	
-	////// Instance properties //////
-	// [Node.baseURI](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Node/baseURI
-	// [Node.childNodes](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Node/childNodes
-	// [Node.firstChild](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Node/firstChild
-	// [Node.isConnected](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Node/isConnected
-	// [Node.lastChild](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Node/lastChild
-	// [Node.nextSibling](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Node/nextSibling
-	// [Node.nodeName](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeName
-	// [Node.nodeType](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType
-	// [Node.nodeValue] https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeValue
-	// [Node.ownerDocument](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Node/ownerDocument
-	// [Node.parentNode](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Node/parentNode
-	// [Node.parentElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Node/parentElement
-	// [Node.previousSibling](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Node/previousSibling
-	// [Node.textContent] https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent
 	
 	
-	////// Instance methods //////
-	// [Node.appendChild()] https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild
-	// [Node.cloneNode()] https://developer.mozilla.org/en-US/docs/Web/API/Node/cloneNode
-	// [Node.compareDocumentPosition()] https://developer.mozilla.org/en-US/docs/Web/API/Node/compareDocumentPosition
-	// [Node.contains()] https://developer.mozilla.org/en-US/docs/Web/API/Node/contains
-	// [Node.getRootNode()] https://developer.mozilla.org/en-US/docs/Web/API/Node/getRootNode
-	// [Node.hasChildNodes()] https://developer.mozilla.org/en-US/docs/Web/API/Node/hasChildNodes
-	// [Node.insertBefore()] https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore
-	// [Node.isDefaultNamespace()] https://developer.mozilla.org/en-US/docs/Web/API/Node/isDefaultNamespace
-	// [Node.isEqualNode()] https://developer.mozilla.org/en-US/docs/Web/API/Node/isEqualNode
-	// [Node.isSameNode()] https://developer.mozilla.org/en-US/docs/Web/API/Node/isSameNode
-	// [Node.lookupPrefix()] https://developer.mozilla.org/en-US/docs/Web/API/Node/lookupPrefix
-	// [Node.lookupNamespaceURI()] https://developer.mozilla.org/en-US/docs/Web/API/Node/lookupNamespaceURI
-	// [Node.normalize()] https://developer.mozilla.org/en-US/docs/Web/API/Node/normalize
-	// [Node.removeChild()] https://developer.mozilla.org/en-US/docs/Web/API/Node/removeChild
-	// [Node.replaceChild()] https://developer.mozilla.org/en-US/docs/Web/API/Node/replaceChild
+	// const unsigned short ELEMENT_NODE = 1;
+	// const unsigned short ATTRIBUTE_NODE = 2;
+	// const unsigned short TEXT_NODE = 3;
+	// const unsigned short CDATA_SECTION_NODE = 4;
+	// const unsigned short ENTITY_REFERENCE_NODE = 5; // legacy
+	// const unsigned short ENTITY_NODE = 6; // legacy
+	// const unsigned short PROCESSING_INSTRUCTION_NODE = 7;
+	// const unsigned short COMMENT_NODE = 8;
+	// const unsigned short DOCUMENT_NODE = 9;
+	// const unsigned short DOCUMENT_TYPE_NODE = 10;
+	// const unsigned short DOCUMENT_FRAGMENT_NODE = 11;
+	// const unsigned short NOTATION_NODE = 12; // legacy
+		
+	
+	// readonly attribute unsigned short nodeType;
+	Object.defineProperty(this, "nodeType", {
+        get: function nodeType()			{ return CPP_DKDocumentDUK_nodeType(this.address) },
+		//set: function nodeType(data)	{ return CPP_DKDocumentDUK_nodeType(this.address, data) },
+    })
 	
 	
 	////// toString //////
 	if(this.toString() === "[object Object]")
 		this.toString = function(){	return "[object Node]" }
-	
 	
 	return EventTarget.call(this, this.address)
 }
