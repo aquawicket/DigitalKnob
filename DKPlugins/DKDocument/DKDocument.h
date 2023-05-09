@@ -178,28 +178,37 @@ public:
 	// Source: Font Metrics API Level 1 (https://drafts.css-houdini.org/font-metrics-api-1/)
 	// partial interface Document {
 	//		FontMetrics measureElement(Element element);
-			// TODO
+			virtual bool measureElement(DKString& _element, DKString& _measureElement){
+				DKDEBUGFUNC(_element, _measureElement);
+				return DKTODO();
+			}
 	//
 	//		FontMetrics measureText(DOMString text, StylePropertyMapReadOnly styleMap);
-			// TODO
+			virtual bool measureText(DKString& _text, DKString& _styleMap, DKString& _measureText){
+				DKDEBUGFUNC(_text, _styleMap, _measureText);
+				return DKTODO();
+			}
 	//};
 
 	// Source: Fullscreen API Standard (https://fullscreen.spec.whatwg.org/)
 	// partial interface Document {
 	//		[LegacyLenientSetter] readonly attribute boolean fullscreenEnabled;
-			// TODO
+			virtual bool fullscreenEnabled(bool&, bool) { return false; }
 	//		
 	//		[LegacyLenientSetter, Unscopable] readonly attribute boolean fullscreen; // historical
-			// TODO
+			virtual bool fullscreen(bool&, bool) { return false; }
 	//
 	//		Promise<undefined> exitFullscreen();
-			// TODO
+			virtual bool exitFullscreen(DKString& _exitFullscreen){
+				DKDEBUGFUNC(_exitFullscreen);
+				return DKTODO();
+			}
 	//
 	//		attribute EventHandler onfullscreenchange;
-			// TODO
+			virtual bool onfullscreenchange(DKString&, bool) { return false; }
 	//
 	//		attribute EventHandler onfullscreenerror;
-	//		// TODO
+			virtual bool onfullscreenerror(DKString&, bool) { return false; }
 	//};
 };
 
