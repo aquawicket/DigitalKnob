@@ -400,7 +400,7 @@ public:
 	static int createProcessingInstruction(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString _target = GetString(ctx, 1);
-		DKString _data = GetSring(ctx, 2);
+		DKString _data = GetString(ctx, 2);
 		DKString _createProcessingInstruction;
 		if(!eventTarget(ctx)->createProcessingInstruction(_target, _data, _createProcessingInstruction))
 			return false;
