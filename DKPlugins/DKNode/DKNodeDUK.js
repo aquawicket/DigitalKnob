@@ -34,6 +34,14 @@ var Node = function Node(address) {
 		//set: function nodeType(data)	{ return CPP_DKDocumentDUK_nodeType(this.address, data) },
     })
 	
+	// readonly attribute DOMString nodeName;
+	Object.defineProperty(this, "nodeName", {
+        get: function nodeName()			{ return CPP_DKDocumentDUK_nodeName(this.address) },
+		//set: function nodeName(data)	{ return CPP_DKDocumentDUK_nodeName(this.address, data) },
+    })
+	
+	// readonly attribute USVString baseURI;
+	// TODO
 	
 	////// toString //////
 	if(this.toString() === "[object Object]")
