@@ -101,8 +101,9 @@ public:
 	double timeStamp = 0; // https://dom.spec.whatwg.org/#dom-event-timestamp
 	
 	// undefined initEvent(DOMString type, optional boolean bubbles = false, optional boolean cancelable = false); // legacy
-	void initEvent() { // https://dom.spec.whatwg.org/#dom-event-initevent
-		DKDEPRECATED();
+	void initEvent(DKString& type, bool& bubbles, bool& cancelable) { // https://dom.spec.whatwg.org/#dom-event-initevent
+		DKDEBUGFUNC(type, bubbles, cancelable);
+		DKTODO();
 	}
 	
 	
