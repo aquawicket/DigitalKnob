@@ -153,7 +153,7 @@ public:
 	const unsigned short DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC = 0x20;
 	
 	// unsigned short compareDocumentPosition(Node other);
-	virtual bool compareDocumentPosition(DKString& _other, unsigned int& _compareDocumentPosition) 
+	virtual bool compareDocumentPosition(DKString& _other, unsigned short& _compareDocumentPosition) {
 		DKDEBUGFUNC(_other, _compareDocumentPosition);
 		return DKTODO();
 	}

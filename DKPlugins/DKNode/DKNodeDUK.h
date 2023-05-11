@@ -398,7 +398,7 @@ public:
 	static int compareDocumentPosition(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString _other = GetString(ctx);
-		unsigned int _compareDocumentPosition;
+		unsigned short _compareDocumentPosition;
 		if(!eventTarget(ctx)->compareDocumentPosition(_other, _compareDocumentPosition))
 			return false;
 		dukglue_push(ctx, _compareDocumentPosition);	
