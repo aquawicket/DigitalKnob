@@ -27,6 +27,7 @@ public:
 	
 	// KeyLocationCode
 	
+#if !EMSCRIPTEN	//FIXME
 	// const unsigned long DOM_KEY_LOCATION_STANDARD = 0x00;
 	const unsigned int DOM_KEY_LOCATION_STANDARD = 0x00;
 	
@@ -38,6 +39,7 @@ public:
 	
 	// const unsigned long DOM_KEY_LOCATION_NUMPAD = 0x03;
 	const unsigned int DOM_KEY_LOCATION_NUMPAD = 0x03;
+#endif
 	
 	// readonly attribute DOMString key;
 	DOMString key = "";
