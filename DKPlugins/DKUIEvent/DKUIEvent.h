@@ -26,7 +26,7 @@ public:
 	DKString view = ""; // https://w3c.github.io/uievents/#dom-uievent-view
 	
 	// readonly attribute long detail;
-	unsigned int detail = 0; // https://w3c.github.io/uievents/#dom-uievent-detail
+	int detail = 0; // https://w3c.github.io/uievents/#dom-uievent-detail
 	
 	// Source: Input Device Capabilities (https://wicg.github.io/input-device-capabilities/)
 	// partial interface UIEvent {
@@ -38,8 +38,9 @@ public:
 	// partial interface UIEvent {
 	// 		Deprecated in this specification
 	//		undefined initUIEvent(DOMString typeArg, optional boolean bubblesArg = false, optional boolean cancelableArg = false, optional Window? viewArg = null, optional long detailArg = 0);
-			void initUIEvent(){ // https://w3c.github.io/uievents/#dom-uievent-inituievent
-				DKDEPRECATED();
+			void initUIEvent(DKString& typeArg, bool& bubblesArg, bool& cancelableArg, DKString& viewArg, int& detailArg){ // https://w3c.github.io/uievents/#dom-uievent-inituievent
+				DKDEBUGFUNC(typeArg, bubblesArg, cancelableArg, viewArg, detailArg);
+				DKTODO();
 			}
 	//	};
 	

@@ -58,6 +58,31 @@ public:
 		DKString uiEventAddress = duk_require_string(ctx, 0);
 		return (DKUIEvent*)addressToPointer(uiEventAddress);
 	}
+	static bool GetBool(duk_context* ctx, int index = 1){
+		if (duk_is_boolean(ctx, index))
+			return duk_to_boolean(ctx, index);
+		return false;
+	}
+	static double GetDouble(duk_context* ctx, int index = 1){
+		if (duk_is_number(ctx, index))
+			return duk_to_number(ctx, index);
+		return 0.0;
+	}
+	static int GetInt(duk_context* ctx, int index = 1){
+		if (duk_is_number(ctx, index))
+			return duk_to_int(ctx, index);
+		return 0;
+	}
+	static DKString GetString(duk_context* ctx, int index = 1){
+		if (duk_is_string(ctx, index))
+			return duk_to_string(ctx, index);
+		return "";
+	}
+	static unsigned int GetUint(duk_context* ctx, int index = 1){
+		if (duk_is_number(ctx, index))
+			return duk_to_uint(ctx, index);
+		return 0;
+	}
 	
 	//constructor(DOMString type, optional UIEventInit eventInitDict = {});
 	static int constructor(duk_context* ctx){
@@ -74,14 +99,17 @@ public:
 	// readonly attribute Window? view;
 	static int view(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		return DKTODO();
+		if (duk_is_string(ctx, 1))
+			uiEvent(ctx)->view = duk_to_string(ctx, 1);
+		dukglue_push(ctx, uiEvent(ctx)->view);
+		return true;
 	}
 	
 	// readonly attribute long detail;
 	static int detail(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_number(ctx, 1))
-			uiEvent(ctx)->detail = duk_to_uint(ctx, 1);
+			uiEvent(ctx)->detail = duk_to_int(ctx, 1);
 		dukglue_push(ctx, uiEvent(ctx)->detail);
 		return true;
 	}
@@ -101,7 +129,13 @@ public:
 	//		undefined initUIEvent(DOMString typeArg, optional boolean bubblesArg = false, optional boolean cancelableArg = false, optional Window? viewArg = null, optional long detailArg = 0);
 			static int initUIEvent(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				return DKDEPRECATED();
+				DKString _typeArg = GetString(ctx, 1);
+				bool _bubblesArg = GetBool(ctx, 2);
+				bool _cancelableArg = GetBool(ctx, 3);
+				DKString _viewArg = GetString(ctx, 4);
+				int _detailArg = GetInt(ctx, 5);
+				uiEvent(ctx)->initUIEvent(_typeArg, _bubblesArg, _cancelableArg, _viewArg, _detailArg);
+				return DKTODO();
 			}
 	//	};
 	
@@ -112,7 +146,7 @@ public:
 			static int which(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
 				dukglue_push(ctx, uiEvent(ctx)->which);				
-				return DKDEPRECATED();
+				return DKTODO();
 			}
 	// };	
 };
