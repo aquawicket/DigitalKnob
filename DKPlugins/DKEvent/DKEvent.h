@@ -43,6 +43,7 @@ public:
 	
 	// sequence<EventTarget> composedPath();
 	void composedPath() { // https://dom.spec.whatwg.org/#dom-event-composedpath
+		DKDEBUGFUNC();
 		DKTODO();
 	}
 	
@@ -63,6 +64,7 @@ public:
 	
 	// undefined stopPropagation();
 	void stopPropagation() { // https://dom.spec.whatwg.org/#dom-event-stoppropagation
+		DKDEBUGFUNC();
 		DKTODO();
 	}
 	
@@ -71,6 +73,7 @@ public:
 	
 	// undefined stopImmediatePropagation();
 	void stopImmediatePropagation() { // https://dom.spec.whatwg.org/#dom-event-stopimmediatepropagation
+		DKDEBUGFUNC();
 		DKTODO();
 	}
 	
@@ -85,6 +88,7 @@ public:
 	
 	// undefined preventDefault();
 	void preventDefault() { // https://dom.spec.whatwg.org/#dom-event-preventdefault
+		DKDEBUGFUNC();
 		DKTODO();
 	}
 	
@@ -101,8 +105,8 @@ public:
 	double timeStamp = 0; // https://dom.spec.whatwg.org/#dom-event-timestamp
 	
 	// undefined initEvent(DOMString type, optional boolean bubbles = false, optional boolean cancelable = false); // legacy
-	void initEvent(DKString& type, bool& bubbles, bool& cancelable) { // https://dom.spec.whatwg.org/#dom-event-initevent
-		DKDEBUGFUNC(type, bubbles, cancelable);
+	void initEvent(DKString& _type, bool& _bubbles, bool& _cancelable) { // https://dom.spec.whatwg.org/#dom-event-initevent
+		DKDEBUGFUNC(_type, _bubbles, _cancelable);
 		DKTODO();
 	}
 	
