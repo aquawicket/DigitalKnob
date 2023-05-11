@@ -21,23 +21,46 @@ public:
 	}
 	
 	// const unsigned short ELEMENT_NODE = 1;
+	const unsigned short ELEMENT_NODE = 1;
+	
 	// const unsigned short ATTRIBUTE_NODE = 2;
+	const unsigned short ATTRIBUTE_NODE = 2;
+	
 	// const unsigned short TEXT_NODE = 3;
+	const unsigned short TEXT_NODE = 3;
+	
 	// const unsigned short CDATA_SECTION_NODE = 4;
+	const unsigned short CDATA_SECTION_NODE = 4;
+	
 	// const unsigned short ENTITY_REFERENCE_NODE = 5; // legacy
+	const unsigned short ENTITY_REFERENCE_NODE = 5;
+	
 	// const unsigned short ENTITY_NODE = 6; // legacy
+	const unsigned short ENTITY_NODE = 6;
+	
 	// const unsigned short PROCESSING_INSTRUCTION_NODE = 7;
+	const unsigned short PROCESSING_INSTRUCTION_NODE = 7;
+	
 	// const unsigned short COMMENT_NODE = 8;
+	const unsigned short COMMENT_NODE = 8;
+	
 	// const unsigned short DOCUMENT_NODE = 9;
+	const unsigned short DOCUMENT_NODE = 9;
+	
 	// const unsigned short DOCUMENT_TYPE_NODE = 10;
+	const unsigned short DOCUMENT_TYPE_NODE = 10;
+	
 	// const unsigned short DOCUMENT_FRAGMENT_NODE = 11;
+	const unsigned short DOCUMENT_FRAGMENT_NODE = 11;
+	
 	// const unsigned short NOTATION_NODE = 12; // legacy
+	const unsigned short NOTATION_NODE = 12;
 	
 	// readonly attribute unsigned short nodeType;
 	virtual bool nodeType(unsigned int&, bool) { return false; } // [Node.nodeType](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType
 	
 	// readonly attribute DOMString nodeName;
-	virtual bool nodeName(DKString&, bool) { return false; } // [Node.nodeName](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeName
+	virtual bool nodeName(DOMString&, bool) { return false; } // [Node.nodeName](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeName
 
 	// readonly attribute USVString baseURI;
 	virtual bool baseURI(DKString&, bool) { return false; } // [Node.baseURI](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Node/baseURI
@@ -82,10 +105,10 @@ public:
 	virtual bool nextSibling(DKString&, bool) { return false; } // [Node.nextSibling](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Node/nextSibling
 
 	// [CEReactions] attribute DOMString? nodeValue;
-	virtual bool nodeValue(DKString&, bool) { return false; } // [Node.nodeValue] https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeValue
+	virtual bool nodeValue(DOMString&, bool) { return false; } // [Node.nodeValue] https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeValue
 	
 	// [CEReactions] attribute DOMString? textContent;
-	virtual bool textContent(DKString&, bool) { return false; } // [Node.textContent] https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent
+	virtual bool textContent(DOMString&, bool) { return false; } // [Node.textContent] https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent
 	
 	// [CEReactions] undefined normalize();
 	virtual bool normalize() { // [Node.normalize()] https://developer.mozilla.org/en-US/docs/Web/API/Node/normalize
@@ -112,11 +135,22 @@ public:
 	}
 
 	// const unsigned short DOCUMENT_POSITION_DISCONNECTED = 0x01;
+	const unsigned short DOCUMENT_POSITION_DISCONNECTED = 0x01;
+	
 	// const unsigned short DOCUMENT_POSITION_PRECEDING = 0x02;
+	const unsigned short DOCUMENT_POSITION_PRECEDING = 0x02;
+	
 	// const unsigned short DOCUMENT_POSITION_FOLLOWING = 0x04;
+	const unsigned short DOCUMENT_POSITION_FOLLOWING = 0x04;
+	
 	// const unsigned short DOCUMENT_POSITION_CONTAINS = 0x08;
+	const unsigned short DOCUMENT_POSITION_CONTAINS = 0x08;
+	
 	// const unsigned short DOCUMENT_POSITION_CONTAINED_BY = 0x10;
+	const unsigned short DOCUMENT_POSITION_CONTAINED_BY = 0x10;
+	
 	// const unsigned short DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC = 0x20;
+	const unsigned short DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC = 0x20;
 	
 	// unsigned short compareDocumentPosition(Node other);
 	virtual bool compareDocumentPosition(DKString& _other, unsigned int& _compareDocumentPosition) { // [Node.compareDocumentPosition()] https://developer.mozilla.org/en-US/docs/Web/API/Node/compareDocumentPosition
@@ -131,19 +165,19 @@ public:
 	}
 	
 	// DOMString? lookupPrefix(DOMString? namespace);
-	virtual bool lookupPrefix(DKString& _namespace, DKString& _lookupPrefix) { // [Node.lookupPrefix()] https://developer.mozilla.org/en-US/docs/Web/API/Node/lookupPrefix
+	virtual bool lookupPrefix(DOMString& _namespace, DOMString& _lookupPrefix) { // [Node.lookupPrefix()] https://developer.mozilla.org/en-US/docs/Web/API/Node/lookupPrefix
 		DKDEBUGFUNC(_namespace, _lookupPrefix);
 		return DKTODO();
 	}
 	
 	// DOMString? lookupNamespaceURI(DOMString? prefix);
-	virtual bool lookupNamespaceURI(DKString& _prefix, DKString& _lookupNamespaceURI) { // [Node.lookupNamespaceURI()] https://developer.mozilla.org/en-US/docs/Web/API/Node/lookupNamespaceURI
+	virtual bool lookupNamespaceURI(DOMString& _prefix, DOMString& _lookupNamespaceURI) { // [Node.lookupNamespaceURI()] https://developer.mozilla.org/en-US/docs/Web/API/Node/lookupNamespaceURI
 		DKDEBUGFUNC(_prefix, _lookupNamespaceURI);
 		return DKTODO();
 	}
 	
 	// boolean isDefaultNamespace(DOMString? namespace);
-	virtual bool isDefaultNamespace(DKString& _namespace, bool& _isDefaultNamespace) { // [Node.isDefaultNamespace()] https://developer.mozilla.org/en-US/docs/Web/API/Node/isDefaultNamespace
+	virtual bool isDefaultNamespace(DOMString& _namespace, bool& _isDefaultNamespace) { // [Node.isDefaultNamespace()] https://developer.mozilla.org/en-US/docs/Web/API/Node/isDefaultNamespace
 		DKDEBUGFUNC(_namespace, _isDefaultNamespace);
 		return DKTODO();
 	}

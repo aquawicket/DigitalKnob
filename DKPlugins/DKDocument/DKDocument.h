@@ -24,25 +24,25 @@ public:
 	virtual bool implementation(DKString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-implementation
 	
 	// readonly attribute USVString URL;
-	virtual bool URL(DKString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-url
+	virtual bool URL(USVString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-url
 
 	// readonly attribute USVString documentURI;
-	virtual bool documentURI(DKString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-documenturi
+	virtual bool documentURI(USVString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-documenturi
 	
 	// readonly attribute DOMString compatMode;
-	virtual bool compatMode(DKString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-compatmode
+	virtual bool compatMode(DOMString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-compatmode
 	
 	// readonly attribute DOMString characterSet;
-	virtual bool characterSet(DKString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-characterset
+	virtual bool characterSet(DOMString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-characterset
 	
 	// readonly attribute DOMString charset; // legacy alias of .characterSet
-	virtual bool charset(DKString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-charset
+	virtual bool charset(DOMString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-charset
 	
 	// readonly attribute DOMString inputEncoding; // legacy alias of .characterSet
-	virtual bool inputEncoding(DKString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-inputencoding
+	virtual bool inputEncoding(DOMString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-inputencoding
 	
 	// readonly attribute DOMString contentType;
-	virtual bool contentType(DKString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-contenttype
+	virtual bool contentType(DOMString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-contenttype
 	
 	// readonly attribute DocumentType? doctype;
 	virtual bool doctype(DKString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-doctype
@@ -51,31 +51,31 @@ public:
 	virtual bool documentElement(DKString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-documentelement
 	
 	// HTMLCollection getElementsByTagName(DOMString qualifiedName);
-	virtual bool getElementsByTagName(DKString& _qualifiedName, DKString& _getElementsByTagName){ // https://dom.spec.whatwg.org/#dom-document-getelementsbytagname
+	virtual bool getElementsByTagName(DOMString& _qualifiedName, DKString& _getElementsByTagName){ // https://dom.spec.whatwg.org/#dom-document-getelementsbytagname
 		DKDEBUGFUNC(_qualifiedName, _getElementsByTagName);
 		return DKTODO();
 	}
 	
 	// HTMLCollection getElementsByTagNameNS(DOMString? namespace, DOMString localName);
-	virtual bool getElementsByTagNameNS(DKString& _namespace, DKString& _localName, DKString& _getElementsByTagNameNS){ // https://dom.spec.whatwg.org/#dom-document-getelementsbytagnamens
+	virtual bool getElementsByTagNameNS(DOMString& _namespace, DOMString& _localName, DKString& _getElementsByTagNameNS){ // https://dom.spec.whatwg.org/#dom-document-getelementsbytagnamens
 		DKDEBUGFUNC(_namespace, _localName, _getElementsByTagNameNS);
 		return DKTODO();
 	}
 	
 	// HTMLCollection getElementsByClassName(DOMString classNames);
-	virtual bool getElementsByClassName(DKString& _classNames, DKString& _getElementsByClassName){ //https://dom.spec.whatwg.org/#dom-document-getelementsbyclassname
+	virtual bool getElementsByClassName(DOMString& _classNames, DKString& _getElementsByClassName){ //https://dom.spec.whatwg.org/#dom-document-getelementsbyclassname
 		DKDEBUGFUNC(_classNames, _getElementsByClassName);
 		return DKTODO();
 	}
 	
 	// [CEReactions, NewObject] Element createElement(DOMString localName, optional (DOMString or ElementCreationOptions) options = {});
-	virtual bool createElement(DKString& _localName, DKString& _options, DKString& _createElement){ // https://dom.spec.whatwg.org/#dom-document-createelement
+	virtual bool createElement(DOMString& _localName, DKString& _options, DKString& _createElement){ // https://dom.spec.whatwg.org/#dom-document-createelement
 		DKDEBUGFUNC(_localName, _options, _createElement);
 		return DKTODO();
 	}
 	
 	// [CEReactions, NewObject] Element createElementNS(DOMString? namespace, DOMString qualifiedName, optional (DOMString or ElementCreationOptions) options = {});
-	virtual bool createElementNS(DKString& _namespace, DKString& _qualifiedName, DKString& _options, DKString& _createElementNS){ // https://dom.spec.whatwg.org/#dom-document-createelementns
+	virtual bool createElementNS(DOMString& _namespace, DOMString& _qualifiedName, DKString& _options, DKString& _createElementNS){ // https://dom.spec.whatwg.org/#dom-document-createelementns
 		DKDEBUGFUNC(_namespace, _qualifiedName, _options, _createElementNS);
 		return DKTODO();
 	}
@@ -87,25 +87,25 @@ public:
 	}
 	
 	// [NewObject] Text createTextNode(DOMString data);
-	virtual bool createTextNode(DKString& _data, DKString& _createTextNode){
+	virtual bool createTextNode(DOMString& _data, DKString& _createTextNode){
 		DKDEBUGFUNC(_data, _createTextNode);
 		return DKTODO();
 	}
 	
 	// [NewObject] CDATASection createCDATASection(DOMString data);
-	virtual bool createCDATASection(DKString& _data, DKString& _createCDATASection){
+	virtual bool createCDATASection(DOMString& _data, DKString& _createCDATASection){
 		DKDEBUGFUNC(_data, _createCDATASection);
 		return DKTODO();
 	}
 	
 	// [NewObject] Comment createComment(DOMString data);
-	virtual bool createComment(DKString& _data, DKString& _createComment){
+	virtual bool createComment(DOMString& _data, DKString& _createComment){
 		DKDEBUGFUNC(_data, _createComment);
 		return DKTODO();
 	}
 	
 	// [NewObject] ProcessingInstruction createProcessingInstruction(DOMString target, DOMString data);
-	virtual bool createProcessingInstruction(DKString& _target, DKString& _data, DKString& _createProcessingInstruction){
+	virtual bool createProcessingInstruction(DOMString& _target, DOMString& _data, DKString& _createProcessingInstruction){
 		DKDEBUGFUNC(_target, _data, _createProcessingInstruction);
 		return DKTODO();
 	}
@@ -123,19 +123,19 @@ public:
 	}
 	
 	// [NewObject] Attr createAttribute(DOMString localName);
-	virtual bool createAttribute(DKString& _localName, DKString& _createAttribute){
+	virtual bool createAttribute(DOMString& _localName, DKString& _createAttribute){
 		DKDEBUGFUNC(_localName, _createAttribute);
 		return DKTODO();
 	}
 	
 	// [NewObject] Attr createAttributeNS(DOMString? namespace, DOMString qualifiedName);
-	virtual bool createAttributeNS(DKString& _namespace, DKString& _qualifiedName, DKString& _createAttributeNS){
+	virtual bool createAttributeNS(DOMString& _namespace, DOMString& _qualifiedName, DKString& _createAttributeNS){
 		DKDEBUGFUNC(_namespace, _qualifiedName, _createAttributeNS);
 		return DKTODO();
 	}
 	
 	// [NewObject] Event createEvent(DOMString interface); // legacy
-	virtual bool createEvent(DKString& _interface, DKString& _createEvent){
+	virtual bool createEvent(DOMString& _interface, DKString& _createEvent){
 		DKDEBUGFUNC(_interface, _createEvent);
 		return DKTODO();
 	}
@@ -184,7 +184,7 @@ public:
 			}
 	//
 	//		FontMetrics measureText(DOMString text, StylePropertyMapReadOnly styleMap);
-			virtual bool measureText(DKString& _text, DKString& _styleMap, DKString& _measureText){
+			virtual bool measureText(DOMString& _text, DKString& _styleMap, DKString& _measureText){
 				DKDEBUGFUNC(_text, _styleMap, _measureText);
 				return DKTODO();
 			}
