@@ -1,5 +1,4 @@
-// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/WheelEvent.idl
-// [SOURCE] https://w3c.github.io/uievents/#events-wheelevents
+// [IDL] https://w3c.github.io/uievents/#idl-wheelevent
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent
 #pragma once
 #ifndef DKWheelEventDUK_H
@@ -20,11 +19,15 @@ public:
 		DKDuktape::AttachFunction("CPP_DKWheelEventDUK", DKWheelEventDUK::constructor);
 	
 		// DeltaModeCode
+		
 		// const unsigned long DOM_DELTA_PIXEL = 0x00;
+		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_DOM_DELTA_PIXEL", 		DKWheelEventDUK::DOM_DELTA_PIXEL); 
 		
 		// const unsigned long DOM_DELTA_LINE  = 0x01;
+		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_DOM_DELTA_LINE", 		DKWheelEventDUK::DOM_DELTA_LINE); 
 		
 		// const unsigned long DOM_DELTA_PAGE  = 0x02;
+		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_DOM_DELTA_PAGE", 		DKWheelEventDUK::DOM_DELTA_PAGE);
 	
 		// readonly attribute double deltaX;
 		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_deltaX", 		DKWheelEventDUK::deltaX); 
@@ -65,10 +68,25 @@ public:
 	
 	// DeltaModeCode
 	// const unsigned long DOM_DELTA_PIXEL = 0x00;
+	static int DOM_DELTA_PIXEL(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		dukglue_push(ctx, wheelEvent(ctx)->DOM_DELTA_PIXEL);	
+		return true;
+	}
 		
 	// const unsigned long DOM_DELTA_LINE  = 0x01;
+	static int DOM_DELTA_LINE(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		dukglue_push(ctx, wheelEvent(ctx)->DOM_DELTA_LINE);	
+		return true;
+	}
 		
 	// const unsigned long DOM_DELTA_PAGE  = 0x02;
+	static int DOM_DELTA_PAGE(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		dukglue_push(ctx, wheelEvent(ctx)->DOM_DELTA_PAGE);	
+		return true;
+	}
 		
 	// readonly attribute double deltaX;
 	static int deltaX(duk_context* ctx){

@@ -13,7 +13,7 @@ class DKWheelEvent : public DKMouseEvent
 {
 public:
 	// constructor(DOMString type, optional WheelEventInit eventInitDict = {});
-	DKWheelEvent(DKString _type, DKString _eventInitDict) : DKMouseEvent(_type, _eventInitDict) { // [WheelEvent()] https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent/WheelEvent
+	DKWheelEvent(DKString _type, DKString _eventInitDict) : DKMouseEvent(_type, _eventInitDict) {
 		DKDEBUGFUNC(_type, _eventInitDict);
 		interfaceName = "WheelEvent";
 		interfaceAddress = pointerToAddress(this);
@@ -22,20 +22,27 @@ public:
 	virtual ~DKWheelEvent(){}
 	
 	// DeltaModeCode
+	
 	// const unsigned long DOM_DELTA_PIXEL = 0x00;
+	const unsigned int DOM_DELTA_PIXEL = 0x00;
 	
 	// const unsigned long DOM_DELTA_LINE  = 0x01;
+	const unsigned int DOM_DELTA_LINE  = 0x01;
 	
 	// const unsigned long DOM_DELTA_PAGE  = 0x02;
+	const unsigned int DOM_DELTA_PAGE  = 0x02;
 	
 	// readonly attribute double deltaX;
-	double deltaX = 0.0; // [WheelEvent.deltaX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent/deltaX
+	double deltaX = 0.0; 
+	
 	// readonly attribute double deltaY;
-	double deltaY = 0.0; // [WheelEvent.deltaY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent/deltaY
+	double deltaY = 0.0;
+	
 	// readonly attribute double deltaZ;
-	double deltaZ = 0.0; // [WheelEvent.deltaZ](Read only) https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent/deltaZ
+	double deltaZ = 0.0;
+	
 	// readonly attribute unsigned long deltaMode;
-	unsigned int deltaMode = 0; // [WheelEvent.deltaMode](Read only) https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent/deltaMode
+	unsigned int deltaMode = 0;
 };
 
 

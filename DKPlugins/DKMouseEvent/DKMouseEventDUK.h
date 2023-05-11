@@ -1,5 +1,4 @@
-// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/MouseEvent.idl
-// [SOURCE] https://w3c.github.io/uievents/#events-mouseevents
+// [IDL] https://w3c.github.io/uievents/#idl-mouseevent
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent
 #pragma once
 #ifndef DKMouseEventDUK_H
