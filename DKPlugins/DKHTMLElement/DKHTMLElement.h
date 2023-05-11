@@ -6,63 +6,101 @@
 
 #include "DKElement/DKElement.h"
 
-
+// [Exposed=Window]
+// interface HTMLElement : Element {
 class DKHTMLElement : public DKElement
 {
 public:
-	////// Constructor //////
-	// [HTMLElement()] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/HTMLElement
+	// [HTMLConstructor] constructor();
 	DKHTMLElement() : DKElement() {
 		DKDEBUGFUNC();
 		interfaceName = "HTMLElement";
 		interfaceAddress = pointerToAddress(this);		
 	}
 	
+	// metadata attributes
+	// [CEReactions] attribute DOMString title;
+	virtual bool title(DOMString&, bool) { return false; }
 	
-	////// Instance properties //////
-	// [HTMLElement.accessKey] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/accessKey
-	// [HTMLElement.accessKeyLabel](Read only) https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/accessKeyLabel
-	// [HTMLElement.attributeStyleMap](Read only)
-	// [HTMLElement.contentEditable] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/contentEditable
-	// [HTMLElement.isContentEditable](Read only) https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/isContentEditable
-	// [HTMLElement.dataset](Read only) https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset
-	// [HTMLElement.dir] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dir
-	// [HTMLElement.draggable]
-	// [HTMLElement.enterKeyHint] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/enterKeyHint
-	// [HTMLElement.hidden] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/hidden
-	// [HTMLElement.inert] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/inert
-	// [HTMLElement.innerText] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/innerText
-	// [HTMLElement.inputMode] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/inputMode
-	// [HTMLElement.popover](Experimental)
-	// [HTMLElement.lang] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/lang
-	// [HTMLElement.noModule] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/nonce
-	// [HTMLElement.nonce] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/nonce
-	// [HTMLElement.offsetHeight](Read only) https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetHeight
-	// [HTMLElement.offsetLeft](Read only) https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetLeft
-	// [HTMLElement.offsetParent](Read only) https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetParent
-	// [HTMLElement.offsetTop](Read only) https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetTop
-	// [HTMLElement.offsetWidth](Read only) https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetWidth
-	// [HTMLElement.outerText] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/outerText
-	// [HTMLElement.properties](Experimental)(Read only)
-	// [HTMLElement.spellcheck]
-	// [HTMLElement.style] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style
-	// [HTMLElement.tabIndex] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/tabIndex
-	// [HTMLElement.title] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/title
-	// [HTMLElement.translate]
+	// [CEReactions] attribute DOMString lang;
+	virtual bool lang(DOMString&, bool) { return false; }
+	
+	// [CEReactions] attribute boolean translate;
+	virtual bool translate(bool&, bool) { return false; }
+	
+	// [CEReactions] attribute DOMString dir;
+	virtual bool dir(DOMString&, bool) { return false; }
 
-
-	////// Instance methods //////
-	// [HTMLElement.attachInternals()] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/attachInternals
-	// [HTMLElement.blur()] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/blur
-	// [HTMLElement.click()] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/click
-	// [HTMLElement.focus()] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus
-	// [HTMLElement.hidePopover()](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/hidePopover
-	// [HTMLElement.showPopover()](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/showPopover
-	// [HTMLElement.togglePopover()](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/togglePopover
-		
-		
-	////// Events //////
+	// user interaction
+	
+	// [CEReactions] attribute (boolean or unrestricted double or DOMString)? hidden;
+	virtual bool inert(DKString&, bool) { return false; }
+	
+	// [CEReactions] attribute boolean inert;
+	virtual bool inert(bool&, bool) { return false; }
+	
+	// undefined click();
 	// TODO
+	
+	// [CEReactions] attribute DOMString accessKey;
+	virtual bool accessKey(DOMString&, bool) { return false; }
+	
+	// readonly attribute DOMString accessKeyLabel;
+	virtual bool accessKeyLabel(DOMString&, bool) { return false; }
+	
+	// [CEReactions] attribute boolean draggable;
+	virtual bool draggable(bool&, bool) { return false; }
+	
+	// [CEReactions] attribute boolean spellcheck;
+	virtual bool spellcheck(bool&, bool) { return false; }
+	
+	// [CEReactions] attribute DOMString autocapitalize;
+	virtual bool autocapitalize(DOMString&, bool) { return false; }
+
+	// [CEReactions] attribute [LegacyNullToEmptyString] DOMString innerText;
+	virtual bool innerText(DOMString&, bool) { return false; }
+	
+	// [CEReactions] attribute [LegacyNullToEmptyString] DOMString outerText;
+	virtual bool outerText(DOMString&, bool) { return false; }
+
+	// ElementInternals attachInternals();
+	virtual bool attachInternals(DKString& _attachInternals) {
+		DKDEBUGFUNC(_attachInternals);
+		return DKTODO();
+	}
+
+	// The popover API
+	
+	// undefined showPopover();
+	virtual bool showPopover() {
+		DKDEBUGFUNC();
+		return DKTODO();
+	}
+	
+	// undefined hidePopover();
+	virtual bool hidePopover() {
+		DKDEBUGFUNC();
+		return DKTODO();
+	}
+	
+	// undefined togglePopover(optional boolean force);
+	virtual bool togglePopover(bool& _force) {
+		DKDEBUGFUNC(_force);
+		return DKTODO();
+	}
+	
+	// [CEReactions] attribute DOMString? popover;
+	virtual bool popover(DOMString&, bool) { return false; }
+//};
+
+	// HTMLElement includes GlobalEventHandlers;
+	// HTMLElement includes ElementContentEditable;
+	// HTMLElement includes HTMLOrSVGElement;
+	
+	// [Exposed=Window]
+	// interface HTMLUnknownElement : HTMLElement {
+		// Note: intentionally no [HTMLConstructor]
+	// };
 };
 
 
