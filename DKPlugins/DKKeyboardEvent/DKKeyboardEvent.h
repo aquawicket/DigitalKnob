@@ -6,6 +6,9 @@
 
 #include "DKUIEvent/DKUIEvent.h"
 
+////// KeyboardEventInit //////
+typedef std::string KeyboardEventInit;
+
 
 // Source: UI Events (https://www.w3.org/TR/uievents/)
 // [Exposed=Window]
@@ -14,7 +17,7 @@ class DKKeyboardEvent : public DKUIEvent
 {
 public:
 	// constructor(DOMString type, optional KeyboardEventInit eventInitDict = {});
-	DKKeyboardEvent(DKString _type, DKString _eventInitDict) : DKUIEvent(_type, _eventInitDict) {
+	DKKeyboardEvent(DOMString _type, KeyboardEventInit _eventInitDict) : DKUIEvent(_type, _eventInitDict) {
 		DKDEBUGFUNC(_type, _eventInitDict);
 		interfaceName = "KeyboardEvent";
 		interfaceAddress = pointerToAddress(this);
@@ -37,10 +40,10 @@ public:
 	const unsigned int DOM_KEY_LOCATION_NUMPAD = 0x03;
 	
 	// readonly attribute DOMString key;
-	DKString key = "";
+	DOMString key = "";
 	
 	// readonly attribute DOMString code;
-	DKString code = "";
+	DOMString code = "";
 	
 	// readonly attribute unsigned long location;
 	unsigned int location = 0;
@@ -64,7 +67,7 @@ public:
 	bool isComposing = false;
 	
 	// boolean getModifierState(DOMString keyArg);
-	void getModifierState(DKString& _keyArg) {
+	void getModifierState(DOMString& _keyArg) {
 		DKDEBUGFUNC(_keyArg);
 		DKTODO();
 	}
@@ -83,11 +86,11 @@ public:
 	//		optional boolean shiftKey = false,
 	//		optional boolean metaKey = false);
 			void initKeyboardEvent(
-				DKString& _typeArg,
+				DOMString& _typeArg,
 				bool& _bubblesArg,
 				bool& _cancelableArg,
 				DKString& _viewArg,
-				DKString& _keyArg,
+				DOMString& _keyArg,
 				unsigned int& _locationArg,
 				bool& _ctrlKey,
 				bool& _altKey,

@@ -6,6 +6,10 @@
 
 #include "DKUIEvent/DKUIEvent.h"
 
+////// InputEventInit //////
+typedef std::string InputEventInit;
+
+
 // Source: UI Events (https://www.w3.org/TR/uievents/)
 // [Exposed=Window]
 // interface InputEvent : UIEvent {
@@ -13,7 +17,7 @@ class DKInputEvent : public DKUIEvent
 {
 public:
 	// constructor(DOMString type, optional InputEventInit eventInitDict = {});
-	DKInputEvent(DKString _type, DKString _eventInitDict) : DKUIEvent(_type, _eventInitDict) {
+	DKInputEvent(DOMString _type, InputEventInit _eventInitDict) : DKUIEvent(_type, _eventInitDict) {
 		DKDEBUGFUNC(_type, _eventInitDict);
 		interfaceName = "InputEvent";
 		interfaceAddress = pointerToAddress(this);
@@ -22,13 +26,13 @@ public:
 	virtual ~DKInputEvent(){}
 	
 	// readonly attribute DOMString? data;
-	DKString data = "";
+	DOMString data = "";
 	
 	//readonly attribute boolean isComposing;
 	bool isComposing = false;
 	
 	//readonly attribute DOMString inputType;
-	DKString inputType = "";
+	DOMString inputType = "";
 	
 	// Source: Input Events Level 2 (https://www.w3.org/TR/input-events-2/)
 	// partial interface InputEvent {

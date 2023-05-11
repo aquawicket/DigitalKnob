@@ -6,6 +6,9 @@
 
 #include "DKEvent/DKEvent.h"
 
+////// UIEventInit //////
+typedef std::string UIEventInit;
+
 
 // Source: UI Events (https://www.w3.org/TR/uievents/)
 // [Exposed=Window]
@@ -14,7 +17,7 @@ class DKUIEvent : public DKEvent
 {
 public:
 	//constructor(DOMString type, optional UIEventInit eventInitDict = {});
-	DKUIEvent(DKString _type, DKString _eventInitDict) : DKEvent(_type, _eventInitDict) { // https://w3c.github.io/uievents/#dom-uievent-uievent
+	DKUIEvent(DOMString _type, UIEventInit _eventInitDict) : DKEvent(_type, _eventInitDict) { // https://w3c.github.io/uievents/#dom-uievent-uievent
 		DKDEBUGFUNC(_type, _eventInitDict);
 		interfaceName = "UIEvent";
 		interfaceAddress = pointerToAddress(this);
@@ -38,8 +41,8 @@ public:
 	// partial interface UIEvent {
 	// 		Deprecated in this specification
 	//		undefined initUIEvent(DOMString typeArg, optional boolean bubblesArg = false, optional boolean cancelableArg = false, optional Window? viewArg = null, optional long detailArg = 0);
-			void initUIEvent(DKString& typeArg, bool& bubblesArg, bool& cancelableArg, DKString& viewArg, int& detailArg){ // https://w3c.github.io/uievents/#dom-uievent-inituievent
-				DKDEBUGFUNC(typeArg, bubblesArg, cancelableArg, viewArg, detailArg);
+			void initUIEvent(DOMString& _typeArg, bool& _bubblesArg, bool& _cancelableArg, DKString& _viewArg, int& _detailArg){ // https://w3c.github.io/uievents/#dom-uievent-inituievent
+				DKDEBUGFUNC(_typeArg, _bubblesArg, _cancelableArg, _viewArg, _detailArg);
 				DKTODO();
 			}
 	//	};

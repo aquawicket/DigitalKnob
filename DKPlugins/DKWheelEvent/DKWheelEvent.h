@@ -6,6 +6,10 @@
 
 #include "DKMouseEvent/DKMouseEvent.h"
 
+////// WheelEventInit //////
+typedef std::string WheelEventInit;
+
+
 // Source: UI Events (https://www.w3.org/TR/uievents/)
 // [Exposed=Window]
 // interface WheelEvent : MouseEvent {
@@ -13,7 +17,7 @@ class DKWheelEvent : public DKMouseEvent
 {
 public:
 	// constructor(DOMString type, optional WheelEventInit eventInitDict = {});
-	DKWheelEvent(DKString _type, DKString _eventInitDict) : DKMouseEvent(_type, _eventInitDict) {
+	DKWheelEvent(DOMString _type, WheelEventInit _eventInitDict) : DKMouseEvent(_type, _eventInitDict) {
 		DKDEBUGFUNC(_type, _eventInitDict);
 		interfaceName = "WheelEvent";
 		interfaceAddress = pointerToAddress(this);

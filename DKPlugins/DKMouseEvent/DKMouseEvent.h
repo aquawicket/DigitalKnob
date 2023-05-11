@@ -6,6 +6,10 @@
 
 #include "DKUIEvent/DKUIEvent.h"
 
+////// MouseEventInit //////
+typedef std::string MouseEventInit;
+
+
 // Source: UI Events (https://www.w3.org/TR/uievents/)
 // [Exposed=Window]
 // interface MouseEvent : UIEvent {
@@ -13,7 +17,7 @@ class DKMouseEvent : public DKUIEvent
 {
 public:
 	// constructor(DOMString type, optional MouseEventInit eventInitDict = {});
-	DKMouseEvent(DKString _type, DKString _eventInitDict) : DKUIEvent(_type, _eventInitDict) { // https://w3c.github.io/uievents/#dom-mouseevent-mouseevent
+	DKMouseEvent(DOMString _type, MouseEventInit _eventInitDict) : DKUIEvent(_type, _eventInitDict) { // https://w3c.github.io/uievents/#dom-mouseevent-mouseevent
 		DKDEBUGFUNC(_type, _eventInitDict);
 		interfaceName = "MouseEvent";
 		interfaceAddress = pointerToAddress(this);
@@ -55,7 +59,7 @@ public:
 	DKString relatedTarget = ""; // https://w3c.github.io/uievents/#dom-mouseevent-relatedtarget
 	
 	// boolean getModifierState(DOMString keyArg);
-	void getModifierState(DKString& keyArg) { // https://w3c.github.io/uievents/#dom-mouseevent-getmodifierstate
+	void getModifierState(DOMString& keyArg) { // https://w3c.github.io/uievents/#dom-mouseevent-getmodifierstate
 		DKDEBUGFUNC(keyArg);
 		DKTODO();
 	}
@@ -103,22 +107,22 @@ public:
 	//		optional short buttonArg = 0,
 	//		optional EventTarget? relatedTargetArg = null);
 			void initMouseEvent(
-				DKString& typeArg, 
-				bool& bubblesArg,
-				bool& cancelableArg,
-				DKString& viewArg,
-				int& detailArg,
-				int& screenXArg,
-				int& screenYArg,
-				int& clientXArg,
-				int& clientYArg,
-				bool& ctrlKeyArg,
-				bool& altKeyArg,
-				bool& shiftKeyArg,
-				bool& metaKeyArg,
-				short& buttonArg,
-				DKString& relatedTargetArg) { // [MouseEvent.initMouseEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/initMouseEvent
-					DKDEBUGFUNC(typeArg, bubblesArg, cancelableArg, viewArg, detailArg, screenXArg, screenYArg, clientXArg, clientYArg, ctrlKeyArg, altKeyArg, shiftKeyArg, metaKeyArg, buttonArg, relatedTargetArg);
+				DOMString& _typeArg, 
+				bool& _bubblesArg,
+				bool& _cancelableArg,
+				DKString& _viewArg,
+				int& _detailArg,
+				int& _screenXArg,
+				int& _screenYArg,
+				int& _clientXArg,
+				int& _clientYArg,
+				bool& _ctrlKeyArg,
+				bool& _altKeyArg,
+				bool& _shiftKeyArg,
+				bool& _metaKeyArg,
+				short& _buttonArg,
+				DKString& _relatedTargetArg) { // [MouseEvent.initMouseEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/initMouseEvent
+					DKDEBUGFUNC(_typeArg, _bubblesArg, _cancelableArg, _viewArg, _detailArg, _screenXArg, _screenYArg, _clientXArg, _clientYArg, _ctrlKeyArg, _altKeyArg, _shiftKeyArg, _metaKeyArg, _buttonArg, _relatedTargetArg);
 					DKTODO();
 			}
 	// };

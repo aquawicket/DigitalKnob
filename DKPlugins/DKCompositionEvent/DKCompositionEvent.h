@@ -6,6 +6,10 @@
 
 #include "DKUIEvent/DKUIEvent.h"
 
+////// CompositionEventInit //////
+typedef std::string CompositionEventInit;
+
+
 // Source: UI Events (https://www.w3.org/TR/uievents/)
 // [Exposed=Window]
 // interface CompositionEvent : UIEvent {
@@ -13,7 +17,7 @@ class DKCompositionEvent : public DKUIEvent
 {
 public:
 	// constructor(DOMString type, optional CompositionEventInit eventInitDict = {});
-	DKCompositionEvent(DKString _type, DKString _eventInitDict) : DKUIEvent(_type, _eventInitDict) { // [CompositionEvent()] https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/CompositionEvent
+	DKCompositionEvent(DOMString _type, CompositionEventInit _eventInitDict) : DKUIEvent(_type, _eventInitDict) { // [CompositionEvent()] https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/CompositionEvent
 		DKDEBUGFUNC(_type, _eventInitDict);
 		interfaceName = "CompositionEvent";
 		interfaceAddress = pointerToAddress(this);
@@ -22,7 +26,7 @@ public:
 	virtual ~DKCompositionEvent(){}
 	
 	// readonly attribute DOMString data;
-	DKString data = "";
+	DOMString data = "";
 	
 	// Source: UI Events (https://www.w3.org/TR/uievents/)
 	// partial interface CompositionEvent {
@@ -32,7 +36,7 @@ public:
 	//		optional boolean cancelableArg = false,
 	//		optional WindowProxy? viewArg = null,
 	//		optional DOMString dataArg = "");
-			void initCompositionEvent(DKString& _typeArg, bool& _bubblesArg, bool& _cancelableArg, DKString& _viewArg, DKString& _dataArg) {
+			void initCompositionEvent(DOMString& _typeArg, bool& _bubblesArg, bool& _cancelableArg, DKString& _viewArg, DOMString& _dataArg) {
 				DKDEBUGFUNC(_typeArg, _bubblesArg, _cancelableArg, _viewArg, _dataArg);
 				DKTODO();
 			}
