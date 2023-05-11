@@ -59,7 +59,7 @@ public:
 	const unsigned short BUBBLING_PHASE = 3; // https://dom.spec.whatwg.org/#dom-event-bubbling_phase
 	
 	// readonly attribute unsigned short eventPhase;
-	int eventPhase = 0; // https://dom.spec.whatwg.org/#dom-event-eventphase
+	unsigned short eventPhase = 0; // https://dom.spec.whatwg.org/#dom-event-eventphase
 	
 	// undefined stopPropagation();
 	void stopPropagation() { // https://dom.spec.whatwg.org/#dom-event-stoppropagation

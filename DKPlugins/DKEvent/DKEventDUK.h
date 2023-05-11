@@ -37,12 +37,16 @@ public:
 		DKDuktape::AttachFunction("CPP_DKEventDUK_composedPath", DKEventDUK::composedPath);
 		
 		// const unsigned short NONE = 0;
-	
+		DKDuktape::AttachFunction("CPP_DKEventDUK_NONE", DKEventDUK::NONE);
+		
 		// const unsigned short CAPTURING_PHASE = 1;
+		DKDuktape::AttachFunction("CPP_DKEventDUK_CAPTURING_PHASE", DKEventDUK::CAPTURING_PHASE);
 	
 		// const unsigned short AT_TARGET = 2;
+		DKDuktape::AttachFunction("CPP_DKEventDUK_AT_TARGET", DKEventDUK::AT_TARGET);
 	
 		// const unsigned short BUBBLING_PHASE = 3;
+		DKDuktape::AttachFunction("CPP_DKEventDUK_BUBBLING_PHASE", DKEventDUK::BUBBLING_PHASE);
 		
 		// readonly attribute unsigned short eventPhase;
 		DKDuktape::AttachFunction("CPP_DKEventDUK_eventPhase", DKEventDUK::eventPhase);
@@ -142,12 +146,32 @@ public:
 	}
 	
 	// const unsigned short NONE = 0;
+	static int NONE(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		dukglue_push(ctx, event(ctx)->NONE);		
+		return true;
+	}
 	
 	// const unsigned short CAPTURING_PHASE = 1;
+	static int CAPTURING_PHASE(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		dukglue_push(ctx, event(ctx)->CAPTURING_PHASE);		
+		return true;
+	}
 	
 	// const unsigned short AT_TARGET = 2;
+	static int AT_TARGET(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		dukglue_push(ctx, event(ctx)->AT_TARGET);		
+		return true;
+	}
 	
 	// const unsigned short BUBBLING_PHASE = 3;
+	static int BUBBLING_PHASE(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		dukglue_push(ctx, event(ctx)->BUBBLING_PHASE);		
+		return true;
+	}
 	
 	// readonly attribute unsigned short eventPhase;
 	static int eventPhase(duk_context* ctx){
