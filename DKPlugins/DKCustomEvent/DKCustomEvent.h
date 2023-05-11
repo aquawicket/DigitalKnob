@@ -25,8 +25,9 @@ public:
 	DKString detail = "{}";	// https://dom.spec.whatwg.org/#dom-customevent-detail
 
 	// undefined initCustomEvent(DOMString type, optional boolean bubbles = false, optional boolean cancelable = false, optional any detail = null); // legacy
-	void initCustomEvent(){	// https://dom.spec.whatwg.org/#dom-customevent-initcustomevent
-		DKDEPRECATED();
+	void initCustomEvent(DKString& type, bool& bubbles, bool& cancelable, DKString& detail){	// https://dom.spec.whatwg.org/#dom-customevent-initcustomevent
+		DKDEBUGFUNC(type, bubbles, cancelable, detail);
+		DKTODO();
 	}
 };
 

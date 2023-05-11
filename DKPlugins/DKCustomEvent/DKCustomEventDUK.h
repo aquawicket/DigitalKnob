@@ -65,7 +65,12 @@ public:
 	// undefined initCustomEvent(DOMString type, optional boolean bubbles = false, optional boolean cancelable = false, optional any detail = null); // legacy
 	static int initCustomEvent(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		return DKDEPRECATED();
+		DKString _type = GetString(ctx, 1);
+		bool _bubbles = GetBool(ctx, 2);
+		bool _cancelable = GetBool(ctx, 3);
+		DKString _detail = GetString(ctx, 4);
+		customEvent(ctx)->initCustomEvent(_type, _bubbles, _cancelable, _detail);
+		return DKTODO();
 	}
 
 };

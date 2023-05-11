@@ -267,6 +267,10 @@ public:
 	// undefined initEvent(DOMString type, optional boolean bubbles = false, optional boolean cancelable = false); // legacy
 	static int initEvent(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		DKString _type = GetString(ctx, 1);
+		bool _bubbles = GetBool(ctx, 2);
+		bool _cancelable = GetBool(ctx, 3);
+		event(ctx)->initEvent(_type, _bubbles, _cancelable);
 		return DKTODO();
 	}
 };
