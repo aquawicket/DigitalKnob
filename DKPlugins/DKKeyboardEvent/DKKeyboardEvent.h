@@ -14,7 +14,7 @@ class DKKeyboardEvent : public DKUIEvent
 {
 public:
 	// constructor(DOMString type, optional KeyboardEventInit eventInitDict = {});
-	DKKeyboardEvent(DKString _type, DKString _eventInitDict) : DKUIEvent(_type, _eventInitDict) { // [KeyboardEvent()] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/KeyboardEvent
+	DKKeyboardEvent(DKString _type, DKString _eventInitDict) : DKUIEvent(_type, _eventInitDict) {
 		DKDEBUGFUNC(_type, _eventInitDict);
 		interfaceName = "KeyboardEvent";
 		interfaceAddress = pointerToAddress(this);
@@ -37,35 +37,35 @@ public:
 	const unsigned int DOM_KEY_LOCATION_NUMPAD = 0x03;
 	
 	// readonly attribute DOMString key;
-	DKString key = ""; // [KeyboardEvent.key](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key
+	DKString key = "";
 	
 	// readonly attribute DOMString code;
-	DKString code = ""; // [KeyboardEvent.code](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code
+	DKString code = "";
 	
 	// readonly attribute unsigned long location;
-	unsigned int location = 0; // [KeyboardEvent.location](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/location
+	unsigned int location = 0;
 	
 	// readonly attribute boolean ctrlKey;
-	bool ctrlKey = false; // [KeyboardEvent.ctrlKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/ctrlKey
+	bool ctrlKey = false;
 	
 	// readonly attribute boolean shiftKey;
-	bool shiftKey = false; // [KeyboardEvent.shiftKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/shiftKey
+	bool shiftKey = false;
 	
 	// readonly attribute boolean altKey;
-	bool altKey = false; // [KeyboardEvent.altKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/altKey
+	bool altKey = false;
 	
 	// readonly attribute boolean metaKey;
-	bool metaKey = false; // [KeyboardEvent.metaKey](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/metaKey
+	bool metaKey = false;
   
 	// readonly attribute boolean repeat;
-	bool repeat = false; // [KeyboardEvent.repeat](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/repeat
+	bool repeat = false;
 	
 	// readonly attribute boolean isComposing;
-	bool isComposing = false; // [KeyboardEvent.isComposing](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/isComposing
+	bool isComposing = false;
 	
 	// boolean getModifierState(DOMString keyArg);
-	void getModifierState(DKString& keyArg) { // [KeyboardEvent.getModifierState()] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/getModifierState
-		DKDEBUGFUNC(keyArg);
+	void getModifierState(DKString& _keyArg) {
+		DKDEBUGFUNC(_keyArg);
 		DKTODO();
 	}
 	
@@ -82,8 +82,20 @@ public:
 	//		optional boolean altKey = false,
 	//		optional boolean shiftKey = false,
 	//		optional boolean metaKey = false);
-			void initKeyboardEvent() { // [KeyboardEvent.initKeyboardEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/initKeyboardEvent
-				DKDEPRECATED();
+			void initKeyboardEvent(
+				DKString& _typeArg,
+				bool& _bubblesArg,
+				bool& _cancelableArg,
+				DKString& _viewArg,
+				DKString& _keyArg,
+				unsigned int& _locationArg,
+				bool& _ctrlKey,
+				bool& _altKey,
+				bool& _shiftKey,
+				bool& _metaKey
+			) {
+				DKDEPRECATED(_typeArg, _bubblesArg, _cancelableArg, _viewArg, _keyArg, _locationArg, _ctrlKey, _altKey, _shiftKey, _metaKey);
+				DKTODO();
 			}
 	// };
 	
@@ -91,9 +103,10 @@ public:
 	// partial interface KeyboardEvent {
 	//		// The following support legacy user agents
 	//		readonly attribute unsigned long charCode;
-			unsigned int charCode = 0; // [KeyboardEvent.charCode](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/charCode
+			unsigned int charCode = 0;
+	//
 	//		readonly attribute unsigned long keyCode;
-			unsigned int keyCode = 0; // [KeyboardEvent.keyCode](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode
+			unsigned int keyCode = 0;
 	// };
 };
 
