@@ -7,11 +7,16 @@
 #include "DK/DK.h"
 #include "DKEvent/DKEvent.h"
 
+
+////// EventListener //////
+typedef std::function<void(DKEvent&)> DKEventListener;
+
 struct EventObject {
-    DKString type;
 	DKString interfaceAddress;
-    std::function<void(DKEvent&)> listener;
+    DOMString type;
+	DKEventListener callback;
 };
+
 
 
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
@@ -31,12 +36,12 @@ public:
 	virtual ~DKEventTarget(){}
 
 	// undefined addEventListener(DOMString type, EventListener? callback, optional (AddEventListenerOptions or boolean) options = {});
-	void addEventListener(const DKString& type, std::function<void(DKEvent&)> listener){ // https://dom.spec.whatwg.org/#dom-eventtarget-addeventlistener
-		DKDEBUGFUNC(type, listener);
-		//DKINFO("DKEventTarget::addEventListener("+type+", listener) \n");
+	void addEventListener(const DOMString& type, DKEventListener callback){ // https://dom.spec.whatwg.org/#dom-eventtarget-addeventlistener
+		DKDEBUGFUNC(type, callback);
+		//DKINFO("DKEventTarget::addEventListener("+type+", callback) \n");
 		EventObject eventObj;
         eventObj.type = type;
-        eventObj.listener = listener;
+        eventObj.callback = callback;
         eventObj.interfaceAddress = interfaceAddress;
         events.push_back(eventObj);
 		
@@ -51,11 +56,11 @@ public:
 	}
 	
 	// undefined removeEventListener(DOMString type, EventListener? callback, optional (EventListenerOptions or boolean) options = {});
-	void removeEventListener(const DKString& type, std::function<void(DKEvent&)> listener){ // https://dom.spec.whatwg.org/#dom-eventtarget-removeeventlistener
-		DKDEBUGFUNC(type, listener);
-		//DKINFO("DKEventTarget::removeEventListener("+type+", listener) \n");
+	void removeEventListener(const DOMString& type, DKEventListener callback){ // https://dom.spec.whatwg.org/#dom-eventtarget-removeeventlistener
+		DKDEBUGFUNC(type, callback);
+		//DKINFO("DKEventTarget::removeEventListener("+type+", callback) \n");
 		for(auto it = events.begin(); it != events.end();){
-			if(it->type == type && it->interfaceAddress == interfaceAddress) // && it->listener == listener)
+			if(it->type == type && it->interfaceAddress == interfaceAddress) // && it->callback == callback)
 				it = events.erase(it);
 			else
 				++it;
@@ -70,9 +75,13 @@ public:
 			//DKINFO("	eventObj("+eventObj.type+", "+eventObj.interfaceAddress) \n");	
 			if(eventObj.type == event.type && eventObj.interfaceAddress == interfaceAddress){
 				//DKINFO("		event("+event.type+") \n");	
+				
 				event.currentTarget = interfaceAddress;
+				
 				event.target = interfaceAddress;
-				eventObj.listener(event);
+				//event.target = (DKEventTarget*)addressToPointer(interfaceAddress);
+				
+				eventObj.callback(event);
 			}
         }
     }

@@ -152,7 +152,12 @@ public:
 	// readonly attribute EventTarget? target;
 	static int target(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		
 		dukglue_push(ctx, event(ctx)->target);
+		
+		//DKString targetAddress = pointerToAddress(event(ctx)->target);
+		//dukglue_push(ctx, targetAddress);
+		
 		return true;
 	}
 	

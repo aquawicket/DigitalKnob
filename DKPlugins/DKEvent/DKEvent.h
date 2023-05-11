@@ -6,6 +6,20 @@
 
 #include "DK/DK.h"
 
+
+////// DOMString //////
+typedef std::string DOMString;
+
+////// EventInit //////
+typedef std::string EventInit;
+
+////// DOMHighResTimeStamp //////
+typedef double DOMHighResTimeStamp;
+
+////// EventTarget //////
+class DKEventTarget;
+
+
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // [Exposed=*]
 // interface Event {
@@ -13,7 +27,7 @@ class DKEvent
 {
 public:
 	// constructor(DOMString type, optional EventInit eventInitDict = {});  // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Event/Event
-	DKEvent(DKString _type, DKString _eventInitDict){
+	DKEvent(DOMString _type, EventInit _eventInitDict){
 		DKDEBUGFUNC(_type, _eventInitDict);
 		interfaceName = "Event";
 		interfaceAddress = pointerToAddress(this);
@@ -30,10 +44,11 @@ public:
 	virtual ~DKEvent(){}
 	
 	// readonly attribute DOMString type;
-	DKString type = ""; // https://dom.spec.whatwg.org/#dom-event-type
+	DOMString type = ""; // https://dom.spec.whatwg.org/#dom-event-type
 	
 	// readonly attribute EventTarget? target;
 	DKString target = ""; // https://dom.spec.whatwg.org/#dom-event-target
+	//DKEventTarget* target = nullptr;
 	
 	// readonly attribute EventTarget? srcElement; // legacy
 	DKString srcElement = ""; // https://dom.spec.whatwg.org/#dom-event-srcelement
@@ -102,10 +117,10 @@ public:
 	bool isTrusted = false; // https://dom.spec.whatwg.org/#dom-event-istrusted
 	
 	// readonly attribute DOMHighResTimeStamp timeStamp;
-	double timeStamp = 0; // https://dom.spec.whatwg.org/#dom-event-timestamp
+	DOMHighResTimeStamp timeStamp = 0; // https://dom.spec.whatwg.org/#dom-event-timestamp
 	
 	// undefined initEvent(DOMString type, optional boolean bubbles = false, optional boolean cancelable = false); // legacy
-	void initEvent(DKString& _type, bool& _bubbles, bool& _cancelable) { // https://dom.spec.whatwg.org/#dom-event-initevent
+	void initEvent(DOMString& _type, bool& _bubbles, bool& _cancelable) { // https://dom.spec.whatwg.org/#dom-event-initevent
 		DKDEBUGFUNC(_type, _bubbles, _cancelable);
 		DKTODO();
 	}

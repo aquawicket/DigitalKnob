@@ -21,17 +21,17 @@ var EventTarget = function EventTarget(address) {
             return instances[i]; //return already existing instance
     }
     instances.push(this); //create instance
-    this.listeners = {};
+    this.callbacks = {};
 	*/
 
 	// undefined addEventListener(DOMString type, EventListener? callback, optional (AddEventListenerOptions or boolean) options = {});
     Object.defineProperty(this, "addEventListener", {
         value: function addEventListener(type, callback, useCapture) {
             /*
-			if (!(type in this.listeners))
-                this.listeners[type] = [];
-            if (this.listeners[type].indexOf(callback) === -1)
-                this.listeners[type].push(callback) //Do not allow duplicate entries
+			if (!(type in this.callbacks))
+                this.callbacks[type] = [];
+            if (this.callbacks[type].indexOf(callback) === -1)
+                this.callbacks[type].push(callback) //Do not allow duplicate entries
 			*/
             CPP_DKEventTargetDUK_addEventListener(this.address, type, callback);
         },
@@ -41,14 +41,14 @@ var EventTarget = function EventTarget(address) {
     Object.defineProperty(this, "removeEventListener", {
         value: function removeEventListener(type, callback, useCapture) {
 			/*
-            if (!(type in this.listeners))
+            if (!(type in this.callbacks))
                 return;
-            var stack = this.listeners[type];
+            var stack = this.callbacks[type];
             for (var i = 0, l = stack.length; i < l; i++) {
                 if (stack[i] === callback) {
                     //console.log(stack[i]);
                     stack.splice(i, 1);
-                    this.listeners[type].splice(i, 1);
+                    this.callbacks[type].splice(i, 1);
                     return;
                 }
             }
@@ -61,10 +61,10 @@ var EventTarget = function EventTarget(address) {
     Object.defineProperty(this, "dispatchEvent", {
         value: function dispatchEvent(event) {
 			/*
-            if (!(event.type in this.listeners)) {
+            if (!(event.type in this.callbacks)) {
                 return true;
             }
-            var stack = this.listeners[event.type].slice();
+            var stack = this.callbacks[event.type].slice();
             for (var i = 0; i < stack.length; i++) {
                 stack[i].call(this, event);
             }
