@@ -94,7 +94,7 @@ public:
 				bool& _shiftKey,
 				bool& _metaKey
 			) {
-				DKDEPRECATED(_typeArg, _bubblesArg, _cancelableArg, _viewArg, _keyArg, _locationArg, _ctrlKey, _altKey, _shiftKey, _metaKey);
+				DKDEBUGFUNC(_typeArg, _bubblesArg, _cancelableArg, _viewArg, _keyArg, _locationArg, _ctrlKey, _altKey, _shiftKey, _metaKey);
 				DKTODO();
 			}
 	// };
