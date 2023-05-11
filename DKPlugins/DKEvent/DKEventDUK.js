@@ -56,19 +56,29 @@ var Event = function Event(type, eventInitDict, address) {
 	
 	// sequence<EventTarget> composedPath();
 	Event.prototype.composedPath = function composedPath() {
-        // TODO
 		CPP_DKEventDUK_composedPath(this.address);
-		// Return value
-		// An array of EventTarget objects representing the objects on which an event listener will be invoked.
+		// TODO
     }
 	
 	// const unsigned short NONE = 0;
+	Object.defineProperty(this, "NONE", {
+        get: function NONE() { return CPP_DKEventDUK_NONE(this.address) },
+    })
 	
 	// const unsigned short CAPTURING_PHASE = 1;
+	Object.defineProperty(this, "CAPTURING_PHASE", {
+        get: function CAPTURING_PHASE() { return CPP_DKEventDUK_CAPTURING_PHASE(this.address) },
+    })
 	
 	// const unsigned short AT_TARGET = 2;
+	Object.defineProperty(this, "AT_TARGET", {
+        get: function AT_TARGET() { return CPP_DKEventDUK_AT_TARGET(this.address) },
+    })
 	
 	// const unsigned short BUBBLING_PHASE = 3;
+	Object.defineProperty(this, "BUBBLING_PHASE", {
+        get: function BUBBLING_PHASE() { return CPP_DKEventDUK_BUBBLING_PHASE(this.address) },
+    })
 	
 	// readonly attribute unsigned short eventPhase;
 	Object.defineProperty(this, "eventPhase", {
