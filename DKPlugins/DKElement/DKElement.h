@@ -19,28 +19,28 @@ public:
 	}
 	
 	// readonly attribute DOMString? namespaceURI;
-	// TODO
+	virtual bool namespaceURI(DOMString&, bool) { return false; }
 	
 	// readonly attribute DOMString? prefix;
-	// TODO
+	virtual bool prefix(DOMString&, bool) { return false; }
   
 	// readonly attribute DOMString localName;
-	// TODO
+	virtual bool localName(DOMString&, bool) { return false; }
 	
 	// readonly attribute DOMString tagName;
-	// TODO
+	virtual bool tagName(DOMString&, bool) { return false; }
 
 	// [CEReactions] attribute DOMString id;
-	// TODO
+	virtual bool id(DOMString&, bool) { return false; }
 	
 	// [CEReactions] attribute DOMString className;
-	// TODO
+	virtual bool className(DOMString&, bool) { return false; }
 	
 	// [SameObject, PutForwards=value] readonly attribute DOMTokenList classList;
-	// TODO
+	virtual bool classList(DKString&, bool) { return false; }
 	
 	//[CEReactions, Unscopable] attribute DOMString slot;
-	// TODO
+	virtual bool slot(DOMString&, bool) { return false; }
 	
 	// boolean hasAttributes();
 	// TODO
