@@ -27,6 +27,7 @@ public:
 	
 	// DeltaModeCode
 	
+#if !EMSCRIPTEN	//FIXME
 	// const unsigned long DOM_DELTA_PIXEL = 0x00;
 	const unsigned int DOM_DELTA_PIXEL = 0x00;
 	
@@ -35,6 +36,7 @@ public:
 	
 	// const unsigned long DOM_DELTA_PAGE  = 0x02;
 	const unsigned int DOM_DELTA_PAGE  = 0x02;
+#endif
 	
 	// readonly attribute double deltaX;
 	double deltaX = 0.0; 
