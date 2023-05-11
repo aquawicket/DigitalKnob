@@ -3,6 +3,8 @@ dk_depend(DKDuktape)
 
 dk_depend(DK)
 dk_depend(DKAssets)
+
+dk_depend(DKInterface)
 dk_depend(DKConsole)
 
 dk_depend(DKEvent)

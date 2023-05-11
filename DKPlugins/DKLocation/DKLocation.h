@@ -4,17 +4,16 @@
 #ifndef DKLocation_H
 #define DKLocation_H
 
-#include "DK/DK.h"
-//#include "DKInterface/DKInterface.h"	// TODO
+#include "DKInterface/DKInterface.h"
 
 
 // Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
 // [Exposed=Window]
 // interface Location { // but see also additional creation steps and overridden internal methods
-class DKLocation //: public DKInterface
+class DKLocation : public DKInterface
 {
 public:
-	DKLocation(){
+	DKLocation() : DKInterface() {
 		DKDEBUGFUNC();
 		interfaceName = "Location";
 		interfaceAddress = pointerToAddress(this);
@@ -71,11 +70,6 @@ public:
 	
 	// [LegacyUnforgeable, SameObject] readonly attribute DOMStringList ancestorOrigins;
 	virtual bool ancestorOrigins(DKString&, bool) { return false; } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-ancestororigins
-
-
-	////// DK properties //////
-	DKString interfaceName = "";
-	DKString interfaceAddress = "";
 };
 
 

@@ -5,13 +5,13 @@
 #define DKScreen_H
 
 #include "DK/DK.h"
-//#include "DKInterface/DKInterface.h"	// TODO
+#include "DKInterface/DKInterface.h"
 
 
-class DKScreen //: public DKInterface
+class DKScreen : public DKInterface
 {
 public:
-	DKScreen(){
+	DKScreen() : DKInterface() {
 		DKDEBUGFUNC();
 		interfaceName = "Screen";
 		interfaceAddress = pointerToAddress(this);
@@ -176,15 +176,6 @@ public:
 		DKDEBUGFUNC();
 		return DKTODO();
 	}
-	
-	
-	////// Events //////
-	// [orientationchange](Deprecated)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Screen/orientationchange_event
-
-	
-	////// DK properties //////
-	DKString interfaceName = "";
-	DKString interfaceAddress = "";
 };
 
 

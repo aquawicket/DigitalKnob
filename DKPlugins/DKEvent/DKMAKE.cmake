@@ -1,4 +1,4 @@
-dk_depend(DK)
+dk_depend(DKInterface)
 
 dk_generateCmake(DKEvent)
 dk_assets(DKEvent)

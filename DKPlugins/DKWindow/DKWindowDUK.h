@@ -711,7 +711,7 @@ public:
 	//		readonly attribute short orientation;
 			static int orientation(duk_context* ctx){ // [Window.orientation](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/orientation
 				DKDEBUGFUNC(ctx);
-				int _orientation = GetInt(ctx);
+				short _orientation = GetInt(ctx);
 				if(!eventTarget(ctx)->orientation(_orientation, duk_is_valid_index(ctx, 1)))
 					return false;
 				dukglue_push(ctx, _orientation);

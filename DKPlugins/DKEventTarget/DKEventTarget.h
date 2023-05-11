@@ -4,8 +4,7 @@
 #ifndef DKEventTarget_H
 #define DKEventTarget_H
 
-#include "DK/DK.h"
-//#include "DKInterface/DKInterface.h"	// TODO
+#include "DKInterface/DKInterface.h"
 #include "DKEvent/DKEvent.h"
 
 
@@ -23,12 +22,12 @@ struct EventObject {
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // [Exposed=*]
 // interface EventTarget {
-class DKEventTarget //: public DKInterface
+class DKEventTarget : public DKInterface
 {
 public:
 
 	// constructor();
-	DKEventTarget() { // https://dom.spec.whatwg.org/#dom-eventtarget-eventtarget
+	DKEventTarget() : DKInterface() { // https://dom.spec.whatwg.org/#dom-eventtarget-eventtarget
 		DKDEBUGFUNC();
 		interfaceName = "EventTarget";
 		interfaceAddress = pointerToAddress(this);
@@ -91,8 +90,6 @@ public:
 	
 	////// DK properties //////	
 	static std::vector<EventObject> events;
-	DKString interfaceName = "";
-	DKString interfaceAddress = "";
 };
 
 
