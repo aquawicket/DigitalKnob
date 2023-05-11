@@ -475,7 +475,7 @@ public:
 		return true;
 	}
 	
-		// NodeFilter.SHOW_ALL = 0xFFFFFFFF
+	// NodeFilter.SHOW_ALL = 0xFFFFFFFF
 	// TODO 
 	
 	// [NewObject] NodeIterator createNodeIterator(Node root, optional unsigned long whatToShow = 0xFFFFFFFF, optional NodeFilter? filter = null);
