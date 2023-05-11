@@ -23,95 +23,95 @@ public:
 	
 	// the current browsing context
 	// [LegacyUnforgeable] readonly attribute WindowProxy window;
-	virtual bool window(DKString&, bool) { return false; } // [Window.window](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/window
+	virtual bool window(DKString&, bool) { return false; }
 	
 	// [Replaceable] readonly attribute WindowProxy self;
-	virtual bool self(DKString&, bool) { return false; } // [Window.self](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/self
+	virtual bool self(DKString&, bool) { return false; }
 	
 	// [LegacyUnforgeable] readonly attribute Document document;
-	virtual bool document(DKString&, bool) { return false; } // [Window.document](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/document
+	virtual bool document(DKString&, bool) { return false; }
 	
 	// attribute DOMString name;
-	virtual bool name(DOMString&, bool) { return false; } // [Window.name] https://developer.mozilla.org/en-US/docs/Web/API/Window/name
+	virtual bool name(DOMString&, bool) { return false; }
 	
 	// [PutForwards=href, LegacyUnforgeable] readonly attribute Location location;
-	virtual bool location(DKString&, bool) { return false; } // [Window.location] https://developer.mozilla.org/en-US/docs/Web/API/Window/location
+	virtual bool location(DKString&, bool) { return false; }
 	
 	// readonly attribute History history;
-	virtual bool history(DKString&, bool) { return false; } // [Window.history](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/History
+	virtual bool history(DKString&, bool) { return false; }
 	
 	// readonly attribute CustomElementRegistry customElements;
-	virtual bool customElements(DKString&, bool) { return false; } // [Window.customElements](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/customElements
+	virtual bool customElements(DKString&, bool) { return false; }
 	
 	// [Replaceable] readonly attribute BarProp locationbar;
-	virtual bool locationbar(DKString&, bool) { return false; } // [Window.locationbar](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/locationbar
+	virtual bool locationbar(DKString&, bool) { return false; }
 	
 	// [Replaceable] readonly attribute BarProp menubar;
-	virtual bool menubar(DKString&, bool) { return false; } // [Window.menubar](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/menubar
+	virtual bool menubar(DKString&, bool) { return false; }
 	
 	// [Replaceable] readonly attribute BarProp personalbar;
-	virtual bool personalbar(DKString&, bool) { return false; } // [Window.personalbar](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/personalbar
+	virtual bool personalbar(DKString&, bool) { return false; }
 	
 	// [Replaceable] readonly attribute BarProp scrollbars;
-	virtual bool scrollbars(DKString&, bool) { return false; } // [Window.scrollbars](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollbars
+	virtual bool scrollbars(DKString&, bool) { return false; }
 	
 	// [Replaceable] readonly attribute BarProp statusbar;
-	virtual bool statusbar(DKString&, bool) { return false; } // [Window.statusbar](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/statusbar
+	virtual bool statusbar(DKString&, bool) { return false; }
 	
 	// [Replaceable] readonly attribute BarProp toolbar;
-	virtual bool toolbar(DKString&, bool) { return false; } // [Window.toolbar](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/toolbar
+	virtual bool toolbar(DKString&, bool) { return false; }
 	
 	// attribute DOMString status;
-	virtual bool status(DOMString&, bool) { return false; } // [Window.status](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/status
+	virtual bool status(DOMString&, bool) { return false; }
 	
 	// undefined close();
-	virtual bool close() { // [Window.close()] https://developer.mozilla.org/en-US/docs/Web/API/Window/close
+	virtual bool close() {
 		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	
 	// readonly attribute boolean closed;
-	virtual bool closed(bool&, bool) { return false; } // [Window.closed](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/closed
+	virtual bool closed(bool&, bool) { return false; }
 	
 	// undefined stop();
-	virtual bool stop() { // [Window.stop()] https://developer.mozilla.org/en-US/docs/Web/API/Window/stop
+	virtual bool stop() {
 		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	
 	// undefined focus();
-	virtual bool focus() { // [Window.focus()] https://developer.mozilla.org/en-US/docs/Web/API/Window/focus
+	virtual bool focus() {
 		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	
 	// undefined blur();
-	virtual bool blur() { // [Window.blur()] https://developer.mozilla.org/en-US/docs/Web/API/Window/blur
+	virtual bool blur() {
 		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	
 	// other browsing contexts
 	// [Replaceable] readonly attribute WindowProxy frames;
-	virtual bool frames(DKString&, bool) { return false; } // [Window.frames](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/frames
+	virtual bool frames(DKString&, bool) { return false; }
 	
 	// [Replaceable] readonly attribute unsigned long length;
-	virtual bool length(unsigned int&, bool) { return false; } // [Window.length](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/length
+	virtual bool length(unsigned int&, bool) { return false; }
 	
 	// [LegacyUnforgeable] readonly attribute WindowProxy? top;
-	virtual bool top(DKString&, bool) { return false; } // [Window.top](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/top
+	virtual bool top(DKString&, bool) { return false; }
 	
 	// attribute any opener;
-	virtual bool opener(DKString&, bool) { return false; } // [Window.opener] https://developer.mozilla.org/en-US/docs/Web/API/Window/opener
+	virtual bool opener(DKString&, bool) { return false; }
 	
 	// [Replaceable] readonly attribute WindowProxy? parent;
-	virtual bool parent(DKString&, bool) { return false; } // [Window.parent](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/parent
+	virtual bool parent(DKString&, bool) { return false; }
 	
 	// readonly attribute Element? frameElement;
-	virtual bool frameElement(DKString&, bool) { return false; } // [Window.frameElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/frameElement
+	virtual bool frameElement(DKString&, bool) { return false; }
 	
 	// WindowProxy? open(optional USVString url = "", optional DOMString target = "_blank", optional [LegacyNullToEmptyString] DOMString features = "");
-	virtual bool open(USVString& _url, DOMString& _target, DOMString& _features) { // [Window.open()] https://developer.mozilla.org/en-US/docs/Web/API/Window/open
+	virtual bool open(USVString& _url, DOMString& _target, DOMString& _features) {
 		DKDEBUGFUNC(_url, _target, _features);
 		return DKTODO();
 	}
@@ -123,42 +123,42 @@ public:
 	
 	// the user agent
 	// readonly attribute Navigator navigator;
-	virtual bool navigator(DKString&, bool) { return false; } // [Window.navigator](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/navigator
+	virtual bool navigator(DKString&, bool) { return false; }
 	
 	// readonly attribute Navigator clientInformation; // legacy alias of .navigator
-	virtual bool clientInformation(DKString&, bool) { return false; } // [Window.clientInformation](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/navigator
+	virtual bool clientInformation(DKString&, bool) { return false; }
 	
 	// readonly attribute boolean originAgentCluster;
 	
 	//user prompts
 	// undefined alert();
 	// undefined alert(DOMString message);
-	virtual bool alert(DOMString& _message) { // [Window.alert()] https://developer.mozilla.org/en-US/docs/Web/API/Window/alert
+	virtual bool alert(DOMString& _message) {
 		DKDEBUGFUNC(_message);
 		return DKTODO();
 	}
 	
 	// boolean confirm(optional DOMString message = "");
-	virtual bool confirm(DOMString& _message) { // [Window.confirm()] https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm
+	virtual bool confirm(DOMString& _message) {
 		DKDEBUGFUNC(_message);
 		return DKTODO();
 	}
 	
 	// DOMString? prompt(optional DOMString message = "", optional DOMString default = "");
-	virtual bool prompt(DOMString& _message, DOMString _default) { // [Window.prompt()] https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt
+	virtual bool prompt(DOMString& _message, DOMString _default) {
 		DKDEBUGFUNC(_message, _default);
 		return DKTODO();
 	}
 	
 	// undefined print();
-	virtual bool print() { // [Window.print()] https://developer.mozilla.org/en-US/docs/Web/API/Window/print
+	virtual bool print() {
 		DKDEBUGFUNC();
 		return DKTODO();
 	}
 	
 	// undefined postMessage(any message, USVString targetOrigin, optional sequence<object> transfer = []);
 	// undefined postMessage(any message, optional WindowPostMessageOptions options = {});
-	virtual bool postMessage(DKString& _message, USVString& _targetOrigin) { // [Window.postMessage()] https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage
+	virtual bool postMessage(DKString& _message, USVString& _targetOrigin) {
 		DKDEBUGFUNC(_message, _targetOrigin);
 		return DKTODO();
 	}
@@ -168,7 +168,7 @@ public:
 	// Source: Compatibility Standard (https://compat.spec.whatwg.org/)
 	// partial interface Window {
 	//		readonly attribute short orientation;
-			virtual bool orientation(short&, bool) { return false; } // [Window.orientation](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/orientation
+			virtual bool orientation(short&, bool) { return false; }
 	//		
 	//		attribute EventHandler onorientationchange;
 	
@@ -177,7 +177,7 @@ public:
 	// Source: DOM Standard (https://dom.spec.whatwg.org/)
 	// partial interface Window {
 	//		[Replaceable] readonly attribute (Event or undefined) event; // legacy
-			virtual bool event(DKString&, bool) { return false; } // [Window.event](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/event
+			virtual bool event(DKString&, bool) { return false; }
 	// };
 	
 	// Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
@@ -201,19 +201,19 @@ public:
 	// Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
 	// partial interface Window {
 	//		undefined captureEvents();
-			virtual bool captureEvents() { // [Window.captureEvents()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/captureEvents
+			virtual bool captureEvents() {
 				DKDEBUGFUNC();
 				return DKTODO();
 			}
 	//
 	//		undefined releaseEvents();
-			virtual bool releaseEvents(DKString& _eventType) { // [Window.releaseEvents()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/releaseEvents
+			virtual bool releaseEvents(DKString& _eventType) {
 				DKDEBUGFUNC(_eventType);
 				return DKTODO();
 			}
 	//
 	//		[Replaceable, SameObject] readonly attribute External external;
-			virtual bool external(DKString&, bool) { return false; } // [Window.external](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/external
+			virtual bool external(DKString&, bool) { return false; }
 	// };
 
 	// Source: Cookie Store API (https://wicg.github.io/cookie-store/)
@@ -237,19 +237,19 @@ public:
 	// [SecureContext]
 	// partial interface Window {
 	//		Promise<sequence<FileSystemFileHandle>> showOpenFilePicker(optional OpenFilePickerOptions options = {});
-			virtual bool showOpenFilePicker() { // [Window.showOpenFilePicker()](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Window/showOpenFilePicker
+			virtual bool showOpenFilePicker() {
 				DKDEBUGFUNC();
 				return DKTODO();
 			}
 	//
 	//		Promise<FileSystemFileHandle> showSaveFilePicker(optional SaveFilePickerOptions options = {});
-			virtual bool showSaveFilePicker() { // [Window.showSaveFilePicker()](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Window/showSaveFilePicker
+			virtual bool showSaveFilePicker() {
 				DKDEBUGFUNC();
 				return DKTODO();
 			}
 	//
 	//		Promise<FileSystemDirectoryHandle> showDirectoryPicker(optional DirectoryPickerOptions options = {});
-			virtual bool showDirectoryPicker() { // [Window.showDirectoryPicker()](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Window/showDirectoryPicker
+			virtual bool showDirectoryPicker() {
 				DKDEBUGFUNC();
 				return DKTODO();
 			}
@@ -259,7 +259,7 @@ public:
 	// [SecureContext]
 	// partial interface Window {
 	//		Promise<sequence<FontData>> queryLocalFonts(optional QueryOptions options = {});
-			virtual bool queryLocalFonts() { // [Window.queryLocalFonts()](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Window/queryLocalFonts
+			virtual bool queryLocalFonts() {
 				DKDEBUGFUNC();
 				return DKTODO();
 			}
@@ -279,13 +279,13 @@ public:
 	// Source: Web Speech API (https://wicg.github.io/speech-api/)
 	// partial interface Window {
 	//		[SameObject] readonly attribute SpeechSynthesis speechSynthesis;
-			virtual bool speechSynthesis(DKString&, bool) { return false; } // [Window.speechSynthesis](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/speechSynthesis
+			virtual bool speechSynthesis(DKString&, bool) { return false; }
 	// };
 
 	// Source: Web App Launch Handler API (https://wicg.github.io/web-app-launch/)
 	// partial interface Window {
 	//		readonly attribute LaunchQueue launchQueue;
-			virtual bool launchQueue(DKString&, bool) { return false; } // [Window.launchQueue](Read only)(Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Window/launchQueue
+			virtual bool launchQueue(DKString&, bool) { return false; }
 	// };
 
 	// Source: CSS Spatial Navigation Level 1 (https://www.w3.org/TR/css-nav-1/)
@@ -296,7 +296,7 @@ public:
 	// Source: CSS Object Model (CSSOM) (https://www.w3.org/TR/cssom-1/)
 	// partial interface Window {
 	//		[NewObject] CSSStyleDeclaration getComputedStyle(Element elt, optional CSSOMString? pseudoElt);
-			virtual bool getComputedStyle() { // [Window.getComputedStyle()] https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
+			virtual bool getComputedStyle() {
 				DKDEBUGFUNC();
 				return DKTODO();
 			}
@@ -305,100 +305,100 @@ public:
 	// Source: CSSOM View Module (https://www.w3.org/TR/cssom-view-1/)
 	// partial interface Window {
 	//		[NewObject] MediaQueryList matchMedia(CSSOMString query);
-			virtual bool matchMedia(DKString& _mediaQueryString) { // [Window.matchMedia()] https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia
+			virtual bool matchMedia(DKString& _mediaQueryString) {
 				DKDEBUGFUNC(_mediaQueryString);
 				return DKTODO();
 			}
 	//
 	//		[SameObject, Replaceable] readonly attribute Screen screen;
-			virtual bool screen(DKString&, bool) { return false; } // [Window.screen](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/screen
+			virtual bool screen(DKString&, bool) { return false; }
 	//
 	//		[SameObject, Replaceable] readonly attribute VisualViewport? visualViewport;
-			virtual bool visualViewport(DKString&, bool) { return false; } // [Window.visualViewport](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/visualViewport
+			virtual bool visualViewport(DKString&, bool) { return false; }
 	//
 	//		// browsing context
 	//		undefined moveTo(long x, long y);
-			virtual bool moveTo(int& _x, int& _y) { // [Window.moveTo()] https://developer.mozilla.org/en-US/docs/Web/API/Window/moveTo
+			virtual bool moveTo(int& _x, int& _y) {
 				DKDEBUGFUNC(_x, _y);
 				return DKTODO();
 			}
 	//
 	//		undefined moveBy(long x, long y);
-			virtual bool moveBy(int& _deltaX, int& _deltaY) { // [Window.moveBy()] https://developer.mozilla.org/en-US/docs/Web/API/Window/moveBy
+			virtual bool moveBy(int& _deltaX, int& _deltaY) {
 				DKDEBUGFUNC(_deltaX, _deltaY);
 				return DKTODO();
 			}
 	//
 	//		undefined resizeTo(long width, long height);
-			virtual bool resizeTo(int& _width, int& _height) { // [Window.resizeTo()] https://developer.mozilla.org/en-US/docs/Web/API/Window/resizeTo
+			virtual bool resizeTo(int& _width, int& _height) {
 				DKDEBUGFUNC(_width, _height);
 				return DKTODO();
 			}
 	//
 	//		undefined resizeBy(long x, long y);
-			virtual bool resizeBy(int& _xDelta, int& _yDelta) { // [Window.resizeBy()] https://developer.mozilla.org/en-US/docs/Web/API/Window/resizeBy
+			virtual bool resizeBy(int& _xDelta, int& _yDelta) {
 				DKDEBUGFUNC(_xDelta, _yDelta);
 				return DKTODO();
 			}
 	//
 	//		// viewport
 	//		[Replaceable] readonly attribute long innerWidth;
-			virtual bool innerWidth(unsigned int&, bool) { return false; } // [Window.innerWidth](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/innerWidth
+			virtual bool innerWidth(unsigned int&, bool) { return false; }
 	//
 	//		[Replaceable] readonly attribute long innerHeight;
-			virtual bool innerHeight(unsigned int&, bool) { return false; } // [Window.innerHeight](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/innerHeight
+			virtual bool innerHeight(unsigned int&, bool) { return false; }
 	//
 	//		// viewport scrolling
 	//		[Replaceable] readonly attribute double scrollX;
-			virtual bool scrollX(unsigned int&, bool) { return false; } // [Window.scrollX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollX	
+			virtual bool scrollX(unsigned int&, bool) { return false; }
 	//
 	//		[Replaceable] readonly attribute double pageXOffset;
-			virtual bool pageXOffset(unsigned int&, bool) { return false; } // [Window.pageXOffset](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/pageXOffset
+			virtual bool pageXOffset(unsigned int&, bool) { return false; }
 	//
 	//		[Replaceable] readonly attribute double scrollY;
-			virtual bool scrollY(unsigned int&, bool) { return false; } // [Window.scrollY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollY
+			virtual bool scrollY(unsigned int&, bool) { return false; }
 	//
 	//		[Replaceable] readonly attribute double pageYOffset;
-			virtual bool pageYOffset(unsigned int&, bool) { return false; } // [Window.pageYOffset](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset
+			virtual bool pageYOffset(unsigned int&, bool) { return false; }
 	//
 	//		undefined scroll(optional ScrollToOptions options = {});
 	//		undefined scroll(unrestricted double x, unrestricted double y);
-			virtual bool scroll() { // [Window.scroll()] https://developer.mozilla.org/en-US/docs/Web/API/Window/scroll
+			virtual bool scroll() {
 				DKDEBUGFUNC();
 				return DKTODO();
 			}
 	//
 	//		undefined scrollTo(optional ScrollToOptions options = {});
 	//		undefined scrollTo(unrestricted double x, unrestricted double y);
-			virtual bool scrollTo() { // [Window.scrollTo()] https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollTo
+			virtual bool scrollTo() {
 				DKDEBUGFUNC();
 				return DKTODO();
 			}
 	//
 	//		undefined scrollBy(optional ScrollToOptions options = {});
 	//		undefined scrollBy(unrestricted double x, unrestricted double y);
-			virtual bool scrollBy() { // [Window.scrollBy()] https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollBy
+			virtual bool scrollBy() {
 				DKDEBUGFUNC();
 				return DKTODO();
 			}
 	///
 	//		// client
 	//		[Replaceable] readonly attribute long screenX;
-			virtual bool screenX(int&, bool) { return false; } // [Window.screenX and Window.screenLeft](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/screenX
+			virtual bool screenX(int&, bool) { return false; }
 	//		[Replaceable] readonly attribute long screenLeft;
 	//
 	//		[Replaceable] readonly attribute long screenY;
-			virtual bool screenY(int&, bool) { return false; } // [Window.screenY and Window.screenTop](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/screenY
+			virtual bool screenY(int&, bool) { return false; }
 	//		[Replaceable] readonly attribute long screenTop;
 	//
 	//		[Replaceable] readonly attribute long outerWidth;
-			virtual bool outerWidth(unsigned int&, bool) { return false; } // [Window.outerWidth](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/outerWidth
+			virtual bool outerWidth(unsigned int&, bool) { return false; }
 	//
 	//		[Replaceable] readonly attribute long outerHeight;
-			virtual bool outerHeight(unsigned int&, bool) { return false; } // [Window.outerHeight](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/outerHeight
+			virtual bool outerHeight(unsigned int&, bool) { return false; }
 	//
 	//		[Replaceable] readonly attribute double devicePixelRatio;
-			virtual bool devicePixelRatio(double&, bool) { return false; } // [Window.devicePixelRatio](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio
+			virtual bool devicePixelRatio(double&, bool) { return false; }
 	// };
 
 	// Source: DeviceOrientation Event Specification (https://www.w3.org/TR/orientation-event/)
@@ -419,14 +419,14 @@ public:
 	// Source: requestIdleCallback() (https://www.w3.org/TR/requestidlecallback/)
 	// partial interface Window {
 	//		unsigned long requestIdleCallback(IdleRequestCallback callback, optional IdleRequestOptions options = {});
-			virtual bool requestIdleCallback() { // [Window.requestIdleCallback()] https://developer.mozilla.org/en-US/docs/Web/API/Window/requestIdleCallback
+			virtual bool requestIdleCallback() {
 				DKDEBUGFUNC();
 				return DKTODO();
 			}
 	//
 	//		undefined cancelIdleCallback(unsigned long handle);
-			virtual bool cancelIdleCallback(DKString& _handle) { // [Window.cancelIdleCallback()] https://developer.mozilla.org/en-US/docs/Web/API/Window/cancelIdleCallback
-				DKDEBUGFUNC(_handle);
+			virtual bool cancelIdleCallback(DKString& handle) {
+				DKDEBUGFUNC(handle);
 				return DKTODO();
 			}
 	// };
@@ -434,7 +434,7 @@ public:
 	// Source: Selection API (https://www.w3.org/TR/selection-api/)
 	// partial interface Window {
 	//		Selection? getSelection();
-			virtual bool getSelection() { // [Window.getSelection()] https://developer.mozilla.org/en-US/docs/Web/API/Window/getSelection
+			virtual bool getSelection() {
 				DKDEBUGFUNC();
 				return DKTODO();
 			}
