@@ -114,6 +114,12 @@ public:
 	// readonly attribute DOMString type;
 	static int type(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		/*
+		DKString _type = GetString(ctx);
+		if(!event(ctx)->type(_type, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _type);
+		*/
 		dukglue_push(ctx, event(ctx)->type);
 		return true;
 	}
