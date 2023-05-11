@@ -5,11 +5,13 @@
 #define DKLocation_H
 
 #include "DK/DK.h"
+//#include "DKInterface/DKInterface.h"	// TODO
+
 
 // Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
 // [Exposed=Window]
 // interface Location { // but see also additional creation steps and overridden internal methods
-class DKLocation
+class DKLocation //: public DKInterface
 {
 public:
 	DKLocation(){
@@ -21,42 +23,42 @@ public:
 	virtual ~DKLocation() {}
 
 	// [LegacyUnforgeable] stringifier attribute USVString href;
-	virtual bool href(DKString&, bool) { 
+	virtual bool href(USVString&, bool) { 
 		return false;
 	}  // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-href
 	
 	// [LegacyUnforgeable] readonly attribute USVString origin;
-	virtual bool origin(DKString&, bool) { return false; } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-origin
+	virtual bool origin(USVString&, bool) { return false; } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-origin
 	
 	// [LegacyUnforgeable] attribute USVString protocol;
-	virtual bool protocol(DKString&, bool) { return false; } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-protocol
+	virtual bool protocol(USVString&, bool) { return false; } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-protocol
 	
 	// [LegacyUnforgeable] attribute USVString host;
-	virtual bool host(DKString&, bool) { return false; } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-host
+	virtual bool host(USVString&, bool) { return false; } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-host
 	
 	// [LegacyUnforgeable] attribute USVString hostname;
-	virtual bool hostname(DKString&, bool) { return false; } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-hostname
+	virtual bool hostname(USVString&, bool) { return false; } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-hostname
 	
 	// [LegacyUnforgeable] attribute USVString port;
-	virtual bool port(DKString&, bool) { return false; } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-port
+	virtual bool port(USVString&, bool) { return false; } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-port
 	
 	// [LegacyUnforgeable] attribute USVString pathname;
-	virtual bool pathname(DKString&, bool) { return false; } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-pathname
+	virtual bool pathname(USVString&, bool) { return false; } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-pathname
 	
 	// [LegacyUnforgeable] attribute USVString search;
-	virtual bool search(DKString&, bool) { return false; } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-search
+	virtual bool search(USVString&, bool) { return false; } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-search
 	
 	// [LegacyUnforgeable] attribute USVString hash;
-	virtual bool hash(DKString&, bool) { return false; } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-hash
+	virtual bool hash(USVString&, bool) { return false; } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-hash
 
 	// [LegacyUnforgeable] undefined assign(USVString url);
-	virtual bool assign(DKString& url) { // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-assign
+	virtual bool assign(USVString& url) { // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-assign
 		DKDEBUGFUNC(url);
 		return DKTODO();
 	}
 	
 	// [LegacyUnforgeable] undefined replace(USVString url);
-	virtual bool replace(DKString& url) { // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-replace
+	virtual bool replace(USVString& url) { // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-replace
 		DKDEBUGFUNC(url);
 		return DKTODO();
 	}

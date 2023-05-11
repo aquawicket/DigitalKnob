@@ -5,9 +5,10 @@
 #define DKNavigator_H
 
 #include "DK/DK.h"
+//#include "DKInterface/DKInterface.h"	// TODO
 
 
-class DKNavigator
+class DKNavigator //: public DKInterface
 {
 public:
 	

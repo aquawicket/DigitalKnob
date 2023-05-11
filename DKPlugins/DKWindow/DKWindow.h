@@ -32,7 +32,7 @@ public:
 	virtual bool document(DKString&, bool) { return false; } // [Window.document](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/document
 	
 	// attribute DOMString name;
-	virtual bool name(DKString&, bool) { return false; } // [Window.name] https://developer.mozilla.org/en-US/docs/Web/API/Window/name
+	virtual bool name(DOMString&, bool) { return false; } // [Window.name] https://developer.mozilla.org/en-US/docs/Web/API/Window/name
 	
 	// [PutForwards=href, LegacyUnforgeable] readonly attribute Location location;
 	virtual bool location(DKString&, bool) { return false; } // [Window.location] https://developer.mozilla.org/en-US/docs/Web/API/Window/location
@@ -62,7 +62,7 @@ public:
 	virtual bool toolbar(DKString&, bool) { return false; } // [Window.toolbar](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/toolbar
 	
 	// attribute DOMString status;
-	virtual bool status(DKString&, bool) { return false; } // [Window.status](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/status
+	virtual bool status(DOMString&, bool) { return false; } // [Window.status](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/status
 	
 	// undefined close();
 	virtual bool close() { // [Window.close()] https://developer.mozilla.org/en-US/docs/Web/API/Window/close
@@ -111,8 +111,8 @@ public:
 	virtual bool frameElement(DKString&, bool) { return false; } // [Window.frameElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/frameElement
 	
 	// WindowProxy? open(optional USVString url = "", optional DOMString target = "_blank", optional [LegacyNullToEmptyString] DOMString features = "");
-	virtual bool open() { // [Window.open()] https://developer.mozilla.org/en-US/docs/Web/API/Window/open
-		DKDEBUGFUNC();
+	virtual bool open(USVString& _url, DOMString& _target, DOMString& _features) { // [Window.open()] https://developer.mozilla.org/en-US/docs/Web/API/Window/open
+		DKDEBUGFUNC(_url, _target, _features);
 		return DKTODO();
 	}
 	
@@ -133,19 +133,19 @@ public:
 	//user prompts
 	// undefined alert();
 	// undefined alert(DOMString message);
-	virtual bool alert(DKString& message) { // [Window.alert()] https://developer.mozilla.org/en-US/docs/Web/API/Window/alert
-		DKDEBUGFUNC(message);
+	virtual bool alert(DOMString& _message) { // [Window.alert()] https://developer.mozilla.org/en-US/docs/Web/API/Window/alert
+		DKDEBUGFUNC(_message);
 		return DKTODO();
 	}
 	
 	// boolean confirm(optional DOMString message = "");
-	virtual bool confirm(DKString& message) { // [Window.confirm()] https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm
-		DKDEBUGFUNC(message);
+	virtual bool confirm(DOMString& _message) { // [Window.confirm()] https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm
+		DKDEBUGFUNC(_message);
 		return DKTODO();
 	}
 	
 	// DOMString? prompt(optional DOMString message = "", optional DOMString default = "");
-	virtual bool prompt() { // [Window.prompt()] https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt
+	virtual bool prompt(DOMString& _message, DOMString _default) { // [Window.prompt()] https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt
 		DKDEBUGFUNC();
 		return DKTODO();
 	}
@@ -158,7 +158,7 @@ public:
 	
 	// undefined postMessage(any message, USVString targetOrigin, optional sequence<object> transfer = []);
 	// undefined postMessage(any message, optional WindowPostMessageOptions options = {});
-	virtual bool postMessage() { // [Window.postMessage()] https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage
+	virtual bool postMessage(DKString& message, USVString& targetOrigin) { // [Window.postMessage()] https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage
 		DKDEBUGFUNC();
 		return DKTODO();
 	}
@@ -168,7 +168,7 @@ public:
 	// Source: Compatibility Standard (https://compat.spec.whatwg.org/)
 	// partial interface Window {
 	//		readonly attribute short orientation;
-			virtual bool orientation(int&, bool) { return false; } // [Window.orientation](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/orientation
+			virtual bool orientation(short&, bool) { return false; } // [Window.orientation](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/orientation
 	//		
 	//		attribute EventHandler onorientationchange;
 	

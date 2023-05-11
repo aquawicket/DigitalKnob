@@ -5,13 +5,13 @@
 #define DKScreen_H
 
 #include "DK/DK.h"
-//#include "DKEventTarget/DKEventTarget.h"
+//#include "DKInterface/DKInterface.h"	// TODO
 
 
-class DKScreen// : public DKEventTarget
+class DKScreen //: public DKInterface
 {
 public:
-	DKScreen(){ // : DKEventTarget() {
+	DKScreen(){
 		DKDEBUGFUNC();
 		interfaceName = "Screen";
 		interfaceAddress = pointerToAddress(this);

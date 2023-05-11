@@ -5,6 +5,7 @@
 #define DKEventTarget_H
 
 #include "DK/DK.h"
+//#include "DKInterface/DKInterface.h"	// TODO
 #include "DKEvent/DKEvent.h"
 
 
@@ -22,7 +23,7 @@ struct EventObject {
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // [Exposed=*]
 // interface EventTarget {
-class DKEventTarget
+class DKEventTarget //: public DKInterface
 {
 public:
 

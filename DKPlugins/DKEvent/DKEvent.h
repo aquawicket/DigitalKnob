@@ -5,10 +5,14 @@
 #define DKEvent_H
 
 #include "DK/DK.h"
+//#include "DKInterface/DKInterface.h"	// TODO
 
 
 ////// DOMString //////
 typedef std::string DOMString;
+
+////// USVString //////
+typedef std::string USVString;
 
 ////// EventInit //////
 typedef std::string EventInit;
@@ -23,7 +27,7 @@ class DKEventTarget;
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // [Exposed=*]
 // interface Event {
-class DKEvent
+class DKEvent //: public DKInterface
 {
 public:
 	// constructor(DOMString type, optional EventInit eventInitDict = {});  // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Event/Event
