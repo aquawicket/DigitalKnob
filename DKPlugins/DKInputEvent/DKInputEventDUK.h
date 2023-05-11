@@ -32,6 +32,7 @@ public:
 		// partial interface InputEvent {
 		//    	readonly attribute DataTransfer? dataTransfer;
 				DKDuktape::AttachFunction("CPP_DKInputEventDUK_dataTransfer",	DKInputEventDUK::dataTransfer);
+		//
 		//    	sequence<StaticRange> getTargetRanges();
 				DKDuktape::AttachFunction("CPP_DKInputEventDUK_getTargetRanges", DKInputEventDUK::getTargetRanges);
 		// };

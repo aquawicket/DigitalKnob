@@ -23,13 +23,18 @@ public:
 	virtual ~DKKeyboardEvent(){}
 	
 	// KeyLocationCode
+	
 	// const unsigned long DOM_KEY_LOCATION_STANDARD = 0x00;
+	const unsigned int DOM_KEY_LOCATION_STANDARD = 0x00;
 	
 	// const unsigned long DOM_KEY_LOCATION_LEFT = 0x01;
+	const unsigned int DOM_KEY_LOCATION_LEFT = 0x01;
 	
 	// const unsigned long DOM_KEY_LOCATION_RIGHT = 0x02;
+	const unsigned int DOM_KEY_LOCATION_RIGHT = 0x02;
 	
 	// const unsigned long DOM_KEY_LOCATION_NUMPAD = 0x03;
+	const unsigned int DOM_KEY_LOCATION_NUMPAD = 0x03;
 	
 	// readonly attribute DOMString key;
 	DKString key = ""; // [KeyboardEvent.key](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key
@@ -59,7 +64,8 @@ public:
 	bool isComposing = false; // [KeyboardEvent.isComposing](Read only) https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/isComposing
 	
 	// boolean getModifierState(DOMString keyArg);
-	void getModifierState() { // [KeyboardEvent.getModifierState()] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/getModifierState
+	void getModifierState(DKString& keyArg) { // [KeyboardEvent.getModifierState()] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/getModifierState
+		DKDEBUGFUNC(keyArg);
 		DKTODO();
 	}
 	

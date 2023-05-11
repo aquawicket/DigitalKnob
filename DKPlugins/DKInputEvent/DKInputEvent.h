@@ -13,7 +13,7 @@ class DKInputEvent : public DKUIEvent
 {
 public:
 	// constructor(DOMString type, optional InputEventInit eventInitDict = {});
-	DKInputEvent(DKString _type, DKString _eventInitDict) : DKUIEvent(_type, _eventInitDict) { // [InputEvent()] https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/InputEvent
+	DKInputEvent(DKString _type, DKString _eventInitDict) : DKUIEvent(_type, _eventInitDict) {
 		DKDEBUGFUNC(_type, _eventInitDict);
 		interfaceName = "InputEvent";
 		interfaceAddress = pointerToAddress(this);
@@ -22,20 +22,22 @@ public:
 	virtual ~DKInputEvent(){}
 	
 	// readonly attribute DOMString? data;
-	DKString data = ""; // [InputEvent.data](Read only) https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/data
+	DKString data = "";
 	
 	//readonly attribute boolean isComposing;
-	bool isComposing = false; // [InputEvent.isComposing](Read only) https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/isComposing
+	bool isComposing = false;
 	
 	//readonly attribute DOMString inputType;
-	DKString inputType = ""; // [InputEvent.inputType](Read only) https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/inputType
+	DKString inputType = "";
 	
 	// Source: Input Events Level 2 (https://www.w3.org/TR/input-events-2/)
 	// partial interface InputEvent {
 	//    	readonly attribute DataTransfer? dataTransfer;
-			DKString dataTransfer = ""; // [InputEvent.dataTransfer](Read only) https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/dataTransfer
+			DKString dataTransfer = "";
+	//		
 	//    	sequence<StaticRange> getTargetRanges();
-			void getTargetRanges() { // [InputEvent.getTargetRanges()] https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/getTargetRanges
+			void getTargetRanges() {
+				DKDEBUGFUNC();
 				DKTODO();
 			}
 	// };
