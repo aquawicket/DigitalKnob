@@ -47,7 +47,7 @@ public:
 	}
 	
 	// const unsigned short NONE = 0;
-	// TODO //https://dom.spec.whatwg.org/#dom-event-none
+	const unsigned short NONE = 0; // TODO //https://dom.spec.whatwg.org/#dom-event-none
 	
 	// const unsigned short CAPTURING_PHASE = 1;
 	// TODO // https://dom.spec.whatwg.org/#dom-event-capturing_phase

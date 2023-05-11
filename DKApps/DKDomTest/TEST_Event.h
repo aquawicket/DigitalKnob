@@ -48,23 +48,21 @@ public:
 
 	static void printEventProperties(DKEvent& event){
 		DKDEBUGFUNC(event);
-		////// Instance properties //////
-		DKINFO("event.bubbles = "				+toString(event.bubbles)				+"\n");	// [Event.bubbles](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/bubbles
-		DKINFO("event.cancelable = "			+toString(event.cancelable)				+"\n");	// [Event.cancelable](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelable
-		DKINFO("event.composed = "				+toString(event.composed)				+"\n");	// [Event.composed](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/composed
-		DKINFO("event.currentTarget = "			+toString(event.currentTarget)			+"\n");	// [Event.currentTarget](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/currentTarget
-		DKINFO("event.defaultPrevented = "		+toString(event.defaultPrevented)		+"\n");	// [Event.defaultPrevented](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/defaultPrevented
-		DKINFO("event.eventPhase = "			+toString(event.eventPhase)				+"\n");	// [Event.eventPhase](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/eventPhase
-		DKINFO("event.isTrusted = "				+toString(event.isTrusted)				+"\n");	// [Event.isTrusted](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
-		DKINFO("event.target = "				+toString(event.target)					+"\n");	// [Event.target](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/target
-		DKINFO("event.timeStamp = "				+toString(event.timeStamp)				+"\n");	// [Event.timeStamp](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/timeStamp
-		DKINFO("event.type = "					+toString(event.type)					+"\n");	// [Event.type](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/type
-		////// Legacy and non-standard properties //////
-		DKINFO("event.cancelBubble = "			+toString(event.cancelBubble)			+"\n");	// [Event.cancelBubble](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelBubble
-		//DKINFO("event.explicitOriginalTarget = "+toString(event.explicitOriginalTarget)	+"\n");	// [Event.explicitOriginalTarget](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/explicitOriginalTarget
-		//DKINFO("event.originalTarget = "		+toString(event.originalTarget)			+"\n");	// [Event.originalTarget](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/originalTarget
-		DKINFO("event.returnValue = "			+toString(event.returnValue)			+"\n");	// [Event.returnValue](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/returnValue
-		//DKINFO("event.scoped = "				+toString(event.scoped)					+"\n");	// [Event.scoped](Read only)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/scoped
+		DKINFO("event.bubbles = "				+toString(event.bubbles)				+"\n");
+		DKINFO("event.cancelable = "			+toString(event.cancelable)				+"\n");
+		DKINFO("event.composed = "				+toString(event.composed)				+"\n");
+		DKINFO("event.currentTarget = "			+toString(event.currentTarget)			+"\n");
+		DKINFO("event.defaultPrevented = "		+toString(event.defaultPrevented)		+"\n");
+		DKINFO("event.eventPhase = "			+toString(event.eventPhase)				+"\n");
+		DKINFO("event.isTrusted = "				+toString(event.isTrusted)				+"\n");
+		DKINFO("event.target = "				+toString(event.target)					+"\n");
+		DKINFO("event.timeStamp = "				+toString(event.timeStamp)				+"\n");
+		DKINFO("event.type = "					+toString(event.type)					+"\n");
+		DKINFO("event.cancelBubble = "			+toString(event.cancelBubble)			+"\n");
+		//DKINFO("event.explicitOriginalTarget = "+toString(event.explicitOriginalTarget)	+"\n");
+		//DKINFO("event.originalTarget = "		+toString(event.originalTarget)			+"\n");
+		DKINFO("event.returnValue = "			+toString(event.returnValue)			+"\n");
+		//DKINFO("event.scoped = "				+toString(event.scoped)					+"\n");
 	}
 	
 	static bool onevent(DKEvent& event){
