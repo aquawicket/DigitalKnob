@@ -22,7 +22,7 @@ public:
 	virtual ~DKCompositionEvent(){}
 	
 	// readonly attribute DOMString data;
-	DKString data = ""; // [CompositionEvent.data](Read only) https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/data
+	DKString data = "";
 	
 	// Source: UI Events (https://www.w3.org/TR/uievents/)
 	// partial interface CompositionEvent {
@@ -32,7 +32,8 @@ public:
 	//		optional boolean cancelableArg = false,
 	//		optional WindowProxy? viewArg = null,
 	//		optional DOMString dataArg = "");
-			void initCompositionEvent() { // [CompositionEvent.initCompositionEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/initCompositionEvent
+			void initCompositionEvent(DKString& _typeArg, bool& _bubblesArg, bool& _cancelableArg, DKString& _viewArg, DKString& _dataArg) {
+				DKDEBUGFUNC(_typeArg, _bubblesArg, _cancelableArg, _viewArg, _dataArg);
 				DKTODO();
 			}
 	// };
