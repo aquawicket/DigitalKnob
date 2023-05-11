@@ -22,16 +22,16 @@ public:
 	virtual ~DKMouseEvent(){}
 	
 	// readonly attribute long screenX;
-	unsigned int screenX = 0; // https://w3c.github.io/uievents/#dom-mouseevent-screenx
+	int screenX = 0; // https://w3c.github.io/uievents/#dom-mouseevent-screenx
 	
 	// readonly attribute long screenY;
-	unsigned int screenY = 0; // https://w3c.github.io/uievents/#dom-mouseevent-screeny
+	int screenY = 0; // https://w3c.github.io/uievents/#dom-mouseevent-screeny
 	
 	// readonly attribute long clientX;
-	unsigned int clientX = 0; // https://w3c.github.io/uievents/#dom-mouseevent-clientx
+	int clientX = 0; // https://w3c.github.io/uievents/#dom-mouseevent-clientx
 	
 	// readonly attribute long clientY;
-	unsigned int clientY = 0; // https://w3c.github.io/uievents/#dom-mouseevent-clienty
+	int clientY = 0; // https://w3c.github.io/uievents/#dom-mouseevent-clienty
 	 
 	// readonly attribute boolean ctrlKey;
 	bool ctrlKey = false; // https://w3c.github.io/uievents/#dom-mouseevent-ctrlkey
@@ -46,41 +46,42 @@ public:
 	bool metaKey = false; // https://w3c.github.io/uievents/#dom-mouseevent-metakey
 	
 	// readonly attribute short button;
-	unsigned int button = 0; // https://w3c.github.io/uievents/#dom-mouseevent-button
+	short button = 0; // https://w3c.github.io/uievents/#dom-mouseevent-button
 	
 	// readonly attribute unsigned short buttons;
-	unsigned int buttons = 0; // https://w3c.github.io/uievents/#dom-mouseevent-buttons
+	unsigned short buttons = 0; // https://w3c.github.io/uievents/#dom-mouseevent-buttons
 	
 	// readonly attribute EventTarget? relatedTarget;
 	DKString relatedTarget = ""; // https://w3c.github.io/uievents/#dom-mouseevent-relatedtarget
 	
 	// boolean getModifierState(DOMString keyArg);
-	void getModifierState() { // https://w3c.github.io/uievents/#dom-mouseevent-getmodifierstate
+	void getModifierState(DKString& keyArg) { // https://w3c.github.io/uievents/#dom-mouseevent-getmodifierstate
+		DKDEBUGFUNC(keyArg);
 		DKTODO();
 	}
 	
 	// Source: CSSOM View Module (https://www.w3.org/TR/cssom-view-1/)
 	// partial interface MouseEvent {
 	//  	readonly attribute double pageX;
-			int pageX = 0; // [MouseEvent.pageX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/pageX
+			double pageX = 0; // [MouseEvent.pageX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/pageX
 	//  	readonly attribute double pageY;
-			int pageY = 0;  // [MouseEvent.pageY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/pageY
+			double pageY = 0;  // [MouseEvent.pageY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/pageY
 	//  	readonly attribute double x;
-			unsigned int x = 0; // [MouseEvent.x](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/x
+			double x = 0; // [MouseEvent.x](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/x
 	//  	readonly attribute double y;
-			unsigned int y = 0;	// [MouseEvent.y](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/y
+			double y = 0;	// [MouseEvent.y](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/y
 	//  	readonly attribute double offsetX; 
-			int offsetX = 0; // [MouseEvent.offsetX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/offsetX
+			double offsetX = 0; // [MouseEvent.offsetX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/offsetX
 	//  	readonly attribute double offsetY;
-			int offsetY = 0; // [MouseEvent.offsetY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/offsetY
+			double offsetY = 0; // [MouseEvent.offsetY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/offsetY
 	// };
 	
 	// Source: Pointer Lock 2.0 (https://www.w3.org/TR/pointerlock-2/)
 	// partial interface MouseEvent {
 	//   	readonly attribute double movementX;
-			int movementX = 0; // [MouseEvent.movementX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/movementX
+			double movementX = 0; // [MouseEvent.movementX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/movementX
 	//   	readonly attribute double movementY;
-			int movementY = 0; // [MouseEvent.movementY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/movementY
+			double movementY = 0; // [MouseEvent.movementY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/movementY
 	// };
 	
 	// Source: UI Events (https://www.w3.org/TR/uievents/)
@@ -101,8 +102,24 @@ public:
 	//		optional boolean metaKeyArg = false,
 	//		optional short buttonArg = 0,
 	//		optional EventTarget? relatedTargetArg = null);
-			void initMouseEvent() { // [MouseEvent.initMouseEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/initMouseEvent
-				DKDEPRECATED();
+			void initMouseEvent(
+				DKString& typeArg, 
+				bool& bubblesArg,
+				bool& cancelableArg,
+				DKString& viewArg,
+				int& detailArg,
+				int& screenXArg,
+				int& screenYArg,
+				int& clientXArg,
+				int& clientYArg,
+				bool& ctrlKeyArg,
+				bool& altKeyArg,
+				bool& shiftKeyArg,
+				bool& metaKeyArg,
+				short& buttonArg,
+				DKString& relatedTargetArg) { // [MouseEvent.initMouseEvent()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/initMouseEvent
+					DKDEBUGFUNC(typeArg, bubblesArg, cancelableArg, viewArg, detailArg, screenXArg, screenYArg, clientXArg, clientYArg, ctrlKeyArg, altKeyArg, shiftKeyArg, metaKeyArg, buttonArg, relatedTargetArg);
+					DKTODO();
 			}
 	// };
 };

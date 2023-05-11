@@ -129,7 +129,7 @@ public:
 	static int screenX(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_number(ctx, 1))
-			mouseEvent(ctx)->screenX = duk_to_uint(ctx, 1);
+			mouseEvent(ctx)->screenX = duk_to_int(ctx, 1);
 		dukglue_push(ctx, mouseEvent(ctx)->screenX);
 		return true;
 	}
@@ -138,7 +138,7 @@ public:
 	static int screenY(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_number(ctx, 1))
-			mouseEvent(ctx)->screenY = duk_to_uint(ctx, 1);
+			mouseEvent(ctx)->screenY = duk_to_int(ctx, 1);
 		dukglue_push(ctx, mouseEvent(ctx)->screenY);	
 		return true;
 	}
@@ -147,7 +147,7 @@ public:
 	static int clientX(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_number(ctx, 1))
-			mouseEvent(ctx)->clientX = duk_to_uint(ctx, 1);
+			mouseEvent(ctx)->clientX = duk_to_int(ctx, 1);
 		dukglue_push(ctx, mouseEvent(ctx)->clientX);	
 		return true;
 	}
@@ -156,7 +156,7 @@ public:
 	static int clientY(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_number(ctx, 1))
-			mouseEvent(ctx)->clientY = duk_to_uint(ctx, 1);
+			mouseEvent(ctx)->clientY = duk_to_int(ctx, 1);
 		dukglue_push(ctx, mouseEvent(ctx)->clientY);	
 		return true;
 	}
