@@ -47,16 +47,16 @@ public:
 	}
 	
 	// const unsigned short NONE = 0;
-	const unsigned short NONE = 0; // TODO //https://dom.spec.whatwg.org/#dom-event-none
+	const unsigned short NONE = 0; //https://dom.spec.whatwg.org/#dom-event-none
 	
 	// const unsigned short CAPTURING_PHASE = 1;
-	// TODO // https://dom.spec.whatwg.org/#dom-event-capturing_phase
+	const unsigned short CAPTURING_PHASE = 1; // https://dom.spec.whatwg.org/#dom-event-capturing_phase
 	
 	// const unsigned short AT_TARGET = 2;
-	// TODO // https://dom.spec.whatwg.org/#dom-event-at_target
+	const unsigned short AT_TARGET = 2; // https://dom.spec.whatwg.org/#dom-event-at_target
 	
 	// const unsigned short BUBBLING_PHASE = 3;
-	// TODO // https://dom.spec.whatwg.org/#dom-event-bubbling_phase
+	const unsigned short BUBBLING_PHASE = 3; // https://dom.spec.whatwg.org/#dom-event-bubbling_phase
 	
 	// readonly attribute unsigned short eventPhase;
 	int eventPhase = 0; // https://dom.spec.whatwg.org/#dom-event-eventphase
