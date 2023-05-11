@@ -146,7 +146,7 @@ public:
 	
 	// DOMString? prompt(optional DOMString message = "", optional DOMString default = "");
 	virtual bool prompt(DOMString& _message, DOMString _default) { // [Window.prompt()] https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt
-		DKDEBUGFUNC();
+		DKDEBUGFUNC(_message, _default);
 		return DKTODO();
 	}
 	
@@ -158,8 +158,8 @@ public:
 	
 	// undefined postMessage(any message, USVString targetOrigin, optional sequence<object> transfer = []);
 	// undefined postMessage(any message, optional WindowPostMessageOptions options = {});
-	virtual bool postMessage(DKString& message, USVString& targetOrigin) { // [Window.postMessage()] https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage
-		DKDEBUGFUNC();
+	virtual bool postMessage(DKString& _message, USVString& _targetOrigin) { // [Window.postMessage()] https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage
+		DKDEBUGFUNC(_message, _targetOrigin);
 		return DKTODO();
 	}
 	
@@ -207,8 +207,8 @@ public:
 			}
 	//
 	//		undefined releaseEvents();
-			virtual bool releaseEvents(DKString& eventType) { // [Window.releaseEvents()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/releaseEvents
-				DKDEBUGFUNC(eventType);
+			virtual bool releaseEvents(DKString& _eventType) { // [Window.releaseEvents()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/releaseEvents
+				DKDEBUGFUNC(_eventType);
 				return DKTODO();
 			}
 	//
@@ -305,8 +305,8 @@ public:
 	// Source: CSSOM View Module (https://www.w3.org/TR/cssom-view-1/)
 	// partial interface Window {
 	//		[NewObject] MediaQueryList matchMedia(CSSOMString query);
-			virtual bool matchMedia(DKString& mediaQueryString) { // [Window.matchMedia()] https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia
-				DKDEBUGFUNC(mediaQueryString);
+			virtual bool matchMedia(DKString& _mediaQueryString) { // [Window.matchMedia()] https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia
+				DKDEBUGFUNC(_mediaQueryString);
 				return DKTODO();
 			}
 	//
@@ -318,26 +318,26 @@ public:
 	//
 	//		// browsing context
 	//		undefined moveTo(long x, long y);
-			virtual bool moveTo(int& x, int& y) { // [Window.moveTo()] https://developer.mozilla.org/en-US/docs/Web/API/Window/moveTo
-				DKDEBUGFUNC(x, y);
+			virtual bool moveTo(int& _x, int& _y) { // [Window.moveTo()] https://developer.mozilla.org/en-US/docs/Web/API/Window/moveTo
+				DKDEBUGFUNC(_x, _y);
 				return DKTODO();
 			}
 	//
 	//		undefined moveBy(long x, long y);
-			virtual bool moveBy(int& deltaX, int& deltaY) { // [Window.moveBy()] https://developer.mozilla.org/en-US/docs/Web/API/Window/moveBy
-				DKDEBUGFUNC(deltaX, deltaY);
+			virtual bool moveBy(int& _deltaX, int& _deltaY) { // [Window.moveBy()] https://developer.mozilla.org/en-US/docs/Web/API/Window/moveBy
+				DKDEBUGFUNC(_deltaX, _deltaY);
 				return DKTODO();
 			}
 	//
 	//		undefined resizeTo(long width, long height);
-			virtual bool resizeTo(int& width, int& height) { // [Window.resizeTo()] https://developer.mozilla.org/en-US/docs/Web/API/Window/resizeTo
-				DKDEBUGFUNC(width, height);
+			virtual bool resizeTo(int& _width, int& _height) { // [Window.resizeTo()] https://developer.mozilla.org/en-US/docs/Web/API/Window/resizeTo
+				DKDEBUGFUNC(_width, _height);
 				return DKTODO();
 			}
 	//
 	//		undefined resizeBy(long x, long y);
-			virtual bool resizeBy(int& xDelta, int& yDelta) { // [Window.resizeBy()] https://developer.mozilla.org/en-US/docs/Web/API/Window/resizeBy
-				DKDEBUGFUNC(xDelta, yDelta);
+			virtual bool resizeBy(int& _xDelta, int& _yDelta) { // [Window.resizeBy()] https://developer.mozilla.org/en-US/docs/Web/API/Window/resizeBy
+				DKDEBUGFUNC(_xDelta, _yDelta);
 				return DKTODO();
 			}
 	//
@@ -425,8 +425,8 @@ public:
 			}
 	//
 	//		undefined cancelIdleCallback(unsigned long handle);
-			virtual bool cancelIdleCallback(DKString& handle) { // [Window.cancelIdleCallback()] https://developer.mozilla.org/en-US/docs/Web/API/Window/cancelIdleCallback
-				DKDEBUGFUNC(handle);
+			virtual bool cancelIdleCallback(DKString& _handle) { // [Window.cancelIdleCallback()] https://developer.mozilla.org/en-US/docs/Web/API/Window/cancelIdleCallback
+				DKDEBUGFUNC(_handle);
 				return DKTODO();
 			}
 	// };
