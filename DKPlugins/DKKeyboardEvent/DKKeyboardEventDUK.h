@@ -17,46 +17,51 @@ public:
 	bool Init(){
 		
 		// constructor(DOMString type, optional KeyboardEventInit eventInitDict = {});
-		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK", 				DKKeyboardEventDUK::constructor);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK", 							DKKeyboardEventDUK::constructor);
 		
 		// KeyLocationCode
+		
 		// const unsigned long DOM_KEY_LOCATION_STANDARD = 0x00;
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_DOM_KEY_LOCATION_STANDARD",	DKKeyboardEventDUK::DOM_KEY_LOCATION_STANDARD);
 		
 		// const unsigned long DOM_KEY_LOCATION_LEFT = 0x01;
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_DOM_KEY_LOCATION_LEFT", 		DKKeyboardEventDUK::DOM_KEY_LOCATION_LEFT);
 		
 		// const unsigned long DOM_KEY_LOCATION_RIGHT = 0x02;
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_DOM_KEY_LOCATION_RIGHT", 		DKKeyboardEventDUK::DOM_KEY_LOCATION_RIGHT);
 		
 		// const unsigned long DOM_KEY_LOCATION_NUMPAD = 0x03;
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_DOM_KEY_LOCATION_NUMPAD", 	DKKeyboardEventDUK::DOM_KEY_LOCATION_NUMPAD);
 	
 		// readonly attribute DOMString key;
-		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_key", 			DKKeyboardEventDUK::key);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_key", 						DKKeyboardEventDUK::key);
 		
 		// readonly attribute DOMString code;
-		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_code",			DKKeyboardEventDUK::code);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_code",						DKKeyboardEventDUK::code);
 		
 		// readonly attribute unsigned long location;
-		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_location", 		DKKeyboardEventDUK::location);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_location", 					DKKeyboardEventDUK::location);
 		
 		// readonly attribute boolean ctrlKey;
-		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_ctrlKey",			DKKeyboardEventDUK::ctrlKey);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_ctrlKey",						DKKeyboardEventDUK::ctrlKey);
 		
 		// readonly attribute boolean shiftKey;
-		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_shiftKey",		DKKeyboardEventDUK::shiftKey);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_shiftKey",					DKKeyboardEventDUK::shiftKey);
 		
 		// readonly attribute boolean altKey;
-		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_altKey",			DKKeyboardEventDUK::altKey);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_altKey",						DKKeyboardEventDUK::altKey);
 		
 		// readonly attribute boolean metaKey;
-		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_metaKey", 		DKKeyboardEventDUK::metaKey);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_metaKey", 					DKKeyboardEventDUK::metaKey);
 		
 		// readonly attribute boolean repeat;
-		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_repeat",			DKKeyboardEventDUK::repeat);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_repeat",						DKKeyboardEventDUK::repeat);
 		
 		// readonly attribute boolean isComposing;
-		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_isComposing", 	DKKeyboardEventDUK::isComposing);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_isComposing", 				DKKeyboardEventDUK::isComposing);
 		
 		// boolean getModifierState(DOMString keyArg);
-		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_getModifierState", DKKeyboardEventDUK::getModifierState);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_getModifierState", 			DKKeyboardEventDUK::getModifierState);
 		
 		// Source: UI Events (https://www.w3.org/TR/uievents/)
 		// partial interface KeyboardEvent {
@@ -71,16 +76,17 @@ public:
 		//		optional boolean altKey = false,
 		//		optional boolean shiftKey = false,
 		//		optional boolean metaKey = false);
-				DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_initKeyboardEvent", DKKeyboardEventDUK::initKeyboardEvent);
+				DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_initKeyboardEvent",	DKKeyboardEventDUK::initKeyboardEvent);
 		// };
 	
 		// Source: UI Events (https://www.w3.org/TR/uievents/)
 		// partial interface KeyboardEvent {
 		//		// The following support legacy user agents
 		//		readonly attribute unsigned long charCode;
-				DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_charCode",		DKKeyboardEventDUK::charCode);
+				DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_charCode",			DKKeyboardEventDUK::charCode);
+		//
 		//		readonly attribute unsigned long keyCode;
-				DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_keyCode",		DKKeyboardEventDUK::keyCode);
+				DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_keyCode",				DKKeyboardEventDUK::keyCode);
 		// };
 	
 
@@ -110,12 +116,32 @@ public:
 	
 	// KeyLocationCode
 	// const unsigned long DOM_KEY_LOCATION_STANDARD = 0x00;
+	static int DOM_KEY_LOCATION_STANDARD(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		dukglue_push(ctx, keyboardEvent(ctx)->DOM_KEY_LOCATION_STANDARD);	
+		return true;
+	}
 		
 	// const unsigned long DOM_KEY_LOCATION_LEFT = 0x01;
+	static int DOM_KEY_LOCATION_LEFT(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		dukglue_push(ctx, keyboardEvent(ctx)->DOM_KEY_LOCATION_LEFT);	
+		return true;
+	}
 		
 	// const unsigned long DOM_KEY_LOCATION_RIGHT = 0x02;
+	static int DOM_KEY_LOCATION_RIGHT(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		dukglue_push(ctx, keyboardEvent(ctx)->DOM_KEY_LOCATION_RIGHT);	
+		return true;
+	}
 		
 	// const unsigned long DOM_KEY_LOCATION_NUMPAD = 0x03;
+	static int DOM_KEY_LOCATION_NUMPAD(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		dukglue_push(ctx, keyboardEvent(ctx)->DOM_KEY_LOCATION_NUMPAD);	
+		return true;
+	}
 	
 	// readonly attribute DOMString key;
 	static int key(duk_context* ctx){
@@ -232,6 +258,7 @@ public:
 				dukglue_push(ctx, keyboardEvent(ctx)->charCode);	
 				return DKDEPRECATED();
 			}
+	//
 	//		readonly attribute unsigned long keyCode;
 			static int keyCode(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
