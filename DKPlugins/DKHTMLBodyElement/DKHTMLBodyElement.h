@@ -4,13 +4,13 @@
 #ifndef HTMLBodyElement_H
 #define HTMLBodyElement_H
 
-#include "DKInterface/DKInterface.h"
+#include "DKHTMLElement/DKHTMLElement.h"
 
 
-class DKHTMLBodyElement : public DKInterface
+class DKHTMLBodyElement : public DKHTMLElement
 {
 public:
-	DKHTMLBodyElement() : DKInterface() {
+	DKHTMLBodyElement() : DKHTMLElement() {
 		DKDEBUGFUNC();
 		interfaceName = "DKHTMLBodyElement";
 		interfaceAddress = pointerToAddress(this);
