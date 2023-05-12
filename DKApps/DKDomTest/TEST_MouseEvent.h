@@ -12,9 +12,8 @@ class TEST_MouseEvent : public DKObjectT<TEST_MouseEvent>
 public:
 	bool Init(){
 		DKDEBUGFUNC();
-		DKINFO("////// TEST_MouseEvent.h ////// \n");
+		DKINFO("\n////// TEST_MouseEvent.h //////\n");
 		
-		DKINFO("\n");
 		DKEventTarget myEventTarget;
 		myEventTarget.addEventListener("mouseevent", &TEST_MouseEvent::onmouseevent);
 		DKMouseEvent mouseevent("mouseevent", "");

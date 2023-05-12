@@ -11,7 +11,8 @@ class TEST_TEMPLATE : public DKObjectT<TEST_TEMPLATE>
 {
 public:
 	bool Init(){
-		DKINFO("////// TEST_TEMPLATE.h ////// \n");
+		DKDEBUGFUNC();
+		DKINFO("\n////// TEST_TEMPLATE.h //////\n");
 		
 		return DKTODO();
 	}

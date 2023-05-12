@@ -11,7 +11,8 @@ class TEST_Screen : public DKObjectT<TEST_Screen>
 {
 public:
 	bool Init(){
-		DKINFO("\n////// TEST_Screen.h //////");
+		DKDEBUGFUNC();
+		DKINFO("\n////// TEST_Screen.h //////\n");
 		
 		DKScreen screen();
 		printScreenProperties(screen);

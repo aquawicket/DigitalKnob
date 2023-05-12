@@ -12,9 +12,8 @@ class TEST_KeyboardEvent : public DKObjectT<TEST_KeyboardEvent>
 public:
 	bool Init(){
 		DKDEBUGFUNC();
-		DKINFO("////// TEST_KeyboardEvent.h ////// \n");
+		DKINFO("\n////// TEST_KeyboardEvent.h //////\n");
 		
-		DKINFO("\n");
 		DKEventTarget myEventTarget;
 		myEventTarget.addEventListener("keyboardevent", &TEST_KeyboardEvent::onkeyboardevent);
 		DKKeyboardEvent keyboardevent("keyboardevent", "");
