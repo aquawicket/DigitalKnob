@@ -2,7 +2,7 @@
 #ifndef TEST_DKRmlLocation_H
 #define TEST_DKRmlLocation_H
 
-#include "DK/DK.h"
+//#include "DK/DK.h"
 #include "DKRmlLocation/DKRmlLocation.h"
 
 

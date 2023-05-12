@@ -2,7 +2,7 @@
 #ifndef TEST_DKSdlWindow_H
 #define TEST_DKSdlWindow_H
 
-#include "DK/DK.h"
+//#include "DK/DK.h"
 #include "DKSdlWindow/DKSdlWindow.h"
 
 

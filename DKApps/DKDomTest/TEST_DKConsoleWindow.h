@@ -2,7 +2,7 @@
 #ifndef TEST_DKConsoleWindow_H
 #define TEST_DKConsoleWindow_H
 
-#include "DK/DK.h"
+//#include "DK/DK.h"
 #include "DKConsoleWindow/DKConsoleWindow.h"
 
 

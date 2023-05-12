@@ -4,7 +4,7 @@
 #ifndef TEST_HTMLBodyElement_H
 #define TEST_HTMLBodyElement_H
 
-#include "DK/DK.h"
+//#include "DK/DK.h"
 #include "DKHTMLBodyElement/DKHTMLBodyElement.h"
 
 

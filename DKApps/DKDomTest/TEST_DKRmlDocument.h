@@ -2,7 +2,7 @@
 #ifndef TEST_DKRmlDocument_H
 #define TEST_DKRmlDocument_H
 
-#include "DK/DK.h"
+//#include "DK/DK.h"
 #include "DKRmlDocument/DKRmlDocument.h"
 
 

@@ -3,7 +3,7 @@
 #ifndef TEST_CustomEvent_H
 #define TEST_CustomEvent_H
 
-#include "DK/DK.h"
+//#include "DK/DK.h"
 #include "DKCustomEvent/DKCustomEvent.h"
 #include "TEST_Event.h"
 

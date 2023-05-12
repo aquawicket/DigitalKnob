@@ -4,7 +4,7 @@
 #ifndef TEST_Navigator_H
 #define TEST_Navigator_H
 
-#include "DK/DK.h"
+//#include "DK/DK.h"
 #include "DKNavigator/DKNavigator.h"
 
 

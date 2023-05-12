@@ -4,7 +4,7 @@
 #ifndef TEST_CompositionEvent_H
 #define TEST_CompositionEvent_H
 
-#include "DK/DK.h"
+//#include "DK/DK.h"
 #include "DKCompositionEvent/DKCompositionEvent.h"
 #include "TEST_UIEvent.h"
 #include "TEST_Event.h"
