@@ -29,9 +29,9 @@ dk_depend(DKLocation)
 dk_depend(DKNode)
 dk_depend(DKDocument)
 dk_depend(DKElement)
-dk_depend(DKHTMLCollection)
+#dk_depend(DKHTMLCollection)	#FIXME
 dk_depend(DKHTMLElement)
-dk_depend(DKHTMLBodyElement)
+#dk_depend(DKHTMLBodyElement)	#FIXME
 dk_depend(DKHTMLImageElement)
 
 dk_depend(DKConsoleWindow)
