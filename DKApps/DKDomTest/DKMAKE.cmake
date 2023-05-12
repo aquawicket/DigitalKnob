@@ -32,7 +32,7 @@ dk_depend(DKElement)
 #dk_depend(DKHTMLCollection)	#FIXME
 dk_depend(DKHTMLElement)
 #dk_depend(DKHTMLBodyElement)	#FIXME
-dk_depend(DKHTMLImageElement)
+#dk_depend(DKHTMLImageElement)	#FIXME
 
 dk_depend(DKConsoleWindow)
 dk_depend(DKSdlWindow)
