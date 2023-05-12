@@ -23,7 +23,6 @@ public:
 	
 	static void printKeyboardEventProperties(DKKeyboardEvent& keyboardevent){
 		DKDEBUGFUNC(keyboardevent);
-		////// Instance properties //////
 		DKINFO("keyboardevent.altKey = "		+toString(keyboardevent.altKey)			+"\n");
 		DKINFO("keyboardevent.code = "			+toString(keyboardevent.code)			+"\n");		
 		DKINFO("keyboardevent.ctrlKey = "		+toString(keyboardevent.ctrlKey)		+"\n");

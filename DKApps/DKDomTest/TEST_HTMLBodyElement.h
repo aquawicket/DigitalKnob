@@ -11,6 +11,7 @@ class TEST_HTMLBodyElement : public DKObjectT<TEST_HTMLBodyElement>
 {
 public:
 	bool Init(){
+		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_HTMLBodyElement.h //////\n");
 		
 		return DKTODO();

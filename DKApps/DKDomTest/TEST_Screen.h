@@ -14,19 +14,21 @@ public:
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_Screen.h //////\n");
 		
-		DKScreen screen();
-		printScreenProperties(screen);
+		//DKScreen screen();
+		//printScreenProperties(screen);
 		return true;
 	}
 	
 	static void printScreenProperties(DKScreen& screen){
 		DKDEBUGFUNC(screen);
+		/*
 		DKINFO("screen.availWidth = "	+toString(screen.availWidth)	+"\n");
 		DKINFO("screen.availHeight = "	+toString(screen.availHeight)	+"\n");
 		DKINFO("screen.width = "		+toString(screen.width)			+"\n");
 		DKINFO("screen.height = "		+toString(screen.height)		+"\n");
 		DKINFO("screen.colorDepth = "	+toString(screen.colorDepth)	+"\n");
 		DKINFO("screen.pixelDepth = "	+toString(screen.pixelDepth)	+"\n");
+		*/
 	}
 };
 REGISTER_OBJECT(TEST_Screen, true);

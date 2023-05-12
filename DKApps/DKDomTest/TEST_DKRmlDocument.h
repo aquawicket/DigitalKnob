@@ -9,6 +9,7 @@ class TEST_DKRmlDocument : public DKObjectT<TEST_DKRmlDocument>
 {
 public:
 	bool Init(){
+		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_DKRmlDocument.h ////// \n");
 		
 		return DKTODO();

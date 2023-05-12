@@ -57,10 +57,7 @@ public:
 		DKINFO("event.timeStamp = "				+toString(event.timeStamp)				+"\n");
 		DKINFO("event.type = "					+toString(event.type)					+"\n");
 		DKINFO("event.cancelBubble = "			+toString(event.cancelBubble)			+"\n");
-		//DKINFO("event.explicitOriginalTarget = "+toString(event.explicitOriginalTarget)	+"\n");
-		//DKINFO("event.originalTarget = "		+toString(event.originalTarget)			+"\n");
 		DKINFO("event.returnValue = "			+toString(event.returnValue)			+"\n");
-		//DKINFO("event.scoped = "				+toString(event.scoped)					+"\n");
 	}
 	
 	static bool onevent(DKEvent& event){

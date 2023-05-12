@@ -13,6 +13,7 @@ class TEST_CompositionEvent : public DKObjectT<TEST_CompositionEvent>
 {
 public:
 	bool Init(){
+		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_CompositionEvent.h //////\n");
 		
 		DKEventTarget myEventTarget;

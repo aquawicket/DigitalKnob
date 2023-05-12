@@ -11,6 +11,7 @@ class TEST_Location : public DKObjectT<TEST_Location>
 {
 public:
 	bool Init(){
+		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_Location.h //////\n");
 		
 		return DKTODO();

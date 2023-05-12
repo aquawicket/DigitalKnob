@@ -11,6 +11,7 @@ class TEST_CSSStyleDeclaration : public DKObjectT<TEST_CSSStyleDeclaration>
 {
 public:
 	bool Init(){
+		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_CSSStyleDeclaration.h //////\n");
 		
 		return DKTODO();

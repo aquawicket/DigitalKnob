@@ -12,6 +12,7 @@ class TEST_Window : public DKObjectT<TEST_Window>
 {
 public:
 	bool Init(){
+		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_Window.h //////\n");
 		
 		return DKTODO();

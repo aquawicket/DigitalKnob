@@ -11,6 +11,7 @@ class TEST_Navigator : public DKObjectT<TEST_Navigator>
 {
 public:
 	bool Init(){
+		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_Navigator.h //////\n");
 
 		return DKTODO();

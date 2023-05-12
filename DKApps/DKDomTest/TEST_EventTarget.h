@@ -11,6 +11,7 @@ class TEST_EventTarget : public DKObjectT<TEST_EventTarget>
 {
 public:
 	bool Init(){
+		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_EventTarget.h //////\n");
 		
 		return DKTODO();

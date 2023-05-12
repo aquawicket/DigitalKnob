@@ -11,6 +11,7 @@ class TEST_Document : public DKObjectT<TEST_Document>
 {
 public:
 	bool Init(){
+		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_Document.h //////\n");
 		
 		return DKTODO();

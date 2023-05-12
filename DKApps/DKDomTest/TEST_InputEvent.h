@@ -14,7 +14,6 @@ public:
 		DKDEBUGFUNC();
 		DKINFO("////// TEST_InputEvent.h ////// \n");
 	
-		DKINFO("\n");
 		DKEventTarget myEventTarget;
 		myEventTarget.addEventListener("inputevent", &TEST_InputEvent::oninputevent);
 		DKInputEvent inputevent("inputevent", "");
@@ -24,7 +23,6 @@ public:
 	
 	static void printInputEventProperties(DKInputEvent& inputevent){
 		DKDEBUGFUNC(inputevent);
-		////// Instance properties //////
 		DKINFO("inputevent.data = "			+toString(inputevent.data)			+"\n");
 		DKINFO("inputevent.dataTransfer = "	+toString(inputevent.dataTransfer)	+"\n");
 		DKINFO("inputevent.inputType = "	+toString(inputevent.inputType)		+"\n");

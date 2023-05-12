@@ -11,6 +11,7 @@ class TEST_Console : public DKObjectT<TEST_Console>
 {
 public:
 	bool Init(){
+		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_Console.h //////\n");
 		
 		////// Instance methods //////

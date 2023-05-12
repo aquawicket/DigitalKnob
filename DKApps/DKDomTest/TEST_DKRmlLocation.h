@@ -9,6 +9,7 @@ class TEST_DKRmlLocation : public DKObjectT<TEST_DKRmlLocation>
 {
 public:
 	bool Init(){
+		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_DKRmlLocation.h //////\n");
 		
 		return DKTODO();

@@ -11,6 +11,7 @@ class TEST_DragEvent : public DKObjectT<TEST_DragEvent>
 {
 public:
 	bool Init(){
+		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_DragEvent.h //////\n");
 	
 		return DKTODO();

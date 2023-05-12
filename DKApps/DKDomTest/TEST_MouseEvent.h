@@ -23,7 +23,6 @@ public:
 
 	static void printMouseEventProperties(DKMouseEvent& mouseevent){
 		DKDEBUGFUNC(mouseevent);
-		////// Instance properties //////
 		DKINFO("mouseevent.altKey = "			+toString(mouseevent.altKey)		+"\n");
 		DKINFO("mouseevent.button = "			+toString(mouseevent.button)		+"\n");
 		DKINFO("mouseevent.buttons = "			+toString(mouseevent.buttons)		+"\n");

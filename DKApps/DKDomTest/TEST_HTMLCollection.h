@@ -11,6 +11,7 @@ class TEST_HTMLCollection : public DKObjectT<TEST_HTMLCollection>
 {
 public:
 	bool Init(){
+		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_HTMLCollection.h //////\n");
 		
 		return DKTODO();
