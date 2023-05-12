@@ -1,0 +1,4 @@
+dk_depend(DKInterface)
+
+dk_generateCmake(DKCSSStyleDeclaration)
+dk_assets(DKCSSStyleDeclaration)
