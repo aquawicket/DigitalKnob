@@ -3,5 +3,5 @@
 
 dk_depend(DKInterface)
 
-dk_generateCmake(HTMLCollection)
-dk_assets(HTMLCollection)
+dk_generateCmake(DKHTMLCollection)
+dk_assets(DKHTMLCollection)
