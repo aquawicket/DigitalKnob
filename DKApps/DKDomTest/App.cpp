@@ -43,8 +43,14 @@
 // [Element] https://dom.spec.whatwg.org/#interface-element
 #include "TEST_Element.h"
 
-// [HtmlElement] https://html.spec.whatwg.org/multipage/dom.html#htmlelement
+// [HTMLCollection]
+#include "TEST_HTMLCollection.h"
+
+// [HTMLElement] https://html.spec.whatwg.org/multipage/dom.html#htmlelement
 #include "TEST_HTMLElement.h"
+
+// [HTMLBodyElement] 
+#include "TEST_HTMLBodyElement.h"
 
 
 ////// DigitalKnob //////
