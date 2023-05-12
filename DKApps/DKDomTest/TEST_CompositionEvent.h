@@ -4,7 +4,6 @@
 #ifndef TEST_CompositionEvent_H
 #define TEST_CompositionEvent_H
 
-//#include "DK/DK.h"
 #include "DKCompositionEvent/DKCompositionEvent.h"
 #include "TEST_UIEvent.h"
 #include "TEST_Event.h"
@@ -14,9 +13,8 @@ class TEST_CompositionEvent : public DKObjectT<TEST_CompositionEvent>
 {
 public:
 	bool Init(){
-		DKINFO("////// TEST_CompositionEvent.h ////// \n");
+		DKINFO("\n////// TEST_CompositionEvent.h //////\n");
 		
-		DKINFO("\n");
 		DKEventTarget myEventTarget;
 		myEventTarget.addEventListener("compositionevent", &TEST_CompositionEvent::oncompositionevent);
 		DKCompositionEvent compositionevent("compositionevent", "");

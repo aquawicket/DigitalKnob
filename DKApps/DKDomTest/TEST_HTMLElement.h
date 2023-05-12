@@ -4,7 +4,6 @@
 #ifndef TEST_HTMLElement_H
 #define TEST_HTMLElement_H
 
-//#include "DK/DK.h"
 #include "DKHTMLElement/DKHTMLElement.h"
 
 

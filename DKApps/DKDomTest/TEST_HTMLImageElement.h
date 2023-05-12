@@ -11,7 +11,7 @@ class TEST_HTMLImageElement : public DKObjectT<TEST_HTMLImageElement>
 {
 public:
 	bool Init(){
-		DKINFO("////// TEST_HTMLImageElement.h ////// \n");
+		DKINFO("\n////// TEST_HTMLImageElement.h //////\n");
 		
 		return DKTODO();
 	}

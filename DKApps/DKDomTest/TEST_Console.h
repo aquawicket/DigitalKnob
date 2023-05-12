@@ -4,7 +4,6 @@
 #ifndef TEST_Console_H
 #define TEST_Console_H
 
-//#include "DK/DK.h"
 #include "DKConsole/DKConsole.h"
 
 
@@ -12,7 +11,7 @@ class TEST_Console : public DKObjectT<TEST_Console>
 {
 public:
 	bool Init(){
-		DKINFO("////// TEST_Console.h ////// \n");
+		DKINFO("\n////// TEST_Console.h //////\n");
 		
 		////// Instance methods //////
 		// [console.assert()] https://developer.mozilla.org/en-US/docs/Web/API/console/assert

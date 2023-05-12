@@ -11,7 +11,7 @@ class TEST_CSSStyleDeclaration : public DKObjectT<TEST_CSSStyleDeclaration>
 {
 public:
 	bool Init(){
-		DKINFO("////// TEST_CSSStyleDeclaration.h ////// \n");
+		DKINFO("\n////// TEST_CSSStyleDeclaration.h //////\n");
 		
 		return DKTODO();
 	}

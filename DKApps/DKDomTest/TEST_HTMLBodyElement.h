@@ -4,7 +4,6 @@
 #ifndef TEST_HTMLBodyElement_H
 #define TEST_HTMLBodyElement_H
 
-//#include "DK/DK.h"
 #include "DKHTMLBodyElement/DKHTMLBodyElement.h"
 
 
@@ -12,7 +11,7 @@ class TEST_HTMLBodyElement : public DKObjectT<TEST_HTMLBodyElement>
 {
 public:
 	bool Init(){
-		DKINFO("////// TEST_HTMLBodyElement.h ////// \n");
+		DKINFO("\n////// TEST_HTMLBodyElement.h //////\n");
 		
 		return DKTODO();
 	}

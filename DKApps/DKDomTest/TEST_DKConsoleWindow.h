@@ -2,7 +2,6 @@
 #ifndef TEST_DKConsoleWindow_H
 #define TEST_DKConsoleWindow_H
 
-//#include "DK/DK.h"
 #include "DKConsoleWindow/DKConsoleWindow.h"
 
 
@@ -10,7 +9,8 @@ class TEST_DKConsoleWindow : public DKObjectT<TEST_DKConsoleWindow>
 {
 public:
 	bool Init(){
-		DKINFO("////// TEST_DKConsoleWindow.h ////// \n");
+		DKINFO("\n////// TEST_DKConsoleWindow.h ////// \n");
+		
 		return DKTODO();
 	}
 

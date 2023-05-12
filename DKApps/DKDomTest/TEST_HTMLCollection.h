@@ -4,7 +4,6 @@
 #ifndef TEST_HTMLCollection_H
 #define TEST_HTMLCollection_H
 
-//#include "DK/DK.h"
 #include "DKHTMLCollection/DKHTMLCollection.h"
 
 

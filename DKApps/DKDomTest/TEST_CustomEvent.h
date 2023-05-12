@@ -3,7 +3,6 @@
 #ifndef TEST_CustomEvent_H
 #define TEST_CustomEvent_H
 
-//#include "DK/DK.h"
 #include "DKCustomEvent/DKCustomEvent.h"
 #include "TEST_Event.h"
 
@@ -13,9 +12,8 @@ class TEST_CustomEvent : public DKObjectT<TEST_CustomEvent>
 public:
 	bool Init(){
 		DKDEBUGFUNC();
-		DKINFO("////// TEST_CustomEvent.h ////// \n");
+		DKINFO("\n////// TEST_CustomEvent.h ////// \n");
 		
-		DKINFO("\n");
 		DKEventTarget myEventTarget;
 		myEventTarget.addEventListener("customevent", &TEST_CustomEvent::oncustomevent);
 		DKCustomEvent customevent("customevent", "");

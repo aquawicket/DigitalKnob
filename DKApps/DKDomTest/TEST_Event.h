@@ -4,7 +4,6 @@
 #ifndef TEST_Event_H
 #define TEST_Event_H
 
-//#include "DK/DK.h"
 #include "DKEvent/DKEvent.h"
 
 
@@ -13,9 +12,8 @@ class TEST_Event : public DKObjectT<TEST_Event>
 public:
 	bool Init(){
 		DKDEBUGFUNC();
-		DKINFO("////// TEST_Event.h ////// \n");
+		DKINFO("\n////// TEST_Event.h //////\n");
 		
-		DKINFO("\n");
 		DKEventTarget myTargetA;									// EventTarget as 	value
 		DKEvent eventA("eventA", "");								// Event as 		value
 		myTargetA.addEventListener("eventA", &TEST_Event::onevent);

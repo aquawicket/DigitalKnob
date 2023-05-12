@@ -4,7 +4,6 @@
 #ifndef TEST_FocusEvent_H
 #define TEST_FocusEvent_H
 
-//#include "DK/DK.h"
 #include "DKFocusEvent/DKFocusEvent.h"
 
 
@@ -13,9 +12,8 @@ class TEST_FocusEvent : public DKObjectT<TEST_FocusEvent>
 public:
 	bool Init(){
 		DKDEBUGFUNC();
-		DKINFO("////// TEST_FocusEvent.h ////// \n");
+		DKINFO("\n////// TEST_FocusEvent.h //////\n");
 		
-		DKINFO("\n");
 		DKEventTarget myEventTarget;
 		myEventTarget.addEventListener("focusevent", &TEST_FocusEvent::onfocusevent);
 		DKFocusEvent focusevent("focusevent", "");

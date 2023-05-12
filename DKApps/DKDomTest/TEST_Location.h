@@ -4,7 +4,6 @@
 #ifndef TEST_Location_H
 #define TEST_Location_H
 
-//#include "DK/DK.h"
 #include "DKLocation/DKLocation.h"
 
 
