@@ -7,7 +7,7 @@
 #include "DKInterface/DKInterface.h"
 
 
-class HTMLCollection : public DKInterface
+class DKHTMLCollection : public DKInterface
 {
 public:
 	DKHTMLCollection() : DKInterface() {
