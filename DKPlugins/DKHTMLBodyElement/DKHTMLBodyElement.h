@@ -1,8 +1,8 @@
 // [IDL] https://html.spec.whatwg.org/multipage/sections.html#htmlbodyelement
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/HTMLBodyElement
 #pragma once
-#ifndef HTMLBodyElement_H
-#define HTMLBodyElement_H
+#ifndef DKHTMLBodyElement_H
+#define DKHTMLBodyElement_H
 
 #include "DKHTMLElement/DKHTMLElement.h"
 
