@@ -1,5 +1,5 @@
-// [IDL]
-// [MDN]
+// [IDL] https://drafts.csswg.org/cssom/#the-cssstyledeclaration-interface
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration
 #pragma once
 #ifndef TEST_CSSStyleDeclaration_H
 #define TEST_CSSStyleDeclaration_H
