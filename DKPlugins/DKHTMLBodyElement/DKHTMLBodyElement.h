@@ -10,7 +10,7 @@
 class DKHTMLBodyElement : public DKInterface
 {
 public:
-	DKHTMLCollection() : DKInterface() {
+	DKHTMLBodyElement() : DKInterface() {
 		DKDEBUGFUNC();
 		interfaceName = "DKHTMLBodyElement";
 		interfaceAddress = pointerToAddress(this);
@@ -21,4 +21,4 @@ public:
 };
 
 
-#endif //DKHTMLCollection_H
+#endif //DKHTMLBodyElement_H
