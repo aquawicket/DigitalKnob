@@ -124,6 +124,7 @@ public:
 		return true;
 	}
 		
+#if !EMSCRIPTEN	//FIXME
 	// const unsigned long DOM_KEY_LOCATION_LEFT = 0x01;
 	static int DOM_KEY_LOCATION_LEFT(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -144,6 +145,7 @@ public:
 		dukglue_push(ctx, keyboardEvent(ctx)->DOM_KEY_LOCATION_NUMPAD);	
 		return true;
 	}
+#endif	
 	
 	// readonly attribute DOMString key;
 	static int key(duk_context* ctx){
