@@ -20,7 +20,8 @@ public:
 		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK", 							DKKeyboardEventDUK::constructor);
 		
 		// KeyLocationCode
-		
+	
+	#if !EMSCRIPTEN	//FIXME
 		// const unsigned long DOM_KEY_LOCATION_STANDARD = 0x00;
 		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_DOM_KEY_LOCATION_STANDARD",	DKKeyboardEventDUK::DOM_KEY_LOCATION_STANDARD);
 		
@@ -32,6 +33,7 @@ public:
 		
 		// const unsigned long DOM_KEY_LOCATION_NUMPAD = 0x03;
 		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_DOM_KEY_LOCATION_NUMPAD", 	DKKeyboardEventDUK::DOM_KEY_LOCATION_NUMPAD);
+	#endif
 	
 		// readonly attribute DOMString key;
 		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_key", 						DKKeyboardEventDUK::key);
