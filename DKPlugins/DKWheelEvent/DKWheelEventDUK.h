@@ -20,6 +20,7 @@ public:
 	
 		// DeltaModeCode
 		
+#if !EMSCRIPTEN	//FIXME
 		// const unsigned long DOM_DELTA_PIXEL = 0x00;
 		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_DOM_DELTA_PIXEL", 		DKWheelEventDUK::DOM_DELTA_PIXEL); 
 		
@@ -28,6 +29,7 @@ public:
 		
 		// const unsigned long DOM_DELTA_PAGE  = 0x02;
 		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_DOM_DELTA_PAGE", 		DKWheelEventDUK::DOM_DELTA_PAGE);
+#endif
 	
 		// readonly attribute double deltaX;
 		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_deltaX", 		DKWheelEventDUK::deltaX); 
@@ -66,6 +68,7 @@ public:
 		return true;
 	}
 	
+#if !EMSCRIPTEN	//FIXME
 	// DeltaModeCode
 	// const unsigned long DOM_DELTA_PIXEL = 0x00;
 	static int DOM_DELTA_PIXEL(duk_context* ctx){
@@ -87,7 +90,8 @@ public:
 		dukglue_push(ctx, wheelEvent(ctx)->DOM_DELTA_PAGE);	
 		return true;
 	}
-		
+#endif 
+	
 	// readonly attribute double deltaX;
 	static int deltaX(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
