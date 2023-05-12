@@ -116,6 +116,7 @@ public:
 		return true;
 	}
 	
+#if !EMSCRIPTEN	//FIXME
 	// KeyLocationCode
 	// const unsigned long DOM_KEY_LOCATION_STANDARD = 0x00;
 	static int DOM_KEY_LOCATION_STANDARD(duk_context* ctx){
@@ -124,7 +125,6 @@ public:
 		return true;
 	}
 		
-#if !EMSCRIPTEN	//FIXME
 	// const unsigned long DOM_KEY_LOCATION_LEFT = 0x01;
 	static int DOM_KEY_LOCATION_LEFT(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
