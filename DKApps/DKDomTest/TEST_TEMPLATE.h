@@ -1,12 +1,9 @@
 // [IDL]
-// [SOURCE]
 // [MDN]
-
 #pragma once
 #ifndef TEST_TEMPLATE_H
 #define TEST_TEMPLATE_H
 
-#include "DK/DK.h"
 //#include "DKTemplate/DKTemplate.h"
 
 
