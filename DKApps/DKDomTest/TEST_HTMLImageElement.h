@@ -4,7 +4,7 @@
 #ifndef TEST_HTMLImageElement_H
 #define TEST_HTMLImageElement_H
 
-#include "DKHTMLImageElement/DKImageBodyElement.h"
+#include "DKHTMLImageElement/DKImageImageElement.h"
 
 
 class TEST_HTMLImageElement : public DKObjectT<TEST_HTMLImageElement>
