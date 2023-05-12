@@ -1,8 +1,8 @@
 // [IDL] https://dom.spec.whatwg.org/#interface-htmlcollection
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection
 #pragma once
-#ifndef HTMLCollection_H
-#define HTMLCollection_H
+#ifndef DKHTMLCollection_H
+#define DKHTMLCollection_H
 
 #include "DKInterface/DKInterface.h"
 
