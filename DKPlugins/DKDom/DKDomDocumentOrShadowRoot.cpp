@@ -24,7 +24,6 @@
 * SOFTWARE.
 */
 
-// https://developer.mozilla.org/en-US/docs/Web/API/DocumentOrShadowRoot
 // https://javascript.info/mixins
 
 #include "DK/DKApp.h"
