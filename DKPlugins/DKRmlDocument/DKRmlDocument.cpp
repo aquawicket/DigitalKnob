@@ -332,6 +332,8 @@ bool DKRmlDocument::LoadUrl(const DKString& url){
 	DKDEBUGFUNC(url);
 	DKINFO("DKRmlDocument::LoadUrl("+url+")\n");
 	DKString _url = url;
+	
+	// FIXME: url as full path only works on Windows due to C:/  vs  /users
 	if(has(_url,":/")) //could be http:// , https://, file:/// or C:/
 		href_ = _url; //absolute path including protocol
 	else if(has(_url,"//")){ //could be //www.site.com/style.css or //site.com/style.css
