@@ -14,7 +14,9 @@ public:
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_EventTarget.h //////\n");
 		
-		return DKTODO();
+		DKEventTarget myTarget;
+		
+		return true;
 	}
 
 };
