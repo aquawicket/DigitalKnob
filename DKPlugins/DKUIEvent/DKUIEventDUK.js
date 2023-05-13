@@ -7,18 +7,18 @@
 // [Exposed=Window]
 // interface UIEvent : Event {
 //constructor(DOMString type, optional UIEventInit eventInitDict = {});
-var UIEvent = function UIEvent(type, options, address) {
-	//console.log("UIEvent("+type+","+options+","+address+")")
+var UIEvent = function UIEvent(type, eventInitDict, address) {
+	//console.log("UIEvent("+type+","+eventInitDict+","+address+")")
 	
 	if(address)
 		this.address = address;
 	if(!this.address)
-		this.address = CPP_DKUIEventDUK(type, options);
+		this.address = CPP_DKUIEventDUK(type, eventInitDict);
 	
 	// readonly attribute Window? view;
 	Object.defineProperty(this, "view", {
-        get: function view() { return CPP_DKUIEventDUK_view(this.address) },
-		set: function view(num)	{ return CPP_DKUIEventDUK_view(this.address, num) },
+        get: function view() 		{ return CPP_DKUIEventDUK_view(this.address) },
+		set: function view(num)		{ return CPP_DKUIEventDUK_view(this.address, num) },
 		configurable: true,
     })
 	

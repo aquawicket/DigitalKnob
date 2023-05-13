@@ -12,7 +12,7 @@ class TEST_InputEvent : public DKObjectT<TEST_InputEvent>
 public:
 	bool Init(){
 		DKDEBUGFUNC();
-		DKINFO("////// TEST_InputEvent.h ////// \n");
+		DKINFO("\n////// TEST_InputEvent.h //////\n");
 	
 		DKEventTarget myEventTarget;
 		myEventTarget.addEventListener("inputevent", &TEST_InputEvent::oninputevent);
