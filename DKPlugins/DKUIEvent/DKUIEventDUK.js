@@ -63,7 +63,7 @@ var UIEvent = function UIEvent(type, eventInitDict, address) {
 		this.toString = function(){ return "[object UIEvent]" }
 	
 	
-	var event = Event.call(this, type, options)
+	var event = Event.call(this, type, eventInitDict)
 	
 	// Make properties (Read Only) after assignment
 	Object.defineProperty(this, "detail", 				{ set: undefined })
