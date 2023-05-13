@@ -330,6 +330,7 @@ bool DKRmlDocument::LoadHtml(const DKString& html){
 
 bool DKRmlDocument::LoadUrl(const DKString& url){
 	DKDEBUGFUNC(url);
+	DKINFO("DKRmlDocument::LoadUrl("+url+")\n");
 	DKString _url = url;
 	if(has(_url,":/")) //could be http:// , https://, file:/// or C:/
 		href_ = _url; //absolute path including protocol
@@ -338,6 +339,7 @@ bool DKRmlDocument::LoadUrl(const DKString& url){
 	}
 	else
 		_url = workingPath + _url;
+	
 	//Get the working path;
 	std::string::size_type found = _url.find_last_of("/");
 	workingPath = _url.substr(0, found + 1);
