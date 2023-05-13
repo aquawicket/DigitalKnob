@@ -1,14 +1,9 @@
 // [IDL] https://w3c.github.io/uievents/#events-mouseevents
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent
-console.log("////// TEST_MouseEvent.js //////")
+console.log("\n////// TEST_MouseEvent.js //////")
 
 
-////// MouseEvent //////
 function printMouseEventProperties(mouseevent){
-	////// Static properties //////
-	//console.log("mouseevent.WEBKIT_FORCE_AT_MOUSE_DOWN = "+mouseevent.WEBKIT_FORCE_AT_MOUSE_DOWN)
-	//console.log("mouseevent.WEBKIT_FORCE_AT_FORCE_MOUSE_DOWN = "+mouseevent.WEBKIT_FORCE_AT_FORCE_MOUSE_DOWN)
-	////// Instance properties //////
 	console.log("mouseevent.altKey = "			+mouseevent.altKey)
 	console.log("mouseevent.button = "			+mouseevent.button)
 	console.log("mouseevent.buttons = "			+mouseevent.buttons)

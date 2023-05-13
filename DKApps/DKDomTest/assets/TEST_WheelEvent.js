@@ -1,10 +1,9 @@
 // [IDL] https://w3c.github.io/uievents/#events-wheelevents
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent
-console.log("////// TEST_WheelEvent.js //////")
+console.log("\n////// TEST_WheelEvent.js //////")
 
 
 function printWheelEventProperties(wheelevent){
-	////// Instance properties //////
 	console.log("wheelevent.deltaX = "		+wheelevent.deltaX)
 	console.log("wheelevent.deltaY = "		+wheelevent.deltaY)
 	console.log("wheelevent.deltaZ = "		+wheelevent.deltaZ)

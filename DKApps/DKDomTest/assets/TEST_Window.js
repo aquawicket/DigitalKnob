@@ -1,11 +1,10 @@
 // [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/Window.idl
 // [SOURCE] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-window-object
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Window
-console.log("////// TEST_Window.js //////")
+console.log("\n////// TEST_Window.js //////")
 
 
 function printWindowProperties(window){
-	////// Instance properties //////
 	console.log("window.caches = "				+window.caches)
 	console.log("window.clientInformation = "	+window.clientInformation)
 	console.log("window.closed = "				+window.closed)

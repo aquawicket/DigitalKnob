@@ -1,6 +1,6 @@
 // [IDL] https://console.spec.whatwg.org/
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Console
-console.log("////// TEST_Console.js //////")
+console.log("\n////// TEST_Console.js //////")
 
 
 ////// Instance methods //////

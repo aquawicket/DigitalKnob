@@ -1,12 +1,10 @@
-console.log("////// TEST_DKSdlWindow.js //////")
+console.log("\n////// TEST_DKSdlWindow.js //////")
 
 function printSdlWindowProperties(consolewindow){
-	////// Instance properties //////
 	// TODO
 }
 
 
-/////////////////////////////////////
 const mySdlWindow = new DKSdlWindow()
 printWindowProperties(mySdlWindow)		//requires TEST_Window.js
 printSdlWindowProperties(mySdlWindow)

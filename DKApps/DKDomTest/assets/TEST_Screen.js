@@ -1,6 +1,6 @@
 // [IDL] https://w3c.github.io/csswg-drafts/cssom-view/#the-screen-interface
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Screen
-console.log("////// TEST_Screen.js //////")
+console.log("\n////// TEST_Screen.js //////")
 
 
 function printScreenProperties(screen){

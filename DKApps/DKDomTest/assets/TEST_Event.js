@@ -1,10 +1,9 @@
 // [IDL] https://dom.spec.whatwg.org/#interface-event
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Event
-console.log("////// TEST_Event.js //////")
+console.log("\n////// TEST_Event.js //////")
 
 
 function printEventProperties(event){
-	////// Instance properties //////
 	console.log("event.bubbles = "					+event.bubbles)					// [Event.bubbles](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/bubbles
 	console.log("event.cancelable = "				+event.cancelable)				// [Event.cancelable](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelable
 	console.log("event.composed = "					+event.composed)				// [Event.composed](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/composed
@@ -15,7 +14,6 @@ function printEventProperties(event){
 	console.log("event.target = "					+event.target)					// [Event.target](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/target
 	console.log("event.timeStamp = "				+event.timeStamp)				// [Event.timeStamp](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/timeStamp
 	console.log("event.type = "						+event.type)					// [Event.type](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/type
-	////// Legacy and non-standard properties //////
 	console.log("event.cancelBubble = "				+event.cancelBubble)			// [Event.cancelBubble](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/cancelBubble
 	console.log("event.explicitOriginalTarget = "	+event.explicitOriginalTarget)	// [Event.explicitOriginalTarget](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/explicitOriginalTarget
 	console.log("event.originalTarget = "			+event.originalTarget)			// [Event.originalTarget](Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Event/originalTarget
@@ -23,7 +21,6 @@ function printEventProperties(event){
 	console.log("event.scoped = "					+event.scoped)					// [Event.scoped](Read only)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Event/scoped
 }
 
-// create EventTarget
 const eventTarget = new EventTarget();
 
 console.log('\n');

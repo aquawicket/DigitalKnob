@@ -1,7 +1,6 @@
-console.log("////// TEST_DKConsoleWindow.js //////")
+console.log("\n////// TEST_DKConsoleWindow.js //////")
 
 function printConsoleWindowProperties(consolewindow){
-	////// Instance properties //////
 	console.log("consolewindow.columns = "	+consolewindow.columns)
 	console.log("consolewindow.rows = "		+consolewindow.rows)
 }

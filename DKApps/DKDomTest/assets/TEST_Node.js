@@ -1,6 +1,6 @@
 // [IDL] https://dom.spec.whatwg.org/#interface-node
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Node
-console.log("////// TEST_Node.js //////")
+console.log("\n////// TEST_Node.js //////")
 
 
 function printNodeProperties(node){

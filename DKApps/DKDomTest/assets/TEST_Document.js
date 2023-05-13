@@ -1,10 +1,9 @@
 // [IDL] https://dom.spec.whatwg.org/#interface-document
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Document
-console.log("////// TEST_Document.js //////")
+console.log("\n////// TEST_Document.js //////")
 
 
 function printDocumentProperties(document){
-	////// Instance properties //////	
 	console.log("document.activeElement = "				+document.activeElement)			// [Document.activeElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement
 	console.log("document.adoptedStyleSheets = "		+document.adoptedStyleSheets)		// [Document.adoptedStyleSheets] https://developer.mozilla.org/en-US/docs/Web/API/Document/adoptedStyleSheets
 	console.log("document.body = "						+document.body)						// [Document.body] https://developer.mozilla.org/en-US/docs/Web/API/Document/body
@@ -39,8 +38,6 @@ function printDocumentProperties(document){
 	console.log("document.styleSheets = "				+document.styleSheets)				// [Document.styleSheets](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/styleSheets
 	console.log("document.timeline = "					+document.timeline)					// [Document.timeline](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/timeline
 	console.log("document.visibilityState = "			+document.visibilityState)			// [Document.visibilityState](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/visibilityState
-	
-	////// Extensions for HTMLDocument //////
 	console.log("document.cookie = "					+document.cookie)					// [Document.cookie] https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie
 	console.log("document.defaultView = "				+document.defaultView)				// [Document.defaultView](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
 	console.log("document.designMode = "				+document.designMode)				// [Document.designMode] https://developer.mozilla.org/en-US/docs/Web/API/Document/designMode
@@ -53,8 +50,6 @@ function printDocumentProperties(document){
 	console.log("document.referrer = "					+document.referrer)					// [Document.referrer](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/referrer
 	console.log("document.title = "						+document.title)					// [Document.title] https://developer.mozilla.org/en-US/docs/Web/API/Document/title
 	console.log("document.URL = "						+document.URL)						// [Document.URL](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/URL
-			
-	////// Deprecated properties //////
 	console.log("document.alinkColor = "				+document.alinkColor)				// [Document.alinkColor](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/alinkColor
 	console.log("document.all = "						+document.all)						// [Document.all](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/all
 	console.log("document.anchors = "					+document.anchors)					// [Document.anchors](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/anchors
@@ -77,142 +72,3 @@ function printDocumentProperties(document){
 	console.log("document.xmlStandalone = "				+document.xmlStandalone)			// [Document.xmlStandalone](Deprecated)
 	console.log("document.xmlVersion = "				+document.xmlVersion)				// [Document.xmlVersion](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/xmlVersion
 }
-
-
-
-////// Instance methods //////
-// [Document.adoptNode()] https://developer.mozilla.org/en-US/docs/Web/API/Document/adoptNode
-// [Document.append()] https://developer.mozilla.org/en-US/docs/Web/API/Document/append
-// [Document.captureEvents()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/caretPositionFromPoint
-// [Document.caretPositionFromPoint()] https://developer.mozilla.org/en-US/docs/Web/API/Document/caretPositionFromPoint
-// [Document.caretRangeFromPoint()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Document/caretRangeFromPoint
-// [Document.createAttribute()] https://developer.mozilla.org/en-US/docs/Web/API/Document/createAttribute
-// [Document.createAttributeNS()] https://developer.mozilla.org/en-US/docs/Web/API/Document/createAttributeNS
-// [Document.createCDATASection()] https://developer.mozilla.org/en-US/docs/Web/API/Document/createCDATASection
-// [Document.createComment()] https://developer.mozilla.org/en-US/docs/Web/API/Document/createComment
-// [Document.createDocumentFragment()] https://developer.mozilla.org/en-US/docs/Web/API/Document/createDocumentFragment
-// [Document.createElement()] https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement
-// [Document.createElementNS()] https://developer.mozilla.org/en-US/docs/Web/API/Document/createElementNS
-// [Document.createEntityReference()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document
-// [Document.createEvent()] https://developer.mozilla.org/en-US/docs/Web/API/Document/createEvent
-// [Document.createNodeIterator()] https://developer.mozilla.org/en-US/docs/Web/API/Document/createNodeIterator
-// [Document.createProcessingInstruction()] https://developer.mozilla.org/en-US/docs/Web/API/Document/createProcessingInstruction
-// [Document.createRange()] https://developer.mozilla.org/en-US/docs/Web/API/Document/createRange
-// [Document.createTextNode()] https://developer.mozilla.org/en-US/docs/Web/API/Document/createTextNode
-// [Document.createTouch()](Deprecated)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Document/createTouch
-// [Document.createTouchList()](Deprecated)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Document/createTouchList
-// [Document.createTreeWalker()] https://developer.mozilla.org/en-US/docs/Web/API/Document/createTreeWalker
-// [Document.elementFromPoint()] https://developer.mozilla.org/en-US/docs/Web/API/Document/elementFromPoint
-// [Document.elementsFromPoint()] https://developer.mozilla.org/en-US/docs/Web/API/Document/elementsFromPoint
-// [Document.enableStyleSheetsForSet()](Deprecated)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Document/enableStyleSheetsForSet
-// [Document.exitFullscreen()] https://developer.mozilla.org/en-US/docs/Web/API/Document/exitFullscreen
-// [Document.exitPictureInPicture()] https://developer.mozilla.org/en-US/docs/Web/API/Document/exitPictureInPicture
-// [Document.exitPointerLock()] https://developer.mozilla.org/en-US/docs/Web/API/Document/exitPointerLock
-// [Document.getAnimations()] https://developer.mozilla.org/en-US/docs/Web/API/Document/getAnimations
-// [Document.getBoxQuads()](Experimental)
-// [Document.getElementById()] https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById
-// [Document.getElementsByClassName()] https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByClassName
-// [Document.getElementsByTagName()] https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByTagName
-// [Document.getElementsByTagNameNS()] https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByTagNameNS
-// [Document.getSelection()] https://developer.mozilla.org/en-US/docs/Web/API/Document/getSelection
-// [Document.hasStorageAccess()] https://developer.mozilla.org/en-US/docs/Web/API/Document/hasStorageAccess
-// [Document.importNode()] https://developer.mozilla.org/en-US/docs/Web/API/Document/importNode
-// [Document.prepend()] https://developer.mozilla.org/en-US/docs/Web/API/Document/prepend
-// [Document.querySelector()] https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector
-// [Document.querySelectorAll()] https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll
-// [Document.releaseCapture()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Document/releaseCapture
-// [Document.releaseEvents()](Deprecated)
-// [Document.replaceChildren()] https://developer.mozilla.org/en-US/docs/Web/API/Document/replaceChildren
-// [Document.requestStorageAccess()] https://developer.mozilla.org/en-US/docs/Web/API/Document/requestStorageAccess
-// [Document.startViewTransition()](Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Document/startViewTransition
-// [Document.mozSetImageElement()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Document/mozSetImageElement
-// [Document.createExpression()] https://developer.mozilla.org/en-US/docs/Web/API/Document/createExpression
-// [Document.createNSResolver()] https://developer.mozilla.org/en-US/docs/Web/API/Document/createNSResolver
-// [Document.evaluate()] https://developer.mozilla.org/en-US/docs/Web/API/Document/evaluate
-		
-		
-////// Extension for HTML documents //////
-// [Document.clear()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/clear
-// [Document.close()] https://developer.mozilla.org/en-US/docs/Web/API/Document/close
-// [Document.execCommand()](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand
-// [Document.getElementsByName()] https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByName
-// [Document.hasFocus()] https://developer.mozilla.org/en-US/docs/Web/API/Document/hasFocus
-// [Document.open()] https://developer.mozilla.org/en-US/docs/Web/API/Document/open
-// [Document.queryCommandEnabled()](Deprecated)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Document/queryCommandEnabled
-// [Document.queryCommandIndeterm()](Deprecated)
-// [Document.queryCommandState()](Deprecated)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Document/queryCommandState
-// [Document.queryCommandSupported()](Deprecated)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Document/queryCommandSupported
-// [Document.queryCommandValue()](Deprecated)
-// [Document.write()] https://developer.mozilla.org/en-US/docs/Web/API/Document/write
-// [Document.writeln()] https://developer.mozilla.org/en-US/docs/Web/API/Document/writeln
-		
-		
-////// Events //////
-// [afterscriptexecute](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Document/afterscriptexecute_event
-// [beforescriptexecute](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Document/beforescriptexecute_event
-// [securitypolicyviolation]
-// [scroll] https://developer.mozilla.org/en-US/docs/Web/API/Document/scroll_event
-// [visibilitychange] https://developer.mozilla.org/en-US/docs/Web/API/Document/visibilitychange_event
-// [wheel] https://developer.mozilla.org/en-US/docs/Web/API/Element/wheel_event
-		
-////// Animation events //////
-// [animationcancel] https://developer.mozilla.org/en-US/docs/Web/API/Element/animationcancel_event
-// [animationend] https://developer.mozilla.org/en-US/docs/Web/API/Element/animationend_event
-// [animationiteration] https://developer.mozilla.org/en-US/docs/Web/API/Element/animationiteration_event
-// [animationstart] https://developer.mozilla.org/en-US/docs/Web/API/Element/animationstart_event
-		
-////// Clipboard events //////
-// [copy] https://developer.mozilla.org/en-US/docs/Web/API/Document/copy_event
-// [cut] https://developer.mozilla.org/en-US/docs/Web/API/Document/cut_event
-// [paste] https://developer.mozilla.org/en-US/docs/Web/API/Document/paste_event
-		
-////// Drag & drop events //////
-// [drag] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/drag_event
-// [dragend] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragend_event
-// [dragenter] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragenter_event
-// [dragleave] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragleave_event
-// [dragover] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragover_event
-// [dragstart] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragstart_event
-// [drop] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/drop_event
-		
-////// Fullscreen events //////
-// [fullscreenchange] https://developer.mozilla.org/en-US/docs/Web/API/Document/fullscreenchange_event
-// [fullscreenerror] https://developer.mozilla.org/en-US/docs/Web/API/Document/fullscreenerror_event
-	
-////// Keyboard events //////
-// [keydown] https://developer.mozilla.org/en-US/docs/Web/API/Element/keydown_event
-// [keypress](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Element/keypress_event
-// [keyup] https://developer.mozilla.org/en-US/docs/Web/API/Element/keyup_event
-		
-////// Load & unload events //////
-// [DOMContentLoaded] https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
-// [readystatechange] https://developer.mozilla.org/en-US/docs/Web/API/Document/readystatechange_event
-		
-////// Pointer events //////
-// [gotpointercapture] https://developer.mozilla.org/en-US/docs/Web/API/Element/gotpointercapture_event
-// [lostpointercapture] https://developer.mozilla.org/en-US/docs/Web/API/Document/lostpointercapture_event
-// [pointercancel] https://developer.mozilla.org/en-US/docs/Web/API/Element/pointercancel_event
-// [pointerdown] https://developer.mozilla.org/en-US/docs/Web/API/Element/pointerdown_event
-// [pointerenter] https://developer.mozilla.org/en-US/docs/Web/API/Element/pointerenter_event
-// [pointerleave] https://developer.mozilla.org/en-US/docs/Web/API/Element/pointerleave_event
-// [pointerlockchange] https://developer.mozilla.org/en-US/docs/Web/API/Document/pointerlockchange_event
-// [pointerlockerror] https://developer.mozilla.org/en-US/docs/Web/API/Document/pointerlockerror_event
-// [pointermove] https://developer.mozilla.org/en-US/docs/Web/API/Element/pointermove_event
-// [pointerout] https://developer.mozilla.org/en-US/docs/Web/API/Element/pointerout_event
-// [pointerover] https://developer.mozilla.org/en-US/docs/Web/API/Element/pointerover_event
-// [pointerup] https://developer.mozilla.org/en-US/docs/Web/API/Element/pointerup_event
-	
-////// Selection events //////
-// [selectionchange] https://developer.mozilla.org/en-US/docs/Web/API/Document/selectionchange_event
-		
-////// Touch events //////
-// [touchcancel] https://developer.mozilla.org/en-US/docs/Web/API/Element/touchcancel_event
-// [touchend] https://developer.mozilla.org/en-US/docs/Web/API/Element/touchend_event
-// [touchmove] https://developer.mozilla.org/en-US/docs/Web/API/Element/touchmove_event
-// [touchstart] https://developer.mozilla.org/en-US/docs/Web/API/Element/touchstart_event
-		
-////// Transition events //////
-// [transitioncancel] https://developer.mozilla.org/en-US/docs/Web/API/Element/transitioncancel_event
-// [transitionend] https://developer.mozilla.org/en-US/docs/Web/API/Element/transitionend_event
-// [transitionrun] https://developer.mozilla.org/en-US/docs/Web/API/Element/transitionrun_event
-// [transitionstart] https://developer.mozilla.org/en-US/docs/Web/API/Element/transitionstart_event

@@ -1,13 +1,11 @@
-console.log("////// TEST_DKRmlLocation.js //////")
+console.log("\n////// TEST_DKRmlLocation.js //////")
 
 
 function printRmlLocationProperties(rmlLocation){
-	////// Instance properties //////
 	// TODO
 }
 
 
-/////////////////////////////////////////
 const myRmlLocation = new DKRmlLocation()
 printRmlLocationProperties(myRmlLocation)
 printLocationProperties(myRmlLocation)		//requires TEST_Location.js
