@@ -14,12 +14,12 @@ public:
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_HTMLImageElement.h //////\n");
 		
-		HTMLImageElement htmlimageelement;
+		DKHTMLImageElement htmlimageelement;
 		printHTMLImageElementProperties(htmlimageelement);
 		return true;
 	}
 
-	static void printHTMLImageElementProperties(HTMLImageElement& htmlimageelement){
+	static void printHTMLImageElementProperties(DKHTMLImageElement& htmlimageelement){
 		DKDEBUGFUNC(htmlimageelement);
 		DKTODO();
 	}

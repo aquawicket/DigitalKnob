@@ -14,12 +14,12 @@ public:
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_HTMLBodyElement.h //////\n");
 		
-		HTMLBodyElement htmlbodyelement;
+		DKHTMLBodyElement htmlbodyelement;
 		printHTMLBodyElementProperties(htmlbodyelement);
 		return true;
 	}
 
-	static void printHTMLBodyElementProperties(HTMLBodyElement& htmlbodyelement){
+	static void printHTMLBodyElementProperties(DKHTMLBodyElement& htmlbodyelement){
 		DKDEBUGFUNC(htmlbodyelement);
 		DKTODO();
 	}
