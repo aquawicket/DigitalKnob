@@ -14,11 +14,14 @@ public:
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_Node.h //////\n");
 		
-		return DKTODO();
+		DKNode node;
+		printNodeProperties(node);
+		return true;
 	}
 	
 	static void printNodeProperties(DKNode& node){
 		DKDEBUGFUNC(node);
+		DKINFO("node.ELEMENT_NODE = "	+toString(node.ELEMENT_NODE)	+"\n");
 		DKTODO();
 	}
 
