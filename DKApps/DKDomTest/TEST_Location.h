@@ -14,7 +14,14 @@ public:
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_Location.h //////\n");
 		
-		return DKTODO();
+		DKLocation location;
+		printLocationProperties(location);
+		return true;
+	}
+	
+	static void printLocationProperties(DKLocation& location){
+		DKDEBUGFUNC(location);
+		DKTODO();
 	}
 };
 REGISTER_OBJECT(TEST_Location, true);

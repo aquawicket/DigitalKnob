@@ -14,9 +14,15 @@ public:
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_Element.h //////\n");
 
-		return DKTODO();
+		DKElement element;
+		printElementProperties(element);
+		return true;
 	}
-
+	
+	static void printElementProperties(DKElement& element){
+		DKDEBUGFUNC(element);
+		DKTODO();
+	}
 };
 REGISTER_OBJECT(TEST_Element, true);
 

@@ -25,7 +25,6 @@ public:
 	
 	static void printCompositionEventProperties(DKCompositionEvent& compositionevent){
 		DKDEBUGFUNC(compositionevent);
-		////// Instance properties //////
 		DKINFO("compositionevent.data = "		+toString(compositionevent.data)	+"\n");
 	}
 	

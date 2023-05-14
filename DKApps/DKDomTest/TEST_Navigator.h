@@ -13,10 +13,16 @@ public:
 	bool Init(){
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_Navigator.h //////\n");
-
-		return DKTODO();
+	
+		DKNavigator navigator;
+		printNavigatorProperties(navigator);
+		return true;
 	}
 
+	static void printNavigatorProperties(DKNavigator& navigator){
+		DKDEBUGFUNC(navigator);
+		DKTODO();
+	}
 };
 REGISTER_OBJECT(TEST_Navigator, true);
 

@@ -24,7 +24,6 @@ public:
 
 	static void printCustomEventProperties(DKCustomEvent& customevent) {
 		DKDEBUGFUNC(customevent);
-		////// Instance properties //////
 		DKINFO("customevent.detail = "	+toString(customevent.detail)	+"\n");
 	}
 	

@@ -12,9 +12,15 @@ public:
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_DKConsoleWindow.h ////// \n");
 		
-		return DKTODO();
+		DKConsoleWindow dkconsolewindow;
+		printDKConsoleWindowProperties(dkconsolewindow);
+		return true;
 	}
 
+	static void printDKConsoleWindowProperties(DKConsoleWindow& dkconsolewindow){
+		DKDEBUGFUNC(dkconsolewindow);
+		DKTODO();
+	}
 };
 REGISTER_OBJECT(TEST_DKConsoleWindow, true);
 

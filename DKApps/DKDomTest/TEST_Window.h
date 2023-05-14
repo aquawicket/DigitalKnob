@@ -4,7 +4,6 @@
 #ifndef TEST_Window_H
 #define TEST_Window_H
 
-//#include "DK/DK.h"
 #include "DKWindow/DKWindow.h"
 
 
@@ -15,7 +14,14 @@ public:
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_Window.h //////\n");
 		
-		return DKTODO();
+		DKWindow window;
+		printWindowProperties(window);
+		return true;
+	}
+	
+	static void printWindowProperties(DKWindow& window){
+		DKDEBUGFUNC(window);
+		DKTODO();
 	}
 
 };

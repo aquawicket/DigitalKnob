@@ -14,8 +14,8 @@ public:
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_Screen.h //////\n");
 		
-		//DKScreen screen();
-		//printScreenProperties(screen);
+		DKScreen screen;
+		printScreenProperties(screen);
 		return true;
 	}
 	

@@ -21,7 +21,23 @@ public:
 	
 	static void printNodeProperties(DKNode& node){
 		DKDEBUGFUNC(node);
-		DKINFO("node.ELEMENT_NODE = "	+toString(node.ELEMENT_NODE)	+"\n");
+		DKINFO("node.ELEMENT_NODE = "				+toString(node.ELEMENT_NODE)				+"\n");
+		DKINFO("node.ATTRIBUTE_NODE = "				+toString(node.ATTRIBUTE_NODE)				+"\n");
+		DKINFO("node.TEXT_NODE = "					+toString(node.TEXT_NODE)					+"\n");
+		DKINFO("node.CDATA_SECTION_NODE = "			+toString(node.CDATA_SECTION_NODE)			+"\n");
+		DKINFO("node.ENTITY_REFERENCE_NODE = "		+toString(node.ENTITY_REFERENCE_NODE)		+"\n");
+		DKINFO("node.ENTITY_NODE = "				+toString(node.ENTITY_NODE)					+"\n");
+		DKINFO("node.PROCESSING_INSTRUCTION_NODE = "+toString(node.PROCESSING_INSTRUCTION_NODE)	+"\n");
+		DKINFO("node.COMMENT_NODE = "				+toString(node.COMMENT_NODE)				+"\n");
+		DKINFO("node.DOCUMENT_NODE = "				+toString(node.DOCUMENT_NODE)				+"\n");
+		DKINFO("node.DOCUMENT_TYPE_NODE = "			+toString(node.DOCUMENT_TYPE_NODE)			+"\n");
+		DKINFO("node.DOCUMENT_FRAGMENT_NODE = "		+toString(node.DOCUMENT_FRAGMENT_NODE)		+"\n");
+		DKINFO("node.NOTATION_NODE = "				+toString(node.NOTATION_NODE)				+"\n");
+		//DKINFO("node.nodeType = "					+toString(node.nodeType)					+"\n");
+		//DKINFO("node.nodeName = "					+toString(node.nodeName)					+"\n");
+		//DKINFO("node.baseURI = "					+toString(node.baseURI)						+"\n");
+		//DKINFO("node.isConnected = "				+toString(node.isConnected)					+"\n");
+		//DKINFO("node.ownerDocument = "			+toString(node.ownerDocument)				+"\n");
 		DKTODO();
 	}
 

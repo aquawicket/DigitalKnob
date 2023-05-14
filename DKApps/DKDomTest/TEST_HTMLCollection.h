@@ -14,9 +14,15 @@ public:
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_HTMLCollection.h //////\n");
 		
-		return DKTODO();
+		DKHTMLCollection htmlcollection;
+		printHTMLCollectionProperties(htmlcollection);
+		return true;
 	}
 
+	static void printHTMLCollectionProperties(DKHTMLCollection& htmlcollection){
+		DKDEBUGFUNC(htmlcollection);
+		DKTODO();
+	}
 };
 REGISTER_OBJECT(TEST_HTMLCollection, true);
 

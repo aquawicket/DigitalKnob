@@ -28,17 +28,12 @@ public:
 		DKINFO("keyboardevent.ctrlKey = "		+toString(keyboardevent.ctrlKey)		+"\n");
 		DKINFO("keyboardevent.isComposing = "	+toString(keyboardevent.isComposing)	+"\n");
 		DKINFO("keyboardevent.key = "			+toString(keyboardevent.key)			+"\n");
-		//DKINFO("keyboardevent.locale = "		+toString(keyboardevent.locale)			+"\n");
 		DKINFO("keyboardevent.location = "		+toString(keyboardevent.location)		+"\n");
 		DKINFO("keyboardevent.metaKey = "		+toString(keyboardevent.metaKey)		+"\n");
 		DKINFO("keyboardevent.repeat = "		+toString(keyboardevent.repeat)			+"\n");
 		DKINFO("keyboardevent.shiftKey = "		+toString(keyboardevent.shiftKey)		+"\n");
-		////// Obsolete properties //////
-		//DKINFO("keyboardevent.char = "		+toString(keyboardevent._char)			+"\n");
 		DKINFO("keyboardevent.charCode = "		+toString(keyboardevent.charCode)		+"\n");
 		DKINFO("keyboardevent.keyCode = "		+toString(keyboardevent.keyCode)		+"\n");
-		//DKINFO("keyboardevent.keyIdentifier = "+toString(keyboardevent.keyIdentifier)	+"\n");
-		//DKINFO("keyboardevent.keyLocation = "	+toString(keyboardevent.keyLocation)	+"\n");
 		DKINFO("keyboardevent.which = "			+toString(keyboardevent.which)			+"\n");
 	}
 

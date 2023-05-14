@@ -23,7 +23,6 @@ public:
 	
 	static void printFocusEventProperties(DKFocusEvent& focusevent){
 		DKDEBUGFUNC(focusevent);
-		////// Instance properties //////
 		DKINFO("focusevent.relatedTarget = "+toString(focusevent.relatedTarget)	+"\n");
 	}
 	

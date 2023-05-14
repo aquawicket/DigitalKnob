@@ -14,9 +14,15 @@ public:
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_HTMLImageElement.h //////\n");
 		
-		return DKTODO();
+		HTMLImageElement htmlimageelement;
+		printHTMLImageElementProperties(htmlimageelement);
+		return true;
 	}
 
+	static void printHTMLImageElementProperties(HTMLImageElement& htmlimageelement){
+		DKDEBUGFUNC(htmlimageelement);
+		DKTODO();
+	}
 };
 REGISTER_OBJECT(TEST_HTMLImageElement, true);
 

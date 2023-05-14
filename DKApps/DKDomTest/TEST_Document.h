@@ -14,9 +14,15 @@ public:
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_Document.h //////\n");
 		
-		return DKTODO();
+		DKDocument document;
+		printDocumentProperties(document);
+		return true;
 	}
-
+	
+	static void printDocumentProperties(DKDocument& document){
+		DKDEBUGFUNC(document);
+		DKTODO();
+	}
 };
 REGISTER_OBJECT(TEST_Document, true);
 

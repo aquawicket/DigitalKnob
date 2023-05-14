@@ -14,7 +14,11 @@ public:
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_DragEvent.h //////\n");
 	
-		return DKTODO();
+		DKEventTarget myEventTarget;
+		myEventTarget.addEventListener("dragevent", &TEST_DragEvent::ondragevent);
+		DKDragEvent dragevent("dragevent", "");
+		myEventTarget.dispatchEvent(dragevent);
+		return true;
 	}
 	
 	static void printDragEventProperties(DKDragEvent& dragevent){

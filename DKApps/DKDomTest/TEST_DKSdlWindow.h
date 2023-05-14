@@ -12,9 +12,15 @@ public:
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_DKSdlWindow.h //////\n");
 		
-		return DKTODO();
+		DKSdlWindow dksdlwindow;
+		printDKSdlWindowProperties(dksdlwindow);
+		return true;
 	}
 
+	static void printDKSdlWindowProperties(DKSdlWindow& dksdlwindow){
+		DKDEBUGFUNC(dksdlwindow);
+		DKTODO();
+	}
 };
 REGISTER_OBJECT(TEST_DKSdlWindow, true);
 
