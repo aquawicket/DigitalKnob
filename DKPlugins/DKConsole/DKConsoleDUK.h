@@ -91,8 +91,8 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKINFO("CPP_DKConsoleDUK()\n");
 		DKConsole* _console = new DKConsole();
-		DKString eventTargetAddress = pointerToAddress(_console);
-		duk_push_string(ctx, eventTargetAddress.c_str());
+		DKString consoleAddress = pointerToAddress(_console);
+		duk_push_string(ctx, consoleAddress.c_str());
 		return true;
 	}
 	

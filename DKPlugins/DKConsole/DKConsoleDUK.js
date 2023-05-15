@@ -1,16 +1,6 @@
 // [IDL] https://console.spec.whatwg.org/#console-namespace
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Console
 
-/*
-const Console_HandleColor = function Console_HandleColor(data){
-	//TODO: handle coloring, (currently disabled)
-	if(data){
-		data = data.replace("%c ","")
-		data = data.replace("%c","")
-	}
-	return data;
-}
-*/
 
 //[Exposed=*]
 //namespace console { // but see namespace object requirements below
@@ -34,10 +24,7 @@ var Console = function Console(address) {
 	
 	//undefined error(any... data);
 	Console.prototype.error = function error(data) {
-		if(!data){
-			CPP_DKConsoleDUK_error("data invalid \n");
-			return;
-		}
+		/*
 		const err = new Error(data);
 		if (!err.stack) {
 			try {
@@ -48,7 +35,8 @@ var Console = function Console(address) {
 					return error("err.stack invalid"); // browser too old
 			}
 		}
-		CPP_DKConsoleDUK_error(err.stack);
+		*/
+		CPP_DKConsoleDUK_error(data);
     }
 	
 	//undefined info(any... data);
