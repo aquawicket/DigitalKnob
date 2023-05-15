@@ -19,9 +19,7 @@ var Console = function Console(address) {
 	//undefined assert(optional boolean condition = false, any... data);
     Console.prototype.assert = function assert(data) {
 		data = Console_HandleColor(data)
-        //if (assertion)
-        //    return;
-        CPP_DKConsoleDUK_assert(data + "\n");
+        CPP_DKConsoleDUK_assert(data);
     }
 	
 	//undefined clear();	
@@ -32,7 +30,7 @@ var Console = function Console(address) {
 	//undefined debug(any... data);
 	Console.prototype.debug = function debug(data) {
 		data = Console_HandleColor(data)
-        CPP_DKConsoleDUK_debug(data + "\n");
+        CPP_DKConsoleDUK_debug(data);
     }
 	
 	//undefined error(any... data);
@@ -52,19 +50,19 @@ var Console = function Console(address) {
 					return error("err.stack invalid"); // browser too old
 			}
 		}
-		CPP_DKConsoleDUK_error(err.stack+"\n");
+		CPP_DKConsoleDUK_error(err.stack);
     }
 	
 	//undefined info(any... data);
 	Console.prototype.info = function info(data) {
 		data = Console_HandleColor(data)
-        CPP_DKConsoleDUK_info(data + "\n");
+        CPP_DKConsoleDUK_info(data);
     }
 	
 	//undefined log(any... data);
 	Console.prototype.log = function log(data) {
 		data = Console_HandleColor(data)
-        CPP_DKConsoleDUK_log(data + "\n");
+        CPP_DKConsoleDUK_log(data);
     }
 	
 	//undefined table(optional any tabularData, optional sequence<DOMString> properties);
@@ -75,13 +73,13 @@ var Console = function Console(address) {
 	//undefined trace(any... data);
 	Console.prototype.trace = function trace(data) {
 		data = Console_HandleColor(data)
-		CPP_DKConsoleDUK_trace(data + "\n");
+		CPP_DKConsoleDUK_trace(data);
     }
 	
 	//undefined warn(any... data);
 	Console.prototype.warn = function warn(data) {
 		data = Console_HandleColor(data)
-        CPP_DKConsoleDUK_warn(data + "\n");
+        CPP_DKConsoleDUK_warn(data);
     }
 	
 	//undefined dir(optional any item, optional object? options);
@@ -109,13 +107,13 @@ var Console = function Console(address) {
 	//undefined group(any... data);
 	Console.prototype.group = function group(data) {
 		data = Console_HandleColor(data)
-        CPP_DKConsoleDUK_group(data + "\n");
+        CPP_DKConsoleDUK_group(data);
     }
 	
 	//undefined groupCollapsed(any... data);
 	Console.prototype.groupCollapsed = function groupCollapsed(data) {
 		data = Console_HandleColor(data)
-        CPP_DKConsoleDUK_groupCollapsed(data + "\n");
+        CPP_DKConsoleDUK_groupCollapsed(data);
     }
 	
 	//undefined groupEnd();

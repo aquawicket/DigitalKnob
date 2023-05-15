@@ -21,7 +21,7 @@ public:
 	//undefined assert(optional boolean condition = false, any... data);
 	static bool _assert(const DKString& data) {
 		DKDEBUGFUNC(data);
-		DKERROR(data);
+		DKERROR(data+"\n");
 		return true;
 	}
 
@@ -35,28 +35,28 @@ public:
 	//undefined debug(any... data);
 	static bool debug(const DKString& data) {
 		DKDEBUGFUNC(data);
-		DKDEBUG(data);
+		DKDEBUG(data+"\n");
 		return true;
 	}
 	
 	//undefined error(any... data);
 	static bool error(const DKString& data) {
 		DKDEBUGFUNC(data);
-		DKERROR(data);
+		DKERROR(data+"\n");
 		return true;
 	}
 	
 	//undefined info(any... data);
 	static bool info(const DKString& data) {
 		DKDEBUGFUNC(data);
-		DKINFO(data);
+		DKINFO(data+"\n");
 		return true;
 	}
 
 	//undefined log(any... data);
 	static bool log(const DKString& data) {
 		DKDEBUGFUNC(data);
-		DKINFO(data);
+		DKINFO(data+"\n");
 		return true;
 	}
 	
@@ -75,7 +75,7 @@ public:
 	//undefined warn(any... data);
 	static bool warn(const DKString& data) {
 		DKDEBUGFUNC(data);
-		DKWARN(data);
+		DKWARN(data+"\n");
 		return true;
 	}
 	
