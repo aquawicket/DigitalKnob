@@ -1,4 +1,4 @@
-// [IDL] https://console.spec.whatwg.org/
+// [IDL] https://console.spec.whatwg.org/#console-namespace
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Console
 #pragma once
 #ifndef DKConsole_H
@@ -6,7 +6,8 @@
 
 #include "DK/DK.h"
 
-
+//[Exposed=*]
+//namespace console { // but see namespace object requirements below
 class DKConsole
 {
 public:
@@ -16,51 +17,130 @@ public:
 		//eventTargetAddress = pointerToAddress(this);
 	}
 	
-	
-	////// Instance methods //////
-	// [console.assert()] https://developer.mozilla.org/en-US/docs/Web/API/console/assert
-	static bool _assert(DKString& string) {
-		DKDEBUGFUNC();
-		DKERROR(string);
+	// Logging
+	//undefined assert(optional boolean condition = false, any... data);
+	static bool _assert(const DKString& data) {
+		DKDEBUGFUNC(data);
+		DKERROR(data);
 		return true;
 	}
-	// [console.clear()] https://developer.mozilla.org/en-US/docs/Web/API/console/clear
+
+	//undefined clear();
 	static bool clear() {
 		DKDEBUGFUNC();
 		int rtnvalue = DKUtil::System("cls", rtnvalue);
 		return true;
 	}
-	// [console.count()] https://developer.mozilla.org/en-US/docs/Web/API/console/count
-	// [console.countReset()] https://developer.mozilla.org/en-US/docs/Web/API/console/countReset
-	// [console.debug()] https://developer.mozilla.org/en-US/docs/Web/API/console/debug
-	// [console.dir()] https://developer.mozilla.org/en-US/docs/Web/API/console/dir
-	// [console.dirxml()] https://developer.mozilla.org/en-US/docs/Web/API/console/dirxml
-	// [console.error()] https://developer.mozilla.org/en-US/docs/Web/API/console/error
-	// [console.exception()](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/console/exception
-	// [console.group()] https://developer.mozilla.org/en-US/docs/Web/API/console/group
-	// [console.groupCollapsed()] https://developer.mozilla.org/en-US/docs/Web/API/console/groupCollapsed
-	// [console.groupEnd()] https://developer.mozilla.org/en-US/docs/Web/API/console/groupEnd
-	// [console.info()] https://developer.mozilla.org/en-US/docs/Web/API/console/info
-	static bool info(DKString& string) {
-		DKDEBUGFUNC();
-		DKINFO(string);
+
+	//undefined debug(any... data);
+	static bool debug(const DKString& data) {
+		DKDEBUGFUNC(data);
+		DKDEBUG(data);
 		return true;
 	}
-	// [console.log()] https://developer.mozilla.org/en-US/docs/Web/API/console/log
-	static bool log(DKString& string) {
-		DKDEBUGFUNC();
-		DKINFO(string);
+	
+	//undefined error(any... data);
+	static bool error(const DKString& data) {
+		DKDEBUGFUNC(data);
+		DKERROR(data);
 		return true;
 	}
-	// [console.profile()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/console/profile
-	// [console.profileEnd()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/console/profileEnd
-	// [console.table()] https://developer.mozilla.org/en-US/docs/Web/API/console/table
-	// [console.time()] https://developer.mozilla.org/en-US/docs/Web/API/console/time
-	// [console.timeEnd()] https://developer.mozilla.org/en-US/docs/Web/API/console/timeEnd
-	// [console.timeLog()] https://developer.mozilla.org/en-US/docs/Web/API/console/timeLog
-	// [console.timeStamp()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/console/timeStamp
-	// [console.trace() https://developer.mozilla.org/en-US/docs/Web/API/console/trace
-	// [console.warn() https://developer.mozilla.org/en-US/docs/Web/API/console/warn
+	
+	//undefined info(any... data);
+	static bool info(const DKString& data) {
+		DKDEBUGFUNC(data);
+		DKINFO(data);
+		return true;
+	}
+
+	//undefined log(any... data);
+	static bool log(const DKString& data) {
+		DKDEBUGFUNC(data);
+		DKINFO(data);
+		return true;
+	}
+	
+	//undefined table(optional any tabularData, optional sequence<DOMString> properties);
+	static bool table() {
+		DKDEBUGFUNC();
+		return DKTODO();
+	}
+	
+	//undefined trace(any... data);
+	static bool trace(const DKString& data) {
+		DKDEBUGFUNC(data);
+		return DKTODO();
+	}
+	
+	//undefined warn(any... data);
+	static bool warn(const DKString& data) {
+		DKDEBUGFUNC(data);
+		DKWARN(data);
+		return true;
+	}
+	
+	//undefined dir(optional any item, optional object? options);
+	static bool dir() {
+		DKDEBUGFUNC();
+		return DKTODO();
+	}
+	
+	//undefined dirxml(any... data);
+	static bool dirxml(const DKString& data) {
+		DKDEBUGFUNC(data);
+		return DKTODO();
+	}
+	
+	// Counting
+	//undefined count(optional DOMString label = "default");
+	static bool count() {
+		DKDEBUGFUNC();
+		return DKTODO();
+	}
+	
+	//undefined countReset(optional DOMString label = "default");
+	static bool countReset() {
+		DKDEBUGFUNC();
+		return DKTODO();
+	}
+	
+	// Grouping
+	//undefined group(any... data);
+	static bool group(const DKString& data) {
+		DKDEBUGFUNC(data);
+		return DKTODO();
+	}
+	
+	//undefined groupCollapsed(any... data);
+	static bool groupCollapsed(const DKString& data) {
+		DKDEBUGFUNC(data);
+		return DKTODO();
+	}
+	
+	//undefined groupEnd();
+	static bool groupEnd() {
+		DKDEBUGFUNC();
+		return DKTODO();
+	}
+	
+	// Timing
+	//undefined time(optional DOMString label = "default");
+	static bool time() {
+		DKDEBUGFUNC();
+		return DKTODO();
+	}
+	
+	//undefined timeLog(optional DOMString label = "default", any... data);
+	static bool timeLog() {
+		DKDEBUGFUNC();
+		return DKTODO();
+	}
+	
+	//undefined timeEnd(optional DOMString label = "default");
+	static bool timeEnd() {
+		DKDEBUGFUNC();
+		return DKTODO();
+	}
 };
 
 
