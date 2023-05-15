@@ -1,59 +1,48 @@
-// [W3C] https://console.spec.whatwg.org/
+// [IDL] https://console.spec.whatwg.org/#console-namespace
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Console
 
 
-const Console_HandleColor = function Console_HandleColor(msg){
+const Console_HandleColor = function Console_HandleColor(data){
 	//TODO: handle coloring, (currently disabled)
-	if(msg){
-		msg = msg.replace("%c ","")
-		msg = msg.replace("%c","")
+	if(data){
+		data = data.replace("%c ","")
+		data = data.replace("%c","")
 	}
-	return msg;
+	return data;
 }
 
+//[Exposed=*]
+//namespace console { // but see namespace object requirements below
 var Console = function Console(address) {
 	
-	////// Instance methods //////
-	// [console.assert()] https://developer.mozilla.org/en-US/docs/Web/API/console/assert
-    Console.prototype.assert = function assert(msg) {
-		msg = Console_HandleColor(msg)
+	// Logging
+	//undefined assert(optional boolean condition = false, any... data);
+    Console.prototype.assert = function assert(data) {
+		data = Console_HandleColor(data)
         //if (assertion)
         //    return;
-        CPP_DKConsoleDUK_assert(msg + "\n");
+        CPP_DKConsoleDUK_assert(data + "\n");
     }
-	// [console.clear()] https://developer.mozilla.org/en-US/docs/Web/API/console/clear
+	
+	//undefined clear();	
     Console.prototype.clear = function clear() {
         CPP_DKConsoleDUK_clear();
     }
-	// [console.count()] https://developer.mozilla.org/en-US/docs/Web/API/console/count
-	Console.prototype.count = function count() {
-        //TODO
+	
+	//undefined debug(any... data);
+	Console.prototype.debug = function debug(data) {
+		data = Console_HandleColor(data)
+        CPP_DKConsoleDUK_debug(data + "\n");
     }
-	// [console.countReset()] https://developer.mozilla.org/en-US/docs/Web/API/console/countReset
-	Console.prototype.countReset = function countReset() {
-        //TODO
-    }
-	// [console.debug()] https://developer.mozilla.org/en-US/docs/Web/API/console/debug
-    Console.prototype.debug = function debug(msg) {
-		msg = Console_HandleColor(msg)
-        CPP_DKConsoleDUK_debug(msg + "\n");
-    }
-	// [console.dir()] https://developer.mozilla.org/en-US/docs/Web/API/console/dir
-	Console.prototype.dir = function dir() {
-        //TODO
-    }
-	// [console.dirxml()] https://developer.mozilla.org/en-US/docs/Web/API/console/dirxml
-	Console.prototype.dirxml = function dirxml() {
-        //TODO
-    }
-	// [console.error()] https://developer.mozilla.org/en-US/docs/Web/API/console/error
-    Console.prototype.error = function error(msg) {
-		msg = Console_HandleColor(msg)
-		if(!msg){
-			CPP_DKConsoleDUK_error("msg invalid \n");
+	
+	//undefined error(any... data);
+	Console.prototype.error = function error(data) {
+		data = Console_HandleColor(data)
+		if(!data){
+			CPP_DKConsoleDUK_error("data invalid \n");
 			return;
 		}
-		const err = new Error(msg);
+		const err = new Error(data);
 		if (!err.stack) {
 			try {
 				throw err; // old browsers need the Error thrown to fill the stack
@@ -65,74 +54,91 @@ var Console = function Console(address) {
 		}
 		CPP_DKConsoleDUK_error(err.stack+"\n");
     }
-	// [console.exception()](Non-standard)(Deprecated) "An alias for error()."
-    Console.prototype.exception = function exception(msg) {
-		msg = Console_HandleColor(msg)
-        CPP_DKConsoleDUK_exception(msg + "\n");
+	
+	//undefined info(any... data);
+	Console.prototype.info = function info(data) {
+		data = Console_HandleColor(data)
+        CPP_DKConsoleDUK_info(data + "\n");
     }
-	// [console.group()] https://developer.mozilla.org/en-US/docs/Web/API/console/group
-    Console.prototype.group = function group(msg) {
-		msg = Console_HandleColor(msg)
-        CPP_DKConsoleDUK_group(msg + "\n");
+	
+	//undefined log(any... data);
+	Console.prototype.log = function log(data) {
+		data = Console_HandleColor(data)
+        CPP_DKConsoleDUK_log(data + "\n");
     }
-	// [console.groupCollapsed()] https://developer.mozilla.org/en-US/docs/Web/API/console/groupCollapsed
-    Console.prototype.groupCollapsed = function groupCollapsed(msg) {
-		msg = Console_HandleColor(msg)
-        CPP_DKConsoleDUK_groupCollapsed(msg + "\n");
-    }
-	// [console.groupEnd()] https://developer.mozilla.org/en-US/docs/Web/API/console/groupEnd
-    Console.prototype.groupEnd = function groupEnd(msg) {
-		msg = Console_HandleColor(msg)
-        CPP_DKConsoleDUK_groupEnd(msg + "\n");
-    }
-	// [console.info()] https://developer.mozilla.org/en-US/docs/Web/API/console/info
-    Console.prototype.info = function info(msg) {
-		msg = Console_HandleColor(msg)
-        CPP_DKConsoleDUK_info(msg + "\n");
-    }
-	// [console.log()] https://developer.mozilla.org/en-US/docs/Web/API/console/log
-    Console.prototype.log = function log(msg) {
-		msg = Console_HandleColor(msg)
-        CPP_DKConsoleDUK_log(msg + "\n");
-    }
-	// [console.profile()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/console/profile
-	Console.prototype.profile = function profile() {
-        //TODO
-    }
-	// [console.profileEnd()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/console/profileEnd
-	Console.prototype.profileEnd = function profileEnd() {
-        //TODO
-    }
-	// [console.table()] https://developer.mozilla.org/en-US/docs/Web/API/console/table
+	
+	//undefined table(optional any tabularData, optional sequence<DOMString> properties);
 	Console.prototype.table = function table() {
         //TODO
     }
-	// [console.time()] https://developer.mozilla.org/en-US/docs/Web/API/console/time
+	
+	//undefined trace(any... data);
+	Console.prototype.trace = function trace(data) {
+		data = Console_HandleColor(data)
+		CPP_DKConsoleDUK_trace(data + "\n");
+    }
+	
+	//undefined warn(any... data);
+	Console.prototype.warn = function warn(data) {
+		data = Console_HandleColor(data)
+        CPP_DKConsoleDUK_warn(data + "\n");
+    }
+	
+	//undefined dir(optional any item, optional object? options);
+	Console.prototype.dir = function dir() {
+        //TODO
+    }
+	
+	//undefined dirxml(any... data);
+	Console.prototype.dirxml = function dirxml() {
+        //TODO
+    }
+	
+	// Counting
+	//undefined count(optional DOMString label = "default");
+	Console.prototype.count = function count() {
+        //TODO
+    }
+	
+	//undefined countReset(optional DOMString label = "default");
+	Console.prototype.countReset = function countReset() {
+        //TODO
+    }
+   
+	// Grouping
+	//undefined group(any... data);
+	Console.prototype.group = function group(data) {
+		data = Console_HandleColor(data)
+        CPP_DKConsoleDUK_group(data + "\n");
+    }
+	
+	//undefined groupCollapsed(any... data);
+	Console.prototype.groupCollapsed = function groupCollapsed(data) {
+		data = Console_HandleColor(data)
+        CPP_DKConsoleDUK_groupCollapsed(data + "\n");
+    }
+	
+	//undefined groupEnd();
+	Console.prototype.groupEnd = function groupEnd() {
+        CPP_DKConsoleDUK_groupEnd();
+    }
+	
+	// Timing
+	//undefined time(optional DOMString label = "default");
 	Console.prototype.time = function time() {
         //TODO
     }
-	// [console.timeEnd()] https://developer.mozilla.org/en-US/docs/Web/API/console/timeEnd
-	Console.prototype.timeEnd = function timeEnd() {
-        //TODO
-    }
-	// [console.timeLog()] https://developer.mozilla.org/en-US/docs/Web/API/console/timeLog
+	
+	//undefined timeLog(optional DOMString label = "default", any... data);
 	Console.prototype.timeLog = function timeLog() {
         //TODO
     }
-	// [console.timeStamp()](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/console/timeStamp
-	Console.prototype.timeStamp = function timeStamp() {
+	
+	//undefined timeEnd(optional DOMString label = "default");
+	Console.prototype.timeEnd = function timeEnd() {
         //TODO
     }
-	// [console.trace()] https://developer.mozilla.org/en-US/docs/Web/API/console/trace
-    Console.prototype.trace = function trace(msg) {
-		msg = Console_HandleColor(msg)
-		CPP_DKConsoleDUK_trace(msg + "\n");
-    }
-	// [console.warn()] https://developer.mozilla.org/en-US/docs/Web/API/console/warn
-    Console.prototype.warn = function warn(msg) {
-		msg = Console_HandleColor(msg)
-        CPP_DKConsoleDUK_warn(msg + "\n");
-    }
+	   
 	
 	////// toString //////
 	//NOTE: Chrome returns [object Object]
