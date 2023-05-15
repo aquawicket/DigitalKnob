@@ -171,28 +171,19 @@ public:
 	//undefined log(any... data);
 	static int log(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		/*
-		DKString data;
-		if (duk_is_string(ctx, 0))
-			data = duk_require_string(ctx, 0);
-		if (duk_is_boolean(ctx, 0))
-			data = toString((bool)duk_require_boolean(ctx, 0));
-		if (duk_is_number(ctx, 0))
-			data = toString(duk_require_int(ctx, 0));
-		DKConsole::log(data);
-		*/
-		if(duk_is_string(ctx, 0)){
-			const DKString data = duk_require_string(ctx, 0);
-			DKConsole::log(data);
-			//DKConsole::log(duk_require_string(ctx, 0));
-		}
-		if(duk_is_boolean(ctx, 0)){
-			//const bool data = (bool)duk_require_boolean(ctx, 0);
-			//DKConsole::log(data);
+		if(duk_is_string(ctx, 0))
+			DKConsole::log((DKString)duk_require_string(ctx, 0));
+		if(duk_is_boolean(ctx, 0))
 			DKConsole::log((bool)duk_require_boolean(ctx, 0));
-		}
 		if(duk_is_number(ctx, 0)){
-			DKConsole::log(duk_require_number(ctx, 0));
+			double _double = duk_require_number(ctx, 0);
+			DKINFO("_double = "+toString(_double)+"\n");
+			unsigned int _uint = duk_require_uint(ctx, 0);
+			DKINFO("_uint = "+toString(_uint)+"\n");
+			int _int = duk_require_int(ctx, 0);
+			DKINFO("_int = "+toString(_int)+"\n");
+			
+			DKConsole::log(_double);
 		}
 		return true;
 	}

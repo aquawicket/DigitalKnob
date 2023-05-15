@@ -21,6 +21,11 @@ console.info('console.info() test')
 console.log('console.log() test')
 console.log('abc'); 
 console.log(1);
+console.log(-1);
+console.log(1.0);
+console.log(-1.0);
+console.log(1.1);
+console.log(-1.1);
 console.log(true);
 console.log(null);
 console.log(undefined); 
