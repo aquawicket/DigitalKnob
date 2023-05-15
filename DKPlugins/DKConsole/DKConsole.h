@@ -38,11 +38,6 @@ public:
 		DKDEBUG(data+"\n");
 		return true;
 	}
-	/*
-	static bool debug(const int& data){
-		debug(toString(data));
-	}
-	*/
 	
 	//undefined error(any... data);
 	static bool error(const DKString& data) {
@@ -64,6 +59,9 @@ public:
 		DKINFO(data+"\n");
 		return true;
 	}
+	static bool log(const bool& data){		debug(toString(data));	}
+	static bool log(const int& data){		debug(toString(data));	}
+	static bool log(const double& data){	debug(toString(data));	}
 	
 	//undefined table(optional any tabularData, optional sequence<DOMString> properties);
 	static bool table() {
