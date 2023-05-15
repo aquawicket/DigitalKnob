@@ -59,9 +59,9 @@ public:
 		DKINFO(data+"\n");
 		return true;
 	}
-	static bool log(const bool& data){		debug(toString(data));	}
-	static bool log(const int& data){		debug(toString(data));	}
-	static bool log(const double& data){	debug(toString(data));	}
+	static bool log(const bool& data){		return log(toString(data));	}
+	static bool log(const int& data){		return log(toString(data));	}
+	static bool log(const double& data){	return log(toString(data));	}
 	
 	//undefined table(optional any tabularData, optional sequence<DOMString> properties);
 	static bool table() {
