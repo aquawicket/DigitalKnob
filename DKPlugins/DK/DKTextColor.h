@@ -56,6 +56,9 @@ WARNING_ENABLE
 
 	//Desired Example
 	// out << color(RED) << "hello world" << reset() << std::endl;
+#elif MAC
+	// TODO
+	// https://stackoverflow.com/a/33311700/688352
 #else
 	#define RESET		0  //"\033[0m"			// RESET
 	#define BLACK		30 //"\033[30m"			// Black

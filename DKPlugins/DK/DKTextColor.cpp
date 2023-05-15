@@ -78,17 +78,23 @@ bool DKTextColor::StoreColor(WORD& colorScheme){
 	colorScheme = consoleInfo.wAttributes; 
 	return true;
 }
+//#else
+	//https://stackoverflow.com/a/33311700/688352
+	// TODO
 #endif
-
 
 /* DKTextColor::RestoreStoredColor( &colorScheme )
 	Restores a color scheme from variable
 	colorSceme: <WORD&> Optional variable to restore the color from. If excluded, DKTextColor::storedColorScheme will be used
 */ 
 #if WIN
-bool DKTextColor::RestoreColor(WORD& colorScheme){
+//bool DKTextColor::RestoreColor(WORD& colorScheme){
+bool DKTextColor::RestoreColor(unsigned short& colorScheme){
 	GetConsoleHandle();
 	SetConsoleTextAttribute(hConsole, colorScheme);
 	return true;
 }
+//#else
+	//https://stackoverflow.com/a/33311700/688352
+	// TODO
 #endif
