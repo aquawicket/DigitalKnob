@@ -128,7 +128,7 @@ public:
 			string = toString(duk_require_boolean(ctx, 0));
 		if(duk_is_number(ctx, 0))
 			string = toString(duk_require_int(ctx, 0));
-		DKDEBUG(string);
+		DKConsole::debug(string);
 		return true;
 	}
 	
@@ -142,7 +142,7 @@ public:
 			string = toString(duk_require_boolean(ctx, 0));
 		if(duk_is_number(ctx, 0))
 			string = toString(duk_require_int(ctx, 0));
-		DKERROR(string);
+		DKConsole::error(string);
 		return true;
 	}
 	
@@ -177,6 +177,7 @@ public:
 	//undefined table(optional any tabularData, optional sequence<DOMString> properties);
 	static int table(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		//DKConsole::table(tabularData, properties);
 		return DKTODO();
 	}
 	
@@ -190,7 +191,7 @@ public:
 			string = toString(duk_require_boolean(ctx, 0));
 		if(duk_is_number(ctx, 0))
 			string = toString(duk_require_int(ctx, 0));
-		DKWARN(string);
+		DKConsole::trace(string);
 		return true;
 	}
 	
@@ -204,19 +205,21 @@ public:
 			string = toString(duk_require_boolean(ctx, 0));
 		if(duk_is_number(ctx, 0))
 			string = toString(duk_require_int(ctx, 0));
-		DKWARN(string);
+		DKConsole::warn(string);
 		return true;
 	}
 	
 	//undefined dir(optional any item, optional object? options);
 	static int dir(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		//DKConsole::dir(item, options);
 		return DKTODO();
 	}
 	
 	//undefined dirxml(any... data);
 	static int dirxml(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		//DKConsole::dirxml(data);
 		return DKTODO();
 	}
 	
@@ -224,12 +227,14 @@ public:
 	//undefined count(optional DOMString label = "default");
 	static int count(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		//DKConsole::count(label);
 		return DKTODO();
 	}
 	
 	//undefined countReset(optional DOMString label = "default");
 	static int countReset(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		//DKConsole::countReset(label);
 		return DKTODO();
 	}	
 	
@@ -244,7 +249,7 @@ public:
 			string = toString(duk_require_boolean(ctx, 0));
 		if(duk_is_number(ctx, 0))
 			string = toString(duk_require_int(ctx, 0));
-		DKINFO(string);
+		DKConsole::group(string);
 		return true;
 	}
 	
@@ -258,21 +263,14 @@ public:
 			string = toString(duk_require_boolean(ctx, 0));
 		if(duk_is_number(ctx, 0))
 			string = toString(duk_require_int(ctx, 0));
-		DKINFO(string);
+		DKConsole::groupCollapsed(string);
 		return true;
 	}
 	
 	//undefined groupEnd();
 	static int groupEnd(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString string;
-		if(duk_is_string(ctx, 0))
-			string = duk_require_string(ctx, 0);
-		if(duk_is_boolean(ctx, 0))
-			string = toString(duk_require_boolean(ctx, 0));
-		if(duk_is_number(ctx, 0))
-			string = toString(duk_require_int(ctx, 0));
-		DKINFO(string);
+		DKConsole::groupEnd();
 		return true;
 	}
 	
@@ -280,18 +278,21 @@ public:
 	//undefined time(optional DOMString label = "default");
 	static int time(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		//DKConsole::time(label);
 		return DKTODO();
 	}
 	
 	//undefined timeLog(optional DOMString label = "default", any... data);
 	static int timeLog(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		//DKConsole::timeLog(label, data);
 		return DKTODO();
 	}
 	
 	//undefined timeEnd(optional DOMString label = "default");
 	static int timeEnd(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		//DKConsole::timeEnd(label);
 		return DKTODO();
 	}
 };
