@@ -67,7 +67,7 @@
 #include "TEST_DKRmlDocument.h"
 
 // [DKRmlLocation]
-// #include "TEST_DKRmlLocation.h"	//FIXME: Static variables may be interfering across instances
+#include "TEST_DKRmlLocation.h"
 
 
 ///////////////////////////////////////
@@ -130,7 +130,7 @@ bool App::Init() {
 	
 	////// DigitalKnob //////
 	// [DKConsoleWindow]
-	DKClass::DKCreate("TEST_DKConsoleWindow");
+	//DKClass::DKCreate("TEST_DKConsoleWindow"); //FIXME
 
 	// [DKSdlWindow]
 	DKClass::DKCreate("TEST_DKSdlWindow");
