@@ -100,14 +100,14 @@ public:
 	//undefined assert(optional boolean condition = false, any... data);
 	static int _assert(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString string;
+		DKString data;
 		if(duk_is_string(ctx, 0))
-			string = duk_require_string(ctx, 0);
+			data = duk_require_string(ctx, 0);
 		if(duk_is_boolean(ctx, 0))
-			string = toString(duk_require_boolean(ctx, 0));
+			data = toString(duk_require_boolean(ctx, 0));
 		if(duk_is_number(ctx, 0))
-			string = toString(duk_require_int(ctx, 0));
-		DKConsole::_assert(string);
+			data = toString(duk_require_int(ctx, 0));
+		DKConsole::_assert(data);
 		return true;
 	}
 
@@ -121,56 +121,60 @@ public:
 	//undefined debug(any... data);
 	static int debug(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString string;
+		/*
+		DKString data;
 		if(duk_is_string(ctx, 0))
-			string = duk_require_string(ctx, 0);
+			data = duk_require_string(ctx, 0);
 		if(duk_is_boolean(ctx, 0))
-			string = toString(duk_require_boolean(ctx, 0));
+			data = toString(duk_require_boolean(ctx, 0));
 		if(duk_is_number(ctx, 0))
-			string = toString(duk_require_int(ctx, 0));
-		DKConsole::debug(string);
+			data = toString(duk_require_int(ctx, 0));
+		DKConsole::debug(data);
+		*/
+		if(duk_is_string(ctx, 0))
+			DKConsole::debug(data);
 		return true;
 	}
 	
 	//undefined error(any... data);
 	static int error(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString string;
+		DKString data;
 		if(duk_is_string(ctx, 0))
-			string = duk_require_string(ctx, 0);
+			data = duk_require_string(ctx, 0);
 		if(duk_is_boolean(ctx, 0))
-			string = toString(duk_require_boolean(ctx, 0));
+			data = toString(duk_require_boolean(ctx, 0));
 		if(duk_is_number(ctx, 0))
-			string = toString(duk_require_int(ctx, 0));
-		DKConsole::error(string);
+			data = toString(duk_require_int(ctx, 0));
+		DKConsole::error(data);
 		return true;
 	}
 	
 	//undefined info(any... data);
 	static int info(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString string;
+		DKString data;
 		if(duk_is_string(ctx, 0))
-			string = duk_require_string(ctx, 0);
+			data = duk_require_string(ctx, 0);
 		if(duk_is_boolean(ctx, 0))
-			string = toString(duk_require_boolean(ctx, 0));
+			data = toString(duk_require_boolean(ctx, 0));
 		if(duk_is_number(ctx, 0))
-			string = toString(duk_require_int(ctx, 0));
-		DKConsole::info(string);
+			data = toString(duk_require_int(ctx, 0));
+		DKConsole::info(data);
 		return true;
 	}
 	
 	//undefined log(any... data);
 	static int log(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString string;
+		DKString data;
 		if (duk_is_string(ctx, 0))
-			string = duk_require_string(ctx, 0);
+			data = duk_require_string(ctx, 0);
 		if (duk_is_boolean(ctx, 0))
-			string = toString(duk_require_boolean(ctx, 0));
+			data = toString(duk_require_boolean(ctx, 0));
 		if (duk_is_number(ctx, 0))
-			string = toString(duk_require_int(ctx, 0));
-		DKConsole::log(string);
+			data = toString(duk_require_int(ctx, 0));
+		DKConsole::log(data);
 		return true;
 	}
 	
@@ -184,28 +188,28 @@ public:
 	//undefined trace(any... data);
 	static int trace(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString string;
+		DKString data;
 		if(duk_is_string(ctx, 0))
-			string = duk_require_string(ctx, 0);
+			data = duk_require_string(ctx, 0);
 		if(duk_is_boolean(ctx, 0))
-			string = toString(duk_require_boolean(ctx, 0));
+			data = toString(duk_require_boolean(ctx, 0));
 		if(duk_is_number(ctx, 0))
-			string = toString(duk_require_int(ctx, 0));
-		DKConsole::trace(string);
+			data = toString(duk_require_int(ctx, 0));
+		DKConsole::trace(data);
 		return true;
 	}
 	
 	//undefined warn(any... data);
 	static int warn(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString string;
+		DKString data;
 		if(duk_is_string(ctx, 0))
-			string = duk_require_string(ctx, 0);
+			data = duk_require_string(ctx, 0);
 		if(duk_is_boolean(ctx, 0))
-			string = toString(duk_require_boolean(ctx, 0));
+			data = toString(duk_require_boolean(ctx, 0));
 		if(duk_is_number(ctx, 0))
-			string = toString(duk_require_int(ctx, 0));
-		DKConsole::warn(string);
+			data = toString(duk_require_int(ctx, 0));
+		DKConsole::warn(data);
 		return true;
 	}
 	
@@ -242,28 +246,28 @@ public:
 	//undefined group(any... data);
 	static int group(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString string;
+		DKString data;
 		if(duk_is_string(ctx, 0))
-			string = duk_require_string(ctx, 0);
+			data = duk_require_string(ctx, 0);
 		if(duk_is_boolean(ctx, 0))
-			string = toString(duk_require_boolean(ctx, 0));
+			data = toString(duk_require_boolean(ctx, 0));
 		if(duk_is_number(ctx, 0))
-			string = toString(duk_require_int(ctx, 0));
-		DKConsole::group(string);
+			data = toString(duk_require_int(ctx, 0));
+		DKConsole::group(data);
 		return true;
 	}
 	
 	//undefined groupCollapsed(any... data);
 	static int groupCollapsed(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString string;
+		DKString data;
 		if(duk_is_string(ctx, 0))
-			string = duk_require_string(ctx, 0);
+			data = duk_require_string(ctx, 0);
 		if(duk_is_boolean(ctx, 0))
-			string = toString(duk_require_boolean(ctx, 0));
+			data = toString(duk_require_boolean(ctx, 0));
 		if(duk_is_number(ctx, 0))
-			string = toString(duk_require_int(ctx, 0));
-		DKConsole::groupCollapsed(string);
+			data = toString(duk_require_int(ctx, 0));
+		DKConsole::groupCollapsed(data);
 		return true;
 	}
 	

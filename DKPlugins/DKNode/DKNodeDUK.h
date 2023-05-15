@@ -20,17 +20,40 @@ public:
 		DKDuktape::AttachFunction("CPP_DKNodeDUK", DKNodeDUK::constructor);
 		
 		// const unsigned short ELEMENT_NODE = 1;
+		DKDuktape::AttachFunction("CPP_DKNodeDUK_ELEMENT_NODE", DKNodeDUK::ELEMENT_NODE);
+		
 		// const unsigned short ATTRIBUTE_NODE = 2;
+		DKDuktape::AttachFunction("CPP_DKNodeDUK_ATTRIBUTE_NODE", DKNodeDUK::ATTRIBUTE_NODE);
+		
 		// const unsigned short TEXT_NODE = 3;
+		DKDuktape::AttachFunction("CPP_DKNodeDUK_TEXT_NODE", DKNodeDUK::TEXT_NODE);
+		
 		// const unsigned short CDATA_SECTION_NODE = 4;
+		DKDuktape::AttachFunction("CPP_DKNodeDUK_CDATA_SECTION_NODE", DKNodeDUK::CDATA_SECTION_NODE);
+		
 		// const unsigned short ENTITY_REFERENCE_NODE = 5; // legacy
+		DKDuktape::AttachFunction("CPP_DKNodeDUK_ENTITY_REFERENCE_NODE", DKNodeDUK::ENTITY_REFERENCE_NODE);
+		
 		// const unsigned short ENTITY_NODE = 6; // legacy
+		DKDuktape::AttachFunction("CPP_DKNodeDUK_ENTITY_NODE", DKNodeDUK::ENTITY_NODE);
+		
 		// const unsigned short PROCESSING_INSTRUCTION_NODE = 7;
+		DKDuktape::AttachFunction("CPP_DKNodeDUK_PROCESSING_INSTRUCTION_NODE", DKNodeDUK::PROCESSING_INSTRUCTION_NODE);
+		
 		// const unsigned short COMMENT_NODE = 8;
+		DKDuktape::AttachFunction("CPP_DKNodeDUK_COMMENT_NODE", DKNodeDUK::COMMENT_NODE);
+		
 		// const unsigned short DOCUMENT_NODE = 9;
+		DKDuktape::AttachFunction("CPP_DKNodeDUK_DOCUMENT_NODE", DKNodeDUK::DOCUMENT_NODE);
+		
 		// const unsigned short DOCUMENT_TYPE_NODE = 10;
+		DKDuktape::AttachFunction("CPP_DKNodeDUK_DOCUMENT_TYPE_NODE", DKNodeDUK::DOCUMENT_TYPE_NODE);
+		
 		// const unsigned short DOCUMENT_FRAGMENT_NODE = 11;
+		DKDuktape::AttachFunction("CPP_DKNodeDUK_DOCUMENT_FRAGMENT_NODE", DKNodeDUK::DOCUMENT_FRAGMENT_NODE);
+		
 		// const unsigned short NOTATION_NODE = 12; // legacy
+		DKDuktape::AttachFunction("CPP_DKNodeDUK_NOTATION_NODE", DKNodeDUK::NOTATION_NODE);
 	
 		// readonly attribute unsigned short nodeType;
 		DKDuktape::AttachFunction("CPP_DKNodeDUK_nodeType", DKNodeDUK::nodeType);
@@ -93,11 +116,22 @@ public:
 		DKDuktape::AttachFunction("CPP_DKNodeDUK_isSameNode", DKNodeDUK::isSameNode);
 		
 		// const unsigned short DOCUMENT_POSITION_DISCONNECTED = 0x01;
+		DKDuktape::AttachFunction("CPP_DKNodeDUK_DOCUMENT_POSITION_DISCONNECTED", DKNodeDUK::DOCUMENT_POSITION_DISCONNECTED);
+		
 		// const unsigned short DOCUMENT_POSITION_PRECEDING = 0x02;
+		DKDuktape::AttachFunction("CPP_DKNodeDUK_DOCUMENT_POSITION_PRECEDING", DKNodeDUK::DOCUMENT_POSITION_PRECEDING);
+		
 		// const unsigned short DOCUMENT_POSITION_FOLLOWING = 0x04;
+		DKDuktape::AttachFunction("CPP_DKNodeDUK_DOCUMENT_POSITION_FOLLOWING", DKNodeDUK::DOCUMENT_POSITION_FOLLOWING);
+		
 		// const unsigned short DOCUMENT_POSITION_CONTAINS = 0x08;
+		DKDuktape::AttachFunction("CPP_DKNodeDUK_DOCUMENT_POSITION_CONTAINS", DKNodeDUK::DOCUMENT_POSITION_CONTAINS);
+		
 		// const unsigned short DOCUMENT_POSITION_CONTAINED_BY = 0x10;
+		DKDuktape::AttachFunction("CPP_DKNodeDUK_DOCUMENT_POSITION_CONTAINED_BY", DKNodeDUK::DOCUMENT_POSITION_CONTAINED_BY);
+		
 		// const unsigned short DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC = 0x20;
+		DKDuktape::AttachFunction("CPP_DKNodeDUK_DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC", DKNodeDUK::DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC);
 	
 		// unsigned short compareDocumentPosition(Node other);
 		DKDuktape::AttachFunction("CPP_DKNodeDUK_compareDocumentPosition", DKNodeDUK::compareDocumentPosition);
@@ -173,17 +207,88 @@ public:
 	}
 	
 	// const unsigned short ELEMENT_NODE = 1;
+	static int ELEMENT_NODE(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		dukglue_push(ctx, eventTarget(ctx)->ELEMENT_NODE);
+		return true;
+	}
+	
 	// const unsigned short ATTRIBUTE_NODE = 2;
+	static int ATTRIBUTE_NODE(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		dukglue_push(ctx, eventTarget(ctx)->ATTRIBUTE_NODE);
+		return true;
+	}
+	
 	// const unsigned short TEXT_NODE = 3;
+	static int TEXT_NODE(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		dukglue_push(ctx, eventTarget(ctx)->TEXT_NODE);
+		return true;
+	}
+	
 	// const unsigned short CDATA_SECTION_NODE = 4;
+	static int CDATA_SECTION_NODE(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		dukglue_push(ctx, eventTarget(ctx)->CDATA_SECTION_NODE);
+		return true;
+	}
+	
 	// const unsigned short ENTITY_REFERENCE_NODE = 5; // legacy
+	static int ENTITY_REFERENCE_NODE(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		dukglue_push(ctx, eventTarget(ctx)->ENTITY_REFERENCE_NODE);
+		return true;
+	}
+	
 	// const unsigned short ENTITY_NODE = 6; // legacy
+	static int ENTITY_NODE(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		dukglue_push(ctx, eventTarget(ctx)->ENTITY_NODE);
+		return true;
+	}
+	
 	// const unsigned short PROCESSING_INSTRUCTION_NODE = 7;
+	static int PROCESSING_INSTRUCTION_NODE(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		dukglue_push(ctx, eventTarget(ctx)->PROCESSING_INSTRUCTION_NODE);
+		return true;
+	}
+	
 	// const unsigned short COMMENT_NODE = 8;
+	static int COMMENT_NODE(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		dukglue_push(ctx, eventTarget(ctx)->COMMENT_NODE);
+		return true;
+	}
+	
 	// const unsigned short DOCUMENT_NODE = 9;
+	static int DOCUMENT_NODE(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		dukglue_push(ctx, eventTarget(ctx)->DOCUMENT_NODE);
+		return true;
+	}
+	
 	// const unsigned short DOCUMENT_TYPE_NODE = 10;
+	static int DOCUMENT_TYPE_NODE(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		dukglue_push(ctx, eventTarget(ctx)->DOCUMENT_TYPE_NODE);
+		return true;
+	}
+	
 	// const unsigned short DOCUMENT_FRAGMENT_NODE = 11;
+	static int DOCUMENT_FRAGMENT_NODE(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		dukglue_push(ctx, eventTarget(ctx)->DOCUMENT_FRAGMENT_NODE);
+		return true;
+	}
+	
 	// const unsigned short NOTATION_NODE = 12; // legacy
+	static int NOTATION_NODE(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		dukglue_push(ctx, eventTarget(ctx)->NOTATION_NODE);
+		return true;
+	}
 	
 	// readonly attribute unsigned short nodeType;
 	static int nodeType(duk_context* ctx){
@@ -388,11 +493,46 @@ public:
 	}
 	
 	// const unsigned short DOCUMENT_POSITION_DISCONNECTED = 0x01;
+	static int DOCUMENT_POSITION_DISCONNECTED(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		dukglue_push(ctx, eventTarget(ctx)->DOCUMENT_POSITION_DISCONNECTED);
+		return true;
+	}
+	
 	// const unsigned short DOCUMENT_POSITION_PRECEDING = 0x02;
+	static int DOCUMENT_POSITION_PRECEDING(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		dukglue_push(ctx, eventTarget(ctx)->DOCUMENT_POSITION_PRECEDING);
+		return true;
+	}
+	
 	// const unsigned short DOCUMENT_POSITION_FOLLOWING = 0x04;
+	static int DOCUMENT_POSITION_FOLLOWING(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		dukglue_push(ctx, eventTarget(ctx)->DOCUMENT_POSITION_FOLLOWING);
+		return true;
+	}
+	
 	// const unsigned short DOCUMENT_POSITION_CONTAINS = 0x08;
+	static int DOCUMENT_POSITION_CONTAINS(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		dukglue_push(ctx, eventTarget(ctx)->DOCUMENT_POSITION_CONTAINS);
+		return true;
+	}
+	
 	// const unsigned short DOCUMENT_POSITION_CONTAINED_BY = 0x10;
+	static int DOCUMENT_POSITION_CONTAINED_BY(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		dukglue_push(ctx, eventTarget(ctx)->DOCUMENT_POSITION_CONTAINED_BY);
+		return true;
+	}
+	
 	// const unsigned short DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC = 0x20;
+	static int DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		dukglue_push(ctx, eventTarget(ctx)->DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC);
+		return true;
+	}
 	
 	// unsigned short compareDocumentPosition(Node other);
 	static int compareDocumentPosition(duk_context* ctx){

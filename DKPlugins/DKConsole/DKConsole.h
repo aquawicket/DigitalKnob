@@ -38,6 +38,11 @@ public:
 		DKDEBUG(data+"\n");
 		return true;
 	}
+	/*
+	static bool debug(const int& data){
+		debug(toString(data));
+	}
+	*/
 	
 	//undefined error(any... data);
 	static bool error(const DKString& data) {
