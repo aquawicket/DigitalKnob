@@ -34,7 +34,7 @@ public:
 		DKINFO("screen.width() = "		+toString(screen.width())		+"\n");
 		
 		// readonly attribute long height;
-		DKINFO("screen.height() = "		+toString(screen.height())		+"\n");
+		//DKINFO("screen.height() = "		+toString(screen.height())		+"\n");
 		
 		// readonly attribute unsigned long colorDepth;
 		//DKINFO("screen.colorDepth = "	+toString(screen.colorDepth)	+"\n");

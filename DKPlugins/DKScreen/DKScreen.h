@@ -27,10 +27,11 @@ public:
 	
 	// readonly attribute long width;
 	//virtual bool width(int&, bool) { return false; }
-	virtual int width(const int& = 0) { return 0; }
+	virtual int width() { return 0; }
+	virtual int width(const int&) { return 0; }
 	
 	// readonly attribute long height;
-	virtual int height(const int& = 0) { return 0; }
+	virtual bool height(int&, bool) { return false; }
 	
 	// readonly attribute unsigned long colorDepth;
 	//virtual bool colorDepth(int&, bool) { return false; }

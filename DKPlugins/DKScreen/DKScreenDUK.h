@@ -27,7 +27,7 @@ public:
 		DKDuktape::AttachFunction("CPP_DKScreenDUK_width", 			DKScreenDUK::width);
 		
 		// readonly attribute long height;
-		DKDuktape::AttachFunction("CPP_DKScreenDUK_height", 		DKScreenDUK::height);
+		//DKDuktape::AttachFunction("CPP_DKScreenDUK_height", 		DKScreenDUK::height);
 		
 		// readonly attribute unsigned long colorDepth;
 		//DKDuktape::AttachFunction("CPP_DKScreenDUK_colorDepth", 	DKScreenDUK::colorDepth);
@@ -119,7 +119,8 @@ public:
 		dukglue_push(ctx, _width);
 		return true;
 	}
-		
+	
+	/*
 	// readonly attribute long height;
 	static int height(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -133,6 +134,7 @@ public:
 		dukglue_push(ctx, _height);
 		return true;
 	}
+	*/
 	
 	/////////////////////////////////////////////////////////////////////////////
 	

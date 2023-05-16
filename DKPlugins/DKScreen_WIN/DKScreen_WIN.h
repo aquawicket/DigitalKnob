@@ -32,16 +32,22 @@ public:
 	*/
 	
 	// readonly attribute long width;
-	virtual int width(int&, bool) {
+	virtual int width() { 
+		DKTODO();
+		return 0; 
+	}
+	virtual int width(const int& _width) {
 		DKTODO();
 		return 0; 
 	}
 	
+	/*
 	// readonly attribute long height;
 	virtual bool height(int&, bool) { 
 		DKTODO();
 		return 0;
 	}
+	*/
 	
 	/*
 	// readonly attribute unsigned long colorDepth;
