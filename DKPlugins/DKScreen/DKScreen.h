@@ -36,7 +36,9 @@ public:
 	
 	// readonly attribute unsigned long pixelDepth;
 	virtual bool pixelDepth(int&, bool) { return false; }
-};
+	
 //};
+};
+
 
 #endif //DKScreen_H
