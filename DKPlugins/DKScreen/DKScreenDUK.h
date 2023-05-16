@@ -103,6 +103,9 @@ public:
 	}
 	*/
 	
+	////////////////////////////// DEBUG ///////////////////////////////////
+	// Practicing getters / setters
+	
 	// readonly attribute long width;
 	static int width(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -113,11 +116,6 @@ public:
 		else{
 			_width = eventTarget(ctx)->width();
 		}
-		
-		/*
-		if(!eventTarget(ctx)->width(_width, duk_is_valid_index(ctx, 1)))
-			return false;
-		*/
 		dukglue_push(ctx, _width);
 		return true;
 	}
@@ -131,6 +129,8 @@ public:
 		dukglue_push(ctx, _height);
 		return true;
 	}
+	
+	/////////////////////////////////////////////////////////////////////////////
 	
 	/*
 	// readonly attribute unsigned long colorDepth;
