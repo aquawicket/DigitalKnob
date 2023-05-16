@@ -43,37 +43,67 @@ public:
 	virtual bool slot(DOMString&, bool) { return false; }
 	
 	// boolean hasAttributes();
-	// TODO
+	virtual bool hasAttributes(bool& _hasAttributes){
+		DKDEBUGFUNC(_hasAttributes);
+		return DKTODO();
+	}
 	
 	// [SameObject] readonly attribute NamedNodeMap attributes;
-	// TODO
+	virtual bool attributes(DKString&, bool) { return false; }
 	
 	// sequence<DOMString> getAttributeNames();
-	// TODO
+	virtual bool getAttributeNames(DKString& _getAttributeNames){
+		DKDEBUGFUNC(_getAttributeNames);
+		return DKTODO();
+	}
 	
 	// DOMString? getAttribute(DOMString qualifiedName);
-	// TODO
+	virtual bool getAttribute(DOMString& _qualifiedName, DOMString& _getAttribute){
+		DKDEBUGFUNC(_qualifiedName, _getAttribute);
+		return DKTODO();
+	}
 	
 	// DOMString? getAttributeNS(DOMString? namespace, DOMString localName);
-	// TODO
+	virtual bool getAttribute(DOMString& _namespace, DOMString& _localName, DOMString& _getAttributeNS){
+		DKDEBUGFUNC(_namespace, _localName, _getAttributeNS);
+		return DKTODO();
+	}
 	
 	// [CEReactions] undefined setAttribute(DOMString qualifiedName, DOMString value);
-	// TODO
+	virtual bool setAttribute(DOMString& _qualifiedName, DOMString& _value){
+		DKDEBUGFUNC(_qualifiedName, _value);
+		return DKTODO();
+	}
 	
 	// [CEReactions] undefined setAttributeNS(DOMString? namespace, DOMString qualifiedName, DOMString value);
-	// TODO
+	virtual bool setAttributeNS(DOMString& _namespace, DOMString& _qualifiedName, DOMString& _value){
+		DKDEBUGFUNC(_namespace, _qualifiedName, _value);
+		return DKTODO();
+	}
 	
 	// [CEReactions] undefined removeAttribute(DOMString qualifiedName);
-	// TODO
+	virtual bool removeAttribute(DOMString& _qualifiedName){
+		DKDEBUGFUNC(_qualifiedName);
+		return DKTODO();
+	}
 	
 	// [CEReactions] undefined removeAttributeNS(DOMString? namespace, DOMString localName);
-	// TODO
+	virtual bool removeAttributeNS(DOMString& _namespace, DOMString& _localName){
+		DKDEBUGFUNC(_namespace, _localName);
+		return DKTODO();
+	}
 	
 	// [CEReactions] boolean toggleAttribute(DOMString qualifiedName, optional boolean force);
-	// TODO
+	virtual bool toggleAttribute(DOMString& _qualifiedName, bool& _force, bool& _toggleAttribute){
+		DKDEBUGFUNC(_qualifiedName, _force, _toggleAttribute);
+		return DKTODO();
+	}
 	
 	// boolean hasAttribute(DOMString qualifiedName);
-	// TODO
+	virtual bool hasAttribute(DOMString& _qualifiedName, bool& _hasAttribute){
+		DKDEBUGFUNC(_qualifiedName, _hasAttribute);
+		return DKTODO();
+	}
 	
 	// boolean hasAttributeNS(DOMString? namespace, DOMString localName);
 	// TODO
