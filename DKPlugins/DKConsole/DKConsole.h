@@ -24,6 +24,10 @@ public:
 		DKERROR(data+"\n");
 		return true;
 	}
+	static bool _assert(const char* data){		return _assert(toString(data)); }
+	static bool _assert(const bool& data){		return _assert(toString(data)); }
+	static bool _assert(const int& data){		return _assert(toString(data)); }
+	static bool _assert(const double& data){	return _assert(toString(data)); }
 
 	//undefined clear();
 	static bool clear() {
@@ -38,6 +42,10 @@ public:
 		DKDEBUG(data+"\n");
 		return true;
 	}
+	static bool debug(const char* data){	return debug(toString(data)); }
+	static bool debug(const bool& data){	return debug(toString(data)); }
+	static bool debug(const int& data){		return debug(toString(data)); }
+	static bool debug(const double& data){	return debug(toString(data)); }
 	
 	//undefined error(any... data);
 	static bool error(const DKString& data) {
@@ -45,6 +53,10 @@ public:
 		DKERROR(data+"\n");
 		return true;
 	}
+	static bool error(const char* data){	return error(toString(data)); }
+	static bool error(const bool& data){	return error(toString(data)); }
+	static bool error(const int& data){		return error(toString(data)); }
+	static bool error(const double& data){	return error(toString(data)); }
 	
 	//undefined info(any... data);
 	static bool info(const DKString& data) {
@@ -52,6 +64,10 @@ public:
 		DKINFO(data+"\n");
 		return true;
 	}
+	static bool info(const char* data){		return info(toString(data)); }
+	static bool info(const bool& data){		return info(toString(data)); }
+	static bool info(const int& data){		return info(toString(data)); }
+	static bool info(const double& data){	return info(toString(data)); }
 
 	//undefined log(any... data);
 	static bool log(const DKString& data) {
@@ -75,6 +91,10 @@ public:
 		DKDEBUGFUNC(data);
 		return DKTODO();
 	}
+	static bool trace(const char* data){	return trace(toString(data)); }
+	static bool trace(const bool& data){	return trace(toString(data)); }
+	static bool trace(const int& data){		return trace(toString(data)); }
+	static bool trace(const double& data){	return trace(toString(data)); }
 	
 	//undefined warn(any... data);
 	static bool warn(const DKString& data) {
@@ -82,6 +102,10 @@ public:
 		DKWARN(data+"\n");
 		return true;
 	}
+	static bool warn(const char* data){		return warn(toString(data)); }
+	static bool warn(const bool& data){		return warn(toString(data)); }
+	static bool warn(const int& data){		return warn(toString(data)); }
+	static bool warn(const double& data){	return warn(toString(data)); }
 	
 	//undefined dir(optional any item, optional object? options);
 	static bool dir() {
@@ -114,12 +138,20 @@ public:
 		DKDEBUGFUNC(data);
 		return DKTODO();
 	}
+	static bool group(const char* data){	return group(toString(data)); }
+	static bool group(const bool& data){	return group(toString(data)); }
+	static bool group(const int& data){		return group(toString(data)); }
+	static bool group(const double& data){	return group(toString(data)); }
 	
 	//undefined groupCollapsed(any... data);
 	static bool groupCollapsed(const DKString& data) {
 		DKDEBUGFUNC(data);
 		return DKTODO();
 	}
+	static bool groupCollapsed(const char* data){	return groupCollapsed(toString(data)); }
+	static bool groupCollapsed(const bool& data){	return groupCollapsed(toString(data)); }
+	static bool groupCollapsed(const int& data){	return groupCollapsed(toString(data)); }
+	static bool groupCollapsed(const double& data){	return groupCollapsed(toString(data)); }
 	
 	//undefined groupEnd();
 	static bool groupEnd() {
