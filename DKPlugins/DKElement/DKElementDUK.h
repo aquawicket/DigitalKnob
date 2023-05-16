@@ -41,10 +41,10 @@ public:
 		//[CEReactions, Unscopable] attribute DOMString slot;
 		DKDuktape::AttachFunction("CPP_DKElementDUK_slot", DKElementDUK::slot);
 		
-		/*
 		// boolean hasAttributes();
 		DKDuktape::AttachFunction("CPP_DKElementDUK_hasAttributes", DKElementDUK::hasAttributes);
 		
+		/*		
 		// [SameObject] readonly attribute NamedNodeMap attributes;
 		DKDuktape::AttachFunction("CPP_DKElementDUK_attributes", DKElementDUK::attributes);
 		
@@ -249,7 +249,20 @@ public:
 		return true;
 	}
 	
+	// boolean hasAttributes();
+	static int hasAttributes(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		bool _hasAttributes;
+		if(!eventTarget(ctx)->hasAttributes(_hasAttributes))
+			return false;
+		dukglue_push(ctx, _hasAttributes);	
+		return true;
+	}
+	
+
 	// TODO
+	
+	
 	
 };
 REGISTER_OBJECT(DKElementDUK, true)
