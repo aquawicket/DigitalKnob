@@ -106,7 +106,10 @@ public:
 	}
 	
 	// boolean hasAttributeNS(DOMString? namespace, DOMString localName);
-	// TODO
+	virtual bool hasAttributeNS(DOMString& _namespace, DOMString& _localName, bool& _hasAttributeNS){
+		DKDEBUGFUNC(_namespace, _localName, _hasAttributeNS);
+		return DKTODO();
+	}
 	
 	// Attr? getAttributeNode(DOMString qualifiedName);
 	// TODO
