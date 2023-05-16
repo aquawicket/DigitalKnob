@@ -85,7 +85,7 @@ public:
 	// readonly attribute long availWidth;
 	static int availWidth(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		int _availWidth = GetUint(ctx);
+		int _availWidth = GetInt(ctx);
 		if(!eventTarget(ctx)->availWidth(_availWidth, duk_is_valid_index(ctx, 1)))
 			return false;
 		dukglue_push(ctx, _availWidth);
@@ -95,7 +95,7 @@ public:
 	// readonly attribute long availHeight;
 	static int availHeight(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		int _availHeight = GetUint(ctx);
+		int _availHeight = GetInt(ctx);
 		if(!eventTarget(ctx)->availHeight(_availHeight, duk_is_valid_index(ctx, 1)))
 			return false;
 		dukglue_push(ctx, _availHeight);
@@ -123,9 +123,13 @@ public:
 	// readonly attribute long height;
 	static int height(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		int _height = GetUint(ctx);
-		if(!eventTarget(ctx)->height(_height, duk_is_valid_index(ctx, 1)))
-			return false;
+		int _height = GetInt(ctx);
+		if(duk_is_valid_index(ctx, 1)){
+			eventTarget(ctx)->height(_height);
+		}
+		else{
+			_height = eventTarget(ctx)->height();
+		}
 		dukglue_push(ctx, _height);
 		return true;
 	}
@@ -136,7 +140,7 @@ public:
 	// readonly attribute unsigned long colorDepth;
 	static int colorDepth(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		int _colorDepth = GetUint(ctx);
+		int _colorDepth = GetInt(ctx);
 		if(!eventTarget(ctx)->colorDepth(_colorDepth, duk_is_valid_index(ctx, 1)))
 			return false;
 		dukglue_push(ctx, _colorDepth);
@@ -146,7 +150,7 @@ public:
 	// readonly attribute unsigned long pixelDepth;
 	static int pixelDepth(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		int _pixelDepth = GetUint(ctx);
+		int _pixelDepth = GetInt(ctx);
 		if(!eventTarget(ctx)->pixelDepth(_pixelDepth, duk_is_valid_index(ctx, 1)))
 			return false;
 		dukglue_push(ctx, _pixelDepth);
