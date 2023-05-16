@@ -136,7 +136,7 @@ public:
 	}
 	
 	// [CEReactions] Attr removeAttributeNode(Attr attr);
-	virtual bool setAttributeNodeNS(DKString& _attr, DKString& _removeAttributeNode){
+	virtual bool removeAttributeNode(DKString& _attr, DKString& _removeAttributeNode){
 		DKDEBUGFUNC(_attr, _removeAttributeNode);
 		return DKTODO();
 	}
