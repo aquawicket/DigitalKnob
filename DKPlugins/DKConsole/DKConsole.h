@@ -59,6 +59,7 @@ public:
 		DKINFO(data+"\n");
 		return true;
 	}
+	static bool log(const char* data){		return log(toString(data)); }
 	static bool log(const bool& data){		return log(toString(data));	}
 	static bool log(const int& data){		return log(toString(data));	}
 	static bool log(const double& data){	return log(toString(data));	}
