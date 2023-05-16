@@ -41,6 +41,7 @@ public:
 		//[CEReactions, Unscopable] attribute DOMString slot;
 		DKDuktape::AttachFunction("CPP_DKElementDUK_slot", DKElementDUK::slot);
 		
+		/*
 		// boolean hasAttributes();
 		DKDuktape::AttachFunction("CPP_DKElementDUK_hasAttributes", DKElementDUK::hasAttributes);
 		
@@ -121,7 +122,7 @@ public:
 		
 		// undefined insertAdjacentText(DOMString where, DOMString data); // legacy
 		DKDuktape::AttachFunction("CPP_DKElementDUK_insertAdjacentText", DKElementDUK::insertAdjacentText);
-		
+		*/
 		
 		////// Load .js files //////
 		DKClass::DKCreate("DKElement/DKElementDUK.js");
@@ -235,6 +236,16 @@ public:
 		if(!eventTarget(ctx)->classList(_classList, duk_is_valid_index(ctx, 1)))
 			return false;
 		dukglue_push(ctx, _classList);
+		return true;
+	}
+	
+	//[CEReactions, Unscopable] attribute DOMString slot;
+	static int slot(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DOMString _slot = GetString(ctx);
+		if(!eventTarget(ctx)->slot(_slot, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _slot);
 		return true;
 	}
 	
