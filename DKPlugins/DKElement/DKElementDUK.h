@@ -20,7 +20,108 @@ public:
 		// readonly attribute DOMString? namespaceURI;
 		DKDuktape::AttachFunction("CPP_DKElementDUK_namespaceURI", DKElementDUK::namespaceURI);
 		
-		// TODO
+		// readonly attribute DOMString? prefix;
+		DKDuktape::AttachFunction("CPP_DKElementDUK_prefix", DKElementDUK::prefix);
+		
+		// readonly attribute DOMString localName;
+		DKDuktape::AttachFunction("CPP_DKElementDUK_localName", DKElementDUK::localName);
+		
+		// readonly attribute DOMString tagName;
+		DKDuktape::AttachFunction("CPP_DKElementDUK_tagName", DKElementDUK::tagName);
+		
+		// [CEReactions] attribute DOMString id;
+		DKDuktape::AttachFunction("CPP_DKElementDUK_id", DKElementDUK::id);
+		
+		// [CEReactions] attribute DOMString className;
+		DKDuktape::AttachFunction("CPP_DKElementDUK_className", DKElementDUK::className);
+		
+		// [SameObject, PutForwards=value] readonly attribute DOMTokenList classList;
+		DKDuktape::AttachFunction("CPP_DKElementDUK_classList", DKElementDUK::classList);
+		
+		//[CEReactions, Unscopable] attribute DOMString slot;
+		DKDuktape::AttachFunction("CPP_DKElementDUK_slot", DKElementDUK::slot);
+		
+		// boolean hasAttributes();
+		DKDuktape::AttachFunction("CPP_DKElementDUK_hasAttributes", DKElementDUK::hasAttributes);
+		
+		// [SameObject] readonly attribute NamedNodeMap attributes;
+		DKDuktape::AttachFunction("CPP_DKElementDUK_attributes", DKElementDUK::attributes);
+		
+		// sequence<DOMString> getAttributeNames();
+		DKDuktape::AttachFunction("CPP_DKElementDUK_getAttributeNames", DKElementDUK::getAttributeNames);
+		
+		// DOMString? getAttribute(DOMString qualifiedName);
+		DKDuktape::AttachFunction("CPP_DKElementDUK_getAttribute", DKElementDUK::getAttribute);
+		
+		// DOMString? getAttributeNS(DOMString? namespace, DOMString localName);
+		DKDuktape::AttachFunction("CPP_DKElementDUK_getAttributeNS", DKElementDUK::getAttributeNS);
+		
+		// [CEReactions] undefined setAttribute(DOMString qualifiedName, DOMString value);
+		DKDuktape::AttachFunction("CPP_DKElementDUK_setAttribute", DKElementDUK::setAttribute);
+		
+		// [CEReactions] undefined setAttributeNS(DOMString? namespace, DOMString qualifiedName, DOMString value);
+		DKDuktape::AttachFunction("CPP_DKElementDUK_setAttributeNS", DKElementDUK::setAttributeNS);
+		
+		// [CEReactions] undefined removeAttribute(DOMString qualifiedName);
+		DKDuktape::AttachFunction("CPP_DKElementDUK_removeAttribute", DKElementDUK::removeAttribute);
+		
+		// [CEReactions] undefined removeAttributeNS(DOMString? namespace, DOMString localName);
+		DKDuktape::AttachFunction("CPP_DKElementDUK_removeAttributeNS", DKElementDUK::removeAttributeNS);
+		
+		// [CEReactions] boolean toggleAttribute(DOMString qualifiedName, optional boolean force);
+		DKDuktape::AttachFunction("CPP_DKElementDUK_toggleAttribute", DKElementDUK::toggleAttribute);
+		
+		// boolean hasAttribute(DOMString qualifiedName);
+		DKDuktape::AttachFunction("CPP_DKElementDUK_hasAttribute", DKElementDUK::hasAttribute);
+		
+		// boolean hasAttributeNS(DOMString? namespace, DOMString localName);
+		DKDuktape::AttachFunction("CPP_DKElementDUK_hasAttributeNS", DKElementDUK::hasAttributeNS);
+		
+		// Attr? getAttributeNode(DOMString qualifiedName);
+		DKDuktape::AttachFunction("CPP_DKElementDUK_getAttributeNode", DKElementDUK::getAttributeNode);
+		
+		// Attr? getAttributeNodeNS(DOMString? namespace, DOMString localName);
+		DKDuktape::AttachFunction("CPP_DKElementDUK_getAttributeNodeNS", DKElementDUK::getAttributeNodeNS);
+		
+		// [CEReactions] Attr? setAttributeNode(Attr attr);
+		DKDuktape::AttachFunction("CPP_DKElementDUK_setAttributeNode", DKElementDUK::setAttributeNode);
+		
+		// [CEReactions] Attr? setAttributeNodeNS(Attr attr);
+		DKDuktape::AttachFunction("CPP_DKElementDUK_setAttributeNodeNS", DKElementDUK::setAttributeNodeNS);
+		
+		// [CEReactions] Attr removeAttributeNode(Attr attr);
+		DKDuktape::AttachFunction("CPP_DKElementDUK_removeAttributeNode", DKElementDUK::removeAttributeNode);
+		
+		// ShadowRoot attachShadow(ShadowRootInit init);
+		DKDuktape::AttachFunction("CPP_DKElementDUK_attachShadow", DKElementDUK::attachShadow);
+		
+		// readonly attribute ShadowRoot? shadowRoot;
+		DKDuktape::AttachFunction("CPP_DKElementDUK_shadowRoot", DKElementDUK::shadowRoot);
+		
+		// Element? closest(DOMString selectors);
+		DKDuktape::AttachFunction("CPP_DKElementDUK_closest", DKElementDUK::closest);
+		
+		// boolean matches(DOMString selectors);
+		DKDuktape::AttachFunction("CPP_DKElementDUK_matches", DKElementDUK::matches);
+		
+		// boolean webkitMatchesSelector(DOMString selectors); // legacy alias of .matches
+		DKDuktape::AttachFunction("CPP_DKElementDUK_webkitMatchesSelector", DKElementDUK::webkitMatchesSelector);
+		
+		// HTMLCollection getElementsByTagName(DOMString qualifiedName);
+		DKDuktape::AttachFunction("CPP_DKElementDUK_getElementsByTagName", DKElementDUK::getElementsByTagName);
+		
+		// HTMLCollection getElementsByTagNameNS(DOMString? namespace, DOMString localName);
+		DKDuktape::AttachFunction("CPP_DKElementDUK_getElementsByTagNameNS", DKElementDUK::getElementsByTagNameNS);
+		
+		// HTMLCollection getElementsByClassName(DOMString classNames);
+		DKDuktape::AttachFunction("CPP_DKElementDUK_getElementsByClassName", DKElementDUK::getElementsByClassName);
+		
+		// [CEReactions] Element? insertAdjacentElement(DOMString where, Element element); // legacy
+		DKDuktape::AttachFunction("CPP_DKElementDUK_insertAdjacentElement", DKElementDUK::insertAdjacentElement);
+		
+		// undefined insertAdjacentText(DOMString where, DOMString data); // legacy
+		DKDuktape::AttachFunction("CPP_DKElementDUK_insertAdjacentText", DKElementDUK::insertAdjacentText);
+		
 		
 		////// Load .js files //////
 		DKClass::DKCreate("DKElement/DKElementDUK.js");
