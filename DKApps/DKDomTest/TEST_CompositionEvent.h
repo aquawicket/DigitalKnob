@@ -16,21 +16,21 @@ public:
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_CompositionEvent.h //////\n");
 		
-		DKEventTarget myEventTarget;
-		myEventTarget.addEventListener("compositionevent", &TEST_CompositionEvent::oncompositionevent);
-		DKCompositionEvent compositionevent("compositionevent", "");
-		myEventTarget.dispatchEvent(compositionevent);
+		DKEventTarget eventTarget;
+		eventTarget.addEventListener("compositionEvent", &TEST_CompositionEvent::onCompositionEvent);
+		DKCompositionEvent compositionEvent("compositionEvent", "");
+		eventTarget.dispatchEvent(compositionEvent);
 		return true;
 	}
 	
-	static void printCompositionEventProperties(DKCompositionEvent& compositionevent){
-		DKDEBUGFUNC(compositionevent);
-		DKINFO("compositionevent.data = "		+toString(compositionevent.data)	+"\n");
+	static void printCompositionEventProperties(DKCompositionEvent& compositionEvent){
+		DKDEBUGFUNC(compositionEvent);
+		DKINFO("compositionEvent.data = "		+toString(compositionEvent.data)	+"\n");
 	}
 	
-	static bool oncompositionevent(DKEvent& event){
+	static bool onCompositionEvent(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKINFO("TEST_CompositionEvent::oncompositionevent() \n");
+		DKINFO("TEST_CompositionEvent::onCompositionEvent() \n");
 		printCompositionEventProperties(dynamic_cast<DKCompositionEvent&>(event));	//TODO: try to remove the need for dynamic_cast
 		TEST_UIEvent::printUIEventProperties(dynamic_cast<DKUIEvent&>(event));		//TODO: try to remove the need for dynamic_cast
 		TEST_Event::printEventProperties(event);

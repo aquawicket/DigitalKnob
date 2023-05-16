@@ -14,22 +14,22 @@ public:
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_CustomEvent.h ////// \n");
 		
-		DKEventTarget myEventTarget;
-		myEventTarget.addEventListener("customevent", &TEST_CustomEvent::oncustomevent);
-		DKCustomEvent customevent("customevent", "");
-		customevent.detail = "{name : 'mycustomevent'}";
-		myEventTarget.dispatchEvent(customevent);
+		DKEventTarget eventTarget;
+		eventTarget.addEventListener("customEvent", &TEST_CustomEvent::onCustomEvent);
+		DKCustomEvent customEvent("customEvent", "");
+		customEvent.detail = "{name : 'myCustomEvent'}";
+		eventTarget.dispatchEvent(customEvent);
 		return true;
 	}
 
-	static void printCustomEventProperties(DKCustomEvent& customevent) {
-		DKDEBUGFUNC(customevent);
-		DKINFO("customevent.detail = "	+toString(customevent.detail)	+"\n");
+	static void printCustomEventProperties(DKCustomEvent& customEvent) {
+		DKDEBUGFUNC(customEvent);
+		DKINFO("customEvent.detail = "	+toString(customEvent.detail)	+"\n");
 	}
 	
-	static bool oncustomevent(DKEvent& event) {
+	static bool onCustomEvent(DKEvent& event) {
 		DKDEBUGFUNC(event);
-		DKINFO("TEST_CustomEvent::oncustomevent() \n");
+		DKINFO("TEST_CustomEvent::onCustomEvent() \n");
 		printCustomEventProperties(dynamic_cast<DKCustomEvent&>(event));	//TODO: try to remove the need for dynamic_cast
 		TEST_Event::printEventProperties(event);
 		return true;
