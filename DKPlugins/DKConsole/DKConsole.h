@@ -24,10 +24,20 @@ public:
 		DKERROR(data+"\n");
 		return true;
 	}
-	static bool _assert(const char* data){		return _assert(toString(data)); }
-	static bool _assert(const bool& data){		return _assert(toString(data)); }
-	static bool _assert(const int& data){		return _assert(toString(data)); }
-	static bool _assert(const double& data){	return _assert(toString(data)); }
+	static bool _assert(const bool& condition, const DKString& data){
+		DKDEBUGFUNC(condition, data);
+		if(!condition)
+			_assert(data);
+		return true;
+	}
+	static bool _assert(const char* data){							return _assert(toString(data)); }
+	static bool _assert(const bool& data){							return _assert(toString(data)); }
+	static bool _assert(const int& data){							return _assert(toString(data)); }
+	static bool _assert(const double& data){						return _assert(toString(data)); }
+	static bool _assert(const bool& condition, const char* data){	return _assert(condition, toString(data)); }
+	static bool _assert(const bool& condition, const bool& data){	return _assert(condition, toString(data)); }
+	static bool _assert(const bool& condition, const int& data){	return _assert(condition, toString(data)); }
+	static bool _assert(const bool& condition, const double& data){	return _assert(condition, toString(data)); }
 
 	//undefined clear();
 	static bool clear() {
