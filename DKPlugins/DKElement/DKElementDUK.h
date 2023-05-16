@@ -178,7 +178,68 @@ public:
 		return true;
 	}
 	
+	// readonly attribute DOMString? prefix;
+	static int prefix(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DOMString _prefix = GetString(ctx);
+		if(!eventTarget(ctx)->prefix(_prefix, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _prefix);
+		return true;
+	}
+	
+	// readonly attribute DOMString localName;
+	static int localName(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DOMString _localName = GetString(ctx);
+		if(!eventTarget(ctx)->localName(_localName, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _localName);
+		return true;
+	}
+	
+	// readonly attribute DOMString tagName;
+	static int tagName(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DOMString _tagName = GetString(ctx);
+		if(!eventTarget(ctx)->tagName(_tagName, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _tagName);
+		return true;
+	}
+	
+	// [CEReactions] attribute DOMString id;
+	static int id(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DOMString _id = GetString(ctx);
+		if(!eventTarget(ctx)->id(_id, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _id);
+		return true;
+	}
+	
+	// [CEReactions] attribute DOMString className;
+	static int className(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DOMString _className = GetString(ctx);
+		if(!eventTarget(ctx)->className(_className, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _className);
+		return true;
+	}
+	
+	// [SameObject, PutForwards=value] readonly attribute DOMTokenList classList;
+	static int classList(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DOMString _classList = GetString(ctx);
+		if(!eventTarget(ctx)->classList(_classList, duk_is_valid_index(ctx, 1)))
+			return false;
+		dukglue_push(ctx, _classList);
+		return true;
+	}
+	
 	// TODO
+	
 };
 REGISTER_OBJECT(DKElementDUK, true)
 
