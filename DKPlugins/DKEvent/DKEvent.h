@@ -23,7 +23,7 @@ class DKEventTarget;
 class DKEvent : public DKInterface
 {
 public:
-	// constructor(DOMString type, optional EventInit eventInitDict = {});  // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Event/Event
+	// constructor(DOMString type, optional EventInit eventInitDict = {});
 	DKEvent(DOMString _type, EventInit _eventInitDict) : DKInterface(){
 		DKDEBUGFUNC(_type, _eventInitDict);
 		interfaceName = "Event";
