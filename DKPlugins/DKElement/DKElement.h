@@ -112,49 +112,91 @@ public:
 	}
 	
 	// Attr? getAttributeNode(DOMString qualifiedName);
-	// TODO
+	virtual bool getAttributeNode(DOMString& _qualifiedName, DKString& _getAttributeNode){
+		DKDEBUGFUNC(_qualifiedName, _getAttributeNode);
+		return DKTODO();
+	}
 	
 	// Attr? getAttributeNodeNS(DOMString? namespace, DOMString localName);
-	// TODO
+	virtual bool getAttributeNodeNS(DOMString& _namespace, DOMString& _localName, DKString& _getAttributeNodeNS){
+		DKDEBUGFUNC(_namespace, _localName, _getAttributeNodeNS);
+		return DKTODO();
+	}
 	
 	// [CEReactions] Attr? setAttributeNode(Attr attr);
-	// TODO
+	virtual bool setAttributeNode(DKString& _attr, DKString& _setAttributeNode){
+		DKDEBUGFUNC(_attr, _setAttributeNode);
+		return DKTODO();
+	}
 	
 	// [CEReactions] Attr? setAttributeNodeNS(Attr attr);
-	// TODO
+	virtual bool setAttributeNodeNS(DKString& _attr, DKString& _setAttributeNodeNS){
+		DKDEBUGFUNC(_attr, _setAttributeNodeNS);
+		return DKTODO();
+	}
 	
 	// [CEReactions] Attr removeAttributeNode(Attr attr);
-	// TODO
+	virtual bool setAttributeNodeNS(DKString& _attr, DKString& _removeAttributeNode){
+		DKDEBUGFUNC(_attr, _removeAttributeNode);
+		return DKTODO();
+	}
 	
 	// ShadowRoot attachShadow(ShadowRootInit init);
-	// TODO
+	virtual bool attachShadow(DKString& _init, DKString& _attachShadow){
+		DKDEBUGFUNC(_init, _attachShadow);
+		return DKTODO();
+	}
 	
 	// readonly attribute ShadowRoot? shadowRoot;
-	// TODO
+	virtual bool shadowRoot(DKString&, bool) { return false; }
 	
 	// Element? closest(DOMString selectors);
-	// TODO
+	virtual bool closest(DOMString& _selectors, DKString& _closest){
+		DKDEBUGFUNC(_selectors, _closest);
+		return DKTODO();
+	}
 	
 	// boolean matches(DOMString selectors);
-	// TODO
+	virtual bool matches(DOMString& _selectors, bool& _matches){
+		DKDEBUGFUNC(_selectors, _matches);
+		return DKTODO();
+	}
 	
 	// boolean webkitMatchesSelector(DOMString selectors); // legacy alias of .matches
-	// TODO
+	virtual bool webkitMatchesSelector(DOMString& _selectors, bool& _webkitMatchesSelector){
+		DKDEBUGFUNC(_selectors, _webkitMatchesSelector);
+		return DKTODO();
+	}
   
 	// HTMLCollection getElementsByTagName(DOMString qualifiedName);
-	// TODO
+	virtual bool getElementsByTagName(DOMString& _qualifiedName, DKString& _getElementsByTagName){
+		DKDEBUGFUNC(_qualifiedName, _getElementsByTagName);
+		return DKTODO();
+	}
 	
 	// HTMLCollection getElementsByTagNameNS(DOMString? namespace, DOMString localName);
-	// TODO
+	virtual bool getElementsByTagNameNS(DOMString& _namespace, DOMString& _localName, DKString& _getElementsByTagNameNS){
+		DKDEBUGFUNC(_namespace, _localName, _getElementsByTagNameNS);
+		return DKTODO();
+	}
 	
 	// HTMLCollection getElementsByClassName(DOMString classNames);
-	// TODO
+	virtual bool getElementsByClassName(DOMString& _classNames, DKString& _getElementsByClassName){
+		DKDEBUGFUNC(_classNames, _getElementsByClassName);
+		return DKTODO();
+	}
   
 	// [CEReactions] Element? insertAdjacentElement(DOMString where, Element element); // legacy
-	// TODO
+	virtual bool insertAdjacentElement(DOMString& _where, DKString& _element, DKString& _insertAdjacentElement){
+		DKDEBUGFUNC(_where, _element, _insertAdjacentElement);
+		return DKTODO();
+	}
 	
 	// undefined insertAdjacentText(DOMString where, DOMString data); // legacy
-	// TODO
+	virtual bool insertAdjacentText(DOMString& _where, DOMString& _data){
+		DKDEBUGFUNC(_where, _data);
+		return DKTODO();
+	}
 //};
 
 };
