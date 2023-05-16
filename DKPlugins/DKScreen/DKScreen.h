@@ -27,7 +27,14 @@ public:
 	
 	// readonly attribute long width;
 	//virtual bool width(int&, bool) { return false; }
-	virtual int width() { return 0; }
+	virtual int width() { 
+		DKDEBUGFUNC();
+		RECT desktop;
+		const HWND hDesktop = GetDesktopWindow();
+		if(!GetWindowRect(hDesktop, &desktop))
+			DKERROR("GetWindowRect() failed\n");
+		return desktop.right;
+	}
 	virtual int width(const int&) { return 0; }
 	
 	// readonly attribute long height;

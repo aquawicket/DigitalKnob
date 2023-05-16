@@ -33,8 +33,12 @@ public:
 	
 	// readonly attribute long width;
 	virtual int width() { 
-		DKTODO();
-		return 0; 
+		DKDEBUGFUNC();
+		RECT desktop;
+		const HWND hDesktop = GetDesktopWindow();
+		if(!GetWindowRect(hDesktop, &desktop))
+			DKERROR("GetWindowRect() failed\n");
+		return desktop.right;
 	}
 	virtual int width(const int& _width) {
 		DKTODO();
