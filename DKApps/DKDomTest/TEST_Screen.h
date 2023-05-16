@@ -25,16 +25,16 @@ public:
 		DKDEBUGFUNC(screen);
 		
 		// readonly attribute long availWidth;
-		DKINFO("screen.availWidth() = "	+toString(screen.availWidth())	+"\n");
+		//DKINFO("screen.availWidth = "	+toString(screen.availWidth)	+"\n");
 		
 		// readonly attribute long availHeight;
-		//DKINFO("screen.availHeight = "	+toString(screen.availHeight)	+"\n");
+		//DKINFO("screen.availHeight = "	+toString(screen.availHeight)+"\n");
 		
 		// readonly attribute long width;
-		//DKINFO("screen.width = "		+toString(screen.width)			+"\n");
+		DKINFO("screen.width() = "		+toString(screen.width())		+"\n");
 		
 		// readonly attribute long height;
-		//DKINFO("screen.height = "		+toString(screen.height)		+"\n");
+		DKINFO("screen.height() = "		+toString(screen.height())		+"\n");
 		
 		// readonly attribute unsigned long colorDepth;
 		//DKINFO("screen.colorDepth = "	+toString(screen.colorDepth)	+"\n");

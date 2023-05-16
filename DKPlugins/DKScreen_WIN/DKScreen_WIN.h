@@ -19,6 +19,7 @@ public:
 	}
 	virtual ~DKScreen_WIN() {}
 	
+	/*
 	// readonly attribute long availWidth;
 	virtual bool availWidth(int&, bool) { 
 		return DKTODO();
@@ -28,6 +29,7 @@ public:
 	virtual bool availHeight(int&, bool) { 
 		return DKTODO();
 	}
+	*/
 	
 	// readonly attribute long width;
 	virtual int width(int&, bool) {
@@ -37,9 +39,11 @@ public:
 	
 	// readonly attribute long height;
 	virtual bool height(int&, bool) { 
-		return DKTODO();
+		DKTODO();
+		return 0;
 	}
 	
+	/*
 	// readonly attribute unsigned long colorDepth;
 	virtual bool colorDepth(int&, bool) { 
 		return DKTODO();
@@ -49,6 +53,7 @@ public:
 	virtual bool pixelDepth(int&, bool) { 
 		return DKTODO();
 	}
+	*/
 	
 //};
 };

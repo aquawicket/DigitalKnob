@@ -20,23 +20,23 @@ public:
 	virtual ~DKScreen() {}
 	
 	// readonly attribute long availWidth;
-	virtual bool availWidth(int&, bool) { return false; }
+	//virtual bool availWidth(int&, bool) { return false; }
 	
 	// readonly attribute long availHeight;
-	virtual bool availHeight(int&, bool) { return false; }
+	//virtual bool availHeight(int&, bool) { return false; }
 	
 	// readonly attribute long width;
 	//virtual bool width(int&, bool) { return false; }
-	virtual int width(int&, bool) { return 0; }
+	virtual int width(const int& = 0) { return 0; }
 	
 	// readonly attribute long height;
-	virtual bool height(int&, bool) { return false; }
+	virtual int height(const int& = 0) { return 0; }
 	
 	// readonly attribute unsigned long colorDepth;
-	virtual bool colorDepth(int&, bool) { return false; }
+	//virtual bool colorDepth(int&, bool) { return false; }
 	
 	// readonly attribute unsigned long pixelDepth;
-	virtual bool pixelDepth(int&, bool) { return false; }
+	//virtual bool pixelDepth(int&, bool) { return false; }
 	
 //};
 };
