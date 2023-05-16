@@ -198,7 +198,7 @@ bool DKLinux::ReleaseKey(int key){
 #endif
 }
 
-bool DKLinux::GetScreenWidth(unsigned int& w){
+bool DKLinux::GetScreenWidth(unsigned int& w){	// TODO: Move to DKScreen Interface
 	DKDEBUGFUNC(w);
 #if HAVE_libx11_dev
 	Display* d = XOpenDisplay(NULL);
@@ -210,7 +210,7 @@ bool DKLinux::GetScreenWidth(unsigned int& w){
 #endif
 }
 
-bool DKLinux::GetScreenHeight(unsigned int& h){
+bool DKLinux::GetScreenHeight(unsigned int& h){	// TODO: Move to DKScreen Interface
 	DKDEBUGFUNC(h);
 #if HAVE_libx11_dev
 	Display* d = XOpenDisplay(NULL);

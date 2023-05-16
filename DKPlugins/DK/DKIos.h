@@ -32,8 +32,8 @@
 
 class DKIos{
 public:
-	static bool GetScreenWidth(unsigned int& w);
-	static bool GetScreenHeight(unsigned int& h);
+	static bool GetScreenWidth(unsigned int& w);		// TODO: Move to DKScreen Interface
+	static bool GetScreenHeight(unsigned int& h);		// TODO: Move to DKScreen Interface
 };
 
 #endif //DKIos_H

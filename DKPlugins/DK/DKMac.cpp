@@ -52,14 +52,14 @@ bool DKMac::SetMousePos(const int& x, const int& y){
 	return true;
 }
 
-bool DKMac::GetScreenWidth(unsigned int& w){
+bool DKMac::GetScreenWidth(unsigned int& w){		// TODO: Move to DKScreen Interface
 	CGRect mainMonitor = CGDisplayBounds(CGMainDisplayID());
 	CGFloat monitorWidth = CGRectGetWidth(mainMonitor);
 	w = monitorWidth;
 	return true;
 }
 
-bool DKMac::GetScreenHeight(unsigned int& h){
+bool DKMac::GetScreenHeight(unsigned int& h){		// TODO: Move to DKScreen Interface
 	CGRect mainMonitor = CGDisplayBounds(CGMainDisplayID());
 	CGFloat monitorHeight = CGRectGetHeight(mainMonitor);
 	h = monitorHeight;
