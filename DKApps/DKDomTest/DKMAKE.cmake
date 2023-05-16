@@ -22,7 +22,9 @@ dk_depend(DKCompositionEvent)
 dk_depend(DKDragEvent)
 
 dk_depend(DKWindow)
+
 dk_depend(DKScreen)
+dk_depend(DKScreen_WIN)
 dk_depend(DKNavigator)
 dk_depend(DKLocation)
 
