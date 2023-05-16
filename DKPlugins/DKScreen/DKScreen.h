@@ -26,7 +26,8 @@ public:
 	virtual bool availHeight(int&, bool) { return false; }
 	
 	// readonly attribute long width;
-	virtual bool width(int&, bool) { return false; }
+	//virtual bool width(int&, bool) { return false; }
+	virtual int width(int&, bool) { return 0; }
 	
 	// readonly attribute long height;
 	virtual bool height(int&, bool) { return false; }

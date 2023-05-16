@@ -30,8 +30,9 @@ public:
 	}
 	
 	// readonly attribute long width;
-	virtual bool width(int&, bool) { 
-		return DKTODO();
+	virtual int width(int&, bool) {
+		DKTODO();
+		return 0; 
 	}
 	
 	// readonly attribute long height;

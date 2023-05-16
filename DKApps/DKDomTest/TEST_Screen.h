@@ -25,7 +25,7 @@ public:
 		DKDEBUGFUNC(screen);
 		
 		// readonly attribute long availWidth;
-		//DKINFO("screen.availWidth = "	+toString(screen.availWidth)	+"\n");
+		DKINFO("screen.availWidth() = "	+toString(screen.availWidth())	+"\n");
 		
 		// readonly attribute long availHeight;
 		//DKINFO("screen.availHeight = "	+toString(screen.availHeight)	+"\n");
