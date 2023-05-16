@@ -7,6 +7,8 @@
 #include "DKScreen/DKScreen.h"
 
 
+// [Exposed=Window]
+// interface Screen {
 class TEST_Screen : public DKObjectT<TEST_Screen>
 {
 public:
@@ -21,14 +23,24 @@ public:
 	
 	static void printScreenProperties(DKScreen& screen){
 		DKDEBUGFUNC(screen);
-		/*
-		DKINFO("screen.availWidth = "	+toString(screen.availWidth)	+"\n");
-		DKINFO("screen.availHeight = "	+toString(screen.availHeight)	+"\n");
-		DKINFO("screen.width = "		+toString(screen.width)			+"\n");
-		DKINFO("screen.height = "		+toString(screen.height)		+"\n");
-		DKINFO("screen.colorDepth = "	+toString(screen.colorDepth)	+"\n");
-		DKINFO("screen.pixelDepth = "	+toString(screen.pixelDepth)	+"\n");
-		*/
+		
+		// readonly attribute long availWidth;
+		//DKINFO("screen.availWidth = "	+toString(screen.availWidth)	+"\n");
+		
+		// readonly attribute long availHeight;
+		//DKINFO("screen.availHeight = "	+toString(screen.availHeight)	+"\n");
+		
+		// readonly attribute long width;
+		//DKINFO("screen.width = "		+toString(screen.width)			+"\n");
+		
+		// readonly attribute long height;
+		//DKINFO("screen.height = "		+toString(screen.height)		+"\n");
+		
+		// readonly attribute unsigned long colorDepth;
+		//DKINFO("screen.colorDepth = "	+toString(screen.colorDepth)	+"\n");
+		
+		// readonly attribute unsigned long pixelDepth;
+		//DKINFO("screen.pixelDepth = "	+toString(screen.pixelDepth)	+"\n");
 	}
 };
 REGISTER_OBJECT(TEST_Screen, true);
