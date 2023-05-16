@@ -12,13 +12,13 @@ public:
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_DKConsoleWindow.h ////// \n");
 		
-		DKConsoleWindow dkconsolewindow;
-		printDKConsoleWindowProperties(dkconsolewindow);
+		DKConsoleWindow dkConsoleWindow;
+		printDKConsoleWindowProperties(dkConsoleWindow);
 		return true;
 	}
 
-	static void printDKConsoleWindowProperties(DKConsoleWindow& dkconsolewindow){
-		DKDEBUGFUNC(dkconsolewindow);
+	static void printDKConsoleWindowProperties(DKConsoleWindow& dkConsoleWindow){
+		DKDEBUGFUNC(dkConsoleWindow);
 		DKTODO();
 	}
 };

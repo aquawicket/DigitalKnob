@@ -12,13 +12,13 @@ public:
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_DKRmlDocument.h ////// \n");
 		
-		DKRmlDocument rmldocument;
-		printRmlDocumentProperties(rmldocument);
+		DKRmlDocument dkRmlDocument;
+		printRmlDocumentProperties(dkRmlDocument);
 		return true;
 	}
 	
-	static void printRmlDocumentProperties(DKRmlDocument& rmldocument){
-		DKDEBUGFUNC(rmldocument);
+	static void printRmlDocumentProperties(DKRmlDocument& dkRmlDocument){
+		DKDEBUGFUNC(dkRmlDocument);
 		DKTODO();
 	}
 

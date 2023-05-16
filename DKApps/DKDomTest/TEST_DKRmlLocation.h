@@ -12,13 +12,13 @@ public:
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_DKRmlLocation.h //////\n");
 		
-		DKRmlLocation dkrmllocation;
-		printDKRmlLocationProperties(dkrmllocation);
+		DKRmlLocation dkRmlLocation;
+		printDKRmlLocationProperties(dkRmlLocation);
 		return true;
 	}
 	
-	static void printDKRmlLocationProperties(DKRmlLocation& dkrmllocation){
-		DKDEBUGFUNC(dkrmllocation);
+	static void printDKRmlLocationProperties(DKRmlLocation& dkRmlLocation){
+		DKDEBUGFUNC(dkRmlLocation);
 		DKTODO();
 	}
 };
