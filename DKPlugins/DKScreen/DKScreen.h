@@ -4,7 +4,6 @@
 #ifndef DKScreen_H
 #define DKScreen_H
 
-#include "DK/DK.h"
 #include "DKInterface/DKInterface.h"
 
 // [Exposed=Window]
@@ -38,6 +37,6 @@ public:
 	// readonly attribute unsigned long pixelDepth;
 	virtual bool pixelDepth(int&, bool) { return false; }
 };
-
+//};
 
 #endif //DKScreen_H
