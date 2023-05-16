@@ -9,6 +9,33 @@
 #include "DKConsole/DKConsole.h"
 #include "DKDuktape/DKDuktape.h"
 
+/*
+bool duk_is_int(duk_context *ctx, duk_idx_t idx){
+	if(!duk_is_number(ctx, idx))
+		return false;
+	double _double = duk_require_number(ctx, 0);
+	//unsigned int _uint = duk_require_uint(ctx, 0);
+	int _int = duk_require_int(ctx, 0);
+	if(_double == _int)
+		return true;
+	return false;
+}
+bool duk_is_uint(duk_context *ctx, duk_idx_t idx){
+	if(!duk_is_number(ctx, idx))
+		return false;
+	return true;
+}
+bool duk_is_double(duk_context *ctx, duk_idx_t idx){
+	if(!duk_is_number(ctx, idx))
+		return false;
+	double _double = duk_require_number(ctx, 0);
+	int _int = duk_require_int(ctx, 0);
+	if(_double != _int)
+		return true;
+	return false;
+}
+*/
+
 
 //[Exposed=*]
 //namespace console { // but see namespace object requirements below
@@ -175,16 +202,8 @@ public:
 			DKConsole::log((DKString)duk_require_string(ctx, 0));
 		if(duk_is_boolean(ctx, 0))
 			DKConsole::log((bool)duk_require_boolean(ctx, 0));
-		if(duk_is_number(ctx, 0)){
-			double _double = duk_require_number(ctx, 0);
-			DKINFO("_double = "+toString(_double)+"\n");
-			unsigned int _uint = duk_require_uint(ctx, 0);
-			DKINFO("_uint = "+toString(_uint)+"\n");
-			int _int = duk_require_int(ctx, 0);
-			DKINFO("_int = "+toString(_int)+"\n");
-			
-			DKConsole::log(_double);
-		}
+		if(duk_is_number(ctx, 0))
+			DKConsole::log(duk_require_number(ctx, 0));
 		return true;
 	}
 	

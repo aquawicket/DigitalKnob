@@ -123,7 +123,12 @@ DKString toString(const double& _double) {
 	s = out.str();
 	return s;
 	*/
-	return std::to_string(_double); //C11
+	
+	// https://stackoverflow.com/a/13709929/688352
+	std::string str = std::to_string(_double); //C11
+	str.erase(str.find_last_not_of('0') + 1, std::string::npos); // Strip the 0's trailing after .
+	str.erase(str.find_last_not_of('.') + 1, std::string::npos); // Strip the . if whole number
+	return str;
 }
 
 DKString toString(const unsigned int& _uint) {
