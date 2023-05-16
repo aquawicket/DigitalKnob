@@ -15,24 +15,24 @@ public:
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_WheelEvent.h //////\n");
 		
-		DKEventTarget myEventTarget;
-		myEventTarget.addEventListener("wheelevent", &TEST_WheelEvent::onwheelevent);
-		DKWheelEvent wheelevent("wheelevent", "");
-		myEventTarget.dispatchEvent(wheelevent);
+		DKEventTarget eventTarget;
+		eventTarget.addEventListener("wheelEvent", &TEST_WheelEvent::onWheelEvent);
+		DKWheelEvent wheelEvent("wheelEvent", "");
+		eventTarget.dispatchEvent(wheelEvent);
 		return true;
 	}
 
-	static void printWheelEventProperties(DKWheelEvent& wheelevent){
-		DKDEBUGFUNC(wheelevent);
-		DKINFO("wheelevent.deltaX = "		+toString(wheelevent.deltaX)		+"\n");
-		DKINFO("wheelevent.deltaY = "		+toString(wheelevent.deltaY)		+"\n");
-		DKINFO("wheelevent.deltaZ = "		+toString(wheelevent.deltaZ)		+"\n");
-		DKINFO("wheelevent.deltaMode = "	+toString(wheelevent.deltaMode)		+"\n");
+	static void printWheelEventProperties(DKWheelEvent& wheelEvent){
+		DKDEBUGFUNC(wheelEvent);
+		DKINFO("wheelEvent.deltaX = "		+toString(wheelEvent.deltaX)		+"\n");
+		DKINFO("wheelEvent.deltaY = "		+toString(wheelEvent.deltaY)		+"\n");
+		DKINFO("wheelEvent.deltaZ = "		+toString(wheelEvent.deltaZ)		+"\n");
+		DKINFO("wheelEvent.deltaMode = "	+toString(wheelEvent.deltaMode)		+"\n");
 	}
 
-	static bool onwheelevent(DKEvent& event){
+	static bool onWheelEvent(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKINFO("TEST_WheelEvent::onwheelevent() \n");
+		DKINFO("TEST_WheelEvent::onWheelEvent() \n");
 		printWheelEventProperties(dynamic_cast<DKWheelEvent&>(event));					//TODO: try to remove the need for dynamic_cast
 		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent&>(event));	//TODO: try to remove the need for dynamic_cast
 		TEST_UIEvent::printUIEventProperties(dynamic_cast<DKUIEvent&>(event));			//TODO: try to remove the need for dynamic_cast

@@ -14,21 +14,21 @@ public:
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_FocusEvent.h //////\n");
 		
-		DKEventTarget myEventTarget;
-		myEventTarget.addEventListener("focusevent", &TEST_FocusEvent::onfocusevent);
-		DKFocusEvent focusevent("focusevent", "");
-		myEventTarget.dispatchEvent(focusevent);
+		DKEventTarget eventTarget;
+		eventTarget.addEventListener("focusEvent", &TEST_FocusEvent::onFocusEvent);
+		DKFocusEvent focusEvent("focusEvent", "");
+		eventTarget.dispatchEvent(focusEvent);
 		return true;
 	}
 	
-	static void printFocusEventProperties(DKFocusEvent& focusevent){
-		DKDEBUGFUNC(focusevent);
-		DKINFO("focusevent.relatedTarget = "+toString(focusevent.relatedTarget)	+"\n");
+	static void printFocusEventProperties(DKFocusEvent& focusEvent){
+		DKDEBUGFUNC(focusEvent);
+		DKINFO("focusEvent.relatedTarget = "+toString(focusEvent.relatedTarget)	+"\n");
 	}
 	
-	static bool onfocusevent(DKEvent& event){
+	static bool onFocusEvent(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKINFO("TEST_FocusEvent::onfocusevent() \n");
+		DKINFO("TEST_FocusEvent::onFocusEvent() \n");
 		printFocusEventProperties(dynamic_cast<DKFocusEvent&>(event));			//TODO: try to remove the need for dynamic_cast
 		TEST_UIEvent::printUIEventProperties(dynamic_cast<DKUIEvent&>(event));	//TODO: try to remove the need for dynamic_cast
 		TEST_Event::printEventProperties(event);

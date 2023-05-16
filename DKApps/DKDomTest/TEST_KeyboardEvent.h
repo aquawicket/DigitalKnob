@@ -14,30 +14,30 @@ public:
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_KeyboardEvent.h //////\n");
 		
-		DKEventTarget myEventTarget;
-		myEventTarget.addEventListener("keyboardevent", &TEST_KeyboardEvent::onkeyboardevent);
-		DKKeyboardEvent keyboardevent("keyboardevent", "");
-		myEventTarget.dispatchEvent(keyboardevent);
+		DKEventTarget eventTarget;
+		eventTarget.addEventListener("keyboardEvent", &TEST_KeyboardEvent::onKeyboardEvent);
+		DKKeyboardEvent keyboardEvent("keyboardEvent", "");
+		eventTarget.dispatchEvent(keyboardEvent);
 		return true;
 	}
 	
-	static void printKeyboardEventProperties(DKKeyboardEvent& keyboardevent){
-		DKDEBUGFUNC(keyboardevent);
-		DKINFO("keyboardevent.altKey = "		+toString(keyboardevent.altKey)			+"\n");
-		DKINFO("keyboardevent.code = "			+toString(keyboardevent.code)			+"\n");		
-		DKINFO("keyboardevent.ctrlKey = "		+toString(keyboardevent.ctrlKey)		+"\n");
-		DKINFO("keyboardevent.isComposing = "	+toString(keyboardevent.isComposing)	+"\n");
-		DKINFO("keyboardevent.key = "			+toString(keyboardevent.key)			+"\n");
-		DKINFO("keyboardevent.location = "		+toString(keyboardevent.location)		+"\n");
-		DKINFO("keyboardevent.metaKey = "		+toString(keyboardevent.metaKey)		+"\n");
-		DKINFO("keyboardevent.repeat = "		+toString(keyboardevent.repeat)			+"\n");
-		DKINFO("keyboardevent.shiftKey = "		+toString(keyboardevent.shiftKey)		+"\n");
-		DKINFO("keyboardevent.charCode = "		+toString(keyboardevent.charCode)		+"\n");
-		DKINFO("keyboardevent.keyCode = "		+toString(keyboardevent.keyCode)		+"\n");
-		DKINFO("keyboardevent.which = "			+toString(keyboardevent.which)			+"\n");
+	static void printKeyboardEventProperties(DKKeyboardEvent& keyboardEvent){
+		DKDEBUGFUNC(keyboardEvent);
+		DKINFO("keyboardEvent.altKey = "		+toString(keyboardEvent.altKey)			+"\n");
+		DKINFO("keyboardEvent.code = "			+toString(keyboardEvent.code)			+"\n");		
+		DKINFO("keyboardEvent.ctrlKey = "		+toString(keyboardEvent.ctrlKey)		+"\n");
+		DKINFO("keyboardEvent.isComposing = "	+toString(keyboardEvent.isComposing)	+"\n");
+		DKINFO("keyboardEvent.key = "			+toString(keyboardEvent.key)			+"\n");
+		DKINFO("keyboardEvent.location = "		+toString(keyboardEvent.location)		+"\n");
+		DKINFO("keyboardEvent.metaKey = "		+toString(keyboardEvent.metaKey)		+"\n");
+		DKINFO("keyboardEvent.repeat = "		+toString(keyboardEvent.repeat)			+"\n");
+		DKINFO("keyboardEvent.shiftKey = "		+toString(keyboardEvent.shiftKey)		+"\n");
+		DKINFO("keyboardEvent.charCode = "		+toString(keyboardEvent.charCode)		+"\n");
+		DKINFO("keyboardEvent.keyCode = "		+toString(keyboardEvent.keyCode)		+"\n");
+		DKINFO("keyboardEvent.which = "			+toString(keyboardEvent.which)			+"\n");
 	}
 
-	static bool onkeyboardevent(DKEvent& event){
+	static bool onKeyboardEvent(DKEvent& event){
 		DKDEBUGFUNC(event);
 		DKINFO("TEST_KeyboardEvent::onkeyboardevent() \n");
 		printKeyboardEventProperties(dynamic_cast<DKKeyboardEvent&>(event));	//TODO: try to remove the need for dynamic_cast

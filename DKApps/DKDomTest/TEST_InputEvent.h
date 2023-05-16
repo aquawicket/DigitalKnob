@@ -14,24 +14,24 @@ public:
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_InputEvent.h //////\n");
 	
-		DKEventTarget myEventTarget;
-		myEventTarget.addEventListener("inputevent", &TEST_InputEvent::oninputevent);
-		DKInputEvent inputevent("inputevent", "");
-		myEventTarget.dispatchEvent(inputevent);
+		DKEventTarget eventTarget;
+		eventTarget.addEventListener("inputEvent", &TEST_InputEvent::onInputEvent);
+		DKInputEvent inputEvent("inputEvent", "");
+		eventTarget.dispatchEvent(inputEvent);
 		return true;
 	}
 	
-	static void printInputEventProperties(DKInputEvent& inputevent){
-		DKDEBUGFUNC(inputevent);
-		DKINFO("inputevent.data = "			+toString(inputevent.data)			+"\n");
-		DKINFO("inputevent.dataTransfer = "	+toString(inputevent.dataTransfer)	+"\n");
-		DKINFO("inputevent.inputType = "	+toString(inputevent.inputType)		+"\n");
-		DKINFO("inputevent.isComposing = "	+toString(inputevent.isComposing)	+"\n");
+	static void printInputEventProperties(DKInputEvent& inputEvent){
+		DKDEBUGFUNC(inputEvent);
+		DKINFO("inputEvent.data = "			+toString(inputEvent.data)			+"\n");
+		DKINFO("inputEvent.dataTransfer = "	+toString(inputEvent.dataTransfer)	+"\n");
+		DKINFO("inputEvent.inputType = "	+toString(inputEvent.inputType)		+"\n");
+		DKINFO("inputEvent.isComposing = "	+toString(inputEvent.isComposing)	+"\n");
 	}
 	
-	static bool oninputevent(DKEvent& event){
+	static bool onInputEvent(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKINFO("TEST_InputEvent::oninputevent() \n");
+		DKINFO("TEST_InputEvent::onInputEvent() \n");
 		printInputEventProperties(dynamic_cast<DKInputEvent&>(event));			//TODO: try to remove the need for dynamic_cast
 		TEST_UIEvent::printUIEventProperties(dynamic_cast<DKUIEvent&>(event));	//TODO: try to remove the need for dynamic_cast
 		TEST_Event::printEventProperties(event);

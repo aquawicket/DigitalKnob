@@ -14,13 +14,13 @@ public:
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_HTMLCollection.h //////\n");
 		
-		DKHTMLCollection htmlcollection;
-		printHTMLCollectionProperties(htmlcollection);
+		DKHTMLCollection htmlCollection;
+		printHTMLCollectionProperties(htmlCollection);
 		return true;
 	}
 
-	static void printHTMLCollectionProperties(DKHTMLCollection& htmlcollection){
-		DKDEBUGFUNC(htmlcollection);
+	static void printHTMLCollectionProperties(DKHTMLCollection& htmlCollection){
+		DKDEBUGFUNC(htmlCollection);
 		DKTODO();
 	}
 };

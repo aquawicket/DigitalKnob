@@ -14,39 +14,39 @@ public:
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_MouseEvent.h //////\n");
 		
-		DKEventTarget myEventTarget;
-		myEventTarget.addEventListener("mouseevent", &TEST_MouseEvent::onmouseevent);
-		DKMouseEvent mouseevent("mouseevent", "");
-		myEventTarget.dispatchEvent(mouseevent);
+		DKEventTarget eventTarget;
+		eventTarget.addEventListener("mouseEvent", &TEST_MouseEvent::onMouseEvent);
+		DKMouseEvent mouseEvent("mouseEvent", "");
+		eventTarget.dispatchEvent(mouseEvent);
 		return true;	
 	}
 
-	static void printMouseEventProperties(DKMouseEvent& mouseevent){
-		DKDEBUGFUNC(mouseevent);
-		DKINFO("mouseevent.altKey = "			+toString(mouseevent.altKey)		+"\n");
-		DKINFO("mouseevent.button = "			+toString(mouseevent.button)		+"\n");
-		DKINFO("mouseevent.buttons = "			+toString(mouseevent.buttons)		+"\n");
-		DKINFO("mouseevent.clientX = "			+toString(mouseevent.clientX)		+"\n");
-		DKINFO("mouseevent.clientY = "			+toString(mouseevent.clientY)		+"\n");
-		DKINFO("mouseevent.ctrlKey = "			+toString(mouseevent.ctrlKey)		+"\n");
-		DKINFO("mouseevent.metaKey = "			+toString(mouseevent.metaKey)		+"\n");
-		DKINFO("mouseevent.movementX = "		+toString(mouseevent.movementX)		+"\n");
-		DKINFO("mouseevent.movementY = "		+toString(mouseevent.movementY)		+"\n");
-		DKINFO("mouseevent.offsetX = "			+toString(mouseevent.offsetX)		+"\n");
-		DKINFO("mouseevent.offsetY = "			+toString(mouseevent.offsetY)		+"\n");
-		DKINFO("mouseevent.pageX = "			+toString(mouseevent.pageX)			+"\n");
-		DKINFO("mouseevent.pageY = "			+toString(mouseevent.pageY)			+"\n");
-		DKINFO("mouseevent.relatedTarget = "	+toString(mouseevent.relatedTarget)	+"\n");
-		DKINFO("mouseevent.screenX = "			+toString(mouseevent.screenX)		+"\n");
-		DKINFO("mouseevent.screenY = "			+toString(mouseevent.screenY)		+"\n");
-		DKINFO("mouseevent.shiftKey = "			+toString(mouseevent.shiftKey)		+"\n");
-		DKINFO("mouseevent.x = "				+toString(mouseevent.x)				+"\n");
-		DKINFO("mouseevent.y = "				+toString(mouseevent.y)				+"\n");
+	static void printMouseEventProperties(DKMouseEvent& mouseEvent){
+		DKDEBUGFUNC(mouseEvent);
+		DKINFO("mouseEvent.altKey = "			+toString(mouseEvent.altKey)		+"\n");
+		DKINFO("mouseEvent.button = "			+toString(mouseEvent.button)		+"\n");
+		DKINFO("mouseEvent.buttons = "			+toString(mouseEvent.buttons)		+"\n");
+		DKINFO("mouseEvent.clientX = "			+toString(mouseEvent.clientX)		+"\n");
+		DKINFO("mouseEvent.clientY = "			+toString(mouseEvent.clientY)		+"\n");
+		DKINFO("mouseEvent.ctrlKey = "			+toString(mouseEvent.ctrlKey)		+"\n");
+		DKINFO("mouseEvent.metaKey = "			+toString(mouseEvent.metaKey)		+"\n");
+		DKINFO("mouseEvent.movementX = "		+toString(mouseEvent.movementX)		+"\n");
+		DKINFO("mouseEvent.movementY = "		+toString(mouseEvent.movementY)		+"\n");
+		DKINFO("mouseEvent.offsetX = "			+toString(mouseEvent.offsetX)		+"\n");
+		DKINFO("mouseEvent.offsetY = "			+toString(mouseEvent.offsetY)		+"\n");
+		DKINFO("mouseEvent.pageX = "			+toString(mouseEvent.pageX)			+"\n");
+		DKINFO("mouseEvent.pageY = "			+toString(mouseEvent.pageY)			+"\n");
+		DKINFO("mouseEvent.relatedTarget = "	+toString(mouseEvent.relatedTarget)	+"\n");
+		DKINFO("mouseEvent.screenX = "			+toString(mouseEvent.screenX)		+"\n");
+		DKINFO("mouseEvent.screenY = "			+toString(mouseEvent.screenY)		+"\n");
+		DKINFO("mouseEvent.shiftKey = "			+toString(mouseEvent.shiftKey)		+"\n");
+		DKINFO("mouseEvent.x = "				+toString(mouseEvent.x)				+"\n");
+		DKINFO("mouseEvent.y = "				+toString(mouseEvent.y)				+"\n");
 	}
 
-	static bool onmouseevent(DKEvent& event){
+	static bool onMouseEvent(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKINFO("TEST_MouseEvent::onmouseevent() \n");
+		DKINFO("TEST_MouseEvent::onMouseEvent() \n");
 		printMouseEventProperties(dynamic_cast<DKMouseEvent&>(event));			//TODO: try to remove the need for dynamic_cast
 		TEST_UIEvent::printUIEventProperties(dynamic_cast<DKUIEvent&>(event));	//TODO: try to remove the need for dynamic_cast
 		TEST_Event::printEventProperties(event);

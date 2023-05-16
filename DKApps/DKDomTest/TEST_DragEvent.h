@@ -14,21 +14,21 @@ public:
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_DragEvent.h //////\n");
 	
-		DKEventTarget myEventTarget;
-		myEventTarget.addEventListener("dragevent", &TEST_DragEvent::ondragevent);
-		DKDragEvent dragevent("dragevent", "");
-		myEventTarget.dispatchEvent(dragevent);
+		DKEventTarget eventTarget;
+		eventTarget.addEventListener("dragEvent", &TEST_DragEvent::onDragEvent);
+		DKDragEvent dragEvent("dragEvent", "");
+		eventTarget.dispatchEvent(dragEvent);
 		return true;
 	}
 	
-	static void printDragEventProperties(DKDragEvent& dragevent){
-		DKDEBUGFUNC(dragevent);
+	static void printDragEventProperties(DKDragEvent& dragEvent){
+		DKDEBUGFUNC(dragEvent);
 		DKTODO();
 	}
 	
-	static bool ondragevent(DKEvent& event){
+	static bool onDragEvent(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKINFO("TEST_DragEvent::ondragevent() \n");
+		DKINFO("TEST_DragEvent::onDragEvent() \n");
 		printDragEventProperties(dynamic_cast<DKDragEvent&>(event));			//TODO: try to remove the need for dynamic_cast
 		TEST_UIEvent::printUIEventProperties(dynamic_cast<DKUIEvent&>(event));	//TODO: try to remove the need for dynamic_cast
 		TEST_Event::printEventProperties(event);

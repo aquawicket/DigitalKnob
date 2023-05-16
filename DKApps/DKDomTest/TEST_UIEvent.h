@@ -14,10 +14,10 @@ public:
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_UIEvent.h ////// \n");
 		
-		DKEventTarget myEventTarget;
-		myEventTarget.addEventListener("uievent", &TEST_UIEvent::onuievent);
+		DKEventTarget eventTarget;
+		eventTarget.addEventListener("uievent", &TEST_UIEvent::onuievent);
 		DKUIEvent uievent("uievent", "");
-		myEventTarget.dispatchEvent(uievent);
+		eventTarget.dispatchEvent(uievent);
 		return true;
 	}
 	

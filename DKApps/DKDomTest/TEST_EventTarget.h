@@ -14,8 +14,8 @@ public:
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_EventTarget.h //////\n");
 		
-		DKEventTarget myTarget;
-		printEventTargetProperties(myTarget);
+		DKEventTarget eventTarget;
+		printEventTargetProperties(eventTarget);
 		
 		return true;
 	}
