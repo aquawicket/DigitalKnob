@@ -12,9 +12,9 @@ WARNING_DISABLE
 		#include "SDL.h"
 	#endif
 #endif
-#if LINUX
-	#include <X11/Xlib.h>
-#endif
+//#if LINUX
+//	#include <X11/Xlib.h>
+//#endif
 #if MAC
 	#import "CoreGraphics/CoreGraphics.h"
 #endif
