@@ -1,4 +1,4 @@
-dk_depend(libx11-dev)	# XOpenDisplay()
+#dk_depend(libx11-dev)	# XOpenDisplay()
 
 dk_depend(DKInterface)
 
