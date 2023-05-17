@@ -27,10 +27,10 @@ public:
 		DKDuktape::AttachFunction("CPP_DKScreenDUK_width", 			DKScreenDUK::width);
 		
 		// readonly attribute long height;
-		//DKDuktape::AttachFunction("CPP_DKScreenDUK_height", 		DKScreenDUK::height);
+		DKDuktape::AttachFunction("CPP_DKScreenDUK_height", 		DKScreenDUK::height);
 		
 		// readonly attribute unsigned long colorDepth;
-		//DKDuktape::AttachFunction("CPP_DKScreenDUK_colorDepth", 	DKScreenDUK::colorDepth);
+		DKDuktape::AttachFunction("CPP_DKScreenDUK_colorDepth", 	DKScreenDUK::colorDepth);
 		
 		// readonly attribute unsigned long pixelDepth;
 		//DKDuktape::AttachFunction("CPP_DKScreenDUK_pixelDepth", 	DKScreenDUK::pixelDepth);
@@ -120,7 +120,6 @@ public:
 		return true;
 	}
 	
-	/*
 	// readonly attribute long height;
 	static int height(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
@@ -134,21 +133,22 @@ public:
 		dukglue_push(ctx, _height);
 		return true;
 	}
-	*/
 	
-	/////////////////////////////////////////////////////////////////////////////
-	
-	/*
 	// readonly attribute unsigned long colorDepth;
 	static int colorDepth(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		int _colorDepth = GetInt(ctx);
-		if(!eventTarget(ctx)->colorDepth(_colorDepth, duk_is_valid_index(ctx, 1)))
-			return false;
+		if(duk_is_valid_index(ctx, 1)){
+			eventTarget(ctx)->colorDepth(_colorDepth);
+		}
+		else{
+			_colorDepth = eventTarget(ctx)->colorDepth();
+		}
 		dukglue_push(ctx, _colorDepth);
 		return true;
 	}
 	
+	/*
 	// readonly attribute unsigned long pixelDepth;
 	static int pixelDepth(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
