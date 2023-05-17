@@ -35,7 +35,8 @@ public:
 	virtual int height(const int&) { return 0; } // setter
 	
 	// readonly attribute unsigned long colorDepth;
-	//virtual bool colorDepth(int&, bool) { return false; }
+	virtual int colorDepth(); // getter
+	virtual int colorDepth(const int&) { return 0; } // setter
 	
 	// readonly attribute unsigned long pixelDepth;
 	//virtual bool pixelDepth(int&, bool) { return false; }

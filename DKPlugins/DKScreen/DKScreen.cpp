@@ -7,6 +7,9 @@ WARNING_DISABLE
 		#include "SDL.h"
 	#endif
 #endif
+#if IOS
+	//#import <UIKit/UIKit.h>
+#endif 
 #if LINUX
 	#include <X11/Xlib.h>
 #endif
@@ -37,6 +40,10 @@ int DKScreen::width() { // getter
 	#elif EMSCRIPTEN
 		DKWARN("Screen.width not implemented!");
 		return 0;
+	#elif IOS
+		CGRect screenRect = [[UIScreen mainScreen] bounds];
+		CGFloat screenWidth = screenRect.size.width;
+		return screenWidth;
 	#elif LINUX
 		#if HAVE_libx11_dev
 			Display* d = XOpenDisplay(NULL);
@@ -82,6 +89,10 @@ int DKScreen::height() { // getter
 	#elif EMSCRIPTEN
 		DKWARN("Screen.height not implemented!");
 		return 0;
+	#elif IOS
+		CGRect screenRect = [[UIScreen mainScreen] bounds];
+		CGFloat screenHeight = screenRect.size.height;
+		return screenHeight;
 	#elif LINUX
 		#if HAVE_libx11_dev
 			Display* d = XOpenDisplay(NULL);
@@ -103,6 +114,31 @@ int DKScreen::height() { // getter
 		return desktop.bottom;
 	#else
 		DKWARN("Screen.height not implemented!");
+		return 0;
+	#endif
+}
+
+int DKScreen::colorDepth() { // getter
+	DKDEBUGFUNC();
+	#if ANDROID
+		DKWARN("Screen.colorDepth not implemented!");
+		return 0;
+	#elif EMSCRIPTEN
+		DKWARN("Screen.colorDepth not implemented!");
+		return 0;
+	#elif LINUX
+		DKWARN("Screen.colorDepth not implemented!");
+		return 0;
+	#elif MAC
+		DKWARN("Screen.colorDepth not implemented!");
+		return 0;
+	#elif WIN
+		HDC dc = GetDC(NULL);
+		int bitsPerPixel = GetDeviceCaps(dc, BITSPIXEL);
+		ReleaseDC(NULL, dc);
+		return bitsPerPixel;
+	#else
+		DKWARN("Screen.colorDepth not implemented!");
 		return 0;
 	#endif
 }
