@@ -4,8 +4,6 @@
 #ifndef DKScreen_H
 #define DKScreen_H
 
-#include "DKInterface/DKInterface.h"
-
 WARNING_DISABLE
 #if ANDROID
 	# if HAVE_sdl
@@ -19,6 +17,10 @@ WARNING_DISABLE
 	#import "CoreGraphics/CoreGraphics.h"
 #endif
 WARNING_ENABLE
+
+#include "DKInterface/DKInterface.h"
+
+
 
 // [Exposed=Window]
 // interface Screen {
