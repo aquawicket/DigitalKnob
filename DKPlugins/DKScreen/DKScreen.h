@@ -36,6 +36,7 @@ public:
 				DKERROR("GetWindowRect() failed\n");
 			return desktop.right;
 		#endif
+		return 0;
 	}
 	virtual int width(const int&) { return 0; }
 	
