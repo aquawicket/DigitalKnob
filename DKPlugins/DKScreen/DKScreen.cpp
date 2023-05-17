@@ -1,3 +1,5 @@
+// [IDL] https://drafts.csswg.org/cssom-view/#the-screen-interface
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Screen
 #include "DK/stdafx.h"
 #include "DKScreen/DKScreen.h"
 
@@ -22,14 +24,14 @@ WARNING_ENABLE
 // readonly attribute long availWidth;
 int DKScreen::availWidth() { // getter
 	DKDEBUGFUNC();
-	DKWARN("Screen.availWidth not implemented!");
+	DKWARN("Screen.availWidth not implemented! \n");
 	return 0;
 }
 
 // readonly attribute long availHeight;
 int DKScreen::availHeight() { // getter
 	DKDEBUGFUNC();
-	DKWARN("Screen.availHeight not implemented!");
+	DKWARN("Screen.availHeight not implemented! \n");
 	return 0;
 }
 
@@ -53,7 +55,7 @@ int DKScreen::width() { // getter
 			return 0;
 		#endif
 	#elif EMSCRIPTEN
-		DKWARN("Screen.width not implemented!");
+		DKWARN("Screen.width not implemented! \n");
 		return 0;
 	#elif IOS
 		CGRect screenRect = [[UIScreen mainScreen] bounds];
@@ -65,7 +67,7 @@ int DKScreen::width() { // getter
 			Screen* s = DefaultScreenOfDisplay(d);
 			return s->width;
 		#else
-			return DKERROR("!HAVE_libx11_dev");
+			return DKERROR("!HAVE_libx11_dev \n");
 		#endif
 	#elif MAC
 		CGRect mainMonitor = CGDisplayBounds(CGMainDisplayID());
@@ -75,10 +77,10 @@ int DKScreen::width() { // getter
 		RECT desktop;
 		const HWND hDesktop = GetDesktopWindow();
 		if(!GetWindowRect(hDesktop, &desktop))
-			DKERROR("GetWindowRect() failed\n");
+			DKERROR("GetWindowRect() failed \n");
 		return desktop.right;
 	#else
-		DKWARN("Screen.width not implemented!");
+		DKWARN("Screen.width not implemented! \n");
 		return 0;
 	#endif
 }
@@ -103,7 +105,7 @@ int DKScreen::height() { // getter
 			return 0;
 		#endif
 	#elif EMSCRIPTEN
-		DKWARN("Screen.height not implemented!");
+		DKWARN("Screen.height not implemented! \n");
 		return 0;
 	#elif IOS
 		CGRect screenRect = [[UIScreen mainScreen] bounds];
@@ -115,7 +117,7 @@ int DKScreen::height() { // getter
 			Screen* s = DefaultScreenOfDisplay(d);
 			return s->height;
 		#else
-			DKERROR("!HAVE_libx11_dev");
+			DKERROR("!HAVE_libx11_dev \n");
 			return 0;
 		#endif
 	#elif MAC
@@ -126,10 +128,10 @@ int DKScreen::height() { // getter
 		RECT desktop;
 		const HWND hDesktop = GetDesktopWindow();
 		if(!GetWindowRect(hDesktop, &desktop))
-			DKERROR("GetWindowRect() failed\n");
+			DKERROR("GetWindowRect() failed \n");
 		return desktop.bottom;
 	#else
-		DKWARN("Screen.height not implemented!");
+		DKWARN("Screen.height not implemented! \n");
 		return 0;
 	#endif
 }
@@ -138,16 +140,16 @@ int DKScreen::height() { // getter
 int DKScreen::colorDepth() { // getter
 	DKDEBUGFUNC();
 	#if ANDROID
-		DKWARN("Screen.colorDepth not implemented!");
+		DKWARN("Screen.colorDepth not implemented! \n");
 		return 0;
 	#elif EMSCRIPTEN
-		DKWARN("Screen.colorDepth not implemented!");
+		DKWARN("Screen.colorDepth not implemented! \n");
 		return 0;
 	#elif LINUX
-		DKWARN("Screen.colorDepth not implemented!");
+		DKWARN("Screen.colorDepth not implemented! \n");
 		return 0;
 	#elif MAC
-		DKWARN("Screen.colorDepth not implemented!");
+		DKWARN("Screen.colorDepth not implemented! \n");
 		return 0;
 	#elif WIN
 		HDC dc = GetDC(NULL);
@@ -155,7 +157,7 @@ int DKScreen::colorDepth() { // getter
 		ReleaseDC(NULL, dc);
 		return bitsPerPixel;
 	#else
-		DKWARN("Screen.colorDepth not implemented!");
+		DKWARN("Screen.colorDepth not implemented! \n");
 		return 0;
 	#endif
 }
@@ -163,6 +165,6 @@ int DKScreen::colorDepth() { // getter
 // readonly attribute unsigned long pixelDepth;
 int DKScreen::pixelDepth() { // getter
 	DKDEBUGFUNC();
-	DKWARN("Screen.pixelDepth not implemented!");
+	DKWARN("Screen.pixelDepth not implemented! \n");
 	return 0;
 }
