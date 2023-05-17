@@ -29,11 +29,13 @@ public:
 	//virtual bool width(int&, bool) { return false; }
 	virtual int width() { 
 		DKDEBUGFUNC();
-		RECT desktop;
-		const HWND hDesktop = GetDesktopWindow();
-		if(!GetWindowRect(hDesktop, &desktop))
-			DKERROR("GetWindowRect() failed\n");
-		return desktop.right;
+		#if WIN
+			RECT desktop;
+			const HWND hDesktop = GetDesktopWindow();
+			if(!GetWindowRect(hDesktop, &desktop))
+				DKERROR("GetWindowRect() failed\n");
+			return desktop.right;
+		#endif
 	}
 	virtual int width(const int&) { return 0; }
 	
