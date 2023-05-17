@@ -37,8 +37,8 @@ WARNING_ENABLE
 
 class DKEmscripten{
 public:
-	static bool GetScreenWidth(int& w);		// TODO: Move to DKScreen Interface
-	static bool GetScreenHeight(int& h);	// TODO: Move to DKScreen Interface
+	//static bool GetScreenWidth(int& w);		// TODO: Move to DKScreen Interface
+	//static bool GetScreenHeight(int& h);	// TODO: Move to DKScreen Interface
 };
 
 #endif //DKEmscripten_H

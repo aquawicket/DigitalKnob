@@ -395,11 +395,11 @@ bool DKUtil::GetProcessList(DKString& list){
 		return DKERROR("not implemented on this OS\n");
 #	endif
 }
-
+/*
 bool DKUtil::GetScreenHeight(unsigned int& h){	// TODO: Move to DKScreen Interface
 #	if WIN32
 		return DKWindows::GetScreenHeight(h) && DKDEBUGRETURN(h);
-#	elif MAC
+#	if MAC
 		return DKMac::GetScreenHeight(h) && DKDEBUGRETURN(h);
 #	elif LINUX
 		return DKLinux::GetScreenHeight(h);//&& DKDEBUGRETURN(h);
@@ -413,9 +413,9 @@ bool DKUtil::GetScreenHeight(unsigned int& h){	// TODO: Move to DKScreen Interfa
 }
 
 bool DKUtil::GetScreenWidth(unsigned int& w){	// TODO: Move to DKScreen Interface
-#	if WIN32
-		return DKWindows::GetScreenWidth(w) && DKDEBUGRETURN(w);
-#	elif MAC
+//#	if WIN32
+//		return DKWindows::GetScreenWidth(w) && DKDEBUGRETURN(w);
+#	if MAC
 		return DKMac::GetScreenWidth(w) && DKDEBUGRETURN(w);
 #	elif LINUX
 		return DKLinux::GetScreenWidth(w);// && DKDEBUGRETURN(w);
@@ -427,7 +427,7 @@ bool DKUtil::GetScreenWidth(unsigned int& w){	// TODO: Move to DKScreen Interfac
 		return DKERROR("not implemented on this OS\n");
 #	endif
 }
-
+*/
 bool DKUtil::GetThreadId(unsigned long int& id){
 	//DKDEBUGFUNC(id);  // DON'T DO THIS
 	id = DKUtil::mainThreadId;

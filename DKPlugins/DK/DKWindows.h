@@ -64,8 +64,8 @@ public:
 	static bool GetPixelFromImage(const DKString& image, int x, int y);
 	static bool GetPixelFromScreen(int x, int y, int& r, int& g, int& b);
 	static bool GetProcessList(DKString& list);
-	static bool GetScreenWidth(unsigned int& w);	// TODO: Move to DKScreen Interface
-	static bool GetScreenHeight(unsigned int& h);	// TODO: Move to DKScreen Interface
+	//static bool GetScreenWidth(unsigned int& w);	// TODO: Move to DKScreen Interface
+	//static bool GetScreenHeight(unsigned int& h);	// TODO: Move to DKScreen Interface
 	static bool GetUsername(DKString& username);
 	static bool GetVolume(int& percent);
 	static bool KeyIsDown(const int& key);

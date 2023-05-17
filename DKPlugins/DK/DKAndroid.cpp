@@ -264,17 +264,16 @@ bool DKAndroid::GetMousePos(int& x, int& y){
 	return true;
 }
 
+/*
 bool DKAndroid::GetScreenHeight(unsigned int& h) {		// TODO: Move to DKScreen Interface
 	DKDEBUGFUNC(h);
 	// https://stackoverflow.com/a/12134363/688352
-	/*
-	#include <sys/ioctl.h>
-	#include <linux/fb.h>
-	struct fb_var_screeninfo fb_var;
-	int fd = open("/dev/graphics/fb0", O_RDONLY);
-	ioctl(fd, FBIOGET_VSCREENINFO, &fb_var);
-	close(fd);
-	*/
+	//#include <sys/ioctl.h>
+	//#include <linux/fb.h>
+	//struct fb_var_screeninfo fb_var;
+	//int fd = open("/dev/graphics/fb0", O_RDONLY);
+	//ioctl(fd, FBIOGET_VSCREENINFO, &fb_var);
+	//close(fd);
 #if HAVE_sdl
 	SDL_DisplayMode sdl_displayMode;
 	SDL_GetCurrentDisplayMode(0, &sdl_displayMode);
@@ -288,14 +287,12 @@ bool DKAndroid::GetScreenHeight(unsigned int& h) {		// TODO: Move to DKScreen In
 bool DKAndroid::GetScreenWidth(unsigned int& w){		// TODO: Move to DKScreen Interface
 	DKDEBUGFUNC(w);
 	// https://stackoverflow.com/a/12134363/688352
-	/*
-	#include <sys/ioctl.h>
-	#include <linux/fb.h>
-	struct fb_var_screeninfo fb_var;
-	int fd = open("/dev/graphics/fb0", O_RDONLY);
-	ioctl(fd, FBIOGET_VSCREENINFO, &fb_var);
-	close(fd);
-	*/
+	//#include <sys/ioctl.h>
+	//#include <linux/fb.h>
+	//struct fb_var_screeninfo fb_var;
+	//int fd = open("/dev/graphics/fb0", O_RDONLY);
+	//ioctl(fd, FBIOGET_VSCREENINFO, &fb_var);
+	//close(fd);
 #if HAVE_sdl
 	SDL_DisplayMode sdl_displayMode;
 	SDL_GetCurrentDisplayMode(0, &sdl_displayMode);
@@ -305,7 +302,7 @@ bool DKAndroid::GetScreenWidth(unsigned int& w){		// TODO: Move to DKScreen Inte
 	return DKERROR("sdl unavailable! \n");
 #endif
 }
-
+*/
 /*
 void DKAndroid::ProcessEvent(Rocket::Core::Event& event){
 	DKDEBUGFUNC(events);

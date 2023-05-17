@@ -65,8 +65,8 @@ public:
 	static bool GetPixelFromImage(const DKString& image, int x, int y);
 	static bool GetPixelFromScreen(int x, int y, int& r, int& g, int& b);
 	static bool GetProcessList(DKString& list);
-	static bool GetScreenHeight(unsigned int& h);	// TODO: Move to DKScreen Interface
-	static bool GetScreenWidth(unsigned int& w);	// TODO: Move to DKScreen Interface
+	//static bool GetScreenHeight(unsigned int& h);	// TODO: Move to DKScreen Interface
+	//static bool GetScreenWidth(unsigned int& w);	// TODO: Move to DKScreen Interface
 	static bool GetThreadId(unsigned long int& id);
 	static bool GetTicks(long& ticks);
 	static bool GetTime(DKString& _time);

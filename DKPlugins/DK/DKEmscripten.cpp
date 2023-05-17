@@ -28,7 +28,7 @@
 #if EMSCRIPTEN
 #include "DK/DKEmscripten.h"
 
-
+/*
 bool DKEmscripten::GetScreenHeight(int& h){		// TODO: Move to DKScreen Interface
 	return DKERROR("not impemented on emscripten")
 }
@@ -36,5 +36,5 @@ bool DKEmscripten::GetScreenHeight(int& h){		// TODO: Move to DKScreen Interface
 bool DKEmscripten::GetScreenWidth(int& w){		// TODO: Move to DKScreen Interface
 	return DKERROR("not impemented on emscripten")
 }
-
+*/
 #endif //EMSCRIPTEN

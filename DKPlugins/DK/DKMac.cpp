@@ -52,6 +52,7 @@ bool DKMac::SetMousePos(const int& x, const int& y){
 	return true;
 }
 
+/*
 bool DKMac::GetScreenWidth(unsigned int& w){		// TODO: Move to DKScreen Interface
 	CGRect mainMonitor = CGDisplayBounds(CGMainDisplayID());
 	CGFloat monitorWidth = CGRectGetWidth(mainMonitor);
@@ -65,6 +66,7 @@ bool DKMac::GetScreenHeight(unsigned int& h){		// TODO: Move to DKScreen Interfa
 	h = monitorHeight;
 	return true;
 }
+*/
 
 bool DKMac::GetUsername(DKString& username){
     return DKERROR("not implemented\n");

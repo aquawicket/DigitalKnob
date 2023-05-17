@@ -36,8 +36,8 @@ public:
 	static bool GetKey(int& key);
 	static bool GetMousePos(int& x, int& y);
 	static bool SetMousePos(const int& x, const int& y);
-	static bool GetScreenWidth(unsigned int& w);	// TODO: Move to DKScreen Interface
-	static bool GetScreenHeight(unsigned int& h);	// TODO: Move to DKScreen Interface
+	//static bool GetScreenWidth(unsigned int& w);	// TODO: Move to DKScreen Interface
+	//static bool GetScreenHeight(unsigned int& h);	// TODO: Move to DKScreen Interface
 	static bool GetUsername(DKString& username);
 	static bool LeftPress();
 	static bool LeftRelease();

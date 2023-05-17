@@ -32,6 +32,7 @@ WARNING_DISABLE
 #import <UIKit/UIKit.h>
 WARNING_ENABLE
 
+/*
 bool DKIos::GetScreenHeight(unsigned int& h){		// TODO: Move to DKScreen Interface
 	CGRect screenRect = [[UIScreen mainScreen] bounds];
 	CGFloat screenHeight = screenRect.size.height;
@@ -45,5 +46,6 @@ bool DKIos::GetScreenWidth(unsigned int& w){		// TODO: Move to DKScreen Interfac
 	w = screenWidth;
 	return true;
 }
+*/
 
 #endif //IOS

@@ -581,6 +581,7 @@ bool DKWindows::GetProcessList(DKString& list){
 	return true;
 }
 
+/*
 bool DKWindows::GetScreenWidth(unsigned int& w){	// TODO: Move to DKScreen Interface
 	DKDEBUGFUNC(w);
 	RECT desktop;
@@ -600,6 +601,7 @@ bool DKWindows::GetScreenHeight(unsigned int& h){	// TODO: Move to DKScreen Inte
 	h = desktop.bottom;
 	return true;// && DKDEBUGRETURN(h);
 }
+*/
 
 bool DKWindows::GetUsername(DKString& username){
 	DKDEBUGFUNC(username);
