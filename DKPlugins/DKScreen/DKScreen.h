@@ -15,6 +15,9 @@ WARNING_DISABLE
 #if LINUX
 	#include <X11/Xlib.h>	// XOpenDisplay()
 #endif
+#if MAC
+	#import "CoreGraphics/CoreGraphics.h"
+#endif
 WARNING_ENABLE
 
 // [Exposed=Window]
