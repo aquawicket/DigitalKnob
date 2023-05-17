@@ -7,6 +7,11 @@
 #include "DKInterface/DKInterface.h"
 
 WARNING_DISABLE
+#if ANDROID
+	# if HAVE_sdl
+		#include "SDL.h"
+	#endif
+#endif
 #if LINUX
 	#include <X11/Xlib.h>	// XOpenDisplay()
 #endif
