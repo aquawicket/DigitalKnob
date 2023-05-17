@@ -15,8 +15,12 @@ WARNING_DISABLE
 #if LINUX
 	#include <stdio.h>
 	#include <stdlib.h>
-	#include <X11/Xlib.h>	// XOpenDisplay()
-#endif
+	#include <X11/Xlib.h>
+	#include <X11/XKBlib.h>
+	#include <X11/extensions/XTest.h>  //requires libxtst-dev
+	#include <alsa/asoundlib.h>
+	#include <unistd.h>         
+	#include <termios.h>               //for system()#endif
 #if MAC
 	#import "CoreGraphics/CoreGraphics.h"
 #endif
