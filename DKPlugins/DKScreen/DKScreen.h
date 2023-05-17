@@ -4,6 +4,8 @@
 #ifndef DKScreen_H
 #define DKScreen_H
 
+#include "DKInterface/DKInterface.h"
+
 WARNING_DISABLE
 #if ANDROID
 	# if HAVE_sdl
@@ -11,14 +13,14 @@ WARNING_DISABLE
 	#endif
 #endif
 #if LINUX
-	#include <X11/Xlib.h>
+	//#include <X11/Xlib.h>
 #endif
 #if MAC
 	#import "CoreGraphics/CoreGraphics.h"
 #endif
 WARNING_ENABLE
 
-#include "DKInterface/DKInterface.h"
+
 
 
 
