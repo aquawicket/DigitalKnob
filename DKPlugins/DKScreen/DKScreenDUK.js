@@ -26,14 +26,14 @@ var Screen = function Screen(address) {
 		
 	// readonly attribute long width;
 	Object.defineProperty(this, "width", {
-        get: function width()		{ return CPP_DKScreenDUK_width(this.address) },
-		//set: function width(num)	{ return CPP_DKScreenDUK_width(this.address, num) },
+        get: function width()			{ return CPP_DKScreenDUK_width(this.address) },
+		//set: function width(num)		{ return CPP_DKScreenDUK_width(this.address, num) },
     })
 		
 	// readonly attribute long height;
 	Object.defineProperty(this, "height", {
-        get: function height()		{ return CPP_DKScreenDUK_height(this.address) },
-		//set: function height(num)	{ return CPP_DKScreenDUK_height(this.address, num) },
+        get: function height()			{ return CPP_DKScreenDUK_height(this.address) },
+		//set: function height(num)		{ return CPP_DKScreenDUK_height(this.address, num) },
     })
 	
 	// readonly attribute unsigned long colorDepth;

@@ -21,25 +21,28 @@ public:
 	virtual ~DKScreen() {}
 	
 	// readonly attribute long availWidth;
-	//virtual bool availWidth(int&, bool) { return false; }
+	virtual int availWidth(); 							// getter
+	virtual int availWidth(const int&) { return 0; } 	// setter
 	
 	// readonly attribute long availHeight;
-	//virtual bool availHeight(int&, bool) { return false; }
+	virtual int availHeight(); 							// getter
+	virtual int availHeight(const int&) { return 0; } 	// setter
 	
 	// readonly attribute long width;
-	virtual int width(); // getter
-	virtual int width(const int&) { return 0; } // setter
+	virtual int width(); 								// getter
+	virtual int width(const int&) { return 0; } 		// setter
 	
 	// readonly attribute long height;
-	virtual int height(); // getter
-	virtual int height(const int&) { return 0; } // setter
+	virtual int height(); 								// getter
+	virtual int height(const int&) { return 0; } 		// setter
 	
 	// readonly attribute unsigned long colorDepth;
-	virtual int colorDepth(); // getter
-	virtual int colorDepth(const int&) { return 0; } // setter
+	virtual int colorDepth(); 							// getter
+	virtual int colorDepth(const int&) { return 0; } 	// setter
 	
 	// readonly attribute unsigned long pixelDepth;
-	//virtual bool pixelDepth(int&, bool) { return false; }
+	virtual int pixelDepth(); 							// getter
+	virtual int pixelDepth(const int&) { return 0; } 	// setter
 	
 //};
 };

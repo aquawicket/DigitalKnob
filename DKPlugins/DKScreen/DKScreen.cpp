@@ -19,6 +19,21 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
+// readonly attribute long availWidth;
+int DKScreen::availWidth() { // getter
+	DKDEBUGFUNC();
+	DKWARN("Screen.availWidth not implemented!");
+	return 0;
+}
+
+// readonly attribute long availHeight;
+int DKScreen::availHeight() { // getter
+	DKDEBUGFUNC();
+	DKWARN("Screen.availHeight not implemented!");
+	return 0;
+}
+
+// readonly attribute long width;
 int DKScreen::width() { // getter
 	DKDEBUGFUNC();
 	#if ANDROID
@@ -68,6 +83,7 @@ int DKScreen::width() { // getter
 	#endif
 }
 
+// readonly attribute long height;
 int DKScreen::height() { // getter
 	DKDEBUGFUNC();
 	#if ANDROID
@@ -118,6 +134,7 @@ int DKScreen::height() { // getter
 	#endif
 }
 
+// readonly attribute unsigned long colorDepth;
 int DKScreen::colorDepth() { // getter
 	DKDEBUGFUNC();
 	#if ANDROID
@@ -141,4 +158,11 @@ int DKScreen::colorDepth() { // getter
 		DKWARN("Screen.colorDepth not implemented!");
 		return 0;
 	#endif
+}
+
+// readonly attribute unsigned long pixelDepth;
+int DKScreen::pixelDepth() { // getter
+	DKDEBUGFUNC();
+	DKWARN("Screen.pixelDepth not implemented!");
+	return 0;
 }
