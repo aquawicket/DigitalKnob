@@ -65,6 +65,7 @@ public:
 		#elif EMSCRIPTEN
 			DKWARN("Screen.width not implemented!");
 			return 0;
+		/*
 		#elif LINUX
 			#if HAVE_libx11_dev
 				Display* d = XOpenDisplay(NULL);
@@ -73,6 +74,7 @@ public:
 			#else
 				return DKERROR("!HAVE_libx11_dev");
 			#endif
+		*/
 		#elif MAC
 			CGRect mainMonitor = CGDisplayBounds(CGMainDisplayID());
 			CGFloat monitorWidth = CGRectGetWidth(mainMonitor);
@@ -112,6 +114,7 @@ public:
 		#elif EMSCRIPTEN
 			DKWARN("Screen.height not implemented!");
 			return 0;
+		/*
 		#elif LINUX
 			#if HAVE_libx11_dev
 				Display* d = XOpenDisplay(NULL);
@@ -121,6 +124,7 @@ public:
 				DKERROR("!HAVE_libx11_dev");
 				return 0;
 			#endif
+		*/
 		#elif MAC
 			CGRect mainMonitor = CGDisplayBounds(CGMainDisplayID());
 			CGFloat monitorHeight = CGRectGetHeight(mainMonitor);
