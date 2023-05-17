@@ -13,6 +13,8 @@ WARNING_DISABLE
 	#endif
 #endif
 #if LINUX
+	#include <stdio.h>
+	#include <stdlib.h>
 	#include <X11/Xlib.h>	// XOpenDisplay()
 #endif
 #if MAC
