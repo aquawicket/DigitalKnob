@@ -73,8 +73,8 @@ public:
 	virtual int width(const int&) { return 0; } // setter
 	
 	// readonly attribute long height;
-	virtual bool height(int&, bool) { // getter
-		DKDEBUGFUNC(h);
+	virtual int height() { // getter
+		DKDEBUGFUNC();
 		#if ANDROID
 			// https://stackoverflow.com/a/12134363/688352
 			//#include <sys/ioctl.h>
