@@ -8,7 +8,7 @@ WARNING_DISABLE
 	#endif
 #endif
 #if IOS
-	//#import <UIKit/UIKit.h>
+	#import <UIKit/UIKit.h>
 #endif 
 #if LINUX
 	#include <X11/Xlib.h>
