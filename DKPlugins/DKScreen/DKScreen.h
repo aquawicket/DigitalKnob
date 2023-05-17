@@ -6,6 +6,10 @@
 
 #include "DKInterface/DKInterface.h"
 
+WARNING_DISABLE
+#include <X11/Xlib.h>	// XOpenDisplay()
+WARNING_ENABLE
+
 // [Exposed=Window]
 // interface Screen {
 class DKScreen : public DKInterface
