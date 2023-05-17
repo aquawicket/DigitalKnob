@@ -13,7 +13,7 @@ WARNING_DISABLE
 	#endif
 #endif
 #if LINUX
-	//#include <X11/Xlib.h>
+	#include <X11/Xlib.h>
 #endif
 #if MAC
 	#import "CoreGraphics/CoreGraphics.h"
