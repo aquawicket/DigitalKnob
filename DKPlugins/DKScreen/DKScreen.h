@@ -7,7 +7,9 @@
 #include "DKInterface/DKInterface.h"
 
 WARNING_DISABLE
-#include <X11/Xlib.h>	// XOpenDisplay()
+#if LINUX
+	#include <X11/Xlib.h>	// XOpenDisplay()
+#endif
 WARNING_ENABLE
 
 // [Exposed=Window]
