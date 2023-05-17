@@ -16,7 +16,7 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
-virtual int DKScreen::width() { // getter
+int DKScreen::width() { // getter
 	DKDEBUGFUNC();
 	#if ANDROID
 		// https://stackoverflow.com/a/12134363/688352
@@ -61,7 +61,7 @@ virtual int DKScreen::width() { // getter
 	#endif
 }
 
-virtual int DKScreen::height() { // getter
+int DKScreen::height() { // getter
 	DKDEBUGFUNC();
 	#if ANDROID
 		// https://stackoverflow.com/a/12134363/688352
