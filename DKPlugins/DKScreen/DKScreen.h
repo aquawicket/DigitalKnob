@@ -20,7 +20,8 @@ WARNING_DISABLE
 	#include <X11/extensions/XTest.h>  //requires libxtst-dev
 	#include <alsa/asoundlib.h>
 	#include <unistd.h>         
-	#include <termios.h>               //for system()#endif
+	#include <termios.h>               //for system()
+#endif
 #if MAC
 	#import "CoreGraphics/CoreGraphics.h"
 #endif
