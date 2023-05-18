@@ -16,7 +16,7 @@ typedef std::string UIEventInit;
 class DKUIEvent : public DKEvent
 {
 public:
-	//constructor(DOMString type, optional UIEventInit eventInitDict = {});
+	// constructor(DOMString type, optional UIEventInit eventInitDict = {});
 	DKUIEvent(DOMString _type, UIEventInit _eventInitDict) : DKEvent(_type, _eventInitDict) { // https://w3c.github.io/uievents/#dom-uievent-uievent
 		DKDEBUGFUNC(_type, _eventInitDict);
 		interfaceName = "UIEvent";

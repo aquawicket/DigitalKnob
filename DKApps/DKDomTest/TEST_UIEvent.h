@@ -23,10 +23,35 @@ public:
 	
 	static void printUIEventProperties(DKUIEvent& uievent){
 		DKDEBUGFUNC(uievent);
-		DKINFO("uievent.detail = "				+toString(uievent.detail)				+"\n");
-		DKINFO("uievent.sourceCapabilities = "	+toString(uievent.sourceCapabilities)	+"\n");
+		
+		// constructor(DOMString type, optional UIEventInit eventInitDict = {});
+		// function
+		
+		// readonly attribute Window? view;
 		DKINFO("uievent.view = "				+toString(uievent.view)					+"\n");
-		DKINFO("uievent.which = "				+toString(uievent.which)				+"\n");
+		
+		// readonly attribute long detail;
+		DKINFO("uievent.detail = "				+toString(uievent.detail)				+"\n");
+		
+		// Source: Input Device Capabilities (https://wicg.github.io/input-device-capabilities/)
+		// partial interface UIEvent {
+		// 		readonly attribute InputDeviceCapabilities? sourceCapabilities;
+				DKINFO("uievent.sourceCapabilities = "	+toString(uievent.sourceCapabilities)	+"\n");
+		// };
+		
+		// Source: UI Events (https://www.w3.org/TR/uievents/)
+		// partial interface UIEvent {
+		// 		Deprecated in this specification
+		//		undefined initUIEvent(DOMString typeArg, optional boolean bubblesArg = false, optional boolean cancelableArg = false, optional Window? viewArg = null, optional long detailArg = 0);
+				// function
+		//	};
+	
+		// Source: UI Events (https://www.w3.org/TR/uievents/)
+		// partial interface UIEvent {
+		//		The following support legacy user agents
+		//		readonly attribute unsigned long which;
+				DKINFO("uievent.which = "				+toString(uievent.which)				+"\n");
+		// };
 	}
 	
 	static bool onuievent(DKEvent& event){
