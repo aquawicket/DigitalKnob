@@ -26,7 +26,7 @@ public:
 		// [LegacyUnforgeable] readonly attribute WindowProxy window;
 	
 		// [Replaceable] readonly attribute WindowProxy self;
-		DKINFO("window.self = "				+toString(window.self)					+"\n");
+		DKINFO("window.self() = "			+toString(window.self())				+"\n");
 		
 		// [LegacyUnforgeable] readonly attribute Document document;
 		DKINFO("window.document = "			+toString(window.document)				+"\n");
