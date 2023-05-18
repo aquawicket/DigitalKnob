@@ -23,7 +23,12 @@ public:
 	
 	static void printDragEventProperties(DKDragEvent& dragEvent){
 		DKDEBUGFUNC(dragEvent);
-		DKTODO();
+		
+		// constructor(DOMString type, optional DragEventInit eventInitDict = {});
+		// function
+		
+		// readonly attribute DataTransfer? dataTransfer;
+		DKINFO("dragEvent.dataTransfer = "	+toString(dragEvent.dataTransfer)	+"\n");
 	}
 	
 	static bool onDragEvent(DKEvent& event){

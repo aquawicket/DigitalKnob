@@ -12,7 +12,7 @@
 class DKDragEvent : public DKMouseEvent
 {
 public:
-	//constructor(DOMString type, optional DragEventInit eventInitDict = {});
+	// constructor(DOMString type, optional DragEventInit eventInitDict = {});
 	DKDragEvent(DKString _type, DKString _eventInitDict) : DKMouseEvent(_type, _eventInitDict) { // [DragEvent()] https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/DragEvent
 		DKINFO("DKDragEvent("+_type+", "+_eventInitDict+") \n");
 		interfaceName = "DragEvent";
