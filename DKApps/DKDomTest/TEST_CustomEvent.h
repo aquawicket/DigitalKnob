@@ -24,7 +24,15 @@ public:
 
 	static void printCustomEventProperties(DKCustomEvent& customEvent) {
 		DKDEBUGFUNC(customEvent);
+		
+		// constructor(DOMString type, optional CustomEventInit eventInitDict = {});
+		// function
+		
+		// readonly attribute any detail;
 		DKINFO("customEvent.detail = "	+toString(customEvent.detail)	+"\n");
+		
+		// undefined initCustomEvent(DOMString type, optional boolean bubbles = false, optional boolean cancelable = false, optional any detail = null); // legacy
+		// function
 	}
 	
 	static bool onCustomEvent(DKEvent& event) {
