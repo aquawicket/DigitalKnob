@@ -90,7 +90,7 @@ public:
 	}
 	
 	// readonly attribute boolean bubbles;
-	bool bubbles = false; // https://dom.spec.whatwg.org/#dom-event-bubbles
+	bool bubbles = false;
 	
 	// readonly attribute boolean cancelable;
 	bool cancelable = false; // https://dom.spec.whatwg.org/#dom-event-cancelable

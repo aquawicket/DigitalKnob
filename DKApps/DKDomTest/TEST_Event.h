@@ -46,18 +46,72 @@ public:
 
 	static void printEventProperties(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKINFO("event.bubbles() = "				+toString(event.bubbles())				+"\n");
-		DKINFO("event.cancelable = "			+toString(event.cancelable)				+"\n");
-		DKINFO("event.composed = "				+toString(event.composed)				+"\n");
-		DKINFO("event.currentTarget = "			+toString(event.currentTarget)			+"\n");
-		DKINFO("event.defaultPrevented = "		+toString(event.defaultPrevented)		+"\n");
-		DKINFO("event.eventPhase = "			+toString(event.eventPhase)				+"\n");
-		DKINFO("event.isTrusted = "				+toString(event.isTrusted)				+"\n");
-		DKINFO("event.target = "				+toString(event.target)					+"\n");
-		DKINFO("event.timeStamp = "				+toString(event.timeStamp)				+"\n");
-		DKINFO("event.type = "					+toString(event.type)					+"\n");
-		DKINFO("event.cancelBubble = "			+toString(event.cancelBubble)			+"\n");
-		DKINFO("event.returnValue = "			+toString(event.returnValue)			+"\n");
+		
+		// readonly attribute DOMString type;
+		DKINFO("event.type = "				+toString(event.type)				+"\n");
+		
+		// readonly attribute EventTarget? target;
+		DKINFO("event.target = "			+toString(event.target)				+"\n");
+		
+		// readonly attribute EventTarget? srcElement; // legacy
+		DKINFO("event.srcElement = "		+toString(event.srcElement)			+"\n");
+		
+		// readonly attribute EventTarget? currentTarget;
+		DKINFO("event.currentTarget = "		+toString(event.currentTarget)		+"\n");
+		
+		// sequence<EventTarget> composedPath();
+		// function
+		
+		// const unsigned short NONE = 0;
+		DKINFO("event.NONE = "				+toString(event.NONE)				+"\n");
+		
+		// const unsigned short CAPTURING_PHASE = 1;
+		DKINFO("event.CAPTURING_PHASE = "	+toString(event.CAPTURING_PHASE)	+"\n");
+		
+		// const unsigned short AT_TARGET = 2;
+		DKINFO("event.AT_TARGET = "			+toString(event.AT_TARGET)			+"\n");
+		
+		// const unsigned short BUBBLING_PHASE = 3;
+		DKINFO("event.BUBBLING_PHASE = "	+toString(event.BUBBLING_PHASE)		+"\n");
+		
+		// readonly attribute unsigned short eventPhase;
+		DKINFO("event.eventPhase = "		+toString(event.eventPhase)			+"\n");
+		
+		// undefined stopPropagation();
+		// function 
+		
+		// attribute boolean cancelBubble; // legacy alias of .stopPropagation()
+		DKINFO("event.cancelBubble = "		+toString(event.cancelBubble)	+"\n");
+		
+		// undefined stopImmediatePropagation();
+		// function
+		
+		// readonly attribute boolean bubbles;
+		DKINFO("event.bubbles = "			+toString(event.bubbles)			+"\n");
+		
+		// readonly attribute boolean cancelable;
+		DKINFO("event.cancelable = "		+toString(event.cancelable)			+"\n");
+		
+		// attribute boolean returnValue;  // legacy
+		DKINFO("event.returnValue = "		+toString(event.returnValue)		+"\n");
+		
+		// undefined preventDefault();
+		// function
+		
+		// readonly attribute boolean defaultPrevented;
+		DKINFO("event.defaultPrevented = "	+toString(event.defaultPrevented)	+"\n");
+		
+		// readonly attribute boolean composed;
+		DKINFO("event.composed = "			+toString(event.composed)			+"\n");
+		
+		// [LegacyUnforgeable] readonly attribute boolean isTrusted;
+		DKINFO("event.isTrusted = "			+toString(event.isTrusted)			+"\n");
+		
+		// readonly attribute DOMHighResTimeStamp timeStamp;
+		DKINFO("event.timeStamp = "			+toString(event.timeStamp)			+"\n");
+		
+		// undefined initEvent(DOMString type, optional boolean bubbles = false, optional boolean cancelable = false); // legacy
+		// function 
 	}
 	
 	static bool onevent(DKEvent& event){
