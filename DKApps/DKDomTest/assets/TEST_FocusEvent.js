@@ -4,5 +4,10 @@ console.log("\n////// TEST_FocusEvent.js //////")
 
 
 function printFocusEventProperties(focusevent){
+	
+	// constructor(DOMString type, optional FocusEventInit eventInitDict = {});
+	// function
+		
+	// readonly attribute EventTarget? relatedTarget;
 	console.log("focusevent.relatedTarget = "	+focusevent.relatedTarget)
 }

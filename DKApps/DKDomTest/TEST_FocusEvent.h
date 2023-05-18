@@ -23,6 +23,11 @@ public:
 	
 	static void printFocusEventProperties(DKFocusEvent& focusEvent){
 		DKDEBUGFUNC(focusEvent);
+		
+		// constructor(DOMString type, optional FocusEventInit eventInitDict = {});
+		// function
+		
+		// readonly attribute EventTarget? relatedTarget;
 		DKINFO("focusEvent.relatedTarget = "+toString(focusEvent.relatedTarget)	+"\n");
 	}
 	
