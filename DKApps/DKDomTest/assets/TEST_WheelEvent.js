@@ -4,11 +4,29 @@ console.log("\n////// TEST_WheelEvent.js //////")
 
 
 function printWheelEventProperties(wheelevent){
+	
+	// constructor(DOMString type, optional WheelEventInit eventInitDict = {});
+	// function
+	
+	// DeltaModeCode
+	// const unsigned long DOM_DELTA_PIXEL = 0x00;
+	console.log("wheelevent.DOM_DELTA_PIXEL = "		+wheelevent.DOM_DELTA_PIXEL)
+	
+	// const unsigned long DOM_DELTA_LINE  = 0x01;
+	console.log("wheelevent.DOM_DELTA_LINE = "		+wheelevent.DOM_DELTA_LINE)
+	
+	// const unsigned long DOM_DELTA_PAGE  = 0x02;
+	console.log("wheelevent.DOM_DELTA_PAGE = "		+wheelevent.DOM_DELTA_PAGE)
+	
+	// readonly attribute double deltaX;
 	console.log("wheelevent.deltaX = "		+wheelevent.deltaX)
+	
+	// readonly attribute double deltaY;
 	console.log("wheelevent.deltaY = "		+wheelevent.deltaY)
+	
+	// readonly attribute double deltaZ;
 	console.log("wheelevent.deltaZ = "		+wheelevent.deltaZ)
+	
+	// readonly attribute unsigned long deltaMode;
 	console.log("wheelevent.deltaMode = "	+wheelevent.deltaMode)
-	console.log("wheelevent.wheelDelta = "	+wheelevent.wheelDelta)
-	console.log("wheelevent.wheelDeltaX = "	+wheelevent.wheelDeltaX)
-	console.log("wheelevent.wheelDeltaY = "	+wheelevent.wheelDeltaY)
 }

@@ -24,10 +24,31 @@ public:
 
 	static void printWheelEventProperties(DKWheelEvent& wheelEvent){
 		DKDEBUGFUNC(wheelEvent);
-		DKINFO("wheelEvent.deltaX = "		+toString(wheelEvent.deltaX)		+"\n");
-		DKINFO("wheelEvent.deltaY = "		+toString(wheelEvent.deltaY)		+"\n");
-		DKINFO("wheelEvent.deltaZ = "		+toString(wheelEvent.deltaZ)		+"\n");
-		DKINFO("wheelEvent.deltaMode = "	+toString(wheelEvent.deltaMode)		+"\n");
+		
+		// constructor(DOMString type, optional WheelEventInit eventInitDict = {});
+		// function
+		
+		// DeltaModeCode
+		// const unsigned long DOM_DELTA_PIXEL = 0x00;
+		DKINFO("wheelEvent.DOM_DELTA_PIXEL = "	+toString(wheelEvent.DOM_DELTA_PIXEL)	+"\n");
+		
+		// const unsigned long DOM_DELTA_LINE  = 0x01;
+		DKINFO("wheelEvent.DOM_DELTA_LINE = "	+toString(wheelEvent.DOM_DELTA_LINE)	+"\n");
+		
+		// const unsigned long DOM_DELTA_PAGE  = 0x02;
+		DKINFO("wheelEvent.DOM_DELTA_PAGE = "	+toString(wheelEvent.DOM_DELTA_PAGE)	+"\n");
+		
+		// readonly attribute double deltaX;
+		DKINFO("wheelEvent.deltaX = "			+toString(wheelEvent.deltaX)			+"\n");
+		
+		// readonly attribute double deltaY;
+		DKINFO("wheelEvent.deltaY = "			+toString(wheelEvent.deltaY)			+"\n");
+		
+		// readonly attribute double deltaZ;
+		DKINFO("wheelEvent.deltaZ = "			+toString(wheelEvent.deltaZ)			+"\n");
+		
+		// readonly attribute unsigned long deltaMode;
+		DKINFO("wheelEvent.deltaMode = "		+toString(wheelEvent.deltaMode)			+"\n");
 	}
 
 	static bool onWheelEvent(DKEvent& event){
