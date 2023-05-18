@@ -25,7 +25,23 @@ public:
 	
 	static void printCompositionEventProperties(DKCompositionEvent& compositionEvent){
 		DKDEBUGFUNC(compositionEvent);
+		
+		// constructor(DOMString type, optional CompositionEventInit eventInitDict = {});
+		// function
+		
+		// readonly attribute DOMString data;
 		DKINFO("compositionEvent.data = "		+toString(compositionEvent.data)	+"\n");
+		
+		// Source: UI Events (https://www.w3.org/TR/uievents/)
+		// partial interface CompositionEvent {
+		//		// Originally introduced (and deprecated) in this specification
+		//		undefined initCompositionEvent(DOMString typeArg,
+		//		optional boolean bubblesArg = false,
+		//		optional boolean cancelableArg = false,
+		//		optional WindowProxy? viewArg = null,
+		//		optional DOMString dataArg = "");
+				// function
+		// };
 	}
 	
 	static bool onCompositionEvent(DKEvent& event){
