@@ -23,10 +23,27 @@ public:
 	
 	static void printInputEventProperties(DKInputEvent& inputEvent){
 		DKDEBUGFUNC(inputEvent);
+		
+		// constructor(DOMString type, optional InputEventInit eventInitDict = {});
+		// function
+		
+		// readonly attribute DOMString? data;
 		DKINFO("inputEvent.data = "			+toString(inputEvent.data)			+"\n");
-		DKINFO("inputEvent.dataTransfer = "	+toString(inputEvent.dataTransfer)	+"\n");
-		DKINFO("inputEvent.inputType = "	+toString(inputEvent.inputType)		+"\n");
+		
+		//readonly attribute boolean isComposing;
 		DKINFO("inputEvent.isComposing = "	+toString(inputEvent.isComposing)	+"\n");
+		
+		//readonly attribute DOMString inputType;
+		DKINFO("inputEvent.inputType = "	+toString(inputEvent.inputType)		+"\n");
+		
+		// Source: Input Events Level 2 (https://www.w3.org/TR/input-events-2/)
+		// partial interface InputEvent {
+		//    	readonly attribute DataTransfer? dataTransfer;
+				DKINFO("inputEvent.dataTransfer = "	+toString(inputEvent.dataTransfer)	+"\n");
+		//		
+		//    	sequence<StaticRange> getTargetRanges();
+				// function
+		// };
 	}
 	
 	static bool onInputEvent(DKEvent& event){
