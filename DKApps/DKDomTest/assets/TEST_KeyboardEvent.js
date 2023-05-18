@@ -4,20 +4,76 @@ console.log("\n////// TEST_KeyboardEvent.js //////")
 
 
 function printKeyboardEventProperties(keyboardevent){
-	console.log("keyboardevent.altKey = "		+keyboardevent.altKey)
-	console.log("keyboardevent.code = "			+keyboardevent.code)			
-	console.log("keyboardevent.ctrlKey = "		+keyboardevent.ctrlKey)
-	console.log("keyboardevent.isComposing = "	+keyboardevent.isComposing)
-	console.log("keyboardevent.key = "			+keyboardevent.key)
-	console.log("keyboardevent.locale = "		+keyboardevent.locale)
-	console.log("keyboardevent.location = "		+keyboardevent.location)
-	console.log("keyboardevent.metaKey = "		+keyboardevent.metaKey)
-	console.log("keyboardevent.repeat = "		+keyboardevent.repeat)
-	console.log("keyboardevent.shiftKey = "		+keyboardevent.shiftKey)
-	console.log("keyboardevent.char = "			+keyboardevent.char)
-	console.log("keyboardevent.charCode = "		+keyboardevent.charCode)
-	console.log("keyboardevent.keyCode = "		+keyboardevent.keyCode)
-	console.log("keyboardevent.keyIdentifier = "+keyboardevent.keyIdentifier)
-	console.log("keyboardevent.keyLocation = "	+keyboardevent.keyLocation)
-	console.log("keyboardevent.which = "		+keyboardevent.which)
+	
+	// constructor(DOMString type, optional KeyboardEventInit eventInitDict = {});
+	// function
+		
+	// KeyLocationCode
+	// const unsigned long DOM_KEY_LOCATION_STANDARD = 0x00;
+	console.log("keyboardevent.DOM_KEY_LOCATION_STANDARD = "+keyboardevent.DOM_KEY_LOCATION_STANDARD)	
+		
+	// const unsigned long DOM_KEY_LOCATION_LEFT = 0x01;
+	console.log("keyboardevent.DOM_KEY_LOCATION_LEFT = "	+keyboardevent.DOM_KEY_LOCATION_LEFT)
+	
+	// const unsigned long DOM_KEY_LOCATION_RIGHT = 0x02;
+	console.log("keyboardevent.DOM_KEY_LOCATION_RIGHT = "	+keyboardevent.DOM_KEY_LOCATION_RIGHT)
+	
+	// const unsigned long DOM_KEY_LOCATION_NUMPAD = 0x03;
+	console.log("keyboardevent.DOM_KEY_LOCATION_NUMPAD = "	+keyboardevent.DOM_KEY_LOCATION_NUMPAD)
+	
+	// readonly attribute DOMString key;
+	console.log("keyboardevent.key = "						+keyboardevent.key)
+	
+	// readonly attribute DOMString code;
+	console.log("keyboardevent.code = "						+keyboardevent.code)
+	
+	// readonly attribute unsigned long location;
+	console.log("keyboardevent.location = "					+keyboardevent.location)
+	
+	// readonly attribute boolean ctrlKey;
+	console.log("keyboardevent.ctrlKey = "					+keyboardevent.ctrlKey)
+	
+	// readonly attribute boolean shiftKey;
+	console.log("keyboardevent.shiftKey = "					+keyboardevent.shiftKey)
+	
+	// readonly attribute boolean altKey;
+	console.log("keyboardevent.altKey = "					+keyboardevent.altKey)
+				
+	// readonly attribute boolean metaKey;
+	console.log("keyboardevent.metaKey = "					+keyboardevent.metaKey)
+	
+	// readonly attribute boolean repeat;
+	console.log("keyboardevent.repeat = "					+keyboardevent.repeat)
+	
+	// readonly attribute boolean isComposing;
+	console.log("keyboardevent.isComposing = "				+keyboardevent.isComposing)
+	
+	// boolean getModifierState(DOMString keyArg);
+	// function
+	
+	// Source: UI Events (https://www.w3.org/TR/uievents/)
+	// partial interface KeyboardEvent {
+	//		// Originally introduced (and deprecated) in this specification
+	//		undefined initKeyboardEvent(DOMString typeArg,
+	// 		optional boolean bubblesArg = false,
+	// 		optional boolean cancelableArg = false,
+	//		optional Window? viewArg = null,
+	//		optional DOMString keyArg = "",
+	//		optional unsigned long locationArg = 0,
+	//		optional boolean ctrlKey = false,
+	//		optional boolean altKey = false,
+	//		optional boolean shiftKey = false,
+	//		optional boolean metaKey = false);
+			// function
+	// };
+		
+	// Source: UI Events (https://www.w3.org/TR/uievents/)
+	// partial interface KeyboardEvent {
+	//		// The following support legacy user agents
+	//		readonly attribute unsigned long charCode;
+			console.log("keyboardevent.charCode = "		+keyboardevent.charCode)
+	//
+	//		readonly attribute unsigned long keyCode;
+			console.log("keyboardevent.keyCode = "		+keyboardevent.keyCode)
+	// };
 }
