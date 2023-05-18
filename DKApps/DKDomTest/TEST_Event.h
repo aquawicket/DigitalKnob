@@ -46,7 +46,7 @@ public:
 
 	static void printEventProperties(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKINFO("event.bubbles = "				+toString(event.bubbles)				+"\n");
+		DKINFO("event.bubbles() = "				+toString(event.bubbles())				+"\n");
 		DKINFO("event.cancelable = "			+toString(event.cancelable)				+"\n");
 		DKINFO("event.composed = "				+toString(event.composed)				+"\n");
 		DKINFO("event.currentTarget = "			+toString(event.currentTarget)			+"\n");
