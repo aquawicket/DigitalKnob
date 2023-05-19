@@ -17,8 +17,8 @@ class DKUIEvent : public DKEvent
 {
 public:
 	// constructor(DOMString type, optional UIEventInit eventInitDict = {});
-	DKUIEvent(DOMString _type, UIEventInit _eventInitDict) : DKEvent(_type, _eventInitDict) { // https://w3c.github.io/uievents/#dom-uievent-uievent
-		DKDEBUGFUNC(_type, _eventInitDict);
+	DKUIEvent(DOMString type, UIEventInit eventInitDict) : DKEvent(type, eventInitDict) { // https://w3c.github.io/uievents/#dom-uievent-uievent
+		DKDEBUGFUNC(type, eventInitDict);
 		interfaceName = "UIEvent";
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKUIEvent("+interfaceAddress+") \n");
@@ -26,23 +26,29 @@ public:
 	virtual ~DKUIEvent(){}
 	
 	// readonly attribute Window? view;
-	DKString view = ""; // https://w3c.github.io/uievents/#dom-uievent-view
+	DKString _view = ""; // https://w3c.github.io/uievents/#dom-uievent-view
+	virtual DKString 	view()										{ return _view; }								// getter
+	virtual void 		view(const DKString& view) 					{ _view = view; } 								// setter
 	
 	// readonly attribute long detail;
-	int detail = 0; // https://w3c.github.io/uievents/#dom-uievent-detail
+	int _detail = 0; // https://w3c.github.io/uievents/#dom-uievent-detail
+	virtual int 		detail()									{ return _detail; }								// getter
+	virtual void 		detail(const int& detail) 					{ _detail = detail; } 							// setter
 	
 	// Source: Input Device Capabilities (https://wicg.github.io/input-device-capabilities/)
 	// partial interface UIEvent {
 	// 		readonly attribute InputDeviceCapabilities? sourceCapabilities;
-			DKString sourceCapabilities = ""; // https://wicg.github.io/input-device-capabilities/#dom-uieventinit-sourcecapabilities
+			DKString _sourceCapabilities = ""; // https://wicg.github.io/input-device-capabilities/#dom-uieventinit-sourcecapabilities
+			virtual DKString 	sourceCapabilities()									{ return _sourceCapabilities; }					// getter
+			virtual void 		sourceCapabilities(const DKString& sourceCapabilities) 	{ _sourceCapabilities = sourceCapabilities; } 	// setter
 	// };
 	
 	// Source: UI Events (https://www.w3.org/TR/uievents/)
 	// partial interface UIEvent {
 	// 		Deprecated in this specification
 	//		undefined initUIEvent(DOMString typeArg, optional boolean bubblesArg = false, optional boolean cancelableArg = false, optional Window? viewArg = null, optional long detailArg = 0);
-			void initUIEvent(DOMString& _typeArg, bool& _bubblesArg, bool& _cancelableArg, DKString& _viewArg, int& _detailArg){ // https://w3c.github.io/uievents/#dom-uievent-inituievent
-				DKDEBUGFUNC(_typeArg, _bubblesArg, _cancelableArg, _viewArg, _detailArg);
+			void initUIEvent(DOMString& typeArg, bool& bubblesArg, bool& cancelableArg, DKString& viewArg, int& detailArg){ // https://w3c.github.io/uievents/#dom-uievent-inituievent
+				DKDEBUGFUNC(typeArg, bubblesArg, cancelableArg, viewArg, detailArg);
 				DKTODO();
 			}
 	//	};
@@ -51,7 +57,9 @@ public:
 	// partial interface UIEvent {
 	//		The following support legacy user agents
 	//		readonly attribute unsigned long which;
-			unsigned int which = 0; // https://w3c.github.io/uievents/#dom-uievent-which
+			unsigned int _which = 0; // https://w3c.github.io/uievents/#dom-uievent-which
+			virtual int 		which()								{ return _which; }						// getter
+			virtual void 		which(const int& which) 			{ _which = which; } 					// setter
 	// };
 };
 

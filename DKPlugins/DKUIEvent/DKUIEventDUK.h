@@ -100,8 +100,8 @@ public:
 	static int view(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_string(ctx, 1))
-			uiEvent(ctx)->view = duk_to_string(ctx, 1);
-		dukglue_push(ctx, uiEvent(ctx)->view);
+			uiEvent(ctx)->view(duk_to_string(ctx, 1));
+		dukglue_push(ctx, uiEvent(ctx)->view());
 		return true;
 	}
 	
@@ -109,8 +109,8 @@ public:
 	static int detail(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_number(ctx, 1))
-			uiEvent(ctx)->detail = duk_to_int(ctx, 1);
-		dukglue_push(ctx, uiEvent(ctx)->detail);
+			uiEvent(ctx)->detail(duk_to_int(ctx, 1));
+		dukglue_push(ctx, uiEvent(ctx)->detail());
 		return true;
 	}
 	
@@ -119,7 +119,8 @@ public:
 	// 		readonly attribute InputDeviceCapabilities? sourceCapabilities;
 			static int sourceCapabilities(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				return DKTODO();
+				dukglue_push(ctx, uiEvent(ctx)->sourceCapabilities());
+				return true;
 			}
 	// };
 	
@@ -145,7 +146,7 @@ public:
 	//		readonly attribute unsigned long which;
 			static int which(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				dukglue_push(ctx, uiEvent(ctx)->which);				
+				dukglue_push(ctx, uiEvent(ctx)->which());				
 				return DKTODO();
 			}
 	// };	

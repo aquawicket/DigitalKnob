@@ -28,15 +28,15 @@ public:
 		// function
 		
 		// readonly attribute Window? view;
-		DKINFO("uievent.view = "				+toString(uievent.view)					+"\n");
+		DKINFO("uievent.view() = "							+toString(uievent.view())				+"\n");
 		
 		// readonly attribute long detail;
-		DKINFO("uievent.detail = "				+toString(uievent.detail)				+"\n");
+		DKINFO("uievent.detail() = "						+toString(uievent.detail())				+"\n");
 		
 		// Source: Input Device Capabilities (https://wicg.github.io/input-device-capabilities/)
 		// partial interface UIEvent {
 		// 		readonly attribute InputDeviceCapabilities? sourceCapabilities;
-				DKINFO("uievent.sourceCapabilities = "	+toString(uievent.sourceCapabilities)	+"\n");
+				DKINFO("uievent.sourceCapabilities() = "	+toString(uievent.sourceCapabilities())	+"\n");
 		// };
 		
 		// Source: UI Events (https://www.w3.org/TR/uievents/)
@@ -50,7 +50,7 @@ public:
 		// partial interface UIEvent {
 		//		The following support legacy user agents
 		//		readonly attribute unsigned long which;
-				DKINFO("uievent.which = "				+toString(uievent.which)				+"\n");
+				DKINFO("uievent.which() = "					+toString(uievent.which())				+"\n");
 		// };
 	}
 	

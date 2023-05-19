@@ -11,7 +11,7 @@ dk_depend(DKEvent)
 dk_depend(DKCustomEvent)
 dk_depend(DKEventTarget)
 
-#dk_depend(DKUIEvent)
+dk_depend(DKUIEvent)
 #dk_depend(DKFocusEvent)
 #dk_depend(DKMouseEvent)
 #dk_depend(DKWheelEvent)

@@ -10,9 +10,9 @@
 #include "TEST_CustomEvent.h"
 #include "TEST_EventTarget.h"
 
-/*
 // [UIEvents] https://w3c.github.io/uievents
 #include "TEST_UIEvent.h"
+/*
 #include "TEST_FocusEvent.h"
 #include "TEST_MouseEvent.h"
 #include "TEST_WheelEvent.h"
@@ -83,9 +83,9 @@ bool App::Init() {
 	DKClass::DKCreate("TEST_CustomEvent");
 	DKClass::DKCreate("TEST_EventTarget");
 	
-	/*
 	// [UIEvents] https://w3c.github.io/uievents
 	DKClass::DKCreate("TEST_UIEvent");
+	/*
 	DKClass::DKCreate("TEST_FocusEvent");
 	DKClass::DKCreate("TEST_MouseEvent");
 	DKClass::DKCreate("TEST_WheelEvent");
