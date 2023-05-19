@@ -10,6 +10,7 @@
 #include "TEST_CustomEvent.h"
 #include "TEST_EventTarget.h"
 
+/*
 // [UIEvents] https://w3c.github.io/uievents
 #include "TEST_UIEvent.h"
 #include "TEST_FocusEvent.h"
@@ -68,7 +69,7 @@
 
 // [DKRmlLocation]
 #include "TEST_DKRmlLocation.h"
-
+*/
 
 ///////////////////////////////////////
 bool App::Init() {
@@ -82,6 +83,7 @@ bool App::Init() {
 	DKClass::DKCreate("TEST_CustomEvent");
 	DKClass::DKCreate("TEST_EventTarget");
 	
+	/*
 	// [UIEvents] https://w3c.github.io/uievents
 	DKClass::DKCreate("TEST_UIEvent");
 	DKClass::DKCreate("TEST_FocusEvent");
@@ -140,6 +142,7 @@ bool App::Init() {
 	
 	// [DKRmlLocation]
 	DKClass::DKCreate("TEST_DKRmlLocation");
+	*/
 	
 	return true;
 }

@@ -145,7 +145,7 @@ public:
 			return false;
 		dukglue_push(ctx, _type);
 		*/
-		dukglue_push(ctx, event(ctx)->type);
+		dukglue_push(ctx, event(ctx)->type());
 		return true;
 	}
 	
@@ -153,7 +153,7 @@ public:
 	static int target(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		
-		dukglue_push(ctx, event(ctx)->target);
+		dukglue_push(ctx, event(ctx)->target());
 		
 		//DKString targetAddress = pointerToAddress(event(ctx)->target);
 		//dukglue_push(ctx, targetAddress);
@@ -164,14 +164,14 @@ public:
 	// readonly attribute EventTarget? srcElement; // legacy
 	static int srcElement(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, event(ctx)->srcElement);
+		dukglue_push(ctx, event(ctx)->srcElement());
 		return true;
 	}
 	
 	// readonly attribute EventTarget? currentTarget;
 	static int currentTarget(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, event(ctx)->currentTarget);		
+		dukglue_push(ctx, event(ctx)->currentTarget());		
 		return true;
 	}
 	
@@ -184,35 +184,35 @@ public:
 	// const unsigned short NONE = 0;
 	static int NONE(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, event(ctx)->NONE);		
+		dukglue_push(ctx, event(ctx)->NONE());		
 		return true;
 	}
 	
 	// const unsigned short CAPTURING_PHASE = 1;
 	static int CAPTURING_PHASE(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, event(ctx)->CAPTURING_PHASE);		
+		dukglue_push(ctx, event(ctx)->CAPTURING_PHASE());		
 		return true;
 	}
 	
 	// const unsigned short AT_TARGET = 2;
 	static int AT_TARGET(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, event(ctx)->AT_TARGET);		
+		dukglue_push(ctx, event(ctx)->AT_TARGET());		
 		return true;
 	}
 	
 	// const unsigned short BUBBLING_PHASE = 3;
 	static int BUBBLING_PHASE(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, event(ctx)->BUBBLING_PHASE);		
+		dukglue_push(ctx, event(ctx)->BUBBLING_PHASE());		
 		return true;
 	}
 	
 	// readonly attribute unsigned short eventPhase;
 	static int eventPhase(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, event(ctx)->eventPhase);
+		dukglue_push(ctx, event(ctx)->eventPhase());
 		return true;
 	}
 	
@@ -225,7 +225,8 @@ public:
 	// attribute boolean cancelBubble; // legacy alias of .stopPropagation()
 	static int cancelBubble(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		return DKDEPRECATED();
+		dukglue_push(ctx, event(ctx)->cancelBubble());
+		return true;
 	}
 	
 	// undefined stopImmediatePropagation();
@@ -237,25 +238,22 @@ public:
 	// readonly attribute boolean bubbles;
 	static int bubbles(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if (duk_is_boolean(ctx, 1))
-			event(ctx)->bubbles = duk_to_boolean(ctx, 1);
-		dukglue_push(ctx, event(ctx)->bubbles);
+		dukglue_push(ctx, event(ctx)->bubbles());
 		return true;
 	}
 	
 	// readonly attribute boolean cancelable;
 	static int cancelable(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if (duk_is_boolean(ctx, 1))
-			event(ctx)->cancelable = duk_to_boolean(ctx, 1);
-		dukglue_push(ctx, event(ctx)->cancelable);
+		dukglue_push(ctx, event(ctx)->cancelable());
 		return true;
 	}
 	
 	// attribute boolean returnValue;  // legacy
 	static int returnValue(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		return DKDEPRECATED();
+		dukglue_push(ctx, event(ctx)->returnValue());
+		return true;
 	}
 	
 	// undefined preventDefault();
@@ -267,7 +265,7 @@ public:
 	// readonly attribute boolean defaultPrevented;
 	static int defaultPrevented(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, event(ctx)->defaultPrevented);		
+		dukglue_push(ctx, event(ctx)->defaultPrevented());		
 		return true;
 	}
 	
@@ -275,22 +273,22 @@ public:
 	static int composed(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_boolean(ctx, 1))
-			event(ctx)->composed = duk_to_boolean(ctx, 1);
-		dukglue_push(ctx, event(ctx)->composed);
+			event(ctx)->composed(duk_to_boolean(ctx, 1));
+		dukglue_push(ctx, event(ctx)->composed());
 		return true;
 	}
 	
 	// [LegacyUnforgeable] readonly attribute boolean isTrusted;
 	static int isTrusted(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, event(ctx)->isTrusted);
+		dukglue_push(ctx, event(ctx)->isTrusted());
 		return true;
 	}
 	
 	// readonly attribute DOMHighResTimeStamp timeStamp;
 	static int timeStamp(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, event(ctx)->timeStamp);		
+		dukglue_push(ctx, event(ctx)->timeStamp());		
 		return true;
 	}
 	

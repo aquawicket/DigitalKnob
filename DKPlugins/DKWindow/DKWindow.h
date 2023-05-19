@@ -23,19 +23,24 @@ public:
 	
 	// the current browsing context
 	// [LegacyUnforgeable] readonly attribute WindowProxy window;
-	virtual bool window(DKString&, bool) { return false; }
+	virtual DKString window()					{ return ""; }	// getter
+	virtual DKString window(const DKString&)	{ return ""; } 	// setter
 	
 	// [Replaceable] readonly attribute WindowProxy self;
-	virtual bool self(DKString&, bool) { return false; }
+	virtual DKString self()						{ return ""; }	// getter
+	virtual DKString self(const DKString&)		{ return ""; } 	// setter
 	
 	// [LegacyUnforgeable] readonly attribute Document document;
-	virtual bool document(DKString&, bool) { return false; }
+	virtual DKString document()					{ return ""; }	// getter
+	virtual DKString document(const DKString&)	{ return ""; } 	// setter
 	
 	// attribute DOMString name;
-	virtual bool name(DOMString&, bool) { return false; }
+	virtual DOMString name()					{ return ""; }	// getter
+	virtual DOMString name(const DOMString&)	{ return ""; } 	// setter
 	
 	// [PutForwards=href, LegacyUnforgeable] readonly attribute Location location;
-	virtual bool location(DKString&, bool) { return false; }
+	virtual DKString location()					{ return ""; }	// getter
+	virtual DKString location(const DKString&)	{ return ""; } 	// setter
 	
 	// readonly attribute History history;
 	virtual bool history(DKString&, bool) { return false; }

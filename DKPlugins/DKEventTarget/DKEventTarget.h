@@ -73,12 +73,14 @@ public:
 		//DKINFO("DKEventTarget::dispatchEvent("+event+") \n");	
 		for (auto& eventObj : events) {
 			//DKINFO("	eventObj("+eventObj.type+", "+eventObj.interfaceAddress) \n");	
-			if(eventObj.type == event.type && eventObj.interfaceAddress == interfaceAddress){
-				//DKINFO("		event("+event.type+") \n");	
+			if(eventObj.type == event.type() && eventObj.interfaceAddress == interfaceAddress){
+				//DKINFO("		event("+event.type()+") \n");	
 				
-				event.currentTarget = interfaceAddress;
+				//event.currentTarget = interfaceAddress;
+				event.currentTarget(interfaceAddress);
 				
-				event.target = interfaceAddress;
+				//event.target = interfaceAddress;
+				event.target(interfaceAddress);
 				//event.target = (DKEventTarget*)addressToPointer(interfaceAddress);
 				
 				eventObj.callback(event);

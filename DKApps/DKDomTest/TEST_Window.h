@@ -24,51 +24,52 @@ public:
 		
 		// the current browsing context
 		// [LegacyUnforgeable] readonly attribute WindowProxy window;
+		DKINFO("window.window() = "				+toString(window.window())				+"\n");
 	
 		// [Replaceable] readonly attribute WindowProxy self;
-		DKINFO("window.self() = "			+toString(window.self())				+"\n");
+		DKINFO("window.self() = "				+toString(window.self())				+"\n");
 		
 		// [LegacyUnforgeable] readonly attribute Document document;
-		DKINFO("window.document = "			+toString(window.document)				+"\n");
+		DKINFO("window.document() = "			+toString(window.document())			+"\n");
 		
 		// attribute DOMString name;
-		DKINFO("window.name = "				+toString(window.name)					+"\n");
+		DKINFO("window.name() = "				+toString(window.name())				+"\n");
 		
 		// [PutForwards=href, LegacyUnforgeable] readonly attribute Location location;
-		DKINFO("window.location = "			+toString(window.location)				+"\n");
+		DKINFO("window.location() = "			+toString(window.location())			+"\n");
 
 		// readonly attribute History history;
-		DKINFO("window.history = "			+toString(window.history)				+"\n");
+		DKINFO("window.history() = "			+toString(window.history())				+"\n");
 		
 		// readonly attribute CustomElementRegistry customElements;
-		DKINFO("window.customElements = "	+toString(window.customElements)		+"\n");
+		DKINFO("window.customElements() = "		+toString(window.customElements())		+"\n");
 		
 		// [Replaceable] readonly attribute BarProp locationbar;
-		DKINFO("window.locationbar = "		+toString(window.locationbar)			+"\n");
+		DKINFO("window.locationbar() = "		+toString(window.locationbar())			+"\n");
 		
 		// [Replaceable] readonly attribute BarProp menubar;
-		DKINFO("window.menubar = "			+toString(window.menubar)				+"\n");
+		DKINFO("window.menubar() = "			+toString(window.menubar())				+"\n");
 		
 		// [Replaceable] readonly attribute BarProp personalbar;
-		DKINFO("window.personalbar = "		+toString(window.personalbar)			+"\n");
+		DKINFO("window.personalbar() = "		+toString(window.personalbar())			+"\n");
 		
 		// [Replaceable] readonly attribute BarProp scrollbars;
-		DKINFO("window.scrollbars = "		+toString(window.scrollbars)			+"\n");
+		DKINFO("window.scrollbars() = "			+toString(window.scrollbars())			+"\n");
 		
 		// [Replaceable] readonly attribute BarProp statusbar;
-		DKINFO("window.statusbar = "		+toString(window.statusbar)				+"\n");
+		DKINFO("window.statusbar() = "			+toString(window.statusbar())			+"\n");
 		
 		// [Replaceable] readonly attribute BarProp toolbar;
-		DKINFO("window.toolbar = "			+toString(window.toolbar)				+"\n");
+		DKINFO("window.toolbar() = "			+toString(window.toolbar())				+"\n");
 		
 		// attribute DOMString status;
-		DKINFO("window.status = "			+toString(window.status)				+"\n");
+		DKINFO("window.status() = "				+toString(window.status())				+"\n");
 		
 		// undefined close();
 		// function
 		
 		// readonly attribute boolean closed;
-		DKINFO("window.closed = "			+toString(window.closed)				+"\n");
+		DKINFO("window.closed() = "				+toString(window.closed())				+"\n");
 		
 		// undefined stop();
 		// function
@@ -81,22 +82,22 @@ public:
 		
 		// other browsing contexts
 		// [Replaceable] readonly attribute WindowProxy frames;
-		DKINFO("window.frames = "			+toString(window.frames)				+"\n");
+		DKINFO("window.frames() = "				+toString(window.frames())				+"\n");
 		
 		// [Replaceable] readonly attribute unsigned long length;
-		DKINFO("window.length = "			+toString(window.length)				+"\n");
+		DKINFO("window.length() = "				+toString(window.length())				+"\n");
 		
 		// [LegacyUnforgeable] readonly attribute WindowProxy? top;
-		DKINFO("window.top = "				+toString(window.top)					+"\n");
+		DKINFO("window.top() = "				+toString(window.top())					+"\n");
 		
 		// attribute any opener;
-		DKINFO("window.opener = "			+toString(window.opener)				+"\n");
+		DKINFO("window.opener() = "				+toString(window.opener())				+"\n");
 		
 		// [Replaceable] readonly attribute WindowProxy? parent;
-		DKINFO("window.parent = "			+toString(window.parent)				+"\n");
+		DKINFO("window.parent() = "				+toString(window.parent())				+"\n");
 		
 		// readonly attribute Element? frameElement;
-		DKINFO("window.frameElement = "		+toString(window.frameElement)			+"\n");
+		DKINFO("window.frameElement() = "		+toString(window.frameElement())		+"\n");
 		
 		// WindowProxy? open(optional USVString url = "", optional DOMString target = "_blank", optional [LegacyNullToEmptyString] DOMString features = "");
 		// function
@@ -108,13 +109,13 @@ public:
 		
 		// the user agent
 		// readonly attribute Navigator navigator;
-		DKINFO("window.navigator = "		+toString(window.navigator)				+"\n");
+		DKINFO("window.navigator() = "			+toString(window.navigator())			+"\n");
 		
 		// readonly attribute Navigator clientInformation; // legacy alias of .navigator
-		DKINFO("window.clientInformation = "+toString(window.clientInformation)		+"\n");
+		DKINFO("window.clientInformation() = "	+toString(window.clientInformation())	+"\n");
 		
 		// readonly attribute boolean originAgentCluster;
-		DKINFO("window.originAgentCluster = "+toString(window.originAgentCluster)	+"\n");
+		DKINFO("window.originAgentCluster() = "	+toString(window.originAgentCluster())	+"\n");
 		
 		//user prompts
 		// undefined alert();
@@ -142,16 +143,16 @@ public:
 		// Source: Compatibility Standard (https://compat.spec.whatwg.org/)
 		// partial interface Window {
 		//		readonly attribute short orientation;
-				DKINFO("window.orientation = "			+toString(window.orientation)			+"\n");
+				DKINFO("window.orientation() = "			+toString(window.orientation())			+"\n");
 		//		
 		//		attribute EventHandler onorientationchange;
-				DKINFO("window.onorientationchange = "	+toString(window.onorientationchange)	+"\n");
+				DKINFO("window.onorientationchange() = "	+toString(window.onorientationchange())	+"\n");
 		// };
 		
 		// Source: DOM Standard (https://dom.spec.whatwg.org/)
 		// partial interface Window {
 		//		[Replaceable] readonly attribute (Event or undefined) event; // legacy
-				DKINFO("window.event = "				+toString(window.event)					+"\n");
+				DKINFO("window.event() = "					+toString(window.event())				+"\n");
 		// };
 		
 		// Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
@@ -235,13 +236,13 @@ public:
 		// Source: Web Speech API (https://wicg.github.io/speech-api/)
 		// partial interface Window {
 		//		[SameObject] readonly attribute SpeechSynthesis speechSynthesis;
-				DKINFO("window.speechSynthesis = "		+toString(window.speechSynthesis)		+"\n");
+				DKINFO("window.speechSynthesis() = "	+toString(window.speechSynthesis())		+"\n");
 		// };
 		
 		// Source: Web App Launch Handler API (https://wicg.github.io/web-app-launch/)
 		// partial interface Window {
 		//		readonly attribute LaunchQueue launchQueue;
-				DKINFO("window.launchQueue = "			+toString(window.launchQueue)			+"\n");
+				DKINFO("window.launchQueue() = "		+toString(window.launchQueue())			+"\n");
 		// };
 		
 		// Source: CSS Spatial Navigation Level 1 (https://www.w3.org/TR/css-nav-1/)
@@ -261,10 +262,10 @@ public:
 				// function
 		//
 		//		[SameObject, Replaceable] readonly attribute Screen screen;
-				DKINFO("window.screen = "				+toString(window.screen)				+"\n");
+				DKINFO("window.screen() = "				+toString(window.screen())				+"\n");
 		//
 		//		[SameObject, Replaceable] readonly attribute VisualViewport? visualViewport;
-				DKINFO("window.visualViewport = "		+toString(window.visualViewport)		+"\n");
+				DKINFO("window.visualViewport() = "		+toString(window.visualViewport())		+"\n");
 		//
 		//		// browsing context
 		//		undefined moveTo(long x, long y);
@@ -281,23 +282,23 @@ public:
 		//
 		//		// viewport
 		//		[Replaceable] readonly attribute long innerWidth;
-				DKINFO("window.innerWidth = "			+toString(window.innerWidth)			+"\n");
+				DKINFO("window.innerWidth() = "			+toString(window.innerWidth())			+"\n");
 		//
 		//		[Replaceable] readonly attribute long innerHeight;
-				DKINFO("window.innerHeight = "			+toString(window.innerHeight)			+"\n");
+				DKINFO("window.innerHeight() = "		+toString(window.innerHeight())			+"\n");
 		//
 		//		// viewport scrolling
 		//		[Replaceable] readonly attribute double scrollX;
-				DKINFO("window.scrollX = "				+toString(window.scrollX)				+"\n");
+				DKINFO("window.scrollX() = "			+toString(window.scrollX())				+"\n");
 		//
 		//		[Replaceable] readonly attribute double pageXOffset;
-				DKINFO("window.pageXOffset = "			+toString(window.pageXOffset)			+"\n");
+				DKINFO("window.pageXOffset() = "		+toString(window.pageXOffset())			+"\n");
 		//
 		//		[Replaceable] readonly attribute double scrollY;
-				DKINFO("window.scrollY = "				+toString(window.scrollY)				+"\n");
+				DKINFO("window.scrollY() = "			+toString(window.scrollY())				+"\n");
 		//
 		//		[Replaceable] readonly attribute double pageYOffset;
-				DKINFO("window.pageYOffset = "			+toString(window.pageYOffset)			+"\n");
+				DKINFO("window.pageYOffset() = "		+toString(window.pageYOffset())			+"\n");
 		//
 		//		undefined scroll(optional ScrollToOptions options = {});
 		//		undefined scroll(unrestricted double x, unrestricted double y);
@@ -313,25 +314,25 @@ public:
 		///
 		//		// client
 		//		[Replaceable] readonly attribute long screenX;
-				DKINFO("window.screenX = "				+toString(window.screenX)				+"\n");
+				DKINFO("window.screenX() = "			+toString(window.screenX())				+"\n");
 		//
 		//		[Replaceable] readonly attribute long screenLeft;
-				DKINFO("window.screenLeft = "			+toString(window.screenLeft)			+"\n");
+				DKINFO("window.screenLeft() = "			+toString(window.screenLeft())			+"\n");
 		//
 		//		[Replaceable] readonly attribute long screenY;
-				DKINFO("window.screenY = "				+toString(window.screenY)				+"\n");
+				DKINFO("window.screenY() = "			+toString(window.screenY())				+"\n");
 		//
 		//		[Replaceable] readonly attribute long screenTop;
-				DKINFO("window.screenTop = "			+toString(window.screenTop)				+"\n");
+				DKINFO("window.screenTop() = "			+toString(window.screenTop())			+"\n");
 		//
 		//		[Replaceable] readonly attribute long outerWidth;
-				DKINFO("window.outerWidth = "			+toString(window.outerWidth)			+"\n");
+				DKINFO("window.outerWidth() = "			+toString(window.outerWidth())			+"\n");
 		//
 		//		[Replaceable] readonly attribute long outerHeight;
-				DKINFO("window.outerHeight = "			+toString(window.outerHeight)			+"\n");
+				DKINFO("window.outerHeight() = "		+toString(window.outerHeight())			+"\n");
 		//
 		//		[Replaceable] readonly attribute double devicePixelRatio;
-				DKINFO("window.devicePixelRatio = "		+toString(window.devicePixelRatio)		+"\n");
+				DKINFO("window.devicePixelRatio() = "	+toString(window.devicePixelRatio())	+"\n");
 		// };
 		
 		// Source: DeviceOrientation Event Specification (https://www.w3.org/TR/orientation-event/)

@@ -82,8 +82,8 @@ public:
 		if(duk_is_object(ctx, 1))
 			DKWARN("detail is an object")
 		if (duk_is_string(ctx, 1))
-			customEvent(ctx)->detail = duk_to_string(ctx, 1);
-		dukglue_push(ctx, customEvent(ctx)->detail);
+			customEvent(ctx)->detail(duk_to_string(ctx, 1));
+		dukglue_push(ctx, customEvent(ctx)->detail());
 		return true;
 	}
 

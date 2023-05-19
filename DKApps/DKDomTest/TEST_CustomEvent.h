@@ -17,7 +17,7 @@ public:
 		DKEventTarget eventTarget;
 		eventTarget.addEventListener("customEvent", &TEST_CustomEvent::onCustomEvent);
 		DKCustomEvent customEvent("customEvent", "");
-		customEvent.detail = "{name : 'myCustomEvent'}";
+		customEvent.detail("{name : 'myCustomEvent'}");
 		eventTarget.dispatchEvent(customEvent);
 		return true;
 	}
@@ -29,7 +29,7 @@ public:
 		// function
 		
 		// readonly attribute any detail;
-		DKINFO("customEvent.detail = "	+toString(customEvent.detail)	+"\n");
+		DKINFO("customEvent.detail() = "	+toString(customEvent.detail())	+"\n");
 		
 		// undefined initCustomEvent(DOMString type, optional boolean bubbles = false, optional boolean cancelable = false, optional any detail = null); // legacy
 		// function

@@ -113,7 +113,7 @@ public:
 		// get the globally stored js callback function
 		DKString eventAddress = pointerToAddress(&event);
 		
-		DKString cb = event.target+"_"+event.type+"_callback";
+		DKString cb = event.target()+"_"+event.type()+"_callback";
 		//DKString eventTargetAddress = pointerToAddress(&event.target);
 		//DKString cb = eventTargetAddress+"_"+event.type+"_callback";
 		
