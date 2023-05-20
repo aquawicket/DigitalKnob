@@ -209,7 +209,7 @@ public:
 	// const unsigned short ELEMENT_NODE = 1;
 	static int ELEMENT_NODE(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, eventTarget(ctx)->ELEMENT_NODE);
+		dukglue_push(ctx, eventTarget(ctx)->ELEMENT_NODE());
 		return true;
 	}
 	
