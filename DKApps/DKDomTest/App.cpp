@@ -40,10 +40,10 @@
 // [Document] https://dom.spec.whatwg.org/#interface-document
 #include "TEST_Document.h"
 
-/*
 // [Element] https://dom.spec.whatwg.org/#interface-element
 #include "TEST_Element.h"
 
+/*
 // [HTMLCollection] https://dom.spec.whatwg.org/#interface-htmlcollection
 #include "TEST_HTMLCollection.h"
 
@@ -113,10 +113,10 @@ bool App::Init() {
 	// [Document] https://dom.spec.whatwg.org/#interface-document
 	DKClass::DKCreate("TEST_Document");
 	
-	/*
 	// [Element] https://dom.spec.whatwg.org/#interface-element
 	DKClass::DKCreate("TEST_Element");
 	
+	/*
 	// [HTMLCollection ] https://dom.spec.whatwg.org/#interface-htmlcollection
 	DKClass::DKCreate("TEST_HTMLCollection");
 	
