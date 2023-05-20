@@ -62,7 +62,7 @@ public:
 	// readonly attribute unsigned long deltaMode;
 	unsigned int _deltaMode = 0;
 	virtual double 			deltaMode()											{ return _deltaMode; }					// getter
-	virtual void 			deltaMode(const double& deltaMode) 					{ _deltaMode = deltaMode; } 			// setter
+	virtual void 			deltaMode(const unsigned int& deltaMode) 			{ _deltaMode = deltaMode; } 			// setter
 };
 
 

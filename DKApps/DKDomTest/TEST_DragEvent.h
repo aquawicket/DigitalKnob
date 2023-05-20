@@ -28,7 +28,7 @@ public:
 		// function
 		
 		// readonly attribute DataTransfer? dataTransfer;
-		DKINFO("dragEvent.dataTransfer = "	+toString(dragEvent.dataTransfer)	+"\n");
+		DKINFO("dragEvent.dataTransfer() = "	+toString(dragEvent.dataTransfer())	+"\n");
 	}
 	
 	static bool onDragEvent(DKEvent& event){
