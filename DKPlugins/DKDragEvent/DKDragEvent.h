@@ -6,6 +6,11 @@
 
 #include "DKMouseEvent/DKMouseEvent.h"
 
+
+////// EventInit //////
+typedef std::string DragEventInit;
+
+
 // Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
 // [Exposed=Window]
 // interface DragEvent : MouseEvent {
@@ -13,15 +18,17 @@ class DKDragEvent : public DKMouseEvent
 {
 public:
 	// constructor(DOMString type, optional DragEventInit eventInitDict = {});
-	DKDragEvent(DKString _type, DKString _eventInitDict) : DKMouseEvent(_type, _eventInitDict) { // [DragEvent()] https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/DragEvent
-		DKINFO("DKDragEvent("+_type+", "+_eventInitDict+") \n");
+	DKDragEvent(DKString type, DragEventInit eventInitDict) : DKMouseEvent(type, eventInitDict) {
+		DKINFO("DKDragEvent("+type+", "+eventInitDict+") \n");
 		interfaceName = "DragEvent";
 		interfaceAddress = pointerToAddress(this);
 	}
 	virtual ~DKDragEvent(){}
 	
 	// readonly attribute DataTransfer? dataTransfer;
-	DKString dataTransfer = ""; // [DragEvent.dataTransfer](Read only) https://developer.mozilla.org/en-US/docs/Web/API/DragEvent/dataTransfer
+	DKString _dataTransfer = "";
+	virtual DKString 	dataTransfer()								{ return _dataTransfer; }			// getter
+	virtual void 		dataTransfer(const DKString& dataTransfer) 	{ _dataTransfer = dataTransfer; } 	// setter
 };
 
 

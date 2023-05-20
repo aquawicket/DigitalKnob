@@ -1,5 +1,4 @@
-// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/DragEvent.idl
-// [SOURCE] https://html.spec.whatwg.org/multipage/dnd.html#the-dragevent-interface
+// [IDL] https://html.spec.whatwg.org/multipage/dnd.html#the-dragevent-interface
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/DragEvent
 #pragma once
 #ifndef DKDragEventDUK_H
@@ -19,8 +18,9 @@ public:
 		//constructor(DOMString type, optional DragEventInit eventInitDict = {});
 		DKDuktape::AttachFunction("CPP_DKDragEventDUK", DKDragEventDUK::constructor);
 	
-		// TODO
-	
+		// readonly attribute DataTransfer? dataTransfer;
+		DKDuktape::AttachFunction("CPP_DKDragEventDUK_dataTransfer", DKDragEventDUK::dataTransfer);
+		
 	
 		////// Load .js files //////
 		DKClass::DKCreate("DKDragEvent/DKDragEventDUK.js");
@@ -46,9 +46,12 @@ public:
 		return true;
 	}
 	
-	
-	// TODO
-	
+	// readonly attribute DataTransfer? dataTransfer;
+	static int dataTransfer(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		dukglue_push(ctx, dragEvent(ctx)->dataTransfer());
+		return true;
+	}
 };
 REGISTER_OBJECT(DKDragEventDUK, true)
 

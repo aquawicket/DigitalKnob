@@ -19,10 +19,10 @@
 #include "TEST_KeyboardEvent.h"
 #include "TEST_CompositionEvent.h"
 
-/*
 // [DragEvent] https://html.spec.whatwg.org/multipage/dnd.html#the-dragevent-interface
 #include "TEST_DragEvent.h"
 
+/*
 // [Window] https://html.spec.whatwg.org/
 #include "TEST_Window.h"
 
@@ -92,10 +92,10 @@ bool App::Init() {
 	DKClass::DKCreate("TEST_KeyboardEvent");
 	DKClass::DKCreate("TEST_CompositionEvent");
 	
-	/*
 	// [DragEvent] https://html.spec.whatwg.org/multipage/dnd.html#the-dragevent-interface
 	DKClass::DKCreate("TEST_DragEvent");
 	
+	/*
 	// [Window] https://html.spec.whatwg.org/
 	DKClass::DKCreate("TEST_Window");
 
