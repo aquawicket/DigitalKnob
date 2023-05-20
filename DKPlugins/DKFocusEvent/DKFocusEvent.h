@@ -17,8 +17,8 @@ class DKFocusEvent : public DKUIEvent
 {
 public:
 	// constructor(DOMString type, optional FocusEventInit eventInitDict = {});
-	DKFocusEvent(DOMString _type, FocusEventInit _eventInitDict) : DKUIEvent(_type, _eventInitDict) { // https://w3c.github.io/uievents/#dom-focusevent-focusevent
-		DKDEBUGFUNC(_type, _eventInitDict);
+	DKFocusEvent(DOMString type, FocusEventInit eventInitDict) : DKUIEvent(type, eventInitDict) { // https://w3c.github.io/uievents/#dom-focusevent-focusevent
+		DKDEBUGFUNC(type, eventInitDict);
 		interfaceName = "FocusEvent";
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKFocusEvent("+interfaceAddress+") \n");
@@ -26,7 +26,9 @@ public:
 	virtual ~DKFocusEvent(){}
 	
 	// readonly attribute EventTarget? relatedTarget;
-	DKString relatedTarget = ""; // https://w3c.github.io/uievents/#dom-focusevent-relatedtarget
+	DKString _relatedTarget = ""; // https://w3c.github.io/uievents/#dom-focusevent-relatedtarget
+	virtual DKString 	relatedTarget()									{ return _relatedTarget; }				// getter
+	virtual void 		relatedTarget(const DKString& relatedTarget) 	{ _relatedTarget = relatedTarget; } 	// setter
 };
 
 

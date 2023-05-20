@@ -53,8 +53,8 @@ public:
 	static int relatedTarget(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_string(ctx, 1))
-			focusEvent(ctx)->relatedTarget = duk_to_string(ctx, 1);
-		dukglue_push(ctx, focusEvent(ctx)->relatedTarget);
+			focusEvent(ctx)->relatedTarget(duk_to_string(ctx, 1));
+		dukglue_push(ctx, focusEvent(ctx)->relatedTarget());
 		return true;
 	}
 	

@@ -136,7 +136,7 @@ public:
 				DKString _viewArg = GetString(ctx, 4);
 				int _detailArg = GetInt(ctx, 5);
 				uiEvent(ctx)->initUIEvent(_typeArg, _bubblesArg, _cancelableArg, _viewArg, _detailArg);
-				return DKTODO();
+				return true;
 			}
 	//	};
 	
@@ -147,7 +147,7 @@ public:
 			static int which(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
 				dukglue_push(ctx, uiEvent(ctx)->which());				
-				return DKTODO();
+				return true;
 			}
 	// };	
 };

@@ -28,7 +28,7 @@ public:
 		// function
 		
 		// readonly attribute EventTarget? relatedTarget;
-		DKINFO("focusEvent.relatedTarget = "+toString(focusEvent.relatedTarget)	+"\n");
+		DKINFO("focusEvent.relatedTarget() = "+toString(focusEvent.relatedTarget())	+"\n");
 	}
 	
 	static bool onFocusEvent(DKEvent& event){
