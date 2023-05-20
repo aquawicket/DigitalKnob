@@ -17,8 +17,8 @@ class DKCompositionEvent : public DKUIEvent
 {
 public:
 	// constructor(DOMString type, optional CompositionEventInit eventInitDict = {});
-	DKCompositionEvent(DOMString _type, CompositionEventInit _eventInitDict) : DKUIEvent(_type, _eventInitDict) { // [CompositionEvent()] https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/CompositionEvent
-		DKDEBUGFUNC(_type, _eventInitDict);
+	DKCompositionEvent(DOMString type, CompositionEventInit eventInitDict) : DKUIEvent(type, eventInitDict) { // [CompositionEvent()] https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/CompositionEvent
+		DKDEBUGFUNC(type, eventInitDict);
 		interfaceName = "CompositionEvent";
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKCompositionEvent("+interfaceAddress+") \n");
@@ -26,7 +26,9 @@ public:
 	virtual ~DKCompositionEvent(){}
 	
 	// readonly attribute DOMString data;
-	DOMString data = "";
+	DOMString _data = "";
+	virtual DOMString 	data()						{ return _data; }	// getter
+	virtual void 		data(const DOMString& data) { _data = data; }	// setter
 	
 	// Source: UI Events (https://www.w3.org/TR/uievents/)
 	// partial interface CompositionEvent {
@@ -36,8 +38,8 @@ public:
 	//		optional boolean cancelableArg = false,
 	//		optional WindowProxy? viewArg = null,
 	//		optional DOMString dataArg = "");
-			void initCompositionEvent(DOMString& _typeArg, bool& _bubblesArg, bool& _cancelableArg, DKString& _viewArg, DOMString& _dataArg) {
-				DKDEBUGFUNC(_typeArg, _bubblesArg, _cancelableArg, _viewArg, _dataArg);
+			void initCompositionEvent(DOMString& typeArg, bool& bubblesArg, bool& cancelableArg, DKString& viewArg, DOMString& dataArg) {
+				DKDEBUGFUNC(typeArg, bubblesArg, cancelableArg, viewArg, dataArg);
 				DKTODO();
 			}
 	// };

@@ -30,7 +30,7 @@ public:
 		// function
 		
 		// readonly attribute DOMString data;
-		DKINFO("compositionEvent.data = "		+toString(compositionEvent.data)	+"\n");
+		DKINFO("compositionEvent.data() = "		+toString(compositionEvent.data())	+"\n");
 		
 		// Source: UI Events (https://www.w3.org/TR/uievents/)
 		// partial interface CompositionEvent {

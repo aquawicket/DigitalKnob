@@ -64,8 +64,8 @@ public:
 	static int _data(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_string(ctx, 1))
-			compositionEvent(ctx)->data = duk_to_string(ctx, 1);
-		dukglue_push(ctx, compositionEvent(ctx)->data);	
+			compositionEvent(ctx)->data(duk_to_string(ctx, 1));
+		dukglue_push(ctx, compositionEvent(ctx)->data());	
 		return true;
 	}
 	
