@@ -34,10 +34,10 @@
 // [Location] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-location-interface
 #include "TEST_Location.h"
 
-/*
 // [Node] https://dom.spec.whatwg.org/#interface-node
 #include "TEST_Node.h"
 
+/*
 // [Document] https://dom.spec.whatwg.org/#interface-document
 #include "TEST_Document.h"
 
@@ -107,10 +107,10 @@ bool App::Init() {
 	// [Location] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-location-interface
 	DKClass::DKCreate("TEST_Location");
 	
-	/*
 	// [Node] https://dom.spec.whatwg.org/#interface-node
 	DKClass::DKCreate("TEST_Node");
 
+	/*
 	// [Document] https://dom.spec.whatwg.org/#interface-document
 	DKClass::DKCreate("TEST_Document");
 	

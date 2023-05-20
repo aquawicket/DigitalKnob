@@ -27,7 +27,7 @@ dk_depend(DKScreen)
 dk_depend(DKNavigator)	# TODO
 dk_depend(DKLocation)
 
-#dk_depend(DKNode)
+dk_depend(DKNode)
 #dk_depend(DKDocument)
 #dk_depend(DKElement)
 #dk_depend(DKHTMLCollection)
