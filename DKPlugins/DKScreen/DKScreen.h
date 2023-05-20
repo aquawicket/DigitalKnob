@@ -22,27 +22,27 @@ public:
 	
 	// readonly attribute long availWidth;
 	virtual int availWidth(); 							// getter
-	virtual int availWidth(const int&) { return 0; } 	// setter
+	virtual void availWidth(const int&) { return 0; } 	// setter
 	
 	// readonly attribute long availHeight;
 	virtual int availHeight(); 							// getter
-	virtual int availHeight(const int&) { return 0; } 	// setter
+	virtual void availHeight(const int&) { return 0; } 	// setter
 	
 	// readonly attribute long width;
 	virtual int width(); 								// getter
-	virtual int width(const int&) { return 0; } 		// setter
+	virtual void width(const int&) { return 0; } 		// setter
 	
 	// readonly attribute long height;
 	virtual int height(); 								// getter
-	virtual int height(const int&) { return 0; } 		// setter
+	virtual void height(const int&) { return 0; } 		// setter
 	
 	// readonly attribute unsigned long colorDepth;
 	virtual int colorDepth(); 							// getter
-	virtual int colorDepth(const int&) { return 0; } 	// setter
+	virtual void colorDepth(const int&) { return 0; } 	// setter
 	
 	// readonly attribute unsigned long pixelDepth;
 	virtual int pixelDepth(); 							// getter
-	virtual int pixelDepth(const int&) { return 0; } 	// setter
+	virtual void pixelDepth(const int&) { return 0; } 	// setter
 	
 //};
 };
