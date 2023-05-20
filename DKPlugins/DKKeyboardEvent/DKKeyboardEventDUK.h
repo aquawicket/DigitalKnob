@@ -121,28 +121,28 @@ public:
 	// const unsigned long DOM_KEY_LOCATION_STANDARD = 0x00;
 	static int DOM_KEY_LOCATION_STANDARD(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, keyboardEvent(ctx)->DOM_KEY_LOCATION_STANDARD);	
+		dukglue_push(ctx, keyboardEvent(ctx)->DOM_KEY_LOCATION_STANDARD());	
 		return true;
 	}
 		
 	// const unsigned long DOM_KEY_LOCATION_LEFT = 0x01;
 	static int DOM_KEY_LOCATION_LEFT(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, keyboardEvent(ctx)->DOM_KEY_LOCATION_LEFT);	
+		dukglue_push(ctx, keyboardEvent(ctx)->DOM_KEY_LOCATION_LEFT());	
 		return true;
 	}
 		
 	// const unsigned long DOM_KEY_LOCATION_RIGHT = 0x02;
 	static int DOM_KEY_LOCATION_RIGHT(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, keyboardEvent(ctx)->DOM_KEY_LOCATION_RIGHT);	
+		dukglue_push(ctx, keyboardEvent(ctx)->DOM_KEY_LOCATION_RIGHT());	
 		return true;
 	}
 		
 	// const unsigned long DOM_KEY_LOCATION_NUMPAD = 0x03;
 	static int DOM_KEY_LOCATION_NUMPAD(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, keyboardEvent(ctx)->DOM_KEY_LOCATION_NUMPAD);	
+		dukglue_push(ctx, keyboardEvent(ctx)->DOM_KEY_LOCATION_NUMPAD());	
 		return true;
 	}
 #endif	
@@ -151,8 +151,8 @@ public:
 	static int key(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_string(ctx, 1))
-			keyboardEvent(ctx)->key = duk_to_string(ctx, 1);
-		dukglue_push(ctx, keyboardEvent(ctx)->key);	
+			keyboardEvent(ctx)->key(duk_to_string(ctx, 1));
+		dukglue_push(ctx, keyboardEvent(ctx)->key());	
 		return true;
 	}
 	
@@ -160,8 +160,8 @@ public:
 	static int code(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_string(ctx, 1))
-			keyboardEvent(ctx)->code = duk_to_string(ctx, 1);
-		dukglue_push(ctx, keyboardEvent(ctx)->code);	
+			keyboardEvent(ctx)->code(duk_to_string(ctx, 1));
+		dukglue_push(ctx, keyboardEvent(ctx)->code());	
 		return true;
 	}
 	
@@ -169,8 +169,8 @@ public:
 	static int location(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_number(ctx, 1))
-			keyboardEvent(ctx)->location = duk_to_int(ctx, 1);
-		dukglue_push(ctx, keyboardEvent(ctx)->location);	
+			keyboardEvent(ctx)->location(duk_to_int(ctx, 1));
+		dukglue_push(ctx, keyboardEvent(ctx)->location());	
 		return true;
 	}
 	
@@ -178,8 +178,8 @@ public:
 	static int ctrlKey(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_boolean(ctx, 1))
-			keyboardEvent(ctx)->ctrlKey = duk_to_boolean(ctx, 1);
-		dukglue_push(ctx, keyboardEvent(ctx)->ctrlKey);	
+			keyboardEvent(ctx)->ctrlKey(duk_to_boolean(ctx, 1));
+		dukglue_push(ctx, keyboardEvent(ctx)->ctrlKey());	
 		return true;
 	}
 	
@@ -187,8 +187,8 @@ public:
 	static int shiftKey(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_boolean(ctx, 1))
-			keyboardEvent(ctx)->shiftKey = duk_to_boolean(ctx, 1);
-		dukglue_push(ctx, keyboardEvent(ctx)->shiftKey);	
+			keyboardEvent(ctx)->shiftKey(duk_to_boolean(ctx, 1));
+		dukglue_push(ctx, keyboardEvent(ctx)->shiftKey());	
 		return true;
 	}
 	
@@ -196,8 +196,8 @@ public:
 	static int altKey(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_boolean(ctx, 1))
-			keyboardEvent(ctx)->altKey = duk_to_boolean(ctx, 1);
-		dukglue_push(ctx, keyboardEvent(ctx)->altKey);	
+			keyboardEvent(ctx)->altKey(duk_to_boolean(ctx, 1));
+		dukglue_push(ctx, keyboardEvent(ctx)->altKey());	
 		return true;
 	}
 	
@@ -205,8 +205,8 @@ public:
 	static int metaKey(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_boolean(ctx, 1))
-			keyboardEvent(ctx)->metaKey = duk_to_boolean(ctx, 1);
-		dukglue_push(ctx, keyboardEvent(ctx)->metaKey);	
+			keyboardEvent(ctx)->metaKey(duk_to_boolean(ctx, 1));
+		dukglue_push(ctx, keyboardEvent(ctx)->metaKey());	
 		return true;
 	}
 	
@@ -214,8 +214,8 @@ public:
 	static int repeat(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_boolean(ctx, 1))
-			keyboardEvent(ctx)->repeat = duk_to_boolean(ctx, 1);
-		dukglue_push(ctx, keyboardEvent(ctx)->repeat);	
+			keyboardEvent(ctx)->repeat(duk_to_boolean(ctx, 1));
+		dukglue_push(ctx, keyboardEvent(ctx)->repeat());	
 		return true;
 	}
 	
@@ -223,8 +223,8 @@ public:
 	static int isComposing(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_boolean(ctx, 1))
-			keyboardEvent(ctx)->isComposing = duk_to_boolean(ctx, 1);
-		dukglue_push(ctx, keyboardEvent(ctx)->isComposing);	
+			keyboardEvent(ctx)->isComposing(duk_to_boolean(ctx, 1));
+		dukglue_push(ctx, keyboardEvent(ctx)->isComposing());	
 		return true;
 	}
 	
@@ -259,15 +259,15 @@ public:
 	//		readonly attribute unsigned long charCode;
 			static int charCode(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				dukglue_push(ctx, keyboardEvent(ctx)->charCode);	
-				return DKDEPRECATED();
+				dukglue_push(ctx, keyboardEvent(ctx)->charCode());	
+				return true;
 			}
 	//
 	//		readonly attribute unsigned long keyCode;
 			static int keyCode(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				dukglue_push(ctx, keyboardEvent(ctx)->keyCode);	
-				return DKDEPRECATED();
+				dukglue_push(ctx, keyboardEvent(ctx)->keyCode());	
+				return true;
 			}
 	// };
 };

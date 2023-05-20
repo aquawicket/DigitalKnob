@@ -17,8 +17,8 @@ class DKKeyboardEvent : public DKUIEvent
 {
 public:
 	// constructor(DOMString type, optional KeyboardEventInit eventInitDict = {});
-	DKKeyboardEvent(DOMString _type, KeyboardEventInit _eventInitDict) : DKUIEvent(_type, _eventInitDict) {
-		DKDEBUGFUNC(_type, _eventInitDict);
+	DKKeyboardEvent(DOMString type, KeyboardEventInit eventInitDict) : DKUIEvent(type, eventInitDict) {
+		DKDEBUGFUNC(type, eventInitDict);
 		interfaceName = "KeyboardEvent";
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKKeyboardEvent("+interfaceAddress+") \n");
@@ -29,48 +29,74 @@ public:
 	
 #if !EMSCRIPTEN	//FIXME
 	// const unsigned long DOM_KEY_LOCATION_STANDARD = 0x00;
-	const unsigned int DOM_KEY_LOCATION_STANDARD = 0x00;
+	const unsigned int _DOM_KEY_LOCATION_STANDARD = 0x00;
+	virtual unsigned int 	DOM_KEY_LOCATION_STANDARD()												{ return _DOM_KEY_LOCATION_STANDARD; }						// getter
+	//virtual void 			DOM_KEY_LOCATION_STANDARD(const unsigned int& DOM_KEY_LOCATION_STANDARD){ _DOM_KEY_LOCATION_STANDARD = DOM_KEY_LOCATION_STANDARD; } // setter
 	
 	// const unsigned long DOM_KEY_LOCATION_LEFT = 0x01;
-	const unsigned int DOM_KEY_LOCATION_LEFT = 0x01;
+	const unsigned int _DOM_KEY_LOCATION_LEFT = 0x01;
+	virtual unsigned int 	DOM_KEY_LOCATION_LEFT()													{ return _DOM_KEY_LOCATION_LEFT; }							// getter
+	//virtual void 			DOM_KEY_LOCATION_LEFT(const unsigned int& DOM_KEY_LOCATION_LEFT)		{ _DOM_KEY_LOCATION_LEFT = DOM_KEY_LOCATION_LEFT; } 		// setter
 	
 	// const unsigned long DOM_KEY_LOCATION_RIGHT = 0x02;
-	const unsigned int DOM_KEY_LOCATION_RIGHT = 0x02;
+	const unsigned int _DOM_KEY_LOCATION_RIGHT = 0x02;
+	virtual unsigned int 	DOM_KEY_LOCATION_RIGHT()												{ return _DOM_KEY_LOCATION_RIGHT; }							// getter
+	//virtual void 			DOM_KEY_LOCATION_RIGHT(const unsigned int& DOM_KEY_LOCATION_RIGHT)		{ _DOM_KEY_LOCATION_RIGHT = DOM_KEY_LOCATION_RIGHT; } 		// setter
 	
 	// const unsigned long DOM_KEY_LOCATION_NUMPAD = 0x03;
-	const unsigned int DOM_KEY_LOCATION_NUMPAD = 0x03;
+	const unsigned int _DOM_KEY_LOCATION_NUMPAD = 0x03;
+	virtual unsigned int 	DOM_KEY_LOCATION_NUMPAD()												{ return _DOM_KEY_LOCATION_NUMPAD; }						// getter
+	//virtual void 			DOM_KEY_LOCATION_NUMPAD(const unsigned int& DOM_KEY_LOCATION_NUMPAD)	{ _DOM_KEY_LOCATION_NUMPAD = DOM_KEY_LOCATION_NUMPAD; } 	// setter
 #endif
 	
 	// readonly attribute DOMString key;
-	DOMString key = "";
+	DOMString _key = "";
+	virtual DOMString 		key()																	{ return _key; }											// getter
+	virtual void 			key(const DOMString& key)												{ _key = key; } 											// setter
 	
 	// readonly attribute DOMString code;
-	DOMString code = "";
+	DOMString _code = "";
+	virtual DOMString 		code()																	{ return _code; }											// getter
+	virtual void 			code(const DOMString& code)												{ _code = code; } 											// setter
 	
 	// readonly attribute unsigned long location;
-	unsigned int location = 0;
+	unsigned int _location = 0;
+	virtual unsigned int 	location()																{ return _location; }										// getter
+	virtual void 			location(const unsigned int& location)									{ _location = location; } 									// setter
 	
 	// readonly attribute boolean ctrlKey;
-	bool ctrlKey = false;
+	bool _ctrlKey = false;
+	virtual bool 			ctrlKey()																{ return _ctrlKey; }										// getter
+	virtual void 			ctrlKey(const bool& ctrlKey)											{ _ctrlKey = ctrlKey; } 									// setter
 	
 	// readonly attribute boolean shiftKey;
-	bool shiftKey = false;
+	bool _shiftKey = false;
+	virtual bool 			shiftKey()																{ return _shiftKey; }										// getter
+	virtual void 			shiftKey(const bool& shiftKey)											{ _shiftKey = shiftKey; } 									// setter
 	
 	// readonly attribute boolean altKey;
-	bool altKey = false;
+	bool _altKey = false;
+	virtual bool 			altKey()																{ return _altKey; }											// getter
+	virtual void 			altKey(const bool& altKey)												{ _altKey = altKey; } 										// setter
 	
 	// readonly attribute boolean metaKey;
-	bool metaKey = false;
+	bool _metaKey = false;
+	virtual bool 			metaKey()																{ return _metaKey; }										// getter
+	virtual void 			metaKey(const bool& metaKey)											{ _metaKey = metaKey; } 									// setter
   
 	// readonly attribute boolean repeat;
-	bool repeat = false;
+	bool _repeat = false;
+	virtual bool 			repeat()																{ return _repeat; }											// getter
+	virtual void 			repeat(const bool& repeat)												{ _repeat = repeat; } 										// setter
 	
 	// readonly attribute boolean isComposing;
-	bool isComposing = false;
+	bool _isComposing = false;
+	virtual bool 			isComposing()															{ return _isComposing; }									// getter
+	virtual void 			isComposing(const bool& isComposing)									{ _isComposing = isComposing; } 							// setter
 	
 	// boolean getModifierState(DOMString keyArg);
-	void getModifierState(DOMString& _keyArg) {
-		DKDEBUGFUNC(_keyArg);
+	void getModifierState(DOMString& keyArg) {
+		DKDEBUGFUNC(keyArg);
 		DKTODO();
 	}
 	
@@ -88,18 +114,18 @@ public:
 	//		optional boolean shiftKey = false,
 	//		optional boolean metaKey = false);
 			void initKeyboardEvent(
-				DOMString& _typeArg,
-				bool& _bubblesArg,
-				bool& _cancelableArg,
-				DKString& _viewArg,
-				DOMString& _keyArg,
-				unsigned int& _locationArg,
-				bool& _ctrlKey,
-				bool& _altKey,
-				bool& _shiftKey,
-				bool& _metaKey
+				DOMString& typeArg,
+				bool& bubblesArg,
+				bool& cancelableArg,
+				DKString& viewArg,
+				DOMString& keyArg,
+				unsigned int& locationArg,
+				bool& ctrlKey,
+				bool& altKey,
+				bool& shiftKey,
+				bool& metaKey
 			) {
-				DKDEBUGFUNC(_typeArg, _bubblesArg, _cancelableArg, _viewArg, _keyArg, _locationArg, _ctrlKey, _altKey, _shiftKey, _metaKey);
+				DKDEBUGFUNC(typeArg, bubblesArg, cancelableArg, viewArg, keyArg, locationArg, ctrlKey, altKey, shiftKey, metaKey);
 				DKTODO();
 			}
 	// };
@@ -108,10 +134,14 @@ public:
 	// partial interface KeyboardEvent {
 	//		// The following support legacy user agents
 	//		readonly attribute unsigned long charCode;
-			unsigned int charCode = 0;
+			unsigned int _charCode = 0;
+			virtual unsigned int 	charCode()															{ return _charCode; }								// getter
+			virtual void 			charCode(const unsigned int& charCode)								{ _charCode = charCode; } 							// setter
 	//
 	//		readonly attribute unsigned long keyCode;
-			unsigned int keyCode = 0;
+			unsigned int _keyCode = 0;
+			virtual unsigned int 	keyCode()															{ return _keyCode; }								// getter
+			virtual void 			keyCode(const unsigned int& keyCode)								{ _keyCode = keyCode; } 							// setter
 	// };
 };
 
