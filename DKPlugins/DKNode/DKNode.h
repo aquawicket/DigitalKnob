@@ -173,22 +173,34 @@ public:
 	}
 
 	// const unsigned short DOCUMENT_POSITION_DISCONNECTED = 0x01;
-	const unsigned short DOCUMENT_POSITION_DISCONNECTED = 0x01;
+	const unsigned short _DOCUMENT_POSITION_DISCONNECTED = 0x01;
+	virtual unsigned short DOCUMENT_POSITION_DISCONNECTED()												{ return _DOCUMENT_POSITION_DISCONNECTED; }								// getter
+	//virtual void DOCUMENT_POSITION_DISCONNECTED(const unsigned short& DOCUMENT_POSITION_DISCONNECTED)	{ _DOCUMENT_POSITION_DISCONNECTED = DOCUMENT_POSITION_DISCONNECTED; }	// setter
 	
 	// const unsigned short DOCUMENT_POSITION_PRECEDING = 0x02;
-	const unsigned short DOCUMENT_POSITION_PRECEDING = 0x02;
+	const unsigned short _DOCUMENT_POSITION_PRECEDING = 0x02;
+	virtual unsigned short DOCUMENT_POSITION_PRECEDING()												{ return _DOCUMENT_POSITION_PRECEDING; }								// getter
+	//virtual void DOCUMENT_POSITION_PRECEDING(const unsigned short& DOCUMENT_POSITION_PRECEDING)		{ _DOCUMENT_POSITION_PRECEDING = DOCUMENT_POSITION_PRECEDING; }			// setter
 	
 	// const unsigned short DOCUMENT_POSITION_FOLLOWING = 0x04;
-	const unsigned short DOCUMENT_POSITION_FOLLOWING = 0x04;
+	const unsigned short _DOCUMENT_POSITION_FOLLOWING = 0x04;
+	virtual unsigned short DOCUMENT_POSITION_FOLLOWING()												{ return _DOCUMENT_POSITION_FOLLOWING; }								// getter
+	//virtual void DOCUMENT_POSITION_FOLLOWING(const unsigned short& DOCUMENT_POSITION_FOLLOWING)		{ _DOCUMENT_POSITION_FOLLOWING = DOCUMENT_POSITION_FOLLOWING; }			// setter
 	
 	// const unsigned short DOCUMENT_POSITION_CONTAINS = 0x08;
-	const unsigned short DOCUMENT_POSITION_CONTAINS = 0x08;
+	const unsigned short _DOCUMENT_POSITION_CONTAINS = 0x08;
+	virtual unsigned short DOCUMENT_POSITION_CONTAINS()													{ return _DOCUMENT_POSITION_CONTAINS; }									// getter
+	//virtual void DOCUMENT_POSITION_CONTAINS(const unsigned short& DOCUMENT_POSITION_CONTAINS)			{ _DOCUMENT_POSITION_CONTAINS = DOCUMENT_POSITION_CONTAINS; }			// setter
 	
 	// const unsigned short DOCUMENT_POSITION_CONTAINED_BY = 0x10;
-	const unsigned short DOCUMENT_POSITION_CONTAINED_BY = 0x10;
+	const unsigned short _DOCUMENT_POSITION_CONTAINED_BY = 0x10;
+	virtual unsigned short DOCUMENT_POSITION_CONTAINED_BY()												{ return _DOCUMENT_POSITION_CONTAINED_BY; }								// getter
+	//virtual void DOCUMENT_POSITION_CONTAINED_BY(const unsigned short& DOCUMENT_POSITION_CONTAINED_BY)	{ _DOCUMENT_POSITION_CONTAINED_BY = DOCUMENT_POSITION_CONTAINED_BY; }	// setter
 	
 	// const unsigned short DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC = 0x20;
-	const unsigned short DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC = 0x20;
+	const unsigned short _DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC = 0x20;
+	virtual unsigned short DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC()															{ return _DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC; }										// getter
+	//virtual void DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC(const unsigned short& DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC)	{ _DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC = DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC; }	// setter
 	
 	// unsigned short compareDocumentPosition(Node other);
 	virtual bool compareDocumentPosition(DKString& _other, unsigned short& _compareDocumentPosition) {
