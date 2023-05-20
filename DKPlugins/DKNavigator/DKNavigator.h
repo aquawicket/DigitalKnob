@@ -7,6 +7,9 @@
 #include "DKInterface/DKInterface.h"
 
 
+// [Exposed=Window]
+// interface Navigator {
+// objects implementing this interface also implement the interfaces given below
 class DKNavigator : public DKInterface
 {
 public:

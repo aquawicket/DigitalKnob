@@ -28,10 +28,10 @@
 // [Screen] https://w3c.github.io/csswg-drafts/cssom-view/#the-screen-interface
 #include "TEST_Screen.h"
 
-/*
 // [Navigator] https://html.spec.whatwg.org/multipage/system-state.html#the-navigator-object
 #include "TEST_Navigator.h"
 
+/*
 // [Location] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-location-interface
 #include "TEST_Location.h"
 
@@ -101,10 +101,10 @@ bool App::Init() {
 	// [Screen] https://w3c.github.io/csswg-drafts/cssom-view/#the-screen-interface
 	DKClass::DKCreate("TEST_Screen");
 
-	/*
 	// [Navigator] https://html.spec.whatwg.org/multipage/system-state.html#the-navigator-object
 	DKClass::DKCreate("TEST_Navigator");
 	
+	/*
 	// [Location] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-location-interface
 	DKClass::DKCreate("TEST_Location");
 

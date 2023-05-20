@@ -1,3 +1,5 @@
+// [IDL] https://html.spec.whatwg.org/multipage/system-state.html#the-navigator-object
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Navigator
 #if HAVE_DKDuktape
 
 #pragma once
@@ -7,26 +9,20 @@
 #include "DKDuktape/DKDuktape.h"
 
 
-// [INTERFACE] https://html.spec.whatwg.org/multipage/system-state.html#the-navigator-object
-// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Navigator
 class DKNavigatorDUK : public DKObjectT<DKNavigatorDUK>
 {
 public:
 	bool Init(){
 		
-		////// Constructor //////
 		DKDuktape::AttachFunction("CPP_DKNavigatorDUK", DKNavigatorDUK::constructor);
 		
 
-		
 		////// Load .js files
 		DKClass::DKCreate("DKNavigator/DKNavigatorDUK.js");
 		
 		return true;
 	}
 	
-	////// Constructor //////
-	// [Navigator()]
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKINFO("CPP_DKNavigatorDUK()\n");
