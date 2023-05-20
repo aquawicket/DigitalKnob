@@ -539,20 +539,18 @@ public:
 	//		[LegacyLenientSetter] readonly attribute boolean fullscreenEnabled;
 			static int fullscreenEnabled(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				bool _fullscreenEnabled = GetBool(ctx);
-				if(!eventTarget(ctx)->fullscreenEnabled(_fullscreenEnabled, duk_is_valid_index(ctx, 1)))
-					return false;
-				dukglue_push(ctx, _fullscreenEnabled);
+				if(duk_is_valid_index(ctx, 1))
+					eventTarget(ctx)->fullscreenEnabled(GetBool(ctx));
+				dukglue_push(ctx, eventTarget(ctx)->fullscreenEnabled());
 				return true;
 			}
 	//		
 	//		[LegacyLenientSetter, Unscopable] readonly attribute boolean fullscreen; // historical
 			static int fullscreen(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				bool _fullscreen = GetBool(ctx);
-				if(!eventTarget(ctx)->fullscreen(_fullscreen, duk_is_valid_index(ctx, 1)))
-					return false;
-				dukglue_push(ctx, _fullscreen);
+				if(duk_is_valid_index(ctx, 1))
+					eventTarget(ctx)->fullscreen(GetBool(ctx));
+				dukglue_push(ctx, eventTarget(ctx)->fullscreen());
 				return true;
 			}
 	//
@@ -569,20 +567,18 @@ public:
 	//		attribute EventHandler onfullscreenchange;
 			static int onfullscreenchange(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				DKString _onfullscreenchange = GetString(ctx);
-				if(!eventTarget(ctx)->onfullscreenchange(_onfullscreenchange, duk_is_valid_index(ctx, 1)))
-					return false;
-				dukglue_push(ctx, _onfullscreenchange);
+				if(duk_is_valid_index(ctx, 1))
+					eventTarget(ctx)->onfullscreenchange(GetString(ctx));
+				dukglue_push(ctx, eventTarget(ctx)->onfullscreenchange());
 				return true;
 			}
 	//
 	//		attribute EventHandler onfullscreenerror;
 			static int onfullscreenerror(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				DKString _onfullscreenerror = GetString(ctx);
-				if(!eventTarget(ctx)->onfullscreenerror(_onfullscreenerror, duk_is_valid_index(ctx, 1)))
-					return false;
-				dukglue_push(ctx, _onfullscreenerror);
+				if(duk_is_valid_index(ctx, 1))
+					eventTarget(ctx)->onfullscreenerror(GetString(ctx));
+				dukglue_push(ctx, eventTarget(ctx)->onfullscreenerror());
 				return true;
 			}
 	//};
