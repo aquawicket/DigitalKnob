@@ -21,7 +21,9 @@ public:
 	}
 	
 	// const unsigned short ELEMENT_NODE = 1;
-	const unsigned short ELEMENT_NODE = 1;
+	const unsigned short _ELEMENT_NODE = 1;
+	virtual unsigned short ELEMENT_NODE()				{ return _ELEMENT_NODE; }			// getter
+	//virtual void ELEMENT_NODE(const unsigned short&)	{ _ELEMENT_NODE = _ELEMENT_NODE; } 	// setter
 	
 	// const unsigned short ATTRIBUTE_NODE = 2;
 	const unsigned short ATTRIBUTE_NODE = 2;
