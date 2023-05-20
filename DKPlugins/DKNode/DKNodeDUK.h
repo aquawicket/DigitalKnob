@@ -302,40 +302,36 @@ public:
 	// readonly attribute DOMString nodeName;
 	static int nodeName(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _nodeName = GetString(ctx);
-		if(!eventTarget(ctx)->nodeName(_nodeName, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _nodeName);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->nodeName(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->nodeName());
 		return true;
 	}
 	
 	// readonly attribute USVString baseURI;
 	static int baseURI(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _baseURI = GetString(ctx);
-		if(!eventTarget(ctx)->baseURI(_baseURI, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _baseURI);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->baseURI(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->baseURI());
 		return true;
 	}
 	
 	// readonly attribute boolean isConnected;
 	static int isConnected(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		bool _isConnected = GetBool(ctx);
-		if(!eventTarget(ctx)->isConnected(_isConnected, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _isConnected);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->isConnected(GetBool(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->isConnected());
 		return true;
 	}
 	
 	// readonly attribute Document? ownerDocument;
 	static int ownerDocument(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _ownerDocument = GetString(ctx);
-		if(!eventTarget(ctx)->ownerDocument(_ownerDocument, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _ownerDocument);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->ownerDocument(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->ownerDocument());
 		return true;
 	}
 	
@@ -353,20 +349,18 @@ public:
 	// readonly attribute Node? parentNode;
 	static int parentNode(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _parentNode = GetString(ctx);
-		if(!eventTarget(ctx)->parentNode(_parentNode, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _parentNode);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->parentNode(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->parentNode());
 		return true;
 	}
 	
 	// readonly attribute Element? parentElement;
 	static int parentElement(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _parentElement = GetString(ctx);
-		if(!eventTarget(ctx)->parentElement(_parentElement, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _parentElement);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->parentElement(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->parentElement());
 		return true;
 	}
 	
@@ -383,70 +377,63 @@ public:
 	// [SameObject] readonly attribute NodeList childNodes;
 	static int childNodes(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _childNodes = GetString(ctx);
-		if(!eventTarget(ctx)->childNodes(_childNodes, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _childNodes);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->childNodes(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->childNodes());
 		return true;
 	}
 	
 	// readonly attribute Node? firstChild;
 	static int firstChild(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _firstChild = GetString(ctx);
-		if(!eventTarget(ctx)->firstChild(_firstChild, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _firstChild);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->firstChild(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->firstChild());
 		return true;
 	}
 	
 	// readonly attribute Node? lastChild;
 	static int lastChild(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _lastChild = GetString(ctx);
-		if(!eventTarget(ctx)->lastChild(_lastChild, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _lastChild);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->lastChild(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->lastChild());
 		return true;
 	}
 	
 	// readonly attribute Node? previousSibling;
 	static int previousSibling(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _previousSibling = GetString(ctx);
-		if(!eventTarget(ctx)->previousSibling(_previousSibling, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _previousSibling);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->previousSibling(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->previousSibling());
 		return true;
 	}
 	
 	// readonly attribute Node? nextSibling;
 	static int nextSibling(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _nextSibling = GetString(ctx);
-		if(!eventTarget(ctx)->nextSibling(_nextSibling, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _nextSibling);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->nextSibling(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->nextSibling());
 		return true;
 	}
 	
 	// [CEReactions] attribute DOMString? nodeValue;
 	static int nodeValue(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _nodeValue = GetString(ctx);
-		if(!eventTarget(ctx)->nodeValue(_nodeValue, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _nodeValue);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->nodeValue(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->nodeValue());
 		return true;
 	}
 	
 	// [CEReactions] attribute DOMString? textContent;
 	static int textContent(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _textContent = GetString(ctx);
-		if(!eventTarget(ctx)->textContent(_textContent, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _textContent);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->textContent(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->textContent());
 		return true;
 	}
 	
@@ -494,42 +481,42 @@ public:
 	// const unsigned short DOCUMENT_POSITION_DISCONNECTED = 0x01;
 	static int DOCUMENT_POSITION_DISCONNECTED(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, eventTarget(ctx)->DOCUMENT_POSITION_DISCONNECTED);
+		dukglue_push(ctx, eventTarget(ctx)->DOCUMENT_POSITION_DISCONNECTED());
 		return true;
 	}
 	
 	// const unsigned short DOCUMENT_POSITION_PRECEDING = 0x02;
 	static int DOCUMENT_POSITION_PRECEDING(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, eventTarget(ctx)->DOCUMENT_POSITION_PRECEDING);
+		dukglue_push(ctx, eventTarget(ctx)->DOCUMENT_POSITION_PRECEDING());
 		return true;
 	}
 	
 	// const unsigned short DOCUMENT_POSITION_FOLLOWING = 0x04;
 	static int DOCUMENT_POSITION_FOLLOWING(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, eventTarget(ctx)->DOCUMENT_POSITION_FOLLOWING);
+		dukglue_push(ctx, eventTarget(ctx)->DOCUMENT_POSITION_FOLLOWING());
 		return true;
 	}
 	
 	// const unsigned short DOCUMENT_POSITION_CONTAINS = 0x08;
 	static int DOCUMENT_POSITION_CONTAINS(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, eventTarget(ctx)->DOCUMENT_POSITION_CONTAINS);
+		dukglue_push(ctx, eventTarget(ctx)->DOCUMENT_POSITION_CONTAINS());
 		return true;
 	}
 	
 	// const unsigned short DOCUMENT_POSITION_CONTAINED_BY = 0x10;
 	static int DOCUMENT_POSITION_CONTAINED_BY(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, eventTarget(ctx)->DOCUMENT_POSITION_CONTAINED_BY);
+		dukglue_push(ctx, eventTarget(ctx)->DOCUMENT_POSITION_CONTAINED_BY());
 		return true;
 	}
 	
 	// const unsigned short DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC = 0x20;
 	static int DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, eventTarget(ctx)->DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC);
+		dukglue_push(ctx, eventTarget(ctx)->DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC());
 		return true;
 	}
 	
