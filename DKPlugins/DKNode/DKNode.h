@@ -81,10 +81,12 @@ public:
 	//virtual void NOTATION_NODE(const unsigned short& NOTATION_NODE)								{ _NOTATION_NODE = NOTATION_NODE; }								// setter
 	
 	// readonly attribute unsigned short nodeType;
-	virtual bool nodeType(unsigned int&, bool) { return false; }
+	virtual unsigned short nodeType()						{ return 0; }		// getter
+	virtual void nodeType(const unsigned short&)			{ } 				// setter
 	
 	// readonly attribute DOMString nodeName;
-	virtual bool nodeName(DOMString&, bool) { return false; }
+	virtual DOMString nodeName()							{ return ""; }		// getter
+	virtual void nodeName(const DOMString&)					{ } 				// setter
 
 	// readonly attribute USVString baseURI;
 	virtual bool baseURI(DKString&, bool) { return false; }

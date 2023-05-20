@@ -216,87 +216,86 @@ public:
 	// const unsigned short ATTRIBUTE_NODE = 2;
 	static int ATTRIBUTE_NODE(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, eventTarget(ctx)->ATTRIBUTE_NODE);
+		dukglue_push(ctx, eventTarget(ctx)->ATTRIBUTE_NODE());
 		return true;
 	}
 	
 	// const unsigned short TEXT_NODE = 3;
 	static int TEXT_NODE(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, eventTarget(ctx)->TEXT_NODE);
+		dukglue_push(ctx, eventTarget(ctx)->TEXT_NODE());
 		return true;
 	}
 	
 	// const unsigned short CDATA_SECTION_NODE = 4;
 	static int CDATA_SECTION_NODE(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, eventTarget(ctx)->CDATA_SECTION_NODE);
+		dukglue_push(ctx, eventTarget(ctx)->CDATA_SECTION_NODE());
 		return true;
 	}
 	
 	// const unsigned short ENTITY_REFERENCE_NODE = 5; // legacy
 	static int ENTITY_REFERENCE_NODE(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, eventTarget(ctx)->ENTITY_REFERENCE_NODE);
+		dukglue_push(ctx, eventTarget(ctx)->ENTITY_REFERENCE_NODE());
 		return true;
 	}
 	
 	// const unsigned short ENTITY_NODE = 6; // legacy
 	static int ENTITY_NODE(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, eventTarget(ctx)->ENTITY_NODE);
+		dukglue_push(ctx, eventTarget(ctx)->ENTITY_NODE());
 		return true;
 	}
 	
 	// const unsigned short PROCESSING_INSTRUCTION_NODE = 7;
 	static int PROCESSING_INSTRUCTION_NODE(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, eventTarget(ctx)->PROCESSING_INSTRUCTION_NODE);
+		dukglue_push(ctx, eventTarget(ctx)->PROCESSING_INSTRUCTION_NODE());
 		return true;
 	}
 	
 	// const unsigned short COMMENT_NODE = 8;
 	static int COMMENT_NODE(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, eventTarget(ctx)->COMMENT_NODE);
+		dukglue_push(ctx, eventTarget(ctx)->COMMENT_NODE());
 		return true;
 	}
 	
 	// const unsigned short DOCUMENT_NODE = 9;
 	static int DOCUMENT_NODE(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, eventTarget(ctx)->DOCUMENT_NODE);
+		dukglue_push(ctx, eventTarget(ctx)->DOCUMENT_NODE());
 		return true;
 	}
 	
 	// const unsigned short DOCUMENT_TYPE_NODE = 10;
 	static int DOCUMENT_TYPE_NODE(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, eventTarget(ctx)->DOCUMENT_TYPE_NODE);
+		dukglue_push(ctx, eventTarget(ctx)->DOCUMENT_TYPE_NODE());
 		return true;
 	}
 	
 	// const unsigned short DOCUMENT_FRAGMENT_NODE = 11;
 	static int DOCUMENT_FRAGMENT_NODE(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, eventTarget(ctx)->DOCUMENT_FRAGMENT_NODE);
+		dukglue_push(ctx, eventTarget(ctx)->DOCUMENT_FRAGMENT_NODE());
 		return true;
 	}
 	
 	// const unsigned short NOTATION_NODE = 12; // legacy
 	static int NOTATION_NODE(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, eventTarget(ctx)->NOTATION_NODE);
+		dukglue_push(ctx, eventTarget(ctx)->NOTATION_NODE());
 		return true;
 	}
 	
 	// readonly attribute unsigned short nodeType;
 	static int nodeType(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		unsigned int _nodeType = GetUint(ctx);
-		if(!eventTarget(ctx)->nodeType(_nodeType, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _nodeType);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->nodeType((unsigned short)GetUint(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->nodeType());
 		return true;
 	}
 	
