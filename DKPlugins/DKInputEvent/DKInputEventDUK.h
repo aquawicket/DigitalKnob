@@ -66,8 +66,8 @@ public:
 	static int _data(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_string(ctx, 1))
-			inputEvent(ctx)->data = duk_to_string(ctx, 1);
-		dukglue_push(ctx, inputEvent(ctx)->data);	
+			inputEvent(ctx)->data(duk_to_string(ctx, 1));
+		dukglue_push(ctx, inputEvent(ctx)->data());	
 		return true;
 	}
 	
@@ -75,8 +75,8 @@ public:
 	static int isComposing(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_boolean(ctx, 1))
-			inputEvent(ctx)->isComposing = duk_to_boolean(ctx, 1);
-		dukglue_push(ctx, inputEvent(ctx)->isComposing);	
+			inputEvent(ctx)->isComposing(duk_to_boolean(ctx, 1));
+		dukglue_push(ctx, inputEvent(ctx)->isComposing());	
 		return true;
 	}
 	
@@ -84,8 +84,8 @@ public:
 	static int inputType(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_string(ctx, 1))
-			inputEvent(ctx)->inputType = duk_to_string(ctx, 1);
-		dukglue_push(ctx, inputEvent(ctx)->inputType);	
+			inputEvent(ctx)->inputType(duk_to_string(ctx, 1));
+		dukglue_push(ctx, inputEvent(ctx)->inputType());	
 		return true;
 	}
 	
@@ -94,7 +94,7 @@ public:
 	//    	readonly attribute DataTransfer? dataTransfer;
 			static int dataTransfer(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				dukglue_push(ctx, inputEvent(ctx)->dataTransfer);	
+				dukglue_push(ctx, inputEvent(ctx)->dataTransfer());	
 				return true;
 			}
 	//    	sequence<StaticRange> getTargetRanges();
