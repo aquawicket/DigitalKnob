@@ -17,8 +17,8 @@ class DKWheelEvent : public DKMouseEvent
 {
 public:
 	// constructor(DOMString type, optional WheelEventInit eventInitDict = {});
-	DKWheelEvent(DOMString _type, WheelEventInit _eventInitDict) : DKMouseEvent(_type, _eventInitDict) {
-		DKDEBUGFUNC(_type, _eventInitDict);
+	DKWheelEvent(DOMString type, WheelEventInit eventInitDict) : DKMouseEvent(type, eventInitDict) {
+		DKDEBUGFUNC(type, eventInitDict);
 		interfaceName = "WheelEvent";
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKWheelEvent("+interfaceAddress+") \n");
@@ -29,26 +29,40 @@ public:
 	
 #if !EMSCRIPTEN	//FIXME
 	// const unsigned long DOM_DELTA_PIXEL = 0x00;
-	const unsigned int DOM_DELTA_PIXEL = 0x00;
+	const unsigned int _DOM_DELTA_PIXEL = 0x00;
+	virtual unsigned int 	DOM_DELTA_PIXEL()									{ return _DOM_DELTA_PIXEL; }			// getter
+	//virtual void 			DOM_DELTA_PIXEL(const unsigned int& DOM_DELTA_PIXEL){ _DOM_DELTA_PIXEL = DOM_DELTA_PIXEL; } // setter
 	
 	// const unsigned long DOM_DELTA_LINE  = 0x01;
-	const unsigned int DOM_DELTA_LINE  = 0x01;
+	const unsigned int _DOM_DELTA_LINE  = 0x01;
+	virtual unsigned int 	DOM_DELTA_LINE()									{ return _DOM_DELTA_LINE; }				// getter
+	//virtual void 			DOM_DELTA_LINE(const unsigned int& DOM_DELTA_LINE) 	{ _DOM_DELTA_LINE = DOM_DELTA_LINE; } 	// setter
 	
 	// const unsigned long DOM_DELTA_PAGE  = 0x02;
-	const unsigned int DOM_DELTA_PAGE  = 0x02;
+	const unsigned int _DOM_DELTA_PAGE  = 0x02;
+	virtual unsigned int 	DOM_DELTA_PAGE()									{ return _DOM_DELTA_PAGE; }				// getter
+	//virtual void 			DOM_DELTA_PAGE(const unsigned int& DOM_DELTA_PAGE) 	{ _DOM_DELTA_PAGE = DOM_DELTA_PAGE; } 	// setter
 #endif
 	
 	// readonly attribute double deltaX;
-	double deltaX = 0.0; 
+	double _deltaX = 0.0;
+	virtual double 			deltaX()											{ return _deltaX; }						// getter
+	virtual void 			deltaX(const double& deltaX) 						{ _deltaX = deltaX; } 					// setter
 	
 	// readonly attribute double deltaY;
-	double deltaY = 0.0;
+	double _deltaY = 0.0;
+	virtual double 			deltaY()											{ return _deltaY; }						// getter
+	virtual void 			deltaY(const double& deltaY) 						{ _deltaY = deltaY; } 					// setter
 	
 	// readonly attribute double deltaZ;
-	double deltaZ = 0.0;
+	double _deltaZ = 0.0;
+	virtual double 			deltaZ()											{ return _deltaZ; }						// getter
+	virtual void 			deltaZ(const double& deltaZ) 						{ _deltaZ = deltaZ; } 					// setter
 	
 	// readonly attribute unsigned long deltaMode;
-	unsigned int deltaMode = 0;
+	unsigned int _deltaMode = 0;
+	virtual double 			deltaMode()											{ return _deltaMode; }					// getter
+	virtual void 			deltaMode(const double& deltaMode) 					{ _deltaMode = deltaMode; } 			// setter
 };
 
 

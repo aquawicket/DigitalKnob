@@ -73,21 +73,21 @@ public:
 	// const unsigned long DOM_DELTA_PIXEL = 0x00;
 	static int DOM_DELTA_PIXEL(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, wheelEvent(ctx)->DOM_DELTA_PIXEL);	
+		dukglue_push(ctx, wheelEvent(ctx)->DOM_DELTA_PIXEL());	
 		return true;
 	}
 		
 	// const unsigned long DOM_DELTA_LINE  = 0x01;
 	static int DOM_DELTA_LINE(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, wheelEvent(ctx)->DOM_DELTA_LINE);	
+		dukglue_push(ctx, wheelEvent(ctx)->DOM_DELTA_LINE());	
 		return true;
 	}
 		
 	// const unsigned long DOM_DELTA_PAGE  = 0x02;
 	static int DOM_DELTA_PAGE(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, wheelEvent(ctx)->DOM_DELTA_PAGE);	
+		dukglue_push(ctx, wheelEvent(ctx)->DOM_DELTA_PAGE());	
 		return true;
 	}
 #endif 
@@ -96,8 +96,8 @@ public:
 	static int deltaX(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_number(ctx, 1))
-			wheelEvent(ctx)->deltaX = duk_to_number(ctx, 1);
-		dukglue_push(ctx, wheelEvent(ctx)->deltaX);	
+			wheelEvent(ctx)->deltaX(duk_to_number(ctx, 1));
+		dukglue_push(ctx, wheelEvent(ctx)->deltaX());	
 		return true;
 	}
 	
@@ -105,8 +105,8 @@ public:
 	static int deltaY(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_number(ctx, 1))
-			wheelEvent(ctx)->deltaY = duk_to_number(ctx, 1);
-		dukglue_push(ctx, wheelEvent(ctx)->deltaY);	
+			wheelEvent(ctx)->deltaY(duk_to_number(ctx, 1));
+		dukglue_push(ctx, wheelEvent(ctx)->deltaY());	
 		return true;
 	}
 		
@@ -114,8 +114,8 @@ public:
 	static int deltaZ(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_number(ctx, 1))
-			wheelEvent(ctx)->deltaZ = duk_to_number(ctx, 1);
-		dukglue_push(ctx, wheelEvent(ctx)->deltaZ);	
+			wheelEvent(ctx)->deltaZ(duk_to_number(ctx, 1));
+		dukglue_push(ctx, wheelEvent(ctx)->deltaZ());	
 		return true;
 	}	
 		
@@ -123,8 +123,8 @@ public:
 	static int deltaMode(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_number(ctx, 1))
-			wheelEvent(ctx)->deltaMode = duk_to_uint(ctx, 1);
-		dukglue_push(ctx, wheelEvent(ctx)->deltaMode);	
+			wheelEvent(ctx)->deltaMode(duk_to_uint(ctx, 1));
+		dukglue_push(ctx, wheelEvent(ctx)->deltaMode());
 		return true;
 	}	
 };

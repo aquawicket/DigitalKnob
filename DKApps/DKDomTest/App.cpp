@@ -14,8 +14,8 @@
 #include "TEST_UIEvent.h"
 #include "TEST_FocusEvent.h"
 #include "TEST_MouseEvent.h"
-/*
 #include "TEST_WheelEvent.h"
+/*
 #include "TEST_InputEvent.h"
 #include "TEST_KeyboardEvent.h"
 #include "TEST_CompositionEvent.h"
@@ -87,8 +87,8 @@ bool App::Init() {
 	DKClass::DKCreate("TEST_UIEvent");
 	DKClass::DKCreate("TEST_FocusEvent");
 	DKClass::DKCreate("TEST_MouseEvent");
-	/*
 	DKClass::DKCreate("TEST_WheelEvent");
+	/*
 	DKClass::DKCreate("TEST_InputEvent");
 	DKClass::DKCreate("TEST_KeyboardEvent");
 	DKClass::DKCreate("TEST_CompositionEvent");
