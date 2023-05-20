@@ -89,13 +89,16 @@ public:
 	virtual void nodeName(const DOMString&)					{ } 				// setter
 
 	// readonly attribute USVString baseURI;
-	virtual bool baseURI(DKString&, bool) { return false; }
+	virtual USVString baseURI()								{ return ""; }		// getter
+	virtual void baseURI(const USVString&)					{ } 				// setter
 
 	// readonly attribute boolean isConnected;
-	virtual bool isConnected(bool&, bool) { return false; }
+	virtual bool isConnected()								{ return false; }	// getter
+	virtual void isConnected(const bool&)					{ } 				// setter
 	
 	// readonly attribute Document? ownerDocument;
-	virtual bool ownerDocument(DKString&, bool) { return false; }
+	virtual DKString ownerDocument()						{ return ""; }		// getter
+	virtual void ownerDocument(const DKString&)				{ } 				// setter
 	
 	// Node getRootNode(optional GetRootNodeOptions options = {});
 	virtual bool getRootNode(DKString& _options, DKString& _node) {
@@ -104,10 +107,12 @@ public:
 	}
 	
 	// readonly attribute Node? parentNode;
-	virtual bool parentNode(DKString&, bool) { return false; }
+	virtual DKString parentNode()							{ return ""; }		// getter
+	virtual void parentNode(const DKString&)				{ } 				// setter
 	
 	// readonly attribute Element? parentElement;
-	virtual bool parentElement(DKString&, bool) { return false; }
+	virtual DKString parentElement()						{ return ""; }		// getter
+	virtual void parentElement(const DKString&)				{ } 				// setter
 	
 	// boolean hasChildNodes();
 	virtual bool hasChildNodes(bool& _hasChildNodes) {
@@ -116,25 +121,32 @@ public:
 	}
 	
 	// [SameObject] readonly attribute NodeList childNodes;
-	virtual bool childNodes(DKString&, bool) { return false; }
+	virtual DKString childNodes()							{ return ""; }		// getter
+	virtual void childNodes(const DKString&)				{ } 				// setter
 	
 	// readonly attribute Node? firstChild;
-	virtual bool firstChild(DKString&, bool) { return false; }
+	virtual DKString firstChild()							{ return ""; }		// getter
+	virtual void firstChild(const DKString&)				{ } 				// setter
 	
 	// readonly attribute Node? lastChild;
-	virtual bool lastChild(DKString&, bool) { return false; }
+	virtual DKString lastChild()							{ return ""; }		// getter
+	virtual void lastChild(const DKString&)					{ } 				// setter
 	
 	// readonly attribute Node? previousSibling;
-	virtual bool previousSibling(DKString&, bool) { return false; }
+	virtual DKString previousSibling()						{ return ""; }		// getter
+	virtual void previousSibling(const DKString&)			{ } 				// setter
 	
 	// readonly attribute Node? nextSibling;
-	virtual bool nextSibling(DKString&, bool) { return false; }
+	virtual DKString nextSibling()							{ return ""; }		// getter
+	virtual void nextSibling(const DKString&)				{ } 				// setter
 
 	// [CEReactions] attribute DOMString? nodeValue;
-	virtual bool nodeValue(DOMString&, bool) { return false; }
+	virtual DKString nodeValue()							{ return ""; }		// getter
+	virtual void nodeValue(const DKString&)					{ } 				// setter
 	
 	// [CEReactions] attribute DOMString? textContent;
-	virtual bool textContent(DOMString&, bool) { return false; }
+	virtual DOMString textContent()							{ return ""; }		// getter
+	virtual void textContent(const DOMString&)				{ } 				// setter
 	
 	// [CEReactions] undefined normalize();
 	virtual bool normalize() {
