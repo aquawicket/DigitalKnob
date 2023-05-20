@@ -27,6 +27,7 @@ public:
 		// constructor(DOMString type, optional KeyboardEventInit eventInitDict = {});
 		// function
 		
+	#if !EMSCRIPTEN
 		// KeyLocationCode
 		// const unsigned long DOM_KEY_LOCATION_STANDARD = 0x00;
 		DKINFO("keyboardEvent.DOM_KEY_LOCATION_STANDARD() = "	+toString(keyboardEvent.DOM_KEY_LOCATION_STANDARD())+"\n");
@@ -39,6 +40,7 @@ public:
 		
 		// const unsigned long DOM_KEY_LOCATION_NUMPAD = 0x03;
 		DKINFO("keyboardEvent.DOM_KEY_LOCATION_NUMPAD() = "		+toString(keyboardEvent.DOM_KEY_LOCATION_NUMPAD())	+"\n");
+	#endif
 		
 		// readonly attribute DOMString key;
 		DKINFO("keyboardEvent.key() = "							+toString(keyboardEvent.key())						+"\n");

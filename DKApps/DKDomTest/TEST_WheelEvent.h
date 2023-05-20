@@ -27,7 +27,7 @@ public:
 		// constructor(DOMString type, optional WheelEventInit eventInitDict = {});
 		// function
 		
-	#if (!EMSCRIPTEN)
+	#if !EMSCRIPTEN
 		// DeltaModeCode
 		// const unsigned long DOM_DELTA_PIXEL = 0x00;
 		DKINFO("wheelEvent.DOM_DELTA_PIXEL() = "+toString(wheelEvent.DOM_DELTA_PIXEL())	+"\n");
