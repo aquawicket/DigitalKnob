@@ -22,10 +22,10 @@
 // [DragEvent] https://html.spec.whatwg.org/multipage/dnd.html#the-dragevent-interface
 #include "TEST_DragEvent.h"
 
-/*
 // [Window] https://html.spec.whatwg.org/
 #include "TEST_Window.h"
 
+/*
 // [Screen] https://w3c.github.io/csswg-drafts/cssom-view/#the-screen-interface
 #include "TEST_Screen.h"
 
@@ -95,10 +95,10 @@ bool App::Init() {
 	// [DragEvent] https://html.spec.whatwg.org/multipage/dnd.html#the-dragevent-interface
 	DKClass::DKCreate("TEST_DragEvent");
 	
-	/*
 	// [Window] https://html.spec.whatwg.org/
 	DKClass::DKCreate("TEST_Window");
 
+	/*
 	// [Screen] https://w3c.github.io/csswg-drafts/cssom-view/#the-screen-interface
 	DKClass::DKCreate("TEST_Screen");
 

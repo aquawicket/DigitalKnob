@@ -23,51 +23,60 @@ public:
 	
 	// the current browsing context
 	// [LegacyUnforgeable] readonly attribute WindowProxy window;
-	virtual DKString window()					{ return ""; }	// getter
-	virtual DKString window(const DKString&)	{ return ""; } 	// setter
+	virtual DKString window()						{ return ""; }	// getter
+	virtual void window(const DKString&)			{ } 			// setter
 	
 	// [Replaceable] readonly attribute WindowProxy self;
-	virtual DKString self()						{ return ""; }	// getter
-	virtual DKString self(const DKString&)		{ return ""; } 	// setter
+	virtual DKString self()							{ return ""; }	// getter
+	virtual void self(const DKString&)				{ } 			// setter
 	
 	// [LegacyUnforgeable] readonly attribute Document document;
-	virtual DKString document()					{ return ""; }	// getter
-	virtual DKString document(const DKString&)	{ return ""; } 	// setter
+	virtual DKString document()						{ return ""; }	// getter
+	virtual void document(const DKString&)			{ } 			// setter
 	
 	// attribute DOMString name;
-	virtual DOMString name()					{ return ""; }	// getter
-	virtual DOMString name(const DOMString&)	{ return ""; } 	// setter
+	virtual DOMString name()						{ return ""; }	// getter
+	virtual void name(const DOMString&)				{ } 			// setter
 	
 	// [PutForwards=href, LegacyUnforgeable] readonly attribute Location location;
-	virtual DKString location()					{ return ""; }	// getter
-	virtual DKString location(const DKString&)	{ return ""; } 	// setter
+	virtual DKString location()						{ return ""; }	// getter
+	virtual void location(const DKString&)			{ } 			// setter
 	
 	// readonly attribute History history;
-	virtual bool history(DKString&, bool) { return false; }
+	virtual DKString history()						{ return ""; }	// getter
+	virtual void history(const DKString&)			{ } 			// setter
 	
 	// readonly attribute CustomElementRegistry customElements;
-	virtual bool customElements(DKString&, bool) { return false; }
+	virtual DKString customElements()				{ return ""; }	// getter
+	virtual void customElements(const DKString&)	{ } 			// setter
 	
 	// [Replaceable] readonly attribute BarProp locationbar;
-	virtual bool locationbar(DKString&, bool) { return false; }
+	virtual DKString locationbar()					{ return ""; }	// getter
+	virtual void locationbar(const DKString&)		{ } 			// setter
 	
 	// [Replaceable] readonly attribute BarProp menubar;
-	virtual bool menubar(DKString&, bool) { return false; }
+	virtual DKString menubar()						{ return ""; }	// getter
+	virtual void menubar(const DKString&)			{ } 			// setter
 	
 	// [Replaceable] readonly attribute BarProp personalbar;
-	virtual bool personalbar(DKString&, bool) { return false; }
+	virtual DKString personalbar()					{ return ""; }	// getter
+	virtual void personalbar(const DKString&)		{ } 			// setter
 	
 	// [Replaceable] readonly attribute BarProp scrollbars;
-	virtual bool scrollbars(DKString&, bool) { return false; }
+	virtual DKString scrollbars()					{ return ""; }	// getter
+	virtual void scrollbars(const DKString&)		{ } 			// setter
 	
 	// [Replaceable] readonly attribute BarProp statusbar;
-	virtual bool statusbar(DKString&, bool) { return false; }
+	virtual DKString statusbar()					{ return ""; }	// getter
+	virtual void statusbar(const DKString&)			{ } 			// setter
 	
 	// [Replaceable] readonly attribute BarProp toolbar;
-	virtual bool toolbar(DKString&, bool) { return false; }
+	virtual DKString toolbar()						{ return ""; }	// getter
+	virtual void toolbar(const DKString&)			{ } 			// setter
 	
 	// attribute DOMString status;
-	virtual bool status(DOMString&, bool) { return false; }
+	virtual DOMString status()						{ return ""; }	// getter
+	virtual void status(const DOMString&)			{ } 			// setter
 	
 	// undefined close();
 	virtual bool close() {
@@ -76,7 +85,8 @@ public:
 	}
 	
 	// readonly attribute boolean closed;
-	virtual bool closed(bool&, bool) { return false; }
+	virtual bool closed()							{ return false; }	// getter
+	virtual void closed(const bool&)				{ } 			// setter
 	
 	// undefined stop();
 	virtual bool stop() {
@@ -98,26 +108,32 @@ public:
 	
 	// other browsing contexts
 	// [Replaceable] readonly attribute WindowProxy frames;
-	virtual bool frames(DKString&, bool) { return false; }
+	virtual DKString frames()						{ return ""; }	// getter
+	virtual void frames(const DKString&)			{ } 			// setter
 	
 	// [Replaceable] readonly attribute unsigned long length;
-	virtual bool length(unsigned int&, bool) { return false; }
+	virtual unsigned int length()					{ return 0; }	// getter
+	virtual void length(const unsigned int&)		{ } 			// setter
 	
 	// [LegacyUnforgeable] readonly attribute WindowProxy? top;
-	virtual bool top(DKString&, bool) { return false; }
+	virtual DKString top()							{ return ""; }	// getter
+	virtual void top(const DKString&)				{ } 			// setter
 	
 	// attribute any opener;
-	virtual bool opener(DKString&, bool) { return false; }
+	virtual DKString opener()						{ return ""; }	// getter
+	virtual void opener(const DKString&)			{ } 			// setter
 	
 	// [Replaceable] readonly attribute WindowProxy? parent;
-	virtual bool parent(DKString&, bool) { return false; }
+	virtual DKString parent()						{ return ""; }	// getter
+	virtual void parent(const DKString&)			{ } 			// setter
 	
 	// readonly attribute Element? frameElement;
-	virtual bool frameElement(DKString&, bool) { return false; }
+	virtual DKString frameElement()					{ return ""; }	// getter
+	virtual void frameElement(const DKString&)		{ } 			// setter
 	
 	// WindowProxy? open(optional USVString url = "", optional DOMString target = "_blank", optional [LegacyNullToEmptyString] DOMString features = "");
-	virtual bool open(USVString& _url, DOMString& _target, DOMString& _features) {
-		DKDEBUGFUNC(_url, _target, _features);
+	virtual bool open(USVString& url, DOMString& target, DOMString& features) {
+		DKDEBUGFUNC(url, target, features);
 		return DKTODO();
 	}
 	
@@ -128,10 +144,12 @@ public:
 	
 	// the user agent
 	// readonly attribute Navigator navigator;
-	virtual bool navigator(DKString&, bool) { return false; }
+	virtual DKString navigator()					{ return ""; }	// getter
+	virtual void navigator(const DKString&)			{ } 			// setter
 	
 	// readonly attribute Navigator clientInformation; // legacy alias of .navigator
-	virtual bool clientInformation(DKString&, bool) { return false; }
+	virtual DKString clientInformation()			{ return ""; }	// getter
+	virtual void clientInformation(const DKString&)	{ } 			// setter
 	
 	// readonly attribute boolean originAgentCluster;
 	
@@ -163,8 +181,8 @@ public:
 	
 	// undefined postMessage(any message, USVString targetOrigin, optional sequence<object> transfer = []);
 	// undefined postMessage(any message, optional WindowPostMessageOptions options = {});
-	virtual bool postMessage(DKString& _message, USVString& _targetOrigin) {
-		DKDEBUGFUNC(_message, _targetOrigin);
+	virtual bool postMessage(DKString& message, USVString& targetOrigin) {
+		DKDEBUGFUNC(message, targetOrigin);
 		return DKTODO();
 	}
 	
@@ -173,16 +191,19 @@ public:
 	// Source: Compatibility Standard (https://compat.spec.whatwg.org/)
 	// partial interface Window {
 	//		readonly attribute short orientation;
-			virtual bool orientation(short&, bool) { return false; }
+			virtual short orientation()							{ return 0; }	// getter
+			virtual void orientation(const short&)				{ } 			// setter
 	//		
 	//		attribute EventHandler onorientationchange;
-			// TODO
+			virtual DKString onorientationchange()				{ return ""; }	// getter
+			virtual void onorientationchange(const DKString&)	{ } 			// setter
 	// };
 	
 	// Source: DOM Standard (https://dom.spec.whatwg.org/)
 	// partial interface Window {
 	//		[Replaceable] readonly attribute (Event or undefined) event; // legacy
-			virtual bool event(DKString&, bool) { return false; }
+			virtual DKString event()							{ return ""; }	// getter
+			virtual void event(const DKString&)					{ } 			// setter
 	// };
 	
 	// Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
@@ -212,13 +233,14 @@ public:
 			}
 	//
 	//		undefined releaseEvents();
-			virtual bool releaseEvents(DKString& _eventType) {
-				DKDEBUGFUNC(_eventType);
+			virtual bool releaseEvents() {
+				DKDEBUGFUNC();
 				return DKTODO();
 			}
 	//
 	//		[Replaceable, SameObject] readonly attribute External external;
-			virtual bool external(DKString&, bool) { return false; }
+			virtual DKString external()							{ return ""; }	// getter
+			virtual void external(const DKString&)				{ } 			// setter
 	// };
 
 	// Source: Cookie Store API (https://wicg.github.io/cookie-store/)
@@ -284,13 +306,15 @@ public:
 	// Source: Web Speech API (https://wicg.github.io/speech-api/)
 	// partial interface Window {
 	//		[SameObject] readonly attribute SpeechSynthesis speechSynthesis;
-			virtual bool speechSynthesis(DKString&, bool) { return false; }
+			virtual DKString speechSynthesis()							{ return ""; }	// getter
+			virtual void speechSynthesis(const DKString&)				{ } 			// setter
 	// };
 
 	// Source: Web App Launch Handler API (https://wicg.github.io/web-app-launch/)
 	// partial interface Window {
 	//		readonly attribute LaunchQueue launchQueue;
-			virtual bool launchQueue(DKString&, bool) { return false; }
+			virtual DKString launchQueue()								{ return ""; }	// getter
+			virtual void launchQueue(const DKString&)					{ } 			// setter
 	// };
 
 	// Source: CSS Spatial Navigation Level 1 (https://www.w3.org/TR/css-nav-1/)
@@ -310,61 +334,69 @@ public:
 	// Source: CSSOM View Module (https://www.w3.org/TR/cssom-view-1/)
 	// partial interface Window {
 	//		[NewObject] MediaQueryList matchMedia(CSSOMString query);
-			virtual bool matchMedia(DKString& _mediaQueryString) {
-				DKDEBUGFUNC(_mediaQueryString);
+			virtual bool matchMedia(DKString& mediaQueryString) {
+				DKDEBUGFUNC(mediaQueryString);
 				return DKTODO();
 			}
 	//
 	//		[SameObject, Replaceable] readonly attribute Screen screen;
-			virtual bool screen(DKString&, bool) { return false; }
+			virtual DKString screen()								{ return ""; }	// getter
+			virtual void screen(const DKString&)					{ } 			// setter
 	//
 	//		[SameObject, Replaceable] readonly attribute VisualViewport? visualViewport;
-			virtual bool visualViewport(DKString&, bool) { return false; }
+			virtual DKString visualViewport()						{ return ""; }	// getter
+			virtual void visualViewport(const DKString&)			{ } 			// setter
 	//
 	//		// browsing context
 	//		undefined moveTo(long x, long y);
-			virtual bool moveTo(int& _x, int& _y) {
-				DKDEBUGFUNC(_x, _y);
+			virtual bool moveTo(int& x, int& y) {
+				DKDEBUGFUNC(x, y);
 				return DKTODO();
 			}
 	//
 	//		undefined moveBy(long x, long y);
-			virtual bool moveBy(int& _deltaX, int& _deltaY) {
-				DKDEBUGFUNC(_deltaX, _deltaY);
+			virtual bool moveBy(int& deltaX, int& deltaY) {
+				DKDEBUGFUNC(deltaX, deltaY);
 				return DKTODO();
 			}
 	//
 	//		undefined resizeTo(long width, long height);
-			virtual bool resizeTo(int& _width, int& _height) {
-				DKDEBUGFUNC(_width, _height);
+			virtual bool resizeTo(int& width, int& height) {
+				DKDEBUGFUNC(width, height);
 				return DKTODO();
 			}
 	//
 	//		undefined resizeBy(long x, long y);
-			virtual bool resizeBy(int& _xDelta, int& _yDelta) {
-				DKDEBUGFUNC(_xDelta, _yDelta);
+			virtual bool resizeBy(int& xDelta, int& yDelta) {
+				DKDEBUGFUNC(xDelta, yDelta);
 				return DKTODO();
 			}
 	//
 	//		// viewport
 	//		[Replaceable] readonly attribute long innerWidth;
-			virtual bool innerWidth(unsigned int&, bool) { return false; }
+			virtual int innerWidth()						{ return 0; }	// getter
+			virtual void innerWidth(const int&)				{ } 			// setter
 	//
 	//		[Replaceable] readonly attribute long innerHeight;
-			virtual bool innerHeight(unsigned int&, bool) { return false; }
+			virtual int innerHeight()						{ return 0; }	// getter
+			virtual void innerHeight(const int&)			{ } 			// setter
 	//
 	//		// viewport scrolling
 	//		[Replaceable] readonly attribute double scrollX;
-			virtual bool scrollX(unsigned int&, bool) { return false; }
+			virtual double scrollX()						{ return 0.0; }	// getter
+			virtual void scrollX(const double&)				{ } 			// setter
 	//
 	//		[Replaceable] readonly attribute double pageXOffset;
-			virtual bool pageXOffset(unsigned int&, bool) { return false; }
+			virtual double pageXOffset()					{ return 0.0; }	// getter
+			virtual void pageXOffset(const double&)			{ } 			// setter
 	//
 	//		[Replaceable] readonly attribute double scrollY;
-			virtual bool scrollY(unsigned int&, bool) { return false; }
+			virtual double scrollY()						{ return 0.0; }	// getter
+			virtual void scrollY(const double&)				{ } 			// setter
 	//
 	//		[Replaceable] readonly attribute double pageYOffset;
-			virtual bool pageYOffset(unsigned int&, bool) { return false; }
+			virtual double pageYOffset()					{ return 0.0; }	// getter
+			virtual void pageYOffset(const double&)			{ } 			// setter
 	//
 	//		undefined scroll(optional ScrollToOptions options = {});
 	//		undefined scroll(unrestricted double x, unrestricted double y);
@@ -389,21 +421,32 @@ public:
 	///
 	//		// client
 	//		[Replaceable] readonly attribute long screenX;
-			virtual bool screenX(int&, bool) { return false; }
+			virtual int screenX()						{ return 0; }	// getter
+			virtual void screenX(const int&)			{ } 			// setter
+	//
 	//		[Replaceable] readonly attribute long screenLeft;
+			virtual int screenLeft()					{ return 0; }	// getter
+			virtual void screenLeft(const int&)			{ } 			// setter
 	//
 	//		[Replaceable] readonly attribute long screenY;
-			virtual bool screenY(int&, bool) { return false; }
+			virtual int screenY()						{ return 0; }	// getter
+			virtual void screenY(const int&)			{ } 			// setter
+	//
 	//		[Replaceable] readonly attribute long screenTop;
+			virtual int screenTop()						{ return 0; }	// getter
+			virtual void screenTop(const int&)			{ } 			// setter
 	//
 	//		[Replaceable] readonly attribute long outerWidth;
-			virtual bool outerWidth(unsigned int&, bool) { return false; }
+			virtual int outerWidth()					{ return 0; }	// getter
+			virtual void outerWidth(const int&)			{ } 			// setter
 	//
 	//		[Replaceable] readonly attribute long outerHeight;
-			virtual bool outerHeight(unsigned int&, bool) { return false; }
+			virtual int outerHeight()					{ return 0; }	// getter
+			virtual void outerHeight(const int&)		{ } 			// setter
 	//
 	//		[Replaceable] readonly attribute double devicePixelRatio;
-			virtual bool devicePixelRatio(double&, bool) { return false; }
+			virtual double devicePixelRatio()			{ return 0; }	// getter
+			virtual void devicePixelRatio(const double&){ } 			// setter
 	// };
 
 	// Source: DeviceOrientation Event Specification (https://www.w3.org/TR/orientation-event/)
