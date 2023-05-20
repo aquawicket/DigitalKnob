@@ -37,10 +37,10 @@
 // [Node] https://dom.spec.whatwg.org/#interface-node
 #include "TEST_Node.h"
 
-/*
 // [Document] https://dom.spec.whatwg.org/#interface-document
 #include "TEST_Document.h"
 
+/*
 // [Element] https://dom.spec.whatwg.org/#interface-element
 #include "TEST_Element.h"
 
@@ -110,10 +110,10 @@ bool App::Init() {
 	// [Node] https://dom.spec.whatwg.org/#interface-node
 	DKClass::DKCreate("TEST_Node");
 
-	/*
 	// [Document] https://dom.spec.whatwg.org/#interface-document
 	DKClass::DKCreate("TEST_Document");
 	
+	/*
 	// [Element] https://dom.spec.whatwg.org/#interface-element
 	DKClass::DKCreate("TEST_Element");
 	

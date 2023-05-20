@@ -26,34 +26,34 @@ public:
 		// function
 		
 		// [SameObject] readonly attribute DOMImplementation implementation;
-		DKINFO("document.implementation = "	+toString(document.implementation)	+"\n");
+		DKINFO("document.implementation() = "	+toString(document.implementation())	+"\n");
 		
 		// readonly attribute USVString URL;
-		DKINFO("document.URL = "			+toString(document.URL)				+"\n");
+		DKINFO("document.URL() = "				+toString(document.URL())				+"\n");
 		
 		// readonly attribute USVString documentURI;
-		DKINFO("document.documentURI = "	+toString(document.documentURI)		+"\n");
+		DKINFO("document.documentURI() = "		+toString(document.documentURI())		+"\n");
 		
 		// readonly attribute DOMString compatMode;
-		DKINFO("document.compatMode = "		+toString(document.compatMode)		+"\n");
+		DKINFO("document.compatMode() = "		+toString(document.compatMode())		+"\n");
 		
 		// readonly attribute DOMString characterSet;
-		DKINFO("document.characterSet = "	+toString(document.characterSet)	+"\n");
+		DKINFO("document.characterSet() = "		+toString(document.characterSet())		+"\n");
 		
 		// readonly attribute DOMString charset; // legacy alias of .characterSet
-		DKINFO("document.charset = "		+toString(document.charset)			+"\n");
+		DKINFO("document.charset() = "			+toString(document.charset())			+"\n");
 		
 		// readonly attribute DOMString inputEncoding; // legacy alias of .characterSet
-		DKINFO("document.inputEncoding = "	+toString(document.inputEncoding)	+"\n");
+		DKINFO("document.inputEncoding() = "	+toString(document.inputEncoding())		+"\n");
 		
 		// readonly attribute DOMString contentType;
-		DKINFO("document.contentType = "	+toString(document.contentType)		+"\n");
+		DKINFO("document.contentType() = "		+toString(document.contentType())		+"\n");
 		
 		// readonly attribute DocumentType? doctype;
-		DKINFO("document.doctype = "		+toString(document.doctype)			+"\n");
+		DKINFO("document.doctype() = "			+toString(document.doctype())			+"\n");
 		
 		// readonly attribute Element? documentElement;
-		DKINFO("document.documentElement = "+toString(document.documentElement)	+"\n");
+		DKINFO("document.documentElement() = "	+toString(document.documentElement())	+"\n");
 		
 		// HTMLCollection getElementsByTagName(DOMString qualifiedName);
 		// function
@@ -138,19 +138,19 @@ public:
 		// Source: Fullscreen API Standard (https://fullscreen.spec.whatwg.org/)
 		// partial interface Document {
 		//		[LegacyLenientSetter] readonly attribute boolean fullscreenEnabled;
-				DKINFO("document.fullscreenEnabled = "	+toString(document.fullscreenEnabled)	+"\n");
+				DKINFO("document.fullscreenEnabled() = "	+toString(document.fullscreenEnabled())		+"\n");
 		//		
 		//		[LegacyLenientSetter, Unscopable] readonly attribute boolean fullscreen; // historical
-				DKINFO("document.fullscreen = "			+toString(document.fullscreen)			+"\n");
+				DKINFO("document.fullscreen() = "			+toString(document.fullscreen())			+"\n");
 		//
 		//		Promise<undefined> exitFullscreen();
 				// function
 		//
 		//		attribute EventHandler onfullscreenchange;
-				DKINFO("document.onfullscreenchange = "	+toString(document.onfullscreenchange)	+"\n");
+				DKINFO("document.onfullscreenchange() = "	+toString(document.onfullscreenchange())	+"\n");
 		//
 		//		attribute EventHandler onfullscreenerror;
-				DKINFO("document.onfullscreenerror = "	+toString(document.onfullscreenerror)	+"\n");
+				DKINFO("document.onfullscreenerror() = "	+toString(document.onfullscreenerror())		+"\n");
 		//};
 	}
 };
