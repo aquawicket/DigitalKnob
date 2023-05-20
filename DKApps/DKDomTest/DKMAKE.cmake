@@ -24,8 +24,8 @@ dk_depend(DKDragEvent)
 dk_depend(DKWindow)
 
 dk_depend(DKScreen)
-dk_depend(DKNavigator)
-#dk_depend(DKLocation)
+dk_depend(DKNavigator)	# TODO
+dk_depend(DKLocation)
 
 #dk_depend(DKNode)
 #dk_depend(DKDocument)

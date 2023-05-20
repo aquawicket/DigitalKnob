@@ -22,33 +22,40 @@ public:
 	virtual ~DKLocation() {}
 
 	// [LegacyUnforgeable] stringifier attribute USVString href;
-	virtual bool href(USVString&, bool) { 
-		return false;
-	}  // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-href
+	virtual USVString href()						{ return ""; }	// getter
+	virtual void href(const USVString&)				{ } 			// setter
 	
 	// [LegacyUnforgeable] readonly attribute USVString origin;
-	virtual bool origin(USVString&, bool) { return false; } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-origin
+	virtual USVString origin()						{ return ""; }	// getter
+	virtual void origin(const USVString&)			{ } 			// setter
 	
 	// [LegacyUnforgeable] attribute USVString protocol;
-	virtual bool protocol(USVString&, bool) { return false; } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-protocol
+	virtual USVString protocol()					{ return ""; }	// getter
+	virtual void protocol(const USVString&)			{ } 			// setter
 	
 	// [LegacyUnforgeable] attribute USVString host;
-	virtual bool host(USVString&, bool) { return false; } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-host
+	virtual USVString host()						{ return ""; }	// getter
+	virtual void host(const USVString&)			{ } 			// setter
 	
 	// [LegacyUnforgeable] attribute USVString hostname;
-	virtual bool hostname(USVString&, bool) { return false; } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-hostname
+	virtual USVString hostname()					{ return ""; }	// getter
+	virtual void hostname(const USVString&)			{ } 			// setter
 	
 	// [LegacyUnforgeable] attribute USVString port;
-	virtual bool port(USVString&, bool) { return false; } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-port
+	virtual USVString port()						{ return ""; }	// getter
+	virtual void port(const USVString&)				{ } 			// setter
 	
 	// [LegacyUnforgeable] attribute USVString pathname;
-	virtual bool pathname(USVString&, bool) { return false; } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-pathname
+	virtual USVString pathname()					{ return ""; }	// getter
+	virtual void pathname(const USVString&)			{ } 			// setter
 	
 	// [LegacyUnforgeable] attribute USVString search;
-	virtual bool search(USVString&, bool) { return false; } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-search
+	virtual USVString search()						{ return ""; }	// getter
+	virtual void search(const USVString&)			{ } 			// setter
 	
 	// [LegacyUnforgeable] attribute USVString hash;
-	virtual bool hash(USVString&, bool) { return false; } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-hash
+	virtual USVString hash()						{ return ""; }	// getter
+	virtual void hash(const USVString&)				{ } 			// setter
 
 	// [LegacyUnforgeable] undefined assign(USVString url);
 	virtual bool assign(USVString& url) { // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-assign
@@ -69,7 +76,8 @@ public:
 	}
 	
 	// [LegacyUnforgeable, SameObject] readonly attribute DOMStringList ancestorOrigins;
-	virtual bool ancestorOrigins(DKString&, bool) { return false; } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-ancestororigins
+	virtual DKString ancestorOrigins()				{ return ""; }	// getter
+	virtual void ancestorOrigins(const DKString&)	{ } 			// setter
 };
 
 

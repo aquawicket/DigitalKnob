@@ -108,90 +108,81 @@ public:
 	// [LegacyUnforgeable] stringifier attribute USVString href;
 	static int href(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _href = GetString(ctx);
-		if(!eventTarget(ctx)->href(_href, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _href);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->href(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->href());
 		return true;
 	}
 	
 	// [LegacyUnforgeable] readonly attribute USVString origin;
 	static int origin(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _origin = GetString(ctx);
-		if(!eventTarget(ctx)->origin(_origin, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _origin);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->origin(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->origin());
 		return true;
 	}
 	
 	// [LegacyUnforgeable] attribute USVString protocol;
 	static int protocol(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _protocol = GetString(ctx);
-		if(!eventTarget(ctx)->protocol(_protocol, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _protocol);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->protocol(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->protocol());
 		return true;
 	}
 	
 	// [LegacyUnforgeable] attribute USVString host;
 	static int host(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _host = GetString(ctx);
-		if(!eventTarget(ctx)->host(_host, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _host);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->host(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->host());
 		return true;
 	}
 	
 	// [LegacyUnforgeable] attribute USVString hostname;
 	static int hostname(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _hostname = GetString(ctx);
-		if(!eventTarget(ctx)->hostname(_hostname, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _hostname);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->hostname(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->hostname());
 		return true;
 	}
 	
 	// [LegacyUnforgeable] attribute USVString port;
 	static int port(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _port = GetString(ctx);
-		if(!eventTarget(ctx)->port(_port, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _port);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->port(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->port());
 		return true;
 	}
 	
 	// [LegacyUnforgeable] attribute USVString pathname;
 	static int pathname(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _pathname = GetString(ctx);
-		if(!eventTarget(ctx)->pathname(_pathname, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _pathname);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->pathname(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->pathname());
 		return true;
 	}
 	
 	// [LegacyUnforgeable] attribute USVString search;
 	static int search(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _search = GetString(ctx);
-		if(!eventTarget(ctx)->search(_search, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _search);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->search(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->search());
 		return true;
 	}
 	
 	// [LegacyUnforgeable] attribute USVString hash;
 	static int hash(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _hash = GetString(ctx);
-		if(!eventTarget(ctx)->hash(_hash, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _hash);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->hash(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->hash());
 		return true;
 	}
 	
@@ -224,10 +215,9 @@ public:
 	// [LegacyUnforgeable, SameObject] readonly attribute DOMStringList ancestorOrigins;
 	static int ancestorOrigins(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _ancestorOrigins = GetString(ctx);
-		if(!eventTarget(ctx)->ancestorOrigins(_ancestorOrigins, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _ancestorOrigins);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->ancestorOrigins(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->ancestorOrigins());
 		return true;
 	}
 	

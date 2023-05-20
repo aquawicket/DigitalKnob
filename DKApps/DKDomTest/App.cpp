@@ -31,10 +31,10 @@
 // [Navigator] https://html.spec.whatwg.org/multipage/system-state.html#the-navigator-object
 #include "TEST_Navigator.h"
 
-/*
 // [Location] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-location-interface
 #include "TEST_Location.h"
 
+/*
 // [Node] https://dom.spec.whatwg.org/#interface-node
 #include "TEST_Node.h"
 
@@ -104,10 +104,10 @@ bool App::Init() {
 	// [Navigator] https://html.spec.whatwg.org/multipage/system-state.html#the-navigator-object
 	DKClass::DKCreate("TEST_Navigator");
 	
-	/*
 	// [Location] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-location-interface
 	DKClass::DKCreate("TEST_Location");
-
+	
+	/*
 	// [Node] https://dom.spec.whatwg.org/#interface-node
 	DKClass::DKCreate("TEST_Node");
 
