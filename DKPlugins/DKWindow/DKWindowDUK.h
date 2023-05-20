@@ -418,147 +418,133 @@ public:
 	
 	// the current browsing context
 	// [LegacyUnforgeable] readonly attribute WindowProxy window;
-	static int window(duk_context* ctx){ // [Window.window](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/window
+	static int window(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _window = GetString(ctx);
-		if(!eventTarget(ctx)->window(_window, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _window);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->window(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->window());
 		return true;
 	}
 	
 	// [Replaceable] readonly attribute WindowProxy self;
-	static int self(duk_context* ctx){ // [Window.self](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/self
+	static int self(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _self = GetString(ctx);
-		if(!eventTarget(ctx)->self(_self, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _self);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->self(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->self());
 		return true;
 	}
 	
 	// [LegacyUnforgeable] readonly attribute Document document;
-	static int document(duk_context* ctx){ // [Window.document](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/document
+	static int document(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _document = GetString(ctx);
-		if(!eventTarget(ctx)->document(_document, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _document);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->document(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->document());
 		return true;
 	}
 	
 	// attribute DOMString name;
-	static int name(duk_context* ctx){ // [Window.name] https://developer.mozilla.org/en-US/docs/Web/API/Window/name
+	static int name(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _name = GetString(ctx);
-		if(!eventTarget(ctx)->name(_name, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _name);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->name(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->name());
 		return true;
 	}
 	
 	// [PutForwards=href, LegacyUnforgeable] readonly attribute Location location;
-	static int location(duk_context* ctx){ // [Window.location] https://developer.mozilla.org/en-US/docs/Web/API/Window/location
+	static int location(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _location = GetString(ctx);
-		if(!eventTarget(ctx)->location(_location, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _location);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->location(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->location());
 		return true;
 	}
 	
 	// readonly attribute History history;
-	static int history(duk_context* ctx){ // [Window.history](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/History
+	static int history(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _history = GetString(ctx);
-		if(!eventTarget(ctx)->history(_history, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _history);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->history(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->history());
 		return true;
 	}
 	
 	// readonly attribute CustomElementRegistry customElements;
-	static int customElements(duk_context* ctx){ // [Window.customElements](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/customElements
+	static int customElements(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _customElements = GetString(ctx);
-		if(!eventTarget(ctx)->customElements(_customElements, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _customElements);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->customElements(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->customElements());
 		return true;
 	}
 	
 	// [Replaceable] readonly attribute BarProp locationbar;
-	static int locationbar(duk_context* ctx){ // [Window.locationbar](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/locationbar
+	static int locationbar(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _locationbar = GetString(ctx);
-		if(!eventTarget(ctx)->locationbar(_locationbar, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _locationbar);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->locationbar(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->locationbar());
 		return true;
 	}
 	
 	// [Replaceable] readonly attribute BarProp menubar;
-	static int menubar(duk_context* ctx){ // [Window.menubar](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/menubar
+	static int menubar(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _menubar = GetString(ctx);
-		if(!eventTarget(ctx)->menubar(_menubar, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _menubar);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->menubar(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->menubar());
 		return true;
 	}
 	
 	// [Replaceable] readonly attribute BarProp personalbar;
-	static int personalbar(duk_context* ctx){ // [Window.personalbar](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/personalbar
+	static int personalbar(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _personalbar = GetString(ctx);
-		if(!eventTarget(ctx)->personalbar(_personalbar, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _personalbar);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->personalbar(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->personalbar());
 		return true;
 	}
 	
 	// [Replaceable] readonly attribute BarProp scrollbars;
-	static int scrollbars(duk_context* ctx){ // [Window.scrollbars](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollbars
+	static int scrollbars(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _scrollbars = GetString(ctx);
-		if(!eventTarget(ctx)->scrollbars(_scrollbars, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _scrollbars);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->scrollbars(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->scrollbars());
 		return true;
 	}
 	
 	// [Replaceable] readonly attribute BarProp statusbar;
-	static int statusbar(duk_context* ctx){ // [Window.statusbar](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/statusbar
+	static int statusbar(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _statusbar = GetString(ctx);
-		if(!eventTarget(ctx)->statusbar(_statusbar, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _statusbar);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->statusbar(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->statusbar());
 		return true;
 	}
 	
 	// [Replaceable] readonly attribute BarProp toolbar;
-	static int toolbar(duk_context* ctx){ // [Window.toolbar](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/toolbar
+	static int toolbar(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _toolbar = GetString(ctx);
-		if(!eventTarget(ctx)->toolbar(_toolbar, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _toolbar);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->toolbar(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->toolbar());
 		return true;
 	}
 	
 	// attribute DOMString status;
-	static int status(duk_context* ctx){ // [Window.status](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/status
+	static int status(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _status = GetString(ctx);
-		if(!eventTarget(ctx)->status(_status, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _status);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->status(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->status());
 		return true;
 	}
 	
 	// undefined close();
-	static int close(duk_context* ctx){ // [Window.close()] https://developer.mozilla.org/en-US/docs/Web/API/close
+	static int close(duk_context* ctx){
 			DKDEBUGFUNC(ctx);
 			if(!eventTarget(ctx)->close())
 				return false;
@@ -566,12 +552,11 @@ public:
 	}
 	
 	// readonly attribute boolean closed;
-	static int closed(duk_context* ctx){ // [Window.closed](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/closed
+	static int closed(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		bool _closed = GetBool(ctx);
-		if(!eventTarget(ctx)->closed(_closed, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _closed);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->closed(GetBool(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->closed());
 		return true;
 	}
 	
@@ -584,7 +569,7 @@ public:
 	}
 	
 	// undefined focus();
-	static int focus(duk_context* ctx){ // [Window.focus()] https://developer.mozilla.org/en-US/docs/Web/API/focus
+	static int focus(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(!eventTarget(ctx)->focus())
 			return false;
@@ -592,7 +577,7 @@ public:
 	}
 	
 	// undefined blur();
-	static int blur(duk_context* ctx){ // [Window.blur()] https://developer.mozilla.org/en-US/docs/Web/API/blur
+	static int blur(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(!eventTarget(ctx)->blur())
 			return false;
@@ -601,62 +586,56 @@ public:
 	
 	// other browsing contexts
 	// [Replaceable] readonly attribute WindowProxy frames;
-	static int frames(duk_context* ctx){ // [Window.frames](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/frames
+	static int frames(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _frames = GetString(ctx);
-		if(!eventTarget(ctx)->frames(_frames, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _frames);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->frames(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->frames());
 		return true;
 	}
 	
 	// [Replaceable] readonly attribute unsigned long length;
-	static int length(duk_context* ctx){ // [Window.length](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/length
+	static int length(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		unsigned int _length = GetUint(ctx);
-		if(!eventTarget(ctx)->length(_length, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _length);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->length(GetUint(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->length());
 		return true;
 	}
 	
 	// [LegacyUnforgeable] readonly attribute WindowProxy? top;
-	static int top(duk_context* ctx){ // [Window.top](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/top
+	static int top(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _top = GetString(ctx);
-		if(!eventTarget(ctx)->top(_top, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _top);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->top(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->top());
 		return true;
 	}
 	
 	// attribute any opener;
-	static int opener(duk_context* ctx){ // [Window.opener] https://developer.mozilla.org/en-US/docs/Web/API/Window/opener
+	static int opener(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _opener = GetString(ctx);
-		if(!eventTarget(ctx)->opener(_opener, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _opener);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->opener(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->opener());
 		return true;
 	}
 	
 	// [Replaceable] readonly attribute WindowProxy? parent;
-	static int parent(duk_context* ctx){ // [Window.parent](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/parent
+	static int parent(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _parent = GetString(ctx);
-		if(!eventTarget(ctx)->parent(_parent, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _parent);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->parent(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->parent());
 		return true;
 	}
 	
 	// readonly attribute Element? frameElement;
-	static int frameElement(duk_context* ctx){ // [Window.frameElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/frameElement
+	static int frameElement(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _frameElement = GetString(ctx);
-		if(!eventTarget(ctx)->frameElement(_frameElement, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _frameElement);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->frameElement(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->frameElement());
 		return true;
 	}
 	
@@ -669,22 +648,20 @@ public:
 	
 	// the user agent
 	// readonly attribute Navigator navigator;
-	static int navigator(duk_context* ctx){ // [Window.navigator](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/navigator
+	static int navigator(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _navigator = GetString(ctx);
-		if(!eventTarget(ctx)->navigator(_navigator, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _navigator);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->navigator(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->navigator());
 		return true;
 	}
 	
 	// readonly attribute Navigator clientInformation; // legacy alias of .navigator
-	static int clientInformation(duk_context* ctx){ // [Window.clientInformation](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/navigator
+	static int clientInformation(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _clientInformation = GetString(ctx);
-		if(!eventTarget(ctx)->clientInformation(_clientInformation, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _clientInformation);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->clientInformation(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->clientInformation());
 		return true;
 	}
 	

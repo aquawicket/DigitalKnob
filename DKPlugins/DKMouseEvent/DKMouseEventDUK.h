@@ -128,7 +128,7 @@ public:
 	static int screenX(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_number(ctx, 1))
-			mouseEvent(ctx)->screenX(duk_to_int(ctx, 1))
+			mouseEvent(ctx)->screenX(duk_to_int(ctx, 1));
 		dukglue_push(ctx, mouseEvent(ctx)->screenX());
 		return true;
 	}

@@ -12,18 +12,18 @@ dk_depend(DKCustomEvent)
 dk_depend(DKEventTarget)
 
 dk_depend(DKUIEvent)
-#dk_depend(DKFocusEvent)
-#dk_depend(DKMouseEvent)
-#dk_depend(DKWheelEvent)
-#dk_depend(DKInputEvent)
-#dk_depend(DKKeyboardEvent)
-#dk_depend(DKCompositionEvent)
+dk_depend(DKFocusEvent)
+dk_depend(DKMouseEvent)
+dk_depend(DKWheelEvent)
+dk_depend(DKInputEvent)
+dk_depend(DKKeyboardEvent)
+dk_depend(DKCompositionEvent)
 
-#dk_depend(DKDragEvent)
+dk_depend(DKDragEvent)
 
-#dk_depend(DKWindow)
+dk_depend(DKWindow)
 
-#dk_depend(DKScreen)
+dk_depend(DKScreen)
 #dk_depend(DKNavigator)
 #dk_depend(DKLocation)
 
