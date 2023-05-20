@@ -21,10 +21,12 @@ public:
 	}
 	
 	// [SameObject] readonly attribute DOMImplementation implementation;
-	virtual bool implementation(DKString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-implementation
+	virtual DKString implementation()						{ return ""; }	// getter
+	virtual void implementation(const DKString&)			{ } 			// setter
 	
 	// readonly attribute USVString URL;
-	virtual bool URL(USVString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-url
+	virtual USVString URL()									{ return ""; }	// getter
+	virtual void URL(const USVString&)						{ } 			// setter
 
 	// readonly attribute USVString documentURI;
 	virtual bool documentURI(USVString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-documenturi

@@ -197,100 +197,90 @@ public:
 	// [SameObject] readonly attribute DOMImplementation implementation;
 	static int implementation(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _implementation = GetString(ctx);
-		if(!eventTarget(ctx)->implementation(_implementation, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _implementation);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->implementation(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->implementation());
 		return true;
 	}
 	
 	// readonly attribute USVString URL;
 	static int URL(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _URL = GetString(ctx);
-		if(!eventTarget(ctx)->URL(_URL, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _URL);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->URL(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->URL());
 		return true;
 	}
 	
 	// readonly attribute USVString documentURI;
 	static int documentURI(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _documentURI = GetString(ctx);
-		if(!eventTarget(ctx)->documentURI(_documentURI, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _documentURI);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->documentURI(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->documentURI());
 		return true;
 	}
 	
 	// readonly attribute DOMString compatMode;
 	static int compatMode(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _compatMode = GetString(ctx);
-		if(!eventTarget(ctx)->compatMode(_compatMode, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _compatMode);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->compatMode(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->compatMode());
 		return true;
 	}
 	
 	// readonly attribute DOMString characterSet;
 	static int characterSet(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _characterSet = GetString(ctx);
-		if(!eventTarget(ctx)->characterSet(_characterSet, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _characterSet);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->characterSet(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->characterSet());
 		return true;
 	}
 	
 	// readonly attribute DOMString charset; // legacy alias of .characterSet
 	static int charset(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _charset = GetString(ctx);
-		if(!eventTarget(ctx)->charset(_charset, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _charset);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->charset(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->charset());
 		return true;
 	}
 	
 	// readonly attribute DOMString inputEncoding; // legacy alias of .characterSet
 	static int inputEncoding(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _inputEncoding = GetString(ctx);
-		if(!eventTarget(ctx)->inputEncoding(_inputEncoding, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _inputEncoding);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->inputEncoding(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->inputEncoding());
 		return true;
 	}
 	
 	// readonly attribute DOMString contentType;
 	static int contentType(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _contentType = GetString(ctx);
-		if(!eventTarget(ctx)->contentType(_contentType, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _contentType);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->contentType(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->contentType());
 		return true;
 	}
 	
 	// readonly attribute DocumentType? doctype;
 	static int doctype(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _doctype = GetString(ctx);
-		if(!eventTarget(ctx)->doctype(_doctype, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _doctype);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->doctype(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->doctype());
 		return true;
 	}
 	
 	// readonly attribute Element? documentElement;
 	static int documentElement(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _documentElement = GetString(ctx);
-		if(!eventTarget(ctx)->documentElement(_documentElement, duk_is_valid_index(ctx, 1)))
-			return false;
-		dukglue_push(ctx, _documentElement);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->documentElement(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->documentElement());
 		return true;
 	}
 	
