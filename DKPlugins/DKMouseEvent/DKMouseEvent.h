@@ -43,7 +43,7 @@ public:
 	// readonly attribute long clientY;
 	int _clientY = 0; // https://w3c.github.io/uievents/#dom-mouseevent-clienty
 	virtual int 			clientY()									{ return _clientY; }				// getter
-	virtual void 			clientY(const int& clientX) 				{ _clientY = clientY; } 			// setter
+	virtual void 			clientY(const int& clientY) 				{ _clientY = clientY; } 			// setter
 
 	// readonly attribute boolean ctrlKey;
 	bool _ctrlKey = false; // https://w3c.github.io/uievents/#dom-mouseevent-ctrlkey
