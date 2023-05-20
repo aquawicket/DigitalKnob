@@ -128,8 +128,8 @@ public:
 	static int screenX(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_number(ctx, 1))
-			mouseEvent(ctx)->screenX = duk_to_int(ctx, 1);
-		dukglue_push(ctx, mouseEvent(ctx)->screenX);
+			mouseEvent(ctx)->screenX(duk_to_int(ctx, 1))
+		dukglue_push(ctx, mouseEvent(ctx)->screenX());
 		return true;
 	}
 	
@@ -137,8 +137,8 @@ public:
 	static int screenY(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_number(ctx, 1))
-			mouseEvent(ctx)->screenY = duk_to_int(ctx, 1);
-		dukglue_push(ctx, mouseEvent(ctx)->screenY);	
+			mouseEvent(ctx)->screenY(duk_to_int(ctx, 1));
+		dukglue_push(ctx, mouseEvent(ctx)->screenY());	
 		return true;
 	}
 	
@@ -146,8 +146,8 @@ public:
 	static int clientX(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_number(ctx, 1))
-			mouseEvent(ctx)->clientX = duk_to_int(ctx, 1);
-		dukglue_push(ctx, mouseEvent(ctx)->clientX);	
+			mouseEvent(ctx)->clientX(duk_to_int(ctx, 1));
+		dukglue_push(ctx, mouseEvent(ctx)->clientX());	
 		return true;
 	}
 	
@@ -155,8 +155,8 @@ public:
 	static int clientY(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_number(ctx, 1))
-			mouseEvent(ctx)->clientY = duk_to_int(ctx, 1);
-		dukglue_push(ctx, mouseEvent(ctx)->clientY);	
+			mouseEvent(ctx)->clientY(duk_to_int(ctx, 1));
+		dukglue_push(ctx, mouseEvent(ctx)->clientY());	
 		return true;
 	}
 	
@@ -164,8 +164,8 @@ public:
 	static int ctrlKey(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_boolean(ctx, 1))
-			mouseEvent(ctx)->ctrlKey = duk_to_boolean(ctx, 1);
-		dukglue_push(ctx, mouseEvent(ctx)->ctrlKey);	
+			mouseEvent(ctx)->ctrlKey(duk_to_boolean(ctx, 1));
+		dukglue_push(ctx, mouseEvent(ctx)->ctrlKey());	
 		return true;
 	}
 	
@@ -173,8 +173,8 @@ public:
 	static int shiftKey(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_boolean(ctx, 1))
-			mouseEvent(ctx)->shiftKey = duk_to_boolean(ctx, 1);
-		dukglue_push(ctx, mouseEvent(ctx)->shiftKey);	
+			mouseEvent(ctx)->shiftKey(duk_to_boolean(ctx, 1));
+		dukglue_push(ctx, mouseEvent(ctx)->shiftKey());	
 		return true;
 	}
 	
@@ -182,8 +182,8 @@ public:
 	static int altKey(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_boolean(ctx, 1))
-			mouseEvent(ctx)->altKey = duk_to_boolean(ctx, 1);
-		dukglue_push(ctx, mouseEvent(ctx)->altKey);	
+			mouseEvent(ctx)->altKey(duk_to_boolean(ctx, 1));
+		dukglue_push(ctx, mouseEvent(ctx)->altKey());	
 		return true;
 	}
 	
@@ -191,29 +191,29 @@ public:
 	static int metaKey(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_boolean(ctx, 1))
-			mouseEvent(ctx)->metaKey = duk_to_boolean(ctx, 1);
-		dukglue_push(ctx, mouseEvent(ctx)->metaKey);	
+			mouseEvent(ctx)->metaKey(duk_to_boolean(ctx, 1));
+		dukglue_push(ctx, mouseEvent(ctx)->metaKey());
 		return true;
 	}
 	
 	// readonly attribute short button;
 	static int button(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, mouseEvent(ctx)->button);	
+		dukglue_push(ctx, mouseEvent(ctx)->button());
 		return true;
 	}
 	
 	// readonly attribute unsigned short buttons;
 	static int buttons(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, mouseEvent(ctx)->buttons);	
+		dukglue_push(ctx, mouseEvent(ctx)->buttons());	
 		return true;
 	}
 	
 	// readonly attribute EventTarget? relatedTarget;
 	static int relatedTarget(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, mouseEvent(ctx)->relatedTarget);	
+		dukglue_push(ctx, mouseEvent(ctx)->relatedTarget());
 		return true;
 	}
 	
@@ -228,37 +228,37 @@ public:
 	//  	readonly attribute double pageX;
 			static int pageX(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				dukglue_push(ctx, mouseEvent(ctx)->pageX);	
+				dukglue_push(ctx, mouseEvent(ctx)->pageX());
 				return true;
 			}
 	//  	readonly attribute double pageY;
 			static int pageY(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				dukglue_push(ctx, mouseEvent(ctx)->pageY);	
+				dukglue_push(ctx, mouseEvent(ctx)->pageY());
 				return true;
 			}
 	//  	readonly attribute double x;
 			static int x(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				dukglue_push(ctx, mouseEvent(ctx)->x);	
+				dukglue_push(ctx, mouseEvent(ctx)->x());
 				return true;
 			}
 	//  	readonly attribute double y;
 			static int y(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				dukglue_push(ctx, mouseEvent(ctx)->y);	
+				dukglue_push(ctx, mouseEvent(ctx)->y());
 				return true;
 			}
 	//  	readonly attribute double offsetX; 
 			static int offsetX(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				dukglue_push(ctx, mouseEvent(ctx)->offsetX);	
+				dukglue_push(ctx, mouseEvent(ctx)->offsetX());
 				return true;
 			}
 	//  	readonly attribute double offsetY;
 			static int offsetY(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				dukglue_push(ctx, mouseEvent(ctx)->offsetY);	
+				dukglue_push(ctx, mouseEvent(ctx)->offsetY());
 				return true;
 			}
 	// };
@@ -268,13 +268,13 @@ public:
 	//   	readonly attribute double movementX;
 			static int movementX(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				dukglue_push(ctx, mouseEvent(ctx)->movementX);	
+				dukglue_push(ctx, mouseEvent(ctx)->movementX());
 				return true;
 			}
 	//   	readonly attribute double movementY;
 			static int movementY(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				dukglue_push(ctx, mouseEvent(ctx)->movementY);	
+				dukglue_push(ctx, mouseEvent(ctx)->movementY());
 				return true;
 			}
 	// };
