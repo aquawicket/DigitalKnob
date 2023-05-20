@@ -29,68 +29,76 @@ public:
 	virtual void URL(const USVString&)						{ } 			// setter
 
 	// readonly attribute USVString documentURI;
-	virtual bool documentURI(USVString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-documenturi
+	virtual USVString documentURI()							{ return ""; }	// getter
+	virtual void documentURI(const USVString&)				{ } 			// setter
 	
 	// readonly attribute DOMString compatMode;
-	virtual bool compatMode(DOMString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-compatmode
+	virtual DOMString compatMode()							{ return ""; }	// getter
+	virtual void compatMode(const DOMString&)				{ } 			// setter
 	
 	// readonly attribute DOMString characterSet;
-	virtual bool characterSet(DOMString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-characterset
+	virtual DOMString characterSet()						{ return ""; }	// getter
+	virtual void characterSet(const DOMString&)				{ } 			// setter
 	
 	// readonly attribute DOMString charset; // legacy alias of .characterSet
-	virtual bool charset(DOMString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-charset
+	virtual DOMString charset()								{ return ""; }	// getter
+	virtual void charset(const DOMString&)					{ } 			// setter
 	
 	// readonly attribute DOMString inputEncoding; // legacy alias of .characterSet
-	virtual bool inputEncoding(DOMString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-inputencoding
+	virtual DOMString inputEncoding()						{ return ""; }	// getter
+	virtual void inputEncoding(const DOMString&)			{ } 			// setter
 	
 	// readonly attribute DOMString contentType;
-	virtual bool contentType(DOMString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-contenttype
+	virtual DOMString contentType()							{ return ""; }	// getter
+	virtual void contentType(const DOMString&)				{ } 			// setter
 	
 	// readonly attribute DocumentType? doctype;
-	virtual bool doctype(DKString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-doctype
+	virtual DKString doctype()								{ return ""; }	// getter
+	virtual void doctype(const DKString&)					{ } 			// setter
 	
 	// readonly attribute Element? documentElement;
-	virtual bool documentElement(DKString&, bool) { return false; } // https://dom.spec.whatwg.org/#dom-document-documentelement
+	virtual DKString documentElement()						{ return ""; }	// getter
+	virtual void documentElement(const DKString&)			{ } 			// setter
 	
 	// HTMLCollection getElementsByTagName(DOMString qualifiedName);
-	virtual bool getElementsByTagName(DOMString& _qualifiedName, DKString& _getElementsByTagName){ // https://dom.spec.whatwg.org/#dom-document-getelementsbytagname
-		DKDEBUGFUNC(_qualifiedName, _getElementsByTagName);
+	virtual bool getElementsByTagName(DOMString& qualifiedName, DKString& getElementsByTagName){ // https://dom.spec.whatwg.org/#dom-document-getelementsbytagname
+		DKDEBUGFUNC(qualifiedName, getElementsByTagName);
 		return DKTODO();
 	}
 	
 	// HTMLCollection getElementsByTagNameNS(DOMString? namespace, DOMString localName);
-	virtual bool getElementsByTagNameNS(DOMString& _namespace, DOMString& _localName, DKString& _getElementsByTagNameNS){ // https://dom.spec.whatwg.org/#dom-document-getelementsbytagnamens
-		DKDEBUGFUNC(_namespace, _localName, _getElementsByTagNameNS);
+	virtual bool getElementsByTagNameNS(DOMString& _namespace, DOMString& localName, DKString& getElementsByTagNameNS){ // https://dom.spec.whatwg.org/#dom-document-getelementsbytagnamens
+		DKDEBUGFUNC(_namespace, localName, getElementsByTagNameNS);
 		return DKTODO();
 	}
 	
 	// HTMLCollection getElementsByClassName(DOMString classNames);
-	virtual bool getElementsByClassName(DOMString& _classNames, DKString& _getElementsByClassName){ //https://dom.spec.whatwg.org/#dom-document-getelementsbyclassname
-		DKDEBUGFUNC(_classNames, _getElementsByClassName);
+	virtual bool getElementsByClassName(DOMString& classNames, DKString& getElementsByClassName){ //https://dom.spec.whatwg.org/#dom-document-getelementsbyclassname
+		DKDEBUGFUNC(classNames, getElementsByClassName);
 		return DKTODO();
 	}
 	
 	// [CEReactions, NewObject] Element createElement(DOMString localName, optional (DOMString or ElementCreationOptions) options = {});
-	virtual bool createElement(DOMString& _localName, DKString& _options, DKString& _createElement){ // https://dom.spec.whatwg.org/#dom-document-createelement
-		DKDEBUGFUNC(_localName, _options, _createElement);
+	virtual bool createElement(DOMString& localName, DKString& options, DKString& createElement){ // https://dom.spec.whatwg.org/#dom-document-createelement
+		DKDEBUGFUNC(localName, options, createElement);
 		return DKTODO();
 	}
 	
 	// [CEReactions, NewObject] Element createElementNS(DOMString? namespace, DOMString qualifiedName, optional (DOMString or ElementCreationOptions) options = {});
-	virtual bool createElementNS(DOMString& _namespace, DOMString& _qualifiedName, DKString& _options, DKString& _createElementNS){ // https://dom.spec.whatwg.org/#dom-document-createelementns
-		DKDEBUGFUNC(_namespace, _qualifiedName, _options, _createElementNS);
+	virtual bool createElementNS(DOMString& _namespace, DOMString& qualifiedName, DKString& options, DKString& createElementNS){ // https://dom.spec.whatwg.org/#dom-document-createelementns
+		DKDEBUGFUNC(_namespace, qualifiedName, options, createElementNS);
 		return DKTODO();
 	}
 	
 	// [NewObject] DocumentFragment createDocumentFragment();
-	virtual bool createDocumentFragment(DKString& _createDocumentFragment){
-		DKDEBUGFUNC(_createDocumentFragment);
+	virtual bool createDocumentFragment(DKString& createDocumentFragment){
+		DKDEBUGFUNC(createDocumentFragment);
 		return DKTODO();
 	}
 	
 	// [NewObject] Text createTextNode(DOMString data);
-	virtual bool createTextNode(DOMString& _data, DKString& _createTextNode){
-		DKDEBUGFUNC(_data, _createTextNode);
+	virtual bool createTextNode(DOMString& data, DKString& createTextNode){
+		DKDEBUGFUNC(data, createTextNode);
 		return DKTODO();
 	}
 	
@@ -195,10 +203,12 @@ public:
 	// Source: Fullscreen API Standard (https://fullscreen.spec.whatwg.org/)
 	// partial interface Document {
 	//		[LegacyLenientSetter] readonly attribute boolean fullscreenEnabled;
-			virtual bool fullscreenEnabled(bool&, bool) { return false; }
+			virtual bool fullscreenEnabled()							{ return false; }	// getter
+			virtual void fullscreenEnabled(const bool&)					{ } 				// setter
 	//		
 	//		[LegacyLenientSetter, Unscopable] readonly attribute boolean fullscreen; // historical
-			virtual bool fullscreen(bool&, bool) { return false; }
+			virtual bool fullscreen()									{ return false; }	// getter
+			virtual void fullscreen(const bool&)						{ } 				// setter
 	//
 	//		Promise<undefined> exitFullscreen();
 			virtual bool exitFullscreen(DKString& _exitFullscreen){
@@ -207,10 +217,12 @@ public:
 			}
 	//
 	//		attribute EventHandler onfullscreenchange;
-			virtual bool onfullscreenchange(DKString&, bool) { return false; }
+			virtual DKString onfullscreenchange()						{ return ""; }		// getter
+			virtual void onfullscreenchange(const DKString&)			{ } 				// setter
 	//
 	//		attribute EventHandler onfullscreenerror;
-			virtual bool onfullscreenerror(DKString&, bool) { return false; }
+			virtual DKString onfullscreenerror()						{ return ""; }		// getter
+			virtual void onfullscreenerror(const DKString&)				{ } 				// setter
 	//};
 };
 
