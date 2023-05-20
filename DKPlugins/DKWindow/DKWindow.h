@@ -152,6 +152,8 @@ public:
 	virtual void clientInformation(const DKString&)	{ } 			// setter
 	
 	// readonly attribute boolean originAgentCluster;
+	virtual bool originAgentCluster()				{ return false; }// getter
+	virtual void originAgentCluster(const bool&)	{ } 			// setter
 	
 	//user prompts
 	// undefined alert();
