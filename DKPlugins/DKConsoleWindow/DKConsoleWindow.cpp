@@ -46,6 +46,8 @@
 	LONG DKConsoleWindow::HWNDStyleEx = 0;
 #endif
 
+HANDLE DKConsoleWindow::hStdin;
+
 DKConsoleWindow::DKConsoleWindow() : DKWindow() {
 	DKDEBUGFUNC();
 	interfaceName = "ConsoleWindow";
@@ -133,6 +135,7 @@ DKConsoleWindow::DKConsoleWindow() : DKWindow() {
 DKConsoleWindow::~DKConsoleWindow() {
 	DKDEBUGFUNC();
 	DKINFO("DKConsoleWindow::~DKConsoleWindow() \n");
+	DKApp::RemoveLoopFunc(&DKConsoleWindow::Loop, this);
 	#if WIN
 		SetConsoleMode(hStdin, fdwSaveOldMode); // Restore input mode on exit.
 	#endif
@@ -167,6 +170,9 @@ void DKConsoleWindow::Loop() {
         DKINFO("VK_XBUTTON2 \n");
     */
 #if WIN
+	if (hStdin == INVALID_HANDLE_VALUE)
+		DKERROR("hStdin invalid! \n");
+
     DWORD lpcNumberOfEvents;
     GetNumberOfConsoleInputEvents(hStdin, &lpcNumberOfEvents);
     if (!lpcNumberOfEvents)

@@ -203,7 +203,7 @@ public:
 	static LONG HWNDStyle;
 	static LONG HWNDStyleEx;
 	
-	HANDLE hStdin;
+	static HANDLE hStdin;
 	DWORD fdwSaveOldMode;
 	void ErrorExit(LPCSTR);
 	void FocusEventProc(FOCUS_EVENT_RECORD);

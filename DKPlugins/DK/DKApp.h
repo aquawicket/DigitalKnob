@@ -82,9 +82,14 @@ public:
 	template<class T>
 	static void RemoveLoopFunc(void (T::*func)(), T* instance){
 		DKDEBUGFUNC(func, instance);
+		
+		std::function<void()> funk = std::bind(func, instance);
+		void(*const* ptrA)() = funk.target<void(*)()>();	// get a pointer to the function
+		
 		for(unsigned int i=0; i<loop_funcs.size(); ++i){
-			//if (loop_funcs[i].contains(std::bind(func, instance)))
-			//	loop_funcs.erase(loop_funcs.begin() +i );
+			void(*const* ptrB)() = loop_funcs[i].target<void(*)()>();	// get a pointer to the function
+			if (ptrA == ptrB)
+				loop_funcs.erase(loop_funcs.begin() +i );
 		}
 	}
 

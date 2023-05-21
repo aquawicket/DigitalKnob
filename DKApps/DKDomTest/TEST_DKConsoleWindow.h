@@ -14,6 +14,10 @@ public:
 		
 		DKConsoleWindow dkConsoleWindow;
 		printDKConsoleWindowProperties(dkConsoleWindow);
+		
+		//DKConsoleWindow* dkConsoleWindow = new DKConsoleWindow();
+		//printDKConsoleWindowProperties(*dkConsoleWindow);
+		
 		return true;
 	}
 
