@@ -41,9 +41,9 @@ public:
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKINFO("CPP_DKHTMLCollectionDUK()\n");
-		DKHTMLElement* _htmlelement = new DKHTMLElement();
-		DKString eventTargetAddress = pointerToAddress(_htmlelement);
-		duk_push_string(ctx, eventTargetAddress.c_str());
+		DKHTMLCollection* _htmlCollection = new DKHTMLCollection();
+		DKString htmlCollectionAddress = pointerToAddress(_htmlCollection);
+		duk_push_string(ctx, htmlCollectionAddress.c_str());
 		return true;
 	}
 	
