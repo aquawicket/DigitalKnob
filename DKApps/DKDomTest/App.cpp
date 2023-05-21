@@ -49,10 +49,10 @@
 // [HTMLElement] https://html.spec.whatwg.org/multipage/dom.html#htmlelement
 #include "TEST_HTMLElement.h"
 
-/*
 // [HTMLBodyElement] https://html.spec.whatwg.org/multipage/sections.html#htmlbodyelement
 #include "TEST_HTMLBodyElement.h"
 
+/*
 // [HTMLImageElement] https://html.spec.whatwg.org/multipage/sections.html#htmlbodyelement
 #include "TEST_HTMLImageElement.h"
 
@@ -122,10 +122,10 @@ bool App::Init() {
 	// [HTMLElement] https://html.spec.whatwg.org/multipage/dom.html#htmlelement
 	DKClass::DKCreate("TEST_HTMLElement");
 	
-	/*
 	// [HTMLBodyElement] https://html.spec.whatwg.org/multipage/sections.html#htmlbodyelement
 	DKClass::DKCreate("TEST_HTMLBodyElement");
 	
+	/*
 	// [HTMLImageElement] https://html.spec.whatwg.org/multipage/sections.html#htmlbodyelement
 	DKClass::DKCreate("TEST_HTMLImageElement");
 	
