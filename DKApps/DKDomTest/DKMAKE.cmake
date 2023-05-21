@@ -33,7 +33,7 @@ dk_depend(DKElement)
 dk_depend(DKHTMLCollection)
 dk_depend(DKHTMLElement)
 dk_depend(DKHTMLBodyElement)
-#dk_depend(DKHTMLImageElement)
+dk_depend(DKHTMLImageElement)
 
 #dk_depend(DKConsoleWindow)
 #dk_depend(DKSdlWindow)
