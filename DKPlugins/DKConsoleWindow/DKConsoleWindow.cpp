@@ -180,8 +180,12 @@ void DKConsoleWindow::Loop() {
         hStdin,      // input buffer handle 
         irInBuf,     // buffer to read into 
         128,         // size of read buffer 
-        &cNumRead))  // number of records read 
-            ErrorExit("ReadDKConsoleWindow");
+        &cNumRead)){  // number of records read
+			DKString error;
+			DKWindows::GetLastError(error);
+			DKERROR("ReadConsoleInput() failed! ERROR:"+error+"\n");
+			return;
+		}
 
     // Dispatch the events to the appropriate handler. 
     for (i = 0; i < cNumRead; i++) {
