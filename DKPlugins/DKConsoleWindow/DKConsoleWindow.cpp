@@ -46,7 +46,6 @@
 	LONG DKConsoleWindow::HWNDStyleEx = 0;
 #endif
 
-HANDLE DKConsoleWindow::hStdin;
 
 DKConsoleWindow::DKConsoleWindow() : DKWindow() {
 	DKDEBUGFUNC();
