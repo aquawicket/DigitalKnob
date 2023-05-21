@@ -97,14 +97,14 @@ public:
 		//		readonly attribute unsigned long keyCode;
 				DKINFO("keyboardEvent.keyCode() = "				+toString(keyboardEvent.keyCode())					+"\n");
 		// };
+		
+		TEST_UIEvent::printUIEventProperties(dynamic_cast<DKUIEvent&>(keyboardEvent));	//TODO: try to remove the need for dynamic_cast
 	}
 
 	static bool onKeyboardEvent(DKEvent& event){
 		DKDEBUGFUNC(event);
 		DKINFO("TEST_KeyboardEvent::onkeyboardevent() \n");
 		printKeyboardEventProperties(dynamic_cast<DKKeyboardEvent&>(event));	//TODO: try to remove the need for dynamic_cast
-		TEST_UIEvent::printUIEventProperties(dynamic_cast<DKUIEvent&>(event));	//TODO: try to remove the need for dynamic_cast
-		TEST_Event::printEventProperties(event);
 		return true;
 	}
 };

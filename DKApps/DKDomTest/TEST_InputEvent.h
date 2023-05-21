@@ -44,14 +44,14 @@ public:
 		//    	sequence<StaticRange> getTargetRanges();
 				// function
 		// };
+		
+		TEST_UIEvent::printUIEventProperties(dynamic_cast<DKUIEvent&>(inputEvent));	//TODO: try to remove the need for dynamic_cast
 	}
 	
 	static bool onInputEvent(DKEvent& event){
 		DKDEBUGFUNC(event);
 		DKINFO("TEST_InputEvent::onInputEvent() \n");
-		printInputEventProperties(dynamic_cast<DKInputEvent&>(event));			//TODO: try to remove the need for dynamic_cast
-		TEST_UIEvent::printUIEventProperties(dynamic_cast<DKUIEvent&>(event));	//TODO: try to remove the need for dynamic_cast
-		TEST_Event::printEventProperties(event);
+		printInputEventProperties(dynamic_cast<DKInputEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 };

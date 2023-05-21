@@ -29,14 +29,14 @@ public:
 		
 		// readonly attribute DataTransfer? dataTransfer;
 		DKINFO("dragEvent.dataTransfer() = "	+toString(dragEvent.dataTransfer())	+"\n");
+		
+		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent&>(dragEvent));	//TODO: try to remove the need for dynamic_cast
 	}
 	
 	static bool onDragEvent(DKEvent& event){
 		DKDEBUGFUNC(event);
 		DKINFO("TEST_DragEvent::onDragEvent() \n");
-		printDragEventProperties(dynamic_cast<DKDragEvent&>(event));			//TODO: try to remove the need for dynamic_cast
-		TEST_UIEvent::printUIEventProperties(dynamic_cast<DKUIEvent&>(event));	//TODO: try to remove the need for dynamic_cast
-		TEST_Event::printEventProperties(event);
+		printDragEventProperties(dynamic_cast<DKDragEvent&>(event));						//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 };

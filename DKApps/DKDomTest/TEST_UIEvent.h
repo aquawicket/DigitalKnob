@@ -52,13 +52,14 @@ public:
 		//		readonly attribute unsigned long which;
 				DKINFO("uievent.which() = "					+toString(uievent.which())				+"\n");
 		// };
+		
+		TEST_Event::printEventProperties(dynamic_cast<DKEvent&>(uievent));	//TODO: try to remove the need for dynamic_cast
 	}
 	
 	static bool onuievent(DKEvent& event){
 		DKDEBUGFUNC(event);
 		DKINFO("TEST_UIEvent::onuievent() \n");
-		printUIEventProperties(dynamic_cast<DKUIEvent&>(event));		//TODO: try to remove the need for dynamic_cast
-		TEST_Event::printEventProperties(event);
+		printUIEventProperties(dynamic_cast<DKUIEvent&>(event));			//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 };

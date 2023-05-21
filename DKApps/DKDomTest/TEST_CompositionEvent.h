@@ -42,14 +42,14 @@ public:
 		//		optional DOMString dataArg = "");
 				// function
 		// };
+		
+		TEST_UIEvent::printUIEventProperties(dynamic_cast<DKUIEvent&>(compositionEvent));	//TODO: try to remove the need for dynamic_cast
 	}
 	
 	static bool onCompositionEvent(DKEvent& event){
 		DKDEBUGFUNC(event);
 		DKINFO("TEST_CompositionEvent::onCompositionEvent() \n");
-		printCompositionEventProperties(dynamic_cast<DKCompositionEvent&>(event));	//TODO: try to remove the need for dynamic_cast
-		TEST_UIEvent::printUIEventProperties(dynamic_cast<DKUIEvent&>(event));		//TODO: try to remove the need for dynamic_cast
-		TEST_Event::printEventProperties(event);
+		printCompositionEventProperties(dynamic_cast<DKCompositionEvent&>(event));			//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 };

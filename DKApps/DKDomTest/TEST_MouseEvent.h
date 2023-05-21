@@ -107,14 +107,14 @@ public:
 		//		optional EventTarget? relatedTargetArg = null);
 				// function
 		// };
+		
+		TEST_UIEvent::printUIEventProperties(dynamic_cast<DKUIEvent&>(mouseEvent));	//TODO: try to remove the need for dynamic_cast
 	}
 
 	static bool onMouseEvent(DKEvent& event){
 		DKDEBUGFUNC(event);
 		DKINFO("TEST_MouseEvent::onMouseEvent() \n");
-		printMouseEventProperties(dynamic_cast<DKMouseEvent&>(event));			//TODO: try to remove the need for dynamic_cast
-		TEST_UIEvent::printUIEventProperties(dynamic_cast<DKUIEvent&>(event));	//TODO: try to remove the need for dynamic_cast
-		TEST_Event::printEventProperties(event);
+		printMouseEventProperties(dynamic_cast<DKMouseEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 };

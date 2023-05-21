@@ -29,14 +29,14 @@ public:
 		
 		// readonly attribute EventTarget? relatedTarget;
 		DKINFO("focusEvent.relatedTarget() = "+toString(focusEvent.relatedTarget())	+"\n");
+		
+		TEST_UIEvent::printUIEventProperties(dynamic_cast<DKUIEvent&>(focusEvent));	//TODO: try to remove the need for dynamic_cast
 	}
 	
 	static bool onFocusEvent(DKEvent& event){
 		DKDEBUGFUNC(event);
 		DKINFO("TEST_FocusEvent::onFocusEvent() \n");
-		printFocusEventProperties(dynamic_cast<DKFocusEvent&>(event));			//TODO: try to remove the need for dynamic_cast
-		TEST_UIEvent::printUIEventProperties(dynamic_cast<DKUIEvent&>(event));	//TODO: try to remove the need for dynamic_cast
-		TEST_Event::printEventProperties(event);
+		printFocusEventProperties(dynamic_cast<DKFocusEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 };

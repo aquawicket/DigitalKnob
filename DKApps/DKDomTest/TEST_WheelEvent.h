@@ -50,15 +50,14 @@ public:
 		
 		// readonly attribute unsigned long deltaMode;
 		DKINFO("wheelEvent.deltaMode() = "		+toString(wheelEvent.deltaMode())		+"\n");
+		
+		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent&>(wheelEvent));	//TODO: try to remove the need for dynamic_cast
 	}
 
 	static bool onWheelEvent(DKEvent& event){
 		DKDEBUGFUNC(event);
 		DKINFO("TEST_WheelEvent::onWheelEvent() \n");
 		printWheelEventProperties(dynamic_cast<DKWheelEvent&>(event));					//TODO: try to remove the need for dynamic_cast
-		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent&>(event));	//TODO: try to remove the need for dynamic_cast
-		TEST_UIEvent::printUIEventProperties(dynamic_cast<DKUIEvent&>(event));			//TODO: try to remove the need for dynamic_cast
-		TEST_Event::printEventProperties(event);
 		return true;
 	}
 };
