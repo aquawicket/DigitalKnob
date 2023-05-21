@@ -21,10 +21,10 @@ public:
 		DKDuktape::AttachFunction("CPP_DKHTMLCollectionDUK_length", DKHTMLCollectionDUK::length);
 
 		// getter Element? item(unsigned long index);
-		DKDuktape::AttachFunction("CPP_DKHTMLCollectionDUK_item", DKHTMLCollectionDUK::item);
+		//DKDuktape::AttachFunction("CPP_DKHTMLCollectionDUK_item", DKHTMLCollectionDUK::item);
 	
 		// getter Element? namedItem(DOMString name);
-		DKDuktape::AttachFunction("CPP_DKHTMLCollectionDUK_namedItem", DKHTMLCollectionDUK::namedItem);
+		//DKDuktape::AttachFunction("CPP_DKHTMLCollectionDUK_namedItem", DKHTMLCollectionDUK::namedItem);
 		
 	
 		////// Load .js files
@@ -33,9 +33,9 @@ public:
 		return true;
 	}
 	
-	static DKHTMLElement* eventTarget(duk_context* ctx){
+	static DKHTMLCollection* htmlCollection(duk_context* ctx){
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		return (DKHTMLElement*)addressToPointer(eventTargetAddress);
+		return (DKHTMLCollection*)addressToPointer(eventTargetAddress);
 	}
 
 	static int constructor(duk_context* ctx){
@@ -51,8 +51,8 @@ public:
 	static int length(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->length(GetUint(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->length());
+			htmlCollection(ctx)->length(GetUint(ctx));
+		dukglue_push(ctx, htmlCollection(ctx)->length());
 		return true;
 	}
 	
