@@ -20,48 +20,63 @@ public:
 	
 	// metadata attributes
 	// [CEReactions] attribute DOMString title;
-	virtual bool title(DOMString&, bool) { return false; }
+	virtual DOMString title()						{ return ""; }		// getter
+	virtual void title(const DOMString&)			{ } 				// setter
 	
 	// [CEReactions] attribute DOMString lang;
-	virtual bool lang(DOMString&, bool) { return false; }
+	virtual DOMString lang()						{ return ""; }		// getter
+	virtual void lang(const DOMString&)				{ } 				// setter
 	
 	// [CEReactions] attribute boolean translate;
-	virtual bool translate(bool&, bool) { return false; }
+	virtual bool translate()						{ return false; }	// getter
+	virtual void translate(const bool&)				{ } 				// setter
 	
 	// [CEReactions] attribute DOMString dir;
-	virtual bool dir(DOMString&, bool) { return false; }
+	virtual DOMString dir()							{ return ""; }		// getter
+	virtual void dir(const DOMString&)				{ } 				// setter
 
 	// user interaction
-	
 	// [CEReactions] attribute (boolean or unrestricted double or DOMString)? hidden;
-	virtual bool inert(DKString&, bool) { return false; }
+	virtual DOMString hidden()						{ return ""; }		// getter
+	virtual void hidden(const DOMString&)			{ } 				// setter
 	
 	// [CEReactions] attribute boolean inert;
-	virtual bool inert(bool&, bool) { return false; }
+	virtual bool inert()							{ return false; }	// getter
+	virtual void inert(const bool&)					{ } 				// setter
 	
 	// undefined click();
-	// TODO
+	virtual bool click() {
+		DKDEBUGFUNC();
+		return DKTODO();
+	}
 	
 	// [CEReactions] attribute DOMString accessKey;
-	virtual bool accessKey(DOMString&, bool) { return false; }
+	virtual DOMString accessKey()					{ return ""; }		// getter
+	virtual void accessKey(const DOMString&)		{ } 				// setter
 	
 	// readonly attribute DOMString accessKeyLabel;
-	virtual bool accessKeyLabel(DOMString&, bool) { return false; }
+	virtual DOMString accessKeyLabel()				{ return ""; }		// getter
+	virtual void accessKeyLabel(const DOMString&)	{ } 				// setter
 	
 	// [CEReactions] attribute boolean draggable;
-	virtual bool draggable(bool&, bool) { return false; }
+	virtual bool draggable()						{ return false; }	// getter
+	virtual void draggable(const bool&)				{ } 				// setter
 	
 	// [CEReactions] attribute boolean spellcheck;
-	virtual bool spellcheck(bool&, bool) { return false; }
+	virtual bool spellcheck()						{ return false; }	// getter
+	virtual void spellcheck(const bool&)				{ } 			// setter
 	
 	// [CEReactions] attribute DOMString autocapitalize;
-	virtual bool autocapitalize(DOMString&, bool) { return false; }
+	virtual DOMString autocapitalize()				{ return ""; }		// getter
+	virtual void autocapitalize(const DOMString&)	{ } 				// setter
 
 	// [CEReactions] attribute [LegacyNullToEmptyString] DOMString innerText;
-	virtual bool innerText(DOMString&, bool) { return false; }
+	virtual DOMString innerText()					{ return ""; }		// getter
+	virtual void innerText(const DOMString&)		{ } 				// setter
 	
 	// [CEReactions] attribute [LegacyNullToEmptyString] DOMString outerText;
-	virtual bool outerText(DOMString&, bool) { return false; }
+	virtual DOMString outerText()					{ return ""; }		// getter
+	virtual void outerText(const DOMString&)		{ } 				// setter
 
 	// ElementInternals attachInternals();
 	virtual bool attachInternals(DKString& _attachInternals) {
@@ -70,7 +85,6 @@ public:
 	}
 
 	// The popover API
-	
 	// undefined showPopover();
 	virtual bool showPopover() {
 		DKDEBUGFUNC();
@@ -90,7 +104,8 @@ public:
 	}
 	
 	// [CEReactions] attribute DOMString? popover;
-	virtual bool popover(DOMString&, bool) { return false; }
+	virtual DOMString popover()					{ return ""; }		// getter
+	virtual void popover(const DOMString&)		{ } 				// setter
 //};
 
 	// HTMLElement includes GlobalEventHandlers;
