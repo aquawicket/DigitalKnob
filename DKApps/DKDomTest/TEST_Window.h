@@ -371,6 +371,8 @@ public:
 		//		Promise<ScreenDetails> getScreenDetails();
 				// function
 		// };
+		
+		TEST_EventTarget::printEventTargetProperties(dynamic_cast<DKEventTarget&>(window));	//TODO: try to remove the need for dynamic_cast
 	}
 
 };

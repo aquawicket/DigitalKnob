@@ -1,4 +1,4 @@
-// [IDL] https://html.spec.whatwg.org/multipage/sections.html#htmlbodyelement
+// [IDL] https://html.spec.whatwg.org/multipage/embedded-content.html#htmlimageelement
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement
 #pragma once
 #ifndef TEST_HTMLImageElement_H
@@ -81,6 +81,8 @@ public:
 
 		// also has obsolete members
 	//};
+	
+		TEST_HTMLElement::printHTMLElementProperties(dynamic_cast<DKHTMLElement&>(htmlImageElement));	//TODO: try to remove the need for dynamic_cast
 	}
 };
 REGISTER_OBJECT(TEST_HTMLImageElement, true);

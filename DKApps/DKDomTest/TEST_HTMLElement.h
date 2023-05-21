@@ -95,6 +95,8 @@ public:
 		// interface HTMLUnknownElement : HTMLElement {
 			// Note: intentionally no [HTMLConstructor]
 		// };
+		
+		TEST_Element::printElementProperties(dynamic_cast<DKElement&>(htmlElement));	//TODO: try to remove the need for dynamic_cast
 	}
 };
 REGISTER_OBJECT(TEST_HTMLElement, true);

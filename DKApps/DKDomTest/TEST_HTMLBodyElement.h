@@ -58,6 +58,8 @@ public:
 		// 		[CEReactions] attribute DOMString background;
 				DKINFO("htmlBodyElement.background() = "			+toString(htmlBodyElement.background())				+"\n");
 		//};
+		
+		TEST_HTMLElement::printHTMLElementProperties(dynamic_cast<DKHTMLElement&>(htmlBodyElement));	//TODO: try to remove the need for dynamic_cast
 	}
 };
 REGISTER_OBJECT(TEST_HTMLBodyElement, true);

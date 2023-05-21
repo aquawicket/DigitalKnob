@@ -152,6 +152,8 @@ public:
 		//		attribute EventHandler onfullscreenerror;
 				DKINFO("document.onfullscreenerror() = "	+toString(document.onfullscreenerror())		+"\n");
 		//};
+		
+		TEST_Node::printNodeProperties(dynamic_cast<DKNode&>(document));	//TODO: try to remove the need for dynamic_cast
 	}
 };
 REGISTER_OBJECT(TEST_Document, true);

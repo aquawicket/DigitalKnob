@@ -22,7 +22,6 @@ public:
 	
 	static void printEventTargetProperties(DKEventTarget& evenTarget){
 		DKDEBUGFUNC(evenTarget);
-		DKTODO();
 	}
 
 };
