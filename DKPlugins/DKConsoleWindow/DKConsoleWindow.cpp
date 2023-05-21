@@ -440,9 +440,6 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
     // key
     key = ker.uChar.AsciiChar;
 
-    // locale
-    locale = "todo";
-
     // location
     location = 0; //FIXME: todo
 
