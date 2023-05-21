@@ -7,6 +7,8 @@
 #include "DKInterface/DKInterface.h"
 
 
+// [Exposed=Window, LegacyUnenumerableNamedProperties]
+// interface HTMLCollection {
 class DKHTMLCollection : public DKInterface
 {
 public:
@@ -16,8 +18,17 @@ public:
 		interfaceAddress = pointerToAddress(this);
 	}
 
+	// readonly attribute unsigned long length;
+	virtual unsigned int length()						{ return 0; }	// getter
+	virtual void length(const unsigned int&)			{ } 			// setter
+	
+	// getter Element? item(unsigned long index);
 	// TODO
-
+	
+	// getter Element? namedItem(DOMString name);
+	// TODO
+	
+//};
 };
 
 

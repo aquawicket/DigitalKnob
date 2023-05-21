@@ -21,7 +21,15 @@ public:
 
 	static void printHTMLCollectionProperties(DKHTMLCollection& htmlCollection){
 		DKDEBUGFUNC(htmlCollection);
-		DKTODO();
+		
+		// readonly attribute unsigned long length;
+		DKINFO("htmlCollection.length() = "	+toString(htmlCollection.length())	+"\n");
+		
+		// getter Element? item(unsigned long index);
+		// function
+		
+		// getter Element? namedItem(DOMString name);
+		// function
 	}
 };
 REGISTER_OBJECT(TEST_HTMLCollection, true);
