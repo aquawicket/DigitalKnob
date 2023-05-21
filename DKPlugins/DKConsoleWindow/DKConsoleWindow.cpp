@@ -81,52 +81,44 @@ DKConsoleWindow::DKConsoleWindow() : DKWindow() {
 	#endif
 		
 	// KeyboardEvent
-	altKey = false;
+	key = "";
 	code = "";
-	ctrlKey = false;
-	isComposing = false;
-	key = ' ';
-	locale = "";
 	location = 0;
+	ctrlKey = false;
+	shiftKey = false;
+	altKey = false;
 	metaKey = false;
 	repeat = false;
-	shiftKey = false;
+	isComposing = false;
 	
 	// MouseEvent
+	screenX = 0;
+	screenY = 0;
+	clientX = 0;
+	clientY = 0;
+	button = 0;
+	buttons = 0;
+	relatedTarget = "";
+	pageX = 0;
+	pageY = 0;
+	x = 0;
+	y = 0;
+	offsetX = 0;
+	offsetY = 0;
+	movementX = 0;
+	movementY = 0;
+	
 	button_state[0] = false;
 	button_state[1] = false;
 	button_state[2] = false;
 	button_state[3] = false;
 	button_state[4] = false;
-	button = 0;
-	buttons = 0;
-	clientX = 0;
-	clientY = 0;
-	//layerX = 0;
-	//layerY = 0;
-	movementX = 0;
-	movementY = 0;
-	offsetX = 0;
-	offsetY = 0;
-	pageX = 0;
-	pageY = 0;
-	relatedTarget = "";
-	screenX = 0;
-	screenY = 0;
-	//mozPressure = 0.0;
-	//mozInputSource = "";
-	//webkitForce = 0;
-	x = 0;
-	y = 0;
-
+	
 	// WheelEvent
 	deltaX = 0;
 	deltaY = 0;
 	deltaZ = 0;
 	deltaMode = 0;
-	wheelDelta = 0;
-	wheelDeltaX = 0;
-	wheelDeltaY = 0;
 
 	// FocusEvent
 	//relatedTarget = "";
