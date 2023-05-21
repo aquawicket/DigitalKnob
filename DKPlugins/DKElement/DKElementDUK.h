@@ -252,10 +252,23 @@ public:
 	}
 	
 	// [SameObject] readonly attribute NamedNodeMap attributes;
-	// TODO
+	static int attributes(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->attributes(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->attributes());
+		return true;
+	}
 	
 	// sequence<DOMString> getAttributeNames();
-	// TODO
+	static int getAttributeNames(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKString _getAttributeNames;
+		if(!eventTarget(ctx)->getAttributeNames(_getAttributeNames))
+			return false;
+		dukglue_push(ctx, _getAttributeNames);	
+		return true;
+	}
 	
 	// DOMString? getAttribute(DOMString qualifiedName);
 	// TODO
@@ -303,7 +316,13 @@ public:
 	// TODO
 	
 	// readonly attribute ShadowRoot? shadowRoot;
-	// TODO
+	static int shadowRoot(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->shadowRoot(GetString(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->shadowRoot());
+		return true;
+	}
 	
 	// Element? closest(DOMString selectors);
 	// TODO
