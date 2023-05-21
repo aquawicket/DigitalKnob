@@ -7,20 +7,15 @@
 #include "DKDuktape/DKDuktape.h"
 
 
-// [IDL] https://html.spec.whatwg.org/multipage/dom.html#htmlelement
-// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement
 class DKHTMLElementDUK : public DKObjectT<DKHTMLElementDUK>
 {
 public:
 	bool Init(){
+		DKDuktape::AttachFunction("CPP_DKHTMLElementDUK", DKHTMLElementDUK::constructor);
 		
-		////// Constructor //////
-		DKDuktape::AttachFunction("CPP_DKHTMLElementDUK", DKHTMLElementDUK::constructor);		// [HTMLElement()] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/HTMLElement
-		
-		////// Instance properties //////
 		// TODO
 
-		////// Load .js files
+		////// Load .js files //////
 		DKClass::DKCreate("DKHTMLElement/DKHTMLElementDUK.js");
 		
 		return true;
@@ -31,8 +26,6 @@ public:
 		return (DKHTMLElement*)addressToPointer(eventTargetAddress);
 	}
 
-	
-	////// Constructor //////
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKINFO("CPP_DKHTMLElementDUK()\n");
@@ -42,8 +35,6 @@ public:
 		return true;
 	}
 	
-	
-	////// Instance properties //////
 	// TODO
 		
 };
