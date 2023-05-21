@@ -55,11 +55,11 @@
 // [HTMLImageElement] https://html.spec.whatwg.org/multipage/sections.html#htmlbodyelement
 #include "TEST_HTMLImageElement.h"
 
-/*
+
 ////// DigitalKnob //////
 // [DKConsoleWindow]
 #include "TEST_DKConsoleWindow.h"
-
+/*
 // [DKSdlWindow]
 #include "TEST_DKSdlWindow.h"
 
@@ -127,11 +127,11 @@ bool App::Init() {
 	// [HTMLImageElement] https://html.spec.whatwg.org/multipage/sections.html#htmlbodyelement
 	DKClass::DKCreate("TEST_HTMLImageElement");
 	
-	/*
+
 	////// DigitalKnob //////
 	// [DKConsoleWindow]
-	//DKClass::DKCreate("TEST_DKConsoleWindow"); //FIXME
-
+	DKClass::DKCreate("TEST_DKConsoleWindow");
+	/*
 	// [DKSdlWindow]
 	DKClass::DKCreate("TEST_DKSdlWindow");
 	

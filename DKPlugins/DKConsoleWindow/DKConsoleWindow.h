@@ -153,43 +153,42 @@ public:
 	void Loop();
 
 	// KeyboardEvent
-	bool altKey;
-	DKString code;
-	bool ctrlKey;
-	bool isComposing;
-	char key;
-	DKString locale;
+	DOMString key;
+	DOMString code;
 	unsigned int location;
+	bool ctrlKey;
+	bool shiftKey;
+	bool altKey;
 	bool metaKey;
 	bool repeat;
-	bool shiftKey;
+	bool isComposing;
+	unsigned int charCode;
+	unsigned int keyCode;
 	
 	// MouseEvent
-	bool button_state[5];
-	unsigned int button;
-	unsigned int buttons;
-	unsigned int clientX;
-	unsigned int clientY;
-	int movementX;
-	int movementY;
-	int offsetX;
-	int offsetY;
-	int pageX;
-	int pageY;
+	int screenX;
+	int screenY;
+	int clientX;
+	int clientY;
+	short button;
+	unsigned short buttons;
 	DKString relatedTarget;
-	unsigned int screenX;
-	unsigned int screenY;
-	unsigned int x;
-	unsigned int y;
-
+	double pageX;
+	double pageY;
+	double x;
+	double y;
+	double offsetX;
+	double offsetY;
+	double movementX;
+	double movementY;
+	
+	bool button_state[5];
+	
 	// WheelEvent
-	int deltaX;
-	int deltaY;
-	int deltaZ;
-	unsigned long deltaMode;
-	int wheelDelta;
-	int wheelDeltaX;
-	int wheelDeltaY;
+	double deltaX;
+	double deltaY;
+	double deltaZ;
+	unsigned int deltaMode;
 
 	// FocusEvent
 	//DKString relatedTarget;
