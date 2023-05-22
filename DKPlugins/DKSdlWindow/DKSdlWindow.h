@@ -41,6 +41,7 @@ class DKSdlWindow : public DKWindow, public DKObjectT<DKSdlWindow>
 {
 public:
 	DKSdlWindow();
+	~DKSdlWindow();
 	bool Init();
 	bool End();
 

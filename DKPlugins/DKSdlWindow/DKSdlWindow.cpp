@@ -46,10 +46,7 @@ std::map<int, int> DKSdlWindow::sdlMacCode;
 
 DKSdlWindow::DKSdlWindow() : DKWindow() { 
 	DKDEBUGFUNC();
-//}
 
-//bool DKSdlWindow::Init(){
-//    DKDEBUGFUNC();
 	SDL_SetMainReady(); //Bypass SDL_main() //https://wiki.libsdl.org/SDL_SetMainReady
 	
 #if ANDROID
@@ -335,6 +332,11 @@ DKSdlWindow::DKSdlWindow() : DKWindow() {
     //return true;
 }
 
+DKSdlWindow::~DKSdlWindow(){
+	DKDEBUGFUNC();
+	DKApp::RemoveLoopFunc(&DKSdlWindow::Process, this);
+}
+
 bool DKSdlWindow::Init(){
 	DKDEBUGFUNC();
 	return true;
@@ -342,7 +344,6 @@ bool DKSdlWindow::Init(){
 
 bool DKSdlWindow::End(){
     DKDEBUGFUNC();
-    DKApp::RemoveLoopFunc(&DKSdlWindow::Process, this);
     //SDL_DestroyTexture(tex);
     SDL_DestroyRenderer(renderer);
     renderer = NULL;
