@@ -92,7 +92,7 @@ public:
 		for(unsigned int i=0; i<loop_funcs.size(); ++i){
 			//void(*const* ptrB)() = loop_funcs[i].target<void(*)()>();	// get a pointer to the function
 			//if (ptrA == ptrB){
-			if(loop_funcs[i].target_type().name() == funk.target_type().name()){
+			if(loop_funcs[i].target_type().name() == funk.target_type().name()){	// FIXME:  use a better variable for matching
 				DKINFO("RemoveLoopFunc(): removing function "+DKString(loop_funcs[i].target_type().name())+"\n");
 				loop_funcs.erase(loop_funcs.begin() +i);
 				DKINFO("loop_funcs.size() = "+toString(loop_funcs.size())+"\n");
