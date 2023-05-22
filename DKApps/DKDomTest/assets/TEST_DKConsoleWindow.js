@@ -28,7 +28,7 @@ function onblur(event){
 	printUIEventProperties(event)		//requires TEST_UIEvent.js
 	printEventProperties(event)			//requires TEST_Event.js
 }
-myConsoleWindow.addEventListener('blur', onblur)
+myConsoleWindow.addEventListener("blur", onblur)
 // [focus] https://developer.mozilla.org/en-US/docs/Web/API/Element/focus_event
 function onfocus(event){
 	console.log("onfocus("+event+")")
@@ -89,14 +89,6 @@ function ondblclick(event){
 	printEventProperties(event)
 }
 myConsoleWindow.addEventListener('dblclick', ondblclick)
-// [DOMActivate](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Element/DOMActivate_event
-function onDOMActivate(event){
-	console.log("onDOMActivate("+event+")")
-	printMouseEventProperties(event)		//requires TEST_MouseEvent.js
-	printUIEventProperties(event)
-	printEventProperties(event)
-}
-myConsoleWindow.addEventListener('DOMActivate', onDOMActivate)
 // [mousedown] https://developer.mozilla.org/en-US/docs/Web/API/Element/mousedown_event
 function onmousedown(event){
 	console.log("onmousedown("+event+")")
@@ -153,38 +145,6 @@ function onmouseup(event){
 	printEventProperties(event)
 }
 myConsoleWindow.addEventListener('mouseup', onmouseup)
-// [webkitmouseforcechanged](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Element/webkitmouseforcechanged_event
-function onwebkitmouseforcechanged(event){
-	console.log("onwebkitmouseforcechanged("+event+")")
-	printMouseEventProperties(event)		//requires TEST_MouseEvent.js
-	printUIEventProperties(event)
-	printEventProperties(event)
-}
-myConsoleWindow.addEventListener('webkitmouseforcechanged', onwebkitmouseforcechanged)
-// [webkitmouseforcedown](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Element/webkitmouseforcedown_event
-function onwebkitmouseforcedown(event){
-	console.log("onwebkitmouseforcedown("+event+")")
-	printMouseEventProperties(event)		//requires TEST_MouseEvent.js
-	printUIEventProperties(event)
-	printEventProperties(event)
-}
-myConsoleWindow.addEventListener('webkitmouseforcedown', onwebkitmouseforcedown)
-// [webkitmouseforceup](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Element/webkitmouseforceup_event
-function onwebkitmouseforceup(event){
-	console.log("onwebkitmouseforceup("+event+")")
-	printMouseEventProperties(event)		//requires TEST_MouseEvent.js
-	printUIEventProperties(event)
-	printEventProperties(event)
-}
-myConsoleWindow.addEventListener('webkitmouseforceup', onwebkitmouseforceup)
-// [webkitmouseforcewillbegin](Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Element/webkitmouseforcewillbegin_event
-function onwebkitmouseforcewillbegin(event){
-	console.log("onwebkitmouseforcewillbegin("+event+")")
-	printMouseEventProperties(event)		//requires TEST_MouseEvent.js
-	printUIEventProperties(event)
-	printEventProperties(event)
-}
-myConsoleWindow.addEventListener('webkitmouseforcewillbegin', onwebkitmouseforcewillbegin)
 
 
 ////// WheelEvent //////
