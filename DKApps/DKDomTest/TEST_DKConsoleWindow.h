@@ -208,19 +208,19 @@ public:
 	static bool oncompositionstart(DKEvent& event){
 		DKDEBUGFUNC(event);
 		DKINFO("TEST_DKConsoleWindow::oncompositionstart() \n");
-		TEST_CompositionEvent::printCompositionEventProperties(dynamic_cast<DKCompositionEventEvent&>(event));	//TODO: try to remove the need for dynamic_cast
+		TEST_CompositionEvent::printCompositionEventProperties(dynamic_cast<DKCompositionEvent&>(event));	//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool oncompositionupdate(DKEvent& event){
 		DKDEBUGFUNC(event);
 		DKINFO("TEST_DKConsoleWindow::oncompositionupdate() \n");
-		TEST_CompositionEvent::printCompositionEventProperties(dynamic_cast<DKCompositionEventEvent&>(event));	//TODO: try to remove the need for dynamic_cast
+		TEST_CompositionEvent::printCompositionEventProperties(dynamic_cast<DKCompositionEvent&>(event));	//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool oncompositionend(DKEvent& event){
 		DKDEBUGFUNC(event);
 		DKINFO("TEST_DKConsoleWindow::oncompositionend() \n");
-		TEST_CompositionEvent::printCompositionEventProperties(dynamic_cast<DKCompositionEventEvent&>(event));	//TODO: try to remove the need for dynamic_cast
+		TEST_CompositionEvent::printCompositionEventProperties(dynamic_cast<DKCompositionEvent&>(event));	//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 		
