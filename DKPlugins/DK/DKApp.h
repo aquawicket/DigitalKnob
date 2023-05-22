@@ -87,13 +87,14 @@ public:
 		DKDEBUGFUNC(func, instance);
 		
 		std::function<void()> funk = std::bind(func, instance);
-		void(*const* ptrA)() = funk.target<void(*)()>();	// get a pointer to the function
+		//void(*const* ptrA)() = funk.target<void(*)()>();	// get a pointer to the function
 		
 		for(unsigned int i=0; i<loop_funcs.size(); ++i){
-			void(*const* ptrB)() = loop_funcs[i].target<void(*)()>();	// get a pointer to the function
-			if (ptrA == ptrB){
+			//void(*const* ptrB)() = loop_funcs[i].target<void(*)()>();	// get a pointer to the function
+			//if (ptrA == ptrB){
+			if(loop_funcs[i].target_type().name() == funk.target_type().name()){
+				DKINFO("RemoveLoopFunc(): removing function "+DKString(loop_funcs[i].target_type().name())+"\n");
 				loop_funcs.erase(loop_funcs.begin() +i);
-				DKINFO("RemoveLoopFunc(): removed function "+DKString(funk.target_type().name())+"\n");
 				DKINFO("loop_funcs.size() = "+toString(loop_funcs.size())+"\n");
 			}
 		}
