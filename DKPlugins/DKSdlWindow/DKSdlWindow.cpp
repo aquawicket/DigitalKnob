@@ -329,12 +329,16 @@ DKSdlWindow::DKSdlWindow() : DKWindow() {
 #endif
 
     DKClass::DKCreate("DKWindow");
-    //return true;
 }
 
 DKSdlWindow::~DKSdlWindow(){
 	DKDEBUGFUNC();
 	DKApp::RemoveLoopFunc(&DKSdlWindow::Process, this);
+	//SDL_DestroyTexture(tex);
+    SDL_DestroyRenderer(renderer);
+    renderer = NULL;
+    SDL_DestroyWindow(window);
+    SDL_Quit();
 }
 
 bool DKSdlWindow::Init(){
@@ -344,11 +348,6 @@ bool DKSdlWindow::Init(){
 
 bool DKSdlWindow::End(){
     DKDEBUGFUNC();
-    //SDL_DestroyTexture(tex);
-    SDL_DestroyRenderer(renderer);
-    renderer = NULL;
-    SDL_DestroyWindow(window);
-    SDL_Quit();
     return true;
 }
 
