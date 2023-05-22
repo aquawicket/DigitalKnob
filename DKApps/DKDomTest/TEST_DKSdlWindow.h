@@ -19,7 +19,8 @@ public:
 
 	static void printDKSdlWindowProperties(DKSdlWindow& dkSdlWindow){
 		DKDEBUGFUNC(dkSdlWindow);
-		DKTODO();
+		
+		TEST_Window::printWindowProperties(dynamic_cast<DKWindow&>(dkSdlWindow));	//TODO: try to remove the need for dynamic_cast
 	}
 };
 REGISTER_OBJECT(TEST_DKSdlWindow, true);
