@@ -130,7 +130,7 @@ bool App::Init() {
 
 	////// DigitalKnob //////
 	// [DKConsoleWindow]
-	DKClass::DKCreate("TEST_DKConsoleWindow");
+	//DKClass::DKCreate("TEST_DKConsoleWindow");
 
 	// [DKSdlWindow]
 	DKClass::DKCreate("TEST_DKSdlWindow");

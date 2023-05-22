@@ -93,7 +93,7 @@ public:
 			void(*const* ptrB)() = loop_funcs[i].target<void(*)()>();	// get a pointer to the function
 			if (ptrA == ptrB){
 				loop_funcs.erase(loop_funcs.begin() +i);
-				DKINFO("RemoveLoopFunc(): removed function "+DKString(loop_funcs[i].target_type().name())+"\n");
+				DKINFO("RemoveLoopFunc(): removed function "+DKString(funk.target_type().name())+"\n");
 				DKINFO("loop_funcs.size() = "+toString(loop_funcs.size())+"\n");
 			}
 		}
