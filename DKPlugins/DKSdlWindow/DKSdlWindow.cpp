@@ -46,10 +46,10 @@ std::map<int, int> DKSdlWindow::sdlMacCode;
 
 DKSdlWindow::DKSdlWindow() : DKWindow() { 
 	DKDEBUGFUNC();
-}
+//}
 
-bool DKSdlWindow::Init(){
-    DKDEBUGFUNC();
+//bool DKSdlWindow::Init(){
+//    DKDEBUGFUNC();
 	SDL_SetMainReady(); //Bypass SDL_main() //https://wiki.libsdl.org/SDL_SetMainReady
 	
 #if ANDROID
@@ -60,8 +60,10 @@ bool DKSdlWindow::Init(){
     DKString sdl_renderer;
     DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[SDL_RENDERER]", sdl_renderer);
     DKINFO("settings.txt: [SDL_RENDERER] = " + sdl_renderer + "\n");
-    if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER) < 0)
-        return DKERROR("SDL_Init Error: " + DKString(SDL_GetError()) + "\n");
+    if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER) < 0){
+        DKERROR("SDL_Init Error: " + DKString(SDL_GetError()) + "\n");
+		return;
+	}
     DKString title;
     DKFile::GetAppName(title);
     mTitle = title;
@@ -132,8 +134,10 @@ bool DKSdlWindow::Init(){
     result = "OpenGLES";
     DKINFO("DKSdlWindow Width: " + toString(width) + " Height: " + toString(height) + "\n");
 	
-    if(SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_RESIZABLE, &window, &renderer) < 0)
-		return DKERROR("SDL_CreateWindowAndRenderer() failed!: " + DKString(SDL_GetError()) + "\n");
+    if(SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_RESIZABLE, &window, &renderer) < 0){
+		DKERROR("SDL_CreateWindowAndRenderer() failed!: " + DKString(SDL_GetError()) + "\n");
+		return;
+	}
     
     /*
     //SDL_SetHint(SDL_HINT_VIDEO_MINIMIZE_ON_FOCUS_LOSS, "0");
@@ -173,7 +177,8 @@ bool DKSdlWindow::Init(){
     window = SDL_CreateWindow(mTitle.c_str(), winX, winY, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL | SDL_WINDOW_ALLOW_HIGHDPI);
     if(!window) {
         SDL_Quit();
-        return DKERROR("window invalid!: " + DKString(SDL_GetError()) + "\n");
+        DKERROR("window invalid!: " + DKString(SDL_GetError()) + "\n");
+		return;
     }
     renderer = NULL;
     if(!same(sdl_renderer, "SOFTWARE")) {
@@ -187,7 +192,8 @@ bool DKSdlWindow::Init(){
     if(!renderer) {
         SDL_DestroyWindow(window);
         SDL_Quit();
-		return DKERROR("SDL_CreateRenderer Error: " + DKString(SDL_GetError()) + "\n");
+		DKERROR("SDL_CreateRenderer Error: " + DKString(SDL_GetError()) + "\n");
+		return;
     }
 	#if WIN
 		GLenum err = glewInit();
@@ -326,11 +332,17 @@ bool DKSdlWindow::Init(){
 #endif
 
     DKClass::DKCreate("DKWindow");
-    return true;
+    //return true;
+}
+
+bool DKSdlWindow::Init(){
+	DKDEBUGFUNC();
+	return true;
 }
 
 bool DKSdlWindow::End(){
     DKDEBUGFUNC();
+    DKApp::RemoveLoopFunc(&DKSdlWindow::Process, this);
     //SDL_DestroyTexture(tex);
     SDL_DestroyRenderer(renderer);
     renderer = NULL;
