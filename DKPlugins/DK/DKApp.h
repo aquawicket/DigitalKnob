@@ -64,8 +64,9 @@ public:
 
 	template<class T>
 	static void AppendLoopFunc(void (T::*func)(), T* instance){
-		loop_funcs.push_back(std::bind(func, instance));
-		DKINFO("AppendLoopFunc(): added function \n");
+		std::function<void()> funk = std::bind(func, instance);
+		loop_funcs.push_back(funk);
+		DKINFO("AppendLoopFunc(): added function "+DKString(funk.target_type().name())+"\n");
 	}
 	
 	/*
@@ -91,7 +92,7 @@ public:
 			void(*const* ptrB)() = loop_funcs[i].target<void(*)()>();	// get a pointer to the function
 			if (ptrA == ptrB){
 				loop_funcs.erase(loop_funcs.begin() +i );
-				DKINFO("RemoveLoopFunc(): removed function \n");
+				DKINFO("RemoveLoopFunc(): removed function "+DKString(ptrB.target_type().name())+"\n");
 			}
 		}
 	}
