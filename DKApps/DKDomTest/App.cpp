@@ -62,13 +62,13 @@
 
 // [DKSdlWindow]
 #include "TEST_DKSdlWindow.h"
-/*
+
 // [DKRmlDocument]
 #include "TEST_DKRmlDocument.h"
 
 // [DKRmlLocation]
-#include "TEST_DKRmlLocation.h"
-*/
+//#include "TEST_DKRmlLocation.h"
+
 
 ///////////////////////////////////////
 bool App::Init() {
@@ -134,13 +134,12 @@ bool App::Init() {
 
 	// [DKSdlWindow]
 	DKClass::DKCreate("TEST_DKSdlWindow");
-	/*
+	
 	// [DKRmlDocument]
 	DKClass::DKCreate("TEST_DKRmlDocument");
 	
 	// [DKRmlLocation]
-	DKClass::DKCreate("TEST_DKRmlLocation");
-	*/
+	//DKClass::DKCreate("TEST_DKRmlLocation");
 	
 	return true;
 }

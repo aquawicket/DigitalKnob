@@ -8,12 +8,12 @@
 class TEST_DKSdlWindow : public DKObjectT<TEST_DKSdlWindow>
 {
 public:
+	DKSdlWindow dkSdlWindow;
 	
 	bool Init(){
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_DKSdlWindow.h //////\n");
 		
-		DKSdlWindow dkSdlWindow;
 		printDKSdlWindowProperties(dkSdlWindow);
 		return true;
 	}
