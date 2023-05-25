@@ -8,18 +8,20 @@
 class TEST_DKRmlLocation : public DKObjectT<TEST_DKRmlLocation>
 {
 public:
+	DKRmlLocation dkRmlLocation;
+
 	bool Init(){
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_DKRmlLocation.h //////\n");
 		
-		DKRmlLocation dkRmlLocation;
 		printDKRmlLocationProperties(dkRmlLocation);
 		return true;
 	}
 	
 	static void printDKRmlLocationProperties(DKRmlLocation& dkRmlLocation){
 		DKDEBUGFUNC(dkRmlLocation);
-		DKTODO();
+		
+		TEST_Location::printLocationProperties(dynamic_cast<DKLocation&>(dkRmlLocation));	//TODO: try to remove the need for dynamic_cast
 	}
 };
 REGISTER_OBJECT(TEST_DKRmlLocation, true);
