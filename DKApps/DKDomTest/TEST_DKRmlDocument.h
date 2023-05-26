@@ -8,13 +8,15 @@
 class TEST_DKRmlDocument : public DKObjectT<TEST_DKRmlDocument>
 {
 public:
-	DKRmlDocument dkRmlDocument;
+	//DKRmlDocument dkRmlDocument;
 	
 	bool Init(){
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_DKRmlDocument.h //////\n");
 		
-		printRmlDocumentProperties(dkRmlDocument);
+		DKClass::DKCreate("DKRmlDocument");
+		
+		//printRmlDocumentProperties(dkRmlDocument);
 		return true;
 	}
 	
