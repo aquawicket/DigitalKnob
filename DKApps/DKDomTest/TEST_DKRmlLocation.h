@@ -15,6 +15,8 @@ public:
 		DKINFO("\n////// TEST_DKRmlLocation.h //////\n");
 		
 		printDKRmlLocationProperties(dkRmlLocation);
+		
+		dkRmlLocation.href("DKWebTest/index.html");
 		return true;
 	}
 	

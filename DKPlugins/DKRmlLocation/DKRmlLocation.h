@@ -24,15 +24,8 @@ public:
 	virtual ~DKRmlLocation() {}
 
 	// [LegacyUnforgeable] stringifier attribute USVString href;
-	virtual bool href(DKString& url, bool set) {
-		if (set) {
-			DKRmlDocument::Get()->LoadUrl(url);
-		}
-		else {
-			url = DKRmlDocument::Get()->href_;
-		}
-		return true;
-	}  // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-href
+	virtual USVString href()				{ return DKRmlDocument::Get()->href_; }		// getter
+	virtual void href(const USVString& url)	{ DKRmlDocument::Get()->LoadUrl(url); } 	// setter
 	
 	// [LegacyUnforgeable] readonly attribute USVString origin;
 	virtual bool origin(DKString&, bool) { return DKTODO(); } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-origin

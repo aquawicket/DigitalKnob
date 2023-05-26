@@ -10,7 +10,6 @@ const myRmlLocation = new DKRmlLocation()
 printRmlLocationProperties(myRmlLocation)
 printLocationProperties(myRmlLocation)		//requires TEST_Location.js
 
-const myRmlLocation = new DKRmlLocation()
 console.log("myRmlLocation.href = " +myRmlLocation.href)
 //const url = CPP_DKAssets_LocalAssets()+"DKWebTest/index.html"
 const url = "DKWebTest/index.html"
