@@ -29,4 +29,18 @@ function printWheelEventProperties(wheelevent){
 	
 	// readonly attribute unsigned long deltaMode;
 	console.log("wheelevent.deltaMode = "	+wheelevent.deltaMode)
+	
+	
+	printMouseEventProperties(wheelEvent);
 }
+
+function onWheelEvent(event){
+	console.log("onWheelEvent() \n");
+	printWheelEventProperties(event);
+}
+
+
+var wheelEventTarget = new EventTarget();
+wheelEventTarget.addEventListener("wheelEvent", onWheelEvent);
+var wheelEvent = new WheelEvent("wheelEvent", "");
+wheelEventTarget.dispatchEvent(wheelEvent);

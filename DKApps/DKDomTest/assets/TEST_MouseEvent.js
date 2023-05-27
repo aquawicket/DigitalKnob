@@ -92,8 +92,7 @@ function printMouseEventProperties(mouseevent){
 	printUIEventProperties(mouseEvent);
 }
 
-function onMouseEvent(DKEvent& event){
-	DKDEBUGFUNC(event);
+function onMouseEvent(event){
 	console.log("onMouseEvent() \n");
 	printMouseEventProperties(event);
 }
