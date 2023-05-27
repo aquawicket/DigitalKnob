@@ -3,4 +3,18 @@
 console.log("\n////// TEST_HTMLCollection.js //////")
 
 
-// TODO
+function printHTMLCollectionProperties(htmlCollection){
+		
+	// readonly attribute unsigned long length;
+	console.log("htmlCollection.length = "	+htmlCollection.length);
+		
+	// getter Element? item(unsigned long index);
+	// function
+		
+	// getter Element? namedItem(DOMString name);
+	// function
+}
+
+
+var htmlCollection = new HTMLCollection();
+printHTMLCollectionProperties(htmlCollection);
