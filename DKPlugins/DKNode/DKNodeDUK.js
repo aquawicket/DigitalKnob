@@ -30,32 +30,32 @@ var Node = function Node(address) {
 	
 	// readonly attribute unsigned short nodeType;
 	Object.defineProperty(this, "nodeType", {
-        get: function nodeType()				{ return CPP_DKDocumentDUK_nodeType(this.address) },
-		//set: function nodeType(data)			{ return CPP_DKDocumentDUK_nodeType(this.address, data) },
+        get: function nodeType()				{ return CPP_DKNodeDUK_nodeType(this.address) },
+		//set: function nodeType(data)			{ return CPP_DKNodeDUK_nodeType(this.address, data) },
     })
 	
 	// readonly attribute DOMString nodeName;
 	Object.defineProperty(this, "nodeName", {
-        get: function nodeName()				{ return CPP_DKDocumentDUK_nodeName(this.address) },
-		//set: function nodeName(data)			{ return CPP_DKDocumentDUK_nodeName(this.address, data) },
+        get: function nodeName()				{ return CPP_DKNodeDUK_nodeName(this.address) },
+		//set: function nodeName(data)			{ return CPP_DKNodeDUK_nodeName(this.address, data) },
     })
 	
 	// readonly attribute USVString baseURI;
 	Object.defineProperty(this, "baseURI", {
-        get: function baseURI()					{ return CPP_DKDocumentDUK_baseURI(this.address) },
-		//set: function baseURI(data)			{ return CPP_DKDocumentDUK_baseURI(this.address, data) },
+        get: function baseURI()					{ return CPP_DKNodeDUK_baseURI(this.address) },
+		//set: function baseURI(data)			{ return CPP_DKNodeDUK_baseURI(this.address, data) },
     })
 	
 	// readonly attribute boolean isConnected;
 	Object.defineProperty(this, "isConnected", {
-        get: function isConnected()				{ return CPP_DKDocumentDUK_isConnected(this.address) },
-		//set: function isConnected(data)		{ return CPP_DKDocumentDUK_isConnected(this.address, data) },
+        get: function isConnected()				{ return CPP_DKNodeDUK_isConnected(this.address) },
+		//set: function isConnected(data)		{ return CPP_DKNodeDUK_isConnected(this.address, data) },
     })
 	
 	// readonly attribute Document? ownerDocument;
 	Object.defineProperty(this, "ownerDocument", {
-        get: function ownerDocument()			{ return CPP_DKDocumentDUK_ownerDocument(this.address) },
-		//set: function ownerDocument(data)		{ return CPP_DKDocumentDUK_ownerDocument(this.address, data) },
+        get: function ownerDocument()			{ return CPP_DKNodeDUK_ownerDocument(this.address) },
+		//set: function ownerDocument(data)		{ return CPP_DKNodeDUK_ownerDocument(this.address, data) },
     })
 	
 	// Node getRootNode(optional GetRootNodeOptions options = {});
@@ -63,14 +63,14 @@ var Node = function Node(address) {
 	
 	// readonly attribute Node? parentNode;
 	Object.defineProperty(this, "parentNode", {
-        get: function parentNode()				{ return CPP_DKDocumentDUK_parentNode(this.address) },
-		//set: function parentNode(data)		{ return CPP_DKDocumentDUK_parentNode(this.address, data) },
+        get: function parentNode()				{ return CPP_DKNodeDUK_parentNode(this.address) },
+		//set: function parentNode(data)		{ return CPP_DKNodeDUK_parentNode(this.address, data) },
     })
 	
 	// readonly attribute Element? parentElement;
 	Object.defineProperty(this, "parentElement", {
-        get: function parentElement()			{ return CPP_DKDocumentDUK_parentElement(this.address) },
-		//set: function parentElement(data)		{ return CPP_DKDocumentDUK_parentElement(this.address, data) },
+        get: function parentElement()			{ return CPP_DKNodeDUK_parentElement(this.address) },
+		//set: function parentElement(data)		{ return CPP_DKNodeDUK_parentElement(this.address, data) },
     })
 	
 	// boolean hasChildNodes();
@@ -78,44 +78,44 @@ var Node = function Node(address) {
 	
 	// [SameObject] readonly attribute NodeList childNodes;
 	Object.defineProperty(this, "childNodes", {
-        get: function childNodes()				{ return CPP_DKDocumentDUK_childNodes(this.address) },
-		//set: function childNodes(data)		{ return CPP_DKDocumentDUK_childNodes(this.address, data) },
+        get: function childNodes()				{ return CPP_DKNodeDUK_childNodes(this.address) },
+		//set: function childNodes(data)		{ return CPP_DKNodeDUK_childNodes(this.address, data) },
     })
 	
 	// readonly attribute Node? firstChild;
 	Object.defineProperty(this, "firstChild", {
-        get: function firstChild()				{ return CPP_DKDocumentDUK_firstChild(this.address) },
-		//set: function firstChild(data)		{ return CPP_DKDocumentDUK_firstChild(this.address, data) },
+        get: function firstChild()				{ return CPP_DKNodeDUK_firstChild(this.address) },
+		//set: function firstChild(data)		{ return CPP_DKNodeDUK_firstChild(this.address, data) },
     })
 	
 	// readonly attribute Node? lastChild;
 	Object.defineProperty(this, "lastChild", {
-        get: function lastChild()				{ return CPP_DKDocumentDUK_lastChild(this.address) },
-		//set: function lastChild(data)			{ return CPP_DKDocumentDUK_lastChild(this.address, data) },
+        get: function lastChild()				{ return CPP_DKNodeDUK_lastChild(this.address) },
+		//set: function lastChild(data)			{ return CPP_DKNodeDUK_lastChild(this.address, data) },
     })
 	
 	// readonly attribute Node? previousSibling;
 	Object.defineProperty(this, "previousSibling", {
-        get: function previousSibling()			{ return CPP_DKDocumentDUK_previousSibling(this.address) },
-		//set: function previousSibling(data)	{ return CPP_DKDocumentDUK_previousSibling(this.address, data) },
+        get: function previousSibling()			{ return CPP_DKNodeDUK_previousSibling(this.address) },
+		//set: function previousSibling(data)	{ return CPP_DKNodeDUK_previousSibling(this.address, data) },
     })
 	
 	// readonly attribute Node? nextSibling;
 	Object.defineProperty(this, "nextSibling", {
-        get: function nextSibling()				{ return CPP_DKDocumentDUK_nextSibling(this.address) },
-		//set: function nextSibling(data)		{ return CPP_DKDocumentDUK_nextSibling(this.address, data) },
+        get: function nextSibling()				{ return CPP_DKNodeDUK_nextSibling(this.address) },
+		//set: function nextSibling(data)		{ return CPP_DKNodeDUK_nextSibling(this.address, data) },
     })
 	
 	// [CEReactions] attribute DOMString? nodeValue;
 	Object.defineProperty(this, "nodeValue", {
-        get: function nodeValue()				{ return CPP_DKDocumentDUK_nodeValue(this.address) },
-		set: function nodeValue(data)			{ return CPP_DKDocumentDUK_nodeValue(this.address, data) },
+        get: function nodeValue()				{ return CPP_DKNodeDUK_nodeValue(this.address) },
+		set: function nodeValue(data)			{ return CPP_DKNodeDUK_nodeValue(this.address, data) },
     })
 	
 	// [CEReactions] attribute DOMString? textContent;
 	Object.defineProperty(this, "textContent", {
-        get: function textContent()				{ return CPP_DKDocumentDUK_textContent(this.address) },
-		set: function textContent(data)			{ return CPP_DKDocumentDUK_textContent(this.address, data) },
+        get: function textContent()				{ return CPP_DKNodeDUK_textContent(this.address) },
+		set: function textContent(data)			{ return CPP_DKNodeDUK_textContent(this.address, data) },
     })
 	
 	// [CEReactions] undefined normalize();
