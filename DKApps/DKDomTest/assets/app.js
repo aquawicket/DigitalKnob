@@ -27,7 +27,6 @@ CPP_DK_Create("TEST_KeyboardEvent.js");
 CPP_DK_Create("DKCompositionEventDUK");
 CPP_DK_Create("TEST_CompositionEvent.js");
 
-/*
 // [DragEvent] https://html.spec.whatwg.org/multipage/dnd.html#the-dragevent-interface
 CPP_DK_Create("DKDragEventDUK");
 CPP_DK_Create("TEST_DragEvent.js");
@@ -35,7 +34,7 @@ CPP_DK_Create("TEST_DragEvent.js");
 // [Window] https://html.spec.whatwg.org/
 CPP_DK_Create("DKWindowDUK");
 CPP_DK_Create("TEST_Window.js");
-
+/*
 // [Screen] https://w3c.github.io/csswg-drafts/cssom-view/#the-screen-interface
 CPP_DK_Create("DKScreenDUK");
 CPP_DK_Create("TEST_Screen.js");
