@@ -82,7 +82,7 @@ function printKeyboardEventProperties(keyboardevent){
 }
 
 function onKeyboardEvent(event){
-	DKINFO("onKeyboardEvent() \n");
+	console.log("onKeyboardEvent() \n");
 	printKeyboardEventProperties(event);
 }
 
