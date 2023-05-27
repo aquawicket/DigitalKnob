@@ -15,7 +15,7 @@ function printFocusEventProperties(focusevent){
 }
 
 function onFocusEvent(event){
-	DKINFO("onFocusEvent() \n");
+	console.log("onFocusEvent() \n");
 	printFocusEventProperties(event);
 }
 
