@@ -46,11 +46,11 @@ CPP_DK_Create("TEST_Navigator.js");
 // [Location] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-location-interface
 CPP_DK_Create("DKLocationDUK");
 CPP_DK_Create("TEST_Location.js");
-/*
+
 // [Node] https://dom.spec.whatwg.org/#interface-node
 CPP_DK_Create("DKNodeDUK");
 CPP_DK_Create("TEST_Node.js");
-
+/*
 // [Document] https://dom.spec.whatwg.org/#interface-document
 CPP_DK_Create("DKDocumentDUK");
 CPP_DK_Create("TEST_Document.js");
