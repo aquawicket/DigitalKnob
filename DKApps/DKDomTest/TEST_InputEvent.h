@@ -14,10 +14,10 @@ public:
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_InputEvent.h //////\n");
 	
-		DKEventTarget eventTarget;
-		eventTarget.addEventListener("inputEvent", &TEST_InputEvent::onInputEvent);
+		DKEventTarget inputEventTarget;
+		inputEventTarget.addEventListener("inputEvent", &TEST_InputEvent::onInputEvent);
 		DKInputEvent inputEvent("inputEvent", "");
-		eventTarget.dispatchEvent(inputEvent);
+		inputEventTarget.dispatchEvent(inputEvent);
 		return true;
 	}
 	
@@ -44,6 +44,7 @@ public:
 		//    	sequence<StaticRange> getTargetRanges();
 				// function
 		// };
+		
 		
 		TEST_UIEvent::printUIEventProperties(dynamic_cast<DKUIEvent&>(inputEvent));	//TODO: try to remove the need for dynamic_cast
 	}
