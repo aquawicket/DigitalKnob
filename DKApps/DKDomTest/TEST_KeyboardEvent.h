@@ -14,10 +14,10 @@ public:
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_KeyboardEvent.h //////\n");
 		
-		DKEventTarget eventTarget;
-		eventTarget.addEventListener("keyboardEvent", &TEST_KeyboardEvent::onKeyboardEvent);
+		DKEventTarget keyboardEventTarget;
+		keyboardEventTarget.addEventListener("keyboardEvent", &TEST_KeyboardEvent::onKeyboardEvent);
 		DKKeyboardEvent keyboardEvent("keyboardEvent", "");
-		eventTarget.dispatchEvent(keyboardEvent);
+		keyboardEventTarget.dispatchEvent(keyboardEvent);
 		return true;
 	}
 	
@@ -97,6 +97,7 @@ public:
 		//		readonly attribute unsigned long keyCode;
 				DKINFO("keyboardEvent.keyCode() = "				+toString(keyboardEvent.keyCode())					+"\n");
 		// };
+		
 		
 		TEST_UIEvent::printUIEventProperties(dynamic_cast<DKUIEvent&>(keyboardEvent));	//TODO: try to remove the need for dynamic_cast
 	}

@@ -22,9 +22,9 @@ CPP_DK_Create("DKWheelEventDUK");
 CPP_DK_Create("TEST_WheelEvent.js");
 CPP_DK_Create("DKInputEventDUK");
 CPP_DK_Create("TEST_InputEvent.js");
-/*
 CPP_DK_Create("DKKeyboardEventDUK");
 CPP_DK_Create("TEST_KeyboardEvent.js");
+/*
 CPP_DK_Create("DKCompositionEventDUK");
 CPP_DK_Create("TEST_CompositionEvent.js");
 
