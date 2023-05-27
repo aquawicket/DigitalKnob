@@ -50,11 +50,11 @@ CPP_DK_Create("TEST_Location.js");
 // [Node] https://dom.spec.whatwg.org/#interface-node
 CPP_DK_Create("DKNodeDUK");
 CPP_DK_Create("TEST_Node.js");
-/*
+
 // [Document] https://dom.spec.whatwg.org/#interface-document
 CPP_DK_Create("DKDocumentDUK");
 CPP_DK_Create("TEST_Document.js");
-
+/*
 // [Element] https://dom.spec.whatwg.org/#interface-element
 CPP_DK_Create("DKElementDUK");
 CPP_DK_Create("TEST_Element.js");

@@ -153,6 +153,7 @@ public:
 				DKINFO("document.onfullscreenerror() = "	+toString(document.onfullscreenerror())		+"\n");
 		//};
 		
+		
 		TEST_Node::printNodeProperties(dynamic_cast<DKNode&>(document));	//TODO: try to remove the need for dynamic_cast
 	}
 };

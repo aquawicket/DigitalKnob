@@ -4,71 +4,142 @@ console.log("\n////// TEST_Document.js //////")
 
 
 function printDocumentProperties(document){
-	console.log("document.activeElement = "				+document.activeElement)			// [Document.activeElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement
-	console.log("document.adoptedStyleSheets = "		+document.adoptedStyleSheets)		// [Document.adoptedStyleSheets] https://developer.mozilla.org/en-US/docs/Web/API/Document/adoptedStyleSheets
-	console.log("document.body = "						+document.body)						// [Document.body] https://developer.mozilla.org/en-US/docs/Web/API/Document/body
-	console.log("document.characterSet = "				+document.characterSet)				// [Document.characterSet](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/characterSet
-	console.log("document.childElementCount = "			+document.childElementCount)		// [Document.childElementCount](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/childElementCount
-	console.log("document.children = "					+document.children)					// [Document.children](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/children
-	console.log("document.compatMode = "				+document.compatMode)				// [Document.compatMode](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/compatMode
-	console.log("document.contentType = "				+document.contentType)				// [Document.contentType](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/contentType
-	console.log("document.currentScript = "				+document.currentScript)			// [Document.currentScript](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/currentScript
-	console.log("document.doctype = "					+document.doctype)					// [Document.doctype](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/doctype
-	console.log("document.documentElement = "			+document.documentElement)			// [Document.documentElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/documentElement
-	console.log("document.documentURI = "				+document.documentURI)				// [Document.documentURI](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/documentURI
-	console.log("document.embeds = "					+document.embeds)					// [Document.embeds](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/embeds
-	console.log("document.firstElementChild = "			+document.firstElementChild)		// [Document.firstElementChild](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/firstElementChild
-	console.log("document.fonts = "						+document.fonts)					// [Document.fonts] https://developer.mozilla.org/en-US/docs/Web/API/Document/fonts
-	console.log("document.forms = "						+document.forms)					// [Document.forms](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/forms
-	console.log("document.fragmentDirective = "			+document.fragmentDirective)		// [Document.fragmentDirective](Read only)(Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Document/fragmentDirective
-	console.log("document.fullscreenElement = "			+document.fullscreenElement)		// [Document.fullscreenElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/fullscreenElement
-	console.log("document.head = "						+document.head)						// [Document.head](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/head
-	console.log("document.hidden = "					+document.hidden)					// [Document.hidden](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/hidden
-	console.log("document.images = "					+document.images)					// [Document.images](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/images
-	console.log("document.implementation = "			+document.implementation)			// [Document.implementation](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/implementation
-	console.log("document.lastElementChild = "			+document.lastElementChild)			// [Document.lastElementChild](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/lastElementChild
-	console.log("document.links = "						+document.links)					// [Document.links](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/links
-	console.log("document.pictureInPictureElement = "	+document.pictureInPictureElement)	// [Document.pictureInPictureElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/pictureInPictureElement
-	console.log("document.pictureInPictureEnabled = "	+document.pictureInPictureEnabled)	// [Document.pictureInPictureEnabled](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/pictureInPictureEnabled
-	console.log("document.plugins = "					+document.plugins)					// [Document.plugins](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/plugins
-	console.log("document.pointerLockElement = "		+document.pointerLockElement)		// [Document.pointerLockElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/pointerLockElement
-	console.log("document.featurePolicy = "				+document.featurePolicy)			// [Document.featurePolicy Experimental](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/featurePolicy
-	console.log("document.scripts = "					+document.scripts)					// [Document.scripts](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/scripts
-	console.log("document.scrollingElement = "			+document.scrollingElement)			// [Document.scrollingElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/scrollingElement
-	console.log("document.styleSheets = "				+document.styleSheets)				// [Document.styleSheets](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/styleSheets
-	console.log("document.timeline = "					+document.timeline)					// [Document.timeline](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/timeline
-	console.log("document.visibilityState = "			+document.visibilityState)			// [Document.visibilityState](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/visibilityState
-	console.log("document.cookie = "					+document.cookie)					// [Document.cookie] https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie
-	console.log("document.defaultView = "				+document.defaultView)				// [Document.defaultView](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/defaultView
-	console.log("document.designMode = "				+document.designMode)				// [Document.designMode] https://developer.mozilla.org/en-US/docs/Web/API/Document/designMode
-	console.log("document.dir = "						+document.dir)						// [Document.dir] https://developer.mozilla.org/en-US/docs/Web/API/Document/dir
-	console.log("document.domain = "					+document.domain)					// [Document.domain](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/domain
-	console.log("document.fullscreenEnabled = "			+document.fullscreenEnabled)		// [Document.fullscreenEnabled](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/fullscreenEnabled
-	console.log("document.lastModified = "				+document.lastModified)				// [Document.lastModified](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/lastModified
-	console.log("document.location = "					+document.location)					// [Document.location](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/location
-	console.log("document.readyState = "				+document.readyState)				// [Document.readyState](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/readyState
-	console.log("document.referrer = "					+document.referrer)					// [Document.referrer](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/referrer
-	console.log("document.title = "						+document.title)					// [Document.title] https://developer.mozilla.org/en-US/docs/Web/API/Document/title
-	console.log("document.URL = "						+document.URL)						// [Document.URL](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/URL
-	console.log("document.alinkColor = "				+document.alinkColor)				// [Document.alinkColor](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/alinkColor
-	console.log("document.all = "						+document.all)						// [Document.all](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/all
-	console.log("document.anchors = "					+document.anchors)					// [Document.anchors](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/anchors
-	console.log("document.applets = "					+document.applets)					// [Document.applets](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/applets
-	console.log("document.bgColor = "					+document.bgColor)					// [Document.bgColor](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/bgColor
-	console.log("document.charset = "					+document.charset)					// [Document.charset](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/characterSet
-	console.log("document.fgColor = "					+document.fgColor)					// [Document.fgColor](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/fgColor
-	console.log("document.fullscreen = "				+document.fullscreen)				// [Document.fullscreen](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/fullscreen
-	console.log("document.height = "					+document.height)					// [Document.height](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Element/clientHeight
-	console.log("document.inputEncoding = "				+document.inputEncoding)			// [Document.inputEncoding](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Document/characterSet
-	console.log("document.lastStyleSheetSet = "			+document.lastStyleSheetSet)		// [Document.lastStyleSheetSet](Deprecated)(Read only)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Document/lastStyleSheetSet
-	console.log("document.linkColor = "					+document.linkColor)				// [Document.linkColor](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/linkColor
-	console.log("document.preferredStyleSheetSet = "	+document.preferredStyleSheetSet)	// [Document.preferredStyleSheetSet](Deprecated)(Read only)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Document/preferredStyleSheetSet
-	console.log("document.rootElement = "				+document.rootElement)				// [Document.rootElement](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/rootElement
-	console.log("document.selectedStyleSheetSet = "		+document.selectedStyleSheetSet)	// [Document.selectedStyleSheetSet](Deprecated)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Document/selectedStyleSheetSet
-	console.log("document.styleSheetSets = "			+document.styleSheetSets)			// [Document.styleSheetSets](Deprecated)(Read only)(Non-standard) https://developer.mozilla.org/en-US/docs/Web/API/Document/styleSheetSets
-	console.log("document.vlinkColor = "				+document.vlinkColor)				// [Document.vlinkColor](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/vlinkColor
-	console.log("document.width = "						+document.width)					// [Document.width](Non-standard)(Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Element/clientWidth
-	console.log("document.xmlEncoding = "				+document.xmlEncoding)				// [Document.xmlEncoding](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/xmlEncoding
-	console.log("document.xmlStandalone = "				+document.xmlStandalone)			// [Document.xmlStandalone](Deprecated)
-	console.log("document.xmlVersion = "				+document.xmlVersion)				// [Document.xmlVersion](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Document/xmlVersion
+	
+	// constructor();
+	// function
+		
+	// [SameObject] readonly attribute DOMImplementation implementation;
+	console.log("document.implementation = "			+document.implementation);
+	
+	// readonly attribute USVString URL;
+	console.log("document.URL = "						+document.URL);
+	
+	// readonly attribute USVString documentURI;
+	console.log("document.documentURI = "				+document.documentURI);
+	
+	// readonly attribute DOMString compatMode;
+	console.log("document.compatMode = "				+document.compatMode);
+	
+	// readonly attribute DOMString characterSet;
+	console.log("document.characterSet = "				+document.characterSet);
+	
+	// readonly attribute DOMString charset; // legacy alias of .characterSet
+	console.log("document.charset = "					+document.charset);
+	
+	// readonly attribute DOMString inputEncoding; // legacy alias of .characterSet
+	console.log("document.inputEncoding = "				+document.inputEncoding);
+	
+	// readonly attribute DOMString contentType;
+	console.log("document.contentType = "				+document.contentType);
+	
+	// readonly attribute DocumentType? doctype;
+	console.log("document.doctype = "					+document.doctype);
+	
+	// readonly attribute Element? documentElement;
+	console.log("document.documentElement = "			+document.documentElement);
+	
+	// HTMLCollection getElementsByTagName(DOMString qualifiedName);
+	// function
+		
+	// HTMLCollection getElementsByTagNameNS(DOMString? namespace, DOMString localName);
+	// function
+		
+	// HTMLCollection getElementsByClassName(DOMString classNames);
+	// function
+		
+	// [CEReactions, NewObject] Element createElement(DOMString localName, optional (DOMString or ElementCreationOptions) options = {});
+	// function
+		
+	// [CEReactions, NewObject] Element createElementNS(DOMString? namespace, DOMString qualifiedName, optional (DOMString or ElementCreationOptions) options = {});
+	// function
+		
+	// [NewObject] DocumentFragment createDocumentFragment();
+	// function
+		
+	// [NewObject] Text createTextNode(DOMString data);
+	// function
+		
+	// [NewObject] CDATASection createCDATASection(DOMString data);
+	// function
+		
+	// [NewObject] Comment createComment(DOMString data);
+	// function
+		
+	// [NewObject] ProcessingInstruction createProcessingInstruction(DOMString target, DOMString data);
+	// function
+		
+	// [CEReactions, NewObject] Node importNode(Node node, optional boolean deep = false);
+	// function
+		
+	// [CEReactions] Node adoptNode(Node node);
+	// function
+		
+	// [NewObject] Attr createAttribute(DOMString localName);
+	// function
+		
+	// [NewObject] Attr createAttributeNS(DOMString? namespace, DOMString qualifiedName);
+	// function
+		
+	// [NewObject] Event createEvent(DOMString interface); // legacy
+	// function
+		
+	// [NewObject] Range createRange();
+	// function
+		
+	// NodeFilter.SHOW_ALL = 0xFFFFFFFF
+	// TODO 
+		
+	// [NewObject] NodeIterator createNodeIterator(Node root, optional unsigned long whatToShow = 0xFFFFFFFF, optional NodeFilter? filter = null);
+	// function
+		
+	// [NewObject] TreeWalker createTreeWalker(Node root, optional unsigned long whatToShow = 0xFFFFFFFF, optional NodeFilter? filter = null);
+	// function
+		
+// };
+	
+	// Source: DOM Standard (https://dom.spec.whatwg.org/)
+	// Document includes NonElementParentNode;
+
+	// Source: DOM Standard (https://dom.spec.whatwg.org/)
+	// Document includes DocumentOrShadowRoot;
+
+	// Source: DOM Standard (https://dom.spec.whatwg.org/)
+	// Document includes ParentNode;
+
+	// Source: DOM Standard (https://dom.spec.whatwg.org/)
+	// Document includes XPathEvaluatorBase;
+		
+	// Source: Font Metrics API Level 1 (https://drafts.css-houdini.org/font-metrics-api-1/)
+	// partial interface Document {
+	//		FontMetrics measureElement(Element element);
+			// function
+	//
+	//		FontMetrics measureText(DOMString text, StylePropertyMapReadOnly styleMap);
+			// function
+	//};
+		
+	// Source: Fullscreen API Standard (https://fullscreen.spec.whatwg.org/)
+	// partial interface Document {
+	//		[LegacyLenientSetter] readonly attribute boolean fullscreenEnabled;
+			console.log("document.fullscreenEnabled = "	+document.fullscreenEnabled);
+	//		
+	//		[LegacyLenientSetter, Unscopable] readonly attribute boolean fullscreen; // historical
+			console.log("document.fullscreen = "		+document.fullscreen);
+	//
+	//		Promise<undefined> exitFullscreen();
+			// function
+	//
+	//		attribute EventHandler onfullscreenchange;
+			console.log("document.onfullscreenchange = "+document.onfullscreenchange);
+	//
+	//		attribute EventHandler onfullscreenerror;
+			console.log("document.onfullscreenerror = "	+document.onfullscreenerror);
+	//};
+		
+	
+	printNodeProperties(document);
 }
+
+
+var document = new Document();
+printDocumentProperties(document);
