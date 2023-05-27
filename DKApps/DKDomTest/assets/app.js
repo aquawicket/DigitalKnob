@@ -54,11 +54,11 @@ CPP_DK_Create("TEST_Node.js");
 // [Document] https://dom.spec.whatwg.org/#interface-document
 CPP_DK_Create("DKDocumentDUK");
 CPP_DK_Create("TEST_Document.js");
-/*
+
 // [Element] https://dom.spec.whatwg.org/#interface-element
 CPP_DK_Create("DKElementDUK");
 CPP_DK_Create("TEST_Element.js");
-
+/*
 // [HTMLCollection] https://dom.spec.whatwg.org/#interface-htmlcollection
 //CPP_DK_Create("DKHTMLCollectionDUK");		//TODO
 //CPP_DK_Create("TEST_HTMLCollection.js");	//TODO
