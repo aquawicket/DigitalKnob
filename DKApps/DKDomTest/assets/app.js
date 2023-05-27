@@ -1,4 +1,3 @@
-/*
 // [Console] https://console.spec.whatwg.org
 CPP_DK_Create("DKConsoleDUK");
 CPP_DK_Create("TEST_Console.js");
@@ -7,6 +6,7 @@ CPP_DK_Create("TEST_Console.js");
 CPP_DK_Create("DKEventDUK");
 CPP_DK_Create("DKCustomEventDUK");
 CPP_DK_Create("DKEventTargetDUK");
+
 CPP_DK_Create("TEST_Event.js");
 CPP_DK_Create("TEST_CustomEvent.js");
 CPP_DK_Create("TEST_EventTarget.js");
@@ -16,6 +16,7 @@ CPP_DK_Create("DKUIEventDUK");
 CPP_DK_Create("TEST_UIEvent.js");
 CPP_DK_Create("DKFocusEventDUK");
 CPP_DK_Create("TEST_FocusEvent.js");
+/*
 CPP_DK_Create("DKMouseEventDUK");
 CPP_DK_Create("TEST_MouseEvent.js");
 CPP_DK_Create("DKWheelEventDUK");

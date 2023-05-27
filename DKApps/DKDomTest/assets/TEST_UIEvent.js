@@ -32,8 +32,18 @@ function printUIEventProperties(uievent){
 	//		The following support legacy user agents
 	//		readonly attribute unsigned long which;
 			console.log("uievent.which = "				+uievent.which)
-	// };	
+	// };
+	
+	printEventProperties(uievent);
 }
 
-const uievent = new UIEvent('myUiEvent', '', '')
-printUIEventProperties(uievent)
+function onuievent(event){
+	console.log("onuievent() \n");
+	printUIEventProperties(event);
+}
+	
+
+var uiEventTarget = new EventTarget();
+uiEventTarget.addEventListener("uievent", onuievent);
+var uievent = new UIEvent("uievent", "");
+uiEventTarget.dispatchEvent(uievent);

@@ -14,7 +14,7 @@ public:
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_DKRmlDocument.h //////\n");
 		
-		DKClass::DKCreate("DKRmlDocument");
+		DKRmlDocument* dkRmlDocument = (DKRmlDocument*)DKClass::DKCreate("DKRmlDocument");
 		
 		//printRmlDocumentProperties(dkRmlDocument);
 		return true;

@@ -19,13 +19,13 @@ public:
 	bool Init(){
 		
 		// constructor(DOMString type, optional CustomEventInit eventInitDict = {});
-		DKDuktape::AttachFunction("CPP_DKCustomEvent", 					DKCustomEventDUK::constructor);
+		DKDuktape::AttachFunction("CPP_DKCustomEventDUK", 					DKCustomEventDUK::constructor);
 
 		// readonly attribute any detail;
-		DKDuktape::AttachFunction("CPP_DKCustomEvent_detail", 			DKCustomEventDUK::detail);
+		DKDuktape::AttachFunction("CPP_DKCustomEventDUK_detail", 			DKCustomEventDUK::detail);
 
 		// undefined initCustomEvent(DOMString type, optional boolean bubbles = false, optional boolean cancelable = false, optional any detail = null); // legacy
-		DKDuktape::AttachFunction("CPP_DKCustomEvent_initCustomEvent", 	DKCustomEventDUK::initCustomEvent);
+		DKDuktape::AttachFunction("CPP_DKCustomEventDUL_initCustomEvent", 	DKCustomEventDUK::initCustomEvent);
 		
 	
 		////// Load .js files //////

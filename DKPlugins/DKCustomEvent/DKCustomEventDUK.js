@@ -36,7 +36,7 @@ var CustomEvent = function CustomEvent(type, eventInitDict, address) {
 	var event = Event.call(this, type, eventInitDict)
 	
 	// Make properties (Read Only) after assignment
-	Object.defineProperty(this, "detail", 		{ set: undefined })
+	//Object.defineProperty(this, "detail", 		{ set: undefined })
 	
 	return event
 };

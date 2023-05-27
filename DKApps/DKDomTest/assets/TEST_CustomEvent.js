@@ -13,4 +13,18 @@ function printCustomEventProperties(customevent){
 	
 	// undefined initCustomEvent(DOMString type, optional boolean bubbles = false, optional boolean cancelable = false, optional any detail = null); // legacy
 	// function
+	
+	printEventProperties(customEvent);
 }
+
+function onCustomEvent(event) {
+		console.log("onCustomEvent() \n");
+		printCustomEventProperties(event);
+		return true;
+}
+	
+var customEventTarget = new EventTarget();
+customEventTarget.addEventListener("customEvent", onCustomEvent);
+var customEvent = new CustomEvent("customEvent", "");
+customEvent.detail = "{name : 'myCustomEvent'}";
+customEventTarget.dispatchEvent(customEvent);
