@@ -3,4 +3,11 @@
 console.log("\n////// TEST_Navigator.js //////")
 
 
-// TODO
+function printNavigatorProperties(navigator){
+
+	// TODO
+}
+
+
+var navigator = new Navigator();
+printNavigatorProperties(navigator);

@@ -1,11 +1,50 @@
-// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/Location.idl
-// [SOURCE] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-location-interface
+// [IDL] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-location-interface
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Location
 console.log("\n////// TEST_Location.js //////")
 
+
 function printLocationProperties(location){
-	console.log("location.href = "	+location.href)	
+	
+	// [LegacyUnforgeable] stringifier attribute USVString href;
+	console.log("location.href = "				+location.href);
+	
+	// [LegacyUnforgeable] readonly attribute USVString origin;
+	console.log("location.origin = "			+location.origin);
+	
+	// [LegacyUnforgeable] attribute USVString protocol;
+	console.log("location.protocol = "			+location.protocol);
+	
+	// [LegacyUnforgeable] attribute USVString host;
+	console.log("location.host = "				+location.host);
+	
+	// [LegacyUnforgeable] attribute USVString hostname;
+	console.log("location.hostname = "			+location.hostname);
+	
+	// [LegacyUnforgeable] attribute USVString port;
+	console.log("location.port = "				+location.port);
+	
+	// [LegacyUnforgeable] attribute USVString pathname;
+	console.log("location.pathname = "			+location.pathname);
+	
+	// [LegacyUnforgeable] attribute USVString search;
+	console.log("location.search = "			+location.search);
+	
+	// [LegacyUnforgeable] attribute USVString hash;
+	console.log("location.hash = "				+location.hash);
+	
+	// [LegacyUnforgeable] undefined assign(USVString url);
+	// function
+		
+	// [LegacyUnforgeable] undefined replace(USVString url);
+	// function
+		
+	// [LegacyUnforgeable] undefined reload();
+	// function
+	
+	// [LegacyUnforgeable, SameObject] readonly attribute DOMStringList ancestorOrigins;
+	console.log("location.ancestorOrigins = "	+location.ancestorOrigins);
 }
 
-const myLocation = new Location();
-printLocationProperties(myLocation)
+
+var location = new Location();
+printLocationProperties(location);

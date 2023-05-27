@@ -34,7 +34,7 @@ CPP_DK_Create("TEST_DragEvent.js");
 // [Window] https://html.spec.whatwg.org/
 CPP_DK_Create("DKWindowDUK");
 CPP_DK_Create("TEST_Window.js");
-/*
+
 // [Screen] https://w3c.github.io/csswg-drafts/cssom-view/#the-screen-interface
 CPP_DK_Create("DKScreenDUK");
 CPP_DK_Create("TEST_Screen.js");
@@ -46,7 +46,7 @@ CPP_DK_Create("TEST_Navigator.js");
 // [Location] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-location-interface
 CPP_DK_Create("DKLocationDUK");
 CPP_DK_Create("TEST_Location.js");
-
+/*
 // [Node] https://dom.spec.whatwg.org/#interface-node
 CPP_DK_Create("DKNodeDUK");
 CPP_DK_Create("TEST_Node.js");

@@ -24,5 +24,5 @@ function printScreenProperties(screen){
 	console.log("screen.pixelDepth = "	+screen.pixelDepth	+"\n");
 }
 
-const screen = new Screen();
+var screen = new Screen();
 printScreenProperties(screen);
