@@ -5,6 +5,8 @@ console.log("\n////// TEST_Event.js //////")
 
 function printEventProperties(event){
 	
+	console.log("event = "							+event)
+	
 	// readonly attribute DOMString type;
 	console.log("event.type = "						+event.type)
 	
