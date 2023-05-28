@@ -11,7 +11,6 @@
 typedef std::string DragEventInit;
 
 
-// Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
 // [Exposed=Window]
 // interface DragEvent : MouseEvent {
 class DKDragEvent : public DKMouseEvent
