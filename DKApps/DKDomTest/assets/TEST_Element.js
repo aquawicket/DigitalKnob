@@ -68,7 +68,7 @@ function printElementProperties(element){
 	console.log("element.hasAttributeNS = "			+element.hasAttributeNS);
 		
 	// Attr? getAttributeNode(DOMString qualifiedName);
-	console.log("element.qualifiedName = "			+element.qualifiedName);
+	console.log("element.getAttributeNode = "		+element.getAttributeNode);
 		
 	// Attr? getAttributeNodeNS(DOMString? namespace, DOMString localName);
 	console.log("element.getAttributeNodeNS = "		+element.getAttributeNodeNS);
