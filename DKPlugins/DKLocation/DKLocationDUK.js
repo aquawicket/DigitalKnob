@@ -6,7 +6,7 @@
 // [Exposed=Window]
 // interface Location { // but see also additional creation steps and overridden internal methods
 var Location = function Location(address) {
-	console.log("Location("+address+")")
+	//console.log("Location("+address+")")
 	
 	if(address)
 		this.address = address;
@@ -78,17 +78,17 @@ var Location = function Location(address) {
     })
 	
 	// [LegacyUnforgeable] undefined assign(USVString url);
-	Window.prototype.assign = function assign(url) {
+	Location.prototype.assign = function assign(url) {
 		return CPP_DKLocationDUK_assign(this.address, url)
     }
 	
 	// [LegacyUnforgeable] undefined replace(USVString url);
-	Window.prototype.replace = function replace(url) {
+	Location.prototype.replace = function replace(url) {
 		return CPP_DKLocationDUK_replace(this.address, url)
     }
 	
 	// [LegacyUnforgeable] undefined reload();
-	Window.prototype.reload = function reload() {
+	Location.prototype.reload = function reload() {
 		return CPP_DKLocationDUK_reload(this.address)
     }
 	
