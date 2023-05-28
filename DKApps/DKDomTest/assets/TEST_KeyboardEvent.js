@@ -6,7 +6,7 @@ console.log("\n////// TEST_KeyboardEvent.js //////");
 function printKeyboardEventProperties(keyboardevent){
 	
 	// constructor(DOMString type, optional KeyboardEventInit eventInitDict = {});
-	// function
+	console.log("keyboardevent = "							+keyboardevent);
 		
 	// KeyLocationCode
 	// const unsigned long DOM_KEY_LOCATION_STANDARD = 0x00;
@@ -64,17 +64,17 @@ function printKeyboardEventProperties(keyboardevent){
 	//		optional boolean altKey = false,
 	//		optional boolean shiftKey = false,
 	//		optional boolean metaKey = false);
-			// function
+			console.log("keyboardevent.initKeyboardEvent = "+keyboardevent.initKeyboardEvent);
 	// };
 		
 	// Source: UI Events (https://www.w3.org/TR/uievents/)
 	// partial interface KeyboardEvent {
 	//		// The following support legacy user agents
 	//		readonly attribute unsigned long charCode;
-			console.log("keyboardevent.charCode = "		+keyboardevent.charCode);
+			console.log("keyboardevent.charCode = "			+keyboardevent.charCode);
 	//
 	//		readonly attribute unsigned long keyCode;
-			console.log("keyboardevent.keyCode = "		+keyboardevent.keyCode);
+			console.log("keyboardevent.keyCode = "			+keyboardevent.keyCode);
 	// };
 	
 	
