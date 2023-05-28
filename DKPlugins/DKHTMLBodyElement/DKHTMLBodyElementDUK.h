@@ -18,7 +18,7 @@ public:
 		// TODO
 
 		////// Load .js files //////
-		DKClass::DKCreate("DKHTMLElement/DKHTMLBodyElementDUK.js");
+		DKClass::DKCreate("DKHTMLBodyElement/DKHTMLBodyElementDUK.js");
 		
 		return true;
 	}
