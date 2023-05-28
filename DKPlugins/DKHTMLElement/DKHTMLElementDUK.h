@@ -183,7 +183,7 @@ public:
 	}
 	
 	// [CEReactions] attribute boolean inert;
-	static int hidden(duk_context* ctx){
+	static int inert(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
 			eventTarget(ctx)->inert(GetBool(ctx));
@@ -207,7 +207,7 @@ public:
 	}
 	
 	// readonly attribute DOMString accessKeyLabel;
-	static int accessKey(duk_context* ctx){
+	static int accessKeyLabel(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
 			eventTarget(ctx)->accessKeyLabel(GetString(ctx));
