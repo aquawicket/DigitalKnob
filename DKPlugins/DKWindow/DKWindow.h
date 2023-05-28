@@ -141,6 +141,7 @@ public:
 	//object on the prototype chain. Indeed, this does not make the global object an exotic object.
 	//Indexed access is taken care of by the WindowProxy exotic object.
 	// getter object (DOMString name);
+	// TODO
 	
 	// the user agent
 	// readonly attribute Navigator navigator;
@@ -157,21 +158,26 @@ public:
 	
 	//user prompts
 	// undefined alert();
+	virtual bool alert() {
+		DKDEBUGFUNC();
+		return DKTODO();
+	}
+	
 	// undefined alert(DOMString message);
-	virtual bool alert(DOMString& _message) {
-		DKDEBUGFUNC(_message);
+	virtual bool alert(DOMString& message) {
+		DKDEBUGFUNC(message);
 		return DKTODO();
 	}
 	
 	// boolean confirm(optional DOMString message = "");
-	virtual bool confirm(DOMString& _message) {
-		DKDEBUGFUNC(_message);
+	virtual bool confirm(DOMString& message) {
+		DKDEBUGFUNC(message);
 		return DKTODO();
 	}
 	
 	// DOMString? prompt(optional DOMString message = "", optional DOMString default = "");
-	virtual bool prompt(DOMString& _message, DOMString _default) {
-		DKDEBUGFUNC(_message, _default);
+	virtual bool prompt(DOMString& message, DOMString default) {
+		DKDEBUGFUNC(message, default);
 		return DKTODO();
 	}
 	
@@ -182,9 +188,14 @@ public:
 	}
 	
 	// undefined postMessage(any message, USVString targetOrigin, optional sequence<object> transfer = []);
+	virtual bool postMessage(DKString& message, USVString& targetOrigin, DKString& transfer) {
+		DKDEBUGFUNC(message, targetOrigin, transfer);
+		return DKTODO();
+	}
+	
 	// undefined postMessage(any message, optional WindowPostMessageOptions options = {});
-	virtual bool postMessage(DKString& message, USVString& targetOrigin) {
-		DKDEBUGFUNC(message, targetOrigin);
+	virtual bool postMessage(DKString& message, DKString& options) {
+		DKDEBUGFUNC(message, options);
 		return DKTODO();
 	}
 	
@@ -249,37 +260,45 @@ public:
 	// [SecureContext]
 	// partial interface Window {
 	//		[SameObject] readonly attribute CookieStore cookieStore;
+			virtual DKString cookieStore()						{ return ""; }	// getter
+			virtual void cookieStore(const DKString&)			{ } 			// setter
 	// };
 
 	// Source: Digital Goods API (https://wicg.github.io/digital-goods/)
 	// partial interface Window {
 	//		[SecureContext] Promise<DigitalGoodsService> getDigitalGoodsService(DOMString serviceProvider);
+			virtual bool getDigitalGoodsService(DKString& serviceProvider) {
+				DKDEBUGFUNC();
+				return DKTODO();
+			}
 	// };
 
 	// Source: Fenced frame (https://wicg.github.io/fenced-frame/)
 	// partial interface Window {
 	//		// Collection of fenced frame APIs
 	//		readonly attribute Fence? fence;
+			virtual DKString fence()							{ return ""; }	// getter
+			virtual void fence(const DKString&)					{ } 			// setter
 	// };
 
 	// Source: File System Access (https://wicg.github.io/file-system-access/)
 	// [SecureContext]
 	// partial interface Window {
 	//		Promise<sequence<FileSystemFileHandle>> showOpenFilePicker(optional OpenFilePickerOptions options = {});
-			virtual bool showOpenFilePicker() {
-				DKDEBUGFUNC();
+			virtual bool showOpenFilePicker(DKString& options) {
+				DKDEBUGFUNC(options);
 				return DKTODO();
 			}
 	//
 	//		Promise<FileSystemFileHandle> showSaveFilePicker(optional SaveFilePickerOptions options = {});
-			virtual bool showSaveFilePicker() {
-				DKDEBUGFUNC();
+			virtual bool showSaveFilePicker(DKString& options) {
+				DKDEBUGFUNC(options);
 				return DKTODO();
 			}
 	//
 	//		Promise<FileSystemDirectoryHandle> showDirectoryPicker(optional DirectoryPickerOptions options = {});
-			virtual bool showDirectoryPicker() {
-				DKDEBUGFUNC();
+			virtual bool showDirectoryPicker(DKString& options) {
+				DKDEBUGFUNC(options);
 				return DKTODO();
 			}
 	// };
@@ -288,8 +307,8 @@ public:
 	// [SecureContext]
 	// partial interface Window {
 	//		Promise<sequence<FontData>> queryLocalFonts(optional QueryOptions options = {});
-			virtual bool queryLocalFonts() {
-				DKDEBUGFUNC();
+			virtual bool queryLocalFonts(DKString& options) {
+				DKDEBUGFUNC(options);
 				return DKTODO();
 			}
 	// };
@@ -297,12 +316,19 @@ public:
 	// Source: Manifest Incubations (https://wicg.github.io/manifest-incubations/)
 	// partial interface Window {
 	//		attribute EventHandler onappinstalled;
+			virtual DKString onappinstalled()							{ return ""; }	// getter
+			virtual void onappinstalled(const DKString&)				{ } 			// setter
+	//
 	//		attribute EventHandler onbeforeinstallprompt;
+			virtual DKString onbeforeinstallprompt()					{ return ""; }	// getter
+			virtual void onbeforeinstallprompt(const DKString&)			{ } 			// setter
 	// };
 
 	// Source: Portals (https://wicg.github.io/portals/)
 	// partial interface Window {
 	//		readonly attribute PortalHost? portalHost;
+			virtual DKString portalHost()								{ return ""; }	// getter
+			virtual void portalHost(const DKString&)					{ } 			// setter
 	// };
 
 	// Source: Web Speech API (https://wicg.github.io/speech-api/)
@@ -322,13 +348,17 @@ public:
 	// Source: CSS Spatial Navigation Level 1 (https://www.w3.org/TR/css-nav-1/)
 	// partial interface Window {
 	//		undefined navigate(SpatialNavigationDirection dir);
+			virtual bool navigate(DKString& dir) {
+				DKDEBUGFUNC(dir);
+				return DKTODO();
+			}
 	// };
 
 	// Source: CSS Object Model (CSSOM) (https://www.w3.org/TR/cssom-1/)
 	// partial interface Window {
 	//		[NewObject] CSSStyleDeclaration getComputedStyle(Element elt, optional CSSOMString? pseudoElt);
-			virtual bool getComputedStyle() {
-				DKDEBUGFUNC();
+			virtual bool getComputedStyle(DKString& elt, DKString& pseudoElt) {
+				DKDEBUGFUNC(elt, pseudoElt);
 				return DKTODO();
 			}
 	// };
@@ -357,8 +387,8 @@ public:
 			}
 	//
 	//		undefined moveBy(long x, long y);
-			virtual bool moveBy(int& deltaX, int& deltaY) {
-				DKDEBUGFUNC(deltaX, deltaY);
+			virtual bool moveBy(int& x, int& y) {
+				DKDEBUGFUNC(x, y);
 				return DKTODO();
 			}
 	//
@@ -369,8 +399,8 @@ public:
 			}
 	//
 	//		undefined resizeBy(long x, long y);
-			virtual bool resizeBy(int& xDelta, int& yDelta) {
-				DKDEBUGFUNC(xDelta, yDelta);
+			virtual bool resizeBy(int& x, int& y) {
+				DKDEBUGFUNC(x, y);
 				return DKTODO();
 			}
 	//
@@ -423,47 +453,53 @@ public:
 	///
 	//		// client
 	//		[Replaceable] readonly attribute long screenX;
-			virtual int screenX()						{ return 0; }	// getter
-			virtual void screenX(const int&)			{ } 			// setter
+			virtual int screenX()							{ return 0; }	// getter
+			virtual void screenX(const int&)				{ } 			// setter
 	//
 	//		[Replaceable] readonly attribute long screenLeft;
-			virtual int screenLeft()					{ return 0; }	// getter
-			virtual void screenLeft(const int&)			{ } 			// setter
+			virtual int screenLeft()						{ return 0; }	// getter
+			virtual void screenLeft(const int&)				{ } 			// setter
 	//
 	//		[Replaceable] readonly attribute long screenY;
-			virtual int screenY()						{ return 0; }	// getter
-			virtual void screenY(const int&)			{ } 			// setter
+			virtual int screenY()							{ return 0; }	// getter
+			virtual void screenY(const int&)				{ } 			// setter
 	//
 	//		[Replaceable] readonly attribute long screenTop;
-			virtual int screenTop()						{ return 0; }	// getter
-			virtual void screenTop(const int&)			{ } 			// setter
+			virtual int screenTop()							{ return 0; }	// getter
+			virtual void screenTop(const int&)				{ } 			// setter
 	//
 	//		[Replaceable] readonly attribute long outerWidth;
-			virtual int outerWidth()					{ return 0; }	// getter
-			virtual void outerWidth(const int&)			{ } 			// setter
+			virtual int outerWidth()						{ return 0; }	// getter
+			virtual void outerWidth(const int&)				{ } 			// setter
 	//
 	//		[Replaceable] readonly attribute long outerHeight;
-			virtual int outerHeight()					{ return 0; }	// getter
-			virtual void outerHeight(const int&)		{ } 			// setter
+			virtual int outerHeight()						{ return 0; }	// getter
+			virtual void outerHeight(const int&)			{ } 			// setter
 	//
 	//		[Replaceable] readonly attribute double devicePixelRatio;
-			virtual double devicePixelRatio()			{ return 0; }	// getter
-			virtual void devicePixelRatio(const double&){ } 			// setter
+			virtual double devicePixelRatio()				{ return 0; }	// getter
+			virtual void devicePixelRatio(const double&)	{ } 			// setter
 	// };
 
 	// Source: DeviceOrientation Event Specification (https://www.w3.org/TR/orientation-event/)
 	// partial interface Window {
 	//		[SecureContext] attribute EventHandler ondeviceorientation;
+			virtual DKString ondeviceorientation()						{ return ""; }	// getter
+			virtual void ondeviceorientation(const DKString&)			{ } 			// setter
 	// };
 
 	// Source: DeviceOrientation Event Specification (https://www.w3.org/TR/orientation-event/)
 	// partial interface Window {
 	//		[SecureContext] attribute EventHandler ondeviceorientationabsolute;
+			virtual DKString ondeviceorientationabsolute()				{ return ""; }	// getter
+			virtual void ondeviceorientationabsolute(const DKString&)	{ } 			// setter
 	// };
 
 	// Source: DeviceOrientation Event Specification (https://www.w3.org/TR/orientation-event/)
 	//	partial interface Window {
 	//		[SecureContext] attribute EventHandler ondevicemotion;
+			virtual DKString ondevicemotion()							{ return ""; }	// getter
+			virtual void ondevicemotion(const DKString&)				{ } 			// setter
 	// };
 
 	// Source: requestIdleCallback() (https://www.w3.org/TR/requestidlecallback/)
@@ -494,6 +530,10 @@ public:
 	// partial interface Window {
 	//		[SecureContext]
 	//		Promise<ScreenDetails> getScreenDetails();
+			virtual bool getScreenDetails() {
+				DKDEBUGFUNC();
+				return DKTODO();
+			}
 	// };
 };
 
