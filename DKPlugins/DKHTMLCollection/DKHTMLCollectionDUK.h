@@ -15,16 +15,16 @@ class DKHTMLCollectionDUK : public DKObjectT<DKHTMLCollectionDUK>
 public:
 	bool Init(){
 		
-		DKDuktape::AttachFunction("CPP_DKHTMLCollectionDUK", DKHTMLCollectionDUK::constructor);
+		DKDuktape::AttachFunction("CPP_DKHTMLCollectionDUK", 			DKHTMLCollectionDUK::constructor);
 		
 		// readonly attribute unsigned long length;
-		DKDuktape::AttachFunction("CPP_DKHTMLCollectionDUK_length", DKHTMLCollectionDUK::length);
+		DKDuktape::AttachFunction("CPP_DKHTMLCollectionDUK_length", 	DKHTMLCollectionDUK::length);
 
 		// getter Element? item(unsigned long index);
-		//DKDuktape::AttachFunction("CPP_DKHTMLCollectionDUK_item", DKHTMLCollectionDUK::item);
+		DKDuktape::AttachFunction("CPP_DKHTMLCollectionDUK_item", 		DKHTMLCollectionDUK::item);
 	
 		// getter Element? namedItem(DOMString name);
-		//DKDuktape::AttachFunction("CPP_DKHTMLCollectionDUK_namedItem", DKHTMLCollectionDUK::namedItem);
+		DKDuktape::AttachFunction("CPP_DKHTMLCollectionDUK_namedItem", 	DKHTMLCollectionDUK::namedItem);
 		
 	
 		////// Load .js files
@@ -82,10 +82,16 @@ public:
 	}
 	
 	// getter Element? item(unsigned long index);
-	// TODO
+	static int item(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		return DKTODO();
+	}
 	
 	// getter Element? namedItem(DOMString name);
-	// TODO
+	static int namedItem(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		return DKTODO();
+	}
 		
 };
 REGISTER_OBJECT(DKHTMLCollectionDUK, true)

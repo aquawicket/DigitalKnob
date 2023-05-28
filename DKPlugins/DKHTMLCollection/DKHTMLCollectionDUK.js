@@ -19,10 +19,14 @@ var HTMLCollection = function HTMLCollection(address) {
     })
 	
 	// getter Element? item(unsigned long index);
-	// TODO
+	HTMLCollection.prototype.item = function item(index) {
+		return CPP_DKHTMLCollectionDUK_item(this.address, index);
+    }
 	
 	// getter Element? namedItem(DOMString name);
-	// TODO
+	HTMLCollection.prototype.namedItem = function namedItem(name) {
+		return CPP_DKHTMLCollectionDUK_namedItem(this.address, name);
+    }
 	
 //};
 		
