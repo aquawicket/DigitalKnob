@@ -1,9 +1,7 @@
-// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/WheelEvent.idl
-// [SOURCE] https://w3c.github.io/uievents/#events-wheelevents
+// [IDL] https://w3c.github.io/uievents/#events-wheelevents
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent
 
 
-// Source: UI Events (https://www.w3.org/TR/uievents/)
 // [Exposed=Window]
 // interface WheelEvent : MouseEvent {
 // constructor(DOMString type, optional WheelEventInit eventInitDict = {});
@@ -18,10 +16,25 @@ var WheelEvent = function WheelEvent(type, eventInitDict, address) {
 	
 	// DeltaModeCode
 	// const unsigned long DOM_DELTA_PIXEL = 0x00;
+	Object.defineProperty(this, "DOM_DELTA_PIXEL", {
+        get: function DOM_DELTA_PIXEL() 	{ return CPP_DKWheelEventDUK_DOM_DELTA_PIXEL(this.address) },
+		//set: function DOM_DELTA_PIXEL(num) { return CPP_DKWheelEventDUK_DOM_DELTA_PIXEL(this.address, num) },
+		//configurable: true,
+    })
 		
 	// const unsigned long DOM_DELTA_LINE  = 0x01;
+	Object.defineProperty(this, "DOM_DELTA_LINE", {
+        get: function DOM_DELTA_LINE() 		{ return CPP_DKWheelEventDUK_DOM_DELTA_LINE(this.address) },
+		//set: function DOM_DELTA_LINE(num) { return CPP_DKWheelEventDUK_DOM_DELTA_LINE(this.address, num) },
+		//configurable: true,
+    })
 		
 	// const unsigned long DOM_DELTA_PAGE  = 0x02;
+	Object.defineProperty(this, "DOM_DELTA_PAGE", {
+        get: function DOM_DELTA_PAGE() 		{ return CPP_DKWheelEventDUK_DOM_DELTA_PAGE(this.address) },
+		//set: function DOM_DELTA_PAGE(num) { return CPP_DKWheelEventDUK_DOM_DELTA_PAGE(this.address, num) },
+		//configurable: true,
+    })
 		
 	// readonly attribute double deltaX;
 	Object.defineProperty(this, "deltaX", {
