@@ -5,23 +5,25 @@ console.log("\n////// TEST_Screen.js //////");
 
 function printScreenProperties(screen){
 	
+	console.log("screen = "				+screen);
+	
 	// readonly attribute long availWidth;
-	console.log("screen.availWidth = "	+screen.availWidth	+"\n");
+	console.log("screen.availWidth = "	+screen.availWidth);
 	
 	// readonly attribute long availHeight;
-	console.log("screen.availHeight = "	+screen.availHeight	+"\n");
+	console.log("screen.availHeight = "	+screen.availHeight);
 	
 	// readonly attribute long width;
-	console.log("screen.width = "		+screen.width		+"\n");
+	console.log("screen.width = "		+screen.width);
 	
 	// readonly attribute long height;
-	console.log("screen.height = "		+screen.height		+"\n");
+	console.log("screen.height = "		+screen.height);
 	
 	// readonly attribute unsigned long colorDepth;
-	console.log("screen.colorDepth = "	+screen.colorDepth	+"\n");
+	console.log("screen.colorDepth = "	+screen.colorDepth);
 	
 	// readonly attribute unsigned long pixelDepth;
-	console.log("screen.pixelDepth = "	+screen.pixelDepth	+"\n");
+	console.log("screen.pixelDepth = "	+screen.pixelDepth);
 }
 
 var screen = new Screen();

@@ -5,6 +5,8 @@ console.log("\n////// TEST_Node.js //////")
 
 function printNodeProperties(node){
 	
+	console.log("node = "											+node);
+	
 	// const unsigned short ELEMENT_NODE = 1;
 	console.log("node.ELEMENT_NODE = "								+node.ELEMENT_NODE);
 	
@@ -57,7 +59,7 @@ function printNodeProperties(node){
 	console.log("node.ownerDocument = "								+node.ownerDocument);
 	
 	// Node getRootNode(optional GetRootNodeOptions options = {});
-	// function
+	console.log("node.getRootNode = "								+node.getRootNode);
 	
 	// readonly attribute Node? parentNode;
 	console.log("node.parentNode = "								+node.parentNode);
@@ -66,7 +68,7 @@ function printNodeProperties(node){
 	console.log("node.parentElement = "								+node.parentElement);
 	
 	// boolean hasChildNodes();
-	// function
+	console.log("node.hasChildNodes = "								+node.hasChildNodes);
 	
 	// [SameObject] readonly attribute NodeList childNodes;
 	console.log("node.childNodes = "								+node.childNodes);
@@ -90,16 +92,16 @@ function printNodeProperties(node){
 	console.log("node.textContent = "								+node.textContent);
 	
 	// [CEReactions] undefined normalize();
-	// function
+	console.log("node.normalize = "									+node.normalize);
 		
 	// [CEReactions, NewObject] Node cloneNode(optional boolean deep = false);
-	// function
+	console.log("node.cloneNode = "									+node.cloneNode);
 		
 	// boolean isEqualNode(Node? otherNode);
-	// function
+	console.log("node.isEqualNode = "								+node.isEqualNode);
 		
 	// boolean isSameNode(Node? otherNode); // legacy alias of ===
-	// function
+	console.log("node.isSameNode = "								+node.isSameNode);
 	
 	// const unsigned short DOCUMENT_POSITION_DISCONNECTED = 0x01;
 	console.log("node.DOCUMENT_POSITION_DISCONNECTED = "			+node.DOCUMENT_POSITION_DISCONNECTED);
@@ -120,31 +122,31 @@ function printNodeProperties(node){
 	console.log("node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC = "	+node.DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC);
 	
 	// unsigned short compareDocumentPosition(Node other);
-	// function
+	console.log("node.compareDocumentPosition = "					+node.compareDocumentPosition);
 		
 	// boolean contains(Node? other);
-	// function
+	console.log("node.contains = "									+node.contains);
 		
 	// DOMString? lookupPrefix(DOMString? namespace);
-	// function
+	console.log("node.lookupPrefix = "								+node.lookupPrefix);
 		
 	// DOMString? lookupNamespaceURI(DOMString? prefix);
-	// function
+	console.log("node.lookupNamespaceURI = "						+node.lookupNamespaceURI);
 		
 	// boolean isDefaultNamespace(DOMString? namespace);
-	// function
+	console.log("node.isDefaultNamespace = "						+node.isDefaultNamespace);
 		
 	// [CEReactions] Node insertBefore(Node node, Node? child);
-	// function
+	console.log("node.insertBefore = "								+node.insertBefore);
 		
 	// [CEReactions] Node appendChild(Node node);
-	// function
+	console.log("node.appendChild = "								+node.appendChild);
 		
 	// [CEReactions] Node replaceChild(Node node, Node child);
-	// function
+	console.log("node.replaceChild = "								+node.replaceChild);
 		
 	// [CEReactions] Node removeChild(Node child);
-	// function
+	console.log("node.removeChild = "								+node.removeChild);
 	
 	
 	printEventTargetProperties(node);

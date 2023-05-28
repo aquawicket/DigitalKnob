@@ -49,7 +49,7 @@ function printKeyboardEventProperties(keyboardevent){
 	console.log("keyboardevent.isComposing = "				+keyboardevent.isComposing);
 	
 	// boolean getModifierState(DOMString keyArg);
-	// function
+	console.log("keyboardevent.getModifierState = "			+keyboardevent.getModifierState);
 	
 	// Source: UI Events (https://www.w3.org/TR/uievents/)
 	// partial interface KeyboardEvent {
@@ -64,17 +64,17 @@ function printKeyboardEventProperties(keyboardevent){
 	//		optional boolean altKey = false,
 	//		optional boolean shiftKey = false,
 	//		optional boolean metaKey = false);
-			console.log("keyboardevent.initKeyboardEvent = "+keyboardevent.initKeyboardEvent);
+			console.log("keyboardevent.initKeyboardEvent = "	+keyboardevent.initKeyboardEvent);
 	// };
 		
 	// Source: UI Events (https://www.w3.org/TR/uievents/)
 	// partial interface KeyboardEvent {
 	//		// The following support legacy user agents
 	//		readonly attribute unsigned long charCode;
-			console.log("keyboardevent.charCode = "			+keyboardevent.charCode);
+			console.log("keyboardevent.charCode = "				+keyboardevent.charCode);
 	//
 	//		readonly attribute unsigned long keyCode;
-			console.log("keyboardevent.keyCode = "			+keyboardevent.keyCode);
+			console.log("keyboardevent.keyCode = "				+keyboardevent.keyCode);
 	// };
 	
 	

@@ -6,7 +6,7 @@ console.log("\n////// TEST_UIEvent.js //////")
 function printUIEventProperties(uievent){
 	
 	// constructor(DOMString type, optional UIEventInit eventInitDict = {});
-	// function
+	console.log("uievent = "					+uievent)
 		
 	// readonly attribute Window? view;
 	console.log("uievent.view = "				+uievent.view)
@@ -24,7 +24,7 @@ function printUIEventProperties(uievent){
 	// partial interface UIEvent {
 	// 		Deprecated in this specification
 	//		undefined initUIEvent(DOMString typeArg, optional boolean bubblesArg = false, optional boolean cancelableArg = false, optional Window? viewArg = null, optional long detailArg = 0);
-			// function
+			console.log("uievent.initUIEvent = "		+uievent.initUIEvent)
 	//	};
 
 	// Source: UI Events (https://www.w3.org/TR/uievents/)

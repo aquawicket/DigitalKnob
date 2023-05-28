@@ -5,14 +5,16 @@ console.log("\n////// TEST_HTMLCollection.js //////")
 
 function printHTMLCollectionProperties(htmlCollection){
 		
+	console.log("htmlCollection = "				+htmlCollection);
+	
 	// readonly attribute unsigned long length;
-	console.log("htmlCollection.length = "	+htmlCollection.length);
+	console.log("htmlCollection.length = "		+htmlCollection.length);
 		
 	// getter Element? item(unsigned long index);
-	// function
+	console.log("htmlCollection.item = "		+htmlCollection.item);
 		
 	// getter Element? namedItem(DOMString name);
-	// function
+	console.log("htmlCollection.namedItem = "	+htmlCollection.namedItem);
 }
 
 

@@ -6,24 +6,24 @@ console.log("\n////// TEST_InputEvent.js //////");
 function printInputEventProperties(inputevent){
 	
 	// constructor(DOMString type, optional InputEventInit eventInitDict = {});
-	// function
+	console.log("inputevent = "						+inputevent);
 		
 	// readonly attribute DOMString? data;	
-	console.log("inputevent.data = "		+inputevent.data);
+	console.log("inputevent.data = "				+inputevent.data);
 	
 	//readonly attribute boolean isComposing;
-	console.log("inputevent.isComposing = "	+inputevent.isComposing);
+	console.log("inputevent.isComposing = "			+inputevent.isComposing);
 	
 	//readonly attribute DOMString inputType;
-	console.log("inputevent.inputType = "	+inputevent.inputType);
+	console.log("inputevent.inputType = "			+inputevent.inputType);
 	
 	// Source: Input Events Level 2 (https://www.w3.org/TR/input-events-2/)
 	// partial interface InputEvent {
 	//    	readonly attribute DataTransfer? dataTransfer;
-			console.log("inputevent.dataTransfer = "+inputevent.dataTransfer);
+			console.log("inputevent.dataTransfer = "	+inputevent.dataTransfer);
 	//		
 	//    	sequence<StaticRange> getTargetRanges();
-			// function
+			console.log("inputevent.getTargetRanges = "	+inputevent.getTargetRanges);
 	// };
 
 

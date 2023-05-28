@@ -6,94 +6,94 @@ console.log("\n////// TEST_Document.js //////")
 function printDocumentProperties(document){
 	
 	// constructor();
-	// function
+	console.log("document = "								+document);
 		
 	// [SameObject] readonly attribute DOMImplementation implementation;
-	console.log("document.implementation = "			+document.implementation);
+	console.log("document.implementation = "				+document.implementation);
 	
 	// readonly attribute USVString URL;
-	console.log("document.URL = "						+document.URL);
+	console.log("document.URL = "							+document.URL);
 	
 	// readonly attribute USVString documentURI;
-	console.log("document.documentURI = "				+document.documentURI);
+	console.log("document.documentURI = "					+document.documentURI);
 	
 	// readonly attribute DOMString compatMode;
-	console.log("document.compatMode = "				+document.compatMode);
-	
+	console.log("document.compatMode = "					+document.compatMode);
+
 	// readonly attribute DOMString characterSet;
-	console.log("document.characterSet = "				+document.characterSet);
+	console.log("document.characterSet = "					+document.characterSet);
 	
 	// readonly attribute DOMString charset; // legacy alias of .characterSet
-	console.log("document.charset = "					+document.charset);
+	console.log("document.charset = "						+document.charset);
 	
 	// readonly attribute DOMString inputEncoding; // legacy alias of .characterSet
-	console.log("document.inputEncoding = "				+document.inputEncoding);
+	console.log("document.inputEncoding = "					+document.inputEncoding);
 	
 	// readonly attribute DOMString contentType;
-	console.log("document.contentType = "				+document.contentType);
+	console.log("document.contentType = "					+document.contentType);
 	
 	// readonly attribute DocumentType? doctype;
-	console.log("document.doctype = "					+document.doctype);
+	console.log("document.doctype = "						+document.doctype);
 	
 	// readonly attribute Element? documentElement;
-	console.log("document.documentElement = "			+document.documentElement);
+	console.log("document.documentElement = "				+document.documentElement);
 	
 	// HTMLCollection getElementsByTagName(DOMString qualifiedName);
-	// function
+	console.log("document.getElementsByTagName = "			+document.getElementsByTagName);
 		
 	// HTMLCollection getElementsByTagNameNS(DOMString? namespace, DOMString localName);
-	// function
+	console.log("document.getElementsByTagNameNS = "		+document.getElementsByTagNameNS);
 		
 	// HTMLCollection getElementsByClassName(DOMString classNames);
-	// function
+	console.log("document.getElementsByClassName = "		+document.getElementsByClassName);
 		
 	// [CEReactions, NewObject] Element createElement(DOMString localName, optional (DOMString or ElementCreationOptions) options = {});
-	// function
+	console.log("document.createElement = "					+document.createElement);
 		
 	// [CEReactions, NewObject] Element createElementNS(DOMString? namespace, DOMString qualifiedName, optional (DOMString or ElementCreationOptions) options = {});
-	// function
+	console.log("document.createElementNS = "				+document.createElementNS);
 		
 	// [NewObject] DocumentFragment createDocumentFragment();
-	// function
+	console.log("document.createDocumentFragment = "		+document.createDocumentFragment);
 		
 	// [NewObject] Text createTextNode(DOMString data);
-	// function
+	console.log("document.createTextNode = "				+document.createTextNode);
 		
 	// [NewObject] CDATASection createCDATASection(DOMString data);
-	// function
+	console.log("document.createCDATASection = "			+document.createCDATASection);
 		
 	// [NewObject] Comment createComment(DOMString data);
-	// function
+	console.log("document.createComment = "					+document.createComment);
 		
 	// [NewObject] ProcessingInstruction createProcessingInstruction(DOMString target, DOMString data);
-	// function
+	console.log("document.createProcessingInstruction = "	+document.createProcessingInstruction);
 		
 	// [CEReactions, NewObject] Node importNode(Node node, optional boolean deep = false);
-	// function
+	console.log("document.importNode = "					+document.importNode);
 		
 	// [CEReactions] Node adoptNode(Node node);
-	// function
+	console.log("document.adoptNode = "						+document.adoptNode);
 		
 	// [NewObject] Attr createAttribute(DOMString localName);
-	// function
+	console.log("document.createAttribute = "				+document.createAttribute);
 		
 	// [NewObject] Attr createAttributeNS(DOMString? namespace, DOMString qualifiedName);
-	// function
+	console.log("document.createAttributeNS = "				+document.createAttributeNS);
 		
 	// [NewObject] Event createEvent(DOMString interface); // legacy
-	// function
+	console.log("document.createEvent = "					+document.createEvent);
 		
 	// [NewObject] Range createRange();
-	// function
+	console.log("document.createRange = "					+document.createRange);
 		
 	// NodeFilter.SHOW_ALL = 0xFFFFFFFF
 	// TODO 
 		
 	// [NewObject] NodeIterator createNodeIterator(Node root, optional unsigned long whatToShow = 0xFFFFFFFF, optional NodeFilter? filter = null);
-	// function
+	console.log("document.createNodeIterator = "			+document.createNodeIterator);
 		
 	// [NewObject] TreeWalker createTreeWalker(Node root, optional unsigned long whatToShow = 0xFFFFFFFF, optional NodeFilter? filter = null);
-	// function
+	console.log("document.createTreeWalker = "				+document.createTreeWalker);
 		
 // };
 	
@@ -112,28 +112,28 @@ function printDocumentProperties(document){
 	// Source: Font Metrics API Level 1 (https://drafts.css-houdini.org/font-metrics-api-1/)
 	// partial interface Document {
 	//		FontMetrics measureElement(Element element);
-			// function
+			console.log("document.measureElement = "			+document.measureElement);
 	//
 	//		FontMetrics measureText(DOMString text, StylePropertyMapReadOnly styleMap);
-			// function
+			console.log("document.measureText = "				+document.measureText);
 	//};
 		
 	// Source: Fullscreen API Standard (https://fullscreen.spec.whatwg.org/)
 	// partial interface Document {
 	//		[LegacyLenientSetter] readonly attribute boolean fullscreenEnabled;
-			console.log("document.fullscreenEnabled = "	+document.fullscreenEnabled);
+			console.log("document.fullscreenEnabled = "			+document.fullscreenEnabled);
 	//		
 	//		[LegacyLenientSetter, Unscopable] readonly attribute boolean fullscreen; // historical
-			console.log("document.fullscreen = "		+document.fullscreen);
+			console.log("document.fullscreen = "				+document.fullscreen);
 	//
 	//		Promise<undefined> exitFullscreen();
-			// function
+			console.log("document.exitFullscreen = "			+document.exitFullscreen);
 	//
 	//		attribute EventHandler onfullscreenchange;
-			console.log("document.onfullscreenchange = "+document.onfullscreenchange);
+			console.log("document.onfullscreenchange = "		+document.onfullscreenchange);
 	//
 	//		attribute EventHandler onfullscreenerror;
-			console.log("document.onfullscreenerror = "	+document.onfullscreenerror);
+			console.log("document.onfullscreenerror = "			+document.onfullscreenerror);
 	//};
 		
 	

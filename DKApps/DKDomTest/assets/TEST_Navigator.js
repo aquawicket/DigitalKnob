@@ -4,7 +4,9 @@ console.log("\n////// TEST_Navigator.js //////")
 
 
 function printNavigatorProperties(navigator){
-
+	
+	console.log("navigator = "		+navigator);
+	
 	// TODO
 }
 

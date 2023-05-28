@@ -6,7 +6,7 @@ console.log("\n////// TEST_DragEvent.js //////")
 function printDragEventProperties(dragevent){
 	
 	// constructor(DOMString type, optional DragEventInit eventInitDict = {});
-	// function
+	console.log("dragevent = "				+dragevent);
 	
 	// readonly attribute DataTransfer? dataTransfer;
 	console.log("dragevent.dataTransfer = "	+dragevent.dataTransfer);

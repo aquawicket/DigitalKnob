@@ -6,7 +6,7 @@ console.log("\n////// TEST_HTMLElement.js //////")
 function printHTMLElementProperties(htmlElement){
 		
 	// [HTMLConstructor] constructor();
-	// function
+	console.log("htmlElement = "				+htmlElement);
 		
 	// metadata attributes
 	// [CEReactions] attribute DOMString title;
@@ -29,7 +29,7 @@ function printHTMLElementProperties(htmlElement){
 	console.log("htmlElement.inert = "			+htmlElement.inert);
 		
 	// undefined click();
-	// function
+	console.log("htmlElement.click = "			+htmlElement.click);
 		
 	// [CEReactions] attribute DOMString accessKey;
 	console.log("htmlElement.accessKey = "		+htmlElement.accessKey);
@@ -53,20 +53,20 @@ function printHTMLElementProperties(htmlElement){
 	console.log("htmlElement.outerText = "		+htmlElement.outerText);
 		
 	// ElementInternals attachInternals();
-	// function
+	console.log("htmlElement.attachInternals = "+htmlElement.attachInternals);
 		
 	// The popover API
 	// undefined showPopover();
-	// function
+	console.log("htmlElement.showPopover = "	+htmlElement.showPopover);
 		
 	// undefined hidePopover();
-	// function
+	console.log("htmlElement.hidePopover = "	+htmlElement.hidePopover);
 		
 	// undefined togglePopover(optional boolean force);
-	// function
+	console.log("htmlElement.togglePopover = "	+htmlElement.togglePopover);
 	
 	// [CEReactions] attribute DOMString? popover;
-	// function
+	console.log("htmlElement.popover = "		+htmlElement.popover);
 	
 //};
 

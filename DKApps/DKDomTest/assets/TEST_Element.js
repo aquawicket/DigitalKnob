@@ -5,110 +5,112 @@ console.log("\n////// TEST_Element.js //////")
 
 function printElementProperties(element){
 	
+	console.log("element = "						+element);
+	
 	// readonly attribute DOMString? namespaceURI;
-	console.log("element.namespaceURI = "	+element.namespaceURI);
+	console.log("element.namespaceURI = "			+element.namespaceURI);
 	
 	// readonly attribute DOMString? prefix;
-	console.log("element.prefix = "			+element.prefix);
+	console.log("element.prefix = "					+element.prefix);
 	
 	// readonly attribute DOMString localName;
-	console.log("element.localName = "		+element.localName);
+	console.log("element.localName = "				+element.localName);
 	
 	// readonly attribute DOMString tagName;
-	console.log("element.tagName = "		+element.tagName);
+	console.log("element.tagName = "				+element.tagName);
 	
 	// [CEReactions] attribute DOMString id;
-	console.log("element.id = "				+element.id);
+	console.log("element.id = "						+element.id);
 	
 	// [CEReactions] attribute DOMString className;
-	console.log("element.className = "		+element.className);
+	console.log("element.className = "				+element.className);
 	
 	// [SameObject, PutForwards=value] readonly attribute DOMTokenList classList;
-	console.log("element.classList = "		+element.classList);
+	console.log("element.classList = "				+element.classList);
 	
 	//[CEReactions, Unscopable] attribute DOMString slot;
-	console.log("element.slot = "			+element.slot);
+	console.log("element.slot = "					+element.slot);
 	
 	// boolean hasAttributes();
-	// function
+	console.log("element.hasAttributes = "			+element.hasAttributes);
 	
 	// [SameObject] readonly attribute NamedNodeMap attributes;
-	console.log("element.attributes = "		+element.attributes);
+	console.log("element.attributes = "				+element.attributes);
 	
 	// sequence<DOMString> getAttributeNames();
-	// function
+	console.log("element.getAttributeNames = "		+element.getAttributeNames);
 		
 	// DOMString? getAttribute(DOMString qualifiedName);
-	// function
+	console.log("element.getAttribute = "			+element.getAttribute);
 		
 	// DOMString? getAttributeNS(DOMString? namespace, DOMString localName);
-	// function
+	console.log("element.getAttributeNS = "			+element.getAttributeNS);
 		
 	// [CEReactions] undefined setAttribute(DOMString qualifiedName, DOMString value);
-	// function
+	console.log("element.setAttribute = "			+element.setAttribute);
 		
 	// [CEReactions] undefined setAttributeNS(DOMString? namespace, DOMString qualifiedName, DOMString value);
-	// function
+	console.log("element.setAttributeNS = "			+element.setAttributeNS);
 		
 	// [CEReactions] undefined removeAttribute(DOMString qualifiedName);
-	// function
+	console.log("element.removeAttribute = "		+element.removeAttribute);
 		
 	// [CEReactions] undefined removeAttributeNS(DOMString? namespace, DOMString localName);
-	// function
+	console.log("element.removeAttributeNS = "		+element.removeAttributeNS);
 		
 	// [CEReactions] boolean toggleAttribute(DOMString qualifiedName, optional boolean force);
-	// function
+	console.log("element.toggleAttribute = "		+element.toggleAttribute);
 		
 	// boolean hasAttribute(DOMString qualifiedName);
-	// function
+	console.log("element.hasAttribute = "			+element.hasAttribute);
 		
 	// boolean hasAttributeNS(DOMString? namespace, DOMString localName);
-	// function
+	console.log("element.hasAttributeNS = "			+element.hasAttributeNS);
 		
 	// Attr? getAttributeNode(DOMString qualifiedName);
-	// function
+	console.log("element.qualifiedName = "			+element.qualifiedName);
 		
 	// Attr? getAttributeNodeNS(DOMString? namespace, DOMString localName);
-	// function
+	console.log("element.getAttributeNodeNS = "		+element.getAttributeNodeNS);
 		
 	// [CEReactions] Attr? setAttributeNode(Attr attr);
-	// function
+	console.log("element.setAttributeNode = "		+element.setAttributeNode);
 		
 	// [CEReactions] Attr? setAttributeNodeNS(Attr attr);
-	// function
+	console.log("element.setAttributeNodeNS = "		+element.setAttributeNodeNS);
 		
 	// [CEReactions] Attr removeAttributeNode(Attr attr);
-	// function
+	console.log("element.removeAttributeNode = "	+element.removeAttributeNode);
 		
 	// ShadowRoot attachShadow(ShadowRootInit init);
-	// function
+	console.log("element.attachShadow = "			+element.attachShadow);
 	
 	// readonly attribute ShadowRoot? shadowRoot;
-	console.log("element.shadowRoot = "		+element.shadowRoot);
+	console.log("element.shadowRoot = "				+element.shadowRoot);
 	
 	// Element? closest(DOMString selectors);
-	// function
+	console.log("element.closest = "				+element.closest);
 		
 	// boolean matches(DOMString selectors);
-	// function
+	console.log("element.matches = "				+element.matches);
 		
 	// boolean webkitMatchesSelector(DOMString selectors); // legacy alias of .matches
-	// function
+	console.log("element.webkitMatchesSelector = "	+element.webkitMatchesSelector);
 		
 	// HTMLCollection getElementsByTagName(DOMString qualifiedName);
-	// function
+	console.log("element.getElementsByTagName = "	+element.getElementsByTagName);
 		
 	// HTMLCollection getElementsByTagNameNS(DOMString? namespace, DOMString localName);
-	// function
+	console.log("element.getElementsByTagNameNS = "	+element.getElementsByTagNameNS);
 		
 	// HTMLCollection getElementsByClassName(DOMString classNames);
-	// function
+	console.log("element.getElementsByClassName = "	+element.getElementsByClassName);
 		
 	// [CEReactions] Element? insertAdjacentElement(DOMString where, Element element); // legacy
-	// function
+	console.log("element.insertAdjacentElement = "	+element.insertAdjacentElement);
 		
 	// undefined insertAdjacentText(DOMString where, DOMString data); // legacy
-	// function
+	console.log("element.insertAdjacentText = "		+element.insertAdjacentText);
 	
 	
 	printNodeProperties(element);

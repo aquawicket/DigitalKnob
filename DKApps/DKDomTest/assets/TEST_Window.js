@@ -5,6 +5,8 @@ console.log("\n////// TEST_Window.js //////")
 
 function printWindowProperties(window){
 	
+	console.log("window = "						+window);
+	
 	// the current browsing context
 	// [LegacyUnforgeable] readonly attribute WindowProxy window;
 	console.log("window.window = "				+window.window);
@@ -49,19 +51,19 @@ function printWindowProperties(window){
 	console.log("window.status = "				+window.status);
 	
 	// undefined close();
-	// function
+	console.log("window.close = "				+window.close);
 		
 	// readonly attribute boolean closed;
 	console.log("window.closed = "				+window.closed);
 	
 	// undefined stop();
-	// function
+	console.log("window.stop = "				+window.stop);
 		
 	// undefined focus();
-	// function
+	console.log("window.focus = "				+window.focus);
 		
 	// undefined blur();
-	// function
+	console.log("window.blur = "				+window.blur);
 	
 	// other browsing contexts
 	// [Replaceable] readonly attribute WindowProxy frames;
@@ -83,13 +85,14 @@ function printWindowProperties(window){
 	console.log("window.frameElement = "		+window.frameElement);
 	
 	// WindowProxy? open(optional USVString url = "", optional DOMString target = "_blank", optional [LegacyNullToEmptyString] DOMString features = "");
-	// function
+	console.log("window.open = "				+window.open);
 		
 	//Since this is the global object, the IDL named getter adds a NamedPropertiesObject exotic
 	//object on the prototype chain. Indeed, this does not make the global object an exotic object.
 	//Indexed access is taken care of by the WindowProxy exotic object.
 	// getter object (DOMString name);
-		
+	// TODO
+	
 	// the user agent
 	// readonly attribute Navigator navigator;
 	console.log("window.navigator = "			+window.navigator);
@@ -102,25 +105,21 @@ function printWindowProperties(window){
 
 	//user prompts
 	// undefined alert();
-	// function
-		
 	// undefined alert(DOMString message);
-	// function
+	console.log("window.alert = "				+window.alert);
 		
 	// boolean confirm(optional DOMString message = "");
-	// function
+	console.log("window.confirm = "				+window.confirm);
 		
 	// DOMString? prompt(optional DOMString message = "", optional DOMString default = "");
-	// function
+	console.log("window.prompt = "				+window.prompt);
 	
 	// undefined print();
-	// function
+	console.log("window.print = "				+window.print);
 		
 	// undefined postMessage(any message, USVString targetOrigin, optional sequence<object> transfer = []);
-	// function
-	
 	// undefined postMessage(any message, optional WindowPostMessageOptions options = {});
-	// function
+	console.log("window.postMessage = "			+window.postMessage);
 		
 	// also has obsolete members
 	// Source: Compatibility Standard (https://compat.spec.whatwg.org/)
@@ -159,204 +158,211 @@ function printWindowProperties(window){
 	// Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
 	// partial interface Window {
 	//		undefined captureEvents();
-			// function
+			console.log("window.captureEvents = "			+window.captureEvents);
 	//
 	//		undefined releaseEvents();
-			// function
+			console.log("window.releaseEvents = "			+window.releaseEvents);
 	//
 	//		[Replaceable, SameObject] readonly attribute External external;
-			// function 
+			console.log("window.external = "				+window.external); 
 	// };
 		
 	// Source: Cookie Store API (https://wicg.github.io/cookie-store/)
 	// [SecureContext]
 	// partial interface Window {
 	//		[SameObject] readonly attribute CookieStore cookieStore;
+			console.log("window.cookieStore = "				+window.cookieStore); 
 	// };
 
 	// Source: Digital Goods API (https://wicg.github.io/digital-goods/)
 	// partial interface Window {
 	//		[SecureContext] Promise<DigitalGoodsService> getDigitalGoodsService(DOMString serviceProvider);
+			console.log("window.getDigitalGoodsService = "	+window.getDigitalGoodsService); 
 	// };
 
 	// Source: Fenced frame (https://wicg.github.io/fenced-frame/)
 	// partial interface Window {
 	//		// Collection of fenced frame APIs
 	//		readonly attribute Fence? fence;
-			// TODO
+			console.log("window.fence = "					+window.fence); 
 	// };
 
 	// Source: File System Access (https://wicg.github.io/file-system-access/)
 	// [SecureContext]
 	// partial interface Window {
 	//		Promise<sequence<FileSystemFileHandle>> showOpenFilePicker(optional OpenFilePickerOptions options = {});
-			// function
+			console.log("window.showOpenFilePicker = "		+window.showOpenFilePicker); 
 	//
 	//		Promise<FileSystemFileHandle> showSaveFilePicker(optional SaveFilePickerOptions options = {});
-			// function
+			console.log("window.showSaveFilePicker = "		+window.showSaveFilePicker); 
 	//
 	//		Promise<FileSystemDirectoryHandle> showDirectoryPicker(optional DirectoryPickerOptions options = {});
-			// function
+			console.log("window.showDirectoryPicker = "		+window.showDirectoryPicker); 
 	// };
 	
 	// Source: Local Font Access API (https://wicg.github.io/local-font-access/)
 	// [SecureContext]
 	// partial interface Window {
 	//		Promise<sequence<FontData>> queryLocalFonts(optional QueryOptions options = {});
-			// function
+			console.log("window.queryLocalFonts = "			+window.queryLocalFonts); 
 	// };
 
 	// Source: Manifest Incubations (https://wicg.github.io/manifest-incubations/)
 	// partial interface Window {
 	//		attribute EventHandler onappinstalled;
-			// TODO
+			console.log("window.onappinstalled = "			+window.onappinstalled);
+	//
 	//		attribute EventHandler onbeforeinstallprompt;
-			// TODO
+			console.log("window.onbeforeinstallprompt = "	+window.onbeforeinstallprompt);
 	// };
 
 	// Source: Portals (https://wicg.github.io/portals/)
 	// partial interface Window {
 	//		readonly attribute PortalHost? portalHost;
-			// TODO
+			console.log("window.portalHost = "				+window.portalHost);
 	// };
 	
 	// Source: Web Speech API (https://wicg.github.io/speech-api/)
 	// partial interface Window {
 	//		[SameObject] readonly attribute SpeechSynthesis speechSynthesis;
-			console.log("window.speechSynthesis = "		+window.speechSynthesis);
+			console.log("window.speechSynthesis = "			+window.speechSynthesis);
 	// };
 		
 	// Source: Web App Launch Handler API (https://wicg.github.io/web-app-launch/)
 	// partial interface Window {
 	//		readonly attribute LaunchQueue launchQueue;
-			console.log("window.launchQueue = "			+window.launchQueue);
+			console.log("window.launchQueue = "				+window.launchQueue);
 	// };
 
 	// Source: CSS Spatial Navigation Level 1 (https://www.w3.org/TR/css-nav-1/)
 	// partial interface Window {
 	//		undefined navigate(SpatialNavigationDirection dir);
+			console.log("window.navigate = "				+window.navigate);
 	// };
 		
 	// Source: CSS Object Model (CSSOM) (https://www.w3.org/TR/cssom-1/)
 	// partial interface Window {
 	//		[NewObject] CSSStyleDeclaration getComputedStyle(Element elt, optional CSSOMString? pseudoElt);
-			// function
+			console.log("window.getComputedStyle = "		+window.getComputedStyle);
 	// };
 		
 	// Source: CSSOM View Module (https://www.w3.org/TR/cssom-view-1/)
 	// partial interface Window {
 	//		[NewObject] MediaQueryList matchMedia(CSSOMString query);
-			// function
+			console.log("window.matchMedia = "				+window.matchMedia);
 	//
 	//		[SameObject, Replaceable] readonly attribute Screen screen;
-			console.log("window.screen = "				+window.screen);
+			console.log("window.screen = "					+window.screen);
 	//
 	//		[SameObject, Replaceable] readonly attribute VisualViewport? visualViewport;
-			console.log("window.visualViewport = "		+window.visualViewport);
+			console.log("window.visualViewport = "			+window.visualViewport);
 	//
 	//		// browsing context
 	//		undefined moveTo(long x, long y);
-			// function
+			console.log("window.moveTo = "					+window.moveTo);
 	//
 	//		undefined moveBy(long x, long y);
-			// function
+			console.log("window.moveBy = "					+window.moveBy);
 	//
 	//		undefined resizeTo(long width, long height);
-			// function
+			console.log("window.resizeTo = "				+window.resizeTo);
 	//
 	//		undefined resizeBy(long x, long y);
-			// function
+			console.log("window.resizeBy = "				+window.resizeBy);
 	//
 	//		// viewport
 	//		[Replaceable] readonly attribute long innerWidth;
-			console.log("window.innerWidth = "			+window.innerWidth);
+			console.log("window.innerWidth = "				+window.innerWidth);
 	//
 	//		[Replaceable] readonly attribute long innerHeight;
-			console.log("window.innerHeight = "			+window.innerHeight);
+			console.log("window.innerHeight = "				+window.innerHeight);
 	//
 	//		// viewport scrolling
 	//		[Replaceable] readonly attribute double scrollX;
-			console.log("window.scrollX = "				+window.scrollX);
+			console.log("window.scrollX = "					+window.scrollX);
 	//
 	//		[Replaceable] readonly attribute double pageXOffset;
-			console.log("window.pageXOffset = "			+window.pageXOffset);
+			console.log("window.pageXOffset = "				+window.pageXOffset);
 	//
 	//		[Replaceable] readonly attribute double scrollY;
-			console.log("window.scrollY = "				+window.scrollY);
+			console.log("window.scrollY = "					+window.scrollY);
 	//
 	//		[Replaceable] readonly attribute double pageYOffset;
-			console.log("window.pageYOffset = "			+window.pageYOffset);
+			console.log("window.pageYOffset = "				+window.pageYOffset);
 	//
 	//		undefined scroll(optional ScrollToOptions options = {});
 	//		undefined scroll(unrestricted double x, unrestricted double y);
-			// function
+			console.log("window.scroll = "					+window.scroll);
 	//
 	//		undefined scrollTo(optional ScrollToOptions options = {});
 	//		undefined scrollTo(unrestricted double x, unrestricted double y);
-			// function
+			console.log("window.scrollTo = "				+window.scrollTo);
 	//
 	//		undefined scrollBy(optional ScrollToOptions options = {});
 	//		undefined scrollBy(unrestricted double x, unrestricted double y);
-			// function
+			console.log("window.scrollBy = "				+window.scrollBy);
 	///
 	//		// client
 	//		[Replaceable] readonly attribute long screenX;
-			console.log("window.screenX = "				+window.screenX);
+			console.log("window.screenX = "					+window.screenX);
 	//
 	//		[Replaceable] readonly attribute long screenLeft;
-			console.log("window.screenLeft = "			+window.screenLeft);
+			console.log("window.screenLeft = "				+window.screenLeft);
 	//
 	//		[Replaceable] readonly attribute long screenY;
-			console.log("window.screenY = "				+window.screenY);
+			console.log("window.screenY = "					+window.screenY);
 	//
 	//		[Replaceable] readonly attribute long screenTop;
-			console.log("window.screenTop = "			+window.screenTop);
+			console.log("window.screenTop = "				+window.screenTop);
 	//
 	//		[Replaceable] readonly attribute long outerWidth;
-			console.log("window.outerWidth = "			+window.outerWidth);
+			console.log("window.outerWidth = "				+window.outerWidth);
 	//
 	//		[Replaceable] readonly attribute long outerHeight;
-			console.log("window.outerHeight = "			+window.outerHeight);
+			console.log("window.outerHeight = "				+window.outerHeight);
 	//
 	//		[Replaceable] readonly attribute double devicePixelRatio;
-			console.log("window.devicePixelRatio = "	+window.devicePixelRatio)
+			console.log("window.devicePixelRatio = "		+window.devicePixelRatio)
 	// };
 		
 	// Source: DeviceOrientation Event Specification (https://www.w3.org/TR/orientation-event/)
 	// partial interface Window {
 	//		[SecureContext] attribute EventHandler ondeviceorientation;
+			console.log("window.ondeviceorientation = "		+window.ondeviceorientation);
 	// };
 
 	// Source: DeviceOrientation Event Specification (https://www.w3.org/TR/orientation-event/)
 	// partial interface Window {
 	//		[SecureContext] attribute EventHandler ondeviceorientationabsolute;
+			console.log("window.ondeviceorientationabsolute = "	+window.ondeviceorientationabsolute);
 	// };
 
 	// Source: DeviceOrientation Event Specification (https://www.w3.org/TR/orientation-event/)
 	//	partial interface Window {
 	//		[SecureContext] attribute EventHandler ondevicemotion;
+			console.log("window.ondevicemotion = "			+window.ondevicemotion);
 	// };
 	
 	// Source: requestIdleCallback() (https://www.w3.org/TR/requestidlecallback/)
 	// partial interface Window {
 	//		unsigned long requestIdleCallback(IdleRequestCallback callback, optional IdleRequestOptions options = {});
-			// function
+			console.log("window.requestIdleCallback = "		+window.requestIdleCallback);
 	//
 	//		undefined cancelIdleCallback(unsigned long handle);
-			// function
+			console.log("window.cancelIdleCallback = "		+window.cancelIdleCallback);
 	// };
 	
 	// Source: Selection API (https://www.w3.org/TR/selection-api/)
 	// partial interface Window {
 	//		Selection? getSelection();
-			// function
+			console.log("window.getSelection = "			+window.getSelection);
 	// };
 		
 	// Source: Window Management (https://www.w3.org/TR/window-management/)
 	// partial interface Window {
 	//		[SecureContext]
 	//		Promise<ScreenDetails> getScreenDetails();
-			// function
+			console.log("window.getScreenDetails = "		+window.getScreenDetails);
 	// };
 		
 	

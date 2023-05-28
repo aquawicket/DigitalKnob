@@ -5,6 +5,8 @@ console.log("\n////// TEST_Location.js //////")
 
 function printLocationProperties(location){
 	
+	console.log("location = "					+location);
+	
 	// [LegacyUnforgeable] stringifier attribute USVString href;
 	console.log("location.href = "				+location.href);
 	
@@ -33,13 +35,13 @@ function printLocationProperties(location){
 	console.log("location.hash = "				+location.hash);
 	
 	// [LegacyUnforgeable] undefined assign(USVString url);
-	// function
+	console.log("location.assign = "			+location.assign);
 		
 	// [LegacyUnforgeable] undefined replace(USVString url);
-	// function
+	console.log("location.replace = "			+location.replace);
 		
 	// [LegacyUnforgeable] undefined reload();
-	// function
+	console.log("location.reload = "			+location.reload);
 	
 	// [LegacyUnforgeable, SameObject] readonly attribute DOMStringList ancestorOrigins;
 	console.log("location.ancestorOrigins = "	+location.ancestorOrigins);

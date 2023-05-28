@@ -6,7 +6,7 @@ console.log("\n////// TEST_MouseEvent.js //////")
 function printMouseEventProperties(mouseevent){
 	
 	// constructor(DOMString type, optional MouseEventInit eventInitDict = {});
-	// function
+	console.log("mouseevent = "					+mouseevent);
 		
 	// readonly attribute long screenX;
 	console.log("mouseevent.screenX = "			+mouseevent.screenX);
@@ -42,7 +42,7 @@ function printMouseEventProperties(mouseevent){
 	console.log("mouseevent.relatedTarget = "	+mouseevent.relatedTarget);
 	
 	// boolean getModifierState(DOMString keyArg);
-	// function
+	console.log("mouseevent.getModifierState = "+mouseevent.getModifierState);
 	
 	// Source: CSSOM View Module (https://www.w3.org/TR/cssom-view-1/)
 	// partial interface MouseEvent {
@@ -86,7 +86,7 @@ function printMouseEventProperties(mouseevent){
 	//		optional boolean metaKeyArg = false,
 	//		optional short buttonArg = 0,
 	//		optional EventTarget? relatedTargetArg = null);
-			// function
+			console.log("mouseevent.initMouseEvent = "	+mouseevent.initMouseEvent);
 	// };
 	
 	printUIEventProperties(mouseEvent);
