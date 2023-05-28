@@ -307,13 +307,13 @@ public:
 				DKDuktape::AttachFunction("CPP_DKWindowDUK_screenX", 			DKWindowDUK::screenX);
 		//
 		//		[Replaceable] readonly attribute long screenLeft;
-				// DKDuktape::AttachFunction("CPP_DKWindowDUK_screenLeft", 		DKWindowDUK::screenLeft);		// TODO
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_screenLeft", 		DKWindowDUK::screenLeft);
 		//
 		//		[Replaceable] readonly attribute long screenY;
 				DKDuktape::AttachFunction("CPP_DKWindowDUK_screenY", 			DKWindowDUK::screenY);
 		//
 		//		[Replaceable] readonly attribute long screenTop;
-				// DKDuktape::AttachFunction("CPP_DKWindowDUK_screenTop", 			DKWindowDUK::screenTop);	// TODO
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_screenTop", 			DKWindowDUK::screenTop);
 		//
 		//		[Replaceable] readonly attribute long outerWidth;
 				DKDuktape::AttachFunction("CPP_DKWindowDUK_outerWidth", 		DKWindowDUK::outerWidth);
@@ -806,7 +806,7 @@ public:
 	// Source: Web Speech API (https://wicg.github.io/speech-api/)
 	// partial interface Window {
 	//		[SameObject] readonly attribute SpeechSynthesis speechSynthesis;
-			static int speechSynthesis(duk_context* ctx){ // [Window.speechSynthesis](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/speechSynthesis
+			static int speechSynthesis(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
 				if(duk_is_valid_index(ctx, 1))
 					eventTarget(ctx)->speechSynthesis(GetString(ctx));
@@ -818,7 +818,7 @@ public:
 	// Source: Web App Launch Handler API (https://wicg.github.io/web-app-launch/)
 	// partial interface Window {
 	//		readonly attribute LaunchQueue launchQueue;
-			static int launchQueue(duk_context* ctx){ // [Window.launchQueue](Read only)(Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Window/launchQueue
+			static int launchQueue(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
 				if(duk_is_valid_index(ctx, 1))
 					eventTarget(ctx)->launchQueue(GetString(ctx));
@@ -844,7 +844,7 @@ public:
 			// TODO
 	//
 	//		[SameObject, Replaceable] readonly attribute Screen screen;
-			static int screen(duk_context* ctx){ // [Window.screen](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/screen
+			static int screen(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
 				if(duk_is_valid_index(ctx, 1))
 					eventTarget(ctx)->screen(GetString(ctx));
@@ -853,7 +853,7 @@ public:
 			}
 	//
 	//		[SameObject, Replaceable] readonly attribute VisualViewport? visualViewport;
-			static int visualViewport(duk_context* ctx){ // [Window.visualViewport](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/visualViewport
+			static int visualViewport(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
 				if(duk_is_valid_index(ctx, 1))
 					eventTarget(ctx)->visualViewport(GetString(ctx));
@@ -863,7 +863,7 @@ public:
 	//
 	//		// browsing context
 	//		undefined moveTo(long x, long y);
-			static int moveTo(duk_context* ctx){ // [Window.moveTo()] https://developer.mozilla.org/en-US/docs/Web/API/moveTo
+			static int moveTo(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
 				int x = duk_require_int(ctx, 1);
 				int y = duk_require_int(ctx, 2);
@@ -873,7 +873,7 @@ public:
 			}
 	//
 	//		undefined moveBy(long x, long y);
-			static int moveBy(duk_context* ctx){ // [Window.moveBy()] https://developer.mozilla.org/en-US/docs/Web/API/moveBy
+			static int moveBy(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
 				int deltaX = duk_require_int(ctx, 1);
 				int deltaY = duk_require_int(ctx, 2);
@@ -883,7 +883,7 @@ public:
 			}
 	//
 	//		undefined resizeTo(long width, long height);
-			static int resizeTo(duk_context* ctx){ // [Window.resizeTo()] https://developer.mozilla.org/en-US/docs/Web/API/resizeTo
+			static int resizeTo(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
 				int width = duk_require_int(ctx, 1);
 				int height = duk_require_int(ctx, 2);
@@ -893,7 +893,7 @@ public:
 			}
 	//
 	//		undefined resizeBy(long x, long y);
-			static int resizeBy(duk_context* ctx){ // [Window.resizeBy()] https://developer.mozilla.org/en-US/docs/Web/API/resizeBy
+			static int resizeBy(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
 				int xDelta = duk_require_int(ctx, 1);
 				int yDelta = duk_require_int(ctx, 2);
@@ -904,7 +904,7 @@ public:
 	//
 	//		// viewport
 	//		[Replaceable] readonly attribute long innerWidth;
-			static int innerWidth(duk_context* ctx){ // [Window.innerWidth](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/innerWidth
+			static int innerWidth(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
 				if(duk_is_valid_index(ctx, 1))
 					eventTarget(ctx)->innerWidth(GetInt(ctx));
@@ -913,7 +913,7 @@ public:
 			}
 	//
 	//		[Replaceable] readonly attribute long innerHeight;
-			static int innerHeight(duk_context* ctx){ // [Window.innerHeight](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/innerHeight
+			static int innerHeight(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
 				if(duk_is_valid_index(ctx, 1))
 					eventTarget(ctx)->innerHeight(GetInt(ctx));
@@ -923,7 +923,7 @@ public:
 	//
 	//		// viewport scrolling
 	//		[Replaceable] readonly attribute double scrollX;
-			static int scrollX(duk_context* ctx){ // [Window.scrollX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollX
+			static int scrollX(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
 				if(duk_is_valid_index(ctx, 1))
 					eventTarget(ctx)->scrollX(GetDouble(ctx));
@@ -932,7 +932,7 @@ public:
 			}
 	//
 	//		[Replaceable] readonly attribute double pageXOffset;
-			static int pageXOffset(duk_context* ctx){ // [Window.pageXOffset](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/pageXOffset
+			static int pageXOffset(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
 				if(duk_is_valid_index(ctx, 1))
 					eventTarget(ctx)->pageXOffset(GetDouble(ctx));
@@ -941,7 +941,7 @@ public:
 			}
 	//
 	//		[Replaceable] readonly attribute double scrollY;
-			static int scrollY(duk_context* ctx){ // [Window.scrollY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollY
+			static int scrollY(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
 				if(duk_is_valid_index(ctx, 1))
 					eventTarget(ctx)->scrollY(GetDouble(ctx));
@@ -950,7 +950,7 @@ public:
 			}
 	//
 	//		[Replaceable] readonly attribute double pageYOffset;
-			static int pageYOffset(duk_context* ctx){ // [Window.pageYOffset](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset
+			static int pageYOffset(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
 				if(duk_is_valid_index(ctx, 1))
 					eventTarget(ctx)->pageYOffset(GetDouble(ctx));
@@ -972,7 +972,7 @@ public:
 	///
 	//		// client
 	//		[Replaceable] readonly attribute long screenX;
-			static int screenX(duk_context* ctx){ // [Window.screenX and Window.screenLeft](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/screenX
+			static int screenX(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
 				if(duk_is_valid_index(ctx, 1))
 					eventTarget(ctx)->screenX(GetInt(ctx));
@@ -981,10 +981,16 @@ public:
 			}
 	//
 	//		[Replaceable] readonly attribute long screenLeft;
-			// TODO
+			static int screenLeft(duk_context* ctx){
+				DKDEBUGFUNC(ctx);
+				if(duk_is_valid_index(ctx, 1))
+					eventTarget(ctx)->screenLeft(GetInt(ctx));
+				dukglue_push(ctx, eventTarget(ctx)->screenLeft());
+				return true;
+			}
 	//
 	//		[Replaceable] readonly attribute long screenY;
-			static int screenY(duk_context* ctx){ // [Window.screenY and Window.screenTop](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/screenY
+			static int screenY(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
 				if(duk_is_valid_index(ctx, 1))
 					eventTarget(ctx)->screenY(GetInt(ctx));
@@ -993,10 +999,16 @@ public:
 			}
 	//
 	//		[Replaceable] readonly attribute long screenTop;
-	//		// TODO
+			static int screenTop(duk_context* ctx){
+				DKDEBUGFUNC(ctx);
+				if(duk_is_valid_index(ctx, 1))
+					eventTarget(ctx)->screenTop(GetInt(ctx));
+				dukglue_push(ctx, eventTarget(ctx)->screenTop());
+				return true;
+			}
 	//
 	//		[Replaceable] readonly attribute long outerWidth;
-			static int outerWidth(duk_context* ctx){ // [Window.outerWidth](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/outerWidth
+			static int outerWidth(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
 				if(duk_is_valid_index(ctx, 1))
 					eventTarget(ctx)->outerWidth(GetInt(ctx));
@@ -1005,7 +1017,7 @@ public:
 			}
 	//
 	//		[Replaceable] readonly attribute long outerHeight;
-			static int outerHeight(duk_context* ctx){ // [Window.outerHeight](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/outerHeight
+			static int outerHeight(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
 				if(duk_is_valid_index(ctx, 1))
 					eventTarget(ctx)->outerHeight(GetInt(ctx));
@@ -1014,7 +1026,7 @@ public:
 			}
 	//
 	//		[Replaceable] readonly attribute double devicePixelRatio;
-			static int devicePixelRatio(duk_context* ctx){ // [Window.devicePixelRatio](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio
+			static int devicePixelRatio(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
 				if(duk_is_valid_index(ctx, 1))
 					eventTarget(ctx)->devicePixelRatio(GetDouble(ctx));
