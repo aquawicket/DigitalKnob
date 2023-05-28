@@ -23,7 +23,7 @@ public:
 		DKDuktape::AttachFunction("CPP_DKHTMLElementDUK_title", 			DKHTMLElementDUK::title);
 
 		// [CEReactions] attribute DOMString lang;
-		DKDuktape::AttachFunction("CPP_DKHTMLElementDUK_title", 			DKHTMLElementDUK::title);
+		DKDuktape::AttachFunction("CPP_DKHTMLElementDUK_lang", 				DKHTMLElementDUK::lang);
 		
 		// [CEReactions] attribute boolean translate;
 		DKDuktape::AttachFunction("CPP_DKHTMLElementDUK_translate", 		DKHTMLElementDUK::translate);
@@ -177,7 +177,7 @@ public:
 	static int hidden(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->hidden(GetBool(ctx));
+			eventTarget(ctx)->hidden(GetString(ctx));
 		dukglue_push(ctx, eventTarget(ctx)->hidden());
 		return true;
 	}
