@@ -3,4 +3,85 @@
 console.log("\n////// TEST_HTMLElement.js //////")
 
 
-// TODO
+function printHTMLElementProperties(htmlElement){
+		
+	// [HTMLConstructor] constructor();
+	// function
+		
+	// metadata attributes
+	// [CEReactions] attribute DOMString title;
+	console.log("htmlElement.title = "			+htmlElement.title);
+		
+	// [CEReactions] attribute DOMString lang;
+	console.log("htmlElement.lang = "			+htmlElement.lang);
+		
+	// [CEReactions] attribute boolean translate;
+	console.log("htmlElement.translate = "		+htmlElement.translate);
+		
+	// [CEReactions] attribute DOMString dir;
+	console.log("htmlElement.dir = "			+htmlElement.dir);
+		
+	// user interaction
+	// [CEReactions] attribute (boolean or unrestricted double or DOMString)? hidden;
+	console.log("htmlElement.hidden = "			+htmlElement.hidden);
+		
+	// [CEReactions] attribute boolean inert;
+	console.log("htmlElement.inert = "			+htmlElement.inert);
+		
+	// undefined click();
+	// function
+		
+	// [CEReactions] attribute DOMString accessKey;
+	console.log("htmlElement.accessKey = "		+htmlElement.accessKey);
+		
+	// readonly attribute DOMString accessKeyLabel;
+	console.log("htmlElement.accessKeyLabel = "	+htmlElement.accessKeyLabel);
+		
+	// [CEReactions] attribute boolean draggable;
+	console.log("htmlElement.draggable = "		+htmlElement.draggable);
+		
+	// [CEReactions] attribute boolean spellcheck;
+	console.log("htmlElement.spellcheck = "		+htmlElement.spellcheck);
+		
+	// [CEReactions] attribute DOMString autocapitalize;
+	console.log("htmlElement.autocapitalize = "	+htmlElement.autocapitalize);
+	
+	// [CEReactions] attribute [LegacyNullToEmptyString] DOMString innerText;
+	console.log("htmlElement.innerText = "		+htmlElement.innerText);
+		
+	// [CEReactions] attribute [LegacyNullToEmptyString] DOMString outerText;
+	console.log("htmlElement.outerText = "		+htmlElement.outerText);
+		
+	// ElementInternals attachInternals();
+	// function
+		
+	// The popover API
+	// undefined showPopover();
+	// function
+		
+	// undefined hidePopover();
+	// function
+		
+	// undefined togglePopover(optional boolean force);
+	// function
+	
+	// [CEReactions] attribute DOMString? popover;
+	// function
+	
+//};
+
+	// HTMLElement includes GlobalEventHandlers;
+	// HTMLElement includes ElementContentEditable;
+	// HTMLElement includes HTMLOrSVGElement;
+	
+	// [Exposed=Window]
+	// interface HTMLUnknownElement : HTMLElement {
+		// Note: intentionally no [HTMLConstructor]
+	// };
+	
+	printElementProperties(htmlElement);
+}
+
+
+var htmlElement = new HTMLElement();
+printHTMLElementProperties(htmlElement);

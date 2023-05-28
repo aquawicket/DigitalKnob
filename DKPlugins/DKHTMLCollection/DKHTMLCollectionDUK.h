@@ -28,7 +28,7 @@ public:
 		
 	
 		////// Load .js files
-		DKClass::DKCreate("DKHTMLElement/DKHTMLCollectionDUK.js");
+		DKClass::DKCreate("DKHTMLCollection/DKHTMLCollectionDUK.js");
 		
 		return true;
 	}
