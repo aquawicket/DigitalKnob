@@ -1,5 +1,4 @@
-// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/Location.idl
-// [SOURCE] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-location-interface
+// [IDL] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-location-interface
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Location
 #if HAVE_DKDuktape
 
@@ -10,7 +9,6 @@
 #include "DKDuktape/DKDuktape.h"
 
 
-// Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
 // [Exposed=Window]
 // interface Location { // but see also additional creation steps and overridden internal methods
 class DKLocationDUK : public DKObjectT<DKLocationDUK>
@@ -18,46 +16,46 @@ class DKLocationDUK : public DKObjectT<DKLocationDUK>
 public:
 	bool Init(){
 		
-		DKDuktape::AttachFunction("CPP_DKLocationDUK", DKLocationDUK::constructor);
+		DKDuktape::AttachFunction("CPP_DKLocationDUK", 					DKLocationDUK::constructor);
 		
 		// [LegacyUnforgeable] stringifier attribute USVString href;
-		DKDuktape::AttachFunction("CPP_DKLocationDUK_href", DKLocationDUK::href);
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_href", 			DKLocationDUK::href);
 		
 		// [LegacyUnforgeable] readonly attribute USVString origin;
-		DKDuktape::AttachFunction("CPP_DKLocationDUK_origin", DKLocationDUK::origin);
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_origin", 			DKLocationDUK::origin);
 		
 		// [LegacyUnforgeable] attribute USVString protocol;
-		DKDuktape::AttachFunction("CPP_DKLocationDUK_protocol", DKLocationDUK::protocol);
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_protocol", 		DKLocationDUK::protocol);
 		
 		// [LegacyUnforgeable] attribute USVString host;
-		DKDuktape::AttachFunction("CPP_DKLocationDUK_host", DKLocationDUK::host);
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_host", 			DKLocationDUK::host);
 		
 		// [LegacyUnforgeable] attribute USVString hostname;
-		DKDuktape::AttachFunction("CPP_DKLocationDUK_hostname", DKLocationDUK::hostname);
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_hostname", 		DKLocationDUK::hostname);
 		
 		// [LegacyUnforgeable] attribute USVString port;
-		DKDuktape::AttachFunction("CPP_DKLocationDUK_port", DKLocationDUK::port);
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_port", 			DKLocationDUK::port);
 		
 		// [LegacyUnforgeable] attribute USVString pathname;
-		DKDuktape::AttachFunction("CPP_DKLocationDUK_pathname", DKLocationDUK::pathname);
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_pathname",		 	DKLocationDUK::pathname);
 		
 		// [LegacyUnforgeable] attribute USVString search;
-		DKDuktape::AttachFunction("CPP_DKLocationDUK_search", DKLocationDUK::search);
-		
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_search", 			DKLocationDUK::search);
+
 		// [LegacyUnforgeable] attribute USVString hash;
-		DKDuktape::AttachFunction("CPP_DKLocationDUK_hash", DKLocationDUK::hash);
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_hash", 			DKLocationDUK::hash);
 		
 		// [LegacyUnforgeable] undefined assign(USVString url);
-		DKDuktape::AttachFunction("CPP_DKLocationDUK_assign", DKLocationDUK::assign);
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_assign", 			DKLocationDUK::assign);
 		
 		// [LegacyUnforgeable] undefined replace(USVString url);
-		DKDuktape::AttachFunction("CPP_DKLocationDUK_replace", DKLocationDUK::replace);
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_replace", 			DKLocationDUK::replace);
 		
 		// [LegacyUnforgeable] undefined reload();
-		DKDuktape::AttachFunction("CPP_DKLocationDUK_reload", DKLocationDUK::reload);
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_reload", 			DKLocationDUK::reload);
 		
 		// [LegacyUnforgeable, SameObject] readonly attribute DOMStringList ancestorOrigins;
-		DKDuktape::AttachFunction("CPP_DKLocationDUK_ancestorOrigins", DKLocationDUK::ancestorOrigins);
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_ancestorOrigins", 	DKLocationDUK::ancestorOrigins);
 		
 		
 		////// Load .js files //////
