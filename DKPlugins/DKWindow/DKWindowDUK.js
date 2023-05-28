@@ -1,8 +1,12 @@
-// [INTERFACE] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-window-object
+// [IDL] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-window-object
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Window
 
 
-// [Window()] https://developer.mozilla.org/en-US/docs/Web/API/Window
+// Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
+// [Global=Window,
+// Exposed=Window,
+// LegacyUnenumerableNamedProperties]
+// interface Window : EventTarget {
 var Window = function Window(address) {
 	//console.log("Window("+address+")")
 	
@@ -12,232 +16,211 @@ var Window = function Window(address) {
 		this.address = CPP_DKWindowDUK();
 
 	
-	////// Instance properties //////
-	// [Window.clientInformation](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/clientInformation
-	Object.defineProperty(this, "clientInformation", {
-        get: function clientInformation()		{ return CPP_DKWindowDUK_clientInformation(this.address) },
-		//set: function clientInformation(data)	{ return CPP_DKWindowDUK_clientInformation(this.address, data) },
-    })
-	// [Window.closed](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/closed
-	Object.defineProperty(this, "closed", {
-        get: function closed()					{ return CPP_DKWindowDUK_closed(this.address) },
-		//set: function closed(data)			{ return CPP_DKWindowDUK_closed(this.address, data) },
-    })
-	// [Window.customElements](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/customElements
-	Object.defineProperty(this, "customElements", {
-        get: function customElements()			{ return CPP_DKWindowDUK_customElements(this.address) },
-		//set: function customElements(data)	{ return CPP_DKWindowDUK_customElements(this.address, data) },
-    })
-	// [Window.devicePixelRatio](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio
-	Object.defineProperty(this, "devicePixelRatio", {
-        get: function devicePixelRatio()		{ return CPP_DKWindowDUK_devicePixelRatio(this.address) },
-		//set: function devicePixelRatio(data)	{ return CPP_DKWindowDUK_devicePixelRatio(this.address, data) },
-    })
-	// [Window.document](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/document
-	Object.defineProperty(this, "document", {
-        get: function document()				{ return CPP_DKWindowDUK_document(this.address) },
-		//set: function document(data)			{ return CPP_DKWindowDUK_document(this.address, data) },
-    })
-	// [Window.frameElement](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/frameElement
-	Object.defineProperty(this, "frameElement", {
-        get: function frameElement()			{ return CPP_DKWindowDUK_frameElement(this.address) },
-		//set: function frameElement(data)		{ return CPP_DKWindowDUK_frameElement(this.address, data) },
-    })
-	// [Window.frames](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/frames
-	Object.defineProperty(this, "frames", {
-        get: function frames()					{ return CPP_DKWindowDUK_frames(this.address) },
-		//set: function frames(data)			{ return CPP_DKWindowDUK_frames(this.address, data) },
-    })
-	// [Window.history](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/History
-	Object.defineProperty(this, "history", {
-        get: function history()					{ return CPP_DKWindowDUK_history(this.address) },
-		//set: function history(data)			{ return CPP_DKWindowDUK_history(this.address, data) },
-    })
-	// [Window.innerHeight](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/innerHeight
-	Object.defineProperty(this, "innerHeight", {
-        get: function innerHeight()				{ return CPP_DKWindowDUK_innerHeight(this.address) },
-		//set: function innerHeight(data)		{ return CPP_DKWindowDUK_innerHeight(this.address, data) },
-    })
-	// [Window.innerWidth](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/innerWidth
-	Object.defineProperty(this, "innerWidth", {
-        get: function innerWidth()				{ return CPP_DKWindowDUK_innerWidth(this.address) },
-		//set: function innerWidth(data)		{ return CPP_DKWindowDUK_innerWidth(this.address, data) },
-    })
-	// [Window.launchQueue](Read only)(Experimental) https://developer.mozilla.org/en-US/docs/Web/API/Window/launchQueue
-	Object.defineProperty(this, "launchQueue", {
-        get: function launchQueue()				{ return CPP_DKWindowDUK_launchQueue(this.address) },
-		//set: function launchQueue(data)		{ return CPP_DKWindowDUK_launchQueue(this.address, data) },
-    })
-	// [Window.length](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/length
-	Object.defineProperty(this, "length", {
-        get: function length()					{ return CPP_DKWindowDUK_length(this.address) },
-		//set: function length(data)			{ return CPP_DKWindowDUK_length(this.address, data) },
-    })
-	// [Window.location] https://developer.mozilla.org/en-US/docs/Web/API/Window/location
-	Object.defineProperty(this, "location", {
-        get: function location()				{ return CPP_DKWindowDUK_location(this.address) },
-		set: function location(data)			{ return CPP_DKWindowDUK_location(this.address, data) },
-    })
-	// [Window.locationbar](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/locationbar
-	Object.defineProperty(this, "locationbar", {
-        get: function locationbar()				{ return CPP_DKWindowDUK_locationbar(this.address) },
-		//set: function locationbar(data)		{ return CPP_DKWindowDUK_locationbar(this.address, data) },
-    })
-	// [Window.menubar](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/menubar
-	Object.defineProperty(this, "menubar", {
-        get: function menubar()					{ return CPP_DKWindowDUK_menubar(this.address) },
-		//set: function menubar(data)			{ return CPP_DKWindowDUK_menubar(this.address, data) },
-    })
-	// [Window.name] https://developer.mozilla.org/en-US/docs/Web/API/Window/name
-	Object.defineProperty(this, "name", {
-        get: function name()					{ return CPP_DKWindowDUK_name(this.address) },
-		set: function name(data)				{ return CPP_DKWindowDUK_name(this.address, data) },
-    })
-	// [Window.navigator](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/navigator
-	Object.defineProperty(this, "navigator", {
-        get: function navigator()				{ return CPP_DKWindowDUK_navigator(this.address) },
-		//set: function navigator(data)			{ return CPP_DKWindowDUK_navigator(this.address, data) },
-    })
-	// [Window.opener] https://developer.mozilla.org/en-US/docs/Web/API/Window/opener
-	Object.defineProperty(this, "opener", {
-        get: function opener()					{ return CPP_DKWindowDUK_opener(this.address) },
-		set: function opener(data)				{ return CPP_DKWindowDUK_opener(this.address, data) },
-    })
-	// [Window.outerHeight](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/outerHeight
-	Object.defineProperty(this, "outerHeight", {
-        get: function outerHeight()				{ return CPP_DKWindowDUK_outerHeight(this.address) },
-		//set: function outerHeight(data)		{ return CPP_DKWindowDUK_outerHeight(this.address, data) },
-    })
-	// [Window.outerWidth](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/outerWidth
-	Object.defineProperty(this, "outerWidth", {
-        get: function outerWidth()				{ return CPP_DKWindowDUK_outerWidth(this.address) },
-		//set: function outerWidth(data)		{ return CPP_DKWindowDUK_outerWidth(this.address, data) },
-    })
-	// [Window.pageXOffset](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/pageXOffset
-	Object.defineProperty(this, "pageXOffset", {
-        get: function pageXOffset()				{ return CPP_DKWindowDUK_pageXOffset(this.address) },
-		//set: function pageXOffset(data)		{ return CPP_DKWindowDUK_pageXOffset(this.address, data) },
-    })
-	// [Window.pageYOffset](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset
-	Object.defineProperty(this, "pageYOffset", {
-        get: function pageYOffset()				{ return CPP_DKWindowDUK_pageYOffset(this.address) },
-		//set: function pageYOffset(data)		{ return CPP_DKWindowDUK_pageYOffset(this.address, data) },
-    })
-	// [Window.parent](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/parent
-	Object.defineProperty(this, "parent", {
-        get: function parent()					{ return CPP_DKWindowDUK_parent(this.address) },
-		//set: function parent(data)			{ return CPP_DKWindowDUK_parent(this.address, data) },
-    })
-	// [Window.personalbar](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/personalbar
-	Object.defineProperty(this, "personalbar", {
-        get: function personalbar()				{ return CPP_DKWindowDUK_personalbar(this.address) },
-		//set: function personalbar(data)		{ return CPP_DKWindowDUK_personalbar(this.address, data) },
-    })
-	// [Window.screen](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/screen
-	Object.defineProperty(this, "screen", {
-        get: function screen()					{ return CPP_DKWindowDUK_screen(this.address) },
-		//set: function screen(data)			{ return CPP_DKWindowDUK_screen(this.address, data) },
-    })
-	// [Window.scrollbars](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollbars
-	Object.defineProperty(this, "scrollbars", {
-        get: function scrollbars()				{ return CPP_DKWindowDUK_scrollbars(this.address) },
-		//set: function scrollbars(data)		{ return CPP_DKWindowDUK_scrollbars(this.address, data) },
-    })
-	// [Window.scrollX](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollX
-	Object.defineProperty(this, "scrollX", {
-        get: function scrollX()					{ return CPP_DKWindowDUK_scrollX(this.address) },
-		//set: function scrollX(data)			{ return CPP_DKWindowDUK_scrollX(this.address, data) },
-    })
-	// [Window.scrollY](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollY
-	Object.defineProperty(this, "scrollY", {
-        get: function scrollY()					{ return CPP_DKWindowDUK_scrollY(this.address) },
-		//set: function scrollY(data)			{ return CPP_DKWindowDUK_scrollY(this.address, data) },
-    })
-	// [Window.self](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/self
-	Object.defineProperty(this, "self", {
-        get: function self()					{ return CPP_DKWindowDUK_self(this.address) },
-		//set: function self(data)				{ return CPP_DKWindowDUK_self(this.address, data) },
-    })
-	// [Window.speechSynthesis](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/speechSynthesis
-	Object.defineProperty(this, "speechSynthesis", {
-        get: function speechSynthesis()			{ return CPP_DKWindowDUK_speechSynthesis(this.address) },
-		//set: function speechSynthesis(data)	{ return CPP_DKWindowDUK_speechSynthesis(this.address, data) },
-    })
-	// [Window.statusbar](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/statusbar
-	Object.defineProperty(this, "statusbar", {
-        get: function statusbar()				{ return CPP_DKWindowDUK_statusbar(this.address) },
-		//set: function statusbar(data)			{ return CPP_DKWindowDUK_statusbar(this.address, data) },
-    })
-	// [Window.toolbar](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/toolbar
-	Object.defineProperty(this, "toolbar", {
-        get: function toolbar()					{ return CPP_DKWindowDUK_toolbar(this.address) },
-		//set: function toolbar(data)			{ return CPP_DKWindowDUK_toolbar(this.address, data) },
-    })
-	// [Window.top](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/top
-	Object.defineProperty(this, "top", {
-        get: function top()						{ return CPP_DKWindowDUK_top(this.address) },
-		//set: function top(data)				{ return CPP_DKWindowDUK_top(this.address, data) },
-    })
-	// [Window.visualViewport](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/visualViewport
-	Object.defineProperty(this, "visualViewport", {
-        get: function visualViewport()			{ return CPP_DKWindowDUK_visualViewport(this.address) },
-		//set: function visualViewport(data)	{ return CPP_DKWindowDUK_visualViewport(this.address, data) },
-    })
-	// [Window.window](Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/window
+	// the current browsing context
+	// [LegacyUnforgeable] readonly attribute WindowProxy window;
 	Object.defineProperty(this, "window", {
         get: function window()					{ return CPP_DKWindowDUK_window(this.address) },
 		//set: function window(data)			{ return CPP_DKWindowDUK_window(this.address, data) },
     })
-	// [window[0], window[1], etc.] https://developer.mozilla.org/en-US/docs/Web/API/Window
-	/*
-	Object.defineProperty(this, "windows", {
-        get: function windows()					{ return CPP_DKWindowDUK_windows(this.address) },
-		//set: function windows(data)			{ return CPP_DKWindowDUK_windows(this.address, data) },
-    })
-	*/
 	
-
-	////// Deprecated properties //////
-	// [Window.content and Window._content](Deprecated)(Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window
-	Object.defineProperty(this, "content", {
-        get: function content()					{ return CPP_DKWindowDUK_content(this.address) },
-		//set: function content(data)			{ return CPP_DKWindowDUK_content(this.address, data) },
+	// [Replaceable] readonly attribute WindowProxy self;
+	Object.defineProperty(this, "self", {
+        get: function self()					{ return CPP_DKWindowDUK_self(this.address) },
+		//set: function self(data)				{ return CPP_DKWindowDUK_self(this.address, data) },
     })
-	// [Window.defaultStatus](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/defaultStatus
-	Object.defineProperty(this, "defaultStatus", {
-        get: function defaultStatus()			{ return CPP_DKWindowDUK_defaultStatus(this.address) },
-		set: function defaultStatus(data)		{ return CPP_DKWindowDUK_defaultStatus(this.address, data) },
+	
+	// [LegacyUnforgeable] readonly attribute Document document;
+	Object.defineProperty(this, "document", {
+        get: function document()				{ return CPP_DKWindowDUK_document(this.address) },
+		//set: function document(data)			{ return CPP_DKWindowDUK_document(this.address, data) },
     })
-	// [Window.event](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/event
-	Object.defineProperty(this, "event", {
-        get: function event()					{ return CPP_DKWindowDUK_event(this.address) },
-		//set: function event(data)				{ return CPP_DKWindowDUK_event(this.address, data) },
+	
+	// attribute DOMString name;
+	Object.defineProperty(this, "name", {
+        get: function name()					{ return CPP_DKWindowDUK_name(this.address) },
+		set: function name(data)				{ return CPP_DKWindowDUK_name(this.address, data) },
     })
-	// [Window.external](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/external
-	Object.defineProperty(this, "external", {
-        get: function external()				{ return CPP_DKWindowDUK_external(this.address) },
-		//set: function external(data)			{ return CPP_DKWindowDUK_external(this.address, data) },
+	
+	// [PutForwards=href, LegacyUnforgeable] readonly attribute Location location;
+	Object.defineProperty(this, "location", {
+        get: function location()				{ return CPP_DKWindowDUK_location(this.address) },
+		set: function location(data)			{ return CPP_DKWindowDUK_location(this.address, data) },
     })
-	// [Window.orientation](Deprecated)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/orientation
-	Object.defineProperty(this, "orientation", {
-        get: function orientation()				{ return CPP_DKWindowDUK_orientation(this.address) },
-		//set: function orientation(data)		{ return CPP_DKWindowDUK_orientation(this.address, data) },
+	
+	// readonly attribute History history;
+	Object.defineProperty(this, "history", {
+        get: function history()					{ return CPP_DKWindowDUK_history(this.address) },
+		//set: function history(data)			{ return CPP_DKWindowDUK_history(this.address, data) },
     })
-	// [Window.returnValue](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window
-	Object.defineProperty(this, "returnValue", {
-        get: function returnValue()				{ return CPP_DKWindowDUK_returnValue(this.address) },
-		set: function returnValue(data)			{ return CPP_DKWindowDUK_returnValue(this.address, data) },
+	
+	// readonly attribute CustomElementRegistry customElements;
+	Object.defineProperty(this, "customElements", {
+        get: function customElements()			{ return CPP_DKWindowDUK_customElements(this.address) },
+		//set: function customElements(data)	{ return CPP_DKWindowDUK_customElements(this.address, data) },
     })
-	// [Window.sidebar](Deprecated)(Non-standard)(Read only) https://developer.mozilla.org/en-US/docs/Web/API/Window/sidebar
-	Object.defineProperty(this, "sidebar", {
-        get: function sidebar()					{ return CPP_DKWindowDUK_sidebar(this.address) },
-		//set: function sidebar(data)			{ return CPP_DKWindowDUK_sidebar(this.address, data) },
+	
+	// [Replaceable] readonly attribute BarProp locationbar;
+	Object.defineProperty(this, "locationbar", {
+        get: function locationbar()				{ return CPP_DKWindowDUK_locationbar(this.address) },
+		//set: function locationbar(data)		{ return CPP_DKWindowDUK_locationbar(this.address, data) },
     })
-	// [Window.status](Deprecated) https://developer.mozilla.org/en-US/docs/Web/API/Window/status
+	
+	// [Replaceable] readonly attribute BarProp menubar;
+	Object.defineProperty(this, "menubar", {
+        get: function menubar()					{ return CPP_DKWindowDUK_menubar(this.address) },
+		//set: function menubar(data)			{ return CPP_DKWindowDUK_menubar(this.address, data) },
+    })
+	
+	// [Replaceable] readonly attribute BarProp personalbar;
+	Object.defineProperty(this, "personalbar", {
+        get: function personalbar()				{ return CPP_DKWindowDUK_personalbar(this.address) },
+		//set: function personalbar(data)		{ return CPP_DKWindowDUK_personalbar(this.address, data) },
+    })
+	
+	// [Replaceable] readonly attribute BarProp scrollbars;
+	Object.defineProperty(this, "scrollbars", {
+        get: function scrollbars()				{ return CPP_DKWindowDUK_scrollbars(this.address) },
+		//set: function scrollbars(data)		{ return CPP_DKWindowDUK_scrollbars(this.address, data) },
+    })
+	
+	// [Replaceable] readonly attribute BarProp statusbar;
+	Object.defineProperty(this, "statusbar", {
+        get: function statusbar()				{ return CPP_DKWindowDUK_statusbar(this.address) },
+		//set: function statusbar(data)			{ return CPP_DKWindowDUK_statusbar(this.address, data) },
+    })
+	
+	// [Replaceable] readonly attribute BarProp toolbar;
+	Object.defineProperty(this, "toolbar", {
+        get: function toolbar()					{ return CPP_DKWindowDUK_toolbar(this.address) },
+		//set: function toolbar(data)			{ return CPP_DKWindowDUK_toolbar(this.address, data) },
+    })
+	
+	// attribute DOMString status;
 	Object.defineProperty(this, "status", {
         get: function status()					{ return CPP_DKWindowDUK_status(this.address) },
 		set: function status(data)				{ return CPP_DKWindowDUK_status(this.address, data) },
     })
+	
+	
+	// TODO
+	/////////////////////////////////////////////////////////////////////////////////////////////////
+	Object.defineProperty(this, "clientInformation", {
+        get: function clientInformation()		{ return CPP_DKWindowDUK_clientInformation(this.address) },
+		//set: function clientInformation(data)	{ return CPP_DKWindowDUK_clientInformation(this.address, data) },
+    })
+	Object.defineProperty(this, "closed", {
+        get: function closed()					{ return CPP_DKWindowDUK_closed(this.address) },
+		//set: function closed(data)			{ return CPP_DKWindowDUK_closed(this.address, data) },
+    })
+	Object.defineProperty(this, "devicePixelRatio", {
+        get: function devicePixelRatio()		{ return CPP_DKWindowDUK_devicePixelRatio(this.address) },
+		//set: function devicePixelRatio(data)	{ return CPP_DKWindowDUK_devicePixelRatio(this.address, data) },
+    })
+	Object.defineProperty(this, "frameElement", {
+        get: function frameElement()			{ return CPP_DKWindowDUK_frameElement(this.address) },
+		//set: function frameElement(data)		{ return CPP_DKWindowDUK_frameElement(this.address, data) },
+    })
+	Object.defineProperty(this, "frames", {
+        get: function frames()					{ return CPP_DKWindowDUK_frames(this.address) },
+		//set: function frames(data)			{ return CPP_DKWindowDUK_frames(this.address, data) },
+    })
+	Object.defineProperty(this, "innerHeight", {
+        get: function innerHeight()				{ return CPP_DKWindowDUK_innerHeight(this.address) },
+		//set: function innerHeight(data)		{ return CPP_DKWindowDUK_innerHeight(this.address, data) },
+    })
+	Object.defineProperty(this, "innerWidth", {
+        get: function innerWidth()				{ return CPP_DKWindowDUK_innerWidth(this.address) },
+		//set: function innerWidth(data)		{ return CPP_DKWindowDUK_innerWidth(this.address, data) },
+    })
+	Object.defineProperty(this, "launchQueue", {
+        get: function launchQueue()				{ return CPP_DKWindowDUK_launchQueue(this.address) },
+		//set: function launchQueue(data)		{ return CPP_DKWindowDUK_launchQueue(this.address, data) },
+    })
+	Object.defineProperty(this, "length", {
+        get: function length()					{ return CPP_DKWindowDUK_length(this.address) },
+		//set: function length(data)			{ return CPP_DKWindowDUK_length(this.address, data) },
+    })
+	Object.defineProperty(this, "navigator", {
+        get: function navigator()				{ return CPP_DKWindowDUK_navigator(this.address) },
+		//set: function navigator(data)			{ return CPP_DKWindowDUK_navigator(this.address, data) },
+    })
+	Object.defineProperty(this, "opener", {
+        get: function opener()					{ return CPP_DKWindowDUK_opener(this.address) },
+		set: function opener(data)				{ return CPP_DKWindowDUK_opener(this.address, data) },
+    })
+	Object.defineProperty(this, "outerHeight", {
+        get: function outerHeight()				{ return CPP_DKWindowDUK_outerHeight(this.address) },
+		//set: function outerHeight(data)		{ return CPP_DKWindowDUK_outerHeight(this.address, data) },
+    })
+	Object.defineProperty(this, "outerWidth", {
+        get: function outerWidth()				{ return CPP_DKWindowDUK_outerWidth(this.address) },
+		//set: function outerWidth(data)		{ return CPP_DKWindowDUK_outerWidth(this.address, data) },
+    })
+	Object.defineProperty(this, "pageXOffset", {
+        get: function pageXOffset()				{ return CPP_DKWindowDUK_pageXOffset(this.address) },
+		//set: function pageXOffset(data)		{ return CPP_DKWindowDUK_pageXOffset(this.address, data) },
+    })
+	Object.defineProperty(this, "pageYOffset", {
+        get: function pageYOffset()				{ return CPP_DKWindowDUK_pageYOffset(this.address) },
+		//set: function pageYOffset(data)		{ return CPP_DKWindowDUK_pageYOffset(this.address, data) },
+    })
+	Object.defineProperty(this, "parent", {
+        get: function parent()					{ return CPP_DKWindowDUK_parent(this.address) },
+		//set: function parent(data)			{ return CPP_DKWindowDUK_parent(this.address, data) },
+    })
+	Object.defineProperty(this, "screen", {
+        get: function screen()					{ return CPP_DKWindowDUK_screen(this.address) },
+		//set: function screen(data)			{ return CPP_DKWindowDUK_screen(this.address, data) },
+    })
+	Object.defineProperty(this, "scrollX", {
+        get: function scrollX()					{ return CPP_DKWindowDUK_scrollX(this.address) },
+		//set: function scrollX(data)			{ return CPP_DKWindowDUK_scrollX(this.address, data) },
+    })
+	Object.defineProperty(this, "scrollY", {
+        get: function scrollY()					{ return CPP_DKWindowDUK_scrollY(this.address) },
+		//set: function scrollY(data)			{ return CPP_DKWindowDUK_scrollY(this.address, data) },
+    })
+	Object.defineProperty(this, "speechSynthesis", {
+        get: function speechSynthesis()			{ return CPP_DKWindowDUK_speechSynthesis(this.address) },
+		//set: function speechSynthesis(data)	{ return CPP_DKWindowDUK_speechSynthesis(this.address, data) },
+    })
+	Object.defineProperty(this, "top", {
+        get: function top()						{ return CPP_DKWindowDUK_top(this.address) },
+		//set: function top(data)				{ return CPP_DKWindowDUK_top(this.address, data) },
+    })
+	Object.defineProperty(this, "visualViewport", {
+        get: function visualViewport()			{ return CPP_DKWindowDUK_visualViewport(this.address) },
+		//set: function visualViewport(data)	{ return CPP_DKWindowDUK_visualViewport(this.address, data) },
+    })
+	Object.defineProperty(this, "content", {
+        get: function content()					{ return CPP_DKWindowDUK_content(this.address) },
+		//set: function content(data)			{ return CPP_DKWindowDUK_content(this.address, data) },
+    })
+	Object.defineProperty(this, "defaultStatus", {
+        get: function defaultStatus()			{ return CPP_DKWindowDUK_defaultStatus(this.address) },
+		set: function defaultStatus(data)		{ return CPP_DKWindowDUK_defaultStatus(this.address, data) },
+    })
+	Object.defineProperty(this, "event", {
+        get: function event()					{ return CPP_DKWindowDUK_event(this.address) },
+		//set: function event(data)				{ return CPP_DKWindowDUK_event(this.address, data) },
+    })
+	Object.defineProperty(this, "external", {
+        get: function external()				{ return CPP_DKWindowDUK_external(this.address) },
+		//set: function external(data)			{ return CPP_DKWindowDUK_external(this.address, data) },
+    })
+	Object.defineProperty(this, "orientation", {
+        get: function orientation()				{ return CPP_DKWindowDUK_orientation(this.address) },
+		//set: function orientation(data)		{ return CPP_DKWindowDUK_orientation(this.address, data) },
+    })
+	Object.defineProperty(this, "returnValue", {
+        get: function returnValue()				{ return CPP_DKWindowDUK_returnValue(this.address) },
+		set: function returnValue(data)			{ return CPP_DKWindowDUK_returnValue(this.address, data) },
+    })
+	Object.defineProperty(this, "sidebar", {
+        get: function sidebar()					{ return CPP_DKWindowDUK_sidebar(this.address) },
+		//set: function sidebar(data)			{ return CPP_DKWindowDUK_sidebar(this.address, data) },
+    })
+	
 	
 	
 	////// Instance methods //////
