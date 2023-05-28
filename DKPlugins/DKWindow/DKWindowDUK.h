@@ -99,12 +99,13 @@ public:
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_frameElement", 		DKWindowDUK::frameElement);
 		
 		// WindowProxy? open(optional USVString url = "", optional DOMString target = "_blank", optional [LegacyNullToEmptyString] DOMString features = "");
-		//DKDuktape::AttachFunction("CPP_DKWindowDUK_open", 				DKWindowDUK::open); // TODO
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_open", 				DKWindowDUK::open); // TODO
 		
 		//Since this is the global object, the IDL named getter adds a NamedPropertiesObject exotic
 		//object on the prototype chain. Indeed, this does not make the global object an exotic object.
 		//Indexed access is taken care of by the WindowProxy exotic object.
 		// getter object (DOMString name);
+		// TODO
 	
 		// the user agent
 		// readonly attribute Navigator navigator;
@@ -114,35 +115,41 @@ public:
 		DKDuktape::AttachFunction("CPP_DKWindowDUK_clientInformation", 	DKWindowDUK::clientInformation);
 		
 		// readonly attribute boolean originAgentCluster;
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_originAgentCluster", DKWindowDUK::originAgentCluster);
 		
 		//user prompts
 		// undefined alert();
 		// undefined alert(DOMString message);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_alert", 				DKWindowDUK::alert);
 		
 		// boolean confirm(optional DOMString message = "");
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_confirm", 			DKWindowDUK::confirm);
 		
 		// DOMString? prompt(optional DOMString message = "", optional DOMString default = "");
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_prompt", 			DKWindowDUK::prompt);
 		
 		// undefined print();
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_print", 				DKWindowDUK::print);
 		
 		// undefined postMessage(any message, USVString targetOrigin, optional sequence<object> transfer = []);
 		// undefined postMessage(any message, optional WindowPostMessageOptions options = {});
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_postMessage", 		DKWindowDUK::postMessage);
 	
 		// also has obsolete members
 		
 		// Source: Compatibility Standard (https://compat.spec.whatwg.org/)
 		// partial interface Window {
 		//		readonly attribute short orientation;
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_orientation", 	DKWindowDUK::orientation);
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_orientation", 				DKWindowDUK::orientation);
 		//		
 		//		attribute EventHandler onorientationchange;
-		
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_onorientationchange",		DKWindowDUK::onorientationchange);
 		// };
 		
 		// Source: DOM Standard (https://dom.spec.whatwg.org/)
 		// partial interface Window {
 		//		[Replaceable] readonly attribute (Event or undefined) event; // legacy
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_event", 			DKWindowDUK::event);
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_event", 						DKWindowDUK::event);
 		// };
 		
 		// Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
@@ -166,199 +173,211 @@ public:
 		// Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
 		// partial interface Window {
 		//		undefined captureEvents();
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_captureEvents", 		DKWindowDUK::captureEvents);
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_captureEvents", 				DKWindowDUK::captureEvents);
 		//
 		//		undefined releaseEvents();
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_releaseEvents", 		DKWindowDUK::releaseEvents);
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_releaseEvents", 				DKWindowDUK::releaseEvents);
 		//
 		//		[Replaceable, SameObject] readonly attribute External external;
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_external", 			DKWindowDUK::external);
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_external", 					DKWindowDUK::external);
 		// };
 		
 		// Source: Cookie Store API (https://wicg.github.io/cookie-store/)
 		// [SecureContext]
 		// partial interface Window {
 		//		[SameObject] readonly attribute CookieStore cookieStore;
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_cookieStore", 				DKWindowDUK::cookieStore);
 		// };
 
 		// Source: Digital Goods API (https://wicg.github.io/digital-goods/)
 		// partial interface Window {
 		//		[SecureContext] Promise<DigitalGoodsService> getDigitalGoodsService(DOMString serviceProvider);
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_getDigitalGoodsService", 	DKWindowDUK::getDigitalGoodsService);
 		// };
 
 		// Source: Fenced frame (https://wicg.github.io/fenced-frame/)
 		// partial interface Window {
 		//		// Collection of fenced frame APIs
 		//		readonly attribute Fence? fence;
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_fence", 						DKWindowDUK::fence);
 		// };
 		
 		// Source: File System Access (https://wicg.github.io/file-system-access/)
 		// [SecureContext]
 		// partial interface Window {
 		//		Promise<sequence<FileSystemFileHandle>> showOpenFilePicker(optional OpenFilePickerOptions options = {});
-				//DKDuktape::AttachFunction("CPP_DKWindowDUK_showOpenFilePicker", 	DKWindowDUK::showOpenFilePicker);  // TODO
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_showOpenFilePicker", 		DKWindowDUK::showOpenFilePicker);
 		//
 		//		Promise<FileSystemFileHandle> showSaveFilePicker(optional SaveFilePickerOptions options = {});
-				//DKDuktape::AttachFunction("CPP_DKWindowDUK_showSaveFilePicker", 	DKWindowDUK::showSaveFilePicker);  // TODO
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_showSaveFilePicker", 		DKWindowDUK::showSaveFilePicker);
 		//
 		//		Promise<FileSystemDirectoryHandle> showDirectoryPicker(optional DirectoryPickerOptions options = {});
-				//DKDuktape::AttachFunction("CPP_DKWindowDUK_showDirectoryPicker", 	DKWindowDUK::showDirectoryPicker);  // TODO
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_showDirectoryPicker", 		DKWindowDUK::showDirectoryPicker);
 		// };
 		
 		// Source: Local Font Access API (https://wicg.github.io/local-font-access/)
 		// [SecureContext]
 		// partial interface Window {
 		//		Promise<sequence<FontData>> queryLocalFonts(optional QueryOptions options = {});
-				//DKDuktape::AttachFunction("CPP_DKWindowDUK_queryLocalFonts", 		DKWindowDUK::queryLocalFonts); // TODO
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_queryLocalFonts", 			DKWindowDUK::queryLocalFonts);
 		// };
 		
 		// Source: Manifest Incubations (https://wicg.github.io/manifest-incubations/)
 		// partial interface Window {
 		//		attribute EventHandler onappinstalled;
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_onappinstalled", 			DKWindowDUK::onappinstalled);
+		//
 		//		attribute EventHandler onbeforeinstallprompt;
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_onbeforeinstallprompt", 		DKWindowDUK::onbeforeinstallprompt);
 		// };
 
 		// Source: Portals (https://wicg.github.io/portals/)
 		// partial interface Window {
 		//		readonly attribute PortalHost? portalHost;
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_portalHost", 				DKWindowDUK::portalHost);
 		// };
 		
 		// Source: Web Speech API (https://wicg.github.io/speech-api/)
 		// partial interface Window {
 		//		[SameObject] readonly attribute SpeechSynthesis speechSynthesis;
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_speechSynthesis",	DKWindowDUK::speechSynthesis);
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_speechSynthesis",			DKWindowDUK::speechSynthesis);
 		// };
 		
 		// Source: Web App Launch Handler API (https://wicg.github.io/web-app-launch/)
 		// partial interface Window {
 		//		readonly attribute LaunchQueue launchQueue;
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_launchQueue", 		DKWindowDUK::launchQueue);
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_launchQueue", 				DKWindowDUK::launchQueue);
 		// };
 	
 		// Source: CSS Spatial Navigation Level 1 (https://www.w3.org/TR/css-nav-1/)
 		// partial interface Window {
 		//		undefined navigate(SpatialNavigationDirection dir);
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_navigate", 					DKWindowDUK::navigate);
 		// };
 
 		// Source: CSS Object Model (CSSOM) (https://www.w3.org/TR/cssom-1/)
 		// partial interface Window {
 		//		[NewObject] CSSStyleDeclaration getComputedStyle(Element elt, optional CSSOMString? pseudoElt);
-				//DKDuktape::AttachFunction("CPP_DKWindowDUK_getComputedStyle", 	DKWindowDUK::getComputedStyle); 	// TODO
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_getComputedStyle", 			DKWindowDUK::getComputedStyle);
 		// };
 	
 		// Source: CSSOM View Module (https://www.w3.org/TR/cssom-view-1/)
 		// partial interface Window {
 		//		[NewObject] MediaQueryList matchMedia(CSSOMString query);
-				//DKDuktape::AttachFunction("CPP_DKWindowDUK_matchMedia", 		DKWindowDUK::matchMedia);	 // TODO
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_matchMedia", 				DKWindowDUK::matchMedia);
 		//
 		//		[SameObject, Replaceable] readonly attribute Screen screen;
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_screen",				DKWindowDUK::screen);
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_screen",						DKWindowDUK::screen);
 		//
 		//		[SameObject, Replaceable] readonly attribute VisualViewport? visualViewport;
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_visualViewport",		DKWindowDUK::visualViewport);
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_visualViewport",				DKWindowDUK::visualViewport);
 		//
 		//		// browsing context
 		//		undefined moveTo(long x, long y);
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_moveTo", 			DKWindowDUK::moveTo);
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_moveTo", 					DKWindowDUK::moveTo);
 		//
 		//		undefined moveBy(long x, long y);
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_moveBy", 			DKWindowDUK::moveBy);
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_moveBy", 					DKWindowDUK::moveBy);
 		//
 		//		undefined resizeTo(long width, long height);
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_resizeTo", 			DKWindowDUK::resizeTo);
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_resizeTo", 					DKWindowDUK::resizeTo);
 		//
 		//		undefined resizeBy(long x, long y);
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_resizeBy", 			DKWindowDUK::resizeBy);
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_resizeBy", 					DKWindowDUK::resizeBy);
 		//
 		//		// viewport
 		//		[Replaceable] readonly attribute long innerWidth;
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_innerWidth", 		DKWindowDUK::innerWidth);
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_innerWidth", 				DKWindowDUK::innerWidth);
 		//
 		//		[Replaceable] readonly attribute long innerHeight;
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_innerHeight", 		DKWindowDUK::innerHeight);
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_innerHeight", 				DKWindowDUK::innerHeight);
 		//
 		//		// viewport scrolling
 		//		[Replaceable] readonly attribute double scrollX;
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_scrollX", 			DKWindowDUK::scrollX);
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_scrollX", 					DKWindowDUK::scrollX);
 		//
 		//		[Replaceable] readonly attribute double pageXOffset;
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_pageXOffset", 		DKWindowDUK::pageXOffset);
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_pageXOffset", 				DKWindowDUK::pageXOffset);
 		//
 		//		[Replaceable] readonly attribute double scrollY;
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_scrollY", 			DKWindowDUK::scrollY);
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_scrollY", 					DKWindowDUK::scrollY);
 		//
 		//		[Replaceable] readonly attribute double pageYOffset;
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_pageYOffset", 		DKWindowDUK::pageYOffset);
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_pageYOffset", 				DKWindowDUK::pageYOffset);
 		//
 		//		undefined scroll(optional ScrollToOptions options = {});
 		//		undefined scroll(unrestricted double x, unrestricted double y);
-				// DKDuktape::AttachFunction("CPP_DKWindowDUK_scroll", 			DKWindowDUK::scroll);		// TODO
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_scroll", 					DKWindowDUK::scroll);
 		//
 		//		undefined scrollTo(optional ScrollToOptions options = {});
 		//		undefined scrollTo(unrestricted double x, unrestricted double y);
-				// DKDuktape::AttachFunction("CPP_DKWindowDUK_scrollTo", 			DKWindowDUK::scrollTo);		// TODO
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_scrollTo", 					DKWindowDUK::scrollTo);
 				
 		//		undefined scrollBy(optional ScrollToOptions options = {});
 		//		undefined scrollBy(unrestricted double x, unrestricted double y);
-				// DKDuktape::AttachFunction("CPP_DKWindowDUK_scrollBy", 			DKWindowDUK::scrollBy);		// TODO
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_scrollBy", 					DKWindowDUK::scrollBy);
 		///
 		//		// client
 		//		[Replaceable] readonly attribute long screenX;
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_screenX", 			DKWindowDUK::screenX);
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_screenX", 					DKWindowDUK::screenX);
 		//
 		//		[Replaceable] readonly attribute long screenLeft;
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_screenLeft", 		DKWindowDUK::screenLeft);
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_screenLeft", 				DKWindowDUK::screenLeft);
 		//
 		//		[Replaceable] readonly attribute long screenY;
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_screenY", 			DKWindowDUK::screenY);
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_screenY", 					DKWindowDUK::screenY);
 		//
 		//		[Replaceable] readonly attribute long screenTop;
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_screenTop", 			DKWindowDUK::screenTop);
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_screenTop", 					DKWindowDUK::screenTop);
 		//
 		//		[Replaceable] readonly attribute long outerWidth;
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_outerWidth", 		DKWindowDUK::outerWidth);
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_outerWidth", 				DKWindowDUK::outerWidth);
 		//
 		//		[Replaceable] readonly attribute long outerHeight;
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_outerHeight", 		DKWindowDUK::outerHeight);
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_outerHeight", 				DKWindowDUK::outerHeight);
 		//
 		//		[Replaceable] readonly attribute double devicePixelRatio;
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_devicePixelRatio", 	DKWindowDUK::devicePixelRatio);
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_devicePixelRatio", 			DKWindowDUK::devicePixelRatio);
 		// };
 	
 		// Source: DeviceOrientation Event Specification (https://www.w3.org/TR/orientation-event/)
 		// partial interface Window {
 		//		[SecureContext] attribute EventHandler ondeviceorientation;
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_ondeviceorientation", 		DKWindowDUK::ondeviceorientation);
 		// };
 
 		// Source: DeviceOrientation Event Specification (https://www.w3.org/TR/orientation-event/)
 		// partial interface Window {
 		//		[SecureContext] attribute EventHandler ondeviceorientationabsolute;
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_ondeviceorientationabsolute", DKWindowDUK::ondeviceorientationabsolute);
 		// };
 
 		// Source: DeviceOrientation Event Specification (https://www.w3.org/TR/orientation-event/)
 		//	partial interface Window {
 		//		[SecureContext] attribute EventHandler ondevicemotion;
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_ondevicemotion",				 DKWindowDUK::ondevicemotion);
 		// };
 	
 		// Source: requestIdleCallback() (https://www.w3.org/TR/requestidlecallback/)
 		// partial interface Window {
 		//		unsigned long requestIdleCallback(IdleRequestCallback callback, optional IdleRequestOptions options = {});
-				// DKDuktape::AttachFunction("CPP_DKWindowDUK_requestIdleCallback", 	DKWindowDUK::requestIdleCallback);		// TODO
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_requestIdleCallback", 		DKWindowDUK::requestIdleCallback);
 		//
 		//		undefined cancelIdleCallback(unsigned long handle);
-				// DKDuktape::AttachFunction("CPP_DKWindowDUK_cancelIdleCallback", 	DKWindowDUK::cancelIdleCallback);			// TODO
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_cancelIdleCallback", 		DKWindowDUK::cancelIdleCallback);
 		// };
 	
 		// Source: Selection API (https://www.w3.org/TR/selection-api/)
 		// partial interface Window {
 		//		Selection? getSelection();
-				// DKDuktape::AttachFunction("CPP_DKWindowDUK_getSelection", 			DKWindowDUK::getSelection);			// TODO
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_getSelection", 				DKWindowDUK::getSelection);
 		// };
 
 		// Source: Window Management (https://www.w3.org/TR/window-management/)
 		// partial interface Window {
 		//		[SecureContext]
 		//		Promise<ScreenDetails> getScreenDetails();
+				DKDuktape::AttachFunction("CPP_DKWindowDUK_getScreenDetails", 			DKWindowDUK::getScreenDetails);
 		// };
 		
 		
@@ -640,6 +659,10 @@ public:
 	}
 	
 	// WindowProxy? open(optional USVString url = "", optional DOMString target = "_blank", optional [LegacyNullToEmptyString] DOMString features = "");
+	static int open(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		return DKTODO();
+	}
 	
 	//Since this is the global object, the IDL named getter adds a NamedPropertiesObject exotic
 	//object on the prototype chain. Indeed, this does not make the global object an exotic object.
@@ -677,15 +700,35 @@ public:
 	//user prompts
 	// undefined alert();
 	// undefined alert(DOMString message);
+	static int alert(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		return DKTODO();
+	}
 	
 	// boolean confirm(optional DOMString message = "");
+	static int confirm(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		return DKTODO();
+	}
 	
 	// DOMString? prompt(optional DOMString message = "", optional DOMString default = "");
+	static int prompt(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		return DKTODO();
+	}
 	
 	// undefined print();
+	static int print(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		return DKTODO();
+	}
 	
 	// undefined postMessage(any message, USVString targetOrigin, optional sequence<object> transfer = []);
 	// undefined postMessage(any message, optional WindowPostMessageOptions options = {});
+	static int postMessage(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		return DKTODO();
+	}
 	
 	// also has obsolete members
 	
@@ -701,7 +744,13 @@ public:
 			}
 	//		
 	//		attribute EventHandler onorientationchange;
-	
+			static int onorientationchange(duk_context* ctx){
+				DKDEBUGFUNC(ctx);
+				if(duk_is_valid_index(ctx, 1))
+					eventTarget(ctx)->onorientationchange(GetString(ctx));
+				dukglue_push(ctx, eventTarget(ctx)->onorientationchange());
+				return true;
+			}
 	// };
 	
 	// Source: DOM Standard (https://dom.spec.whatwg.org/)
@@ -766,48 +815,100 @@ public:
 	// [SecureContext]
 	// partial interface Window {
 	//		[SameObject] readonly attribute CookieStore cookieStore;
+			static int cookieStore(duk_context* ctx){
+				DKDEBUGFUNC(ctx);
+				if(duk_is_valid_index(ctx, 1))
+					eventTarget(ctx)->cookieStore(GetString(ctx));
+				dukglue_push(ctx, eventTarget(ctx)->cookieStore());
+				return true;
+			}
 	// };
 
 	// Source: Digital Goods API (https://wicg.github.io/digital-goods/)
 	// partial interface Window {
 	//		[SecureContext] Promise<DigitalGoodsService> getDigitalGoodsService(DOMString serviceProvider);
+			static int getDigitalGoodsService(duk_context* ctx){
+				DKDEBUGFUNC(ctx);
+				return DKTODO();
+			}
 	// };
 
 	// Source: Fenced frame (https://wicg.github.io/fenced-frame/)
 	// partial interface Window {
 	//		// Collection of fenced frame APIs
 	//		readonly attribute Fence? fence;
+			static int fence(duk_context* ctx){
+				DKDEBUGFUNC(ctx);
+				if(duk_is_valid_index(ctx, 1))
+					eventTarget(ctx)->fence(GetString(ctx));
+				dukglue_push(ctx, eventTarget(ctx)->fence());
+				return true;
+			}
 	// };
 	
 	// Source: File System Access (https://wicg.github.io/file-system-access/)
 	// [SecureContext]
 	// partial interface Window {
 	//		Promise<sequence<FileSystemFileHandle>> showOpenFilePicker(optional OpenFilePickerOptions options = {});
-			// TODO
+			static int showOpenFilePicker(duk_context* ctx){
+				DKDEBUGFUNC(ctx);
+				return DKTODO();
+			}
 	//
 	//		Promise<FileSystemFileHandle> showSaveFilePicker(optional SaveFilePickerOptions options = {});
-			// TODO
+			static int showSaveFilePicker(duk_context* ctx){
+				DKDEBUGFUNC(ctx);
+				return DKTODO();
+			}
 	//
 	//		Promise<FileSystemDirectoryHandle> showDirectoryPicker(optional DirectoryPickerOptions options = {});
-			// TODO
+			static int showDirectoryPicker(duk_context* ctx){
+				DKDEBUGFUNC(ctx);
+				return DKTODO();
+			}
 	// };
 	
 	// Source: Local Font Access API (https://wicg.github.io/local-font-access/)
 	// [SecureContext]
 	// partial interface Window {
 	//		Promise<sequence<FontData>> queryLocalFonts(optional QueryOptions options = {});
-			// TODO
+			static int queryLocalFonts(duk_context* ctx){
+				DKDEBUGFUNC(ctx);
+				return DKTODO();
+			}
 	// };
 	
 	// Source: Manifest Incubations (https://wicg.github.io/manifest-incubations/)
 	// partial interface Window {
 	//		attribute EventHandler onappinstalled;
+			static int onappinstalled(duk_context* ctx){
+				DKDEBUGFUNC(ctx);
+				if(duk_is_valid_index(ctx, 1))
+					eventTarget(ctx)->onappinstalled(GetString(ctx));
+				dukglue_push(ctx, eventTarget(ctx)->onappinstalled());
+				return true;
+			}
+	//
 	//		attribute EventHandler onbeforeinstallprompt;
+			static int onbeforeinstallprompt(duk_context* ctx){
+				DKDEBUGFUNC(ctx);
+				if(duk_is_valid_index(ctx, 1))
+					eventTarget(ctx)->onbeforeinstallprompt(GetString(ctx));
+				dukglue_push(ctx, eventTarget(ctx)->onbeforeinstallprompt());
+				return true;
+			}
 	// };
 
 	// Source: Portals (https://wicg.github.io/portals/)
 	// partial interface Window {
 	//		readonly attribute PortalHost? portalHost;
+			static int portalHost(duk_context* ctx){
+				DKDEBUGFUNC(ctx);
+				if(duk_is_valid_index(ctx, 1))
+					eventTarget(ctx)->portalHost(GetString(ctx));
+				dukglue_push(ctx, eventTarget(ctx)->portalHost());
+				return true;
+			}
 	// };
 	
 	// Source: Web Speech API (https://wicg.github.io/speech-api/)
@@ -837,18 +938,28 @@ public:
 	// Source: CSS Spatial Navigation Level 1 (https://www.w3.org/TR/css-nav-1/)
 	// partial interface Window {
 	//		undefined navigate(SpatialNavigationDirection dir);
+			static int navigate(duk_context* ctx){
+				DKDEBUGFUNC(ctx);
+				return DKTODO();
+			}
 	// };
 	
 	// Source: CSS Object Model (CSSOM) (https://www.w3.org/TR/cssom-1/)
 	// partial interface Window {
 	//		[NewObject] CSSStyleDeclaration getComputedStyle(Element elt, optional CSSOMString? pseudoElt);
-			// TODO
+			static int getComputedStyle(duk_context* ctx){
+				DKDEBUGFUNC(ctx);
+				return DKTODO();
+			}
 	// };
 	
 	// Source: CSSOM View Module (https://www.w3.org/TR/cssom-view-1/)
 	// partial interface Window {
 	//		[NewObject] MediaQueryList matchMedia(CSSOMString query);
-			// TODO
+			static int matchMedia(duk_context* ctx){
+				DKDEBUGFUNC(ctx);
+				return DKTODO();
+			}
 	//
 	//		[SameObject, Replaceable] readonly attribute Screen screen;
 			static int screen(duk_context* ctx){
@@ -967,15 +1078,24 @@ public:
 	//
 	//		undefined scroll(optional ScrollToOptions options = {});
 	//		undefined scroll(unrestricted double x, unrestricted double y);
-			// TODO
+			static int scroll(duk_context* ctx){
+				DKDEBUGFUNC(ctx);
+				return DKTODO();
+			}
 	//
 	//		undefined scrollTo(optional ScrollToOptions options = {});
 	//		undefined scrollTo(unrestricted double x, unrestricted double y);
-			// TODO
+			static int scrollTo(duk_context* ctx){
+				DKDEBUGFUNC(ctx);
+				return DKTODO();
+			}
 	//
 	//		undefined scrollBy(optional ScrollToOptions options = {});
 	//		undefined scrollBy(unrestricted double x, unrestricted double y);
-			// TODO
+			static int scrollBy(duk_context* ctx){
+				DKDEBUGFUNC(ctx);
+				return DKTODO();
+			}
 	///
 	//		// client
 	//		[Replaceable] readonly attribute long screenX;
@@ -1045,37 +1165,71 @@ public:
 	// Source: DeviceOrientation Event Specification (https://www.w3.org/TR/orientation-event/)
 	// partial interface Window {
 	//		[SecureContext] attribute EventHandler ondeviceorientation;
+			static int ondeviceorientation(duk_context* ctx){
+				DKDEBUGFUNC(ctx);
+				if(duk_is_valid_index(ctx, 1))
+					eventTarget(ctx)->ondeviceorientation(GetString(ctx));
+				dukglue_push(ctx, eventTarget(ctx)->ondeviceorientation());
+				return true;
+			}
 	// };
 
 	// Source: DeviceOrientation Event Specification (https://www.w3.org/TR/orientation-event/)
 	// partial interface Window {
 	//		[SecureContext] attribute EventHandler ondeviceorientationabsolute;
+			static int ondeviceorientationabsolute(duk_context* ctx){
+				DKDEBUGFUNC(ctx);
+				if(duk_is_valid_index(ctx, 1))
+					eventTarget(ctx)->ondeviceorientationabsolute(GetString(ctx));
+				dukglue_push(ctx, eventTarget(ctx)->ondeviceorientationabsolute());
+				return true;
+			}
 	// };
 
 	// Source: DeviceOrientation Event Specification (https://www.w3.org/TR/orientation-event/)
 	//	partial interface Window {
 	//		[SecureContext] attribute EventHandler ondevicemotion;
+			static int ondevicemotion(duk_context* ctx){
+				DKDEBUGFUNC(ctx);
+				if(duk_is_valid_index(ctx, 1))
+					eventTarget(ctx)->ondevicemotion(GetString(ctx));
+				dukglue_push(ctx, eventTarget(ctx)->ondevicemotion());
+				return true;
+			}
 	// };
 	
 	// Source: requestIdleCallback() (https://www.w3.org/TR/requestidlecallback/)
 	// partial interface Window {
 	//		unsigned long requestIdleCallback(IdleRequestCallback callback, optional IdleRequestOptions options = {});
-			// TODO
+			static int requestIdleCallback(duk_context* ctx){
+				DKDEBUGFUNC(ctx);
+				return DKTODO();
+			}
 	//
 	//		undefined cancelIdleCallback(unsigned long handle);
-			// TODO
+			static int cancelIdleCallback(duk_context* ctx){
+				DKDEBUGFUNC(ctx);
+				return DKTODO();
+			}
 	// };
 	
 	// Source: Selection API (https://www.w3.org/TR/selection-api/)
 	// partial interface Window {
 	//		Selection? getSelection();
-			// TODO
+			static int getSelection(duk_context* ctx){
+				DKDEBUGFUNC(ctx);
+				return DKTODO();
+			}
 	// };
 	
 	// Source: Window Management (https://www.w3.org/TR/window-management/)
 	// partial interface Window {
 	//		[SecureContext]
 	//		Promise<ScreenDetails> getScreenDetails();
+			static int getScreenDetails(duk_context* ctx){
+				DKDEBUGFUNC(ctx);
+				return DKTODO();
+			}
 	// };
 };
 REGISTER_OBJECT(DKWindowDUK, true)
