@@ -268,7 +268,7 @@ public:
 	// partial interface Window {
 	//		[SecureContext] Promise<DigitalGoodsService> getDigitalGoodsService(DOMString serviceProvider);
 			virtual bool getDigitalGoodsService(DKString& serviceProvider) {
-				DKDEBUGFUNC();
+				DKDEBUGFUNC(serviceProvider);
 				return DKTODO();
 			}
 	// };
