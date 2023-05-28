@@ -211,8 +211,8 @@ var Window = function Window(address) {
     }
 		
 	// DOMString? prompt(optional DOMString message = "", optional DOMString default = "");
-	Window.prototype.prompt = function prompt(message, default) {
-		return CPP_DKWindowDUK_prompt(this.address, message, default)
+	Window.prototype.prompt = function prompt(message, _default) {
+		return CPP_DKWindowDUK_prompt(this.address, message, _default)
     }
 		
 	// undefined print();

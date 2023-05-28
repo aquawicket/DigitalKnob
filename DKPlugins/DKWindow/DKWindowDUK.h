@@ -666,6 +666,13 @@ public:
 	}
 	
 	// readonly attribute boolean originAgentCluster;
+	static int originAgentCluster(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		if(duk_is_valid_index(ctx, 1))
+			eventTarget(ctx)->originAgentCluster(GetBool(ctx));
+		dukglue_push(ctx, eventTarget(ctx)->originAgentCluster());
+		return true;
+	}
 	
 	//user prompts
 	// undefined alert();
