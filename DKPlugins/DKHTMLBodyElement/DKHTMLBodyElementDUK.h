@@ -57,9 +57,9 @@ public:
 		return true;
 	}
 	
-	static DKHTMLElement* eventTarget(duk_context* ctx){
+	static DKHTMLBodyElement* eventTarget(duk_context* ctx){
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		return (DKHTMLElement*)addressToPointer(eventTargetAddress);
+		return (DKHTMLBodyElement*)addressToPointer(eventTargetAddress);
 	}
 	static bool GetBool(duk_context* ctx, int index = 1){
 		if (duk_is_boolean(ctx, index))
