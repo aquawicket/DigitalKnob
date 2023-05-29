@@ -90,11 +90,58 @@ public:
 	virtual void fetchPriority(const DOMString&)	{ } 				// setter
 	
 	// Promise<undefined> decode();
-	// TODO
+	virtual bool decode() {
+		DKDEBUGFUNC();
+		return DKTODO();
+	}
 
 	// also has obsolete members
 //};
 
+// Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
+// partial interface HTMLImageElement {
+	// [CEReactions] attribute DOMString name;
+	virtual DOMString name()						{ return ""; }		// getter
+	virtual void name(const DOMString&)				{ } 				// setter
+	
+	// [CEReactions] attribute USVString lowsrc;
+	virtual USVString name()						{ return ""; }		// getter
+	virtual void name(const USVString&)				{ } 				// setter
+	
+	// [CEReactions] attribute DOMString align;
+	virtual DOMString align()						{ return ""; }		// getter
+	virtual void align(const DOMString&)			{ } 				// setter
+	
+	// [CEReactions] attribute unsigned long hspace;
+	virtual unsigned int hspace()					{ return 0; }		// getter
+	virtual void hspace(const unsigned int&)		{ } 				// setter
+	
+	// [CEReactions] attribute unsigned long vspace;
+	virtual unsigned int vspace()					{ return 0; }		// getter
+	virtual void vspace(const unsigned int&)		{ } 				// sette
+	
+	// [CEReactions] attribute USVString longDesc;
+	virtual USVString longDesc()					{ return ""; }		// getter
+	virtual void longDesc(const USVString&)			{ } 				// setter
+	
+	// [CEReactions] attribute [LegacyNullToEmptyString] DOMString border;
+	virtual DOMString border()						{ return ""; }		// getter
+	virtual void border(const DOMString&)			{ } 				// setter
+// };
+
+// Source: Attribution Reporting (https://wicg.github.io/attribution-reporting-api/)
+// HTMLImageElement includes HTMLAttributionSrcElementUtils;
+
+// Source: CSSOM View Module (https://www.w3.org/TR/cssom-view-1/)
+// partial interface HTMLImageElement {
+	// readonly attribute long x;
+	virtual int x()									{ return ""; }		// getter
+	virtual void x(const int&)						{ } 				// setter
+	
+	// readonly attribute long y;
+	virtual int y()									{ return ""; }		// getter
+	virtual void y(const int&)						{ } 				// setter
+//};
 };
 
 

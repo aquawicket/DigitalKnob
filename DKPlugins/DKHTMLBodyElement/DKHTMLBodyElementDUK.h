@@ -9,18 +9,19 @@
 #include "DKDuktape/DKDuktape.h"
 
 
-// [Exposed=Window]
-// interface HTMLBodyElement : HTMLElement {
+
 class DKHTMLBodyElementDUK : public DKObjectT<DKHTMLBodyElementDUK>
 {
 public:
 	bool Init(){
-		// [HTMLConstructor] constructor();
-		DKDuktape::AttachFunction("CPP_DKHTMLBodyElementDUK", DKHTMLBodyElementDUK::constructor);
-		
-		//	 also has obsolete members
-	//};
-		
+		// [Exposed=Window]
+		// interface HTMLBodyElement : HTMLElement {
+			// [HTMLConstructor] constructor();
+			DKDuktape::AttachFunction("CPP_DKHTMLBodyElementDUK", DKHTMLBodyElementDUK::constructor);
+			
+			//	 also has obsolete members
+		//};
+			
 		// partial interface HTMLBodyElement {
 			// attribute EventHandler onorientationchange;
 			DKDuktape::AttachFunction("CPP_DKHTMLBodyElementDUK_onorientationchange", 	DKHTMLBodyElementDUK::onorientationchange);
@@ -28,7 +29,7 @@ public:
 
 		// Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
 		// HTMLBodyElement includes WindowEventHandlers;
-		
+			
 		// Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
 		// partial interface HTMLBodyElement {
 			// [CEReactions] attribute [LegacyNullToEmptyString] DOMString text;
