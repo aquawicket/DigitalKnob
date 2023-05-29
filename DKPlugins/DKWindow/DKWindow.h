@@ -176,8 +176,8 @@ public:
 	}
 	
 	// DOMString? prompt(optional DOMString message = "", optional DOMString default = "");
-	virtual bool prompt(DOMString& message, DOMString default) {
-		DKDEBUGFUNC(message, default);
+	virtual bool prompt(DOMString& message, DOMString _default) {
+		DKDEBUGFUNC(message, _default);
 		return DKTODO();
 	}
 	
