@@ -1,3 +1,4 @@
+/*
 // [Console] https://console.spec.whatwg.org
 CPP_DK_Create("DKConsoleDUK");
 CPP_DK_Create("TEST_Console.js");
@@ -74,7 +75,7 @@ CPP_DK_Create("TEST_HTMLBodyElement.js");
 // [HTMLImageElement] https://html.spec.whatwg.org/multipage/sections.html#htmlimageelement
 CPP_DK_Create("DKHTMLImageElementDUK");
 CPP_DK_Create("TEST_HTMLImageElement.js");
-
+*/
 
 /*
 ////// DigitalKnob //////

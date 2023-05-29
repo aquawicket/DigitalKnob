@@ -74,7 +74,6 @@
 bool App::Init() {
 	DKDEBUGFUNC();
 	
-	/*
 	// [Console] https://console.spec.whatwg.org
 	DKClass::DKCreate("TEST_Console");
 	
@@ -131,11 +130,11 @@ bool App::Init() {
 
 	////// DigitalKnob //////
 	// [DKConsoleWindow]
-	DKClass::DKCreate("TEST_DKConsoleWindow");
-
+	//DKClass::DKCreate("TEST_DKConsoleWindow");
+	
 	// [DKSdlWindow]
 	DKClass::DKCreate("TEST_DKSdlWindow");
-	
+	/*
 	// [DKRmlDocument]
 	DKClass::DKCreate("TEST_DKRmlDocument");
 	
