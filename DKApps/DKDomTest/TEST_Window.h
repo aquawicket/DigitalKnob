@@ -106,6 +106,7 @@ public:
 		//object on the prototype chain. Indeed, this does not make the global object an exotic object.
 		//Indexed access is taken care of by the WindowProxy exotic object.
 		// getter object (DOMString name);
+		// TODO
 		
 		// the user agent
 		// readonly attribute Navigator navigator;
@@ -189,17 +190,20 @@ public:
 		// [SecureContext]
 		// partial interface Window {
 		//		[SameObject] readonly attribute CookieStore cookieStore;
+				DKINFO("window.cookieStore() = "		+toString(window.cookieStore())				+"\n");
 		// };
 
 		// Source: Digital Goods API (https://wicg.github.io/digital-goods/)
 		// partial interface Window {
 		//		[SecureContext] Promise<DigitalGoodsService> getDigitalGoodsService(DOMString serviceProvider);
+				// function
 		// };
 
 		// Source: Fenced frame (https://wicg.github.io/fenced-frame/)
 		// partial interface Window {
 		//		// Collection of fenced frame APIs
 		//		readonly attribute Fence? fence;
+				DKINFO("window.fence() = "				+toString(window.fence())				+"\n");
 		// };
 	
 		// Source: File System Access (https://wicg.github.io/file-system-access/)
@@ -225,12 +229,16 @@ public:
 		// Source: Manifest Incubations (https://wicg.github.io/manifest-incubations/)
 		// partial interface Window {
 		//		attribute EventHandler onappinstalled;
+				DKINFO("window.onappinstalled() = "				+toString(window.onappinstalled())				+"\n");
+		
 		//		attribute EventHandler onbeforeinstallprompt;
+				DKINFO("window.onbeforeinstallprompt() = "		+toString(window.onbeforeinstallprompt())		+"\n");
 		// };
 
 		// Source: Portals (https://wicg.github.io/portals/)
 		// partial interface Window {
 		//		readonly attribute PortalHost? portalHost;
+				DKINFO("window.portalHost() = "					+toString(window.portalHost())					+"\n");
 		// };
 	
 		// Source: Web Speech API (https://wicg.github.io/speech-api/)
@@ -248,6 +256,7 @@ public:
 		// Source: CSS Spatial Navigation Level 1 (https://www.w3.org/TR/css-nav-1/)
 		// partial interface Window {
 		//		undefined navigate(SpatialNavigationDirection dir);
+				// function
 		// };
 		
 		// Source: CSS Object Model (CSSOM) (https://www.w3.org/TR/cssom-1/)
@@ -338,16 +347,19 @@ public:
 		// Source: DeviceOrientation Event Specification (https://www.w3.org/TR/orientation-event/)
 		// partial interface Window {
 		//		[SecureContext] attribute EventHandler ondeviceorientation;
+				DKINFO("window.ondeviceorientation() = "+toString(window.ondeviceorientation())	+"\n");
 		// };
 
 		// Source: DeviceOrientation Event Specification (https://www.w3.org/TR/orientation-event/)
 		// partial interface Window {
 		//		[SecureContext] attribute EventHandler ondeviceorientationabsolute;
+				DKINFO("window.ondeviceorientationabsolute() = "+toString(window.ondeviceorientationabsolute())	+"\n");
 		// };
 
 		// Source: DeviceOrientation Event Specification (https://www.w3.org/TR/orientation-event/)
 		//	partial interface Window {
 		//		[SecureContext] attribute EventHandler ondevicemotion;
+				DKINFO("window.ondevicemotion() = "		+toString(window.ondevicemotion())		+"\n");
 		// };
 	
 		// Source: requestIdleCallback() (https://www.w3.org/TR/requestidlecallback/)
