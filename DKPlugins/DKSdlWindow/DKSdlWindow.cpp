@@ -131,7 +131,7 @@ DKSdlWindow::DKSdlWindow() : DKWindow() {
     result = "OpenGLES";
     DKINFO("DKSdlWindow Width: " + toString(width) + " Height: " + toString(height) + "\n");
 	
-    if(SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_RESIZABLE, &window, &renderer) < 0){
+    if(SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_RESIZABLE, &_window, &renderer) < 0){
 		DKERROR("SDL_CreateWindowAndRenderer() failed!: " + DKString(SDL_GetError()) + "\n");
 		return;
 	}
@@ -141,7 +141,7 @@ DKSdlWindow::DKSdlWindow() : DKWindow() {
     SDL_Window* sdlWindow = SDL_CreateWindow("RmlUi SDL2 with SDL_Renderer", 0, 0, width, height, SDL_WINDOW_RESIZABLE);
     if (!sdlWindow)
 		return DKERROR("sdlWindow inavlid!: " + DKString(SDL_GetError()) + "\n");
-    window = sdlWindow;
+    _window = sdlWindow;
 
     SDL_Renderer* sdlRenderer = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_ACCELERATED);// | SDL_RENDERER_PRESENTVSYNC);
     if (!sdlRenderer)
@@ -171,23 +171,23 @@ DKSdlWindow::DKSdlWindow() : DKWindow() {
     SDL_SetHintWithPriority(SDL_HINT_RENDER_DRIVER, "opengl", SDL_HINT_OVERRIDE);
     //SDL_SetHint(SDL_HINT_RENDER_OPENGL_SHADERS, 0);
     SDL_SetHintWithPriority(SDL_HINT_RENDER_OPENGL_SHADERS, 0, SDL_HINT_OVERRIDE);
-    window = SDL_CreateWindow(mTitle.c_str(), winX, winY, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL | SDL_WINDOW_ALLOW_HIGHDPI);
-    if(!window) {
+    _window = SDL_CreateWindow(mTitle.c_str(), winX, winY, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL | SDL_WINDOW_ALLOW_HIGHDPI);
+    if(!_window) {
         SDL_Quit();
-        DKERROR("window invalid!: " + DKString(SDL_GetError()) + "\n");
+        DKERROR("_window invalid!: " + DKString(SDL_GetError()) + "\n");
 		return;
     }
     renderer = NULL;
     if(!same(sdl_renderer, "SOFTWARE")) {
         result = "SDL_RENDERER_ACCELERATED"; // | SDL_RENDERER_PRESENTVSYNC";
-        renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE/*| SDL_RENDERER_PRESENTVSYNC*/);
+        renderer = SDL_CreateRenderer(_window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE/*| SDL_RENDERER_PRESENTVSYNC*/);
     }
     if(!renderer) {
         result = "SDL_RENDERER_SOFTWARE";
-        renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
+        renderer = SDL_CreateRenderer(_window, -1, SDL_RENDERER_SOFTWARE);
     }
     if(!renderer) {
-        SDL_DestroyWindow(window);
+        SDL_DestroyWindow(_window);
         SDL_Quit();
 		DKERROR("SDL_CreateRenderer Error: " + DKString(SDL_GetError()) + "\n");
 		return;
@@ -215,7 +215,7 @@ DKSdlWindow::DKSdlWindow() : DKWindow() {
 
     DKString icon = DKFile::local_assets + "icon.ico";
     SetIcon(&icon, NULL);
-    SDL_SetWindowTitle(window, windowTitle.c_str());
+    SDL_SetWindowTitle(_window, windowTitle.c_str());
     DKClass::RegisterFunc("DKSdlWindow::TestInt", &DKSdlWindow::TestInt, this);
     DKClass::RegisterFunc("DKSdlWindow::TestString", &DKSdlWindow::TestString, this);
     DKClass::RegisterFunc("DKSdlWindow::TestReturnInt", &DKSdlWindow::TestReturnInt, this);
@@ -251,8 +251,8 @@ DKSdlWindow::DKSdlWindow() : DKWindow() {
     SDL_SetEventFilter(&DKSdlWindow::EventFilter, this); //DEBUG : bypassing events here for now
 #if SDL_VIDEO_OPENGL
 	// https://github.com/ocornut/imgui/issues/1116#issuecomment-297701113
-    SDL_GLContext glcontext = SDL_GL_CreateContext(window);
-    SDL_GL_MakeCurrent(window, glcontext);
+    SDL_GLContext glcontext = SDL_GL_CreateContext(_window);
+    SDL_GL_MakeCurrent(_window, glcontext);
     gl_version = (char*)glGetString(GL_VERSION);
     // these are only available with OpenGL 3.0+
     // https://www.khronos.org/opengl/wiki/Get_Context_Info
@@ -294,7 +294,7 @@ DKSdlWindow::DKSdlWindow() : DKWindow() {
     //DKINFO("GL_SHADING_LANGUAGE_VERSION = "+gl_shading+"\n");
     DKINFO("GL_EXTENSIONS = "+gl_extensions+"\n");
     DKINFO("SDL Renderer = " + result + "\n");
-    SDL_GL_GetDrawableSize(window, &width, &height);
+    SDL_GL_GetDrawableSize(_window, &width, &height);
     DKINFO("Resolution = " + toString(width) + "x" + toString(height) + "\n");
     DKINFO("Render Driver = " + toString(info.name) + "\n");
     DKINFO("max_texture_height = "+toString(info.max_texture_height)+"\n");
@@ -325,7 +325,7 @@ DKSdlWindow::DKSdlWindow() : DKWindow() {
     SDL_GL_GetAttribute(SDL_GL_STENCIL_SIZE, &stencil);
     DKINFO("Stencil Size = " + toString(stencil) + "\n");
     if(has(gl_vendor, "Microsoft"))
-        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_WARNING, "OpenGL Drivers", "Your OpenGL video drivers are out of date. Please upgrade the graphics card drivers for best performance and compatability.", window);
+        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_WARNING, "OpenGL Drivers", "Your OpenGL video drivers are out of date. Please upgrade the graphics card drivers for best performance and compatability.", _window);
 #endif
 
     //DKClass::DKCreate("DKWindow");
@@ -337,7 +337,7 @@ DKSdlWindow::~DKSdlWindow(){
 	//SDL_DestroyTexture(tex);
     SDL_DestroyRenderer(renderer);
     renderer = NULL;
-    SDL_DestroyWindow(window);
+    SDL_DestroyWindow(_window);
     SDL_Quit();
 }
 
@@ -383,7 +383,7 @@ bool DKSdlWindow::TestReturnString(const void* input, void* output) {
 
 bool DKSdlWindow::Fullscreen(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
-    SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+    SDL_SetWindowFullscreen(_window, SDL_WINDOW_FULLSCREEN_DESKTOP);
     return true;
 }
 
@@ -398,7 +398,7 @@ bool DKSdlWindow::GetHandle(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     SDL_SysWMinfo wmInfo;
     SDL_VERSION(&wmInfo.version);
-    SDL_GetWindowWMInfo(window, &wmInfo);
+    SDL_GetWindowWMInfo(_window, &wmInfo);
 #if WIN
     HWND hwnd = wmInfo.info.win.window;
     *(HWND*)output = hwnd;
@@ -426,7 +426,7 @@ bool DKSdlWindow::GetHandle(const void* input, void* output) {
 bool DKSdlWindow::GetHeight(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     int h;
-    SDL_GetWindowSize(window, NULL, &h);
+    SDL_GetWindowSize(_window, NULL, &h);
     if(h == 0)
         h = height;
     *(int*)output = h;
@@ -458,7 +458,7 @@ bool DKSdlWindow::GetPixelRatio(const void* input, void* output) {
 bool DKSdlWindow::GetWidth(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     int w;
-    SDL_GetWindowSize(window, &w, NULL);
+    SDL_GetWindowSize(_window, &w, NULL);
     if(w == 0)
         w = width;
     *(int*)output = w;
@@ -468,7 +468,7 @@ bool DKSdlWindow::GetWidth(const void* input, void* output) {
 bool DKSdlWindow::GetX(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     int x;
-    SDL_GetWindowPosition(window, &x, NULL);
+    SDL_GetWindowPosition(_window, &x, NULL);
     *(int*)output = x;
     return true;
 }
@@ -476,21 +476,21 @@ bool DKSdlWindow::GetX(const void* input, void* output) {
 bool DKSdlWindow::GetY(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     int y;
-    SDL_GetWindowPosition(window, NULL, &y);
+    SDL_GetWindowPosition(_window, NULL, &y);
     *(int*)output = y;
     return true;
 }
 
 bool DKSdlWindow::Hide(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
-    SDL_HideWindow(window);
+    SDL_HideWindow(_window);
     return true;
 }
 
 bool DKSdlWindow::IsFullscreen(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     long FullscreenFlag = SDL_WINDOW_FULLSCREEN;
-    bool isFullscreen = ((SDL_GetWindowFlags(window) & FullscreenFlag) != 0);
+    bool isFullscreen = ((SDL_GetWindowFlags(_window) & FullscreenFlag) != 0);
     *(bool*)output = isFullscreen;
     return true;
 }
@@ -498,7 +498,7 @@ bool DKSdlWindow::IsFullscreen(const void* input, void* output) {
 bool DKSdlWindow::IsVisible(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     long IsVisibleFlag = SDL_WINDOW_SHOWN;
-    bool isVisible = ((SDL_GetWindowFlags(window) & IsVisibleFlag) != 0);
+    bool isVisible = ((SDL_GetWindowFlags(_window) & IsVisibleFlag) != 0);
     *(bool*)output = isVisible;
     return true;
 }
@@ -506,19 +506,19 @@ bool DKSdlWindow::IsVisible(const void* input, void* output) {
 bool DKSdlWindow::MessageBox(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     DKString message = *(DKString*)input;
-    SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "DKERROR", message.c_str(), window);
+    SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "DKERROR", message.c_str(), _window);
     return true;
 }
 
 bool DKSdlWindow::Minimize(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
-    SDL_MinimizeWindow(window);
+    SDL_MinimizeWindow(_window);
     return true;
 }
 
 bool DKSdlWindow::Restore(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
-    SDL_RestoreWindow(window);
+    SDL_RestoreWindow(_window);
     return true;
 }
 
@@ -536,8 +536,8 @@ bool DKSdlWindow::SetHeight(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     int h = *(int*)input;
     int w;
-    SDL_GetWindowSize(window, &w, NULL);
-    SDL_SetWindowSize(window, w, h);
+    SDL_GetWindowSize(_window, &w, NULL);
+    SDL_SetWindowSize(_window, w, h);
     return true;
 }
 
@@ -547,7 +547,7 @@ bool DKSdlWindow::SetIcon(const void* input, void* output) {
     DKString file = *(DKString*)input;
     SDL_SysWMinfo wmInfo;
     SDL_VERSION(&wmInfo.version);
-    SDL_GetWindowWMInfo(window, &wmInfo);
+    SDL_GetWindowWMInfo(_window, &wmInfo);
     HWND hwnd = wmInfo.info.win.window;
     HICON hIcon = (HICON)LoadImage(NULL, file.c_str(), IMAGE_ICON, 32, 32, LR_LOADFROMFILE);
     SendMessage(hwnd, WM_SETICON, ICON_SMALL, (LPARAM)hIcon);
@@ -561,7 +561,7 @@ bool DKSdlWindow::SetIcon(const void* input, void* output) {
 bool DKSdlWindow::SetTitle(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     DKString title = *(DKString*)input;
-    SDL_SetWindowTitle(window, title.c_str());
+    SDL_SetWindowTitle(_window, title.c_str());
     return true;
 }
 
@@ -569,8 +569,8 @@ bool DKSdlWindow::SetWidth(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     int w = *(int*)input;
     int h;
-    SDL_GetWindowSize(window, NULL, &h);
-    SDL_SetWindowSize(window, w, h);
+    SDL_GetWindowSize(_window, NULL, &h);
+    SDL_SetWindowSize(_window, w, h);
     return true;
 }
 
@@ -578,8 +578,8 @@ bool DKSdlWindow::SetX(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     int x = *(int*)input;
     int y;
-    SDL_GetWindowPosition(window, NULL, &y);
-    SDL_SetWindowPosition(window, x, y);
+    SDL_GetWindowPosition(_window, NULL, &y);
+    SDL_SetWindowPosition(_window, x, y);
     return true;
 }
 
@@ -587,20 +587,20 @@ bool DKSdlWindow::SetY(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     int y = *(int*)input;
     int x;
-    SDL_GetWindowPosition(window, &x, NULL);
-    SDL_SetWindowPosition(window, x, y);
+    SDL_GetWindowPosition(_window, &x, NULL);
+    SDL_SetWindowPosition(_window, x, y);
     return true;
 }
 
 bool DKSdlWindow::Show(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
-    SDL_ShowWindow(window);
+    SDL_ShowWindow(_window);
     return true;
 }
 
 bool DKSdlWindow::Windowed(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
-    SDL_SetWindowFullscreen(window, 0);
+    SDL_SetWindowFullscreen(_window, 0);
     return true;
 }
 
@@ -624,7 +624,7 @@ bool DKSdlWindow::drawBackground(SDL_Renderer *renderer, int w, int h) {
 
 void DKSdlWindow::Process() {
     //DKDEBUGFUNC();  //EXCESSIVE LOGGING
-    if(SDL_GetWindowFlags(window) & SDL_WINDOW_HIDDEN)
+    if(SDL_GetWindowFlags(_window) & SDL_WINDOW_HIDDEN)
         DKUtil::Sleep(1000); //FIXME - look for a better way to save cpu usage here
 	
 	if (!renderer) {
@@ -659,7 +659,7 @@ int DKSdlWindow::EventFilter(void* userdata, SDL_Event* event) {
 			case SDL_WINDOWEVENT_CLOSE: {
 				DKINFO("SDL_WINDOWEVENT_CLOSE \n");
 				DKSdlWindow* dkSdlWindow = static_cast<DKSdlWindow*>(userdata);
-				SDL_DestroyWindow(dkSdlWindow->window);
+				SDL_DestroyWindow(dkSdlWindow->_window);
 				return 1;
 			}
             case SDL_WINDOWEVENT_MOVED: {

@@ -43,9 +43,9 @@ bool DKSdlRmlDocument::Init(){
 	if(!dkSdlWindow || !dkRmlDocument)
 		return DKERROR("DKSdlRmlDocument::Init(): INVALID OBJECTS\n");
 #ifdef USE_DKSDLRMLRENDERER
-	Renderer = new DKSdlRmlRenderer(dkSdlWindow->renderer, dkSdlWindow->window);
+	Renderer = new DKSdlRmlRenderer(dkSdlWindow->renderer, dkSdlWindow->_window);
 #elif USE_DKSDLRMLOPENGL
-	Renderer = new DKSdlRmlOpenGL(dkSdlWindow->renderer, dkSdlWindow->window);
+	Renderer = new DKSdlRmlOpenGL(dkSdlWindow->renderer, dkSdlWindow->_window);
 #elif USE_DKSDLRMLSHELL
 	Renderer = new ShellRenderInterfaceOpenGL();
 #endif
