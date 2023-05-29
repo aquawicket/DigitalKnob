@@ -70,13 +70,13 @@ CPP_DK_Create("TEST_HTMLElement.js");
 // [HTMLBodyElement] https://html.spec.whatwg.org/multipage/sections.html#htmlbodyelement
 CPP_DK_Create("DKHTMLBodyElementDUK");
 CPP_DK_Create("TEST_HTMLBodyElement.js");
+
+// [HTMLImageElement] https://html.spec.whatwg.org/multipage/sections.html#htmlimageelement
+CPP_DK_Create("DKHTMLImageElementDUK");
+CPP_DK_Create("TEST_HTMLImageElement.js");
+
+
 /*
-// [HTMLImageElement] https://html.spec.whatwg.org/multipage/sections.html#htmlbodyelement
-//CPP_DK_Create("DKHTMLImageElementDUK");	//TODO
-//CPP_DK_Create("TEST_HTMLImageElement.js");//TODO
-
-
-
 ////// DigitalKnob //////
 // [DKConsoleWindow]
 CPP_DK_Create("DKConsoleWindowDUK");
