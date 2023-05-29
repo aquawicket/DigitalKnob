@@ -656,6 +656,12 @@ int DKSdlWindow::EventFilter(void* userdata, SDL_Event* event) {
     //DKDEBUGFUNC(userdata, event);  //EXCESSIVE LOGGING
     if(event->type == SDL_WINDOWEVENT) {
         switch(event->window.event) {
+			case SDL_WINDOWEVENT_CLOSE: {
+				DKINFO("SDL_WINDOWEVENT_CLOSE \n");
+				DKSdlWindow* dkSdlWindow = static_cast<DKSdlWindow*>(userdata);
+				SDL_DestroyWindow(dkSdlWindow->window);
+				return 1;
+			}
             case SDL_WINDOWEVENT_MOVED: {
                 DKSdlWindow* dkwindowdow = static_cast<DKSdlWindow*>(userdata);
                 dkwindowdow->winX = event->window.data1;
