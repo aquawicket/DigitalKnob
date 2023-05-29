@@ -105,8 +105,8 @@ public:
 	virtual void name(const DOMString&)				{ } 				// setter
 	
 	// [CEReactions] attribute USVString lowsrc;
-	virtual USVString name()						{ return ""; }		// getter
-	virtual void name(const USVString&)				{ } 				// setter
+	virtual USVString lowsrc()						{ return ""; }		// getter
+	virtual void lowsrc(const USVString&)				{ } 				// setter
 	
 	// [CEReactions] attribute DOMString align;
 	virtual DOMString align()						{ return ""; }		// getter
@@ -135,11 +135,11 @@ public:
 // Source: CSSOM View Module (https://www.w3.org/TR/cssom-view-1/)
 // partial interface HTMLImageElement {
 	// readonly attribute long x;
-	virtual int x()									{ return ""; }		// getter
+	virtual int x()									{ return 0; }		// getter
 	virtual void x(const int&)						{ } 				// setter
 	
 	// readonly attribute long y;
-	virtual int y()									{ return ""; }		// getter
+	virtual int y()									{ return 0; }		// getter
 	virtual void y(const int&)						{ } 				// setter
 //};
 };
