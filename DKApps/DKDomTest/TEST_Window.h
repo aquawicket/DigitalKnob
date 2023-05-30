@@ -15,6 +15,7 @@ public:
 		DKINFO("\n////// TEST_Window.h //////\n");
 		
 		DKWindow window;
+		window.screen(&TEST_Screen::_screen);
 		printWindowProperties(window);
 		return true;
 	}
@@ -271,7 +272,9 @@ public:
 				// function
 		//
 		//		[SameObject, Replaceable] readonly attribute Screen screen;
-				// DKINFO("window.screen() = "				+toString(window.screen())				+"\n");
+				//DKINFO("window.screen() = "				+toString(window.screen())				+"\n");
+				if(window.screen())
+					TEST_Screen::printScreenProperties(*window.screen());
 		//
 		//		[SameObject, Replaceable] readonly attribute VisualViewport? visualViewport;
 				DKINFO("window.visualViewport() = "		+toString(window.visualViewport())		+"\n");

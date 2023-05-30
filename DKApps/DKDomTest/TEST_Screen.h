@@ -12,12 +12,13 @@
 class TEST_Screen : public DKObjectT<TEST_Screen>
 {
 public:
+	static DKScreen _screen;
+
 	bool Init(){
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_Screen.h //////\n");
 		
-		DKScreen screen;
-		printScreenProperties(screen);
+		printScreenProperties(_screen);
 		return true;
 	}
 	
@@ -45,5 +46,6 @@ public:
 };
 REGISTER_OBJECT(TEST_Screen, true);
 
+DKScreen TEST_Screen::_screen;
 
 #endif //TEST_Screen_H
