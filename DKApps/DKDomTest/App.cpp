@@ -73,7 +73,7 @@
 ///////////////////////////////////////
 bool App::Init() {
 	DKDEBUGFUNC();
-	/*
+
 	// [Console] https://console.spec.whatwg.org
 	DKClass::DKCreate("TEST_Console");
 	
@@ -140,7 +140,7 @@ bool App::Init() {
 	
 	// [DKRmlLocation]
 	//DKClass::DKCreate("TEST_DKRmlLocation");
-	*/
+
 	return true;
 }
 
