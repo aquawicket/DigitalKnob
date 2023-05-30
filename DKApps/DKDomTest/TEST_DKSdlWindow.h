@@ -8,20 +8,20 @@
 class TEST_DKSdlWindow : public DKObjectT<TEST_DKSdlWindow>
 {
 public:
-	DKSdlWindow dkSdlWindowA;
+	DKSdlWindow dkSdlWindow;
 	
 	bool Init(){
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_DKSdlWindow.h //////\n");
 		
-		printDKSdlWindowProperties(dkSdlWindowA);
+		printDKSdlWindowProperties(dkSdlWindow);
 		
 		////// FocusEvent //////
 		// https://w3c.github.io/uievents/#events-focus-types
-		dkConsoleWindow.addEventListener("blur", 				&TEST_DKSdlWindow::onblur);
-		dkConsoleWindow.addEventListener("focus", 				&TEST_DKSdlWindow::onfocus);
-		dkConsoleWindow.addEventListener("focusin", 			&TEST_DKSdlWindow::onfocusin);
-		dkConsoleWindow.addEventListener("focusout", 			&TEST_DKSdlWindow::onfocusout);
+		dkSdlWindow.addEventListener("blur", 		&TEST_DKSdlWindow::onblur);
+		dkSdlWindow.addEventListener("focus", 		&TEST_DKSdlWindow::onfocus);
+		dkSdlWindow.addEventListener("focusin", 	&TEST_DKSdlWindow::onfocusin);
+		dkSdlWindow.addEventListener("focusout", 	&TEST_DKSdlWindow::onfocusout);
 		
 		return true;
 	}

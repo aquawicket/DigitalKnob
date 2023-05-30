@@ -28,6 +28,7 @@
 //#include "DK/DKAndroid.h"
 #include "DK/DKFile.h"
 #include "DKSdlWindow/DKSdlWindow.h"
+#include "DKFocusEvent/DKFocusEvent.h"
 #include "DK/DKOsInfo.h"
 #include "DKOpenGL/DKOpenGL.h"
 
@@ -654,48 +655,68 @@ void DKSdlWindow::Process() {
 
 int DKSdlWindow::EventFilter(void* userdata, SDL_Event* event) {
     //DKDEBUGFUNC(userdata, event);  //EXCESSIVE LOGGING
+	DKSdlWindow* dkSdlWindow = static_cast<DKSdlWindow*>(userdata);
+	
     if(event->type == SDL_WINDOWEVENT) {
         switch(event->window.event) {
 			case SDL_WINDOWEVENT_CLOSE: {
 				DKINFO("SDL_WINDOWEVENT_CLOSE \n");
-				DKSdlWindow* dkSdlWindow = static_cast<DKSdlWindow*>(userdata);
 				SDL_DestroyWindow(dkSdlWindow->_window);
 				return 1;
 			}
             case SDL_WINDOWEVENT_MOVED: {
-                DKSdlWindow* dkwindowdow = static_cast<DKSdlWindow*>(userdata);
-                dkwindowdow->winX = event->window.data1;
-                dkwindowdow->winY = event->window.data2;
-                dkwindowdow->Process();
-                DKEvents::SendEvent("sdlwindow", "move", toString(dkwindowdow->winX) + "," + toString(dkwindowdow->winY));
+                dkSdlWindow->winX = event->window.data1;
+                dkSdlWindow->winY = event->window.data2;
+                dkSdlWindow->Process();
+                //DKEvents::SendEvent("sdlwindow", "move", toString(dkSdlWindow->winX) + "," + toString(dkSdlWindow->winY));
                 return 1;
             }
             case SDL_WINDOWEVENT_RESIZED: {
-                DKSdlWindow* dkwindowdow = static_cast<DKSdlWindow*>(userdata);
-                dkwindowdow->width = event->window.data1;
-                dkwindowdow->height = event->window.data2;
-                dkwindowdow->Process();
-                DKEvents::SendEvent("sdlwindow", "resize", toString(dkwindowdow->width) + "," + toString(dkwindowdow->height));
+                dkSdlWindow->width = event->window.data1;
+                dkSdlWindow->height = event->window.data2;
+                dkSdlWindow->Process();
+                //DKEvents::SendEvent("sdlwindow", "resize", toString(dkwindowdow->width) + "," + toString(dkwindowdow->height));
                 return 1;
             }
             case SDL_WINDOWEVENT_SIZE_CHANGED: {
-                DKSdlWindow* dkwindowdow = static_cast<DKSdlWindow*>(userdata);
-                dkwindowdow->width = event->window.data1;
-                dkwindowdow->height = event->window.data2;
-                dkwindowdow->Process();
-                DKEvents::SendEvent("sdlwindow", "resize", toString(dkwindowdow->width) + "," + toString(dkwindowdow->height));
+                dkSdlWindow->width = event->window.data1;
+                dkSdlWindow->height = event->window.data2;
+                dkSdlWindow->Process();
+                //DKEvents::SendEvent("sdlwindow", "resize", toString(dkwindowdow->width) + "," + toString(dkwindowdow->height));
                 return 1;
             }
             case SDL_WINDOWEVENT_MINIMIZED: {
-                DKEvents::SendEvent("sdlwindow", "minimize", "");
+				DKINFO("SDL_WINDOWEVENT_MINIMIZED \n");
+				
+                //1. blur: sent after element A loses focus.
+				DKFocusEvent blur_event("blur", "");
+				blur_event.relatedTarget(dkSdlWindow->interfaceAddress);
+				dkSdlWindow->dispatchEvent(blur_event);
+
+				//2. focusout: sent after the blur event.
+				DKFocusEvent focusout_event("focusout", "");
+				focusout_event.relatedTarget(dkSdlWindow->interfaceAddress);
+				dkSdlWindow->dispatchEvent(focusout_event);
                 return 1;
             }
             case SDL_WINDOWEVENT_MAXIMIZED: {
-                DKEvents::SendEvent("sdlwindow", "maximize", "");
+				DKINFO("SDL_WINDOWEVENT_MAXIMIZED \n");
+                //DKEvents::SendEvent("sdlwindow", "maximize", "");
                 return 1;
             }
             case SDL_WINDOWEVENT_RESTORED: {
-                DKEvents::SendEvent("sdlwindow", "restore", "");
+				DKINFO("SDL_WINDOWEVENT_RESTORED \n");
+               
+				//3. focus: sent after element B receives focus.
+				DKFocusEvent focus_event("focus", "");
+				focus_event.relatedTarget(dkSdlWindow->interfaceAddress);
+				dkSdlWindow->dispatchEvent(focus_event);
+
+				//4. focusin: sent after the focus event.
+				DKFocusEvent focusin_event("focusin", "");
+				focusin_event.relatedTarget(dkSdlWindow->interfaceAddress);
+				dkSdlWindow->dispatchEvent(focusin_event);
+		
                 return 1;
             }
         }
