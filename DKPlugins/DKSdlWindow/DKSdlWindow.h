@@ -184,6 +184,10 @@ public:
 	// undefined alert();
 	virtual bool alert() {
 		DKDEBUGFUNC();
+		
+		// https://wiki.libsdl.org/SDL2/SDL_ShowSimpleMessageBox
+		int rtn = SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, "alert", "alert", _window);
+		
 		return DKTODO();
 	}
 	
@@ -344,7 +348,7 @@ public:
 			virtual void onappinstalled(const DKString&)				{ DKTODO(); } 				// setter
 	//
 	//		attribute EventHandler onbeforeinstallprompt;
-			virtual DKString onbeforeinstallprompt()					{ return ""; }				// getter
+			virtual DKString onbeforeinstallprompt()					{ DKTODO(); return ""; }				// getter
 			virtual void onbeforeinstallprompt(const DKString&)			{ DKTODO(); } 				// setter
 	// };
 	
@@ -352,21 +356,21 @@ public:
 	// partial interface Window {
 	//		readonly attribute PortalHost? portalHost;
 			virtual DKString portalHost()								{ DKTODO(); return ""; }	// getter
-			virtual void portalHost(const DKString&)					{ } 						// setter
+			virtual void portalHost(const DKString&)					{ DKTODO(); } 				// setter
 	// };
 	
 	// Source: Web Speech API (https://wicg.github.io/speech-api/)
 	// partial interface Window {
 	//		[SameObject] readonly attribute SpeechSynthesis speechSynthesis;
 			virtual DKString speechSynthesis()							{ DKTODO(); return ""; }	// getter
-			virtual void speechSynthesis(const DKString&)				{ } 						// setter
+			virtual void speechSynthesis(const DKString&)				{ DKTODO(); } 				// setter
 	// };
 	
 	// Source: Web App Launch Handler API (https://wicg.github.io/web-app-launch/)
 	// partial interface Window {
 	//		readonly attribute LaunchQueue launchQueue;
 			virtual DKString launchQueue()								{ DKTODO(); return ""; }	// getter
-			virtual void launchQueue(const DKString&)					{ } 						// setter
+			virtual void launchQueue(const DKString&)					{ DKTODO(); } 				// setter
 	// };
 	
 	// Source: CSS Spatial Navigation Level 1 (https://www.w3.org/TR/css-nav-1/)
@@ -397,11 +401,11 @@ public:
 	//
 	//		[SameObject, Replaceable] readonly attribute Screen screen;
 			virtual DKString screen()								{ DKTODO(); return ""; }	// getter
-			virtual void screen(const DKString&)					{ } 						// setter
+			virtual void screen(const DKString&)					{ DKTODO(); } 				// setter
 	//
 	//		[SameObject, Replaceable] readonly attribute VisualViewport? visualViewport;
 			virtual DKString visualViewport()						{ DKTODO(); return ""; }	// getter
-			virtual void visualViewport(const DKString&)			{ } 						// setter
+			virtual void visualViewport(const DKString&)			{ DKTODO(); } 				// setter
 	//
 	//		// browsing context
 	//		undefined moveTo(long x, long y);
@@ -431,28 +435,28 @@ public:
 	//		// viewport
 	//		[Replaceable] readonly attribute long innerWidth;
 			virtual int innerWidth()						{ DKTODO(); return 0; }		// getter
-			virtual void innerWidth(const int&)				{ } 						// setter
+			virtual void innerWidth(const int&)				{ DKTODO(); } 				// setter
 	//
 	//		[Replaceable] readonly attribute long innerHeight;
 			virtual int innerHeight()						{ DKTODO(); return 0; }		// getter
-			virtual void innerHeight(const int&)			{ } 						// setter
+			virtual void innerHeight(const int&)			{ DKTODO(); } 				// setter
 	//
 	//		// viewport scrolling
 	//		[Replaceable] readonly attribute double scrollX;
 			virtual double scrollX()						{ DKTODO(); return 0.0; }	// getter
-			virtual void scrollX(const double&)				{ } 						// setter
+			virtual void scrollX(const double&)				{ DKTODO(); } 				// setter
 	//
 	//		[Replaceable] readonly attribute double pageXOffset;
 			virtual double pageXOffset()					{ DKTODO(); return 0.0; }	// getter
-			virtual void pageXOffset(const double&)			{ } 						// setter
+			virtual void pageXOffset(const double&)			{ DKTODO(); } 				// setter
 	//
 	//		[Replaceable] readonly attribute double scrollY;
 			virtual double scrollY()						{ DKTODO(); return 0.0; }	// getter
-			virtual void scrollY(const double&)				{ } 						// setter
+			virtual void scrollY(const double&)				{ DKTODO(); } 				// setter
 	//
 	//		[Replaceable] readonly attribute double pageYOffset;
 			virtual double pageYOffset()					{ DKTODO(); return 0.0; }	// getter
-			virtual void pageYOffset(const double&)			{ } 						// setter
+			virtual void pageYOffset(const double&)			{ DKTODO(); } 				// setter
 	//
 	//		undefined scroll(optional ScrollToOptions options = {});
 	//		undefined scroll(unrestricted double x, unrestricted double y);
@@ -478,19 +482,19 @@ public:
 	//		// client
 	//		[Replaceable] readonly attribute long screenX;
 			virtual int screenX()							{ DKTODO(); return 0; }	// getter
-			virtual void screenX(const int&)				{ } 			// setter
+			virtual void screenX(const int&)				{ DKTODO(); } 			// setter
 	//
 	//		[Replaceable] readonly attribute long screenLeft;
 			virtual int screenLeft()						{ DKTODO(); return 0; }	// getter
-			virtual void screenLeft(const int&)				{ } 			// setter
+			virtual void screenLeft(const int&)				{ DKTODO(); } 			// setter
 	//
 	//		[Replaceable] readonly attribute long screenY;
 			virtual int screenY()							{ DKTODO(); return 0; }	// getter
-			virtual void screenY(const int&)				{ } 			// setter
+			virtual void screenY(const int&)				{ DKTODO(); } 			// setter
 	//
 	//		[Replaceable] readonly attribute long screenTop;
 			virtual int screenTop()							{ DKTODO(); return 0; }	// getter
-			virtual void screenTop(const int&)				{ } 			// setter
+			virtual void screenTop(const int&)				{ DKTODO(); } 			// setter
 	//
 	//		[Replaceable] readonly attribute long outerWidth;
 			virtual int outerWidth(){										// getter
@@ -518,28 +522,28 @@ public:
 	//
 	//		[Replaceable] readonly attribute double devicePixelRatio;
 			virtual double devicePixelRatio()				{ DKTODO(); return 0; }	// getter
-			virtual void devicePixelRatio(const double&)	{ } 					// setter
+			virtual void devicePixelRatio(const double&)	{ DKTODO(); } 			// setter
 	// };
 	
 	// Source: DeviceOrientation Event Specification (https://www.w3.org/TR/orientation-event/)
 	// partial interface Window {
 	//		[SecureContext] attribute EventHandler ondeviceorientation;
 			virtual DKString ondeviceorientation()						{ DKTODO(); return ""; }	// getter
-			virtual void ondeviceorientation(const DKString&)			{ } 						// setter
+			virtual void ondeviceorientation(const DKString&)			{ DKTODO(); } 				// setter
 	// };
 
 	// Source: DeviceOrientation Event Specification (https://www.w3.org/TR/orientation-event/)
 	// partial interface Window {
 	//		[SecureContext] attribute EventHandler ondeviceorientationabsolute;
 			virtual DKString ondeviceorientationabsolute()				{ DKTODO(); return ""; }	// getter
-			virtual void ondeviceorientationabsolute(const DKString&)	{ } 						// setter
+			virtual void ondeviceorientationabsolute(const DKString&)	{ DKTODO(); } 				// setter
 	// };
 
 	// Source: DeviceOrientation Event Specification (https://www.w3.org/TR/orientation-event/)
 	//	partial interface Window {
 	//		[SecureContext] attribute EventHandler ondevicemotion;
 			virtual DKString ondevicemotion()							{ DKTODO(); return ""; }	// getter
-			virtual void ondevicemotion(const DKString&)				{ } 						// setter
+			virtual void ondevicemotion(const DKString&)				{ DKTODO(); } 				// setter
 	// };
 
 	// Source: requestIdleCallback() (https://www.w3.org/TR/requestidlecallback/)
@@ -577,15 +581,9 @@ public:
 	// };
 
 	////// DK //////
-	bool TestInt(const void* input, void* output);
-	bool TestString(const void* input, void* output);
-	bool TestReturnInt(const void* input, void* output);
-	bool TestReturnString(const void* input, void* output);
-
 	bool Fullscreen(const void* input, void* output);
 	bool GetClipboard(const void* input, void* output);
 	bool GetHandle(const void* input, void* output);
-	bool GetHeight(const void* input, void* output);
 	bool GetMouseX(const void* input, void* output);
 	bool GetMouseY(const void* input, void* output);
 	bool GetPixelRatio(const void* input, void* output);
@@ -599,10 +597,8 @@ public:
 	bool Minimize(const void* input, void* output);
 	bool Restore(const void* input, void* output);
 	bool SetClipboard(const void* input, void* output);
-	bool SetHeight(const void* input, void* output);
 	bool SetIcon(const void* input, void* output);
 	bool SetTitle(const void* input, void* output);
-	bool SetWidth(const void* input, void* output);
 	bool SetX(const void* input, void* output);
 	bool SetY(const void* input, void* output);
 	bool Show(const void* input, void* output);
@@ -612,6 +608,7 @@ public:
 	static bool drawBackground(SDL_Renderer *renderer, int w, int h);
 	bool handle(SDL_Event* event);
 	void Process();
+	
 	static std::map<int,int> sdlKeyCode;
 	static std::map<int,int> sdlCharCode;
 	static std::map<int,int> sdlShiftCharCode;
@@ -632,8 +629,8 @@ public:
 	DKString mTitle;
 	int winX;
 	int winY;
-	int width;
-	int height;
+	int _width;
+	int _height;
 	int last_mouseX;
 	int last_mouseY;
 

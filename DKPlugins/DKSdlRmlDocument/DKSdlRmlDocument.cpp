@@ -158,8 +158,8 @@ bool DKSdlRmlDocument::Handle(SDL_Event *event) {
 
 bool DKSdlRmlDocument::Render(){
     //DKDEBUGFUNC();  //EXCESSIVE LOGGING
-	if(dkSdlWindow->width != dkRmlDocument->context->GetDimensions().x || dkSdlWindow->height != dkRmlDocument->context->GetDimensions().y){
-		dkRmlDocument->context->SetDimensions(Rml::Vector2i(dkSdlWindow->width, dkSdlWindow->height));
+	if(dkSdlWindow->_width != dkRmlDocument->context->GetDimensions().x || dkSdlWindow->_height != dkRmlDocument->context->GetDimensions().y){
+		dkRmlDocument->context->SetDimensions(Rml::Vector2i(dkSdlWindow->_width, dkSdlWindow->_height));
 		// Reset blending and draw a fake point just outside the screen to let SDL know that it needs to reset its state in case it wants to render a texture 
 		SDL_SetRenderDrawBlendMode(dkSdlWindow->renderer, SDL_BLENDMODE_NONE);
 		SDL_RenderDrawPoint(dkSdlWindow->renderer, -1, -1);
