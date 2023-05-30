@@ -70,25 +70,25 @@ public:
 	// https://w3c.github.io/uievents/#events-focus-types
 	static bool onblur(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKINFO("TEST_DKSdlWindow::onblur() \n");
+		DKINFO("\nTEST_DKSdlWindow::onblur() \n");
 		TEST_FocusEvent::printFocusEventProperties(dynamic_cast<DKFocusEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool onfocus(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKINFO("TEST_DKSdlWindow::onfocus() \n");
+		DKINFO("\nTEST_DKSdlWindow::onfocus() \n");
 		TEST_FocusEvent::printFocusEventProperties(dynamic_cast<DKFocusEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool onfocusin(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKINFO("TEST_DKSdlWindow::onfocusin() \n");
+		DKINFO("\nTEST_DKSdlWindow::onfocusin() \n");
 		TEST_FocusEvent::printFocusEventProperties(dynamic_cast<DKFocusEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool onfocusout(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKINFO("TEST_DKSdlWindow::onfocusout() \n");
+		DKINFO("\nTEST_DKSdlWindow::onfocusout() \n");
 		TEST_FocusEvent::printFocusEventProperties(dynamic_cast<DKFocusEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
@@ -97,67 +97,67 @@ public:
 	// https://w3c.github.io/uievents/#events-mouse-types
 	static bool onauxclick(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKINFO("TEST_DKSdlWindow::onauxclick() \n");
+		DKINFO("\nTEST_DKSdlWindow::onauxclick() \n");
 		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool onclick(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKINFO("TEST_DKSdlWindow::onclick() \n");
+		DKINFO("\nTEST_DKSdlWindow::onclick() \n");
 		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool oncontextmenu(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKINFO("TEST_DKSdlWindow::oncontextmenu() \n");
+		DKINFO("\nTEST_DKSdlWindow::oncontextmenu() \n");
 		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool ondblclick(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKINFO("TEST_DKSdlWindow::ondblclick() \n");
+		DKINFO("\nTEST_DKSdlWindow::ondblclick() \n");
 		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool onmousedown(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKINFO("TEST_DKSdlWindow::onmousedown() \n");
+		DKINFO("\nTEST_DKSdlWindow::onmousedown() \n");
 		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool onmouseenter(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKINFO("TEST_DKSdlWindow::onmouseenter() \n");
+		DKINFO("\nTEST_DKSdlWindow::onmouseenter() \n");
 		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool onmouseleave(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKINFO("TEST_DKSdlWindow::onmouseleave() \n");
+		DKINFO("\nTEST_DKSdlWindow::onmouseleave() \n");
 		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool onmousemove(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKINFO("TEST_DKSdlWindow::onmousemove() \n");
+		DKINFO("\nTEST_DKSdlWindow::onmousemove() \n");
 		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool onmouseout(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKINFO("TEST_DKSdlWindow::onmouseout() \n");
+		DKINFO("\nTEST_DKSdlWindow::onmouseout() \n");
 		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool onmouseover(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKINFO("TEST_DKSdlWindow::onmouseover() \n");
+		DKINFO("\nTEST_DKSdlWindow::onmouseover() \n");
 		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool onmouseup(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKINFO("TEST_DKSdlWindow::onmouseup() \n");
+		DKINFO("\nTEST_DKSdlWindow::onmouseup() \n");
 		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
@@ -166,7 +166,7 @@ public:
 	// https://w3c.github.io/uievents/#events-wheel-types
 	static bool onwheel(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKINFO("TEST_DKSdlWindow::onwheel() \n");
+		DKINFO("\nTEST_DKSdlWindow::onwheel() \n");
 		TEST_WheelEvent::printWheelEventProperties(dynamic_cast<DKWheelEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
@@ -175,13 +175,13 @@ public:
 	// https://w3c.github.io/uievents/#events-input-types
 	static bool onbeforeinput(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKINFO("TEST_DKSdlWindow::onbeforeinput() \n");
+		DKINFO("\nTEST_DKSdlWindow::onbeforeinput() \n");
 		TEST_InputEvent::printInputEventProperties(dynamic_cast<DKInputEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool oninput(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKINFO("TEST_DKSdlWindow::oninput() \n");
+		DKINFO("\nTEST_DKSdlWindow::oninput() \n");
 		TEST_InputEvent::printInputEventProperties(dynamic_cast<DKInputEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
@@ -190,13 +190,13 @@ public:
 	// https://w3c.github.io/uievents/#events-keyboard-types
 	static bool onkeydown(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKINFO("TEST_DKSdlWindow::onkeydown() \n");
+		DKINFO("\nTEST_DKSdlWindow::onkeydown() \n");
 		TEST_KeyboardEvent::printKeyboardEventProperties(dynamic_cast<DKKeyboardEvent&>(event));	//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool onkeyup(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKINFO("TEST_DKSdlWindow::onkeyup() \n");
+		DKINFO("\nTEST_DKSdlWindow::onkeyup() \n");
 		TEST_KeyboardEvent::printKeyboardEventProperties(dynamic_cast<DKKeyboardEvent&>(event));	//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
@@ -205,19 +205,19 @@ public:
 	// https://w3c.github.io/uievents/#events-composition-types
 	static bool oncompositionstart(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKINFO("TEST_DKSdlWindow::oncompositionstart() \n");
+		DKINFO("\nTEST_DKSdlWindow::oncompositionstart() \n");
 		TEST_CompositionEvent::printCompositionEventProperties(dynamic_cast<DKCompositionEvent&>(event));	//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool oncompositionupdate(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKINFO("TEST_DKSdlWindow::oncompositionupdate() \n");
+		DKINFO("\nTEST_DKSdlWindow::oncompositionupdate() \n");
 		TEST_CompositionEvent::printCompositionEventProperties(dynamic_cast<DKCompositionEvent&>(event));	//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool oncompositionend(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKINFO("TEST_DKSdlWindow::oncompositionend() \n");
+		DKINFO("\nTEST_DKSdlWindow::oncompositionend() \n");
 		TEST_CompositionEvent::printCompositionEventProperties(dynamic_cast<DKCompositionEvent&>(event));	//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
