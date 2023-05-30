@@ -32,13 +32,13 @@ CPP_DK_Create("TEST_CompositionEvent.js");
 CPP_DK_Create("DKDragEventDUK");
 CPP_DK_Create("TEST_DragEvent.js");
 
-// [Window] https://html.spec.whatwg.org/
-CPP_DK_Create("DKWindowDUK");
-CPP_DK_Create("TEST_Window.js");
-
 // [Screen] https://w3c.github.io/csswg-drafts/cssom-view/#the-screen-interface
 CPP_DK_Create("DKScreenDUK");
 CPP_DK_Create("TEST_Screen.js");
+
+// [Window] https://html.spec.whatwg.org/
+CPP_DK_Create("DKWindowDUK");
+CPP_DK_Create("TEST_Window.js");
 
 // [Navigator] https://html.spec.whatwg.org/multipage/system-state.html#the-navigator-object
 CPP_DK_Create("DKNavigatorDUK");
@@ -75,9 +75,8 @@ CPP_DK_Create("TEST_HTMLBodyElement.js");
 // [HTMLImageElement] https://html.spec.whatwg.org/multipage/sections.html#htmlimageelement
 CPP_DK_Create("DKHTMLImageElementDUK");
 CPP_DK_Create("TEST_HTMLImageElement.js");
-*/
 
-/*
+
 ////// DigitalKnob //////
 // [DKConsoleWindow]
 CPP_DK_Create("DKConsoleWindowDUK");

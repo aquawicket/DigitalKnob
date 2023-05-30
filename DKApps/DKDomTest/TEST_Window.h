@@ -271,7 +271,7 @@ public:
 				// function
 		//
 		//		[SameObject, Replaceable] readonly attribute Screen screen;
-				DKINFO("window.screen() = "				+toString(window.screen())				+"\n");
+				// DKINFO("window.screen() = "				+toString(window.screen())				+"\n");
 		//
 		//		[SameObject, Replaceable] readonly attribute VisualViewport? visualViewport;
 				DKINFO("window.visualViewport() = "		+toString(window.visualViewport())		+"\n");

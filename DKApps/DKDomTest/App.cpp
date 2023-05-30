@@ -22,11 +22,11 @@
 // [DragEvent] https://html.spec.whatwg.org/multipage/dnd.html#the-dragevent-interface
 #include "TEST_DragEvent.h"
 
-// [Window] https://html.spec.whatwg.org/
-#include "TEST_Window.h"
-
 // [Screen] https://w3c.github.io/csswg-drafts/cssom-view/#the-screen-interface
 #include "TEST_Screen.h"
+
+// [Window] https://html.spec.whatwg.org/
+#include "TEST_Window.h"
 
 // [Navigator] https://html.spec.whatwg.org/multipage/system-state.html#the-navigator-object
 #include "TEST_Navigator.h"
@@ -73,7 +73,7 @@
 ///////////////////////////////////////
 bool App::Init() {
 	DKDEBUGFUNC();
-	
+
 	// [Console] https://console.spec.whatwg.org
 	DKClass::DKCreate("TEST_Console");
 	
@@ -94,11 +94,11 @@ bool App::Init() {
 	// [DragEvent] https://html.spec.whatwg.org/multipage/dnd.html#the-dragevent-interface
 	DKClass::DKCreate("TEST_DragEvent");
 	
-	// [Window] https://html.spec.whatwg.org/
-	DKClass::DKCreate("TEST_Window");
-
 	// [Screen] https://w3c.github.io/csswg-drafts/cssom-view/#the-screen-interface
 	DKClass::DKCreate("TEST_Screen");
+	
+	// [Window] https://html.spec.whatwg.org/
+	DKClass::DKCreate("TEST_Window");
 
 	// [Navigator] https://html.spec.whatwg.org/multipage/system-state.html#the-navigator-object
 	DKClass::DKCreate("TEST_Navigator");
@@ -134,13 +134,12 @@ bool App::Init() {
 	
 	// [DKSdlWindow]
 	DKClass::DKCreate("TEST_DKSdlWindow");
-	/*
+	
 	// [DKRmlDocument]
-	DKClass::DKCreate("TEST_DKRmlDocument");
+	//DKClass::DKCreate("TEST_DKRmlDocument");
 	
 	// [DKRmlLocation]
-	DKClass::DKCreate("TEST_DKRmlLocation");
-	*/
+	//DKClass::DKCreate("TEST_DKRmlLocation");
 	
 	return true;
 }

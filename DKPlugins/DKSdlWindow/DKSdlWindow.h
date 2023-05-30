@@ -402,8 +402,8 @@ public:
 			}
 	//
 	//		[SameObject, Replaceable] readonly attribute Screen screen;
-			virtual DKString screen()								{ DKTODO(); return ""; }	// getter
-			virtual void screen(const DKString&)					{ DKTODO(); } 				// setter
+			//virtual DKString screen()								{ DKTODO(); return ""; }	// getter
+			//virtual void screen(const DKString&)					{ DKTODO(); } 				// setter
 	//
 	//		[SameObject, Replaceable] readonly attribute VisualViewport? visualViewport;
 			virtual DKString visualViewport()						{ DKTODO(); return ""; }	// getter

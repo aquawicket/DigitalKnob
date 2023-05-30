@@ -5,6 +5,7 @@
 #define DKWindow_H
 
 #include "DKEventTarget/DKEventTarget.h"
+#include "DKScreen/DKScreen.h"
 
 // Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
 // [Global=Window,
@@ -372,12 +373,15 @@ public:
 			}
 	//
 	//		[SameObject, Replaceable] readonly attribute Screen screen;
-			virtual DKString screen()								{ return ""; }	// getter
-			virtual void screen(const DKString&)					{ } 			// setter
+			//virtual DKString screen()								{ return ""; }			// getter
+			//virtual void screen(const DKString&)					{ } 					// setter
+			DKScreen* _screen = NULL;
+			virtual DKScreen* screen()								{ return _screen; }		// getter
+			virtual void screen(DKScreen* screen)					{ _screen = screen; } 	// setter
 	//
 	//		[SameObject, Replaceable] readonly attribute VisualViewport? visualViewport;
-			virtual DKString visualViewport()						{ return ""; }	// getter
-			virtual void visualViewport(const DKString&)			{ } 			// setter
+			virtual DKString visualViewport()						{ return ""; }			// getter
+			virtual void visualViewport(const DKString&)			{ } 					// setter
 	//
 	//		// browsing context
 	//		undefined moveTo(long x, long y);

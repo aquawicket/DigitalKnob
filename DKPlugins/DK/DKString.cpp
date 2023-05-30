@@ -503,7 +503,7 @@ DKString pointerToAddress(const void* pointer) {
 	//DKDEBUGFUNC(event);  //EXCESSIVE LOGGING
 	if (!pointer) {
 		DKERROR("pointer invalid! \n");
-		return NULL;
+		return "";
 	}
 	std::stringstream ss;
 	const void* address = static_cast<const void*>(pointer);
