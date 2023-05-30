@@ -224,5 +224,6 @@ public:
 };
 REGISTER_OBJECT(TEST_DKSdlWindow, true);
 
+//DKSdlWindow& window;	// global window variable (TODO)
 
 #endif //TEST_DKSdlWindow_H
