@@ -228,19 +228,19 @@ public:
 	// Source: Compatibility Standard (https://compat.spec.whatwg.org/)
 	// partial interface Window {
 	//		readonly attribute short orientation;
-			virtual short orientation()							{ return 0; }	// getter
-			virtual void orientation(const short&)				{ } 			// setter
+			virtual short orientation()							{ DKTODO(); return 0; }									// getter
+			virtual void orientation(const short&)				{ DKERROR("DKSdlWindow.orientation readonly! \n"); } 	// setter
 	//		
 	//		attribute EventHandler onorientationchange;
-			virtual DKString onorientationchange()				{ return ""; }	// getter
-			virtual void onorientationchange(const DKString&)	{ } 			// setter
+			virtual DKString onorientationchange()				{ DKTODO(); return ""; }								// getter
+			virtual void onorientationchange(const DKString&)	{ DKTODO(); } 											// setter
 	// };
 	
 	// Source: DOM Standard (https://dom.spec.whatwg.org/)
 	// partial interface Window {
 	//		[Replaceable] readonly attribute (Event or undefined) event; // legacy
-			virtual DKString event()							{ return ""; }	// getter
-			virtual void event(const DKString&)					{ } 			// setter
+			virtual DKString event()							{ DKTODO(); return ""; }								// getter
+			virtual void event(const DKString&)					{ DKERROR("DKSdlWindow.event readonly! \n"); } 			// setter
 	// };
 	
 	// Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
@@ -276,16 +276,16 @@ public:
 			}
 	//
 	//		[Replaceable, SameObject] readonly attribute External external;
-			virtual DKString external()							{ return ""; }	// getter
-			virtual void external(const DKString&)				{ } 			// setter
+			virtual DKString external()							{ DKTODO(); return ""; }	// getter
+			virtual void external(const DKString&)				{ } 						// setter
 	// };
 	
 	// Source: Cookie Store API (https://wicg.github.io/cookie-store/)
 	// [SecureContext]
 	// partial interface Window {
 	//		[SameObject] readonly attribute CookieStore cookieStore;
-			virtual DKString cookieStore()						{ return ""; }	// getter
-			virtual void cookieStore(const DKString&)			{ } 			// setter
+			virtual DKString cookieStore()						{ DKTODO(); return ""; }	// getter
+			virtual void cookieStore(const DKString&)			{ } 						// setter
 	// };
 	
 	// Source: Digital Goods API (https://wicg.github.io/digital-goods/)
@@ -301,8 +301,8 @@ public:
 	// partial interface Window {
 	//		// Collection of fenced frame APIs
 	//		readonly attribute Fence? fence;
-			virtual DKString fence()							{ return ""; }	// getter
-			virtual void fence(const DKString&)					{ } 			// setter
+			virtual DKString fence()							{ DKTODO(); return ""; }	// getter
+			virtual void fence(const DKString&)					{ } 						// setter
 	// };
 	
 	// Source: File System Access (https://wicg.github.io/file-system-access/)
@@ -340,33 +340,33 @@ public:
 	// Source: Manifest Incubations (https://wicg.github.io/manifest-incubations/)
 	// partial interface Window {
 	//		attribute EventHandler onappinstalled;
-			virtual DKString onappinstalled()							{ return ""; }	// getter
-			virtual void onappinstalled(const DKString&)				{ } 			// setter
+			virtual DKString onappinstalled()							{ DKTODO(); return ""; }	// getter
+			virtual void onappinstalled(const DKString&)				{ DKTODO(); } 				// setter
 	//
 	//		attribute EventHandler onbeforeinstallprompt;
-			virtual DKString onbeforeinstallprompt()					{ return ""; }	// getter
-			virtual void onbeforeinstallprompt(const DKString&)			{ } 			// setter
+			virtual DKString onbeforeinstallprompt()					{ return ""; }				// getter
+			virtual void onbeforeinstallprompt(const DKString&)			{ DKTODO(); } 				// setter
 	// };
 	
 	// Source: Portals (https://wicg.github.io/portals/)
 	// partial interface Window {
 	//		readonly attribute PortalHost? portalHost;
-			virtual DKString portalHost()								{ return ""; }	// getter
-			virtual void portalHost(const DKString&)					{ } 			// setter
+			virtual DKString portalHost()								{ DKTODO(); return ""; }	// getter
+			virtual void portalHost(const DKString&)					{ } 						// setter
 	// };
 	
 	// Source: Web Speech API (https://wicg.github.io/speech-api/)
 	// partial interface Window {
 	//		[SameObject] readonly attribute SpeechSynthesis speechSynthesis;
-			virtual DKString speechSynthesis()							{ return ""; }	// getter
-			virtual void speechSynthesis(const DKString&)				{ } 			// setter
+			virtual DKString speechSynthesis()							{ DKTODO(); return ""; }	// getter
+			virtual void speechSynthesis(const DKString&)				{ } 						// setter
 	// };
 	
 	// Source: Web App Launch Handler API (https://wicg.github.io/web-app-launch/)
 	// partial interface Window {
 	//		readonly attribute LaunchQueue launchQueue;
-			virtual DKString launchQueue()								{ return ""; }	// getter
-			virtual void launchQueue(const DKString&)					{ } 			// setter
+			virtual DKString launchQueue()								{ DKTODO(); return ""; }	// getter
+			virtual void launchQueue(const DKString&)					{ } 						// setter
 	// };
 	
 	// Source: CSS Spatial Navigation Level 1 (https://www.w3.org/TR/css-nav-1/)
@@ -396,12 +396,12 @@ public:
 			}
 	//
 	//		[SameObject, Replaceable] readonly attribute Screen screen;
-			virtual DKString screen()								{ return ""; }	// getter
-			virtual void screen(const DKString&)					{ } 			// setter
+			virtual DKString screen()								{ DKTODO(); return ""; }	// getter
+			virtual void screen(const DKString&)					{ } 						// setter
 	//
 	//		[SameObject, Replaceable] readonly attribute VisualViewport? visualViewport;
-			virtual DKString visualViewport()						{ return ""; }	// getter
-			virtual void visualViewport(const DKString&)			{ } 			// setter
+			virtual DKString visualViewport()						{ DKTODO(); return ""; }	// getter
+			virtual void visualViewport(const DKString&)			{ } 						// setter
 	//
 	//		// browsing context
 	//		undefined moveTo(long x, long y);
@@ -430,29 +430,29 @@ public:
 	//
 	//		// viewport
 	//		[Replaceable] readonly attribute long innerWidth;
-			virtual int innerWidth()						{ return 0; }	// getter
-			virtual void innerWidth(const int&)				{ } 			// setter
+			virtual int innerWidth()						{ DKTODO(); return 0; }		// getter
+			virtual void innerWidth(const int&)				{ } 						// setter
 	//
 	//		[Replaceable] readonly attribute long innerHeight;
-			virtual int innerHeight()						{ return 0; }	// getter
-			virtual void innerHeight(const int&)			{ } 			// setter
+			virtual int innerHeight()						{ DKTODO(); return 0; }		// getter
+			virtual void innerHeight(const int&)			{ } 						// setter
 	//
 	//		// viewport scrolling
 	//		[Replaceable] readonly attribute double scrollX;
-			virtual double scrollX()						{ return 0.0; }	// getter
-			virtual void scrollX(const double&)				{ } 			// setter
+			virtual double scrollX()						{ DKTODO(); return 0.0; }	// getter
+			virtual void scrollX(const double&)				{ } 						// setter
 	//
 	//		[Replaceable] readonly attribute double pageXOffset;
-			virtual double pageXOffset()					{ return 0.0; }	// getter
-			virtual void pageXOffset(const double&)			{ } 			// setter
+			virtual double pageXOffset()					{ DKTODO(); return 0.0; }	// getter
+			virtual void pageXOffset(const double&)			{ } 						// setter
 	//
 	//		[Replaceable] readonly attribute double scrollY;
-			virtual double scrollY()						{ return 0.0; }	// getter
-			virtual void scrollY(const double&)				{ } 			// setter
+			virtual double scrollY()						{ DKTODO(); return 0.0; }	// getter
+			virtual void scrollY(const double&)				{ } 						// setter
 	//
 	//		[Replaceable] readonly attribute double pageYOffset;
-			virtual double pageYOffset()					{ return 0.0; }	// getter
-			virtual void pageYOffset(const double&)			{ } 			// setter
+			virtual double pageYOffset()					{ DKTODO(); return 0.0; }	// getter
+			virtual void pageYOffset(const double&)			{ } 						// setter
 	//
 	//		undefined scroll(optional ScrollToOptions options = {});
 	//		undefined scroll(unrestricted double x, unrestricted double y);
@@ -477,19 +477,19 @@ public:
 	///
 	//		// client
 	//		[Replaceable] readonly attribute long screenX;
-			virtual int screenX()							{ return 0; }	// getter
+			virtual int screenX()							{ DKTODO(); return 0; }	// getter
 			virtual void screenX(const int&)				{ } 			// setter
 	//
 	//		[Replaceable] readonly attribute long screenLeft;
-			virtual int screenLeft()						{ return 0; }	// getter
+			virtual int screenLeft()						{ DKTODO(); return 0; }	// getter
 			virtual void screenLeft(const int&)				{ } 			// setter
 	//
 	//		[Replaceable] readonly attribute long screenY;
-			virtual int screenY()							{ return 0; }	// getter
+			virtual int screenY()							{ DKTODO(); return 0; }	// getter
 			virtual void screenY(const int&)				{ } 			// setter
 	//
 	//		[Replaceable] readonly attribute long screenTop;
-			virtual int screenTop()							{ return 0; }	// getter
+			virtual int screenTop()							{ DKTODO(); return 0; }	// getter
 			virtual void screenTop(const int&)				{ } 			// setter
 	//
 	//		[Replaceable] readonly attribute long outerWidth;
@@ -517,29 +517,29 @@ public:
 			} 			
 	//
 	//		[Replaceable] readonly attribute double devicePixelRatio;
-			virtual double devicePixelRatio()				{ return 0; }	// getter
-			virtual void devicePixelRatio(const double&)	{ } 			// setter
+			virtual double devicePixelRatio()				{ DKTODO(); return 0; }	// getter
+			virtual void devicePixelRatio(const double&)	{ } 					// setter
 	// };
 	
 	// Source: DeviceOrientation Event Specification (https://www.w3.org/TR/orientation-event/)
 	// partial interface Window {
 	//		[SecureContext] attribute EventHandler ondeviceorientation;
-			virtual DKString ondeviceorientation()						{ return ""; }	// getter
-			virtual void ondeviceorientation(const DKString&)			{ } 			// setter
+			virtual DKString ondeviceorientation()						{ DKTODO(); return ""; }	// getter
+			virtual void ondeviceorientation(const DKString&)			{ } 						// setter
 	// };
 
 	// Source: DeviceOrientation Event Specification (https://www.w3.org/TR/orientation-event/)
 	// partial interface Window {
 	//		[SecureContext] attribute EventHandler ondeviceorientationabsolute;
-			virtual DKString ondeviceorientationabsolute()				{ return ""; }	// getter
-			virtual void ondeviceorientationabsolute(const DKString&)	{ } 			// setter
+			virtual DKString ondeviceorientationabsolute()				{ DKTODO(); return ""; }	// getter
+			virtual void ondeviceorientationabsolute(const DKString&)	{ } 						// setter
 	// };
 
 	// Source: DeviceOrientation Event Specification (https://www.w3.org/TR/orientation-event/)
 	//	partial interface Window {
 	//		[SecureContext] attribute EventHandler ondevicemotion;
-			virtual DKString ondevicemotion()							{ return ""; }	// getter
-			virtual void ondevicemotion(const DKString&)				{ } 			// setter
+			virtual DKString ondevicemotion()							{ DKTODO(); return ""; }	// getter
+			virtual void ondevicemotion(const DKString&)				{ } 						// setter
 	// };
 
 	// Source: requestIdleCallback() (https://www.w3.org/TR/requestidlecallback/)
