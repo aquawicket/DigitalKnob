@@ -253,6 +253,8 @@ function printWindowProperties(window){
 	//
 	//		[SameObject, Replaceable] readonly attribute Screen screen;
 			console.log("window.screen = "					+window.screen);
+			if(window.screen)
+				printScreenProperties(window.screen);
 	//
 	//		[SameObject, Replaceable] readonly attribute VisualViewport? visualViewport;
 			console.log("window.visualViewport = "			+window.visualViewport);
