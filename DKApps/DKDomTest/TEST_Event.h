@@ -12,32 +12,28 @@ class TEST_Event : public DKObjectT<TEST_Event>
 public:
 	bool Init(){
 		DKDEBUGFUNC();
-		DKINFO("\n////// TEST_Event.h //////\n");
+		DKConsole::log("\n////// TEST_Event.h //////");
 		
 		DKEventTarget myTargetA;									// EventTarget as 	value
 		DKEvent eventA("eventA", "");								// Event as 		value
 		myTargetA.addEventListener("eventA", &TEST_Event::onevent);
 		myTargetA.dispatchEvent(eventA);
 		
-		DKINFO("\n");
 		DKEventTarget* myTargetB = new DKEventTarget();  			// EventTarget as 	pointer
 		DKEvent eventB("eventB", "");								// Event as 		value
 		myTargetB->addEventListener("eventB", &TEST_Event::onevent);
 		myTargetB->dispatchEvent(eventB);
 		
-		DKINFO("\n");
 		DKEventTarget myTargetC;									// EventTarget as 	value
 		DKEvent* eventC = new DKEvent("eventC", "");				// Event as 		pointer
 		myTargetC.addEventListener("eventC", &TEST_Event::onevent);
 		myTargetC.dispatchEvent(eventC);
 		
-		DKINFO("\n");
 		DKEventTarget* myTargetD = new DKEventTarget();				// EventTarget as 	pointer
 		DKEvent* eventD = new DKEvent("eventD", "");				// Event as 		pointer
 		myTargetD->addEventListener("eventD", &TEST_Event::onevent);
 		myTargetD->dispatchEvent(eventD);
 		
-		DKINFO("\n");
 		DKEventTarget myTargetE;
 		myTargetE.addEventListener("eventE", &TEST_Event::onevent);
 		myTargetE.dispatchEvent(new DKEvent("eventE", ""));			// Event as new pointer, created within dispatchEvent function
@@ -48,67 +44,67 @@ public:
 		DKDEBUGFUNC(event);
 		
 		// readonly attribute DOMString type;
-		DKINFO("event.type() = "			+toString(event.type())				+"\n");
+		DKConsole::log("event.type() = "			+toString(event.type()));
 		
 		// readonly attribute EventTarget? target;
-		DKINFO("event.target() = "			+toString(event.target())			+"\n");
+		DKConsole::log("event.target() = "			+toString(event.target()));
 		
 		// readonly attribute EventTarget? srcElement; // legacy
-		DKINFO("event.srcElement() = "		+toString(event.srcElement())		+"\n");
+		DKConsole::log("event.srcElement() = "		+toString(event.srcElement()));
 		
 		// readonly attribute EventTarget? currentTarget;
-		DKINFO("event.currentTarget() = "	+toString(event.currentTarget())	+"\n");
+		DKConsole::log("event.currentTarget() = "	+toString(event.currentTarget()));
 		
 		// sequence<EventTarget> composedPath();
 		// function
 		
 		// const unsigned short NONE = 0;
-		DKINFO("event.NONE() = "			+toString(event.NONE())				+"\n");
+		DKConsole::log("event.NONE() = "			+toString(event.NONE()));
 		
 		// const unsigned short CAPTURING_PHASE = 1;
-		DKINFO("event.CAPTURING_PHASE() = "	+toString(event.CAPTURING_PHASE())	+"\n");
+		DKConsole::log("event.CAPTURING_PHASE() = "	+toString(event.CAPTURING_PHASE()));
 		
 		// const unsigned short AT_TARGET = 2;
-		DKINFO("event.AT_TARGET() = "		+toString(event.AT_TARGET())		+"\n");
+		DKConsole::log("event.AT_TARGET() = "		+toString(event.AT_TARGET()));
 		
 		// const unsigned short BUBBLING_PHASE = 3;
-		DKINFO("event.BUBBLING_PHASE() = "	+toString(event.BUBBLING_PHASE())	+"\n");
+		DKConsole::log("event.BUBBLING_PHASE() = "	+toString(event.BUBBLING_PHASE()));
 		
 		// readonly attribute unsigned short eventPhase;
-		DKINFO("event.eventPhase() = "		+toString(event.eventPhase())		+"\n");
+		DKConsole::log("event.eventPhase() = "		+toString(event.eventPhase()));
 		
 		// undefined stopPropagation();
 		// function 
 		
 		// attribute boolean cancelBubble; // legacy alias of .stopPropagation()
-		DKINFO("event.cancelBubble() = "	+toString(event.cancelBubble())		+"\n");
+		DKConsole::log("event.cancelBubble() = "	+toString(event.cancelBubble()));
 		
 		// undefined stopImmediatePropagation();
 		// function
 		
 		// readonly attribute boolean bubbles;
-		DKINFO("event.bubbles() = "			+toString(event.bubbles())			+"\n");
+		DKConsole::log("event.bubbles() = "			+toString(event.bubbles()));
 		
 		// readonly attribute boolean cancelable;
-		DKINFO("event.cancelable() = "		+toString(event.cancelable())		+"\n");
+		DKConsole::log("event.cancelable() = "		+toString(event.cancelable()));
 		
 		// attribute boolean returnValue;  // legacy
-		DKINFO("event.returnValue() = "		+toString(event.returnValue())		+"\n");
+		DKConsole::log("event.returnValue() = "		+toString(event.returnValue()));
 		
 		// undefined preventDefault();
 		// function
 		
 		// readonly attribute boolean defaultPrevented;
-		DKINFO("event.defaultPrevented() = "+toString(event.defaultPrevented())	+"\n");
+		DKConsole::log("event.defaultPrevented() = "+toString(event.defaultPrevented()));
 		
 		// readonly attribute boolean composed;
-		DKINFO("event.composed() = "			+toString(event.composed())		+"\n");
+		DKConsole::log("event.composed() = "			+toString(event.composed()));
 		
 		// [LegacyUnforgeable] readonly attribute boolean isTrusted;
-		DKINFO("event.isTrusted() = "			+toString(event.isTrusted())	+"\n");
+		DKConsole::log("event.isTrusted() = "			+toString(event.isTrusted()));
 		
 		// readonly attribute DOMHighResTimeStamp timeStamp;
-		DKINFO("event.timeStamp() = "			+toString(event.timeStamp())	+"\n");
+		DKConsole::log("event.timeStamp() = "			+toString(event.timeStamp()));
 		
 		// undefined initEvent(DOMString type, optional boolean bubbles = false, optional boolean cancelable = false); // legacy
 		// function 
@@ -116,7 +112,7 @@ public:
 	
 	static bool onevent(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKINFO("TEST_Event::onevent() \n");
+		DKConsole::log("TEST_Event::onevent() \n");
 		printEventProperties(event);
 		return true;
 	}

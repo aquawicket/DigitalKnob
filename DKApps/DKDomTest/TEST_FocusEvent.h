@@ -12,7 +12,7 @@ class TEST_FocusEvent : public DKObjectT<TEST_FocusEvent>
 public:
 	bool Init(){
 		DKDEBUGFUNC();
-		DKINFO("\n////// TEST_FocusEvent.h //////\n");
+		DKConsole::log("\n////// TEST_FocusEvent.h //////");
 		
 		DKEventTarget eventTarget;
 		eventTarget.addEventListener("focusEvent", &TEST_FocusEvent::onFocusEvent);
@@ -28,14 +28,14 @@ public:
 		// function
 		
 		// readonly attribute EventTarget? relatedTarget;
-		DKINFO("focusEvent.relatedTarget() = "+toString(focusEvent.relatedTarget())	+"\n");
+		DKConsole::log("focusEvent.relatedTarget() = "+toString(focusEvent.relatedTarget()));
 		
 		TEST_UIEvent::printUIEventProperties(dynamic_cast<DKUIEvent&>(focusEvent));	//TODO: try to remove the need for dynamic_cast
 	}
 	
 	static bool onFocusEvent(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKINFO("TEST_FocusEvent::onFocusEvent() \n");
+		DKConsole::log("TEST_FocusEvent::onFocusEvent()");
 		printFocusEventProperties(dynamic_cast<DKFocusEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}

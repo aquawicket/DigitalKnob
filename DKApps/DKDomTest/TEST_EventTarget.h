@@ -12,7 +12,7 @@ class TEST_EventTarget : public DKObjectT<TEST_EventTarget>
 public:
 	bool Init(){
 		DKDEBUGFUNC();
-		DKINFO("\n////// TEST_EventTarget.h //////\n");
+		DKConsole::log("\n////// TEST_EventTarget.h //////");
 		
 		DKEventTarget eventTarget;
 		printEventTargetProperties(eventTarget);
