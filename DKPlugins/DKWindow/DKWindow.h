@@ -373,11 +373,10 @@ public:
 			}
 	//
 	//		[SameObject, Replaceable] readonly attribute Screen screen;
-			//virtual DKString screen()								{ return ""; }			// getter
-			//virtual void screen(const DKString&)					{ } 					// setter
 			DKScreen* _screen = NULL;
-			virtual DKScreen* screen()								{ return _screen; }		// getter
-			virtual void screen(DKScreen* screen)					{ _screen = screen; } 	// setter
+			virtual DKScreen& screen()								{ return *_screen; }	// getter
+			virtual void screen(DKScreen& screen)					{ _screen = &screen; } 	// setter
+			
 	//
 	//		[SameObject, Replaceable] readonly attribute VisualViewport? visualViewport;
 			virtual DKString visualViewport()						{ return ""; }			// getter

@@ -15,7 +15,7 @@ public:
 		console.log("\n////// TEST_Window.h //////");
 		
 		DKWindow window;
-		window.screen(&TEST_Screen::_screen);
+		window.screen(TEST_Screen::_screen);
 		printWindowProperties(window);
 		return true;
 	}
@@ -273,8 +273,9 @@ public:
 		//
 		//		[SameObject, Replaceable] readonly attribute Screen screen;
 				//console.log("window.screen() = "				+toString(window.screen()));
-				if(window.screen())
-					TEST_Screen::printScreenProperties(*window.screen());
+				if(&window.screen())
+					TEST_Screen::printScreenProperties(window.screen());
+				
 		//
 		//		[SameObject, Replaceable] readonly attribute VisualViewport? visualViewport;
 				console.log("window.visualViewport() = "		+toString(window.visualViewport()));

@@ -416,7 +416,7 @@ var Window = function Window(address) {
 	//
 	//		[SameObject, Replaceable] readonly attribute Screen screen;
 			Object.defineProperty(this, "screen", {
-				get: function screen()					{ return CPP_DKWindowDUK_screen(this.address) },
+				get: function screen()					{ return new Screen(CPP_DKWindowDUK_screen(this.address)) },
 				//set: function screen(data)			{ return CPP_DKWindowDUK_screen(this.address, data) },
 			})
 	//
