@@ -227,7 +227,6 @@ DKSdlWindow::DKSdlWindow() : DKWindow() {
     DKClass::RegisterFunc("DKSdlWindow::GetMouseX", &DKSdlWindow::GetMouseX, this);
     DKClass::RegisterFunc("DKSdlWindow::GetMouseY", &DKSdlWindow::GetMouseY, this);
     DKClass::RegisterFunc("DKSdlWindow::GetPixelRatio", &DKSdlWindow::GetPixelRatio, this);
-    DKClass::RegisterFunc("DKSdlWindow::GetX", &DKSdlWindow::GetX, this);
     DKClass::RegisterFunc("DKSdlWindow::GetY", &DKSdlWindow::GetY, this);
     DKClass::RegisterFunc("DKSdlWindow::Hide", &DKSdlWindow::Hide, this);
     DKClass::RegisterFunc("DKSdlWindow::IsFullscreen", &DKSdlWindow::IsFullscreen, this);
@@ -324,8 +323,6 @@ DKSdlWindow::DKSdlWindow() : DKWindow() {
     if(has(gl_vendor, "Microsoft"))
         SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_WARNING, "OpenGL Drivers", "Your OpenGL video drivers are out of date. Please upgrade the graphics card drivers for best performance and compatability.", _window);
 #endif
-
-    //DKClass::DKCreate("DKWindow");
 }
 
 DKSdlWindow::~DKSdlWindow(){
@@ -413,15 +410,6 @@ bool DKSdlWindow::GetPixelRatio(const void* input, void* output) {
     *(int*)output = 1;
     return true;
 }
-
-bool DKSdlWindow::GetX(const void* input, void* output) {
-    DKDEBUGFUNC(input, output);
-    int x;
-    SDL_GetWindowPosition(_window, &x, NULL);
-    *(int*)output = x;
-    return true;
-}
-
 bool DKSdlWindow::GetY(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     int y;

@@ -121,12 +121,14 @@ public:
 	// undefined focus();
 	virtual bool focus() {
 		DKDEBUGFUNC();
-		return DKTODO();
+		SDL_RestoreWindow(_window);
+		return true;
 	}
 	
 	// undefined blur();
 	virtual bool blur() {
 		DKDEBUGFUNC();
+		SDL_MinimizeWindow(_window);
 		return DKTODO();
 	}
 	
@@ -184,17 +186,17 @@ public:
 	// undefined alert();
 	virtual bool alert() {
 		DKDEBUGFUNC();
-		
-		// https://wiki.libsdl.org/SDL2/SDL_ShowSimpleMessageBox
-		int rtn = SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, "alert", "alert", _window);
-		
-		return DKTODO();
+		if(SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, "alert", "alert", _window) != 0)
+			return DKERROR("SDL_ShowSimpleMessageBox() failed! \n    use SDL_GetError() for more info");
+		return true;
 	}
 	
 	// undefined alert(DOMString message);
 	virtual bool alert(DOMString& message) {
 		DKDEBUGFUNC(message);
-		return DKTODO();
+		if(SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, "alert", message.c_str(), _window) != 0)
+			return DKERROR("SDL_ShowSimpleMessageBox() failed! \n    use SDL_GetError() for more info");
+		return true;
 	}
 	
 	// boolean confirm(optional DOMString message = "");
@@ -481,8 +483,14 @@ public:
 	///
 	//		// client
 	//		[Replaceable] readonly attribute long screenX;
-			virtual int screenX()							{ DKTODO(); return 0; }	// getter
-			virtual void screenX(const int&)				{ DKTODO(); } 			// setter
+			virtual int screenX(){ 													// getter
+				int x;
+				SDL_GetWindowPosition(_window, &x, NULL);
+				return x;
+			}	
+			virtual void screenX(const int&){ 										// setter
+				DKTODO(); 
+			} 
 	//
 	//		[Replaceable] readonly attribute long screenLeft;
 			virtual int screenLeft()						{ DKTODO(); return 0; }	// getter
@@ -588,7 +596,6 @@ public:
 	bool GetMouseY(const void* input, void* output);
 	bool GetPixelRatio(const void* input, void* output);
 	bool GetWidth(const void* input, void* output);
-	bool GetX(const void* input, void* output);
 	bool GetY(const void* input, void* output);
 	bool Hide(const void* input, void* output);
 	bool IsFullscreen(const void* input, void* output);
