@@ -31,6 +31,7 @@
 #include "DKFocusEvent/DKFocusEvent.h"
 #include "DKMouseEvent/DKMouseEvent.h"
 #include "DKWheelEvent/DKWheelEvent.h"
+#include "DKKeyboardEvent/DKKeyboardEvent.h"
 #include "DK/DKOsInfo.h"
 #include "DKOpenGL/DKOpenGL.h"
 
