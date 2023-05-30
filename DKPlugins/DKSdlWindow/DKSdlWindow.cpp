@@ -726,14 +726,99 @@ bool DKSdlWindow::handle(SDL_Event *event) {
             return false; //allow event to continue
         }
         case SDL_MOUSEBUTTONUP: {
-            DKEvents::SendEvent("sdlwindow", "mouseup", toString(event->button.button));
-            if(event->button.button == 3)
-                DKEvents::SendEvent("sdlwindow", "contextmenu", toString(event->button.button));
+            
+			DKMouseEvent mouseup_event("mouseup", "");
+			//mouseup_event.screenX(screenX);
+			//mouseup_event.screenY(screenY);
+			//mouseup_event.clientX(clientX);
+			//mouseup_event.clientY(clientY);
+			//mouseup_event.ctrlKey(ctrlKey);
+			//mouseup_event.shiftKey(shiftKey);
+			//mouseup_event.altKey(altKey);
+			//mouseup_event.metaKey(metaKey);
+			//mouseup_event.button(button);
+			//mouseup_event.buttons(buttons);
+			//mouseup_event.relatedTarget(relatedTarget);
+			//mouseup_event.pageX(pageX);
+			//mouseup_event.pageY(pageY);
+			mouseup_event.x(last_mouseX);
+			mouseup_event.y(last_mouseY);
+			//mouseup_event.offsetX(offsetX);
+			//mouseup_event.offsetY(offsetY);
+			//mouseup_event.movementX(movementX);
+			//mouseup_event.movementY(movementY);
+			dispatchEvent(mouseup_event);
+				
+            if(event->button.button == 3){
+				DKMouseEvent contextmenu_event("contextmenu", "");
+				//contextmenu_event.screenX(screenX);
+				//contextmenu_event.screenY(screenY);
+				//contextmenu_event.clientX(clientX);
+				//contextmenu_event.clientY(clientY);
+				//contextmenu_event.ctrlKey(ctrlKey);
+				//contextmenu_event.shiftKey(shiftKey);
+				//contextmenu_event.altKey(altKey);
+				//contextmenu_event.metaKey(metaKey);
+				//contextmenu_event.button(button);
+				//contextmenu_event.buttons(buttons);
+				//contextmenu_event.relatedTarget(relatedTarget);
+				//contextmenu_event.pageX(pageX);
+				//contextmenu_event.pageY(pageY);
+				contextmenu_event.x(last_mouseX);
+				contextmenu_event.y(last_mouseY);
+				//contextmenu_event.offsetX(offsetX);
+				//contextmenu_event.offsetY(offsetY);
+				//contextmenu_event.movementX(movementX);
+				//contextmenu_event.movementY(movementY);
+				dispatchEvent(contextmenu_event);
+			}
             else {
-					if(event->button.clicks == 2)
-						DKEvents::SendEvent("sdlwindow", "dblclick", toString(event->button.button));
-                    else
-						DKEvents::SendEvent("sdlwindow", "click", toString(event->button.button));
+					if(event->button.clicks == 2){
+						DKMouseEvent dblclick_event("dblclick", "");
+						//dblclick_event.screenX(screenX);
+						//dblclick_event.screenY(screenY);
+						//dblclick_event.clientX(clientX);
+						//dblclick_event.clientY(clientY);
+						//dblclick_event.ctrlKey(ctrlKey);
+						//dblclick_event.shiftKey(shiftKey);
+						//dblclick_event.altKey(altKey);
+						//dblclick_event.metaKey(metaKey);
+						//dblclick_event.button(button);
+						//dblclick_event.buttons(buttons);
+						//dblclick_event.relatedTarget(relatedTarget);
+						//dblclick_event.pageX(pageX);
+						//dblclick_event.pageY(pageY);
+						dblclick_event.x(last_mouseX);
+						dblclick_event.y(last_mouseY);
+						//dblclick_event.offsetX(offsetX);
+						//dblclick_event.offsetY(offsetY);
+						//dblclick_event.movementX(movementX);
+						//dblclick_event.movementY(movementY);
+						dispatchEvent(dblclick_event);
+					}
+                    else{
+						DDKMouseEvent click_event("click", "");
+						//click_event.screenX(screenX);
+						//click_event.screenY(screenY);
+						//click_event.clientX(clientX);
+						//click_event.clientY(clientY);
+						//click_event.ctrlKey(ctrlKey);
+						//click_event.shiftKey(shiftKey);
+						//click_event.altKey(altKey);
+						//click_event.metaKey(metaKey);
+						//click_event.button(button);
+						//click_event.buttons(buttons);
+						//click_event.relatedTarget(relatedTarget);
+						//click_event.pageX(pageX);
+						//click_event.pageY(pageY);
+						click_event.x(last_mouseX);
+						click_event.y(last_mouseY);
+						//click_event.offsetX(offsetX);
+						//click_event.offsetY(offsetY);
+						//click_event.movementX(movementX);
+						//click_event.movementY(movementY);
+						dispatchEvent(click_event);
+					}
             }
             return false; //allow event to continue
         }
