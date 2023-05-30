@@ -12,7 +12,7 @@ class TEST_TEMPLATE : public DKObjectT<TEST_TEMPLATE>
 public:
 	bool Init(){
 		DKDEBUGFUNC();
-		DKConsole::log("\n////// TEST_TEMPLATE.h //////");
+		console.log("\n////// TEST_TEMPLATE.h //////");
 		
 		return DKTODO();
 	}

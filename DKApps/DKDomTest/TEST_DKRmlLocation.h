@@ -12,7 +12,7 @@ public:
 
 	bool Init(){
 		DKDEBUGFUNC();
-		DKConsole::log("\n////// TEST_DKRmlLocation.h //////");
+		console.log("\n////// TEST_DKRmlLocation.h //////");
 		
 		printDKRmlLocationProperties(dkRmlLocation);
 		

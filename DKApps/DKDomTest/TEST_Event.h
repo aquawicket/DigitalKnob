@@ -12,7 +12,7 @@ class TEST_Event : public DKObjectT<TEST_Event>
 public:
 	bool Init(){
 		DKDEBUGFUNC();
-		DKConsole::log("\n////// TEST_Event.h //////");
+		console.log("\n////// TEST_Event.h //////");
 		
 		DKEventTarget myTargetA;									// EventTarget as 	value
 		DKEvent eventA("eventA", "");								// Event as 		value
@@ -44,67 +44,67 @@ public:
 		DKDEBUGFUNC(event);
 		
 		// readonly attribute DOMString type;
-		DKConsole::log("event.type() = "			+toString(event.type()));
+		console.log("event.type() = "			+toString(event.type()));
 		
 		// readonly attribute EventTarget? target;
-		DKConsole::log("event.target() = "			+toString(event.target()));
+		console.log("event.target() = "			+toString(event.target()));
 		
 		// readonly attribute EventTarget? srcElement; // legacy
-		DKConsole::log("event.srcElement() = "		+toString(event.srcElement()));
+		console.log("event.srcElement() = "		+toString(event.srcElement()));
 		
 		// readonly attribute EventTarget? currentTarget;
-		DKConsole::log("event.currentTarget() = "	+toString(event.currentTarget()));
+		console.log("event.currentTarget() = "	+toString(event.currentTarget()));
 		
 		// sequence<EventTarget> composedPath();
 		// function
 		
 		// const unsigned short NONE = 0;
-		DKConsole::log("event.NONE() = "			+toString(event.NONE()));
+		console.log("event.NONE() = "			+toString(event.NONE()));
 		
 		// const unsigned short CAPTURING_PHASE = 1;
-		DKConsole::log("event.CAPTURING_PHASE() = "	+toString(event.CAPTURING_PHASE()));
+		console.log("event.CAPTURING_PHASE() = "	+toString(event.CAPTURING_PHASE()));
 		
 		// const unsigned short AT_TARGET = 2;
-		DKConsole::log("event.AT_TARGET() = "		+toString(event.AT_TARGET()));
+		console.log("event.AT_TARGET() = "		+toString(event.AT_TARGET()));
 		
 		// const unsigned short BUBBLING_PHASE = 3;
-		DKConsole::log("event.BUBBLING_PHASE() = "	+toString(event.BUBBLING_PHASE()));
+		console.log("event.BUBBLING_PHASE() = "	+toString(event.BUBBLING_PHASE()));
 		
 		// readonly attribute unsigned short eventPhase;
-		DKConsole::log("event.eventPhase() = "		+toString(event.eventPhase()));
+		console.log("event.eventPhase() = "		+toString(event.eventPhase()));
 		
 		// undefined stopPropagation();
 		// function 
 		
 		// attribute boolean cancelBubble; // legacy alias of .stopPropagation()
-		DKConsole::log("event.cancelBubble() = "	+toString(event.cancelBubble()));
+		console.log("event.cancelBubble() = "	+toString(event.cancelBubble()));
 		
 		// undefined stopImmediatePropagation();
 		// function
 		
 		// readonly attribute boolean bubbles;
-		DKConsole::log("event.bubbles() = "			+toString(event.bubbles()));
+		console.log("event.bubbles() = "			+toString(event.bubbles()));
 		
 		// readonly attribute boolean cancelable;
-		DKConsole::log("event.cancelable() = "		+toString(event.cancelable()));
+		console.log("event.cancelable() = "		+toString(event.cancelable()));
 		
 		// attribute boolean returnValue;  // legacy
-		DKConsole::log("event.returnValue() = "		+toString(event.returnValue()));
+		console.log("event.returnValue() = "		+toString(event.returnValue()));
 		
 		// undefined preventDefault();
 		// function
 		
 		// readonly attribute boolean defaultPrevented;
-		DKConsole::log("event.defaultPrevented() = "+toString(event.defaultPrevented()));
+		console.log("event.defaultPrevented() = "+toString(event.defaultPrevented()));
 		
 		// readonly attribute boolean composed;
-		DKConsole::log("event.composed() = "			+toString(event.composed()));
+		console.log("event.composed() = "			+toString(event.composed()));
 		
 		// [LegacyUnforgeable] readonly attribute boolean isTrusted;
-		DKConsole::log("event.isTrusted() = "			+toString(event.isTrusted()));
+		console.log("event.isTrusted() = "			+toString(event.isTrusted()));
 		
 		// readonly attribute DOMHighResTimeStamp timeStamp;
-		DKConsole::log("event.timeStamp() = "			+toString(event.timeStamp()));
+		console.log("event.timeStamp() = "			+toString(event.timeStamp()));
 		
 		// undefined initEvent(DOMString type, optional boolean bubbles = false, optional boolean cancelable = false); // legacy
 		// function 
@@ -112,7 +112,7 @@ public:
 	
 	static bool onevent(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKConsole::log("\nTEST_Event::onevent()");
+		console.log("\nTEST_Event::onevent()");
 		printEventProperties(event);
 		return true;
 	}

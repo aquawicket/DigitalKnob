@@ -92,5 +92,6 @@ public:
 };
 REGISTER_OBJECT(TEST_Console, true);
 
+DKConsole console;	// global console variable
 
 #endif //TEST_Console_H

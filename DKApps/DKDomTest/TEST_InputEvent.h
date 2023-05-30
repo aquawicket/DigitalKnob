@@ -12,7 +12,7 @@ class TEST_InputEvent : public DKObjectT<TEST_InputEvent>
 public:
 	bool Init(){
 		DKDEBUGFUNC();
-		DKConsole::log("\n////// TEST_InputEvent.h //////");
+		console.log("\n////// TEST_InputEvent.h //////");
 	
 		DKEventTarget inputEventTarget;
 		inputEventTarget.addEventListener("inputEvent", &TEST_InputEvent::onInputEvent);
@@ -28,18 +28,18 @@ public:
 		// function
 		
 		// readonly attribute DOMString? data;
-		DKConsole::log("inputEvent.data() = "			+toString(inputEvent.data()));
+		console.log("inputEvent.data() = "			+toString(inputEvent.data()));
 		
 		//readonly attribute boolean isComposing;
-		DKConsole::log("inputEvent.isComposing() = "	+toString(inputEvent.isComposing()));
+		console.log("inputEvent.isComposing() = "	+toString(inputEvent.isComposing()));
 		
 		//readonly attribute DOMString inputType;
-		DKConsole::log("inputEvent.inputType() = "		+toString(inputEvent.inputType()));
+		console.log("inputEvent.inputType() = "		+toString(inputEvent.inputType()));
 		
 		// Source: Input Events Level 2 (https://www.w3.org/TR/input-events-2/)
 		// partial interface InputEvent {
 		//    	readonly attribute DataTransfer? dataTransfer;
-				DKConsole::log("inputEvent.dataTransfer() = "	+toString(inputEvent.dataTransfer()));
+				console.log("inputEvent.dataTransfer() = "	+toString(inputEvent.dataTransfer()));
 		//		
 		//    	sequence<StaticRange> getTargetRanges();
 				// function
@@ -51,7 +51,7 @@ public:
 	
 	static bool onInputEvent(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKConsole::log("\nTEST_InputEvent::onInputEvent()");
+		console.log("\nTEST_InputEvent::onInputEvent()");
 		printInputEventProperties(dynamic_cast<DKInputEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}

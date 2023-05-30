@@ -14,7 +14,7 @@ class TEST_CompositionEvent : public DKObjectT<TEST_CompositionEvent>
 public:
 	bool Init(){
 		DKDEBUGFUNC();
-		DKConsole::log("\n////// TEST_CompositionEvent.h //////");
+		console.log("\n////// TEST_CompositionEvent.h //////");
 		
 		DKEventTarget eventTarget;
 		eventTarget.addEventListener("compositionEvent", &TEST_CompositionEvent::onCompositionEvent);
@@ -30,7 +30,7 @@ public:
 		// function
 		
 		// readonly attribute DOMString data;
-		DKConsole::log("compositionEvent.data() = "		+toString(compositionEvent.data()));
+		console.log("compositionEvent.data() = "		+toString(compositionEvent.data()));
 		
 		// Source: UI Events (https://www.w3.org/TR/uievents/)
 		// partial interface CompositionEvent {
@@ -48,7 +48,7 @@ public:
 	
 	static bool onCompositionEvent(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKConsole::log("\nTEST_CompositionEvent::onCompositionEvent()");
+		console.log("\nTEST_CompositionEvent::onCompositionEvent()");
 		printCompositionEventProperties(dynamic_cast<DKCompositionEvent&>(event));			//TODO: try to remove the need for dynamic_cast
 		return true;
 	}

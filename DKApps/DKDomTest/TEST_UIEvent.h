@@ -12,7 +12,7 @@ class TEST_UIEvent : public DKObjectT<TEST_UIEvent>
 public:
 	bool Init(){
 		DKDEBUGFUNC();
-		DKConsole::log("\n////// TEST_UIEvent.h //////");
+		console.log("\n////// TEST_UIEvent.h //////");
 		
 		DKEventTarget eventTarget;
 		eventTarget.addEventListener("uievent", &TEST_UIEvent::onuievent);
@@ -28,15 +28,15 @@ public:
 		// function
 		
 		// readonly attribute Window? view;
-		DKConsole::log("uievent.view() = "							+toString(uievent.view()));
+		console.log("uievent.view() = "							+toString(uievent.view()));
 		
 		// readonly attribute long detail;
-		DKConsole::log("uievent.detail() = "						+toString(uievent.detail()));
+		console.log("uievent.detail() = "						+toString(uievent.detail()));
 		
 		// Source: Input Device Capabilities (https://wicg.github.io/input-device-capabilities/)
 		// partial interface UIEvent {
 		// 		readonly attribute InputDeviceCapabilities? sourceCapabilities;
-				DKConsole::log("uievent.sourceCapabilities() = "	+toString(uievent.sourceCapabilities()));
+				console.log("uievent.sourceCapabilities() = "	+toString(uievent.sourceCapabilities()));
 		// };
 		
 		// Source: UI Events (https://www.w3.org/TR/uievents/)
@@ -50,7 +50,7 @@ public:
 		// partial interface UIEvent {
 		//		The following support legacy user agents
 		//		readonly attribute unsigned long which;
-				DKConsole::log("uievent.which() = "					+toString(uievent.which()));
+				console.log("uievent.which() = "					+toString(uievent.which()));
 		// };
 		
 		TEST_Event::printEventProperties(dynamic_cast<DKEvent&>(uievent));	//TODO: try to remove the need for dynamic_cast
@@ -58,7 +58,7 @@ public:
 	
 	static bool onuievent(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKConsole::log("\nTEST_UIEvent::onuievent()");
+		console.log("\nTEST_UIEvent::onuievent()");
 		printUIEventProperties(dynamic_cast<DKUIEvent&>(event));			//TODO: try to remove the need for dynamic_cast
 		return true;
 	}

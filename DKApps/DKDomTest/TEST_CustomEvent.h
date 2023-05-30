@@ -12,7 +12,7 @@ class TEST_CustomEvent : public DKObjectT<TEST_CustomEvent>
 public:
 	bool Init(){
 		DKDEBUGFUNC();
-		DKConsole::log("\n////// TEST_CustomEvent.h //////");
+		console.log("\n////// TEST_CustomEvent.h //////");
 		
 		DKEventTarget eventTarget;
 		eventTarget.addEventListener("customEvent", &TEST_CustomEvent::onCustomEvent);
@@ -29,7 +29,7 @@ public:
 		// function
 		
 		// readonly attribute any detail;
-		DKConsole::log("customEvent.detail() = "	+toString(customEvent.detail()));
+		console.log("customEvent.detail() = "	+toString(customEvent.detail()));
 		
 		// undefined initCustomEvent(DOMString type, optional boolean bubbles = false, optional boolean cancelable = false, optional any detail = null); // legacy
 		// function
@@ -39,7 +39,7 @@ public:
 	
 	static bool onCustomEvent(DKEvent& event) {
 		DKDEBUGFUNC(event);
-		DKConsole::log("\nTEST_CustomEvent::onCustomEvent()");
+		console.log("\nTEST_CustomEvent::onCustomEvent()");
 		printCustomEventProperties(dynamic_cast<DKCustomEvent&>(event));		//TODO: try to remove the need for dynamic_cast
 		return true;
 	}

@@ -12,7 +12,7 @@ class TEST_CSSStyleDeclaration : public DKObjectT<TEST_CSSStyleDeclaration>
 public:
 	bool Init(){
 		DKDEBUGFUNC();
-		DKConsole::log("\n////// TEST_CSSStyleDeclaration.h //////");
+		console.log("\n////// TEST_CSSStyleDeclaration.h //////");
 		
 		return DKTODO();
 	}

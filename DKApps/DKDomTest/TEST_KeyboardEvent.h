@@ -12,7 +12,7 @@ class TEST_KeyboardEvent : public DKObjectT<TEST_KeyboardEvent>
 public:
 	bool Init(){
 		DKDEBUGFUNC();
-		DKConsole::log("\n////// TEST_KeyboardEvent.h //////");
+		console.log("\n////// TEST_KeyboardEvent.h //////");
 		
 		DKEventTarget keyboardEventTarget;
 		keyboardEventTarget.addEventListener("keyboardEvent", &TEST_KeyboardEvent::onKeyboardEvent);
@@ -30,44 +30,44 @@ public:
 	#if !EMSCRIPTEN
 		// KeyLocationCode
 		// const unsigned long DOM_KEY_LOCATION_STANDARD = 0x00;
-		DKConsole::log("keyboardEvent.DOM_KEY_LOCATION_STANDARD() = "	+toString(keyboardEvent.DOM_KEY_LOCATION_STANDARD()));
+		console.log("keyboardEvent.DOM_KEY_LOCATION_STANDARD() = "	+toString(keyboardEvent.DOM_KEY_LOCATION_STANDARD()));
 		
 		// const unsigned long DOM_KEY_LOCATION_LEFT = 0x01;
-		DKConsole::log("keyboardEvent.DOM_KEY_LOCATION_LEFT() = "		+toString(keyboardEvent.DOM_KEY_LOCATION_LEFT()));
+		console.log("keyboardEvent.DOM_KEY_LOCATION_LEFT() = "		+toString(keyboardEvent.DOM_KEY_LOCATION_LEFT()));
 		
 		// const unsigned long DOM_KEY_LOCATION_RIGHT = 0x02;
-		DKConsole::log("keyboardEvent.DOM_KEY_LOCATION_RIGHT() = "		+toString(keyboardEvent.DOM_KEY_LOCATION_RIGHT()));
+		console.log("keyboardEvent.DOM_KEY_LOCATION_RIGHT() = "		+toString(keyboardEvent.DOM_KEY_LOCATION_RIGHT()));
 		
 		// const unsigned long DOM_KEY_LOCATION_NUMPAD = 0x03;
-		DKConsole::log("keyboardEvent.DOM_KEY_LOCATION_NUMPAD() = "		+toString(keyboardEvent.DOM_KEY_LOCATION_NUMPAD()));
+		console.log("keyboardEvent.DOM_KEY_LOCATION_NUMPAD() = "		+toString(keyboardEvent.DOM_KEY_LOCATION_NUMPAD()));
 	#endif
 		
 		// readonly attribute DOMString key;
-		DKConsole::log("keyboardEvent.key() = "							+toString(keyboardEvent.key()));
+		console.log("keyboardEvent.key() = "							+toString(keyboardEvent.key()));
 		
 		// readonly attribute DOMString code;
-		DKConsole::log("keyboardEvent.code() = "						+toString(keyboardEvent.code()));	
+		console.log("keyboardEvent.code() = "						+toString(keyboardEvent.code()));	
 		
 		// readonly attribute unsigned long location;
-		DKConsole::log("keyboardEvent.location() = "					+toString(keyboardEvent.location()));
+		console.log("keyboardEvent.location() = "					+toString(keyboardEvent.location()));
 		
 		// readonly attribute boolean ctrlKey;
-		DKConsole::log("keyboardEvent.ctrlKey() = "						+toString(keyboardEvent.ctrlKey()));
+		console.log("keyboardEvent.ctrlKey() = "						+toString(keyboardEvent.ctrlKey()));
 		
 		// readonly attribute boolean shiftKey;
-		DKConsole::log("keyboardEvent.shiftKey() = "					+toString(keyboardEvent.shiftKey()));
+		console.log("keyboardEvent.shiftKey() = "					+toString(keyboardEvent.shiftKey()));
 		
 		// readonly attribute boolean altKey;
-		DKConsole::log("keyboardEvent.altKey() = "						+toString(keyboardEvent.altKey()));
+		console.log("keyboardEvent.altKey() = "						+toString(keyboardEvent.altKey()));
 		
 		// readonly attribute boolean metaKey;
-		DKConsole::log("keyboardEvent.metaKey() = "						+toString(keyboardEvent.metaKey()));
+		console.log("keyboardEvent.metaKey() = "						+toString(keyboardEvent.metaKey()));
 		
 		// readonly attribute boolean repeat;
-		DKConsole::log("keyboardEvent.repeat() = "						+toString(keyboardEvent.repeat()));
+		console.log("keyboardEvent.repeat() = "						+toString(keyboardEvent.repeat()));
 		
 		// readonly attribute boolean isComposing;
-		DKConsole::log("keyboardEvent.isComposing() = "					+toString(keyboardEvent.isComposing()));
+		console.log("keyboardEvent.isComposing() = "					+toString(keyboardEvent.isComposing()));
 		
 		// boolean getModifierState(DOMString keyArg);
 		// function
@@ -92,10 +92,10 @@ public:
 		// partial interface KeyboardEvent {
 		//		// The following support legacy user agents
 		//		readonly attribute unsigned long charCode;
-				DKConsole::log("keyboardEvent.charCode() = "			+toString(keyboardEvent.charCode()));
+				console.log("keyboardEvent.charCode() = "			+toString(keyboardEvent.charCode()));
 		//
 		//		readonly attribute unsigned long keyCode;
-				DKConsole::log("keyboardEvent.keyCode() = "				+toString(keyboardEvent.keyCode()));
+				console.log("keyboardEvent.keyCode() = "				+toString(keyboardEvent.keyCode()));
 		// };
 		
 		
@@ -104,7 +104,7 @@ public:
 
 	static bool onKeyboardEvent(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKConsole::log("\nTEST_KeyboardEvent::onkeyboardevent()");
+		console.log("\nTEST_KeyboardEvent::onkeyboardevent()");
 		printKeyboardEventProperties(dynamic_cast<DKKeyboardEvent&>(event));	//TODO: try to remove the need for dynamic_cast
 		return true;
 	}

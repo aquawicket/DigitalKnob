@@ -12,7 +12,7 @@ class TEST_HTMLCollection : public DKObjectT<TEST_HTMLCollection>
 public:
 	bool Init(){
 		DKDEBUGFUNC();
-		DKConsole::log("\n////// TEST_HTMLCollection.h //////");
+		console.log("\n////// TEST_HTMLCollection.h //////");
 		
 		DKHTMLCollection htmlCollection;
 		printHTMLCollectionProperties(htmlCollection);
@@ -23,7 +23,7 @@ public:
 		DKDEBUGFUNC(htmlCollection);
 		
 		// readonly attribute unsigned long length;
-		DKConsole::log("htmlCollection.length() = "	+toString(htmlCollection.length()));
+		console.log("htmlCollection.length() = "	+toString(htmlCollection.length()));
 		
 		// getter Element? item(unsigned long index);
 		// function

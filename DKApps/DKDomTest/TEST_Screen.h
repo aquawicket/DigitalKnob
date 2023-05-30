@@ -16,7 +16,7 @@ public:
 
 	bool Init(){
 		DKDEBUGFUNC();
-		DKConsole::log("\n////// TEST_Screen.h //////");
+		console.log("\n////// TEST_Screen.h //////");
 		
 		printScreenProperties(_screen);
 		return true;
@@ -26,22 +26,22 @@ public:
 		DKDEBUGFUNC(screen);
 		
 		// readonly attribute long availWidth;
-		DKConsole::log("screen.availWidth() = "	+toString(screen.availWidth()));
+		console.log("screen.availWidth() = "+toString(screen.availWidth()));
 		
 		// readonly attribute long availHeight;
-		DKConsole::log("screen.availHeight() = "+toString(screen.availHeight()));
+		console.log("screen.availHeight() = "+toString(screen.availHeight()));
 		
 		// readonly attribute long width;
-		DKConsole::log("screen.width() = "		+toString(screen.width()));
+		console.log("screen.width() = "		+toString(screen.width()));
 		
 		// readonly attribute long height;
-		DKConsole::log("screen.height() = "		+toString(screen.height()));
+		console.log("screen.height() = "	+toString(screen.height()));
 		
 		// readonly attribute unsigned long colorDepth;
-		DKConsole::log("screen.colorDepth() = "	+toString(screen.colorDepth()));
+		console.log("screen.colorDepth() = "+toString(screen.colorDepth()));
 		
 		// readonly attribute unsigned long pixelDepth;
-		DKConsole::log("screen.pixelDepth() = "	+toString(screen.pixelDepth()));
+		console.log("screen.pixelDepth() = "+toString(screen.pixelDepth()));
 	}
 };
 REGISTER_OBJECT(TEST_Screen, true);

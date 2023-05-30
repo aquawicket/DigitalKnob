@@ -12,7 +12,7 @@ class TEST_HTMLElement : public DKObjectT<TEST_HTMLElement>
 public:
 	bool Init(){
 		DKDEBUGFUNC();
-		DKConsole::log("\n////// TEST_HTMLElement.h //////");
+		console.log("\n////// TEST_HTMLElement.h //////");
 		
 		DKHTMLElement htmlElement;
 		printHTMLElementProperties(htmlElement);
@@ -27,47 +27,47 @@ public:
 		
 		// metadata attributes
 		// [CEReactions] attribute DOMString title;
-		DKConsole::log("htmlElement.title() = "			+toString(htmlElement.title()));
+		console.log("htmlElement.title() = "		+toString(htmlElement.title()));
 		
 		// [CEReactions] attribute DOMString lang;
-		DKConsole::log("htmlElement.lang() = "			+toString(htmlElement.lang()));
+		console.log("htmlElement.lang() = "			+toString(htmlElement.lang()));
 		
 		// [CEReactions] attribute boolean translate;
-		DKConsole::log("htmlElement.translate() = "		+toString(htmlElement.translate()));
+		console.log("htmlElement.translate() = "	+toString(htmlElement.translate()));
 		
 		// [CEReactions] attribute DOMString dir;
-		DKConsole::log("htmlElement.dir() = "			+toString(htmlElement.dir()));
+		console.log("htmlElement.dir() = "			+toString(htmlElement.dir()));
 		
 		// user interaction
 		// [CEReactions] attribute (boolean or unrestricted double or DOMString)? hidden;
-		DKConsole::log("htmlElement.hidden() = "		+toString(htmlElement.hidden()));
+		console.log("htmlElement.hidden() = "		+toString(htmlElement.hidden()));
 		
 		// [CEReactions] attribute boolean inert;
-		DKConsole::log("htmlElement.inert() = "			+toString(htmlElement.inert()));
+		console.log("htmlElement.inert() = "		+toString(htmlElement.inert()));
 		
 		// undefined click();
 		// function
 		
 		// [CEReactions] attribute DOMString accessKey;
-		DKConsole::log("htmlElement.accessKey() = "		+toString(htmlElement.accessKey()));
+		console.log("htmlElement.accessKey() = "	+toString(htmlElement.accessKey()));
 		
 		// readonly attribute DOMString accessKeyLabel;
-		DKConsole::log("htmlElement.accessKeyLabel() = "+toString(htmlElement.accessKeyLabel()));
+		console.log("htmlElement.accessKeyLabel() = "+toString(htmlElement.accessKeyLabel()));
 		
 		// [CEReactions] attribute boolean draggable;
-		DKConsole::log("htmlElement.draggable() = "		+toString(htmlElement.draggable()));
+		console.log("htmlElement.draggable() = "	+toString(htmlElement.draggable()));
 		
 		// [CEReactions] attribute boolean spellcheck;
-		DKConsole::log("htmlElement.spellcheck() = "	+toString(htmlElement.spellcheck()));
+		console.log("htmlElement.spellcheck() = "	+toString(htmlElement.spellcheck()));
 		
 		// [CEReactions] attribute DOMString autocapitalize;
-		DKConsole::log("htmlElement.autocapitalize() = "+toString(htmlElement.autocapitalize()));
+		console.log("htmlElement.autocapitalize() = "+toString(htmlElement.autocapitalize()));
 		
 		// [CEReactions] attribute [LegacyNullToEmptyString] DOMString innerText;
-		DKConsole::log("htmlElement.innerText() = "		+toString(htmlElement.innerText()));
+		console.log("htmlElement.innerText() = "	+toString(htmlElement.innerText()));
 		
 		// [CEReactions] attribute [LegacyNullToEmptyString] DOMString outerText;
-		DKConsole::log("htmlElement.outerText() = "		+toString(htmlElement.outerText()));
+		console.log("htmlElement.outerText() = "	+toString(htmlElement.outerText()));
 		
 		// ElementInternals attachInternals();
 		// function

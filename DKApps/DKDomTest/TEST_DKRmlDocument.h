@@ -12,7 +12,7 @@ public:
 	
 	bool Init(){
 		DKDEBUGFUNC();
-		DKConsole::log("\n////// TEST_DKRmlDocument.h //////");
+		console.log("\n////// TEST_DKRmlDocument.h //////");
 		
 		DKRmlDocument* dkRmlDocument = (DKRmlDocument*)DKClass::DKCreate("DKRmlDocument");
 		

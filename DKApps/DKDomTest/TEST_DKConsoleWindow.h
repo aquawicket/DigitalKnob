@@ -12,7 +12,7 @@ public:
 
 	bool Init(){
 		DKDEBUGFUNC();
-		DKConsole::log("\n////// TEST_DKConsoleWindow.h //////");
+		console.log("\n////// TEST_DKConsoleWindow.h //////");
 		
 		printDKConsoleWindowProperties(dkConsoleWindow);
 		
@@ -62,8 +62,8 @@ public:
 
 	static void printDKConsoleWindowProperties(DKConsoleWindow& dkConsoleWindow){
 		DKDEBUGFUNC(dkConsoleWindow);
-		//DKConsole::log("dkConsoleWindow.columns() = "	+toString(dkConsoleWindow.columns())	+"\n");		// TODO
-		//DKConsole::log("dkConsoleWindow.rows() = "	+toString(dkConsoleWindow.rows())		+"\n");		// TODO
+		//console.log("dkConsoleWindow.columns() = "	+toString(dkConsoleWindow.columns())	+"\n");		// TODO
+		//console.log("dkConsoleWindow.rows() = "	+toString(dkConsoleWindow.rows())		+"\n");		// TODO
 		
 		TEST_Window::printWindowProperties(dynamic_cast<DKWindow&>(dkConsoleWindow));	//TODO: try to remove the need for dynamic_cast
 	}
@@ -72,25 +72,25 @@ public:
 	// https://w3c.github.io/uievents/#events-focus-types
 	static bool onblur(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKConsole::log("\nTEST_DKConsoleWindow::onblur()");
+		console.log("\nTEST_DKConsoleWindow::onblur()");
 		TEST_FocusEvent::printFocusEventProperties(dynamic_cast<DKFocusEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool onfocus(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKConsole::log("\nTEST_DKConsoleWindow::onfocus()");
+		console.log("\nTEST_DKConsoleWindow::onfocus()");
 		TEST_FocusEvent::printFocusEventProperties(dynamic_cast<DKFocusEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool onfocusin(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKConsole::log("\nTEST_DKConsoleWindow::onfocusin()");
+		console.log("\nTEST_DKConsoleWindow::onfocusin()");
 		TEST_FocusEvent::printFocusEventProperties(dynamic_cast<DKFocusEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool onfocusout(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKConsole::log("\nTEST_DKConsoleWindow::onfocusout()");
+		console.log("\nTEST_DKConsoleWindow::onfocusout()");
 		TEST_FocusEvent::printFocusEventProperties(dynamic_cast<DKFocusEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
@@ -99,67 +99,67 @@ public:
 	// https://w3c.github.io/uievents/#events-mouse-types
 	static bool onauxclick(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKConsole::log("\nTEST_DKConsoleWindow::onauxclick()");
+		console.log("\nTEST_DKConsoleWindow::onauxclick()");
 		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool onclick(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKConsole::log("\nTEST_DKConsoleWindow::onclick()");
+		console.log("\nTEST_DKConsoleWindow::onclick()");
 		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool oncontextmenu(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKConsole::log("\nTEST_DKConsoleWindow::oncontextmenu()");
+		console.log("\nTEST_DKConsoleWindow::oncontextmenu()");
 		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool ondblclick(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKConsole::log("\nTEST_DKConsoleWindow::ondblclick()");
+		console.log("\nTEST_DKConsoleWindow::ondblclick()");
 		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool onmousedown(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKConsole::log("\nTEST_DKConsoleWindow::onmousedown()");
+		console.log("\nTEST_DKConsoleWindow::onmousedown()");
 		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool onmouseenter(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKConsole::log("\nTEST_DKConsoleWindow::onmouseenter()");
+		console.log("\nTEST_DKConsoleWindow::onmouseenter()");
 		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool onmouseleave(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKConsole::log("\nTEST_DKConsoleWindow::onmouseleave()");
+		console.log("\nTEST_DKConsoleWindow::onmouseleave()");
 		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool onmousemove(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKConsole::log("\nTEST_DKConsoleWindow::onmousemove()");
+		console.log("\nTEST_DKConsoleWindow::onmousemove()");
 		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool onmouseout(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKConsole::log("\nTEST_DKConsoleWindow::onmouseout()");
+		console.log("\nTEST_DKConsoleWindow::onmouseout()");
 		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool onmouseover(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKConsole::log("\nTEST_DKConsoleWindow::onmouseover()");
+		console.log("\nTEST_DKConsoleWindow::onmouseover()");
 		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool onmouseup(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKConsole::log("\nTEST_DKConsoleWindow::onmouseup()");
+		console.log("\nTEST_DKConsoleWindow::onmouseup()");
 		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
@@ -168,7 +168,7 @@ public:
 	// https://w3c.github.io/uievents/#events-wheel-types
 	static bool onwheel(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKConsole::log("\nTEST_DKConsoleWindow::onwheel()");
+		console.log("\nTEST_DKConsoleWindow::onwheel()");
 		TEST_WheelEvent::printWheelEventProperties(dynamic_cast<DKWheelEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
@@ -177,13 +177,13 @@ public:
 	// https://w3c.github.io/uievents/#events-input-types
 	static bool onbeforeinput(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKConsole::log("\nTEST_DKConsoleWindow::onbeforeinput()");
+		console.log("\nTEST_DKConsoleWindow::onbeforeinput()");
 		TEST_InputEvent::printInputEventProperties(dynamic_cast<DKInputEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool oninput(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKConsole::log("\nTEST_DKConsoleWindow::oninput()");
+		console.log("\nTEST_DKConsoleWindow::oninput()");
 		TEST_InputEvent::printInputEventProperties(dynamic_cast<DKInputEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
@@ -192,13 +192,13 @@ public:
 	// https://w3c.github.io/uievents/#events-keyboard-types
 	static bool onkeydown(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKConsole::log("\nTEST_DKConsoleWindow::onkeydown()");
+		console.log("\nTEST_DKConsoleWindow::onkeydown()");
 		TEST_KeyboardEvent::printKeyboardEventProperties(dynamic_cast<DKKeyboardEvent&>(event));	//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool onkeyup(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKConsole::log("\nTEST_DKConsoleWindow::onkeyup()");
+		console.log("\nTEST_DKConsoleWindow::onkeyup()");
 		TEST_KeyboardEvent::printKeyboardEventProperties(dynamic_cast<DKKeyboardEvent&>(event));	//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
@@ -207,19 +207,19 @@ public:
 	// https://w3c.github.io/uievents/#events-composition-types
 	static bool oncompositionstart(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKConsole::log("\nTEST_DKConsoleWindow::oncompositionstart()");
+		console.log("\nTEST_DKConsoleWindow::oncompositionstart()");
 		TEST_CompositionEvent::printCompositionEventProperties(dynamic_cast<DKCompositionEvent&>(event));	//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool oncompositionupdate(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKConsole::log("\nTEST_DKConsoleWindow::oncompositionupdate()");
+		console.log("\nTEST_DKConsoleWindow::oncompositionupdate()");
 		TEST_CompositionEvent::printCompositionEventProperties(dynamic_cast<DKCompositionEvent&>(event));	//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool oncompositionend(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKConsole::log("\nTEST_DKConsoleWindow::oncompositionend()");
+		console.log("\nTEST_DKConsoleWindow::oncompositionend()");
 		TEST_CompositionEvent::printCompositionEventProperties(dynamic_cast<DKCompositionEvent&>(event));	//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
