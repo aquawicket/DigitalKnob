@@ -227,7 +227,6 @@ DKSdlWindow::DKSdlWindow() : DKWindow() {
     DKClass::RegisterFunc("DKSdlWindow::GetMouseX", &DKSdlWindow::GetMouseX, this);
     DKClass::RegisterFunc("DKSdlWindow::GetMouseY", &DKSdlWindow::GetMouseY, this);
     DKClass::RegisterFunc("DKSdlWindow::GetPixelRatio", &DKSdlWindow::GetPixelRatio, this);
-    DKClass::RegisterFunc("DKSdlWindow::GetY", &DKSdlWindow::GetY, this);
     DKClass::RegisterFunc("DKSdlWindow::Hide", &DKSdlWindow::Hide, this);
     DKClass::RegisterFunc("DKSdlWindow::IsFullscreen", &DKSdlWindow::IsFullscreen, this);
     DKClass::RegisterFunc("DKSdlWindow::IsVisible", &DKSdlWindow::IsVisible, this);
@@ -236,8 +235,6 @@ DKSdlWindow::DKSdlWindow() : DKWindow() {
     DKClass::RegisterFunc("DKSdlWindow::SetClipboard", &DKSdlWindow::SetClipboard, this);
     DKClass::RegisterFunc("DKSdlWindow::SetIcon", &DKSdlWindow::SetIcon, this);
     DKClass::RegisterFunc("DKSdlWindow::SetTitle", &DKSdlWindow::SetTitle, this);
-    DKClass::RegisterFunc("DKSdlWindow::SetX", &DKSdlWindow::SetX, this);
-    DKClass::RegisterFunc("DKSdlWindow::SetY", &DKSdlWindow::SetY, this);
     DKClass::RegisterFunc("DKSdlWindow::Show", &DKSdlWindow::Show, this);
     DKClass::RegisterFunc("DKSdlWindow::Windowed", &DKSdlWindow::Windowed, this);
     DKClass::RegisterFunc("DKSdlWindow::MessageBox", &DKSdlWindow::MessageBox, this);
@@ -410,13 +407,6 @@ bool DKSdlWindow::GetPixelRatio(const void* input, void* output) {
     *(int*)output = 1;
     return true;
 }
-bool DKSdlWindow::GetY(const void* input, void* output) {
-    DKDEBUGFUNC(input, output);
-    int y;
-    SDL_GetWindowPosition(_window, NULL, &y);
-    *(int*)output = y;
-    return true;
-}
 
 bool DKSdlWindow::Hide(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
@@ -490,24 +480,6 @@ bool DKSdlWindow::SetTitle(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     DKString title = *(DKString*)input;
     SDL_SetWindowTitle(_window, title.c_str());
-    return true;
-}
-
-bool DKSdlWindow::SetX(const void* input, void* output) {
-    DKDEBUGFUNC(input, output);
-    int x = *(int*)input;
-    int y;
-    SDL_GetWindowPosition(_window, NULL, &y);
-    SDL_SetWindowPosition(_window, x, y);
-    return true;
-}
-
-bool DKSdlWindow::SetY(const void* input, void* output) {
-    DKDEBUGFUNC(input, output);
-    int y = *(int*)input;
-    int x;
-    SDL_GetWindowPosition(_window, &x, NULL);
-    SDL_SetWindowPosition(_window, x, y);
     return true;
 }
 

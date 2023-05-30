@@ -483,13 +483,15 @@ public:
 	///
 	//		// client
 	//		[Replaceable] readonly attribute long screenX;
-			virtual int screenX(){ 													// getter
+			virtual int screenX(){ 														// getter
 				int x;
 				SDL_GetWindowPosition(_window, &x, NULL);
 				return x;
 			}	
-			virtual void screenX(const int&){ 										// setter
-				DKTODO(); 
+			virtual void screenX(const int& x){ 										// setter
+				int y;
+				SDL_GetWindowPosition(_window, NULL, &y);
+				SDL_SetWindowPosition(_window, x, y);
 			} 
 	//
 	//		[Replaceable] readonly attribute long screenLeft;
@@ -497,8 +499,16 @@ public:
 			virtual void screenLeft(const int&)				{ DKTODO(); } 			// setter
 	//
 	//		[Replaceable] readonly attribute long screenY;
-			virtual int screenY()							{ DKTODO(); return 0; }	// getter
-			virtual void screenY(const int&)				{ DKTODO(); } 			// setter
+			virtual int screenY(){ 													// getter
+				int y;
+				SDL_GetWindowPosition(_window, NULL, &y);
+				return y;
+			}
+			virtual void screenY(const int& y){ 									// setter
+				int x;
+				SDL_GetWindowPosition(_window, &x, NULL);
+				SDL_SetWindowPosition(_window, x, y);
+			}
 	//
 	//		[Replaceable] readonly attribute long screenTop;
 			virtual int screenTop()							{ DKTODO(); return 0; }	// getter
@@ -596,7 +606,6 @@ public:
 	bool GetMouseY(const void* input, void* output);
 	bool GetPixelRatio(const void* input, void* output);
 	bool GetWidth(const void* input, void* output);
-	bool GetY(const void* input, void* output);
 	bool Hide(const void* input, void* output);
 	bool IsFullscreen(const void* input, void* output);
 	bool IsVisible(const void* input, void* output);
@@ -606,8 +615,6 @@ public:
 	bool SetClipboard(const void* input, void* output);
 	bool SetIcon(const void* input, void* output);
 	bool SetTitle(const void* input, void* output);
-	bool SetX(const void* input, void* output);
-	bool SetY(const void* input, void* output);
 	bool Show(const void* input, void* output);
 	bool Windowed(const void* input, void* output);
 	
