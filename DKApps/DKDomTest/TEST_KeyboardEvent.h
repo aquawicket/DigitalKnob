@@ -104,7 +104,7 @@ public:
 
 	static bool onKeyboardEvent(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKConsole::log("TEST_KeyboardEvent::onkeyboardevent()");
+		DKConsole::log("\nTEST_KeyboardEvent::onkeyboardevent()");
 		printKeyboardEventProperties(dynamic_cast<DKKeyboardEvent&>(event));	//TODO: try to remove the need for dynamic_cast
 		return true;
 	}

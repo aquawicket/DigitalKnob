@@ -35,7 +35,7 @@ public:
 	
 	static bool onFocusEvent(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKConsole::log("TEST_FocusEvent::onFocusEvent()");
+		DKConsole::log("\nTEST_FocusEvent::onFocusEvent()");
 		printFocusEventProperties(dynamic_cast<DKFocusEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}

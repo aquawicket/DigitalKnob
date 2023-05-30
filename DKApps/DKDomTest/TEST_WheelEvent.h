@@ -56,7 +56,7 @@ public:
 
 	static bool onWheelEvent(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKConsole::log("TEST_WheelEvent::onWheelEvent()");
+		DKConsole::log("\nTEST_WheelEvent::onWheelEvent()");
 		printWheelEventProperties(dynamic_cast<DKWheelEvent&>(event));					//TODO: try to remove the need for dynamic_cast
 		return true;
 	}

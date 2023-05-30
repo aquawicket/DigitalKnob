@@ -35,7 +35,7 @@ public:
 	
 	static bool onDragEvent(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKConsole::log("TEST_DragEvent::onDragEvent()");
+		DKConsole::log("\nTEST_DragEvent::onDragEvent()");
 		printDragEventProperties(dynamic_cast<DKDragEvent&>(event));						//TODO: try to remove the need for dynamic_cast
 		return true;
 	}

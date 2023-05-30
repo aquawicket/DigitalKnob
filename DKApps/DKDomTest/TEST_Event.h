@@ -112,7 +112,7 @@ public:
 	
 	static bool onevent(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKConsole::log("TEST_Event::onevent() \n");
+		DKConsole::log("\nTEST_Event::onevent()");
 		printEventProperties(event);
 		return true;
 	}

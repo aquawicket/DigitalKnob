@@ -12,7 +12,7 @@ class TEST_Node : public DKObjectT<TEST_Node>
 public:
 	bool Init(){
 		DKDEBUGFUNC();
-		DKConsole::log("\n////// TEST_Node.h //////\n");
+		DKConsole::log("\n////// TEST_Node.h //////");
 		
 		DKNode node;
 		printNodeProperties(node);

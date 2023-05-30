@@ -113,7 +113,7 @@ public:
 
 	static bool onMouseEvent(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKConsole::log("TEST_MouseEvent::onMouseEvent()");
+		DKConsole::log("\nTEST_MouseEvent::onMouseEvent()");
 		printMouseEventProperties(dynamic_cast<DKMouseEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}

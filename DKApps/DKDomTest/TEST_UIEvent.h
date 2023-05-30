@@ -58,7 +58,7 @@ public:
 	
 	static bool onuievent(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKConsole::log("TEST_UIEvent::onuievent()");
+		DKConsole::log("\nTEST_UIEvent::onuievent()");
 		printUIEventProperties(dynamic_cast<DKUIEvent&>(event));			//TODO: try to remove the need for dynamic_cast
 		return true;
 	}

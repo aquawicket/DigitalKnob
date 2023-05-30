@@ -48,7 +48,7 @@ public:
 	
 	static bool onCompositionEvent(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKConsole::log("TEST_CompositionEvent::onCompositionEvent()");
+		DKConsole::log("\nTEST_CompositionEvent::onCompositionEvent()");
 		printCompositionEventProperties(dynamic_cast<DKCompositionEvent&>(event));			//TODO: try to remove the need for dynamic_cast
 		return true;
 	}

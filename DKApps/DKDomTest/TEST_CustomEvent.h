@@ -39,7 +39,7 @@ public:
 	
 	static bool onCustomEvent(DKEvent& event) {
 		DKDEBUGFUNC(event);
-		DKConsole::log("TEST_CustomEvent::onCustomEvent()");
+		DKConsole::log("\nTEST_CustomEvent::onCustomEvent()");
 		printCustomEventProperties(dynamic_cast<DKCustomEvent&>(event));		//TODO: try to remove the need for dynamic_cast
 		return true;
 	}

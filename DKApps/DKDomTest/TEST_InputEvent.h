@@ -51,7 +51,7 @@ public:
 	
 	static bool onInputEvent(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKConsole::log("TEST_InputEvent::onInputEvent()");
+		DKConsole::log("\nTEST_InputEvent::onInputEvent()");
 		printInputEventProperties(dynamic_cast<DKInputEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
