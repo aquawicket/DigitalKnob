@@ -12,7 +12,7 @@ class TEST_Window : public DKObjectT<TEST_Window>
 public:
 	bool Init(){
 		DKDEBUGFUNC();
-		DKINFO("\n////// TEST_Window.h //////\n");
+		DKConsole::log("\n////// TEST_Window.h //////");
 		
 		DKWindow window;
 		window.screen(&TEST_Screen::_screen);
@@ -25,52 +25,52 @@ public:
 		
 		// the current browsing context
 		// [LegacyUnforgeable] readonly attribute WindowProxy window;
-		DKINFO("window.window() = "				+toString(window.window())				+"\n");
+		DKConsole::log("window.window() = "				+toString(window.window()));
 	
 		// [Replaceable] readonly attribute WindowProxy self;
-		DKINFO("window.self() = "				+toString(window.self())				+"\n");
+		DKConsole::log("window.self() = "				+toString(window.self()));
 		
 		// [LegacyUnforgeable] readonly attribute Document document;
-		DKINFO("window.document() = "			+toString(window.document())			+"\n");
+		DKConsole::log("window.document() = "			+toString(window.document()));
 		
 		// attribute DOMString name;
-		DKINFO("window.name() = "				+toString(window.name())				+"\n");
+		DKConsole::log("window.name() = "				+toString(window.name()));
 		
 		// [PutForwards=href, LegacyUnforgeable] readonly attribute Location location;
-		DKINFO("window.location() = "			+toString(window.location())			+"\n");
+		DKConsole::log("window.location() = "			+toString(window.location()));
 
 		// readonly attribute History history;
-		DKINFO("window.history() = "			+toString(window.history())				+"\n");
+		DKConsole::log("window.history() = "			+toString(window.history()));
 		
 		// readonly attribute CustomElementRegistry customElements;
-		DKINFO("window.customElements() = "		+toString(window.customElements())		+"\n");
+		DKConsole::log("window.customElements() = "		+toString(window.customElements()));
 		
 		// [Replaceable] readonly attribute BarProp locationbar;
-		DKINFO("window.locationbar() = "		+toString(window.locationbar())			+"\n");
+		DKConsole::log("window.locationbar() = "		+toString(window.locationbar()));
 		
 		// [Replaceable] readonly attribute BarProp menubar;
-		DKINFO("window.menubar() = "			+toString(window.menubar())				+"\n");
+		DKConsole::log("window.menubar() = "			+toString(window.menubar()));
 		
 		// [Replaceable] readonly attribute BarProp personalbar;
-		DKINFO("window.personalbar() = "		+toString(window.personalbar())			+"\n");
+		DKConsole::log("window.personalbar() = "		+toString(window.personalbar()));
 		
 		// [Replaceable] readonly attribute BarProp scrollbars;
-		DKINFO("window.scrollbars() = "			+toString(window.scrollbars())			+"\n");
+		DKConsole::log("window.scrollbars() = "			+toString(window.scrollbars()));
 		
 		// [Replaceable] readonly attribute BarProp statusbar;
-		DKINFO("window.statusbar() = "			+toString(window.statusbar())			+"\n");
+		DKConsole::log("window.statusbar() = "			+toString(window.statusbar()));
 		
 		// [Replaceable] readonly attribute BarProp toolbar;
-		DKINFO("window.toolbar() = "			+toString(window.toolbar())				+"\n");
+		DKConsole::log("window.toolbar() = "			+toString(window.toolbar()));
 		
 		// attribute DOMString status;
-		DKINFO("window.status() = "				+toString(window.status())				+"\n");
+		DKConsole::log("window.status() = "				+toString(window.status()));
 		
 		// undefined close();
 		// function
 		
 		// readonly attribute boolean closed;
-		DKINFO("window.closed() = "				+toString(window.closed())				+"\n");
+		DKConsole::log("window.closed() = "				+toString(window.closed()));
 		
 		// undefined stop();
 		// function
@@ -83,22 +83,22 @@ public:
 		
 		// other browsing contexts
 		// [Replaceable] readonly attribute WindowProxy frames;
-		DKINFO("window.frames() = "				+toString(window.frames())				+"\n");
+		DKConsole::log("window.frames() = "				+toString(window.frames()));
 		
 		// [Replaceable] readonly attribute unsigned long length;
-		DKINFO("window.length() = "				+toString(window.length())				+"\n");
+		DKConsole::log("window.length() = "				+toString(window.length()));
 		
 		// [LegacyUnforgeable] readonly attribute WindowProxy? top;
-		DKINFO("window.top() = "				+toString(window.top())					+"\n");
+		DKConsole::log("window.top() = "				+toString(window.top()));
 		
 		// attribute any opener;
-		DKINFO("window.opener() = "				+toString(window.opener())				+"\n");
+		DKConsole::log("window.opener() = "				+toString(window.opener()));
 		
 		// [Replaceable] readonly attribute WindowProxy? parent;
-		DKINFO("window.parent() = "				+toString(window.parent())				+"\n");
+		DKConsole::log("window.parent() = "				+toString(window.parent()));
 		
 		// readonly attribute Element? frameElement;
-		DKINFO("window.frameElement() = "		+toString(window.frameElement())		+"\n");
+		DKConsole::log("window.frameElement() = "		+toString(window.frameElement()));
 		
 		// WindowProxy? open(optional USVString url = "", optional DOMString target = "_blank", optional [LegacyNullToEmptyString] DOMString features = "");
 		// function
@@ -111,13 +111,13 @@ public:
 		
 		// the user agent
 		// readonly attribute Navigator navigator;
-		DKINFO("window.navigator() = "			+toString(window.navigator())			+"\n");
+		DKConsole::log("window.navigator() = "			+toString(window.navigator()));
 		
 		// readonly attribute Navigator clientInformation; // legacy alias of .navigator
-		DKINFO("window.clientInformation() = "	+toString(window.clientInformation())	+"\n");
+		DKConsole::log("window.clientInformation() = "	+toString(window.clientInformation()));
 		
 		// readonly attribute boolean originAgentCluster;
-		DKINFO("window.originAgentCluster() = "	+toString(window.originAgentCluster())	+"\n");
+		DKConsole::log("window.originAgentCluster() = "	+toString(window.originAgentCluster()));
 		
 		//user prompts
 		// undefined alert();
@@ -145,16 +145,16 @@ public:
 		// Source: Compatibility Standard (https://compat.spec.whatwg.org/)
 		// partial interface Window {
 		//		readonly attribute short orientation;
-				DKINFO("window.orientation() = "			+toString(window.orientation())			+"\n");
+				DKConsole::log("window.orientation() = "			+toString(window.orientation()));
 		//		
 		//		attribute EventHandler onorientationchange;
-				DKINFO("window.onorientationchange() = "	+toString(window.onorientationchange())	+"\n");
+				DKConsole::log("window.onorientationchange() = "	+toString(window.onorientationchange()));
 		// };
 		
 		// Source: DOM Standard (https://dom.spec.whatwg.org/)
 		// partial interface Window {
 		//		[Replaceable] readonly attribute (Event or undefined) event; // legacy
-				DKINFO("window.event() = "					+toString(window.event())				+"\n");
+				DKConsole::log("window.event() = "					+toString(window.event()));
 		// };
 		
 		// Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
@@ -191,7 +191,7 @@ public:
 		// [SecureContext]
 		// partial interface Window {
 		//		[SameObject] readonly attribute CookieStore cookieStore;
-				DKINFO("window.cookieStore() = "		+toString(window.cookieStore())				+"\n");
+				DKConsole::log("window.cookieStore() = "		+toString(window.cookieStore()));
 		// };
 
 		// Source: Digital Goods API (https://wicg.github.io/digital-goods/)
@@ -204,7 +204,7 @@ public:
 		// partial interface Window {
 		//		// Collection of fenced frame APIs
 		//		readonly attribute Fence? fence;
-				DKINFO("window.fence() = "				+toString(window.fence())				+"\n");
+				DKConsole::log("window.fence() = "				+toString(window.fence()));
 		// };
 	
 		// Source: File System Access (https://wicg.github.io/file-system-access/)
@@ -230,28 +230,28 @@ public:
 		// Source: Manifest Incubations (https://wicg.github.io/manifest-incubations/)
 		// partial interface Window {
 		//		attribute EventHandler onappinstalled;
-				DKINFO("window.onappinstalled() = "				+toString(window.onappinstalled())				+"\n");
+				DKConsole::log("window.onappinstalled() = "				+toString(window.onappinstalled()));
 		
 		//		attribute EventHandler onbeforeinstallprompt;
-				DKINFO("window.onbeforeinstallprompt() = "		+toString(window.onbeforeinstallprompt())		+"\n");
+				DKConsole::log("window.onbeforeinstallprompt() = "		+toString(window.onbeforeinstallprompt()));
 		// };
 
 		// Source: Portals (https://wicg.github.io/portals/)
 		// partial interface Window {
 		//		readonly attribute PortalHost? portalHost;
-				DKINFO("window.portalHost() = "					+toString(window.portalHost())					+"\n");
+				DKConsole::log("window.portalHost() = "					+toString(window.portalHost()));
 		// };
 	
 		// Source: Web Speech API (https://wicg.github.io/speech-api/)
 		// partial interface Window {
 		//		[SameObject] readonly attribute SpeechSynthesis speechSynthesis;
-				DKINFO("window.speechSynthesis() = "	+toString(window.speechSynthesis())		+"\n");
+				DKConsole::log("window.speechSynthesis() = "	+toString(window.speechSynthesis()));
 		// };
 		
 		// Source: Web App Launch Handler API (https://wicg.github.io/web-app-launch/)
 		// partial interface Window {
 		//		readonly attribute LaunchQueue launchQueue;
-				DKINFO("window.launchQueue() = "		+toString(window.launchQueue())			+"\n");
+				DKConsole::log("window.launchQueue() = "		+toString(window.launchQueue()));
 		// };
 		
 		// Source: CSS Spatial Navigation Level 1 (https://www.w3.org/TR/css-nav-1/)
@@ -272,12 +272,12 @@ public:
 				// function
 		//
 		//		[SameObject, Replaceable] readonly attribute Screen screen;
-				//DKINFO("window.screen() = "				+toString(window.screen())				+"\n");
+				//DKConsole::log("window.screen() = "				+toString(window.screen()));
 				if(window.screen())
 					TEST_Screen::printScreenProperties(*window.screen());
 		//
 		//		[SameObject, Replaceable] readonly attribute VisualViewport? visualViewport;
-				DKINFO("window.visualViewport() = "		+toString(window.visualViewport())		+"\n");
+				DKConsole::log("window.visualViewport() = "		+toString(window.visualViewport()));
 		//
 		//		// browsing context
 		//		undefined moveTo(long x, long y);
@@ -294,23 +294,23 @@ public:
 		//
 		//		// viewport
 		//		[Replaceable] readonly attribute long innerWidth;
-				DKINFO("window.innerWidth() = "			+toString(window.innerWidth())			+"\n");
+				DKConsole::log("window.innerWidth() = "			+toString(window.innerWidth()));
 		//
 		//		[Replaceable] readonly attribute long innerHeight;
-				DKINFO("window.innerHeight() = "		+toString(window.innerHeight())			+"\n");
+				DKConsole::log("window.innerHeight() = "		+toString(window.innerHeight()));
 		//
 		//		// viewport scrolling
 		//		[Replaceable] readonly attribute double scrollX;
-				DKINFO("window.scrollX() = "			+toString(window.scrollX())				+"\n");
+				DKConsole::log("window.scrollX() = "			+toString(window.scrollX()));
 		//
 		//		[Replaceable] readonly attribute double pageXOffset;
-				DKINFO("window.pageXOffset() = "		+toString(window.pageXOffset())			+"\n");
+				DKConsole::log("window.pageXOffset() = "		+toString(window.pageXOffset()));
 		//
 		//		[Replaceable] readonly attribute double scrollY;
-				DKINFO("window.scrollY() = "			+toString(window.scrollY())				+"\n");
+				DKConsole::log("window.scrollY() = "			+toString(window.scrollY()));
 		//
 		//		[Replaceable] readonly attribute double pageYOffset;
-				DKINFO("window.pageYOffset() = "		+toString(window.pageYOffset())			+"\n");
+				DKConsole::log("window.pageYOffset() = "		+toString(window.pageYOffset()));
 		//
 		//		undefined scroll(optional ScrollToOptions options = {});
 		//		undefined scroll(unrestricted double x, unrestricted double y);
@@ -326,43 +326,43 @@ public:
 		///
 		//		// client
 		//		[Replaceable] readonly attribute long screenX;
-				DKINFO("window.screenX() = "			+toString(window.screenX())				+"\n");
+				DKConsole::log("window.screenX() = "			+toString(window.screenX()));
 		//
 		//		[Replaceable] readonly attribute long screenLeft;
-				DKINFO("window.screenLeft() = "			+toString(window.screenLeft())			+"\n");
+				DKConsole::log("window.screenLeft() = "			+toString(window.screenLeft()));
 		//
 		//		[Replaceable] readonly attribute long screenY;
-				DKINFO("window.screenY() = "			+toString(window.screenY())				+"\n");
+				DKConsole::log("window.screenY() = "			+toString(window.screenY()));
 		//
 		//		[Replaceable] readonly attribute long screenTop;
-				DKINFO("window.screenTop() = "			+toString(window.screenTop())			+"\n");
+				DKConsole::log("window.screenTop() = "			+toString(window.screenTop()));
 		//
 		//		[Replaceable] readonly attribute long outerWidth;
-				DKINFO("window.outerWidth() = "			+toString(window.outerWidth())			+"\n");
+				DKConsole::log("window.outerWidth() = "			+toString(window.outerWidth()));
 		//
 		//		[Replaceable] readonly attribute long outerHeight;
-				DKINFO("window.outerHeight() = "		+toString(window.outerHeight())			+"\n");
+				DKConsole::log("window.outerHeight() = "		+toString(window.outerHeight()));
 		//
 		//		[Replaceable] readonly attribute double devicePixelRatio;
-				DKINFO("window.devicePixelRatio() = "	+toString(window.devicePixelRatio())	+"\n");
+				DKConsole::log("window.devicePixelRatio() = "	+toString(window.devicePixelRatio()));
 		// };
 		
 		// Source: DeviceOrientation Event Specification (https://www.w3.org/TR/orientation-event/)
 		// partial interface Window {
 		//		[SecureContext] attribute EventHandler ondeviceorientation;
-				DKINFO("window.ondeviceorientation() = "+toString(window.ondeviceorientation())	+"\n");
+				DKConsole::log("window.ondeviceorientation() = "+toString(window.ondeviceorientation()));
 		// };
 
 		// Source: DeviceOrientation Event Specification (https://www.w3.org/TR/orientation-event/)
 		// partial interface Window {
 		//		[SecureContext] attribute EventHandler ondeviceorientationabsolute;
-				DKINFO("window.ondeviceorientationabsolute() = "+toString(window.ondeviceorientationabsolute())	+"\n");
+				DKConsole::log("window.ondeviceorientationabsolute() = "+toString(window.ondeviceorientationabsolute()));
 		// };
 
 		// Source: DeviceOrientation Event Specification (https://www.w3.org/TR/orientation-event/)
 		//	partial interface Window {
 		//		[SecureContext] attribute EventHandler ondevicemotion;
-				DKINFO("window.ondevicemotion() = "		+toString(window.ondevicemotion())		+"\n");
+				DKConsole::log("window.ondevicemotion() = "		+toString(window.ondevicemotion()));
 		// };
 	
 		// Source: requestIdleCallback() (https://www.w3.org/TR/requestidlecallback/)

@@ -12,7 +12,7 @@ class TEST_Navigator : public DKObjectT<TEST_Navigator>
 public:
 	bool Init(){
 		DKDEBUGFUNC();
-		DKINFO("\n////// TEST_Navigator.h //////\n");
+		DKConsole::log("\n////// TEST_Navigator.h //////");
 	
 		DKNavigator navigator;
 		printNavigatorProperties(navigator);

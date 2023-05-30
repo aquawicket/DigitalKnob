@@ -12,7 +12,7 @@ class TEST_KeyboardEvent : public DKObjectT<TEST_KeyboardEvent>
 public:
 	bool Init(){
 		DKDEBUGFUNC();
-		DKINFO("\n////// TEST_KeyboardEvent.h //////\n");
+		DKConsole::log("\n////// TEST_KeyboardEvent.h //////");
 		
 		DKEventTarget keyboardEventTarget;
 		keyboardEventTarget.addEventListener("keyboardEvent", &TEST_KeyboardEvent::onKeyboardEvent);
@@ -30,44 +30,44 @@ public:
 	#if !EMSCRIPTEN
 		// KeyLocationCode
 		// const unsigned long DOM_KEY_LOCATION_STANDARD = 0x00;
-		DKINFO("keyboardEvent.DOM_KEY_LOCATION_STANDARD() = "	+toString(keyboardEvent.DOM_KEY_LOCATION_STANDARD())+"\n");
+		DKConsole::log("keyboardEvent.DOM_KEY_LOCATION_STANDARD() = "	+toString(keyboardEvent.DOM_KEY_LOCATION_STANDARD()));
 		
 		// const unsigned long DOM_KEY_LOCATION_LEFT = 0x01;
-		DKINFO("keyboardEvent.DOM_KEY_LOCATION_LEFT() = "		+toString(keyboardEvent.DOM_KEY_LOCATION_LEFT())	+"\n");
+		DKConsole::log("keyboardEvent.DOM_KEY_LOCATION_LEFT() = "		+toString(keyboardEvent.DOM_KEY_LOCATION_LEFT()));
 		
 		// const unsigned long DOM_KEY_LOCATION_RIGHT = 0x02;
-		DKINFO("keyboardEvent.DOM_KEY_LOCATION_RIGHT() = "		+toString(keyboardEvent.DOM_KEY_LOCATION_RIGHT())	+"\n");
+		DKConsole::log("keyboardEvent.DOM_KEY_LOCATION_RIGHT() = "		+toString(keyboardEvent.DOM_KEY_LOCATION_RIGHT()));
 		
 		// const unsigned long DOM_KEY_LOCATION_NUMPAD = 0x03;
-		DKINFO("keyboardEvent.DOM_KEY_LOCATION_NUMPAD() = "		+toString(keyboardEvent.DOM_KEY_LOCATION_NUMPAD())	+"\n");
+		DKConsole::log("keyboardEvent.DOM_KEY_LOCATION_NUMPAD() = "		+toString(keyboardEvent.DOM_KEY_LOCATION_NUMPAD()));
 	#endif
 		
 		// readonly attribute DOMString key;
-		DKINFO("keyboardEvent.key() = "							+toString(keyboardEvent.key())						+"\n");
+		DKConsole::log("keyboardEvent.key() = "							+toString(keyboardEvent.key()));
 		
 		// readonly attribute DOMString code;
-		DKINFO("keyboardEvent.code() = "						+toString(keyboardEvent.code())						+"\n");	
+		DKConsole::log("keyboardEvent.code() = "						+toString(keyboardEvent.code()));	
 		
 		// readonly attribute unsigned long location;
-		DKINFO("keyboardEvent.location() = "					+toString(keyboardEvent.location())					+"\n");
+		DKConsole::log("keyboardEvent.location() = "					+toString(keyboardEvent.location()));
 		
 		// readonly attribute boolean ctrlKey;
-		DKINFO("keyboardEvent.ctrlKey() = "						+toString(keyboardEvent.ctrlKey())					+"\n");
+		DKConsole::log("keyboardEvent.ctrlKey() = "						+toString(keyboardEvent.ctrlKey()));
 		
 		// readonly attribute boolean shiftKey;
-		DKINFO("keyboardEvent.shiftKey() = "					+toString(keyboardEvent.shiftKey())					+"\n");
+		DKConsole::log("keyboardEvent.shiftKey() = "					+toString(keyboardEvent.shiftKey()));
 		
 		// readonly attribute boolean altKey;
-		DKINFO("keyboardEvent.altKey() = "						+toString(keyboardEvent.altKey())					+"\n");
+		DKConsole::log("keyboardEvent.altKey() = "						+toString(keyboardEvent.altKey()));
 		
 		// readonly attribute boolean metaKey;
-		DKINFO("keyboardEvent.metaKey() = "						+toString(keyboardEvent.metaKey())					+"\n");
+		DKConsole::log("keyboardEvent.metaKey() = "						+toString(keyboardEvent.metaKey()));
 		
 		// readonly attribute boolean repeat;
-		DKINFO("keyboardEvent.repeat() = "						+toString(keyboardEvent.repeat())					+"\n");
+		DKConsole::log("keyboardEvent.repeat() = "						+toString(keyboardEvent.repeat()));
 		
 		// readonly attribute boolean isComposing;
-		DKINFO("keyboardEvent.isComposing() = "					+toString(keyboardEvent.isComposing())				+"\n");
+		DKConsole::log("keyboardEvent.isComposing() = "					+toString(keyboardEvent.isComposing()));
 		
 		// boolean getModifierState(DOMString keyArg);
 		// function
@@ -92,10 +92,10 @@ public:
 		// partial interface KeyboardEvent {
 		//		// The following support legacy user agents
 		//		readonly attribute unsigned long charCode;
-				DKINFO("keyboardEvent.charCode() = "			+toString(keyboardEvent.charCode())					+"\n");
+				DKConsole::log("keyboardEvent.charCode() = "			+toString(keyboardEvent.charCode()));
 		//
 		//		readonly attribute unsigned long keyCode;
-				DKINFO("keyboardEvent.keyCode() = "				+toString(keyboardEvent.keyCode())					+"\n");
+				DKConsole::log("keyboardEvent.keyCode() = "				+toString(keyboardEvent.keyCode()));
 		// };
 		
 		
@@ -104,7 +104,7 @@ public:
 
 	static bool onKeyboardEvent(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKINFO("TEST_KeyboardEvent::onkeyboardevent() \n");
+		DKConsole::log("TEST_KeyboardEvent::onkeyboardevent()");
 		printKeyboardEventProperties(dynamic_cast<DKKeyboardEvent&>(event));	//TODO: try to remove the need for dynamic_cast
 		return true;
 	}

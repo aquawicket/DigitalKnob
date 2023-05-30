@@ -12,7 +12,7 @@ class TEST_DragEvent : public DKObjectT<TEST_DragEvent>
 public:
 	bool Init(){
 		DKDEBUGFUNC();
-		DKINFO("\n////// TEST_DragEvent.h //////\n");
+		DKConsole::log("\n////// TEST_DragEvent.h //////");
 	
 		DKEventTarget eventTarget;
 		eventTarget.addEventListener("dragEvent", &TEST_DragEvent::onDragEvent);
@@ -28,14 +28,14 @@ public:
 		// function
 		
 		// readonly attribute DataTransfer? dataTransfer;
-		DKINFO("dragEvent.dataTransfer() = "	+toString(dragEvent.dataTransfer())	+"\n");
+		DKConsole::log("dragEvent.dataTransfer() = "	+toString(dragEvent.dataTransfer()));
 		
 		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent&>(dragEvent));	//TODO: try to remove the need for dynamic_cast
 	}
 	
 	static bool onDragEvent(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKINFO("TEST_DragEvent::onDragEvent() \n");
+		DKConsole::log("TEST_DragEvent::onDragEvent()");
 		printDragEventProperties(dynamic_cast<DKDragEvent&>(event));						//TODO: try to remove the need for dynamic_cast
 		return true;
 	}

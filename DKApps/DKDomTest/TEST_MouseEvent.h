@@ -12,7 +12,7 @@ class TEST_MouseEvent : public DKObjectT<TEST_MouseEvent>
 public:
 	bool Init(){
 		DKDEBUGFUNC();
-		DKINFO("\n////// TEST_MouseEvent.h //////\n");
+		DKConsole::log("\n////// TEST_MouseEvent.h //////");
 		
 		DKEventTarget eventTarget;
 		eventTarget.addEventListener("mouseEvent", &TEST_MouseEvent::onMouseEvent);
@@ -28,37 +28,37 @@ public:
 		// function
 		
 		// readonly attribute long screenX;
-		DKINFO("mouseEvent.screenX() = "		+toString(mouseEvent.screenX())			+"\n");
+		DKConsole::log("mouseEvent.screenX() = "		+toString(mouseEvent.screenX()));
 		
 		// readonly attribute long screenY;
-		DKINFO("mouseEvent.screenY() = "		+toString(mouseEvent.screenY())			+"\n");
+		DKConsole::log("mouseEvent.screenY() = "		+toString(mouseEvent.screenY()));
 		
 		// readonly attribute long clientX;
-		DKINFO("mouseEvent.clientX() = "		+toString(mouseEvent.clientX())			+"\n");
+		DKConsole::log("mouseEvent.clientX() = "		+toString(mouseEvent.clientX()));
 		
 		// readonly attribute long clientY;
-		DKINFO("mouseEvent.clientY() = "		+toString(mouseEvent.clientY())			+"\n");
+		DKConsole::log("mouseEvent.clientY() = "		+toString(mouseEvent.clientY()));
 		
 		// readonly attribute boolean ctrlKey;
-		DKINFO("mouseEvent.ctrlKey() = "		+toString(mouseEvent.ctrlKey())			+"\n");
+		DKConsole::log("mouseEvent.ctrlKey() = "		+toString(mouseEvent.ctrlKey()));
 		
 		// readonly attribute boolean shiftKey;
-		DKINFO("mouseEvent.shiftKey() = "		+toString(mouseEvent.shiftKey())		+"\n");
+		DKConsole::log("mouseEvent.shiftKey() = "		+toString(mouseEvent.shiftKey()));
 		
 		// readonly attribute boolean altKey;
-		DKINFO("mouseEvent.altKey() = "			+toString(mouseEvent.altKey())			+"\n");
+		DKConsole::log("mouseEvent.altKey() = "			+toString(mouseEvent.altKey()));
 		
 		// readonly attribute boolean metaKey;
-		DKINFO("mouseEvent.metaKey() = "		+toString(mouseEvent.metaKey())			+"\n");
+		DKConsole::log("mouseEvent.metaKey() = "		+toString(mouseEvent.metaKey()));
 		
 		// readonly attribute short button;
-		DKINFO("mouseEvent.button() = "			+toString(mouseEvent.button())			+"\n");
+		DKConsole::log("mouseEvent.button() = "			+toString(mouseEvent.button()));
 		
 		// readonly attribute unsigned short buttons;		
-		DKINFO("mouseEvent.buttons() = "		+toString(mouseEvent.buttons())			+"\n");
+		DKConsole::log("mouseEvent.buttons() = "		+toString(mouseEvent.buttons()));
 		
 		// readonly attribute EventTarget? relatedTarget;
-		DKINFO("mouseEvent.relatedTarget() = "	+toString(mouseEvent.relatedTarget())	+"\n");
+		DKConsole::log("mouseEvent.relatedTarget() = "	+toString(mouseEvent.relatedTarget()));
 		
 		// boolean getModifierState(DOMString keyArg);
 		// function
@@ -66,25 +66,25 @@ public:
 		// Source: CSSOM View Module (https://www.w3.org/TR/cssom-view-1/)
 		// partial interface MouseEvent {
 		//  	readonly attribute double pageX;
-				DKINFO("mouseEvent.pageX() = "			+toString(mouseEvent.pageX())		+"\n");
+				DKConsole::log("mouseEvent.pageX() = "			+toString(mouseEvent.pageX()));
 		//  	readonly attribute double pageY;
-				DKINFO("mouseEvent.pageY() = "			+toString(mouseEvent.pageY())		+"\n");
+				DKConsole::log("mouseEvent.pageY() = "			+toString(mouseEvent.pageY()));
 		//  	readonly attribute double x;
-				DKINFO("mouseEvent.x() = "				+toString(mouseEvent.x())			+"\n");
+				DKConsole::log("mouseEvent.x() = "				+toString(mouseEvent.x()));
 		//  	readonly attribute double y;
-				DKINFO("mouseEvent.y() = "				+toString(mouseEvent.y())			+"\n");
+				DKConsole::log("mouseEvent.y() = "				+toString(mouseEvent.y()));
 		//  	readonly attribute double offsetX; 
-				DKINFO("mouseEvent.offsetX() = "		+toString(mouseEvent.offsetX())		+"\n");
+				DKConsole::log("mouseEvent.offsetX() = "		+toString(mouseEvent.offsetX()));
 		//  	readonly attribute double offsetY;
-				DKINFO("mouseEvent.offsetY() = "		+toString(mouseEvent.offsetY())		+"\n");
+				DKConsole::log("mouseEvent.offsetY() = "		+toString(mouseEvent.offsetY()));
 		// };
 	
 		// Source: Pointer Lock 2.0 (https://www.w3.org/TR/pointerlock-2/)
 		// partial interface MouseEvent {
 		//   	readonly attribute double movementX;
-				DKINFO("mouseEvent.movementX() = "		+toString(mouseEvent.movementX())	+"\n");
+				DKConsole::log("mouseEvent.movementX() = "		+toString(mouseEvent.movementX()));
 		//   	readonly attribute double movementY;
-				DKINFO("mouseEvent.movementY() = "		+toString(mouseEvent.movementY())	+"\n");
+				DKConsole::log("mouseEvent.movementY() = "		+toString(mouseEvent.movementY()));
 		// };
 	
 		// Source: UI Events (https://www.w3.org/TR/uievents/)
@@ -113,7 +113,7 @@ public:
 
 	static bool onMouseEvent(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKINFO("TEST_MouseEvent::onMouseEvent() \n");
+		DKConsole::log("TEST_MouseEvent::onMouseEvent()");
 		printMouseEventProperties(dynamic_cast<DKMouseEvent&>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}

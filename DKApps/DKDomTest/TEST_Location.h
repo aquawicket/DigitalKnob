@@ -12,7 +12,7 @@ class TEST_Location : public DKObjectT<TEST_Location>
 public:
 	bool Init(){
 		DKDEBUGFUNC();
-		DKINFO("\n////// TEST_Location.h //////\n");
+		DKConsole::log("\n////// TEST_Location.h //////");
 		
 		DKLocation location;
 		printLocationProperties(location);
@@ -23,31 +23,31 @@ public:
 		DKDEBUGFUNC(location);
 		
 		// [LegacyUnforgeable] stringifier attribute USVString href;
-		DKINFO("location.href() = "				+toString(location.href())				+"\n");
+		DKConsole::log("location.href() = "				+toString(location.href()));
 		
 		// [LegacyUnforgeable] readonly attribute USVString origin;
-		DKINFO("location.origin() = "			+toString(location.origin())			+"\n");
+		DKConsole::log("location.origin() = "			+toString(location.origin()));
 		
 		// [LegacyUnforgeable] attribute USVString protocol;
-		DKINFO("location.protocol() = "			+toString(location.protocol())			+"\n");
+		DKConsole::log("location.protocol() = "			+toString(location.protocol()));
 		
 		// [LegacyUnforgeable] attribute USVString host;
-		DKINFO("location.host() = "				+toString(location.host())				+"\n");
+		DKConsole::log("location.host() = "				+toString(location.host()));
 		
 		// [LegacyUnforgeable] attribute USVString hostname;
-		DKINFO("location.hostname() = "			+toString(location.hostname())			+"\n");
+		DKConsole::log("location.hostname() = "			+toString(location.hostname()));
 		
 		// [LegacyUnforgeable] attribute USVString port;
-		DKINFO("location.port() = "				+toString(location.port())				+"\n");
+		DKConsole::log("location.port() = "				+toString(location.port()));
 		
 		// [LegacyUnforgeable] attribute USVString pathname;
-		DKINFO("location.pathname() = "			+toString(location.pathname())			+"\n");
+		DKConsole::log("location.pathname() = "			+toString(location.pathname()));
 		
 		// [LegacyUnforgeable] attribute USVString search;
-		DKINFO("location.search() = "			+toString(location.search())			+"\n");
+		DKConsole::log("location.search() = "			+toString(location.search()));
 		
 		// [LegacyUnforgeable] attribute USVString hash;
-		DKINFO("location.hash() = "				+toString(location.hash())				+"\n");
+		DKConsole::log("location.hash() = "				+toString(location.hash()));
 		
 		// [LegacyUnforgeable] undefined assign(USVString url);
 		// function
@@ -59,7 +59,7 @@ public:
 		// function
 		
 		// [LegacyUnforgeable, SameObject] readonly attribute DOMStringList ancestorOrigins;
-		DKINFO("location.ancestorOrigins() = "	+toString(location.ancestorOrigins())	+"\n");
+		DKConsole::log("location.ancestorOrigins() = "	+toString(location.ancestorOrigins()));
 	}
 };
 REGISTER_OBJECT(TEST_Location, true);

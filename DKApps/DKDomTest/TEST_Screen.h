@@ -16,7 +16,7 @@ public:
 
 	bool Init(){
 		DKDEBUGFUNC();
-		DKINFO("\n////// TEST_Screen.h //////\n");
+		DKConsole::log("\n////// TEST_Screen.h //////");
 		
 		printScreenProperties(_screen);
 		return true;
@@ -26,22 +26,22 @@ public:
 		DKDEBUGFUNC(screen);
 		
 		// readonly attribute long availWidth;
-		DKINFO("screen.availWidth() = "	+toString(screen.availWidth())	+"\n");
+		DKConsole::log("screen.availWidth() = "	+toString(screen.availWidth()));
 		
 		// readonly attribute long availHeight;
-		DKINFO("screen.availHeight() = "+toString(screen.availHeight())+"\n");
+		DKConsole::log("screen.availHeight() = "+toString(screen.availHeight()));
 		
 		// readonly attribute long width;
-		DKINFO("screen.width() = "		+toString(screen.width())		+"\n");
+		DKConsole::log("screen.width() = "		+toString(screen.width()));
 		
 		// readonly attribute long height;
-		DKINFO("screen.height() = "		+toString(screen.height())		+"\n");
+		DKConsole::log("screen.height() = "		+toString(screen.height()));
 		
 		// readonly attribute unsigned long colorDepth;
-		DKINFO("screen.colorDepth() = "	+toString(screen.colorDepth())	+"\n");
+		DKConsole::log("screen.colorDepth() = "	+toString(screen.colorDepth()));
 		
 		// readonly attribute unsigned long pixelDepth;
-		DKINFO("screen.pixelDepth() = "	+toString(screen.pixelDepth())	+"\n");
+		DKConsole::log("screen.pixelDepth() = "	+toString(screen.pixelDepth()));
 	}
 };
 REGISTER_OBJECT(TEST_Screen, true);

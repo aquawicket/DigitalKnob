@@ -12,7 +12,7 @@ class TEST_Element : public DKObjectT<TEST_Element>
 public:
 	bool Init(){
 		DKDEBUGFUNC();
-		DKINFO("\n////// TEST_Element.h //////\n");
+		DKConsole::log("\n////// TEST_Element.h //////");
 
 		DKElement element;
 		printElementProperties(element);
@@ -23,34 +23,34 @@ public:
 		DKDEBUGFUNC(element);
 		
 		// readonly attribute DOMString? namespaceURI;
-		DKINFO("element.namespaceURI() = "	+toString(element.namespaceURI())	+"\n");
+		DKConsole::log("element.namespaceURI() = "	+toString(element.namespaceURI()));
 		
 		// readonly attribute DOMString? prefix;
-		DKINFO("element.prefix() = "		+toString(element.prefix())			+"\n");
+		DKConsole::log("element.prefix() = "		+toString(element.prefix()));
 		
 		// readonly attribute DOMString localName;
-		DKINFO("element.localName() = "		+toString(element.localName())		+"\n");
+		DKConsole::log("element.localName() = "		+toString(element.localName()));
 		
 		// readonly attribute DOMString tagName;
-		DKINFO("element.tagName() = "		+toString(element.tagName())		+"\n");
+		DKConsole::log("element.tagName() = "		+toString(element.tagName()));
 		
 		// [CEReactions] attribute DOMString id;
-		DKINFO("element.id() = "			+toString(element.id())				+"\n");
+		DKConsole::log("element.id() = "			+toString(element.id()));
 		
 		// [CEReactions] attribute DOMString className;
-		DKINFO("element.className() = "		+toString(element.className())		+"\n");
+		DKConsole::log("element.className() = "		+toString(element.className()));
 		
 		// [SameObject, PutForwards=value] readonly attribute DOMTokenList classList;
-		DKINFO("element.classList() = "		+toString(element.classList())		+"\n");
+		DKConsole::log("element.classList() = "		+toString(element.classList()));
 		
 		//[CEReactions, Unscopable] attribute DOMString slot;
-		DKINFO("element.slot() = "			+toString(element.slot())			+"\n");
+		DKConsole::log("element.slot() = "			+toString(element.slot()));
 		
 		// boolean hasAttributes();
 		// function
 		
 		// [SameObject] readonly attribute NamedNodeMap attributes;
-		DKINFO("element.attributes() = "	+toString(element.attributes())		+"\n");
+		DKConsole::log("element.attributes() = "	+toString(element.attributes()));
 		
 		// sequence<DOMString> getAttributeNames();
 		// function
@@ -101,7 +101,7 @@ public:
 		// function
 		
 		// readonly attribute ShadowRoot? shadowRoot;
-		DKINFO("element.shadowRoot() = "	+toString(element.shadowRoot())		+"\n");
+		DKConsole::log("element.shadowRoot() = "	+toString(element.shadowRoot()));
 		
 		// Element? closest(DOMString selectors);
 		// function

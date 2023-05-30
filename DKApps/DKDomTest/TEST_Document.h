@@ -12,7 +12,7 @@ class TEST_Document : public DKObjectT<TEST_Document>
 public:
 	bool Init(){
 		DKDEBUGFUNC();
-		DKINFO("\n////// TEST_Document.h //////\n");
+		DKConsole::log("\n////// TEST_Document.h //////");
 		
 		DKDocument document;
 		printDocumentProperties(document);
@@ -26,34 +26,34 @@ public:
 		// function
 		
 		// [SameObject] readonly attribute DOMImplementation implementation;
-		DKINFO("document.implementation() = "	+toString(document.implementation())	+"\n");
+		DKConsole::log("document.implementation() = "	+toString(document.implementation()));
 		
 		// readonly attribute USVString URL;
-		DKINFO("document.URL() = "				+toString(document.URL())				+"\n");
+		DKConsole::log("document.URL() = "				+toString(document.URL()));
 		
 		// readonly attribute USVString documentURI;
-		DKINFO("document.documentURI() = "		+toString(document.documentURI())		+"\n");
+		DKConsole::log("document.documentURI() = "		+toString(document.documentURI()));
 		
 		// readonly attribute DOMString compatMode;
-		DKINFO("document.compatMode() = "		+toString(document.compatMode())		+"\n");
+		DKConsole::log("document.compatMode() = "		+toString(document.compatMode()));
 		
 		// readonly attribute DOMString characterSet;
-		DKINFO("document.characterSet() = "		+toString(document.characterSet())		+"\n");
+		DKConsole::log("document.characterSet() = "		+toString(document.characterSet()));
 		
 		// readonly attribute DOMString charset; // legacy alias of .characterSet
-		DKINFO("document.charset() = "			+toString(document.charset())			+"\n");
+		DKConsole::log("document.charset() = "			+toString(document.charset()));
 		
 		// readonly attribute DOMString inputEncoding; // legacy alias of .characterSet
-		DKINFO("document.inputEncoding() = "	+toString(document.inputEncoding())		+"\n");
+		DKConsole::log("document.inputEncoding() = "	+toString(document.inputEncoding()));
 		
 		// readonly attribute DOMString contentType;
-		DKINFO("document.contentType() = "		+toString(document.contentType())		+"\n");
+		DKConsole::log("document.contentType() = "		+toString(document.contentType()));
 		
 		// readonly attribute DocumentType? doctype;
-		DKINFO("document.doctype() = "			+toString(document.doctype())			+"\n");
+		DKConsole::log("document.doctype() = "			+toString(document.doctype()));
 		
 		// readonly attribute Element? documentElement;
-		DKINFO("document.documentElement() = "	+toString(document.documentElement())	+"\n");
+		DKConsole::log("document.documentElement() = "	+toString(document.documentElement()));
 		
 		// HTMLCollection getElementsByTagName(DOMString qualifiedName);
 		// function
@@ -138,19 +138,19 @@ public:
 		// Source: Fullscreen API Standard (https://fullscreen.spec.whatwg.org/)
 		// partial interface Document {
 		//		[LegacyLenientSetter] readonly attribute boolean fullscreenEnabled;
-				DKINFO("document.fullscreenEnabled() = "	+toString(document.fullscreenEnabled())		+"\n");
+				DKConsole::log("document.fullscreenEnabled() = "	+toString(document.fullscreenEnabled()));
 		//		
 		//		[LegacyLenientSetter, Unscopable] readonly attribute boolean fullscreen; // historical
-				DKINFO("document.fullscreen() = "			+toString(document.fullscreen())			+"\n");
+				DKConsole::log("document.fullscreen() = "			+toString(document.fullscreen()));
 		//
 		//		Promise<undefined> exitFullscreen();
 				// function
 		//
 		//		attribute EventHandler onfullscreenchange;
-				DKINFO("document.onfullscreenchange() = "	+toString(document.onfullscreenchange())	+"\n");
+				DKConsole::log("document.onfullscreenchange() = "	+toString(document.onfullscreenchange()));
 		//
 		//		attribute EventHandler onfullscreenerror;
-				DKINFO("document.onfullscreenerror() = "	+toString(document.onfullscreenerror())		+"\n");
+				DKConsole::log("document.onfullscreenerror() = "	+toString(document.onfullscreenerror()));
 		//};
 		
 		
