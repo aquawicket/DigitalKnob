@@ -30,6 +30,7 @@
 #include "DKSdlWindow/DKSdlWindow.h"
 #include "DKFocusEvent/DKFocusEvent.h"
 #include "DKMouseEvent/DKMouseEvent.h"
+#include "DKWheelEvent/DKWheelEvent.h"
 #include "DK/DKOsInfo.h"
 #include "DKOpenGL/DKOpenGL.h"
 
@@ -596,21 +597,18 @@ int DKSdlWindow::EventFilter(void* userdata, SDL_Event* event) {
                 dkSdlWindow->winX = event->window.data1;
                 dkSdlWindow->winY = event->window.data2;
                 dkSdlWindow->Process();
-                //DKEvents::SendEvent("sdlwindow", "move", toString(dkSdlWindow->winX) + "," + toString(dkSdlWindow->winY));
                 return 1;
             }
             case SDL_WINDOWEVENT_RESIZED: {
                 dkSdlWindow->_width = event->window.data1;
                 dkSdlWindow->_height = event->window.data2;
                 dkSdlWindow->Process();
-                //DKEvents::SendEvent("sdlwindow", "resize", toString(dkwindowdow->_width) + "," + toString(dkwindowdow->_height));
                 return 1;
             }
             case SDL_WINDOWEVENT_SIZE_CHANGED: {
                 dkSdlWindow->_width = event->window.data1;
                 dkSdlWindow->_height = event->window.data2;
                 dkSdlWindow->Process();
-                //DKEvents::SendEvent("sdlwindow", "resize", toString(dkwindowdow->_width) + "," + toString(dkwindowdow->_height));
                 return 1;
             }
             case SDL_WINDOWEVENT_MINIMIZED: {
@@ -629,7 +627,6 @@ int DKSdlWindow::EventFilter(void* userdata, SDL_Event* event) {
             }
             case SDL_WINDOWEVENT_MAXIMIZED: {
 				DKINFO("SDL_WINDOWEVENT_MAXIMIZED \n");
-                //DKEvents::SendEvent("sdlwindow", "maximize", "");
                 return 1;
             }
             case SDL_WINDOWEVENT_RESTORED: {
@@ -797,7 +794,7 @@ bool DKSdlWindow::handle(SDL_Event *event) {
 						dispatchEvent(dblclick_event);
 					}
                     else{
-						DDKMouseEvent click_event("click", "");
+						DKMouseEvent click_event("click", "");
 						//click_event.screenX(screenX);
 						//click_event.screenY(screenY);
 						//click_event.clientX(clientX);
@@ -823,11 +820,40 @@ bool DKSdlWindow::handle(SDL_Event *event) {
             return false; //allow event to continue
         }
         case SDL_MOUSEWHEEL: {
-            DKEvents::SendEvent("sdlwindow", "wheel", toString(event->wheel.y));
+            //DKEvents::SendEvent("sdlwindow", "wheel", toString(event->wheel.y));
+			//button = 0;
+            //if ((int32_t)mer.dwButtonState > 0)
+            //    deltaY = -100;
+            //if ((int32_t)mer.dwButtonState < 0)
+            //    deltaY = 100;
+			DKWheelEvent wheel_event("wheel", "");
+			//wheel_event.deltaY(deltaY);
+			//wheel_event.screenX(screenX);
+			//wheel_event.screenY(screenY);
+			//wheel_event.clientX(clientX);
+			//wheel_event.clientY(clientY);
+			//wheel_event.ctrlKey(ctrlKey);
+			//wheel_event.shiftKey(shiftKey);
+			//wheel_event.altKey(altKey);
+			//wheel_event.metaKey(metaKey);
+			//wheel_event.button(button);
+			//wheel_event.buttons(buttons);
+			//wheel_event.relatedTarget(relatedTarget);
+			//wheel_event.pageX(pageX);
+			//wheel_event.pageY(pageY);
+			wheel_event.x(last_mouseX);
+			wheel_event.y(last_mouseY);
+			//wheel_event.offsetX(offsetX);
+			//wheel_event.offsetY(offsetY);
+			//wheel_event.movementX(movementX);
+			//wheel_event.movementY(movementY);
+			dispatchEvent(wheel_event);
             return false; //allow event to continue
         }
         case SDL_KEYDOWN: {
-            //DKINFO("DKSdlWindow::SDL_KEYDOWN("+toString(event->key.keysym.sym)+")\n");
+            
+			/*
+			DKINFO("DKSdlWindow::SDL_KEYDOWN("+toString(event->key.keysym.sym)+")\n");
             if(event->key.keysym.sym == 0)
                 return true;
             if(event->key.keysym.sym > 96 && event->key.keysym.sym < 123) { //letter
@@ -843,13 +869,46 @@ bool DKSdlWindow::handle(SDL_Event *event) {
             } else {
                 DKEvents::SendEvent("sdlwindow", "keypress", toString(sdlCharCode[event->key.keysym.sym])); //symbol
             }
-            DKEvents::SendEvent("sdlwindow", "keydown", toString(sdlKeyCode[event->key.keysym.sym])); //keycode
+			DKEvents::SendEvent("sdlwindow", "keydown", toString(sdlKeyCode[event->key.keysym.sym])); //keycode
+			*/
+            
+			DKKeyboardEvent keydown_event("keydown", "");
+			//keydown_event.key(key);
+			//keydown_event.code(code);
+			//keydown_event.location(location);
+			//keydown_event.ctrlKey(ctrlKey);
+			//keydown_event.shiftKey(shiftKey);
+			//keydown_event.altKey(altKey);
+			//keydown_event.metaKey(metaKey);
+			//keydown_event.repeat(repeat);
+			//keydown_event.isComposing(isComposing);
+			//keydown_event.charCode(charCode);
+			//keydown_event.keyCode(keyCode);
+			dispatchEvent(keydown_event);
+		
             return false; //allow event to continue
         }
         case SDL_KEYUP: {
+			/*
             if(event->key.keysym.sym == 0)
                 return true;
             DKEvents::SendEvent("sdlwindow", "keyup", toString(sdlKeyCode[event->key.keysym.sym]));
+			*/
+			
+			DKKeyboardEvent keyup_event("keyup", "");
+			//keyup_event.key(key);
+			//keyup_event.code(code);
+			//keyup_event.location(location);
+			//keyup_event.ctrlKey(ctrlKey);
+			//keyup_event.shiftKey(shiftKey);
+			//keyup_event.altKey(altKey);
+			//keyup_event.metaKey(metaKey);
+			//keyup_event.repeat(repeat);
+			//keyup_event.isComposing(isComposing);
+			//keyup_event.charCode(charCode);
+			//keyup_event.keyCode(keyCode);
+			dispatchEvent(keyup_event);
+		
             return false; //allow event to continue
         }
     }
