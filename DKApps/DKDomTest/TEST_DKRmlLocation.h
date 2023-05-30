@@ -12,7 +12,7 @@ public:
 
 	bool Init(){
 		DKDEBUGFUNC();
-		DKINFO("\n////// TEST_DKRmlLocation.h //////\n");
+		DKConsole::log("\n////// TEST_DKRmlLocation.h //////");
 		
 		printDKRmlLocationProperties(dkRmlLocation);
 		

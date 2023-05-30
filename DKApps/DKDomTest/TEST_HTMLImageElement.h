@@ -12,7 +12,7 @@ class TEST_HTMLImageElement : public DKObjectT<TEST_HTMLImageElement>
 public:
 	bool Init(){
 		DKDEBUGFUNC();
-		DKINFO("\n////// TEST_HTMLImageElement.h //////\n");
+		DKConsole::log("\n////// TEST_HTMLImageElement.h //////");
 		
 		DKHTMLImageElement htmlImageElement;
 		printHTMLImageElementProperties(htmlImageElement);
@@ -26,55 +26,55 @@ public:
 		// function
 		
 		// [CEReactions] attribute DOMString alt;
-		DKINFO("htmlImageElement.alt() = "			+toString(htmlImageElement.alt())				+"\n");
+		DKConsole::log("htmlImageElement.alt() = "			+toString(htmlImageElement.alt()));
 		
 		// [CEReactions] attribute USVString src;
-		DKINFO("htmlImageElement.src() = "			+toString(htmlImageElement.src())				+"\n");
+		DKConsole::log("htmlImageElement.src() = "			+toString(htmlImageElement.src()));
 		
 		// [CEReactions] attribute USVString srcset;
-		DKINFO("htmlImageElement.srcset() = "		+toString(htmlImageElement.srcset())			+"\n");
+		DKConsole::log("htmlImageElement.srcset() = "		+toString(htmlImageElement.srcset()));
 		
 		// [CEReactions] attribute DOMString sizes;
-		DKINFO("htmlImageElement.sizes() = "		+toString(htmlImageElement.sizes())				+"\n");
+		DKConsole::log("htmlImageElement.sizes() = "		+toString(htmlImageElement.sizes()));
 		
 		// [CEReactions] attribute DOMString? crossOrigin;
-		DKINFO("htmlImageElement.crossOrigin() = "	+toString(htmlImageElement.crossOrigin())		+"\n");
+		DKConsole::log("htmlImageElement.crossOrigin() = "	+toString(htmlImageElement.crossOrigin()));
 		
 		// [CEReactions] attribute DOMString useMap;
-		DKINFO("htmlImageElement.useMap() = "		+toString(htmlImageElement.useMap())			+"\n");
+		DKConsole::log("htmlImageElement.useMap() = "		+toString(htmlImageElement.useMap()));
 		
 		// [CEReactions] attribute boolean isMap;
-		DKINFO("htmlImageElement.isMap() = "		+toString(htmlImageElement.isMap())				+"\n");
+		DKConsole::log("htmlImageElement.isMap() = "		+toString(htmlImageElement.isMap()));
 		
 		// [CEReactions] attribute unsigned long width;
-		DKINFO("htmlImageElement.width() = "		+toString(htmlImageElement.width())				+"\n");
+		DKConsole::log("htmlImageElement.width() = "		+toString(htmlImageElement.width()));
 		
 		// [CEReactions] attribute unsigned long height;
-		DKINFO("htmlImageElement.height() = "		+toString(htmlImageElement.height())			+"\n");
+		DKConsole::log("htmlImageElement.height() = "		+toString(htmlImageElement.height()));
 		
 		// readonly attribute unsigned long naturalWidth;
-		DKINFO("htmlImageElement.naturalWidth() = "	+toString(htmlImageElement.naturalWidth())		+"\n");
+		DKConsole::log("htmlImageElement.naturalWidth() = "	+toString(htmlImageElement.naturalWidth()));
 		
 		// readonly attribute unsigned long naturalHeight;
-		DKINFO("htmlImageElement.naturalHeight() = "+toString(htmlImageElement.naturalHeight())		+"\n");
+		DKConsole::log("htmlImageElement.naturalHeight() = "+toString(htmlImageElement.naturalHeight()));
 		
 		// readonly attribute boolean complete;
-		DKINFO("htmlImageElement.complete() = "		+toString(htmlImageElement.complete())			+"\n");
+		DKConsole::log("htmlImageElement.complete() = "		+toString(htmlImageElement.complete()));
 		
 		// readonly attribute USVString currentSrc;
-		DKINFO("htmlImageElement.currentSrc() = "	+toString(htmlImageElement.currentSrc())		+"\n");
+		DKConsole::log("htmlImageElement.currentSrc() = "	+toString(htmlImageElement.currentSrc()));
 		
 		// [CEReactions] attribute DOMString referrerPolicy;
-		DKINFO("htmlImageElement.referrerPolicy() = "+toString(htmlImageElement.referrerPolicy())	+"\n");
+		DKConsole::log("htmlImageElement.referrerPolicy() = "+toString(htmlImageElement.referrerPolicy()));
 		
 		// [CEReactions] attribute DOMString decoding;
-		DKINFO("htmlImageElement.decoding() = "		+toString(htmlImageElement.decoding())			+"\n");
+		DKConsole::log("htmlImageElement.decoding() = "		+toString(htmlImageElement.decoding()));
 		
 		// [CEReactions] attribute DOMString loading;
-		DKINFO("htmlImageElement.loading() = "		+toString(htmlImageElement.loading())			+"\n");
+		DKConsole::log("htmlImageElement.loading() = "		+toString(htmlImageElement.loading()));
 		
 		// [CEReactions] attribute DOMString fetchPriority;
-		DKINFO("htmlImageElement.fetchPriority() = "+toString(htmlImageElement.fetchPriority())		+"\n");
+		DKConsole::log("htmlImageElement.fetchPriority() = "+toString(htmlImageElement.fetchPriority()));
 		
 		// Promise<undefined> decode();
 		// function

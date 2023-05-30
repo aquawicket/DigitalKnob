@@ -12,7 +12,7 @@ class TEST_HTMLBodyElement : public DKObjectT<TEST_HTMLBodyElement>
 public:
 	bool Init(){
 		DKDEBUGFUNC();
-		DKINFO("\n////// TEST_HTMLBodyElement.h //////\n");
+		DKConsole::log("\n////// TEST_HTMLBodyElement.h //////");
 		
 		DKHTMLBodyElement htmlBodyElement;
 		printHTMLBodyElementProperties(htmlBodyElement);
@@ -31,7 +31,7 @@ public:
 		// Source: Compatibility Standard (https://compat.spec.whatwg.org/)
 		// partial interface HTMLBodyElement {
 		//		attribute EventHandler onorientationchange;
-				DKINFO("htmlBodyElement.onorientationchange() = "	+toString(htmlBodyElement.onorientationchange())	+"\n");
+				DKConsole::log("htmlBodyElement.onorientationchange() = "	+toString(htmlBodyElement.onorientationchange()));
 		//};
 		
 		// Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
@@ -41,22 +41,22 @@ public:
 		// Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
 		// partial interface HTMLBodyElement {
 		// 		[CEReactions] attribute [LegacyNullToEmptyString] DOMString text;
-				DKINFO("htmlBodyElement.text() = "					+toString(htmlBodyElement.text())					+"\n");
+				DKConsole::log("htmlBodyElement.text() = "					+toString(htmlBodyElement.text()));
 		//
 		// 		[CEReactions] attribute [LegacyNullToEmptyString] DOMString link;
-				DKINFO("htmlBodyElement.link() = "					+toString(htmlBodyElement.link())					+"\n");
+				DKConsole::log("htmlBodyElement.link() = "					+toString(htmlBodyElement.link()));
 		//
 		// 		[CEReactions] attribute [LegacyNullToEmptyString] DOMString vLink;
-				DKINFO("htmlBodyElement.vLink() = "					+toString(htmlBodyElement.vLink())					+"\n");
+				DKConsole::log("htmlBodyElement.vLink() = "					+toString(htmlBodyElement.vLink()));
 		//
 		// 		[CEReactions] attribute [LegacyNullToEmptyString] DOMString aLink;
-				DKINFO("htmlBodyElement.aLink() = "					+toString(htmlBodyElement.aLink())					+"\n");
+				DKConsole::log("htmlBodyElement.aLink() = "					+toString(htmlBodyElement.aLink()));
 		//
 		// 		[CEReactions] attribute [LegacyNullToEmptyString] DOMString bgColor;
-				DKINFO("htmlBodyElement.bgColor() = "				+toString(htmlBodyElement.bgColor())				+"\n");
+				DKConsole::log("htmlBodyElement.bgColor() = "				+toString(htmlBodyElement.bgColor()));
 		//
 		// 		[CEReactions] attribute DOMString background;
-				DKINFO("htmlBodyElement.background() = "			+toString(htmlBodyElement.background())				+"\n");
+				DKConsole::log("htmlBodyElement.background() = "			+toString(htmlBodyElement.background()));
 		//};
 		
 		TEST_HTMLElement::printHTMLElementProperties(dynamic_cast<DKHTMLElement&>(htmlBodyElement));	//TODO: try to remove the need for dynamic_cast

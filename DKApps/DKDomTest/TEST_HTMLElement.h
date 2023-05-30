@@ -12,7 +12,7 @@ class TEST_HTMLElement : public DKObjectT<TEST_HTMLElement>
 public:
 	bool Init(){
 		DKDEBUGFUNC();
-		DKINFO("\n////// TEST_HTMLElement.h //////\n");
+		DKConsole::log("\n////// TEST_HTMLElement.h //////");
 		
 		DKHTMLElement htmlElement;
 		printHTMLElementProperties(htmlElement);
@@ -27,47 +27,47 @@ public:
 		
 		// metadata attributes
 		// [CEReactions] attribute DOMString title;
-		DKINFO("htmlElement.title() = "			+toString(htmlElement.title())			+"\n");
+		DKConsole::log("htmlElement.title() = "			+toString(htmlElement.title()));
 		
 		// [CEReactions] attribute DOMString lang;
-		DKINFO("htmlElement.lang() = "			+toString(htmlElement.lang())			+"\n");
+		DKConsole::log("htmlElement.lang() = "			+toString(htmlElement.lang()));
 		
 		// [CEReactions] attribute boolean translate;
-		DKINFO("htmlElement.translate() = "		+toString(htmlElement.translate())		+"\n");
+		DKConsole::log("htmlElement.translate() = "		+toString(htmlElement.translate()));
 		
 		// [CEReactions] attribute DOMString dir;
-		DKINFO("htmlElement.dir() = "			+toString(htmlElement.dir())			+"\n");
+		DKConsole::log("htmlElement.dir() = "			+toString(htmlElement.dir()));
 		
 		// user interaction
 		// [CEReactions] attribute (boolean or unrestricted double or DOMString)? hidden;
-		DKINFO("htmlElement.hidden() = "		+toString(htmlElement.hidden())			+"\n");
+		DKConsole::log("htmlElement.hidden() = "		+toString(htmlElement.hidden()));
 		
 		// [CEReactions] attribute boolean inert;
-		DKINFO("htmlElement.inert() = "			+toString(htmlElement.inert())			+"\n");
+		DKConsole::log("htmlElement.inert() = "			+toString(htmlElement.inert()));
 		
 		// undefined click();
 		// function
 		
 		// [CEReactions] attribute DOMString accessKey;
-		DKINFO("htmlElement.accessKey() = "		+toString(htmlElement.accessKey())		+"\n");
+		DKConsole::log("htmlElement.accessKey() = "		+toString(htmlElement.accessKey()));
 		
 		// readonly attribute DOMString accessKeyLabel;
-		DKINFO("htmlElement.accessKeyLabel() = "+toString(htmlElement.accessKeyLabel())	+"\n");
+		DKConsole::log("htmlElement.accessKeyLabel() = "+toString(htmlElement.accessKeyLabel()));
 		
 		// [CEReactions] attribute boolean draggable;
-		DKINFO("htmlElement.draggable() = "		+toString(htmlElement.draggable())		+"\n");
+		DKConsole::log("htmlElement.draggable() = "		+toString(htmlElement.draggable()));
 		
 		// [CEReactions] attribute boolean spellcheck;
-		DKINFO("htmlElement.spellcheck() = "	+toString(htmlElement.spellcheck())		+"\n");
+		DKConsole::log("htmlElement.spellcheck() = "	+toString(htmlElement.spellcheck()));
 		
 		// [CEReactions] attribute DOMString autocapitalize;
-		DKINFO("htmlElement.autocapitalize() = "+toString(htmlElement.autocapitalize())	+"\n");
+		DKConsole::log("htmlElement.autocapitalize() = "+toString(htmlElement.autocapitalize()));
 		
 		// [CEReactions] attribute [LegacyNullToEmptyString] DOMString innerText;
-		DKINFO("htmlElement.innerText() = "		+toString(htmlElement.innerText())		+"\n");
+		DKConsole::log("htmlElement.innerText() = "		+toString(htmlElement.innerText()));
 		
 		// [CEReactions] attribute [LegacyNullToEmptyString] DOMString outerText;
-		DKINFO("htmlElement.outerText() = "		+toString(htmlElement.outerText())		+"\n");
+		DKConsole::log("htmlElement.outerText() = "		+toString(htmlElement.outerText()));
 		
 		// ElementInternals attachInternals();
 		// function
