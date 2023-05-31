@@ -51,48 +51,48 @@ public:
 	
 	// readonly attribute DOMString key;
 	DOMString _key = "";
-	virtual DOMString& 		key()																	{ return _key; }											// getter
-	virtual void 			key(const DOMString& key)												{ _key = key; } 											// setter
+	virtual const DOMString& 		key()																	{ return _key; }											// getter
+	virtual void 					key(const DOMString& key)												{ _key = key; } 											// setter
 	
 	// readonly attribute DOMString code;
 	DOMString _code = "";
-	virtual DOMString& 		code()																	{ return _code; }											// getter
-	virtual void 			code(const DOMString& code)												{ _code = code; } 											// setter
+	virtual const DOMString& 		code()																	{ return _code; }											// getter
+	virtual void 					code(const DOMString& code)												{ _code = code; } 											// setter
 	
 	// readonly attribute unsigned long location;
 	unsigned int _location = 0;
-	virtual unsigned int& 	location()																{ return _location; }										// getter
-	virtual void 			location(const unsigned int& location)									{ _location = location; } 									// setter
+	virtual const unsigned int& 	location()																{ return _location; }										// getter
+	virtual void 					location(const unsigned int& location)									{ _location = location; } 									// setter
 	
 	// readonly attribute boolean ctrlKey;
 	bool _ctrlKey = false;
-	virtual bool& 			ctrlKey()																{ return _ctrlKey; }										// getter
-	virtual void 			ctrlKey(const bool& ctrlKey)											{ _ctrlKey = ctrlKey; } 									// setter
+	virtual const bool& 			ctrlKey()																{ return _ctrlKey; }										// getter
+	virtual void 					ctrlKey(const bool& ctrlKey)											{ _ctrlKey = ctrlKey; } 									// setter
 	
 	// readonly attribute boolean shiftKey;
 	bool _shiftKey = false;
-	virtual bool& 			shiftKey()																{ return _shiftKey; }										// getter
-	virtual void 			shiftKey(const bool& shiftKey)											{ _shiftKey = shiftKey; } 									// setter
+	virtual const bool& 			shiftKey()																{ return _shiftKey; }										// getter
+	virtual void 					shiftKey(const bool& shiftKey)											{ _shiftKey = shiftKey; } 									// setter
 	
 	// readonly attribute boolean altKey;
 	bool _altKey = false;
-	virtual bool& 			altKey()																{ return _altKey; }											// getter
-	virtual void 			altKey(const bool& altKey)												{ _altKey = altKey; } 										// setter
+	virtual const bool& 			altKey()																{ return _altKey; }											// getter
+	virtual void 					altKey(const bool& altKey)												{ _altKey = altKey; } 										// setter
 	
 	// readonly attribute boolean metaKey;
 	bool _metaKey = false;
-	virtual bool& 			metaKey()																{ return _metaKey; }										// getter
-	virtual void 			metaKey(const bool& metaKey)											{ _metaKey = metaKey; } 									// setter
+	virtual const bool& 			metaKey()																{ return _metaKey; }										// getter
+	virtual void 					metaKey(const bool& metaKey)											{ _metaKey = metaKey; } 									// setter
   
 	// readonly attribute boolean repeat;
 	bool _repeat = false;
-	virtual bool& 			repeat()																{ return _repeat; }											// getter
-	virtual void 			repeat(const bool& repeat)												{ _repeat = repeat; } 										// setter
+	virtual const bool& 			repeat()																{ return _repeat; }											// getter
+	virtual void 					repeat(const bool& repeat)												{ _repeat = repeat; } 										// setter
 	
 	// readonly attribute boolean isComposing;
 	bool _isComposing = false;
-	virtual bool& 			isComposing()															{ return _isComposing; }									// getter
-	virtual void 			isComposing(const bool& isComposing)									{ _isComposing = isComposing; } 							// setter
+	virtual const bool& 			isComposing()															{ return _isComposing; }									// getter
+	virtual void 					isComposing(const bool& isComposing)									{ _isComposing = isComposing; } 							// setter
 	
 	// boolean getModifierState(DOMString keyArg);
 	void getModifierState(DOMString& keyArg) {
@@ -102,46 +102,45 @@ public:
 	
 	// Source: UI Events (https://www.w3.org/TR/uievents/)
 	// partial interface KeyboardEvent {
-	//		// Originally introduced (and deprecated) in this specification
-	//		undefined initKeyboardEvent(DOMString typeArg,
-	// 		optional boolean bubblesArg = false,
-	// 		optional boolean cancelableArg = false,
-	//		optional Window? viewArg = null,
-	//		optional DOMString keyArg = "",
-	//		optional unsigned long locationArg = 0,
-	//		optional boolean ctrlKey = false,
-	//		optional boolean altKey = false,
-	//		optional boolean shiftKey = false,
-	//		optional boolean metaKey = false);
-			void initKeyboardEvent(
-				DOMString& typeArg,
-				bool& bubblesArg,
-				bool& cancelableArg,
-				DKString& viewArg,
-				DOMString& keyArg,
-				unsigned int& locationArg,
-				bool& ctrlKey,
-				bool& altKey,
-				bool& shiftKey,
-				bool& metaKey
-			) {
-				DKDEBUGFUNC(typeArg, bubblesArg, cancelableArg, viewArg, keyArg, locationArg, ctrlKey, altKey, shiftKey, metaKey);
-				DKTODO();
-			}
+	// Originally introduced (and deprecated) in this specification
+	// undefined initKeyboardEvent(DOMString typeArg,
+	// optional boolean bubblesArg = false,
+	// optional boolean cancelableArg = false,
+	// optional Window? viewArg = null,
+	// optional DOMString keyArg = "",
+	// optional unsigned long locationArg = 0,
+	// optional boolean ctrlKey = false,
+	// optional boolean altKey = false,
+	// optional boolean shiftKey = false,
+	// optional boolean metaKey = false);
+	void initKeyboardEvent(
+		const DOMString& typeArg,
+		const bool& bubblesArg,
+		const bool& cancelableArg,
+		const DKString& viewArg,
+		const DOMString& keyArg,
+		const unsigned int& locationArg,
+		const bool& ctrlKey,
+		const bool& altKey,
+		const bool& shiftKey,
+		const bool& metaKey) {
+			DKDEBUGFUNC(typeArg, bubblesArg, cancelableArg, viewArg, keyArg, locationArg, ctrlKey, altKey, shiftKey, metaKey);
+			DKTODO();
+		}
 	// };
 	
 	// Source: UI Events (https://www.w3.org/TR/uievents/)
 	// partial interface KeyboardEvent {
-	//		// The following support legacy user agents
-	//		readonly attribute unsigned long charCode;
-			unsigned int _charCode = 0;
-			virtual unsigned int& 	charCode()															{ return _charCode; }								// getter
-			virtual void 			charCode(const unsigned int& charCode)								{ _charCode = charCode; } 							// setter
-	//
+	// The following support legacy user agents
+	// readonly attribute unsigned long charCode;
+	unsigned int _charCode = 0;
+	virtual const unsigned int& 	charCode()															{ return _charCode; }										// getter
+	virtual void 					charCode(const unsigned int& charCode)								{ _charCode = charCode; } 									// setter
+	
 	//		readonly attribute unsigned long keyCode;
-			unsigned int _keyCode = 0;
-			virtual unsigned int& 	keyCode()															{ return _keyCode; }								// getter
-			virtual void 			keyCode(const unsigned int& keyCode)								{ _keyCode = keyCode; } 							// setter
+	unsigned int _keyCode = 0;
+	virtual const unsigned int& 	keyCode()															{ return _keyCode; }										// getter
+	virtual void 					keyCode(const unsigned int& keyCode)								{ _keyCode = keyCode; } 									// setter
 	// };
 };
 
