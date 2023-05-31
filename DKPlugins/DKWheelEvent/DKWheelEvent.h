@@ -46,22 +46,22 @@ public:
 	
 	// readonly attribute double deltaX;
 	double _deltaX = 0.0;
-	virtual double&					deltaX()											{ return _deltaX; }						// getter
+	virtual const double&			deltaX()											{ return _deltaX; }						// getter
 	virtual void 					deltaX(const double& deltaX) 						{ _deltaX = deltaX; } 					// setter
 	
 	// readonly attribute double deltaY;
 	double _deltaY = 0.0;
-	virtual double&					deltaY()											{ return _deltaY; }						// getter
+	virtual const double&			deltaY()											{ return _deltaY; }						// getter
 	virtual void 					deltaY(const double& deltaY) 						{ _deltaY = deltaY; } 					// setter
 	
 	// readonly attribute double deltaZ;
 	double _deltaZ = 0.0;
-	virtual double& 				deltaZ()											{ return _deltaZ; }						// getter
+	virtual const double& 			deltaZ()											{ return _deltaZ; }						// getter
 	virtual void 					deltaZ(const double& deltaZ) 						{ _deltaZ = deltaZ; } 					// setter
 	
 	// readonly attribute unsigned long deltaMode;
 	unsigned int _deltaMode = 0;
-	virtual unsigned int&			deltaMode()											{ return _deltaMode; }					// getter
+	virtual const unsigned int&		deltaMode()											{ return _deltaMode; }					// getter
 	virtual void 					deltaMode(const unsigned int& deltaMode) 			{ _deltaMode = deltaMode; } 			// setter
 };
 
