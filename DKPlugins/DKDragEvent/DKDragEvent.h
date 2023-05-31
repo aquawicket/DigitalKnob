@@ -26,8 +26,8 @@ public:
 	
 	// readonly attribute DataTransfer? dataTransfer;
 	DKString _dataTransfer = "";
-	virtual DKString& 	dataTransfer()								{ return _dataTransfer; }			// getter
-	virtual void 		dataTransfer(const DKString& dataTransfer) 	{ _dataTransfer = dataTransfer; } 	// setter
+	virtual const DKString& 	dataTransfer()								{ return _dataTransfer; }			// getter
+	virtual void 				dataTransfer(const DKString& dataTransfer) 	{ _dataTransfer = dataTransfer; } 	// setter
 };
 
 

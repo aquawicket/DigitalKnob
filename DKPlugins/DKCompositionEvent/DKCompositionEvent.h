@@ -27,21 +27,21 @@ public:
 	
 	// readonly attribute DOMString data;
 	DOMString _data = "";
-	virtual DOMString& 	data()						{ return _data; }	// getter
-	virtual void 		data(const DOMString& data) { _data = data; }	// setter
+	virtual const DOMString& 	data()						{ return _data; }	// getter
+	virtual void 				data(const DOMString& data) { _data = data; }	// setter
 	
 	// Source: UI Events (https://www.w3.org/TR/uievents/)
 	// partial interface CompositionEvent {
-	//		// Originally introduced (and deprecated) in this specification
-	//		undefined initCompositionEvent(DOMString typeArg,
-	//		optional boolean bubblesArg = false,
-	//		optional boolean cancelableArg = false,
-	//		optional WindowProxy? viewArg = null,
-	//		optional DOMString dataArg = "");
-			void initCompositionEvent(DOMString& typeArg, bool& bubblesArg, bool& cancelableArg, DKString& viewArg, DOMString& dataArg) {
-				DKDEBUGFUNC(typeArg, bubblesArg, cancelableArg, viewArg, dataArg);
-				DKTODO();
-			}
+	// Originally introduced (and deprecated) in this specification
+	// undefined initCompositionEvent(DOMString typeArg,
+	// optional boolean bubblesArg = false,
+	// optional boolean cancelableArg = false,
+	// optional WindowProxy? viewArg = null,
+	// optional DOMString dataArg = "");
+	void initCompositionEvent(DOMString& typeArg, bool& bubblesArg, bool& cancelableArg, DKString& viewArg, DOMString& dataArg) {
+		DKDEBUGFUNC(typeArg, bubblesArg, cancelableArg, viewArg, dataArg);
+		DKTODO();
+	}
 	// };
 };
 
