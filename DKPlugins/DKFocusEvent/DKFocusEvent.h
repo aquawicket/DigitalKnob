@@ -27,7 +27,7 @@ public:
 	
 	// readonly attribute EventTarget? relatedTarget;
 	DKString _relatedTarget = ""; // https://w3c.github.io/uievents/#dom-focusevent-relatedtarget
-	virtual DKString 	relatedTarget()									{ return _relatedTarget; }				// getter
+	virtual DKString& 	relatedTarget()									{ return _relatedTarget; }				// getter
 	virtual void 		relatedTarget(const DKString& relatedTarget) 	{ _relatedTarget = relatedTarget; } 	// setter
 };
 

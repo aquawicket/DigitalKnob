@@ -22,63 +22,63 @@ public:
 	
 	// const unsigned short ELEMENT_NODE = 1;
 	const unsigned short _ELEMENT_NODE = 1;
-	virtual unsigned short ELEMENT_NODE()															{ return _ELEMENT_NODE; }										// getter
-	//virtual void ELEMENT_NODE(const unsigned short& ELEMENT_NODE)									{ _ELEMENT_NODE = ELEMENT_NODE; } 								// setter
+	virtual const unsigned short& 	ELEMENT_NODE()																	{ return _ELEMENT_NODE; }										// getter
+	//virtual void 					ELEMENT_NODE(const unsigned short& ELEMENT_NODE)								{ _ELEMENT_NODE = ELEMENT_NODE; } 								// setter
 	
 	// const unsigned short ATTRIBUTE_NODE = 2;
 	const unsigned short _ATTRIBUTE_NODE = 2;
-	virtual unsigned short ATTRIBUTE_NODE()															{ return _ATTRIBUTE_NODE; }										// getter
-	//virtual void ATTRIBUTE_NODE(const unsigned short& ATTRIBUTE_NODE)								{ _ATTRIBUTE_NODE = ATTRIBUTE_NODE; }							// setter
+	virtual const unsigned short&	ATTRIBUTE_NODE()																{ return _ATTRIBUTE_NODE; }										// getter
+	//virtual void 					ATTRIBUTE_NODE(const unsigned short& ATTRIBUTE_NODE)							{ _ATTRIBUTE_NODE = ATTRIBUTE_NODE; }							// setter
 	
 	// const unsigned short TEXT_NODE = 3;
 	const unsigned short _TEXT_NODE = 3;
-	virtual unsigned short TEXT_NODE()																{ return _TEXT_NODE; }											// getter
-	//virtual void TEXT_NODE(const unsigned short& TEXT_NODE)										{ _TEXT_NODE = TEXT_NODE; }										// setter
+	virtual const unsigned short& 	TEXT_NODE()																		{ return _TEXT_NODE; }											// getter
+	//virtual void 					TEXT_NODE(const unsigned short& TEXT_NODE)										{ _TEXT_NODE = TEXT_NODE; }										// setter
 	
 	// const unsigned short CDATA_SECTION_NODE = 4;
 	const unsigned short _CDATA_SECTION_NODE = 4;
-	virtual unsigned short CDATA_SECTION_NODE()														{ return _CDATA_SECTION_NODE; }									// getter
-	//virtual void CDATA_SECTION_NODE(const unsigned short& CDATA_SECTION_NODE)						{ _CDATA_SECTION_NODE = CDATA_SECTION_NODE; }					// setter
+	virtual const unsigned short& 	CDATA_SECTION_NODE()															{ return _CDATA_SECTION_NODE; }									// getter
+	//virtual void 					CDATA_SECTION_NODE(const unsigned short& CDATA_SECTION_NODE)					{ _CDATA_SECTION_NODE = CDATA_SECTION_NODE; }					// setter
 	
 	// const unsigned short ENTITY_REFERENCE_NODE = 5; // legacy
 	const unsigned short _ENTITY_REFERENCE_NODE = 5;
-	virtual unsigned short ENTITY_REFERENCE_NODE()													{ return _ENTITY_REFERENCE_NODE; }								// getter
-	//virtual void ENTITY_REFERENCE_NODE(const unsigned short& ENTITY_REFERENCE_NODE)				{ _ENTITY_REFERENCE_NODE = ENTITY_REFERENCE_NODE; }				// setter
+	virtual const unsigned short& 	ENTITY_REFERENCE_NODE()															{ return _ENTITY_REFERENCE_NODE; }								// getter
+	//virtual void 					ENTITY_REFERENCE_NODE(const unsigned short& ENTITY_REFERENCE_NODE)				{ _ENTITY_REFERENCE_NODE = ENTITY_REFERENCE_NODE; }				// setter
 	
 	// const unsigned short ENTITY_NODE = 6; // legacy
 	const unsigned short _ENTITY_NODE = 6;
-	virtual unsigned short ENTITY_NODE()															{ return _ENTITY_NODE; }										// getter
-	//virtual void ENTITY_NODE(const unsigned short& ENTITY_NODE)									{ _ENTITY_NODE = ENTITY_NODE; }									// setter
+	virtual const unsigned short& 	ENTITY_NODE()																	{ return _ENTITY_NODE; }										// getter
+	//virtual void 					ENTITY_NODE(const unsigned short& ENTITY_NODE)									{ _ENTITY_NODE = ENTITY_NODE; }									// setter
 	
 	// const unsigned short PROCESSING_INSTRUCTION_NODE = 7;
 	const unsigned short _PROCESSING_INSTRUCTION_NODE = 7;
-	virtual unsigned short PROCESSING_INSTRUCTION_NODE()											{ return _PROCESSING_INSTRUCTION_NODE; }						// getter
-	//virtual void PROCESSING_INSTRUCTION_NODE(const unsigned short& PROCESSING_INSTRUCTION_NODE)	{ _PROCESSING_INSTRUCTION_NODE = PROCESSING_INSTRUCTION_NODE; }	// setter
+	virtual const unsigned short& 	PROCESSING_INSTRUCTION_NODE()													{ return _PROCESSING_INSTRUCTION_NODE; }						// getter
+	//virtual void 					PROCESSING_INSTRUCTION_NODE(const unsigned short& PROCESSING_INSTRUCTION_NODE)	{ _PROCESSING_INSTRUCTION_NODE = PROCESSING_INSTRUCTION_NODE; }	// setter
 	
 	// const unsigned short COMMENT_NODE = 8;
 	const unsigned short _COMMENT_NODE = 8;
-	virtual unsigned short COMMENT_NODE()															{ return _COMMENT_NODE; }										// getter
-	//virtual void COMMENT_NODE(const unsigned short& COMMENT_NODE)									{ _COMMENT_NODE = COMMENT_NODE; }								// setter
+	virtual const unsigned short& 	COMMENT_NODE()																	{ return _COMMENT_NODE; }										// getter
+	//virtual void 					COMMENT_NODE(const unsigned short& COMMENT_NODE)								{ _COMMENT_NODE = COMMENT_NODE; }								// setter
 	
 	// const unsigned short DOCUMENT_NODE = 9;
 	const unsigned short _DOCUMENT_NODE = 9;
-	virtual unsigned short DOCUMENT_NODE()															{ return _DOCUMENT_NODE; }										// getter
-	//virtual void DOCUMENT_NODE(const unsigned short& DOCUMENT_NODE)								{ _DOCUMENT_NODE = DOCUMENT_NODE; }								// setter
+	virtual const unsigned short& 	DOCUMENT_NODE()																	{ return _DOCUMENT_NODE; }										// getter
+	//virtual void 					DOCUMENT_NODE(const unsigned short& DOCUMENT_NODE)								{ _DOCUMENT_NODE = DOCUMENT_NODE; }								// setter
 	
 	// const unsigned short DOCUMENT_TYPE_NODE = 10;
 	const unsigned short _DOCUMENT_TYPE_NODE = 10;
-	virtual unsigned short DOCUMENT_TYPE_NODE()														{ return _DOCUMENT_TYPE_NODE; }									// getter
-	//virtual void DOCUMENT_TYPE_NODE(const unsigned short& DOCUMENT_TYPE_NODE)						{ _DOCUMENT_TYPE_NODE = DOCUMENT_TYPE_NODE; }					// setter
+	virtual const unsigned short& 	DOCUMENT_TYPE_NODE()															{ return _DOCUMENT_TYPE_NODE; }									// getter
+	//virtual void 					DOCUMENT_TYPE_NODE(const unsigned short& DOCUMENT_TYPE_NODE)					{ _DOCUMENT_TYPE_NODE = DOCUMENT_TYPE_NODE; }					// setter
 	
 	// const unsigned short DOCUMENT_FRAGMENT_NODE = 11;
 	const unsigned short _DOCUMENT_FRAGMENT_NODE = 11;
-	virtual unsigned short DOCUMENT_FRAGMENT_NODE()													{ return _DOCUMENT_FRAGMENT_NODE; }								// getter
-	//virtual void DOCUMENT_FRAGMENT_NODE(const unsigned short& DOCUMENT_FRAGMENT_NODE)				{ _DOCUMENT_FRAGMENT_NODE = DOCUMENT_FRAGMENT_NODE; }			// setter
+	virtual const unsigned short& 	DOCUMENT_FRAGMENT_NODE()														{ return _DOCUMENT_FRAGMENT_NODE; }								// getter
+	//virtual void 					DOCUMENT_FRAGMENT_NODE(const unsigned short& DOCUMENT_FRAGMENT_NODE)			{ _DOCUMENT_FRAGMENT_NODE = DOCUMENT_FRAGMENT_NODE; }			// setter
 	
 	// const unsigned short NOTATION_NODE = 12; // legacy
 	const unsigned short _NOTATION_NODE = 12;
-	virtual unsigned short NOTATION_NODE()															{ return _NOTATION_NODE; }										// getter
-	//virtual void NOTATION_NODE(const unsigned short& NOTATION_NODE)								{ _NOTATION_NODE = NOTATION_NODE; }								// setter
+	virtual const unsigned short& 	NOTATION_NODE()																	{ return _NOTATION_NODE; }										// getter
+	//virtual void 					NOTATION_NODE(const unsigned short& NOTATION_NODE)								{ _NOTATION_NODE = NOTATION_NODE; }								// setter
 	
 	// readonly attribute unsigned short nodeType;
 	virtual unsigned short nodeType()						{ return 0; }		// getter

@@ -27,7 +27,7 @@ public:
 	
 	// readonly attribute any detail;
 	DKString _detail = "{}";	// https://dom.spec.whatwg.org/#dom-customevent-detail
-	virtual DKString	detail()						{ return _detail; }		// getter
+	virtual DKString&	detail()						{ return _detail; }		// getter
 	virtual void 		detail(const DKString& detail) 	{ _detail = detail; }	// setter
 
 	// undefined initCustomEvent(DOMString type, optional boolean bubbles = false, optional boolean cancelable = false, optional any detail = null); // legacy

@@ -27,19 +27,19 @@ public:
 	
 	// readonly attribute Window? view;
 	DKString _view = ""; // https://w3c.github.io/uievents/#dom-uievent-view
-	virtual DKString 	view()										{ return _view; }								// getter
+	virtual DKString &	view()										{ return _view; }								// getter
 	virtual void 		view(const DKString& view) 					{ _view = view; } 								// setter
 	
 	// readonly attribute long detail;
 	int _detail = 0; // https://w3c.github.io/uievents/#dom-uievent-detail
-	virtual int 		detail()									{ return _detail; }								// getter
+	virtual int& 		detail()									{ return _detail; }								// getter
 	virtual void 		detail(const int& detail) 					{ _detail = detail; } 							// setter
 	
 	// Source: Input Device Capabilities (https://wicg.github.io/input-device-capabilities/)
 	// partial interface UIEvent {
 	// 		readonly attribute InputDeviceCapabilities? sourceCapabilities;
 			DKString _sourceCapabilities = ""; // https://wicg.github.io/input-device-capabilities/#dom-uieventinit-sourcecapabilities
-			virtual DKString 	sourceCapabilities()									{ return _sourceCapabilities; }					// getter
+			virtual DKString& 	sourceCapabilities()									{ return _sourceCapabilities; }					// getter
 			virtual void 		sourceCapabilities(const DKString& sourceCapabilities) 	{ _sourceCapabilities = sourceCapabilities; } 	// setter
 	// };
 	
@@ -58,8 +58,8 @@ public:
 	//		The following support legacy user agents
 	//		readonly attribute unsigned long which;
 			unsigned int _which = 0; // https://w3c.github.io/uievents/#dom-uievent-which
-			virtual int 		which()								{ return _which; }						// getter
-			virtual void 		which(const int& which) 			{ _which = which; } 					// setter
+			virtual unsigned int& 	which()								{ return _which; }						// getter
+			virtual void 			which(const int& which) 			{ _which = which; } 					// setter
 	// };
 };
 

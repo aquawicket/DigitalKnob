@@ -27,7 +27,7 @@ public:
 	
 	// readonly attribute DOMString data;
 	DOMString _data = "";
-	virtual DOMString 	data()						{ return _data; }	// getter
+	virtual DOMString& 	data()						{ return _data; }	// getter
 	virtual void 		data(const DOMString& data) { _data = data; }	// setter
 	
 	// Source: UI Events (https://www.w3.org/TR/uievents/)

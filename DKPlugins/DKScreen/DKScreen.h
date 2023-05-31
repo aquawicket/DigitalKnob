@@ -25,7 +25,7 @@ public:
 	virtual void availWidth(const int&) { } 	// setter
 	
 	// readonly attribute long availHeight;
-	virtual int availHeight(); 					// getter
+	virtual int availHeight(); 				// getter
 	virtual void availHeight(const int&) { } 	// setter
 	
 	// readonly attribute long width;

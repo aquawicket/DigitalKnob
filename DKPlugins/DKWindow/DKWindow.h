@@ -28,11 +28,11 @@ public:
 	virtual void window(const DKString&)			{ } 			// setter
 	
 	// [Replaceable] readonly attribute WindowProxy self;
-	virtual DKString self()							{ return ""; }	// getter
+	virtual DKString self()						{ return ""; }	// getter
 	virtual void self(const DKString&)				{ } 			// setter
 	
 	// [LegacyUnforgeable] readonly attribute Document document;
-	virtual DKString document()						{ return ""; }	// getter
+	virtual DKString document()					{ return ""; }	// getter
 	virtual void document(const DKString&)			{ } 			// setter
 	
 	// attribute DOMString name;
@@ -40,7 +40,7 @@ public:
 	virtual void name(const DOMString&)				{ } 			// setter
 	
 	// [PutForwards=href, LegacyUnforgeable] readonly attribute Location location;
-	virtual DKString location()						{ return ""; }	// getter
+	virtual DKString location()					{ return ""; }	// getter
 	virtual void location(const DKString&)			{ } 			// setter
 	
 	// readonly attribute History history;
@@ -205,7 +205,7 @@ public:
 	// Source: Compatibility Standard (https://compat.spec.whatwg.org/)
 	// partial interface Window {
 	//		readonly attribute short orientation;
-			virtual short orientation()							{ return 0; }	// getter
+			virtual short orientation()						{ return 0; }	// getter
 			virtual void orientation(const short&)				{ } 			// setter
 	//		
 	//		attribute EventHandler onorientationchange;
@@ -253,7 +253,7 @@ public:
 			}
 	//
 	//		[Replaceable, SameObject] readonly attribute External external;
-			virtual DKString external()							{ return ""; }	// getter
+			virtual DKString external()						{ return ""; }	// getter
 			virtual void external(const DKString&)				{ } 			// setter
 	// };
 
