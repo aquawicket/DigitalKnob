@@ -81,24 +81,29 @@ public:
 	//virtual void 					NOTATION_NODE(const unsigned short& NOTATION_NODE)								{ _NOTATION_NODE = NOTATION_NODE; }								// setter
 	
 	// readonly attribute unsigned short nodeType;
-	virtual unsigned short nodeType()						{ return 0; }		// getter
-	virtual void nodeType(const unsigned short&)			{ } 				// setter
+	unsigned short _nodeType = 0;
+	virtual const unsigned short& nodeType()					{ return _nodeType; }				// getter
+	virtual void nodeType(const unsigned short& nodeType)		{ _nodeType = nodeType; } 			// setter
 	
 	// readonly attribute DOMString nodeName;
-	virtual DOMString nodeName()							{ return ""; }		// getter
-	virtual void nodeName(const DOMString&)					{ } 				// setter
+	DOMString _nodeName = "";
+	virtual const DOMString& nodeName()							{ return _nodeName; }				// getter
+	virtual void nodeName(const DOMString& nodeName)			{ _nodeName = nodeName} 			// setter
 
 	// readonly attribute USVString baseURI;
-	virtual USVString baseURI()								{ return ""; }		// getter
-	virtual void baseURI(const USVString&)					{ } 				// setter
+	USVString _baseURI = "";
+	virtual const USVString& baseURI()							{ return _baseURI; }				// getter
+	virtual void baseURI(const USVString& baseURI)				{ _baseURI = baseURI; } 			// setter
 
 	// readonly attribute boolean isConnected;
-	virtual bool isConnected()								{ return false; }	// getter
-	virtual void isConnected(const bool&)					{ } 				// setter
+	bool _isConnected = false;
+	virtual const bool& isConnected()							{ return _isConnected; }			// getter
+	virtual void isConnected(const bool& isConnected)			{ _isConnected = isConnected; } 	// setter
 	
 	// readonly attribute Document? ownerDocument;
-	virtual DKString ownerDocument()						{ return ""; }		// getter
-	virtual void ownerDocument(const DKString&)				{ } 				// setter
+	DKString _ownerDocument = "";
+	virtual const DKString& ownerDocument()						{ return _ownerDocument; }			// getter
+	virtual void ownerDocument(const DKString& ownerDocument)	{ _ownerDocument = ownerDocument; } // setter
 	
 	// Node getRootNode(optional GetRootNodeOptions options = {});
 	virtual bool getRootNode(DKString& _options, DKString& _node) {
@@ -107,12 +112,14 @@ public:
 	}
 	
 	// readonly attribute Node? parentNode;
-	virtual DKString parentNode()							{ return ""; }		// getter
-	virtual void parentNode(const DKString&)				{ } 				// setter
+	DKString _parentNode = "";
+	virtual const DKString& parentNode()						{ return _parentNode; }				// getter
+	virtual void parentNode(const DKString& parentNode)			{ _parentNode = parentNode; } 		// setter
 	
 	// readonly attribute Element? parentElement;
-	virtual DKString parentElement()						{ return ""; }		// getter
-	virtual void parentElement(const DKString&)				{ } 				// setter
+	DKString _parentElement = "";
+	virtual const DKString& parentElement()						{ return _parentElement; }			// getter
+	virtual void parentElement(const DKString& parentElement)	{ _parentElement = parentElement; } // setter
 	
 	// boolean hasChildNodes();
 	virtual bool hasChildNodes(bool& _hasChildNodes) {
