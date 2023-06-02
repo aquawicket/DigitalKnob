@@ -979,7 +979,7 @@ public:
 				DKDEBUGFUNC(ctx);
 				int x = duk_require_int(ctx, 1);
 				int y = duk_require_int(ctx, 2);
-				ieventTarget(ctx)->moveTo(x, y);
+				eventTarget(ctx)->moveTo(x, y);
 				return true;
 			}
 	//
