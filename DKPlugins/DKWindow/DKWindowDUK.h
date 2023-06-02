@@ -595,8 +595,7 @@ public:
 	// undefined blur();
 	static int blur(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if(!eventTarget(ctx)->blur())
-			return false;
+		eventTarget(ctx)->blur();
 		return true;
 	}
 	
@@ -785,16 +784,14 @@ public:
 	//		undefined captureEvents();
 			static int captureEvents(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				if(!eventTarget(ctx)->captureEvents())
-					return false;
+				eventTarget(ctx)->captureEvents();
 				return true;
 			}
 	//
 	//		undefined releaseEvents();
 			static int releaseEvents(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				if(!eventTarget(ctx)->releaseEvents())
-					return false;
+				eventTarget(ctx)->releaseEvents();
 				return true;
 			}
 	//
@@ -982,8 +979,7 @@ public:
 				DKDEBUGFUNC(ctx);
 				int x = duk_require_int(ctx, 1);
 				int y = duk_require_int(ctx, 2);
-				if(!eventTarget(ctx)->moveTo(x, y))
-					return false;
+				ieventTarget(ctx)->moveTo(x, y);
 				return true;
 			}
 	//
@@ -992,8 +988,7 @@ public:
 				DKDEBUGFUNC(ctx);
 				int deltaX = duk_require_int(ctx, 1);
 				int deltaY = duk_require_int(ctx, 2);
-				if(!eventTarget(ctx)->moveBy(deltaX, deltaY))
-					return false;
+				eventTarget(ctx)->moveBy(deltaX, deltaY);
 				return true;
 			}
 	//
@@ -1002,8 +997,7 @@ public:
 				DKDEBUGFUNC(ctx);
 				int width = duk_require_int(ctx, 1);
 				int height = duk_require_int(ctx, 2);
-				if(!eventTarget(ctx)->resizeTo(width, height))
-					return false;
+				eventTarget(ctx)->resizeTo(width, height);
 				return true;
 			}
 	//
@@ -1012,8 +1006,7 @@ public:
 				DKDEBUGFUNC(ctx);
 				int xDelta = duk_require_int(ctx, 1);
 				int yDelta = duk_require_int(ctx, 2);
-				if(!eventTarget(ctx)->resizeBy(xDelta, yDelta))
-					return false;
+				eventTarget(ctx)->resizeBy(xDelta, yDelta);
 				return true;
 			}
 	//
