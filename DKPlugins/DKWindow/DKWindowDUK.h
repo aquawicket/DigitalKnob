@@ -564,10 +564,9 @@ public:
 	
 	// undefined close();
 	static int close(duk_context* ctx){
-			DKDEBUGFUNC(ctx);
-			if(!eventTarget(ctx)->close())
-				return false;
-			return true;
+		DKDEBUGFUNC(ctx);
+		eventTarget(ctx)->close();
+		return true;
 	}
 	
 	// readonly attribute boolean closed;
@@ -582,16 +581,14 @@ public:
 	// undefined stop();
 	static int stop(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if(!eventTarget(ctx)->stop())
-			return false;
+		eventTarget(ctx)->stop();
 		return true;
 	}
 	
 	// undefined focus();
 	static int focus(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if(!eventTarget(ctx)->focus())
-			return false;
+		eventTarget(ctx)->focus();
 		return true;
 	}
 	
