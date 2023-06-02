@@ -17,7 +17,7 @@ class DKCustomEvent : public DKEvent
 {
 public:
 	// constructor(DOMString type, optional CustomEventInit eventInitDict = {});
-	DKCustomEvent(DOMString type, CustomEventInit eventInitDict) : DKEvent(type, eventInitDict) { // https://dom.spec.whatwg.org/#dom-customevent-customevent
+	DKCustomEvent(const DOMString& type, const CustomEventInit& eventInitDict = "{}") : DKEvent(type, eventInitDict) {
 		DKDEBUGFUNC(type, eventInitDict);
 		interfaceName = "CustomEvent";
 		interfaceAddress = pointerToAddress(this);
@@ -26,12 +26,12 @@ public:
 	virtual ~DKCustomEvent(){}
 	
 	// readonly attribute any detail;
-	DKString _detail = "{}";	// https://dom.spec.whatwg.org/#dom-customevent-detail
+	DKString _detail = "{}";
 	virtual const DKString&		detail()						{ return _detail; }		// getter
 	virtual void 				detail(const DKString& detail) 	{ _detail = detail; }	// setter
 
 	// undefined initCustomEvent(DOMString type, optional boolean bubbles = false, optional boolean cancelable = false, optional any detail = null); // legacy
-	void initCustomEvent(DOMString& type, bool& bubbles, bool& cancelable, DKString& detail){	// https://dom.spec.whatwg.org/#dom-customevent-initcustomevent
+	virtual void initCustomEvent(const DOMString& type, const bool& bubbles, const bool& cancelable, const DKString& detail){
 		DKDEBUGFUNC(type, bubbles, cancelable, detail);
 		DKTODO();
 	}

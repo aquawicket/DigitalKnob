@@ -17,7 +17,7 @@ class DKCompositionEvent : public DKUIEvent
 {
 public:
 	// constructor(DOMString type, optional CompositionEventInit eventInitDict = {});
-	DKCompositionEvent(DOMString type, CompositionEventInit eventInitDict) : DKUIEvent(type, eventInitDict) { // [CompositionEvent()] https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/CompositionEvent
+	DKCompositionEvent(const DOMString& type, const CompositionEventInit& eventInitDict = "{}") : DKUIEvent(type, eventInitDict) { // [CompositionEvent()] https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/CompositionEvent
 		DKDEBUGFUNC(type, eventInitDict);
 		interfaceName = "CompositionEvent";
 		interfaceAddress = pointerToAddress(this);
@@ -38,7 +38,7 @@ public:
 	// optional boolean cancelableArg = false,
 	// optional WindowProxy? viewArg = null,
 	// optional DOMString dataArg = "");
-	void initCompositionEvent(DOMString& typeArg, bool& bubblesArg, bool& cancelableArg, DKString& viewArg, DOMString& dataArg) {
+	virtual void initCompositionEvent(const DOMString& typeArg, const bool& bubblesArg, const bool& cancelableArg, const DKString& viewArg, const DOMString& dataArg) {
 		DKDEBUGFUNC(typeArg, bubblesArg, cancelableArg, viewArg, dataArg);
 		DKTODO();
 	}

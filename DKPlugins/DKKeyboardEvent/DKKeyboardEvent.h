@@ -17,7 +17,7 @@ class DKKeyboardEvent : public DKUIEvent
 {
 public:
 	// constructor(DOMString type, optional KeyboardEventInit eventInitDict = {});
-	DKKeyboardEvent(DOMString type, KeyboardEventInit eventInitDict) : DKUIEvent(type, eventInitDict) {
+	DKKeyboardEvent(const DOMString& type, const KeyboardEventInit& eventInitDict = "{}") : DKUIEvent(type, eventInitDict) {
 		DKDEBUGFUNC(type, eventInitDict);
 		interfaceName = "KeyboardEvent";
 		interfaceAddress = pointerToAddress(this);
@@ -95,9 +95,11 @@ public:
 	virtual void 					isComposing(const bool& isComposing)									{ _isComposing = isComposing; } 							// setter
 	
 	// boolean getModifierState(DOMString keyArg);
-	void getModifierState(DOMString& keyArg) {
+	bool _getModifierState = false;
+	virtual const bool& getModifierState(const DOMString& keyArg) {
 		DKDEBUGFUNC(keyArg);
 		DKTODO();
+		return _getModifierState;
 	}
 	
 	// Source: UI Events (https://www.w3.org/TR/uievents/)
@@ -113,7 +115,7 @@ public:
 	// optional boolean altKey = false,
 	// optional boolean shiftKey = false,
 	// optional boolean metaKey = false);
-	void initKeyboardEvent(
+	virtual void initKeyboardEvent(
 		const DOMString& typeArg,
 		const bool& bubblesArg,
 		const bool& cancelableArg,

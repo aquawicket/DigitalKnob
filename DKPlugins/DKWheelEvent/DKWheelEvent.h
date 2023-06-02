@@ -17,7 +17,7 @@ class DKWheelEvent : public DKMouseEvent
 {
 public:
 	// constructor(DOMString type, optional WheelEventInit eventInitDict = {});
-	DKWheelEvent(DOMString type, WheelEventInit eventInitDict) : DKMouseEvent(type, eventInitDict) {
+	DKWheelEvent(const DOMString& type, const WheelEventInit& eventInitDict = "{}") : DKMouseEvent(type, eventInitDict) {
 		DKDEBUGFUNC(type, eventInitDict);
 		interfaceName = "WheelEvent";
 		interfaceAddress = pointerToAddress(this);

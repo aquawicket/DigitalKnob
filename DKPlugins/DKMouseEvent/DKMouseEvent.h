@@ -17,7 +17,7 @@ class DKMouseEvent : public DKUIEvent
 {
 public:
 	// constructor(DOMString type, optional MouseEventInit eventInitDict = {});
-	DKMouseEvent(DOMString type, MouseEventInit eventInitDict) : DKUIEvent(type, eventInitDict) {
+	DKMouseEvent(const DOMString& type, const MouseEventInit& eventInitDict = "{}") : DKUIEvent(type, eventInitDict) {
 		DKDEBUGFUNC(type, eventInitDict);
 		interfaceName = "MouseEvent";
 		interfaceAddress = pointerToAddress(this);
@@ -81,9 +81,11 @@ public:
 	virtual void 					relatedTarget(const DKString& relatedTarget){ _relatedTarget = relatedTarget; } // setter
 	
 	// boolean getModifierState(DOMString keyArg);
-	void getModifierState(DOMString& keyArg) {
+	bool _getModifierState = false;
+	virtual const bool& getModifierState(const DOMString& keyArg) {
 		DKDEBUGFUNC(keyArg);
 		DKTODO();
+		return _getModifierState;
 	}
 	
 	// Source: CSSOM View Module (https://www.w3.org/TR/cssom-view-1/)
@@ -150,7 +152,7 @@ public:
 	// optional boolean metaKeyArg = false,
 	// optional short buttonArg = 0,
 	// optional EventTarget? relatedTargetArg = null);
-	void initMouseEvent(
+	virtual void initMouseEvent(
 		const DOMString& typeArg, 
 		const bool& bubblesArg,
 		const bool& cancelableArg,

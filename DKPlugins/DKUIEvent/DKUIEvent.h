@@ -17,7 +17,7 @@ class DKUIEvent : public DKEvent
 {
 public:
 	// constructor(DOMString type, optional UIEventInit eventInitDict = {});
-	DKUIEvent(DOMString type, UIEventInit eventInitDict) : DKEvent(type, eventInitDict) { // https://w3c.github.io/uievents/#dom-uievent-uievent
+	DKUIEvent(const DOMString& type, const UIEventInit& eventInitDict = "{}") : DKEvent(type, eventInitDict) {
 		DKDEBUGFUNC(type, eventInitDict);
 		interfaceName = "UIEvent";
 		interfaceAddress = pointerToAddress(this);
@@ -26,19 +26,19 @@ public:
 	virtual ~DKUIEvent(){}
 	
 	// readonly attribute Window? view;
-	DKString _view = ""; // https://w3c.github.io/uievents/#dom-uievent-view
-	virtual const DKString &		view()													{ return _view; }								// getter
+	DKString _view = "";
+	virtual const DKString&			view()													{ return _view; }								// getter
 	virtual void 					view(const DKString& view) 								{ _view = view; } 								// setter
 	
 	// readonly attribute long detail;
-	int _detail = 0; // https://w3c.github.io/uievents/#dom-uievent-detail
+	int _detail = 0;
 	virtual const int& 				detail()												{ return _detail; }								// getter
 	virtual void 					detail(const int& detail) 								{ _detail = detail; } 							// setter
 	
 	// Source: Input Device Capabilities (https://wicg.github.io/input-device-capabilities/)
 	// partial interface UIEvent {
 	// 	readonly attribute InputDeviceCapabilities? sourceCapabilities;
-	DKString _sourceCapabilities = ""; // https://wicg.github.io/input-device-capabilities/#dom-uieventinit-sourcecapabilities
+	DKString _sourceCapabilities = "";
 	virtual const DKString& 		sourceCapabilities()									{ return _sourceCapabilities; }					// getter
 	virtual void 					sourceCapabilities(const DKString& sourceCapabilities) 	{ _sourceCapabilities = sourceCapabilities; } 	// setter
 	// };
@@ -47,7 +47,7 @@ public:
 	// partial interface UIEvent {
 	// Deprecated in this specification
 	// undefined initUIEvent(DOMString typeArg, optional boolean bubblesArg = false, optional boolean cancelableArg = false, optional Window? viewArg = null, optional long detailArg = 0);
-	void initUIEvent(DOMString& typeArg, bool& bubblesArg, bool& cancelableArg, DKString& viewArg, int& detailArg){ // https://w3c.github.io/uievents/#dom-uievent-inituievent
+	virtual void initUIEvent(const DOMString& typeArg, const bool& bubblesArg, const bool& cancelableArg, const DKString& viewArg, const int& detailArg){
 		DKDEBUGFUNC(typeArg, bubblesArg, cancelableArg, viewArg, detailArg);
 		DKTODO();
 	}

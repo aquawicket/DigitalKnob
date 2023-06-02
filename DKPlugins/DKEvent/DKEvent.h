@@ -24,7 +24,7 @@ class DKEvent : public DKInterface
 {
 public:
 	// constructor(DOMString type, optional EventInit eventInitDict = {});
-	DKEvent(DOMString type, EventInit eventInitDict) : DKInterface(){
+	DKEvent(const DOMString& type, const EventInit& eventInitDict = "{}") : DKInterface(){
 		DKDEBUGFUNC(type, eventInitDict);
 		interfaceName = "Event";
 		interfaceAddress = pointerToAddress(this);
@@ -61,9 +61,11 @@ public:
 	virtual void 				currentTarget(const DOMString& currentTarget) 					{ _currentTarget = currentTarget; }			// setter
 	
 	// sequence<EventTarget> composedPath();
-	void composedPath() { // https://dom.spec.whatwg.org/#dom-event-composedpath
+	DKString _composedPath = "";
+	virtual const DKString& composedPath() { // https://dom.spec.whatwg.org/#dom-event-composedpath
 		DKDEBUGFUNC();
 		DKTODO();
+		return _composedPath;
 	}
 	
 	// const unsigned short NONE = 0;
@@ -92,7 +94,7 @@ public:
 	virtual void 						eventPhase(const unsigned short& eventPhase) 			{ _eventPhase = eventPhase; }				// setter
 	
 	// undefined stopPropagation();
-	void stopPropagation() { // https://dom.spec.whatwg.org/#dom-event-stoppropagation
+	virtual void stopPropagation() { // https://dom.spec.whatwg.org/#dom-event-stoppropagation
 		DKDEBUGFUNC();
 		DKTODO();
 	}
@@ -103,7 +105,7 @@ public:
 	virtual void 						cancelBubble(const bool& cancelBubble) 					{ _cancelBubble = cancelBubble; }			// setter
 	
 	// undefined stopImmediatePropagation();
-	void stopImmediatePropagation() { // https://dom.spec.whatwg.org/#dom-event-stopimmediatepropagation
+	virtual void stopImmediatePropagation() { // https://dom.spec.whatwg.org/#dom-event-stopimmediatepropagation
 		DKDEBUGFUNC();
 		DKTODO();
 	}
@@ -124,7 +126,7 @@ public:
 	virtual void 						returnValue(const bool& returnValue) 					{ _returnValue = returnValue; }				// setter
 	
 	// undefined preventDefault();
-	void preventDefault() { // https://dom.spec.whatwg.org/#dom-event-preventdefault
+	virtual void preventDefault() { // https://dom.spec.whatwg.org/#dom-event-preventdefault
 		DKDEBUGFUNC();
 		DKTODO();
 	}
@@ -150,14 +152,14 @@ public:
 	virtual void 				 		timeStamp(const DOMHighResTimeStamp& timeStamp) 		{ _timeStamp = timeStamp; }					// setter
 	
 	// undefined initEvent(DOMString type, optional boolean bubbles = false, optional boolean cancelable = false); // legacy
-	void initEvent(DOMString& type, bool& bubbles, bool& cancelable) { // https://dom.spec.whatwg.org/#dom-event-initevent
+	virtual void initEvent(const DOMString& type, const bool& bubbles, const bool& cancelable) { // https://dom.spec.whatwg.org/#dom-event-initevent
 		DKDEBUGFUNC(type, bubbles, cancelable);
 		DKTODO();
 	}
 	
 	
 	////// DK properties //////
-	DKString _eventInitDict = "{}";
+	DKString _eventInitDict;
 };
 
 
