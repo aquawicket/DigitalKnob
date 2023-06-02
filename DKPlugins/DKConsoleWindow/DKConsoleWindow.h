@@ -327,7 +327,7 @@ public:
 					int nWidth = rect.right - rect.left;
 					int nHeight = rect.bottom - rect.top;
 					if (!MoveWindow(GetConsoleWindow(), x, y, nWidth, nHeight, TRUE))
-						KERROR("MoveWindow() failed");
+						DKERROR("MoveWindow() failed");
 				#endif
 			}
 	//
