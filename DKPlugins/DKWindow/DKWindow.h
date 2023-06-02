@@ -376,93 +376,103 @@ public:
 	// Source: Portals (https://wicg.github.io/portals/)
 	// partial interface Window {
 	//		readonly attribute PortalHost? portalHost;
-			virtual DKString portalHost()								{ return ""; }	// getter
-			virtual void portalHost(const DKString&)					{ } 			// setter
+			DKString _portalHost = "";
+			virtual const DKString& portalHost()										{ return _portalHost; }									// getter
+			virtual void portalHost(const DKString& portalHost)							{ _portalHost = portalHost; } 							// setter
 	// };
 
 	// Source: Web Speech API (https://wicg.github.io/speech-api/)
 	// partial interface Window {
 	//		[SameObject] readonly attribute SpeechSynthesis speechSynthesis;
-			virtual DKString speechSynthesis()							{ return ""; }	// getter
-			virtual void speechSynthesis(const DKString&)				{ } 			// setter
+			DKString _speechSynthesis = "";
+			virtual const DKString& speechSynthesis()									{ return _speechSynthesis; }							// getter
+			virtual void speechSynthesis(const DKString& speechSynthesis)				{ _speechSynthesis = speechSynthesis; } 				// setter
 	// };
 
 	// Source: Web App Launch Handler API (https://wicg.github.io/web-app-launch/)
 	// partial interface Window {
 	//		readonly attribute LaunchQueue launchQueue;
-			virtual DKString launchQueue()								{ return ""; }	// getter
-			virtual void launchQueue(const DKString&)					{ } 			// setter
+			DKString _launchQueue = "";
+			virtual const DKString& launchQueue()										{ return _launchQueue; }								// getter
+			virtual void launchQueue(const DKString& launchQueue)						{ _launchQueue = launchQueue; } 						// setter
 	// };
 
 	// Source: CSS Spatial Navigation Level 1 (https://www.w3.org/TR/css-nav-1/)
 	// partial interface Window {
 	//		undefined navigate(SpatialNavigationDirection dir);
-			virtual bool navigate(DKString& dir) {
+			virtual void navigate(const DKString& dir) {
 				DKDEBUGFUNC(dir);
-				return DKTODO();
+				DKTODO();
 			}
 	// };
 
 	// Source: CSS Object Model (CSSOM) (https://www.w3.org/TR/cssom-1/)
 	// partial interface Window {
 	//		[NewObject] CSSStyleDeclaration getComputedStyle(Element elt, optional CSSOMString? pseudoElt);
-			virtual bool getComputedStyle(DKString& elt, DKString& pseudoElt) {
+			DKString _getComputedStyle = "";
+			virtual const DKString& getComputedStyle(const DKString& elt, const DKString& pseudoElt = "") {
 				DKDEBUGFUNC(elt, pseudoElt);
-				return DKTODO();
+				DKTODO();
+				return _getComputedStyle;
 			}
 	// };
 
 	// Source: CSSOM View Module (https://www.w3.org/TR/cssom-view-1/)
 	// partial interface Window {
 	//		[NewObject] MediaQueryList matchMedia(CSSOMString query);
-			virtual bool matchMedia(DKString& mediaQueryString) {
+			DKString _matchMedia = "";
+			virtual const DKString& matchMedia(const DKString& mediaQueryString) {
 				DKDEBUGFUNC(mediaQueryString);
-				return DKTODO();
+				DKTODO();
+				return _matchMedia;
 			}
 	//
 	//		[SameObject, Replaceable] readonly attribute Screen screen;
 			DKScreen* _screen = NULL;
-			virtual DKScreen& screen()								{ return *_screen; }	// getter
-			virtual void screen(DKScreen& screen)					{ _screen = &screen; } 	// setter
+			virtual DKScreen& screen()									{ return *_screen; }					// getter
+			virtual void screen(DKScreen& screen)						{ _screen = &screen; } 					// setter
 			
 	//
 	//		[SameObject, Replaceable] readonly attribute VisualViewport? visualViewport;
-			virtual DKString visualViewport()						{ return ""; }			// getter
-			virtual void visualViewport(const DKString&)			{ } 					// setter
+			DKString _visualViewport = "";
+			virtual const DKString& visualViewport()					{ return _visualViewport; }				// getter
+			virtual void visualViewport(const DKString& visualViewport)	{ _visualViewport = visualViewport; } 	// setter
 	//
 	//		// browsing context
 	//		undefined moveTo(long x, long y);
-			virtual bool moveTo(int& x, int& y) {
+			virtual void moveTo(const int& x, const int& y) {
 				DKDEBUGFUNC(x, y);
-				return DKTODO();
+				DKTODO();
 			}
 	//
 	//		undefined moveBy(long x, long y);
-			virtual bool moveBy(int& x, int& y) {
+			virtual void moveBy(const int& x, const int& y) {
 				DKDEBUGFUNC(x, y);
 				return DKTODO();
 			}
 	//
 	//		undefined resizeTo(long width, long height);
-			virtual bool resizeTo(int& width, int& height) {
+			virtual void resizeTo(const int& width, const int& height) {
 				DKDEBUGFUNC(width, height);
-				return DKTODO();
+				DKTODO();
 			}
 	//
 	//		undefined resizeBy(long x, long y);
-			virtual bool resizeBy(int& x, int& y) {
+			virtual void resizeBy(const int& x, const int& y) {
 				DKDEBUGFUNC(x, y);
-				return DKTODO();
+				DKTODO();
 			}
 	//
 	//		// viewport
 	//		[Replaceable] readonly attribute long innerWidth;
-			virtual int innerWidth()						{ return 0; }	// getter
-			virtual void innerWidth(const int&)				{ } 			// setter
+			int _innerWidth = 0;
+			virtual const int& innerWidth()					{ return _innerWidth; }				// getter
+			virtual void innerWidth(const int& innerWidth)	{ _innerWidth = innerWidth; } 		// setter
 	//
 	//		[Replaceable] readonly attribute long innerHeight;
-			virtual int innerHeight()						{ return 0; }	// getter
-			virtual void innerHeight(const int&)			{ } 			// setter
+			int _innerHeight = 0;
+			virtual const int& innerHeight()				{ return _innerHeight; }			// getter
+			virtual void innerHeight(const int& innerHeight){ _innerHeight = innerHeight; } 	// setter
 	//
 	//		// viewport scrolling
 	//		[Replaceable] readonly attribute double scrollX;
