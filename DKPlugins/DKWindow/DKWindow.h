@@ -176,7 +176,7 @@ public:
 	// readonly attribute Navigator clientInformation; // legacy alias of .navigator
 	DKString _clientInformation = "";
 	virtual const DKString& clientInformation()							{ return _clientInformation; }					// getter
-	virtual void clientInformation(const DKString& clientInformation)	{ _clientInformation = _clientInformation; } 	// setter
+	virtual void clientInformation(const DKString& clientInformation)	{ _clientInformation = clientInformation; } 	// setter
 	
 	// readonly attribute boolean originAgentCluster;
 	bool _originAgentCluster = false;
@@ -539,7 +539,7 @@ public:
 	//		[Replaceable] readonly attribute long screenLeft;
 			int _screenLeft = 0;
 			virtual const int& screenLeft()					{ return _screenLeft; }			// getter
-			virtual void screenLeft(const int& screenLeft)	{ _screenLeft = _screenLeft; } 	// setter
+			virtual void screenLeft(const int& screenLeft)	{ _screenLeft = screenLeft; } 	// setter
 	//
 	//		[Replaceable] readonly attribute long screenY;
 			int _screenY = 0;
