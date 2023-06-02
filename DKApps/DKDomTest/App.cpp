@@ -61,7 +61,7 @@
 #include "TEST_DKConsoleWindow.h"
 
 // [DKSdlWindow]
-//#include "TEST_DKSdlWindow.h"
+#include "TEST_DKSdlWindow.h"
 
 // [DKRmlDocument]
 //#include "TEST_DKRmlDocument.h"
@@ -133,7 +133,7 @@ bool App::Init() {
 	DKClass::DKCreate("TEST_DKConsoleWindow");
 	
 	// [DKSdlWindow]
-	//DKClass::DKCreate("TEST_DKSdlWindow");
+	DKClass::DKCreate("TEST_DKSdlWindow");
 	
 	// [DKRmlDocument]
 	//DKClass::DKCreate("TEST_DKRmlDocument");

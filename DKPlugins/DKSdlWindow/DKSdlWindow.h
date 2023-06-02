@@ -47,120 +47,119 @@ public:
 
 	// the current browsing context
 	// [LegacyUnforgeable] readonly attribute WindowProxy window;
-	virtual const DKString& window()				{ DKTODO(); return ""; }								// getter
-	virtual void window(const DKString&)			{ DKERROR("DKSdlWindow.window readonly! \n"); } 		// setter
+	virtual const DKString& window()							{ DKTODO(); return ""; }								// getter
+	virtual void window(const DKString& window)					{ DKERROR("DKSdlWindow.window readonly! \n"); } 		// setter
 	
 	// [Replaceable] readonly attribute WindowProxy self;
-	virtual DKString self()							{ DKTODO(); return ""; }								// getter
-	virtual void self(const DKString&)				{ DKERROR("DKSdlWindow.self readonly! \n");} 			// setter
+	virtual const DKString& self()								{ DKTODO(); return ""; }								// getter
+	virtual void self(const DKString& self)						{ DKERROR("DKSdlWindow.self readonly! \n");} 			// setter
 	
 	// [LegacyUnforgeable] readonly attribute Document document;
-	virtual DKString document()						{ DKTODO(); return ""; }								// getter
-	virtual void document(const DKString&)			{ DKERROR("DKSdlWindow.document readonly! \n");} 		// setter
+	virtual const DKString& document()							{ DKTODO(); return ""; }								// getter
+	virtual void document(const DKString& document)				{ DKERROR("DKSdlWindow.document readonly! \n");} 		// setter
 	
 	// attribute DOMString name;
-	virtual DOMString name()						{ DKTODO(); return ""; }								// getter
-	virtual void name(const DOMString&)				{ DKTODO(); } 											// setter
+	virtual const DOMString& name()								{ DKTODO(); return ""; }								// getter
+	virtual void name(const DOMString& name)					{ DKTODO(); } 											// setter
 	
 	// [PutForwards=href, LegacyUnforgeable] readonly attribute Location location;
-	virtual DKString location()						{ DKTODO(); return ""; }								// getter
-	virtual void location(const DKString&)			{ DKERROR("DKSdlWindow.location readonly! \n"); } 		// setter
+	virtual const DKString& location()							{ DKTODO(); return ""; }								// getter
+	virtual void location(const DKString& location)				{ DKERROR("DKSdlWindow.location readonly! \n"); } 		// setter
 	
 	// readonly attribute History history;
-	virtual DKString history()						{ DKTODO(); return ""; }								// getter
-	virtual void history(const DKString&)			{ DKERROR("DKSdlWindow.history readonly! \n"); } 		// setter
+	virtual const DKString& history()							{ DKTODO(); return ""; }								// getter
+	virtual void history(const DKString& history)				{ DKERROR("DKSdlWindow.history readonly! \n"); } 		// setter
 	
 	// readonly attribute CustomElementRegistry customElements;
-	virtual DKString customElements()				{ DKTODO(); return ""; }								// getter
-	virtual void customElements(const DKString&)	{ DKERROR("DKSdlWindow.customElements readonly! \n"); } // setter
+	virtual const DKString& customElements()					{ DKTODO(); return ""; }								// getter
+	virtual void customElements(const DKString& customElements)	{ DKERROR("DKSdlWindow.customElements readonly! \n"); } // setter
 	
 	// [Replaceable] readonly attribute BarProp locationbar;
-	virtual DKString locationbar()					{ DKTODO(); return ""; }								// getter
-	virtual void locationbar(const DKString&)		{ DKERROR("DKSdlWindow.locationbar readonly! \n"); } 	// setter
+	virtual const DKString& locationbar()						{ DKTODO(); return ""; }								// getter
+	virtual void locationbar(const DKString& locationbar)		{ DKERROR("DKSdlWindow.locationbar readonly! \n"); } 	// setter
 	
 	// [Replaceable] readonly attribute BarProp menubar;
-	virtual DKString menubar()						{ DKTODO(); return ""; }								// getter
-	virtual void menubar(const DKString&)			{ DKERROR("DKSdlWindow.menubar readonly! \n"); } 		// setter
+	virtual const DKString& menubar()							{ DKTODO(); return ""; }								// getter
+	virtual void menubar(const DKString& menubar)				{ DKERROR("DKSdlWindow.menubar readonly! \n"); } 		// setter
 	
 	// [Replaceable] readonly attribute BarProp personalbar;
-	virtual DKString personalbar()					{ DKTODO(); return ""; }								// getter
-	virtual void personalbar(const DKString&)		{ DKERROR("DKSdlWindow.menubar readonly! \n"); } 		// setter
+	virtual const DKString& personalbar()						{ DKTODO(); return ""; }								// getter
+	virtual void personalbar(const DKString& personalbar)		{ DKERROR("DKSdlWindow.menubar readonly! \n"); } 		// setter
 	
 	// [Replaceable] readonly attribute BarProp scrollbars;
-	virtual DKString scrollbars()					{ DKTODO(); return ""; }								// getter
-	virtual void scrollbars(const DKString&)		{ DKERROR("DKSdlWindow.scrollbars readonly! \n"); } 	// setter
+	virtual const DKString& scrollbars()						{ DKTODO(); return ""; }								// getter
+	virtual void scrollbars(const DKString& scrollbars)			{ DKERROR("DKSdlWindow.scrollbars readonly! \n"); } 	// setter
 	
 	// [Replaceable] readonly attribute BarProp statusbar;
-	virtual DKString statusbar()					{ DKTODO(); return "D"; }								// getter
-	virtual void statusbar(const DKString&)			{ DKERROR("DKSdlWindow.statusbar readonly! \n"); } 		// setter
+	virtual const DKString& statusbar()							{ DKTODO(); return "D"; }								// getter
+	virtual void statusbar(const DKString& statusbar)			{ DKERROR("DKSdlWindow.statusbar readonly! \n"); } 		// setter
 	
 	// [Replaceable] readonly attribute BarProp toolbar;
-	virtual DKString toolbar()						{ DKTODO(); return ""; }								// getter
-	virtual void toolbar(const DKString&)			{ DKERROR("DKSdlWindow.toolbar readonly! \n"); } 		// setter
+	virtual const DKString& toolbar()							{ DKTODO(); return ""; }								// getter
+	virtual void toolbar(const DKString& toolbar)				{ DKERROR("DKSdlWindow.toolbar readonly! \n"); } 		// setter
 	
 	// attribute DOMString status;
-	virtual DOMString status()						{ DKTODO(); return ""; }								// getter
-	virtual void status(const DOMString&)			{ DKTODO(); } 											// setter
+	virtual const DOMString& status()							{ DKTODO(); return ""; }								// getter
+	virtual void status(const DOMString& status)				{ DKTODO(); } 											// setter
 	
 	// undefined close();
-	virtual bool close() {
+	virtual void close() {
 		DKDEBUGFUNC();
-		return DKTODO();
+		DKTODO();
 	}
 	
 	// readonly attribute boolean closed;
-	virtual bool closed()							{ DKTODO(); return ""; }								// getter
-	virtual void closed(const bool&)				{ DKTODO(); } 											// setter
+	virtual const bool& closed()								{ DKTODO(); return ""; }								// getter
+	virtual void closed(const bool& closed)						{ DKTODO(); } 											// setter
 	
 	// undefined stop();
-	virtual bool stop() {
+	virtual void stop() {
 		DKDEBUGFUNC();
-		return DKTODO();
+		DKTODO();
 	}
 	
 	// undefined focus();
-	virtual bool focus() {
+	virtual void focus() {
 		DKDEBUGFUNC();
 		SDL_RestoreWindow(_window);
-		return true;
 	}
 	
 	// undefined blur();
-	virtual bool blur() {
+	virtual void blur() {
 		DKDEBUGFUNC();
 		SDL_MinimizeWindow(_window);
-		return DKTODO();
 	}
 	
 	// other browsing contexts
 	// [Replaceable] readonly attribute WindowProxy frames;
-	virtual DKString frames()						{ DKTODO(); return ""; }									// getter
-	virtual void frames(const DKString&)			{ DKERROR("DKSdlWindow.frames readonly! \n"); } 			// setter
+	virtual const DKString& frames()						{ DKTODO(); return ""; }									// getter
+	virtual void frames(const DKString& frames)				{ DKERROR("DKSdlWindow.frames readonly! \n"); } 			// setter
 	
 	// [Replaceable] readonly attribute unsigned long length;
-	virtual unsigned int length()					{ DKTODO(); return 0; }										// getter
-	virtual void length(const unsigned int&)		{ DKERROR("DKSdlWindow.length readonly! \n"); } 			// setter
+	virtual const unsigned int& length()					{ DKTODO(); return 0; }										// getter
+	virtual void length(const unsigned int& length)			{ DKERROR("DKSdlWindow.length readonly! \n"); } 			// setter
 	
 	// [LegacyUnforgeable] readonly attribute WindowProxy? top;
-	virtual DKString top()							{ DKTODO(); return ""; }									// getter
-	virtual void top(const DKString&)				{ DKERROR("DKSdlWindow.top readonly! \n"); } 				// setter
+	virtual const DKString& top()							{ DKTODO(); return ""; }									// getter
+	virtual void top(const DKString& top)					{ DKERROR("DKSdlWindow.top readonly! \n"); } 				// setter
 	
 	// attribute any opener;
-	virtual DKString opener()						{ DKTODO(); return ""; }									// getter
-	virtual void opener(const DKString&)			{ DKTODO(); } 												// setter
+	virtual const DKString& opener()						{ DKTODO(); return ""; }									// getter
+	virtual void opener(const DKString& opener)				{ DKTODO(); } 												// setter
 	
 	// [Replaceable] readonly attribute WindowProxy? parent;
-	virtual DKString parent()						{ DKTODO(); return ""; }									// getter
-	virtual void parent(const DKString&)			{ DKERROR("DKSdlWindow.parent readonly! \n"); } 			// setter
+	virtual const DKString& parent()						{ DKTODO(); return ""; }									// getter
+	virtual void parent(const DKString& parent)				{ DKERROR("DKSdlWindow.parent readonly! \n"); } 			// setter
 	
 	// readonly attribute Element? frameElement;
-	virtual DKString frameElement()					{ DKTODO(); return ""; }									// getter
-	virtual void frameElement(const DKString&)		{ DKERROR("DKSdlWindow.frameElement readonly! \n"); } 		// setter
+	virtual const DKString& frameElement()					{ DKTODO(); return ""; }									// getter
+	virtual void frameElement(const DKString& frameElement)	{ DKERROR("DKSdlWindow.frameElement readonly! \n"); } 		// setter
 	
 	// WindowProxy? open(optional USVString url = "", optional DOMString target = "_blank", optional [LegacyNullToEmptyString] DOMString features = "");
-	virtual bool open(USVString& url, DOMString& target, DOMString& features) {
+	virtual const DKString& open(const USVString& url = "", const DOMString& target = "_blank", const DOMString& features = "") {
 		DKDEBUGFUNC(url, target, features);
-		return DKTODO();
+		DKTODO();
+		return "";
 	}
 	
 	//Since this is the global object, the IDL named getter adds a NamedPropertiesObject exotic
@@ -171,38 +170,37 @@ public:
 	
 	// the user agent
 	// readonly attribute Navigator navigator;
-	virtual DKString navigator()					{ DKTODO(); return ""; }									// getter
-	virtual void navigator(const DKString&)			{ DKERROR("DKSdlWindow.navigator readonly! \n"); } 			// setter
+	virtual const DKString& navigator()									{ DKTODO(); return ""; }									// getter
+	virtual void navigator(const DKString& navigator)					{ DKERROR("DKSdlWindow.navigator readonly! \n"); } 			// setter
 	
 	// readonly attribute Navigator clientInformation; // legacy alias of .navigator
-	virtual DKString clientInformation()			{ DKTODO(); return ""; }			// getter
-	virtual void clientInformation(const DKString&) { DKERROR("DKSdlWindow.clientInformation readonly! \n"); } 	// setter
+	virtual const DKString& clientInformation()							{ DKTODO(); return ""; }									// getter
+	virtual void clientInformation(const DKString& clientInformation) 	{ DKERROR("DKSdlWindow.clientInformation readonly! \n"); } 	// setter
 	
 	// readonly attribute boolean originAgentCluster;
-	virtual bool originAgentCluster()				{ DKTODO(); return false; }									// getter
-	virtual void originAgentCluster(const bool&)	{ DKERROR("DKSdlWindow.originAgentCluster readonly! \n"); } // setter
+	virtual const bool& originAgentCluster()							{ DKTODO(); return false; }									// getter
+	virtual void originAgentCluster(const bool& originAgentCluster)		{ DKERROR("DKSdlWindow.originAgentCluster readonly! \n"); } // setter
 	
 	//user prompts
 	// undefined alert();
-	virtual bool alert() {
+	virtual void alert() {
 		DKDEBUGFUNC();
 		if(SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, "alert", "alert", _window) != 0)
-			return DKERROR("SDL_ShowSimpleMessageBox() failed! \n    use SDL_GetError() for more info");
-		return true;
+			DKERROR("SDL_ShowSimpleMessageBox() failed! \n    use SDL_GetError() for more info");
 	}
 	
 	// undefined alert(DOMString message);
-	virtual bool alert(DOMString& message) {
+	virtual void alert(const DOMString& message) {
 		DKDEBUGFUNC(message);
 		if(SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, "alert", message.c_str(), _window) != 0)
-			return DKERROR("SDL_ShowSimpleMessageBox() failed! \n    use SDL_GetError() for more info");
-		return true;
+			DKERROR("SDL_ShowSimpleMessageBox() failed! \n    use SDL_GetError() for more info");
 	}
 	
 	// boolean confirm(optional DOMString message = "");
-	virtual bool confirm(DOMString& message) {
+	virtual const bool& confirm(const DOMString& message = "") {
 		DKDEBUGFUNC(message);
-		return DKTODO();
+		DKTODO();
+		return false;
 	}
 	
 	// DOMString? prompt(optional DOMString message = "", optional DOMString default = "");
