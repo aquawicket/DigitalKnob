@@ -31,7 +31,7 @@ public:
 	// [Replaceable] readonly attribute WindowProxy self;
 	DKString _self = "";
 	virtual const DKString& self()								{ return _self; }						// getter
-	virtual void self(const DKString& self)						{ _self = _elf; } 						// setter
+	virtual void self(const DKString& self)						{ _self = self; } 						// setter
 	
 	// [LegacyUnforgeable] readonly attribute Document document;
 	DKString _document = "";
@@ -51,7 +51,7 @@ public:
 	// readonly attribute History history;
 	DKString _history = "";
 	virtual const DKString& history()							{ return _history; }					// getter
-	virtual void history(const DKString& history)				{ _history = history} 					// setter
+	virtual void history(const DKString& history)				{ _history = history; } 				// setter
 	
 	// readonly attribute CustomElementRegistry customElements;
 	DKString _customElements = "";
@@ -105,52 +105,60 @@ public:
 	virtual void closed(const bool&)							{ _closed = closed; } 					// setter
 	
 	// undefined stop();
-	virtual bool stop() {
+	virtual void stop() {
 		DKDEBUGFUNC();
-		return DKTODO();
+		DKTODO();
 	}
 	
 	// undefined focus();
-	virtual bool focus() {
+	virtual void focus() {
 		DKDEBUGFUNC();
-		return DKTODO();
+		DKTODO();
 	}
 	
 	// undefined blur();
-	virtual bool blur() {
+	virtual void blur() {
 		DKDEBUGFUNC();
-		return DKTODO();
+		DKTODO();
 	}
 	
 	// other browsing contexts
 	// [Replaceable] readonly attribute WindowProxy frames;
-	virtual DKString frames()						{ return ""; }	// getter
-	virtual void frames(const DKString&)			{ } 			// setter
+	DKString _frames = "";
+	virtual const DKString& frames()					{ return _frames; }					// getter
+	virtual void frames(const DKString& frames)			{ _frames = frames; } 				// setter
 	
 	// [Replaceable] readonly attribute unsigned long length;
-	virtual unsigned int length()					{ return 0; }	// getter
-	virtual void length(const unsigned int&)		{ } 			// setter
+	unsigned int _length = 0;
+	virtual const unsigned int& length()				{ return _length; }					// getter
+	virtual void length(const unsigned int& length)		{ _length = length; } 				// setter
 	
 	// [LegacyUnforgeable] readonly attribute WindowProxy? top;
-	virtual DKString top()							{ return ""; }	// getter
-	virtual void top(const DKString&)				{ } 			// setter
+	DKString _top = "";
+	virtual const DKString& top()						{ return _top; }					// getter
+	virtual void top(const DKString& top)				{ _top = top; } 					// setter
 	
 	// attribute any opener;
-	virtual DKString opener()						{ return ""; }	// getter
-	virtual void opener(const DKString&)			{ } 			// setter
+	DKString _opener = "";
+	virtual const DKString& opener()					{ return _opener; }					// getter
+	virtual void opener(const DKString& opener)			{ _opener = opener; } 				// setter
 	
 	// [Replaceable] readonly attribute WindowProxy? parent;
-	virtual DKString parent()						{ return ""; }	// getter
-	virtual void parent(const DKString&)			{ } 			// setter
+	DKString _parent = "";
+	virtual const DKString& parent()					{ return _parent; }					// getter
+	virtual void parent(const DKString& parent)			{ _parent = parent; } 				// setter
 	
 	// readonly attribute Element? frameElement;
-	virtual DKString frameElement()					{ return ""; }	// getter
-	virtual void frameElement(const DKString&)		{ } 			// setter
+	DKString _frameElement = "";
+	virtual const DKString& frameElement()				{ return _frameElement; }			// getter
+	virtual void frameElement(const DKString&)			{ _frameElement = frameElement; } 	// setter
 	
 	// WindowProxy? open(optional USVString url = "", optional DOMString target = "_blank", optional [LegacyNullToEmptyString] DOMString features = "");
-	virtual bool open(USVString& url, DOMString& target, DOMString& features) {
+	DKString _open = "";
+	virtual const DKString& open(const USVString& url, const DOMString& target, const DOMString& features) {
 		DKDEBUGFUNC(url, target, features);
-		return DKTODO();
+		DKTODO();
+		return _open;
 	}
 	
 	//Since this is the global object, the IDL named getter adds a NamedPropertiesObject exotic
@@ -161,58 +169,65 @@ public:
 	
 	// the user agent
 	// readonly attribute Navigator navigator;
-	virtual DKString navigator()					{ return ""; }	// getter
-	virtual void navigator(const DKString&)			{ } 			// setter
+	DKString _navigator = "";
+	virtual const DKString& navigator()									{ return _navigator; }							// getter
+	virtual void navigator(const DKString& navigator)					{ _navigator = navigator; } 					// setter
 	
 	// readonly attribute Navigator clientInformation; // legacy alias of .navigator
-	virtual DKString clientInformation()			{ return ""; }	// getter
-	virtual void clientInformation(const DKString&)	{ } 			// setter
+	DKString _clientInformation = "";
+	virtual const DKString& clientInformation()							{ return _clientInformation; }					// getter
+	virtual void clientInformation(const DKString& clientInformation)	{ _clientInformation = _clientInformation; } 	// setter
 	
 	// readonly attribute boolean originAgentCluster;
-	virtual bool originAgentCluster()				{ return false; }// getter
-	virtual void originAgentCluster(const bool&)	{ } 			// setter
+	bool _originAgentCluster = false;
+	virtual const bool& originAgentCluster()							{ return _originAgentCluster; }					// getter
+	virtual void originAgentCluster(const bool& originAgentCluster)		{ _originAgentCluster = originAgentCluster; } 	// setter
 	
 	//user prompts
 	// undefined alert();
-	virtual bool alert() {
+	virtual void alert() {
 		DKDEBUGFUNC();
-		return DKTODO();
+		DKTODO();
 	}
 	
 	// undefined alert(DOMString message);
-	virtual bool alert(DOMString& message) {
+	virtual void alert(const DOMString& message) {
 		DKDEBUGFUNC(message);
-		return DKTODO();
+		DKTODO();
 	}
 	
 	// boolean confirm(optional DOMString message = "");
-	virtual bool confirm(DOMString& message) {
+	bool _confirm = false;
+	virtual const bool& confirm(const DOMString& message = "") {
 		DKDEBUGFUNC(message);
-		return DKTODO();
+		DKTODO();
+		return _confirm;
 	}
 	
 	// DOMString? prompt(optional DOMString message = "", optional DOMString default = "");
-	virtual bool prompt(DOMString& message, DOMString _default) {
+	DOMString _prompt = "";
+	virtual const DOMString& prompt(const DOMString& message = "", const DOMString _default = "") {
 		DKDEBUGFUNC(message, _default);
-		return DKTODO();
+		DKTODO();
+		return _prompt;
 	}
 	
 	// undefined print();
-	virtual bool print() {
+	virtual void print() {
 		DKDEBUGFUNC();
-		return DKTODO();
+		DKTODO();
 	}
 	
 	// undefined postMessage(any message, USVString targetOrigin, optional sequence<object> transfer = []);
-	virtual bool postMessage(DKString& message, USVString& targetOrigin, DKString& transfer) {
+	virtual void postMessage(const DKString& message, const USVString& targetOrigin, const DKString& transfer = "[]") {
 		DKDEBUGFUNC(message, targetOrigin, transfer);
-		return DKTODO();
+		DKTODO();
 	}
 	
 	// undefined postMessage(any message, optional WindowPostMessageOptions options = {});
-	virtual bool postMessage(DKString& message, DKString& options) {
+	virtual void postMessage(const DKString& message, const DKString& options = "{}") {
 		DKDEBUGFUNC(message, options);
-		return DKTODO();
+		DKTODO();
 	}
 	
 	// also has obsolete members
@@ -220,19 +235,22 @@ public:
 	// Source: Compatibility Standard (https://compat.spec.whatwg.org/)
 	// partial interface Window {
 	//		readonly attribute short orientation;
-			virtual short orientation()						{ return 0; }	// getter
-			virtual void orientation(const short&)				{ } 			// setter
+			short _orientation = 0;
+			virtual short orientation()												{ return _orientation; }							// getter
+			virtual void orientation(const short& orientation)						{ _orientation = orientation; } 					// setter
 	//		
 	//		attribute EventHandler onorientationchange;
-			virtual DKString onorientationchange()				{ return ""; }	// getter
-			virtual void onorientationchange(const DKString&)	{ } 			// setter
+			DKString _onorientationchange = "";
+			virtual const DKString& onorientationchange()							{ return _onorientationchange; }					// getter
+			virtual void onorientationchange(const DKString& onorientationchange)	{ _onorientationchange = onorientationchange; } 	// setter
 	// };
 	
 	// Source: DOM Standard (https://dom.spec.whatwg.org/)
 	// partial interface Window {
 	//		[Replaceable] readonly attribute (Event or undefined) event; // legacy
-			virtual DKString event()							{ return ""; }	// getter
-			virtual void event(const DKString&)					{ } 			// setter
+			DKString _event = "";
+			virtual const DKString& event()											{ return _event; }									// getter
+			virtual void event(const DKString&)										{ _event = event; } 								// setter
 	// };
 	
 	// Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
@@ -256,36 +274,40 @@ public:
 	// Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
 	// partial interface Window {
 	//		undefined captureEvents();
-			virtual bool captureEvents() {
+			virtual void captureEvents() {
 				DKDEBUGFUNC();
-				return DKTODO();
+				DKTODO();
 			}
 	//
 	//		undefined releaseEvents();
-			virtual bool releaseEvents() {
+			virtual void releaseEvents() {
 				DKDEBUGFUNC();
-				return DKTODO();
+				DKTODO();
 			}
 	//
 	//		[Replaceable, SameObject] readonly attribute External external;
-			virtual DKString external()						{ return ""; }	// getter
-			virtual void external(const DKString&)				{ } 			// setter
+			DKString _external = "";
+			virtual const DKString& external()							{ return _external; }				// getter
+			virtual void external(const DKString& external)				{ _external = external; } 			// setter
 	// };
 
 	// Source: Cookie Store API (https://wicg.github.io/cookie-store/)
 	// [SecureContext]
 	// partial interface Window {
 	//		[SameObject] readonly attribute CookieStore cookieStore;
-			virtual DKString cookieStore()						{ return ""; }	// getter
-			virtual void cookieStore(const DKString&)			{ } 			// setter
+			DKString _cookieStore = "";
+			virtual const DKString& cookieStore()						{ return _cookieStore; }			// getter
+			virtual void cookieStore(const DKString& cookieStore)		{ _cookieStore = cookieStore; } 	// setter
 	// };
 
 	// Source: Digital Goods API (https://wicg.github.io/digital-goods/)
 	// partial interface Window {
 	//		[SecureContext] Promise<DigitalGoodsService> getDigitalGoodsService(DOMString serviceProvider);
-			virtual bool getDigitalGoodsService(DKString& serviceProvider) {
+			DKString _getDigitalGoodsService = "";
+			virtual const DKString& getDigitalGoodsService(const DOMString& serviceProvider) {
 				DKDEBUGFUNC(serviceProvider);
-				return DKTODO();
+				DKTODO();
+				return _getDigitalGoodsService;
 			}
 	// };
 
@@ -293,29 +315,36 @@ public:
 	// partial interface Window {
 	//		// Collection of fenced frame APIs
 	//		readonly attribute Fence? fence;
-			virtual DKString fence()							{ return ""; }	// getter
-			virtual void fence(const DKString&)					{ } 			// setter
+			DKString _fence = "";
+			virtual const DKString& fence()								{ return _fence; }				// getter
+			virtual void fence(const DKString& fence)					{ _fence = fence; } 			// setter
 	// };
 
 	// Source: File System Access (https://wicg.github.io/file-system-access/)
 	// [SecureContext]
 	// partial interface Window {
 	//		Promise<sequence<FileSystemFileHandle>> showOpenFilePicker(optional OpenFilePickerOptions options = {});
-			virtual bool showOpenFilePicker(DKString& options) {
+			DKString _showOpenFilePicker = "";
+			virtual const DKString& showOpenFilePicker(const DKString& options = "{}") {
 				DKDEBUGFUNC(options);
-				return DKTODO();
+				DKTODO();
+				return _showOpenFilePicker;
 			}
 	//
 	//		Promise<FileSystemFileHandle> showSaveFilePicker(optional SaveFilePickerOptions options = {});
-			virtual bool showSaveFilePicker(DKString& options) {
+			DKString _showSaveFilePicker = "";
+			virtual const DKString& showSaveFilePicker(const DKString& options = "{}") {
 				DKDEBUGFUNC(options);
-				return DKTODO();
+				DKTODO();
+				return _showSaveFilePicker;
 			}
 	//
 	//		Promise<FileSystemDirectoryHandle> showDirectoryPicker(optional DirectoryPickerOptions options = {});
-			virtual bool showDirectoryPicker(DKString& options) {
+			DKString _showDirectoryPicker = "";
+			virtual const DKString& showDirectoryPicker(const DKString& options = "{}") {
 				DKDEBUGFUNC(options);
-				return DKTODO();
+				DKTODO();
+				return _showDirectoryPicker;
 			}
 	// };
 
@@ -323,21 +352,25 @@ public:
 	// [SecureContext]
 	// partial interface Window {
 	//		Promise<sequence<FontData>> queryLocalFonts(optional QueryOptions options = {});
-			virtual bool queryLocalFonts(DKString& options) {
+			DKString _queryLocalFonts = "";
+			virtual const DKString& queryLocalFonts(const DKString& options = "{}") {
 				DKDEBUGFUNC(options);
-				return DKTODO();
+				DKTODO();
+				return _queryLocalFonts;
 			}
 	// };
 
 	// Source: Manifest Incubations (https://wicg.github.io/manifest-incubations/)
 	// partial interface Window {
 	//		attribute EventHandler onappinstalled;
-			virtual DKString onappinstalled()							{ return ""; }	// getter
-			virtual void onappinstalled(const DKString&)				{ } 			// setter
+			DKString _onappinstalled = "";
+			virtual const DKString& onappinstalled()									{ return _onappinstalled; }								// getter
+			virtual void onappinstalled(const DKString& onappinstalled)					{ _onappinstalled = onappinstalled; } 					// setter
 	//
 	//		attribute EventHandler onbeforeinstallprompt;
-			virtual DKString onbeforeinstallprompt()					{ return ""; }	// getter
-			virtual void onbeforeinstallprompt(const DKString&)			{ } 			// setter
+			DKString _onbeforeinstallprompt = "";
+			virtual const DKString& onbeforeinstallprompt()								{ return _onbeforeinstallprompt; }						// getter
+			virtual void onbeforeinstallprompt(const DKString& onbeforeinstallprompt)	{ _onbeforeinstallprompt = onbeforeinstallprompt; } 	// setter
 	// };
 
 	// Source: Portals (https://wicg.github.io/portals/)
