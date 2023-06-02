@@ -319,16 +319,62 @@ public:
 	//
 	//		// browsing context
 	//		undefined moveTo(long x, long y);
-			// TODO
+			virtual void moveTo(const int& x, const int& y){
+				DKDEBUGFUNC(x, y);
+				#if WIN
+					RECT rect;
+					GetWindowRect(GetConsoleWindow(), &rect);
+					int nWidth = rect.right - rect.left;
+					int nHeight = rect.bottom - rect.top;
+					if (!MoveWindow(GetConsoleWindow(), x, y, nWidth, nHeight, TRUE))
+						KERROR("MoveWindow() failed");
+				#endif
+			}
 	//
 	//		undefined moveBy(long x, long y);
-			// TODO
+			virtual void moveBy(const int& x, const int& y) {
+				DKDEBUGFUNC(x, y);
+				#if WIN
+					RECT rect;
+					GetWindowRect(GetConsoleWindow(), &rect);
+					int new_x = rect.left + x;
+					int new_y = rect.top + y;
+					int nWidth = rect.right - rect.left;
+					int nHeight = rect.bottom - rect.top;
+					if (!MoveWindow(GetConsoleWindow(), new_x, new_y, nWidth, nHeight, TRUE))
+						DKERROR("MoveWindow() failed");
+				#endif
+			}
 	//
 	//		undefined resizeTo(long width, long height);
-			// TODO
+			virtual void resizeTo(const int& width, const int& height) {
+				DKDEBUGFUNC(width, height);
+				#if WIN
+					RECT rect;
+					GetWindowRect(GetConsoleWindow(), &rect);
+					int X = rect.left;
+					int Y = rect.top;
+					int nWidth = width;
+					int nHeight = height;
+					if (!MoveWindow(GetConsoleWindow(), X, Y, nWidth, nHeight, TRUE))
+						DKERROR("MoveWindow() failed");
+				#endif
+			}
 	//
 	//		undefined resizeBy(long x, long y);
-			// TODO
+			virtual void resizeBy(const int& x, const int& y) {
+				DKDEBUGFUNC(x, y);
+				#if WIN
+					RECT rect;
+					GetWindowRect(GetConsoleWindow(), &rect);
+					int X = rect.left;
+					int Y = rect.top;
+					int nWidth = rect.right - rect.left + x;
+					int nHeight = rect.bottom - rect.top + y;
+					if (!MoveWindow(GetConsoleWindow(), X, Y, nWidth, nHeight, TRUE))
+						DKERROR("MoveWindow() failed");
+				#endif
+			}
 	//
 	//		// viewport
 	//		[Replaceable] readonly attribute long innerWidth;
@@ -376,108 +422,38 @@ public:
 			// TODO
 	//
 	//		[Replaceable] readonly attribute long outerWidth;
-			// TODO
+			virtual const int& outerWidth() {					// getter
+				#if WIN
+					RECT rect;
+					GetWindowRect(GetConsoleWindow(), &rect);
+					_outerWidth = rect.right - rect.left;
+					return _outerWidth;
+				#endif
+			}
+			virtual void outerWidth(const int& outerWidth){	// setter
+				// TODO
+			}
 	//
 	//		[Replaceable] readonly attribute long outerHeight;
-			virtual int outerHeight(){ 	// getter
-				RECT rect;
-				GetWindowRect(GetConsoleWindow(), &rect);
-				int _outerHeight = rect.bottom - rect.top;
+			virtual const int& outerHeight(){ 					// getter
+				#if WIN
+					RECT rect;
+					GetWindowRect(GetConsoleWindow(), &rect);
+					_outerHeight = rect.bottom - rect.top;
+					return _outerHeight;
+				#endif
 			}
-			virtual void outerHeight(const int&){ } // setter
-			
-			
-			bool outerHeight(unsigned int& _outerHeight, bool set = false) {
-				if(set){
-					return DKTODO();
-				}
-				else{
-					#if WIN
-						RECT rect;
-						GetWindowRect(GetConsoleWindow(), &rect);
-						_outerHeight = rect.bottom - rect.top;
-					#endif
-				}
-				return true;
+			virtual void outerHeight(const int& outerHeight){	// setter
+				// TODO
 			}
+			
 	//
 	//		[Replaceable] readonly attribute double devicePixelRatio;
 			// TODO
 	// };
 	
-	
-	bool outerWidth(unsigned int& _outerWidth, bool set = false) {
-		if(set){
-			return DKTODO();
-		}
-		else{
-			#if WIN
-				RECT rect;
-				GetWindowRect(GetConsoleWindow(), &rect);
-				_outerWidth = rect.right - rect.left;
-			#endif
-		}
-		return true;
-	}
-	
-	
-	
-	bool moveBy(int& _deltaX, int& _deltaY) {
-		DKDEBUGFUNC(_deltaX, _deltaY);
-		#if WIN
-			RECT rect;
-			GetWindowRect(GetConsoleWindow(), &rect);
-			int X = rect.left + _deltaX;
-			int Y = rect.top + _deltaY;
-			int nWidth = rect.right - rect.left;
-			int nHeight = rect.bottom - rect.top;
-			if (!MoveWindow(GetConsoleWindow(), X, Y, nWidth, nHeight, TRUE))
-				return DKERROR("MoveWindow() failed");
-		#endif
-		return true;
-	}
-	bool moveTo(int& _x, int& _y){
-		DKDEBUGFUNC(_x, _y);
-		#if WIN
-			RECT rect;
-			GetWindowRect(GetConsoleWindow(), &rect);
-			int nWidth = rect.right - rect.left;
-			int nHeight = rect.bottom - rect.top;
-			if (!MoveWindow(GetConsoleWindow(), _x, _y, nWidth, nHeight, TRUE)){
-				return DKERROR("MoveWindow() failed");
-			}
-		#endif
-		return true;
-	}
-	bool resizeBy(int& _xDelta, int& _yDelta) {
-		DKDEBUGFUNC(_xDelta, _yDelta);
-		#if WIN
-			RECT rect;
-			GetWindowRect(GetConsoleWindow(), &rect);
-			int X = rect.left;
-			int Y = rect.top;
-			int nWidth = rect.right - rect.left + _xDelta;
-			int nHeight = rect.bottom - rect.top + _yDelta;
-			if (!MoveWindow(GetConsoleWindow(), X, Y, nWidth, nHeight, TRUE))
-				return DKERROR("MoveWindow() failed");
-		#endif
-		return true;
-	}
-	bool resizeTo(int& _width, int& _height) {
-		DKDEBUGFUNC(_width, _height);
-		#if WIN
-			RECT rect;
-			GetWindowRect(GetConsoleWindow(), &rect);
-			int X = rect.left;
-			int Y = rect.top;
-			int nWidth = _width;
-			int nHeight = _height;
-			if (!MoveWindow(GetConsoleWindow(), X, Y, nWidth, nHeight, TRUE))
-				return DKERROR("MoveWindow() failed");
-		#endif
-		return true;
-	}
 
+	
 	////// DK //////
 	void Loop();
 

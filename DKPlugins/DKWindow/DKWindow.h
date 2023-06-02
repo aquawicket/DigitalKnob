@@ -102,7 +102,7 @@ public:
 	// readonly attribute boolean closed;
 	bool _closed = false;
 	virtual const bool& closed()								{ return _closed; }						// getter
-	virtual void closed(const bool&)							{ _closed = closed; } 					// setter
+	virtual void closed(const bool& closed)						{ _closed = closed; } 					// setter
 	
 	// undefined stop();
 	virtual void stop() {
@@ -151,7 +151,7 @@ public:
 	// readonly attribute Element? frameElement;
 	DKString _frameElement = "";
 	virtual const DKString& frameElement()						{ return _frameElement; }				// getter
-	virtual void frameElement(const DKString&)					{ _frameElement = frameElement; } 		// setter
+	virtual void frameElement(const DKString& frameElement)		{ _frameElement = frameElement; } 		// setter
 	
 	// WindowProxy? open(optional USVString url = "", optional DOMString target = "_blank", optional [LegacyNullToEmptyString] DOMString features = "");
 	DKString _open = "";
@@ -250,7 +250,7 @@ public:
 	//		[Replaceable] readonly attribute (Event or undefined) event; // legacy
 			DKString _event = "";
 			virtual const DKString& event()											{ return _event; }									// getter
-			virtual void event(const DKString&)										{ _event = event; } 								// setter
+			virtual void event(const DKString& event)								{ _event = event; } 								// setter
 	// };
 	
 	// Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
@@ -447,7 +447,7 @@ public:
 	//		undefined moveBy(long x, long y);
 			virtual void moveBy(const int& x, const int& y) {
 				DKDEBUGFUNC(x, y);
-				return DKTODO();
+				DKTODO();
 			}
 
 	//		undefined resizeTo(long width, long height);
@@ -549,7 +549,7 @@ public:
 	//		[Replaceable] readonly attribute long screenTop;
 			int _screenTop = 0;
 			virtual const int& screenTop()					{ return _screenTop; }			// getter
-			virtual void screenTop(const int& screenTop)	{ screenTop = _screenTop;} 		// setter
+			virtual void screenTop(const int& screenTop)	{ _screenTop = screenTop; } 	// setter
 	//
 	//		[Replaceable] readonly attribute long outerWidth;
 			int _outerWidth = 0;
