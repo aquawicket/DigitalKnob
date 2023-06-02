@@ -125,33 +125,33 @@ public:
 	// other browsing contexts
 	// [Replaceable] readonly attribute WindowProxy frames;
 	DKString _frames = "";
-	virtual const DKString& frames()					{ return _frames; }					// getter
-	virtual void frames(const DKString& frames)			{ _frames = frames; } 				// setter
+	virtual const DKString& frames()							{ return _frames; }						// getter
+	virtual void frames(const DKString& frames)					{ _frames = frames; } 					// setter
 	
 	// [Replaceable] readonly attribute unsigned long length;
 	unsigned int _length = 0;
-	virtual const unsigned int& length()				{ return _length; }					// getter
-	virtual void length(const unsigned int& length)		{ _length = length; } 				// setter
+	virtual const unsigned int& length()						{ return _length; }						// getter
+	virtual void length(const unsigned int& length)				{ _length = length; } 					// setter
 	
 	// [LegacyUnforgeable] readonly attribute WindowProxy? top;
 	DKString _top = "";
-	virtual const DKString& top()						{ return _top; }					// getter
-	virtual void top(const DKString& top)				{ _top = top; } 					// setter
+	virtual const DKString& top()								{ return _top; }						// getter
+	virtual void top(const DKString& top)						{ _top = top; } 						// setter
 	
 	// attribute any opener;
 	DKString _opener = "";
-	virtual const DKString& opener()					{ return _opener; }					// getter
-	virtual void opener(const DKString& opener)			{ _opener = opener; } 				// setter
+	virtual const DKString& opener()							{ return _opener; }						// getter
+	virtual void opener(const DKString& opener)					{ _opener = opener; } 					// setter
 	
 	// [Replaceable] readonly attribute WindowProxy? parent;
 	DKString _parent = "";
-	virtual const DKString& parent()					{ return _parent; }					// getter
-	virtual void parent(const DKString& parent)			{ _parent = parent; } 				// setter
+	virtual const DKString& parent()							{ return _parent; }						// getter
+	virtual void parent(const DKString& parent)					{ _parent = parent; } 					// setter
 	
 	// readonly attribute Element? frameElement;
 	DKString _frameElement = "";
-	virtual const DKString& frameElement()				{ return _frameElement; }			// getter
-	virtual void frameElement(const DKString&)			{ _frameElement = frameElement; } 	// setter
+	virtual const DKString& frameElement()						{ return _frameElement; }				// getter
+	virtual void frameElement(const DKString&)					{ _frameElement = frameElement; } 		// setter
 	
 	// WindowProxy? open(optional USVString url = "", optional DOMString target = "_blank", optional [LegacyNullToEmptyString] DOMString features = "");
 	DKString _open = "";

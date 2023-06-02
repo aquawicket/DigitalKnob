@@ -91,10 +91,13 @@ int DKScreen::colorDepth(duk_context* ctx){
 
 int DKScreen::height(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
+	/*
 	unsigned int height;
 	if(!DKUtil::GetScreenHeight(height)){ return 0; }
 	duk_push_uint(ctx, height);
 	return 1;
+	*/
+	return false;
 }
 
 int DKScreen::left(duk_context* ctx){
@@ -123,10 +126,13 @@ int DKScreen::top(duk_context* ctx){
 
 int DKScreen::width(duk_context* ctx){
 	DKDEBUGFUNC(ctx);
+	/*
 	unsigned int width;
 	if(!DKUtil::GetScreenWidth(width)) { return 0; }
 	duk_push_uint(ctx, width);
 	return 1;
+	*/
+	return false;
 }
 
 int DKScreen::mozEnabled(duk_context* ctx){
