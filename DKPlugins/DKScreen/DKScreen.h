@@ -21,28 +21,34 @@ public:
 	virtual ~DKScreen() {}
 	
 	// readonly attribute long availWidth;
-	virtual int availWidth(); 					// getter
-	virtual void availWidth(const int&) { } 	// setter
+	int _availWidth = 0;
+	virtual const int& availWidth() 						{ return _availWidth; }			// getter
+	virtual void availWidth(const int& availWidth) 			{ _availWidth = availWidth; } 	// setter
 	
 	// readonly attribute long availHeight;
-	virtual int availHeight(); 				// getter
-	virtual void availHeight(const int&) { } 	// setter
+	int _availHeight = 0;;
+	virtual const int& availHeight()						{ return _availHeight; }		// getter
+	virtual void availHeight(const int& availHeight) 		{ _availHeight = availHeight; } // setter
 	
 	// readonly attribute long width;
-	virtual int width(); 						// getter
-	virtual void width(const int&) { } 			// setter
+	int _width = 0;
+	virtual const int& width()								{ return _availHeight; }		// getter
+	virtual void width(const int& width) 					{ _availHeight = availHeight; } // setter
 	
 	// readonly attribute long height;
-	virtual int height(); 						// getter
-	virtual void height(const int&) { } 		// setter
+	int _height = 0;
+	virtual const int& height()								{ return _height; }				// getter
+	virtual void height(const int& height)  				{ _height = height; } 			// setter
 	
 	// readonly attribute unsigned long colorDepth;
-	virtual int colorDepth(); 					// getter
-	virtual void colorDepth(const int&) { } 	// setter
+	unsigned int _colorDepth = 0;
+	virtual const unsigned int& colorDepth()				{ return _colorDepth; }			// getter
+	virtual void colorDepth(const unsigned int& colorDepth)	{ _colorDepth = colorDepth; } 	// setter
 	
 	// readonly attribute unsigned long pixelDepth;
-	virtual int pixelDepth(); 					// getter
-	virtual void pixelDepth(const int&) { } 	// setter
+	unsigned int _pixelDepth = 0;
+	virtual const unsigned int& pixelDepth()				{ return _pixelDepth; }			// getter
+	virtual void pixelDepth(const unsigned int& pixelDepth)	{ _pixelDepth = pixelDepth; } 	// setter
 	
 //};
 };
