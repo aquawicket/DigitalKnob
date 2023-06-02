@@ -466,57 +466,78 @@ public:
 	//		// viewport
 	//		[Replaceable] readonly attribute long innerWidth;
 			int _innerWidth = 0;
-			virtual const int& innerWidth()					{ return _innerWidth; }				// getter
-			virtual void innerWidth(const int& innerWidth)	{ _innerWidth = innerWidth; } 		// setter
+			virtual const int& innerWidth()						{ return _innerWidth; }				// getter
+			virtual void innerWidth(const int& innerWidth)		{ _innerWidth = innerWidth; } 		// setter
 	//
 	//		[Replaceable] readonly attribute long innerHeight;
 			int _innerHeight = 0;
-			virtual const int& innerHeight()				{ return _innerHeight; }			// getter
-			virtual void innerHeight(const int& innerHeight){ _innerHeight = innerHeight; } 	// setter
+			virtual const int& innerHeight()					{ return _innerHeight; }			// getter
+			virtual void innerHeight(const int& innerHeight)	{ _innerHeight = innerHeight; } 	// setter
 	//
 	//		// viewport scrolling
 	//		[Replaceable] readonly attribute double scrollX;
-			virtual double scrollX()						{ return 0.0; }	// getter
-			virtual void scrollX(const double&)				{ } 			// setter
+			double _scrollX = 0.0;
+			virtual const double& scrollX()						{ return _scrollX; }				// getter
+			virtual void scrollX(const double& scrollX)			{ _scrollX = scrollX; } 			// setter
 	//
 	//		[Replaceable] readonly attribute double pageXOffset;
-			virtual double pageXOffset()					{ return 0.0; }	// getter
-			virtual void pageXOffset(const double&)			{ } 			// setter
+			double _pageXOffset = 0.0;
+			virtual const double& pageXOffset()					{ return _pageXOffset; }			// getter
+			virtual void pageXOffset(const double& pageXOffset)	{ _pageXOffset = pageXOffset; } 	// setter
 	//
 	//		[Replaceable] readonly attribute double scrollY;
-			virtual double scrollY()						{ return 0.0; }	// getter
-			virtual void scrollY(const double&)				{ } 			// setter
+			double _scrollY = 0.0;
+			virtual const double& scrollY()						{ return _scrollY; }				// getter
+			virtual void scrollY(const double& scrollY)			{ _scrollY = scrollY; } 			// setter
 	//
 	//		[Replaceable] readonly attribute double pageYOffset;
-			virtual double pageYOffset()					{ return 0.0; }	// getter
-			virtual void pageYOffset(const double&)			{ } 			// setter
+			double _pageYOffset = 0.0;
+			virtual const double& pageYOffset()					{ return _pageYOffset; }			// getter
+			virtual void pageYOffset(const double& pageYOffset)	{ _pageYOffset = pageYOffset; } 	// setter
 	//
 	//		undefined scroll(optional ScrollToOptions options = {});
+			virtual void scroll(const DKString& options = "{}") {
+				DKDEBUGFUNC(options);
+				DKTODO();
+			}
+			
 	//		undefined scroll(unrestricted double x, unrestricted double y);
-			virtual bool scroll() {
-				DKDEBUGFUNC();
-				return DKTODO();
+			virtual void scroll(const double& x, const double& y) {
+				DKDEBUGFUNC(x, y);
+				DKTODO();
 			}
 	//
 	//		undefined scrollTo(optional ScrollToOptions options = {});
+			virtual void scrollTo(const DKString& options = "{}") {
+				DKDEBUGFUNC(options);
+				DKTODO();
+			}
+			
 	//		undefined scrollTo(unrestricted double x, unrestricted double y);
-			virtual bool scrollTo() {
-				DKDEBUGFUNC();
-				return DKTODO();
+			virtual void scrollTo(const double& x, const double& y) {
+				DKDEBUGFUNC(x, y);
+				DKTODO();
 			}
 	//
 	//		undefined scrollBy(optional ScrollToOptions options = {});
+			virtual void scrollBy(const DKString& options = "{}") {
+				DKDEBUGFUNC(options);
+				DKTODO();
+			}
+			
 	//		undefined scrollBy(unrestricted double x, unrestricted double y);
-			virtual bool scrollBy() {
-				DKDEBUGFUNC();
-				return DKTODO();
+			virtual void scrollBy(const double& x, const double& y) {
+				DKDEBUGFUNC(x, y);
+				DKTODO();
 			}
 	///
 	//		// client
 	//		[Replaceable] readonly attribute long screenX;
-			virtual int screenX()							{ return 0; }	// getter
-			virtual void screenX(const int&)				{ } 			// setter
+			int _screenX = 0;
+			virtual const int& screenX()					{ return _screenX; }			// getter
+			virtual void screenX(const int& screenX)		{ _screenX = screenX; } 		// setter
 	//
+	/////////////////////////////////// TODO ///////////////////////////////////////////////
 	//		[Replaceable] readonly attribute long screenLeft;
 			virtual int screenLeft()						{ return 0; }	// getter
 			virtual void screenLeft(const int&)				{ } 			// setter
