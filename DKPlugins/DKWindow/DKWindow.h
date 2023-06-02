@@ -60,7 +60,7 @@ public:
 	
 	// [Replaceable] readonly attribute BarProp locationbar;
 	DKString _locationbar = "";
-	virtual const DKString locationbar()						{ return _locationbar; }				// getter
+	virtual const DKString& locationbar()						{ return _locationbar; }				// getter
 	virtual void locationbar(const DKString& locationbar)		{ _locationbar = locationbar; } 		// setter
 	
 	// [Replaceable] readonly attribute BarProp menubar;
