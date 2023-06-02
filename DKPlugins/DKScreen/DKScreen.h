@@ -32,8 +32,8 @@ public:
 	
 	// readonly attribute long width;
 	int _width = 0;
-	virtual const int& width()								{ return _availHeight; }		// getter
-	virtual void width(const int& width) 					{ _availHeight = availHeight; } // setter
+	virtual const int& width()								{ return _width; }				// getter
+	virtual void width(const int& width) 					{ _width = width; } 			// setter
 	
 	// readonly attribute long height;
 	int _height = 0;
