@@ -236,7 +236,7 @@ public:
 	// partial interface Window {
 	//		readonly attribute short orientation;
 			short _orientation = 0;
-			virtual short orientation()												{ return _orientation; }							// getter
+			virtual const short& orientation()										{ return _orientation; }							// getter
 			virtual void orientation(const short& orientation)						{ _orientation = orientation; } 					// setter
 
 	//		attribute EventHandler onorientationchange;

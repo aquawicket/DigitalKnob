@@ -413,7 +413,7 @@ public:
 	//
 	//		[SameObject, Replaceable] readonly attribute VisualViewport? visualViewport;
 			virtual const DKString& visualViewport()					{ DKTODO(); return ""; }	// getter
-			virtual void visualViewport(const DKString& visualViewport	{ DKTODO(); } 				// setter
+			virtual void visualViewport(const DKString& visualViewport)	{ DKTODO(); } 				// setter
 	//
 	//		// browsing context
 	//		undefined moveTo(long x, long y);
@@ -467,7 +467,7 @@ public:
 			virtual void pageYOffset(const double& pageYOffset)	{ DKTODO(); } 				// setter
 			
 	//		undefined scroll(optional ScrollToOptions options = {});
-			virtual void scroll(const DKString& option = "{}") {
+			virtual void scroll(const DKString& options = "{}") {
 				DKDEBUGFUNC(options);
 				DKTODO();
 			}
@@ -485,7 +485,7 @@ public:
 			}
 			
 	//		undefined scrollTo(unrestricted double x, unrestricted double y);
-			virtual void scrollTo(const double& x, const doublw& y) {
+			virtual void scrollTo(const double& x, const double& y) {
 				DKDEBUGFUNC(x, y);
 				DKTODO();
 			}
@@ -516,96 +516,98 @@ public:
 			} 
 	//
 	//		[Replaceable] readonly attribute long screenLeft;
-			virtual int screenLeft()						{ DKTODO(); return 0; }	// getter
-			virtual void screenLeft(const int&)				{ DKTODO(); } 			// setter
+			virtual const int& screenLeft()						{ DKTODO(); return 0; }	// getter
+			virtual void screenLeft(const int& screenLeft)		{ DKTODO(); } 			// setter
 	//
 	//		[Replaceable] readonly attribute long screenY;
-			virtual int screenY(){ 													// getter
+			virtual const int& screenY(){ 												// getter
 				int y;
 				SDL_GetWindowPosition(_window, NULL, &y);
 				return y;
 			}
-			virtual void screenY(const int& y){ 									// setter
+			virtual void screenY(const int& screenY){ 									// setter
 				int x;
 				SDL_GetWindowPosition(_window, &x, NULL);
-				SDL_SetWindowPosition(_window, x, y);
+				SDL_SetWindowPosition(_window, x, screenY);
 			}
 	//
 	//		[Replaceable] readonly attribute long screenTop;
-			virtual int screenTop()							{ DKTODO(); return 0; }	// getter
-			virtual void screenTop(const int&)				{ DKTODO(); } 			// setter
+			virtual const int& screenTop()						{ DKTODO(); return 0; }				// getter
+			virtual void screenTop(const int& screenTop)		{ DKTODO(); } 						// setter
 	//
 	//		[Replaceable] readonly attribute long outerWidth;
-			virtual int outerWidth(){										// getter
+			virtual const int& outerWidth(){														// getter
 				int width;
 				SDL_GetWindowSize(_window, &width, NULL);
 				return width;
 			}
-			virtual void outerWidth(const int& width){ 				 		// setter
+			virtual void outerWidth(const int& outerWidth){ 				 						// setter
 				int height;
 				SDL_GetWindowSize(_window, NULL, &height);
-				SDL_SetWindowSize(_window, width, height);
+				SDL_SetWindowSize(_window, outerWidth, height);
 			}
 	//
 	//		[Replaceable] readonly attribute long outerHeight;
-			virtual int outerHeight(){										// getter
+			virtual const int& outerHeight(){														// getter
 				int height;
 				SDL_GetWindowSize(_window, NULL, &height);
 				return height;
 			}	
-			virtual void outerHeight(const int& height){					// setter 
+			virtual void outerHeight(const int& outerHeight){										// setter 
 				int width;
 				SDL_GetWindowSize(_window, &width, NULL);
-				SDL_SetWindowSize(_window, width, height);
+				SDL_SetWindowSize(_window, width, outerHeight);
 			} 			
 	//
 	//		[Replaceable] readonly attribute double devicePixelRatio;
-			virtual double devicePixelRatio()				{ DKTODO(); return 0; }	// getter
-			virtual void devicePixelRatio(const double&)	{ DKTODO(); } 			// setter
+			virtual const double& devicePixelRatio()												{ DKTODO(); return 0; }		// getter
+			virtual void devicePixelRatio(const double& devicePixelRatio)							{ DKTODO(); } 				// setter
 	// };
 	
 	// Source: DeviceOrientation Event Specification (https://www.w3.org/TR/orientation-event/)
 	// partial interface Window {
 	//		[SecureContext] attribute EventHandler ondeviceorientation;
-			virtual DKString ondeviceorientation()						{ DKTODO(); return ""; }	// getter
-			virtual void ondeviceorientation(const DKString&)			{ DKTODO(); } 				// setter
+			virtual const DKString& ondeviceorientation()											{ DKTODO(); return ""; }	// getter
+			virtual void ondeviceorientation(const DKString& ondeviceorientation)					{ DKTODO(); } 				// setter
 	// };
 
 	// Source: DeviceOrientation Event Specification (https://www.w3.org/TR/orientation-event/)
 	// partial interface Window {
 	//		[SecureContext] attribute EventHandler ondeviceorientationabsolute;
-			virtual DKString ondeviceorientationabsolute()				{ DKTODO(); return ""; }	// getter
-			virtual void ondeviceorientationabsolute(const DKString&)	{ DKTODO(); } 				// setter
+			virtual const DKString& ondeviceorientationabsolute()									{ DKTODO(); return ""; }	// getter
+			virtual void ondeviceorientationabsolute(const DKString& ondeviceorientationabsolute)	{ DKTODO(); } 				// setter
 	// };
 
 	// Source: DeviceOrientation Event Specification (https://www.w3.org/TR/orientation-event/)
 	//	partial interface Window {
 	//		[SecureContext] attribute EventHandler ondevicemotion;
-			virtual DKString ondevicemotion()							{ DKTODO(); return ""; }	// getter
-			virtual void ondevicemotion(const DKString&)				{ DKTODO(); } 				// setter
+			virtual const DKString& ondevicemotion()												{ DKTODO(); return ""; }	// getter
+			virtual void ondevicemotion(const DKString& ondevicemotion)								{ DKTODO(); } 				// setter
 	// };
 
 	// Source: requestIdleCallback() (https://www.w3.org/TR/requestidlecallback/)
 	// partial interface Window {
 	//		unsigned long requestIdleCallback(IdleRequestCallback callback, optional IdleRequestOptions options = {});
-			virtual bool requestIdleCallback() {
+			virtual const unsigned int& requestIdleCallback(const DKString& callback, const DKString& options = "{}") {
 				DKDEBUGFUNC();
-				return DKTODO();
+				DKTODO();
+				return 0;
 			}
-	//
+
 	//		undefined cancelIdleCallback(unsigned long handle);
-			virtual bool cancelIdleCallback(DKString& handle) {
+			virtual void cancelIdleCallback(const unsigned int& handle) {
 				DKDEBUGFUNC(handle);
-				return DKTODO();
+				DKTODO();
 			}
 	// };
 
 	// Source: Selection API (https://www.w3.org/TR/selection-api/)
 	// partial interface Window {
 	//		Selection? getSelection();
-			virtual bool getSelection() {
+			virtual const DKString& getSelection() {
 				DKDEBUGFUNC();
-				return DKTODO();
+				DKTODO();
+				return "";
 			}
 	// };
 
@@ -613,9 +615,10 @@ public:
 	// partial interface Window {
 	//		[SecureContext]
 	//		Promise<ScreenDetails> getScreenDetails();
-			virtual bool getScreenDetails() {
+			virtual const DKString& getScreenDetails() {
 				DKDEBUGFUNC();
-				return DKTODO();
+				DKTODO();
+				return "";
 			}
 	// };
 
