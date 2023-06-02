@@ -338,11 +338,9 @@ public:
 	// Node getRootNode(optional GetRootNodeOptions options = {});
 	static int getRootNode(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _options = GetString(ctx);
-		DKString _node;
-		if(!eventTarget(ctx)->getRootNode(_options, _node))
-			return false;
-		dukglue_push(ctx, _node);	
+		DKString options = GetString(ctx);
+		DKString node = eventTarget(ctx)->getRootNode(options);
+		dukglue_push(ctx, node);	
 		return true;
 	}
 	
@@ -440,8 +438,7 @@ public:
 	// [CEReactions] undefined normalize();
 	static int normalize(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if(!eventTarget(ctx)->normalize())
-			return false;
+		eventTarget(ctx)->normalize();
 		return true;
 	}
 	

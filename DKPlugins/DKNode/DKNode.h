@@ -82,44 +82,45 @@ public:
 	
 	// readonly attribute unsigned short nodeType;
 	unsigned short _nodeType = 0;
-	virtual const unsigned short& nodeType()					{ return _nodeType; }				// getter
-	virtual void nodeType(const unsigned short& nodeType)		{ _nodeType = nodeType; } 			// setter
+	virtual const unsigned short& nodeType()						{ return _nodeType; }					// getter
+	virtual void nodeType(const unsigned short& nodeType)			{ _nodeType = nodeType; } 				// setter
 	
 	// readonly attribute DOMString nodeName;
 	DOMString _nodeName = "";
-	virtual const DOMString& nodeName()							{ return _nodeName; }				// getter
-	virtual void nodeName(const DOMString& nodeName)			{ _nodeName = nodeName} 			// setter
+	virtual const DOMString& nodeName()								{ return _nodeName; }					// getter
+	virtual void nodeName(const DOMString& nodeName)				{ _nodeName = nodeName; } 				// setter
 
 	// readonly attribute USVString baseURI;
 	USVString _baseURI = "";
-	virtual const USVString& baseURI()							{ return _baseURI; }				// getter
-	virtual void baseURI(const USVString& baseURI)				{ _baseURI = baseURI; } 			// setter
+	virtual const USVString& baseURI()								{ return _baseURI; }					// getter
+	virtual void baseURI(const USVString& baseURI)					{ _baseURI = baseURI; } 				// setter
 
 	// readonly attribute boolean isConnected;
 	bool _isConnected = false;
-	virtual const bool& isConnected()							{ return _isConnected; }			// getter
-	virtual void isConnected(const bool& isConnected)			{ _isConnected = isConnected; } 	// setter
+	virtual const bool& isConnected()								{ return _isConnected; }				// getter
+	virtual void isConnected(const bool& isConnected)				{ _isConnected = isConnected; } 		// setter
 	
 	// readonly attribute Document? ownerDocument;
 	DKString _ownerDocument = "";
-	virtual const DKString& ownerDocument()						{ return _ownerDocument; }			// getter
-	virtual void ownerDocument(const DKString& ownerDocument)	{ _ownerDocument = ownerDocument; } // setter
+	virtual const DKString& ownerDocument()							{ return _ownerDocument; }				// getter
+	virtual void ownerDocument(const DKString& ownerDocument)		{ _ownerDocument = ownerDocument; }	 	// setter
 	
 	// Node getRootNode(optional GetRootNodeOptions options = {});
-	virtual bool getRootNode(DKString& _options, DKString& _node) {
-		DKDEBUGFUNC(_options, _node);
-		return DKTODO();
+	DKString _getRootNode = "";
+	virtual const DKString& getRootNode(const DKString& options = "{}") {
+		DKDEBUGFUNC(options);
+		return _getRootNode;
 	}
 	
 	// readonly attribute Node? parentNode;
 	DKString _parentNode = "";
-	virtual const DKString& parentNode()						{ return _parentNode; }				// getter
-	virtual void parentNode(const DKString& parentNode)			{ _parentNode = parentNode; } 		// setter
+	virtual const DKString& parentNode()							{ return _parentNode; }					// getter
+	virtual void parentNode(const DKString& parentNode)				{ _parentNode = parentNode; } 			// setter
 	
 	// readonly attribute Element? parentElement;
 	DKString _parentElement = "";
-	virtual const DKString& parentElement()						{ return _parentElement; }			// getter
-	virtual void parentElement(const DKString& parentElement)	{ _parentElement = parentElement; } // setter
+	virtual const DKString& parentElement()							{ return _parentElement; }				// getter
+	virtual void parentElement(const DKString& parentElement)		{ _parentElement = parentElement; } 	// setter
 	
 	// boolean hasChildNodes();
 	virtual bool hasChildNodes(bool& _hasChildNodes) {
@@ -128,37 +129,44 @@ public:
 	}
 	
 	// [SameObject] readonly attribute NodeList childNodes;
-	virtual DKString childNodes()							{ return ""; }		// getter
-	virtual void childNodes(const DKString&)				{ } 				// setter
+	DKString _childNodes = "";
+	virtual const DKString& childNodes()							{ return _childNodes; }					// getter
+	virtual void childNodes(const DKString& childNodes)				{ _childNodes = childNodes; } 			// setter
 	
 	// readonly attribute Node? firstChild;
-	virtual DKString firstChild()							{ return ""; }		// getter
-	virtual void firstChild(const DKString&)				{ } 				// setter
+	DKString _firstChild = "";
+	virtual const DKString& firstChild()							{ return _firstChild; }					// getter
+	virtual void firstChild(const DKString& firstChild)				{ _firstChild = firstChild; } 			// setter
 	
 	// readonly attribute Node? lastChild;
-	virtual DKString lastChild()							{ return ""; }		// getter
-	virtual void lastChild(const DKString&)					{ } 				// setter
+	DKString _lastChild = "";
+	virtual const DKString& lastChild()								{ return _lastChild; }					// getter
+	virtual void lastChild(const DKString& lastChild)				{ _lastChild = lastChild; } 			// setter
 	
 	// readonly attribute Node? previousSibling;
-	virtual DKString previousSibling()						{ return ""; }		// getter
-	virtual void previousSibling(const DKString&)			{ } 				// setter
+	DKString _previousSibling = "";
+	virtual const DKString& previousSibling()						{ return _previousSibling; }			// getter
+	virtual void previousSibling(const DKString& previousSibling)	{ _previousSibling = previousSibling; } // setter
 	
 	// readonly attribute Node? nextSibling;
-	virtual DKString nextSibling()							{ return ""; }		// getter
-	virtual void nextSibling(const DKString&)				{ } 				// setter
+	DKString _nextSibling = "";
+	virtual const DKString& nextSibling()							{ return _nextSibling; }				// getter
+	virtual void nextSibling(const DKString& nextSibling)			{ _nextSibling = nextSibling; } 		// setter
 
 	// [CEReactions] attribute DOMString? nodeValue;
-	virtual DKString nodeValue()							{ return ""; }		// getter
-	virtual void nodeValue(const DKString&)					{ } 				// setter
+	DKString _nodeValue = "";
+	virtual const DKString& nodeValue()								{ return _nodeValue; }					// getter
+	virtual void nodeValue(const DKString& nodeValue)				{ _nodeValue = nodeValue; } 			// setter
 	
 	// [CEReactions] attribute DOMString? textContent;
-	virtual DOMString textContent()							{ return ""; }		// getter
-	virtual void textContent(const DOMString&)				{ } 				// setter
+	DOMString _textContent = "";
+	virtual const DOMString& textContent()							{ return _textContent; }				// getter
+	virtual void textContent(const DOMString& textContent)			{ _textContent = textContent; } 		// setter
 	
 	// [CEReactions] undefined normalize();
-	virtual bool normalize() {
+	virtual void normalize() {
 		DKDEBUGFUNC();
-		return DKTODO();
+		DKTODO();
 	}
 
 	// [CEReactions, NewObject] Node cloneNode(optional boolean deep = false);
