@@ -338,8 +338,8 @@ public:
 	// Node getRootNode(optional GetRootNodeOptions options = {});
 	static int getRootNode(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString options = GetString(ctx);
-		DKString node = eventTarget(ctx)->getRootNode(options);
+		const DKString options = GetString(ctx);
+		const DKString& node = eventTarget(ctx)->getRootNode(options);
 		dukglue_push(ctx, node);	
 		return true;
 	}
@@ -445,33 +445,27 @@ public:
 	// [CEReactions, NewObject] Node cloneNode(optional boolean deep = false);
 	static int cloneNode(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		bool _deep = GetBool(ctx);
-		DKString _node;
-		if(!eventTarget(ctx)->cloneNode(_deep, _node))
-			return false;
-		dukglue_push(ctx, _node);	
+		bool deep = GetBool(ctx);
+		DKString node = eventTarget(ctx)->cloneNode(deep);
+		dukglue_push(ctx, node);	
 		return true;
 	}
 	
 	// boolean isEqualNode(Node? otherNode);
 	static int isEqualNode(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _otherNode = GetString(ctx);
-		bool _isEqualNode;
-		if(!eventTarget(ctx)->isEqualNode(_otherNode, _isEqualNode))
-			return false;
-		dukglue_push(ctx, _isEqualNode);	
+		DKString otherNode = GetString(ctx);
+		bool isEqualNode = eventTarget(ctx)->isEqualNode(otherNode);
+		dukglue_push(ctx, isEqualNode);	
 		return true;
 	}
 	
 	// boolean isSameNode(Node? otherNode); // legacy alias of ===
 	static int isSameNode(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _otherNode = GetString(ctx);
-		bool _isSameNode;
-		if(!eventTarget(ctx)->isSameNode(_otherNode, _isSameNode))
-			return false;
-		dukglue_push(ctx, _isSameNode);	
+		DKString otherNode = GetString(ctx);
+		bool isSameNode = eventTarget(ctx)->isSameNode(otherNode);
+		dukglue_push(ctx, isSameNode);	
 		return true;
 	}
 	
@@ -520,22 +514,18 @@ public:
 	// unsigned short compareDocumentPosition(Node other);
 	static int compareDocumentPosition(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _other = GetString(ctx);
-		unsigned short _compareDocumentPosition;
-		if(!eventTarget(ctx)->compareDocumentPosition(_other, _compareDocumentPosition))
-			return false;
-		dukglue_push(ctx, _compareDocumentPosition);	
+		DKString other = GetString(ctx);
+		unsigned short compareDocumentPosition = eventTarget(ctx)->compareDocumentPosition(other);
+		dukglue_push(ctx, compareDocumentPosition);	
 		return true;
 	}
 	
 	// boolean contains(Node? other);
 	static int contains(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _other = GetString(ctx);
-		bool _contains;
-		if(!eventTarget(ctx)->contains(_other, _contains))
-			return false;
-		dukglue_push(ctx, _contains);	
+		DKString other = GetString(ctx);
+		bool contains = eventTarget(ctx)->contains(other);
+		dukglue_push(ctx, contains);	
 		return true;
 	}
 	
@@ -543,10 +533,8 @@ public:
 	static int lookupPrefix(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString _namespace = GetString(ctx);
-		DKString _lookupPrefix;
-		if(!eventTarget(ctx)->lookupPrefix(_namespace, _lookupPrefix))
-			return false;
-		dukglue_push(ctx, _lookupPrefix);	
+		DKString lookupPrefix = eventTarget(ctx)->lookupPrefix(_namespace);
+		dukglue_push(ctx, lookupPrefix);	
 		return true;
 	}
 	
@@ -554,10 +542,8 @@ public:
 	static int lookupNamespaceURI(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString _namespace = GetString(ctx);
-		DKString _lookupNamespaceURI;
-		if(!eventTarget(ctx)->lookupNamespaceURI(_namespace, _lookupNamespaceURI))
-			return false;
-		dukglue_push(ctx, _lookupNamespaceURI);	
+		DKString lookupNamespaceURI = eventTarget(ctx)->lookupNamespaceURI(_namespace);
+		dukglue_push(ctx, lookupNamespaceURI);	
 		return true;
 	}
 	
@@ -565,56 +551,46 @@ public:
 	static int isDefaultNamespace(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString _namespace = GetString(ctx);
-		bool _isDefaultNamespace;
-		if(!eventTarget(ctx)->isDefaultNamespace(_namespace, _isDefaultNamespace))
-			return false;
-		dukglue_push(ctx, _isDefaultNamespace);	
+		bool isDefaultNamespace = eventTarget(ctx)->isDefaultNamespace(_namespace);
+		dukglue_push(ctx, isDefaultNamespace);	
 		return true;
 	}
 	
 	// [CEReactions] Node insertBefore(Node node, Node? child);
 	static int insertBefore(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _node = GetString(ctx);
-		DKString _child = GetString(ctx, 2);
-		DKString _insertBefore;
-		if(!eventTarget(ctx)->insertBefore(_node, _child, _insertBefore))
-			return false;
-		dukglue_push(ctx, _insertBefore);	
+		DKString node = GetString(ctx);
+		DKString child = GetString(ctx, 2);
+		DKString insertBefore = eventTarget(ctx)->insertBefore(node, child);
+		dukglue_push(ctx, insertBefore);	
 		return true;
 	}
 	
 	// [CEReactions] Node appendChild(Node node);
 	static int appendChild(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _node = GetString(ctx);
-		DKString _appendChild;
-		if(!eventTarget(ctx)->appendChild(_node, _appendChild))
-			return false;
-		dukglue_push(ctx, _appendChild);	
+		DKString node = GetString(ctx);
+		DKString appendChild = eventTarget(ctx)->appendChild(node);
+		dukglue_push(ctx, appendChild);	
 		return true;
 	}
 	
 	// [CEReactions] Node replaceChild(Node node, Node child);
 	static int replaceChild(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _node = GetString(ctx);
-		DKString _child = GetString(ctx, 2);
-		DKString _replaceChild;
-		if(!eventTarget(ctx)->replaceChild(_node, _child, _replaceChild))
-			return false;
-		dukglue_push(ctx, _replaceChild);	
+		DKString node = GetString(ctx);
+		DKString child = GetString(ctx, 2);
+		DKString replaceChild = eventTarget(ctx)->replaceChild(node, child);
+		dukglue_push(ctx, replaceChild);	
 		return true;
 	}
 	
 	// [CEReactions] Node removeChild(Node child);
 	static int removeChild(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _node = GetString(ctx);
-		DKString _removeChild;
-		if(!eventTarget(ctx)->removeChild(_node, _removeChild))
-			return false;
-		dukglue_push(ctx, _removeChild);	
+		DKString node = GetString(ctx);
+		DKString removeChild = eventTarget(ctx)->removeChild(node);
+		dukglue_push(ctx, removeChild);	
 		return true;
 	}
 };

@@ -170,105 +170,117 @@ public:
 	}
 
 	// [CEReactions, NewObject] Node cloneNode(optional boolean deep = false);
-	virtual bool cloneNode(bool& _deep, DKString& _cloneNode) {
-		DKDEBUGFUNC(_deep, _cloneNode);
-		return DKTODO();
+	DKString _cloneNode = "";
+	virtual const DKString& cloneNode(const bool& deep) {
+		DKDEBUGFUNC(deep);
+		return _cloneNode;
 	}
 	
 	// boolean isEqualNode(Node? otherNode);
-	virtual bool isEqualNode(DKString& _otherNode, bool& _isEqualNode) {
-		DKDEBUGFUNC(_otherNode, _isEqualNode);
-		return DKTODO();
+	bool _isEqualNode = false;
+	virtual const bool& isEqualNode(const DKString& otherNode) {
+		DKDEBUGFUNC(otherNode);
+		return _isEqualNode;
 	}
 	
 	// boolean isSameNode(Node? otherNode); // legacy alias of ===
-	virtual bool isSameNode(DKString& _otherNode, bool& _isSameNode) {
-		DKDEBUGFUNC(_otherNode, _isSameNode);
-		return DKTODO();
+	bool _isSameNode = false;
+	virtual const bool& isSameNode(const DKString& otherNode) {
+		DKDEBUGFUNC(otherNode);
+		return _isSameNode;
 	}
 
 	// const unsigned short DOCUMENT_POSITION_DISCONNECTED = 0x01;
 	const unsigned short _DOCUMENT_POSITION_DISCONNECTED = 0x01;
-	virtual unsigned short DOCUMENT_POSITION_DISCONNECTED()												{ return _DOCUMENT_POSITION_DISCONNECTED; }								// getter
+	virtual const unsigned short& DOCUMENT_POSITION_DISCONNECTED()										{ return _DOCUMENT_POSITION_DISCONNECTED; }								// getter
 	//virtual void DOCUMENT_POSITION_DISCONNECTED(const unsigned short& DOCUMENT_POSITION_DISCONNECTED)	{ _DOCUMENT_POSITION_DISCONNECTED = DOCUMENT_POSITION_DISCONNECTED; }	// setter
 	
 	// const unsigned short DOCUMENT_POSITION_PRECEDING = 0x02;
 	const unsigned short _DOCUMENT_POSITION_PRECEDING = 0x02;
-	virtual unsigned short DOCUMENT_POSITION_PRECEDING()												{ return _DOCUMENT_POSITION_PRECEDING; }								// getter
+	virtual const unsigned short& DOCUMENT_POSITION_PRECEDING()											{ return _DOCUMENT_POSITION_PRECEDING; }								// getter
 	//virtual void DOCUMENT_POSITION_PRECEDING(const unsigned short& DOCUMENT_POSITION_PRECEDING)		{ _DOCUMENT_POSITION_PRECEDING = DOCUMENT_POSITION_PRECEDING; }			// setter
 	
 	// const unsigned short DOCUMENT_POSITION_FOLLOWING = 0x04;
 	const unsigned short _DOCUMENT_POSITION_FOLLOWING = 0x04;
-	virtual unsigned short DOCUMENT_POSITION_FOLLOWING()												{ return _DOCUMENT_POSITION_FOLLOWING; }								// getter
+	virtual const unsigned short& DOCUMENT_POSITION_FOLLOWING()											{ return _DOCUMENT_POSITION_FOLLOWING; }								// getter
 	//virtual void DOCUMENT_POSITION_FOLLOWING(const unsigned short& DOCUMENT_POSITION_FOLLOWING)		{ _DOCUMENT_POSITION_FOLLOWING = DOCUMENT_POSITION_FOLLOWING; }			// setter
 	
 	// const unsigned short DOCUMENT_POSITION_CONTAINS = 0x08;
 	const unsigned short _DOCUMENT_POSITION_CONTAINS = 0x08;
-	virtual unsigned short DOCUMENT_POSITION_CONTAINS()													{ return _DOCUMENT_POSITION_CONTAINS; }									// getter
+	virtual const unsigned short& DOCUMENT_POSITION_CONTAINS()											{ return _DOCUMENT_POSITION_CONTAINS; }									// getter
 	//virtual void DOCUMENT_POSITION_CONTAINS(const unsigned short& DOCUMENT_POSITION_CONTAINS)			{ _DOCUMENT_POSITION_CONTAINS = DOCUMENT_POSITION_CONTAINS; }			// setter
 	
 	// const unsigned short DOCUMENT_POSITION_CONTAINED_BY = 0x10;
 	const unsigned short _DOCUMENT_POSITION_CONTAINED_BY = 0x10;
-	virtual unsigned short DOCUMENT_POSITION_CONTAINED_BY()												{ return _DOCUMENT_POSITION_CONTAINED_BY; }								// getter
+	virtual const unsigned short& DOCUMENT_POSITION_CONTAINED_BY()										{ return _DOCUMENT_POSITION_CONTAINED_BY; }								// getter
 	//virtual void DOCUMENT_POSITION_CONTAINED_BY(const unsigned short& DOCUMENT_POSITION_CONTAINED_BY)	{ _DOCUMENT_POSITION_CONTAINED_BY = DOCUMENT_POSITION_CONTAINED_BY; }	// setter
 	
 	// const unsigned short DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC = 0x20;
 	const unsigned short _DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC = 0x20;
-	virtual unsigned short DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC()															{ return _DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC; }										// getter
+	virtual const unsigned short& DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC()													{ return _DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC; }										// getter
 	//virtual void DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC(const unsigned short& DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC)	{ _DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC = DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC; }	// setter
 	
 	// unsigned short compareDocumentPosition(Node other);
-	virtual bool compareDocumentPosition(DKString& _other, unsigned short& _compareDocumentPosition) {
-		DKDEBUGFUNC(_other, _compareDocumentPosition);
-		return DKTODO();
+	unsigned short _compareDocumentPosition = 0;
+	virtual const unsigned short& compareDocumentPosition(const DKString& other) {
+		DKDEBUGFUNC(other);
+		return _compareDocumentPosition;
 	}
 	
 	// boolean contains(Node? other);
-	virtual bool contains(DKString& _other, bool& _contains) {
-		DKDEBUGFUNC(_other, _contains);
-		return DKTODO();
+	bool _contains = false;
+	virtual const bool& contains(const DKString& other) {
+		DKDEBUGFUNC(other);
+		return _contains;
 	}
 	
 	// DOMString? lookupPrefix(DOMString? namespace);
-	virtual bool lookupPrefix(DOMString& _namespace, DOMString& _lookupPrefix) {
-		DKDEBUGFUNC(_namespace, _lookupPrefix);
-		return DKTODO();
+	DOMString _lookupPrefix = "";
+	virtual const DOMString& lookupPrefix(const DOMString& _namespace) {
+		DKDEBUGFUNC(_namespace);
+		return _lookupPrefix;
 	}
 	
 	// DOMString? lookupNamespaceURI(DOMString? prefix);
-	virtual bool lookupNamespaceURI(DOMString& _prefix, DOMString& _lookupNamespaceURI) {
-		DKDEBUGFUNC(_prefix, _lookupNamespaceURI);
-		return DKTODO();
+	DOMString _lookupNamespaceURI = "";
+	virtual const DOMString& lookupNamespaceURI(const DOMString& prefix) {
+		DKDEBUGFUNC(prefix);
+		return _lookupNamespaceURI;
 	}
 	
 	// boolean isDefaultNamespace(DOMString? namespace);
-	virtual bool isDefaultNamespace(DOMString& _namespace, bool& _isDefaultNamespace) {
-		DKDEBUGFUNC(_namespace, _isDefaultNamespace);
-		return DKTODO();
+	bool _isDefaultNamespace = false;
+	virtual const bool& isDefaultNamespace(const DOMString& _namespace) {
+		DKDEBUGFUNC(_namespace);
+		return _isDefaultNamespace;
 	}
 	
 	// [CEReactions] Node insertBefore(Node node, Node? child);
-	virtual bool insertBefore(DKString& _node, DKString& _child, DKString& _insertBefore) {
-		DKDEBUGFUNC(_node, _child, _insertBefore);
-		return DKTODO();
+	DKString _insertBefore = "";
+	virtual const DKString& insertBefore(const DKString& node, const DKString& child) {
+		DKDEBUGFUNC(node, child);
+		return _insertBefore;
 	}
 	
 	// [CEReactions] Node appendChild(Node node);
-	virtual bool appendChild(DKString& _node, DKString& _appendChild) {
-		DKDEBUGFUNC(_node, _appendChild);
-		return DKTODO();
+	DKString _appendChild = "";
+	virtual const DKString& appendChild(const DKString& node) {
+		DKDEBUGFUNC(node);
+		return _appendChild;
 	}
 	
 	// [CEReactions] Node replaceChild(Node node, Node child);
-	virtual bool replaceChild(DKString& _node, DKString& _child, DKString& _replaceChild) {
-		DKDEBUGFUNC(_node, _child, _replaceChild);
-		return DKTODO();
+	DKString _replaceChild = "";
+	virtual const DKString& replaceChild(const DKString& node, const DKString& child) {
+		DKDEBUGFUNC(node, child);
+		return _replaceChild;
 	}
 	
 	// [CEReactions] Node removeChild(Node child);
-	virtual bool removeChild(DKString& _child, DKString& _removeChild) {
-		DKDEBUGFUNC(_child, _removeChild);
-		return DKTODO();
+	DKString _removeChild = "";
+	virtual const DKString& removeChild(const DKString& child) {
+		DKDEBUGFUNC(child);
+		return _removeChild;
 	}
 };
 
