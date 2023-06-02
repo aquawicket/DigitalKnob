@@ -19,173 +19,165 @@ public:
 	
 	// Logging
 	//undefined assert(optional boolean condition = false, any... data);
-	static bool _assert(const DKString& data) {
+	static void _assert(const DKString& data) {
 		DKDEBUGFUNC(data);
 		DKERROR(data+"\n");
-		return true;
 	}
-	static bool _assert(const bool& condition, const DKString& data){
+	static void _assert(const bool& condition, const DKString& data){
 		DKDEBUGFUNC(condition, data);
 		if(!condition)
 			_assert(data);
-		return true;
 	}
-	static bool _assert(const char* data){							return _assert(toString(data)); }
-	static bool _assert(const bool& data){							return _assert(toString(data)); }
-	static bool _assert(const int& data){							return _assert(toString(data)); }
-	static bool _assert(const double& data){						return _assert(toString(data)); }
-	static bool _assert(const bool& condition, const char* data){	return _assert(condition, toString(data)); }
-	static bool _assert(const bool& condition, const bool& data){	return _assert(condition, toString(data)); }
-	static bool _assert(const bool& condition, const int& data){	return _assert(condition, toString(data)); }
-	static bool _assert(const bool& condition, const double& data){	return _assert(condition, toString(data)); }
+	static void _assert(const char* data)							{ _assert(toString(data)); }
+	static void _assert(const bool& data)							{ _assert(toString(data)); }
+	static void _assert(const int& data)							{ _assert(toString(data)); }
+	static void _assert(const double& data)							{ _assert(toString(data)); }
+	static void _assert(const bool& condition, const char* data)	{ _assert(condition, toString(data)); }
+	static void _assert(const bool& condition, const bool& data)	{ _assert(condition, toString(data)); }
+	static void _assert(const bool& condition, const int& data)		{ _assert(condition, toString(data)); }
+	static void _assert(const bool& condition, const double& data)	{ _assert(condition, toString(data)); }
 
 	//undefined clear();
-	static bool clear() {
+	static void clear() {
 		DKDEBUGFUNC();
 		int rtnvalue = DKUtil::System("cls", rtnvalue);
-		return true;
 	}
 
 	//undefined debug(any... data);
-	static bool debug(const DKString& data) {
+	static void debug(const DKString& data) {
 		DKDEBUGFUNC(data);
 		DKDEBUG(data+"\n");
-		return true;
 	}
-	static bool debug(const char* data){	return debug(toString(data)); }
-	static bool debug(const bool& data){	return debug(toString(data)); }
-	static bool debug(const int& data){		return debug(toString(data)); }
-	static bool debug(const double& data){	return debug(toString(data)); }
+	static void debug(const char* data)		{ debug(toString(data)); }
+	static void debug(const bool& data)		{ debug(toString(data)); }
+	static void debug(const int& data)		{ debug(toString(data)); }
+	static void debug(const double& data)	{ debug(toString(data)); }
 	
 	//undefined error(any... data);
-	static bool error(const DKString& data) {
+	static void error(const DKString& data) {
 		DKDEBUGFUNC(data);
 		DKERROR(data+"\n");
-		return true;
 	}
-	static bool error(const char* data){	return error(toString(data)); }
-	static bool error(const bool& data){	return error(toString(data)); }
-	static bool error(const int& data){		return error(toString(data)); }
-	static bool error(const double& data){	return error(toString(data)); }
+	static void error(const char* data)		{ error(toString(data)); }
+	static void error(const bool& data)		{ error(toString(data)); }
+	static void error(const int& data)		{ error(toString(data)); }
+	static void error(const double& data)	{ error(toString(data)); }
 	
 	//undefined info(any... data);
-	static bool info(const DKString& data) {
+	static void info(const DKString& data) {
 		DKDEBUGFUNC(data);
 		DKINFO(data+"\n");
-		return true;
 	}
-	static bool info(const char* data){		return info(toString(data)); }
-	static bool info(const bool& data){		return info(toString(data)); }
-	static bool info(const int& data){		return info(toString(data)); }
-	static bool info(const double& data){	return info(toString(data)); }
+	static void info(const char* data)	{ info(toString(data)); }
+	static void info(const bool& data)	{ info(toString(data)); }
+	static void info(const int& data)	{ info(toString(data)); }
+	static void info(const double& data){ info(toString(data)); }
 
 	//undefined log(any... data);
-	static bool log(const DKString& data) {
+	static void log(const DKString& data) {
 		DKDEBUGFUNC(data);
 		DKINFO(data+"\n");
-		return true;
 	}
-	static bool log(const char* data){		return log(toString(data)); }
-	static bool log(const bool& data){		return log(toString(data));	}
-	static bool log(const int& data){		return log(toString(data));	}
-	static bool log(const double& data){	return log(toString(data));	}
+	static void log(const char* data)	{ log(toString(data)); }
+	static void log(const bool& data)	{ log(toString(data)); }
+	static void log(const int& data)	{ log(toString(data)); }
+	static void log(const double& data)	{ log(toString(data)); }
 	
 	//undefined table(optional any tabularData, optional sequence<DOMString> properties);
-	static bool table() {
+	static void table() {
 		DKDEBUGFUNC();
-		return DKTODO();
+		DKTODO();
 	}
 	
 	//undefined trace(any... data);
-	static bool trace(const DKString& data) {
+	static void trace(const DKString& data) {
 		DKDEBUGFUNC(data);
-		return DKTODO();
+		DKTODO();
 	}
-	static bool trace(const char* data){	return trace(toString(data)); }
-	static bool trace(const bool& data){	return trace(toString(data)); }
-	static bool trace(const int& data){		return trace(toString(data)); }
-	static bool trace(const double& data){	return trace(toString(data)); }
+	static void trace(const char* data)		{ trace(toString(data)); }
+	static void trace(const bool& data)		{ trace(toString(data)); }
+	static void trace(const int& data)		{ trace(toString(data)); }
+	static void trace(const double& data)	{ trace(toString(data)); }
 	
 	//undefined warn(any... data);
-	static bool warn(const DKString& data) {
+	static void warn(const DKString& data) {
 		DKDEBUGFUNC(data);
 		DKWARN(data+"\n");
-		return true;
 	}
-	static bool warn(const char* data){		return warn(toString(data)); }
-	static bool warn(const bool& data){		return warn(toString(data)); }
-	static bool warn(const int& data){		return warn(toString(data)); }
-	static bool warn(const double& data){	return warn(toString(data)); }
+	static void warn(const char* data)	{ warn(toString(data)); }
+	static void warn(const bool& data)	{ warn(toString(data)); }
+	static void warn(const int& data)	{ warn(toString(data)); }
+	static void warn(const double& data){ warn(toString(data)); }
 	
 	//undefined dir(optional any item, optional object? options);
-	static bool dir() {
+	static void dir() {
 		DKDEBUGFUNC();
-		return DKTODO();
+		DKTODO();
 	}
 	
 	//undefined dirxml(any... data);
-	static bool dirxml(const DKString& data) {
+	static void dirxml(const DKString& data) {
 		DKDEBUGFUNC(data);
-		return DKTODO();
+		DKTODO();
 	}
 	
 	// Counting
 	//undefined count(optional DOMString label = "default");
-	static bool count() {
+	static void count() {
 		DKDEBUGFUNC();
-		return DKTODO();
+		DKTODO();
 	}
 	
 	//undefined countReset(optional DOMString label = "default");
-	static bool countReset() {
+	static void countReset() {
 		DKDEBUGFUNC();
-		return DKTODO();
+		DKTODO();
 	}
 	
 	// Grouping
 	//undefined group(any... data);
-	static bool group(const DKString& data) {
+	static void group(const DKString& data) {
 		DKDEBUGFUNC(data);
-		return DKTODO();
+		DKTODO();
 	}
-	static bool group(const char* data){	return group(toString(data)); }
-	static bool group(const bool& data){	return group(toString(data)); }
-	static bool group(const int& data){		return group(toString(data)); }
-	static bool group(const double& data){	return group(toString(data)); }
+	static void group(const char* data)		{ group(toString(data)); }
+	static void group(const bool& data)		{ group(toString(data)); }
+	static void group(const int& data)		{ group(toString(data)); }
+	static void group(const double& data)	{ group(toString(data)); }
 	
 	//undefined groupCollapsed(any... data);
-	static bool groupCollapsed(const DKString& data) {
+	static void groupCollapsed(const DKString& data) {
 		DKDEBUGFUNC(data);
-		return DKTODO();
+		DKTODO();
 	}
-	static bool groupCollapsed(const char* data){	return groupCollapsed(toString(data)); }
-	static bool groupCollapsed(const bool& data){	return groupCollapsed(toString(data)); }
-	static bool groupCollapsed(const int& data){	return groupCollapsed(toString(data)); }
-	static bool groupCollapsed(const double& data){	return groupCollapsed(toString(data)); }
+	static void groupCollapsed(const char* data)	{ groupCollapsed(toString(data)); }
+	static void groupCollapsed(const bool& data)	{ groupCollapsed(toString(data)); }
+	static void groupCollapsed(const int& data)		{ groupCollapsed(toString(data)); }
+	static void groupCollapsed(const double& data)	{ groupCollapsed(toString(data)); }
 	
 	//undefined groupEnd();
-	static bool groupEnd() {
+	static void groupEnd() {
 		DKDEBUGFUNC();
-		return DKTODO();
+		DKTODO();
 	}
 	
 	// Timing
 	//undefined time(optional DOMString label = "default");
-	static bool time() {
+	static void time() {
 		DKDEBUGFUNC();
-		return DKTODO();
+		DKTODO();
 	}
 	
 	//undefined timeLog(optional DOMString label = "default", any... data);
-	static bool timeLog() {
+	static void timeLog() {
 		DKDEBUGFUNC();
-		return DKTODO();
+		DKTODO();
 	}
 	
 	//undefined timeEnd(optional DOMString label = "default");
-	static bool timeEnd() {
+	static void timeEnd() {
 		DKDEBUGFUNC();
-		return DKTODO();
+		DKTODO();
 	}
 };
 
