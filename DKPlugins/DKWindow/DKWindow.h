@@ -25,70 +25,84 @@ public:
 	// the current browsing context
 	// [LegacyUnforgeable] readonly attribute WindowProxy window;
 	DKString _window = "";
-	virtual const DKString& window()				{ return _window; }		// getter
-	virtual void window(const DKString& window)		{ _window = window; }	// setter
+	virtual const DKString& window()							{ return _window; }						// getter
+	virtual void window(const DKString& window)					{ _window = window; }					// setter
 	
 	// [Replaceable] readonly attribute WindowProxy self;
-	virtual DKString self()							{ return ""; }		// getter
-	virtual void self(const DKString&)				{ } 				// setter
+	DKString _self = "";
+	virtual const DKString& self()								{ return _self; }						// getter
+	virtual void self(const DKString& self)						{ _self = _elf; } 						// setter
 	
 	// [LegacyUnforgeable] readonly attribute Document document;
-	virtual DKString document()						{ return ""; }	// getter
-	virtual void document(const DKString&)			{ } 			// setter
+	DKString _document = "";
+	virtual const DKString& document()							{ return _document; }					// getter
+	virtual void document(const DKString& document)				{ _document = document; } 				// setter
 	
 	// attribute DOMString name;
-	virtual DOMString name()						{ return ""; }	// getter
-	virtual void name(const DOMString&)				{ } 			// setter
+	DOMString _name = "";
+	virtual const DOMString& name()								{ return _name; }						// getter
+	virtual void name(const DOMString& name)					{ _name = name; } 						// setter
 	
 	// [PutForwards=href, LegacyUnforgeable] readonly attribute Location location;
-	virtual DKString location()						{ return ""; }	// getter
-	virtual void location(const DKString&)			{ } 			// setter
+	DKString _location = "";
+	virtual const DKString& location()							{ return _location; }					// getter
+	virtual void location(const DKString& location)				{ _location = location; } 				// setter
 	
 	// readonly attribute History history;
-	virtual DKString history()						{ return ""; }	// getter
-	virtual void history(const DKString&)			{ } 			// setter
+	DKString _history = "";
+	virtual const DKString& history()							{ return _history; }					// getter
+	virtual void history(const DKString& history)				{ _history = history} 					// setter
 	
 	// readonly attribute CustomElementRegistry customElements;
-	virtual DKString customElements()				{ return ""; }	// getter
-	virtual void customElements(const DKString&)	{ } 			// setter
+	DKString _customElements = "";
+	virtual const DKString& customElements()					{ return _customElements; }				// getter
+	virtual void customElements(const DKString& customElements)	{ _customElements = customElements; } 	// setter
 	
 	// [Replaceable] readonly attribute BarProp locationbar;
-	virtual DKString locationbar()					{ return ""; }	// getter
-	virtual void locationbar(const DKString&)		{ } 			// setter
+	DKString _locationbar = "";
+	virtual const DKString locationbar()						{ return _locationbar; }				// getter
+	virtual void locationbar(const DKString& locationbar)		{ _locationbar = locationbar; } 		// setter
 	
 	// [Replaceable] readonly attribute BarProp menubar;
-	virtual DKString menubar()						{ return ""; }	// getter
-	virtual void menubar(const DKString&)			{ } 			// setter
+	DKString _menubar = "";
+	virtual const DKString& menubar()							{ return _menubar; }					// getter
+	virtual void menubar(const DKString& menubar)				{ _menubar = menubar; } 				// setter
 	
 	// [Replaceable] readonly attribute BarProp personalbar;
-	virtual DKString personalbar()					{ return ""; }	// getter
-	virtual void personalbar(const DKString&)		{ } 			// setter
+	DKString _personalbar = "";
+	virtual const DKString& personalbar()						{ return _personalbar; }				// getter
+	virtual void personalbar(const DKString& personalbar)		{ _personalbar = personalbar; } 		// setter
 	
 	// [Replaceable] readonly attribute BarProp scrollbars;
-	virtual DKString scrollbars()					{ return ""; }	// getter
-	virtual void scrollbars(const DKString&)		{ } 			// setter
+	DKString _scrollbars = "";
+	virtual const DKString& scrollbars()						{ return _scrollbars; }					// getter
+	virtual void scrollbars(const DKString& scrollbars)			{ _scrollbars = scrollbars; } 			// setter
 	
 	// [Replaceable] readonly attribute BarProp statusbar;
-	virtual DKString statusbar()					{ return ""; }	// getter
-	virtual void statusbar(const DKString&)			{ } 			// setter
+	DKString _statusbar = "";
+	virtual const DKString& statusbar()							{ return _statusbar; }					// getter
+	virtual void statusbar(const DKString& statusbar)			{ _statusbar = statusbar; } 			// setter
 	
 	// [Replaceable] readonly attribute BarProp toolbar;
-	virtual DKString toolbar()						{ return ""; }	// getter
-	virtual void toolbar(const DKString&)			{ } 			// setter
+	DKString _toolbar = "";
+	virtual const DKString& toolbar()							{ return _toolbar; }					// getter
+	virtual void toolbar(const DKString& toolbar)				{ _toolbar = toolbar; } 				// setter
 	
 	// attribute DOMString status;
-	virtual DOMString status()						{ return ""; }	// getter
-	virtual void status(const DOMString&)			{ } 			// setter
+	DOMString _status = "";
+	virtual const DOMString& status()							{ return _status; }						// getter
+	virtual void status(const DOMString& status)				{ _status = status; } 					// setter
 	
 	// undefined close();
-	virtual bool close() {
+	virtual void close() {
 		DKDEBUGFUNC();
-		return DKTODO();
+		DKTODO();
 	}
 	
 	// readonly attribute boolean closed;
-	virtual bool closed()							{ return false; }	// getter
-	virtual void closed(const bool&)				{ } 			// setter
+	bool _closed = false;
+	virtual const bool& closed()								{ return _closed; }						// getter
+	virtual void closed(const bool&)							{ _closed = closed; } 					// setter
 	
 	// undefined stop();
 	virtual bool stop() {
