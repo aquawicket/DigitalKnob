@@ -47,7 +47,7 @@ public:
 
 	// the current browsing context
 	// [LegacyUnforgeable] readonly attribute WindowProxy window;
-	virtual DKString window()						{ DKTODO(); return ""; }								// getter
+	virtual const DKString& window()				{ DKTODO(); return ""; }								// getter
 	virtual void window(const DKString&)			{ DKERROR("DKSdlWindow.window readonly! \n"); } 		// setter
 	
 	// [Replaceable] readonly attribute WindowProxy self;

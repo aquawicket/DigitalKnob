@@ -24,15 +24,16 @@ public:
 	
 	// the current browsing context
 	// [LegacyUnforgeable] readonly attribute WindowProxy window;
-	virtual DKString window()						{ return ""; }	// getter
-	virtual void window(const DKString&)			{ } 			// setter
+	DKString _window = "";
+	virtual const DKString& window()				{ return _window; }		// getter
+	virtual void window(const DKString& window)		{ _window = window; }	// setter
 	
 	// [Replaceable] readonly attribute WindowProxy self;
-	virtual DKString self()						{ return ""; }	// getter
-	virtual void self(const DKString&)				{ } 			// setter
+	virtual DKString self()							{ return ""; }		// getter
+	virtual void self(const DKString&)				{ } 				// setter
 	
 	// [LegacyUnforgeable] readonly attribute Document document;
-	virtual DKString document()					{ return ""; }	// getter
+	virtual DKString document()						{ return ""; }	// getter
 	virtual void document(const DKString&)			{ } 			// setter
 	
 	// attribute DOMString name;
@@ -40,7 +41,7 @@ public:
 	virtual void name(const DOMString&)				{ } 			// setter
 	
 	// [PutForwards=href, LegacyUnforgeable] readonly attribute Location location;
-	virtual DKString location()					{ return ""; }	// getter
+	virtual DKString location()						{ return ""; }	// getter
 	virtual void location(const DKString&)			{ } 			// setter
 	
 	// readonly attribute History history;
