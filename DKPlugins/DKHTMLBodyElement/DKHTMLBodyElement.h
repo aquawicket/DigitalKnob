@@ -25,8 +25,9 @@ public:
 	// Source: Compatibility Standard (https://compat.spec.whatwg.org/)
 	// partial interface HTMLBodyElement {
 	//		attribute EventHandler onorientationchange;
-			virtual DKString onorientationchange()				{ return ""; }		// getter
-			virtual void onorientationchange(const DKString&)	{ } 				// setter
+			DKString _onorientationchange = "";
+			virtual const DKString& onorientationchange()							{ return _onorientationchange; }					// getter
+			virtual void onorientationchange(const DKString& onorientationchange)	{ _onorientationchange = onorientationchange; } 	// setter
 	//};
 	
 	// Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
@@ -36,28 +37,34 @@ public:
 	// Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
 	// partial interface HTMLBodyElement {
 	// 		[CEReactions] attribute [LegacyNullToEmptyString] DOMString text;
-			virtual DOMString text()							{ return ""; }		// getter
-			virtual void text(const DOMString&)					{ } 				// setter
+			DOMString _text = "";
+			virtual const DOMString& text()							{ return _text; }				// getter
+			virtual void text(const DOMString& text)				{ _text = text; } 				// setter
 	//
 	// 		[CEReactions] attribute [LegacyNullToEmptyString] DOMString link;
-			virtual DOMString link()							{ return ""; }		// getter
-			virtual void link(const DOMString&)					{ } 				// setter
+			DOMString _link = "";
+			virtual const DOMString& link()							{ return _link; }				// getter
+			virtual void link(const DOMString& link)				{ _link = link; } 				// setter
 	//
 	// 		[CEReactions] attribute [LegacyNullToEmptyString] DOMString vLink;
-			virtual DOMString vLink()							{ return ""; }		// getter
-			virtual void vLink(const DOMString&)				{ } 				// setter
+			DOMString _vLink = "";
+			virtual const DOMString& vLink()						{ return _vLink; }				// getter
+			virtual void vLink(const DOMString& vLink)				{ _vLink = vLink; } 			// setter
 	//
 	// 		[CEReactions] attribute [LegacyNullToEmptyString] DOMString aLink;
-			virtual DOMString aLink()							{ return ""; }		// getter
-			virtual void aLink(const DOMString&)				{ } 				// setter
+			DOMString _aLink = "";
+			virtual const DOMString& aLink()						{ return _aLink; }				// getter
+			virtual void aLink(const DOMString& aLink)				{ _aLink = aLink; } 			// setter
 	//
 	// 		[CEReactions] attribute [LegacyNullToEmptyString] DOMString bgColor;
-			virtual DOMString bgColor()							{ return ""; }		// getter
-			virtual void bgColor(const DOMString&)				{ } 				// setter
+			DOMString _bgColor = "";
+			virtual const DOMString& bgColor()						{ return _bgColor; }			// getter
+			virtual void bgColor(const DOMString& bgColor)			{ _bgColor= bgColor; } 			// setter
 	//
 	// 		[CEReactions] attribute DOMString background;
-			virtual DOMString background()						{ return ""; }		// getter
-			virtual void background(const DOMString&)			{ } 				// setter
+			DOMString _background = "";
+			virtual const DOMString& background()					{ return _background; }			// getter
+			virtual void background(const DOMString& background)	{ _background = background; } 	// setter
 	//};
 };
 
