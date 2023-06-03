@@ -4,6 +4,8 @@
 
 #include "DK/DK.h"
 
+////// undefined //////
+typedef void undefined;
 
 ////// DOMString //////
 typedef std::string DOMString;
