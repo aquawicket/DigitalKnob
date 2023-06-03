@@ -336,9 +336,7 @@ public:
 	// [NewObject] DocumentFragment createDocumentFragment();
 	static int createDocumentFragment(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _createDocumentFragment;
-		if(!eventTarget(ctx)->createDocumentFragment(_createDocumentFragment))
-			return false;
+		DKString _createDocumentFragment = eventTarget(ctx)->createDocumentFragment();
 		dukglue_push(ctx, _createDocumentFragment);	
 		return true;
 	}
