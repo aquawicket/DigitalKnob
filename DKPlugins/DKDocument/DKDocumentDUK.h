@@ -287,10 +287,8 @@ public:
 	// HTMLCollection getElementsByTagName(DOMString qualifiedName);
 	static int getElementsByTagName(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _qualifiedName = GetString(ctx);
-		DKString _getElementsByTagName;
-		if(!eventTarget(ctx)->getElementsByTagName(_qualifiedName, _getElementsByTagName))
-			return false;
+		DKString qualifiedName = GetString(ctx);
+		DKString _getElementsByTagName = eventTarget(ctx)->getElementsByTagName(qualifiedName);
 		dukglue_push(ctx, _getElementsByTagName);	
 		return true;
 	}
@@ -299,10 +297,8 @@ public:
 	static int getElementsByTagNameNS(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString _namespace = GetString(ctx);
-		DKString _localName = GetString(ctx, 2);
-		DKString _getElementsByTagNameNS;
-		if(!eventTarget(ctx)->getElementsByTagNameNS(_namespace, _localName, _getElementsByTagNameNS))
-			return false;
+		DKString localName = GetString(ctx, 2);
+		DKString _getElementsByTagNameNS = eventTarget(ctx)->getElementsByTagNameNS(_namespace, localName);
 		dukglue_push(ctx, _getElementsByTagNameNS);	
 		return true;
 	}
