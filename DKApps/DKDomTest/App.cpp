@@ -136,7 +136,7 @@ bool App::Init() {
 	DKClass::DKCreate("TEST_DKSdlWindow");
 	
 	// [DKRmlDocument]
-	//DKClass::DKCreate("TEST_DKRmlDocument");
+	DKClass::DKCreate("TEST_DKRmlDocument");
 	
 	// [DKRmlLocation]
 	//DKClass::DKCreate("TEST_DKRmlLocation");
