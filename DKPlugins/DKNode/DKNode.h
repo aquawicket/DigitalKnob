@@ -171,7 +171,7 @@ public:
 
 	// [CEReactions, NewObject] Node cloneNode(optional boolean deep = false);
 	DKString _cloneNode = "";
-	virtual const DKString& cloneNode(const bool& deep) {
+	virtual const DKString& cloneNode(const bool& deep = false) {
 		DKDEBUGFUNC(deep);
 		return _cloneNode;
 	}

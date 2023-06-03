@@ -93,14 +93,14 @@ public:
 	
 	// [CEReactions, NewObject] Element createElement(DOMString localName, optional (DOMString or ElementCreationOptions) options = {});
 	DKString _createElement = "";
-	virtual const DKString& createElement(const DOMString& localName, const DKString& options){
+	virtual const DKString& createElement(const DOMString& localName, const DKString& options = "{}"){
 		DKDEBUGFUNC(localName, options);
 		return _createElement;
 	}
 	
 	// [CEReactions, NewObject] Element createElementNS(DOMString? namespace, DOMString qualifiedName, optional (DOMString or ElementCreationOptions) options = {});
 	DKString _createElementNS = "";
-	virtual const DKString& createElementNS(const DOMString& _namespace, const DOMString& qualifiedName, const DKString& options){ // https://dom.spec.whatwg.org/#dom-document-createelementns
+	virtual const DKString& createElementNS(const DOMString& _namespace, const DOMString& qualifiedName, const DKString& options = "{}"){ // https://dom.spec.whatwg.org/#dom-document-createelementns
 		DKDEBUGFUNC(_namespace, qualifiedName, options);
 		return _createElementNS;
 	}
@@ -119,72 +119,83 @@ public:
 	}
 	
 	// [NewObject] CDATASection createCDATASection(DOMString data);
-	virtual bool createCDATASection(DOMString& _data, DKString& _createCDATASection){
-		DKDEBUGFUNC(_data, _createCDATASection);
-		return DKTODO();
+	DKString _createCDATASection = "";
+	virtual const DKString& createCDATASection(const DOMString& data){
+		DKDEBUGFUNC(data);
+		return _createCDATASection;
 	}
 	
 	// [NewObject] Comment createComment(DOMString data);
-	virtual bool createComment(DOMString& _data, DKString& _createComment){
-		DKDEBUGFUNC(_data, _createComment);
-		return DKTODO();
+	DKString _createComment = "";
+	virtual const DKString& createComment(const DOMString& _data){
+		DKDEBUGFUNC(_data);
+		return _createComment;
 	}
 	
 	// [NewObject] ProcessingInstruction createProcessingInstruction(DOMString target, DOMString data);
-	virtual bool createProcessingInstruction(DOMString& _target, DOMString& _data, DKString& _createProcessingInstruction){
-		DKDEBUGFUNC(_target, _data, _createProcessingInstruction);
-		return DKTODO();
+	DKString _createProcessingInstruction = "";
+	virtual const DKString& createProcessingInstruction(const DOMString& target, const DOMString& data){
+		DKDEBUGFUNC(target, data);
+		return _createProcessingInstruction;
 	}
 	
 	// [CEReactions, NewObject] Node importNode(Node node, optional boolean deep = false);
-	virtual bool importNode(DKString& _node, bool& _deep, DKString& _importNode){
-		DKDEBUGFUNC(_node, _deep, _importNode);
-		return DKTODO();
+	DKString _importNode = "";
+	virtual const DKString& importNode(const DKString& node, const bool& deep = false){
+		DKDEBUGFUNC(node, deep);
+		return _importNode;
 	}
 	
 	// [CEReactions] Node adoptNode(Node node);
-	virtual bool adoptNode(DKString& _node, DKString& _adoptNode){
-		DKDEBUGFUNC(_node, _adoptNode);
-		return DKTODO();
+	DKString _adoptNode = "";
+	virtual const DKString& adoptNode(const DKString& node){
+		DKDEBUGFUNC(node);
+		return _adoptNode;
 	}
 	
 	// [NewObject] Attr createAttribute(DOMString localName);
-	virtual bool createAttribute(DOMString& _localName, DKString& _createAttribute){
-		DKDEBUGFUNC(_localName, _createAttribute);
-		return DKTODO();
+	DKString _createAttribute = "";
+	virtual const DKString& createAttribute(const DOMString& localName){
+		DKDEBUGFUNC(localName);
+		return _createAttribute;
 	}
 	
 	// [NewObject] Attr createAttributeNS(DOMString? namespace, DOMString qualifiedName);
-	virtual bool createAttributeNS(DOMString& _namespace, DOMString& _qualifiedName, DKString& _createAttributeNS){
-		DKDEBUGFUNC(_namespace, _qualifiedName, _createAttributeNS);
-		return DKTODO();
+	DKString _createAttributeNS = "";
+	virtual const DKString& createAttributeNS(const DOMString& _namespace, const DOMString& qualifiedName){
+		DKDEBUGFUNC(_namespace, qualifiedName);
+		return _createAttributeNS;
 	}
 	
 	// [NewObject] Event createEvent(DOMString interface); // legacy
-	virtual bool createEvent(DOMString& _interface, DKString& _createEvent){
-		DKDEBUGFUNC(_interface, _createEvent);
-		return DKTODO();
+	DKString _createEvent = "";
+	virtual const DKString& createEvent(const DOMString& interface){
+		DKDEBUGFUNC(interface);
+		return _createEvent;
 	}
 	
 	// [NewObject] Range createRange();
-	virtual bool createRange(DKString& _createRange){
-		DKDEBUGFUNC(_createRange);
-		return DKTODO();
+	DKString _createRange = "";
+	virtual const DKString& createRange(){
+		DKDEBUGFUNC();
+		return _createRange;
 	}
 	
 	// NodeFilter.SHOW_ALL = 0xFFFFFFFF
 	// TODO 
 	
 	// [NewObject] NodeIterator createNodeIterator(Node root, optional unsigned long whatToShow = 0xFFFFFFFF, optional NodeFilter? filter = null);
-	virtual bool createNodeIterator(DKString& _root, unsigned int& _whatToShow, DKString& _filter, DKString& _createNodeIterator){
-		DKDEBUGFUNC(_root, _whatToShow, _filter, _createNodeIterator);
-		return DKTODO();
+	DKString _createNodeIterator = "";
+	virtual const DKString& createNodeIterator(const DKString& root, const unsigned int& whatToShow = 0xFFFFFFFF, const DKString& filter = "null"){
+		DKDEBUGFUNC(root, whatToShow, filter);
+		return _createNodeIterator;
 	}
 	
 	// [NewObject] TreeWalker createTreeWalker(Node root, optional unsigned long whatToShow = 0xFFFFFFFF, optional NodeFilter? filter = null);
-	virtual bool createTreeWalker(DKString& _root, unsigned int& _whatToShow, DKString& _filter, DKString& _createTreeWalker){
-		DKDEBUGFUNC(_root, _whatToShow, _filter, _createTreeWalker);
-		return DKTODO();
+	DKString _createTreeWalker = "";
+	virtual const DKString& createTreeWalker(const DKString& root, const unsigned int& whatToShow = 0xFFFFFFFF, const DKString& filter = "null"){
+		DKDEBUGFUNC(root, whatToShow, filter);
+		return _createTreeWalker;
 	}
 
 // };
@@ -204,41 +215,48 @@ public:
 	// Source: Font Metrics API Level 1 (https://drafts.css-houdini.org/font-metrics-api-1/)
 	// partial interface Document {
 	//		FontMetrics measureElement(Element element);
-			virtual bool measureElement(DKString& _element, DKString& _measureElement){
-				DKDEBUGFUNC(_element, _measureElement);
-				return DKTODO();
+			DKString _measureElement = "";
+			virtual const DKString& measureElement(const DKString& element){
+				DKDEBUGFUNC(element);
+				return _measureElement;
 			}
 	//
 	//		FontMetrics measureText(DOMString text, StylePropertyMapReadOnly styleMap);
-			virtual bool measureText(DOMString& _text, DKString& _styleMap, DKString& _measureText){
-				DKDEBUGFUNC(_text, _styleMap, _measureText);
-				return DKTODO();
+			DKString _measureText = "";
+			virtual const DKString& measureText(const DOMString& text, const DKString& styleMap){
+				DKDEBUGFUNC(text, styleMap);
+				return _measureText;
 			}
 	//};
 
 	// Source: Fullscreen API Standard (https://fullscreen.spec.whatwg.org/)
 	// partial interface Document {
 	//		[LegacyLenientSetter] readonly attribute boolean fullscreenEnabled;
-			virtual bool fullscreenEnabled()							{ return false; }	// getter
-			virtual void fullscreenEnabled(const bool&)					{ } 				// setter
+			bool _fullscreenEnabled = false;
+			virtual const bool& fullscreenEnabled()							{ return _fullscreenEnabled; }					// getter
+			virtual void fullscreenEnabled(const bool& fullscreenEnabled)	{ _fullscreenEnabled = fullscreenEnabled; } 	// setter
 	//		
 	//		[LegacyLenientSetter, Unscopable] readonly attribute boolean fullscreen; // historical
-			virtual bool fullscreen()									{ return false; }	// getter
-			virtual void fullscreen(const bool&)						{ } 				// setter
+			bool _fullscreen = false;
+			virtual const bool& fullscreen()								{ return _fullscreen; }							// getter
+			virtual void fullscreen(const bool& fullscreen)					{ _fullscreen = fullscreen; } 					// setter
 	//
 	//		Promise<undefined> exitFullscreen();
-			virtual bool exitFullscreen(DKString& _exitFullscreen){
-				DKDEBUGFUNC(_exitFullscreen);
-				return DKTODO();
+			DKString _exitFullscreen = "";
+			virtual const DKString& exitFullscreen(){
+				DKDEBUGFUNC();
+				return _exitFullscreen;
 			}
 	//
 	//		attribute EventHandler onfullscreenchange;
-			virtual DKString onfullscreenchange()						{ return ""; }		// getter
-			virtual void onfullscreenchange(const DKString&)			{ } 				// setter
+			DKString _onfullscreenchange = "";
+			virtual const DKString& onfullscreenchange()							{ return _onfullscreenchange; }					// getter
+			virtual void onfullscreenchange(const DKString& onfullscreenchange)		{ _onfullscreenchange = onfullscreenchange; } 	// setter
 	//
 	//		attribute EventHandler onfullscreenerror;
-			virtual DKString onfullscreenerror()						{ return ""; }		// getter
-			virtual void onfullscreenerror(const DKString&)				{ } 				// setter
+			DKString _onfullscreenerror = "";
+			virtual const DKString& onfullscreenerror()								{ return _onfullscreenerror; }					// getter
+			virtual void onfullscreenerror(const DKString& onfullscreenerror)		{ _onfullscreenerror = onfullscreenerror; } 	// setter
 	//};
 };
 

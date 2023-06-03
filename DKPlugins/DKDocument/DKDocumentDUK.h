@@ -353,10 +353,8 @@ public:
 	// [NewObject] CDATASection createCDATASection(DOMString data);
 	static int createCDATASection(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _data = GetString(ctx, 1);
-		DKString _createCDATASection;
-		if(!eventTarget(ctx)->createCDATASection(_data, _createCDATASection))
-			return false;
+		DKString data = GetString(ctx, 1);
+		DKString _createCDATASection = eventTarget(ctx)->createCDATASection(data);
 		dukglue_push(ctx, _createCDATASection);	
 		return true;
 	}
@@ -364,10 +362,8 @@ public:
 	// [NewObject] Comment createComment(DOMString data);
 	static int createComment(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _data = GetString(ctx, 1);
-		DKString _createComment;
-		if(!eventTarget(ctx)->createComment(_data, _createComment))
-			return false;
+		DKString data = GetString(ctx, 1);
+		DKString _createComment = eventTarget(ctx)->createComment(data);
 		dukglue_push(ctx, _createComment);	
 		return true;
 	}
@@ -375,11 +371,9 @@ public:
 	// [NewObject] ProcessingInstruction createProcessingInstruction(DOMString target, DOMString data);
 	static int createProcessingInstruction(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _target = GetString(ctx, 1);
-		DKString _data = GetString(ctx, 2);
-		DKString _createProcessingInstruction;
-		if(!eventTarget(ctx)->createProcessingInstruction(_target, _data, _createProcessingInstruction))
-			return false;
+		DKString target = GetString(ctx, 1);
+		DKString data = GetString(ctx, 2);
+		DKString _createProcessingInstruction = eventTarget(ctx)->createProcessingInstruction(target, data);
 		dukglue_push(ctx, _createProcessingInstruction);	
 		return true;
 	}
@@ -387,11 +381,9 @@ public:
 	// [CEReactions, NewObject] Node importNode(Node node, optional boolean deep = false);
 	static int importNode(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _node = GetString(ctx, 1);
-		bool _deep = GetBool(ctx, 2);
-		DKString _importNode;
-		if(!eventTarget(ctx)->importNode(_node, _deep, _importNode))
-			return false;
+		DKString node = GetString(ctx, 1);
+		bool deep = GetBool(ctx, 2);
+		DKString _importNode = eventTarget(ctx)->importNode(node, deep);
 		dukglue_push(ctx, _importNode);	
 		return true;
 	}
@@ -399,10 +391,8 @@ public:
 	// [CEReactions] Node adoptNode(Node node);
 	static int adoptNode(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _node = GetString(ctx, 1);
-		DKString _adoptNode;
-		if(!eventTarget(ctx)->adoptNode(_node, _adoptNode))
-			return false;
+		DKString node = GetString(ctx, 1);
+		DKString _adoptNode = eventTarget(ctx)->adoptNode(node);
 		dukglue_push(ctx, _adoptNode);	
 		return true;
 	}
@@ -410,10 +400,8 @@ public:
 	// [NewObject] Attr createAttribute(DOMString localName);
 	static int createAttribute(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _localName = GetString(ctx, 1);
-		DKString _createAttribute;
-		if(!eventTarget(ctx)->createAttribute(_localName, _createAttribute))
-			return false;
+		DKString localName = GetString(ctx, 1);
+		DKString _createAttribute = eventTarget(ctx)->createAttribute(localName);
 		dukglue_push(ctx, _createAttribute);	
 		return true;
 	}
@@ -422,10 +410,8 @@ public:
 	static int createAttributeNS(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString _namespace = GetString(ctx, 1);
-		DKString _qualifiedName = GetString(ctx, 2);
-		DKString _createAttributeNS;
-		if(!eventTarget(ctx)->createAttributeNS(_namespace, _qualifiedName, _createAttributeNS))
-			return false;
+		DKString qualifiedName = GetString(ctx, 2);
+		DKString _createAttributeNS = eventTarget(ctx)->createAttributeNS(_namespace, qualifiedName);
 		dukglue_push(ctx, _createAttributeNS);	
 		return true;
 	}
@@ -433,10 +419,8 @@ public:
 	// [NewObject] Event createEvent(DOMString interface); // legacy
 	static int createEvent(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _interface = GetString(ctx, 1);
-		DKString _createEvent;
-		if(!eventTarget(ctx)->createEvent(_interface, _createEvent))
-			return false;
+		DKString interface = GetString(ctx, 1);
+		DKString _createEvent = eventTarget(ctx)->createEvent(interface);
 		dukglue_push(ctx, _createEvent);	
 		return true;
 	}
@@ -444,9 +428,7 @@ public:
 	// [NewObject] Range createRange();
 	static int createRange(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _createRange;
-		if(!eventTarget(ctx)->createRange(_createRange))
-			return false;
+		DKString _createRange = eventTarget(ctx)->createRange();
 		dukglue_push(ctx, _createRange);	
 		return true;
 	}
@@ -457,12 +439,10 @@ public:
 	// [NewObject] NodeIterator createNodeIterator(Node root, optional unsigned long whatToShow = 0xFFFFFFFF, optional NodeFilter? filter = null);
 	static int createNodeIterator(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _root = GetString(ctx, 1);
-		unsigned int _whatToShow = GetUint(ctx, 2);
-		DKString _filter = GetString(ctx, 3);
-		DKString _createNodeIterator;
-		if(!eventTarget(ctx)->createNodeIterator(_root, _whatToShow, _filter, _createNodeIterator))
-			return false;
+		DKString root = GetString(ctx, 1);
+		unsigned int whatToShow = GetUint(ctx, 2);
+		DKString filter = GetString(ctx, 3);
+		DKString _createNodeIterator = eventTarget(ctx)->createNodeIterator(root, whatToShow, filter);
 		dukglue_push(ctx, _createNodeIterator);	
 		return true;
 	}
@@ -470,12 +450,10 @@ public:
 	// [NewObject] TreeWalker createTreeWalker(Node root, optional unsigned long whatToShow = 0xFFFFFFFF, optional NodeFilter? filter = null);
 	static int createTreeWalker(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _root = GetString(ctx, 1);
-		unsigned int _whatToShow = GetUint(ctx, 2);
-		DKString _filter = GetString(ctx, 3);
-		DKString _createTreeWalker;
-		if(!eventTarget(ctx)->createTreeWalker(_root, _whatToShow, _filter, _createTreeWalker))
-			return false;
+		DKString root = GetString(ctx, 1);
+		unsigned int whatToShow = GetUint(ctx, 2);
+		DKString filter = GetString(ctx, 3);
+		DKString _createTreeWalker = eventTarget(ctx)->createTreeWalker(root, whatToShow, filter);
 		dukglue_push(ctx, _createTreeWalker);	
 		return true;
 	}
@@ -499,10 +477,8 @@ public:
 	//		FontMetrics measureElement(Element element);
 			static int measureElement(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				DKString _element = GetString(ctx, 1);
-				DKString _measureElement;
-				if(!eventTarget(ctx)->measureElement(_element, _measureElement))
-					return false;
+				DKString element = GetString(ctx, 1);
+				DKString _measureElement = eventTarget(ctx)->measureElement(element);
 				dukglue_push(ctx, _measureElement);	
 				return true;
 			}
@@ -510,11 +486,9 @@ public:
 	//		FontMetrics measureText(DOMString text, StylePropertyMapReadOnly styleMap);
 			static int measureText(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				DKString _text = GetString(ctx, 1);
-				DKString _styleMap = GetString(ctx, 2);
-				DKString _measureText;
-				if(!eventTarget(ctx)->measureText(_text, _styleMap, _measureText))
-					return false;
+				DKString text = GetString(ctx, 1);
+				DKString styleMap = GetString(ctx, 2);
+				DKString _measureText = eventTarget(ctx)->measureText(text, styleMap);
 				dukglue_push(ctx, _measureText);	
 				return true;
 			}
@@ -543,9 +517,7 @@ public:
 	//		Promise<undefined> exitFullscreen();
 			static int exitFullscreen(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				DKString _exitFullscreen;
-				if(!eventTarget(ctx)->exitFullscreen(_exitFullscreen))
-					return false;
+				DKString _exitFullscreen = eventTarget(ctx)->exitFullscreen();
 				dukglue_push(ctx, _exitFullscreen);	
 				return true;
 			}
