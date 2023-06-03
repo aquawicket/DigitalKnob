@@ -80,7 +80,7 @@ public:
 	// HTMLCollection getElementsByTagNameNS(DOMString? namespace, DOMString localName);
 	DKString _getElementsByTagNameNS = "";
 	virtual const DKString& getElementsByTagNameNS(const DOMString& _namespace, const DOMString& localName){
-		DKDEBUGFUNC(_namespace, localName;
+		DKDEBUGFUNC(_namespace, localName);
 		return _getElementsByTagNameNS;
 	}
 	
