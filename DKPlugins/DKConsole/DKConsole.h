@@ -1,4 +1,5 @@
-// TODO - we should make Console a non static interface. Then we can derive from it to direct it anywhere we want just like other Interfaces
+// TODO: We should make Console a non static interface. Then we can derive from it to direct it anywhere we want just like other Interfaces
+// NOTE: As far as WebIDL goes, i'm not sure what a namespace refers to.  It could very well be an underlying Console interface anyway.   Need to do some research. 
 
 // [IDL] https://console.spec.whatwg.org/#console-namespace
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Console
