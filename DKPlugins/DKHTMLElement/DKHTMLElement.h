@@ -20,92 +20,103 @@ public:
 	
 	// metadata attributes
 	// [CEReactions] attribute DOMString title;
-	virtual DOMString title()						{ return ""; }		// getter
-	virtual void title(const DOMString&)			{ } 				// setter
+	DOMString _title = "";
+	virtual const DOMString& title()					{ return _title; }				// getter
+	virtual void title(const DOMString& title)			{ _title = title; } 			// setter
 	
 	// [CEReactions] attribute DOMString lang;
-	virtual DOMString lang()						{ return ""; }		// getter
-	virtual void lang(const DOMString&)				{ } 				// setter
+	DOMString _lang = "";
+	virtual const DOMString& lang()						{ return _lang; }				// getter
+	virtual void lang(const DOMString& lang)			{ _lang = lang; } 				// setter
 	
 	// [CEReactions] attribute boolean translate;
-	virtual bool translate()						{ return false; }	// getter
-	virtual void translate(const bool&)				{ } 				// setter
+	bool _translate = false;
+	virtual const bool& translate()						{ return _translate; }			// getter
+	virtual void translate(const bool& translate)		{ _translate = translate; } 	// setter
 	
 	// [CEReactions] attribute DOMString dir;
-	virtual DOMString dir()							{ return ""; }		// getter
-	virtual void dir(const DOMString&)				{ } 				// setter
+	DOMString _dir = "";
+	virtual const DOMString& dir()						{ return _dir; }				// getter
+	virtual void dir(const DOMString& dir)				{ _dir = dir; } 				// setter
 
 	// user interaction
 	// [CEReactions] attribute (boolean or unrestricted double or DOMString)? hidden;
-	virtual DOMString hidden()						{ return ""; }		// getter
-	virtual void hidden(const DOMString&)			{ } 				// setter
+	DOMString _hidden = "";
+	virtual const DOMString& hidden()					{ return _hidden; }				// getter
+	virtual void hidden(const DOMString& hidden)		{ _hidden = hidden; } 			// setter
 	
 	// [CEReactions] attribute boolean inert;
-	virtual bool inert()							{ return false; }	// getter
-	virtual void inert(const bool&)					{ } 				// setter
+	bool _inert = false;
+	virtual const bool& inert()							{ return _inert; }				// getter
+	virtual void inert(const bool& inert)				{ _inert = inert; } 			// setter
 	
 	// undefined click();
-	virtual bool click() {
+	virtual void click() {
 		DKDEBUGFUNC();
-		return DKTODO();
 	}
 	
 	// [CEReactions] attribute DOMString accessKey;
-	virtual DOMString accessKey()					{ return ""; }		// getter
-	virtual void accessKey(const DOMString&)		{ } 				// setter
+	DOMString _accessKey = "";
+	virtual const DOMString& accessKey()							{ return _accessKey; }					// getter
+	virtual void accessKey(const DOMString& accessKey)				{ _accessKey = accessKey; } 			// setter
 	
 	// readonly attribute DOMString accessKeyLabel;
-	virtual DOMString accessKeyLabel()				{ return ""; }		// getter
-	virtual void accessKeyLabel(const DOMString&)	{ } 				// setter
+	DOMString _accessKeyLabel = "";
+	virtual const DOMString& accessKeyLabel()						{ return _accessKeyLabel; }				// getter
+	virtual void accessKeyLabel(const DOMString& accessKeyLabel)	{ _accessKeyLabel = accessKeyLabel; } 	// setter
 	
 	// [CEReactions] attribute boolean draggable;
-	virtual bool draggable()						{ return false; }	// getter
-	virtual void draggable(const bool&)				{ } 				// setter
+	bool _draggable = false;
+	virtual const bool& draggable()									{ return _draggable; }					// getter
+	virtual void draggable(const bool& draggable)					{ _draggable = draggable; } 			// setter
 	
 	// [CEReactions] attribute boolean spellcheck;
-	virtual bool spellcheck()						{ return false; }	// getter
-	virtual void spellcheck(const bool&)				{ } 			// setter
+	bool _spellcheck = false;
+	virtual const bool& spellcheck()								{ return _spellcheck; }					// getter
+	virtual void spellcheck(const bool& spellcheck)					{ _spellcheck = spellcheck; } 			// setter
 	
 	// [CEReactions] attribute DOMString autocapitalize;
-	virtual DOMString autocapitalize()				{ return ""; }		// getter
-	virtual void autocapitalize(const DOMString&)	{ } 				// setter
+	DOMString _autocapitalize = "";
+	virtual const DOMString& autocapitalize()						{ return _autocapitalize; }				// getter
+	virtual void autocapitalize(const DOMString& autocapitalize)	{ _autocapitalize = autocapitalize; } 	// setter
 
 	// [CEReactions] attribute [LegacyNullToEmptyString] DOMString innerText;
-	virtual DOMString innerText()					{ return ""; }		// getter
-	virtual void innerText(const DOMString&)		{ } 				// setter
+	DOMString _innerText = "";
+	virtual const DOMString& innerText()							{ return _innerText; }					// getter
+	virtual void innerText(const DOMString& innerText)				{ _innerText = innerText; } 			// setter
 	
 	// [CEReactions] attribute [LegacyNullToEmptyString] DOMString outerText;
-	virtual DOMString outerText()					{ return ""; }		// getter
-	virtual void outerText(const DOMString&)		{ } 				// setter
+	DOMString _outerText = "";
+	virtual const DOMString& outerText()							{ return _outerText; }					// getter
+	virtual void outerText(const DOMString& outerText)				{ _outerText = outerText; } 			// setter
 
 	// ElementInternals attachInternals();
-	virtual bool attachInternals(DKString& _attachInternals) {
-		DKDEBUGFUNC(_attachInternals);
-		return DKTODO();
+	DKString _attachInternals = "";
+	virtual const DKString& attachInternals() {
+		DKDEBUGFUNC();
+		return _attachInternals;
 	}
 
 	// The popover API
 	// undefined showPopover();
-	virtual bool showPopover() {
+	virtual void showPopover() {
 		DKDEBUGFUNC();
-		return DKTODO();
 	}
 	
 	// undefined hidePopover();
-	virtual bool hidePopover() {
+	virtual void hidePopover() {
 		DKDEBUGFUNC();
-		return DKTODO();
 	}
 	
 	// undefined togglePopover(optional boolean force);
-	virtual bool togglePopover(bool& _force) {
-		DKDEBUGFUNC(_force);
-		return DKTODO();
+	virtual void togglePopover(const bool& force) {
+		DKDEBUGFUNC(force);
 	}
 	
 	// [CEReactions] attribute DOMString? popover;
-	virtual DOMString popover()					{ return ""; }		// getter
-	virtual void popover(const DOMString&)		{ } 				// setter
+	DOMString _popover = "";
+	virtual const DOMString& popover()					{ return _popover; }		// getter
+	virtual void popover(const DOMString& popover)		{ _popover = popover; } 	// setter
 //};
 
 	// HTMLElement includes GlobalEventHandlers;

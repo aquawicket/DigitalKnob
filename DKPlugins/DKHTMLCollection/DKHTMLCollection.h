@@ -19,8 +19,9 @@ public:
 	}
 
 	// readonly attribute unsigned long length;
-	virtual unsigned int length()						{ return 0; }	// getter
-	virtual void length(const unsigned int&)			{ } 			// setter
+	unsigned int _length = 0;
+	virtual const unsigned int& length()				{ return _length; }		// getter
+	virtual void length(const unsigned int&)			{ _length = length; } 	// setter
 	
 	// getter Element? item(unsigned long index);
 	// TODO
