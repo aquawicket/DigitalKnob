@@ -113,8 +113,8 @@ public:
 	
 	// [NewObject] Text createTextNode(DOMString data);
 	DKString _createTextNode = "";
-	virtual const DKString& createTextNode(const DOMString& data, const DKString& createTextNode){
-		DKDEBUGFUNC(data, createTextNode);
+	virtual const DKString& createTextNode(const DOMString& data){
+		DKDEBUGFUNC(data);
 		return _createTextNode;
 	}
 	
