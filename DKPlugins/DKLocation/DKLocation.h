@@ -34,7 +34,7 @@ public:
 	// [LegacyUnforgeable] attribute USVString protocol;
 	USVString _protocol = "";
 	virtual const USVString& protocol()				{ return _protocol; }		// getter
-	virtual void protocol(const USVString&)			{ _protocol = protocol; } 	// setter
+	virtual void protocol(const USVString& protocol){ _protocol = protocol; } 	// setter
 	
 	// [LegacyUnforgeable] attribute USVString host;
 	USVString _host = "";

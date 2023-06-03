@@ -21,85 +21,102 @@ public:
 	}
 	
 	// [SameObject] readonly attribute DOMImplementation implementation;
-	virtual DKString implementation()						{ return ""; }	// getter
-	virtual void implementation(const DKString&)			{ } 			// setter
+	DKString _implementation = "";
+	virtual const DKString& implementation()						{ return _implementation; }					// getter
+	virtual void implementation(const DKString& implementation)		{ _implementation = implementation; }		// setter
 	
 	// readonly attribute USVString URL;
-	virtual USVString URL()									{ return ""; }	// getter
-	virtual void URL(const USVString&)						{ } 			// setter
+	USVString _URL = "";
+	virtual const USVString& URL()									{ return _URL; }							// getter
+	virtual void URL(const USVString& URL)							{ _URL = URL; } 							// setter
 
 	// readonly attribute USVString documentURI;
-	virtual USVString documentURI()							{ return ""; }	// getter
-	virtual void documentURI(const USVString&)				{ } 			// setter
+	USVString _documentURI = "";
+	virtual const USVString& documentURI()							{ return _documentURI; }					// getter
+	virtual void documentURI(const USVString& documentURI)			{ _documentURI = documentURI; } 			// setter
 	
 	// readonly attribute DOMString compatMode;
-	virtual DOMString compatMode()							{ return ""; }	// getter
-	virtual void compatMode(const DOMString&)				{ } 			// setter
+	DOMString _compatMode = "";
+	virtual const DOMString& compatMode()							{ return _compatMode; }						// getter
+	virtual void compatMode(const DOMString& compatMode)			{ _compatMode = compatMode; } 				// setter
 	
 	// readonly attribute DOMString characterSet;
-	virtual DOMString characterSet()						{ return ""; }	// getter
-	virtual void characterSet(const DOMString&)				{ } 			// setter
+	DOMString _characterSet = "";
+	virtual const DOMString& characterSet()							{ return _characterSet; }					// getter
+	virtual void characterSet(const DOMString& characterSet)		{ _characterSet = characterSet; } 			// setter
 	
 	// readonly attribute DOMString charset; // legacy alias of .characterSet
-	virtual DOMString charset()								{ return ""; }	// getter
-	virtual void charset(const DOMString&)					{ } 			// setter
+	DOMString _charset = "";
+	virtual const DOMString& charset()								{ return _charset; }						// getter
+	virtual void charset(const DOMString& charset)					{ _charset = charset; } 					// setter
 	
 	// readonly attribute DOMString inputEncoding; // legacy alias of .characterSet
-	virtual DOMString inputEncoding()						{ return ""; }	// getter
-	virtual void inputEncoding(const DOMString&)			{ } 			// setter
+	DOMString _inputEncoding = "";
+	virtual const DOMString& inputEncoding()						{ return _inputEncoding; }					// getter
+	virtual void inputEncoding(const DOMString& inputEncoding)		{ _inputEncoding = inputEncoding; } 		// setter
 	
 	// readonly attribute DOMString contentType;
-	virtual DOMString contentType()							{ return ""; }	// getter
-	virtual void contentType(const DOMString&)				{ } 			// setter
+	DOMString _contentType = "";
+	virtual const DOMString& contentType()							{ return _contentType; }					// getter
+	virtual void contentType(const DOMString& contentType)			{ _contentType = contentType; } 			// setter
 	
 	// readonly attribute DocumentType? doctype;
-	virtual DKString doctype()								{ return ""; }	// getter
-	virtual void doctype(const DKString&)					{ } 			// setter
+	DKString _doctype = "";
+	virtual const DKString& doctype()								{ return _doctype; }						// getter
+	virtual void doctype(const DKString& doctype)					{ _doctype = doctype; } 					// setter
 	
 	// readonly attribute Element? documentElement;
-	virtual DKString documentElement()						{ return ""; }	// getter
-	virtual void documentElement(const DKString&)			{ } 			// setter
+	DKString _documentElement = "";
+	virtual const DKString& documentElement()						{ return _documentElement; }				// getter
+	virtual void documentElement(const DKString& documentElement)	{ _documentElement = documentElement; } 	// setter
 	
 	// HTMLCollection getElementsByTagName(DOMString qualifiedName);
-	virtual bool getElementsByTagName(DOMString& qualifiedName, DKString& getElementsByTagName){ // https://dom.spec.whatwg.org/#dom-document-getelementsbytagname
-		DKDEBUGFUNC(qualifiedName, getElementsByTagName);
-		return DKTODO();
+	DKString _getElementsByTagName = "";
+	virtual const DKString& getElementsByTagName(const DOMString& qualifiedName){
+		DKDEBUGFUNC(qualifiedName);
+		return _getElementsByTagName;
 	}
 	
 	// HTMLCollection getElementsByTagNameNS(DOMString? namespace, DOMString localName);
-	virtual bool getElementsByTagNameNS(DOMString& _namespace, DOMString& localName, DKString& getElementsByTagNameNS){ // https://dom.spec.whatwg.org/#dom-document-getelementsbytagnamens
-		DKDEBUGFUNC(_namespace, localName, getElementsByTagNameNS);
-		return DKTODO();
+	DKString _getElementsByTagNameNS = "";
+	virtual const DKString& getElementsByTagNameNS(const DOMString& _namespace, const DOMString& localName){
+		DKDEBUGFUNC(_namespace, localName;
+		return _getElementsByTagNameNS;
 	}
 	
 	// HTMLCollection getElementsByClassName(DOMString classNames);
-	virtual bool getElementsByClassName(DOMString& classNames, DKString& getElementsByClassName){ //https://dom.spec.whatwg.org/#dom-document-getelementsbyclassname
+	DKString _getElementsByClassName = "";
+	virtual const DKString& getElementsByClassName(const DOMString& classNames){
 		DKDEBUGFUNC(classNames, getElementsByClassName);
-		return DKTODO();
+		return _getElementsByClassName;
 	}
 	
 	// [CEReactions, NewObject] Element createElement(DOMString localName, optional (DOMString or ElementCreationOptions) options = {});
-	virtual bool createElement(DOMString& localName, DKString& options, DKString& createElement){ // https://dom.spec.whatwg.org/#dom-document-createelement
-		DKDEBUGFUNC(localName, options, createElement);
-		return DKTODO();
+	DKString _createElement = "";
+	virtual const DKString& createElement(const DOMString& localName, const DKString& options){
+		DKDEBUGFUNC(localName, options);
+		return _createElement;
 	}
 	
 	// [CEReactions, NewObject] Element createElementNS(DOMString? namespace, DOMString qualifiedName, optional (DOMString or ElementCreationOptions) options = {});
-	virtual bool createElementNS(DOMString& _namespace, DOMString& qualifiedName, DKString& options, DKString& createElementNS){ // https://dom.spec.whatwg.org/#dom-document-createelementns
-		DKDEBUGFUNC(_namespace, qualifiedName, options, createElementNS);
-		return DKTODO();
+	DKString _createElementNS = "";
+	virtual const DKString& createElementNS(const DOMString& _namespace, const DOMString& qualifiedName, const DKString& options){ // https://dom.spec.whatwg.org/#dom-document-createelementns
+		DKDEBUGFUNC(_namespace, qualifiedName, options);
+		return _createElementNS;
 	}
 	
 	// [NewObject] DocumentFragment createDocumentFragment();
-	virtual bool createDocumentFragment(DKString& createDocumentFragment){
+	DKString _createDocumentFragment = "";
+	virtual const DKString& createDocumentFragment(const DKString& createDocumentFragment){
 		DKDEBUGFUNC(createDocumentFragment);
-		return DKTODO();
+		return _createDocumentFragment;
 	}
 	
 	// [NewObject] Text createTextNode(DOMString data);
-	virtual bool createTextNode(DOMString& data, DKString& createTextNode){
+	DKString _createTextNode = "";
+	virtual const DKString& createTextNode(const DOMString& data, const DKString& createTextNode){
 		DKDEBUGFUNC(data, createTextNode);
-		return DKTODO();
+		return _createTextNode;
 	}
 	
 	// [NewObject] CDATASection createCDATASection(DOMString data);

@@ -188,8 +188,7 @@ public:
 	static int assign(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString url = GetString(ctx);
-		if(!eventTarget(ctx)->assign(url))
-			return false;
+		eventTarget(ctx)->assign(url);
 		return true;
 	}
 	
@@ -197,16 +196,14 @@ public:
 	static int replace(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString url = GetString(ctx);
-		if(!eventTarget(ctx)->replace(url))
-			return false;
+		eventTarget(ctx)->replace(url);
 		return true;
 	}
 	
 	// [LegacyUnforgeable] undefined reload();
 	static int reload(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if(!eventTarget(ctx)->reload())
-			return false;
+		eventTarget(ctx)->reload();
 		return true;
 	}
 	
