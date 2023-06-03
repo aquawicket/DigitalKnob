@@ -74,149 +74,165 @@ public:
 	DKString _getAttributeNames = "";
 	virtual const DKString& getAttributeNames(){
 		DKDEBUGFUNC();
-		return _getAttributeNames
+		return _getAttributeNames;
 	}
 	
 	// DOMString? getAttribute(DOMString qualifiedName);
-	virtual bool getAttribute(DOMString& qualifiedName, DOMString& getAttribute){
-		DKDEBUGFUNC(qualifiedName, getAttribute);
-		return DKTODO();
+	DKString _getAttribute = "";
+	virtual const DKString& getAttribute(const DOMString& qualifiedName){
+		DKDEBUGFUNC(qualifiedName);
+		return _getAttribute;
 	}
 	
 	// DOMString? getAttributeNS(DOMString? namespace, DOMString localName);
-	virtual bool getAttribute(DOMString& _namespace, DOMString& localName, DOMString& getAttributeNS){
-		DKDEBUGFUNC(_namespace, localName, getAttributeNS);
-		return DKTODO();
+	DOMString _getAttributeNS = "";
+	virtual const DOMString& getAttribute(const DOMString& _namespace, const DOMString& localName){
+		DKDEBUGFUNC(_namespace, localName);
+		return _getAttributeNS;
 	}
 	
 	// [CEReactions] undefined setAttribute(DOMString qualifiedName, DOMString value);
-	virtual bool setAttribute(DOMString& qualifiedName, DOMString& value){
+	virtual void setAttribute(const DOMString& qualifiedName, const DOMString& value){
 		DKDEBUGFUNC(qualifiedName, value);
-		return DKTODO();
 	}
 	
 	// [CEReactions] undefined setAttributeNS(DOMString? namespace, DOMString qualifiedName, DOMString value);
-	virtual bool setAttributeNS(DOMString& _namespace, DOMString& qualifiedName, DOMString& value){
+	virtual void setAttributeNS(const DOMString& _namespace, const DOMString& qualifiedName, const DOMString& value){
 		DKDEBUGFUNC(_namespace, qualifiedName, value);
-		return DKTODO();
 	}
 	
 	// [CEReactions] undefined removeAttribute(DOMString qualifiedName);
-	virtual bool removeAttribute(DOMString& qualifiedName){
+	virtual void removeAttribute(const DOMString& qualifiedName){
 		DKDEBUGFUNC(qualifiedName);
-		return DKTODO();
 	}
 	
 	// [CEReactions] undefined removeAttributeNS(DOMString? namespace, DOMString localName);
-	virtual bool removeAttributeNS(DOMString& _namespace, DOMString& localName){
+	virtual void removeAttributeNS(const DOMString& _namespace, const DOMString& localName){
 		DKDEBUGFUNC(_namespace, localName);
-		return DKTODO();
 	}
 	
 	// [CEReactions] boolean toggleAttribute(DOMString qualifiedName, optional boolean force);
-	virtual bool toggleAttribute(DOMString& qualifiedName, bool& force, bool& toggleAttribute){
-		DKDEBUGFUNC(qualifiedName, force, toggleAttribute);
-		return DKTODO();
+	bool _toggleAttribute = false;
+	virtual const bool& toggleAttribute(const DOMString& qualifiedName, const bool& force){
+		DKDEBUGFUNC(qualifiedName, force);
+		return _toggleAttribute;
 	}
 	
 	// boolean hasAttribute(DOMString qualifiedName);
-	virtual bool hasAttribute(DOMString& qualifiedName, bool& hasAttribute){
-		DKDEBUGFUNC(qualifiedName, hasAttribute);
-		return DKTODO();
+	bool _hasAttribute = false;
+	virtual const bool& hasAttribute(const DOMString& qualifiedName){
+		DKDEBUGFUNC(qualifiedName);
+		return _hasAttribute;
 	}
 	
 	// boolean hasAttributeNS(DOMString? namespace, DOMString localName);
-	virtual bool hasAttributeNS(DOMString& _namespace, DOMString& _localName, bool& _hasAttributeNS){
-		DKDEBUGFUNC(_namespace, _localName, _hasAttributeNS);
-		return DKTODO();
+	bool _hasAttributeNS = false;
+	virtual const bool& hasAttributeNS(const DOMString& _namespace, const DOMString& localName){
+		DKDEBUGFUNC(_namespace, localName);
+		return _hasAttributeNS;
 	}
 	
 	// Attr? getAttributeNode(DOMString qualifiedName);
-	virtual bool getAttributeNode(DOMString& _qualifiedName, DKString& _getAttributeNode){
-		DKDEBUGFUNC(_qualifiedName, _getAttributeNode);
-		return DKTODO();
+	DKString _getAttributeNode = "";
+	virtual const DKString& getAttributeNode(const DOMString& qualifiedName){
+		DKDEBUGFUNC(qualifiedName);
+		return _getAttributeNode;
 	}
 	
 	// Attr? getAttributeNodeNS(DOMString? namespace, DOMString localName);
-	virtual bool getAttributeNodeNS(DOMString& _namespace, DOMString& _localName, DKString& _getAttributeNodeNS){
-		DKDEBUGFUNC(_namespace, _localName, _getAttributeNodeNS);
-		return DKTODO();
+	DKString _getAttributeNodeNS = "";
+	virtual const DKString& getAttributeNodeNS(const DOMString& _namespace, const DOMString& localName){
+		DKDEBUGFUNC(_namespace, localName);
+		return _getAttributeNodeNS;
 	}
 	
 	// [CEReactions] Attr? setAttributeNode(Attr attr);
-	virtual bool setAttributeNode(DKString& _attr, DKString& _setAttributeNode){
-		DKDEBUGFUNC(_attr, _setAttributeNode);
-		return DKTODO();
+	DKString _setAttributeNode = "";
+	virtual const DKString& setAttributeNode(const DKString& attr){
+		DKDEBUGFUNC(attr);
+		return _setAttributeNode;
 	}
 	
 	// [CEReactions] Attr? setAttributeNodeNS(Attr attr);
-	virtual bool setAttributeNodeNS(DKString& _attr, DKString& _setAttributeNodeNS){
-		DKDEBUGFUNC(_attr, _setAttributeNodeNS);
-		return DKTODO();
+	DKString _setAttributeNodeNS = "";
+	virtual const DKString& setAttributeNodeNS(const DKString& attr){
+		DKDEBUGFUNC(attr);
+		return _setAttributeNodeNS;
 	}
 	
 	// [CEReactions] Attr removeAttributeNode(Attr attr);
-	virtual bool removeAttributeNode(DKString& _attr, DKString& _removeAttributeNode){
-		DKDEBUGFUNC(_attr, _removeAttributeNode);
-		return DKTODO();
+	DKString _removeAttributeNode = "";
+	virtual const DKString& removeAttributeNode(const DKString& attr){
+		DKDEBUGFUNC(attr);
+		return _removeAttributeNode;
 	}
 	
 	// ShadowRoot attachShadow(ShadowRootInit init);
-	virtual bool attachShadow(DKString& _init, DKString& _attachShadow){
-		DKDEBUGFUNC(_init, _attachShadow);
-		return DKTODO();
+	DKString _attachShadow = "";
+	virtual const DKString& attachShadow(const DKString& init){
+		DKDEBUGFUNC(init);
+		return _attachShadow;
 	}
 	
 	// readonly attribute ShadowRoot? shadowRoot;
-	virtual DKString shadowRoot()							{ return ""; }	// getter
-	virtual void shadowRoot(const DKString&)				{ } 			// setter
+	DKString _shadowRoot = "";
+	virtual const DKString& shadowRoot()							{ return _shadowRoot; }					// getter
+	virtual void shadowRoot(const DKString& shadowRoot)				{ _shadowRoot = shadowRoot; } 			// setter
 	
 	// Element? closest(DOMString selectors);
-	virtual bool closest(DOMString& _selectors, DKString& _closest){
-		DKDEBUGFUNC(_selectors, _closest);
-		return DKTODO();
+	DKString _closest = "";
+	virtual const DKString& closest(const DOMString& selectors){
+		DKDEBUGFUNC(selectors);
+		return _closest;
 	}
 	
 	// boolean matches(DOMString selectors);
-	virtual bool matches(DOMString& _selectors, bool& _matches){
-		DKDEBUGFUNC(_selectors, _matches);
-		return DKTODO();
+	bool _matches = false;
+	virtual const bool& matches(const DOMString& selectors){
+		DKDEBUGFUNC(selectors);
+		return _matches;
 	}
 	
 	// boolean webkitMatchesSelector(DOMString selectors); // legacy alias of .matches
-	virtual bool webkitMatchesSelector(DOMString& _selectors, bool& _webkitMatchesSelector){
-		DKDEBUGFUNC(_selectors, _webkitMatchesSelector);
-		return DKTODO();
+	bool _webkitMatchesSelector = false;
+	virtual const bool& webkitMatchesSelector(const DOMString& selectors){
+		DKDEBUGFUNC(selectors);
+		return _webkitMatchesSelector;
 	}
   
 	// HTMLCollection getElementsByTagName(DOMString qualifiedName);
-	virtual bool getElementsByTagName(DOMString& _qualifiedName, DKString& _getElementsByTagName){
-		DKDEBUGFUNC(_qualifiedName, _getElementsByTagName);
-		return DKTODO();
+	DKString _getElementsByTagName = "";
+	virtual const DKString& getElementsByTagName(const DOMString& qualifiedName){
+		DKDEBUGFUNC(qualifiedName);
+		return _getElementsByTagName;
 	}
 	
 	// HTMLCollection getElementsByTagNameNS(DOMString? namespace, DOMString localName);
-	virtual bool getElementsByTagNameNS(DOMString& _namespace, DOMString& _localName, DKString& _getElementsByTagNameNS){
-		DKDEBUGFUNC(_namespace, _localName, _getElementsByTagNameNS);
-		return DKTODO();
+	DKString _getElementsByTagNameNS = "";
+	virtual const DKString& getElementsByTagNameNS(const DOMString& _namespace, const DOMString& localName){
+		DKDEBUGFUNC(_namespace, localName);
+		return _getElementsByTagNameNS;
 	}
 	
 	// HTMLCollection getElementsByClassName(DOMString classNames);
-	virtual bool getElementsByClassName(DOMString& _classNames, DKString& _getElementsByClassName){
-		DKDEBUGFUNC(_classNames, _getElementsByClassName);
-		return DKTODO();
+	DKString _getElementsByClassName = "";
+	virtual const DKString& getElementsByClassName(const DOMString& classNames){
+		DKDEBUGFUNC(classNames);
+		return _getElementsByClassName;
 	}
   
 	// [CEReactions] Element? insertAdjacentElement(DOMString where, Element element); // legacy
-	virtual bool insertAdjacentElement(DOMString& _where, DKString& _element, DKString& _insertAdjacentElement){
-		DKDEBUGFUNC(_where, _element, _insertAdjacentElement);
-		return DKTODO();
+	DKString _insertAdjacentElement = "";
+	virtual const DKString& insertAdjacentElement(const DOMString& where, const DKString& element){
+		DKDEBUGFUNC(where, element);
+		return _insertAdjacentElement;
 	}
 	
 	// undefined insertAdjacentText(DOMString where, DOMString data); // legacy
-	virtual bool insertAdjacentText(DOMString& _where, DOMString& _data){
-		DKDEBUGFUNC(_where, _data);
-		return DKTODO();
+	DKString _insertAdjacentText = "";
+	virtual const DKString& insertAdjacentText(const DOMString& where, const DOMString& data){
+		DKDEBUGFUNC(where, data);
+		return _insertAdjacentText;
 	}
 //};
 

@@ -243,9 +243,7 @@ public:
 	// boolean hasAttributes();
 	static int hasAttributes(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		bool _hasAttributes;
-		if(!eventTarget(ctx)->hasAttributes(_hasAttributes))
-			return false;
+		bool _hasAttributes = eventTarget(ctx)->hasAttributes();
 		dukglue_push(ctx, _hasAttributes);	
 		return true;
 	}
@@ -262,9 +260,7 @@ public:
 	// sequence<DOMString> getAttributeNames();
 	static int getAttributeNames(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _getAttributeNames;
-		if(!eventTarget(ctx)->getAttributeNames(_getAttributeNames))
-			return false;
+		DKString _getAttributeNames = eventTarget(ctx)->getAttributeNames();
 		dukglue_push(ctx, _getAttributeNames);	
 		return true;
 	}
