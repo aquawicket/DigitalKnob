@@ -23,36 +23,43 @@ public:
 
 	// [CEReactions] attribute DOMString alt;
 	DOMString _alt = "";
-	virtual const DOMString& alt()					{ return _alt; }	// getter
-	virtual void alt(const DOMString& alt)			{ _alt = alt; } 	// setter
+	virtual const DOMString& alt()							{ return _alt; }				// getter
+	virtual void alt(const DOMString& alt)					{ _alt = alt; } 				// setter
 	
 	// [CEReactions] attribute USVString src;
-	virtual USVString src()							{ return ""; }		// getter
-	virtual void src(const USVString&)				{ } 				// setter
+	USVString _src = "";
+	virtual const USVString& src()							{ return _src; }				// getter
+	virtual void src(const USVString& src)					{ _src = _rc; } 				// setter
 	
 	// [CEReactions] attribute USVString srcset;
-	virtual USVString srcset()						{ return ""; }		// getter
-	virtual void srcset(const USVString&)			{ } 				// setter
+	USVString _srcset = "";
+	virtual const USVString& srcset()						{ return _srcset; }				// getter
+	virtual void srcset(const USVString& srcset)			{ _srcset = srcset; } 			// setter
 	
 	// [CEReactions] attribute DOMString sizes;
-	virtual DOMString sizes()						{ return ""; }		// getter
-	virtual void sizes(const DOMString&)			{ } 				// setter
+	DOMString _sizes = "";
+	virtual const DOMString& sizes()						{ return _sizes; }				// getter
+	virtual void sizes(const DOMString& sizes)				{ _sizes = sizes; } 			// setter
 	
 	// [CEReactions] attribute DOMString? crossOrigin;
-	virtual DOMString crossOrigin()					{ return ""; }		// getter
-	virtual void crossOrigin(const DOMString&)		{ } 				// setter
+	DOMString _crossOrigin = "";
+	virtual const DOMString& crossOrigin()					{ return _crossOrigin; }		// getter
+	virtual void crossOrigin(const DOMString& crossOrigin)	{ _crossOrigin = crossOrigin;} 	// setter
 	
 	// [CEReactions] attribute DOMString useMap;
-	virtual DOMString useMap()						{ return ""; }		// getter
-	virtual void useMap(const DOMString&)			{ } 				// setter
+	DOMString _useMap = "";
+	virtual const DOMString& useMap()						{ return _useMap; }				// getter
+	virtual void useMap(const DOMString& useMap)			{ _useMap = useMap; } 			// setter
 	
 	// [CEReactions] attribute boolean isMap;
-	virtual bool isMap()							{ return false; }	// getter
-	virtual void isMap(const bool&)					{ } 				// setter
+	bool _isMap = false;
+	virtual const bool& isMap()								{ return _isMap; }				// getter
+	virtual void isMap(const bool& isMap)					{ _isMap = isMap; } 			// setter
 	
 	// [CEReactions] attribute unsigned long width;
-	virtual unsigned int width()					{ return 0; }		// getter
-	virtual void width(const unsigned int&)			{ } 				// setter
+	unsigned int _width = 0;
+	virtual const unsigned int& width()						{ return _width; }				// getter
+	virtual void width(const unsigned int& width)			{ _width = width; } 			// setter
 	
 	// [CEReactions] attribute unsigned long height;
 	virtual unsigned int height()					{ return 0; }		// getter
