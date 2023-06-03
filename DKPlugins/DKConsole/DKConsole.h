@@ -1,5 +1,6 @@
 // TODO: We should make Console a non static interface. Then we can derive from it to direct it anywhere we want just like other Interfaces
 // NOTE: As far as WebIDL goes, i'm not sure what a namespace refers to.  It could very well be an underlying Console interface anyway.   Need to do some research. 
+// NOTE: ALL WebIDL code will include DKInterface for now. 
 
 // [IDL] https://console.spec.whatwg.org/#console-namespace
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Console
@@ -7,7 +8,7 @@
 #ifndef DKConsole_H
 #define DKConsole_H
 
-#include "DK/DK.h"
+#include "DKInterface/DKInterface.h"
 
 //[Exposed=*]
 //namespace console { // but see namespace object requirements below
