@@ -480,8 +480,8 @@ public:
 	DKString relatedTarget;
 	double pageX;
 	double pageY;
-	//double x;
-	//double y;
+	double x;
+	double y;
 	double offsetX;
 	double offsetY;
 	double movementX;
