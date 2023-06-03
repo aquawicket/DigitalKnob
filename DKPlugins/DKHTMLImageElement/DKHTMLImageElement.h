@@ -22,8 +22,9 @@ public:
 	}
 
 	// [CEReactions] attribute DOMString alt;
-	virtual DOMString alt()							{ return ""; }		// getter
-	virtual void alt(const DOMString&)				{ } 				// setter
+	DOMString _alt = "";
+	virtual const DOMString& alt()					{ return _alt; }	// getter
+	virtual void alt(const DOMString& alt)			{ _alt = alt; } 	// setter
 	
 	// [CEReactions] attribute USVString src;
 	virtual USVString src()							{ return ""; }		// getter
