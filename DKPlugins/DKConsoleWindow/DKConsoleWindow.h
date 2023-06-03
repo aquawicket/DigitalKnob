@@ -251,7 +251,7 @@ public:
 	// partial interface Window {
 	//		Promise<sequence<FileSystemFileHandle>> showOpenFilePicker(optional OpenFilePickerOptions options = {});
 			// TODO
-	//
+
 	//		Promise<FileSystemFileHandle> showSaveFilePicker(optional SaveFilePickerOptions options = {});
 			// TODO
 	//
@@ -270,7 +270,7 @@ public:
 	// partial interface Window {
 	//		attribute EventHandler onappinstalled;
 			// TODO
-	//
+
 	//		attribute EventHandler onbeforeinstallprompt;
 			// TODO
 	// };
@@ -309,14 +309,14 @@ public:
 	// partial interface Window {
 	//		[NewObject] MediaQueryList matchMedia(CSSOMString query);
 			// TODO
-	//
+
 	//		[SameObject, Replaceable] readonly attribute Screen screen;
 			// TODO
 			
-	//
+
 	//		[SameObject, Replaceable] readonly attribute VisualViewport? visualViewport;
 			// TODO
-	//
+
 	//		// browsing context
 	//		undefined moveTo(long x, long y);
 			virtual void moveTo(const int& x, const int& y){
@@ -330,7 +330,7 @@ public:
 						DKERROR("MoveWindow() failed");
 				#endif
 			}
-	//
+
 	//		undefined moveBy(long x, long y);
 			virtual void moveBy(const int& x, const int& y) {
 				DKDEBUGFUNC(x, y);
@@ -345,7 +345,7 @@ public:
 						DKERROR("MoveWindow() failed");
 				#endif
 			}
-	//
+
 	//		undefined resizeTo(long width, long height);
 			virtual void resizeTo(const int& width, const int& height) {
 				DKDEBUGFUNC(width, height);
@@ -360,7 +360,7 @@ public:
 						DKERROR("MoveWindow() failed");
 				#endif
 			}
-	//
+
 	//		undefined resizeBy(long x, long y);
 			virtual void resizeBy(const int& x, const int& y) {
 				DKDEBUGFUNC(x, y);
@@ -375,54 +375,54 @@ public:
 						DKERROR("MoveWindow() failed");
 				#endif
 			}
-	//
+
 	//		// viewport
 	//		[Replaceable] readonly attribute long innerWidth;
 			// TODO
-	//
+
 	//		[Replaceable] readonly attribute long innerHeight;
 			// TODO
-	//
+
 	//		// viewport scrolling
 	//		[Replaceable] readonly attribute double scrollX;
 			// TODO
 	//
 	//		[Replaceable] readonly attribute double pageXOffset;
 			// TODO
-	//
+
 	//		[Replaceable] readonly attribute double scrollY;
 			// TODO
-	//
+
 	//		[Replaceable] readonly attribute double pageYOffset;
 			// TODO
-	//
+
 	//		undefined scroll(optional ScrollToOptions options = {});
 	//		undefined scroll(unrestricted double x, unrestricted double y);
 			// TODO
-	//
+
 	//		undefined scrollTo(optional ScrollToOptions options = {});
 	//		undefined scrollTo(unrestricted double x, unrestricted double y);
 			// TODO
-	//
+
 	//		undefined scrollBy(optional ScrollToOptions options = {});
 	//		undefined scrollBy(unrestricted double x, unrestricted double y);
 			// TODO
-	///
+
 	//		// client
 	//		[Replaceable] readonly attribute long screenX;
 			// TODO
-	//
+
 	//		[Replaceable] readonly attribute long screenLeft;
 			// TODO
-	//
+
 	//		[Replaceable] readonly attribute long screenY;
 			// TODO
-	//
+
 	//		[Replaceable] readonly attribute long screenTop;
 			// TODO
-	//
+
 	//		[Replaceable] readonly attribute long outerWidth;
-			virtual const int& outerWidth() {					// getter
+			virtual const int& outerWidth() {						// getter
 				#if WIN
 					RECT rect;
 					GetWindowRect(GetConsoleWindow(), &rect);
@@ -430,12 +430,12 @@ public:
 					return _outerWidth;
 				#endif
 			}
-			virtual void outerWidth(const int& outerWidth){	// setter
-				// TODO
+			virtual void outerWidth(const int& outerWidth){			// setter
+				// readonly
 			}
-	//
+
 	//		[Replaceable] readonly attribute long outerHeight;
-			virtual const int& outerHeight(){ 					// getter
+			virtual const int& outerHeight(){ 						// getter
 				#if WIN
 					RECT rect;
 					GetWindowRect(GetConsoleWindow(), &rect);
@@ -443,11 +443,11 @@ public:
 					return _outerHeight;
 				#endif
 			}
-			virtual void outerHeight(const int& outerHeight){	// setter
-				// TODO
+			virtual void outerHeight(const int& outerHeight){		// setter
+				//readonly
 			}
 			
-	//
+
 	//		[Replaceable] readonly attribute double devicePixelRatio;
 			// TODO
 	// };
@@ -480,8 +480,8 @@ public:
 	DKString relatedTarget;
 	double pageX;
 	double pageY;
-	double x;
-	double y;
+	//double x;
+	//double y;
 	double offsetX;
 	double offsetY;
 	double movementX;
