@@ -1,3 +1,5 @@
+// TODO - we should make Console a non static interface. Then we can derive from it to direct it anywhere we want just like other Interfaces
+
 // [IDL] https://console.spec.whatwg.org/#console-namespace
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Console
 #pragma once
