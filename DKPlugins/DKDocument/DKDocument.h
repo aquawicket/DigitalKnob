@@ -87,7 +87,7 @@ public:
 	// HTMLCollection getElementsByClassName(DOMString classNames);
 	DKString _getElementsByClassName = "";
 	virtual const DKString& getElementsByClassName(const DOMString& classNames){
-		DKDEBUGFUNC(classNames, getElementsByClassName);
+		DKDEBUGFUNC(classNames);
 		return _getElementsByClassName;
 	}
 	
