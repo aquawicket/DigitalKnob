@@ -344,10 +344,8 @@ public:
 	// [NewObject] Text createTextNode(DOMString data);
 	static int createTextNode(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _data = GetString(ctx, 1);
-		DKString _createTextNode;
-		if(!eventTarget(ctx)->createTextNode(_data, _createTextNode))
-			return false;
+		DKString data = GetString(ctx, 1);
+		DKString _createTextNode = eventTarget(ctx)->createTextNode(data);
 		dukglue_push(ctx, _createTextNode);	
 		return true;
 	}
