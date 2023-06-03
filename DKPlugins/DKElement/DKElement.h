@@ -19,51 +19,62 @@ public:
 	}
 	
 	// readonly attribute DOMString? namespaceURI;
-	virtual DOMString namespaceURI()					{ return ""; }	// getter
-	virtual void namespaceURI(const DOMString&)			{ } 			// setter
+	DOMString _namespaceURI = "";
+	virtual const DOMString& namespaceURI()						{ return _namespaceURI; }			// getter
+	virtual void namespaceURI(const DOMString& namespaceURI)	{ _namespaceURI = namespaceURI; } 	// setter
 	
 	// readonly attribute DOMString? prefix;
-	virtual DOMString prefix()							{ return ""; }	// getter
-	virtual void prefix(const DOMString&)				{ } 			// setter
+	DOMString _prefix = "";
+	virtual const DOMString& prefix()							{ return _prefix; }					// getter
+	virtual void prefix(const DOMString& prefix)				{ _prefix = prefix; } 				// setter
   
 	// readonly attribute DOMString localName;
-	virtual DOMString localName()						{ return ""; }	// getter
-	virtual void localName(const DOMString&)			{ } 			// setter
+	DOMString _localName = "";
+	virtual const DOMString& localName()						{ return _localName; }				// getter
+	virtual void localName(const DOMString& localName)			{ _localName = localName; } 		// setter
 	
 	// readonly attribute DOMString tagName;
-	virtual DOMString tagName()							{ return ""; }	// getter
-	virtual void tagName(const DOMString&)				{ } 			// setter
+	DOMString _tagName = "";
+	virtual const DOMString& tagName()							{ return _tagName; }				// getter
+	virtual void tagName(const DOMString& tagName)				{ _tagName = tagName; } 			// setter
 
 	// [CEReactions] attribute DOMString id;
-	virtual DOMString id()								{ return ""; }	// getter
-	virtual void id(const DOMString&)					{ } 			// setter
+	DOMString _id = "";
+	virtual const DOMString& id()								{ return _id; }						// getter
+	virtual void id(const DOMString& id)						{ _id = id; } 						// setter
 	
 	// [CEReactions] attribute DOMString className;
-	virtual DOMString className()						{ return ""; }	// getter
-	virtual void className(const DOMString&)			{ } 			// setter
+	DOMString _className = "";
+	virtual const DOMString& className()						{ return _className; }				// getter
+	virtual void className(const DOMString& className)			{ _className = className; } 		// setter
 	
 	// [SameObject, PutForwards=value] readonly attribute DOMTokenList classList;
-	virtual DKString classList()						{ return ""; }	// getter
-	virtual void classList(const DKString&)				{ } 			// setter
+	DKString _classList = "";
+	virtual const DKString& classList()							{ return _classList; }				// getter
+	virtual void classList(const DKString& classList)			{ _classList = classList; } 		// setter
 	
 	//[CEReactions, Unscopable] attribute DOMString slot;
-	virtual DOMString slot()							{ return ""; }	// getter
-	virtual void slot(const DOMString&)					{ } 			// setter
+	DOMString _slot = "";
+	virtual const DOMString& slot()								{ return _slot; }					// getter
+	virtual void slot(const DOMString& slot)					{ _slot = slot; } 					// setter
 	
 	// boolean hasAttributes();
-	virtual bool hasAttributes(bool& _hasAttributes){
-		DKDEBUGFUNC(_hasAttributes);
-		return DKTODO();
+	bool _hasAttributes = false;
+	virtual const bool& hasAttributes(){
+		DKDEBUGFUNC();
+		return _hasAttributes;
 	}
 	
 	// [SameObject] readonly attribute NamedNodeMap attributes;
-	virtual DKString attributes()						{ return ""; }	// getter
-	virtual void attributes(const DKString&)			{ } 			// setter
+	DKString _attributes = "";
+	virtual const DKString& attributes()						{ return _attributes; }				// getter
+	virtual void attributes(const DKString& attributes)			{ _attributes = attributes; } 		// setter
 	
 	// sequence<DOMString> getAttributeNames();
-	virtual bool getAttributeNames(DKString& getAttributeNames){
-		DKDEBUGFUNC(getAttributeNames);
-		return DKTODO();
+	DKString _getAttributeNames = "";
+	virtual const DKString& getAttributeNames(){
+		DKDEBUGFUNC();
+		return _getAttributeNames
 	}
 	
 	// DOMString? getAttribute(DOMString qualifiedName);
