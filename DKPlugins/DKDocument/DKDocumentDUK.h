@@ -306,10 +306,8 @@ public:
 	// HTMLCollection getElementsByClassName(DOMString classNames);
 	static int getElementsByClassName(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _classNames = GetString(ctx);
-		DKString _getElementsByClassName;
-		if(!eventTarget(ctx)->getElementsByClassName(_classNames, _getElementsByClassName))
-			return false;
+		DKString classNames = GetString(ctx);
+		DKString _getElementsByClassName = eventTarget(ctx)->getElementsByClassName(classNames);
 		dukglue_push(ctx, _getElementsByClassName);	
 		return true;
 	}
@@ -317,11 +315,9 @@ public:
 	// [CEReactions, NewObject] Element createElement(DOMString localName, optional (DOMString or ElementCreationOptions) options = {});
 	static int createElement(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _localName = GetString(ctx, 1);
-		DKString _options = GetString(ctx, 2);
-		DKString _createElement;
-		if(!eventTarget(ctx)->createElement(_localName, _options, _createElement))
-			return false;
+		DKString localName = GetString(ctx, 1);
+		DKString options = GetString(ctx, 2);
+		DKString _createElement = eventTarget(ctx)->createElement(localName, options);
 		dukglue_push(ctx, _createElement);	
 		return true;
 	}
@@ -330,11 +326,9 @@ public:
 	static int createElementNS(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString _namespace = GetString(ctx, 1);
-		DKString _qualifiedName = GetString(ctx, 2);
-		DKString _options = GetString(ctx, 3);
-		DKString _createElementNS;
-		if(!eventTarget(ctx)->createElementNS(_namespace, _qualifiedName, _options, _createElementNS))
-			return false;
+		DKString qualifiedName = GetString(ctx, 2);
+		DKString options = GetString(ctx, 3);
+		DKString _createElementNS = eventTarget(ctx)->createElementNS(_namespace, qualifiedName, options);
 		dukglue_push(ctx, _createElementNS);	
 		return true;
 	}
