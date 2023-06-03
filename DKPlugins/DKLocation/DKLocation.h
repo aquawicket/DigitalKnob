@@ -22,62 +22,72 @@ public:
 	virtual ~DKLocation() {}
 
 	// [LegacyUnforgeable] stringifier attribute USVString href;
-	virtual USVString href()						{ return ""; }	// getter
-	virtual void href(const USVString&)				{ } 			// setter
+	USVString _href = "";
+	virtual const USVString& href()					{ return _href; }			// getter
+	virtual void href(const USVString& href)		{ _href = href; } 			// setter
 	
 	// [LegacyUnforgeable] readonly attribute USVString origin;
-	virtual USVString origin()						{ return ""; }	// getter
-	virtual void origin(const USVString&)			{ } 			// setter
+	USVString _origin = "";
+	virtual const USVString& origin()				{ return _origin; }			// getter
+	virtual void origin(const USVString& origin)	{ _origin = origin; } 		// setter
 	
 	// [LegacyUnforgeable] attribute USVString protocol;
-	virtual USVString protocol()					{ return ""; }	// getter
-	virtual void protocol(const USVString&)			{ } 			// setter
+	USVString _protocol = "";
+	virtual const USVString& protocol()				{ return _protocol; }		// getter
+	virtual void protocol(const USVString&)			{ _protocol = protocol; } 	// setter
 	
 	// [LegacyUnforgeable] attribute USVString host;
-	virtual USVString host()						{ return ""; }	// getter
-	virtual void host(const USVString&)			{ } 			// setter
+	USVString _host = "";
+	virtual const USVString& host()					{ return _host; }			// getter
+	virtual void host(const USVString& host)		{ _host = _host; } 			// setter
 	
 	// [LegacyUnforgeable] attribute USVString hostname;
-	virtual USVString hostname()					{ return ""; }	// getter
-	virtual void hostname(const USVString&)			{ } 			// setter
+	USVString _hostname = "";
+	virtual const USVString& hostname()				{ return _hostname; }		// getter
+	virtual void hostname(const USVString& hostname){ _hostname = hostname; } 	// setter
 	
 	// [LegacyUnforgeable] attribute USVString port;
-	virtual USVString port()						{ return ""; }	// getter
-	virtual void port(const USVString&)				{ } 			// setter
+	USVString _port = "";
+	virtual const USVString& port()					{ return _port; }			// getter
+	virtual void port(const USVString& port)		{ _port = port; } 			// setter
 	
 	// [LegacyUnforgeable] attribute USVString pathname;
-	virtual USVString pathname()					{ return ""; }	// getter
-	virtual void pathname(const USVString&)			{ } 			// setter
+	USVString _pathname = "";
+	virtual const USVString& pathname()				{ return _pathname; }		// getter
+	virtual void pathname(const USVString& pathname){ _pathname = pathname; } 	// setter
 	
 	// [LegacyUnforgeable] attribute USVString search;
-	virtual USVString search()						{ return ""; }	// getter
-	virtual void search(const USVString&)			{ } 			// setter
+	USVString _search = "";
+	virtual const USVString& search()				{ return _search; }			// getter
+	virtual void search(const USVString& search)	{ _search = search; } 		// setter
 	
 	// [LegacyUnforgeable] attribute USVString hash;
-	virtual USVString hash()						{ return ""; }	// getter
-	virtual void hash(const USVString&)				{ } 			// setter
+	USVString _hash = "";
+	virtual const USVString& hash()					{ return _hash; }			// getter
+	virtual void hash(const USVString& hash)		{ _hash =_hash; } 			// setter
 
 	// [LegacyUnforgeable] undefined assign(USVString url);
-	virtual bool assign(USVString& url) { // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-assign
+	virtual void assign(const USVString& url) {
 		DKDEBUGFUNC(url);
-		return DKTODO();
+		DKTODO();
 	}
 	
 	// [LegacyUnforgeable] undefined replace(USVString url);
-	virtual bool replace(USVString& url) { // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-replace
+	virtual void replace(const USVString& url) {
 		DKDEBUGFUNC(url);
-		return DKTODO();
+		DKTODO();
 	}
 	
 	// [LegacyUnforgeable] undefined reload();
-	virtual bool reload() { // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-reload
+	virtual void reload() {
 		DKDEBUGFUNC();
-		return DKTODO();
+		DKTODO();
 	}
 	
 	// [LegacyUnforgeable, SameObject] readonly attribute DOMStringList ancestorOrigins;
-	virtual DKString ancestorOrigins()				{ return ""; }	// getter
-	virtual void ancestorOrigins(const DKString&)	{ } 			// setter
+	DKString _ancestorOrigins = "";
+	virtual const DKString& ancestorOrigins()						{ return _ancestorOrigins; }				// getter
+	virtual void ancestorOrigins(const DKString& ancestorOrigins)	{ _ancestorOrigins = ancestorOrigins; } 	// setter
 };
 
 
