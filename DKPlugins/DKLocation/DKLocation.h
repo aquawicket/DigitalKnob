@@ -64,7 +64,7 @@ public:
 	// [LegacyUnforgeable] attribute USVString hash;
 	USVString _hash = "";
 	virtual const USVString& hash()					{ return _hash; }			// getter
-	virtual void hash(const USVString& hash)		{ _hash =_hash; } 			// setter
+	virtual void hash(const USVString& hash)		{ _hash = hash; } 			// setter
 
 	// [LegacyUnforgeable] undefined assign(USVString url);
 	virtual void assign(const USVString& url) {
