@@ -21,7 +21,7 @@ public:
 	// readonly attribute unsigned long length;
 	unsigned int _length = 0;
 	virtual const unsigned int& length()				{ return _length; }		// getter
-	virtual void length(const unsigned int&)			{ _length = length; } 	// setter
+	virtual void length(const unsigned int& length)		{ _length = length; } 	// setter
 	
 	// getter Element? item(unsigned long index);
 	// TODO
