@@ -107,8 +107,7 @@ public:
 	
 	// [NewObject] DocumentFragment createDocumentFragment();
 	DKString _createDocumentFragment = "";
-	virtual const DKString& createDocumentFragment(const DKString& createDocumentFragment){
-		DKDEBUGFUNC(createDocumentFragment);
+	virtual const DKString& createDocumentFragment(){
 		return _createDocumentFragment;
 	}
 	
