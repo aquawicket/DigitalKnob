@@ -56,8 +56,10 @@ bool LoadGifAnimation(SDL_Renderer* renderer, const Rml::String& source, Rml::Te
         return DKERROR("DKRmlDocument::LoadUrl(): no protocol specified\n"); //absolute path without protocol
     }
     else {
-        if (DKFile::PathExists(DKRmlDocument::Get()->workingPath + _url))
-            _url = DKRmlDocument::Get()->workingPath + _url;
+        //if (DKFile::PathExists(DKRmlDocument::Get()->workingPath + _url))
+        //    _url = DKRmlDocument::Get()->workingPath + _url;
+		if (DKFile::PathExists(DKRmlDocument::workingPath + _url))
+            _url = DKRmlDocument::workingPath + _url;
         else if (!DKFile::VerifyPath(_url))
             return DKERROR("could not locate path (" + _url + ")");
     }

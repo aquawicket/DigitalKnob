@@ -32,7 +32,7 @@
 WARNING_DISABLE
 #include "SDL_image.h"
 #include "RmlUi/Core.h"
-//#include "GifAnimate.h"
+#include "GifAnimate.h"
 WARNING_ENABLE
 
 
@@ -131,8 +131,8 @@ void DKSdlRmlRenderer::SetScissorRegion(int x, int y, int width, int height){
 bool DKSdlRmlRenderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vector2i& texture_dimensions, const Rml::String& source){
     DKDEBUGFUNC(texture_handle, texture_dimensions, source);
     
-	//if(LoadGifAnimation(mSdlRenderer, source, texture_handle, texture_dimensions))
-    //    return true;
+	if(LoadGifAnimation(mSdlRenderer, source, texture_handle, texture_dimensions))
+        return true;
     
     //CEF Texture
     //The source variable is the id of the iframe. It will contain [CEF] in it's id.
