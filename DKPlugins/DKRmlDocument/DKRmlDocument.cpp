@@ -44,13 +44,23 @@ WARNING_ENABLE
 #	include "DKCurl/DKCurl.h"
 #endif
 
+#include "DKRmlDocument/DKRmlConverter.h"
+
 #define DRAG_FIX 1
 
 
 DKRmlFile* DKRmlDocument::dkRmlFile = NULL;
-
-
+DKString DKRmlDocument::workingPath;
+/*
 DKRmlDocument::DKRmlDocument() : DKDocument() {
+	DKDEBUGFUNC();
+	interfaceName = "RmlDocument";
+	interfaceAddress = pointerToAddress(this);
+	DKINFO("DKRmlDocument("+interfaceAddress+") \n");
+}
+*/
+
+DKRmlDocument::DKRmlDocument(const DKWindow& window) : DKDocument() {
 	DKDEBUGFUNC();
 	interfaceName = "RmlDocument";
 	interfaceAddress = pointerToAddress(this);
@@ -253,7 +263,8 @@ bool DKRmlDocument::LoadHtml(const DKString& html){
 	//// Prepair the html document for RmlUi
 
 	DKString rml;
-	dkRmlConverter.HtmlToRml(html, rml);
+	//dkRmlConverter.HtmlToRml(html, rml);
+	DKRmlConverter::HtmlToRml(html, rml);
 
 	//// Clear any document and load the rml into the document
 	if (document) {
@@ -315,11 +326,13 @@ bool DKRmlDocument::LoadHtml(const DKString& html){
 		return DKERROR("document invalid\n");
 	}
 	Rml::ElementList elements;
-	DKRmlDocument::Get()->document->GetElementsByTagName(elements, "body");
+	//DKRmlDocument::Get()->document->GetElementsByTagName(elements, "body");
+	document->GetElementsByTagName(elements, "body");
 	if(!elements[0])
 		return DKERROR("body element invalid\n");
 	//dkRmlConverter.PostProcess(document);
-	dkRmlConverter.PostProcess(elements[0]);
+	//dkRmlConverter.PostProcess(elements[0]);
+	DKRmlConverter::PostProcess(this, elements[0]);
 	document->Show();
 #if ANDROID
 	//We have to make sure the fonts are loaded on ANDROID
@@ -540,10 +553,12 @@ bool DKRmlDocument::SendEvent(const DKString& elementAddress, const DKString& ty
 		return DKERROR("document invalid");
 	Rml::Element* element;
 	if (same("window", elementAddress)) {
-		element = DKRmlDocument::Get()->document->GetContext()->GetRootElement();
+		//element = DKRmlDocument::Get()->document->GetContext()->GetRootElement();
+		element = document->GetContext()->GetRootElement();
 	}
 	else if (same("sdlwindow", elementAddress)) {
-		element = DKRmlDocument::Get()->document->GetContext()->GetRootElement();
+		//element = DKRmlDocument::Get()->document->GetContext()->GetRootElement();
+		element = document->GetContext()->GetRootElement();
 	}
 	else {
 		element = (Rml::Element*)addressToPointer(elementAddress);

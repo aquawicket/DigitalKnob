@@ -12,7 +12,7 @@
 // Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
 // [Exposed=Window]
 // interface Location { // but see also additional creation steps and overridden internal methods
-class DKRmlLocation : public DKLocation, public DKObjectT<DKRmlLocation>
+class DKRmlLocation : public DKLocation //, public DKObjectT<DKRmlLocation>
 {
 public:
 	DKRmlLocation() : DKLocation() {
@@ -24,8 +24,8 @@ public:
 	virtual ~DKRmlLocation() {}
 
 	// [LegacyUnforgeable] stringifier attribute USVString href;
-	virtual const USVString& href()				{ return DKRmlDocument::Get()->href_; }		// getter
-	virtual void href(const USVString& url)		{ DKRmlDocument::Get()->LoadUrl(url); } 	// setter
+	//virtual const USVString& href()				{ return DKRmlDocument::Get()->href_; }		// getter
+	//virtual void href(const USVString& url)		{ DKRmlDocument::Get()->LoadUrl(url); } 	// setter
 	
 	// [LegacyUnforgeable] readonly attribute USVString origin;
 	virtual bool origin(DKString&, bool) { return DKTODO(); } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-origin
@@ -72,6 +72,6 @@ public:
 	// [LegacyUnforgeable, SameObject] readonly attribute DOMStringList ancestorOrigins;
 	virtual bool ancestorOrigins(DKString&, bool) { return DKTODO(); } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-ancestororigins
 };
-REGISTER_OBJECT(DKRmlLocation, true);
+//REGISTER_OBJECT(DKRmlLocation, true);
 
 #endif //DKLocation_H

@@ -79,12 +79,12 @@ public:
 	// readonly attribute boolean complete;
 	bool _complete = false;
 	virtual const bool& complete()									{ return _complete; }					// getter
-	virtual void complete(const bool& complete)						{ _complete = _complete; } 				// setter
+	virtual void complete(const bool& complete)						{ _complete = complete; } 				// setter
 	
 	// readonly attribute USVString currentSrc;
 	USVString _currentSrc = "";
 	virtual const USVString& currentSrc()							{ return _currentSrc; }					// getter
-	virtual void currentSrc(const USVString& currentSrc)			{ _currentSrc = _currentSrc; }			// setter
+	virtual void currentSrc(const USVString& currentSrc)			{ _currentSrc = currentSrc; }			// setter
 	
 	// [CEReactions] attribute DOMString referrerPolicy;
 	DOMString _referrerPolicy = "";

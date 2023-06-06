@@ -38,7 +38,7 @@
 #endif
 
 
-class DKConsoleWindow : public DKWindow, public DKObjectT<DKConsoleWindow>
+class DKConsoleWindow : public DKWindow //, public DKObjectT<DKConsoleWindow>
 {
 public:
 	DKConsoleWindow();
@@ -518,7 +518,7 @@ public:
 	void ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD);
 #endif
 };
-REGISTER_OBJECT(DKConsoleWindow, true);
+//REGISTER_OBJECT(DKConsoleWindow, true);
 
 
 #endif //DKConsoleWindow_H

@@ -30,6 +30,11 @@
 	#include "DKCurl/DKCurl.h"
 #endif
 
+/*
+DKRmlFile::DKRmlFile(DKRmlDocument* dkRmlDocument){
+	_dkRmlDocument = dkRmlDocument;
+}
+*/
 
 Rml::FileHandle DKRmlFile::Open(const Rml::String& path){
 	DKDEBUGFUNC("path");
@@ -46,8 +51,10 @@ Rml::FileHandle DKRmlFile::Open(const Rml::String& path){
 		return DKERROR("DKRmlDocument::LoadUrl(): no protocol specified\n"); //absolute path without protocol
 	}
 	else{
-		if(DKFile::PathExists(DKRmlDocument::Get()->workingPath+_url))
-			_url = DKRmlDocument::Get()->workingPath+_url;
+		//if(DKFile::PathExists(DKRmlDocument::Get()->workingPath+_url))
+		//	_url = DKRmlDocument::Get()->workingPath+_url;
+		if(DKFile::PathExists(DKRmlDocument::workingPath+_url))
+			_url = DKRmlDocument::workingPath+_url;
 		else if(!DKFile::VerifyPath(_url)){
 			return DKERROR("could not locate path ("+_url+")");
 		}

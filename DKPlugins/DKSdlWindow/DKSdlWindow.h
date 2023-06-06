@@ -37,7 +37,7 @@ WARNING_ENABLE
 #include "DKWindow/DKWindow.h"
 
 
-class DKSdlWindow : public DKWindow, public DKObjectT<DKSdlWindow>
+class DKSdlWindow : public DKWindow//, public DKObjectT<DKSdlWindow>
 {
 public:
 	DKSdlWindow();
@@ -45,6 +45,7 @@ public:
 	bool Init();
 	bool End();
 
+	/*
 	// the current browsing context
 	// [LegacyUnforgeable] readonly attribute WindowProxy window;
 	virtual const DKString& window()							{ DKTODO(); return ""; }								// getter
@@ -621,6 +622,7 @@ public:
 				return "";
 			}
 	// };
+	*/
 
 	////// DK //////
 	bool Fullscreen(const void* input, void* output);
@@ -697,6 +699,6 @@ public:
 	}
 };
 
-REGISTER_OBJECT(DKSdlWindow, true)
+//REGISTER_OBJECT(DKSdlWindow, true)
 
 #endif //DKSdlWindow_H

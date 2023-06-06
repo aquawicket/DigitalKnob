@@ -58,7 +58,7 @@
 
 ////// DigitalKnob //////
 // [DKConsoleWindow]
-#include "TEST_DKConsoleWindow.h"
+//#include "TEST_DKConsoleWindow.h"
 
 // [DKSdlWindow]
 #include "TEST_DKSdlWindow.h"
@@ -67,7 +67,7 @@
 #include "TEST_DKRmlDocument.h"
 
 // [DKRmlLocation]
-#include "TEST_DKRmlLocation.h"
+//#include "TEST_DKRmlLocation.h"
 
 
 ///////////////////////////////////////
@@ -130,16 +130,16 @@ bool App::Init() {
 
 	////// DigitalKnob //////
 	// [DKConsoleWindow]
-	DKClass::DKCreate("TEST_DKConsoleWindow");
+	//DKClass::DKCreate("TEST_DKConsoleWindow");
 	
 	// [DKSdlWindow]
 	DKClass::DKCreate("TEST_DKSdlWindow");
 	
 	// [DKRmlDocument]
-	DKClass::DKCreate("TEST_DKRmlDocument");
+	//DKClass::DKCreate("TEST_DKRmlDocument");
 	
 	// [DKRmlLocation]
-	DKClass::DKCreate("TEST_DKRmlLocation");
+	//DKClass::DKCreate("TEST_DKRmlLocation");
 
 	return true;
 }

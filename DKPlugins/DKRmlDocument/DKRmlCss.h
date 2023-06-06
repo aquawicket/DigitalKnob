@@ -30,14 +30,14 @@
 #include "DKRmlDocument/DKRmlDocument.h"
 
 
-class DKRmlCss : public DKObjectT<DKRmlCss>
+class DKRmlCss// : public DKObjectT<DKRmlCss>
 {
 public:
-	bool Init();
-	bool End();
-	static DKRmlDocument* dkRmlDocument;
+	DKRmlCss(DKRmlDocument* dkRmlDocument, /*const*/ DKString& file);
+	//bool Init();
+	//static DKRmlDocument* dkRmlDocument;
 };
 
 
-REGISTER_OBJECT(DKRmlCss, false)
+//REGISTER_OBJECT(DKRmlCss, false)
 #endif //DKRmlCss_H

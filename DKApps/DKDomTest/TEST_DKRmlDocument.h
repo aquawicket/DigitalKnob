@@ -3,20 +3,21 @@
 #define TEST_DKRmlDocument_H
 
 #include "DKRmlDocument/DKRmlDocument.h"
+#include "TEST_DKSdlWindow.h"
 
 
 class TEST_DKRmlDocument : public DKObjectT<TEST_DKRmlDocument>
 {
 public:
-	//DKRmlDocument dkRmlDocument;
+	DKRmlDocument* dkRmlDocument;
 	
 	bool Init(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DKRmlDocument.h //////");
 		
-		DKRmlDocument* dkRmlDocument = (DKRmlDocument*)DKClass::DKCreate("DKRmlDocument");
+		dkRmlDocument = new DKRmlDocument (*TEST_DKSdlWindow::Get()->dkSdlWindow);
 		
-		//printRmlDocumentProperties(dkRmlDocument);
+		printRmlDocumentProperties(*dkRmlDocument);
 		return true;
 	}
 	

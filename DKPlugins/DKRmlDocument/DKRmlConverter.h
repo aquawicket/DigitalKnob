@@ -28,30 +28,36 @@
 #define DKRmlConverter_H
 
 #include "DK/DK.h"
+#include "DKRmlDocument/DKRmlDocument.h"
 
 WARNING_DISABLE
 #include <RmlUi/Core.h>
 WARNING_ENABLE
 
 
-class DKRmlConverter  : public DKObject{
+class DKRmlConverter {// : public DKObject{
 public:
-	bool HtmlToRml(const DKString& html, DKString& rml);
-	bool Hyperlink(DKEvents* event);
+	static bool HtmlToRml(const DKString& html, DKString& rml);
+	//bool Hyperlink(DKEvents* event);
+	bool Hyperlink(DKRmlDocument* dkRmlDocument, DKEvents* event);
 	//bool IndexToRml(const DKString& html, DKString& rml);
-	bool PostProcess(Rml::Element* element);
-	static bool ResizeIframe(DKEvents* event);
-	bool ClickIframe(DKEvents* event);
-	bool MouseOverIframe(DKEvents* event);
+	//bool PostProcess(Rml::Element* element);
+	static bool DKRmlConverter::PostProcess(DKRmlDocument* dkRmlDocument, Rml::Element* element);
+	//static bool ResizeIframe(DKEvents* event);
+	static bool ResizeIframe(DKRmlDocument* dkRmlDocument, DKEvents* event);
+	//bool ClickIframe(DKEvents* event);
+	bool ClickIframe(DKRmlDocument* dkRmlDocument, DKEvents* event);
+	//bool MouseOverIframe(DKEvents* event);
+	bool MouseOverIframe(DKRmlDocument* dkRmlDocument, DKEvents* event);
 	bool Encode(std::string& _data);
 #ifdef USE_tidy_html5
 	bool TidyFile(const DKString& in, DKString& out);
 #endif
 	bool GetOuterHtml(Rml::Element* element, DKString& string);
 
-	DKString stored_html;
-	DKString stored_rml;
-	DKString processed;
+	static DKString stored_html;
+	static DKString stored_rml;
+	static DKString processed;
 	
 	// TODO: multi-demensional map of html escape characters
 	// https://mateam.net/html-escape-characters/

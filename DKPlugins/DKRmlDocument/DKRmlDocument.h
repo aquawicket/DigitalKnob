@@ -34,16 +34,17 @@
 #include "DKWindow/DKWindow.h"
 #include "DKDocument/DKDocument.h"
 #include "DKRmlDocument/DKRmlFile.h"
-#include "DKRmlDocument/DKRmlConverter.h"
+//#include "DKRmlDocument/DKRmlConverter.h"
 
 WARNING_DISABLE
 #include <RmlUi/Core.h>
 WARNING_ENABLE
 
 
-class DKRmlDocument : public DKDocument, public Rml::EventListener, public DKObjectT<DKRmlDocument> {
+class DKRmlDocument : public DKDocument, public Rml::EventListener {//, public DKObjectT<DKRmlDocument> {
 public:
-	DKRmlDocument();
+	//DKRmlDocument();
+	DKRmlDocument(const DKWindow& window);
 	~DKRmlDocument();
 	bool Init();
 	bool End();
@@ -65,13 +66,13 @@ public:
 	DKString href_;
 	DKString protocol;
 	DKString _path;
-	DKString workingPath;
+	static DKString workingPath; //FIXME: make un-static
 	Rml::Context* context;
 	Rml::ElementDocument* document;
 	static DKRmlFile* dkRmlFile;
 	Rml::Element* hover;
-	DKRmlConverter dkRmlConverter;
+	//DKRmlConverter dkRmlConverter;
 };
 
-REGISTER_OBJECT(DKRmlDocument, true)
+//REGISTER_OBJECT(DKRmlDocument, true)
 #endif //DKRmlDocument_H

@@ -52,11 +52,11 @@ WARNING_ENABLE
 #endif
 
 
-class DKSdlRmlDocument : public DKObjectT<DKSdlRmlDocument>
+class DKSdlRmlDocument //: public DKObjectT<DKSdlRmlDocument>
 {
 public:
-	bool Init();
-	bool End();
+	DKSdlRmlDocument(DKSdlWindow* _dkSdlWindow, DKRmlDocument* _dkRmlDocument);
+	//bool Init();
 
 	bool Handle(SDL_Event *event);
 	bool Render();
@@ -78,5 +78,5 @@ public:
 };
 
 
-REGISTER_OBJECT(DKSdlRmlDocument, true)
+//REGISTER_OBJECT(DKSdlRmlDocument, true)
 #endif //DKSdlRmlDocument_H

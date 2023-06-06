@@ -32,7 +32,7 @@
 WARNING_DISABLE
 #include "SDL_image.h"
 #include "RmlUi/Core.h"
-#include "GifAnimate.h"
+//#include "GifAnimate.h"
 WARNING_ENABLE
 
 
@@ -51,7 +51,7 @@ DKSdlRmlRenderer::DKSdlRmlRenderer(SDL_Renderer* sdlRenderer, SDL_Window* sdlWin
 // Called by RmlUi when it wants to render geometry that it does not wish to optimise.
 void DKSdlRmlRenderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, const Rml::TextureHandle texture, const Rml::Vector2f& translation) {
     //DKDEBUGFUNC(vertices, num_vertices, indices, num_indices, texture, translation);  //EXCESSIVE LOGGING
-    SDL_Texture* sdlTexture = GetGifAnimation(texture);
+    SDL_Texture* sdlTexture = nullptr;//GetGifAnimation(texture);
     if (sdlTexture == nullptr)
         sdlTexture = (SDL_Texture*)texture;
 
@@ -130,8 +130,9 @@ void DKSdlRmlRenderer::SetScissorRegion(int x, int y, int width, int height){
 // Called by RmlUi when a texture is required by the library.		
 bool DKSdlRmlRenderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vector2i& texture_dimensions, const Rml::String& source){
     DKDEBUGFUNC(texture_handle, texture_dimensions, source);
-    if(LoadGifAnimation(mSdlRenderer, source, texture_handle, texture_dimensions))
-        return true;
+    
+	//if(LoadGifAnimation(mSdlRenderer, source, texture_handle, texture_dimensions))
+    //    return true;
     
     //CEF Texture
     //The source variable is the id of the iframe. It will contain [CEF] in it's id.

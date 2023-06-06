@@ -14,9 +14,9 @@ public:
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_Window.h //////");
 		
-		DKWindow window;
-		window.screen(TEST_Screen::_screen);
-		printWindowProperties(window);
+		DKWindow* window = new DKWindow();
+		window->screen(TEST_Screen::_screen);
+		printWindowProperties(*window);
 		return true;
 	}
 	

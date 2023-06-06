@@ -32,13 +32,17 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
-DKRmlDocument* DKRmlCss::dkRmlDocument;
+//KRmlDocument* DKRmlCss::dkRmlDocument;
 
-bool DKRmlCss::Init(){
+//bool DKRmlCss::Init(){
+DKRmlCss::DKRmlCss(DKRmlDocument* dkRmlDocument, /*const*/ DKString& file){
 	DKDEBUGFUNC();
-	dkRmlDocument = DKRmlDocument::Get();
-	if(!dkRmlDocument)
-		return DKERROR("dkRmlDocument invalid\n");
+	//dkRmlDocument = DKRmlDocument::Get();
+	if(!dkRmlDocument){
+		DKERROR("dkRmlDocument invalid\n");
+		return;
+	}
+	/*
 	//data = ("DKRmlCss", file)
 	if(data.size() < 2){
 		DKString _data = toString(data, ",");
@@ -49,8 +53,11 @@ bool DKRmlCss::Init(){
 		return DKERROR("data has too many parameters: data:("+_data+")\n");
 	}
 	DKString file = data[1];
-	if(!DKFile::VerifyPath(file))
-		return DKERROR("could not find css file\n");	
+	*/
+	if(!DKFile::VerifyPath(file)){
+		DKERROR("could not find css file\n");
+		return;
+	}
 
 	//Load user agent style sheet
 	const Rml::StyleSheetContainer* doc_sheet = dkRmlDocument->document->GetOwnerDocument()->GetStyleSheetContainer();
@@ -61,10 +68,4 @@ bool DKRmlCss::Init(){
 	}
 	else //no current sheet, just load the file sheet
 		dkRmlDocument->document->GetOwnerDocument()->SetStyleSheetContainer(std::move(file_sheet));
-	return true;
-}
-
-bool DKRmlCss::End(){
-	DKDEBUGFUNC();
-	return true;
 }

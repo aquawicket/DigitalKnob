@@ -39,7 +39,7 @@ public:
 	// [LegacyUnforgeable] attribute USVString host;
 	USVString _host = "";
 	virtual const USVString& host()					{ return _host; }			// getter
-	virtual void host(const USVString& host)		{ _host = _host; } 			// setter
+	virtual void host(const USVString& host)		{ _host = host; } 			// setter
 	
 	// [LegacyUnforgeable] attribute USVString hostname;
 	USVString _hostname = "";

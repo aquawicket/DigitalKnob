@@ -33,15 +33,20 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
-bool DKSdlRmlDocument::Init(){
+//bool DKSdlRmlDocument::Init(){
+DKSdlRmlDocument::DKSdlRmlDocument(DKSdlWindow* _dkSdlWindow, DKRmlDocument* _dkRmlDocument) {
 	DKDEBUGFUNC();
 	//Android SDL_TEXTINPUT events not working
 	//SDL_StartTextInput(); 
 	//SDL_EventState(SDL_TEXTINPUT, SDL_ENABLE);
-	dkSdlWindow = DKSdlWindow::Instance("DKSdlWindow0");
-	dkRmlDocument = DKRmlDocument::Instance("DKRmlDocument0");
-	if(!dkSdlWindow || !dkRmlDocument)
-		return DKERROR("DKSdlRmlDocument::Init(): INVALID OBJECTS\n");
+	//dkSdlWindow = DKSdlWindow::Instance("DKSdlWindow0");
+	dkSdlWindow = _dkSdlWindow;
+	//dkRmlDocument = DKRmlDocument::Instance("DKRmlDocument0");
+	dkRmlDocument = _dkRmlDocument;
+	if(!dkSdlWindow || !dkRmlDocument){
+		DKERROR("DKSdlRmlDocument::Init(): INVALID OBJECTS\n");
+		return;
+	}
 #ifdef USE_DKSDLRMLRENDERER
 	Renderer = new DKSdlRmlRenderer(dkSdlWindow->renderer, dkSdlWindow->_window);
 #elif USE_DKSDLRMLOPENGL
@@ -55,12 +60,7 @@ bool DKSdlRmlDocument::Init(){
 	DKSdlWindow::AddEventFunc(&DKSdlRmlDocument::Handle, this);
 	DKSdlWindow::AddRenderFunc(&DKSdlRmlDocument::Render, this);
 	DKSdlWindow::AddUpdateFunc(&DKSdlRmlDocument::Update, this);
-	return true;
-}
-
-bool DKSdlRmlDocument::End(){
-	DKDEBUGFUNC();
-	return true;
+	//return true;
 }
 
 bool DKSdlRmlDocument::Handle(SDL_Event *event) {

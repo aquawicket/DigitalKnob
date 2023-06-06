@@ -8,54 +8,58 @@
 class TEST_DKSdlWindow : public DKObjectT<TEST_DKSdlWindow>
 {
 public:
-	DKSdlWindow dkSdlWindow;
+	//DKSdlWindow dkSdlWindow;
+	DKSdlWindow* dkSdlWindow;
 	
 	bool Init(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DKSdlWindow.h //////");
 		
-		printDKSdlWindowProperties(dkSdlWindow);
+		dkSdlWindow = new DKSdlWindow();
+		dkSdlWindow->screen(TEST_Screen::_screen);
+		
+		printDKSdlWindowProperties(*dkSdlWindow);
 		
 		////// FocusEvent //////
 		// https://w3c.github.io/uievents/#events-focus-types
-		dkSdlWindow.addEventListener("blur", 				&TEST_DKSdlWindow::onblur);
-		dkSdlWindow.addEventListener("focus", 				&TEST_DKSdlWindow::onfocus);
-		dkSdlWindow.addEventListener("focusin", 			&TEST_DKSdlWindow::onfocusin);
-		dkSdlWindow.addEventListener("focusout", 			&TEST_DKSdlWindow::onfocusout);
+		dkSdlWindow->addEventListener("blur", 				&TEST_DKSdlWindow::onblur);
+		dkSdlWindow->addEventListener("focus", 				&TEST_DKSdlWindow::onfocus);
+		dkSdlWindow->addEventListener("focusin", 			&TEST_DKSdlWindow::onfocusin);
+		dkSdlWindow->addEventListener("focusout", 			&TEST_DKSdlWindow::onfocusout);
 		
 		////// MouseEvent //////
 		// https://w3c.github.io/uievents/#events-mouse-types
-		dkSdlWindow.addEventListener("auxclick", 			&TEST_DKSdlWindow::onauxclick);
-		dkSdlWindow.addEventListener("click", 				&TEST_DKSdlWindow::onclick);
-		dkSdlWindow.addEventListener("contextmenu",			&TEST_DKSdlWindow::oncontextmenu);
-		dkSdlWindow.addEventListener("dblclick", 			&TEST_DKSdlWindow::ondblclick);
-		dkSdlWindow.addEventListener("mousedown", 			&TEST_DKSdlWindow::onmousedown);
-		dkSdlWindow.addEventListener("mouseenter", 			&TEST_DKSdlWindow::onmouseenter);
-		dkSdlWindow.addEventListener("mouseleave", 			&TEST_DKSdlWindow::onmouseleave);
-		dkSdlWindow.addEventListener("mousemove", 			&TEST_DKSdlWindow::onmousemove);
-		dkSdlWindow.addEventListener("mouseout", 			&TEST_DKSdlWindow::onmouseout);
-		dkSdlWindow.addEventListener("mouseover", 			&TEST_DKSdlWindow::onmouseover);
-		dkSdlWindow.addEventListener("mouseup", 			&TEST_DKSdlWindow::onmouseup);
+		dkSdlWindow->addEventListener("auxclick", 			&TEST_DKSdlWindow::onauxclick);
+		dkSdlWindow->addEventListener("click", 				&TEST_DKSdlWindow::onclick);
+		dkSdlWindow->addEventListener("contextmenu",			&TEST_DKSdlWindow::oncontextmenu);
+		dkSdlWindow->addEventListener("dblclick", 			&TEST_DKSdlWindow::ondblclick);
+		dkSdlWindow->addEventListener("mousedown", 			&TEST_DKSdlWindow::onmousedown);
+		dkSdlWindow->addEventListener("mouseenter", 			&TEST_DKSdlWindow::onmouseenter);
+		dkSdlWindow->addEventListener("mouseleave", 			&TEST_DKSdlWindow::onmouseleave);
+		dkSdlWindow->addEventListener("mousemove", 			&TEST_DKSdlWindow::onmousemove);
+		dkSdlWindow->addEventListener("mouseout", 			&TEST_DKSdlWindow::onmouseout);
+		dkSdlWindow->addEventListener("mouseover", 			&TEST_DKSdlWindow::onmouseover);
+		dkSdlWindow->addEventListener("mouseup", 			&TEST_DKSdlWindow::onmouseup);
 		
 		////// WheelEvent //////
 		// https://w3c.github.io/uievents/#events-wheel-types
-		dkSdlWindow.addEventListener("wheel", 				&TEST_DKSdlWindow::onwheel);
+		dkSdlWindow->addEventListener("wheel", 				&TEST_DKSdlWindow::onwheel);
 		
 		////// InputEvent //////
 		// https://w3c.github.io/uievents/#events-input-types
-		dkSdlWindow.addEventListener("beforeinput", 		&TEST_DKSdlWindow::onbeforeinput);
-		dkSdlWindow.addEventListener("input", 				&TEST_DKSdlWindow::oninput);
+		dkSdlWindow->addEventListener("beforeinput", 		&TEST_DKSdlWindow::onbeforeinput);
+		dkSdlWindow->addEventListener("input", 				&TEST_DKSdlWindow::oninput);
 		
 		////// KeyboardEvent //////
 		// https://w3c.github.io/uievents/#events-keyboard-types
-		dkSdlWindow.addEventListener("keydown", 			&TEST_DKSdlWindow::onkeydown);
-		dkSdlWindow.addEventListener("keyup", 				&TEST_DKSdlWindow::onkeyup);
+		dkSdlWindow->addEventListener("keydown", 			&TEST_DKSdlWindow::onkeydown);
+		dkSdlWindow->addEventListener("keyup", 				&TEST_DKSdlWindow::onkeyup);
 		
 		////// CompositionEvent //////
 		// https://w3c.github.io/uievents/#events-composition-types
-		dkSdlWindow.addEventListener("compositionstart",	&TEST_DKSdlWindow::oncompositionstart);
-		dkSdlWindow.addEventListener("compositionupdate", 	&TEST_DKSdlWindow::oncompositionupdate);
-		dkSdlWindow.addEventListener("compositionend", 		&TEST_DKSdlWindow::oncompositionend);
+		dkSdlWindow->addEventListener("compositionstart",	&TEST_DKSdlWindow::oncompositionstart);
+		dkSdlWindow->addEventListener("compositionupdate", 	&TEST_DKSdlWindow::oncompositionupdate);
+		dkSdlWindow->addEventListener("compositionend", 		&TEST_DKSdlWindow::oncompositionend);
 		
 		return true;
 	}
@@ -225,5 +229,7 @@ public:
 REGISTER_OBJECT(TEST_DKSdlWindow, true);
 
 //DKSdlWindow& window;	// global window variable (TODO)
+
+
 
 #endif //TEST_DKSdlWindow_H
