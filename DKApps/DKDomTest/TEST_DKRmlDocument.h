@@ -15,7 +15,7 @@ public:
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DKRmlDocument.h //////");
 		
-		dkRmlDocument = new DKRmlDocument (*TEST_DKSdlWindow::Get()->dkSdlWindow);
+		dkRmlDocument = new DKRmlDocument(*TEST_DKSdlWindow::Get()->dkSdlWindow);
 		
 		printRmlDocumentProperties(*dkRmlDocument);
 		return true;
