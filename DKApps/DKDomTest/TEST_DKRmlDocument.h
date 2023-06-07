@@ -6,19 +6,18 @@
 #include "TEST_DKSdlWindow.h"
 
 
-class TEST_DKRmlDocument : public DKObjectT<TEST_DKRmlDocument>
+class TEST_DKRmlDocument //: public DKObjectT<TEST_DKRmlDocument>
 {
 public:
 	DKRmlDocument* dkRmlDocument;
 	
-	bool Init(){
+	TEST_DKRmlDocument(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DKRmlDocument.h //////");
 		
 		dkRmlDocument = new DKRmlDocument(TEST_DKSdlWindow::Get()->dkSdlWindow);
 		
 		printRmlDocumentProperties(*dkRmlDocument);
-		return true;
 	}
 	
 	static void printRmlDocumentProperties(DKRmlDocument& dkRmlDocument){
@@ -27,7 +26,7 @@ public:
 		TEST_Document::printDocumentProperties(dynamic_cast<DKDocument&>(dkRmlDocument));	//TODO: try to remove the need for dynamic_cast
 	}
 };
-REGISTER_OBJECT(TEST_DKRmlDocument, true);
+//REGISTER_OBJECT(TEST_DKRmlDocument, true);
 
 
 #endif //TEST_DKRmlDocument_H

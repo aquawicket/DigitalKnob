@@ -7,16 +7,15 @@
 #include "DKHTMLBodyElement/DKHTMLBodyElement.h"
 
 
-class TEST_HTMLBodyElement : public DKObjectT<TEST_HTMLBodyElement>
+class TEST_HTMLBodyElement //: public DKObjectT<TEST_HTMLBodyElement>
 {
 public:
-	bool Init(){
+	TEST_HTMLBodyElement(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_HTMLBodyElement.h //////");
 		
 		DKHTMLBodyElement htmlBodyElement;
 		printHTMLBodyElementProperties(htmlBodyElement);
-		return true;
 	}
 
 	static void printHTMLBodyElementProperties(DKHTMLBodyElement& htmlBodyElement){
@@ -62,7 +61,7 @@ public:
 		TEST_HTMLElement::printHTMLElementProperties(dynamic_cast<DKHTMLElement&>(htmlBodyElement));	//TODO: try to remove the need for dynamic_cast
 	}
 };
-REGISTER_OBJECT(TEST_HTMLBodyElement, true);
+//REGISTER_OBJECT(TEST_HTMLBodyElement, true);
 
 
 #endif //TEST_HTMLBodyElement_H

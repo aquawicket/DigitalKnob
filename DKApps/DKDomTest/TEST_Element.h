@@ -7,16 +7,15 @@
 #include "DKElement/DKElement.h"
 
 
-class TEST_Element : public DKObjectT<TEST_Element>
+class TEST_Element //: public DKObjectT<TEST_Element>
 {
 public:
-	bool Init(){
+	TEST_Element(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_Element.h //////");
 
 		DKElement element;
 		printElementProperties(element);
-		return true;
 	}
 	
 	static void printElementProperties(DKElement& element){
@@ -130,7 +129,7 @@ public:
 		TEST_Node::printNodeProperties(dynamic_cast<DKNode&>(element));	//TODO: try to remove the need for dynamic_cast
 	}
 };
-REGISTER_OBJECT(TEST_Element, true);
+//REGISTER_OBJECT(TEST_Element, true);
 
 
 #endif //TEST_Element_H

@@ -5,12 +5,12 @@
 #include "DKSdlWindow/DKSdlWindow.h"
 
 
-class TEST_DKSdlWindow : public DKObjectT<TEST_DKSdlWindow>
+class TEST_DKSdlWindow //: public DKObjectT<TEST_DKSdlWindow>
 {
 public:
 	DKSdlWindow* dkSdlWindow;
 	
-	bool Init(){
+	TEST_DKSdlWindow(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DKSdlWindow.h //////");
 		
@@ -59,8 +59,6 @@ public:
 		dkSdlWindow->addEventListener("compositionstart",	&TEST_DKSdlWindow::oncompositionstart);
 		dkSdlWindow->addEventListener("compositionupdate", 	&TEST_DKSdlWindow::oncompositionupdate);
 		dkSdlWindow->addEventListener("compositionend", 	&TEST_DKSdlWindow::oncompositionend);
-		
-		return true;
 	}
 
 	static void printDKSdlWindowProperties(DKSdlWindow& dkSdlWindow){
@@ -225,7 +223,7 @@ public:
 		return true;
 	}
 };
-REGISTER_OBJECT(TEST_DKSdlWindow, true);
+//REGISTER_OBJECT(TEST_DKSdlWindow, true);
 
 //DKSdlWindow& window;	// global window variable (TODO)
 

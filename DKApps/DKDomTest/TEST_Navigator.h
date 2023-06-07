@@ -7,16 +7,15 @@
 #include "DKNavigator/DKNavigator.h"
 
 
-class TEST_Navigator : public DKObjectT<TEST_Navigator>
+class TEST_Navigator //: public DKObjectT<TEST_Navigator>
 {
 public:
-	bool Init(){
+	TEST_Navigator(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_Navigator.h //////");
 	
 		DKNavigator navigator;
 		printNavigatorProperties(navigator);
-		return true;
 	}
 
 	static void printNavigatorProperties(DKNavigator& navigator){
@@ -24,7 +23,7 @@ public:
 		DKTODO();
 	}
 };
-REGISTER_OBJECT(TEST_Navigator, true);
+//REGISTER_OBJECT(TEST_Navigator, true);
 
 
 #endif //TEST_Navigator_H

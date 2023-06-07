@@ -17,8 +17,7 @@ public:
 		DKEventTarget eventTarget;
 		eventTarget.addEventListener("mouseEvent", &TEST_MouseEvent::onMouseEvent);
 		DKMouseEvent mouseEvent("mouseEvent", "");
-		eventTarget.dispatchEvent(mouseEvent);
-		return true;	
+		eventTarget.dispatchEvent(mouseEvent);	
 	}
 
 	static void printMouseEventProperties(DKMouseEvent& mouseEvent){

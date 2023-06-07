@@ -5,10 +5,10 @@
 #include "DKRmlLocation/DKRmlLocation.h"
 
 
-class TEST_DKRmlLocation : public DKObjectT<TEST_DKRmlLocation>
+class TEST_DKRmlLocation //: public DKObjectT<TEST_DKRmlLocation>
 {
 public:
-	bool Init(){
+	TEST_DKRmlLocation(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DKRmlLocation.h //////");
 		
@@ -17,7 +17,6 @@ public:
 		printDKRmlLocationProperties(*dkRmlLocation);
 		
 		dkRmlLocation->href("DKWebTest/index.html");
-		return true;
 	}
 	
 	static void printDKRmlLocationProperties(DKRmlLocation& dkRmlLocation){
@@ -26,7 +25,7 @@ public:
 		TEST_Location::printLocationProperties(dynamic_cast<DKLocation&>(dkRmlLocation));	//TODO: try to remove the need for dynamic_cast
 	}
 };
-REGISTER_OBJECT(TEST_DKRmlLocation, true);
+//REGISTER_OBJECT(TEST_DKRmlLocation, true);
 
 
 #endif //TEST_DKRmlLocation_H

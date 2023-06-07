@@ -60,7 +60,7 @@ public:
 		return true;
 	}
 };
-REGISTER_OBJECT(TEST_WheelEvent, true);
+//REGISTER_OBJECT(TEST_WheelEvent, true);
 
 
 #endif //TEST_WheelEvent_H

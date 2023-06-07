@@ -5,12 +5,12 @@
 #include "DKConsoleWindow/DKConsoleWindow.h"
 
 
-class TEST_DKConsoleWindow : public DKObjectT<TEST_DKConsoleWindow>
+class TEST_DKConsoleWindow //: public DKObjectT<TEST_DKConsoleWindow>
 {
 public:
 	DKConsoleWindow dkConsoleWindow;
 
-	bool Init(){
+	TEST_DKConsoleWindow(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DKConsoleWindow.h //////");
 		
@@ -56,8 +56,6 @@ public:
 		dkConsoleWindow.addEventListener("compositionstart",	&TEST_DKConsoleWindow::oncompositionstart);
 		dkConsoleWindow.addEventListener("compositionupdate", 	&TEST_DKConsoleWindow::oncompositionupdate);
 		dkConsoleWindow.addEventListener("compositionend", 		&TEST_DKConsoleWindow::oncompositionend);
-		
-		return true;
 	}
 
 	static void printDKConsoleWindowProperties(DKConsoleWindow& dkConsoleWindow){
@@ -225,7 +223,7 @@ public:
 	}
 		
 };
-REGISTER_OBJECT(TEST_DKConsoleWindow, true);
+//REGISTER_OBJECT(TEST_DKConsoleWindow, true);
 
 
 #endif //TEST_DKConsoleWindow_H

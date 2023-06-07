@@ -18,7 +18,6 @@ public:
 		keyboardEventTarget.addEventListener("keyboardEvent", &TEST_KeyboardEvent::onKeyboardEvent);
 		DKKeyboardEvent keyboardEvent("keyboardEvent", "");
 		keyboardEventTarget.dispatchEvent(keyboardEvent);
-		return true;
 	}
 	
 	static void printKeyboardEventProperties(DKKeyboardEvent& keyboardEvent){

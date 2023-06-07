@@ -7,16 +7,15 @@
 #include "DKHTMLImageElement/DKHTMLImageElement.h"
 
 
-class TEST_HTMLImageElement : public DKObjectT<TEST_HTMLImageElement>
+class TEST_HTMLImageElement //: public DKObjectT<TEST_HTMLImageElement>
 {
 public:
-	bool Init(){
+	TEST_HTMLImageElement(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_HTMLImageElement.h //////");
 		
 		DKHTMLImageElement htmlImageElement;
 		printHTMLImageElementProperties(htmlImageElement);
-		return true;
 	}
 
 	static void printHTMLImageElementProperties(DKHTMLImageElement& htmlImageElement){
@@ -85,7 +84,7 @@ public:
 		TEST_HTMLElement::printHTMLElementProperties(dynamic_cast<DKHTMLElement&>(htmlImageElement));	//TODO: try to remove the need for dynamic_cast
 	}
 };
-REGISTER_OBJECT(TEST_HTMLImageElement, true);
+//REGISTER_OBJECT(TEST_HTMLImageElement, true);
 
 
 #endif //TEST_HTMLImageElement_H

@@ -7,16 +7,15 @@
 #include "DKHTMLCollection/DKHTMLCollection.h"
 
 
-class TEST_HTMLCollection : public DKObjectT<TEST_HTMLCollection>
+class TEST_HTMLCollection //: public DKObjectT<TEST_HTMLCollection>
 {
 public:
-	bool Init(){
+	TEST_HTMLCollection(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_HTMLCollection.h //////");
 		
 		DKHTMLCollection htmlCollection;
 		printHTMLCollectionProperties(htmlCollection);
-		return true;
 	}
 
 	static void printHTMLCollectionProperties(DKHTMLCollection& htmlCollection){
@@ -32,7 +31,7 @@ public:
 		// function
 	}
 };
-REGISTER_OBJECT(TEST_HTMLCollection, true);
+//REGISTER_OBJECT(TEST_HTMLCollection, true);
 
 
 #endif //TEST_HTMLCollection_H

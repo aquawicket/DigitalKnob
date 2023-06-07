@@ -7,16 +7,15 @@
 #include "DKDocument/DKDocument.h"
 
 
-class TEST_Document : public DKObjectT<TEST_Document>
+class TEST_Document //: public DKObjectT<TEST_Document>
 {
 public:
-	bool Init(){
+	TEST_Document(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_Document.h //////");
 		
 		DKDocument document;
 		printDocumentProperties(document);
-		return true;
 	}
 	
 	static void printDocumentProperties(DKDocument& document){
@@ -157,7 +156,7 @@ public:
 		TEST_Node::printNodeProperties(dynamic_cast<DKNode&>(document));	//TODO: try to remove the need for dynamic_cast
 	}
 };
-REGISTER_OBJECT(TEST_Document, true);
+//REGISTER_OBJECT(TEST_Document, true);
 
 
 #endif //TEST_Document_H

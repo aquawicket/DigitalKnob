@@ -7,17 +7,16 @@
 #include "DKWindow/DKWindow.h"
 
 
-class TEST_Window : public DKObjectT<TEST_Window>
+class TEST_Window //: public DKObjectT<TEST_Window>
 {
 public:
-	bool Init(){
+	TEST_Window(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_Window.h //////");
 		
 		DKWindow* window = new DKWindow();
 		window->screen(TEST_Screen::_screen);
 		printWindowProperties(*window);
-		return true;
 	}
 	
 	static void printWindowProperties(DKWindow& window){
@@ -392,7 +391,7 @@ public:
 	}
 
 };
-REGISTER_OBJECT(TEST_Window, true);
+//REGISTER_OBJECT(TEST_Window, true);
 
 
 #endif //TEST_Window_H

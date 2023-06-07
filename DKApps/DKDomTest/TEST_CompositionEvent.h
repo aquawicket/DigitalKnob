@@ -5,8 +5,6 @@
 #define TEST_CompositionEvent_H
 
 #include "DKCompositionEvent/DKCompositionEvent.h"
-#include "TEST_UIEvent.h"
-#include "TEST_Event.h"
 
 
 class TEST_CompositionEvent //: public DKObjectT<TEST_CompositionEvent>
@@ -20,7 +18,6 @@ public:
 		eventTarget.addEventListener("compositionEvent", &TEST_CompositionEvent::onCompositionEvent);
 		DKCompositionEvent compositionEvent("compositionEvent", "");
 		eventTarget.dispatchEvent(compositionEvent);
-		return true;
 	}
 	
 	static void printCompositionEventProperties(DKCompositionEvent& compositionEvent){

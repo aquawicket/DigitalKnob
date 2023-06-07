@@ -7,16 +7,15 @@
 #include "DKNode/DKNode.h"
 
 
-class TEST_Node : public DKObjectT<TEST_Node>
+class TEST_Node //: public DKObjectT<TEST_Node>
 {
 public:
-	bool Init(){
+	TEST_Node(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_Node.h //////");
 		
 		DKNode node;
 		printNodeProperties(node);
-		return true;
 	}
 	
 	static void printNodeProperties(DKNode& node){
@@ -167,7 +166,7 @@ public:
 	}
 
 };
-REGISTER_OBJECT(TEST_Node, true);
+//REGISTER_OBJECT(TEST_Node, true);
 
 
 #endif //TEST_Node_H

@@ -7,10 +7,10 @@
 #include "DKDragEvent/DKDragEvent.h"
 
 
-class TEST_DragEvent : public DKObjectT<TEST_DragEvent>
+class TEST_DragEvent //: public DKObjectT<TEST_DragEvent>
 {
 public:
-	bool Init(){
+	TEST_DragEvent() {
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DragEvent.h //////");
 	
@@ -18,10 +18,9 @@ public:
 		eventTarget.addEventListener("dragEvent", &TEST_DragEvent::onDragEvent);
 		DKDragEvent dragEvent("dragEvent", "");
 		eventTarget.dispatchEvent(dragEvent);
-		return true;
 	}
 	
-	static void printDragEventProperties(DKDragEvent& dragEvent){
+	static void printDragEventProperties(DKDragEvent& dragEvent) {
 		DKDEBUGFUNC(dragEvent);
 		
 		// constructor(DOMString type, optional DragEventInit eventInitDict = {});
@@ -33,14 +32,14 @@ public:
 		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent&>(dragEvent));	//TODO: try to remove the need for dynamic_cast
 	}
 	
-	static bool onDragEvent(DKEvent& event){
+	static bool onDragEvent(DKEvent& event) {
 		DKDEBUGFUNC(event);
 		console.log("\nTEST_DragEvent::onDragEvent()");
 		printDragEventProperties(dynamic_cast<DKDragEvent&>(event));						//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 };
-REGISTER_OBJECT(TEST_DragEvent, true);
+//REGISTER_OBJECT(TEST_DragEvent, true);
 
 
 #endif //TEST_DragEvent_H

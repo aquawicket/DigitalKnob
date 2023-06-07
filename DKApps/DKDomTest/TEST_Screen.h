@@ -9,17 +9,16 @@
 
 // [Exposed=Window]
 // interface Screen {
-class TEST_Screen : public DKObjectT<TEST_Screen>
+class TEST_Screen //: public DKObjectT<TEST_Screen>
 {
 public:
 	static DKScreen _screen;
 
-	bool Init(){
+	TEST_Screen(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_Screen.h //////");
 		
 		printScreenProperties(_screen);
-		return true;
 	}
 	
 	static void printScreenProperties(DKScreen& screen){
@@ -44,7 +43,7 @@ public:
 		console.log("screen.pixelDepth() = "+toString(screen.pixelDepth()));
 	}
 };
-REGISTER_OBJECT(TEST_Screen, true);
+//REGISTER_OBJECT(TEST_Screen, true);
 
 DKScreen TEST_Screen::_screen;
 

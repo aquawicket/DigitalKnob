@@ -1,18 +1,11 @@
 #include "DK/stdafx.h"
-
 #include "App.h"
 #include <algorithm>	// smart pointers
 
-
-// [Console] https://console.spec.whatwg.org
 #include "TEST_Console.h"
-
-// [DOM] https://dom.spec.whatwg.org
 #include "TEST_Event.h"
 #include "TEST_EventTarget.h"
 #include "TEST_CustomEvent.h"
-
-// [UIEvents] https://w3c.github.io/uievents
 #include "TEST_UIEvent.h"
 #include "TEST_FocusEvent.h"
 #include "TEST_MouseEvent.h"
@@ -20,56 +13,26 @@
 #include "TEST_InputEvent.h"
 #include "TEST_KeyboardEvent.h"
 #include "TEST_CompositionEvent.h"
-
-// [DragEvent] https://html.spec.whatwg.org/multipage/dnd.html#the-dragevent-interface
 #include "TEST_DragEvent.h"
-
-// [Screen] https://w3c.github.io/csswg-drafts/cssom-view/#the-screen-interface
 #include "TEST_Screen.h"
-
-// [Window] https://html.spec.whatwg.org/
 #include "TEST_Window.h"
-
-// [Navigator] https://html.spec.whatwg.org/multipage/system-state.html#the-navigator-object
 #include "TEST_Navigator.h"
-
-// [Location] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-location-interface
 #include "TEST_Location.h"
-
-// [Node] https://dom.spec.whatwg.org/#interface-node
 #include "TEST_Node.h"
-
-// [Document] https://dom.spec.whatwg.org/#interface-document
 #include "TEST_Document.h"
-
-// [Element] https://dom.spec.whatwg.org/#interface-element
 #include "TEST_Element.h"
-
-// [HTMLCollection] https://dom.spec.whatwg.org/#interface-htmlcollection
 #include "TEST_HTMLCollection.h"
-
-// [HTMLElement] https://html.spec.whatwg.org/multipage/dom.html#htmlelement
 #include "TEST_HTMLElement.h"
-
-// [HTMLBodyElement] https://html.spec.whatwg.org/multipage/sections.html#htmlbodyelement
 #include "TEST_HTMLBodyElement.h"
-
-// [HTMLImageElement] https://html.spec.whatwg.org/multipage/sections.html#htmlbodyelement
 #include "TEST_HTMLImageElement.h"
 
-
+/*
 ////// DigitalKnob //////
-// [DKConsoleWindow]
-//#include "TEST_DKConsoleWindow.h"
-
-// [DKSdlWindow]
+#include "TEST_DKConsoleWindow.h"
 #include "TEST_DKSdlWindow.h"
-
-// [DKRmlDocument]
 #include "TEST_DKRmlDocument.h"
-
-// [DKRmlLocation]
 #include "TEST_DKRmlLocation.h"
+*/
 
 
 ///////////////////////////////////////
@@ -134,57 +97,88 @@ bool App::Init() {
 	std::unique_ptr<TEST_CompositionEvent> test_CompositionEvent = std::make_unique<TEST_CompositionEvent>();	// smart pointer
 	
 	
-	/*
-	// [DragEvent] https://html.spec.whatwg.org/multipage/dnd.html#the-dragevent-interface
-	DKClass::DKCreate("TEST_DragEvent");
-	
-	// [Screen] https://w3c.github.io/csswg-drafts/cssom-view/#the-screen-interface
-	DKClass::DKCreate("TEST_Screen");
-	
-	// [Window] https://html.spec.whatwg.org/
-	DKClass::DKCreate("TEST_Window");
+	// [DragEvent]
+	//DKClass::DKCreate("TEST_DragEvent");																		// DKObjectT
+	//TEST_DragEvent* test_DragEvent = new TEST_DragEvent();													// pointer
+	std::unique_ptr<TEST_DragEvent> test_DragEvent = std::make_unique<TEST_DragEvent>();						// smart pointer
 
-	// [Navigator] https://html.spec.whatwg.org/multipage/system-state.html#the-navigator-object
-	DKClass::DKCreate("TEST_Navigator");
-	
-	// [Location] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-location-interface
-	DKClass::DKCreate("TEST_Location");
-	
-	// [Node] https://dom.spec.whatwg.org/#interface-node
-	DKClass::DKCreate("TEST_Node");
+	// [Screen]
+	//DKClass::DKCreate("TEST_Screen");																			// DKObjectT
+	//TEST_Screen* test_Screen = new TEST_Screen();																// pointer
+	std::unique_ptr<TEST_Screen> test_Screen = std::make_unique<TEST_Screen>();									// smart pointer
 
-	// [Document] https://dom.spec.whatwg.org/#interface-document
-	DKClass::DKCreate("TEST_Document");
-	
-	// [Element] https://dom.spec.whatwg.org/#interface-element
-	DKClass::DKCreate("TEST_Element");
+	// [Window]
+	//DKClass::DKCreate("TEST_Window");																			// DKObjectT
+	//TEST_Window* test_Window = new TEST_Window();																// pointer
+	std::unique_ptr<TEST_Window> test_Window = std::make_unique<TEST_Window>();									// smart pointer
 
-	// [HTMLCollection ] https://dom.spec.whatwg.org/#interface-htmlcollection
-	DKClass::DKCreate("TEST_HTMLCollection");
+	// [Navigator]
+	//DKClass::DKCreate("TEST_Navigator");																		// DKObjectT
+	//TEST_Navigator* test_Navigator = new TEST_Navigator();													// pointer
+	std::unique_ptr<TEST_Navigator> test_Navigator = std::make_unique<TEST_Navigator>();						// smart pointer
+
+	// [Location]
+	//DKClass::DKCreate("TEST_Location");																		// DKObjectT
+	//TEST_Location* test_Location = new TEST_Location();														// pointer
+	std::unique_ptr<TEST_Location> test_Location = std::make_unique<TEST_Location>();							// smart pointer
+
+	// [Node]
+	//DKClass::DKCreate("TEST_Node");																			// DKObjectT
+	//TEST_Node* test_Node = new TEST_Node();																	// pointer
+	std::unique_ptr<TEST_Node> test_Node = std::make_unique<TEST_Node>();										// smart pointer
+
+	// [Document]
+	//DKClass::DKCreate("TEST_Document");																		// DKObjectT
+	//TEST_Document* test_Document = new TEST_Document();														// pointer
+	std::unique_ptr<TEST_Document> test_Document = std::make_unique<TEST_Document>();							// smart pointer
 	
-	// [HTMLElement] https://html.spec.whatwg.org/multipage/dom.html#htmlelement
-	DKClass::DKCreate("TEST_HTMLElement");
+	// [Element]
+	//DKClass::DKCreate("TEST_Element");																		// DKObjectT
+	//TEST_Element* test_Element = new TEST_Element();															// pointer
+	std::unique_ptr<TEST_Element> test_Element = std::make_unique<TEST_Element>();								// smart pointer
+
+	// [HTMLCollection]
+	//DKClass::DKCreate("TEST_HTMLCollection");																	// DKObjectT
+	//TEST_HTMLCollection* test_HTMLCollection = new TEST_HTMLCollection();										// pointer
+	std::unique_ptr<TEST_HTMLCollection> test_HTMLCollection = std::make_unique<TEST_HTMLCollection>();			// smart pointer
 	
-	// [HTMLBodyElement] https://html.spec.whatwg.org/multipage/sections.html#htmlbodyelement
-	DKClass::DKCreate("TEST_HTMLBodyElement");
+	// [HTMLElement]
+	//DKClass::DKCreate("TEST_HTMLElement");																	// DKObjectT
+	//TEST_HTMLElement* test_HTMLElement = new TEST_HTMLElement();												// pointer
+	std::unique_ptr<TEST_HTMLElement> test_HTMLElement = std::make_unique<TEST_HTMLElement>();					// smart pointer
 	
-	// [HTMLImageElement] https://html.spec.whatwg.org/multipage/sections.html#htmlbodyelement
-	DKClass::DKCreate("TEST_HTMLImageElement");
-	*/
+	// [HTMLBodyElement]
+	//DKClass::DKCreate("TEST_HTMLBodyElement");																// DKObjectT
+	//TEST_HTMLBodyElement* test_HTMLBodyElement = new TEST_HTMLBodyElement();									// pointer
+	std::unique_ptr<TEST_HTMLBodyElement> test_HTMLBodyElement = std::make_unique<TEST_HTMLBodyElement>();		// smart pointer
+	
+	// [HTMLImageElement]
+	//DKClass::DKCreate("TEST_HTMLImageElement");																// DKObjectT
+	//TEST_HTMLImageElement* test_HTMLImageElement = new TEST_HTMLImageElement();								// pointer
+	std::unique_ptr<TEST_HTMLImageElement> test_HTMLImageElement = std::make_unique<TEST_HTMLImageElement>();	// smart pointer
+
 
 	/*
 	////// DigitalKnob //////
 	// [DKConsoleWindow]
-	//DKClass::DKCreate("TEST_DKConsoleWindow");
+	//DKClass::DKCreate("TEST_DKConsoleWindow");																// DKObjectT
+	//TEST_DKConsoleWindow* test_DKConsoleWindow = new TEST_DKConsoleWindow();									// pointer
+	std::unique_ptr<TEST_DKConsoleWindow> test_DKConsoleWindow = std::make_unique<TEST_DKConsoleWindow>();		// smart pointer
 	
 	// [DKSdlWindow]
-	DKClass::DKCreate("TEST_DKSdlWindow");
+	//DKClass::DKCreate("TEST_DKSdlWindow");																	// DKObjectT
+	//TEST_DKSdlWindow* test_DKSdlWindow = new TEST_DKSdlWindow();												// pointer
+	std::unique_ptr<TEST_DKSdlWindow> test_DKSdlWindow = std::make_unique<TEST_DKSdlWindow>();					// smart pointer
 	
 	// [DKRmlDocument]
-	DKClass::DKCreate("TEST_DKRmlDocument");
+	//DKClass::DKCreate("TEST_DKRmlDocument");																	// DKObjectT
+	//TEST_DKRmlDocument* test_DKRmlDocument = new TEST_DKRmlDocument();										// pointer
+	std::unique_ptr<TEST_DKRmlDocument> test_DKRmlDocument = std::make_unique<TEST_DKRmlDocument>();			// smart pointer
 	
 	// [DKRmlLocation]
-	DKClass::DKCreate("TEST_DKRmlLocation");
+	//DKClass::DKCreate("TEST_DKRmlLocation");																	// DKObjectT
+	//TEST_DKRmlLocation* test_DKRmlLocation = new TEST_DKRmlLocation();										// pointer
+	std::unique_ptr<TEST_DKRmlLocation> test_DKRmlLocation = std::make_unique<TEST_DKRmlLocation>();			// smart pointer
 	*/
 	
 	return true;

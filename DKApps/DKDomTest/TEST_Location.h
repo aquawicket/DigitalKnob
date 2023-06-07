@@ -7,16 +7,15 @@
 #include "DKLocation/DKLocation.h"
 
 
-class TEST_Location : public DKObjectT<TEST_Location>
+class TEST_Location //: public DKObjectT<TEST_Location>
 {
 public:
-	bool Init(){
+	TEST_Location(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_Location.h //////");
 		
 		DKLocation location;
 		printLocationProperties(location);
-		return true;
 	}
 	
 	static void printLocationProperties(DKLocation& location){
@@ -62,7 +61,7 @@ public:
 		console.log("location.ancestorOrigins() = "	+toString(location.ancestorOrigins()));
 	}
 };
-REGISTER_OBJECT(TEST_Location, true);
+//REGISTER_OBJECT(TEST_Location, true);
 
 
 #endif //TEST_Location_H
