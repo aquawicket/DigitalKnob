@@ -15,62 +15,65 @@
 class DKRmlLocation : public DKLocation //, public DKObjectT<DKRmlLocation>
 {
 public:
-	DKRmlLocation() : DKLocation() {
+	DKRmlDocument* _dkRmlDocument;
+
+	DKRmlLocation(DKRmlDocument* dkRmlDocument) : DKLocation() {
 		DKDEBUGFUNC();
 		interfaceName = "RmlLocation";
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKRmlLocation("+interfaceAddress+") \n");
+		_dkRmlDocument = dkRmlDocument;
 	}
 	virtual ~DKRmlLocation() {}
 
 	// [LegacyUnforgeable] stringifier attribute USVString href;
-	//virtual const USVString& href()				{ return DKRmlDocument::Get()->href_; }		// getter
-	//virtual void href(const USVString& url)		{ DKRmlDocument::Get()->LoadUrl(url); } 	// setter
+	virtual const USVString& href()					{ return _dkRmlDocument->href_; }		// getter
+	virtual void href(const USVString& url)		{ _dkRmlDocument->LoadUrl(url); } 		// setter
 	
 	// [LegacyUnforgeable] readonly attribute USVString origin;
-	virtual bool origin(DKString&, bool) { return DKTODO(); } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-origin
+	virtual bool origin(DKString&, bool) { return DKTODO(); }
 	
 	// [LegacyUnforgeable] attribute USVString protocol;
-	virtual bool protocol(DKString&, bool) { return DKTODO(); } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-protocol
+	virtual bool protocol(DKString&, bool) { return DKTODO(); }
 	
 	// [LegacyUnforgeable] attribute USVString host;
-	virtual bool host(DKString&, bool) { return DKTODO(); } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-host
+	virtual bool host(DKString&, bool) { return DKTODO(); }
 	
 	// [LegacyUnforgeable] attribute USVString hostname;
-	virtual bool hostname(DKString&, bool) { return DKTODO(); } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-hostname
+	virtual bool hostname(DKString&, bool) { return DKTODO(); }
 	
 	// [LegacyUnforgeable] attribute USVString port;
-	virtual bool port(DKString&, bool) { return DKTODO(); } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-port
+	virtual bool port(DKString&, bool) { return DKTODO(); }
 	
 	// [LegacyUnforgeable] attribute USVString pathname;
-	virtual bool pathname(DKString&, bool) { return DKTODO(); } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-pathname
+	virtual bool pathname(DKString&, bool) { return DKTODO(); }
 	
 	// [LegacyUnforgeable] attribute USVString search;
-	virtual bool search(DKString&, bool) { return DKTODO(); } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-search
+	virtual bool search(DKString&, bool) { return DKTODO(); }
 	
 	// [LegacyUnforgeable] attribute USVString hash;
-	virtual bool hash(DKString&, bool) { return DKTODO(); } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-hash
+	virtual bool hash(DKString&, bool) { return DKTODO(); }
 
 	// [LegacyUnforgeable] undefined assign(USVString url);
-	virtual bool assign(DKString& url) { // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-assign
+	virtual bool assign(DKString& url) {
 		DKDEBUGFUNC(url);
 		return DKTODO();
 	}
 	
 	// [LegacyUnforgeable] undefined replace(USVString url);
-	virtual bool replace(DKString& url) { // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-replace
+	virtual bool replace(DKString& url) {
 		DKDEBUGFUNC(url);
 		return DKTODO();
 	}
 	
 	// [LegacyUnforgeable] undefined reload();
-	virtual void reload() { // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-reload
+	virtual void reload() {
 		DKDEBUGFUNC();
 		DKTODO();
 	}
 	
 	// [LegacyUnforgeable, SameObject] readonly attribute DOMStringList ancestorOrigins;
-	virtual bool ancestorOrigins(DKString&, bool) { return DKTODO(); } // https://html.spec.whatwg.org/multipage/nav-history-apis.html#dom-location-ancestororigins
+	virtual bool ancestorOrigins(DKString&, bool) { return DKTODO(); }
 };
 //REGISTER_OBJECT(DKRmlLocation, true);
 

@@ -8,15 +8,15 @@
 class TEST_DKRmlLocation : public DKObjectT<TEST_DKRmlLocation>
 {
 public:
-	DKRmlLocation dkRmlLocation;
-
 	bool Init(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DKRmlLocation.h //////");
 		
-		printDKRmlLocationProperties(dkRmlLocation);
+		DKRmlLocation* dkRmlLocation = new DKRmlLocation(TEST_DKRmlDocument::Get()->dkRmlDocument);
 		
-		dkRmlLocation.href("DKWebTest/index.html");
+		printDKRmlLocationProperties(*dkRmlLocation);
+		
+		dkRmlLocation->href("DKWebTest/index.html");
 		return true;
 	}
 	
