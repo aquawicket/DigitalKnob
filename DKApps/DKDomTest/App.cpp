@@ -2,38 +2,6 @@
 #include "App.h"
 #include <algorithm>	// smart pointers
 
-#include "TEST_Console.h"
-#include "TEST_Event.h"
-#include "TEST_EventTarget.h"
-#include "TEST_CustomEvent.h"
-#include "TEST_UIEvent.h"
-#include "TEST_FocusEvent.h"
-#include "TEST_MouseEvent.h"
-#include "TEST_WheelEvent.h"
-#include "TEST_InputEvent.h"
-#include "TEST_KeyboardEvent.h"
-#include "TEST_CompositionEvent.h"
-#include "TEST_DragEvent.h"
-#include "TEST_Screen.h"
-#include "TEST_Window.h"
-#include "TEST_Navigator.h"
-#include "TEST_Location.h"
-#include "TEST_Node.h"
-#include "TEST_Document.h"
-#include "TEST_Element.h"
-#include "TEST_HTMLCollection.h"
-#include "TEST_HTMLElement.h"
-#include "TEST_HTMLBodyElement.h"
-#include "TEST_HTMLImageElement.h"
-
-
-////// DigitalKnob //////
-#include "TEST_DKConsoleWindow.h"
-/*
-#include "TEST_DKSdlWindow.h"
-#include "TEST_DKRmlDocument.h"
-#include "TEST_DKRmlLocation.h"
-*/
 
 
 ///////////////////////////////////////
@@ -161,9 +129,12 @@ bool App::Init() {
 
 	////// DigitalKnob //////
 	// [DKConsoleWindow]
-	//DKClass::DKCreate("TEST_DKConsoleWindow");																// DKObjectT
-	TEST_DKConsoleWindow* test_DKConsoleWindow = new TEST_DKConsoleWindow();									// pointer
-	//std::unique_ptr<TEST_DKConsoleWindow> test_DKConsoleWindow = std::make_unique<TEST_DKConsoleWindow>();		// smart pointer
+	//DKClass::DKCreate("TEST_DKConsoleWindow");																// DKObjectT						// WORKS
+	//TEST_DKConsoleWindow* test_DKConsoleWindow = new TEST_DKConsoleWindow();									// pointer							// WORKS		 (dangling pointer)
+	//std::unique_ptr<TEST_DKConsoleWindow> test_DKConsoleWindow = std::make_unique<TEST_DKConsoleWindow>();	// smart pointer					// DOES NOT WORK (goes out of scope)
+	test_DKConsoleWindow = std::make_unique<TEST_DKConsoleWindow>();											// smart pointer member variable	// WORKS
+	//std::make_unique<TEST_DKConsoleWindow>();																	// smart pointer without variable	// DOES NOT WORK (goes out of scope)
+	
 	/*
 	// [DKSdlWindow]
 	//DKClass::DKCreate("TEST_DKSdlWindow");																	// DKObjectT
