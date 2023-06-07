@@ -26,9 +26,10 @@
 #include "TEST_HTMLBodyElement.h"
 #include "TEST_HTMLImageElement.h"
 
-/*
+
 ////// DigitalKnob //////
 #include "TEST_DKConsoleWindow.h"
+/*
 #include "TEST_DKSdlWindow.h"
 #include "TEST_DKRmlDocument.h"
 #include "TEST_DKRmlLocation.h"
@@ -158,13 +159,12 @@ bool App::Init() {
 	std::unique_ptr<TEST_HTMLImageElement> test_HTMLImageElement = std::make_unique<TEST_HTMLImageElement>();	// smart pointer
 
 
-	/*
 	////// DigitalKnob //////
 	// [DKConsoleWindow]
 	//DKClass::DKCreate("TEST_DKConsoleWindow");																// DKObjectT
 	//TEST_DKConsoleWindow* test_DKConsoleWindow = new TEST_DKConsoleWindow();									// pointer
 	std::unique_ptr<TEST_DKConsoleWindow> test_DKConsoleWindow = std::make_unique<TEST_DKConsoleWindow>();		// smart pointer
-	
+	/*
 	// [DKSdlWindow]
 	//DKClass::DKCreate("TEST_DKSdlWindow");																	// DKObjectT
 	//TEST_DKSdlWindow* test_DKSdlWindow = new TEST_DKSdlWindow();												// pointer
