@@ -7,7 +7,7 @@
 #include "TEST_Event.h"
 
 
-class TEST_CustomEvent : public DKObjectT<TEST_CustomEvent>
+class TEST_CustomEvent //: public DKObjectT<TEST_CustomEvent>
 {
 public:
 	bool Init(){
@@ -45,7 +45,7 @@ public:
 	}
 
 };
-REGISTER_OBJECT(TEST_CustomEvent, true);
+//REGISTER_OBJECT(TEST_CustomEvent, true);
 
 
 #endif //TEST_CustomEvent_H

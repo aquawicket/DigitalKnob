@@ -98,10 +98,12 @@ DKRmlDocument::DKRmlDocument(DKWindow* window) : DKDocument() {
 			DKERROR("Rml::Initialise(): failed \n");
 			return;
 		}
-		int w = 800;
+		//int w = 800;
+		int w = window->outerWidth();
 		//if(!DKWindow::GetWidth(w))
 		//	return DKERROR("DKWindow::GetWidth() failed! \n");
-		int h = 600;
+		//int h = 600;
+		int h = window->outerHeight();
 		//if(!DKWindow::GetHeight(h))
 		//	return DKERROR("DKWindow::GetHeight() failed! \n");
 		context = Rml::CreateContext("default", Rml::Vector2i(w, h));
@@ -201,6 +203,18 @@ DKRmlDocument::DKRmlDocument(DKWindow* window) : DKDocument() {
 
 DKRmlDocument::~DKRmlDocument() {
 	DKDEBUGFUNC();
+	if(context){
+		Rml::ReleaseTextures();
+		Rml::Shutdown();
+		delete Rml::GetRenderInterface();
+		delete Rml::GetSystemInterface();
+		delete Rml::GetFileInterface();
+	}
+	DKClass::DKClose("DKRmlJS");
+	DKClass::DKClose("DKRmlV8");
+	DKEvents::RemoveRegisterEventFunc(&DKRmlDocument::RegisterEvent, this);
+	DKEvents::RemoveUnegisterEventFunc(&DKRmlDocument::UnregisterEvent, this);
+	DKEvents::RemoveSendEventFunc(&DKRmlDocument::SendEvent, this);
 }
 
 /*
@@ -211,6 +225,7 @@ bool DKRmlDocument::Init(){
 
 bool DKRmlDocument::End(){
 	DKDEBUGFUNC();
+	/*
 	if(context){
 		Rml::ReleaseTextures();
 		Rml::Shutdown();
@@ -243,6 +258,7 @@ bool DKRmlDocument::GetSourceCode(DKString& source_code) {
 	DKINFO("################## Last <html> node from RmlUi ##################\n");
 	DKINFO(source_code+"\n");
 	DKINFO("#################################################################\n");
+	*/
 	return true;
 }
 

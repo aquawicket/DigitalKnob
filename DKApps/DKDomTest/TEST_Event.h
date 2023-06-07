@@ -7,10 +7,10 @@
 #include "DKEvent/DKEvent.h"
 
 
-class TEST_Event : public DKObjectT<TEST_Event>
+class TEST_Event //: public DKObjectT<TEST_Event>
 {
 public:
-	bool Init(){
+	TEST_Event() {
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_Event.h //////");
 		
@@ -37,7 +37,6 @@ public:
 		DKEventTarget myTargetE;
 		myTargetE.addEventListener("eventE", &TEST_Event::onevent);
 		myTargetE.dispatchEvent(new DKEvent("eventE", ""));			// Event as new pointer, created within dispatchEvent function
-		return true;
 	}
 
 	static void printEventProperties(DKEvent& event){
@@ -118,7 +117,7 @@ public:
 	}
 
 };
-REGISTER_OBJECT(TEST_Event, true);
+//REGISTER_OBJECT(TEST_Event, true);
 
 
 #endif //TEST_Event_H

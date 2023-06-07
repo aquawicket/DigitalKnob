@@ -1,15 +1,19 @@
 #include "DK/stdafx.h"
 
 #include "App.h"
+#include <algorithm>	// smart pointers
+
 
 // [Console] https://console.spec.whatwg.org
 #include "TEST_Console.h"
 
 // [DOM] https://dom.spec.whatwg.org
 #include "TEST_Event.h"
-#include "TEST_CustomEvent.h"
 #include "TEST_EventTarget.h"
 
+//#include "TEST_CustomEvent.h"
+
+/*
 // [UIEvents] https://w3c.github.io/uievents
 #include "TEST_UIEvent.h"
 #include "TEST_FocusEvent.h"
@@ -68,20 +72,33 @@
 
 // [DKRmlLocation]
 #include "TEST_DKRmlLocation.h"
-
+*/
 
 ///////////////////////////////////////
 bool App::Init() {
 	DKDEBUGFUNC();
 
-	// [Console] https://console.spec.whatwg.org
-	DKClass::DKCreate("TEST_Console");
-	/*
-	// [DOM] https://dom.spec.whatwg.org
-	DKClass::DKCreate("TEST_Event");
-	DKClass::DKCreate("TEST_CustomEvent");
-	DKClass::DKCreate("TEST_EventTarget");
+	// [Console]
+	//DKClass::DKCreate("TEST_Console");															// DKObjectT
+	//TEST_Console* test_console = new TEST_Console();												// pointer
+	std::unique_ptr<TEST_Console> test_Console = std::make_unique<TEST_Console>();					// smart pointer
 	
+	// [Event]
+	//DKClass::DKCreate("TEST_Event");																// DKObjectT
+	//TEST_Event* test_event = new TEST_Event();													// pointer
+	std::unique_ptr<TEST_Event> test_Event = std::make_unique<TEST_Event>();						// smart pointer
+	
+	// [EventTarget]
+	//DKClass::DKCreate("TEST_EventTarget");														// DKObjectT
+	//TEST_EventTarget* test_EventTarget = new TEST_EventTarget();									// pointer
+	std::unique_ptr<TEST_EventTarget> test_EventTarget = std::make_unique<TEST_EventTarget>();		// smart pointer
+	
+	// [CustomEvent]
+	//DKClass::DKCreate("TEST_CustomEvent");														// DKObjectT
+	//TEST_CustomEvent* test_CustomEvent = new TEST_CustomEvent();									// pointer
+	std::unique_ptr<TEST_CustomEvent> test_CustomEvent = std::make_unique<TEST_CustomEvent>();		// smart pointer
+	
+	/*
 	// [UIEvents] https://w3c.github.io/uievents
 	DKClass::DKCreate("TEST_UIEvent");
 	DKClass::DKCreate("TEST_FocusEvent");
@@ -128,6 +145,7 @@ bool App::Init() {
 	DKClass::DKCreate("TEST_HTMLImageElement");
 	*/
 
+	/*
 	////// DigitalKnob //////
 	// [DKConsoleWindow]
 	//DKClass::DKCreate("TEST_DKConsoleWindow");
@@ -140,7 +158,8 @@ bool App::Init() {
 	
 	// [DKRmlLocation]
 	DKClass::DKCreate("TEST_DKRmlLocation");
-
+	*/
+	
 	return true;
 }
 

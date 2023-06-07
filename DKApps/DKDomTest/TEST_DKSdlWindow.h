@@ -8,7 +8,6 @@
 class TEST_DKSdlWindow : public DKObjectT<TEST_DKSdlWindow>
 {
 public:
-	//DKSdlWindow dkSdlWindow;
 	DKSdlWindow* dkSdlWindow;
 	
 	bool Init(){
@@ -31,11 +30,11 @@ public:
 		// https://w3c.github.io/uievents/#events-mouse-types
 		dkSdlWindow->addEventListener("auxclick", 			&TEST_DKSdlWindow::onauxclick);
 		dkSdlWindow->addEventListener("click", 				&TEST_DKSdlWindow::onclick);
-		dkSdlWindow->addEventListener("contextmenu",			&TEST_DKSdlWindow::oncontextmenu);
+		dkSdlWindow->addEventListener("contextmenu",		&TEST_DKSdlWindow::oncontextmenu);
 		dkSdlWindow->addEventListener("dblclick", 			&TEST_DKSdlWindow::ondblclick);
 		dkSdlWindow->addEventListener("mousedown", 			&TEST_DKSdlWindow::onmousedown);
-		dkSdlWindow->addEventListener("mouseenter", 			&TEST_DKSdlWindow::onmouseenter);
-		dkSdlWindow->addEventListener("mouseleave", 			&TEST_DKSdlWindow::onmouseleave);
+		dkSdlWindow->addEventListener("mouseenter", 		&TEST_DKSdlWindow::onmouseenter);
+		dkSdlWindow->addEventListener("mouseleave", 		&TEST_DKSdlWindow::onmouseleave);
 		dkSdlWindow->addEventListener("mousemove", 			&TEST_DKSdlWindow::onmousemove);
 		dkSdlWindow->addEventListener("mouseout", 			&TEST_DKSdlWindow::onmouseout);
 		dkSdlWindow->addEventListener("mouseover", 			&TEST_DKSdlWindow::onmouseover);
@@ -59,7 +58,7 @@ public:
 		// https://w3c.github.io/uievents/#events-composition-types
 		dkSdlWindow->addEventListener("compositionstart",	&TEST_DKSdlWindow::oncompositionstart);
 		dkSdlWindow->addEventListener("compositionupdate", 	&TEST_DKSdlWindow::oncompositionupdate);
-		dkSdlWindow->addEventListener("compositionend", 		&TEST_DKSdlWindow::oncompositionend);
+		dkSdlWindow->addEventListener("compositionend", 	&TEST_DKSdlWindow::oncompositionend);
 		
 		return true;
 	}
@@ -67,7 +66,7 @@ public:
 	static void printDKSdlWindowProperties(DKSdlWindow& dkSdlWindow){
 		//DKDEBUGFUNC(dkSdlWindow);
 		
-		TEST_Window::printWindowProperties(dynamic_cast<DKWindow&>(dkSdlWindow));	//TODO: try to remove the need for dynamic_cast
+		TEST_Window::printWindowProperties(dynamic_cast<DKWindow&>(dkSdlWindow));					//TODO: try to remove the need for dynamic_cast
 	}
 	
 	////// FocusEvent //////

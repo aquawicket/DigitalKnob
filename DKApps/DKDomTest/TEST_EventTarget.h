@@ -7,17 +7,15 @@
 #include "DKEventTarget/DKEventTarget.h"
 
 
-class TEST_EventTarget : public DKObjectT<TEST_EventTarget>
+class TEST_EventTarget //: public DKObjectT<TEST_EventTarget>
 {
 public:
-	bool Init(){
+	TEST_EventTarget() {
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_EventTarget.h //////");
 		
 		DKEventTarget eventTarget;
 		printEventTargetProperties(eventTarget);
-		
-		return true;
 	}
 	
 	static void printEventTargetProperties(DKEventTarget& evenTarget){
@@ -25,7 +23,7 @@ public:
 	}
 
 };
-REGISTER_OBJECT(TEST_EventTarget, true);
+//REGISTER_OBJECT(TEST_EventTarget, true);
 
 
 #endif //TEST_EventTarget_H

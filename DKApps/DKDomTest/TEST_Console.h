@@ -7,10 +7,11 @@
 #include "DKConsole/DKConsole.h"
 
 
-class TEST_Console : public DKObjectT<TEST_Console>
+class TEST_Console //: public DKObjectT<TEST_Console>
 {
 public:
-	bool Init(){
+	//bool Init(){
+	TEST_Console() {
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_Console.h //////\n");
 		
@@ -86,11 +87,11 @@ public:
 		//undefined timeEnd(optional DOMString label = "default");
 		DKConsole::timeEnd();
 
-		return true;
+		//return true;
 	}
 	
 };
-REGISTER_OBJECT(TEST_Console, true);
+//REGISTER_OBJECT(TEST_Console, true);
 
 DKConsole console;	// global console variable
 
