@@ -65,6 +65,16 @@ DKRmlDocument::DKRmlDocument(const DKWindow& window) : DKDocument() {
 	interfaceName = "RmlDocument";
 	interfaceAddress = pointerToAddress(this);
 	DKINFO("DKRmlDocument("+interfaceAddress+") \n");
+	
+	DKINFO("DKRmlDocument("+window.interfaceName+") \n");
+	/*
+	if(dynamic_cast<DKSdlWindow*>(window)){
+		DKINFO("window is a DKSDLWindow\n");
+	}
+	else{
+		DKINFO("window is NOT a DKSDLWindow\n");
+	}
+	*/
 }
 
 DKRmlDocument::~DKRmlDocument() {
