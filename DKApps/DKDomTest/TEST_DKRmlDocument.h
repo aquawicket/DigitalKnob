@@ -2,8 +2,6 @@
 #ifndef TEST_DKRmlDocument_H
 #define TEST_DKRmlDocument_H
 
-#include "DKSdlRmlDocument/DKSdlRmlDocument.h"
-
 #include "DKRmlDocument/DKRmlDocument.h"
 #include "TEST_DKSdlWindow.h"
 
@@ -13,15 +11,11 @@ class TEST_DKRmlDocument : public DKObjectT<TEST_DKRmlDocument>
 public:
 	DKRmlDocument* dkRmlDocument;
 	
-	DKSdlRmlDocument* dkSdlRmlDocument;
-	
 	bool Init(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DKRmlDocument.h //////");
 		
-		dkRmlDocument = new DKRmlDocument(*TEST_DKSdlWindow::Get()->dkSdlWindow);
-		
-		dkSdlRmlDocument = new DKSdlRmlDocument(TEST_DKSdlWindow::Get()->dkSdlWindow, dkRmlDocument);
+		dkRmlDocument = new DKRmlDocument(TEST_DKSdlWindow::Get()->dkSdlWindow);
 		
 		printRmlDocumentProperties(*dkRmlDocument);
 		return true;

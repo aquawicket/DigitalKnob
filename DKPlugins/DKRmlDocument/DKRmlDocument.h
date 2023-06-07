@@ -44,7 +44,7 @@ WARNING_ENABLE
 class DKRmlDocument : public DKDocument, public Rml::EventListener {//, public DKObjectT<DKRmlDocument> {
 public:
 	//DKRmlDocument();
-	DKRmlDocument(const DKWindow& window);
+	DKRmlDocument(DKWindow* window);
 	~DKRmlDocument();
 	bool Init();
 	bool End();

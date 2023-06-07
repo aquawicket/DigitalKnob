@@ -76,7 +76,7 @@ bool App::Init() {
 
 	// [Console] https://console.spec.whatwg.org
 	DKClass::DKCreate("TEST_Console");
-	
+	/*
 	// [DOM] https://dom.spec.whatwg.org
 	DKClass::DKCreate("TEST_Event");
 	DKClass::DKCreate("TEST_CustomEvent");
@@ -126,7 +126,7 @@ bool App::Init() {
 	
 	// [HTMLImageElement] https://html.spec.whatwg.org/multipage/sections.html#htmlbodyelement
 	DKClass::DKCreate("TEST_HTMLImageElement");
-	
+	*/
 
 	////// DigitalKnob //////
 	// [DKConsoleWindow]

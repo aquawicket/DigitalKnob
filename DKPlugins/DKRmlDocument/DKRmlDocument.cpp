@@ -37,6 +37,7 @@ WARNING_ENABLE
 
 #include "DKRmlDocument/DKRmlDocument.h"
 #include "DKWindow/DKWindow.h"
+#include "DKSdlRmlDocument/DKSdlRmlDocument.h" // FIXME
 #include "DKDuktape/DKDuktape.h"
 #include "DKXml/DKXml.h"
 #include "DKRmlDocument/DKRmlHeadInstancer.h"
@@ -60,30 +61,17 @@ DKRmlDocument::DKRmlDocument() : DKDocument() {
 }
 */
 
-DKRmlDocument::DKRmlDocument(const DKWindow& window) : DKDocument() {
+DKRmlDocument::DKRmlDocument(DKWindow* window) : DKDocument() {
 	DKDEBUGFUNC();
 	interfaceName = "RmlDocument";
 	interfaceAddress = pointerToAddress(this);
 	DKINFO("DKRmlDocument("+interfaceAddress+") \n");
 	
-	DKINFO("DKRmlDocument("+window.interfaceName+") \n");
-	/*
-	if(dynamic_cast<DKSdlWindow*>(window)){
-		DKINFO("window is a DKSDLWindow\n");
-	}
-	else{
-		DKINFO("window is NOT a DKSDLWindow\n");
-	}
-	*/
-}
-
-DKRmlDocument::~DKRmlDocument() {
-	DKDEBUGFUNC();
-}
+	DKINFO("DKRmlDocument("+window->interfaceName+") \n");
+	
+	
 
 
-bool DKRmlDocument::Init(){
-	DKDEBUGFUNC();
 	DKClass::DKCreate("DKRmlJS");
 	DKClass::DKCreate("DKRmlV8");
 
@@ -100,10 +88,16 @@ bool DKRmlDocument::Init(){
 	}
 
 	//Create DKSdlRml or DKOsgRml
-	if(DKClass::DKAvailable("DKSdlRmlDocument")){
-		DKClass::DKCreate("DKSdlRmlDocument");
-		if(!Rml::Initialise())
-			return DKERROR("Rml::Initialise(): failed \n");
+	
+	//if(DKClass::DKAvailable("DKSdlRmlDocument")){
+	if(same(window->interfaceName, "SdlWindow")){
+		// DKClass::DKCreate("DKSdlRmlDocument");
+		DKSdlRmlDocument* dkSdlRmlDocument = new DKSdlRmlDocument(dynamic_cast<DKSdlWindow*>(window), this);
+		
+		if(!Rml::Initialise()){
+			DKERROR("Rml::Initialise(): failed \n");
+			return;
+		}
 		int w = 800;
 		//if(!DKWindow::GetWidth(w))
 		//	return DKERROR("DKWindow::GetWidth() failed! \n");
@@ -112,15 +106,20 @@ bool DKRmlDocument::Init(){
 		//	return DKERROR("DKWindow::GetHeight() failed! \n");
 		context = Rml::CreateContext("default", Rml::Vector2i(w, h));
 	}
-	else if(DKClass::DKAvailable("DKOsgRml")){
+	//else if(DKClass::DKAvailable("DKOsgRml")){
+	else if(same(window->interfaceName, "OsgWindow")){
 		DKClass::DKCreate("DKOsgRml");
 	}
 	else{
-		return DKERROR("No registered window found \n");
+		DKERROR("No registered window found \n");
+		return;
 	}
+
 #ifdef HAVE_rmlui_debugger
-	if (!Rml::Debugger::Initialise(context))
-		return DKERROR("Rml::Debugger::Initialise(): failed\n");
+	if (!Rml::Debugger::Initialise(context)){
+		DKERROR("Rml::Debugger::Initialise(): failed\n");
+		return;
+	}
 #endif
 	//Add missing stylesheet properties to silence warnings
 	//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/background-repeat
@@ -198,8 +197,17 @@ bool DKRmlDocument::Init(){
 	DKFile::ChDir(workingPath);
 	DKINFO("DKRmlDocument.workingPath = "+workingPath+"\n");
 	LoadHtml(html);
-	return true;
 }
+
+DKRmlDocument::~DKRmlDocument() {
+	DKDEBUGFUNC();
+}
+
+/*
+bool DKRmlDocument::Init(){
+	DKDEBUGFUNC();
+}
+*/
 
 bool DKRmlDocument::End(){
 	DKDEBUGFUNC();
