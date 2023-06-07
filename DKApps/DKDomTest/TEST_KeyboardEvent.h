@@ -7,10 +7,10 @@
 #include "DKKeyboardEvent/DKKeyboardEvent.h"
 
 
-class TEST_KeyboardEvent : public DKObjectT<TEST_KeyboardEvent>
+class TEST_KeyboardEvent //: public DKObjectT<TEST_KeyboardEvent>
 {
 public:
-	bool Init(){
+	TEST_KeyboardEvent(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_KeyboardEvent.h //////");
 		
@@ -39,11 +39,11 @@ public:
 		console.log("keyboardEvent.DOM_KEY_LOCATION_RIGHT() = "		+toString(keyboardEvent.DOM_KEY_LOCATION_RIGHT()));
 		
 		// const unsigned long DOM_KEY_LOCATION_NUMPAD = 0x03;
-		console.log("keyboardEvent.DOM_KEY_LOCATION_NUMPAD() = "		+toString(keyboardEvent.DOM_KEY_LOCATION_NUMPAD()));
+		console.log("keyboardEvent.DOM_KEY_LOCATION_NUMPAD() = "	+toString(keyboardEvent.DOM_KEY_LOCATION_NUMPAD()));
 	#endif
 		
 		// readonly attribute DOMString key;
-		console.log("keyboardEvent.key() = "							+toString(keyboardEvent.key()));
+		console.log("keyboardEvent.key() = "						+toString(keyboardEvent.key()));
 		
 		// readonly attribute DOMString code;
 		console.log("keyboardEvent.code() = "						+toString(keyboardEvent.code()));	
@@ -52,7 +52,7 @@ public:
 		console.log("keyboardEvent.location() = "					+toString(keyboardEvent.location()));
 		
 		// readonly attribute boolean ctrlKey;
-		console.log("keyboardEvent.ctrlKey() = "						+toString(keyboardEvent.ctrlKey()));
+		console.log("keyboardEvent.ctrlKey() = "					+toString(keyboardEvent.ctrlKey()));
 		
 		// readonly attribute boolean shiftKey;
 		console.log("keyboardEvent.shiftKey() = "					+toString(keyboardEvent.shiftKey()));
@@ -61,13 +61,13 @@ public:
 		console.log("keyboardEvent.altKey() = "						+toString(keyboardEvent.altKey()));
 		
 		// readonly attribute boolean metaKey;
-		console.log("keyboardEvent.metaKey() = "						+toString(keyboardEvent.metaKey()));
+		console.log("keyboardEvent.metaKey() = "					+toString(keyboardEvent.metaKey()));
 		
 		// readonly attribute boolean repeat;
 		console.log("keyboardEvent.repeat() = "						+toString(keyboardEvent.repeat()));
 		
 		// readonly attribute boolean isComposing;
-		console.log("keyboardEvent.isComposing() = "					+toString(keyboardEvent.isComposing()));
+		console.log("keyboardEvent.isComposing() = "				+toString(keyboardEvent.isComposing()));
 		
 		// boolean getModifierState(DOMString keyArg);
 		// function
@@ -95,7 +95,7 @@ public:
 				console.log("keyboardEvent.charCode() = "			+toString(keyboardEvent.charCode()));
 		//
 		//		readonly attribute unsigned long keyCode;
-				console.log("keyboardEvent.keyCode() = "				+toString(keyboardEvent.keyCode()));
+				console.log("keyboardEvent.keyCode() = "			+toString(keyboardEvent.keyCode()));
 		// };
 		
 		
@@ -109,7 +109,7 @@ public:
 		return true;
 	}
 };
-REGISTER_OBJECT(TEST_KeyboardEvent, true);
+//REGISTER_OBJECT(TEST_KeyboardEvent, true);
 
 
 #endif //TEST_KeyboardEvent_H

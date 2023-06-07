@@ -7,10 +7,10 @@
 #include "DKUIEvent/DKUIEvent.h"
 
 
-class TEST_UIEvent : public DKObjectT<TEST_UIEvent>
+class TEST_UIEvent //: public DKObjectT<TEST_UIEvent>
 {
 public:
-	bool Init(){
+	TEST_UIEvent(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_UIEvent.h //////");
 		
@@ -18,7 +18,6 @@ public:
 		eventTarget.addEventListener("uievent", &TEST_UIEvent::onuievent);
 		DKUIEvent uievent("uievent", "");
 		eventTarget.dispatchEvent(uievent);
-		return true;
 	}
 	
 	static void printUIEventProperties(DKUIEvent& uievent){
@@ -63,7 +62,7 @@ public:
 		return true;
 	}
 };
-REGISTER_OBJECT(TEST_UIEvent, true);
+//REGISTER_OBJECT(TEST_UIEvent, true);
 
 
 #endif //TEST_UIEvent_H

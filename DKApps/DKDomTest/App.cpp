@@ -10,10 +10,8 @@
 // [DOM] https://dom.spec.whatwg.org
 #include "TEST_Event.h"
 #include "TEST_EventTarget.h"
+#include "TEST_CustomEvent.h"
 
-//#include "TEST_CustomEvent.h"
-
-/*
 // [UIEvents] https://w3c.github.io/uievents
 #include "TEST_UIEvent.h"
 #include "TEST_FocusEvent.h"
@@ -72,42 +70,71 @@
 
 // [DKRmlLocation]
 #include "TEST_DKRmlLocation.h"
-*/
+
 
 ///////////////////////////////////////
 bool App::Init() {
 	DKDEBUGFUNC();
 
 	// [Console]
-	//DKClass::DKCreate("TEST_Console");															// DKObjectT
-	//TEST_Console* test_console = new TEST_Console();												// pointer
-	std::unique_ptr<TEST_Console> test_Console = std::make_unique<TEST_Console>();					// smart pointer
+	//DKClass::DKCreate("TEST_Console");																		// DKObjectT
+	//TEST_Console* test_console = new TEST_Console();															// pointer
+	std::unique_ptr<TEST_Console> test_Console = std::make_unique<TEST_Console>();								// smart pointer
+	
 	
 	// [Event]
-	//DKClass::DKCreate("TEST_Event");																// DKObjectT
-	//TEST_Event* test_event = new TEST_Event();													// pointer
-	std::unique_ptr<TEST_Event> test_Event = std::make_unique<TEST_Event>();						// smart pointer
+	//DKClass::DKCreate("TEST_Event");																			// DKObjectT
+	//TEST_Event* test_event = new TEST_Event();																// pointer
+	std::unique_ptr<TEST_Event> test_Event = std::make_unique<TEST_Event>();									// smart pointer
 	
 	// [EventTarget]
-	//DKClass::DKCreate("TEST_EventTarget");														// DKObjectT
-	//TEST_EventTarget* test_EventTarget = new TEST_EventTarget();									// pointer
-	std::unique_ptr<TEST_EventTarget> test_EventTarget = std::make_unique<TEST_EventTarget>();		// smart pointer
+	//DKClass::DKCreate("TEST_EventTarget");																	// DKObjectT
+	//TEST_EventTarget* test_EventTarget = new TEST_EventTarget();												// pointer
+	std::unique_ptr<TEST_EventTarget> test_EventTarget = std::make_unique<TEST_EventTarget>();					// smart pointer
 	
 	// [CustomEvent]
-	//DKClass::DKCreate("TEST_CustomEvent");														// DKObjectT
-	//TEST_CustomEvent* test_CustomEvent = new TEST_CustomEvent();									// pointer
-	std::unique_ptr<TEST_CustomEvent> test_CustomEvent = std::make_unique<TEST_CustomEvent>();		// smart pointer
+	//DKClass::DKCreate("TEST_CustomEvent");																	// DKObjectT
+	//TEST_CustomEvent* test_CustomEvent = new TEST_CustomEvent();												// pointer
+	std::unique_ptr<TEST_CustomEvent> test_CustomEvent = std::make_unique<TEST_CustomEvent>();					// smart pointer
+	
+	
+	// [UIEvent]
+	//DKClass::DKCreate("TEST_UIEvent");																		// DKObjectT
+	//TEST_UIEvent* test_UIEvent = new TEST_UIEvent();															// pointer
+	std::unique_ptr<TEST_UIEvent> test_UIEvent = std::make_unique<TEST_UIEvent>();								// smart pointer
+	
+	// [FocusEvent]
+	//DKClass::DKCreate("TEST_FocusEvent");																		// DKObjectT
+	//TEST_FocusEvent* test_FocusEvent = new TEST_FocusEvent();													// pointer
+	std::unique_ptr<TEST_FocusEvent> test_FocusEvent = std::make_unique<TEST_FocusEvent>();						// smart pointer
+	
+	// [MouseEvent]
+	//DKClass::DKCreate("TEST_MouseEvent");																		// DKObjectT
+	//TEST_MouseEvent* test_MouseEvent = new TEST_MouseEvent();													// pointer
+	std::unique_ptr<TEST_MouseEvent> test_MouseEvent = std::make_unique<TEST_MouseEvent>();						// smart pointer
+	
+	// [WheelEvent]
+	//DKClass::DKCreate("TEST_WheelEvent");																		// DKObjectT
+	//TEST_WheelEvent* test_WheelEvent = new TEST_WheelEvent();													// pointer
+	std::unique_ptr<TEST_WheelEvent> test_WheelEvent = std::make_unique<TEST_WheelEvent>();						// smart pointer
+	
+	// [InputEvent]
+	//DKClass::DKCreate("TEST_InputEvent");																		// DKObjectT
+	//TEST_InputEvent* test_InputEvent = new TEST_InputEvent();													// pointer
+	std::unique_ptr<TEST_InputEvent> test_InputEvent = std::make_unique<TEST_InputEvent>();						// smart pointer
+	
+	// [KeyboardEvent]
+	//DKClass::DKCreate("TEST_KeyboardEvent");																	// DKObjectT
+	//TEST_KeyboardEvent* test_KeyboardEvent = new TEST_KeyboardEvent();										// pointer
+	std::unique_ptr<TEST_KeyboardEvent> test_KeyboardEvent = std::make_unique<TEST_KeyboardEvent>();			// smart pointer
+	
+	// [CompositionEvent]
+	//DKClass::DKCreate("TEST_CompositionEvent");																// DKObjectT
+	//TEST_CompositionEvent* test_CompositionEvent = new TEST_CompositionEvent();								// pointer
+	std::unique_ptr<TEST_CompositionEvent> test_CompositionEvent = std::make_unique<TEST_CompositionEvent>();	// smart pointer
+	
 	
 	/*
-	// [UIEvents] https://w3c.github.io/uievents
-	DKClass::DKCreate("TEST_UIEvent");
-	DKClass::DKCreate("TEST_FocusEvent");
-	DKClass::DKCreate("TEST_MouseEvent");
-	DKClass::DKCreate("TEST_WheelEvent");
-	DKClass::DKCreate("TEST_InputEvent");
-	DKClass::DKCreate("TEST_KeyboardEvent");
-	DKClass::DKCreate("TEST_CompositionEvent");
-	
 	// [DragEvent] https://html.spec.whatwg.org/multipage/dnd.html#the-dragevent-interface
 	DKClass::DKCreate("TEST_DragEvent");
 	

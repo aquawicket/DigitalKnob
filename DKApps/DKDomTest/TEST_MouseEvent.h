@@ -7,10 +7,10 @@
 #include "DKMouseEvent/DKMouseEvent.h"
 
 
-class TEST_MouseEvent : public DKObjectT<TEST_MouseEvent>
+class TEST_MouseEvent //: public DKObjectT<TEST_MouseEvent>
 {
 public:
-	bool Init(){
+	TEST_MouseEvent(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_MouseEvent.h //////");
 		
@@ -118,7 +118,7 @@ public:
 		return true;
 	}
 };
-REGISTER_OBJECT(TEST_MouseEvent, true);
+//REGISTER_OBJECT(TEST_MouseEvent, true);
 
 
 #endif //TEST_MouseEvent_H

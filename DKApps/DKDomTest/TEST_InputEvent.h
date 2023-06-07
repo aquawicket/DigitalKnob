@@ -7,10 +7,10 @@
 #include "DKInputEvent/DKInputEvent.h"
 
 
-class TEST_InputEvent : public DKObjectT<TEST_InputEvent>
+class TEST_InputEvent //: public DKObjectT<TEST_InputEvent>
 {
 public:
-	bool Init(){
+	TEST_InputEvent(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_InputEvent.h //////");
 	
@@ -56,7 +56,7 @@ public:
 		return true;
 	}
 };
-REGISTER_OBJECT(TEST_InputEvent, true);
+//REGISTER_OBJECT(TEST_InputEvent, true);
 
 
 #endif //TEST_InputEvent_H

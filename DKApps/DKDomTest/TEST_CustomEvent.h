@@ -10,7 +10,7 @@
 class TEST_CustomEvent //: public DKObjectT<TEST_CustomEvent>
 {
 public:
-	bool Init(){
+	TEST_CustomEvent(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_CustomEvent.h //////");
 		
@@ -19,7 +19,6 @@ public:
 		DKCustomEvent customEvent("customEvent", "");
 		customEvent.detail("{name : 'myCustomEvent'}");
 		eventTarget.dispatchEvent(customEvent);
-		return true;
 	}
 
 	static void printCustomEventProperties(DKCustomEvent& customEvent) {

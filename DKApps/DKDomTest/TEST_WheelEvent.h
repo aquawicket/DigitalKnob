@@ -7,10 +7,10 @@
 #include "DKWheelEvent/DKWheelEvent.h"
 
 
-class TEST_WheelEvent : public DKObjectT<TEST_WheelEvent>
+class TEST_WheelEvent //: public DKObjectT<TEST_WheelEvent>
 {
 public:
-	bool Init(){
+	TEST_WheelEvent(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_WheelEvent.h //////");
 		
@@ -18,7 +18,6 @@ public:
 		eventTarget.addEventListener("wheelEvent", &TEST_WheelEvent::onWheelEvent);
 		DKWheelEvent wheelEvent("wheelEvent", "");
 		eventTarget.dispatchEvent(wheelEvent);
-		return true;
 	}
 
 	static void printWheelEventProperties(DKWheelEvent& wheelEvent){

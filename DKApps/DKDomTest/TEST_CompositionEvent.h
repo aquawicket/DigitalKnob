@@ -9,10 +9,10 @@
 #include "TEST_Event.h"
 
 
-class TEST_CompositionEvent : public DKObjectT<TEST_CompositionEvent>
+class TEST_CompositionEvent //: public DKObjectT<TEST_CompositionEvent>
 {
 public:
-	bool Init(){
+	TEST_CompositionEvent(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_CompositionEvent.h //////");
 		
@@ -53,7 +53,7 @@ public:
 		return true;
 	}
 };
-REGISTER_OBJECT(TEST_CompositionEvent, true);
+//REGISTER_OBJECT(TEST_CompositionEvent, true);
 
 
 #endif //TEST_CompositionEvent_H
