@@ -162,8 +162,8 @@ bool App::Init() {
 	////// DigitalKnob //////
 	// [DKConsoleWindow]
 	//DKClass::DKCreate("TEST_DKConsoleWindow");																// DKObjectT
-	//TEST_DKConsoleWindow* test_DKConsoleWindow = new TEST_DKConsoleWindow();									// pointer
-	std::unique_ptr<TEST_DKConsoleWindow> test_DKConsoleWindow = std::make_unique<TEST_DKConsoleWindow>();		// smart pointer
+	TEST_DKConsoleWindow* test_DKConsoleWindow = new TEST_DKConsoleWindow();									// pointer
+	//std::unique_ptr<TEST_DKConsoleWindow> test_DKConsoleWindow = std::make_unique<TEST_DKConsoleWindow>();		// smart pointer
 	/*
 	// [DKSdlWindow]
 	//DKClass::DKCreate("TEST_DKSdlWindow");																	// DKObjectT

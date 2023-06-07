@@ -61,7 +61,7 @@ public:
 	static void printDKConsoleWindowProperties(DKConsoleWindow& dkConsoleWindow){
 		DKDEBUGFUNC(dkConsoleWindow);
 		//console.log("dkConsoleWindow.columns() = "	+toString(dkConsoleWindow.columns())	+"\n");		// TODO
-		//console.log("dkConsoleWindow.rows() = "	+toString(dkConsoleWindow.rows())		+"\n");		// TODO
+		//console.log("dkConsoleWindow.rows() = "		+toString(dkConsoleWindow.rows())		+"\n");		// TODO
 		
 		TEST_Window::printWindowProperties(dynamic_cast<DKWindow&>(dkConsoleWindow));	//TODO: try to remove the need for dynamic_cast
 	}
