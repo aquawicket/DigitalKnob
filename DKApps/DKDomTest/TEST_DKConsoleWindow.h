@@ -8,54 +8,59 @@
 class TEST_DKConsoleWindow //: public DKObjectT<TEST_DKConsoleWindow>
 {
 public:
-	DKConsoleWindow dkConsoleWindow;
+	//DKConsoleWindow dkConsoleWindow;					// goes out of scope
+	//DKConsoleWindow* dkConsoleWindow;					// dangling pointer
+	std::unique_ptr<DKConsoleWindow> dkConsoleWindow;
 
 	TEST_DKConsoleWindow(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DKConsoleWindow.h //////");
 		
-		printDKConsoleWindowProperties(dkConsoleWindow);
+		//dkConsoleWindow = new DKConsoleWindow();
+		dkConsoleWindow = std::make_unique<DKConsoleWindow>();	
+		
+		printDKConsoleWindowProperties(*dkConsoleWindow);
 		
 		////// FocusEvent //////
 		// https://w3c.github.io/uievents/#events-focus-types
-		dkConsoleWindow.addEventListener("blur", 				&TEST_DKConsoleWindow::onblur);
-		dkConsoleWindow.addEventListener("focus", 				&TEST_DKConsoleWindow::onfocus);
-		dkConsoleWindow.addEventListener("focusin", 			&TEST_DKConsoleWindow::onfocusin);
-		dkConsoleWindow.addEventListener("focusout", 			&TEST_DKConsoleWindow::onfocusout);
+		dkConsoleWindow->addEventListener("blur", 				&TEST_DKConsoleWindow::onblur);
+		dkConsoleWindow->addEventListener("focus", 				&TEST_DKConsoleWindow::onfocus);
+		dkConsoleWindow->addEventListener("focusin", 			&TEST_DKConsoleWindow::onfocusin);
+		dkConsoleWindow->addEventListener("focusout", 			&TEST_DKConsoleWindow::onfocusout);
 		
 		////// MouseEvent //////
 		// https://w3c.github.io/uievents/#events-mouse-types
-		dkConsoleWindow.addEventListener("auxclick", 			&TEST_DKConsoleWindow::onauxclick);
-		dkConsoleWindow.addEventListener("click", 				&TEST_DKConsoleWindow::onclick);
-		dkConsoleWindow.addEventListener("contextmenu",			&TEST_DKConsoleWindow::oncontextmenu);
-		dkConsoleWindow.addEventListener("dblclick", 			&TEST_DKConsoleWindow::ondblclick);
-		dkConsoleWindow.addEventListener("mousedown", 			&TEST_DKConsoleWindow::onmousedown);
-		dkConsoleWindow.addEventListener("mouseenter", 			&TEST_DKConsoleWindow::onmouseenter);
-		dkConsoleWindow.addEventListener("mouseleave", 			&TEST_DKConsoleWindow::onmouseleave);
-		dkConsoleWindow.addEventListener("mousemove", 			&TEST_DKConsoleWindow::onmousemove);
-		dkConsoleWindow.addEventListener("mouseout", 			&TEST_DKConsoleWindow::onmouseout);
-		dkConsoleWindow.addEventListener("mouseover", 			&TEST_DKConsoleWindow::onmouseover);
-		dkConsoleWindow.addEventListener("mouseup", 			&TEST_DKConsoleWindow::onmouseup);
+		dkConsoleWindow->addEventListener("auxclick", 			&TEST_DKConsoleWindow::onauxclick);
+		dkConsoleWindow->addEventListener("click", 				&TEST_DKConsoleWindow::onclick);
+		dkConsoleWindow->addEventListener("contextmenu",		&TEST_DKConsoleWindow::oncontextmenu);
+		dkConsoleWindow->addEventListener("dblclick", 			&TEST_DKConsoleWindow::ondblclick);
+		dkConsoleWindow->addEventListener("mousedown", 			&TEST_DKConsoleWindow::onmousedown);
+		dkConsoleWindow->addEventListener("mouseenter", 		&TEST_DKConsoleWindow::onmouseenter);
+		dkConsoleWindow->addEventListener("mouseleave", 		&TEST_DKConsoleWindow::onmouseleave);
+		dkConsoleWindow->addEventListener("mousemove", 			&TEST_DKConsoleWindow::onmousemove);
+		dkConsoleWindow->addEventListener("mouseout", 			&TEST_DKConsoleWindow::onmouseout);
+		dkConsoleWindow->addEventListener("mouseover", 			&TEST_DKConsoleWindow::onmouseover);
+		dkConsoleWindow->addEventListener("mouseup", 			&TEST_DKConsoleWindow::onmouseup);
 		
 		////// WheelEvent //////
 		// https://w3c.github.io/uievents/#events-wheel-types
-		dkConsoleWindow.addEventListener("wheel", 				&TEST_DKConsoleWindow::onwheel);
+		dkConsoleWindow->addEventListener("wheel", 				&TEST_DKConsoleWindow::onwheel);
 		
 		////// InputEvent //////
 		// https://w3c.github.io/uievents/#events-input-types
-		dkConsoleWindow.addEventListener("beforeinput", 		&TEST_DKConsoleWindow::onbeforeinput);
-		dkConsoleWindow.addEventListener("input", 				&TEST_DKConsoleWindow::oninput);
+		dkConsoleWindow->addEventListener("beforeinput", 		&TEST_DKConsoleWindow::onbeforeinput);
+		dkConsoleWindow->addEventListener("input", 				&TEST_DKConsoleWindow::oninput);
 		
 		////// KeyboardEvent //////
 		// https://w3c.github.io/uievents/#events-keyboard-types
-		dkConsoleWindow.addEventListener("keydown", 			&TEST_DKConsoleWindow::onkeydown);
-		dkConsoleWindow.addEventListener("keyup", 				&TEST_DKConsoleWindow::onkeyup);
+		dkConsoleWindow->addEventListener("keydown", 			&TEST_DKConsoleWindow::onkeydown);
+		dkConsoleWindow->addEventListener("keyup", 				&TEST_DKConsoleWindow::onkeyup);
 		
 		////// CompositionEvent //////
 		// https://w3c.github.io/uievents/#events-composition-types
-		dkConsoleWindow.addEventListener("compositionstart",	&TEST_DKConsoleWindow::oncompositionstart);
-		dkConsoleWindow.addEventListener("compositionupdate", 	&TEST_DKConsoleWindow::oncompositionupdate);
-		dkConsoleWindow.addEventListener("compositionend", 		&TEST_DKConsoleWindow::oncompositionend);
+		dkConsoleWindow->addEventListener("compositionstart",	&TEST_DKConsoleWindow::oncompositionstart);
+		dkConsoleWindow->addEventListener("compositionupdate", 	&TEST_DKConsoleWindow::oncompositionupdate);
+		dkConsoleWindow->addEventListener("compositionend", 	&TEST_DKConsoleWindow::oncompositionend);
 	}
 
 	static void printDKConsoleWindowProperties(DKConsoleWindow& dkConsoleWindow){

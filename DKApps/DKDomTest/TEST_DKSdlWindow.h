@@ -8,13 +8,16 @@
 class TEST_DKSdlWindow //: public DKObjectT<TEST_DKSdlWindow>
 {
 public:
-	DKSdlWindow* dkSdlWindow;
+	//DKSdlWindow dkSdlWindow;					// goes out of scope
+	//DKSdlWindow* dkSdlWindow;					// dangling pointer
+	std::unique_ptr<DKSdlWindow> dkSdlWindow;
 	
 	TEST_DKSdlWindow(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DKSdlWindow.h //////");
 		
-		dkSdlWindow = new DKSdlWindow();
+		//dkSdlWindow = new DKSdlWindow();
+		dkSdlWindow = std::make_unique<DKSdlWindow>();	
 		dkSdlWindow->screen(TEST_Screen::_screen);
 		
 		printDKSdlWindowProperties(*dkSdlWindow);

@@ -1,6 +1,6 @@
 #include "DK/stdafx.h"
 #include "App.h"
-#include <algorithm>	// smart pointers
+//#include <algorithm>	// smart pointers
 
 
 
@@ -135,12 +135,14 @@ bool App::Init() {
 	test_DKConsoleWindow = std::make_unique<TEST_DKConsoleWindow>();											// smart pointer member variable	// WORKS
 	//std::make_unique<TEST_DKConsoleWindow>();																	// smart pointer without variable	// DOES NOT WORK (goes out of scope)
 	
-	/*
 	// [DKSdlWindow]
-	//DKClass::DKCreate("TEST_DKSdlWindow");																	// DKObjectT
-	//TEST_DKSdlWindow* test_DKSdlWindow = new TEST_DKSdlWindow();												// pointer
-	std::unique_ptr<TEST_DKSdlWindow> test_DKSdlWindow = std::make_unique<TEST_DKSdlWindow>();					// smart pointer
+	//DKClass::DKCreate("TEST_DKSdlWindow");																	// DKObjectT						// WORKS
+	//TEST_DKSdlWindow* test_DKSdlWindow = new TEST_DKSdlWindow();												// pointer							// WORKS		 (dangling pointer)
+	//std::unique_ptr<TEST_DKSdlWindow> test_DKSdlWindow = std::make_unique<TEST_DKSdlWindow>();				// smart pointer
+	test_DKSdlWindow = std::make_unique<TEST_DKSdlWindow>();													// smart pointer member variable
+	//std::make_unique<TEST_DKSdlWindow>();																		// smart pointer without variable	// DOES NOT WORK (goes out of scope)
 	
+	/*
 	// [DKRmlDocument]
 	//DKClass::DKCreate("TEST_DKRmlDocument");																	// DKObjectT
 	//TEST_DKRmlDocument* test_DKRmlDocument = new TEST_DKRmlDocument();										// pointer

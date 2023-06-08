@@ -30,11 +30,9 @@
 
 ////// DigitalKnob //////
 #include "TEST_DKConsoleWindow.h"
-/*
 #include "TEST_DKSdlWindow.h"
-#include "TEST_DKRmlDocument.h"
-#include "TEST_DKRmlLocation.h"
-*/
+//#include "TEST_DKRmlDocument.h"
+//#include "TEST_DKRmlLocation.h"
 
 
 class App : public DKObjectT<App>
@@ -44,6 +42,7 @@ public:
 	bool End();
 
 	std::unique_ptr<TEST_DKConsoleWindow> test_DKConsoleWindow;
+	std::unique_ptr<TEST_DKSdlWindow> test_DKSdlWindow;
 };
 REGISTER_OBJECT(App, true);
 
