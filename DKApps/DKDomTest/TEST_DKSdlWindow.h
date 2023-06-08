@@ -66,6 +66,10 @@ public:
 		dkSdlWindow->addEventListener("compositionupdate", 	&TEST_DKSdlWindow::oncompositionupdate);
 		dkSdlWindow->addEventListener("compositionend", 	&TEST_DKSdlWindow::oncompositionend);
 	}
+	
+	~TEST_DKSdlWindow(){
+		delete dkSdlWindow;
+	}
 
 	static void printDKSdlWindowProperties(DKSdlWindow& dkSdlWindow){
 		//DKDEBUGFUNC(dkSdlWindow);

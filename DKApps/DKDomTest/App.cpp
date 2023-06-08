@@ -1,6 +1,5 @@
 #include "DK/stdafx.h"
 #include "App.h"
-//#include <algorithm>	// smart pointers
 
 
 
