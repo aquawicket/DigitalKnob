@@ -17,9 +17,9 @@ public:
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DKSdlWindow.h //////");
 		
-		//dkSdlWindow = new DKSdlWindow();
+		dkSdlWindow = new DKSdlWindow();
 		//dkSdlWindow = std::make_unique<DKSdlWindow>();
-		dkSdlWindow = std::make_shared<DKSdlWindow>();	
+		//dkSdlWindow = std::make_shared<DKSdlWindow>();	
 		
 		
 		dkSdlWindow->screen(TEST_Screen::_screen);
