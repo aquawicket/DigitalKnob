@@ -43,6 +43,7 @@ public:
 
 	std::unique_ptr<TEST_DKConsoleWindow> test_DKConsoleWindow;
 	std::unique_ptr<TEST_DKSdlWindow> test_DKSdlWindow;
+	std::unique_ptr<TEST_DKRmlDocument> test_DKRmlDocument;
 };
 REGISTER_OBJECT(App, true);
 

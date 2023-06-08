@@ -138,16 +138,18 @@ bool App::Init() {
 	// [DKSdlWindow]
 	//DKClass::DKCreate("TEST_DKSdlWindow");																	// DKObjectT						// WORKS
 	//TEST_DKSdlWindow* test_DKSdlWindow = new TEST_DKSdlWindow();												// pointer							// WORKS		 (dangling pointer)
-	//std::unique_ptr<TEST_DKSdlWindow> test_DKSdlWindow = std::make_unique<TEST_DKSdlWindow>();				// smart pointer
-	test_DKSdlWindow = std::make_unique<TEST_DKSdlWindow>();													// smart pointer member variable
+	//std::unique_ptr<TEST_DKSdlWindow> test_DKSdlWindow = std::make_unique<TEST_DKSdlWindow>();				// smart pointer					// DOES NOT WORK (goes out of scope)
+	test_DKSdlWindow = std::make_unique<TEST_DKSdlWindow>();													// smart pointer member variable	// WORKS
 	//std::make_unique<TEST_DKSdlWindow>();																		// smart pointer without variable	// DOES NOT WORK (goes out of scope)
 	
-	/*
 	// [DKRmlDocument]
 	//DKClass::DKCreate("TEST_DKRmlDocument");																	// DKObjectT
 	//TEST_DKRmlDocument* test_DKRmlDocument = new TEST_DKRmlDocument();										// pointer
-	std::unique_ptr<TEST_DKRmlDocument> test_DKRmlDocument = std::make_unique<TEST_DKRmlDocument>();			// smart pointer
+	//std::unique_ptr<TEST_DKRmlDocument> test_DKRmlDocument = std::make_unique<TEST_DKRmlDocument>();			// smart pointer
+	test_DKRmlDocument = std::make_unique<TEST_DKRmlDocument>();												// smart pointer member variable
+	//std::make_unique<TEST_DKRmlDocument>();
 	
+	/*
 	// [DKRmlLocation]
 	//DKClass::DKCreate("TEST_DKRmlLocation");																	// DKObjectT
 	//TEST_DKRmlLocation* test_DKRmlLocation = new TEST_DKRmlLocation();										// pointer
