@@ -11,15 +11,18 @@ public:
 	//DKSdlWindow dkSdlWindow;							// goes out of scope
 	static DKSdlWindow* dkSdlWindow;					// dangling pointer
 	//static std::unique_ptr<DKSdlWindow> dkSdlWindow;
+	//static std::shared_ptr<DKSdlWindow> dkSdlWindow;
 	
 	TEST_DKSdlWindow(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DKSdlWindow.h //////");
 		
-		dkSdlWindow = new DKSdlWindow();
-		//dkSdlWindow = std::make_unique<DKSdlWindow>();	
-		dkSdlWindow->screen(TEST_Screen::_screen);
+		//dkSdlWindow = new DKSdlWindow();
+		//dkSdlWindow = std::make_unique<DKSdlWindow>();
+		dkSdlWindow = std::make_shared<DKSdlWindow>();	
 		
+		
+		dkSdlWindow->screen(TEST_Screen::_screen);
 		printDKSdlWindowProperties(*dkSdlWindow);
 		
 		////// FocusEvent //////
@@ -230,6 +233,7 @@ public:
 
 DKSdlWindow* TEST_DKSdlWindow::dkSdlWindow;
 //std::unique_ptr<DKSdlWindow> TEST_DKSdlWindow::dkSdlWindow;
+//std::shared_ptr<DKSdlWindow> TEST_DKSdlWindow::dkSdlWindow;
 
 //DKSdlWindow& window;	// global window variable (TODO)
 

@@ -42,6 +42,8 @@ public:
 	bool End();
 
 	std::unique_ptr<TEST_DKConsoleWindow> 	test_DKConsoleWindow;
+	//std::shared_ptr<TEST_DKConsoleWindow> 	test_DKConsoleWindow;
+	
 	std::unique_ptr<TEST_DKSdlWindow> 		test_DKSdlWindow;
 	std::unique_ptr<TEST_DKRmlDocument>		test_DKRmlDocument;
 	std::unique_ptr<TEST_DKRmlLocation> 	test_DKRmlLocation;
