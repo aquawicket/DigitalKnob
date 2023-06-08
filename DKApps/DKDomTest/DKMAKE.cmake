@@ -40,4 +40,6 @@ dk_depend(DKSdlWindow)
 dk_depend(DKSdlRmlDocument)
 dk_depend(DKRmlDocument)
 dk_depend(DKRmlLocation)
+#dk_depend(DKRmlNode)
+
 dk_depend(DKWebTest)
