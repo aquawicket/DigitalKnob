@@ -12,7 +12,7 @@ public:
 	DKRmlLocation* dkRmlLocation;					// dangling pointer
 	//std::unique_ptr<DKRmlLocation> dkRmlLocation;
 	
-	TEST_DKRmlLocation(){
+	TEST_DKRmlLocation() {
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DKRmlLocation.h //////");
 		
@@ -21,6 +21,10 @@ public:
 		printDKRmlLocationProperties(*dkRmlLocation);
 		
 		dkRmlLocation->href("DKWebTest/index.html");
+	}
+	
+	~TEST_DKRmlLocation() {
+		delete dkRmlLocation;
 	}
 	
 	static void printDKRmlLocationProperties(DKRmlLocation& dkRmlLocation){

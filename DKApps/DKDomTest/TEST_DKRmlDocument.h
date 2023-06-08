@@ -13,7 +13,7 @@ public:
 	static DKRmlDocument* dkRmlDocument;			// dangling pointer
 	//std::unique_ptr<DKRmlDocument> dkRmlDocument;
 	
-	TEST_DKRmlDocument(){
+	TEST_DKRmlDocument() {
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DKRmlDocument.h //////");
 		
@@ -22,6 +22,10 @@ public:
 		//dkRmlDocument = std::make_unique<DKRmlDocument>(TEST_DKSdlWindow::dkSdlWindow);	
 		
 		printRmlDocumentProperties(*dkRmlDocument);
+	}
+	
+	~TEST_DKRmlDocument() {
+		delete dkRmlDocument;
 	}
 	
 	static void printRmlDocumentProperties(DKRmlDocument& dkRmlDocument){
