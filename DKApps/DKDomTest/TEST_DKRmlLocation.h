@@ -8,11 +8,15 @@
 class TEST_DKRmlLocation //: public DKObjectT<TEST_DKRmlLocation>
 {
 public:
+	//DKRmlLocation dkRmlLocation;					// goes out of scope
+	DKRmlLocation* dkRmlLocation;					// dangling pointer
+	//std::unique_ptr<DKRmlLocation> dkRmlLocation;
+	
 	TEST_DKRmlLocation(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DKRmlLocation.h //////");
 		
-		DKRmlLocation* dkRmlLocation = new DKRmlLocation(TEST_DKRmlDocument::Get()->dkRmlDocument);
+		dkRmlLocation = new DKRmlLocation(TEST_DKRmlDocument::dkRmlDocument);
 		
 		printDKRmlLocationProperties(*dkRmlLocation);
 		
