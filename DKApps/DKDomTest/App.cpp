@@ -154,9 +154,10 @@ bool App::Init() {
 	//std::make_unique<TEST_DKSdlWindow>();																		// smart pointer without variable	// DOES NOT WORK (goes out of scope)
 	
 	
-	// [DKRmlDocument]
+	// [DKRmlInterface]
 	test_DKRmlInterface = std::make_unique<TEST_DKRmlInterface>();												// smart pointer member variable
 	
+	/*
 	// [DKRmlDocument]
 	test_DKRmlDocument = std::make_unique<TEST_DKRmlDocument>();												// smart pointer member variable
 	
@@ -165,6 +166,7 @@ bool App::Init() {
 	
 	// [DKRmlNode]
 	test_DKRmlNode = std::make_unique<TEST_DKRmlNode>();														// smart pointer member variable
+	*/
 	
 	return true;
 }

@@ -40,10 +40,11 @@ dk_depend(DKConsoleWindow)
 dk_depend(DKSdlWindow)
 dk_depend(DKSdlRmlDocument)
 
-dk_depend(DKRmlEventTarget)
-dk_depend(DKRmlNode)
-dk_depend(DKRmlDocument)
-dk_depend(DKRmlLocation)
+dk_depend(DKRmlInterface)
+#dk_depend(DKRmlEventTarget)
+#dk_depend(DKRmlNode)
+#dk_depend(DKRmlDocument)
+#dk_depend(DKRmlLocation)
 
 
-dk_depend(DKWebTest)
+#dk_depend(DKWebTest)
