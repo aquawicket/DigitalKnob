@@ -163,7 +163,7 @@ bool App::Init() {
 	test_DKRmlNode = std::make_unique<TEST_DKRmlNode>();
 	
 	// [DKRmlDocument]
-	//test_DKRmlDocument = std::make_unique<TEST_DKRmlDocument>();
+	test_DKRmlDocument = std::make_unique<TEST_DKRmlDocument>();
 
 	// [DKRmlLocation]
 	//test_DKRmlLocation = std::make_unique<TEST_DKRmlLocation>();

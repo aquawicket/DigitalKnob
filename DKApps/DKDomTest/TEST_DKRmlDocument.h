@@ -3,7 +3,6 @@
 #define TEST_DKRmlDocument_H
 
 #include "DKRmlDocument/DKRmlDocument.h"
-#include "TEST_DKSdlWindow.h"
 
 
 class TEST_DKRmlDocument //: public DKObjectT<TEST_DKRmlDocument>

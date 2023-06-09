@@ -40,7 +40,7 @@
 #include "TEST_DKRmlInterface.h"
 #include "TEST_DKRmlEventTarget.h"
 #include "TEST_DKRmlNode.h"
-//#include "TEST_DKRmlDocument.h"
+#include "TEST_DKRmlDocument.h"
 //#include "TEST_DKRmlLocation.h"
 
 
@@ -59,7 +59,7 @@ public:
 	std::unique_ptr<TEST_DKRmlInterface>		test_DKRmlInterface;
 	std::unique_ptr<TEST_DKRmlEventTarget> 		test_DKRmlEventTarget;	
 	std::unique_ptr<TEST_DKRmlNode> 			test_DKRmlNode;
-	//std::unique_ptr<TEST_DKRmlDocument>		test_DKRmlDocument;
+	std::unique_ptr<TEST_DKRmlDocument>			test_DKRmlDocument;
 	//std::unique_ptr<TEST_DKRmlLocation> 		test_DKRmlLocation;
 };
 REGISTER_OBJECT(App, true);
