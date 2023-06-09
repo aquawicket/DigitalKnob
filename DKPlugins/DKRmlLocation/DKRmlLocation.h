@@ -5,7 +5,6 @@
 #ifndef DKRmlLocation_H
 #define DKRmlLocation_H
 
-#include "DK/DK.h"
 #include "DKLocation/DKLocation.h"
 #include "DKRmlDocument/DKRmlDocument.h"
 
@@ -27,7 +26,7 @@ public:
 	virtual ~DKRmlLocation() {}
 
 	// [LegacyUnforgeable] stringifier attribute USVString href;
-	virtual const USVString& href()					{ return _dkRmlDocument->href_; }		// getter
+	virtual const USVString& href()				{ return _dkRmlDocument->href_; }		// getter
 	virtual void href(const USVString& url)		{ _dkRmlDocument->LoadUrl(url); } 		// setter
 	
 	// [LegacyUnforgeable] readonly attribute USVString origin;
