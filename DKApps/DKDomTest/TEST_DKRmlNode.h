@@ -16,7 +16,7 @@ public:
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DKRmlNode.h //////");
 		
-		dkRmlNode = new DKRmlNode();
+		dkRmlNode = new DKRmlNode(TEST_DKRmlDocument::dkRmlDocument);
 		
 		printDKRmlNodeProperties(*dkRmlNode);
 	}
