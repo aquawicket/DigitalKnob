@@ -9,15 +9,15 @@
 class TEST_DKRmlDocument //: public DKObjectT<TEST_DKRmlDocument>
 {
 public:
-	static DKRmlDocument* dkRmlDocument;			// dangling pointer
+	static DKRmlDocument* dkRmlDocument;
 	//std::unique_ptr<DKRmlDocument> dkRmlDocument;
 	
 	TEST_DKRmlDocument() {
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DKRmlDocument.h //////");
 		
-		dkRmlDocument = new DKRmlDocument(TEST_DKSdlWindow::dkSdlWindow);
-		//dkRmlDocument = std::make_unique<DKRmlDocument>(TEST_DKSdlWindow::dkSdlWindow);	
+		dkRmlDocument = new DKRmlDocument(TEST_DKRmlInterface::dkRmlInterface);
+		//dkRmlDocument = std::make_unique<DKRmlDocument>(TEST_DKRmlInterface::dkRmlInterface);	
 		
 		printRmlDocumentProperties(*dkRmlDocument);
 	}
