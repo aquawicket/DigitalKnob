@@ -61,7 +61,7 @@ DKRmlInterface::DKRmlInterface(DKWindow* window) : DKInterface() {
 	DKINFO("DKRmlInterface("+interfaceAddress+") \n");
 	
 	DKINFO("DKRmlInterface("+window->interfaceName+") \n");	
-
+	
 	document = NULL;
 	
 	if(!dkRmlFile){ 
@@ -89,7 +89,6 @@ DKRmlInterface::DKRmlInterface(DKWindow* window) : DKInterface() {
 		
 	int w = window->outerWidth();
 	int h = window->outerHeight();
-
 	context = Rml::CreateContext("default", Rml::Vector2i(w, h));
 		
 #ifdef HAVE_rmlui_debugger
@@ -185,8 +184,6 @@ DKRmlInterface::~DKRmlInterface() {
 		delete Rml::GetSystemInterface();
 		delete Rml::GetFileInterface();
 	}
-	DKClass::DKClose("DKRmlJS");
-	DKClass::DKClose("DKRmlV8");
 	DKEvents::RemoveRegisterEventFunc(&DKRmlInterface::RegisterEvent, this);
 	DKEvents::RemoveUnegisterEventFunc(&DKRmlInterface::UnregisterEvent, this);
 	DKEvents::RemoveSendEventFunc(&DKRmlInterface::SendEvent, this);
