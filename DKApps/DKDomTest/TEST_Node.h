@@ -22,7 +22,7 @@ public:
 		DKDEBUGFUNC(node);
 		
 		// const unsigned short ELEMENT_NODE = 1;
-		console.log("node.ELEMENT_NODE() = "								+toString(node.ELEMENT_NODE()));
+		console.log("node.ELEMENT_NODE() = "							+toString(node.ELEMENT_NODE()));
 		
 		// const unsigned short ATTRIBUTE_NODE = 2;
 		console.log("node.ATTRIBUTE_NODE() = "							+toString(node.ATTRIBUTE_NODE()));
@@ -43,7 +43,7 @@ public:
 		console.log("node.PROCESSING_INSTRUCTION_NODE() = "				+toString(node.PROCESSING_INSTRUCTION_NODE()));
 		
 		// const unsigned short COMMENT_NODE = 8;
-		console.log("node.COMMENT_NODE() = "								+toString(node.COMMENT_NODE()));
+		console.log("node.COMMENT_NODE() = "							+toString(node.COMMENT_NODE()));
 		
 		// const unsigned short DOCUMENT_NODE = 9;
 		console.log("node.DOCUMENT_NODE() = "							+toString(node.DOCUMENT_NODE()));
@@ -58,10 +58,10 @@ public:
 		console.log("node.NOTATION_NODE() = "							+toString(node.NOTATION_NODE()));
 		
 		// readonly attribute unsigned short nodeType;
-		console.log("node.nodeType() = "									+toString(node.nodeType()));
+		console.log("node.nodeType() = "								+toString(node.nodeType()));
 		
 		// readonly attribute DOMString nodeName;
-		console.log("node.nodeName() = "									+toString(node.nodeName()));
+		console.log("node.nodeName() = "								+toString(node.nodeName()));
 		
 		// readonly attribute USVString baseURI;
 		console.log("node.baseURI() = "									+toString(node.baseURI()));

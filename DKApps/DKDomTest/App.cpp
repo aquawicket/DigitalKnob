@@ -158,6 +158,13 @@ bool App::Init() {
 	test_DKRmlLocation = std::make_unique<TEST_DKRmlLocation>();												// smart pointer member variable
 	//std::make_unique<TEST_DKSdlWindow>();																		// smart pointer without variable
 	
+	// [DKRmlNode]
+	//DKClass::DKCreate("TEST_DKRmlNode");																		// DKObjectT
+	//TEST_DKRmlNode* test_DKRmlNode = new TEST_DKRmlNode();													// pointer
+	//std::unique_ptr<TEST_DKRmlNode> test_DKRmlNode = std::make_unique<TEST_DKRmlNode>();						// smart pointer
+	test_DKRmlNode = std::make_unique<TEST_DKRmlNode>();														// smart pointer member variable
+	//std::make_unique<TEST_DKRmlNode>();	
+	
 	return true;
 }
 
