@@ -46,7 +46,7 @@ public:
 	DKRmlInterface(DKWindow* window);
 	~DKRmlInterface();
 	
-	bool GetSourceCode(DKString& source_code);
+	bool GetSourceCode(DKString& source_code); 									//FIXME: https://stackoverflow.com/a/1367597/688352
 	bool LoadFont(const DKString& file);
 	bool LoadFonts(DKString& directory);
 	bool LoadUrl(const DKString& url);
@@ -58,8 +58,8 @@ public:
 	bool DebuggerOn();
 	bool DebuggerToggle();
 	bool UnregisterEvent(const DKString& elementAddress, const DKString& type);
-	static bool GetOuterHTML(Rml::Element* element, DKString& outerHtml);
-	static bool SetOuterHTML(Rml::Element* element, const DKString& outerHtml);
+	static bool GetOuterHTML(Rml::Element* element, DKString& outerHtml);		//FIXME: https://stackoverflow.com/a/1367597/688352
+	static bool SetOuterHTML(Rml::Element* element, const DKString& outerHtml);	//FIXME: https://stackoverflow.com/a/1367597/688352
 	DKString href_;
 	DKString protocol;
 	DKString _path;

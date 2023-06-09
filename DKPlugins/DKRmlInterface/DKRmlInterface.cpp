@@ -60,19 +60,10 @@ DKRmlInterface::DKRmlInterface(DKWindow* window) : DKInterface() {
 	interfaceAddress = pointerToAddress(this);
 	DKINFO("DKRmlInterface("+interfaceAddress+") \n");
 	
-	DKINFO("DKRmlInterface("+window->interfaceName+") \n");
-	
-
-	DKClass::DKCreate("DKRmlJS");
-	DKClass::DKCreate("DKRmlV8");
-
-	DKClass::DKCreate("DKRmlAudio");
-	DKClass::DKCreate("DKRmlElement");
-	DKClass::DKCreate("DKRmlIframe");
-	DKClass::DKCreate("DKRmlTestElements");
-	
+	DKINFO("DKRmlInterface("+window->interfaceName+") \n");	
 
 	document = NULL;
+	
 	if(!dkRmlFile){ 
 		dkRmlFile = new DKRmlFile();
 		Rml::SetFileInterface(dkRmlFile);
@@ -80,34 +71,27 @@ DKRmlInterface::DKRmlInterface(DKWindow* window) : DKInterface() {
 
 	//Create DKSdlRml or DKOsgRml
 	
-	//if(DKClass::DKAvailable("DKSdlRmlDocument")){
 	if(same(window->interfaceName, "SdlWindow")){
-		// DKClass::DKCreate("DKSdlRmlDocument");
 		DKSdlRmlDocument* dkSdlRmlDocument = new DKSdlRmlDocument(dynamic_cast<DKSdlWindow*>(window), this);
-		
-		if(!Rml::Initialise()){
-			DKERROR("Rml::Initialise(): failed \n");
-			return;
-		}
-		//int w = 800;
-		int w = window->outerWidth();
-		//if(!DKWindow::GetWidth(w))
-		//	return DKERROR("DKWindow::GetWidth() failed! \n");
-		//int h = 600;
-		int h = window->outerHeight();
-		//if(!DKWindow::GetHeight(h))
-		//	return DKERROR("DKWindow::GetHeight() failed! \n");
-		context = Rml::CreateContext("default", Rml::Vector2i(w, h));
 	}
-	//else if(DKClass::DKAvailable("DKOsgRml")){
 	else if(same(window->interfaceName, "OsgWindow")){
-		DKClass::DKCreate("DKOsgRml");
+		//DKOsgRml* dkOsgRml = new DKOsgRml(dynamic_cast<DKOsgWindow*>(window), this);	// TODO
 	}
 	else{
 		DKERROR("No registered window found \n");
 		return;
 	}
+	
+	if(!Rml::Initialise()){
+		DKERROR("Rml::Initialise(): failed \n");
+		return;
+	}
+		
+	int w = window->outerWidth();
+	int h = window->outerHeight();
 
+	context = Rml::CreateContext("default", Rml::Vector2i(w, h));
+		
 #ifdef HAVE_rmlui_debugger
 	if (!Rml::Debugger::Initialise(context)){
 		DKERROR("Rml::Debugger::Initialise(): failed\n");
