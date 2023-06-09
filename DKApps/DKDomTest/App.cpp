@@ -6,12 +6,18 @@
 ///////////////////////////////////////
 bool App::Init() {
 	DKDEBUGFUNC();
-
+	
+	// [INTERFACE]
+	//DKClass::DKCreate("TEST_INTERFACE");																		// DKObjectT
+	//TEST_INTERFACE* test_interfqce = new TEST_INTERFACE();													// pointer
+	//std::shared_ptr<TEST_INTERFACE> test_interfqce = std::make_shared<TEST_INTERFACE>();						// smart pointer (shared)
+	//std::unique_ptr<TEST_INTERFACE> test_interfqce = std::make_unique<TEST_INTERFACE>();						// smart pointer (unique)
+	
 	// [Console]
 	//DKClass::DKCreate("TEST_Console");																		// DKObjectT
 	//TEST_Console* test_console = new TEST_Console();															// pointer
-	std::shared_ptr<TEST_Console> test_Console = std::make_shared<TEST_Console>();								// smart pointer (shared)
-	//std::unique_ptr<TEST_Console> test_Console = std::make_unique<TEST_Console>();							// smart pointer (unique)
+	//std::shared_ptr<TEST_Console> test_Console = std::make_shared<TEST_Console>();							// smart pointer (shared)
+	std::unique_ptr<TEST_Console> test_Console = std::make_unique<TEST_Console>();								// smart pointer (unique)
 	
 	
 	// [Event]
@@ -139,6 +145,7 @@ bool App::Init() {
 	//std::make_shared<TEST_DKConsoleWindow>();
 	*/
 	
+	
 	// [DKSdlWindow]
 	//DKClass::DKCreate("TEST_DKSdlWindow");																	// DKObjectT						// WORKS
 	//TEST_DKSdlWindow* test_DKSdlWindow = new TEST_DKSdlWindow();												// pointer							// WORKS		 (dangling pointer)
@@ -146,26 +153,18 @@ bool App::Init() {
 	test_DKSdlWindow = std::make_unique<TEST_DKSdlWindow>();													// smart pointer member variable	// WORKS
 	//std::make_unique<TEST_DKSdlWindow>();																		// smart pointer without variable	// DOES NOT WORK (goes out of scope)
 	
+	
 	// [DKRmlDocument]
-	//DKClass::DKCreate("TEST_DKRmlDocument");																	// DKObjectT
-	//TEST_DKRmlDocument* test_DKRmlDocument = new TEST_DKRmlDocument();										// pointer
-	//std::unique_ptr<TEST_DKRmlDocument> test_DKRmlDocument = std::make_unique<TEST_DKRmlDocument>();			// smart pointer
+	test_DKRmlInterface = std::make_unique<TEST_DKRmlInterface>();												// smart pointer member variable
+	
+	// [DKRmlDocument]
 	test_DKRmlDocument = std::make_unique<TEST_DKRmlDocument>();												// smart pointer member variable
-	//std::make_unique<TEST_DKRmlDocument>();
 	
 	// [DKRmlLocation]
-	//DKClass::DKCreate("TEST_DKRmlLocation");																	// DKObjectT
-	//TEST_DKRmlLocation* test_DKRmlLocation = new TEST_DKRmlLocation();										// pointer
-	//std::unique_ptr<TEST_DKRmlLocation> test_DKRmlLocation = std::make_unique<TEST_DKRmlLocation>();			// smart pointer
 	test_DKRmlLocation = std::make_unique<TEST_DKRmlLocation>();												// smart pointer member variable
-	//std::make_unique<TEST_DKSdlWindow>();																		// smart pointer without variable
 	
 	// [DKRmlNode]
-	//DKClass::DKCreate("TEST_DKRmlNode");																		// DKObjectT
-	//TEST_DKRmlNode* test_DKRmlNode = new TEST_DKRmlNode();													// pointer
-	//std::unique_ptr<TEST_DKRmlNode> test_DKRmlNode = std::make_unique<TEST_DKRmlNode>();						// smart pointer
 	test_DKRmlNode = std::make_unique<TEST_DKRmlNode>();														// smart pointer member variable
-	//std::make_unique<TEST_DKRmlNode>();	
 	
 	return true;
 }
