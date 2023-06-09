@@ -5,6 +5,7 @@
 #define DKRmlDocument_H
 
 #include "DKDocument/DKDocument.h"
+#include "DKRmlInterface/DKRmlInterface.h"
 
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // [Exposed=Window]
@@ -12,13 +13,18 @@
 class DKRmlDocument : public DKDocument
 {
 public:
+	DKRmlInterface* _dkRmlInterface;
+	
 	// constructor();
-	DKRmlDocument() : DKDocument() {
+	DKRmlDocument(DKRmlInterface* dkRmlInterface) : DKDocument() {
 		DKDEBUGFUNC();
 		interfaceName = "DKRmlDocument";
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKRmlDocument("+interfaceAddress+") \n");
+		_dkRmlInterface = dkRmlInterface;
 	}
+	
+	virtual ~DKRmlDocument() {	}
 	
 	/*
 	// [SameObject] readonly attribute DOMImplementation implementation;
