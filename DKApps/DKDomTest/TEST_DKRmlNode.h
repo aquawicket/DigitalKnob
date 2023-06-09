@@ -8,15 +8,14 @@
 class TEST_DKRmlNode //: public DKObjectT<TEST_DKRmlNode>
 {
 public:
-	//DKRmlNode dkRmlNode;					// goes out of scope
-	DKRmlNode* dkRmlNode;					// dangling pointer
+	DKRmlNode* dkRmlNode;
 	//std::unique_ptr<DKRmlNode> dkRmlNode;
 	
 	TEST_DKRmlNode() {
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DKRmlNode.h //////");
 		
-		dkRmlNode = new DKRmlNode(TEST_DKRmlDocument::dkRmlDocument);
+		dkRmlNode = new DKRmlNode(TEST_DKRmlInterface::dkRmlInterface);
 		
 		printDKRmlNodeProperties(*dkRmlNode);
 	}
