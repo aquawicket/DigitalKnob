@@ -25,21 +25,21 @@
 */
 #include "DK/stdafx.h"
 #include "DK/DKFile.h"
-#include "DKRmlDocument/DKRmlCss.h"
+#include "DKRmlInterface/DKRmlCss.h"
 
 WARNING_DISABLE
 #include "RmlUi/Core/Factory.h"
 WARNING_ENABLE
 
 
-//KRmlDocument* DKRmlCss::dkRmlDocument;
+//KRmlDocument* DKRmlCss::dkRmlInterface;
 
 //bool DKRmlCss::Init(){
-DKRmlCss::DKRmlCss(DKRmlDocument* dkRmlDocument, /*const*/ DKString& file){
+DKRmlCss::DKRmlCss(DKRmlInterface* dkRmlInterface, /*const*/ DKString& file){
 	DKDEBUGFUNC();
-	//dkRmlDocument = DKRmlDocument::Get();
-	if(!dkRmlDocument){
-		DKERROR("dkRmlDocument invalid\n");
+	//dkRmlInterface = DKRmlInterface::Get();
+	if(!dkRmlInterface){
+		DKERROR("dkRmlInterface invalid\n");
 		return;
 	}
 	/*
@@ -60,12 +60,12 @@ DKRmlCss::DKRmlCss(DKRmlDocument* dkRmlDocument, /*const*/ DKString& file){
 	}
 
 	//Load user agent style sheet
-	const Rml::StyleSheetContainer* doc_sheet = dkRmlDocument->document->GetOwnerDocument()->GetStyleSheetContainer();
+	const Rml::StyleSheetContainer* doc_sheet = dkRmlInterface->document->GetOwnerDocument()->GetStyleSheetContainer();
 	Rml::SharedPtr<Rml::StyleSheetContainer> file_sheet = Rml::Factory::InstanceStyleSheetFile(file.c_str());
 	if (doc_sheet) { //Combine the file_sheet to the current sheet
 		Rml::SharedPtr<Rml::StyleSheetContainer> new_sheet = doc_sheet->CombineStyleSheetContainer(*file_sheet);
-		dkRmlDocument->document->GetOwnerDocument()->SetStyleSheetContainer(std::move(new_sheet));
+		dkRmlInterface->document->GetOwnerDocument()->SetStyleSheetContainer(std::move(new_sheet));
 	}
 	else //no current sheet, just load the file sheet
-		dkRmlDocument->document->GetOwnerDocument()->SetStyleSheetContainer(std::move(file_sheet));
+		dkRmlInterface->document->GetOwnerDocument()->SetStyleSheetContainer(std::move(file_sheet));
 }

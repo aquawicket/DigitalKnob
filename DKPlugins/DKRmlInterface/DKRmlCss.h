@@ -27,15 +27,15 @@
 #ifndef DKRmlCss_H
 #define DKRmlCss_H
 #include "DK/DK.h"
-#include "DKRmlDocument/DKRmlDocument.h"
+#include "DKRmlInterface/DKRmlInterface.h"
 
 
 class DKRmlCss// : public DKObjectT<DKRmlCss>
 {
 public:
-	DKRmlCss(DKRmlDocument* dkRmlDocument, /*const*/ DKString& file);
+	DKRmlCss(DKRmlInterface* dkRmlInterface, /*const*/ DKString& file);
 	//bool Init();
-	//static DKRmlDocument* dkRmlDocument;
+	//static DKRmlInterface* dkRmlInterface;
 };
 
 

@@ -28,7 +28,7 @@
 #define DKRmlConverter_H
 
 #include "DK/DK.h"
-#include "DKRmlDocument/DKRmlDocument.h"
+#include "DKRmlInterface/DKRmlInterface.h"
 
 WARNING_DISABLE
 #include <RmlUi/Core.h>
@@ -39,16 +39,16 @@ class DKRmlConverter {// : public DKObject{
 public:
 	static bool HtmlToRml(const DKString& html, DKString& rml);
 	//bool Hyperlink(DKEvents* event);
-	bool Hyperlink(DKRmlDocument* dkRmlDocument, DKEvents* event);
+	bool Hyperlink(DKRmlInterface* dkRmlInterface, DKEvents* event);
 	//bool IndexToRml(const DKString& html, DKString& rml);
 	//bool PostProcess(Rml::Element* element);
-	static bool DKRmlConverter::PostProcess(DKRmlDocument* dkRmlDocument, Rml::Element* element);
+	static bool DKRmlConverter::PostProcess(DKRmlInterface* dkRmlInterface, Rml::Element* element);
 	//static bool ResizeIframe(DKEvents* event);
-	static bool ResizeIframe(DKRmlDocument* dkRmlDocument, DKEvents* event);
+	static bool ResizeIframe(DKRmlInterface* dkRmlInterface, DKEvents* event);
 	//bool ClickIframe(DKEvents* event);
-	bool ClickIframe(DKRmlDocument* dkRmlDocument, DKEvents* event);
+	bool ClickIframe(DKRmlInterface* dkRmlInterface, DKEvents* event);
 	//bool MouseOverIframe(DKEvents* event);
-	bool MouseOverIframe(DKRmlDocument* dkRmlDocument, DKEvents* event);
+	bool MouseOverIframe(DKRmlInterface* dkRmlInterface, DKEvents* event);
 	bool Encode(std::string& _data);
 #ifdef USE_tidy_html5
 	bool TidyFile(const DKString& in, DKString& out);

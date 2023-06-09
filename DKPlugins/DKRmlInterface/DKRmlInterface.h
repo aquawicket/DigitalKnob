@@ -27,25 +27,25 @@
 // https://github.com/mikke89/RmlUi
 // https://mikke89.github.io/RmlUiDoc/
 #pragma once
-#ifndef DKRmlDocument_H
-#define DKRmlDocument_H
+#ifndef DKRmlInterface_H
+#define DKRmlInterface_H
 
 #include "DK/DK.h"
 #include "DKWindow/DKWindow.h"
 #include "DKDocument/DKDocument.h"
-#include "DKRmlDocument/DKRmlFile.h"
-//#include "DKRmlDocument/DKRmlConverter.h"
+#include "DKRmlInterface/DKRmlFile.h"
+//#include "DKRmlInterface/DKRmlConverter.h"
 
 WARNING_DISABLE
 #include <RmlUi/Core.h>
 WARNING_ENABLE
 
 
-class DKRmlDocument : public DKDocument, public Rml::EventListener {//, public DKObjectT<DKRmlDocument> {
+class DKRmlInterface : public DKInterface, public Rml::EventListener {//, public DKObjectT<DKRmlInterface> {
 public:
-	//DKRmlDocument();
-	DKRmlDocument(DKWindow* window);
-	~DKRmlDocument();
+	//DKRmlInterface();
+	DKRmlInterface(DKWindow* window);
+	~DKRmlInterface();
 	bool Init();
 	bool End();
 	
@@ -74,5 +74,5 @@ public:
 	//DKRmlConverter dkRmlConverter;
 };
 
-//REGISTER_OBJECT(DKRmlDocument, true)
-#endif //DKRmlDocument_H
+//REGISTER_OBJECT(DKRmlInterface, true)
+#endif //DKRmlInterface_H

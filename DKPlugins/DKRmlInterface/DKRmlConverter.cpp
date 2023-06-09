@@ -24,13 +24,13 @@
 * SOFTWARE.
 */
 #include "DK/stdafx.h"
-#include "DKRmlDocument/DKRmlConverter.h"
+#include "DKRmlInterface/DKRmlConverter.h"
 #include "DK/DKLog.h"
 #if HAVE_DKCurl
 	#include "DKCurl/DKCurl.h"
 #endif
 #include "DKDuktape/DKDuktape.h"
-#include "DKRmlDocument/DKRmlDocument.h"
+#include "DKRmlInterface/DKRmlInterface.h"
 #include "DKXml/DKXml.h"
 
 WARNING_DISABLE
@@ -124,16 +124,16 @@ bool DKRmlConverter::HtmlToRml(const DKString& html, DKString& rml){
 }
 
 //bool DKRmlConverter::Hyperlink(DKEvents* event){
-bool DKRmlConverter::Hyperlink(DKRmlDocument* dkRmlDocument, DKEvents* event){
+bool DKRmlConverter::Hyperlink(DKRmlInterface* dkRmlInterface, DKEvents* event){
 	DKDEBUGFUNC(event);
 	DKString elementAddress = event->GetId();
-	//DKRmlDocument* dkRmlDocument = DKRmlDocument::Get("");
+	//DKRmlInterface* dkRmlInterface = DKRmlInterface::Get("");
 	//Rml::ElementDocument* doc = dkRml->document; //unused code
 	Rml::Element* aElement = (Rml::Element*)addressToPointer(elementAddress);
 	DKString value = aElement->GetAttribute("href")->Get<Rml::String>();
 	DKINFO("DKWidget::Hyperlink: "+value+"\n");
 	//DKUtil::Run(value, "");
-	dkRmlDocument->LoadUrl(value);
+	dkRmlInterface->LoadUrl(value);
 	return true;
 }
 
@@ -155,8 +155,8 @@ bool DKRmlConverter::IndexToRml(const DKString& html, DKString& rml){
 	rml = "<rml>\n"+rml+"</rml>";
 	
 	replace(rml, "<head />", "<head></head>");
-	DKString rml_css = DKFile::local_assets+"DKRmlDocument/DKRml.css"; //add DKRml.css to the head tag
-	replace(rml, "<head>", "<head><link id=\"DKRmlDocument/DKRml.css\" type=\"text/css\" href=\""+rml_css+"\"></link>");
+	DKString rml_css = DKFile::local_assets+"DKRmlInterface/DKRml.css"; //add DKRml.css to the head tag
+	replace(rml, "<head>", "<head><link id=\"DKRmlInterface/DKRml.css\" type=\"text/css\" href=\""+rml_css+"\"></link>");
 
 	//replace quotes with apostrophes, pugixml will remove quotes inside nodes.
 	//FIXME: code like jSFunc('"+var_in_quotes+"') will NOT work. 
@@ -178,7 +178,7 @@ bool DKRmlConverter::IndexToRml(const DKString& html, DKString& rml){
 	//xml.PrependNode("//head","link");
 	//xml.SetAttributes("//head/link[1]","rel","stylesheet");
 	//xml.SetAttributes("//head/link[1]","type","text/css");
-	//xml.SetAttributes("//head/link[1]","href","DKRmlDocument/DKRml.css");
+	//xml.SetAttributes("//head/link[1]","href","DKRmlInterface/DKRml.css");
 
 	//Rml cannot read nodes outside of the body, so add a html node we can work with.
 	//xml.PrependNode("//body", "html"); 
@@ -189,13 +189,13 @@ bool DKRmlConverter::IndexToRml(const DKString& html, DKString& rml){
 */
 
 //bool DKRmlConverter::PostProcess(Rml::Element* element) {
-bool DKRmlConverter::PostProcess(DKRmlDocument* dkRmlDocument, Rml::Element* element) {
+bool DKRmlConverter::PostProcess(DKRmlInterface* dkRmlInterface, Rml::Element* element) {
 	DKDEBUGFUNC(element);
 	if(!element)
 		return DKERROR("element invalid\n");
 	//we actually want the parent if it has one
-	//Rml::Element* doc = DKRmlDocument::Get()->document;
-	Rml::Element* doc = dkRmlDocument->document;
+	//Rml::Element* doc = DKRmlInterface::Get()->document;
+	Rml::Element* doc = dkRmlInterface->document;
 	if(element != doc && element->GetParentNode())
 		element = element->GetParentNode();
 
@@ -286,8 +286,8 @@ bool DKRmlConverter::PostProcess(DKRmlDocument* dkRmlDocument, Rml::Element* ele
 			aElements[i]->SetProperty("color", "rgb(0,0,255)");
 			aElements[i]->SetProperty("text-decoration", "underline");
 			DKString id = aElements[i]->GetId();
-			//aElements[i]->AddEventListener("click", DKRmlDocument::Get(), false);
-			aElements[i]->AddEventListener("click", dkRmlDocument, false);
+			//aElements[i]->AddEventListener("click", DKRmlInterface::Get(), false);
+			aElements[i]->AddEventListener("click", dkRmlInterface, false);
 			DKString elementAddress = pointerToAddress(aElements[i]);
 			//DKEvents::AddEvent(elementAddress, "click", &DKRmlConverter::Hyperlink, this);	//FIXME
 		}
@@ -317,14 +317,14 @@ bool DKRmlConverter::PostProcess(DKRmlDocument* dkRmlDocument, Rml::Element* ele
 		DKString href = links[i]->GetAttribute("href")->Get<Rml::String>();
 		if(has(processed, href))
 			continue;
-		//replace(href, DKRmlDocument::Get()->_path, "");
+		//replace(href, DKRmlInterface::Get()->_path, "");
 		processed += href + ",";
 		DKClass::DKCreate(href);
 	}
 	// <script> tags
 	//get the path from the url
-	//DKString path = DKRmlDocument::Get()->href_;
-	DKString path = dkRmlDocument->href_;
+	//DKString path = DKRmlInterface::Get()->href_;
+	DKString path = dkRmlInterface->href_;
 	std::string::size_type found = path.find_last_of("/");
 	path = path.substr(0,found);
 	path += "/";
@@ -361,7 +361,7 @@ bool DKRmlConverter::PostProcess(DKRmlDocument* dkRmlDocument, Rml::Element* ele
 #endif
 			if(!has(path, "http://")) {
 				processed += src+",";
-				//DKString app = DKRmlDocument::Get()->workingPath +src;
+				//DKString app = DKRmlInterface::Get()->workingPath +src;
 				//DKDuktape::LoadFile(app);
 				DKClass::DKCreate(src);
 			}
@@ -382,8 +382,8 @@ bool DKRmlConverter::PostProcess(DKRmlDocument* dkRmlDocument, Rml::Element* ele
 
 //DEBUG - Lets see the code
 #if DEBUG
-	//DKRmlDocument* dkRmlDocument = DKRmlDocument::Get();
-	Rml::ElementDocument* _doc = dkRmlDocument->document;
+	//DKRmlInterface* dkRmlInterface = DKRmlInterface::Get();
+	Rml::ElementDocument* _doc = dkRmlInterface->document;
 	DKString code = _doc->GetContext()->GetRootElement()->GetInnerRML();
 	std::string::size_type n = code.rfind("<html");
 	if(n < 0){
@@ -400,11 +400,11 @@ bool DKRmlConverter::PostProcess(DKRmlDocument* dkRmlDocument, Rml::Element* ele
 }
 
 //bool DKRmlConverter::ResizeIframe(DKEvents* event){
-bool DKRmlConverter::ResizeIframe(DKRmlDocument* dkRmlDocument, DKEvents* event){
+bool DKRmlConverter::ResizeIframe(DKRmlInterface* dkRmlInterface, DKEvents* event){
 	DKDEBUGFUNC(event);
 	DKString id = event->GetId();
-	//DKRmlDocument* dkRmlDocument = DKRmlDocument::Get();
-	Rml::ElementDocument* doc = dkRmlDocument->document;
+	//DKRmlInterface* dkRmlInterface = DKRmlInterface::Get();
+	Rml::ElementDocument* doc = dkRmlInterface->document;
 	Rml::Element* iframe = doc->GetElementById(id.c_str());
 	DKString iTop = toString(iframe->GetAbsoluteTop());
 	DKString iLeft = toString(iframe->GetAbsoluteLeft());
@@ -416,11 +416,11 @@ bool DKRmlConverter::ResizeIframe(DKRmlDocument* dkRmlDocument, DKEvents* event)
 }
 
 //bool DKRmlConverter::ClickIframe(DKEvents* event){
-bool DKRmlConverter::ClickIframe(DKRmlDocument* dkRmlDocument, DKEvents* event){
+bool DKRmlConverter::ClickIframe(DKRmlInterface* dkRmlInterface, DKEvents* event){
 	DKDEBUGFUNC(event);
 	DKString id = event->GetId();
-	//DKRmlDocument* dkRmlDocument = DKRmlDocument::Get("");
-	Rml::ElementDocument* doc = dkRmlDocument->document;
+	//DKRmlInterface* dkRmlInterface = DKRmlInterface::Get("");
+	Rml::ElementDocument* doc = dkRmlInterface->document;
 	Rml::Element* iframe = doc->GetElementById(id.c_str());
 	DKString iTop = toString(iframe->GetAbsoluteTop());
 	DKString iLeft = toString(iframe->GetAbsoluteLeft());
@@ -432,11 +432,11 @@ bool DKRmlConverter::ClickIframe(DKRmlDocument* dkRmlDocument, DKEvents* event){
 }
 
 //bool DKRmlConverter::MouseOverIframe(DKEvents* event){
-bool DKRmlConverter::MouseOverIframe(DKRmlDocument* dkRmlDocument, DKEvents* event){
+bool DKRmlConverter::MouseOverIframe(DKRmlInterface* dkRmlInterface, DKEvents* event){
 	DKDEBUGFUNC(event);
 	DKString id = event->GetId();
-	//DKRmlDocument* dkRmlDocument = DKRmlDocument::Get("");
-	Rml::ElementDocument* doc = dkRmlDocument->document;
+	//DKRmlInterface* dkRmlInterface = DKRmlInterface::Get("");
+	Rml::ElementDocument* doc = dkRmlInterface->document;
 	Rml::Element* iframe = doc->GetElementById(id.c_str());
 	DKString iTop = toString(iframe->GetAbsoluteTop());
 	DKString iLeft = toString(iframe->GetAbsoluteLeft());

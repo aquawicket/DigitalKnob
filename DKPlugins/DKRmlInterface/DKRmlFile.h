@@ -29,7 +29,7 @@
 #define DKRmlFile_H
 
 #include "DK/DKFile.h"
-//#include "DKRmlDocument/DKRmlDocument.h"
+//#include "DKRmlInterface/DKRmlInterface.h"
 
 WARNING_DISABLE
 #include <RmlUi/Core.h>
@@ -37,14 +37,14 @@ WARNING_ENABLE
 
 
 class DKRmlFile : public Rml::FileInterface {
-	//DKRmlFile(DKRmlDocument* dkRmlDocument);
+	//DKRmlFile(DKRmlInterface* dkRmlInterface);
 	virtual Rml::FileHandle Open(const Rml::String& path);
 	virtual void Close(Rml::FileHandle file);
 	virtual size_t Read(void* buffer, size_t size, Rml::FileHandle file);
 	virtual bool Seek(Rml::FileHandle file, long offset, int origin);
 	virtual size_t Tell(Rml::FileHandle file);
 	
-	//DKRmlDocument* _dkRmlDocument;
+	//DKRmlInterface* _dkRmlInterface;
 };
 
 #endif //DKRmlFile_H

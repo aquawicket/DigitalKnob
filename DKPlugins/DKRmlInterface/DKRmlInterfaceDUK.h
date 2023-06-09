@@ -1,24 +1,24 @@
 #if HAVE_DKDuktape
 
 #pragma once
-#ifndef DKRmlDocumentDUK_H
-#define DKRmlDocumentDUK_H
+#ifndef DKRmlInterfaceDUK_H
+#define DKRmlInterfaceDUK_H
 
-#include "DKRmlDocument/DKRmlDocument.h"
+#include "DKRmlInterface/DKRmlInterface.h"
 #include "DKDuktape/DKDuktape.h"
 
 
-class DKRmlDocumentDUK : public DKObjectT<DKRmlDocumentDUK>
+class DKRmlInterfaceDUK : public DKObjectT<DKRmlInterfaceDUK>
 {
 public:
 	bool Init(){
 		
 		////// Constructor //////
-		DKDuktape::AttachFunction("CPP_DKRmlDocumentDUK", DKRmlDocumentDUK::constructor);
+		DKDuktape::AttachFunction("CPP_DKRmlInterfaceDUK", DKRmlInterfaceDUK::constructor);
 			
 			
 		////// Load .js files
-		DKClass::DKCreate("DKRmlDocument/DKRmlDocumentDUK.js");
+		DKClass::DKCreate("DKRmlInterface/DKRmlInterfaceDUK.js");
 		
 		return true;
 	}
@@ -27,16 +27,16 @@ public:
 	////// Constructor //////
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKINFO("CPP_DKRmlDocumentDUK()\n");
-		DKRmlDocument* _dkRmlDocument = (DKRmlDocument*)DKClass::DKCreate("DKRmlDocument");
-		DKString eventTargetAddress = pointerToAddress(_dkRmlDocument);
+		DKINFO("CPP_DKRmlInterfaceDUK()\n");
+		DKRmlInterface* _dkRmlInterface = (DKRmlInterface*)DKClass::DKCreate("DKRmlInterface");
+		DKString eventTargetAddress = pointerToAddress(_dkRmlInterface);
 		duk_push_string(ctx, eventTargetAddress.c_str());	
 		return true;
 	}
 	
 };
-REGISTER_OBJECT(DKRmlDocumentDUK, true)
+REGISTER_OBJECT(DKRmlInterfaceDUK, true)
 
 
-#endif //DKRmlDocumentDUK_H
+#endif //DKRmlInterfaceDUK_H
 #endif //HAVE_DKDuktape

@@ -35,39 +35,39 @@ WARNING_DISABLE
 #include <Core/XMLNodeHandlerBody.h>
 WARNING_ENABLE
 
-#include "DKRmlDocument/DKRmlDocument.h"
+#include "DKRmlInterface/DKRmlInterface.h"
 #include "DKWindow/DKWindow.h"
 #include "DKSdlRmlDocument/DKSdlRmlDocument.h" // FIXME
 #include "DKDuktape/DKDuktape.h"
 #include "DKXml/DKXml.h"
-#include "DKRmlDocument/DKRmlHeadInstancer.h"
+#include "DKRmlInterface/DKRmlHeadInstancer.h"
 #ifdef HAVE_DKCurl
 #	include "DKCurl/DKCurl.h"
 #endif
 
-#include "DKRmlDocument/DKRmlConverter.h"
+#include "DKRmlInterface/DKRmlConverter.h"
 
 #define DRAG_FIX 1
 
 
-DKRmlFile* DKRmlDocument::dkRmlFile = NULL;
-DKString DKRmlDocument::workingPath;
+DKRmlFile* DKRmlInterface::dkRmlFile = NULL;
+DKString DKRmlInterface::workingPath;
 /*
-DKRmlDocument::DKRmlDocument() : DKDocument() {
+DKRmlInterface::DKRmlInterface() : DKDocument() {
 	DKDEBUGFUNC();
 	interfaceName = "RmlDocument";
 	interfaceAddress = pointerToAddress(this);
-	DKINFO("DKRmlDocument("+interfaceAddress+") \n");
+	DKINFO("DKRmlInterface("+interfaceAddress+") \n");
 }
 */
 
-DKRmlDocument::DKRmlDocument(DKWindow* window) : DKDocument() {
+DKRmlInterface::DKRmlInterface(DKWindow* window) : DKDocument() {
 	DKDEBUGFUNC();
 	interfaceName = "RmlDocument";
 	interfaceAddress = pointerToAddress(this);
-	DKINFO("DKRmlDocument("+interfaceAddress+") \n");
+	DKINFO("DKRmlInterface("+interfaceAddress+") \n");
 	
-	DKINFO("DKRmlDocument("+window->interfaceName+") \n");
+	DKINFO("DKRmlInterface("+window->interfaceName+") \n");
 	
 	
 
@@ -177,12 +177,12 @@ DKRmlDocument::DKRmlDocument(DKWindow* window) : DKDocument() {
 
 
 	context->SetDocumentsBaseTag("html");
-	DKString rmlFonts = DKFile::local_assets+"DKRmlDocument";
+	DKString rmlFonts = DKFile::local_assets+"DKRmlInterface";
 	LoadFonts(rmlFonts);
 	LoadFonts(DKFile::local_assets);
-	DKEvents::AddRegisterEventFunc(&DKRmlDocument::RegisterEvent, this);
-	//DKEvents::AddUnegisterEventFunc(&DKRmlDocument::UnregisterEvent, this);
-	DKEvents::AddSendEventFunc(&DKRmlDocument::SendEvent, this);
+	DKEvents::AddRegisterEventFunc(&DKRmlInterface::RegisterEvent, this);
+	//DKEvents::AddUnegisterEventFunc(&DKRmlInterface::UnregisterEvent, this);
+	DKEvents::AddSendEventFunc(&DKRmlInterface::SendEvent, this);
 	Rml::Factory::RegisterElementInstancer("html", new Rml::ElementInstancerGeneric<Rml::ElementDocument>);
 	Rml::XMLParser::RegisterNodeHandler("html", std::make_shared<Rml::XMLNodeHandlerBody>());
 	Rml::XMLParser::RegisterNodeHandler("head", std::make_shared<HeadInstancer>());
@@ -195,13 +195,13 @@ DKRmlDocument::DKRmlDocument(DKWindow* window) : DKDocument() {
 
 	DKString html;
 	workingPath = DKFile::local_assets;
-	DKFile::FileToString(workingPath +"DKRmlDocument/blank.html", html);
+	DKFile::FileToString(workingPath +"DKRmlInterface/blank.html", html);
 	DKFile::ChDir(workingPath);
-	DKINFO("DKRmlDocument.workingPath = "+workingPath+"\n");
+	DKINFO("DKRmlInterface.workingPath = "+workingPath+"\n");
 	LoadHtml(html);
 }
 
-DKRmlDocument::~DKRmlDocument() {
+DKRmlInterface::~DKRmlInterface() {
 	DKDEBUGFUNC();
 	if(context){
 		Rml::ReleaseTextures();
@@ -212,18 +212,18 @@ DKRmlDocument::~DKRmlDocument() {
 	}
 	DKClass::DKClose("DKRmlJS");
 	DKClass::DKClose("DKRmlV8");
-	DKEvents::RemoveRegisterEventFunc(&DKRmlDocument::RegisterEvent, this);
-	DKEvents::RemoveUnegisterEventFunc(&DKRmlDocument::UnregisterEvent, this);
-	DKEvents::RemoveSendEventFunc(&DKRmlDocument::SendEvent, this);
+	DKEvents::RemoveRegisterEventFunc(&DKRmlInterface::RegisterEvent, this);
+	DKEvents::RemoveUnegisterEventFunc(&DKRmlInterface::UnregisterEvent, this);
+	DKEvents::RemoveSendEventFunc(&DKRmlInterface::SendEvent, this);
 }
 
 /*
-bool DKRmlDocument::Init(){
+bool DKRmlInterface::Init(){
 	DKDEBUGFUNC();
 }
 */
 
-bool DKRmlDocument::End(){
+bool DKRmlInterface::End(){
 	DKDEBUGFUNC();
 	/*
 	if(context){
@@ -235,13 +235,13 @@ bool DKRmlDocument::End(){
 	}
 	DKClass::DKClose("DKRmlJS");
 	DKClass::DKClose("DKRmlV8");
-	DKEvents::RemoveRegisterEventFunc(&DKRmlDocument::RegisterEvent, this);
-	DKEvents::RemoveUnegisterEventFunc(&DKRmlDocument::UnregisterEvent, this);
-	DKEvents::RemoveSendEventFunc(&DKRmlDocument::SendEvent, this);
+	DKEvents::RemoveRegisterEventFunc(&DKRmlInterface::RegisterEvent, this);
+	DKEvents::RemoveUnegisterEventFunc(&DKRmlInterface::UnregisterEvent, this);
+	DKEvents::RemoveSendEventFunc(&DKRmlInterface::SendEvent, this);
 	return true;
 }
 
-bool DKRmlDocument::GetSourceCode(DKString& source_code) {
+bool DKRmlInterface::GetSourceCode(DKString& source_code) {
 	DKDEBUGFUNC(source_code);
 	source_code = document->GetContext()->GetRootElement()->GetInnerRML();
 	DKINFO("######################## CODE FROM RmlUi #########################\n");
@@ -262,14 +262,14 @@ bool DKRmlDocument::GetSourceCode(DKString& source_code) {
 	return true;
 }
 
-bool DKRmlDocument::LoadFont(const DKString& file){
+bool DKRmlInterface::LoadFont(const DKString& file){
 	DKDEBUGFUNC(file);
 	if(!Rml::LoadFontFace(file.c_str()))
 		return DKERROR("Could not load "+file+"\n");
 	return true;
 }
 
-bool DKRmlDocument::LoadFonts(DKString& directory){
+bool DKRmlInterface::LoadFonts(DKString& directory){
 	DKDEBUGFUNC(directory);
 	
 	char ch = directory.back();
@@ -292,7 +292,7 @@ bool DKRmlDocument::LoadFonts(DKString& directory){
 	return true;
 }
 
-bool DKRmlDocument::LoadHtml(const DKString& html){
+bool DKRmlInterface::LoadHtml(const DKString& html){
 	DKDEBUGFUNC(html);
 	//// Prepair the html document for RmlUi
 
@@ -340,7 +340,7 @@ bool DKRmlDocument::LoadHtml(const DKString& html){
 	else if (!head && body)
 		document->GetOwnerDocument()->InsertBefore(document->CreateElement("head"), body);
 	//Load user agent style sheet
-	DKString file = DKFile::local_assets + "DKRmlDocument/DKRml.css";
+	DKString file = DKFile::local_assets + "DKRmlInterface/DKRml.css";
 	const Rml::StyleSheetContainer* doc_sheet = document->GetOwnerDocument()->GetStyleSheetContainer();
 	Rml::SharedPtr<Rml::StyleSheetContainer> file_sheet = Rml::Factory::InstanceStyleSheetFile(file.c_str());
 	if(doc_sheet) { 
@@ -360,7 +360,7 @@ bool DKRmlDocument::LoadHtml(const DKString& html){
 		return DKERROR("document invalid\n");
 	}
 	Rml::ElementList elements;
-	//DKRmlDocument::Get()->document->GetElementsByTagName(elements, "body");
+	//DKRmlInterface::Get()->document->GetElementsByTagName(elements, "body");
 	document->GetElementsByTagName(elements, "body");
 	if(!elements[0])
 		return DKERROR("body element invalid\n");
@@ -375,9 +375,9 @@ bool DKRmlDocument::LoadHtml(const DKString& html){
 	return true;
 }
 
-bool DKRmlDocument::LoadUrl(const DKString& url){
+bool DKRmlInterface::LoadUrl(const DKString& url){
 	DKDEBUGFUNC(url);
-	DKINFO("DKRmlDocument::LoadUrl("+url+")\n");
+	DKINFO("DKRmlInterface::LoadUrl("+url+")\n");
 	DKString _url = url;
 	
 	// FIXME: url as full path only works on Windows due to C:/  vs  /users
@@ -392,16 +392,16 @@ bool DKRmlDocument::LoadUrl(const DKString& url){
 	//Get the working path;
 	std::string::size_type found = _url.find_last_of("/");
 	workingPath = _url.substr(0, found + 1);
-	DKINFO("DKRmlDocument::LoadUrl(): workingPath: " + workingPath + "\n");
-	DKINFO("DKRmlDocument::LoadUrl(): href_: " + href_ + "\n");
+	DKINFO("DKRmlInterface::LoadUrl(): workingPath: " + workingPath + "\n");
+	DKINFO("DKRmlInterface::LoadUrl(): href_: " + href_ + "\n");
 	//get the protocol
 	std::string::size_type n = _url.find(":");
 	protocol = _url.substr(0,n);
-	DKINFO("DKRmlDocument::LoadUrl(): protocol: "+protocol+"\n");
+	DKINFO("DKRmlInterface::LoadUrl(): protocol: "+protocol+"\n");
 	found = _url.rfind("/");
 	_path = _url.substr(0,found+1);
-	//DKWARN("DKRmlDocument::LoadUrl(): last / at "+toString(found)+"\n");
-	DKINFO("DKRmlDocument::LoadUrl(): _path = "+_path+"\n");
+	//DKWARN("DKRmlInterface::LoadUrl(): last / at "+toString(found)+"\n");
+	DKINFO("DKRmlInterface::LoadUrl(): _path = "+_path+"\n");
 	
 	DKString html;
 #ifdef HAVE_DKCurl
@@ -422,13 +422,13 @@ bool DKRmlDocument::LoadUrl(const DKString& url){
 	return true;
 }
 
-void DKRmlDocument::ProcessEvent(Rml::Event& rmlEvent){
+void DKRmlInterface::ProcessEvent(Rml::Event& rmlEvent){
 	//DKDEBUGFUNC(rmlEvent);  //EXCESSIVE LOGGING
 	DKString rmlEventAddress = pointerToAddress(&rmlEvent);
 	//DKString code = "new Event("+rmlEventAddress+")";
 	//DKString rval;
 	//DKDuktape::Get()->RunDuktape(code, rval);
-	//DKINFO("DKRmlDocument::ProcessEvent(): "+code+": rval="+rval+"\n");
+	//DKINFO("DKRmlInterface::ProcessEvent(): "+code+": rval="+rval+"\n");
 	if (!rmlEvent.GetCurrentElement())
 		return;
 	if (!rmlEvent.GetTargetElement())
@@ -447,7 +447,7 @@ void DKRmlDocument::ProcessEvent(Rml::Event& rmlEvent){
 	DKString code = "EventFromCPP('"+ currentElementAddress +"',"+evnt+");";
 	DKString rval;
 	DKDuktape::Get()->RunDuktape(code, rval);
-	if(!rval.empty()){ DKINFO("DKRmlDocument::ProcessEvent(): rval = "+rval+"\n"); }
+	if(!rval.empty()){ DKINFO("DKRmlInterface::ProcessEvent(): rval = "+rval+"\n"); }
 	*/
 	// If the event bubbles up, ignore elements underneith 
 	context = document->GetContext();
@@ -543,7 +543,7 @@ void DKRmlDocument::ProcessEvent(Rml::Event& rmlEvent){
 	}
 }
 
-bool DKRmlDocument::RegisterEvent(const DKString& elementAddress, const DKString& type){
+bool DKRmlInterface::RegisterEvent(const DKString& elementAddress, const DKString& type){
 	//DKDEBUGFUNC(elementAddress, type);  //EXCESSIVE LOGGING
 	if(elementAddress.empty())
 		return DKERROR(elementAddress +": elementAddress empty\n"); 
@@ -577,7 +577,7 @@ bool DKRmlDocument::RegisterEvent(const DKString& elementAddress, const DKString
 	return true;
 }
 
-bool DKRmlDocument::SendEvent(const DKString& elementAddress, const DKString& type, const DKString& value){
+bool DKRmlInterface::SendEvent(const DKString& elementAddress, const DKString& type, const DKString& value){
 	//DKDEBUGFUNC(id, type, value);  //EXCESSIVE LOGGING
 	if(elementAddress.empty())
 		return DKERROR("elementAddress invalid");
@@ -587,11 +587,11 @@ bool DKRmlDocument::SendEvent(const DKString& elementAddress, const DKString& ty
 		return DKERROR("document invalid");
 	Rml::Element* element;
 	if (same("window", elementAddress)) {
-		//element = DKRmlDocument::Get()->document->GetContext()->GetRootElement();
+		//element = DKRmlInterface::Get()->document->GetContext()->GetRootElement();
 		element = document->GetContext()->GetRootElement();
 	}
 	else if (same("sdlwindow", elementAddress)) {
-		//element = DKRmlDocument::Get()->document->GetContext()->GetRootElement();
+		//element = DKRmlInterface::Get()->document->GetContext()->GetRootElement();
 		element = document->GetContext()->GetRootElement();
 	}
 	else {
@@ -605,7 +605,7 @@ bool DKRmlDocument::SendEvent(const DKString& elementAddress, const DKString& ty
 	return true;
 }
 
-bool DKRmlDocument::DebuggerOff(){
+bool DKRmlInterface::DebuggerOff(){
 #ifdef HAVE_rmlui_debugger
 	Rml::Debugger::SetVisible(false);
 	DKINFO("Rml Debugger OFF\n");
@@ -615,7 +615,7 @@ bool DKRmlDocument::DebuggerOff(){
 	return true;
 }
 
-bool DKRmlDocument::DebuggerOn(){
+bool DKRmlInterface::DebuggerOn(){
 #ifdef HAVE_rmlui_debugger
 	Rml::Debugger::SetVisible(true);
 	DKINFO("Rml Debugger ON\n");
@@ -625,26 +625,26 @@ bool DKRmlDocument::DebuggerOn(){
 	return true;
 }
 
-bool DKRmlDocument::DebuggerToggle(){
+bool DKRmlInterface::DebuggerToggle(){
 	DKDEBUGFUNC();
 #ifdef HAVE_rmlui_debugger
 	if(Rml::Debugger::IsVisible()) //FIXME:  always returns false
-		DKRmlDocument::DebuggerOff();
+		DKRmlInterface::DebuggerOff();
 	else
-		DKRmlDocument::DebuggerOn();
+		DKRmlInterface::DebuggerOn();
 #else
 	return DKERROR("RML Debugger not available \n");
 #endif
 	return true;
 }
 
-bool DKRmlDocument::UnregisterEvent(const DKString& elementAddress, const DKString& type){
+bool DKRmlInterface::UnregisterEvent(const DKString& elementAddress, const DKString& type){
 	DKDEBUGFUNC(elementAddress, type);
 	if(elementAddress.empty())
 		return DKERROR("elementAddress invalid");
 	if(type.empty())
 		return DKERROR("type invalid");
-	//if(!DKValid("DKRmlDocument0")){ return false; }
+	//if(!DKValid("DKRmlInterface0")){ return false; }
 	Rml::Element* element = (Rml::Element*)addressToPointer(elementAddress);
 	if(!element)
 		return DKERROR("element invalid");
@@ -660,7 +660,7 @@ bool DKRmlDocument::UnregisterEvent(const DKString& elementAddress, const DKStri
 }
 
 //TODO
-bool DKRmlDocument::GetOuterHTML(Rml::Element* element, DKString& outerHtml) {
+bool DKRmlInterface::GetOuterHTML(Rml::Element* element, DKString& outerHtml) {
 	DKDEBUGFUNC(element, outerHtml);
 	/*
 	if (!element)
@@ -697,7 +697,7 @@ bool DKRmlDocument::GetOuterHTML(Rml::Element* element, DKString& outerHtml) {
 }
 
 //TODO
-bool DKRmlDocument::SetOuterHTML(Rml::Element* element, const DKString& outerHtml) {
+bool DKRmlInterface::SetOuterHTML(Rml::Element* element, const DKString& outerHtml) {
 	DKDEBUGFUNC(element, outerHtml);
 	return DKERROR("not implemented\n");
 }
