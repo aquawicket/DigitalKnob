@@ -2,7 +2,6 @@
 #include "App.h"
 
 
-
 ///////////////////////////////////////
 bool App::Init() {
 	DKDEBUGFUNC();
@@ -155,18 +154,19 @@ bool App::Init() {
 	
 	
 	// [DKRmlInterface]
-	test_DKRmlInterface = std::make_unique<TEST_DKRmlInterface>();												// smart pointer member variable
+	test_DKRmlInterface = std::make_unique<TEST_DKRmlInterface>();
 	
-	/*
-	// [DKRmlDocument]
-	test_DKRmlDocument = std::make_unique<TEST_DKRmlDocument>();												// smart pointer member variable
-	
-	// [DKRmlLocation]
-	test_DKRmlLocation = std::make_unique<TEST_DKRmlLocation>();												// smart pointer member variable
+	// [DKRmlEventTarget]
+	test_DKRmlEventTarget = std::make_unique<TEST_DKRmlEventTarget>();
 	
 	// [DKRmlNode]
-	test_DKRmlNode = std::make_unique<TEST_DKRmlNode>();														// smart pointer member variable
-	*/
+	//test_DKRmlNode = std::make_unique<TEST_DKRmlNode>();
+	
+	// [DKRmlDocument]
+	//test_DKRmlDocument = std::make_unique<TEST_DKRmlDocument>();
+
+	// [DKRmlLocation]
+	//test_DKRmlLocation = std::make_unique<TEST_DKRmlLocation>();
 	
 	return true;
 }

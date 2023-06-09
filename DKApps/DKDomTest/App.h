@@ -35,13 +35,12 @@
 
 #include "TEST_DKSdlWindow.h"
 
-#include "TEST_DKRmlInterface.h"	
-/*
-#include "TEST_DKRmlDocument.h"		// FIXME: move down in heirarchy 
+#include "TEST_DKRmlInterface.h"
 #include "TEST_DKRmlEventTarget.h"
-#include "TEST_DKRmlNode.h"
-#include "TEST_DKRmlLocation.h"
-*/
+//#include "TEST_DKRmlNode.h"
+//#include "TEST_DKRmlDocument.h"
+//#include "TEST_DKRmlLocation.h"
+
 
 
 
@@ -56,12 +55,10 @@ public:
 	std::unique_ptr<TEST_DKSdlWindow> 			test_DKSdlWindow;
 	
 	std::unique_ptr<TEST_DKRmlInterface>		test_DKRmlInterface;
-	/*
-	std::unique_ptr<TEST_DKRmlDocument>			test_DKRmlDocument;		// FIXME - rml should be initialized at DKRmlInterface, move this down in heirarchy 
 	std::unique_ptr<TEST_DKRmlEventTarget> 		test_DKRmlEventTarget;	
-	std::unique_ptr<TEST_DKRmlNode> 			test_DKRmlNode;
-	std::unique_ptr<TEST_DKRmlLocation> 		test_DKRmlLocation;
-	*/
+	//std::unique_ptr<TEST_DKRmlNode> 			test_DKRmlNode;
+	//std::unique_ptr<TEST_DKRmlDocument>		test_DKRmlDocument;
+	//std::unique_ptr<TEST_DKRmlLocation> 		test_DKRmlLocation;
 };
 REGISTER_OBJECT(App, true);
 
