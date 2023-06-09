@@ -4,6 +4,8 @@ dk_depend(DKDuktape)
 dk_depend(DK)
 dk_depend(DKAssets)
 
+
+###### Standard Interfaces ######
 dk_depend(DKInterface)
 dk_depend(DKConsole)
 
@@ -35,7 +37,9 @@ dk_depend(DKHTMLElement)
 dk_depend(DKHTMLBodyElement)
 dk_depend(DKHTMLImageElement)
 
-dk_depend(DKConsoleWindow)
+
+###### DigitalKnob Interfaces ######
+#dk_depend(DKConsoleWindow)
 
 dk_depend(DKSdlWindow)
 dk_depend(DKSdlRmlDocument)

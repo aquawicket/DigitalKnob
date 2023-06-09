@@ -16,7 +16,7 @@ public:
 	// constructor();
 	DKRmlEventTarget() : DKEventTarget() {
 		DKDEBUGFUNC();
-		interfaceName = "RmlEventTarget";
+		interfaceName = "DKRmlEventTarget";
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKRmlEventTarget("+interfaceAddress+") \n");
 	}
