@@ -9,7 +9,7 @@
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // [Exposed=*]
 // interface EventTarget {
-class DKEventTarget : public DKInterface
+class DKRMLEventTarget : public DKEventTarget
 {
 public:
 
