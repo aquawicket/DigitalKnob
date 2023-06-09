@@ -129,6 +129,7 @@ bool App::Init() {
 
 	////// DigitalKnob //////
 	// [DKConsoleWindow]
+	/*
 	//DKClass::DKCreate("TEST_DKConsoleWindow");																// DKObjectT						// WORKS
 	//TEST_DKConsoleWindow* test_DKConsoleWindow = new TEST_DKConsoleWindow();									// pointer							// WORKS		 (dangling pointer)
 	//std::unique_ptr<TEST_DKConsoleWindow> test_DKConsoleWindow = std::make_unique<TEST_DKConsoleWindow>();	// smart pointer					// DOES NOT WORK (goes out of scope)
@@ -136,6 +137,7 @@ bool App::Init() {
 	//test_DKConsoleWindow = std::make_shared<TEST_DKConsoleWindow>();											// smart pointer member variable	// WORKS
 	//std::make_unique<TEST_DKConsoleWindow>();																	// smart pointer without variable	// DOES NOT WORK (goes out of scope)
 	//std::make_shared<TEST_DKConsoleWindow>();
+	*/
 	
 	// [DKSdlWindow]
 	//DKClass::DKCreate("TEST_DKSdlWindow");																	// DKObjectT						// WORKS

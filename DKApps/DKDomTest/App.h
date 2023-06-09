@@ -29,7 +29,8 @@
 #include "TEST_HTMLImageElement.h"
 
 ////// DigitalKnob //////
-#include "TEST_DKConsoleWindow.h"
+//#include "TEST_DKConsoleWindow.h"
+
 #include "TEST_DKSdlWindow.h"
 
 #include "TEST_DKRmlDocument.h"
@@ -43,7 +44,7 @@ public:
 	bool Init();
 	bool End();
 
-	std::unique_ptr<TEST_DKConsoleWindow> 	test_DKConsoleWindow;
+	//std::unique_ptr<TEST_DKConsoleWindow> 	test_DKConsoleWindow;
 	
 	std::unique_ptr<TEST_DKSdlWindow> 		test_DKSdlWindow;
 	
