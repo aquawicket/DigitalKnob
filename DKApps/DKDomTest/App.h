@@ -33,9 +33,9 @@
 //#include "TEST_DKConsoleWindow.h"
 
 #include "TEST_DKSdlWindow.h"
+#include "TEST_DKRmlDocument.h"		// FIXME: move down in heirarchy 
 #include "TEST_DKRmlEventTarget.h"
 #include "TEST_DKRmlNode.h"
-#include "TEST_DKRmlDocument.h"
 #include "TEST_DKRmlLocation.h"
 
 
