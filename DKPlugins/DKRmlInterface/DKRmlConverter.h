@@ -42,7 +42,7 @@ public:
 	bool Hyperlink(DKRmlInterface* dkRmlInterface, DKEvents* event);
 	//bool IndexToRml(const DKString& html, DKString& rml);
 	//bool PostProcess(Rml::Element* element);
-	static bool DKRmlConverter::PostProcess(DKRmlInterface* dkRmlInterface, Rml::Element* element);
+	static bool PostProcess(DKRmlInterface* dkRmlInterface, Rml::Element* element);
 	//static bool ResizeIframe(DKEvents* event);
 	static bool ResizeIframe(DKRmlInterface* dkRmlInterface, DKEvents* event);
 	//bool ClickIframe(DKEvents* event);
