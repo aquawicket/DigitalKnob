@@ -46,8 +46,6 @@ public:
 	//DKRmlDocument();
 	DKRmlDocument(DKWindow* window);
 	~DKRmlDocument();
-	bool Init();
-	bool End();
 	
 	bool GetSourceCode(DKString& source_code);
 	bool LoadFont(const DKString& file);

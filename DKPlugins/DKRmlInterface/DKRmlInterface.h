@@ -31,8 +31,8 @@
 #define DKRmlInterface_H
 
 #include "DK/DK.h"
+#include "DKInterface/DKInterface.h"
 #include "DKWindow/DKWindow.h"
-#include "DKDocument/DKDocument.h"
 #include "DKRmlInterface/DKRmlFile.h"
 //#include "DKRmlInterface/DKRmlConverter.h"
 
@@ -46,8 +46,6 @@ public:
 	//DKRmlInterface();
 	DKRmlInterface(DKWindow* window);
 	~DKRmlInterface();
-	bool Init();
-	bool End();
 	
 	bool GetSourceCode(DKString& source_code);
 	bool LoadFont(const DKString& file);
