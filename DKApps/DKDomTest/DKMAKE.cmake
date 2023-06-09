@@ -46,9 +46,9 @@ dk_depend(DKSdlRmlDocument)
 
 dk_depend(DKRmlInterface)
 dk_depend(DKRmlEventTarget)
-#dk_depend(DKRmlNode)
-#dk_depend(DKRmlDocument)
-#dk_depend(DKRmlLocation)
+dk_depend(DKRmlNode)
+dk_depend(DKRmlDocument)
+dk_depend(DKRmlLocation)
 
 
 #dk_depend(DKWebTest)

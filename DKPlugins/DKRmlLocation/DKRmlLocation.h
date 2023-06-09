@@ -6,7 +6,7 @@
 #define DKRmlLocation_H
 
 #include "DKLocation/DKLocation.h"
-#include "DKRmlDocument/DKRmlDocument.h"
+#include "DKRmlInterface/DKRmlInterface.h"
 
 // Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
 // [Exposed=Window]
@@ -14,20 +14,20 @@
 class DKRmlLocation : public DKLocation //, public DKObjectT<DKRmlLocation>
 {
 public:
-	DKRmlDocument* _dkRmlDocument;
+	DKRmlInterface* _dkRmlInterface;
 
-	DKRmlLocation(DKRmlDocument* dkRmlDocument) : DKLocation() {
+	DKRmlLocation(DKRmlInterface* dkRmlInterface) : DKLocation() {
 		DKDEBUGFUNC();
 		interfaceName = "RmlLocation";
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKRmlLocation("+interfaceAddress+") \n");
-		_dkRmlDocument = dkRmlDocument;
+		_dkRmlInterface = dkRmlInterface;
 	}
 	virtual ~DKRmlLocation() {}
 
 	// [LegacyUnforgeable] stringifier attribute USVString href;
-	virtual const USVString& href()				{ return _dkRmlDocument->href_; }		// getter
-	virtual void href(const USVString& url)		{ _dkRmlDocument->LoadUrl(url); } 		// setter
+	virtual const USVString& href()				{ return _dkRmlInterface->href_; }		// getter
+	virtual void href(const USVString& url)		{ _dkRmlInterface->LoadUrl(url); } 		// setter
 	
 	// [LegacyUnforgeable] readonly attribute USVString origin;
 	virtual bool origin(DKString&, bool) { return DKTODO(); }
