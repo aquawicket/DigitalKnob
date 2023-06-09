@@ -4,6 +4,7 @@
 
 #include "DK/DK.h"
 
+// FIXME: Get the hierarchy in the right order
 #include "TEST_Console.h"
 #include "TEST_Event.h"
 #include "TEST_EventTarget.h"
@@ -32,10 +33,11 @@
 //#include "TEST_DKConsoleWindow.h"
 
 #include "TEST_DKSdlWindow.h"
-
+#include "TEST_DKRmlEventTarget.h"
+#include "TEST_DKRmlNode.h"
 #include "TEST_DKRmlDocument.h"
 #include "TEST_DKRmlLocation.h"
-#include "TEST_DKRmlNode.h"
+
 
 
 class App : public DKObjectT<App>
@@ -48,9 +50,12 @@ public:
 	
 	std::unique_ptr<TEST_DKSdlWindow> 		test_DKSdlWindow;
 	
-	std::unique_ptr<TEST_DKRmlDocument>		test_DKRmlDocument;
-	std::unique_ptr<TEST_DKRmlLocation> 	test_DKRmlLocation;
+	
+	std::unique_ptr<TEST_DKRmlDocument>		test_DKRmlDocument;		// FIXME - rml should be initialized at or before DKRmlEventTarget
+	std::unique_ptr<TEST_DKRmlEventTarget> 	test_DKRmlEventTarget;	
 	std::unique_ptr<TEST_DKRmlNode> 		test_DKRmlNode;
+	std::unique_ptr<TEST_DKRmlLocation> 	test_DKRmlLocation;
+	
 };
 REGISTER_OBJECT(App, true);
 
