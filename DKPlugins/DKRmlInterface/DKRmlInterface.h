@@ -43,7 +43,6 @@ WARNING_ENABLE
 
 class DKRmlInterface : public DKInterface, public Rml::EventListener {//, public DKObjectT<DKRmlInterface> {
 public:
-	//DKRmlInterface();
 	DKRmlInterface(DKWindow* window);
 	~DKRmlInterface();
 	

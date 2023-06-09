@@ -217,51 +217,6 @@ DKRmlDocument::~DKRmlDocument() {
 	DKEvents::RemoveSendEventFunc(&DKRmlDocument::SendEvent, this);
 }
 
-/*
-bool DKRmlDocument::Init(){
-	DKDEBUGFUNC();
-}
-*/
-
-bool DKRmlDocument::End(){
-	DKDEBUGFUNC();
-	/*
-	if(context){
-		Rml::ReleaseTextures();
-		Rml::Shutdown();
-		delete Rml::GetRenderInterface();
-		delete Rml::GetSystemInterface();
-		delete Rml::GetFileInterface();
-	}
-	DKClass::DKClose("DKRmlJS");
-	DKClass::DKClose("DKRmlV8");
-	DKEvents::RemoveRegisterEventFunc(&DKRmlDocument::RegisterEvent, this);
-	DKEvents::RemoveUnegisterEventFunc(&DKRmlDocument::UnregisterEvent, this);
-	DKEvents::RemoveSendEventFunc(&DKRmlDocument::SendEvent, this);
-	return true;
-}
-
-bool DKRmlDocument::GetSourceCode(DKString& source_code) {
-	DKDEBUGFUNC(source_code);
-	source_code = document->GetContext()->GetRootElement()->GetInnerRML();
-	DKINFO("######################## CODE FROM RmlUi #########################\n");
-	DKINFO(source_code+"\n");
-	DKINFO("##################################################################\n");
-	
-	// Actually, we only want the  last html node
-	std::string::size_type n = source_code.rfind("<html");
-	if(n < 0)
-		return DKWARN("html tag not found\n");
-
-	source_code = source_code.substr(n);
-	//	replace(source_code, "<", "\n<"); //put all tags on a new line
-	DKINFO("################## Last <html> node from RmlUi ##################\n");
-	DKINFO(source_code+"\n");
-	DKINFO("#################################################################\n");
-	*/
-	return true;
-}
-
 bool DKRmlDocument::LoadFont(const DKString& file){
 	DKDEBUGFUNC(file);
 	if(!Rml::LoadFontFace(file.c_str()))
