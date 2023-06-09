@@ -5,6 +5,8 @@
 #include "DK/DK.h"
 
 // FIXME: Get the hierarchy in the right order
+
+////// Standard Interfaces //////
 //#include "TEST_Interface.h"	
 #include "TEST_Console.h"
 #include "TEST_Event.h"
@@ -30,14 +32,14 @@
 #include "TEST_HTMLBodyElement.h"
 #include "TEST_HTMLImageElement.h"
 
-////// DigitalKnob //////
+////// DigitalKnob Interfaces //////
 //#include "TEST_DKConsoleWindow.h"
 
 #include "TEST_DKSdlWindow.h"
 
 #include "TEST_DKRmlInterface.h"
 #include "TEST_DKRmlEventTarget.h"
-//#include "TEST_DKRmlNode.h"
+#include "TEST_DKRmlNode.h"
 //#include "TEST_DKRmlDocument.h"
 //#include "TEST_DKRmlLocation.h"
 
@@ -49,14 +51,14 @@ class App : public DKObjectT<App>
 public:
 	bool Init();
 	bool End();
-
+	
 	//std::unique_ptr<TEST_DKConsoleWindow> 	test_DKConsoleWindow;
 	
 	std::unique_ptr<TEST_DKSdlWindow> 			test_DKSdlWindow;
 	
 	std::unique_ptr<TEST_DKRmlInterface>		test_DKRmlInterface;
 	std::unique_ptr<TEST_DKRmlEventTarget> 		test_DKRmlEventTarget;	
-	//std::unique_ptr<TEST_DKRmlNode> 			test_DKRmlNode;
+	std::unique_ptr<TEST_DKRmlNode> 			test_DKRmlNode;
 	//std::unique_ptr<TEST_DKRmlDocument>		test_DKRmlDocument;
 	//std::unique_ptr<TEST_DKRmlLocation> 		test_DKRmlLocation;
 };

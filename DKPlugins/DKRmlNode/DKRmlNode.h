@@ -5,7 +5,7 @@
 #define DKRmlNode_H
 
 #include "DKNode/DKNode.h"
-#include "DKRmlDocument/DKRmlDocument.h"
+#include "DKRmlInterface/DKRmlInterface.h"
 
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // [Exposed=Window]
@@ -13,14 +13,14 @@
 class DKRmlNode : public DKNode
 {
 public:
-	DKRmlDocument* _dkRmlDocument;
+	DKRmlInterface* _dkRmlInterface;
 	
-	DKRmlNode(DKRmlDocument* dkRmlDocument) : DKNode() {
+	DKRmlNode(DKRmlInterface* dkRmlInterface) : DKNode() {
 		DKDEBUGFUNC();
 		interfaceName = "RmlNode";
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKRmlNode("+interfaceAddress+") \n");
-		_dkRmlDocument = dkRmlDocument;
+		_dkRmlInterface = dkRmlInterface;
 	}
 	
 	virtual ~DKRmlNode() {}
