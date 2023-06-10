@@ -17,7 +17,7 @@ public:
 	
 	DKRmlNode(DKRmlInterface* dkRmlInterface) : DKNode() {
 		DKDEBUGFUNC();
-		interfaceName = "RmlNode";
+		interfaceName = "DKRmlNode";
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKRmlNode("+interfaceAddress+") \n");
 		_dkRmlInterface = dkRmlInterface;

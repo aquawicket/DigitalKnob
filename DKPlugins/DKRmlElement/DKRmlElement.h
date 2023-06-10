@@ -4,7 +4,7 @@
 #ifndef DKRmlElement_H
 #define DKRmlElement_H
 
-#include "DKNode/DKNode.h"
+#include "DKElement/DKElement.h"
 
 
 // [Exposed=Window]
@@ -12,11 +12,17 @@
 class DKRmlElement : public DKElement
 {
 public:
-	DKRmlElement() : DKElement() {
+	DKRmlInterface* _dkRmlInterface;
+	
+	DKRmlElement(DKRmlInterface* dkRmlInterface) : DKElement() {
 		DKDEBUGFUNC();
 		interfaceName = "DKRmlElement";
 		interfaceAddress = pointerToAddress(this);
+		DKINFO("DKRmlElement("+interfaceAddress+") \n");
+		_dkRmlInterface = dkRmlInterface;
 	}
+	
+	virtual ~DKRmlElement() {}
 	
 	/*
 	// readonly attribute DOMString? namespaceURI;
