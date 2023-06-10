@@ -53,4 +53,4 @@ dk_depend(DKRmlDocument)
 dk_depend(DKRmlElement)
 
 
-#dk_depend(DKWebTest)
+dk_depend(DKWebTest)
