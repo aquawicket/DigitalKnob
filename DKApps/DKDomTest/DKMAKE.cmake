@@ -1,3 +1,4 @@
+dk_depend(uriparser)
 dk_depend(webref)
 dk_depend(DKDuktape)
 
