@@ -4,14 +4,15 @@ dk_depend(DKFile)
 dk_depend(DKWindow)
 dk_depend(DKXml)
 dk_depend(tidy-html5)
-IF(HAVE_DKDuktape)
+if(HAVE_DKDuktape)
 	dk_depend(DKDuktape)
-ENDIF()
-IF(HAVE_DKCef)
+endif()
+if(HAVE_DKCef)
 	dk_depend(DKCef)
-ENDIF()
-
-dk_depend(DKSdlRmlDocument)	# LINUX FIX: ???
+endif()
+if(HAVE_DKSdlRmlDocument)
+	dk_depend(DKSdlRmlDocument)	# LINUX FIX:
+endif()
 
 dk_generateCmake(DKRmlInterface)
 dk_assets(DKRmlInterface)
