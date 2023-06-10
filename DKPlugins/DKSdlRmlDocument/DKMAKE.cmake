@@ -1,3 +1,4 @@
+dk_depend(rmlui)
 dk_depend(DKAssets)
 dk_depend(DKSdlWindow)
 #dk_depend(DKRmlInterface)			//LINUX FIX: ???
