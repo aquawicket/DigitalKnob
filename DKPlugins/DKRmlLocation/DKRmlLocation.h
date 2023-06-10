@@ -26,53 +26,10 @@ public:
 	virtual ~DKRmlLocation() {}
 
 	// [LegacyUnforgeable] stringifier attribute USVString href;
-	virtual const USVString& href()					{ return _dkRmlInterface->href_; }	// getter
-	virtual void href(const USVString& href)		{ _dkRmlInterface->LoadUrl(href); } // setter
-	
-	// [LegacyUnforgeable] readonly attribute USVString origin;
-	virtual bool origin(DKString&, bool) { return DKTODO(); }
-	
-	// [LegacyUnforgeable] attribute USVString protocol;
-	virtual bool protocol(DKString&, bool) { return DKTODO(); }
-	
-	// [LegacyUnforgeable] attribute USVString host;
-	virtual bool host(DKString&, bool) { return DKTODO(); }
-	
-	// [LegacyUnforgeable] attribute USVString hostname;
-	virtual bool hostname(DKString&, bool) { return DKTODO(); }
-	
-	// [LegacyUnforgeable] attribute USVString port;
-	virtual bool port(DKString&, bool) { return DKTODO(); }
-	
-	// [LegacyUnforgeable] attribute USVString pathname;
-	virtual bool pathname(DKString&, bool) { return DKTODO(); }
-	
-	// [LegacyUnforgeable] attribute USVString search;
-	virtual bool search(DKString&, bool) { return DKTODO(); }
-	
-	// [LegacyUnforgeable] attribute USVString hash;
-	virtual bool hash(DKString&, bool) { return DKTODO(); }
-
-	// [LegacyUnforgeable] undefined assign(USVString url);
-	virtual bool assign(DKString& url) {
-		DKDEBUGFUNC(url);
-		return DKTODO();
-	}
-	
-	// [LegacyUnforgeable] undefined replace(USVString url);
-	virtual bool replace(DKString& url) {
-		DKDEBUGFUNC(url);
-		return DKTODO();
-	}
-	
-	// [LegacyUnforgeable] undefined reload();
-	virtual void reload() {
-		DKDEBUGFUNC();
-		DKTODO();
-	}
-	
-	// [LegacyUnforgeable, SameObject] readonly attribute DOMStringList ancestorOrigins;
-	virtual bool ancestorOrigins(DKString&, bool) { return DKTODO(); }
+	virtual void href(const USVString& href) { 	// setter
+		DKLocation::href(href);
+		_dkRmlInterface->LoadUrl(href); 
+	} 	
 };
 //REGISTER_OBJECT(DKRmlLocation, true);
 

@@ -28,9 +28,6 @@ public:
 	static void printDKRmlLocationProperties(DKRmlLocation& dkRmlLocation){
 		DKDEBUGFUNC(dkRmlLocation);
 		
-		// [LegacyUnforgeable] stringifier attribute USVString href;
-		console.log("dkRmlLocation.href() = "		+toString(dkRmlLocation.href()));
-		
 		TEST_Location::printLocationProperties(dynamic_cast<DKLocation&>(dkRmlLocation));	//TODO: try to remove the need for dynamic_cast
 	}
 };

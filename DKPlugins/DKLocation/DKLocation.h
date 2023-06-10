@@ -28,12 +28,22 @@ public:
 	
 	// [LegacyUnforgeable] readonly attribute USVString origin;
 	USVString _origin = "";
-	virtual const USVString& origin()				{ return _origin; }			// getter
+	virtual const USVString& origin(){ 											// getter
+		//Get the protocol, hostname and port number of the URL:
+		//_origin = _protocol+_hostname+_port;
+		_origin = protocol()+hostname()+port();
+		return _origin;
+	}			
 	virtual void origin(const USVString& origin)	{ _origin = origin; } 		// setter
 	
 	// [LegacyUnforgeable] attribute USVString protocol;
 	USVString _protocol = "";
-	virtual const USVString& protocol()				{ return _protocol; }		// getter
+	virtual const USVString& protocol(){ 										// getter
+		std::string::size_type pos = _href.find("://");
+		if(pos != std::string::npos)
+			_protocol = _href.substr(pos);
+		return _protocol; 
+	}
 	virtual void protocol(const USVString& protocol){ _protocol = protocol; } 	// setter
 	
 	// [LegacyUnforgeable] attribute USVString host;
