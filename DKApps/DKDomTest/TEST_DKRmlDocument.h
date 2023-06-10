@@ -16,7 +16,7 @@ public:
 		console.log("\n////// TEST_DKRmlDocument.h //////");
 		
 		dkRmlDocument = new DKRmlDocument(TEST_DKRmlInterface::dkRmlInterface);
-		//dkRmlDocument = std::make_unique<DKRmlDocument>(TEST_DKRmlInterface::dkRmlInterface);	
+		//dkRmlDocument = std::make_unique<DKRmlDocument>(TEST_DKRmlInterface::dkRmlInterface);
 		
 		printRmlDocumentProperties(*dkRmlDocument);
 	}

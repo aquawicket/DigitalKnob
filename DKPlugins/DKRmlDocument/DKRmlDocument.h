@@ -31,12 +31,14 @@ public:
 	DKString _implementation = "";
 	virtual const DKString& implementation()						{ return _implementation; }					// getter
 	virtual void implementation(const DKString& implementation)		{ _implementation = implementation; }		// setter
+	*/
 	
 	// readonly attribute USVString URL;
-	USVString _URL = "";
-	virtual const USVString& URL()									{ return _URL; }							// getter
-	virtual void URL(const USVString& URL)							{ _URL = URL; } 							// setter
+	//USVString _URL = "";
+	virtual const USVString& URL()									{ return _dkRmlInterface->href_; }			// getter
+	virtual void URL(const USVString& URL)							{ _dkRmlInterface->LoadUrl(URL); } 			// setter
 
+	/*
 	// readonly attribute USVString documentURI;
 	USVString _documentURI = "";
 	virtual const USVString& documentURI()							{ return _documentURI; }					// getter

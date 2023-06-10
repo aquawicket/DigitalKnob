@@ -16,10 +16,9 @@ public:
 		console.log("\n////// TEST_DKRmlLocation.h //////");
 		
 		dkRmlLocation = new DKRmlLocation(TEST_DKRmlInterface::dkRmlInterface);
+		dkRmlLocation->href("DKWebTest/index.html");
 		
 		printDKRmlLocationProperties(*dkRmlLocation);
-		
-		dkRmlLocation->href("DKWebTest/index.html");
 	}
 	
 	~TEST_DKRmlLocation() {
@@ -28,6 +27,9 @@ public:
 	
 	static void printDKRmlLocationProperties(DKRmlLocation& dkRmlLocation){
 		DKDEBUGFUNC(dkRmlLocation);
+		
+		// [LegacyUnforgeable] stringifier attribute USVString href;
+		console.log("dkRmlLocation.href() = "		+toString(dkRmlLocation.href()));
 		
 		TEST_Location::printLocationProperties(dynamic_cast<DKLocation&>(dkRmlLocation));	//TODO: try to remove the need for dynamic_cast
 	}

@@ -26,8 +26,8 @@ public:
 	virtual ~DKRmlLocation() {}
 
 	// [LegacyUnforgeable] stringifier attribute USVString href;
-	virtual const USVString& href()				{ return _dkRmlInterface->href_; }		// getter
-	virtual void href(const USVString& url)		{ _dkRmlInterface->LoadUrl(url); } 		// setter
+	virtual const USVString& href()					{ return _dkRmlInterface->href_; }	// getter
+	virtual void href(const USVString& href)		{ _dkRmlInterface->LoadUrl(href); } // setter
 	
 	// [LegacyUnforgeable] readonly attribute USVString origin;
 	virtual bool origin(DKString&, bool) { return DKTODO(); }
