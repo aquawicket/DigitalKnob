@@ -117,7 +117,9 @@ public:
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKINFO("CPP_DKURLDUK()\n");
-		DKURL* _url = new DKURL();
+		USVString url = GetString(ctx);
+		USVString base = ""; // TODO
+		DKURL* _url = new DKURL(url, base);
 		DKString eventTargetAddress = pointerToAddress(_url);
 		duk_push_string(ctx, eventTargetAddress.c_str());
 		return true;
