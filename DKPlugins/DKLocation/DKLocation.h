@@ -28,7 +28,7 @@ public:
 	// [LegacyUnforgeable] stringifier attribute USVString href;
 	USVString _href = "";
 	virtual const USVString& href()					{ return _href; }			// getter
-	virtual void href(const USVString& href); 		{ 							// setter
+	virtual void href(const USVString& href) 		{ 							// setter
 		
 		UriUriA uri;
 		const char* const uriString = href.c_str();
