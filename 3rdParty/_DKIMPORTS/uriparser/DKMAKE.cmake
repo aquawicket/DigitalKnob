@@ -13,7 +13,10 @@ WIN_dk_libRelease	(${URIPARSER}/${OS}/${RELEASE_DIR}/uriparser.lib)
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} ${URIPARSER})
+dk_queueCommand(${DKCMAKE_BUILD}
+	-DURIPARSER_BUILD_DOCS=OFF
+	-DURIPARSER_BUILD_TESTS=OFF 
+	${URIPARSER})
 
 
 ### COMPILE ###
