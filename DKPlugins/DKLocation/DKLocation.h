@@ -24,7 +24,25 @@ public:
 	// [LegacyUnforgeable] stringifier attribute USVString href;
 	USVString _href = "";
 	virtual const USVString& href()					{ return _href; }			// getter
-	virtual void href(const USVString& href)		{ _href = href; } 			// setter
+	virtual void href(const USVString& href){ 									// setter
+		// FIXME: url as full path only works on Windows due to C:/  vs  /users
+		if(has(href,"://")){ 	//could be http:// , https://, file:/// or C:/, etc...
+			//_href = href;
+			std::string::size_type pos = href.find(":/");
+			_protocol = href.substr(pos);
+		}
+		else if(has(href,":/")){
+			
+		}
+		else if(has(href,"//")){ //could be //www.site.com/style.css or //site.com/style.css
+			_protocol = "";
+			DKERROR("no protocol specified\n"); //absolute path without protocol
+			return;
+		}
+		else{
+			//_url = workingPath + _url;
+		}	
+	} 			
 	
 	// [LegacyUnforgeable] readonly attribute USVString origin;
 	USVString _origin = "";
@@ -38,12 +56,7 @@ public:
 	
 	// [LegacyUnforgeable] attribute USVString protocol;
 	USVString _protocol = "";
-	virtual const USVString& protocol(){ 										// getter
-		std::string::size_type pos = _href.find("://");
-		if(pos != std::string::npos)
-			_protocol = _href.substr(pos);
-		return _protocol; 
-	}
+	virtual const USVString& protocol()				{ return _protocol; }		// getter
 	virtual void protocol(const USVString& protocol){ _protocol = protocol; } 	// setter
 	
 	// [LegacyUnforgeable] attribute USVString host;
