@@ -27,6 +27,7 @@ dk_depend(DKWindow)
 
 dk_depend(DKScreen)
 dk_depend(DKNavigator)	# TODO
+dk_depend(DKURL)
 dk_depend(DKLocation)
 
 dk_depend(DKNode)

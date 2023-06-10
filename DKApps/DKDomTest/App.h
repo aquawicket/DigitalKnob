@@ -23,6 +23,7 @@
 #include "TEST_Screen.h"
 #include "TEST_Window.h"
 #include "TEST_Navigator.h"
+#include "TEST_URL.h"
 #include "TEST_Location.h"
 #include "TEST_Node.h"
 #include "TEST_Document.h"
@@ -61,7 +62,7 @@ public:
 	std::unique_ptr<TEST_DKRmlNode> 			test_DKRmlNode;
 	std::unique_ptr<TEST_DKRmlDocument>			test_DKRmlDocument;
 	std::unique_ptr<TEST_DKRmlLocation> 		test_DKRmlLocation;
-	std::unique_ptr<TEST_DKRmlElement> 		test_DKRmlElement;
+	std::unique_ptr<TEST_DKRmlElement> 			test_DKRmlElement;
 };
 REGISTER_OBJECT(App, true);
 

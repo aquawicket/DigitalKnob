@@ -91,6 +91,11 @@ bool App::Init() {
 	//TEST_Navigator* test_Navigator = new TEST_Navigator();													// pointer
 	std::unique_ptr<TEST_Navigator> test_Navigator = std::make_unique<TEST_Navigator>();						// smart pointer (unique)
 
+	// [URL]
+	//DKClass::DKCreate("TEST_URL");																			// DKObjectT
+	//TEST_URL* test_URL = new TEST_URL();																		// pointer
+	std::unique_ptr<TEST_URL> test_URL = std::make_unique<TEST_URL>();											// smart pointer (unique)
+	
 	// [Location]
 	//DKClass::DKCreate("TEST_Location");																		// DKObjectT
 	//TEST_Location* test_Location = new TEST_Location();														// pointer
