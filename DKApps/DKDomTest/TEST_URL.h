@@ -15,7 +15,7 @@ public:
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_URL.h //////");
 		
-		dkUrl = new DKURL();
+		dkUrl = new DKURL("http://www.google.com");
 		
 		printURLProperties(*dkUrl);
 	}
