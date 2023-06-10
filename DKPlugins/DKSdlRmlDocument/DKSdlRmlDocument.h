@@ -56,7 +56,6 @@ class DKSdlRmlDocument //: public DKObjectT<DKSdlRmlDocument>
 {
 public:
 	DKSdlRmlDocument(DKSdlWindow* _dkSdlWindow, DKRmlInterface* _dkRmlInterface);
-	//bool Init();
 
 	bool Handle(SDL_Event *event);
 	bool Render();

@@ -11,5 +11,7 @@ IF(HAVE_DKCef)
 	dk_depend(DKCef)
 ENDIF()
 
+dk_depend(DKSdlRmlDocument)
+
 dk_generateCmake(DKRmlInterface)
 dk_assets(DKRmlInterface)
