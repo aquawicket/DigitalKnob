@@ -5,6 +5,7 @@ dk_import(https://github.com/uriparser/uriparser.git)
 
 
 ### LINK ###
+dk_define			(URI_STATIC_BUILD)
 dk_include			(${URIPARSER}/include)
 UNIX_dk_libDebug	(${URIPARSER}/${OS}/${DEBUG_DIR}/liburiparser.a)
 UNIX_dk_libRelease	(${URIPARSER}/${OS}/${RELEASE_DIR}/liburiparser.a)
@@ -21,3 +22,4 @@ dk_queueCommand(${DKCMAKE_BUILD}
 
 ### COMPILE ###
 dk_build(${URIPARSER} uriparser)
+#dk_build(${URIPARSER} uriparse)
