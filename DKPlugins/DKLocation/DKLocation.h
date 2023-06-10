@@ -29,18 +29,17 @@ public:
 	USVString _href = "";
 	virtual const USVString& href()					{ return _href; }			// getter
 	virtual void href(const USVString& href) 		{ 							// setter
-		
+		DKTODO();
 		UriUriA uri;
 		const char* const uriString = href.c_str();
 		const char* errorPos;
- 
 		if (uriParseSingleUriA(&uri, uriString, &errorPos) != URI_SUCCESS) {
-			// Failure (no need to call uriFreeUriMembersA)
 			DKERROR("uriParseSingleUriA failed! \n");
 			return;
 		}
  
 		DKINFO("uriParseSingleUriA parsed successfully \n");
+		//_protocol = uri.scheme;	// TODO
 		uriFreeUriMembersA(&uri);
 	}
 	
