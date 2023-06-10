@@ -6,6 +6,10 @@
 
 #include "DKInterface/DKInterface.h"
 
+WARNING_DISABLE
+#include "uriparser/Uri.h"
+WARNING_ENABLE
+
 
 // Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
 // [Exposed=Window]
