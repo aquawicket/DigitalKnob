@@ -8,7 +8,7 @@
 // LegacyUnenumerableNamedProperties]
 // interface Window : EventTarget {
 var Window = function Window(address) {
-	//console.log("Window("+address+")")
+	//console.log("Window("+address+")");
 	
 	if(address)
 		this.address = address;
