@@ -28,34 +28,25 @@ public:
 	// [LegacyUnforgeable] stringifier attribute USVString href;
 	USVString _href = "";
 	virtual const USVString& href()					{ return _href; }			// getter
-	virtual void href(const USVString& href){ 									// setter
-		// FIXME: url as full path only works on Windows due to C:/  vs  /users
-		if(has(href,"://")){ 	//could be http:// , https://, file:/// or C:/, etc...
-			//_href = href;
-			std::string::size_type pos = href.find(":/");
-			_protocol = href.substr(pos);
-		}
-		else if(has(href,":/")){
-			
-		}
-		else if(has(href,"//")){ //could be //www.site.com/style.css or //site.com/style.css
-			_protocol = "";
-			DKERROR("no protocol specified\n"); //absolute path without protocol
+	virtual void href(const USVString& href) 		{ 							// setter
+		
+		UriUriA uri;
+		const char* const uriString = href.c_str();
+		const char* errorPos;
+ 
+		if (uriParseSingleUriA(&uri, uriString, &errorPos) != URI_SUCCESS) {
+			// Failure (no need to call uriFreeUriMembersA)
+			DKERROR("uriParseSingleUriA failed! \n");
 			return;
 		}
-		else{
-			//_url = workingPath + _url;
-		}	
+ 
+		DKINFO("uriParseSingleUriA parsed successfully \n");
+		uriFreeUriMembersA(&uri);
 	} 			
 	
 	// [LegacyUnforgeable] readonly attribute USVString origin;
 	USVString _origin = "";
-	virtual const USVString& origin(){ 											// getter
-		//Get the protocol, hostname and port number of the URL:
-		//_origin = _protocol+_hostname+_port;
-		_origin = protocol()+hostname()+port();
-		return _origin;
-	}			
+	virtual const USVString& origin()				{ return _origin;	}		// getter		
 	virtual void origin(const USVString& origin)	{ _origin = origin; } 		// setter
 	
 	// [LegacyUnforgeable] attribute USVString protocol;
