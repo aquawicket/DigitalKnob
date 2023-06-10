@@ -27,7 +27,7 @@ public:
 	
 	// static boolean canParse(USVString url, optional USVString base);
 	bool _canParse = false;
-	virtual const bool& canParse(csont USVString& url, const USVString& base = "") {
+	virtual const bool& canParse(const USVString& url, const USVString& base = "") {
 		DKDEBUGFUNC(url, base);
 		DKTODO();
 		return _canParse;
