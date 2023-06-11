@@ -5,6 +5,7 @@
 #define DKNode_H
 
 #include "DKEventTarget/DKEventTarget.h"
+class DKDocument;
 
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // [Exposed=Window]
@@ -101,9 +102,9 @@ public:
 	virtual void isConnected(const bool& isConnected)				{ _isConnected = isConnected; } 		// setter
 	
 	// readonly attribute Document? ownerDocument;
-	DKString _ownerDocument = "";
-	virtual const DKString& ownerDocument()							{ return _ownerDocument; }				// getter
-	virtual void ownerDocument(const DKString& ownerDocument)		{ _ownerDocument = ownerDocument; }	 	// setter
+	//DKDocument* _ownerDocument = NULL;
+	virtual DKDocument* ownerDocument()								{ return NULL; }						// getter
+	virtual void ownerDocument(DKDocument* ownerDocument)			{  }	 								// setter
 	
 	// Node getRootNode(optional GetRootNodeOptions options = {});
 	DKString _getRootNode = "";

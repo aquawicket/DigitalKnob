@@ -17,7 +17,7 @@ public:
 	
 	// constructor(USVString url, optional USVString base);
 	DKURL(const USVString& url, const USVString& base = "") : DKInterface() {
-		DKDEBUGFUNC();
+		DKDEBUGFUNC(url, base);
 		interfaceName = "URL";
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKURL("+interfaceAddress+") \n");
