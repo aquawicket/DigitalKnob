@@ -18,6 +18,7 @@ public:
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_Screen.h //////");
 		
+		_screen = new DKScreen();
 		printScreenProperties(*_screen);
 	}
 	

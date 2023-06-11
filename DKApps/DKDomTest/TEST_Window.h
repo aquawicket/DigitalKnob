@@ -153,7 +153,7 @@ public:
 		// Source: DOM Standard (https://dom.spec.whatwg.org/)
 		// partial interface Window {
 		//		[Replaceable] readonly attribute (Event or undefined) event; // legacy
-				console.log("window.event() = "					+toString(window.event()));
+				//console.log("window.event() = "					+toString(window.event()));
 		// };
 		
 		// Source: HTML Standard (https://html.spec.whatwg.org/multipage/)

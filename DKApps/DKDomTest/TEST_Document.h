@@ -52,7 +52,7 @@ public:
 		console.log("document.doctype() = "			+toString(document.doctype()));
 		
 		// readonly attribute Element? documentElement;
-		console.log("document.documentElement() = "	+toString(document.documentElement()));
+		//console.log("document.documentElement() = "	+toString(document.documentElement()));
 		
 		// HTMLCollection getElementsByTagName(DOMString qualifiedName);
 		// function
