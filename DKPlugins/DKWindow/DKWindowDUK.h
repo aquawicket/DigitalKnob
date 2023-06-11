@@ -755,8 +755,8 @@ public:
 			static int event(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
 				if(duk_is_valid_index(ctx, 1))
-					eventTarget(ctx)->event(GetString(ctx));
-				dukglue_push(ctx, eventTarget(ctx)->event());
+					eventTarget(ctx)->event((DKEvent*)addressToPointer(GetString(ctx)));
+				dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->event()));
 				return true;
 			}
 	// };

@@ -69,9 +69,9 @@ public:
 	virtual void doctype(const DKString& doctype)					{ _doctype = doctype; } 					// setter
 	
 	// readonly attribute Element? documentElement;
-	const DKElement* _documentElement = NULL;
-	virtual const DKElement* documentElement()						{ return _documentElement; }				// getter
-	virtual void documentElement(const DKElement* documentElement)	{ _documentElement = documentElement; } 	// setter
+	DKElement* _documentElement = NULL;
+	virtual DKElement* documentElement()							{ return _documentElement; }				// getter
+	virtual void documentElement(DKElement* documentElement)		{ _documentElement = documentElement; } 	// setter
 	
 	// HTMLCollection getElementsByTagName(DOMString qualifiedName);
 	DKHTMLCollection* _getElementsByTagName = NULL;
@@ -143,15 +143,15 @@ public:
 	}
 	
 	// [CEReactions, NewObject] Node importNode(Node node, optional boolean deep = false);
-	DKString _importNode = "";
-	virtual const DKString& importNode(const DKString& node, const bool& deep = false){
+	DKNode* _importNode = NULL;
+	virtual DKNode* importNode(DKNode* node, const bool& deep = false){
 		DKDEBUGFUNC(node, deep);
 		return _importNode;
 	}
 	
 	// [CEReactions] Node adoptNode(Node node);
-	DKString _adoptNode = "";
-	virtual const DKString& adoptNode(const DKString& node){
+	DKNode* _adoptNode = NULL;
+	virtual DKNode* adoptNode(DKNode* node){
 		DKDEBUGFUNC(node);
 		return _adoptNode;
 	}
@@ -171,8 +171,8 @@ public:
 	}
 	
 	// [NewObject] Event createEvent(DOMString interface); // legacy
-	DKString _createEvent = "";
-	virtual const DKString& createEvent(const DOMString& interface){
+	DKEvent* _createEvent = NULL;
+	virtual DKEvent* createEvent(const DOMString& interface){
 		DKDEBUGFUNC(interface);
 		return _createEvent;
 	}
@@ -189,14 +189,14 @@ public:
 	
 	// [NewObject] NodeIterator createNodeIterator(Node root, optional unsigned long whatToShow = 0xFFFFFFFF, optional NodeFilter? filter = null);
 	DKString _createNodeIterator = "";
-	virtual const DKString& createNodeIterator(const DKString& root, const unsigned int& whatToShow = 0xFFFFFFFF, const DKString& filter = "null"){
+	virtual const DKString& createNodeIterator(DKNode* root, const unsigned int& whatToShow = 0xFFFFFFFF, const DKString& filter = "null"){
 		DKDEBUGFUNC(root, whatToShow, filter);
 		return _createNodeIterator;
 	}
 	
 	// [NewObject] TreeWalker createTreeWalker(Node root, optional unsigned long whatToShow = 0xFFFFFFFF, optional NodeFilter? filter = null);
 	DKString _createTreeWalker = "";
-	virtual const DKString& createTreeWalker(const DKString& root, const unsigned int& whatToShow = 0xFFFFFFFF, const DKString& filter = "null"){
+	virtual const DKString& createTreeWalker(DKNode* root, const unsigned int& whatToShow = 0xFFFFFFFF, const DKString& filter = "null"){
 		DKDEBUGFUNC(root, whatToShow, filter);
 		return _createTreeWalker;
 	}

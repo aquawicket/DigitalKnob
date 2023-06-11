@@ -156,9 +156,9 @@ public:
 	virtual void nextSibling(DKNode* nextSibling)					{ _nextSibling = nextSibling; } 		// setter
 
 	// [CEReactions] attribute DOMString? nodeValue;
-	DKString _nodeValue = "";
-	virtual const DKString& nodeValue()								{ return _nodeValue; }					// getter
-	virtual void nodeValue(const DKString& nodeValue)				{ _nodeValue = nodeValue; } 			// setter
+	DOMString _nodeValue = "";
+	virtual const DOMString& nodeValue()							{ return _nodeValue; }					// getter
+	virtual void nodeValue(const DOMString& nodeValue)				{ _nodeValue = nodeValue; } 			// setter
 	
 	// [CEReactions] attribute DOMString? textContent;
 	DOMString _textContent = "";

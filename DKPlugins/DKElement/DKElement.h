@@ -5,7 +5,7 @@
 #define DKElement_H
 
 #include "DKNode/DKNode.h"
-
+class DKHTMLCollection;
 
 // [Exposed=Window]
 // interface Element : Node {
@@ -180,8 +180,8 @@ public:
 	virtual void shadowRoot(const DKString& shadowRoot)				{ _shadowRoot = shadowRoot; } 			// setter
 	
 	// Element? closest(DOMString selectors);
-	DKString _closest = "";
-	virtual const DKString& closest(const DOMString& selectors){
+	DKElement* _closest = NULL;
+	virtual DKElement* closest(const DOMString& selectors){
 		DKDEBUGFUNC(selectors);
 		return _closest;
 	}
@@ -201,29 +201,29 @@ public:
 	}
   
 	// HTMLCollection getElementsByTagName(DOMString qualifiedName);
-	DKString _getElementsByTagName = "";
-	virtual const DKString& getElementsByTagName(const DOMString& qualifiedName){
+	DKHTMLCollection* _getElementsByTagName = NULL;
+	virtual DKHTMLCollection* getElementsByTagName(const DOMString& qualifiedName){
 		DKDEBUGFUNC(qualifiedName);
 		return _getElementsByTagName;
 	}
 	
 	// HTMLCollection getElementsByTagNameNS(DOMString? namespace, DOMString localName);
-	DKString _getElementsByTagNameNS = "";
-	virtual const DKString& getElementsByTagNameNS(const DOMString& _namespace, const DOMString& localName){
+	DKHTMLCollection* _getElementsByTagNameNS = NULL;
+	virtual const DKHTMLCollection* getElementsByTagNameNS(const DOMString& _namespace, const DOMString& localName){
 		DKDEBUGFUNC(_namespace, localName);
 		return _getElementsByTagNameNS;
 	}
 	
 	// HTMLCollection getElementsByClassName(DOMString classNames);
-	DKString _getElementsByClassName = "";
-	virtual const DKString& getElementsByClassName(const DOMString& classNames){
+	DKHTMLCollection* _getElementsByClassName = NULL;
+	virtual DKHTMLCollection* getElementsByClassName(const DOMString& classNames){
 		DKDEBUGFUNC(classNames);
 		return _getElementsByClassName;
 	}
   
 	// [CEReactions] Element? insertAdjacentElement(DOMString where, Element element); // legacy
-	DKString _insertAdjacentElement = "";
-	virtual const DKString& insertAdjacentElement(const DOMString& where, const DKString& element){
+	DKElement* _insertAdjacentElement = NULL;
+	virtual DKElement* insertAdjacentElement(const DOMString& where, DKElement* element){
 		DKDEBUGFUNC(where, element);
 		return _insertAdjacentElement;
 	}
