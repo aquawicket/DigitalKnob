@@ -5,7 +5,8 @@
 #define DKDocument_H
 
 #include "DKNode/DKNode.h"
-#include "DKNonElementParentNode/DKNonElementParentNode.h"
+#include "DKNonElementParentNode/DKNonElementParentNode.h"	// mixin
+//#include "DKHTMLCollection/DKHTMLCollection.h"			// TODO
 
 
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
@@ -94,15 +95,15 @@ public:
 	}
 	
 	// [CEReactions, NewObject] Element createElement(DOMString localName, optional (DOMString or ElementCreationOptions) options = {});
-	DKString _createElement = "";
-	virtual const DKString& createElement(const DOMString& localName, const DKString& options = "{}"){
+	DKElement* _createElement = NULL;
+	virtual DKElement* createElement(const DOMString& localName, const DKString& options = "{}"){
 		DKDEBUGFUNC(localName, options);
 		return _createElement;
 	}
 	
 	// [CEReactions, NewObject] Element createElementNS(DOMString? namespace, DOMString qualifiedName, optional (DOMString or ElementCreationOptions) options = {});
-	DKString _createElementNS = "";
-	virtual const DKString& createElementNS(const DOMString& _namespace, const DOMString& qualifiedName, const DKString& options = "{}"){ // https://dom.spec.whatwg.org/#dom-document-createelementns
+	DKElement* _createElementNS = NULL;
+	virtual DKElement* createElementNS(const DOMString& _namespace, const DOMString& qualifiedName, const DKString& options = "{}"){ // https://dom.spec.whatwg.org/#dom-document-createelementns
 		DKDEBUGFUNC(_namespace, qualifiedName, options);
 		return _createElementNS;
 	}
@@ -219,7 +220,7 @@ public:
 	// partial interface Document {
 	//		FontMetrics measureElement(Element element);
 			DKString _measureElement = "";
-			virtual const DKString& measureElement(const DKString& element){
+			virtual const DKString& measureElement(DKElement* element){
 				DKDEBUGFUNC(element);
 				return _measureElement;
 			}

@@ -100,14 +100,16 @@ public:
 		DKDEBUGFUNC(classNames);
 		return _getElementsByClassName;
 	}
-	
+	*/
 	// [CEReactions, NewObject] Element createElement(DOMString localName, optional (DOMString or ElementCreationOptions) options = {});
-	DKString _createElement = "";
-	virtual const DKString& createElement(const DOMString& localName, const DKString& options = "{}"){
+	DKElement* _createElement = NULL;
+	virtual DKElement* createElement(const DOMString& localName, const DKString& options = "{}"){
 		DKDEBUGFUNC(localName, options);
+		Rml::Element* element = _dkRmlInterface->document->AppendChild(_dkRmlInterface->document->CreateElement(localName.c_str()), false);
+		_createElement = new DKRmlElement(_dkRmlInterface, element);	// FIXME: danggling pointer
 		return _createElement;
 	}
-	
+	/*
 	// [CEReactions, NewObject] Element createElementNS(DOMString? namespace, DOMString qualifiedName, optional (DOMString or ElementCreationOptions) options = {});
 	DKString _createElementNS = "";
 	virtual const DKString& createElementNS(const DOMString& _namespace, const DOMString& qualifiedName, const DKString& options = "{}"){ // https://dom.spec.whatwg.org/#dom-document-createelementns
@@ -216,8 +218,7 @@ public:
 	virtual DKElement* getElementById(const DOMString& elementId) {
 		DKDEBUGFUNC(elementId);
 		Rml::Element* element = _dkRmlInterface->document->GetElementById(elementId.c_str());
-		//TODO:  need to get a DKElement* from element.
-		_getElementById = new DKRmlElement(_dkRmlInterface, element);
+		_getElementById = new DKRmlElement(_dkRmlInterface, element);		// FIXME: danggling pointer
 		DKTODO();
 		return _getElementById;
 	}

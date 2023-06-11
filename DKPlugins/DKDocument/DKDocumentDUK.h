@@ -278,7 +278,7 @@ public:
 	// readonly attribute Element? documentElement;
 	static int documentElement(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if(duk_is_valid_index(ctx, 1))							//read only
+		if(duk_is_valid_index(ctx, 1))
 			eventTarget(ctx)->documentElement( (DKElement*)addressToPointer(GetString(ctx)) );	
 		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->documentElement()));
 		return true;
@@ -317,8 +317,8 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString localName = GetString(ctx, 1);
 		DKString options = GetString(ctx, 2);
-		DKString _createElement = eventTarget(ctx)->createElement(localName, options);
-		dukglue_push(ctx, _createElement);	
+		DKElement* _createElement = eventTarget(ctx)->createElement(localName, options);
+		dukglue_push(ctx, pointerToAddress(_createElement));
 		return true;
 	}
 	
@@ -328,8 +328,8 @@ public:
 		DKString _namespace = GetString(ctx, 1);
 		DKString qualifiedName = GetString(ctx, 2);
 		DKString options = GetString(ctx, 3);
-		DKString _createElementNS = eventTarget(ctx)->createElementNS(_namespace, qualifiedName, options);
-		dukglue_push(ctx, _createElementNS);	
+		DKElement* _createElementNS = eventTarget(ctx)->createElementNS(_namespace, qualifiedName, options);
+		dukglue_push(ctx, pointerToAddress(_createElementNS));	
 		return true;
 	}
 	
@@ -477,7 +477,8 @@ public:
 	//		FontMetrics measureElement(Element element);
 			static int measureElement(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				DKString element = GetString(ctx, 1);
+				DKString elementAddress = GetString(ctx, 1);
+				DKElement* element = (DKElement*)addressToPointer(elementAddress);
 				DKString _measureElement = eventTarget(ctx)->measureElement(element);
 				dukglue_push(ctx, _measureElement);	
 				return true;
