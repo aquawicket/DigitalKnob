@@ -18,7 +18,7 @@ public:
 		dkRmlDocument = new DKRmlDocument(TEST_DKRmlInterface::dkRmlInterface);
 		//dkRmlDocument = std::make_unique<DKRmlDocument>(TEST_DKRmlInterface::dkRmlInterface);
 		
-		const DKElement* body = dkRmlDocument->getElementById("body");
+		DKElement* body = dkRmlDocument->getElementById("body");
 		if(body){
 			DKINFO("body is valid \n");
 		}

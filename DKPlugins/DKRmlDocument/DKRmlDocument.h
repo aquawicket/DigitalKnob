@@ -213,7 +213,7 @@ public:
 	// Source: DOM Standard (https://dom.spec.whatwg.org/)
 	// Document includes NonElementParentNode;
 	DKElement* _getElementById = NULL;
-	virtual const DKElement* getElementById(const DOMString& elementId) {
+	virtual DKElement* getElementById(const DOMString& elementId) {
 		DKDEBUGFUNC(elementId);
 		Rml::Element* element = _dkRmlInterface->document->GetElementById(elementId.c_str());
 		//TODO:  need to get a DKElement* from element.
