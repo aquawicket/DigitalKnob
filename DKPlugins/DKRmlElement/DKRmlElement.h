@@ -41,12 +41,16 @@ public:
 	DOMString _localName = "";
 	virtual const DOMString& localName()						{ return _localName; }				// getter
 	virtual void localName(const DOMString& localName)			{ _localName = localName; } 		// setter
-	
+	*/
 	// readonly attribute DOMString tagName;
-	DOMString _tagName = "";
-	virtual const DOMString& tagName()							{ return _tagName; }				// getter
-	virtual void tagName(const DOMString& tagName)				{ _tagName = tagName; } 			// setter
-
+	//DOMString _tagName = "";
+	virtual const DOMString& tagName()							{									// getter
+		_tagName = _rmlElement->GetTagName();
+		return _tagName; 
+	}				
+	//virtual void tagName(const DOMString& tagName)			{ _tagName = tagName; } 			// setter
+	
+	/*
 	// [CEReactions] attribute DOMString id;
 	DOMString _id = "";
 	virtual const DOMString& id()								{ return _id; }						// getter

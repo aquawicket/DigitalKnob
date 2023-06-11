@@ -18,14 +18,16 @@ public:
 		dkRmlDocument = new DKRmlDocument(TEST_DKRmlInterface::dkRmlInterface);
 		//dkRmlDocument = std::make_unique<DKRmlDocument>(TEST_DKRmlInterface::dkRmlInterface);
 		
-		const DKElement* _getElementById = dkRmlDocument->getElementById("body");
-		if(_getElementById){
-			DKINFO("_getElementById is valid \n");
+		const DKElement* body = dkRmlDocument->getElementById("body");
+		if(body){
+			DKINFO("body is valid \n");
 		}
 		else{
-			DKINFO("_getElementById is invalid \n");
+			DKINFO("body is invalid \n");
 		}
-		//DKINFO("_getElementById = "+_getElementById+"\n");
+		
+		DOMString tagName = body->tagName();
+		DKINFO("tagName = "+tagName+"\n");
 		
 		//DKElement* _getElementsByTagName = dkRmlDocument->getElementsByTagName("a");
 		//DKINFO("_getElementsByTagName = "+_getElementsByTagName+"\n");
