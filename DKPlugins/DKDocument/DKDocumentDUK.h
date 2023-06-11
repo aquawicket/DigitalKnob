@@ -278,9 +278,9 @@ public:
 	// readonly attribute Element? documentElement;
 	static int documentElement(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->documentElement(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->documentElement());
+		if(duk_is_valid_index(ctx, 1))							//read only
+			eventTarget(ctx)->documentElement( (DKElement*)addressToPointer(GetString(ctx)) );	
+		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->documentElement()));
 		return true;
 	}
 	

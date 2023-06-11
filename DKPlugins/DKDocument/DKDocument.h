@@ -68,9 +68,9 @@ public:
 	virtual void doctype(const DKString& doctype)					{ _doctype = doctype; } 					// setter
 	
 	// readonly attribute Element? documentElement;
-	DKString _documentElement = "";
-	virtual const DKString& documentElement()						{ return _documentElement; }				// getter
-	virtual void documentElement(const DKString& documentElement)	{ _documentElement = documentElement; } 	// setter
+	const DKElement* _documentElement = NULL;
+	virtual const DKElement* documentElement()						{ return _documentElement; }				// getter
+	virtual void documentElement(const DKElement* documentElement)	{ _documentElement = documentElement; } 	// setter
 	
 	// HTMLCollection getElementsByTagName(DOMString qualifiedName);
 	DKString _getElementsByTagName = "";

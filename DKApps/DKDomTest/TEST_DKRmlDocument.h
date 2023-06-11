@@ -19,6 +19,10 @@ public:
 		//dkRmlDocument = std::make_unique<DKRmlDocument>(TEST_DKRmlInterface::dkRmlInterface);
 		
 		const DKElement* _getElementById = dkRmlDocument->getElementById("test");
+		if(_getElementById)
+			DKINFO("_getElementById is valid \n");
+		else
+			DKINFO("_getElementById is invalid \n");
 		//DKINFO("_getElementById = "+_getElementById+"\n");
 		
 		//DKElement* _getElementsByTagName = dkRmlDocument->getElementsByTagName("a");
