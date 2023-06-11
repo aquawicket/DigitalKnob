@@ -458,8 +458,8 @@ public:
 	static int document(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->document(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->document());
+			eventTarget(ctx)->document((DKDocument*)addressToPointer(GetString(ctx)));
+		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->document()));
 		return true;
 	}
 	
@@ -476,8 +476,8 @@ public:
 	static int location(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->location(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->location());
+			eventTarget(ctx)->location((DKLocation*)addressToPointer(GetString(ctx)));
+		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->location()));
 		return true;
 	}
 	
@@ -649,8 +649,8 @@ public:
 	static int frameElement(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->frameElement(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->frameElement());
+			eventTarget(ctx)->frameElement((DKElement*)addressToPointer(GetString(ctx)));
+		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->frameElement()));
 		return true;
 	}
 	
@@ -670,8 +670,8 @@ public:
 	static int navigator(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->navigator(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->navigator());
+			eventTarget(ctx)->navigator((DKNavigator*)addressToPointer(GetString(ctx)));
+		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->navigator()));
 		return true;
 	}
 	
@@ -679,8 +679,8 @@ public:
 	static int clientInformation(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->clientInformation(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->clientInformation());
+			eventTarget(ctx)->clientInformation((DKNavigator*)addressToPointer(GetString(ctx)));
+		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->clientInformation()));
 		return true;
 	}
 	

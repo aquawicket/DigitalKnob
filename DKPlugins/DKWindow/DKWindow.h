@@ -6,6 +6,10 @@
 
 #include "DKEventTarget/DKEventTarget.h"
 #include "DKScreen/DKScreen.h"
+class DKDocument;
+class DKLocation;
+class DKNavigator;
+class DKElement;
 
 // Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
 // [Global=Window,
@@ -34,9 +38,9 @@ public:
 	virtual void self(const DKString& self)						{ _self = self; } 						// setter
 	
 	// [LegacyUnforgeable] readonly attribute Document document;
-	DKString _document = "";
-	virtual const DKString& document()							{ return _document; }					// getter
-	virtual void document(const DKString& document)				{ _document = document; } 				// setter
+	DKDocument* _document = NULL;
+	virtual DKDocument* document()								{ return _document; }					// getter
+	virtual void document(DKDocument* document)					{ _document = document; } 				// setter
 	
 	// attribute DOMString name;
 	DOMString _name = "";
@@ -44,9 +48,9 @@ public:
 	virtual void name(const DOMString& name)					{ _name = name; } 						// setter
 	
 	// [PutForwards=href, LegacyUnforgeable] readonly attribute Location location;
-	DKString _location = "";
-	virtual const DKString& location()							{ return _location; }					// getter
-	virtual void location(const DKString& location)				{ _location = location; } 				// setter
+	DKLocation* _location = NULL;
+	virtual DKLocation* location()								{ return _location; }					// getter
+	virtual void location(DKLocation* location)					{ _location = location; } 				// setter
 	
 	// readonly attribute History history;
 	DKString _history = "";
@@ -149,9 +153,9 @@ public:
 	virtual void parent(const DKString& parent)					{ _parent = parent; } 					// setter
 	
 	// readonly attribute Element? frameElement;
-	DKString _frameElement = "";
-	virtual const DKString& frameElement()						{ return _frameElement; }				// getter
-	virtual void frameElement(const DKString& frameElement)		{ _frameElement = frameElement; } 		// setter
+	DKElement* _frameElement = NULL;
+	virtual DKElement* frameElement()							{ return _frameElement; }				// getter
+	virtual void frameElement(DKElement* frameElement)			{ _frameElement = frameElement; } 		// setter
 	
 	// WindowProxy? open(optional USVString url = "", optional DOMString target = "_blank", optional [LegacyNullToEmptyString] DOMString features = "");
 	DKString _open = "";
@@ -169,14 +173,14 @@ public:
 	
 	// the user agent
 	// readonly attribute Navigator navigator;
-	DKString _navigator = "";
-	virtual const DKString& navigator()									{ return _navigator; }							// getter
-	virtual void navigator(const DKString& navigator)					{ _navigator = navigator; } 					// setter
+	DKNavigator* _navigator = NULL;
+	virtual DKNavigator* navigator()									{ return _navigator; }							// getter
+	virtual void navigator(DKNavigator* navigator)						{ _navigator = navigator; } 					// setter
 	
 	// readonly attribute Navigator clientInformation; // legacy alias of .navigator
-	DKString _clientInformation = "";
-	virtual const DKString& clientInformation()							{ return _clientInformation; }					// getter
-	virtual void clientInformation(const DKString& clientInformation)	{ _clientInformation = clientInformation; } 	// setter
+	DKNavigator* _clientInformation = NULL;
+	virtual DKNavigator* clientInformation()							{ return _clientInformation; }					// getter
+	virtual void clientInformation(DKNavigator* clientInformation)		{ _clientInformation = clientInformation; } 	// setter
 	
 	// readonly attribute boolean originAgentCluster;
 	bool _originAgentCluster = false;
