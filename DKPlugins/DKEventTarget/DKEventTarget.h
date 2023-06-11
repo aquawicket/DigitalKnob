@@ -13,6 +13,7 @@ typedef std::function<void(DKEvent&)> DKEventListener;
 
 struct EventObject {
 	DKString interfaceAddress;
+	DKEventTarget* dkEventTarget;
     DOMString type;
 	DKEventListener callback;
 };
@@ -43,6 +44,7 @@ public:
         eventObj.type = type;
         eventObj.callback = callback;
         eventObj.interfaceAddress = interfaceAddress;
+		eventObj.dkEventTarget = this;
         events.push_back(eventObj);
 		
 		/// Print event list
@@ -68,7 +70,7 @@ public:
 	}
 	
 	// boolean dispatchEvent(Event event);
-    void dispatchEvent(DKEvent& event){	// https://dom.spec.whatwg.org/#dom-eventtarget-dispatchevent
+    bool dispatchEvent(DKEvent& event){	// https://dom.spec.whatwg.org/#dom-eventtarget-dispatchevent
 		DKDEBUGFUNC(event);
 		//DKINFO("DKEventTarget::dispatchEvent("+event+") \n");	
 		for (auto& eventObj : events) {
@@ -77,17 +79,18 @@ public:
 				//DKINFO("		event("+event.type()+") \n");	
 				
 				//event.currentTarget = interfaceAddress;
-				event.currentTarget(interfaceAddress);
+				event.currentTarget(this);
 				
 				//event.target = interfaceAddress;
-				event.target(interfaceAddress);
+				event.target(this);
 				//event.target = (DKEventTarget*)addressToPointer(interfaceAddress);
 				
 				eventObj.callback(event);
 			}
         }
+		return true; 
     }
-	void dispatchEvent(DKEvent* event){	dispatchEvent(*event); }
+	bool dispatchEvent(DKEvent* event){	return dispatchEvent(*event); }
 	
 	
 	////// DK properties //////	

@@ -42,23 +42,23 @@ public:
 	
 	// readonly attribute DOMString type;
 	DOMString _type = "";
-	virtual const DOMString& 	type()															{ return _type; }							// getter
+	virtual const DOMString&	type()															{ return _type; }							// getter
 	virtual void 				type(const DOMString& type) 									{ _type = type; } 							// setter
 	
 	// readonly attribute EventTarget? target;
-	DKString _target = "";
-	virtual const DKString& 	target()														{ return _target; }							// getter
-	virtual void 				target(const DOMString& target)									{ _target = target; } 						// setter
+	DKEventTarget* _target = NULL;
+	virtual DKEventTarget* 		target()														{ return _target; }							// getter
+	virtual void 				target(DKEventTarget* target)									{ _target = target; } 						// setter
 	
 	// readonly attribute EventTarget? srcElement; // legacy
-	DKString _srcElement = "";
-	virtual const DKString& 	srcElement()													{ return _srcElement; }						// getter
-	virtual void 				srcElement(const DOMString& srcElement) 						{ _srcElement = srcElement; } 				// setter
+	DKEventTarget* _srcElement = NULL;
+	virtual DKEventTarget* 		srcElement()													{ return _srcElement; }						// getter
+	virtual void 				srcElement(DKEventTarget* srcElement) 							{ _srcElement = srcElement; } 				// setter
 	
 	// readonly attribute EventTarget? currentTarget;
-	DKString _currentTarget = "";
-	virtual const DKString& 	currentTarget()													{ return _currentTarget; }					// getter
-	virtual void 				currentTarget(const DOMString& currentTarget) 					{ _currentTarget = currentTarget; }			// setter
+	DKEventTarget* _currentTarget = NULL;
+	virtual DKEventTarget* 		currentTarget()													{ return _currentTarget; }					// getter
+	virtual void 				currentTarget(DKEventTarget* currentTarget) 					{ _currentTarget = currentTarget; }			// setter
 	
 	// sequence<EventTarget> composedPath();
 	DKString _composedPath = "";

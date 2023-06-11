@@ -959,8 +959,8 @@ public:
 			static int screen(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
 				if(duk_is_valid_index(ctx, 1))
-					eventTarget(ctx)->screen( *(DKScreen*)addressToPointer(GetString(ctx)) );
-				dukglue_push(ctx, pointerToAddress(&eventTarget(ctx)->screen()) );
+					eventTarget(ctx)->screen((DKScreen*)addressToPointer(GetString(ctx)));
+				dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->screen()) );
 				return true;
 			}
 	//

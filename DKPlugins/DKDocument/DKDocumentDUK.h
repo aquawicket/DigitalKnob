@@ -381,19 +381,21 @@ public:
 	// [CEReactions, NewObject] Node importNode(Node node, optional boolean deep = false);
 	static int importNode(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString node = GetString(ctx, 1);
+		DKString nodeAddress = GetString(ctx, 1);
+		DKNode* node = (DKNode*)addressToPointer(nodeAddress);
 		bool deep = GetBool(ctx, 2);
-		DKString _importNode = eventTarget(ctx)->importNode(node, deep);
-		dukglue_push(ctx, _importNode);	
+		DKNode* importNode = eventTarget(ctx)->importNode(node, deep);
+		dukglue_push(ctx, pointerToAddress(importNode));	
 		return true;
 	}
 	
 	// [CEReactions] Node adoptNode(Node node);
 	static int adoptNode(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString node = GetString(ctx, 1);
-		DKString _adoptNode = eventTarget(ctx)->adoptNode(node);
-		dukglue_push(ctx, _adoptNode);	
+		DKString nodeAddress = GetString(ctx, 1);
+		DKNode* node = (DKNode*)addressToPointer(nodeAddress);
+		DKNode* adoptNode = eventTarget(ctx)->adoptNode(node);
+		dukglue_push(ctx, pointerToAddress(adoptNode));	
 		return true;
 	}
 	
@@ -420,8 +422,8 @@ public:
 	static int createEvent(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString interface = GetString(ctx, 1);
-		DKString _createEvent = eventTarget(ctx)->createEvent(interface);
-		dukglue_push(ctx, _createEvent);	
+		DKEvent* createEvent = eventTarget(ctx)->createEvent(interface);
+		dukglue_push(ctx, pointerToAddress(createEvent));	
 		return true;
 	}
 	
@@ -439,7 +441,8 @@ public:
 	// [NewObject] NodeIterator createNodeIterator(Node root, optional unsigned long whatToShow = 0xFFFFFFFF, optional NodeFilter? filter = null);
 	static int createNodeIterator(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString root = GetString(ctx, 1);
+		DKString rootAddress = GetString(ctx, 1);
+		DKNode* root = (DKNode*)addressToPointer(rootAddress);
 		unsigned int whatToShow = GetUint(ctx, 2);
 		DKString filter = GetString(ctx, 3);
 		DKString _createNodeIterator = eventTarget(ctx)->createNodeIterator(root, whatToShow, filter);
@@ -450,7 +453,8 @@ public:
 	// [NewObject] TreeWalker createTreeWalker(Node root, optional unsigned long whatToShow = 0xFFFFFFFF, optional NodeFilter? filter = null);
 	static int createTreeWalker(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString root = GetString(ctx, 1);
+		DKString rootAddress = GetString(ctx, 1);
+		DKNode* root = (DKNode*)addressToPointer(rootAddress);
 		unsigned int whatToShow = GetUint(ctx, 2);
 		DKString filter = GetString(ctx, 3);
 		DKString _createTreeWalker = eventTarget(ctx)->createTreeWalker(root, whatToShow, filter);

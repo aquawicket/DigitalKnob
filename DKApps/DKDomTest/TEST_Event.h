@@ -46,13 +46,13 @@ public:
 		console.log("event.type() = "			+toString(event.type()));
 		
 		// readonly attribute EventTarget? target;
-		console.log("event.target() = "			+toString(event.target()));
+		//console.log("event.target() = "			+toString(event.target()));
 		
 		// readonly attribute EventTarget? srcElement; // legacy
-		console.log("event.srcElement() = "		+toString(event.srcElement()));
+		//console.log("event.srcElement() = "		+toString(event.srcElement()));
 		
 		// readonly attribute EventTarget? currentTarget;
-		console.log("event.currentTarget() = "	+toString(event.currentTarget()));
+		//console.log("event.currentTarget() = "	+toString(event.currentTarget()));
 		
 		// sequence<EventTarget> composedPath();
 		// function

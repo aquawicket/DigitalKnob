@@ -12,13 +12,13 @@
 class TEST_Screen //: public DKObjectT<TEST_Screen>
 {
 public:
-	static DKScreen _screen;
+	static DKScreen* _screen;
 
 	TEST_Screen(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_Screen.h //////");
 		
-		printScreenProperties(_screen);
+		printScreenProperties(*_screen);
 	}
 	
 	static void printScreenProperties(DKScreen& screen){
@@ -45,6 +45,6 @@ public:
 };
 //REGISTER_OBJECT(TEST_Screen, true);
 
-DKScreen TEST_Screen::_screen;
+DKScreen* TEST_Screen::_screen;
 
 #endif //TEST_Screen_H

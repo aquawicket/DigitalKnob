@@ -30,7 +30,7 @@ public:
 		console.log("window.self() = "				+toString(window.self()));
 		
 		// [LegacyUnforgeable] readonly attribute Document document;
-		//console.log("window.document() = "			+toString(window.document()));
+		//console.log("window.document() = "		+toString(window.document()));
 		
 		// attribute DOMString name;
 		console.log("window.name() = "				+toString(window.name()));
@@ -272,8 +272,8 @@ public:
 		//
 		//		[SameObject, Replaceable] readonly attribute Screen screen;
 				//console.log("window.screen() = "				+toString(window.screen()));
-				if(&window.screen())
-					TEST_Screen::printScreenProperties(window.screen());
+				if(window.screen())
+					TEST_Screen::printScreenProperties(*window.screen());
 				
 		//
 		//		[SameObject, Replaceable] readonly attribute VisualViewport? visualViewport;
