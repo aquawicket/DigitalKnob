@@ -5,6 +5,7 @@
 #define DKUIEvent_H
 
 #include "DKEvent/DKEvent.h"
+class DKWindow;
 
 ////// UIEventInit //////
 typedef std::string UIEventInit;
@@ -26,9 +27,9 @@ public:
 	virtual ~DKUIEvent(){}
 	
 	// readonly attribute Window? view;
-	DKString _view = "";
-	virtual const DKString&			view()													{ return _view; }								// getter
-	virtual void 					view(const DKString& view) 								{ _view = view; } 								// setter
+	DKWindow* _view = NULL;
+	virtual DKWindow*				view()													{ return _view; }								// getter
+	virtual void 					view(DKWindow* view) 									{ _view = view; } 								// setter
 	
 	// readonly attribute long detail;
 	int _detail = 0;
@@ -47,7 +48,7 @@ public:
 	// partial interface UIEvent {
 	// Deprecated in this specification
 	// undefined initUIEvent(DOMString typeArg, optional boolean bubblesArg = false, optional boolean cancelableArg = false, optional Window? viewArg = null, optional long detailArg = 0);
-	virtual void initUIEvent(const DOMString& typeArg, const bool& bubblesArg, const bool& cancelableArg, const DKString& viewArg, const int& detailArg){
+	virtual void initUIEvent(const DOMString& typeArg, const bool& bubblesArg = false, const bool& cancelableArg = false, DKWindow* viewArg = NULL, const int& detailArg = 0){
 		DKDEBUGFUNC(typeArg, bubblesArg, cancelableArg, viewArg, detailArg);
 		DKTODO();
 	}

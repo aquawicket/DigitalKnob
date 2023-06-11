@@ -117,15 +117,15 @@ public:
 	// optional boolean metaKey = false);
 	virtual void initKeyboardEvent(
 		const DOMString& typeArg,
-		const bool& bubblesArg,
-		const bool& cancelableArg,
-		const DKString& viewArg,
-		const DOMString& keyArg,
-		const unsigned int& locationArg,
-		const bool& ctrlKey,
-		const bool& altKey,
-		const bool& shiftKey,
-		const bool& metaKey) {
+		const bool& bubblesArg = false,
+		const bool& cancelableArg = false,
+		DKWinow* viewArg = NULL,
+		const DOMString& keyArg = "",
+		const unsigned int& locationArg = 0,
+		const bool& ctrlKey = false,
+		const bool& altKey = false,
+		const bool& shiftKey = false,
+		const bool& metaKey = false) {
 			DKDEBUGFUNC(typeArg, bubblesArg, cancelableArg, viewArg, keyArg, locationArg, ctrlKey, altKey, shiftKey, metaKey);
 			DKTODO();
 		}

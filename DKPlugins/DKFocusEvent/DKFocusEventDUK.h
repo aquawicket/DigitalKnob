@@ -40,12 +40,11 @@ public:
 	// constructor(DOMString type, optional FocusEventInit eventInitDict = {});
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString type = duk_require_string(ctx, 0);
-		DKString eventInitDict = "";//duk_require_string(ctx, 1);
+		DOMString type = duk_require_string(ctx, 0);
+		FocusEventInit eventInitDict = "{}";	//duk_require_string(ctx, 1);
 		DKINFO("CPP_DKFocusEventDUK("+type+","+eventInitDict+")\n");
 		DKFocusEvent* focusEvent = new DKFocusEvent(type, eventInitDict);
-		DKString focusEventAddress = pointerToAddress(focusEvent);
-		dukglue_push(ctx, focusEventAddress);
+		dukglue_push(ctx, pointerToAddress(focusEvent));
 		return true;
 	}
 	
@@ -53,8 +52,8 @@ public:
 	static int relatedTarget(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_string(ctx, 1))
-			focusEvent(ctx)->relatedTarget(duk_to_string(ctx, 1));
-		dukglue_push(ctx, focusEvent(ctx)->relatedTarget());
+			focusEvent(ctx)->relatedTarget((DKEventTarget*)addressToPointer(duk_to_string(ctx, 1)));
+		dukglue_push(ctx, pointerToAddress(focusEvent(ctx)->relatedTarget()));
 		return true;
 	}
 	

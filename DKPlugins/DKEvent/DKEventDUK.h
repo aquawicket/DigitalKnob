@@ -126,12 +126,11 @@ public:
 	// constructor(DOMString type, optional EventInit eventInitDict = {});
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString type = duk_require_string(ctx, 0);
-		DKString eventInitDict = "";//duk_require_string(ctx, 1);
+		DOMString type = duk_require_string(ctx, 0);
+		EventInit eventInitDict = "{}";		//duk_require_string(ctx, 1);
 		DKINFO("CPP_DKEventDUK("+type+","+eventInitDict+")\n");
 		DKEvent* event = new DKEvent(type, eventInitDict);
-		DKString eventAddress = pointerToAddress(event);
-		dukglue_push(ctx, eventAddress);
+		dukglue_push(ctx, pointerToAddress(event));
 		return true;
 	}
 	

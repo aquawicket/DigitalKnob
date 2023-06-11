@@ -76,9 +76,9 @@ public:
 	virtual void 					buttons(const unsigned short& buttons) 		{ _buttons = buttons; }				// setter
 	
 	// readonly attribute EventTarget? relatedTarget;
-	DKString _relatedTarget = "";
-	virtual const DKString& 		relatedTarget()								{ return _relatedTarget; }			// getter
-	virtual void 					relatedTarget(const DKString& relatedTarget){ _relatedTarget = relatedTarget; } // setter
+	DKEventTarget* _relatedTarget = NULL;
+	virtual DKEventTarget* 			relatedTarget()								{ return _relatedTarget; }			// getter
+	virtual void 					relatedTarget(DKEventTarget* relatedTarget)	{ _relatedTarget = relatedTarget; } // setter
 	
 	// boolean getModifierState(DOMString keyArg);
 	bool _getModifierState = false;
@@ -154,20 +154,20 @@ public:
 	// optional EventTarget? relatedTargetArg = null);
 	virtual void initMouseEvent(
 		const DOMString& typeArg, 
-		const bool& bubblesArg,
-		const bool& cancelableArg,
-		const DKString& viewArg,
-		const int& detailArg,
-		const int& screenXArg,
-		const int& screenYArg,
-		const int& clientXArg,
-		const int& clientYArg,
-		const bool& ctrlKeyArg,
-		const bool& altKeyArg,
-		const bool& shiftKeyArg,
-		const bool& metaKeyArg,
-		const short& buttonArg,
-		const DKString& relatedTargetArg) {
+		const bool& bubblesArg = false,
+		const bool& cancelableArg = false,
+		DKWindow* viewArg = NULL,
+		const int& detailArg = 0,
+		const int& screenXArg = 0,
+		const int& screenYArg = 0,
+		const int& clientXArg = 0,
+		const int& clientYArg = 0,
+		const bool& ctrlKeyArg = false,
+		const bool& altKeyArg = false,
+		const bool& shiftKeyArg = false,
+		const bool& metaKeyArg = false,
+		const short& buttonArg = 0,
+		DKEventTarget* relatedTargetArg = NULL) {
 			DKDEBUGFUNC(typeArg, bubblesArg, cancelableArg, viewArg, detailArg, screenXArg, screenYArg, clientXArg, clientYArg, ctrlKeyArg, altKeyArg, shiftKeyArg, metaKeyArg, buttonArg, relatedTargetArg);
 			DKTODO();
 		}

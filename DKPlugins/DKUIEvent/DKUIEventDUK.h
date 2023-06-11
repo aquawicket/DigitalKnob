@@ -100,8 +100,8 @@ public:
 	static int view(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_string(ctx, 1))
-			uiEvent(ctx)->view(duk_to_string(ctx, 1));
-		dukglue_push(ctx, uiEvent(ctx)->view());
+			uiEvent(ctx)->view((DKWindow*)addressToPointer(duk_to_string(ctx, 1)));
+		dukglue_push(ctx, pointerToAddress(uiEvent(ctx)->view()));
 		return true;
 	}
 	
@@ -130,12 +130,13 @@ public:
 	//		undefined initUIEvent(DOMString typeArg, optional boolean bubblesArg = false, optional boolean cancelableArg = false, optional Window? viewArg = null, optional long detailArg = 0);
 			static int initUIEvent(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				DKString _typeArg = GetString(ctx, 1);
-				bool _bubblesArg = GetBool(ctx, 2);
-				bool _cancelableArg = GetBool(ctx, 3);
-				DKString _viewArg = GetString(ctx, 4);
-				int _detailArg = GetInt(ctx, 5);
-				uiEvent(ctx)->initUIEvent(_typeArg, _bubblesArg, _cancelableArg, _viewArg, _detailArg);
+				DKString typeArg = GetString(ctx, 1);
+				bool bubblesArg = GetBool(ctx, 2);
+				bool cancelableArg = GetBool(ctx, 3);
+				DKString viewArgAddress = GetString(ctx, 4);
+				DKWindow* viewArg = (DKWindow*)addressToPointer(viewArgAddress);
+				int detailArg = GetInt(ctx, 5);
+				uiEvent(ctx)->initUIEvent(typeArg, bubblesArg, cancelableArg, viewArg, detailArg);
 				return true;
 			}
 	//	};

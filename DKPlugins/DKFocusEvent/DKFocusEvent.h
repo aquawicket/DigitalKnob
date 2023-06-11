@@ -26,9 +26,9 @@ public:
 	virtual ~DKFocusEvent(){}
 	
 	// readonly attribute EventTarget? relatedTarget;
-	DKString _relatedTarget = ""; // https://w3c.github.io/uievents/#dom-focusevent-relatedtarget
-	virtual const DKString& 	relatedTarget()									{ return _relatedTarget; }				// getter
-	virtual void 				relatedTarget(const DKString& relatedTarget) 	{ _relatedTarget = relatedTarget; } 	// setter
+	DKEventTarget* _relatedTarget = NULL;
+	virtual DKEventTarget* 	relatedTarget()									{ return _relatedTarget; }				// getter
+	virtual void 			relatedTarget(DKEventTarget* relatedTarget) 	{ _relatedTarget = relatedTarget; } 	// setter
 };
 
 

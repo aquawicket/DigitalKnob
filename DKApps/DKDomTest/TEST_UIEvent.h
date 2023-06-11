@@ -27,7 +27,7 @@ public:
 		// function
 		
 		// readonly attribute Window? view;
-		console.log("uievent.view() = "							+toString(uievent.view()));
+		//console.log("uievent.view() = "							+toString(uievent.view()));
 		
 		// readonly attribute long detail;
 		console.log("uievent.detail() = "						+toString(uievent.detail()));

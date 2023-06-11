@@ -57,7 +57,7 @@ public:
 		console.log("mouseEvent.buttons() = "		+toString(mouseEvent.buttons()));
 		
 		// readonly attribute EventTarget? relatedTarget;
-		console.log("mouseEvent.relatedTarget() = "	+toString(mouseEvent.relatedTarget()));
+		//console.log("mouseEvent.relatedTarget() = "	+toString(mouseEvent.relatedTarget()));
 		
 		// boolean getModifierState(DOMString keyArg);
 		// function
