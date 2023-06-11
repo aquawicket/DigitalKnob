@@ -18,6 +18,9 @@ public:
 		dkRmlDocument = new DKRmlDocument(TEST_DKRmlInterface::dkRmlInterface);
 		//dkRmlDocument = std::make_unique<DKRmlDocument>(TEST_DKRmlInterface::dkRmlInterface);
 		
+		DKString _getElementById = dkRmlDocument->getElementById("test");
+		DKINFO("_getElementById = "+_getElementById+"\n");
+		
 		DKString _getElementsByTagName = dkRmlDocument->getElementsByTagName("a");
 		DKINFO("_getElementsByTagName = "+_getElementsByTagName+"\n");
 		

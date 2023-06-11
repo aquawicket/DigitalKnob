@@ -208,10 +208,15 @@ public:
 	}
 
 // };
-  
+  */
 	// Source: DOM Standard (https://dom.spec.whatwg.org/)
 	// Document includes NonElementParentNode;
-
+	DKString _getElementById = "DKRmlDocument::getElementById()";
+	virtual const DKString& getElementById(const DOMString& elementId) {
+		DKDEBUGFUNC(elementId);
+		return _getElementById;
+	}
+/*
 	// Source: DOM Standard (https://dom.spec.whatwg.org/)
 	// Document includes DocumentOrShadowRoot;
 

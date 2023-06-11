@@ -7,10 +7,11 @@
 #include "DKNode/DKNode.h"
 #include "DKNonElementParentNode/DKNonElementParentNode.h"
 
+
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // [Exposed=Window]
 // interface Document : Node {
-class DKDocument : public DKNode
+class DKDocument : public DKNode, public DKNonElementParentNode
 {
 public:
 	// constructor();
@@ -203,6 +204,7 @@ public:
   
 	// Source: DOM Standard (https://dom.spec.whatwg.org/)
 	// Document includes NonElementParentNode;
+	//friend class DKNonElementParentNode;
 
 	// Source: DOM Standard (https://dom.spec.whatwg.org/)
 	// Document includes DocumentOrShadowRoot;

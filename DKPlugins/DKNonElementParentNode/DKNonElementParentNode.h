@@ -4,6 +4,7 @@
 #ifndef DKNonElementParentNode_H
 #define DKNonElementParentNode_H
 
+#include "DKInterface/DKInterface.h"
 //#include "DKMixin/DKMixin.h"
 
 
@@ -13,13 +14,13 @@ class DKNonElementParentNode //: public DKMixin
 {
 public:
 	// Element? getElementById(DOMString elementId);
-	DKString _getElementById = "";
+	DKString _getElementById = "DKNonElementParentNode::getElementById()";
 	virtual const DKString& getElementById(const DOMString& elementId) {
 		DKDEBUGFUNC(elementId);
 		return _getElementById;
 	}
 
 // };
-}
+};
 
 #endif // NonElementParentNode_H
