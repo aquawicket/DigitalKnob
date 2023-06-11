@@ -31,6 +31,7 @@ dk_depend(DKURL)
 dk_depend(DKLocation)
 
 dk_depend(DKNode)
+dk_depend(DKNonElementParentNode)
 dk_depend(DKDocument)
 dk_depend(DKElement)
 dk_depend(DKHTMLCollection)
