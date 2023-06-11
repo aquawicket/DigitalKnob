@@ -76,10 +76,10 @@ public:
 		// function
 		
 		// readonly attribute Node? parentNode;
-		console.log("node.parentNode() = "								+toString(node.parentNode()));
+		//console.log("node.parentNode() = "							+toString(node.parentNode()));
 		
 		// readonly attribute Element? parentElement;
-		console.log("node.parentElement() = "							+toString(node.parentElement()));
+		//console.log("node.parentElement() = "							+toString(node.parentElement()));
 		
 		// boolean hasChildNodes();
 		// function
@@ -88,16 +88,16 @@ public:
 		console.log("node.childNodes() = "								+toString(node.childNodes()));
 		
 		// readonly attribute Node? firstChild;
-		console.log("node.firstChild() = "								+toString(node.firstChild()));
+		//console.log("node.firstChild() = "								+toString(node.firstChild()));
 		
 		// readonly attribute Node? lastChild;
-		console.log("node.lastChild() = "								+toString(node.lastChild()));
+		//console.log("node.lastChild() = "								+toString(node.lastChild()));
 		
 		// readonly attribute Node? previousSibling;
-		console.log("node.previousSibling() = "							+toString(node.previousSibling()));
+		//console.log("node.previousSibling() = "							+toString(node.previousSibling()));
 		
 		// readonly attribute Node? nextSibling;
-		console.log("node.nextSibling() = "								+toString(node.nextSibling()));
+		//console.log("node.nextSibling() = "								+toString(node.nextSibling()));
 		
 		// [CEReactions] attribute DOMString? nodeValue;
 		console.log("node.nodeValue() = "								+toString(node.nodeValue()));
