@@ -288,8 +288,8 @@ public:
 	static int getElementsByTagName(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString qualifiedName = GetString(ctx);
-		DKString _getElementsByTagName = eventTarget(ctx)->getElementsByTagName(qualifiedName);
-		dukglue_push(ctx, _getElementsByTagName);	
+		DKHTMLCollection* _getElementsByTagName = eventTarget(ctx)->getElementsByTagName(qualifiedName);
+		dukglue_push(ctx, pointerToAddress(_getElementsByTagName));	
 		return true;
 	}
 	
@@ -298,8 +298,8 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString _namespace = GetString(ctx);
 		DKString localName = GetString(ctx, 2);
-		DKString _getElementsByTagNameNS = eventTarget(ctx)->getElementsByTagNameNS(_namespace, localName);
-		dukglue_push(ctx, _getElementsByTagNameNS);	
+		DKHTMLCollection* _getElementsByTagNameNS = eventTarget(ctx)->getElementsByTagNameNS(_namespace, localName);
+		dukglue_push(ctx, pointerToAddress(_getElementsByTagNameNS));	
 		return true;
 	}
 	
@@ -307,8 +307,8 @@ public:
 	static int getElementsByClassName(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString classNames = GetString(ctx);
-		DKString _getElementsByClassName = eventTarget(ctx)->getElementsByClassName(classNames);
-		dukglue_push(ctx, _getElementsByClassName);	
+		DKHTMLCollection* _getElementsByClassName = eventTarget(ctx)->getElementsByClassName(classNames);
+		dukglue_push(ctx, pointerToAddress(_getElementsByClassName));	
 		return true;
 	}
 	

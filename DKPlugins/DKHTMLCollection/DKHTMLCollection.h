@@ -5,6 +5,7 @@
 #define DKHTMLCollection_H
 
 #include "DKInterface/DKInterface.h"
+#include "DKElement/DKElement.h"
 
 
 // [Exposed=Window, LegacyUnenumerableNamedProperties]
@@ -24,10 +25,18 @@ public:
 	virtual void length(const unsigned int& length)		{ _length = length; } 	// setter
 	
 	// getter Element? item(unsigned long index);
-	// TODO
+	DKElement* _item = NULL;
+	virtual DKElement* item(const unsigned int& index){
+		DKDEBUGFUNC(index);
+		return _item;
+	}
 	
 	// getter Element? namedItem(DOMString name);
-	// TODO
+	DKElement* _namedItem = NULL;
+	virtual DKElement* namedItem(const DOMString& name){
+		DKDEBUGFUNC(name);
+		return _namedItem;
+	}
 	
 //};
 };

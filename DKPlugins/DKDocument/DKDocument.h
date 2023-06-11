@@ -6,7 +6,7 @@
 
 #include "DKNode/DKNode.h"
 #include "DKNonElementParentNode/DKNonElementParentNode.h"	// mixin
-//#include "DKHTMLCollection/DKHTMLCollection.h"			// TODO
+#include "DKHTMLCollection/DKHTMLCollection.h"
 
 
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
@@ -74,22 +74,22 @@ public:
 	virtual void documentElement(const DKElement* documentElement)	{ _documentElement = documentElement; } 	// setter
 	
 	// HTMLCollection getElementsByTagName(DOMString qualifiedName);
-	DKString _getElementsByTagName = "";
-	virtual const DKString& getElementsByTagName(const DOMString& qualifiedName){
+	DKHTMLCollection* _getElementsByTagName = NULL;
+	virtual DKHTMLCollection* getElementsByTagName(const DOMString& qualifiedName){
 		DKDEBUGFUNC(qualifiedName);
 		return _getElementsByTagName;
 	}
 	
 	// HTMLCollection getElementsByTagNameNS(DOMString? namespace, DOMString localName);
-	DKString _getElementsByTagNameNS = "";
-	virtual const DKString& getElementsByTagNameNS(const DOMString& _namespace, const DOMString& localName){
+	DKHTMLCollection* _getElementsByTagNameNS = NULL;
+	virtual DKHTMLCollection* getElementsByTagNameNS(const DOMString& _namespace, const DOMString& localName){
 		DKDEBUGFUNC(_namespace, localName);
 		return _getElementsByTagNameNS;
 	}
 	
 	// HTMLCollection getElementsByClassName(DOMString classNames);
-	DKString _getElementsByClassName = "";
-	virtual const DKString& getElementsByClassName(const DOMString& classNames){
+	DKHTMLCollection* _getElementsByClassName = NULL;
+	virtual DKHTMLCollection* getElementsByClassName(const DOMString& classNames){
 		DKDEBUGFUNC(classNames);
 		return _getElementsByClassName;
 	}
