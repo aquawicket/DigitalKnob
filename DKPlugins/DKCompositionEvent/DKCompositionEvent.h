@@ -38,7 +38,12 @@ public:
 	// optional boolean cancelableArg = false,
 	// optional WindowProxy? viewArg = null,
 	// optional DOMString dataArg = "");
-	virtual void initCompositionEvent(const DOMString& typeArg, const bool& bubblesArg, const bool& cancelableArg, const DKString& viewArg, const DOMString& dataArg) {
+	virtual void initCompositionEvent(
+		const DOMString& typeArg, 
+		const bool& bubblesArg = false;, 
+		const bool& cancelableArg = false, 
+		const DKString& viewArg,
+		const DOMString& dataArg) {
 		DKDEBUGFUNC(typeArg, bubblesArg, cancelableArg, viewArg, dataArg);
 		DKTODO();
 	}
