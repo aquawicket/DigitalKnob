@@ -14,9 +14,10 @@ class DKNonElementParentNode //: public DKMixin
 {
 public:
 	// Element? getElementById(DOMString elementId);
-	DKString _getElementById = "DKNonElementParentNode::getElementById()";
+	DKString _getElementById = "";
 	virtual const DKString& getElementById(const DOMString& elementId) {
 		DKDEBUGFUNC(elementId);
+		DKTODO();
 		return _getElementById;
 	}
 
