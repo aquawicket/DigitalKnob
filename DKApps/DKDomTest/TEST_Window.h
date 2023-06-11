@@ -30,13 +30,13 @@ public:
 		console.log("window.self() = "				+toString(window.self()));
 		
 		// [LegacyUnforgeable] readonly attribute Document document;
-		console.log("window.document() = "			+toString(window.document()));
+		//console.log("window.document() = "			+toString(window.document()));
 		
 		// attribute DOMString name;
 		console.log("window.name() = "				+toString(window.name()));
 		
 		// [PutForwards=href, LegacyUnforgeable] readonly attribute Location location;
-		console.log("window.location() = "			+toString(window.location()));
+		//console.log("window.location() = "			+toString(window.location()));
 
 		// readonly attribute History history;
 		console.log("window.history() = "			+toString(window.history()));
@@ -97,7 +97,7 @@ public:
 		console.log("window.parent() = "			+toString(window.parent()));
 		
 		// readonly attribute Element? frameElement;
-		console.log("window.frameElement() = "		+toString(window.frameElement()));
+		//console.log("window.frameElement() = "		+toString(window.frameElement()));
 		
 		// WindowProxy? open(optional USVString url = "", optional DOMString target = "_blank", optional [LegacyNullToEmptyString] DOMString features = "");
 		// function
@@ -110,10 +110,10 @@ public:
 		
 		// the user agent
 		// readonly attribute Navigator navigator;
-		console.log("window.navigator() = "			+toString(window.navigator()));
+		//console.log("window.navigator() = "			+toString(window.navigator()));
 		
 		// readonly attribute Navigator clientInformation; // legacy alias of .navigator
-		console.log("window.clientInformation() = "	+toString(window.clientInformation()));
+		//console.log("window.clientInformation() = "	+toString(window.clientInformation()));
 		
 		// readonly attribute boolean originAgentCluster;
 		console.log("window.originAgentCluster() = "+toString(window.originAgentCluster()));

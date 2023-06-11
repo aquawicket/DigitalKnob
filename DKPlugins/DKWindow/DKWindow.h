@@ -252,9 +252,9 @@ public:
 	// Source: DOM Standard (https://dom.spec.whatwg.org/)
 	// partial interface Window {
 	//		[Replaceable] readonly attribute (Event or undefined) event; // legacy
-			DKString _event = "";
-			virtual const DKString& event()											{ return _event; }									// getter
-			virtual void event(const DKString& event)								{ _event = event; } 								// setter
+			DKEvent* _event = NULL;
+			virtual DKEvent* event()												{ return _event; }									// getter
+			virtual void event(DKEvent* event)										{ _event = event; } 								// setter
 	// };
 	
 	// Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
@@ -414,7 +414,7 @@ public:
 	// partial interface Window {
 	//		[NewObject] CSSStyleDeclaration getComputedStyle(Element elt, optional CSSOMString? pseudoElt);
 			DKString _getComputedStyle = "";
-			virtual const DKString& getComputedStyle(const DKString& elt, const DKString& pseudoElt = "") {
+			virtual const DKString& getComputedStyle(DKElement* elt, const DKString& pseudoElt = "") {
 				DKDEBUGFUNC(elt, pseudoElt);
 				DKTODO();
 				return _getComputedStyle;
@@ -433,8 +433,8 @@ public:
 			
 	//		[SameObject, Replaceable] readonly attribute Screen screen;
 			DKScreen* _screen = NULL;
-			virtual DKScreen& screen()									{ return *_screen; }					// getter
-			virtual void screen(DKScreen& screen)						{ _screen = &screen; } 					// setter
+			virtual DKScreen* screen()									{ return _screen; }						// getter
+			virtual void screen(DKScreen* screen)						{ _screen = screen; } 					// setter
 			
 	//		[SameObject, Replaceable] readonly attribute VisualViewport? visualViewport;
 			DKString _visualViewport = "";
