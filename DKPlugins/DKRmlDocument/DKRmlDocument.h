@@ -6,6 +6,7 @@
 
 #include "DKDocument/DKDocument.h"
 #include "DKRmlInterface/DKRmlInterface.h"
+#include "DKRmlElement/DKRmlElement.h"
 
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // [Exposed=Window]
@@ -215,6 +216,8 @@ public:
 	virtual const DKElement* getElementById(const DOMString& elementId) {
 		DKDEBUGFUNC(elementId);
 		Rml::Element* element = _dkRmlInterface->document->GetElementById(elementId.c_str());
+		//TODO:  need to get a DKElement* from element.
+		_getElementById = new DKRmlElement(_dkRmlInterface, element);
 		DKTODO();
 		return _getElementById;
 	}

@@ -174,7 +174,7 @@ bool App::Init() {
 	test_DKRmlDocument = std::make_unique<TEST_DKRmlDocument>();
 
 	// [DKRmlElement]
-	test_DKRmlElement = std::make_unique<TEST_DKRmlElement>();
+	//test_DKRmlElement = std::make_unique<TEST_DKRmlElement>();
 	
 	return true;
 }

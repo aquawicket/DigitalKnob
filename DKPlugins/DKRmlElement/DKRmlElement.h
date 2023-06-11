@@ -13,13 +13,15 @@ class DKRmlElement : public DKElement
 {
 public:
 	DKRmlInterface* _dkRmlInterface;
+	Rml::Element* _rmlElement;
 	
-	DKRmlElement(DKRmlInterface* dkRmlInterface) : DKElement() {
+	DKRmlElement(DKRmlInterface* dkRmlInterface, Rml::Element* rmlElement) : DKElement() {
 		DKDEBUGFUNC();
 		interfaceName = "DKRmlElement";
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKRmlElement("+interfaceAddress+") \n");
 		_dkRmlInterface = dkRmlInterface;
+		_rmlElement = rmlElement;
 	}
 	
 	virtual ~DKRmlElement() {}
