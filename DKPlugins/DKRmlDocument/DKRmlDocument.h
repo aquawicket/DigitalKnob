@@ -214,6 +214,7 @@ public:
 	DKElement* _getElementById = NULL;
 	virtual const DKElement* getElementById(const DOMString& elementId) {
 		DKDEBUGFUNC(elementId);
+		Rml::Element* element = _dkRmlInterface->document->GetElementById(elementId.c_str());
 		DKTODO();
 		return _getElementById;
 	}
