@@ -5,6 +5,7 @@
 #define DKDocument_H
 
 #include "DKNode/DKNode.h"
+#include "DKNonElementParentNode/DKNonElementParentNode.h"
 
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // [Exposed=Window]
