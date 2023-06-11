@@ -6,6 +6,7 @@
 
 #include "DKEventTarget/DKEventTarget.h"
 class DKDocument;
+class DKElement;
 
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // [Exposed=Window]
@@ -102,26 +103,26 @@ public:
 	virtual void isConnected(const bool& isConnected)				{ _isConnected = isConnected; } 		// setter
 	
 	// readonly attribute Document? ownerDocument;
-	//DKDocument* _ownerDocument = NULL;
-	virtual DKDocument* ownerDocument()								{ return NULL; }						// getter
-	virtual void ownerDocument(DKDocument* ownerDocument)			{  }	 								// setter
+	DKDocument* _ownerDocument = NULL;
+	virtual DKDocument* ownerDocument()								{ return _ownerDocument; }				// getter
+	virtual void ownerDocument(DKDocument* ownerDocument)			{ _ownerDocument = ownerDocument; }	 	// setter
 	
 	// Node getRootNode(optional GetRootNodeOptions options = {});
-	DKString _getRootNode = "";
-	virtual const DKString& getRootNode(const DKString& options = "{}") {
+	DKNode* _getRootNode = NULL;
+	virtual DKNode* getRootNode(const DKString& options = "{}") {
 		DKDEBUGFUNC(options);
 		return _getRootNode;
 	}
 	
 	// readonly attribute Node? parentNode;
-	DKString _parentNode = "";
-	virtual const DKString& parentNode()							{ return _parentNode; }					// getter
-	virtual void parentNode(const DKString& parentNode)				{ _parentNode = parentNode; } 			// setter
+	DKNode* _parentNode = NULL;
+	virtual DKNode* parentNode()									{ return _parentNode; }					// getter
+	virtual void parentNode(DKNode* parentNode)						{ _parentNode = parentNode; } 			// setter
 	
 	// readonly attribute Element? parentElement;
-	DKString _parentElement = "";
-	virtual const DKString& parentElement()							{ return _parentElement; }				// getter
-	virtual void parentElement(const DKString& parentElement)		{ _parentElement = parentElement; } 	// setter
+	DKElement* _parentElement = NULL;
+	virtual DKElement* parentElement()								{ return _parentElement; }				// getter
+	virtual void parentElement(DKElement* parentElement)			{ _parentElement = parentElement; } 	// setter
 	
 	// boolean hasChildNodes();
 	virtual bool hasChildNodes(bool& _hasChildNodes) {
@@ -135,24 +136,24 @@ public:
 	virtual void childNodes(const DKString& childNodes)				{ _childNodes = childNodes; } 			// setter
 	
 	// readonly attribute Node? firstChild;
-	DKString _firstChild = "";
-	virtual const DKString& firstChild()							{ return _firstChild; }					// getter
-	virtual void firstChild(const DKString& firstChild)				{ _firstChild = firstChild; } 			// setter
+	DKNode* _firstChild = NULL;
+	virtual DKNode* firstChild()									{ return _firstChild; }					// getter
+	virtual void firstChild(DKNode* firstChild)						{ _firstChild = firstChild; } 			// setter
 	
 	// readonly attribute Node? lastChild;
-	DKString _lastChild = "";
-	virtual const DKString& lastChild()								{ return _lastChild; }					// getter
-	virtual void lastChild(const DKString& lastChild)				{ _lastChild = lastChild; } 			// setter
+	DKNode* _lastChild = NULL;
+	virtual DKNode* lastChild()										{ return _lastChild; }					// getter
+	virtual void lastChild(DKNode* lastChild)						{ _lastChild = lastChild; } 			// setter
 	
 	// readonly attribute Node? previousSibling;
-	DKString _previousSibling = "";
-	virtual const DKString& previousSibling()						{ return _previousSibling; }			// getter
-	virtual void previousSibling(const DKString& previousSibling)	{ _previousSibling = previousSibling; } // setter
+	DKNode* _previousSibling = NULL;
+	virtual DKNode* previousSibling()								{ return _previousSibling; }			// getter
+	virtual void previousSibling(DKNode* previousSibling)			{ _previousSibling = previousSibling; } // setter
 	
 	// readonly attribute Node? nextSibling;
-	DKString _nextSibling = "";
-	virtual const DKString& nextSibling()							{ return _nextSibling; }				// getter
-	virtual void nextSibling(const DKString& nextSibling)			{ _nextSibling = nextSibling; } 		// setter
+	DKNode* _nextSibling = NULL;
+	virtual DKNode* nextSibling()									{ return _nextSibling; }				// getter
+	virtual void nextSibling(DKNode* nextSibling)					{ _nextSibling = nextSibling; } 		// setter
 
 	// [CEReactions] attribute DOMString? nodeValue;
 	DKString _nodeValue = "";
@@ -171,22 +172,22 @@ public:
 	}
 
 	// [CEReactions, NewObject] Node cloneNode(optional boolean deep = false);
-	DKString _cloneNode = "";
-	virtual const DKString& cloneNode(const bool& deep = false) {
+	DKNode* _cloneNode = NULL;
+	virtual DKNode* cloneNode(const bool& deep = false) {
 		DKDEBUGFUNC(deep);
 		return _cloneNode;
 	}
 	
 	// boolean isEqualNode(Node? otherNode);
 	bool _isEqualNode = false;
-	virtual const bool& isEqualNode(const DKString& otherNode) {
+	virtual const bool& isEqualNode(DKNode* otherNode) {
 		DKDEBUGFUNC(otherNode);
 		return _isEqualNode;
 	}
 	
 	// boolean isSameNode(Node? otherNode); // legacy alias of ===
 	bool _isSameNode = false;
-	virtual const bool& isSameNode(const DKString& otherNode) {
+	virtual const bool& isSameNode(DKNode* otherNode) {
 		DKDEBUGFUNC(otherNode);
 		return _isSameNode;
 	}
@@ -223,14 +224,14 @@ public:
 	
 	// unsigned short compareDocumentPosition(Node other);
 	unsigned short _compareDocumentPosition = 0;
-	virtual const unsigned short& compareDocumentPosition(const DKString& other) {
+	virtual const unsigned short& compareDocumentPosition(DKNode* other) {
 		DKDEBUGFUNC(other);
 		return _compareDocumentPosition;
 	}
 	
 	// boolean contains(Node? other);
 	bool _contains = false;
-	virtual const bool& contains(const DKString& other) {
+	virtual const bool& contains(DKNode* other) {
 		DKDEBUGFUNC(other);
 		return _contains;
 	}
@@ -257,29 +258,29 @@ public:
 	}
 	
 	// [CEReactions] Node insertBefore(Node node, Node? child);
-	DKString _insertBefore = "";
-	virtual const DKString& insertBefore(const DKString& node, const DKString& child) {
+	DKNode* _insertBefore = NULL;
+	virtual DKNode* insertBefore(DKNode* node, DKNode* child) {
 		DKDEBUGFUNC(node, child);
 		return _insertBefore;
 	}
 	
 	// [CEReactions] Node appendChild(Node node);
-	DKString _appendChild = "";
-	virtual const DKString& appendChild(const DKString& node) {
+	DKNode* _appendChild = NULL;
+	virtual DKNode* appendChild(DKNode* node) {
 		DKDEBUGFUNC(node);
 		return _appendChild;
 	}
 	
 	// [CEReactions] Node replaceChild(Node node, Node child);
-	DKString _replaceChild = "";
-	virtual const DKString& replaceChild(const DKString& node, const DKString& child) {
+	DKNode* _replaceChild = NULL;
+	virtual DKNode* replaceChild(DKNode* node, DKNode* child) {
 		DKDEBUGFUNC(node, child);
 		return _replaceChild;
 	}
 	
 	// [CEReactions] Node removeChild(Node child);
-	DKString _removeChild = "";
-	virtual const DKString& removeChild(const DKString& child) {
+	DKNode* _removeChild = NULL;
+	virtual DKNode* removeChild(DKNode* child) {
 		DKDEBUGFUNC(child);
 		return _removeChild;
 	}

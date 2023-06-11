@@ -339,8 +339,8 @@ public:
 	static int getRootNode(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		const DKString options = GetString(ctx);
-		const DKString& node = eventTarget(ctx)->getRootNode(options);
-		dukglue_push(ctx, node);	
+		DKNode* getRootNode = eventTarget(ctx)->getRootNode(options);
+		dukglue_push(ctx, pointerToAddress(getRootNode));	
 		return true;
 	}
 	
@@ -348,8 +348,8 @@ public:
 	static int parentNode(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->parentNode(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->parentNode());
+			eventTarget(ctx)->parentNode((DKNode*)addressToPointer(GetString(ctx)));
+		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->parentNode()));
 		return true;
 	}
 	
@@ -357,8 +357,8 @@ public:
 	static int parentElement(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->parentElement(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->parentElement());
+			eventTarget(ctx)->parentElement((DKElement*)addressToPointer(GetString(ctx)));
+		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->parentElement()));
 		return true;
 	}
 	
@@ -385,8 +385,8 @@ public:
 	static int firstChild(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->firstChild(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->firstChild());
+			eventTarget(ctx)->firstChild((DKNode*)addressToPointer(GetString(ctx)));
+		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->firstChild()));
 		return true;
 	}
 	
@@ -394,8 +394,8 @@ public:
 	static int lastChild(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->lastChild(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->lastChild());
+			eventTarget(ctx)->lastChild((DKNode*)addressToPointer(GetString(ctx)));
+		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->lastChild()));
 		return true;
 	}
 	
@@ -403,8 +403,8 @@ public:
 	static int previousSibling(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->previousSibling(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->previousSibling());
+			eventTarget(ctx)->previousSibling((DKNode*)addressToPointer(GetString(ctx)));
+		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->previousSibling()));
 		return true;
 	}
 	
@@ -412,8 +412,8 @@ public:
 	static int nextSibling(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->nextSibling(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->nextSibling());
+			eventTarget(ctx)->nextSibling((DKNode*)addressToPointer(GetString(ctx)));
+		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->nextSibling()));
 		return true;
 	}
 	
@@ -446,15 +446,16 @@ public:
 	static int cloneNode(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		bool deep = GetBool(ctx);
-		DKString node = eventTarget(ctx)->cloneNode(deep);
-		dukglue_push(ctx, node);	
+		DKNode* node = eventTarget(ctx)->cloneNode(deep);
+		dukglue_push(ctx, pointerToAddress(node));	
 		return true;
 	}
 	
 	// boolean isEqualNode(Node? otherNode);
 	static int isEqualNode(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString otherNode = GetString(ctx);
+		DKString otherNodeAddress = GetString(ctx);
+		DKNode* otherNode = (DKNode*)addressToPointer(otherNodeAddress);
 		bool isEqualNode = eventTarget(ctx)->isEqualNode(otherNode);
 		dukglue_push(ctx, isEqualNode);	
 		return true;
@@ -463,7 +464,8 @@ public:
 	// boolean isSameNode(Node? otherNode); // legacy alias of ===
 	static int isSameNode(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString otherNode = GetString(ctx);
+		DKString otherNodeAddress = GetString(ctx);
+		DKNode* otherNode = (DKNode*)addressToPointer(otherNodeAddress);
 		bool isSameNode = eventTarget(ctx)->isSameNode(otherNode);
 		dukglue_push(ctx, isSameNode);	
 		return true;
@@ -514,7 +516,8 @@ public:
 	// unsigned short compareDocumentPosition(Node other);
 	static int compareDocumentPosition(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString other = GetString(ctx);
+		DKString otherAddress = GetString(ctx);
+		DKNode* other = (DKNode*)addressToPointer(otherAddress);
 		unsigned short compareDocumentPosition = eventTarget(ctx)->compareDocumentPosition(other);
 		dukglue_push(ctx, compareDocumentPosition);	
 		return true;
@@ -523,7 +526,8 @@ public:
 	// boolean contains(Node? other);
 	static int contains(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString other = GetString(ctx);
+		DKString otherAddress = GetString(ctx);
+		DKNode* other = (DKNode*)addressToPointer(otherAddress);
 		bool contains = eventTarget(ctx)->contains(other);
 		dukglue_push(ctx, contains);	
 		return true;
@@ -559,38 +563,44 @@ public:
 	// [CEReactions] Node insertBefore(Node node, Node? child);
 	static int insertBefore(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString node = GetString(ctx);
-		DKString child = GetString(ctx, 2);
-		DKString insertBefore = eventTarget(ctx)->insertBefore(node, child);
-		dukglue_push(ctx, insertBefore);	
+		DKString nodeAddress = GetString(ctx);
+		DKNode* node = (DKNode*)addressToPointer(nodeAddress);
+		DKString childAddress = GetString(ctx, 2);
+		DKNode* child = (DKNode*)addressToPointer(childAddress);
+		DKNode* insertBefore = eventTarget(ctx)->insertBefore(node, child);
+		dukglue_push(ctx, pointerToAddress(insertBefore));	
 		return true;
 	}
 	
 	// [CEReactions] Node appendChild(Node node);
 	static int appendChild(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString node = GetString(ctx);
-		DKString appendChild = eventTarget(ctx)->appendChild(node);
-		dukglue_push(ctx, appendChild);	
+		DKString nodeAddress = GetString(ctx);
+		DKNode* node = (DKNode*)addressToPointer(nodeAddress);
+		DKNode* appendChild = eventTarget(ctx)->appendChild(node);
+		dukglue_push(ctx, pointerToAddress(appendChild));	
 		return true;
 	}
 	
 	// [CEReactions] Node replaceChild(Node node, Node child);
 	static int replaceChild(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString node = GetString(ctx);
-		DKString child = GetString(ctx, 2);
-		DKString replaceChild = eventTarget(ctx)->replaceChild(node, child);
-		dukglue_push(ctx, replaceChild);	
+		DKString nodeAddress = GetString(ctx);
+		DKNode* node = (DKNode*)addressToPointer(nodeAddress);
+		DKString childAddress = GetString(ctx, 2);
+		DKNode* child = (DKNode*)addressToPointer(childAddress);
+		DKNode* replaceChild = eventTarget(ctx)->replaceChild(node, child);
+		dukglue_push(ctx, pointerToAddress(replaceChild));	
 		return true;
 	}
 	
 	// [CEReactions] Node removeChild(Node child);
 	static int removeChild(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString node = GetString(ctx);
-		DKString removeChild = eventTarget(ctx)->removeChild(node);
-		dukglue_push(ctx, removeChild);	
+		DKString childAddress = GetString(ctx, 2);
+		DKNode* child = (DKNode*)addressToPointer(childAddress);
+		DKNode* removeChild = eventTarget(ctx)->removeChild(child);
+		dukglue_push(ctx, pointerToAddress(removeChild));	
 		return true;
 	}
 };
