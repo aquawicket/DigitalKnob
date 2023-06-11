@@ -70,7 +70,7 @@ public:
 		console.log("node.isConnected() = "								+toString(node.isConnected()));
 		
 		// readonly attribute Document? ownerDocument;
-		console.log("node.ownerDocument() = "							+toString(node.ownerDocument()));
+		//console.log("node.ownerDocument() = "							+toString(node.ownerDocument()));
 		
 		// Node getRootNode(optional GetRootNodeOptions options = {});
 		// function
