@@ -211,8 +211,8 @@ public:
   */
 	// Source: DOM Standard (https://dom.spec.whatwg.org/)
 	// Document includes NonElementParentNode;
-	DKString _getElementById = "";
-	virtual const DKString& getElementById(const DOMString& elementId) {
+	DKElement* _getElementById = NULL;
+	virtual const DKElement* getElementById(const DOMString& elementId) {
 		DKDEBUGFUNC(elementId);
 		DKTODO();
 		return _getElementById;
