@@ -40,10 +40,10 @@ public:
 	// optional DOMString dataArg = "");
 	virtual void initCompositionEvent(
 		const DOMString& typeArg, 
-		const bool& bubblesArg = false;, 
-		const bool& cancelableArg = false, 
+		const bool& bubblesArg, 
+		const bool& cancelableArg, 
 		const DKString& viewArg,
-		const DOMString& dataArg) {
+		const DOMString& dataArg = "") {
 		DKDEBUGFUNC(typeArg, bubblesArg, cancelableArg, viewArg, dataArg);
 		DKTODO();
 	}

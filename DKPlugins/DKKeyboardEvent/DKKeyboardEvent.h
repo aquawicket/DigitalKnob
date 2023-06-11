@@ -119,7 +119,7 @@ public:
 		const DOMString& typeArg,
 		const bool& bubblesArg = false,
 		const bool& cancelableArg = false,
-		DKWinow* viewArg = NULL,
+		DKWindow* viewArg = NULL,
 		const DOMString& keyArg = "",
 		const unsigned int& locationArg = 0,
 		const bool& ctrlKey = false,
