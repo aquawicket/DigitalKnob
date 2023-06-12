@@ -47,7 +47,7 @@ public:
 	
 	// readonly attribute EventTarget? target;
 	DKEventTarget* _target = NULL;
-	virtual DKEventTarget& target()																{ return *_target; }						// getter
+	virtual DKEventTarget& 		target()														{ return *_target; }						// getter
 	virtual void 				target(DKEventTarget& target)									{ _target = &target; } 						// setter
 	
 	// readonly attribute EventTarget? srcElement; // legacy
@@ -57,8 +57,8 @@ public:
 	
 	// readonly attribute EventTarget? currentTarget;
 	DKEventTarget* _currentTarget = NULL;
-	virtual DKEventTarget* 		currentTarget()													{ return _currentTarget; }					// getter
-	virtual void 				currentTarget(DKEventTarget* currentTarget) 					{ _currentTarget = currentTarget; }			// setter
+	virtual DKEventTarget& 		currentTarget()													{ return *_currentTarget; }					// getter
+	virtual void 				currentTarget(DKEventTarget& currentTarget) 					{ _currentTarget = &currentTarget; }		// setter
 	
 	// sequence<EventTarget> composedPath();
 	DKString _composedPath = "";

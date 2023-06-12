@@ -77,7 +77,7 @@ public:
 			if(eventObj.type == event.type() && eventObj.interfaceAddress == interfaceAddress){
 				//DKINFO("		event("+event.type()+") \n");	
 			
-				event.currentTarget(this);
+				event.currentTarget(*this);
 				event.target(*this);
 				event.srcElement(*this);
 				
