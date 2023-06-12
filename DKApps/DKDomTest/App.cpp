@@ -124,7 +124,7 @@ bool App::Init() {
 	// [HTMLCollection]
 	//DKClass::DKCreate("TEST_HTMLCollection");																	// DKObjectT
 	//TEST_HTMLCollection* test_HTMLCollection = new TEST_HTMLCollection();										// pointer
-	std::unique_ptr<TEST_HTMLCollection> test_HTMLCollection = std::make_unique<TEST_HTMLCollection>();			// smart pointer (unique)
+	//std::unique_ptr<TEST_HTMLCollection> test_HTMLCollection = std::make_unique<TEST_HTMLCollection>();		// smart pointer (unique)
 	
 	// [HTMLElement]
 	//DKClass::DKCreate("TEST_HTMLElement");																	// DKObjectT
