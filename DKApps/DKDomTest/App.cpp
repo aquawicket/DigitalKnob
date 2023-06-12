@@ -29,13 +29,12 @@ bool App::Init() {
 	//TEST_EventTarget* test_EventTarget = new TEST_EventTarget();												// pointer
 	std::unique_ptr<TEST_EventTarget> test_EventTarget = std::make_unique<TEST_EventTarget>();					// smart pointer (unique)
 	
-	/*
 	// [CustomEvent]
 	//DKClass::DKCreate("TEST_CustomEvent");																	// DKObjectT
 	//TEST_CustomEvent* test_CustomEvent = new TEST_CustomEvent();												// pointer
 	std::unique_ptr<TEST_CustomEvent> test_CustomEvent = std::make_unique<TEST_CustomEvent>();					// smart pointer (unique)
 	
-	
+	/*
 	// [UIEvent]
 	//DKClass::DKCreate("TEST_UIEvent");																		// DKObjectT
 	//TEST_UIEvent* test_UIEvent = new TEST_UIEvent();															// pointer

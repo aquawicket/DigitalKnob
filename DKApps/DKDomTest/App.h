@@ -11,8 +11,8 @@
 #include "TEST_Console.h"
 #include "TEST_Event.h"
 #include "TEST_EventTarget.h"
-/*
 #include "TEST_CustomEvent.h"
+/*
 #include "TEST_UIEvent.h"
 #include "TEST_FocusEvent.h"
 #include "TEST_MouseEvent.h"
@@ -57,7 +57,7 @@ public:
 	bool End();
 	
 	/*
-	std::unique_ptr<TEST_DKConsoleWindow> 	test_DKConsoleWindow;
+	std::unique_ptr<TEST_DKConsoleWindow> 		test_DKConsoleWindow;
 	
 	std::unique_ptr<TEST_DKSdlWindow> 			test_DKSdlWindow;
 	

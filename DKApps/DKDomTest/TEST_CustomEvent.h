@@ -33,7 +33,7 @@ public:
 		// undefined initCustomEvent(DOMString type, optional boolean bubbles = false, optional boolean cancelable = false, optional any detail = null); // legacy
 		// function
 		
-		TEST_Event::printEventProperties(dynamic_cast<DKEvent&>(customEvent));	//TODO: try to remove the need for dynamic_cast
+		TEST_Event::printEventProperties(customEvent);
 	}
 	
 	static bool onCustomEvent(DKEvent& event) {
