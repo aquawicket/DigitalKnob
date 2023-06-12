@@ -102,12 +102,10 @@ public:
 	}
 	*/
 	// [CEReactions, NewObject] Element createElement(DOMString localName, optional (DOMString or ElementCreationOptions) options = {});
-	DKElement* _createElement = NULL;
-	virtual DKElement* createElement(const DOMString& localName, const DKString& options = "{}"){
+	virtual DKElement* createElement(const DOMString& localName, const DOMString& options = "{}"){
 		DKDEBUGFUNC(localName, options);
 		Rml::Element* element = _dkRmlInterface->document->AppendChild(_dkRmlInterface->document->CreateElement(localName.c_str()), false);
-		_createElement = new DKRmlElement(_dkRmlInterface, element);	// FIXME: danggling pointer
-		return _createElement;
+		return new DKRmlElement(_dkRmlInterface, element);		// FIXME: danggling pointer
 	}
 	/*
 	// [CEReactions, NewObject] Element createElementNS(DOMString? namespace, DOMString qualifiedName, optional (DOMString or ElementCreationOptions) options = {});
@@ -214,13 +212,10 @@ public:
   */
 	// Source: DOM Standard (https://dom.spec.whatwg.org/)
 	// Document includes NonElementParentNode;
-	DKElement* _getElementById = NULL;
 	virtual DKElement* getElementById(const DOMString& elementId) {
 		DKDEBUGFUNC(elementId);
 		Rml::Element* element = _dkRmlInterface->document->GetElementById(elementId.c_str());
-		_getElementById = new DKRmlElement(_dkRmlInterface, element);		// FIXME: danggling pointer
-		DKTODO();
-		return _getElementById;
+		return  new DKRmlElement(_dkRmlInterface, element);		// FIXME: danggling pointer
 	}
 /*
 	// Source: DOM Standard (https://dom.spec.whatwg.org/)

@@ -440,8 +440,8 @@ public:
 	static int window(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->window(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->window());
+			eventTarget(ctx)->window((DKWindowProxy*)addressToPointer(GetString(ctx)));
+		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->window()));
 		return true;
 	}
 	
@@ -449,8 +449,8 @@ public:
 	static int self(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->self(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->self());
+			eventTarget(ctx)->self((DKWindowProxy*)addressToPointer(GetString(ctx)));
+		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->self()));
 		return true;
 	}
 	
@@ -604,8 +604,8 @@ public:
 	static int frames(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->frames(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->frames());
+			eventTarget(ctx)->frames((DKWindowProxy*)addressToPointer(GetString(ctx)));
+		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->frames()));
 		return true;
 	}
 	
@@ -622,8 +622,8 @@ public:
 	static int top(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->top(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->top());
+			eventTarget(ctx)->top((DKWindowProxy*)addressToPointer(GetString(ctx)));
+		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->top()));
 		return true;
 	}
 	
@@ -640,8 +640,8 @@ public:
 	static int parent(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->parent(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->parent());
+			eventTarget(ctx)->parent((DKWindowProxy*)addressToPointer(GetString(ctx)));
+		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->parent()));
 		return true;
 	}
 	

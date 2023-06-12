@@ -17,7 +17,7 @@ class DKDragEvent : public DKMouseEvent
 {
 public:
 	// constructor(DOMString type, optional DragEventInit eventInitDict = {});
-	DKDragEvent(const DKString& type, const DragEventInit& eventInitDict = "{}") : DKMouseEvent(type, eventInitDict) {
+	DKDragEvent(const DOMString& type, const DragEventInit& eventInitDict = "{}") : DKMouseEvent(type, eventInitDict) {
 		DKINFO("DKDragEvent("+type+", "+eventInitDict+") \n");
 		interfaceName = "DragEvent";
 		interfaceAddress = pointerToAddress(this);

@@ -24,10 +24,10 @@ public:
 		
 		// the current browsing context
 		// [LegacyUnforgeable] readonly attribute WindowProxy window;
-		console.log("window.window() = "			+toString(window.window()));
+		//console.log("window.window() = "			+toString(window.window()));
 	
 		// [Replaceable] readonly attribute WindowProxy self;
-		console.log("window.self() = "				+toString(window.self()));
+		//console.log("window.self() = "				+toString(window.self()));
 		
 		// [LegacyUnforgeable] readonly attribute Document document;
 		//console.log("window.document() = "		+toString(window.document()));
@@ -82,19 +82,19 @@ public:
 		
 		// other browsing contexts
 		// [Replaceable] readonly attribute WindowProxy frames;
-		console.log("window.frames() = "			+toString(window.frames()));
+		//console.log("window.frames() = "			+toString(window.frames()));
 	
 		// [Replaceable] readonly attribute unsigned long length;
 		console.log("window.length() = "			+toString(window.length()));
 		
 		// [LegacyUnforgeable] readonly attribute WindowProxy? top;
-		console.log("window.top() = "				+toString(window.top()));
+		//console.log("window.top() = "				+toString(window.top()));
 		
 		// attribute any opener;
 		console.log("window.opener() = "			+toString(window.opener()));
 		
 		// [Replaceable] readonly attribute WindowProxy? parent;
-		console.log("window.parent() = "			+toString(window.parent()));
+		//console.log("window.parent() = "			+toString(window.parent()));
 		
 		// readonly attribute Element? frameElement;
 		//console.log("window.frameElement() = "		+toString(window.frameElement()));

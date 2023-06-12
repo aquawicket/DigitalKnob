@@ -11,6 +11,10 @@ class DKLocation;
 class DKNavigator;
 class DKElement;
 
+////// WindowProxy //////
+class DKWindow;
+typedef DKWindow DKWindowProxy;
+
 // Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
 // [Global=Window,
 // Exposed=Window,
@@ -28,14 +32,14 @@ public:
 	
 	// the current browsing context
 	// [LegacyUnforgeable] readonly attribute WindowProxy window;
-	DKString _window = "";
-	virtual const DKString& window()							{ return _window; }						// getter
-	virtual void window(const DKString& window)					{ _window = window; }					// setter
+	DKWindowProxy* _window = NULL;
+	virtual DKWindowProxy* window()								{ return _window; }						// getter
+	virtual void window(DKWindowProxy* window)					{ _window = window; }					// setter
 	
 	// [Replaceable] readonly attribute WindowProxy self;
-	DKString _self = "";
-	virtual const DKString& self()								{ return _self; }						// getter
-	virtual void self(const DKString& self)						{ _self = self; } 						// setter
+	DKWindowProxy* _self = NULL;
+	virtual DKWindowProxy* self()								{ return _self; }						// getter
+	virtual void self(DKWindowProxy* self)						{ _self = self; } 						// setter
 	
 	// [LegacyUnforgeable] readonly attribute Document document;
 	DKDocument* _document = NULL;
@@ -128,9 +132,9 @@ public:
 	
 	// other browsing contexts
 	// [Replaceable] readonly attribute WindowProxy frames;
-	DKString _frames = "";
-	virtual const DKString& frames()							{ return _frames; }						// getter
-	virtual void frames(const DKString& frames)					{ _frames = frames; } 					// setter
+	DKWindowProxy* _frames = NULL;
+	virtual DKWindowProxy* frames()								{ return _frames; }						// getter
+	virtual void frames(DKWindowProxy* frames)					{ _frames = frames; } 					// setter
 	
 	// [Replaceable] readonly attribute unsigned long length;
 	unsigned int _length = 0;
@@ -138,9 +142,9 @@ public:
 	virtual void length(const unsigned int& length)				{ _length = length; } 					// setter
 	
 	// [LegacyUnforgeable] readonly attribute WindowProxy? top;
-	DKString _top = "";
-	virtual const DKString& top()								{ return _top; }						// getter
-	virtual void top(const DKString& top)						{ _top = top; } 						// setter
+	DKWindowProxy* _top = NULL;
+	virtual DKWindowProxy* top()								{ return _top; }						// getter
+	virtual void top(DKWindowProxy* top)						{ _top = top; } 						// setter
 	
 	// attribute any opener;
 	DKString _opener = "";
@@ -148,9 +152,9 @@ public:
 	virtual void opener(const DKString& opener)					{ _opener = opener; } 					// setter
 	
 	// [Replaceable] readonly attribute WindowProxy? parent;
-	DKString _parent = "";
-	virtual const DKString& parent()							{ return _parent; }						// getter
-	virtual void parent(const DKString& parent)					{ _parent = parent; } 					// setter
+	DKWindowProxy* _parent = NULL;
+	virtual DKWindowProxy* parent()								{ return _parent; }						// getter
+	virtual void parent(DKWindowProxy* parent)					{ _parent = parent; } 					// setter
 	
 	// readonly attribute Element? frameElement;
 	DKElement* _frameElement = NULL;
@@ -158,8 +162,8 @@ public:
 	virtual void frameElement(DKElement* frameElement)			{ _frameElement = frameElement; } 		// setter
 	
 	// WindowProxy? open(optional USVString url = "", optional DOMString target = "_blank", optional [LegacyNullToEmptyString] DOMString features = "");
-	DKString _open = "";
-	virtual const DKString& open(const USVString& url, const DOMString& target, const DOMString& features) {
+	DKWindowProxy* _open = NULL;
+	virtual DKWindowProxy* open(const USVString& url, const DOMString& target, const DOMString& features) {
 		DKDEBUGFUNC(url, target, features);
 		DKTODO();
 		return _open;

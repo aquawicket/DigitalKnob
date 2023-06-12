@@ -6,6 +6,7 @@
 
 #include "DKUIEvent/DKUIEvent.h"
 
+
 ////// CompositionEventInit //////
 typedef std::string CompositionEventInit;
 
@@ -40,9 +41,9 @@ public:
 	// optional DOMString dataArg = "");
 	virtual void initCompositionEvent(
 		const DOMString& typeArg, 
-		const bool& bubblesArg, 
-		const bool& cancelableArg, 
-		const DKString& viewArg,
+		const bool& bubblesArg = false, 
+		const bool& cancelableArg = false, 
+		DKWindow* viewArg = NULL,		// FIXME: change to DKWindowProxy
 		const DOMString& dataArg = "") {
 		DKDEBUGFUNC(typeArg, bubblesArg, cancelableArg, viewArg, dataArg);
 		DKTODO();
