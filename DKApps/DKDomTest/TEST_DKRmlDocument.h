@@ -50,13 +50,12 @@ public:
 				DKElement* item = aElements->item(i);
 				if(!item)
 					console.error("item invalid!");
-
 				if(item->hasAttribute("href")){
-					DKINFO("item->hasAttribute('href')\n");
+					DKINFO("item()->hasAttribute('href')\n");
 					/*
-					aElements[i]->SetProperty("color", "rgb(0,0,255)");
-					aElements[i]->SetProperty("text-decoration", "underline");
-					aElements[i]->AddEventListener("click", dkRmlInterface, false);
+					item->SetProperty("color", "rgb(0,0,255)");
+					item->SetProperty("text-decoration", "underline");
+					item->AddEventListener("click", dkRmlInterface, false);
 					*/
 				}
 			}
