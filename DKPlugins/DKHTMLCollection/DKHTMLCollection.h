@@ -14,7 +14,7 @@ class DKHTMLCollection : public DKInterface
 {
 public:
 	DKHTMLCollection(std::vector<DKElement*> element_list) : DKInterface() {
-		DKDEBUGFUNC();
+		DKDEBUGFUNC(element_list);
 		interfaceName = "HTMLCollection";
 		interfaceAddress = pointerToAddress(this);
 		_element_list = element_list;

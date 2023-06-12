@@ -93,13 +93,18 @@ public:
 		DKDEBUGFUNC(qualifiedName);
 		Rml::ElementList elements;
 		_dkRmlInterface->document->GetElementsByTagName(elements, qualifiedName.c_str());
-		if(elements.empty())
+		if(elements.empty()){
+			DKERROR("elements.empty()\n");
 			return NULL;
+		}
 		std::vector<DKElement*> element_list;
 		for(unsigned int i=0; i<elements.size(); ++i){
 			element_list.push_back(new DKRmlElement(_dkRmlInterface, elements[i]));
 		}
-		return new DKHTMLCollection(element_list);	// FIXME: danggling pointer
+		DKINFO("element_list.size() = "+toString(element_list.size()+"\n");
+		DKHTMLCollection* htmlCollection = new DKHTMLCollection(element_list);	// FIXME: danggling pointer
+		DKINFO("htmlCollection->length() = "+toString(htmlCollection->length())+"\n");
+		return htmlCollection; 
 	}
 	/*
 	// HTMLCollection getElementsByTagNameNS(DOMString? namespace, DOMString localName);

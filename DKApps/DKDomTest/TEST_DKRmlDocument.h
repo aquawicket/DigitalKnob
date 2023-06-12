@@ -21,34 +21,41 @@ public:
 		//////////// TESTS ////////////
 		// readonly attribute Element? documentElement;
 		DKElement* document = dkRmlDocument->documentElement();
-		DKINFO("document->tagName() = "+document->tagName()+"\n");
+		console.log("document->tagName() = "+document->tagName());
 		
 		// HTMLCollection getElementsByTagName(DOMString qualifiedName);
 		DKHTMLCollection* elements = dkRmlDocument->getElementsByTagName("a");
 		if(!elements)
-			DKERROR("elements invalid! \n");
+			console.error("elements invalid!");
 		
 		// [CEReactions, NewObject] Element createElement(DOMString localName, optional (DOMString or ElementCreationOptions) options = {});
 		DKElement* div = dkRmlDocument->createElement("div");
-		DKINFO("div->tagName() = "+div->tagName()+"\n");
+		console.log("div->tagName() = "+div->tagName());
 		
 		// Element? getElementById(DOMString elementId);
 		DKElement* body = dkRmlDocument->getElementById("body");
-		DKINFO("body->tagName() = "+body->tagName()+"\n");
+		console.log("body->tagName() = "+body->tagName());
 		///////////////////////////////
 		
 		
 		//////////// Post processing <a hfer></a> hyperlinks ////////////
 		DKHTMLCollection* aElements = dkRmlDocument->getElementsByTagName("a");
-		if(!aElements)	DKERROR("aElements invalid! \n");
-		for(unsigned int i=0; i<aElements->length(); ++i){
-			//if(aElements->item(i)->hasAttribute("href")){
-				/*
-				aElements[i]->SetProperty("color", "rgb(0,0,255)");
-				aElements[i]->SetProperty("text-decoration", "underline");
-				aElements[i]->AddEventListener("click", dkRmlInterface, false);
-				*/
-			//}
+		if(!aElements){
+			console.error("aElements invalid!");
+		}
+		else{
+			console.log("aElement.length() = "+toString(aElements->length()));
+			/*
+			for(unsigned int i=0; i<aElements->length(); ++i){
+				DKINFO("aElement["+toString(i)+"[\n");
+				//DKElement* item = aElements->item(i);
+				if(aElements->item(i)->hasAttribute("href")){
+					aElements[i]->SetProperty("color", "rgb(0,0,255)");
+					aElements[i]->SetProperty("text-decoration", "underline");
+					aElements[i]->AddEventListener("click", dkRmlInterface, false);
+				}
+			}
+			*/
 		}
 
 		printRmlDocumentProperties(*dkRmlDocument);
