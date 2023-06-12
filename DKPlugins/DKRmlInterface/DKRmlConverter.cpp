@@ -277,8 +277,9 @@ bool DKRmlConverter::PostProcess(DKRmlInterface* dkRmlInterface, Rml::Element* e
 		processed += id+",";
 	}
 	*/
-
+	
 	// <a> tags with href attribute
+	/*
 	Rml::ElementList aElements;
 	Rml::ElementUtilities::GetElementsByTagName(aElements, element, "a");
 	for(unsigned int i=0; i<aElements.size(); ++i){
@@ -292,6 +293,8 @@ bool DKRmlConverter::PostProcess(DKRmlInterface* dkRmlInterface, Rml::Element* e
 			//DKEvents::AddEvent(elementAddress, "click", &DKRmlConverter::Hyperlink, this);	//FIXME
 		}
 	}
+	*/
+	
 	// <audio> tags
 	/*
 	Rml::ElementList audios;

@@ -13,29 +13,32 @@
 class DKHTMLCollection : public DKInterface
 {
 public:
-	DKHTMLCollection() : DKInterface() {
+	DKHTMLCollection(std::vector<DKElement*> element_list) : DKInterface() {
 		DKDEBUGFUNC();
 		interfaceName = "HTMLCollection";
 		interfaceAddress = pointerToAddress(this);
+		_element_list = element_list;
 	}
 
+	std::vector<DKElement*> _element_list;
+	
 	// readonly attribute unsigned long length;
-	unsigned int _length = 0;
-	virtual const unsigned int& length()				{ return _length; }		// getter
-	virtual void length(const unsigned int& length)		{ _length = length; } 	// setter
+	virtual const unsigned int& length()				{		// getter			
+		return _element_list.size(); 
+	}		
+	//virtual void length(const unsigned int& length)	{  } 	// setter	(readonly)
 	
 	// getter Element? item(unsigned long index);
-	DKElement* _item = NULL;
 	virtual DKElement* item(const unsigned int& index){
 		DKDEBUGFUNC(index);
-		return _item;
+		return _element_list[index];
 	}
 	
 	// getter Element? namedItem(DOMString name);
-	DKElement* _namedItem = NULL;
 	virtual DKElement* namedItem(const DOMString& name){
 		DKDEBUGFUNC(name);
-		return _namedItem;
+		DKTODO();
+		return NULL;
 	}
 	
 //};

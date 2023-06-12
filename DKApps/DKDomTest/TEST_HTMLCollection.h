@@ -14,7 +14,8 @@ public:
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_HTMLCollection.h //////");
 		
-		DKHTMLCollection htmlCollection;
+		std::vector<DKElement*> list;
+		DKHTMLCollection htmlCollection(list);
 		printHTMLCollectionProperties(htmlCollection);
 	}
 

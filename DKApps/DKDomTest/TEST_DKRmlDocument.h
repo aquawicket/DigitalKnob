@@ -36,6 +36,20 @@ public:
 		DKElement* body = dkRmlDocument->getElementById("body");
 		DKINFO("body->tagName() = "+body->tagName()+"\n");
 		///////////////////////////////
+		
+		
+		//////////// Post processing <a hfer></a> hyperlinks ////////////
+		DKHTMLCollection* aElements = dkRmlDocument->getElementsByTagName("a");
+		if(!aElements)	DKERROR("aElements invalid! \n");
+		for(unsigned int i=0; i<aElements->length(); ++i){
+			//if(aElements->item(i)->hasAttribute("href")){
+				/*
+				aElements[i]->SetProperty("color", "rgb(0,0,255)");
+				aElements[i]->SetProperty("text-decoration", "underline");
+				aElements[i]->AddEventListener("click", dkRmlInterface, false);
+				*/
+			//}
+		}
 
 		printRmlDocumentProperties(*dkRmlDocument);
 	}

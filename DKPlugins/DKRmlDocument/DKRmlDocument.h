@@ -95,15 +95,11 @@ public:
 		_dkRmlInterface->document->GetElementsByTagName(elements, qualifiedName.c_str());
 		if(elements.empty())
 			return NULL;
-		/*
-		DKStringArray elementAddresses;
-		for(unsigned int i = 0; i<elements.size(); i++)
-			elementAddresses.push_back(pointerToAddress(elements[i]));
-		DKString list = toString(elementAddresses, ",");
-		return new DKHTMLCollection(_dkRmlInterface, elements);	// FIXME: danggling pointer
-		*/
-		DKTODO();
-		return NULL;
+		std::vector<DKElement*> element_list;
+		for(unsigned int i=0; i<elements.size(); ++i){
+			element_list.push_back(new DKRmlElement(_dkRmlInterface, elements[i]));
+		}
+		return new DKHTMLCollection(element_list);	// FIXME: danggling pointer
 	}
 	/*
 	// HTMLCollection getElementsByTagNameNS(DOMString? namespace, DOMString localName);

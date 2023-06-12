@@ -34,8 +34,8 @@ public:
 	}
 	
 	static DKHTMLCollection* htmlCollection(duk_context* ctx){
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		return (DKHTMLCollection*)addressToPointer(eventTargetAddress);
+		DKString htmlCollectionAddress = duk_require_string(ctx, 0);
+		return (DKHTMLCollection*)addressToPointer(htmlCollectionAddress);
 	}
 	static bool GetBool(duk_context* ctx){
 		if (duk_is_boolean(ctx, 1))
@@ -65,8 +65,10 @@ public:
 
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		//DKERROR("DKHTMLCollectionDUK::constructor() Broken! \n");
 		DKINFO("CPP_DKHTMLCollectionDUK()\n");
-		DKHTMLCollection* _htmlCollection = new DKHTMLCollection();
+		std::vector<DKElement*> list;
+		DKHTMLCollection* _htmlCollection = new DKHTMLCollection(list);		// FIXME:
 		DKString htmlCollectionAddress = pointerToAddress(_htmlCollection);
 		duk_push_string(ctx, htmlCollectionAddress.c_str());
 		return true;
@@ -75,8 +77,8 @@ public:
 	// readonly attribute unsigned long length;
 	static int length(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if(duk_is_valid_index(ctx, 1))
-			htmlCollection(ctx)->length(GetUint(ctx));
+		//if(duk_is_valid_index(ctx, 1))					// (readonly)
+		//	htmlCollection(ctx)->length(GetUint(ctx));
 		dukglue_push(ctx, htmlCollection(ctx)->length());
 		return true;
 	}
