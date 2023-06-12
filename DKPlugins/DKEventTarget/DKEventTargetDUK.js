@@ -13,7 +13,7 @@ var EventTarget = function EventTarget(address) {
     if(address)
 		this.address = address;
 	if(!this.address)
-		this.address = CPP_DKEventTargetDUK_constructor();
+		this.address = CPP_DKEventTargetDUK();
 	
 	/*
     for (var i = 0; i < instances.length; i++) {

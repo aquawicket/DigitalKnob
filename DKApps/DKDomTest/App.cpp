@@ -34,11 +34,12 @@ bool App::Init() {
 	//TEST_CustomEvent* test_CustomEvent = new TEST_CustomEvent();												// pointer
 	std::unique_ptr<TEST_CustomEvent> test_CustomEvent = std::make_unique<TEST_CustomEvent>();					// smart pointer (unique)
 	
+	
 	// [UIEvent]
 	//DKClass::DKCreate("TEST_UIEvent");																		// DKObjectT
 	//TEST_UIEvent* test_UIEvent = new TEST_UIEvent();															// pointer
 	std::unique_ptr<TEST_UIEvent> test_UIEvent = std::make_unique<TEST_UIEvent>();								// smart pointer (unique)
-	/*
+	
 	// [FocusEvent]
 	//DKClass::DKCreate("TEST_FocusEvent");																		// DKObjectT
 	//TEST_FocusEvent* test_FocusEvent = new TEST_FocusEvent();													// pointer
@@ -123,7 +124,7 @@ bool App::Init() {
 	// [HTMLCollection]
 	//DKClass::DKCreate("TEST_HTMLCollection");																	// DKObjectT
 	//TEST_HTMLCollection* test_HTMLCollection = new TEST_HTMLCollection();										// pointer
-	std::unique_ptr<TEST_HTMLCollection> test_HTMLCollection = std::make_unique<TEST_HTMLCollection>();		// smart pointer (unique)
+	std::unique_ptr<TEST_HTMLCollection> test_HTMLCollection = std::make_unique<TEST_HTMLCollection>();			// smart pointer (unique)
 	
 	// [HTMLElement]
 	//DKClass::DKCreate("TEST_HTMLElement");																	// DKObjectT
@@ -139,7 +140,7 @@ bool App::Init() {
 	//DKClass::DKCreate("TEST_HTMLImageElement");																// DKObjectT
 	//TEST_HTMLImageElement* test_HTMLImageElement = new TEST_HTMLImageElement();								// pointer
 	std::unique_ptr<TEST_HTMLImageElement> test_HTMLImageElement = std::make_unique<TEST_HTMLImageElement>();	// smart pointer (unique)
-	*/
+
 
 	////// DigitalKnob //////
 	// [DKConsoleWindow]
@@ -153,7 +154,7 @@ bool App::Init() {
 	//std::make_shared<TEST_DKConsoleWindow>();
 	*/
 	
-	/*
+	
 	// [DKSdlWindow]
 	//DKClass::DKCreate("TEST_DKSdlWindow");																	// DKObjectT						// WORKS
 	//TEST_DKSdlWindow* test_DKSdlWindow = new TEST_DKSdlWindow();												// pointer							// WORKS		 (dangling pointer)
@@ -179,7 +180,6 @@ bool App::Init() {
 
 	// [DKRmlElement]
 	//test_DKRmlElement = std::make_unique<TEST_DKRmlElement>();
-	*/
 	
 	return true;
 }
