@@ -42,6 +42,8 @@ public:
 	static void printEventProperties(DKEvent& event){
 		DKDEBUGFUNC(event);
 		
+		console.log("event = "					+toString(event));
+		
 		// readonly attribute DOMString type;
 		console.log("event.type() = "			+toString(event.type()));
 		

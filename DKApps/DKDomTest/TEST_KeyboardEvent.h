@@ -23,6 +23,8 @@ public:
 	static void printKeyboardEventProperties(DKKeyboardEvent& keyboardEvent){
 		DKDEBUGFUNC(keyboardEvent);
 		
+		console.log("keyboardEvent = "								+toString(keyboardEvent));
+		
 		// constructor(DOMString type, optional KeyboardEventInit eventInitDict = {});
 		// function
 		
@@ -98,7 +100,7 @@ public:
 		// };
 		
 		
-		TEST_UIEvent::printUIEventProperties(dynamic_cast<DKUIEvent&>(keyboardEvent));	//TODO: try to remove the need for dynamic_cast
+		TEST_UIEvent::printUIEventProperties(keyboardEvent);
 	}
 
 	static bool onKeyboardEvent(DKEvent& event){

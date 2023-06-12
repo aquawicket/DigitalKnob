@@ -24,13 +24,15 @@ public:
 	static void printFocusEventProperties(DKFocusEvent& focusEvent){
 		DKDEBUGFUNC(focusEvent);
 		
+		console.log("focusEvent = "						+toString(focusEvent));
+		
 		// constructor(DOMString type, optional FocusEventInit eventInitDict = {});
 		// function
 		
 		// readonly attribute EventTarget? relatedTarget;
-		console.log("focusEvent.relatedTarget() = "+toString(focusEvent.relatedTarget()));
+		console.log("focusEvent.relatedTarget() = "		+toString(focusEvent.relatedTarget()));
 		
-		TEST_UIEvent::printUIEventProperties(dynamic_cast<DKUIEvent&>(focusEvent));	//TODO: try to remove the need for dynamic_cast
+		TEST_UIEvent::printUIEventProperties(focusEvent);
 	}
 	
 	static bool onFocusEvent(DKEvent& event){

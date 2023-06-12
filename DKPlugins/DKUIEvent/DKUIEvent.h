@@ -28,8 +28,8 @@ public:
 	
 	// readonly attribute Window? view;
 	DKWindow* _view = NULL;
-	virtual DKWindow*				view()													{ return _view; }								// getter
-	virtual void 					view(DKWindow* view) 									{ _view = view; } 								// setter
+	virtual DKWindow&				view()													{ return *_view; }								// getter
+	virtual void 					view(DKWindow& view) 									{ _view = &view; } 								// setter
 	
 	// readonly attribute long detail;
 	int _detail = 0;
@@ -62,6 +62,10 @@ public:
 	virtual const unsigned int& 	which()													{ return _which; }								// getter
 	virtual void 					which(const unsigned int& which) 						{ _which = which; } 							// setter
 	// };
+	
+	
+	////// toString //////
+	operator std::string() const { return "[object UIEvent]"; }
 };
 
 

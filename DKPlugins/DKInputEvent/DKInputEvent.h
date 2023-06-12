@@ -55,6 +55,10 @@ public:
 		return _getTargetRanges;
 	}
 	// };
+	
+	
+	////// toString //////
+	operator std::string() const { return "[object InputEvent]"; }
 };
 
 

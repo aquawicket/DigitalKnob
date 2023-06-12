@@ -23,6 +23,8 @@ public:
 	static void printMouseEventProperties(DKMouseEvent& mouseEvent){
 		DKDEBUGFUNC(mouseEvent);
 		
+		console.log("mouseEvent = "					+toString(mouseEvent));
+		
 		// constructor(DOMString type, optional MouseEventInit eventInitDict = {});
 		// function
 		
@@ -45,19 +47,19 @@ public:
 		console.log("mouseEvent.shiftKey() = "		+toString(mouseEvent.shiftKey()));
 		
 		// readonly attribute boolean altKey;
-		console.log("mouseEvent.altKey() = "			+toString(mouseEvent.altKey()));
+		console.log("mouseEvent.altKey() = "		+toString(mouseEvent.altKey()));
 		
 		// readonly attribute boolean metaKey;
 		console.log("mouseEvent.metaKey() = "		+toString(mouseEvent.metaKey()));
 		
 		// readonly attribute short button;
-		console.log("mouseEvent.button() = "			+toString(mouseEvent.button()));
+		console.log("mouseEvent.button() = "		+toString(mouseEvent.button()));
 		
 		// readonly attribute unsigned short buttons;		
 		console.log("mouseEvent.buttons() = "		+toString(mouseEvent.buttons()));
 		
 		// readonly attribute EventTarget? relatedTarget;
-		//console.log("mouseEvent.relatedTarget() = "	+toString(mouseEvent.relatedTarget()));
+		console.log("mouseEvent.relatedTarget() = "	+toString(mouseEvent.relatedTarget()));
 		
 		// boolean getModifierState(DOMString keyArg);
 		// function
@@ -66,24 +68,32 @@ public:
 		// partial interface MouseEvent {
 		//  	readonly attribute double pageX;
 				console.log("mouseEvent.pageX() = "			+toString(mouseEvent.pageX()));
+				
 		//  	readonly attribute double pageY;
 				console.log("mouseEvent.pageY() = "			+toString(mouseEvent.pageY()));
+				
 		//  	readonly attribute double x;
 				console.log("mouseEvent.x() = "				+toString(mouseEvent.x()));
+				
 		//  	readonly attribute double y;
 				console.log("mouseEvent.y() = "				+toString(mouseEvent.y()));
+				
 		//  	readonly attribute double offsetX; 
 				console.log("mouseEvent.offsetX() = "		+toString(mouseEvent.offsetX()));
+				
 		//  	readonly attribute double offsetY;
 				console.log("mouseEvent.offsetY() = "		+toString(mouseEvent.offsetY()));
+				
 		// };
 	
 		// Source: Pointer Lock 2.0 (https://www.w3.org/TR/pointerlock-2/)
 		// partial interface MouseEvent {
 		//   	readonly attribute double movementX;
 				console.log("mouseEvent.movementX() = "		+toString(mouseEvent.movementX()));
+				
 		//   	readonly attribute double movementY;
 				console.log("mouseEvent.movementY() = "		+toString(mouseEvent.movementY()));
+				
 		// };
 	
 		// Source: UI Events (https://www.w3.org/TR/uievents/)
@@ -107,7 +117,7 @@ public:
 				// function
 		// };
 		
-		TEST_UIEvent::printUIEventProperties(dynamic_cast<DKUIEvent&>(mouseEvent));	//TODO: try to remove the need for dynamic_cast
+		TEST_UIEvent::printUIEventProperties(mouseEvent);
 	}
 
 	static bool onMouseEvent(DKEvent& event){

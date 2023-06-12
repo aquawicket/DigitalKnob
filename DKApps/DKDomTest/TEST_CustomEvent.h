@@ -24,6 +24,8 @@ public:
 	static void printCustomEventProperties(DKCustomEvent& customEvent) {
 		DKDEBUGFUNC(customEvent);
 		
+		console.log("customEvent = "			+toString(customEvent));
+		
 		// constructor(DOMString type, optional CustomEventInit eventInitDict = {});
 		// function
 		

@@ -27,6 +27,10 @@ public:
 	
 	DKString interfaceName = "";
 	DKString interfaceAddress = "";
+	
+	
+	////// toString //////
+	virtual operator std::string() const { return "[object Interface]"; }
 };
 
 

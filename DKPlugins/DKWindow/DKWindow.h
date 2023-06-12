@@ -640,6 +640,10 @@ public:
 				return _getScreenDetails;
 			}
 	// };
+	
+	
+	////// toString //////
+	operator std::string() const { return "[object Window]"; }
 };
 
 

@@ -20,6 +20,8 @@ public:
 	
 	static void printEventTargetProperties(DKEventTarget& evenTarget){
 		DKDEBUGFUNC(evenTarget);
+		
+		console.log("evenTarget = "		+toString(evenTarget));
 	}
 
 };

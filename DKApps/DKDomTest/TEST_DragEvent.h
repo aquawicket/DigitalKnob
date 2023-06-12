@@ -23,13 +23,15 @@ public:
 	static void printDragEventProperties(DKDragEvent& dragEvent) {
 		DKDEBUGFUNC(dragEvent);
 		
+		console.log("dragEvent = "					+toString(dragEvent));
+		
 		// constructor(DOMString type, optional DragEventInit eventInitDict = {});
 		// function
 		
 		// readonly attribute DataTransfer? dataTransfer;
 		console.log("dragEvent.dataTransfer() = "	+toString(dragEvent.dataTransfer()));
 		
-		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent&>(dragEvent));	//TODO: try to remove the need for dynamic_cast
+		TEST_MouseEvent::printMouseEventProperties(dragEvent);
 	}
 	
 	static bool onDragEvent(DKEvent& event) {

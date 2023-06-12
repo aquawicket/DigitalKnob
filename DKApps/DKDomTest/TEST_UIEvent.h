@@ -23,11 +23,13 @@ public:
 	static void printUIEventProperties(DKUIEvent& uievent){
 		DKDEBUGFUNC(uievent);
 		
+		console.log("uievent = "								+toString(uievent));
+		
 		// constructor(DOMString type, optional UIEventInit eventInitDict = {});
 		// function
 		
 		// readonly attribute Window? view;
-		//console.log("uievent.view() = "							+toString(uievent.view()));
+		console.log("uievent.view() = "							+toString(uievent.view()));
 		
 		// readonly attribute long detail;
 		console.log("uievent.detail() = "						+toString(uievent.detail()));
@@ -49,10 +51,10 @@ public:
 		// partial interface UIEvent {
 		//		The following support legacy user agents
 		//		readonly attribute unsigned long which;
-				console.log("uievent.which() = "					+toString(uievent.which()));
+				console.log("uievent.which() = "				+toString(uievent.which()));
 		// };
 		
-		TEST_Event::printEventProperties(dynamic_cast<DKEvent&>(uievent));	//TODO: try to remove the need for dynamic_cast
+		TEST_Event::printEventProperties(uievent);
 	}
 	
 	static bool onuievent(DKEvent& event){

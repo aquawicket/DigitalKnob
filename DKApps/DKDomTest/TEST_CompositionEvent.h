@@ -23,11 +23,13 @@ public:
 	static void printCompositionEventProperties(DKCompositionEvent& compositionEvent){
 		DKDEBUGFUNC(compositionEvent);
 		
+		console.log("compositionEvent = "			+toString(compositionEvent));
+		
 		// constructor(DOMString type, optional CompositionEventInit eventInitDict = {});
 		// function
 		
 		// readonly attribute DOMString data;
-		console.log("compositionEvent.data() = "		+toString(compositionEvent.data()));
+		console.log("compositionEvent.data() = "	+toString(compositionEvent.data()));
 		
 		// Source: UI Events (https://www.w3.org/TR/uievents/)
 		// partial interface CompositionEvent {
@@ -40,7 +42,7 @@ public:
 				// function
 		// };
 		
-		TEST_UIEvent::printUIEventProperties(dynamic_cast<DKUIEvent&>(compositionEvent));	//TODO: try to remove the need for dynamic_cast
+		TEST_UIEvent::printUIEventProperties(compositionEvent);
 	}
 	
 	static bool onCompositionEvent(DKEvent& event){

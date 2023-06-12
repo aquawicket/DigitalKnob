@@ -183,6 +183,9 @@ public:
 		DKDEBUGFUNC();
 		DKTODO();
 	}
+	
+	////// toString //////
+	operator std::string() const { return "[object object]"; }
 };
 
 

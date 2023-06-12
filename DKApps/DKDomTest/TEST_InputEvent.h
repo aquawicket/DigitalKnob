@@ -23,6 +23,8 @@ public:
 	static void printInputEventProperties(DKInputEvent& inputEvent){
 		DKDEBUGFUNC(inputEvent);
 		
+		console.log("inputEvent = "					+toString(inputEvent));
+		
 		// constructor(DOMString type, optional InputEventInit eventInitDict = {});
 		// function
 		
@@ -45,7 +47,7 @@ public:
 		// };
 		
 		
-		TEST_UIEvent::printUIEventProperties(dynamic_cast<DKUIEvent&>(inputEvent));	//TODO: try to remove the need for dynamic_cast
+		TEST_UIEvent::printUIEventProperties(inputEvent);
 	}
 	
 	static bool onInputEvent(DKEvent& event){

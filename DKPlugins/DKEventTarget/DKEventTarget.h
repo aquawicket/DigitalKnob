@@ -93,7 +93,7 @@ public:
 	static std::vector<EventObject> events;
 	
 	////// toString //////
-	operator std::string() const { return "[object EventTarget]"; }	
+	virtual operator std::string() const { return "[object EventTarget]"; }	
 };
 
 

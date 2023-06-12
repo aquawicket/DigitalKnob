@@ -23,13 +23,15 @@ public:
 	static void printWheelEventProperties(DKWheelEvent& wheelEvent){
 		DKDEBUGFUNC(wheelEvent);
 		
+		console.log("wheelEvent = "						+toString(wheelEvent));
+		
 		// constructor(DOMString type, optional WheelEventInit eventInitDict = {});
 		// function
 		
 	#if !EMSCRIPTEN
 		// DeltaModeCode
 		// const unsigned long DOM_DELTA_PIXEL = 0x00;
-		console.log("wheelEvent.DOM_DELTA_PIXEL() = "+toString(wheelEvent.DOM_DELTA_PIXEL()));
+		console.log("wheelEvent.DOM_DELTA_PIXEL() = "	+toString(wheelEvent.DOM_DELTA_PIXEL()));
 		
 		// const unsigned long DOM_DELTA_LINE  = 0x01;
 		console.log("wheelEvent.DOM_DELTA_LINE() = "	+toString(wheelEvent.DOM_DELTA_LINE()));
@@ -48,9 +50,9 @@ public:
 		console.log("wheelEvent.deltaZ() = "			+toString(wheelEvent.deltaZ()));
 		
 		// readonly attribute unsigned long deltaMode;
-		console.log("wheelEvent.deltaMode() = "		+toString(wheelEvent.deltaMode()));
+		console.log("wheelEvent.deltaMode() = "			+toString(wheelEvent.deltaMode()));
 		
-		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent&>(wheelEvent));	//TODO: try to remove the need for dynamic_cast
+		TEST_MouseEvent::printMouseEventProperties(wheelEvent);
 	}
 
 	static bool onWheelEvent(DKEvent& event){

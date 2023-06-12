@@ -36,8 +36,9 @@ public:
 		DKTODO();
 	}
 	
+	
 	////// toString //////
-	operator std::string() const { return "[object CustomEvent]"; }	
+	virtual operator std::string() const { return "[object CustomEvent]"; }	
 };
 
 
