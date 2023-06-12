@@ -92,10 +92,8 @@ public:
 	////// DK properties //////	
 	static std::vector<EventObject> events;
 	
-	friend std::ostream& operator<<(std::ostream& os, const DKEventTarget&/* eventTarget*/){
-        os << "[object EventTarget]";
-        return os;
-    }
+	////// toString //////
+	operator std::string() const { return "[object EventTarget]"; }	
 };
 
 

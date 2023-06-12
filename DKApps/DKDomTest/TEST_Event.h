@@ -46,9 +46,10 @@ public:
 		console.log("event.type() = "			+toString(event.type()));
 		
 		// readonly attribute EventTarget? target;
-		//console.log("event.target() = "			+toString(event.target()));
+		console.log("event.target() = "			+toString(event.target()));
+		//console.log("event.target() = "		+event.target());	// error C2677: binary '+': no global operator found which takes type 'DKEventTarget'
+		//std::cout << event.target();
 		//console.log(event.target());
-		std::cout << event.target();
 		
 		// readonly attribute EventTarget? srcElement; // legacy
 		//console.log("event.srcElement() = "		+toString(event.srcElement()));

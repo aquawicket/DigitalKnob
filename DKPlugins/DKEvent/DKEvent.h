@@ -160,6 +160,13 @@ public:
 	
 	////// DK properties //////
 	DKString _eventInitDict;
+	
+	////// toString //////
+	operator std::string() const { return "[object Event]"; }
+	//friend std::ostream& operator<<(std::ostream& os, const DKEvent&/* event*/){
+    //    os << "[object Event]";
+    //    return os;
+	//}
 };
 
 
