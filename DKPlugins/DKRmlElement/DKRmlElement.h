@@ -43,10 +43,8 @@ public:
 	virtual void localName(const DOMString& localName)			{ _localName = localName; } 		// setter
 	*/
 	// readonly attribute DOMString tagName;
-	//DOMString _tagName = "";
 	virtual const DOMString& tagName()							{									// getter
-		_tagName = _rmlElement->GetTagName();
-		return _tagName; 
+		return _rmlElement->GetTagName();
 	}				
 	//virtual void tagName(const DOMString& tagName)			{ _tagName = tagName; } 			// setter
 	

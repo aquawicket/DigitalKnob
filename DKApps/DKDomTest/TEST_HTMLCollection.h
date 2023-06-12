@@ -23,7 +23,7 @@ public:
 		DKDEBUGFUNC(htmlCollection);
 		
 		// readonly attribute unsigned long length;
-		console.log("htmlCollection.length() = "	+toString(htmlCollection.length()));
+		//console.log("htmlCollection.length() = "	+toString(htmlCollection.length()));	// FIXME
 		
 		// getter Element? item(unsigned long index);
 		// function
