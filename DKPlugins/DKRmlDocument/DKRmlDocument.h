@@ -78,7 +78,6 @@ public:
 	*/
 	
 	// readonly attribute Element? documentElement;
-	//DKElement* _documentElement = NULL;
 	virtual DKElement* documentElement()							{ 											// getter
 		DKDEBUGFUNC();
 		Rml::Element* element = _dkRmlInterface->document;

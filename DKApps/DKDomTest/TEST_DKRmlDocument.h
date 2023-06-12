@@ -18,21 +18,25 @@ public:
 		dkRmlDocument = new DKRmlDocument(TEST_DKRmlInterface::dkRmlInterface);
 		//dkRmlDocument = std::make_unique<DKRmlDocument>(TEST_DKRmlInterface::dkRmlInterface);
 		
-		/// Test getElementById
-		DKElement* body = dkRmlDocument->getElementById("body");
-		//DOMString tagName = body->tagName();
-		DKINFO("body->tagName() = "+body->tagName()+"\n");
+		//////////// TESTS ////////////
+		// readonly attribute Element? documentElement;
+		DKElement* document = dkRmlDocument->documentElement();
+		DKINFO("document->tagName() = "+document->tagName()+"\n");
 		
-		/// Test createElement
+		// HTMLCollection getElementsByTagName(DOMString qualifiedName);
+		DKHTMLCollection* elements = dkRmlDocument->getElementsByTagName("a");
+		if(!elements)
+			DKERROR("elements invalid! \n");
+		
+		// [CEReactions, NewObject] Element createElement(DOMString localName, optional (DOMString or ElementCreationOptions) options = {});
 		DKElement* div = dkRmlDocument->createElement("div");
 		DKINFO("div->tagName() = "+div->tagName()+"\n");
 		
-		
-		
-		
-		//DKElement* _getElementsByTagName = dkRmlDocument->getElementsByTagName("a");
-		//DKINFO("_getElementsByTagName = "+_getElementsByTagName+"\n");
-		
+		// Element? getElementById(DOMString elementId);
+		DKElement* body = dkRmlDocument->getElementById("body");
+		DKINFO("body->tagName() = "+body->tagName()+"\n");
+		///////////////////////////////
+
 		printRmlDocumentProperties(*dkRmlDocument);
 	}
 	
