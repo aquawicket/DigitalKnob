@@ -13,8 +13,8 @@
 #include "TEST_Event.h"
 #include "TEST_EventTarget.h"
 #include "TEST_CustomEvent.h"
-/*
 #include "TEST_UIEvent.h"
+/*
 #include "TEST_FocusEvent.h"
 #include "TEST_MouseEvent.h"
 #include "TEST_WheelEvent.h"

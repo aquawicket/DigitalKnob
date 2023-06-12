@@ -11,10 +11,10 @@ CPP_DK_Create("TEST_EventTarget.js");
 CPP_DK_Create("DKCustomEventDUK");
 CPP_DK_Create("TEST_CustomEvent.js");
 
-/*
 // [UIEvents] https://w3c.github.io/uievents
 CPP_DK_Create("DKUIEventDUK");
 CPP_DK_Create("TEST_UIEvent.js");
+/*
 CPP_DK_Create("DKFocusEventDUK");
 CPP_DK_Create("TEST_FocusEvent.js");
 CPP_DK_Create("DKMouseEventDUK");
