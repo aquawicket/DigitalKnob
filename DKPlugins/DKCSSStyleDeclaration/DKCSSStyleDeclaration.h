@@ -26,7 +26,7 @@ public:
 	virtual void cssText(const CSSOMString& cssText)		{ _cssText = cssText; } 		// setter
 	
 	// readonly attribute unsigned long length;
-	unsigned int _length = "";
+	unsigned int _length = 0;
 	virtual const unsigned int& length()					{ return _length; }				// getter
 	virtual void length(const unsigned int& length)			{ _length = length; } 			// setter
 	
@@ -72,8 +72,7 @@ public:
 	virtual void cssFloat(const CSSOMString& cssFloat)		{ _cssFloat = cssFloat; } 			// setter
 	
 // };
-}
+};
 	
 	
-
 #endif // DKCSSStyleDeclaration_H

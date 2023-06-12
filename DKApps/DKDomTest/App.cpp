@@ -100,6 +100,11 @@ bool App::Init() {
 	//DKClass::DKCreate("TEST_Location");																		// DKObjectT
 	//TEST_Location* test_Location = new TEST_Location();														// pointer
 	std::unique_ptr<TEST_Location> test_Location = std::make_unique<TEST_Location>();							// smart pointer (unique)
+	
+	// [CSSStyleDeclaration]
+	//DKClass::DKCreate("TEST_CSSStyleDeclaration");															// DKObjectT
+	//TEST_CSSStyleDeclaration* test_CSSStyleDeclaration = new TEST_CSSStyleDeclaration();						// pointer
+	std::unique_ptr<TEST_CSSStyleDeclaration> test_CSSStyleDeclaration = std::make_unique<TEST_CSSStyleDeclaration>();		// smart pointer (unique)
 
 	// [Node]
 	//DKClass::DKCreate("TEST_Node");																			// DKObjectT
