@@ -70,7 +70,7 @@ public:
 	DOMString _slot = "";
 	virtual const DOMString& slot()								{ return _slot; }					// getter
 	virtual void slot(const DOMString& slot)					{ _slot = slot; } 					// setter
-	
+
 	// boolean hasAttributes();
 	bool _hasAttributes = false;
 	virtual const bool& hasAttributes(){
@@ -130,14 +130,15 @@ public:
 		DKDEBUGFUNC(qualifiedName, force);
 		return _toggleAttribute;
 	}
+	*/
 	
 	// boolean hasAttribute(DOMString qualifiedName);
-	bool _hasAttribute = false;
 	virtual const bool& hasAttribute(const DOMString& qualifiedName){
 		DKDEBUGFUNC(qualifiedName);
-		return _hasAttribute;
+		return _rmlElement->HasAttribute(qualifiedName.c_str());
 	}
 	
+	/*
 	// boolean hasAttributeNS(DOMString? namespace, DOMString localName);
 	bool _hasAttributeNS = false;
 	virtual const bool& hasAttributeNS(const DOMString& _namespace, const DOMString& localName){

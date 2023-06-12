@@ -45,17 +45,21 @@ public:
 		}
 		else{
 			console.log("aElement.length() = "+toString(aElements->length()));
-			/*
 			for(unsigned int i=0; i<aElements->length(); ++i){
-				DKINFO("aElement["+toString(i)+"[\n");
-				//DKElement* item = aElements->item(i);
-				if(aElements->item(i)->hasAttribute("href")){
+				//DKINFO("aElement["+toString(i)+"]\n");
+				DKElement* item = aElements->item(i);
+				if(!item)
+					console.error("item invalid!");
+
+				if(item->hasAttribute("href")){
+					DKINFO("item->hasAttribute('href')\n");
+					/*
 					aElements[i]->SetProperty("color", "rgb(0,0,255)");
 					aElements[i]->SetProperty("text-decoration", "underline");
 					aElements[i]->AddEventListener("click", dkRmlInterface, false);
+					*/
 				}
 			}
-			*/
 		}
 
 		printRmlDocumentProperties(*dkRmlDocument);

@@ -97,12 +97,15 @@ public:
 			DKERROR("elements.empty()\n");
 			return NULL;
 		}
-		std::vector<DKElement*> element_list;
+		//std::vector<DKElement*> element_list;
+		std::vector<DKElement*>* element_list = new std::vector<DKElement*>;
 		for(unsigned int i=0; i<elements.size(); ++i){
-			element_list.push_back(new DKRmlElement(_dkRmlInterface, elements[i]));
+			//element_list.push_back(new DKRmlElement(_dkRmlInterface, elements[i]));
+			element_list->push_back(new DKRmlElement(_dkRmlInterface, elements[i]));
 		}
-		DKINFO("element_list.size() = "+toString(element_list.size()+"\n");
-		DKHTMLCollection* htmlCollection = new DKHTMLCollection(element_list);	// FIXME: danggling pointer
+		//DKINFO("element_list.size() = "+toString(element_list.size())+"\n");
+		DKINFO("element_list->size() = "+toString(element_list->size())+"\n");
+		DKHTMLCollection* htmlCollection = new DKHTMLCollection(*element_list);	// FIXME: danggling pointer
 		DKINFO("htmlCollection->length() = "+toString(htmlCollection->length())+"\n");
 		return htmlCollection; 
 	}
