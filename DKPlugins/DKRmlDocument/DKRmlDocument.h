@@ -7,6 +7,7 @@
 #include "DKDocument/DKDocument.h"
 #include "DKRmlInterface/DKRmlInterface.h"
 #include "DKRmlElement/DKRmlElement.h"
+class DKHTMLCollection;
 
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // [Exposed=Window]
@@ -74,19 +75,38 @@ public:
 	DKString _doctype = "";
 	virtual const DKString& doctype()								{ return _doctype; }						// getter
 	virtual void doctype(const DKString& doctype)					{ _doctype = doctype; } 					// setter
+	*/
 	
 	// readonly attribute Element? documentElement;
-	DKString _documentElement = "";
-	virtual const DKString& documentElement()						{ return _documentElement; }				// getter
-	virtual void documentElement(const DKString& documentElement)	{ _documentElement = documentElement; } 	// setter
+	//DKElement* _documentElement = NULL;
+	virtual DKElement* documentElement()							{ 											// getter
+		DKDEBUGFUNC();
+		Rml::Element* element = _dkRmlInterface->document;
+		return new DKRmlElement(_dkRmlInterface, element);		// FIXME: danggling pointer
+	}				
+	virtual void documentElement(DKElement* documentElement)		{ 											// setter
+		DKDEBUGFUNC(documentElement);
+		DKTODO();
+	} 	
 	
-	// HTMLCollection getElementsByTagName(DOMString qualifiedName);
-	DKString _getElementsByTagName = "";
-	virtual const DKString& getElementsByTagName(const DOMString& qualifiedName){
+	// HTMLCollection getElementsByTagName(DOMString qualifiedName);	
+	virtual DKHTMLCollection* getElementsByTagName(const DOMString& qualifiedName) {
 		DKDEBUGFUNC(qualifiedName);
-		return _getElementsByTagName;
+		Rml::ElementList elements;
+		_dkRmlInterface->document->GetElementsByTagName(elements, qualifiedName.c_str());
+		if(elements.empty())
+			return NULL;
+		/*
+		DKStringArray elementAddresses;
+		for(unsigned int i = 0; i<elements.size(); i++)
+			elementAddresses.push_back(pointerToAddress(elements[i]));
+		DKString list = toString(elementAddresses, ",");
+		return new DKHTMLCollection(_dkRmlInterface, elements);	// FIXME: danggling pointer
+		*/
+		DKTODO();
+		return NULL;
 	}
-	
+	/*
 	// HTMLCollection getElementsByTagNameNS(DOMString? namespace, DOMString localName);
 	DKString _getElementsByTagNameNS = "";
 	virtual const DKString& getElementsByTagNameNS(const DOMString& _namespace, const DOMString& localName){
@@ -215,7 +235,7 @@ public:
 	virtual DKElement* getElementById(const DOMString& elementId) {
 		DKDEBUGFUNC(elementId);
 		Rml::Element* element = _dkRmlInterface->document->GetElementById(elementId.c_str());
-		return  new DKRmlElement(_dkRmlInterface, element);		// FIXME: danggling pointer
+		return new DKRmlElement(_dkRmlInterface, element);		// FIXME: danggling pointer
 	}
 /*
 	// Source: DOM Standard (https://dom.spec.whatwg.org/)
