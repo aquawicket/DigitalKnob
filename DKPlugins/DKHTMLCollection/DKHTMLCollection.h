@@ -26,7 +26,8 @@ public:
 	// readonly attribute unsigned long length;
 	virtual const unsigned int& length()				{		// getter
 		DKINFO("_element_list.size() = "+toString(_element_list.size())+"\n");
-		return _element_list.size(); 
+		const unsigned int length = _element_list.size(); 
+		return length; 
 	}		
 	//virtual void length(const unsigned int& length)	{  } 	// setter	(readonly)
 	
