@@ -1,5 +1,7 @@
 // [IDL] https://w3c.github.io/uievents/#idl-mouseevent
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent
+#if HAVE_DKDuktape
+
 #pragma once
 #ifndef DKMouseEventDUK_H
 #define DKMouseEventDUK_H
@@ -308,3 +310,4 @@ REGISTER_OBJECT(DKMouseEventDUK, true)
 
 
 #endif //DKMouseEventDUK_H
+#endif //HAVE_DKDuktape

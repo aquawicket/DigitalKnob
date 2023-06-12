@@ -26,7 +26,6 @@ struct EventObject {
 class DKEventTarget : public DKInterface
 {
 public:
-
 	// constructor();
 	DKEventTarget() : DKInterface() { // https://dom.spec.whatwg.org/#dom-eventtarget-eventtarget
 		DKDEBUGFUNC();
@@ -77,13 +76,10 @@ public:
 			//DKINFO("	eventObj("+eventObj.type+", "+eventObj.interfaceAddress) \n");	
 			if(eventObj.type == event.type() && eventObj.interfaceAddress == interfaceAddress){
 				//DKINFO("		event("+event.type()+") \n");	
-				
-				//event.currentTarget = interfaceAddress;
+			
 				event.currentTarget(this);
-				
-				//event.target = interfaceAddress;
 				event.target(this);
-				//event.target = (DKEventTarget*)addressToPointer(interfaceAddress);
+				event.srcElement(this);
 				
 				eventObj.callback(event);
 			}
@@ -95,6 +91,11 @@ public:
 	
 	////// DK properties //////	
 	static std::vector<EventObject> events;
+	
+	friend std::ostream& operator<<(std::ostream& os, const DKEventTarget&/* eventTarget*/){
+        os << "[object EventTarget]";
+        return os;
+    }
 };
 
 

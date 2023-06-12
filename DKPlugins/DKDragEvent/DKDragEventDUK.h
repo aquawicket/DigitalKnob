@@ -1,5 +1,7 @@
 // [IDL] https://html.spec.whatwg.org/multipage/dnd.html#the-dragevent-interface
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/DragEvent
+#if HAVE_DKDuktape
+
 #pragma once
 #ifndef DKDragEventDUK_H
 #define DKDragEventDUK_H
@@ -84,3 +86,4 @@ REGISTER_OBJECT(DKDragEventDUK, true)
 
 
 #endif //DKDragEventDUK_H
+#endif //HAVE_DKDuktape

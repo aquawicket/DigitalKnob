@@ -1,6 +1,7 @@
-// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/KeyboardEvent.idl
-// [SOURCE] https://w3c.github.io/uievents/#events-keyboardevents
+// [IDL] https://w3c.github.io/uievents/#idl-keyboardevent
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent
+#if HAVE_DKDuktape
+
 #pragma once
 #ifndef DKKeyboardEventDUK_H
 #define DKKeyboardEventDUK_H
@@ -275,3 +276,4 @@ REGISTER_OBJECT(DKKeyboardEventDUK, true)
 
 
 #endif //DKKeyboardEventDUK_H
+#endif //HAVE_DKDuktape

@@ -1,5 +1,7 @@
 // [IDL] https://w3c.github.io/uievents/#idl-wheelevent
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent
+#if HAVE_DKDuktape
+
 #pragma once
 #ifndef DKWheelEventDUK_H
 #define DKWheelEventDUK_H
@@ -132,3 +134,4 @@ REGISTER_OBJECT(DKWheelEventDUK, true)
 
 
 #endif //DKWheelEventDUK_H
+#endif //HAVE_DKDuktape

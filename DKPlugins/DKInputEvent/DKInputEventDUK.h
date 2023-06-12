@@ -1,6 +1,7 @@
-// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/InputEvent.idl
-// [SOURCE] https://w3c.github.io/uievents/#events-inputevents
+// [IDL] https://w3c.github.io/uievents/#idl-inputevent
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/InputEvent
+#if HAVE_DKDuktape
+
 #pragma once
 #ifndef DKInputEventDUK_H
 #define DKInputEventDUK_H
@@ -108,3 +109,4 @@ REGISTER_OBJECT(DKInputEventDUK, true)
 
 
 #endif //DKInputEventDUK_H
+#endif //HAVE_DKDuktape

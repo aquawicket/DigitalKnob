@@ -29,6 +29,7 @@ bool App::Init() {
 	//TEST_EventTarget* test_EventTarget = new TEST_EventTarget();												// pointer
 	std::unique_ptr<TEST_EventTarget> test_EventTarget = std::make_unique<TEST_EventTarget>();					// smart pointer (unique)
 	
+	/*
 	// [CustomEvent]
 	//DKClass::DKCreate("TEST_CustomEvent");																	// DKObjectT
 	//TEST_CustomEvent* test_CustomEvent = new TEST_CustomEvent();												// pointer
@@ -140,7 +141,7 @@ bool App::Init() {
 	//DKClass::DKCreate("TEST_HTMLImageElement");																// DKObjectT
 	//TEST_HTMLImageElement* test_HTMLImageElement = new TEST_HTMLImageElement();								// pointer
 	std::unique_ptr<TEST_HTMLImageElement> test_HTMLImageElement = std::make_unique<TEST_HTMLImageElement>();	// smart pointer (unique)
-
+	*/
 
 	////// DigitalKnob //////
 	// [DKConsoleWindow]
@@ -155,6 +156,7 @@ bool App::Init() {
 	*/
 	
 	
+	/*
 	// [DKSdlWindow]
 	//DKClass::DKCreate("TEST_DKSdlWindow");																	// DKObjectT						// WORKS
 	//TEST_DKSdlWindow* test_DKSdlWindow = new TEST_DKSdlWindow();												// pointer							// WORKS		 (dangling pointer)
@@ -180,6 +182,7 @@ bool App::Init() {
 
 	// [DKRmlElement]
 	//test_DKRmlElement = std::make_unique<TEST_DKRmlElement>();
+	*/
 	
 	return true;
 }
