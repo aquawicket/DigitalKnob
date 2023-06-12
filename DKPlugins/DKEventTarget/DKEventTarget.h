@@ -78,7 +78,7 @@ public:
 				//DKINFO("		event("+event.type()+") \n");	
 			
 				event.currentTarget(this);
-				event.target(this);
+				event.target(*this);
 				event.srcElement(this);
 				
 				eventObj.callback(event);
