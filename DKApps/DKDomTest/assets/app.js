@@ -1,17 +1,17 @@
-/*
 // [Console] https://console.spec.whatwg.org
 CPP_DK_Create("DKConsoleDUK");
 CPP_DK_Create("TEST_Console.js");
 
 // [DOM] https://dom.spec.whatwg.org
 CPP_DK_Create("DKEventDUK");
-CPP_DK_Create("DKCustomEventDUK");
 CPP_DK_Create("DKEventTargetDUK");
-
 CPP_DK_Create("TEST_Event.js");
-CPP_DK_Create("TEST_CustomEvent.js");
 CPP_DK_Create("TEST_EventTarget.js");
 
+CPP_DK_Create("DKCustomEventDUK");
+CPP_DK_Create("TEST_CustomEvent.js");
+
+/*
 // [UIEvents] https://w3c.github.io/uievents
 CPP_DK_Create("DKUIEventDUK");
 CPP_DK_Create("TEST_UIEvent.js");

@@ -23,6 +23,8 @@ class DKEventTarget;
 class DKEvent : public DKInterface
 {
 public:
+	operator std::string() const { return "Object Event"; }
+
 	// constructor(DOMString type, optional EventInit eventInitDict = {});
 	DKEvent(const DOMString& type, const EventInit& eventInitDict = "{}") : DKInterface(){
 		DKDEBUGFUNC(type, eventInitDict);

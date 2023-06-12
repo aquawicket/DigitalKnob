@@ -9,9 +9,11 @@
 ////// Standard Interfaces //////
 //#include "TEST_Interface.h"	
 #include "TEST_Console.h"
+
 #include "TEST_Event.h"
 #include "TEST_EventTarget.h"
 #include "TEST_CustomEvent.h"
+/*
 #include "TEST_UIEvent.h"
 #include "TEST_FocusEvent.h"
 #include "TEST_MouseEvent.h"
@@ -46,6 +48,7 @@
 #include "TEST_DKRmlNode.h"
 #include "TEST_DKRmlDocument.h"
 #include "TEST_DKRmlElement.h"
+*/
 
 
 
@@ -55,7 +58,8 @@ public:
 	bool Init();
 	bool End();
 	
-	//std::unique_ptr<TEST_DKConsoleWindow> 	test_DKConsoleWindow;
+	/*
+	std::unique_ptr<TEST_DKConsoleWindow> 		test_DKConsoleWindow;
 	
 	std::unique_ptr<TEST_DKSdlWindow> 			test_DKSdlWindow;
 	
@@ -65,6 +69,7 @@ public:
 	std::unique_ptr<TEST_DKRmlDocument>			test_DKRmlDocument;
 	std::unique_ptr<TEST_DKRmlLocation> 		test_DKRmlLocation;
 	std::unique_ptr<TEST_DKRmlElement> 			test_DKRmlElement;
+	*/
 };
 REGISTER_OBJECT(App, true);
 

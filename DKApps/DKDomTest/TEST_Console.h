@@ -10,7 +10,6 @@
 class TEST_Console //: public DKObjectT<TEST_Console>
 {
 public:
-	//bool Init(){
 	TEST_Console() {
 		DKDEBUGFUNC();
 		DKINFO("\n////// TEST_Console.h //////\n");
