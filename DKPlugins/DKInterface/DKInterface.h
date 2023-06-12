@@ -13,6 +13,8 @@ typedef std::string DOMString;
 ////// USVString //////
 typedef std::string USVString;
 
+////// CSSOMString //////
+typedef std::string CSSOMString;
 
 
 class DKInterface

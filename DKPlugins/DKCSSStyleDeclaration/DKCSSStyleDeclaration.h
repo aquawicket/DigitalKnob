@@ -6,7 +6,6 @@
 
 #include "DKInterface/DKInterface.h"
 
-typedef DOMString CSSOMString;
 
 // Source: CSS Object Model (CSSOM) (https://www.w3.org/TR/cssom-1/)
 // [Exposed=Window]

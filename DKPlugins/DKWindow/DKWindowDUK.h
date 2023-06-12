@@ -943,6 +943,10 @@ public:
 	//		[NewObject] CSSStyleDeclaration getComputedStyle(Element elt, optional CSSOMString? pseudoElt);
 			static int getComputedStyle(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
+				DKString eltAddress = GetString(ctx);
+				DKElement* elt = (DKElement*)addressToPointer(eltAddress);
+					DKCSSStyleDeclaration* cssStyleDeclaration = eventTarget(ctx)->getComputedStyle(elt/*, TODO */);
+				dukglue_push(ctx, pointerToAddress(cssStyleDeclaration));
 				return DKTODO();
 			}
 	// };

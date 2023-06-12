@@ -10,6 +10,8 @@ class DKDocument;
 class DKLocation;
 class DKNavigator;
 class DKElement;
+class DKCSSStyleDeclaration;
+
 
 ////// WindowProxy //////
 class DKWindow;
@@ -417,8 +419,8 @@ public:
 	// Source: CSS Object Model (CSSOM) (https://www.w3.org/TR/cssom-1/)
 	// partial interface Window {
 	//		[NewObject] CSSStyleDeclaration getComputedStyle(Element elt, optional CSSOMString? pseudoElt);
-			DKString _getComputedStyle = "";
-			virtual const DKString& getComputedStyle(DKElement* elt, const DKString& pseudoElt = "") {
+			DKCSSStyleDeclaration* _getComputedStyle = NULL;
+			virtual DKCSSStyleDeclaration* getComputedStyle(DKElement* elt, const CSSOMString& pseudoElt = "") {
 				DKDEBUGFUNC(elt, pseudoElt);
 				DKTODO();
 				return _getComputedStyle;
@@ -429,7 +431,7 @@ public:
 	// partial interface Window {
 	//		[NewObject] MediaQueryList matchMedia(CSSOMString query);
 			DKString _matchMedia = "";
-			virtual const DKString& matchMedia(const DKString& mediaQueryString) {
+			virtual const DKString& matchMedia(const CSSOMString& mediaQueryString) {
 				DKDEBUGFUNC(mediaQueryString);
 				DKTODO();
 				return _matchMedia;
