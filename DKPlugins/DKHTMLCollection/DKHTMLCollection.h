@@ -33,6 +33,8 @@ public:
 	// getter Element? item(unsigned long index);
 	virtual DKElement* item(const unsigned int& index){
 		DKDEBUGFUNC(index);
+		if(index >= _element_list.size())
+			return NULL;	
 		return _element_list[index];
 	}
 	
