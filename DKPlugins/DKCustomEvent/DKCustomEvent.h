@@ -35,6 +35,9 @@ public:
 		DKDEBUGFUNC(type, bubbles, cancelable, detail);
 		DKTODO();
 	}
+	
+	////// toString //////
+	operator std::string() const { return "[object CustomEvent]"; }	
 };
 
 

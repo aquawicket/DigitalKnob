@@ -79,7 +79,7 @@ public:
 			
 				event.currentTarget(this);
 				event.target(*this);
-				event.srcElement(this);
+				event.srcElement(*this);
 				
 				eventObj.callback(event);
 			}
