@@ -1,3 +1,5 @@
+#if HAVE_DKDuktape
+
 #pragma once
 #ifndef DKConsoleWindowDUK_H
 #define DKConsoleWindowDUK_H
@@ -64,3 +66,4 @@ REGISTER_OBJECT(DKConsoleWindowDUK, true)
 
 
 #endif //DKConsoleWindowDUK_H
+#endif //HAVE_DKDuktape
