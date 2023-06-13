@@ -30,7 +30,8 @@ public:
 	
 	
 	////// toString //////
-	virtual operator std::string() const { return "[object Interface]"; }
+	//virtual operator std::string() const { return "[object Interface]"; }
+	virtual operator std::string() const { return "undefined"; }
 };
 
 

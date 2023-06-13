@@ -28,8 +28,8 @@ public:
 	virtual ~DKUIEvent(){}
 	
 	// readonly attribute Window? view;
-	DKWindow* _view = new DKWindow();
-	virtual DKWindow&				view()													{ return *_view; }								// getter
+	DKWindow* _view = NULL;
+	virtual DKWindow&				view()													{ return _view ? *_view : DKWindow();}			// getter					
 	virtual void 					view(DKWindow& view) 									{ _view = &view; } 								// setter
 	
 	// readonly attribute long detail;

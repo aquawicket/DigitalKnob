@@ -17,6 +17,7 @@ public:
 		DKEventTarget eventTarget;
 		eventTarget.addEventListener("uievent", &TEST_UIEvent::onuievent);
 		DKUIEvent uievent("uievent", "");
+		//uievent.view()
 		eventTarget.dispatchEvent(uievent);
 	}
 	
@@ -29,7 +30,7 @@ public:
 		// function
 		
 		// readonly attribute Window? view;
-		console.log("uievent.view() = "							+toString(uievent.view()));	//FIXME
+		console.log("uievent.view() = "							+toString(uievent.view()));
 		
 		// readonly attribute long detail;
 		console.log("uievent.detail() = "						+toString(uievent.detail()));
