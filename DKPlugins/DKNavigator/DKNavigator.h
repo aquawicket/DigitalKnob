@@ -13,7 +13,16 @@
 class DKNavigator : public DKInterface
 {
 public:
-		//TODO
+// };
+	
+	// Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
+	//	partial interface Navigator {
+	//	[SameObject] readonly attribute UserActivation userActivation;
+		// TODO
+		
+	//};
+	
+	// TODO . . .
 };
 
 
