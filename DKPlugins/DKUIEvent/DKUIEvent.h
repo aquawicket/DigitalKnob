@@ -29,12 +29,7 @@ public:
 	
 	// readonly attribute Window? view;
 	DKWindow* _view = NULL;
-	virtual DKWindow&				view()													{ 												// getter
-		//return _view ? *_view : *new DKWindow();
-		if(_view)
-			return *_view;
-		return new DKWindow();
-	}				
+	virtual DKWindow&				view()													{ return _view ? *_view : *new DKWindow(); }	// getter			
 	virtual void 					view(DKWindow& view) 									{ _view = &view; } 								// setter
 	
 	// readonly attribute long detail;
