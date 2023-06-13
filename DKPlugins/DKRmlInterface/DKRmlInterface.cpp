@@ -38,7 +38,7 @@ WARNING_ENABLE
 #include "DKRmlInterface/DKRmlInterface.h"
 #include "DKWindow/DKWindow.h"
 #include "DKSdlRmlDocument/DKSdlRmlDocument.h" // FIXME
-#include "DKDuktape/DKDuktape.h"
+//#include "DKDuktape/DKDuktape.h"
 #include "DKXml/DKXml.h"
 #include "DKRmlInterface/DKRmlHeadInstancer.h"
 #ifdef HAVE_DKCurl
@@ -242,7 +242,9 @@ bool DKRmlInterface::LoadHtml(const DKString& html){
 	//DKClass::DKCreate("DKDom");
 	DKString rval;
 	DKString document_address = pointerToAddress(document);
-	DKDuktape::RunDuktape("var document = new Document(\"" + document_address + "\");", rval);
+	#if HAVE_DKDuktape
+		DKDuktape::RunDuktape("var document = new Document(\"" + document_address + "\");", rval);
+	#endif
 	
 	Rml::XMLParser parser(ele);
 	parser.Parse(stream.get());

@@ -29,7 +29,6 @@
 #if HAVE_DKCurl
 	#include "DKCurl/DKCurl.h"
 #endif
-#include "DKDuktape/DKDuktape.h"
 #include "DKRmlInterface/DKRmlInterface.h"
 #include "DKXml/DKXml.h"
 
@@ -351,16 +350,18 @@ bool DKRmlConverter::PostProcess(DKRmlInterface* dkRmlInterface, Rml::Element* e
 			if(has(processed, src))
 				continue;
 #if HAVE_DKCurl
-			if(has(path, "http://")){
-				DKString js;
-				DKClass::DKCreate("DKCurl");
-					if(!DKCurl::Get()->HttpToString(path+src, js)){
-						DKERROR("HttpToString failed on "+path+src+"\n");
-						continue;
-					}
-					processed += src+",";
+		if(has(path, "http://")){
+			DKString js;
+			DKClass::DKCreate("DKCurl");
+				if(!DKCurl::Get()->HttpToString(path+src, js)){
+					DKERROR("HttpToString failed on "+path+src+"\n");
+					continue;
+				}
+				processed += src+",";
+				#if HAVE_DKDuktape
 					DKDuktape::Get()->LoadJSString(path+src, js);
-			}
+				#endif
+		}
 #endif
 			if(!has(path, "http://")) {
 				processed += src+",";
@@ -375,7 +376,9 @@ bool DKRmlConverter::PostProcess(DKRmlInterface* dkRmlInterface, Rml::Element* e
 			//replace(inner,"'","\\'");
 			//replace(inner,"\n","");
 			//replace(inner,"\t","");
-			DKDuktape::Get()->LoadJSString("inlineScript", inner);
+			#if HAVE_DKDuktape
+				DKDuktape::Get()->LoadJSString("inlineScript", inner);
+			#endif
 		}
 		
 		//TODO: dispatch a script.onload event
