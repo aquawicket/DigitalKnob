@@ -105,7 +105,7 @@ bool App::Init() {
 	//test_DKSdlRmlDocument = std::make_unique<TEST_DKSdlRmlDocument>();														// Mixin
 	
 	// [DKRmlInterface]
-	//test_DKRmlInterface = std::make_unique<TEST_DKRmlInterface>();
+	test_DKRmlInterface = std::make_unique<TEST_DKRmlInterface>();
 	
 	// [DKRmlEventTarget]
 	//est_DKRmlEventTarget = std::make_unique<TEST_DKRmlEventTarget>();

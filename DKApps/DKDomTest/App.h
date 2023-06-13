@@ -40,7 +40,7 @@
 #include "TEST_DKConsoleWindow.h"
 #include "TEST_DKSdlWindow.h"
 //#include "TEST_DKSdlRmlDocument.h"		// Mixin	// TODO
-//#include "TEST_DKRmlInterface.h"
+#include "TEST_DKRmlInterface.h"
 //#include "TEST_DKRmlEventTarget.h"
 //#include "TEST_DKRmlLocation.h"
 //#include "TEST_RmlCSSStyleDeclaration.h"
@@ -56,9 +56,9 @@ public:
 	bool End();
 	
 	std::unique_ptr<TEST_DKConsoleWindow> 		test_DKConsoleWindow;
+	//std::unique_ptr<TEST_DKSdlRmlDocument> 	test_DKSdlRmlDocument;	// Mixin
 	std::unique_ptr<TEST_DKSdlWindow> 			test_DKSdlWindow;
-	//std::unique_ptr<TEST_DKSdlWindow> 		test_DKSdlWindow;	// Mixin
-	//std::unique_ptr<TEST_DKRmlInterface>		test_DKRmlInterface;
+	std::unique_ptr<TEST_DKRmlInterface>		test_DKRmlInterface;
 	//std::unique_ptr<TEST_DKRmlEventTarget> 	test_DKRmlEventTarget;	
 	//std::unique_ptr<TEST_DKRmlNode> 			test_DKRmlNode;
 	//std::unique_ptr<TEST_DKRmlDocument>		test_DKRmlDocument;
