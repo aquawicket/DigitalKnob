@@ -99,7 +99,7 @@ bool App::Init() {
 	test_DKConsoleWindow = std::make_unique<TEST_DKConsoleWindow>();										
 	
 	// [DKSdlWindow]
-	//test_DKSdlWindow = std::make_unique<TEST_DKSdlWindow>();													
+	test_DKSdlWindow = std::make_unique<TEST_DKSdlWindow>();													
 	
 	// [DKRmlInterface]
 	//test_DKRmlInterface = std::make_unique<TEST_DKRmlInterface>();
