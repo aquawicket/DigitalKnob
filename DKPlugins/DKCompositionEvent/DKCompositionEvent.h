@@ -49,6 +49,10 @@ public:
 		DKTODO();
 	}
 	// };
+	
+	
+	////// toString //////
+	virtual operator std::string() const { return "[object CompositionEvent]"; }
 };
 
 

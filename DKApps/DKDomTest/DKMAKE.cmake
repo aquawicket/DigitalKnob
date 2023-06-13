@@ -22,12 +22,9 @@ dk_depend(DKMouseEvent)
 dk_depend(DKWheelEvent)
 dk_depend(DKInputEvent)
 dk_depend(DKKeyboardEvent)
-#dk_depend(DKCompositionEvent)
+dk_depend(DKCompositionEvent)
 
-#dk_depend(DKDragEvent)
-
-
-
+dk_depend(DKDragEvent)
 
 #dk_depend(DKNavigator)	# TODO
 #dk_depend(DKURL)

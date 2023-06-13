@@ -75,7 +75,7 @@ bool App::Init() {
 	//DKClass::DKCreate("TEST_KeyboardEvent");																	// DKObjectT
 	//TEST_KeyboardEvent* test_KeyboardEvent = new TEST_KeyboardEvent();										// pointer
 	std::unique_ptr<TEST_KeyboardEvent> test_KeyboardEvent = std::make_unique<TEST_KeyboardEvent>();			// smart pointer (unique)
-	/*
+
 	// [CompositionEvent]
 	//DKClass::DKCreate("TEST_CompositionEvent");																// DKObjectT
 	//TEST_CompositionEvent* test_CompositionEvent = new TEST_CompositionEvent();								// pointer
@@ -86,7 +86,7 @@ bool App::Init() {
 	//DKClass::DKCreate("TEST_DragEvent");																		// DKObjectT
 	//TEST_DragEvent* test_DragEvent = new TEST_DragEvent();													// pointer
 	std::unique_ptr<TEST_DragEvent> test_DragEvent = std::make_unique<TEST_DragEvent>();						// smart pointer (unique)
-
+	/*
 	// [Navigator]
 	//DKClass::DKCreate("TEST_Navigator");																		// DKObjectT
 	//TEST_Navigator* test_Navigator = new TEST_Navigator();													// pointer

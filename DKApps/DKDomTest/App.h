@@ -21,9 +21,9 @@
 #include "TEST_WheelEvent.h"
 #include "TEST_InputEvent.h"
 #include "TEST_KeyboardEvent.h"
-/*
 #include "TEST_CompositionEvent.h"
 #include "TEST_DragEvent.h"
+/*
 #include "TEST_Navigator.h"
 #include "TEST_URL.h"
 #include "TEST_Location.h"
