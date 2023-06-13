@@ -12,7 +12,6 @@
 #include "TEST_Event.h"
 #include "TEST_EventTarget.h"
 #include "TEST_CustomEvent.h"
-
 #include "TEST_Screen.h"
 #include "TEST_Window.h"
 #include "TEST_UIEvent.h"
@@ -28,8 +27,9 @@
 #include "TEST_Location.h"
 #include "TEST_CSSStyleDeclaration.h"
 #include "TEST_Node.h"
-//#include "TEST_Document.h"
-//#include "TEST_Element.h"
+//#include "TEST_NonElementParentNode.h"	// Mixin	// TODO
+#include "TEST_Document.h"
+#include "TEST_Element.h"
 //#include "TEST_HTMLCollection.h"
 //#include "TEST_HTMLElement.h"
 //#include "TEST_HTMLBodyElement.h"
@@ -37,9 +37,7 @@
 
 ////// DigitalKnob Interfaces //////
 //#include "TEST_DKConsoleWindow.h"
-
 //#include "TEST_DKSdlWindow.h"
-
 //#include "TEST_DKRmlInterface.h"
 //#include "TEST_DKRmlEventTarget.h"
 //#include "TEST_DKRmlLocation.h"

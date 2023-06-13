@@ -68,12 +68,15 @@ bool App::Init() {
 
 	// [Node]
 	std::unique_ptr<TEST_Node> test_Node = std::make_unique<TEST_Node>();
-
+	
+	// [NonElementParentNode]
+	//std::unique_ptr<TEST_NonElementParentNode> test_NonElementParentNode = std::make_unique<TEST_NonElementParentNode>();	// Mixin
+	
 	// [Document]
-	//std::unique_ptr<TEST_Document> test_Document = std::make_unique<TEST_Document>();
+	std::unique_ptr<TEST_Document> test_Document = std::make_unique<TEST_Document>();
 	
 	// [Element]
-	//std::unique_ptr<TEST_Element> test_Element = std::make_unique<TEST_Element>();
+	std::unique_ptr<TEST_Element> test_Element = std::make_unique<TEST_Element>();
 
 	// [HTMLCollection]
 	//std::unique_ptr<TEST_HTMLCollection> test_HTMLCollection = std::make_unique<TEST_HTMLCollection>();

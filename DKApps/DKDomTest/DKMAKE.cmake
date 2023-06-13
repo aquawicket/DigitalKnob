@@ -1,8 +1,9 @@
 dk_depend(webref)
-#dk_depend(DKDuktape)
 
+#dk_depend(DKDuktape)
 dk_depend(DK)
 dk_depend(DKAssets)
+
 
 ###### Standard Interfaces ######
 dk_depend(DKInterface)
@@ -25,9 +26,9 @@ dk_depend(DKURL)
 dk_depend(DKLocation)
 dk_depend(DKCSSStyleDeclaration)
 dk_depend(DKNode)
-#dk_depend(DKNonElementParentNode)
-#dk_depend(DKDocument)
-#dk_depend(DKElement)
+dk_depend(DKNonElementParentNode)	# Mixin
+dk_depend(DKDocument)
+dk_depend(DKElement)
 #dk_depend(DKHTMLCollection)
 #dk_depend(DKHTMLElement)
 #dk_depend(DKElementCSSInlineStyle)
