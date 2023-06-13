@@ -33,7 +33,7 @@ public:
 	virtual DKWindow&				view()													{ 												// getter
 		if(_view)
 			return *_view;
-		return DKWindow();
+		return const DKWindow();
 	}					
 	virtual void 					view(DKWindow& view) 									{ _view = &view; } 								// setter
 	
