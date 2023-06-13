@@ -55,12 +55,12 @@ bool App::Init() {
 	//DKClass::DKCreate("TEST_FocusEvent");																		// DKObjectT
 	//TEST_FocusEvent* test_FocusEvent = new TEST_FocusEvent();													// pointer
 	std::unique_ptr<TEST_FocusEvent> test_FocusEvent = std::make_unique<TEST_FocusEvent>();						// smart pointer (unique)
-	/*
+
 	// [MouseEvent]
 	//DKClass::DKCreate("TEST_MouseEvent");																		// DKObjectT
 	//TEST_MouseEvent* test_MouseEvent = new TEST_MouseEvent();													// pointer
 	std::unique_ptr<TEST_MouseEvent> test_MouseEvent = std::make_unique<TEST_MouseEvent>();						// smart pointer (unique)
-	
+	/*
 	// [WheelEvent]
 	//DKClass::DKCreate("TEST_WheelEvent");																		// DKObjectT
 	//TEST_WheelEvent* test_WheelEvent = new TEST_WheelEvent();													// pointer
