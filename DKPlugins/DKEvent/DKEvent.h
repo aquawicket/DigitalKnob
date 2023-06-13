@@ -48,6 +48,7 @@ public:
 	// readonly attribute EventTarget? target;
 	DKEventTarget* _target = NULL;
 	virtual DKEventTarget& 		target()														{ return *_target; }						// getter
+	//virtual DKEventTarget& 		target()														{ return _target ? *_target : *new DKNullEventTarget(); }	// getter
 	virtual void 				target(DKEventTarget& target)									{ _target = &target; } 						// setter
 	
 	// readonly attribute EventTarget? srcElement; // legacy

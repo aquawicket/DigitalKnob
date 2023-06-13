@@ -16,8 +16,8 @@
 #include "TEST_Screen.h"
 #include "TEST_Window.h"
 #include "TEST_UIEvent.h"
-/*
 #include "TEST_FocusEvent.h"
+/*
 #include "TEST_MouseEvent.h"
 #include "TEST_WheelEvent.h"
 #include "TEST_InputEvent.h"
