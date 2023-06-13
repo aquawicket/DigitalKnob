@@ -30,10 +30,11 @@
 //#include "TEST_NonElementParentNode.h"	// Mixin	// TODO
 #include "TEST_Document.h"
 #include "TEST_Element.h"
-//#include "TEST_HTMLCollection.h"
-//#include "TEST_HTMLElement.h"
-//#include "TEST_HTMLBodyElement.h"
-//#include "TEST_HTMLImageElement.h"
+#include "TEST_HTMLCollection.h"
+//#include "TEST_ElementCSSInlineStyle.h"	// Mixin	// TODO
+#include "TEST_HTMLElement.h"
+#include "TEST_HTMLBodyElement.h"
+#include "TEST_HTMLImageElement.h"
 
 ////// DigitalKnob Interfaces //////
 //#include "TEST_DKConsoleWindow.h"

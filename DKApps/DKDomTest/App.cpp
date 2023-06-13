@@ -70,7 +70,7 @@ bool App::Init() {
 	std::unique_ptr<TEST_Node> test_Node = std::make_unique<TEST_Node>();
 	
 	// [NonElementParentNode]
-	//std::unique_ptr<TEST_NonElementParentNode> test_NonElementParentNode = std::make_unique<TEST_NonElementParentNode>();	// Mixin
+	//std::unique_ptr<TEST_NonElementParentNode> test_NonElementParentNode = std::make_unique<TEST_NonElementParentNode>();		// Mixin
 	
 	// [Document]
 	std::unique_ptr<TEST_Document> test_Document = std::make_unique<TEST_Document>();
@@ -79,16 +79,19 @@ bool App::Init() {
 	std::unique_ptr<TEST_Element> test_Element = std::make_unique<TEST_Element>();
 
 	// [HTMLCollection]
-	//std::unique_ptr<TEST_HTMLCollection> test_HTMLCollection = std::make_unique<TEST_HTMLCollection>();
+	std::unique_ptr<TEST_HTMLCollection> test_HTMLCollection = std::make_unique<TEST_HTMLCollection>();
 	
 	// [HTMLElement]
-	//std::unique_ptr<TEST_HTMLElement> test_HTMLElement = std::make_unique<TEST_HTMLElement>();
+	//std::unique_ptr<TEST_ElementCSSInlineStyle> test_ElementCSSInlineStyle = std::make_unique<TEST_ElementCSSInlineStyle>();	// Mixin
+	
+	// [HTMLElement]
+	std::unique_ptr<TEST_HTMLElement> test_HTMLElement = std::make_unique<TEST_HTMLElement>();
 	
 	// [HTMLBodyElement]
-	//std::unique_ptr<TEST_HTMLBodyElement> test_HTMLBodyElement = std::make_unique<TEST_HTMLBodyElement>();
+	std::unique_ptr<TEST_HTMLBodyElement> test_HTMLBodyElement = std::make_unique<TEST_HTMLBodyElement>();
 	
 	// [HTMLImageElement]
-	//std::unique_ptr<TEST_HTMLImageElement> test_HTMLImageElement = std::make_unique<TEST_HTMLImageElement>();
+	std::unique_ptr<TEST_HTMLImageElement> test_HTMLImageElement = std::make_unique<TEST_HTMLImageElement>();
 
 
 	////// DigitalKnob //////
