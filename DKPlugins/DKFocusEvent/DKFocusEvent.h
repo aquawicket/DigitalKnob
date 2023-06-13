@@ -32,7 +32,7 @@ public:
 	
 	
 	////// toString //////
-	operator std::string() const { return "[object FocusEvent]"; }
+	virtual operator std::string() const { return "[object FocusEvent]"; }
 };
 
 
