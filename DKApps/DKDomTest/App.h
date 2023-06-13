@@ -23,32 +23,30 @@
 #include "TEST_KeyboardEvent.h"
 #include "TEST_CompositionEvent.h"
 #include "TEST_DragEvent.h"
-/*
 #include "TEST_Navigator.h"
 #include "TEST_URL.h"
 #include "TEST_Location.h"
 #include "TEST_CSSStyleDeclaration.h"
 #include "TEST_Node.h"
-#include "TEST_Document.h"
-#include "TEST_Element.h"
-#include "TEST_HTMLCollection.h"
-#include "TEST_HTMLElement.h"
-#include "TEST_HTMLBodyElement.h"
-#include "TEST_HTMLImageElement.h"
+//#include "TEST_Document.h"
+//#include "TEST_Element.h"
+//#include "TEST_HTMLCollection.h"
+//#include "TEST_HTMLElement.h"
+//#include "TEST_HTMLBodyElement.h"
+//#include "TEST_HTMLImageElement.h"
 
 ////// DigitalKnob Interfaces //////
 //#include "TEST_DKConsoleWindow.h"
 
-#include "TEST_DKSdlWindow.h"
+//#include "TEST_DKSdlWindow.h"
 
-#include "TEST_DKRmlInterface.h"
-#include "TEST_DKRmlEventTarget.h"
-#include "TEST_DKRmlLocation.h"
+//#include "TEST_DKRmlInterface.h"
+//#include "TEST_DKRmlEventTarget.h"
+//#include "TEST_DKRmlLocation.h"
 //#include "TEST_RmlCSSStyleDeclaration.h"
-#include "TEST_DKRmlNode.h"
-#include "TEST_DKRmlDocument.h"
-#include "TEST_DKRmlElement.h"
-*/
+//#include "TEST_DKRmlNode.h"
+//#include "TEST_DKRmlDocument.h"
+//#include "TEST_DKRmlElement.h"
 
 
 class App : public DKObjectT<App>
@@ -57,18 +55,15 @@ public:
 	bool Init();
 	bool End();
 	
-	/*
-	std::unique_ptr<TEST_DKConsoleWindow> 		test_DKConsoleWindow;
-	
-	std::unique_ptr<TEST_DKSdlWindow> 			test_DKSdlWindow;
-	
-	std::unique_ptr<TEST_DKRmlInterface>		test_DKRmlInterface;
-	std::unique_ptr<TEST_DKRmlEventTarget> 		test_DKRmlEventTarget;	
-	std::unique_ptr<TEST_DKRmlNode> 			test_DKRmlNode;
-	std::unique_ptr<TEST_DKRmlDocument>			test_DKRmlDocument;
-	std::unique_ptr<TEST_DKRmlLocation> 		test_DKRmlLocation;
-	std::unique_ptr<TEST_DKRmlElement> 			test_DKRmlElement;
-	*/
+	//std::unique_ptr<TEST_DKConsoleWindow> 	test_DKConsoleWindow;
+	//std::unique_ptr<TEST_DKSdlWindow> 		test_DKSdlWindow;
+	//std::unique_ptr<TEST_DKRmlInterface>		test_DKRmlInterface;
+	//std::unique_ptr<TEST_DKRmlEventTarget> 	test_DKRmlEventTarget;	
+	//std::unique_ptr<TEST_DKRmlNode> 			test_DKRmlNode;
+	//std::unique_ptr<TEST_DKRmlDocument>		test_DKRmlDocument;
+	//std::unique_ptr<TEST_DKRmlLocation> 		test_DKRmlLocation;
+	//std::unique_ptr<TEST_DKRmlElement> 		test_DKRmlElement;
+
 };
 REGISTER_OBJECT(App, true);
 
