@@ -646,5 +646,11 @@ public:
 	operator std::string() const { return "[object Window]"; }
 };
 
+class DKNullWindow : public DKWindow
+{
+public:
+	operator std::string() const { return "null"; }
+};
+
 
 #endif //DKWindow_H
