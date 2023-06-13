@@ -51,6 +51,10 @@ public:
 	virtual void pixelDepth(const unsigned int& pixelDepth)	{ _pixelDepth = pixelDepth; } 	// setter
 	
 //};
+
+	
+	////// toString //////
+	virtual operator std::string() const { return "[object Screen]"; }
 };
 
 
