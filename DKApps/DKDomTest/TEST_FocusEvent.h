@@ -7,10 +7,10 @@
 #include "DKFocusEvent/DKFocusEvent.h"
 
 
-class TEST_FocusEvent : public DKObjectT<TEST_FocusEvent>
+class TEST_FocusEvent //: public DKObjectT<TEST_FocusEvent>
 {
 public:
-	bool Init(){
+	TEST_FocusEvent() {
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_FocusEvent.h //////");
 		
@@ -18,7 +18,6 @@ public:
 		eventTarget.addEventListener("focusEvent", &TEST_FocusEvent::onFocusEvent);
 		DKFocusEvent focusEvent("focusEvent", "");
 		eventTarget.dispatchEvent(focusEvent);
-		return true;
 	}
 	
 	static void printFocusEventProperties(DKFocusEvent& focusEvent){
@@ -42,7 +41,7 @@ public:
 		return true;
 	}
 };
-REGISTER_OBJECT(TEST_FocusEvent, true);
+//REGISTER_OBJECT(TEST_FocusEvent, true);
 
 
 #endif //TEST_FocusEvent_H

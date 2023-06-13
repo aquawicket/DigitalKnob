@@ -18,7 +18,7 @@ dk_depend(DKWindow)
 
 dk_depend(DKUIEvent)
 dk_depend(DKFocusEvent)
-#dk_depend(DKMouseEvent)
+dk_depend(DKMouseEvent)
 #dk_depend(DKWheelEvent)
 #dk_depend(DKInputEvent)
 #dk_depend(DKKeyboardEvent)
