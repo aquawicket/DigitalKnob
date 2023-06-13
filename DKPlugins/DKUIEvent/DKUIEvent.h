@@ -29,24 +29,20 @@ public:
 	
 	// readonly attribute Window? view;
 	DKWindow* _view = NULL;
-	virtual DKWindow&				view()													{ // getter
-		if (_view)
-			return *_view;
-		return *new DKNullWindow(); 
-	}				
-	virtual void 					view(DKWindow& view) 									{ _view = &view; } 								// setter
+	virtual DKWindow&			view()													{ return _view ? *_view : *new DKNullWindow(); }	// getter
+	virtual void 				view(DKWindow& view) 									{ _view = &view; } 									// setter
 	
 	// readonly attribute long detail;
 	int _detail = 0;
-	virtual const int& 				detail()												{ return _detail; }								// getter
-	virtual void 					detail(const int& detail) 								{ _detail = detail; } 							// setter
+	virtual const int& 			detail()												{ return _detail; }									// getter
+	virtual void 				detail(const int& detail) 								{ _detail = detail; } 								// setter
 	
 	// Source: Input Device Capabilities (https://wicg.github.io/input-device-capabilities/)
 	// partial interface UIEvent {
 	// 	readonly attribute InputDeviceCapabilities? sourceCapabilities;
 	DKString _sourceCapabilities = "";
-	virtual const DKString& 		sourceCapabilities()									{ return _sourceCapabilities; }					// getter
-	virtual void 					sourceCapabilities(const DKString& sourceCapabilities) 	{ _sourceCapabilities = sourceCapabilities; } 	// setter
+	virtual const DKString& 	sourceCapabilities()									{ return _sourceCapabilities; }						// getter
+	virtual void 				sourceCapabilities(const DKString& sourceCapabilities) 	{ _sourceCapabilities = sourceCapabilities; } 		// setter
 	// };
 	
 	// Source: UI Events (https://www.w3.org/TR/uievents/)
@@ -64,8 +60,8 @@ public:
 	// The following support legacy user agents
 	// readonly attribute unsigned long which;
 	unsigned int _which = 0; // https://w3c.github.io/uievents/#dom-uievent-which
-	virtual const unsigned int& 	which()													{ return _which; }								// getter
-	virtual void 					which(const unsigned int& which) 						{ _which = which; } 							// setter
+	virtual const unsigned int& which()													{ return _which; }									// getter
+	virtual void 				which(const unsigned int& which) 						{ _which = which; } 								// setter
 	// };
 	
 	
