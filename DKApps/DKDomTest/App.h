@@ -12,8 +12,11 @@
 #include "TEST_Event.h"
 #include "TEST_EventTarget.h"
 #include "TEST_CustomEvent.h"
-/*
+
+#include "TEST_Screen.h"
+#include "TEST_Window.h"
 #include "TEST_UIEvent.h"
+/*
 #include "TEST_FocusEvent.h"
 #include "TEST_MouseEvent.h"
 #include "TEST_WheelEvent.h"
@@ -21,8 +24,6 @@
 #include "TEST_KeyboardEvent.h"
 #include "TEST_CompositionEvent.h"
 #include "TEST_DragEvent.h"
-#include "TEST_Screen.h"
-#include "TEST_Window.h"
 #include "TEST_Navigator.h"
 #include "TEST_URL.h"
 #include "TEST_Location.h"

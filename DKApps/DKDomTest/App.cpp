@@ -34,12 +34,23 @@ bool App::Init() {
 	//TEST_CustomEvent* test_CustomEvent = new TEST_CustomEvent();												// pointer
 	std::unique_ptr<TEST_CustomEvent> test_CustomEvent = std::make_unique<TEST_CustomEvent>();					// smart pointer (unique)
 	
-	/*
+	
+	// [Screen]
+	//DKClass::DKCreate("TEST_Screen");																			// DKObjectT
+	//TEST_Screen* test_Screen = new TEST_Screen();																// pointer
+	std::unique_ptr<TEST_Screen> test_Screen = std::make_unique<TEST_Screen>();									// smart pointer (unique)
+	
+	// [Window]
+	//DKClass::DKCreate("TEST_Window");																			// DKObjectT
+	//TEST_Window* test_Window = new TEST_Window();																// pointer
+	std::unique_ptr<TEST_Window> test_Window = std::make_unique<TEST_Window>();									// smart pointer (unique)
+	
+	
 	// [UIEvent]
 	//DKClass::DKCreate("TEST_UIEvent");																		// DKObjectT
 	//TEST_UIEvent* test_UIEvent = new TEST_UIEvent();															// pointer
 	std::unique_ptr<TEST_UIEvent> test_UIEvent = std::make_unique<TEST_UIEvent>();								// smart pointer (unique)
-
+	/*
 	// [FocusEvent]
 	//DKClass::DKCreate("TEST_FocusEvent");																		// DKObjectT
 	//TEST_FocusEvent* test_FocusEvent = new TEST_FocusEvent();													// pointer
@@ -75,16 +86,6 @@ bool App::Init() {
 	//DKClass::DKCreate("TEST_DragEvent");																		// DKObjectT
 	//TEST_DragEvent* test_DragEvent = new TEST_DragEvent();													// pointer
 	std::unique_ptr<TEST_DragEvent> test_DragEvent = std::make_unique<TEST_DragEvent>();						// smart pointer (unique)
-
-	// [Screen]
-	//DKClass::DKCreate("TEST_Screen");																			// DKObjectT
-	//TEST_Screen* test_Screen = new TEST_Screen();																// pointer
-	std::unique_ptr<TEST_Screen> test_Screen = std::make_unique<TEST_Screen>();									// smart pointer (unique)
-
-	// [Window]
-	//DKClass::DKCreate("TEST_Window");																			// DKObjectT
-	//TEST_Window* test_Window = new TEST_Window();																// pointer
-	std::unique_ptr<TEST_Window> test_Window = std::make_unique<TEST_Window>();									// smart pointer (unique)
 
 	// [Navigator]
 	//DKClass::DKCreate("TEST_Navigator");																		// DKObjectT

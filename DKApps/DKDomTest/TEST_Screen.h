@@ -25,6 +25,8 @@ public:
 	static void printScreenProperties(DKScreen& screen){
 		DKDEBUGFUNC(screen);
 		
+		console.log("screen = "				+toString(screen));
+		
 		// readonly attribute long availWidth;
 		console.log("screen.availWidth() = "+toString(screen.availWidth()));
 		

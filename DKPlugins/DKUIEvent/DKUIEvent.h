@@ -5,7 +5,8 @@
 #define DKUIEvent_H
 
 #include "DKEvent/DKEvent.h"
-class DKWindow;
+#include "DKWindow/DKWindow.h"
+
 
 ////// UIEventInit //////
 typedef std::string UIEventInit;
@@ -27,9 +28,9 @@ public:
 	virtual ~DKUIEvent(){}
 	
 	// readonly attribute Window? view;
-	DKWindow* _view = NULL;
-	virtual DKWindow&				view()													{ return *_view; }								// getter
-	virtual void 					view(DKWindow& view) 									{ _view = &view; } 								// setter
+	DKWindow _view;
+	virtual DKWindow&				view()													{ return _view; }								// getter
+	virtual void 					view(DKWindow& view) 									{ _view = view; } 								// setter
 	
 	// readonly attribute long detail;
 	int _detail = 0;

@@ -22,6 +22,8 @@ public:
 	static void printWindowProperties(DKWindow& window){
 		DKDEBUGFUNC(window);
 		
+		console.log("window = "						+toString(window));
+		
 		// the current browsing context
 		// [LegacyUnforgeable] readonly attribute WindowProxy window;
 		//console.log("window.window() = "			+toString(window.window()));

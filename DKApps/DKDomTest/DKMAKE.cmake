@@ -13,7 +13,10 @@ dk_depend(DKEvent)
 dk_depend(DKEventTarget)
 dk_depend(DKCustomEvent)
 
-#dk_depend(DKUIEvent)
+dk_depend(DKScreen)
+dk_depend(DKWindow)
+
+dk_depend(DKUIEvent)
 #dk_depend(DKFocusEvent)
 #dk_depend(DKMouseEvent)
 #dk_depend(DKWheelEvent)
@@ -23,9 +26,9 @@ dk_depend(DKCustomEvent)
 
 #dk_depend(DKDragEvent)
 
-#dk_depend(DKWindow)
 
-#dk_depend(DKScreen)
+
+
 #dk_depend(DKNavigator)	# TODO
 #dk_depend(DKURL)
 #dk_depend(DKLocation)
