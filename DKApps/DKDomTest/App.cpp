@@ -96,7 +96,7 @@ bool App::Init() {
 
 	////// DigitalKnob //////
 	// [DKConsoleWindow]
-	//test_DKConsoleWindow = std::make_shared<TEST_DKConsoleWindow>();										
+	test_DKConsoleWindow = std::make_unique<TEST_DKConsoleWindow>();										
 	
 	// [DKSdlWindow]
 	//test_DKSdlWindow = std::make_unique<TEST_DKSdlWindow>();													

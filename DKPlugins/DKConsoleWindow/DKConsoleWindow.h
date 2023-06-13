@@ -477,7 +477,6 @@ public:
 	int clientY;
 	short button;
 	unsigned short buttons;
-	DKString relatedTarget;
 	double pageX;
 	double pageY;
 	double x;
@@ -494,9 +493,6 @@ public:
 	double deltaY;
 	double deltaZ;
 	unsigned int deltaMode;
-
-	// FocusEvent
-	//DKString relatedTarget;
 
 	// ResizeEvent
 	unsigned int columns;

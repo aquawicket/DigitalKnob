@@ -37,7 +37,7 @@
 #include "TEST_HTMLImageElement.h"
 
 ////// DigitalKnob Interfaces //////
-//#include "TEST_DKConsoleWindow.h"
+#include "TEST_DKConsoleWindow.h"
 //#include "TEST_DKSdlWindow.h"
 //#include "TEST_DKRmlInterface.h"
 //#include "TEST_DKRmlEventTarget.h"
@@ -54,7 +54,7 @@ public:
 	bool Init();
 	bool End();
 	
-	//std::unique_ptr<TEST_DKConsoleWindow> 	test_DKConsoleWindow;
+	std::unique_ptr<TEST_DKConsoleWindow> 	test_DKConsoleWindow;
 	//std::unique_ptr<TEST_DKSdlWindow> 		test_DKSdlWindow;
 	//std::unique_ptr<TEST_DKRmlInterface>		test_DKRmlInterface;
 	//std::unique_ptr<TEST_DKRmlEventTarget> 	test_DKRmlEventTarget;	
