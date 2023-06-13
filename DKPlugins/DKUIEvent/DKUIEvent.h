@@ -30,10 +30,10 @@ public:
 	// readonly attribute Window? view;
 	DKWindow* _view = NULL;
 	//virtual DKWindow&				view()													{ return _view ? *_view : DKWindow();}			// getter
-	virtual const DKWindow&				view()												{ 												// getter
-		if(_view)
-			_view = new DKWindow;
-		return &_view;
+	virtual DKWindow&				view()												{ 												// getter
+		if(!_view)
+			_view = new DKWindow();
+		return *_view;
 	}					
 	virtual void 					view(DKWindow& view) 									{ _view = &view; } 								// setter
 	
