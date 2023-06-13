@@ -28,9 +28,9 @@ public:
 	virtual ~DKUIEvent(){}
 	
 	// readonly attribute Window? view;
-	DKWindow _view;
-	virtual DKWindow&				view()													{ return _view; }								// getter
-	virtual void 					view(DKWindow& view) 									{ _view = view; } 								// setter
+	DKWindow* _view = new DKWindow();
+	virtual DKWindow&				view()													{ return *_view; }								// getter
+	virtual void 					view(DKWindow& view) 									{ _view = &view; } 								// setter
 	
 	// readonly attribute long detail;
 	int _detail = 0;
