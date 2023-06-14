@@ -106,13 +106,13 @@ bool App::Init() {
 	//test_DKSdlRmlDocument = std::make_unique<TEST_DKSdlRmlDocument>();														// Mixin
 	
 	// [DKRmlInterface]
-	test_DKRmlInterface = std::make_unique<TEST_DKRmlInterface>();
+	//test_DKRmlInterface = std::make_unique<TEST_DKRmlInterface>();
 	
 	// [DKRmlEventTarget]
-	test_DKRmlEventTarget = std::make_unique<TEST_DKRmlEventTarget>();
+	//test_DKRmlEventTarget = std::make_unique<TEST_DKRmlEventTarget>();
 	
 	// [DKRmlLocation]
-	test_DKRmlLocation = std::make_unique<TEST_DKRmlLocation>();
+	//test_DKRmlLocation = std::make_unique<TEST_DKRmlLocation>();
 	
 	// [DKRmlNode]
 	//test_DKRmlNode = std::make_unique<TEST_DKRmlNode>();
