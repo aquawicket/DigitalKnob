@@ -43,8 +43,6 @@ class DKConsoleWindow : public DKWindow //, public DKObjectT<DKConsoleWindow>
 public:
 	DKConsoleWindow();
 	~DKConsoleWindow();
-	bool Init();
-	bool End();
 	
 	// the current browsing context
 	// [LegacyUnforgeable] readonly attribute WindowProxy window;
@@ -427,8 +425,8 @@ public:
 					RECT rect;
 					GetWindowRect(GetConsoleWindow(), &rect);
 					_outerWidth = rect.right - rect.left;
-					return _outerWidth;
 				#endif
+				return _outerWidth;
 			}
 			virtual void outerWidth(const int& outerWidth){			// setter
 				// readonly
@@ -440,8 +438,8 @@ public:
 					RECT rect;
 					GetWindowRect(GetConsoleWindow(), &rect);
 					_outerHeight = rect.bottom - rect.top;
-					return _outerHeight;
 				#endif
+				return _outerHeight;
 			}
 			virtual void outerHeight(const int& outerHeight){		// setter
 				//readonly

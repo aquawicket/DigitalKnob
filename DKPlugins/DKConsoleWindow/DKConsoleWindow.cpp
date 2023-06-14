@@ -139,19 +139,6 @@ DKConsoleWindow::~DKConsoleWindow() {
 	#endif
 }
 
-bool DKConsoleWindow::Init() {
-	DKDEBUGFUNC();
-	DKINFO("DKConsoleWindow::Init() \n");
-	return true;
-}
-
-bool DKConsoleWindow::End() {
-	DKDEBUGFUNC();
-	DKINFO("DKConsoleWindow::End() \n");
-	return true;
-}
-
-
 
 void DKConsoleWindow::Loop() {
     //DKDEBUGFUNC(); //EXCESSIVE LOGGING
@@ -1079,4 +1066,4 @@ void DKConsoleWindow::ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD wbsr) {
 	dispatchEvent(resize_event);
 	*/
 }
-#endif
+#endif	//WIN
