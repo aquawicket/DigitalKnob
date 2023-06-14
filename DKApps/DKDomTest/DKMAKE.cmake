@@ -38,14 +38,14 @@ dk_depend(DKHTMLImageElement)
 
 ###### DigitalKnob Interfaces ######
 dk_depend(DKConsoleWindow)
-dk_depend(DKSdlWindow)
-dk_depend(DKSdlRmlDocument)			# Mixin
-dk_depend(DKRmlInterface)
-dk_depend(DKRmlEventTarget)
-dk_depend(DKRmlLocation)
-dk_depend(DKRmlNode)
-dk_depend(DKRmlDocument)
-dk_depend(DKRmlElement)
-dk_depend(DKElementCSSInlineStyle)
+#dk_depend(DKSdlWindow)
+#dk_depend(DKSdlRmlDocument)			# Mixin
+#dk_depend(DKRmlInterface)
+#dk_depend(DKRmlEventTarget)
+#dk_depend(DKRmlLocation)
+#dk_depend(DKRmlNode)
+#dk_depend(DKRmlDocument)
+#dk_depend(DKRmlElement)
+#dk_depend(DKElementCSSInlineStyle)
 #dk_depend(DKRmlHTMLElement)		# TODO
-dk_depend(DKWebTest)
+#dk_depend(DKWebTest)
