@@ -111,7 +111,7 @@ bool App::Init() {
 	test_DKRmlEventTarget = std::make_unique<TEST_DKRmlEventTarget>();
 	
 	// [DKRmlLocation]
-	//test_DKRmlLocation = std::make_unique<TEST_DKRmlLocation>();
+	test_DKRmlLocation = std::make_unique<TEST_DKRmlLocation>();
 	
 	// [DKRmlNode]
 	//test_DKRmlNode = std::make_unique<TEST_DKRmlNode>();
