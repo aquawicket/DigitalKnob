@@ -53,7 +53,8 @@ DKConsoleWindow::DKConsoleWindow() : DKWindow() {
 	interfaceName = "ConsoleWindow";
 	interfaceAddress = pointerToAddress(this);
 	DKINFO("DKConsoleWindow("+interfaceAddress+") \n");
-		
+	
+	/*	
 	#if !WIN && !EMSCRIPTEN && !ANDROID && !IOS
 		SCREEN *screen = newterm((char *) 0, stdout, stdin);
 		if(!screen){
@@ -61,6 +62,7 @@ DKConsoleWindow::DKConsoleWindow() : DKWindow() {
 			return;
 		}
 	#endif
+	*/
 
 	#if WIN
 		// Get the standard input handle. 
