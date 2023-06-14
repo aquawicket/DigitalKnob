@@ -101,6 +101,7 @@ bool App::Init() {
 	// [DKSdlWindow]
 	test_DKSdlWindow = std::make_unique<TEST_DKSdlWindow>();
 
+#if !UNIX
 	// [DKSdlRmlDocument]
 	//test_DKSdlRmlDocument = std::make_unique<TEST_DKSdlRmlDocument>();														// Mixin
 	
@@ -121,7 +122,7 @@ bool App::Init() {
 
 	// [DKRmlElement]
 	//test_DKRmlElement = std::make_unique<TEST_DKRmlElement>();
-	
+#endif
 	return true;
 }
 
