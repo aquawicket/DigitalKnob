@@ -32,11 +32,13 @@
 #include "DKWheelEvent/DKWheelEvent.h"
 #include "DKKeyboardEvent/DKKeyboardEvent.h"
 
+/*
 #if !WIN && !EMSCRIPTEN && !ANDROID && !IOS
 	#include <stdlib.h>
 	#include <signal.h>
 	#include <curses.h>
 #endif
+*/
 
 #if WIN
 	// fullScreen

@@ -1,3 +1,4 @@
+#FIXME:  Unix probobly needs curses
 dk_depend(DKWindow)
 dk_depend(DKFocusEvent)
 dk_depend(DKMouseEvent)
