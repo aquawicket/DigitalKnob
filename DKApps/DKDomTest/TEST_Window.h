@@ -29,10 +29,10 @@ public:
 		console.log("window.window() = "			+toString(window.window()));
 	
 		// [Replaceable] readonly attribute WindowProxy self;
-		//console.log("window.self() = "				+toString(window.self()));
+		console.log("window.self() = "				+toString(window.self()));
 		
 		// [LegacyUnforgeable] readonly attribute Document document;
-		//console.log("window.document() = "		+toString(window.document()));
+		console.log("window.document() = "		+toString(window.document()));
 		
 		// attribute DOMString name;
 		console.log("window.name() = "				+toString(window.name()));

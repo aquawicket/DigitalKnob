@@ -6,7 +6,7 @@
 
 #include "DKEventTarget/DKEventTarget.h"
 #include "DKScreen/DKScreen.h"
-class DKDocument;
+#include "DKDocument/DKDocument.h"
 class DKLocation;
 class DKNavigator;
 class DKElement;
@@ -40,13 +40,13 @@ public:
 	
 	// [Replaceable] readonly attribute WindowProxy self;
 	DKWindowProxy* _self = NULL;
-	virtual DKWindowProxy* self();																		// getter
-	virtual void self(DKWindowProxy* self);										 						// setter
+	virtual DKWindowProxy& self();																		// getter
+	virtual void self(DKWindowProxy& self);										 						// setter
 	
 	// [LegacyUnforgeable] readonly attribute Document document;
 	DKDocument* _document = NULL;
-	virtual DKDocument* document()								{ return _document; }					// getter
-	virtual void document(DKDocument* document)					{ _document = document; } 				// setter
+	virtual DKDocument& document()								{ return _document ? *_document : *new DKNullDocument(); }	// getter
+	virtual void document(DKDocument& document)					{ _document = &document; } 									// setter
 	
 	// attribute DOMString name;
 	DOMString _name = "";

@@ -11,6 +11,8 @@ dk_depend(DKConsole)
 dk_depend(DKEvent)
 dk_depend(DKEventTarget)
 dk_depend(DKCustomEvent)
+dk_depend(DKNonElementParentNode)	# Mixin
+dk_depend(DKDocument)
 dk_depend(DKScreen)
 dk_depend(DKWindow)
 dk_depend(DKUIEvent)
@@ -26,8 +28,6 @@ dk_depend(DKURL)
 dk_depend(DKLocation)
 dk_depend(DKCSSStyleDeclaration)
 dk_depend(DKNode)
-dk_depend(DKNonElementParentNode)	# Mixin
-dk_depend(DKDocument)
 dk_depend(DKElement)
 dk_depend(DKHTMLCollection)
 dk_depend(DKElementCSSInlineStyle)	# Mixin
