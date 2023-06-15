@@ -47,20 +47,20 @@ public:
 	
 	// readonly attribute EventTarget? target;
 	DKEventTarget* _target = NULL;
-	//virtual DKEventTarget& 	target()														{ return *_target; }													// getter
-	virtual DKEventTarget& 		target()														{ return _target ? *_target : *new DKNullEventTarget(); }				// getter
+	virtual DKEventTarget& 	target()															{ return *_target; }													// getter
+	//virtual DKEventTarget& 		target()													{ return _target ? *_target : *new DKNullEventTarget(); }				// getter
 	virtual void 				target(DKEventTarget& target)									{ _target = &target; } 													// setter
 	
 	// readonly attribute EventTarget? srcElement; // legacy
 	DKEventTarget* _srcElement = NULL;
-	//virtual DKEventTarget& 	srcElement()													{ return *_srcElement; }												// getter
-	virtual DKEventTarget& 		srcElement()													{ return _srcElement ? *_srcElement : *new DKNullEventTarget(); }		// getter
+	virtual DKEventTarget& 	srcElement()														{ return *_srcElement; }												// getter
+	//virtual DKEventTarget& 		srcElement()												{ return _srcElement ? *_srcElement : *new DKNullEventTarget(); }		// getter
 	virtual void 				srcElement(DKEventTarget& srcElement) 							{ _srcElement = &srcElement; } 											// setter
 	
 	// readonly attribute EventTarget? currentTarget;
 	DKEventTarget* _currentTarget = NULL;
-	//virtual DKEventTarget& 		currentTarget()												{ return *_currentTarget; }												// getter
-	virtual DKEventTarget& 		currentTarget()													{ return _currentTarget ? *_currentTarget : *new DKNullEventTarget(); }	// getter
+	virtual DKEventTarget& 		currentTarget()													{ return *_currentTarget; }												// getter
+	//virtual DKEventTarget& 		currentTarget()												{ return _currentTarget ? *_currentTarget : *new DKNullEventTarget(); }	// getter
 	virtual void 				currentTarget(DKEventTarget& currentTarget) 					{ _currentTarget = &currentTarget; }									// setter
 	
 	// sequence<EventTarget> composedPath();
