@@ -22,7 +22,7 @@ public:
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKRmlHTMLElement("+interfaceAddress+") \n");
 		_dkRmlInterface = dkRmlInterface;
-		_rmlElement = rmlElement;		
+		_rmlElement = rmlElement;
 	}
 	
 	virtual ~DKRmlHTMLElement() {}
