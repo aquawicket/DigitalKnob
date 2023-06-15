@@ -26,7 +26,7 @@ public:
 		
 		// the current browsing context
 		// [LegacyUnforgeable] readonly attribute WindowProxy window;
-		//console.log("window.window() = "			+toString(window.window()));
+		console.log("window.window() = "			+toString(window.window()));
 	
 		// [Replaceable] readonly attribute WindowProxy self;
 		//console.log("window.self() = "				+toString(window.self()));

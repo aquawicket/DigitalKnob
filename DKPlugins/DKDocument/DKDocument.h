@@ -262,6 +262,17 @@ public:
 			virtual const DKString& onfullscreenerror()								{ return _onfullscreenerror; }					// getter
 			virtual void onfullscreenerror(const DKString& onfullscreenerror)		{ _onfullscreenerror = onfullscreenerror; } 	// setter
 	//};
+	
+	
+	////// toString //////
+	operator std::string() const { return "[object Document]"; }
+};
+
+
+class DKNullDocument : public DKDocument
+{
+public:
+	operator std::string() const { return "null"; }
 };
 
 

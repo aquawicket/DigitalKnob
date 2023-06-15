@@ -35,13 +35,13 @@ public:
 	// the current browsing context
 	// [LegacyUnforgeable] readonly attribute WindowProxy window;
 	DKWindowProxy* _window = NULL;
-	virtual DKWindowProxy* window()								{ return _window; }						// getter
-	virtual void window(DKWindowProxy* window)					{ _window = window; }					// setter
+	virtual DKWindowProxy& window();																	// getter
+	virtual void window(DKWindowProxy& window);															// setter
 	
 	// [Replaceable] readonly attribute WindowProxy self;
 	DKWindowProxy* _self = NULL;
-	virtual DKWindowProxy* self()								{ return _self; }						// getter
-	virtual void self(DKWindowProxy* self)						{ _self = self; } 						// setter
+	virtual DKWindowProxy* self();																		// getter
+	virtual void self(DKWindowProxy* self);										 						// setter
 	
 	// [LegacyUnforgeable] readonly attribute Document document;
 	DKDocument* _document = NULL;

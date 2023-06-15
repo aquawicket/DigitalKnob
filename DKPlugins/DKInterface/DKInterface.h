@@ -33,5 +33,11 @@ public:
 	virtual operator std::string() const { return "[object Interface]"; }
 };
 
+class DKNullInterface : public DKInterface
+{
+public:
+	operator std::string() const { return "null"; }
+};
+
 
 #endif //DKInterface_H
