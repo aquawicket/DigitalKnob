@@ -645,12 +645,14 @@ public:
 	
 	////// toString //////
 	operator std::string() const { return "[object Window]"; }
+	//operator bool() const { return true; }
 };
 
 class DKNullWindow : public DKWindow
 {
 public:
 	operator std::string() const { return "null"; }
+	//operator bool() const { return false; }
 };
 
 

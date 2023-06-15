@@ -274,8 +274,8 @@ public:
 		//
 		//		[SameObject, Replaceable] readonly attribute Screen screen;
 				console.log("window.screen() = "				+toString(window.screen()));
-				//if(window.screen())
-				//	TEST_Screen::printScreenProperties(window.screen());
+				//if(*window.screen())
+				//	TEST_Screen::printScreenProperties(*window.screen());
 				
 		//
 		//		[SameObject, Replaceable] readonly attribute VisualViewport? visualViewport;
