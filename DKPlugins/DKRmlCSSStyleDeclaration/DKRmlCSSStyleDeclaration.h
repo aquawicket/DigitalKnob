@@ -13,11 +13,16 @@
 class DKRmlCSSStyleDeclaration : public DKCSSStyleDeclaration
 {
 public:
-	DKRmlCSSStyleDeclaration() : DKCSSStyleDeclaration() {
+	DKRmlInterface* _dkRmlInterface;
+	
+	DKRmlCSSStyleDeclaration(DKRmlInterface* dkRmlInterface) : DKCSSStyleDeclaration() {
 		DKDEBUGFUNC();
 		interfaceName = "DKRmlCSSStyleDeclaration";
 		interfaceAddress = pointerToAddress(this);
+		_dkRmlInterface = dkRmlInterface;
 	}
+	virtual ~DKRmlCSSStyleDeclaration() {	}
+	
 	
 	// [CEReactions] attribute CSSOMString cssText;
 	CSSOMString _cssText = "";

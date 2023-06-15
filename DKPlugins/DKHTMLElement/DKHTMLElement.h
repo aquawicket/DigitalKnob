@@ -5,6 +5,7 @@
 #define DKHTMLElement_H
 
 #include "DKElement/DKElement.h"
+#include "DKElementCSSInlineStyle/DKElementCSSInlineStyle.h"
 
 // [Exposed=Window]
 // interface HTMLElement : Element {

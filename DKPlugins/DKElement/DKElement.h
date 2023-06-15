@@ -5,11 +5,12 @@
 #define DKElement_H
 
 #include "DKNode/DKNode.h"
+#include "DKElementCSSInlineStyle/DKElementCSSInlineStyle.h"
 class DKHTMLCollection;
 
 // [Exposed=Window]
 // interface Element : Node {
-class DKElement : public DKNode
+class DKElement : public DKNode, public DKElementCSSInlineStyle
 {
 public:
 	DKElement() : DKNode() {

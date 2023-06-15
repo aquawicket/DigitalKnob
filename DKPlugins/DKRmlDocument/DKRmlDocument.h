@@ -25,7 +25,6 @@ public:
 		DKINFO("DKRmlDocument("+interfaceAddress+") \n");
 		_dkRmlInterface = dkRmlInterface;
 	}
-	
 	virtual ~DKRmlDocument() {	}
 	
 	/*

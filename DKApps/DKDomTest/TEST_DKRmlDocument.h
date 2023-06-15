@@ -57,6 +57,9 @@ public:
 					item->SetProperty("text-decoration", "underline");
 					item->AddEventListener("click", dkRmlInterface, false);
 					*/
+					
+					DKCSSStyleDeclaration* dkCSSStyleDeclaration = &item->style();
+					dkCSSStyleDeclaration->setProperty("color", "rgb(0,0,255)");
 				}
 			}
 		}
