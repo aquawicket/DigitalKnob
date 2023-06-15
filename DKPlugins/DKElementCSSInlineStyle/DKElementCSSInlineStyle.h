@@ -4,7 +4,7 @@
 #ifndef DKElementCSSInlineStyle_H
 #define DKElementCSSInlineStyle_H
 
-#include "DKInterface/DKInterface.h"
+#include "DKCSSStyleDeclaration/DKCSSStyleDeclaration.h"
 //#include "DKMixin/DKMixin.h"
 
 
@@ -16,17 +16,20 @@ public:
 	
 	// [SameObject, PutForwards=cssText] readonly attribute CSSStyleDeclaration style;
 	DKCSSStyleDeclaration* _style = NULL;
-	virtual DKCSSStyleDeclaration&	type()									{ return *_type; }		// getter
-	virtual void 					type(DKCSSStyleDeclaration& type) 		{ _type = &type; } 		// setter
+	virtual DKCSSStyleDeclaration&	style()									{ return *_style; }			// getter
+	virtual void 					style(DKCSSStyleDeclaration& style) 	{ _style = &style; } 		// setter
 
 // };
 
 	// Source: CSS Typed OM Level 1 (https://www.w3.org/TR/css-typed-om-1/)
 	// partial interface mixin ElementCSSInlineStyle {
 	//	[SameObject] readonly attribute StylePropertyMap attributeStyleMap;
+		/*
+		// TODO
 		DKStylePropertyMap* _attributeStyleMap = NULL;
 		virtual DKStylePropertyMap&	attributeStyleMap()											{ return *_attributeStyleMap; }					// getter
 		virtual void 				attributeStyleMap(DKStylePropertyMap& attributeStyleMap) 	{ _attributeStyleMap = &attributeStyleMap; } 	// setter
+		*/
 	// };
 };
 
