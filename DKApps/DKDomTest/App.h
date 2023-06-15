@@ -7,7 +7,7 @@
 // FIXME: Get the hierarchy in the right order
 
 ////// Standard Interfaces //////
-//#include "TEST_Interface.h"	
+//#include "TEST_Interface.h"				// TODO
 #include "TEST_Console.h"
 #include "TEST_Event.h"
 #include "TEST_EventTarget.h"
@@ -45,8 +45,8 @@
 #include "TEST_DKRmlLocation.h"
 //#include "TEST_RmlCSSStyleDeclaration.h"	// TODO
 #include "TEST_DKRmlNode.h"
-//#include "TEST_DKRmlDocument.h"
-//#include "TEST_DKRmlElement.h"
+#include "TEST_DKRmlDocument.h"
+#include "TEST_DKRmlElement.h"
 //#include "TEST_DKRmlHTMLElement.h"		// TODO
 
 
@@ -56,15 +56,17 @@ public:
 	bool Init();
 	bool End();
 	
-	std::unique_ptr<TEST_DKConsoleWindow> 		test_DKConsoleWindow;
-	std::unique_ptr<TEST_DKSdlWindow> 			test_DKSdlWindow;
-	//std::unique_ptr<TEST_DKSdlRmlDocument> 	test_DKSdlRmlDocument;	// Mixin
-	std::unique_ptr<TEST_DKRmlInterface>		test_DKRmlInterface;
-	std::unique_ptr<TEST_DKRmlEventTarget> 		test_DKRmlEventTarget;
-	std::unique_ptr<TEST_DKRmlLocation> 		test_DKRmlLocation;
-	std::unique_ptr<TEST_DKRmlNode> 			test_DKRmlNode;
-	//std::unique_ptr<TEST_DKRmlDocument>		test_DKRmlDocument;
-	//std::unique_ptr<TEST_DKRmlElement> 		test_DKRmlElement;
+	std::unique_ptr<TEST_DKConsoleWindow> 			test_DKConsoleWindow;
+	std::unique_ptr<TEST_DKSdlWindow> 				test_DKSdlWindow;
+	//std::unique_ptr<TEST_DKSdlRmlDocument> 		test_DKSdlRmlDocument;			// Mixin
+	std::unique_ptr<TEST_DKRmlInterface>			test_DKRmlInterface;
+	std::unique_ptr<TEST_DKRmlEventTarget> 			test_DKRmlEventTarget;
+	std::unique_ptr<TEST_DKRmlLocation> 			test_DKRmlLocation;
+	//std::unique_ptr<TEST_RmlCSSStyleDeclaration>	test_RmlCSSStyleDeclaration;	// TODO
+	std::unique_ptr<TEST_DKRmlNode> 				test_DKRmlNode;
+	std::unique_ptr<TEST_DKRmlDocument>				test_DKRmlDocument;
+	std::unique_ptr<TEST_DKRmlElement> 				test_DKRmlElement;
+	//std::unique_ptr<TEST_DKRmlHTMLElement> 		test_DKRmlHTMLElement;			// TODO
 
 };
 REGISTER_OBJECT(App, true);

@@ -11,7 +11,7 @@ dk_depend(DKConsole)
 dk_depend(DKEvent)
 dk_depend(DKEventTarget)
 dk_depend(DKCustomEvent)
-dk_depend(DKNonElementParentNode)	# Mixin
+dk_depend(DKNonElementParentNode)		# Mixin
 dk_depend(DKDocument)
 dk_depend(DKScreen)
 dk_depend(DKWindow)
@@ -30,7 +30,7 @@ dk_depend(DKCSSStyleDeclaration)
 dk_depend(DKNode)
 dk_depend(DKElement)
 dk_depend(DKHTMLCollection)
-dk_depend(DKElementCSSInlineStyle)	# Mixin
+dk_depend(DKElementCSSInlineStyle)		# Mixin
 dk_depend(DKHTMLElement)
 dk_depend(DKHTMLBodyElement)
 dk_depend(DKHTMLImageElement)
@@ -39,13 +39,12 @@ dk_depend(DKHTMLImageElement)
 ###### DigitalKnob Interfaces ######
 dk_depend(DKConsoleWindow)
 dk_depend(DKSdlWindow)
-dk_depend(DKSdlRmlDocument)			# Mixin
+dk_depend(DKSdlRmlDocument)				# Mixin
 dk_depend(DKRmlInterface)
 dk_depend(DKRmlEventTarget)
 dk_depend(DKRmlLocation)
 dk_depend(DKRmlNode)
-#dk_depend(DKRmlDocument)
-#dk_depend(DKRmlElement)
-#dk_depend(DKElementCSSInlineStyle)
+dk_depend(DKRmlDocument)
+dk_depend(DKRmlElement)
 #dk_depend(DKRmlHTMLElement)			# TODO
 #dk_depend(DKWebTest)
