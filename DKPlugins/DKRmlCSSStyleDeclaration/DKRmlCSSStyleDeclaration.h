@@ -4,6 +4,7 @@
 #ifndef DKRmlCSSStyleDeclaration_H
 #define DKRmlCSSStyleDeclaration_H
 
+#include "DKRmlInterface/DKRmlInterface.h"
 #include "DKCSSStyleDeclaration/DKCSSStyleDeclaration.h"
 
 
@@ -14,12 +15,14 @@ class DKRmlCSSStyleDeclaration : public DKCSSStyleDeclaration
 {
 public:
 	DKRmlInterface* _dkRmlInterface;
+	Rml::Element* _rmlElement;
 	
-	DKRmlCSSStyleDeclaration(DKRmlInterface* dkRmlInterface) : DKCSSStyleDeclaration() {
+	DKRmlCSSStyleDeclaration(DKRmlInterface* dkRmlInterface, Rml::Element* rmlElement) : DKCSSStyleDeclaration() {
 		DKDEBUGFUNC();
 		interfaceName = "DKRmlCSSStyleDeclaration";
 		interfaceAddress = pointerToAddress(this);
 		_dkRmlInterface = dkRmlInterface;
+		_rmlElement = rmlElement;
 	}
 	virtual ~DKRmlCSSStyleDeclaration() {	}
 	
@@ -58,6 +61,7 @@ public:
 	// [CEReactions] undefined setProperty(CSSOMString property, [LegacyNullToEmptyString] CSSOMString value, optional [LegacyNullToEmptyString] CSSOMString priority = "");
 	virtual void setProperty(const CSSOMString& property, const CSSOMString& value, const CSSOMString& priority = "") override {
 		DKDEBUGFUNC(property, value, priority);
+		_rmlElement->SetProperty(property, value);//, priority);
 	}
 	
 	// [CEReactions] CSSOMString removeProperty(CSSOMString property);

@@ -3,6 +3,7 @@
 #define TEST_DKRmlDocument_H
 
 #include "DKRmlDocument/DKRmlDocument.h"
+#include "DKRmlCSSStyleDeclaration/DKRmlCSSStyleDeclaration.h"
 
 
 class TEST_DKRmlDocument //: public DKObjectT<TEST_DKRmlDocument>
@@ -60,6 +61,9 @@ public:
 					
 					DKCSSStyleDeclaration* dkCSSStyleDeclaration = &item->style();
 					dkCSSStyleDeclaration->setProperty("color", "rgb(0,0,255)");
+					
+					//DKRmlCSSStyleDeclaration* dkRmlCSSStyleDeclaration = &item->style();
+					//dkRmlCSSStyleDeclaration->setProperty("color", "rgb(0,0,255)");
 				}
 			}
 		}
