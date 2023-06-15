@@ -12,6 +12,7 @@ bool App::Init() {
 	//std::shared_ptr<TEST_INTERFACE> test_interfqce = std::make_shared<TEST_INTERFACE>();						// smart pointer (shared)
 	//std::unique_ptr<TEST_INTERFACE> test_interfqce = std::make_unique<TEST_INTERFACE>();						// smart pointer (unique)
 	
+	////// Standard Interfaces //////
 	// [Console]
 	std::unique_ptr<TEST_Console> test_Console = std::make_unique<TEST_Console>();
 	
@@ -94,7 +95,7 @@ bool App::Init() {
 	std::unique_ptr<TEST_HTMLImageElement> test_HTMLImageElement = std::make_unique<TEST_HTMLImageElement>();
 
 
-	////// DigitalKnob //////
+	////// DigitalKnob Interfaces //////
 	// [DKConsoleWindow]
 	test_DKConsoleWindow = std::make_unique<TEST_DKConsoleWindow>();										
 	
@@ -120,7 +121,10 @@ bool App::Init() {
 	test_DKRmlDocument = std::make_unique<TEST_DKRmlDocument>();
 
 	// [DKRmlElement]
-	//test_DKRmlElement = std::make_unique<TEST_DKRmlElement>();
+	test_DKRmlElement = std::make_unique<TEST_DKRmlElement>();
+	
+	// [DKRmlHTMLElement]
+	test_DKRmlHTMLElement = std::make_unique<TEST_DKRmlHTMLElement>();
 	return true;
 }
 
