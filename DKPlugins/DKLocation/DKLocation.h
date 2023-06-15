@@ -105,6 +105,16 @@ public:
 	DKString _ancestorOrigins = "";
 	virtual const DKString& ancestorOrigins()						{ return _ancestorOrigins; }				// getter
 	virtual void ancestorOrigins(const DKString& ancestorOrigins)	{ _ancestorOrigins = ancestorOrigins; } 	// setter
+	
+	
+	////// toString //////
+	operator std::string() const { return "[object Location]"; }
+};
+
+class DKNullLocation : public DKLocation
+{
+public:
+	operator std::string() const { return "null"; }
 };
 
 

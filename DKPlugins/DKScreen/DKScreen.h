@@ -57,5 +57,10 @@ public:
 	virtual operator std::string() const { return "[object Screen]"; }
 };
 
+class DKNullScreen : public DKScreen
+{
+public:
+	operator std::string() const { return "null"; }
+};
 
 #endif //DKScreen_H

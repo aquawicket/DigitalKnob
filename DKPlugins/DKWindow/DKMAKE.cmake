@@ -1,3 +1,4 @@
+dk_depend(uriparser)
 dk_depend(DKEventTarget)
 
 dk_generateCmake(DKWindow)

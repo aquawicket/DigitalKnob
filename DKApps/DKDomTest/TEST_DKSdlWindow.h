@@ -22,7 +22,7 @@ public:
 		//dkSdlWindow = std::make_shared<DKSdlWindow>();	
 		
 		
-		dkSdlWindow->screen(TEST_Screen::_screen);
+		dkSdlWindow->screen(*TEST_Screen::_screen);
 		printDKSdlWindowProperties(*dkSdlWindow);
 		
 		////// FocusEvent //////

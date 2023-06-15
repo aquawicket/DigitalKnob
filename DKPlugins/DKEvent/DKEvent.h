@@ -162,12 +162,20 @@ public:
 	////// DK properties //////
 	DKString _eventInitDict;
 	
+	
 	////// toString //////
 	virtual operator std::string() const { return "[object Event]"; }
 	//friend std::ostream& operator<<(std::ostream& os, const DKEvent&/* event*/){
     //    os << "[object Event]";
     //    return os;
 	//}
+};
+
+class DKNullEvent : public DKEvent
+{
+public:
+	DKNullEvent() : DKEvent("undefined", "{}"){}
+	virtual operator std::string() const { return "null"; }
 };
 
 

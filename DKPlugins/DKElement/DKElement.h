@@ -236,6 +236,15 @@ public:
 	}
 //};
 
+	
+	////// toString //////
+	operator std::string() const { return "[object Element]"; }
+};
+
+class DKNullElement : public DKElement
+{
+public:
+	operator std::string() const { return "null"; }
 };
 
 

@@ -15,7 +15,7 @@ public:
 		console.log("\n////// TEST_Window.h //////");
 		
 		DKWindow* window = new DKWindow();
-		window->screen(TEST_Screen::_screen);
+		window->screen(*TEST_Screen::_screen);
 		printWindowProperties(*window);
 	}
 	
@@ -32,13 +32,13 @@ public:
 		console.log("window.self() = "				+toString(window.self()));
 		
 		// [LegacyUnforgeable] readonly attribute Document document;
-		console.log("window.document() = "		+toString(window.document()));
+		console.log("window.document() = "			+toString(window.document()));
 		
 		// attribute DOMString name;
 		console.log("window.name() = "				+toString(window.name()));
 		
 		// [PutForwards=href, LegacyUnforgeable] readonly attribute Location location;
-		//console.log("window.location() = "			+toString(window.location()));
+		console.log("window.location() = "			+toString(window.location()));
 
 		// readonly attribute History history;
 		console.log("window.history() = "			+toString(window.history()));
@@ -84,22 +84,22 @@ public:
 		
 		// other browsing contexts
 		// [Replaceable] readonly attribute WindowProxy frames;
-		//console.log("window.frames() = "			+toString(window.frames()));
+		console.log("window.frames() = "			+toString(window.frames()));
 	
 		// [Replaceable] readonly attribute unsigned long length;
 		console.log("window.length() = "			+toString(window.length()));
 		
 		// [LegacyUnforgeable] readonly attribute WindowProxy? top;
-		//console.log("window.top() = "				+toString(window.top()));
+		console.log("window.top() = "				+toString(window.top()));
 		
 		// attribute any opener;
 		console.log("window.opener() = "			+toString(window.opener()));
 		
 		// [Replaceable] readonly attribute WindowProxy? parent;
-		//console.log("window.parent() = "			+toString(window.parent()));
+		console.log("window.parent() = "			+toString(window.parent()));
 		
 		// readonly attribute Element? frameElement;
-		//console.log("window.frameElement() = "		+toString(window.frameElement()));
+		console.log("window.frameElement() = "		+toString(window.frameElement()));
 		
 		// WindowProxy? open(optional USVString url = "", optional DOMString target = "_blank", optional [LegacyNullToEmptyString] DOMString features = "");
 		// function
@@ -112,10 +112,10 @@ public:
 		
 		// the user agent
 		// readonly attribute Navigator navigator;
-		//console.log("window.navigator() = "			+toString(window.navigator()));
+		console.log("window.navigator() = "			+toString(window.navigator()));
 		
 		// readonly attribute Navigator clientInformation; // legacy alias of .navigator
-		//console.log("window.clientInformation() = "	+toString(window.clientInformation()));
+		console.log("window.clientInformation() = "	+toString(window.clientInformation()));
 		
 		// readonly attribute boolean originAgentCluster;
 		console.log("window.originAgentCluster() = "+toString(window.originAgentCluster()));
@@ -155,7 +155,7 @@ public:
 		// Source: DOM Standard (https://dom.spec.whatwg.org/)
 		// partial interface Window {
 		//		[Replaceable] readonly attribute (Event or undefined) event; // legacy
-				//console.log("window.event() = "					+toString(window.event()));
+				console.log("window.event() = "					+toString(window.event()));
 		// };
 		
 		// Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
@@ -273,9 +273,9 @@ public:
 				// function
 		//
 		//		[SameObject, Replaceable] readonly attribute Screen screen;
-				//console.log("window.screen() = "				+toString(window.screen()));
-				if(window.screen())
-					TEST_Screen::printScreenProperties(*window.screen());
+				console.log("window.screen() = "				+toString(window.screen()));
+				//if(window.screen())
+				//	TEST_Screen::printScreenProperties(window.screen());
 				
 		//
 		//		[SameObject, Replaceable] readonly attribute VisualViewport? visualViewport;
