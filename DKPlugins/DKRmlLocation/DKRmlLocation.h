@@ -26,7 +26,7 @@ public:
 	virtual ~DKRmlLocation() {}
 
 	// [LegacyUnforgeable] stringifier attribute USVString href;
-	virtual void href(const USVString& href) { 	// setter
+	virtual void href(const USVString& href) override { 	// setter
 		DKLocation::href(href);
 		_dkRmlInterface->LoadUrl(href); 
 	} 	

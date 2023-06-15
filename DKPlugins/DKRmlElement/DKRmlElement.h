@@ -29,109 +29,109 @@ public:
 	/*
 	// readonly attribute DOMString? namespaceURI;
 	DOMString _namespaceURI = "";
-	virtual const DOMString& namespaceURI()						{ return _namespaceURI; }			// getter
-	virtual void namespaceURI(const DOMString& namespaceURI)	{ _namespaceURI = namespaceURI; } 	// setter
+	virtual const DOMString& namespaceURI()	override					{ return _namespaceURI; }			// getter
+	virtual void namespaceURI(const DOMString& namespaceURI) override	{ _namespaceURI = namespaceURI; } 	// setter
 	
 	// readonly attribute DOMString? prefix;
 	DOMString _prefix = "";
-	virtual const DOMString& prefix()							{ return _prefix; }					// getter
-	virtual void prefix(const DOMString& prefix)				{ _prefix = prefix; } 				// setter
+	virtual const DOMString& prefix() override							{ return _prefix; }					// getter
+	virtual void prefix(const DOMString& prefix) override				{ _prefix = prefix; } 				// setter
   
 	// readonly attribute DOMString localName;
 	DOMString _localName = "";
-	virtual const DOMString& localName()						{ return _localName; }				// getter
-	virtual void localName(const DOMString& localName)			{ _localName = localName; } 		// setter
+	virtual const DOMString& localName() override						{ return _localName; }				// getter
+	virtual void localName(const DOMString& localName) override			{ _localName = localName; } 		// setter
 	*/
 	// readonly attribute DOMString tagName;
-	virtual const DOMString& tagName()							{									// getter
+	virtual const DOMString& tagName() override							{									// getter
 		return _rmlElement->GetTagName();
 	}				
-	//virtual void tagName(const DOMString& tagName)			{ _tagName = tagName; } 			// setter
+	//virtual void tagName(const DOMString& tagName) override			{ _tagName = tagName; } 			// setter
 	
 	/*
 	// [CEReactions] attribute DOMString id;
 	DOMString _id = "";
-	virtual const DOMString& id()								{ return _id; }						// getter
-	virtual void id(const DOMString& id)						{ _id = id; } 						// setter
+	virtual const DOMString& id() override								{ return _id; }						// getter
+	virtual void id(const DOMString& id) override						{ _id = id; } 						// setter
 	
 	// [CEReactions] attribute DOMString className;
 	DOMString _className = "";
-	virtual const DOMString& className()						{ return _className; }				// getter
-	virtual void className(const DOMString& className)			{ _className = className; } 		// setter
+	virtual const DOMString& className() override						{ return _className; }				// getter
+	virtual void className(const DOMString& className) override			{ _className = className; } 		// setter
 	
 	// [SameObject, PutForwards=value] readonly attribute DOMTokenList classList;
 	DKString _classList = "";
-	virtual const DKString& classList()							{ return _classList; }				// getter
-	virtual void classList(const DKString& classList)			{ _classList = classList; } 		// setter
+	virtual const DKString& classList() override						{ return _classList; }				// getter
+	virtual void classList(const DKString& classList) override			{ _classList = classList; } 		// setter
 	
 	//[CEReactions, Unscopable] attribute DOMString slot;
 	DOMString _slot = "";
-	virtual const DOMString& slot()								{ return _slot; }					// getter
-	virtual void slot(const DOMString& slot)					{ _slot = slot; } 					// setter
+	virtual const DOMString& slot() override							{ return _slot; }					// getter
+	virtual void slot(const DOMString& slot) override					{ _slot = slot; } 					// setter
 
 	// boolean hasAttributes();
 	bool _hasAttributes = false;
-	virtual const bool& hasAttributes(){
+	virtual const bool& hasAttributes() override {
 		DKDEBUGFUNC();
 		return _hasAttributes;
 	}
 	
 	// [SameObject] readonly attribute NamedNodeMap attributes;
 	DKString _attributes = "";
-	virtual const DKString& attributes()						{ return _attributes; }				// getter
-	virtual void attributes(const DKString& attributes)			{ _attributes = attributes; } 		// setter
+	virtual const DKString& attributes() override						{ return _attributes; }				// getter
+	virtual void attributes(const DKString& attributes) override		{ _attributes = attributes; } 		// setter
 	
 	// sequence<DOMString> getAttributeNames();
 	DKString _getAttributeNames = "";
-	virtual const DKString& getAttributeNames(){
+	virtual const DKString& getAttributeNames() override {
 		DKDEBUGFUNC();
 		return _getAttributeNames;
 	}
 	
 	// DOMString? getAttribute(DOMString qualifiedName);
 	DKString _getAttribute = "";
-	virtual const DKString& getAttribute(const DOMString& qualifiedName){
+	virtual const DKString& getAttribute(const DOMString& qualifiedName) override {
 		DKDEBUGFUNC(qualifiedName);
 		return _getAttribute;
 	}
 	
 	// DOMString? getAttributeNS(DOMString? namespace, DOMString localName);
 	DOMString _getAttributeNS = "";
-	virtual const DOMString& getAttribute(const DOMString& _namespace, const DOMString& localName){
+	virtual const DOMString& getAttribute(const DOMString& _namespace, const DOMString& localName) override {
 		DKDEBUGFUNC(_namespace, localName);
 		return _getAttributeNS;
 	}
 	
 	// [CEReactions] undefined setAttribute(DOMString qualifiedName, DOMString value);
-	virtual void setAttribute(const DOMString& qualifiedName, const DOMString& value){
+	virtual void setAttribute(const DOMString& qualifiedName, const DOMString& value) override {
 		DKDEBUGFUNC(qualifiedName, value);
 	}
 	
 	// [CEReactions] undefined setAttributeNS(DOMString? namespace, DOMString qualifiedName, DOMString value);
-	virtual void setAttributeNS(const DOMString& _namespace, const DOMString& qualifiedName, const DOMString& value){
+	virtual void setAttributeNS(const DOMString& _namespace, const DOMString& qualifiedName, const DOMString& value) override {
 		DKDEBUGFUNC(_namespace, qualifiedName, value);
 	}
 	
 	// [CEReactions] undefined removeAttribute(DOMString qualifiedName);
-	virtual void removeAttribute(const DOMString& qualifiedName){
+	virtual void removeAttribute(const DOMString& qualifiedName) override {
 		DKDEBUGFUNC(qualifiedName);
 	}
 	
 	// [CEReactions] undefined removeAttributeNS(DOMString? namespace, DOMString localName);
-	virtual void removeAttributeNS(const DOMString& _namespace, const DOMString& localName){
+	virtual void removeAttributeNS(const DOMString& _namespace, const DOMString& localName) override {
 		DKDEBUGFUNC(_namespace, localName);
 	}
 	
 	// [CEReactions] boolean toggleAttribute(DOMString qualifiedName, optional boolean force);
 	bool _toggleAttribute = false;
-	virtual const bool& toggleAttribute(const DOMString& qualifiedName, const bool& force){
+	virtual const bool& toggleAttribute(const DOMString& qualifiedName, const bool& force) override {
 		DKDEBUGFUNC(qualifiedName, force);
 		return _toggleAttribute;
 	}
 	*/
 	
 	// boolean hasAttribute(DOMString qualifiedName);
-	virtual const bool& hasAttribute(const DOMString& qualifiedName){
+	virtual const bool& hasAttribute(const DOMString& qualifiedName) override {
 		DKDEBUGFUNC(qualifiedName);
 		return _rmlElement->HasAttribute(qualifiedName.c_str());
 	}
@@ -139,110 +139,110 @@ public:
 	/*
 	// boolean hasAttributeNS(DOMString? namespace, DOMString localName);
 	bool _hasAttributeNS = false;
-	virtual const bool& hasAttributeNS(const DOMString& _namespace, const DOMString& localName){
+	virtual const bool& hasAttributeNS(const DOMString& _namespace, const DOMString& localName) override {
 		DKDEBUGFUNC(_namespace, localName);
 		return _hasAttributeNS;
 	}
 	
 	// Attr? getAttributeNode(DOMString qualifiedName);
 	DKString _getAttributeNode = "";
-	virtual const DKString& getAttributeNode(const DOMString& qualifiedName){
+	virtual const DKString& getAttributeNode(const DOMString& qualifiedName) override {
 		DKDEBUGFUNC(qualifiedName);
 		return _getAttributeNode;
 	}
 	
 	// Attr? getAttributeNodeNS(DOMString? namespace, DOMString localName);
 	DKString _getAttributeNodeNS = "";
-	virtual const DKString& getAttributeNodeNS(const DOMString& _namespace, const DOMString& localName){
+	virtual const DKString& getAttributeNodeNS(const DOMString& _namespace, const DOMString& localName) override {
 		DKDEBUGFUNC(_namespace, localName);
 		return _getAttributeNodeNS;
 	}
 	
 	// [CEReactions] Attr? setAttributeNode(Attr attr);
 	DKString _setAttributeNode = "";
-	virtual const DKString& setAttributeNode(const DKString& attr){
+	virtual const DKString& setAttributeNode(const DKString& attr) override {
 		DKDEBUGFUNC(attr);
 		return _setAttributeNode;
 	}
 	
 	// [CEReactions] Attr? setAttributeNodeNS(Attr attr);
 	DKString _setAttributeNodeNS = "";
-	virtual const DKString& setAttributeNodeNS(const DKString& attr){
+	virtual const DKString& setAttributeNodeNS(const DKString& attr) override {
 		DKDEBUGFUNC(attr);
 		return _setAttributeNodeNS;
 	}
 	
 	// [CEReactions] Attr removeAttributeNode(Attr attr);
 	DKString _removeAttributeNode = "";
-	virtual const DKString& removeAttributeNode(const DKString& attr){
+	virtual const DKString& removeAttributeNode(const DKString& attr) override {
 		DKDEBUGFUNC(attr);
 		return _removeAttributeNode;
 	}
 	
 	// ShadowRoot attachShadow(ShadowRootInit init);
 	DKString _attachShadow = "";
-	virtual const DKString& attachShadow(const DKString& init){
+	virtual const DKString& attachShadow(const DKString& init) override {
 		DKDEBUGFUNC(init);
 		return _attachShadow;
 	}
 	
 	// readonly attribute ShadowRoot? shadowRoot;
 	DKString _shadowRoot = "";
-	virtual const DKString& shadowRoot()							{ return _shadowRoot; }					// getter
-	virtual void shadowRoot(const DKString& shadowRoot)				{ _shadowRoot = shadowRoot; } 			// setter
+	virtual const DKString& shadowRoot() override							{ return _shadowRoot; }					// getter
+	virtual void shadowRoot(const DKString& shadowRoot) override			{ _shadowRoot = shadowRoot; } 			// setter
 	
 	// Element? closest(DOMString selectors);
 	DKString _closest = "";
-	virtual const DKString& closest(const DOMString& selectors){
+	virtual const DKString& closest(const DOMString& selectors) override {
 		DKDEBUGFUNC(selectors);
 		return _closest;
 	}
 	
 	// boolean matches(DOMString selectors);
 	bool _matches = false;
-	virtual const bool& matches(const DOMString& selectors){
+	virtual const bool& matches(const DOMString& selectors) override {
 		DKDEBUGFUNC(selectors);
 		return _matches;
 	}
 	
 	// boolean webkitMatchesSelector(DOMString selectors); // legacy alias of .matches
 	bool _webkitMatchesSelector = false;
-	virtual const bool& webkitMatchesSelector(const DOMString& selectors){
+	virtual const bool& webkitMatchesSelector(const DOMString& selectors) override {
 		DKDEBUGFUNC(selectors);
 		return _webkitMatchesSelector;
 	}
   
 	// HTMLCollection getElementsByTagName(DOMString qualifiedName);
 	DKString _getElementsByTagName = "";
-	virtual const DKString& getElementsByTagName(const DOMString& qualifiedName){
+	virtual const DKString& getElementsByTagName(const DOMString& qualifiedName) override {
 		DKDEBUGFUNC(qualifiedName);
 		return _getElementsByTagName;
 	}
 	
 	// HTMLCollection getElementsByTagNameNS(DOMString? namespace, DOMString localName);
 	DKString _getElementsByTagNameNS = "";
-	virtual const DKString& getElementsByTagNameNS(const DOMString& _namespace, const DOMString& localName){
+	virtual const DKString& getElementsByTagNameNS(const DOMString& _namespace, const DOMString& localName) override {
 		DKDEBUGFUNC(_namespace, localName);
 		return _getElementsByTagNameNS;
 	}
 	
 	// HTMLCollection getElementsByClassName(DOMString classNames);
 	DKString _getElementsByClassName = "";
-	virtual const DKString& getElementsByClassName(const DOMString& classNames){
+	virtual const DKString& getElementsByClassName(const DOMString& classNames) override {
 		DKDEBUGFUNC(classNames);
 		return _getElementsByClassName;
 	}
   
 	// [CEReactions] Element? insertAdjacentElement(DOMString where, Element element); // legacy
 	DKString _insertAdjacentElement = "";
-	virtual const DKString& insertAdjacentElement(const DOMString& where, const DKString& element){
+	virtual const DKString& insertAdjacentElement(const DOMString& where, const DKString& element) override {
 		DKDEBUGFUNC(where, element);
 		return _insertAdjacentElement;
 	}
 	
 	// undefined insertAdjacentText(DOMString where, DOMString data); // legacy
 	DKString _insertAdjacentText = "";
-	virtual const DKString& insertAdjacentText(const DOMString& where, const DOMString& data){
+	virtual const DKString& insertAdjacentText(const DOMString& where, const DOMString& data) override {
 		DKDEBUGFUNC(where, data);
 		return _insertAdjacentText;
 	}

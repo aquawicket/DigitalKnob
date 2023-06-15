@@ -88,7 +88,7 @@ public:
 	// TODO
 	
 	// undefined close();
-	void close() {
+	void close() override {
 		DKDEBUGFUNC();
 		#if WIN
 			ShowWindow(GetConsoleWindow(), SW_HIDE);
@@ -102,7 +102,7 @@ public:
 	// TODO
 	
 	// undefined focus();
-	void focus() {
+	void focus() override {
 		DKDEBUGFUNC();
 		#if WIN
 			ShowWindow(GetConsoleWindow(), SW_SHOW);
@@ -110,7 +110,7 @@ public:
 	}
 	
 	// undefined blur();
-	void blur() {
+	void blur() override {
 		DKDEBUGFUNC();
 		#if WIN
 			ShowWindow(GetConsoleWindow(), SW_SHOWMINNOACTIVE);
@@ -317,7 +317,7 @@ public:
 
 	//		// browsing context
 	//		undefined moveTo(long x, long y);
-			virtual void moveTo(const int& x, const int& y){
+			virtual void moveTo(const int& x, const int& y) override {
 				DKDEBUGFUNC(x, y);
 				#if WIN
 					RECT rect;
@@ -330,7 +330,7 @@ public:
 			}
 
 	//		undefined moveBy(long x, long y);
-			virtual void moveBy(const int& x, const int& y) {
+			virtual void moveBy(const int& x, const int& y) override {
 				DKDEBUGFUNC(x, y);
 				#if WIN
 					RECT rect;
@@ -345,7 +345,7 @@ public:
 			}
 
 	//		undefined resizeTo(long width, long height);
-			virtual void resizeTo(const int& width, const int& height) {
+			virtual void resizeTo(const int& width, const int& height) override {
 				DKDEBUGFUNC(width, height);
 				#if WIN
 					RECT rect;
@@ -360,7 +360,7 @@ public:
 			}
 
 	//		undefined resizeBy(long x, long y);
-			virtual void resizeBy(const int& x, const int& y) {
+			virtual void resizeBy(const int& x, const int& y) override {
 				DKDEBUGFUNC(x, y);
 				#if WIN
 					RECT rect;
@@ -420,7 +420,7 @@ public:
 			// TODO
 
 	//		[Replaceable] readonly attribute long outerWidth;
-			virtual const int& outerWidth() {						// getter
+			virtual const int& outerWidth() override {						// getter
 				#if WIN
 					RECT rect;
 					GetWindowRect(GetConsoleWindow(), &rect);
@@ -428,12 +428,12 @@ public:
 				#endif
 				return _outerWidth;
 			}
-			virtual void outerWidth(const int& outerWidth){			// setter
+			virtual void outerWidth(const int& outerWidth) override {			// setter
 				// readonly
 			}
 
 	//		[Replaceable] readonly attribute long outerHeight;
-			virtual const int& outerHeight(){ 						// getter
+			virtual const int& outerHeight() override { 						// getter
 				#if WIN
 					RECT rect;
 					GetWindowRect(GetConsoleWindow(), &rect);

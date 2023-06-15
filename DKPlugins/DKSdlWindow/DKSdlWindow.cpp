@@ -336,18 +336,6 @@ DKSdlWindow::~DKSdlWindow(){
     SDL_Quit();
 }
 
-bool DKSdlWindow::Init(){
-	DKDEBUGFUNC();
-	return true;
-}
-
-bool DKSdlWindow::End(){
-    DKDEBUGFUNC();
-    return true;
-}
-
-
-
 bool DKSdlWindow::Fullscreen(const void* input, void* output) {
     DKDEBUGFUNC(input, output);
     SDL_SetWindowFullscreen(_window, SDL_WINDOW_FULLSCREEN_DESKTOP);
