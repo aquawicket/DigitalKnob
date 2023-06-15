@@ -47,7 +47,7 @@
 #include "TEST_DKRmlNode.h"
 #include "TEST_DKRmlDocument.h"
 #include "TEST_DKRmlElement.h"
-//#include "TEST_DKRmlHTMLElement.h"		// TODO
+#include "TEST_DKRmlHTMLElement.h"
 
 
 class App : public DKObjectT<App>
@@ -66,7 +66,7 @@ public:
 	std::unique_ptr<TEST_DKRmlNode> 				test_DKRmlNode;
 	std::unique_ptr<TEST_DKRmlDocument>				test_DKRmlDocument;
 	std::unique_ptr<TEST_DKRmlElement> 				test_DKRmlElement;
-	//std::unique_ptr<TEST_DKRmlHTMLElement> 		test_DKRmlHTMLElement;			// TODO
+	std::unique_ptr<TEST_DKRmlHTMLElement> 			test_DKRmlHTMLElement;
 
 };
 REGISTER_OBJECT(App, true);

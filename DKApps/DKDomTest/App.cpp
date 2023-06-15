@@ -124,7 +124,7 @@ bool App::Init() {
 	test_DKRmlElement = std::make_unique<TEST_DKRmlElement>();
 	
 	// [DKRmlHTMLElement]
-	//test_DKRmlHTMLElement = std::make_unique<TEST_DKRmlHTMLElement>();				// TODO
+	test_DKRmlHTMLElement = std::make_unique<TEST_DKRmlHTMLElement>();
 	return true;
 }
 

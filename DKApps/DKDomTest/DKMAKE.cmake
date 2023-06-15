@@ -46,5 +46,5 @@ dk_depend(DKRmlLocation)
 dk_depend(DKRmlNode)
 dk_depend(DKRmlDocument)
 dk_depend(DKRmlElement)
-#dk_depend(DKRmlHTMLElement)			# TODO
+dk_depend(DKRmlHTMLElement)
 dk_depend(DKWebTest)
