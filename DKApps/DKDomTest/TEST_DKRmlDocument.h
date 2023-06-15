@@ -49,18 +49,17 @@ public:
 			for(unsigned int i=0; i<aElements->length(); ++i){
 				//DKINFO("aElement["+toString(i)+"]\n");
 				DKElement* item = aElements->item(i);
+				
 				if(!item)
 					console.error("item invalid!");
 				if(item->hasAttribute("href")){
-					DKINFO("item()->hasAttribute('href')\n");
-					/*
-					item->SetProperty("color", "rgb(0,0,255)");
-					item->SetProperty("text-decoration", "underline");
-					item->AddEventListener("click", dkRmlInterface, false);
-					*/
+					console.log("item()->hasAttribute('href')");
+
+					//item->SetProperty("color", "rgb(0,0,255)");
+					//item->SetProperty("text-decoration", "underline");
+					//item->AddEventListener("click", dkRmlInterface, false);
 					
-					DKCSSStyleDeclaration* dkCSSStyleDeclaration = &item->style();
-					dkCSSStyleDeclaration->setProperty("color", "rgb(0,0,255)");
+					item->style().setProperty("color", "rgb(0,0,255)");
 					
 					//DKRmlCSSStyleDeclaration* dkRmlCSSStyleDeclaration = &item->style();
 					//dkRmlCSSStyleDeclaration->setProperty("color", "rgb(0,0,255)");

@@ -23,7 +23,6 @@ public:
 		_dkRmlInterface = dkRmlInterface;
 		_rmlElement = rmlElement;
 	}
-	
 	virtual ~DKRmlElement() {}
 	
 	/*

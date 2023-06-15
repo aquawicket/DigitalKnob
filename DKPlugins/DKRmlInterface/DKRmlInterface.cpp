@@ -228,10 +228,13 @@ bool DKRmlInterface::LoadHtml(const DKString& html){
 	DKRmlConverter::HtmlToRml(html, rml);
 
 	//// Clear any document and load the rml into the document
+	
 	if (document) {
-		Rml::Factory::ClearStyleSheetCache();
-		document->Close();
+		document = nullptr;
+		//document->Close();
+		//Rml::Factory::ClearStyleSheetCache();
 	}
+	
 	auto stream = std::make_unique<Rml::StreamMemory>((Rml::byte*)rml.c_str(), rml.size());
 	stream->SetSourceURL("[document from memory]");
 	Rml::PluginRegistry::NotifyDocumentOpen(context, stream->GetSourceURL().GetURL());
