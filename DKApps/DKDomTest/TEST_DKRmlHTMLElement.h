@@ -10,12 +10,16 @@
 class TEST_DKRmlHTMLElement //: public DKObjectT<TEST_DKRmlHTMLElement>
 {
 public:
+	DKRmlHTMLElement* dkRmlHTMLElement;
+	//std::unique_ptr<DKRmlHTMLElement> dkRmlHTMLElement;
+	
 	TEST_DKRmlHTMLElement(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DKRmlHTMLElement.h //////");
 		
-		DKRmlHTMLElement dkRmlHTMLElement;
-		printDKRmlHTMLElementProperties(dkRmlHTMLElement);
+		dkRmlHTMLElement = new DKRmlHTMLElement(TEST_DKRmlInterface::dkRmlInterface, NULL);
+		
+		printDKRmlHTMLElementProperties(*dkRmlHTMLElement);
 	}
 	
 	static void printDKRmlHTMLElementProperties(DKRmlHTMLElement& dkRmlHTMLElement){

@@ -5,18 +5,27 @@
 #define DKRmlHTMLElement_H
 
 #include "DKHTMLElement/DKHTMLElement.h"
+#include "DKRmlInterface/DKRmlInterface.h"
 
 // [Exposed=Window]
 // interface HTMLElement : Element {
 class DKRmlHTMLElement : public DKHTMLElement
 {
 public:
+	DKRmlInterface* _dkRmlInterface;
+	Rml::Element* _rmlElement;
+	
 	// [HTMLConstructor] constructor();
 	DKRmlHTMLElement(DKRmlInterface* dkRmlInterface, Rml::Element* rmlElement) : DKHTMLElement() {
 		DKDEBUGFUNC();
 		interfaceName = "DKRmlHTMLElement";
-		interfaceAddress = pointerToAddress(this);		
+		interfaceAddress = pointerToAddress(this);
+		DKINFO("DKRmlHTMLElement("+interfaceAddress+") \n");
+		_dkRmlInterface = dkRmlInterface;
+		_rmlElement = rmlElement;		
 	}
+	
+	virtual ~DKRmlHTMLElement() {}
 	
 	// metadata attributes
 	// [CEReactions] attribute DOMString title;
