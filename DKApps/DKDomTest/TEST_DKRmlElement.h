@@ -15,7 +15,7 @@ public:
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DKRmlElement.h //////");
 		
-		//dkRmlElement = new DKRmlElement(TEST_DKRmlInterface::dkRmlInterface);
+		dkRmlElement = new DKRmlElement(TEST_DKRmlInterface::dkRmlInterface, NULL);
 		
 		printDKRmlElementProperties(*dkRmlElement);
 	}
