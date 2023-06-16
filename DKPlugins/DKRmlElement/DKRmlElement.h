@@ -140,7 +140,8 @@ public:
 	// boolean hasAttribute(DOMString qualifiedName);
 	virtual const bool& hasAttribute(const DOMString& qualifiedName) override {
 		DKDEBUGFUNC(qualifiedName);
-		return _rmlElement->HasAttribute(qualifiedName.c_str());
+		const bool _hasAttribute = _rmlElement->HasAttribute(qualifiedName.c_str());
+		return _hasAttribute;
 	}
 	
 	/*
