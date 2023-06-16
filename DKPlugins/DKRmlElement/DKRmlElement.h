@@ -24,6 +24,9 @@ public:
 		DKINFO("DKRmlElement("+interfaceAddress+") \n");
 		_dkRmlInterface = dkRmlInterface;
 		_rmlElement = rmlElement;
+		
+		if(!_rmlElement)
+			DKERROR("_rmlElement invalid! \n");
 	}
 	~DKRmlElement() {}
 	
@@ -53,6 +56,10 @@ public:
 	*/
 	// readonly attribute DOMString tagName;
 	const DOMString& tagName() override							{									// getter
+		if(!_rmlElement){
+			DKERROR("_rmlElement invalid! \n");
+			return _tagName;
+		}
 		_tagName = _rmlElement->GetTagName();
 		return _tagName;
 	}				

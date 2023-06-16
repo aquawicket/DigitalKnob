@@ -24,6 +24,9 @@ public:
 		DKINFO("DKRmlNode("+interfaceAddress+") \n");
 		_dkRmlInterface = dkRmlInterface;
 		_rmlElement = rmlElement;
+		
+		if(!_rmlElement)
+			DKERROR("_rmlElement invalid! \n");
 	}
 	~DKRmlNode() {}
 	
