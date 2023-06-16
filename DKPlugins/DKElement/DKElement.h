@@ -248,5 +248,7 @@ public:
 	operator std::string() const { return "null"; }
 };
 
+//DKNullElement dkNullElement;
+
 
 #endif //DKElement_H
