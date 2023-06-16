@@ -11,13 +11,13 @@
 
 // [Exposed=Window]
 // interface Element : Node {
-class DKRmlElement : public DKElement, public DKRmlNode//, public DKRmlElementCSSInlineStyle
+class DKRmlElement : public DKRmlNode, public DKElement //, public DKRmlElementCSSInlineStyle
 {
 public:
 	DKRmlInterface* _dkRmlInterface;
 	Rml::Element* _rmlElement;
 	
-	DKRmlElement(DKRmlInterface* dkRmlInterface, Rml::Element* rmlElement) : DKElement(), DKRmlNode(dkRmlInterface) {//, DKRmlElementCSSInlineStyle(dkRmlInterface, _rmlElement) {
+	DKRmlElement(DKRmlInterface* dkRmlInterface, Rml::Element* rmlElement) : DKRmlNode(dkRmlInterface), DKElement() {//, DKRmlElementCSSInlineStyle(dkRmlInterface, _rmlElement) {
 		DKDEBUGFUNC();
 		interfaceName = "DKRmlElement";
 		interfaceAddress = pointerToAddress(this);
@@ -25,15 +25,15 @@ public:
 		_dkRmlInterface = dkRmlInterface;
 		_rmlElement = rmlElement;
 	}
-	virtual ~DKRmlElement() {}
+	~DKRmlElement() {}
 	
 	////// NOTE: from DKRmlElementCSSInlineStyle
 	// [SameObject, PutForwards=cssText] readonly attribute CSSStyleDeclaration style;
 	DKCSSStyleDeclaration* _style = NULL;
-	virtual DKCSSStyleDeclaration&	style()	/*override*/								{ 																// getter
+	DKCSSStyleDeclaration&	style()	/*override*/								{ 																// getter
 		return _style ? *_style : *new DKRmlCSSStyleDeclaration(_dkRmlInterface, _rmlElement); 
 	}	
-	virtual void 					style(DKCSSStyleDeclaration& style) /*override*/	{ _style = &style; } 											// setter
+	void 					style(DKCSSStyleDeclaration& style) /*override*/	{ _style = &style; } 											// setter
 	
 	/*
 	// readonly attribute DOMString? namespaceURI;
@@ -52,7 +52,7 @@ public:
 	virtual void localName(const DOMString& localName) override			{ _localName = localName; } 		// setter
 	*/
 	// readonly attribute DOMString tagName;
-	virtual const DOMString& tagName() override							{									// getter
+	const DOMString& tagName() override							{									// getter
 		_tagName = _rmlElement->GetTagName();
 		return _tagName;
 	}				
@@ -141,7 +141,7 @@ public:
 	*/
 	
 	// boolean hasAttribute(DOMString qualifiedName);
-	virtual const bool& hasAttribute(const DOMString& qualifiedName) override {
+	const bool& hasAttribute(const DOMString& qualifiedName) override {
 		DKDEBUGFUNC(qualifiedName);
 		_hasAttribute = _rmlElement->HasAttribute(qualifiedName.c_str());
 		return _hasAttribute;

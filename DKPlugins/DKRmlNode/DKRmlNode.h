@@ -23,8 +23,7 @@ public:
 		DKINFO("DKRmlNode("+interfaceAddress+") \n");
 		_dkRmlInterface = dkRmlInterface;
 	}
-	
-	virtual ~DKRmlNode() {}
+	~DKRmlNode() {}
 	
 	/*
 	// const unsigned short ELEMENT_NODE = 1;

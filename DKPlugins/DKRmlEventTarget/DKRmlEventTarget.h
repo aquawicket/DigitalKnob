@@ -23,22 +23,22 @@ public:
 		DKINFO("DKRmlEventTarget("+interfaceAddress+") \n");
 		_dkRmlInterface = dkRmlInterface;
 	}
-	virtual ~DKRmlEventTarget(){}
+	~DKRmlEventTarget(){}
 
 	// undefined addEventListener(DOMString type, EventListener? callback, optional (AddEventListenerOptions or boolean) options = {});
-	virtual void addEventListener(const DOMString& type, DKEventListener callback) override {
+	void addEventListener(const DOMString& type, DKEventListener callback) override {
 		DKDEBUGFUNC(type, callback);
 		DKTODO();
 	}
 	
 	// undefined removeEventListener(DOMString type, EventListener? callback, optional (EventListenerOptions or boolean) options = {});
-	virtual void removeEventListener(const DOMString& type, DKEventListener callback) override {
+	void removeEventListener(const DOMString& type, DKEventListener callback) override {
 		DKDEBUGFUNC(type, callback);
 		DKTODO();
 	}
 	
 	// boolean dispatchEvent(Event event);
-	virtual bool dispatchEvent(DKEvent& event) override {
+	bool dispatchEvent(DKEvent& event) override {
 		DKDEBUGFUNC(event);
 		DKTODO();
 		return false;
