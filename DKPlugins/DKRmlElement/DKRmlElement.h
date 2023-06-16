@@ -9,13 +9,13 @@
 
 // [Exposed=Window]
 // interface Element : Node {
-class DKRmlElement : public DKElement, public DKRmlElementCSSInlineStyle
+class DKRmlElement : public DKElement//, public DKRmlElementCSSInlineStyle
 {
 public:
 	DKRmlInterface* _dkRmlInterface;
 	Rml::Element* _rmlElement;
 	
-	DKRmlElement(DKRmlInterface* dkRmlInterface, Rml::Element* rmlElement) : DKElement(), DKRmlElementCSSInlineStyle(dkRmlInterface, _rmlElement) {
+	DKRmlElement(DKRmlInterface* dkRmlInterface, Rml::Element* rmlElement) : DKElement() {//, DKRmlElementCSSInlineStyle(dkRmlInterface, _rmlElement) {
 		DKDEBUGFUNC();
 		interfaceName = "DKRmlElement";
 		interfaceAddress = pointerToAddress(this);
@@ -24,6 +24,14 @@ public:
 		_rmlElement = rmlElement;
 	}
 	virtual ~DKRmlElement() {}
+	
+	////// NOTE: from DKRmlElementCSSInlineStyle
+	// [SameObject, PutForwards=cssText] readonly attribute CSSStyleDeclaration style;
+	DKCSSStyleDeclaration* _style = NULL;
+	virtual DKCSSStyleDeclaration&	style()	/*override*/								{ 																// getter
+		return _style ? *_style : *new DKRmlCSSStyleDeclaration(_dkRmlInterface, _rmlElement); 
+	}	
+	virtual void 					style(DKCSSStyleDeclaration& style) /*override*/	{ _style = &style; } 											// setter
 	
 	/*
 	// readonly attribute DOMString? namespaceURI;

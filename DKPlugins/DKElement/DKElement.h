@@ -5,15 +5,15 @@
 #define DKElement_H
 
 #include "DKNode/DKNode.h"
-//#include "DKElementCSSInlineStyle/DKElementCSSInlineStyle.h"
+#include "DKElementCSSInlineStyle/DKElementCSSInlineStyle.h"
 class DKHTMLCollection;
 
 // [Exposed=Window]
 // interface Element : Node {
-class DKElement : public DKNode//, public DKElementCSSInlineStyle
+class DKElement : public DKNode, public DKElementCSSInlineStyle
 {
 public:
-	DKElement() : DKNode() {
+	DKElement() : DKNode(), DKElementCSSInlineStyle() {
 		DKDEBUGFUNC();
 		interfaceName = "Element";
 		interfaceAddress = pointerToAddress(this);
