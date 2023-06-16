@@ -28,7 +28,7 @@ include_guard()
 dk_disable(DKPlugin1)				# TODO
 dk_disable(DKPlugin2)				# TODO
 dk_disable(DKRmlAudio)				# build errors
-dk_disable(DKRmlElement)			# build errors
+#dk_disable(DKRmlElement)			# build errors
 dk_disable(DKRmlIframe)				# build errors
 dk_disable(DKRmlTestElements)		# build errors
 dk_disable(DKTemplateEventTest)		# DEPRECATED: using DKEventTargetTest instead

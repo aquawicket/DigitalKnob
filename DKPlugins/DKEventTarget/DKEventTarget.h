@@ -36,7 +36,7 @@ public:
 	virtual ~DKEventTarget(){}
 
 	// undefined addEventListener(DOMString type, EventListener? callback, optional (AddEventListenerOptions or boolean) options = {});
-	virtual void addEventListener(const DOMString& type, DKEventListener callback) {
+	virtual const void addEventListener(const DOMString& type, DKEventListener callback) {
 		DKDEBUGFUNC(type, callback);
 		//DKINFO("DKEventTarget::addEventListener("+type+", callback) \n");
 		EventObject eventObj;

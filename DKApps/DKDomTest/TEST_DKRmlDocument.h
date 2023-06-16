@@ -13,7 +13,7 @@ public:
 	//std::unique_ptr<DKRmlDocument> dkRmlDocument;
 	
 	TEST_DKRmlDocument() {
-		DKDEBUGFUNC();
+		//DKDEBUGFUNC();
 		console.log("\n////// TEST_DKRmlDocument.h //////");
 		
 		dkRmlDocument = new DKRmlDocument(TEST_DKRmlInterface::dkRmlInterface);
@@ -55,6 +55,7 @@ public:
 					console.log("item()->hasAttribute('href')");
 					item->style().setProperty("color", "rgb(0,0,255)");
 					item->style().setProperty("text-decoration", "underline");
+					//DKRmlElement* rmlItem = (DKRmlElement*)item;
 					item->addEventListener("click", &TEST_DKRmlDocument::onHyperlink);
 				}
 			}

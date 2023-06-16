@@ -10,7 +10,7 @@
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // [Exposed=*]
 // interface EventTarget {
-class DKRmlEventTarget : public DKEventTarget
+class DKRmlEventTarget : virtual public DKEventTarget
 {
 public:
 	DKRmlInterface* _dkRmlInterface;
@@ -31,7 +31,7 @@ public:
 	~DKRmlEventTarget(){}
 
 	// undefined addEventListener(DOMString type, EventListener? callback, optional (AddEventListenerOptions or boolean) options = {});
-	void addEventListener(const DOMString& type, DKEventListener callback) override {
+	const void addEventListener(const DOMString& type, DKEventListener callback) override {
 		DKDEBUGFUNC(type, callback);
 		DKTODO();
 	}

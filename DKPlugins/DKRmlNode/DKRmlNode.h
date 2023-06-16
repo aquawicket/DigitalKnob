@@ -11,7 +11,7 @@
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // [Exposed=Window]
 // interface Node : EventTarget {
-class DKRmlNode : public DKNode, public DKRmlEventTarget
+class DKRmlNode : virtual public DKNode, virtual public DKRmlEventTarget
 {
 public:	 
 	//DKRmlInterface* _dkRmlInterface;
