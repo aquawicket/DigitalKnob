@@ -27,7 +27,7 @@ class DKEventTarget : public DKInterface
 {
 public:
 	// constructor();
-	DKEventTarget() : DKInterface() { // https://dom.spec.whatwg.org/#dom-eventtarget-eventtarget
+	DKEventTarget() : DKInterface() {
 		DKDEBUGFUNC();
 		interfaceName = "EventTarget";
 		interfaceAddress = pointerToAddress(this);
@@ -36,7 +36,7 @@ public:
 	virtual ~DKEventTarget(){}
 
 	// undefined addEventListener(DOMString type, EventListener? callback, optional (AddEventListenerOptions or boolean) options = {});
-	virtual void addEventListener(const DOMString& type, DKEventListener callback){ // https://dom.spec.whatwg.org/#dom-eventtarget-addeventlistener
+	virtual void addEventListener(const DOMString& type, DKEventListener callback){
 		DKDEBUGFUNC(type, callback);
 		//DKINFO("DKEventTarget::addEventListener("+type+", callback) \n");
 		EventObject eventObj;
@@ -57,7 +57,7 @@ public:
 	}
 	
 	// undefined removeEventListener(DOMString type, EventListener? callback, optional (EventListenerOptions or boolean) options = {});
-	virtual void removeEventListener(const DOMString& type, DKEventListener callback){ // https://dom.spec.whatwg.org/#dom-eventtarget-removeeventlistener
+	virtual void removeEventListener(const DOMString& type, DKEventListener callback){
 		DKDEBUGFUNC(type, callback);
 		//DKINFO("DKEventTarget::removeEventListener("+type+", callback) \n");
 		for(auto it = events.begin(); it != events.end();){
@@ -69,7 +69,7 @@ public:
 	}
 	
 	// boolean dispatchEvent(Event event);
-    virtual bool dispatchEvent(DKEvent& event){	// https://dom.spec.whatwg.org/#dom-eventtarget-dispatchevent
+    virtual bool dispatchEvent(DKEvent& event){
 		DKDEBUGFUNC(event);
 		//DKINFO("DKEventTarget::dispatchEvent("+event+") \n");	
 		for (auto& eventObj : events) {

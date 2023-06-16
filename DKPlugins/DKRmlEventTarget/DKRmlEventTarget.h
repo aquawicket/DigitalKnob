@@ -23,16 +23,23 @@ public:
 	virtual ~DKRmlEventTarget(){}
 
 	// undefined addEventListener(DOMString type, EventListener? callback, optional (AddEventListenerOptions or boolean) options = {});
-	// TODO
+	virtual void addEventListener(const DOMString& type, DKEventListener callback) override {
+		DKDEBUGFUNC(type, callback);
+		DKTODO();
+	}
 	
 	// undefined removeEventListener(DOMString type, EventListener? callback, optional (EventListenerOptions or boolean) options = {});
-	// TODO
+	virtual void removeEventListener(const DOMString& type, DKEventListener callback) override {
+		DKDEBUGFUNC(type, callback);
+		DKTODO();
+	}
 	
 	// boolean dispatchEvent(Event event);
-	// TODO
-	
-	////// DK properties //////	
-	//static std::vector<EventObject> events;	// TODO
+	virtual bool dispatchEvent(DKEvent& event) override {
+		DKDEBUGFUNC(event);
+		DKTODO();
+		return false;
+	}
 };
 
 
