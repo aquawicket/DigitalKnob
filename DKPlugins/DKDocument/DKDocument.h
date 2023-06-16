@@ -5,7 +5,7 @@
 #define DKDocument_H
 
 #include "DKNode/DKNode.h"
-#include "DKNonElementParentNode/DKNonElementParentNode.h"	// mixin
+//#include "DKNonElementParentNode/DKNonElementParentNode.h"	// mixin
 #include "DKHTMLCollection/DKHTMLCollection.h"
 
 
