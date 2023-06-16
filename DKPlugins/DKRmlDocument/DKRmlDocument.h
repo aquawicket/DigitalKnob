@@ -105,7 +105,7 @@ public:
 		}
 		//DKINFO("element_list.size() = "+toString(element_list.size())+"\n");
 		DKINFO("element_list->size() = "+toString(element_list->size())+"\n");
-		DKHTMLCollection* htmlCollection = new DKHTMLCollection(*element_list);	// FIXME: danggling pointer
+		DKHTMLCollection* htmlCollection = new DKHTMLCollection(*element_list);	// FIXME: dangling pointer
 		DKINFO("htmlCollection->length() = "+toString(htmlCollection->length())+"\n");
 		return htmlCollection; 
 	}
