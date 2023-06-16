@@ -10,7 +10,7 @@
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // [Exposed=*]
 // interface EventTarget {
-class DKRmlEventTarget : public DKEventTarget
+class DKRmlEventTarget : virtual public DKEventTarget
 {
 public:
 	DKRmlInterface* _dkRmlInterface;
