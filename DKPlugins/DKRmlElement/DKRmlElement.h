@@ -9,13 +9,13 @@
 
 // [Exposed=Window]
 // interface Element : Node {
-class DKRmlElement : public DKElement//, public DKRmlElementCSSInlineStyle
+class DKRmlElement : public DKElement, public DKRmlElementCSSInlineStyle
 {
 public:
 	DKRmlInterface* _dkRmlInterface;
 	Rml::Element* _rmlElement;
 	
-	DKRmlElement(DKRmlInterface* dkRmlInterface, Rml::Element* rmlElement) : DKElement() {
+	DKRmlElement(DKRmlInterface* dkRmlInterface, Rml::Element* rmlElement) : DKElement(), DKRmlElementCSSInlineStyle(dkRmlInterface, _rmlElement) {
 		DKDEBUGFUNC();
 		interfaceName = "DKRmlElement";
 		interfaceAddress = pointerToAddress(this);
