@@ -232,12 +232,8 @@ bool DKRmlInterface::LoadHtml(const DKString& html){
 	if (document) {
 		//document = nullptr;
 		document->Close();
-<<<<<<< HEAD
 		if(context)
 			Rml::Factory::ClearStyleSheetCache();
-=======
-		Rml::Factory::ClearStyleSheetCache();
->>>>>>> 30cb30c2161fbc03a6c9350cd85df123d74199b2
 	}
 	
 	auto stream = std::make_unique<Rml::StreamMemory>((Rml::byte*)rml.c_str(), rml.size());
