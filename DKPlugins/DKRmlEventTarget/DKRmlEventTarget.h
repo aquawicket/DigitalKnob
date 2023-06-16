@@ -48,6 +48,9 @@ public:
 		DKTODO();
 		return false;
 	}
+	
+	////// toString //////
+	operator std::string() const { return "[object DKRmlEventTarget]"; }
 };
 
 

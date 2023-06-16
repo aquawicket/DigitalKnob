@@ -294,6 +294,9 @@ public:
 		return _removeChild;
 	}
 	*/
+	
+	////// toString //////
+	operator std::string() const { return "[object DKRmlNode]"; }
 };
 
 
