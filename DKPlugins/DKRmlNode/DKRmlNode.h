@@ -15,13 +15,15 @@ class DKRmlNode : public DKRmlEventTarget, public DKNode
 {
 public:	 
 	DKRmlInterface* _dkRmlInterface;
+	Rml::Element* _rmlElement;
 	
-	DKRmlNode(DKRmlInterface* dkRmlInterface) : DKRmlEventTarget(dkRmlInterface), DKNode() {
+	DKRmlNode(DKRmlInterface* dkRmlInterface, Rml::Element* rmlElement) : DKRmlEventTarget(dkRmlInterface, rmlElement), DKNode() {
 		DKDEBUGFUNC();
 		interfaceName = "DKRmlNode";
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKRmlNode("+interfaceAddress+") \n");
 		_dkRmlInterface = dkRmlInterface;
+		_rmlElement = rmlElement;
 	}
 	~DKRmlNode() {}
 	

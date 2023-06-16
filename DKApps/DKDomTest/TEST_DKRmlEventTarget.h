@@ -17,7 +17,7 @@ public:
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DKRmlEventTarget.h //////");
 		
-		dkRmlEventTarget = new DKRmlEventTarget(TEST_DKRmlInterface::dkRmlInterface);
+		dkRmlEventTarget = new DKRmlEventTarget(TEST_DKRmlInterface::dkRmlInterface, NULL);
 		
 		printDKRmlEventTargetProperties(*dkRmlEventTarget);
 	}

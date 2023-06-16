@@ -14,14 +14,16 @@ class DKRmlEventTarget : public DKEventTarget
 {
 public:
 	DKRmlInterface* _dkRmlInterface;
+	Rml::Element* _rmlElement;
 	
 	// constructor();
-	DKRmlEventTarget(DKRmlInterface* dkRmlInterface) : DKEventTarget() {
+	DKRmlEventTarget(DKRmlInterface* dkRmlInterface, Rml::Element* rmlElement) : DKEventTarget() {
 		DKDEBUGFUNC();
 		interfaceName = "DKRmlEventTarget";
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKRmlEventTarget("+interfaceAddress+") \n");
 		_dkRmlInterface = dkRmlInterface;
+		_rmlElement = rmlElement;
 	}
 	~DKRmlEventTarget(){}
 
