@@ -34,11 +34,15 @@ public:
 	const void addEventListener(const DOMString& type, DKEventListener callback) override {
 		DKDEBUGFUNC(type, callback);
 		DKTODO();
+		_rmlElement->AddEventListener(type, _dkRmlInterface, false);
+		DKTODO();
 	}
 	
 	// undefined removeEventListener(DOMString type, EventListener? callback, optional (EventListenerOptions or boolean) options = {});
 	void removeEventListener(const DOMString& type, DKEventListener callback) override {
 		DKDEBUGFUNC(type, callback);
+		DKTODO();
+		_rmlElement->RemoveEventListener(type, _dkRmlInterface, false);
 		DKTODO();
 	}
 	
@@ -46,9 +50,14 @@ public:
 	bool dispatchEvent(DKEvent& event) override {
 		DKDEBUGFUNC(event);
 		DKTODO();
+		_rmlElement->DispatchEvent(event.type(), Rml::Dictionary());
 		return false;
 	}
 	
+	bool onEvent() {
+
+	}
+
 	////// toString //////
 	operator std::string() const { return "[object DKRmlEventTarget]"; }
 };
