@@ -429,6 +429,7 @@ public:
 				return _outerWidth;
 			}
 			virtual void outerWidth(const int& outerWidth) override {			// setter
+				DKDEBUGFUNC(outerWidth);
 				// readonly
 			}
 
@@ -442,6 +443,7 @@ public:
 				return _outerHeight;
 			}
 			virtual void outerHeight(const int& outerHeight){		// setter
+				DKDEBUGFUNC(outerHeight);
 				//readonly
 			}
 			
@@ -477,8 +479,8 @@ public:
 	unsigned short buttons;
 	double pageX;
 	double pageY;
-	double x;
-	double y;
+	double mouseEvent_x;
+	double mouseEvent_y;
 	double offsetX;
 	double offsetY;
 	double movementX;

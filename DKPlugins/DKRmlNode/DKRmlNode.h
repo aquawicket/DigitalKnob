@@ -16,7 +16,7 @@ class DKRmlNode : public DKRmlEventTarget, public DKNode
 public:	 
 	DKRmlInterface* _dkRmlInterface;
 	
-	DKRmlNode(DKRmlInterface* dkRmlInterface) : DKRmlEventTarget(), DKNode()  {
+	DKRmlNode(DKRmlInterface* dkRmlInterface) : DKRmlEventTarget(dkRmlInterface), DKNode() {
 		DKDEBUGFUNC();
 		interfaceName = "DKRmlNode";
 		interfaceAddress = pointerToAddress(this);

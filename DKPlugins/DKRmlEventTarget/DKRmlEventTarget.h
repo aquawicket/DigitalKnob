@@ -5,6 +5,7 @@
 #define DKRmlEventTarget_H
 
 #include "DKEventTarget/DKEventTarget.h"
+#include "DKRmlInterface/DKRmlInterface.h"
 
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // [Exposed=*]
@@ -12,13 +13,15 @@
 class DKRmlEventTarget : public DKEventTarget
 {
 public:
-
+	DKRmlInterface* _dkRmlInterface;
+	
 	// constructor();
-	DKRmlEventTarget() : DKEventTarget() {
+	DKRmlEventTarget(DKRmlInterface* dkRmlInterface) : DKEventTarget() {
 		DKDEBUGFUNC();
 		interfaceName = "DKRmlEventTarget";
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKRmlEventTarget("+interfaceAddress+") \n");
+		_dkRmlInterface = dkRmlInterface;
 	}
 	virtual ~DKRmlEventTarget(){}
 

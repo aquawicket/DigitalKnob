@@ -10,12 +10,20 @@
 class TEST_DKRmlEventTarget //: public DKObjectT<TEST_DKRmlEventTarget>
 {
 public:
+	DKRmlEventTarget* dkRmlEventTarget;
+	//std::unique_ptr<DKRmlEventTarget> dkRmlEventTarget;
+
 	TEST_DKRmlEventTarget() {
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DKRmlEventTarget.h //////");
 		
-		DKRmlEventTarget rmlEventTarget;
-		printDKRmlEventTargetProperties(rmlEventTarget);
+		dkRmlEventTarget = new DKRmlEventTarget(TEST_DKRmlInterface::dkRmlInterface);
+		
+		printDKRmlEventTargetProperties(*dkRmlEventTarget);
+	}
+	
+	~TEST_DKRmlEventTarget() {
+		delete dkRmlEventTarget;
 	}
 	
 	static void printDKRmlEventTargetProperties(DKRmlEventTarget& rmlEventTarget){

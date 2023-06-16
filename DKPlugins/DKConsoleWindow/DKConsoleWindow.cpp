@@ -104,8 +104,8 @@ DKConsoleWindow::DKConsoleWindow() : DKWindow() {
 	buttons = 0;
 	pageX = 0;
 	pageY = 0;
-	x = 0;
-	y = 0;
+	mouseEvent_x = 0;
+	mouseEvent_y = 0;
 	offsetX = 0;
 	offsetY = 0;
 	movementX = 0;
@@ -588,8 +588,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 					mousedown_event.relatedTarget(*this);
 					mousedown_event.pageX(pageX);
 					mousedown_event.pageY(pageY);
-					mousedown_event.x(x);
-					mousedown_event.y(y);
+					mousedown_event.x(mouseEvent_x);
+					mousedown_event.y(mouseEvent_y);
 					mousedown_event.offsetX(offsetX);
 					mousedown_event.offsetY(offsetY);
 					mousedown_event.movementX(movementX);
@@ -617,8 +617,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				mouseup_event.relatedTarget(*this);
 				mouseup_event.pageX(pageX);
 				mouseup_event.pageY(pageY);
-				mouseup_event.x(x);
-				mouseup_event.y(y);
+				mouseup_event.x(mouseEvent_x);
+				mouseup_event.y(mouseEvent_y);
 				mouseup_event.offsetX(offsetX);
 				mouseup_event.offsetY(offsetY);
 				mouseup_event.movementX(movementX);
@@ -639,8 +639,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				click_event.relatedTarget(*this);
 				click_event.pageX(pageX);
 				click_event.pageY(pageY);
-				click_event.x(x);
-				click_event.y(y);
+				click_event.x(mouseEvent_x);
+				click_event.y(mouseEvent_y);
 				click_event.offsetX(offsetX);
 				click_event.offsetY(offsetY);
 				click_event.movementX(movementX);
@@ -669,8 +669,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 					mousedown_event.relatedTarget(*this);
 					mousedown_event.pageX(pageX);
 					mousedown_event.pageY(pageY);
-					mousedown_event.x(x);
-					mousedown_event.y(y);
+					mousedown_event.x(mouseEvent_x);
+					mousedown_event.y(mouseEvent_y);
 					mousedown_event.offsetX(offsetX);
 					mousedown_event.offsetY(offsetY);
 					mousedown_event.movementX(movementX);
@@ -698,8 +698,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				mouseup_event.relatedTarget(*this);
 				mouseup_event.pageX(pageX);
 				mouseup_event.pageY(pageY);
-				mouseup_event.x(x);
-				mouseup_event.y(y);
+				mouseup_event.x(mouseEvent_x);
+				mouseup_event.y(mouseEvent_y);
 				mouseup_event.offsetX(offsetX);
 				mouseup_event.offsetY(offsetY);
 				mouseup_event.movementX(movementX);
@@ -720,8 +720,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				contextmenu_event.relatedTarget(*this);
 				contextmenu_event.pageX(pageX);
 				contextmenu_event.pageY(pageY);
-				contextmenu_event.x(x);
-				contextmenu_event.y(y);
+				contextmenu_event.x(mouseEvent_x);
+				contextmenu_event.y(mouseEvent_y);
 				contextmenu_event.offsetX(offsetX);
 				contextmenu_event.offsetY(offsetY);
 				contextmenu_event.movementX(movementX);
@@ -750,8 +750,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 					mousedown_event.relatedTarget(*this);
 					mousedown_event.pageX(pageX);
 					mousedown_event.pageY(pageY);
-					mousedown_event.x(x);
-					mousedown_event.y(y);
+					mousedown_event.x(mouseEvent_x);
+					mousedown_event.y(mouseEvent_y);
 					mousedown_event.offsetX(offsetX);
 					mousedown_event.offsetY(offsetY);
 					mousedown_event.movementX(movementX);
@@ -779,8 +779,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				mouseup_event.relatedTarget(*this);
 				mouseup_event.pageX(pageX);
 				mouseup_event.pageY(pageY);
-				mouseup_event.x(x);
-				mouseup_event.y(y);
+				mouseup_event.x(mouseEvent_x);
+				mouseup_event.y(mouseEvent_y);
 				mouseup_event.offsetX(offsetX);
 				mouseup_event.offsetY(offsetY);
 				mouseup_event.movementX(movementX);
@@ -809,8 +809,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 					mousedown_event.relatedTarget(*this);
 					mousedown_event.pageX(pageX);
 					mousedown_event.pageY(pageY);
-					mousedown_event.x(x);
-					mousedown_event.y(y);
+					mousedown_event.x(mouseEvent_x);
+					mousedown_event.y(mouseEvent_y);
 					mousedown_event.offsetX(offsetX);
 					mousedown_event.offsetY(offsetY);
 					mousedown_event.movementX(movementX);
@@ -838,8 +838,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				mouseup_event.relatedTarget(*this);
 				mouseup_event.pageX(pageX);
 				mouseup_event.pageY(pageY);
-				mouseup_event.x(x);
-				mouseup_event.y(y);
+				mouseup_event.x(mouseEvent_x);
+				mouseup_event.y(mouseEvent_y);
 				mouseup_event.offsetX(offsetX);
 				mouseup_event.offsetY(offsetY);
 				mouseup_event.movementX(movementX);
@@ -868,8 +868,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 					mousedown_event.relatedTarget(*this);
 					mousedown_event.pageX(pageX);
 					mousedown_event.pageY(pageY);
-					mousedown_event.x(x);
-					mousedown_event.y(y);
+					mousedown_event.x(mouseEvent_x);
+					mousedown_event.y(mouseEvent_y);
 					mousedown_event.offsetX(offsetX);
 					mousedown_event.offsetY(offsetY);
 					mousedown_event.movementX(movementX);
@@ -897,8 +897,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				mouseup_event.relatedTarget(*this);
 				mouseup_event.pageX(pageX);
 				mouseup_event.pageY(pageY);
-				mouseup_event.x(x);
-				mouseup_event.y(y);
+				mouseup_event.x(mouseEvent_x);
+				mouseup_event.y(mouseEvent_y);
 				mouseup_event.offsetX(offsetX);
 				mouseup_event.offsetY(offsetY);
 				mouseup_event.movementX(movementX);
@@ -923,8 +923,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 			dblclick_event.relatedTarget(*this);
 			dblclick_event.pageX(pageX);
 			dblclick_event.pageY(pageY);
-			dblclick_event.x(x);
-			dblclick_event.y(y);
+			dblclick_event.x(mouseEvent_x);
+			dblclick_event.y(mouseEvent_y);
 			dblclick_event.offsetX(offsetX);
 			dblclick_event.offsetY(offsetY);
 			dblclick_event.movementX(movementX);
@@ -953,8 +953,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 			wheel_event.relatedTarget(*this);
 			wheel_event.pageX(pageX);
 			wheel_event.pageY(pageY);
-			wheel_event.x(x);
-			wheel_event.y(y);
+			wheel_event.x(mouseEvent_x);
+			wheel_event.y(mouseEvent_y);
 			wheel_event.offsetX(offsetX);
 			wheel_event.offsetY(offsetY);
 			wheel_event.movementX(movementX);
@@ -983,8 +983,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 			wheel_event.relatedTarget(*this);
 			wheel_event.pageX(pageX);
 			wheel_event.pageY(pageY);
-			wheel_event.x(x);
-			wheel_event.y(y);
+			wheel_event.x(mouseEvent_x);
+			wheel_event.y(mouseEvent_y);
 			wheel_event.offsetX(offsetX);
 			wheel_event.offsetY(offsetY);
 			wheel_event.movementX(movementX);
@@ -1010,20 +1010,20 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 
             clientX = mousex - rect.left;
             clientY = mousey - rect.top;
-            if (clientX == x && clientY == y)
+            if (clientX == mouseEvent_x && clientY == mouseEvent_y)
                 break;
 
             button = 0;
             //layerX = clientX;
             //layerY = clientY;
-            movementX = clientX - x;
-            movementY = clientY - y;
+            movementX = clientX - mouseEvent_x;
+            movementY = clientY - mouseEvent_y;
             offsetX = clientX;
             offsetY = clientY;
             pageX = clientX;
             pageY = clientY;
-            x = clientX;
-            y = clientY;
+            mouseEvent_x = clientX;
+            mouseEvent_y = clientY;
             
 			DKMouseEvent mousemove_event("mousemove", "");
 			mousemove_event.screenX(screenX);
@@ -1039,8 +1039,8 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 			mousemove_event.relatedTarget(*this);
 			mousemove_event.pageX(pageX);
 			mousemove_event.pageY(pageY);
-			mousemove_event.x(x);
-			mousemove_event.y(y);
+			mousemove_event.x(mouseEvent_x);
+			mousemove_event.y(mouseEvent_y);
 			mousemove_event.offsetX(offsetX);
 			mousemove_event.offsetY(offsetY);
 			mousemove_event.movementX(movementX);
