@@ -54,8 +54,7 @@ public:
 					console.error("item invalid!");
 				if(item->hasAttribute("href")){
 					console.log("item()->hasAttribute('href')");
-
-					//item->style().setProperty("color", "rgb(0,0,255)");
+					item->style().setProperty("color", "rgb(0,0,255)");
 					//item->style().setProperty("text-decoration", "underline");
 					//item->AddEventListener("click", dkRmlInterface, false);
 				}
