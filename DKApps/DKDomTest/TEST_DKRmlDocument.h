@@ -47,7 +47,7 @@ public:
 		else{
 			console.log("aElement.length() = "+toString(aElements->length()));
 			for(unsigned int i=0; i<aElements->length(); ++i){
-				//DKINFO("aElement["+toString(i)+"]\n");
+				console.log("aElement["+toString(i)+"]");
 				DKElement* item = aElements->item(i);
 				
 				if(!item)
