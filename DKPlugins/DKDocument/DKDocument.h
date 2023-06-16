@@ -12,7 +12,7 @@
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // [Exposed=Window]
 // interface Document : Node {
-class DKDocument : public DKNode, public DKNonElementParentNode
+class DKDocument : public DKNode//, public DKNonElementParentNode
 {
 public:
 	// constructor();

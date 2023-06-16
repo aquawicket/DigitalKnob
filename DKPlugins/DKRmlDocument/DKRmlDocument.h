@@ -6,19 +6,20 @@
 
 #include "DKDocument/DKDocument.h"
 #include "DKRmlInterface/DKRmlInterface.h"
+#include "DKRmlNonElementParentNode/DKRmlNonElementParentNode.h"
 #include "DKRmlElement/DKRmlElement.h"
 class DKHTMLCollection;
 
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // [Exposed=Window]
 // interface Document : Node {
-class DKRmlDocument : public DKDocument
+class DKRmlDocument : public DKDocument, public DKRmlNonElementParentNode
 {
 public:
 	DKRmlInterface* _dkRmlInterface;
 	
 	// constructor();
-	DKRmlDocument(DKRmlInterface* dkRmlInterface) : DKDocument() {
+	DKRmlDocument(DKRmlInterface* dkRmlInterface) : DKDocument(), DKRmlNonElementParentNode(dkRmlInterface) {
 		DKDEBUGFUNC();
 		interfaceName = "DKRmlDocument";
 		interfaceAddress = pointerToAddress(this);
@@ -234,11 +235,13 @@ public:
   */
 	// Source: DOM Standard (https://dom.spec.whatwg.org/)
 	// Document includes NonElementParentNode;
+	/*
 	virtual DKElement* getElementById(const DOMString& elementId) override {
 		DKDEBUGFUNC(elementId);
 		Rml::Element* element = _dkRmlInterface->document->GetElementById(elementId.c_str());
 		return new DKRmlElement(_dkRmlInterface, element);		// FIXME: danggling pointer
 	}
+	*/
 /*
 	// Source: DOM Standard (https://dom.spec.whatwg.org/)
 	// Document includes DocumentOrShadowRoot;

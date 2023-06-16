@@ -43,6 +43,7 @@ dk_depend(DKSdlRmlDocument)				# Mixin
 dk_depend(DKRmlInterface)
 dk_depend(DKRmlEventTarget)
 dk_depend(DKRmlLocation)
+dk_depend(DKRmlCSSStyleDeclaration)
 dk_depend(DKRmlNode)
 dk_depend(DKRmlDocument)
 dk_depend(DKRmlElementCSSInlineStyle)	# Mixin

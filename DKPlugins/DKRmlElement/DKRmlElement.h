@@ -5,11 +5,11 @@
 #define DKRmlElement_H
 
 #include "DKElement/DKElement.h"
-
+#include "DKRmlElementCSSInlineStyle/DKRmlElementCSSInlineStyle.h"
 
 // [Exposed=Window]
 // interface Element : Node {
-class DKRmlElement : public DKElement
+class DKRmlElement : public DKElement//, public DKRmlElementCSSInlineStyle
 {
 public:
 	DKRmlInterface* _dkRmlInterface;
