@@ -36,7 +36,7 @@ public:
 	virtual ~DKEventTarget(){}
 
 	// undefined addEventListener(DOMString type, EventListener? callback, optional (AddEventListenerOptions or boolean) options = {});
-	virtual void addEventListener(const DOMString& type, DKEventListener callback){
+	virtual void addEventListener(const DOMString& type, DKEventListener callback) {
 		DKDEBUGFUNC(type, callback);
 		//DKINFO("DKEventTarget::addEventListener("+type+", callback) \n");
 		EventObject eventObj;
@@ -57,7 +57,7 @@ public:
 	}
 	
 	// undefined removeEventListener(DOMString type, EventListener? callback, optional (EventListenerOptions or boolean) options = {});
-	virtual void removeEventListener(const DOMString& type, DKEventListener callback){
+	virtual void removeEventListener(const DOMString& type, DKEventListener callback) {
 		DKDEBUGFUNC(type, callback);
 		//DKINFO("DKEventTarget::removeEventListener("+type+", callback) \n");
 		for(auto it = events.begin(); it != events.end();){
@@ -69,7 +69,7 @@ public:
 	}
 	
 	// boolean dispatchEvent(Event event);
-    virtual bool dispatchEvent(DKEvent& event){
+    virtual bool dispatchEvent(DKEvent& event) {
 		DKDEBUGFUNC(event);
 		//DKINFO("DKEventTarget::dispatchEvent("+event+") \n");	
 		for (auto& eventObj : events) {
