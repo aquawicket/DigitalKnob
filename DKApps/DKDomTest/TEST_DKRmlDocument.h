@@ -51,7 +51,6 @@ public:
 				DKElement* item = aElements->item(i);
 				if(!item)
 					console.error("item invalid!");
-				console.log("if(item->hasAttribute('href')){");
 				if(item->hasAttribute("href")){
 					console.log("item()->hasAttribute('href')");
 					item->style().setProperty("color", "rgb(0,0,255)");

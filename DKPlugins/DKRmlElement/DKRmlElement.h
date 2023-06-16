@@ -4,18 +4,20 @@
 #ifndef DKRmlElement_H
 #define DKRmlElement_H
 
+#include "DKRmlNode/DKRmlNode.h"
 #include "DKElement/DKElement.h"
 #include "DKRmlElementCSSInlineStyle/DKRmlElementCSSInlineStyle.h"
 
+
 // [Exposed=Window]
 // interface Element : Node {
-class DKRmlElement : public DKElement//, public DKRmlElementCSSInlineStyle
+class DKRmlElement : public DKRmlNode, public DKElement//, public DKRmlElementCSSInlineStyle
 {
 public:
 	DKRmlInterface* _dkRmlInterface;
 	Rml::Element* _rmlElement;
 	
-	DKRmlElement(DKRmlInterface* dkRmlInterface, Rml::Element* rmlElement) : DKElement() {//, DKRmlElementCSSInlineStyle(dkRmlInterface, _rmlElement) {
+	DKRmlElement(DKRmlInterface* dkRmlInterface, Rml::Element* rmlElement) : DKRmlNode(dkRmlInterface), DKElement() {//, DKRmlElementCSSInlineStyle(dkRmlInterface, _rmlElement) {
 		DKDEBUGFUNC();
 		interfaceName = "DKRmlElement";
 		interfaceAddress = pointerToAddress(this);

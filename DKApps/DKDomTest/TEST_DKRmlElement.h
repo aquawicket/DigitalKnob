@@ -27,7 +27,7 @@ public:
 	static void printDKRmlElementProperties(DKRmlElement& dkRmlElement){
 		DKDEBUGFUNC(dkRmlElement);
 		
-		TEST_Node::printNodeProperties(dynamic_cast<DKNode&>(dkRmlElement));	//TODO: try to remove the need for dynamic_cast
+		TEST_Element::printElementProperties(dynamic_cast<DKElement&>(dkRmlElement));	//TODO: try to remove the need for dynamic_cast
 	}
 };
 //REGISTER_OBJECT(TEST_DKRmlElement, true);

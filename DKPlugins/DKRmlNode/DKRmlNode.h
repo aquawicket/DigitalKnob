@@ -6,16 +6,17 @@
 
 #include "DKNode/DKNode.h"
 #include "DKRmlInterface/DKRmlInterface.h"
+#include "DKRmlEventTarget/DKRmlEventTarget.h"
 
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // [Exposed=Window]
 // interface Node : EventTarget {
-class DKRmlNode : public DKNode
+class DKRmlNode : public DKRmlEventTarget, public DKNode
 {
-public:
+public:	 
 	DKRmlInterface* _dkRmlInterface;
 	
-	DKRmlNode(DKRmlInterface* dkRmlInterface) : DKNode() {
+	DKRmlNode(DKRmlInterface* dkRmlInterface) : DKRmlEventTarget(), DKNode()  {
 		DKDEBUGFUNC();
 		interfaceName = "DKRmlNode";
 		interfaceAddress = pointerToAddress(this);

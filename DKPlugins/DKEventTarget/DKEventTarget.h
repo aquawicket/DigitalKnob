@@ -23,7 +23,7 @@ struct EventObject {
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // [Exposed=*]
 // interface EventTarget {
-class DKEventTarget : public DKInterface
+class DKEventTarget : virtual public DKInterface
 {
 public:
 	// constructor();
