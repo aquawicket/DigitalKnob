@@ -50,7 +50,7 @@ WARNING_ENABLE
 #define DRAG_FIX 1
 
 
-DKRmlFile* 	DKRmlInterface::dkRmlFile 	= NULL;
+DKRmlFile* 	DKRmlInterface::dkRmlFile = nullptr;
 DKString 	DKRmlInterface::workingPath;
 
 
@@ -62,7 +62,7 @@ DKRmlInterface::DKRmlInterface(DKWindow* window) : DKInterface() {
 	
 	DKINFO("DKRmlInterface("+window->interfaceName+") \n");	
 	
-	document = NULL;
+	//document = NULL;
 	
 	if(!dkRmlFile){ 
 		dkRmlFile = new DKRmlFile();
@@ -230,9 +230,10 @@ bool DKRmlInterface::LoadHtml(const DKString& html){
 	//// Clear any document and load the rml into the document
 	
 	if (document) {
-		document = nullptr;
-		//document->Close();
-		//Rml::Factory::ClearStyleSheetCache();
+		//document = nullptr;
+		document->Close();
+		if(context)
+			Rml::Factory::ClearStyleSheetCache();
 	}
 	
 	auto stream = std::make_unique<Rml::StreamMemory>((Rml::byte*)rml.c_str(), rml.size());

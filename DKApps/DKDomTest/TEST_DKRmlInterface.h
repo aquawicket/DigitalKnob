@@ -27,7 +27,7 @@ public:
 	}
 	
 	static void printDKRmlInterfaceProperties(DKRmlInterface& dkRmlInterface){
-		DKDEBUGFUNC(dkRmlInterface);
+		//DKDEBUGFUNC(dkRmlInterface);
 		
 		//TEST_Interface::printNodeProperties(dynamic_cast<DKInterface&>(dkRmlInterface));	//TODO: try to remove the need for dynamic_cast
 	}

@@ -14,7 +14,7 @@
 class DKRmlLocation : public DKLocation //, public DKObjectT<DKRmlLocation>
 {
 public:
-	DKRmlInterface* _dkRmlInterface;
+	static DKRmlInterface* _dkRmlInterface;
 
 	DKRmlLocation(DKRmlInterface* dkRmlInterface) : DKLocation() {
 		DKDEBUGFUNC();
@@ -32,5 +32,6 @@ public:
 	} 	
 };
 //REGISTER_OBJECT(DKRmlLocation, true);
+
 
 #endif //DKLocation_H

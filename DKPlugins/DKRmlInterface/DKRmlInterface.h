@@ -64,10 +64,10 @@ public:
 	DKString protocol;
 	DKString _path;
 	static DKString workingPath; //FIXME: make un-static
-	Rml::Context* context;
-	Rml::ElementDocument* document;
+	Rml::Context* context = nullptr;
+	Rml::ElementDocument* document = nullptr;
 	static DKRmlFile* dkRmlFile;
-	Rml::Element* hover;
+	Rml::Element* hover = nullptr;
 	//DKRmlConverter dkRmlConverter;
 };
 
