@@ -10,7 +10,7 @@ class DKHTMLCollection;
 
 // [Exposed=Window]
 // interface Element : Node {
-class DKElement : virtual public DKNode, virtual public DKElementCSSInlineStyle
+class DKElement : public DKNode, public DKElementCSSInlineStyle
 {
 public:
 	DKElement() : DKNode(), DKElementCSSInlineStyle() {

@@ -11,7 +11,7 @@
 
 // [Exposed=Window]
 // interface Element : Node {
-class DKRmlElement : virtual public DKElement, virtual public DKRmlNode  //, public DKRmlElementCSSInlineStyle
+class DKRmlElement : public DKElement, public DKRmlNode  //, public DKRmlElementCSSInlineStyle
 {
 public:
 	//DKRmlInterface* _dkRmlInterface;

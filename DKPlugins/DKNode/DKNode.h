@@ -11,7 +11,7 @@ class DKElement;
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // [Exposed=Window]
 // interface Node : EventTarget {
-class DKNode : virtual public DKEventTarget
+class DKNode : public DKEventTarget
 {
 public:
 
