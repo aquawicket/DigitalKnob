@@ -47,16 +47,20 @@ public:
 		else{
 			console.log("aElement.length() = "+toString(aElements->length()));
 			for(unsigned int i=0; i<aElements->length(); ++i){
-				console.log("aElement["+toString(i)+"]");
-				DKElement* item = aElements->item(i);
-				if(!item)
-					console.error("item invalid!");
-				if(item->hasAttribute("href")){
-					console.log("item()->hasAttribute('href')");
-					item->style().setProperty("color", "rgb(0,0,255)");
-					item->style().setProperty("text-decoration", "underline");
-					//DKRmlElement* rmlItem = (DKRmlElement*)item;
-					item->addEventListener("click", &TEST_DKRmlDocument::onHyperlink);
+				//console.log("aElement["+toString(i)+"]");
+				//DKElement* item = aElements->item(i);
+				if (!aElements->item(i))
+					console.error("aElements->item("+toString(i)+") invalid!");
+				DKElement& item = *aElements->item(i);
+				//if(!item)
+					//console.error("item invalid!");
+				//if(item->hasAttribute("href")){
+				if (item.hasAttribute("href")) {
+					//console.log("item()->hasAttribute('href')");
+					//item->style().setProperty("color", "rgb(0,0,255)");
+					item.style().setProperty("color", "rgb(0,0,255)");
+					item.style().setProperty("text-decoration", "underline");
+					item.addEventListener("click", &TEST_DKRmlDocument::onHyperlink);
 				}
 			}
 		}
