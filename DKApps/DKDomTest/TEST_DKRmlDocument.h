@@ -55,8 +55,8 @@ public:
 				if(item->hasAttribute("href")){
 					console.log("item()->hasAttribute('href')");
 					item->style().setProperty("color", "rgb(0,0,255)");
-					//item->style().setProperty("text-decoration", "underline");
-					//item->AddEventListener("click", dkRmlInterface, false);
+					item->style().setProperty("text-decoration", "underline");
+					item->addEventListener("click", &TEST_DKRmlDocument::onHyperlink);
 				}
 			}
 		}
@@ -66,6 +66,11 @@ public:
 	
 	~TEST_DKRmlDocument() {
 		delete dkRmlDocument;
+	}
+	
+	static void onHyperlink(DKEvent& event){
+		DKDEBUGFUNC(event);
+		console.log("onHyperlink()");
 	}
 	
 	static void printRmlDocumentProperties(DKRmlDocument& dkRmlDocument){
