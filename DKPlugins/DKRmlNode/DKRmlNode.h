@@ -14,8 +14,8 @@
 class DKRmlNode : public DKRmlEventTarget, public DKNode
 {
 public:	 
-	DKRmlInterface* _dkRmlInterface;
-	Rml::Element* _rmlElement;
+	//DKRmlInterface* _dkRmlInterface;
+	//Rml::Element* _rmlElement;
 	
 	DKRmlNode(DKRmlInterface* dkRmlInterface, Rml::Element* rmlElement) : DKRmlEventTarget(dkRmlInterface, rmlElement), DKNode() {
 		DKDEBUGFUNC();

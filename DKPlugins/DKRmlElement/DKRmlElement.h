@@ -14,8 +14,8 @@
 class DKRmlElement : public DKRmlNode, public DKElement //, public DKRmlElementCSSInlineStyle
 {
 public:
-	DKRmlInterface* _dkRmlInterface;
-	Rml::Element* _rmlElement;
+	//DKRmlInterface* _dkRmlInterface;
+	//Rml::Element* _rmlElement;
 	
 	DKRmlElement(DKRmlInterface* dkRmlInterface, Rml::Element* rmlElement) : DKRmlNode(dkRmlInterface, rmlElement), DKElement() {//, DKRmlElementCSSInlineStyle(dkRmlInterface, _rmlElement) {
 		DKDEBUGFUNC();
