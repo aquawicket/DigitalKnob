@@ -55,14 +55,9 @@ public:
 				if(item->hasAttribute("href")){
 					console.log("item()->hasAttribute('href')");
 
-					//item->SetProperty("color", "rgb(0,0,255)");
-					//item->SetProperty("text-decoration", "underline");
+					//item->style().setProperty("color", "rgb(0,0,255)");
+					//item->style().setProperty("text-decoration", "underline");
 					//item->AddEventListener("click", dkRmlInterface, false);
-					
-					item->style().setProperty("color", "rgb(0,0,255)");
-					
-					//DKRmlCSSStyleDeclaration* dkRmlCSSStyleDeclaration = &item->style();
-					//dkRmlCSSStyleDeclaration->setProperty("color", "rgb(0,0,255)");
 				}
 			}
 		}
