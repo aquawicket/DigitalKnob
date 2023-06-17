@@ -46,10 +46,8 @@ public:
 			console.error("aElements invalid!");
 		}
 		else{
-			console.log("aElement.length() = "+toString(aElements.length()));
+			//console.log("aElement.length() = "+toString(aElements.length()));
 			for(unsigned int i=0; i<aElements.length(); ++i){
-				//if (!aElements.item(i))
-				//	console.error("aElements.item("+toString(i)+") invalid!");
 				DKElement& item = *aElements.item(i);
 				if (!&item)
 					console.error("aElements->item(" + toString(i) + ") invalid!");
@@ -70,6 +68,7 @@ public:
 	
 	static void onHyperlink(DKEvent& event){
 		DKDEBUGFUNC(event);
+		DKTODO();
 		console.log("onHyperlink()");
 	}
 	

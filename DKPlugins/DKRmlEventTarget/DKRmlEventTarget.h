@@ -50,7 +50,7 @@ public:
 	bool dispatchEvent(DKEvent& event) override {
 		DKDEBUGFUNC(event);
 		DKTODO();
-		_rmlElement->DispatchEvent(event.type(), Rml::Dictionary());
+		//_rmlElement->DispatchEvent(event.type(), Rml::Dictionary());
 		return false;
 	}
 	
