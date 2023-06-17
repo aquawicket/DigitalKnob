@@ -40,24 +40,20 @@ public:
 		
 		
 		//////////// Post processing <a hfer></a> hyperlinks ////////////
-		DKHTMLCollection* aElements = dkRmlDocument->getElementsByTagName("a");
-		if(!aElements){
+		//DKHTMLCollection* aElements = dkRmlDocument->getElementsByTagName("a");
+		DKHTMLCollection& aElements = *dkRmlDocument->getElementsByTagName("a");
+		if(!&aElements){
 			console.error("aElements invalid!");
 		}
 		else{
-			console.log("aElement.length() = "+toString(aElements->length()));
-			for(unsigned int i=0; i<aElements->length(); ++i){
-				//console.log("aElement["+toString(i)+"]");
-				//DKElement* item = aElements->item(i);
-				if (!aElements->item(i))
-					console.error("aElements->item("+toString(i)+") invalid!");
-				DKElement& item = *aElements->item(i);
-				//if(!item)
-					//console.error("item invalid!");
-				//if(item->hasAttribute("href")){
+			console.log("aElement.length() = "+toString(aElements.length()));
+			for(unsigned int i=0; i<aElements.length(); ++i){
+				//if (!aElements.item(i))
+				//	console.error("aElements.item("+toString(i)+") invalid!");
+				DKElement& item = *aElements.item(i);
+				if (!&item)
+					console.error("aElements->item(" + toString(i) + ") invalid!");
 				if (item.hasAttribute("href")) {
-					//console.log("item()->hasAttribute('href')");
-					//item->style().setProperty("color", "rgb(0,0,255)");
 					item.style().setProperty("color", "rgb(0,0,255)");
 					item.style().setProperty("text-decoration", "underline");
 					item.addEventListener("click", &TEST_DKRmlDocument::onHyperlink);
