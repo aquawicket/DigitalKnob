@@ -5,19 +5,8 @@
 #define DKEventTarget_H
 
 #include "DKInterface/DKInterface.h"
+#include "DKEventListener/DKEventListener.h"
 #include "DKEvent/DKEvent.h"
-
-
-////// EventListener //////
-typedef std::function<void(DKEvent&)> DKEventListener;
-
-struct EventObject {
-	DKString interfaceAddress;
-	DKEventTarget* dkEventTarget;
-    DOMString type;
-	DKEventListener callback;
-};
-
 
 
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
@@ -36,33 +25,33 @@ public:
 	virtual ~DKEventTarget(){}
 
 	// undefined addEventListener(DOMString type, EventListener? callback, optional (AddEventListenerOptions or boolean) options = {});
-	virtual const void addEventListener(const DOMString& type, DKEventListener callback) {
+	virtual const void addEventListener(const DOMString& type, DKCallback callback) {
 		DKDEBUGFUNC(type, callback);
 		//DKINFO("DKEventTarget::addEventListener("+type+", callback) \n");
-		EventObject eventObj;
-        eventObj.type = type;
-        eventObj.callback = callback;
-        eventObj.interfaceAddress = interfaceAddress;
-		eventObj.dkEventTarget = this;
-        events.push_back(eventObj);
+		DKEventListener eventListener;
+        eventListener.type = type;
+        eventListener.callback = callback;
+        eventListener.interfaceAddress = interfaceAddress;
+		eventListener.dkEventTarget = this;
+        eventListeners.push_back(eventListener);
 		
 		/// Print event list
 		/*
 		unsigned int i=0;
-		for (auto& eventObj : events) {
-			DKINFO("event["+toString(i)+"] = ("+eventObj.type+","+eventObj.interfaceAddress+") \n");
+		for (auto& eventListener : eventListeners) {
+			DKINFO("event["+toString(i)+"] = ("+eventListener.type+","+eventListener.interfaceAddress+") \n");
 			i++;
         }
 		*/
 	}
 	
 	// undefined removeEventListener(DOMString type, EventListener? callback, optional (EventListenerOptions or boolean) options = {});
-	virtual void removeEventListener(const DOMString& type, DKEventListener callback) {
+	virtual void removeEventListener(const DOMString& type, DKCallback callback) {
 		DKDEBUGFUNC(type, callback);
 		//DKINFO("DKEventTarget::removeEventListener("+type+", callback) \n");
-		for(auto it = events.begin(); it != events.end();){
+		for(auto it = eventListeners.begin(); it != eventListeners.end();){
 			if(it->type == type && it->interfaceAddress == interfaceAddress) // && it->callback == callback)
-				it = events.erase(it);
+				it = eventListeners.erase(it);
 			else
 				++it;
 		}
@@ -72,16 +61,16 @@ public:
     virtual bool dispatchEvent(DKEvent& event) {
 		DKDEBUGFUNC(event);
 		//DKINFO("DKEventTarget::dispatchEvent("+event+") \n");	
-		for (auto& eventObj : events) {
+		for (auto& eventListener : eventListeners) {
 			//DKINFO("	eventObj("+eventObj.type+", "+eventObj.interfaceAddress) \n");	
-			if(eventObj.type == event.type() && eventObj.interfaceAddress == interfaceAddress){
+			if(eventListener.type == event.type() && eventListener.interfaceAddress == interfaceAddress){
 				//DKINFO("		event("+event.type()+") \n");	
 			
 				event.currentTarget(*this);
 				event.target(*this);
 				event.srcElement(*this);
 				
-				eventObj.callback(event);
+				eventListener.callback(event);
 			}
         }
 		return true; 
@@ -90,7 +79,8 @@ public:
 	
 	
 	////// DK properties //////	
-	static std::vector<EventObject> events;
+	//static std::vector<EventObject> events;
+	static std::vector<DKEventListener> eventListeners;
 	
 	////// toString //////
 	virtual operator std::string() const { return "[object EventTarget]"; }	

@@ -431,7 +431,7 @@ void DKRmlInterface::ProcessEvent(Rml::Event& rmlEvent){
 
 	//////////////////////////////////
 	if (same(type, "click")) {
-		DKINFO("click!");
+		DKINFO("click!\n");
 		DKMouseEvent click_event("click", "");
 		DKRmlElement* dkRmlElement = new DKRmlElement(this, currentElement);
 		dkRmlElement->dispatchEvent(click_event);

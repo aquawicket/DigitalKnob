@@ -31,7 +31,7 @@ public:
 	~DKRmlEventTarget(){}
 
 	// undefined addEventListener(DOMString type, EventListener? callback, optional (AddEventListenerOptions or boolean) options = {});
-	const void addEventListener(const DOMString& type, DKEventListener callback) override {
+	const void addEventListener(const DOMString& type, DKCallback callback) override {
 		DKDEBUGFUNC(type, callback);
 		DKTODO();
 		_rmlElement->AddEventListener(type, _dkRmlInterface, false);
@@ -39,7 +39,7 @@ public:
 	}
 	
 	// undefined removeEventListener(DOMString type, EventListener? callback, optional (EventListenerOptions or boolean) options = {});
-	void removeEventListener(const DOMString& type, DKEventListener callback) override {
+	void removeEventListener(const DOMString& type, DKCallback callback) override {
 		DKDEBUGFUNC(type, callback);
 		DKTODO();
 		_rmlElement->RemoveEventListener(type, _dkRmlInterface, false);
