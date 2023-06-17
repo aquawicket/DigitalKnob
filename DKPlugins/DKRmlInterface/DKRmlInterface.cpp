@@ -46,6 +46,8 @@ WARNING_ENABLE
 #endif
 
 #include "DKRmlInterface/DKRmlConverter.h"
+
+#include "DKRmlElement/DKRmlElement.h"
 #include "DKMouseEvent/DKMouseEvent.h"
 
 #define DRAG_FIX 1
@@ -428,13 +430,12 @@ void DKRmlInterface::ProcessEvent(Rml::Event& rmlEvent){
 		type = "input";
 
 	//////////////////////////////////
-	/*
 	if (same(type, "click")) {
 		DKINFO("click!");
 		DKMouseEvent click_event("click", "");
-		this->dispatchEvent(click_event);
+		DKRmlElement* dkRmlElement = new DKRmlElement(this, currentElement);
+		dkRmlElement->dispatchEvent(click_event);
 	}
-	*/
 	/////////////////////////////////
 
 
