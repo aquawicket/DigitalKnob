@@ -101,7 +101,8 @@ public:
 		std::vector<DKElement*>* element_list = new std::vector<DKElement*>;
 		for(unsigned int i=0; i<elements.size(); ++i){
 			//element_list.push_back(new DKRmlElement(_dkRmlInterface, elements[i]));
-			element_list->push_back(new DKRmlElement(_dkRmlInterface, elements[i]));
+			//element_list->push_back(new DKRmlElement(_dkRmlInterface, elements[i]));
+			element_list->push_back(DKRmlElement::instance(_dkRmlInterface, elements[i]));
 		}
 		//DKINFO("element_list.size() = "+toString(element_list.size())+"\n");
 		DKINFO("element_list->size() = "+toString(element_list->size())+"\n");

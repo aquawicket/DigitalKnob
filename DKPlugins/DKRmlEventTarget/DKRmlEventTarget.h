@@ -35,6 +35,7 @@ public:
 		DKDEBUGFUNC(type, callback);
 		DKTODO();
 		_rmlElement->AddEventListener(type, _dkRmlInterface, false);
+		DKEventTarget::addEventListener(type, callback);
 		DKTODO();
 	}
 	
@@ -43,6 +44,7 @@ public:
 		DKDEBUGFUNC(type, callback);
 		DKTODO();
 		_rmlElement->RemoveEventListener(type, _dkRmlInterface, false);
+		DKEventTarget::removeEventListener(type, callback);
 		DKTODO();
 	}
 	
@@ -51,6 +53,7 @@ public:
 		DKDEBUGFUNC(event);
 		DKTODO();
 		//_rmlElement->DispatchEvent(event.type(), Rml::Dictionary());
+		DKEventTarget::dispatchEvent(event);
 		return false;
 	}
 	

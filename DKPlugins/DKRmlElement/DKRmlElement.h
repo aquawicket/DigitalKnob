@@ -14,8 +14,6 @@
 class DKRmlElement : public DKElement, public DKRmlNode  //, public DKRmlElementCSSInlineStyle
 {
 public:
-	//std::vector<DKRmlElement*> list;
-
 	DKRmlElement(DKRmlInterface* dkRmlInterface, Rml::Element* rmlElement) : DKElement(), DKRmlNode(dkRmlInterface, rmlElement) {//, DKRmlElementCSSInlineStyle(dkRmlInterface, _rmlElement) {
 		DKDEBUGFUNC();
 		interfaceName = "DKRmlElement";
@@ -27,14 +25,18 @@ public:
 		if(!_rmlElement)
 			DKERROR("_rmlElement invalid! \n");
 		
-		/*
-		for(unsigned int i=0; i<list.size(); ++i){
-			
-		}
 		list.push_back(this);
-		*/
 	}
 	~DKRmlElement() {}
+	
+	static std::vector<DKRmlElement*> list;
+	static DKRmlElement* instance(DKRmlInterface* dkRmlInterface, Rml::Element* rmlElement){
+		for(unsigned int i=0; i<list.size(); ++i){
+			if(rmlElement == list[i]->_rmlElement)
+				return list[i];
+		}
+		return new DKRmlElement(dkRmlInterface, rmlElement);
+	}
 	
 	////// NOTE: from DKRmlElementCSSInlineStyle
 	// [SameObject, PutForwards=cssText] readonly attribute CSSStyleDeclaration style;
@@ -277,5 +279,6 @@ public:
 	operator std::string() const { return "[object DKRmlElement]"; }
 };
 
+//std::vector<DKRmlElement*> DKRmlElement::list;
 
 #endif //DKRmlElement_H
