@@ -25,13 +25,11 @@ public:
 	}
 	virtual ~DKEventListener(){}
 	
-	/*
 	// undefined handleEvent(Event event);
 	virtual const void handleEvent(DKEvent& event) {
 		DKDEBUGFUNC(event);
 		DKTODO();
 	}
-	*/
 	
 // };
 
@@ -42,7 +40,7 @@ public:
 	DKCallback callback;
 	
 	////// toString //////
-	virtual operator std::string() const { return "[object EventListener]"; }	
+	virtual operator std::string() const { return "[object EventListener]"; }
 };
 
 

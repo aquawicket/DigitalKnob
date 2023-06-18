@@ -14,9 +14,8 @@
 class DKRmlElement : public DKElement, public DKRmlNode  //, public DKRmlElementCSSInlineStyle
 {
 public:
-	//DKRmlInterface* _dkRmlInterface;
-	//Rml::Element* _rmlElement;
-	
+	//std::vector<DKRmlElement*> list;
+
 	DKRmlElement(DKRmlInterface* dkRmlInterface, Rml::Element* rmlElement) : DKElement(), DKRmlNode(dkRmlInterface, rmlElement) {//, DKRmlElementCSSInlineStyle(dkRmlInterface, _rmlElement) {
 		DKDEBUGFUNC();
 		interfaceName = "DKRmlElement";
@@ -27,6 +26,13 @@ public:
 		
 		if(!_rmlElement)
 			DKERROR("_rmlElement invalid! \n");
+		
+		/*
+		for(unsigned int i=0; i<list.size(); ++i){
+			
+		}
+		list.push_back(this);
+		*/
 	}
 	~DKRmlElement() {}
 	
