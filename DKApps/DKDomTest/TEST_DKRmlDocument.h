@@ -70,6 +70,10 @@ public:
 		DKDEBUGFUNC(event);
 		DKTODO();
 		console.log("onHyperlink()");
+		
+		DKElement* target = dynamic_cast<DKElement*>(&event.target());
+		DOMString value = target->getAttribute("href");
+		TEST_DKRmlLocation::dkRmlLocation->href(value);
 	}
 	
 	static void printRmlDocumentProperties(DKRmlDocument& dkRmlDocument){

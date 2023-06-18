@@ -8,7 +8,7 @@
 class TEST_DKRmlLocation //: public DKObjectT<TEST_DKRmlLocation>
 {
 public:
-	DKRmlLocation* dkRmlLocation;
+	static DKRmlLocation* dkRmlLocation;
 	//std::unique_ptr<DKRmlLocation> dkRmlLocation;
 	
 	TEST_DKRmlLocation() {
@@ -33,5 +33,6 @@ public:
 };
 //REGISTER_OBJECT(TEST_DKRmlLocation, true);
 
+DKRmlLocation* TEST_DKRmlLocation::dkRmlLocation;
 
 #endif //TEST_DKRmlLocation_H

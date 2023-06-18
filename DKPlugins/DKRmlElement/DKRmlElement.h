@@ -112,14 +112,17 @@ public:
 		DKDEBUGFUNC();
 		return _getAttributeNames;
 	}
-	
+	*/
 	// DOMString? getAttribute(DOMString qualifiedName);
-	DKString _getAttribute = "";
+	//DKString _getAttribute = "";
 	virtual const DKString& getAttribute(const DOMString& qualifiedName) override {
 		DKDEBUGFUNC(qualifiedName);
+		Rml::Variant* variant = _rmlElement->GetAttribute(qualifiedName.c_str());
+		if(variant)
+			_getAttribute = _rmlElement->GetAttribute(qualifiedName.c_str())->Get<Rml::String>();
 		return _getAttribute;
 	}
-	
+	/*
 	// DOMString? getAttributeNS(DOMString? namespace, DOMString localName);
 	DOMString _getAttributeNS = "";
 	virtual const DOMString& getAttribute(const DOMString& _namespace, const DOMString& localName) override {

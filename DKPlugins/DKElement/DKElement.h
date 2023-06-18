@@ -79,7 +79,7 @@ public:
 	}
 	
 	// DOMString? getAttribute(DOMString qualifiedName);
-	DKString _getAttribute = "";
+	DOMString _getAttribute = "";
 	virtual const DKString& getAttribute(const DOMString& qualifiedName){
 		DKDEBUGFUNC(qualifiedName);
 		return _getAttribute;
