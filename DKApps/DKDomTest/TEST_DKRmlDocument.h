@@ -40,7 +40,6 @@ public:
 		
 		
 		//////////// Post processing <a hfer></a> hyperlinks ////////////
-		//DKHTMLCollection* aElements = dkRmlDocument->getElementsByTagName("a");
 		DKHTMLCollection& aElements = *dkRmlDocument->getElementsByTagName("a");
 		if(!&aElements){
 			console.error("aElements invalid!");
@@ -58,6 +57,7 @@ public:
 				}
 			}
 		}
+		/////////////////////////////////////////////////////////////////
 
 		printRmlDocumentProperties(*dkRmlDocument);
 	}
@@ -68,9 +68,7 @@ public:
 	
 	static void onHyperlink(DKEvent& event){
 		DKDEBUGFUNC(event);
-		DKTODO();
-		console.log("onHyperlink()");
-		
+		//console.log("onHyperlink()");
 		DKElement* target = dynamic_cast<DKElement*>(&event.target());
 		DOMString value = target->getAttribute("href");
 		TEST_DKRmlLocation::dkRmlLocation->href(value);
