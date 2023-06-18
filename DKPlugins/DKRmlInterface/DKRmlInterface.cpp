@@ -47,6 +47,7 @@ WARNING_ENABLE
 
 #include "DKRmlInterface/DKRmlConverter.h"
 
+#include "DKRmlDocument/DKRmlDocument.h"
 #include "DKRmlElement/DKRmlElement.h"
 #include "DKMouseEvent/DKMouseEvent.h"
 
@@ -355,6 +356,13 @@ bool DKRmlInterface::LoadUrl(const DKString& url){
 	}
 	LoadHtml(html);
 
+	//////////////////////////////////
+	DKINFO("load!\n");
+	DKEvent load_event("load", "");
+	DKRmlDocument* dkRmlDocument = DKRmlDocument::instance(this);
+	dkRmlDocument->dispatchEvent(load_event);
+	/////////////////////////////////
+	
 	return true;
 }
 

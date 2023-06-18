@@ -16,6 +16,15 @@ class DKHTMLCollection;
 class DKRmlDocument : public DKDocument, public DKRmlNonElementParentNode
 {
 public:
+	static std::vector<DKRmlDocument*> list;
+	static DKRmlDocument* instance(DKRmlInterface* dkRmlInterface){
+		for(unsigned int i=0; i<list.size(); ++i){
+			if(dkRmlInterface == list[i]->_dkRmlInterface)
+				return list[i];
+		}
+		return new DKRmlDocument(dkRmlInterface);
+	}
+	
 	DKRmlInterface* _dkRmlInterface;
 	
 	// constructor();
@@ -25,6 +34,8 @@ public:
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKRmlDocument("+interfaceAddress+") \n");
 		_dkRmlInterface = dkRmlInterface;
+		
+		list.push_back(this);
 	}
 	virtual ~DKRmlDocument() {	}
 	
