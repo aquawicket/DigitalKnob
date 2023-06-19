@@ -211,6 +211,6 @@ var Element = function Element(address) {
 	if(this.toString() === "[object Object]")
 		this.toString = function(){	return "[object Element]" }
 	
-	return Node.call(this)
+	return Node.call(this, this.address)
 }
 Element.prototype = Node.prototype
