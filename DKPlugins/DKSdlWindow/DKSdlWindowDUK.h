@@ -14,7 +14,7 @@ public:
 	bool Init(){
 		
 		////// Constructor //////
-		DKDuktape::AttachFunction("CPP_DKSdlWindowDUK", DKSdlWindowDUK::constructor);
+		DKDuktape::AttachFunction("CPP_DKSdlWindowDUK_constructor", DKSdlWindowDUK::constructor);
 			
 			
 		////// Load .js files
@@ -27,7 +27,7 @@ public:
 	////// Constructor //////
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKINFO("CPP_DKSdlWindowDUK()\n");
+		DKINFO("CPP_DKSdlWindowDUK_constructor()\n");
 		DKSdlWindow* sdlwindow = (DKSdlWindow*)DKClass::DKCreate("DKSdlWindow");
 		DKString eventTargetAddress = pointerToAddress(sdlwindow);
 		duk_push_string(ctx, eventTargetAddress.c_str());	

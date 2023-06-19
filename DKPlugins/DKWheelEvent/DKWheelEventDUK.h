@@ -18,32 +18,32 @@ public:
 	bool Init(){
 		
 		// constructor(DOMString type, optional WheelEventInit eventInitDict = {});
-		DKDuktape::AttachFunction("CPP_DKWheelEventDUK", DKWheelEventDUK::constructor);
+		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_constructor", 		DKWheelEventDUK::constructor);
 	
 		// DeltaModeCode
 		
 #if !EMSCRIPTEN	//FIXME
 		// const unsigned long DOM_DELTA_PIXEL = 0x00;
-		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_DOM_DELTA_PIXEL", 		DKWheelEventDUK::DOM_DELTA_PIXEL); 
+		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_DOM_DELTA_PIXEL",	DKWheelEventDUK::DOM_DELTA_PIXEL); 
 		
 		// const unsigned long DOM_DELTA_LINE  = 0x01;
-		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_DOM_DELTA_LINE", 		DKWheelEventDUK::DOM_DELTA_LINE); 
+		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_DOM_DELTA_LINE",		DKWheelEventDUK::DOM_DELTA_LINE); 
 		
 		// const unsigned long DOM_DELTA_PAGE  = 0x02;
-		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_DOM_DELTA_PAGE", 		DKWheelEventDUK::DOM_DELTA_PAGE);
+		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_DOM_DELTA_PAGE",		DKWheelEventDUK::DOM_DELTA_PAGE);
 #endif
 	
 		// readonly attribute double deltaX;
-		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_deltaX", 		DKWheelEventDUK::deltaX); 
+		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_deltaX", 			DKWheelEventDUK::deltaX); 
 		
 		// readonly attribute double deltaY;
-		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_deltaY", 		DKWheelEventDUK::deltaY); 
+		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_deltaY", 			DKWheelEventDUK::deltaY); 
 		
 		// readonly attribute double deltaZ;
-		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_deltaZ",		DKWheelEventDUK::deltaZ); 
+		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_deltaZ",				DKWheelEventDUK::deltaZ); 
 		
 		// readonly attribute unsigned long deltaMode;
-		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_deltaMode", 	DKWheelEventDUK::deltaMode);
+		DKDuktape::AttachFunction("CPP_DKWheelEventDUK_deltaMode", 			DKWheelEventDUK::deltaMode);
 		
 
 		////// Load .js files //////
@@ -63,7 +63,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
 		DKString eventInitDict = "";//duk_require_string(ctx, 1);
-		DKINFO("CPP_DKWheelEventDUK("+type+","+eventInitDict+")\n");
+		DKINFO("CPP_DKWheelEventDUK_constructor("+type+","+eventInitDict+")\n");
 		DKWheelEvent* wheelEvent = new DKWheelEvent(type, eventInitDict);
 		DKString wheelEventAddress = pointerToAddress(wheelEvent);
 		dukglue_push(ctx, wheelEventAddress);	

@@ -19,7 +19,7 @@ class DKWindowDUK : public DKObjectT<DKWindowDUK>
 public:
 	bool Init(){
 		
-		DKDuktape::AttachFunction("CPP_DKWindowDUK", DKWindowDUK::constructor);
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_constructor", 		DKWindowDUK::constructor);
 		
 		// the current browsing context
 		// [LegacyUnforgeable] readonly attribute WindowProxy window;
@@ -427,7 +427,7 @@ public:
 	
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKINFO("CPP_DKWindowDUK()\n");
+		DKINFO("CPP_DKWindowDUK_constructor()\n");
 		DKWindow* _window = new DKWindow();
 		DKString eventTargetAddress = pointerToAddress(_window);
 		duk_push_string(ctx, eventTargetAddress.c_str());

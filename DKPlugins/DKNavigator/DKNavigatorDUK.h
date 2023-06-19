@@ -14,7 +14,7 @@ class DKNavigatorDUK : public DKObjectT<DKNavigatorDUK>
 public:
 	bool Init(){
 		
-		DKDuktape::AttachFunction("CPP_DKNavigatorDUK", DKNavigatorDUK::constructor);
+		DKDuktape::AttachFunction("CPP_DKNavigatorDUK_constructor", DKNavigatorDUK::constructor);
 		
 
 		////// Load .js files
@@ -25,7 +25,7 @@ public:
 	
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKINFO("CPP_DKNavigatorDUK()\n");
+		DKINFO("CPP_DKNavigatorDUK_constructor()\n");
 		DKNavigator* _navigator = new DKNavigator();
 		DKString eventTargetAddress = pointerToAddress(_navigator);
 		duk_push_string(ctx, eventTargetAddress.c_str());

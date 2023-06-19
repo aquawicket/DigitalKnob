@@ -14,7 +14,7 @@ public:
 	bool Init(){
 		
 		////// Constructor //////
-		DKDuktape::AttachFunction("CPP_DKRmlLocationDUK", DKRmlLocationDUK::constructor);
+		DKDuktape::AttachFunction("CPP_DKRmlLocationDUK_constructor", DKRmlLocationDUK::constructor);
 			
 			
 		////// Load .js files
@@ -27,7 +27,7 @@ public:
 	////// Constructor //////
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKINFO("CPP_DKRmlLocationDUK()\n");
+		DKINFO("CPP_DKRmlLocationDUK_constructor()\n");
 		DKRmlLocation* _dkRmlLocation = (DKRmlLocation*)DKClass::DKCreate("DKRmlLocation");
 		DKString eventTargetAddress = pointerToAddress(_dkRmlLocation);
 		duk_push_string(ctx, eventTargetAddress.c_str());	

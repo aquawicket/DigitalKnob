@@ -5,7 +5,7 @@ var DKRmlInterface = function DKRmlInterface(address) {
 	if(address)
 		this.address = address;
 	if(!this.address)
-		this.address = CPP_DKRmlInterfaceDUK();
+		this.address = CPP_DKRmlInterfaceDUK_constructor();
 	
 	
 	//// toString ////

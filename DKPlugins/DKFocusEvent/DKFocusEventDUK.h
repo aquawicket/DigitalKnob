@@ -18,7 +18,7 @@ public:
 	bool Init(){
 		
 		// constructor(DOMString type, optional FocusEventInit eventInitDict = {});
-		DKDuktape::AttachFunction("CPP_DKFocusEventDUK", DKFocusEventDUK::constructor);
+		DKDuktape::AttachFunction("CPP_DKFocusEventDUK_constructor", 	DKFocusEventDUK::constructor);
 		
 		// readonly attribute EventTarget? relatedTarget;
 		DKDuktape::AttachFunction("CPP_DKFocusEventDUK_relatedTarget",	DKFocusEventDUK::relatedTarget);
@@ -41,7 +41,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DOMString type = duk_require_string(ctx, 0);
 		FocusEventInit eventInitDict = "{}";	//duk_require_string(ctx, 1);
-		DKINFO("CPP_DKFocusEventDUK("+type+","+eventInitDict+")\n");
+		DKINFO("CPP_DKFocusEventDUK_constructor("+type+","+eventInitDict+")\n");
 		DKFocusEvent* focusEvent = new DKFocusEvent(type, eventInitDict);
 		dukglue_push(ctx, pointerToAddress(focusEvent));
 		return true;

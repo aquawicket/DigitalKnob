@@ -10,7 +10,7 @@ var HTMLElement = function HTMLElement(address) {
 	if(address)
 		this.address = address;
 	if(!this.address)
-		this.address = CPP_DKHTMLElementDUK();
+		this.address = CPP_DKHTMLElementDUK_constructor();
 	
 	
 	// metadata attributes

@@ -11,7 +11,7 @@ var DragEvent = function DragEvent(type, eventInitDict, address) {
 	if(address)
 		this.address = address
 	if(!this.address)
-		this.address = CPP_DKDragEventDUK(type, eventInitDict)
+		this.address = CPP_DKDragEventDUK_constructor(type, eventInitDict)
 	
 	
 	// readonly attribute DataTransfer? dataTransfer;

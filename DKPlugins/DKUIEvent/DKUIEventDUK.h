@@ -18,13 +18,13 @@ public:
 	bool Init(){
 		
 		//constructor(DOMString type, optional UIEventInit eventInitDict = {});
-		DKDuktape::AttachFunction("CPP_DKUIEventDUK", 			DKUIEventDUK::constructor);
+		DKDuktape::AttachFunction("CPP_DKUIEventDUK_constructor", 	DKUIEventDUK::constructor);
 	
 		// readonly attribute Window? view;
-		DKDuktape::AttachFunction("CPP_DKUIEventDUK_view", 		DKUIEventDUK::view);
+		DKDuktape::AttachFunction("CPP_DKUIEventDUK_view", 			DKUIEventDUK::view);
 		
 		// readonly attribute long detail;
-		DKDuktape::AttachFunction("CPP_DKUIEventDUK_detail", 	DKUIEventDUK::detail);
+		DKDuktape::AttachFunction("CPP_DKUIEventDUK_detail", 		DKUIEventDUK::detail);
 		
 		// Source: Input Device Capabilities (https://wicg.github.io/input-device-capabilities/)
 		// partial interface UIEvent {
@@ -88,7 +88,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
 		DKString eventInitDict = "";//duk_require_string(ctx, 1);
-		DKINFO("CPP_DKUIEventDUK("+type+","+eventInitDict+")\n");
+		DKINFO("CPP_DKUIEventDUK_constructor("+type+","+eventInitDict+")\n");
 		DKUIEvent* uiEvent = new DKUIEvent(type, eventInitDict);
 		DKString uiEventAddress = pointerToAddress(uiEvent);	
 		dukglue_push(ctx, uiEventAddress);

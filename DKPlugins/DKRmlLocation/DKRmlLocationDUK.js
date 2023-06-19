@@ -5,7 +5,7 @@ var DKRmlLocation = function DKRmlLocation(address) {
 	if(address)
 		this.address = address;
 	if(!this.address)
-		this.address = CPP_DKRmlLocationDUK();
+		this.address = CPP_DKRmlLocationDUK_constructor();
 	
 	
 	//// toString ////

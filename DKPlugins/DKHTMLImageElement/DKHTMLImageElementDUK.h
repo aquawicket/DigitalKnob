@@ -19,7 +19,7 @@ public:
 	bool Init(){
 		
 		// [HTMLConstructor] constructor();
-		DKDuktape::AttachFunction("CPP_DKHTMLImageElementDUK", 					DKHTMLImageElementDUK::constructor);
+		DKDuktape::AttachFunction("CPP_DKHTMLImageElementDUK_constructor", 		DKHTMLImageElementDUK::constructor);
 
 		// [CEReactions] attribute DOMString alt;
 		DKDuktape::AttachFunction("CPP_DKHTMLImageElementDUK_alt", 				DKHTMLImageElementDUK::alt);
@@ -154,7 +154,7 @@ public:
 	// [HTMLConstructor] constructor();
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKINFO("CPP_DKHTMLImageElementDUK()\n");
+		DKINFO("CPP_DKHTMLImageElementDUK_constructor()\n");
 		DKHTMLImageElement* htmlImageElement = new DKHTMLImageElement();
 		DKString eventTargetAddress = pointerToAddress(htmlImageElement);
 		duk_push_string(ctx, eventTargetAddress.c_str());

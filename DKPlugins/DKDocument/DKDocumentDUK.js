@@ -12,7 +12,7 @@ var Document = function Document(address) {
 	if(address)
 		this.address = address;
 	if(!this.address)
-		this.address = CPP_DKDocumentDUK();
+		this.address = CPP_DKDocumentDUK_constructor();
 
 	
 	// [SameObject] readonly attribute DOMImplementation implementation;

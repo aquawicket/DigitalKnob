@@ -17,7 +17,7 @@ public:
 	bool Init(){
 		
 		//constructor(DOMString type, optional DragEventInit eventInitDict = {});
-		DKDuktape::AttachFunction("CPP_DKDragEventDUK", 				DKDragEventDUK::constructor);
+		DKDuktape::AttachFunction("CPP_DKDragEventDUK_constructor", 	DKDragEventDUK::constructor);
 	
 		// readonly attribute DataTransfer? dataTransfer;
 		DKDuktape::AttachFunction("CPP_DKDragEventDUK_dataTransfer", 	DKDragEventDUK::dataTransfer);
@@ -66,7 +66,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
 		DKString eventInitDict = "";//duk_require_string(ctx, 1);
-		DKINFO("CPP_DKDragEventDUK("+type+","+eventInitDict+")\n");
+		DKINFO("CPP_DKDragEventDUK_constructor("+type+","+eventInitDict+")\n");
 		DKDragEvent* dragEvent = new DKDragEvent(type, eventInitDict);
 		DKString dragEventAddress = pointerToAddress(dragEvent);
 		dukglue_push(ctx, dragEventAddress);	

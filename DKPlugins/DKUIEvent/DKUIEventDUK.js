@@ -13,7 +13,7 @@ var UIEvent = function UIEvent(type, eventInitDict, address) {
 	if(address)
 		this.address = address;
 	if(!this.address)
-		this.address = CPP_DKUIEventDUK(type, eventInitDict);
+		this.address = CPP_DKUIEventDUK_constructor(type, eventInitDict);
 	
 	// readonly attribute Window? view;
 	Object.defineProperty(this, "view", {

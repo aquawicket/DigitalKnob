@@ -16,7 +16,7 @@ public:
 	bool Init(){
 		
 		// [HTMLConstructor] constructor();
-		DKDuktape::AttachFunction("CPP_DKHTMLElementDUK", 					DKHTMLElementDUK::constructor);
+		DKDuktape::AttachFunction("CPP_DKHTMLElementDUK_constructor", 		DKHTMLElementDUK::constructor);
 		
 		// metadata attributes
 		// [CEReactions] attribute DOMString title;
@@ -128,7 +128,7 @@ public:
 	// [HTMLConstructor] constructor();
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKINFO("CPP_DKHTMLElementDUK()\n");
+		DKINFO("CPP_DKHTMLElementDUK_constructor()\n");
 		DKHTMLElement* _htmlelement = new DKHTMLElement();
 		DKString eventTargetAddress = pointerToAddress(_htmlelement);
 		duk_push_string(ctx, eventTargetAddress.c_str());

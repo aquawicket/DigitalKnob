@@ -11,7 +11,7 @@ var KeyboardEvent = function KeyboardEvent(type, options, address) {
 	if(address)
 		this.address = address
 	if(!this.address)
-		this.address = CPP_DKKeyboardEventDUK(type, options)
+		this.address = CPP_DKKeyboardEventDUK_constructor(type, options)
 	
 	// KeyLocationCode
 	// const unsigned long DOM_KEY_LOCATION_STANDARD = 0x00;

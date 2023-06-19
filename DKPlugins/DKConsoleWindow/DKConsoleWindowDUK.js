@@ -7,7 +7,7 @@ var DKConsoleWindow = function DKConsoleWindow(address) {
 	if(address)
 		this.address = address;
 	if(!this.address)
-		this.address = CPP_DKConsoleWindowDUK();
+		this.address = CPP_DKConsoleWindowDUK_constructor();
 	
 	console.log("JS ConsoleWindow address = "+this.address)
 	

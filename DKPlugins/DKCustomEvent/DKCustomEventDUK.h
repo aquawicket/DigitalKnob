@@ -18,7 +18,7 @@ public:
 	bool Init(){
 		
 		// constructor(DOMString type, optional CustomEventInit eventInitDict = {});
-		DKDuktape::AttachFunction("CPP_DKCustomEventDUK", 					DKCustomEventDUK::constructor);
+		DKDuktape::AttachFunction("CPP_DKCustomEventDUK_constructor", 		DKCustomEventDUK::constructor);
 
 		// readonly attribute any detail;
 		DKDuktape::AttachFunction("CPP_DKCustomEventDUK_detail", 			DKCustomEventDUK::detail);
@@ -68,7 +68,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
 		DKString eventInitDict = "";//duk_require_string(ctx, 1);
-		DKINFO("CPP_DKCustomEvent("+type+","+eventInitDict+")\n");
+		DKINFO("CPP_DKCustomEventDUK_constructor("+type+","+eventInitDict+")\n");
 		DKCustomEvent* customEvent = new DKCustomEvent(type, eventInitDict);
 		DKString customEventAddress = pointerToAddress(customEvent);
 		dukglue_push(ctx, customEventAddress);

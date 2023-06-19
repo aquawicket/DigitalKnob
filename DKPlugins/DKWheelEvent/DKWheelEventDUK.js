@@ -11,7 +11,7 @@ var WheelEvent = function WheelEvent(type, eventInitDict, address) {
 	if(address)
 		this.address = address
 	if(!this.address)
-		this.address = CPP_DKWheelEventDUK(type, eventInitDict)
+		this.address = CPP_DKWheelEventDUK_constructor(type, eventInitDict)
 	
 	
 	// DeltaModeCode

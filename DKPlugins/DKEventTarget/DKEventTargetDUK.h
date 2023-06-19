@@ -20,7 +20,7 @@ public:
 	bool Init(){
 		
 		// constructor();
-		DKDuktape::AttachFunction("CPP_DKEventTargetDUK", DKEventTargetDUK::constructor);
+		DKDuktape::AttachFunction("CPP_DKEventTargetDUK_constructor", 			DKEventTargetDUK::constructor);
 		
 		// undefined addEventListener(DOMString type, EventListener? callback, optional (AddEventListenerOptions or boolean) options = {});
 		DKDuktape::AttachFunction("CPP_DKEventTargetDUK_addEventListener", 		DKEventTargetDUK::addEventListener);
@@ -42,7 +42,7 @@ public:
 	// constructor();
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKINFO("CPP_DKEventTargetDUK()\n");
+		DKINFO("CPP_DKEventTargetDUK_constructor()\n");
 		DKEventTarget* eventTarget = new DKEventTarget();
 		DKString eventTargetAddress = pointerToAddress(eventTarget);
 		duk_push_string(ctx, eventTargetAddress.c_str());	

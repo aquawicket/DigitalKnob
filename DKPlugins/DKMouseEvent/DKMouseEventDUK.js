@@ -13,7 +13,7 @@ var MouseEvent = function MouseEvent(type, eventInitDict, address) {
 	if(address)
 		this.address = address
 	if(!this.address)
-		this.address = CPP_DKMouseEventDUK(type, eventInitDict)
+		this.address = CPP_DKMouseEventDUK_constructor(type, eventInitDict)
 		
 	// readonly attribute long screenX;
 	Object.defineProperty(this, "screenX", {

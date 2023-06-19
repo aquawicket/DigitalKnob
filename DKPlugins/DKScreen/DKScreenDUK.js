@@ -9,7 +9,7 @@ var Screen = function Screen(address) {
 	if(address)
 		this.address = address;
 	if(!this.address)
-		this.address = CPP_DKScreenDUK();
+		this.address = CPP_DKScreenDUK_constructor();
 
 	
 	// readonly attribute long availWidth;

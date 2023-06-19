@@ -13,7 +13,7 @@ var HTMLBodyElement = function HTMLBodyElement(address) {
 	if(address)
 		this.address = address;
 	if(!this.address)
-		this.address = CPP_DKHTMLBodyElementDUK();
+		this.address = CPP_DKHTMLBodyElementDUK_constructor();
 	
 	// partial interface HTMLBodyElement {
     	// attribute EventHandler onorientationchange;

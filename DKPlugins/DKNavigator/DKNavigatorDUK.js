@@ -8,7 +8,7 @@ var Navigator = function Navigator(address) {
 	if(address)
 		this.address = address;
 	if(!this.address)
-		this.address = CPP_DKNavigatorDUK();
+		this.address = CPP_DKNavigatorDUK_constructor();
 
 	
 	////// toString //////

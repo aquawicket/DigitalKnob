@@ -13,7 +13,7 @@ var URL = function URL(url, base, address) {
 	if(address)
 		this.address = address;
 	if(!this.address)
-		this.address = CPP_DKURLDUK(url, base);
+		this.address = CPP_DKURLDUK_constructor(url, base);
 	
 	
 	// static boolean canParse(USVString url, optional USVString base);

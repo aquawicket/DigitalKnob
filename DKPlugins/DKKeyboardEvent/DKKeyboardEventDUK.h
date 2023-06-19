@@ -18,7 +18,7 @@ public:
 	bool Init(){
 		
 		// constructor(DOMString type, optional KeyboardEventInit eventInitDict = {});
-		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK", 							DKKeyboardEventDUK::constructor);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_constructor", 				DKKeyboardEventDUK::constructor);
 		
 		// KeyLocationCode
 	
@@ -110,7 +110,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
 		DKString eventInitDict = "";//duk_require_string(ctx, 1);
-		DKINFO("CPP_DKKeyboardEventDUK("+type+","+eventInitDict+")\n");
+		DKINFO("CPP_DKKeyboardEventDUK_constructor("+type+","+eventInitDict+")\n");
 		DKKeyboardEvent* keyboardEvent = new DKKeyboardEvent(type, eventInitDict);
 		DKString keyboardEventAddress = pointerToAddress(keyboardEvent);
 		dukglue_push(ctx, keyboardEventAddress);	

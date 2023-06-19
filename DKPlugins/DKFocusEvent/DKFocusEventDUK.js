@@ -13,7 +13,7 @@ var FocusEvent = function FocusEvent(type, eventInitDict, address) {
 	if(address)
 		this.address = address;
 	if(!this.address)
-		this.address = CPP_DKFocusEventDUK(type, eventInitDict);
+		this.address = CPP_DKFocusEventDUK_constructor(type, eventInitDict);
 	
 	
 	// readonly attribute EventTarget? relatedTarget;

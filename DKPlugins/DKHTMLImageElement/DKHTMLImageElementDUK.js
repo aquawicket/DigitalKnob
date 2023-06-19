@@ -13,7 +13,7 @@ var HTMLImageElement = function HTMLImageElement(address) {
 	if(address)
 		this.address = address;
 	if(!this.address)
-		this.address = CPP_DKHTMLImageElementDUK();
+		this.address = CPP_DKHTMLImageElementDUK_constructor();
 	
 	
 	// [CEReactions] attribute DOMString alt;

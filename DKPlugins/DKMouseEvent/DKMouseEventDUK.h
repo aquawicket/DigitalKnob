@@ -18,7 +18,7 @@ public:
 	bool Init(){
 		
 		// constructor(DOMString type, optional MouseEventInit eventInitDict = {});
-		DKDuktape::AttachFunction("CPP_DKMouseEventDUK", 					DKMouseEventDUK::constructor);
+		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_constructor", 		DKMouseEventDUK::constructor);
 		
 		// readonly attribute long screenX;
 		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_screenX",			DKMouseEventDUK::screenX);
@@ -119,7 +119,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
 		DKString eventInitDict = "";//duk_require_string(ctx, 1);
-		DKINFO("CPP_DKMouseEventDUK("+type+","+eventInitDict+")\n");
+		DKINFO("CPP_DKMouseEventDUK_constructor("+type+","+eventInitDict+")\n");
 		DKMouseEvent* mouseEvent = new DKMouseEvent(type, eventInitDict);
 		DKString mouseEventAddress = pointerToAddress(mouseEvent);
 		dukglue_push(ctx, mouseEventAddress);

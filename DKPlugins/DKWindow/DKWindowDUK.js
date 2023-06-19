@@ -13,7 +13,7 @@ var Window = function Window(address) {
 	if(address)
 		this.address = address;
 	if(!this.address)
-		this.address = CPP_DKWindowDUK();
+		this.address = CPP_DKWindowDUK_constructor();
 
 	
 	// the current browsing context

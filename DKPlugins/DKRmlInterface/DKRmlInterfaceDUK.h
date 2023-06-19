@@ -12,10 +12,7 @@ class DKRmlInterfaceDUK : public DKObjectT<DKRmlInterfaceDUK>
 {
 public:
 	bool Init(){
-		
-		////// Constructor //////
-		DKDuktape::AttachFunction("CPP_DKRmlInterfaceDUK", DKRmlInterfaceDUK::constructor);
-			
+		DKDuktape::AttachFunction("CPP_DKRmlInterfaceDUK_constructor", DKRmlInterfaceDUK::constructor);
 			
 		////// Load .js files
 		DKClass::DKCreate("DKRmlInterface/DKRmlInterfaceDUK.js");
@@ -27,7 +24,7 @@ public:
 	////// Constructor //////
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKINFO("CPP_DKRmlInterfaceDUK()\n");
+		DKINFO("CPP_DKRmlInterfaceDUK_constructor()\n");
 		DKRmlInterface* _dkRmlInterface = (DKRmlInterface*)DKClass::DKCreate("DKRmlInterface");
 		DKString eventTargetAddress = pointerToAddress(_dkRmlInterface);
 		duk_push_string(ctx, eventTargetAddress.c_str());	

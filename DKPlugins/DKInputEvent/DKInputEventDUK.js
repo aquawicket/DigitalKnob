@@ -13,7 +13,7 @@ var InputEvent = function InputEvent(type, options, address) {
 	if(address)
 		this.address = address
 	if(!this.address)
-		this.address = CPP_DKInputEventDUK(type, options)
+		this.address = CPP_DKInputEventDUK_constructor(type, options)
 	
 	
 	// readonly attribute DOMString? data;

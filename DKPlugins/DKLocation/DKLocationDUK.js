@@ -11,7 +11,7 @@ var Location = function Location(address) {
 	if(address)
 		this.address = address;
 	if(!this.address)
-		this.address = CPP_DKLocationDUK();
+		this.address = CPP_DKLocationDUK_constructor();
 
 
 	// [LegacyUnforgeable] stringifier attribute USVString href;

@@ -17,7 +17,7 @@ public:
 		// [Exposed=Window]
 		// interface HTMLBodyElement : HTMLElement {
 			// [HTMLConstructor] constructor();
-			DKDuktape::AttachFunction("CPP_DKHTMLBodyElementDUK", DKHTMLBodyElementDUK::constructor);
+			DKDuktape::AttachFunction("CPP_DKHTMLBodyElementDUK_constructor", 			DKHTMLBodyElementDUK::constructor);
 			
 			//	 also has obsolete members
 		//};
@@ -91,7 +91,7 @@ public:
 	// [HTMLConstructor] constructor();
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKINFO("CPP_DKHTMLBodyElementDUK()\n");
+		DKINFO("CPP_DKHTMLBodyElementDUK_constructor()\n");
 		DKHTMLBodyElement* _htmlBodyElement = new DKHTMLBodyElement();
 		DKString eventTargetAddress = pointerToAddress(_htmlBodyElement);
 		duk_push_string(ctx, eventTargetAddress.c_str());

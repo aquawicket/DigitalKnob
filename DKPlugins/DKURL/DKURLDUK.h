@@ -19,7 +19,7 @@ public:
 	bool Init(){
 		
 		// constructor(USVString url, optional USVString base);
-		DKDuktape::AttachFunction("CPP_DKURLDUK", 					DKURLDUK::constructor);
+		DKDuktape::AttachFunction("CPP_DKURLDUK_constructor", 		DKURLDUK::constructor);
 		
 		// static boolean canParse(USVString url, optional USVString base);
 		DKDuktape::AttachFunction("CPP_DKURLDUK_canParse", 			DKURLDUK::canParse);
@@ -116,7 +116,7 @@ public:
 	// constructor(USVString url, optional USVString base);
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKINFO("CPP_DKURLDUK()\n");
+		DKINFO("CPP_DKURLDUK_constructor()\n");
 		USVString url = GetString(ctx);
 		USVString base = ""; // TODO
 		DKURL* _url = new DKURL(url, base);

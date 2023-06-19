@@ -15,16 +15,16 @@ class DKHTMLCollectionDUK : public DKObjectT<DKHTMLCollectionDUK>
 public:
 	bool Init(){
 		
-		DKDuktape::AttachFunction("CPP_DKHTMLCollectionDUK", 			DKHTMLCollectionDUK::constructor);
+		DKDuktape::AttachFunction("CPP_DKHTMLCollectionDUK_constructor", 	DKHTMLCollectionDUK::constructor);
 		
 		// readonly attribute unsigned long length;
-		DKDuktape::AttachFunction("CPP_DKHTMLCollectionDUK_length", 	DKHTMLCollectionDUK::length);
+		DKDuktape::AttachFunction("CPP_DKHTMLCollectionDUK_length", 		DKHTMLCollectionDUK::length);
 
 		// getter Element? item(unsigned long index);
-		DKDuktape::AttachFunction("CPP_DKHTMLCollectionDUK_item", 		DKHTMLCollectionDUK::item);
+		DKDuktape::AttachFunction("CPP_DKHTMLCollectionDUK_item", 			DKHTMLCollectionDUK::item);
 	
 		// getter Element? namedItem(DOMString name);
-		DKDuktape::AttachFunction("CPP_DKHTMLCollectionDUK_namedItem", 	DKHTMLCollectionDUK::namedItem);
+		DKDuktape::AttachFunction("CPP_DKHTMLCollectionDUK_namedItem", 		DKHTMLCollectionDUK::namedItem);
 		
 	
 		////// Load .js files
@@ -65,10 +65,9 @@ public:
 
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		//DKERROR("DKHTMLCollectionDUK::constructor() Broken! \n");
-		DKINFO("CPP_DKHTMLCollectionDUK()\n");
+		DKINFO("CPP_DKHTMLCollectionDUK_constructor()\n");
 		std::vector<DKElement*> list;
-		DKHTMLCollection* _htmlCollection = new DKHTMLCollection(list);		// FIXME:
+		DKHTMLCollection* _htmlCollection = new DKHTMLCollection(list);
 		DKString htmlCollectionAddress = pointerToAddress(_htmlCollection);
 		duk_push_string(ctx, htmlCollectionAddress.c_str());
 		return true;

@@ -16,7 +16,7 @@ class DKLocationDUK : public DKObjectT<DKLocationDUK>
 public:
 	bool Init(){
 		
-		DKDuktape::AttachFunction("CPP_DKLocationDUK", 					DKLocationDUK::constructor);
+		DKDuktape::AttachFunction("CPP_DKLocationDUK_constructor", 		DKLocationDUK::constructor);
 		
 		// [LegacyUnforgeable] stringifier attribute USVString href;
 		DKDuktape::AttachFunction("CPP_DKLocationDUK_href", 			DKLocationDUK::href);
@@ -96,7 +96,7 @@ public:
 	
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKINFO("CPP_DKLocationDUK()\n");
+		DKINFO("CPP_DKLocationDUK_constructor()\n");
 		DKLocation* _location = new DKLocation();
 		DKString eventTargetAddress = pointerToAddress(_location);
 		duk_push_string(ctx, eventTargetAddress.c_str());

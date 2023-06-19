@@ -13,7 +13,7 @@ var CustomEvent = function CustomEvent(type, eventInitDict, address) {
 	if(address)
 		this.address = address;
 	if(!this.address)
-		this.address = CPP_DKCustomEventDUK(type, eventInitDict);
+		this.address = CPP_DKCustomEventDUK_constructor(type, eventInitDict);
 
 	// readonly attribute any detail;
 	Object.defineProperty(this, "detail", {

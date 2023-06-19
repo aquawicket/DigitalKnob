@@ -13,7 +13,7 @@ var CompositionEvent = function CompositionEvent(type, options, address) {
 	if(address)
 		this.address = address
 	if(!this.address)
-		this.address = CPP_DKCompositionEventDUK(type, options)
+		this.address = CPP_DKCompositionEventDUK_constructor(type, options)
 	
 
 	// readonly attribute DOMString data;

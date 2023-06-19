@@ -18,24 +18,24 @@ public:
 	bool Init(){
 		
 		// constructor(DOMString type, optional InputEventInit eventInitDict = {});
-		DKDuktape::AttachFunction("CPP_DKInputEventDUK", 				DKInputEventDUK::constructor);
+		DKDuktape::AttachFunction("CPP_DKInputEventDUK_constructor", 		DKInputEventDUK::constructor);
 	
 		// readonly attribute DOMString? data;
-		DKDuktape::AttachFunction("CPP_DKInputEventDUK_data",			DKInputEventDUK::_data); //FIXME: data is already a member of DKObject
+		DKDuktape::AttachFunction("CPP_DKInputEventDUK_data",				DKInputEventDUK::_data); //FIXME: data is already a member of DKObject
 		
 		// readonly attribute boolean isComposing;
-		DKDuktape::AttachFunction("CPP_DKInputEventDUK_isComposing", 	DKInputEventDUK::isComposing);
+		DKDuktape::AttachFunction("CPP_DKInputEventDUK_isComposing", 		DKInputEventDUK::isComposing);
 		
 		// readonly attribute DOMString inputType;
-		DKDuktape::AttachFunction("CPP_DKInputEventDUK_inputType",		DKInputEventDUK::inputType);
+		DKDuktape::AttachFunction("CPP_DKInputEventDUK_inputType",			DKInputEventDUK::inputType);
 		
 		// Source: Input Events Level 2 (https://www.w3.org/TR/input-events-2/)
 		// partial interface InputEvent {
-		//    	readonly attribute DataTransfer? dataTransfer;
-				DKDuktape::AttachFunction("CPP_DKInputEventDUK_dataTransfer",	DKInputEventDUK::dataTransfer);
+		// readonly attribute DataTransfer? dataTransfer;
+		DKDuktape::AttachFunction("CPP_DKInputEventDUK_dataTransfer",		DKInputEventDUK::dataTransfer);
 		//
-		//    	sequence<StaticRange> getTargetRanges();
-				DKDuktape::AttachFunction("CPP_DKInputEventDUK_getTargetRanges", DKInputEventDUK::getTargetRanges);
+		// sequence<StaticRange> getTargetRanges();
+		DKDuktape::AttachFunction("CPP_DKInputEventDUK_getTargetRanges",	DKInputEventDUK::getTargetRanges);
 		// };
 		
 
@@ -56,7 +56,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
 		DKString eventInitDict = "";//duk_require_string(ctx, 1);
-		DKINFO("CPP_DKInputEventDUK("+type+","+eventInitDict+")\n");
+		DKINFO("CPP_DKInputEventDUK_constructor("+type+","+eventInitDict+")\n");
 		DKInputEvent* inputEvent = new DKInputEvent(type, eventInitDict);
 		DKString inputEventAddress = pointerToAddress(inputEvent);
 		dukglue_push(ctx, inputEventAddress);	

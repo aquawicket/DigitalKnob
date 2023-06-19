@@ -11,15 +11,10 @@ class DKConsoleWindowDUK : public DKObjectT<DKConsoleWindowDUK>
 {
 public:
 	bool Init(){
-		
-		////// Constructor //////
-		DKDuktape::AttachFunction("CPP_DKConsoleWindowDUK", DKConsoleWindowDUK::constructor);
-		
-		
-		////// Instance properties //////
-		DKDuktape::AttachFunction("CPP_DKConsoleWindowDUK_columns", DKConsoleWindowDUK::columns);
-		DKDuktape::AttachFunction("CPP_DKConsoleWindowDUK_rows", DKConsoleWindowDUK::rows);	
-			
+
+		DKDuktape::AttachFunction("CPP_DKConsoleWindowDUK_constructor", DKConsoleWindowDUK::constructor);
+		DKDuktape::AttachFunction("CPP_DKConsoleWindowDUK_columns", 	DKConsoleWindowDUK::columns);
+		DKDuktape::AttachFunction("CPP_DKConsoleWindowDUK_rows", 		DKConsoleWindowDUK::rows);		
 			
 		////// Load .js files //////
 		DKClass::DKCreate("DKConsoleWindow/DKConsoleWindowDUK.js");
@@ -31,7 +26,7 @@ public:
 	////// Constructor //////
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKINFO("CPP_DKConsoleWindowDUK()\n");
+		DKINFO("CPP_DKConsoleWindowDUK_constructor()\n");
 		//DKConsoleWindow* consolewindow = new DKConsoleWindow();
 		DKConsoleWindow* consolewindow = (DKConsoleWindow*)DKClass::DKCreate("DKConsoleWindow");
 		DKString eventTargetAddress = pointerToAddress(consolewindow);

@@ -18,10 +18,10 @@ public:
 	bool Init(){
 		
 		// constructor(DOMString type, optional CompositionEventInit eventInitDict = {});
-		DKDuktape::AttachFunction("CPP_DKCompositionEventDUK", DKCompositionEventDUK::constructor);
+		DKDuktape::AttachFunction("CPP_DKCompositionEventDUK_constructor", 			DKCompositionEventDUK::constructor);
 	
 		// readonly attribute DOMString data;
-		DKDuktape::AttachFunction("CPP_DKCompositionEventDUK_data",	DKCompositionEventDUK::_data); //FIXME: data is already a member of DKObject
+		DKDuktape::AttachFunction("CPP_DKCompositionEventDUK_data",					DKCompositionEventDUK::_data); //FIXME: data is already a member of DKObject
 		
 		// Source: UI Events (https://www.w3.org/TR/uievents/)
 		// partial interface CompositionEvent {
@@ -31,7 +31,7 @@ public:
 		//		optional boolean cancelableArg = false,
 		//		optional WindowProxy? viewArg = null,
 		//		optional DOMString dataArg = "");
-				DKDuktape::AttachFunction("CPP_DKCompositionEventDUK_initCompositionEvent", DKCompositionEventDUK::initCompositionEvent);
+		DKDuktape::AttachFunction("CPP_DKCompositionEventDUK_initCompositionEvent",	DKCompositionEventDUK::initCompositionEvent);
 		// };
 	
 	
@@ -52,7 +52,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
 		DKString eventInitDict = "";//duk_require_string(ctx, 1);
-		DKINFO("CPP_DKCompositionEventDUK("+type+","+eventInitDict+")\n");
+		DKINFO("CPP_DKCompositionEventDUK_constructor("+type+","+eventInitDict+")\n");
 		DKCompositionEvent* compositionEvent = new DKCompositionEvent(type, eventInitDict);
 		DKString compositionEventAddress = pointerToAddress(compositionEvent);
 		dukglue_push(ctx, compositionEventAddress);	

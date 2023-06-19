@@ -15,7 +15,7 @@ class DKScreenDUK : public DKObjectT<DKScreenDUK>
 {
 public:
 	bool Init(){
-		DKDuktape::AttachFunction("CPP_DKScreenDUK", 				DKScreenDUK::constructor);
+		DKDuktape::AttachFunction("CPP_DKScreenDUK_constructor", 	DKScreenDUK::constructor);
 		
 		// readonly attribute long availWidth;
 		DKDuktape::AttachFunction("CPP_DKScreenDUK_availWidth", 	DKScreenDUK::availWidth);	
@@ -74,7 +74,7 @@ public:
 
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKINFO("CPP_DKScreenDUK()\n");
+		DKINFO("CPP_DKScreenDUK_constructor()\n");
 		DKScreen* _screen = new DKScreen();
 		DKString eventTargetAddress = pointerToAddress(_screen);
 		duk_push_string(ctx, eventTargetAddress.c_str());
