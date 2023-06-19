@@ -21,6 +21,8 @@ public:
 	static void printCSSStyleDeclarationProperties(DKCSSStyleDeclaration& cssStyleDeclaration) {
 		DKDEBUGFUNC(cssStyleDeclaration);
 		
+		console.log("cssStyleDeclaration = "			+toString(cssStyleDeclaration));
+		
 		// [CEReactions] attribute CSSOMString cssText;
 		console.log("cssStyleDeclaration.cssText() = "	+toString(cssStyleDeclaration.cssText()));
 		

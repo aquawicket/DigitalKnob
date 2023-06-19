@@ -128,6 +128,17 @@ public:
 	// interface HTMLUnknownElement : HTMLElement {
 		// Note: intentionally no [HTMLConstructor]
 	// };
+	
+	
+	////// toString //////
+	operator std::string() const { return "[object HTMLElement]"; }
+};
+
+
+class DKNullHTMLElement : public DKHTMLElement
+{
+public:
+	operator std::string() const { return "null"; }
 };
 
 

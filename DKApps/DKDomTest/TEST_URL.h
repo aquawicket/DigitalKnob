@@ -27,6 +27,8 @@ public:
 	static void printURLProperties(DKURL& url){
 		DKDEBUGFUNC(url);
 		
+		console.log("url = "				+toString(url));
+		
 		// static boolean canParse(USVString url, optional USVString base);
 		// function
 		

@@ -21,11 +21,13 @@ public:
 	static void printLocationProperties(DKLocation& location){
 		DKDEBUGFUNC(location);
 		
+		console.log("location = "						+toString(location));
+		
 		// [LegacyUnforgeable] stringifier attribute USVString href;
 		console.log("location.href() = "				+toString(location.href()));
 		
 		// [LegacyUnforgeable] readonly attribute USVString origin;
-		console.log("location.origin() = "			+toString(location.origin()));
+		console.log("location.origin() = "				+toString(location.origin()));
 		
 		// [LegacyUnforgeable] attribute USVString protocol;
 		console.log("location.protocol() = "			+toString(location.protocol()));
@@ -43,7 +45,7 @@ public:
 		console.log("location.pathname() = "			+toString(location.pathname()));
 		
 		// [LegacyUnforgeable] attribute USVString search;
-		console.log("location.search() = "			+toString(location.search()));
+		console.log("location.search() = "				+toString(location.search()));
 		
 		// [LegacyUnforgeable] attribute USVString hash;
 		console.log("location.hash() = "				+toString(location.hash()));

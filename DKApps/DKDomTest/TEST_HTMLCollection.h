@@ -22,6 +22,8 @@ public:
 	static void printHTMLCollectionProperties(DKHTMLCollection& htmlCollection){
 		DKDEBUGFUNC(htmlCollection);
 		
+		console.log("htmlCollection = "				+toString(htmlCollection));
+		
 		// readonly attribute unsigned long length;
 		//console.log("htmlCollection.length() = "	+toString(htmlCollection.length()));	// FIXME
 		

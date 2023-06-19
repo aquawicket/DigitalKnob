@@ -21,6 +21,8 @@ public:
 	static void printHTMLElementProperties(DKHTMLElement& htmlElement){
 		DKDEBUGFUNC(htmlElement);
 		
+		console.log("htmlElement = "				+toString(htmlElement));
+		
 		// [HTMLConstructor] constructor();
 		// function
 		
@@ -95,7 +97,8 @@ public:
 			// Note: intentionally no [HTMLConstructor]
 		// };
 		
-		TEST_Element::printElementProperties(dynamic_cast<DKElement&>(htmlElement));	//TODO: try to remove the need for dynamic_cast
+		//TEST_Element::printElementProperties(dynamic_cast<DKElement&>(htmlElement));	//TODO: try to remove the need for dynamic_cast
+		TEST_Element::printElementProperties(htmlElement);
 	}
 };
 //REGISTER_OBJECT(TEST_HTMLElement, true);

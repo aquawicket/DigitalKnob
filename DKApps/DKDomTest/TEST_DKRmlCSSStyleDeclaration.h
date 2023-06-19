@@ -19,9 +19,11 @@ public:
 	}
 	
 	static void printDKRmlCSSStyleDeclarationProperties(DKRmlCSSStyleDeclaration& dkRmlCSSStyleDeclaration) {
-		DKDEBUGFUNC(cssStyleDeclaration);
+		DKDEBUGFUNC(dkRmlCSSStyleDeclaration);
 		
-		TEST_CSSStyleDeclaration::printCSSStyleDeclarationProperties(cssStyleDeclaration);
+		console.log("dkRmlCSSStyleDeclaration = "		+toString(dkRmlCSSStyleDeclaration));
+		
+		TEST_CSSStyleDeclaration::printCSSStyleDeclarationProperties(dkRmlCSSStyleDeclaration);
 	}
 	
 };

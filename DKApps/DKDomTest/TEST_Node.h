@@ -21,6 +21,8 @@ public:
 	static void printNodeProperties(DKNode& node){
 		DKDEBUGFUNC(node);
 		
+		console.log("node = "											+toString(node));
+		
 		// const unsigned short ELEMENT_NODE = 1;
 		console.log("node.ELEMENT_NODE() = "							+toString(node.ELEMENT_NODE()));
 		

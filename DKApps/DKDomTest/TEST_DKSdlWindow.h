@@ -74,7 +74,10 @@ public:
 	static void printDKSdlWindowProperties(DKSdlWindow& dkSdlWindow){
 		//DKDEBUGFUNC(dkSdlWindow);
 		
-		TEST_Window::printWindowProperties(dynamic_cast<DKWindow&>(dkSdlWindow));					//TODO: try to remove the need for dynamic_cast
+		console.log("dkSdlWindow = "				+toString(dkSdlWindow));
+		
+		//TEST_Window::printWindowProperties(dynamic_cast<DKWindow&>(dkSdlWindow));					//TODO: try to remove the need for dynamic_cast
+		TEST_Window::printWindowProperties(dkSdlWindow);
 	}
 	
 	////// FocusEvent //////

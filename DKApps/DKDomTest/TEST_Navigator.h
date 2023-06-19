@@ -20,7 +20,8 @@ public:
 
 	static void printNavigatorProperties(DKNavigator& navigator){
 		DKDEBUGFUNC(navigator);
-		DKTODO();
+		
+		console.log("navigator = "	+toString(navigator));
 	}
 };
 //REGISTER_OBJECT(TEST_Navigator, true);

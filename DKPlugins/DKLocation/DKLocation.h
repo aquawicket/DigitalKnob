@@ -111,6 +111,7 @@ public:
 	operator std::string() const { return "[object Location]"; }
 };
 
+
 class DKNullLocation : public DKLocation
 {
 public:

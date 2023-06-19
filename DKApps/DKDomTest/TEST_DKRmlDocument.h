@@ -82,7 +82,10 @@ public:
 	static void printRmlDocumentProperties(DKRmlDocument& dkRmlDocument){
 		DKDEBUGFUNC(dkRmlDocument);
 		
-		TEST_Document::printDocumentProperties(dynamic_cast<DKDocument&>(dkRmlDocument));	//TODO: try to remove the need for dynamic_cast
+		console.log("dkRmlDocument = "				+toString(dkRmlDocument));
+		
+		//TEST_Document::printDocumentProperties(dynamic_cast<DKDocument&>(dkRmlDocument));	//TODO: try to remove the need for dynamic_cast
+		TEST_Document::printDocumentProperties(dkRmlDocument);
 	}
 };
 //REGISTER_OBJECT(TEST_DKRmlDocument, true);

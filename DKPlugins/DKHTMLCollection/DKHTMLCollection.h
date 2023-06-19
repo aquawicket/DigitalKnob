@@ -47,6 +47,17 @@ public:
 	}
 	
 //};
+
+
+	////// toString //////
+	operator std::string() const { return "[object HTMLCollection]"; }
+};
+
+
+class DKNullHTMLCollection : public DKHTMLCollection
+{
+public:
+	operator std::string() const { return "null"; }
 };
 
 

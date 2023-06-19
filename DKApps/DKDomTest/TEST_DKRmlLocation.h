@@ -28,7 +28,10 @@ public:
 	static void printDKRmlLocationProperties(DKRmlLocation& dkRmlLocation){
 		DKDEBUGFUNC(dkRmlLocation);
 		
-		TEST_Location::printLocationProperties(dynamic_cast<DKLocation&>(dkRmlLocation));	//TODO: try to remove the need for dynamic_cast
+		console.log("dkRmlLocation = "				+toString(dkRmlLocation));
+		
+		//TEST_Location::printLocationProperties(dynamic_cast<DKLocation&>(dkRmlLocation));	//TODO: try to remove the need for dynamic_cast
+		TEST_Location::printLocationProperties(dkRmlLocation);
 	}
 };
 //REGISTER_OBJECT(TEST_DKRmlLocation, true);

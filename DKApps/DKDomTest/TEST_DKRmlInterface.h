@@ -29,7 +29,9 @@ public:
 	static void printDKRmlInterfaceProperties(DKRmlInterface& dkRmlInterface){
 		//DKDEBUGFUNC(dkRmlInterface);
 		
-		//TEST_Interface::printNodeProperties(dynamic_cast<DKInterface&>(dkRmlInterface));	//TODO: try to remove the need for dynamic_cast
+		console.log("dkRmlInterface = "				+toString(dkRmlInterface));
+		
+		//TEST_Interface::printInterfaceProperties(dkRmlInterface);
 	}
 };
 //REGISTER_OBJECT(TEST_DKRmlInterface, true);

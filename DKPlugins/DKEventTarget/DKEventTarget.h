@@ -83,7 +83,7 @@ public:
 	static std::vector<DKEventListener> eventListeners;
 	
 	////// toString //////
-	virtual operator std::string() const { return "[object EventTarget]"; }	
+	operator std::string() const { return "[object EventTarget]"; }	
 };
 
 

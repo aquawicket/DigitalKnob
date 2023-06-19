@@ -29,6 +29,7 @@ public:
 	operator std::string() const { return "[object Navigator]"; }
 };
 
+
 class DKNullNavigator : public DKNavigator
 {
 public:

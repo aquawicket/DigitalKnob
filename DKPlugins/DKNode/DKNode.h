@@ -284,6 +284,17 @@ public:
 		DKDEBUGFUNC(child);
 		return _removeChild;
 	}
+	
+	
+	////// toString //////
+	operator std::string() const { return "[object Node]"; }	
+};
+
+
+class DKNullNode : public DKNode
+{
+public:
+	operator std::string() const { return "null"; }
 };
 
 

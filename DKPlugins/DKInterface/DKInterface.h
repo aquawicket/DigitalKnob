@@ -30,8 +30,9 @@ public:
 	
 	
 	////// toString //////
-	virtual operator std::string() const { return "[object Interface]"; }
+	operator std::string() const { return "[object Interface]"; }
 };
+
 
 class DKNullInterface : public DKInterface
 {

@@ -29,7 +29,10 @@ public:
 	static void printDKRmlEventTargetProperties(DKRmlEventTarget& rmlEventTarget){
 		DKDEBUGFUNC(rmlEventTarget);
 		
-		TEST_EventTarget::printEventTargetProperties(dynamic_cast<DKEventTarget&>(rmlEventTarget));	//TODO: try to remove the need for dynamic_cast
+		console.log("rmlEventTarget = "				+toString(rmlEventTarget));
+		
+		//TEST_EventTarget::printEventTargetProperties(dynamic_cast<DKEventTarget&>(rmlEventTarget));	//TODO: try to remove the need for dynamic_cast
+		TEST_EventTarget::printEventTargetProperties(rmlEventTarget);
 	}
 
 };

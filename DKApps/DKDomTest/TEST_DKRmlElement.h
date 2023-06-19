@@ -27,7 +27,10 @@ public:
 	static void printDKRmlElementProperties(DKRmlElement& dkRmlElement){
 		DKDEBUGFUNC(dkRmlElement);
 		
-		TEST_Element::printElementProperties(dynamic_cast<DKElement&>(dkRmlElement));	//TODO: try to remove the need for dynamic_cast
+		console.log("dkRmlElement = "				+toString(dkRmlElement));
+		
+		//TEST_Element::printElementProperties(dynamic_cast<DKElement&>(dkRmlElement));	//TODO: try to remove the need for dynamic_cast
+		TEST_Element::printElementProperties(dkRmlElement);
 	}
 };
 //REGISTER_OBJECT(TEST_DKRmlElement, true);

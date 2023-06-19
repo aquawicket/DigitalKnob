@@ -27,7 +27,10 @@ public:
 	static void printDKRmlNodeProperties(DKRmlNode& dkRmlNode){
 		DKDEBUGFUNC(dkRmlNode);
 		
-		TEST_Node::printNodeProperties(dynamic_cast<DKNode&>(dkRmlNode));	//TODO: try to remove the need for dynamic_cast
+		console.log("dkRmlNode = "				+toString(dkRmlNode));
+		
+		//TEST_Node::printNodeProperties(dynamic_cast<DKNode&>(dkRmlNode));	//TODO: try to remove the need for dynamic_cast
+		TEST_Node::printNodeProperties(dkRmlNode);
 	}
 };
 //REGISTER_OBJECT(TEST_DKRmlNode, true);

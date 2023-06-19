@@ -21,6 +21,8 @@ public:
 	static void printElementProperties(DKElement& element){
 		DKDEBUGFUNC(element);
 		
+		console.log("element = "					+toString(element));
+		
 		// readonly attribute DOMString? namespaceURI;
 		console.log("element.namespaceURI() = "		+toString(element.namespaceURI()));
 		

@@ -21,6 +21,8 @@ public:
 	static void printHTMLBodyElementProperties(DKHTMLBodyElement& htmlBodyElement){
 		DKDEBUGFUNC(htmlBodyElement);
 		
+		console.log("htmlBodyElement = "								+toString(htmlBodyElement));
+		
 		// [HTMLConstructor] constructor();
 		// function
 		
@@ -58,7 +60,8 @@ public:
 				console.log("htmlBodyElement.background() = "			+toString(htmlBodyElement.background()));
 		//};
 		
-		TEST_HTMLElement::printHTMLElementProperties(dynamic_cast<DKHTMLElement&>(htmlBodyElement));	//TODO: try to remove the need for dynamic_cast
+		//TEST_HTMLElement::printHTMLElementProperties(dynamic_cast<DKHTMLElement&>(htmlBodyElement));	//TODO: try to remove the need for dynamic_cast
+		TEST_HTMLElement::printHTMLElementProperties(htmlBodyElement);
 	}
 };
 //REGISTER_OBJECT(TEST_HTMLBodyElement, true);
