@@ -86,7 +86,11 @@ public:
 	*/
 	
 	// [SameObject, PutForwards=value] readonly attribute DOMTokenList classList;
-	virtual const DKString& classList() override						{ 									// getter
+	virtual const DKString& classList() override { 									// getter
+		if (!_rmlElement) {
+			DKERROR("_rmlElement invalid! \n");
+			return _classList;
+		}
 		Rml::StringList list = _rmlElement->GetActivePseudoClasses();
 		DKString _classList = "";
 		for (unsigned int n = 0; n < list.size(); ++n) {
