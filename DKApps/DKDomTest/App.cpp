@@ -6,6 +6,7 @@
 bool App::Init() {
 	DKDEBUGFUNC();
 	
+	/*
 	// [INTERFACE]
 	//DKClass::DKCreate("TEST_INTERFACE");																		// DKObjectT
 	//TEST_INTERFACE* test_interfqce = new TEST_INTERFACE();													// pointer
@@ -125,6 +126,8 @@ bool App::Init() {
 	
 	// [DKRmlHTMLElement]
 	test_DKRmlHTMLElement = std::make_unique<TEST_DKRmlHTMLElement>();
+	*/
+	
 	return true;
 }
 
