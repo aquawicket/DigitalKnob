@@ -238,7 +238,7 @@ public:
 		if(!closestElement)
 			DKERROR("closestElement invalid");
 		_closest = DKRmlElement::instance(_dkRmlInterface, closestElement);
-		return _closest;
+		return *_closest;
 	}
 	
 	/*
