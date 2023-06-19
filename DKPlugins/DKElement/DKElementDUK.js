@@ -9,7 +9,7 @@ var Element = function Element(address) {
 	if(address)
 		this.address = address;
 	if(!this.address)
-		this.address = CPP_DKElementDUK();
+		this.address = CPP_DKElementDUK_constructor();
 
 	// readonly attribute DOMString? namespaceURI;
 	Object.defineProperty(this, "namespaceURI", {

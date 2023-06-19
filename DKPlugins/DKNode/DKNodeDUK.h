@@ -7,6 +7,7 @@
 #define DKNodeDUK_H
 
 #include "DKDuktape/DKDuktape.h"
+#include "DKNode/DKNode.h"
 
 
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
@@ -17,7 +18,7 @@ class DKNodeDUK : public DKObjectT<DKNodeDUK>
 public:
 	bool Init(){
 		
-		DKDuktape::AttachFunction("CPP_DKNodeDUK", DKNodeDUK::constructor);
+		DKDuktape::AttachFunction("CPP_DKNodeDUK_constructor", DKNodeDUK::constructor);
 		
 		// const unsigned short ELEMENT_NODE = 1;
 		DKDuktape::AttachFunction("CPP_DKNodeDUK_ELEMENT_NODE", DKNodeDUK::ELEMENT_NODE);
@@ -199,7 +200,7 @@ public:
 	
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKINFO("CPP_DKNodeDUK()\n");
+		DKINFO("CPP_DKNodeDUK_constructor()\n");
 		DKNode* _node = new DKNode();
 		DKString eventTargetAddress = pointerToAddress(_node);
 		duk_push_string(ctx, eventTargetAddress.c_str());
@@ -209,7 +210,9 @@ public:
 	// const unsigned short ELEMENT_NODE = 1;
 	static int ELEMENT_NODE(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, eventTarget(ctx)->ELEMENT_NODE());
+		DKNode* node = eventTarget(ctx);
+		const unsigned short _ELEMENT_NODE = node->ELEMENT_NODE();
+		dukglue_push(ctx, _ELEMENT_NODE);
 		return true;
 	}
 	

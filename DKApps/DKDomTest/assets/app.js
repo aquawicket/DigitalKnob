@@ -58,7 +58,7 @@ CPP_DK_Create("TEST_Document.js");
 // [Element] https://dom.spec.whatwg.org/#interface-element
 CPP_DK_Create("DKElementDUK");
 CPP_DK_Create("TEST_Element.js");
-
+/*
 // [HTMLCollection] https://dom.spec.whatwg.org/#interface-htmlcollection
 CPP_DK_Create("DKHTMLCollectionDUK");
 CPP_DK_Create("TEST_HTMLCollection.js");
@@ -92,3 +92,4 @@ CPP_DK_Create("TEST_DKRmlDocument.js");
 // [DKRmlDocument]
 CPP_DK_Create("DKRmlLocationDUK");
 CPP_DK_Create("TEST_DKRmlLocation.js");
+*/

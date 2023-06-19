@@ -15,7 +15,7 @@ class DKElementDUK : public DKObjectT<DKElementDUK>
 {
 public:
 	bool Init(){
-		DKDuktape::AttachFunction("CPP_DKElementDUK", 							DKElementDUK::constructor);
+		DKDuktape::AttachFunction("CPP_DKElementDUK_constructor", 				DKElementDUK::constructor);
 		
 		// readonly attribute DOMString? namespaceURI;
 		DKDuktape::AttachFunction("CPP_DKElementDUK_namespaceURI", 				DKElementDUK::namespaceURI);
@@ -161,7 +161,7 @@ public:
 
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKINFO("CPP_DKElementDUK()\n");
+		DKINFO("CPP_DKElementDUK_constructor()\n");
 		DKElement* _element = new DKElement();
 		DKString eventTargetAddress = pointerToAddress(_element);
 		duk_push_string(ctx, eventTargetAddress.c_str());

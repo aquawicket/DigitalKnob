@@ -4,7 +4,7 @@ console.log("\n////// TEST_Element.js //////")
 
 
 function printElementProperties(element){
-	
+	/*
 	console.log("element = "						+element);
 	
 	// readonly attribute DOMString? namespaceURI;
@@ -111,7 +111,7 @@ function printElementProperties(element){
 		
 	// undefined insertAdjacentText(DOMString where, DOMString data); // legacy
 	console.log("element.insertAdjacentText = "		+element.insertAdjacentText);
-	
+	*/
 	
 	printNodeProperties(element);
 }

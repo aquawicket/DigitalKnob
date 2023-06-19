@@ -10,7 +10,7 @@ var Node = function Node(address) {
 	if(address)
 		this.address = address;
 	if(!this.address)
-		this.address = CPP_DKNodeDUK();
+		this.address = CPP_DKNodeDUK_constructor();
 	
 	
 	// const unsigned short ELEMENT_NODE = 1;
