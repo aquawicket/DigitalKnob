@@ -171,8 +171,8 @@ public:
 	// readonly attribute DOMString? namespaceURI;
 	static int namespaceURI(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->namespaceURI(GetString(ctx));
+		//if(duk_is_valid_index(ctx, 1))
+		//	eventTarget(ctx)->namespaceURI(GetString(ctx));
 		dukglue_push(ctx, eventTarget(ctx)->namespaceURI());
 		return true;
 	}
@@ -180,8 +180,8 @@ public:
 	// readonly attribute DOMString? prefix;
 	static int prefix(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->prefix(GetString(ctx));
+		//if(duk_is_valid_index(ctx, 1))
+		//	eventTarget(ctx)->prefix(GetString(ctx));
 		dukglue_push(ctx, eventTarget(ctx)->prefix());
 		return true;
 	}
@@ -189,8 +189,8 @@ public:
 	// readonly attribute DOMString localName;
 	static int localName(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->localName(GetString(ctx));
+		//if(duk_is_valid_index(ctx, 1))
+		//	eventTarget(ctx)->localName(GetString(ctx));
 		dukglue_push(ctx, eventTarget(ctx)->localName());
 		return true;
 	}
@@ -198,8 +198,8 @@ public:
 	// readonly attribute DOMString tagName;
 	static int tagName(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->tagName(GetString(ctx));
+		//if(duk_is_valid_index(ctx, 1))
+		//	eventTarget(ctx)->tagName(GetString(ctx));
 		dukglue_push(ctx, eventTarget(ctx)->tagName());
 		return true;
 	}
@@ -225,8 +225,8 @@ public:
 	// [SameObject, PutForwards=value] readonly attribute DOMTokenList classList;
 	static int classList(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->classList(GetString(ctx));
+		//if(duk_is_valid_index(ctx, 1))
+		//	eventTarget(ctx)->classList(GetString(ctx));
 		dukglue_push(ctx, eventTarget(ctx)->classList());
 		return true;
 	}
@@ -251,8 +251,8 @@ public:
 	// [SameObject] readonly attribute NamedNodeMap attributes;
 	static int attributes(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->attributes(GetString(ctx));
+		//if(duk_is_valid_index(ctx, 1))
+		//	eventTarget(ctx)->attributes(GetString(ctx));
 		dukglue_push(ctx, eventTarget(ctx)->attributes());
 		return true;
 	}
@@ -358,8 +358,8 @@ public:
 	// readonly attribute ShadowRoot? shadowRoot;
 	static int shadowRoot(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->shadowRoot(GetString(ctx));
+		//if(duk_is_valid_index(ctx, 1))
+		//	eventTarget(ctx)->shadowRoot(GetString(ctx));
 		dukglue_push(ctx, eventTarget(ctx)->shadowRoot());
 		return true;
 	}
