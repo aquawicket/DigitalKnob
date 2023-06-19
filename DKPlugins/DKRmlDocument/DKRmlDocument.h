@@ -92,7 +92,7 @@ public:
 	virtual DKElement* documentElement() override							{ 											// getter
 		DKDEBUGFUNC();
 		Rml::Element* element = _dkRmlInterface->document;
-		return new DKRmlElement(_dkRmlInterface, element);		// FIXME: danggling pointer
+		return DKRmlElement::instance(_dkRmlInterface, element);
 	}				
 	virtual void documentElement(DKElement* documentElement) override		{ 											// setter
 		DKDEBUGFUNC(documentElement);
@@ -108,11 +108,8 @@ public:
 			DKERROR("elements.empty()\n");
 			return NULL;
 		}
-		//std::vector<DKElement*> element_list;
 		std::vector<DKElement*>* element_list = new std::vector<DKElement*>;
 		for(unsigned int i=0; i<elements.size(); ++i){
-			//element_list.push_back(new DKRmlElement(_dkRmlInterface, elements[i]));
-			//element_list->push_back(new DKRmlElement(_dkRmlInterface, elements[i]));
 			element_list->push_back(DKRmlElement::instance(_dkRmlInterface, elements[i]));
 		}
 		//DKINFO("element_list.size() = "+toString(element_list.size())+"\n");
@@ -140,7 +137,8 @@ public:
 	virtual DKElement* createElement(const DOMString& localName, const DOMString& options = "{}") override {
 		DKDEBUGFUNC(localName, options);
 		Rml::Element* element = _dkRmlInterface->document->AppendChild(_dkRmlInterface->document->CreateElement(localName.c_str()), false);
-		return new DKRmlElement(_dkRmlInterface, element);		// FIXME: danggling pointer
+		_createElement = DKRmlElement::instance(_dkRmlInterface, element);
+		return _createElement;
 	}
 	/*
 	// [CEReactions, NewObject] Element createElementNS(DOMString? namespace, DOMString qualifiedName, optional (DOMString or ElementCreationOptions) options = {});

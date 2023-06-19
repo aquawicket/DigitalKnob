@@ -83,12 +83,22 @@ public:
 	DOMString _className = "";
 	virtual const DOMString& className() override						{ return _className; }				// getter
 	virtual void className(const DOMString& className) override			{ _className = className; } 		// setter
+	*/
 	
 	// [SameObject, PutForwards=value] readonly attribute DOMTokenList classList;
-	DKString _classList = "";
-	virtual const DKString& classList() override						{ return _classList; }				// getter
-	virtual void classList(const DKString& classList) override			{ _classList = classList; } 		// setter
+	virtual const DKString& classList() override						{ 									// getter
+		Rml::StringList list = _rmlElement->GetActivePseudoClasses();
+		DKString _classList = "";
+		for (unsigned int n = 0; n < list.size(); ++n) {
+			_classList += list[n];
+			if (n < list.size()-1)
+				_classList += ",";
+		}
+		return _classList; 
+	}				
+	//virtual void classList(const DKString& classList) override		{ _classList = classList; } 		// setter
 	
+	/*
 	//[CEReactions, Unscopable] attribute DOMString slot;
 	DOMString _slot = "";
 	virtual const DOMString& slot() override							{ return _slot; }					// getter
@@ -219,14 +229,19 @@ public:
 	DKString _shadowRoot = "";
 	virtual const DKString& shadowRoot() override							{ return _shadowRoot; }					// getter
 	virtual void shadowRoot(const DKString& shadowRoot) override			{ _shadowRoot = shadowRoot; } 			// setter
+	*/
 	
 	// Element? closest(DOMString selectors);
-	DKString _closest = "";
-	virtual const DKString& closest(const DOMString& selectors) override {
+	virtual const DKElement& closest(const DOMString& selectors) override {
 		DKDEBUGFUNC(selectors);
+		Rml::Element* closestElement = _rmlElement->Closest(selectors);
+		if(!closestElement)
+			DKERROR("closestElement invalid");
+		_closest = DKRmlElement::instance(_dkRmlInterface, closestElement);
 		return _closest;
 	}
 	
+	/*
 	// boolean matches(DOMString selectors);
 	bool _matches = false;
 	virtual const bool& matches(const DOMString& selectors) override {

@@ -182,7 +182,7 @@ public:
 	
 	// Element? closest(DOMString selectors);
 	DKElement* _closest = NULL;
-	virtual DKElement* closest(const DOMString& selectors){
+	virtual DKElement* closest(const DOMString& selectors) {
 		DKDEBUGFUNC(selectors);
 		return _closest;
 	}
