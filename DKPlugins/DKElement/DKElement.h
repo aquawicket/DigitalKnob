@@ -17,6 +17,7 @@ public:
 		DKDEBUGFUNC();
 		interfaceName = "Element";
 		interfaceAddress = pointerToAddress(this);
+		DKINFO("DKElement("+interfaceAddress+") \n");
 	}
 	
 	// readonly attribute DOMString? namespaceURI;

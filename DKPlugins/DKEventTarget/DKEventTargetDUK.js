@@ -8,7 +8,7 @@
 // interface EventTarget {
 // constructor();
 var EventTarget = function EventTarget(address) {
-	//console.log("EventTarget("+address+")")
+	console.log("EventTarget("+address+")")
 
     if(address)
 		this.address = address;

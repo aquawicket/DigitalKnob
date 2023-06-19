@@ -4,7 +4,7 @@
 // [Exposed=Window]
 // interface Element : Node {
 var Element = function Element(address) {
-	//console.log("Element("+address+")")
+	console.log("Element("+address+")")
 	
 	if(address)
 		this.address = address;
@@ -211,6 +211,6 @@ var Element = function Element(address) {
 	if(this.toString() === "[object Object]")
 		this.toString = function(){	return "[object Element]" }
 	
-	return Node.call(this, this.address)
+	return Node.call(this, this.address);
 }
 Element.prototype = Node.prototype

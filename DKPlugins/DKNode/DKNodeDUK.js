@@ -5,7 +5,7 @@
 // [Exposed=Window]
 // interface Node : EventTarget {
 var Node = function Node(address) {
-	//console.log("Node("+address+")")
+	console.log("Node("+address+")")
 	
 	if(address)
 		this.address = address;
@@ -285,6 +285,6 @@ var Node = function Node(address) {
 	if(this.toString() === "[object Object]")
 		this.toString = function(){	return "[object Node]" }
 	
-	return EventTarget.call(this, this.address)
+	return EventTarget.call(this, this.address);
 }
 Node.prototype = EventTarget.prototype
