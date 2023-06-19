@@ -9,7 +9,7 @@ function printNodeProperties(node){
 	
 	// const unsigned short ELEMENT_NODE = 1;
 	console.log("node.ELEMENT_NODE = "								+node.ELEMENT_NODE);
-	/*
+
 	// const unsigned short ATTRIBUTE_NODE = 2;
 	console.log("node.ATTRIBUTE_NODE = "							+node.ATTRIBUTE_NODE);
 	
@@ -148,9 +148,7 @@ function printNodeProperties(node){
 	// [CEReactions] Node removeChild(Node child);
 	console.log("node.removeChild = "								+node.removeChild);
 	
-	
 	printEventTargetProperties(node);
-	*/
 }
 
 
