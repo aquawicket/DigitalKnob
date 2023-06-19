@@ -41,10 +41,10 @@ public:
 	////// NOTE: from DKRmlElementCSSInlineStyle
 	// [SameObject, PutForwards=cssText] readonly attribute CSSStyleDeclaration style;
 	DKCSSStyleDeclaration* _style = NULL;
-	DKCSSStyleDeclaration&	style()	/*override*/								{ 																// getter
-		return _style ? *_style : *new DKRmlCSSStyleDeclaration(_dkRmlInterface, _rmlElement); 
+	DKCSSStyleDeclaration& style()	/*override*/								{ 							// getter
+		return _style ? *_style : *DKRmlCSSStyleDeclaration::instance(_dkRmlInterface, _rmlElement); 
 	}	
-	void 					style(DKCSSStyleDeclaration& style) /*override*/	{ _style = &style; } 											// setter
+	//void style(DKCSSStyleDeclaration& style) /*override*/	{ _style = &style; } 							// setter
 	
 	/*
 	// readonly attribute DOMString? namespaceURI;
@@ -123,8 +123,8 @@ public:
 		return _getAttributeNames;
 	}
 	*/
+	
 	// DOMString? getAttribute(DOMString qualifiedName);
-	//DKString _getAttribute = "";
 	virtual const DKString& getAttribute(const DOMString& qualifiedName) override {
 		DKDEBUGFUNC(qualifiedName);
 		Rml::Variant* variant = _rmlElement->GetAttribute(qualifiedName.c_str());
@@ -132,6 +132,7 @@ public:
 			_getAttribute = _rmlElement->GetAttribute(qualifiedName.c_str())->Get<Rml::String>();
 		return _getAttribute;
 	}
+	
 	/*
 	// DOMString? getAttributeNS(DOMString? namespace, DOMString localName);
 	DOMString _getAttributeNS = "";
@@ -235,8 +236,8 @@ public:
 	virtual const DKElement& closest(const DOMString& selectors) override {
 		DKDEBUGFUNC(selectors);
 		Rml::Element* closestElement = _rmlElement->Closest(selectors);
-		if(!closestElement)
-			DKERROR("closestElement invalid");
+		//if(!closestElement)
+		//	DKERROR("closestElement invalid");
 		_closest = DKRmlElement::instance(_dkRmlInterface, closestElement);
 		return *_closest;
 	}
