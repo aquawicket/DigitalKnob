@@ -11,7 +11,7 @@ var Event = function Event(type, eventInitDict, address) {
 	if(address)
 		this.address = address;
 	if(!this.address)
-		this.address = CPP_DKEventDUK(type, eventInitDict);
+		this.address = CPP_DKEventDUK_constructor(type, eventInitDict);
 	
 	// readonly attribute DOMString type;
 	Object.defineProperty(this, "type", {

@@ -44,7 +44,7 @@ class DKConsoleDUK : public DKObjectT<DKConsoleDUK>
 public:
 	bool Init(){
 		
-		DKDuktape::AttachFunction("CPP_DKConsoleDUK", 				DKConsoleDUK::constructor);
+		DKDuktape::AttachFunction("CPP_DKConsoleDUK_constructor", 	DKConsoleDUK::constructor);
 		
 		// Logging
 		//undefined assert(optional boolean condition = false, any... data);
@@ -116,7 +116,7 @@ public:
 	
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKINFO("CPP_DKConsoleDUK()\n");
+		DKINFO("CPP_DKConsoleDUK_constructor()\n");
 		DKConsole* _console = new DKConsole();
 		DKString consoleAddress = pointerToAddress(_console);
 		duk_push_string(ctx, consoleAddress.c_str());
