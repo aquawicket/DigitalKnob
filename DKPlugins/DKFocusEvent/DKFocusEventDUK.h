@@ -51,8 +51,8 @@ public:
 	static int relatedTarget(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_string(ctx, 1))
-			focusEvent(ctx)->relatedTarget((DKEventTarget*)addressToPointer(duk_to_string(ctx, 1)));
-		dukglue_push(ctx, pointerToAddress(focusEvent(ctx)->relatedTarget()));
+			focusEvent(ctx)->relatedTarget(*(DKEventTarget*)addressToPointer(duk_to_string(ctx, 1)));
+		dukglue_push(ctx, pointerToAddress(&focusEvent(ctx)->relatedTarget()));
 		return true;
 	}
 	

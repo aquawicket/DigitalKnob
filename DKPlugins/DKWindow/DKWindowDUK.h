@@ -440,8 +440,8 @@ public:
 	static int window(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->window((DKWindowProxy*)addressToPointer(GetString(ctx)));
-		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->window()));
+			eventTarget(ctx)->window(*(DKWindowProxy*)addressToPointer(GetString(ctx)));
+		dukglue_push(ctx, pointerToAddress(&eventTarget(ctx)->window()));
 		return true;
 	}
 	
@@ -449,8 +449,8 @@ public:
 	static int self(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->self((DKWindowProxy*)addressToPointer(GetString(ctx)));
-		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->self()));
+			eventTarget(ctx)->self(*(DKWindowProxy*)addressToPointer(GetString(ctx)));
+		dukglue_push(ctx, pointerToAddress(&eventTarget(ctx)->self()));
 		return true;
 	}
 	
@@ -458,8 +458,8 @@ public:
 	static int document(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->document((DKDocument*)addressToPointer(GetString(ctx)));
-		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->document()));
+			eventTarget(ctx)->document(*(DKDocument*)addressToPointer(GetString(ctx)));
+		dukglue_push(ctx, pointerToAddress(&eventTarget(ctx)->document()));
 		return true;
 	}
 	
@@ -476,8 +476,8 @@ public:
 	static int location(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->location((DKLocation*)addressToPointer(GetString(ctx)));
-		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->location()));
+			eventTarget(ctx)->location(*(DKLocation*)addressToPointer(GetString(ctx)));
+		dukglue_push(ctx, pointerToAddress(&eventTarget(ctx)->location()));
 		return true;
 	}
 	
@@ -604,8 +604,8 @@ public:
 	static int frames(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->frames((DKWindowProxy*)addressToPointer(GetString(ctx)));
-		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->frames()));
+			eventTarget(ctx)->frames(*(DKWindowProxy*)addressToPointer(GetString(ctx)));
+		dukglue_push(ctx, pointerToAddress(&eventTarget(ctx)->frames()));
 		return true;
 	}
 	
@@ -622,8 +622,8 @@ public:
 	static int top(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->top((DKWindowProxy*)addressToPointer(GetString(ctx)));
-		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->top()));
+			eventTarget(ctx)->top(*(DKWindowProxy*)addressToPointer(GetString(ctx)));
+		dukglue_push(ctx, pointerToAddress(&eventTarget(ctx)->top()));
 		return true;
 	}
 	
@@ -640,8 +640,8 @@ public:
 	static int parent(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->parent((DKWindowProxy*)addressToPointer(GetString(ctx)));
-		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->parent()));
+			eventTarget(ctx)->parent(*(DKWindowProxy*)addressToPointer(GetString(ctx)));
+		dukglue_push(ctx, pointerToAddress(&eventTarget(ctx)->parent()));
 		return true;
 	}
 	
@@ -649,8 +649,8 @@ public:
 	static int frameElement(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->frameElement((DKElement*)addressToPointer(GetString(ctx)));
-		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->frameElement()));
+			eventTarget(ctx)->frameElement(*(DKElement*)addressToPointer(GetString(ctx)));
+		dukglue_push(ctx, pointerToAddress(&eventTarget(ctx)->frameElement()));
 		return true;
 	}
 	
@@ -670,8 +670,8 @@ public:
 	static int navigator(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->navigator((DKNavigator*)addressToPointer(GetString(ctx)));
-		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->navigator()));
+			eventTarget(ctx)->navigator(*(DKNavigator*)addressToPointer(GetString(ctx)));
+		dukglue_push(ctx, pointerToAddress(&eventTarget(ctx)->navigator()));
 		return true;
 	}
 	
@@ -679,8 +679,8 @@ public:
 	static int clientInformation(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->clientInformation((DKNavigator*)addressToPointer(GetString(ctx)));
-		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->clientInformation()));
+			eventTarget(ctx)->clientInformation(*(DKNavigator*)addressToPointer(GetString(ctx)));
+		dukglue_push(ctx, pointerToAddress(&eventTarget(ctx)->clientInformation()));
 		return true;
 	}
 	
@@ -755,8 +755,8 @@ public:
 			static int event(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
 				if(duk_is_valid_index(ctx, 1))
-					eventTarget(ctx)->event((DKEvent*)addressToPointer(GetString(ctx)));
-				dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->event()));
+					eventTarget(ctx)->event(*(DKEvent*)addressToPointer(GetString(ctx)));
+				dukglue_push(ctx, pointerToAddress(&eventTarget(ctx)->event()));
 				return true;
 			}
 	// };
@@ -945,8 +945,8 @@ public:
 				DKDEBUGFUNC(ctx);
 				DKString eltAddress = GetString(ctx);
 				DKElement* elt = (DKElement*)addressToPointer(eltAddress);
-					DKCSSStyleDeclaration* cssStyleDeclaration = eventTarget(ctx)->getComputedStyle(elt/*, TODO */);
-				dukglue_push(ctx, pointerToAddress(cssStyleDeclaration));
+					DKCSSStyleDeclaration* cssStyleDeclaration = &eventTarget(ctx)->getComputedStyle(elt/*, TODO */);
+				dukglue_push(ctx, pointerToAddress(&cssStyleDeclaration));
 				return DKTODO();
 			}
 	// };
@@ -963,8 +963,8 @@ public:
 			static int screen(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
 				if(duk_is_valid_index(ctx, 1))
-					eventTarget(ctx)->screen((DKScreen*)addressToPointer(GetString(ctx)));
-				dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->screen()) );
+					eventTarget(ctx)->screen(*(DKScreen*)addressToPointer(GetString(ctx)));
+				dukglue_push(ctx, pointerToAddress(&eventTarget(ctx)->screen()) );
 				return true;
 			}
 	//

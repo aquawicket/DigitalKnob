@@ -215,7 +215,7 @@ public:
 	// readonly attribute EventTarget? relatedTarget;
 	static int relatedTarget(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, mouseEvent(ctx)->relatedTarget());
+		dukglue_push(ctx, pointerToAddress(&mouseEvent(ctx)->relatedTarget()) );
 		return true;
 	}
 	

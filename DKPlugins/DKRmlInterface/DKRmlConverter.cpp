@@ -26,6 +26,9 @@
 #include "DK/stdafx.h"
 #include "DKRmlInterface/DKRmlConverter.h"
 #include "DK/DKLog.h"
+#if HAVE_DKDuktape
+	#include "DKDuktape/DKDuktape.h"
+#endif
 #if HAVE_DKCurl
 	#include "DKCurl/DKCurl.h"
 #endif

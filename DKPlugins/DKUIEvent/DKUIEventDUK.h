@@ -99,8 +99,8 @@ public:
 	static int view(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if (duk_is_string(ctx, 1))
-			uiEvent(ctx)->view((DKWindow*)addressToPointer(duk_to_string(ctx, 1)));
-		dukglue_push(ctx, pointerToAddress(uiEvent(ctx)->view()));
+			uiEvent(ctx)->view(*(DKWindow*)addressToPointer(duk_to_string(ctx, 1)));
+		dukglue_push(ctx, pointerToAddress(&uiEvent(ctx)->view()));
 		return true;
 	}
 	

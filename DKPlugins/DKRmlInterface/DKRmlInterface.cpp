@@ -38,7 +38,9 @@ WARNING_ENABLE
 #include "DKRmlInterface/DKRmlInterface.h"
 #include "DKWindow/DKWindow.h"
 #include "DKSdlRmlDocument/DKSdlRmlDocument.h" // FIXME
-//#include "DKDuktape/DKDuktape.h"
+#if HAVE_DKDuktape
+	#include "DKDuktape/DKDuktape.h"
+#endif
 #include "DKXml/DKXml.h"
 #include "DKRmlInterface/DKRmlHeadInstancer.h"
 #ifdef HAVE_DKCurl

@@ -116,7 +116,7 @@ public:
 		//DKString cb = event.target()+"_"+event.type()+"_callback";
 		
 		
-		DKString eventTargetAddress = pointerToAddress(event.target());
+		DKString eventTargetAddress = pointerToAddress(&event.target());
 		DKString cb = eventTargetAddress+"_"+event.type()+"_callback";
 		
 		duk_get_global_string(DKDuktape::ctx, cb.c_str());
