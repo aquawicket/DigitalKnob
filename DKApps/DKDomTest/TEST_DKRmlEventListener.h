@@ -4,19 +4,19 @@
 #ifndef TEST_DKRmlEventListener_H
 #define TEST_DKRmlEventListener_H
 
-#include "DKRmlEventTarget/DKRmlEventTarget.h"
+#include "DKRmlEventListener/DKRmlEventListener.h"
 
 
 class TEST_DKRmlEventListener //: public DKObjectT<TEST_DKRmlEventListener>
 {
 public:
-	DKRmlEventListener* _dkRmlEventListener;
+	static DKRmlEventListener* _dkRmlEventListener;
 
 	TEST_DKRmlEventListener() {
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DKRmlEventListener.h //////");
 		
-		_dkRmlEventTarget = new DKRmlEventTarget(TEST_DKRmlEventListener::_eventListener, NULL);
+		_dkRmlEventListener = new DKRmlEventListener();
 		
 		printDKRmlEventListenerProperties(*_dkRmlEventListener);
 	}
@@ -28,11 +28,12 @@ public:
 	static void printDKRmlEventListenerProperties(DKRmlEventListener& dkRmlEventListener){
 		DKDEBUGFUNC(dkRmlEventListener);
 		
-		console.log("dkRmlEventListener = "				+toString(dkRmlEventListener));
+		console.log("dkRmlEventListener = "		+toString(dkRmlEventListener));
 	}
 
 };
 //REGISTER_OBJECT(TEST_DKRmlEventListener, true);
 
+DKRmlEventListener* TEST_DKRmlEventListener::_dkRmlEventListener = NULL;
 
 #endif //TEST_DKRmlEventListener_H

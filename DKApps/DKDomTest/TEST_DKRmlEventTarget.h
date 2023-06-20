@@ -18,7 +18,7 @@ public:
 		console.log("\n////// TEST_DKRmlEventTarget.h //////");
 		
 		//dkRmlEventTarget = new DKRmlEventTarget(TEST_DKRmlInterface::dkRmlInterface, NULL);
-		dkRmlEventTarget = new DKRmlEventTarget(TEST_DKRmlEventListener::dkRmlEventListner, NULL);
+		dkRmlEventTarget = new DKRmlEventTarget(TEST_DKRmlEventListener::_dkRmlEventListener, NULL);
 		
 		printDKRmlEventTargetProperties(*dkRmlEventTarget);
 	}
