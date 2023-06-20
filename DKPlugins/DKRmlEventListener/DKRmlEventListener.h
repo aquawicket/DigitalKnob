@@ -8,7 +8,7 @@
 #include "DKEventListener/DKEventListener.h"
 #include "DKRmlInterface/DKRmlInterface.h"
 
-//#include "DKMouseEvent/DKMouseEvent.h"
+#include "DKMouseEvent/DKMouseEvent.h"
 //#include "DKRmlElement/DKRmlElement.h"
 
 
@@ -43,7 +43,7 @@ public:
 		// TODO
 		if (same(type, "click")) {
 			DKINFO("click!\n");
-			//DKMouseEvent click_event("click", "");
+			DKMouseEvent click_event("click", "");
 			//DKRmlElement* dkRmlElement = DKRmlElement::instance(this, currentElement);
 			//dkRmlElement->dispatchEvent(click_event);
 		}
