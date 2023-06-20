@@ -51,7 +51,7 @@
 #include "TEST_DKRmlCSSStyleDeclaration.h"
 #include "TEST_DKRmlNode.h"
 //#include "TEST_DKRmlElementCSSInlineStyle.h"	// Mixin	// TODO
-//#include "TEST_DKRmlElement.h"
+#include "TEST_DKRmlElement.h"
 //#include "TEST_DKRmlDocument.h"
 //#include "TEST_DKRmlHTMLElement.h"
 
@@ -73,7 +73,7 @@ public:
 	std::unique_ptr<TEST_DKRmlCSSStyleDeclaration>		test_DKRmlCSSStyleDeclaration;
 	std::unique_ptr<TEST_DKRmlNode> 					test_DKRmlNode;
 	//std::unique_ptr<TEST_DKRmlElementCSSInlineStyle>	test_DKRmlElementCSSInlineStyle;	// Mixin
-	//std::unique_ptr<TEST_DKRmlElement> 				test_DKRmlElement;
+	std::unique_ptr<TEST_DKRmlElement> 					test_DKRmlElement;
 	//std::unique_ptr<TEST_DKRmlDocument>				test_DKRmlDocument;
 	//std::unique_ptr<TEST_DKRmlHTMLElement> 			test_DKRmlHTMLElement;
 };

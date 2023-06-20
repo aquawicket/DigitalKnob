@@ -9,13 +9,12 @@ class TEST_DKRmlElement //: public DKObjectT<TEST_DKRmlElement>
 {
 public:
 	DKRmlElement* dkRmlElement;
-	//std::unique_ptr<DKRmlElement> dkRmlElement;
 	
 	TEST_DKRmlElement() {
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DKRmlElement.h //////");
 		
-		dkRmlElement = new DKRmlElement(TEST_DKRmlInterface::dkRmlInterface, NULL);
+		dkRmlElement = new DKRmlElement(TEST_DKRmlEventListener::_dkRmlEventListener, NULL);
 		
 		printDKRmlElementProperties(*dkRmlElement);
 	}

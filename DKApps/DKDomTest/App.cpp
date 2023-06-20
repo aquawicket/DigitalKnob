@@ -130,7 +130,7 @@ bool App::Init() {
 	//test_DKRmlElementCSSInlineStyle = std::make_unique<TEST_DKRmlElementCSSInlineStyle>();									// Mixin
 	
 	// [DKRmlElement]
-	//test_DKRmlElement = std::make_unique<TEST_DKRmlElement>();
+	test_DKRmlElement = std::make_unique<TEST_DKRmlElement>();
 	
 	// [DKRmlDocument]
 	//test_DKRmlDocument = std::make_unique<TEST_DKRmlDocument>();
