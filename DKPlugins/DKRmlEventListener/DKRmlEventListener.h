@@ -5,6 +5,7 @@
 #define DKRmlEventListener_H
 
 //#include "DKEventListener/DKEventListener.h"
+#include "DKRmlInterface/DKRmlInterface.h"
 
 //typedef std::function<void(DKEvent&)> DKCallback;
 
