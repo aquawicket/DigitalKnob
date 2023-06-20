@@ -19,6 +19,9 @@ bool App::Init() {
 	// [Event]
 	std::unique_ptr<TEST_Event> test_Event = std::make_unique<TEST_Event>();
 	
+	// [EventListener]
+	std::unique_ptr<TEST_EventListener> test_EventListener = std::make_unique<TEST_EventListener>();
+	
 	// [EventTarget]
 	std::unique_ptr<TEST_EventTarget> test_EventTarget = std::make_unique<TEST_EventTarget>();
 	

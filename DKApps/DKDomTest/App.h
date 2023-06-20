@@ -10,7 +10,7 @@
 //#include "TEST_Interface.h"				// TODO
 #include "TEST_Console.h"
 #include "TEST_Event.h"
-//#include "TEST_EventListener.h"
+#include "TEST_EventListener.h"
 #include "TEST_EventTarget.h"
 #include "TEST_CustomEvent.h"
 #include "TEST_Screen.h"

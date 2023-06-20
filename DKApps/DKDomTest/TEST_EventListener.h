@@ -18,7 +18,7 @@ public:
 		
 		_eventListener = new DKEventListener();
 		
-		printDKRmlEventTargetProperties(*_eventListener);
+		printEventListenerProperties(*_eventListener);
 	}
 	
 	~TEST_EventListener() {
