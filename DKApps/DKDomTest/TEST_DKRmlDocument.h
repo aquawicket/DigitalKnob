@@ -38,7 +38,12 @@ public:
 		console.log("body->tagName() = "+body->tagName());
 		///////////////////////////////
 		
+		
+		//////////////////////////////////
 		dkRmlDocument->addEventListener("load", &TEST_DKRmlDocument::onLoad);
+		DKEvent load_event("load", "");
+		dkRmlDocument->dispatchEvent(load_event);
+		/////////////////////////////////
 
 		printRmlDocumentProperties(*dkRmlDocument);
 	}
