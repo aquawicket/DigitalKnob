@@ -84,12 +84,11 @@ CPP_DK_Create("TEST_DKConsoleWindow.js");
 // [DKSdlWindow]
 CPP_DK_Create("DKSdlWindowDUK");
 CPP_DK_Create("TEST_DKSdlWindow.js");
-/*
-// [DKRmlDocument]
-CPP_DK_Create("DKRmlDocumentDUK");
-CPP_DK_Create("TEST_DKRmlDocument.js");
 
-// [DKRmlDocument]
+// [DKRmlLocation]
 CPP_DK_Create("DKRmlLocationDUK");
 CPP_DK_Create("TEST_DKRmlLocation.js");
-*/
+
+// [DKRmlDocument]
+//CPP_DK_Create("DKRmlDocumentDUK");
+//CPP_DK_Create("TEST_DKRmlDocument.js");

@@ -15,22 +15,22 @@ class DKRmlCSSStyleDeclaration : public DKCSSStyleDeclaration
 {
 public:
 	static std::vector<DKRmlCSSStyleDeclaration*> list;
-	static DKRmlCSSStyleDeclaration* instance(DKRmlInterface* dkRmlInterface, Rml::Element* rmlElement){
+	static DKRmlCSSStyleDeclaration* instance(Rml::Element* rmlElement){
 		for(unsigned int i=0; i<list.size(); ++i){
 			if(rmlElement == list[i]->_rmlElement)
 				return list[i];
 		}
-		return new DKRmlCSSStyleDeclaration(dkRmlInterface, rmlElement);
+		return new DKRmlCSSStyleDeclaration(rmlElement);
 	}
 	
-	DKRmlInterface* _dkRmlInterface;
+	//DKRmlInterface* _dkRmlInterface;
 	Rml::Element* _rmlElement;
 	
-	DKRmlCSSStyleDeclaration(DKRmlInterface* dkRmlInterface, Rml::Element* rmlElement) : DKCSSStyleDeclaration() {
+	DKRmlCSSStyleDeclaration(Rml::Element* rmlElement) : DKCSSStyleDeclaration() {
 		DKDEBUGFUNC();
 		interfaceName = "DKRmlCSSStyleDeclaration";
 		interfaceAddress = pointerToAddress(this);
-		_dkRmlInterface = dkRmlInterface;
+		//_dkRmlInterface = dkRmlInterface;
 		_rmlElement = rmlElement;
 	}
 	virtual ~DKRmlCSSStyleDeclaration() {	}

@@ -17,23 +17,25 @@ class DKRmlDocument : public DKDocument, public DKRmlNonElementParentNode
 {
 public:
 	static std::vector<DKRmlDocument*> list;
-	static DKRmlDocument* instance(DKRmlInterface* dkRmlInterface){
+	static DKRmlDocument* instance(DKRmlInterface* dkRmlInterface, DKRmlEventListener* dkRmlEventListener){
 		for(unsigned int i=0; i<list.size(); ++i){
 			if(dkRmlInterface == list[i]->_dkRmlInterface)
 				return list[i];
 		}
-		return new DKRmlDocument(dkRmlInterface);
+		return new DKRmlDocument(dkRmlInterface, dkRmlEventListener);
 	}
 	
 	DKRmlInterface* _dkRmlInterface;
+	DKRmlEventListener* _dkRmlEventListener;
 	
 	// constructor();
-	DKRmlDocument(DKRmlInterface* dkRmlInterface) : DKDocument(), DKRmlNonElementParentNode(dkRmlInterface) {
+	DKRmlDocument(DKRmlInterface* dkRmlInterface, DKRmlEventListener* dkRmlEventListener) : DKDocument(), DKRmlNonElementParentNode(dkRmlInterface, dkRmlEventListener) {
 		DKDEBUGFUNC();
 		interfaceName = "DKRmlDocument";
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKRmlDocument("+interfaceAddress+") \n");
 		_dkRmlInterface = dkRmlInterface;
+		_dkRmlEventListener = dkRmlEventListener;
 		
 		list.push_back(this);
 	}
@@ -92,7 +94,7 @@ public:
 	virtual DKElement* documentElement() override							{ 											// getter
 		DKDEBUGFUNC();
 		Rml::Element* element = _dkRmlInterface->document;
-		return DKRmlElement::instance(_dkRmlInterface, element);
+		return DKRmlElement::instance(_dkRmlEventListener, element);
 	}				
 	virtual void documentElement(DKElement* documentElement) override		{ 											// setter
 		DKDEBUGFUNC(documentElement);
@@ -110,7 +112,7 @@ public:
 		}
 		std::vector<DKElement*>* element_list = new std::vector<DKElement*>;
 		for(unsigned int i=0; i<elements.size(); ++i){
-			element_list->push_back(DKRmlElement::instance(_dkRmlInterface, elements[i]));
+			element_list->push_back(DKRmlElement::instance(_dkRmlEventListener, elements[i]));
 		}
 		//DKINFO("element_list.size() = "+toString(element_list.size())+"\n");
 		DKINFO("element_list->size() = "+toString(element_list->size())+"\n");
@@ -137,7 +139,7 @@ public:
 	virtual DKElement* createElement(const DOMString& localName, const DOMString& options = "{}") override {
 		DKDEBUGFUNC(localName, options);
 		Rml::Element* element = _dkRmlInterface->document->AppendChild(_dkRmlInterface->document->CreateElement(localName.c_str()), false);
-		_createElement = DKRmlElement::instance(_dkRmlInterface, element);
+		_createElement = DKRmlElement::instance(_dkRmlEventListener, element);
 		return _createElement;
 	}
 	/*

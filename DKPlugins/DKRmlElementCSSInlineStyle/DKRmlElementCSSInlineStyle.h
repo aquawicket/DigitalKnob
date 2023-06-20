@@ -28,7 +28,7 @@ public:
 	// [SameObject, PutForwards=cssText] readonly attribute CSSStyleDeclaration style;
 	DKCSSStyleDeclaration* _style = NULL;
 	virtual DKCSSStyleDeclaration&	style()	/*override*/								{ 																// getter
-		return _style ? *_style : *new DKRmlCSSStyleDeclaration(_dkRmlInterface, _rmlElement); 
+		return _style ? *_style : *new DKRmlCSSStyleDeclaration(_rmlElement); 
 	}	
 	virtual void 					style(DKCSSStyleDeclaration& style) /*override*/	{ _style = &style; } 											// setter
 

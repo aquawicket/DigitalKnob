@@ -15,11 +15,13 @@ class DKRmlNonElementParentNode //: public DKNonElementParentNode
 {
 public:
 	DKRmlInterface* _dkRmlInterface;
+	DKRmlEventListener* _dkRmlEventListener;
 	
 	// constructor();
-	DKRmlNonElementParentNode(DKRmlInterface* dkRmlInterface) {//: DKNonElementParentNode() {
+	DKRmlNonElementParentNode(DKRmlInterface* dkRmlInterface, DKRmlEventListener* dkRmlEventListener) {//: DKNonElementParentNode() {
 		DKDEBUGFUNC();
 		_dkRmlInterface = dkRmlInterface;
+		_dkRmlEventListener = dkRmlEventListener;
 	}
 	virtual ~DKRmlNonElementParentNode() {	}
 	
@@ -27,7 +29,7 @@ public:
 	virtual DKElement* getElementById(const DOMString& elementId) {
 		DKDEBUGFUNC(elementId);
 		Rml::Element* element = _dkRmlInterface->document->GetElementById(elementId.c_str());
-		return new DKRmlElement(_dkRmlInterface, element);		// FIXME: danggling pointer
+		return DKRmlElement::instance(_dkRmlEventListener, element);
 	}
 
 // };

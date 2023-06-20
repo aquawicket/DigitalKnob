@@ -14,21 +14,24 @@
 class DKRmlElement : virtual public DKElement, public DKRmlNode  //, public DKRmlElementCSSInlineStyle
 {
 public:
+	DKRmlEventListener* _dkRmlEventListener;
+
 	static std::vector<DKRmlElement*> list;
-	static DKRmlElement* instance(DKRmlInterface* dkRmlInterface, Rml::Element* rmlElement){
+	static DKRmlElement* instance(DKRmlEventListener* dkRmlEventListener, Rml::Element* rmlElement){
 		for(unsigned int i=0; i<list.size(); ++i){
 			if(rmlElement == list[i]->_rmlElement)
 				return list[i];
 		}
-		return new DKRmlElement(dkRmlInterface, rmlElement);
+		return new DKRmlElement(dkRmlEventListener, rmlElement);
 	}
 	
-	DKRmlElement(DKRmlInterface* dkRmlInterface, Rml::Element* rmlElement) : DKElement(), DKRmlNode(dkRmlInterface, rmlElement) {//, DKRmlElementCSSInlineStyle(dkRmlInterface, _rmlElement) {
+	DKRmlElement(DKRmlEventListener* dkRmlEventListener, Rml::Element* rmlElement) : DKElement(), DKRmlNode(dkRmlEventListener, rmlElement) {//, DKRmlElementCSSInlineStyle(dkRmlInterface, _rmlElement) {
 		DKDEBUGFUNC();
 		interfaceName = "DKRmlElement";
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKRmlElement("+interfaceAddress+") \n");
-		_dkRmlInterface = dkRmlInterface;
+		//_dkRmlInterface = dkRmlInterface;
+		_dkRmlEventListener = dkRmlEventListener;
 		_rmlElement = rmlElement;
 		
 		if(!_rmlElement)
@@ -38,11 +41,13 @@ public:
 	}
 	~DKRmlElement() {}
 	
+
+	
 	////// NOTE: from DKRmlElementCSSInlineStyle
 	// [SameObject, PutForwards=cssText] readonly attribute CSSStyleDeclaration style;
 	DKCSSStyleDeclaration* _style = NULL;
 	DKCSSStyleDeclaration& style()	/*override*/								{ 							// getter
-		return _style ? *_style : *DKRmlCSSStyleDeclaration::instance(_dkRmlInterface, _rmlElement); 
+		return _style ? *_style : *DKRmlCSSStyleDeclaration::instance(_rmlElement); 
 	}	
 	//void style(DKCSSStyleDeclaration& style) /*override*/	{ _style = &style; } 							// setter
 	
@@ -242,7 +247,7 @@ public:
 		Rml::Element* closestElement = _rmlElement->Closest(selectors);
 		//if(!closestElement)
 		//	DKERROR("closestElement invalid");
-		_closest = DKRmlElement::instance(_dkRmlInterface, closestElement);
+		_closest = DKRmlElement::instance(_dkRmlEventListener, closestElement);
 		return *_closest;
 	}
 	
