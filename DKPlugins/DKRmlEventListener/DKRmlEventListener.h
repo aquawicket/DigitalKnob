@@ -11,7 +11,7 @@
 
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // callback interface EventListener {
-class DKRmlEventListener //: virtual public DKEventListener
+class DKRmlEventListener : public Rml::EventListener //: virtual public DKEventListener
 {
 public:
 	DKRmlEventListener() {//: DKEventListener() {

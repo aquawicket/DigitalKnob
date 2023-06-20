@@ -41,7 +41,8 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
-class DKRmlInterface : virtual public DKInterface, public Rml::EventListener {//, public DKObjectT<DKRmlInterface> {
+class DKRmlInterface : virtual public DKInterface//, public Rml::EventListener //, public DKObjectT<DKRmlInterface> 
+{
 public:
 	DKRmlInterface(DKWindow* window);
 	~DKRmlInterface();
@@ -51,7 +52,7 @@ public:
 	bool LoadFonts(DKString& directory);
 	bool LoadUrl(const DKString& url);
 	bool LoadHtml(const DKString& html);
-	void ProcessEvent(Rml::Event& rmlEvent) override;
+	//void ProcessEvent(Rml::Event& rmlEvent) override;
 	bool RegisterEvent(const DKString& elementAddress, const DKString& type);
 	bool SendEvent(const DKString& elementAddress, const DKString& type, const DKString& value);
 	bool DebuggerOff();

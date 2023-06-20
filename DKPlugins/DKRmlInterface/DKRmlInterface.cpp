@@ -49,9 +49,9 @@ WARNING_ENABLE
 
 #include "DKRmlInterface/DKRmlConverter.h"
 
-#include "DKRmlDocument/DKRmlDocument.h"
-#include "DKRmlElement/DKRmlElement.h"
-#include "DKMouseEvent/DKMouseEvent.h"
+//#include "DKRmlDocument/DKRmlDocument.h"
+//#include "DKRmlElement/DKRmlElement.h"
+//#include "DKMouseEvent/DKMouseEvent.h"
 
 #define DRAG_FIX 1
 
@@ -358,16 +358,19 @@ bool DKRmlInterface::LoadUrl(const DKString& url){
 	}
 	LoadHtml(html);
 
+/*
 	//////////////////////////////////
 	DKINFO("load!\n");
 	DKEvent load_event("load", "");
 	DKRmlDocument* dkRmlDocument = DKRmlDocument::instance(this);
 	dkRmlDocument->dispatchEvent(load_event);
 	/////////////////////////////////
+*/
 	
 	return true;
 }
 
+/*
 void DKRmlInterface::ProcessEvent(Rml::Event& rmlEvent){
 	//DKDEBUGFUNC(rmlEvent);  //EXCESSIVE LOGGING
 	DKString rmlEventAddress = pointerToAddress(&rmlEvent);
@@ -387,14 +390,13 @@ void DKRmlInterface::ProcessEvent(Rml::Event& rmlEvent){
 	//TODO: implement this
     //int phase = (int)rmlEvent.GetPhase(); //{ None, Capture = 1, Target = 2, Bubble = 4 };
     
-    /*
 	// Send this event back to duktape to be processed in javascript
-	DKString evnt = "{type:'"+type+"', eventPhase:"+toString(phase)+"}";
-	DKString code = "EventFromCPP('"+ currentElementAddress +"',"+evnt+");";
-	DKString rval;
-	DKDuktape::Get()->RunDuktape(code, rval);
-	if(!rval.empty()){ DKINFO("DKRmlInterface::ProcessEvent(): rval = "+rval+"\n"); }
-	*/
+	//DKString evnt = "{type:'"+type+"', eventPhase:"+toString(phase)+"}";
+	//DKString code = "EventFromCPP('"+ currentElementAddress +"',"+evnt+");";
+	//DKString rval;
+	//DKDuktape::Get()->RunDuktape(code, rval);
+	//if(!rval.empty()){ DKINFO("DKRmlInterface::ProcessEvent(): rval = "+rval+"\n"); }
+
 	// If the event bubbles up, ignore elements underneith 
 	context = document->GetContext();
 	Rml::Element* hoverElement = NULL;
@@ -406,16 +408,16 @@ void DKRmlInterface::ProcessEvent(Rml::Event& rmlEvent){
 	if (hoverParent)
 		hover = hoverParent;
 	//if(rmlEvent.GetPhase() == 1 && currentElement != hover){ return; }
-	/*
+
 	//Event Monitor
-	DKString tag = currentElement->GetTagName();
-	DKString id = currentElement->GetId();
-	DKString target_id = targetElement->GetId();
-	DKString target_tag = targetElement->GetTagName();
-	DKString hover_id = hover->GetId();
-	DKString string = "EVENT: " + type + " (current) " + tag + "> " + id + " (target) " + target_tag + "> " + target_id + "(hover)" + hover_id + "\n";
-	DKINFO(string + "\n");
-	*/
+	//DKString tag = currentElement->GetTagName();
+	//DKString id = currentElement->GetId();
+	//DKString target_id = targetElement->GetId();
+	//DKString target_tag = targetElement->GetTagName();
+	//DKString hover_id = hover->GetId();
+	//DKString string = "EVENT: " + type + " (current) " + tag + "> " + id + " (target) " + target_tag + "> " + target_id + "(hover)" + hover_id + "\n";
+	//DKINFO(string + "\n");
+
 #if ANDROID
 	//Toggle Keyboard on text element click
 	if (type == "mousedown") {
@@ -463,17 +465,17 @@ void DKRmlInterface::ProcessEvent(Rml::Event& rmlEvent){
 			ev->data.clear();
 			ev->data.push_back(rmlEventAddress);
 			//ev->rEvent = &rmlEvent;
-			/*
+			
 			//pass the value
-			if (same(type, "keydown") || same(type, "keyup")) {
-				ev->data.clear();
-				ev->data.push_back(toString(rmlEvent.GetParameter<int>("key_identifier", 0)));
-			}
-			if (same(type, "mousedown") || same(type, "mouseup")) {
-				ev->data.clear();
-				ev->data.push_back(toString(rmlEvent.GetParameter<int>("button", 0)));
-			}
-			*/
+			//if (same(type, "keydown") || same(type, "keyup")) {
+			//	ev->data.clear();
+			//	ev->data.push_back(toString(rmlEvent.GetParameter<int>("key_identifier", 0)));
+			//}
+			//if (same(type, "mousedown") || same(type, "mouseup")) {
+			//	ev->data.clear();
+			//	ev->data.push_back(toString(rmlEvent.GetParameter<int>("button", 0)));
+			//}
+			
 			//FIXME - we run the risk of having event function pointers that point to nowhere
 			if (!ev->event_func(ev)){
 				DKERROR("ev->event_func(ev): failed \n");
@@ -483,21 +485,22 @@ void DKRmlInterface::ProcessEvent(Rml::Event& rmlEvent){
 			//DKINFO("Event: "+ev->type+", "+ev->id+"\n");
 			//FIXME - StopPropagation() on a mousedown even will bock the elements ability to drag
 			// we need to find a way to stop propagation of the event, while allowing drag events.
-/*
-#ifdef DRAG_FIX
-			if (!same(type, "mousedown")) {
-#endif
-				if (!same(type, "keydown")) 
-					rmlEvent.StopPropagation();
-#ifdef DRAG_FIX
-			}
-#endif
-*/
+
+//#ifdef DRAG_FIX
+//			if (!same(type, "mousedown")) {
+//#endif
+//				if (!same(type, "keydown")) 
+//					rmlEvent.StopPropagation();
+//#ifdef DRAG_FIX
+//			}
+//#endif
+
 			//ev->rEvent = NULL;
 			return;
 		}
 	}
 }
+*/
 
 bool DKRmlInterface::RegisterEvent(const DKString& elementAddress, const DKString& type){
 	//DKDEBUGFUNC(elementAddress, type);  //EXCESSIVE LOGGING
