@@ -9,13 +9,12 @@ class TEST_DKRmlNode //: public DKObjectT<TEST_DKRmlNode>
 {
 public:
 	DKRmlNode* dkRmlNode;
-	//std::unique_ptr<DKRmlNode> dkRmlNode;
 	
 	TEST_DKRmlNode() {
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DKRmlNode.h //////");
 		
-		dkRmlNode = new DKRmlNode(TEST_DKRmlInterface::dkRmlInterface, NULL);
+		dkRmlNode = new DKRmlNode(TEST_DKRmlEventListener::_dkRmlEventListener, NULL);
 		
 		printDKRmlNodeProperties(*dkRmlNode);
 	}

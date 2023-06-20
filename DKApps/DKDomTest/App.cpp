@@ -124,7 +124,7 @@ bool App::Init() {
 	test_DKRmlCSSStyleDeclaration = std::make_unique<TEST_DKRmlCSSStyleDeclaration>();
 	
 	// [DKRmlNode]
-	//test_DKRmlNode = std::make_unique<TEST_DKRmlNode>();
+	test_DKRmlNode = std::make_unique<TEST_DKRmlNode>();
 	
 	// [DKRmlDocument]
 	//test_DKRmlDocument = std::make_unique<TEST_DKRmlDocument>();
