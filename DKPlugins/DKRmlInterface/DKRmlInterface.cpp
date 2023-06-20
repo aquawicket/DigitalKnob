@@ -160,9 +160,9 @@ DKRmlInterface::DKRmlInterface(DKWindow* window) : DKInterface() {
 	DKString rmlFonts = DKFile::local_assets+"DKRmlInterface";
 	LoadFonts(rmlFonts);
 	LoadFonts(DKFile::local_assets);
-	DKEvents::AddRegisterEventFunc(&DKRmlInterface::RegisterEvent, this);
+	//DKEvents::AddRegisterEventFunc(&DKRmlInterface::RegisterEvent, this);
 	//DKEvents::AddUnegisterEventFunc(&DKRmlInterface::UnregisterEvent, this);
-	DKEvents::AddSendEventFunc(&DKRmlInterface::SendEvent, this);
+	//DKEvents::AddSendEventFunc(&DKRmlInterface::SendEvent, this);
 	Rml::Factory::RegisterElementInstancer("html", new Rml::ElementInstancerGeneric<Rml::ElementDocument>);
 	Rml::XMLParser::RegisterNodeHandler("html", std::make_shared<Rml::XMLNodeHandlerBody>());
 	Rml::XMLParser::RegisterNodeHandler("head", std::make_shared<HeadInstancer>());
@@ -190,9 +190,9 @@ DKRmlInterface::~DKRmlInterface() {
 		delete Rml::GetSystemInterface();
 		delete Rml::GetFileInterface();
 	}
-	DKEvents::RemoveRegisterEventFunc(&DKRmlInterface::RegisterEvent, this);
-	DKEvents::RemoveUnegisterEventFunc(&DKRmlInterface::UnregisterEvent, this);
-	DKEvents::RemoveSendEventFunc(&DKRmlInterface::SendEvent, this);
+	//DKEvents::RemoveRegisterEventFunc(&DKRmlInterface::RegisterEvent, this);
+	//DKEvents::RemoveUnegisterEventFunc(&DKRmlInterface::UnregisterEvent, this);
+	//DKEvents::RemoveSendEventFunc(&DKRmlInterface::SendEvent, this);
 }
 
 bool DKRmlInterface::LoadFont(const DKString& file){
@@ -502,6 +502,7 @@ void DKRmlInterface::ProcessEvent(Rml::Event& rmlEvent){
 }
 */
 
+/*
 bool DKRmlInterface::RegisterEvent(const DKString& elementAddress, const DKString& type){
 	//DKDEBUGFUNC(elementAddress, type);  //EXCESSIVE LOGGING
 	if(elementAddress.empty())
@@ -563,6 +564,7 @@ bool DKRmlInterface::SendEvent(const DKString& elementAddress, const DKString& t
 	element->DispatchEvent(type.c_str(), parameters, false);
 	return true;
 }
+*/
 
 bool DKRmlInterface::DebuggerOff(){
 #ifdef HAVE_rmlui_debugger
@@ -597,6 +599,7 @@ bool DKRmlInterface::DebuggerToggle(){
 	return true;
 }
 
+/*
 bool DKRmlInterface::UnregisterEvent(const DKString& elementAddress, const DKString& type){
 	DKDEBUGFUNC(elementAddress, type);
 	if(elementAddress.empty())
@@ -617,6 +620,7 @@ bool DKRmlInterface::UnregisterEvent(const DKString& elementAddress, const DKStr
 	element->RemoveEventListener(_type.c_str(), this, false);
 	return true;
 }
+*/
 
 //TODO
 bool DKRmlInterface::GetOuterHTML(Rml::Element* element, DKString& outerHtml) {

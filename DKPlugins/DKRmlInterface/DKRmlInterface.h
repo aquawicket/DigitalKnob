@@ -52,13 +52,16 @@ public:
 	bool LoadFonts(DKString& directory);
 	bool LoadUrl(const DKString& url);
 	bool LoadHtml(const DKString& html);
+	
 	//void ProcessEvent(Rml::Event& rmlEvent) override;
-	bool RegisterEvent(const DKString& elementAddress, const DKString& type);
-	bool SendEvent(const DKString& elementAddress, const DKString& type, const DKString& value);
+	//bool RegisterEvent(const DKString& elementAddress, const DKString& type);
+	//bool UnregisterEvent(const DKString& elementAddress, const DKString& type);
+	//bool SendEvent(const DKString& elementAddress, const DKString& type, const DKString& value);
+	
 	bool DebuggerOff();
 	bool DebuggerOn();
 	bool DebuggerToggle();
-	bool UnregisterEvent(const DKString& elementAddress, const DKString& type);
+	
 	static bool GetOuterHTML(Rml::Element* element, DKString& outerHtml);		//FIXME: https://stackoverflow.com/a/1367597/688352
 	static bool SetOuterHTML(Rml::Element* element, const DKString& outerHtml);	//FIXME: https://stackoverflow.com/a/1367597/688352
 	DKString href_;
