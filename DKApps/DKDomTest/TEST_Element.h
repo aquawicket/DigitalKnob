@@ -128,7 +128,6 @@ public:
 		// undefined insertAdjacentText(DOMString where, DOMString data); // legacy
 		// function
 		
-		//TEST_Node::printNodeProperties(dynamic_cast<DKNode&>(element));	//TODO: try to remove the need for dynamic_cast
 		TEST_Node::printNodeProperties(element);
 	}
 };

@@ -29,7 +29,6 @@ public:
 		
 		console.log("dkRmlNode = "				+toString(dkRmlNode));
 		
-		//TEST_Node::printNodeProperties(dynamic_cast<DKNode&>(dkRmlNode));	//TODO: try to remove the need for dynamic_cast
 		TEST_Node::printNodeProperties(dkRmlNode);
 	}
 };

@@ -27,7 +27,6 @@ public:
 		
 		console.log("dkRmlHTMLElement = "				+toString(dkRmlHTMLElement));
 		
-		//TEST_HTMLElement::printHTMLElementProperties(dynamic_cast<DKHTMLElement&>(dkRmlHTMLElement));	//TODO: try to remove the need for dynamic_cast
 		TEST_HTMLElement::printHTMLElementProperties(dkRmlHTMLElement);
 	}
 };

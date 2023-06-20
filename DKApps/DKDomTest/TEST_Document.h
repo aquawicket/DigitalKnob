@@ -155,7 +155,6 @@ public:
 		//};
 		
 		
-		//TEST_Node::printNodeProperties(dynamic_cast<DKNode&>(document));	//TODO: try to remove the need for dynamic_cast
 		TEST_Node::printNodeProperties(document);
 	}
 };

@@ -83,7 +83,6 @@ public:
 		// also has obsolete members
 	//};
 	
-		//TEST_HTMLElement::printHTMLElementProperties(dynamic_cast<DKHTMLElement&>(htmlImageElement));	//TODO: try to remove the need for dynamic_cast
 		TEST_HTMLElement::printHTMLElementProperties(htmlImageElement);
 	}
 };

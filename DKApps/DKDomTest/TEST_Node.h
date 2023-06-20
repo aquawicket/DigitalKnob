@@ -164,7 +164,6 @@ public:
 		// [CEReactions] Node removeChild(Node child);
 		// function
 		
-		//TEST_EventTarget::printEventTargetProperties(dynamic_cast<DKEventTarget&>(node));	//TODO: try to remove the need for dynamic_cast
 		TEST_EventTarget::printEventTargetProperties(node);
 	}
 

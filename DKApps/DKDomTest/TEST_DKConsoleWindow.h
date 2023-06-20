@@ -71,7 +71,6 @@ public:
 		//console.log("dkConsoleWindow.columns() = "	+toString(dkConsoleWindow.columns()));		// TODO
 		//console.log("dkConsoleWindow.rows() = "		+toString(dkConsoleWindow.rows()));			// TODO
 		
-		//TEST_Window::printWindowProperties(dynamic_cast<DKWindow&>(dkConsoleWindow));	//TODO: try to remove the need for dynamic_cast
 		TEST_Window::printWindowProperties(dkConsoleWindow);
 	}
 	

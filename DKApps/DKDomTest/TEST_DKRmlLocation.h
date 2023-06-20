@@ -30,7 +30,6 @@ public:
 		
 		console.log("dkRmlLocation = "				+toString(dkRmlLocation));
 		
-		//TEST_Location::printLocationProperties(dynamic_cast<DKLocation&>(dkRmlLocation));	//TODO: try to remove the need for dynamic_cast
 		TEST_Location::printLocationProperties(dkRmlLocation);
 	}
 };

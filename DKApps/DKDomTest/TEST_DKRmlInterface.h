@@ -27,7 +27,7 @@ public:
 	}
 	
 	static void printDKRmlInterfaceProperties(DKRmlInterface& dkRmlInterface){
-		//DKDEBUGFUNC(dkRmlInterface);
+		DKDEBUGFUNC(dkRmlInterface);
 		
 		console.log("dkRmlInterface = "				+toString(dkRmlInterface));
 		
