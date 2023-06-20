@@ -55,14 +55,14 @@ public:
 	
 	////// toString //////
 	operator std::string() const { return "[object Screen]"; }
-	//operator bool() const { return true; }
 };
+
 
 class DKNullScreen : public DKScreen
 {
 public:
 	operator std::string() const { return "null"; }
-	//operator bool() const { return false; }
 };
+
 
 #endif //DKScreen_H

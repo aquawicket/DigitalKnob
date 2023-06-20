@@ -147,7 +147,7 @@ public:
 	
 	
 	////// toString //////
-	virtual operator std::string() const { return "[object KeyboardEvent]"; }
+	operator std::string() const { return "[object KeyboardEvent]"; }
 };
 
 

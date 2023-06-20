@@ -185,7 +185,14 @@ public:
 	}
 	
 	////// toString //////
-	operator std::string() const { return "[object object]"; }
+	operator std::string() const { return "[object Object]"; }
+};
+
+
+class DKNullConsole : public DKConsole
+{
+public:
+	operator std::string() const { return "null"; }
 };
 
 

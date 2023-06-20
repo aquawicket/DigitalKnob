@@ -31,7 +31,7 @@ public:
 	
 	
 	////// toString //////
-	virtual operator std::string() const { return "[object DKDragEvent]"; }
+	operator std::string() const { return "[object DragEvent]"; }
 };
 
 

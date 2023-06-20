@@ -38,8 +38,16 @@ public:
 	
 	
 	////// toString //////
-	virtual operator std::string() const { return "[object CustomEvent]"; }	
+	operator std::string() const { return "[object CustomEvent]"; }	
 };
+
+/*
+class DKNullCustomEvent : public DKCustomEvent
+{
+public:
+	operator std::string() const { return "null"; }
+};
+*/
 
 
 #endif //DKCustomEvent_H

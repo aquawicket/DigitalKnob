@@ -58,7 +58,7 @@ public:
 	
 	
 	////// toString //////
-	virtual operator std::string() const { return "[object InputEvent]"; }
+	operator std::string() const { return "[object InputEvent]"; }
 };
 
 

@@ -52,7 +52,7 @@ public:
 	
 	
 	////// toString //////
-	virtual operator std::string() const { return "[object CompositionEvent]"; }
+	operator std::string() const { return "[object CompositionEvent]"; }
 };
 
 

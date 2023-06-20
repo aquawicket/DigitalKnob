@@ -175,7 +175,7 @@ public:
 	
 	
 	////// toString //////
-	virtual operator std::string() const { return "[object MouseEvent]"; }
+	operator std::string() const { return "[object MouseEvent]"; }
 };
 
 

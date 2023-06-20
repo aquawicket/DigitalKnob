@@ -66,7 +66,7 @@ public:
 	
 	
 	////// toString //////
-	virtual operator std::string() const { return "[object UIEvent]"; }
+	operator std::string() const { return "[object UIEvent]"; }
 };
 
 
