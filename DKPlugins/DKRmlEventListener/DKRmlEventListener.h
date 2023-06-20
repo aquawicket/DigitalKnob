@@ -8,9 +8,10 @@
 #include "DKEventListener/DKEventListener.h"
 #include "DKRmlInterface/DKRmlInterface.h"
 
-#include "DKMouseEvent/DKMouseEvent.h"
 //#include "DKRmlElement/DKRmlElement.h"
+#include "DKMouseEvent/DKMouseEvent.h"
 
+class DKRmlElement;
 
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // callback interface EventListener {
