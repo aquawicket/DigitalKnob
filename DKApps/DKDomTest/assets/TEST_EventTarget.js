@@ -3,5 +3,7 @@
 console.log("\n////// TEST_EventTarget.js //////")
 
 function printEventTargetProperties(eventtarget){
-	// TODO	
+	
+	console.log("eventtarget = "	+eventtarget);
+	
 }

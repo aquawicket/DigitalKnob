@@ -22,6 +22,7 @@ public:
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKDocument("+interfaceAddress+") \n");
 	}
+	//virtual ~DKDocument(){}
 	
 	// [SameObject] readonly attribute DOMImplementation implementation;
 	DKString _implementation = "";

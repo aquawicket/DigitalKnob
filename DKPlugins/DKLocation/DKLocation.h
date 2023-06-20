@@ -23,7 +23,7 @@ public:
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKLocation("+interfaceAddress+") \n");
 	}
-	virtual ~DKLocation() {}
+	virtual ~DKLocation(){}
 
 	// [LegacyUnforgeable] stringifier attribute USVString href;
 	USVString _href = "";
