@@ -333,8 +333,8 @@ public:
 	static int ownerDocument(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->ownerDocument((DKDocument*)addressToPointer(GetString(ctx)));
-		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->ownerDocument()));
+			eventTarget(ctx)->ownerDocument(*(DKDocument*)addressToPointer(GetString(ctx)));
+		dukglue_push(ctx, pointerToAddress(&eventTarget(ctx)->ownerDocument()));
 		return true;
 	}
 	

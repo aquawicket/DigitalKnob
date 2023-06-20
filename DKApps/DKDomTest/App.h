@@ -10,6 +10,7 @@
 //#include "TEST_Interface.h"				// TODO
 #include "TEST_Console.h"
 #include "TEST_Event.h"
+//#include "TEST_EventListener.h"
 #include "TEST_EventTarget.h"
 #include "TEST_CustomEvent.h"
 #include "TEST_Screen.h"
@@ -37,11 +38,14 @@
 #include "TEST_HTMLBodyElement.h"
 #include "TEST_HTMLImageElement.h"
 
+
 ////// DigitalKnob Interfaces //////
 #include "TEST_DKConsoleWindow.h"
 #include "TEST_DKSdlWindow.h"
+
 //#include "TEST_DKSdlRmlDocument.h"		// Mixin	// TODO
-#include "TEST_DKRmlInterface.h"
+//#include "TEST_DKRmlInterface.h"
+/*
 #include "TEST_DKRmlEventTarget.h"
 #include "TEST_DKRmlLocation.h"
 //#include "TEST_RmlCSSStyleDeclaration.h"	// TODO
@@ -49,7 +53,7 @@
 #include "TEST_DKRmlDocument.h"
 #include "TEST_DKRmlElement.h"
 #include "TEST_DKRmlHTMLElement.h"
-
+*/
 
 class App : public DKObjectT<App>
 {
@@ -59,8 +63,10 @@ public:
 	
 	std::unique_ptr<TEST_DKConsoleWindow> 			test_DKConsoleWindow;
 	std::unique_ptr<TEST_DKSdlWindow> 				test_DKSdlWindow;
+	
 	//std::unique_ptr<TEST_DKSdlRmlDocument> 		test_DKSdlRmlDocument;			// Mixin
-	std::unique_ptr<TEST_DKRmlInterface>			test_DKRmlInterface;
+	//std::unique_ptr<TEST_DKRmlInterface>			test_DKRmlInterface;
+	/*
 	std::unique_ptr<TEST_DKRmlEventTarget> 			test_DKRmlEventTarget;
 	std::unique_ptr<TEST_DKRmlLocation> 			test_DKRmlLocation;
 	//std::unique_ptr<TEST_RmlCSSStyleDeclaration>	test_RmlCSSStyleDeclaration;	// TODO
@@ -68,6 +74,7 @@ public:
 	std::unique_ptr<TEST_DKRmlDocument>				test_DKRmlDocument;
 	std::unique_ptr<TEST_DKRmlElement> 				test_DKRmlElement;
 	std::unique_ptr<TEST_DKRmlHTMLElement> 			test_DKRmlHTMLElement;
+	*/
 
 };
 REGISTER_OBJECT(App, true);

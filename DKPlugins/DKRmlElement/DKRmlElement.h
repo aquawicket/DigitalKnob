@@ -11,7 +11,7 @@
 
 // [Exposed=Window]
 // interface Element : Node {
-class DKRmlElement : public DKElement, public DKRmlNode  //, public DKRmlElementCSSInlineStyle
+class DKRmlElement : virtual public DKElement, public DKRmlNode  //, public DKRmlElementCSSInlineStyle
 {
 public:
 	static std::vector<DKRmlElement*> list;
