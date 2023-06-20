@@ -107,29 +107,27 @@ bool App::Init() {
 
 	// [DKRmlInterface]
 	test_DKRmlInterface = std::make_unique<TEST_DKRmlInterface>();
-	/*
 	
 	// [DKRmlEventListener]
-	test_DKRmlEventListener = std::make_unique<TEST_DKRmlEventListener>();
+	//test_DKRmlEventListener = std::make_unique<TEST_DKRmlEventListener>();
 	
 	// [DKRmlEventTarget]
 	test_DKRmlEventTarget = std::make_unique<TEST_DKRmlEventTarget>();
 	
 	// [DKRmlNode]
-	test_DKRmlNode = std::make_unique<TEST_DKRmlNode>();
+	//test_DKRmlNode = std::make_unique<TEST_DKRmlNode>();
 	
 	// [DKRmlDocument]
-	test_DKRmlDocument = std::make_unique<TEST_DKRmlDocument>();
+	//test_DKRmlDocument = std::make_unique<TEST_DKRmlDocument>();
 	
 	// [DKRmlLocation]
-	test_DKRmlLocation = std::make_unique<TEST_DKRmlLocation>();
+	//test_DKRmlLocation = std::make_unique<TEST_DKRmlLocation>();
 
 	// [DKRmlElement]
-	test_DKRmlElement = std::make_unique<TEST_DKRmlElement>();
+	//test_DKRmlElement = std::make_unique<TEST_DKRmlElement>();
 	
 	// [DKRmlHTMLElement]
-	test_DKRmlHTMLElement = std::make_unique<TEST_DKRmlHTMLElement>();
-	*/
+	//test_DKRmlHTMLElement = std::make_unique<TEST_DKRmlHTMLElement>();
 	
 	return true;
 }
