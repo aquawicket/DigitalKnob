@@ -5,7 +5,8 @@
 #define DKRmlEventTarget_H
 
 #include "DKEventTarget/DKEventTarget.h"
-#include "DKRmlInterface/DKRmlInterface.h"
+//#include "DKRmlInterface/DKRmlInterface.h"
+#include "DKRmlEventListener/DKRmlEventListener.h"
 
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // [Exposed=*]
