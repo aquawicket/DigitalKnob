@@ -46,6 +46,7 @@
 //#include "TEST_DKSdlRmlDocument.h"		// Mixin	// TODO
 #include "TEST_DKRmlInterface.h"
 /*
+#include "TEST_DKRmlEventListener.h"
 #include "TEST_DKRmlEventTarget.h"
 #include "TEST_DKRmlLocation.h"
 //#include "TEST_RmlCSSStyleDeclaration.h"	// TODO
@@ -67,6 +68,7 @@ public:
 	//std::unique_ptr<TEST_DKSdlRmlDocument> 		test_DKSdlRmlDocument;			// Mixin
 	std::unique_ptr<TEST_DKRmlInterface>			test_DKRmlInterface;
 	/*
+	std::unique_ptr<TEST_DKRmlEventListener> 		test_DKRmlEventListener;
 	std::unique_ptr<TEST_DKRmlEventTarget> 			test_DKRmlEventTarget;
 	std::unique_ptr<TEST_DKRmlLocation> 			test_DKRmlLocation;
 	//std::unique_ptr<TEST_RmlCSSStyleDeclaration>	test_RmlCSSStyleDeclaration;	// TODO
