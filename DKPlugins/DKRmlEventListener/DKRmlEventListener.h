@@ -7,8 +7,6 @@
 #include "DKEventListener/DKEventListener.h"
 #include "DKRmlInterface/DKRmlInterface.h"
 
-//typedef std::function<void(DKEvent&)> DKCallback;
-
 
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // callback interface EventListener {
@@ -32,7 +30,9 @@ public:
 	}
 	
 	// Rml::EventListener::ProcessEvent override
-	void ProcessEvent(Rml::Event& rmlEvent) override {}
+	void ProcessEvent(Rml::Event& rmlEvent) override {
+		DKINFO("DKRmlEventListener::ProcessEvent() \n");
+	}
 };
 
 
