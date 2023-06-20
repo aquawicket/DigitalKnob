@@ -303,6 +303,7 @@ public:
 //};
 	*/
 
+
 	////// toString //////
 	operator std::string() const { return "[object DKRmlElement]"; }
 };

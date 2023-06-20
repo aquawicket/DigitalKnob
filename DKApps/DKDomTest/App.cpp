@@ -133,10 +133,10 @@ bool App::Init() {
 	test_DKRmlElement = std::make_unique<TEST_DKRmlElement>();
 	
 	// [DKRmlDocument]
-	//test_DKRmlDocument = std::make_unique<TEST_DKRmlDocument>();
+	test_DKRmlDocument = std::make_unique<TEST_DKRmlDocument>();
 	
 	// [DKRmlHTMLElement]
-	//test_DKRmlHTMLElement = std::make_unique<TEST_DKRmlHTMLElement>();
+	test_DKRmlHTMLElement = std::make_unique<TEST_DKRmlHTMLElement>();
 	
 	return true;
 }

@@ -5,23 +5,33 @@
 #define DKRmlHTMLElement_H
 
 #include "DKHTMLElement/DKHTMLElement.h"
-#include "DKRmlInterface/DKRmlInterface.h"
+#include "DKRmlElement/DKRmlElement.h"
+#include "DKRmlEventListener/DKRmlEventListener.h"
 
 // [Exposed=Window]
 // interface HTMLElement : Element {
-class DKRmlHTMLElement : public DKHTMLElement
+class DKRmlHTMLElement : public DKHTMLElement, public DKRmlElement
 {
 public:
-	DKRmlInterface* _dkRmlInterface;
-	Rml::Element* _rmlElement;
+	DKRmlEventListener* _dkRmlEventListener;
+	
+	static std::vector<DKRmlHTMLElement*> list;
+	static DKRmlHTMLElement* instance(DKRmlEventListener* dkRmlEventListener, Rml::Element* rmlElement){
+		for(unsigned int i=0; i<list.size(); ++i){
+			if(rmlElement == list[i]->_rmlElement)
+				return list[i];
+		}
+		return new DKRmlHTMLElement(dkRmlEventListener, rmlElement);
+	}
 	
 	// [HTMLConstructor] constructor();
-	DKRmlHTMLElement(DKRmlInterface* dkRmlInterface, Rml::Element* rmlElement) : DKHTMLElement() {
+	DKRmlHTMLElement(DKRmlEventListener* dkRmlEventListener, Rml::Element* rmlElement) : DKHTMLElement(), DKRmlElement(dkRmlEventListener, rmlElement) {
 		DKDEBUGFUNC();
 		interfaceName = "DKRmlHTMLElement";
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKRmlHTMLElement("+interfaceAddress+") \n");
-		_dkRmlInterface = dkRmlInterface;
+		//_dkRmlInterface = dkRmlInterface;
+		_dkRmlEventListener = dkRmlEventListener;
 		_rmlElement = rmlElement;
 	}
 	
@@ -136,6 +146,10 @@ public:
 	// interface HTMLUnknownElement : HTMLElement {
 		// Note: intentionally no [HTMLConstructor]
 	// };
+	
+	
+	////// toString //////
+	operator std::string() const { return "[object DKRmlHTMLElement]"; }
 };
 
 
