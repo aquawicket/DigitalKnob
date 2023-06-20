@@ -16,7 +16,7 @@ public:
 		//DKDEBUGFUNC();
 		console.log("\n////// TEST_DKRmlDocument.h //////");
 		
-		dkRmlDocument = DKRmlDocument::instance(TEST_DKRmlInterface::dkRmlInterface);
+		dkRmlDocument = DKRmlDocument::instance(TEST_DKRmlInterface::dkRmlInterface, TEST_DKRmlEventListener::_dkRmlEventListener);
 		//dkRmlDocument = std::make_unique<DKRmlDocument>(TEST_DKRmlInterface::dkRmlInterface);
 		
 		//////////// TESTS ////////////

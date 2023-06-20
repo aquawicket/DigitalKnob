@@ -7,7 +7,7 @@
 // FIXME: Get the hierarchy in the right order
 
 ////// Standard Interfaces //////
-//#include "TEST_Interface.h"				// TODO
+//#include "TEST_Interface.h"					// TODO
 #include "TEST_Console.h"
 #include "TEST_Event.h"
 #include "TEST_EventListener.h"
@@ -29,11 +29,11 @@
 #include "TEST_Location.h"
 #include "TEST_CSSStyleDeclaration.h"
 #include "TEST_Node.h"
-//#include "TEST_NonElementParentNode.h"	// Mixin	// TODO
+//#include "TEST_NonElementParentNode.h"		// Mixin	// TODO
 #include "TEST_Document.h"
 #include "TEST_Element.h"
 #include "TEST_HTMLCollection.h"
-//#include "TEST_ElementCSSInlineStyle.h"	// Mixin	// TODO
+//#include "TEST_ElementCSSInlineStyle.h"		// Mixin	// TODO
 #include "TEST_HTMLElement.h"
 #include "TEST_HTMLBodyElement.h"
 #include "TEST_HTMLImageElement.h"
@@ -43,15 +43,16 @@
 #include "TEST_DKConsoleWindow.h"
 #include "TEST_DKSdlWindow.h"
 
-//#include "TEST_DKSdlRmlDocument.h"		// Mixin	// TODO
+//#include "TEST_DKSdlRmlDocument.h"			// Mixin	// TODO
 #include "TEST_DKRmlInterface.h"
 #include "TEST_DKRmlEventListener.h"
 #include "TEST_DKRmlEventTarget.h"
 #include "TEST_DKRmlLocation.h"
 #include "TEST_DKRmlCSSStyleDeclaration.h"
 #include "TEST_DKRmlNode.h"
-//#include "TEST_DKRmlDocument.h"
+//#include "TEST_DKRmlElementCSSInlineStyle.h"	// Mixin	// TODO
 //#include "TEST_DKRmlElement.h"
+//#include "TEST_DKRmlDocument.h"
 //#include "TEST_DKRmlHTMLElement.h"
 
 
@@ -61,19 +62,20 @@ public:
 	bool Init();
 	bool End();
 	
-	std::unique_ptr<TEST_DKConsoleWindow> 			test_DKConsoleWindow;
-	std::unique_ptr<TEST_DKSdlWindow> 				test_DKSdlWindow;
+	std::unique_ptr<TEST_DKConsoleWindow> 				test_DKConsoleWindow;
+	std::unique_ptr<TEST_DKSdlWindow> 					test_DKSdlWindow;
 	
-	//std::unique_ptr<TEST_DKSdlRmlDocument> 		test_DKSdlRmlDocument;			// Mixin
-	std::unique_ptr<TEST_DKRmlInterface>			test_DKRmlInterface;
-	std::unique_ptr<TEST_DKRmlEventListener> 		test_DKRmlEventListener;
-	std::unique_ptr<TEST_DKRmlEventTarget> 			test_DKRmlEventTarget;
-	std::unique_ptr<TEST_DKRmlLocation> 			test_DKRmlLocation;
-	std::unique_ptr<TEST_DKRmlCSSStyleDeclaration>	test_DKRmlCSSStyleDeclaration;
-	std::unique_ptr<TEST_DKRmlNode> 				test_DKRmlNode;
-	//std::unique_ptr<TEST_DKRmlDocument>			test_DKRmlDocument;
-	//std::unique_ptr<TEST_DKRmlElement> 			test_DKRmlElement;
-	//std::unique_ptr<TEST_DKRmlHTMLElement> 		test_DKRmlHTMLElement;
+	//std::unique_ptr<TEST_DKSdlRmlDocument> 			test_DKSdlRmlDocument;				// Mixin
+	std::unique_ptr<TEST_DKRmlInterface>				test_DKRmlInterface;
+	std::unique_ptr<TEST_DKRmlEventListener> 			test_DKRmlEventListener;
+	std::unique_ptr<TEST_DKRmlEventTarget> 				test_DKRmlEventTarget;
+	std::unique_ptr<TEST_DKRmlLocation> 				test_DKRmlLocation;
+	std::unique_ptr<TEST_DKRmlCSSStyleDeclaration>		test_DKRmlCSSStyleDeclaration;
+	std::unique_ptr<TEST_DKRmlNode> 					test_DKRmlNode;
+	//std::unique_ptr<TEST_DKRmlElementCSSInlineStyle>	test_DKRmlElementCSSInlineStyle;	// Mixin
+	//std::unique_ptr<TEST_DKRmlElement> 				test_DKRmlElement;
+	//std::unique_ptr<TEST_DKRmlDocument>				test_DKRmlDocument;
+	//std::unique_ptr<TEST_DKRmlHTMLElement> 			test_DKRmlHTMLElement;
 };
 REGISTER_OBJECT(App, true);
 

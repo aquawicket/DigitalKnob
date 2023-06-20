@@ -26,7 +26,7 @@ public:
 	static void printDKRmlNodeProperties(DKRmlNode& dkRmlNode){
 		DKDEBUGFUNC(dkRmlNode);
 		
-		console.log("dkRmlNode = "				+toString(dkRmlNode));
+		console.log("dkRmlNode = "		+toString(dkRmlNode));
 		
 		TEST_Node::printNodeProperties(dkRmlNode);
 	}

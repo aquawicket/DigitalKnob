@@ -106,7 +106,7 @@ bool App::Init() {
 	test_DKSdlWindow = std::make_unique<TEST_DKSdlWindow>();
 	
 	// [DKSdlRmlDocument]
-	//test_DKSdlRmlDocument = std::make_unique<TEST_DKSdlRmlDocument>();				// Mixin
+	//test_DKSdlRmlDocument = std::make_unique<TEST_DKSdlRmlDocument>();														// Mixin
 
 	// [DKRmlInterface]
 	test_DKRmlInterface = std::make_unique<TEST_DKRmlInterface>();
@@ -126,11 +126,14 @@ bool App::Init() {
 	// [DKRmlNode]
 	test_DKRmlNode = std::make_unique<TEST_DKRmlNode>();
 	
-	// [DKRmlDocument]
-	//test_DKRmlDocument = std::make_unique<TEST_DKRmlDocument>();
+	// [DKRmlElementCSSInlineStyle]
+	//test_DKRmlElementCSSInlineStyle = std::make_unique<TEST_DKRmlElementCSSInlineStyle>();									// Mixin
 	
 	// [DKRmlElement]
 	//test_DKRmlElement = std::make_unique<TEST_DKRmlElement>();
+	
+	// [DKRmlDocument]
+	//test_DKRmlDocument = std::make_unique<TEST_DKRmlDocument>();
 	
 	// [DKRmlHTMLElement]
 	//test_DKRmlHTMLElement = std::make_unique<TEST_DKRmlHTMLElement>();
