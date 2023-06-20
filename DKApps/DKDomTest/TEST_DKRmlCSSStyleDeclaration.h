@@ -4,17 +4,17 @@
 #ifndef TEST_DKRmlCSSStyleDeclaration_H
 #define TEST_DKRmlCSSStyleDeclaration_H
 
-#include "DKDKRmlCSSStyleDeclaration/DKDKRmlCSSStyleDeclaration.h"
+#include "DKRmlCSSStyleDeclaration/DKRmlCSSStyleDeclaration.h"
 
 
-class TEST_DKRmlCSSStyleDeclaration : public DKObjectT<TEST_DKRmlCSSStyleDeclaration>
+class TEST_DKRmlCSSStyleDeclaration //: public DKObjectT<TEST_DKRmlCSSStyleDeclaration>
 {
 public:
 	TEST_DKRmlCSSStyleDeclaration() {
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DKRmlCSSStyleDeclaration.h //////");
 		
-		DKRmlCSSStyleDeclaration dkRmlCSSStyleDeclaration;
+		DKRmlCSSStyleDeclaration dkRmlCSSStyleDeclaration(NULL);
 		printDKRmlCSSStyleDeclarationProperties(dkRmlCSSStyleDeclaration);
 	}
 	
@@ -27,7 +27,7 @@ public:
 	}
 	
 };
-REGISTER_OBJECT(TEST_DKRmlCSSStyleDeclaration, true);
+//REGISTER_OBJECT(TEST_DKRmlCSSStyleDeclaration, true);
 
 
 #endif //TEST_DKRmlCSSStyleDeclaration_H

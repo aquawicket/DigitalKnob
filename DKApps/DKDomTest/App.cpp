@@ -117,15 +117,18 @@ bool App::Init() {
 	// [DKRmlEventTarget]
 	test_DKRmlEventTarget = std::make_unique<TEST_DKRmlEventTarget>();
 	
+	// [DKRmlLocation]
+	test_DKRmlLocation = std::make_unique<TEST_DKRmlLocation>();
+	
+	// [DKRmlCSSStyleDeclaration]
+	test_DKRmlCSSStyleDeclaration = std::make_unique<TEST_DKRmlCSSStyleDeclaration>();
+	
 	// [DKRmlNode]
 	//test_DKRmlNode = std::make_unique<TEST_DKRmlNode>();
 	
 	// [DKRmlDocument]
 	//test_DKRmlDocument = std::make_unique<TEST_DKRmlDocument>();
 	
-	// [DKRmlLocation]
-	test_DKRmlLocation = std::make_unique<TEST_DKRmlLocation>();
-
 	// [DKRmlElement]
 	//test_DKRmlElement = std::make_unique<TEST_DKRmlElement>();
 	

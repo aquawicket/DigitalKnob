@@ -48,7 +48,7 @@
 #include "TEST_DKRmlEventListener.h"
 #include "TEST_DKRmlEventTarget.h"
 #include "TEST_DKRmlLocation.h"
-//#include "TEST_RmlCSSStyleDeclaration.h"	// TODO
+#include "TEST_DKRmlCSSStyleDeclaration.h"
 //#include "TEST_DKRmlNode.h"
 //#include "TEST_DKRmlDocument.h"
 //#include "TEST_DKRmlElement.h"
@@ -69,7 +69,7 @@ public:
 	std::unique_ptr<TEST_DKRmlEventListener> 		test_DKRmlEventListener;
 	std::unique_ptr<TEST_DKRmlEventTarget> 			test_DKRmlEventTarget;
 	std::unique_ptr<TEST_DKRmlLocation> 			test_DKRmlLocation;
-	//std::unique_ptr<TEST_RmlCSSStyleDeclaration>	test_RmlCSSStyleDeclaration;	// TODO
+	std::unique_ptr<TEST_DKRmlCSSStyleDeclaration>	test_DKRmlCSSStyleDeclaration;
 	//std::unique_ptr<TEST_DKRmlNode> 				test_DKRmlNode;
 	//std::unique_ptr<TEST_DKRmlDocument>			test_DKRmlDocument;
 	//std::unique_ptr<TEST_DKRmlElement> 			test_DKRmlElement;
