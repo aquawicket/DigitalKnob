@@ -18,6 +18,11 @@ public:
 		DKDuktape::AttachFunction("CPP_DKEventListenerDUK_constructor", 	DKEventListenerDUK::constructor); 
 		
 		// TODO
+		
+		////// Load .js files
+		DKClass::DKCreate("DKEventListener/DKEventListenerDUK.js");
+		
+		return true;
 	}
 	
 	static DKEventListener* eventListener(duk_context* ctx){
