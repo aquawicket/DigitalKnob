@@ -57,7 +57,6 @@ public:
 	
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DOMString type = duk_require_string(ctx, 0);
 		DKINFO("CPP_DKEventListenerDUK_constructor()\n");
 		DKEventListener* eventListener = new DKEventListener();
 		dukglue_push(ctx, pointerToAddress(eventListener));
