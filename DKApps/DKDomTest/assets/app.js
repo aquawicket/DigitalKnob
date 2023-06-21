@@ -158,8 +158,8 @@ CPP_DK_Create("TEST_DKRmlLocation.js");
 //CPP_DK_Create("TEST_DKRmlElement.js");
 
 // [DKRmlDocument]
-//CPP_DK_Create("DKRmlDocumentDUK");
-//CPP_DK_Create("TEST_DKRmlDocument.js");
+CPP_DK_Create("DKRmlDocumentDUK");
+CPP_DK_Create("TEST_DKRmlDocument.js");
 
 // [DKRmlHTMLElement]
 //CPP_DK_Create("DKRmlHTMLElementDUK");
