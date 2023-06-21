@@ -17,12 +17,12 @@ function onLoad(event){
 	//////////// Post processing <a href></a> hyperlinks ////////////
 	var aElements = dkRmlDocument.getElementsByTagName("a");
 	
-	if(aElements){
+	if(!aElements){
 		console.error("aElements invalid!");
 	}
 	else{
 		console.log("aElement.length() = "+aElements.length());
-		for(var int i=0; i<aElements.length(); ++i){
+		for(var i=0; i<aElements.length(); i++){
 			var item = aElements.item(i);
 			if (!item)
 				console.error("aElements.item(" + i + ") invalid!");
