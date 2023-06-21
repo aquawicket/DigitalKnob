@@ -91,12 +91,12 @@ public:
 	*/
 	
 	// readonly attribute Element? documentElement;
-	virtual DKElement* documentElement() override							{ 											// getter
+	virtual DKElement* documentElement() override { 																	// getter
 		DKDEBUGFUNC();
 		Rml::Element* element = _dkRmlInterface->document;
 		return DKRmlElement::instance(_dkRmlEventListener, element);
 	}				
-	virtual void documentElement(DKElement* documentElement) override		{ 											// setter
+	virtual void documentElement(DKElement* documentElement) override { 												// setter
 		DKDEBUGFUNC(documentElement);
 		DKTODO();
 	} 	

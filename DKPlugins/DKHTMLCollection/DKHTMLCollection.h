@@ -24,12 +24,12 @@ public:
 	}
 
 	// readonly attribute unsigned long length;
-	virtual const unsigned int length()				{		// getter
+	virtual const unsigned int length()	{					// getter
 		DKINFO("_element_list.size() = "+toString(_element_list.size())+"\n");
 		const unsigned int length = _element_list.size(); 
 		return length; 
 	}		
-	//virtual void length(const unsigned int& length)	{  } 	// setter	(readonly)
+	//virtual void length(const unsigned int& length) {} 	// setter	(readonly)
 	
 	// getter Element? item(unsigned long index);
 	virtual DKElement* item(const unsigned int& index){

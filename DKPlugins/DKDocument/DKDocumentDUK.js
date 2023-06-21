@@ -71,38 +71,33 @@ var Document = function Document(address) {
 	
 	// readonly attribute Element? documentElement;
 	Object.defineProperty(this, "documentElement", {
-        get: function documentElement()			{ return CPP_DKDocumentDUK_documentElement(this.address) },
+        get: function documentElement()			{ return new Element(CPP_DKDocumentDUK_documentElement(this.address)) },
 		//set: function documentElement(data)	{ return CPP_DKDocumentDUK_documentElement(this.address, data) },
     })
 	
 	// HTMLCollection getElementsByTagName(DOMString qualifiedName);
 	Document.prototype.getElementsByTagName = function getElementsByTagName(qualifiedName) {
-		CPP_DKDocumentDUK_getElementsByTagName(this.address, qualifiedName);
-		// TODO
+		return new HTMLCollection(CPP_DKDocumentDUK_getElementsByTagName(this.address, qualifiedName));
     }
 	
 	// HTMLCollection getElementsByTagNameNS(DOMString? namespace, DOMString localName);
 	Document.prototype.getElementsByTagNameNS = function getElementsByTagNameNS(namespace, localName) {
-		CPP_DKDocumentDUK_getElementsByTagNameNS(this.address, namespace, localName);
-		// TODO
+		return new HTMLCollection(CPP_DKDocumentDUK_getElementsByTagNameNS(this.address, namespace, localName));
     }
 	
 	// HTMLCollection getElementsByClassName(DOMString classNames);
 	Document.prototype.getElementsByClassName = function getElementsByClassName(classNames) {
-		CPP_DKDocumentDUK_getElementsByClassName(this.address, classNames);
-		// TODO
+		return new HTMLCollection(CPP_DKDocumentDUK_getElementsByClassName(this.address, classNames));
     }
 	
 	// [CEReactions, NewObject] Element createElement(DOMString localName, optional (DOMString or ElementCreationOptions) options = {});
 	Document.prototype.createElement = function createElement(localName, options) {
-		CPP_DKDocumentDUK_createElement(this.address, localName, options);
-		// TODO
+		return new Element(CPP_DKDocumentDUK_createElement(this.address, localName, options));
     }
 	
 	// [CEReactions, NewObject] Element createElementNS(DOMString? namespace, DOMString qualifiedName, optional (DOMString or ElementCreationOptions) options = {});
 	Document.prototype.createElementNS = function createElementNS(namespace, qualifiedName, options) {
-		CPP_DKDocumentDUK_createElementNS(this.address, namespace, qualifiedName, options);
-		// TODO
+		return new Element(CPP_DKDocumentDUK_createElementNS(this.address, namespace, qualifiedName, options));
     }
 	
 	// [NewObject] DocumentFragment createDocumentFragment();
@@ -137,14 +132,12 @@ var Document = function Document(address) {
 	
 	// [CEReactions, NewObject] Node importNode(Node node, optional boolean deep = false);
 	Document.prototype.importNode = function importNode(node, deep) {
-		CPP_DKDocumentDUK_importNode(this.address, node, deep);
-		// TODO
+		return new Node(CPP_DKDocumentDUK_importNode(this.address, node, deep));
     }
 	
 	// [CEReactions] Node adoptNode(Node node);
 	Document.prototype.adoptNode = function adoptNode(node) {
-		CPP_DKDocumentDUK_adoptNode(this.address, node);
-		// TODO
+		return new Node(CPP_DKDocumentDUK_adoptNode(this.address, node));
     }
 	
 	// [NewObject] Attr createAttribute(DOMString localName);
@@ -161,8 +154,7 @@ var Document = function Document(address) {
 	
 	// [NewObject] Event createEvent(DOMString interface); // legacy
 	Document.prototype.createEvent = function createEvent(interface) {
-		CPP_DKDocumentDUK_createEvent(this.address, interface);
-		// TODO
+		return new Event(CPP_DKDocumentDUK_createEvent(this.address, interface));
     }
 	
 	// [NewObject] Range createRange();

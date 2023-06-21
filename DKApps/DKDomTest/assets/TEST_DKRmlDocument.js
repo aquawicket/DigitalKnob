@@ -9,8 +9,21 @@ function printDKRmlDocumentProperties(dkRmlDocument){
 }
 
 
-const dkRmlDocument = new DKRmlDocument(dkRmlInterface, dkRmlEventListener);		// requires TEST_DKRmlInterface.js and TEST_DKRmlEventListener.js
+const dkRmlDocument = new DKRmlDocument(dkRmlInterface, dkRmlEventListener);	// requires TEST_DKRmlInterface.js and TEST_DKRmlEventListener.js
 
+var document = dkRmlDocument.documentElement;
+console.log("document = "+document);
+console.log("document.tagName = "+document.tagName);
+	
+	
+var aElements = dkRmlDocument.getElementsByTagName("a");
+if(!aElements)
+	console.error("aElements invalid!");
+console.log("aElements = "+aElements);
+console.log("aElements.length = "+aElements.length);
+
+
+/*
 function onLoad(event){
 	console.log("onLoad()");
 
@@ -38,6 +51,6 @@ function onLoad(event){
 dkRmlDocument.addEventListener('load', onLoad)		// FIXME
 const load_event = new Event("load", "");
 dkRmlDocument.dispatchEvent(load_event);
-
+*/
 printDKRmlDocumentProperties(dkRmlDocument);
 
