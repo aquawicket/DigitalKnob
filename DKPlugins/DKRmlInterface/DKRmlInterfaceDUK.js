@@ -4,10 +4,9 @@ var DKRmlInterface = function DKRmlInterface(window) {
 
 	//if(address)
 	//	this.address = address;
-	//if(!this.address)
-	//	this.address = CPP_DKRmlInterfaceDUK_constructor();
-
-	CPP_DKRmlInterfaceDUK_constructor(window.address);
+	if(!this.address)
+		this.address = CPP_DKRmlInterfaceDUK_constructor(window.address);
+	
 	
 	//// toString ////
 	if(this.toString() === "[object Object]")
