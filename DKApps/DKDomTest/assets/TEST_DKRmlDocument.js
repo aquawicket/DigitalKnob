@@ -2,7 +2,8 @@ console.log("\n////// TEST_DKRmlDocument.js //////")
 
 
 function printRmlDocumentProperties(rmlDocument){
-	// TODO
+	
+	console.log("rmlDocument = "		+rmlDocument);
 }
 
 
