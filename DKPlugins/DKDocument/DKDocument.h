@@ -76,7 +76,7 @@ public:
 	
 	// HTMLCollection getElementsByTagName(DOMString qualifiedName);
 	DKHTMLCollection* _getElementsByTagName = NULL;
-	virtual DKHTMLCollection* getElementsByTagName(const DOMString& qualifiedName){
+	virtual DKHTMLCollection* getElementsByTagName(const DOMString& qualifiedName) {
 		DKDEBUGFUNC(qualifiedName);
 		return _getElementsByTagName;
 	}

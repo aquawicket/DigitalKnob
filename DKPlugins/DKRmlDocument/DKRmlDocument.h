@@ -94,7 +94,7 @@ public:
 	virtual DKElement* documentElement() override { 																	// getter
 		DKDEBUGFUNC();
 		Rml::Element* element = _dkRmlInterface->document;
-		return DKRmlElement::instance(_dkRmlEventListener, element);
+		return (DKElement*)DKRmlElement::instance(_dkRmlEventListener, element);
 	}				
 	virtual void documentElement(DKElement* documentElement) override { 												// setter
 		DKDEBUGFUNC(documentElement);
