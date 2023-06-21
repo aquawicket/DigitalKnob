@@ -122,45 +122,45 @@ CPP_DK_Create("DKSdlWindowDUK");
 CPP_DK_Create("TEST_DKSdlWindow.js");
 
 // [DKSdlRmlDocument]
-CPP_DK_Create("DKSdlRmlDocumentDUK");
-CPP_DK_Create("TEST_DKSdlRmlDocument.js");
+//CPP_DK_Create("DKSdlRmlDocumentDUK");
+//CPP_DK_Create("TEST_DKSdlRmlDocument.js");
 
 // [DKRmlInterface]
-CPP_DK_Create("DKRmlInterfaceDUK");
-CPP_DK_Create("TEST_DKRmlInterface.js");
+//CPP_DK_Create("DKRmlInterfaceDUK");
+//CPP_DK_Create("TEST_DKRmlInterface.js");
 
 // [DKRmlEventListener]
-CPP_DK_Create("DKRmlEventListenerDUK");
-CPP_DK_Create("TEST_DKRmlEventListener.js");
+//CPP_DK_Create("DKRmlEventListenerDUK");
+//CPP_DK_Create("TEST_DKRmlEventListener.js");
 
 // [DKRmlEventTarget]
-CPP_DK_Create("DKRmlEventTargetDUK");
-CPP_DK_Create("TEST_DKRmlEventTarget.js");
+//CPP_DK_Create("DKRmlEventTargetDUK");
+//CPP_DK_Create("TEST_DKRmlEventTarget.js");
 
 // [DKRmlLocation]
 CPP_DK_Create("DKRmlLocationDUK");
 CPP_DK_Create("TEST_DKRmlLocation.js");
 
 // [DKRmlCSSStyleDeclaration]
-CPP_DK_Create("DKRmlCSSStyleDeclarationDUK");
-CPP_DK_Create("TEST_DKRmlCSSStyleDeclaration.js");
+//CPP_DK_Create("DKRmlCSSStyleDeclarationDUK");
+//CPP_DK_Create("TEST_DKRmlCSSStyleDeclaration.js");
 
 // [DKRmlNode]
-CPP_DK_Create("DKRmlNodeDUK");
-CPP_DK_Create("TEST_DKRmlNode.js");
+//CPP_DK_Create("DKRmlNodeDUK");
+//CPP_DK_Create("TEST_DKRmlNode.js");
 
 // [DKRmlElementCSSInlineStyle]
-CPP_DK_Create("DKRmlElementCSSInlineStyleDUK");
-CPP_DK_Create("TEST_DKRmlElementCSSInlineStyle.js");
+//CPP_DK_Create("DKRmlElementCSSInlineStyleDUK");
+//CPP_DK_Create("TEST_DKRmlElementCSSInlineStyle.js");
 
 // [DKRmlElement]
-CPP_DK_Create("DKRmlElementDUK");
-CPP_DK_Create("TEST_DKRmlElement.js");
+//CPP_DK_Create("DKRmlElementDUK");
+//CPP_DK_Create("TEST_DKRmlElement.js");
 
 // [DKRmlDocument]
-CPP_DK_Create("DKRmlDocumentDUK");
-CPP_DK_Create("TEST_DKRmlDocument.js");
+//CPP_DK_Create("DKRmlDocumentDUK");
+//CPP_DK_Create("TEST_DKRmlDocument.js");
 
 // [DKRmlHTMLElement]
-CPP_DK_Create("DKRmlHTMLElementDUK");
-CPP_DK_Create("TEST_DKRmlHTMLElement.js");
+//CPP_DK_Create("DKRmlHTMLElementDUK");
+//CPP_DK_Create("TEST_DKRmlHTMLElement.js");
