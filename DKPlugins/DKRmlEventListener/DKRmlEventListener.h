@@ -30,7 +30,7 @@ public:
 	}
 	
 	// Rml::EventListener::ProcessEvent override
-	void ProcessEvent(Rml::Event& rmlEvent) override
+	void ProcessEvent(Rml::Event& rmlEvent) override;
 };
 
 
