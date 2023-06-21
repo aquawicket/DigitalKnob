@@ -265,14 +265,28 @@ public:
 		DKDEBUGFUNC(selectors);
 		return _webkitMatchesSelector;
 	}
-  
-	// HTMLCollection getElementsByTagName(DOMString qualifiedName);
-	DKString _getElementsByTagName = "";
-	virtual const DKString& getElementsByTagName(const DOMString& qualifiedName) override {
+	*/
+	
+	// HTMLCollection getElementsByTagName(DOMString qualifiedName);	
+	virtual DKHTMLCollection* getElementsByTagName(const DOMString& qualifiedName) override {
 		DKDEBUGFUNC(qualifiedName);
-		return _getElementsByTagName;
+		Rml::ElementList elements;
+		_rmlElement->GetElementsByTagName(elements, qualifiedName.c_str());
+		if(elements.empty()){
+			DKERROR("elements.empty()\n");
+			return NULL;
+		}
+		std::vector<DKElement*>* element_list = new std::vector<DKElement*>;
+		for(unsigned int i=0; i<elements.size(); ++i){
+			element_list->push_back(DKRmlElement::instance(_dkRmlEventListener, elements[i]));
+		}
+		DKINFO("element_list->size() = "+toString(element_list->size())+"\n");
+		DKHTMLCollection* htmlCollection = new DKHTMLCollection(*element_list);	// FIXME: dangling pointer
+		DKINFO("htmlCollection->length() = "+toString(htmlCollection->length())+"\n");
+		return htmlCollection; 
 	}
 	
+	/*
 	// HTMLCollection getElementsByTagNameNS(DOMString? namespace, DOMString localName);
 	DKString _getElementsByTagNameNS = "";
 	virtual const DKString& getElementsByTagNameNS(const DOMString& _namespace, const DOMString& localName) override {

@@ -114,12 +114,12 @@ public:
 		for(unsigned int i=0; i<elements.size(); ++i){
 			element_list->push_back(DKRmlElement::instance(_dkRmlEventListener, elements[i]));
 		}
-		//DKINFO("element_list.size() = "+toString(element_list.size())+"\n");
 		DKINFO("element_list->size() = "+toString(element_list->size())+"\n");
 		DKHTMLCollection* htmlCollection = new DKHTMLCollection(*element_list);	// FIXME: dangling pointer
 		DKINFO("htmlCollection->length() = "+toString(htmlCollection->length())+"\n");
 		return htmlCollection; 
 	}
+	
 	/*
 	// HTMLCollection getElementsByTagNameNS(DOMString? namespace, DOMString localName);
 	DKString _getElementsByTagNameNS = "";
