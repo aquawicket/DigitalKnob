@@ -25,9 +25,11 @@ public:
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKINFO("CPP_DKRmlInterfaceDUK_constructor()\n");
-		DKRmlInterface* _dkRmlInterface = (DKRmlInterface*)DKClass::DKCreate("DKRmlInterface");
-		DKString eventTargetAddress = pointerToAddress(_dkRmlInterface);
-		duk_push_string(ctx, eventTargetAddress.c_str());	
+		DKString windowAddress = duk_require_string(ctx, 0);
+		DKWindow* window = (DKWindow*)addressToPointer(windowAddress);
+		DKRmlInterface* dkRmlInterface = new DKRmlInterface(window);
+		DKString dkRmlInterfaceAddress = pointerToAddress(dkRmlInterface);
+		duk_push_string(ctx, dkRmlInterfaceAddress.c_str());	
 		return true;
 	}
 	

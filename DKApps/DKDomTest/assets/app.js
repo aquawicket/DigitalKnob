@@ -78,7 +78,7 @@ CPP_DK_Create("TEST_CSSStyleDeclaration.js");
 CPP_DK_Create("DKNodeDUK");
 CPP_DK_Create("TEST_Node.js");
 
-// [NonElementParentNode]
+// [NonElementParentNode]							// Mixin
 //CPP_DK_Create("DKNonElementParentNodeDUK");
 //CPP_DK_Create("TEST_NonElementParentNode.js");
 
@@ -94,7 +94,7 @@ CPP_DK_Create("TEST_Element.js");
 CPP_DK_Create("DKHTMLCollectionDUK");
 CPP_DK_Create("TEST_HTMLCollection.js");
 
-// [ElementCSSInlineStyle]
+// [ElementCSSInlineStyle]							// Mixin
 //CPP_DK_Create("DKElementCSSInlineStyleDUK");
 //CPP_DK_Create("TEST_ElementCSSInlineStyle.js");
 
@@ -122,12 +122,12 @@ CPP_DK_Create("DKSdlWindowDUK");
 CPP_DK_Create("TEST_DKSdlWindow.js");
 
 // [DKSdlRmlDocument]
-//CPP_DK_Create("DKSdlRmlDocumentDUK");
+//CPP_DK_Create("DKSdlRmlDocumentDUK");				// Mixin
 //CPP_DK_Create("TEST_DKSdlRmlDocument.js");
 
 // [DKRmlInterface]
-//CPP_DK_Create("DKRmlInterfaceDUK");
-//CPP_DK_Create("TEST_DKRmlInterface.js");
+CPP_DK_Create("DKRmlInterfaceDUK");
+CPP_DK_Create("TEST_DKRmlInterface.js");
 
 // [DKRmlEventListener]
 //CPP_DK_Create("DKRmlEventListenerDUK");
