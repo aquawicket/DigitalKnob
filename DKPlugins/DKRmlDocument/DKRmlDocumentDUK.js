@@ -1,7 +1,7 @@
 
 var DKRmlDocument = function DKRmlDocument(dkRmlInterface, dkRmlEventListener) {
-	console.log("DKRmlLocation("+dkRmlInterface+","+dkRmlEventListener+")");
-	console.log("DKRmlLocation("+dkRmlInterface.address+","+dkRmlEventListener.address+")");
+	console.log("DKRmlDocument("+dkRmlInterface+","+dkRmlEventListener+")");
+	console.log("DKRmlDocument("+dkRmlInterface.address+","+dkRmlEventListener.address+")");
 
 	//if(address)
 	//	this.address = address;
