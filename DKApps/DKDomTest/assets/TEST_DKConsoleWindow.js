@@ -1,10 +1,10 @@
 console.log("\n////// TEST_DKConsoleWindow.js //////")
 
 function printConsoleWindowProperties(consolewindow){
-	console.log("consolewindow.columns = "	+consolewindow.columns);
-	console.log("consolewindow.rows = "		+consolewindow.rows);
+	//console.log("consolewindow.columns = "	+consolewindow.columns);	// TODO
+	//console.log("consolewindow.rows = "		+consolewindow.rows);		// TODO
 	
-	printWindowProperties(myConsoleWindow)	;		//requires TEST_Window.js
+	printWindowProperties(consolewindow);		//requires TEST_Window.js
 }
 
 

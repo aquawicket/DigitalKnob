@@ -9,15 +9,15 @@ class TEST_DKConsoleWindow //: public DKObjectT<TEST_DKConsoleWindow>
 {
 public:
 	//DKConsoleWindow dkConsoleWindow;					// goes out of scope
-	//DKConsoleWindow* dkConsoleWindow;					// dangling pointer
-	std::unique_ptr<DKConsoleWindow> dkConsoleWindow;
+	DKConsoleWindow* dkConsoleWindow;					// dangling pointer
+	//std::unique_ptr<DKConsoleWindow> dkConsoleWindow;
 
 	TEST_DKConsoleWindow(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DKConsoleWindow.h //////");
 		
-		//dkConsoleWindow = new DKConsoleWindow();
-		dkConsoleWindow = std::make_unique<DKConsoleWindow>();	
+		dkConsoleWindow = new DKConsoleWindow();
+		//dkConsoleWindow = std::make_unique<DKConsoleWindow>();	
 		
 		printDKConsoleWindowProperties(*dkConsoleWindow);
 		
@@ -62,7 +62,10 @@ public:
 		dkConsoleWindow->addEventListener("compositionupdate", 	&TEST_DKConsoleWindow::oncompositionupdate);
 		dkConsoleWindow->addEventListener("compositionend", 	&TEST_DKConsoleWindow::oncompositionend);
 	}
-
+	~TEST_DKConsoleWindow(){
+		delete dkConsoleWindow;
+	}
+	
 	static void printDKConsoleWindowProperties(DKConsoleWindow& dkConsoleWindow){
 		DKDEBUGFUNC(dkConsoleWindow);
 		

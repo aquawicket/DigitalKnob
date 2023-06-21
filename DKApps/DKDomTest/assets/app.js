@@ -114,8 +114,8 @@ CPP_DK_Create("TEST_HTMLImageElement.js");
 ////// DigitalKnob Interfaces //////
 
 // [DKConsoleWindow]
-CPP_DK_Create("DKConsoleWindowDUK");
-CPP_DK_Create("TEST_DKConsoleWindow.js");
+//CPP_DK_Create("DKConsoleWindowDUK");
+//CPP_DK_Create("TEST_DKConsoleWindow.js");
 
 // [DKSdlWindow]
 CPP_DK_Create("DKSdlWindowDUK");
