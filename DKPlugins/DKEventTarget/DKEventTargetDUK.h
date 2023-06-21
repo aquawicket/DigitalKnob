@@ -55,7 +55,7 @@ public:
 		DKString targetAddress = duk_require_string(ctx, 0);
 		DKString type = duk_require_string(ctx, 1);
 		duk_require_function(ctx, 2);
-		//DKINFO("DKEventTargetDUK::addEventListener("+targetAddress+", "+type+", callback)\n");
+		DKINFO("DKEventTargetDUK::addEventListener("+targetAddress+", "+type+", callback)\n");
 		
 		// store the js callback function
 		// How to persist Duktape/C arguments across calls
