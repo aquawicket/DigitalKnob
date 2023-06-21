@@ -40,8 +40,8 @@ public:
 		
 		
 		dkRmlDocument->addEventListener("load", &TEST_DKRmlDocument::onLoad);
-		//DKEvent load_event("load", "");
-		//dkRmlDocument->dispatchEvent(load_event);
+		DKEvent load_event("load", "");
+		dkRmlDocument->dispatchEvent(load_event);
 
 		printRmlDocumentProperties(*dkRmlDocument);
 	}
