@@ -8,10 +8,10 @@ CPP_DK_Create("TEST_Console.js");
 // [EventListener]
 // [EventTarget]
 CPP_DK_Create("DKEventDUK");
-//CPP_DK_Create("DKEventListenerDUK");
+CPP_DK_Create("DKEventListenerDUK");
 CPP_DK_Create("DKEventTargetDUK");
 CPP_DK_Create("TEST_Event.js");
-//CPP_DK_Create("TEST_EventListener.js");
+CPP_DK_Create("TEST_EventListener.js");
 CPP_DK_Create("TEST_EventTarget.js");
 
 // [CustomEvent]
