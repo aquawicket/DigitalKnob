@@ -71,7 +71,7 @@ CPP_DK_Create("DKLocationDUK");
 CPP_DK_Create("TEST_Location.js");
 
 // [CSSStyleDeclaration]
-//CPP_DK_Create("DKCSSStyleDeclarationDUK");
+CPP_DK_Create("DKCSSStyleDeclarationDUK");
 //CPP_DK_Create("TEST_CSSStyleDeclaration.js");
 
 // [Node]
