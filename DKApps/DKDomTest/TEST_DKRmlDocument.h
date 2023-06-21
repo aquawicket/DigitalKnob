@@ -39,11 +39,9 @@ public:
 		///////////////////////////////
 		
 		
-		//////////////////////////////////
 		dkRmlDocument->addEventListener("load", &TEST_DKRmlDocument::onLoad);
-		DKEvent load_event("load", "");
-		dkRmlDocument->dispatchEvent(load_event);
-		/////////////////////////////////
+		//DKEvent load_event("load", "");
+		//dkRmlDocument->dispatchEvent(load_event);
 
 		printRmlDocumentProperties(*dkRmlDocument);
 	}
@@ -81,7 +79,7 @@ public:
 		//console.log("onHyperlink()");
 		DKElement* target = dynamic_cast<DKElement*>(&event.target());
 		DOMString value = target->getAttribute("href");
-		TEST_DKRmlLocation::dkRmlLocation->href(value);
+		TEST_DKRmlLocation::_dkRmlLocation->href(value);
 	}
 	
 	static void printRmlDocumentProperties(DKRmlDocument& dkRmlDocument){

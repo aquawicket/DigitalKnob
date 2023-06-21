@@ -7,6 +7,7 @@
 
 #include "DKLocation/DKLocation.h"
 #include "DKRmlInterface/DKRmlInterface.h"
+#include "DKRmlEventListener/DKRmlEventListener.h"
 
 // Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
 // [Exposed=Window]
@@ -15,21 +16,20 @@ class DKRmlLocation : public DKLocation //, public DKObjectT<DKRmlLocation>
 {
 public:
 	static DKRmlInterface* _dkRmlInterface;
+	static DKRmlEventListener* _dkRmlEventListener;
 
-	DKRmlLocation(DKRmlInterface* dkRmlInterface) : DKLocation() {
+	DKRmlLocation(DKRmlInterface* dkRmlInterface, DKRmlEventListener* dkRmlEventListener) : DKLocation() {
 		DKDEBUGFUNC();
 		interfaceName = "RmlLocation";
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKRmlLocation("+interfaceAddress+") \n");
 		_dkRmlInterface = dkRmlInterface;
+		_dkRmlEventListener = dkRmlEventListener;
 	}
 	virtual ~DKRmlLocation() {}
 
 	// [LegacyUnforgeable] stringifier attribute USVString href;
-	virtual void href(const USVString& href) override { 	// setter
-		DKLocation::href(href);
-		_dkRmlInterface->LoadUrl(href);
-	} 	
+	virtual void href(const USVString& href) override;
 };
 //REGISTER_OBJECT(DKRmlLocation, true);
 
