@@ -9,14 +9,11 @@ function printDKRmlDocumentProperties(dkRmlDocument){
 }
 
 
-	
-	
 const dkRmlDocument = new DKRmlDocument(dkRmlInterface, dkRmlEventListener);		// requires TEST_DKRmlInterface.js and TEST_DKRmlEventListener.js
 
-/*
 function onLoad(event){
 	console.log("onLoad()");
-
+	/*
 	//////////// Post processing <a href></a> hyperlinks ////////////
 	DKHTMLCollection& aElements = *dkRmlDocument->getElementsByTagName("a");
 	if(!&aElements){
@@ -35,12 +32,12 @@ function onLoad(event){
 			}
 		}
 	}
+	*/
 	//printEventProperties(event)
 }
-dkRmlDocument.addEventListener('load', onLoad)
-const load_event = new Event("load", "");
-dkRmlDocument.dispatchEvent(load_event);
-*/
-		
+dkRmlDocument.addEventListener('load', onLoad)		// FIXME
+//const load_event = new Event("load", "");
+//dkRmlDocument.dispatchEvent(load_event);
+
 printDKRmlDocumentProperties(dkRmlDocument);
 
