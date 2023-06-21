@@ -13,27 +13,27 @@ const dkRmlDocument = new DKRmlDocument(dkRmlInterface, dkRmlEventListener);		//
 
 function onLoad(event){
 	console.log("onLoad()");
-	/*
+
 	//////////// Post processing <a href></a> hyperlinks ////////////
-	DKHTMLCollection& aElements = *dkRmlDocument->getElementsByTagName("a");
-	if(!&aElements){
+	var aElements = dkRmlDocument.getElementsByTagName("a");
+	
+	if(aElements){
 		console.error("aElements invalid!");
 	}
 	else{
-		//console.log("aElement.length() = "+toString(aElements.length()));
-		for(unsigned int i=0; i<aElements.length(); ++i){
-			DKElement& item = *aElements.item(i);
-			if (!&item)
-				console.error("aElements->item(" + toString(i) + ") invalid!");
+		console.log("aElement.length() = "+aElements.length());
+		for(var int i=0; i<aElements.length(); ++i){
+			var item = aElements.item(i);
+			if (!item)
+				console.error("aElements.item(" + i + ") invalid!");
 			if (item.hasAttribute("href")) {
-				item.style().setProperty("color", "rgb(0,0,255)");
-				item.style().setProperty("text-decoration", "underline");
-				item.addEventListener("click", &TEST_DKRmlDocument::onHyperlink);
+				item.style.setProperty("color", "rgb(0,0,255)");
+				item.style.setProperty("text-decoration", "underline");
+				//item.addEventListener("click", onHyperlink);
 			}
 		}
 	}
-	*/
-	//printEventProperties(event)
+	printEventProperties(event)
 }
 dkRmlDocument.addEventListener('load', onLoad)		// FIXME
 const load_event = new Event("load", "");
