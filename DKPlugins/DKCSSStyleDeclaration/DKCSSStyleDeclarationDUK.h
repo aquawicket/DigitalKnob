@@ -157,7 +157,7 @@ public:
 		return true;
 	}
 };
-REGISTER_OBJECT(DKCSSStyleDeclarationDUK_H, true)
+REGISTER_OBJECT(DKCSSStyleDeclarationDUK, true)
 
 
 #endif //DKCSSStyleDeclarationDUK_H

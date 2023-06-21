@@ -65,7 +65,7 @@ public:
 	// readonly attribute CSSRule? parentRule;
 	DKString _parentRule = "";
 	virtual const DKString& parentRule()					{ return _parentRule; }				// getter
-	virtual void cssFloat(const DKString& parentRule)		{ _parentRule = parentRule; } 		// setter
+	virtual void parentRule(const DKString& parentRule)		{ _parentRule = parentRule; } 		// setter
 	
 	// [CEReactions] attribute [LegacyNullToEmptyString] CSSOMString cssFloat;
 	CSSOMString _cssFloat = "";
