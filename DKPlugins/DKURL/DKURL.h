@@ -100,7 +100,7 @@ public:
 		DKTODO();
 		return _toJSON;
 	}
-// };	
+	// };	
 
 	// Source: File API (https://www.w3.org/TR/FileAPI/)
 	// [Exposed=(Window,DedicatedWorker,SharedWorker)]

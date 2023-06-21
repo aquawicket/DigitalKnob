@@ -8,26 +8,28 @@
 class TEST_URL //: public DKObjectT<TEST_URL>
 {
 public:
-	DKURL* dkUrl;
-	//std::unique_ptr<DKURL> dkUrl;
+	DKURL* _dkUrl;
 	
 	TEST_URL() {
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_URL.h //////");
 		
-		dkUrl = new DKURL("http://www.google.com");
+		_dkUrl = new DKURL("http://www.google.com");
 		
-		printURLProperties(*dkUrl);
+		printURLProperties(*_dkUrl);
 	}
 	
 	~TEST_URL() {
-		delete dkUrl;
+		delete _dkUrl;
 	}
 	
 	static void printURLProperties(DKURL& url){
 		DKDEBUGFUNC(url);
 		
 		console.log("url = "				+toString(url));
+		
+		// constructor(USVString url, optional USVString base);
+		// function
 		
 		// static boolean canParse(USVString url, optional USVString base);
 		// function
