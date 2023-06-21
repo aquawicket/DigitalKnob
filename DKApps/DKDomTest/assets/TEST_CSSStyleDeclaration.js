@@ -3,6 +3,10 @@
 console.log("\n////// TEST_CSSStyleDeclaration.js //////")
 
 
-function printCSSStyleDeclarationProperties(cssstyledeclaration){
-	console.log("cssstyledeclaration.??? = "		+cssstyledeclaration.???)
+function printCSSStyleDeclarationProperties(cssStyleDeclaration){
+	console.log("cssStyleDeclaration = "	+cssStyleDeclaration)
 }
+
+
+var cssStyleDeclaration = new CSSStyleDeclaration();
+printCSSStyleDeclarationProperties(cssStyleDeclaration);
