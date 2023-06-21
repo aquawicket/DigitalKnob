@@ -5,15 +5,13 @@ CPP_DK_Create("DKConsoleDUK");
 CPP_DK_Create("TEST_Console.js");
 
 // [Event]
-CPP_DK_Create("DKEventDUK");
-CPP_DK_Create("TEST_Event.js");
-
 // [EventListener]
-CPP_DK_Create("DKEventListenerDUK");
-CPP_DK_Create("TEST_EventListener.js");
-
 // [EventTarget]
+CPP_DK_Create("DKEventDUK");
+//CPP_DK_Create("DKEventListenerDUK");
 CPP_DK_Create("DKEventTargetDUK");
+CPP_DK_Create("TEST_Event.js");
+//CPP_DK_Create("TEST_EventListener.js");
 CPP_DK_Create("TEST_EventTarget.js");
 
 // [CustomEvent]
@@ -73,16 +71,16 @@ CPP_DK_Create("DKLocationDUK");
 CPP_DK_Create("TEST_Location.js");
 
 // [CSSStyleDeclaration]
-CPP_DK_Create("DKCSSStyleDeclarationDUK");
-CPP_DK_Create("TEST_CSSStyleDeclaration.js");
+//CPP_DK_Create("DKCSSStyleDeclarationDUK");
+//CPP_DK_Create("TEST_CSSStyleDeclaration.js");
 
 // [Node]
 CPP_DK_Create("DKNodeDUK");
 CPP_DK_Create("TEST_Node.js");
 
 // [NonElementParentNode]
-CPP_DK_Create("DKNonElementParentNodeDUK");
-CPP_DK_Create("TEST_NonElementParentNode.js");
+//CPP_DK_Create("DKNonElementParentNodeDUK");
+//CPP_DK_Create("TEST_NonElementParentNode.js");
 
 // [Document]
 CPP_DK_Create("DKDocumentDUK");
@@ -97,8 +95,8 @@ CPP_DK_Create("DKHTMLCollectionDUK");
 CPP_DK_Create("TEST_HTMLCollection.js");
 
 // [ElementCSSInlineStyle]
-CPP_DK_Create("DKElementCSSInlineStyleDUK");
-CPP_DK_Create("TEST_ElementCSSInlineStyle.js");
+//CPP_DK_Create("DKElementCSSInlineStyleDUK");
+//CPP_DK_Create("TEST_ElementCSSInlineStyle.js");
 
 // [HTMLElement]
 CPP_DK_Create("DKHTMLElementDUK");

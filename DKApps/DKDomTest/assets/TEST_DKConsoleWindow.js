@@ -58,7 +58,7 @@ function onauxclick(event){
 dkConsoleWindow.addEventListener('auxclick', onauxclick)
 // [click] https://developer.mozilla.org/en-US/docs/Web/API/Element/click_event
 function onclick(event){
-	console.log(\n "onclick("+event+")")
+	console.log("\n onclick("+event+")")
 	printMouseEventProperties(event)		//requires TEST_MouseEvent.js
 }
 dkConsoleWindow.addEventListener('click', onclick)
