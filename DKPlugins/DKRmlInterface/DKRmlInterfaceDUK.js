@@ -1,18 +1,17 @@
 
-var DKRmlInterface = function DKRmlInterface(address) {
-	console.log("DKRmlInterface("+address+")");
+var DKRmlInterface = function DKRmlInterface(window) {
+	console.log("DKRmlInterface("+window+")");
 
-	if(address)
-		this.address = address;
-	if(!this.address)
-		this.address = CPP_DKRmlInterfaceDUK_constructor();
-	
+	//if(address)
+	//	this.address = address;
+	//if(!this.address)
+	//	this.address = CPP_DKRmlInterfaceDUK_constructor();
+
+	CPP_DKRmlInterfaceDUK_constructor(window.address);
 	
 	//// toString ////
 	if(this.toString() === "[object Object]")
 		this.toString = function(){	return "[object DKRmlInterface]" }
 	
-	return Document.call(this, this.address)
-	
+	return this;
 }
-DKRmlInterface.prototype = Document.prototype;

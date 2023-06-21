@@ -9,15 +9,13 @@
 class TEST_DKRmlInterface //: public DKObjectT<TEST_DKRmlInterface>
 {
 public:
-	static DKRmlInterface* dkRmlInterface;				// must delete
-	//std::unique_ptr<DKRmlInterface> dkRmlInterface;
+	static DKRmlInterface* dkRmlInterface;
 	
 	TEST_DKRmlInterface() {
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DKRmlInterface.h //////");
 		
 		dkRmlInterface = new DKRmlInterface(TEST_DKSdlWindow::dkSdlWindow);
-		//dkRmlInterface = std::make_unique<DKRmlInterface>(TEST_DKSdlWindow::dkSdlWindow);	
 		
 		printDKRmlInterfaceProperties(*dkRmlInterface);
 	}
