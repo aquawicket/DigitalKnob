@@ -11,6 +11,6 @@ var DKRmlLocation = function DKRmlLocation(dkRmlInterface, dkRmlEventListener) {
 	if(this.toString() === "[object Object]")
 		this.toString = function(){	return "[object DKRmlLocation]" }
 	
-	return Location.call(this, this.address)
+	return Location.call(this, this.address);
 }
 DKRmlLocation.prototype = Location.prototype;

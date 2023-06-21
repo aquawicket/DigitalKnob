@@ -1,11 +1,11 @@
 console.log("\n////// TEST_DKRmlLocation.js //////")
 
 
-function printRmlLocationProperties(rmlLocation){
+function printRmlLocationProperties(dkRmlLocation){
 	
-	console.log("rmlLocation = "		+rmlLocation);
+	console.log("dkRmlLocation = "		+dkRmlLocation);
 	
-	printLocationProperties(rmlLocation)		//requires TEST_Location.js
+	printLocationProperties(dkRmlLocation)		//requires TEST_Location.js
 }
 
 
