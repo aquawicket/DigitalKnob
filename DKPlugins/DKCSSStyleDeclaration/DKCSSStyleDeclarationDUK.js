@@ -43,7 +43,7 @@ var CSSStyleDeclaration = function CSSStyleDeclaration(address) {
     }
 	
 	// [CEReactions] undefined setProperty(CSSOMString property, [LegacyNullToEmptyString] CSSOMString value, optional [LegacyNullToEmptyString] CSSOMString priority = "");
-	CSSStyleDeclaration.prototype.setProperty = function setProperty(property, value, priority = "") {
+	CSSStyleDeclaration.prototype.setProperty = function setProperty(property, value, priority) {
         CPP_DKCSSStyleDeclarationDUK_setProperty(this.address, property, value, priority);
     }
 	
