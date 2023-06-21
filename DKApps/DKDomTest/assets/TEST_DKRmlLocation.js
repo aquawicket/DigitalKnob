@@ -2,16 +2,19 @@ console.log("\n////// TEST_DKRmlLocation.js //////")
 
 
 function printRmlLocationProperties(rmlLocation){
-	// TODO
+	
+	console.log("rmlLocation = "		+rmlLocation);
+	
+	printLocationProperties(rmlLocation)		//requires TEST_Location.js
 }
 
 
-const myRmlLocation = new DKRmlLocation()
-printRmlLocationProperties(myRmlLocation)
-printLocationProperties(myRmlLocation)		//requires TEST_Location.js
+const dkRmlLocation = new DKRmlLocation(dkRmlInterface, dkRmlEventListener)		// requires TEST_DKRmlInterface.js and TEST_DKRmlEventListener.js
+printRmlLocationProperties(dkRmlLocation)
 
-console.log("myRmlLocation.href = " +myRmlLocation.href)
+
+console.log("dkRmlLocation.href = " +dkRmlLocation.href)
 //const url = CPP_DKAssets_LocalAssets()+"DKWebTest/index.html"
 const url = "DKWebTest/index.html"
 console.log("url = "+url)
-myRmlLocation.href = url;
+dkRmlLocation.href = url;

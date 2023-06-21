@@ -1,12 +1,11 @@
 
-var DKRmlLocation = function DKRmlLocation(address) {
-	console.log("DKRmlLocation("+address+")");
+var DKRmlLocation = function DKRmlLocation(dkRmlInterface, dkRmlEventListener) {
+	console.log("DKRmlLocation("+dkRmlInterface+","+dkRmlEventListener+")");
 
-	if(address)
-		this.address = address;
+	//if(address)
+	//	this.address = address;
 	if(!this.address)
-		this.address = CPP_DKRmlLocationDUK_constructor();
-	
+		this.address = CPP_DKRmlLocationDUK_constructor(dkRmlInterface.address, dkRmlEventListener.address);	
 	
 	//// toString ////
 	if(this.toString() === "[object Object]")
