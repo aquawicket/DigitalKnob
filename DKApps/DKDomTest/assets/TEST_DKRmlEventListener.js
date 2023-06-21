@@ -9,5 +9,5 @@ function printDKRmlEventListenerProperties(dkRmlEventListener){
 }
 
 
-const dkRmlEventListener = new DKRmlEventListener(dkRmlInterface, dkRmlEventListener)		// requires TEST_DKRmlInterface.js and TEST_DKRmlEventListener.js
-printRmlLocationProperties(dkRmlEventListener)
+const dkRmlEventListener = new DKRmlEventListener()
+printDKRmlEventListenerProperties(dkRmlEventListener)

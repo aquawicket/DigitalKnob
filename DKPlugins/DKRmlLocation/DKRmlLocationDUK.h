@@ -27,11 +27,11 @@ public:
 	////// Constructor //////
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKINFO("CPP_DKRmlLocationDUK_constructor()\n");
 		DKString dkRmlInterfaceAddress = duk_require_string(ctx, 0);
 		DKRmlInterface* dkRmlInterface = (DKRmlInterface*)addressToPointer(dkRmlInterfaceAddress);
 		DKString dkRmlEventListenerAddress = duk_require_string(ctx, 1);
 		DKRmlEventListener* dkRmlEventListener = (DKRmlEventListener*)addressToPointer(dkRmlEventListenerAddress);
+		DKINFO("CPP_DKRmlLocationDUK_constructor("+dkRmlInterfaceAddress+","+dkRmlEventListenerAddress+")\n");
 		DKRmlLocation* dkRmlLocation = new DKRmlLocation(dkRmlInterface, dkRmlEventListener);
 		DKString dkRmlLocationAddress = pointerToAddress(dkRmlLocation);
 		duk_push_string(ctx, dkRmlLocationAddress.c_str());	
