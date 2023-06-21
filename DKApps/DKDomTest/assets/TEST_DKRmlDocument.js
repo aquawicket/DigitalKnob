@@ -21,8 +21,8 @@ function onLoad(event){
 		console.error("aElements invalid!");
 	}
 	else{
-		console.log("aElement.length() = "+aElements.length());
-		for(var i=0; i<aElements.length(); i++){
+		console.log("aElement.length = "+aElements.length);
+		for(var i=0; i<aElements.length; i++){
 			var item = aElements.item(i);
 			if (!item)
 				console.error("aElements.item(" + i + ") invalid!");
