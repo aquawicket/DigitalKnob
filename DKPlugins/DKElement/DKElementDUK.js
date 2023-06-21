@@ -168,7 +168,7 @@ var Element = function Element(address) {
 	
 	// Element? closest(DOMString selectors);
 	Element.prototype.closest = function closest(selectors) {
-        return CPP_DKElementDUK_closest(this.address, selectors);
+        return new Element(CPP_DKElementDUK_closest(this.address, selectors));
     }
 	
 	// boolean matches(DOMString selectors);
@@ -183,22 +183,22 @@ var Element = function Element(address) {
 	
 	// HTMLCollection getElementsByTagName(DOMString qualifiedName);
 	Element.prototype.getElementsByTagName = function getElementsByTagName(qualifiedName) {
-        return CPP_DKElementDUK_getElementsByTagName(this.address, qualifiedName);
+        return new HTMLCollection(CPP_DKElementDUK_getElementsByTagName(this.address, qualifiedName));
     }
 	
 	// HTMLCollection getElementsByTagNameNS(DOMString? namespace, DOMString localName);
 	Element.prototype.getElementsByTagNameNS = function getElementsByTagNameNS(namespace, localName) {
-        return CPP_DKElementDUK_getElementsByTagNameNS(this.address, namespace, localName);
+        return new HTMLCollection(CPP_DKElementDUK_getElementsByTagNameNS(this.address, namespace, localName));
     }
 	
 	// HTMLCollection getElementsByClassName(DOMString classNames);
 	Element.prototype.getElementsByClassName = function getElementsByClassName(classNames) {
-        return CPP_DKElementDUK_getElementsByClassName(this.address, classNames);
+        return new HTMLCollection(CPP_DKElementDUK_getElementsByClassName(this.address, classNames));
     }
 	
 	// [CEReactions] Element? insertAdjacentElement(DOMString where, Element element); // legacy
 	Element.prototype.insertAdjacentElement = function insertAdjacentElement(where, element) {
-        return CPP_DKElementDUK_insertAdjacentElement(this.address, where, element);
+        return new Element(CPP_DKElementDUK_insertAdjacentElement(this.address, where, element));
     }
 	
 	// undefined insertAdjacentText(DOMString where, DOMString data); // legacy

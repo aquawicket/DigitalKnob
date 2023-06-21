@@ -385,7 +385,10 @@ public:
 	// HTMLCollection getElementsByTagName(DOMString qualifiedName);
 	static int getElementsByTagName(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		return DKTODO();
+		DKString qualifiedName = GetString(ctx);
+		DKHTMLCollection* _getElementsByTagName = eventTarget(ctx)->getElementsByTagName(qualifiedName);
+		dukglue_push(ctx, pointerToAddress(_getElementsByTagName));	
+		return true;
 	}
 	
 	// HTMLCollection getElementsByTagNameNS(DOMString? namespace, DOMString localName);
