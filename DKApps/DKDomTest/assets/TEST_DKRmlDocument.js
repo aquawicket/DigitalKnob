@@ -36,8 +36,8 @@ function onLoad(event){
 	//printEventProperties(event)
 }
 dkRmlDocument.addEventListener('load', onLoad)		// FIXME
-//const load_event = new Event("load", "");
-//dkRmlDocument.dispatchEvent(load_event);
+const load_event = new Event("load", "");
+dkRmlDocument.dispatchEvent(load_event);
 
 printDKRmlDocumentProperties(dkRmlDocument);
 
