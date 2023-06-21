@@ -5,7 +5,7 @@ var DKRmlEventListener = function DKRmlEventListener(dkRmlInterface, dkRmlEventL
 	//if(address)
 	//	this.address = address;
 	if(!this.address)
-		this.address = CPP_DKRmlEventListenerDUK_constructor(dkRmlInterface.address, dkRmlEventListener.address);	
+		this.address = CPP_DKRmlEventListenerDUK_constructor(dkRmlInterface.address, dkRmlEventListener.address);
 	
 	//// toString ////
 	if(this.toString() === "[object Object]")
