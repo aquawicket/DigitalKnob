@@ -110,7 +110,6 @@ CPP_DK_Create("TEST_HTMLBodyElement.js");
 CPP_DK_Create("DKHTMLImageElementDUK");
 CPP_DK_Create("TEST_HTMLImageElement.js");
 
-
 ////// DigitalKnob Interfaces //////
 
 // [DKConsoleWindow]
@@ -128,7 +127,7 @@ CPP_DK_Create("TEST_DKSdlWindow.js");
 // [DKRmlInterface]
 CPP_DK_Create("DKRmlInterfaceDUK");
 CPP_DK_Create("TEST_DKRmlInterface.js");
-
+/*
 // [DKRmlEventListener]
 CPP_DK_Create("DKRmlEventListenerDUK");
 CPP_DK_Create("TEST_DKRmlEventListener.js");
@@ -164,3 +163,4 @@ CPP_DK_Create("TEST_DKRmlDocument.js");
 // [DKRmlHTMLElement]
 //CPP_DK_Create("DKRmlHTMLElementDUK");
 //CPP_DK_Create("TEST_DKRmlHTMLElement.js");
+*/
