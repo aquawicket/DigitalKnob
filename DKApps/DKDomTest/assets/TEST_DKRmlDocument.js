@@ -20,7 +20,7 @@ var aElements = dkRmlDocument.getElementsByTagName("a");
 if(!aElements)
 	console.error("aElements invalid!");
 console.log("aElements = "+aElements);
-console.log("aElements.length = "+aElements.length);
+//console.log("aElements.length = "+aElements.length);
 
 
 /*
