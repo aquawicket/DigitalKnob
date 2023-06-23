@@ -88,7 +88,7 @@ WARNING_ENABLE
 class DKLog {
 public:
 	static bool Clear(int& rtnvalue);
-	static bool Log(const char* file, int line, const char* func, const DKString& input, const int lvl = DK_INFO, const unsigned short color_override = 0/*, const bool rtnval = true*/);
+	static bool Log(const char* file, const int line, const char* func, const DKString& input, const int lvl = DK_INFO, const unsigned short color_override = 0/*, const bool rtnval = true*/);
 	static bool SetLog(const int lvl, const DKString& text);
 	static bool log_assert;
 	static bool log_fatal;
@@ -189,7 +189,7 @@ void getTemplateArgs(std::ostringstream& out, DKStringArray& name_array, const A
 }
 
 template <typename... Args>
-void DebugFunc(const char* file, int line, const char* func, const DKString& names, Args&&... args){
+void DebugFunc(const char* file, const int line, const char* func, const DKString& names, Args&&... args){
 	if (!DKUtil::InMainThread())
 		return;
 	if(DKLog::log_show.empty() && !DKLog::log_debug)
@@ -211,7 +211,7 @@ void DebugFunc(const char* file, int line, const char* func, const DKString& nam
 }
 
 template <typename... Args>
-bool DebugReturn(const char* file, int line, const char* func, const DKString& names, Args&&... args){
+bool DebugReturn(const char* file, const int line, const char* func, const DKString& names, Args&&... args){
 	if (1) //FIXME: DebugReturn() - Currently disabled
 		return true;
 	if (!DKUtil::InMainThread())
@@ -273,7 +273,7 @@ void signal_handler(int signal);
 class logy {
 public:
 	template <typename... Args>
-	logy(const char* file, int line, const char* func, const DKString& names, Args&&... args) : file(file), line(line), func(func), names(names), /*args(args...),*/ start_time(clock()){
+	logy(const char* file, const int line, const char* func, const DKString& names, Args&&... args) : file(file), line(line), func(func), names(names), /*args(args...),*/ start_time(clock()){
 		count++;
 		if (!DKUtil::InMainThread())
 			return;
