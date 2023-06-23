@@ -12,7 +12,7 @@ public:
 	DKRmlInterface* 		dkRmlInterfaceA;
 	DKRmlEventListener* 	dkRmlEventListenerA;
 	static DKRmlLocation*	dkRmlLocationA;
-	DKRmlDocument*			dkRmlDocumentA;
+	static DKRmlDocument*	dkRmlDocumentA;
 	
 	//DKSdlWindow* 			dkSdlWindowB;
 	//DKRmlInterface* 		dkRmlInterfaceB;
@@ -92,5 +92,6 @@ public:
 //REGISTER_OBJECT(TEST_Multiple, true);
 
 DKRmlLocation*	TEST_Multiple::dkRmlLocationA;
+DKRmlDocument*	TEST_Multiple::dkRmlDocumentA;
 
 #endif //TEST_Multiple_H
