@@ -66,14 +66,16 @@ public:
 	DKSdlWindow* dkSdlWindow;
 	
 #	if USE_DKSDLRMLRENDERER
-		DKSdlRmlRenderer* Renderer;
+		static DKSdlRmlRenderer* Renderer;
 #	elif USE_DKSDLRMLOPENGL
 		DKSdlRmlOpenGL* Renderer;
 #	elif USE_DKSDLRMLSHELL
 		ShellRenderInterfaceOpenGL* Renderer;
 #	endif
 
-	RmlSDL2SystemInterface* SystemInterface;
+	static RmlSDL2SystemInterface* SystemInterface;
+
+	static bool rml_render_interface_set;
 };
 
 

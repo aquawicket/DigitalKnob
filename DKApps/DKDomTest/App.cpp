@@ -5,7 +5,7 @@
 ///////////////////////////////////////
 bool App::Init() {
 	DKDEBUGFUNC();
-
+	
 //#if HAVE_DKDuktape
 //	DKINFO("Using Javascript Dom Tests \n");
 //#else
@@ -142,7 +142,6 @@ bool App::Init() {
 	// [DKRmlHTMLElement]
 	test_DKRmlHTMLElement = std::make_unique<TEST_DKRmlHTMLElement>();
 //#endif //!HAVE_DKDuktape	
-
 	return true;
 }
 

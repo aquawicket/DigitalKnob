@@ -49,112 +49,131 @@ WARNING_ENABLE
 
 #include "DKRmlInterface/DKRmlConverter.h"
 
-//#include "DKRmlDocument/DKRmlDocument.h"
-//#include "DKRmlElement/DKRmlElement.h"
-//#include "DKMouseEvent/DKMouseEvent.h"
-
 #define DRAG_FIX 1
 
 
 DKRmlFile* 	DKRmlInterface::dkRmlFile = nullptr;
 DKString 	DKRmlInterface::workingPath;
+bool		DKRmlInterface::dkSdlRmlDocument_initialized = false;
+bool		DKRmlInterface::rml_initialized = false;
+bool		DKRmlInterface::rml_debugger_initialized = false;
+bool		DKRmlInterface::rml_properties_registered = false;
 
 
 DKRmlInterface::DKRmlInterface(DKWindow* window) : DKInterface() {
 	DKDEBUGFUNC();
 	interfaceName = "DKRmlInterface";
 	interfaceAddress = pointerToAddress(this);
-	DKINFO("DKRmlInterface("+interfaceAddress+") \n");
-	
-	DKINFO("DKRmlInterface("+window->interfaceName+") \n");	
-	
+	DKINFO("DKRmlInterface(" + interfaceAddress + ") \n");
+
+	DKINFO("DKRmlInterface(" + window->interfaceName + ") \n");
+
 	//document = NULL;
-	
-	if(!dkRmlFile){ 
+
+	if (!dkRmlFile) {
 		dkRmlFile = new DKRmlFile();
 		Rml::SetFileInterface(dkRmlFile);
 	}
 
 	//Create DKSdlRml or DKOsgRml
-	
-	if(same(window->interfaceName, "SdlWindow")){
-		DKSdlRmlDocument* dkSdlRmlDocument = new DKSdlRmlDocument(dynamic_cast<DKSdlWindow*>(window), this);
+
+	if (same(window->interfaceName, "SdlWindow")) {
+		if (!dkSdlRmlDocument_initialized) {
+			DKSdlRmlDocument* dkSdlRmlDocument = new DKSdlRmlDocument(dynamic_cast<DKSdlWindow*>(window), this);
+			dkSdlRmlDocument_initialized = true;
+		}
 	}
-	else if(same(window->interfaceName, "OsgWindow")){
+	else if (same(window->interfaceName, "OsgWindow")) {
 		//DKOsgRml* dkOsgRml = new DKOsgRml(dynamic_cast<DKOsgWindow*>(window), this);	// TODO
 	}
-	else{
+	else {
 		DKERROR("No registered window found \n");
 		return;
 	}
-	
-	if(!Rml::Initialise()){
-		DKERROR("Rml::Initialise(): failed \n");
-		return;
+
+	if (!rml_initialized) {
+		if (!Rml::Initialise()) {
+			DKERROR("Rml::Initialise(): failed \n");
+			return;
+		}
+		rml_initialized = true;
 	}
 		
 	int w = window->outerWidth();
 	int h = window->outerHeight();
-	context = Rml::CreateContext("default", Rml::Vector2i(w, h));
-		
-#ifdef HAVE_rmlui_debugger
-	if (!Rml::Debugger::Initialise(context)){
-		DKERROR("Rml::Debugger::Initialise(): failed\n");
+	//context = Rml::CreateContext("default", Rml::Vector2i(w, h));
+	context = Rml::CreateContext(interfaceAddress, Rml::Vector2i(w, h));
+
+	if (!context) {
+		DKERROR("context is invalid! \n");
 		return;
 	}
+		
+#ifdef HAVE_rmlui_debugger
+	if (!rml_debugger_initialized) {
+		if (!Rml::Debugger::Initialise(context)) {
+			DKERROR("Rml::Debugger::Initialise(): failed\n");
+			return;
+		}
+		rml_debugger_initialized = true;
+	}
 #endif
-	//Add missing stylesheet properties to silence warnings
-	//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/background-repeat
-	Rml::StyleSheetSpecification::RegisterProperty("background-repeat", "repeat", false)
-		.AddParser("keyword", "repeat, space, round, no-repeat")
-		.AddParser("string")
-		.GetId();
-	//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/border-style
-	Rml::StyleSheetSpecification::RegisterProperty("border-style", "none", false)
-		.AddParser("keyword", "none, hidden")
-		.AddParser("string")
-		.GetId();
-	//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-type
-	Rml::StyleSheetSpecification::RegisterProperty("list-style-type", "none", false)
-		.AddParser("keyword", "none")
-		.AddParser("string")
-		.GetId();
-	//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/user-select
-	Rml::StyleSheetSpecification::RegisterProperty("-webkit-user-select", "none", false)
-		.AddParser("keyword", "none")
-		.AddParser("string")
-		.GetId();
-	//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/user-select
-	Rml::StyleSheetSpecification::RegisterProperty("-moz-user-select", "none", false)
-		.AddParser("keyword", "none")
-		.AddParser("string")
-		.GetId();
-	//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/user-select
-	Rml::StyleSheetSpecification::RegisterProperty("-ms-user-select", "none", false)
-		.AddParser("keyword", "none")
-		.AddParser("string")
-		.GetId();
-	//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/user-select
-	Rml::StyleSheetSpecification::RegisterProperty("user-select", "none", false)
-		.AddParser("keyword", "none")
-		.AddParser("string")
-		.GetId();
-	//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/content
-	Rml::StyleSheetSpecification::RegisterProperty("content", "none", false)
-		.AddParser("keyword", "none")
-		.AddParser("string")
-		.GetId();
-	//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/transform
-	Rml::StyleSheetSpecification::RegisterProperty("-webkit-transform", "none", false)
-		.AddParser("keyword", "none")
-		.AddParser("string")
-		.GetId();
-	//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/transform
-	Rml::StyleSheetSpecification::RegisterProperty("-ms-transform", "none", false)
-		.AddParser("keyword", "none")
-		.AddParser("string")
-		.GetId();
 
+	if (!rml_properties_registered) {
+		//Add missing stylesheet properties to silence warnings
+		//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/background-repeat
+		Rml::StyleSheetSpecification::RegisterProperty("background-repeat", "repeat", false)
+			.AddParser("keyword", "repeat, space, round, no-repeat")
+			.AddParser("string")
+			.GetId();
+		//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/border-style
+		Rml::StyleSheetSpecification::RegisterProperty("border-style", "none", false)
+			.AddParser("keyword", "none, hidden")
+			.AddParser("string")
+			.GetId();
+		//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-type
+		Rml::StyleSheetSpecification::RegisterProperty("list-style-type", "none", false)
+			.AddParser("keyword", "none")
+			.AddParser("string")
+			.GetId();
+		//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/user-select
+		Rml::StyleSheetSpecification::RegisterProperty("-webkit-user-select", "none", false)
+			.AddParser("keyword", "none")
+			.AddParser("string")
+			.GetId();
+		//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/user-select
+		Rml::StyleSheetSpecification::RegisterProperty("-moz-user-select", "none", false)
+			.AddParser("keyword", "none")
+			.AddParser("string")
+			.GetId();
+		//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/user-select
+		Rml::StyleSheetSpecification::RegisterProperty("-ms-user-select", "none", false)
+			.AddParser("keyword", "none")
+			.AddParser("string")
+			.GetId();
+		//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/user-select
+		Rml::StyleSheetSpecification::RegisterProperty("user-select", "none", false)
+			.AddParser("keyword", "none")
+			.AddParser("string")
+			.GetId();
+		//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/content
+		Rml::StyleSheetSpecification::RegisterProperty("content", "none", false)
+			.AddParser("keyword", "none")
+			.AddParser("string")
+			.GetId();
+		//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/transform
+		Rml::StyleSheetSpecification::RegisterProperty("-webkit-transform", "none", false)
+			.AddParser("keyword", "none")
+			.AddParser("string")
+			.GetId();
+		//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/transform
+		Rml::StyleSheetSpecification::RegisterProperty("-ms-transform", "none", false)
+			.AddParser("keyword", "none")
+			.AddParser("string")
+			.GetId();
+
+		rml_properties_registered = true;
+	}
 
 	context->SetDocumentsBaseTag("html");
 	DKString rmlFonts = DKFile::local_assets+"DKRmlInterface";

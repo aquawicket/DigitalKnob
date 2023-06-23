@@ -32,6 +32,9 @@ WARNING_DISABLE
 #include "SDL.h"
 WARNING_ENABLE
 
+bool DKSdlRmlDocument::rml_render_interface_set = false;
+DKSdlRmlRenderer* DKSdlRmlDocument::Renderer;
+RmlSDL2SystemInterface* DKSdlRmlDocument::SystemInterface;
 
 //bool DKSdlRmlDocument::Init(){
 DKSdlRmlDocument::DKSdlRmlDocument(DKSdlWindow* _dkSdlWindow, DKRmlInterface* _dkRmlInterface) {
@@ -43,20 +46,26 @@ DKSdlRmlDocument::DKSdlRmlDocument(DKSdlWindow* _dkSdlWindow, DKRmlInterface* _d
 	dkSdlWindow = _dkSdlWindow;
 	//dkRmlInterface = DKRmlInterface::Instance("DKRmlInterface0");
 	dkRmlInterface = _dkRmlInterface;
-	if(!dkSdlWindow || !dkRmlInterface){
+	if (!dkSdlWindow || !dkRmlInterface) {
 		DKERROR("DKSdlRmlDocument::Init(): INVALID OBJECTS\n");
 		return;
 	}
+	if (!rml_render_interface_set) {
 #ifdef USE_DKSDLRMLRENDERER
-	Renderer = new DKSdlRmlRenderer(dkSdlWindow->renderer, dkSdlWindow->_window);
+		Renderer = new DKSdlRmlRenderer(dkSdlWindow->renderer, dkSdlWindow->_window);
 #elif USE_DKSDLRMLOPENGL
-	Renderer = new DKSdlRmlOpenGL(dkSdlWindow->renderer, dkSdlWindow->_window);
+		Renderer = new DKSdlRmlOpenGL(dkSdlWindow->renderer, dkSdlWindow->_window);
 #elif USE_DKSDLRMLSHELL
-	Renderer = new ShellRenderInterfaceOpenGL();
+		Renderer = new ShellRenderInterfaceOpenGL();
 #endif
+
+		Rml::SetRenderInterface(Renderer);
+		rml_render_interface_set = true;
+	}
+	
 	SystemInterface = new RmlSDL2SystemInterface();
-	Rml::SetRenderInterface(Renderer);
-    Rml::SetSystemInterface(SystemInterface);
+	Rml::SetSystemInterface(SystemInterface);	
+	
 	DKSdlWindow::AddEventFunc(&DKSdlRmlDocument::Handle, this);
 	DKSdlWindow::AddRenderFunc(&DKSdlRmlDocument::Render, this);
 	DKSdlWindow::AddUpdateFunc(&DKSdlRmlDocument::Update, this);
