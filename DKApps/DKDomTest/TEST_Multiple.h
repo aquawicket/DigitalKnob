@@ -8,11 +8,11 @@
 class TEST_Multiple //: public DKObjectT<TEST_Multiple>
 {
 public:
-	DKSdlWindow* 		dkSdlWindowA;
-	DKRmlInterface* 	dkRmlInterfaceA;
-	DKRmlEventListener* dkRmlEventListenerA;
-	DKRmlLocation*		dkRmlLocationA;
-	DKRmlDocument*		dkRmlDocumentA;
+	DKSdlWindow* 			dkSdlWindowA;
+	DKRmlInterface* 		dkRmlInterfaceA;
+	DKRmlEventListener* 	dkRmlEventListenerA;
+	static DKRmlLocation*	dkRmlLocationA;
+	DKRmlDocument*			dkRmlDocumentA;
 	
 	//DKSdlWindow* 			dkSdlWindowB;
 	//DKRmlInterface* 		dkRmlInterfaceB;
@@ -61,20 +61,21 @@ public:
 		console.log("onLoad()");
 		
 		//////////// Post processing <a href></a> hyperlinks ////////////
-		DKHTMLCollection& aElements = *dkRmlDocumentA->getElementsByTagName("a");
-		if(!&aElements){
+		DKDocument* document = dynamic_cast<DKDocument*>(&event.target());
+		DKHTMLCollection* aElements = document->getElementsByTagName("a");
+		if(!aElements){
 			console.error("aElements invalid!");
 		}
 		else{
-			//console.log("aElement.length() = "+toString(aElements.length()));
-			for(unsigned int i=0; i<aElements.length(); ++i){
-				DKElement& item = *aElements.item(i);
-				if (!&item)
+			//console.log("aElement->length() = "+toString(aElements->length()));
+			for(unsigned int i=0; i<aElements->length(); ++i){
+				DKElement* item = aElements->item(i);
+				if (!item)
 					console.error("aElements->item(" + toString(i) + ") invalid!");
-				if (item.hasAttribute("href")) {
-					item.style().setProperty("color", "rgb(0,0,255)");
-					item.style().setProperty("text-decoration", "underline");
-					item.addEventListener("click", &TEST_Multiple::onHyperlink);
+				if (item->hasAttribute("href")) {
+					item->style().setProperty("color", "rgb(0,0,255)");
+					item->style().setProperty("text-decoration", "underline");
+					item->addEventListener("click", &TEST_Multiple::onHyperlink);
 				}
 			}
 		}
@@ -85,10 +86,11 @@ public:
 		console.log("onHyperlink()");
 		DKElement* target = dynamic_cast<DKElement*>(&event.target());
 		DOMString value = target->getAttribute("href");
-		dkRmlLocationA->href(value);
+		TEST_Multiple::dkRmlLocationA->href(value);
 	}
 };
 //REGISTER_OBJECT(TEST_Multiple, true);
 
+DKRmlLocation*	TEST_Multiple::dkRmlLocationA;
 
 #endif //TEST_Multiple_H
