@@ -19,7 +19,7 @@ public:
 		dkSdlWindowB = new DKSdlWindow();
 	}
 	
-	~TEST_DKSdlWindow(){
+	~TEST_Multiple(){
 		delete dkSdlWindowA;
 		delete dkSdlWindowB;
 	}
