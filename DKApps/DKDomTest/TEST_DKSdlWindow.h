@@ -8,7 +8,6 @@
 class TEST_DKSdlWindow //: public DKObjectT<TEST_DKSdlWindow>
 {
 public:
-	//DKSdlWindow dkSdlWindow;							// goes out of scope
 	static DKSdlWindow* dkSdlWindow;
 	//static std::unique_ptr<DKSdlWindow> dkSdlWindow;
 	//static std::shared_ptr<DKSdlWindow> dkSdlWindow;

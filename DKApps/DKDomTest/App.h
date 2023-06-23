@@ -56,12 +56,18 @@
 #include "TEST_DKRmlHTMLElement.h"
 
 
+////// DigitalKnob Tests //////
+#include "TEST_Multiple.h"
+
+
 class App : public DKObjectT<App>
 {
 public:
 	bool Init();
 	bool End();
 	
+	////// DigitalKnob Interfaces //////
+	/*
 	std::unique_ptr<TEST_DKConsoleWindow> 				test_DKConsoleWindow;
 	std::unique_ptr<TEST_DKSdlWindow> 					test_DKSdlWindow;
 	
@@ -76,6 +82,11 @@ public:
 	std::unique_ptr<TEST_DKRmlElement> 					test_DKRmlElement;
 	std::unique_ptr<TEST_DKRmlDocument>					test_DKRmlDocument;
 	std::unique_ptr<TEST_DKRmlHTMLElement> 				test_DKRmlHTMLElement;
+	*/
+	
+	
+	////// DigitalKnob Tests //////
+	std::unique_ptr<TEST_Multiple> 						test_Multiple;
 };
 REGISTER_OBJECT(App, true);
 
