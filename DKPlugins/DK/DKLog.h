@@ -125,7 +125,7 @@ template<typename S, typename T>
 struct is_streamable<S, T, decltype(std::declval<S&>() << std::declval<T&>(), void())> : std::true_type {};
 
 template<typename T, typename std::enable_if<is_streamable<std::ostream, T>::value>::type* = nullptr>
-void printVariable(const DKString& name, T t, std::ostringstream& out){
+void printVariable(const DKString& name, T& t, std::ostringstream& out){
 	DKString type = "";
 	DKString constant = "";
 	std::ostringstream value;
