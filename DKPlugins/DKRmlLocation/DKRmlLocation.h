@@ -15,8 +15,8 @@
 class DKRmlLocation : public DKLocation //, public DKObjectT<DKRmlLocation>
 {
 public:
-	static DKRmlInterface* _dkRmlInterface;
-	static DKRmlEventListener* _dkRmlEventListener;
+	DKRmlInterface* _dkRmlInterface = nullptr;
+	DKRmlEventListener* _dkRmlEventListener = nullptr;
 
 	DKRmlLocation(DKRmlInterface* dkRmlInterface, DKRmlEventListener* dkRmlEventListener) : DKLocation() {
 		DKDEBUGFUNC();

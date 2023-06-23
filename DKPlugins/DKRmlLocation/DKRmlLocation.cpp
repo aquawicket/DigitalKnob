@@ -1,9 +1,6 @@
 #include "DKRmlLocation/DKRmlLocation.h"
 #include "DKRmlDocument/DKRmlDocument.h"
 
-DKRmlInterface* DKRmlLocation::_dkRmlInterface = nullptr;
-DKRmlEventListener* DKRmlLocation::_dkRmlEventListener = nullptr;
-
 // [LegacyUnforgeable] stringifier attribute USVString href;
 void DKRmlLocation::href(const USVString& href) { 	// setter
 	DKLocation::href(href);
