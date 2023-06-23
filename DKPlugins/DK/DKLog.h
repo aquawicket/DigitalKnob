@@ -152,7 +152,7 @@ void printVariable(const DKString& name, T t, std::ostringstream& out){
 }
 
 template<typename T, typename std::enable_if<!is_streamable<std::ostream, T>::value>::type* = nullptr>
-void printVariable(const DKString& name, T t, std::ostringstream& out){
+void printVariable(const DKString& name, T& t, std::ostringstream& out){
 	DKString type = "";
 	DKString constant = "";
 	std::ostringstream value;
@@ -178,7 +178,7 @@ void getTemplateArgs(std::ostringstream& out);
 void getTemplateArgs(std::ostringstream& out, DKStringArray& name_array);
 
 template <typename A, typename... Args>
-void getTemplateArgs(std::ostringstream& out, DKStringArray& name_array, A arg1, Args&&... args){
+void getTemplateArgs(std::ostringstream& out, DKStringArray& name_array, A& arg1, Args&&... args) {
 	printVariable(name_array[0], arg1, out); //use first name element
 	name_array.erase(name_array.begin()); //remove first name element
 	int arg_count = sizeof...(Args);

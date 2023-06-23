@@ -34,6 +34,6 @@ public:
 };
 //REGISTER_OBJECT(TEST_DKRmlInterface, true);
 
-DKRmlInterface* TEST_DKRmlInterface::dkRmlInterface;
+DKRmlInterface* TEST_DKRmlInterface::dkRmlInterface = nullptr;
 
 #endif //TEST_DKRmlInterface_H

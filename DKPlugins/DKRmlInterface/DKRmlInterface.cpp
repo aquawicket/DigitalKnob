@@ -248,6 +248,7 @@ bool DKRmlInterface::LoadHtml(const DKString& html){
 	document = context->CreateDocument("html");
 	Rml::Element* ele = document;
 
+	/*
 	//Create DOM javascript instance of the document using the documents element address
 	//DKClass::DKCreate("DKDom");
 	DKString rval;
@@ -255,6 +256,7 @@ bool DKRmlInterface::LoadHtml(const DKString& html){
 	#if HAVE_DKDuktape
 		DKDuktape::RunDuktape("var document = new Document(\"" + document_address + "\");", rval);
 	#endif
+	*/
 	
 	Rml::XMLParser parser(ele);
 	parser.Parse(stream.get());

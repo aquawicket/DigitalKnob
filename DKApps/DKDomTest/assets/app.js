@@ -1,3 +1,4 @@
+/*
 ////// Standard Interfaces //////
 
 // [Console]
@@ -123,7 +124,7 @@ CPP_DK_Create("TEST_DKSdlWindow.js");
 // [DKSdlRmlDocument]
 //CPP_DK_Create("DKSdlRmlDocumentDUK");				// Mixin
 //CPP_DK_Create("TEST_DKSdlRmlDocument.js");
-/*
+
 // [DKRmlInterface]
 CPP_DK_Create("DKRmlInterfaceDUK");
 CPP_DK_Create("TEST_DKRmlInterface.js");
