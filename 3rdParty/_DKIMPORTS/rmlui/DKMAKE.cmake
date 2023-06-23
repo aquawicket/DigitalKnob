@@ -10,7 +10,7 @@ dk_depend(glew)
 #dk_depend(lua)
 dk_depend(sdl)
 dk_depend(sdl_image)
-dk_depend(sfml)
+#dk_depend(sfml)
 
 
 ### IMPORT ###
