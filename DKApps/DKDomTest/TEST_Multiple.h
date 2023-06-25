@@ -31,8 +31,6 @@ public:
 		dkRmlLocationA->href("DKWebTest/index.html");
 		dkRmlDocumentA = 		DKRmlDocument::instance(dkRmlInterfaceA, dkRmlEventListenerA);
 		dkRmlDocumentA->addEventListener("load", &TEST_Multiple::onLoad);
-		DKEvent load_event("load", "");
-		dkRmlDocumentA->dispatchEvent(load_event);
 		
 		dkSdlWindowB = 			new DKSdlWindow();
 		dkRmlInterfaceB = 		new DKRmlInterface(dkSdlWindowB);
@@ -40,6 +38,11 @@ public:
 		dkRmlLocationB = 		new DKRmlLocation(dkRmlInterfaceB, dkRmlEventListenerB);
 		dkRmlLocationB->href("DKWebTest/blank.html");
 		dkRmlDocumentB = 		DKRmlDocument::instance(dkRmlInterfaceB, dkRmlEventListenerB);
+		dkRmlDocumentB->addEventListener("load", &TEST_Multiple::onLoad);
+		
+		DKEvent load_event("load", "");
+		dkRmlDocumentA->dispatchEvent(load_event);
+		dkRmlDocumentB->dispatchEvent(load_event);
 	}
 	
 	~TEST_Multiple(){
@@ -87,6 +90,7 @@ public:
 		DKElement* target = dynamic_cast<DKElement*>(&event.target());
 		DOMString value = target->getAttribute("href");
 		TEST_Multiple::dkRmlLocationA->href(value);
+		TEST_Multiple::dkRmlLocationB->href(value);
 	}
 };
 //REGISTER_OBJECT(TEST_Multiple, true);

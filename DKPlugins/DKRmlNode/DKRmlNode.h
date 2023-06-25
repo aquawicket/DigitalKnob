@@ -110,12 +110,22 @@ public:
 	bool _isConnected = false;
 	virtual const bool& isConnected() override								{ return _isConnected; }				// getter
 	virtual void isConnected(const bool& isConnected) override				{ _isConnected = isConnected; } 		// setter
+	*/
 	
 	// readonly attribute Document? ownerDocument;
-	DKString _ownerDocument = "";
-	virtual const DKString& ownerDocument() override						{ return _ownerDocument; }				// getter
-	virtual void ownerDocument(const DKString& ownerDocument) override		{ _ownerDocument = ownerDocument; }	 	// setter
+	//DKString _ownerDocument = "";
+	virtual DKDocument* ownerDocument() override { 																// getter
+		if(!_rmlElement){
+			DKERROR("_rmlElement invalid! \n");
+			return _ownerDocument;
+		}
+		Rml::ElementDocument* rmlElementDocument = _rmlElement->GetOwnerDocument();
+		//_ownerDocument = DKRmlDocument::instance(_dkRmlEventListener, rmlElementDocument);	//FIXME
+		return _ownerDocument; 
+	}
+	//virtual void ownerDocument(DKDocument* ownerDocument) override	{ _ownerDocument = ownerDocument; }	 	// setter
 	
+	/*
 	// Node getRootNode(optional GetRootNodeOptions options = {});
 	DKString _getRootNode = "";
 	virtual const DKString& getRootNode(const DKString& options = "{}") override {

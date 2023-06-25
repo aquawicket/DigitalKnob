@@ -105,8 +105,8 @@ public:
 	
 	// readonly attribute Document? ownerDocument;
 	DKDocument* _ownerDocument = NULL;
-	virtual DKDocument& ownerDocument()								{ return *_ownerDocument; }				// getter
-	virtual void ownerDocument(DKDocument& ownerDocument)			{ _ownerDocument = &ownerDocument; }	// setter
+	virtual DKDocument* ownerDocument()								{ return _ownerDocument; }				// getter
+	virtual void ownerDocument(DKDocument* ownerDocument)			{ _ownerDocument = ownerDocument; }		// setter
 	
 	// Node getRootNode(optional GetRootNodeOptions options = {});
 	DKNode* _getRootNode = NULL;
