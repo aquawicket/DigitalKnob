@@ -17,8 +17,8 @@ public:
 	DKSdlWindow* 			dkSdlWindowB;
 	DKRmlInterface* 		dkRmlInterfaceB;
 	DKRmlEventListener* 	dkRmlEventListenerB;
-	DKRmlLocation*			dkRmlLocationB;
-	DKRmlDocument*			dkRmlDocumentB;
+	static DKRmlLocation*	dkRmlLocationB;
+	static DKRmlDocument*	dkRmlDocumentB;
 
 	TEST_Multiple(){
 		DKDEBUGFUNC();
@@ -97,5 +97,8 @@ public:
 
 DKRmlLocation*	TEST_Multiple::dkRmlLocationA;
 DKRmlDocument*	TEST_Multiple::dkRmlDocumentA;
+
+DKRmlLocation*	TEST_Multiple::dkRmlLocationB;
+DKRmlDocument*	TEST_Multiple::dkRmlDocumentB;
 
 #endif //TEST_Multiple_H
