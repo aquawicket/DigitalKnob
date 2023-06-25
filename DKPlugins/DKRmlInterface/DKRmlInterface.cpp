@@ -58,7 +58,7 @@ bool		DKRmlInterface::dkSdlRmlDocument_initialized = false;
 bool		DKRmlInterface::rml_initialized = false;
 bool		DKRmlInterface::rml_debugger_initialized = false;
 bool		DKRmlInterface::rml_properties_registered = false;
-
+Rml::ElementInstancer* DKRmlInterface::original_body_instancer = nullptr;
 
 DKRmlInterface::DKRmlInterface(DKWindow* window) : DKInterface() {
 	DKDEBUGFUNC();
@@ -101,8 +101,16 @@ DKRmlInterface::DKRmlInterface(DKWindow* window) : DKInterface() {
 		
 	int w = window->outerWidth();
 	int h = window->outerHeight();
+	
+	// Store the body element instancer
+	if(!original_body_instancer)
+		original_body_instancer = Rml::Factory::GetElementInstancer("body");
+	if(!original_body_instancer)
+		DKERROR("original_body_instancer invalid! \n");
+	Rml::Factory::RegisterElementInstancer("body", original_body_instancer);
+	
 	context = Rml::CreateContext(interfaceAddress, Rml::Vector2i(w, h));
-	//contextB = Rml::CreateContext("contextB", Rml::Vector2i(w, h));
+	//
 
 	if (!context) {
 		DKERROR("context is invalid! \n");
@@ -118,7 +126,7 @@ DKRmlInterface::DKRmlInterface(DKWindow* window) : DKInterface() {
 		rml_debugger_initialized = true;
 	}
 #endif
-
+	
 	if (!rml_properties_registered) {
 		//Add missing stylesheet properties to silence warnings
 		//TODO - https://developer.mozilla.org/en-US/docs/Web/CSS/background-repeat
@@ -174,7 +182,7 @@ DKRmlInterface::DKRmlInterface(DKWindow* window) : DKInterface() {
 
 		rml_properties_registered = true;
 	}
-
+	
 	context->SetDocumentsBaseTag("html");
 	DKString rmlFonts = DKFile::local_assets+"DKRmlInterface";
 	LoadFonts(rmlFonts);
@@ -182,12 +190,23 @@ DKRmlInterface::DKRmlInterface(DKWindow* window) : DKInterface() {
 	//DKEvents::AddRegisterEventFunc(&DKRmlInterface::RegisterEvent, this);
 	//DKEvents::AddUnegisterEventFunc(&DKRmlInterface::UnregisterEvent, this);
 	//DKEvents::AddSendEventFunc(&DKRmlInterface::SendEvent, this);
+	
+	
 	Rml::Factory::RegisterElementInstancer("html", new Rml::ElementInstancerGeneric<Rml::ElementDocument>);
 	Rml::XMLParser::RegisterNodeHandler("html", std::make_shared<Rml::XMLNodeHandlerBody>());
 	Rml::XMLParser::RegisterNodeHandler("head", std::make_shared<HeadInstancer>());
+	
+	//////////////////////////////////////////////////////////////////////////////////////////
+	
+	//contextB = Rml::CreateContext("contextB", Rml::Vector2i(w, h)); 	// WORKS
 	Rml::Factory::RegisterElementInstancer("body", new Rml::ElementInstancerElement);
+	//contextB = Rml::CreateContext("contextB", Rml::Vector2i(w, h));	// BROKEN
+	
+	////////////////////////////////////////////////////////////////////////////////////////////
+	
 	Rml::XMLParser::RegisterNodeHandler("body", std::make_shared<Rml::XMLNodeHandlerDefault>());
 	
+
 	// Make sure custom_instancer is kept alive until after the call to Rml::Shutdown
 	//auto custom_instancer = std::make_unique< Rml::ElementInstancerGeneric< CustomElement > >();
 	//Rml::Factory::RegisterElementInstancer("custom", custom_instancer.get());
