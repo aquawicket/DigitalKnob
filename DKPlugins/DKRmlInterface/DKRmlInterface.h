@@ -70,7 +70,7 @@ public:
 	static DKString workingPath; //FIXME: make un-static
 	Rml::Context* context = nullptr;
 	Rml::ElementDocument* document = nullptr;
-	static DKRmlFile* dkRmlFile;
+	DKRmlFile* dkRmlFile = nullptr;
 	Rml::Element* hover = nullptr;
 	//DKRmlConverter dkRmlConverter;
 

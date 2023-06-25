@@ -126,7 +126,7 @@ void DKSdlRmlRenderer::EnableScissorRegion(bool enable) {
     if (enable)
        SDL_RenderSetClipRect(mSdlRenderer, &mScisorRect);
     else
-        SDL_RenderSetClipRect(mSdlRenderer, NULL);
+       SDL_RenderSetClipRect(mSdlRenderer, NULL);
 }
 
 // Called by RmlUi when it wants to change the scissor region.		
@@ -144,8 +144,8 @@ void DKSdlRmlRenderer::SetScissorRegion(int x, int y, int width, int height){
 bool DKSdlRmlRenderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vector2i& texture_dimensions, const Rml::String& source){
     DKDEBUGFUNC(texture_handle, texture_dimensions, source);
     
-	if(LoadGifAnimation(mSdlRenderer, source, texture_handle, texture_dimensions))
-        return true;
+	//if(LoadGifAnimation(mSdlRenderer, source, texture_handle, texture_dimensions))
+    //    return true;
     
 	/*
     //CEF Texture

@@ -193,6 +193,6 @@ void DKSdlRmlDocument::Update(){
 	if(!DKApp::active)
 		return;
 	
-	Renderer->setWindow(dkSdlWindow->renderer, dkSdlWindow->_window);
+	//Renderer->setWindow(dkSdlWindow->renderer, dkSdlWindow->_window);
 	dkRmlInterface->context->Update();
 }

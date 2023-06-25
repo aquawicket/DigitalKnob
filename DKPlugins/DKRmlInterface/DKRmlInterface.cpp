@@ -52,7 +52,6 @@ WARNING_ENABLE
 #define DRAG_FIX 1
 
 
-DKRmlFile* 	DKRmlInterface::dkRmlFile = nullptr;
 DKString 	DKRmlInterface::workingPath;
 bool		DKRmlInterface::rml_initialized = false;
 bool		DKRmlInterface::rml_debugger_initialized = false;
@@ -106,8 +105,6 @@ DKRmlInterface::DKRmlInterface(DKWindow* window) : DKInterface() {
 	Rml::Factory::RegisterElementInstancer("body", original_body_instancer);
 	
 	context = Rml::CreateContext(interfaceAddress, Rml::Vector2i(w, h));
-	//
-
 	if (!context) {
 		DKERROR("context is invalid! \n");
 		return;
