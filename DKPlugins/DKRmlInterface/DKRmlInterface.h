@@ -78,7 +78,6 @@ public:
 	static bool rml_initialized;
 	static bool rml_debugger_initialized;
 	static bool rml_properties_registered;
-	static bool dkSdlRmlDocument_initialized;
 	static Rml::ElementInstancer* original_body_instancer;
 };
 

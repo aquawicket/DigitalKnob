@@ -54,7 +54,6 @@ WARNING_ENABLE
 
 DKRmlFile* 	DKRmlInterface::dkRmlFile = nullptr;
 DKString 	DKRmlInterface::workingPath;
-bool		DKRmlInterface::dkSdlRmlDocument_initialized = false;
 bool		DKRmlInterface::rml_initialized = false;
 bool		DKRmlInterface::rml_debugger_initialized = false;
 bool		DKRmlInterface::rml_properties_registered = false;
@@ -78,10 +77,7 @@ DKRmlInterface::DKRmlInterface(DKWindow* window) : DKInterface() {
 	//Create DKSdlRml or DKOsgRml
 
 	if (same(window->interfaceName, "SdlWindow")) {
-		if (!dkSdlRmlDocument_initialized) {
-			DKSdlRmlDocument* dkSdlRmlDocument = new DKSdlRmlDocument(dynamic_cast<DKSdlWindow*>(window), this);
-			//dkSdlRmlDocument_initialized = true;
-		}
+		DKSdlRmlDocument* dkSdlRmlDocument = new DKSdlRmlDocument(dynamic_cast<DKSdlWindow*>(window), this);
 	}
 	else if (same(window->interfaceName, "OsgWindow")) {
 		//DKOsgRml* dkOsgRml = new DKOsgRml(dynamic_cast<DKOsgWindow*>(window), this);	// TODO
@@ -195,15 +191,7 @@ DKRmlInterface::DKRmlInterface(DKWindow* window) : DKInterface() {
 	Rml::Factory::RegisterElementInstancer("html", new Rml::ElementInstancerGeneric<Rml::ElementDocument>);
 	Rml::XMLParser::RegisterNodeHandler("html", std::make_shared<Rml::XMLNodeHandlerBody>());
 	Rml::XMLParser::RegisterNodeHandler("head", std::make_shared<HeadInstancer>());
-	
-	//////////////////////////////////////////////////////////////////////////////////////////
-	
-	//contextB = Rml::CreateContext("contextB", Rml::Vector2i(w, h)); 	// WORKS
-	Rml::Factory::RegisterElementInstancer("body", new Rml::ElementInstancerElement);
-	//contextB = Rml::CreateContext("contextB", Rml::Vector2i(w, h));	// BROKEN
-	
-	////////////////////////////////////////////////////////////////////////////////////////////
-	
+	Rml::Factory::RegisterElementInstancer("body", new Rml::ElementInstancerElement);	// NOTE: this instancer must be restored to original before creating new contexts
 	Rml::XMLParser::RegisterNodeHandler("body", std::make_shared<Rml::XMLNodeHandlerDefault>());
 	
 
