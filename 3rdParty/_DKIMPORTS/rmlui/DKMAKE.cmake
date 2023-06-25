@@ -16,8 +16,10 @@ dk_depend(sdl_image)
 ### IMPORT ###
 #dk_import(https://github.com/aquawicket/RmlUi.git PATCH)
 #dk_import(https://github.com/aquawicket/RmlUi.git BRANCH RCSS_attribute_selector_support PATCH)
-dk_import(https://github.com/mikke89/RmlUi.git) # PATCH)
+dk_import(https://github.com/mikke89/RmlUi.git)# PATCH)
 
+# ANDROID FIX
+dkFileReplace(${RMLUI}/CMakeLists.txt "target_compile_features" "#target_compile_features")
 
 ### LINK ###
 dk_define(RMLUI_STATIC_LIB)
