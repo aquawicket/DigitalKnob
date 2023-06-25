@@ -66,6 +66,7 @@ void DKSdlRmlRenderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, i
     if (sdlTexture == nullptr)
         sdlTexture = (SDL_Texture*)texture;
 
+	/*
     //Cef
     //The id is mapped to the texture in texture_name
     //If the id contains [CEF] , it is a cef image
@@ -80,7 +81,8 @@ void DKSdlRmlRenderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, i
             sdlTexture = output.texture;
     }
     ///////////////////////////////////////////////////////////
-
+	*/
+	
     int sz = sizeof(vertices[0]);
     //int off1 = offsetof(Rml::Vertex, position);
     int off2 = offsetof(Rml::Vertex, colour);
@@ -145,6 +147,7 @@ bool DKSdlRmlRenderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vect
 	if(LoadGifAnimation(mSdlRenderer, source, texture_handle, texture_dimensions))
         return true;
     
+	/*
     //CEF Texture
     //The source variable is the id of the iframe. It will contain [CEF] in it's id.
     //We will map that id to the texture handle for later use. 
@@ -155,7 +158,7 @@ bool DKSdlRmlRenderer::LoadTexture(Rml::TextureHandle& texture_handle, Rml::Vect
         return true;
     }
     //////////////////////////////////////////////////////////////////////////////
-
+	*/
 
     Rml::FileInterface* fileInterface = Rml::GetFileInterface();
     Rml::FileHandle fileHandle = fileInterface->Open(source);

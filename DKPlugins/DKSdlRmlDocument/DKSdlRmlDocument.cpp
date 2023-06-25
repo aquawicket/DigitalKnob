@@ -80,6 +80,10 @@ bool DKSdlRmlDocument::Handle(SDL_Event *event) {
 		return false;
 	if(!dkRmlInterface->document)
 		return DKERROR("dkRmlInterface->document invalid\n");
+	
+	Renderer->setWindow(dkSdlWindow->renderer, dkSdlWindow->_window);
+	
+	
 	Rml::Element* hover;
 	switch(event->type){
 		case SDL_MOUSEMOTION:

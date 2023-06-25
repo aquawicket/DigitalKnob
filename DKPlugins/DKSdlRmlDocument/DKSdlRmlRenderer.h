@@ -70,12 +70,12 @@ public:
 
 private:
     SDL_Renderer* mSdlRenderer;
+	SDL_Window* mSdlWindow;
     int mWidth;
     int mHeight;
-    SDL_Window* mSdlWindow;
     SDL_Rect mScisorRect;
 
-	std::map<Rml::TextureHandle, DKString> texture_name; //texture to name map
+	//std::map<Rml::TextureHandle, DKString> texture_name; //texture to name map
 };
 
 #endif //DKSdlRMLRENDERER_H
