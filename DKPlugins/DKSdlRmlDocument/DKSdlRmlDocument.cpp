@@ -76,6 +76,8 @@ DKSdlRmlDocument::DKSdlRmlDocument(DKSdlWindow* _dkSdlWindow, DKRmlInterface* _d
 
 bool DKSdlRmlDocument::Handle(SDL_Event *event) {
 	//DKDEBUGFUNC(event);  //EXCESSIVE LOGGING
+	if (event->window.windowID != SDL_GetWindowID(dkSdlWindow->_window))
+		return false;
 	if(!dkRmlInterface->document)
 		return DKERROR("dkRmlInterface->document invalid\n");
 	Rml::Element* hover;
