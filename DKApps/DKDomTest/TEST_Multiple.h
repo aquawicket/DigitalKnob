@@ -19,6 +19,14 @@ public:
 	DKRmlEventListener* 	dkRmlEventListenerB;
 	static DKRmlLocation*	dkRmlLocationB;
 	static DKRmlDocument*	dkRmlDocumentB;
+	
+	/*
+	DKSdlWindow* 			dkSdlWindowC;
+	DKRmlInterface* 		dkRmlInterfaceC;
+	DKRmlEventListener* 	dkRmlEventListenerC;
+	static DKRmlLocation*	dkRmlLocationC;
+	static DKRmlDocument*	dkRmlDocumentC;
+	*/
 
 	TEST_Multiple(){
 		DKDEBUGFUNC();
@@ -40,9 +48,20 @@ public:
 		dkRmlDocumentB = 		DKRmlDocument::instance(dkRmlInterfaceB, dkRmlEventListenerB);
 		dkRmlDocumentB->addEventListener("load", &TEST_Multiple::onLoad);
 		
+		/*
+		dkSdlWindowC = 			new DKSdlWindow();
+		dkRmlInterfaceC = 		new DKRmlInterface(dkSdlWindowC);
+		dkRmlEventListenerC = 	new DKRmlEventListener();
+		dkRmlLocationC = 		new DKRmlLocation(dkRmlInterfaceC, dkRmlEventListenerC);
+		dkRmlLocationC->href("DKWebTest/blank.html");
+		dkRmlDocumentC = 		DKRmlDocument::instance(dkRmlInterfaceC, dkRmlEventListenerC);
+		dkRmlDocumentC->addEventListener("load", &TEST_Multiple::onLoad);
+		*/
+		
 		DKEvent load_event("load", "");
 		dkRmlDocumentA->dispatchEvent(load_event);
 		dkRmlDocumentB->dispatchEvent(load_event);
+		//dkRmlDocumentC->dispatchEvent(load_event);
 	}
 	
 	~TEST_Multiple(){
@@ -57,6 +76,14 @@ public:
 		delete dkRmlEventListenerB;
 		delete dkRmlLocationB;
 		delete dkRmlDocumentB;
+		
+		/*
+		delete dkSdlWindowC;
+		delete dkRmlInterfaceC;
+		delete dkRmlEventListenerC;
+		delete dkRmlLocationC;
+		delete dkRmlDocumentC;
+		*/
 	}
 	
 	static void onLoad(DKEvent& event){
@@ -91,6 +118,7 @@ public:
 		DOMString value = target->getAttribute("href");
 		TEST_Multiple::dkRmlLocationA->href(value);
 		TEST_Multiple::dkRmlLocationB->href(value);
+		//TEST_Multiple::dkRmlLocationC->href(value);
 	}
 };
 //REGISTER_OBJECT(TEST_Multiple, true);
@@ -100,5 +128,10 @@ DKRmlDocument*	TEST_Multiple::dkRmlDocumentA;
 
 DKRmlLocation*	TEST_Multiple::dkRmlLocationB;
 DKRmlDocument*	TEST_Multiple::dkRmlDocumentB;
+
+/*
+DKRmlLocation*	TEST_Multiple::dkRmlLocationC;
+DKRmlDocument*	TEST_Multiple::dkRmlDocumentC;
+*/
 
 #endif //TEST_Multiple_H
