@@ -101,8 +101,8 @@ DKRmlInterface::DKRmlInterface(DKWindow* window) : DKInterface() {
 		
 	int w = window->outerWidth();
 	int h = window->outerHeight();
-	//context = Rml::CreateContext("default", Rml::Vector2i(w, h));
 	context = Rml::CreateContext(interfaceAddress, Rml::Vector2i(w, h));
+	//contextB = Rml::CreateContext("contextB", Rml::Vector2i(w, h));
 
 	if (!context) {
 		DKERROR("context is invalid! \n");

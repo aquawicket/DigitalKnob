@@ -14,8 +14,8 @@ public:
 	static DKRmlLocation*	dkRmlLocationA;
 	static DKRmlDocument*	dkRmlDocumentA;
 	
-	//DKSdlWindow* 			dkSdlWindowB;
-	//DKRmlInterface* 		dkRmlInterfaceB;
+	DKSdlWindow* 			dkSdlWindowB;
+	DKRmlInterface* 		dkRmlInterfaceB;
 	//DKRmlEventListener* 	dkRmlEventListenerB;
 	//DKRmlLocation*		dkRmlLocationB;
 	//DKRmlDocument*		dkRmlDocumentB;
@@ -29,17 +29,17 @@ public:
 		dkRmlEventListenerA = 	new DKRmlEventListener();
 		dkRmlLocationA = 		new DKRmlLocation(dkRmlInterfaceA, dkRmlEventListenerA);
 		dkRmlLocationA->href("DKWebTest/index.html");
-		dkRmlDocumentA = 		new DKRmlDocument(dkRmlInterfaceA, dkRmlEventListenerA);
+		dkRmlDocumentA = 		DKRmlDocument::instance(dkRmlInterfaceA, dkRmlEventListenerA);
 		dkRmlDocumentA->addEventListener("load", &TEST_Multiple::onLoad);
 		DKEvent load_event("load", "");
 		dkRmlDocumentA->dispatchEvent(load_event);
 		
-		//dkSdlWindowB = 		new DKSdlWindow();
-		//dkRmlInterfaceB = 	new DKRmlInterface(dkSdlWindowB);
+		dkSdlWindowB = 		new DKSdlWindow();
+		dkRmlInterfaceB = 	new DKRmlInterface(dkSdlWindowB);
 		//dkRmlEventListenerB = new DKRmlEventListener();
 		//dkRmlLocationB = 		new DKRmlLocation(dkRmlInterfaceB, dkRmlEventListenerB);
 		//dkRmlLocationB->href("DKWebTest/index.html");
-		//dkRmlDocumentB = 		new DKRmlDocument(dkRmlInterfaceB, dkRmlEventListenerB);
+		//dkRmlDocumentB = 		DKRmlDocument::instance(dkRmlInterfaceB, dkRmlEventListenerB);
 	}
 	
 	~TEST_Multiple(){
@@ -49,8 +49,8 @@ public:
 		delete dkRmlLocationA;
 		delete dkRmlDocumentA;
 		
-		//delete dkSdlWindowB;
-		//delete dkRmlInterfaceB;
+		delete dkSdlWindowB;
+		delete dkRmlInterfaceB;
 		//delete dkRmlEventListenerB;
 		//delete dkRmlLocationB;
 		//delete dkRmlDocumentB;
