@@ -63,6 +63,8 @@ DKSdlRmlDocument::DKSdlRmlDocument(DKSdlWindow* _dkSdlWindow, DKRmlInterface* _d
 		rml_render_interface_set = true;
 	}
 	
+	Renderer->setWindow(dkSdlWindow->renderer, dkSdlWindow->_window);
+	
 	SystemInterface = new RmlSDL2SystemInterface();
 	Rml::SetSystemInterface(SystemInterface);	
 	
@@ -167,18 +169,24 @@ bool DKSdlRmlDocument::Handle(SDL_Event *event) {
 
 bool DKSdlRmlDocument::Render(){
     //DKDEBUGFUNC();  //EXCESSIVE LOGGING
+	
 	if(dkSdlWindow->_width != dkRmlInterface->context->GetDimensions().x || dkSdlWindow->_height != dkRmlInterface->context->GetDimensions().y){
 		dkRmlInterface->context->SetDimensions(Rml::Vector2i(dkSdlWindow->_width, dkSdlWindow->_height));
 		// Reset blending and draw a fake point just outside the screen to let SDL know that it needs to reset its state in case it wants to render a texture 
 		SDL_SetRenderDrawBlendMode(dkSdlWindow->renderer, SDL_BLENDMODE_NONE);
 		SDL_RenderDrawPoint(dkSdlWindow->renderer, -1, -1);
 	}
+	
+	Renderer->setWindow(dkSdlWindow->renderer, dkSdlWindow->_window);
 	dkRmlInterface->context->Render();
+	
 	return true;
 }
 
 void DKSdlRmlDocument::Update(){
 	if(!DKApp::active)
 		return;
+	
+	Renderer->setWindow(dkSdlWindow->renderer, dkSdlWindow->_window);
 	dkRmlInterface->context->Update();
 }

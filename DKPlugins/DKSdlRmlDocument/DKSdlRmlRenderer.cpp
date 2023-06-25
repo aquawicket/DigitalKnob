@@ -48,6 +48,17 @@ DKSdlRmlRenderer::DKSdlRmlRenderer(SDL_Renderer* sdlRenderer, SDL_Window* sdlWin
     mScisorRect.h = mHeight;
 }
 
+void DKSdlRmlRenderer::setWindow(SDL_Renderer* sdlRenderer, SDL_Window* sdlWindow) {
+	DKDEBUGFUNC(sdlRenderer, sdlWindow);
+    mSdlRenderer = sdlRenderer;
+    mSdlWindow = sdlWindow;
+    SDL_GetRendererOutputSize(mSdlRenderer, &mWidth, &mHeight);
+    mScisorRect.x = 0;
+    mScisorRect.y = 0;
+    mScisorRect.w = mWidth;
+    mScisorRect.h = mHeight;
+}
+
 // Called by RmlUi when it wants to render geometry that it does not wish to optimise.
 void DKSdlRmlRenderer::RenderGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, const Rml::TextureHandle texture, const Rml::Vector2f& translation) {
     //DKDEBUGFUNC(vertices, num_vertices, indices, num_indices, texture, translation);  //EXCESSIVE LOGGING

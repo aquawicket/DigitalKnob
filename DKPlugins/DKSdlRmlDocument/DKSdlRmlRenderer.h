@@ -38,7 +38,9 @@ WARNING_ENABLE
 class DKSdlRmlRenderer : public Rml::RenderInterface
 {
 public:
-    DKSdlRmlRenderer(SDL_Renderer* renderer, SDL_Window* screen);
+    DKSdlRmlRenderer(SDL_Renderer* sdlRenderer, SDL_Window* sdlWindow);
+	
+	void setWindow(SDL_Renderer* sdlRenderer, SDL_Window* sdlWindow);
 
 	/// Called by RmlUi when it wants to render geometry that it does not wish to optimise.
 	void RenderGeometry(Rml::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rml::TextureHandle texture, const Rml::Vector2f& translation) override;
