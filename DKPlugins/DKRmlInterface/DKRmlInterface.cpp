@@ -80,7 +80,7 @@ DKRmlInterface::DKRmlInterface(DKWindow* window) : DKInterface() {
 	if (same(window->interfaceName, "SdlWindow")) {
 		if (!dkSdlRmlDocument_initialized) {
 			DKSdlRmlDocument* dkSdlRmlDocument = new DKSdlRmlDocument(dynamic_cast<DKSdlWindow*>(window), this);
-			dkSdlRmlDocument_initialized = true;
+			//dkSdlRmlDocument_initialized = true;
 		}
 	}
 	else if (same(window->interfaceName, "OsgWindow")) {
