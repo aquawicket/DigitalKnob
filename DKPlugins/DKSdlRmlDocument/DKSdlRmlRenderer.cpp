@@ -49,7 +49,7 @@ DKSdlRmlRenderer::DKSdlRmlRenderer(SDL_Renderer* sdlRenderer, SDL_Window* sdlWin
 }
 
 void DKSdlRmlRenderer::setWindow(SDL_Renderer* sdlRenderer, SDL_Window* sdlWindow) {
-	DKDEBUGFUNC(sdlRenderer, sdlWindow);
+	//DKDEBUGFUNC(sdlRenderer, sdlWindow); //EXCESSIVE LOGGING
     mSdlRenderer = sdlRenderer;
     mSdlWindow = sdlWindow;
     SDL_GetRendererOutputSize(mSdlRenderer, &mWidth, &mHeight);
