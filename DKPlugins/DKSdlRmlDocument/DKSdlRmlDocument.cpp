@@ -83,7 +83,6 @@ bool DKSdlRmlDocument::Handle(SDL_Event *event) {
 	
 	Renderer->setWindow(dkSdlWindow->renderer, dkSdlWindow->_window);
 	
-	
 	Rml::Element* hover;
 	switch(event->type){
 		case SDL_MOUSEMOTION:
@@ -175,6 +174,7 @@ bool DKSdlRmlDocument::Handle(SDL_Event *event) {
 
 bool DKSdlRmlDocument::Render(){
     //DKDEBUGFUNC();  //EXCESSIVE LOGGING
+	Renderer->setWindow(dkSdlWindow->renderer, dkSdlWindow->_window);
 	
 	if(dkSdlWindow->_width != dkRmlInterface->context->GetDimensions().x || dkSdlWindow->_height != dkRmlInterface->context->GetDimensions().y){
 		dkRmlInterface->context->SetDimensions(Rml::Vector2i(dkSdlWindow->_width, dkSdlWindow->_height));
@@ -183,7 +183,6 @@ bool DKSdlRmlDocument::Render(){
 		SDL_RenderDrawPoint(dkSdlWindow->renderer, -1, -1);
 	}
 	
-	Renderer->setWindow(dkSdlWindow->renderer, dkSdlWindow->_window);
 	dkRmlInterface->context->Render();
 	
 	return true;
@@ -193,6 +192,7 @@ void DKSdlRmlDocument::Update(){
 	if(!DKApp::active)
 		return;
 	
-	//Renderer->setWindow(dkSdlWindow->renderer, dkSdlWindow->_window);
+	Renderer->setWindow(dkSdlWindow->renderer, dkSdlWindow->_window);
+	
 	dkRmlInterface->context->Update();
 }

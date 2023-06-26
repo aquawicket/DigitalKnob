@@ -77,7 +77,17 @@ public:
 	static bool rml_initialized;
 	static bool rml_debugger_initialized;
 	static bool rml_properties_registered;
+	
+	static Rml::ElementInstancer* original_html_instancer;
+	static Rml::ElementInstancer* original_head_instancer;
 	static Rml::ElementInstancer* original_body_instancer;
+	
+	/*
+	static Rml::XMLNodeHandler* original_html_handler;
+	static Rml::XMLNodeHandler* original_head_handler;
+	static Rml::XMLNodeHandler* original_body_handler;
+	*/
+	
 };
 
 //REGISTER_OBJECT(DKRmlInterface, true)

@@ -56,7 +56,14 @@ DKString 	DKRmlInterface::workingPath;
 bool		DKRmlInterface::rml_initialized = false;
 bool		DKRmlInterface::rml_debugger_initialized = false;
 bool		DKRmlInterface::rml_properties_registered = false;
+
+
+Rml::ElementInstancer* DKRmlInterface::original_html_instancer = nullptr;
+Rml::ElementInstancer* DKRmlInterface::original_head_instancer = nullptr;
 Rml::ElementInstancer* DKRmlInterface::original_body_instancer = nullptr;
+
+//Rml::XMLNodeHandler* DKRmlInterface::original_html_handler = nullptr;
+
 
 DKRmlInterface::DKRmlInterface(DKWindow* window) : DKInterface() {
 	DKDEBUGFUNC();
@@ -97,12 +104,53 @@ DKRmlInterface::DKRmlInterface(DKWindow* window) : DKInterface() {
 	int w = window->outerWidth();
 	int h = window->outerHeight();
 	
+	//////////////////////////////////////////////////////////////////////
+	// Store the html element instancer
+	if(!original_html_instancer)
+		original_html_instancer = Rml::Factory::GetElementInstancer("html");
+	if(!original_html_instancer)
+		DKERROR("original_html_instancer invalid! \n");
+	Rml::Factory::RegisterElementInstancer("html", original_html_instancer);
+	
+	// Store the head element instancer
+	if(!original_head_instancer)
+		original_head_instancer = Rml::Factory::GetElementInstancer("head");
+	if(!original_head_instancer)
+		DKERROR("original_head_instancer invalid! \n");
+	Rml::Factory::RegisterElementInstancer("head", original_head_instancer);
+	
 	// Store the body element instancer
 	if(!original_body_instancer)
 		original_body_instancer = Rml::Factory::GetElementInstancer("body");
 	if(!original_body_instancer)
 		DKERROR("original_body_instancer invalid! \n");
 	Rml::Factory::RegisterElementInstancer("body", original_body_instancer);
+	
+	// Store the html node handler
+	/*
+	if(!original_html_handler)
+		original_html_handler = Rml::XMLParser::GetNodeHandler("html");
+	if(!original_html_handler)
+		DKERROR("original_html_handler invalid! \n");
+	Rml::XMLParser::RegisterNodeHandler("html", std::make_shared<Rml::XMLNodeHandler>(original_html_handler));
+	*/
+	
+	/*
+	// Store the head node handler
+	if(!original_head_handler)
+		original_head_handler = Rml::XMLParser::GetNodeHandler("head");
+	if(!original_head_handler)
+		DKERROR("original_head_handler invalid! \n");
+	Rml::XMLParser::RegisterNodeHandler("head", original_head_handler);
+	
+	// Store the body node handler
+	if(!original_body_handler)
+		original_body_handler = Rml::XMLParser::GetNodeHandler("body");
+	if(!original_body_handler)
+		DKERROR("original_body_handler invalid! \n");
+	Rml::XMLParser::RegisterNodeHandler("body", original_body_handler);
+	*/
+	///////////////////////////////////////////////////////////////////
 	
 	context = Rml::CreateContext(interfaceAddress, Rml::Vector2i(w, h));
 	if (!context) {
@@ -271,15 +319,6 @@ bool DKRmlInterface::LoadHtml(const DKString& html){
 	document = context->CreateDocument("html");
 	Rml::Element* ele = document;
 
-	/*
-	//Create DOM javascript instance of the document using the documents element address
-	//DKClass::DKCreate("DKDom");
-	DKString rval;
-	DKString document_address = pointerToAddress(document);
-	#if HAVE_DKDuktape
-		DKDuktape::RunDuktape("var document = new Document(\"" + document_address + "\");", rval);
-	#endif
-	*/
 	
 	Rml::XMLParser parser(ele);
 	parser.Parse(stream.get());
@@ -288,7 +327,6 @@ bool DKRmlInterface::LoadHtml(const DKString& html){
 	Rml::ElementList bodys;
 	Rml::Element* head = NULL;
 	Rml::Element* body = NULL;
-	//Rml::ElementDocument* elementDocument = document->GetOwnerDocument(); unused code
 	document->GetOwnerDocument()->GetElementsByTagName(heads, "head");
 	if (!heads.empty())
 		head = heads[0];
