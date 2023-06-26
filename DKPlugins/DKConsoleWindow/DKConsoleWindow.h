@@ -428,13 +428,13 @@ public:
 				#endif
 				return _outerWidth;
 			}
-			virtual void outerWidth(const int& outerWidth) override {			// setter
+			virtual void outerWidth(const int& outerWidth) override {		// setter
 				DKDEBUGFUNC(outerWidth);
 				// readonly
 			}
 
 	//		[Replaceable] readonly attribute long outerHeight;
-			virtual const int& outerHeight() override { 						// getter
+			virtual const int& outerHeight() override { 					// getter
 				#if WIN
 					RECT rect;
 					GetWindowRect(GetConsoleWindow(), &rect);
@@ -442,7 +442,7 @@ public:
 				#endif
 				return _outerHeight;
 			}
-			virtual void outerHeight(const int& outerHeight){		// setter
+			virtual void outerHeight(const int& outerHeight) override {		// setter
 				DKDEBUGFUNC(outerHeight);
 				//readonly
 			}

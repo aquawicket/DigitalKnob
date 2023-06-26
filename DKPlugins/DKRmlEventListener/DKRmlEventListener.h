@@ -24,7 +24,7 @@ public:
 	virtual ~DKRmlEventListener(){}
 	
 	// undefined handleEvent(Event event);
-	virtual const void handleEvent(DKEvent& event) {
+	virtual const void handleEvent(DKEvent& event) override {
 		DKDEBUGFUNC(event);
 		DKTODO();
 	}

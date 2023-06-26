@@ -61,9 +61,11 @@ public:
 		return false;
 	}
 	
+	/*
 	bool onEvent() {
-
+		
 	}
+	*/
 
 	////// toString //////
 	operator std::string() const { return "[object DKRmlEventTarget]"; }
