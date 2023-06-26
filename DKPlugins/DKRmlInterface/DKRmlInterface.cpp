@@ -95,6 +95,7 @@ DKRmlInterface::DKRmlInterface(DKWindow* window) : DKInterface() {
 	int w = window->outerWidth();
 	int h = window->outerHeight();
 	
+	/*
 	//////////////////////////////////////////////////////////////////////
 	// Store the html element instancer
 	if(!original_html_instancer)
@@ -117,6 +118,7 @@ DKRmlInterface::DKRmlInterface(DKWindow* window) : DKInterface() {
 		DKERROR("original_body_instancer invalid! \n");
 	Rml::Factory::RegisterElementInstancer("body", original_body_instancer);
 	///////////////////////////////////////////////////////////////////
+	*/
 	
 	context = Rml::CreateContext(interfaceAddress, Rml::Vector2i(w, h));
 	if (!context) {
@@ -190,11 +192,12 @@ DKRmlInterface::DKRmlInterface(DKWindow* window) : DKInterface() {
 		rml_properties_registered = true;
 	}
 	
-	context->SetDocumentsBaseTag("html");
+	//context->SetDocumentsBaseTag("html");
 	DKString rmlFonts = DKFile::local_assets+"DKRmlInterface";
 	LoadFonts(rmlFonts);
 	LoadFonts(DKFile::local_assets);
-
+	
+	/*
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
 	Rml::Factory::RegisterElementInstancer("html", new Rml::ElementInstancerGeneric<Rml::ElementDocument>);
 	Rml::XMLParser::RegisterNodeHandler("html", std::make_shared<Rml::XMLNodeHandlerBody>());
@@ -202,7 +205,8 @@ DKRmlInterface::DKRmlInterface(DKWindow* window) : DKInterface() {
 	Rml::Factory::RegisterElementInstancer("body", new Rml::ElementInstancerElement);	// NOTE: this instancer must be restored to original before creating new contexts
 	Rml::XMLParser::RegisterNodeHandler("body", std::make_shared<Rml::XMLNodeHandlerDefault>());
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
-
+	*/
+	
 	// Make sure custom_instancer is kept alive until after the call to Rml::Shutdown
 	//auto custom_instancer = std::make_unique< Rml::ElementInstancerGeneric< CustomElement > >();
 	//Rml::Factory::RegisterElementInstancer("custom", custom_instancer.get());
@@ -273,7 +277,8 @@ bool DKRmlInterface::LoadHtml(const DKString& html){
 	auto stream = std::make_unique<Rml::StreamMemory>((Rml::byte*)rml.c_str(), rml.size());
 	stream->SetSourceURL("[document from memory]");
 	Rml::PluginRegistry::NotifyDocumentOpen(context, stream->GetSourceURL().GetURL());
-	document = context->CreateDocument("html");
+	//document = context->CreateDocument("html");
+	document = context->CreateDocument("rml");
 	Rml::Element* ele = document;
 
 	
