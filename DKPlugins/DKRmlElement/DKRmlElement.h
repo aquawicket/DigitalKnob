@@ -97,7 +97,8 @@ public:
 			return _classList;
 		}
 		Rml::StringList list = _rmlElement->GetActivePseudoClasses();
-		DKString _classList = "";
+		//_classList = "";
+		_classList.clear();
 		for (unsigned int n = 0; n < list.size(); ++n) {
 			_classList += list[n];
 			if (n < list.size()-1)
