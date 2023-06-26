@@ -274,9 +274,8 @@ bool DKRmlInterface::LoadHtml(const DKString& html){
 	stream->SetSourceURL("[document from memory]");
 	Rml::PluginRegistry::NotifyDocumentOpen(context, stream->GetSourceURL().GetURL());
 	document = context->CreateDocument("html");
-	Rml::Element* ele = document;
-
 	
+	Rml::Element* ele = document;
 	Rml::XMLParser parser(ele);
 	parser.Parse(stream.get());
 	//Make sure we have <head> and <body> tags
