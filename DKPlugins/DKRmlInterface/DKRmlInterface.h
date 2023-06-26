@@ -34,7 +34,6 @@
 #include "DKInterface/DKInterface.h"
 #include "DKWindow/DKWindow.h"
 #include "DKRmlInterface/DKRmlFile.h"
-//#include "DKRmlInterface/DKRmlConverter.h"
 
 WARNING_DISABLE
 #include <RmlUi/Core.h>
@@ -53,17 +52,6 @@ public:
 	bool LoadUrl(const DKString& url);
 	bool LoadHtml(const DKString& html);
 	
-	//void ProcessEvent(Rml::Event& rmlEvent) override;
-	//bool RegisterEvent(const DKString& elementAddress, const DKString& type);
-	//bool UnregisterEvent(const DKString& elementAddress, const DKString& type);
-	//bool SendEvent(const DKString& elementAddress, const DKString& type, const DKString& value);
-	
-	bool DebuggerOff();
-	bool DebuggerOn();
-	bool DebuggerToggle();
-	
-	static bool GetOuterHTML(Rml::Element* element, DKString& outerHtml);		//FIXME: https://stackoverflow.com/a/1367597/688352
-	static bool SetOuterHTML(Rml::Element* element, const DKString& outerHtml);	//FIXME: https://stackoverflow.com/a/1367597/688352
 	DKString href_;
 	DKString protocol;
 	DKString _path;
@@ -72,7 +60,6 @@ public:
 	Rml::ElementDocument* document = nullptr;
 	DKRmlFile* dkRmlFile = nullptr;
 	Rml::Element* hover = nullptr;
-	//DKRmlConverter dkRmlConverter;
 
 	static bool rml_initialized;
 	static bool rml_debugger_initialized;
@@ -80,14 +67,7 @@ public:
 	
 	static Rml::ElementInstancer* original_html_instancer;
 	static Rml::ElementInstancer* original_head_instancer;
-	static Rml::ElementInstancer* original_body_instancer;
-	
-	/*
-	static Rml::XMLNodeHandler* original_html_handler;
-	static Rml::XMLNodeHandler* original_head_handler;
-	static Rml::XMLNodeHandler* original_body_handler;
-	*/
-	
+	static Rml::ElementInstancer* original_body_instancer;	
 };
 
 //REGISTER_OBJECT(DKRmlInterface, true)
