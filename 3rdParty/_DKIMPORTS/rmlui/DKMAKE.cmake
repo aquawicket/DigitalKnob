@@ -19,7 +19,7 @@ dk_depend(sdl_image)
 dk_import(https://github.com/mikke89/RmlUi.git)# PATCH)
 
 # ANDROID FIX
-dkFileReplace(${RMLUI}/CMakeLists.txt "target_compile_features" "#target_compile_features")
+#dkFileReplace(${RMLUI}/CMakeLists.txt "target_compile_features" "#target_compile_features")
 
 ### LINK ###
 dk_define(RMLUI_STATIC_LIB)
