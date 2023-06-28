@@ -27,9 +27,9 @@ location.href = url;
 
 function onHyperlink(event) {
 	console.log("onHyperlink()");
-	//const target = event.target;
-	//const value = target.getAttribute("href");
-	//location.href = value;
+	const target = event.target;
+	const value = target.getAttribute("href");
+	location.href = value;
 }
 
 function onLoad(event) {
@@ -62,4 +62,4 @@ function onLoad(event) {
 	}
 }
 document.addEventListener("load", onLoad);
-//document.dispatchEvent(new Event('load'));
+document.dispatchEvent(new Event('load'));
