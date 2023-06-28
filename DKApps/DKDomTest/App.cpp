@@ -142,7 +142,8 @@ bool App::Init() {
 	
 	
 	////// DigitalKnob Tests //////
-	test_Multiple = std::make_unique<TEST_Multiple>();
+	test_Browser = std::make_unique<TEST_Browser>();
+	//test_Multiple = std::make_unique<TEST_Multiple>();
 	
 	return true;
 }

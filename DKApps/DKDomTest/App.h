@@ -57,6 +57,7 @@
 
 
 ////// DigitalKnob Tests //////
+#include "TEST_Browser.h"
 #include "TEST_Multiple.h"
 
 
@@ -86,7 +87,8 @@ public:
 	
 	
 	////// DigitalKnob Tests //////
-	std::unique_ptr<TEST_Multiple> 						test_Multiple;
+	std::unique_ptr<TEST_Browser> 						test_Browser;
+	//std::unique_ptr<TEST_Multiple> 					test_Multiple;
 };
 REGISTER_OBJECT(App, true);
 
