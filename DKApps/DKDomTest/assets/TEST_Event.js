@@ -90,3 +90,11 @@ eventTarget.addEventListener('myeventB', function(event){
 	printEventProperties(event)
 })
 eventTarget.dispatchEvent(new Event('myeventB'));
+
+console.log('\n');
+function onmyeventC(event){
+	console.log('onmyeventC')
+	printEventProperties(event)
+}
+eventTarget.addEventListener('myeventC', onmyeventC);
+eventTarget.dispatchEvent(new Event('myeventC'));

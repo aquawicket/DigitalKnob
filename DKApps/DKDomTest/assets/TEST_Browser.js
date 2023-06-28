@@ -61,7 +61,5 @@ function onLoad(event) {
 		}
 	}
 }
-//onLoad();
 document.addEventListener("load", onLoad);
-//const load_event = new Event("load", "");
-//document.dispatchEvent(load_event);
+//document.dispatchEvent(new Event('load'));
