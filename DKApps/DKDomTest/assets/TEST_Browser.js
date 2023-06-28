@@ -44,7 +44,7 @@ function onLoad(event) {
 
 	//console.log("aElement->length() = "+toString(aElements->length()));
 	for(var i=0; i<aElements.length; i++){
-		const item = aElements.item(i);
+		var item = aElements.item(i);
 		if(!item){
 			console.error("aElements.item("+i+") invalid!");
 			return;
