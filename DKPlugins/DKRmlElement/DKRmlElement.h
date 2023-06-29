@@ -39,8 +39,6 @@ public:
 		
 		list.push_back(this);
 	}
-	//~DKRmlElement() {}
-	
 
 	
 	////// NOTE: from DKRmlElementCSSInlineStyle

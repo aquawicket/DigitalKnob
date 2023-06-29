@@ -26,7 +26,7 @@ public:
 		_dkRmlInterface = dkRmlInterface;
 		_dkRmlEventListener = dkRmlEventListener;
 	}
-	virtual ~DKRmlLocation() {}
+	//virtual ~DKRmlLocation() {}
 
 	// [LegacyUnforgeable] stringifier attribute USVString href;
 	virtual void href(const USVString& href) override;

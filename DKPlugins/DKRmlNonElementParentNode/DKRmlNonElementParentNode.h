@@ -23,7 +23,7 @@ public:
 		_dkRmlInterface = dkRmlInterface;
 		_dkRmlEventListener = dkRmlEventListener;
 	}
-	virtual ~DKRmlNonElementParentNode() {	}
+	//virtual ~DKRmlNonElementParentNode() {	}
 	
 	// Element? getElementById(DOMString elementId);
 	virtual DKElement* getElementById(const DOMString& elementId) {

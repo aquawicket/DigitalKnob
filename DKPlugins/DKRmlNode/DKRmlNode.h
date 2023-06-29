@@ -24,7 +24,6 @@ public:
 		if(!_rmlElement)
 			DKERROR("_rmlElement invalid! \n");
 	}
-	//~DKRmlNode() {}
 	
 	/*
 	// const unsigned short ELEMENT_NODE = 1;

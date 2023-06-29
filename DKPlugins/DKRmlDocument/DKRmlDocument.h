@@ -39,7 +39,7 @@ public:
 		
 		list.push_back(this);
 	}
-	virtual ~DKRmlDocument() {	}
+	//virtual ~DKRmlDocument() {	}
 	
 	/*
 	// [SameObject] readonly attribute DOMImplementation implementation;
