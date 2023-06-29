@@ -14,18 +14,15 @@
 class DKRmlEventTarget : virtual public DKEventTarget
 {
 public:
-	//DKRmlInterface* _dkRmlInterface;
 	DKRmlEventListener* _dkRmlEventListener;
 	Rml::Element* _rmlElement;
 	
 	// constructor();
-	//DKRmlEventTarget(DKRmlInterface* dkRmlInterface, Rml::Element* rmlElement) : DKEventTarget() {
 	DKRmlEventTarget(DKRmlEventListener* dkRmlEventListener, Rml::Element* rmlElement) : DKEventTarget() {
 		DKDEBUGFUNC();
 		interfaceName = "DKRmlEventTarget";
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKRmlEventTarget("+interfaceAddress+") \n");
-		//_dkRmlInterface = dkRmlInterface;
 		_dkRmlEventListener = dkRmlEventListener;
 		_rmlElement = rmlElement;
 		

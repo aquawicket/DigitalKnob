@@ -154,7 +154,7 @@ public:
 		return true;
 	}
 	
-	static DKDocument* eventTarget(duk_context* ctx){
+	static DKDocument* document(duk_context* ctx){
 		DKString eventTargetAddress = duk_require_string(ctx, 0);
 		return (DKDocument*)addressToPointer(eventTargetAddress);
 	}
@@ -198,8 +198,8 @@ public:
 	static int implementation(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->implementation(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->implementation());
+			document(ctx)->implementation(GetString(ctx));
+		dukglue_push(ctx, document(ctx)->implementation());
 		return true;
 	}
 	
@@ -207,8 +207,8 @@ public:
 	static int URL(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->URL(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->URL());
+			document(ctx)->URL(GetString(ctx));
+		dukglue_push(ctx, document(ctx)->URL());
 		return true;
 	}
 	
@@ -216,8 +216,8 @@ public:
 	static int documentURI(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->documentURI(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->documentURI());
+			document(ctx)->documentURI(GetString(ctx));
+		dukglue_push(ctx, document(ctx)->documentURI());
 		return true;
 	}
 	
@@ -225,8 +225,8 @@ public:
 	static int compatMode(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->compatMode(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->compatMode());
+			document(ctx)->compatMode(GetString(ctx));
+		dukglue_push(ctx, document(ctx)->compatMode());
 		return true;
 	}
 	
@@ -234,8 +234,8 @@ public:
 	static int characterSet(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->characterSet(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->characterSet());
+			document(ctx)->characterSet(GetString(ctx));
+		dukglue_push(ctx, document(ctx)->characterSet());
 		return true;
 	}
 	
@@ -243,8 +243,8 @@ public:
 	static int charset(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->charset(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->charset());
+			document(ctx)->charset(GetString(ctx));
+		dukglue_push(ctx, document(ctx)->charset());
 		return true;
 	}
 	
@@ -252,8 +252,8 @@ public:
 	static int inputEncoding(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->inputEncoding(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->inputEncoding());
+			document(ctx)->inputEncoding(GetString(ctx));
+		dukglue_push(ctx, document(ctx)->inputEncoding());
 		return true;
 	}
 	
@@ -261,8 +261,8 @@ public:
 	static int contentType(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->contentType(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->contentType());
+			document(ctx)->contentType(GetString(ctx));
+		dukglue_push(ctx, document(ctx)->contentType());
 		return true;
 	}
 	
@@ -270,8 +270,8 @@ public:
 	static int doctype(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->doctype(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->doctype());
+			document(ctx)->doctype(GetString(ctx));
+		dukglue_push(ctx, document(ctx)->doctype());
 		return true;
 	}
 	
@@ -279,8 +279,8 @@ public:
 	static int documentElement(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->documentElement( (DKElement*)addressToPointer(GetString(ctx)) );	
-		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->documentElement()));
+			document(ctx)->documentElement( (DKElement*)addressToPointer(GetString(ctx)) );	
+		dukglue_push(ctx, pointerToAddress(document(ctx)->documentElement()));
 		return true;
 	}
 	
@@ -288,7 +288,7 @@ public:
 	static int getElementsByTagName(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString qualifiedName = GetString(ctx);
-		DKHTMLCollection* _getElementsByTagName = eventTarget(ctx)->getElementsByTagName(qualifiedName);
+		DKHTMLCollection* _getElementsByTagName = document(ctx)->getElementsByTagName(qualifiedName);
 		dukglue_push(ctx, pointerToAddress(_getElementsByTagName));	
 		return true;
 	}
@@ -298,7 +298,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString _namespace = GetString(ctx);
 		DKString localName = GetString(ctx, 2);
-		DKHTMLCollection* _getElementsByTagNameNS = eventTarget(ctx)->getElementsByTagNameNS(_namespace, localName);
+		DKHTMLCollection* _getElementsByTagNameNS = document(ctx)->getElementsByTagNameNS(_namespace, localName);
 		dukglue_push(ctx, pointerToAddress(_getElementsByTagNameNS));	
 		return true;
 	}
@@ -307,7 +307,7 @@ public:
 	static int getElementsByClassName(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString classNames = GetString(ctx);
-		DKHTMLCollection* _getElementsByClassName = eventTarget(ctx)->getElementsByClassName(classNames);
+		DKHTMLCollection* _getElementsByClassName = document(ctx)->getElementsByClassName(classNames);
 		dukglue_push(ctx, pointerToAddress(_getElementsByClassName));	
 		return true;
 	}
@@ -317,7 +317,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString localName = GetString(ctx, 1);
 		DKString options = GetString(ctx, 2);
-		DKElement* _createElement = eventTarget(ctx)->createElement(localName, options);
+		DKElement* _createElement = document(ctx)->createElement(localName, options);
 		dukglue_push(ctx, pointerToAddress(_createElement));
 		return true;
 	}
@@ -328,7 +328,7 @@ public:
 		DKString _namespace = GetString(ctx, 1);
 		DKString qualifiedName = GetString(ctx, 2);
 		DKString options = GetString(ctx, 3);
-		DKElement* _createElementNS = eventTarget(ctx)->createElementNS(_namespace, qualifiedName, options);
+		DKElement* _createElementNS = document(ctx)->createElementNS(_namespace, qualifiedName, options);
 		dukglue_push(ctx, pointerToAddress(_createElementNS));	
 		return true;
 	}
@@ -336,7 +336,7 @@ public:
 	// [NewObject] DocumentFragment createDocumentFragment();
 	static int createDocumentFragment(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _createDocumentFragment = eventTarget(ctx)->createDocumentFragment();
+		DKString _createDocumentFragment = document(ctx)->createDocumentFragment();
 		dukglue_push(ctx, _createDocumentFragment);	
 		return true;
 	}
@@ -345,7 +345,7 @@ public:
 	static int createTextNode(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString data = GetString(ctx, 1);
-		DKString _createTextNode = eventTarget(ctx)->createTextNode(data);
+		DKString _createTextNode = document(ctx)->createTextNode(data);
 		dukglue_push(ctx, _createTextNode);	
 		return true;
 	}
@@ -354,7 +354,7 @@ public:
 	static int createCDATASection(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString data = GetString(ctx, 1);
-		DKString _createCDATASection = eventTarget(ctx)->createCDATASection(data);
+		DKString _createCDATASection = document(ctx)->createCDATASection(data);
 		dukglue_push(ctx, _createCDATASection);	
 		return true;
 	}
@@ -363,7 +363,7 @@ public:
 	static int createComment(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString data = GetString(ctx, 1);
-		DKString _createComment = eventTarget(ctx)->createComment(data);
+		DKString _createComment = document(ctx)->createComment(data);
 		dukglue_push(ctx, _createComment);	
 		return true;
 	}
@@ -373,7 +373,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString target = GetString(ctx, 1);
 		DKString data = GetString(ctx, 2);
-		DKString _createProcessingInstruction = eventTarget(ctx)->createProcessingInstruction(target, data);
+		DKString _createProcessingInstruction = document(ctx)->createProcessingInstruction(target, data);
 		dukglue_push(ctx, _createProcessingInstruction);	
 		return true;
 	}
@@ -384,7 +384,7 @@ public:
 		DKString nodeAddress = GetString(ctx, 1);
 		DKNode* node = (DKNode*)addressToPointer(nodeAddress);
 		bool deep = GetBool(ctx, 2);
-		DKNode* importNode = eventTarget(ctx)->importNode(node, deep);
+		DKNode* importNode = document(ctx)->importNode(node, deep);
 		dukglue_push(ctx, pointerToAddress(importNode));	
 		return true;
 	}
@@ -394,7 +394,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString nodeAddress = GetString(ctx, 1);
 		DKNode* node = (DKNode*)addressToPointer(nodeAddress);
-		DKNode* adoptNode = eventTarget(ctx)->adoptNode(node);
+		DKNode* adoptNode = document(ctx)->adoptNode(node);
 		dukglue_push(ctx, pointerToAddress(adoptNode));	
 		return true;
 	}
@@ -403,7 +403,7 @@ public:
 	static int createAttribute(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString localName = GetString(ctx, 1);
-		DKString _createAttribute = eventTarget(ctx)->createAttribute(localName);
+		DKString _createAttribute = document(ctx)->createAttribute(localName);
 		dukglue_push(ctx, _createAttribute);	
 		return true;
 	}
@@ -413,7 +413,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString _namespace = GetString(ctx, 1);
 		DKString qualifiedName = GetString(ctx, 2);
-		DKString _createAttributeNS = eventTarget(ctx)->createAttributeNS(_namespace, qualifiedName);
+		DKString _createAttributeNS = document(ctx)->createAttributeNS(_namespace, qualifiedName);
 		dukglue_push(ctx, _createAttributeNS);	
 		return true;
 	}
@@ -422,7 +422,7 @@ public:
 	static int createEvent(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString interface = GetString(ctx, 1);
-		DKEvent* createEvent = eventTarget(ctx)->createEvent(interface);
+		DKEvent* createEvent = document(ctx)->createEvent(interface);
 		dukglue_push(ctx, pointerToAddress(createEvent));	
 		return true;
 	}
@@ -430,7 +430,7 @@ public:
 	// [NewObject] Range createRange();
 	static int createRange(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _createRange = eventTarget(ctx)->createRange();
+		DKString _createRange = document(ctx)->createRange();
 		dukglue_push(ctx, _createRange);	
 		return true;
 	}
@@ -445,7 +445,7 @@ public:
 		DKNode* root = (DKNode*)addressToPointer(rootAddress);
 		unsigned int whatToShow = GetUint(ctx, 2);
 		DKString filter = GetString(ctx, 3);
-		DKString _createNodeIterator = eventTarget(ctx)->createNodeIterator(root, whatToShow, filter);
+		DKString _createNodeIterator = document(ctx)->createNodeIterator(root, whatToShow, filter);
 		dukglue_push(ctx, _createNodeIterator);	
 		return true;
 	}
@@ -457,7 +457,7 @@ public:
 		DKNode* root = (DKNode*)addressToPointer(rootAddress);
 		unsigned int whatToShow = GetUint(ctx, 2);
 		DKString filter = GetString(ctx, 3);
-		DKString _createTreeWalker = eventTarget(ctx)->createTreeWalker(root, whatToShow, filter);
+		DKString _createTreeWalker = document(ctx)->createTreeWalker(root, whatToShow, filter);
 		dukglue_push(ctx, _createTreeWalker);	
 		return true;
 	}
@@ -483,7 +483,7 @@ public:
 				DKDEBUGFUNC(ctx);
 				DKString elementAddress = GetString(ctx, 1);
 				DKElement* element = (DKElement*)addressToPointer(elementAddress);
-				DKString _measureElement = eventTarget(ctx)->measureElement(element);
+				DKString _measureElement = document(ctx)->measureElement(element);
 				dukglue_push(ctx, _measureElement);	
 				return true;
 			}
@@ -493,7 +493,7 @@ public:
 				DKDEBUGFUNC(ctx);
 				DKString text = GetString(ctx, 1);
 				DKString styleMap = GetString(ctx, 2);
-				DKString _measureText = eventTarget(ctx)->measureText(text, styleMap);
+				DKString _measureText = document(ctx)->measureText(text, styleMap);
 				dukglue_push(ctx, _measureText);	
 				return true;
 			}
@@ -505,8 +505,8 @@ public:
 			static int fullscreenEnabled(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
 				if(duk_is_valid_index(ctx, 1))
-					eventTarget(ctx)->fullscreenEnabled(GetBool(ctx));
-				dukglue_push(ctx, eventTarget(ctx)->fullscreenEnabled());
+					document(ctx)->fullscreenEnabled(GetBool(ctx));
+				dukglue_push(ctx, document(ctx)->fullscreenEnabled());
 				return true;
 			}
 	//		
@@ -514,15 +514,15 @@ public:
 			static int fullscreen(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
 				if(duk_is_valid_index(ctx, 1))
-					eventTarget(ctx)->fullscreen(GetBool(ctx));
-				dukglue_push(ctx, eventTarget(ctx)->fullscreen());
+					document(ctx)->fullscreen(GetBool(ctx));
+				dukglue_push(ctx, document(ctx)->fullscreen());
 				return true;
 			}
 	//
 	//		Promise<undefined> exitFullscreen();
 			static int exitFullscreen(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				DKString _exitFullscreen = eventTarget(ctx)->exitFullscreen();
+				DKString _exitFullscreen = document(ctx)->exitFullscreen();
 				dukglue_push(ctx, _exitFullscreen);	
 				return true;
 			}
@@ -531,8 +531,8 @@ public:
 			static int onfullscreenchange(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
 				if(duk_is_valid_index(ctx, 1))
-					eventTarget(ctx)->onfullscreenchange(GetString(ctx));
-				dukglue_push(ctx, eventTarget(ctx)->onfullscreenchange());
+					document(ctx)->onfullscreenchange(GetString(ctx));
+				dukglue_push(ctx, document(ctx)->onfullscreenchange());
 				return true;
 			}
 	//
@@ -540,8 +540,8 @@ public:
 			static int onfullscreenerror(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
 				if(duk_is_valid_index(ctx, 1))
-					eventTarget(ctx)->onfullscreenerror(GetString(ctx));
-				dukglue_push(ctx, eventTarget(ctx)->onfullscreenerror());
+					document(ctx)->onfullscreenerror(GetString(ctx));
+				dukglue_push(ctx, document(ctx)->onfullscreenerror());
 				return true;
 			}
 	//};

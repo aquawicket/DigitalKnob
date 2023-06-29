@@ -1,3 +1,4 @@
+#dk_depend(netsurf)
 dk_depend(webref)
 
 dk_depend(DKDuktape)
