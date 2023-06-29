@@ -23,7 +23,7 @@ public:
 		DKINFO("DKEventListener("+interfaceAddress+") \n");
 		*/
 	}
-	//virtual ~DKEventListener(){}
+	virtual ~DKEventListener(){}
 	
 	// undefined handleEvent(Event event);
 	virtual const void handleEvent(DKEvent& event) {

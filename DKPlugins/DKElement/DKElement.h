@@ -19,7 +19,7 @@ public:
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKElement("+interfaceAddress+") \n");
 	}
-	//virtual ~DKElement(){}
+	virtual ~DKElement(){}
 	
 	////// NOTE: from DKElementCSSInlineStyle
 	// [SameObject, PutForwards=cssText] readonly attribute CSSStyleDeclaration style;
