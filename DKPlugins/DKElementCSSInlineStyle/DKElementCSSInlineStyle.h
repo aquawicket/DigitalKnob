@@ -16,7 +16,7 @@ public:
 	
 	// [SameObject, PutForwards=cssText] readonly attribute CSSStyleDeclaration style;
 	DKCSSStyleDeclaration* _style = NULL;
-	virtual DKCSSStyleDeclaration*	style()									{ return _style ? _style : new DKNullCSSStyleDeclaration(); }	// getter
+	virtual DKCSSStyleDeclaration*	style()									{ return _style;/* ? _style : new DKNullCSSStyleDeclaration();*/ }	// getter
 	virtual void 					style(DKCSSStyleDeclaration* style) 	{ _style = style; } 											// setter
 
 // };
