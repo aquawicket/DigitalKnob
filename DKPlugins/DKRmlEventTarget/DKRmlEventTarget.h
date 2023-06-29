@@ -11,28 +11,31 @@
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // [Exposed=*]
 // interface EventTarget {
-class DKRmlEventTarget : public DKEventTarget
+class DKRmlEventTarget : virtual public DKEventTarget
 {
 public:
+	//DKRmlInterface* _dkRmlInterface;
 	DKRmlEventListener* _dkRmlEventListener;
 	Rml::Element* _rmlElement;
 	
 	// constructor();
+	//DKRmlEventTarget(DKRmlInterface* dkRmlInterface, Rml::Element* rmlElement) : DKEventTarget() {
 	DKRmlEventTarget(DKRmlEventListener* dkRmlEventListener, Rml::Element* rmlElement) : DKEventTarget() {
 		DKDEBUGFUNC();
 		interfaceName = "DKRmlEventTarget";
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKRmlEventTarget("+interfaceAddress+") \n");
+		//_dkRmlInterface = dkRmlInterface;
 		_dkRmlEventListener = dkRmlEventListener;
 		_rmlElement = rmlElement;
 		
 		if(!_rmlElement)
 			DKERROR("_rmlElement invalid! \n");
 	}
-	//virtual ~DKRmlEventTarget(){}
+	~DKRmlEventTarget(){}
 
 	// undefined addEventListener(DOMString type, EventListener? callback, optional (AddEventListenerOptions or boolean) options = {});
-	void addEventListener(const DOMString& type, DKCallback callback) override {
+	const void addEventListener(const DOMString& type, DKCallback callback) override {
 		DKDEBUGFUNC(type, callback);
 		DKTODO();
 		_rmlElement->AddEventListener(type, _dkRmlEventListener, false);

@@ -13,7 +13,7 @@ class DKHTMLCollection;
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // [Exposed=Window]
 // interface Document : Node {
-class DKRmlDocument : virtual public DKDocument, public DKRmlNonElementParentNode
+class DKRmlDocument : public DKDocument, public DKRmlNonElementParentNode
 {
 public:
 	static std::vector<DKRmlDocument*> list;

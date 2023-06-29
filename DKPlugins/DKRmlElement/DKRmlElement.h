@@ -11,7 +11,7 @@
 
 // [Exposed=Window]
 // interface Element : Node {
-class DKRmlElement : public DKElement, public DKRmlNode     //, public DKRmlElementCSSInlineStyle
+class DKRmlElement : public DKElement, public DKRmlNode   //, public DKRmlElementCSSInlineStyle
 {
 public:
 	DKRmlEventListener* _dkRmlEventListener;
@@ -30,6 +30,7 @@ public:
 		interfaceName = "DKRmlElement";
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKRmlElement("+interfaceAddress+") \n");
+		//_dkRmlInterface = dkRmlInterface;
 		_dkRmlEventListener = dkRmlEventListener;
 		_rmlElement = rmlElement;
 		
@@ -38,7 +39,7 @@ public:
 		
 		list.push_back(this);
 	}
-	//~DKRmlElement() {}
+	~DKRmlElement() {}
 	
 
 	

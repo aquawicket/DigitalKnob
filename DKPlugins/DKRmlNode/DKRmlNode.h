@@ -14,7 +14,7 @@
 class DKRmlNode : public DKNode, public DKRmlEventTarget
 {
 public:	 
-	DKRmlNode(DKRmlEventListener* dkRmlEventListener, Rml::Element* rmlElement) : DKNode(), DKRmlEventTarget(dkRmlEventListener, rmlElement) {
+	DKRmlNode(DKRmlEventListener* dkRmlEventListener, Rml::Element* rmlElement) : DKNode(), DKRmlEventTarget(dkRmlEventListener, rmlElement)  {
 		DKDEBUGFUNC();
 		interfaceName = "DKRmlNode";
 		interfaceAddress = pointerToAddress(this);
@@ -24,7 +24,7 @@ public:
 		if(!_rmlElement)
 			DKERROR("_rmlElement invalid! \n");
 	}
-	//~DKRmlNode() {}
+	~DKRmlNode() {}
 	
 	/*
 	// const unsigned short ELEMENT_NODE = 1;
