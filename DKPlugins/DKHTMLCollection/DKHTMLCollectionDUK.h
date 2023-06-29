@@ -78,7 +78,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		//if(duk_is_valid_index(ctx, 1))
 		//	htmlCollection(ctx)->length(GetUint(ctx));
-		unsigned int length = htmlCollection(ctx)->length();
+		const unsigned int length = htmlCollection(ctx)->length();
 		dukglue_push(ctx, length);
 		return true;
 	}
