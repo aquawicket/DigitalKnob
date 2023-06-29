@@ -23,7 +23,7 @@ public:
 	}
 	
 	// undefined handleEvent(Event event);
-	virtual const void handleEvent(DKEvent& event) override {
+	const void handleEvent(DKEvent& event) override {
 		DKDEBUGFUNC(event);
 		DKTODO();
 	}

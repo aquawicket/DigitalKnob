@@ -34,44 +34,44 @@ public:
 	
 	// [CEReactions] attribute CSSOMString cssText;
 	//CSSOMString _cssText = "";
-	virtual const CSSOMString& cssText() override				{ return _cssText; }			// getter
-	virtual void cssText(const CSSOMString& cssText) override	{ _cssText = cssText; } 		// setter
+	const CSSOMString& cssText() override				{ return _cssText; }			// getter
+	void cssText(const CSSOMString& cssText) override	{ _cssText = cssText; } 		// setter
 	
 	// readonly attribute unsigned long length;
 	//unsigned int _length = 0;
-	virtual const unsigned int& length() override				{ return _length; }				// getter
-	virtual void length(const unsigned int& length)	override	{ _length = length; } 			// setter
+	const unsigned int& length() override				{ return _length; }				// getter
+	void length(const unsigned int& length)	override	{ _length = length; } 			// setter
 	
 	// getter CSSOMString item(unsigned long index);
 	//CSSOMString _item = "";
-	virtual const CSSOMString& item(const unsigned int& index) override {
+	const CSSOMString& item(const unsigned int& index) override {
 		DKDEBUGFUNC(index);
 		return _item;
 	}
 	
 	// CSSOMString getPropertyValue(CSSOMString property);
 	//CSSOMString _getPropertyValue = "";
-	virtual const CSSOMString& getPropertyValue(const CSSOMString& property) override {
+	const CSSOMString& getPropertyValue(const CSSOMString& property) override {
 		DKDEBUGFUNC(property);
 		return _getPropertyValue;
 	}
 	
 	// CSSOMString getPropertyPriority(CSSOMString property);
 	//CSSOMString _getPropertyPriority = "";
-	virtual const CSSOMString& getPropertyPriority(const CSSOMString& property) override {
+	const CSSOMString& getPropertyPriority(const CSSOMString& property) override {
 		DKDEBUGFUNC(property);
 		return _getPropertyPriority;
 	}
 	
 	// [CEReactions] undefined setProperty(CSSOMString property, [LegacyNullToEmptyString] CSSOMString value, optional [LegacyNullToEmptyString] CSSOMString priority = "");
-	virtual void setProperty(const CSSOMString& property, const CSSOMString& value, const CSSOMString& priority = "") override {
+	void setProperty(const CSSOMString& property, const CSSOMString& value, const CSSOMString& priority = "") override {
 		DKDEBUGFUNC(property, value, priority);
 		_rmlElement->SetProperty(property, value);//, priority);
 	}
 	
 	// [CEReactions] CSSOMString removeProperty(CSSOMString property);
 	//CSSOMString _removeProperty = "";
-	virtual const CSSOMString& removeProperty(const CSSOMString& property) override {
+	const CSSOMString& removeProperty(const CSSOMString& property) override {
 		DKDEBUGFUNC(property);
 		return _removeProperty;
 	}
@@ -81,8 +81,8 @@ public:
 	
 	// [CEReactions] attribute [LegacyNullToEmptyString] CSSOMString cssFloat;
 	//CSSOMString _cssFloat = "";
-	virtual const CSSOMString& cssFloat() override					{ return _cssFloat; }				// getter
-	virtual void cssFloat(const CSSOMString& cssFloat) override		{ _cssFloat = cssFloat; } 			// setter
+	const CSSOMString& cssFloat() override					{ return _cssFloat; }				// getter
+	void cssFloat(const CSSOMString& cssFloat) override		{ _cssFloat = cssFloat; } 			// setter
 	
 // };
 };

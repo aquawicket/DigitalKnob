@@ -23,10 +23,9 @@ public:
 		_dkRmlInterface = dkRmlInterface;
 		_dkRmlEventListener = dkRmlEventListener;
 	}
-	//virtual ~DKRmlNonElementParentNode() {	}
 	
 	// Element? getElementById(DOMString elementId);
-	virtual DKElement* getElementById(const DOMString& elementId) {
+	DKElement* getElementById(const DOMString& elementId) {
 		DKDEBUGFUNC(elementId);
 		Rml::Element* element = _dkRmlInterface->document->GetElementById(elementId.c_str());
 		return DKRmlElement::instance(_dkRmlEventListener, element);
