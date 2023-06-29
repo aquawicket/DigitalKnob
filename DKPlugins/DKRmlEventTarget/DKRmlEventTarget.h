@@ -5,7 +5,6 @@
 #define DKRmlEventTarget_H
 
 #include "DKEventTarget/DKEventTarget.h"
-//#include "DKRmlInterface/DKRmlInterface.h"
 #include "DKRmlEventListener/DKRmlEventListener.h"
 
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
@@ -33,7 +32,6 @@ public:
 	// undefined addEventListener(DOMString type, EventListener? callback, optional (AddEventListenerOptions or boolean) options = {});
 	void addEventListener(const DOMString& type, DKCallback callback) override {
 		DKDEBUGFUNC(type, callback);
-		DKTODO();
 		_rmlElement->AddEventListener(type, _dkRmlEventListener, false);
 		DKEventTarget::addEventListener(type, callback);
 		DKTODO();
@@ -42,7 +40,6 @@ public:
 	// undefined removeEventListener(DOMString type, EventListener? callback, optional (EventListenerOptions or boolean) options = {});
 	void removeEventListener(const DOMString& type, DKCallback callback) override {
 		DKDEBUGFUNC(type, callback);
-		DKTODO();
 		_rmlElement->RemoveEventListener(type, _dkRmlEventListener, false);
 		DKEventTarget::removeEventListener(type, callback);
 		DKTODO();
@@ -51,7 +48,6 @@ public:
 	// boolean dispatchEvent(Event event);
 	bool dispatchEvent(DKEvent& event) override {
 		DKDEBUGFUNC(event);
-		DKTODO();
 		//_rmlElement->DispatchEvent(event.type(), Rml::Dictionary());
 		DKEventTarget::dispatchEvent(event);
 		return false;

@@ -42,7 +42,6 @@ public:
 	
 	////// NOTE: from DKRmlElementCSSInlineStyle
 	// [SameObject, PutForwards=cssText] readonly attribute CSSStyleDeclaration style;
-	//DKCSSStyleDeclaration* _style = NULL;
 	DKCSSStyleDeclaration* style() override { 																// getter
 		return _style ? _style : DKRmlCSSStyleDeclaration::instance(_rmlElement); 
 	}	
@@ -51,20 +50,18 @@ public:
 	
 	/*
 	// readonly attribute DOMString? namespaceURI;
-	DOMString _namespaceURI = "";
 	const DOMString& namespaceURI()	override					{ return _namespaceURI; }			// getter
 	void namespaceURI(const DOMString& namespaceURI) override	{ _namespaceURI = namespaceURI; } 	// setter
 	
 	// readonly attribute DOMString? prefix;
-	DOMString _prefix = "";
 	const DOMString& prefix() override							{ return _prefix; }					// getter
 	void prefix(const DOMString& prefix) override				{ _prefix = prefix; } 				// setter
   
 	// readonly attribute DOMString localName;
-	DOMString _localName = "";
 	const DOMString& localName() override						{ return _localName; }				// getter
 	void localName(const DOMString& localName) override			{ _localName = localName; } 		// setter
 	*/
+	
 	// readonly attribute DOMString tagName;
 	const DOMString& tagName() override							{									// getter
 		if(!_rmlElement){
@@ -78,12 +75,10 @@ public:
 	
 	/*
 	// [CEReactions] attribute DOMString id;
-	DOMString _id = "";
 	const DOMString& id() override								{ return _id; }						// getter
 	void id(const DOMString& id) override						{ _id = id; } 						// setter
 	
 	// [CEReactions] attribute DOMString className;
-	DOMString _className = "";
 	const DOMString& className() override						{ return _className; }				// getter
 	void className(const DOMString& className) override			{ _className = className; } 		// setter
 	*/
@@ -108,24 +103,20 @@ public:
 	
 	/*
 	//[CEReactions, Unscopable] attribute DOMString slot;
-	DOMString _slot = "";
 	const DOMString& slot() override							{ return _slot; }					// getter
 	void slot(const DOMString& slot) override					{ _slot = slot; } 					// setter
 
 	// boolean hasAttributes();
-	bool _hasAttributes = false;
 	const bool& hasAttributes() override {
 		DKDEBUGFUNC();
 		return _hasAttributes;
 	}
 	
 	// [SameObject] readonly attribute NamedNodeMap attributes;
-	DKString _attributes = "";
 	const DKString& attributes() override						{ return _attributes; }				// getter
 	void attributes(const DKString& attributes) override		{ _attributes = attributes; } 		// setter
 	
 	// sequence<DOMString> getAttributeNames();
-	DKString _getAttributeNames = "";
 	const DKString& getAttributeNames() override {
 		DKDEBUGFUNC();
 		return _getAttributeNames;
@@ -143,7 +134,6 @@ public:
 	
 	/*
 	// DOMString? getAttributeNS(DOMString? namespace, DOMString localName);
-	DOMString _getAttributeNS = "";
 	const DOMString& getAttribute(const DOMString& _namespace, const DOMString& localName) override {
 		DKDEBUGFUNC(_namespace, localName);
 		return _getAttributeNS;
@@ -170,7 +160,6 @@ public:
 	}
 	
 	// [CEReactions] boolean toggleAttribute(DOMString qualifiedName, optional boolean force);
-	bool _toggleAttribute = false;
 	const bool& toggleAttribute(const DOMString& qualifiedName, const bool& force) override {
 		DKDEBUGFUNC(qualifiedName, force);
 		return _toggleAttribute;
@@ -186,56 +175,48 @@ public:
 	
 	/*
 	// boolean hasAttributeNS(DOMString? namespace, DOMString localName);
-	bool _hasAttributeNS = false;
 	const bool& hasAttributeNS(const DOMString& _namespace, const DOMString& localName) override {
 		DKDEBUGFUNC(_namespace, localName);
 		return _hasAttributeNS;
 	}
 	
 	// Attr? getAttributeNode(DOMString qualifiedName);
-	DKString _getAttributeNode = "";
 	const DKString& getAttributeNode(const DOMString& qualifiedName) override {
 		DKDEBUGFUNC(qualifiedName);
 		return _getAttributeNode;
 	}
 	
 	// Attr? getAttributeNodeNS(DOMString? namespace, DOMString localName);
-	DKString _getAttributeNodeNS = "";
 	const DKString& getAttributeNodeNS(const DOMString& _namespace, const DOMString& localName) override {
 		DKDEBUGFUNC(_namespace, localName);
 		return _getAttributeNodeNS;
 	}
 	
 	// [CEReactions] Attr? setAttributeNode(Attr attr);
-	DKString _setAttributeNode = "";
 	const DKString& setAttributeNode(const DKString& attr) override {
 		DKDEBUGFUNC(attr);
 		return _setAttributeNode;
 	}
 	
 	// [CEReactions] Attr? setAttributeNodeNS(Attr attr);
-	DKString _setAttributeNodeNS = "";
 	const DKString& setAttributeNodeNS(const DKString& attr) override {
 		DKDEBUGFUNC(attr);
 		return _setAttributeNodeNS;
 	}
 	
 	// [CEReactions] Attr removeAttributeNode(Attr attr);
-	DKString _removeAttributeNode = "";
 	const DKString& removeAttributeNode(const DKString& attr) override {
 		DKDEBUGFUNC(attr);
 		return _removeAttributeNode;
 	}
 	
 	// ShadowRoot attachShadow(ShadowRootInit init);
-	DKString _attachShadow = "";
 	const DKString& attachShadow(const DKString& init) override {
 		DKDEBUGFUNC(init);
 		return _attachShadow;
 	}
 	
 	// readonly attribute ShadowRoot? shadowRoot;
-	DKString _shadowRoot = "";
 	const DKString& shadowRoot() override							{ return _shadowRoot; }					// getter
 	void shadowRoot(const DKString& shadowRoot) override			{ _shadowRoot = shadowRoot; } 			// setter
 	*/
@@ -252,14 +233,12 @@ public:
 	
 	/*
 	// boolean matches(DOMString selectors);
-	bool _matches = false;
 	const bool& matches(const DOMString& selectors) override {
 		DKDEBUGFUNC(selectors);
 		return _matches;
 	}
 	
 	// boolean webkitMatchesSelector(DOMString selectors); // legacy alias of .matches
-	bool _webkitMatchesSelector = false;
 	const bool& webkitMatchesSelector(const DOMString& selectors) override {
 		DKDEBUGFUNC(selectors);
 		return _webkitMatchesSelector;
@@ -287,28 +266,24 @@ public:
 	
 	/*
 	// HTMLCollection getElementsByTagNameNS(DOMString? namespace, DOMString localName);
-	DKString _getElementsByTagNameNS = "";
 	const DKString& getElementsByTagNameNS(const DOMString& _namespace, const DOMString& localName) override {
 		DKDEBUGFUNC(_namespace, localName);
 		return _getElementsByTagNameNS;
 	}
 	
 	// HTMLCollection getElementsByClassName(DOMString classNames);
-	DKString _getElementsByClassName = "";
 	const DKString& getElementsByClassName(const DOMString& classNames) override {
 		DKDEBUGFUNC(classNames);
 		return _getElementsByClassName;
 	}
   
 	// [CEReactions] Element? insertAdjacentElement(DOMString where, Element element); // legacy
-	DKString _insertAdjacentElement = "";
 	const DKString& insertAdjacentElement(const DOMString& where, const DKString& element) override {
 		DKDEBUGFUNC(where, element);
 		return _insertAdjacentElement;
 	}
 	
 	// undefined insertAdjacentText(DOMString where, DOMString data); // legacy
-	DKString _insertAdjacentText = "";
 	const DKString& insertAdjacentText(const DOMString& where, const DOMString& data) override {
 		DKDEBUGFUNC(where, data);
 		return _insertAdjacentText;

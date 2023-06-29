@@ -33,31 +33,26 @@ public:
 	}
 	
 	// [CEReactions] attribute CSSOMString cssText;
-	//CSSOMString _cssText = "";
 	const CSSOMString& cssText() override				{ return _cssText; }			// getter
 	void cssText(const CSSOMString& cssText) override	{ _cssText = cssText; } 		// setter
 	
 	// readonly attribute unsigned long length;
-	//unsigned int _length = 0;
 	const unsigned int& length() override				{ return _length; }				// getter
 	void length(const unsigned int& length)	override	{ _length = length; } 			// setter
 	
 	// getter CSSOMString item(unsigned long index);
-	//CSSOMString _item = "";
 	const CSSOMString& item(const unsigned int& index) override {
 		DKDEBUGFUNC(index);
 		return _item;
 	}
 	
 	// CSSOMString getPropertyValue(CSSOMString property);
-	//CSSOMString _getPropertyValue = "";
 	const CSSOMString& getPropertyValue(const CSSOMString& property) override {
 		DKDEBUGFUNC(property);
 		return _getPropertyValue;
 	}
 	
 	// CSSOMString getPropertyPriority(CSSOMString property);
-	//CSSOMString _getPropertyPriority = "";
 	const CSSOMString& getPropertyPriority(const CSSOMString& property) override {
 		DKDEBUGFUNC(property);
 		return _getPropertyPriority;
@@ -70,7 +65,6 @@ public:
 	}
 	
 	// [CEReactions] CSSOMString removeProperty(CSSOMString property);
-	//CSSOMString _removeProperty = "";
 	const CSSOMString& removeProperty(const CSSOMString& property) override {
 		DKDEBUGFUNC(property);
 		return _removeProperty;
@@ -80,7 +74,6 @@ public:
 	// TODO
 	
 	// [CEReactions] attribute [LegacyNullToEmptyString] CSSOMString cssFloat;
-	//CSSOMString _cssFloat = "";
 	const CSSOMString& cssFloat() override					{ return _cssFloat; }				// getter
 	void cssFloat(const CSSOMString& cssFloat) override		{ _cssFloat = cssFloat; } 			// setter
 	

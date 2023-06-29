@@ -23,10 +23,6 @@ public:
 	}
 
 // };
-
-	
-	////// toString //////
-	//operator std::string() const { return "[object NonElementParentNode]"; }
 };
 
 #endif // NonElementParentNode_H
