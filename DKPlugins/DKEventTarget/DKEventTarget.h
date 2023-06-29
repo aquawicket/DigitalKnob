@@ -65,11 +65,9 @@ public:
 			//DKINFO("	eventObj("+eventObj.type+", "+eventObj.interfaceAddress) \n");	
 			if(eventListener.type == event.type() && eventListener.interfaceAddress == interfaceAddress){
 				//DKINFO("		event("+event.type()+") \n");	
-			
 				event.currentTarget(*this);
 				event.target(*this);
 				event.srcElement(*this);
-				
 				eventListener.callback(event);
 			}
         }

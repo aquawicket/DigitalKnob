@@ -34,7 +34,6 @@ public:
 		DKDEBUGFUNC(type, callback);
 		_rmlElement->AddEventListener(type, _dkRmlEventListener, false);
 		DKEventTarget::addEventListener(type, callback);
-		DKTODO();
 	}
 	
 	// undefined removeEventListener(DOMString type, EventListener? callback, optional (EventListenerOptions or boolean) options = {});
@@ -42,7 +41,6 @@ public:
 		DKDEBUGFUNC(type, callback);
 		_rmlElement->RemoveEventListener(type, _dkRmlEventListener, false);
 		DKEventTarget::removeEventListener(type, callback);
-		DKTODO();
 	}
 	
 	// boolean dispatchEvent(Event event);
