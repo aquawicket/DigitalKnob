@@ -95,8 +95,8 @@ var Element = function Element(address) {
     }
 	
 	// DOMString? getAttribute(DOMString qualifiedName);
-	Element.prototype.getAttribute = function getAttribute() {
-        return CPP_DKElementDUK_getAttribute(this.address);
+	Element.prototype.getAttribute = function getAttribute(qualifiedName) {
+        return CPP_DKElementDUK_getAttribute(this.address, qualifiedName);
     }
 	
 	// DOMString? getAttributeNS(DOMString? namespace, DOMString localName);
