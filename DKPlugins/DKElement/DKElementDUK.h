@@ -134,9 +134,9 @@ public:
 		return true;
 	}
 	
-	static DKElement* eventTarget(duk_context* ctx){
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		return (DKElement*)addressToPointer(eventTargetAddress);
+	static DKElement* element(duk_context* ctx){
+		DKString elementAddress = duk_require_string(ctx, 0);
+		return (DKElement*)addressToPointer(elementAddress);
 	}
 	static bool GetBool(duk_context* ctx, int index = 1){
 		if (duk_is_boolean(ctx, index))
@@ -168,8 +168,8 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKINFO("CPP_DKElementDUK_constructor()\n");
 		DKElement* _element = new DKElement();
-		DKString eventTargetAddress = pointerToAddress(_element);
-		duk_push_string(ctx, eventTargetAddress.c_str());
+		DKString elementAddress = pointerToAddress(_element);
+		duk_push_string(ctx, elementAddress.c_str());
 		return true;
 	}
 	
@@ -178,8 +178,8 @@ public:
 	static int style(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		//if(duk_is_valid_index(ctx, 1))
-		//	eventTarget(ctx)->namespaceURI(GetString(ctx));
-		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->style()));
+		//	element(ctx)->namespaceURI(GetString(ctx));
+		dukglue_push(ctx, pointerToAddress(element(ctx)->style()));
 		return true;
 	}
 	/////////////////////////////////////////
@@ -188,8 +188,8 @@ public:
 	static int namespaceURI(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		//if(duk_is_valid_index(ctx, 1))
-		//	eventTarget(ctx)->namespaceURI(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->namespaceURI());
+		//	element(ctx)->namespaceURI(GetString(ctx));
+		dukglue_push(ctx, element(ctx)->namespaceURI());
 		return true;
 	}
 	
@@ -197,8 +197,8 @@ public:
 	static int prefix(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		//if(duk_is_valid_index(ctx, 1))
-		//	eventTarget(ctx)->prefix(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->prefix());
+		//	element(ctx)->prefix(GetString(ctx));
+		dukglue_push(ctx, element(ctx)->prefix());
 		return true;
 	}
 	
@@ -206,8 +206,8 @@ public:
 	static int localName(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		//if(duk_is_valid_index(ctx, 1))
-		//	eventTarget(ctx)->localName(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->localName());
+		//	element(ctx)->localName(GetString(ctx));
+		dukglue_push(ctx, element(ctx)->localName());
 		return true;
 	}
 	
@@ -215,8 +215,8 @@ public:
 	static int tagName(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		//if(duk_is_valid_index(ctx, 1))
-		//	eventTarget(ctx)->tagName(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->tagName());
+		//	element(ctx)->tagName(GetString(ctx));
+		dukglue_push(ctx, element(ctx)->tagName());
 		return true;
 	}
 	
@@ -224,8 +224,8 @@ public:
 	static int id(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->id(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->id());
+			element(ctx)->id(GetString(ctx));
+		dukglue_push(ctx, element(ctx)->id());
 		return true;
 	}
 	
@@ -233,8 +233,8 @@ public:
 	static int className(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->className(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->className());
+			element(ctx)->className(GetString(ctx));
+		dukglue_push(ctx, element(ctx)->className());
 		return true;
 	}
 	
@@ -242,8 +242,8 @@ public:
 	static int classList(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		//if(duk_is_valid_index(ctx, 1))
-		//	eventTarget(ctx)->classList(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->classList());
+		//	element(ctx)->classList(GetString(ctx));
+		dukglue_push(ctx, element(ctx)->classList());
 		return true;
 	}
 	
@@ -251,15 +251,15 @@ public:
 	static int slot(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->slot(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->slot());
+			element(ctx)->slot(GetString(ctx));
+		dukglue_push(ctx, element(ctx)->slot());
 		return true;
 	}
 	
 	// boolean hasAttributes();
 	static int hasAttributes(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		bool _hasAttributes = eventTarget(ctx)->hasAttributes();
+		bool _hasAttributes = element(ctx)->hasAttributes();
 		dukglue_push(ctx, _hasAttributes);	
 		return true;
 	}
@@ -268,15 +268,15 @@ public:
 	static int attributes(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		//if(duk_is_valid_index(ctx, 1))
-		//	eventTarget(ctx)->attributes(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->attributes());
+		//	element(ctx)->attributes(GetString(ctx));
+		dukglue_push(ctx, element(ctx)->attributes());
 		return true;
 	}
 	
 	// sequence<DOMString> getAttributeNames();
 	static int getAttributeNames(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _getAttributeNames = eventTarget(ctx)->getAttributeNames();
+		DKString _getAttributeNames = element(ctx)->getAttributeNames();
 		dukglue_push(ctx, _getAttributeNames);	
 		return true;
 	}
@@ -284,7 +284,8 @@ public:
 	// DOMString? getAttribute(DOMString qualifiedName);
 	static int getAttribute(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		return DKTODO();
+		dukglue_push(ctx, element(ctx)->getAttribute(GetString(ctx)));
+		return true;
 	}
 	
 	// DOMString? getAttributeNS(DOMString? namespace, DOMString localName);
@@ -375,8 +376,8 @@ public:
 	static int shadowRoot(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		//if(duk_is_valid_index(ctx, 1))
-		//	eventTarget(ctx)->shadowRoot(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->shadowRoot());
+		//	element(ctx)->shadowRoot(GetString(ctx));
+		dukglue_push(ctx, element(ctx)->shadowRoot());
 		return true;
 	}
 	
@@ -402,7 +403,7 @@ public:
 	static int getElementsByTagName(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString qualifiedName = GetString(ctx);
-		DKHTMLCollection* _getElementsByTagName = eventTarget(ctx)->getElementsByTagName(qualifiedName);
+		DKHTMLCollection* _getElementsByTagName = element(ctx)->getElementsByTagName(qualifiedName);
 		dukglue_push(ctx, pointerToAddress(_getElementsByTagName));	
 		return true;
 	}
