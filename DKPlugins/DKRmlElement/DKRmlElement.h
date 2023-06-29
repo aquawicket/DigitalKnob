@@ -11,7 +11,7 @@
 
 // [Exposed=Window]
 // interface Element : Node {
-class DKRmlElement : public DKElement, public DKRmlNode, public DKRmlElementCSSInlineStyle
+class DKRmlElement : public DKElement, public DKRmlNode//, public DKRmlElementCSSInlineStyle
 {
 public:
 	//DKRmlEventListener* _dkRmlEventListener;
@@ -25,7 +25,7 @@ public:
 		return new DKRmlElement(dkRmlEventListener, rmlElement);
 	}
 	
-	DKRmlElement(DKRmlEventListener* dkRmlEventListener, Rml::Element* rmlElement) : DKElement(), DKRmlNode(dkRmlEventListener, rmlElement), DKRmlElementCSSInlineStyle(rmlElement) {
+	DKRmlElement(DKRmlEventListener* dkRmlEventListener, Rml::Element* rmlElement) : DKElement(), DKRmlNode(dkRmlEventListener, rmlElement)/*, DKRmlElementCSSInlineStyle(rmlElement)*/ {
 		DKDEBUGFUNC();
 		interfaceName = "DKRmlElement";
 		interfaceAddress = pointerToAddress(this);
@@ -39,13 +39,10 @@ public:
 		list.push_back(this);
 	}
 
-	
 	////// NOTE: from DKRmlElementCSSInlineStyle
 	// [SameObject, PutForwards=cssText] readonly attribute CSSStyleDeclaration style;
-	//DKCSSStyleDeclaration* style() override { 																// getter
-	//	return _style ? _style : DKRmlCSSStyleDeclaration::instance(_rmlElement); 
-	//}	
-	//void style(DKCSSStyleDeclaration& style) /*override*/	{ _style = &style; } 							// setter
+	DKCSSStyleDeclaration* style() override { return _style ? _style : DKRmlCSSStyleDeclaration::instance(_rmlElement); }	// getter	
+	//void style(DKCSSStyleDeclaration& style) /*override*/	{ _style = &style; } 											// setter
 	////////////////////////////////////////////
 	
 	/*
