@@ -35,7 +35,7 @@ public:
 	~DKRmlEventTarget(){}
 
 	// undefined addEventListener(DOMString type, EventListener? callback, optional (AddEventListenerOptions or boolean) options = {});
-	const void addEventListener(const DOMString& type, DKCallback callback) override {
+	void addEventListener(const DOMString& type, DKCallback callback) override {
 		DKDEBUGFUNC(type, callback);
 		DKTODO();
 		_rmlElement->AddEventListener(type, _dkRmlEventListener, false);
