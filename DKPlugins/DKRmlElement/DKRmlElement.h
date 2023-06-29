@@ -39,7 +39,7 @@ public:
 		
 		list.push_back(this);
 	}
-	~DKRmlElement() {}
+	//~DKRmlElement() {}
 	
 
 	

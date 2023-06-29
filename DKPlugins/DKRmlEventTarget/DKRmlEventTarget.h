@@ -29,7 +29,7 @@ public:
 		if(!_rmlElement)
 			DKERROR("_rmlElement invalid! \n");
 	}
-	~DKRmlEventTarget(){}
+	//~DKRmlEventTarget(){}
 
 	// undefined addEventListener(DOMString type, EventListener? callback, optional (AddEventListenerOptions or boolean) options = {});
 	void addEventListener(const DOMString& type, DKCallback callback) override {
