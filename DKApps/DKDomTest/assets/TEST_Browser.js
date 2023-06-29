@@ -28,7 +28,9 @@ location.href = url;
 function onHyperlink(event) {
 	console.log("onHyperlink()");
 	const target = event.target;
+	console.log("target = "+target);
 	const value = target.getAttribute("href");
+	console.log("value = "+value);
 	location.href = value;
 }
 
