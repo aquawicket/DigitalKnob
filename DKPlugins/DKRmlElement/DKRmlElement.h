@@ -14,7 +14,7 @@
 class DKRmlElement : public DKElement, public DKRmlNode   //, public DKRmlElementCSSInlineStyle
 {
 public:
-	DKRmlEventListener* _dkRmlEventListener;
+	//DKRmlEventListener* _dkRmlEventListener;
 
 	static std::vector<DKRmlElement*> list;
 	static DKRmlElement* instance(DKRmlEventListener* dkRmlEventListener, Rml::Element* rmlElement){

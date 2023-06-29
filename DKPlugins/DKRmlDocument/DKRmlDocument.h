@@ -13,7 +13,7 @@ class DKHTMLCollection;
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // [Exposed=Window]
 // interface Document : Node {
-class DKRmlDocument : public DKDocument, public DKRmlNonElementParentNode
+class DKRmlDocument : public DKDocument, public DKRmlNode, public DKRmlNonElementParentNode
 {
 public:
 	static std::vector<DKRmlDocument*> list;
@@ -29,7 +29,7 @@ public:
 	DKRmlEventListener* _dkRmlEventListener;
 	
 	// constructor();
-	DKRmlDocument(DKRmlInterface* dkRmlInterface, DKRmlEventListener* dkRmlEventListener) : DKDocument(), DKRmlNonElementParentNode(dkRmlInterface, dkRmlEventListener) {
+	DKRmlDocument(DKRmlInterface* dkRmlInterface, DKRmlEventListener* dkRmlEventListener) : DKDocument(), DKRmlNode(_dkRmlEventListener, NULL), DKRmlNonElementParentNode(dkRmlInterface, dkRmlEventListener) {
 		DKDEBUGFUNC();
 		interfaceName = "DKRmlDocument";
 		interfaceAddress = pointerToAddress(this);
@@ -278,6 +278,10 @@ public:
 			void onfullscreenerror(const DKString& onfullscreenerror) override		{ _onfullscreenerror = onfullscreenerror; } 	// setter
 	//};
 	*/
+	
+	
+	////// toString //////
+	operator std::string() const { return "[object DKRmlDocument]"; }
 };
 
 

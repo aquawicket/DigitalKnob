@@ -29,6 +29,10 @@ public:
 
 	// [LegacyUnforgeable] stringifier attribute USVString href;
 	void href(const USVString& href) override;
+	
+	
+	////// toString //////
+	operator std::string() const { return "[object DKRmlLocation]"; }
 };
 //REGISTER_OBJECT(DKRmlLocation, true);
 

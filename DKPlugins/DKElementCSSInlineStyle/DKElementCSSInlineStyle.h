@@ -31,10 +31,6 @@ public:
 		virtual void 				attributeStyleMap(DKStylePropertyMap& attributeStyleMap) 	{ _attributeStyleMap = &attributeStyleMap; } 	// setter
 		*/
 	// };
-	
-	
-	////// toString //////
-	operator std::string() const { return "[object ElementCSSInlineStyle]"; }
 };
 
 #endif //DKElementCSSInlineStyle_H

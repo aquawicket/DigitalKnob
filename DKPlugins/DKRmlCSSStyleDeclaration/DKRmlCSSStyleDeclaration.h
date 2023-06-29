@@ -33,12 +33,12 @@ public:
 	}
 	
 	// [CEReactions] attribute CSSOMString cssText;
-	const CSSOMString& cssText() override				{ return _cssText; }			// getter
-	void cssText(const CSSOMString& cssText) override	{ _cssText = cssText; } 		// setter
+	const CSSOMString& cssText() override					{ return _cssText; }			// getter
+	void cssText(const CSSOMString& cssText) override		{ _cssText = cssText; } 		// setter
 	
 	// readonly attribute unsigned long length;
-	const unsigned int& length() override				{ return _length; }				// getter
-	void length(const unsigned int& length)	override	{ _length = length; } 			// setter
+	const unsigned int& length() override					{ return _length; }				// getter
+	void length(const unsigned int& length)	override		{ _length = length; } 			// setter
 	
 	// getter CSSOMString item(unsigned long index);
 	const CSSOMString& item(const unsigned int& index) override {
@@ -74,10 +74,14 @@ public:
 	// TODO
 	
 	// [CEReactions] attribute [LegacyNullToEmptyString] CSSOMString cssFloat;
-	const CSSOMString& cssFloat() override					{ return _cssFloat; }				// getter
-	void cssFloat(const CSSOMString& cssFloat) override		{ _cssFloat = cssFloat; } 			// setter
+	const CSSOMString& cssFloat() override					{ return _cssFloat; }			// getter
+	void cssFloat(const CSSOMString& cssFloat) override		{ _cssFloat = cssFloat; } 		// setter
 	
 // };
+
+	
+	////// toString //////
+	operator std::string() const { return "[object DKRmlCSSStyleDeclaration]"; }
 };
 	
 	

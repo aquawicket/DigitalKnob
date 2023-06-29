@@ -30,6 +30,10 @@ public:
 	
 	// Rml::EventListener::ProcessEvent override
 	void ProcessEvent(Rml::Event& rmlEvent) override;
+	
+	
+	////// toString //////
+	operator std::string() const { return "[object DKRmlEventListener]"; }
 };
 
 

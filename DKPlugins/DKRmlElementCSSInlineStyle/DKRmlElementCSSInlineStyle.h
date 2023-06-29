@@ -4,15 +4,14 @@
 #ifndef DKRmlElementCSSInlineStyle_H
 #define DKRmlElementCSSInlineStyle_H
 
-//#include "DKElementCSSInlineStyle/DKElementCSSInlineStyle.h"
+#include "DKElementCSSInlineStyle/DKElementCSSInlineStyle.h"
 #include "DKRmlCSSStyleDeclaration/DKRmlCSSStyleDeclaration.h"
-
 //#include "DKMixin/DKMixin.h"
 
 
 // Source: CSS Object Model (CSSOM) (https://www.w3.org/TR/cssom-1/)
 // interface mixin ElementCSSInlineStyle {
-class DKRmlElementCSSInlineStyle //: public DKElementCSSInlineStyle
+class DKRmlElementCSSInlineStyle : public DKElementCSSInlineStyle
 {
 public:
 	DKRmlInterface* _dkRmlInterface;
@@ -23,14 +22,12 @@ public:
 		_dkRmlInterface = dkRmlInterface;
 		_rmlElement = rmlElement;
 	}
-	virtual ~DKRmlElementCSSInlineStyle() {	}
 	
 	// [SameObject, PutForwards=cssText] readonly attribute CSSStyleDeclaration style;
-	DKCSSStyleDeclaration* _style = NULL;
-	virtual DKCSSStyleDeclaration&	style()	/*override*/								{ 																// getter
-		return _style ? *_style : *new DKRmlCSSStyleDeclaration(_rmlElement); 
+	DKCSSStyleDeclaration* style() override								{ 																// getter
+		return _style ? _style : new DKRmlCSSStyleDeclaration(_rmlElement); 
 	}	
-	virtual void 					style(DKCSSStyleDeclaration& style) /*override*/	{ _style = &style; } 											// setter
+	//void 					style(DKCSSStyleDeclaration& style) override{ _style = style; } 											// setter
 
 // };
 
