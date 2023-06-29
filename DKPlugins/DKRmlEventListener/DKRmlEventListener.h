@@ -13,7 +13,7 @@
 class DKRmlEventListener : virtual public DKEventListener, public Rml::EventListener
 {
 public:
-	DKRmlEventListener() {//: DKEventListener() {
+	DKRmlEventListener() : DKEventListener() {
 		DKDEBUGFUNC();
 		/*
 		interfaceName = "RmlEventListener";
@@ -21,7 +21,7 @@ public:
 		DKINFO("DKRmlEventListener("+interfaceAddress+") \n");
 		*/
 	}
-	virtual ~DKRmlEventListener(){}
+	//virtual ~DKRmlEventListener(){}
 	
 	// undefined handleEvent(Event event);
 	virtual const void handleEvent(DKEvent& event) override {

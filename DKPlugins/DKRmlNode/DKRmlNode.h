@@ -11,10 +11,10 @@
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // [Exposed=Window]
 // interface Node : EventTarget {
-class DKRmlNode : public DKNode, public DKRmlEventTarget
+class DKRmlNode : public DKRmlEventTarget, virtual public DKNode
 {
 public:	 
-	DKRmlNode(DKRmlEventListener* dkRmlEventListener, Rml::Element* rmlElement) : DKNode(), DKRmlEventTarget(dkRmlEventListener, rmlElement)  {
+	DKRmlNode(DKRmlEventListener* dkRmlEventListener, Rml::Element* rmlElement) : DKRmlEventTarget(dkRmlEventListener, rmlElement), DKNode() {
 		DKDEBUGFUNC();
 		interfaceName = "DKRmlNode";
 		interfaceAddress = pointerToAddress(this);
@@ -24,7 +24,7 @@ public:
 		if(!_rmlElement)
 			DKERROR("_rmlElement invalid! \n");
 	}
-	~DKRmlNode() {}
+	//~DKRmlNode() {}
 	
 	/*
 	// const unsigned short ELEMENT_NODE = 1;

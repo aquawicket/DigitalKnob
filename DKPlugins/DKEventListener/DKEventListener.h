@@ -12,7 +12,7 @@ typedef std::function<void(DKEvent&)> DKCallback;
 
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // callback interface EventListener {
-class DKEventListener //: virtual public DKInterface
+class DKEventListener : virtual public DKInterface
 {
 public:
 	DKEventListener() {//: DKInterface() {
@@ -23,7 +23,7 @@ public:
 		DKINFO("DKEventListener("+interfaceAddress+") \n");
 		*/
 	}
-	virtual ~DKEventListener(){}
+	//virtual ~DKEventListener(){}
 	
 	// undefined handleEvent(Event event);
 	virtual const void handleEvent(DKEvent& event) {

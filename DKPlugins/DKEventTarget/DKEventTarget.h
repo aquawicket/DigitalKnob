@@ -22,10 +22,10 @@ public:
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKEventTarget("+interfaceAddress+") \n");
 	}
-	virtual ~DKEventTarget(){}
+	//virtual ~DKEventTarget(){}
 
 	// undefined addEventListener(DOMString type, EventListener? callback, optional (AddEventListenerOptions or boolean) options = {});
-	virtual const void addEventListener(const DOMString& type, DKCallback callback) {
+	virtual void addEventListener(const DOMString& type, DKCallback callback) {
 		DKDEBUGFUNC(type, callback);
 		//DKINFO("DKEventTarget::addEventListener("+type+", callback) \n");
 		DKEventListener eventListener;
