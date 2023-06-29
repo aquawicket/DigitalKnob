@@ -10,7 +10,7 @@
 
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // callback interface EventListener {
-class DKRmlEventListener : virtual public DKEventListener, public Rml::EventListener
+class DKRmlEventListener : public DKEventListener, public Rml::EventListener
 {
 public:
 	DKRmlEventListener() : DKEventListener() {
