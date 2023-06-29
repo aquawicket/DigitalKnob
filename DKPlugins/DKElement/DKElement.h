@@ -21,6 +21,13 @@ public:
 	}
 	//virtual ~DKElement(){}
 	
+	////// NOTE: from DKElementCSSInlineStyle
+	// [SameObject, PutForwards=cssText] readonly attribute CSSStyleDeclaration style;
+	//DKCSSStyleDeclaration* _style = NULL;
+	//virtual DKCSSStyleDeclaration* style() 					{ return _style; }					// getter
+	//virtual void style(DKCSSStyleDeclaration* style)			{ _style = style; } 				// setter
+	////////////////////////////////////////////
+	
 	// readonly attribute DOMString? namespaceURI;
 	DOMString _namespaceURI = "";
 	virtual const DOMString& namespaceURI()						{ return _namespaceURI; }			// getter

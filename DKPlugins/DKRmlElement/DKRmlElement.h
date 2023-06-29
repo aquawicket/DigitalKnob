@@ -46,10 +46,11 @@ public:
 	////// NOTE: from DKRmlElementCSSInlineStyle
 	// [SameObject, PutForwards=cssText] readonly attribute CSSStyleDeclaration style;
 	DKCSSStyleDeclaration* _style = NULL;
-	DKCSSStyleDeclaration& style() override { 																// getter
-		return _style ? *_style : *DKRmlCSSStyleDeclaration::instance(_rmlElement); 
+	DKCSSStyleDeclaration* style() override { 																// getter
+		return _style ? _style : DKRmlCSSStyleDeclaration::instance(_rmlElement); 
 	}	
 	//void style(DKCSSStyleDeclaration& style) /*override*/	{ _style = &style; } 							// setter
+	////////////////////////////////////////////
 	
 	/*
 	// readonly attribute DOMString? namespaceURI;

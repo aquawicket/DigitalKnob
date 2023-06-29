@@ -23,14 +23,12 @@ public:
 		return new DKRmlCSSStyleDeclaration(rmlElement);
 	}
 	
-	//DKRmlInterface* _dkRmlInterface;
 	Rml::Element* _rmlElement;
 	
 	DKRmlCSSStyleDeclaration(Rml::Element* rmlElement) : DKCSSStyleDeclaration() {
 		DKDEBUGFUNC();
 		interfaceName = "DKRmlCSSStyleDeclaration";
 		interfaceAddress = pointerToAddress(this);
-		//_dkRmlInterface = dkRmlInterface;
 		_rmlElement = rmlElement;
 	}
 	virtual ~DKRmlCSSStyleDeclaration() {	}

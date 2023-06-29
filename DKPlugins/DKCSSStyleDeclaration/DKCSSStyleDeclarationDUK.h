@@ -112,31 +112,39 @@ public:
 	// getter CSSOMString item(unsigned long index);
 	static int item(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		return DKTODO();
+		dukglue_push(ctx, cssStyleDeclaration(ctx)->item(GetUint(ctx)) );
+		return true;
 	}
 	
 	// CSSOMString getPropertyValue(CSSOMString property);
 	static int getPropertyValue(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		return DKTODO();
+		dukglue_push(ctx, cssStyleDeclaration(ctx)->getPropertyValue(GetString(ctx)) );
+		return true;
 	}
 	
 	// CSSOMString getPropertyPriority(CSSOMString property);
 	static int getPropertyPriority(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		return DKTODO();
+		dukglue_push(ctx, cssStyleDeclaration(ctx)->getPropertyPriority(GetString(ctx)) );
+		return true;
 	}
 	
 	// [CEReactions] undefined setProperty(CSSOMString property, [LegacyNullToEmptyString] CSSOMString value, optional [LegacyNullToEmptyString] CSSOMString priority = "");
 	static int setProperty(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		return DKTODO();
+		CSSOMString property = GetString(ctx, 1);
+		CSSOMString value = GetString(ctx, 2);
+		//CSSOMString priority = GetString(ctx, 3);
+		cssStyleDeclaration(ctx)->setProperty(property, value);
+		return true;
 	}
 	
 	// [CEReactions] CSSOMString removeProperty(CSSOMString property);
 	static int removeProperty(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		return DKTODO();
+		dukglue_push(ctx, cssStyleDeclaration(ctx)->removeProperty(GetString(ctx)) );
+		return true;
 	}
 	
 	// readonly attribute CSSRule? parentRule;

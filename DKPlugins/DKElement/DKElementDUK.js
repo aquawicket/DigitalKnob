@@ -11,6 +11,16 @@ var Element = function Element(address) {
 	if(!this.address)
 		this.address = CPP_DKElementDUK_constructor();
 
+	////// NOTE: from DKElementCSSInlineStyle
+	// [SameObject, PutForwards=cssText] readonly attribute CSSStyleDeclaration style;
+	Object.defineProperty(this, "style", {
+        get: function style()							{ return new CSSStyleDeclaration(CPP_DKElementDUK_style(this.address)) },
+		//set: function style(data)						{ return CPP_DKElementDUK_style(this.address, data) },
+		//configurable: true,
+    })
+	////////////////////////////////////////////
+	
+	
 	// readonly attribute DOMString? namespaceURI;
 	Object.defineProperty(this, "namespaceURI", {
         get: function namespaceURI()					{ return CPP_DKElementDUK_namespaceURI(this.address) },

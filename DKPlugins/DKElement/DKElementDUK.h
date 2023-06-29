@@ -17,6 +17,11 @@ public:
 	bool Init(){
 		DKDuktape::AttachFunction("CPP_DKElementDUK_constructor", 				DKElementDUK::constructor);
 		
+		////// NOTE: from DKElementCSSInlineStyle
+		// [SameObject, PutForwards=cssText] readonly attribute CSSStyleDeclaration style;
+		DKDuktape::AttachFunction("CPP_DKElementDUK_style", 					DKElementDUK::style);
+		/////////////////////////////////////////
+		
 		// readonly attribute DOMString? namespaceURI;
 		DKDuktape::AttachFunction("CPP_DKElementDUK_namespaceURI", 				DKElementDUK::namespaceURI);
 		
@@ -167,6 +172,17 @@ public:
 		duk_push_string(ctx, eventTargetAddress.c_str());
 		return true;
 	}
+	
+	////// NOTE: from DKElementCSSInlineStyle
+	// [SameObject, PutForwards=cssText] readonly attribute CSSStyleDeclaration style;
+	static int style(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		//if(duk_is_valid_index(ctx, 1))
+		//	eventTarget(ctx)->namespaceURI(GetString(ctx));
+		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->style()));
+		return true;
+	}
+	/////////////////////////////////////////
 	
 	// readonly attribute DOMString? namespaceURI;
 	static int namespaceURI(duk_context* ctx){
