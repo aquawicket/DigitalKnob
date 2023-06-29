@@ -52,7 +52,7 @@ function onLoad(event) {
 			return;
 		}
 		if (item.hasAttribute("href")) {
-			item.addEventListener("click", onHyperlink);
+			//item.addEventListener("click", onHyperlink);
 			const style = item.style;
 			if(!style){
 				console.error("style invalid!");
@@ -63,6 +63,6 @@ function onLoad(event) {
 		}
 	}
 }
-document.addEventListener('load', onLoad);
-document.dispatchEvent(new Event('load'));
-//onLoad();
+//document.addEventListener('load', onLoad);
+//document.dispatchEvent(new Event('load'));
+onLoad();
