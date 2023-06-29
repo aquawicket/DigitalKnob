@@ -14,18 +14,16 @@
 class DKRmlElementCSSInlineStyle : public DKElementCSSInlineStyle
 {
 public:
-	DKRmlInterface* _dkRmlInterface;
-	Rml::Element* _rmlElement;
+	Rml::Element* __rmlElement;
 	
-	DKRmlElementCSSInlineStyle(DKRmlInterface* dkRmlInterface, Rml::Element* rmlElement) {
+	DKRmlElementCSSInlineStyle(Rml::Element* rmlElement) : DKElementCSSInlineStyle() {
 		DKDEBUGFUNC();
-		_dkRmlInterface = dkRmlInterface;
-		_rmlElement = rmlElement;
+		__rmlElement = rmlElement;
 	}
 	
 	// [SameObject, PutForwards=cssText] readonly attribute CSSStyleDeclaration style;
 	DKCSSStyleDeclaration* style() override								{ 																// getter
-		return _style ? _style : new DKRmlCSSStyleDeclaration(_rmlElement); 
+		return _style ? _style : new DKRmlCSSStyleDeclaration(__rmlElement); 
 	}	
 	//void 					style(DKCSSStyleDeclaration& style) override{ _style = style; } 											// setter
 
