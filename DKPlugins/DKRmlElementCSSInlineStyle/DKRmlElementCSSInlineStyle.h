@@ -35,10 +35,8 @@ public:
 	// partial interface mixin ElementCSSInlineStyle {
 	//	[SameObject] readonly attribute StylePropertyMap attributeStyleMap;
 		/*
-		// TODO
-		DKStylePropertyMap* _attributeStyleMap = NULL;
-		virtual DKStylePropertyMap&	attributeStyleMap()	override										{ return *_attributeStyleMap; }					// getter
-		virtual void 				attributeStyleMap(DKStylePropertyMap& attributeStyleMap) override 	{ _attributeStyleMap = &attributeStyleMap; } 	// setter
+		DKStylePropertyMap*	attributeStyleMap()	override												{ return _attributeStyleMap; }					// getter
+		virtual void 				attributeStyleMap(DKStylePropertyMap* attributeStyleMap) override 	{ _attributeStyleMap = attributeStyleMap; } 	// setter
 		*/
 	// };
 };

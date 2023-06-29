@@ -27,8 +27,8 @@ public:
 		/*
 		// TODO
 		DKStylePropertyMap* _attributeStyleMap = NULL;
-		virtual DKStylePropertyMap&	attributeStyleMap()											{ return *_attributeStyleMap; }					// getter
-		virtual void 				attributeStyleMap(DKStylePropertyMap& attributeStyleMap) 	{ _attributeStyleMap = &attributeStyleMap; } 	// setter
+		virtual DKStylePropertyMap*	attributeStyleMap()											{ return _attributeStyleMap; }					// getter
+		virtual void 				attributeStyleMap(DKStylePropertyMap* attributeStyleMap) 	{ _attributeStyleMap = attributeStyleMap; } 	// setter
 		*/
 	// };
 };

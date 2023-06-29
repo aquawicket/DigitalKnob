@@ -222,13 +222,13 @@ public:
 	*/
 	
 	// Element? closest(DOMString selectors);
-	const DKElement& closest(const DOMString& selectors) override {
+	DKElement* closest(const DOMString& selectors) override {
 		DKDEBUGFUNC(selectors);
 		Rml::Element* closestElement = _rmlElement->Closest(selectors);
 		//if(!closestElement)
 		//	DKERROR("closestElement invalid");
 		_closest = DKRmlElement::instance(_dkRmlEventListener, closestElement);
-		return *_closest;
+		return _closest;
 	}
 	
 	/*
