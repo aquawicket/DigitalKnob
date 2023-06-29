@@ -22,7 +22,7 @@ public:
 	}
 	
 	// [SameObject, PutForwards=cssText] readonly attribute CSSStyleDeclaration style;
-	DKCSSStyleDeclaration* 	style() override							{ return _style ? _style : DKRmlCSSStyleDeclaration::instance(__rmlElement);  }	// getter
+	DKCSSStyleDeclaration* 	style() override							{ return /*_style ? _style :*/ DKRmlCSSStyleDeclaration::instance(__rmlElement);  }	// getter
 	//void 					style(DKCSSStyleDeclaration* style) override{ _style = style; } 															// setter
 
 // };
