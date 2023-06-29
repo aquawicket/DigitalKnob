@@ -35,5 +35,5 @@ var HTMLCollection = function HTMLCollection(address) {
 	if(this.toString() === "[object Object]")
 		this.toString = function(){	return "[object HTMLCollection]" }
 	
-	return this
+	return this;
 }
