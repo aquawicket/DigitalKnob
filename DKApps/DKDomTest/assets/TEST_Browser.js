@@ -41,7 +41,6 @@ function onLoad(event) {
 		return;
 	}
 
-	//console.log("aElement->length() = "+toString(aElements->length()));
 	for(var i=0; i<aElements.length; i++){
 		var item = aElements.item(i);
 		if(!item){
@@ -49,7 +48,7 @@ function onLoad(event) {
 			return;
 		}
 		if (item.hasAttribute("href")) {
-			//item.addEventListener("click", onHyperlink);
+			item.addEventListener("click", onHyperlink);
 			const style = item.style;
 			if(!style){
 				console.error("style invalid!");
