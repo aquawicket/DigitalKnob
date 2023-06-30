@@ -29,6 +29,7 @@ public:
 		DKDEBUGFUNC();
 		interfaceName = "DKRmlCSSStyleDeclaration";
 		//interfaceAddress = pointerToAddress(this);
+		DKINFO("DKRmlCSSStyleDeclaration("+interfaceAddress+") \n");
 		_rmlElement = rmlElement;
 	}
 	

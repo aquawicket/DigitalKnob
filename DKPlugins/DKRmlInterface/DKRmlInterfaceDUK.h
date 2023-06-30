@@ -28,7 +28,7 @@ public:
 		DKString windowAddress = duk_require_string(ctx, 0);
 		DKWindow* window = (DKWindow*)addressToPointer(windowAddress);
 		DKRmlInterface* dkRmlInterface = new DKRmlInterface(window);
-		DKString dkRmlInterfaceAddress = dkRmlInterface->interfaceAddress;//pointerToAddress(dkRmlInterface);
+		DKString dkRmlInterfaceAddress = pointerToAddress(dkRmlInterface);
 		duk_push_string(ctx, dkRmlInterfaceAddress.c_str());	
 		return true;
 	}

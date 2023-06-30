@@ -17,6 +17,7 @@ public:
 		DKDEBUGFUNC();
 		interfaceName = "CSSStyleDeclaration";
 		interfaceAddress = pointerToAddress(this);
+		DKINFO("DKCSSStyleDeclaration("+interfaceAddress+") \n");
 	}
 	
 	// [CEReactions] attribute CSSOMString cssText;

@@ -86,8 +86,10 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKINFO("CPP_DKElementDUK_constructor()\n");
 		DKCSSStyleDeclaration* cssStyleDeclaration = new DKCSSStyleDeclaration();
-		DKString cssStyleDeclarationAddress = pointerToAddress(cssStyleDeclaration);
-		duk_push_string(ctx, cssStyleDeclarationAddress.c_str());
+		//DKString cssStyleDeclarationAddress = pointerToAddress(cssStyleDeclaration);
+		DKString cssStyleDeclarationAddress = cssStyleDeclaration->interfaceAddress;
+		//duk_push_string(ctx, cssStyleDeclarationAddress.c_str());
+		dukglue_push(ctx, cssStyleDeclarationAddress);
 		return true;
 	}
 	
