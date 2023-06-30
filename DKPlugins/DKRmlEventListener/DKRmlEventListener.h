@@ -16,7 +16,7 @@ public:
 	DKRmlEventListener() {//: DKEventListener() {
 		DKDEBUGFUNC();
 		interfaceName = "RmlEventListener";
-		interfaceAddress = pointerToAddress(this);
+		//interfaceAddress = pointerToAddress(this);
 		DKINFO("DKRmlEventListener("+interfaceAddress+") \n");
 	}
 	

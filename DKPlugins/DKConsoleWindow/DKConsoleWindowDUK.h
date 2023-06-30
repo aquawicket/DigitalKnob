@@ -27,11 +27,9 @@ public:
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKINFO("CPP_DKConsoleWindowDUK_constructor()\n");
-		//DKConsoleWindow* consolewindow = new DKConsoleWindow();
-		//DKConsoleWindow* consolewindow = (DKConsoleWindow*)DKClass::DKCreate("DKConsoleWindow");
-		DKConsoleWindow* consolewindow = new DKConsoleWindow();
-		DKString eventTargetAddress = pointerToAddress(consolewindow);
-		duk_push_string(ctx, eventTargetAddress.c_str());	
+		DKConsoleWindow* consoleWindow = new DKConsoleWindow();
+		DKString consoleWindowAddress = consoleWindow->interfaceAddress;
+		duk_push_string(ctx, consoleWindowAddress.c_str());	
 		return true;
 	}
 	

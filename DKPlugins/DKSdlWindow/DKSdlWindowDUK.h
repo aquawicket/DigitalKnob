@@ -28,10 +28,9 @@ public:
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKINFO("CPP_DKSdlWindowDUK_constructor()\n");
-		//DKSdlWindow* sdlwindow = (DKSdlWindow*)DKClass::DKCreate("DKSdlWindow");
 		DKSdlWindow* sdlwindow = new DKSdlWindow();
-		DKString eventTargetAddress = pointerToAddress(sdlwindow);
-		duk_push_string(ctx, eventTargetAddress.c_str());	
+		DKString sdlWindowAddress = sdlwindow->interfaceAddress;
+		duk_push_string(ctx, sdlWindowAddress.c_str());	
 		return true;
 	}
 	

@@ -66,7 +66,7 @@ Rml::ElementInstancer* DKRmlInterface::original_body_instancer = nullptr;
 DKRmlInterface::DKRmlInterface(DKWindow* window) : DKInterface() {
 	DKDEBUGFUNC();
 	interfaceName = "DKRmlInterface";
-	interfaceAddress = pointerToAddress(this);
+	//interfaceAddress = pointerToAddress(this);
 	DKINFO("DKRmlInterface(" + interfaceAddress + ") \n");
 	
 	if (!dkRmlFile) {

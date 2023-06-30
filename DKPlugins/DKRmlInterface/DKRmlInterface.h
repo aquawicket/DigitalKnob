@@ -52,9 +52,9 @@ public:
 	bool LoadUrl(const DKString& url);
 	bool LoadHtml(const DKString& html);
 	
-	DKString href_;
-	DKString protocol;
-	DKString _path;
+	DKString href_ = "";
+	DKString protocol = "";
+	DKString _path = "";
 	static DKString workingPath; //FIXME: make un-static
 	Rml::Context* context = nullptr;
 	Rml::ElementDocument* document = nullptr;

@@ -20,7 +20,7 @@ public:
 	DKRmlEventTarget(DKRmlEventListener* dkRmlEventListener, Rml::Element* rmlElement) : DKEventTarget()/*, DKRmlInterface()*/ {
 		DKDEBUGFUNC();
 		interfaceName = "DKRmlEventTarget";
-		interfaceAddress = pointerToAddress(this);
+		//interfaceAddress = pointerToAddress(this);
 		DKINFO("DKRmlEventTarget("+interfaceAddress+") \n");
 		_dkRmlEventListener = dkRmlEventListener;
 		_rmlElement = rmlElement;

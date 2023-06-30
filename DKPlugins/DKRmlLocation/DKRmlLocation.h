@@ -21,7 +21,7 @@ public:
 	DKRmlLocation(DKRmlInterface* dkRmlInterface, DKRmlEventListener* dkRmlEventListener) : DKLocation() {
 		DKDEBUGFUNC();
 		interfaceName = "RmlLocation";
-		interfaceAddress = pointerToAddress(this);
+		//interfaceAddress = pointerToAddress(this);
 		DKINFO("DKRmlLocation("+interfaceAddress+") \n");
 		_dkRmlInterface = dkRmlInterface;
 		_dkRmlEventListener = dkRmlEventListener;

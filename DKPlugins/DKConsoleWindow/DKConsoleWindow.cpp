@@ -51,7 +51,7 @@
 DKConsoleWindow::DKConsoleWindow() : DKWindow() {
 	DKDEBUGFUNC();
 	interfaceName = "ConsoleWindow";
-	interfaceAddress = pointerToAddress(this);
+	//interfaceAddress = pointerToAddress(this);
 	DKINFO("DKConsoleWindow("+interfaceAddress+") \n");
 	
 	/*	
