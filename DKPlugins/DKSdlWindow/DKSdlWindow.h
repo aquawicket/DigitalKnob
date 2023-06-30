@@ -37,7 +37,7 @@ WARNING_ENABLE
 #include "DKWindow/DKWindow.h"
 
 
-class DKSdlWindow : public DKWindow//, public DKObjectT<DKSdlWindow>
+class DKSdlWindow : virtual public DKWindow//, public DKObjectT<DKSdlWindow>
 {
 public:
 	DKSdlWindow();

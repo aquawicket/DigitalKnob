@@ -9,8 +9,8 @@ class TEST_Browser //: public DKObjectT<TEST_Browser>
 {
 public:
 	static DKSdlWindow* 	window;
-	DKRmlInterface* 		dkRmlInterfaceA;
-	DKRmlEventListener* 	dkRmlEventListenerA;
+	DKRmlInterface* 		dkRmlInterface;
+	DKRmlEventListener* 	dkRmlEventListener;
 	static DKRmlLocation*	location;
 	static DKRmlDocument*	document;
 	
@@ -18,22 +18,42 @@ public:
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_Browser.h //////");
 		
-		window = 			new DKSdlWindow();
-		dkRmlInterfaceA = 		new DKRmlInterface(window);
-		dkRmlEventListenerA = 	new DKRmlEventListener();
-		location = 		new DKRmlLocation(dkRmlInterfaceA, dkRmlEventListenerA);
-		location->href("DKWebTest/index.html");
-		document = 		DKRmlDocument::instance(dkRmlInterfaceA, dkRmlEventListenerA);
-		document->addEventListener("load", &TEST_Browser::onLoad);
+		//////////// Setup ////////////
+		console.log("/// DKSdlWindow /////////////////");
+		window = 				new DKSdlWindow();
+		console.log("/////////////////////////////////");
 		
-		DKEvent load_event("load", "");
-		document->dispatchEvent(load_event);
+		console.log("/// DKRmlInterface //////////////");
+		dkRmlInterface = 		new DKRmlInterface(window);
+		console.log("/////////////////////////////////");
+		
+		console.log("/// DKRmlEventListener //////////");
+		dkRmlEventListener = 	new DKRmlEventListener();
+		console.log("/////////////////////////////////");
+		
+		console.log("/// DKRmlLocation ///////////////");
+		location = 				new DKRmlLocation(dkRmlInterface, dkRmlEventListener);
+		console.log("/////////////////////////////////");
+		
+		console.log("/// DKRmlDocument ///////////////");
+		document = 				DKRmlDocument::instance(dkRmlInterface, dkRmlEventListener);
+		console.log("/////////////////////////////////");
+		///////////////////////////////
+		
+		//location->href("DKWebTest/index.html");
+		//document->addEventListener("load", &TEST_Browser::onLoad);
+		//DKEvent load_event("load", "");
+		//document->dispatchEvent(load_event);
+		
+		console.log("/// DKRmlElement ////////////////");
+		DKElement* div = document->createElement("div");
+		console.log("////////////////////////////////");
 	}
 	
 	~TEST_Browser(){
 		delete window;
-		delete dkRmlInterfaceA;
-		delete dkRmlEventListenerA;
+		delete dkRmlInterface;
+		delete dkRmlEventListener;
 		delete location;
 		delete document;
 	}
@@ -43,22 +63,25 @@ public:
 		console.log("onLoad()");
 		
 		//////////// Post processing <a href></a> hyperlinks ////////////
-		DKDocument* document = dynamic_cast<DKDocument*>(&event.target());
+		if(!document)
+			console.error("document invalid!");
+		
 		DKHTMLCollection* aElements = document->getElementsByTagName("a");
-		if(!aElements){
+		if(!aElements)
 			console.error("aElements invalid!");
-		}
-		else{
-			//console.log("aElement->length() = "+toString(aElements->length()));
-			for(unsigned int i=0; i<aElements->length(); ++i){
-				DKElement* item = aElements->item(i);
-				if (!item)
-					console.error("aElements->item(" + toString(i) + ") invalid!");
-				if (item->hasAttribute("href")) {
-					item->style()->setProperty("color", "rgb(0,0,255)");
-					item->style()->setProperty("text-decoration", "underline");
-					item->addEventListener("click", &TEST_Browser::onHyperlink);
-				}
+		
+		for(unsigned int i=0; i<aElements->length(); ++i){
+			DKElement* item = aElements->item(i);
+			if (!item)
+				console.error("aElements->item("+toString(i)+") invalid!");
+			
+			if (item->hasAttribute("href")) {
+				if(!item->style())
+					console.error("item->style() invalid!");
+				
+				item->style()->setProperty("color", "rgb(0,0,255)");
+				item->style()->setProperty("text-decoration", "underline");
+				item->addEventListener("click", &TEST_Browser::onHyperlink);
 			}
 		}
 	}

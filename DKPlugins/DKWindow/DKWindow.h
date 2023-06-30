@@ -23,7 +23,7 @@ typedef DKWindow DKWindowProxy;
 // Exposed=Window,
 // LegacyUnenumerableNamedProperties]
 // interface Window : EventTarget {
-class DKWindow : public DKEventTarget
+class DKWindow : virtual public DKEventTarget
 {
 public:
 	DKWindow() : DKEventTarget() {

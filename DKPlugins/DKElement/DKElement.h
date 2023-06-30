@@ -10,10 +10,10 @@ class DKHTMLCollection;
 
 // [Exposed=Window]
 // interface Element : Node {
-class DKElement : public DKNode, public DKElementCSSInlineStyle
+class DKElement : virtual public DKNode//, virtual public DKElementCSSInlineStyle
 {
 public:
-	DKElement() : DKNode(), DKElementCSSInlineStyle() {
+	DKElement() : DKNode() {//, DKElementCSSInlineStyle() {
 		DKDEBUGFUNC();
 		interfaceName = "Element";
 		interfaceAddress = pointerToAddress(this);
@@ -23,9 +23,9 @@ public:
 	
 	////// NOTE: from DKElementCSSInlineStyle
 	// [SameObject, PutForwards=cssText] readonly attribute CSSStyleDeclaration style;
-	//DKCSSStyleDeclaration* _style = NULL;
-	//virtual DKCSSStyleDeclaration* style() 					{ return _style; }					// getter
-	//virtual void style(DKCSSStyleDeclaration* style)			{ _style = style; } 				// setter
+	DKCSSStyleDeclaration* _style = NULL;
+	virtual DKCSSStyleDeclaration* style() 						{ return _style; }					// getter
+	virtual void style(DKCSSStyleDeclaration* style)			{ _style = style; } 				// setter
 	////////////////////////////////////////////
 	
 	// readonly attribute DOMString? namespaceURI;

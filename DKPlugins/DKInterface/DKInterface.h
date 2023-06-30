@@ -22,6 +22,9 @@ class DKInterface
 public:
 	DKInterface(){
 		DKDEBUGFUNC();
+		interfaceName = "Interface";
+		interfaceAddress = pointerToAddress(this);
+		DKINFO("DKInterface("+interfaceAddress+") \n");
 	}
 	virtual ~DKInterface(){}
 	

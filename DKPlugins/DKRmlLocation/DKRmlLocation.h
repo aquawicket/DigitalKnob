@@ -12,7 +12,7 @@
 // Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
 // [Exposed=Window]
 // interface Location { // but see also additional creation steps and overridden internal methods
-class DKRmlLocation : public DKLocation //, public DKObjectT<DKRmlLocation>
+class DKRmlLocation : virtual public DKLocation //, public DKObjectT<DKRmlLocation>
 {
 public:
 	DKRmlInterface* _dkRmlInterface = nullptr;

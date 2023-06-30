@@ -68,14 +68,13 @@ DKRmlInterface::DKRmlInterface(DKWindow* window) : DKInterface() {
 	interfaceName = "DKRmlInterface";
 	interfaceAddress = pointerToAddress(this);
 	DKINFO("DKRmlInterface(" + interfaceAddress + ") \n");
-
-	DKINFO("DKRmlInterface(" + window->interfaceName + ") \n");
-
+	
 	if (!dkRmlFile) {
 		dkRmlFile = new DKRmlFile();
 		Rml::SetFileInterface(dkRmlFile);
 	}
 
+	//DKINFO("DKRmlInterface(" + window->interfaceName + ") \n");
 	if (same(window->interfaceName, "SdlWindow")) {
 		DKSdlRmlDocument* dkSdlRmlDocument = new DKSdlRmlDocument(dynamic_cast<DKSdlWindow*>(window), this);
 	}

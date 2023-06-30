@@ -14,7 +14,7 @@ WARNING_ENABLE
 // Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
 // [Exposed=Window]
 // interface Location { // but see also additional creation steps and overridden internal methods
-class DKLocation : public DKInterface
+class DKLocation : virtual public DKInterface
 {
 public:
 	DKLocation() : DKInterface() {
@@ -23,7 +23,7 @@ public:
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKLocation("+interfaceAddress+") \n");
 	}
-	virtual ~DKLocation(){}
+	//virtual ~DKLocation(){}
 
 	// [LegacyUnforgeable] stringifier attribute USVString href;
 	USVString _href = "";
