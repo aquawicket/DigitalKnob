@@ -169,7 +169,8 @@ public:
 		DKINFO("CPP_DKElementDUK_constructor()\n");
 		DKElement* _element = new DKElement();
 		DKString elementAddress = pointerToAddress(_element);
-		duk_push_string(ctx, elementAddress.c_str());
+		//duk_push_string(ctx, elementAddress.c_str());
+		dukglue_push(ctx, elementAddress);
 		return true;
 	}
 	

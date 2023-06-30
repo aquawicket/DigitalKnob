@@ -64,9 +64,9 @@ public:
 		return true;
 	}
 	
-	static DKLocation* eventTarget(duk_context* ctx){
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		return (DKLocation*)addressToPointer(eventTargetAddress);
+	static DKLocation* location(duk_context* ctx){
+		DKString locationAddress = duk_require_string(ctx, 0);
+		return (DKLocation*)addressToPointer(locationAddress);
 	}
 	static bool GetBool(duk_context* ctx){
 		if (duk_is_boolean(ctx, 1))
@@ -98,8 +98,8 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKINFO("CPP_DKLocationDUK_constructor()\n");
 		DKLocation* _location = new DKLocation();
-		DKString eventTargetAddress = pointerToAddress(_location);
-		duk_push_string(ctx, eventTargetAddress.c_str());
+		DKString locationAddress = pointerToAddress(_location);
+		duk_push_string(ctx, locationAddress.c_str());
 		return true;
 	}
 	
@@ -107,8 +107,8 @@ public:
 	static int href(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->href(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->href());
+			location(ctx)->href(GetString(ctx));
+		dukglue_push(ctx, location(ctx)->href());
 		return true;
 	}
 	
@@ -116,8 +116,8 @@ public:
 	static int origin(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->origin(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->origin());
+			location(ctx)->origin(GetString(ctx));
+		dukglue_push(ctx, location(ctx)->origin());
 		return true;
 	}
 	
@@ -125,8 +125,8 @@ public:
 	static int protocol(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->protocol(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->protocol());
+			location(ctx)->protocol(GetString(ctx));
+		dukglue_push(ctx, location(ctx)->protocol());
 		return true;
 	}
 	
@@ -134,8 +134,8 @@ public:
 	static int host(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->host(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->host());
+			location(ctx)->host(GetString(ctx));
+		dukglue_push(ctx, location(ctx)->host());
 		return true;
 	}
 	
@@ -143,8 +143,8 @@ public:
 	static int hostname(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->hostname(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->hostname());
+			location(ctx)->hostname(GetString(ctx));
+		dukglue_push(ctx, location(ctx)->hostname());
 		return true;
 	}
 	
@@ -152,8 +152,8 @@ public:
 	static int port(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->port(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->port());
+			location(ctx)->port(GetString(ctx));
+		dukglue_push(ctx, location(ctx)->port());
 		return true;
 	}
 	
@@ -161,8 +161,8 @@ public:
 	static int pathname(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->pathname(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->pathname());
+			location(ctx)->pathname(GetString(ctx));
+		dukglue_push(ctx, location(ctx)->pathname());
 		return true;
 	}
 	
@@ -170,8 +170,8 @@ public:
 	static int search(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->search(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->search());
+			location(ctx)->search(GetString(ctx));
+		dukglue_push(ctx, location(ctx)->search());
 		return true;
 	}
 	
@@ -179,8 +179,8 @@ public:
 	static int hash(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->hash(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->hash());
+			location(ctx)->hash(GetString(ctx));
+		dukglue_push(ctx, location(ctx)->hash());
 		return true;
 	}
 	
@@ -188,7 +188,7 @@ public:
 	static int assign(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString url = GetString(ctx);
-		eventTarget(ctx)->assign(url);
+		location(ctx)->assign(url);
 		return true;
 	}
 	
@@ -196,14 +196,14 @@ public:
 	static int replace(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString url = GetString(ctx);
-		eventTarget(ctx)->replace(url);
+		location(ctx)->replace(url);
 		return true;
 	}
 	
 	// [LegacyUnforgeable] undefined reload();
 	static int reload(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		eventTarget(ctx)->reload();
+		location(ctx)->reload();
 		return true;
 	}
 	
@@ -211,8 +211,8 @@ public:
 	static int ancestorOrigins(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->ancestorOrigins(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->ancestorOrigins());
+			location(ctx)->ancestorOrigins(GetString(ctx));
+		dukglue_push(ctx, location(ctx)->ancestorOrigins());
 		return true;
 	}
 	

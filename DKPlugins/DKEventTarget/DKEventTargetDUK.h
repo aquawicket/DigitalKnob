@@ -45,7 +45,8 @@ public:
 		DKINFO("CPP_DKEventTargetDUK_constructor()\n");
 		DKEventTarget* eventTarget = new DKEventTarget();
 		DKString eventTargetAddress = pointerToAddress(eventTarget);
-		duk_push_string(ctx, eventTargetAddress.c_str());	
+		//duk_push_string(ctx, eventTargetAddress.c_str());
+		dukglue_push(ctx, eventTargetAddress);
 		return true;
 	}
 	

@@ -168,9 +168,9 @@ public:
 		return true;
 	}
 	
-	static DKNode* eventTarget(duk_context* ctx){
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		return (DKNode*)addressToPointer(eventTargetAddress);
+	static DKNode* node(duk_context* ctx){
+		DKString nodeAddress = duk_require_string(ctx, 0);
+		return (DKNode*)addressToPointer(nodeAddress);
 	}
 	static bool GetBool(duk_context* ctx, int index = 1){
 		if (duk_is_boolean(ctx, index))
@@ -202,94 +202,93 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKINFO("CPP_DKNodeDUK_constructor()\n");
 		DKNode* _node = new DKNode();
-		DKString eventTargetAddress = pointerToAddress(_node);
-		duk_push_string(ctx, eventTargetAddress.c_str());
+		DKString nodeAddress = pointerToAddress(_node);
+		//duk_push_string(ctx, nodeAddress.c_str());
+		dukglue_push(ctx, nodeAddress);
 		return true;
 	}
 	
 	// const unsigned short ELEMENT_NODE = 1;
 	static int ELEMENT_NODE(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKNode* node = eventTarget(ctx);
-		const unsigned short _ELEMENT_NODE = node->ELEMENT_NODE();
-		dukglue_push(ctx, _ELEMENT_NODE);
+		dukglue_push(ctx, node(ctx)->ELEMENT_NODE());
 		return true;
 	}
 	
 	// const unsigned short ATTRIBUTE_NODE = 2;
 	static int ATTRIBUTE_NODE(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, eventTarget(ctx)->ATTRIBUTE_NODE());
+		dukglue_push(ctx, node(ctx)->ATTRIBUTE_NODE());
 		return true;
 	}
 	
 	// const unsigned short TEXT_NODE = 3;
 	static int TEXT_NODE(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, eventTarget(ctx)->TEXT_NODE());
+		dukglue_push(ctx, node(ctx)->TEXT_NODE());
 		return true;
 	}
 	
 	// const unsigned short CDATA_SECTION_NODE = 4;
 	static int CDATA_SECTION_NODE(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, eventTarget(ctx)->CDATA_SECTION_NODE());
+		dukglue_push(ctx, node(ctx)->CDATA_SECTION_NODE());
 		return true;
 	}
 	
 	// const unsigned short ENTITY_REFERENCE_NODE = 5; // legacy
 	static int ENTITY_REFERENCE_NODE(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, eventTarget(ctx)->ENTITY_REFERENCE_NODE());
+		dukglue_push(ctx, node(ctx)->ENTITY_REFERENCE_NODE());
 		return true;
 	}
 	
 	// const unsigned short ENTITY_NODE = 6; // legacy
 	static int ENTITY_NODE(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, eventTarget(ctx)->ENTITY_NODE());
+		dukglue_push(ctx, node(ctx)->ENTITY_NODE());
 		return true;
 	}
 	
 	// const unsigned short PROCESSING_INSTRUCTION_NODE = 7;
 	static int PROCESSING_INSTRUCTION_NODE(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, eventTarget(ctx)->PROCESSING_INSTRUCTION_NODE());
+		dukglue_push(ctx, node(ctx)->PROCESSING_INSTRUCTION_NODE());
 		return true;
 	}
 	
 	// const unsigned short COMMENT_NODE = 8;
 	static int COMMENT_NODE(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, eventTarget(ctx)->COMMENT_NODE());
+		dukglue_push(ctx, node(ctx)->COMMENT_NODE());
 		return true;
 	}
 	
 	// const unsigned short DOCUMENT_NODE = 9;
 	static int DOCUMENT_NODE(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, eventTarget(ctx)->DOCUMENT_NODE());
+		dukglue_push(ctx, node(ctx)->DOCUMENT_NODE());
 		return true;
 	}
 	
 	// const unsigned short DOCUMENT_TYPE_NODE = 10;
 	static int DOCUMENT_TYPE_NODE(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, eventTarget(ctx)->DOCUMENT_TYPE_NODE());
+		dukglue_push(ctx, node(ctx)->DOCUMENT_TYPE_NODE());
 		return true;
 	}
 	
 	// const unsigned short DOCUMENT_FRAGMENT_NODE = 11;
 	static int DOCUMENT_FRAGMENT_NODE(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, eventTarget(ctx)->DOCUMENT_FRAGMENT_NODE());
+		dukglue_push(ctx, node(ctx)->DOCUMENT_FRAGMENT_NODE());
 		return true;
 	}
 	
 	// const unsigned short NOTATION_NODE = 12; // legacy
 	static int NOTATION_NODE(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, eventTarget(ctx)->NOTATION_NODE());
+		dukglue_push(ctx, node(ctx)->NOTATION_NODE());
 		return true;
 	}
 	
@@ -297,8 +296,8 @@ public:
 	static int nodeType(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->nodeType((unsigned short)GetUint(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->nodeType());
+			node(ctx)->nodeType((unsigned short)GetUint(ctx));
+		dukglue_push(ctx, node(ctx)->nodeType());
 		return true;
 	}
 	
@@ -306,8 +305,8 @@ public:
 	static int nodeName(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->nodeName(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->nodeName());
+			node(ctx)->nodeName(GetString(ctx));
+		dukglue_push(ctx, node(ctx)->nodeName());
 		return true;
 	}
 	
@@ -315,8 +314,8 @@ public:
 	static int baseURI(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->baseURI(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->baseURI());
+			node(ctx)->baseURI(GetString(ctx));
+		dukglue_push(ctx, node(ctx)->baseURI());
 		return true;
 	}
 	
@@ -324,8 +323,8 @@ public:
 	static int isConnected(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->isConnected(GetBool(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->isConnected());
+			node(ctx)->isConnected(GetBool(ctx));
+		dukglue_push(ctx, node(ctx)->isConnected());
 		return true;
 	}
 	
@@ -333,8 +332,8 @@ public:
 	static int ownerDocument(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->ownerDocument((DKDocument*)addressToPointer(GetString(ctx)));
-		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->ownerDocument()));
+			node(ctx)->ownerDocument((DKDocument*)addressToPointer(GetString(ctx)));
+		dukglue_push(ctx, pointerToAddress(node(ctx)->ownerDocument()));
 		return true;
 	}
 	
@@ -342,7 +341,7 @@ public:
 	static int getRootNode(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		const DKString options = GetString(ctx);
-		DKNode* getRootNode = eventTarget(ctx)->getRootNode(options);
+		DKNode* getRootNode = node(ctx)->getRootNode(options);
 		dukglue_push(ctx, pointerToAddress(getRootNode));	
 		return true;
 	}
@@ -351,8 +350,8 @@ public:
 	static int parentNode(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->parentNode((DKNode*)addressToPointer(GetString(ctx)));
-		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->parentNode()));
+			node(ctx)->parentNode((DKNode*)addressToPointer(GetString(ctx)));
+		dukglue_push(ctx, pointerToAddress(node(ctx)->parentNode()));
 		return true;
 	}
 	
@@ -360,8 +359,8 @@ public:
 	static int parentElement(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->parentElement((DKElement*)addressToPointer(GetString(ctx)));
-		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->parentElement()));
+			node(ctx)->parentElement((DKElement*)addressToPointer(GetString(ctx)));
+		dukglue_push(ctx, pointerToAddress(node(ctx)->parentElement()));
 		return true;
 	}
 	
@@ -369,7 +368,7 @@ public:
 	static int hasChildNodes(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		bool _hasChildNodes;
-		if(!eventTarget(ctx)->hasChildNodes(_hasChildNodes))
+		if(!node(ctx)->hasChildNodes(_hasChildNodes))
 			return false;
 		dukglue_push(ctx, _hasChildNodes);	
 		return true;
@@ -379,8 +378,8 @@ public:
 	static int childNodes(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->childNodes(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->childNodes());
+			node(ctx)->childNodes(GetString(ctx));
+		dukglue_push(ctx, node(ctx)->childNodes());
 		return true;
 	}
 	
@@ -388,8 +387,8 @@ public:
 	static int firstChild(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->firstChild((DKNode*)addressToPointer(GetString(ctx)));
-		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->firstChild()));
+			node(ctx)->firstChild((DKNode*)addressToPointer(GetString(ctx)));
+		dukglue_push(ctx, pointerToAddress(node(ctx)->firstChild()));
 		return true;
 	}
 	
@@ -397,8 +396,8 @@ public:
 	static int lastChild(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->lastChild((DKNode*)addressToPointer(GetString(ctx)));
-		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->lastChild()));
+			node(ctx)->lastChild((DKNode*)addressToPointer(GetString(ctx)));
+		dukglue_push(ctx, pointerToAddress(node(ctx)->lastChild()));
 		return true;
 	}
 	
@@ -406,8 +405,8 @@ public:
 	static int previousSibling(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->previousSibling((DKNode*)addressToPointer(GetString(ctx)));
-		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->previousSibling()));
+			node(ctx)->previousSibling((DKNode*)addressToPointer(GetString(ctx)));
+		dukglue_push(ctx, pointerToAddress(node(ctx)->previousSibling()));
 		return true;
 	}
 	
@@ -415,8 +414,8 @@ public:
 	static int nextSibling(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->nextSibling((DKNode*)addressToPointer(GetString(ctx)));
-		dukglue_push(ctx, pointerToAddress(eventTarget(ctx)->nextSibling()));
+			node(ctx)->nextSibling((DKNode*)addressToPointer(GetString(ctx)));
+		dukglue_push(ctx, pointerToAddress(node(ctx)->nextSibling()));
 		return true;
 	}
 	
@@ -424,8 +423,8 @@ public:
 	static int nodeValue(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->nodeValue(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->nodeValue());
+			node(ctx)->nodeValue(GetString(ctx));
+		dukglue_push(ctx, node(ctx)->nodeValue());
 		return true;
 	}
 	
@@ -433,15 +432,15 @@ public:
 	static int textContent(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->textContent(GetString(ctx));
-		dukglue_push(ctx, eventTarget(ctx)->textContent());
+			node(ctx)->textContent(GetString(ctx));
+		dukglue_push(ctx, node(ctx)->textContent());
 		return true;
 	}
 	
 	// [CEReactions] undefined normalize();
 	static int normalize(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		eventTarget(ctx)->normalize();
+		node(ctx)->normalize();
 		return true;
 	}
 	
@@ -449,8 +448,7 @@ public:
 	static int cloneNode(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		bool deep = GetBool(ctx);
-		DKNode* node = eventTarget(ctx)->cloneNode(deep);
-		dukglue_push(ctx, pointerToAddress(node));	
+		dukglue_push(ctx, pointerToAddress( node(ctx)->cloneNode(deep) ));	
 		return true;
 	}
 	
@@ -459,7 +457,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString otherNodeAddress = GetString(ctx);
 		DKNode* otherNode = (DKNode*)addressToPointer(otherNodeAddress);
-		bool isEqualNode = eventTarget(ctx)->isEqualNode(otherNode);
+		bool isEqualNode = node(ctx)->isEqualNode(otherNode);
 		dukglue_push(ctx, isEqualNode);	
 		return true;
 	}
@@ -469,7 +467,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString otherNodeAddress = GetString(ctx);
 		DKNode* otherNode = (DKNode*)addressToPointer(otherNodeAddress);
-		bool isSameNode = eventTarget(ctx)->isSameNode(otherNode);
+		bool isSameNode = node(ctx)->isSameNode(otherNode);
 		dukglue_push(ctx, isSameNode);	
 		return true;
 	}
@@ -477,42 +475,42 @@ public:
 	// const unsigned short DOCUMENT_POSITION_DISCONNECTED = 0x01;
 	static int DOCUMENT_POSITION_DISCONNECTED(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, eventTarget(ctx)->DOCUMENT_POSITION_DISCONNECTED());
+		dukglue_push(ctx, node(ctx)->DOCUMENT_POSITION_DISCONNECTED());
 		return true;
 	}
 	
 	// const unsigned short DOCUMENT_POSITION_PRECEDING = 0x02;
 	static int DOCUMENT_POSITION_PRECEDING(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, eventTarget(ctx)->DOCUMENT_POSITION_PRECEDING());
+		dukglue_push(ctx, node(ctx)->DOCUMENT_POSITION_PRECEDING());
 		return true;
 	}
 	
 	// const unsigned short DOCUMENT_POSITION_FOLLOWING = 0x04;
 	static int DOCUMENT_POSITION_FOLLOWING(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, eventTarget(ctx)->DOCUMENT_POSITION_FOLLOWING());
+		dukglue_push(ctx, node(ctx)->DOCUMENT_POSITION_FOLLOWING());
 		return true;
 	}
 	
 	// const unsigned short DOCUMENT_POSITION_CONTAINS = 0x08;
 	static int DOCUMENT_POSITION_CONTAINS(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, eventTarget(ctx)->DOCUMENT_POSITION_CONTAINS());
+		dukglue_push(ctx, node(ctx)->DOCUMENT_POSITION_CONTAINS());
 		return true;
 	}
 	
 	// const unsigned short DOCUMENT_POSITION_CONTAINED_BY = 0x10;
 	static int DOCUMENT_POSITION_CONTAINED_BY(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, eventTarget(ctx)->DOCUMENT_POSITION_CONTAINED_BY());
+		dukglue_push(ctx, node(ctx)->DOCUMENT_POSITION_CONTAINED_BY());
 		return true;
 	}
 	
 	// const unsigned short DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC = 0x20;
 	static int DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, eventTarget(ctx)->DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC());
+		dukglue_push(ctx, node(ctx)->DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC());
 		return true;
 	}
 	
@@ -521,7 +519,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString otherAddress = GetString(ctx);
 		DKNode* other = (DKNode*)addressToPointer(otherAddress);
-		unsigned short compareDocumentPosition = eventTarget(ctx)->compareDocumentPosition(other);
+		unsigned short compareDocumentPosition = node(ctx)->compareDocumentPosition(other);
 		dukglue_push(ctx, compareDocumentPosition);	
 		return true;
 	}
@@ -531,7 +529,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString otherAddress = GetString(ctx);
 		DKNode* other = (DKNode*)addressToPointer(otherAddress);
-		bool contains = eventTarget(ctx)->contains(other);
+		bool contains = node(ctx)->contains(other);
 		dukglue_push(ctx, contains);	
 		return true;
 	}
@@ -540,7 +538,7 @@ public:
 	static int lookupPrefix(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString _namespace = GetString(ctx);
-		DKString lookupPrefix = eventTarget(ctx)->lookupPrefix(_namespace);
+		DKString lookupPrefix = node(ctx)->lookupPrefix(_namespace);
 		dukglue_push(ctx, lookupPrefix);	
 		return true;
 	}
@@ -549,7 +547,7 @@ public:
 	static int lookupNamespaceURI(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString _namespace = GetString(ctx);
-		DKString lookupNamespaceURI = eventTarget(ctx)->lookupNamespaceURI(_namespace);
+		DKString lookupNamespaceURI = node(ctx)->lookupNamespaceURI(_namespace);
 		dukglue_push(ctx, lookupNamespaceURI);	
 		return true;
 	}
@@ -558,7 +556,7 @@ public:
 	static int isDefaultNamespace(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString _namespace = GetString(ctx);
-		bool isDefaultNamespace = eventTarget(ctx)->isDefaultNamespace(_namespace);
+		bool isDefaultNamespace = node(ctx)->isDefaultNamespace(_namespace);
 		dukglue_push(ctx, isDefaultNamespace);	
 		return true;
 	}
@@ -567,10 +565,10 @@ public:
 	static int insertBefore(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString nodeAddress = GetString(ctx);
-		DKNode* node = (DKNode*)addressToPointer(nodeAddress);
+		DKNode* _node = (DKNode*)addressToPointer(nodeAddress);
 		DKString childAddress = GetString(ctx, 2);
 		DKNode* child = (DKNode*)addressToPointer(childAddress);
-		DKNode* insertBefore = eventTarget(ctx)->insertBefore(node, child);
+		DKNode* insertBefore = node(ctx)->insertBefore(_node, child);
 		dukglue_push(ctx, pointerToAddress(insertBefore));	
 		return true;
 	}
@@ -579,8 +577,8 @@ public:
 	static int appendChild(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString nodeAddress = GetString(ctx);
-		DKNode* node = (DKNode*)addressToPointer(nodeAddress);
-		DKNode* appendChild = eventTarget(ctx)->appendChild(node);
+		DKNode* _node = (DKNode*)addressToPointer(nodeAddress);
+		DKNode* appendChild = node(ctx)->appendChild(_node);
 		dukglue_push(ctx, pointerToAddress(appendChild));	
 		return true;
 	}
@@ -589,10 +587,10 @@ public:
 	static int replaceChild(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString nodeAddress = GetString(ctx);
-		DKNode* node = (DKNode*)addressToPointer(nodeAddress);
+		DKNode* _node = (DKNode*)addressToPointer(nodeAddress);
 		DKString childAddress = GetString(ctx, 2);
 		DKNode* child = (DKNode*)addressToPointer(childAddress);
-		DKNode* replaceChild = eventTarget(ctx)->replaceChild(node, child);
+		DKNode* replaceChild = node(ctx)->replaceChild(_node, child);
 		dukglue_push(ctx, pointerToAddress(replaceChild));	
 		return true;
 	}
@@ -602,7 +600,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString childAddress = GetString(ctx, 2);
 		DKNode* child = (DKNode*)addressToPointer(childAddress);
-		DKNode* removeChild = eventTarget(ctx)->removeChild(child);
+		DKNode* removeChild = node(ctx)->removeChild(child);
 		dukglue_push(ctx, pointerToAddress(removeChild));	
 		return true;
 	}

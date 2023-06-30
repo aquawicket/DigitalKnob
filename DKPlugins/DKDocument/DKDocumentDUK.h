@@ -155,8 +155,8 @@ public:
 	}
 	
 	static DKDocument* document(duk_context* ctx){
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		return (DKDocument*)addressToPointer(eventTargetAddress);
+		DKString documentAddress = duk_require_string(ctx, 0);
+		return (DKDocument*)addressToPointer(documentAddress);
 	}
 	static bool GetBool(duk_context* ctx, int index = 1){
 		if (duk_is_boolean(ctx, index))
@@ -189,8 +189,9 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKINFO("CPP_DKDocumentDUK_constructor()\n");
 		DKDocument* document = new DKDocument();
-		DKString eventTargetAddress = pointerToAddress(document);
-		dukglue_push(ctx, eventTargetAddress);
+		DKString documentAddress = pointerToAddress(document);
+		//duk_push_string(ctx, documentAddress.c_str());
+		dukglue_push(ctx, documentAddress);
 		return true;
 	}
 	

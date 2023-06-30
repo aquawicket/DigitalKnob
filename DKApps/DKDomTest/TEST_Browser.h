@@ -21,33 +21,33 @@ public:
 		//////////// Setup ////////////
 		console.log("/// DKSdlWindow /////////////////");
 		window = 				new DKSdlWindow();
-		console.log("/////////////////////////////////");
+		console.log(" ");
 		
 		console.log("/// DKRmlInterface //////////////");
 		dkRmlInterface = 		new DKRmlInterface(window);
-		console.log("/////////////////////////////////");
+		console.log(" ");
 		
 		console.log("/// DKRmlEventListener //////////");
 		dkRmlEventListener = 	new DKRmlEventListener();
-		console.log("/////////////////////////////////");
+		console.log(" ");
 		
 		console.log("/// DKRmlLocation ///////////////");
 		location = 				new DKRmlLocation(dkRmlInterface, dkRmlEventListener);
-		console.log("/////////////////////////////////");
+		console.log(" ");
 		
 		console.log("/// DKRmlDocument ///////////////");
 		document = 				DKRmlDocument::instance(dkRmlInterface, dkRmlEventListener);
-		console.log("/////////////////////////////////");
+		console.log(" ");
 		///////////////////////////////
 		
-		//location->href("DKWebTest/index.html");
-		//document->addEventListener("load", &TEST_Browser::onLoad);
-		//DKEvent load_event("load", "");
-		//document->dispatchEvent(load_event);
+		location->href("DKWebTest/index.html");
+		document->addEventListener("load", &TEST_Browser::onLoad);
+		DKEvent load_event("load", "");
+		document->dispatchEvent(load_event);
 		
 		console.log("/// DKRmlElement ////////////////");
 		DKElement* div = document->createElement("div");
-		console.log("////////////////////////////////");
+		console.log(" ");
 	}
 	
 	~TEST_Browser(){
