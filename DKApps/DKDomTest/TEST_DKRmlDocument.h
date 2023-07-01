@@ -10,44 +10,44 @@ class TEST_DKRmlDocument //: public DKObjectT<TEST_DKRmlDocument>
 {
 public:
 	static DKRmlDocument* _dkRmlDocument;
-	//std::unique_ptr<DKRmlDocument> _dkSdlWindow;
+	//std::unique_ptr<DKRmlDocument> _dkRmlDocument;
 	
 	TEST_DKRmlDocument() {
 		//DKDEBUGFUNC();
 		console.log("\n////// TEST_DKRmlDocument.h //////");
 		
-		_dkSdlWindow = DKRmlDocument::instance(TEST_DKRmlInterface::_dkRmlInterface, TEST_DKRmlEventListener::_dkRmlEventListener);
-		//_dkSdlWindow = std::make_unique<DKRmlDocument>(TEST_DKRmlInterface::dkRmlInterface);
+		_dkRmlDocument = DKRmlDocument::instance(TEST_DKRmlInterface::_dkRmlInterface, TEST_DKRmlEventListener::_dkRmlEventListener);
+		//_dkRmlDocument = std::make_unique<DKRmlDocument>(TEST_DKRmlInterface::dkRmlInterface);
 		
 		//////////// TESTS ////////////
 		// readonly attribute Element? documentElement;
-		DKElement* document = _dkSdlWindow->documentElement();
+		DKElement* document = _dkRmlDocument->documentElement();
 		console.log("document->tagName() = "+document->tagName());
 		
 		// HTMLCollection getElementsByTagName(DOMString qualifiedName);
-		DKHTMLCollection* elements = _dkSdlWindow->getElementsByTagName("a");
+		DKHTMLCollection* elements = _dkRmlDocument->getElementsByTagName("a");
 		if(!elements)
 			console.error("elements invalid!");
 		
 		// [CEReactions, NewObject] Element createElement(DOMString localName, optional (DOMString or ElementCreationOptions) options = {});
-		DKElement* div = _dkSdlWindow->createElement("div");
+		DKElement* div = _dkRmlDocument->createElement("div");
 		console.log("div->tagName() = "+div->tagName());
 		
 		// Element? getElementById(DOMString elementId);
-		DKElement* body = _dkSdlWindow->getElementById("body");
+		DKElement* body = _dkRmlDocument->getElementById("body");
 		console.log("body->tagName() = "+body->tagName());
 		///////////////////////////////
 		
 		
-		_dkSdlWindow->addEventListener("load", &TEST_DKRmlDocument::onLoad);
+		_dkRmlDocument->addEventListener("load", &TEST_DKRmlDocument::onLoad);
 		DKEvent load_event("load", "");
-		_dkSdlWindow->dispatchEvent(load_event);
+		_dkRmlDocument->dispatchEvent(load_event);
 
-		printRmlDocumentProperties(*_dkSdlWindow);
+		printRmlDocumentProperties(*_dkRmlDocument);
 	}
 	
 	~TEST_DKRmlDocument() {
-		delete _dkSdlWindow;
+		delete _dkRmlDocument;
 	}
 	
 	static void onLoad(DKEvent& event){
@@ -55,7 +55,7 @@ public:
 		console.log("onLoad()");
 		
 		//////////// Post processing <a href></a> hyperlinks ////////////
-		DKHTMLCollection* aElements = _dkSdlWindow->getElementsByTagName("a");
+		DKHTMLCollection* aElements = _dkRmlDocument->getElementsByTagName("a");
 		if(!aElements){
 			console.error("aElements invalid!");
 		}
