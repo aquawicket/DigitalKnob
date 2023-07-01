@@ -291,63 +291,87 @@ public:
 	// DOMString? getAttributeNS(DOMString? namespace, DOMString localName);
 	static int getAttributeNS(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		return DKTODO();
+		DOMString _namespace	= GetString(ctx, 1);
+		DOMString localName		= GetString(ctx, 2);
+		dukglue_push(ctx, element(ctx)->getAttributeNS(_namespace, localName));
+		return true;
 	}
 	
 	// [CEReactions] undefined setAttribute(DOMString qualifiedName, DOMString value);
 	static int setAttribute(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		return DKTODO();
+		DOMString qualifiedName	= GetString(ctx, 1);
+		DOMString value			= GetString(ctx, 2);
+		element(ctx)->setAttribute(qualifiedName, value);
+		return true;
 	}
 	
 	// [CEReactions] undefined setAttributeNS(DOMString? namespace, DOMString qualifiedName, DOMString value);
 	static int setAttributeNS(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		return DKTODO();
+		DOMString _namespace	= GetString(ctx, 1);
+		DOMString qualifiedName	= GetString(ctx, 2);
+		DOMString value			= GetString(ctx, 3);
+		element(ctx)->setAttributeNS(_namespace, qualifiedName, value);
+		return true;
 	}
 	
 	// [CEReactions] undefined removeAttribute(DOMString qualifiedName);
 	static int removeAttribute(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		return DKTODO();
+		DOMString qualifiedName	= GetString(ctx, 1);
+		element(ctx)->removeAttribute(qualifiedName);
+		return true;
 	}
 	
 	// [CEReactions] undefined removeAttributeNS(DOMString? namespace, DOMString localName);
 	static int removeAttributeNS(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		return DKTODO();
+		DOMString _namespace	= GetString(ctx, 1);
+		DOMString localName		= GetString(ctx, 2);
+		element(ctx)->removeAttributeNS(_namespace, localName);
+		return true;
 	}
 	
 	// [CEReactions] boolean toggleAttribute(DOMString qualifiedName, optional boolean force);
 	static int toggleAttribute(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		DOMString qualifiedName = GetString(ctx, 1);
+		bool force 				= GetBool(ctx, 2);
+		dukglue_push(ctx, element(ctx)->toggleAttribute(qualifiedName, force));
 		return DKTODO();
 	}
 	
 	// boolean hasAttribute(DOMString qualifiedName);
 	static int hasAttribute(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, element(ctx)->hasAttribute(GetString(ctx, 1)));
+		DOMString qualifiedName = GetString(ctx, 1);
+		dukglue_push(ctx, element(ctx)->hasAttribute(qualifiedName));
 		return true;
 	}
 	
 	// boolean hasAttributeNS(DOMString? namespace, DOMString localName);
 	static int hasAttributeNS(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, element(ctx)->hasAttributeNS(GetString(ctx, 1), GetString(ctx, 2)));
+		DOMString _namespace = GetString(ctx, 1);
+		DOMString localName = GetString(ctx, 1);
+		dukglue_push(ctx, element(ctx)->hasAttributeNS(_namespace, localName));
 		return true;
 	}
 	
 	// Attr? getAttributeNode(DOMString qualifiedName);
 	static int getAttributeNode(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, element(ctx)->getAttributeNode(GetString(ctx, 1)));
+		DOMString qualifiedName = GetString(ctx, 1);
+		dukglue_push(ctx, element(ctx)->getAttributeNode(qualifiedName));
 		return true;
 	}
 	
 	// Attr? getAttributeNodeNS(DOMString? namespace, DOMString localName);
 	static int getAttributeNodeNS(duk_context* ctx){
-		dukglue_push(ctx, element(ctx)->getAttributeNodeNS(GetString(ctx, 1), GetString(ctx, 2)));
+		DOMString _namespace = GetString(ctx, 1);
+		DOMString localName = GetString(ctx, 2);
+		dukglue_push(ctx, element(ctx)->getAttributeNodeNS(_namespace, localName));
 		return true;
 	}
 	
@@ -378,8 +402,8 @@ public:
 	// readonly attribute ShadowRoot? shadowRoot;
 	static int shadowRoot(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		//if(duk_is_valid_index(ctx, 1))
-		//	element(ctx)->shadowRoot(GetString(ctx));
+		if(duk_is_valid_index(ctx, 1))
+			element(ctx)->shadowRoot(GetString(ctx));
 		dukglue_push(ctx, element(ctx)->shadowRoot());
 		return true;
 	}
@@ -387,52 +411,69 @@ public:
 	// Element? closest(DOMString selectors);
 	static int closest(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		return DKTODO();
+		DOMString selectors = GetString(ctx, 1);
+		dukglue_push(ctx, element(ctx)->closest(selectors)->interfaceAddress);
+		return true;
 	}
 	
 	// boolean matches(DOMString selectors);
 	static int matches(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		return DKTODO();
+		DOMString selectors = GetString(ctx, 1);
+		dukglue_push(ctx, element(ctx)->matches(selectors));	
+		return true;
 	}
 	
 	// boolean webkitMatchesSelector(DOMString selectors); // legacy alias of .matches
 	static int webkitMatchesSelector(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		return DKTODO();
+		DOMString selectors = GetString(ctx, 1);
+		dukglue_push(ctx, element(ctx)->webkitMatchesSelector(selectors));	
+		return true;
 	}
 	
 	// HTMLCollection getElementsByTagName(DOMString qualifiedName);
 	static int getElementsByTagName(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString qualifiedName = GetString(ctx);
-		DKHTMLCollection* _getElementsByTagName = element(ctx)->getElementsByTagName(qualifiedName);
-		dukglue_push(ctx, pointerToAddress(_getElementsByTagName));	
+		DOMString qualifiedName = GetString(ctx, 1);
+		dukglue_push(ctx, element(ctx)->getElementsByTagName(qualifiedName)->interfaceAddress);	
 		return true;
 	}
 	
 	// HTMLCollection getElementsByTagNameNS(DOMString? namespace, DOMString localName);
 	static int getElementsByTagNameNS(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		return DKTODO();
+		DOMString _namespace = GetString(ctx, 1);
+		DOMString localName = GetString(ctx, 2);
+		dukglue_push(ctx, element(ctx)->getElementsByTagNameNS(_namespace, localName)->interfaceAddress);
+		return true;
 	}
 	
 	// HTMLCollection getElementsByClassName(DOMString classNames);
 	static int getElementsByClassName(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		return DKTODO();
+		DOMString classNames = GetString(ctx, 1);
+		dukglue_push(ctx, element(ctx)->getElementsByClassName(classNames)->interfaceAddress);
+		return true;
 	}
 	
 	// [CEReactions] Element? insertAdjacentElement(DOMString where, Element element); // legacy
 	static int insertAdjacentElement(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		return DKTODO();
+		DOMString where 		= GetString(ctx, 1);
+		DKString elementAddress = GetString(ctx, 2);
+		DKElement* _element 	= (DKElement*)addressToPointer(elementAddress);
+		dukglue_push(ctx, element(ctx)->insertAdjacentElement(where, _element)->interfaceAddress);	
+		return true;
 	}
 	
 	// undefined insertAdjacentText(DOMString where, DOMString data); // legacy
 	static int insertAdjacentText(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		return DKTODO();
+		DOMString where = GetString(ctx, 1);
+		DOMString data 	= GetString(ctx, 2);
+		element(ctx)->insertAdjacentText(where, data);
+		return true;
 	}
 };
 REGISTER_OBJECT(DKElementDUK, true)
