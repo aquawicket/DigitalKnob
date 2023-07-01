@@ -27,12 +27,10 @@ public:
 	////// Constructor //////
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		
 		DKINFO("CPP_DKRmlEventListenerDUK_constructor()\n");
 		DKRmlEventListener* dkRmlEventListener = new DKRmlEventListener();
-		//DKString dkRmlEventListenerAddress = pointerToAddress(dkRmlEventListener);
-		DKString dkRmlEventListenerAddress = dkRmlEventListener->interfaceAddress;
-		//duk_push_string(ctx, dkRmlEventListenerAddress.c_str());
-		dukglue_push(ctx, dkRmlEventListenerAddress);
+		dukglue_push(ctx, dkRmlEventListener->interfaceAddress);
 		return true;
 	}
 	

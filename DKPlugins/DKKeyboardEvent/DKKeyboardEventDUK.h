@@ -109,11 +109,11 @@ public:
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
-		DKString eventInitDict = "";//duk_require_string(ctx, 1);
+		DKString eventInitDict = "{}";	//duk_require_string(ctx, 1);
+		
 		DKINFO("CPP_DKKeyboardEventDUK_constructor("+type+","+eventInitDict+")\n");
 		DKKeyboardEvent* keyboardEvent = new DKKeyboardEvent(type, eventInitDict);
-		DKString keyboardEventAddress = pointerToAddress(keyboardEvent);
-		dukglue_push(ctx, keyboardEventAddress);	
+		dukglue_push(ctx, keyboardEvent->interfaceAddress);	
 		return true;
 	}
 	

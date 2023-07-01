@@ -62,11 +62,11 @@ public:
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
-		DKString eventInitDict = "";//duk_require_string(ctx, 1);
+		DKString eventInitDict = "{}";	//duk_require_string(ctx, 1);
+		
 		DKINFO("CPP_DKWheelEventDUK_constructor("+type+","+eventInitDict+")\n");
 		DKWheelEvent* wheelEvent = new DKWheelEvent(type, eventInitDict);
-		DKString wheelEventAddress = pointerToAddress(wheelEvent);
-		dukglue_push(ctx, wheelEventAddress);	
+		dukglue_push(ctx, wheelEvent->interfaceAddress);	
 		return true;
 	}
 	

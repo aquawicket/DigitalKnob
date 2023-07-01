@@ -128,10 +128,10 @@ public:
 	// [HTMLConstructor] constructor();
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		
 		DKINFO("CPP_DKHTMLElementDUK_constructor()\n");
 		DKHTMLElement* _htmlelement = new DKHTMLElement();
-		DKString eventTargetAddress = pointerToAddress(_htmlelement);
-		duk_push_string(ctx, eventTargetAddress.c_str());
+		dukglue_push(ctx, _htmlelement->interfaceAddress);
 		return true;
 	}
 	

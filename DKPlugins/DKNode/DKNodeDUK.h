@@ -200,11 +200,10 @@ public:
 	
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		
 		DKINFO("CPP_DKNodeDUK_constructor()\n");
 		DKNode* _node = new DKNode();
-		DKString nodeAddress = pointerToAddress(_node);
-		//duk_push_string(ctx, nodeAddress.c_str());
-		dukglue_push(ctx, nodeAddress);
+		dukglue_push(ctx, _node->interfaceAddress);
 		return true;
 	}
 	

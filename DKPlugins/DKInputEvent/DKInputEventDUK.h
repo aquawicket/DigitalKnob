@@ -55,11 +55,11 @@ public:
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
-		DKString eventInitDict = "";//duk_require_string(ctx, 1);
+		DKString eventInitDict = "{}";	//duk_require_string(ctx, 1);
+		
 		DKINFO("CPP_DKInputEventDUK_constructor("+type+","+eventInitDict+")\n");
 		DKInputEvent* inputEvent = new DKInputEvent(type, eventInitDict);
-		DKString inputEventAddress = pointerToAddress(inputEvent);
-		dukglue_push(ctx, inputEventAddress);	
+		dukglue_push(ctx, inputEvent->interfaceAddress);	
 		return true;
 	}
 	

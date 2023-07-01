@@ -26,10 +26,10 @@ public:
 	////// Constructor //////
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		
 		DKINFO("CPP_DKConsoleWindowDUK_constructor()\n");
 		DKConsoleWindow* consoleWindow = new DKConsoleWindow();
-		DKString consoleWindowAddress = consoleWindow->interfaceAddress;
-		duk_push_string(ctx, consoleWindowAddress.c_str());	
+		dukglue_push(ctx, consoleWindow->interfaceAddress);
 		return true;
 	}
 	

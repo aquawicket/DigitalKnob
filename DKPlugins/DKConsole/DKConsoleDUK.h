@@ -116,10 +116,10 @@ public:
 	
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		
 		DKINFO("CPP_DKConsoleDUK_constructor()\n");
 		DKConsole* _console = new DKConsole();
-		DKString consoleAddress = pointerToAddress(_console);
-		duk_push_string(ctx, consoleAddress.c_str());
+		dukglue_push(ctx, _console->interfaceAddress);
 		return true;
 	}
 	

@@ -67,11 +67,11 @@ public:
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
-		DKString eventInitDict = "";//duk_require_string(ctx, 1);
+		DKString eventInitDict = "{}";	//duk_require_string(ctx, 1);
+		
 		DKINFO("CPP_DKCustomEventDUK_constructor("+type+","+eventInitDict+")\n");
 		DKCustomEvent* customEvent = new DKCustomEvent(type, eventInitDict);
-		DKString customEventAddress = pointerToAddress(customEvent);
-		dukglue_push(ctx, customEventAddress);
+		dukglue_push(ctx, customEvent->interfaceAddress);
 		return true;
 	}
 	

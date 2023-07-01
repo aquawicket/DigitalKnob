@@ -51,11 +51,11 @@ public:
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
-		DKString eventInitDict = "";//duk_require_string(ctx, 1);
+		DKString eventInitDict = "{}";	//duk_require_string(ctx, 1);
+		
 		DKINFO("CPP_DKCompositionEventDUK_constructor("+type+","+eventInitDict+")\n");
 		DKCompositionEvent* compositionEvent = new DKCompositionEvent(type, eventInitDict);
-		DKString compositionEventAddress = pointerToAddress(compositionEvent);
-		dukglue_push(ctx, compositionEventAddress);	
+		dukglue_push(ctx, compositionEvent->interfaceAddress);	
 		return true;
 	}
 	

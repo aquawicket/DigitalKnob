@@ -41,9 +41,10 @@ public:
 		DKDEBUGFUNC(ctx);
 		DOMString type = duk_require_string(ctx, 0);
 		FocusEventInit eventInitDict = "{}";	//duk_require_string(ctx, 1);
+		
 		DKINFO("CPP_DKFocusEventDUK_constructor("+type+","+eventInitDict+")\n");
 		DKFocusEvent* focusEvent = new DKFocusEvent(type, eventInitDict);
-		dukglue_push(ctx, pointerToAddress(focusEvent));
+		dukglue_push(ctx, focusEvent->interfaceAddress);
 		return true;
 	}
 	

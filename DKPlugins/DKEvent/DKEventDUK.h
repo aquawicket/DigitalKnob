@@ -128,9 +128,10 @@ public:
 		DKDEBUGFUNC(ctx);
 		DOMString type = duk_require_string(ctx, 0);
 		EventInit eventInitDict = "{}";		//duk_require_string(ctx, 1);
+		
 		DKINFO("CPP_DKEventDUK_constructor("+type+","+eventInitDict+")\n");
-		DKEvent* event = new DKEvent(type, eventInitDict);
-		dukglue_push(ctx, pointerToAddress(event));
+		DKEvent* _event = new DKEvent(type, eventInitDict);
+		dukglue_push(ctx, _event->interfaceAddress);
 		return true;
 	}
 	

@@ -27,10 +27,10 @@ public:
 	////// Constructor //////
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		
 		DKINFO("CPP_DKSdlWindowDUK_constructor()\n");
 		DKSdlWindow* sdlwindow = new DKSdlWindow();
-		DKString sdlWindowAddress = sdlwindow->interfaceAddress;
-		duk_push_string(ctx, sdlWindowAddress.c_str());	
+		dukglue_push(ctx, sdlwindow->interfaceAddress);
 		return true;
 	}
 	

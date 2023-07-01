@@ -96,10 +96,10 @@ public:
 	
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		
 		DKINFO("CPP_DKLocationDUK_constructor()\n");
 		DKLocation* _location = new DKLocation();
-		DKString locationAddress = pointerToAddress(_location);
-		duk_push_string(ctx, locationAddress.c_str());
+		dukglue_push(ctx, _location->interfaceAddress);
 		return true;
 	}
 	

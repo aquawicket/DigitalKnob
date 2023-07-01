@@ -187,11 +187,10 @@ public:
 	// constructor();
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		
 		DKINFO("CPP_DKDocumentDUK_constructor()\n");
-		DKDocument* document = new DKDocument();
-		DKString documentAddress = pointerToAddress(document);
-		//duk_push_string(ctx, documentAddress.c_str());
-		dukglue_push(ctx, documentAddress);
+		DKDocument* _document = new DKDocument();
+		dukglue_push(ctx, _document->interfaceAddress);
 		return true;
 	}
 	

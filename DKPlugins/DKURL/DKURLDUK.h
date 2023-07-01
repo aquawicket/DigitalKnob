@@ -116,12 +116,12 @@ public:
 	// constructor(USVString url, optional USVString base);
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKINFO("CPP_DKURLDUK_constructor()\n");
 		USVString url = GetString(ctx);
 		USVString base = ""; // TODO
+		
+		DKINFO("CPP_DKURLDUK_constructor("+url+","+base+")\n");
 		DKURL* _url = new DKURL(url, base);
-		DKString eventTargetAddress = pointerToAddress(_url);
-		duk_push_string(ctx, eventTargetAddress.c_str());
+		dukglue_push(ctx, _url->interfaceAddress);
 		return true;
 	}
 	

@@ -91,10 +91,10 @@ public:
 	// [HTMLConstructor] constructor();
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		
 		DKINFO("CPP_DKHTMLBodyElementDUK_constructor()\n");
 		DKHTMLBodyElement* _htmlBodyElement = new DKHTMLBodyElement();
-		DKString eventTargetAddress = pointerToAddress(_htmlBodyElement);
-		duk_push_string(ctx, eventTargetAddress.c_str());
+		dukglue_push(ctx, _htmlBodyElement->interfaceAddress);
 		return true;
 	}
 	

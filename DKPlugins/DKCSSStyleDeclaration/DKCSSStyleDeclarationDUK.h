@@ -84,12 +84,10 @@ public:
 
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		
 		DKINFO("CPP_DKElementDUK_constructor()\n");
-		DKCSSStyleDeclaration* cssStyleDeclaration = new DKCSSStyleDeclaration();
-		//DKString cssStyleDeclarationAddress = pointerToAddress(cssStyleDeclaration);
-		DKString cssStyleDeclarationAddress = cssStyleDeclaration->interfaceAddress;
-		//duk_push_string(ctx, cssStyleDeclarationAddress.c_str());
-		dukglue_push(ctx, cssStyleDeclarationAddress);
+		DKCSSStyleDeclaration* _cssStyleDeclaration = new DKCSSStyleDeclaration();
+		dukglue_push(ctx, _cssStyleDeclaration->interfaceAddress);
 		return true;
 	}
 	

@@ -42,11 +42,10 @@ public:
 	// constructor();
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		
 		DKINFO("CPP_DKEventTargetDUK_constructor()\n");
-		DKEventTarget* eventTarget = new DKEventTarget();
-		DKString eventTargetAddress = pointerToAddress(eventTarget);
-		//duk_push_string(ctx, eventTargetAddress.c_str());
-		dukglue_push(ctx, eventTargetAddress);
+		DKEventTarget* _eventTarget = new DKEventTarget();
+		dukglue_push(ctx, _eventTarget->interfaceAddress);
 		return true;
 	}
 	

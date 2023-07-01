@@ -31,12 +31,10 @@ public:
 		DKRmlInterface* dkRmlInterface = (DKRmlInterface*)addressToPointer(dkRmlInterfaceAddress);
 		DKString dkRmlEventListenerAddress = duk_require_string(ctx, 1);
 		DKRmlEventListener* dkRmlEventListener = (DKRmlEventListener*)addressToPointer(dkRmlEventListenerAddress);
+		
 		DKINFO("CPP_DKRmlLocationDUK_constructor("+dkRmlInterfaceAddress+","+dkRmlEventListenerAddress+")\n");
 		DKRmlLocation* dkRmlLocation = new DKRmlLocation(dkRmlInterface, dkRmlEventListener);
-		//DKString dkRmlLocationAddress = pointerToAddress(dkRmlLocation);
-		DKString dkRmlLocationAddress = dkRmlLocation->interfaceAddress;
-		//duk_push_string(ctx, dkRmlLocationAddress.c_str());
-		dukglue_push(ctx, dkRmlLocationAddress);
+		dukglue_push(ctx, dkRmlLocation->interfaceAddress);
 		return true;
 	}
 	

@@ -24,12 +24,13 @@ public:
 	////// Constructor //////
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKINFO("CPP_DKRmlInterfaceDUK_constructor()\n");
+		
 		DKString windowAddress = duk_require_string(ctx, 0);
 		DKWindow* window = (DKWindow*)addressToPointer(windowAddress);
+		
+		DKINFO("CPP_DKRmlInterfaceDUK_constructor("+windowAddress+")\n");
 		DKRmlInterface* dkRmlInterface = new DKRmlInterface(window);
-		DKString dkRmlInterfaceAddress = pointerToAddress(dkRmlInterface);
-		duk_push_string(ctx, dkRmlInterfaceAddress.c_str());	
+		dukglue_push(ctx, dkRmlInterface->interfaceAddress);	
 		return true;
 	}
 	

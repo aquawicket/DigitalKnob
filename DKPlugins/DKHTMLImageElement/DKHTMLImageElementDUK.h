@@ -154,10 +154,10 @@ public:
 	// [HTMLConstructor] constructor();
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		
 		DKINFO("CPP_DKHTMLImageElementDUK_constructor()\n");
-		DKHTMLImageElement* htmlImageElement = new DKHTMLImageElement();
-		DKString eventTargetAddress = pointerToAddress(htmlImageElement);
-		duk_push_string(ctx, eventTargetAddress.c_str());
+		DKHTMLImageElement* _htmlImageElement = new DKHTMLImageElement();
+		dukglue_push(ctx, _htmlImageElement->interfaceAddress);
 		return true;
 	}
 	

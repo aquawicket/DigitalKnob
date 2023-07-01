@@ -74,10 +74,10 @@ public:
 
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		
 		DKINFO("CPP_DKScreenDUK_constructor()\n");
 		DKScreen* _screen = new DKScreen();
-		DKString eventTargetAddress = pointerToAddress(_screen);
-		duk_push_string(ctx, eventTargetAddress.c_str());
+		dukglue_push(ctx, _screen->interfaceAddress);
 		return true;
 	}
 	

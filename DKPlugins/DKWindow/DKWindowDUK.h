@@ -427,10 +427,10 @@ public:
 	
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		
 		DKINFO("CPP_DKWindowDUK_constructor()\n");
 		DKWindow* _window = new DKWindow();
-		DKString eventTargetAddress = pointerToAddress(_window);
-		duk_push_string(ctx, eventTargetAddress.c_str());
+		dukglue_push(ctx, _window->interfaceAddress);
 		return true;
 	}
 	

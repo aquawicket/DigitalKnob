@@ -65,11 +65,11 @@ public:
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString type = duk_require_string(ctx, 0);
-		DKString eventInitDict = "";//duk_require_string(ctx, 1);
+		DKString eventInitDict = "{}";	//duk_require_string(ctx, 1);
+		
 		DKINFO("CPP_DKDragEventDUK_constructor("+type+","+eventInitDict+")\n");
 		DKDragEvent* dragEvent = new DKDragEvent(type, eventInitDict);
-		DKString dragEventAddress = pointerToAddress(dragEvent);
-		dukglue_push(ctx, dragEventAddress);	
+		dukglue_push(ctx, dragEvent->interfaceAddress);	
 		return true;
 	}
 	

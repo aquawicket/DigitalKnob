@@ -65,11 +65,11 @@ public:
 
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKINFO("CPP_DKHTMLCollectionDUK_constructor()\n");
 		std::vector<DKElement*> list;
+		
+		DKINFO("CPP_DKHTMLCollectionDUK_constructor(list)\n");
 		DKHTMLCollection* _htmlCollection = new DKHTMLCollection(list);
-		DKString htmlCollectionAddress = pointerToAddress(_htmlCollection);
-		duk_push_string(ctx, htmlCollectionAddress.c_str());
+		dukglue_push(ctx, _htmlCollection->interfaceAddress);
 		return true;
 	}
 	
