@@ -21,6 +21,8 @@ public:
 		interfaceName = "EventTarget";
 		interfaceAddress = pointerToAddress(this);
 		DKINFO("DKEventTarget("+interfaceAddress+") \n");
+		
+		//address["DKEventTarget"] = interfaceAddress;
 	}
 	//virtual ~DKEventTarget(){}
 

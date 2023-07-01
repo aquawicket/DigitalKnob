@@ -28,6 +28,7 @@ public:
 	}
 	virtual ~DKInterface(){}
 	
+	//std::map<DKString, DKString> address;
 	DKString interfaceName = "";
 	DKString interfaceAddress = "";
 	
