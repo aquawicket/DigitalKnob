@@ -126,11 +126,11 @@ public:
 	// boolean dispatchEvent(Event event);
 	static int dispatchEvent(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString targetAddress = duk_require_string(ctx, 0);
+		DKString eventTargetAddress = duk_require_string(ctx, 0);
 		DKString eventAddress = duk_require_string(ctx, 1);
-		//DKINFO("DKEventTargetDUK::dispatchEvent("+targetAddress+", "+eventAddress+")\n");
+		//DKINFO("DKEventTargetDUK::dispatchEvent("+eventTargetAddress+", "+eventAddress+")\n");
 		
-		DKEventTarget* eventTarget = (DKEventTarget*)addressToPointer(targetAddress);
+		DKEventTarget* eventTarget = (DKEventTarget*)addressToPointer(eventTargetAddress);
 		DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
 		eventTarget->dispatchEvent(*event);
 		
