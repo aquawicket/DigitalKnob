@@ -132,7 +132,7 @@ public:
 		
 		DKEventTarget* eventTarget = (DKEventTarget*)addressToPointer(eventTargetAddress);
 		DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
-		eventTarget->dispatchEvent(*event);
+		eventTarget->dispatchEvent(event);
 		
 		return true;
 	}
