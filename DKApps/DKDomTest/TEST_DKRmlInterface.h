@@ -21,7 +21,7 @@ public:
 	}
 	
 	~TEST_DKRmlInterface() {
-		delete dkRmlInterface;
+		delete _dkRmlInterface;
 	}
 	
 	static void printDKRmlInterfaceProperties(DKRmlInterface& dkRmlInterface){
@@ -34,6 +34,6 @@ public:
 };
 //REGISTER_OBJECT(TEST_DKRmlInterface, true);
 
-DKRmlInterface* TEST_DKRmlInterface::dkRmlInterface = nullptr;
+DKRmlInterface* TEST_DKRmlInterface::_dkRmlInterface = nullptr;
 
 #endif //TEST_DKRmlInterface_H
