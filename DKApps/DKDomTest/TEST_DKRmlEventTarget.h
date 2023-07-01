@@ -20,14 +20,14 @@ public:
 		//dkRmlEventTarget = new DKRmlEventTarget(TEST_DKRmlInterface::dkRmlInterface, NULL);
 		dkRmlEventTarget = new DKRmlEventTarget(TEST_DKRmlEventListener::_dkRmlEventListener, NULL);
 		
-		printDKRmlEventTargetProperties(*dkRmlEventTarget);
+		printDKRmlEventTargetProperties(dkRmlEventTarget);
 	}
 	
 	~TEST_DKRmlEventTarget() {
 		delete dkRmlEventTarget;
 	}
 	
-	static void printDKRmlEventTargetProperties(DKRmlEventTarget& rmlEventTarget){
+	static void printDKRmlEventTargetProperties(DKRmlEventTarget* rmlEventTarget){
 		DKDEBUGFUNC(rmlEventTarget);
 		
 		console.log("rmlEventTarget = "				+toString(rmlEventTarget));

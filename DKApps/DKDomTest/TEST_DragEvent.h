@@ -20,7 +20,7 @@ public:
 		eventTarget.dispatchEvent(&dragEvent);
 	}
 	
-	static void printDragEventProperties(DKDragEvent& dragEvent) {
+	static void printDragEventProperties(DKDragEvent* dragEvent) {
 		DKDEBUGFUNC(dragEvent);
 		
 		console.log("dragEvent = "					+toString(dragEvent));
@@ -29,15 +29,15 @@ public:
 		// function
 		
 		// readonly attribute DataTransfer? dataTransfer;
-		console.log("dragEvent.dataTransfer() = "	+toString(dragEvent.dataTransfer()));
+		console.log("dragEvent->dataTransfer() = "	+toString(dragEvent->dataTransfer()));
 		
 		TEST_MouseEvent::printMouseEventProperties(dragEvent);
 	}
 	
-	static bool onDragEvent(DKEvent& event) {
+	static bool onDragEvent(DKEvent* event) {
 		DKDEBUGFUNC(event);
 		console.log("\nTEST_DragEvent::onDragEvent()");
-		printDragEventProperties(dynamic_cast<DKDragEvent&>(event));						//TODO: try to remove the need for dynamic_cast
+		printDragEventProperties(dynamic_cast<DKDragEvent*>(event));						//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 };

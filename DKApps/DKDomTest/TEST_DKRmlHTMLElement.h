@@ -18,10 +18,10 @@ public:
 		
 		_dkRmlHTMLElement = new DKRmlHTMLElement(TEST_DKRmlEventListener::_dkRmlEventListener, NULL);
 		
-		printDKRmlHTMLElementProperties(*_dkRmlHTMLElement);
+		printDKRmlHTMLElementProperties(_dkRmlHTMLElement);
 	}
 	
-	static void printDKRmlHTMLElementProperties(DKRmlHTMLElement& dkRmlHTMLElement){
+	static void printDKRmlHTMLElementProperties(DKRmlHTMLElement* dkRmlHTMLElement){
 		DKDEBUGFUNC(dkRmlHTMLElement);
 		
 		console.log("dkRmlHTMLElement = "	+toString(dkRmlHTMLElement));

@@ -20,7 +20,7 @@ public:
 		eventTarget.dispatchEvent(&focusEvent);
 	}
 	
-	static void printFocusEventProperties(DKFocusEvent& focusEvent){
+	static void printFocusEventProperties(DKFocusEvent* focusEvent){
 		DKDEBUGFUNC(focusEvent);
 		
 		console.log("focusEvent = "						+toString(focusEvent));
@@ -29,15 +29,15 @@ public:
 		// function
 		
 		// readonly attribute EventTarget? relatedTarget;
-		console.log("focusEvent.relatedTarget() = "		+toString(focusEvent.relatedTarget()));
+		console.log("focusEvent->relatedTarget() = "	+toString(focusEvent->relatedTarget()));
 		
 		TEST_UIEvent::printUIEventProperties(focusEvent);
 	}
 	
-	static bool onFocusEvent(DKEvent& event){
+	static bool onFocusEvent(DKEvent* event){
 		DKDEBUGFUNC(event);
 		console.log("\nTEST_FocusEvent::onFocusEvent()");
-		printFocusEventProperties(dynamic_cast<DKFocusEvent&>(event));				//TODO: try to remove the need for dynamic_cast
+		printFocusEventProperties(dynamic_cast<DKFocusEvent*>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 };

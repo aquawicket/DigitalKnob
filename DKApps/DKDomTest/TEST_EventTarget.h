@@ -15,15 +15,14 @@ public:
 		console.log("\n////// TEST_EventTarget.h //////");
 		
 		DKEventTarget eventTarget;
-		printEventTargetProperties(eventTarget);
+		printEventTargetProperties(&eventTarget);
 	}
 	
-	static void printEventTargetProperties(DKEventTarget& evenTarget){
+	static void printEventTargetProperties(DKEventTarget* evenTarget){
 		DKDEBUGFUNC(evenTarget);
 		
 		console.log("evenTarget = "		+toString(evenTarget));
 	}
-
 };
 //REGISTER_OBJECT(TEST_EventTarget, true);
 

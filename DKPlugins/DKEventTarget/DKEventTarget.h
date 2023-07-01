@@ -70,7 +70,7 @@ public:
 				event->currentTarget(this);
 				event->target(this);
 				event->srcElement(this);
-				eventListener.callback(*event);
+				eventListener.callback(event);
 			}
         }
 		return true; 

@@ -15,46 +15,46 @@ public:
 		console.log("\n////// TEST_Document.h //////");
 		
 		DKDocument document;
-		printDocumentProperties(document);
+		printDocumentProperties(&document);
 	}
 	
-	static void printDocumentProperties(DKDocument& document){
+	static void printDocumentProperties(DKDocument* document){
 		DKDEBUGFUNC(document);
 		
-		console.log("document = "					+toString(document));
+		console.log("document = "						+toString(document));
 		
 		// constructor();
 		// function
 		
 		// [SameObject] readonly attribute DOMImplementation implementation;
-		console.log("document.implementation() = "	+toString(document.implementation()));
+		console.log("document->implementation() = "		+toString(document->implementation()));
 		
 		// readonly attribute USVString URL;
-		console.log("document.URL() = "				+toString(document.URL()));
+		console.log("document->URL() = "				+toString(document->URL()));
 		
 		// readonly attribute USVString documentURI;
-		console.log("document.documentURI() = "		+toString(document.documentURI()));
+		console.log("document->documentURI() = "		+toString(document->documentURI()));
 		
 		// readonly attribute DOMString compatMode;
-		console.log("document.compatMode() = "		+toString(document.compatMode()));
+		console.log("document->compatMode() = "			+toString(document->compatMode()));
 		
 		// readonly attribute DOMString characterSet;
-		console.log("document.characterSet() = "		+toString(document.characterSet()));
+		console.log("document->characterSet() = "		+toString(document->characterSet()));
 		
 		// readonly attribute DOMString charset; // legacy alias of .characterSet
-		console.log("document.charset() = "			+toString(document.charset()));
+		console.log("document->charset() = "			+toString(document->charset()));
 		
 		// readonly attribute DOMString inputEncoding; // legacy alias of .characterSet
-		console.log("document.inputEncoding() = "	+toString(document.inputEncoding()));
+		console.log("document->inputEncoding() = "		+toString(document->inputEncoding()));
 		
 		// readonly attribute DOMString contentType;
-		console.log("document.contentType() = "		+toString(document.contentType()));
+		console.log("document->contentType() = "		+toString(document->contentType()));
 		
 		// readonly attribute DocumentType? doctype;
-		console.log("document.doctype() = "			+toString(document.doctype()));
+		console.log("document->doctype() = "			+toString(document->doctype()));
 		
 		// readonly attribute Element? documentElement;
-		//console.log("document.documentElement() = "	+toString(document.documentElement()));
+		//console.log("document->documentElement() = "	+toString(document->documentElement()));
 		
 		// HTMLCollection getElementsByTagName(DOMString qualifiedName);
 		// function
@@ -138,20 +138,21 @@ public:
 		
 		// Source: Fullscreen API Standard (https://fullscreen.spec.whatwg.org/)
 		// partial interface Document {
-		//		[LegacyLenientSetter] readonly attribute boolean fullscreenEnabled;
-				console.log("document.fullscreenEnabled() = "	+toString(document.fullscreenEnabled()));
-		//		
-		//		[LegacyLenientSetter, Unscopable] readonly attribute boolean fullscreen; // historical
-				console.log("document.fullscreen() = "			+toString(document.fullscreen()));
-		//
-		//		Promise<undefined> exitFullscreen();
-				// function
-		//
-		//		attribute EventHandler onfullscreenchange;
-				console.log("document.onfullscreenchange() = "	+toString(document.onfullscreenchange()));
-		//
-		//		attribute EventHandler onfullscreenerror;
-				console.log("document.onfullscreenerror() = "	+toString(document.onfullscreenerror()));
+		// [LegacyLenientSetter] readonly attribute boolean fullscreenEnabled;
+		console.log("document->fullscreenEnabled() = "	+toString(document->fullscreenEnabled()));
+				
+		// [LegacyLenientSetter, Unscopable] readonly attribute boolean fullscreen; // historical
+		console.log("document->fullscreen() = "			+toString(document->fullscreen()));
+		
+		// Promise<undefined> exitFullscreen();
+		// function
+		
+		// attribute EventHandler onfullscreenchange;
+		console.log("document->onfullscreenchange() = "	+toString(document->onfullscreenchange()));
+		
+		// attribute EventHandler onfullscreenerror;
+		console.log("document->onfullscreenerror() = "	+toString(document->onfullscreenerror()));
+		
 		//};
 		
 		

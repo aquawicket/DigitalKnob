@@ -20,7 +20,7 @@ public:
 		inputEventTarget.dispatchEvent(&inputEvent);
 	}
 	
-	static void printInputEventProperties(DKInputEvent& inputEvent){
+	static void printInputEventProperties(DKInputEvent* inputEvent){
 		DKDEBUGFUNC(inputEvent);
 		
 		console.log("inputEvent = "					+toString(inputEvent));
@@ -29,31 +29,32 @@ public:
 		// function
 		
 		// readonly attribute DOMString? data;
-		console.log("inputEvent.data() = "			+toString(inputEvent.data()));
+		console.log("inputEvent->data() = "			+toString(inputEvent->data()));
 		
 		//readonly attribute boolean isComposing;
-		console.log("inputEvent.isComposing() = "	+toString(inputEvent.isComposing()));
+		console.log("inputEvent->isComposing() = "	+toString(inputEvent->isComposing()));
 		
 		//readonly attribute DOMString inputType;
-		console.log("inputEvent.inputType() = "		+toString(inputEvent.inputType()));
+		console.log("inputEvent->inputType() = "		+toString(inputEvent->inputType()));
 		
 		// Source: Input Events Level 2 (https://www.w3.org/TR/input-events-2/)
 		// partial interface InputEvent {
-		//    	readonly attribute DataTransfer? dataTransfer;
-				console.log("inputEvent.dataTransfer() = "	+toString(inputEvent.dataTransfer()));
-		//		
-		//    	sequence<StaticRange> getTargetRanges();
-				// function
+		// readonly attribute DataTransfer? dataTransfer;
+		console.log("inputEvent->dataTransfer() = "	+toString(inputEvent->dataTransfer()));
+				
+		// sequence<StaticRange> getTargetRanges();
+		// function
+		
 		// };
 		
 		
 		TEST_UIEvent::printUIEventProperties(inputEvent);
 	}
 	
-	static bool onInputEvent(DKEvent& event){
+	static bool onInputEvent(DKEvent* event){
 		DKDEBUGFUNC(event);
 		console.log("\nTEST_InputEvent::onInputEvent()");
-		printInputEventProperties(dynamic_cast<DKInputEvent&>(event));				//TODO: try to remove the need for dynamic_cast
+		printInputEventProperties(dynamic_cast<DKInputEvent*>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 };

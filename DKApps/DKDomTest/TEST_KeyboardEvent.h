@@ -20,7 +20,7 @@ public:
 		keyboardEventTarget.dispatchEvent(&keyboardEvent);
 	}
 	
-	static void printKeyboardEventProperties(DKKeyboardEvent& keyboardEvent){
+	static void printKeyboardEventProperties(DKKeyboardEvent* keyboardEvent){
 		DKDEBUGFUNC(keyboardEvent);
 		
 		console.log("keyboardEvent = "								+toString(keyboardEvent));
@@ -31,44 +31,44 @@ public:
 	#if !EMSCRIPTEN
 		// KeyLocationCode
 		// const unsigned long DOM_KEY_LOCATION_STANDARD = 0x00;
-		console.log("keyboardEvent.DOM_KEY_LOCATION_STANDARD() = "	+toString(keyboardEvent.DOM_KEY_LOCATION_STANDARD()));
+		console.log("keyboardEvent->DOM_KEY_LOCATION_STANDARD() = "	+toString(keyboardEvent->DOM_KEY_LOCATION_STANDARD()));
 		
 		// const unsigned long DOM_KEY_LOCATION_LEFT = 0x01;
-		console.log("keyboardEvent.DOM_KEY_LOCATION_LEFT() = "		+toString(keyboardEvent.DOM_KEY_LOCATION_LEFT()));
+		console.log("keyboardEvent->DOM_KEY_LOCATION_LEFT() = "		+toString(keyboardEvent->DOM_KEY_LOCATION_LEFT()));
 		
 		// const unsigned long DOM_KEY_LOCATION_RIGHT = 0x02;
-		console.log("keyboardEvent.DOM_KEY_LOCATION_RIGHT() = "		+toString(keyboardEvent.DOM_KEY_LOCATION_RIGHT()));
+		console.log("keyboardEvent->DOM_KEY_LOCATION_RIGHT() = "	+toString(keyboardEvent->DOM_KEY_LOCATION_RIGHT()));
 		
 		// const unsigned long DOM_KEY_LOCATION_NUMPAD = 0x03;
-		console.log("keyboardEvent.DOM_KEY_LOCATION_NUMPAD() = "	+toString(keyboardEvent.DOM_KEY_LOCATION_NUMPAD()));
+		console.log("keyboardEvent->DOM_KEY_LOCATION_NUMPAD() = "	+toString(keyboardEvent->DOM_KEY_LOCATION_NUMPAD()));
 	#endif
 		
 		// readonly attribute DOMString key;
-		console.log("keyboardEvent.key() = "						+toString(keyboardEvent.key()));
+		console.log("keyboardEvent->key() = "						+toString(keyboardEvent->key()));
 		
 		// readonly attribute DOMString code;
-		console.log("keyboardEvent.code() = "						+toString(keyboardEvent.code()));	
+		console.log("keyboardEvent->code() = "						+toString(keyboardEvent->code()));	
 		
 		// readonly attribute unsigned long location;
-		console.log("keyboardEvent.location() = "					+toString(keyboardEvent.location()));
+		console.log("keyboardEvent->location() = "					+toString(keyboardEvent->location()));
 		
 		// readonly attribute boolean ctrlKey;
-		console.log("keyboardEvent.ctrlKey() = "					+toString(keyboardEvent.ctrlKey()));
+		console.log("keyboardEvent->ctrlKey() = "					+toString(keyboardEvent->ctrlKey()));
 		
 		// readonly attribute boolean shiftKey;
-		console.log("keyboardEvent.shiftKey() = "					+toString(keyboardEvent.shiftKey()));
+		console.log("keyboardEvent->shiftKey() = "					+toString(keyboardEvent->shiftKey()));
 		
 		// readonly attribute boolean altKey;
-		console.log("keyboardEvent.altKey() = "						+toString(keyboardEvent.altKey()));
+		console.log("keyboardEvent->altKey() = "					+toString(keyboardEvent->altKey()));
 		
 		// readonly attribute boolean metaKey;
-		console.log("keyboardEvent.metaKey() = "					+toString(keyboardEvent.metaKey()));
+		console.log("keyboardEvent->metaKey() = "					+toString(keyboardEvent->metaKey()));
 		
 		// readonly attribute boolean repeat;
-		console.log("keyboardEvent.repeat() = "						+toString(keyboardEvent.repeat()));
+		console.log("keyboardEvent->repeat() = "					+toString(keyboardEvent->repeat()));
 		
 		// readonly attribute boolean isComposing;
-		console.log("keyboardEvent.isComposing() = "				+toString(keyboardEvent.isComposing()));
+		console.log("keyboardEvent->isComposing() = "				+toString(keyboardEvent->isComposing()));
 		
 		// boolean getModifierState(DOMString keyArg);
 		// function
@@ -91,22 +91,23 @@ public:
 		
 		// Source: UI Events (https://www.w3.org/TR/uievents/)
 		// partial interface KeyboardEvent {
-		//		// The following support legacy user agents
-		//		readonly attribute unsigned long charCode;
-				console.log("keyboardEvent.charCode() = "			+toString(keyboardEvent.charCode()));
-		//
-		//		readonly attribute unsigned long keyCode;
-				console.log("keyboardEvent.keyCode() = "			+toString(keyboardEvent.keyCode()));
+		// // The following support legacy user agents
+		// readonly attribute unsigned long charCode;
+		console.log("keyboardEvent->charCode() = "					+toString(keyboardEvent->charCode()));
+
+		// readonly attribute unsigned long keyCode;
+		console.log("keyboardEvent->keyCode() = "					+toString(keyboardEvent->keyCode()));
+		
 		// };
 		
 		
 		TEST_UIEvent::printUIEventProperties(keyboardEvent);
 	}
 
-	static bool onKeyboardEvent(DKEvent& event){
+	static bool onKeyboardEvent(DKEvent* event){
 		DKDEBUGFUNC(event);
 		console.log("\nTEST_KeyboardEvent::onkeyboardevent()");
-		printKeyboardEventProperties(dynamic_cast<DKKeyboardEvent&>(event));	//TODO: try to remove the need for dynamic_cast
+		printKeyboardEventProperties(dynamic_cast<DKKeyboardEvent*>(event));	//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 };

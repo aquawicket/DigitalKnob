@@ -15,43 +15,43 @@ public:
 		console.log("\n////// TEST_Element.h //////");
 
 		DKElement element;
-		printElementProperties(element);
+		printElementProperties(&element);
 	}
 	
-	static void printElementProperties(DKElement& element){
+	static void printElementProperties(DKElement* element){
 		DKDEBUGFUNC(element);
 		
 		console.log("element = "					+toString(element));
 		
 		// readonly attribute DOMString? namespaceURI;
-		console.log("element.namespaceURI() = "		+toString(element.namespaceURI()));
+		console.log("element->namespaceURI() = "	+toString(element->namespaceURI()));
 		
 		// readonly attribute DOMString? prefix;
-		console.log("element.prefix() = "			+toString(element.prefix()));
+		console.log("element->prefix() = "			+toString(element->prefix()));
 		
 		// readonly attribute DOMString localName;
-		console.log("element.localName() = "		+toString(element.localName()));
+		console.log("element->localName() = "		+toString(element->localName()));
 		
 		// readonly attribute DOMString tagName;
-		console.log("element.tagName() = "			+toString(element.tagName()));
+		console.log("element->tagName() = "			+toString(element->tagName()));
 		
 		// [CEReactions] attribute DOMString id;
-		console.log("element.id() = "				+toString(element.id()));
+		console.log("element->id() = "				+toString(element->id()));
 		
 		// [CEReactions] attribute DOMString className;
-		console.log("element.className() = "		+toString(element.className()));
+		console.log("element->className() = "		+toString(element->className()));
 		
 		// [SameObject, PutForwards=value] readonly attribute DOMTokenList classList;
-		console.log("element.classList() = "		+toString(element.classList()));
+		console.log("element->classList() = "		+toString(element->classList()));
 		
 		//[CEReactions, Unscopable] attribute DOMString slot;
-		console.log("element.slot() = "				+toString(element.slot()));
+		console.log("element->slot() = "			+toString(element->slot()));
 		
 		// boolean hasAttributes();
 		// function
 		
 		// [SameObject] readonly attribute NamedNodeMap attributes;
-		console.log("element.attributes() = "		+toString(element.attributes()));
+		console.log("element->attributes() = "		+toString(element->attributes()));
 		
 		// sequence<DOMString> getAttributeNames();
 		// function
@@ -102,7 +102,7 @@ public:
 		// function
 		
 		// readonly attribute ShadowRoot? shadowRoot;
-		console.log("element.shadowRoot() = "	+toString(element.shadowRoot()));
+		console.log("element->shadowRoot() = "		+toString(element->shadowRoot()));
 		
 		// Element? closest(DOMString selectors);
 		// function

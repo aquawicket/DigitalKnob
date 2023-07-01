@@ -16,62 +16,62 @@ public:
 		
 		DKWindow* window = new DKWindow();
 		window->screen(TEST_Screen::_screen);
-		printWindowProperties(*window);
+		printWindowProperties(window);
 	}
 	
-	static void printWindowProperties(DKWindow& window){
+	static void printWindowProperties(DKWindow* window){
 		DKDEBUGFUNC(window);
 		
 		console.log("window = "						+toString(window));
 		
 		// the current browsing context
 		// [LegacyUnforgeable] readonly attribute WindowProxy window;
-		console.log("window.window() = "			+toString(window.window()));
+		console.log("window->window() = "			+toString(window->window()));
 	
 		// [Replaceable] readonly attribute WindowProxy self;
-		console.log("window.self() = "				+toString(window.self()));
+		console.log("window->self() = "				+toString(window->self()));
 		
 		// [LegacyUnforgeable] readonly attribute Document document;
-		console.log("window.document() = "			+toString(window.document()));
+		console.log("window->document() = "			+toString(window->document()));
 		
 		// attribute DOMString name;
-		console.log("window.name() = "				+toString(window.name()));
+		console.log("window->name() = "				+toString(window->name()));
 		
 		// [PutForwards=href, LegacyUnforgeable] readonly attribute Location location;
-		console.log("window.location() = "			+toString(window.location()));
+		console.log("window->location() = "			+toString(window->location()));
 
 		// readonly attribute History history;
-		console.log("window.history() = "			+toString(window.history()));
+		console.log("window->history() = "			+toString(window->history()));
 		
 		// readonly attribute CustomElementRegistry customElements;
-		console.log("window.customElements() = "	+toString(window.customElements()));
+		console.log("window->customElements() = "	+toString(window->customElements()));
 		
 		// [Replaceable] readonly attribute BarProp locationbar;
-		console.log("window.locationbar() = "		+toString(window.locationbar()));
+		console.log("window->locationbar() = "		+toString(window->locationbar()));
 		
 		// [Replaceable] readonly attribute BarProp menubar;
-		console.log("window.menubar() = "			+toString(window.menubar()));
+		console.log("window->menubar() = "			+toString(window->menubar()));
 		
 		// [Replaceable] readonly attribute BarProp personalbar;
-		console.log("window.personalbar() = "		+toString(window.personalbar()));
+		console.log("window->personalbar() = "		+toString(window->personalbar()));
 		
 		// [Replaceable] readonly attribute BarProp scrollbars;
-		console.log("window.scrollbars() = "		+toString(window.scrollbars()));
+		console.log("window->scrollbars() = "		+toString(window->scrollbars()));
 		
 		// [Replaceable] readonly attribute BarProp statusbar;
-		console.log("window.statusbar() = "			+toString(window.statusbar()));
+		console.log("window->statusbar() = "		+toString(window->statusbar()));
 		
 		// [Replaceable] readonly attribute BarProp toolbar;
-		console.log("window.toolbar() = "			+toString(window.toolbar()));
+		console.log("window->toolbar() = "			+toString(window->toolbar()));
 		
 		// attribute DOMString status;
-		console.log("window.status() = "			+toString(window.status()));
+		console.log("window->status() = "			+toString(window->status()));
 		
 		// undefined close();
 		// function
 		
 		// readonly attribute boolean closed;
-		console.log("window.closed() = "			+toString(window.closed()));
+		console.log("window->closed() = "			+toString(window->closed()));
 		
 		// undefined stop();
 		// function
@@ -84,22 +84,22 @@ public:
 		
 		// other browsing contexts
 		// [Replaceable] readonly attribute WindowProxy frames;
-		console.log("window.frames() = "			+toString(window.frames()));
+		console.log("window->frames() = "			+toString(window->frames()));
 	
 		// [Replaceable] readonly attribute unsigned long length;
-		console.log("window.length() = "			+toString(window.length()));
+		console.log("window->length() = "			+toString(window->length()));
 		
 		// [LegacyUnforgeable] readonly attribute WindowProxy? top;
-		console.log("window.top() = "				+toString(window.top()));
+		console.log("window->top() = "				+toString(window->top()));
 		
 		// attribute any opener;
-		console.log("window.opener() = "			+toString(window.opener()));
+		console.log("window->opener() = "			+toString(window->opener()));
 		
 		// [Replaceable] readonly attribute WindowProxy? parent;
-		console.log("window.parent() = "			+toString(window.parent()));
+		console.log("window->parent() = "			+toString(window->parent()));
 		
 		// readonly attribute Element? frameElement;
-		console.log("window.frameElement() = "		+toString(window.frameElement()));
+		console.log("window->frameElement() = "		+toString(window->frameElement()));
 		
 		// WindowProxy? open(optional USVString url = "", optional DOMString target = "_blank", optional [LegacyNullToEmptyString] DOMString features = "");
 		// function
@@ -112,13 +112,13 @@ public:
 		
 		// the user agent
 		// readonly attribute Navigator navigator;
-		console.log("window.navigator() = "			+toString(window.navigator()));
+		console.log("window->navigator() = "		+toString(window->navigator()));
 		
 		// readonly attribute Navigator clientInformation; // legacy alias of .navigator
-		console.log("window.clientInformation() = "	+toString(window.clientInformation()));
+		console.log("window->clientInformation() = "+toString(window->clientInformation()));
 		
 		// readonly attribute boolean originAgentCluster;
-		console.log("window.originAgentCluster() = "+toString(window.originAgentCluster()));
+		console.log("window->originAgentCluster() = "+toString(window->originAgentCluster()));
 		
 		//user prompts
 		// undefined alert();
@@ -146,16 +146,16 @@ public:
 		// Source: Compatibility Standard (https://compat.spec.whatwg.org/)
 		// partial interface Window {
 		//		readonly attribute short orientation;
-				console.log("window.orientation() = "			+toString(window.orientation()));
+				console.log("window->orientation() = "			+toString(window->orientation()));
 		//		
 		//		attribute EventHandler onorientationchange;
-				console.log("window.onorientationchange() = "	+toString(window.onorientationchange()));
+				console.log("window->onorientationchange() = "	+toString(window->onorientationchange()));
 		// };
 		
 		// Source: DOM Standard (https://dom.spec.whatwg.org/)
 		// partial interface Window {
 		//		[Replaceable] readonly attribute (Event or undefined) event; // legacy
-				console.log("window.event() = "					+toString(window.event()));
+				console.log("window->event() = "				+toString(window->event()));
 		// };
 		
 		// Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
@@ -192,7 +192,7 @@ public:
 		// [SecureContext]
 		// partial interface Window {
 		//		[SameObject] readonly attribute CookieStore cookieStore;
-				console.log("window.cookieStore() = "		+toString(window.cookieStore()));
+				console.log("window->cookieStore() = "		+toString(window->cookieStore()));
 		// };
 
 		// Source: Digital Goods API (https://wicg.github.io/digital-goods/)
@@ -205,7 +205,7 @@ public:
 		// partial interface Window {
 		//		// Collection of fenced frame APIs
 		//		readonly attribute Fence? fence;
-				console.log("window.fence() = "				+toString(window.fence()));
+				console.log("window->fence() = "			+toString(window->fence()));
 		// };
 	
 		// Source: File System Access (https://wicg.github.io/file-system-access/)
@@ -231,28 +231,28 @@ public:
 		// Source: Manifest Incubations (https://wicg.github.io/manifest-incubations/)
 		// partial interface Window {
 		//		attribute EventHandler onappinstalled;
-				console.log("window.onappinstalled() = "			+toString(window.onappinstalled()));
+				console.log("window->onappinstalled() = "		+toString(window->onappinstalled()));
 		
 		//		attribute EventHandler onbeforeinstallprompt;
-				console.log("window.onbeforeinstallprompt() = "		+toString(window.onbeforeinstallprompt()));
+				console.log("window->onbeforeinstallprompt() = "+toString(window->onbeforeinstallprompt()));
 		// };
 
 		// Source: Portals (https://wicg.github.io/portals/)
 		// partial interface Window {
 		//		readonly attribute PortalHost? portalHost;
-				console.log("window.portalHost() = "				+toString(window.portalHost()));
+				console.log("window->portalHost() = "			+toString(window->portalHost()));
 		// };
 	
 		// Source: Web Speech API (https://wicg.github.io/speech-api/)
 		// partial interface Window {
 		//		[SameObject] readonly attribute SpeechSynthesis speechSynthesis;
-				console.log("window.speechSynthesis() = "	+toString(window.speechSynthesis()));
+				console.log("window->speechSynthesis() = "		+toString(window->speechSynthesis()));
 		// };
 		
 		// Source: Web App Launch Handler API (https://wicg.github.io/web-app-launch/)
 		// partial interface Window {
 		//		readonly attribute LaunchQueue launchQueue;
-				console.log("window.launchQueue() = "		+toString(window.launchQueue()));
+				console.log("window->launchQueue() = "			+toString(window->launchQueue()));
 		// };
 		
 		// Source: CSS Spatial Navigation Level 1 (https://www.w3.org/TR/css-nav-1/)
@@ -273,13 +273,13 @@ public:
 				// function
 		//
 		//		[SameObject, Replaceable] readonly attribute Screen screen;
-				console.log("window.screen() = "				+toString(window.screen()));
-				//if(*window.screen())
-				//	TEST_Screen::printScreenProperties(*window.screen());
+				console.log("window->screen() = "				+toString(window->screen()));
+				//if(*window->screen())
+				//	TEST_Screen::printScreenProperties(*window->screen());
 				
 		//
 		//		[SameObject, Replaceable] readonly attribute VisualViewport? visualViewport;
-				console.log("window.visualViewport() = "		+toString(window.visualViewport()));
+				console.log("window->visualViewport() = "		+toString(window->visualViewport()));
 		//
 		//		// browsing context
 		//		undefined moveTo(long x, long y);
@@ -296,23 +296,23 @@ public:
 		//
 		//		// viewport
 		//		[Replaceable] readonly attribute long innerWidth;
-				console.log("window.innerWidth() = "		+toString(window.innerWidth()));
+				console.log("window->innerWidth() = "			+toString(window->innerWidth()));
 		//
 		//		[Replaceable] readonly attribute long innerHeight;
-				console.log("window.innerHeight() = "		+toString(window.innerHeight()));
+				console.log("window->innerHeight() = "			+toString(window->innerHeight()));
 		//
 		//		// viewport scrolling
 		//		[Replaceable] readonly attribute double scrollX;
-				console.log("window.scrollX() = "			+toString(window.scrollX()));
+				console.log("window->scrollX() = "				+toString(window->scrollX()));
 		//
 		//		[Replaceable] readonly attribute double pageXOffset;
-				console.log("window.pageXOffset() = "		+toString(window.pageXOffset()));
+				console.log("window->pageXOffset() = "			+toString(window->pageXOffset()));
 		//
 		//		[Replaceable] readonly attribute double scrollY;
-				console.log("window.scrollY() = "			+toString(window.scrollY()));
+				console.log("window->scrollY() = "				+toString(window->scrollY()));
 		//
 		//		[Replaceable] readonly attribute double pageYOffset;
-				console.log("window.pageYOffset() = "		+toString(window.pageYOffset()));
+				console.log("window->pageYOffset() = "			+toString(window->pageYOffset()));
 		//
 		//		undefined scroll(optional ScrollToOptions options = {});
 		//		undefined scroll(unrestricted double x, unrestricted double y);
@@ -328,43 +328,43 @@ public:
 		///
 		//		// client
 		//		[Replaceable] readonly attribute long screenX;
-				console.log("window.screenX() = "			+toString(window.screenX()));
+				console.log("window->screenX() = "				+toString(window->screenX()));
 		//
 		//		[Replaceable] readonly attribute long screenLeft;
-				console.log("window.screenLeft() = "		+toString(window.screenLeft()));
+				console.log("window->screenLeft() = "			+toString(window->screenLeft()));
 		//
 		//		[Replaceable] readonly attribute long screenY;
-				console.log("window.screenY() = "			+toString(window.screenY()));
+				console.log("window->screenY() = "				+toString(window->screenY()));
 		//
 		//		[Replaceable] readonly attribute long screenTop;
-				console.log("window.screenTop() = "			+toString(window.screenTop()));
+				console.log("window->screenTop() = "			+toString(window->screenTop()));
 		//
 		//		[Replaceable] readonly attribute long outerWidth;
-				console.log("window.outerWidth() = "		+toString(window.outerWidth()));
+				console.log("window->outerWidth() = "			+toString(window->outerWidth()));
 		//
 		//		[Replaceable] readonly attribute long outerHeight;
-				console.log("window.outerHeight() = "		+toString(window.outerHeight()));
+				console.log("window->outerHeight() = "			+toString(window->outerHeight()));
 		//
 		//		[Replaceable] readonly attribute double devicePixelRatio;
-				console.log("window.devicePixelRatio() = "	+toString(window.devicePixelRatio()));
+				console.log("window->devicePixelRatio() = "		+toString(window->devicePixelRatio()));
 		// };
 		
 		// Source: DeviceOrientation Event Specification (https://www.w3.org/TR/orientation-event/)
 		// partial interface Window {
 		//		[SecureContext] attribute EventHandler ondeviceorientation;
-				console.log("window.ondeviceorientation() = "+toString(window.ondeviceorientation()));
+				console.log("window->ondeviceorientation() = "	+toString(window->ondeviceorientation()));
 		// };
 
 		// Source: DeviceOrientation Event Specification (https://www.w3.org/TR/orientation-event/)
 		// partial interface Window {
 		//		[SecureContext] attribute EventHandler ondeviceorientationabsolute;
-				console.log("window.ondeviceorientationabsolute() = "+toString(window.ondeviceorientationabsolute()));
+				console.log("window->ondeviceorientationabsolute() = "+toString(window->ondeviceorientationabsolute()));
 		// };
 
 		// Source: DeviceOrientation Event Specification (https://www.w3.org/TR/orientation-event/)
 		//	partial interface Window {
 		//		[SecureContext] attribute EventHandler ondevicemotion;
-				console.log("window.ondevicemotion() = "		+toString(window.ondevicemotion()));
+				console.log("window->ondevicemotion() = "		+toString(window->ondevicemotion()));
 		// };
 	
 		// Source: requestIdleCallback() (https://www.w3.org/TR/requestidlecallback/)

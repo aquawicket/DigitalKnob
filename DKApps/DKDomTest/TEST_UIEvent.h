@@ -21,7 +21,7 @@ public:
 		eventTarget.dispatchEvent(&uievent);
 	}
 	
-	static void printUIEventProperties(DKUIEvent& uievent){
+	static void printUIEventProperties(DKUIEvent* uievent){
 		DKDEBUGFUNC(uievent);
 		
 		console.log("uievent = "								+toString(uievent));
@@ -30,15 +30,15 @@ public:
 		// function
 		
 		// readonly attribute Window? view;
-		console.log("uievent.view() = "							+toString(uievent.view()));
+		console.log("uievent->view() = "							+toString(uievent->view()));
 		
 		// readonly attribute long detail;
-		console.log("uievent.detail() = "						+toString(uievent.detail()));
+		console.log("uievent->detail() = "						+toString(uievent->detail()));
 		
 		// Source: Input Device Capabilities (https://wicg.github.io/input-device-capabilities/)
 		// partial interface UIEvent {
 		// 		readonly attribute InputDeviceCapabilities? sourceCapabilities;
-				console.log("uievent.sourceCapabilities() = "	+toString(uievent.sourceCapabilities()));
+				console.log("uievent->sourceCapabilities() = "	+toString(uievent->sourceCapabilities()));
 		// };
 		
 		// Source: UI Events (https://www.w3.org/TR/uievents/)
@@ -52,16 +52,16 @@ public:
 		// partial interface UIEvent {
 		//		The following support legacy user agents
 		//		readonly attribute unsigned long which;
-				console.log("uievent.which() = "				+toString(uievent.which()));
+				console.log("uievent->which() = "				+toString(uievent->which()));
 		// };
 		
 		TEST_Event::printEventProperties(uievent);
 	}
 	
-	static bool onuievent(DKEvent& event){
+	static bool onuievent(DKEvent* event){
 		DKDEBUGFUNC(event);
 		console.log("\nTEST_UIEvent::onuievent()");
-		printUIEventProperties(dynamic_cast<DKUIEvent&>(event));			//TODO: try to remove the need for dynamic_cast
+		printUIEventProperties(dynamic_cast<DKUIEvent*>(event));			//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 };

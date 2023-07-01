@@ -21,7 +21,7 @@ public:
 		eventTarget.dispatchEvent(&customEvent);
 	}
 
-	static void printCustomEventProperties(DKCustomEvent& customEvent) {
+	static void printCustomEventProperties(DKCustomEvent* customEvent) {
 		DKDEBUGFUNC(customEvent);
 		
 		console.log("customEvent = "			+toString(customEvent));
@@ -30,7 +30,7 @@ public:
 		// function
 		
 		// readonly attribute any detail;
-		console.log("customEvent.detail() = "	+toString(customEvent.detail()));
+		console.log("customEvent->detail() = "	+toString(customEvent->detail()));
 		
 		// undefined initCustomEvent(DOMString type, optional boolean bubbles = false, optional boolean cancelable = false, optional any detail = null); // legacy
 		// function
@@ -38,10 +38,10 @@ public:
 		TEST_Event::printEventProperties(customEvent);
 	}
 	
-	static bool onCustomEvent(DKEvent& event) {
+	static bool onCustomEvent(DKEvent* event) {
 		DKDEBUGFUNC(event);
 		console.log("\nTEST_CustomEvent::onCustomEvent()");
-		printCustomEventProperties(dynamic_cast<DKCustomEvent&>(event));		//TODO: try to remove the need for dynamic_cast
+		printCustomEventProperties(dynamic_cast<DKCustomEvent*>(event));		//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 

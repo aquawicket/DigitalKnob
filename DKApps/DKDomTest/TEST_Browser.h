@@ -58,7 +58,7 @@ public:
 		delete document;
 	}
 	
-	static void onLoad(DKEvent& event){
+	static void onLoad(DKEvent* event){
 		DKDEBUGFUNC(event);
 		console.log("onLoad()");
 		
@@ -86,10 +86,10 @@ public:
 		}
 	}
 	
-	static void onHyperlink(DKEvent& event){
+	static void onHyperlink(DKEvent* event){
 		DKDEBUGFUNC(event);
 		console.log("onHyperlink()");
-		DKElement* target = dynamic_cast<DKElement*>(event.target());
+		DKElement* target = dynamic_cast<DKElement*>(event->target());
 		DOMString value = target->getAttribute("href");
 		TEST_Browser::location->href(value);
 	}

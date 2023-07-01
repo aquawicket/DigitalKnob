@@ -16,14 +16,14 @@ public:
 		
 		dkRmlNode = new DKRmlNode(TEST_DKRmlEventListener::_dkRmlEventListener, NULL);
 		
-		printDKRmlNodeProperties(*dkRmlNode);
+		printDKRmlNodeProperties(dkRmlNode);
 	}
 	
 	~TEST_DKRmlNode() {
 		delete dkRmlNode;
 	}
 	
-	static void printDKRmlNodeProperties(DKRmlNode& dkRmlNode){
+	static void printDKRmlNodeProperties(DKRmlNode* dkRmlNode){
 		DKDEBUGFUNC(dkRmlNode);
 		
 		console.log("dkRmlNode = "		+toString(dkRmlNode));

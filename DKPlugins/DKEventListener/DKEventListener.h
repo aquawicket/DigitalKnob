@@ -7,7 +7,7 @@
 #include "DKEvent/DKEvent.h"
 
 
-typedef std::function<void(DKEvent&)> DKCallback;
+typedef std::function<void(DKEvent*)> DKCallback;
 
 
 // Source: DOM Standard (https://dom.spec.whatwg.org/)

@@ -43,14 +43,14 @@ public:
 		DKEvent load_event("load", "");
 		_dkRmlDocument->dispatchEvent(&load_event);
 
-		printRmlDocumentProperties(*_dkRmlDocument);
+		printRmlDocumentProperties(_dkRmlDocument);
 	}
 	
 	~TEST_DKRmlDocument() {
 		delete _dkRmlDocument;
 	}
 	
-	static void onLoad(DKEvent& event){
+	static void onLoad(DKEvent* event){
 		DKDEBUGFUNC(event);
 		console.log("onLoad()");
 		
@@ -74,15 +74,15 @@ public:
 		}
 	}
 	
-	static void onHyperlink(DKEvent& event){
+	static void onHyperlink(DKEvent* event){
 		DKDEBUGFUNC(event);
 		//console.log("onHyperlink()");
-		DKElement* target = dynamic_cast<DKElement*>(event.target());
+		DKElement* target = dynamic_cast<DKElement*>(event->target());
 		DOMString value = target->getAttribute("href");
 		TEST_DKRmlLocation::_dkRmlLocation->href(value);
 	}
 	
-	static void printRmlDocumentProperties(DKRmlDocument& dkRmlDocument){
+	static void printRmlDocumentProperties(DKRmlDocument* dkRmlDocument){
 		DKDEBUGFUNC(dkRmlDocument);
 		
 		console.log("dkRmlDocument = "				+toString(dkRmlDocument));

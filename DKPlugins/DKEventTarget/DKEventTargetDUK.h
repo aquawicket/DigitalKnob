@@ -137,24 +137,24 @@ public:
 		return true;
 	}
 	
-	static void onevent(DKEvent& event) {
+	static void onevent(DKEvent* event) {
 		DKDEBUGFUNC(event);
 		//DKINFO("DKEventTargetDUK::onevent() \n");
 		
 		// get the globally stored js callback function
-		DKString eventAddress = pointerToAddress(&event);
-		DKString eventTargetAddress = pointerToAddress(event.target());
-		DKString cb = eventTargetAddress+"_"+event.type()+"_callback";
+		DKString eventAddress = pointerToAddress(event);
+		DKString eventTargetAddress = pointerToAddress(event->target());
+		DKString cb = eventTargetAddress+"_"+event->type()+"_callback";
 		
 		duk_get_global_string(DKDuktape::ctx, cb.c_str());
 		
 		// create and push the Event(eventAddress) object		
 		//DKString eventObjStr = "var eventObj = new Event('', '', '"+eventAddress+"'); eventObj;";
-		if (event.interfaceName.empty()) {
+		if (event->interfaceName.empty()) {
 			DKERROR("event->interfaceName invalid! \n");
 			return;
 		}
-		DKString eventObjStr = "var eventObj = new "+event.interfaceName+"('', '', '"+eventAddress+"'); eventObj;";
+		DKString eventObjStr = "var eventObj = new "+event->interfaceName+"('', '', '"+eventAddress+"'); eventObj;";
 		DukValue eventObj = dukglue_peval<DukValue>(DKDuktape::ctx, eventObjStr.c_str());
 		dukglue_push(DKDuktape::ctx, eventObj);
 		
