@@ -7,6 +7,7 @@
 #define DKWindowDUK_H
 
 #include "DKDuktape/DKDuktape.h"
+#include "DKWindow/DKWindow.h"
 
 
 // Source: HTML Standard (https://html.spec.whatwg.org/multipage/)

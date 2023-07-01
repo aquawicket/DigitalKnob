@@ -293,6 +293,6 @@ public:
 	operator std::string() const { return "[object DKRmlElement]"; }
 };
 
-//std::vector<DKRmlElement*> DKRmlElement::list;
+//std::vector<DKRmlElement*> DKRmlElement::_list;
 
 #endif //DKRmlElement_H
