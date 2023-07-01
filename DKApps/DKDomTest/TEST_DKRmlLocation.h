@@ -14,7 +14,7 @@ public:
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DKRmlLocation.h //////");
 		
-		_dkRmlLocation = new DKRmlLocation(TEST_DKRmlInterface::dkRmlInterface, TEST_DKRmlEventListener::_dkRmlEventListener);
+		_dkRmlLocation = new DKRmlLocation(TEST_DKRmlInterface::_dkRmlInterface, TEST_DKRmlEventListener::_dkRmlEventListener);
 		_dkRmlLocation->href("DKWebTest/index.html");
 		
 		printDKRmlLocationProperties(*_dkRmlLocation);
