@@ -86,7 +86,7 @@ public:
 	// getter Element? item(unsigned long index);
 	static int item(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push( ctx, pointerToAddress( htmlCollection(ctx)->item(GetUint(ctx)) ) );
+		dukglue_push( ctx, htmlCollection(ctx)->item(GetUint(ctx))->interfaceAddress );
 		return true;
 	}
 	
