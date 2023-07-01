@@ -12,13 +12,14 @@
 
 //[Exposed=*]
 //namespace console { // but see namespace object requirements below
-class DKConsole
+class DKConsole : virtual public DKInterface
 {
 public:
-	DKConsole() {
+	DKConsole() : DKInterface() {
 		DKDEBUGFUNC();
-		//eventTargetClass = "Console";
-		//eventTargetAddress = pointerToAddress(this);
+		interfaceName = "Console";
+		interfaceAddress = pointerToAddress(this);
+		DKINFO("DKConsole("+interfaceAddress+") \n");
 	}
 	
 	// Logging
