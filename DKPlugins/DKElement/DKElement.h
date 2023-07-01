@@ -96,7 +96,7 @@ public:
 	
 	// DOMString? getAttributeNS(DOMString? namespace, DOMString localName);
 	DOMString _getAttributeNS = "";
-	virtual const DOMString& getAttribute(const DOMString& _namespace, const DOMString& localName){
+	virtual const DOMString& getAttributeNS(const DOMString& _namespace, const DOMString& localName){
 		DKDEBUGFUNC(_namespace, localName);
 		return _getAttributeNS;
 	}

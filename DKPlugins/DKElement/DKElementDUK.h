@@ -178,7 +178,7 @@ public:
 	static int style(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		//if(duk_is_valid_index(ctx, 1))
-		//	element(ctx)->namespaceURI(GetString(ctx));
+		//	element(ctx)->style( (CSSStyleDeclaration*)addressToPointer(GetString(ctx)) );
 		dukglue_push(ctx, element(ctx)->style()->interfaceAddress);
 		return true;
 	}
@@ -187,8 +187,8 @@ public:
 	// readonly attribute DOMString? namespaceURI;
 	static int namespaceURI(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		//if(duk_is_valid_index(ctx, 1))
-		//	element(ctx)->namespaceURI(GetString(ctx));
+		if(duk_is_valid_index(ctx, 1))
+			element(ctx)->namespaceURI(GetString(ctx));
 		dukglue_push(ctx, element(ctx)->namespaceURI());
 		return true;
 	}
@@ -196,8 +196,8 @@ public:
 	// readonly attribute DOMString? prefix;
 	static int prefix(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		//if(duk_is_valid_index(ctx, 1))
-		//	element(ctx)->prefix(GetString(ctx));
+		if(duk_is_valid_index(ctx, 1))
+			element(ctx)->prefix(GetString(ctx));
 		dukglue_push(ctx, element(ctx)->prefix());
 		return true;
 	}
@@ -205,8 +205,8 @@ public:
 	// readonly attribute DOMString localName;
 	static int localName(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		//if(duk_is_valid_index(ctx, 1))
-		//	element(ctx)->localName(GetString(ctx));
+		if(duk_is_valid_index(ctx, 1))
+			element(ctx)->localName(GetString(ctx));
 		dukglue_push(ctx, element(ctx)->localName());
 		return true;
 	}
@@ -214,8 +214,8 @@ public:
 	// readonly attribute DOMString tagName;
 	static int tagName(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		//if(duk_is_valid_index(ctx, 1))
-		//	element(ctx)->tagName(GetString(ctx));
+		if(duk_is_valid_index(ctx, 1))
+			element(ctx)->tagName(GetString(ctx));
 		dukglue_push(ctx, element(ctx)->tagName());
 		return true;
 	}
@@ -241,8 +241,8 @@ public:
 	// [SameObject, PutForwards=value] readonly attribute DOMTokenList classList;
 	static int classList(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		//if(duk_is_valid_index(ctx, 1))
-		//	element(ctx)->classList(GetString(ctx));
+		if(duk_is_valid_index(ctx, 1))
+			element(ctx)->classList(GetString(ctx));
 		dukglue_push(ctx, element(ctx)->classList());
 		return true;
 	}
@@ -259,16 +259,15 @@ public:
 	// boolean hasAttributes();
 	static int hasAttributes(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		bool _hasAttributes = element(ctx)->hasAttributes();
-		dukglue_push(ctx, _hasAttributes);	
+		dukglue_push(ctx, element(ctx)->hasAttributes());
 		return true;
 	}
 	
 	// [SameObject] readonly attribute NamedNodeMap attributes;
 	static int attributes(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		//if(duk_is_valid_index(ctx, 1))
-		//	element(ctx)->attributes(GetString(ctx));
+		if(duk_is_valid_index(ctx, 1))
+			element(ctx)->attributes(GetString(ctx));
 		dukglue_push(ctx, element(ctx)->attributes());
 		return true;
 	}
@@ -276,15 +275,15 @@ public:
 	// sequence<DOMString> getAttributeNames();
 	static int getAttributeNames(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString _getAttributeNames = element(ctx)->getAttributeNames();
-		dukglue_push(ctx, _getAttributeNames);	
+		dukglue_push(ctx, element(ctx)->getAttributeNames());	
 		return true;
 	}
 	
 	// DOMString? getAttribute(DOMString qualifiedName);
 	static int getAttribute(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, element(ctx)->getAttribute(GetString(ctx)));
+		DOMString qualifiedName	= GetString(ctx, 1);
+		dukglue_push(ctx, element(ctx)->getAttribute(qualifiedName));
 		return true;
 	}
 	

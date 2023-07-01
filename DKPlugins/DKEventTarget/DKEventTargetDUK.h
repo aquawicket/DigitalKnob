@@ -38,6 +38,37 @@ public:
 		return true;
 	}
 	
+	/*
+	static DKEventTarget* eventTarget(duk_context* ctx){
+		DKString eventTargetAddress = duk_require_string(ctx, 0);
+		return (DKEventTarget*)addressToPointer(eventTargetAddress);
+	}
+	static bool GetBool(duk_context* ctx){
+		if (duk_is_boolean(ctx, 1))
+			return duk_to_boolean(ctx, 1);
+		return false;
+	}
+	static double GetDouble(duk_context* ctx){
+		if (duk_is_number(ctx, 1))
+			return duk_to_number(ctx, 1);
+		return 0.0;
+	}
+	static int GetInt(duk_context* ctx){
+		if (duk_is_number(ctx, 1))
+			return duk_to_int(ctx, 1);
+		return 0;
+	}
+	static DKString GetString(duk_context* ctx){
+		if (duk_is_string(ctx, 1))
+			return duk_to_string(ctx, 1);
+		return "";
+	}
+	static unsigned int GetUint(duk_context* ctx){
+		if (duk_is_number(ctx, 1))
+			return duk_to_uint(ctx, 1);
+		return 0;
+	}
+	*/
 	
 	// constructor();
 	static int constructor(duk_context* ctx){
@@ -52,20 +83,20 @@ public:
 	// undefined addEventListener(DOMString type, EventListener? callback, optional (AddEventListenerOptions or boolean) options = {});
 	static int addEventListener(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString targetAddress = duk_require_string(ctx, 0);
+		DKString eventTargetAddress = duk_require_string(ctx, 0);
 		DKString type = duk_require_string(ctx, 1);
 		duk_require_function(ctx, 2);
-		DKINFO("DKEventTargetDUK::addEventListener("+targetAddress+", "+type+", callback)\n");
+		DKINFO("DKEventTargetDUK::addEventListener("+eventTargetAddress+", "+type+", callback)\n");
 		
 		// store the js callback function
 		// How to persist Duktape/C arguments across calls
 		// https://wiki.duktape.org/howtonativepersistentreferences#:~:text=When%20a%20Duktape%2FC%20function,safely%20work%20with%20the%20arguments.
-		DKString cb = targetAddress+"_"+type+"_callback";
+		DKString cb = eventTargetAddress+"_"+type+"_callback";
 		//DKINFO("DKEventTargetDUK::addEventListener() -> "+cb+" \n")
 		duk_dup(ctx, 2);
 		duk_put_global_string(ctx, cb.c_str());
 		
-		DKEventTarget* eventTarget = (DKEventTarget*)addressToPointer(targetAddress);
+		DKEventTarget* eventTarget = (DKEventTarget*)addressToPointer(eventTargetAddress);
 		eventTarget->addEventListener(type, &DKEventTargetDUK::onevent);
 		
 		return true;
@@ -74,19 +105,19 @@ public:
 	// undefined removeEventListener(DOMString type, EventListener? callback, optional (EventListenerOptions or boolean) options = {});
 	static int removeEventListener(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString targetAddress = duk_require_string(ctx, 0);
+		DKString eventTargetAddress = duk_require_string(ctx, 0);
 		DKString type = duk_require_string(ctx, 1);
 		duk_require_function(ctx, 2);
-		//DKINFO("DKEventTargetDUK::removeEventListener("+targetAddress+", "+type+", callback)\n");
+		//DKINFO("DKEventTargetDUK::removeEventListener("+eventTargetAddress+", "+type+", callback)\n");
 		
 		// remove the js callback function
 		// How to persist Duktape/C arguments across calls
 		// https://wiki.duktape.org/howtonativepersistentreferences#:~:text=When%20a%20Duktape%2FC%20function,safely%20work%20with%20the%20arguments.
-		DKString cb = targetAddress+"_"+type+"_callback";
+		DKString cb = eventTargetAddress+"_"+type+"_callback";
 		duk_push_null(ctx);
 		duk_put_global_string(ctx, cb.c_str());
 		
-		DKEventTarget* eventTarget = (DKEventTarget*)addressToPointer(targetAddress);
+		DKEventTarget* eventTarget = (DKEventTarget*)addressToPointer(eventTargetAddress);
 		eventTarget->removeEventListener(type, &DKEventTargetDUK::onevent);
 
 		return true;

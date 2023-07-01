@@ -78,22 +78,21 @@ public:
 		DKDEBUGFUNC(ctx);
 		//if(duk_is_valid_index(ctx, 1))
 		//	htmlCollection(ctx)->length(GetUint(ctx));
-		const unsigned int length = htmlCollection(ctx)->length();
-		dukglue_push(ctx, length);
+		dukglue_push(ctx, htmlCollection(ctx)->length());
 		return true;
 	}
 	
 	// getter Element? item(unsigned long index);
 	static int item(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push( ctx, htmlCollection(ctx)->item(GetUint(ctx))->interfaceAddress );
+		dukglue_push(ctx, htmlCollection(ctx)->item(GetUint(ctx))->interfaceAddress);
 		return true;
 	}
 	
 	// getter Element? namedItem(DOMString name);
 	static int namedItem(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push( ctx, htmlCollection(ctx)->namedItem(GetString(ctx))->interfaceAddress );
+		dukglue_push(ctx, htmlCollection(ctx)->namedItem(GetString(ctx))->interfaceAddress);
 		return true;
 	}
 		
