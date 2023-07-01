@@ -8,66 +8,66 @@
 class TEST_DKSdlWindow //: public DKObjectT<TEST_DKSdlWindow>
 {
 public:
-	static DKSdlWindow* dkSdlWindow;
-	//static std::unique_ptr<DKSdlWindow> dkSdlWindow;
-	//static std::shared_ptr<DKSdlWindow> dkSdlWindow;
+	static DKSdlWindow* _dkSdlWindow;
+	//static std::unique_ptr<DKSdlWindow> _dkSdlWindow;
+	//static std::shared_ptr<DKSdlWindow> _dkSdlWindow;
 	
 	TEST_DKSdlWindow(){
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DKSdlWindow.h //////");
 		
-		dkSdlWindow = new DKSdlWindow();
-		//dkSdlWindow = std::make_unique<DKSdlWindow>();
-		//dkSdlWindow = std::make_shared<DKSdlWindow>();	
+		_dkSdlWindow = new DKSdlWindow();
+		//_dkSdlWindow = std::make_unique<DKSdlWindow>();
+		//_dkSdlWindow = std::make_shared<DKSdlWindow>();	
 		
 		
-		dkSdlWindow->screen(*TEST_Screen::_screen);
-		printDKSdlWindowProperties(*dkSdlWindow);
+		_dkSdlWindow->screen(TEST_Screen::_screen);
+		printDKSdlWindowProperties(*_dkSdlWindow);
 		
 		////// FocusEvent //////
 		// https://w3c.github.io/uievents/#events-focus-types
-		dkSdlWindow->addEventListener("blur", 				&TEST_DKSdlWindow::onblur);
-		dkSdlWindow->addEventListener("focus", 				&TEST_DKSdlWindow::onfocus);
-		dkSdlWindow->addEventListener("focusin", 			&TEST_DKSdlWindow::onfocusin);
-		dkSdlWindow->addEventListener("focusout", 			&TEST_DKSdlWindow::onfocusout);
+		_dkSdlWindow->addEventListener("blur", 				&TEST_DKSdlWindow::onblur);
+		_dkSdlWindow->addEventListener("focus", 				&TEST_DKSdlWindow::onfocus);
+		_dkSdlWindow->addEventListener("focusin", 			&TEST_DKSdlWindow::onfocusin);
+		_dkSdlWindow->addEventListener("focusout", 			&TEST_DKSdlWindow::onfocusout);
 		
 		////// MouseEvent //////
 		// https://w3c.github.io/uievents/#events-mouse-types
-		dkSdlWindow->addEventListener("auxclick", 			&TEST_DKSdlWindow::onauxclick);
-		dkSdlWindow->addEventListener("click", 				&TEST_DKSdlWindow::onclick);
-		dkSdlWindow->addEventListener("contextmenu",		&TEST_DKSdlWindow::oncontextmenu);
-		dkSdlWindow->addEventListener("dblclick", 			&TEST_DKSdlWindow::ondblclick);
-		dkSdlWindow->addEventListener("mousedown", 			&TEST_DKSdlWindow::onmousedown);
-		dkSdlWindow->addEventListener("mouseenter", 		&TEST_DKSdlWindow::onmouseenter);
-		dkSdlWindow->addEventListener("mouseleave", 		&TEST_DKSdlWindow::onmouseleave);
-		dkSdlWindow->addEventListener("mousemove", 			&TEST_DKSdlWindow::onmousemove);
-		dkSdlWindow->addEventListener("mouseout", 			&TEST_DKSdlWindow::onmouseout);
-		dkSdlWindow->addEventListener("mouseover", 			&TEST_DKSdlWindow::onmouseover);
-		dkSdlWindow->addEventListener("mouseup", 			&TEST_DKSdlWindow::onmouseup);
+		_dkSdlWindow->addEventListener("auxclick", 			&TEST_DKSdlWindow::onauxclick);
+		_dkSdlWindow->addEventListener("click", 				&TEST_DKSdlWindow::onclick);
+		_dkSdlWindow->addEventListener("contextmenu",		&TEST_DKSdlWindow::oncontextmenu);
+		_dkSdlWindow->addEventListener("dblclick", 			&TEST_DKSdlWindow::ondblclick);
+		_dkSdlWindow->addEventListener("mousedown", 			&TEST_DKSdlWindow::onmousedown);
+		_dkSdlWindow->addEventListener("mouseenter", 		&TEST_DKSdlWindow::onmouseenter);
+		_dkSdlWindow->addEventListener("mouseleave", 		&TEST_DKSdlWindow::onmouseleave);
+		_dkSdlWindow->addEventListener("mousemove", 			&TEST_DKSdlWindow::onmousemove);
+		_dkSdlWindow->addEventListener("mouseout", 			&TEST_DKSdlWindow::onmouseout);
+		_dkSdlWindow->addEventListener("mouseover", 			&TEST_DKSdlWindow::onmouseover);
+		_dkSdlWindow->addEventListener("mouseup", 			&TEST_DKSdlWindow::onmouseup);
 		
 		////// WheelEvent //////
 		// https://w3c.github.io/uievents/#events-wheel-types
-		dkSdlWindow->addEventListener("wheel", 				&TEST_DKSdlWindow::onwheel);
+		_dkSdlWindow->addEventListener("wheel", 				&TEST_DKSdlWindow::onwheel);
 		
 		////// InputEvent //////
 		// https://w3c.github.io/uievents/#events-input-types
-		dkSdlWindow->addEventListener("beforeinput", 		&TEST_DKSdlWindow::onbeforeinput);
-		dkSdlWindow->addEventListener("input", 				&TEST_DKSdlWindow::oninput);
+		_dkSdlWindow->addEventListener("beforeinput", 		&TEST_DKSdlWindow::onbeforeinput);
+		_dkSdlWindow->addEventListener("input", 				&TEST_DKSdlWindow::oninput);
 		
 		////// KeyboardEvent //////
 		// https://w3c.github.io/uievents/#events-keyboard-types
-		dkSdlWindow->addEventListener("keydown", 			&TEST_DKSdlWindow::onkeydown);
-		dkSdlWindow->addEventListener("keyup", 				&TEST_DKSdlWindow::onkeyup);
+		_dkSdlWindow->addEventListener("keydown", 			&TEST_DKSdlWindow::onkeydown);
+		_dkSdlWindow->addEventListener("keyup", 				&TEST_DKSdlWindow::onkeyup);
 		
 		////// CompositionEvent //////
 		// https://w3c.github.io/uievents/#events-composition-types
-		dkSdlWindow->addEventListener("compositionstart",	&TEST_DKSdlWindow::oncompositionstart);
-		dkSdlWindow->addEventListener("compositionupdate", 	&TEST_DKSdlWindow::oncompositionupdate);
-		dkSdlWindow->addEventListener("compositionend", 	&TEST_DKSdlWindow::oncompositionend);
+		_dkSdlWindow->addEventListener("compositionstart",	&TEST_DKSdlWindow::oncompositionstart);
+		_dkSdlWindow->addEventListener("compositionupdate", 	&TEST_DKSdlWindow::oncompositionupdate);
+		_dkSdlWindow->addEventListener("compositionend", 	&TEST_DKSdlWindow::oncompositionend);
 	}
 	
 	~TEST_DKSdlWindow(){
-		delete dkSdlWindow;
+		delete _dkSdlWindow;
 	}
 
 	static void printDKSdlWindowProperties(DKSdlWindow& dkSdlWindow){
@@ -236,9 +236,9 @@ public:
 };
 //REGISTER_OBJECT(TEST_DKSdlWindow, true);
 
-DKSdlWindow* TEST_DKSdlWindow::dkSdlWindow;
-//std::unique_ptr<DKSdlWindow> TEST_DKSdlWindow::dkSdlWindow;
-//std::shared_ptr<DKSdlWindow> TEST_DKSdlWindow::dkSdlWindow;
+DKSdlWindow* TEST_DKSdlWindow::_dkSdlWindow;
+//std::unique_ptr<DKSdlWindow> TEST_DKSdlWindow::_dkSdlWindow;
+//std::shared_ptr<DKSdlWindow> TEST_DKSdlWindow::_dkSdlWindow;
 
 //DKSdlWindow& window;	// global window variable (TODO)
 

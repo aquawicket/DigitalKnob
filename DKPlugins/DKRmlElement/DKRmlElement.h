@@ -16,11 +16,11 @@ class DKRmlElement : virtual public DKElement, public DKRmlNode  //, public DKRm
 public:
 	//DKRmlEventListener* _dkRmlEventListener;
 
-	static std::vector<DKRmlElement*> list;
+	static std::vector<DKRmlElement*> _list;
 	static DKRmlElement* instance(DKRmlEventListener* dkRmlEventListener, Rml::Element* rmlElement){
-		for(unsigned int i=0; i<list.size(); ++i){
-			if(rmlElement == list[i]->_rmlElement)
-				return list[i];
+		for(unsigned int i=0; i<_list.size(); ++i){
+			if(rmlElement == _list[i]->_rmlElement)
+				return _list[i];
 		}
 		return new DKRmlElement(dkRmlEventListener, rmlElement);
 	}
@@ -36,7 +36,7 @@ public:
 		if(!_rmlElement)
 			DKERROR("_rmlElement invalid! \n");
 		
-		list.push_back(this);
+		_list.push_back(this);
 	}
 
 	////// NOTE: from DKRmlElementCSSInlineStyle

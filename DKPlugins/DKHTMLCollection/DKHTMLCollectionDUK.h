@@ -93,7 +93,7 @@ public:
 	// getter Element? namedItem(DOMString name);
 	static int namedItem(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push( ctx, pointerToAddress( htmlCollection(ctx)->namedItem(GetString(ctx)) ) );
+		dukglue_push( ctx, htmlCollection(ctx)->namedItem(GetString(ctx))->interfaceAddress );
 		return true;
 	}
 		

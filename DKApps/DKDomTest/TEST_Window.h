@@ -15,7 +15,7 @@ public:
 		console.log("\n////// TEST_Window.h //////");
 		
 		DKWindow* window = new DKWindow();
-		window->screen(*TEST_Screen::_screen);
+		window->screen(TEST_Screen::_screen);
 		printWindowProperties(*window);
 	}
 	
