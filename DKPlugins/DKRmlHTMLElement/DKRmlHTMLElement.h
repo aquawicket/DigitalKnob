@@ -28,8 +28,9 @@ public:
 	DKRmlHTMLElement(DKRmlEventListener* dkRmlEventListener, Rml::Element* rmlElement) : DKHTMLElement(), DKRmlElement(dkRmlEventListener, rmlElement) {
 		DKDEBUGFUNC();
 		interfaceName = "DKRmlHTMLElement";
-		//interfaceAddress = pointerToAddress(this);
-		DKINFO("DKRmlHTMLElement("+interfaceAddress+") \n");
+		address[interfaceName] = pointerToAddress(this);
+		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
+		
 		_dkRmlEventListener = dkRmlEventListener;
 		_rmlElement = rmlElement;
 	}

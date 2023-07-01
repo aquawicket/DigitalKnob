@@ -20,8 +20,8 @@ public:
 	DKCustomEvent(const DOMString& type, const CustomEventInit& eventInitDict = "{}") : DKEvent(type, eventInitDict) {
 		DKDEBUGFUNC(type, eventInitDict);
 		interfaceName = "CustomEvent";
-		interfaceAddress = pointerToAddress(this);
-		DKINFO("DKCustomEvent("+interfaceAddress+") \n");
+		address[interfaceName] = pointerToAddress(this);
+		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 	}
 	virtual ~DKCustomEvent(){}
 	

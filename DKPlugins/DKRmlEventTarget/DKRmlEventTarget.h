@@ -10,18 +10,19 @@
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // [Exposed=*]
 // interface EventTarget {
-class DKRmlEventTarget : virtual public DKEventTarget//, public DKRmlInterface
+class DKRmlEventTarget : virtual public DKEventTarget//, public DKInterface
 {
 public:
 	DKRmlEventListener* _dkRmlEventListener;
 	Rml::Element* _rmlElement;
 	
 	// constructor();
-	DKRmlEventTarget(DKRmlEventListener* dkRmlEventListener, Rml::Element* rmlElement) : DKEventTarget()/*, DKRmlInterface()*/ {
+	DKRmlEventTarget(DKRmlEventListener* dkRmlEventListener, Rml::Element* rmlElement) : DKEventTarget() {//, DKInterface() {
 		DKDEBUGFUNC(dkRmlEventListener, rmlElement);
-		interfaceName = "DKRmlEventTarget";
-		//interfaceAddress = pointerToAddress(this);
-		DKINFO("DKRmlEventTarget("+interfaceAddress+") \n");
+		interfaceName = "RmlEventTarget";
+		address[interfaceName] = pointerToAddress(this);
+		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
+		
 		_dkRmlEventListener = dkRmlEventListener;
 		_rmlElement = rmlElement;
 		

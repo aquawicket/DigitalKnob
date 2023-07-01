@@ -29,8 +29,8 @@ public:
 	DKWindow() : DKEventTarget() {
 		DKDEBUGFUNC();
 		interfaceName = "Window";
-		interfaceAddress = pointerToAddress(this);
-		DKINFO("DKWindow("+interfaceAddress+") \n");
+		address[interfaceName] = pointerToAddress(this);
+		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 	}
 	//virtual ~DKWindow(){}
 	

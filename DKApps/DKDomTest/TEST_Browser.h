@@ -40,10 +40,12 @@ public:
 		console.log(" ");
 		///////////////////////////////
 		
+		
 		location->href("DKWebTest/index.html");
 		document->addEventListener("load", &TEST_Browser::onLoad);
 		DKEvent load_event("load", "");
 		document->dispatchEvent(&load_event);
+		
 		
 		console.log("/// DKRmlElement ////////////////");
 		DKElement* div = document->createElement("div");

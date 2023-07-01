@@ -24,11 +24,12 @@ public:
 		DKDEBUGFUNC();
 		interfaceName = "Interface";
 		interfaceAddress = pointerToAddress(this);
-		DKINFO("DKInterface("+interfaceAddress+") \n");
+		address[interfaceName] = pointerToAddress(this);
+		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 	}
 	virtual ~DKInterface(){}
 	
-	//std::map<DKString, DKString> address;
+	std::map<DKString, DKString> address;
 	DKString interfaceName = "";
 	DKString interfaceAddress = "";
 	

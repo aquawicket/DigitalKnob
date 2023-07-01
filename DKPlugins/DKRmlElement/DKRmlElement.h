@@ -11,7 +11,7 @@
 
 // [Exposed=Window]
 // interface Element : Node {
-class DKRmlElement : virtual public DKElement, public DKRmlNode  //, public DKRmlElementCSSInlineStyle
+class DKRmlElement : public DKRmlNode, virtual public DKElement  //, public DKRmlElementCSSInlineStyle
 {
 public:
 	//DKRmlEventListener* _dkRmlEventListener;
@@ -25,11 +25,12 @@ public:
 		return new DKRmlElement(dkRmlEventListener, rmlElement);
 	}
 	
-	DKRmlElement(DKRmlEventListener* dkRmlEventListener, Rml::Element* rmlElement) : DKElement(), DKRmlNode(dkRmlEventListener, rmlElement)  /*, DKRmlElementCSSInlineStyle(rmlElement)*/ {
+	DKRmlElement(DKRmlEventListener* dkRmlEventListener, Rml::Element* rmlElement) : DKRmlNode(dkRmlEventListener, rmlElement), DKElement()   /*, DKRmlElementCSSInlineStyle(rmlElement)*/ {
 		DKDEBUGFUNC();
-		interfaceName = "DKRmlElement";
-		//interfaceAddress = pointerToAddress(this);
-		DKINFO("DKRmlElement("+interfaceAddress+") \n");
+		interfaceName = "RmlElement";
+		address[interfaceName] = pointerToAddress(this);
+		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
+		
 		_dkRmlEventListener = dkRmlEventListener;
 		_rmlElement = rmlElement;
 		

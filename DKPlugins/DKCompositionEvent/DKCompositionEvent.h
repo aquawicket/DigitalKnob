@@ -21,8 +21,8 @@ public:
 	DKCompositionEvent(const DOMString& type, const CompositionEventInit& eventInitDict = "{}") : DKUIEvent(type, eventInitDict) { // [CompositionEvent()] https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/CompositionEvent
 		DKDEBUGFUNC(type, eventInitDict);
 		interfaceName = "CompositionEvent";
-		interfaceAddress = pointerToAddress(this);
-		DKINFO("DKCompositionEvent("+interfaceAddress+") \n");
+		address[interfaceName] = pointerToAddress(this);
+		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 	}
 	virtual ~DKCompositionEvent(){}
 	

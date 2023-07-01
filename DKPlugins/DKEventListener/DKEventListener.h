@@ -18,8 +18,10 @@ public:
 	DKEventListener() : DKInterface() {
 		DKDEBUGFUNC();
 		interfaceName = "EventListener";
-		interfaceAddress = pointerToAddress(this);
-		DKINFO("DKEventListener("+interfaceAddress+") \n");
+		address[interfaceName] = pointerToAddress(this);
+		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
+		
+		address["EventListener"] = pointerToAddress(this);
 	}
 	//virtual ~DKEventListener(){}
 	

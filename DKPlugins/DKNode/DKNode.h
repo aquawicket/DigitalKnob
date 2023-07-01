@@ -18,8 +18,10 @@ public:
 	DKNode() : DKEventTarget() {
 		DKDEBUGFUNC();
 		interfaceName = "Node";
-		interfaceAddress = pointerToAddress(this);
-		DKINFO("DKNode("+interfaceAddress+") \n");
+		address[interfaceName] = pointerToAddress(this);
+		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
+		
+		address["Node"] = pointerToAddress(this);
 	}
 	//virtual ~DKNode(){}
 	

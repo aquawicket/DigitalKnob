@@ -33,9 +33,10 @@ public:
 	// constructor();
 	DKRmlDocument(DKRmlInterface* dkRmlInterface, DKRmlEventListener* dkRmlEventListener) : DKDocument(), /*DKRmlNode(_dkRmlEventListener, NULL),*/ DKRmlNonElementParentNode(dkRmlInterface, dkRmlEventListener) {
 		DKDEBUGFUNC();
-		interfaceName = "DKRmlDocument";
-		//interfaceAddress = pointerToAddress(this);
-		DKINFO("DKRmlDocument("+interfaceAddress+") \n");
+		interfaceName = "RmlDocument";
+		address[interfaceName] = pointerToAddress(this);
+		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
+		
 		_dkRmlInterface = dkRmlInterface;
 		_dkRmlEventListener = dkRmlEventListener;
 		

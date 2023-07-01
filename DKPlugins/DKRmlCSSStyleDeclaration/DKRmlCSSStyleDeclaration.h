@@ -27,9 +27,10 @@ public:
 	
 	DKRmlCSSStyleDeclaration(Rml::Element* rmlElement) : DKCSSStyleDeclaration() {
 		DKDEBUGFUNC();
-		interfaceName = "DKRmlCSSStyleDeclaration";
-		//interfaceAddress = pointerToAddress(this);
-		DKINFO("DKRmlCSSStyleDeclaration("+interfaceAddress+") \n");
+		interfaceName = "RmlCSSStyleDeclaration";
+		address[interfaceName] = pointerToAddress(this);
+		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
+		
 		_rmlElement = rmlElement;
 	}
 	

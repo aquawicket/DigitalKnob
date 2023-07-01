@@ -18,8 +18,8 @@ public:
 	DKConsole() : DKInterface() {
 		DKDEBUGFUNC();
 		interfaceName = "Console";
-		interfaceAddress = pointerToAddress(this);
-		DKINFO("DKConsole("+interfaceAddress+") \n");
+		address[interfaceName] = pointerToAddress(this);
+		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 	}
 	
 	// Logging

@@ -16,8 +16,8 @@ public:
 	DKElement() : DKNode() {//, DKElementCSSInlineStyle() {
 		DKDEBUGFUNC();
 		interfaceName = "Element";
-		interfaceAddress = pointerToAddress(this);
-		DKINFO("DKElement("+interfaceAddress+") \n");
+		address[interfaceName] = pointerToAddress(this);
+		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 	}
 	//virtual ~DKElement(){}
 	

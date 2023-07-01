@@ -27,8 +27,8 @@ public:
 	DKEvent(const DOMString& type, const EventInit& eventInitDict = "{}") : DKInterface(){
 		DKDEBUGFUNC(type, eventInitDict);
 		interfaceName = "Event";
-		interfaceAddress = pointerToAddress(this);
-		DKINFO("DKEvent("+interfaceAddress+") \n");
+		address[interfaceName] = pointerToAddress(this);
+		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 		
 		long ticks;
 		DKUtil::GetTicks(ticks);

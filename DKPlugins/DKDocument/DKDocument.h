@@ -19,8 +19,8 @@ public:
 	DKDocument() : DKNode() { // https://dom.spec.whatwg.org/#dom-document-document
 		DKDEBUGFUNC();
 		interfaceName = "Document";
-		interfaceAddress = pointerToAddress(this);
-		DKINFO("DKDocument("+interfaceAddress+") \n");
+		address[interfaceName] = pointerToAddress(this);
+		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 	}
 	//virtual ~DKDocument(){}
 	

@@ -11,14 +11,15 @@
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // [Exposed=Window]
 // interface Node : EventTarget {
-class DKRmlNode : virtual public DKNode, public DKRmlEventTarget
+class DKRmlNode : public DKRmlEventTarget, virtual public DKNode
 {
 public:	 
-	DKRmlNode(DKRmlEventListener* dkRmlEventListener, Rml::Element* rmlElement) : DKNode(), DKRmlEventTarget(dkRmlEventListener, rmlElement)  {
+	DKRmlNode(DKRmlEventListener* dkRmlEventListener, Rml::Element* rmlElement) : DKRmlEventTarget(dkRmlEventListener, rmlElement), DKNode()  {
 		DKDEBUGFUNC();
 		interfaceName = "DKRmlNode";
-		//interfaceAddress = pointerToAddress(this);
-		DKINFO("DKRmlNode("+interfaceAddress+") \n");
+		address[interfaceName] = pointerToAddress(this);
+		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
+		
 		_rmlElement = rmlElement;
 		
 		if(!_rmlElement)

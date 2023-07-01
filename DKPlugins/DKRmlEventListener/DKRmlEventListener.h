@@ -16,8 +16,8 @@ public:
 	DKRmlEventListener() {//: DKEventListener() {
 		DKDEBUGFUNC();
 		interfaceName = "RmlEventListener";
-		//interfaceAddress = pointerToAddress(this);
-		DKINFO("DKRmlEventListener("+interfaceAddress+") \n");
+		address[interfaceName] = pointerToAddress(this);
+		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 	}
 	
 	// undefined handleEvent(Event event);

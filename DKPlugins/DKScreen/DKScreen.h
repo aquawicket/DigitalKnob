@@ -15,8 +15,8 @@ public:
 	DKScreen() : DKInterface() {
 		DKDEBUGFUNC();
 		interfaceName = "Screen";
-		interfaceAddress = pointerToAddress(this);
-		DKINFO("DKScreen("+interfaceAddress+") \n");
+		address[interfaceName] = pointerToAddress(this);
+		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 	}
 	virtual ~DKScreen() {}
 	

@@ -19,10 +19,10 @@ public:
 	DKEventTarget() : DKInterface() {
 		DKDEBUGFUNC();
 		interfaceName = "EventTarget";
-		interfaceAddress = pointerToAddress(this);
-		DKINFO("DKEventTarget("+interfaceAddress+") \n");
+		address[interfaceName] = pointerToAddress(this);
+		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 		
-		//address["DKEventTarget"] = interfaceAddress;
+		address["EventTarget"] = pointerToAddress(this);
 	}
 	//virtual ~DKEventTarget(){}
 
