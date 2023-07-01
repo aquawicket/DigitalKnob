@@ -179,7 +179,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		//if(duk_is_valid_index(ctx, 1))
 		//	element(ctx)->namespaceURI(GetString(ctx));
-		dukglue_push(ctx, pointerToAddress(element(ctx)->style()));
+		dukglue_push(ctx, element(ctx)->style()->interfaceAddress);
 		return true;
 	}
 	/////////////////////////////////////////
@@ -327,25 +327,28 @@ public:
 	// boolean hasAttribute(DOMString qualifiedName);
 	static int hasAttribute(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		return DKTODO();
+		dukglue_push(ctx, element(ctx)->hasAttribute(GetString(ctx, 1)));
+		return true;
 	}
 	
 	// boolean hasAttributeNS(DOMString? namespace, DOMString localName);
 	static int hasAttributeNS(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		return DKTODO();
+		dukglue_push(ctx, element(ctx)->hasAttributeNS(GetString(ctx, 1), GetString(ctx, 2)));
+		return true;
 	}
 	
 	// Attr? getAttributeNode(DOMString qualifiedName);
 	static int getAttributeNode(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		return DKTODO();
+		dukglue_push(ctx, element(ctx)->getAttributeNode(GetString(ctx, 1)));
+		return true;
 	}
 	
 	// Attr? getAttributeNodeNS(DOMString? namespace, DOMString localName);
 	static int getAttributeNodeNS(duk_context* ctx){
-		DKDEBUGFUNC(ctx);
-		return DKTODO();
+		dukglue_push(ctx, element(ctx)->getAttributeNodeNS(GetString(ctx, 1), GetString(ctx, 2)));
+		return true;
 	}
 	
 	// [CEReactions] Attr? setAttributeNode(Attr attr);
