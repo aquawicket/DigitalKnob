@@ -17,7 +17,7 @@ public:
 		DKEventTarget keyboardEventTarget;
 		keyboardEventTarget.addEventListener("keyboardEvent", &TEST_KeyboardEvent::onKeyboardEvent);
 		DKKeyboardEvent keyboardEvent("keyboardEvent", "");
-		keyboardEventTarget.dispatchEvent(keyboardEvent);
+		keyboardEventTarget.dispatchEvent(&keyboardEvent);
 	}
 	
 	static void printKeyboardEventProperties(DKKeyboardEvent& keyboardEvent){

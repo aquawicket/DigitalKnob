@@ -143,7 +143,7 @@ public:
 		
 		// get the globally stored js callback function
 		DKString eventAddress = pointerToAddress(&event);
-		DKString eventTargetAddress = pointerToAddress(&event.target());
+		DKString eventTargetAddress = pointerToAddress(event.target());
 		DKString cb = eventTargetAddress+"_"+event.type()+"_callback";
 		
 		duk_get_global_string(DKDuktape::ctx, cb.c_str());

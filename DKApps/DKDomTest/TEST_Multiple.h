@@ -59,9 +59,9 @@ public:
 		*/
 		
 		DKEvent load_event("load", "");
-		dkRmlDocumentA->dispatchEvent(load_event);
-		dkRmlDocumentB->dispatchEvent(load_event);
-		//dkRmlDocumentC->dispatchEvent(load_event);
+		dkRmlDocumentA->dispatchEvent(&load_event);
+		dkRmlDocumentB->dispatchEvent(&load_event);
+		//dkRmlDocumentC->dispatchEvent(&load_event);
 	}
 	
 	~TEST_Multiple(){
@@ -91,7 +91,7 @@ public:
 		console.log("onLoad()");
 		
 		//////////// Post processing <a href></a> hyperlinks ////////////
-		DKDocument* document = dynamic_cast<DKDocument*>(&event.target());
+		DKDocument* document = dynamic_cast<DKDocument*>(event.target());
 		DKHTMLCollection* aElements = document->getElementsByTagName("a");
 		if(!aElements){
 			console.error("aElements invalid!");
@@ -114,7 +114,7 @@ public:
 	static void onHyperlink(DKEvent& event){
 		DKDEBUGFUNC(event);
 		console.log("onHyperlink()");
-		DKElement* target = dynamic_cast<DKElement*>(&event.target());
+		DKElement* target = dynamic_cast<DKElement*>(event.target());
 		DOMString value = target->getAttribute("href");
 		TEST_Multiple::dkRmlLocationA->href(value);
 		TEST_Multiple::dkRmlLocationB->href(value);

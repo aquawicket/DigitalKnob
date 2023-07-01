@@ -148,8 +148,8 @@ public:
 	static int target(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			event(ctx)->target(*(DKEventTarget*)addressToPointer(GetString(ctx)));
-		dukglue_push(ctx, pointerToAddress(&event(ctx)->target()));
+			event(ctx)->target((DKEventTarget*)addressToPointer(GetString(ctx)));
+		dukglue_push(ctx, pointerToAddress(event(ctx)->target()));
 		return true;
 	}
 	
@@ -157,8 +157,8 @@ public:
 	static int srcElement(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			event(ctx)->srcElement(*(DKEventTarget*)addressToPointer(GetString(ctx)));
-		dukglue_push(ctx, pointerToAddress(&event(ctx)->srcElement()));
+			event(ctx)->srcElement((DKEventTarget*)addressToPointer(GetString(ctx)));
+		dukglue_push(ctx, pointerToAddress(event(ctx)->srcElement()));
 		return true;
 	}
 	
@@ -166,8 +166,8 @@ public:
 	static int currentTarget(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		if(duk_is_valid_index(ctx, 1))
-			event(ctx)->currentTarget(*(DKEventTarget*)addressToPointer(GetString(ctx)));
-		dukglue_push(ctx, pointerToAddress(&event(ctx)->currentTarget()));
+			event(ctx)->currentTarget((DKEventTarget*)addressToPointer(GetString(ctx)));
+		dukglue_push(ctx, pointerToAddress(event(ctx)->currentTarget()));
 		return true;
 	}
 	

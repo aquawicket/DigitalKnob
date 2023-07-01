@@ -17,12 +17,12 @@ public:
 		DKEventTarget myTargetA;									// EventTarget as 	value
 		DKEvent eventA("eventA", "");								// Event as 		value
 		myTargetA.addEventListener("eventA", &TEST_Event::onevent);
-		myTargetA.dispatchEvent(eventA);
+		myTargetA.dispatchEvent(&eventA);
 		
 		DKEventTarget* myTargetB = new DKEventTarget();  			// EventTarget as 	pointer
 		DKEvent eventB("eventB", "");								// Event as 		value
 		myTargetB->addEventListener("eventB", &TEST_Event::onevent);
-		myTargetB->dispatchEvent(eventB);
+		myTargetB->dispatchEvent(&eventB);
 		
 		DKEventTarget myTargetC;									// EventTarget as 	value
 		DKEvent* eventC = new DKEvent("eventC", "");				// Event as 		pointer

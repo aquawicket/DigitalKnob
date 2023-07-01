@@ -17,7 +17,7 @@ public:
 		DKEventTarget eventTarget;
 		eventTarget.addEventListener("dragEvent", &TEST_DragEvent::onDragEvent);
 		DKDragEvent dragEvent("dragEvent", "");
-		eventTarget.dispatchEvent(dragEvent);
+		eventTarget.dispatchEvent(&dragEvent);
 	}
 	
 	static void printDragEventProperties(DKDragEvent& dragEvent) {

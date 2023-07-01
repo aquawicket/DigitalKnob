@@ -9,5 +9,5 @@ void DKRmlLocation::href(const USVString& href) { 	// setter
 	DKINFO("load_event!\n");
 	DKEvent load_event("load", "");
 	DKRmlDocument* dkRmlDocument = DKRmlDocument::instance(_dkRmlInterface, _dkRmlEventListener);
-	dkRmlDocument->dispatchEvent(load_event);
+	dkRmlDocument->dispatchEvent(&load_event);
 } 

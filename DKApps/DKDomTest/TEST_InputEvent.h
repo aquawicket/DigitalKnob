@@ -17,7 +17,7 @@ public:
 		DKEventTarget inputEventTarget;
 		inputEventTarget.addEventListener("inputEvent", &TEST_InputEvent::onInputEvent);
 		DKInputEvent inputEvent("inputEvent", "");
-		inputEventTarget.dispatchEvent(inputEvent);
+		inputEventTarget.dispatchEvent(&inputEvent);
 	}
 	
 	static void printInputEventProperties(DKInputEvent& inputEvent){

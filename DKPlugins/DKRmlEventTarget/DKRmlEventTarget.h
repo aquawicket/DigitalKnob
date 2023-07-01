@@ -18,7 +18,7 @@ public:
 	
 	// constructor();
 	DKRmlEventTarget(DKRmlEventListener* dkRmlEventListener, Rml::Element* rmlElement) : DKEventTarget()/*, DKRmlInterface()*/ {
-		DKDEBUGFUNC();
+		DKDEBUGFUNC(dkRmlEventListener, rmlElement);
 		interfaceName = "DKRmlEventTarget";
 		//interfaceAddress = pointerToAddress(this);
 		DKINFO("DKRmlEventTarget("+interfaceAddress+") \n");
@@ -44,9 +44,9 @@ public:
 	}
 	
 	// boolean dispatchEvent(Event event);
-	bool dispatchEvent(DKEvent& event) override {
+	bool dispatchEvent(DKEvent* event) override {
 		DKDEBUGFUNC(event);
-		//_rmlElement->DispatchEvent(event.type(), Rml::Dictionary());
+		//_rmlElement->DispatchEvent(event->type(), Rml::Dictionary());
 		DKEventTarget::dispatchEvent(event);
 		return false;
 	}

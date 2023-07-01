@@ -17,7 +17,7 @@ public:
 		DKEventTarget eventTarget;
 		eventTarget.addEventListener("compositionEvent", &TEST_CompositionEvent::onCompositionEvent);
 		DKCompositionEvent compositionEvent("compositionEvent", "");
-		eventTarget.dispatchEvent(compositionEvent);
+		eventTarget.dispatchEvent(&compositionEvent);
 	}
 	
 	static void printCompositionEventProperties(DKCompositionEvent& compositionEvent){

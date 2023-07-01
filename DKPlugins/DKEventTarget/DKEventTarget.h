@@ -60,22 +60,22 @@ public:
 	}
 	
 	// boolean dispatchEvent(Event event);
-    virtual bool dispatchEvent(DKEvent& event) {
+    virtual bool dispatchEvent(DKEvent* event) {
 		DKDEBUGFUNC(event);
 		//DKINFO("DKEventTarget::dispatchEvent("+event+") \n");	
 		for (auto& eventListener : eventListeners) {
 			//DKINFO("	eventObj("+eventObj.type+", "+eventObj.interfaceAddress) \n");	
-			if(eventListener.type == event.type() && eventListener.interfaceAddress == interfaceAddress){
+			if(eventListener.type == event->type() && eventListener.interfaceAddress == interfaceAddress){
 				//DKINFO("		event("+event.type()+") \n");	
-				event.currentTarget(*this);
-				event.target(*this);
-				event.srcElement(*this);
-				eventListener.callback(event);
+				event->currentTarget(this);
+				event->target(this);
+				event->srcElement(this);
+				eventListener.callback(*event);
 			}
         }
 		return true; 
     }
-	virtual bool dispatchEvent(DKEvent* event){	return dispatchEvent(*event); }
+	//virtual bool dispatchEvent(DKEvent* event){	return dispatchEvent(*event); }
 	
 	
 	////// DK properties //////	

@@ -18,7 +18,7 @@ public:
 		eventTarget.addEventListener("uievent", &TEST_UIEvent::onuievent);
 		DKUIEvent uievent("uievent", "");
 		//uievent.view()
-		eventTarget.dispatchEvent(uievent);
+		eventTarget.dispatchEvent(&uievent);
 	}
 	
 	static void printUIEventProperties(DKUIEvent& uievent){

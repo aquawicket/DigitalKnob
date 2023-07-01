@@ -17,7 +17,7 @@ public:
 		DKEventTarget eventTarget;
 		eventTarget.addEventListener("wheelEvent", &TEST_WheelEvent::onWheelEvent);
 		DKWheelEvent wheelEvent("wheelEvent", "");
-		eventTarget.dispatchEvent(wheelEvent);
+		eventTarget.dispatchEvent(&wheelEvent);
 	}
 
 	static void printWheelEventProperties(DKWheelEvent& wheelEvent){

@@ -18,7 +18,7 @@ public:
 		eventTarget.addEventListener("customEvent", &TEST_CustomEvent::onCustomEvent);
 		DKCustomEvent customEvent("customEvent", "");
 		customEvent.detail("{name : 'myCustomEvent'}");
-		eventTarget.dispatchEvent(customEvent);
+		eventTarget.dispatchEvent(&customEvent);
 	}
 
 	static void printCustomEventProperties(DKCustomEvent& customEvent) {

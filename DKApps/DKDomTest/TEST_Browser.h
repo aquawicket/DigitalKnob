@@ -43,7 +43,7 @@ public:
 		location->href("DKWebTest/index.html");
 		document->addEventListener("load", &TEST_Browser::onLoad);
 		DKEvent load_event("load", "");
-		document->dispatchEvent(load_event);
+		document->dispatchEvent(&load_event);
 		
 		console.log("/// DKRmlElement ////////////////");
 		DKElement* div = document->createElement("div");
@@ -89,7 +89,7 @@ public:
 	static void onHyperlink(DKEvent& event){
 		DKDEBUGFUNC(event);
 		console.log("onHyperlink()");
-		DKElement* target = dynamic_cast<DKElement*>(&event.target());
+		DKElement* target = dynamic_cast<DKElement*>(event.target());
 		DOMString value = target->getAttribute("href");
 		TEST_Browser::location->href(value);
 	}

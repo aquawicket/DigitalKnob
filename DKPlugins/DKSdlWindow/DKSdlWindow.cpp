@@ -571,12 +571,12 @@ int DKSdlWindow::EventFilter(void* userdata, SDL_Event* event) {
 				DKFocusEvent blur_event("blur", "");
 				//blur_event.relatedTarget(dkSdlWindow->interfaceAddress);
 				blur_event.relatedTarget(*dkSdlWindow);
-				dkSdlWindow->dispatchEvent(blur_event);
+				dkSdlWindow->dispatchEvent(&blur_event);
 
 				//2. focusout: sent after the blur event.
 				DKFocusEvent focusout_event("focusout", "");
 				focusout_event.relatedTarget(*dkSdlWindow);
-				dkSdlWindow->dispatchEvent(focusout_event);
+				dkSdlWindow->dispatchEvent(&focusout_event);
                 return 1;
             }
             case SDL_WINDOWEVENT_MAXIMIZED: {
@@ -589,12 +589,12 @@ int DKSdlWindow::EventFilter(void* userdata, SDL_Event* event) {
 				//3. focus: sent after element B receives focus.
 				DKFocusEvent focus_event("focus", "");
 				focus_event.relatedTarget(*dkSdlWindow);
-				dkSdlWindow->dispatchEvent(focus_event);
+				dkSdlWindow->dispatchEvent(&focus_event);
 
 				//4. focusin: sent after the focus event.
 				DKFocusEvent focusin_event("focusin", "");
 				focusin_event.relatedTarget(*dkSdlWindow);
-				dkSdlWindow->dispatchEvent(focusin_event);
+				dkSdlWindow->dispatchEvent(&focusin_event);
 		
                 return 1;
             }
@@ -648,7 +648,7 @@ bool DKSdlWindow::handle(SDL_Event *event) {
 				//mousemove_event.offsetY(offsetY);
 				//mousemove_event.movementX(movementX);
 				//mousemove_event.movementY(movementY);
-				dispatchEvent(mousemove_event);
+				dispatchEvent(&mousemove_event);
             }
             return false; //allow event to continue
         }
@@ -673,7 +673,7 @@ bool DKSdlWindow::handle(SDL_Event *event) {
 			//mousedown_event.offsetY(offsetY);
 			//mousedown_event.movementX(movementX);
 			//mousedown_event.movementY(movementY);
-			dispatchEvent(mousedown_event);
+			dispatchEvent(&mousedown_event);
             return false; //allow event to continue
         }
         case SDL_MOUSEBUTTONUP: {
@@ -698,7 +698,7 @@ bool DKSdlWindow::handle(SDL_Event *event) {
 			//mouseup_event.offsetY(offsetY);
 			//mouseup_event.movementX(movementX);
 			//mouseup_event.movementY(movementY);
-			dispatchEvent(mouseup_event);
+			dispatchEvent(&mouseup_event);
 				
             if(event->button.button == 3){
 				DKMouseEvent contextmenu_event("contextmenu", "");
@@ -721,7 +721,7 @@ bool DKSdlWindow::handle(SDL_Event *event) {
 				//contextmenu_event.offsetY(offsetY);
 				//contextmenu_event.movementX(movementX);
 				//contextmenu_event.movementY(movementY);
-				dispatchEvent(contextmenu_event);
+				dispatchEvent(&contextmenu_event);
 			}
             else {
 					if(event->button.clicks == 2){
@@ -745,7 +745,7 @@ bool DKSdlWindow::handle(SDL_Event *event) {
 						//dblclick_event.offsetY(offsetY);
 						//dblclick_event.movementX(movementX);
 						//dblclick_event.movementY(movementY);
-						dispatchEvent(dblclick_event);
+						dispatchEvent(&dblclick_event);
 					}
                     else{
 						DKMouseEvent click_event("click", "");
@@ -768,7 +768,7 @@ bool DKSdlWindow::handle(SDL_Event *event) {
 						//click_event.offsetY(offsetY);
 						//click_event.movementX(movementX);
 						//click_event.movementY(movementY);
-						dispatchEvent(click_event);
+						dispatchEvent(&click_event);
 					}
             }
             return false; //allow event to continue
@@ -801,7 +801,7 @@ bool DKSdlWindow::handle(SDL_Event *event) {
 			//wheel_event.offsetY(offsetY);
 			//wheel_event.movementX(movementX);
 			//wheel_event.movementY(movementY);
-			dispatchEvent(wheel_event);
+			dispatchEvent(&wheel_event);
             return false; //allow event to continue
         }
         case SDL_KEYDOWN: {
@@ -838,7 +838,7 @@ bool DKSdlWindow::handle(SDL_Event *event) {
 			//keydown_event.isComposing(isComposing);
 			//keydown_event.charCode(charCode);
 			//keydown_event.keyCode(keyCode);
-			dispatchEvent(keydown_event);
+			dispatchEvent(&keydown_event);
 		
             return false; //allow event to continue
         }
@@ -861,7 +861,7 @@ bool DKSdlWindow::handle(SDL_Event *event) {
 			//keyup_event.isComposing(isComposing);
 			//keyup_event.charCode(charCode);
 			//keyup_event.keyCode(keyCode);
-			dispatchEvent(keyup_event);
+			dispatchEvent(&keyup_event);
 		
             return false; //allow event to continue
         }

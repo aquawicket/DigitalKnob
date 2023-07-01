@@ -390,23 +390,23 @@ void DKConsoleWindow::FocusEventProc(FOCUS_EVENT_RECORD fer) {
         //1. blur: sent after element A loses focus.
 		DKFocusEvent blur_event("blur", "");
 		blur_event.relatedTarget(*this);
-		dispatchEvent(blur_event);
+		dispatchEvent(&blur_event);
 
         //2. focusout: sent after the blur event.
         DKFocusEvent focusout_event("focusout", "");
 		focusout_event.relatedTarget(*this);
-		dispatchEvent(focusout_event);
+		dispatchEvent(&focusout_event);
     }
     else {
         //3. focus: sent after element B receives focus.
         DKFocusEvent focus_event("focus", "");
 		focus_event.relatedTarget(*this);
-		dispatchEvent(focus_event);
+		dispatchEvent(&focus_event);
 
         //4. focusin: sent after the focus event.
         DKFocusEvent focusin_event("focusin", "");
 		focusin_event.relatedTarget(*this);
-		dispatchEvent(focusin_event);
+		dispatchEvent(&focusin_event);
     }
 }
 
@@ -468,7 +468,7 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
 		keydown_event.isComposing(isComposing);
 		//keydown_event.charCode(charCode);
 		//keydown_event.keyCode(keyCode);
-		dispatchEvent(keydown_event);
+		dispatchEvent(&keydown_event);
 
 		//Only fire keypress on alphanumeric keys.
         if (ker.uChar.AsciiChar < 32)
@@ -485,7 +485,7 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
 		keypress_event.isComposing(isComposing);
 		//keypress_event.charCode(charCode);
 		//keypress_event.keyCode(keyCode);
-		dispatchEvent(keypress_event);
+		dispatchEvent(&keypress_event);
     }
     else {
 		DKKeyboardEvent keyup_event("keyup", "");
@@ -500,7 +500,7 @@ void DKConsoleWindow::KeyboardEventProc(KEY_EVENT_RECORD ker){
 		keyup_event.isComposing(isComposing);
 		//keyup_event.charCode(charCode);
 		//keyup_event.keyCode(keyCode);
-		dispatchEvent(keyup_event);
+		dispatchEvent(&keyup_event);
     }
 }
 
@@ -594,7 +594,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 					mousedown_event.offsetY(offsetY);
 					mousedown_event.movementX(movementX);
 					mousedown_event.movementY(movementY);
-					dispatchEvent(mousedown_event);
+					dispatchEvent(&mousedown_event);
 					
                     break;
                 }
@@ -623,7 +623,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				mouseup_event.offsetY(offsetY);
 				mouseup_event.movementX(movementX);
 				mouseup_event.movementY(movementY);
-				dispatchEvent(mouseup_event);
+				dispatchEvent(&mouseup_event);
 
 				DKMouseEvent click_event("click", "");
 				click_event.screenX(screenX);
@@ -645,7 +645,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				click_event.offsetY(offsetY);
 				click_event.movementX(movementX);
 				click_event.movementY(movementY);
-				dispatchEvent(click_event);
+				dispatchEvent(&click_event);
 				
                 break;
             }
@@ -675,7 +675,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 					mousedown_event.offsetY(offsetY);
 					mousedown_event.movementX(movementX);
 					mousedown_event.movementY(movementY);
-					dispatchEvent(mousedown_event);
+					dispatchEvent(&mousedown_event);
 				
                     break;
                 }
@@ -704,7 +704,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				mouseup_event.offsetY(offsetY);
 				mouseup_event.movementX(movementX);
 				mouseup_event.movementY(movementY);
-				dispatchEvent(mouseup_event);
+				dispatchEvent(&mouseup_event);
 
 				DKMouseEvent contextmenu_event("contextmenu", "");
 				contextmenu_event.screenX(screenX);
@@ -726,7 +726,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				contextmenu_event.offsetY(offsetY);
 				contextmenu_event.movementX(movementX);
 				contextmenu_event.movementY(movementY);
-				dispatchEvent(contextmenu_event);
+				dispatchEvent(&contextmenu_event);
 				
                 break;
             }
@@ -756,7 +756,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 					mousedown_event.offsetY(offsetY);
 					mousedown_event.movementX(movementX);
 					mousedown_event.movementY(movementY);
-					dispatchEvent(mousedown_event);
+					dispatchEvent(&mousedown_event);
 					
                     break;
                 }
@@ -785,7 +785,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				mouseup_event.offsetY(offsetY);
 				mouseup_event.movementX(movementX);
 				mouseup_event.movementY(movementY);
-				dispatchEvent(mouseup_event);
+				dispatchEvent(&mouseup_event);
 				
                 break;
             }
@@ -815,7 +815,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 					mousedown_event.offsetY(offsetY);
 					mousedown_event.movementX(movementX);
 					mousedown_event.movementY(movementY);
-					dispatchEvent(mousedown_event);
+					dispatchEvent(&mousedown_event);
 					
                     break;
                 }
@@ -844,7 +844,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				mouseup_event.offsetY(offsetY);
 				mouseup_event.movementX(movementX);
 				mouseup_event.movementY(movementY);
-				dispatchEvent(mouseup_event);
+				dispatchEvent(&mouseup_event);
 				
                 break;
             }
@@ -874,7 +874,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 					mousedown_event.offsetY(offsetY);
 					mousedown_event.movementX(movementX);
 					mousedown_event.movementY(movementY);
-					dispatchEvent(mousedown_event);
+					dispatchEvent(&mousedown_event);
 					
                     break;
                 }
@@ -903,7 +903,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				mouseup_event.offsetY(offsetY);
 				mouseup_event.movementX(movementX);
 				mouseup_event.movementY(movementY);
-				dispatchEvent(mouseup_event);
+				dispatchEvent(&mouseup_event);
 				
                 break;
             }
@@ -929,7 +929,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 			dblclick_event.offsetY(offsetY);
 			dblclick_event.movementX(movementX);
 			dblclick_event.movementY(movementY);
-			dispatchEvent(dblclick_event);
+			dispatchEvent(&dblclick_event);
 			break;
 		}
 		case MOUSE_HWHEELED: { //horizontal mouse wheel
@@ -959,7 +959,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 			wheel_event.offsetY(offsetY);
 			wheel_event.movementX(movementX);
 			wheel_event.movementY(movementY);
-			dispatchEvent(wheel_event);
+			dispatchEvent(&wheel_event);
 			break;
 		}
 		case MOUSE_WHEELED: { //vertical mouse wheel
@@ -989,7 +989,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 			wheel_event.offsetY(offsetY);
 			wheel_event.movementX(movementX);
 			wheel_event.movementY(movementY);
-			dispatchEvent(wheel_event);
+			dispatchEvent(&wheel_event);
 			break;
 		}
         case MOUSE_MOVED: {
@@ -1045,7 +1045,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 			mousemove_event.offsetY(offsetY);
 			mousemove_event.movementX(movementX);
 			mousemove_event.movementY(movementY);
-			dispatchEvent(mousemove_event);
+			dispatchEvent(&mousemove_event);
 				
             break;
 		}
@@ -1063,7 +1063,7 @@ void DKConsoleWindow::ResizeEventProc(WINDOW_BUFFER_SIZE_RECORD wbsr) {
 
 	/*
 	DKResizeEvent resize_event("resize", "");
-	dispatchEvent(resize_event);
+	dispatchEvent(&resize_event);
 	*/
 }
 #endif	//WIN

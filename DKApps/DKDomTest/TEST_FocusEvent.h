@@ -17,7 +17,7 @@ public:
 		DKEventTarget eventTarget;
 		eventTarget.addEventListener("focusEvent", &TEST_FocusEvent::onFocusEvent);
 		DKFocusEvent focusEvent("focusEvent", "");
-		eventTarget.dispatchEvent(focusEvent);
+		eventTarget.dispatchEvent(&focusEvent);
 	}
 	
 	static void printFocusEventProperties(DKFocusEvent& focusEvent){
