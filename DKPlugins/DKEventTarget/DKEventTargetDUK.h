@@ -86,11 +86,14 @@ public:
 	// undefined addEventListener(DOMString type, EventListener? callback, optional (AddEventListenerOptions or boolean) options = {});
 	static int addEventListener(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString interfaceAddress = duk_require_string(ctx, 0);
+		DKString interfaceAddress = duk_require_string(ctx, 0);	
+		// TODO- check if interfaceAddress is Valid
+		
 		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
 		DKString eventTargetAddress = interface->address["EventTarget"];
-		DKEventTarget* eventTarget = (DKEventTarget*)addressToPointer(eventTargetAddress;)
+		// TODO - check if eventTargetAddress is Valid
 		
+		DKEventTarget* eventTarget = (DKEventTarget*)addressToPointer(eventTargetAddress);
 		
 		DKString type = duk_require_string(ctx, 1);
 		duk_require_function(ctx, 2);
@@ -113,7 +116,11 @@ public:
 	// undefined removeEventListener(DOMString type, EventListener? callback, optional (EventListenerOptions or boolean) options = {});
 	static int removeEventListener(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
+		DKString interfaceAddress = duk_require_string(ctx, 0);
+		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+		DKString eventTargetAddress = interface->address["EventTarget"];
+		DKEventTarget* eventTarget = (DKEventTarget*)addressToPointer(eventTargetAddress);
+		
 		DKString type = duk_require_string(ctx, 1);
 		duk_require_function(ctx, 2);
 		//DKINFO("DKEventTargetDUK::removeEventListener("+eventTargetAddress+", "+type+", callback)\n");
@@ -125,7 +132,7 @@ public:
 		duk_push_null(ctx);
 		duk_put_global_string(ctx, cb.c_str());
 		
-		DKEventTarget* eventTarget = (DKEventTarget*)addressToPointer(eventTargetAddress);
+		//DKEventTarget* eventTarget = (DKEventTarget*)addressToPointer(eventTargetAddress);
 		eventTarget->removeEventListener(type, &DKEventTargetDUK::onevent);
 
 		return true;
@@ -134,11 +141,16 @@ public:
 	// boolean dispatchEvent(Event event);
 	static int dispatchEvent(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
+		DKString interfaceAddress = duk_require_string(ctx, 0);
+		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+		DKString eventTargetAddress = interface->address["EventTarget"];
+		DKEventTarget* eventTarget = (DKEventTarget*)addressToPointer(eventTargetAddress);
+		
 		DKString eventAddress = duk_require_string(ctx, 1);
 		//DKINFO("DKEventTargetDUK::dispatchEvent("+eventTargetAddress+", "+eventAddress+")\n");
 		
-		DKEventTarget* eventTarget = (DKEventTarget*)addressToPointer(eventTargetAddress);
+		// NOTE: LOOK AT THIS,   looking for 2 addresses.   so probobly 2 interfaceAddresses need to be converted. 
+		//DKEventTarget* eventTarget = (DKEventTarget*)addressToPointer(eventTargetAddress);
 		DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
 		eventTarget->dispatchEvent(event);
 		
