@@ -86,7 +86,12 @@ public:
 	// undefined addEventListener(DOMString type, EventListener? callback, optional (AddEventListenerOptions or boolean) options = {});
 	static int addEventListener(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
+		DKString interfaceAddress = duk_require_string(ctx, 0);
+		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+		DKString eventTargetAddress = interface->address["EventTarget"];
+		DKEventTarget* eventTarget = (DKEventTarget*)addressToPointer(eventTargetAddress;)
+		
+		
 		DKString type = duk_require_string(ctx, 1);
 		duk_require_function(ctx, 2);
 		DKINFO("DKEventTargetDUK::addEventListener("+eventTargetAddress+", "+type+", callback)\n");
@@ -99,7 +104,7 @@ public:
 		duk_dup(ctx, 2);
 		duk_put_global_string(ctx, cb.c_str());
 		
-		DKEventTarget* eventTarget = (DKEventTarget*)addressToPointer(eventTargetAddress);
+		//DKEventTarget* eventTarget = (DKEventTarget*)addressToPointer(eventTargetAddress);
 		eventTarget->addEventListener(type, &DKEventTargetDUK::onevent);
 		
 		return true;
