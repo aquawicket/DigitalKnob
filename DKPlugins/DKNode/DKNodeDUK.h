@@ -206,7 +206,7 @@ public:
 		
 		DKINFO("CPP_DKNodeDUK_constructor()\n");
 		DKNode* _node = new DKNode();
-		dukglue_push(ctx, _node->interfaceAddress);
+		dukglue_push(ctx, _node->interfaceAddress);		//Note: Javascript should only ever receive the base interfaceAddress
 		return true;
 	}
 	
@@ -330,12 +330,22 @@ public:
 		return true;
 	}
 	
+	///////////////////////////////////////////////////////////////////////////////////
+	// NOTE: The first parameter is the interfaceAddress of the Node
+	//		 The second parameter is the interfaceAddress of the Document
 	// readonly attribute Document? ownerDocument;
 	static int ownerDocument(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if(duk_is_valid_index(ctx, 1))
-			node(ctx)->ownerDocument((DKDocument*)addressToPointer(GetString(ctx)));
-		dukglue_push(ctx, pointerToAddress(node(ctx)->ownerDocument()));
+		if(duk_is_valid_index(ctx, 1)){	// is there and interfaceAddress?
+			DKString interfaceAddress = GetString(ctx);
+			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);	// We have and interface to find a Document address from
+			
+			DKDocument* document = (DKDocument*)addressToPointer(interface->address["Document"]);	//convert the interfaceAddress parameter to a DKDocumnet
+			DKDocument* _ownerDocument = node(ctx)->ownerDocument(document);		// Now we have the return Document
+		}
+		
+		// Now, how do we send back the _ownerDocument address?
+		dukglue_push(ctx, node(ctx)->ownerDocument()->interfaceAddress);	// anything pushed back to JS should be and interfaceAddress.
 		return true;
 	}
 	
