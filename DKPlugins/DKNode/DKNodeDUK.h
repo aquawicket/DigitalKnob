@@ -8,6 +8,7 @@
 
 #include "DKDuktape/DKDuktape.h"
 #include "DKNode/DKNode.h"
+#include "DKDocument/DKDocument.h"
 
 
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
@@ -341,11 +342,11 @@ public:
 			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);	// We have and interface to find a Document address from
 			
 			DKDocument* document = (DKDocument*)addressToPointer(interface->address["Document"]);	//convert the interfaceAddress parameter to a DKDocumnet
-			DKDocument* _ownerDocument = node(ctx)->ownerDocument(document);		// Now we have the return Document
+			//DKDocument* _ownerDocument = node(ctx)->ownerDocument(document);		<---   // this does not work, maybe _ownerDocument doesn't exist. 
 		}
 		
 		// Now, how do we send back the _ownerDocument address?
-		dukglue_push(ctx, node(ctx)->ownerDocument()->interfaceAddress);	// anything pushed back to JS should be and interfaceAddress.
+		dukglue_push(ctx, node(ctx)->ownerDocument()->interfaceAddress);	// anything pushed back to JS should only be a base interfaceAddress.
 		return true;
 	}
 	
