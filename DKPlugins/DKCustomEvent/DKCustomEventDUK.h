@@ -34,8 +34,11 @@ public:
 	}
 	
 	static DKCustomEvent* customEvent(duk_context* ctx){
-		DKString customEventAddress = duk_require_string(ctx, 0);
-		return (DKCustomEvent*)addressToPointer(customEventAddress);
+		DKString interfaceAddress = duk_require_string(ctx, 0);
+		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+		DKString customEventAddress = interface->address["CustomEvent"];
+		DKCustomEvent* _customEvent = (DKCustomEvent*)addressToPointer(customEventAddress);
+		return _customEvent;
 	}
 	static bool GetBool(duk_context* ctx, int index = 1){
 		if (duk_is_boolean(ctx, index))

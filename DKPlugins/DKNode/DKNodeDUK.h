@@ -169,8 +169,11 @@ public:
 	}
 	
 	static DKNode* node(duk_context* ctx){
-		DKString nodeAddress = duk_require_string(ctx, 0);
-		return (DKNode*)addressToPointer(nodeAddress);
+		DKString interfaceAddress = duk_require_string(ctx, 0);
+		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+		DKString nodeAddress = interface->address["Node"];
+		DKNode* _node = (DKNode*)addressToPointer(nodeAddress);
+		return _node;
 	}
 	static bool GetBool(duk_context* ctx, int index = 1){
 		if (duk_is_boolean(ctx, index))

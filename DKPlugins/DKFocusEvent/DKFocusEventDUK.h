@@ -32,8 +32,11 @@ public:
 	
 	
 	static DKFocusEvent* focusEvent(duk_context* ctx){
-		DKString focusEventAddress = duk_require_string(ctx, 0);
-		return (DKFocusEvent*)addressToPointer(focusEventAddress);
+		DKString interfaceAddress = duk_require_string(ctx, 0);
+		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+		DKString focusEventAddress = interface->address["FocusEvent"];
+		DKFocusEvent* _focusEvent = (DKFocusEvent*)addressToPointer(focusEventAddress);
+		return _focusEvent;
 	}
 	
 	// constructor(DOMString type, optional FocusEventInit eventInitDict = {});

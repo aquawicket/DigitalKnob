@@ -26,8 +26,11 @@ public:
 	}
 	
 	static DKEventListener* eventListener(duk_context* ctx){
-		DKString eventAddress = duk_require_string(ctx, 0);
-		return (DKEventListener*)addressToPointer(eventAddress);
+		DKString interfaceAddress = duk_require_string(ctx, 0);
+		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+		DKString eventListenerAddress = interface->address["EventListener"];
+		DKEventListener* _eventListener = (DKEventListener*)addressToPointer(eventListenerAddress);
+		return _eventListener;
 	}
 	static bool GetBool(duk_context* ctx, int index = 1){
 		if (duk_is_boolean(ctx, index))

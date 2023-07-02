@@ -47,8 +47,11 @@ public:
 	
 	
 	static DKInputEvent* inputEvent(duk_context* ctx){
-		DKString inputEventAddress = duk_require_string(ctx, 0);
-		return (DKInputEvent*)addressToPointer(inputEventAddress);
+		DKString interfaceAddress = duk_require_string(ctx, 0);
+		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+		DKString inputEventAddress = interface->address["InputEvent"];
+		DKInputEvent* _inputEvent = (DKInputEvent*)addressToPointer(inputEventAddress);
+		return _inputEvent;
 	}
 	
 	// constructor(DOMString type, optional InputEventInit eventInitDict = {});

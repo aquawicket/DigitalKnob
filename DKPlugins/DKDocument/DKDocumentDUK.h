@@ -155,8 +155,11 @@ public:
 	}
 	
 	static DKDocument* document(duk_context* ctx){
-		DKString documentAddress = duk_require_string(ctx, 0);
-		return (DKDocument*)addressToPointer(documentAddress);
+		DKString interfaceAddress = duk_require_string(ctx, 0);
+		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+		DKString documentAddress = interface->address["Document"];
+		DKDocument* _document = (DKDocument*)addressToPointer(documentAddress);
+		return _document;
 	}
 	static bool GetBool(duk_context* ctx, int index = 1){
 		if (duk_is_boolean(ctx, index))

@@ -32,8 +32,11 @@ public:
 	
 	
 	static DKDragEvent* dragEvent(duk_context* ctx){
-		DKString dragEventAddress = duk_require_string(ctx, 0);
-		return (DKDragEvent*)addressToPointer(dragEventAddress);
+		DKString interfaceAddress = duk_require_string(ctx, 0);
+		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+		DKString dragEventAddress = interface->address["DragEvent"];
+		DKDragEvent* _dragEvent = (DKDragEvent*)addressToPointer(dragEventAddress);
+		return _dragEvent;
 	}
 	static bool GetBool(duk_context* ctx, int index = 1){
 		if (duk_is_boolean(ctx, index))

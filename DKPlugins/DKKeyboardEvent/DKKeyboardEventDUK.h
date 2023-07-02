@@ -101,8 +101,11 @@ public:
 	
 	
 	static DKKeyboardEvent* keyboardEvent(duk_context* ctx){
-		DKString keyboardEventAddress = duk_require_string(ctx, 0);
-		return (DKKeyboardEvent*)addressToPointer(keyboardEventAddress);
+		DKString interfaceAddress = duk_require_string(ctx, 0);
+		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+		DKString keyboardEventAddress = interface->address["KeyboardEvent"];
+		DKKeyboardEvent* _keyboardEvent = (DKKeyboardEvent*)addressToPointer(keyboardEventAddress);
+		return _keyboardEvent;
 	}
 	
 	// constructor(DOMString type, optional KeyboardEventInit eventInitDict = {});

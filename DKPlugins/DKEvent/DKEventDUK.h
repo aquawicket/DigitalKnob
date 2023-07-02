@@ -93,9 +93,13 @@ public:
 		return true;
 	}
 	
+	// NOTE:  Example of converting interfaceAddress to DKEvent*
 	static DKEvent* event(duk_context* ctx){
-		DKString eventAddress = duk_require_string(ctx, 0);
-		return (DKEvent*)addressToPointer(eventAddress);
+		DKString interfaceAddress = duk_require_string(ctx, 0);
+		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+		DKString eventAddress = interface->address["Event"];
+		DKEvent* _event = (DKEvent*)addressToPointer(eventAddress);
+		return _event;
 	}
 	static bool GetBool(duk_context* ctx, int index = 1){
 		if (duk_is_boolean(ctx, index))

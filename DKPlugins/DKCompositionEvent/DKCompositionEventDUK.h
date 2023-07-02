@@ -43,8 +43,11 @@ public:
 	
 	
 	static DKCompositionEvent* compositionEvent(duk_context* ctx){
-		DKString compositionEventAddress = duk_require_string(ctx, 0);
-		return (DKCompositionEvent*)addressToPointer(compositionEventAddress);
+		DKString interfaceAddress = duk_require_string(ctx, 0);
+		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+		DKString compositionEventAddress = interface->address["CompositionEvent"];
+		DKCompositionEvent* _compositionEvent = (DKCompositionEvent*)addressToPointer(compositionEventAddress);
+		return _compositionEvent;
 	}
 	
 	// constructor(DOMString type, optional CompositionEventInit eventInitDict = {});

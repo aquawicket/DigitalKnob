@@ -110,8 +110,11 @@ public:
 	
 	
 	static DKMouseEvent* mouseEvent(duk_context* ctx){
-		DKString mouseEventAddress = duk_require_string(ctx, 0);
-		return (DKMouseEvent*)addressToPointer(mouseEventAddress);
+		DKString interfaceAddress = duk_require_string(ctx, 0);
+		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+		DKString mouseEventAddress = interface->address["MouseEvent"];
+		DKMouseEvent* _mouseEvent = (DKMouseEvent*)addressToPointer(mouseEventAddress);
+		return _mouseEvent;
 	}
 	
 	// constructor(DOMString type, optional MouseEventInit eventInitDict = {});

@@ -54,8 +54,11 @@ public:
 	
 	
 	static DKWheelEvent* wheelEvent(duk_context* ctx){
-		DKString wheelEventAddress = duk_require_string(ctx, 0);
-		return (DKWheelEvent*)addressToPointer(wheelEventAddress);
+		DKString interfaceAddress = duk_require_string(ctx, 0);
+		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+		DKString wheelEventAddress = interface->address["WheelEvent"];
+		DKWheelEvent* _wheelEvent = (DKWheelEvent*)addressToPointer(wheelEventAddress);
+		return _wheelEvent;
 	}
 	
 	// constructor(DOMString type, optional WheelEventInit eventInitDict = {});

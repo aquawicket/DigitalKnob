@@ -40,8 +40,11 @@ public:
 	
 	/*
 	static DKEventTarget* eventTarget(duk_context* ctx){
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		return (DKEventTarget*)addressToPointer(eventTargetAddress);
+		DKString interfaceAddress = duk_require_string(ctx, 0);
+		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+		DKString eventTargetAddress = interface->address["EventTarget"];
+		DKEvent* _eventTarget = (DKEventTarget*)addressToPointer(eventTargetAddress);
+		return _eventTarget;
 	}
 	static bool GetBool(duk_context* ctx){
 		if (duk_is_boolean(ctx, 1))

@@ -135,8 +135,11 @@ public:
 	}
 	
 	static DKElement* element(duk_context* ctx){
-		DKString elementAddress = duk_require_string(ctx, 0);
-		return (DKElement*)addressToPointer(elementAddress);
+		DKString interfaceAddress = duk_require_string(ctx, 0);
+		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+		DKString elementAddress = interface->address["Element"];
+		DKElement* _element = (DKElement*)addressToPointer(elementAddress);
+		return _element;
 	}
 	static bool GetBool(duk_context* ctx, int index = 1){
 		if (duk_is_boolean(ctx, index))

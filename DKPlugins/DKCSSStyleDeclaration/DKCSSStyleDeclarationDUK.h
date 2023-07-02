@@ -53,8 +53,11 @@ public:
 	}
 	
 	static DKCSSStyleDeclaration* cssStyleDeclaration(duk_context* ctx){
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		return (DKCSSStyleDeclaration*)addressToPointer(eventTargetAddress);
+		DKString interfaceAddress = duk_require_string(ctx, 0);
+		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+		DKString cssStyleDeclarationAddress = interface->address["CSSStyleDeclaration"];
+		DKCSSStyleDeclaration* _cssStyleDeclaration = (DKCSSStyleDeclaration*)addressToPointer(cssStyleDeclarationAddress);
+		return _cssStyleDeclaration;
 	}
 	static bool GetBool(duk_context* ctx, int index = 1){
 		if (duk_is_boolean(ctx, index))
