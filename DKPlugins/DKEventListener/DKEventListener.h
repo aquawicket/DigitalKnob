@@ -20,8 +20,6 @@ public:
 		interfaceName = "EventListener";
 		address[interfaceName] = pointerToAddress(this);
 		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
-		
-		address["EventListener"] = pointerToAddress(this);
 	}
 	//virtual ~DKEventListener(){}
 	

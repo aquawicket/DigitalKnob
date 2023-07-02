@@ -86,7 +86,7 @@ public:
 	// undefined addEventListener(DOMString type, EventListener? callback, optional (AddEventListenerOptions or boolean) options = {});
 	static int addEventListener(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString interfaceAddress = duk_require_string(ctx, 0);	
+		DKString interfaceAddress = duk_require_string(ctx, 0);	 
 		// TODO- check if interfaceAddress is Valid
 		
 		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
