@@ -585,7 +585,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 					mousedown_event.metaKey(metaKey);
 					mousedown_event.button(button);
 					mousedown_event.buttons(buttons);
-					mousedown_event.relatedTarget(*this);
+					mousedown_event.relatedTarget(this);
 					mousedown_event.pageX(pageX);
 					mousedown_event.pageY(pageY);
 					mousedown_event.x(mouseEvent_x);
@@ -614,7 +614,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				mouseup_event.metaKey(metaKey);
 				mouseup_event.button(button);
 				mouseup_event.buttons(buttons);
-				mouseup_event.relatedTarget(*this);
+				mouseup_event.relatedTarget(this);
 				mouseup_event.pageX(pageX);
 				mouseup_event.pageY(pageY);
 				mouseup_event.x(mouseEvent_x);
@@ -636,7 +636,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				click_event.metaKey(metaKey);
 				click_event.button(button);
 				click_event.buttons(buttons);
-				click_event.relatedTarget(*this);
+				click_event.relatedTarget(this);
 				click_event.pageX(pageX);
 				click_event.pageY(pageY);
 				click_event.x(mouseEvent_x);
@@ -666,7 +666,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 					mousedown_event.metaKey(metaKey);
 					mousedown_event.button(button);
 					mousedown_event.buttons(buttons);
-					mousedown_event.relatedTarget(*this);
+					mousedown_event.relatedTarget(this);
 					mousedown_event.pageX(pageX);
 					mousedown_event.pageY(pageY);
 					mousedown_event.x(mouseEvent_x);
@@ -695,7 +695,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				mouseup_event.metaKey(metaKey);
 				mouseup_event.button(button);
 				mouseup_event.buttons(buttons);
-				mouseup_event.relatedTarget(*this);
+				mouseup_event.relatedTarget(this);
 				mouseup_event.pageX(pageX);
 				mouseup_event.pageY(pageY);
 				mouseup_event.x(mouseEvent_x);
@@ -717,7 +717,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				contextmenu_event.metaKey(metaKey);
 				contextmenu_event.button(button);
 				contextmenu_event.buttons(buttons);
-				contextmenu_event.relatedTarget(*this);
+				contextmenu_event.relatedTarget(this);
 				contextmenu_event.pageX(pageX);
 				contextmenu_event.pageY(pageY);
 				contextmenu_event.x(mouseEvent_x);
@@ -747,7 +747,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 					mousedown_event.metaKey(metaKey);
 					mousedown_event.button(button);
 					mousedown_event.buttons(buttons);
-					mousedown_event.relatedTarget(*this);
+					mousedown_event.relatedTarget(this);
 					mousedown_event.pageX(pageX);
 					mousedown_event.pageY(pageY);
 					mousedown_event.x(mouseEvent_x);
@@ -776,7 +776,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				mouseup_event.metaKey(metaKey);
 				mouseup_event.button(button);
 				mouseup_event.buttons(buttons);
-				mouseup_event.relatedTarget(*this);
+				mouseup_event.relatedTarget(this);
 				mouseup_event.pageX(pageX);
 				mouseup_event.pageY(pageY);
 				mouseup_event.x(mouseEvent_x);
@@ -806,7 +806,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 					mousedown_event.metaKey(metaKey);
 					mousedown_event.button(button);
 					mousedown_event.buttons(buttons);
-					mousedown_event.relatedTarget(*this);
+					mousedown_event.relatedTarget(this);
 					mousedown_event.pageX(pageX);
 					mousedown_event.pageY(pageY);
 					mousedown_event.x(mouseEvent_x);
@@ -835,7 +835,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				mouseup_event.metaKey(metaKey);
 				mouseup_event.button(button);
 				mouseup_event.buttons(buttons);
-				mouseup_event.relatedTarget(*this);
+				mouseup_event.relatedTarget(this);
 				mouseup_event.pageX(pageX);
 				mouseup_event.pageY(pageY);
 				mouseup_event.x(mouseEvent_x);
@@ -865,7 +865,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 					mousedown_event.metaKey(metaKey);
 					mousedown_event.button(button);
 					mousedown_event.buttons(buttons);
-					mousedown_event.relatedTarget(*this);
+					mousedown_event.relatedTarget(this);
 					mousedown_event.pageX(pageX);
 					mousedown_event.pageY(pageY);
 					mousedown_event.x(mouseEvent_x);
@@ -894,7 +894,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 				mouseup_event.metaKey(metaKey);
 				mouseup_event.button(button);
 				mouseup_event.buttons(buttons);
-				mouseup_event.relatedTarget(*this);
+				mouseup_event.relatedTarget(this);
 				mouseup_event.pageX(pageX);
 				mouseup_event.pageY(pageY);
 				mouseup_event.x(mouseEvent_x);
@@ -920,7 +920,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 			dblclick_event.metaKey(metaKey);
 			dblclick_event.button(button);
 			dblclick_event.buttons(buttons);
-			dblclick_event.relatedTarget(*this);
+			dblclick_event.relatedTarget(this);
 			dblclick_event.pageX(pageX);
 			dblclick_event.pageY(pageY);
 			dblclick_event.x(mouseEvent_x);
@@ -950,7 +950,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 			wheel_event.metaKey(metaKey);
 			wheel_event.button(button);
 			wheel_event.buttons(buttons);
-			wheel_event.relatedTarget(*this);
+			wheel_event.relatedTarget(this);
 			wheel_event.pageX(pageX);
 			wheel_event.pageY(pageY);
 			wheel_event.x(mouseEvent_x);
@@ -980,7 +980,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 			wheel_event.metaKey(metaKey);
 			wheel_event.button(button);
 			wheel_event.buttons(buttons);
-			wheel_event.relatedTarget(*this);
+			wheel_event.relatedTarget(this);
 			wheel_event.pageX(pageX);
 			wheel_event.pageY(pageY);
 			wheel_event.x(mouseEvent_x);
@@ -1036,7 +1036,7 @@ void DKConsoleWindow::MouseEventProc(MOUSE_EVENT_RECORD mer) {
 			mousemove_event.metaKey(metaKey);
 			mousemove_event.button(button);
 			mousemove_event.buttons(buttons);
-			mousemove_event.relatedTarget(*this);
+			mousemove_event.relatedTarget(this);
 			mousemove_event.pageX(pageX);
 			mousemove_event.pageY(pageY);
 			mousemove_event.x(mouseEvent_x);

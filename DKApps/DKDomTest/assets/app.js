@@ -41,7 +41,7 @@ CPP_DK_Create("TEST_FocusEvent.js");
 
 // [MouseEvent]
 CPP_DK_Create("DKMouseEventDUK");
-//CPP_DK_Create("TEST_MouseEvent.js");
+CPP_DK_Create("TEST_MouseEvent.js");
 
 // [WheelEvent]
 CPP_DK_Create("DKWheelEventDUK");

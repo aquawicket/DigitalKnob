@@ -58,32 +58,40 @@ public:
 		
 		// Source: CSSOM View Module (https://www.w3.org/TR/cssom-view-1/)
 		// partial interface MouseEvent {
-		//  	readonly attribute double pageX;
-				DKDuktape::AttachFunction("CPP_DKMouseEventDUK_pageX", 		DKMouseEventDUK::pageX); 
-		//  	readonly attribute double pageY;
-				DKDuktape::AttachFunction("CPP_DKMouseEventDUK_pageY",		DKMouseEventDUK::pageY); 
-		//  	readonly attribute double x;
-				DKDuktape::AttachFunction("CPP_DKMouseEventDUK_x", 			DKMouseEventDUK::x); 
-		//  	readonly attribute double y;
-				DKDuktape::AttachFunction("CPP_DKMouseEventDUK_y", 			DKMouseEventDUK::y); 
-		//  	readonly attribute double offsetX; 
-				DKDuktape::AttachFunction("CPP_DKMouseEventDUK_offsetX", 	DKMouseEventDUK::offsetX); 
-		//  	readonly attribute double offsetY;
-				DKDuktape::AttachFunction("CPP_DKMouseEventDUK_offsetY", 	DKMouseEventDUK::offsetY); 	
+		// readonly attribute double pageX;
+		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_pageX", 				DKMouseEventDUK::pageX); 
+		
+		// readonly attribute double pageY;
+		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_pageY",				DKMouseEventDUK::pageY); 
+		
+		// readonly attribute double x;
+		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_x", 					DKMouseEventDUK::x); 
+		
+		// readonly attribute double y;
+		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_y", 					DKMouseEventDUK::y); 
+		
+		// readonly attribute double offsetX; 
+		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_offsetX", 			DKMouseEventDUK::offsetX); 
+		
+		// readonly attribute double offsetY;
+		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_offsetY", 			DKMouseEventDUK::offsetY); 	
+		
 		// };
 		
 		// Source: Pointer Lock 2.0 (https://www.w3.org/TR/pointerlock-2/)
 		// partial interface MouseEvent {
-		//   	readonly attribute double movementX;
-				DKDuktape::AttachFunction("CPP_DKMouseEventDUK_movementX",	DKMouseEventDUK::movementX);
-		//   	readonly attribute double movementY;
-				DKDuktape::AttachFunction("CPP_DKMouseEventDUK_movementY",	DKMouseEventDUK::movementY); 
+		// readonly attribute double movementX;
+		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_movementX",			DKMouseEventDUK::movementX);
+		
+		// readonly attribute double movementY;
+		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_movementY",			DKMouseEventDUK::movementY); 
+		
 		// };
 		
 		// Source: UI Events (https://www.w3.org/TR/uievents/)
 		// partial interface MouseEvent {
-		//		Deprecated in this specification
-		//	  	undefined initMouseEvent(DOMString typeArg,
+		// Deprecated in this specification
+		// undefined initMouseEvent(DOMString typeArg,
 		//		optional boolean bubblesArg = false,
 		//		optional boolean cancelableArg = false,
 		//		optional Window? viewArg = null,
@@ -98,7 +106,8 @@ public:
 		//		optional boolean metaKeyArg = false,
 		//		optional short buttonArg = 0,
 		//		optional EventTarget? relatedTargetArg = null);
-				DKDuktape::AttachFunction("CPP_DKMouseEventDUK_initMouseEvent",	DKMouseEventDUK::initMouseEvent);
+		DKDuktape::AttachFunction("CPP_DKMouseEventDUK_initMouseEvent",		DKMouseEventDUK::initMouseEvent);
+		
 		// };
 	
 
@@ -218,7 +227,14 @@ public:
 	// readonly attribute EventTarget? relatedTarget;
 	static int relatedTarget(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		dukglue_push(ctx, pointerToAddress(&mouseEvent(ctx)->relatedTarget()) );
+		if(duk_is_valid_index(ctx, 1)){
+			DKString interfaceAddress = duk_require_string(ctx, 1);
+			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+			DKString eventTargetAddress = interface->address["EventTarget"];
+			DKEventTarget* eventTarget = (DKEventTarget*)addressToPointer(eventTargetAddress);
+			mouseEvent(ctx)->relatedTarget(eventTarget);
+		}
+		dukglue_push(ctx, mouseEvent(ctx)->relatedTarget()->interfaceAddress );
 		return true;
 	}
 	
@@ -304,7 +320,8 @@ public:
 	//		optional EventTarget? relatedTargetArg = null);
 			static int initMouseEvent(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				return DKDEPRECATED();
+				//mouseEvent(ctx)->initMouseEvent(typeArg, bubblesArg, cancelableArg, viewArg, detailArg, screenXArg, screenYArg, clientXArg, clientYArg, ctrlKeyArg, altKeyArg, shiftKeyArg, metaKeyArg, buttonArg, relatedTargetArg);
+				return DKTODO();
 			}
 	// };	
 
