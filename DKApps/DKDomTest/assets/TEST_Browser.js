@@ -5,8 +5,9 @@ const window = new DKSdlWindow()
 console.log("window = "+window);
 
 const dkRmlInterface = new DKRmlInterface(window);
-console.log("dkRmlInterface = "+dkRmlInterface);
+//console.log("dkRmlInterface = "+dkRmlInterface);
 
+/*
 const dkRmlEventListener = new DKRmlEventListener()
 console.log("dkRmlEventListener = "+dkRmlEventListener);
 
@@ -15,13 +16,14 @@ console.log("location = "+location);
 
 const document = new DKRmlDocument(dkRmlInterface, dkRmlEventListener);
 console.log("document = "+document);
+*/
 ///////////////////////////////
 
 
-const url = "DKWebTest/index.html"
-location.href = url;
+//const url = "DKWebTest/index.html"
+//location.href = url;
 
-
+/*
 function onHyperlink(event) {
 	console.log("onHyperlink()");
 	const target = event.target;
@@ -61,4 +63,4 @@ function onLoad(event) {
 }
 document.addEventListener('load', onLoad);
 document.dispatchEvent(new Event('load'));
-onLoad();
+*/
