@@ -20,10 +20,10 @@ public:
 	DKMouseEvent(const DOMString& type, const MouseEventInit& eventInitDict = "{}") : DKUIEvent(type, eventInitDict) {
 		DKDEBUGFUNC(type, eventInitDict);
 		interfaceName = "MouseEvent";
-		interfaceAddress = pointerToAddress(this);
-		DKINFO("DKMouseEvent("+interfaceAddress+") \n");
+		address[interfaceName] = pointerToAddress(this);
+		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 	}
-	virtual ~DKMouseEvent(){}
+	//virtual ~DKMouseEvent(){}
 	
 	// readonly attribute long screenX;
 	int _screenX = 0;

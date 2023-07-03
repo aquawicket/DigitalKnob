@@ -17,18 +17,18 @@ class DKFocusEvent : public DKUIEvent
 {
 public:
 	// constructor(DOMString type, optional FocusEventInit eventInitDict = {});
-	DKFocusEvent(const DOMString& type, const FocusEventInit& eventInitDict = "{}") : DKUIEvent(type, eventInitDict) { // https://w3c.github.io/uievents/#dom-focusevent-focusevent
+	DKFocusEvent(const DOMString& type, const FocusEventInit& eventInitDict = "{}") : DKUIEvent(type, eventInitDict) {
 		DKDEBUGFUNC(type, eventInitDict);
 		interfaceName = "FocusEvent";
-		interfaceAddress = pointerToAddress(this);
-		DKINFO("DKFocusEvent("+interfaceAddress+") \n");
+		address[interfaceName] = pointerToAddress(this);
+		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 	}
-	virtual ~DKFocusEvent(){}
+	//virtual ~DKFocusEvent(){}
 	
 	// readonly attribute EventTarget? relatedTarget;
 	DKEventTarget* _relatedTarget = NULL;
-	virtual DKEventTarget& 	relatedTarget()									{ return _relatedTarget ? *_relatedTarget : *new DKNullEventTarget(); }	// getter
-	virtual void 			relatedTarget(DKEventTarget& relatedTarget) 	{ _relatedTarget = &relatedTarget; } 									// setter
+	virtual DKEventTarget* 	relatedTarget()									{ return _relatedTarget ? _relatedTarget : new DKNullEventTarget(); }	// getter
+	virtual void 			relatedTarget(DKEventTarget* relatedTarget) 	{ _relatedTarget = relatedTarget; } 									// setter
 	
 	
 	////// toString //////

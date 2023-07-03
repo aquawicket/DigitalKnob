@@ -38,7 +38,7 @@ public:
 		
 		_eventInitDict = eventInitDict;
 	}
-	virtual ~DKEvent(){}
+	//virtual ~DKEvent(){}
 	
 	// readonly attribute DOMString type;
 	DOMString _type = "";

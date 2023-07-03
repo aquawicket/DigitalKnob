@@ -23,7 +23,7 @@ public:
 		address[interfaceName] = pointerToAddress(this);
 		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 	}
-	virtual ~DKCustomEvent(){}
+	//virtual ~DKCustomEvent(){}
 	
 	// readonly attribute any detail;
 	DKString _detail = "{}";

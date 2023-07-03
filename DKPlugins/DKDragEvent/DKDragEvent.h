@@ -23,7 +23,7 @@ public:
 		address[interfaceName] = pointerToAddress(this);
 		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 	}
-	virtual ~DKDragEvent(){}
+	//virtual ~DKDragEvent(){}
 	
 	// readonly attribute DataTransfer? dataTransfer;
 	DKString _dataTransfer = "";

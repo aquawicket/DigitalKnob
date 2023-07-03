@@ -20,10 +20,10 @@ public:
 	DKKeyboardEvent(const DOMString& type, const KeyboardEventInit& eventInitDict = "{}") : DKUIEvent(type, eventInitDict) {
 		DKDEBUGFUNC(type, eventInitDict);
 		interfaceName = "KeyboardEvent";
-		interfaceAddress = pointerToAddress(this);
-		DKINFO("DKKeyboardEvent("+interfaceAddress+") \n");
+		address[interfaceName] = pointerToAddress(this);
+		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 	}
-	virtual ~DKKeyboardEvent(){}
+	//virtual ~DKKeyboardEvent(){}
 	
 	// KeyLocationCode
 	

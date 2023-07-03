@@ -24,7 +24,7 @@ public:
 		address[interfaceName] = pointerToAddress(this);
 		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 	}
-	virtual ~DKCompositionEvent(){}
+	//virtual ~DKCompositionEvent(){}
 	
 	// readonly attribute DOMString data;
 	DOMString _data = "";

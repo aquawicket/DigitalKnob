@@ -20,10 +20,10 @@ public:
 	DKInputEvent(const DOMString& type, const InputEventInit& eventInitDict = "{}") : DKUIEvent(type, eventInitDict) {
 		DKDEBUGFUNC(type, eventInitDict);
 		interfaceName = "InputEvent";
-		interfaceAddress = pointerToAddress(this);
-		DKINFO("DKInputEvent("+interfaceAddress+") \n");
+		address[interfaceName] = pointerToAddress(this);
+		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 	}
-	virtual ~DKInputEvent(){}
+	//virtual ~DKInputEvent(){}
 	
 	// readonly attribute DOMString? data;
 	DOMString _data = "";

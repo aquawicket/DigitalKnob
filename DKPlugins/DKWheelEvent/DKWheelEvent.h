@@ -20,10 +20,10 @@ public:
 	DKWheelEvent(const DOMString& type, const WheelEventInit& eventInitDict = "{}") : DKMouseEvent(type, eventInitDict) {
 		DKDEBUGFUNC(type, eventInitDict);
 		interfaceName = "WheelEvent";
-		interfaceAddress = pointerToAddress(this);
-		DKINFO("DKWheelEvent("+interfaceAddress+") \n");
+		address[interfaceName] = pointerToAddress(this);
+		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 	}
-	virtual ~DKWheelEvent(){}
+	//virtual ~DKWheelEvent(){}
 	
 	// DeltaModeCode
 	
