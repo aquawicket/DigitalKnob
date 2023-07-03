@@ -8,12 +8,13 @@
 // interface MouseEvent : UIEvent {
 // constructor(DOMString type, optional MouseEventInit eventInitDict = {});
 var MouseEvent = function MouseEvent(type, eventInitDict, address) {
-	//console.log("MouseEvent("+type+","+eventInitDict+","+address+")")
+	console.log("MouseEvent("+type+","+eventInitDict+","+address+")")
 	
 	if(address)
-		this.address = address
+		this.address = address;
 	if(!this.address)
-		this.address = CPP_DKMouseEventDUK_constructor(type, eventInitDict)
+		this.address = CPP_DKMouseEventDUK_constructor(type, eventInitDict);
+	
 		
 	// readonly attribute long screenX;
 	Object.defineProperty(this, "screenX", {
@@ -83,12 +84,12 @@ var MouseEvent = function MouseEvent(type, eventInitDict, address) {
 	
 	// readonly attribute EventTarget? relatedTarget;
 	Object.defineProperty(this, "relatedTarget", {
-        get: function relatedTarget() { return CPP_DKMouseEventDUK_relatedTarget(this.address) },
+        get: function relatedTarget() { return new EventTarget(CPP_DKMouseEventDUK_relatedTarget(this.address)) },
     })
 	
 	// boolean getModifierState(DOMString keyArg);
 	MouseEvent.prototype.getModifierState = function getModifierState() {
-		CPP_DKMouseEventDUK_getModifierState(this.address)
+		CPP_DKMouseEventDUK_getModifierState(this.address);
     }
 	
 	
@@ -151,7 +152,7 @@ var MouseEvent = function MouseEvent(type, eventInitDict, address) {
 	//		optional short buttonArg = 0,
 	//		optional EventTarget? relatedTargetArg = null);
 			MouseEvent.prototype.initMouseEvent = function initMouseEvent() {
-				CPP_DKMouseEventDUK_initMouseEvent(this.address)
+				CPP_DKMouseEventDUK_initMouseEvent(this.address);
 			}
 	// };
 	
@@ -161,18 +162,18 @@ var MouseEvent = function MouseEvent(type, eventInitDict, address) {
 		this.toString = function(){ return "[object MouseEvent]" }
 	
 
-	var event = UIEvent.call(this, type, eventInitDict)
+	var event = UIEvent.call(this, type, eventInitDict);
 	
 	// Make properties (Read Only) after assignment
-	Object.defineProperty(this, "altKey ", 		{ set: undefined })
-	Object.defineProperty(this, "clientX",  	{ set: undefined })
-	Object.defineProperty(this, "clientY",  	{ set: undefined })
-	Object.defineProperty(this, "ctrlKey ", 	{ set: undefined })
-	Object.defineProperty(this, "metaKey ", 	{ set: undefined })
-	Object.defineProperty(this, "screenX",  	{ set: undefined })
-	Object.defineProperty(this, "screenY",  	{ set: undefined })
-	Object.defineProperty(this, "shiftKey ", 	{ set: undefined })
+	Object.defineProperty(this, "altKey ", 		{ set: undefined });
+	Object.defineProperty(this, "clientX",  	{ set: undefined });
+	Object.defineProperty(this, "clientY",  	{ set: undefined });
+	Object.defineProperty(this, "ctrlKey ", 	{ set: undefined });
+	Object.defineProperty(this, "metaKey ", 	{ set: undefined });
+	Object.defineProperty(this, "screenX",  	{ set: undefined });
+	Object.defineProperty(this, "screenY",  	{ set: undefined });
+	Object.defineProperty(this, "shiftKey ", 	{ set: undefined });
 	
-	return event
+	return event;
 }
 MouseEvent.prototype = UIEvent.prototype

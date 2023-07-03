@@ -44,7 +44,7 @@ public:
 	// partial interface InputEvent {
 	// readonly attribute DataTransfer? dataTransfer;
 	DKString _dataTransfer = "";
-	virtual const DKString& 	dataTransfer()							{ return _dataTransfer; }			// getter
+	virtual const DKString& 	dataTransfer()								{ return _dataTransfer; }			// getter
 	virtual void 				dataTransfer(const DKString& dataTransfer) 	{ _dataTransfer = dataTransfer; }	// setter
 	
 	// sequence<StaticRange> getTargetRanges();

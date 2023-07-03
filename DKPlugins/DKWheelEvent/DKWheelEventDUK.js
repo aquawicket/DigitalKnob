@@ -6,12 +6,12 @@
 // interface WheelEvent : MouseEvent {
 // constructor(DOMString type, optional WheelEventInit eventInitDict = {});
 var WheelEvent = function WheelEvent(type, eventInitDict, address) {
-	//console.log("WheelEvent("+type+","+eventInitDict+","+address+")")
+	console.log("WheelEvent("+type+","+eventInitDict+","+address+")")
 	
 	if(address)
-		this.address = address
+		this.address = address;
 	if(!this.address)
-		this.address = CPP_DKWheelEventDUK_constructor(type, eventInitDict)
+		this.address = CPP_DKWheelEventDUK_constructor(type, eventInitDict);
 	
 	
 	// DeltaModeCode
@@ -73,11 +73,11 @@ var WheelEvent = function WheelEvent(type, eventInitDict, address) {
 	var event = MouseEvent.call(this, type, eventInitDict)
 	
 	// Make properties (Read Only) after assignment
-	Object.defineProperty(this, "deltaX", 	 { set: undefined })
-	Object.defineProperty(this, "deltaY", 	 { set: undefined })
-	Object.defineProperty(this, "deltaZ", 	 { set: undefined })
-	Object.defineProperty(this, "deltaMode", { set: undefined })
+	Object.defineProperty(this, "deltaX", 	 { set: undefined });
+	Object.defineProperty(this, "deltaY", 	 { set: undefined });
+	Object.defineProperty(this, "deltaZ", 	 { set: undefined });
+	Object.defineProperty(this, "deltaMode", { set: undefined });
 	
-	return event
+	return event;
 };
 WheelEvent.prototype = MouseEvent.prototype;

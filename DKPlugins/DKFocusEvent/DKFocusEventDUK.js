@@ -8,7 +8,7 @@
 // interface FocusEvent : UIEvent {
 // constructor(DOMString type, optional FocusEventInit eventInitDict = {});
 var FocusEvent = function FocusEvent(type, eventInitDict, address) {
-	//console.log("FocusEvent("+type+","+eventInitDict+","+address+")")
+	console.log("FocusEvent("+type+","+eventInitDict+","+address+")")
 	
 	if(address)
 		this.address = address;
@@ -18,8 +18,8 @@ var FocusEvent = function FocusEvent(type, eventInitDict, address) {
 	
 	// readonly attribute EventTarget? relatedTarget;
 	Object.defineProperty(this, "relatedTarget", {
-        get: function relatedTarget() { return CPP_DKFocusEventDUK_relatedTarget(this.address) },
-		set: function relatedTarget(v) { return CPP_DKFocusEventDUK_relatedTarget(this.address, v) },
+        get: function relatedTarget() 		{ return new EventTarget(CPP_DKFocusEventDUK_relatedTarget(this.address)) },
+		set: function relatedTarget(data) 	{ return CPP_DKFocusEventDUK_relatedTarget(this.address, data) },
 		configurable: true,
     })
 
