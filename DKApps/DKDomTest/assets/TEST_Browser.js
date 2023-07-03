@@ -5,18 +5,16 @@ const window = new DKSdlWindow()
 console.log("window = "+window);
 
 const dkRmlInterface = new DKRmlInterface(window);
-//console.log("dkRmlInterface = "+dkRmlInterface);
+console.log("dkRmlInterface = "+dkRmlInterface);
 
-/*
 const dkRmlEventListener = new DKRmlEventListener()
 console.log("dkRmlEventListener = "+dkRmlEventListener);
 
 const location = new DKRmlLocation(dkRmlInterface, dkRmlEventListener)	
 console.log("location = "+location);
 
-const document = new DKRmlDocument(dkRmlInterface, dkRmlEventListener);
-console.log("document = "+document);
-*/
+//const document = new DKRmlDocument(dkRmlInterface, dkRmlEventListener);
+//console.log("document = "+document);
 ///////////////////////////////
 
 
