@@ -20,8 +20,8 @@ public:
 		DKDEBUGFUNC();
 		
 		__rmlElement = rmlElement;
-		if(!_rmlElement)
-			DKERROR("_rmlElement invalid! \n");
+		if(!__rmlElement)
+			DKERROR("__rmlElement invalid! \n");
 	}
 	
 	// [SameObject, PutForwards=cssText] readonly attribute CSSStyleDeclaration style;
