@@ -24,8 +24,10 @@ public:
 		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 		
 		_dkRmlEventListener = dkRmlEventListener;
+		if (!_dkRmlEventListener)
+			DKERROR("_dkRmlEventListener invalid! \n");
+
 		_rmlElement = rmlElement;
-		
 		if(!_rmlElement)
 			DKERROR("_rmlElement invalid! \n");
 	}
