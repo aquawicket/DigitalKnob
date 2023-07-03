@@ -438,6 +438,7 @@ public:
 	static int getElementsByTagName(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DOMString qualifiedName = GetString(ctx, 1);
+		
 		dukglue_push(ctx, element(ctx)->getElementsByTagName(qualifiedName)->interfaceAddress);	
 		return true;
 	}
