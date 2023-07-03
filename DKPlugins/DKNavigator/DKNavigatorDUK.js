@@ -3,7 +3,7 @@
 
 
 var Navigator = function Navigator(address) {
-	//console.log("Navigator("+address+")")
+	console.log("Navigator("+address+")")
 	
 	if(address)
 		this.address = address;
@@ -16,5 +16,5 @@ var Navigator = function Navigator(address) {
 		this.toString = function(){	return "[object Navigator]" }
 	
 	
-	return this
+	return this;
 }

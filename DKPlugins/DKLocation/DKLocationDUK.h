@@ -65,8 +65,11 @@ public:
 	}
 	
 	static DKLocation* location(duk_context* ctx){
-		DKString locationAddress = duk_require_string(ctx, 0);
-		return (DKLocation*)addressToPointer(locationAddress);
+		DKString interfaceAddress = duk_require_string(ctx, 0);
+		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+		DKString locationAddress = interface->address["Location"];
+		DKLocation* _location = (DKLocation*)addressToPointer(locationAddress);
+		return _location;
 	}
 	static bool GetBool(duk_context* ctx){
 		if (duk_is_boolean(ctx, 1))

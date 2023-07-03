@@ -20,8 +20,8 @@ public:
 	DKLocation() : DKInterface() {
 		DKDEBUGFUNC();
 		interfaceName = "Location";
-		interfaceAddress = pointerToAddress(this);
-		DKINFO("DKLocation("+interfaceAddress+") \n");
+		address[interfaceName] = pointerToAddress(this);
+		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 	}
 	//virtual ~DKLocation(){}
 

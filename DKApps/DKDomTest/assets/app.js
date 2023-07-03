@@ -64,20 +64,18 @@ CPP_DK_Create("DKDragEventDUK");
 CPP_DK_Create("TEST_DragEvent.js");
 
 // [Navigator]
-//CPP_DK_Create("DKNavigatorDUK");
-//CPP_DK_Create("TEST_Navigator.js");
+CPP_DK_Create("TEST_Navigator.js");
 
 // [URL]
 CPP_DK_Create("DKURLDUK");
-//CPP_DK_Create("TEST_URL.js");
+CPP_DK_Create("TEST_URL.js");
 
 // [Location]
-//CPP_DK_Create("DKLocationDUK");
-//CPP_DK_Create("TEST_Location.js");
+CPP_DK_Create("TEST_Location.js");
 
 // [CSSStyleDeclaration]
 CPP_DK_Create("DKCSSStyleDeclarationDUK");
-//CPP_DK_Create("TEST_CSSStyleDeclaration.js");
+CPP_DK_Create("TEST_CSSStyleDeclaration.js");
 
 // [Node]
 //CPP_DK_Create("DKNodeDUK");
