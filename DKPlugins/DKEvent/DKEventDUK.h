@@ -7,6 +7,8 @@
 #define DKEventDUK_H
 
 #include "DKDuktape/DKDuktape.h"
+#include "DKEvent/DKEvent.h"
+#include "DKEventTarget/DKEventTarget.h"
 
 
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
