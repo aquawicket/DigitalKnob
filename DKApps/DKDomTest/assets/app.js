@@ -78,8 +78,7 @@ CPP_DK_Create("DKCSSStyleDeclarationDUK");
 CPP_DK_Create("TEST_CSSStyleDeclaration.js");
 
 // [Node]
-//CPP_DK_Create("DKNodeDUK");
-//CPP_DK_Create("TEST_Node.js");
+CPP_DK_Create("TEST_Node.js");
 
 // [NonElementParentNode]							// Mixin
 //CPP_DK_Create("DKNonElementParentNodeDUK");

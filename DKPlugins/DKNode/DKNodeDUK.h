@@ -337,16 +337,14 @@ public:
 	// readonly attribute Document? ownerDocument;
 	static int ownerDocument(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if(duk_is_valid_index(ctx, 1)){	// is there and interfaceAddress?
+		if(duk_is_valid_index(ctx, 1)){
 			DKString interfaceAddress = GetString(ctx);
-			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);	// We have and interface to find a Document address from
-			
-			DKDocument* document = (DKDocument*)addressToPointer(interface->address["Document"]);	//convert the interfaceAddress parameter to a DKDocumnet
-			//DKDocument* _ownerDocument = node(ctx)->ownerDocument(document);		<---   // this does not work, maybe _ownerDocument doesn't exist. 
+			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+			DKString documentAddress = interface->address["Document"];
+			DKDocument* document = (DKDocument*)addressToPointer(documentAddress);
+			node(ctx)->ownerDocument(document);
 		}
-		
-		// Now, how do we send back the _ownerDocument address?
-		dukglue_push(ctx, node(ctx)->ownerDocument()->interfaceAddress);	// anything pushed back to JS should only be a base interfaceAddress.
+		dukglue_push(ctx, node(ctx)->ownerDocument()->interfaceAddress);
 		return true;
 	}
 	
@@ -354,36 +352,43 @@ public:
 	static int getRootNode(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		const DKString options = GetString(ctx);
-		DKNode* getRootNode = node(ctx)->getRootNode(options);
-		dukglue_push(ctx, pointerToAddress(getRootNode));	
+		
+		dukglue_push(ctx, node(ctx)->getRootNode(options)->interfaceAddress);	
 		return true;
 	}
 	
 	// readonly attribute Node? parentNode;
 	static int parentNode(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if(duk_is_valid_index(ctx, 1))
-			node(ctx)->parentNode((DKNode*)addressToPointer(GetString(ctx)));
-		dukglue_push(ctx, pointerToAddress(node(ctx)->parentNode()));
+		if(duk_is_valid_index(ctx, 1)){
+			DKString interfaceAddress = GetString(ctx);
+			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+			DKString nodeAddress = interface->address["Node"];
+			DKNode* _node = (DKNode*)addressToPointer(nodeAddress);
+			node(ctx)->parentNode(_node);
+		}
+		dukglue_push(ctx, node(ctx)->parentNode()->interfaceAddress);
 		return true;
 	}
 	
 	// readonly attribute Element? parentElement;
 	static int parentElement(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if(duk_is_valid_index(ctx, 1))
-			node(ctx)->parentElement((DKElement*)addressToPointer(GetString(ctx)));
-		dukglue_push(ctx, pointerToAddress(node(ctx)->parentElement()));
+		if(duk_is_valid_index(ctx, 1)){
+			DKString interfaceAddress = GetString(ctx);
+			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+			DKString elementAddress = interface->address["Element"];
+			DKElement* element = (DKElement*)addressToPointer(elementAddress);
+			node(ctx)->parentElement(element);
+		}
+		dukglue_push(ctx, node(ctx)->parentElement()->interfaceAddress);
 		return true;
 	}
 	
 	// boolean hasChildNodes();
 	static int hasChildNodes(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		bool _hasChildNodes;
-		if(!node(ctx)->hasChildNodes(_hasChildNodes))
-			return false;
-		dukglue_push(ctx, _hasChildNodes);	
+		dukglue_push(ctx, node(ctx)->hasChildNodes());	
 		return true;
 	}
 	
@@ -399,36 +404,56 @@ public:
 	// readonly attribute Node? firstChild;
 	static int firstChild(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if(duk_is_valid_index(ctx, 1))
-			node(ctx)->firstChild((DKNode*)addressToPointer(GetString(ctx)));
-		dukglue_push(ctx, pointerToAddress(node(ctx)->firstChild()));
+		if(duk_is_valid_index(ctx, 1)){
+			DKString interfaceAddress = GetString(ctx);
+			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+			DKString nodeAddress = interface->address["Node"];
+			DKNode* _node = (DKNode*)addressToPointer(nodeAddress);
+			node(ctx)->firstChild(_node);
+		}
+		dukglue_push(ctx, node(ctx)->firstChild()->interfaceAddress);
 		return true;
 	}
 	
 	// readonly attribute Node? lastChild;
 	static int lastChild(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if(duk_is_valid_index(ctx, 1))
-			node(ctx)->lastChild((DKNode*)addressToPointer(GetString(ctx)));
-		dukglue_push(ctx, pointerToAddress(node(ctx)->lastChild()));
+		if(duk_is_valid_index(ctx, 1)){
+			DKString interfaceAddress = GetString(ctx);
+			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+			DKString nodeAddress = interface->address["Node"];
+			DKNode* _node = (DKNode*)addressToPointer(nodeAddress);
+			node(ctx)->lastChild(_node);
+		}
+		dukglue_push(ctx, node(ctx)->lastChild()->interfaceAddress);
 		return true;
 	}
 	
 	// readonly attribute Node? previousSibling;
 	static int previousSibling(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if(duk_is_valid_index(ctx, 1))
-			node(ctx)->previousSibling((DKNode*)addressToPointer(GetString(ctx)));
-		dukglue_push(ctx, pointerToAddress(node(ctx)->previousSibling()));
+		if(duk_is_valid_index(ctx, 1)){
+			DKString interfaceAddress = GetString(ctx);
+			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+			DKString nodeAddress = interface->address["Node"];
+			DKNode* _node = (DKNode*)addressToPointer(nodeAddress);
+			node(ctx)->previousSibling(_node);
+		}
+		dukglue_push(ctx, node(ctx)->previousSibling()->interfaceAddress);
 		return true;
 	}
 	
 	// readonly attribute Node? nextSibling;
 	static int nextSibling(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if(duk_is_valid_index(ctx, 1))
-			node(ctx)->nextSibling((DKNode*)addressToPointer(GetString(ctx)));
-		dukglue_push(ctx, pointerToAddress(node(ctx)->nextSibling()));
+		if(duk_is_valid_index(ctx, 1)){
+			DKString interfaceAddress = GetString(ctx);
+			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+			DKString nodeAddress = interface->address["Node"];
+			DKNode* _node = (DKNode*)addressToPointer(nodeAddress);
+			node(ctx)->nextSibling(_node);
+		}
+		dukglue_push(ctx, node(ctx)->nextSibling()->interfaceAddress);
 		return true;
 	}
 	
@@ -461,33 +486,39 @@ public:
 	static int cloneNode(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		bool deep = GetBool(ctx);
-		dukglue_push(ctx, pointerToAddress( node(ctx)->cloneNode(deep) ));	
+		
+		dukglue_push(ctx, node(ctx)->cloneNode(deep)->interfaceAddress);	
 		return true;
 	}
 	
 	// boolean isEqualNode(Node? otherNode);
 	static int isEqualNode(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString otherNodeAddress = GetString(ctx);
+		DKString otherNodeInterfaceAddress = GetString(ctx);
+		DKInterface* otherNodeInterface = (DKInterface*)addressToPointer(otherNodeInterfaceAddress);
+		DKString otherNodeAddress = otherNodeInterface->address["Node"];
 		DKNode* otherNode = (DKNode*)addressToPointer(otherNodeAddress);
-		bool isEqualNode = node(ctx)->isEqualNode(otherNode);
-		dukglue_push(ctx, isEqualNode);	
+
+		dukglue_push(ctx, node(ctx)->isEqualNode(otherNode));
 		return true;
 	}
 	
 	// boolean isSameNode(Node? otherNode); // legacy alias of ===
 	static int isSameNode(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString otherNodeAddress = GetString(ctx);
+		DKString otherNodeInterfaceAddress = GetString(ctx);
+		DKInterface* otherNodeInterface = (DKInterface*)addressToPointer(otherNodeInterfaceAddress);
+		DKString otherNodeAddress = otherNodeInterface->address["Node"];
 		DKNode* otherNode = (DKNode*)addressToPointer(otherNodeAddress);
-		bool isSameNode = node(ctx)->isSameNode(otherNode);
-		dukglue_push(ctx, isSameNode);	
+
+		dukglue_push(ctx, node(ctx)->isSameNode(otherNode));	
 		return true;
 	}
 	
 	// const unsigned short DOCUMENT_POSITION_DISCONNECTED = 0x01;
 	static int DOCUMENT_POSITION_DISCONNECTED(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		
 		dukglue_push(ctx, node(ctx)->DOCUMENT_POSITION_DISCONNECTED());
 		return true;
 	}
@@ -495,6 +526,7 @@ public:
 	// const unsigned short DOCUMENT_POSITION_PRECEDING = 0x02;
 	static int DOCUMENT_POSITION_PRECEDING(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		
 		dukglue_push(ctx, node(ctx)->DOCUMENT_POSITION_PRECEDING());
 		return true;
 	}
@@ -502,6 +534,7 @@ public:
 	// const unsigned short DOCUMENT_POSITION_FOLLOWING = 0x04;
 	static int DOCUMENT_POSITION_FOLLOWING(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		
 		dukglue_push(ctx, node(ctx)->DOCUMENT_POSITION_FOLLOWING());
 		return true;
 	}
@@ -509,6 +542,7 @@ public:
 	// const unsigned short DOCUMENT_POSITION_CONTAINS = 0x08;
 	static int DOCUMENT_POSITION_CONTAINS(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		
 		dukglue_push(ctx, node(ctx)->DOCUMENT_POSITION_CONTAINS());
 		return true;
 	}
@@ -516,6 +550,7 @@ public:
 	// const unsigned short DOCUMENT_POSITION_CONTAINED_BY = 0x10;
 	static int DOCUMENT_POSITION_CONTAINED_BY(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		
 		dukglue_push(ctx, node(ctx)->DOCUMENT_POSITION_CONTAINED_BY());
 		return true;
 	}
@@ -523,6 +558,7 @@ public:
 	// const unsigned short DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC = 0x20;
 	static int DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		
 		dukglue_push(ctx, node(ctx)->DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC());
 		return true;
 	}
@@ -530,20 +566,24 @@ public:
 	// unsigned short compareDocumentPosition(Node other);
 	static int compareDocumentPosition(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString otherAddress = GetString(ctx);
+		DKString otherInterfaceAddress = GetString(ctx);
+		DKInterface* otherInterface = (DKInterface*)addressToPointer(otherInterfaceAddress);
+		DKString otherAddress = otherInterface->address["Node"];
 		DKNode* other = (DKNode*)addressToPointer(otherAddress);
-		unsigned short compareDocumentPosition = node(ctx)->compareDocumentPosition(other);
-		dukglue_push(ctx, compareDocumentPosition);	
+
+		dukglue_push(ctx, node(ctx)->compareDocumentPosition(other));	
 		return true;
 	}
 	
 	// boolean contains(Node? other);
 	static int contains(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString otherAddress = GetString(ctx);
+		DKString otherInterfaceAddress = GetString(ctx);
+		DKInterface* otherInterface = (DKInterface*)addressToPointer(otherInterfaceAddress);
+		DKString otherAddress = otherInterface->address["Node"];
 		DKNode* other = (DKNode*)addressToPointer(otherAddress);
-		bool contains = node(ctx)->contains(other);
-		dukglue_push(ctx, contains);	
+
+		dukglue_push(ctx, node(ctx)->contains(other));	
 		return true;
 	}
 	
@@ -551,8 +591,8 @@ public:
 	static int lookupPrefix(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString _namespace = GetString(ctx);
-		DKString lookupPrefix = node(ctx)->lookupPrefix(_namespace);
-		dukglue_push(ctx, lookupPrefix);	
+
+		dukglue_push(ctx, node(ctx)->lookupPrefix(_namespace));	
 		return true;
 	}
 	
@@ -560,8 +600,8 @@ public:
 	static int lookupNamespaceURI(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString _namespace = GetString(ctx);
-		DKString lookupNamespaceURI = node(ctx)->lookupNamespaceURI(_namespace);
-		dukglue_push(ctx, lookupNamespaceURI);	
+		
+		dukglue_push(ctx, node(ctx)->lookupNamespaceURI(_namespace));	
 		return true;
 	}
 	
@@ -569,52 +609,66 @@ public:
 	static int isDefaultNamespace(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString _namespace = GetString(ctx);
-		bool isDefaultNamespace = node(ctx)->isDefaultNamespace(_namespace);
-		dukglue_push(ctx, isDefaultNamespace);	
+
+		dukglue_push(ctx, node(ctx)->isDefaultNamespace(_namespace));	
 		return true;
 	}
 	
 	// [CEReactions] Node insertBefore(Node node, Node? child);
 	static int insertBefore(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString nodeAddress = GetString(ctx);
+		DKString nodeInterfaceAddress = GetString(ctx, 1);
+		DKInterface* nodeInterface = (DKInterface*)addressToPointer(nodeInterfaceAddress);
+		DKString nodeAddress = nodeInterface->address["Node"];
 		DKNode* _node = (DKNode*)addressToPointer(nodeAddress);
-		DKString childAddress = GetString(ctx, 2);
+		
+		DKString childInterfaceAddress = GetString(ctx, 2);
+		DKInterface* childInterface = (DKInterface*)addressToPointer(childInterfaceAddress);
+		DKString childAddress = nodeInterface->address["Node"];
 		DKNode* child = (DKNode*)addressToPointer(childAddress);
-		DKNode* insertBefore = node(ctx)->insertBefore(_node, child);
-		dukglue_push(ctx, pointerToAddress(insertBefore));	
+		
+		dukglue_push(ctx, node(ctx)->insertBefore(_node, child)->interfaceAddress);	
 		return true;
 	}
 	
 	// [CEReactions] Node appendChild(Node node);
 	static int appendChild(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString nodeAddress = GetString(ctx);
+		DKString nodeInterfaceAddress = GetString(ctx, 1);
+		DKInterface* nodeInterface = (DKInterface*)addressToPointer(nodeInterfaceAddress);
+		DKString nodeAddress = nodeInterface->address["Node"];
 		DKNode* _node = (DKNode*)addressToPointer(nodeAddress);
-		DKNode* appendChild = node(ctx)->appendChild(_node);
-		dukglue_push(ctx, pointerToAddress(appendChild));	
+		
+		dukglue_push(ctx, node(ctx)->appendChild(_node)->interfaceAddress);	
 		return true;
 	}
 	
 	// [CEReactions] Node replaceChild(Node node, Node child);
 	static int replaceChild(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString nodeAddress = GetString(ctx);
+		DKString nodeInterfaceAddress = GetString(ctx, 1);
+		DKInterface* nodeInterface = (DKInterface*)addressToPointer(nodeInterfaceAddress);
+		DKString nodeAddress = nodeInterface->address["Node"];
 		DKNode* _node = (DKNode*)addressToPointer(nodeAddress);
-		DKString childAddress = GetString(ctx, 2);
+		
+		DKString childInterfaceAddress = GetString(ctx, 2);
+		DKInterface* childInterface = (DKInterface*)addressToPointer(childInterfaceAddress);
+		DKString childAddress = nodeInterface->address["Node"];
 		DKNode* child = (DKNode*)addressToPointer(childAddress);
-		DKNode* replaceChild = node(ctx)->replaceChild(_node, child);
-		dukglue_push(ctx, pointerToAddress(replaceChild));	
+		
+		dukglue_push(ctx, node(ctx)->replaceChild(_node, child)->interfaceAddress);	
 		return true;
 	}
 	
 	// [CEReactions] Node removeChild(Node child);
 	static int removeChild(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		DKString childAddress = GetString(ctx, 2);
+		DKString childInterfaceAddress = GetString(ctx, 1);
+		DKInterface* childInterface = (DKInterface*)addressToPointer(childInterfaceAddress);
+		DKString childAddress = childInterface->address["Node"];
 		DKNode* child = (DKNode*)addressToPointer(childAddress);
-		DKNode* removeChild = node(ctx)->removeChild(child);
-		dukglue_push(ctx, pointerToAddress(removeChild));	
+		
+		dukglue_push(ctx, node(ctx)->removeChild(child)->interfaceAddress);	
 		return true;
 	}
 };

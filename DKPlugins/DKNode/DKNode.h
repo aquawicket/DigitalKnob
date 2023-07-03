@@ -20,8 +20,6 @@ public:
 		interfaceName = "Node";
 		address[interfaceName] = pointerToAddress(this);
 		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
-		
-		address["Node"] = pointerToAddress(this);
 	}
 	//virtual ~DKNode(){}
 	
@@ -128,9 +126,10 @@ public:
 	virtual void parentElement(DKElement* parentElement)			{ _parentElement = parentElement; } 	// setter
 	
 	// boolean hasChildNodes();
-	virtual bool hasChildNodes(bool& _hasChildNodes) {
-		DKDEBUGFUNC(_hasChildNodes);
-		return DKTODO();
+	bool _hasChildNodes = false;
+	virtual bool hasChildNodes() {
+		DKDEBUGFUNC();
+		return _hasChildNodes;
 	}
 	
 	// [SameObject] readonly attribute NodeList childNodes;
