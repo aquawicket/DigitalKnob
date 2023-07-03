@@ -14,8 +14,6 @@
 class DKRmlElement : public DKRmlNode, virtual public DKElement  //, public DKRmlElementCSSInlineStyle
 {
 public:
-	//DKRmlEventListener* _dkRmlEventListener;
-
 	static std::vector<DKRmlElement*> _list;
 	static DKRmlElement* instance(DKRmlEventListener* dkRmlEventListener, Rml::Element* rmlElement){
 		for(unsigned int i=0; i<_list.size(); ++i){
@@ -32,8 +30,10 @@ public:
 		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 		
 		_dkRmlEventListener = dkRmlEventListener;
-		_rmlElement = rmlElement;
+		if(!_dkRmlEventListener)
+			DKERROR("_dkRmlEventListener invalid! \n");
 		
+		_rmlElement = rmlElement;
 		if(!_rmlElement)
 			DKERROR("_rmlElement invalid! \n");
 		

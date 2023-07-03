@@ -21,7 +21,12 @@ public:
 	DKRmlNonElementParentNode(DKRmlInterface* dkRmlInterface, DKRmlEventListener* dkRmlEventListener) : DKNonElementParentNode() {
 		DKDEBUGFUNC();
 		_dkRmlInterface = dkRmlInterface;
+		if(!_dkRmlInterface)
+			DKERROR("_dkRmlInterface invalid! \n");
+		
 		_dkRmlEventListener = dkRmlEventListener;
+		if(!_dkRmlEventListener)
+			DKERROR("_dkRmlEventListener invalid! \n");
 	}
 	
 	// Element? getElementById(DOMString elementId);

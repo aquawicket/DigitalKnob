@@ -13,7 +13,7 @@
 class DKRmlEventListener : virtual public DKEventListener, public Rml::EventListener
 {
 public:
-	DKRmlEventListener() {//: DKEventListener() {
+	DKRmlEventListener() : DKEventListener() {
 		DKDEBUGFUNC();
 		interfaceName = "RmlEventListener";
 		address[interfaceName] = pointerToAddress(this);

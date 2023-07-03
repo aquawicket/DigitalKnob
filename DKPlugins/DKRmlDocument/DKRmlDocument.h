@@ -38,7 +38,12 @@ public:
 		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 		
 		_dkRmlInterface = dkRmlInterface;
+		if(!_dkRmlInterface)
+			DKERROR("_dkRmlInterface invalid! \n");
+		
 		_dkRmlEventListener = dkRmlEventListener;
+		if(!_dkRmlEventListener)
+			DKERROR("_dkRmlEventListener invalid! \n");
 		
 		list.push_back(this);
 	}

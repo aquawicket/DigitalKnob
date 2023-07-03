@@ -69,6 +69,9 @@ DKRmlInterface::DKRmlInterface(DKWindow* window) : DKInterface() {
 	address[interfaceName] = pointerToAddress(this);
 	DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 	
+	if(!window)
+		DKERROR("window invalid! \n");
+	
 	if (!dkRmlFile) {
 		dkRmlFile = new DKRmlFile();
 		Rml::SetFileInterface(dkRmlFile);

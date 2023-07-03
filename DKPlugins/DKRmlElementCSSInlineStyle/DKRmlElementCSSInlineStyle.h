@@ -18,7 +18,10 @@ public:
 	
 	DKRmlElementCSSInlineStyle(Rml::Element* rmlElement) : DKElementCSSInlineStyle() {
 		DKDEBUGFUNC();
+		
 		__rmlElement = rmlElement;
+		if(!_rmlElement)
+			DKERROR("_rmlElement invalid! \n");
 	}
 	
 	// [SameObject, PutForwards=cssText] readonly attribute CSSStyleDeclaration style;
