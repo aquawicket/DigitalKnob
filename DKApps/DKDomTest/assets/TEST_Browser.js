@@ -32,6 +32,7 @@ function onHyperlink(event) {
 
 function onLoad(event) {
 	console.log("onLoad()");
+	const document = new DKRmlDocument(dkRmlInterface, dkRmlEventListener);	//the document needs to be refreshes when reloading a page
 	
 	//////////// Post processing <a href></a> hyperlinks ////////////
 	var aElements = document.getElementsByTagName("a");

@@ -138,6 +138,8 @@ public:
 		DKString interfaceAddress = duk_require_string(ctx, 0);
 		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
 		DKString elementAddress = interface->address["Element"];
+		if(elementAddress.empty())
+			DKERROR("elementAddress.empty()! \n");
 		DKElement* _element = (DKElement*)addressToPointer(elementAddress);
 		return _element;
 	}
