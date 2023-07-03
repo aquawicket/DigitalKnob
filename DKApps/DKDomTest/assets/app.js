@@ -88,12 +88,11 @@ CPP_DK_Create("TEST_Node.js");
 CPP_DK_Create("TEST_Document.js");
 
 // [Element]
-//CPP_DK_Create("DKElementDUK");
-//CPP_DK_Create("TEST_Element.js");
+CPP_DK_Create("TEST_Element.js");
 
 // [HTMLCollection]
 CPP_DK_Create("DKHTMLCollectionDUK");
-//CPP_DK_Create("TEST_HTMLCollection.js");
+CPP_DK_Create("TEST_HTMLCollection.js");
 
 // [ElementCSSInlineStyle]							// Mixin
 //CPP_DK_Create("DKElementCSSInlineStyleDUK");
@@ -114,12 +113,12 @@ CPP_DK_Create("DKHTMLImageElementDUK");
 ////// DigitalKnob Interfaces //////
 
 // [DKConsoleWindow]
-//CPP_DK_Create("DKConsoleWindowDUK");
+CPP_DK_Create("DKConsoleWindowDUK");
 //CPP_DK_Create("TEST_DKConsoleWindow.js");
 
 // [DKSdlWindow]
 CPP_DK_Create("DKSdlWindowDUK");
-//CPP_DK_Create("TEST_DKSdlWindow.js");
+CPP_DK_Create("TEST_DKSdlWindow.js");
 
 // [DKSdlRmlDocument]
 //CPP_DK_Create("DKSdlRmlDocumentDUK");				// Mixin

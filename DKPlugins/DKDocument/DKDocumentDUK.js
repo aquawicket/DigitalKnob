@@ -154,7 +154,7 @@ var Document = function Document(address) {
 	
 	// [NewObject] Event createEvent(DOMString interface); // legacy
 	Document.prototype.createEvent = function createEvent(interface) {
-		return new Event(CPP_DKDocumentDUK_createEvent(this.address, interface));
+		return new Event("", "", CPP_DKDocumentDUK_createEvent(this.address, interface));
     }
 	
 	// [NewObject] Range createRange();
