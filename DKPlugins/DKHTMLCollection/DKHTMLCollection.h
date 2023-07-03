@@ -18,9 +18,11 @@ public:
 	DKHTMLCollection(std::vector<DKElement*> element_list) : DKInterface() {
 		DKDEBUGFUNC(element_list);
 		interfaceName = "HTMLCollection";
-		interfaceAddress = pointerToAddress(this);
+		address[interfaceName] = pointerToAddress(this);
+		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
+		
 		_element_list = element_list;
-		DKINFO("_element_list.size() = "+toString(_element_list.size())+"\n");
+		//DKINFO("_element_list.size() = "+toString(_element_list.size())+"\n");
 	}
 
 	// readonly attribute unsigned long length;

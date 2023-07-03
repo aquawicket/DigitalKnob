@@ -12,6 +12,7 @@ var HTMLCollection = function HTMLCollection(address) {
 	if(!this.address)
 		this.address = CPP_DKHTMLCollectionDUK_constructor();
 	
+	
 	// readonly attribute unsigned long length;
 	Object.defineProperty(this, "length", {
         get: function length()			{ return CPP_DKHTMLCollectionDUK_length(this.address) },

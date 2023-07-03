@@ -521,9 +521,12 @@ DKString pointerToAddress(const void* pointer) {
 
 void* addressToPointer(const DKString& address) {
 	//DKDEBUGFUNC(address);  //EXCESSIVE LOGGING
+	if(address.empty())
+		DKERROR("address is empty! \n");
+	
 	void* pointer;
 	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {
-		DKERROR("address is not a valid hex notation! \n");
+		DKERROR("address:" + address + " is not a valid hex notation! \n");
 		return NULL;
 	}
 	//Convert a string of an address back into a pointer
@@ -531,7 +534,7 @@ void* addressToPointer(const DKString& address) {
 	ss << address.substr(2, address.size() - 2);
 	std::uint64_t tmp;
 	if (!(ss >> std::hex >> tmp)) {
-		DKERROR("addressToPointer(" + address + "): invalid address\n");
+		DKERROR("address invalid! \n");
 		return NULL;
 	}
 	pointer = reinterpret_cast<void*>(tmp);
