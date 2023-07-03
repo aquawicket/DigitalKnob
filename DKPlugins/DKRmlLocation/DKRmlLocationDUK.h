@@ -32,7 +32,7 @@ public:
 		DKString dkRmlInterfaceAddress = rmlInterface->address["RmlInterface"];
 		DKRmlInterface* dkRmlInterface = (DKRmlInterface*)addressToPointer(dkRmlInterfaceAddress);
 		
-		DKString rmlEventListenerInterfaceAddress = duk_require_string(ctx, 0);
+		DKString rmlEventListenerInterfaceAddress = duk_require_string(ctx, 1);
 		DKInterface* rmlEventListenerInterface = (DKInterface*)addressToPointer(rmlEventListenerInterfaceAddress);
 		DKString dkRmlEventListenerAddress = rmlEventListenerInterface->address["RmlEventListener"];
 		DKRmlEventListener* dkRmlEventListener = (DKRmlEventListener*)addressToPointer(dkRmlEventListenerAddress);
