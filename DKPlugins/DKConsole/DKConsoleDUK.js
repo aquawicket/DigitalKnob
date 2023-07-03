@@ -5,6 +5,13 @@
 //[Exposed=*]
 //namespace console { // but see namespace object requirements below
 var Console = function Console(address) {
+	console.log("Console("+address+")")
+	
+	if(address)
+		this.address = address;
+	if(!this.address)
+		this.address = CPP_DKConsoleDUK_constructor();
+	
 	
 	// Logging
 	//undefined assert(optional boolean condition = false, any... data);
@@ -120,10 +127,10 @@ var Console = function Console(address) {
 	
 	////// toString //////
 	//NOTE: Chrome returns [object Object]
-	/*
 	if(this.toString() === "[object Object]")
 		this.toString = function(){ return "[object Console]" }
-	*/
+	
+	return this;
 }
 
-var console = new Console("console");
+var console = new Console();

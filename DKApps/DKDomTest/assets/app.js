@@ -2,7 +2,7 @@
 
 // [Console]
 CPP_DK_Create("DKConsoleDUK");
-//CPP_DK_Create("TEST_Console.js");
+CPP_DK_Create("TEST_Console.js");
 
 // [Event]
 // [EventListener]
@@ -10,9 +10,9 @@ CPP_DK_Create("DKConsoleDUK");
 CPP_DK_Create("DKEventDUK");
 CPP_DK_Create("DKEventListenerDUK");
 CPP_DK_Create("DKEventTargetDUK");
-//CPP_DK_Create("TEST_Event.js");
-//CPP_DK_Create("TEST_EventListener.js");
-//CPP_DK_Create("TEST_EventTarget.js");
+CPP_DK_Create("TEST_Event.js");
+CPP_DK_Create("TEST_EventListener.js");
+CPP_DK_Create("TEST_EventTarget.js");
 
 // [CustomEvent]
 CPP_DK_Create("DKCustomEventDUK");
@@ -167,4 +167,4 @@ CPP_DK_Create("DKRmlDocumentDUK");
 
 
 ////// DigitalKnob Tests //////
-CPP_DK_Create("TEST_Browser.js");
+//CPP_DK_Create("TEST_Browser.js");

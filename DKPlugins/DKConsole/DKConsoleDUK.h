@@ -113,6 +113,13 @@ public:
 		return true;
 	}
 	
+	static DKConsole* console(duk_context* ctx){
+		DKString interfaceAddress = duk_require_string(ctx, 0);
+		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+		DKString consoleAddress = interface->address["Console"];
+		DKConsole* _console = (DKConsole*)addressToPointer(consoleAddress);
+		return _console;
+	}
 	
 	static int constructor(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
