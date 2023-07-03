@@ -52,8 +52,8 @@ DKSdlWindow::DKSdlWindow() : DKWindow() {
 	DKDEBUGFUNC();
 	
 	interfaceName = "SdlWindow";
-	//interfaceAddress = pointerToAddress(this);
-	DKINFO("DKSdlWindow("+interfaceAddress+") \n");
+	address[interfaceName] = pointerToAddress(this);
+	DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 
 	SDL_SetMainReady(); //Bypass SDL_main() //https://wiki.libsdl.org/SDL_SetMainReady
 	
