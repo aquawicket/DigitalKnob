@@ -32,7 +32,7 @@ public:
 // };
 
 	////// DK properties //////
-	DKString interfaceAddress;
+	//DKString interfaceAddress;
 	DKEventTarget* dkEventTarget;
 	DOMString type;
 	DKCallback callback;
