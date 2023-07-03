@@ -151,27 +151,42 @@ public:
 	// readonly attribute EventTarget? target;
 	static int target(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if(duk_is_valid_index(ctx, 1))
-			event(ctx)->target((DKEventTarget*)addressToPointer(GetString(ctx)));
-		dukglue_push(ctx, pointerToAddress(event(ctx)->target()));
+		if(duk_is_valid_index(ctx, 1)){
+			DKString interfaceAddress = GetString(ctx);
+			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+			DKString eventTargetAddress = interface->address["EventTarget"];
+			DKEventTarget* eventTarget = (DKEventTarget*)addressToPointer(eventTargetAddress);
+			event(ctx)->target(eventTarget);
+		}
+		dukglue_push(ctx, event(ctx)->target()->interfaceAddress);
 		return true;
 	}
 	
 	// readonly attribute EventTarget? srcElement; // legacy
 	static int srcElement(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if(duk_is_valid_index(ctx, 1))
-			event(ctx)->srcElement((DKEventTarget*)addressToPointer(GetString(ctx)));
-		dukglue_push(ctx, pointerToAddress(event(ctx)->srcElement()));
+		if(duk_is_valid_index(ctx, 1)){
+			DKString interfaceAddress = GetString(ctx);
+			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+			DKString eventTargetAddress = interface->address["EventTarget"];
+			DKEventTarget* eventTarget = (DKEventTarget*)addressToPointer(eventTargetAddress);
+			event(ctx)->srcElement(eventTarget);
+		}
+		dukglue_push(ctx, event(ctx)->srcElement()->interfaceAddress);
 		return true;
 	}
 	
 	// readonly attribute EventTarget? currentTarget;
 	static int currentTarget(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if(duk_is_valid_index(ctx, 1))
-			event(ctx)->currentTarget((DKEventTarget*)addressToPointer(GetString(ctx)));
-		dukglue_push(ctx, pointerToAddress(event(ctx)->currentTarget()));
+		if(duk_is_valid_index(ctx, 1)){
+			DKString interfaceAddress = GetString(ctx);
+			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+			DKString eventTargetAddress = interface->address["EventTarget"];
+			DKEventTarget* eventTarget = (DKEventTarget*)addressToPointer(eventTargetAddress);
+			event(ctx)->currentTarget(eventTarget);
+		}
+		dukglue_push(ctx, event(ctx)->currentTarget()->interfaceAddress);
 		return true;
 	}
 	
