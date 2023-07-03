@@ -16,19 +16,24 @@ CPP_DK_Create("TEST_EventTarget.js");
 
 // [CustomEvent]
 CPP_DK_Create("DKCustomEventDUK");
-//CPP_DK_Create("TEST_CustomEvent.js");
+CPP_DK_Create("TEST_CustomEvent.js");
 
 // [Screen]
 CPP_DK_Create("DKScreenDUK");
-//CPP_DK_Create("TEST_Screen.js");
+CPP_DK_Create("TEST_Screen.js");
 
 // [Window]
+CPP_DK_Create("DKNodeDUK");
+CPP_DK_Create("DKDocumentDUK");
+CPP_DK_Create("DKLocationDUK");
+CPP_DK_Create("DKElementDUK");
+CPP_DK_Create("DKNavigatorDUK");
 CPP_DK_Create("DKWindowDUK");
-//CPP_DK_Create("TEST_Window.js");
+CPP_DK_Create("TEST_Window.js");
 
 // [UIEvent]
 CPP_DK_Create("DKUIEventDUK");
-//CPP_DK_Create("TEST_UIEvent.js");
+CPP_DK_Create("TEST_UIEvent.js");
 
 // [FocusEvent]
 CPP_DK_Create("DKFocusEventDUK");
@@ -59,7 +64,7 @@ CPP_DK_Create("DKDragEventDUK");
 //CPP_DK_Create("TEST_DragEvent.js");
 
 // [Navigator]
-CPP_DK_Create("DKNavigatorDUK");
+//CPP_DK_Create("DKNavigatorDUK");
 //CPP_DK_Create("TEST_Navigator.js");
 
 // [URL]
@@ -67,7 +72,7 @@ CPP_DK_Create("DKURLDUK");
 //CPP_DK_Create("TEST_URL.js");
 
 // [Location]
-CPP_DK_Create("DKLocationDUK");
+//CPP_DK_Create("DKLocationDUK");
 //CPP_DK_Create("TEST_Location.js");
 
 // [CSSStyleDeclaration]
@@ -75,7 +80,7 @@ CPP_DK_Create("DKCSSStyleDeclarationDUK");
 //CPP_DK_Create("TEST_CSSStyleDeclaration.js");
 
 // [Node]
-CPP_DK_Create("DKNodeDUK");
+//CPP_DK_Create("DKNodeDUK");
 //CPP_DK_Create("TEST_Node.js");
 
 // [NonElementParentNode]							// Mixin
@@ -83,11 +88,11 @@ CPP_DK_Create("DKNodeDUK");
 //CPP_DK_Create("TEST_NonElementParentNode.js");
 
 // [Document]
-CPP_DK_Create("DKDocumentDUK");
+//CPP_DK_Create("DKDocumentDUK");
 //CPP_DK_Create("TEST_Document.js");
 
 // [Element]
-CPP_DK_Create("DKElementDUK");
+//CPP_DK_Create("DKElementDUK");
 //CPP_DK_Create("TEST_Element.js");
 
 // [HTMLCollection]

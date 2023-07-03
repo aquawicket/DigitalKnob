@@ -19,19 +19,19 @@ var Window = function Window(address) {
 	// the current browsing context
 	// [LegacyUnforgeable] readonly attribute WindowProxy window;
 	Object.defineProperty(this, "window", {
-        get: function window()					{ return CPP_DKWindowDUK_window(this.address) },
+        get: function window()					{ return new Window(CPP_DKWindowDUK_window(this.address)) },
 		//set: function window(data)			{ return CPP_DKWindowDUK_window(this.address, data) },
     })
 	
 	// [Replaceable] readonly attribute WindowProxy self;
 	Object.defineProperty(this, "self", {
-        get: function self()					{ return CPP_DKWindowDUK_self(this.address) },
+        get: function self()					{ return new Window(CPP_DKWindowDUK_self(this.address)) },
 		//set: function self(data)				{ return CPP_DKWindowDUK_self(this.address, data) },
     })
 	
 	// [LegacyUnforgeable] readonly attribute Document document;
 	Object.defineProperty(this, "document", {
-        get: function document()				{ return CPP_DKWindowDUK_document(this.address) },
+        get: function document()				{ return new Document(CPP_DKWindowDUK_document(this.address)) },
 		//set: function document(data)			{ return CPP_DKWindowDUK_document(this.address, data) },
     })
 	
@@ -43,7 +43,7 @@ var Window = function Window(address) {
 	
 	// [PutForwards=href, LegacyUnforgeable] readonly attribute Location location;
 	Object.defineProperty(this, "location", {
-        get: function location()				{ return CPP_DKWindowDUK_location(this.address) },
+        get: function location()				{ return new Location(CPP_DKWindowDUK_location(this.address)) },
 		set: function location(data)			{ return CPP_DKWindowDUK_location(this.address, data) },
     })
 	
@@ -130,7 +130,7 @@ var Window = function Window(address) {
 	// other browsing contexts
 	// [Replaceable] readonly attribute WindowProxy frames;
 	Object.defineProperty(this, "frames", {
-        get: function frames()					{ return CPP_DKWindowDUK_frames(this.address) },
+        get: function frames()					{ return new Window(CPP_DKWindowDUK_frames(this.address)) },
 		//set: function frames(data)			{ return CPP_DKWindowDUK_frames(this.address, data) },
     })
 	
@@ -142,7 +142,7 @@ var Window = function Window(address) {
 	
 	// [LegacyUnforgeable] readonly attribute WindowProxy? top;
 	Object.defineProperty(this, "top", {
-        get: function top()						{ return CPP_DKWindowDUK_top(this.address) },
+        get: function top()						{ return new Window(CPP_DKWindowDUK_top(this.address)) },
 		//set: function top(data)				{ return CPP_DKWindowDUK_top(this.address, data) },
     })
 	
@@ -154,19 +154,19 @@ var Window = function Window(address) {
 	
 	// [Replaceable] readonly attribute WindowProxy? parent;
 	Object.defineProperty(this, "parent", {
-        get: function parent()					{ return CPP_DKWindowDUK_parent(this.address) },
+        get: function parent()					{ return new Window(CPP_DKWindowDUK_parent(this.address)) },
 		//set: function parent(data)			{ return CPP_DKWindowDUK_parent(this.address, data) },
     })
 	
 	// readonly attribute Element? frameElement;
 	Object.defineProperty(this, "frameElement", {
-        get: function frameElement()			{ return CPP_DKWindowDUK_frameElement(this.address) },
+        get: function frameElement()			{ return new Element(CPP_DKWindowDUK_frameElement(this.address)) },
 		//set: function frameElement(data)		{ return CPP_DKWindowDUK_frameElement(this.address, data) },
     })
 	
 	// WindowProxy? open(optional USVString url = "", optional DOMString target = "_blank", optional [LegacyNullToEmptyString] DOMString features = "");
 	Window.prototype.open = function open(url, target, features) {
-		return CPP_DKWindowDUK_open(this.address, url, target, features)
+		return new Window(CPP_DKWindowDUK_open(this.address, url, target, features));
     }
 	
 	//Since this is the global object, the IDL named getter adds a NamedPropertiesObject exotic
@@ -178,13 +178,13 @@ var Window = function Window(address) {
 	// the user agent
 	// readonly attribute Navigator navigator;
 	Object.defineProperty(this, "navigator", {
-        get: function navigator()				{ return CPP_DKWindowDUK_navigator(this.address) },
+        get: function navigator()				{ return new Navigator(CPP_DKWindowDUK_navigator(this.address)) },
 		//set: function navigator(data)			{ return CPP_DKWindowDUK_navigator(this.address, data) },
     })
 	
 	// readonly attribute Navigator clientInformation; // legacy alias of .navigator
 	Object.defineProperty(this, "clientInformation", {
-        get: function clientInformation()		{ return CPP_DKWindowDUK_clientInformation(this.address) },
+        get: function clientInformation()		{ return new Navigator(CPP_DKWindowDUK_clientInformation(this.address)) },
 		//set: function clientInformation(data)	{ return CPP_DKWindowDUK_clientInformation(this.address, data) },
     })
 	
@@ -197,37 +197,37 @@ var Window = function Window(address) {
 	//user prompts
 	// undefined alert();
 	Window.prototype.alert = function alert() {
-		CPP_DKWindowDUK_alert(this.address)
+		CPP_DKWindowDUK_alert(this.address);
     }
 	
 	// undefined alert(DOMString message);
 	Window.prototype.alert = function alert(message) {
-		CPP_DKWindowDUK_alert(this.address, message)
+		CPP_DKWindowDUK_alert(this.address, message);
     }
 		
 	// boolean confirm(optional DOMString message = "");
 	Window.prototype.confirm = function confirm(message) {
-		return CPP_DKWindowDUK_confirm(this.address, message)
+		return CPP_DKWindowDUK_confirm(this.address, message);
     }
 		
 	// DOMString? prompt(optional DOMString message = "", optional DOMString default = "");
 	Window.prototype.prompt = function prompt(message, _default) {
-		return CPP_DKWindowDUK_prompt(this.address, message, _default)
+		return CPP_DKWindowDUK_prompt(this.address, message, _default);
     }
 		
 	// undefined print();
 	Window.prototype.print = function print() {
-		CPP_DKWindowDUK_print(this.address)
+		CPP_DKWindowDUK_print(this.address);
     }
 		
 	// undefined postMessage(any message, USVString targetOrigin, optional sequence<object> transfer = []);
 	Window.prototype.postMessage = function postMessage(message, targetOrigin, transfer) {
-		CPP_DKWindowDUK_print(this.address, message, targetOrigin, transfer)
+		CPP_DKWindowDUK_print(this.address, message, targetOrigin, transfer);
     }
 	
 	// undefined postMessage(any message, optional WindowPostMessageOptions options = {});
 	Window.prototype.postMessage = function postMessage(message, options) {
-		CPP_DKWindowDUK_print(this.address, message, options)
+		CPP_DKWindowDUK_print(this.address, message, options);
     }
 	
 	// also has obsolete members
@@ -251,7 +251,7 @@ var Window = function Window(address) {
 	// partial interface Window {
 	//		[Replaceable] readonly attribute (Event or undefined) event; // legacy
 			Object.defineProperty(this, "event", {
-				get: function event()					{ return CPP_DKWindowDUK_event(this.address) },
+				get: function event()					{ return new Event("", "", CPP_DKWindowDUK_event(this.address)) },
 				//set: function event(data)				{ return CPP_DKWindowDUK_event(this.address, data) },
 			})
 	// };
@@ -278,12 +278,12 @@ var Window = function Window(address) {
 	// partial interface Window {
 	//		undefined captureEvents();
 			Window.prototype.captureEvents = function captureEvents() {
-				CPP_DKWindowDUK_captureEvents(this.address)
+				CPP_DKWindowDUK_captureEvents(this.address);
 			}
 	//
 	//		undefined releaseEvents();
 			Window.prototype.releaseEvents = function releaseEvents() {
-				CPP_DKWindowDUK_releaseEvents(this.address)
+				CPP_DKWindowDUK_releaseEvents(this.address);
 			}
 	//
 	//		[Replaceable, SameObject] readonly attribute External external;
@@ -307,7 +307,7 @@ var Window = function Window(address) {
 	// partial interface Window {
 	//		[SecureContext] Promise<DigitalGoodsService> getDigitalGoodsService(DOMString serviceProvider);
 			Window.prototype.getDigitalGoodsService = function getDigitalGoodsService(serviceProvider) {
-				return CPP_DKWindowDUK_getDigitalGoodsService(this.address, serviceProvider)
+				return CPP_DKWindowDUK_getDigitalGoodsService(this.address, serviceProvider);
 			}
 	// };
 
@@ -326,17 +326,17 @@ var Window = function Window(address) {
 	// partial interface Window {
 	//		Promise<sequence<FileSystemFileHandle>> showOpenFilePicker(optional OpenFilePickerOptions options = {});
 			Window.prototype.showOpenFilePicker = function showOpenFilePicker(options) {
-				return CPP_DKWindowDUK_showOpenFilePicker(this.address, options)
+				return CPP_DKWindowDUK_showOpenFilePicker(this.address, options);
 			}
 	//
 	//		Promise<FileSystemFileHandle> showSaveFilePicker(optional SaveFilePickerOptions options = {});
 			Window.prototype.showSaveFilePicker = function showSaveFilePicker(options) {
-				return CPP_DKWindowDUK_showSaveFilePicker(this.address, options)
+				return CPP_DKWindowDUK_showSaveFilePicker(this.address, options);
 			}
 	//
 	//		Promise<FileSystemDirectoryHandle> showDirectoryPicker(optional DirectoryPickerOptions options = {});
 			Window.prototype.showDirectoryPicker = function showDirectoryPicker(options) {
-				return CPP_DKWindowDUK_showDirectoryPicker(this.address, options)
+				return CPP_DKWindowDUK_showDirectoryPicker(this.address, options);
 			}
 	// };
 		
@@ -345,7 +345,7 @@ var Window = function Window(address) {
 	// partial interface Window {
 	//		Promise<sequence<FontData>> queryLocalFonts(optional QueryOptions options = {});
 			Window.prototype.queryLocalFonts = function queryLocalFonts(options) {
-				return CPP_DKWindowDUK_queryLocalFonts(this.address, options)
+				return CPP_DKWindowDUK_queryLocalFonts(this.address, options);
 			}
 	// };	
 		
@@ -395,7 +395,7 @@ var Window = function Window(address) {
 	// partial interface Window {
 	//		undefined navigate(SpatialNavigationDirection dir);
 			Window.prototype.navigate = function navigate(dir) {
-				return CPP_DKWindowDUK_navigate(this.address, dir)
+				return CPP_DKWindowDUK_navigate(this.address, dir);
 			}
 	// };
 
@@ -403,7 +403,7 @@ var Window = function Window(address) {
 	// partial interface Window {
 	//		[NewObject] CSSStyleDeclaration getComputedStyle(Element elt, optional CSSOMString? pseudoElt);
 			Window.prototype.getComputedStyle = function getComputedStyle(elt, pseudoElt) {
-				return CPP_DKWindowDUK_getComputedStyle(this.address, elt, pseudoElt)
+				return new CSSStyleDeclaration(CPP_DKWindowDUK_getComputedStyle(this.address, elt, pseudoElt));
 			}
 	// };
 		
@@ -411,7 +411,7 @@ var Window = function Window(address) {
 	// partial interface Window {
 	//		[NewObject] MediaQueryList matchMedia(CSSOMString query);
 			Window.prototype.matchMedia = function matchMedia(query) {
-				return CPP_DKWindowDUK_matchMedia(this.address, query)
+				return CPP_DKWindowDUK_matchMedia(this.address, query);
 			}
 	//
 	//		[SameObject, Replaceable] readonly attribute Screen screen;
@@ -429,22 +429,22 @@ var Window = function Window(address) {
 	//		// browsing context
 	//		undefined moveTo(long x, long y);
 			Window.prototype.moveTo = function moveTo(x, y) {
-				CPP_DKWindowDUK_moveTo(this.address, x, y)
+				CPP_DKWindowDUK_moveTo(this.address, x, y);
 			}
 	//
 	//		undefined moveBy(long x, long y);
 			Window.prototype.moveBy = function moveBy(deltaX, deltaY) {
-				CPP_DKWindowDUK_moveBy(this.address, deltaX, deltaY)
+				CPP_DKWindowDUK_moveBy(this.address, deltaX, deltaY);
 			}
 	//
 	//		undefined resizeTo(long width, long height);
 			Window.prototype.resizeTo = function resizeTo(width, height) {
-				CPP_DKWindowDUK_resizeTo(this.address, width, height)
+				CPP_DKWindowDUK_resizeTo(this.address, width, height);
 			}
 	//
 	//		undefined resizeBy(long x, long y);
 			Window.prototype.resizeBy = function resizeBy(x, y) {
-				CPP_DKWindowDUK_resizeBy(this.address, x, y)
+				CPP_DKWindowDUK_resizeBy(this.address, x, y);
 			}
 	//
 	//		// viewport
@@ -487,32 +487,32 @@ var Window = function Window(address) {
 	//
 	//		undefined scroll(optional ScrollToOptions options = {});
 			Window.prototype.scroll = function scroll(options) {
-				CPP_DKWindowDUK_scroll(this.address, options)
+				CPP_DKWindowDUK_scroll(this.address, options);
 			}
 	//		
 	//		undefined scroll(unrestricted double x, unrestricted double y);
 			Window.prototype.scroll = function scroll(x, y) {
-				CPP_DKWindowDUK_scroll(this.address, x, y)
+				CPP_DKWindowDUK_scroll(this.address, x, y);
 			}
 	//
 	//		undefined scrollTo(optional ScrollToOptions options = {});
 			Window.prototype.scrollTo = function scrollTo(options) {
-				CPP_DKWindowDUK_scrollTo(this.address, options)
+				CPP_DKWindowDUK_scrollTo(this.address, options);
 			}
 	//
 	//		undefined scrollTo(unrestricted double x, unrestricted double y);
 			Window.prototype.scrollTo = function scrollTo(x, y) {
-				CPP_DKWindowDUK_scrollTo(this.address, x, y)
+				CPP_DKWindowDUK_scrollTo(this.address, x, y);
 			}
 			
 	//		undefined scrollBy(optional ScrollToOptions options = {});
 			Window.prototype.scrollBy = function scrollBy(options) {
-				CPP_DKWindowDUK_scrollBy(this.address, options)
+				CPP_DKWindowDUK_scrollBy(this.address, options);
 			}
 	//
 	//		undefined scrollBy(unrestricted double x, unrestricted double y);
 			Window.prototype.scrollBy = function scrollBy(x, y) {
-				CPP_DKWindowDUK_scrollBy(this.address, x, y)
+				CPP_DKWindowDUK_scrollBy(this.address, x, y);
 			}
 	//
 	//		// client
@@ -590,12 +590,12 @@ var Window = function Window(address) {
 	// partial interface Window {
 	//		unsigned long requestIdleCallback(IdleRequestCallback callback, optional IdleRequestOptions options = {});
 			Window.prototype.requestIdleCallback = function requestIdleCallback(callback, options) {
-				return CPP_DKWindowDUK_requestIdleCallback(this.address, callback, options)
+				return CPP_DKWindowDUK_requestIdleCallback(this.address, callback, options);
 			}
 	//
 	//		undefined cancelIdleCallback(unsigned long handle);
 			Window.prototype.cancelIdleCallback = function cancelIdleCallback(handle) {
-				CPP_DKWindowDUK_cancelIdleCallback(this.address, handle)
+				CPP_DKWindowDUK_cancelIdleCallback(this.address, handle);
 			}
 	// };
 	
@@ -603,7 +603,7 @@ var Window = function Window(address) {
 	// partial interface Window {
 	//		Selection? getSelection();
 			Window.prototype.getSelection = function getSelection() {
-				return CPP_DKWindowDUK_getSelection(this.address)
+				return CPP_DKWindowDUK_getSelection(this.address);
 			}
 	// };
 
@@ -612,7 +612,7 @@ var Window = function Window(address) {
 	//		[SecureContext]
 	//		Promise<ScreenDetails> getScreenDetails();
 			Window.prototype.getScreenDetails = function getScreenDetails() {
-				return CPP_DKWindowDUK_getScreenDetails(this.address)
+				return CPP_DKWindowDUK_getScreenDetails(this.address);
 			}
 	// };
 	

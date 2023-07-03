@@ -42,8 +42,11 @@ public:
 	}
 	
 	static DKScreen* eventTarget(duk_context* ctx){
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		return (DKScreen*)addressToPointer(eventTargetAddress);
+		DKString interfaceAddress = duk_require_string(ctx, 0);
+		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+		DKString screenAddress = interface->address["Screen"];
+		DKScreen* _screen = (DKScreen*)addressToPointer(screenAddress);
+		return _screen;
 	}
 	static bool GetBool(duk_context* ctx){
 		if (duk_is_boolean(ctx, 1))

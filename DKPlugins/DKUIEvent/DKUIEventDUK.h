@@ -18,32 +18,35 @@ public:
 	bool Init(){
 		
 		//constructor(DOMString type, optional UIEventInit eventInitDict = {});
-		DKDuktape::AttachFunction("CPP_DKUIEventDUK_constructor", 	DKUIEventDUK::constructor);
+		DKDuktape::AttachFunction("CPP_DKUIEventDUK_constructor", 			DKUIEventDUK::constructor);
 	
 		// readonly attribute Window? view;
-		DKDuktape::AttachFunction("CPP_DKUIEventDUK_view", 			DKUIEventDUK::view);
+		DKDuktape::AttachFunction("CPP_DKUIEventDUK_view", 					DKUIEventDUK::view);
 		
 		// readonly attribute long detail;
-		DKDuktape::AttachFunction("CPP_DKUIEventDUK_detail", 		DKUIEventDUK::detail);
+		DKDuktape::AttachFunction("CPP_DKUIEventDUK_detail", 				DKUIEventDUK::detail);
 		
 		// Source: Input Device Capabilities (https://wicg.github.io/input-device-capabilities/)
 		// partial interface UIEvent {
-		// 		readonly attribute InputDeviceCapabilities? sourceCapabilities;
-				DKDuktape::AttachFunction("CPP_DKUIEventDUK_sourceCapabilities", 	DKUIEventDUK::sourceCapabilities);
+		// readonly attribute InputDeviceCapabilities? sourceCapabilities;
+		DKDuktape::AttachFunction("CPP_DKUIEventDUK_sourceCapabilities", 	DKUIEventDUK::sourceCapabilities);
+		
 		// };
 		
 		// Source: UI Events (https://www.w3.org/TR/uievents/)
 		// partial interface UIEvent {
-		// 		Deprecated in this specification
-		//		undefined initUIEvent(DOMString typeArg, optional boolean bubblesArg = false, optional boolean cancelableArg = false, optional Window? viewArg = null, optional long detailArg = 0);
-				DKDuktape::AttachFunction("CPP_DKUIEventDUK_initUIEvent", 			DKUIEventDUK::initUIEvent);
+		// Deprecated in this specification
+		// undefined initUIEvent(DOMString typeArg, optional boolean bubblesArg = false, optional boolean cancelableArg = false, optional Window? viewArg = null, optional long detailArg = 0);
+		DKDuktape::AttachFunction("CPP_DKUIEventDUK_initUIEvent", 			DKUIEventDUK::initUIEvent);
+		
 		//	};
 	
 		// Source: UI Events (https://www.w3.org/TR/uievents/)
 		// partial interface UIEvent {
-		//		The following support legacy user agents
-		//		readonly attribute unsigned long which;
-				DKDuktape::AttachFunction("CPP_DKUIEventDUK_which", 				DKUIEventDUK::which);
+		// The following support legacy user agents
+		// readonly attribute unsigned long which;
+		DKDuktape::AttachFunction("CPP_DKUIEventDUK_which", 				DKUIEventDUK::which);
+		
 		// };
 	
 	
@@ -98,9 +101,14 @@ public:
 	// readonly attribute Window? view;
 	static int view(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if (duk_is_string(ctx, 1))
-			uiEvent(ctx)->view(*(DKWindow*)addressToPointer(duk_to_string(ctx, 1)));
-		dukglue_push(ctx, pointerToAddress(&uiEvent(ctx)->view()));
+		if(duk_is_valid_index(ctx, 1)){
+			DKString interfaceAddress = GetString(ctx);
+			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+			DKString windowAddress = interface->address["Window"];
+			DKWindow* window = (DKWindow*)addressToPointer(windowAddress);
+			uiEvent(ctx)->view(window);
+		}
+		dukglue_push(ctx, uiEvent(ctx)->view()->interfaceAddress);
 		return true;
 	}
 	

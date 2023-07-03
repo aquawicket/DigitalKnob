@@ -99,11 +99,9 @@ public:
 		// How to persist Duktape/C arguments across calls
 		// https://wiki.duktape.org/howtonativepersistentreferences#:~:text=When%20a%20Duktape%2FC%20function,safely%20work%20with%20the%20arguments.
 		DKString cb = eventTargetAddress+"_"+type+"_callback";
-		//DKINFO("DKEventTargetDUK::addEventListener() -> "+cb+" \n")
 		duk_dup(ctx, 2);
 		duk_put_global_string(ctx, cb.c_str());
 		
-		//DKEventTarget* eventTarget = (DKEventTarget*)addressToPointer(eventTargetAddress);
 		eventTarget->addEventListener(type, &DKEventTargetDUK::onevent);
 		
 		return true;
@@ -119,7 +117,6 @@ public:
 		
 		DKString type = duk_require_string(ctx, 1);
 		duk_require_function(ctx, 2);
-		//DKINFO("DKEventTargetDUK::removeEventListener("+eventTargetAddress+", "+type+", callback)\n");
 		
 		// remove the js callback function
 		// How to persist Duktape/C arguments across calls
@@ -128,7 +125,6 @@ public:
 		duk_push_null(ctx);
 		duk_put_global_string(ctx, cb.c_str());
 		
-		//DKEventTarget* eventTarget = (DKEventTarget*)addressToPointer(eventTargetAddress);
 		eventTarget->removeEventListener(type, &DKEventTargetDUK::onevent);
 
 		return true;

@@ -397,8 +397,11 @@ public:
 	
 	
 	static DKWindow* eventTarget(duk_context* ctx){
-		DKString eventTargetAddress = duk_require_string(ctx, 0);
-		return (DKWindow*)addressToPointer(eventTargetAddress);
+		DKString interfaceAddress = duk_require_string(ctx, 0);
+		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+		DKString windowAddress = interface->address["Window"];
+		DKWindow* _window = (DKWindow*)addressToPointer(windowAddress);
+		return _window;
 	}
 	static bool GetBool(duk_context* ctx){
 		if (duk_is_boolean(ctx, 1))
@@ -440,8 +443,13 @@ public:
 	// [LegacyUnforgeable] readonly attribute WindowProxy window;
 	static int window(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->window((DKWindowProxy*)addressToPointer(GetString(ctx)));
+		if(duk_is_valid_index(ctx, 1)){
+			DKString interfaceAddress = GetString(ctx);
+			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+			DKString windowAddress = interface->address["Window"];
+			DKWindow* window = (DKWindow*)addressToPointer(windowAddress);
+			eventTarget(ctx)->window(window);
+		}
 		dukglue_push(ctx, eventTarget(ctx)->window()->interfaceAddress);
 		return true;
 	}
@@ -449,8 +457,13 @@ public:
 	// [Replaceable] readonly attribute WindowProxy self;
 	static int self(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->self((DKWindowProxy*)addressToPointer(GetString(ctx)));
+		if(duk_is_valid_index(ctx, 1)){
+			DKString interfaceAddress = GetString(ctx);
+			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+			DKString windowAddress = interface->address["Window"];
+			DKWindow* window = (DKWindow*)addressToPointer(windowAddress);
+			eventTarget(ctx)->self(window);
+		}
 		dukglue_push(ctx, eventTarget(ctx)->self()->interfaceAddress);
 		return true;
 	}
@@ -458,8 +471,13 @@ public:
 	// [LegacyUnforgeable] readonly attribute Document document;
 	static int document(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->document((DKDocument*)addressToPointer(GetString(ctx)));
+		if(duk_is_valid_index(ctx, 1)){
+			DKString interfaceAddress = GetString(ctx);
+			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+			DKString documentAddress = interface->address["Document"];
+			DKDocument* document = (DKDocument*)addressToPointer(documentAddress);
+			eventTarget(ctx)->document(document);
+		}
 		dukglue_push(ctx, eventTarget(ctx)->document()->interfaceAddress);
 		return true;
 	}
@@ -476,8 +494,13 @@ public:
 	// [PutForwards=href, LegacyUnforgeable] readonly attribute Location location;
 	static int location(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->location((DKLocation*)addressToPointer(GetString(ctx)));
+		if(duk_is_valid_index(ctx, 1)){
+			DKString interfaceAddress = GetString(ctx);
+			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+			DKString locationAddress = interface->address["Location"];
+			DKLocation* location = (DKLocation*)addressToPointer(locationAddress);
+			eventTarget(ctx)->location(location);
+		}
 		dukglue_push(ctx, eventTarget(ctx)->location()->interfaceAddress);
 		return true;
 	}
@@ -604,8 +627,13 @@ public:
 	// [Replaceable] readonly attribute WindowProxy frames;
 	static int frames(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->frames((DKWindowProxy*)addressToPointer(GetString(ctx)));
+		if(duk_is_valid_index(ctx, 1)){
+			DKString interfaceAddress = GetString(ctx);
+			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+			DKString windowAddress = interface->address["Window"];
+			DKWindow* window = (DKWindow*)addressToPointer(windowAddress);
+			eventTarget(ctx)->frames(window);
+		}
 		dukglue_push(ctx, eventTarget(ctx)->frames()->interfaceAddress);
 		return true;
 	}
@@ -622,8 +650,13 @@ public:
 	// [LegacyUnforgeable] readonly attribute WindowProxy? top;
 	static int top(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->top((DKWindowProxy*)addressToPointer(GetString(ctx)));
+		if(duk_is_valid_index(ctx, 1)){
+			DKString interfaceAddress = GetString(ctx);
+			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+			DKString windowAddress = interface->address["Window"];
+			DKWindow* window = (DKWindow*)addressToPointer(windowAddress);
+			eventTarget(ctx)->top(window);
+		}
 		dukglue_push(ctx, eventTarget(ctx)->top()->interfaceAddress);
 		return true;
 	}
@@ -640,8 +673,13 @@ public:
 	// [Replaceable] readonly attribute WindowProxy? parent;
 	static int parent(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->parent((DKWindowProxy*)addressToPointer(GetString(ctx)));
+		if(duk_is_valid_index(ctx, 1)){
+			DKString interfaceAddress = GetString(ctx);
+			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+			DKString windowAddress = interface->address["Window"];
+			DKWindow* window = (DKWindow*)addressToPointer(windowAddress);
+			eventTarget(ctx)->parent(window);
+		}
 		dukglue_push(ctx, eventTarget(ctx)->parent()->interfaceAddress);
 		return true;
 	}
@@ -649,8 +687,13 @@ public:
 	// readonly attribute Element? frameElement;
 	static int frameElement(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->frameElement((DKElement*)addressToPointer(GetString(ctx)));
+		if(duk_is_valid_index(ctx, 1)){
+			DKString interfaceAddress = GetString(ctx);
+			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+			DKString elementAddress = interface->address["Element"];
+			DKElement* element = (DKElement*)addressToPointer(elementAddress);
+			eventTarget(ctx)->frameElement(element);
+		}
 		dukglue_push(ctx, eventTarget(ctx)->frameElement()->interfaceAddress);
 		return true;
 	}
@@ -658,6 +701,7 @@ public:
 	// WindowProxy? open(optional USVString url = "", optional DOMString target = "_blank", optional [LegacyNullToEmptyString] DOMString features = "");
 	static int open(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		//dukglue_push(ctx, eventTarget(ctx)->open(url, target, features)->interfaceAddress);
 		return DKTODO();
 	}
 	
@@ -670,8 +714,13 @@ public:
 	// readonly attribute Navigator navigator;
 	static int navigator(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->navigator((DKNavigator*)addressToPointer(GetString(ctx)));
+		if(duk_is_valid_index(ctx, 1)){
+			DKString interfaceAddress = GetString(ctx);
+			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+			DKString navigatorAddress = interface->address["Navigator"];
+			DKNavigator* navigator = (DKNavigator*)addressToPointer(navigatorAddress);
+			eventTarget(ctx)->navigator(navigator);
+		}
 		dukglue_push(ctx, eventTarget(ctx)->navigator()->interfaceAddress);
 		return true;
 	}
@@ -679,8 +728,13 @@ public:
 	// readonly attribute Navigator clientInformation; // legacy alias of .navigator
 	static int clientInformation(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if(duk_is_valid_index(ctx, 1))
-			eventTarget(ctx)->clientInformation((DKNavigator*)addressToPointer(GetString(ctx)));
+		if(duk_is_valid_index(ctx, 1)){
+			DKString interfaceAddress = GetString(ctx);
+			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+			DKString navigatorAddress = interface->address["Navigator"];
+			DKNavigator* navigator = (DKNavigator*)addressToPointer(navigatorAddress);
+			eventTarget(ctx)->clientInformation(navigator);
+		}
 		dukglue_push(ctx, eventTarget(ctx)->clientInformation()->interfaceAddress);
 		return true;
 	}
@@ -755,8 +809,13 @@ public:
 	//		[Replaceable] readonly attribute (Event or undefined) event; // legacy
 			static int event(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				if(duk_is_valid_index(ctx, 1))
-					eventTarget(ctx)->event((DKEvent*)addressToPointer(GetString(ctx)));
+				if(duk_is_valid_index(ctx, 1)){
+					DKString interfaceAddress = GetString(ctx);
+					DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+					DKString eventAddress = interface->address["Event"];
+					DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
+					eventTarget(ctx)->event(event);
+				}
 				dukglue_push(ctx, eventTarget(ctx)->event()->interfaceAddress);
 				return true;
 			}
