@@ -389,23 +389,23 @@ void DKConsoleWindow::FocusEventProc(FOCUS_EVENT_RECORD fer) {
     if (!fer.bSetFocus) {
         //1. blur: sent after element A loses focus.
 		DKFocusEvent blur_event("blur", "");
-		blur_event.relatedTarget(*this);
+		blur_event.relatedTarget(this);
 		dispatchEvent(&blur_event);
 
         //2. focusout: sent after the blur event.
         DKFocusEvent focusout_event("focusout", "");
-		focusout_event.relatedTarget(*this);
+		focusout_event.relatedTarget(this);
 		dispatchEvent(&focusout_event);
     }
     else {
         //3. focus: sent after element B receives focus.
         DKFocusEvent focus_event("focus", "");
-		focus_event.relatedTarget(*this);
+		focus_event.relatedTarget(this);
 		dispatchEvent(&focus_event);
 
         //4. focusin: sent after the focus event.
         DKFocusEvent focusin_event("focusin", "");
-		focusin_event.relatedTarget(*this);
+		focusin_event.relatedTarget(this);
 		dispatchEvent(&focusin_event);
     }
 }

@@ -569,13 +569,12 @@ int DKSdlWindow::EventFilter(void* userdata, SDL_Event* event) {
 				
                 //1. blur: sent after element A loses focus.
 				DKFocusEvent blur_event("blur", "");
-				//blur_event.relatedTarget(dkSdlWindow->interfaceAddress);
-				blur_event.relatedTarget(*dkSdlWindow);
+				blur_event.relatedTarget(dkSdlWindow);
 				dkSdlWindow->dispatchEvent(&blur_event);
 
 				//2. focusout: sent after the blur event.
 				DKFocusEvent focusout_event("focusout", "");
-				focusout_event.relatedTarget(*dkSdlWindow);
+				focusout_event.relatedTarget(dkSdlWindow);
 				dkSdlWindow->dispatchEvent(&focusout_event);
                 return 1;
             }
@@ -588,12 +587,12 @@ int DKSdlWindow::EventFilter(void* userdata, SDL_Event* event) {
                
 				//3. focus: sent after element B receives focus.
 				DKFocusEvent focus_event("focus", "");
-				focus_event.relatedTarget(*dkSdlWindow);
+				focus_event.relatedTarget(dkSdlWindow);
 				dkSdlWindow->dispatchEvent(&focus_event);
 
 				//4. focusin: sent after the focus event.
 				DKFocusEvent focusin_event("focusin", "");
-				focusin_event.relatedTarget(*dkSdlWindow);
+				focusin_event.relatedTarget(dkSdlWindow);
 				dkSdlWindow->dispatchEvent(&focusin_event);
 		
                 return 1;

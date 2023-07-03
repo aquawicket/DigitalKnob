@@ -54,9 +54,14 @@ public:
 	// readonly attribute EventTarget? relatedTarget;
 	static int relatedTarget(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if (duk_is_string(ctx, 1))
-			focusEvent(ctx)->relatedTarget(*(DKEventTarget*)addressToPointer(duk_to_string(ctx, 1)));
-		dukglue_push(ctx, pointerToAddress(&focusEvent(ctx)->relatedTarget()));
+		if(duk_is_valid_index(ctx, 1)){
+			DKString interfaceAddress = duk_require_string(ctx, 1);
+			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+			DKString eventTargetAddress = interface->address["EventTarget"];
+			DKEventTarget* eventTarget = (DKEventTarget*)addressToPointer(eventTargetAddress);
+			focusEvent(ctx)->relatedTarget(eventTarget);
+		}
+		dukglue_push(ctx, focusEvent(ctx)->relatedTarget()->interfaceAddress);
 		return true;
 	}
 	
