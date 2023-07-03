@@ -9,9 +9,9 @@ var DragEvent = function DragEvent(type, eventInitDict, address) {
 	//console.log("DragEvent("+type+","+eventInitDict+","+address+")")
 	
 	if(address)
-		this.address = address
+		this.address = address;
 	if(!this.address)
-		this.address = CPP_DKDragEventDUK_constructor(type, eventInitDict)
+		this.address = CPP_DKDragEventDUK_constructor(type, eventInitDict);
 	
 	
 	// readonly attribute DataTransfer? dataTransfer;
@@ -28,8 +28,8 @@ var DragEvent = function DragEvent(type, eventInitDict, address) {
 		this.toString = function(){ return "[object DragEvent]" }
 		
 	
-	var event = MouseEvent.call(this, type, eventInitDict)
-	// Make properties (Read Only) after assignment
-	return event
+	var event = MouseEvent.call(this, type, eventInitDict);
+
+	return event;
 };
 DragEvent.prototype = MouseEvent.prototype;

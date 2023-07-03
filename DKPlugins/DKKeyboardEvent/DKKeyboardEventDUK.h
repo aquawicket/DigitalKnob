@@ -68,9 +68,9 @@ public:
 		
 		// Source: UI Events (https://www.w3.org/TR/uievents/)
 		// partial interface KeyboardEvent {
-		//		// Originally introduced (and deprecated) in this specification
-		//		undefined initKeyboardEvent(DOMString typeArg,
-		// 		optional boolean bubblesArg = false,
+		// // Originally introduced (and deprecated) in this specification
+		// undefined initKeyboardEvent(DOMString typeArg,
+		//		optional boolean bubblesArg = false,
 		// 		optional boolean cancelableArg = false,
 		//		optional Window? viewArg = null,
 		//		optional DOMString keyArg = "",
@@ -79,17 +79,19 @@ public:
 		//		optional boolean altKey = false,
 		//		optional boolean shiftKey = false,
 		//		optional boolean metaKey = false);
-				DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_initKeyboardEvent",	DKKeyboardEventDUK::initKeyboardEvent);
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_initKeyboardEvent",			DKKeyboardEventDUK::initKeyboardEvent);
+		
 		// };
 	
 		// Source: UI Events (https://www.w3.org/TR/uievents/)
 		// partial interface KeyboardEvent {
-		//		// The following support legacy user agents
-		//		readonly attribute unsigned long charCode;
-				DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_charCode",			DKKeyboardEventDUK::charCode);
-		//
-		//		readonly attribute unsigned long keyCode;
-				DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_keyCode",				DKKeyboardEventDUK::keyCode);
+		// // The following support legacy user agents
+		// readonly attribute unsigned long charCode;
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_charCode",					DKKeyboardEventDUK::charCode);
+		
+		// readonly attribute unsigned long keyCode;
+		DKDuktape::AttachFunction("CPP_DKKeyboardEventDUK_keyCode",						DKKeyboardEventDUK::keyCode);
+		
 		// };
 	
 

@@ -8,12 +8,12 @@
 // interface CompositionEvent : UIEvent {
 // constructor(DOMString type, optional CompositionEventInit eventInitDict = {});
 var CompositionEvent = function CompositionEvent(type, options, address) {
-	//console.log("CompositionEvent("+type+","+options+","+address+")")
+	console.log("CompositionEvent("+type+","+options+","+address+")")
 	
 	if(address)
-		this.address = address
+		this.address = address;
 	if(!this.address)
-		this.address = CPP_DKCompositionEventDUK_constructor(type, options)
+		this.address = CPP_DKCompositionEventDUK_constructor(type, options);
 	
 
 	// readonly attribute DOMString data;
@@ -25,15 +25,16 @@ var CompositionEvent = function CompositionEvent(type, options, address) {
 	
 	// Source: UI Events (https://www.w3.org/TR/uievents/)
 	// partial interface CompositionEvent {
-	//		// Originally introduced (and deprecated) in this specification
+	// // Originally introduced (and deprecated) in this specification
 	//		undefined initCompositionEvent(DOMString typeArg,
 	//		optional boolean bubblesArg = false,
 	//		optional boolean cancelableArg = false,
 	//		optional WindowProxy? viewArg = null,
 	//		optional DOMString dataArg = "");
-			CompositionEvent.prototype.initCompositionEvent = function initCompositionEvent() {
-				CPP_DKCompositionEventDUK_initCompositionEvent(this.address)
-			}
+	CompositionEvent.prototype.initCompositionEvent = function initCompositionEvent() {
+		CPP_DKCompositionEventDUK_initCompositionEvent(this.address)
+	}
+	
 	// };
 		
 
@@ -42,11 +43,11 @@ var CompositionEvent = function CompositionEvent(type, options, address) {
 		this.toString = function(){ return "[object CompositionEvent]" }
 	
 	
-	var event = UIEvent.call(this, type, options)
+	var event = UIEvent.call(this, type, options);
 	
 	// Make properties (Read Only) after assignment
-	Object.defineProperty(this, "data", { set: undefined })
+	Object.defineProperty(this, "data", { set: undefined });
 	
-	return event
+	return event;
 };
 CompositionEvent.prototype = UIEvent.prototype;

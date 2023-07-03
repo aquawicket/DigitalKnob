@@ -45,23 +45,23 @@ CPP_DK_Create("TEST_MouseEvent.js");
 
 // [WheelEvent]
 CPP_DK_Create("DKWheelEventDUK");
-//CPP_DK_Create("TEST_WheelEvent.js");
+CPP_DK_Create("TEST_WheelEvent.js");
 
 // [InputEvent]
 CPP_DK_Create("DKInputEventDUK");
-//CPP_DK_Create("TEST_InputEvent.js");
+CPP_DK_Create("TEST_InputEvent.js");
 
 // [KeyboardEvent]
 CPP_DK_Create("DKKeyboardEventDUK");
-//CPP_DK_Create("TEST_KeyboardEvent.js");
+CPP_DK_Create("TEST_KeyboardEvent.js");
 
 // [CompositionEvent]
 CPP_DK_Create("DKCompositionEventDUK");
-//CPP_DK_Create("TEST_CompositionEvent.js");
+CPP_DK_Create("TEST_CompositionEvent.js");
 
 // [DragEvent]
 CPP_DK_Create("DKDragEventDUK");
-//CPP_DK_Create("TEST_DragEvent.js");
+CPP_DK_Create("TEST_DragEvent.js");
 
 // [Navigator]
 //CPP_DK_Create("DKNavigatorDUK");

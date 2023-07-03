@@ -72,18 +72,19 @@ public:
 	}
 	
 	// Source: UI Events (https://www.w3.org/TR/uievents/)
-		// partial interface CompositionEvent {
-		//		// Originally introduced (and deprecated) in this specification
-		//		undefined initCompositionEvent(DOMString typeArg,
-		//		optional boolean bubblesArg = false,
-		//		optional boolean cancelableArg = false,
-		//		optional WindowProxy? viewArg = null,
-		//		optional DOMString dataArg = "");
-				static int initCompositionEvent(duk_context* ctx){
-					DKDEBUGFUNC(ctx);
-					return DKTODO();
-				}
-		// };
+	// partial interface CompositionEvent {
+	// // Originally introduced (and deprecated) in this specification
+	// undefined initCompositionEvent(DOMString typeArg,
+	//		optional boolean bubblesArg = false,
+	//		optional boolean cancelableArg = false,
+	//		optional WindowProxy? viewArg = null,
+	//		optional DOMString dataArg = "");
+	static int initCompositionEvent(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		return DKTODO();
+	}
+	
+	// };
 };
 REGISTER_OBJECT(DKCompositionEventDUK, true)
 

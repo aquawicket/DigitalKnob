@@ -9,9 +9,9 @@ var KeyboardEvent = function KeyboardEvent(type, options, address) {
 	//console.log("KeyboardEvent("+type+","+options+","+address+")")
 	
 	if(address)
-		this.address = address
+		this.address = address;
 	if(!this.address)
-		this.address = CPP_DKKeyboardEventDUK_constructor(type, options)
+		this.address = CPP_DKKeyboardEventDUK_constructor(type, options);
 	
 	// KeyLocationCode
 	// const unsigned long DOM_KEY_LOCATION_STANDARD = 0x00;
@@ -124,7 +124,7 @@ var KeyboardEvent = function KeyboardEvent(type, options, address) {
 	//		optional boolean shiftKey = false,
 	//		optional boolean metaKey = false);
 			KeyboardEvent.prototype.initKeyboardEvent = function initKeyboardEvent() {
-				CPP_DKKeyboardEventDUK_initKeyboardEvent(this.address)
+				CPP_DKKeyboardEventDUK_initKeyboardEvent(this.address);
 			}
 	// };
 	
@@ -150,19 +150,19 @@ var KeyboardEvent = function KeyboardEvent(type, options, address) {
 	if(this.toString() === "[object Object]")
 		this.toString = function(){ return "[object KeyboardEvent]" }
 	
-	var event = UIEvent.call(this, type, options)
+	var event = UIEvent.call(this, type, options);
 	
 	// Make properties (Read Only) after assignment
-	Object.defineProperty(this, "altKey", 		{ set: undefined })
-	Object.defineProperty(this, "code", 		{ set: undefined })
-	Object.defineProperty(this, "ctrlKey", 		{ set: undefined })
-	Object.defineProperty(this, "isComposing", 	{ set: undefined })
-	Object.defineProperty(this, "key", 			{ set: undefined })
-	Object.defineProperty(this, "location", 	{ set: undefined })
-	Object.defineProperty(this, "metaKey", 		{ set: undefined })
-	Object.defineProperty(this, "repeat", 		{ set: undefined })
-	Object.defineProperty(this, "shiftKey", 	{ set: undefined })
+	Object.defineProperty(this, "altKey", 		{ set: undefined });
+	Object.defineProperty(this, "code", 		{ set: undefined });
+	Object.defineProperty(this, "ctrlKey", 		{ set: undefined });
+	Object.defineProperty(this, "isComposing", 	{ set: undefined });
+	Object.defineProperty(this, "key", 			{ set: undefined });
+	Object.defineProperty(this, "location", 	{ set: undefined });
+	Object.defineProperty(this, "metaKey", 		{ set: undefined });
+	Object.defineProperty(this, "repeat", 		{ set: undefined });
+	Object.defineProperty(this, "shiftKey", 	{ set: undefined });
 
-	return event
+	return event;
 };
 KeyboardEvent.prototype = UIEvent.prototype;
