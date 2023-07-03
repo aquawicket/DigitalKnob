@@ -87,12 +87,8 @@ public:
 	static int addEventListener(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKString interfaceAddress = duk_require_string(ctx, 0);	 
-		// TODO- check if interfaceAddress is Valid
-		
 		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
 		DKString eventTargetAddress = interface->address["EventTarget"];
-		// TODO - check if eventTargetAddress is Valid
-		
 		DKEventTarget* eventTarget = (DKEventTarget*)addressToPointer(eventTargetAddress);
 		
 		DKString type = duk_require_string(ctx, 1);
@@ -146,12 +142,11 @@ public:
 		DKString eventTargetAddress = interface->address["EventTarget"];
 		DKEventTarget* eventTarget = (DKEventTarget*)addressToPointer(eventTargetAddress);
 		
-		DKString eventAddress = duk_require_string(ctx, 1);
-		//DKINFO("DKEventTargetDUK::dispatchEvent("+eventTargetAddress+", "+eventAddress+")\n");
-		
-		// NOTE: LOOK AT THIS,   looking for 2 addresses.   so probobly 2 interfaceAddresses need to be converted. 
-		//DKEventTarget* eventTarget = (DKEventTarget*)addressToPointer(eventTargetAddress);
+		DKString eventInterfaceAddress = duk_require_string(ctx, 1);
+		DKInterface* eventInterface = (DKInterface*)addressToPointer(eventInterfaceAddress);
+		DKString eventAddress = eventInterface->address["Event"];
 		DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
+		
 		eventTarget->dispatchEvent(event);
 		
 		return true;
@@ -159,21 +154,15 @@ public:
 	
 	static void onevent(DKEvent* event) {
 		DKDEBUGFUNC(event);
-		//DKINFO("DKEventTargetDUK::onevent() \n");
 		
 		// get the globally stored js callback function
-		DKString eventAddress = pointerToAddress(event);
-		DKString eventTargetAddress = pointerToAddress(event->target());
+		DKString eventAddress = event->address["Event"];
+		DKString eventTargetAddress = event->target()->address["EventTarget"];
 		DKString cb = eventTargetAddress+"_"+event->type()+"_callback";
 		
 		duk_get_global_string(DKDuktape::ctx, cb.c_str());
 		
 		// create and push the Event(eventAddress) object		
-		//DKString eventObjStr = "var eventObj = new Event('', '', '"+eventAddress+"'); eventObj;";
-		if (event->interfaceName.empty()) {
-			DKERROR("event->interfaceName invalid! \n");
-			return;
-		}
 		DKString eventObjStr = "var eventObj = new "+event->interfaceName+"('', '', '"+eventAddress+"'); eventObj;";
 		DukValue eventObj = dukglue_peval<DukValue>(DKDuktape::ctx, eventObjStr.c_str());
 		dukglue_push(DKDuktape::ctx, eventObj);
