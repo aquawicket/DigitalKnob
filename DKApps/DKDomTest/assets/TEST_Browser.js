@@ -13,15 +13,14 @@ console.log("dkRmlEventListener = "+dkRmlEventListener);
 const location = new DKRmlLocation(dkRmlInterface, dkRmlEventListener)	
 console.log("location = "+location);
 
-//const document = new DKRmlDocument(dkRmlInterface, dkRmlEventListener);
-//console.log("document = "+document);
+const document = new DKRmlDocument(dkRmlInterface, dkRmlEventListener);
+console.log("document = "+document);
 ///////////////////////////////
 
 
-//const url = "DKWebTest/index.html"
-//location.href = url;
+const url = "DKWebTest/index.html"
+location.href = url;
 
-/*
 function onHyperlink(event) {
 	console.log("onHyperlink()");
 	const target = event.target;
@@ -61,4 +60,3 @@ function onLoad(event) {
 }
 document.addEventListener('load', onLoad);
 document.dispatchEvent(new Event('load'));
-*/

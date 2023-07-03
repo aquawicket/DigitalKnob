@@ -29,12 +29,12 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString rmlInterfaceAddress = duk_require_string(ctx, 0);
 		DKInterface* rmlInterface = (DKInterface*)addressToPointer(rmlInterfaceAddress);
-		DKString dkRmlInterfaceAddress = rmlInterface->address["DKRmlInterface"];
+		DKString dkRmlInterfaceAddress = rmlInterface->address["RmlInterface"];
 		DKRmlInterface* dkRmlInterface = (DKRmlInterface*)addressToPointer(dkRmlInterfaceAddress);
 		
 		DKString rmlEventListenerInterfaceAddress = duk_require_string(ctx, 0);
 		DKInterface* rmlEventListenerInterface = (DKInterface*)addressToPointer(rmlEventListenerInterfaceAddress);
-		DKString dkRmlEventListenerAddress = rmlEventListenerInterface->address["DKRmlEventListener"];
+		DKString dkRmlEventListenerAddress = rmlEventListenerInterface->address["RmlEventListener"];
 		DKRmlEventListener* dkRmlEventListener = (DKRmlEventListener*)addressToPointer(dkRmlEventListenerAddress);
 		
 		DKINFO("CPP_DKRmlDocumentDUK_constructor("+dkRmlInterfaceAddress+","+dkRmlEventListenerAddress+")\n");
