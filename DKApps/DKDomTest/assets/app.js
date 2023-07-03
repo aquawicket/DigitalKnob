@@ -85,8 +85,7 @@ CPP_DK_Create("TEST_Node.js");
 //CPP_DK_Create("TEST_NonElementParentNode.js");
 
 // [Document]
-//CPP_DK_Create("DKDocumentDUK");
-//CPP_DK_Create("TEST_Document.js");
+CPP_DK_Create("TEST_Document.js");
 
 // [Element]
 //CPP_DK_Create("DKElementDUK");

@@ -281,9 +281,16 @@ public:
 	// readonly attribute Element? documentElement;
 	static int documentElement(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if(duk_is_valid_index(ctx, 1))
-			document(ctx)->documentElement( (DKElement*)addressToPointer(GetString(ctx)) );	
-		dukglue_push(ctx, pointerToAddress(document(ctx)->documentElement()));
+		if(duk_is_valid_index(ctx, 1)){
+			DKString interfaceAddress = GetString(ctx);
+			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+			DKString elementAddress = interface->address["Element"];
+			DKElement* element = (DKElement*)addressToPointer(elementAddress);
+			document(ctx)->documentElement(element);
+		}
+		
+		if(document(ctx)->documentElement())
+			dukglue_push(ctx, document(ctx)->documentElement()->interfaceAddress);
 		return true;
 	}
 	
@@ -292,7 +299,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString qualifiedName = GetString(ctx);
 		DKHTMLCollection* _getElementsByTagName = document(ctx)->getElementsByTagName(qualifiedName);
-		dukglue_push(ctx, pointerToAddress(_getElementsByTagName));	
+		dukglue_push(ctx, _getElementsByTagName->interfaceAddress);	
 		return true;
 	}
 	
@@ -302,7 +309,7 @@ public:
 		DKString _namespace = GetString(ctx);
 		DKString localName = GetString(ctx, 2);
 		DKHTMLCollection* _getElementsByTagNameNS = document(ctx)->getElementsByTagNameNS(_namespace, localName);
-		dukglue_push(ctx, pointerToAddress(_getElementsByTagNameNS));	
+		dukglue_push(ctx, _getElementsByTagNameNS->interfaceAddress);	
 		return true;
 	}
 	
@@ -311,7 +318,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString classNames = GetString(ctx);
 		DKHTMLCollection* _getElementsByClassName = document(ctx)->getElementsByClassName(classNames);
-		dukglue_push(ctx, pointerToAddress(_getElementsByClassName));	
+		dukglue_push(ctx, _getElementsByClassName->interfaceAddress);	
 		return true;
 	}
 	
@@ -321,7 +328,7 @@ public:
 		DKString localName = GetString(ctx, 1);
 		DKString options = GetString(ctx, 2);
 		DKElement* _createElement = document(ctx)->createElement(localName, options);
-		dukglue_push(ctx, pointerToAddress(_createElement));
+		dukglue_push(ctx, _createElement->interfaceAddress);
 		return true;
 	}
 	
@@ -332,7 +339,7 @@ public:
 		DKString qualifiedName = GetString(ctx, 2);
 		DKString options = GetString(ctx, 3);
 		DKElement* _createElementNS = document(ctx)->createElementNS(_namespace, qualifiedName, options);
-		dukglue_push(ctx, pointerToAddress(_createElementNS));	
+		dukglue_push(ctx, _createElementNS->interfaceAddress);	
 		return true;
 	}
 	
@@ -388,7 +395,7 @@ public:
 		DKNode* node = (DKNode*)addressToPointer(nodeAddress);
 		bool deep = GetBool(ctx, 2);
 		DKNode* importNode = document(ctx)->importNode(node, deep);
-		dukglue_push(ctx, pointerToAddress(importNode));	
+		dukglue_push(ctx, importNode->interfaceAddress);	
 		return true;
 	}
 	
@@ -398,7 +405,7 @@ public:
 		DKString nodeAddress = GetString(ctx, 1);
 		DKNode* node = (DKNode*)addressToPointer(nodeAddress);
 		DKNode* adoptNode = document(ctx)->adoptNode(node);
-		dukglue_push(ctx, pointerToAddress(adoptNode));	
+		dukglue_push(ctx, adoptNode->interfaceAddress);	
 		return true;
 	}
 	
@@ -426,7 +433,7 @@ public:
 		DKDEBUGFUNC(ctx);
 		DKString interface = GetString(ctx, 1);
 		DKEvent* createEvent = document(ctx)->createEvent(interface);
-		dukglue_push(ctx, pointerToAddress(createEvent));	
+		dukglue_push(ctx, createEvent->interfaceAddress);	
 		return true;
 	}
 	
