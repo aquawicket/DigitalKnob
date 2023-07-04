@@ -13,6 +13,13 @@
 class DKNonElementParentNode //: public DKMixin
 {
 public:
+	DKNonElementParentNode() //: DKMixin()
+		DKDEBUGFUNC();
+		interfaceName = "NonElementParentNode";
+		address[interfaceName] = pointerToAddress(this);
+		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
+	}
+	
 	// Element? getElementById(DOMString elementId);
 	DKElement* _getElementById = NULL;
 	virtual const DKElement* getElementById(const DOMString& elementId) {
@@ -21,6 +28,9 @@ public:
 	}
 
 // };
+
+	////// toString //////
+	operator std::string() const { return "[object NonElementParentNode]"; }
 };
 
 #endif // NonElementParentNode_H

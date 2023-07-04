@@ -9,7 +9,11 @@ var NonElementParentNode = function NonElementParentNode(address) {
 		this.address = address;
 	if(!this.address)
 		this.address = CPP_NonElementParentNodeDUK_constructor();
-		
+	
+	// Element? getElementById(DOMString elementId);	
+	NonElementParentNode.prototype.getElementById = function getElementById(elementId) {
+		return new Element(CPP_DKNonElementParentNodeDUK_getElementById(this.address, elementId));
+    }
 	
 	////// toString //////
 	if(this.toString() === "[object Object]")
@@ -18,3 +22,4 @@ var NonElementParentNode = function NonElementParentNode(address) {
 	return this;
 }
 
+Object.assign(Document.prototype, NonElementParentNode.prototype);
