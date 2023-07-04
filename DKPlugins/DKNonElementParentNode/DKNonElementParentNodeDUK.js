@@ -12,6 +12,7 @@ var NonElementParentNode = function NonElementParentNode(address) {
 	
 	// Element? getElementById(DOMString elementId);	
 	NonElementParentNode.prototype.getElementById = function getElementById(elementId) {
+		console.log("NonElementParentNode.prototype.getElementById("+elementId+")");
 		return new Element(CPP_DKNonElementParentNodeDUK_getElementById(this.address, elementId));
     }
 	
@@ -22,4 +23,5 @@ var NonElementParentNode = function NonElementParentNode(address) {
 	return this;
 }
 
-Object.assign(Document.prototype, NonElementParentNode.prototype);
+//Object.assign(Document.prototype, NonElementParentNode.prototype);
+Object.assign(Document.prototype, NonElementParentNode);

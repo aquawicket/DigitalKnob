@@ -10,10 +10,11 @@
 
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // interface mixin NonElementParentNode {
-class DKNonElementParentNode //: public DKMixin
+class DKNonElementParentNode : virtual public DKInterface //: public DKMixin
 {
 public:
-	DKNonElementParentNode() //: DKMixin()
+	DKNonElementParentNode() : DKInterface() //: DKMixin()
+	{
 		DKDEBUGFUNC();
 		interfaceName = "NonElementParentNode";
 		address[interfaceName] = pointerToAddress(this);
@@ -27,10 +28,10 @@ public:
 		return _getElementById;
 	}
 
-// };
+	// };
 
 	////// toString //////
 	operator std::string() const { return "[object NonElementParentNode]"; }
 };
 
-#endif // NonElementParentNode_H
+#endif // DKNonElementParentNode_H
