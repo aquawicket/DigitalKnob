@@ -5,24 +5,24 @@
 #define DKDocument_H
 
 #include "DKNode/DKNode.h"
-//#include "DKNonElementParentNode/DKNonElementParentNode.h"	// mixin
+#include "DKNonElementParentNode/DKNonElementParentNode.h"	// mixin
 #include "DKHTMLCollection/DKHTMLCollection.h"
 
 
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // [Exposed=Window]
 // interface Document : Node {
-class DKDocument : virtual public DKNode//, public DKNonElementParentNode
+class DKDocument : virtual public DKNode, virtual public DKNonElementParentNode
 {
 public:
 	// constructor();
-	DKDocument() : DKNode() { // https://dom.spec.whatwg.org/#dom-document-document
+	DKDocument() : DKNode(), DKNonElementParentNode()
+	{
 		DKDEBUGFUNC();
 		interfaceName = "Document";
 		address[interfaceName] = pointerToAddress(this);
 		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 	}
-	//virtual ~DKDocument(){}
 	
 	// [SameObject] readonly attribute DOMImplementation implementation;
 	DKString _implementation = "";

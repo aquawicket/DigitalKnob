@@ -23,7 +23,7 @@ public:
 	
 	// Element? getElementById(DOMString elementId);
 	DKElement* _getElementById = NULL;
-	virtual const DKElement* getElementById(const DOMString& elementId) {
+	virtual DKElement* getElementById(const DOMString& elementId) {
 		DKDEBUGFUNC(elementId);
 		DKINFO("DKNonElementParentNode::getElementById("+elementId+")\n");
 		return _getElementById;

@@ -11,7 +11,7 @@
 
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // interface mixin NonElementParentNode {
-class DKRmlNonElementParentNode : public DKNonElementParentNode
+class DKRmlNonElementParentNode : virtual public DKNonElementParentNode
 {
 public:
 	DKRmlInterface* _dkRmlInterface;
