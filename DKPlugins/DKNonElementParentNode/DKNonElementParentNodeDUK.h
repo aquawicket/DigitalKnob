@@ -18,7 +18,6 @@ public:
 		// Element? getElementById(DOMString elementId);
 		DKDuktape::AttachFunction("CPP_DKNonElementParentNodeDUK_getElementById", 	DKNonElementParentNodeDUK::getElementById);
 		
-		
 		DKClass::DKCreate("DKNonElementParentNode/DKNonElementParentNodeDUK.js");
 		
 		return true;
