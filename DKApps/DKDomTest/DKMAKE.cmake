@@ -41,7 +41,7 @@ dk_depend(DKHTMLImageElement)
 ###### DigitalKnob Interfaces ######
 dk_depend(DKConsoleWindow)
 dk_depend(DKSdlWindow)
-dk_depend(DKSdlRmlDocument)				# Mixin
+dk_depend(DKSdlRmlDocument)
 
 dk_depend(DKRmlInterface)
 dk_depend(DKRmlEventListener)
@@ -51,6 +51,7 @@ dk_depend(DKRmlCSSStyleDeclaration)
 dk_depend(DKRmlNode)
 dk_depend(DKRmlElementCSSInlineStyle)	# Mixin
 dk_depend(DKRmlElement)
+dk_depend(DKRmlNonElementParentNode)	# Mixin
 dk_depend(DKRmlDocument)
 dk_depend(DKRmlHTMLElement)
 dk_depend(DKWebTest)
