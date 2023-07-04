@@ -24,7 +24,7 @@ public:
 	}
 	
 	//FIXME: since this is a mixin, we need to know which base class called
-	static DKElement* innerHTML(duk_context* ctx){		
+	static DKElement* element(duk_context* ctx){		
 		DKString interfaceAddress = duk_require_string(ctx, 0);
 		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
 		DKString elementAddress = interface->address["Element"];			
@@ -38,9 +38,9 @@ public:
 		
 		DKString interfaceAddress = duk_require_string(ctx, 0);
 		//DOMString innerHTML = duk_require_string(ctx, 1);
-		//DKINFO("DKinnerHTMLDUK::innerHTML("+interfaceAddress+", "+innerHTML+")\n");
+		DKINFO("DKinnerHTMLDUK::innerHTML("+interfaceAddress+")\n");
 		
-		//dukglue_push(ctx, innerHTML(ctx)->innerHTML(innerHTML)->interfaceAddress);	
+		//dukglue_push(ctx, element(ctx)->innerHTML(innerHTML)->interfaceAddress);	
 		return true;
 	}
 };

@@ -30,6 +30,7 @@ dk_depend(DKURL)
 dk_depend(DKLocation)
 dk_depend(DKCSSStyleDeclaration)
 dk_depend(DKNode)
+dk_depend(DKinnerHTML)					# Mixin
 dk_depend(DKElement)
 dk_depend(DKHTMLCollection)
 dk_depend(DKElementCSSInlineStyle)		# Mixin
