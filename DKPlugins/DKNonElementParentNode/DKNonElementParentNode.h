@@ -18,6 +18,7 @@ public:
 		DKDEBUGFUNC();
 		interfaceName = "NonElementParentNode";
 		address[interfaceName] = pointerToAddress(this);
+		//address[interfaceName] = address["Document"];
 		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 	}
 	

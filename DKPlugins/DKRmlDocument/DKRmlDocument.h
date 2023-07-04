@@ -15,7 +15,7 @@ class DKHTMLCollection;
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // [Exposed=Window]
 // interface Document : Node {
-class DKRmlDocument : virtual public DKDocument, /*public DKRmlNode,*/ public DKRmlNonElementParentNode
+class DKRmlDocument : public DKRmlNonElementParentNode, virtual public DKDocument /*public DKRmlNode,*/ 
 {
 public:
 	static std::vector<DKRmlDocument*> list;
@@ -31,7 +31,8 @@ public:
 	DKRmlEventListener* _dkRmlEventListener;
 	
 	// constructor();
-	DKRmlDocument(DKRmlInterface* dkRmlInterface, DKRmlEventListener* dkRmlEventListener) : DKDocument(), /*DKRmlNode(_dkRmlEventListener, NULL),*/ DKRmlNonElementParentNode(dkRmlInterface, dkRmlEventListener) {
+	DKRmlDocument(DKRmlInterface* dkRmlInterface, DKRmlEventListener* dkRmlEventListener) : DKRmlNonElementParentNode(dkRmlInterface, dkRmlEventListener), DKDocument() /*DKRmlNode(_dkRmlEventListener, NULL),*/ 
+	{
 		DKDEBUGFUNC();
 		interfaceName = "RmlDocument";
 		address[interfaceName] = pointerToAddress(this);

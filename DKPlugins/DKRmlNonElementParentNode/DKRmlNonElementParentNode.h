@@ -20,6 +20,11 @@ public:
 	// constructor();
 	DKRmlNonElementParentNode(DKRmlInterface* dkRmlInterface, DKRmlEventListener* dkRmlEventListener) : DKNonElementParentNode() {
 		DKDEBUGFUNC();
+
+		interfaceName = "RmlNonElementParentNode";
+		address[interfaceName] = pointerToAddress(this);
+		DKINFO("DK" + interfaceName + "(" + interfaceAddress + "," + address[interfaceName] + ") \n");
+
 		_dkRmlInterface = dkRmlInterface;
 		if(!_dkRmlInterface)
 			DKERROR("_dkRmlInterface invalid! \n");
