@@ -3,7 +3,7 @@
 // Source: DOM Parsing and Serialization (https://www.w3.org/TR/DOM-Parsing/)
 // interface mixin InnerHTML {
 var innerHTML = function innerHTML() {
-	//console.log("innerHTML")
+	console.log("innerHTML()")
 	
 	// [CEReactions] attribute [LegacyNullToEmptyString] DOMString innerHTML;
 	/*
