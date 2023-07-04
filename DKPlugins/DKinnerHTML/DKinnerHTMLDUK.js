@@ -1,4 +1,5 @@
 // [IDL] https://www.w3.org/TR/DOM-Parsing/#widl-Element-innerHTML
+console.log("DKInnerHTMLDUK.js")
 
 // Source: DOM Parsing and Serialization (https://www.w3.org/TR/DOM-Parsing/)
 // interface mixin InnerHTML {
