@@ -2,7 +2,7 @@
 
 // Source: DOM Parsing and Serialization (https://www.w3.org/TR/DOM-Parsing/)
 // interface mixin InnerHTML {
-var innerHTML = {
+var innerHTML = function innerHTML() {
 	//console.log("innerHTML")
 	
 	// [CEReactions] attribute [LegacyNullToEmptyString] DOMString innerHTML;
@@ -14,9 +14,15 @@ var innerHTML = {
 	*/
 	
 	Object.defineProperty(this, "innerHTML", {
-        get: function innerHTML()			{ return CPP_DKinnerHTMLDUK_innerHTML(this.address) },
-		//set: function innerHTML(data)		{ return CPP_DKinnerHTMLDUK_innerHTML(this.address, data) },
-		//configurable: true,
-    })
+        get: function innerHTML()			{ 
+			console.log("innerHTML getter");
+			return CPP_DKinnerHTMLDUK_innerHTML(this.address) 
+		},
+		set: function innerHTML(data)		{
+			console.log("innerHTML setter");
+			return CPP_DKinnerHTMLDUK_innerHTML(this.address, data)			
+		},
+		configurable: true,
+    });
 };
 Object.assign(Element.prototype, innerHTML);
