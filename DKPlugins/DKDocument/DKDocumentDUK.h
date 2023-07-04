@@ -19,6 +19,11 @@ public:
 		
 		// constructor();
 		DKDuktape::AttachFunction("CPP_DKDocumentDUK_constructor", 					DKDocumentDUK::constructor);
+		
+		////// NonElementParentNode //////////////////////////////////////////////////////////////////////////////
+		// Element? getElementById(DOMString elementId);
+		DKDuktape::AttachFunction("CPP_DKDocumentDUK_getElementById", 				DKDocumentDUK::getElementById);
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		// [SameObject] readonly attribute DOMImplementation implementation;
 		DKDuktape::AttachFunction("CPP_DKDocumentDUK_implementation", 				DKDocumentDUK::implementation);
@@ -196,6 +201,20 @@ public:
 		dukglue_push(ctx, _document->interfaceAddress);
 		return true;
 	}
+	
+	////// NonElementParentNode /////////////////////////////////////////////////////////////////
+	// Element? getElementById(DOMString elementId);
+	static int getElementById(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		
+		DKString interfaceAddress = duk_require_string(ctx, 0);
+		DOMString elementId = GetString(ctx, 1);
+		DKINFO("DKDocumentDUK::getElementById("+interfaceAddress+", "+elementId+")\n");
+		
+		dukglue_push(ctx, document(ctx)->getElementById(elementId)->interfaceAddress);	
+		return true;
+	}
+	/////////////////////////////////////////////////////////////////////////////////////////////
 	
 	// [SameObject] readonly attribute DOMImplementation implementation;
 	static int implementation(duk_context* ctx){

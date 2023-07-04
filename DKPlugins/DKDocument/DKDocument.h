@@ -12,17 +12,28 @@
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // [Exposed=Window]
 // interface Document : Node {
-class DKDocument : virtual public DKNode, /*virtual*/ public DKNonElementParentNode
+class DKDocument : virtual public DKNode //, public DKNonElementParentNode
 {
 public:
 	// constructor();
-	DKDocument() : DKNode(), DKNonElementParentNode()
+	DKDocument() : DKNode() //, DKNonElementParentNode()
 	{
 		DKDEBUGFUNC();
 		interfaceName = "Document";
 		address[interfaceName] = pointerToAddress(this);
 		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 	}
+	
+	////// NonElementParentNode ////////////////////////////////////////
+	// Element? getElementById(DOMString elementId);
+	DKElement* _getElementById = NULL;
+	virtual DKElement* getElementById(const DOMString& elementId) {
+		DKDEBUGFUNC(elementId);
+		DKINFO("DKDocument::getElementById("+elementId+")\n");
+		return _getElementById;
+	}
+	////////////////////////////////////////////////////////////////////
+	
 	
 	// [SameObject] readonly attribute DOMImplementation implementation;
 	DKString _implementation = "";

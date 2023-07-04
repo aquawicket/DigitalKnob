@@ -15,7 +15,7 @@ class DKHTMLCollection;
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // [Exposed=Window]
 // interface Document : Node {
-class DKRmlDocument : public DKRmlNonElementParentNode, virtual public DKDocument /*public DKRmlNode,*/ 
+class DKRmlDocument : /*public DKRmlNonElementParentNode,*/ virtual public DKDocument /*public DKRmlNode,*/ 
 {
 public:
 	static std::vector<DKRmlDocument*> list;
@@ -31,7 +31,7 @@ public:
 	DKRmlEventListener* _dkRmlEventListener;
 	
 	// constructor();
-	DKRmlDocument(DKRmlInterface* dkRmlInterface, DKRmlEventListener* dkRmlEventListener) : DKRmlNonElementParentNode(dkRmlInterface, dkRmlEventListener), DKDocument() /*DKRmlNode(_dkRmlEventListener, NULL),*/ 
+	DKRmlDocument(DKRmlInterface* dkRmlInterface, DKRmlEventListener* dkRmlEventListener) : /*DKRmlNonElementParentNode(dkRmlInterface, dkRmlEventListener),*/ DKDocument() /*DKRmlNode(_dkRmlEventListener, NULL),*/ 
 	{
 		DKDEBUGFUNC();
 		interfaceName = "RmlDocument";
@@ -48,6 +48,16 @@ public:
 		
 		list.push_back(this);
 	}
+	
+	////// NonElementParentNode /////////////////////////////////////////////////////////////////
+	// Element? getElementById(DOMString elementId);
+	DKElement* getElementById(const DOMString& elementId) override {
+		DKDEBUGFUNC(elementId);
+		DKINFO("DKRmlDocument::getElementById("+elementId+")\n");
+		Rml::Element* element = _dkRmlInterface->document->GetElementById(elementId.c_str());
+		return (DKElement*)DKRmlElement::instance(_dkRmlEventListener, element);
+	}
+	/////////////////////////////////////////////////////////////////////////////////////////////
 	
 	/*
 	// [SameObject] readonly attribute DOMImplementation implementation;
@@ -228,6 +238,7 @@ public:
 
 // };
   */
+	/*
 	// Source: DOM Standard (https://dom.spec.whatwg.org/)
 	// Document includes NonElementParentNode;
 	DKElement* getElementById(const DOMString& elementId) override {
@@ -235,6 +246,7 @@ public:
 		Rml::Element* element = _dkRmlInterface->document->GetElementById(elementId.c_str());
 		return (DKElement*)DKRmlElement::instance(_dkRmlEventListener, element);
 	}
+	*/
 	
 /*
 	// Source: DOM Standard (https://dom.spec.whatwg.org/)

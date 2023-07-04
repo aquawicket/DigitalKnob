@@ -6,6 +6,7 @@
 #define DKNonElementParentNodeDUK_H
 
 #include "DKDuktape/DKDuktape.h"
+#include "DKDocument/DKDocument.h"
 
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // interface mixin NonElementParentNode {
@@ -24,14 +25,20 @@ public:
 		return true;
 	}
 	
-	static DKNonElementParentNode* nonElementParentNode(duk_context* ctx){
+	static DKDocument* nonElementParentNode(duk_context* ctx){
+		/*
 		DKString interfaceAddress = duk_require_string(ctx, 0);
 		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
 		DKString nonElementParentNodeAddress = interface->address["NonElementParentNode"];
-		if(nonElementParentNodeAddress.empty())
-			DKERROR("nonElementParentNodeAddress.empty()! \n");
 		DKNonElementParentNode* _nonElementParentNode = (DKNonElementParentNode*)addressToPointer(nonElementParentNodeAddress);
 		return _nonElementParentNode;
+		*/
+		
+		DKString interfaceAddress = duk_require_string(ctx, 0);
+		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+		DKString documentAddress = interface->address["Document"];
+		DKDocument* _document = (DKDocument*)addressToPointer(documentAddress);
+		return _document;
 	}
 	static bool GetBool(duk_context* ctx, int index = 1){
 		if (duk_is_boolean(ctx, index))
@@ -65,7 +72,7 @@ public:
 		
 		DKINFO("CPP_DKNonElementParentNodeDUK_constructor()\n");
 		DKNonElementParentNode* _nonElementParentNode = new DKNonElementParentNode();
-		dukglue_push(ctx, _nonElementParentNode->interfaceAddress);
+		//dukglue_push(ctx, _nonElementParentNode->interfaceAddress);
 		return true;
 	}
 	

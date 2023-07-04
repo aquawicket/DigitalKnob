@@ -14,6 +14,14 @@ var Document = function Document(address) {
 	if(!this.address)
 		this.address = CPP_DKDocumentDUK_constructor();
 
+
+	////// NonElementParentNode /////////////////////////////////////////////////////////////////
+	// Element? getElementById(DOMString elementId);
+	Document.prototype.getElementById = function getElementById(elementId) {
+		console.log("Document.prototype.getElementById("+elementId+")");
+		return new Element(CPP_DKDocumentDUK_getElementById(this.address, elementId));
+    }
+	/////////////////////////////////////////////////////////////////////////////////////////////
 	
 	// [SameObject] readonly attribute DOMImplementation implementation;
 	Object.defineProperty(this, "implementation", {

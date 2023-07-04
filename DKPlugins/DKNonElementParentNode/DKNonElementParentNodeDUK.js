@@ -29,7 +29,7 @@ Object.assign(Document.prototype, NonElementParentNode);
 */
 
 
-
+/*
 var NonElementParentNode = {
 	
 	// Element? getElementById(DOMString elementId);
@@ -39,3 +39,4 @@ var NonElementParentNode = {
 	}
 };
 Object.assign(Document.prototype, NonElementParentNode);
+*/

@@ -11,19 +11,20 @@
 
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // interface mixin NonElementParentNode {
-class DKRmlNonElementParentNode : virtual public DKNonElementParentNode
+class DKRmlNonElementParentNode : virtual public DKDocument // public DKNonElementParentNode
 {
 public:
 	DKRmlInterface* _dkRmlInterface;
 	DKRmlEventListener* _dkRmlEventListener;
 	
 	// constructor();
-	DKRmlNonElementParentNode(DKRmlInterface* dkRmlInterface, DKRmlEventListener* dkRmlEventListener) : DKNonElementParentNode() {
+	DKRmlNonElementParentNode(DKRmlInterface* dkRmlInterface, DKRmlEventListener* dkRmlEventListener) : DKDocument() //DKNonElementParentNode() 
+	{
 		DKDEBUGFUNC();
 
-		interfaceName = "RmlNonElementParentNode";
-		address[interfaceName] = pointerToAddress(this);
-		DKINFO("DK" + interfaceName + "(" + interfaceAddress + "," + address[interfaceName] + ") \n");
+		//interfaceName = "RmlNonElementParentNode";
+		//address[interfaceName] = pointerToAddress(this);
+		//DKINFO("DK" + interfaceName + "(" + interfaceAddress + "," + address[interfaceName] + ") \n");
 
 		_dkRmlInterface = dkRmlInterface;
 		if(!_dkRmlInterface)

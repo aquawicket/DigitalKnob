@@ -10,16 +10,15 @@
 
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // interface mixin NonElementParentNode {
-class DKNonElementParentNode : virtual public DKInterface //: public DKMixin
+class DKNonElementParentNode //: virtual public DKInterface //: public DKMixin
 {
 public:
-	DKNonElementParentNode() : DKInterface() //: DKMixin()
+	DKNonElementParentNode() //: DKInterface() //: DKMixin()
 	{
 		DKDEBUGFUNC();
-		interfaceName = "NonElementParentNode";
-		address[interfaceName] = pointerToAddress(this);
-		//address[interfaceName] = address["Document"];
-		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
+		//interfaceName = "NonElementParentNode";
+		//address[interfaceName] = pointerToAddress(this);
+		//DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 	}
 	
 	// Element? getElementById(DOMString elementId);
