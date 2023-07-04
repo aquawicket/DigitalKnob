@@ -66,8 +66,9 @@ public:
 			DKERROR("_rmlElement invalid! \n");
 			return _tagName;
 		}
-		_tagName = _rmlElement->GetTagName();
-		return _tagName;
+		return _rmlElement->GetTagName();
+		//_tagName = _rmlElement->GetTagName();
+		//return _tagName;
 	}				
 	//void tagName(const DOMString& tagName) override			{ _tagName = tagName; } 			// setter
 	
@@ -88,7 +89,6 @@ public:
 			return _classList;
 		}
 		Rml::StringList list = _rmlElement->GetActivePseudoClasses();
-		//_classList = "";
 		_classList.clear();
 		for (unsigned int n = 0; n < list.size(); ++n) {
 			_classList += list[n];

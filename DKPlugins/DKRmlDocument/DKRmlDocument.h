@@ -114,7 +114,6 @@ public:
 		}
 		DKINFO("element_list->size() = "+toString(element_list->size())+"\n");
 		DKHTMLCollection* htmlCollection = new DKHTMLCollection(*element_list);	// FIXME: dangling pointer
-		DKINFO("htmlCollection->length() = "+toString(htmlCollection->length())+"\n");
 		return htmlCollection; 
 	}
 	
@@ -135,8 +134,9 @@ public:
 	DKElement* createElement(const DOMString& localName, const DOMString& options = "{}") override {
 		DKDEBUGFUNC(localName, options);
 		Rml::Element* element = _dkRmlInterface->document->AppendChild(_dkRmlInterface->document->CreateElement(localName.c_str()), false);
-		_createElement = DKRmlElement::instance(_dkRmlEventListener, element);
-		return _createElement;
+		return (DKElement*)DKRmlElement::instance(_dkRmlEventListener, element);
+		//_createElement = DKRmlElement::instance(_dkRmlEventListener, element);
+		//return _createElement;
 	}
 	/*
 	// [CEReactions, NewObject] Element createElementNS(DOMString? namespace, DOMString qualifiedName, optional (DOMString or ElementCreationOptions) options = {});
@@ -229,13 +229,12 @@ public:
   */
 	// Source: DOM Standard (https://dom.spec.whatwg.org/)
 	// Document includes NonElementParentNode;
-	/*
 	DKElement* getElementById(const DOMString& elementId) override {
 		DKDEBUGFUNC(elementId);
 		Rml::Element* element = _dkRmlInterface->document->GetElementById(elementId.c_str());
-		return new DKRmlElement(_dkRmlInterface, element);		// FIXME: danggling pointer
+		return (DKElement*)DKRmlElement::instance(_dkRmlEventListener, element);
 	}
-	*/
+	
 /*
 	// Source: DOM Standard (https://dom.spec.whatwg.org/)
 	// Document includes DocumentOrShadowRoot;

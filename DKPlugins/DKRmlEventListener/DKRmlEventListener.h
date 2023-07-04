@@ -31,7 +31,7 @@ public:
 	
 	
 	////// toString //////
-	operator std::string() const { return "[object DKRmlEventListener]"; }
+	operator std::string() const override { return "[object DKRmlEventListener]"; }
 };
 
 

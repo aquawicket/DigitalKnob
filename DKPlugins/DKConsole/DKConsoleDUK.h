@@ -258,8 +258,8 @@ public:
 	//undefined count(optional DOMString label = "default");
 	static int count(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
-		if(duk_is_string(ctx, 1))
-		//console(ctx)->count(label);
+		//if(duk_is_string(ctx, 1))
+			//console(ctx)->count(label);
 		return DKTODO();
 	}
 	

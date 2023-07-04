@@ -13,7 +13,7 @@ console.log("dkRmlEventListener = "+dkRmlEventListener);
 const location = new DKRmlLocation(dkRmlInterface, dkRmlEventListener)	
 console.log("location = "+location);
 
-const document = new DKRmlDocument(dkRmlInterface, dkRmlEventListener);
+var document = new DKRmlDocument(dkRmlInterface, dkRmlEventListener);
 console.log("document = "+document);
 ///////////////////////////////
 

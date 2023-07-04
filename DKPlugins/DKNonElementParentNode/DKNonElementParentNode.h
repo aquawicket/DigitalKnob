@@ -1,5 +1,4 @@
 // [IDL] https://dom.spec.whatwg.org/#interface-nonelementparentnode
-// [MDN]
 #pragma once
 #ifndef DKNonElementParentNode_H
 #define DKNonElementParentNode_H
@@ -18,7 +17,6 @@ public:
 	DKElement* _getElementById = NULL;
 	virtual const DKElement* getElementById(const DOMString& elementId) {
 		DKDEBUGFUNC(elementId);
-		DKTODO();
 		return _getElementById;
 	}
 

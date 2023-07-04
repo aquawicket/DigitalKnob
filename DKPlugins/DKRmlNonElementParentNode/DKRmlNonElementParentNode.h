@@ -33,7 +33,7 @@ public:
 	DKElement* getElementById(const DOMString& elementId) override {
 		DKDEBUGFUNC(elementId);
 		Rml::Element* element = _dkRmlInterface->document->GetElementById(elementId.c_str());
-		return DKRmlElement::instance(_dkRmlEventListener, element);
+		return (DKElement*)DKRmlElement::instance(_dkRmlEventListener, element);
 	}
 
 // };
