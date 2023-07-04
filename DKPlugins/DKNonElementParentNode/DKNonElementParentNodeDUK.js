@@ -3,7 +3,7 @@
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // interface mixin NonElementParentNode {
 var NonElementParentNode = {
-	//console.log("NonElementParentNode("+this.address+")")
+	//console.log("NonElementParentNode")
 	
 	// Element? getElementById(DOMString elementId);
 	getElementById(elementId){
