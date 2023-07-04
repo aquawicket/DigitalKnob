@@ -1,5 +1,6 @@
 // [IDL] https://dom.spec.whatwg.org/#interface-nonelementparentnode
 
+/*
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // interface mixin NonElementParentNode {
 var NonElementParentNode = function NonElementParentNode(address) {
@@ -24,4 +25,17 @@ var NonElementParentNode = function NonElementParentNode(address) {
 }
 
 //Object.assign(Document.prototype, NonElementParentNode.prototype);
+Object.assign(Document.prototype, NonElementParentNode);
+*/
+
+
+
+var NonElementParentNode = {
+	
+	// Element? getElementById(DOMString elementId);
+	getElementById(elementId){
+		console.log("NonElementParentNode.prototype.getElementById("+elementId+")");
+		return new Element(CPP_DKNonElementParentNodeDUK_getElementById(this.address, elementId));
+	}
+};
 Object.assign(Document.prototype, NonElementParentNode);

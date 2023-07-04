@@ -72,7 +72,10 @@ public:
 	// Element? getElementById(DOMString elementId);
 	static int getElementById(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		
+		DKString interfaceAddress = duk_require_string(ctx, 0);
 		DOMString elementId = GetString(ctx, 1);
+		DKINFO("DKNonElementParentNodeDUK::getElementById("+interfaceAddress+", "+elementId+")\n");
 		
 		dukglue_push(ctx, nonElementParentNode(ctx)->getElementById(elementId)->interfaceAddress);	
 		return true;
