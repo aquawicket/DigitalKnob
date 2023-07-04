@@ -32,6 +32,7 @@ public:
 	// Element? getElementById(DOMString elementId);
 	DKElement* getElementById(const DOMString& elementId) override {
 		DKDEBUGFUNC(elementId);
+		DKINFO("DKRmlNonElementParentNode::getElementById("+elementId+")\n");
 		Rml::Element* element = _dkRmlInterface->document->GetElementById(elementId.c_str());
 		return (DKElement*)DKRmlElement::instance(_dkRmlEventListener, element);
 	}
