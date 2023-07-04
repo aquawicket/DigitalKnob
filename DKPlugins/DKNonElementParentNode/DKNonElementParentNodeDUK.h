@@ -23,10 +23,11 @@ public:
 		return true;
 	}
 	
+	//FIXME: since this is a mixin, we need to know which base class called
 	static DKDocument* nonElementParentNode(duk_context* ctx){		
 		DKString interfaceAddress = duk_require_string(ctx, 0);
 		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
-		DKString documentAddress = interface->address["Document"];			//FIXME: since this is a mixin, we need to know which base class called
+		DKString documentAddress = interface->address["Document"];			
 		DKDocument* _document = (DKDocument*)addressToPointer(documentAddress);
 		return _document;
 	}

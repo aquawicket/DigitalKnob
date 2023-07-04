@@ -5,20 +5,16 @@
 
 #include "DKInterface/DKInterface.h"
 #include "DKElement/DKElement.h"
-//#include "DKMixin/DKMixin.h"
 
 
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // interface mixin NonElementParentNode {
-class DKNonElementParentNode //: virtual public DKInterface //: public DKMixin
+class DKNonElementParentNode
 {
 public:
-	DKNonElementParentNode() //: DKInterface() //: DKMixin()
+	DKNonElementParentNode()
 	{
 		DKDEBUGFUNC();
-		//interfaceName = "NonElementParentNode";
-		//address[interfaceName] = pointerToAddress(this);
-		//DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 	}
 	
 	// Element? getElementById(DOMString elementId);
