@@ -1,49 +1,50 @@
-// [IDL] https://dom.spec.whatwg.org/#interface-nonelementparentnode
+// [IDL] https://www.w3.org/TR/DOM-Parsing/#widl-Element-innerHTML
 #if HAVE_DKDuktape
 
 #pragma once
-#ifndef DKNonElementParentNodeDUK_H
-#define DKNonElementParentNodeDUK_H
+#ifndef DKinnerHTMLDUK_H
+#define DKinnerHTMLDUK_H
 
 #include "DKDuktape/DKDuktape.h"
-#include "DKDocument/DKDocument.h"
+#include "DKElement/DKElement.h"
 
-// Source: DOM Standard (https://dom.spec.whatwg.org/)
-// interface mixin NonElementParentNode {
-class DKNonElementParentNodeDUK : public DKObjectT<DKNonElementParentNodeDUK>
+// Source: DOM Parsing and Serialization (https://www.w3.org/TR/DOM-Parsing/)
+// interface mixin InnerHTML {
+class DKinnerHTMLDUK : public DKObjectT<DKinnerHTMLDUK>
 {
 public:
 	bool Init(){
 		
-		// Element? getElementById(DOMString elementId);
-		DKDuktape::AttachFunction("CPP_DKNonElementParentNodeDUK_getElementById", 	DKNonElementParentNodeDUK::getElementById);
+		// [CEReactions] attribute [LegacyNullToEmptyString] DOMString innerHTML;
+		DKDuktape::AttachFunction("CPP_DKinnerHTMLDUK_innerHTML", 	DKinnerHTMLDUK::innerHTML);
 		
-		DKClass::DKCreate("DKNonElementParentNode/DKNonElementParentNodeDUK.js");
+		DKClass::DKCreate("DKinnerHTML/DKinnerHTMLDUK.js");
 		
 		return true;
 	}
 	
-	static DKDocument* nonElementParentNode(duk_context* ctx){		
+	//FIXME: since this is a mixin, we need to know which base class called
+	static DKElement* innerHTML(duk_context* ctx){		
 		DKString interfaceAddress = duk_require_string(ctx, 0);
 		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
-		DKString documentAddress = interface->address["Document"];			//FIXME: since this is a mixin, we need to know which base class called
-		DKDocument* _document = (DKDocument*)addressToPointer(documentAddress);
-		return _document;
+		DKString elementAddress = interface->address["Element"];			
+		DKElement* _element = (DKElement*)addressToPointer(elementAddress);
+		return _element;
 	}
 	
-	// Element? getElementById(DOMString elementId);
-	static int getElementById(duk_context* ctx){
+	// [CEReactions] attribute [LegacyNullToEmptyString] DOMString innerHTML;
+	static int innerHTML(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		
 		DKString interfaceAddress = duk_require_string(ctx, 0);
-		DOMString elementId = duk_require_string(ctx, 1);
-		DKINFO("DKNonElementParentNodeDUK::getElementById("+interfaceAddress+", "+elementId+")\n");
+		//DOMString innerHTML = duk_require_string(ctx, 1);
+		//DKINFO("DKinnerHTMLDUK::innerHTML("+interfaceAddress+", "+innerHTML+")\n");
 		
-		dukglue_push(ctx, nonElementParentNode(ctx)->getElementById(elementId)->interfaceAddress);	
+		//dukglue_push(ctx, innerHTML(ctx)->innerHTML(innerHTML)->interfaceAddress);	
 		return true;
 	}
 };
-REGISTER_OBJECT(DKNonElementParentNodeDUK, true)
+REGISTER_OBJECT(DKinnerHTMLDUK, true)
 
-#endif //DKNonElementParentNodeDUK_H
+#endif //DKinnerHTMLDUK_H
 #endif //HAVE_DKDuktape

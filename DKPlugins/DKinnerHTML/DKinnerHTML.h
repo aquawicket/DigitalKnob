@@ -1,38 +1,33 @@
-// [IDL] https://dom.spec.whatwg.org/#interface-nonelementparentnode
+// [IDL] https://www.w3.org/TR/DOM-Parsing/#widl-Element-innerHTML
 #pragma once
-#ifndef DKNonElementParentNode_H
-#define DKNonElementParentNode_H
+#ifndef DKinnerHTML_H
+#define DKinnerHTML_H
 
 #include "DKInterface/DKInterface.h"
-#include "DKElement/DKElement.h"
-//#include "DKMixin/DKMixin.h"
 
 
-// Source: DOM Standard (https://dom.spec.whatwg.org/)
-// interface mixin NonElementParentNode {
-class DKNonElementParentNode //: virtual public DKInterface //: public DKMixin
+// Source: DOM Parsing and Serialization (https://www.w3.org/TR/DOM-Parsing/)
+// interface mixin InnerHTML {
+class DKinnerHTML
 {
 public:
-	DKNonElementParentNode() //: DKInterface() //: DKMixin()
+	DKinnerHTML()
 	{
 		DKDEBUGFUNC();
-		//interfaceName = "NonElementParentNode";
-		//address[interfaceName] = pointerToAddress(this);
-		//DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 	}
 	
-	// Element? getElementById(DOMString elementId);
-	DKElement* _getElementById = NULL;
-	virtual DKElement* getElementById(const DOMString& elementId) {
-		DKDEBUGFUNC(elementId);
-		DKINFO("DKNonElementParentNode::getElementById("+elementId+")\n");
-		return _getElementById;
+	// [CEReactions] attribute [LegacyNullToEmptyString] DOMString innerHTML;
+	DOMString _innerHTML = "";
+	virtual const DOMString& innerHTML(const DOMString& innerHTML) {
+		DKDEBUGFUNC(innerHTML);
+		DKINFO("DKinnerHTML::innerHTML("+innerHTML+")\n");
+		return _innerHTML;
 	}
 
 	// };
 
 	////// toString //////
-	operator std::string() const { return "[object NonElementParentNode]"; }
+	operator std::string() const { return "[object innerHTML]"; }
 };
 
-#endif // DKNonElementParentNode_H
+#endif // DKinnerHTML_H

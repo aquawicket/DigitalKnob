@@ -1,14 +1,14 @@
-// [IDL] https://dom.spec.whatwg.org/#interface-nonelementparentnode
+// [IDL] https://www.w3.org/TR/DOM-Parsing/#widl-Element-innerHTML
 
-// Source: DOM Standard (https://dom.spec.whatwg.org/)
-// interface mixin NonElementParentNode {
-var NonElementParentNode = {
-	//console.log("NonElementParentNode")
+// Source: DOM Parsing and Serialization (https://www.w3.org/TR/DOM-Parsing/)
+// interface mixin InnerHTML {
+var innerHTML = {
+	//console.log("innerHTML")
 	
-	// Element? getElementById(DOMString elementId);
-	getElementById(elementId){
-		console.log("NonElementParentNode.prototype.getElementById("+elementId+")");
-		return new Element(CPP_DKNonElementParentNodeDUK_getElementById(this.address, elementId));
+	// [CEReactions] attribute [LegacyNullToEmptyString] DOMString innerHTML;
+	innerHTML(innerHTML){
+		console.log("innerHTML.prototype.innerHTML("+innerHTML+")");
+		return new Element(CPP_DKinnerHTMLDUK_innerHTML(this.address, innerHTML));
 	}
 };
-Object.assign(Document.prototype, NonElementParentNode);
+Object.assign(Element.prototype, innerHTML);
