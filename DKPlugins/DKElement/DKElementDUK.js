@@ -11,7 +11,10 @@ var Element = function Element(address) {
 	if(!this.address)
 		this.address = CPP_DKElementDUK_constructor();
 
-	////// NOTE: from DKElementCSSInlineStyle
+	// FIXME: having trouble using Object.assign to inject Object.defineProperty
+	
+
+	////// ElementCSSInlineStyle (property) mixin ////////
 	// [SameObject, PutForwards=cssText] readonly attribute CSSStyleDeclaration style;
 	Object.defineProperty(this, "style", {
         get: function style()							{ return new CSSStyleDeclaration(CPP_DKElementDUK_style(this.address)) },
@@ -20,6 +23,19 @@ var Element = function Element(address) {
     })
 	////////////////////////////////////////////
 	
+	////// innerHTML (property) mixin ///////////////////////
+	Object.defineProperty(this, "innerHTML", {
+        get: function innerHTML()			{ 
+			console.warn("innerHTML getter");
+			//return CPP_DKinnerHTMLDUK_innerHTML(this.address) 
+		},
+		set: function innerHTML(data)		{
+			console.warn("innerHTML("+data+") setter");
+			//return CPP_DKinnerHTMLDUK_innerHTML(this.address, data)			
+		},
+		configurable: true
+    });
+	///////////////////////////////////////////
 	
 	// readonly attribute DOMString? namespaceURI;
 	Object.defineProperty(this, "namespaceURI", {
