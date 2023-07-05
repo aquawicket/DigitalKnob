@@ -35,7 +35,7 @@ public:
 	}
 	void innerHTML(const DOMString& innerHTML) override {	// setter
 		DKINFO("DKRmlInnerHTML::innerHTML("+innerHTML+")\n");
-		return __rmlElement->SetInnerRML(innerHTML);
+		__rmlElement->SetInnerRML(innerHTML);
 	}
 
 // };
