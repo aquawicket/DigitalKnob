@@ -5,7 +5,7 @@
 #define DKElement_H
 
 #include "DKNode/DKNode.h"
-#include "DKinnerHTML/DKinnerHTML.h"
+#include "DKInnerHTML/DKInnerHTML.h"
 #include "DKElementCSSInlineStyle/DKElementCSSInlineStyle.h"
 class DKHTMLCollection;
 
@@ -21,7 +21,6 @@ public:
 		address[interfaceName] = pointerToAddress(this);
 		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 	}
-	//virtual ~DKElement(){}
 	
 	////// NOTE: from DKElementCSSInlineStyle
 	// [SameObject, PutForwards=cssText] readonly attribute CSSStyleDeclaration style;
