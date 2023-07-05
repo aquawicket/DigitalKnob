@@ -11,10 +11,10 @@ class DKHTMLCollection;
 
 // [Exposed=Window]
 // interface Element : Node {
-class DKElement : virtual public DKNode, public DKinnerHTML //, virtual public DKElementCSSInlineStyle
+class DKElement : virtual public DKNode, public DKInnerHTML //, virtual public DKElementCSSInlineStyle
 {
 public:
-	DKElement() : DKNode(), DKinnerHTML() //, DKElementCSSInlineStyle()
+	DKElement() : DKNode(), DKInnerHTML() //, DKElementCSSInlineStyle()
 	{
 		DKDEBUGFUNC();
 		interfaceName = "Element";

@@ -11,7 +11,7 @@
 
 // [Exposed=Window]
 // interface Element : Node {
-class DKRmlElement : public DKRmlNode, virtual public DKElement  //, public DKRmlElementCSSInlineStyle
+class DKRmlElement : public DKRmlInnerHTML, public DKRmlNode, virtual public DKElement  //, public DKRmlElementCSSInlineStyle
 {
 public:
 	static std::vector<DKRmlElement*> _list;
@@ -23,7 +23,7 @@ public:
 		return new DKRmlElement(dkRmlEventListener, rmlElement);
 	}
 	
-	DKRmlElement(DKRmlEventListener* dkRmlEventListener, Rml::Element* rmlElement) : DKRmlNode(dkRmlEventListener, rmlElement), DKElement()   /*, DKRmlElementCSSInlineStyle(rmlElement)*/ {
+	DKRmlElement(DKRmlEventListener* dkRmlEventListener, Rml::Element* rmlElement) : DKRmlInnerHTML(rmlElement), DKRmlNode(dkRmlEventListener, rmlElement), DKElement()   /*, DKRmlElementCSSInlineStyle(rmlElement)*/ {
 		DKDEBUGFUNC();
 		interfaceName = "RmlElement";
 		address[interfaceName] = pointerToAddress(this);

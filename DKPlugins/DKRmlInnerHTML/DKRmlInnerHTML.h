@@ -12,29 +12,32 @@
 class DKRmlInnerHTML : virtual public DKElement // public DKInnerHTML
 {
 public:
-	DKRmlInterface* _dkRmlInterface;
-	DKRmlEventListener* _dkRmlEventListener;
+	Rml::Element* _rmlElement;
 	
 	// constructor();
-	DKRmlInnerHTML(DKRmlInterface* dkRmlInterface, DKRmlEventListener* dkRmlEventListener) : DKElement() //DKInnerHTML() 
+	DKRmlInnerHTML(Rml::Element* rmlElement) : DKElement() //DKInnerHTML() 
 	{
 		DKDEBUGFUNC();
 
-		_dkRmlInterface = dkRmlInterface;
-		if(!_dkRmlInterface)
-			DKERROR("_dkRmlInterface invalid! \n");
-		
-		_dkRmlEventListener = dkRmlEventListener;
-		if(!_dkRmlEventListener)
-			DKERROR("_dkRmlEventListener invalid! \n");
+		_rmlElement = rmlElement;
+		if(!_rmlElement)
+			DKERROR("_rmlElement invalid! \n");
 	}
 	
 	// [CEReactions] attribute [LegacyNullToEmptyString] DOMString innerHTML;
-	const DOMString& innerHTML(const DOMString& innerHTML) override {
-		DKDEBUGFUNC(innerHTML);
-		DKINFO("DKRmlInnerHTML::innerHTML("+innerHTML+")\n");
-		Rml::Element* element = _dkRmlInterface->document->GetElementById(elementId.c_str());
-		return (DKElement*)DKRmlElement::instance(_dkRmlEventListener, element);
+	const DOMString& innerHTML() override {					// getter
+		if(!_rmlElement){
+			DKERROR("_rmlElement invalid! \n");
+			return _innerHTML;
+		}
+		return _rmlElement->GetInnerHTML();
+	}
+	void innerHTML(const DOMString& innerHTML) override {	// setter
+		if(!_rmlElement){
+			DKERROR("_rmlElement invalid! \n");
+			return _innerHTML;
+		}
+		return _rmlElement->SetInnerHTML(innerHTML);
 	}
 
 // };
