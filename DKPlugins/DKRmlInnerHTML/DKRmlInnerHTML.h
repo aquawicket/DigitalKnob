@@ -4,7 +4,11 @@
 #define DKRmlInnerHTML_H
 
 #include "DKInnerHTML/DKInnerHTML.h"
-#include "DKRmlElement/DKRmlElement.h"
+#include "DKElement/DKElement.h"
+
+WARNING_DISABLE
+#include <RmlUi/Core.h>
+WARNING_ENABLE
 
 
 // Source: DOM Parsing and Serialization (https://www.w3.org/TR/DOM-Parsing/)
@@ -12,32 +16,26 @@
 class DKRmlInnerHTML : virtual public DKElement // public DKInnerHTML
 {
 public:
-	Rml::Element* _rmlElement;
+	Rml::Element* __rmlElement;
 	
 	// constructor();
 	DKRmlInnerHTML(Rml::Element* rmlElement) : DKElement() //DKInnerHTML() 
 	{
 		DKDEBUGFUNC();
 
-		_rmlElement = rmlElement;
-		if(!_rmlElement)
+		__rmlElement = rmlElement;
+		if(!__rmlElement)
 			DKERROR("_rmlElement invalid! \n");
 	}
 	
 	// [CEReactions] attribute [LegacyNullToEmptyString] DOMString innerHTML;
 	const DOMString& innerHTML() override {					// getter
-		if(!_rmlElement){
-			DKERROR("_rmlElement invalid! \n");
-			return _innerHTML;
-		}
-		return _rmlElement->GetInnerHTML();
+		DKINFO("DKRmlInnerHTML::innerHTML()\n");
+		return __rmlElement->GetInnerRML();
 	}
 	void innerHTML(const DOMString& innerHTML) override {	// setter
-		if(!_rmlElement){
-			DKERROR("_rmlElement invalid! \n");
-			return _innerHTML;
-		}
-		return _rmlElement->SetInnerHTML(innerHTML);
+		DKINFO("DKRmlInnerHTML::innerHTML("+innerHTML+")\n");
+		return __rmlElement->SetInnerRML(innerHTML);
 	}
 
 // };

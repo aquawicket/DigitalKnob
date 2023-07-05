@@ -4,6 +4,7 @@
 #ifndef DKRmlElement_H
 #define DKRmlElement_H
 
+#include "DKRmlInnerHTML/DKRmlInnerHTML.h"
 #include "DKRmlNode/DKRmlNode.h"
 #include "DKElement/DKElement.h"
 #include "DKRmlElementCSSInlineStyle/DKRmlElementCSSInlineStyle.h"

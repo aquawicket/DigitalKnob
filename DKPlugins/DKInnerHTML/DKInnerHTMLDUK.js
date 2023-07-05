@@ -5,12 +5,12 @@ console.log("DKInnerHTMLDUK.js")
 // interface mixin InnerHTML {
 Object.defineProperty(Element.prototype, 'innerHTML', {
     get: function innerHTML()			{ 
-			console.warn("innerHTML getter");
-			return CPP_DKinnerHTMLDUK_innerHTML(this.address);
+			console.log("InnerHTML.prototype.innerHTML()");
+			return CPP_DKInnerHTMLDUK_innerHTML(this.address);
 		},
 		set: function innerHTML(data)		{
-			console.warn("innerHTML("+data+") setter");
-			CPP_DKinnerHTMLDUK_innerHTML(this.address, data);		
+			console.log("InnerHTML.prototype.innerHTML("+data+")");
+			CPP_DKInnerHTMLDUK_innerHTML(this.address, data);		
 		},
 		configurable: true
 });

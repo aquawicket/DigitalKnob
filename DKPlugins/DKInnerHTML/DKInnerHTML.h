@@ -18,8 +18,13 @@ public:
 	
 	// [CEReactions] attribute [LegacyNullToEmptyString] DOMString innerHTML;
 	DOMString _innerHTML = "";
-	virtual const DOMString& innerHTML()				{ return _innerHTML; }			// getter
-	virtual void innerHTML(const DOMString& innerHTML)	{ _innerHTML = innerHTML; } 	// setter
+	virtual const DOMString& innerHTML()				{ 	// getter
+		DKINFO("DKInnerHTML::innerHTML()\n");
+		return _innerHTML; 
+	}
+	virtual void innerHTML(const DOMString& innerHTML)	{ 	// setter
+		DKINFO("DKInnerHTML::innerHTML("+innerHTML+")\n");
+		_innerHTML = innerHTML; } 	
 
 	// };
 

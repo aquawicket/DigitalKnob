@@ -23,6 +23,7 @@ var Element = function Element(address) {
     })
 	////////////////////////////////////////////
 	
+	/*
 	////// innerHTML (property) mixin ///////////////////////
 	Object.defineProperty(this, "innerHTML", {
         get: function innerHTML()			{ 
@@ -36,6 +37,7 @@ var Element = function Element(address) {
 		configurable: true
     });
 	///////////////////////////////////////////
+	*/
 	
 	// readonly attribute DOMString? namespaceURI;
 	Object.defineProperty(this, "namespaceURI", {

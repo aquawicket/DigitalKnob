@@ -35,8 +35,9 @@ public:
 	// [CEReactions] attribute [LegacyNullToEmptyString] DOMString innerHTML;
 	static int innerHTML(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
+		DKINFO("DKInnerHTMLDUK::innerHTML()\n");
 		if(duk_is_valid_index(ctx, 1))
-			element(ctx)->innerHTML(GetString(ctx));
+			element(ctx)->innerHTML(duk_require_string(ctx, 1));
 		dukglue_push(ctx, element(ctx)->innerHTML());
 		return true;
 	}
