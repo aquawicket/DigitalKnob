@@ -38,27 +38,26 @@ public:
 		
 		_eventInitDict = eventInitDict;
 	}
-	//virtual ~DKEvent(){}
 	
 	// readonly attribute DOMString type;
 	DOMString _type = "";
-	virtual const DOMString&	type()															{ return _type; }														// getter
-	virtual void 				type(const DOMString& type) 									{ _type = type; } 														// setter
+	virtual const DOMString&	type()															{ return _type; }							// getter
+	virtual void 				type(const DOMString& type) 									{ _type = type; } 							// setter
 	
 	// readonly attribute EventTarget? target;
 	DKEventTarget* _target = NULL;
-	virtual DKEventTarget* 	target()															{ return _target; }														// getter
-	virtual void 				target(DKEventTarget* target)									{ _target = target; } 													// setter
+	virtual DKEventTarget* 	target()															{ return _target; }							// getter
+	virtual void 				target(DKEventTarget* target)									{ _target = target; } 						// setter
 	
 	// readonly attribute EventTarget? srcElement; // legacy
 	DKEventTarget* _srcElement = NULL;
-	virtual DKEventTarget* 	srcElement()														{ return _srcElement; }													// getter
-	virtual void 				srcElement(DKEventTarget* srcElement) 							{ _srcElement = srcElement; } 											// setter
+	virtual DKEventTarget* 	srcElement()														{ return _srcElement; }						// getter
+	virtual void 				srcElement(DKEventTarget* srcElement) 							{ _srcElement = srcElement; } 				// setter
 	
 	// readonly attribute EventTarget? currentTarget;
 	DKEventTarget* _currentTarget = NULL;
-	virtual DKEventTarget* 		currentTarget()													{ return _currentTarget; }												// getter
-	virtual void 				currentTarget(DKEventTarget* currentTarget) 					{ _currentTarget = currentTarget; }										// setter
+	virtual DKEventTarget* 		currentTarget()													{ return _currentTarget; }					// getter
+	virtual void 				currentTarget(DKEventTarget* currentTarget) 					{ _currentTarget = currentTarget; }			// setter
 	
 	// sequence<EventTarget> composedPath();
 	DKString _composedPath = "";
