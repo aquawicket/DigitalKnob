@@ -28,7 +28,7 @@ CPP_DK_Create("DKDocumentDUK");
 CPP_DK_Create("DKNonElementParentNodeDUK");		// mixin
 CPP_DK_Create("DKLocationDUK");
 CPP_DK_Create("DKElementDUK");
-CPP_DK_Create("DKinnerHTMLDUK");				// mixin
+CPP_DK_Create("DKInnerHTMLDUK");				// mixin
 CPP_DK_Create("DKNavigatorDUK");
 CPP_DK_Create("DKWindowDUK");
 //CPP_DK_Create("TEST_Window.js");

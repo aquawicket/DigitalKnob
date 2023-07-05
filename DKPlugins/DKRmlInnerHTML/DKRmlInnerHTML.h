@@ -1,30 +1,24 @@
-// [IDL] https://dom.spec.whatwg.org/#interface-nonelementparentnode
-// [MDN]
+// [IDL] https://www.w3.org/TR/DOM-Parsing/#widl-Element-innerHTML
 #pragma once
 #ifndef DKRmlInnerHTML_H
-#define DKRmlNonElementParentNode_H
+#define DKRmlInnerHTML_H
 
-#include "DKNonElementParentNode/DKNonElementParentNode.h"
+#include "DKInnerHTML/DKInnerHTML.h"
 #include "DKRmlElement/DKRmlElement.h"
-//#include "DKMixin/DKMixin.h"
 
 
-// Source: DOM Standard (https://dom.spec.whatwg.org/)
-// interface mixin NonElementParentNode {
-class DKRmlNonElementParentNode : virtual public DKDocument // public DKNonElementParentNode
+// Source: DOM Parsing and Serialization (https://www.w3.org/TR/DOM-Parsing/)
+// interface mixin InnerHTML {
+class DKRmlInnerHTML : virtual public DKElement // public DKInnerHTML
 {
 public:
 	DKRmlInterface* _dkRmlInterface;
 	DKRmlEventListener* _dkRmlEventListener;
 	
 	// constructor();
-	DKRmlNonElementParentNode(DKRmlInterface* dkRmlInterface, DKRmlEventListener* dkRmlEventListener) : DKDocument() //DKNonElementParentNode() 
+	DKRmlInnerHTML(DKRmlInterface* dkRmlInterface, DKRmlEventListener* dkRmlEventListener) : DKElement() //DKInnerHTML() 
 	{
 		DKDEBUGFUNC();
-
-		//interfaceName = "RmlNonElementParentNode";
-		//address[interfaceName] = pointerToAddress(this);
-		//DKINFO("DK" + interfaceName + "(" + interfaceAddress + "," + address[interfaceName] + ") \n");
 
 		_dkRmlInterface = dkRmlInterface;
 		if(!_dkRmlInterface)
@@ -35,10 +29,10 @@ public:
 			DKERROR("_dkRmlEventListener invalid! \n");
 	}
 	
-	// Element? getElementById(DOMString elementId);
-	DKElement* getElementById(const DOMString& elementId) override {
-		DKDEBUGFUNC(elementId);
-		DKINFO("DKRmlNonElementParentNode::getElementById("+elementId+")\n");
+	// [CEReactions] attribute [LegacyNullToEmptyString] DOMString innerHTML;
+	const DOMString& innerHTML(const DOMString& innerHTML) override {
+		DKDEBUGFUNC(innerHTML);
+		DKINFO("DKRmlInnerHTML::innerHTML("+innerHTML+")\n");
 		Rml::Element* element = _dkRmlInterface->document->GetElementById(elementId.c_str());
 		return (DKElement*)DKRmlElement::instance(_dkRmlEventListener, element);
 	}
@@ -46,4 +40,4 @@ public:
 // };
 };
 
-#endif // DKRmlNonElementParentNode_H
+#endif // DKRmlInnerHTML_H
