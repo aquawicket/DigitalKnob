@@ -21,7 +21,7 @@ public:
 	// constructor();
 	DKRmlInnerHTML(Rml::Element* rmlElement) : DKElement() //DKInnerHTML() 
 	{
-		DKDEBUGFUNC();
+		DKDEBUGFUNC(rmlElement);
 
 		__rmlElement = rmlElement;
 		if(!__rmlElement)
@@ -30,10 +30,13 @@ public:
 	
 	// [CEReactions] attribute [LegacyNullToEmptyString] DOMString innerHTML;
 	const DOMString& innerHTML() override {					// getter
+		//DKDEBUGFUNC();
 		DKINFO("DKRmlInnerHTML::innerHTML()\n");
-		return __rmlElement->GetInnerRML();
+		DKString innerHTML = __rmlElement->GetInnerRML();
+		return innerHTML;
 	}
 	void innerHTML(const DOMString& innerHTML) override {	// setter
+		DKDEBUGFUNC(innerHTML);
 		DKINFO("DKRmlInnerHTML::innerHTML("+innerHTML+")\n");
 		__rmlElement->SetInnerRML(innerHTML);
 	}
