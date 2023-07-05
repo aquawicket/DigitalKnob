@@ -2,23 +2,23 @@
 #if HAVE_DKDuktape
 
 #pragma once
-#ifndef DKinnerHTMLDUK_H
-#define DKinnerHTMLDUK_H
+#ifndef DKInnerHTMLDUK_H
+#define DKInnerHTMLDUK_H
 
 #include "DKDuktape/DKDuktape.h"
 #include "DKElement/DKElement.h"
 
 // Source: DOM Parsing and Serialization (https://www.w3.org/TR/DOM-Parsing/)
 // interface mixin InnerHTML {
-class DKinnerHTMLDUK : public DKObjectT<DKinnerHTMLDUK>
+class DKInnerHTMLDUK : public DKObjectT<DKInnerHTMLDUK>
 {
 public:
 	bool Init(){
 		
 		// [CEReactions] attribute [LegacyNullToEmptyString] DOMString innerHTML;
-		DKDuktape::AttachFunction("CPP_DKinnerHTMLDUK_innerHTML", 	DKinnerHTMLDUK::innerHTML);
+		DKDuktape::AttachFunction("CPP_DKInnerHTMLDUK_innerHTML", 	DKInnerHTMLDUK::innerHTML);
 		
-		DKClass::DKCreate("DKinnerHTML/DKinnerHTMLDUK.js");
+		DKClass::DKCreate("DKInnerHTML/DKInnerHTMLDUK.js");
 		
 		return true;
 	}
@@ -38,13 +38,13 @@ public:
 		
 		DKString interfaceAddress = duk_require_string(ctx, 0);
 		//DOMString innerHTML = duk_require_string(ctx, 1);
-		DKINFO("DKinnerHTMLDUK::innerHTML("+interfaceAddress+")\n");
+		DKINFO("DKInnerHTMLDUK::innerHTML("+interfaceAddress+")\n");
 		
 		//dukglue_push(ctx, element(ctx)->innerHTML(innerHTML)->interfaceAddress);	
 		return true;
 	}
 };
-REGISTER_OBJECT(DKinnerHTMLDUK, true)
+REGISTER_OBJECT(DKInnerHTMLDUK, true)
 
-#endif //DKinnerHTMLDUK_H
+#endif //DKInnerHTMLDUK_H
 #endif //HAVE_DKDuktape

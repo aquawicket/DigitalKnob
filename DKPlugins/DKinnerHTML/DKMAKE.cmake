@@ -1,2 +1,2 @@
-dk_generateCmake(DKinnerHTML)
-dk_assets(DKinnerHTML)
+dk_generateCmake(DKInnerHTML)
+dk_assets(DKInnerHTML)
