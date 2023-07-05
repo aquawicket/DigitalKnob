@@ -32,8 +32,8 @@ public:
 	const DOMString& innerHTML() override {					// getter
 		//DKDEBUGFUNC();
 		DKINFO("DKRmlInnerHTML::innerHTML()\n");
-		DKString innerHTML = __rmlElement->GetInnerRML();
-		return innerHTML;
+		_innerHTML = __rmlElement->GetInnerRML();
+		return _innerHTML;
 	}
 	void innerHTML(const DOMString& innerHTML) override {	// setter
 		DKDEBUGFUNC(innerHTML);
