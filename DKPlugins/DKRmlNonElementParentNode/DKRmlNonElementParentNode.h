@@ -19,15 +19,14 @@ public:
 	// constructor();
 	DKRmlNonElementParentNode(DKRmlInterface* dkRmlInterface, DKRmlEventListener* dkRmlEventListener) : DKDocument()
 	{
-		DKDEBUGFUNC();
+		DKDEBUGFUNC(dkRmlInterface, dkRmlEventListener);
 
 		_dkRmlInterface = dkRmlInterface;
-		if(!_dkRmlInterface)
-			DKERROR("_dkRmlInterface invalid! \n");
+		DKASSERT(_dkRmlInterface);
 		
 		_dkRmlEventListener = dkRmlEventListener;
-		if(!_dkRmlEventListener)
-			DKERROR("_dkRmlEventListener invalid! \n");
+		DKASSERT(_dkRmlEventListener);
+
 	}
 	
 	// Element? getElementById(DOMString elementId);
@@ -35,7 +34,7 @@ public:
 		DKDEBUGFUNC(elementId);
 		DKINFO("DKRmlNonElementParentNode::getElementById("+elementId+")\n");
 		Rml::Element* element = _dkRmlInterface->document->GetElementById(elementId.c_str());
-		ASSERT(element);
+		DKASSERT(element);
 		return (DKElement*)DKRmlElement::instance(_dkRmlEventListener, element);
 	}
 

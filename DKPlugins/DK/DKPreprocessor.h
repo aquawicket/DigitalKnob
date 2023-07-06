@@ -357,13 +357,13 @@
 
 
 /////////////////////////////////////////////////////////////////////////
-#ifndef THROW
-#define THROW(x)      													\
+#ifndef DKTHROW
+#define DKTHROW(x)      												\
     try{																\
 		throw x; 														\
 	}																	\
 	catch(...){															\
-		std::cerr << x << std::endl;									\
+		std::cerr << std::endl << x << std::endl;						\
 		std::cerr << "Press any Enter to continue . . ." << std::endl;	\
 		std::cin.get();													\
 	}
@@ -372,25 +372,15 @@
 /// ASSERT(condition) checks if the condition is met, and if not, calls
 /// ABORT with an error message indicating the module and line where
 /// the error occurred.
-#ifndef ASSERT
-#define ASSERT(x)                                                       	\
+#ifndef DKASSERT
+#define DKASSERT(x)                                                       	\
     if (!(x)) {                                                         	\
         char buf[2048];                                                 	\
         snprintf (buf, 2048, "Assertion (%s) failed in \"%s\", line %d\n",	\
                  #x, __FILE__, __LINE__);                                   \
-        THROW (buf);                                                    	\
+        DKTHROW (buf);                                                    	\
     }                                                                   	\
     else   // This 'else' exists to catch the user's following semicolon
-#endif
-
-
-/// DASSERT(condition) is just like ASSERT, except that it only is 
-/// functional in DEBUG mode, but does nothing when in a non-DEBUG
-/// (optimized, shipping) build.
-#ifdef DEBUG
-# define DASSERT(x) ASSERT(x)
-#else
-# define DASSERT(x) // DASSERT does nothing when not debugging
 #endif
 /////////////////////////////////////////////////////////////////////////
 
