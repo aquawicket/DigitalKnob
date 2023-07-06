@@ -356,16 +356,16 @@
 
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////
-#ifndef ABORT
-#define ABORT(x)      												\
-    try{															\
-			throw x; 												\
-		}															\
-	catch(...){														\
-		std::cerr << x << std::endl;								\
+/////////////////////////////////////////////////////////////////////////
+#ifndef THROW
+#define THROW(x)      													\
+    try{																\
+		throw x; 														\
+	}																	\
+	catch(...){															\
+		std::cerr << x << std::endl;									\
 		std::cerr << "Press any Enter to continue . . ." << std::endl;	\
-		std::cin.get();												\
+		std::cin.get();													\
 	}
 #endif
 
@@ -373,14 +373,13 @@
 /// ABORT with an error message indicating the module and line where
 /// the error occurred.
 #ifndef ASSERT
-#define ASSERT(x)                                                       \
-    if (!(x)) {                                                         \
-        char buf[2048];                                                 \
-        snprintf (buf, 2048, "Assertion failed in \"%s\", line %d\n"    \
-                 "\tProbable bug in software.\n",                       \
-                 __FILE__, __LINE__);                                   \
-        ABORT (buf);                                                    \
-    }                                                                   \
+#define ASSERT(x)                                                       	\
+    if (!(x)) {                                                         	\
+        char buf[2048];                                                 	\
+        snprintf (buf, 2048, "Assertion (%s) failed in \"%s\", line %d\n",	\
+                 #x, __FILE__, __LINE__);                                   \
+        THROW (buf);                                                    	\
+    }                                                                   	\
     else   // This 'else' exists to catch the user's following semicolon
 #endif
 
@@ -393,7 +392,7 @@
 #else
 # define DASSERT(x) // DASSERT does nothing when not debugging
 #endif
-/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
 
 
 

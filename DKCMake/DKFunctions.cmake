@@ -2784,7 +2784,7 @@ function(dk_dll plugin_name)
 	file(APPEND ${plugin_path}/CMakeLists.txt "add_library(${plugin_name} SHARED \${${plugin_name}_SRC})\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "add_definitions(-D_WIN32_WINNT=0x0600)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "set_target_properties(${plugin_name} PROPERTIES LINK_FLAGS_DEBUG \"/NODEFAULTLIB:libc.lib /NODEFAULTLIB:LIBCMTD.lib /SAFESEH:NO\" LINK_FLAGS \"/NODEFAULTLIB:libc.lib /NODEFAULTLIB:LIBCMT.lib /SAFESEH:NO\") \n")
-	file(APPEND ${plugin_path}/CMakeLists.txt "target_compile_options(${plugin_name} PRIVATE $<$<CONFIG:Debug>:/MDd /Od /Ob0 /EHsc /Zi /RTC1 /DDEBUG /D_DEBUG> $<$<CONFIG:Release>:/MD /O2 /Ob2 /EHsc>)\n") # /DNDEBUG
+	file(APPEND ${plugin_path}/CMakeLists.txt "target_compile_options(${plugin_name} PRIVATE $<$<CONFIG:Debug>:/MDd /Od /Ob0 /EHsc /Zi /RTC1 /DDEBUG /D_DEBUG> $<$<CONFIG:Release>:/MD /O2 /Ob2 /EHsc /DNDEBUG>)\n")
 	if(DEBUG_LIBS)
 		string(REPLACE "debug" " debug " DLL_DEBUG_LIBS ${DEBUG_LIBS})
 	endif()
