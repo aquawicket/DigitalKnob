@@ -331,10 +331,8 @@
 // BUILD_TYPE
 #if DEBUG
 #	define DKBUILD_TYPE "DEBUG"
-#elif NDEBUG
-#	define DKBUILD_TYPE "RELEASE"
 #else
-#	define DKBUILD_TYPE "UNKNOWN"
+#	define DKBUILD_TYPE "RELEASE"
 #endif
 
 // RTTI
@@ -353,8 +351,50 @@
 #endif
 
 
-// DK_UNUSED(arg) - supress unreferenced formal parameter warnings for uused variables
+// DK_UNUSED(arg) - supress unreferenced formal parameter warnings for unsed variables
 #define DK_UNUSED(arg) (void)arg;
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+#ifndef ABORT
+#define ABORT(x)      												\
+    try{															\
+			throw x; 												\
+		}															\
+	catch(...){														\
+		std::cerr << x << std::endl;								\
+		std::cerr << "Press any Enter to continue . . ." << std::endl;	\
+		std::cin.get();												\
+	}
+#endif
+
+/// ASSERT(condition) checks if the condition is met, and if not, calls
+/// ABORT with an error message indicating the module and line where
+/// the error occurred.
+#ifndef ASSERT
+#define ASSERT(x)                                                       \
+    if (!(x)) {                                                         \
+        char buf[2048];                                                 \
+        snprintf (buf, 2048, "Assertion failed in \"%s\", line %d\n"    \
+                 "\tProbable bug in software.\n",                       \
+                 __FILE__, __LINE__);                                   \
+        ABORT (buf);                                                    \
+    }                                                                   \
+    else   // This 'else' exists to catch the user's following semicolon
+#endif
+
+
+/// DASSERT(condition) is just like ASSERT, except that it only is 
+/// functional in DEBUG mode, but does nothing when in a non-DEBUG
+/// (optimized, shipping) build.
+#ifdef DEBUG
+# define DASSERT(x) ASSERT(x)
+#else
+# define DASSERT(x) // DASSERT does nothing when not debugging
+#endif
+/////////////////////////////////////////////////////////////////////////////////////////////
+
 
 
 // https://en.cppreference.com/w/cpp/keyword

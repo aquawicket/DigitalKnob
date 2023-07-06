@@ -246,7 +246,7 @@ bool DKLog::Log(const char* file, const int line, const char* func, const DKStri
 #	if WIN32
 		WORD color = 0;
 		if (!color_override){
-			if (lvl == DK_ASSERT)  { color = DKASSERT_COLOR; }
+			//if (lvl == DK_ASSERT)  { color = DKASSERT_COLOR; }
 			if (lvl == DK_FATAL)   { color = DKFATAL_COLOR; }
 			if (lvl == DK_ERROR)   { color = DKERROR_COLOR; }
 			if (lvl == DK_WARN)    { color = DKWARN_COLOR; }
@@ -326,12 +326,12 @@ bool DKLog::Log(const char* file, const int line, const char* func, const DKStri
 	
 	//On errors, show the stack trace or open a message box
 	if(lvl <= DK_ERROR){
-		if(stacktrace_on_errors || lvl <= DK_ASSERT){
+		if(stacktrace_on_errors || lvl <= DK_FATAL){ //DK_ASSERT){
 			DKClass::DKCreate("DKDebug");
 			if(DKClass::HasFunc("DKDebug::ShowStackTrace"))
 				DKClass::CallFunc("DKDebug::ShowStackTrace");
 		}
-		if(exception_on_errors || lvl <= DK_ASSERT){
+		if(exception_on_errors || lvl <= DK_FATAL){ //DK_ASSERT){
 #			ifndef ANDROID //FIXME: change to DKEXCEPTIONS		
 				try{
 					throw output; // throw an exception

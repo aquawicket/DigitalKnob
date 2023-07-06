@@ -10,20 +10,16 @@
 
 // Source: DOM Standard (https://dom.spec.whatwg.org/)
 // interface mixin NonElementParentNode {
-class DKRmlNonElementParentNode : virtual public DKDocument // public DKNonElementParentNode
+class DKRmlNonElementParentNode : virtual public DKDocument
 {
 public:
 	DKRmlInterface* _dkRmlInterface;
 	DKRmlEventListener* _dkRmlEventListener;
 	
 	// constructor();
-	DKRmlNonElementParentNode(DKRmlInterface* dkRmlInterface, DKRmlEventListener* dkRmlEventListener) : DKDocument() //DKNonElementParentNode() 
+	DKRmlNonElementParentNode(DKRmlInterface* dkRmlInterface, DKRmlEventListener* dkRmlEventListener) : DKDocument()
 	{
 		DKDEBUGFUNC();
-
-		//interfaceName = "RmlNonElementParentNode";
-		//address[interfaceName] = pointerToAddress(this);
-		//DKINFO("DK" + interfaceName + "(" + interfaceAddress + "," + address[interfaceName] + ") \n");
 
 		_dkRmlInterface = dkRmlInterface;
 		if(!_dkRmlInterface)
@@ -39,6 +35,7 @@ public:
 		DKDEBUGFUNC(elementId);
 		DKINFO("DKRmlNonElementParentNode::getElementById("+elementId+")\n");
 		Rml::Element* element = _dkRmlInterface->document->GetElementById(elementId.c_str());
+		ASSERT(element);
 		return (DKElement*)DKRmlElement::instance(_dkRmlEventListener, element);
 	}
 

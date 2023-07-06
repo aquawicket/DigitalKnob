@@ -47,7 +47,7 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 
-#define DK_ASSERT  1
+//#define DK_ASSERT  1
 #define DK_FATAL   2
 #define DK_ERROR   3
 #define DK_WARN    4
@@ -63,7 +63,7 @@ WARNING_ENABLE
 #define DKBUILDHOUR(buildHour) GetBuildHour(__TIME__, buildHour);
 #define DKBUILDMINUTE(buildMinute) GetBuildMinute(__TIME__, buildMinute);
 #define DKBUILDSECOND(buildSecond) GetBuildSecond(__TIME__, buildSecond);
-#define  DKASSERT(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_ASSERT);//, DKASSERT_COLOR, false);
+//#define  DKASSERT(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_ASSERT);//, DKASSERT_COLOR, false);
 #define   DKFATAL(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_FATAL);//, DKFATAL_COLOR, false);
 #define   DKERROR(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_ERROR);//, DKERROR_COLOR, false);
 #define    DKWARN(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_WARN);

@@ -323,7 +323,9 @@ bool RmlSDL2SystemInterface::LogMessage(Rml::Log::Type type, const Rml::String& 
 			DKERROR("[Rml] "+DKString(message)+"\n");
 			break;
 		case Rml::Log::LT_ASSERT:
-			DKASSERT("[Rml] "+DKString(message)+"\n");
+			//DKASSERT("[Rml] "+DKString(message)+"\n");
+			DKERROR("[Rml] "+DKString(message)+"\n");
+			ASSERT(0);
 			break;
 		case Rml::Log::LT_WARNING:
 			DKWARN("[Rml] "+DKString(message)+"\n");
