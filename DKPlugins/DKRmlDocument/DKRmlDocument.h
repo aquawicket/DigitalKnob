@@ -34,18 +34,16 @@ public:
 	DKRmlDocument(DKRmlInterface* dkRmlInterface, DKRmlEventListener* dkRmlEventListener) : DKRmlNonElementParentNode(dkRmlInterface, dkRmlEventListener), DKDocument() /*DKRmlNode(_dkRmlEventListener, NULL),*/ 
 	{
 		DKDEBUGFUNC();
+		DKASSERT(dkRmlInterface);
+		DKASSERT(dkRmlEventListener);
+		
 		interfaceName = "RmlDocument";
 		address[interfaceName] = pointerToAddress(this);
 		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 		
 		_dkRmlInterface = dkRmlInterface;
-		if(!_dkRmlInterface)
-			DKERROR("_dkRmlInterface invalid! \n");
-		
 		_dkRmlEventListener = dkRmlEventListener;
-		if(!_dkRmlEventListener)
-			DKERROR("_dkRmlEventListener invalid! \n");
-		
+
 		list.push_back(this);
 	}
 	

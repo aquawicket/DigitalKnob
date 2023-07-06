@@ -26,17 +26,15 @@ public:
 	
 	DKRmlElement(DKRmlEventListener* dkRmlEventListener, Rml::Element* rmlElement) : DKRmlInnerHTML(rmlElement), DKRmlNode(dkRmlEventListener, rmlElement), DKElement()   /*, DKRmlElementCSSInlineStyle(rmlElement)*/ {
 		DKDEBUGFUNC();
+		DKASSERT(dkRmlEventListener);
+		DKASSERT(rmlElement);
+		
 		interfaceName = "RmlElement";
 		address[interfaceName] = pointerToAddress(this);
 		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 		
 		_dkRmlEventListener = dkRmlEventListener;
-		if(!_dkRmlEventListener)
-			DKERROR("_dkRmlEventListener invalid! \n");
-		
 		_rmlElement = rmlElement;
-		if(!_rmlElement)
-			DKERROR("_rmlElement invalid! \n");
 		
 		_list.push_back(this);
 	}
@@ -63,10 +61,6 @@ public:
 	
 	// readonly attribute DOMString tagName;
 	const DOMString& tagName() override							{									// getter
-		if(!_rmlElement){
-			DKERROR("_rmlElement invalid! \n");
-			return _tagName;
-		}
 		return _rmlElement->GetTagName();
 		//_tagName = _rmlElement->GetTagName();
 		//return _tagName;
@@ -85,10 +79,6 @@ public:
 	
 	// [SameObject, PutForwards=value] readonly attribute DOMTokenList classList;
 	const DKString& classList() override { 									// getter
-		if (!_rmlElement) {
-			DKERROR("_rmlElement invalid! \n");
-			return _classList;
-		}
 		Rml::StringList list = _rmlElement->GetActivePseudoClasses();
 		_classList.clear();
 		for (unsigned int n = 0; n < list.size(); ++n) {

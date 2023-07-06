@@ -16,17 +16,15 @@ class DKRmlNode : public DKRmlEventTarget, virtual public DKNode
 public:	 
 	DKRmlNode(DKRmlEventListener* dkRmlEventListener, Rml::Element* rmlElement) : DKRmlEventTarget(dkRmlEventListener, rmlElement), DKNode()  {
 		DKDEBUGFUNC();
+		DKASSERT(dkRmlEventListener);
+		DKASSERT(rmlElement);
+		
 		interfaceName = "DKRmlNode";
 		address[interfaceName] = pointerToAddress(this);
 		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 		
 		_dkRmlEventListener = dkRmlEventListener;
-		if(!_dkRmlEventListener)
-			DKERROR("_dkRmlEventListener invalid! \n");
-		
 		_rmlElement = rmlElement;
-		if(!_rmlElement)
-			DKERROR("_rmlElement invalid! \n");
 	}
 	
 	/*
@@ -97,10 +95,6 @@ public:
 	
 	// readonly attribute Document? ownerDocument;
 	DKDocument* ownerDocument() override { 																// getter
-		if(!_rmlElement){
-			DKERROR("_rmlElement invalid! \n");
-			return _ownerDocument;
-		}
 		Rml::ElementDocument* rmlElementDocument = _rmlElement->GetOwnerDocument();
 		//_ownerDocument = DKRmlDocument::instance(_dkRmlEventListener, rmlElementDocument);	//FIXME
 		return _ownerDocument; 

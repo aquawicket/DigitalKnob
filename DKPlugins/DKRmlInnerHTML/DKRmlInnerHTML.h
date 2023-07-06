@@ -24,8 +24,7 @@ public:
 		DKDEBUGFUNC(rmlElement);
 
 		__rmlElement = rmlElement;
-		if(!__rmlElement)
-			DKERROR("_rmlElement invalid! \n");
+		DKASSERT(__rmlElement);
 	}
 	
 	// [CEReactions] attribute [LegacyNullToEmptyString] DOMString innerHTML;

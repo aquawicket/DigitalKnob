@@ -27,13 +27,13 @@ public:
 	
 	DKRmlCSSStyleDeclaration(Rml::Element* rmlElement) : DKCSSStyleDeclaration() {
 		DKDEBUGFUNC();
+		DKASSERT(rmlElement);
+		
 		interfaceName = "RmlCSSStyleDeclaration";
 		address[interfaceName] = pointerToAddress(this);
 		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 		
 		_rmlElement = rmlElement;
-		if(!_rmlElement)
-			DKERROR("_rmlElement invalid! \n");
 	}
 	
 	// [CEReactions] attribute CSSOMString cssText;

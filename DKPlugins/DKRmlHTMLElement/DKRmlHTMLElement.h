@@ -27,17 +27,15 @@ public:
 	// [HTMLConstructor] constructor();
 	DKRmlHTMLElement(DKRmlEventListener* dkRmlEventListener, Rml::Element* rmlElement) : DKHTMLElement(), DKRmlElement(dkRmlEventListener, rmlElement) {
 		DKDEBUGFUNC();
+		DKASSERT(dkRmlEventListener);
+		DKASSERT(rmlElement);
+		
 		interfaceName = "DKRmlHTMLElement";
 		address[interfaceName] = pointerToAddress(this);
 		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 		
 		_dkRmlEventListener = dkRmlEventListener;
-		if(!_dkRmlEventListener)
-			DKERROR("_dkRmlEventListener invalid! \n");
-		
 		_rmlElement = rmlElement;
-		if(!_rmlElement)
-			DKERROR("_rmlElement invalid! \n");
 	}
 	
 	// metadata attributes
