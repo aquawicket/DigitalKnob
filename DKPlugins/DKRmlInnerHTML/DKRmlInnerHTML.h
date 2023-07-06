@@ -13,13 +13,13 @@ WARNING_ENABLE
 
 // Source: DOM Parsing and Serialization (https://www.w3.org/TR/DOM-Parsing/)
 // interface mixin InnerHTML {
-class DKRmlInnerHTML : virtual public DKElement // public DKInnerHTML
+class DKRmlInnerHTML : virtual public DKElement //, virtual public DKInnerHTML
 {
 public:
 	Rml::Element* __rmlElement;
 	
 	// constructor();
-	DKRmlInnerHTML(Rml::Element* rmlElement) : DKElement() //DKInnerHTML() 
+	DKRmlInnerHTML(Rml::Element* rmlElement) : DKElement() //, DKInnerHTML() 
 	{
 		DKDEBUGFUNC(rmlElement);
 
