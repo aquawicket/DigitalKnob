@@ -23,7 +23,6 @@ public:
 		address[interfaceName] = pointerToAddress(this);
 		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 	}
-	//virtual ~DKFocusEvent(){}
 	
 	// readonly attribute EventTarget? relatedTarget;
 	DKEventTarget* _relatedTarget = NULL;

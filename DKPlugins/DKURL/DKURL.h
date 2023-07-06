@@ -23,8 +23,6 @@ public:
 		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 	}
 	
-	virtual ~DKURL() {}
-	
 	// static boolean canParse(USVString url, optional USVString base);
 	bool _canParse = false;
 	virtual const bool& canParse(const USVString& url, const USVString& base = "") {

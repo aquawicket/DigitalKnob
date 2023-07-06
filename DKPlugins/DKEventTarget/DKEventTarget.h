@@ -21,15 +21,11 @@ public:
 		interfaceName = "EventTarget";
 		address[interfaceName] = pointerToAddress(this);
 		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
-		
-		address["EventTarget"] = pointerToAddress(this);
 	}
-	//virtual ~DKEventTarget(){}
 
 	// undefined addEventListener(DOMString type, EventListener? callback, optional (AddEventListenerOptions or boolean) options = {});
 	virtual void addEventListener(const DOMString& type, DKCallback callback) {
 		DKDEBUGFUNC(type, callback);
-		//DKINFO("DKEventTarget::addEventListener("+type+", callback) \n");
 		DKEventListener eventListener;
         eventListener.type = type;
         eventListener.callback = callback;
@@ -50,7 +46,6 @@ public:
 	// undefined removeEventListener(DOMString type, EventListener? callback, optional (EventListenerOptions or boolean) options = {});
 	virtual void removeEventListener(const DOMString& type, DKCallback callback) {
 		DKDEBUGFUNC(type, callback);
-		//DKINFO("DKEventTarget::removeEventListener("+type+", callback) \n");
 		for(auto it = eventListeners.begin(); it != eventListeners.end();){
 			if(it->type == type && it->interfaceAddress == interfaceAddress) // && it->callback == callback)
 				it = eventListeners.erase(it);
@@ -62,11 +57,8 @@ public:
 	// boolean dispatchEvent(Event event);
     virtual bool dispatchEvent(DKEvent* event) {
 		DKDEBUGFUNC(event);
-		//DKINFO("DKEventTarget::dispatchEvent("+event+") \n");	
 		for (auto& eventListener : eventListeners) {
-			//DKINFO("	eventObj("+eventObj.type+", "+eventObj.interfaceAddress) \n");	
 			if(eventListener.type == event->type() && eventListener.interfaceAddress == interfaceAddress){
-				//DKINFO("		event("+event.type()+") \n");	
 				event->currentTarget(this);
 				event->target(this);
 				event->srcElement(this);
@@ -75,11 +67,8 @@ public:
         }
 		return true; 
     }
-	//virtual bool dispatchEvent(DKEvent* event){	return dispatchEvent(*event); }
-	
 	
 	////// DK properties //////	
-	//static std::vector<EventObject> events;
 	static std::vector<DKEventListener> eventListeners;
 	
 	////// toString //////

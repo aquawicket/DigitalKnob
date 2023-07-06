@@ -21,7 +21,6 @@ public:
 		address[interfaceName] = pointerToAddress(this);
 		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 	}
-	//virtual ~DKEventListener(){}
 	
 	// undefined handleEvent(Event event);
 	virtual const void handleEvent(DKEvent& event) {
@@ -32,7 +31,6 @@ public:
 // };
 
 	////// DK properties //////
-	//DKString interfaceAddress;
 	DKEventTarget* dkEventTarget;
 	DOMString type;
 	DKCallback callback;

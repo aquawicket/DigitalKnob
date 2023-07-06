@@ -18,13 +18,12 @@ class DKCompositionEvent : public DKUIEvent
 {
 public:
 	// constructor(DOMString type, optional CompositionEventInit eventInitDict = {});
-	DKCompositionEvent(const DOMString& type, const CompositionEventInit& eventInitDict = "{}") : DKUIEvent(type, eventInitDict) { // [CompositionEvent()] https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent/CompositionEvent
+	DKCompositionEvent(const DOMString& type, const CompositionEventInit& eventInitDict = "{}") : DKUIEvent(type, eventInitDict) {
 		DKDEBUGFUNC(type, eventInitDict);
 		interfaceName = "CompositionEvent";
 		address[interfaceName] = pointerToAddress(this);
 		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 	}
-	//virtual ~DKCompositionEvent(){}
 	
 	// readonly attribute DOMString data;
 	DOMString _data = "";

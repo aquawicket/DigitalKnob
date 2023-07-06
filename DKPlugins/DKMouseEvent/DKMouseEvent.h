@@ -23,7 +23,6 @@ public:
 		address[interfaceName] = pointerToAddress(this);
 		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 	}
-	//virtual ~DKMouseEvent(){}
 	
 	// readonly attribute long screenX;
 	int _screenX = 0;

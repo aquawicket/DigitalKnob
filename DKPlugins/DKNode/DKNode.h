@@ -21,7 +21,6 @@ public:
 		address[interfaceName] = pointerToAddress(this);
 		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 	}
-	//virtual ~DKNode(){}
 	
 	// const unsigned short ELEMENT_NODE = 1;
 	const unsigned short _ELEMENT_NODE = 1;

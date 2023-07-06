@@ -32,7 +32,6 @@ public:
 		address[interfaceName] = pointerToAddress(this);
 		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 	}
-	//virtual ~DKWindow(){}
 	
 	// the current browsing context
 	// [LegacyUnforgeable] readonly attribute WindowProxy window;

@@ -25,7 +25,6 @@ public:
 		address[interfaceName] = pointerToAddress(this);
 		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 	}
-	//virtual ~DKUIEvent(){}
 	
 	// readonly attribute Window? view;
 	DKWindow* _view = NULL;
