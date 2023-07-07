@@ -21,6 +21,7 @@ class DKInterface
 {
 public:
 	DKInterface(){
+		cleanInterfaceList();
 		//DKDEBUGFUNC();
 		interfaceName = "Interface";
 		interfaceAddress = pointerToAddress(this);
@@ -48,6 +49,13 @@ public:
 			DKINFO(toString(i)+": "+_list[i]->interfaceName+"("+_list[i]->interfaceAddress+")\n");
 		}
 		DKINFO("\n");
+	}
+	
+	static void cleanInterfaceList(){
+		for(unsigned int i=0; i<_list.size(); ++i){
+			if(_list[i]->interfaceName.empty())
+			    _list.erase(_list.begin() + i);
+		}
 	}
 	
 	////// toString //////
