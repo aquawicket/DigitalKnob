@@ -6,6 +6,7 @@
 
 #include "DKElementCSSInlineStyle/DKElementCSSInlineStyle.h"
 #include "DKElement/DKElement.h"
+#include "DKRmlCSSStyleDeclaration/DKRmlCSSStyleDeclaration.h"
 
 
 // Source: CSS Object Model (CSSOM) (https://www.w3.org/TR/cssom-1/)

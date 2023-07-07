@@ -9,11 +9,11 @@ console.log("DKElementCSSInlineStyleDUK.js")
 Object.defineProperty(Element.prototype, 'style', {
     get: function style()			{ 
 			console.log("ElementCSSInlineStyle.prototype.style()");
-			return CPP_DKElementCSSInlineStyleDUK_style(this.address);
+			return new CSSStyleDeclaration(CPP_DKElementCSSInlineStyleDUK_style(this.address));
 		},
 		set: function style(data)		{
 			console.log("ElementCSSInlineStyle.prototype.style("+data+")");
-			CPP_DKElementCSSInlineStyleDUK_style(this.address, data);	
+			CPP_DKElementCSSInlineStyleDUK_style(this.address, data.address);	
 		},
 		configurable: true
 });
