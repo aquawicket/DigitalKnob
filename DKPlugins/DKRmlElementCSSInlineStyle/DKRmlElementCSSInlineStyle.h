@@ -5,18 +5,18 @@
 #define DKRmlElementCSSInlineStyle_H
 
 #include "DKElementCSSInlineStyle/DKElementCSSInlineStyle.h"
-#include "DKRmlCSSStyleDeclaration/DKRmlCSSStyleDeclaration.h"
-//#include "DKMixin/DKMixin.h"
+#include "DKElement/DKElement.h"
 
 
 // Source: CSS Object Model (CSSOM) (https://www.w3.org/TR/cssom-1/)
 // interface mixin ElementCSSInlineStyle {
-class DKRmlElementCSSInlineStyle : public DKElementCSSInlineStyle
+class DKRmlElementCSSInlineStyle : virtual public DKElement
 {
 public:
 	Rml::Element* __rmlElement;
 	
-	DKRmlElementCSSInlineStyle(Rml::Element* rmlElement) : DKElementCSSInlineStyle() {
+	DKRmlElementCSSInlineStyle(Rml::Element* rmlElement) : DKElement() 
+	{
 		DKDEBUGFUNC();
 		DKASSERT(rmlElement);
 		
@@ -24,8 +24,17 @@ public:
 	}
 	
 	// [SameObject, PutForwards=cssText] readonly attribute CSSStyleDeclaration style;
-	DKCSSStyleDeclaration* 	style() override							{ return _style ? _style : DKRmlCSSStyleDeclaration::instance(__rmlElement);  }	// getter
-	//void 					style(DKCSSStyleDeclaration* style) override{ _style = style; } 															// setter
+	DKCSSStyleDeclaration* style() override {						// getter
+		//DKDEBUGFUNC();
+		DKINFO("DKRmlElementCSSInlineStyle::style()\n");
+		_style = DKRmlCSSStyleDeclaration::instance(__rmlElement);
+		return _style;
+	}
+	void style(DKCSSStyleDeclaration* style) override {				// setter
+		DKDEBUGFUNC(style);
+		DKINFO("DKRmlElementCSSInlineStyle::style(CSSStyleDeclaration)\n");
+		//__rmlElement->SetStyle(style);
+	}
 
 // };
 

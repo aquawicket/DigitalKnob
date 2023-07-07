@@ -17,10 +17,11 @@ public:
 	bool Init(){
 		DKDuktape::AttachFunction("CPP_DKElementDUK_constructor", 				DKElementDUK::constructor);
 		
+		/*
 		////// NOTE: from DKElementCSSInlineStyle
 		// [SameObject, PutForwards=cssText] readonly attribute CSSStyleDeclaration style;
 		DKDuktape::AttachFunction("CPP_DKElementDUK_style", 					DKElementDUK::style);
-		/////////////////////////////////////////
+		*/
 		
 		// readonly attribute DOMString? namespaceURI;
 		DKDuktape::AttachFunction("CPP_DKElementDUK_namespaceURI", 				DKElementDUK::namespaceURI);

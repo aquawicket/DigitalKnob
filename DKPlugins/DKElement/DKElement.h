@@ -11,10 +11,10 @@ class DKHTMLCollection;
 
 // [Exposed=Window]
 // interface Element : Node {
-class DKElement : virtual public DKNode, public DKInnerHTML //, virtual public DKElementCSSInlineStyle
+class DKElement : virtual public DKNode, public DKInnerHTML, public DKElementCSSInlineStyle
 {
 public:
-	DKElement() : DKNode(), DKInnerHTML() //, DKElementCSSInlineStyle()
+	DKElement() : DKNode(), DKInnerHTML(), DKElementCSSInlineStyle()
 	{
 		DKDEBUGFUNC();
 		interfaceName = "Element";
@@ -22,12 +22,14 @@ public:
 		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 	}
 	
+	/*
 	////// NOTE: from DKElementCSSInlineStyle
 	// [SameObject, PutForwards=cssText] readonly attribute CSSStyleDeclaration style;
 	DKCSSStyleDeclaration* _style = NULL;
 	virtual DKCSSStyleDeclaration* style() 						{ return _style; }					// getter
 	virtual void style(DKCSSStyleDeclaration* style)			{ _style = style; } 				// setter
 	////////////////////////////////////////////
+	*/
 	
 	// readonly attribute DOMString? namespaceURI;
 	DOMString _namespaceURI = "";

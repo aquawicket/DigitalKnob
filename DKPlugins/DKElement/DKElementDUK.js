@@ -13,7 +13,7 @@ var Element = function Element(address) {
 
 	// FIXME: having trouble using Object.assign to inject Object.defineProperty
 	
-
+	/*
 	////// ElementCSSInlineStyle (property) mixin ////////
 	// [SameObject, PutForwards=cssText] readonly attribute CSSStyleDeclaration style;
 	Object.defineProperty(this, "style", {
@@ -22,6 +22,7 @@ var Element = function Element(address) {
 		//configurable: true,
     })
 	////////////////////////////////////////////
+	*/
 	
 	/*
 	////// innerHTML (property) mixin ///////////////////////

@@ -37,11 +37,15 @@ public:
 	static int style(duk_context* ctx){
 		DKDEBUGFUNC(ctx);
 		DKINFO("DKElementCSSInlineStyleDUK::style()\n");
-		if (duk_is_valid_index(ctx, 1)) {
-			element(ctx)->style(duk_require_string(ctx, 1));
+		if(duk_is_valid_index(ctx, 1)){
+			DKString interfaceAddress = duk_require_string(ctx, 1);
+			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+			DKString cssStyleDeclarationAddress = interface->address["CSSStyleDeclaration"];
+			DKCSSStyleDeclaration* cssStyleDeclaration = (DKCSSStyleDeclaration*)addressToPointer(cssStyleDeclarationAddress);
+			element(ctx)->style(cssStyleDeclaration);
 		}
 		else {
-			dukglue_push(ctx, element(ctx)->style());
+			dukglue_push(ctx, element(ctx)->style()->interfaceAddress);
 		}
 		return true;
 	}

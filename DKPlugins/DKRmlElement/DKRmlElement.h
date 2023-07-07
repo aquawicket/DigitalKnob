@@ -12,7 +12,7 @@
 
 // [Exposed=Window]
 // interface Element : Node {
-class DKRmlElement : public DKRmlInnerHTML, public DKRmlNode, virtual public DKElement  //, public DKRmlElementCSSInlineStyle
+class DKRmlElement : public DKRmlInnerHTML, public DKRmlElementCSSInlineStyle, public DKRmlNode, virtual public DKElement
 {
 public:
 	static std::vector<DKRmlElement*> _list;
@@ -24,7 +24,8 @@ public:
 		return new DKRmlElement(dkRmlEventListener, rmlElement);
 	}
 	
-	DKRmlElement(DKRmlEventListener* dkRmlEventListener, Rml::Element* rmlElement) : DKRmlInnerHTML(rmlElement), DKRmlNode(dkRmlEventListener, rmlElement), DKElement()   /*, DKRmlElementCSSInlineStyle(rmlElement)*/ {
+	DKRmlElement(DKRmlEventListener* dkRmlEventListener, Rml::Element* rmlElement) : DKRmlInnerHTML(rmlElement), DKRmlElementCSSInlineStyle(rmlElement), DKRmlNode(dkRmlEventListener, rmlElement), DKElement()
+	{
 		DKDEBUGFUNC();
 		DKASSERT(dkRmlEventListener);
 		DKASSERT(rmlElement);
@@ -38,12 +39,14 @@ public:
 		
 		_list.push_back(this);
 	}
-
+	
+	/*
 	////// NOTE: from DKRmlElementCSSInlineStyle
 	// [SameObject, PutForwards=cssText] readonly attribute CSSStyleDeclaration style;
 	DKCSSStyleDeclaration* style() override { return _style ? _style : DKRmlCSSStyleDeclaration::instance(_rmlElement); }	// getter	
-	//void style(DKCSSStyleDeclaration& style) /*override*/	{ _style = &style; } 											// setter
+	//void style(DKCSSStyleDeclaration& style) override	{ _style = &style; } 												// setter
 	////////////////////////////////////////////
+	*/
 	
 	/*
 	// readonly attribute DOMString? namespaceURI;
