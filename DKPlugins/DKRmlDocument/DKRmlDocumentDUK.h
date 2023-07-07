@@ -38,7 +38,7 @@ public:
 		DKRmlEventListener* dkRmlEventListener = (DKRmlEventListener*)addressToPointer(dkRmlEventListenerAddress);
 		
 		DKINFO("CPP_DKRmlDocumentDUK_constructor("+dkRmlInterfaceAddress+","+dkRmlEventListenerAddress+")\n");
-		DKRmlDocument* dkRmlDocument = new DKRmlDocument(dkRmlInterface, dkRmlEventListener);
+		DKRmlDocument* dkRmlDocument = DKRmlDocument::instance(dkRmlInterface, dkRmlEventListener);
 		dukglue_push(ctx, dkRmlDocument->interfaceAddress);
 		return true;
 	}
