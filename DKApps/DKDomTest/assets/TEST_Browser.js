@@ -51,6 +51,7 @@ function onLoad(event) {
 		if (item.hasAttribute("href")) {
 			item.addEventListener("click", onHyperlink);
 			const style = item.style;
+			console.log("style = "+style);
 			if(!style){
 				console.error("style invalid!");
 				return;
