@@ -70,17 +70,6 @@ public:
 	
 	////// DK properties //////	
 	static std::vector<DKEventListener> eventListeners;
-	
-	////// toString //////
-	operator std::string() const { return "[object EventTarget]"; }	
 };
-
-
-class DKNullEventTarget : public DKEventTarget
-{
-public:
-	operator std::string() const { return "null"; }
-};
-
 
 #endif //DKEventTarget_H

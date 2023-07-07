@@ -34,9 +34,6 @@ public:
 	DKEventTarget* dkEventTarget;
 	DOMString type;
 	DKCallback callback;
-	
-	////// toString //////
-	virtual operator std::string() const { return "[object EventListener]"; }
 };
 
 

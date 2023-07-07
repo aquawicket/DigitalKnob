@@ -67,17 +67,6 @@ public:
 			virtual const DOMString& background()					{ return _background; }			// getter
 			virtual void background(const DOMString& background)	{ _background = background; } 	// setter
 	//};
-	
-	
-	////// toString //////
-	operator std::string() const { return "[object HTMLBodyElement]"; }
-};
-
-
-class DKNullHTMLBodyElement : public DKHTMLBodyElement
-{
-public:
-	operator std::string() const { return "null"; }
 };
 
 

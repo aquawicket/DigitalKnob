@@ -26,9 +26,6 @@ public:
 	}
 
 	// };
-
-	////// toString //////
-	operator std::string() const { return "[object NonElementParentNode]"; }
 };
 
 #endif // DKNonElementParentNode_H

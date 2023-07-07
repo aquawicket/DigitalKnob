@@ -59,9 +59,6 @@ public:
 		
 	}
 	*/
-
-	////// toString //////
-	operator std::string() const { return "[object DKRmlEventTarget]"; }
 };
 
 

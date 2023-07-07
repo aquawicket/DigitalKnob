@@ -48,10 +48,6 @@ public:
 		DKTODO();
 	}
 	// };
-	
-	
-	////// toString //////
-	operator std::string() const { return "[object CompositionEvent]"; }
 };
 
 

@@ -282,10 +282,6 @@ public:
 	}
 //};
 	*/
-
-
-	////// toString //////
-	operator std::string() const { return "[object DKRmlElement]"; }
 };
 
 //std::vector<DKRmlElement*> DKRmlElement::_list;

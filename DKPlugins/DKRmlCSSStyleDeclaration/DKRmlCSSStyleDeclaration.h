@@ -82,10 +82,6 @@ public:
 	void cssFloat(const CSSOMString& cssFloat) override		{ _cssFloat = cssFloat; } 		// setter
 	
 // };
-
-	
-	////// toString //////
-	operator std::string() const { return "[object DKRmlCSSStyleDeclaration]"; }
 };
 	
 	

@@ -132,10 +132,6 @@ public:
 	// interface HTMLUnknownElement : HTMLElement {
 		// Note: intentionally no [HTMLConstructor]
 	// };
-	
-	
-	////// toString //////
-	operator std::string() const { return "[object DKRmlHTMLElement]"; }
 };
 
 

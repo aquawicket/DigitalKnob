@@ -26,12 +26,8 @@ public:
 	
 	// readonly attribute EventTarget? relatedTarget;
 	DKEventTarget* _relatedTarget = NULL;
-	virtual DKEventTarget* 	relatedTarget()									{ return _relatedTarget ? _relatedTarget : new DKNullEventTarget(); }	// getter
-	virtual void 			relatedTarget(DKEventTarget* relatedTarget) 	{ _relatedTarget = relatedTarget; } 									// setter
-	
-	
-	////// toString //////
-	operator std::string() const { return "[object FocusEvent]"; }
+	virtual DKEventTarget* 	relatedTarget()									{ return _relatedTarget; }	// getter
+	virtual void 			relatedTarget(DKEventTarget* relatedTarget) 	{ _relatedTarget = relatedTarget; } 										// setter
 };
 
 

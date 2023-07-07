@@ -188,16 +188,6 @@ public:
 		DKDEBUGFUNC(label);
 		DKTODO();
 	}
-	
-	////// toString //////
-	operator std::string() const { return "[object Object]"; }
-};
-
-
-class DKNullConsole : public DKConsole
-{
-public:
-	operator std::string() const { return "null"; }
 };
 
 

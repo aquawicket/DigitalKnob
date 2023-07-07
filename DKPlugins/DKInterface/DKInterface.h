@@ -62,7 +62,11 @@ public:
 	*/
 	
 	////// toString //////
-	operator std::string() const { return "[object Interface]"; }
+	operator std::string() const { return "[object "+interfaceName+"]"; }
+	//friend std::ostream& operator<<(std::ostream& os, const DKInterface&/* interface*/){
+    //    os << "[object "+interfaceName+"]";
+    //    return os;
+	//}
 };
 
 

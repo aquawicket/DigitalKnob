@@ -5,7 +5,7 @@
 //[Exposed=*]
 //namespace console { // but see namespace object requirements below
 var Console = function Console(address) {
-	CPP_DKConsoleDUK_log("Console("+address+")");
+	//CPP_DKConsoleDUK_log("Console("+address+")");
 	
 	if(address)
 		this.address = address;

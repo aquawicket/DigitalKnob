@@ -168,17 +168,6 @@ public:
 	virtual const int& y()											{ return _y; }							// getter
 	virtual void y(const int& y)									{ _y = y; } 							// setter
 //};
-
-
-	////// toString //////
-	operator std::string() const { return "[object HTMLImageElement]"; }
-};
-
-
-class DKNullHTMLImageElement : public DKHTMLImageElement
-{
-public:
-	operator std::string() const { return "null"; }
 };
 
 

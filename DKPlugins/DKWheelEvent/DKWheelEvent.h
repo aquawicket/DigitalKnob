@@ -62,10 +62,6 @@ public:
 	unsigned int _deltaMode = 0;
 	virtual const unsigned int&		deltaMode()											{ return _deltaMode; }					// getter
 	virtual void 					deltaMode(const unsigned int& deltaMode) 			{ _deltaMode = deltaMode; } 			// setter
-	
-	
-	////// toString //////
-	operator std::string() const { return "[object WheelEvent]"; }
 };
 
 

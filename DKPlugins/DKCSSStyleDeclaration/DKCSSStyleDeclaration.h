@@ -74,16 +74,7 @@ public:
 	virtual void cssFloat(const CSSOMString& cssFloat)		{ _cssFloat = cssFloat; } 			// setter
 	
 // };
-
-
-	////// toString //////
-	operator std::string() const { return "[object CSSStyleDeclaration]"; }
 };
-	
-class DKNullCSSStyleDeclaration : public DKCSSStyleDeclaration
-{
-public:
-	operator std::string() const { return "null"; }
-};
+
 	
 #endif // DKCSSStyleDeclaration_H

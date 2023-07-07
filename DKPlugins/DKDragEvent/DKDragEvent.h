@@ -28,10 +28,6 @@ public:
 	DKString _dataTransfer = "";
 	virtual const DKString& 	dataTransfer()								{ return _dataTransfer; }			// getter
 	virtual void 				dataTransfer(const DKString& dataTransfer) 	{ _dataTransfer = dataTransfer; } 	// setter
-	
-	
-	////// toString //////
-	operator std::string() const { return "[object DragEvent]"; }
 };
 
 

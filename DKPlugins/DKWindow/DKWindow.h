@@ -46,18 +46,18 @@ public:
 	
 	// [LegacyUnforgeable] readonly attribute Document document;
 	DKDocument* _document = NULL;
-	virtual DKDocument* document()								{ return _document ? _document : new DKNullDocument(); }	// getter
-	virtual void document(DKDocument* document)					{ _document = document; } 									// setter
+	virtual DKDocument* document()								{ return _document; }					// getter
+	virtual void document(DKDocument* document)					{ _document = document; } 				// setter
 	
 	// attribute DOMString name;
 	DOMString _name = "";
-	virtual const DOMString& name()								{ return _name; }											// getter
-	virtual void name(const DOMString& name)					{ _name = name; } 											// setter
+	virtual const DOMString& name()								{ return _name; }						// getter
+	virtual void name(const DOMString& name)					{ _name = name; } 						// setter
 	
 	// [PutForwards=href, LegacyUnforgeable] readonly attribute Location location;
 	DKLocation* _location = NULL;
-	virtual DKLocation* location()								{ return _location ? _location : new DKNullLocation(); }	// getter
-	virtual void location(DKLocation* location)					{ _location = location; } 									// setter
+	virtual DKLocation* location()								{ return _location; }					// getter
+	virtual void location(DKLocation* location)					{ _location = location; } 				// setter
 	
 	// readonly attribute History history;
 	DKString _history = "";
@@ -161,8 +161,8 @@ public:
 	
 	// readonly attribute Element? frameElement;
 	DKElement* _frameElement = NULL;
-	virtual DKElement* frameElement()							{ return _frameElement ? _frameElement : new DKNullElement(); }	// getter
-	virtual void frameElement(DKElement* frameElement)			{ _frameElement = frameElement; } 								// setter
+	virtual DKElement* frameElement()							{ return _frameElement; }				// getter
+	virtual void frameElement(DKElement* frameElement)			{ _frameElement = frameElement; } 		// setter
 	
 	// WindowProxy? open(optional USVString url = "", optional DOMString target = "_blank", optional [LegacyNullToEmptyString] DOMString features = "");
 	DKWindowProxy* _open = NULL;
@@ -181,13 +181,13 @@ public:
 	// the user agent
 	// readonly attribute Navigator navigator;
 	DKNavigator* _navigator = NULL;
-	virtual DKNavigator* navigator()									{ return _navigator ? _navigator : new DKNullNavigator(); }					// getter
-	virtual void navigator(DKNavigator* navigator)						{ _navigator = navigator; } 													// setter
+	virtual DKNavigator* navigator()									{ return _navigator; }							// getter
+	virtual void navigator(DKNavigator* navigator)						{ _navigator = navigator; } 					// setter
 	
 	// readonly attribute Navigator clientInformation; // legacy alias of .navigator
 	DKNavigator* _clientInformation = NULL;
-	virtual DKNavigator* clientInformation()							{ return _clientInformation ? _clientInformation : new DKNullNavigator(); }	// getter
-	virtual void clientInformation(DKNavigator* clientInformation)		{ _clientInformation = clientInformation; } 									// setter
+	virtual DKNavigator* clientInformation()							{ return _clientInformation; }					// getter
+	virtual void clientInformation(DKNavigator* clientInformation)		{ _clientInformation = clientInformation; } 	// setter
 	
 	// readonly attribute boolean originAgentCluster;
 	bool _originAgentCluster = false;
@@ -260,7 +260,7 @@ public:
 	// partial interface Window {
 	//		[Replaceable] readonly attribute (Event or undefined) event; // legacy
 			DKEvent* _event = NULL;
-			virtual DKEvent* event()												{ return _event ? _event : new DKNullEvent(); }		// getter
+			virtual DKEvent* event()												{ return _event; }									// getter
 			virtual void event(DKEvent* event)										{ _event = event; } 								// setter
 	// };
 	
@@ -440,13 +440,13 @@ public:
 			
 	//		[SameObject, Replaceable] readonly attribute Screen screen;
 			DKScreen* _screen = NULL;
-			virtual DKScreen* screen()									{ return _screen ? _screen : new DKNullScreen(); }		// getter
-			virtual void screen(DKScreen* screen)						{ _screen = screen; } 									// setter
+			virtual DKScreen* screen()									{ return _screen; }							// getter
+			virtual void screen(DKScreen* screen)						{ _screen = screen; } 						// setter
 			
 	//		[SameObject, Replaceable] readonly attribute VisualViewport? visualViewport;
 			DKString _visualViewport = "";
-			virtual const DKString& visualViewport()					{ return _visualViewport; }								// getter
-			virtual void visualViewport(const DKString& visualViewport)	{ _visualViewport = visualViewport; } 					// setter
+			virtual const DKString& visualViewport()					{ return _visualViewport; }					// getter
+			virtual void visualViewport(const DKString& visualViewport)	{ _visualViewport = visualViewport; } 		// setter
 
 	//		// browsing context
 	//		undefined moveTo(long x, long y);
@@ -641,17 +641,6 @@ public:
 				return _getScreenDetails;
 			}
 	// };
-	
-	
-	////// toString //////
-	operator std::string() const { return "[object Window]"; }
-};
-
-
-class DKNullWindow : public DKWindow
-{
-public:
-	operator std::string() const { return "null"; }
 };
 
 

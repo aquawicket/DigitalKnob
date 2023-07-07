@@ -47,12 +47,12 @@ public:
 	// readonly attribute EventTarget? target;
 	DKEventTarget* _target = NULL;
 	virtual DKEventTarget* 	target()															{ return _target; }							// getter
-	virtual void 				target(DKEventTarget* target)									{ _target = target; } 						// setter
+	virtual void 			target(DKEventTarget* target)										{ _target = target; } 						// setter
 	
 	// readonly attribute EventTarget? srcElement; // legacy
 	DKEventTarget* _srcElement = NULL;
 	virtual DKEventTarget* 	srcElement()														{ return _srcElement; }						// getter
-	virtual void 				srcElement(DKEventTarget* srcElement) 							{ _srcElement = srcElement; } 				// setter
+	virtual void 			srcElement(DKEventTarget* srcElement) 								{ _srcElement = srcElement; } 				// setter
 	
 	// readonly attribute EventTarget? currentTarget;
 	DKEventTarget* _currentTarget = NULL;
@@ -159,22 +159,6 @@ public:
 	
 	////// DK properties //////
 	DKString _eventInitDict;
-	
-	
-	////// toString //////
-	operator std::string() const { return "[object Event]"; }
-	//friend std::ostream& operator<<(std::ostream& os, const DKEvent&/* event*/){
-    //    os << "[object Event]";
-    //    return os;
-	//}
 };
-
-class DKNullEvent : public DKEvent
-{
-public:
-	DKNullEvent() : DKEvent("undefined", "{}"){}
-	operator std::string() const { return "null"; }
-};
-
 
 #endif //DKEvent_H

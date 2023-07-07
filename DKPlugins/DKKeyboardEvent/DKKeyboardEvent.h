@@ -143,10 +143,6 @@ public:
 	virtual const unsigned int& 	keyCode()															{ return _keyCode; }										// getter
 	virtual void 					keyCode(const unsigned int& keyCode)								{ _keyCode = keyCode; } 									// setter
 	// };
-	
-	
-	////// toString //////
-	operator std::string() const { return "[object KeyboardEvent]"; }
 };
 
 

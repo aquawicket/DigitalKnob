@@ -286,10 +286,6 @@ public:
 			void onfullscreenerror(const DKString& onfullscreenerror) override		{ _onfullscreenerror = onfullscreenerror; } 	// setter
 	//};
 	*/
-	
-	
-	////// toString //////
-	operator std::string() const { return "[object DKRmlDocument]"; }
 };
 
 

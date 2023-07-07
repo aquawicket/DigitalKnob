@@ -22,15 +22,6 @@ public:
 		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 	}
 	
-	/*
-	////// NOTE: from DKElementCSSInlineStyle
-	// [SameObject, PutForwards=cssText] readonly attribute CSSStyleDeclaration style;
-	DKCSSStyleDeclaration* _style = NULL;
-	virtual DKCSSStyleDeclaration* style() 						{ return _style; }					// getter
-	virtual void style(DKCSSStyleDeclaration* style)			{ _style = style; } 				// setter
-	////////////////////////////////////////////
-	*/
-	
 	// readonly attribute DOMString? namespaceURI;
 	DOMString _namespaceURI = "";
 	virtual const DOMString& namespaceURI()						{ return _namespaceURI; }			// getter
@@ -248,17 +239,6 @@ public:
 		return _insertAdjacentText;
 	}
 //};
-
-	
-	////// toString //////
-	operator std::string() const { return "[object Element]"; }
-};
-
-
-class DKNullElement : public DKElement
-{
-public:
-	operator std::string() const { return "null"; }
 };
 
 

@@ -50,17 +50,6 @@ public:
 	virtual void pixelDepth(const unsigned int& pixelDepth)	{ _pixelDepth = pixelDepth; } 	// setter
 	
 //};
-
-	
-	////// toString //////
-	operator std::string() const { return "[object Screen]"; }
-};
-
-
-class DKNullScreen : public DKScreen
-{
-public:
-	operator std::string() const { return "null"; }
 };
 
 

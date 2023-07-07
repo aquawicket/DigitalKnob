@@ -27,9 +27,6 @@ public:
 		_innerHTML = innerHTML; } 	
 
 	// };
-
-	////// toString //////
-	operator std::string() const { return "[object InnerHTML]"; }
 };
 
 #endif // DKInnerHTML_H
