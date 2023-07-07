@@ -6,6 +6,7 @@
 #define DKInnerHTMLDUK_H
 
 #include "DKDuktape/DKDuktape.h"
+//#include "DKInterface/DKInterface.h"
 #include "DKElement/DKElement.h"
 
 // Source: DOM Parsing and Serialization (https://www.w3.org/TR/DOM-Parsing/)

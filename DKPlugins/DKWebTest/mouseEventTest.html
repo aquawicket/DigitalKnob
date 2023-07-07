@@ -24,19 +24,20 @@
 		<strong>event.layerY: </strong><a id="event.layerY">error</a><br />
 
 		<script>
-		window.addEventListener("click", onMouseEvent, true);
+		
 		function onMouseEvent(event){
 			console.log("onMouseEvent("+event+")");
 			document.getElementById("event").innerHTML = ""+event;
-			document.getElementById("event.altKey").innerHTML = event.altKey;
-			document.getElementById("event.button").innerHTML = event.button;
-			document.getElementById("event.buttons").innerHTML = event.buttons;
-			document.getElementById("event.clientX").innerHTML = event.clientX;
-			document.getElementById("event.clientY").innerHTML = event.clientY;
-			document.getElementById("event.ctrlKey").innerHTML = event.ctrlKey;
-			//document.getElementById("event.layerX").innerHTML = event.layerX;
-			//document.getElementById("event.layerY").innerHTML = event.layerY;
+			document.getElementById("event.altKey").innerHTML = ""+event.altKey;
+			document.getElementById("event.button").innerHTML = ""+event.button;
+			document.getElementById("event.buttons").innerHTML = ""+event.buttons;
+			document.getElementById("event.clientX").innerHTML = ""+event.clientX;
+			document.getElementById("event.clientY").innerHTML = ""+event.clientY;
+			document.getElementById("event.ctrlKey").innerHTML = ""+event.ctrlKey;
+			//document.getElementById("event.layerX").innerHTML = ""+event.layerX;
+			//document.getElementById("event.layerY").innerHTML = ""+event.layerY;
 		}
+		window.addEventListener("click", onMouseEvent, true);
 		</script>
 	</body>
 </html>

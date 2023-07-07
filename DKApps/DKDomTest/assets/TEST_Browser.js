@@ -32,12 +32,13 @@ function onHyperlink(event) {
 
 function onLoad(event) {
 	console.log("onLoad()");
-	document = new DKRmlDocument(dkRmlInterface, dkRmlEventListener);	//the document needs to be refreshes when reloading a page
+	document = new DKRmlDocument(dkRmlInterface, dkRmlEventListener);	//the document needs to be refreshed when reloading a page
 	
 	//////////// Post processing <a href></a> hyperlinks ////////////
 	var aElements = document.getElementsByTagName("a");
 	if(!aElements){
 		console.error("aElements invalid!");
+		
 		return;
 	}
 

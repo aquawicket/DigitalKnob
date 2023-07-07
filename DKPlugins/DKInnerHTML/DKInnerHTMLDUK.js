@@ -10,7 +10,7 @@ Object.defineProperty(Element.prototype, 'innerHTML', {
 		},
 		set: function innerHTML(data)		{
 			console.log("InnerHTML.prototype.innerHTML("+data+")");
-			CPP_DKInnerHTMLDUK_innerHTML(this.address, data);		
+			CPP_DKInnerHTMLDUK_innerHTML(this.address, data);	
 		},
 		configurable: true
 });

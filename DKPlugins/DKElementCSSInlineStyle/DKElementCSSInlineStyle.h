@@ -5,19 +5,18 @@
 #define DKElementCSSInlineStyle_H
 
 #include "DKCSSStyleDeclaration/DKCSSStyleDeclaration.h"
-//#include "DKMixin/DKMixin.h"
 
 
 // Source: CSS Object Model (CSSOM) (https://www.w3.org/TR/cssom-1/)
 // interface mixin ElementCSSInlineStyle {
-class DKElementCSSInlineStyle //: public DKMixin
+class DKElementCSSInlineStyle
 {
 public:
 	
 	// [SameObject, PutForwards=cssText] readonly attribute CSSStyleDeclaration style;
 	DKCSSStyleDeclaration* _style = NULL;
-	virtual DKCSSStyleDeclaration*	style()									{ return _style;/* ? _style : new DKNullCSSStyleDeclaration();*/ }	// getter
-	virtual void 					style(DKCSSStyleDeclaration* style) 	{ _style = style; } 											// setter
+	virtual DKCSSStyleDeclaration*	style()									{ return _style; }		// getter
+	virtual void 					style(DKCSSStyleDeclaration* style) 	{ _style = style; } 	// setter
 
 // };
 

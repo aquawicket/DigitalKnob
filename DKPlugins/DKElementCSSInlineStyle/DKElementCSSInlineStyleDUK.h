@@ -1,0 +1,52 @@
+// [IDL] https://drafts.csswg.org/cssom/#the-elementcssinlinestyle-mixin
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style
+#if HAVE_DKDuktape
+
+#pragma once
+#ifndef DKElementCSSInlineStyleDUK_H
+#define DKElementCSSInlineStyleDUK_H
+
+#include "DKDuktape/DKDuktape.h"
+#include "DKElement/DKElement.h"
+
+// Source: CSS Object Model (CSSOM) (https://www.w3.org/TR/cssom-1/)
+// interface mixin ElementCSSInlineStyle {
+class DKElementCSSInlineStyleDUK : public DKObjectT<DKElementCSSInlineStyleDUK>
+{
+public:
+	bool Init(){
+		
+		// [SameObject, PutForwards=cssText] readonly attribute CSSStyleDeclaration style;
+		DKDuktape::AttachFunction("CPP_DKElementCSSInlineStyleDUKK_style", DKElementCSSInlineStyleDUK::style);
+		
+		DKClass::DKCreate("DKElementCSSInlineStyle/DKElementCSSInlineStyleDUK.js");
+		
+		return true;
+	}
+	
+	//FIXME: since this is a mixin, we need to know which base class called
+	static DKElement* element(duk_context* ctx){		
+		DKString interfaceAddress = duk_require_string(ctx, 0);
+		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+		DKString elementAddress = interface->address["Element"];			
+		DKElement* _element = (DKElement*)addressToPointer(elementAddress);
+		return _element;
+	}
+	
+	// [SameObject, PutForwards=cssText] readonly attribute CSSStyleDeclaration style;
+	static int style(duk_context* ctx){
+		DKDEBUGFUNC(ctx);
+		DKINFO("DKElementCSSInlineStyleDUK::style()\n");
+		if (duk_is_valid_index(ctx, 1)) {
+			element(ctx)->style(duk_require_string(ctx, 1));
+		}
+		else {
+			dukglue_push(ctx, element(ctx)->style());
+		}
+		return true;
+	}
+};
+REGISTER_OBJECT(DKElementCSSInlineStyleDUK, true)
+
+#endif //DKElementCSSInlineStyleDUK_H
+#endif //HAVE_DKDuktape

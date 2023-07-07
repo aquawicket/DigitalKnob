@@ -3,7 +3,7 @@
 #ifndef DKInnerHTML_H
 #define DKInnerHTML_H
 
-#include "DKInterface/DKInterface.h"
+//#include "DKInterface/DKInterface.h"
 
 
 // Source: DOM Parsing and Serialization (https://www.w3.org/TR/DOM-Parsing/)
