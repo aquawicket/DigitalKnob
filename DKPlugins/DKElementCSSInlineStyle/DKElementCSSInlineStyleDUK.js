@@ -19,3 +19,9 @@ Object.defineProperty(Element.prototype, 'style', {
 });
 
 // };
+
+// Source: CSS Typed OM Level 1 (https://www.w3.org/TR/css-typed-om-1/)
+// partial interface mixin ElementCSSInlineStyle {
+// [SameObject] readonly attribute StylePropertyMap attributeStyleMap;
+	// TODO
+// };
