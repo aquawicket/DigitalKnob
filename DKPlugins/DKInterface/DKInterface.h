@@ -30,8 +30,9 @@ public:
 		for(unsigned int i=0; i<_list.size(); ++i){
 			if(interfaceAddress == _list[i]->interfaceAddress)
 				return;
-			_list.push_back(this);
 		}
+		
+		_list.push_back(this);
 		printInterfaceList();
 	}
 	virtual ~DKInterface(){}
@@ -42,27 +43,16 @@ public:
 	std::map<DKString, DKString> address;
 	
 	static void printInterfaceList(){
-		DKINFO("\n######### Interface List ########################################################################################################\n");
+		DKINFO("\n########## Interface List ##########\n");
 		for(unsigned int i=0; i<_list.size(); ++i){
-			DKINFO(_list[i]->interfaceName+"("+_list[i]->interfaceAddress+")");
+			DKINFO(toString(i)+": "+_list[i]->interfaceName+"("+_list[i]->interfaceAddress+")\n");
 		}
-		DKINFO("\n#################################################################################################################################\n");
+		DKINFO("\n");
 	}
 	
 	////// toString //////
 	operator std::string() const { return "[object Interface]"; }
 };
-
-
-
-
-/*
-class DKNullInterface : public DKInterface
-{
-public:
-	operator std::string() const { return "null"; }
-};
-*/
 
 
 #endif //DKInterface_H
