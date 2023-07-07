@@ -17,6 +17,8 @@ public:
 	
 	DKHTMLCollection(std::vector<DKElement*> element_list) : DKInterface() {
 		DKDEBUGFUNC(element_list);
+		//DKASSERT(element_list);
+		
 		interfaceName = "HTMLCollection";
 		address[interfaceName] = pointerToAddress(this);
 		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");

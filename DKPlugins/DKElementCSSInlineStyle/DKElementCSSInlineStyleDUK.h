@@ -17,7 +17,7 @@ public:
 	bool Init(){
 		
 		// [SameObject, PutForwards=cssText] readonly attribute CSSStyleDeclaration style;
-		DKDuktape::AttachFunction("CPP_DKElementCSSInlineStyleDUKK_style", DKElementCSSInlineStyleDUK::style);
+		DKDuktape::AttachFunction("CPP_DKElementCSSInlineStyleDUK_style", DKElementCSSInlineStyleDUK::style);
 		
 		DKClass::DKCreate("DKElementCSSInlineStyle/DKElementCSSInlineStyleDUK.js");
 		

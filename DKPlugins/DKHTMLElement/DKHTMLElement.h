@@ -16,7 +16,8 @@ public:
 	DKHTMLElement() : DKElement() {
 		DKDEBUGFUNC();
 		interfaceName = "HTMLElement";
-		interfaceAddress = pointerToAddress(this);		
+		address[interfaceName] = pointerToAddress(this);
+		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");	
 	}
 	
 	// metadata attributes

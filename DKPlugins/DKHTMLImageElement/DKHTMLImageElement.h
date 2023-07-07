@@ -18,7 +18,8 @@ public:
 	DKHTMLImageElement() : DKHTMLElement() {
 		DKDEBUGFUNC();
 		interfaceName = "HTMLImageElement";
-		interfaceAddress = pointerToAddress(this);
+		address[interfaceName] = pointerToAddress(this);
+		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
 	}
 
 	// [CEReactions] attribute DOMString alt;
