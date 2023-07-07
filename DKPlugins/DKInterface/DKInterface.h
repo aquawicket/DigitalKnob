@@ -21,38 +21,48 @@ class DKInterface
 {
 public:
 	DKInterface(){
-		DKDEBUGFUNC();
+		//DKDEBUGFUNC();
 		interfaceName = "Interface";
 		interfaceAddress = pointerToAddress(this);
 		address[interfaceName] = pointerToAddress(this);
 		DKINFO("\nDKInterface("+interfaceAddress+") \n");
 		
-		/*
 		for(unsigned int i=0; i<_list.size(); ++i){
-			if(interfaceAddress == _list[i])
+			if(interfaceAddress == _list[i]->interfaceAddress)
 				return;
-			_list.push_back(interfaceAddress);
+			_list.push_back(this);
 		}
-		*/
+		printInterfaceList();
 	}
 	virtual ~DKInterface(){}
 	
-	//std::vector<DKString> _list;
+	static std::vector<DKInterface*> _list;
 	DKString interfaceName = "";
 	DKString interfaceAddress = "";
 	std::map<DKString, DKString> address;
 	
+	static void printInterfaceList(){
+		DKINFO("\n######### Interface List ########################################################################################################\n");
+		for(unsigned int i=0; i<_list.size(); ++i){
+			DKINFO(_list[i]->interfaceName+"("+_list[i]->interfaceAddress+")");
+		}
+		DKINFO("\n#################################################################################################################################\n");
+	}
 	
 	////// toString //////
 	operator std::string() const { return "[object Interface]"; }
 };
 
 
+
+
+/*
 class DKNullInterface : public DKInterface
 {
 public:
 	operator std::string() const { return "null"; }
 };
+*/
 
 
 #endif //DKInterface_H
