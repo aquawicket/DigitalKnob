@@ -36,8 +36,12 @@ public:
 	static DKHTMLCollection* htmlCollection(duk_context* ctx){
 		DKString interfaceAddress = duk_require_string(ctx, 0);
 		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+		DKASSERT(interface);
+		
 		DKString htmlCollectionAddress = interface->address["HTMLCollection"];
 		DKHTMLCollection* _htmlCollection = (DKHTMLCollection*)addressToPointer(htmlCollectionAddress);
+		DKASSERT(_htmlCollection);
+		
 		return _htmlCollection;
 	}
 	static bool GetBool(duk_context* ctx){

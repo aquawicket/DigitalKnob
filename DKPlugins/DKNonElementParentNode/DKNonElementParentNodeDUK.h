@@ -27,8 +27,12 @@ public:
 	static DKDocument* nonElementParentNode(duk_context* ctx){		
 		DKString interfaceAddress = duk_require_string(ctx, 0);
 		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+		DKASSERT(interface);
+		
 		DKString documentAddress = interface->address["Document"];			
 		DKDocument* _document = (DKDocument*)addressToPointer(documentAddress);
+		DKASSERT(_document);
+		
 		return _document;
 	}
 	

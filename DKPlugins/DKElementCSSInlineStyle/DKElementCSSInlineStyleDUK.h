@@ -29,9 +29,11 @@ public:
 		DKString interfaceAddress = duk_require_string(ctx, 0);
 		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
 		DKASSERT(interface);
+		
 		DKString elementAddress = interface->address["Element"];			
 		DKElement* _element = (DKElement*)addressToPointer(elementAddress);
 		DKASSERT(_element);
+		
 		return _element;
 	}
 	
@@ -43,9 +45,11 @@ public:
 			DKString interfaceAddress = duk_require_string(ctx, 1);
 			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
 			DKASSERT(interface);
+			
 			DKString cssStyleDeclarationAddress = interface->address["CSSStyleDeclaration"];
 			DKCSSStyleDeclaration* cssStyleDeclaration = (DKCSSStyleDeclaration*)addressToPointer(cssStyleDeclarationAddress);
 			DKASSERT(cssStyleDeclaration);
+			
 			element(ctx)->style(cssStyleDeclaration);
 		}
 		else {

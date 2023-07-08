@@ -11,7 +11,7 @@
 // Source: CSS Object Model (CSSOM) (https://www.w3.org/TR/cssom-1/)
 // [Exposed=Window]
 // interface CSSStyleDeclaration {
-class DKRmlCSSStyleDeclaration : public DKCSSStyleDeclaration
+class DKRmlCSSStyleDeclaration : virtual public DKCSSStyleDeclaration
 {
 public:
 	static std::vector<DKRmlCSSStyleDeclaration*> list;

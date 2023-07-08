@@ -6,7 +6,6 @@
 #define DKInnerHTMLDUK_H
 
 #include "DKDuktape/DKDuktape.h"
-//#include "DKInterface/DKInterface.h"
 #include "DKElement/DKElement.h"
 
 // Source: DOM Parsing and Serialization (https://www.w3.org/TR/DOM-Parsing/)
@@ -28,8 +27,11 @@ public:
 	static DKElement* element(duk_context* ctx){		
 		DKString interfaceAddress = duk_require_string(ctx, 0);
 		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+		DKASSERT(interface);
+		
 		DKString elementAddress = interface->address["Element"];			
 		DKElement* _element = (DKElement*)addressToPointer(elementAddress);
+		DKASSERT(_element);
 		return _element;
 	}
 	

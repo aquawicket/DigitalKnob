@@ -135,8 +135,6 @@ public:
 		DKASSERT(interface);
 		
 		DKString elementAddress = interface->address["Element"];
-		DKASSERT(!elementAddress.empty());
-
 		DKElement* _element = (DKElement*)addressToPointer(elementAddress);
 		DKASSERT(_element);
 		

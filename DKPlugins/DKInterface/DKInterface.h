@@ -3,6 +3,7 @@
 #define DKInterface_H
 
 #include "DK/DK.h"
+#include <unordered_map>
 
 ////// undefined //////
 typedef void undefined;
@@ -42,15 +43,15 @@ public:
 	static std::vector<DKInterface*> _list;
 	DKString interfaceName = "";
 	DKString interfaceAddress = "";
-	std::map<DKString, DKString> address;
+	std::unordered_map<DKString, DKString> address;
 	
 	static void printInterfaceList(){
 		DKINFO("\n########## Interface List ##########\n");
 		for(unsigned int i=0; i<_list.size(); ++i){
 			DKINFO(toString(i)+": "+_list[i]->interfaceName+"("+_list[i]->interfaceAddress+"): ");	//print interfaceName and interfaceAddress
 			
-			for (auto nn : _list)																	//print address map
-				DKINFO(nn.first+", "); //+nn.second;
+			for (auto nn = _list[i]->address.begin(); nn != _list[i]->address.end(); nn++)
+				std::cout << nn->first << ", ";
 			
 			DKINFO("\n");
 		}

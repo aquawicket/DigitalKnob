@@ -116,9 +116,11 @@ public:
 		DKString interfaceAddress = duk_require_string(ctx, 0);
 		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
 		DKASSERT(interface);
+		
 		DKString consoleAddress = interface->address["Console"];
 		DKConsole* _console = (DKConsole*)addressToPointer(consoleAddress);
 		DKASSERT(_console);
+		
 		return _console;
 	}
 	

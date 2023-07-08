@@ -10,7 +10,7 @@
 // Source: CSS Object Model (CSSOM) (https://www.w3.org/TR/cssom-1/)
 // [Exposed=Window]
 // interface CSSStyleDeclaration {
-class DKCSSStyleDeclaration : public DKInterface
+class DKCSSStyleDeclaration : virtual public DKInterface
 {
 public:
 	DKCSSStyleDeclaration() : DKInterface() {

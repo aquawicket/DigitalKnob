@@ -501,10 +501,8 @@ DKStringArray getSettingsFromString(const DKString& filestring, const DKString& 
 
 DKString pointerToAddress(const void* pointer) {
 	//DKDEBUGFUNC(event);  //EXCESSIVE LOGGING
-	if (!pointer) {
-		DKERROR("pointer invalid! \n");
-		return "";
-	}
+	DKASSERT(pointer);
+
 	std::stringstream ss;
 	const void* address = static_cast<const void*>(pointer);
 #if WIN
@@ -521,9 +519,8 @@ DKString pointerToAddress(const void* pointer) {
 
 void* addressToPointer(const DKString& address) {
 	//DKDEBUGFUNC(address);  //EXCESSIVE LOGGING
-	if(address.empty())
-		DKERROR("address is empty! \n");
-	
+	DKASSERT(!address.empty());
+
 	void* pointer;
 	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {
 		DKERROR("address:" + address + " is not a valid hex notation! \n");
@@ -538,9 +535,7 @@ void* addressToPointer(const DKString& address) {
 		return NULL;
 	}
 	pointer = reinterpret_cast<void*>(tmp);
-	if (!pointer) {
-		DKERROR("pointer inavalid! \n");
-		return NULL;
-	}
+	DKASSERT(pointer);
+	
 	return pointer;
 }

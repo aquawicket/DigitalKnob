@@ -27,12 +27,16 @@ public:
 		
 		DKString windowInterfaceAddress = duk_require_string(ctx, 0);
 		DKInterface* windowInterface = (DKInterface*)addressToPointer(windowInterfaceAddress);
+		DKASSERT(windowInterface);
+		
 		DKString windowAddress = windowInterface->address["Window"];
 		DKWindow* window = (DKWindow*)addressToPointer(windowAddress);
-
+		DKASSERT(window);
 		
 		DKINFO("CPP_DKRmlInterfaceDUK_constructor("+windowAddress+")\n");
 		DKRmlInterface* dkRmlInterface = new DKRmlInterface(window);
+		DKASSERT(dkRmlInterface);
+		
 		dukglue_push(ctx, dkRmlInterface->interfaceAddress);	
 		return true;
 	}
