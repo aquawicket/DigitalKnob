@@ -50,7 +50,7 @@ public:
 			DKINFO(toString(i)+": "+_list[i]->interfaceName+"("+_list[i]->interfaceAddress+"): ");	//print interfaceName and interfaceAddress
 			
 			for (auto nn : _list)																	//print address map
-				DKINFO(nn.first+", "; //<< nn.second;
+				DKINFO(nn.first+", "); //+nn.second;
 			
 			DKINFO("\n");
 		}
