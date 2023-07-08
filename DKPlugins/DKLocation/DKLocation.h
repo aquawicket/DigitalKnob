@@ -104,6 +104,8 @@ public:
 	DKString _ancestorOrigins = "";
 	virtual const DKString& ancestorOrigins()						{ return _ancestorOrigins; }				// getter
 	virtual void ancestorOrigins(const DKString& ancestorOrigins)	{ _ancestorOrigins = ancestorOrigins; } 	// setter
+
+// };
 };
 
 

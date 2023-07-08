@@ -1,5 +1,4 @@
-// [IDL] file:///C:/Users/Administrator/digitalknob/DK/3rdParty/webref-curated/ed/idlnames/Location.idl
-// [SOURCE] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-location-interface
+// [IDL] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-location-interface
 // [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Location
 #pragma once
 #ifndef DKRmlLocation_H
@@ -29,11 +28,57 @@ public:
 		
 		_dkRmlInterface = dkRmlInterface;
 		_dkRmlEventListener = dkRmlEventListener;
-
 	}
 
 	// [LegacyUnforgeable] stringifier attribute USVString href;
-	void href(const USVString& href) override;
+	const USVString& href()	override;					// getter
+	void href(const USVString& href) override;			// setter
+	
+	// [LegacyUnforgeable] readonly attribute USVString origin;
+	const USVString& origin()	override;				// getter
+	void origin(const USVString& origin) override;		// setter
+	
+	// [LegacyUnforgeable] attribute USVString protocol;
+	const USVString& protocol()	override;				// getter
+	void protocol(const USVString& protocol) override;	// setter
+	
+	// [LegacyUnforgeable] attribute USVString host;
+	const USVString& host()	override;					// getter
+	void host(const USVString& host) override;			// setter
+	
+	// [LegacyUnforgeable] attribute USVString hostname;
+	const USVString& hostname()	override;				// getter
+	void hostname(const USVString& hostname) override;	// setter
+	
+	// [LegacyUnforgeable] attribute USVString port;
+	const USVString& port()	override;					// getter
+	void port(const USVString& port) override;			// setter
+	
+	// [LegacyUnforgeable] attribute USVString pathname;
+	const USVString& pathname()	override;				// getter
+	void pathname(const USVString& pathname) override;	// setter
+	
+	// [LegacyUnforgeable] attribute USVString search;
+	const USVString& search()	override;				// getter
+	void search(const USVString& search) override;		// setter
+	
+	// [LegacyUnforgeable] attribute USVString hash;
+	const USVString& hash()	override;					// getter
+	void hash(const USVString& hash) override;			// setter
+	
+	// [LegacyUnforgeable] undefined assign(USVString url);
+	// TODO
+	
+	// [LegacyUnforgeable] undefined replace(USVString url);
+	// TODO
+	
+	// [LegacyUnforgeable] undefined reload();
+	// TODO
+	
+	// [LegacyUnforgeable, SameObject] readonly attribute DOMStringList ancestorOrigins;
+	// TODO
+	
+// };
 };
 //REGISTER_OBJECT(DKRmlLocation, true);
 
