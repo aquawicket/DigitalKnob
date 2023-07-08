@@ -17,12 +17,6 @@ public:
 	bool Init(){
 		DKDuktape::AttachFunction("CPP_DKElementDUK_constructor", 				DKElementDUK::constructor);
 		
-		/*
-		////// NOTE: from DKElementCSSInlineStyle
-		// [SameObject, PutForwards=cssText] readonly attribute CSSStyleDeclaration style;
-		DKDuktape::AttachFunction("CPP_DKElementDUK_style", 					DKElementDUK::style);
-		*/
-		
 		// readonly attribute DOMString? namespaceURI;
 		DKDuktape::AttachFunction("CPP_DKElementDUK_namespaceURI", 				DKElementDUK::namespaceURI);
 		
@@ -138,10 +132,14 @@ public:
 	static DKElement* element(duk_context* ctx){
 		DKString interfaceAddress = duk_require_string(ctx, 0);
 		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+		DKASSERT(interface);
+		
 		DKString elementAddress = interface->address["Element"];
-		if(elementAddress.empty())
-			DKERROR("elementAddress.empty()! \n");
+		DKASSERT(!elementAddress.empty());
+
 		DKElement* _element = (DKElement*)addressToPointer(elementAddress);
+		DKASSERT(_element);
+		
 		return _element;
 	}
 	static bool GetBool(duk_context* ctx, int index = 1){
@@ -175,10 +173,13 @@ public:
 		
 		DKINFO("CPP_DKElementDUK_constructor()\n");
 		DKElement* _element = new DKElement();
+		DKASSERT(_element);
+		
 		dukglue_push(ctx, _element->interfaceAddress);
 		return true;
 	}
 	
+	/*
 	////// NOTE: from DKElementCSSInlineStyle
 	// [SameObject, PutForwards=cssText] readonly attribute CSSStyleDeclaration style;
 	static int style(duk_context* ctx){
@@ -189,6 +190,7 @@ public:
 		return true;
 	}
 	/////////////////////////////////////////
+	*/
 	
 	// readonly attribute DOMString? namespaceURI;
 	static int namespaceURI(duk_context* ctx){

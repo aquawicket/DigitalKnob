@@ -47,7 +47,12 @@ public:
 	static void printInterfaceList(){
 		DKINFO("\n########## Interface List ##########\n");
 		for(unsigned int i=0; i<_list.size(); ++i){
-			DKINFO(toString(i)+": "+_list[i]->interfaceName+"("+_list[i]->interfaceAddress+")\n");
+			DKINFO(toString(i)+": "+_list[i]->interfaceName+"("+_list[i]->interfaceAddress+"): ");	//print interfaceName and interfaceAddress
+			
+			for (auto nn : _list)																	//print address map
+				DKINFO(nn.first+", "; //<< nn.second;
+			
+			DKINFO("\n");
 		}
 		DKINFO("\n");
 	}
