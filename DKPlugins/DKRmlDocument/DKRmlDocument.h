@@ -47,11 +47,9 @@ public:
 		list.push_back(this);
 	}
 	
-	/*
 	// [SameObject] readonly attribute DOMImplementation implementation;
 	const DKString& implementation() override						{ return _implementation; }					// getter
 	void implementation(const DKString& implementation) override	{ _implementation = implementation; }		// setter
-	*/
 	
 	// readonly attribute USVString URL;
 	const USVString& URL() override									{ return _dkRmlInterface->href_; }			// getter

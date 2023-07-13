@@ -84,7 +84,7 @@ public:
 	
 	// readonly attribute unsigned short nodeType;
 	unsigned short _nodeType = 0;
-	virtual const unsigned short& nodeType()						{ return _nodeType; }					// getter
+	virtual const unsigned short& nodeType() 						{ return _nodeType; }					// getter
 	virtual void nodeType(const unsigned short& nodeType)			{ _nodeType = nodeType; } 				// setter
 	
 	// readonly attribute DOMString nodeName;

@@ -112,15 +112,32 @@ void DKRmlLocation::hash(const USVString& hash) { 			// setter
 }
 	
 // [LegacyUnforgeable] undefined assign(USVString url);
-// TODO
+void DKRmlLocation::assign(const USVString& url) {
+	DKDEBUGFUNC(url);
+	DKTODO();
+}
 	
 // [LegacyUnforgeable] undefined replace(USVString url);
-// TODO
+void DKRmlLocation::replace(const USVString& url) {
+	DKDEBUGFUNC(url);
+	DKTODO();
+}
 	
 // [LegacyUnforgeable] undefined reload();
-// TODO
+void DKRmlLocation::reload() {
+	DKDEBUGFUNC();
+	DKTODO();
+}
 	
 // [LegacyUnforgeable, SameObject] readonly attribute DOMStringList ancestorOrigins;
-// TODO
+const DKString& DKRmlLocation::ancestorOrigins() {						// getter
+	DKDEBUGFUNC();
+	DKTODO();
+	return _hash;
+}
+void DKRmlLocation::ancestorOrigins(const DKString& ancestorOrigins) { 	// setter
+	DKDEBUGFUNC(ancestorOrigins);
+	DKTODO();
+}
 	
 // };

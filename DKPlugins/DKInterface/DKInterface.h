@@ -44,6 +44,7 @@ public:
 	DKString interfaceName = "";
 	DKString interfaceAddress = "";
 	std::unordered_map<DKString, DKString> address;
+	//std::vector<std::pair<DKString, DKString>> address;
 	
 	static void printInterfaceList(){
 		DKINFO("\n########## Interface List ##########\n");
