@@ -92,6 +92,8 @@ public:
 		DKDEBUGFUNC();
 		#if WIN
 			ShowWindow(GetConsoleWindow(), SW_HIDE);
+		#else
+			DKTODO();
 		#endif
 	}
 	
@@ -106,6 +108,8 @@ public:
 		DKDEBUGFUNC();
 		#if WIN
 			ShowWindow(GetConsoleWindow(), SW_SHOW);
+		#else
+			DKTODO();
 		#endif
 	}
 	
@@ -114,6 +118,8 @@ public:
 		DKDEBUGFUNC();
 		#if WIN
 			ShowWindow(GetConsoleWindow(), SW_SHOWMINNOACTIVE);
+		#else
+			DKTODO();
 		#endif
 	}
 	
@@ -326,6 +332,8 @@ public:
 					int nHeight = rect.bottom - rect.top;
 					if (!MoveWindow(GetConsoleWindow(), x, y, nWidth, nHeight, TRUE))
 						DKERROR("MoveWindow() failed");
+				#else
+					DKTODO();
 				#endif
 			}
 
@@ -341,6 +349,8 @@ public:
 					int nHeight = rect.bottom - rect.top;
 					if (!MoveWindow(GetConsoleWindow(), new_x, new_y, nWidth, nHeight, TRUE))
 						DKERROR("MoveWindow() failed");
+				#else
+					DKTODO();
 				#endif
 			}
 
@@ -356,6 +366,8 @@ public:
 					int nHeight = height;
 					if (!MoveWindow(GetConsoleWindow(), X, Y, nWidth, nHeight, TRUE))
 						DKERROR("MoveWindow() failed");
+				#else
+					DKTODO();
 				#endif
 			}
 
@@ -371,6 +383,8 @@ public:
 					int nHeight = rect.bottom - rect.top + y;
 					if (!MoveWindow(GetConsoleWindow(), X, Y, nWidth, nHeight, TRUE))
 						DKERROR("MoveWindow() failed");
+				#else
+					DKTODO();
 				#endif
 			}
 
@@ -425,6 +439,8 @@ public:
 					RECT rect;
 					GetWindowRect(GetConsoleWindow(), &rect);
 					_outerWidth = rect.right - rect.left;
+				#else
+					DKTODO();
 				#endif
 				return _outerWidth;
 			}
@@ -439,6 +455,8 @@ public:
 					RECT rect;
 					GetWindowRect(GetConsoleWindow(), &rect);
 					_outerHeight = rect.bottom - rect.top;
+				#else
+					DKTODO();
 				#endif
 				return _outerHeight;
 			}

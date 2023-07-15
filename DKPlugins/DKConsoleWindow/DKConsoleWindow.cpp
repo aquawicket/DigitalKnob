@@ -70,7 +70,7 @@ DKConsoleWindow::DKConsoleWindow() : DKWindow() {
 		if (hStdin == INVALID_HANDLE_VALUE)
 			ErrorExit("GetStdHandle");
 
-			// Save the current input mode, to be restored on exit. 
+		// Save the current input mode, to be restored on exit. 
 		if (!GetConsoleMode(hStdin, &fdwSaveOldMode))
 			ErrorExit("GetConsoleMode");
 

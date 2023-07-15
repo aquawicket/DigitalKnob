@@ -170,4 +170,4 @@ CPP_DK_Create("DKRmlDocumentDUK");
 
 
 ////// DigitalKnob Tests //////
-//CPP_DK_Create("TEST_Browser.js");
+CPP_DK_Create("TEST_Browser.js");

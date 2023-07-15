@@ -399,8 +399,12 @@ public:
 	static DKWindow* eventTarget(duk_context* ctx){
 		DKString interfaceAddress = duk_require_string(ctx, 0);
 		DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+		DKASSERT(interface);
+		
 		DKString windowAddress = interface->address["Window"];
 		DKWindow* _window = (DKWindow*)addressToPointer(windowAddress);
+		DKASSERT(_window);
+		
 		return _window;
 	}
 	static bool GetBool(duk_context* ctx){
@@ -446,8 +450,12 @@ public:
 		if(duk_is_valid_index(ctx, 1)){
 			DKString interfaceAddress = GetString(ctx);
 			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+			DKASSERT(interface);
+			
 			DKString windowAddress = interface->address["Window"];
 			DKWindow* window = (DKWindow*)addressToPointer(windowAddress);
+			DKASSERT(window);
+			
 			eventTarget(ctx)->window(window);
 		}
 		dukglue_push(ctx, eventTarget(ctx)->window()->interfaceAddress);
@@ -460,8 +468,12 @@ public:
 		if(duk_is_valid_index(ctx, 1)){
 			DKString interfaceAddress = GetString(ctx);
 			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+			DKASSERT(interface);
+			
 			DKString windowAddress = interface->address["Window"];
 			DKWindow* window = (DKWindow*)addressToPointer(windowAddress);
+			DKASSERT(window);
+			
 			eventTarget(ctx)->self(window);
 		}
 		dukglue_push(ctx, eventTarget(ctx)->self()->interfaceAddress);
@@ -474,8 +486,12 @@ public:
 		if(duk_is_valid_index(ctx, 1)){
 			DKString interfaceAddress = GetString(ctx);
 			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+			DKASSERT(interface);
+			
 			DKString documentAddress = interface->address["Document"];
 			DKDocument* document = (DKDocument*)addressToPointer(documentAddress);
+			DKASSERT(document);
+			
 			eventTarget(ctx)->document(document);
 		}
 		dukglue_push(ctx, eventTarget(ctx)->document()->interfaceAddress);
@@ -497,8 +513,12 @@ public:
 		if(duk_is_valid_index(ctx, 1)){
 			DKString interfaceAddress = GetString(ctx);
 			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+			DKASSERT(interface);
+			
 			DKString locationAddress = interface->address["Location"];
 			DKLocation* location = (DKLocation*)addressToPointer(locationAddress);
+			DKASSERT(location);
+			
 			eventTarget(ctx)->location(location);
 		}
 		dukglue_push(ctx, eventTarget(ctx)->location()->interfaceAddress);
@@ -630,8 +650,12 @@ public:
 		if(duk_is_valid_index(ctx, 1)){
 			DKString interfaceAddress = GetString(ctx);
 			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+			DKASSERT(interface);
+			
 			DKString windowAddress = interface->address["Window"];
 			DKWindow* window = (DKWindow*)addressToPointer(windowAddress);
+			DKASSERT(window);
+			
 			eventTarget(ctx)->frames(window);
 		}
 		dukglue_push(ctx, eventTarget(ctx)->frames()->interfaceAddress);
@@ -653,8 +677,12 @@ public:
 		if(duk_is_valid_index(ctx, 1)){
 			DKString interfaceAddress = GetString(ctx);
 			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+			DKASSERT(interface);
+			
 			DKString windowAddress = interface->address["Window"];
 			DKWindow* window = (DKWindow*)addressToPointer(windowAddress);
+			DKASSERT(window);
+			
 			eventTarget(ctx)->top(window);
 		}
 		dukglue_push(ctx, eventTarget(ctx)->top()->interfaceAddress);
@@ -676,8 +704,12 @@ public:
 		if(duk_is_valid_index(ctx, 1)){
 			DKString interfaceAddress = GetString(ctx);
 			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+			DKASSERT(interface);
+			
 			DKString windowAddress = interface->address["Window"];
 			DKWindow* window = (DKWindow*)addressToPointer(windowAddress);
+			DKASSERT(window);
+			
 			eventTarget(ctx)->parent(window);
 		}
 		dukglue_push(ctx, eventTarget(ctx)->parent()->interfaceAddress);
@@ -690,8 +722,12 @@ public:
 		if(duk_is_valid_index(ctx, 1)){
 			DKString interfaceAddress = GetString(ctx);
 			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+			DKASSERT(interface);
+			
 			DKString elementAddress = interface->address["Element"];
 			DKElement* element = (DKElement*)addressToPointer(elementAddress);
+			DKASSERT(element);
+			
 			eventTarget(ctx)->frameElement(element);
 		}
 		dukglue_push(ctx, eventTarget(ctx)->frameElement()->interfaceAddress);
@@ -717,8 +753,12 @@ public:
 		if(duk_is_valid_index(ctx, 1)){
 			DKString interfaceAddress = GetString(ctx);
 			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+			DKASSERT(interface);
+			
 			DKString navigatorAddress = interface->address["Navigator"];
 			DKNavigator* navigator = (DKNavigator*)addressToPointer(navigatorAddress);
+			DKASSERT(navigator);
+			
 			eventTarget(ctx)->navigator(navigator);
 		}
 		dukglue_push(ctx, eventTarget(ctx)->navigator()->interfaceAddress);
@@ -731,8 +771,12 @@ public:
 		if(duk_is_valid_index(ctx, 1)){
 			DKString interfaceAddress = GetString(ctx);
 			DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+			DKASSERT(interface);
+			
 			DKString navigatorAddress = interface->address["Navigator"];
 			DKNavigator* navigator = (DKNavigator*)addressToPointer(navigatorAddress);
+			DKASSERT(navigator);
+			
 			eventTarget(ctx)->clientInformation(navigator);
 		}
 		dukglue_push(ctx, eventTarget(ctx)->clientInformation()->interfaceAddress);
@@ -812,8 +856,12 @@ public:
 				if(duk_is_valid_index(ctx, 1)){
 					DKString interfaceAddress = GetString(ctx);
 					DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+					DKASSERT(interface);
+					
 					DKString eventAddress = interface->address["Event"];
 					DKEvent* event = (DKEvent*)addressToPointer(eventAddress);
+					DKASSERT(event);
+					
 					eventTarget(ctx)->event(event);
 				}
 				dukglue_push(ctx, eventTarget(ctx)->event()->interfaceAddress);
@@ -1003,9 +1051,15 @@ public:
 	//		[NewObject] CSSStyleDeclaration getComputedStyle(Element elt, optional CSSOMString? pseudoElt);
 			static int getComputedStyle(duk_context* ctx){
 				DKDEBUGFUNC(ctx);
-				DKString eltAddress = GetString(ctx);
+				DKString interfaceAddress = GetString(ctx);
+				DKInterface* interface = (DKInterface*)addressToPointer(interfaceAddress);
+				DKASSERT(interface);
+				
+				DKString eltAddress = interface->address["Element"];
 				DKElement* elt = (DKElement*)addressToPointer(eltAddress);
-					DKCSSStyleDeclaration* cssStyleDeclaration = eventTarget(ctx)->getComputedStyle(elt/*, TODO */);
+				DKASSERT(elt);
+					
+				DKCSSStyleDeclaration* cssStyleDeclaration = eventTarget(ctx)->getComputedStyle(elt/*, TODO */);
 				dukglue_push(ctx, cssStyleDeclaration->interfaceAddress);
 				return DKTODO();
 			}

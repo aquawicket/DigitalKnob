@@ -31,7 +31,7 @@ public:
 		DKINFO("\nDKInterface("+interfaceAddress+") \n");
 		
 		_list.push_back(this);
-		printInterfaceList();
+		//printInterfaceList();
 	}
 	virtual ~DKInterface(){
 		for(unsigned int i=0; i<_list.size(); ++i){
