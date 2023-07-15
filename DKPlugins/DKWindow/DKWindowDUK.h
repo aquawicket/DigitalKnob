@@ -458,7 +458,10 @@ public:
 			
 			eventTarget(ctx)->window(window);
 		}
-		dukglue_push(ctx, eventTarget(ctx)->window()->interfaceAddress);
+		DKWindowProxy* window = eventTarget(ctx)->window();
+		DKASSERT(window);
+		
+		dukglue_push(ctx, window->interfaceAddress);
 		return true;
 	}
 	
