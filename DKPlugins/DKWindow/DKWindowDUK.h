@@ -140,17 +140,19 @@ public:
 		
 		// Source: Compatibility Standard (https://compat.spec.whatwg.org/)
 		// partial interface Window {
-		//		readonly attribute short orientation;
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_orientation", 				DKWindowDUK::orientation);
-		//		
-		//		attribute EventHandler onorientationchange;
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_onorientationchange",		DKWindowDUK::onorientationchange);
+		// readonly attribute short orientation;
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_orientation", 		DKWindowDUK::orientation);
+		
+		// attribute EventHandler onorientationchange;
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_onorientationchange",DKWindowDUK::onorientationchange);
+		
 		// };
 		
 		// Source: DOM Standard (https://dom.spec.whatwg.org/)
 		// partial interface Window {
-		//		[Replaceable] readonly attribute (Event or undefined) event; // legacy
-				DKDuktape::AttachFunction("CPP_DKWindowDUK_event", 						DKWindowDUK::event);
+		// [Replaceable] readonly attribute (Event or undefined) event; // legacy
+		DKDuktape::AttachFunction("CPP_DKWindowDUK_event", 				DKWindowDUK::event);
+		
 		// };
 		
 		// Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
@@ -479,7 +481,10 @@ public:
 			
 			eventTarget(ctx)->self(window);
 		}
-		dukglue_push(ctx, eventTarget(ctx)->self()->interfaceAddress);
+		DKWindowProxy* self = eventTarget(ctx)->self();
+		DKASSERT(self);
+		
+		dukglue_push(ctx, self->interfaceAddress);
 		return true;
 	}
 	
@@ -664,7 +669,10 @@ public:
 			
 			eventTarget(ctx)->frames(window);
 		}
-		dukglue_push(ctx, eventTarget(ctx)->frames()->interfaceAddress);
+		DKWindowProxy* frames = eventTarget(ctx)->frames();
+		DKASSERT(frames);
+		
+		dukglue_push(ctx, frames->interfaceAddress);
 		return true;
 	}
 	
@@ -691,7 +699,10 @@ public:
 			
 			eventTarget(ctx)->top(window);
 		}
-		dukglue_push(ctx, eventTarget(ctx)->top()->interfaceAddress);
+		DKWindowProxy* top = eventTarget(ctx)->top();
+		DKASSERT(top);
+		
+		dukglue_push(ctx, top->interfaceAddress);
 		return true;
 	}
 	
@@ -718,7 +729,10 @@ public:
 			
 			eventTarget(ctx)->parent(window);
 		}
-		dukglue_push(ctx, eventTarget(ctx)->parent()->interfaceAddress);
+		DKWindowProxy* parent = eventTarget(ctx)->parent();
+		DKASSERT(parent);
+		
+		dukglue_push(ctx, parent->interfaceAddress);
 		return true;
 	}
 	
@@ -736,7 +750,10 @@ public:
 			
 			eventTarget(ctx)->frameElement(element);
 		}
-		dukglue_push(ctx, eventTarget(ctx)->frameElement()->interfaceAddress);
+		DKElement* frameElement = eventTarget(ctx)->frameElement();
+		DKASSERT(frameElement);
+		
+		dukglue_push(ctx, frameElement->interfaceAddress);
 		return true;
 	}
 	
@@ -767,7 +784,10 @@ public:
 			
 			eventTarget(ctx)->navigator(navigator);
 		}
-		dukglue_push(ctx, eventTarget(ctx)->navigator()->interfaceAddress);
+		DKNavigator* navigator = eventTarget(ctx)->navigator();
+		DKASSERT(navigator);
+		
+		dukglue_push(ctx, navigator->interfaceAddress);
 		return true;
 	}
 	
@@ -785,7 +805,10 @@ public:
 			
 			eventTarget(ctx)->clientInformation(navigator);
 		}
-		dukglue_push(ctx, eventTarget(ctx)->clientInformation()->interfaceAddress);
+		DKNavigator* clientInformation = eventTarget(ctx)->clientInformation();
+		DKASSERT(clientInformation);
+		
+		dukglue_push(ctx, clientInformation->interfaceAddress);
 		return true;
 	}
 	
@@ -870,7 +893,10 @@ public:
 					
 					eventTarget(ctx)->event(event);
 				}
-				dukglue_push(ctx, eventTarget(ctx)->event()->interfaceAddress);
+				DKEvent* event = eventTarget(ctx)->event();
+				DKASSERT(event);
+				
+				dukglue_push(ctx, event->interfaceAddress);
 				return true;
 			}
 	// };
@@ -1066,6 +1092,8 @@ public:
 				DKASSERT(elt);
 					
 				DKCSSStyleDeclaration* cssStyleDeclaration = eventTarget(ctx)->getComputedStyle(elt/*, TODO */);
+				DKASSERT(cssStyleDeclaration);
+				
 				dukglue_push(ctx, cssStyleDeclaration->interfaceAddress);
 				return DKTODO();
 			}

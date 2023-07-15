@@ -15,6 +15,8 @@ console.log("location = "+location);
 
 var document = new DKRmlDocument(dkRmlInterface, dkRmlEventListener);
 console.log("document = "+document);
+
+//window.document = document;
 ///////////////////////////////
 
 
@@ -33,6 +35,7 @@ function onHyperlink(event) {
 function onLoad(event) {
 	console.log("onLoad()");
 	document = new DKRmlDocument(dkRmlInterface, dkRmlEventListener);	//the document needs to be refreshed when reloading a page
+	//window.document = document;
 	
 	//////////// Post processing <a href></a> hyperlinks ////////////
 	var aElements = document.getElementsByTagName("a");

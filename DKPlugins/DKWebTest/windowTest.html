@@ -1,5 +1,5 @@
-<!-- https://developer.mozilla.org/en-US/docs/Web/API/Window -->
-
+<!-- [IDL] https://html.spec.whatwg.org/multipage/nav-history-apis.html#the-window-object -->
+<!-- [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Window -->
 <html>
 <head>
 <title>Window Test</title>
@@ -14,7 +14,18 @@
 <strong>window: </strong><a id="window">error</a><br />
 <br />
 
-<!-- Properties -->
+<!-- 
+Source: HTML Standard (https://html.spec.whatwg.org/multipage/)
+[Global=Window,
+Exposed=Window,
+LegacyUnenumerableNamedProperties]
+interface Window : EventTarget { 
+-->
+
+<!-- the current browsing context -->
+<a style="font-weight:bold;">[LegacyUnforgeable] readonly attribute WindowProxy window;</a><br />
+<strong>window.window: </strong><a id="window.window">error</a><br />
+
 <a style="font-weight:bold;">Window Properties</a><br />
 <strong>window.closed: </strong><a id="window.closed">error</a><br />
 <strong>window.console: </strong><a id="window.console">error</a><br />
@@ -76,7 +87,6 @@
 <strong>window.toolbar: </strong><a id="window.toolbar">error</a><br />
 <strong>window.top: </strong><a id="window.top">error</a><br />
 <strong>window.visualViewport: </strong><a id="window.visualViewport">error</a><br />
-<strong>window.window: </strong><a id="window.window">error</a><br />
 <!-- window[0], window[1], etc. -->
 <br />
 
