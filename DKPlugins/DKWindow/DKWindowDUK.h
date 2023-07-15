@@ -494,7 +494,10 @@ public:
 			
 			eventTarget(ctx)->document(document);
 		}
-		dukglue_push(ctx, eventTarget(ctx)->document()->interfaceAddress);
+		DKDocument* document = eventTarget(ctx)->document();
+		DKASSERT(document);
+
+		dukglue_push(ctx, document->interfaceAddress);
 		return true;
 	}
 	
