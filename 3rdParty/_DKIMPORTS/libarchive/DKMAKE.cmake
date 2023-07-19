@@ -38,8 +38,10 @@ LINUX_dk_libDebug		(${LIBARCHIVE}/${OS}/${DEBUG_DIR}/libarchive/libarchive.a)
 LINUX_dk_libRelease		(${LIBARCHIVE}/${OS}/${RELEASE_DIR}/libarchive/libarchive.a)
 RASPBERRY_dk_libDebug	(${LIBARCHIVE}/${OS}/${DEBUG_DIR}/libarchive/libarchive.a)
 RASPBERRY_dk_libRelease	(${LIBARCHIVE}/${OS}/${RELEASE_DIR}/libarchive/libarchive.a)
-WIN_dk_libDebug			(${LIBARCHIVE}/${OS}/libarchive/${DEBUG_DIR}/archive_static.lib)
-WIN_dk_libRelease		(${LIBARCHIVE}/${OS}/libarchive/${RELEASE_DIR}/archive_static.lib)
+#WIN_dk_libDebug		(${LIBARCHIVE}/${OS}/libarchive/${DEBUG_DIR}/archive_static.lib)
+#WIN_dk_libRelease		(${LIBARCHIVE}/${OS}/libarchive/${RELEASE_DIR}/archive_static.lib)
+WIN_dk_libDebug			(${LIBARCHIVE}/${OS}/libarchive/${DEBUG_DIR}/archive.lib)
+WIN_dk_libRelease		(${LIBARCHIVE}/${OS}/libarchive/${RELEASE_DIR}/archive.lib)
 
 
 ### GENERATE ###
