@@ -1,0 +1,5 @@
+if(VISUAL_STUDIO_IDE)
+elseif(XCODE_IDE)
+else()
+endif()
+dk_set(ZSTD_CMAKE -DZSTD_INCLUDE_DIR=${ZSTD}/lib) #TODO

@@ -1,0 +1,7 @@
+if(ANDROID OR RASPBERRY)
+	dk_undepend(boxer)
+	dk_return()
+endif()
+if(VISUAL_STUDIO_IDE)
+else()
+endif()

@@ -1,0 +1,7 @@
+if(NOT LINUX AND NOT RASPBERRY)
+	dk_undepend(libgtk-3-dev)
+	dk_return()
+endif()
+dk_set(CURRENT_DIR /usr)
+#dk_debug("GTK_INCLUDE_DIRS = ${GTK_INCLUDE_DIRS}")
+#dk_debug("GTK_LIBRARIES = ${GTK_LIBRARIES}")

@@ -1,0 +1,4 @@
+if(NOT WIN)
+	dk_undepend(stackwalker)
+	dk_return()
+endif()

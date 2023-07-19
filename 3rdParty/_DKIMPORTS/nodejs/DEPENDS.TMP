@@ -1,0 +1,2 @@
+dk_set(NODE_EXE ${NODEJS}/node.exe)
+dk_set(NPM_EXE ${NODEJS}/npm.cmd)

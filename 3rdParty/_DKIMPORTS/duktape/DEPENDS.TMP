@@ -1,0 +1,5 @@
+dk_depend(python)
+dk_depend(pyyaml)
+dk_depend(nodejs)
+if(NOT EXISTS ${DUKTAPE}/src/duktape.c)
+endif()

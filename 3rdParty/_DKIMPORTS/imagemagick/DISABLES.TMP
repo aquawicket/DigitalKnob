@@ -1,0 +1,3 @@
+WIN_HOST_dk_set		(IMAGEMAGICK_CONVERT ${IMAGEMAGICK}/convert.exe) # TODO: rename to IMAGEMAGICK_CONVERT_EXE
+if(NOT ANDROID)
+endif()

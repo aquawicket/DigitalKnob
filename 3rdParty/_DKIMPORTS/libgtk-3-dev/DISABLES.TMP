@@ -1,0 +1,5 @@
+if(NOT LINUX AND NOT RASPBERRY)
+	dk_undepend(libgtk-3-dev)
+	dk_return()
+endif()
+dk_set(CURRENT_DIR /usr)
