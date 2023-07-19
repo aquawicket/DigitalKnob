@@ -18,13 +18,15 @@ RASPBERRY_dk_set(PYTHON_APP python)
 ### INSTALL ###
 if(WIN)
 	dk_makeDirectory(${PYTHON})
-	# string(REPLACE "/" "\\" PYTHON_PATH ${PYTHON})
 	dk_setEnv("PATH" "${PYTHON}")
 	if(NOT EXISTS ${PYTHON_APP})
 		dk_download(${PYTHON_DL} ${DKDOWNLOAD}/python-2.7.18.msi)
-		#dk_executeProcess(cmd /c ${DKDOWNLOAD}/python-2.7.18.msi /passive PrependPath=1 TargetDir=${PYTHON})
-		dk_executeProcess(${DKDOWNLOAD}/python-2.7.18.msi /passive PrependPath=1 TargetDir=${PYTHON})
-		#dk_executeProcess(MsiExec.exe /i "${DKDOWNLOAD}/python-2.7.18.msi" ALLUSERS=1 ADDLOCAL=ALL TARGETDIR="${PYTHON}" /qn)
+		#string(REPLACE "/" "\\" PYTHON_PATH "${PYTHON}")
+		#dk_executeProcess(${DKDOWNLOAD}/python-2.7.18.msi /passive PrependPath=1 TargetDir=${PYTHON_PATH})
+		
+		#NOTE:	TargetDir requires the path to use backslashes, yet I cannot figure out how to send this command
+		#		from cmake successfully. So, the command is placed in 'python/install.cmd' and called instead.
+		dk_executeProcess(${DKIMPORTS}/python/install.cmd)
 	endif()
 	if(EXISTS ${PYTHON_APP})
 		if(NOT EXISTS ${PYTHON}/Scripts/pip.exe)

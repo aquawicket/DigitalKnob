@@ -4,8 +4,8 @@ https://suelan.github.io/2020/02/05/iOS-Simulator-from-the-Command-Line
 // Launch the default simulator
 open -a Simulator.app
 
-// Install DKSDLRml_App
-xcrun simctl install booted /Users/aquamac/digitalknob/DK/DKApps/DKSDLRml/iossim64/Debug-iphonesimulator/DKSDLRml_APP.app
+// Install DKSdlRml_App
+xcrun simctl install booted /Users/aquamac/digitalknob/DK/DKApps/DKSdlRml/iossim64/Debug-iphonesimulator/DKSdlRml_APP.app
 
-// Launch DKSDLRml_APP
-xcrun simctl launch booted com.digitalknob.DKSDLRml_APP
+// Launch DKSdlRml_APP
+xcrun simctl launch booted com.digitalknob.DKSdlRml_APP

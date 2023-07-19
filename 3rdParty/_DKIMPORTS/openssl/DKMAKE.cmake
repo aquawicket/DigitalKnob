@@ -2,12 +2,19 @@
 # https://www.openssl.org/
 # https://www.npcglib.org/~stathis/downloads/openssl-1.0.2h-vs2015.7z
 # https://github.com/openssl/openssl/issues/14131 # iOS & iOS-Simulator
+# https://blog.rplasil.name/2015/09/compiling-openssl-with-emscripten.html
 
+### DEPEND ###
+#EMSCRIPTEN_dk_depend(openssl-cmake)
+#EMSCRIPTEN_dk_depend(python3)
 
 ### IMPORT ###
-UNIX_dk_import	(https://github.com/openssl/openssl.git)
+UNIX_dk_import	(https://github.com/openssl/openssl.git PATCH) #PATCH: premade emscripten libraries
 WIN_dk_import	(https://www.npcglib.org/~stathis/downloads/openssl-1.0.2h-vs2015.7z)
 
+#if(EMSCRIPTEN)
+#	dk_copy(${OPENSSL-CMAKE} ${OPENSSL})
+#endif()
 
 ### LINK ###
 dk_include				(${OPENSSL}/include)
@@ -15,8 +22,8 @@ DEBUG_dk_include		(${OPENSSL}/${OS}/${DEBUG_DIR}/include)
 RELEASE_dk_include      (${OPENSSL}/${OS}/${RELEASE_DIR}/include)
 
 # libcrypto
-APPLE_dk_libDebug		(${OPENSSL}/${OS}/${DEBUG_DIR}/libcrypto.a)
-APPLE_dk_libRelease		(${OPENSSL}/${OS}/${RELEASE_DIR}/libcrypto.a)
+UNIX_dk_libDebug		(${OPENSSL}/${OS}/${DEBUG_DIR}/libcrypto.a)
+UNIX_dk_libRelease		(${OPENSSL}/${OS}/${RELEASE_DIR}/libcrypto.a)
 
 # libeay
 WIN32_dk_libDebug		(${OPENSSL}/lib/libeay32MTd.lib)
@@ -25,16 +32,8 @@ WIN64_dk_libDebug		(${OPENSSL}/lib64/libeay32MTd.lib)
 WIN64_dk_libRelease		(${OPENSSL}/lib64/libeay32MT.lib)
 
 # libssl
-ANDROID_dk_libDebug		(${OPENSSL}/${OS}/${DEBUG_DIR}/libssl.a)
-ANDROID_dk_libRelease	(${OPENSSL}/${OS}/${RELEASE_DIR}/libssl.a)
-APPLE_dk_libDebug		(${OPENSSL}/${OS}/${DEBUG_DIR}/libssl.a)
-APPLE_dk_libRelease		(${OPENSSL}/${OS}/${RELEASE_DIR}/libssl.a)
-EMSCRIPTEN_dk_libDebug	(${OPENSSL}/${OS}/${DEBUG_DIR}/libssl.a)
-EMSCRIPTEN_dk_libRelease(${OPENSSL}/${OS}/${RELEASE_DIR}/libssl.a)
-LINUX_dk_libDebug		(${OPENSSL}/${OS}/${DEBUG_DIR}/libssl.a)
-LINUX_dk_libRelease		(${OPENSSL}/${OS}/${RELEASE_DIR}/libssl.a)
-RASPBERRY_dk_libDebug	(${OPENSSL}/${OS}/${DEBUG_DIR}/libssl.a)
-RASPBERRY_dk_libRelease	(${OPENSSL}/${OS}/${RELEASE_DIR}/libssl.a)
+UNIX_dk_libDebug		(${OPENSSL}/${OS}/${DEBUG_DIR}/libssl.a)
+UNIX_dk_libRelease		(${OPENSSL}/${OS}/${RELEASE_DIR}/libssl.a)
 WIN32_dk_libDebug		(${OPENSSL}/lib/ssleay32MTd.lib)
 WIN32_dk_libRelease		(${OPENSSL}/lib/ssleay32MT.lib)
 WIN64_dk_libDebug		(${OPENSSL}/lib64/ssleay32MTd.lib)
@@ -48,31 +47,66 @@ UNIX_RELEASE_dk_set	(OPENSSL_CMAKE -DOPENSSL_INCLUDE_DIR=${OPENSSL}/${OS}/${RELE
 WIN32_dk_set		(OPENSSL_CMAKE -DOPENSSL_INCLUDE_DIR=${OPENSSL}/include -DLIB_EAY_DEBUG=${OPENSSL}/lib/libeay32MTd.lib -DLIB_EAY_RELEASE=${OPENSSL}/lib/libeay32MT.lib -DSSL_EAY_DEBUG=${OPENSSL}/lib/ssleay32MTd.lib -DSSL_EAY_RELEASE=${OPENSSL}/lib/ssleay32MT.lib "-DCMAKE_C_FLAGS=-I${OPENSSL}/include" "-DCMAKE_CXX_FLAGS=-I${OPENSSL}/include")
 WIN64_dk_set		(OPENSSL_CMAKE -DOPENSSL_INCLUDE_DIR=${OPENSSL}/include -DLIB_EAY_DEBUG=${OPENSSL}/lib64/libeay32MTd.lib -DLIB_EAY_RELEASE=${OPENSSL}/lib64/libeay32MT.lib -DSSL_EAY_DEBUG=${OPENSSL}/lib64/ssleay32MTd.lib -DSSL_EAY_RELEASE=${OPENSSL}/lib64/ssleay32MT.lib "-DCMAKE_C_FLAGS=-I${OPENSSL}/include" "-DCMAKE_CXX_FLAGS=-I${OPENSSL}/include")
 
-
 ### GENERATE ###
 ### COMPILE ###
 DEBUG_dk_setPath				(${OPENSSL}/${OS}/${DEBUG_DIR})
-ANDROID_DEBUG_dk_queueShell		(../../Configure no-shared --debug)
-EMSCRIPTEN_DEBUG_dk_queueShell	(../../Configure no-shared --debug)
+ANDROID32_DEBUG_dk_queueShell(
+"export ANDROID_NDK_ROOT=${ANDROID-NDK}\n"
+"export PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/windows-x86_64/bin:$PATH\n"
+"export PATH=$ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/bin:$PATH\n"
+"../../Configure no-shared --debug android-arm -D__ANDROID_API__=31")
+ANDROID64_DEBUG_dk_queueShell(
+"export ANDROID_NDK_ROOT=${ANDROID-NDK}\n"
+"export PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/windows-x86_64/bin:$PATH\n"
+"export PATH=$ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/bin:$PATH\n"
+"../../Configure no-shared --debug android-arm64 -D__ANDROID_API__=31")
+#EMSCRIPTEN_DEBUG_dk_queueShell(${EMCONFIGURE} ${OPENSSL}/Configure linux-x32 -no-asm -static -no-sock -no-afalgeng -DOPENSSL_SYS_NETWARE -DSIG_DFL=0 -DSIG_IGN=0 -DHAVE_FORK=0 -DOPENSSL_NO_AFALGENG=1 -DOPENSSL_NO_SPEED=1)
+#EMSCRIPTEN_dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_OPENSSL=ON -DGIT_EXECUTABLE=${GIT_EXE} -DPYTHON_EXECUTABLE=${PYTHON3_APP} ${OPENSSL})
+
 IOS64_DEBUG_dk_queueShell		(../../Configure no-shared --debug ios64-xcrun)
 IOSSIM_DEBUG_dk_queueShell		(../../Configure no-shared --debug iossimulator-xcrun)
 LINUX_DEBUG_dk_queueShell		(../../Configure no-shared --debug)
 MAC_DEBUG_dk_queueShell			(../../Configure no-shared --debug)
 RASPBERRY_DEBUG_dk_queueShell	(../../Configure no-shared --debug)
 
-UNIX_DEBUG_dk_queueShell	(make)
+if(NOT ANDROID)
+	UNIX_DEBUG_dk_queueShell(make)
+else()
+	ANDROID_DEBUG_dk_queueShell(
+	"export ANDROID_NDK_ROOT=${ANDROID-NDK}\n"
+	"export PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/windows-x86_64/bin:$PATH\n"
+	"export PATH=$ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/bin:$PATH\n"
+	"make")
+endif()
 
 
 RELEASE_dk_setPath				(${OPENSSL}/${OS}/${RELEASE_DIR})
-ANDROID_RELEASE_dk_queueShell	(../../Configure no-shared --release)
-EMSCRIPTEN_RELEASE_dk_queueShell(../../Configure no-shared --release)
+ANDROID32_RELEASE_dk_queueShell(
+"export ANDROID_NDK_ROOT=${ANDROID-NDK}\n"
+"export PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/windows-x86_64/bin:$PATH\n"
+"export PATH=$ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/bin:$PATH\n"
+"../../Configure no-shared --release android-arm -D__ANDROID_API__=31")
+ANDROID64_RELEASE_dk_queueShell(
+"export ANDROID_NDK_ROOT=${ANDROID-NDK}\n"
+"export PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/windows-x86_64/bin:$PATH\n"
+"export PATH=$ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/bin:$PATH\n"
+"../../Configure no-shared --release android-arm64 -D__ANDROID_API__=31")
+#EMSCRIPTEN_RELEASE_dk_queueShell(${EMCONFIGURE} ${OPENSSL}/Configure)
 IOS64_RELEASE_dk_queueShell		(../../Configure no-shared --release ios64-xcrun)
 IOSSIM_RELEASE_dk_queueShell	(../../Configure no-shared --release iossimulator-xcrun)
 LINUX_RELEASE_dk_queueShell		(../../Configure no-shared --release)
 MAC_RELEASE_dk_queueShell		(../../Configure no-shared --release)
 RASPBERRY_RELEASE_dk_queueShell	(../../Configure no-shared --release)
 
-UNIX_RELEASE_dk_queueShell	(make)
+if(NOT ANDROID)
+	UNIX_RELEASE_dk_queueShell(make)
+else()
+	ANDROID_RELEASE_dk_queueShell(
+	"export ANDROID_NDK_ROOT=${ANDROID-NDK}\n"
+	"export PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/windows-x86_64/bin:$PATH\n"
+	"export PATH=$ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/bin:$PATH\n"
+	"make")
+endif()
 
 
 

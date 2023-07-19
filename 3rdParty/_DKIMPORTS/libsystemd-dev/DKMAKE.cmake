@@ -4,7 +4,7 @@ if(NOT LINUX AND NOT RASPBERRY)
 endif()
 
 ### INSTALL ###
-dk_set(CURRENT_DIR /usr)
+#dk_set(CURRENT_DIR /usr)
 dk_command(sudo apt -y install libsystemd-dev)
 
 

@@ -6,6 +6,9 @@ if(IOS OR IOSSIM OR ANDROID)
 	dk_return()
 endif()
 
+### DEPEND ###
+dk_depend(libglu1-mesa-dev)
+
 
 ### IMPORT ###
 dk_import(https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip)
@@ -41,8 +44,8 @@ WIN_dk_libRelease		(${GLEW}/${OS}/lib/${RELEASE_DIR}/libglew32.lib)
 #	-DGLEW_STATIC_LIBRARY_DEBUG=${GLEW}/${OS}/lib/${DEBUG_DIR}/glew32d.lib
 #	-DGLEW_STATIC_LIBRARY_RELEASE=${GLEW}/${OS}/lib/${RELEASE_DIR}/glew32.lib
 #	-DGLEW_LIBRARIES=${GLEW}/${OS}/lib/${DEBUG_DIR}/libglew32d.lib ${GLEW}/${OS}/lib/${RELEASE_DIR}/libglew32.lib)
-UNIX_dk_set	(GLEW_CMAKE "-DCMAKE_C_FLAGS=-I${GLEW}/include -DGLEW_STATIC" "-DCMAKE_CXX_FLAGS=-I${GLEW}/include -DGLEW_STATIC")
-WIN_dk_set	(GLEW_CMAKE "-DCMAKE_C_FLAGS=/I${GLEW}/include /DGLEW_STATIC" "-DCMAKE_CXX_FLAGS=/I${GLEW}/include /DGLEW_STATIC")
+UNIX_dk_set	(GLEW_CMAKE "-DCMAKE_C_FLAGS=-I${GLEW}/include -DGLEW_STATIC" "-DCMAKE_CXX_FLAGS=-I${GLEW}/include -DGLEW_STATIC" -DGLEW_INCLUDE_DIR=${GLEW}/include)
+WIN_dk_set	(GLEW_CMAKE "-DCMAKE_C_FLAGS=/I${GLEW}/include /DGLEW_STATIC" "-DCMAKE_CXX_FLAGS=/I${GLEW}/include /DGLEW_STATIC" -DGLEW_INCLUDE_DIR=${GLEW}/include -DGLEW_LIBRARY=${GLEW}/${OS}/lib/${DEBUG_DIR}/libglew32.lib)
 	
 	
 ### GENERATE ###

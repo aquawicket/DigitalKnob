@@ -9,6 +9,8 @@ dk_import(https://github.com/madler/zlib.git)
 ### LINK ###
 dk_include			(${ZLIB})
 dk_include			(${ZLIB}/${OS})
+DEBUG_dk_include	(${ZLIB}/${OS}/${DEBUG_DIR})
+RELEASE_dk_include	(${ZLIB}/${OS}/${RELEASE_DIR})
 UNIX_dk_libDebug	(${ZLIB}/${OS}/${DEBUG_DIR}/libz.a)
 UNIX_dk_libRelease	(${ZLIB}/${OS}/${RELEASE_DIR}/libz.a)
 WIN_dk_libDebug		(${ZLIB}/${OS}/${DEBUG_DIR}/zlibstaticd.lib)

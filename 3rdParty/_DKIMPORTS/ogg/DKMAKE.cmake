@@ -7,7 +7,8 @@
 
 
 ### DEPEND ###
-WIN_dk_depend(msys)
+#WIN_dk_depend(msys)	# migrated to msys2
+WIN_dk_depend(msys2)
 
 
 ### IMPORT ###

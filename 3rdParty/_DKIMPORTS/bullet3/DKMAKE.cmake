@@ -1,4 +1,4 @@
-# https://github.com/bulletphysics/bullet3
+# https://github.com/bulletphysics/bullet3.git
 # https://code.google.com/archive/p/bullet
 # https://github.com/bulletphysics/bullet3/archive/refs/tags/2.82.zip
 # https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/bullet/bullet-2.82-r2704.zip
@@ -16,10 +16,8 @@ if(ALL_LIBS)
 	dk_enable(Bullet3Common)
 	dk_enable(Bullet3Dynamics)
 	dk_enable(Bullet3Geometry)
-	if(NOT APPLE AND NOT RASPBERRY AND NOT EMSCRIPTEN)
-		dk_enable(Bullet3OpenCL)
-		dk_enable(Bullet3Serialize)
-	endif()
+	#dk_enable(Bullet3OpenCL)
+	#dk_enable(Bullet3Serialize)
 	dk_enable(BulletCollision)
 	dk_enable(BulletDynamics)
 	dk_enable(BulletInverseDynamics)

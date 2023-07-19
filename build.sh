@@ -1,16 +1,11 @@
-#!/bin/bash
+#!/bin/sh
 
-# to run this script requires privledges 
+# to run this script requires privledges
 # > chmod 777 build.sh
 
 if [ -e /proc/device-tree/model ]; then
 	MODEL=$(tr -d '\0' </proc/device-tree/model)
 fi
-echo "hostname = $HOSTNAME"
-echo "hosttype = $HOSTTYPE"
-echo "ostype =   $OSTYPE"
-echo "machtype = $MACHTYPE"
-
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	DIGITALKNOB="/home/$USER/digitalknob"
@@ -27,8 +22,20 @@ elif [[ "$OSTYPE" == "freebsd"* ]]; then
 else
     echo "UNKNOWN OS TYPE ($OSTYPE)"
 fi
+
 DKPATH="$DIGITALKNOB/DK"
 DKCMAKE="$DIGITALKNOB/DK/DKCMake"
+
+echo "hostname		= $HOSTNAME"
+echo "hosttype		= $HOSTTYPE"
+echo "ostype		= $OSTYPE"
+echo "machtype		= $MACHTYPE"
+echo "model			= $MODEL"
+echo "user			= $USER"
+echo "username		= $USERNAME"
+echo "digitalknob	= $DIGITALKNOB"
+echo "dkpath		= $DKPATH"
+echo "dkcmake		= $DKCMAKE"
 
 sudo echo
 
@@ -39,7 +46,7 @@ while :
 	do
 	echo " "
 	PS3='Please update and select an app to build: '
-	options=("Git Update" "Git Commit" "DKBuilder" "DKSDLRmlUi" "DKTestAll" "Clear Screen" "Exit")
+	options=("Git Update" "Git Commit" "DKBuilder" "DKSdlRmlUi" "DKTestAll" "Clear Screen" "Exit")
 	select opt in "${options[@]}"
 	do
 		case $opt in
@@ -97,9 +104,9 @@ while :
 				APP="DKBuilder"
 				break
 				;;
-			"DKSDLRmlUi")
+			"DKSdlRmlUi")
 				echo "$opt"
-				APP="DKSDLRmlUi"
+				APP="DKSdlRmlUi"
 				break
 				;;
 			"DKTestAll")

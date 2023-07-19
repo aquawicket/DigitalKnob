@@ -1,4 +1,3 @@
-#ifdef WIN32
 /**********************************************************************
  * 
  * StackWalker.cpp
@@ -1352,5 +1351,3 @@ void StackWalker::OnOutput(LPCSTR buffer)
 {
   OutputDebugStringA(buffer);
 }
-
-#endif //WIN32

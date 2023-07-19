@@ -1,17 +1,16 @@
-# https://github.com/emscripten-core/emsdk
+# https://github.com/emscripten-core/emsdk.git
 # https://emscripten.org/index.html
 # https://lyceum-allotments.github.io/2016/06/emscripten-and-sdl-2-tutorial-part-1/
 # https://github.com/emscripten-core/emsdk/archive/refs/tags/2.0.26.zip
 
 
-dk_import(https://github.com/emscripten-core/emsdk.git BRANCH main PATCH)
-#dk_copy(${DKIMPORTS}/emsdk/upstream/emscripten/src/settings.js ${EMSDK}/emsdk/upstream/emscripten/src/settings.js)
+dk_depend(python)
 
 
-#WIN_dk_command(${EMSDK}/emsdk update)
-#dk_command(${EMSDK}/emsdk install latest)
-#WIN_dk_command(${EMSDK}/emsdk install activate latest)
-#WIN_dk_command(${EMSDK}/emsdk_env.bat)
+#dk_import(https://github.com/emscripten-core/emsdk/archive/refs/tags/3.1.31.zip)
+dk_import(https://github.com/emscripten-core/emsdk.git BRANCH main)
+
+
 dk_command(${EMSDK}/emsdk install latest)
 dk_command(${EMSDK}/emsdk activate latest)
 UNIX_HOST_dk_command(chmod 777 ${EMSDK}/emsdk_env.sh)
@@ -20,45 +19,24 @@ WIN_HOST_dk_command(${EMSDK}/emsdk_env.bat)
 WIN_HOST_dk_command(${EMSDK}/emsdk install mingw-4.6.2-32bit)
 WIN_HOST_dk_command(${EMSDK}/emsdk activate mingw-4.6.2-32bit)
 
-if(WIN_HOST)
-	dk_set(EMSDK_ENV ${EMSDK}/emsdk_env.bat)
-else()
-	dk_set(EMSDK_ENV ${EMSDK}/emsdk_env.sh)
-endif()
+
+dkFileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL = 0;" 		"var USE_SDL = false;")
+dkFileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL_IMAGE = 1;" 	"var USE_SDL_IMAGE = false;")
+dkFileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL_TTF = 1;" 	"var USE_SDL_TTF = false;")
+dkFileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL_NET = 1;" 	"var USE_SDL_NET = false;")
+dkFileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL_MIXER = 1;" 	"var USE_SDL_MIXER = false;")
+dkFileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_PTHREADS = false;" "var USE_PTHREADS = true;")
+
+
+#if(WIN_HOST)
+	WIN_HOST_dk_set(EMSDK_ENV ${EMSDK}/emsdk_env.bat)
+#else()
+	UNIX_HOST_dk_set(EMSDK_ENV ${EMSDK}/emsdk_env.sh)
+#endif()
+dk_set(EMAR ${EMSDK}/upstream/emscripten/emar)
+dk_set(EMCC ${EMSDK}/upstream/emscripten/emcc)
 dk_set(EMCMAKE ${EMSDK}/upstream/emscripten/emcmake)
 dk_set(EMCONFIGURE ${EMSDK}/upstream/emscripten/emconfigure)
 dk_set(EMMAKE ${EMSDK}/upstream/emscripten/emmake)
-
-
-######################################################################################################################
-# https://emscripten.org/index.html
-# https://lyceum-allotments.github.io/2016/06/emscripten-and-sdl-2-tutorial-part-1/
-# https://github.com/emscripten-core/emsdk/archive/refs/tags/2.0.26.zip
-# dk_import(https://github.com/emscripten-core/emsdk.git)
-# #dk_set(EMSDK_VERSION 2.0.26)
-# #dk_set(EMSDK_NAME emsdk-${EMSCRIPTEN_VERSION})
-# #dk_set(EMSDK_DL https://github.com/emscripten-core/emsdk/archive/refs/tags/${EMSCRIPTEN_VERSION}.zip)
-# #dk_set(EMSDK ${3RDPARTY}/${EMSCRIPTEN_NAME})
-#if(WIN_HOST)
-#	if(NOT EXISTS ${EMSDK})
-#		dk_set(CURRENT_DIR ${DKDOWNLOAD})
-#		## dk_download(www.internet.com/emsdk-portable-64bit.zip) ## find an online link
-#		dk_extract(${DKDOWNLOAD}/emsdk-portable-64bit.zip ${3RDPARTY}/emsdk-portable-64bit)
-#		dk_copy(${DKIMPORTS}/emsdk-portable-64bit/.emscripten ${3RDPARTY}/emsdk-portable-64bit/.emscripten OVERWRITE)
-#		dk_set(CURRENT_DIR ${3RDPARTY}/emsdk-portable-64bit)
-#		dk_command(${3RDPARTY}/emsdk-portable-64bit/emsdk update)
-#		dk_command(${3RDPARTY}/emsdk-portable-64bit/emsdk install latest)
-#		dk_command(${3RDPARTY}/emsdk-portable-64bit/emsdk install activate latest)
-#		dk_command(${3RDPARTY}/emsdk-portable-64bit/emsdk_env.bat)
-#	endif()
-#else()
-#	dk_set(CURRENT_DIR ${DKDOWNLOAD})
-#	## dk_download(www.internet.com/emsdk-portable.tar.gz) ## find an online link
-#	dk_extract(${DKDOWNLOAD}/emsdk-portable.tar.gz ${3RDPARTY}/emsdk-portable)
-#	dk_copy(${DKIMPORTS}/emsdk-portable/.emscripten ${3RDPARTY}/emsdk-portable/.emscripten OVERWRITE)
-#	dk_set(CURRENT_DIR ${3RDPARTY}/emsdk-portable)
-#	dk_command(${3RDPARTY}/emsdk-portable/emsdk update)
-#	dk_command(${3RDPARTY}/emsdk-portable/emsdk install latest)
-#	dk_command(${3RDPARTY}/emsdk-portable/emsdk install activate latest)
-#	dk_command(${3RDPARTY}/emsdk-portable/source ./emsdk_env.sh)
-#endif()
+dk_set(EMPP ${EMSDK}/upstream/emscripten/em++)
+dk_set(EMRANLIB ${EMSDK}/upstream/emscripten/emranlib)

@@ -1,74 +1,60 @@
 # https://cmake.org
 # https://github.com/Kitware/CMake
-#
 # https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi
 # https://developer.android.com/studio/projects/configure-cmake
 
-set(COMPILE_CMAKE 0)
+### DOWNLOAD ###
+WIN_HOST_dk_set(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi)
+WIN_HOST_dk_set(CMAKE_FILE cmake-3.21.1-windows-i386.msi)
 
-if(COMPILE_CMAKE)
-	################################################################################################################
-	#dk_depend(msys)
-	dk_depend(openssl)
-	dk_import(https://github.com/Kitware/CMake.git)
-	#WIN_HOST_dk_set(CMAKE_VERSION 3a169af9524339e8b2e82130da7605040daf7925)
-	#dk_import(https://github.com/Kitware/CMake/archive/3a169af9524339e8b2e82130da7605040daf7925.zip)
 
-	#dk_set(QUEUE_BUILD ON)
-	#dk_shell(pacman -S --needed git base-devel mingw-w64-x86_64-gcc)
-	
-	### GENERATE ###
-	dk_command(${DKCMAKE_BUILD} -DCMAKE_USE_OPENSSL=OFF ${CMAKE}) # ${OPENSSL_CMAKE}
-
-	### COMPILE ###
-	dk_set(QUEUE_BUILD ON)
-	dk_build(${CMAKE})
-
-	### GENERATE / COMPILE ###
-	#DEBUG_dk_setPath	(${CMAKE}/${OS}/${DEBUG_DIR})
-	#DEBUG_dk_shell		(../../configure)
-	#DEBUG_dk_shell		(make)
-	#RELEASE_dk_setPath	(${CMAKE}/${OS}/${RELEASE_DIR})
-	#RELEASE_dk_shell	(../../configure)
-	#RELEASE_dk_shell	(make)
-
+if(EXISTS /usr/bin/cmake)
+	dk_set(CMAKE /usr/bin)
+	dk_set(CMAKE_EXE /usr/bin/cmake)
+elseif(EXISTS /usr/local/bin/cmake)
+	dk_set(CMAKE /usr/local/bin)
+	dk_set(CMAKE_EXE /usr/local/bin/cmake)
+elseif(EXISTS "C:/Progra~1/CMake/bin/cmake.exe")
+	dk_set(CMAKE "C:/Progra~1/CMake/bin")
+	dk_set(CMAKE_EXE "C:/Progra~1/CMake/bin/cmake.exe")
+elseif(EXISTS "C:/Progra~2/CMake/bin/cmake.exe")
+	dk_set(CMAKE "C:/Progra~2/CMake/bin")
+	dk_set(CMAKE_EXE "C:/Progra~2/CMake/bin/cmake.exe")
+elseif(EXISTS "C:/Program Files/CMake/bin/cmake.exe")
+	dk_set(CMAKE "C:/Program Files/CMake/bin")
+	dk_set(CMAKE_EXE "C:/Program Files/CMake/bin/cmake.exe")
+elseif(EXISTS "C:/Program Files (x86)/CMake/bin/cmake.exe")
+	dk_set(CMAKE "C:/Program Files (x86)/CMake/bin")
+	dk_set(CMAKE_EXE "C:/Program Files (x86)/CMake/bin/cmake.exe")
 else()
-	###############################################################################################################
-	WIN_HOST_dk_set(CMAKE_VERSION 3.21.1)
-	WIN_HOST_dk_set(CMAKE_NAME cmake-${CMAKE_VERSION}-windows-i386)
-	WIN_HOST_dk_set(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/${CMAKE_NAME}.msi)
-	if(EXISTS CMAKE_COMMAND)
-		dk_set(CMAKE_EXE "${CMAKE_COMMAND}")
-		get_filename_component(CMAKE "${CMAKE_EXE}" DIRECTORY)
-	elseif(EXISTS "C:/Progra~2/CMake/bin")
-		WIN_HOST_dk_set(CMAKE "C:/Progra~2/CMake/bin")
-		#dk_getShortPath(${CMAKE} CMAKE)	
-	elseif(EXISTS "C:/Program Files (x86)/CMake/bin")
-		WIN_HOST_dk_set(CMAKE "C:/Program Files (x86)/CMake/bin")
-		#dk_getShortPath(${CMAKE} CMAKE)	
-	elseif(EXISTS /usr/local/bin)
-		MAC_HOST_dk_set(CMAKE /usr/local/bin)
-		LINUX_HOST_dk_set(CMAKE /usr/bin)
-	endif()
-	WIN_HOST_dk_set(CMAKE_EXE ${CMAKE}/cmake.exe)
-	UNIX_HOST_dk_set(CMAKE_EXE ${CMAKE}/cmake)	
-
 	### INSTALL ###
-	#dk_info("looking for cmake at ${CMAKE_EXE}")
-	if(NOT EXISTS "${CMAKE_EXE}")
-		MAC_dk_depend(homebrew)
-		dk_info("cmake NOT FOUND")
-		dk_info("Installing ${CMAKE_NAME}")
-		WIN_HOST_dk_download(${CMAKE_DL} ${DKDOWNLOAD})
-		WIN_HOST_dk_command(${DKDOWNLOAD}/${CMAKE_NAME}.msi)
-		MAC_HOST_dk_command(brew install cmake)
-		LINUX_HOST_dk_command(sudo apt-get -y install cmake)
-	else()
-		#dk_info("Found cmake at ${CMAKE_EXE}")
-		#dk_executeProcess(${CMAKE_EXE} --version ${CMAKE}/version.txt)
-	endif()
-
-	if(NOT EXISTS "${CMAKE_EXE}")
-		dk_assert("CMAKE IS NOT FOUND OR INVALID")
-	endif()
+	dk_info("Installing CMake . . .")
+	WIN_HOST_dk_download(${CMAKE_DL} ${DKDOWNLOAD})
+	WIN_HOST_dk_command(${DKDOWNLOAD}/${CMAKE_FILE})
+	MAC_HOST_dk_command(brew install cmake)
+	LINUX_HOST_dk_command(sudo apt-get -y install cmake)
 endif()
+
+if(EXISTS /usr/bin/cmake)
+	dk_set(CMAKE /usr/bin)
+	dk_set(CMAKE_EXE /usr/bin/cmake)
+elseif(EXISTS /usr/local/bin/cmake)
+	dk_set(CMAKE /usr/local/bin)
+	dk_set(CMAKE_EXE /usr/local/bin/cmake)
+elseif(EXISTS "C:/Progra~1/CMake/bin/cmake.exe")
+	dk_set(CMAKE "C:/Progra~1/CMake/bin")
+	dk_set(CMAKE_EXE "C:/Progra~1/CMake/bin/cmake.exe")
+elseif(EXISTS "C:/Progra~2/CMake/bin/cmake.exe")
+	dk_set(CMAKE "C:/Progra~2/CMake/bin")
+	dk_set(CMAKE_EXE "C:/Progra~2/CMake/bin/cmake.exe")
+elseif(EXISTS "C:/Program Files/CMake/bin/cmake.exe")
+	dk_set(CMAKE "C:/Program Files/CMake/bin")
+	dk_set(CMAKE_EXE "C:/Program Files/CMake/bin/cmake.exe")
+elseif(EXISTS "C:/Program Files (x86)/CMake/bin/cmake.exe")
+	dk_set(CMAKE "C:/Program Files (x86)/CMake/bin")
+	dk_set(CMAKE_EXE "C:/Program Files (x86)/CMake/bin/cmake.exe")
+else()
+	dk_assert("CMAKE NOT FOUND!")
+endif()
+
+dk_command(${CMAKE_EXE} --version)

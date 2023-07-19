@@ -128,15 +128,22 @@ foreach(plugin ${dkdepend_list})
 	string(FIND "${DKPLUGIN_LIST_lower}" "${plugin_lower}" isDKPlugin)
 	
 	# Install 3rd Party Libs
-	if(INSTALL_DKLIBS)
-		if(${isDKPlugin} EQUAL -1)
-			if(EXISTS ${plugin_path}/${BUILD_DIR}/cmake_install.cmake)
-				dk_queueCommand(${CMAKE_COMMAND} --install ${plugin_path}/${BUILD_DIR})
-			endif()
-		endif()
-	endif()
+	#if(INSTALL_DKLIBS)
+	#	if(${isDKPlugin} EQUAL -1)
+	#		if(EXISTS ${plugin_path}/${BUILD_DIR}/cmake_install.cmake)
+	#			dk_queueCommand(${CMAKE_COMMAND} --install ${plugin_path}/${BUILD_DIR})
+	#		endif()
+	#	endif()
+	#endif()
 	
 	if(${isDKPlugin} GREATER -1)
+		# Install header files for DKPlugin
+		if(INSTALL_DKLIBS)
+			dk_info("Installing ${plugin} header files")
+			file(INSTALL DIRECTORY ${plugin_path}/ DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${plugin} FILES_MATCHING PATTERN "*.h")
+			dk_deleteEmptyDirectories(${CMAKE_INSTALL_PREFIX}/include/${plugin})
+		endif()
+	
 		#Add the DKPlugin to the app project
 		if(EXISTS "${plugin_path}/CMakeLists.txt")
 			if(VISUAL_STUDIO_IDE OR XCODE_IDE)
@@ -242,9 +249,10 @@ foreach(plugin ${dkdepend_list})
 endforeach()
 
 if(INSTALL_DKLIBS)
-	dk_deleteEmptyDirectories(${CMAKE_INSTALL_PREFIX})
+	# clean up empty directories
+	dk_deleteEmptyDirectories(${CMAKE_INSTALL_PREFIX}/include)
 endif()
-
+		
 if(NOT DKAPP)
 	return()
 endif()	
@@ -362,33 +370,37 @@ if(WIN_32)
 
 	##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
 	
-	list(APPEND DEBUG_LINK_FLAGS /MANIFEST:NO)
-	list(APPEND DEBUG_LINK_FLAGS /MANIFESTUAC:NO)
-	list(APPEND DEBUG_LINK_FLAGS /level='highestAvailable')
-	list(APPEND DEBUG_LINK_FLAGS /uiAccess='true')
-	#list(APPEND DEBUG_LINK_FLAGS /SUBSYSTEM:CONSOLE,5.01)
-	list(APPEND DEBUG_LINK_FLAGS /SUBSYSTEM:CONSOLE)
-	list(APPEND DEBUG_LINK_FLAGS /SAFESEH:NO)
-	string(REPLACE ";" " " DEBUG_FLAGS "${DEBUG_LINK_FLAGS}")
-	
-	##list(APPEND RELEASE_LINK_FLAGS /FORCE) ## This can be used to debug if libraries cause redefinitions
-	list(APPEND RELEASE_LINK_FLAGS /INCREMENTAL:NO)
-	list(APPEND RELEASE_LINK_FLAGS /OPT:NOREF)
-	list(APPEND RELEASE_LINK_FLAGS /MANIFEST:NO)
-	list(APPEND RELEASE_LINK_FLAGS /MANIFESTUAC:NO)
-	list(APPEND RELEASE_LINK_FLAGS /level='highestAvailable')
-	list(APPEND RELEASE_LINK_FLAGS /uiAccess='true')
-	#list(APPEND RELEASE_LINK_FLAGS /SUBSYSTEM:CONSOLE,5.01)
-	list(APPEND RELEASE_LINK_FLAGS /SUBSYSTEM:CONSOLE)
-	list(APPEND RELEASE_LINK_FLAGS /SAFESEH:NO)
-	string(REPLACE ";" " " RELEASE_FLAGS "${RELEASE_LINK_FLAGS}")
-	
-	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
-	
-	# remove -bin from APP_NAME. Was added to avoid app/library same name conflicts
-	#set_target_properties(${APP_NAME} PROPERTIES OUTPUT_NAME ${APP_NAME})
-	#set_target_properties(${APP_NAME} PROPERTIES RUNTIME_OUTPUT_NAME ${APP_NAME})
-	set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${APP_NAME})
+	if(VISUAL_STUDIO_IDE)
+		list(APPEND DEBUG_LINK_FLAGS /MANIFEST:NO)
+		list(APPEND DEBUG_LINK_FLAGS /MANIFESTUAC:NO)
+		list(APPEND DEBUG_LINK_FLAGS /level='highestAvailable')
+		list(APPEND DEBUG_LINK_FLAGS /uiAccess='true')
+		#list(APPEND DEBUG_LINK_FLAGS /SUBSYSTEM:CONSOLE,5.01)
+		list(APPEND DEBUG_LINK_FLAGS /SUBSYSTEM:CONSOLE)
+		list(APPEND DEBUG_LINK_FLAGS /SAFESEH:NO)
+		list(APPEND DEBUG_LINK_FLAGS /NODEFAULTLIB:msvcrtd.lib)
+		string(REPLACE ";" " " DEBUG_FLAGS "${DEBUG_LINK_FLAGS}")
+		
+		##list(APPEND RELEASE_LINK_FLAGS /FORCE) ## This can be used to debug if libraries cause redefinitions
+		list(APPEND RELEASE_LINK_FLAGS /INCREMENTAL:NO)
+		list(APPEND RELEASE_LINK_FLAGS /OPT:NOREF)
+		list(APPEND RELEASE_LINK_FLAGS /MANIFEST:NO)
+		list(APPEND RELEASE_LINK_FLAGS /MANIFESTUAC:NO)
+		list(APPEND RELEASE_LINK_FLAGS /level='highestAvailable')
+		list(APPEND RELEASE_LINK_FLAGS /uiAccess='true')
+		#list(APPEND RELEASE_LINK_FLAGS /SUBSYSTEM:CONSOLE,5.01)
+		list(APPEND RELEASE_LINK_FLAGS /SUBSYSTEM:CONSOLE)
+		list(APPEND RELEASE_LINK_FLAGS /SAFESEH:NO)
+		list(APPEND RELEASE_LINK_FLAGS /NODEFAULTLIB:msvcrt.lib)
+		string(REPLACE ";" " " RELEASE_FLAGS "${RELEASE_LINK_FLAGS}")
+		
+		set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
+		
+		# remove -bin from APP_NAME. Was added to avoid app/library same name conflicts
+		#set_target_properties(${APP_NAME} PROPERTIES OUTPUT_NAME ${APP_NAME})
+		#set_target_properties(${APP_NAME} PROPERTIES RUNTIME_OUTPUT_NAME ${APP_NAME})
+		set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${APP_NAME})
+	endif()
 	
 	
 	#dk_set(CMAKE_BUILD_TYPE "")
@@ -692,11 +704,13 @@ if(IOS OR IOSSIM)
 	if(BACKUP_APP_EXECUTABLES)
 		if(DEBUG)
 			if(EXISTS ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app)
+				dk_remove(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app.backup)
 				dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app.backup OVERWRITE)
 			endif()
 		endif()
 		if(RELEASE)
 			if(EXISTS ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app)
+				dk_remove(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app.backup)
 				dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app.backup OVERWRITE)
 			endif()
 		endif()
@@ -894,7 +908,9 @@ if(NOT RASPBERRY)
 		file(WRITE ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop ${DESKTOP_FILE})
 	
 		# Install shortcut of Release build to the apps menu
-		dk_executeProcess(desktop-file-install --dir=/home/$ENV{USER}/.local/share/applications ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DKPROJECT}/${OS}/Release)
+		if(NOT TINYCORE)
+			dk_executeProcess(desktop-file-install --dir=/home/$ENV{USER}/.local/share/applications ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DKPROJECT}/${OS}/Release)
+		endif()
 	endif()
 	
 	####################### Do Post Build Stuff #######################

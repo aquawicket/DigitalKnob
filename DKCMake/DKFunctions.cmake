@@ -481,7 +481,8 @@ function(dk_remove path)
 		endif()
 		return()
 	endif()
-	file(REMOVE ${path})
+	#file(REMOVE ${path})
+	file(REMOVE_RECURSE ${path})
 	if(EXISTS ${path})
 		dk_error("failed to remove ${path}")
 	endif()
@@ -496,7 +497,7 @@ endfunction()
 ###############################################################################
 # dk_createOsMacros(func)
 #
-#	Prefix a function with OS_ macros. Calling the OS_function will only be called if the current OS or OS_HOST is true
+#	Prefix a function with <OS>_ macros. Calling the <OS>_function will only be called if the current <OS> or <OS_HOST> is true
 #
 #	@func	- The func of the function to create aliases for
 #
@@ -890,20 +891,22 @@ endfunction()
 ###############################################################################
 # dk_deleteEmptyDirectories(path)
 #
-#	Delete all empty directories with a path
+#	Delete all empty directories within a path
 #
-#	@path	- The path to search for empty folders to delete
+#	@path	- The path to remove all empty directories from
 #
 function(dk_deleteEmptyDirectories path)
 	DKDEBUGFUNC(${ARGV})
 	if(NOT EXISTS ${path})
 		dk_error("path:${path} does not exist")
-		return()
+		dk_return()
 	endif()
 	if(WIN_HOST)
-		execute_process(COMMAND for /f "delims=" %d in ('dir /s /b /ad ^| sort /r') do rd "%d" WORKING_DIRECTORY ${path})
+		#execute_process(COMMAND for /f "delims=" %d in ('dir /s /b /ad ^| sort /r') do rd "%d" WORKING_DIRECTORY ${path})
+		# https://stackoverflow.com/a/30138960/688352
+		execute_process(COMMAND ROBOCOPY ${path} ${path} /S /MOVE WORKING_DIRECTORY ${path})
 	else()
-		dk_error("Not implemented for this platform")
+		execute_process(COMMAND find ${path} -empty -type d -delete WORKING_DIRECTORY ${path})
 	endif()
 endfunction()
 
@@ -1251,16 +1254,14 @@ function(dk_enable plugin)
 		if(${ARGC} GREATER 1)
 			dk_set(${${ARGV1}} ON)
 			dk_set(HAVE_${${ARGV1}} ON)
-			# In c++ we can't use certian symbals in the preprocess or for macros. - must be turned to _
-			string(REPLACE "-" "_" argv1_macro "${ARGV1}")
-			string(REPLACE "." "_" argv1_macro "${argv1_macro}")
+			# In c/c++ we can't use certian symbals in the preprocess or for macros. I.E. - must be turned to _
+			string(MAKE_C_IDENTIFIER ${ARGV1} argv1_macro)
 			dk_define(HAVE_${argv1_macro})
 		else()
 			dk_set(${plugin} ON)
 			dk_set(HAVE_${plugin} ON)
-			# In c++ we can't use certian symbals in the preprocess or for macros. - must be turned to _
-			string(REPLACE "-" "_" plugin_macro "${plugin}")
-			string(REPLACE "." "_" plugin_macro "${plugin_macro}")
+			# In c/c++ we can't use certian symbals in the preprocess or for macros. I.E. - must be turned to _
+			string(MAKE_C_IDENTIFIER ${plugin} plugin_macro)
 			dk_define(HAVE_${plugin_macro})
 		endif()
 	endif()
@@ -1305,15 +1306,15 @@ function(dk_disable plugin)
 	#if(target)
 		dk_unset(${ARGV1})
 		dk_unset(HAVE_${ARGV1})
-		# In c++ we can't use certian symbals in the preprocess or for macros. - must be turned to _
-		string(REPLACE "-" "_" argv1_macro "${ARGV1}")
+		# In c/c++ we can't use certian symbals in the preprocess or for macros. I.E. - must be turned to _
+		string(MAKE_C_IDENTIFIER ${ARGV1} argv1_macro)
 		dk_undefine(HAVE_${argv1_macro})
 		dk_undepend(${ARGV1})
 	else()
 		dk_unset(${plugin})
 		dk_unset(HAVE_${plugin})
-		# In c++ we can't use certian symbals in the preprocess or for macros. - must be turned to _
-		string(REPLACE "-" "_" plugin_macro "${plugin}")
+		# In c/c++ we can't use certian symbals in the preprocess or for macros. I.E. - must be turned to _
+		string(MAKE_C_IDENTIFIER ${plugin} plugin_macro)
 		dk_undefine(HAVE_${plugin_macro})
 		dk_undepend(${plugin})
 	endif()
@@ -1368,19 +1369,25 @@ endfunction()
 #
 function(dk_include path)
 	DKDEBUGFUNC(${ARGV})
-	foreach(item ${ARGV})
-		list(FIND DKINCLUDES_LIST "${item}" index)
+	#foreach(item ${ARGV})
+		#list(FIND DKINCLUDES_LIST "${item}" index)
+		list(FIND DKINCLUDES_LIST "${path}" index)
 		if(${index} GREATER -1)
-			continue()  # item is already in the list
+			#continue()	# path is already in the list
+			dk_return()	# path is already in the list
 		endif()
-		dk_set(DKINCLUDES_LIST ${DKINCLUDES_LIST} ${item})
-		include_directories(${item})
 		
 		if(INSTALL_DKLIBS)
 			dk_getFilename(${CMAKE_CURRENT_LIST_DIR} LIB_NAME)
-			file(INSTALL DIRECTORY ${path}/ DESTINATION ${CMAKE_INSTALL_PREFIX}/${LIB_NAME}/include FILES_MATCHING PATTERN "*.h")
+			file(INSTALL DIRECTORY ${path}/ DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${LIB_NAME} FILES_MATCHING PATTERN "*.h")
+			dk_deleteEmptyDirectories(${CMAKE_INSTALL_PREFIX}/include/${LIB_NAME})
 		endif()
-	endforeach()
+		
+		#dk_set(DKINCLUDES_LIST ${DKINCLUDES_LIST} ${item})
+		dk_set(DKINCLUDES_LIST ${DKINCLUDES_LIST} ${path})
+		#include_directories(${item})
+		include_directories(${path})
+	#endforeach()
 endfunction()
 dk_createOsMacros("dk_include")
 
@@ -1394,14 +1401,17 @@ dk_createOsMacros("dk_include")
 #
 function(dk_linkDir path)
 	DKDEBUGFUNC(${ARGV})
-	foreach(item ${ARGV})
-		list(FIND DKLINKDIRS_LIST "${item}" index)
+	#foreach(item ${ARGV})
+		#list(FIND DKLINKDIRS_LIST "${item}" index)
+		list(FIND DKLINKDIRS_LIST "${path}" index)
 		if(${index} GREATER -1)
 			continue()  # already in the list
 		endif()
-		dk_set(DKLINKDIRS_LIST ${DKLINKDIRS_LIST} ${item})
-		link_directories(${item})
-	endforeach()
+		#dk_set(DKLINKDIRS_LIST ${DKLINKDIRS_LIST} ${item})
+		dk_set(DKLINKDIRS_LIST ${DKLINKDIRS_LIST} ${path})
+		#link_directories(${item})
+		link_directories(${path})
+	#endforeach()
 endfunction()
 dk_createOsMacros("dk_linkDir")
 
@@ -1777,8 +1787,7 @@ function(dk_install plugin) #PATCH
 	
 	file(WRITE ${dest_path}/installed "${dest_filename} ")
 	
-	dk_set(DK_DELETE_EXTRACTED_DOWNLOADS ON) # FIXME: move to global dk settings
-	if(DK_DELETE_EXTRACTED_DOWNLOADS) # conserve disk space 
+	if(DELETE_DOWNLOADS) # conserve disk space 
 		dk_info("deleting ${DKDOWNLOAD}/${dl_filename}. . .")
 		dk_remove(${DKDOWNLOAD}/${dl_filename})
 	endif()
@@ -1960,6 +1969,12 @@ dk_createOsMacros("dk_setPath")
 #
 function(dk_msys)
 	DKDEBUGFUNC(${ARGV})
+	
+	if(USE_MSYS2)
+		dk_msys2(${ARGV})
+		return()
+	endif()
+	
 	if(QUEUE_BUILD)
 		string(REPLACE ";" " " str "${ARGV}")
 		set(bash "#!/bin/bash")
@@ -1986,22 +2001,6 @@ dk_createOsMacros("dk_msys")
 
 
 ###############################################################################
-# dk_queueMsys(args)
-#
-#	TODO
-#
-#	@args	- TODO
-#
-function(dk_queueMsys)
-	DKDEBUGFUNC(${ARGV})
-	if(QUEUE_BUILD)
-		dk_msys(${ARGV})
-	endif()	
-endfunction()
-dk_createOsMacros("dk_queueMsys")
-
-
-###############################################################################
 # dk_msys2(args)
 #
 #	TODO
@@ -2014,12 +2013,14 @@ function(dk_msys2)
 		string(REPLACE ";" " " str "${ARGV}")
 		set(bash "#!/bin/bash")
 		list(APPEND bash "cd ${CURRENT_DIR}")
-		if(WIN_32 OR ANDROID_32)
-			list(APPEND bash "export PATH=${MINGW32}/bin:$PATH")
+		if(WIN_32 OR ANDROID_32)# OR EMSCRIPTEN)
+			list(APPEND bash "export PATH=${MSYS2}/mingw32/bin:$PATH")
+			#list(APPEND bash "export PATH=\"C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.34.31933/bin/Hostx64/x86\":$PATH")
 		elseif(WIN_64 OR ANDROID_64)
-			list(APPEND bash "export PATH=${MINGW64}/bin:$PATH")
+			list(APPEND bash "export PATH=${MSYS2}/mingw64/bin:$PATH")
+			#list(APPEND bash "export PATH=\"C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.34.31933/bin/Hostx64/x64\":$PATH")
 		else()
-			dk_error("dk_msys2(): ERROR: not WIN_32, WIN_64, ANDROID_32 or ANDROID_64")
+			dk_assert("dk_msys2(): ERROR: not WIN_32, WIN_64, ANDROID_32 or ANDROID_64")
 		endif()
 		list(APPEND bash "export PATH=${MSYS2}/usr/bin:$PATH")
 		list(APPEND bash "${str}")
@@ -2033,6 +2034,22 @@ function(dk_msys2)
 	endif()
 endfunction()
 dk_createOsMacros("dk_msys2")
+
+
+###############################################################################
+# dk_queueMsys(args)
+#
+#	TODO
+#
+#	@args	- TODO
+#
+function(dk_queueMsys)
+	DKDEBUGFUNC(${ARGV})
+	if(QUEUE_BUILD)
+		dk_msys(${ARGV})
+	endif()	
+endfunction()
+dk_createOsMacros("dk_queueMsys")
 
 
 ###############################################################################
@@ -2092,10 +2109,12 @@ function(dk_command)
 	if(NOT EXISTS ${CURRENT_DIR})
 		dk_set(CURRENT_DIR ${DIGITALKNOB})
 	endif()
-#	dk_debug("${ARGV}")
 	dk_mergeFlags("${ARGV}" merged_args)
-#	dk_debug("${ARGV}")
-	dk_executeProcess(${merged_args} WORKING_DIRECTORY ${CURRENT_DIR})
+	#if(EMSCRIPTEN)
+	#	dk_executeProcess(${EMMAKE} bash ${merged_args} WORKING_DIRECTORY ${CURRENT_DIR})
+	#else()
+		dk_executeProcess(${merged_args} WORKING_DIRECTORY ${CURRENT_DIR})
+	#endif()
 endfunction()
 dk_createOsMacros("dk_command")
 
@@ -2506,9 +2525,9 @@ function(dk_lib lib_path)
 		if(INSTALL_DKLIBS)
 			if(EXISTS ${lib_path})
 				dk_getFilename(${CMAKE_CURRENT_LIST_DIR} LIB_NAME)
-				file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/${LIB_NAME}/lib/${OS})
+				file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/${LIB_NAME}/${OS})
 			else()
-				dk_error("Could not locate ${lib_path}")
+				dk_error("DKINSTALL: Could not locate ${lib_path}")
 			endif()
 		endif()
 		
@@ -2550,8 +2569,10 @@ function(dk_libDebug lib_path)
 	endif()
 
 	if(INSTALL_DKLIBS)
-		dk_getFilename(${CMAKE_CURRENT_LIST_DIR} LIB_NAME)
-		file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/${LIB_NAME}/lib/${OS}/Debug)
+		if(EXISTS ${lib_path})
+			dk_getFilename(${CMAKE_CURRENT_LIST_DIR} LIB_NAME)
+			file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/${LIB_NAME}/${OS}/Debug)
+		endif()
 	endif()
 	
 endfunction()
@@ -2591,8 +2612,10 @@ function(dk_libRelease lib_path)
 	endif()
 	
 	if(INSTALL_DKLIBS)
-		dk_getFilename(${CMAKE_CURRENT_LIST_DIR} LIB_NAME)
-		file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/${LIB_NAME}/lib/${OS}/Release)
+		if(EXISTS ${lib_path})
+			dk_getFilename(${CMAKE_CURRENT_LIST_DIR} LIB_NAME)
+			file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/${LIB_NAME}/${OS}/Release)
+		endif()
 	endif()
 	
 endfunction()
@@ -2678,8 +2701,13 @@ function(dk_generateCmake plugin_name)
 		endforeach()
 	endif()
 	dk_enable				(${plugin_name})
-	WIN_dk_libDebug			(${plugin_path}/${OS}/${DEBUG_DIR}/${plugin_name}.lib)
-	WIN_dk_libRelease		(${plugin_path}/${OS}/${RELEASE_DIR}/${plugin_name}.lib)
+	if(VISUAL_STUDIO_IDE)
+		WIN_dk_libDebug			(${plugin_path}/${OS}/${DEBUG_DIR}/${plugin_name}.lib)
+		WIN_dk_libRelease		(${plugin_path}/${OS}/${RELEASE_DIR}/${plugin_name}.lib)
+	else()
+		WIN_dk_libDebug			(${plugin_path}/${OS}/${DEBUG_DIR}/lib${plugin_name}.a)
+		WIN_dk_libRelease		(${plugin_path}/${OS}/${RELEASE_DIR}/lib${plugin_name}.a)
+	endif()
 	MAC_dk_libDebug			(${plugin_path}/${OS}/${DEBUG_DIR}/lib${plugin_name}.a)
 	MAC_dk_libRelease		(${plugin_path}/${OS}/${RELEASE_DIR}/lib${plugin_name}.a)
 	IOS_dk_libDebug			(${plugin_path}/${OS}/Debug-iphoneos/lib${plugin_name}.a)
@@ -3039,6 +3067,14 @@ function(dk_undepend plugin)
 		endif()
 	endif()
 	
+	#dk_dump(plugin)
+	# remove from ${dkdepend_list}
+	list(FIND dkdepend_list ${plugin} index)
+	if(${index} GREATER -1)
+		# is was found, now remove
+		list(REMOVE_ITEM dkdepend_list ${plugin})
+	endif()
+	
 	dk_info("DISABLING ${ARGV}")
 	dk_set(dk_disabled_list ${dk_disabled_list} "${ARGV}")
 	if(${ARGC} GREATER 1)
@@ -3069,7 +3105,7 @@ function(dk_runDepends plugin)
 	unset(depends_script)
 	unset(index)
 	
-	set(keepCommands "if;IF;else;ELSE;find_library;FIND_LIBRARY;return;RETURN;dk_disable;dk_set;dk_makeDirectory;dk_findLibrary;dk_require")
+	set(keepCommands "if;IF;else;ELSE;find_library;FIND_LIBRARY;return;RETURN;dk_disable;dk_set;dk_makeDirectory;dk_findLibrary;dk_require;dk_undepend")
 	set(KEEPLINE 0)
 	foreach(line ${lines})
 		
@@ -3099,7 +3135,7 @@ function(dk_runDepends plugin)
 		endif()
 	endforeach()
 	
-	set(keepCommands "if;IF;else;ELSE;find_library;FIND_LIBRARY;return;RETURN;dk_enable;dk_disable;dk_depend;dk_set;message;dk_error;dk_warn;dk_info;dk_debug;dk_verbose;dk_trace;dk_makeDirectory;dk_findLibrary;dk_require") #dk_assert
+	set(keepCommands "if;IF;else;ELSE;find_library;FIND_LIBRARY;return;RETURN;dk_enable;dk_disable;dk_depend;dk_set;message;dk_error;dk_warn;dk_info;dk_debug;dk_verbose;dk_trace;dk_makeDirectory;dk_findLibrary;dk_require;dk_undepend")
 	set(KEEPLINE 0)
 	foreach(line ${lines})
 	
@@ -3132,7 +3168,7 @@ function(dk_runDepends plugin)
 	if(disable_script)
 		file(WRITE ${plugin_path}/DISABLES.TMP "${disable_script}")
 		INCLUDE(${plugin_path}/DISABLES.TMP)
-		dk_remove(${plugin_path}/DISABLES.TMP)
+		#dk_remove(${plugin_path}/DISABLES.TMP)
 	endif()
 	
 	if(depends_script)
@@ -3143,7 +3179,7 @@ function(dk_runDepends plugin)
 		endif()
 		file(WRITE ${plugin_path}/DEPENDS.TMP "${depends_script}")
 		INCLUDE(${plugin_path}/DEPENDS.TMP)
-		dk_remove(${plugin_path}/DEPENDS.TMP)
+		#dk_remove(${plugin_path}/DEPENDS.TMP)
 		if(${ARGC} GREATER 1)
 			dk_set(${ARGV1} OFF)
 		endif()
@@ -4199,31 +4235,33 @@ function(dk_import url)
 	dk_verbose("[${plugin_var}_BRANCH] =		${${plugin_var}_BRANCH}")
 	dk_verbose("[${plugin_var}_TAG] =			${${plugin_var}_TAG}")
 	
-	### .git
-	dk_getExtension(${url} extension)
-	if("${extension}" STREQUAL ".git")
-		if(NOT EXISTS ${${plugin_var}}/.git)
-			dk_set(CURRENT_DIR ${DIGITALKNOB}/${3RDPARTY})
-			if(EXISTS ${${plugin_var}})
-				dk_remove(${${plugin_var}})
-			endif()
-			if(NOT EXISTS ${${plugin_var}})
-				dk_makeDirectory(${${plugin_var}})
+	if(NOT DKOFFLINE)
+		### .git
+		dk_getExtension(${url} extension)
+		if("${extension}" STREQUAL ".git")
+			if(NOT EXISTS ${${plugin_var}}/.git)
+				dk_set(CURRENT_DIR ${DIGITALKNOB}/${3RDPARTY})
+				if(EXISTS ${${plugin_var}})
+					dk_remove(${${plugin_var}})
+				endif()
+				if(NOT EXISTS ${${plugin_var}})
+					dk_makeDirectory(${${plugin_var}})
+				endif()
+				dk_set(CURRENT_DIR ${${plugin_var}})
+				dk_command(${GIT_EXE} clone ${${plugin_var}_URL} ${${plugin_var}})
 			endif()
 			dk_set(CURRENT_DIR ${${plugin_var}})
-			dk_command(${GIT_EXE} clone ${${plugin_var}_URL} ${${plugin_var}})
+			dk_command(${GIT_EXE} checkout -- .)
+			dk_command(${GIT_EXE} checkout ${${plugin_var}_BRANCH})
+			dk_command(${GIT_EXE} pull)
+			if(${plugin_var}_TAG)
+				dk_command(${GIT_EXE} checkout ${${plugin_var}_TAG})
+			endif()
+		### download
+		else()
+			dk_verbose("dk_install(${plugin} ${ARGN})")
+			dk_install(${plugin} ${ARGN})
 		endif()
-		dk_set(CURRENT_DIR ${${plugin_var}})
-		dk_command(${GIT_EXE} checkout -- .)
-		dk_command(${GIT_EXE} checkout ${${plugin_var}_BRANCH})
-		dk_command(${GIT_EXE} pull)
-		if(${plugin_var}_TAG)
-			dk_command(${GIT_EXE} checkout ${${plugin_var}_TAG})
-		endif()
-	### download
-	else()
-		dk_verbose("dk_install(${plugin} ${ARGN})")
-		dk_install(${plugin} ${ARGN})
 	endif()
 	
 	dk_includes("${ARGN}" "PATCH" has_patch)
@@ -4659,7 +4697,7 @@ endfunction()
 #
 macro(dk_shell args)
 	DKDEBUGFUNC(${ARGV})
-	if(WIN_HOST)
+	if(WIN_HOST)# AND NOT EMSCRIPTEN)
 		dk_msys(${ARGV})
 	else()
 		dk_command(${ARGV})
@@ -4677,11 +4715,9 @@ dk_createOsMacros("dk_shell")
 #
 macro(dk_queueShell args)
 	DKDEBUGFUNC(${ARGV})
-	if(WIN_HOST)
-		dk_queueMsys(${ARGV})
-	else()
-		dk_queueCommand(${ARGV})
-	endif()
+	if(QUEUE_BUILD)
+		dk_shell(${ARGV})
+	endif()	
 endmacro()
 dk_createOsMacros("dk_queueShell")
 
