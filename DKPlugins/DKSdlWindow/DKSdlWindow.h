@@ -37,7 +37,7 @@ WARNING_ENABLE
 #include "DKWindow/DKWindow.h"
 
 
-class DKSdlWindow : public DKWindow//, public DKObjectT<DKSdlWindow>
+class DKSdlWindow : public DKWindow, public DKObjectT<DKSdlWindow>
 {
 public:
 	DKSdlWindow();
@@ -696,7 +696,6 @@ public:
 		update_funcs.push_back(std::bind(func, _this));
 	}
 };
-
-//REGISTER_OBJECT(DKSdlWindow, true)
+REGISTER_OBJECT(DKSdlWindow, true)
 
 #endif //DKSdlWindow_H

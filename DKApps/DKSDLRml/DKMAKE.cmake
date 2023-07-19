@@ -1,9 +1,11 @@
+dk_depend(DKDuktape)
+
 dk_depend(DK)
 dk_depend(DKArchive)
 dk_depend(DKAssets)
 dk_depend(DKDebug)
 dk_depend(DKDom)
-dk_depend(DKDuktape)
+#dk_depend(DKDuktape)
 dk_depend(DKDuktapeDom)
 dk_depend(DKDukDebugger)
 dk_depend(DKRmlAudio)

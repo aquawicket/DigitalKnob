@@ -30,6 +30,10 @@
 #ifndef DKDuktape_H
 #define DKDuktape_H
 
+//#if !HAVE_duktape
+//		#error "DKDuktape requires duktape"
+//#endif
+
 #define DKHAVE_DKDuktape 1
 
 #include "DK/DK.h"
