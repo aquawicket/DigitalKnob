@@ -1,4 +1,0 @@
-if(IOS OR IOSSIM)
-	#dk_depend(libmd)
-	#dk_depend(macports)
-endif()

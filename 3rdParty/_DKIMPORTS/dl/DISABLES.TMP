@@ -1,5 +1,0 @@
-if(NOT UNIX)
-	dk_undepend(dl)
-	dk_return()
-endif()
-dk_findLibrary(dl)

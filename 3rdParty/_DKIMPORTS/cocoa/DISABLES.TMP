@@ -1,5 +1,0 @@
-if(NOT APPLE)
-	dk_undepend(cocoa)
-	dk_return()
-endif()
-dk_findLibrary(Cocoa)

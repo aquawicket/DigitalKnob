@@ -1,3 +1,0 @@
-if(ANDROID)
-else()
-endif()

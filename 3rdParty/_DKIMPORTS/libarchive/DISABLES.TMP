@@ -1,4 +1,0 @@
-if(IOS)
-endif()
-if(IOSSIM)
-endif()

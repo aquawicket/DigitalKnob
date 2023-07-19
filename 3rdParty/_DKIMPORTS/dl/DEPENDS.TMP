@@ -1,6 +1,0 @@
-if(NOT UNIX)
-	dk_undepend(dl)
-	dk_return()
-endif()
-ANDROID_dk_depend(android-ndk)
-dk_findLibrary(dl)
