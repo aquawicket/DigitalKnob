@@ -326,6 +326,14 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 		if(scripts[i]->HasAttribute("src"))
 			src = scripts[i]->GetAttribute("src")->Get<Rml::String>();
 		DKString inner = scripts[i]->GetInnerRML();
+		
+		// html escape sequences
+		replace(inner, "&amp;", "&");
+		replace(inner, "&lt;", "<");
+		replace(inner, "&gt;", ">");
+		replace(inner, "&quot;", "\"");
+		replace(inner, "&apos;", "\'");
+		
 		scripts[i]->SetProperty("display", "none");
 		if(!src.empty()){
 			if(has(processed, src))
