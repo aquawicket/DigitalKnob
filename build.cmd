@@ -2,6 +2,8 @@
 @echo off
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 
+::set "BRANCH=Development"
+set "BRANCH=CPP_DOM"
 set "DIGITALKNOB=C:\Users\%USERNAME%\digitalknob"
 set "DKPATH=%DIGITALKNOB%\DK"
 set "DKCMAKE=%DIGITALKNOB%\DK\DKCMake"
@@ -68,11 +70,11 @@ cd "%DKPATH%"
 "%GIT%" pull --all
 "%GIT%" checkout -- .
 if NOT "%ERRORLEVEL%" == "0" goto error
-"%GIT%" checkout Development
+"%GIT%" checkout %BRANCH%
 if NOT "%ERRORLEVEL%" == "0" (
-	echo Remote has no Development branch. Creating...
-	"%GIT%" checkout -b Development main
-	"%GIT%" push --set-upstream origin Development
+	echo Remote has no %BRANCH% branch. Creating...
+	"%GIT%" checkout -b %BRANCH% main
+	"%GIT%" push --set-upstream origin %BRANCH%
 )
 
 
