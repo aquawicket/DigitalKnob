@@ -23,6 +23,7 @@ else
     echo "UNKNOWN OS TYPE ($OSTYPE)"
 fi
 
+BRANCH="Development"
 DKPATH="$DIGITALKNOB/DK"
 DKCMAKE="$DIGITALKNOB/DK/DKCMake"
 
@@ -70,13 +71,13 @@ while :
 				cd $DKPATH
 				git pull --all
 				git checkout -- .
-				git checkout Development
+				git checkout $BRANCH
 				if [[ "$?" == "0" ]]; then
-					echo "Development branch selected"
+					echo "$BRANCH branch selected"
 				else
-					echo "Remote has no Development branch. Creating..."
-					git checkout -b Development main
-					git push --set-upstream origin Development
+					echo "Remote has no $BRANCH branch. Creating..."
+					git checkout -b $BRANCH main
+					git push --set-upstream origin $BRANCH
 				fi
 								
 				
