@@ -3,6 +3,7 @@
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 
 set "BRANCH=Development"
+::set "BRANCH=CPP_DOM"
 set "DIGITALKNOB=C:\Users\%USERNAME%\digitalknob"
 set "DKPATH=%DIGITALKNOB%\DK"
 set "DKCMAKE=%DIGITALKNOB%\DK\DKCMake"
