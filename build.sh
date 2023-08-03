@@ -82,7 +82,7 @@ while :
 								
 				
 				chmod +x $DKPATH/build.sh
-				chmod +x $DKCMAKE/dkbuild.sh
+				#chmod +x $DKCMAKE/dkbuild.sh
 				;;
 			"Git Commit")
 				echo "$opt"
