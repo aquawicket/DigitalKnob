@@ -28,7 +28,7 @@
 
 //WARNING_DISABLE
 #include "duktape.h"
-//WARNING_DISABLE
+//WARNING_ENABLE
 
 #include "DKDom/DKDom.h"
 #include "DKDom/DKDomWindow.h"
