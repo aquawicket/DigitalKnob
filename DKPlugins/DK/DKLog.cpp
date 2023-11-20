@@ -86,7 +86,7 @@ bool GetVersion(DKString& version){
 }
 
 bool GetBuildMonth(DKString& buildMonth){
-	buildMonth = __DKDATE__;
+	buildMonth = BUILD_DATE;
 	std::string::size_type found = buildMonth.find_first_of(" ");
 	buildMonth = buildMonth.substr(0, found);
 	if (buildMonth == "Jan")
@@ -117,7 +117,7 @@ bool GetBuildMonth(DKString& buildMonth){
 }
 
 bool GetBuildDay(DKString& buildDay){
-	buildDay = __DKDATE__;
+	buildDay = BUILD_DATE;
 	std::string::size_type foundA = buildDay.find_first_of(" ");
 	std::string::size_type foundB = buildDay.find_first_of(" ", foundA);
 	buildDay = buildDay.substr(foundA+1, foundB-1);
@@ -125,21 +125,21 @@ bool GetBuildDay(DKString& buildDay){
 }
 
 bool GetBuildYear(DKString& buildYear){
-	buildYear = __DKDATE__;
+	buildYear = BUILD_DATE;
 	std::string::size_type found = buildYear.find_last_of(" ");
 	buildYear = buildYear.substr(found+3);
 	return true;
 }
 
 bool GetBuildHour(DKString& buildHour){
-	buildHour = __DKTIME__;
+	buildHour = BUILD_TIME;
 	std::string::size_type found = buildHour.find_first_of(":");
 	buildHour = buildHour.substr(0, found);
 	return true;
 }
 
 bool GetBuildMinute(DKString& buildMinute){
-	buildMinute = __DKTIME__;
+	buildMinute = BUILD_TIME;
 	std::string::size_type foundA = buildMinute.find_first_of(":");
 	std::string::size_type foundB = buildMinute.find_first_of(":", foundA);
 	buildMinute = buildMinute.substr(foundA+1, foundB);
@@ -147,7 +147,7 @@ bool GetBuildMinute(DKString& buildMinute){
 }
 
 bool GetBuildSecond(DKString& buildSecond){
-	buildSecond = __DKTIME__;
+	buildSecond = BUILD_TIME;
 	std::string::size_type found = buildSecond.find_last_of(":");
 	buildSecond = buildSecond.substr(found+1);
 	return true;
