@@ -33,7 +33,6 @@
 #endif
 
 #include "DK/DKApp.h"
-#include "DK/DKLog.h"
 #include "assets.h"
 
 char* BUILD_DATE = __DATE__;

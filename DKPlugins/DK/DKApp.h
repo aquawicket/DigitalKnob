@@ -30,6 +30,9 @@
 
 #include "DK/DK.h"
 
+extern char* BUILD_DATE;
+extern char* BUILD_TIME;
+
 class DKApp{
 public:
 
