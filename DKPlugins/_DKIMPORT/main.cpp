@@ -33,7 +33,11 @@
 #endif
 
 #include "DK/DKApp.h"
+#include "DK/DKLog.h"
 #include "assets.h"
+
+char* __DKDATE__ = __DATE__;
+char* __DKTIME__ = __TIME__;
 
 int main(int argc, char** argv) {
 	#if HAVE_DKSDLWindow
@@ -41,6 +45,7 @@ int main(int argc, char** argv) {
 			SDL_SetMainReady();
 		#endif
 	#endif
+	
 	DKApp dkapp(argc, argv);
 	DKApp::Init();
 	DKApp::Loop();
