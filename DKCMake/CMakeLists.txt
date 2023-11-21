@@ -8,14 +8,14 @@ include_guard()
 ###
 ### *** DKCMake ***
 ### This is the main CMakeLists.txt file for all projects within the code base.
-### All Apps, Tools, 3rd party libraries, plugins and executables  will be build from here.
-### All dependencies will be downloaded, acuired and built for the project as required. 
+### All Apps, Tools, 3rd party libraries, plugins and executables will be build from here.
+### All dependencies will be downloaded, aquired and built for the project as needed. 
 ### All DKPlugins and DKApp executables will be included into the Generated solution,
 ### while any 3rd party libraries will be built prior and referenced externally to the project solution.
 ###
 ### *** DKBuilder ***
 ### A text menu based build app called "DKBuilder" exists to simplify the build process for all DK projects.
-### And For convienience, there is also a build script provided, DKBuilder.sh(unix) or DKBuilder.cmd(windows), that can 
+### And For convienience, there is also a build script provided, build.sh(unix) or build.cmd(windows), that can 
 ### genrate and build any of the initial apps included in the DKApps directory, including the DKBuilder app itself.
 ### This is the method that is encourcaged for getting started on generating and compiling DigitalKnob applications.
 ###

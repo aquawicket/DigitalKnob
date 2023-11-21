@@ -1,8 +1,23 @@
-~! THE LIST !~    02/21/23
+~! THE LIST !~    11/20/23
 
 *******************
 *** DIGITALKNOB ***
 *******************
+
+There are currently 2 branches that implement the DOM.
+1. Javascript DOM, (located in the main and Development branches)
+2. C++/Javascript DOM, (located in the CPP_DOM branch)
+
+We need to start bridging the gap between the 2 source versions.
+We may need to follow the directory structure that CPP_DOM uses for each WebApi
+We may want to create a new JS_DOM branch and rename CPP_DOM to CPP_JS_DOM as well
+
+
+
+
+
+remove the hard coded need for imagemagick
+
 Change javascript entry point file name from "/assets/app.js" to "/assets/main.js"
 
 Move all github wiki into DK.Readme.md and remove all wiki
@@ -11,7 +26,7 @@ Create a fork of RmlUi with a javascript folder for the document object, then do
 
 Go over DKFile.js and alphabatize functions
 
-Move all gui related js to DKGui.js
+Move all gui related javascript into DKGui.js
 DK.js will have access to a C++ EventTarget
 In fact, all C++ OOP structure will follow W3 javascript naming standards.
 
@@ -37,8 +52,6 @@ If you get DKDom as a seperate RmlUi Library, poeple might chip in.
 
 Remodel DK/Events.cpp after javascript EventTarget by creating DK/EventTarget.h/cpp
 
-Rename Github MyApps to DKMyApps
-
 *** Javascript ***
 EventTarget is lower than Window. Use that for javascript without a document context.
 
@@ -52,7 +65,7 @@ Make sure all function are prefixed with DK_
 i.e.  DK_Function(var)
 
 ** Eliminate DKWidget
-Let continue to strip down DKWidget.js because it's all moving to DK.js and DKWidget is gone.
+Let continue to strip down DKWidget.js because it's all moving to DK.js, then DKWidget will be completley removed.
 
 *** Javascript ***
  replace all == with ===
