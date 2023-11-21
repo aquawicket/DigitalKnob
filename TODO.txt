@@ -4,6 +4,8 @@
 *** DIGITALKNOB ***
 *******************
 
+DKBuilder needs to be able to select the branch and the branch shoud corospond to a directory
+
 There are currently 2 branches that implement the DOM.
 1. Javascript DOM, (located in the main and Development branches)
 2. C++/Javascript DOM, (located in the CPP_DOM branch)
