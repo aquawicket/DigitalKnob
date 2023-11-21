@@ -28,15 +28,16 @@
 // https://sourceforge.net/p/predef/wiki/Home/
 // https://github.com/nemequ/pre-defined-macros
 // https://stackoverflow.com/a/3672331/688352
+// https://learn.microsoft.com/en-us/cpp/preprocessor/pragma-directives-and-the-pragma-keyword?view=msvc-170
 #pragma once
 #ifndef DKPreprocessor_H
 #define DKPreprocessor_H
 
 // https://developercommunity.visualstudio.com/t/error-c2872-byte-ambiguous-symbol/93889
 // Fix for DKVncServer
-//#ifndef _HAS_STD_BYTE
+#ifndef _HAS_STD_BYTE
 	#define _HAS_STD_BYTE 0
-//#endif
+#endif
 
 #define STR(x) #x
 #define DKMSG(x) __pragma(message(STR(x)))
@@ -311,7 +312,7 @@
 #endif
 
 
-// DK_UNUSED(arg) - supress unfererenced formal parameter warnings for uused variables
+// DK_UNUSED(arg) - suppress unfererenced formal parameter warnings for uused variables
 #define DK_UNUSED(arg) (void)arg;
 
 
