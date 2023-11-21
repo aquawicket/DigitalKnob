@@ -73,14 +73,14 @@ bool GetVersion(DKString& version){
 	version = version + "." + day;
 	DKString hour;
 	GetBuildHour(hour);
-	version = version + hour;
-	/*
+	version = version + "-" + hour;
 	DKString minute;
 	GetBuildMinute(minute);
-	version = version + minute;
+	version = version + ":" + minute;
+	/*
 	DKString second;
 	GetBuildSecond(second);
-	version = version + second;
+	version = version + ":" + second;
 	*/
 	return true;
 }
@@ -154,7 +154,7 @@ bool GetBuildSecond(DKString& buildSecond){
 }
 
 bool DKLog::Clear(int& rtnvalue){
-    return DKUtil::System("cls", rtnvalue);
+    return DKUtil::System("cls", rtnvalue);	//FIXME: this may only work on windows
 }
 
 /*
