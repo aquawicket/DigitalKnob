@@ -39,18 +39,29 @@ if(CMAKE_HOST_UNIX AND NOT CMAKE_HOST_APPLE)
 endif()
 
 
-## Set the DIGITALKNOB and DKCMAKE environment variables 
+## Set the DIGITALKNOB, DKBRANCH and DKCMAKE variables 
 get_filename_component(path ${CMAKE_SOURCE_DIR} ABSOLUTE)
-string(FIND "${path}" "digitalknob" pos)
-string(SUBSTRING ${path} 0 ${pos} path)
-set(DIGITALKNOB ${path}digitalknob CACHE INTERNAL "")
-set(DKCMAKE ${DIGITALKNOB}/DK/DKCMake CACHE INTERNAL "")
-set(ENV{DIGITALKNOB} ${DIGITALKNOB})
-set(ENV{DKCMAKE} ${DKCMAKE})
-if(WIN_HOST)
-	execute_process(COMMAND cmd /c setx DIGITALKNOB ${DIGITALKNOB})
-	execute_process(COMMAND cmd /c setx DKCMAKE ${DKCMAKE})
-endif()
+set(DKCMAKE ${path} CACHE INTERNAL "")
+message(STATUS "\n DKCMAKE =  ${DKCMAKE}\n")
+
+string(FIND "${DKCMAKE}" "DKCMake" pos)
+math(EXPR pos "${pos}-1")
+string(SUBSTRING ${DKCMAKE} 0 ${pos} DKBRANCH)
+set(DKBRANCH ${DKBRANCH} CACHE INTERNAL "")
+message(STATUS "\n DKBRANCH =  ${DKBRANCH}\n")
+
+string(FIND "${DKBRANCH}" "digitalknob" pos)
+string(SUBSTRING ${DKBRANCH} 0 ${pos} DIGITALKNOB)
+set(DIGITALKNOB ${DIGITALKNOB}digitalknob CACHE INTERNAL "")
+message(STATUS "\n DIGITALKNOB =  ${DIGITALKNOB}\n")
+
+
+#set(ENV{DIGITALKNOB} ${DIGITALKNOB})
+#set(ENV{DKCMAKE} ${DKCMAKE})
+#if(WIN_HOST)
+#	execute_process(COMMAND cmd /c setx DIGITALKNOB ${DIGITALKNOB})
+#	execute_process(COMMAND cmd /c setx DKCMAKE ${DKCMAKE})
+#endif()
 
 
 ##### Load Function files #################
