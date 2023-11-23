@@ -25,7 +25,7 @@ endif()
 if(LINUX)
 	#dk_depend(mesa-common-dev)
 	#dk_depend(libgl1-mesa-dev)
-	#dk_depend(libx11-dev)
+	dk_depend(libx11-dev)
 	#dk_depend(libxrandr-dev)
 	#dk_depend(libasound2-dev) ##TODO: Move to DKAudio
 	#dk_depend(libxtst-dev)
