@@ -270,6 +270,7 @@ sw
 sw-client
 system_configuration
 terminator
+termux
 tesseract
 threadpool
 tidy-html5
