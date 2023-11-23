@@ -327,9 +327,9 @@ while :
 			if [[ "$OS" == "raspberry64" ]]; then
 				cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=OFF -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE
 			fi
-			if [[ "$OS" == "emscipten" ]]; then
+			#if [[ "$OS" == "emscipten" ]]; then
 				#TODO
-			fi
+			#fi
 
 			cmake --build $DKPATH/DKApps/$APP/$OS/Debug --target ${APP}_APP --config Debug
 			chmod +x $DKPATH/DKApps/$APP/$OS/Debug/$APP
@@ -363,9 +363,9 @@ while :
 			if [[ "$OS" == "raspberry64" ]]; then
 				cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=ON -DDEBUG=OFF -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE
 			fi
-			if [[ "$OS" == "emscipten" ]]; then
+			#if [[ "$OS" == "emscipten" ]]; then
 				#TODO
-			fi
+			#fi
 			
 			cmake --build $DKPATH/DKApps/$APP/$OS/Debug --target ${APP}_APP --config Release
 			chmod +x $DKPATH/DKApps/$APP/$OS/Release/$APP
