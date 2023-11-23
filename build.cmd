@@ -24,23 +24,27 @@ if NOT exist "%DKDOWNLOAD%" mkdir "%DKDOWNLOAD%"
 ECHO.
 ECHO 1. Git Update
 ECHO 2. Git Commit
-ECHO 3. DKBuilder
-ECHO 4. DKBuilderGui
-ECHO 5. DKCore
-ECHO 6. DKSDLRml
-ECHO 7. Clear Screen
-ECHO 8. Exit
+ECHO 3. DKCore
+ECHO 4. DKJavascript
+ECHO 5. DKBuilder
+ECHO 6. DKBuilderGui
+ECHO 7. DKSDL
+ECHO 8. DKSDLRml
+ECHO c. Clear Screen
+ECHO x. Exit
 set choice=
 set /p choice=Please select an app to build: 
 if not '%choice%'=='' set choice=%choice:~0,1%
 if '%choice%'=='1' goto gitupdate
 if '%choice%'=='2' goto gitcommit
-if '%choice%'=='3' goto dkbuilder
-if '%choice%'=='4' goto dkbuildergui
-if '%choice%'=='5' goto dkcore
-if '%choice%'=='6' goto dksdlrml
-if '%choice%'=='7' goto clearscreen
-if '%choice%'=='8' goto end
+if '%choice%'=='3' goto dkcore
+if '%choice%'=='4' goto dkjavascript
+if '%choice%'=='5' goto dkbuilder
+if '%choice%'=='6' goto dkbuildergui
+if '%choice%'=='7' goto dksdl
+if '%choice%'=='8' goto dksdlrml
+if '%choice%'=='c' goto clearscreen
+if '%choice%'=='x' goto end
 ECHO "%choice%" is not valid, try again
 goto pickapp
 
@@ -101,6 +105,14 @@ goto pickapp
 cls
 goto pickapp
 
+:dkcore
+set APP=DKCore
+goto checkApp
+
+:dkjavascript
+set APP=DKJavascript
+goto checkApp
+
 :dkbuilder
 set APP=DKBuilder
 goto checkApp
@@ -109,8 +121,8 @@ goto checkApp
 set APP=DKBuilderGui
 goto checkApp
 
-:dkcore
-set APP=DKCore
+:dksdl
+set APP=DKSDL
 goto checkApp
 
 :dksdlrml
@@ -131,30 +143,36 @@ ECHO.
 ECHO 1. Windows 32
 ECHO 2. Windows 64
 ECHO 3. Android 32
-ECHO 4. Go Back
-ECHO 5. Exit
+ECHO 4. Android 64
+ECHO b. Go Back
+ECHO x. Exit
 set choice=
 set /p choice=Please select an OS to build for: 
 if not '%choice%'=='' set choice=%choice:~0,1%
 if '%choice%'=='1' goto win32
 if '%choice%'=='2' goto win64
 if '%choice%'=='3' goto android32
-if '%choice%'=='4' goto pickapp
-if '%choice%'=='5' goto end
+if '%choice%'=='4' goto android64
+if '%choice%'=='b' goto pickapp
+if '%choice%'=='x' goto end
 ECHO "%choice%" is not valid, try again
 goto pickos
 
 :win32
 set OS="win32"
-goto build
+goto type
 
 :win64
 set OS="win64"
-goto build
+goto type
 
 :android32
 set OS="android32"
-goto build
+goto type
+
+:android64
+set OS="android64"
+goto type
 
 
 :type
@@ -163,29 +181,29 @@ ECHO.
 ECHO 1. Debug
 ECHO 2. Release
 ECHO 3. All
-ECHO 4. Go Back
-ECHO 5. Exit
+ECHO b. Go Back
+ECHO x. Exit
 set choice=
 set /p choice=Please select a build type: 
 if not '%choice%'=='' set choice=%choice:~0,1%
 if '%choice%'=='1' goto debug
 if '%choice%'=='2' goto release
 if '%choice%'=='3' goto all
-if '%choice%'=='4' goto pickos
-if '%choice%'=='5' goto end
+if '%choice%'=='b' goto pickos
+if '%choice%'=='x' goto end
 ECHO "%choice%" is not valid, try again
 goto type
 
 :debug
-set TYPE="Debug"
+set TYPE=Debug
 goto build
 
 :release
-set TYPE="Release"
+set TYPE=Release
 goto build
 
 :all
-set TYPE="All"
+set TYPE=All
 goto build
 
 
@@ -206,7 +224,7 @@ for /r %%i in (*.TMP) do del "%%i"
 ::if NOT "%ERRORLEVEL%" == "0" goto error
 
 
-echo ****** BUILDING %APP% - %OS% ******
+echo ****** BUILDING %APP% - %OS% - %TYPE% ******
 if exist "C:\Program Files\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files\CMake\bin\cmake.exe"
 if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files (x86)\CMake\bin\cmake.exe"
 if NOT exist "%CMAKE%" (
@@ -244,11 +262,27 @@ cd "%APP_PATH%\%OS%"
 ::"%CMAKE%" -G "Visual Studio 16 2019" -A Win32 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKCMAKE%
 "%CMAKE%" -G "Visual Studio 17 2022" -A Win32 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKCMAKE%
 ::if NOT "%ERRORLEVEL%" == "0" goto error
+
+echo TYPE = %TYPE%
+if %TYPE%==Debug goto build_debug
+if %TYPE%==Release goto build_release
+if %TYPE%==All goto build_all
+goto error
+
+:build_debug
 "%MSBUILD%" %APP%_APP.sln /p:Configuration=Debug
 ::if NOT "%ERRORLEVEL%" == "0" goto error
+goto pickapp
+
+:build_release
 "%MSBUILD%" %APP%_APP.sln /p:Configuration=Release
 ::if NOT "%ERRORLEVEL%" == "0" goto error
+goto pickapp
 
+:build_all
+"%MSBUILD%" %APP%_APP.sln /p:Configuration=Debug
+"%MSBUILD%" %APP%_APP.sln /p:Configuration=Release
+::if NOT "%ERRORLEVEL%" == "0" goto error
 goto pickapp
 
 

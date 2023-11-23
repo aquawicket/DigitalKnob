@@ -55,7 +55,7 @@ while :
 	do
 	echo " "
 	PS3='Please update and select an app to build: '
-	options=("Git Update" "Git Commit" "DKBuilder" "DKCore" "DKSDLRml" "Clear Screen" "Exit")
+	options=("Git Update" "Git Commit" "DKCore" "DKJavascript" "DKBuilder" "DKSDL" "DKSDLRml" "Clear Screen" "Exit")
 	select opt in "${options[@]}"
 	do
 		case $opt in
@@ -90,7 +90,6 @@ while :
 								
 				
 				chmod +x $DKPATH/build.sh
-				#chmod +x $DKCMAKE/dkbuild.sh
 				;;
 			"Git Commit")
 				echo "$opt"
@@ -108,14 +107,24 @@ while :
 				git commit -a -m "git commit"
 				git push
 				;;
+			"DKCore")
+				echo "$opt"
+				APP="DKCore"
+				break
+				;;
+			"DKJavascript")
+				echo "$opt"
+				APP="DKJavascript"
+				break
+				;;
 			"DKBuilder")
 				echo "$opt"
 				APP="DKBuilder"
 				break
 				;;
-			"DKCore")
+			"DKSDL")
 				echo "$opt"
-				APP="DKCore"
+				APP="DKSDL"
 				break
 				;;
 			"DKSDLRml")
@@ -194,6 +203,40 @@ while :
 		REPLY=
 	done
 
+	echo " "
+	PS3='Please select build type: '
+	options=("Debug" "Release" "All" "Clear Screen" "Exit")
+	select opt in "${options[@]}"
+	do
+		case $opt in
+			"Debug")
+				echo "$opt"
+				TYPE="Debug"
+				break
+				;;
+			"Release")
+				echo "$opt"
+				TYPE="Release"
+				break
+				;;
+			"All")
+				echo "$opt"
+				TYPE="All"
+				break
+				;;
+			"Clear Screen")
+				echo "$opt"
+				clear
+				;;
+			"Exit")
+				echo "$opt"
+				exit 0
+				;;
+			*) echo "invalid option $REPLY";;
+		esac 
+		REPLY=
+	done
+	
 	cd $DIGITALKNOB
 	echo Deleteing CMake cache . . .
 	find . -name "CMakeCache.*" -delete
@@ -214,8 +257,14 @@ while :
 		mkdir $DKPATH/DKApps/$APP/$OS
 		cd $DKPATH/DKApps/$APP/$OS
 		cmake -G "Xcode" -DMAC_64=ON -DCMAKE_OSX_ARCHITECTURES=x86_64 -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DSTATIC=ON $DKCMAKE
-		xcodebuild -configuration Debug build
-		xcodebuild -configuration Release build
+		
+		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
+			xcodebuild -configuration Debug build
+		fi
+		
+		if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
+			xcodebuild -configuration Release build
+		fi
 	else #Linux, Raspberry Pi, Android
 		$SUDO $APT -y install which
 		GCC_PATH=$(which gcc)
@@ -229,21 +278,27 @@ while :
 		$SUDO $APT -y install g++
 		
 		mkdir $DKPATH/DKApps/$APP/$OS
-		mkdir $DKPATH/DKApps/$APP/$OS/Debug
-		cd $DKPATH/DKApps/$APP/$OS/Debug
-		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=OFF -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE
-		make #$APP
-		chmod +x $DKPATH/DKApps/$APP/$OS/Debug/$APP
 		
-		mkdir $DKPATH/DKApps/$APP/$OS/Release
-		cd $DKPATH/DKApps/$APP/$OS/Release
-		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DDEBUG=OFF -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE
-		make #$APP
-		chmod +x $DKPATH/DKApps/$APP/$OS/Release/$APP
+		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
+			mkdir $DKPATH/DKApps/$APP/$OS/Debug
+			cd $DKPATH/DKApps/$APP/$OS/Debug
+			cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=OFF -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE
+			make #$APP
+			chmod +x $DKPATH/DKApps/$APP/$OS/Debug/$APP
+		fi
+		
+		if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
+			mkdir $DKPATH/DKApps/$APP/$OS/Release
+			cd $DKPATH/DKApps/$APP/$OS/Release
+			cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DDEBUG=OFF -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE
+			make #$APP
+			chmod +x $DKPATH/DKApps/$APP/$OS/Release/$APP
+		fi
 	fi
 
     unset APP
 	unset OS
+	unset TYPE
 done
 
 
