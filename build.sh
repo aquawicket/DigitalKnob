@@ -8,6 +8,7 @@ if [ -e /proc/device-tree/model ]; then
 fi
 
 SUDO="sudo"
+APT="apt-get"
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	DIGITALKNOB="/home/$USER/digitalknob"
@@ -24,6 +25,7 @@ elif [[ "$OSTYPE" == "freebsd"* ]]; then
 elif [[ "$OSTYPE" == "linux-android" ]]; then
 	DIGITALKNOB="/data/data/com.termux/files/home/digitalknob"
 	SUDO=""
+	APT="apt"
 else
     echo "UNKNOWN OS TYPE ($OSTYPE)"
 fi
@@ -67,7 +69,7 @@ while :
 					# brew tap homebrew/core
 					# brew install git
 				else
-					sudo apt-get -y install git
+					$SUDO $APT -y install git
 				fi
 				
 				
@@ -100,7 +102,7 @@ while :
 					# brew tap homebrew/core
 					# brew install git
 				else
-					sudo apt-get -y install git
+					$SUDO $APT -y install git
 				fi
 				cd $DKPATH
 				git commit -a -m "git commit"
@@ -209,9 +211,9 @@ while :
 		export CXX="$GPP_PATH"
 		echo "GCC_PATH = $GCC_PATH"
 		echo "GPP_PATH = $GPP_PATH"
-		sudo apt-get -y install cmake
-		sudo apt-get -y install gcc
-		sudo apt-get -y install g++
+		$SUDO $APT -y install cmake
+		$SUDO $APT -y install gcc
+		$SUDO $APT -y install g++
 		
 		mkdir $DKPATH/DKApps/$APP/$OS
 		mkdir $DKPATH/DKApps/$APP/$OS/Debug
