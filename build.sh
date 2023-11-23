@@ -118,9 +118,9 @@ while :
 				APP="DKCore"
 				break
 				;;
-			"DKTestAll")
+			"DKSDLRml")
 				echo "$opt"
-				APP="DKTestAll"
+				APP="DKSDLRml"
 				break
 				;;
 			"Clear Screen")
