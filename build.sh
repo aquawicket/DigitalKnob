@@ -7,6 +7,9 @@ if [ -e /proc/device-tree/model ]; then
 	MODEL=$(tr -d '\0' </proc/device-tree/model)
 fi
 
+SUDO="sudo"
+APT="apt-get"
+
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	DIGITALKNOB="/home/$USER/digitalknob"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
@@ -18,15 +21,19 @@ elif [[ "$OSTYPE" == "msys" ]]; then
 elif [[ "$OSTYPE" == "win32" ]]; then #I'm not sure this can happen
 	DIGITALKNOB="C:/Users/$USERNAME/digitalknob" 
 elif [[ "$OSTYPE" == "freebsd"* ]]; then
-	echo "TODO: DIGITALKNOB NOT SET"
+	echo "TODO: freebsd builder incomplete"
+elif [[ "$OSTYPE" == "linux-android" ]]; then
+	DIGITALKNOB="/data/data/com.termux/files/home/digitalknob"
+	SUDO=""
+	APT="apt"
 else
-    echo "UNKNOWN OS TYPE ($OSTYPE)"
+    echo "UNKNOWN OS ($OSTYPE)"
 fi
 
-#BRANCH="Development"
-BRANCH="CPP_DOM"
-DKPATH="$DIGITALKNOB/DK"
-DKCMAKE="$DIGITALKNOB/DK/DKCMake"
+BRANCH="Development"
+#BRANCH="CPP_DOM"
+DKPATH="$DIGITALKNOB/$BRANCH"
+DKCMAKE="$DIGITALKNOB/$BRANCH/DKCMake"
 
 echo "hostname		= $HOSTNAME"
 echo "hosttype		= $HOSTTYPE"
@@ -39,7 +46,7 @@ echo "digitalknob	= $DIGITALKNOB"
 echo "dkpath		= $DKPATH"
 echo "dkcmake		= $DKCMAKE"
 
-sudo echo
+$SUDO echo
 
 # https://unix.stackexchange.com/a/293605
 COLUMNS=1
@@ -48,7 +55,7 @@ while :
 	do
 	echo " "
 	PS3='Please update and select an app to build: '
-	options=("Git Update" "Git Commit" "DKBuilder" "DKSdlRmlUi" "DKTestAll" "Clear Screen" "Exit")
+	options=("Git Update" "Git Commit" "DKBuilder" "DKCore" "DKTestAll" "Clear Screen" "Exit")
 	select opt in "${options[@]}"
 	do
 		case $opt in
@@ -62,7 +69,7 @@ while :
 					# brew tap homebrew/core
 					# brew install git
 				else
-					sudo apt-get -y install git
+					$SUDO $APT -y install git
 				fi
 				
 				
@@ -83,7 +90,7 @@ while :
 								
 				
 				chmod +x $DKPATH/build.sh
-				chmod +x $DKCMAKE/dkbuild.sh
+				#chmod +x $DKCMAKE/dkbuild.sh
 				;;
 			"Git Commit")
 				echo "$opt"
@@ -95,7 +102,7 @@ while :
 					# brew tap homebrew/core
 					# brew install git
 				else
-					sudo apt-get -y install git
+					$SUDO $APT -y install git
 				fi
 				cd $DKPATH
 				git commit -a -m "git commit"
@@ -106,9 +113,9 @@ while :
 				APP="DKBuilder"
 				break
 				;;
-			"DKSdlRmlUi")
+			"DKCore")
 				echo "$opt"
-				APP="DKSdlRmlUi"
+				APP="DKCore"
 				break
 				;;
 			"DKTestAll")
@@ -134,11 +141,13 @@ while :
 	if [[ "$MODEL" == "Raspberry"* ]]; then
 		options=("raspberry32" "Exit")
 	elif [[ "$OSTYPE" == "linux-gnu"* ]] && [[ "$HOSTTYPE" == "x86_64"* ]]; then
-		options=("linux64" "Exit")
+		options=("linux64" "android32" "Exit")
 	elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
 		options=("linux32" "Exit")
 	elif [[ "$OSTYPE" == "darwin"* ]] && [[ "$HOSTTYPE" == "x86_64"* ]]; then
 		options=("mac64" "Exit")
+	elif [[ "$OSTYPE" == "linux-android" ]]; then
+		options=("android32" "Exit")
 	else
 		echo "UNKNOWN OS TYPE ($OSTYPE)"
 		options=("Exit")
@@ -164,6 +173,11 @@ while :
 			"raspberry32")
 				echo "$opt"
 				OS="raspberry32"
+				break
+				;;
+			"android32")
+				echo "$opt"
+				OS="android32"
 				break
 				;;
 			"Exit")
@@ -197,16 +211,17 @@ while :
 		cmake -G "Xcode" -DMAC_64=ON -DCMAKE_OSX_ARCHITECTURES=x86_64 -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DSTATIC=ON $DKCMAKE
 		xcodebuild -configuration Debug build
 		xcodebuild -configuration Release build
-	else #Linux, Raspberry Pi
+	else #Linux, Raspberry Pi, Android
+		$SUDO $APT -y install which
 		GCC_PATH=$(which gcc)
 		GPP_PATH=$(which g++)
 		export CC="$GCC_PATH"
 		export CXX="$GPP_PATH"
 		echo "GCC_PATH = $GCC_PATH"
 		echo "GPP_PATH = $GPP_PATH"
-		sudo apt-get -y install cmake
-		sudo apt-get -y install gcc
-		sudo apt-get -y install g++
+		$SUDO $APT -y install cmake
+		$SUDO $APT -y install gcc
+		$SUDO $APT -y install g++
 		
 		mkdir $DKPATH/DKApps/$APP/$OS
 		mkdir $DKPATH/DKApps/$APP/$OS/Debug
