@@ -7,6 +7,8 @@ if [ -e /proc/device-tree/model ]; then
 	MODEL=$(tr -d '\0' </proc/device-tree/model)
 fi
 
+SUDO="sudo"
+
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	DIGITALKNOB="/home/$USER/digitalknob"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
@@ -21,6 +23,7 @@ elif [[ "$OSTYPE" == "freebsd"* ]]; then
 	echo "TODO: freebsd builder incomplete"
 elif [[ "$OSTYPE" == "linux-android" ]]; then
 	DIGITALKNOB="/data/data/com.termux/files/home/digitalknob"
+	SUDO=""
 else
     echo "UNKNOWN OS TYPE ($OSTYPE)"
 fi
@@ -41,7 +44,7 @@ echo "digitalknob	= $DIGITALKNOB"
 echo "dkpath		= $DKPATH"
 echo "dkcmake		= $DKCMAKE"
 
-sudo echo
+$SUDO echo
 
 # https://unix.stackexchange.com/a/293605
 COLUMNS=1
