@@ -5,4 +5,6 @@ endif()
 
 dk_depend(android-ndk)
 
-dk_findLibrary(android)
+if(NOT ANDROID_HOST)
+	dk_findLibrary(android)
+endif()
