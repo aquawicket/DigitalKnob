@@ -25,24 +25,26 @@ ECHO.
 ECHO 1. Git Update
 ECHO 2. Git Commit
 ECHO 3. DKCore
-ECHO 4. DKBuilder
-ECHO 5. DKBuilderGui
-ECHO 6. DKSDL
-ECHO 7. DKSDLRml
-ECHO 8. Clear Screen
-ECHO 9. Exit
+ECHO 4. DKJavascript
+ECHO 5. DKBuilder
+ECHO 6. DKBuilderGui
+ECHO 7. DKSDL
+ECHO 8. DKSDLRml
+ECHO c. Clear Screen
+ECHO x. Exit
 set choice=
 set /p choice=Please select an app to build: 
 if not '%choice%'=='' set choice=%choice:~0,1%
 if '%choice%'=='1' goto gitupdate
 if '%choice%'=='2' goto gitcommit
 if '%choice%'=='3' goto dkcore
-if '%choice%'=='4' goto dkbuilder
-if '%choice%'=='5' goto dkbuildergui
-if '%choice%'=='6' goto dksdl
-if '%choice%'=='7' goto dksdlrml
-if '%choice%'=='8' goto clearscreen
-if '%choice%'=='9' goto end
+if '%choice%'=='4' goto dkjavascript
+if '%choice%'=='5' goto dkbuilder
+if '%choice%'=='6' goto dkbuildergui
+if '%choice%'=='7' goto dksdl
+if '%choice%'=='8' goto dksdlrml
+if '%choice%'=='c' goto clearscreen
+if '%choice%'=='x' goto end
 ECHO "%choice%" is not valid, try again
 goto pickapp
 
@@ -107,6 +109,10 @@ goto pickapp
 set APP=DKCore
 goto checkApp
 
+:dkjavascript
+set APP=DKJavascript
+goto checkApp
+
 :dkbuilder
 set APP=DKBuilder
 goto checkApp
@@ -138,8 +144,8 @@ ECHO 1. Windows 32
 ECHO 2. Windows 64
 ECHO 3. Android 32
 ECHO 4. Android 64
-ECHO 5. Go Back
-ECHO 6. Exit
+ECHO b. Go Back
+ECHO x. Exit
 set choice=
 set /p choice=Please select an OS to build for: 
 if not '%choice%'=='' set choice=%choice:~0,1%
@@ -147,8 +153,8 @@ if '%choice%'=='1' goto win32
 if '%choice%'=='2' goto win64
 if '%choice%'=='3' goto android32
 if '%choice%'=='4' goto android64
-if '%choice%'=='5' goto pickapp
-if '%choice%'=='6' goto end
+if '%choice%'=='b' goto pickapp
+if '%choice%'=='x' goto end
 ECHO "%choice%" is not valid, try again
 goto pickos
 
@@ -175,16 +181,16 @@ ECHO.
 ECHO 1. Debug
 ECHO 2. Release
 ECHO 3. All
-ECHO 4. Go Back
-ECHO 5. Exit
+ECHO b. Go Back
+ECHO x. Exit
 set choice=
 set /p choice=Please select a build type: 
 if not '%choice%'=='' set choice=%choice:~0,1%
 if '%choice%'=='1' goto debug
 if '%choice%'=='2' goto release
 if '%choice%'=='3' goto all
-if '%choice%'=='4' goto pickos
-if '%choice%'=='5' goto end
+if '%choice%'=='b' goto pickos
+if '%choice%'=='x' goto end
 ECHO "%choice%" is not valid, try again
 goto type
 
@@ -218,7 +224,7 @@ for /r %%i in (*.TMP) do del "%%i"
 ::if NOT "%ERRORLEVEL%" == "0" goto error
 
 
-echo ****** BUILDING %APP% - %OS% ******
+echo ****** BUILDING %APP% - %OS% - %TYPE% ******
 if exist "C:\Program Files\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files\CMake\bin\cmake.exe"
 if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files (x86)\CMake\bin\cmake.exe"
 if NOT exist "%CMAKE%" (
