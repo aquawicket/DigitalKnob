@@ -50,7 +50,7 @@ dk_disable(sw)						# DEPRECATED: requested by leptonica but not required
 dk_disable(sw-client)				# DEPRECATED: requested by leptonica but not required
 
 if(ANDROID_HOST)
-	dk_disable(openjdk)			
+	#dk_disable(openjdk)			
 endif()
 
 # Disabled for Android targets
