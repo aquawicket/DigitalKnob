@@ -177,7 +177,7 @@ while :
 				;;
 			"android32")
 				echo "$opt"
-				OS="raspberry32"
+				OS="android32"
 				break
 				;;
 			"Exit")
@@ -211,7 +211,7 @@ while :
 		cmake -G "Xcode" -DMAC_64=ON -DCMAKE_OSX_ARCHITECTURES=x86_64 -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DSTATIC=ON $DKCMAKE
 		xcodebuild -configuration Debug build
 		xcodebuild -configuration Release build
-	else #Linux, Raspberry Pi
+	else #Linux, Raspberry Pi, Android
 		GCC_PATH=$(which gcc)
 		GPP_PATH=$(which g++)
 		export CC="$GCC_PATH"
