@@ -218,6 +218,7 @@ while :
 		export CXX="$GPP_PATH"
 		echo "GCC_PATH = $GCC_PATH"
 		echo "GPP_PATH = $GPP_PATH"
+		$SUDO $APT -y install which
 		$SUDO $APT -y install cmake
 		$SUDO $APT -y install gcc
 		$SUDO $APT -y install g++
