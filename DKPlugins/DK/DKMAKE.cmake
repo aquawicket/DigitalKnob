@@ -34,7 +34,7 @@ if(RASPBERRY)
 endif()
 if(ANDROID)
 	#dk_depend(sdl)
-	set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+	set(CMAKE_POSITION_INDEPENDENT_CODE ON)		# https://stackoverflow.com/a/38297422
 endif()
 
 dk_depend(backward-cpp)

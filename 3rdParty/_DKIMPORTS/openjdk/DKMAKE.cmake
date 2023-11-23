@@ -38,8 +38,12 @@ if(LINUX_HOST)
 		dk_set(APT "apt-get")
 	endif()
 	
-	dk_command(${SUDO} ${APT} update)
-	dk_command(${SUDO} apt -y install openjdk-11-jdk)
+	if(ANDROID_HOST)
+		dk_command(pkg install openjdk-17)	# ANDROID install
+	else()
+		dk_command(${SUDO} ${APT} update)
+		dk_command(${SUDO} apt -y install openjdk-11-jdk)
+	endif()
 	#dk_command(java -version)
 endif()
 

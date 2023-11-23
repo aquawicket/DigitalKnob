@@ -20,7 +20,9 @@ elif [[ "$OSTYPE" == "msys" ]]; then
 elif [[ "$OSTYPE" == "win32" ]]; then #I'm not sure this can happen
 	DIGITALKNOB="C:/Users/$USERNAME/digitalknob" 
 elif [[ "$OSTYPE" == "freebsd"* ]]; then
-	echo "TODO: DIGITALKNOB NOT SET"
+	echo "TODO: freebsd builder incomplete"
+elif [[ "$OSTYPE" == "linux-android" ]]; then
+	DIGITALKNOB="/data/data/com.termux/files/home/digitalknob"
 else
     echo "UNKNOWN OS TYPE ($OSTYPE)"
 fi
