@@ -212,13 +212,13 @@ while :
 		xcodebuild -configuration Debug build
 		xcodebuild -configuration Release build
 	else #Linux, Raspberry Pi, Android
+		$SUDO $APT -y install which
 		GCC_PATH=$(which gcc)
 		GPP_PATH=$(which g++)
 		export CC="$GCC_PATH"
 		export CXX="$GPP_PATH"
 		echo "GCC_PATH = $GCC_PATH"
 		echo "GPP_PATH = $GPP_PATH"
-		$SUDO $APT -y install which
 		$SUDO $APT -y install cmake
 		$SUDO $APT -y install gcc
 		$SUDO $APT -y install g++

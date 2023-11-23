@@ -31,6 +31,7 @@ else()
 	WIN_HOST_dk_command(${DKDOWNLOAD}/${GIT_FILE})
 	MAC_HOST_dk_command(brew install git)
 	LINUX_HOST_dk_command(sudo apt-get -y install git)
+	ANDROID_HOST_dk_command(apt -y install git)
 endif()
 
 if(EXISTS /usr/bin/git)
