@@ -141,7 +141,7 @@ while :
 	if [[ "$MODEL" == "Raspberry"* ]]; then
 		options=("raspberry32" "Exit")
 	elif [[ "$OSTYPE" == "linux-gnu"* ]] && [[ "$HOSTTYPE" == "x86_64"* ]]; then
-		options=("linux64" "Exit")
+		options=("linux64" "android32" "Exit")
 	elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
 		options=("linux32" "Exit")
 	elif [[ "$OSTYPE" == "darwin"* ]] && [[ "$HOSTTYPE" == "x86_64"* ]]; then
