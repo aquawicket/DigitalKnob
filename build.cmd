@@ -268,11 +268,13 @@ if %OS%==android64 goto generate_android64
 
 :generate_win32
 "%CMAKE%" -G "Visual Studio 17 2022" -A Win32 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKCMAKE%
+set TARGET=%APP%_APP
 ::if NOT "%ERRORLEVEL%" == "0" goto error
 goto build
 
 :generate_win64
 "%CMAKE%" -G "Visual Studio 17 2022" -A x64 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKCMAKE%
+set TARGET=%APP%_APP
 ::if NOT "%ERRORLEVEL%" == "0" goto error
 goto build
 
@@ -282,9 +284,19 @@ set ANDROID_NDK_BUILD=23.1.7779620
 set ANDROID_NDK=C:/Users/Administrator/digitalknob/Development/3rdParty/android-sdk/ndk/%ANDROID_NDK_BUILD%
 call %DKPATH%\3rdParty\_DKIMPORTS\openjdk\registerJDK.cmd
 "%CMAKE%" -G "Visual Studio 17 2022" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID-NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_NDK%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
+set TARGET=main
+::if NOT "%ERRORLEVEL%" == "0" goto error
+goto build
 
 :generate_android64
-:: TODO
+set ANDROID_API=31
+set ANDROID_NDK_BUILD=23.1.7779620
+set ANDROID_NDK=C:/Users/Administrator/digitalknob/Development/3rdParty/android-sdk/ndk/%ANDROID_NDK_BUILD%
+call %DKPATH%\3rdParty\_DKIMPORTS\openjdk\registerJDK.cmd
+"%CMAKE%" -G "Visual Studio 17 2022" -A ARM64 -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID-NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_NDK%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
+set TARGET=main
+::if NOT "%ERRORLEVEL%" == "0" goto error
+goto build
 
 
 :build
@@ -295,18 +307,18 @@ if %TYPE%==All goto build_all
 goto error
 
 :build_debug
-"%MSBUILD%" %APP%_APP.sln /p:Configuration=Debug
+"%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Debug
 ::if NOT "%ERRORLEVEL%" == "0" goto error
 goto pickapp
 
 :build_release
-"%MSBUILD%" %APP%_APP.sln /p:Configuration=Release
+"%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Release
 ::if NOT "%ERRORLEVEL%" == "0" goto error
 goto pickapp
 
 :build_all
-"%MSBUILD%" %APP%_APP.sln /p:Configuration=Debug
-"%MSBUILD%" %APP%_APP.sln /p:Configuration=Release
+"%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Debug
+"%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Release
 ::if NOT "%ERRORLEVEL%" == "0" goto error
 goto pickapp
 
