@@ -65,3 +65,5 @@ LINUX_HOST_dk_import(${ANDROID-NDK_LINUX_DL} PATH ${ANDROID-SDK}/ndk/${ANDROID-N
 
 dk_setEnv("NDK_ROOT" ${ANDROID-NDK})
 dk_setEnv("VS_NdkRoot" ${ANDROID-NDK})
+
+#dk_dump(ANDROID-NDK)
