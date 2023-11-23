@@ -27,7 +27,7 @@ elif [[ "$OSTYPE" == "linux-android" ]]; then
 	SUDO=""
 	APT="apt"
 else
-    echo "UNKNOWN OS TYPE ($OSTYPE)"
+    echo "UNKNOWN OS ($OSTYPE)"
 fi
 
 BRANCH="Development"
@@ -146,7 +146,7 @@ while :
 		options=("linux32" "Exit")
 	elif [[ "$OSTYPE" == "darwin"* ]] && [[ "$HOSTTYPE" == "x86_64"* ]]; then
 		options=("mac64" "Exit")
-	elif [[ "$OSTYPE" == "linux-android"* ]]; then
+	elif [[ "$OSTYPE" == "linux-android" ]]; then
 		options=("android32" "Exit")
 	else
 		echo "UNKNOWN OS TYPE ($OSTYPE)"
