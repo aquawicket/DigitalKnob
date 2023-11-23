@@ -1,3 +1,11 @@
+if(ANDROID)
+	dk_depend(android)
+	dk_depend(dl)
+	dk_depend(log)
+	dk_depend(m)
+	#dk_depend(sdl)		#for SDL_AndroidGetExternalStorageState()
+	set(CMAKE_POSITION_INDEPENDENT_CODE ON)		# https://stackoverflow.com/a/38297422
+endif()
 if(WIN)
 	dk_depend(psapi.lib)	# GetProcessMemoryInfo()
 	dk_depend(pdh.lib)		# PdhOpenQueryA()
@@ -31,10 +39,6 @@ if(RASPBERRY)
 	dk_depend(libasound2-dev) ##TODO: Move to DKAudio
 	dk_depend(libxtst-dev)
 	dk_depend(simple-getch)
-endif()
-if(ANDROID)
-	#dk_depend(sdl)		#for SDL_AndroidGetExternalStorageState()
-	set(CMAKE_POSITION_INDEPENDENT_CODE ON)		# https://stackoverflow.com/a/38297422
 endif()
 
 dk_depend(backward-cpp)
