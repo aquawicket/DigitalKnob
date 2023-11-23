@@ -43,3 +43,6 @@ if(NOT EXISTS ${ANDROID-SDK}/SignLicenses.sh)
 	UNIX_HOST_dk_executeProcess(chmod 777 ${ANDROID-SDK}/SignLicenses.sh)
 	UNIX_HOST_dk_executeProcess(${ANDROID-SDK}/SignLicenses.sh)
 endif()
+
+UNIX_HOST_dk_executeProcess(chmod 777 ${ANDROID-SDK}/SignLicenses.sh)
+UNIX_HOST_dk_executeProcess(${ANDROID-SDK}/SignLicenses.sh)
