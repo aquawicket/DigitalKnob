@@ -20,7 +20,7 @@ elif [[ "$OSTYPE" == "win32" ]]; then #I'm not sure this can happen
 elif [[ "$OSTYPE" == "freebsd"* ]]; then
 	echo "TODO: freebsd builder incomplete"
 elif [[ "$OSTYPE" == "linux-android" ]]; then
-	echo "TODO: android builder incomplete"
+	DIGITALKNOB="/data/data/com.termux/files/home/digitalknob"
 else
     echo "UNKNOWN OS TYPE ($OSTYPE)"
 fi
