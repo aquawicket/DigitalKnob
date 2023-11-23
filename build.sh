@@ -30,8 +30,8 @@ else
     echo "UNKNOWN OS ($OSTYPE)"
 fi
 
-BRANCH="Development"
-#BRANCH="CPP_DOM"
+#BRANCH="Development"
+BRANCH="CPP_DOM"
 DKPATH="$DIGITALKNOB/$BRANCH"
 DKCMAKE="$DIGITALKNOB/$BRANCH/DKCMake"
 
@@ -55,7 +55,7 @@ while :
 	do
 	echo " "
 	PS3='Please update and select an app to build: '
-	options=("Git Update" "Git Commit" "DKBuilder" "DKCore" "DKTestAll" "Clear Screen" "Exit")
+	options=("Git Update" "Git Commit" "DKBuilder" "DKCore" "DKSDLRml" "Clear Screen" "Exit")
 	select opt in "${options[@]}"
 	do
 		case $opt in
@@ -118,9 +118,9 @@ while :
 				APP="DKCore"
 				break
 				;;
-			"DKTestAll")
+			"DKSDLRml")
 				echo "$opt"
-				APP="DKTestAll"
+				APP="DKSDLRml"
 				break
 				;;
 			"Clear Screen")
@@ -139,15 +139,15 @@ while :
 	echo " "
 	PS3='Please select an OS to build for: '
 	if [[ "$MODEL" == "Raspberry"* ]]; then
-		options=("raspberry32" "Exit")
+		options=("raspberry32" "android32" "android64" "Exit")
 	elif [[ "$OSTYPE" == "linux-gnu"* ]] && [[ "$HOSTTYPE" == "x86_64"* ]]; then
-		options=("linux64" "android32" "Exit")
+		options=("linux64" "android32" "android64" "Exit")
 	elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
-		options=("linux32" "Exit")
+		options=("linux32" "android32" "android64" "Exit")
 	elif [[ "$OSTYPE" == "darwin"* ]] && [[ "$HOSTTYPE" == "x86_64"* ]]; then
-		options=("mac64" "Exit")
+		options=("mac64" "android32" "android64" "Exit")
 	elif [[ "$OSTYPE" == "linux-android" ]]; then
-		options=("android32" "Exit")
+		options=("android32" "android64" "Exit")
 	else
 		echo "UNKNOWN OS TYPE ($OSTYPE)"
 		options=("Exit")
@@ -178,6 +178,11 @@ while :
 			"android32")
 				echo "$opt"
 				OS="android32"
+				break
+				;;
+			"android64")
+				echo "$opt"
+				OS="android64"
 				break
 				;;
 			"Exit")
