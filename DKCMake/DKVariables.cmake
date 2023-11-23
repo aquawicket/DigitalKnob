@@ -23,11 +23,11 @@
 # SOFTWARE.
 include_guard()
 
-if(EXISTS $ENV{DKCMAKE})
-	set(ENV{DKCMAKE} "$ENV{DKCMAKE}/")
-endif()
-include("$ENV{DKCMAKE}DK.cmake")
-
+#if(EXISTS $ENV{DKCMAKE})
+#	set(ENV{DKCMAKE} "$ENV{DKCMAKE}/")
+#endif()
+#include("$ENV{DKCMAKE}DK.cmake")
+include("${DKCMAKE}/DK.cmake")
 
 # FIXME: work to remove this
 if(COMMAND cmake_policy)
@@ -38,9 +38,8 @@ endif(COMMAND cmake_policy)
 ###############################################################
 ## Set variables for paths
 ###############################################################
-dk_set(DKCMAKE ${DIGITALKNOB}/DK/DKCMake)
-dk_set(DKPLUGINS ${DIGITALKNOB}/DK/DKPlugins)
-dk_set(3RDPARTY ${DIGITALKNOB}/DK/3rdParty)
+dk_set(DKPLUGINS ${DKBRANCH}/DKPlugins)
+dk_set(3RDPARTY ${DKBRANCH}/3rdParty)
 dk_set(DKIMPORTS ${3RDPARTY}/_DKIMPORTS)
 dk_set(DKDOWNLOAD ${DIGITALKNOB}/download)
 dk_set(DKWEB "http://127.0.0.1")

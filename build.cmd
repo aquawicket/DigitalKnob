@@ -5,8 +5,8 @@ if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 ::set "BRANCH=Development"
 set "BRANCH=CPP_DOM"
 set "DIGITALKNOB=C:\Users\%USERNAME%\digitalknob"
-set "DKPATH=%DIGITALKNOB%\DK"
-set "DKCMAKE=%DIGITALKNOB%\DK\DKCMake"
+set "DKPATH=%DIGITALKNOB%\%BRANCH%"
+set "DKCMAKE=%DIGITALKNOB%\%BRANCH%\DKCMake"
 set "DKDOWNLOAD=%DIGITALKNOB%\download"
 set "GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.30.1.windows.1/Git-2.30.1-32-bit.exe"
 set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi"
@@ -26,6 +26,7 @@ ECHO 1. Git Update
 ECHO 2. Git Commit
 ECHO 3. DKBuilder
 ECHO 4. DKBuilderGui
+ECHO 5. DKCore
 ECHO 5. Clear Screen
 ECHO 6. Exit
 set choice=
@@ -35,7 +36,7 @@ if '%choice%'=='1' goto gitupdate
 if '%choice%'=='2' goto gitcommit
 if '%choice%'=='3' goto dkbuilder
 if '%choice%'=='4' goto dkbuildergui
-:: if '%choice%'=='5' goto 01_DKCore
+if '%choice%'=='5' goto dkcore
 :: if '%choice%'=='6' goto 01_DKJavascript
 :: if '%choice%'=='7' goto 01_DKSdl
 :: if '%choice%'=='8' goto 01_DKSdlRml
@@ -114,6 +115,10 @@ goto checkApp
 set APP=DKBuilderGui
 goto checkApp
 
+:dkcore
+set APP=DKCore
+goto checkApp
+
 :checkApp
 if NOT exist "%DKPATH%\DKApps\%APP%\DKMAKE.cmake" (
 	ECHO ERROR: %APP%/DKMAKE.cmake file not found
@@ -127,15 +132,17 @@ ECHO %APP%
 ECHO.
 ECHO 1. Windows 32
 ECHO 2. Windows 64
-ECHO 3. Go Back
-ECHO 4. Exit
+ECHO 3. Android 32
+ECHO 4. Go Back
+ECHO 5. Exit
 set choice=
 set /p choice=Please select an OS to build for: 
 if not '%choice%'=='' set choice=%choice:~0,1%
 if '%choice%'=='1' goto win32
 if '%choice%'=='2' goto win64
-if '%choice%'=='3' goto pickapp
-if '%choice%'=='4' goto end
+if '%choice%'=='3' goto android32
+if '%choice%'=='4' goto pickapp
+if '%choice%'=='5' goto end
 ECHO "%choice%" is not valid, try again
 goto pickos
 
@@ -145,6 +152,10 @@ goto build
 
 :win64
 set OS="win64"
+goto build
+
+:android32
+set OS="android32"
 goto build
 
 
