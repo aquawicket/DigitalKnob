@@ -33,7 +33,7 @@ if(RASPBERRY)
 	dk_depend(simple-getch)
 endif()
 if(ANDROID)
-	#dk_depend(sdl)
+	#dk_depend(sdl)		#for SDL_AndroidGetExternalStorageState()
 	set(CMAKE_POSITION_INDEPENDENT_CODE ON)		# https://stackoverflow.com/a/38297422
 endif()
 
