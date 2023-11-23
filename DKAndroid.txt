@@ -1,0 +1,14 @@
+https://github.com/termux/termux-app/releases/tag/v0.118.0
+
+1. download https://github.com/termux/termux-app/releases/download/v0.118.0/termux-app_v0.118.0+github-debug_arm64-v8a.apk
+2. install termux-app_v0.118.0+github-debug_arm64-v8a.apk
+3. open Termux
+4. apt update
+5. apt upgrade -y
+6. apt install wget -y
+7. wget https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/build.sh
+8. chmod 777 build.sh
+9. ./build.sh
+
+
+
