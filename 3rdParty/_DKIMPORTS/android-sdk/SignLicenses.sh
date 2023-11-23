@@ -27,7 +27,8 @@ else
     echo "UNKNOWN OS TYPE ($OSTYPE)"
 fi
 
-SDKMANAGER="$DIGITALKNOB/DK/3rdParty/android-sdk/cmdline-tools/latest/bin/sdkmanager"
+BRANCH="Development"
+SDKMANAGER="$DIGITALKNOB/$BRANCH/3rdParty/android-sdk/cmdline-tools/latest/bin/sdkmanager"
 yes | $SDKMANAGER --licenses
 #$SDKMANAGER --licenses
  
