@@ -49,6 +49,9 @@ dk_disable(simple-getch)			# DEPRECATED: kept for reference
 dk_disable(sw)						# DEPRECATED: requested by leptonica but not required
 dk_disable(sw-client)				# DEPRECATED: requested by leptonica but not required
 
+if(ANDROID_HOST)
+	dk_disable(openjdk)			
+endif()
 
 # Disabled for Android targets
 if(ANDROID) 
