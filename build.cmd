@@ -159,19 +159,19 @@ ECHO "%choice%" is not valid, try again
 goto pickos
 
 :win32
-set OS="win32"
+set OS=win32
 goto type
 
 :win64
-set OS="win64"
+set OS=win64
 goto type
 
 :android32
-set OS="android32"
+set OS=android32
 goto type
 
 :android64
-set OS="android64"
+set OS=android64
 goto type
 
 
@@ -196,19 +196,19 @@ goto type
 
 :debug
 set TYPE=Debug
-goto build
+goto generate
 
 :release
 set TYPE=Release
-goto build
+goto generate
 
 :all
 set TYPE=All
-goto build
+goto generate
 
 
 
-:build
+:generate
 echo Deleteing CMake cache . . .
 cd "%DIGITALKNOB%"
 for /r %%i in (CMakeCache.*) do del "%%i"
@@ -259,10 +259,35 @@ ECHO %APP_PATH%
 if NOT exist "%APP_PATH%\%OS%" mkdir "%APP_PATH%\%OS%"
 ::if NOT "%ERRORLEVEL%" == "0" goto error
 cd "%APP_PATH%\%OS%"
-::"%CMAKE%" -G "Visual Studio 16 2019" -A Win32 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKCMAKE%
+
+
+if %OS%==win32 goto generate_win32
+if %OS%==win64 goto generate_win64
+if %OS%==android32 goto generate_android32
+if %OS%==android64 goto generate_android64
+
+:generate_win32
 "%CMAKE%" -G "Visual Studio 17 2022" -A Win32 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKCMAKE%
 ::if NOT "%ERRORLEVEL%" == "0" goto error
+goto build
 
+:generate_win64
+"%CMAKE%" -G "Visual Studio 17 2022" -A x64 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKCMAKE%
+::if NOT "%ERRORLEVEL%" == "0" goto error
+goto build
+
+:generate_android32
+set ANDROID_API=31
+set ANDROID_NDK_BUILD=23.1.7779620
+set ANDROID_NDK=C:/Users/Administrator/digitalknob/Development/3rdParty/android-sdk/ndk/%ANDROID_NDK_BUILD%
+call %DKPATH%\3rdParty\_DKIMPORTS\openjdk\registerJDK.cmd
+"%CMAKE%" -G "Visual Studio 17 2022" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID-NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_NDK%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
+
+:generate_android64
+:: TODO
+
+
+:build
 echo TYPE = %TYPE%
 if %TYPE%==Debug goto build_debug
 if %TYPE%==Release goto build_release
