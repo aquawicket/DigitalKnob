@@ -30,7 +30,7 @@ endif()
 if(LINUX_HOST)
 	dk_set(CURRENT_DIR /usr)
 	
-	if("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "Android")
+	if(ANDROID_HOST)
 		dk_set(SUDO "")
 		dk_set(APT "apt")
 	else()
