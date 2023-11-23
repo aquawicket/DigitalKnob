@@ -26,6 +26,7 @@ ECHO 1. Git Update
 ECHO 2. Git Commit
 ECHO 3. DKBuilder
 ECHO 4. DKBuilderGui
+ECHO 5. DKCore
 ECHO 5. Clear Screen
 ECHO 6. Exit
 set choice=
@@ -35,7 +36,7 @@ if '%choice%'=='1' goto gitupdate
 if '%choice%'=='2' goto gitcommit
 if '%choice%'=='3' goto dkbuilder
 if '%choice%'=='4' goto dkbuildergui
-:: if '%choice%'=='5' goto 01_DKCore
+if '%choice%'=='5' goto dkcore
 :: if '%choice%'=='6' goto 01_DKJavascript
 :: if '%choice%'=='7' goto 01_DKSdl
 :: if '%choice%'=='8' goto 01_DKSdlRml
@@ -112,6 +113,10 @@ goto checkApp
 
 :dkbuildergui
 set APP=DKBuilderGui
+goto checkApp
+
+:dkcore
+set APP=DKCore
 goto checkApp
 
 :checkApp
