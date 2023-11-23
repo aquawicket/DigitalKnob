@@ -252,8 +252,14 @@ while :
 		mkdir $DKPATH/DKApps/$APP/$OS
 		cd $DKPATH/DKApps/$APP/$OS
 		cmake -G "Xcode" -DMAC_64=ON -DCMAKE_OSX_ARCHITECTURES=x86_64 -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DSTATIC=ON $DKCMAKE
-		xcodebuild -configuration Debug build
-		xcodebuild -configuration Release build
+		
+		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
+			xcodebuild -configuration Debug build
+		fi
+		
+		if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
+			xcodebuild -configuration Release build
+		fi
 	else #Linux, Raspberry Pi, Android
 		$SUDO $APT -y install which
 		GCC_PATH=$(which gcc)
@@ -287,6 +293,7 @@ while :
 
     unset APP
 	unset OS
+	unset TYPE
 done
 
 
