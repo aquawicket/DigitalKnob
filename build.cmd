@@ -24,23 +24,25 @@ if NOT exist "%DKDOWNLOAD%" mkdir "%DKDOWNLOAD%"
 ECHO.
 ECHO 1. Git Update
 ECHO 2. Git Commit
-ECHO 3. DKBuilder
-ECHO 4. DKBuilderGui
-ECHO 5. DKCore
-ECHO 6. DKSDLRml
-ECHO 7. Clear Screen
-ECHO 8. Exit
+ECHO 3. DKCore
+ECHO 4. DKBuilder
+ECHO 5. DKBuilderGui
+ECHO 6. DKSDL
+ECHO 7. DKSDLRml
+ECHO 8. Clear Screen
+ECHO 9. Exit
 set choice=
 set /p choice=Please select an app to build: 
 if not '%choice%'=='' set choice=%choice:~0,1%
 if '%choice%'=='1' goto gitupdate
 if '%choice%'=='2' goto gitcommit
-if '%choice%'=='3' goto dkbuilder
-if '%choice%'=='4' goto dkbuildergui
-if '%choice%'=='5' goto dkcore
-if '%choice%'=='6' goto dksdlrml
-if '%choice%'=='7' goto clearscreen
-if '%choice%'=='8' goto end
+if '%choice%'=='3' goto dkcore
+if '%choice%'=='4' goto dkbuilder
+if '%choice%'=='5' goto dkbuildergui
+if '%choice%'=='6' goto dksdl
+if '%choice%'=='7' goto dksdlrml
+if '%choice%'=='8' goto clearscreen
+if '%choice%'=='9' goto end
 ECHO "%choice%" is not valid, try again
 goto pickapp
 
@@ -101,6 +103,10 @@ goto pickapp
 cls
 goto pickapp
 
+:dkcore
+set APP=DKCore
+goto checkApp
+
 :dkbuilder
 set APP=DKBuilder
 goto checkApp
@@ -109,8 +115,8 @@ goto checkApp
 set APP=DKBuilderGui
 goto checkApp
 
-:dkcore
-set APP=DKCore
+:dksdl
+set APP=DKSDL
 goto checkApp
 
 :dksdlrml
@@ -131,16 +137,18 @@ ECHO.
 ECHO 1. Windows 32
 ECHO 2. Windows 64
 ECHO 3. Android 32
-ECHO 4. Go Back
-ECHO 5. Exit
+ECHO 4. Android 64
+ECHO 5. Go Back
+ECHO 6. Exit
 set choice=
 set /p choice=Please select an OS to build for: 
 if not '%choice%'=='' set choice=%choice:~0,1%
 if '%choice%'=='1' goto win32
 if '%choice%'=='2' goto win64
 if '%choice%'=='3' goto android32
-if '%choice%'=='4' goto pickapp
-if '%choice%'=='5' goto end
+if '%choice%'=='4' goto android64
+if '%choice%'=='5' goto pickapp
+if '%choice%'=='6' goto end
 ECHO "%choice%" is not valid, try again
 goto pickos
 
@@ -154,6 +162,10 @@ goto build
 
 :android32
 set OS="android32"
+goto build
+
+:android64
+set OS="android64"
 goto build
 
 
