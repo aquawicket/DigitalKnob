@@ -35,7 +35,7 @@ else()
 	else()
 		dk_set(APT "apt-get")
 	endif()
-	LINUX_HOST_dk_command(sudo apt-get -y install git)
+	LINUX_HOST_dk_command(sudo ${APT} -y install git)
 
 endif()
 
