@@ -132,15 +132,17 @@ ECHO %APP%
 ECHO.
 ECHO 1. Windows 32
 ECHO 2. Windows 64
-ECHO 3. Go Back
-ECHO 4. Exit
+ECHO 3. Android 32
+ECHO 4. Go Back
+ECHO 5. Exit
 set choice=
 set /p choice=Please select an OS to build for: 
 if not '%choice%'=='' set choice=%choice:~0,1%
 if '%choice%'=='1' goto win32
 if '%choice%'=='2' goto win64
-if '%choice%'=='3' goto pickapp
-if '%choice%'=='4' goto end
+if '%choice%'=='3' goto android32
+if '%choice%'=='4' goto pickapp
+if '%choice%'=='5' goto end
 ECHO "%choice%" is not valid, try again
 goto pickos
 
@@ -150,6 +152,10 @@ goto build
 
 :win64
 set OS="win64"
+goto build
+
+:android32
+set OS="android32"
 goto build
 
 
