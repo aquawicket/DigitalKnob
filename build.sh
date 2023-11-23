@@ -198,6 +198,40 @@ while :
 		REPLY=
 	done
 
+	echo " "
+	PS3='Please select build type: '
+	options=("Debug" "Release" "All" "Clear Screen" "Exit")
+	select opt in "${options[@]}"
+	do
+		case $opt in
+			"Debug")
+				echo "$opt"
+				TYPE="Debug"
+				break
+				;;
+			"Release")
+				echo "$opt"
+				TYPE="Release"
+				break
+				;;
+			"All")
+				echo "$opt"
+				TYPE="All"
+				break
+				;;
+			"Clear Screen")
+				echo "$opt"
+				clear
+				;;
+			"Exit")
+				echo "$opt"
+				exit 0
+				;;
+			*) echo "invalid option $REPLY";;
+		esac 
+		REPLY=
+	done
+	
 	cd $DIGITALKNOB
 	echo Deleteing CMake cache . . .
 	find . -name "CMakeCache.*" -delete
