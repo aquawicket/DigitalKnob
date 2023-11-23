@@ -27,8 +27,9 @@ ECHO 2. Git Commit
 ECHO 3. DKBuilder
 ECHO 4. DKBuilderGui
 ECHO 5. DKCore
-ECHO 5. Clear Screen
-ECHO 6. Exit
+ECHO 6. DKSDLRml
+ECHO 7. Clear Screen
+ECHO 8. Exit
 set choice=
 set /p choice=Please select an app to build: 
 if not '%choice%'=='' set choice=%choice:~0,1%
@@ -37,16 +38,9 @@ if '%choice%'=='2' goto gitcommit
 if '%choice%'=='3' goto dkbuilder
 if '%choice%'=='4' goto dkbuildergui
 if '%choice%'=='5' goto dkcore
-:: if '%choice%'=='6' goto 01_DKJavascript
-:: if '%choice%'=='7' goto 01_DKSdl
-:: if '%choice%'=='8' goto 01_DKSdlRml
-:: if '%choice%'=='9' goto 01_DKCef
-:: if '%choice%'=='10' goto 01_DKSdlCef
-:: if '%choice%'=='11' goto 01_DKSdlText
-:: if '%choice%'=='12' goto 01_DKSdlRmlCef
-:: if '%choice%'=='13' goto 01_DKTestAll
-if '%choice%'=='5' goto clearscreen
-if '%choice%'=='6' goto end
+if '%choice%'=='6' goto dksdlrml
+if '%choice%'=='7' goto clearscreen
+if '%choice%'=='8' goto end
 ECHO "%choice%" is not valid, try again
 goto pickapp
 
@@ -117,6 +111,10 @@ goto checkApp
 
 :dkcore
 set APP=DKCore
+goto checkApp
+
+:dksdlrml
+set APP=DKSDLRml
 goto checkApp
 
 :checkApp
