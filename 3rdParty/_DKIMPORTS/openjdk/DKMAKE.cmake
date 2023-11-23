@@ -29,9 +29,17 @@ endif()
 # LINUX Install
 if(LINUX_HOST)
 	dk_set(CURRENT_DIR /usr)
-	#dk_command(sudo apt-get update)
-	dk_command(sudo apt update)
-	dk_command(sudo apt -y install openjdk-11-jdk)
+	
+	if("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "Android")
+		dk_set(SUDO "")
+		dk_set(APT "apt")
+	else()
+		dk_set(SUDO "sudo")
+		dk_set(APT "apt-get")
+	endif()
+	
+	dk_command(${SUDO} ${APT} update)
+	dk_command(${SUDO} apt -y install openjdk-11-jdk)
 	#dk_command(java -version)
 endif()
 
