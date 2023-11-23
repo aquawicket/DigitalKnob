@@ -32,7 +32,7 @@ if(RASPBERRY)
 	dk_depend(simple-getch)
 endif()
 if(ANDROID)
-	dk_depend(sdl)
+	#dk_depend(sdl)
 endif()
 
 dk_depend(backward-cpp)
