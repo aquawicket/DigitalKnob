@@ -268,7 +268,7 @@ while :
 		
 		mkdir $DKPATH/DKApps/$APP/$OS
 		
-		if [[ "$TYPE" == "Debug" ]]; then
+		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
 			mkdir $DKPATH/DKApps/$APP/$OS/Debug
 			cd $DKPATH/DKApps/$APP/$OS/Debug
 			cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=OFF -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE
@@ -276,21 +276,7 @@ while :
 			chmod +x $DKPATH/DKApps/$APP/$OS/Debug/$APP
 		fi
 		
-		if [[ "$TYPE" == "Release" ]]; then
-			mkdir $DKPATH/DKApps/$APP/$OS/Release
-			cd $DKPATH/DKApps/$APP/$OS/Release
-			cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DDEBUG=OFF -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE
-			make #$APP
-			chmod +x $DKPATH/DKApps/$APP/$OS/Release/$APP
-		fi
-		
-		if [[ "$TYPE" == "All" ]]; then
-			mkdir $DKPATH/DKApps/$APP/$OS/Debug
-			cd $DKPATH/DKApps/$APP/$OS/Debug
-			cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=OFF -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE
-			make #$APP
-			chmod +x $DKPATH/DKApps/$APP/$OS/Debug/$APP
-			
+		if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
 			mkdir $DKPATH/DKApps/$APP/$OS/Release
 			cd $DKPATH/DKApps/$APP/$OS/Release
 			cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DDEBUG=OFF -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE
