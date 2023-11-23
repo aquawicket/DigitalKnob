@@ -146,6 +146,8 @@ while :
 		options=("linux32" "Exit")
 	elif [[ "$OSTYPE" == "darwin"* ]] && [[ "$HOSTTYPE" == "x86_64"* ]]; then
 		options=("mac64" "Exit")
+	elif [[ "$OSTYPE" == "linux-android"* ]]; then
+		options=("android32" "Exit")
 	else
 		echo "UNKNOWN OS TYPE ($OSTYPE)"
 		options=("Exit")
@@ -169,6 +171,11 @@ while :
 				break
 				;;
 			"raspberry32")
+				echo "$opt"
+				OS="raspberry32"
+				break
+				;;
+			"android32")
 				echo "$opt"
 				OS="raspberry32"
 				break
