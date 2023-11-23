@@ -284,7 +284,8 @@ while :
 			cd $DKPATH/DKApps/$APP/$OS/Debug
 			cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=OFF -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE
 			#make #$APP
-			cmake --build $DKPATH/DKApps/$APP/$OS --target $APP_APP --config Debug
+			
+			cmake --build $DKPATH/DKApps/$APP/$OS --target ${APP}_APP --config Debug
 			chmod +x $DKPATH/DKApps/$APP/$OS/Debug/$APP
 		fi
 		
