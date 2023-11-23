@@ -84,10 +84,12 @@ DKApp::DKApp(int _argc, char** _argv){
 	if (argc)
 		DKFile::exe_path = argv[0];
 	#if ANDROID
-		if (!SDL_AndroidGetExternalStorageState())
-			DKERROR("SDL_AndroidGetExternalStorageState(): failed");
-		const char* externalStoragePath = SDL_AndroidGetExternalStoragePath();
-		DKFile::exe_path = externalStoragePath;
+		#if HAVE_sdl
+			if (!SDL_AndroidGetExternalStorageState())
+				DKERROR("SDL_AndroidGetExternalStorageState(): failed");
+			const char* externalStoragePath = SDL_AndroidGetExternalStoragePath();
+			DKFile::exe_path = externalStoragePath;
+		#endif
 	#endif
 	#if EMSCRIPTEN
 		DKFile::GetCurrentPath(DKFile::exe_path);
