@@ -27,7 +27,7 @@ include_guard()
 #	set(ENV{DKCMAKE} "$ENV{DKCMAKE}/")
 #endif()
 #include("$ENV{DKCMAKE}DK.cmake")
-
+include("${DKCMAKE}/DK.cmake")
 
 # FIXME: work to remove this
 if(COMMAND cmake_policy)

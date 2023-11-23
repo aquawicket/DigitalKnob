@@ -28,10 +28,11 @@ include_guard()
 # https://asitdhal.medium.com/cmake-functions-and-macros-22293041519f
 # https://foonathan.net/2016/03/cmake-install/ 
 
-if(EXISTS $ENV{DKCMAKE})
-	set(ENV{DKCMAKE} "$ENV{DKCMAKE}/")
-endif()
-include("$ENV{DKCMAKE}DK.cmake")
+#if(EXISTS $ENV{DKCMAKE})
+#	set(ENV{DKCMAKE} "$ENV{DKCMAKE}/")
+#endif()
+#include("$ENV{DKCMAKE}DK.cmake")
+include("${DKCMAKE}/DK.cmake")
 
 
 ##################################################################################
@@ -2642,7 +2643,8 @@ function(dk_generateCmake plugin_name)
 	file(APPEND ${plugin_path}/CMakeLists.txt "cmake_minimum_required(VERSION 3.10)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "cmake_policy(SET CMP0054 NEW)\n")
 #	file(APPEND ${plugin_path}/CMakeLists.txt "cmake_policy(SET CMP0002 OLD)\n")
-	file(APPEND ${plugin_path}/CMakeLists.txt "include(\$ENV{DKCMAKE}DK.cmake)\n")
+#	file(APPEND ${plugin_path}/CMakeLists.txt "include(\$ENV{DKCMAKE}DK.cmake)\n")
+	file(APPEND ${plugin_path}/CMakeLists.txt "include(\${DKCMAKE}/DK.cmake)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "project(${plugin_name})\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "include_directories(${DKPLUGINS})\n")
 	foreach(each_include ${DKINCLUDES_LIST})
