@@ -189,15 +189,15 @@ ECHO "%choice%" is not valid, try again
 goto type
 
 :debug
-set TYPE="Debug"
+set TYPE=Debug
 goto build
 
 :release
-set TYPE="Release"
+set TYPE=Release
 goto build
 
 :all
-set TYPE="All"
+set TYPE=All
 goto build
 
 
@@ -257,9 +257,11 @@ cd "%APP_PATH%\%OS%"
 "%CMAKE%" -G "Visual Studio 17 2022" -A Win32 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKCMAKE%
 ::if NOT "%ERRORLEVEL%" == "0" goto error
 
-if "%TYPE%"=="Debug" goto build_debug
-if "%TYPE%"=="Release" goto build_release
-if "%TYPE%"=="All" goto build_all
+echo TYPE = %TYPE%
+if %TYPE%==Debug goto build_debug
+if %TYPE%==Release goto build_release
+if %TYPE%==All goto build_all
+goto error
 
 :build_debug
 "%MSBUILD%" %APP%_APP.sln /p:Configuration=Debug
