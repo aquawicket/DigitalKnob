@@ -36,4 +36,4 @@ set "SDKMANAGER=C:\Users\%USERNAME%\digitalknob\DK\3rdParty\android-sdk\cmdline-
 
 call "C:/Users/%USERNAME%/digitalknob/DK/3rdParty/_DKIMPORTS/jdk/registerJDK.cmd" 
  
-%DKEND% 
+::%DKEND% 
