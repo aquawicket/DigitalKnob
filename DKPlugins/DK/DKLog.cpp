@@ -163,7 +163,7 @@ void signal_handler(int signal){
 }
 */
 
-// https://stackoverflow.com/a/9371717/688352  - The command windows is slow, read this
+// https://stackoverflow.com/a/9371717/688352  - The command is slow on windows, read this
 bool DKLog::Log(const char* file, int line, const char* func, const DKString& input, const int lvl, const unsigned short color_override/*, const bool rtnval*/){
 	if (!DKUtil::InMainThread()) {
 		if (lvl <= DK_ERROR)
@@ -171,7 +171,7 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 		return true;
 	}
 	/*
-	if(lvl == DK_ASSERT){
+	if(lvl == DK_FATAL){
 		// Install a signal handler
 		std::signal(SIGINT, signal_handler);
 		std::cout << "SignalValue: " << gSignalStatus << '\n';
@@ -326,12 +326,12 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 	
 	//On errors, show the stack trace or open a message box
 	if(lvl <= DK_ERROR){
-		if(stacktrace_on_errors || lvl <= DK_ASSERT){
+		if(stacktrace_on_errors || lvl <= DK_FATAL){
 			DKClass::DKCreate("DKDebug");
 			if(DKClass::HasFunc("DKDebug::ShowStackTrace"))
 				DKClass::CallFunc("DKDebug::ShowStackTrace");
 		}
-		if(exception_on_errors || lvl <= DK_ASSERT){
+		if(exception_on_errors || lvl <=  DK_FATAL){
 #			ifndef ANDROID //FIXME: change to DKEXCEPTIONS		
 				try{
 					throw output; // throw an exception
