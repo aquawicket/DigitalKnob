@@ -1,3 +1,5 @@
+# FIXME:  Install to /3rdParty only
+
 # https://github.com/doxygen/doxygen.git
 # https://sourceforge.net/projects/doxygen
 if(NOT WIN_HOST)

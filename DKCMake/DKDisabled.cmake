@@ -80,6 +80,10 @@ dk_disable(sfml)
 dk_disable(DKSFMLRml)			# requires sfml
 dk_disable(DKSFMLWindow)		# requires sfml
 
+# doxygen (disabledO
+dk_disable(doxygen)
+
+
 
 
 # Disabled for Android targets
