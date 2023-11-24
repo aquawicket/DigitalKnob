@@ -451,6 +451,8 @@ while :
 		fi
 	fi
 
+	$ echo "******* Done building $APP - $OS - $TYPE *******"	
+	
     unset APP
 	unset OS
 	unset TYPE
