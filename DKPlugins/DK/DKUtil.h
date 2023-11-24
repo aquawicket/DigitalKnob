@@ -51,7 +51,7 @@ public:
 	static bool DoubleClick();
 	static bool DrawTextOnScreen(const DKString& text);
 	
-	//Basically popen. Takes same parameters along with a return reuslt value for pipes. 
+	//Basically popen. Takes same parameters along with a return result value for pipes. 
 	static bool Execute(const DKString& command, const DKString& mode, DKString& stdouterr, int& rtncode);
 	static bool FindImageOnScreen(const DKString& file, int& x, int& y);
 	static bool GetClipboard(DKString& text);
