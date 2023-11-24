@@ -1,0 +1,20 @@
+IF(ANDROID)
+	RETURN()
+ENDIF()
+IF(LINUX)
+	##RETURN()
+ENDIF()
+
+##dk_depend(libwebsockets)
+##dk_depend(uwebsockets)
+dk_depend(uwebsockets)
+IF(HAVE_DKDuktape)
+	dk_depend(DKDuktape)
+ENDIF()
+IF(HAVE_DKCef)
+	dk_depend(DKCef)
+ENDIF()
+
+
+dk_generateCmake(DKWebSockets)
+dk_assets(DKWebSockets)
