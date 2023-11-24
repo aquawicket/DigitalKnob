@@ -30,6 +30,7 @@ ECHO 5. DKBuilder
 ECHO 6. DKBuilderGui
 ECHO 7. DKSDL
 ECHO 8. DKSDLRml
+ECHO 9. DKTestAll
 ECHO c. Clear Screen
 ECHO x. Exit
 set choice=
@@ -43,6 +44,7 @@ if '%choice%'=='5' goto dkbuilder
 if '%choice%'=='6' goto dkbuildergui
 if '%choice%'=='7' goto dksdl
 if '%choice%'=='8' goto dksdlrml
+if '%choice%'=='9' goto dktestall
 if '%choice%'=='c' goto clearscreen
 if '%choice%'=='x' goto end
 ECHO "%choice%" is not valid, try again
@@ -129,6 +131,10 @@ goto checkApp
 set APP=DKSDLRml
 goto checkApp
 
+:dktestall
+set APP=DKTestAll
+goto checkApp
+
 :checkApp
 if NOT exist "%DKPATH%\DKApps\%APP%\DKMAKE.cmake" (
 	ECHO ERROR: %APP%/DKMAKE.cmake file not found
@@ -144,6 +150,7 @@ ECHO 1. Windows 32
 ECHO 2. Windows 64
 ECHO 3. Android 32
 ECHO 4. Android 64
+ECHO 5. Emscripten
 ECHO b. Go Back
 ECHO x. Exit
 set choice=
@@ -153,25 +160,30 @@ if '%choice%'=='1' goto win32
 if '%choice%'=='2' goto win64
 if '%choice%'=='3' goto android32
 if '%choice%'=='4' goto android64
+if '%choice%'=='5' goto emscripten
 if '%choice%'=='b' goto pickapp
 if '%choice%'=='x' goto end
 ECHO "%choice%" is not valid, try again
 goto pickos
 
 :win32
-set OS="win32"
+set OS=win32
 goto type
 
 :win64
-set OS="win64"
+set OS=win64
 goto type
 
 :android32
-set OS="android32"
+set OS=android32
 goto type
 
 :android64
-set OS="android64"
+set OS=android64
+goto type
+
+:emscripten
+set OS=emscripten
 goto type
 
 
@@ -196,19 +208,19 @@ goto type
 
 :debug
 set TYPE=Debug
-goto build
+goto generate
 
 :release
 set TYPE=Release
-goto build
+goto generate
 
 :all
 set TYPE=All
-goto build
+goto generate
 
 
 
-:build
+:generate
 echo Deleteing CMake cache . . .
 cd "%DIGITALKNOB%"
 for /r %%i in (CMakeCache.*) do del "%%i"
@@ -259,10 +271,55 @@ ECHO %APP_PATH%
 if NOT exist "%APP_PATH%\%OS%" mkdir "%APP_PATH%\%OS%"
 ::if NOT "%ERRORLEVEL%" == "0" goto error
 cd "%APP_PATH%\%OS%"
-::"%CMAKE%" -G "Visual Studio 16 2019" -A Win32 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKCMAKE%
-"%CMAKE%" -G "Visual Studio 17 2022" -A Win32 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKCMAKE%
-::if NOT "%ERRORLEVEL%" == "0" goto error
 
+
+if %OS%==win32 goto generate_win32
+if %OS%==win64 goto generate_win64
+if %OS%==android32 goto generate_android32
+if %OS%==android64 goto generate_android64
+if %OS%==emscripten goto generate_emscripten
+
+:generate_win32
+"%CMAKE%" -G "Visual Studio 17 2022" -A Win32 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKCMAKE%
+set TARGET=%APP%_APP
+::if NOT "%ERRORLEVEL%" == "0" goto error
+goto build
+
+:generate_win64
+"%CMAKE%" -G "Visual Studio 17 2022" -A x64 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKCMAKE%
+set TARGET=%APP%_APP
+::if NOT "%ERRORLEVEL%" == "0" goto error
+goto build
+
+:generate_android32
+set ANDROID_API=31
+set ANDROID_NDK_BUILD=23.1.7779620
+set ANDROID_NDK=C:/Users/Administrator/digitalknob/Development/3rdParty/android-sdk/ndk/%ANDROID_NDK_BUILD%
+call %DKPATH%\3rdParty\_DKIMPORTS\openjdk\registerJDK.cmd
+"%CMAKE%" -G "Visual Studio 17 2022" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID-NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_NDK%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
+set TARGET=main
+::if NOT "%ERRORLEVEL%" == "0" goto error
+goto build
+
+:generate_android64
+set ANDROID_API=31
+set ANDROID_NDK_BUILD=23.1.7779620
+set ANDROID_NDK=C:/Users/Administrator/digitalknob/Development/3rdParty/android-sdk/ndk/%ANDROID_NDK_BUILD%
+call %DKPATH%\3rdParty\_DKIMPORTS\openjdk\registerJDK.cmd
+"%CMAKE%" -G "Visual Studio 17 2022" -A ARM64 -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID-NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_NDK%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
+set TARGET=main
+::if NOT "%ERRORLEVEL%" == "0" goto error
+goto build
+
+:generate_emscripten
+set EMSDK=DIGITALKNOB+C:/Users/Administrator/digitalknob/Development/3rdParty/emsdk-main
+set EMSDK_ENV=%EMSDK%/emsdk_env
+set EMSDK_TOOLCHAIN_FILE=%EMSDK%/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake
+echo emscriten incomplete
+goto error
+::goto build
+
+:build
 echo TYPE = %TYPE%
 if %TYPE%==Debug goto build_debug
 if %TYPE%==Release goto build_release
@@ -270,18 +327,18 @@ if %TYPE%==All goto build_all
 goto error
 
 :build_debug
-"%MSBUILD%" %APP%_APP.sln /p:Configuration=Debug
+"%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Debug
 ::if NOT "%ERRORLEVEL%" == "0" goto error
 goto pickapp
 
 :build_release
-"%MSBUILD%" %APP%_APP.sln /p:Configuration=Release
+"%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Release
 ::if NOT "%ERRORLEVEL%" == "0" goto error
 goto pickapp
 
 :build_all
-"%MSBUILD%" %APP%_APP.sln /p:Configuration=Debug
-"%MSBUILD%" %APP%_APP.sln /p:Configuration=Release
+"%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Debug
+"%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Release
 ::if NOT "%ERRORLEVEL%" == "0" goto error
 goto pickapp
 
