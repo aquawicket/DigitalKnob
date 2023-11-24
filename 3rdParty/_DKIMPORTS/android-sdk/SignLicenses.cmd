@@ -3,9 +3,9 @@
 call EndProcess java.exe
 call EndProcess adb.exe
 
-call "C:/Users/%USERNAME%/digitalknob/DK/3rdParty/_DKIMPORTS/openjdk-8u41/registerJDK.cmd"
+call "C:/Users/%USERNAME%/digitalknob/Development/3rdParty/_DKIMPORTS/openjdk-8u41/registerJDK.cmd"
 
-set "SDKMANAGER=C:\Users\%USERNAME%\digitalknob\DK\3rdParty\android-sdk\cmdline-tools\latest\bin\sdkmanager.bat
+set "SDKMANAGER=C:\Users\%USERNAME%\digitalknob\Development\3rdParty\android-sdk\cmdline-tools\latest\bin\sdkmanager.bat
 
 :: https://stackoverflow.com/a/48539058/688352
 (
@@ -34,6 +34,6 @@ set "SDKMANAGER=C:\Users\%USERNAME%\digitalknob\DK\3rdParty\android-sdk\cmdline-
 %SDKMANAGER% --licenses < file-y.txt
 ::%SDKMANAGER% --licenses
 
-call "C:/Users/%USERNAME%/digitalknob/DK/3rdParty/_DKIMPORTS/jdk/registerJDK.cmd" 
+call "C:/Users/%USERNAME%/digitalknob/Development/3rdParty/_DKIMPORTS/jdk/registerJDK.cmd" 
  
 ::%DKEND% 
