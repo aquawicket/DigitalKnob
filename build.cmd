@@ -150,6 +150,7 @@ ECHO 1. Windows 32
 ECHO 2. Windows 64
 ECHO 3. Android 32
 ECHO 4. Android 64
+ECHO 5. Emscripten
 ECHO b. Go Back
 ECHO x. Exit
 set choice=
@@ -159,6 +160,7 @@ if '%choice%'=='1' goto win32
 if '%choice%'=='2' goto win64
 if '%choice%'=='3' goto android32
 if '%choice%'=='4' goto android64
+if '%choice%'=='5' goto emscripten
 if '%choice%'=='b' goto pickapp
 if '%choice%'=='x' goto end
 ECHO "%choice%" is not valid, try again
@@ -178,6 +180,10 @@ goto type
 
 :android64
 set OS=android64
+goto type
+
+:emscripten
+set OS=emscripten
 goto type
 
 
@@ -271,6 +277,7 @@ if %OS%==win32 goto generate_win32
 if %OS%==win64 goto generate_win64
 if %OS%==android32 goto generate_android32
 if %OS%==android64 goto generate_android64
+if %OS%==emscripten goto generate_emscripten
 
 :generate_win32
 "%CMAKE%" -G "Visual Studio 17 2022" -A Win32 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKCMAKE%
@@ -304,6 +311,10 @@ set TARGET=main
 ::if NOT "%ERRORLEVEL%" == "0" goto error
 goto build
 
+:generate_emscripten
+echo emscriten incomplete
+goto error
+::goto build
 
 :build
 echo TYPE = %TYPE%
