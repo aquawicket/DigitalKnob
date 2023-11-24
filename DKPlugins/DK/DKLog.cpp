@@ -171,7 +171,7 @@ bool DKLog::Log(const char* file, const int line, const char* func, const DKStri
 		return true;
 	}
 	/*
-	if(lvl == DK_ASSERT){
+	if(lvl == DK_FATAL){
 		// Install a signal handler
 		std::signal(SIGINT, signal_handler);
 		std::cout << "SignalValue: " << gSignalStatus << '\n';
@@ -326,12 +326,12 @@ bool DKLog::Log(const char* file, const int line, const char* func, const DKStri
 	
 	//On errors, show the stack trace or open a message box
 	if(lvl <= DK_ERROR){
-		if(stacktrace_on_errors || lvl <= DK_FATAL){ //DK_ASSERT){
+		if(stacktrace_on_errors || lvl <= DK_FATAL){
 			DKClass::DKCreate("DKDebug");
 			if(DKClass::HasFunc("DKDebug::ShowStackTrace"))
 				DKClass::CallFunc("DKDebug::ShowStackTrace");
 		}
-		if(exception_on_errors || lvl <= DK_FATAL){ //DK_ASSERT){
+		if(exception_on_errors || lvl <= DK_FATAL){
 #			ifndef ANDROID //FIXME: change to DKEXCEPTIONS		
 				try{
 					throw output; // throw an exception
