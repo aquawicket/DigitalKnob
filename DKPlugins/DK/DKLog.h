@@ -46,7 +46,6 @@ WARNING_DISABLE
 #endif
 WARNING_ENABLE
 
-
 //#define DK_ASSERT  1
 #define DK_FATAL   2
 #define DK_ERROR   3
@@ -57,12 +56,6 @@ WARNING_ENABLE
 #define DK_SHOW    8
 #define DK_HIDE    9
 
-#define DKBUILDMONTH(buildMonth) GetBuildMonth(__DATE__, buildMonth);
-#define DKBUILDDAY(buildDay) GetBuildDay(__DATE__, buildDay);
-#define DKBUILDYEAR(buildYear) GetBuildYear(__DATE__, buildYear);
-#define DKBUILDHOUR(buildHour) GetBuildHour(__TIME__, buildHour);
-#define DKBUILDMINUTE(buildMinute) GetBuildMinute(__TIME__, buildMinute);
-#define DKBUILDSECOND(buildSecond) GetBuildSecond(__TIME__, buildSecond);
 //#define  DKASSERT(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_ASSERT);//, DKASSERT_COLOR, false);
 #define   DKFATAL(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_FATAL);//, DKFATAL_COLOR, false);
 #define   DKERROR(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_ERROR);//, DKERROR_COLOR, false);
@@ -111,12 +104,12 @@ public:
 };
 
 bool GetVersion(DKString& version);
-bool GetBuildMonth(const char* buildDate, DKString& buildMonth);
-bool GetBuildDay(const char* buildDate, DKString& buildDay);
-bool GetBuildYear(const char* buildDate, DKString& buildYear);
-bool GetBuildHour(const char* buildTime, DKString& buildHour);
-bool GetBuildMinute(const char* buildTime, DKString& buildMinute);
-bool GetBuildSecond(const char* buildTime, DKString& buildSecond);
+bool GetBuildMonth(DKString& buildMonth);
+bool GetBuildDay(DKString& buildDay);
+bool GetBuildYear(DKString& buildYear);
+bool GetBuildHour(DKString& buildHour);
+bool GetBuildMinute(DKString& buildMinute);
+bool GetBuildSecond(DKString& buildSecond);
 
 template<typename S, typename T, typename = void>
 struct is_streamable : std::false_type {};
