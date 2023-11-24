@@ -342,19 +342,23 @@ goto error
 :build_debug
 "%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Debug
 ::if NOT "%ERRORLEVEL%" == "0" goto error
-goto pickapp
+goto end_message
 
 :build_release
 "%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Release
 ::if NOT "%ERRORLEVEL%" == "0" goto error
-goto pickapp
+goto end_message
 
 :build_all
 "%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Debug
 "%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Release
 ::if NOT "%ERRORLEVEL%" == "0" goto error
-goto pickapp
+goto end_message
 
+:end_message
+echo:
+echo ******* Done building %APP% - %OS% - %TYPE% *******
+goto pickapp
 
 :error
 echo Failed with error code: %ERRORLEVEL%
