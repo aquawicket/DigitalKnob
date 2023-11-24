@@ -29,7 +29,6 @@ include_guard()
 dk_disable(DKPlugin1)				# TODO
 dk_disable(DKPlugin2)				# TODO
 dk_disable(DKRmlAudio)				# build errors
-#dk_disable(DKRmlElement)			# build errors
 dk_disable(DKRmlIframe)				# build errors
 dk_disable(DKRmlTestElements)		# build errors
 dk_disable(DKTemplateEventTest)		# DEPRECATED: using DKEventTargetTest instead
@@ -82,10 +81,14 @@ dk_disable(DKSFMLWindow)		# requires sfml
 # doxygen (disabledO
 dk_disable(doxygen)
 
-# duk4vb (disabledO
+# duk4vb (disabled)
 dk_disable(duk4vb)
 
+# ffmpeg (disabled)
+dk_disable(ffmpeg)
 
+# diff-match-patch (disabled)
+dk_disable(diff-match-patch)
 
 
 # Disabled for Android targets
@@ -117,9 +120,7 @@ if(ANDROID)
 	dk_disable(bzip2)				# 'make' is not recognized as an internal or external command
 	dk_disable(cryptopp)
 	dk_disable(curl)				# error : "strerror_r MUST be either POSIX, glibc style"
-	dk_disable(diff-match-patch)
 	dk_disable(dukluv)
-	dk_disable(ffmpeg)
 	dk_disable(flac)				# configure: error: unrecognized option: `-DANDROID32'
 	dk_disable(fontconfig)
 	dk_disable(freealut)			# DKFunctions.cmake:4405->dk_findFiles():  files is invalid
@@ -138,7 +139,6 @@ if(ANDROID)
 	dk_disable(libwebp)
 	dk_disable(libxml2)				# ../../configure: No such file or directory
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
-	dk_disable(metalKit)
 	dk_disable(ncurses)				# error: '..' is not recognized as an internal or external command
 	dk_disable(ogg)					# configure: error: unrecognized option: `-DANDROID32'
 	dk_disable(openal)				# The system cannot find the file specified
@@ -238,7 +238,6 @@ if(EMSCRIPTEN)
 	dk_disable(m)
 	dk_disable(media_player)
 	dk_disable(metal)
-	dk_disable(metalKit)
 	dk_disable(mlocate)
 	dk_disable(msinttypes)
 	dk_disable(nasm)
@@ -501,7 +500,6 @@ if(WIN)
 	dk_disable(aom)					# Perl is required to build libaom.
 	dk_disable(aubio)
 	dk_disable(bzip2)
-	dk_disable(diff-match-patch)
 	dk_disable(dukluv)
 	dk_disable(fontconfig)
 	dk_disable(gdal)
