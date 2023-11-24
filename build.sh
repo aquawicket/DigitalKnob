@@ -30,8 +30,14 @@ else
     echo "UNKNOWN OS ($OSTYPE)"
 fi
 
+#TODO: The branch should default to Development, unless this file can find itself in a digitalknob/branch_name folder.  Then it should use branch_name
+# echo the current directory
+$ echo "current directory"
+$ echo "$PWD"
+
 #BRANCH="Development"
 BRANCH="CPP_DOM"
+
 DKPATH="$DIGITALKNOB/$BRANCH"
 DKCMAKE="$DIGITALKNOB/$BRANCH/DKCMake"
 
@@ -55,7 +61,7 @@ while :
 	do
 	echo " "
 	PS3='Please update and select an app to build: '
-	options=("Git Update" "Git Commit" "DKCore" "DKJavascript" "DKBuilder" "DKSDL" "DKSDLRml" "DKTestAll" "Clear Screen" "Exit")
+	options=("Git Update" "Git Commit" "DKCore" "DKJavascript" "DKBuilder" "DKSDL" "DKSDLRml" "DKDomTest" "DKTestAll" "Clear Screen" "Exit")
 	select opt in "${options[@]}"
 	do
 		case $opt in
@@ -130,6 +136,11 @@ while :
 			"DKSDLRml")
 				echo "$opt"
 				APP="DKSDLRml"
+				break
+				;;
+			"DKDomTest")
+				echo "$opt"
+				APP="DKDomTest"
 				break
 				;;
 			"DKTestAll")

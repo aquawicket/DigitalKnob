@@ -2,8 +2,15 @@
 @echo off
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 
+::TODO: The branch should default to Development, unless this file can find itself in a digitalknob/branch_name folder.  Then it should use branch_name
+:: echo the current directory
+echo current directory
+echo %~dp0
+
 ::set "BRANCH=Development"
 set "BRANCH=CPP_DOM"
+
+
 set "DIGITALKNOB=C:\Users\%USERNAME%\digitalknob"
 set "DKPATH=%DIGITALKNOB%\%BRANCH%"
 set "DKCMAKE=%DIGITALKNOB%\%BRANCH%\DKCMake"
@@ -30,7 +37,8 @@ ECHO 5. DKBuilder
 ECHO 6. DKBuilderGui
 ECHO 7. DKSDL
 ECHO 8. DKSDLRml
-ECHO 9. DKTestAll
+ECHO 9. DKDomTest
+ECHO a. DKTestAll
 ECHO c. Clear Screen
 ECHO x. Exit
 set choice=
@@ -44,7 +52,8 @@ if '%choice%'=='5' goto dkbuilder
 if '%choice%'=='6' goto dkbuildergui
 if '%choice%'=='7' goto dksdl
 if '%choice%'=='8' goto dksdlrml
-if '%choice%'=='9' goto dktestall
+if '%choice%'=='9' goto dkdomtest
+if '%choice%'=='a' goto dktestall
 if '%choice%'=='c' goto clearscreen
 if '%choice%'=='x' goto end
 ECHO "%choice%" is not valid, try again
@@ -129,6 +138,10 @@ goto checkApp
 
 :dksdlrml
 set APP=DKSDLRml
+goto checkApp
+
+:dkdomtest
+set APP=DKDomTest
 goto checkApp
 
 :dktestall
