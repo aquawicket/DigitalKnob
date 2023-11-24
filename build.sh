@@ -338,7 +338,7 @@ while :
 			#fi
 
 			cmake --build $DKPATH/DKApps/$APP/$OS/Debug --target ${TARGET} --config Debug
-			chmod +x $DKPATH/DKApps/$APP/$OS/Debug/${TARGET}
+			#chmod +x $DKPATH/DKApps/$APP/$OS/Debug/${TARGET}
 		fi
 		
 		if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
@@ -379,8 +379,8 @@ while :
 				#TODO
 			#fi
 			
-			cmake --build $DKPATH/DKApps/$APP/$OS/Debug --target ${TARGET} --config Release
-			chmod +x $DKPATH/DKApps/$APP/$OS/Release/${TARGET}
+			cmake --build $DKPATH/DKApps/$APP/$OS/Release --target ${TARGET} --config Release
+			#chmod +x $DKPATH/DKApps/$APP/$OS/Release/${TARGET}
 		fi
 	fi
 
