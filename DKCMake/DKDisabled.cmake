@@ -72,6 +72,15 @@ dk_disable(DKOsgWidget)			# requires openscenegraph
 dk_disable(DKOsgWindow)			# requires openscenegraph 
 dk_disable(DKSdlOsg)			# requires openscenegraph, sdl
 
+# OpenFrameworks (disabled)
+dk_disable(DKOfWindow)
+
+# SFML (disabled)
+dk_disable(sfml)
+dk_disable(DKSFMLRml)			# requires sfml
+dk_disable(DKSFMLWindow)		# requires sfml
+
+
 
 # Disabled for Android targets
 if(ANDROID)
@@ -81,14 +90,11 @@ if(ANDROID)
 	dk_disable(DKCurl)				# requires curl
 	dk_disable(DKHandles)			# could not find DKHandles
 	dk_disable(DKMidi)				# requires rtmidi
-	dk_disable(DKMySql)				# requires curl
-	dk_disable(DKOfWindow)			
+	dk_disable(DKMySql)				# requires curl			
 	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKSdlCef)			# requires cef_binary
 	dk_disable(DKSdlWaave)			# requires waave
 	dk_disable(DKSdlWav)			# build errors
-	dk_disable(DKSFMLRml)			# requires sfml
-	dk_disable(DKSFMLWindow)		# requires sfml
 	dk_disable(DKScreenRecorder)	# requires opencv
 	dk_disable(DKThread)			# requires threadpool
 	dk_disable(DKTorrent)			# requires libtorrent
@@ -142,7 +148,6 @@ if(ANDROID)
 	dk_disable(rtmidi)				# ALSA API requested but no ALSA dev libraries found
 	dk_disable(sdl-gpu)				# The target "Sdl_gpu" does not exist in the project
 	dk_disable(sdl_rtf)
-	dk_disable(sfml)				# Unsupported compiler
 	dk_disable(smpeg2)				# error : ISO C++17 does not allow 'register' storage class specifier
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(vorbis)				# configure: error: unrecognized option: `-DANDROID32'
@@ -173,7 +178,6 @@ if(EMSCRIPTEN)
 	dk_disable(DKJerryscript)
 	dk_disable(DKMidi)
 	dk_disable(DKMySql)
-	dk_disable(DKOfWindow)
 	dk_disable(DKOcr)
 	dk_disable(DKRestart)
 	dk_disable(DKSdlAudio)
@@ -181,8 +185,6 @@ if(EMSCRIPTEN)
 	dk_disable(DKSdlMetalWindow)
 	dk_disable(DKSdlWaave)			# requires waave
 	dk_disable(DKSdlWav)
-	dk_disable(DKSFMLRml)
-	dk_disable(DKSFMLWindow)
 	dk_disable(DKScreenRecorder)
 	dk_disable(DKThread)
 	dk_disable(DKTorrent)
@@ -249,7 +251,6 @@ if(EMSCRIPTEN)
 	dk_disable(sdl_mixer)			# emcc: error: setting 'USE_SDL' expects 'bool' but got 'int'
 	dk_disable(sdl_net)				# emcc: error: setting 'USE_SDL' expects 'bool' but got 'int'
 	dk_disable(sdl_rtf)
-	dk_disable(sfml)				# CMake Error: Unsupported operating system or environment
 	dk_disable(smpeg2)				# ISO C++17 does not allow 'register' storage class specifier
 	dk_disable(system_configuration)
 	dk_disable(tesseract)			# missing <allheaders.h>
@@ -269,13 +270,10 @@ if(IOS OR IOSSIM)
 	dk_disable(DKCefChild)			# requires cef_binary
 	dk_disable(DKJerryscript)		# requires jerryscript
 	dk_disable(DKMidi)				# requires rtmidi
-	dk_disable(DKOfWindow)			# requires openframeworks
 	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKSdlCef)			# requires cef_binary
 	dk_disable(DKSdlWaave)			# requires waave
 	dk_disable(DKSdlWav)			# build errors
-	dk_disable(DKSFMLRml)			# requires sfml
-	dk_disable(DKSFMLWindow)		# requires sfml
 	dk_disable(DKScreenRecorder)	# requires opencv
 	dk_disable(DKThread)			# requires threadpool
 	dk_disable(DKTorrent)			# requires libtorrent
@@ -322,7 +320,6 @@ if(IOS OR IOSSIM)
 	dk_disable(rtaudio)				# 'CoreAudio/AudioHardware.h' file not found
 	dk_disable(sdl-gpu)				# SDL2MAIN_LIBRARY is NOTFOUND
 	dk_disable(sdl_rtf)
-	dk_disable(sfml)				# Unknown CMake command "find_host_package"
 	dk_disable(smpeg2)				# ** BUILD FAILED ** MPEGstream.cpp
 	dk_disable(tesseract)			# requires leptonica
 	dk_disable(tiff)				# install TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executable target "fax2ps"
@@ -345,11 +342,9 @@ endif()
 if(LINUX)
 	dk_disable(DKHook)				# 'read' was not declared in this scope
 	dk_disable(DKJerryscript)		# requires jerryscript
-	dk_disable(DKOfWindow)			# requires openframeworks
 	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKSdlWaave)			# requires waave
 	dk_disable(DKSdlWav)			# build errors
-	dk_disable(DKSFMLRml)			# INCOMPLETE
 	dk_disable(DKScreenRecorder)
 	dk_disable(DKThread)			# error: need to implement boost::placeholders
 	dk_disable(DKTorrent)			# requires libtorrent
@@ -386,11 +381,9 @@ endif(LINUX)
 
 # Disabled for Mac targets
 if(MAC) 
-	dk_disable(DKOfWindow)			# requires openframeworks
 	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKSdlWaave)			# requires waave
 	dk_disable(DKSdlWav)			# build errors
-	dk_disable(DKSFMLRml)			# INCOMPLETE
 	dk_disable(DKScreenRecorder)
 	dk_disable(DKThread)			# Error: 'boost/thread/xtime.hpp:24 expected identifier TIME_UTC_=1
 	dk_disable(DKTorrent)			# requires libtorrent
@@ -428,11 +421,9 @@ if(RASPBERRY)
 	dk_disable(DKHook)				# 'read' was not declared in this scope
 	dk_disable(DKJerryscript)		# requires jerryscript
 	dk_disable(DKMidi)				# requires rtmidi
-	dk_disable(DKOfWindow)			# requires openframeworks
 	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKSdlWaave)			# requires waave
 	dk_disable(DKSdlWav)			# build errors
-	dk_disable(DKSFMLRml)			# INCOMPLETE
 	dk_disable(DKScreenRecorder)	# requires opencv
 	dk_disable(DKThread)			# requires threadpool
 	dk_disable(DKTorrent)			# requires libtorrent
@@ -494,13 +485,10 @@ endif()
 if(WIN) 
 	dk_disable(boost)				# error: cl command not found
 	dk_disable(DKOcr)				# requires tesseract
-	dk_disable(DKOfWindow)			# requires openframeworks
 	dk_disable(DKScreenRecorder)    # requires opencv
 	dk_disable(DKSdlVideo)			# error: 'av_mallocz_array': identifier not found
 	dk_disable(DKSdlWaave)			# requires waave
-	dk_disable(DKSdlWav)			# build errors
-	dk_disable(DKSfmlRml)			# INCOMPLETE
-	dk_disable(DKSfmlWindow)			# INCOMPLETE
+	dk_disable(DKSdlWav)			# build errorsE
 	dk_disable(DKThread)			# build errors
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKUpdate)			# build errors
@@ -526,7 +514,6 @@ if(WIN)
 	dk_disable(python3)
 	dk_disable(rmlui-d3d11)
 	dk_disable(sdl_rtf)
-	dk_disable(sfml)				# broken
 	dk_disable(tesseract)
 	dk_disable(waave)				# error C2065: 'PIX_FMT_YUV420P': undeclared identifier.  https://sourceforge.net/p/guvcview/tickets/34/
 	dk_disable(x264)				# broken with new msys2,   check DKMAKE.cmake build script
