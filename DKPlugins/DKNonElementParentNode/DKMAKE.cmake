@@ -1,0 +1,2 @@
+dk_generateCmake(DKNonElementParentNode)
+dk_assets(DKNonElementParentNode)
