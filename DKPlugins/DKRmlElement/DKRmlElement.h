@@ -1,44 +1,280 @@
-/*
-* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
-*
-* For the latest information, see https://github.com/aquawicket/DigitalKnob
-*
-* Copyright(c) 2010 - 2023 Digitalknob Team, and contributors
-*
-* Permission is hereby granted, free of charge, to any person obtaining a copy
-* of this software and associated documentation files(the "Software"), to deal
-* in the Software without restriction, including without limitation the rights
-* to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
-* copies of the Software, and to permit persons to whom the Software is
-* furnished to do so, subject to the following conditions :
-*
-* The above copyright notice and this permission notice shall be included in all
-* copies or substantial portions of the Software.
-*
-* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-* SOFTWARE.
-*/
-
+// [IDL] https://dom.spec.whatwg.org/#interface-element
+// [MDN] https://developer.mozilla.org/en-US/docs/Web/API/Element
 #pragma once
 #ifndef DKRmlElement_H
 #define DKRmlElement_H
 
-#include "DKRmlElement/RmlElementInstancer.h"
+#include "DKRmlInnerHTML/DKRmlInnerHTML.h"
+#include "DKRmlNode/DKRmlNode.h"
+#include "DKElement/DKElement.h"
+#include "DKRmlElementCSSInlineStyle/DKRmlElementCSSInlineStyle.h"
 
 
-class DKRmlElement : public DKObjectT<DKRmlElement>
+// [Exposed=Window]
+// interface Element : Node {
+class DKRmlElement : public DKRmlInnerHTML, public DKRmlElementCSSInlineStyle, public DKRmlNode, virtual public DKElement
 {
 public:
-	bool Init();
-	bool End();
-	std::shared_ptr<RmlElementInstancer> ref;
+	static std::vector<DKRmlElement*> _list;
+	static DKRmlElement* instance(DKRmlEventListener* dkRmlEventListener, Rml::Element* rmlElement){
+		for(unsigned int i=0; i<_list.size(); ++i){
+			if(rmlElement == _list[i]->_rmlElement)
+				return _list[i];
+		}
+		return new DKRmlElement(dkRmlEventListener, rmlElement);
+	}
+	
+	DKRmlElement(DKRmlEventListener* dkRmlEventListener, Rml::Element* rmlElement) : DKRmlInnerHTML(rmlElement), DKRmlElementCSSInlineStyle(rmlElement), DKRmlNode(dkRmlEventListener, rmlElement), DKElement()
+	{
+		DKDEBUGFUNC();
+		DKASSERT(dkRmlEventListener);
+		DKASSERT(rmlElement);
+		
+		interfaceName = "RmlElement";
+		address[interfaceName] = pointerToAddress(this);
+		DKINFO("DK"+interfaceName+"("+interfaceAddress+","+address[interfaceName]+") \n");
+		
+		_dkRmlEventListener = dkRmlEventListener;
+		_rmlElement = rmlElement;
+		
+		_list.push_back(this);
+	}
+	
+	/*
+	// readonly attribute DOMString? namespaceURI;
+	const DOMString& namespaceURI()	override					{ return _namespaceURI; }			// getter
+	void namespaceURI(const DOMString& namespaceURI) override	{ _namespaceURI = namespaceURI; } 	// setter
+	
+	// readonly attribute DOMString? prefix;
+	const DOMString& prefix() override							{ return _prefix; }					// getter
+	void prefix(const DOMString& prefix) override				{ _prefix = prefix; } 				// setter
+  
+	// readonly attribute DOMString localName;
+	const DOMString& localName() override						{ return _localName; }				// getter
+	void localName(const DOMString& localName) override			{ _localName = localName; } 		// setter
+	*/
+	
+	// readonly attribute DOMString tagName;
+	const DOMString& tagName() override							{									// getter
+		return _rmlElement->GetTagName();
+		//_tagName = _rmlElement->GetTagName();
+		//return _tagName;
+	}				
+	//void tagName(const DOMString& tagName) override			{ _tagName = tagName; } 			// setter
+	
+	/*
+	// [CEReactions] attribute DOMString id;
+	const DOMString& id() override								{ return _id; }						// getter
+	void id(const DOMString& id) override						{ _id = id; } 						// setter
+	
+	// [CEReactions] attribute DOMString className;
+	const DOMString& className() override						{ return _className; }				// getter
+	void className(const DOMString& className) override			{ _className = className; } 		// setter
+	*/
+	
+	// [SameObject, PutForwards=value] readonly attribute DOMTokenList classList;
+	const DKString& classList() override { 									// getter
+		Rml::StringList list = _rmlElement->GetActivePseudoClasses();
+		_classList.clear();
+		for (unsigned int n = 0; n < list.size(); ++n) {
+			_classList += list[n];
+			if (n < list.size()-1)
+				_classList += ",";
+		}
+		return _classList; 
+	}				
+	//void classList(const DKString& classList) override		{ _classList = classList; } 		// setter
+	
+	/*
+	//[CEReactions, Unscopable] attribute DOMString slot;
+	const DOMString& slot() override							{ return _slot; }					// getter
+	void slot(const DOMString& slot) override					{ _slot = slot; } 					// setter
+
+	// boolean hasAttributes();
+	const bool& hasAttributes() override {
+		DKDEBUGFUNC();
+		return _hasAttributes;
+	}
+	
+	// [SameObject] readonly attribute NamedNodeMap attributes;
+	const DKString& attributes() override						{ return _attributes; }				// getter
+	void attributes(const DKString& attributes) override		{ _attributes = attributes; } 		// setter
+	
+	// sequence<DOMString> getAttributeNames();
+	const DKString& getAttributeNames() override {
+		DKDEBUGFUNC();
+		return _getAttributeNames;
+	}
+	*/
+	
+	// DOMString? getAttribute(DOMString qualifiedName);
+	const DKString& getAttribute(const DOMString& qualifiedName) override {
+		DKDEBUGFUNC(qualifiedName);
+		Rml::Variant* variant = _rmlElement->GetAttribute(qualifiedName.c_str());
+		if(variant)
+			_getAttribute = _rmlElement->GetAttribute(qualifiedName.c_str())->Get<Rml::String>();
+		return _getAttribute;
+	}
+	
+	/*
+	// DOMString? getAttributeNS(DOMString? namespace, DOMString localName);
+	const DOMString& getAttribute(const DOMString& _namespace, const DOMString& localName) override {
+		DKDEBUGFUNC(_namespace, localName);
+		return _getAttributeNS;
+	}
+	
+	// [CEReactions] undefined setAttribute(DOMString qualifiedName, DOMString value);
+	void setAttribute(const DOMString& qualifiedName, const DOMString& value) override {
+		DKDEBUGFUNC(qualifiedName, value);
+	}
+	
+	// [CEReactions] undefined setAttributeNS(DOMString? namespace, DOMString qualifiedName, DOMString value);
+	void setAttributeNS(const DOMString& _namespace, const DOMString& qualifiedName, const DOMString& value) override {
+		DKDEBUGFUNC(_namespace, qualifiedName, value);
+	}
+	
+	// [CEReactions] undefined removeAttribute(DOMString qualifiedName);
+	void removeAttribute(const DOMString& qualifiedName) override {
+		DKDEBUGFUNC(qualifiedName);
+	}
+	
+	// [CEReactions] undefined removeAttributeNS(DOMString? namespace, DOMString localName);
+	void removeAttributeNS(const DOMString& _namespace, const DOMString& localName) override {
+		DKDEBUGFUNC(_namespace, localName);
+	}
+	
+	// [CEReactions] boolean toggleAttribute(DOMString qualifiedName, optional boolean force);
+	const bool& toggleAttribute(const DOMString& qualifiedName, const bool& force) override {
+		DKDEBUGFUNC(qualifiedName, force);
+		return _toggleAttribute;
+	}
+	*/
+	
+	// boolean hasAttribute(DOMString qualifiedName);
+	const bool& hasAttribute(const DOMString& qualifiedName) override {
+		DKDEBUGFUNC(qualifiedName);
+		_hasAttribute = _rmlElement->HasAttribute(qualifiedName.c_str());
+		return _hasAttribute;
+	}
+	
+	/*
+	// boolean hasAttributeNS(DOMString? namespace, DOMString localName);
+	const bool& hasAttributeNS(const DOMString& _namespace, const DOMString& localName) override {
+		DKDEBUGFUNC(_namespace, localName);
+		return _hasAttributeNS;
+	}
+	
+	// Attr? getAttributeNode(DOMString qualifiedName);
+	const DKString& getAttributeNode(const DOMString& qualifiedName) override {
+		DKDEBUGFUNC(qualifiedName);
+		return _getAttributeNode;
+	}
+	
+	// Attr? getAttributeNodeNS(DOMString? namespace, DOMString localName);
+	const DKString& getAttributeNodeNS(const DOMString& _namespace, const DOMString& localName) override {
+		DKDEBUGFUNC(_namespace, localName);
+		return _getAttributeNodeNS;
+	}
+	
+	// [CEReactions] Attr? setAttributeNode(Attr attr);
+	const DKString& setAttributeNode(const DKString& attr) override {
+		DKDEBUGFUNC(attr);
+		return _setAttributeNode;
+	}
+	
+	// [CEReactions] Attr? setAttributeNodeNS(Attr attr);
+	const DKString& setAttributeNodeNS(const DKString& attr) override {
+		DKDEBUGFUNC(attr);
+		return _setAttributeNodeNS;
+	}
+	
+	// [CEReactions] Attr removeAttributeNode(Attr attr);
+	const DKString& removeAttributeNode(const DKString& attr) override {
+		DKDEBUGFUNC(attr);
+		return _removeAttributeNode;
+	}
+	
+	// ShadowRoot attachShadow(ShadowRootInit init);
+	const DKString& attachShadow(const DKString& init) override {
+		DKDEBUGFUNC(init);
+		return _attachShadow;
+	}
+	
+	// readonly attribute ShadowRoot? shadowRoot;
+	const DKString& shadowRoot() override							{ return _shadowRoot; }					// getter
+	void shadowRoot(const DKString& shadowRoot) override			{ _shadowRoot = shadowRoot; } 			// setter
+	*/
+	
+	// Element? closest(DOMString selectors);
+	DKElement* closest(const DOMString& selectors) override {
+		DKDEBUGFUNC(selectors);
+		Rml::Element* closestElement = _rmlElement->Closest(selectors);
+		//if(!closestElement)
+		//	DKERROR("closestElement invalid");
+		_closest = DKRmlElement::instance(_dkRmlEventListener, closestElement);
+		return _closest;
+	}
+	
+	/*
+	// boolean matches(DOMString selectors);
+	const bool& matches(const DOMString& selectors) override {
+		DKDEBUGFUNC(selectors);
+		return _matches;
+	}
+	
+	// boolean webkitMatchesSelector(DOMString selectors); // legacy alias of .matches
+	const bool& webkitMatchesSelector(const DOMString& selectors) override {
+		DKDEBUGFUNC(selectors);
+		return _webkitMatchesSelector;
+	}
+	*/
+	
+	// HTMLCollection getElementsByTagName(DOMString qualifiedName);	
+	DKHTMLCollection* getElementsByTagName(const DOMString& qualifiedName) override {
+		DKDEBUGFUNC(qualifiedName);
+		Rml::ElementList elements;
+		_rmlElement->GetElementsByTagName(elements, qualifiedName.c_str());
+		if(elements.empty()){
+			DKERROR("elements.empty()\n");
+			return NULL;
+		}
+		std::vector<DKElement*>* element_list = new std::vector<DKElement*>;
+		for(unsigned int i=0; i<elements.size(); ++i){
+			element_list->push_back(DKRmlElement::instance(_dkRmlEventListener, elements[i]));
+		}
+		DKINFO("element_list->size() = "+toString(element_list->size())+"\n");
+		DKHTMLCollection* htmlCollection = new DKHTMLCollection(*element_list);	// FIXME: dangling pointer
+		DKINFO("htmlCollection->length() = "+toString(htmlCollection->length())+"\n");
+		return htmlCollection; 
+	}
+	
+	/*
+	// HTMLCollection getElementsByTagNameNS(DOMString? namespace, DOMString localName);
+	const DKString& getElementsByTagNameNS(const DOMString& _namespace, const DOMString& localName) override {
+		DKDEBUGFUNC(_namespace, localName);
+		return _getElementsByTagNameNS;
+	}
+	
+	// HTMLCollection getElementsByClassName(DOMString classNames);
+	const DKString& getElementsByClassName(const DOMString& classNames) override {
+		DKDEBUGFUNC(classNames);
+		return _getElementsByClassName;
+	}
+  
+	// [CEReactions] Element? insertAdjacentElement(DOMString where, Element element); // legacy
+	const DKString& insertAdjacentElement(const DOMString& where, const DKString& element) override {
+		DKDEBUGFUNC(where, element);
+		return _insertAdjacentElement;
+	}
+	
+	// undefined insertAdjacentText(DOMString where, DOMString data); // legacy
+	const DKString& insertAdjacentText(const DOMString& where, const DOMString& data) override {
+		DKDEBUGFUNC(where, data);
+		return _insertAdjacentText;
+	}
+//};
+	*/
 };
 
-REGISTER_OBJECT(DKRmlElement, true)
 
 #endif //DKRmlElement_H
