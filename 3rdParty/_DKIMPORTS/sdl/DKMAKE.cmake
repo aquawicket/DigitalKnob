@@ -6,9 +6,10 @@
 
 
 ### DEPEND ###
+ANDROID_dk_depend(android)
+ANDROID_dk_depend(libiconv)
 ANDROID_dk_depend(opengles)
 ANDROID_dk_depend(opensles)
-ANDROID_dk_depend(libiconv)
 if(IOS OR IOSSIM)
 	dk_depend(audio_toolbox)
 	dk_depend(av_foundation)

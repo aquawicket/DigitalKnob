@@ -99,7 +99,6 @@ if(ANDROID)
 	dk_disable(cryptopp)
 	dk_disable(curl)				# error : "strerror_r MUST be either POSIX, glibc style"
 	dk_disable(diff-match-patch)
-	#dk_disable(dl)
 	dk_disable(dukluv)
 	dk_disable(ffmpeg)
 	dk_disable(flac)				# configure: error: unrecognized option: `-DANDROID32'
@@ -132,7 +131,6 @@ if(ANDROID)
 	dk_disable(osgbullet)			# requires bullet3, osgworks
 	dk_disable(osgrmlui)
 	dk_disable(osgworks)			# requires openscenegraph
-	#dk_disable(opensles)
 	dk_disable(poco)				# error: Compiler does not support C++14
 	dk_disable(podofo)				# error: can't find "fontconfig/fontconfig.h"
 	dk_disable(rmlui-d3d11)
