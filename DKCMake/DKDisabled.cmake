@@ -505,6 +505,7 @@ if(WIN)
 	dk_disable(gdal)
 	dk_disable(gzip)
 	dk_disable(jasper)
+	dk_disable(leptonica)			# this library is hard to keep alive for some reason. silent dependencies?
 	dk_disable(libcaca)				# no CMakeLists.txt
 	dk_disable(libevent)
 	dk_disable(libexpat)
