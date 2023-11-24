@@ -1,8 +1,5 @@
 if(ANDROID)
-	#dk_depend(android)
-	#dk_depend(dl)
 	dk_depend(log)
-	#dk_depend(m)
 	#dk_depend(sdl)		# SDL_AndroidGetExternalStorageState()
 	set(CMAKE_POSITION_INDEPENDENT_CODE ON)		# https://stackoverflow.com/a/38297422
 endif()

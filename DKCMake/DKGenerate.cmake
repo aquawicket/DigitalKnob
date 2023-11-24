@@ -1139,7 +1139,6 @@ if(ANDROID)
 			POST_BUILD
 			TARGET main
 			COMMAND ${CMAKE_COMMAND} -E echo "Building with Gradle"
-			#COMMAND ${DKPROJECT}/${OS}/gradlew --project-dir ${DKPROJECT}/${OS} --info clean build
 			COMMAND ${DKPROJECT}/${OS}/Release/gradlew --project-dir ${DKPROJECT}/${OS}/Release --info clean build
 			COMMAND ${CMAKE_COMMAND} -E echo "Finnished building with Gradle")	
 	endif()
@@ -1161,7 +1160,6 @@ if(ANDROID)
 			POST_BUILD
 			TARGET main
 			COMMAND ${CMAKE_COMMAND} -E echo "Installing app-debug.apk to device"
-			#COMMAND ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/app/build/outputs/apk/debug/app-debug.apk
 			COMMAND ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/Release/app/build/outputs/apk/debug/app-debug.apk
 			COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing app-debug.apk to device")
 	endif()

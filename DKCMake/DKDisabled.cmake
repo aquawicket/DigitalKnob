@@ -52,9 +52,8 @@ dk_disable(sw-client)				# DEPRECATED: requested by leptonica but not required
 
 # Disabled for Android targets
 if(ANDROID)
-	dk_disable(android)
-	#dk_disable(log)
-	dk_disable(m)
+	#dk_disable(android)
+	#dk_disable(m)
 	dk_disable(DKArchive)			# requires libarchive
 	dk_disable(DKCef)				# requires cef_binary
 	dk_disable(DKCefChild)			# requires cef_binary
@@ -102,7 +101,7 @@ if(ANDROID)
 	dk_disable(cryptopp)
 	dk_disable(curl)				# error : "strerror_r MUST be either POSIX, glibc style"
 	dk_disable(diff-match-patch)
-	dk_disable(dl)
+	#dk_disable(dl)
 	dk_disable(dukluv)
 	dk_disable(ffmpeg)
 	dk_disable(flac)				# configure: error: unrecognized option: `-DANDROID32'
