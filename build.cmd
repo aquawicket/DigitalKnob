@@ -34,11 +34,10 @@ ECHO 2. Git Commit
 ECHO 3. DKCore
 ECHO 4. DKJavascript
 ECHO 5. DKBuilder
-ECHO 6. DKBuilderGui
-ECHO 7. DKSDL
-ECHO 8. DKSDLRml
-ECHO 9. DKDomTest
-ECHO a. DKTestAll
+ECHO 6. DKSDL
+ECHO 7. DKSDLRml
+ECHO 8. DKDomTest
+ECHO 9. DKTestAll
 ECHO c. Clear Screen
 ECHO x. Exit
 set choice=
@@ -49,11 +48,10 @@ if '%choice%'=='2' goto gitcommit
 if '%choice%'=='3' goto dkcore
 if '%choice%'=='4' goto dkjavascript
 if '%choice%'=='5' goto dkbuilder
-if '%choice%'=='6' goto dkbuildergui
-if '%choice%'=='7' goto dksdl
-if '%choice%'=='8' goto dksdlrml
-if '%choice%'=='9' goto dkdomtest
-if '%choice%'=='a' goto dktestall
+if '%choice%'=='6' goto dksdl
+if '%choice%'=='7' goto dksdlrml
+if '%choice%'=='8' goto dkdomtest
+if '%choice%'=='9' goto dktestall
 if '%choice%'=='c' goto clearscreen
 if '%choice%'=='x' goto end
 ECHO "%choice%" is not valid, try again
@@ -126,10 +124,6 @@ goto checkApp
 
 :dkbuilder
 set APP=DKBuilder
-goto checkApp
-
-:dkbuildergui
-set APP=DKBuilderGui
 goto checkApp
 
 :dksdl
