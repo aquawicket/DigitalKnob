@@ -351,6 +351,8 @@ while :
 				ANDROID_NDK="$DKPATH/3rdParty/android-sdk/ndk/$ANDROID_NDK_BUILD"
 				cmake -G "Unix Makefiles" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=$ANDROID_API -DANDROID-NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DRELEASE=ON -DDEBUG=OFF -DREBUILDALL=ON -DSTATIC=ON -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
 				TARGET="main"
+				chmod 777 $DKPATH/DKApps/$APP/$OS/gradlew
+				$DKPATH/DKApps/$APP/$OS/gradlew --project-dir $DKPATH/DKApps/$APP/$OS --info clean build
 			fi
 			if [[ "$OS" == "android64" ]]; then
 				ANDROID_API="31"
