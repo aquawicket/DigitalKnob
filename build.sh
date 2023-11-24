@@ -308,31 +308,37 @@ while :
 				ANDROID_NDK_BUILD="23.1.7779620"
 				ANDROID_NDK="$DKPATH/3rdParty/android-sdk/ndk/$ANDROID_NDK_BUILD"
 				cmake -G "Unix Makefiles" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=$ANDROID_API -DANDROID-NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DRELEASE=OFF -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
+				TARGET="main"
 			fi
 			if [[ "$OS" == "android64" ]]; then
 				ANDROID_API="31"
 				ANDROID_NDK_BUILD="23.1.7779620"
 				ANDROID_NDK="$DKPATH/3rdParty/android-sdk/ndk/$ANDROID_NDK_BUILD"
 				cmake -G "Unix Makefiles" -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=$ANDROID_API -DANDROID-NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DRELEASE=OFF -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
+				TARGET="main"
 			fi
 			if [[ "$OS" == "linux32" ]]; then
 				cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=OFF -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE
+				TARGET=${APP}_APP
 			fi
 			if [[ "$OS" == "linux64" ]]; then
 				cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=OFF -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE
+				TARGET=${APP}_APP
 			fi
 			if [[ "$OS" == "raspberry32" ]]; then
 				cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=OFF -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE
+				TARGET=${APP}_APP
 			fi
 			if [[ "$OS" == "raspberry64" ]]; then
 				cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=OFF -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE
+				TARGET=${APP}_APP
 			fi
 			#if [[ "$OS" == "emscipten" ]]; then
 				#TODO
 			#fi
 
-			cmake --build $DKPATH/DKApps/$APP/$OS/Debug --target ${APP}_APP --config Debug
-			chmod +x $DKPATH/DKApps/$APP/$OS/Debug/$APP
+			cmake --build $DKPATH/DKApps/$APP/$OS/Debug --target ${TARGET} --config Debug
+			chmod +x $DKPATH/DKApps/$APP/$OS/Debug/${TARGET}
 		fi
 		
 		if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
@@ -344,31 +350,37 @@ while :
 				ANDROID_NDK_BUILD="23.1.7779620"
 				ANDROID_NDK="$DKPATH/3rdParty/android-sdk/ndk/$ANDROID_NDK_BUILD"
 				cmake -G "Unix Makefiles" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=$ANDROID_API -DANDROID-NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DRELEASE=ON -DDEBUG=OFF -DREBUILDALL=ON -DSTATIC=ON -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
+				TARGET="main"
 			fi
 			if [[ "$OS" == "android64" ]]; then
 				ANDROID_API="31"
 				ANDROID_NDK_BUILD="23.1.7779620"
 				ANDROID_NDK="$DKPATH/3rdParty/android-sdk/ndk/$ANDROID_NDK_BUILD"
 				cmake -G "Unix Makefiles" -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=$ANDROID_API -DANDROID-NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DRELEASE=ON -DDEBUG=OFF -DREBUILDALL=ON -DSTATIC=ON -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
+				TARGET="main"
 			fi
 			if [[ "$OS" == "linux32" ]]; then
 				cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=ON -DDEBUG=OFF -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE
+				TARGET=${APP}_APP
 			fi
 			if [[ "$OS" == "linux64" ]]; then
 				cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=ON -DDEBUG=OFF -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE
+				TARGET=${APP}_APP
 			fi
 			if [[ "$OS" == "raspberry32" ]]; then
 				cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=ON -DDEBUG=OFF -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE
+				TARGET=${APP}_APP
 			fi
 			if [[ "$OS" == "raspberry64" ]]; then
 				cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=ON -DDEBUG=OFF -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE
+				TARGET=${APP}_APP
 			fi
 			#if [[ "$OS" == "emscipten" ]]; then
 				#TODO
 			#fi
 			
-			cmake --build $DKPATH/DKApps/$APP/$OS/Debug --target ${APP}_APP --config Release
-			chmod +x $DKPATH/DKApps/$APP/$OS/Release/$APP
+			cmake --build $DKPATH/DKApps/$APP/$OS/Debug --target ${TARGET} --config Release
+			chmod +x $DKPATH/DKApps/$APP/$OS/Release/${TARGET}
 		fi
 	fi
 
