@@ -35,22 +35,63 @@
 
 // https://developercommunity.visualstudio.com/t/error-c2872-byte-ambiguous-symbol/93889
 // Fix for DKVncServer
-#ifndef _HAS_STD_BYTE
-	#define _HAS_STD_BYTE 0
+#if HAVE_DKVncServer
+	//#ifndef _HAS_STD_BYTE  //TESTME
+		#define _HAS_STD_BYTE 0
+	//#endif
 #endif
 
 #define STR(x) #x
-#define DKMSG(x) __pragma(message(STR(x)))
-//#define TOSTRING(x) STR(x)
-#define PRNT_NAME(x) printf("%s", #x)
-#define PRNT_NAME_VALUE(x) printf("%s=%s", #x, STR(x))
-#define PRNT_VALUE(x) printf(%s, STR(x))
-
+#define STRS(str1,str2) str1 ## str2
 //#define JOIN(a,b) a ## b
 // https://stackoverflow.com/a/59157875/688352
 //#define JOIN_TWO(_1, _2) STR(_1) "." STR(_2)
 //#define JOIN_THREE(_1, _2, _3) STR(_1) "." STR(_2) "." STR(_3)
 
+
+// DKMESSAGE(<string>): pass a message string to the compiler
+#if defined(_MSC_VER)
+    #define DKMESSAGE(x) __pragma(message(STR(x)))
+#elif defined(__GNUC__) || defined(__clang__)
+	#define DO_PRAGMA(x) _Pragma(#x)
+	#define DKMESSAGE(x) DO_PRAGMA(message (#x))
+#else
+	#define DKMESSAGE(X)
+#endif
+//DKMESSAGE("test DKMESSAGE")
+
+// DKWARNING(string): pass a warning string to the compiler
+#if defined(_MSC_VER)
+    #define DKWARNING(x) __pragma(warning(STR(x)))
+#elif defined(__GNUC__) || defined(__clang__)
+	#define DKWARNING(x) DO_PRAGMA(GCC warning #x)
+#else
+	#define DKWARNING(X)
+#endif
+//DKWARNING("test DKWARNING")
+
+// NOTE: use #error instead 
+// DKERR(string): pass a error string to the compiler 
+#if defined(_MSC_VER)
+    #define DKERR(x) static_assert(false, STR(x));
+#elif defined(__GNUC__) || defined(__clang__)
+	#define DKERR(x) DO_PRAGMA(GCC error #x)
+#else
+	#define DKERR(X)
+#endif
+//DKERR("test DKERR")
+
+
+
+//#define TOSTRING(x) STR(x)
+#define PRNT_NAME(x) printf("%s", #x)
+#define PRNT_NAME_VALUE(x) printf("%s=%s", #x, STR(x))
+#define PRNT_VALUE(x) printf(%s, STR(x))
+
+
+// TODO: Cross-platform warnings
+// https://stackoverflow.com/questions/471935/user-warnings-on-msvc-and-gcc
+// https://stackoverflow.com/questions/171435/portability-of-warning-preprocessor-directive
 
 
 #if __x86_64__ || _M_X64
@@ -290,10 +331,8 @@
 // BUILD_TYPE
 #if DEBUG
 #	define DKBUILD_TYPE "DEBUG"
-#elif NDEBUG
-#	define DKBUILD_TYPE "RELEASE"
 #else
-#	define DKBUILD_TYPE "UNKNOWN"
+#	define DKBUILD_TYPE "RELEASE"
 #endif
 
 // RTTI
@@ -305,15 +344,47 @@
 #	if defined(__GXX_RTTI)
 #		define RTTI_ENABLED 1
 #	endif
-#elif defined(_MSC_VER)
+#elif defined(_MSC_VER) //Visual Studio Compiler
 #	if defined(_CPPRTTI)
 #		define RTTI_ENABLED 1
 #	endif
 #endif
 
 
-// DK_UNUSED(arg) - suppress unfererenced formal parameter warnings for uused variables
+// DK_UNUSED(arg) - supress unreferenced formal parameter warnings for unsed variables
 #define DK_UNUSED(arg) (void)arg;
+
+
+
+/////////////////////////////////////////////////////////////////////////
+#ifndef DKTHROW
+#define DKTHROW(x)      												\
+    try{																\
+		throw x; 														\
+	}																	\
+	catch(...){															\
+		std::cerr << std::endl << x << std::endl;						\
+		std::cerr << "Press any Enter to continue . . ." << std::endl;	\
+		std::cin.get();													\
+	}
+#endif
+
+
+/// ASSERT(condition) checks if the condition is met, and if not, calls
+/// ABORT with an error message indicating the module and line where
+/// the error occurred.
+#ifndef DKASSERT
+#define DKASSERT(x)                                                       	\
+    if (!(x)) {                                                         	\
+        char buf[2048];                                                 	\
+        snprintf (buf, 2048, "Assertion (%s) failed in \"%s\", line %d\n",	\
+                 #x, __FILE__, __LINE__);                                   \
+        DKTHROW (buf);                                                    	\
+    }                                                                   	\
+    else   // This 'else' exists to catch the user's following semicolon
+#endif
+/////////////////////////////////////////////////////////////////////////
+
 
 
 // https://en.cppreference.com/w/cpp/keyword
@@ -328,6 +399,33 @@
 #else
 	static_assert(false, "__has_include not supported");
 #endif
+
+// WARNING DISABLE / ENABLE
+// https://www.fluentcpp.com/2019/08/30/how-to-disable-a-warning-in-cpp
+#if defined(_MSC_VER)
+    #define DISABLE_WARNING_PUSH							__pragma(warning( push ))
+    #define DISABLE_WARNING_POP								__pragma(warning( pop )) 
+    #define DISABLE_WARNING(warningNumber)					__pragma(warning( disable : warningNumber ))
+    #define DISABLE_WARNING_UNREFERENCED_FORMAL_PARAMETER	DISABLE_WARNING(4100)
+    #define DISABLE_WARNING_UNREFERENCED_FUNCTION			DISABLE_WARNING(4505)
+    // other warnings you want to deactivate... 
+#elif defined(__GNUC__) || defined(__clang__)
+   // #define DO_PRAGMA(X) _Pragma(#X)
+    #define DISABLE_WARNING_PUSH							DO_PRAGMA(GCC diagnostic push)
+    #define DISABLE_WARNING_POP								DO_PRAGMA(GCC diagnostic pop) 
+    #define DISABLE_WARNING(warningName)					DO_PRAGMA(GCC diagnostic ignored #warningName)
+    #define DISABLE_WARNING_UNREFERENCED_FORMAL_PARAMETER	DISABLE_WARNING(-Wunused-parameter)
+    #define DISABLE_WARNING_UNREFERENCED_FUNCTION			DISABLE_WARNING(-Wunused-function)
+   // other warnings you want to deactivate... 
+#else
+    #define DISABLE_WARNING_PUSH
+    #define DISABLE_WARNING_POP
+    #define DISABLE_WARNING_UNREFERENCED_FORMAL_PARAMETER
+    #define DISABLE_WARNING_UNREFERENCED_FUNCTION
+    // other warnings you want to deactivate... 
+#endif
+# define WARNING_DISABLE	DISABLE_WARNING_PUSH
+# define WARNING_ENABLE		DISABLE_WARNING_POP
 
 
 class DKPreprocessor {
