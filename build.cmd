@@ -312,6 +312,9 @@ set TARGET=main
 goto build
 
 :generate_emscripten
+set EMSDK=DIGITALKNOB+C:/Users/Administrator/digitalknob/Development/3rdParty/emsdk-main
+set EMSDK_ENV=%EMSDK%/emsdk_env
+set EMSDK_TOOLCHAIN_FILE=%EMSDK%/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake
 echo emscriten incomplete
 goto error
 ::goto build
