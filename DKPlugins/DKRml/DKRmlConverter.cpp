@@ -372,7 +372,7 @@ bool DKRmlConverter::PostProcess(Rml::Element* element) {
 	}
 
 //DEBUG - Lets see the code
-#ifdef DKTODO
+#ifdef DKTEST
 	DKRml* dkRml = DKRml::Get();
 	Rml::ElementDocument* doc = dkRml->document;
 	DKString code = doc->GetContext()->GetRootElement()->GetInnerRML();
