@@ -28,18 +28,20 @@
 #include "DK/DKString.h"
 #include "DK/DKLog.h"
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #include <codecvt> //string <--> wsting conversion
-//WARNING_ENABLE
+WARNING_ENABLE
 
 
-bool same(const DKString& str, const DKString& str2){
+bool same(const DKString& str, const DKString& str2) {
+	//DKDEBUGFUNC(str, str2);
 	if(str.compare(str2) == 0)
 		return true;
 	return false;
 }
 
-bool samei(const DKString& str, const DKString& str2){
+bool samei(const DKString& str, const DKString& str2) {
+	//DKDEBUGFUNC(str, str2);
 	DKString strA = toLower(str);
 	//std::transform(strA.begin(), strA.end(), strA.begin(), [](unsigned char c) {
 	//	return static_cast<char>(std::tolower(c));
@@ -53,7 +55,8 @@ bool samei(const DKString& str, const DKString& str2){
 	return false;
 }
 
-bool has(const DKString& search, const DKString& forthis){
+bool has(const DKString& search, const DKString& forthis) {
+	//DKDEBUGFUNC(search, forthis);
 	std::string::size_type found = search.find(forthis);
 	if(found != std::string::npos)
 		return true;
@@ -61,6 +64,7 @@ bool has(const DKString& search, const DKString& forthis){
 }
 
 int substr_count(const DKString& search, const DKString& forthis) {
+	//DKDEBUGFUNC(search, forthis);
 	int occurrences = 0;
 	std::string::size_type pos = 0;
 	while ((pos = search.find(forthis, pos)) != std::string::npos) {
@@ -70,7 +74,12 @@ int substr_count(const DKString& search, const DKString& forthis) {
 	return occurrences;
 }
 
-DKString toString(const int& _int){
+DKString toString(const DKString& _str){
+		return _str;
+}
+
+DKString toString(const int& _int) {
+	//DKDEBUGFUNC(_int);
 	/*
 	DKString s;
 	std::stringstream out;
@@ -81,7 +90,8 @@ DKString toString(const int& _int){
 	return std::to_string(_int); //C11
 }
 
-DKString toString(const long& _long){
+DKString toString(const long& _long) {
+	//DKDEBUGFUNC(_long);
 	/*
 	DKString s;
 	std::stringstream out;
@@ -92,7 +102,8 @@ DKString toString(const long& _long){
 	return std::to_string(_long); //C11
 }
 
-DKString toString(const float& _float){
+DKString toString(const float& _float) {
+	//DKDEBUGFUNC(_float);
 	/*
 	DKString s;
 	std::stringstream out;
@@ -103,7 +114,8 @@ DKString toString(const float& _float){
 	return std::to_string(_float); //C11
 }
 
-DKString toString(const double& _double){
+DKString toString(const double& _double) {
+	//DKDEBUGFUNC(_double);
 	/*
 	DKString s;
 	std::stringstream out;
@@ -111,10 +123,16 @@ DKString toString(const double& _double){
 	s = out.str();
 	return s;
 	*/
-	return std::to_string(_double); //C11
+	
+	// https://stackoverflow.com/a/13709929/688352
+	std::string str = std::to_string(_double); //C11
+	str.erase(str.find_last_not_of('0') + 1, std::string::npos); // Strip the 0's trailing after .
+	str.erase(str.find_last_not_of('.') + 1, std::string::npos); // Strip the . if whole number
+	return str;
 }
 
-DKString toString(const unsigned int& _uint){
+DKString toString(const unsigned int& _uint) {
+	//DKDEBUGFUNC(_uint);
 	/*
 	DKString s;
 	std::stringstream out;
@@ -125,7 +143,8 @@ DKString toString(const unsigned int& _uint){
 	return std::to_string(_uint); //C11
 }
 
-DKString toString(const unsigned long int& _ulongint){
+DKString toString(const unsigned long int& _ulongint) {
+	//DKDEBUGFUNC(_ulongint);
 	/*
 	DKString s;
 	std::stringstream out;
@@ -136,7 +155,8 @@ DKString toString(const unsigned long int& _ulongint){
 	return std::to_string(_ulongint); //C11
 }
 
-DKString toString(const unsigned long long int& _ulonglongint){
+DKString toString(const unsigned long long int& _ulonglongint) {
+	//DKDEBUGFUNC(_ulonglongint);
 	/*
 	DKString s;
 	std::stringstream out;
@@ -147,22 +167,30 @@ DKString toString(const unsigned long long int& _ulonglongint){
 	return std::to_string(_ulonglongint); //C11
 }
 
-
 DKString toString(const bool _bool){
+	//DKDEBUGFUNC(_bool);
 	if(_bool)
 		return "true";
 	return "false";
 }
 
-DKString toString(const char* _charptr){
+DKString toString(const char _char) {
+	//DKDEBUGFUNC(_char);
+	return std::string(1, _char);
+}
+
+DKString toString(const char* _charptr) {
+	//DKDEBUGFUNC(_charptr);
 	return _charptr;
 }
 
 DKString toString(const unsigned char* _uchar) {
+	//DKDEBUGFUNC(_uchar);
 	return reinterpret_cast<char const*>(_uchar);
 }
 
-DKString toString(void* _voidptr){
+DKString toString(void* _voidptr) {
+	//DKDEBUGFUNC(_voidptr);
 	DKString *p = static_cast<DKString*>(_voidptr);
 	DKString string = *p;
 	return string;
@@ -170,7 +198,8 @@ DKString toString(void* _voidptr){
 
 // https://stackoverflow.com/a/65863170/688352
 // https://riptutorial.com/cplusplus/example/4190/conversion-to-std--wstring
-DKString toString(const std::wstring& _wstring){
+DKString toString(const std::wstring& _wstring) {
+	//DKDEBUGFUNC(_wstring);
 /*
 #if WIN
 	int len;
@@ -185,7 +214,8 @@ DKString toString(const std::wstring& _wstring){
 //#endif
 }
 
-DKString toString(const DKStringArray& arry, const char* seperator){
+DKString toString(const DKStringArray& arry, const char* seperator) {
+	//DKDEBUGFUNC(arry, seperator);
 	DKString string = "";
 	for(unsigned int i=0; i<arry.size(); ++i){
 		string += arry[i];
@@ -195,7 +225,8 @@ DKString toString(const DKStringArray& arry, const char* seperator){
 	return string;
 }
 
-DKString toLower(const DKString& input){
+DKString toLower(const DKString& input) {
+	//DKDEBUGFUNC(input);
     DKString output = input;
 	std::transform(output.begin(), output.end(), output.begin(), [](unsigned char c) {
 		return static_cast<char>(std::tolower(c));
@@ -203,7 +234,8 @@ DKString toLower(const DKString& input){
     return output;
 }
 
-DKString toUpper(const DKString& input){
+DKString toUpper(const DKString& input) {
+	//DKDEBUGFUNC(input);
     DKString output = input;
 	std::transform(output.begin(), output.end(), output.begin(), [](unsigned char c) {
 		return static_cast<char>(std::toupper(c));
@@ -212,7 +244,8 @@ DKString toUpper(const DKString& input){
 }
 
 #if WIN
-DKString toString(const HWND hwnd){
+DKString toString(const HWND hwnd) {
+	//DKDEBUGFUNC(hwnd);
 	std::stringstream ss;
 	ss << "0x" << hwnd;
 	return ss.str();
@@ -221,19 +254,22 @@ DKString toString(const HWND hwnd){
 
 
 DKString& rtrim(DKString& s, const char* t) {
+	//DKDEBUGFUNC(s, t);
 	return s.erase(s.find_last_not_of(t) + 1);
 }
 
 DKString& ltrim(DKString& s, const char* t) {
+	//DKDEBUGFUNC(s, t);
 	return s.erase(0, s.find_first_not_of(t));
 }
 
 DKString& trim(DKString& s, const char* t) {
+	//DKDEBUGFUNC(s, t);
 	return ltrim(rtrim(s, t), t);
 }
 
-
-bool toBool(const DKString& str){
+bool toBool(const DKString& str) {
+	//DKDEBUGFUNC(str);
     if(str.empty())
 		return false;
 	if(str == "false")
@@ -243,33 +279,40 @@ bool toBool(const DKString& str){
 	return true;
 }
 
-int toInt(const DKString& str){
+int toInt(const DKString& str) {
+	//DKDEBUGFUNC(str);
 	return atoi(str.c_str());
 }
 
-long toLong(const DKString& str){
+long toLong(const DKString& str) {
+	//DKDEBUGFUNC(str);
 	return atol(str.c_str());
 }
 
-float toFloat(const DKString& str){
+float toFloat(const DKString& str) {
+	//DKDEBUGFUNC(str);
 	return (float)atof(str.c_str());
 }
 
-unsigned int toUInt(const DKString& str){
+unsigned int toUInt(const DKString& str) {
+	//DKDEBUGFUNC(str);
 	return atoi(str.c_str());
 }
 
-unsigned long int toULong(const DKString& str){
+unsigned long int toULong(const DKString& str) {
+	//DKDEBUGFUNC(str);
 	return strtoul(str.c_str(), NULL, 0);
 }
 
-unsigned long long int toULongLong(const DKString& str){
+unsigned long long int toULongLong(const DKString& str) {
+	//DKDEBUGFUNC(str);
 	return strtoull(str.c_str(), NULL, 0);
 }
 
 // https://stackoverflow.com/a/65863170/688352
 // https://riptutorial.com/cplusplus/example/4190/conversion-to-std--wstring
-std::wstring toWString(const DKString& str){
+std::wstring toWString(const DKString& str) {
+	//DKDEBUGFUNC(str);
 /*
 #if WIN
 	int len;
@@ -287,7 +330,8 @@ std::wstring toWString(const DKString& str){
 }
 
 #if WIN
-HWND toHWND(const DKString& str){
+HWND toHWND(const DKString& str) {
+	//DKDEBUGFUNC(str);
 	DKString hex = str;
 	hex.erase(0,2);
 	size_t x;
@@ -299,7 +343,8 @@ HWND toHWND(const DKString& str){
 #endif
 
 
-bool replace(DKString& str, const DKString& oldStr, const DKString& newStr){
+bool replace(DKString& str, const DKString& oldStr, const DKString& newStr) {
+	//DKDEBUGFUNC(str, oldStr, newStr);
 	std::string::size_type pos = 0;
 	while((pos = str.find(oldStr, pos)) != std::string::npos){
 		str.replace(pos, oldStr.length(), newStr);
@@ -308,7 +353,8 @@ bool replace(DKString& str, const DKString& oldStr, const DKString& newStr){
 	return true;
 }
 
-bool replace_first(DKString& str, const DKString& oldStr, const DKString& newStr){
+bool replace_first(DKString& str, const DKString& oldStr, const DKString& newStr) {
+	//DKDEBUGFUNC(str, oldStr, newStr);
 	std::string::size_type pos = 0;
 	if((pos = str.find(oldStr, pos)) != std::string::npos){
 		str.replace(pos, oldStr.length(), newStr);
@@ -318,26 +364,30 @@ bool replace_first(DKString& str, const DKString& oldStr, const DKString& newStr
 }
 
 
-bool IsNumber(const DKString& str){
+bool IsNumber(const DKString& str) {
+	//DKDEBUGFUNC(str);
     std::string::const_iterator it = str.begin();
     while (it != str.end() && std::isdigit(*it)) ++it;
     return !str.empty() && it == str.end();
 }
 
-bool Pad(int num, char character, DKString& str){
+bool Pad(int num, char character, DKString& str) {
+	//DKDEBUGFUNC(num, character, str);
 	std::ostringstream ss;
 	ss << std::setw(num) << std::setfill(character) << str;
 	str = ss.str();
 	return true;
 }
 
-bool RemoveDuplicates(DKStringArray& arry){
+bool RemoveDuplicates(DKStringArray& arry) {
+	//DKDEBUGFUNC(arry);
 	sort( arry.begin(), arry.end() );
 	arry.erase( unique( arry.begin(), arry.end() ), arry.end() );
 	return true;
 }
 
-bool getSettingFromString(const DKString& filestring, const DKString& setting, DKString& value){
+bool getSettingFromString(const DKString& filestring, const DKString& setting, DKString& value) {
+	//DKDEBUGFUNC(filestring, setting, value);
 	//If the variable looks like this: [VARIABLE]
 	//then we return everything up to the next [VARIABLE] or to the end of the file.
 	if(has(setting,"[") && has(setting,"]")){
@@ -369,14 +419,12 @@ bool getSettingFromString(const DKString& filestring, const DKString& setting, D
 	return true;
 }
 
-bool toStringArray(DKStringArray& output, const DKString& str, const DKString& seperator){
-	//FIXME - while(1) loops are dangerous 
+bool toStringArray(DKStringArray& output, const DKString& str, const DKString& seperator) {
+	//DKDEBUGFUNC(output, str, seperator);
 	DKString text = str + seperator; //add a seperator at the end, or we won't get the last variable
-
-	//int begin = 0;
 	size_t begin = 0;
 	//int end;
-	while(1){
+	while(1){ //FIXME - while(1) loops are dangerous 
 	//while(end != std::string::npos){
 		std::string::size_type end = text.find(seperator, begin);
 		if(end==std::string::npos)
@@ -389,13 +437,14 @@ bool toStringArray(DKStringArray& output, const DKString& str, const DKString& s
 		output.push_back(temp);
 		begin=end+1;
 	}
-
 	if(output[output.size()-1].empty()) //if last one empty
 		output.erase(output.begin()+output.size()-1);
+	return true;
 }
 
 /*
 bool ArrayToString(const DKStringArray& arry, DKString& str, const char* seperator) {
+	//DKDEBUGFUNC(arry, str, seperator);
 	str = "";
 	for(unsigned int i=0; i<arry.size(); ++i){
 		str += arry[i];
@@ -408,6 +457,7 @@ bool ArrayToString(const DKStringArray& arry, DKString& str, const char* seperat
 
 /*
 DKStringArray getSettingsFromString(const DKString& filestring, const DKString& setting) {
+	//DKDEBUGFUNC(filestring, setting);
 	if(has(setting,"[") && has(setting,"]")){
 		std::string::size_type temp = filestring.find(setting,0);
 #ifndef ANDROID
@@ -448,3 +498,44 @@ DKStringArray getSettingsFromString(const DKString& filestring, const DKString& 
 #endif
 }
 */
+
+DKString pointerToAddress(const void* pointer) {
+	//DKDEBUGFUNC(event);  //EXCESSIVE LOGGING
+	DKASSERT(pointer);
+
+	std::stringstream ss;
+	const void* address = static_cast<const void*>(pointer);
+#if WIN
+	ss << "0x" << address;
+#else 
+	ss << address;
+#endif
+	if (same("0xDDDDDDDD", ss.str())) {
+		DKERROR("ss = 0xDDDDDDDD\n");
+		return "";
+	}
+	return ss.str();
+}
+
+void* addressToPointer(const DKString& address) {
+	//DKDEBUGFUNC(address);  //EXCESSIVE LOGGING
+	DKASSERT(!address.empty());
+
+	void* pointer;
+	if (address.compare(0, 2, "0x") != 0 || address.size() <= 2 || address.find_first_not_of("0123456789abcdefABCDEF", 2) != std::string::npos) {
+		DKERROR("address:" + address + " is not a valid hex notation! \n");
+		return NULL;
+	}
+	//Convert a string of an address back into a pointer
+	std::stringstream ss;
+	ss << address.substr(2, address.size() - 2);
+	std::uint64_t tmp;
+	if (!(ss >> std::hex >> tmp)) {
+		DKERROR("address invalid! \n");
+		return NULL;
+	}
+	pointer = reinterpret_cast<void*>(tmp);
+	DKASSERT(pointer);
+	
+	return pointer;
+}

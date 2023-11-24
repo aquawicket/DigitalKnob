@@ -33,7 +33,7 @@
 
 #define _SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING //silence <codecvt> deprecation warnings
 
-//WARNING_DISABLE
+WARNING_DISABLE
 #if WIN
 #include "windows.h"
 #endif
@@ -48,10 +48,10 @@
 #include <locale>
 #include <stdio.h>
 #include <stdlib.h>
-//WARNING_ENABLE
+WARNING_ENABLE
 
 /*
-#ifdef _MSC_VER
+#ifdef _MSC_VER //Visual Studio Compiler
 #define strtoll _strtoi64
 #define strtoull _strtoui64
 #endif
@@ -67,6 +67,7 @@ bool has(const DKString& search, const DKString& forthis);
 int substr_count(const DKString& search, const DKString& forthis);
 
 // https://www.cplusplus.com/reference/string/to_string/
+DKString toString(const DKString& _str);
 DKString toString(const int& _int);
 DKString toString(const long& _long);
 DKString toString(const float& _float);
@@ -76,6 +77,7 @@ DKString toString(const unsigned long int& _ulongint);
 DKString toString(const unsigned long long int& _ulonglongint);
 
 DKString toString(const bool _bool);
+DKString toString(const char _char);
 DKString toString(const char* _charptr);
 DKString toString(const unsigned char* _uchar);
 DKString toString(void* _voidptr);
@@ -114,5 +116,8 @@ bool getSettingFromString(const DKString& str, const DKString& setting, DKString
 bool toStringArray(DKStringArray& arry, const DKString& str, const DKString& seperator);
 //bool ArrayToString(const DKStringArray& arry, DKString& str, const char* seperator);
 //DKStringArray getSettingsFromString(const DKString& filestring, const DKString& setting);
+
+DKString pointerToAddress(const void* pointer);
+void* addressToPointer(const DKString& address);
 
 #endif //DKString_H
