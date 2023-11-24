@@ -25,6 +25,7 @@ include_guard()
 
 
 # DISABLED FOR ALL TARGETS
+
 dk_disable(DKPlugin1)				# TODO
 dk_disable(DKPlugin2)				# TODO
 dk_disable(DKRmlAudio)				# build errors
@@ -34,10 +35,8 @@ dk_disable(DKRmlTestElements)		# build errors
 dk_disable(DKTemplateEventTest)		# DEPRECATED: using DKEventTargetTest instead
 dk_disable(DKWidget)				# DEPRECATED
 dk_disable(bgfx)					# TODO
-dk_disable(gradle)					# We don't need to build this from source
 dk_disable(java)					# TODO
 dk_disable(jpeg)					# DEPRECATED: using libjpeg_turbo instead
-dk_disable(librocket)				# OBSOLETE: replaced by rmlui
 dk_disable(libx11)					# TODO
 dk_disable(mingw32)					# DEPRECATED: migrated to msys2
 dk_disable(mingw64)					# DEPRECATED: migrated to msys2
@@ -82,6 +81,9 @@ dk_disable(DKSFMLWindow)		# requires sfml
 
 # doxygen (disabledO
 dk_disable(doxygen)
+
+# duk4vb (disabledO
+dk_disable(duk4vb)
 
 
 
