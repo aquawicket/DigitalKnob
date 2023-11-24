@@ -9,11 +9,6 @@
 ANDROID_dk_depend(opengles)
 ANDROID_dk_depend(opensles)
 ANDROID_dk_depend(libiconv)
-
-ANDROID_dk_depend(mesa-common-dev)
-ANDROID_dk_depend(libgl1-mesa-dev)
-ANDROID_dk_depend(libxrandr-dev)
-	
 if(IOS OR IOSSIM)
 	dk_depend(audio_toolbox)
 	dk_depend(av_foundation)
