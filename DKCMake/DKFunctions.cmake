@@ -3252,6 +3252,7 @@ function(dk_dependAll)
 	DKDEBUGFUNC(${ARGV})
 	set(DEPENDALL_FILE "")
 	
+	
 	if(IS_DIRECTORY ${DKIMPORTS})
 		file(GLOB allfiles RELATIVE "${DKIMPORTS}/" "${DKIMPORTS}/*")
 		foreach(each_file ${allfiles})
@@ -3261,13 +3262,13 @@ function(dk_dependAll)
 		endforeach()
     endif()
 	
-	# Find all DKPlugins Folders from digitalknob root
-	file(GLOB children RELATIVE ${DIGITALKNOB}/ ${DIGITALKNOB}/*)
+	# Find all DKPlugins Folders from DKBRANCH root
+	file(GLOB children RELATIVE ${DKBRANCH}/ ${DKBRANCH}/*)
   	foreach(child ${children})
-		if(EXISTS ${DIGITALKNOB}/${child}/DKPlugins)
-			file(GLOB plugins RELATIVE ${DIGITALKNOB}/${child}/DKPlugins/ ${DIGITALKNOB}/${child}/DKPlugins/*)
+		if(EXISTS ${DKBRANCH}/DKPlugins)
+			file(GLOB plugins RELATIVE ${DKBRANCH}/${child}/DKPlugins/ ${DKBRANCH}/${child}/DKPlugins/*)
 			foreach(plugin ${plugins})
-				if(EXISTS ${DIGITALKNOB}/${child}/DKPlugins/${plugin}/DKMAKE.cmake)
+				if(EXISTS ${DKBRANCH}/${child}/DKPlugins/${plugin}/DKMAKE.cmake)
 					if(NOT ${plugin} STREQUAL "_DKIMPORT")
 						set(DEPENDALL_FILE ${DEPENDALL_FILE} "dk_depend(${plugin})\n")
 					endif()
@@ -3275,6 +3276,21 @@ function(dk_dependAll)
 			endforeach()
 		endif()
   	endforeach()
+	
+	# Find all DKPlugins Folders from digitalknob root
+	#file(GLOB children RELATIVE ${DIGITALKNOB}/ ${DIGITALKNOB}/*)
+  	#foreach(child ${children})
+	#	if(EXISTS ${DIGITALKNOB}/${child}/DKPlugins)
+	#		file(GLOB plugins RELATIVE ${DIGITALKNOB}/${child}/DKPlugins/ ${DIGITALKNOB}/${child}/DKPlugins/*)
+	#		foreach(plugin ${plugins})
+	#			if(EXISTS ${DIGITALKNOB}/${child}/DKPlugins/${plugin}/DKMAKE.cmake)
+	#				if(NOT ${plugin} STREQUAL "_DKIMPORT")
+	#					set(DEPENDALL_FILE ${DEPENDALL_FILE} "dk_depend(${plugin})\n")
+	#				endif()
+	#			endif()
+	#		endforeach()
+	#	endif()
+  	#endforeach()
 	
 	# To exclude libraries, use dk_disable(lib) in your app DKMAKE.cmake file or in DKDisabled.cmake
 	string (REPLACE ";" "" DEPENDALL_FILE "${DEPENDALL_FILE}")
