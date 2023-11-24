@@ -52,9 +52,9 @@ dk_disable(sw-client)				# DEPRECATED: requested by leptonica but not required
 
 # Disabled for Android targets
 if(ANDROID)
-	#dk_disable(android)
-	#dk_disable(log)
-	#dk_disable(m)
+	dk_disable(android)
+	dk_disable(log)
+	dk_disable(m)
 	dk_disable(DKArchive)			# requires libarchive
 	dk_disable(DKCef)				# requires cef_binary
 	dk_disable(DKCefChild)			# requires cef_binary
