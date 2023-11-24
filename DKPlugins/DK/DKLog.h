@@ -46,7 +46,7 @@
 #endif
 //WARNING_ENABLE
 
-#define DK_ASSERT  1
+//#define DK_ASSERT  1
 #define DK_FATAL   2
 #define DK_ERROR   3
 #define DK_WARN    4
@@ -64,18 +64,16 @@
 #define   DKDEBUG(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_DEBUG);
 #define DKVERBOSE(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_VERBOSE);
 #define DKREDINFO(message) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_INFO, DKERROR_COLOR);
+#define    DKTODO() DKLog::Log(__FILE__, __LINE__, __FUNCTION__, DKString()+"TODO: "+__FUNCTION__+"()\n", DK_WARN);
+#define    DKDEPRECATED() DKLog::Log(__FILE__, __LINE__, __FUNCTION__, DKString()+"DEPRECATED: "+__FUNCTION__+"()\n", DK_WARN);
 //#define DKWARNRTN(message, rtnval) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, message, DK_WARN, DKWARN_COLOR, rtnval);
 
 #if WIN
-//#define DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, ...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
 #define DKDEBUGRETURN1(__FILE__, __LINE__, __FUNCTION__, ...) DebugReturn(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
-//#define DKDEBUGFUNC(...) DKDEBUGFUNC1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
 #define DKDEBUGRETURN(...) DKDEBUGRETURN1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
 #elif APPLE || LINUX || ANDROID || EMSCRIPTEN
-//#define DKDEBUGFUNC(...) DebugFunc(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, ##__VA_ARGS__)
 #define DKDEBUGRETURN(...) DebugReturn(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, ##__VA_ARGS__)
 #else
-//#define DKDEBUGFUNC(...) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, "", DK_DEBUG)
 #define DKDEBUGRETURN(...) DKLog::Log(__FILE__, __LINE__, __FUNCTION__, "", DK_DEBUG)
 #endif
 
@@ -332,20 +330,5 @@ public:
 //////////////////////////////////////////////////////////////////////////////////////
 
 
-
-/*
-template <typename... Args>
-void Test(const char* file, int line, const char* func, const DKString& names, Args&&... args){
-	DKString str = "test";
-	DKLog::Log(file, line, func, str, DKDEBUG);
-}
-#define TEST1(__FILE__, __LINE__, __FUNCTION__, ...)  Test(__FILE__, __LINE__, __FUNCTION__, #__VA_ARGS__, __VA_ARGS__)
-#define TEST(...) TEST1(__FILE__, __LINE__, __FUNCTION__, __VA_ARGS__)
-void Runit(){
-	TEST(123);
-	TEST("123");
-	TEST();
-}
-*/
 
 #endif //DKLog_H
