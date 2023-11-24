@@ -49,6 +49,29 @@ dk_disable(simple-getch)			# DEPRECATED: kept for reference
 dk_disable(sw)						# DEPRECATED: requested by leptonica but not required
 dk_disable(sw-client)				# DEPRECATED: requested by leptonica but not required
 
+# OpenSceneGraph (disabled)
+dk_disable(openscenegraph)
+dk_disable(osgaudio)			# requires openscenegraph
+dk_disable(osgbullet)			# requires openscenegraph, bullet3, osgworks
+dk_disable(osgrmlui)			# requires openscenegraph
+dk_disable(osgworks)			# requires openscenegraph
+dk_disable(DKOsgAudio)			# requires openscenegraph
+dk_disable(DKOsgCef)			# requires openscenegraph
+dk_disable(DKOsgLights)			# requires openscenegraph
+dk_disable(DKOsgManipulator)	# requires openscenegraph
+dk_disable(DKOsgModel)			# requires openscenegraph
+dk_disable(DKOsgNotify)			# requires openscenegraph
+dk_disable(DKOsgPhysics)		# requires openscenegraph
+dk_disable(DKOsgPicker)			# requires openscenegraph
+dk_disable(DKOsgRml)			# requires openscenegraph
+dk_disable(DKOsgStats)			# requires openscenegraph
+dk_disable(DKOsgTerrain)		# requires openscenegraph
+dk_disable(DKOsgVideo)			# requires openscenegraph
+dk_disable(DKOsgViewer)			# requires openscenegraph 
+dk_disable(DKOsgWidget)			# requires openscenegraph 
+dk_disable(DKOsgWindow)			# requires openscenegraph 
+dk_disable(DKSdlOsg)			# requires openscenegraph, sdl
+
 
 # Disabled for Android targets
 if(ANDROID)
@@ -59,25 +82,9 @@ if(ANDROID)
 	dk_disable(DKHandles)			# could not find DKHandles
 	dk_disable(DKMidi)				# requires rtmidi
 	dk_disable(DKMySql)				# requires curl
-	dk_disable(DKOfWindow)			# requires openframeworks
-	dk_disable(DKOsgAudio)			# requires openscenegraph
-	dk_disable(DKOsgCef)			# requires openscenegraph
-	dk_disable(DKOsgLights)			# requires openscenegraph
-	dk_disable(DKOsgManipulator)	# requires openscenegraph
-	dk_disable(DKOsgModel)			# requires openscenegraph
-	dk_disable(DKOsgNotify)			# requires openscenegraph
-	dk_disable(DKOsgPhysics)		# requires openscenegraph
-	dk_disable(DKOsgPicker)			# requires openscenegraph
-	dk_disable(DKOsgRml)			# requires openscenegraph
-	dk_disable(DKOsgStats)			# requires openscenegraph
-	dk_disable(DKOsgTerrain)		# requires openscenegraph
-	dk_disable(DKOsgVideo)			# requires openscenegraph
-	dk_disable(DKOsgViewer)			# requires openscenegraph 
-	dk_disable(DKOsgWidget)			# requires openscenegraph 
-	dk_disable(DKOsgWindow)			# requires openscenegraph 
+	dk_disable(DKOfWindow)			
 	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKSdlCef)			# requires cef_binary
-	dk_disable(DKSdlOsg)			# requires openscenegraph
 	dk_disable(DKSdlWaave)			# requires waave
 	dk_disable(DKSdlWav)			# build errors
 	dk_disable(DKSFMLRml)			# requires sfml
@@ -127,11 +134,7 @@ if(ANDROID)
 	dk_disable(opencv)				# build errors
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	dk_disable(openmw)
-	dk_disable(openscenegraph)
-	dk_disable(osgaudio)			# requires openscenegraph
-	dk_disable(osgbullet)			# requires bullet3, osgworks
-	dk_disable(osgrmlui)
-	dk_disable(osgworks)			# requires openscenegraph
+	
 	dk_disable(poco)				# error: Compiler does not support C++14
 	dk_disable(podofo)				# error: can't find "fontconfig/fontconfig.h"
 	dk_disable(rmlui-d3d11)
@@ -171,21 +174,6 @@ if(EMSCRIPTEN)
 	dk_disable(DKMidi)
 	dk_disable(DKMySql)
 	dk_disable(DKOfWindow)
-	dk_disable(DKOsgAudio)
-	dk_disable(DKOsgCef)
-	dk_disable(DKOsgLights)
-	dk_disable(DKOsgManipulator)
-	dk_disable(DKOsgModel)
-	dk_disable(DKOsgNotify)
-	dk_disable(DKOsgPhysics)
-	dk_disable(DKOsgPicker)
-	dk_disable(DKOsgRml)
-	dk_disable(DKOsgStats)
-	dk_disable(DKOsgTerrain)
-	dk_disable(DKOsgVideo)
-	dk_disable(DKOsgViewer)
-	dk_disable(DKOsgWidget)
-	dk_disable(DKOsgWindow)
 	dk_disable(DKOcr)
 	dk_disable(DKRestart)
 	dk_disable(DKSdlAudio)
@@ -252,10 +240,6 @@ if(EMSCRIPTEN)
 	dk_disable(opencv)				# ittnotify_config.h:376:12: error: call to undeclared function '__TBB_machine_fetchadd4'
 	dk_disable(openframeworks)
 	dk_disable(opus)
-	dk_disable(osgaudio)			# missing osg cmake includes
-	dk_disable(osgbullet)			# missing osg cmake includes
-	dk_disable(osgrmlui)
-	dk_disable(osgworks)			# missing osg cmake includes
 	dk_disable(podofo)				# requires fontconfig
 	dk_disable(quartz_core)
 	dk_disable(rmlui-d3d11)
@@ -286,24 +270,8 @@ if(IOS OR IOSSIM)
 	dk_disable(DKJerryscript)		# requires jerryscript
 	dk_disable(DKMidi)				# requires rtmidi
 	dk_disable(DKOfWindow)			# requires openframeworks
-	dk_disable(DKOsgAudio)			# requires openscenegraph
-	dk_disable(DKOsgCef)			# requires openscenegraph
-	dk_disable(DKOsgLights)			# requires openscenegraph
-	dk_disable(DKOsgManipulator)	# requires openscenegraph
-	dk_disable(DKOsgModel)			# requires openscenegraph
-	dk_disable(DKOsgNotify)			# requires openscenegraph
-	dk_disable(DKOsgPhysics)		# requires openscenegraph
-	dk_disable(DKOsgPicker)			# requires openscenegraph
-	dk_disable(DKOsgRml)			# requires openscenegraph
-	dk_disable(DKOsgStats)			# requires openscenegraph
-	dk_disable(DKOsgTerrain)		# requires openscenegraph
-	dk_disable(DKOsgVideo)			# requires openscenegraph
-	dk_disable(DKOsgViewer)			# requires openscenegraph 
-	dk_disable(DKOsgWidget)			# requires openscenegraph 
-	dk_disable(DKOsgWindow)			# requires openscenegraph 
 	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKSdlCef)			# requires cef_binary
-	dk_disable(DKSdlOsg)			# requires openscenegraph 
 	dk_disable(DKSdlWaave)			# requires waave
 	dk_disable(DKSdlWav)			# build errors
 	dk_disable(DKSFMLRml)			# requires sfml
@@ -347,12 +315,7 @@ if(IOS OR IOSSIM)
 	dk_disable(openblas)			# CMake Error: if given arguments: "STREQUAL" "CORE2" Unknown arguments specified
 	dk_disable(opencv)				# CMAKE_SYSTEM_PROCESSOR is not defined
 	dk_disable(openframeworks)		# error: tesselator.h: No such file or directory
-	dk_disable(openscenegraph)		# CMake errors
 	dk_disable(opensles)			# could not locate OpenSLES Library
-	dk_disable(osgaudio)			# requires openscenegraph
-	dk_disable(osgbullet)			# requires osgworks
-	dk_disable(osgrmlui)			# requires openscenegraph
-	dk_disable(osgworks)			# requires openscenegraph
 	dk_disable(poco)
 	dk_disable(podofo)				# CMake errors
 	dk_disable(rmlui-d3d11)
@@ -383,12 +346,6 @@ if(LINUX)
 	dk_disable(DKHook)				# 'read' was not declared in this scope
 	dk_disable(DKJerryscript)		# requires jerryscript
 	dk_disable(DKOfWindow)			# requires openframeworks
-	dk_disable(DKOsgAudio)			# requires freealut
-	dk_disable(DKOsgCef)			# build errors
-	dk_disable(DKOsgPhysics)		# requires bullet3
-	dk_disable(DKOsgStats)			# build errors
-	dk_disable(DKOsgVideo)			# TODO
-	dk_disable(DKOsgWidget)			# build errors
 	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKSdlWaave)			# requires waave
 	dk_disable(DKSdlWav)			# build errors
@@ -418,10 +375,6 @@ if(LINUX)
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(nasm)
 	dk_disable(openframeworks)		# error: tesselator.h: No such file or directory
-	dk_disable(osgaudio)			# can't find libosg_osgAudiod.a
-	dk_disable(osgbullet)			# requires osgworks
-	dk_disable(osgrmlui)
-	dk_disable(osgworks)			# error: osgUtil::Optimizer::MergeGeometryVisitor has no member named 'mergeGeode'
 	dk_disable(podofo)				# build errors
 	dk_disable(rmlui-d3d11)
 	dk_disable(sdl_rtf)
@@ -434,12 +387,6 @@ endif(LINUX)
 # Disabled for Mac targets
 if(MAC) 
 	dk_disable(DKOfWindow)			# requires openframeworks
-	dk_disable(DKOsgAudio)			# requires freealut
-	dk_disable(DKOsgCef)			# build errors
-	dk_disable(DKOsgPhysics)		# requires bullet3
-	dk_disable(DKOsgStats)			# build errors
-	dk_disable(DKOsgVideo)			# TODO
-	dk_disable(DKOsgWidget)			# build errors
 	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKSdlWaave)			# requires waave
 	dk_disable(DKSdlWav)			# build errors
@@ -464,11 +411,6 @@ if(MAC)
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(mlocate)				# Unable to locate a Java Runtime that supports apt
 	dk_disable(openblas)
-	dk_disable(openframeworks)		# fatal error: /utils/ofConstants.h:183     'GL/glew.h' file not found
-	dk_disable(osgaudio)			# opengl identifier errors
-	dk_disable(osgbullet)			# requires osgworks
-	dk_disable(osgrmlui)
-	dk_disable(osgworks)			# Error: 'osgworks-master/src/osgwTools/GeometeryModifier.cpp:64' no member named 'mergeGeode'
 	dk_disable(podofo)				# error: expected ';' at end of declaration
 	dk_disable(rmlui-d3d11)
 	dk_disable(rtmidi)				# Undefined symbols for architecture x86_64
@@ -487,12 +429,6 @@ if(RASPBERRY)
 	dk_disable(DKJerryscript)		# requires jerryscript
 	dk_disable(DKMidi)				# requires rtmidi
 	dk_disable(DKOfWindow)			# requires openframeworks
-	dk_disable(DKOsgAudio)			# requires osgaudio
-	dk_disable(DKOsgCef)			# build errors
-	dk_disable(DKOsgPhysics)		# requires bullet3
-	dk_disable(DKOsgStats)			# build errors
-	dk_disable(DKOsgVideo)			# TODO
-	dk_disable(DKOsgWidget)			# build errors
 	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKSdlWaave)			# requires waave
 	dk_disable(DKSdlWav)			# build errors
@@ -530,10 +466,6 @@ if(RASPBERRY)
 	dk_disable(openframeworks)		# error: cannot find opengles
 	dk_disable(openjdk)
 	dk_disable(opus)
-	dk_disable(osgaudio)
-	dk_disable(osgbullet)			# requires osgworks
-	dk_disable(osgrmlui)
-	dk_disable(osgworks)
 	dk_disable(rmlui-d3d11)
 	dk_disable(rtmidi)
 	dk_disable(sdl-gpu)
@@ -563,23 +495,7 @@ if(WIN)
 	dk_disable(boost)				# error: cl command not found
 	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKOfWindow)			# requires openframeworks
-	dk_disable(DKOsgAudio)			# requires freealut
-	dk_disable(DKOsgCef)			# build errors
-	dk_disable(DKOsgLights)			# requires openscenegraph
-	dk_disable(DKOsgManipulator)	# requires openscenegraph
-	dk_disable(DKOsgModel)			# requires openscenegraph
-	dk_disable(DKOsgNotify)			# requires openscenegraph
-	dk_disable(DKOsgPhysics)		# requires bullet3
-	dk_disable(DKOsgPicker)			# requires openscenegraph
-	dk_disable(DKOsgRml)			# requires openscenegraph
-	dk_disable(DKOsgStats)			# build errors
-	dk_disable(DKOsgTerrain)		# requires openscenegraph
-	dk_disable(DKOsgVideo)			# TODO
-	dk_disable(DKOsgViewer)			# requires openscenegraph
-	dk_disable(DKOsgWidget)			# build errors
-	dk_disable(DKOsgWindow)			# requires openscenegraph
 	dk_disable(DKScreenRecorder)    # requires opencv
-	dk_disable(DKSdlOsg)			# requires openscenegraph
 	dk_disable(DKSdlVideo)			# error: 'av_mallocz_array': identifier not found
 	dk_disable(DKSdlWaave)			# requires waave
 	dk_disable(DKSdlWav)			# build errors
@@ -605,11 +521,6 @@ if(WIN)
 	dk_disable(opencv)
 	dk_disable(openblas)
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
-	dk_disable(openscenegraph)
-	dk_disable(osgaudio)			# openalpp\AudioBase.cpp(106,54): error C2440: '=': cannot convert from 'ALCcontext *' to 'openalpp::ALCcontext_struct *'
-	dk_disable(osgbullet)			# requires osgworks
-	dk_disable(osgrmlui)
-	dk_disable(osgworks)			# osgwTools\GeometryModifier.cpp(64,13): error C2039: 'mergeGeode': is not a member of 'osgUtil::Optimizer::MergeGeometryVisitor'
 	dk_disable(php-src)
 	dk_disable(poco)
 	dk_disable(python3)
