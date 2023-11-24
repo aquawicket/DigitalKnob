@@ -30,10 +30,11 @@ else
     echo "UNKNOWN OS ($OSTYPE)"
 fi
 
-#TODO: The branch should default to Development, unless this file can find itself in a digitalknob/branch_name folder.  Then it should use branch_name
+#TODO: The BRANCH variable should default to Development, unless this file can find itself in a digitalknob/branch_name folder.  Then it should use branch_name
 # echo the current directory
 $ echo "current directory"
 $ echo "$PWD"
+#
 
 BRANCH="Development"
 #BRANCH="CPP_DOM"
@@ -296,7 +297,7 @@ while :
 	find . -name "*.tmp" -delete
 	find . -name "*.TMP" -delete
 		
-	if [[ "$OSTYPE" == "darwin"* ]]; then
+	if [[ "$OSTYPE" == "darwin"* ]]; then	# Apple
 		#CLANG_PATH=$(which clang)
 		#CLANGPP_PATH=$(which clang++)
 		#export CC="$CLANG_PATH"
@@ -352,7 +353,7 @@ while :
 			#xcodebuild -configuration Release build
 			cmake --build $DKPATH/DKApps/$APP/$OS --target ${APP}_APP --config Debug
 		fi
-	else #Linux, Raspberry Pi, Android
+	else	# Linux, Raspberry Pi, Android
 		$SUDO $APT -y install cmake
 		$SUDO $APT -y install gcc
 		$SUDO $APT -y install g++
@@ -459,4 +460,4 @@ while :
 done
 
 
-exec $SHELL #keep terminal open
+exec $SHELL		# keep terminal open

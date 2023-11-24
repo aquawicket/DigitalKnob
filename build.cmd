@@ -1,11 +1,12 @@
 :: Windows Batch file DK builder
 @echo off
-if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
+if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
 
-::TODO: The branch should default to Development, unless this file can find itself in a digitalknob/branch_name folder.  Then it should use branch_name
+::TODO: The BRANCH variable should default to Development, unless this file can find itself in a digitalknob/branch_name folder.  Then it should use branch_name
 :: echo the current directory
 echo current directory
 echo %~dp0
+::
 
 set "BRANCH=Development"
 ::set "BRANCH=CPP_DOM"
