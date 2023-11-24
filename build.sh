@@ -32,6 +32,7 @@ fi
 
 #TODO: The branch should default to Development, unless this file can find itself in a digitalknob/branch_name folder.  Then it should use branch_name
 # echo the current directory
+$ echo "current directory"
 $ echo "$PWD"
 
 BRANCH="Development"
