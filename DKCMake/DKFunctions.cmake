@@ -3120,7 +3120,7 @@ function(dk_runDepends plugin)
 	unset(depends_script)
 	unset(index)
 	
-	set(keepCommands "if;IF;else;ELSE;find_library;FIND_LIBRARY;return;RETURN;dk_disable;dk_set;dk_makeDirectory;dk_findLibrary;dk_require;dk_undepend")
+	set(keepCommands "if;IF;else;ELSE;find_library;FIND_LIBRARY;return;RETURN;dk_disable;dk_set;dk_makeDirectory;dk_require;dk_undepend")
 	set(KEEPLINE 0)
 	foreach(line ${lines})
 		
@@ -3150,7 +3150,7 @@ function(dk_runDepends plugin)
 		endif()
 	endforeach()
 	
-	set(keepCommands "if;IF;else;ELSE;find_library;FIND_LIBRARY;return;RETURN;dk_enable;dk_disable;dk_depend;dk_set;message;dk_error;dk_warn;dk_info;dk_debug;dk_verbose;dk_trace;dk_makeDirectory;dk_findLibrary;dk_require;dk_undepend")
+	set(keepCommands "if;IF;else;ELSE;find_library;FIND_LIBRARY;return;RETURN;dk_enable;dk_disable;dk_depend;dk_set;message;dk_error;dk_warn;dk_info;dk_debug;dk_verbose;dk_trace;dk_makeDirectory;dk_require;dk_undepend")
 	set(KEEPLINE 0)
 	foreach(line ${lines})
 	
