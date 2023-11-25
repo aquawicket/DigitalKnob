@@ -497,7 +497,7 @@ while :
 		cmake --build $DKPATH/DKApps/$APP/$OS/Release --target ${TARGET} --config Release
 	fi
 	
-	$ echo "******* Done building $APP - $OS - $TYPE *******"	
+	echo "******* Done building $APP - $OS - $TYPE *******"	
 	
     unset APP
 	unset OS
