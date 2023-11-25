@@ -3,12 +3,23 @@
 # to run this script requires privledges
 # > chmod 777 build.sh
 
-if [ -e /proc/device-tree/model ]; then
-	MODEL=$(tr -d '\0' </proc/device-tree/model)
+# If the current folder matches the current branch set BRANCH, default to Development
+FOLDER="$(basename $(pwd))"
+BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+if [[ "$BRANCH" == "$FOLDER" ]]; then
+	BRANCH="$FOLDER"
+else
+	BRANCH="Development"
 fi
+echo "BRANCH = $BRANCH"
+
 
 SUDO="sudo"
 APT="apt-get"
+
+if [ -e /proc/device-tree/model ]; then
+	MODEL=$(tr -d '\0' </proc/device-tree/model)
+fi
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	DIGITALKNOB="/home/$USER/digitalknob"
@@ -30,13 +41,6 @@ else
     echo "UNKNOWN OS ($OSTYPE)"
 fi
 
-#TODO: The branch should default to Development, unless this file can find itself in a digitalknob/branch_name folder.  Then it should use branch_name
-# echo the current directory
-$ echo "current directory"
-$ echo "$PWD"
-
-#BRANCH="Development"
-BRANCH="CPP_DOM"
 
 DKPATH="$DIGITALKNOB/$BRANCH"
 DKCMAKE="$DIGITALKNOB/$BRANCH/DKCMake"
@@ -296,7 +300,7 @@ while :
 	find . -name "*.tmp" -delete
 	find . -name "*.TMP" -delete
 		
-	if [[ "$OSTYPE" == "darwin"* ]]; then
+	if [[ "$OSTYPE" == "darwin"* ]]; then	# Apple
 		#CLANG_PATH=$(which clang)
 		#CLANGPP_PATH=$(which clang++)
 		#export CC="$CLANG_PATH"
@@ -352,7 +356,7 @@ while :
 			#xcodebuild -configuration Release build
 			cmake --build $DKPATH/DKApps/$APP/$OS --target ${APP}_APP --config Debug
 		fi
-	else #Linux, Raspberry Pi, Android
+	else	# Linux, Raspberry Pi, Android
 		$SUDO $APT -y install cmake
 		$SUDO $APT -y install gcc
 		$SUDO $APT -y install g++
@@ -451,10 +455,12 @@ while :
 		fi
 	fi
 
+	$ echo "******* Done building $APP - $OS - $TYPE *******"	
+	
     unset APP
 	unset OS
 	unset TYPE
 done
 
 
-exec $SHELL #keep terminal open
+exec $SHELL		# keep terminal open
