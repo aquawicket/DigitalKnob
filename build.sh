@@ -135,7 +135,7 @@ while :
 					# brew tap homebrew/core
 					# brew install git
 				else
-					$SUDO $APT -y install git
+				  validate_package git
 				fi
 				
 				
