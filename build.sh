@@ -14,8 +14,31 @@ fi
 echo "BRANCH = $BRANCH"
 
 
-SUDO="sudo"
-APT="apt-get"
+if command -v sudo &> /dev/null
+then
+    SUDO="sudo"
+fi
+echo "SUDO = $SUDO"
+
+if command -v apt-get &> /dev/null
+then
+    APT="apt-get"
+fi
+echo "APT = $APT"
+
+if command -v apt &> /dev/null
+then
+    APT="apt"
+fi
+echo "APT = $APT"
+
+if command -v pkg &> /dev/null
+then
+    APT="pkg"
+fi
+echo "APT = $APT"
+
+
 
 if [ -e /proc/device-tree/model ]; then
 	MODEL=$(tr -d '\0' </proc/device-tree/model)
