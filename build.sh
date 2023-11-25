@@ -58,8 +58,6 @@ elif [[ "$OSTYPE" == "freebsd"* ]]; then
 	echo "TODO: freebsd builder incomplete"
 elif [[ "$OSTYPE" == "linux-android" ]]; then
 	DIGITALKNOB="/data/data/com.termux/files/home/digitalknob"
-	SUDO=""
-	APT="apt"
 else
     echo "UNKNOWN OS ($OSTYPE)"
 fi
@@ -200,6 +198,8 @@ while :
 		options=("mac64" "ios32" "ios64" "iossim32" "iossim64" "android32" "android64" "emscripten" "Clear Screen" "Exit")
 	elif [[ "$OSTYPE" == "linux-android" ]]; then
 		options=("android32" "android64" "Clear Screen" "Exit")
+	elif [[ "$OSTYPE" == "msys" ]]; then
+		options=("win32" "win64" "android32" "android64" "Clear Screen" "Exit")
 	else
 		echo "UNKNOWN OS TYPE ($OSTYPE)"
 		options=("Exit")
@@ -207,24 +207,19 @@ while :
 	select opt in "${options[@]}"
 	do
 		case $opt in
-			"linux32")
+			"android32")
 				echo "$opt"
-				OS="linux32"
+				OS="android32"
 				break
 				;;
-			"linux64")
+			"android64")
 				echo "$opt"
-				OS="linux64"
+				OS="android64"
 				break
 				;;
-			"mac32")
+			"emscripten")
 				echo "$opt"
-				OS="mac32"
-				break
-				;;
-			"mac64")
-				echo "$opt"
-				OS="mac64"
+				OS="emscripten"
 				break
 				;;
 			"ios32")
@@ -247,24 +242,39 @@ while :
 				OS="iossim64"
 				break
 				;;
+			"linux32")
+				echo "$opt"
+				OS="linux32"
+				break
+				;;
+			"linux64")
+				echo "$opt"
+				OS="linux64"
+				break
+				;;
+			"mac32")
+				echo "$opt"
+				OS="mac32"
+				break
+				;;
+			"mac64")
+				echo "$opt"
+				OS="mac64"
+				break
+				;;
 			"raspberry32")
 				echo "$opt"
 				OS="raspberry32"
 				break
 				;;
-			"android32")
+			"win32")
 				echo "$opt"
-				OS="android32"
+				OS="win32"
 				break
 				;;
-			"android64")
+			"win64")
 				echo "$opt"
-				OS="android64"
-				break
-				;;
-			"emscripten")
-				echo "$opt"
-				OS="emscripten"
+				OS="win64"
 				break
 				;;
 			"Clear Screen")
@@ -379,7 +389,7 @@ while :
 			#xcodebuild -configuration Release build
 			cmake --build $DKPATH/DKApps/$APP/$OS --target ${APP}_APP --config Debug
 		fi
-	else	# Linux, Raspberry Pi, Android
+	else	# Linux, Raspberry Pi, Android, Windows
 		$SUDO $APT -y install cmake
 		$SUDO $APT -y install gcc
 		$SUDO $APT -y install g++
