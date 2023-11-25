@@ -479,11 +479,11 @@ while :
 		TARGET=${APP}_APP
 	fi
 	if [[ "$OS" == "win32" ]]; then
-		cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
+		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
 		TARGET=${APP}_APP
 	fi
 	if [[ "$OS" == "win64" ]]; then
-		cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
+		cmake -G "MSYS Makefiles" -DCMAKE_C_COMPILER="C:/Users/Administrator/digitalknob/Development/3rdParty/msys2-x86_64-20221216/mingw64/bin/gcc.exe" -DCMAKE_CXX_COMPILER="C:/Users/Administrator/digitalknob/Development/3rdParty/msys2-x86_64-20221216/mingw64/bin/g++.exe" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
 		TARGET=${APP}_APP
 	fi
 	
