@@ -18,25 +18,21 @@ if command -v sudo &> /dev/null
 then
     SUDO="sudo"
 fi
-echo "SUDO = $SUDO"
 
 if command -v apt-get &> /dev/null
 then
     APT="apt-get"
 fi
-echo "APT = $APT"
 
 if command -v apt &> /dev/null
 then
     APT="apt"
 fi
-echo "APT = $APT"
 
 if command -v pkg &> /dev/null
 then
     APT="pkg"
 fi
-echo "APT = $APT"
 
 
 
@@ -434,6 +430,14 @@ while :
 				TARGET=${APP}_APP
 			fi
 			if [[ "$OS" == "raspberry64" ]]; then
+				cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=OFF -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE
+				TARGET=${APP}_APP
+			fi
+			if [[ "$OS" == "win32" ]]; then
+				cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=OFF -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE
+				TARGET=${APP}_APP
+			fi
+			if [[ "$OS" == "win64" ]]; then
 				cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=OFF -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE
 				TARGET=${APP}_APP
 			fi
