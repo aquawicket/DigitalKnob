@@ -3,61 +3,98 @@
 # to run this script requires privledges
 # > chmod 777 build.sh
 
-# If the current folder matches the current branch set BRANCH, default to Development
-FOLDER="$(basename $(pwd))"
-BRANCH="$(git rev-parse --abbrev-ref HEAD)"
-if [[ "$BRANCH" == "$FOLDER" ]]; then
-	BRANCH="$FOLDER"
-else
-	BRANCH="Development"
+
+###### validate_branch() ######
+validate_branch() {
+  # If the current folder matches the current branch set BRANCH, default to Development
+	FOLDER="$(basename $(pwd))"
+	BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+	if [[ "$BRANCH" == "$FOLDER" ]]; then
+		BRANCH="$FOLDER"
+	else
+		BRANCH="Development"
+	fi
+	echo "BRANCH = $BRANCH"
+}
+validate_branch
+
+###### exists(<command>) ######
+exists() {
+  command -v "$1" >/dev/null 2>&1
+}
+
+###### install(<package>) ######
+install() {
+	echo "installing $1"
+	if exists apt; then
+		$SUDO apt -y install $1
+	elif exists apt-get; then
+		$SUDO apt-get -y install $1
+	elif exists pkg; then
+		$SUDO pkg install $1
+	elif exists pacman; then
+		$SUDO pacman -S $1
+	elif exists brew; then
+		$SUDO brew install $1
+	else
+		echo "ERROR: no package managers found"
+	fi
+}
+
+### validate_package(<package>) ###
+validate_package() {
+	if ! exists $1; then
+		install $1
+	fi
+}
+
+### clear_cmake_cache() ###
+clear_cmake_cache() {
+	echo "Clearing CMake cache . . ."
+	cd $DIGITALKNOB
+	find . -name "CMakeCache.*" -delete
+	rm -rf `find . -type d -name CMakeFiles`
+}
+
+### delete_temp_files() ###
+delete_temp_files() {
+	echo "Deleting .TMP files . . ."
+	cd $DIGITALKNOB
+	find . -name "*.tmp" -delete
+	find . -name "*.TMP" -delete
+}
+
+### validate_ostype() ###
+validate_ostype() {
+	if [ -e /proc/device-tree/model ]; then
+		MODEL=$(tr -d '\0' </proc/device-tree/model)
+	fi
+
+	if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+		DIGITALKNOB="/home/$USER/digitalknob"
+	elif [[ "$OSTYPE" == "darwin"* ]]; then
+		DIGITALKNOB="/Users/$USER/digitalknob"
+	elif [[ "$OSTYPE" == "cygwin" ]]; then
+		DIGITALKNOB="C:/Users/$USERNAME/digitalknob"
+	elif [[ "$OSTYPE" == "msys" ]]; then
+		DIGITALKNOB="C:/Users/$USERNAME/digitalknob"
+	elif [[ "$OSTYPE" == "win32" ]]; then #I'm not sure this can happen
+		DIGITALKNOB="C:/Users/$USERNAME/digitalknob" 
+	elif [[ "$OSTYPE" == "freebsd"* ]]; then
+		echo "TODO: freebsd builder incomplete"
+	elif [[ "$OSTYPE" == "linux-android" ]]; then
+		DIGITALKNOB="/data/data/com.termux/files/home/digitalknob"
+	else
+		echo "UNKNOWN OS ($OSTYPE)"
+	fi
+}
+
+validate_ostype
+
+# validata sudo
+if exists sudo; then
+	SUDO="sudo"
 fi
-echo "BRANCH = $BRANCH"
-
-
-if command -v sudo &> /dev/null
-then
-    SUDO="sudo"
-fi
-
-if command -v apt-get &> /dev/null
-then
-    APT="apt-get"
-fi
-
-if command -v apt &> /dev/null
-then
-    APT="apt"
-fi
-
-if command -v pkg &> /dev/null
-then
-    APT="pkg"
-fi
-
-
-
-if [ -e /proc/device-tree/model ]; then
-	MODEL=$(tr -d '\0' </proc/device-tree/model)
-fi
-
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-	DIGITALKNOB="/home/$USER/digitalknob"
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-	DIGITALKNOB="/Users/$USER/digitalknob"
-elif [[ "$OSTYPE" == "cygwin" ]]; then
-	DIGITALKNOB="C:/Users/$USERNAME/digitalknob"
-elif [[ "$OSTYPE" == "msys" ]]; then
-	DIGITALKNOB="C:/Users/$USERNAME/digitalknob"
-elif [[ "$OSTYPE" == "win32" ]]; then #I'm not sure this can happen
-	DIGITALKNOB="C:/Users/$USERNAME/digitalknob" 
-elif [[ "$OSTYPE" == "freebsd"* ]]; then
-	echo "TODO: freebsd builder incomplete"
-elif [[ "$OSTYPE" == "linux-android" ]]; then
-	DIGITALKNOB="/data/data/com.termux/files/home/digitalknob"
-else
-    echo "UNKNOWN OS ($OSTYPE)"
-fi
-
 
 DKPATH="$DIGITALKNOB/$BRANCH"
 DKCMAKE="$DIGITALKNOB/$BRANCH/DKCMake"
@@ -320,178 +357,146 @@ while :
 		REPLY=
 	done
 	
-	cd $DIGITALKNOB
-	echo Deleteing CMake cache . . .
-	find . -name "CMakeCache.*" -delete
-	rm -rf `find . -type d -name CMakeFiles`
+	clear_cmake_cache
+	delete_temp_files
+		
+	validate_package which
+	validate_package cmake
+	validate_package gcc
+	validate_package g++
+
+	GCC_PATH=$(which gcc)
+	GPP_PATH=$(which g++)
+	export CC="$GCC_PATH"
+	export CXX="$GPP_PATH"
+	echo "GCC_PATH = $GCC_PATH"
+	echo "GPP_PATH = $GPP_PATH"
 	
-	echo Deleteing .tmp files . . .
-	find . -name "*.tmp" -delete
-	find . -name "*.TMP" -delete
-		
-	if [[ "$OSTYPE" == "darwin"* ]]; then	# Apple
-		#CLANG_PATH=$(which clang)
-		#CLANGPP_PATH=$(which clang++)
-		#export CC="$CLANG_PATH"
-		#export CXX="$CLANGPP_PATH"
-		#echo "CLANG_PATH = $CLANG_PATH"
-		#echo "CLANGPP_PATH = $CLANGPP_PATH"
-		#brew install cmake		
-		mkdir $DKPATH/DKApps/$APP/$OS
-		cd $DKPATH/DKApps/$APP/$OS
-		
-		if [[ "$OS" == "mac32" ]]; then
-			cmake -G "Xcode" -DMAC_32=ON -DCMAKE_OSX_ARCHITECTURES=i686 -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DSTATIC=ON $DKCMAKE
-		fi
-		if [[ "$OS" == "mac64" ]]; then
-			cmake -G "Xcode" -DMAC_64=ON -DCMAKE_OSX_ARCHITECTURES=x86_64 -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DSTATIC=ON $DKCMAKE
-		fi
-		if [[ "$OS" == "ios32" ]]; then
-			cmake -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake -DPLATFORM=OS -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DSTATIC=ON -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
-		fi
-		if [[ "$OS" == "ios64" ]]; then
-			cmake -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake -DPLATFORM=OS64 -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DSTATIC=ON -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
-		fi
-		if [[ "$OS" == "iossim32" ]]; then
-			cmake -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake -DPLATFORM=SIMULATOR -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DSTATIC=ON -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
-		fi
-		if [[ "$OS" == "iossim64" ]]; then
-			cmake -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake -DPLATFORM=SIMULATOR64 -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DSTATIC=ON -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
-		fi
-		if [[ "$OS" == "android32" ]]; then
-			ANDROID_API="31"
-			ANDROID_NDK_BUILD="23.1.7779620"
-			ANDROID_NDK="$DKPATH/3rdParty/android-sdk/ndk/$ANDROID_NDK_BUILD"
-			cmake -G "Unix Makefiles" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=$ANDROID_API -DANDROID-NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DRELEASE=OFF -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
-			TARGET="main"
-		fi
-		if [[ "$OS" == "android64" ]]; then
-			ANDROID_API="31"
-			ANDROID_NDK_BUILD="23.1.7779620"
-			ANDROID_NDK="$DKPATH/3rdParty/android-sdk/ndk/$ANDROID_NDK_BUILD"
-			cmake -G "Unix Makefiles" -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=$ANDROID_API -DANDROID-NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DRELEASE=OFF -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
-			TARGET="main"
-		fi
-		if [[ "$OS" == "emscipten" ]]; then
-			echo -e "emscripten incomplete...\n"
-		fi
-		
-		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-			#xcodebuild -configuration Debug build
-			cmake --build $DKPATH/DKApps/$APP/$OS --target ${APP}_APP --config Debug
-		fi
-		
-		if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-			#xcodebuild -configuration Release build
-			cmake --build $DKPATH/DKApps/$APP/$OS --target ${APP}_APP --config Debug
-		fi
-	else	# Linux, Raspberry Pi, Android, Windows
-		$SUDO $APT -y install cmake
-		$SUDO $APT -y install gcc
-		$SUDO $APT -y install g++
-		$SUDO $APT -y install which
-		GCC_PATH=$(which gcc)
-		GPP_PATH=$(which g++)
-		export CC="$GCC_PATH"
-		export CXX="$GPP_PATH"
-		echo "GCC_PATH = $GCC_PATH"
-		echo "GPP_PATH = $GPP_PATH"
-
-		mkdir $DKPATH/DKApps/$APP/$OS
-		
-		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-			mkdir $DKPATH/DKApps/$APP/$OS/Debug
-			cd $DKPATH/DKApps/$APP/$OS/Debug
-			
-			if [[ "$OS" == "android32" ]]; then
-				ANDROID_API="31"
-				ANDROID_NDK_BUILD="23.1.7779620"
-				ANDROID_NDK="$DKPATH/3rdParty/android-sdk/ndk/$ANDROID_NDK_BUILD"
-				cmake -G "Unix Makefiles" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=$ANDROID_API -DANDROID-NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DRELEASE=OFF -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
-				TARGET="main"
-			fi
-			if [[ "$OS" == "android64" ]]; then
-				ANDROID_API="31"
-				ANDROID_NDK_BUILD="23.1.7779620"
-				ANDROID_NDK="$DKPATH/3rdParty/android-sdk/ndk/$ANDROID_NDK_BUILD"
-				cmake -G "Unix Makefiles" -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=$ANDROID_API -DANDROID-NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DRELEASE=OFF -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
-				TARGET="main"
-			fi
-			if [[ "$OS" == "linux32" ]]; then
-				cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=OFF -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE
-				TARGET=${APP}_APP
-			fi
-			if [[ "$OS" == "linux64" ]]; then
-				cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=OFF -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE
-				TARGET=${APP}_APP
-			fi
-			if [[ "$OS" == "raspberry32" ]]; then
-				cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=OFF -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE
-				TARGET=${APP}_APP
-			fi
-			if [[ "$OS" == "raspberry64" ]]; then
-				cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=OFF -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE
-				TARGET=${APP}_APP
-			fi
-			if [[ "$OS" == "win32" ]]; then
-				cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=OFF -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE
-				TARGET=${APP}_APP
-			fi
-			if [[ "$OS" == "win64" ]]; then
-				cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=OFF -DDEBUG=ON -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE
-				TARGET=${APP}_APP
-			fi
-			if [[ "$OS" == "emscipten" ]]; then
-				echo -e "emscripten incomplete...\n"
-			fi
-
-			cmake --build $DKPATH/DKApps/$APP/$OS/Debug --target ${TARGET} --config Debug
-			#chmod +x $DKPATH/DKApps/$APP/$OS/Debug/${TARGET}
-		fi
-		
-		if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-			mkdir $DKPATH/DKApps/$APP/$OS/Release
-			cd $DKPATH/DKApps/$APP/$OS/Release
-			
-			if [[ "$OS" == "android32" ]]; then
-				ANDROID_API="31"
-				ANDROID_NDK_BUILD="23.1.7779620"
-				ANDROID_NDK="$DKPATH/3rdParty/android-sdk/ndk/$ANDROID_NDK_BUILD"
-				cmake -G "Unix Makefiles" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=$ANDROID_API -DANDROID-NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DRELEASE=ON -DDEBUG=OFF -DREBUILDALL=ON -DSTATIC=ON -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
-				TARGET="main"
-			fi
-			if [[ "$OS" == "android64" ]]; then
-				ANDROID_API="31"
-				ANDROID_NDK_BUILD="23.1.7779620"
-				ANDROID_NDK="$DKPATH/3rdParty/android-sdk/ndk/$ANDROID_NDK_BUILD"
-				cmake -G "Unix Makefiles" -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=$ANDROID_API -DANDROID-NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DRELEASE=ON -DDEBUG=OFF -DREBUILDALL=ON -DSTATIC=ON -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
-				TARGET="main"
-			fi
-			if [[ "$OS" == "linux32" ]]; then
-				cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=ON -DDEBUG=OFF -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE
-				TARGET=${APP}_APP
-			fi
-			if [[ "$OS" == "linux64" ]]; then
-				cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=ON -DDEBUG=OFF -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE
-				TARGET=${APP}_APP
-			fi
-			if [[ "$OS" == "raspberry32" ]]; then
-				cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=ON -DDEBUG=OFF -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE
-				TARGET=${APP}_APP
-			fi
-			if [[ "$OS" == "raspberry64" ]]; then
-				cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" -DRELEASE=ON -DDEBUG=OFF -DREBUILDALL=ON -DSTATIC=ON $DKCMAKE
-				TARGET=${APP}_APP
-			fi
-			if [[ "$OS" == "emscipten" ]]; then
-				echo -e "emscripten incomplete...\n"
-			fi
-			
-			cmake --build $DKPATH/DKApps/$APP/$OS/Release --target ${TARGET} --config Release
-			#chmod +x $DKPATH/DKApps/$APP/$OS/Release/${TARGET}
-		fi
+	#CLANG_PATH=$(which clang)
+	#CLANGPP_PATH=$(which clang++)
+	#export CC="$CLANG_PATH"
+	#export CXX="$CLANGPP_PATH"
+	#echo "CLANG_PATH = $CLANG_PATH"
+	#echo "CLANGPP_PATH = $CLANGPP_PATH"
+	
+	LEVEL="RebuildAll"
+	LINK="Static"
+	
+	### Create the cmake string
+	cmake_string=""
+	if [[ $TYPE == "Debug" ]] || [[ $TYPE == "All" ]]; then
+		cmake_string+="-DDEBUG=ON "
 	fi
-
+	if [[ $TYPE == "Release" ]] || [[ $TYPE == "All" ]]; then
+		cmake_string+="-DRELEASE=ON "
+	fi
+	if [[ $LEVEL == "Build" ]]; then
+		cmake_string+="-DBUILD=ON "
+	fi
+	if [[ $LEVEL == "Rebuild" ]]; then
+		cmake_string+="-DREBUILD=ON "
+	fi
+	if [[ $LEVEL == "RebuildAll" ]]; then
+		cmake_string+="-DREBUILDALL=ON "
+	fi
+	if [[ $LINK == "Static" ]]; then
+		cmake_string+="-DSTATIC=ON "
+	fi
+	if [[ $LINK == "Shared" ]]; then
+		cmake_string+="-DSHARED=ON "
+	fi
+	#cmake_string = cmake_string.replace("  "," ")
+	#const app_path = DKBuild_FindAppPath(APP)
+	
+	echo cmake_string = $cmake_string
+	
+		
+	############  GENERATE PROJECT ############ 
+	echo Generating OS=$OS APP=$APP TYPE=$TYPE LEVEL=$LEVEL
+	
+	mkdir $DKPATH/DKApps/$APP/$OS
+	
+	if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
+		mkdir $DKPATH/DKApps/$APP/$OS/Debug
+	fi
+	if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
+		mkdir $DKPATH/DKApps/$APP/$OS/Release
+	fi
+			
+			
+	if [[ "$OS" == "android32" ]]; then
+		ANDROID_API="31"
+		ANDROID_NDK_BUILD="23.1.7779620"
+		ANDROID_NDK="$DKPATH/3rdParty/android-sdk/ndk/$ANDROID_NDK_BUILD"
+		cmake -G "Unix Makefiles" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=$ANDROID_API -DANDROID-NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+		TARGET="main"
+	fi
+	if [[ "$OS" == "android64" ]]; then
+		ANDROID_API="31"
+		ANDROID_NDK_BUILD="23.1.7779620"
+		ANDROID_NDK="$DKPATH/3rdParty/android-sdk/ndk/$ANDROID_NDK_BUILD"
+		cmake -G "Unix Makefiles" -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=$ANDROID_API -DANDROID-NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+		TARGET="main"
+	fi
+	if [[ "$OS" == "emscipten" ]]; then
+		echo -e "emscripten incomplete...\n"
+	fi
+	if [[ "$OS" == "ios32" ]]; then
+		cmake -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake -DPLATFORM=OS -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
+	fi
+	if [[ "$OS" == "ios64" ]]; then
+		cmake -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake -DPLATFORM=OS64 -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
+	fi
+	if [[ "$OS" == "iossim32" ]]; then
+		cmake -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake -DPLATFORM=SIMULATOR -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
+	fi
+	if [[ "$OS" == "iossim64" ]]; then
+		cmake -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake -DPLATFORM=SIMULATOR64 -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
+	fi
+	if [[ "$OS" == "linux32" ]]; then
+		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" $cmake_string $DKCMAKE
+		TARGET=${APP}_APP
+	fi
+	if [[ "$OS" == "linux64" ]]; then
+		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" $cmake_string $DKCMAKE
+		TARGET=${APP}_APP
+	fi
+	if [[ "$OS" == "mac32" ]]; then
+		cmake -G "Xcode" -DMAC_32=ON -DCMAKE_OSX_ARCHITECTURES=i686 $cmake_string $DKCMAKE
+	fi
+	if [[ "$OS" == "mac64" ]]; then
+		cmake -G "Xcode" -DMAC_64=ON -DCMAKE_OSX_ARCHITECTURES=x86_64 $cmake_string $DKCMAKE
+	fi
+	if [[ "$OS" == "raspberry32" ]]; then
+		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" $cmake_string $DKCMAKE
+		TARGET=${APP}_APP
+	fi
+	if [[ "$OS" == "raspberry64" ]]; then
+		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" $cmake_string $DKCMAKE
+		TARGET=${APP}_APP
+	fi
+	if [[ "$OS" == "win32" ]]; then
+		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" $cmake_string $DKCMAKE
+		TARGET=${APP}_APP
+	fi
+	if [[ "$OS" == "win64" ]]; then
+		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" $cmake_string $DKCMAKE
+		TARGET=${APP}_APP
+	fi
+	
+	
+	############  BUILD PROJECT ############ 
+	if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
+		#xcodebuild -configuration Debug build
+		cmake --build $DKPATH/DKApps/$APP/$OS --target ${APP}_APP --config Debug
+		#cmake --build $DKPATH/DKApps/$APP/$OS/Debug --target ${TARGET} --config Debug
+	fi
+	if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
+		#xcodebuild -configuration Release build
+		cmake --build $DKPATH/DKApps/$APP/$OS --target ${APP}_APP --config Release
+		#cmake --build $DKPATH/DKApps/$APP/$OS/Release --target ${TARGET} --config Release
+	fi
+	
 	$ echo "******* Done building $APP - $OS - $TYPE *******"	
 	
     unset APP
