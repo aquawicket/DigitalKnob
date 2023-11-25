@@ -3,12 +3,23 @@
 # to run this script requires privledges
 # > chmod 777 build.sh
 
-if [ -e /proc/device-tree/model ]; then
-	MODEL=$(tr -d '\0' </proc/device-tree/model)
+# If the current folder matches the current branch set BRANCH, default to Development
+FOLDER="$(basename $(pwd))"
+BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+if [[ "$BRANCH" == "$FOLDER" ]]; then
+	BRANCH="$FOLDER"
+else
+	BRANCH="Development"
 fi
+echo "BRANCH = $BRANCH"
+
 
 SUDO="sudo"
 APT="apt-get"
+
+if [ -e /proc/device-tree/model ]; then
+	MODEL=$(tr -d '\0' </proc/device-tree/model)
+fi
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	DIGITALKNOB="/home/$USER/digitalknob"
@@ -30,14 +41,6 @@ else
     echo "UNKNOWN OS ($OSTYPE)"
 fi
 
-#TODO: The BRANCH variable should default to Development, unless this file can find itself in a digitalknob/branch_name folder.  Then it should use branch_name
-# echo the current directory
-$ echo "current directory"
-$ echo "$PWD"
-#
-
-BRANCH="Development"
-#BRANCH="CPP_DOM"
 
 DKPATH="$DIGITALKNOB/$BRANCH"
 DKCMAKE="$DIGITALKNOB/$BRANCH/DKCMake"

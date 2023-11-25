@@ -2,15 +2,15 @@
 @echo off
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
 
-::TODO: The BRANCH variable should default to Development, unless this file can find itself in a digitalknob/branch_name folder.  Then it should use branch_name
-:: echo the current directory
-echo current directory
-
-:: Set the BRANCH name to the parent folder
-:: for %%I in (.) do set "BRANCH=%%~nxI"
-
-set "BRANCH=Development"
-::set "BRANCH=CPP_DOM"
+:: https://stackoverflow.com/a/33662275
+:: If the current folder matches the current branch set BRANCH, default to Development
+for %%I in (.) do set "FOLDER=%%~nxI"
+git branch | find "* %FOLDER%" > NUL & IF ERRORLEVEL 1 (
+    set "BRANCH=Development"
+) ELSE (
+    set "BRANCH=%FOLDER%"
+)
+echo BRANCH = %BRANCH%
 
 
 set "DIGITALKNOB=C:\Users\%USERNAME%\digitalknob"
