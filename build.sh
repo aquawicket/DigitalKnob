@@ -60,6 +60,8 @@ clear_cmake_cache() {
 delete_temp_files() {
 	echo "Deleting .TMP files . . ."
 	cd $DIGITALKNOB
+	rm -rf `find . -type d -name *.tmp`
+	rm -rf `find . -type d -name *.TMP`
 	find . -name "*.tmp" -delete
 	find . -name "*.TMP" -delete
 }
@@ -415,6 +417,7 @@ while :
 	echo Generating OS=$OS APP=$APP TYPE=$TYPE LEVEL=$LEVEL
 	
 	mkdir $DKPATH/DKApps/$APP/$OS
+	cd /
 	
 	if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
 		mkdir $DKPATH/DKApps/$APP/$OS/Debug
@@ -476,11 +479,11 @@ while :
 		TARGET=${APP}_APP
 	fi
 	if [[ "$OS" == "win32" ]]; then
-		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
+		cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
 		TARGET=${APP}_APP
 	fi
 	if [[ "$OS" == "win64" ]]; then
-		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
+		cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
 		TARGET=${APP}_APP
 	fi
 	

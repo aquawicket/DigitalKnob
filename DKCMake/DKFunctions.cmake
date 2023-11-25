@@ -3114,6 +3114,7 @@ function(dk_runDepends plugin)
 	endif()
 	dk_verbose("FOUND ${plugin} DK makefile at ${plugin_path}")
 	
+		
 	file(STRINGS ${plugin_path}/DKMAKE.cmake lines)
 	unset(disable_script)
 	unset(depends_script)
