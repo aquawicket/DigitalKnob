@@ -18,23 +18,28 @@ validate_branch() {
 }
 validate_branch
 
-###### exists(<command>) ######
-exists() {
+###### command_exists(<command>) ######
+command_exists() {
   command -v "$1" >/dev/null 2>&1
+}
+
+###### file_exists(<file) ######
+file_exists() {
+  [ -e $1 ]
 }
 
 ###### install(<package>) ######
 install() {
 	echo "installing $1"
-	if exists apt; then
+	if command_exists apt; then
 		$SUDO apt -y install $1
-	elif exists apt-get; then
+	elif command_exists apt-get; then
 		$SUDO apt-get -y install $1
-	elif exists pkg; then
+	elif command_exists pkg; then
 		$SUDO pkg install $1
-	elif exists pacman; then
+	elif command_exists pacman; then
 		$SUDO pacman -S $1
-	elif exists brew; then
+	elif command_exists brew; then
 		$SUDO brew install $1
 	else
 		echo "ERROR: no package managers found"
@@ -43,7 +48,7 @@ install() {
 
 ### validate_package(<package>) ###
 validate_package() {
-	if ! exists $1; then
+	if ! command_exists $1; then
 		install $1
 	fi
 }
@@ -94,7 +99,7 @@ validate_ostype() {
 validate_ostype
 
 # validata sudo
-if exists sudo; then
+if command_exists sudo; then
 	SUDO="sudo"
 fi
 
@@ -431,7 +436,9 @@ while :
 		ANDROID_API="31"
 		ANDROID_NDK_BUILD="23.1.7779620"
 		ANDROID_NDK="$DKPATH/3rdParty/android-sdk/ndk/$ANDROID_NDK_BUILD"
-		#ANDROID_TOOLCHAIN=$ANDROID_NDK/build/cmake/android.toolchain.cmake
+  #if file_exists $ANDROID_NDK/build/cmake/android.toolchain.cmake; then
+#	  ANDROID_TOOLCHAIN=$ANDROID_NDK/build/cmake/android.toolchain.cmake
+ # fi
 		cmake -G "Unix Makefiles" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=$ANDROID_API -DANDROID-NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_TOOLCHAIN -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
 		TARGET="main"
 	fi
@@ -503,7 +510,7 @@ while :
 	
 	echo "******* Done building $APP - $OS - $TYPE *******"	
 	
-    unset APP
+  unset APP
 	unset OS
 	unset TYPE
 done
