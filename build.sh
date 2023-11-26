@@ -499,7 +499,11 @@ while :
 		TARGET=${APP}_APP
 	fi
 	if [[ "$OS" == "win64" ]]; then
-		cmake -G "MSYS Makefiles" -DCMAKE_C_COMPILER="C:/Users/Administrator/digitalknob/Development/3rdParty/msys2-x86_64-20221216/mingw64/bin/gcc.exe" -DCMAKE_CXX_COMPILER="C:/Users/Administrator/digitalknob/Development/3rdParty/msys2-x86_64-20221216/mingw64/bin/g++.exe" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
+		#MSYS2="$DKPATH/3rdParty/msys2-x86_64-20221216"
+		#export PATH=${MSYS2}/mingw64/bin:$PATH
+		#export PATH=${MSYS2}/usr/bin:$PATH
+		#set PATH=%PATH%;${MSYS2}/mingw64/bin
+		cmake -G "MSYS Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
 		TARGET=${APP}_APP
 	fi
 	

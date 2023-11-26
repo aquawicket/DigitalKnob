@@ -90,6 +90,7 @@ dk_disable(ffmpeg)
 # diff-match-patch (disabled)
 dk_disable(diff-match-patch)
 
+dk_disable(boxer)
 
 # Disabled for Android targets
 if(ANDROID)
