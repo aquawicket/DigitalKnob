@@ -6,7 +6,7 @@
 
 ###### validate_branch() ######
 validate_branch() {
-  # If the current folder matches the current branch set BRANCH, default to Development
+	# If the current folder matches the current branch set BRANCH, default to Development
 	FOLDER="$(basename $(pwd))"
 	BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 	if [[ "$BRANCH" == "$FOLDER" ]]; then
@@ -20,12 +20,12 @@ validate_branch
 
 ###### command_exists(<command>) ######
 command_exists() {
-  command -v "$1" >/dev/null 2>&1
+	command -v "$1" >/dev/null 2>&1
 }
 
 ###### file_exists(<file) ######
 file_exists() {
-  [ -e $1 ]
+	[ -e $1 ]
 }
 
 ###### install(<package>) ######
@@ -143,7 +143,6 @@ while :
 				  validate_package git
 				fi
 				
-				
 				if [[ ! -d "$DKPATH/.git" ]]; then
 					git clone https://github.com/aquawicket/DigitalKnob.git $DKPATH
 				fi
@@ -158,8 +157,6 @@ while :
 					git checkout -b $BRANCH main
 					git push --set-upstream origin $BRANCH
 				fi
-								
-				
 				chmod +x $DKPATH/build.sh
 				;;
 			"Git Commit")
@@ -172,7 +169,7 @@ while :
 					# brew tap homebrew/core
 					# brew install git
 				else
-          validate_package git
+					validate_package git
 				fi
 				cd $DKPATH
 				git commit -a -m "git commit"
@@ -437,22 +434,27 @@ while :
 		if [[ "$OSTYPE" == "linux-android" ]]; then
 		    ANDROID_NDK_BUILD="23.2.8568313"
 		else
-	  	ANDROID_NDK_BUILD="23.1.7779620"
-	  fi
+			ANDROID_NDK_BUILD="23.1.7779620"
+		fi
 		ANDROID_NDK="$DKPATH/3rdParty/android-sdk/ndk/$ANDROID_NDK_BUILD"
-  #if file_exists $ANDROID_NDK/build/cmake/android.toolchain.cmake; then
-#	  ANDROID_TOOLCHAIN=$ANDROID_NDK/build/cmake/android.toolchain.cmake
- # fi
+		if file_exists $ANDROID_NDK/build/cmake/android.toolchain.cmake; then
+			ANDROID_TOOLCHAIN=$ANDROID_NDK/build/cmake/android.toolchain.cmake
+		fi
 		cmake -G "Unix Makefiles" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=$ANDROID_API -DANDROID-NDK=$ANDROID_NDK -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
 		TARGET="main"
 	fi
 	if [[ "$OS" == "android64" ]]; then
 		ANDROID_API="31"
-		#ANDROID_NDK_BUILD="23.1.7779620"
-    ANDROID_NDK_BUILD="23.2.8568313"
+		if [[ "$OSTYPE" == "linux-android" ]]; then
+		    ANDROID_NDK_BUILD="23.2.8568313"
+		else
+			ANDROID_NDK_BUILD="23.1.7779620"
+		fi
 		ANDROID_NDK="$DKPATH/3rdParty/android-sdk/ndk/$ANDROID_NDK_BUILD"
-    #ANDROID_TOOLCHAIN=$ANDROID_NDK/build/cmake/android.toolchain.cmake
-		cmake -G "Unix Makefiles" -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=$ANDROID_API -DANDROID-NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
+		if file_exists $ANDROID_NDK/build/cmake/android.toolchain.cmake; then
+			ANDROID_TOOLCHAIN=$ANDROID_NDK/build/cmake/android.toolchain.cmake
+		fi
+		cmake -G "Unix Makefiles" -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=$ANDROID_API -DANDROID-NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_TOOLCHAIN -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
 		TARGET="main"
 	fi
 	if [[ "$OS" == "emscipten" ]]; then
