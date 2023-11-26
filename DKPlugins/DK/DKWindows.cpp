@@ -170,7 +170,11 @@ bool DKWindows::FindImageOnScreen(const DKString& file, int& x, int& y){
 	bitmap.bmiHeader.biSizeImage = SCREEN_WIDTH * 4 * SCREEN_HEIGHT;
 	bitmap.bmiHeader.biClrUsed = 0;
 	bitmap.bmiHeader.biClrImportant = 0;
-	BYTE* sP = BYTE();
+	#if _MSC_VER
+		BYTE* sP = BYTE();
+	#else
+		BYTE* sP = new BYTE;
+	#endif
 	HBITMAP hBitmap = CreateDIBSection(hdcTemp, &bitmap, DIB_RGB_COLORS, (void**)(&sP), NULL, NULL);
 	SelectObject(hdcTemp, hBitmap);
 	BitBlt(hdcTemp, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, hdc, 0, 0, SRCCOPY);
@@ -199,7 +203,11 @@ bool DKWindows::FindImageOnScreen(const DKString& file, int& x, int& y){
 	bitmap2.bmiHeader.biSizeImage = bm.bmWidth * 4 * bm.bmHeight;
 	bitmap2.bmiHeader.biClrUsed = 0;
 	bitmap2.bmiHeader.biClrImportant = 0;
-	BYTE* iP = BYTE();
+	#if _MSC_VER
+		BYTE* iP = BYTE();
+	#else
+		BYTE* iP = new BYTE;
+	#endif
 	HBITMAP hDIBMemBM  = ::CreateDIBSection( 0, &bitmap2, DIB_RGB_COLORS, (void**)&iP, NULL, NULL );
 	HBITMAP hOldBmp1  = (HBITMAP)::SelectObject(memDC1,hDIBMemBM);  
 	HBITMAP hOldBmp2  = (HBITMAP)::SelectObject(memDC2,hBmp);
@@ -702,7 +710,12 @@ bool DKWindows::SetClipboardImage(const DKString& file){
 #if WIN32 && !WIN64
 	SIZE_T dwColTableLen = (bi.biBitCount <= 8) ? (1 << bi.biBitCount) * sizeof(RGBQUAD) : 0;
 #elif WIN64
-	SIZE_T dwColTableLen = (bi.biBitCount <= 8) ? (1i64 << bi.biBitCount) * sizeof(RGBQUAD) : 0;
+	#if _MSC_VER
+		SIZE_T dwColTableLen = (bi.biBitCount <= 8) ? (1i64 << bi.biBitCount) * sizeof(RGBQUAD) : 0;
+	#else
+		#include <stdint.h>
+		SIZE_T dwColTableLen = (bi.biBitCount <= 8) ? (INT64_C( 1) << bi.biBitCount) * sizeof(RGBQUAD) : 0;
+	#endif
 #endif
 	// Create a device context with palette
 	HDC hDC = ::GetDC(NULL);
