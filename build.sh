@@ -106,16 +106,16 @@ fi
 DKPATH="$DIGITALKNOB/$BRANCH"
 DKCMAKE="$DIGITALKNOB/$BRANCH/DKCMake"
 
-echo "hostname		= $HOSTNAME"
-echo "hosttype		= $HOSTTYPE"
-echo "ostype		= $OSTYPE"
-echo "machtype		= $MACHTYPE"
-echo "model			= $MODEL"
-echo "user			= $USER"
-echo "username		= $USERNAME"
-echo "digitalknob	= $DIGITALKNOB"
-echo "dkpath		= $DKPATH"
-echo "dkcmake		= $DKCMAKE"
+echo "hostname = $HOSTNAME"
+echo "hosttype = $HOSTTYPE"
+echo "ostype = $OSTYPE"
+echo "machtype = $MACHTYPE"
+echo "model = $MODEL"
+echo "user = $USER"
+echo "username = $USERNAME"
+echo "digitalknob = $DIGITALKNOB"
+echo "dkpath = $DKPATH"
+echo "dkcmake = $DKCMAKE"
 
 $SUDO echo
 
