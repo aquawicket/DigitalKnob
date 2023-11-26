@@ -37,11 +37,14 @@ dk_set(ANDROID-NDK_MAC_DL http://dl.google.com/android/repository/android-ndk-r2
 dk_set(ANDROID-NDK_LINUX_DL http://dl.google.com/android/repository/android-ndk-r23b-linux.zip)	#FIXME https: not working in DKCurl
 
 # r23c
-#dk_set(ANDROID-NDK_VERSION r23c)
-#dk_set(ANDROID-NDK_BUILD 23.2.8568313)
+if(ANDROID_HOST)
+dk_set(ANDROID-NDK_VERSION r23c)
+dk_set(ANDROID-NDK_BUILD 23.2.8568313)
 #dk_set(ANDROID-NDK_WIN_DL https://dl.google.com/android/repository/android-ndk-r23c-windows.zip)
 #dk_set(ANDROID-NDK_MAC_DL https://dl.google.com/android/repository/android-ndk-r23c-darwin.zip)
 #dk_set(ANDROID-NDK_LINUX_DL https://dl.google.com/android/repository/android-ndk-r23c-linux.zip)
+dk_set(ANDROID-NDK_ANDROID_DL https://web.archive.org/web/20230512191806/https://github.com/lzhiyong/termux-ndk/releases/download/ndk-r23/android-ndk-r23c-aarch64.zip)
+endif()
 
 # r24
 #dk_set(ANDROID-NDK_VERSION r24)
@@ -61,7 +64,11 @@ dk_set(ANDROID-NDK_LINUX_DL http://dl.google.com/android/repository/android-ndk-
 dk_makeDirectory(${ANDROID-SDK}/ndk)
 WIN_HOST_dk_import	(${ANDROID-NDK_WIN_DL} PATH ${ANDROID-SDK}/ndk/${ANDROID-NDK_BUILD} PATCH)
 MAC_HOST_dk_import	(${ANDROID-NDK_MAC_DL} PATH ${ANDROID-SDK}/ndk/${ANDROID-NDK_BUILD} PATCH)
+if(NOT ANDROID_HOST)
 LINUX_HOST_dk_import(${ANDROID-NDK_LINUX_DL} PATH ${ANDROID-SDK}/ndk/${ANDROID-NDK_BUILD} PATCH)
+else()
+LINUX_HOST_dk_import(${ANDROID-NDK_ANDROID_DL} PATH ${ANDROID-SDK}/ndk/${ANDROID-NDK_BUILD} PATCH)
+endif()
 
 dk_setEnv("NDK_ROOT" ${ANDROID-NDK})
 dk_setEnv("VS_NdkRoot" ${ANDROID-NDK})
