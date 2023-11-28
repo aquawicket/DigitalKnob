@@ -427,9 +427,8 @@ while :
 	if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
 		mkdir $DKPATH/DKApps/$APP/$OS/Release
 	fi
-			
-			
-	if [[ "$OS" == "android32" ]]; then
+	
+	if [[ "$OS" == "android"* ]]; then
 		ANDROID_API="31"
 		if [[ "$OSTYPE" == "linux-android" ]]; then
 		    ANDROID_NDK_BUILD="23.2.8568313"
@@ -440,21 +439,34 @@ while :
 		if file_exists $ANDROID_NDK/build/cmake/android.toolchain.cmake; then
 			ANDROID_TOOLCHAIN=$ANDROID_NDK/build/cmake/android.toolchain.cmake
 		fi
-		cmake -G "Unix Makefiles" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=$ANDROID_API -DANDROID-NDK=$ANDROID_NDK -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
+	fi
+			
+	if [[ "$OS" == "android32" ]]; then
+		#ANDROID_API="31"
+		#if [[ "$OSTYPE" == "linux-android" ]]; then
+		#    ANDROID_NDK_BUILD="23.2.8568313"
+		#else
+		#	ANDROID_NDK_BUILD="23.1.7779620"
+		#fi
+		#ANDROID_NDK="$DKPATH/3rdParty/android-sdk/ndk/$ANDROID_NDK_BUILD"
+		#if file_exists $ANDROID_NDK/build/cmake/android.toolchain.cmake; then
+		#	ANDROID_TOOLCHAIN=$ANDROID_NDK/build/cmake/android.toolchain.cmake
+		#fi
+		cmake -G "Unix Makefiles" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=$ANDROID_API -DANDROID-NDK=$ANDROID_NDK -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
 		TARGET="main"
 	fi
 	if [[ "$OS" == "android64" ]]; then
-		ANDROID_API="31"
-		if [[ "$OSTYPE" == "linux-android" ]]; then
-		    ANDROID_NDK_BUILD="23.2.8568313"
-		else
-			ANDROID_NDK_BUILD="23.1.7779620"
-		fi
-		ANDROID_NDK="$DKPATH/3rdParty/android-sdk/ndk/$ANDROID_NDK_BUILD"
-		if file_exists $ANDROID_NDK/build/cmake/android.toolchain.cmake; then
-			ANDROID_TOOLCHAIN=$ANDROID_NDK/build/cmake/android.toolchain.cmake
-		fi
-		cmake -G "Unix Makefiles" -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=$ANDROID_API -DANDROID-NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_TOOLCHAIN -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
+		#ANDROID_API="31"
+		#if [[ "$OSTYPE" == "linux-android" ]]; then
+		#    ANDROID_NDK_BUILD="23.2.8568313"
+		#else
+		#	ANDROID_NDK_BUILD="23.1.7779620"
+		#fi
+		#ANDROID_NDK="$DKPATH/3rdParty/android-sdk/ndk/$ANDROID_NDK_BUILD"
+		#if file_exists $ANDROID_NDK/build/cmake/android.toolchain.cmake; then
+		#	ANDROID_TOOLCHAIN=$ANDROID_NDK/build/cmake/android.toolchain.cmake
+		#fi
+		cmake -G "Unix Makefiles" -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=$ANDROID_API -DANDROID-NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_TOOLCHAIN -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
 		TARGET="main"
 	fi
 	if [[ "$OS" == "emscipten" ]]; then
@@ -520,9 +532,9 @@ while :
 		cmake --build $DKPATH/DKApps/$APP/$OS/Release --target ${TARGET} --config Release
 	fi
 	
-	echo "******* Done building $APP - $OS - $TYPE *******"	
+	echo "******* Done building $APP - $OS - $TYPE *******"
 	
-  unset APP
+    unset APP
 	unset OS
 	unset TYPE
 done
