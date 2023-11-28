@@ -507,7 +507,16 @@ while :
 		TARGET=${APP}_APP
 	fi
 	if [[ "$OS" == "win32" ]]; then
-		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
+		#MSYS2="$DKPATH/3rdParty/msys2-x86_64-20221216"
+		#export PATH=${MSYS2}/mingw64/bin:$PATH
+		#export PATH=${MSYS2}/usr/bin:$PATH
+		#set PATH=%PATH%;${MSYS2}/mingw64/bin
+		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
+			cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+		fi
+		if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
+			cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
+		fi
 		TARGET=${APP}_APP
 	fi
 	if [[ "$OS" == "win64" ]]; then
@@ -515,7 +524,12 @@ while :
 		#export PATH=${MSYS2}/mingw64/bin:$PATH
 		#export PATH=${MSYS2}/usr/bin:$PATH
 		#set PATH=%PATH%;${MSYS2}/mingw64/bin
-		cmake -G "MSYS Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
+		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
+			cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+		fi
+		if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
+			cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
+		fi
 		TARGET=${APP}_APP
 	fi
 	
