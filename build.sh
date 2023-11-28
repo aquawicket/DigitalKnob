@@ -365,7 +365,11 @@ while :
 	delete_temp_files
 		
 	validate_package which
-	validate_package cmake	#this needs to be "mingw-w64-x86_64-cmake" for msys2
+	if [[ "$OSTYPE" == "msys" ]]
+		echo "Please use 'pacman -S mingw-w64-x86_64-cmake' to install cmake for msys2"
+	else
+		validate_package cmake	#this needs to be "mingw-w64-x86_64-cmake" for msys2
+	fi
 	validate_package gcc
 	validate_package g++
 
