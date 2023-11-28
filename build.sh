@@ -365,7 +365,7 @@ while :
 	delete_temp_files
 		
 	validate_package which
-	validate_package cmake
+	validate_package cmake	#this needs to be "mingw-w64-x86_64-cmake" for msys2
 	validate_package gcc
 	validate_package g++
 
