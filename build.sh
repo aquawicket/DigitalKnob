@@ -4,7 +4,7 @@
 # > chmod 777 build.sh
 
 
-###### validate_branch() ######
+###### validate_branch ######
 validate_branch() {
 	# If the current folder matches the current branch set DKBRANCH, default to Development
 	FOLDER="$(basename $(pwd))"
@@ -18,17 +18,17 @@ validate_branch() {
 }
 validate_branch
 
-###### command_exists(<command>) ######
+###### command_exists <command> ######
 command_exists() {
 	command -v "$1" >/dev/null 2>&1
 }
 
-###### file_exists(<file) ######
+###### file_exists <file> ######
 file_exists() {
 	[ -e $1 ]
 }
 
-###### install(<package>) ######
+###### install <package> ######
 install() {
 	echo "installing $1"
 	if command_exists apt; then
@@ -46,14 +46,14 @@ install() {
 	fi
 }
 
-### validate_package(<package>) ###
+### validate_package <command> <package> ###
 validate_package() {
 	if ! command_exists $1; then
-		install $1
+		install $2
 	fi
 }
 
-### clear_cmake_cache() ###
+### clear_cmake_cache ###
 clear_cmake_cache() {
 	echo "Clearing CMake cache . . ."
 	cd $DIGITALKNOB
@@ -61,7 +61,7 @@ clear_cmake_cache() {
 	rm -rf `find . -type d -name CMakeFiles`
 }
 
-### delete_temp_files() ###
+### delete_temp_files ###
 delete_temp_files() {
 	echo "Deleting .TMP files . . ."
 	cd $DIGITALKNOB
@@ -71,7 +71,7 @@ delete_temp_files() {
 	find . -name "*.TMP" -delete
 }
 
-### validate_ostype() ###
+### validate_ostype ###
 validate_ostype() {
 	if [ -e /proc/device-tree/model ]; then
 		MODEL=$(tr -d '\0' </proc/device-tree/model)
@@ -140,7 +140,7 @@ while :
 					# brew tap homebrew/core
 					# brew install git
 				else
-				  validate_package git
+				  validate_package git git
 				fi
 				
 				if [[ ! -d "$DKPATH/.git" ]]; then
@@ -169,7 +169,7 @@ while :
 					# brew tap homebrew/core
 					# brew install git
 				else
-					validate_package git
+					validate_package git git
 				fi
 				cd $DKPATH
 				git commit -a -m "git commit"
@@ -364,14 +364,14 @@ while :
 	clear_cmake_cache
 	delete_temp_files
 		
-	validate_package which
+	validate_package which which
 	if [[ "$OSTYPE" == "msys" ]]; then
-		echo "Please use 'pacman -S mingw-w64-x86_64-cmake' to install cmake for msys2"
+		validate_package cmake mingw-w64-x86_64-cmake
 	else
-		validate_package cmake #this needs to be "mingw-w64-x86_64-cmake" for msys2
+		validate_package cmake cmake
 	fi
-	validate_package gcc
-	validate_package g++
+	validate_package gcc gcc
+	validate_package g++ g++
 
 	GCC_PATH=$(which gcc)
 	GPP_PATH=$(which g++)
