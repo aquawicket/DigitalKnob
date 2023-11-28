@@ -6,15 +6,15 @@
 
 ###### validate_branch() ######
 validate_branch() {
-	# If the current folder matches the current branch set BRANCH, default to Development
+	# If the current folder matches the current branch set DKBRANCH, default to Development
 	FOLDER="$(basename $(pwd))"
-	BRANCH="$(git rev-parse --abbrev-ref HEAD)"
-	if [[ "$BRANCH" == "$FOLDER" ]]; then
-		BRANCH="$FOLDER"
+	DKBRANCH="$(git rev-parse --abbrev-ref HEAD)"
+	if [[ "$DKBRANCH" == "$FOLDER" ]]; then
+		DKBRANCH="$FOLDER"
 	else
-		BRANCH="Development"
+		DKBRANCH="Development"
 	fi
-	echo "BRANCH = $BRANCH"
+	echo "DKBRANCH = $DKBRANCH"
 }
 validate_branch
 
@@ -103,8 +103,8 @@ if command_exists sudo; then
 	SUDO="sudo"
 fi
 
-DKPATH="$DIGITALKNOB/$BRANCH"
-DKCMAKE="$DIGITALKNOB/$BRANCH/DKCMake"
+DKPATH="$DIGITALKNOB/$DKBRANCH"
+DKCMAKE="$DIGITALKNOB/$DKBRANCH/DKCMake"
 
 echo "hostname = $HOSTNAME"
 echo "hosttype = $HOSTTYPE"
@@ -149,13 +149,13 @@ while :
 				cd $DKPATH
 				git pull --all
 				git checkout -- .
-				git checkout $BRANCH
+				git checkout $DKBRANCH
 				if [[ "$?" == "0" ]]; then
-					echo "$BRANCH branch selected"
+					echo "$DKBRANCH branch selected"
 				else
-					echo "Remote has no $BRANCH branch. Creating..."
-					git checkout -b $BRANCH main
-					git push --set-upstream origin $BRANCH
+					echo "Remote has no $DKBRANCH branch. Creating..."
+					git checkout -b $DKBRANCH main
+					git push --set-upstream origin $DKBRANCH
 				fi
 				chmod +x $DKPATH/build.sh
 				;;

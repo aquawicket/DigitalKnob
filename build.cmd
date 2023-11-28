@@ -3,19 +3,19 @@
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
 
 :: https://stackoverflow.com/a/33662275
-:: If the current folder matches the current branch set BRANCH, default to Development
+:: If the current folder matches the current branch set DKBRANCH, default to Development
 for %%I in (.) do set "FOLDER=%%~nxI"
 git branch | find "* %FOLDER%" > NUL & IF ERRORLEVEL 1 (
-    set "BRANCH=Development"
+    set "DKBRANCH=Development"
 ) ELSE (
-    set "BRANCH=%FOLDER%"
+    set "DKBRANCH=%FOLDER%"
 )
-echo BRANCH = %BRANCH%
+echo DKBRANCH = %DKBRANCH%
 
 
 set "DIGITALKNOB=C:\Users\%USERNAME%\digitalknob"
-set "DKPATH=%DIGITALKNOB%\%BRANCH%"
-set "DKCMAKE=%DIGITALKNOB%\%BRANCH%\DKCMake"
+set "DKPATH=%DIGITALKNOB%\%DKBRANCH%"
+set "DKCMAKE=%DIGITALKNOB%\%DKBRANCH%\DKCMake"
 set "DKDOWNLOAD=%DIGITALKNOB%\download"
 set "GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.30.1.windows.1/Git-2.30.1-32-bit.exe"
 set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi"
@@ -80,11 +80,11 @@ cd "%DKPATH%"
 "%GIT%" pull --all
 "%GIT%" checkout -- .
 if NOT "%ERRORLEVEL%" == "0" goto error
-"%GIT%" checkout %BRANCH%
+"%GIT%" checkout %DKBRANCH%
 if NOT "%ERRORLEVEL%" == "0" (
-	echo Remote has no %BRANCH% branch. Creating...
-	"%GIT%" checkout -b %BRANCH% main
-	"%GIT%" push --set-upstream origin %BRANCH%
+	echo Remote has no %DKBRANCH% branch. Creating...
+	"%GIT%" checkout -b %DKBRANCH% main
+	"%GIT%" push --set-upstream origin %DKBRANCH%
 )
 
 
