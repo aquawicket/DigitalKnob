@@ -2146,7 +2146,7 @@ dk_createOsMacros("dk_queueCommand")
 #
 function(dk_visualStudioDebug path) #target #arch
 	DKDEBUGFUNC(${ARGV})
-	if(NOT WIN_HOST)
+	if(NOT VISUAL_STUDIO_IDE)
 		return()
 	endif()
 	
@@ -2194,7 +2194,7 @@ dk_createOsMacros("dk_visualStudioDebug" "NO_DEBUG_RELEASE_TAGS")
 #
 function(dk_visualStudioRelease path) #target #arch
 	DKDEBUGFUNC(${ARGV})
-	if(NOT WIN_HOST)
+	if(NOT VISUAL_STUDIO_IDE)
 		return()
 	endif()
 	
