@@ -30,7 +30,7 @@ WIN_dk_libDebug			(${JERRYSCRIPT}/${OS}/lib/${DEBUG_DIR}/jerry-core.lib)
 WIN_dk_libRelease		(${JERRYSCRIPT}/${OS}/lib/${RELEASE_DIR}/jerry-core.lib)
 
 # jerry-ext
-if(VISUAL_STUDIO_IDE)
+if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")	# replaces if(VISUAL_STUDIO_IDE)
 	ANDROID_dk_libDebug		(${JERRYSCRIPT}/${OS}/lib/${DEBUG_DIR}/libjerry-ext.a)
 	ANDROID_dk_libRelease	(${JERRYSCRIPT}/${OS}/lib/${RELEASE_DIR}/libjerry-ext.a)
 else()
