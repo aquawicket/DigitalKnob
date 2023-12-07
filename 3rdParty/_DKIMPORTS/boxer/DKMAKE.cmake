@@ -21,6 +21,7 @@ dk_include			(${BOXER}/include)
 dk_include			(${BOXER}/${OS})
 UNIX_dk_libDebug	(${BOXER}/${OS}/${DEBUG_DIR}/libBoxer.a)
 UNIX_dk_libRelease	(${BOXER}/${OS}/${RELEASE_DIR}/libBoxer.a)
+
 if(VISUAL_STUDIO_IDE)
 	WIN_dk_libDebug		(${BOXER}/${OS}/${DEBUG_DIR}/Boxer.lib)
 	WIN_dk_libRelease	(${BOXER}/${OS}/${RELEASE_DIR}/Boxer.lib)
