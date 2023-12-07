@@ -10,6 +10,7 @@
 dk_depend(python)
 dk_depend(pyyaml)
 dk_depend(nodejs)
+dk_depend(msys2)
 
 
 ### IMPORT ###
@@ -42,7 +43,15 @@ if(NOT EXISTS ${DUKTAPE}/src/duktape.c)
 		-DDUK_USE_INTERRUPT_COUNTER)
 	#dk_executeProcess(${NODE_EXE} ${DUKTAPE}/src-tools/index.js configure --output-directory ${DUKTAPE}/src --source-directory ${DUKTAPE}/src-input --config-directory ${DUKTAPE}/config)
 endif()
-dk_queueCommand(${DKCMAKE_BUILD} ${DUKTAPE})
+
+
+## TODO: 
+#if(MSYS2)
+	#dk_msys2(${DKCMAKE_BUILD} ${DUKTAPE})				# this does not work
+	#dk_msys2("cmake -G \"Unix Makefiles\" ${DUKTAPE}")	# this kinda works
+#else()
+	dk_queueCommand(${DKCMAKE_BUILD} ${DUKTAPE})
+#endif()
 
 
 ### COMPILE ###

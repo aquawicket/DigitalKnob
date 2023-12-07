@@ -373,12 +373,12 @@ while :
 	validate_package gcc gcc
 	validate_package g++ g++
 
-	GCC_PATH=$(which gcc)
-	GPP_PATH=$(which g++)
-	export CC="$GCC_PATH"
-	export CXX="$GPP_PATH"
-	echo "GCC_PATH = $GCC_PATH"
-	echo "GPP_PATH = $GPP_PATH"
+	#GCC_PATH=$(which gcc)
+	#GPP_PATH=$(which g++)
+	#export CC="$GCC_PATH"
+	#export CXX="$GPP_PATH"
+	#echo "GCC_PATH = $GCC_PATH"
+	#echo "GPP_PATH = $GPP_PATH"
 	
 	#CLANG_PATH=$(which clang)
 	#CLANGPP_PATH=$(which clang++)
