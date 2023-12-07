@@ -82,15 +82,22 @@ endif()
 ###########################################################################
 ## Set the IDE variable
 ###########################################################################
-# FIXME: This can be found in the CMAKE_CXX_COMPILER_ID variable
-#    lets set MSVC to true and us if(MSVC)  ;)
-string(FIND "${CMAKE_GENERATOR}" "Visual Studio" index)
-if(${index} GREATER -1)
-	dk_set(VISUAL_STUDIO_IDE ON)
+#string(FIND "${CMAKE_GENERATOR}" "Visual Studio" index)
+#if(${index} GREATER -1)
+#	dk_set(VISUAL_STUDIO_IDE ON)
+#endif()
+#string(FIND "${CMAKE_GENERATOR}" "Xcode" index)
+#if(${index} GREATER -1)
+#	dk_set(XCODE_IDE ON)
+#endif()
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+	dk_set(GNU ON)
 endif()
-string(FIND "${CMAKE_GENERATOR}" "Xcode" index)
-if(${index} GREATER -1)
-	dk_set(XCODE_IDE ON)
+if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+	dk_set(MSVC ON)
+endif()
+if(CMAKE_CXX_COMPILER_ID STREQUAL "XCODE")
+	dk_set(XCODE ON)
 endif()
 
 

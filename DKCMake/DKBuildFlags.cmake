@@ -592,7 +592,7 @@ endif()
 # MinGW Makefiles   ${OS}/${TYPE}	${OS}/${TYPE} 
 # Unix Makefiles    ${OS}/${TYPE}   ${OS}/${TYPE}  
 # ./configure       ${OS}/${TYPE}   ${OS}/${TYPE}
-if(VISUAL_STUDIO_IDE OR XCODE_IDE)
+if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC" OR CMAKE_CXX_COMPILER_ID STREQUAL "XCODE")	# replaces if(VISUAL_STUDIO_IDE OR XCODE_IDE)
 	dk_set		(CMAKE_BUILD_TYPE DEBUG RELEASE)
 	dk_set		(BUILD_DIR ${OS})
 else()
