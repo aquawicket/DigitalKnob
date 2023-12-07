@@ -1063,7 +1063,6 @@ if(ANDROID)
 	
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
-		#if(VISUAL_STUDIO_IDE)
 		if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")	# replaces if(VISUAL_STUDIO_IDE)
 			DEBUG_dk_rename(${DKPROJECT}/${OS}/app/build/outputs/apk/debug/app-debug.apk ${DKPROJECT}/${OS}/app/build/outputs/apk/app-debug.apk.backup OVERWRITE)
 			RELEASE_dk_rename(${DKPROJECT}/${OS}/app/build/outputs/apk/release/app-release-unsigned.apk ${DKPROJECT}/${OS}/app/build/outputs/apk/release/app-release-unsigned.apk.backup OVERWRITE)
@@ -1074,7 +1073,7 @@ if(ANDROID)
 	endif()
 		
 	####################### Create Library Target ###################
-	if(VISUAL_STUDIO_IDE)
+	if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")	# replaces if(VISUAL_STUDIO_IDE)
 		set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/app/src/main/jniLibs/${ANDROID_ABI}")
 		set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/app/src/main/jniLibs/${ANDROID_ABI}")
 	else()
@@ -1086,7 +1085,7 @@ if(ANDROID)
 	set(localProperties "sdk.dir=${ANDROID-SDK}")
 	
 	####### Import Android Build files ############################################
-	if(VISUAL_STUDIO_IDE)
+	if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")	# replaces if(VISUAL_STUDIO_IDE)
 		dk_copy(${DKPLUGINS}/_DKIMPORT/android/ ${DKPROJECT}/${OS}/)
 		dk_copy(${DKPLUGINS}/_DKIMPORT/${OS}/ ${DKPROJECT}/${OS}/)
 		dk_copy(${DKPROJECT}/assets ${DKPROJECT}/${OS}/app/src/main/assets OVERWRITE)
@@ -1132,7 +1131,7 @@ if(ANDROID)
 	######################### Link Libraries ###########################
 	#target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	#target_include_directories(${APP_NAME} PUBLIC ${SDL2}/include)
-	if(VISUAL_STUDIO_IDE)
+	if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")	# replaces if(VISUAL_STUDIO_IDE)
 		target_link_libraries(main ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	else()
 		if(DEBUG)
@@ -1143,7 +1142,7 @@ if(ANDROID)
 	endif()
 	target_include_directories(main PUBLIC ${SDL2}/include)
 	
-	if(VISUAL_STUDIO_IDE)
+	if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")	# replaces if(VISUAL_STUDIO_IDE)
 		include_external_msproject(gradleAPK gradleAPK.androidproj TYPE 39E2626F-3545-4960-A6E8-258AD8476CE5)
 		set_property(TARGET gradleAPK PROPERTY VS_SOLUTION_DEPLOY ON) # NOT WORKING
 		set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT gradleAPK)
@@ -1163,7 +1162,7 @@ if(ANDROID)
 	
 	####################### Gradle Build #####################
 	#WIN_HOST_dk_set(CMD_K cmd /k)
-	if(VISUAL_STUDIO_IDE)
+	if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")	# replaces if(VISUAL_STUDIO_IDE)
 		add_custom_command(
 			POST_BUILD
 			TARGET main
@@ -1193,7 +1192,7 @@ if(ANDROID)
 	#################### Uninstall PACKAGE_NAME package ###################
 	
 	#################### Install apk to device ###############
-	if(VISUAL_STUDIO_IDE)
+	if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")	# replaces if(VISUAL_STUDIO_IDE)
 		add_custom_command(
 			POST_BUILD
 			TARGET main

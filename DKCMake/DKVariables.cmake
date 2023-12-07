@@ -83,6 +83,7 @@ endif()
 ## Set the IDE variable
 ###########################################################################
 # FIXME: This can be found in the CMAKE_CXX_COMPILER_ID variable
+#    lets set MSVC to true and us if(MSVC)  ;)
 string(FIND "${CMAKE_GENERATOR}" "Visual Studio" index)
 if(${index} GREATER -1)
 	dk_set(VISUAL_STUDIO_IDE ON)
