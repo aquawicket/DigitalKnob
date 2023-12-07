@@ -11,7 +11,7 @@ dk_include				(${JERRYSCRIPT}/jerry-core/include)
 dk_include				(${JERRYSCRIPT}/${OS})
 
 # jerry-core
-if(VISUAL_STUDIO_IDE)
+if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")	# replaces if(VISUAL_STUDIO_IDE)
 	ANDROID_dk_libDebug		(${JERRYSCRIPT}/${OS}/lib/${DEBUG_DIR}/libjerry-core.a)
 	ANDROID_dk_libRelease	(${JERRYSCRIPT}/${OS}/lib/${RELEASE_DIR}/libjerry-core.a)
 else()
