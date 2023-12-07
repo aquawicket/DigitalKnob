@@ -25,7 +25,7 @@ dk_include					(${TIFF}/libtiff)
 dk_include					(${TIFF}/${OS}/libtiff)
 DEBUG_dk_include			(${TIFF}/${OS}/libtiff/${DEBUG_DIR})
 RELEASE_dk_include			(${TIFF}/${OS}/libtiff/${RELEASE_DIR})
-if(VISUAL_STUDIO_IDE)
+if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")	# replaces if(VISUAL_STUDIO_IDE)
 	ANDROID_dk_libDebug		(${TIFF}/${OS}/libtiff/${DEBUG_DIR}/libtiff.a)
 	ANDROID_dk_libRelease	(${TIFF}/${OS}/libtiff/${RELEASE_DIR}/libtiff.a)
 	WIN_dk_libDebug			(${TIFF}/${OS}/libtiff/${DEBUG_DIR}/tiffd.lib)
@@ -40,7 +40,7 @@ endif()
 
 
 ### 3RDPARTY LINK ###
-if(VISUAL_STUDIO_IDE)
+if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")	# replaces if(VISUAL_STUDIO_IDE)
 	ANDROID_dk_set			(TIFF_CMAKE -DTIFF_INCLUDE_DIR=${TIFF}/libtiff "-DCMAKE_C_FLAGS=-I${TIFF}/${OS}/libtiff" "-DCMAKE_CXX_FLAGS=-I${TIFF}/${OS}/libtiff" -DTIFF_INCLUDE_DIR2=${TIFF}/${OS}/libtiff -DTIFF_LIBRARY_DEBUG=${TIFF}/${OS}/${DEBUG_DIR}/libtiff.a -DTIFF_LIBRARY_RELEASE=${TIFF}/${OS}/${RELEASE_DIR}/libtiff.a)
 #else()
 #	ANDROID_DEBUG_dk_set	(TIFF_CMAKE -DTIFF_INCLUDE_DIR=${TIFF}/libtiff "-DCMAKE_C_FLAGS=-I${TIFF}/${OS}/Debug/libtiff -I${TIFF}/libtiff" "-DCMAKE_CXX_FLAGS=-I${TIFF}/${OS}/Debug/libtiff -I${TIFF}/libtiff" -DTIFF_INCLUDE_DIR2=${TIFF}/${OS}/${DEBUG_DIR}/libtiff -DTIFF_LIBRARY_DEBUG=${TIFF}/${OS}/${DEBUG_DIR}/libtiff/libtiff.a -DTIFF_LIBRARY_RELEASE=${TIFF}/${OS}/${RELEASE_DIR}/libtiff/libtiff.a)
