@@ -23,10 +23,17 @@ dk_import(https://github.com/aquawicket/duktape.git PATCH) #NOTE: PATCH is for C
 WIN_dk_define		(DUK_F_VBCC)
 ANDROID_dk_define	(DUK_F_32BIT_PTRS)
 dk_include			(${DUKTAPE}/src)
-UNIX_dk_libDebug	(${DUKTAPE}/${OS}/${DEBUG_DIR}/libduktape.a)
-UNIX_dk_libRelease	(${DUKTAPE}/${OS}/${RELEASE_DIR}/libduktape.a)
-WIN_dk_libDebug		(${DUKTAPE}/${OS}/${DEBUG_DIR}/duktape.lib)
-WIN_dk_libRelease	(${DUKTAPE}/${OS}/${RELEASE_DIR}/duktape.lib)
+#UNIX_dk_libDebug	(${DUKTAPE}/${OS}/${DEBUG_DIR}/libduktape.a)
+#UNIX_dk_libRelease	(${DUKTAPE}/${OS}/${RELEASE_DIR}/libduktape.a)
+#WIN_dk_libDebug	(${DUKTAPE}/${OS}/${DEBUG_DIR}/duktape.lib)
+#WIN_dk_libRelease	(${DUKTAPE}/${OS}/${RELEASE_DIR}/duktape.lib)
+if(MSVC)
+	dk_libDebug		(${DUKTAPE}/${OS}/${DEBUG_DIR}/duktape.lib)
+	dk_libRelease	(${DUKTAPE}/${OS}/${RELEASE_DIR}/duktape.lib)
+else()
+	dk_libDebug		(${DUKTAPE}/${OS}/${DEBUG_DIR}/libduktape.a)
+	dk_libRelease	(${DUKTAPE}/${OS}/${RELEASE_DIR}/libduktape.a)
+endif()
 
 
 ### GENERATE ###
@@ -48,11 +55,16 @@ endif()
 ## TODO: Work this msys2 issue into ${DKCMAKE_BUILD}
 #if(MSYS2)
 	#dk_msys2(${DKCMAKE_BUILD} ${DUKTAPE})				# this does not work,    need quotes around generator string
-	#dk_msys2("cmake -G \"Unix Makefiles\" ${DUKTAPE}")	# this works
-#else()
+if(WIN AND GNU)
+	dk_msys2("cmake -G \"Unix Makefiles\" ${DUKTAPE}")	# this works
+else()
 	dk_queueCommand(${DKCMAKE_BUILD} ${DUKTAPE})
-#endif()
+endif()
 
 
 ### COMPILE ###
-dk_build(${DUKTAPE})
+if(WIN AND GNU)
+	dk_msys2("cmake --build . --config Debug")
+else()
+	dk_build(${DUKTAPE})
+endif()
