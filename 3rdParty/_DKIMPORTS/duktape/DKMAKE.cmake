@@ -45,10 +45,10 @@ if(NOT EXISTS ${DUKTAPE}/src/duktape.c)
 endif()
 
 
-## TODO: 
+## TODO: Work this msys2 issue into ${DKCMAKE_BUILD}
 #if(MSYS2)
-	#dk_msys2(${DKCMAKE_BUILD} ${DUKTAPE})				# this does not work
-	#dk_msys2("cmake -G \"Unix Makefiles\" ${DUKTAPE}")	# this kinda works
+	#dk_msys2(${DKCMAKE_BUILD} ${DUKTAPE})				# this does not work,    need quotes around generator string
+	#dk_msys2("cmake -G \"Unix Makefiles\" ${DUKTAPE}")	# this works
 #else()
 	dk_queueCommand(${DKCMAKE_BUILD} ${DUKTAPE})
 #endif()

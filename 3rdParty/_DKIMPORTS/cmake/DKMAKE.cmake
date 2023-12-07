@@ -75,8 +75,5 @@ else()
 endif()
 
 
-
-#dk_set(CMAKE_EXE ${CMAKE_COMMAND})
-#dk_set(CMAKE_EXE cmake)
 dk_debug("CMAKE_EXE = ${CMAKE_EXE}")
 dk_command(${CMAKE_EXE} --version)
