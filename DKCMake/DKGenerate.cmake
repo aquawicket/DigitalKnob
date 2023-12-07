@@ -375,7 +375,8 @@ if(WIN_32)
 
 	##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
 	
-	if(VISUAL_STUDIO_IDE)
+	#if(VISUAL_STUDIO_IDE)
+	if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")	# replaces if(VISUAL_STUDIO_IDE)
 		list(APPEND DEBUG_LINK_FLAGS /MANIFEST:NO)
 		list(APPEND DEBUG_LINK_FLAGS /MANIFESTUAC:NO)
 		list(APPEND DEBUG_LINK_FLAGS /level='highestAvailable')
@@ -495,7 +496,8 @@ if(WIN_64)
 	############# Link Libraries, Set Startup Project #################
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	
-	if(VISUAL_STUDIO_IDE)
+	#if(VISUAL_STUDIO_IDE)
+	if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")	# replaces if(VISUAL_STUDIO_IDE)
 		list(APPEND DEBUG_LINK_FLAGS /MANIFEST:NO)
 		list(APPEND DEBUG_LINK_FLAGS /MANIFESTUAC:NO)
 		list(APPEND DEBUG_LINK_FLAGS /level='highestAvailable')
@@ -1031,7 +1033,8 @@ if(ANDROID)
 	
 	########################## CREATE ICONS ###############################
 	dk_info("Creating android icons for ${APP_NAME} . . .")
-	if(VISUAL_STUDIO_IDE)
+	#if(VISUAL_STUDIO_IDE)
+	if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")	# replaces if(VISUAL_STUDIO_IDE)
 		dk_resizeImage(${DKPROJECT}/icons/icon.png 36 36 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-ldpi/ic_launcher.png)
 		dk_resizeImage(${DKPROJECT}/icons/icon.png 48 48 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-mdpi/ic_launcher.png)
 		dk_resizeImage(${DKPROJECT}/icons/icon.png 72 72 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-hdpi/ic_launcher.png)
@@ -1060,7 +1063,8 @@ if(ANDROID)
 	
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
-		if(VISUAL_STUDIO_IDE)
+		#if(VISUAL_STUDIO_IDE)
+		if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")	# replaces if(VISUAL_STUDIO_IDE)
 			DEBUG_dk_rename(${DKPROJECT}/${OS}/app/build/outputs/apk/debug/app-debug.apk ${DKPROJECT}/${OS}/app/build/outputs/apk/app-debug.apk.backup OVERWRITE)
 			RELEASE_dk_rename(${DKPROJECT}/${OS}/app/build/outputs/apk/release/app-release-unsigned.apk ${DKPROJECT}/${OS}/app/build/outputs/apk/release/app-release-unsigned.apk.backup OVERWRITE)
 		else()
