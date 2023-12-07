@@ -375,7 +375,6 @@ if(WIN_32)
 
 	##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
 	
-	#if(VISUAL_STUDIO_IDE)
 	if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")	# replaces if(VISUAL_STUDIO_IDE)
 		list(APPEND DEBUG_LINK_FLAGS /MANIFEST:NO)
 		list(APPEND DEBUG_LINK_FLAGS /MANIFESTUAC:NO)
@@ -496,7 +495,6 @@ if(WIN_64)
 	############# Link Libraries, Set Startup Project #################
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	
-	#if(VISUAL_STUDIO_IDE)
 	if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")	# replaces if(VISUAL_STUDIO_IDE)
 		list(APPEND DEBUG_LINK_FLAGS /MANIFEST:NO)
 		list(APPEND DEBUG_LINK_FLAGS /MANIFESTUAC:NO)
@@ -1033,7 +1031,6 @@ if(ANDROID)
 	
 	########################## CREATE ICONS ###############################
 	dk_info("Creating android icons for ${APP_NAME} . . .")
-	#if(VISUAL_STUDIO_IDE)
 	if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")	# replaces if(VISUAL_STUDIO_IDE)
 		dk_resizeImage(${DKPROJECT}/icons/icon.png 36 36 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-ldpi/ic_launcher.png)
 		dk_resizeImage(${DKPROJECT}/icons/icon.png 48 48 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-mdpi/ic_launcher.png)
