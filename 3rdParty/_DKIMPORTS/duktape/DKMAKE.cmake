@@ -54,8 +54,8 @@ endif()
 
 ## TODO: Work this msys2 issue into ${DKCMAKE_BUILD}
 if(WIN AND GNU)
-	#dk_msys2(${DKCMAKE_BUILD} ${DUKTAPE})				# this does not work,    need quotes around generator string
-	dk_msys2("cmake -G \"Unix Makefiles\" ${DUKTAPE}")	# this works
+	dk_msys2(${DKCMAKE_BUILD} ${DUKTAPE})				# this does not work,    need quotes around generator string
+	#dk_msys2("cmake -G \"Unix Makefiles\" ${DUKTAPE}")	# this works
 else()
 	dk_queueCommand(${DKCMAKE_BUILD} ${DUKTAPE})
 endif()
