@@ -23,10 +23,12 @@ dk_import(https://github.com/aquawicket/duktape.git PATCH) #NOTE: PATCH is for C
 WIN_dk_define		(DUK_F_VBCC)
 ANDROID_dk_define	(DUK_F_32BIT_PTRS)
 dk_include			(${DUKTAPE}/src)
+
 #UNIX_dk_libDebug	(${DUKTAPE}/${OS}/${DEBUG_DIR}/libduktape.a)
 #UNIX_dk_libRelease	(${DUKTAPE}/${OS}/${RELEASE_DIR}/libduktape.a)
 #WIN_dk_libDebug	(${DUKTAPE}/${OS}/${DEBUG_DIR}/duktape.lib)
 #WIN_dk_libRelease	(${DUKTAPE}/${OS}/${RELEASE_DIR}/duktape.lib)
+## TODO: create MSVC_dk_libDebug and MSVC_dk_libRelease
 if(MSVC)
 	dk_libDebug		(${DUKTAPE}/${OS}/${DEBUG_DIR}/duktape.lib)
 	dk_libRelease	(${DUKTAPE}/${OS}/${RELEASE_DIR}/duktape.lib)
@@ -51,17 +53,16 @@ if(NOT EXISTS ${DUKTAPE}/src/duktape.c)
 	#dk_executeProcess(${NODE_EXE} ${DUKTAPE}/src-tools/index.js configure --output-directory ${DUKTAPE}/src --source-directory ${DUKTAPE}/src-input --config-directory ${DUKTAPE}/config)
 endif()
 
-
-## TODO: Work this msys2 issue into ${DKCMAKE_BUILD}
+## TODO: Work dk_msys2 into dk_queueCommand
 if(WIN AND GNU)
-	dk_msys2(${DKCMAKE_BUILD} ${DUKTAPE})				# this does not work,    need quotes around generator string
-	#dk_msys2("cmake -G \"Unix Makefiles\" ${DUKTAPE}")	# this works
+	dk_msys2(${DKCMAKE_BUILD} ${DUKTAPE})
 else()
 	dk_queueCommand(${DKCMAKE_BUILD} ${DUKTAPE})
 endif()
 
 
 ### COMPILE ###
+## TODO: Work dk_msys2 into dk_build
 if(WIN AND GNU)
 	dk_msys2("cmake --build . --config Debug")
 else()
