@@ -519,6 +519,7 @@ function(dk_createOsMacros func)
 	file(APPEND ${DKFunctions_ext} "macro(LINUX_HOST_${func})\n   if(LINUX_HOST)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
 	file(APPEND ${DKFunctions_ext} "macro(LINUX32_HOST_${func})\n   if(LINUX_HOST AND X86)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
 	file(APPEND ${DKFunctions_ext} "macro(LINUX64_HOST_${func})\n   if(LINUX_HOST AND X64)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
+	file(APPEND ${DKFunctions_ext} "macro(ANDROID_HOST_${func})\n   if(ANDROID_HOST)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
 	
 	file(APPEND ${DKFunctions_ext} "macro(WIN_${func})\n   if(WIN)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
 	file(APPEND ${DKFunctions_ext} "macro(WIN32_${func})\n   if(WIN_32)\n      ${func}(\${ARGV})\n   endif()\nendmacro()\n")
