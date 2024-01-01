@@ -8,6 +8,8 @@ call:check_error
 :: GLOBAL USER VARIABLES
 ::--------------------------------------------------------
 set "GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.30.1.windows.1/Git-2.30.1-32-bit.exe"
+set "GIT_USER_EMAIL=aquawicket@hotmail.com"
+set "GIT_USER_NAME=aquawicket"
 set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi"
 set "MSBUILD_DL=https://aka.ms/vs/17/release/vs_community.exe"
 set "ANDROID_API=31"
@@ -30,6 +32,8 @@ call:validate_branch
 set "APP="
 set "OS="
 set "TYPE="
+
+
 
 :pickapp
 ECHO.
@@ -61,12 +65,14 @@ if '%choice%'=='x' call:end
 ECHO "%choice%" is not valid, try again
 
 
+
 :checkApp
 if NOT exist "%DKPATH%\DKApps\%APP%\DKMAKE.cmake" (
 	ECHO ERROR: %APP%/DKMAKE.cmake file not found
 	goto pickapp
 ) 
 goto pickos
+
 
 
 :pickos
@@ -346,6 +352,12 @@ goto:eof
 	call:check_error
 goto:eof
 
+
+:: validate_emscripten()
+:validate_emscripten
+	call:assert "validate_emscripten() no implemented"
+goto:eof
+
 :: clear_cmake_cache()
 :clear_cmake_cache
 	echo Deleteing CMake cache . . .
@@ -387,8 +399,8 @@ goto:eof
 :: git_commit()
 :git_commit
 	cd %DKPATH%
-	"%GIT%" config user.email "aquawicket@hotmail.com"
-	"%GIT%" config user.name "aquawicket"
+	"%GIT%" config user.email "%GIT_USER_EMAIL%"
+	"%GIT%" config user.name "%GIT_USER_NAME%"
 	"%GIT%" commit -a -m "git commit"
 	"%GIT%" push
 	call:check_error
