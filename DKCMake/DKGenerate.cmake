@@ -321,6 +321,7 @@ if(WIN_32)
 			dk_info("Building icons for ${APP_NAME} . . .")
 			#dk_makeDirectory(${DKPROJECT}/icons/windows)
 			#dk_executeProcess(${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 ${DKPROJECT}/icons/windows/icon.ico)
+			dk_makeDirectory(${DKPROJECT}/assets)
 			#dk_copy(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico OVERWRITE) # copy the icon to assets
 			dk_executeProcess(${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 ${DKPROJECT}/assets/icon.ico)
 			dk_executeProcess(${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=16 ${DKPROJECT}/assets/favicon.ico)

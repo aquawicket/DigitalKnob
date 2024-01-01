@@ -125,7 +125,7 @@ while :
 	do
 	echo " "
 	PS3='Please update and select an app to build: '
-	options=("Git Update" "Git Commit" "DKCore" "DKJavascript" "DKBuilder" "DKSDL" "DKSDLRml" "DKDomTest" "DKTestAll" "Clear Screen" "Exit")
+	options=("Git Update" "Git Commit" "HelloWorld" "DKCore" "DKJavascript" "DKBuilder" "DKSDL" "DKSDLRml" "DKDomTest" "DKTestAll" "Clear Screen" "Exit")
 	select opt in "${options[@]}"
 	do
 		case $opt in
@@ -173,6 +173,11 @@ while :
 				cd $DKPATH
 				git commit -a -m "git commit"
 				git push
+				;;
+			"HelloWorld")
+				echo "$opt"
+				APP="HelloWorld"
+				break
 				;;
 			"DKCore")
 				echo "$opt"
