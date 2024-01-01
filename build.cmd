@@ -68,34 +68,6 @@ if '%choice%'=='x' goto end
 ::ECHO "%choice%" is not valid, try again
 goto pickapp
 
-:gitupdate
-if NOT exist "%DKPATH%\.git" (
-	"%GIT%" clone https://github.com/aquawicket/DigitalKnob.git "%DKPATH%"
-)
-call:check_error
-
-cd "%DKPATH%"
-"%GIT%" pull --all
-"%GIT%" checkout -- .
-call:check_error
-"%GIT%" checkout %DKBRANCH%
-if NOT "%ERRORLEVEL%" == "0" (
-	echo Remote has no %DKBRANCH% branch. Creating...
-	"%GIT%" checkout -b %DKBRANCH% main
-	"%GIT%" push --set-upstream origin %DKBRANCH%
-)
-
-
-::call:check_error
-goto pickapp
-
-:::gitcommit
-::cd %DKPATH%
-::"%GIT%" config user.email "aquawicket@hotmail.com"
-::"%GIT%" config user.name "aquawicket"
-::"%GIT%" commit -a -m "git commit"
-::"%GIT%" push
-::goto pickapp
 
 :clearscreen
 cls
