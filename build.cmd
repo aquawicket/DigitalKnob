@@ -319,11 +319,18 @@ exit
 :: https://www.dostips.com/DtTutoFunctions.php
 ::--------------------------------------------------------
 
+:: assert()
+:assert
+	echo ASSERT: %~1
+	pause
+	exit
+goto:eof
+
+
 :: check_error()
 :check_error
 	if "%ERRORLEVEL%" == "0" goto:eof
-	echo ERROR: %ERRORLEVEL%
-	pause
+	call:assert "ERRORLEVEL = %ERRORLEVEL%"
 	exit
 goto:eof
 
@@ -345,8 +352,7 @@ goto:eof
 :extract
 	echo Extracting %~1 to %~2
 	if NOT exist "%~2" (
-		echo ERROR: destonation path "%~2" does not exist
-		goto:eof
+		call:assert "destonation path '%~2' does not exist"
 	)
 	chdir "%~2"
 	"%CMAKE%" -E tar x "%~1"
@@ -357,8 +363,7 @@ goto:eof
 :rename
 	echo Renaming %~1 to %~2
 	if NOT exist "%~1" (
-		echo ERROR: source path "%~1" does not exist
-		goto:eof
+		call:assert "source path '%~1' does not exist"
 	)
 	"%CMAKE%" -E rename "%~1" "%~2"
 	call:check_error
@@ -387,15 +392,12 @@ goto:eof
 	if NOT exist "%GIT%" (
 		ECHO "installing git"
 		call:download %GIT_DL% "%DKDOWNLOAD%\Git-2.30.1-32-bit.exe"
-		::call:check_error
 		"%DKDOWNLOAD%\Git-2.30.1-32-bit.exe" /VERYSILENT /NORESTART
-		::call:check_error
 		if exist "C:\Program Files\Git\bin\git.exe" set "GIT=C:\Program Files\Git\bin\git.exe"
 		if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
 	)
 	if NOT exist "%GIT%" (
-		ECHO "GIT is still and invalid command"
-		goto error
+		call:assert "GIT is still and invalid command"
 	)
 	echo GIT = %GIT%
 	call:check_error
@@ -426,12 +428,8 @@ goto:eof
 	if exist "C:\Program Files (x86)\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files (x86)\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
 	if NOT exist "%MSBUILD%" (
 		echo "installing Visual Studio"
-		echo "%MSBUILD_DL%"
-		
 		call:download %MSBUILD_DL% "%DKDOWNLOAD%\vs_Community.exe"
-		::call:check_error
 		"%DKDOWNLOAD%\vs_Community.exe"
-		::call:check_error
 		if exist "C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
 		if exist "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
 		if exist "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
@@ -452,8 +450,6 @@ goto:eof
 	set "ANDROID_NDK=%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk\%ANDROID_NDK_BUILD%"
 	echo ANDROID_NDK = %ANDROID_NDK%
 	call:extract "%DKDOWNLOAD%\android-ndk-r23b-windows.zip" "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk"
-	
-	::"%CMAKE%" -E rename "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk\android-ndk-r23b" "C:\Users\Administrator\digitalknob\Development\3rdParty\android-sdk\ndk\23.1.7779620"
 	call:rename "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk\android-ndk-r23b" "C:\Users\Administrator\digitalknob\Development\3rdParty\android-sdk\ndk\23.1.7779620"
 
 	if not '%VS_NdkRoot%'=='%ANDROID_NDK%' setx VS_NdkRoot %ANDROID_NDK%
@@ -465,9 +461,7 @@ goto:eof
 	echo Deleteing CMake cache . . .
 	cd "%DIGITALKNOB%"
 	for /r %%i in (CMakeCache.*) do del "%%i"
-	::call:check_error
 	for /d /r %%i in (*CMakeFiles*) do rd /s /q "%%i"
-	::call:check_error
 	call:check_error
 goto:eof
 
@@ -476,8 +470,6 @@ goto:eof
 	echo Deleteing .tmp files . . .
 	cd "%DIGITALKNOB%"
 	for /r %%i in (*.tmp) do del "%%i"
-	::call:check_error
 	for /r %%i in (*.TMP) do del "%%i"
-	::call:check_error
 	call:check_error
 goto:eof
