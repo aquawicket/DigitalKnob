@@ -54,7 +54,7 @@ ECHO x. Exit
 set choice=
 set /p choice=Please select an app to build: 
 if not '%choice%'=='' set choice=%choice:~0,1%
-if '%choice%'=='1' goto gitupdate
+if '%choice%'=='1' call:git_update
 if '%choice%'=='2' call:git_commit
 if '%choice%'=='3' goto dkcore
 if '%choice%'=='4' goto dkjavascript
@@ -462,6 +462,26 @@ goto:eof
 	cd "%DIGITALKNOB%"
 	for /r %%i in (*.tmp) do del "%%i"
 	for /r %%i in (*.TMP) do del "%%i"
+	call:check_error
+goto:eof
+
+:: git_update()
+:git_update
+	if NOT exist "%DKPATH%\.git" (
+		"%GIT%" clone https://github.com/aquawicket/DigitalKnob.git "%DKPATH%"
+	)
+	call:check_error
+
+	cd "%DKPATH%"
+	"%GIT%" pull --all
+	"%GIT%" checkout -- .
+	call:check_error
+	"%GIT%" checkout %DKBRANCH%
+	if NOT "%ERRORLEVEL%" == "0" (
+		echo Remote has no %DKBRANCH% branch. Creating...
+		"%GIT%" checkout -b %DKBRANCH% main
+		"%GIT%" push --set-upstream origin %DKBRANCH%
+	)
 	call:check_error
 goto:eof
 
