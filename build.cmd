@@ -1,22 +1,15 @@
 :: Windows Batch file DK builder
 @echo off
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
-
 call:check_error
+
+
 ::--------------------------------------------------------
 :: GLOBAL USER VARIABLES
 ::--------------------------------------------------------
-:: GIT download link
 set "GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.30.1.windows.1/Git-2.30.1-32-bit.exe"
-
-:: CMAKE download link
 set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi"
-
-:: MSBuild download link
-::set "MSBUILD_DL=https://download.visualstudio.microsoft.com/download/pr/5e397ebe-38b2-4e18-a187-ac313d07332a/169156e6e9a005d49b357c42240184dc1e3ccc28ebc777e70d49257c074f77e8/vs_Community.exe"
 set "MSBUILD_DL=https://aka.ms/vs/17/release/vs_community.exe"
-
-:: Android Ndk download link
 set "ANDROID_API=31"
 set "ANDROID_NDK_BUILD=23.1.7779620"
 set "ANDROID_NDK_DL=https://dl.google.com/android/repository/android-ndk-r23b-windows.zip"
@@ -84,8 +77,8 @@ ECHO 2. Windows 64
 ECHO 3. Android 32
 ECHO 4. Android 64
 ECHO 5. Emscripten
-ECHO b. Go Back
 ECHO c. Clear Screen
+ECHO b. Go Back
 ECHO x. Exit
 set choice=
 set /p choice=Please select an OS to build for: 
@@ -95,8 +88,8 @@ if '%choice%'=='2' set "OS=win64" & goto type
 if '%choice%'=='3' set "OS=android32" & goto type
 if '%choice%'=='4' set "OS=android64" & goto type
 if '%choice%'=='5' set "OS=emscripten" & goto type
-if '%choice%'=='b' goto pickapp
 if '%choice%'=='c' call:clear_screen & goto pickos
+if '%choice%'=='b' goto pickapp
 if '%choice%'=='x' call:end
 ECHO "%choice%" is not valid, try again
 
@@ -108,6 +101,7 @@ ECHO.
 ECHO 1. Debug
 ECHO 2. Release
 ECHO 3. All
+ECHO c. Clear Screen
 ECHO b. Go Back
 ECHO x. Exit
 set choice=
@@ -116,6 +110,7 @@ if not '%choice%'=='' set choice=%choice:~0,1%
 if '%choice%'=='1' set "TYPE=Debug" & goto generate
 if '%choice%'=='2' set "TYPE=Release" & goto generate
 if '%choice%'=='3' set "TYPE=All" & goto generate
+if '%choice%'=='c' call:clear_screen & goto type
 if '%choice%'=='b' goto pickos
 if '%choice%'=='x' call:end
 ECHO "%choice%" is not valid, try again
@@ -173,7 +168,6 @@ set EMSDK=DIGITALKNOB+C:/Users/Administrator/digitalknob/Development/3rdParty/em
 set EMSDK_ENV=%EMSDK%/emsdk_env
 set EMSDK_TOOLCHAIN_FILE=%EMSDK%/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake
 call:assert "emscriten incomplete"
-::goto build
 
 :build
 echo TYPE = %TYPE%
@@ -184,18 +178,15 @@ call:assert "TYPE not set"
 
 :build_debug
 "%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Debug
-::call:check_error
 goto end_message
 
 :build_release
 "%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Release
-::call:check_error
 goto end_message
 
 :build_all
 "%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Debug
 "%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Release
-::call:check_error
 goto end_message
 
 :end_message
