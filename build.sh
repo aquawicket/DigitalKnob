@@ -384,31 +384,34 @@ while :
 		
 	validate_package which which
 	if [[ "$OSTYPE" == "msys" ]]; then
-		validate_package make make
-		validate_package diffutils diffutils
-		validate_package yasm yasm
+		#validate_package make make
+		#validate_package diffutils diffutils
+		#validate_package yasm yasm
 		if [[ "$MSYSTEM" == "MINGW32" ]]; then  
-			validate_package gcc mingw-w64-i686-gcc
-			validate_package g++ mingw-w64-i686-g++
-			validate_package gdb mingw-w64-i686-gdb
+			validate_package gcc mingw-w64-i686-toolchain
+			#validate_package gcc mingw-w64-i686-gcc
+			#validate_package g++ mingw-w64-i686-g++
+			#validate_package gdb mingw-w64-i686-gdb
 			validate_package cmake mingw-w64-i686-cmake
 		elif [[ "$MSYSTEM" == "MINGW64" ]]; then
-			validate_package gcc mingw-w64-x86_64-gcc
-			validate_package g++ mingw-w64-x86_64-g++
-			validate_package gdb mingw-w64-x86_64-gdb
-			validate_package autotools mingw-w64-x86_64-autotools
+			validate_package gcc mingw-w64-x86_64-toolchain
+			#validate_package gcc mingw-w64-x86_64-gcc
+			#validate_package g++ mingw-w64-x86_64-g++
+			#validate_package gdb mingw-w64-x86_64-gdb
+			#validate_package autotools mingw-w64-x86_64-autotools
 			validate_package cmake mingw-w64-x86_64-cmake
 		elif [[ "$MSYSTEM" == "UCRT64" ]]; then
-			validate_package gcc mingw-w64-ucrt-x86_64-gcc
-			validate_package g++ mingw-w64-ucrt-x86_64-g++
-			validate_package gdb mingw-w64-ucrt-x86_64-gdb
+			validate_package gcc mingw-w64-ucrt-x86_64-toolchain
+			#validate_package gcc mingw-w64-ucrt-x86_64-gcc
+			#validate_package g++ mingw-w64-ucrt-x86_64-g++
+			#validate_package gdb mingw-w64-ucrt-x86_64-gdb
 			validate_package cmake mingw-w64-ucrt-x86_64-cmake
 		else
-			validate_package gcc gcc
-			validate_package g++ g++
-			validate_package gdb gdb
-			validate_package git git
-			validate_package cmake cmake
+			#validate_package gcc gcc
+			#validate_package g++ g++
+			#validate_package gdb gdb
+			#validate_package git git
+			#validate_package cmake cmake
 		fi
 	else
 		validate_package gcc gcc
