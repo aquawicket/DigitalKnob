@@ -38,7 +38,7 @@ install() {
 	elif command_exists pkg; then
 		$SUDO pkg install $1
 	elif command_exists pacman; then
-		$SUDO pacman -S $1
+		$SUDO pacman -S $1 --noconfirm
 	elif command_exists brew; then
 		$SUDO brew install $1
 	else
@@ -104,6 +104,7 @@ fi
 
 DKPATH="$DIGITALKNOB/$DKBRANCH"
 DKCMAKE="$DIGITALKNOB/$DKBRANCH/DKCMake"
+MSYSTEM="MINGW64"
 
 echo "hostname = $HOSTNAME"
 echo "hosttype = $HOSTTYPE"
@@ -115,6 +116,7 @@ echo "username = $USERNAME"
 echo "digitalknob = $DIGITALKNOB"
 echo "dkpath = $DKPATH"
 echo "dkcmake = $DKCMAKE"
+echo "msystem = $MSYSTEM"
 
 $SUDO echo
 
@@ -139,8 +141,19 @@ while :
 					# brew tap homebrew/core
 					# brew install git
 				else
-				  #validate_package git git
-				  validate_package git mingw-w64-ucrt-x86_64-crt-git
+					if [[ "$OSTYPE" == "msys" ]]; then  
+						if [[ "$MSYSTEM" == "MINGW32" ]]; then  
+							validate_package git mingw-w64-i686-git
+						elif [[ "$MSYSTEM" == "MINGW64" ]]; then
+							validate_package git mingw-w64-x86_64-git
+						elif [[ "$MSYSTEM" == "UCRT64" ]]; then
+							validate_package git mingw-w64-ucrt-x86_64-crt-git
+						else
+							validate_package git git
+						fi						
+					else
+						validate_package git git
+					fi
 				fi
 				
 				if [[ ! -d "$DKPATH/.git" ]]; then
@@ -371,12 +384,31 @@ while :
 		
 	validate_package which which
 	if [[ "$OSTYPE" == "msys" ]]; then
-		#validate_package cmake mingw-w64-x86_64-cmake
-		validate_package gcc mingw-w64-ucrt-x86_64-gcc
-		validate_package g++ mingw-w64-ucrt-x86_64-g++
-		validate_package gdb mingw-w64-ucrt-x86_64-gdb
-		validate_package git mingw-w64-ucrt-x86_64-crt-git
-		validate_package cmake mingw-w64-ucrt-x86_64-cmake
+		if [[ "$MSYSTEM" == "MINGW32" ]]; then  
+			validate_package gcc mingw-w64-i686-gcc
+			validate_package g++ mingw-w64-i686-g++
+			validate_package gdb mingw-w64-i686-gdb
+			#validate_package git mingw-w64-i686-git
+			validate_package cmake mingw-w64-i686-cmake
+		elif [[ "$MSYSTEM" == "MINGW64" ]]; then
+			validate_package gcc mingw-w64-x86_64-gcc
+			validate_package g++ mingw-w64-x86_64-g++
+			validate_package gdb mingw-w64-x86_64-gdb
+			#validate_package git mingw-w64-x86_64-git
+			validate_package cmake mingw-w64-x86_64-cmake
+		elif [[ "$MSYSTEM" == "UCRT64" ]]; then
+			validate_package gcc mingw-w64-ucrt-x86_64-gcc
+			validate_package g++ mingw-w64-ucrt-x86_64-g++
+			validate_package gdb mingw-w64-ucrt-x86_64-gdb
+			#validate_package git mingw-w64-ucrt-x86_64-crt-git
+			validate_package cmake mingw-w64-ucrt-x86_64-cmake
+		else
+			validate_package gcc gcc
+			validate_package g++ g++
+			validate_package gdb gdb
+			validate_package git git
+			validate_package cmake cmake
+		fi
 	else
 		validate_package gcc gcc
 		validate_package g++ g++
@@ -528,12 +560,14 @@ while :
 		#export PATH=${MSYS2}/usr/bin:$PATH
 		#set PATH=%PATH%;${MSYS2}/mingw64/bin
 		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-			#cmake -G "MinGW Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
-			cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+			if [[ "$MSYSTEM" == "MINGW32" ]]; then
+				cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+			fi
 		fi
 		if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-			#cmake -G "MinGW Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
-			cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
+			if [[ "$MSYSTEM" == "MINGW32" ]]; then
+				cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
+			fi
 		fi
 		TARGET=${APP}_APP
 	fi
@@ -543,12 +577,19 @@ while :
 		#export PATH=${MSYS2}/usr/bin:$PATH
 		#set PATH=%PATH%;${MSYS2}/mingw64/bin
 		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-			cmake -G "MinGW Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
-			#cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+			if [[ "$MSYSTEM" == "MINGW64" ]]; then
+				cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+			else
+				cmake -G "MinGW Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+			fi
 		fi
 		if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-			#cmake -G "MinGW Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
-			cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
+			if [[ "$MSYSTEM" == "MINGW64" ]]; then
+				cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
+			else
+				cmake -G "MinGW Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
+			fi
+			
 		fi
 		TARGET=${APP}_APP
 	fi
