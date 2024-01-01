@@ -376,7 +376,7 @@ goto:eof
 	for %%I in (.) do set "FOLDER=%%~nxI"
 	"%GIT%" branch | find "* %FOLDER%" > NUL & IF ERRORLEVEL 1 (
 		set "DKBRANCH=Development"
-	) ELSE (
+	) else (
 		set "DKBRANCH=%FOLDER%"
 	)
 	set "DKPATH=%DIGITALKNOB%\%DKBRANCH%"
@@ -390,7 +390,7 @@ goto:eof
 	if exist "C:\Program Files\Git\bin\git.exe" set "GIT=C:\Program Files\Git\bin\git.exe"
 	if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
 	if NOT exist "%GIT%" (
-		ECHO "installing git"
+		echo "installing git"
 		call:download %GIT_DL% "%DKDOWNLOAD%\Git-2.30.1-32-bit.exe"
 		"%DKDOWNLOAD%\Git-2.30.1-32-bit.exe" /VERYSILENT /NORESTART
 		if exist "C:\Program Files\Git\bin\git.exe" set "GIT=C:\Program Files\Git\bin\git.exe"
@@ -409,11 +409,8 @@ goto:eof
 	if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files (x86)\CMake\bin\cmake.exe"
 	if NOT exist "%CMAKE%" (
 		echo "installing cmake"
-		echo "%CMAKE_DL%"
 		call:download %CMAKE_DL% "%DKDOWNLOAD%\cmake-3.21.1-windows-i386.msi"
-		call:check_error
 		"%DKDOWNLOAD%\cmake-3.21.1-windows-i386.msi"
-		call:check_error
 		if exist "C:\Program Files\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files\CMake\bin\cmake.exe"
 		if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files (x86)\CMake\bin\cmake.exe"
 	)
@@ -440,18 +437,17 @@ goto:eof
 
 :: validate_android_ndk()
 :validate_android_ndk
-	if exist %DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk\%ANDROID_NDK_BUILD%" set "ANDROID_NDK=%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk\%ANDROID_NDK_BUILD%"
+	::if exist "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk\%ANDROID_NDK_BUILD%" set "ANDROID_NDK=%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk\%ANDROID_NDK_BUILD%"
+	set "ANDROID_NDK=%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk\%ANDROID_NDK_BUILD%"
+	echo ANDROID_NDK = %ANDROID_NDK%
 	if NOT exist "%ANDROID_NDK%" (
 		echo "installing android ndk"
 		call:download %ANDROID_NDK_DL% "%DKDOWNLOAD%\android-ndk-r23b-windows.zip"
 		if NOT exist "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk" mkdir "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk"
 		if NOT exist "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk" mkdir "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk"
+		call:extract "%DKDOWNLOAD%\android-ndk-r23b-windows.zip" "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk"
+		call:rename "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk\android-ndk-r23b" "C:\Users\Administrator\digitalknob\Development\3rdParty\android-sdk\ndk\23.1.7779620"
 	)
-	set "ANDROID_NDK=%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk\%ANDROID_NDK_BUILD%"
-	echo ANDROID_NDK = %ANDROID_NDK%
-	call:extract "%DKDOWNLOAD%\android-ndk-r23b-windows.zip" "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk"
-	call:rename "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk\android-ndk-r23b" "C:\Users\Administrator\digitalknob\Development\3rdParty\android-sdk\ndk\23.1.7779620"
-
 	if not '%VS_NdkRoot%'=='%ANDROID_NDK%' setx VS_NdkRoot %ANDROID_NDK%
 	call:check_error
 goto:eof
