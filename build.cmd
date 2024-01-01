@@ -58,37 +58,15 @@ if '%choice%'=='1' call:git_update & goto pickapp
 if '%choice%'=='2' call:git_commit & goto pickapp
 if '%choice%'=='3' set "APP=DKCore" & goto checkApp
 if '%choice%'=='4' set "APP=DKJavascript" & goto checkApp
-if '%choice%'=='5' goto dkbuilder
-if '%choice%'=='6' goto dksdl
-if '%choice%'=='7' goto dksdlrml
-if '%choice%'=='8' goto dkdomtest
-if '%choice%'=='9' goto dktestall
+if '%choice%'=='5' set "APP=DKBuilder" & goto checkApp
+if '%choice%'=='6' set "APP=DKSDL" & goto checkApp
+if '%choice%'=='7' set "APP=DKSDLRml" & goto checkApp
+if '%choice%'=='8' set "APP=DKDomTest" & goto checkApp
+if '%choice%'=='9' set "APP=DKTestAll" & goto checkApp
 if '%choice%'=='c' call:clear_screen & goto pickapp
 if '%choice%'=='x' call:end & goto pickapp
-::ECHO "%choice%" is not valid, try again
-::goto pickapp
+ECHO "%choice%" is not valid, try again
 
-
-
-:dkbuilder
-set APP=DKBuilder
-goto checkApp
-
-:dksdl
-set APP=DKSDL
-goto checkApp
-
-:dksdlrml
-set APP=DKSDLRml
-goto checkApp
-
-:dkdomtest
-set APP=DKDomTest
-goto checkApp
-
-:dktestall
-set APP=DKTestAll
-goto checkApp
 
 :checkApp
 if NOT exist "%DKPATH%\DKApps\%APP%\DKMAKE.cmake" (
