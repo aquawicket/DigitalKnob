@@ -65,7 +65,7 @@ if '%choice%'=='8' goto dkdomtest
 if '%choice%'=='9' goto dktestall
 if '%choice%'=='c' goto clearscreen
 if '%choice%'=='x' goto end
-ECHO "%choice%" is not valid, try again
+::ECHO "%choice%" is not valid, try again
 goto pickapp
 
 :gitupdate
