@@ -2,6 +2,7 @@
 @echo off
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
 
+call:check_error
 ::--------------------------------------------------------
 :: GLOBAL USER VARIABLES
 ::--------------------------------------------------------
@@ -71,12 +72,12 @@ goto pickapp
 if NOT exist "%DKPATH%\.git" (
 	"%GIT%" clone https://github.com/aquawicket/DigitalKnob.git "%DKPATH%"
 )
-if NOT "%ERRORLEVEL%" == "0" goto error
+call:check_error
 
 cd "%DKPATH%"
 "%GIT%" pull --all
 "%GIT%" checkout -- .
-if NOT "%ERRORLEVEL%" == "0" goto error
+call:check_error
 "%GIT%" checkout %DKBRANCH%
 if NOT "%ERRORLEVEL%" == "0" (
 	echo Remote has no %DKBRANCH% branch. Creating...
@@ -85,7 +86,7 @@ if NOT "%ERRORLEVEL%" == "0" (
 )
 
 
-::if NOT "%ERRORLEVEL%" == "0" goto error
+::call:check_error
 goto pickapp
 
 :gitcommit
@@ -93,9 +94,9 @@ cd %DKPATH%
 "%GIT%" config user.email "aquawicket@hotmail.com"
 "%GIT%" config user.name "aquawicket"
 "%GIT%" commit -a -m "git commit"
-::if NOT "%ERRORLEVEL%" == "0" goto error
+::call:check_error
 "%GIT%" push
-::if NOT "%ERRORLEVEL%" == "0" goto error
+::call:check_error
 goto pickapp
 
 :clearscreen
@@ -225,7 +226,7 @@ echo ****** BUILDING %APP% - %OS% - %TYPE% ******
 set "APP_PATH=%DKPATH%\DKApps\%APP%"
 ECHO %APP_PATH%
 if NOT exist "%APP_PATH%\%OS%" mkdir "%APP_PATH%\%OS%"
-::if NOT "%ERRORLEVEL%" == "0" goto error
+::call:check_error
 cd "%APP_PATH%\%OS%"
 
 
@@ -239,14 +240,14 @@ if %OS%==emscripten goto generate_emscripten
 call:validate_visual_studio
 "%CMAKE%" -G "Visual Studio 17 2022" -A Win32 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKCMAKE%
 set TARGET=%APP%_APP
-::if NOT "%ERRORLEVEL%" == "0" goto error
+::call:check_error
 goto build
 
 :generate_win64
 call:validate_visual_studio
 "%CMAKE%" -G "Visual Studio 17 2022" -A x64 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKCMAKE%
 set TARGET=%APP%_APP
-::if NOT "%ERRORLEVEL%" == "0" goto error
+::call:check_error
 goto build
 
 :generate_android32
@@ -254,7 +255,7 @@ call:validate_android_ndk
 call %DKPATH%\3rdParty\_DKIMPORTS\openjdk\registerJDK.cmd
 "%CMAKE%" -G "Visual Studio 17 2022" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID-NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_NDK%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
 set TARGET=main
-::if NOT "%ERRORLEVEL%" == "0" goto error
+::call:check_error
 goto build
 
 :generate_android64
@@ -262,7 +263,7 @@ call:validate_android_ndk
 call %DKPATH%\3rdParty\_DKIMPORTS\openjdk\registerJDK.cmd
 "%CMAKE%" -G "Visual Studio 17 2022" -A ARM64 -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID-NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_NDK%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
 set TARGET=main
-::if NOT "%ERRORLEVEL%" == "0" goto error
+::call:check_error
 goto build
 
 :generate_emscripten
@@ -283,18 +284,18 @@ goto error
 
 :build_debug
 "%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Debug
-::if NOT "%ERRORLEVEL%" == "0" goto error
+::call:check_error
 goto end_message
 
 :build_release
 "%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Release
-::if NOT "%ERRORLEVEL%" == "0" goto error
+::call:check_error
 goto end_message
 
 :build_all
 "%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Debug
 "%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Release
-::if NOT "%ERRORLEVEL%" == "0" goto error
+::call:check_error
 goto end_message
 
 :end_message
@@ -318,17 +319,33 @@ exit
 :: https://www.dostips.com/DtTutoFunctions.php
 ::--------------------------------------------------------
 
+:: check_error()
+:check_error
+	if "%ERRORLEVEL%" == "0" goto:eof
+	echo ERROR: %ERRORLEVEL%
+	pause
+	exit
+goto:eof
+
 :: download()
 :download
 	echo Downloading %~1
-	certutil.exe -urlcache -split -f %~1 %~2
-	::set "bitsadmin /transfer myDownloadJob /download /priority normal %~1 %~2"
+	if exist "%~2" (
+		echo %~2 already exist
+	)
+	if NOT exist "%~2" (
+		echo please wait . . .
+		certutil.exe -urlcache -split -f %~1 %~2
+	)
+	::bitsadmin /transfer myDownloadJob /download /priority normal %~1 %~2
+	call:check_error
 goto:eof
 
 :: extract()
 :extract
 	echo Extracting %~1 to %~2
 	%CMAKE% -E tar %~1 %~2
+	call:check_error
 goto:eof
 
 :: validate_branch()
@@ -344,6 +361,7 @@ goto:eof
 	set "DKPATH=%DIGITALKNOB%\%DKBRANCH%"
 	set "DKCMAKE=%DIGITALKNOB%\%DKBRANCH%\DKCMake"
 	echo DKBRANCH = %DKBRANCH%
+	call:check_error
 goto:eof
 
 :: validate_git()
@@ -353,9 +371,9 @@ goto:eof
 	if NOT exist "%GIT%" (
 		ECHO "installing git"
 		call:download %GIT_DL% "%DKDOWNLOAD%\Git-2.30.1-32-bit.exe"
-		::if NOT "%ERRORLEVEL%" == "0" goto error
+		::call:check_error
 		"%DKDOWNLOAD%\Git-2.30.1-32-bit.exe" /VERYSILENT /NORESTART
-		::if NOT "%ERRORLEVEL%" == "0" goto error
+		::call:check_error
 		if exist "C:\Program Files\Git\bin\git.exe" set "GIT=C:\Program Files\Git\bin\git.exe"
 		if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
 	)
@@ -364,6 +382,7 @@ goto:eof
 		goto error
 	)
 	echo GIT = %GIT%
+	call:check_error
 goto:eof
 
 :: validate_cmake()
@@ -374,12 +393,13 @@ goto:eof
 		echo "installing cmake"
 		echo "%CMAKE_DL%"
 		call:download %CMAKE_DL% "%DKDOWNLOAD%\cmake-3.21.1-windows-i386.msi"
-		if NOT "%ERRORLEVEL%" == "0" goto error
+		call:check_error
 		"%DKDOWNLOAD%\cmake-3.21.1-windows-i386.msi"
-		if NOT "%ERRORLEVEL%" == "0" goto error
+		call:check_error
 		if exist "C:\Program Files\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files\CMake\bin\cmake.exe"
 		if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files (x86)\CMake\bin\cmake.exe"
 	)
+	call:check_error
 goto:eof
 
 :: validate_visual_studio()
@@ -393,14 +413,15 @@ goto:eof
 		echo "%MSBUILD_DL%"
 		
 		call:download %MSBUILD_DL% "%DKDOWNLOAD%\vs_Community.exe"
-		::if NOT "%ERRORLEVEL%" == "0" goto error
+		::call:check_error
 		"%DKDOWNLOAD%\vs_Community.exe"
-		::if NOT "%ERRORLEVEL%" == "0" goto error
+		::call:check_error
 		if exist "C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
 		if exist "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
 		if exist "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
 		if exist "C:\Program Files (x86)\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files (x86)\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
 	)
+	call:check_error
 goto:eof
 
 :: validate_android_ndk()
@@ -412,6 +433,7 @@ goto:eof
 		call:extract "%DKDOWNLOAD%\android-ndk-r23b-windows.zip" "%ANDROID_NDK%"
 	)
 	if not '%VS_NdkRoot%'=='%ANDROID_NDK%' setx VS_NdkRoot %ANDROID_NDK%
+	call:check_error
 goto:eof
 
 :: clear_cmake_cache()
@@ -419,9 +441,10 @@ goto:eof
 	echo Deleteing CMake cache . . .
 	cd "%DIGITALKNOB%"
 	for /r %%i in (CMakeCache.*) do del "%%i"
-	::if NOT "%ERRORLEVEL%" == "0" goto error
+	::call:check_error
 	for /d /r %%i in (*CMakeFiles*) do rd /s /q "%%i"
-	::if NOT "%ERRORLEVEL%" == "0" goto error
+	::call:check_error
+	call:check_error
 goto:eof
 
 :: delete_temp_files()
@@ -429,7 +452,8 @@ goto:eof
 	echo Deleteing .tmp files . . .
 	cd "%DIGITALKNOB%"
 	for /r %%i in (*.tmp) do del "%%i"
-	::if NOT "%ERRORLEVEL%" == "0" goto error
+	::call:check_error
 	for /r %%i in (*.TMP) do del "%%i"
-	::if NOT "%ERRORLEVEL%" == "0" goto error
+	::call:check_error
+	call:check_error
 goto:eof
