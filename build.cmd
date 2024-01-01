@@ -54,28 +54,21 @@ ECHO x. Exit
 set choice=
 set /p choice=Please select an app to build: 
 if not '%choice%'=='' set choice=%choice:~0,1%
-if '%choice%'=='1' call:git_update
-if '%choice%'=='2' call:git_commit
-if '%choice%'=='3' goto dkcore
-if '%choice%'=='4' goto dkjavascript
+if '%choice%'=='1' call:git_update & goto pickapp
+if '%choice%'=='2' call:git_commit & goto pickapp
+if '%choice%'=='3' set "APP=DKCore" & goto checkApp
+if '%choice%'=='4' set "APP=DKJavascript" & goto checkApp
 if '%choice%'=='5' goto dkbuilder
 if '%choice%'=='6' goto dksdl
 if '%choice%'=='7' goto dksdlrml
 if '%choice%'=='8' goto dkdomtest
 if '%choice%'=='9' goto dktestall
-if '%choice%'=='c' call:clear_screen
-if '%choice%'=='x' call:end
+if '%choice%'=='c' call:clear_screen & goto pickapp
+if '%choice%'=='x' call:end & goto pickapp
 ::ECHO "%choice%" is not valid, try again
-goto pickapp
+::goto pickapp
 
 
-:dkcore
-set APP=DKCore
-goto checkApp
-
-:dkjavascript
-set APP=DKJavascript
-goto checkApp
 
 :dkbuilder
 set APP=DKBuilder
@@ -125,7 +118,7 @@ if '%choice%'=='4' goto android64
 if '%choice%'=='5' goto emscripten
 if '%choice%'=='b' goto pickapp
 if '%choice%'=='x' call:end
-ECHO "%choice%" is not valid, try again
+::ECHO "%choice%" is not valid, try again
 goto pickos
 
 :win32
