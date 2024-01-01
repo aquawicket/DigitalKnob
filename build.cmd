@@ -64,7 +64,7 @@ if '%choice%'=='7' set "APP=DKSDLRml" & goto checkApp
 if '%choice%'=='8' set "APP=DKDomTest" & goto checkApp
 if '%choice%'=='9' set "APP=DKTestAll" & goto checkApp
 if '%choice%'=='c' call:clear_screen & goto pickapp
-if '%choice%'=='x' call:end & goto pickapp
+if '%choice%'=='x' call:end
 ECHO "%choice%" is not valid, try again
 
 
@@ -89,35 +89,17 @@ ECHO x. Exit
 set choice=
 set /p choice=Please select an OS to build for: 
 if not '%choice%'=='' set choice=%choice:~0,1%
-if '%choice%'=='1' goto win32
-if '%choice%'=='2' goto win64
-if '%choice%'=='3' goto android32
-if '%choice%'=='4' goto android64
-if '%choice%'=='5' goto emscripten
+if '%choice%'=='1' set "OS=win32" & goto type
+if '%choice%'=='2' set "OS=win64" & goto type
+if '%choice%'=='3' set "OS=android32" & goto type
+if '%choice%'=='4' set "OS=android64" & goto type
+if '%choice%'=='5' set "OS=emscripten" & goto type
 if '%choice%'=='b' goto pickapp
 if '%choice%'=='x' call:end
-::ECHO "%choice%" is not valid, try again
-goto pickos
+ECHO "%choice%" is not valid, try again
 
-:win32
-set OS=win32
-goto type
 
-:win64
-set OS=win64
-goto type
 
-:android32
-set OS=android32
-goto type
-
-:android64
-set OS=android64
-goto type
-
-:emscripten
-set OS=emscripten
-goto type
 
 
 :type
