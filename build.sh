@@ -38,7 +38,7 @@ install() {
 	elif command_exists pkg; then
 		$SUDO pkg install $1
 	elif command_exists pacman; then
-		$SUDO pacman -S $1 --noconfirm
+		$SUDO pacman -Sy $1 --noconfirm
 	elif command_exists brew; then
 		$SUDO brew install $1
 	else
@@ -384,23 +384,24 @@ while :
 		
 	validate_package which which
 	if [[ "$OSTYPE" == "msys" ]]; then
+		validate_package make make
+		validate_package diffutils diffutils
+		validate_package yasm yasm
 		if [[ "$MSYSTEM" == "MINGW32" ]]; then  
 			validate_package gcc mingw-w64-i686-gcc
 			validate_package g++ mingw-w64-i686-g++
 			validate_package gdb mingw-w64-i686-gdb
-			#validate_package git mingw-w64-i686-git
 			validate_package cmake mingw-w64-i686-cmake
 		elif [[ "$MSYSTEM" == "MINGW64" ]]; then
 			validate_package gcc mingw-w64-x86_64-gcc
-			validate_package g++ mingw-w64-x86_64-g++
+			#validate_package g++ mingw-w64-x86_64-g++
 			validate_package gdb mingw-w64-x86_64-gdb
-			#validate_package git mingw-w64-x86_64-git
+			validate_package autotools mingw-w64-x86_64-autotools
 			validate_package cmake mingw-w64-x86_64-cmake
 		elif [[ "$MSYSTEM" == "UCRT64" ]]; then
 			validate_package gcc mingw-w64-ucrt-x86_64-gcc
 			validate_package g++ mingw-w64-ucrt-x86_64-g++
 			validate_package gdb mingw-w64-ucrt-x86_64-gdb
-			#validate_package git mingw-w64-ucrt-x86_64-crt-git
 			validate_package cmake mingw-w64-ucrt-x86_64-cmake
 		else
 			validate_package gcc gcc
@@ -419,10 +420,12 @@ while :
 
 	#GCC_PATH=$(which gcc)
 	#GPP_PATH=$(which g++)
-	#export CC="$GCC_PATH"
-	#export CXX="$GPP_PATH"
-	#echo "GCC_PATH = $GCC_PATH"
-	#echo "GPP_PATH = $GPP_PATH"
+	GCC_PATH="/usr/bin/gcc"
+	GPP_PATH="/usr/bin/g++"
+	export CC="$GCC_PATH"
+	export CXX="$GPP_PATH"
+	echo "GCC_PATH = $GCC_PATH"
+	echo "GPP_PATH = $GPP_PATH"
 	
 	#CLANG_PATH=$(which clang)
 	#CLANGPP_PATH=$(which clang++)
@@ -459,6 +462,8 @@ while :
 	fi
 	#cmake_string = cmake_string.replace("  "," ")
 	#const app_path = DKBuild_FindAppPath(APP)
+	
+	#cmake_string+="-DCMAKE_C_COMPILER=\"$GCC_PATH\""
 	
 	echo cmake_string = $cmake_string
 	
@@ -578,7 +583,9 @@ while :
 		#set PATH=%PATH%;${MSYS2}/mingw64/bin
 		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
 			if [[ "$MSYSTEM" == "MINGW64" ]]; then
-				cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+				#echo $(which cmake)
+				#cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+				cmake -G "MinGW Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
 			else
 				cmake -G "MinGW Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
 			fi
