@@ -224,8 +224,8 @@ call::validate_cmake
 echo ****** BUILDING %APP% - %OS% - %TYPE% ******
 
 set "APP_PATH=%DKPATH%\DKApps\%APP%"
-ECHO %APP_PATH%
-if NOT exist "%APP_PATH%\%OS%" mkdir "%APP_PATH%\%OS%"
+ECHO APP_PATH = %APP_PATH%
+call:make_directory "%APP_PATH%\%OS%"
 cd "%APP_PATH%\%OS%"
 
 
@@ -440,8 +440,8 @@ goto:eof
 	if NOT exist "%ANDROID_NDK%" (
 		echo "installing android ndk"
 		call:download %ANDROID_NDK_DL% "%DKDOWNLOAD%\android-ndk-r23b-windows.zip"
-		if NOT exist "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk" mkdir "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk"
-		if NOT exist "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk" mkdir "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk"
+		call:make_directory "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk"
+		call:make_directory "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk"
 		call:extract "%DKDOWNLOAD%\android-ndk-r23b-windows.zip" "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk"
 		call:rename "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk\android-ndk-r23b" "C:\Users\Administrator\digitalknob\Development\3rdParty\android-sdk\ndk\23.1.7779620"
 	)
