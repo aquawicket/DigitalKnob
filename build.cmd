@@ -344,7 +344,8 @@ goto:eof
 :: extract()
 :extract
 	echo Extracting %~1 to %~2
-	%CMAKE% -E tar %~1 %~2
+	chdir "%~2"
+	"%CMAKE%" -E tar x "%~1"
 	call:check_error
 goto:eof
 
@@ -430,8 +431,15 @@ goto:eof
 	if NOT exist "%ANDROID_NDK%" (
 		echo "installing android ndk"
 		call:download %ANDROID_NDK_DL% "%DKDOWNLOAD%\android-ndk-r23b-windows.zip"
-		call:extract "%DKDOWNLOAD%\android-ndk-r23b-windows.zip" "%ANDROID_NDK%"
+		if NOT exist "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk" mkdir "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk"
+		if NOT exist "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk" mkdir "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk"
 	)
+	set "ANDROID_NDK=%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk\%ANDROID_NDK_BUILD%"
+	echo ANDROID_NDK = %ANDROID_NDK%
+	call:extract "%DKDOWNLOAD%\android-ndk-r23b-windows.zip" "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk"
+	
+	"%CMAKE%" -E rename "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk\android-ndk-r23b" "C:\Users\Administrator\digitalknob\Development\3rdParty\android-sdk\ndk\23.1.7779620"
+
 	if not '%VS_NdkRoot%'=='%ANDROID_NDK%' setx VS_NdkRoot %ANDROID_NDK%
 	call:check_error
 goto:eof
