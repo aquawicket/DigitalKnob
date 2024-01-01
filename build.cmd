@@ -85,6 +85,7 @@ ECHO 3. Android 32
 ECHO 4. Android 64
 ECHO 5. Emscripten
 ECHO b. Go Back
+ECHO c. Clear Screen
 ECHO x. Exit
 set choice=
 set /p choice=Please select an OS to build for: 
@@ -95,10 +96,9 @@ if '%choice%'=='3' set "OS=android32" & goto type
 if '%choice%'=='4' set "OS=android64" & goto type
 if '%choice%'=='5' set "OS=emscripten" & goto type
 if '%choice%'=='b' goto pickapp
+if '%choice%'=='c' call:clear_screen & goto pickos
 if '%choice%'=='x' call:end
 ECHO "%choice%" is not valid, try again
-
-
 
 
 
@@ -113,25 +113,12 @@ ECHO x. Exit
 set choice=
 set /p choice=Please select a build type: 
 if not '%choice%'=='' set choice=%choice:~0,1%
-if '%choice%'=='1' goto debug
-if '%choice%'=='2' goto release
-if '%choice%'=='3' goto all
+if '%choice%'=='1' set "TYPE=Debug" & goto generate
+if '%choice%'=='2' set "TYPE=Release" & goto generate
+if '%choice%'=='3' set "TYPE=All" & goto generate
 if '%choice%'=='b' goto pickos
 if '%choice%'=='x' call:end
 ECHO "%choice%" is not valid, try again
-goto type
-
-:debug
-set TYPE=Debug
-goto generate
-
-:release
-set TYPE=Release
-goto generate
-
-:all
-set TYPE=All
-goto generate
 
 
 
