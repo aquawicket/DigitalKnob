@@ -39,13 +39,14 @@ set "TYPE="
 ECHO.
 ECHO 1. Git Update
 ECHO 2. Git Commit
-ECHO 3. DKCore
-ECHO 4. DKJavascript
-ECHO 5. DKBuilder
-ECHO 6. DKSDL
-ECHO 7. DKSDLRml
-ECHO 8. DKDomTest
-ECHO 9. DKTestAll
+ECHO 3. HelloWorld
+ECHO 4. DKCore
+ECHO 5. DKJavascript
+ECHO 6. DKBuilder
+ECHO 7. DKSDL
+ECHO 8. DKSDLRml
+ECHO 9. DKDomTest
+ECHO 10. DKTestAll
 ECHO c. Clear Screen
 ECHO x. Exit
 set choice=
@@ -53,13 +54,14 @@ set /p choice=Please select an app to build:
 if not '%choice%'=='' set choice=%choice:~0,1%
 if '%choice%'=='1' call:git_update & goto pickapp
 if '%choice%'=='2' call:git_commit & goto pickapp
-if '%choice%'=='3' set "APP=DKCore" & goto checkApp
-if '%choice%'=='4' set "APP=DKJavascript" & goto checkApp
-if '%choice%'=='5' set "APP=DKBuilder" & goto checkApp
-if '%choice%'=='6' set "APP=DKSDL" & goto checkApp
-if '%choice%'=='7' set "APP=DKSDLRml" & goto checkApp
-if '%choice%'=='8' set "APP=DKDomTest" & goto checkApp
-if '%choice%'=='9' set "APP=DKTestAll" & goto checkApp
+if '%choice%'=='3' set "APP=HelloWorld" & goto checkApp
+if '%choice%'=='4' set "APP=DKCore" & goto checkApp
+if '%choice%'=='5' set "APP=DKJavascript" & goto checkApp
+if '%choice%'=='6' set "APP=DKBuilder" & goto checkApp
+if '%choice%'=='7' set "APP=DKSDL" & goto checkApp
+if '%choice%'=='8' set "APP=DKSDLRml" & goto checkApp
+if '%choice%'=='9' set "APP=DKDomTest" & goto checkApp
+if '%choice%'=='10' set "APP=DKTestAll" & goto checkApp
 if '%choice%'=='c' call:clear_screen & goto pickapp
 if '%choice%'=='x' call:end
 ECHO "%choice%" is not valid, try again
