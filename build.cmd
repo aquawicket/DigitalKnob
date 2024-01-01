@@ -405,15 +405,13 @@ goto:eof
 
 :: validate_android_ndk()
 :validate_android_ndk
-	echo validate_android_ndk
 	if exist %DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk\%ANDROID_NDK_BUILD%" set "ANDROID_NDK=%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk\%ANDROID_NDK_BUILD%"
 	if NOT exist "%ANDROID_NDK%" (
 		echo "installing android ndk"
 		call:download %ANDROID_NDK_DL% "%DKDOWNLOAD%\android-ndk-r23b-windows.zip"
 		call:extract "%DKDOWNLOAD%\android-ndk-r23b-windows.zip" "%ANDROID_NDK%"
 	)
-	::if not '%ANDROID_NDK%'=='%VS_NdkRoot%' setx VS_NdkRoot %ANDROID_NDK%
-	echo end validate_android_ndk
+	if not '%VS_NdkRoot%'=='%ANDROID_NDK%' setx VS_NdkRoot %ANDROID_NDK%
 goto:eof
 
 :: clear_cmake_cache()
