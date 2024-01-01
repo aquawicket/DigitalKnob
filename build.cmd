@@ -341,6 +341,8 @@ goto:eof
 		call:rename "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk\android-ndk-r23b" "C:\Users\Administrator\digitalknob\Development\3rdParty\android-sdk\ndk\23.1.7779620"
 	)
 	if not '%VS_NdkRoot%'=='%ANDROID_NDK%' setx VS_NdkRoot %ANDROID_NDK%
+	:: replace all \ characters with / in ANDROID_NDK for cmake compatability
+	set ANDROID_NDK=%ANDROID_NDK:\=/%
 	call:check_error
 goto:eof
 
