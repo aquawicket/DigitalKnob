@@ -407,6 +407,7 @@ while :
 			#validate_package gdb mingw-w64-ucrt-x86_64-gdb
 			validate_package cmake mingw-w64-ucrt-x86_64-cmake
 		else
+			echo "msys default"
 			#validate_package gcc gcc
 			#validate_package g++ g++
 			#validate_package gdb gdb
