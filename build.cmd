@@ -55,7 +55,7 @@ set choice=
 set /p choice=Please select an app to build: 
 if not '%choice%'=='' set choice=%choice:~0,1%
 if '%choice%'=='1' goto gitupdate
-if '%choice%'=='2' goto gitcommit
+if '%choice%'=='2' call:git_commit
 if '%choice%'=='3' goto dkcore
 if '%choice%'=='4' goto dkjavascript
 if '%choice%'=='5' goto dkbuilder
@@ -89,15 +89,13 @@ if NOT "%ERRORLEVEL%" == "0" (
 ::call:check_error
 goto pickapp
 
-:gitcommit
-cd %DKPATH%
-"%GIT%" config user.email "aquawicket@hotmail.com"
-"%GIT%" config user.name "aquawicket"
-"%GIT%" commit -a -m "git commit"
-::call:check_error
-"%GIT%" push
-::call:check_error
-goto pickapp
+:::gitcommit
+::cd %DKPATH%
+::"%GIT%" config user.email "aquawicket@hotmail.com"
+::"%GIT%" config user.name "aquawicket"
+::"%GIT%" commit -a -m "git commit"
+::"%GIT%" push
+::goto pickapp
 
 :clearscreen
 cls
@@ -464,5 +462,15 @@ goto:eof
 	cd "%DIGITALKNOB%"
 	for /r %%i in (*.tmp) do del "%%i"
 	for /r %%i in (*.TMP) do del "%%i"
+	call:check_error
+goto:eof
+
+:: git_commit()
+:git_commit
+	cd %DKPATH%
+	"%GIT%" config user.email "aquawicket@hotmail.com"
+	"%GIT%" config user.name "aquawicket"
+	"%GIT%" commit -a -m "git commit"
+	"%GIT%" push
 	call:check_error
 goto:eof
