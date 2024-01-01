@@ -64,7 +64,7 @@ if '%choice%'=='7' goto dksdlrml
 if '%choice%'=='8' goto dkdomtest
 if '%choice%'=='9' goto dktestall
 if '%choice%'=='c' call:clear_screen
-if '%choice%'=='x' goto end
+if '%choice%'=='x' call:end
 ::ECHO "%choice%" is not valid, try again
 goto pickapp
 
@@ -124,7 +124,7 @@ if '%choice%'=='3' goto android32
 if '%choice%'=='4' goto android64
 if '%choice%'=='5' goto emscripten
 if '%choice%'=='b' goto pickapp
-if '%choice%'=='x' goto end
+if '%choice%'=='x' call:end
 ECHO "%choice%" is not valid, try again
 goto pickos
 
@@ -164,7 +164,7 @@ if '%choice%'=='1' goto debug
 if '%choice%'=='2' goto release
 if '%choice%'=='3' goto all
 if '%choice%'=='b' goto pickos
-if '%choice%'=='x' goto end
+if '%choice%'=='x' call:end
 ECHO "%choice%" is not valid, try again
 goto type
 
@@ -240,7 +240,7 @@ echo TYPE = %TYPE%
 if %TYPE%==Debug goto build_debug
 if %TYPE%==Release goto build_release
 if %TYPE%==All goto build_all
-goto error
+call:assert "TYPE not set"
 
 :build_debug
 "%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Debug
@@ -263,14 +263,6 @@ echo:
 echo ******* Done building %APP% - %OS% - %TYPE% *******
 goto pickapp
 
-:error
-echo Failed with error code: %ERRORLEVEL%
-pause
-
-:end
-ECHO Done
-exit
-
 
 
 
@@ -278,6 +270,12 @@ exit
 :: FUNCTIONS
 :: https://www.dostips.com/DtTutoFunctions.php
 ::--------------------------------------------------------
+
+:: end()
+:end
+	ECHO Done
+	exit
+goto:eof
 
 :: assert()
 :assert
