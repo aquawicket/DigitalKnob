@@ -1862,7 +1862,8 @@ function(dk_executeProcess commands) #NOASSERT
 		dk_info("\n${CLR}${magenta} $ ${commands}\n")
 	endif()
 	
-	if(WIN_HOST)
+	#if(WIN_HOST)
+	if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 		execute_process(COMMAND cmd /c ${commands} RESULT_VARIABLE result ERROR_VARIABLE error) # FIXME: Do we always need  cmd /c  here?
 	else()
 		execute_process(COMMAND ${commands} RESULT_VARIABLE result ERROR_VARIABLE error)
