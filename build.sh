@@ -139,7 +139,8 @@ while :
 					# brew tap homebrew/core
 					# brew install git
 				else
-				  validate_package git git
+				  #validate_package git git
+				  validate_package git mingw-w64-ucrt-x86_64-crt-git
 				fi
 				
 				if [[ ! -d "$DKPATH/.git" ]]; then
@@ -370,12 +371,19 @@ while :
 		
 	validate_package which which
 	if [[ "$OSTYPE" == "msys" ]]; then
-		validate_package cmake mingw-w64-x86_64-cmake
+		#validate_package cmake mingw-w64-x86_64-cmake
+		validate_package gcc mingw-w64-ucrt-x86_64-gcc
+		validate_package g++ mingw-w64-ucrt-x86_64-g++
+		validate_package gdb mingw-w64-ucrt-x86_64-gdb
+		validate_package git mingw-w64-ucrt-x86_64-crt-git
+		validate_package cmake mingw-w64-ucrt-x86_64-cmake
 	else
+		validate_package gcc gcc
+		validate_package g++ g++
+		validate_package gdb gdb
+		validate_package git git
 		validate_package cmake cmake
 	fi
-	validate_package gcc gcc
-	validate_package g++ g++
 
 	#GCC_PATH=$(which gcc)
 	#GPP_PATH=$(which g++)
@@ -520,9 +528,11 @@ while :
 		#export PATH=${MSYS2}/usr/bin:$PATH
 		#set PATH=%PATH%;${MSYS2}/mingw64/bin
 		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
+			#cmake -G "MinGW Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
 			cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
 		fi
 		if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
+			#cmake -G "MinGW Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
 			cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
 		fi
 		TARGET=${APP}_APP
@@ -533,9 +543,11 @@ while :
 		#export PATH=${MSYS2}/usr/bin:$PATH
 		#set PATH=%PATH%;${MSYS2}/mingw64/bin
 		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-			cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+			cmake -G "MinGW Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+			#cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
 		fi
 		if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
+			#cmake -G "MinGW Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
 			cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
 		fi
 		TARGET=${APP}_APP
