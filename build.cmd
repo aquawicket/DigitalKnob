@@ -63,15 +63,11 @@ if '%choice%'=='6' goto dksdl
 if '%choice%'=='7' goto dksdlrml
 if '%choice%'=='8' goto dkdomtest
 if '%choice%'=='9' goto dktestall
-if '%choice%'=='c' goto clearscreen
+if '%choice%'=='c' call:clear_screen
 if '%choice%'=='x' goto end
 ::ECHO "%choice%" is not valid, try again
 goto pickapp
 
-
-:clearscreen
-cls
-goto pickapp
 
 :dkcore
 set APP=DKCore
@@ -465,4 +461,9 @@ goto:eof
 	"%GIT%" commit -a -m "git commit"
 	"%GIT%" push
 	call:check_error
+goto:eof
+
+:: clear_screen()
+:clear_screen
+	cls
 goto:eof
