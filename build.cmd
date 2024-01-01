@@ -238,14 +238,14 @@ goto:eof
 
 :: make_directory()
 :make_directory
-	if NOT exist "%~1" mkdir " %~1"
+	if NOT exist "%~1" mkdir "%~1"
 goto:eof
 
 :: extract()
 :extract
 	echo Extracting %~1 to %~2
 	if NOT exist "%~2" (
-		call:assert "destonation path '%~2' does not exist"
+		call:assert "extract(): destination path '%~2' does not exist"
 	)
 	chdir "%~2"
 	"%CMAKE%" -E tar x "%~1"
