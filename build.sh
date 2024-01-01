@@ -394,7 +394,7 @@ while :
 			validate_package cmake mingw-w64-i686-cmake
 		elif [[ "$MSYSTEM" == "MINGW64" ]]; then
 			validate_package gcc mingw-w64-x86_64-gcc
-			#validate_package g++ mingw-w64-x86_64-g++
+			validate_package g++ mingw-w64-x86_64-g++
 			validate_package gdb mingw-w64-x86_64-gdb
 			validate_package autotools mingw-w64-x86_64-autotools
 			validate_package cmake mingw-w64-x86_64-cmake
@@ -418,10 +418,10 @@ while :
 		validate_package cmake cmake
 	fi
 
-	#GCC_PATH=$(which gcc)
-	#GPP_PATH=$(which g++)
-	GCC_PATH="/usr/bin/gcc"
-	GPP_PATH="/usr/bin/g++"
+	GCC_PATH=$(which gcc)
+	GPP_PATH=$(which g++)
+	#GCC_PATH="/usr/bin/gcc"
+	#GPP_PATH="/usr/bin/g++"
 	export CC="$GCC_PATH"
 	export CXX="$GPP_PATH"
 	echo "GCC_PATH = $GCC_PATH"
