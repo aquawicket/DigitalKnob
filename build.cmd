@@ -2,32 +2,40 @@
 @echo off
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
 
-:: https://stackoverflow.com/a/33662275
-:: If the current folder matches the current branch set DKBRANCH, default to Development
-for %%I in (.) do set "FOLDER=%%~nxI"
-git branch | find "* %FOLDER%" > NUL & IF ERRORLEVEL 1 (
-    set "DKBRANCH=Development"
-) ELSE (
-    set "DKBRANCH=%FOLDER%"
-)
-echo DKBRANCH = %DKBRANCH%
-
-
-set "DIGITALKNOB=C:\Users\%USERNAME%\digitalknob"
-set "DKPATH=%DIGITALKNOB%\%DKBRANCH%"
-set "DKCMAKE=%DIGITALKNOB%\%DKBRANCH%\DKCMake"
-set "DKDOWNLOAD=%DIGITALKNOB%\download"
+::--------------------------------------------------------
+:: GLOBAL USER VARIABLES
+::--------------------------------------------------------
+:: GIT download link
 set "GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.30.1.windows.1/Git-2.30.1-32-bit.exe"
+
+:: CMAKE download link
 set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi"
+
+:: MSBuild download link
 ::set "MSBUILD_DL=https://download.visualstudio.microsoft.com/download/pr/5e397ebe-38b2-4e18-a187-ac313d07332a/169156e6e9a005d49b357c42240184dc1e3ccc28ebc777e70d49257c074f77e8/vs_Community.exe"
 set "MSBUILD_DL=https://aka.ms/vs/17/release/vs_community.exe"
-set "download=certutil.exe -urlcache -split -f"
-::set "download=bitsadmin /transfer myDownloadJob /download /priority normal"
+
+:: Android Ndk download link
+set "ANDROID_API=31"
+set "ANDROID_NDK_BUILD=23.1.7779620"
+set "ANDROID_NDK_DL=https://dl.google.com/android/repository/android-ndk-r23b-windows.zip"
+
+
+
+::--------------------------------------------------------
+:: Main
+::--------------------------------------------------------
+set "DIGITALKNOB=C:\Users\%USERNAME%\digitalknob"
+if NOT exist "%DIGITALKNOB%" mkdir "%DIGITALKNOB%"
+set "DKDOWNLOAD=%DIGITALKNOB%\download"
+if NOT exist "%DKDOWNLOAD%" mkdir "%DKDOWNLOAD%"
+
+call:validate_git
+call:validate_branch
+
 set "APP="
 set "OS="
 set "TYPE="
-if NOT exist "%DIGITALKNOB%" mkdir "%DIGITALKNOB%"
-if NOT exist "%DKDOWNLOAD%" mkdir "%DKDOWNLOAD%"
 
 :pickapp
 ECHO.
@@ -60,17 +68,6 @@ ECHO "%choice%" is not valid, try again
 goto pickapp
 
 :gitupdate
-if exist "C:\Program Files\Git\bin\git.exe" set "GIT=C:\Program Files\Git\bin\git.exe"
-if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
-if NOT exist "%GIT%" (
-	ECHO "installing git"
-	%download% %GIT_DL% "%DKDOWNLOAD%\Git-2.30.1-32-bit.exe"
-	::if NOT "%ERRORLEVEL%" == "0" goto error
-	"%DKDOWNLOAD%\Git-2.30.1-32-bit.exe" /VERYSILENT /NORESTART
-	::if NOT "%ERRORLEVEL%" == "0" goto error
-	if exist "C:\Program Files\Git\bin\git.exe" set "GIT=C:\Program Files\Git\bin\git.exe"
-	if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
-)
 if NOT exist "%DKPATH%\.git" (
 	"%GIT%" clone https://github.com/aquawicket/DigitalKnob.git "%DKPATH%"
 )
@@ -92,17 +89,6 @@ if NOT "%ERRORLEVEL%" == "0" (
 goto pickapp
 
 :gitcommit
-if exist "C:\Program Files\Git\bin\git.exe" set "GIT=C:\Program Files\Git\bin\git.exe"
-if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
-if NOT exist "%GIT%" (
-	ECHO "installing git"
-	%download% %GIT_DL% "%DKDOWNLOAD%\Git-2.30.1-32-bit.exe"
-	::if NOT "%ERRORLEVEL%" == "0" goto error
-	"%DKDOWNLOAD%\Git-2.30.1-32-bit.exe /VERYSILENT /NORESTART"
-	::if NOT "%ERRORLEVEL%" == "0" goto error
-	if exist "C:\Program Files\Git\bin\git.exe" set "GIT=C:\Program Files\Git\bin\git.exe"
-	if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
-)
 cd %DKPATH%
 "%GIT%" config user.email "aquawicket@hotmail.com"
 "%GIT%" config user.name "aquawicket"
@@ -230,51 +216,12 @@ goto generate
 
 
 :generate
-echo Deleteing CMake cache . . .
-cd "%DIGITALKNOB%"
-for /r %%i in (CMakeCache.*) do del "%%i"
-::if NOT "%ERRORLEVEL%" == "0" goto error
-for /d /r %%i in (*CMakeFiles*) do rd /s /q "%%i"
-::if NOT "%ERRORLEVEL%" == "0" goto error
-
-echo Deleteing .tmp files . . .
-cd "%DIGITALKNOB%"
-for /r %%i in (*.tmp) do del "%%i"
-::if NOT "%ERRORLEVEL%" == "0" goto error
-for /r %%i in (*.TMP) do del "%%i"
-::if NOT "%ERRORLEVEL%" == "0" goto error
-
+call:clear_cmake_cache
+call:delete_temp_files
+call::validate_cmake
 
 echo ****** BUILDING %APP% - %OS% - %TYPE% ******
-if exist "C:\Program Files\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files\CMake\bin\cmake.exe"
-if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files (x86)\CMake\bin\cmake.exe"
-if NOT exist "%CMAKE%" (
-    echo "installing cmake"
-	echo "%CMAKE_DL%"
-	%download% %CMAKE_DL% "%DKDOWNLOAD%\cmake-3.21.1-windows-i386.msi"
-	if NOT "%ERRORLEVEL%" == "0" goto error
-	"%DKDOWNLOAD%\cmake-3.21.1-windows-i386.msi"
-	if NOT "%ERRORLEVEL%" == "0" goto error
-	if exist "C:\Program Files\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files\CMake\bin\cmake.exe"
-	if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files (x86)\CMake\bin\cmake.exe"
-)
-if exist "C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
-if exist "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
-if exist "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
-if exist "C:\Program Files (x86)\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files (x86)\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
-if NOT exist "%MSBUILD%" (
-    echo "installing Visual Studio"
-	echo "%MSBUILD_DL%"
-	
-	%download% %MSBUILD_DL% "%DKDOWNLOAD%\vs_Community.exe"
-	::if NOT "%ERRORLEVEL%" == "0" goto error
-	"%DKDOWNLOAD%\vs_Community.exe"
-	::if NOT "%ERRORLEVEL%" == "0" goto error
-	if exist "C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
-	if exist "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
-	if exist "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
-	if exist "C:\Program Files (x86)\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files (x86)\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
-)
+
 set "APP_PATH=%DKPATH%\DKApps\%APP%"
 ECHO %APP_PATH%
 if NOT exist "%APP_PATH%\%OS%" mkdir "%APP_PATH%\%OS%"
@@ -289,21 +236,21 @@ if %OS%==android64 goto generate_android64
 if %OS%==emscripten goto generate_emscripten
 
 :generate_win32
+call:validate_visual_studio
 "%CMAKE%" -G "Visual Studio 17 2022" -A Win32 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKCMAKE%
 set TARGET=%APP%_APP
 ::if NOT "%ERRORLEVEL%" == "0" goto error
 goto build
 
 :generate_win64
+call:validate_visual_studio
 "%CMAKE%" -G "Visual Studio 17 2022" -A x64 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKCMAKE%
 set TARGET=%APP%_APP
 ::if NOT "%ERRORLEVEL%" == "0" goto error
 goto build
 
 :generate_android32
-set ANDROID_API=31
-set ANDROID_NDK_BUILD=23.1.7779620
-set ANDROID_NDK=C:/Users/Administrator/digitalknob/Development/3rdParty/android-sdk/ndk/%ANDROID_NDK_BUILD%
+call:validate_android_ndk
 call %DKPATH%\3rdParty\_DKIMPORTS\openjdk\registerJDK.cmd
 "%CMAKE%" -G "Visual Studio 17 2022" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID-NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_NDK%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
 set TARGET=main
@@ -311,9 +258,7 @@ set TARGET=main
 goto build
 
 :generate_android64
-set ANDROID_API=31
-set ANDROID_NDK_BUILD=23.1.7779620
-set ANDROID_NDK=C:/Users/Administrator/digitalknob/Development/3rdParty/android-sdk/ndk/%ANDROID_NDK_BUILD%
+call:validate_android_ndk
 call %DKPATH%\3rdParty\_DKIMPORTS\openjdk\registerJDK.cmd
 "%CMAKE%" -G "Visual Studio 17 2022" -A ARM64 -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID-NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_NDK%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
 set TARGET=main
@@ -321,6 +266,7 @@ set TARGET=main
 goto build
 
 :generate_emscripten
+call:validate_emscripten
 set EMSDK=DIGITALKNOB+C:/Users/Administrator/digitalknob/Development/3rdParty/emsdk-main
 set EMSDK_ENV=%EMSDK%/emsdk_env
 set EMSDK_TOOLCHAIN_FILE=%EMSDK%/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake
@@ -363,3 +309,127 @@ pause
 :end
 ECHO Done
 exit
+
+
+
+
+::--------------------------------------------------------
+:: FUNCTIONS
+:: https://www.dostips.com/DtTutoFunctions.php
+::--------------------------------------------------------
+
+:: download()
+:download
+	echo Downloading %~1
+	certutil.exe -urlcache -split -f %~1 %~2
+	::set "bitsadmin /transfer myDownloadJob /download /priority normal %~1 %~2"
+goto:eof
+
+:: extract()
+:extract
+	echo Extracting %~1 to %~2
+	echo TODO
+goto:eof
+
+:: validate_branch()
+:validate_branch
+	:: https://stackoverflow.com/a/33662275
+	:: If the current folder matches the current branch set DKBRANCH, default to Development
+	for %%I in (.) do set "FOLDER=%%~nxI"
+	"%GIT%" branch | find "* %FOLDER%" > NUL & IF ERRORLEVEL 1 (
+		set "DKBRANCH=Development"
+	) ELSE (
+		set "DKBRANCH=%FOLDER%"
+	)
+	set "DKPATH=%DIGITALKNOB%\%DKBRANCH%"
+	set "DKCMAKE=%DIGITALKNOB%\%DKBRANCH%\DKCMake"
+	echo DKBRANCH = %DKBRANCH%
+goto:eof
+
+:: validate_git()
+:validate_git
+	if exist "C:\Program Files\Git\bin\git.exe" set "GIT=C:\Program Files\Git\bin\git.exe"
+	if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
+	if NOT exist "%GIT%" (
+		ECHO "installing git"
+		call:download %GIT_DL% "%DKDOWNLOAD%\Git-2.30.1-32-bit.exe"
+		::if NOT "%ERRORLEVEL%" == "0" goto error
+		"%DKDOWNLOAD%\Git-2.30.1-32-bit.exe" /VERYSILENT /NORESTART
+		::if NOT "%ERRORLEVEL%" == "0" goto error
+		if exist "C:\Program Files\Git\bin\git.exe" set "GIT=C:\Program Files\Git\bin\git.exe"
+		if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
+	)
+	if NOT exist "%GIT%" (
+		ECHO "GIT is still and invalid command"
+		goto error
+	)
+	echo GIT = %GIT%
+goto:eof
+
+:: validate_cmake()
+:validate_cmake
+	if exist "C:\Program Files\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files\CMake\bin\cmake.exe"
+	if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files (x86)\CMake\bin\cmake.exe"
+	if NOT exist "%CMAKE%" (
+		echo "installing cmake"
+		echo "%CMAKE_DL%"
+		call:download %CMAKE_DL% "%DKDOWNLOAD%\cmake-3.21.1-windows-i386.msi"
+		if NOT "%ERRORLEVEL%" == "0" goto error
+		"%DKDOWNLOAD%\cmake-3.21.1-windows-i386.msi"
+		if NOT "%ERRORLEVEL%" == "0" goto error
+		if exist "C:\Program Files\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files\CMake\bin\cmake.exe"
+		if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files (x86)\CMake\bin\cmake.exe"
+	)
+goto:eof
+
+:: validate_visual_studio()
+:validate_visual_studio
+	if exist "C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
+	if exist "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
+	if exist "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
+	if exist "C:\Program Files (x86)\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files (x86)\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
+	if NOT exist "%MSBUILD%" (
+		echo "installing Visual Studio"
+		echo "%MSBUILD_DL%"
+		
+		call:download %MSBUILD_DL% "%DKDOWNLOAD%\vs_Community.exe"
+		::if NOT "%ERRORLEVEL%" == "0" goto error
+		"%DKDOWNLOAD%\vs_Community.exe"
+		::if NOT "%ERRORLEVEL%" == "0" goto error
+		if exist "C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
+		if exist "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
+		if exist "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
+		if exist "C:\Program Files (x86)\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files (x86)\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
+	)
+goto:eof
+
+:: validate_android_ndk()
+:validate_android_ndk
+	if exists %DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk\%ANDROID_NDK_BUILD%" set "ANDROID_NDK=%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk\%ANDROID_NDK_BUILD%"
+	if NOT exist "%ANDROID_NDK%" (
+		echo "installing android ndk"
+		call:download %ANDROID_NDK_DL% "%DKDOWNLOAD%\android-ndk-r23b-windows.zip"
+		call:extract "%DKDOWNLOAD%\android-ndk-r23b-windows.zip" "%ANDROID_NDK%"
+	}
+	if not '%ANDROID_NDK%'=='%VS_NdkRoot%' setx VS_NdkRoot %ANDROID_NDK%
+goto:eof
+
+:: clear_cmake_cache()
+:clear_cmake_cache
+	echo Deleteing CMake cache . . .
+	cd "%DIGITALKNOB%"
+	for /r %%i in (CMakeCache.*) do del "%%i"
+	::if NOT "%ERRORLEVEL%" == "0" goto error
+	for /d /r %%i in (*CMakeFiles*) do rd /s /q "%%i"
+	::if NOT "%ERRORLEVEL%" == "0" goto error
+goto:eof
+
+:: delete_temp_files()
+:delete_temp_files
+	echo Deleteing .tmp files . . .
+	cd "%DIGITALKNOB%"
+	for /r %%i in (*.tmp) do del "%%i"
+	::if NOT "%ERRORLEVEL%" == "0" goto error
+	for /r %%i in (*.TMP) do del "%%i"
+	::if NOT "%ERRORLEVEL%" == "0" goto error
+goto:eof

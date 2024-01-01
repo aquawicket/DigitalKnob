@@ -95,7 +95,6 @@ validate_ostype() {
 		echo "UNKNOWN OS ($OSTYPE)"
 	fi
 }
-
 validate_ostype
 
 # validata sudo
