@@ -408,10 +408,9 @@ while :
 	else
 		validate_package git git
 	fi
-	validate_package gcc toolchain
-	validate_package cmake cmake
 
 	if [[ $MSYSTEM == "MINGW32" ]] || [[ $MSYSTEM == "MINGW32" ]] || [[ $MSYSTEM == "MSYS" ]] || [[ $MSYSTEM == "UCRT64" ]]; then
+		validate_package gcc toolchain
 		GCC_PATH=$(which gcc)
 		GPP_PATH=$(which g++)
 		export CC="$GCC_PATH"
@@ -421,6 +420,7 @@ while :
 	fi
 	
 	if [[ $MSYSTEM == "CLANG32" ]] || [[ $MSYSTEM == "CLANG64" ]] || [[ $MSYSTEM == "CLANGARM64" ]]; then
+		validate_package clang toolchain
 		CLANG_PATH=$(which clang)
 		CLANGPP_PATH=$(which clang++)
 		export CC="$CLANG_PATH"
@@ -428,6 +428,9 @@ while :
 		echo "CLANG_PATH = $CLANG_PATH"
 		echo "CLANGPP_PATH = $CLANGPP_PATH"
 	fi
+	
+	validate_package cmake_reinstall cmake
+	
 	
 	LEVEL="RebuildAll"
 	LINK="Static"
