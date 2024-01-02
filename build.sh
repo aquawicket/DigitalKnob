@@ -35,7 +35,7 @@ install() {
 	if [[ "$MSYSTEM" == "CLANG32" ]]; then
 		pacman -S mingw-w64-i686-$1 --noconfirm
 	elif [[ "$MSYSTEM" == "CLANG64" ]]; then
-		pacman -S mingw-w64-x86_64-$1 --noconfirm
+		pacman -S mingw-w64-clang-x86_64-$1 --noconfirm
 	elif [[ "$MSYSTEM" == "CLANGARM64" ]]; then
 		pacman -S mingw-w64-clang-aarch64-$1 --noconfirm
 	elif [[ "$MSYSTEM" == "MINGW32" ]]; then
@@ -142,6 +142,9 @@ echo "DKCMAKE = $DKCMAKE"
 # MSYS			=	x86_64		cygwin		gcc			libstdc++		/usr
 # UCRT64		=	x86_64		ucrt		gcc			libstdc++		/ucrt64
 echo "MSYSTEM = $MSYSTEM"
+
+CMAKE_PATH=$(which cmake)
+echo "CMAKE_PATH = $CMAKE_PATH"
 
 $SUDO echo
 
@@ -408,19 +411,23 @@ while :
 	validate_package gcc toolchain
 	validate_package cmake cmake
 
-	GCC_PATH=$(which gcc)
-	GPP_PATH=$(which g++)
-	export CC="$GCC_PATH"
-	export CXX="$GPP_PATH"
-	echo "GCC_PATH = $GCC_PATH"
-	echo "GPP_PATH = $GPP_PATH"
+	if [[ $MSYSTEM == "MINGW32" ]] || [[ $MSYSTEM == "MINGW32" ]] || [[ $MSYSTEM == "MSYS" ]] || [[ $MSYSTEM == "UCRT64" ]]; then
+		GCC_PATH=$(which gcc)
+		GPP_PATH=$(which g++)
+		export CC="$GCC_PATH"
+		export CXX="$GPP_PATH"
+		echo "GCC_PATH = $GCC_PATH"
+		echo "GPP_PATH = $GPP_PATH"
+	fi
 	
-	#CLANG_PATH=$(which clang)
-	#CLANGPP_PATH=$(which clang++)
-	#export CC="$CLANG_PATH"
-	#export CXX="$CLANGPP_PATH"
-	#echo "CLANG_PATH = $CLANG_PATH"
-	#echo "CLANGPP_PATH = $CLANGPP_PATH"
+	if [[ $MSYSTEM == "CLANG32" ]] || [[ $MSYSTEM == "CLANG64" ]] || [[ $MSYSTEM == "CLANGARM64" ]]; then
+		CLANG_PATH=$(which clang)
+		CLANGPP_PATH=$(which clang++)
+		export CC="$CLANG_PATH"
+		export CXX="$CLANGPP_PATH"
+		echo "CLANG_PATH = $CLANG_PATH"
+		echo "CLANGPP_PATH = $CLANGPP_PATH"
+	fi
 	
 	LEVEL="RebuildAll"
 	LINK="Static"
