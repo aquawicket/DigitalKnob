@@ -166,7 +166,11 @@ while :
 					# brew tap homebrew/core
 					# brew install git
 				else
-					validate_package git git
+					if [ -n "$MSYSTEM" ]; then
+						pacman -S git --noconfirm
+					else
+						validate_package git git
+					fi
 				fi
 				
 				if [[ ! -d "$DKPATH/.git" ]]; then
@@ -396,13 +400,13 @@ while :
 	delete_temp_files
 		
 	validate_package which which
-	validate_package git git
+	if [[ -n "$MSYSTEM" ]]; then
+		pacman -S git --noconfirm
+	else
+		validate_package git git
+	fi
 	validate_package gcc toolchain
-	#validate_package gcc gcc
-	#validate_package g++ g++
-	#validate_package gdb gdb
-	#validate_package git git
-	#validate_package cmake cmake
+	validate_package cmake cmake
 
 	GCC_PATH=$(which gcc)
 	GPP_PATH=$(which g++)
@@ -549,14 +553,14 @@ while :
 		#export PATH=${MSYS2}/usr/bin:$PATH
 		#set PATH=%PATH%;${MSYS2}/mingw64/bin
 		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-			if [ -n "$MSYSTEM" ]; then
+			if [[ -n "$MSYSTEM" ]]; then
 				cmake -G "MinGW Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
 			else
 				cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
 			fi	
 		fi
 		if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-			if [ -n "$MSYSTEM" ]; then
+			if [[ -n "$MSYSTEM" ]]; then
 				cmake -G "MinGW Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
 			else
 				cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
@@ -570,14 +574,14 @@ while :
 		#export PATH=${MSYS2}/usr/bin:$PATH
 		#set PATH=%PATH%;${MSYS2}/mingw64/bin
 		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-			if [ -n "$MSYSTEM" ]; then
+			if [[ -n "$MSYSTEM" ]]; then
 				cmake -G "MinGW Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
 			else
 				cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
 			fi
 		fi
 		if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-			if [ -n "$MSYSTEM" ]; then
+			if [[ -n "$MSYSTEM" ]]; then
 				cmake -G "MinGW Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
 			else
 				cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
