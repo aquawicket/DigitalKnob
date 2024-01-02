@@ -1101,9 +1101,6 @@ if(ANDROID)
 			dkFileReplace(${DKPROJECT}/${OS}/Debug/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}")
 			UNIX_HOST_dk_executeProcess(chmod 777 ${DKPROJECT}/${OS}/Debug/gradlew)
 		    UNIX_HOST_dk_executeProcess(sed -i -e "s/\r$//" "${DKPROJECT}/${OS}/Debug/gradlew")
-        	#if(UNIX_HOST)
-                    #execute_process(COMMAND sed -i -e "s/\r$//" "${DKPROJECT}/${OS}/Debug/gradlew")
-            #endif()
 		elseif(RELEASE)
 			dk_copy(${DKPLUGINS}/_DKIMPORT/android/ ${DKPROJECT}/${OS}/Release)
 			dk_copy(${DKPLUGINS}/_DKIMPORT/${OS}/ ${DKPROJECT}/${OS}/Release)
@@ -1111,6 +1108,7 @@ if(ANDROID)
 			file(WRITE ${DKPROJECT}/${OS}/Release/local.properties ${localProperties})
 			dkFileReplace(${DKPROJECT}/${OS}/Release/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}")
 			UNIX_HOST_dk_executeProcess(chmod 777 ${DKPROJECT}/${OS}/Release/gradlew)
+			UNIX_HOST_dk_executeProcess(sed -i -e "s/\r$//" "${DKPROJECT}/${OS}/Release/gradlew")
 		endif()
 	endif()
 	
@@ -1167,14 +1165,14 @@ if(ANDROID)
 	
 	####################### Gradle Build #####################
 	#WIN_HOST_dk_set(CMD_K cmd /k)
-	if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")	# replaces if(VISUAL_STUDIO_IDE)
+	if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 		add_custom_command(
 			POST_BUILD
 			TARGET main
 			COMMAND ${CMAKE_COMMAND} -E echo "Building with Gradle"
 			COMMAND cmd /k ${DKPROJECT}/${OS}/gradlew --project-dir ${DKPROJECT}/${OS} --info clean build
 			COMMAND ${CMAKE_COMMAND} -E echo "Finnished building with Gradle")
-	else()
+	else() 
 		if(DEBUG)
 			add_custom_command(
 				POST_BUILD
