@@ -497,9 +497,13 @@ if(WIN_64)
 	endforeach()
 		
 	############# Link Libraries, Set Startup Project #################
+	if(MINGW)
+		#target_link_options(${APP_NAME} PRIVATE -static-libgcc -static-libstdc++ -static)
+		target_link_libraries(${APP_NAME} -static gcc stdc++ winpthread -dynamic)
+	endif()
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	
-	if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")	# replaces if(VISUAL_STUDIO_IDE)
+	if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 		list(APPEND DEBUG_LINK_FLAGS /MANIFEST:NO)
 		list(APPEND DEBUG_LINK_FLAGS /MANIFESTUAC:NO)
 		list(APPEND DEBUG_LINK_FLAGS /level='highestAvailable')

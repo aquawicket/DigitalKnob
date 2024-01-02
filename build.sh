@@ -585,7 +585,7 @@ while :
 		#set PATH=%PATH%;${MSYS2}/mingw64/bin
 		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
 			if [[ -n "$MSYSTEM" ]]; then
-				cmake -G "MinGW Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+				cmake -G "MinGW Makefiles" $cmake_string -DBUILD_SHARED_LIBS=OFF -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
 			else
 				cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
 			fi
