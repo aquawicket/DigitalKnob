@@ -33,7 +33,7 @@ install() {
 	echo "installing $1"
 	### MSYS2 Environments ###
 	if [[ "$MSYSTEM" == "CLANG32" ]]; then
-		pacman -S mingw-w64-i686-$1 --noconfirm
+		pacman -S mingw-w64-clang-i686-$1 --noconfirm
 	elif [[ "$MSYSTEM" == "CLANG64" ]]; then
 		pacman -S mingw-w64-clang-x86_64-$1 --noconfirm
 	elif [[ "$MSYSTEM" == "CLANGARM64" ]]; then
