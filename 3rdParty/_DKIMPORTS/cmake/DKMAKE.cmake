@@ -3,6 +3,12 @@
 # https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi
 # https://developer.android.com/studio/projects/configure-cmake
 
+if(MINGW)
+	dk_undepend(cmake)
+	dk_return()
+endif()
+
+
 ### DOWNLOAD ###
 WIN_HOST_dk_set(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi)
 WIN_HOST_dk_set(CMAKE_FILE cmake-3.21.1-windows-i386.msi)
@@ -41,8 +47,13 @@ elseif(EXISTS "C:/Program Files (x86)/CMake/bin/cmake.exe")
 else()
 	### INSTALL ###
 	dk_info("Installing CMake . . .")
-	WIN_HOST_dk_download(${CMAKE_DL} ${DKDOWNLOAD})
-	WIN_HOST_dk_command(${DKDOWNLOAD}/${CMAKE_FILE})
+	if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+		WIN_HOST_dk_download(${CMAKE_DL} ${DKDOWNLOAD})
+		WIN_HOST_dk_command(${DKDOWNLOAD}/${CMAKE_FILE})
+	endif()
+	if(MINGW)
+		dk_msys2("pacman -S mingw-w64-x86_64-cmake --noconfirm")
+	endif()
 	MAC_HOST_dk_command(brew install cmake)
 	if("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "Android")
 		dk_set(APT "apt")

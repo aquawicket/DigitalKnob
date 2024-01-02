@@ -1,7 +1,8 @@
 # https://www.msys2.org
 # https://silentinstallhq.com/msys2-silent-install-how-to-guide
 
-if(NOT WIN_HOST)
+#if(NOT WIN_HOST)
+if(NOT CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 	dk_undepend(msys2)
 	dk_return()
 endif()
