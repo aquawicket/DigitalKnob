@@ -26,6 +26,28 @@ get_dk_version() {
 	echo "DK_VERSION = $DK_VERSION"
 }
 
+get_dk_ostype() {
+	DK_OSTYPE=$OSTYPE
+	echo "DK_OSTYPE = $DK_OSTYPE"
+}
+
+get_dk_model() {
+	if [ -e /proc/device-tree/model ]; then
+		DK_MODEL=$(tr -d '\0' </proc/device-tree/model)
+	fi
+	echo "DK_MODEL = $DK_MODEL"
+}
+
+get_dk_machtype() {
+	DK_MACHTYPE=$MACHTYPE
+	echo "DK_MACHTYPE = $DK_MACHTYPE"
+}
+
+get_dk_lang() {
+	DK_LANG=$LANG
+	echo "DK_LANG = $DK_LANG"
+}
+
 get_dk_username() {
 	if [[ -n "$USER" ]]; then
 		DK_USERNAME=$USER
@@ -33,6 +55,41 @@ get_dk_username() {
 		DK_USERNAME=$USERNAME
 	fi
 	echo "DK_USERNAME = $DK_USERNAME"
+}
+
+get_dk_logname() {
+	DK_LOGNAME=$LOGNAME
+	echo "DK_LOGNAME = $DK_LOGNAME"
+}
+
+get_dk_home(){
+	DK_HOME=$HOME
+	echo "DK_HOME = $DK_HOME"
+}
+
+get_dk_term(){
+	DK_TERM=$TERM
+	echo "DK_TERM = $DK_TERM"
+}
+
+get_dk_shell(){
+	DK_SHELL=$SHELL
+	echo "DK_SHELL = $DK_SHELL"
+}
+
+get_dk_path(){
+	DK_PATH=$PATH
+	echo "DK_PATH = $DK_PATH"
+}
+
+get_dk_pwd(){
+	DK_PWD=$PWD
+	echo "DK_PWD = $DK_PWD"
+}
+
+
+get_dk_root(){
+	echo "DK_ROOT = TODO"
 }
 
 ##################################
@@ -43,6 +100,22 @@ main(){
 	get_dk_host
 	get_dk_arch
 	get_dk_version
+	get_dk_ostype
+	get_dk_model
+	get_dk_machtype
+	get_dk_lang
 	get_dk_username
+	get_dk_logname
+	get_dk_home
+	get_dk_term
+	get_dk_shell
+	get_dk_path
+	get_dk_pwd
+	echo ""
+	
+	get_dk_root
+	
 }
 main
+
+echo ""
