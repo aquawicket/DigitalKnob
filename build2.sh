@@ -87,10 +87,20 @@ get_dk_pwd(){
 	echo "DK_PWD = $DK_PWD"
 }
 
-
 get_dk_root(){
-	echo "DK_ROOT = TODO"
+	if [[ -n "$DK_ROOT" ]]; then
+		echo "DK_ROOT = $DK_ROOT"
+	else
+		echo "setting up default DK_ROOT"
+		DK_ROOT=$DK_HOME/digitalknob
+		export DK_ROOT=$DK_ROOT
+		echo "export DK_ROOT=$DK_ROOT" >> ~/.bash_profile
+		echo "export DK_ROOT=$DK_ROOT" >> ~/.zshrc
+		echo "export DK_ROOT=$DK_ROOT" >> ~/.zprofile
+		echo "DK_ROOT = $DK_ROOT"
+	fi
 }
+
 
 ##################################
 #	main
