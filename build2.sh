@@ -3,6 +3,8 @@
 # to run this script requires privledges
 # > chmod 777 build.sh
 
+# https://blog.opstree.com/2020/02/11/shell-initialization-files/
+
 clear
 echo "NEW DKBUILD SCRIPT FOR UNIX"
 echo ""
