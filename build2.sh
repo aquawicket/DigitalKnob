@@ -4,6 +4,7 @@
 # > chmod 777 build.sh
 
 # https://blog.opstree.com/2020/02/11/shell-initialization-files/
+# https://www.tecmint.com/understanding-shell-initialization-files-and-user-profiles-linux/
 
 clear
 echo "NEW DKBUILD SCRIPT FOR UNIX"
