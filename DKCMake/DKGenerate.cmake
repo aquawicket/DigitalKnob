@@ -1174,7 +1174,7 @@ if(ANDROID)
 			POST_BUILD
 			TARGET main
 			COMMAND ${CMAKE_COMMAND} -E echo "Building with Gradle"
-			COMMAND cmd /k ${DKPROJECT}/${OS}/gradlew --project-dir ${DKPROJECT}/${OS} --info clean build
+			COMMAND cmd /k ${DKPROJECT}/${OS}/gradlew --project-dir ${DKPROJECT}/${OS} --info clean build #--offline
 			COMMAND ${CMAKE_COMMAND} -E echo "Finnished building with Gradle")
 	else() 
 		if(DEBUG)
@@ -1182,14 +1182,14 @@ if(ANDROID)
 				POST_BUILD
 				TARGET main
 				COMMAND ${CMAKE_COMMAND} -E echo "Building with Gradle"
-				COMMAND ${DKPROJECT}/${OS}/Debug/gradlew --project-dir ${DKPROJECT}/${OS}/Debug --info clean build
+				COMMAND ${DKPROJECT}/${OS}/Debug/gradlew --project-dir ${DKPROJECT}/${OS}/Debug --info clean build #--offline
 				COMMAND ${CMAKE_COMMAND} -E echo "Finnished building with Gradle")
 		elseif(RELEASE)
 			add_custom_command(
 				POST_BUILD
 				TARGET main
 				COMMAND ${CMAKE_COMMAND} -E echo "Building with Gradle"
-				COMMAND ${DKPROJECT}/${OS}/Release/gradlew --project-dir ${DKPROJECT}/${OS}/Release --info clean build
+				COMMAND ${DKPROJECT}/${OS}/Release/gradlew --project-dir ${DKPROJECT}/${OS}/Release --info clean build #--offline
 				COMMAND ${CMAKE_COMMAND} -E echo "Finnished building with Gradle")
 		endif()
 	endif()
