@@ -27,7 +27,8 @@
 #include <iostream>
 
 int main() {
-    std::cout << "Hello World!" << std::endl;
-	std::cin.get(); //wait for keypress to exit
+    std::cout << "Hello World!" << std::endl << std::endl;
+	std::cout << "(press any enter to exit)" << std::endl;
+	std::cin.get(); //wait for enter to exit
     return 0;
 }
