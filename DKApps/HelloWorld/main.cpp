@@ -28,5 +28,6 @@
 
 int main() {
     std::cout << "Hello World!" << std::endl;
+	std::cin.get(); //wait for keypress to exit
     return 0;
 }

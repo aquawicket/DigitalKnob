@@ -628,11 +628,12 @@ if(MAC)
 		XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY ""
 		MACOSX_BUNDLE_INFO_PLIST ${DKPLUGINS}/_DKIMPORT/mac/Info.plist)
 		
-	##############Delete Exlusions and Copy Assets to Bundle #######################
-	
-	file(REMOVE ${DKPROJECT}/assets/log.txt)
-	file(REMOVE ${DKPROJECT}/assets/cef.txt)
-	add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${DKPROJECT}/assets $<TARGET_BUNDLE_CONTENT_DIR:${APP_NAME}>/Resources)
+	############## Delete Exlusions and Copy Assets to Bundle #######################
+	if(EXISTS ${DKPROJECT}/assets)
+		file(REMOVE ${DKPROJECT}/assets/log.txt)
+		file(REMOVE ${DKPROJECT}/assets/cef.txt)
+		add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${DKPROJECT}/assets $<TARGET_BUNDLE_CONTENT_DIR:${APP_NAME}>/Resources)
+	endif()
 		
 	############# Link Libraries, Set Startup Project #################
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})

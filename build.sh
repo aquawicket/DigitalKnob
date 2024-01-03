@@ -260,6 +260,7 @@ while :
 		esac 
 		REPLY=
 	done
+	TARGET=${APP}
 
 	echo " "
 	PS3='Please select an OS to build for: '
@@ -560,6 +561,7 @@ while :
 	fi
 	if [[ "$OS" == "mac64" ]]; then
 		cmake -G "Xcode" -DMAC_64=ON -DCMAKE_OSX_ARCHITECTURES=x86_64 $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
+		TARGET=${APP}_APP
 	fi
 	if [[ "$OS" == "raspberry32" ]]; then
 		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
@@ -615,14 +617,18 @@ while :
 	
 	############  BUILD PROJECT ############ 
 	if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-		#xcodebuild -configuration Debug build
-		#cmake --build $DKPATH/DKApps/$APP/$OS --target ${APP}_APP --config Debug
-		cmake --build $DKPATH/DKApps/$APP/$OS/Debug --target ${TARGET} --config Debug
+		if file_exists $DKPATH/DKApps/$APP/$OS/Debug/CMakeCache.txt; then
+			cmake --build $DKPATH/DKApps/$APP/$OS/Debug --target ${TARGET} --config Debug
+		else
+			cmake --build $DKPATH/DKApps/$APP/$OS --target ${TARGET} --config Debug
+		fi
 	fi
 	if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-		#xcodebuild -configuration Release build
-		#cmake --build $DKPATH/DKApps/$APP/$OS --target ${APP}_APP --config Release
-		cmake --build $DKPATH/DKApps/$APP/$OS/Release --target ${TARGET} --config Release
+		if file_exists $DKPATH/DKApps/$APP/$OS/Release/CMakeCache.txt; then
+			cmake --build $DKPATH/DKApps/$APP/$OS/Release --target ${TARGET} --config Release
+		else
+			cmake --build $DKPATH/DKApps/$APP/$OS --target ${TARGET} --config Release
+		fi
 	fi
 	
 	echo "******* Done building $APP - $OS - $TYPE *******"
