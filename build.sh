@@ -4,6 +4,24 @@
 # > chmod 777 build.sh
 
 
+echo ""
+echo ""
+echo "HOSTNAME = $HOSTNAME"
+echo "HOSTTYPE = $HOSTTYPE"
+echo "OSTYPE = $OSTYPE"
+echo "MACHTYPE = $MACHTYPE"
+echo "MODEL = $MODEL"
+echo "USER = $USER"
+echo "USERNAME = $USERNAME"
+echo "DIGITALKNOB = $DIGITALKNOB"
+echo "DKPATH = $DKPATH"
+echo "DKCMAKE = $DKCMAKE"
+
+get_variables() {
+	echo "get_variables()"
+}
+get_variables
+
 ###### validate_branch ######
 validate_branch() {
 	# If the current folder matches the current branch set DKBRANCH, default to Development
@@ -47,16 +65,16 @@ install() {
 	elif [[ "$MSYSTEM" == "UCRT64" ]]; then
 		pacman -S mingw-w64-ucrt-x86_64-$1 --noconfirm
 	###########################
+	elif command_exists brew; then
+		$SUDO brew install $1
 	elif command_exists apt; then
-		$SUDO apt -y install $1
+		$SUDO apt -y install $1f
 	elif command_exists apt-get; then
 		$SUDO apt-get -y install $1
 	elif command_exists pkg; then
 		$SUDO pkg install $1
 	elif command_exists pacman; then
 		$SUDO pacman -S $1 --noconfirm
-	elif command_exists brew; then
-		$SUDO brew install $1
 	else
 		echo "ERROR: no package managers found"
 	fi
@@ -121,6 +139,7 @@ fi
 DKPATH="$DIGITALKNOB/$DKBRANCH"
 DKCMAKE="$DIGITALKNOB/$DKBRANCH/DKCMake"
 
+echo ""
 echo "HOSTNAME = $HOSTNAME"
 echo "HOSTTYPE = $HOSTTYPE"
 echo "OSTYPE = $OSTYPE"
@@ -470,14 +489,14 @@ while :
 	############  GENERATE PROJECT ############ 
 	echo Generating OS=$OS APP=$APP TYPE=$TYPE LEVEL=$LEVEL
 	
-	mkdir $DKPATH/DKApps/$APP/$OS
+	mkdir -p $DKPATH/DKApps/$APP/$OS
 	cd /
 	
 	if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-		mkdir $DKPATH/DKApps/$APP/$OS/Debug
+		mkdir -p $DKPATH/DKApps/$APP/$OS/Debug
 	fi
 	if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-		mkdir $DKPATH/DKApps/$APP/$OS/Release
+		mkdir -p $DKPATH/DKApps/$APP/$OS/Release
 	fi
 	
 	if [[ "$OS" == "android"* ]]; then
