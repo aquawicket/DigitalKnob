@@ -11,6 +11,28 @@ echo ""
 #	Functions
 #################################
 
+### file_exists [file.ext]
+file_exists() {
+	#echo "file_exists($1)"
+	[ -e $1 ]
+}
+
+file_contains() {
+	grep -q "$1" "$2"
+}
+
+### append_file ["string"] [file.ext]
+append_file() {
+	#echo "append_file($1, $2)"
+	echo "$1" >> $2
+	#echo "appended \"$1\" to $2s"
+}
+
+### remove_from_file [string] [file.ext]
+remove_from_file() {
+	sed -i -e "/$1/d" $2
+}
+
 get_dk_host() {
 	DK_HOST=$(uname -s)
 	echo "DK_HOST = $DK_HOST"
@@ -87,25 +109,100 @@ get_dk_pwd(){
 	echo "DK_PWD = $DK_PWD"
 }
 
+reload_environment(){
+	if file_exists ~/.zprofile; then
+		unset DK_ROOT
+		source ~/.zprofile
+		#exec zsh -l
+	fi
+}
+
+### set_env [var] [value]	TODO
+set_env(){
+	echo "set_env($1 $2)"
+	
+	## zsh
+	if file_exists ~/.zprofile; then
+		remove_from_file $1 ~/.zprofile
+		append_file "export $1=$2" ~/.zprofile
+		reload_environment
+	fi
+	
+	echo "$1 = $2"
+}
+
+### get_env [var] 	TODO
+get_env(){
+	echo "get_env(\$1)"
+	if [[ -n "\$1" ]]; then
+		echo "\$1 = $1"
+		#else
+		#echo "setting up default DK_ROOT"
+		#DK_ROOT=$DK_HOME/digitalknob
+		#set_dk_root $DK_ROOT
+	fi
+}
+
+
+### set_dk_root [path/to/digitalknob]
+set_dk_root(){
+	echo "set_dk_root($1)"
+	DK_ROOT=$1
+	
+	## bash, ksh, bourne
+	#if file_exists ~/.profile; then
+	#	remove_from_file DK_ROOT ~/.profile
+	#	append_file "export DK_ROOT=$DK_ROOT" ~/.profile
+	#fi
+	
+	## bash
+	#if file_exists ~/.bash_profile; then
+	#	remove_from_file DK_ROOT ~/.bash_profile
+	#	append_file "export DK_ROOT=$DK_ROOT" ~/.bash_profile
+	#fi
+	#if file_exists ~/.bashrc; then
+	#	remove_from_file DK_ROOT ~/.bashrc
+	#	append_file "export DK_ROOT=$DK_ROOT" ~/.bashrc
+	#fi
+	
+	## zsh
+	if file_exists ~/.zprofile; then
+		remove_from_file DK_ROOT ~/.zprofile
+		append_file "export DK_ROOT=$DK_ROOT" ~/.zprofile
+	fi
+	#if file_exists ~/.zshrc; then
+	#	remove_from_file DK_ROOT ~/.zshrc
+	#	append_file "export DK_ROOT=$DK_ROOT" ~/.zshrc
+	#fi
+	
+	## csh, tcsh
+	#if file_exists ~/.login; then
+	#	remove_from_file DK_ROOT ~/.login
+	#	append_file "export DK_ROOT=$DK_ROOT" ~/.login
+	#fi
+	
+	echo "DK_ROOT = $DK_ROOT"
+}
+
 get_dk_root(){
+	echo "get_dk_root()"
 	if [[ -n "$DK_ROOT" ]]; then
 		echo "DK_ROOT = $DK_ROOT"
 	else
-		echo "setting up default DK_ROOT"
-		DK_ROOT=$DK_HOME/digitalknob
-		export DK_ROOT=$DK_ROOT
-		echo "export DK_ROOT=$DK_ROOT" >> ~/.bash_profile
-		echo "export DK_ROOT=$DK_ROOT" >> ~/.zshrc
-		echo "export DK_ROOT=$DK_ROOT" >> ~/.zprofile
-		echo "DK_ROOT = $DK_ROOT"
+		echo "setting DK_ROOT to default directory"
+		set_dk_root $DK_HOME/digitalknob
 	fi
 }
+
+
+
 
 
 ##################################
 #	main
 #################################
 main(){
+	echo "main()"
 	
 	get_dk_host
 	get_dk_arch
@@ -123,8 +220,10 @@ main(){
 	get_dk_pwd
 	echo ""
 	
-	get_dk_root
+	#remove_from_file DK ~/.zprofile
+	#reload_environment
 	
+	get_dk_root
 }
 main
 
