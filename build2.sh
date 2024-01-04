@@ -242,10 +242,68 @@ function main() {
 	
 	#clear_dk_root
 	get_dk_root
+	
+	#TODO: Here we need to test that we have enough information to determin what environment we exist on
+	
+	# HOSTS
+	# --------------------------------------------------------------------------------------------------
+	# Android (arm32) 	- Termux (LLVM)
+	# Android (arm64) 	- Termux (LLVM)
+	# Android (x86)	  	- Termux (LLVM)
+	# Android (x86_64)	- Termux (LLVM)
+	# iOS (arm64)		- iSH (LLVM)
+	# Linux (arm32)		- Terminal (GCC, LLVM)
+	# Linux (arm64)		- Terminal (GCC, LLVM)
+	# Linux (x86)		- Terminal (GCC, LLVM)
+	# Linux (x86_64)	- Terminal (GCC, LLVM)
+	# Mac (arm32)		- XCode (LLVM)
+	# Mac (arm64)		- XCode (LLVM)
+	# Mac (x86)			- XCode (LLVM)
+	# Mac (x86_64)		- XCode (LLVM)
+	# Raspberry (arm32)	- Terminal (GCC, LLVM)
+	# Raspberry (arm64)	- Terminal (GCC, LLVM)
+	# Raspberry (x86)	- Terminal (GCC, LLVM)
+	# Raspberry (x86_64)- Terminal (GCC, LLVM)
+	# Windows (arm32)	- VisualStudio (MSVC) 
+	# Windows (arm64)	- VisualStudio (MSVC)
+	# Windows (x86)		- VisualStudio (MSVC), MINGW32 (GCC), CLANG32 (LLVM)
+	# Windows (x86_64)	- VisualStudio (MSVC), MINGW32 (GCC), MINGW64 (GCC), CLANG32 (LLVM), CLANG64 (LLVM), UCRT64 (GCC), CLANGARM64 (LLVM)
+	#
+	# TARGETS
+	# --------------------------------------------------------------------------------------------------
+	# Android (arm32)
+	# Android (arm64)
+	# Android (x86)
+	# Android (x86_64)
+	# iOS (arm32)
+	# iOS (arm64)
+	# iOS (x86)
+	# iOS (x86_64)
+	# iOS-Simulator (arm32)
+	# iOS-Simulator (arm64)
+	# iOS-Simulator (x86)
+	# iOS-Simulator (x86_64)
+	# Linux (c)
+	# Linux (arm64)
+	# Linux (x86)
+	# Linux (x86_64)
+	# Mac (arm32)
+	# Mac (arm64)
+	# Mac (x86)
+	# Mac (x86_64)
+	# Raspberry (arm32)
+	# Raspberry (arm64)
+	# Raspberry (x86)
+	# Raspberry (x86_64)
+	# Windows (arm32)
+	# Windows (arm64)
+	# Windows (x86)
+	# Windows (x86_64)
+	
 }
 
 
-# if the script is called with arguments, call the arguments, get the return value and exit
+# If thit script is called with arguments, call the function, arguments, get the return value and exit
 if [ $# -ne 0 ]; then
 	echo "$1(${@:2}) ->"
 	echo ""
