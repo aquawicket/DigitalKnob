@@ -14,6 +14,7 @@ clear
 true=0
 false=1
 
+
 ### message [string]
 function message() {
 	if [ -z "$1" ]; then
@@ -21,8 +22,7 @@ function message() {
 		return $false
 	fi
 	
-	echo "$@"
-	
+	echo "$@"	
 }
 
 ### file_exists [file.ext]
