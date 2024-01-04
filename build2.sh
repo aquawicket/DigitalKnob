@@ -14,16 +14,25 @@ clear
 
 true=0
 false=1
+END_COLOR="\033[0m"
+RED="\033[0;31m"
+GREEN='\033[0;32m'
+CYAN='\033[0;36'
 
 
 #################################
 #	Functions
 #################################
 
+### error [string]
+function error() {
+	echo -e "${RED} ERROR: $1 ${END_COLOR}"
+}
+
 ### message [string]
 function message() {
 	if [ -z "$1" ]; then
-		echo "ERROR: message [string] requires 1 parameter"
+		error "message [string] requires 1 parameter"
 		return $false
 	fi
 	
@@ -33,7 +42,7 @@ function message() {
 ### file_exists [file.ext]
 function file_exists() {
 	if [ -z "$1" ]; then
-		echo "ERROR: file_exists [file.ext] required 1 parameter"
+		error "file_exists [file.ext] required 1 parameter"
 		return $false
 	fi
 	
@@ -43,7 +52,7 @@ function file_exists() {
 ### file_contains [file.ext] [string]
 function file_contains() {
 	if [ -z "$2" ]; then
-		echo "ERROR: file_contains [file.ext] [string] required 2 parameters"
+		error "file_contains [file.ext] [string] required 2 parameters"
 		return $false
 	fi
 		
@@ -53,7 +62,7 @@ function file_contains() {
 ### append_file [string] [file.ext]
 function append_file() {
 	if [ -z "$2" ]; then
-		echo "ERROR: append_file [string] [file.ext] required 2 parameters"
+		error "append_file [string] [file.ext] required 2 parameters"
 		return $false
 	fi
 	
@@ -63,7 +72,7 @@ function append_file() {
 ### remove_from_file [string] [file.ext]
 function remove_from_file() {
 	if [ -z "$2" ]; then
-		echo "ERROR: remove_from_file [string] [file.ext] required 2 parameters"
+		error "remove_from_file [string] [file.ext] required 2 parameters"
 		return $false
 	fi
 		
@@ -168,22 +177,6 @@ function get_dk_pwd() {
 
 ### load_dkenv
 function load_dkenv() {
-	#if file_exists ~/.profile; then
-	#	source ~/.profile
-	#fi
-	#if file_exists ~/.bash_profile; then
-	#	source ~/.bash_profile
-	#fi
-	#if file_exists ~/.bash_login; then
-	#	source ~/.bash_login
-	#fi
-	#if file_exists ~/.bashrc; then
-	#	source ~/.bashrc
-	#fi
-	#if file_exists ~/.zshenv; then
-	#	source ~/.zshenv
-	#fi
-	
 	touch ~/.dkenv
 	source ~/.dkenv
 }
@@ -191,34 +184,12 @@ function load_dkenv() {
 ### set_dk_root [path/to/digitalknob]
 function get_dk_root(){
 	if [ -z "$1" ]; then
-		echo "ERROR: set_dk_root [path/to/digitalknob] required 2 parameters"
+		error "set_dk_root [path/to/digitalknob] required 2 parameters"
 		return $false
 	fi
 	
-	#echo "set_dk_root($1)"
 	DK_ROOT=$1
 	export DK_ROOT=$DK_ROOT
-	
-	#if file_exists ~/.profile; then
-	#	remove_from_file DK_ROOT ~/.profile
-	#	append_file "export DK_ROOT=$DK_ROOT" ~/.profile
-	#fi
-	#if file_exists ~/.bash_profile; then
-	#	remove_from_file DK_ROOT ~/.bash_profile
-	#	append_file "export DK_ROOT=$DK_ROOT" ~/.bash_profile
-	#fi
-	#if file_exists ~/.bash_login; then
-	#	remove_from_file DK_ROOT ~/.bash_login
-	#	append_file "export DK_ROOT=$DK_ROOT" ~/.bash_login
-	#fi
-	#if file_exists ~/.bashrc; then
-	#	remove_from_file DK_ROOT ~/.bashrc
-	#	append_file "export DK_ROOT=$DK_ROOT" ~/.bashrc
-	#fi
-	#if file_exists ~/.zshenv; then
-	#	remove_from_file DK_ROOT ~/.zshenv
-	#	append_file "export DK_ROOT=$DK_ROOT" ~/.zshenv
-	#fi
 	
 	touch ~/.dkenv
 	remove_from_file DK_ROOT ~/.dkenv
@@ -228,7 +199,6 @@ function get_dk_root(){
 }
 
 function get_dk_root() {
-	#echo "get_dk_root()"
 	load_dkenv
 	
 	if [[ -n "$DK_ROOT" ]]; then
@@ -242,22 +212,6 @@ function get_dk_root() {
 function clear_dk_root() {
 	export -n DK_ROOT
 	unset DK_ROOT
-
-	#if file_exists ~/.profile; then
-	#	remove_from_file DK_ROOT ~/.profile
-	#fi
-	#if file_exists ~/.bash_profile; then
-	#	remove_from_file DK_ROOT ~/.bash_profile
-	#fi
-	#if file_exists ~/.bash_login; then
-	#	remove_from_file DK_ROOT ~/.bash_login
-	#fi
-	#if file_exists ~/.bashrc; then	
-	#	remove_from_file DK_ROOT ~/.bashrc
-	#fi
-	#if file_exists ~/.zshenv; then
-	#	remove_from_file DK_ROOT ~/.zshenv
-	#fi
 	
 	touch ~/.dkenv
 	remove_from_file DK_ROOT ~/.dkenv
@@ -268,8 +222,7 @@ function clear_dk_root() {
 #	main
 #################################
 function main() {
-	echo "main()"
-	
+
 	get_dk_host
 	get_dk_arch
 	get_dk_version
@@ -292,16 +245,19 @@ function main() {
 }
 
 
-# if the script is called with arguments, call the arguments and exit
+# if the script is called with arguments, call the arguments, get the return value and exit
 if [ $# -ne 0 ]; then
+	echo "$1(${@:2}) ->"
+	echo ""
+	
 	"$@"
 	
 	if [[ $? -eq 0 ]]; then
 		echo ""
-		echo "$1(${@:2}) -> returned true"
+		echo -e "-> returned true"
 	else
 		echo ""
-		echo "$1(${@:2}) -> returned false"
+		echo -e "-> returned false"
 	fi
 	exit
 fi
