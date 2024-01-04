@@ -87,7 +87,7 @@ get_dk_logname() {
 	echo "DK_LOGNAME = $DK_LOGNAME"
 }
 
-get_dk_home(){
+get_dk_home() {
 	DK_HOME=$HOME
 	echo "DK_HOME = $DK_HOME"
 }
@@ -97,27 +97,28 @@ get_dk_prefix() {
 	echo "DK_PREFIX = $DK_PREFIX"
 }
 
-get_dk_term(){
+get_dk_term() {
 	DK_TERM=$TERM
 	echo "DK_TERM = $DK_TERM"
 }
 
-get_dk_shell(){
+get_dk_shell() {
 	DK_SHELL=$SHELL
 	echo "DK_SHELL = $DK_SHELL"
 }
 
-get_dk_path(){
+get_dk_path() {
 	DK_PATH=$PATH
 	echo "DK_PATH = $DK_PATH"
 }
 
-get_dk_pwd(){
+get_dk_pwd() {
 	DK_PWD=$PWD
 	echo "DK_PWD = $DK_PWD"
 }
 
-reload_environment(){
+reload_environment() {
+	export -n DK_ROOT
 	unset DK_ROOT
 	
 	if file_exists ~/.profile; then
@@ -183,6 +184,7 @@ get_env(){
 set_dk_root(){
 	#echo "set_dk_root($1)"
 	DK_ROOT=$1
+	export DK_ROOT=$DK_ROOT
 	
 	if file_exists ~/.profile; then
 		remove_from_file DK_ROOT ~/.profile
@@ -205,8 +207,6 @@ set_dk_root(){
 		append_file "export DK_ROOT=$DK_ROOT" ~/.zshenv
 	fi
 	
-	#reload_environment
-	export DK_ROOT=$DK_ROOT
 	echo "DK_ROOT = $DK_ROOT"
 }
 
@@ -218,6 +218,27 @@ get_dk_root() {
 		echo "setting DK_ROOT to default directory"
 		set_dk_root $DK_HOME/digitalknob
 	fi
+}
+
+clear_dk_root() {
+	if file_exists ~/.profile; then
+		remove_from_file DK_ROOT ~/.profile
+	fi
+	if file_exists ~/.profile; then
+		remove_from_file DK_ROOT ~/.bash_profile
+	fi
+	if file_exists ~/.profile; then
+		remove_from_file DK_ROOT ~/.bash_login
+	fi
+	if file_exists ~/.profile; then	
+		remove_from_file DK_ROOT ~/.bashrc
+	fi
+	if file_exists ~/.profile; then
+		remove_from_file DK_ROOT ~/.zshenv
+	fi
+	
+	export -n DK_ROOT
+	unset DK_ROOT
 }
 
 
@@ -247,16 +268,9 @@ main(){
 	get_dk_pwd
 	echo ""
 	
-	#remove_from_file DK_ROOT ~/.profile
-	#remove_from_file DK_ROOT ~/.bash_profile
-	#remove_from_file DK_ROOT ~/.bash_login
-	#remove_from_file DK_ROOT ~/.bashrc
-	#remove_from_file DK_ROOT ~/.zshenv
-	#reload_environment
-	
+	#clear_dk_root
 	get_dk_root
-	
-	#echo "DK_ROOT = $DK_ROOT"
+
 }
 main
 
