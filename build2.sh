@@ -39,6 +39,11 @@ function message() {
 	echo "$@"	
 }
 
+### file_exists
+function wait_for_key() {
+	read -n 1 -s -r -p "Press any key to continue"
+}
+
 ### file_exists [file.ext]
 function file_exists() {
 	if [ -z "$1" ]; then
@@ -317,6 +322,8 @@ if [ $# -ne 0 ]; then
 		echo ""
 		echo -e "-> returned false"
 	fi
+	wait_for_key
 	exit
 fi
 main
+wait_for_key
