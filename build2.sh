@@ -11,26 +11,40 @@ clear
 ##################################
 #	Functions
 #################################
+true=0
+false=1
 
+### message [string]
 message() {
-	echo "$@"
+	if [ -z "$1" ]; then
+		echo "ERROR: message [string] requires 1 parameter"
+		return $false
+	else
+		echo "$@"
+	fi
 }
 
 ### file_exists [file.ext]
 file_exists() {
-	#echo "file_exists($1)"
-	[ -e $1 ]
+	if [ -z "$1" ]; then
+		echo "ERROR: file_exists [file.ext] required 1 parameter"
+	else
+		[ -e $1 ]
+	fi
 }
 
+### file_contains [file.ext] [string]
 file_contains() {
-	grep -q "$1" "$2"
+	if [ -z "$2" ]; then
+		echo "ERROR: file_contains [file.ext] [string] required 2 parameters"
+	else
+		grep -q "$2" "$1"
+	fi
 }
 
 ### append_file ["string"] [file.ext]
 append_file() {
-	#echo "append_file($1, $2)"
 	echo "$1" >> $2
-	#echo "appended \"$1\" to $2s"
 }
 
 ### remove_from_file [string] [file.ext]
@@ -119,22 +133,25 @@ get_dk_pwd() {
 	echo "DK_PWD = $DK_PWD"
 }
 
-reload_environment() {
-	if file_exists ~/.profile; then
-		source ~/.profile
-	fi
-	if file_exists ~/.bash_profile; then
-		source ~/.bash_profile
-	fi
-	if file_exists ~/.bash_login; then
-		source ~/.bash_login
-	fi
-	if file_exists ~/.bashrc; then
-		source ~/.bashrc
-	fi
-	if file_exists ~/.zshenv; then
-		source ~/.zshenv
-	fi
+load_dkenv() {
+	#if file_exists ~/.profile; then
+	#	source ~/.profile
+	#fi
+	#if file_exists ~/.bash_profile; then
+	#	source ~/.bash_profile
+	#fi
+	#if file_exists ~/.bash_login; then
+	#	source ~/.bash_login
+	#fi
+	#if file_exists ~/.bashrc; then
+	#	source ~/.bashrc
+	#fi
+	#if file_exists ~/.zshenv; then
+	#	source ~/.zshenv
+	#fi
+	
+	touch ~/.dkenv
+	source ~/.dkenv
 }
 
 ### set_dk_root [path/to/digitalknob]
@@ -143,32 +160,38 @@ set_dk_root(){
 	DK_ROOT=$1
 	export DK_ROOT=$DK_ROOT
 	
-	if file_exists ~/.profile; then
-		remove_from_file DK_ROOT ~/.profile
-		append_file "export DK_ROOT=$DK_ROOT" ~/.profile
-	fi
-	if file_exists ~/.bash_profile; then
-		remove_from_file DK_ROOT ~/.bash_profile
-		append_file "export DK_ROOT=$DK_ROOT" ~/.bash_profile
-	fi
-	if file_exists ~/.bash_login; then
-		remove_from_file DK_ROOT ~/.bash_login
-		append_file "export DK_ROOT=$DK_ROOT" ~/.bash_login
-	fi
-	if file_exists ~/.bashrc; then
-		remove_from_file DK_ROOT ~/.bashrc
-		append_file "export DK_ROOT=$DK_ROOT" ~/.bashrc
-	fi
-	if file_exists ~/.zshenv; then
-		remove_from_file DK_ROOT ~/.zshenv
-		append_file "export DK_ROOT=$DK_ROOT" ~/.zshenv
-	fi
+	#if file_exists ~/.profile; then
+	#	remove_from_file DK_ROOT ~/.profile
+	#	append_file "export DK_ROOT=$DK_ROOT" ~/.profile
+	#fi
+	#if file_exists ~/.bash_profile; then
+	#	remove_from_file DK_ROOT ~/.bash_profile
+	#	append_file "export DK_ROOT=$DK_ROOT" ~/.bash_profile
+	#fi
+	#if file_exists ~/.bash_login; then
+	#	remove_from_file DK_ROOT ~/.bash_login
+	#	append_file "export DK_ROOT=$DK_ROOT" ~/.bash_login
+	#fi
+	#if file_exists ~/.bashrc; then
+	#	remove_from_file DK_ROOT ~/.bashrc
+	#	append_file "export DK_ROOT=$DK_ROOT" ~/.bashrc
+	#fi
+	#if file_exists ~/.zshenv; then
+	#	remove_from_file DK_ROOT ~/.zshenv
+	#	append_file "export DK_ROOT=$DK_ROOT" ~/.zshenv
+	#fi
+	
+	touch ~/.dkenv
+	remove_from_file DK_ROOT ~/.dkenv
+	append_file "export DK_ROOT=$DK_ROOT" ~/.dkenv
 	
 	echo "DK_ROOT = $DK_ROOT"
 }
 
 get_dk_root() {
 	#echo "get_dk_root()"
+	load_dkenv
+	
 	if [[ -n "$DK_ROOT" ]]; then
 		echo "DK_ROOT = $DK_ROOT"
 	else
@@ -178,28 +201,28 @@ get_dk_root() {
 }
 
 clear_dk_root() {
-	if file_exists ~/.profile; then
-		remove_from_file DK_ROOT ~/.profile
-	fi
-	if file_exists ~/.profile; then
-		remove_from_file DK_ROOT ~/.bash_profile
-	fi
-	if file_exists ~/.profile; then
-		remove_from_file DK_ROOT ~/.bash_login
-	fi
-	if file_exists ~/.profile; then	
-		remove_from_file DK_ROOT ~/.bashrc
-	fi
-	if file_exists ~/.profile; then
-		remove_from_file DK_ROOT ~/.zshenv
-	fi
-	
 	export -n DK_ROOT
 	unset DK_ROOT
+
+	#if file_exists ~/.profile; then
+	#	remove_from_file DK_ROOT ~/.profile
+	#fi
+	#if file_exists ~/.bash_profile; then
+	#	remove_from_file DK_ROOT ~/.bash_profile
+	#fi
+	#if file_exists ~/.bash_login; then
+	#	remove_from_file DK_ROOT ~/.bash_login
+	#fi
+	#if file_exists ~/.bashrc; then	
+	#	remove_from_file DK_ROOT ~/.bashrc
+	#fi
+	#if file_exists ~/.zshenv; then
+	#	remove_from_file DK_ROOT ~/.zshenv
+	#fi
+	
+	touch ~/.dkenv
+	remove_from_file DK_ROOT ~/.dkenv
 }
-
-
-
 
 
 ##################################
@@ -232,8 +255,17 @@ main() {
 
 # if the script is called with arguments, call the arguments and exit
 if [ $# -ne 0 ]; then
-    "$@"
-	echo ""
+	"$@"
+	
+	if [[ $? -eq 0 ]]; then
+		echo ""
+		#echo "$@ -> returned true"
+		echo "$1(${@:2}) -> returned true"
+	else
+		echo ""
+		#echo "$@ -> returned false"
+		echo "$1(${@:2}) -> returned false"
+	fi
 	exit
 fi
 main
