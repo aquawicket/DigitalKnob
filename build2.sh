@@ -7,12 +7,14 @@
 # https://www.tecmint.com/understanding-shell-initialization-files-and-user-profiles-linux/
 
 clear
-echo "NEW DKBUILD SCRIPT FOR UNIX"
-echo ""
 
 ##################################
 #	Functions
 #################################
+
+message() {
+	echo "$@"
+}
 
 ### file_exists [file.ext]
 file_exists() {
@@ -118,9 +120,6 @@ get_dk_pwd() {
 }
 
 reload_environment() {
-	export -n DK_ROOT
-	unset DK_ROOT
-	
 	if file_exists ~/.profile; then
 		source ~/.profile
 	fi
@@ -137,48 +136,6 @@ reload_environment() {
 		source ~/.zshenv
 	fi
 }
-
-### set_env [var] [value]	TODO
-set_env(){
-	echo "set_env($1 $2)"
-	
-	if file_exists ~/.profile; then
-		remove_from_file $1 ~/.profile
-		append_file "export $1=$2" ~/.profile
-	fi
-	if file_exists ~/.bash_profile; then
-		remove_from_file $1 ~/.bash_profile
-		append_file "export $1=$2" ~/.bash_profile
-	fi
-	if file_exists ~/.bash_login; then
-		remove_from_file $1 ~/.bash_login
-		append_file "export $1=$2" ~/.bash_login
-	fi
-	if file_exists ~/.bashrc; then
-		remove_from_file $1 ~/.bashrc
-		append_file "export $1=$2" ~/.bashrc
-	fi
-	if file_exists ~/.zshenv; then
-		remove_from_file $1 ~/.zshenv
-		append_file "export $1=$2" ~/.zshenv
-	fi
-	
-	reload_environment
-	echo "$1 = $2"
-}
-
-### get_env [var] 	TODO
-get_env(){
-	echo "get_env(\$1)"
-	if [[ -n "\$1" ]]; then
-		echo "\$1 = $1"
-		#else
-		#echo "setting up default DK_ROOT"
-		#DK_ROOT=$DK_HOME/digitalknob
-		#set_dk_root $DK_ROOT
-	fi
-}
-
 
 ### set_dk_root [path/to/digitalknob]
 set_dk_root(){
@@ -248,7 +205,7 @@ clear_dk_root() {
 ##################################
 #	main
 #################################
-main(){
+main() {
 	echo "main()"
 	
 	get_dk_host
@@ -270,8 +227,13 @@ main(){
 	
 	#clear_dk_root
 	get_dk_root
-
 }
-main
 
-echo ""
+
+# if the script is called with arguments, call the arguments and exit
+if [ $# -ne 0 ]; then
+    "$@"
+	echo ""
+	exit
+fi
+main
