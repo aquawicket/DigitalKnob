@@ -92,6 +92,11 @@ get_dk_home(){
 	echo "DK_HOME = $DK_HOME"
 }
 
+get_dk_prefix() {
+	DK_PREFIX=$PREFIX
+	echo "DK_PREFIX = $DK_PREFIX"
+}
+
 get_dk_term(){
 	DK_TERM=$TERM
 	echo "DK_TERM = $DK_TERM"
@@ -113,10 +118,22 @@ get_dk_pwd(){
 }
 
 reload_environment(){
-	if file_exists ~/.zprofile; then
-		unset DK_ROOT
-		source ~/.zprofile
-		#exec zsh -l
+	unset DK_ROOT
+	
+	if file_exists ~/.profile; then
+		source ~/.profile
+	fi
+	if file_exists ~/.bash_profile; then
+		source ~/.bash_profile
+	fi
+	if file_exists ~/.bash_login; then
+		source ~/.bash_login
+	fi
+	if file_exists ~/.bashrc; then
+		source ~/.bashrc
+	fi
+	if file_exists ~/.zshenv; then
+		source ~/.zshenv
 	fi
 }
 
@@ -124,13 +141,28 @@ reload_environment(){
 set_env(){
 	echo "set_env($1 $2)"
 	
-	## zsh
-	if file_exists ~/.zprofile; then
-		remove_from_file $1 ~/.zprofile
-		append_file "export $1=$2" ~/.zprofile
-		reload_environment
+	if file_exists ~/.profile; then
+		remove_from_file $1 ~/.profile
+		append_file "export $1=$2" ~/.profile
+	fi
+	if file_exists ~/.bash_profile; then
+		remove_from_file $1 ~/.bash_profile
+		append_file "export $1=$2" ~/.bash_profile
+	fi
+	if file_exists ~/.bash_login; then
+		remove_from_file $1 ~/.bash_login
+		append_file "export $1=$2" ~/.bash_login
+	fi
+	if file_exists ~/.bashrc; then
+		remove_from_file $1 ~/.bashrc
+		append_file "export $1=$2" ~/.bashrc
+	fi
+	if file_exists ~/.zshenv; then
+		remove_from_file $1 ~/.zshenv
+		append_file "export $1=$2" ~/.zshenv
 	fi
 	
+	reload_environment
 	echo "$1 = $2"
 }
 
@@ -149,46 +181,37 @@ get_env(){
 
 ### set_dk_root [path/to/digitalknob]
 set_dk_root(){
-	echo "set_dk_root($1)"
+	#echo "set_dk_root($1)"
 	DK_ROOT=$1
 	
-	## bash, ksh, bourne
-	#if file_exists ~/.profile; then
-	#	remove_from_file DK_ROOT ~/.profile
-	#	append_file "export DK_ROOT=$DK_ROOT" ~/.profile
-	#fi
-	
-	## bash
-	#if file_exists ~/.bash_profile; then
-	#	remove_from_file DK_ROOT ~/.bash_profile
-	#	append_file "export DK_ROOT=$DK_ROOT" ~/.bash_profile
-	#fi
-	#if file_exists ~/.bashrc; then
-	#	remove_from_file DK_ROOT ~/.bashrc
-	#	append_file "export DK_ROOT=$DK_ROOT" ~/.bashrc
-	#fi
-	
-	## zsh
-	if file_exists ~/.zprofile; then
-		remove_from_file DK_ROOT ~/.zprofile
-		append_file "export DK_ROOT=$DK_ROOT" ~/.zprofile
+	if file_exists ~/.profile; then
+		remove_from_file DK_ROOT ~/.profile
+		append_file "export DK_ROOT=$DK_ROOT" ~/.profile
 	fi
-	#if file_exists ~/.zshrc; then
-	#	remove_from_file DK_ROOT ~/.zshrc
-	#	append_file "export DK_ROOT=$DK_ROOT" ~/.zshrc
-	#fi
+	if file_exists ~/.bash_profile; then
+		remove_from_file DK_ROOT ~/.bash_profile
+		append_file "export DK_ROOT=$DK_ROOT" ~/.bash_profile
+	fi
+	if file_exists ~/.bash_login; then
+		remove_from_file DK_ROOT ~/.bash_login
+		append_file "export DK_ROOT=$DK_ROOT" ~/.bash_login
+	fi
+	if file_exists ~/.bashrc; then
+		remove_from_file DK_ROOT ~/.bashrc
+		append_file "export DK_ROOT=$DK_ROOT" ~/.bashrc
+	fi
+	if file_exists ~/.zshenv; then
+		remove_from_file DK_ROOT ~/.zshenv
+		append_file "export DK_ROOT=$DK_ROOT" ~/.zshenv
+	fi
 	
-	## csh, tcsh
-	#if file_exists ~/.login; then
-	#	remove_from_file DK_ROOT ~/.login
-	#	append_file "export DK_ROOT=$DK_ROOT" ~/.login
-	#fi
-	
+	#reload_environment
+	export DK_ROOT=$DK_ROOT
 	echo "DK_ROOT = $DK_ROOT"
 }
 
-get_dk_root(){
-	echo "get_dk_root()"
+get_dk_root() {
+	#echo "get_dk_root()"
 	if [[ -n "$DK_ROOT" ]]; then
 		echo "DK_ROOT = $DK_ROOT"
 	else
@@ -217,16 +240,23 @@ main(){
 	get_dk_username
 	get_dk_logname
 	get_dk_home
+	get_dk_prefix
 	get_dk_term
 	get_dk_shell
 	get_dk_path
 	get_dk_pwd
 	echo ""
 	
-	#remove_from_file DK ~/.zprofile
+	#remove_from_file DK_ROOT ~/.profile
+	#remove_from_file DK_ROOT ~/.bash_profile
+	#remove_from_file DK_ROOT ~/.bash_login
+	#remove_from_file DK_ROOT ~/.bashrc
+	#remove_from_file DK_ROOT ~/.zshenv
 	#reload_environment
 	
 	get_dk_root
+	
+	#echo "DK_ROOT = $DK_ROOT"
 }
 main
 
