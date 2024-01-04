@@ -182,7 +182,7 @@ function load_dkenv() {
 }
 
 ### set_dk_root [path/to/digitalknob]
-function get_dk_root(){
+function set_dk_root(){
 	if [ -z "$1" ]; then
 		error "set_dk_root [path/to/digitalknob] required 2 parameters"
 		return $false
