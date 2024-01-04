@@ -15,81 +15,102 @@ true=0
 false=1
 
 ### message [string]
-message() {
+function message() {
 	if [ -z "$1" ]; then
 		echo "ERROR: message [string] requires 1 parameter"
 		return $false
-	else
-		echo "$@"
 	fi
+	
+	echo "$@"
+	
 }
 
 ### file_exists [file.ext]
-file_exists() {
+function file_exists() {
 	if [ -z "$1" ]; then
 		echo "ERROR: file_exists [file.ext] required 1 parameter"
-	else
-		[ -e $1 ]
+		return $false
 	fi
+	
+	[ -e $1 ]
 }
 
 ### file_contains [file.ext] [string]
-file_contains() {
+function file_contains() {
 	if [ -z "$2" ]; then
 		echo "ERROR: file_contains [file.ext] [string] required 2 parameters"
-	else
-		grep -q "$2" "$1"
+		return $false
 	fi
+		
+	grep -q "$2" "$1"
 }
 
-### append_file ["string"] [file.ext]
-append_file() {
+### append_file [string] [file.ext]
+function append_file() {
+	if [ -z "$2" ]; then
+		echo "ERROR: append_file [string] [file.ext] required 2 parameters"
+		return $false
+	fi
+	
 	echo "$1" >> $2
 }
 
 ### remove_from_file [string] [file.ext]
-remove_from_file() {
+function remove_from_file() {
+	if [ -z "$2" ]; then
+		echo "ERROR: remove_from_file [string] [file.ext] required 2 parameters"
+		return $false
+	fi
+		
 	sed -i -e "/$1/d" $2
 }
 
-get_dk_host() {
+### get_dk_host
+function get_dk_host() {
 	DK_HOST=$(uname -s)
 	echo "DK_HOST = $DK_HOST"
 }
 
-get_dk_arch() {
+### get_dk_arch
+function get_dk_arch() {
 	DK_ARCH=$(uname -m)
 	echo "DK_ARCH = $DK_ARCH"
 }
 
-get_dk_version() {
+### get_dk_version
+function get_dk_version() {
 	DK_VERSION=$(uname -v)
 	echo "DK_VERSION = $DK_VERSION"
 }
 
-get_dk_ostype() {
+### get_dk_ostype
+function get_dk_ostype() {
 	DK_OSTYPE=$OSTYPE
 	echo "DK_OSTYPE = $DK_OSTYPE"
 }
 
-get_dk_model() {
+### get_dk_model
+function get_dk_model() {
 	if [ -e /proc/device-tree/model ]; then
 		DK_MODEL=$(tr -d '\0' </proc/device-tree/model)
 	fi
 	echo "DK_MODEL = $DK_MODEL"
 }
 
-get_dk_machtype() {
+### get_dk_machtype
+function get_dk_machtype() {
 	DK_MACHTYPE=$MACHTYPE
 	echo "DK_MACHTYPE = $DK_MACHTYPE"
 }
 
-get_dk_lang() {
+### get_dk_lang
+function get_dk_lang() {
 	DK_LANG=$LANG
 	echo "DK_LANG = $DK_LANG"
 }
 
-get_dk_username() {
+### get_dk_username
+function get_dk_username() {
 	if [[ -n "$USER" ]]; then
 		DK_USERNAME=$USER
 	elif [[ -n "$USERNAME" ]]; then
@@ -98,42 +119,50 @@ get_dk_username() {
 	echo "DK_USERNAME = $DK_USERNAME"
 }
 
-get_dk_logname() {
+### get_dk_logname
+function get_dk_logname() {
 	DK_LOGNAME=$LOGNAME
 	echo "DK_LOGNAME = $DK_LOGNAME"
 }
 
-get_dk_home() {
+### get_dk_home
+function get_dk_home() {
 	DK_HOME=$HOME
 	echo "DK_HOME = $DK_HOME"
 }
 
-get_dk_prefix() {
+### get_dk_prefix
+function get_dk_prefix() {
 	DK_PREFIX=$PREFIX
 	echo "DK_PREFIX = $DK_PREFIX"
 }
 
-get_dk_term() {
+### get_dk_term
+function get_dk_term() {
 	DK_TERM=$TERM
 	echo "DK_TERM = $DK_TERM"
 }
 
-get_dk_shell() {
+### get_dk_shell
+function get_dk_shell() {
 	DK_SHELL=$SHELL
 	echo "DK_SHELL = $DK_SHELL"
 }
 
-get_dk_path() {
+### get_dk_path
+function get_dk_path() {
 	DK_PATH=$PATH
 	echo "DK_PATH = $DK_PATH"
 }
 
-get_dk_pwd() {
+### get_dk_pwd
+function get_dk_pwd() {
 	DK_PWD=$PWD
 	echo "DK_PWD = $DK_PWD"
 }
 
-load_dkenv() {
+### load_dkenv
+function load_dkenv() {
 	#if file_exists ~/.profile; then
 	#	source ~/.profile
 	#fi
@@ -155,7 +184,12 @@ load_dkenv() {
 }
 
 ### set_dk_root [path/to/digitalknob]
-set_dk_root(){
+function get_dk_root(){
+	if [ -z "$1" ]; then
+		echo "ERROR: set_dk_root [path/to/digitalknob] required 2 parameters"
+		return $false
+	fi
+	
 	#echo "set_dk_root($1)"
 	DK_ROOT=$1
 	export DK_ROOT=$DK_ROOT
@@ -188,7 +222,7 @@ set_dk_root(){
 	echo "DK_ROOT = $DK_ROOT"
 }
 
-get_dk_root() {
+function get_dk_root() {
 	#echo "get_dk_root()"
 	load_dkenv
 	
@@ -200,7 +234,7 @@ get_dk_root() {
 	fi
 }
 
-clear_dk_root() {
+function clear_dk_root() {
 	export -n DK_ROOT
 	unset DK_ROOT
 
@@ -228,7 +262,7 @@ clear_dk_root() {
 ##################################
 #	main
 #################################
-main() {
+function main() {
 	echo "main()"
 	
 	get_dk_host
@@ -259,11 +293,9 @@ if [ $# -ne 0 ]; then
 	
 	if [[ $? -eq 0 ]]; then
 		echo ""
-		#echo "$@ -> returned true"
 		echo "$1(${@:2}) -> returned true"
 	else
 		echo ""
-		#echo "$@ -> returned false"
 		echo "$1(${@:2}) -> returned false"
 	fi
 	exit
