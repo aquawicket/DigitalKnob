@@ -30,8 +30,9 @@ else()
     # move termux/platform-tools to android-sdk
     dk_copy(${ANDROID-SDK}/termux/platform-tools ${ANDROID-SDK}/platform-tools)
     
-    ## fix aapt in gradle cache
-    if(EXISTS ~/.gradle)
+    ## fix aapt2 in gradle/cache
+    if(EXISTS /data/data/com.termux/files/home/.gradle)
+        dk_wait()
         dk_info("Patching Gradle aapt2 .......")
         dk_executeProcess(cd ~/.gradle/caches/modules-2/files-2.1/com.android.tools.build/aapt2/7.0.3-7396180/942684a205d274f6b23f6d066cafcc12a17ce9ff)
         dk_executeProcess(unzip aapt2-7.0.3-7396180-linux.jar)
