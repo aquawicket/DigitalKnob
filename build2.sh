@@ -42,6 +42,7 @@ function message() {
 ### file_exists
 function wait_for_key() {
 	read -n 1 -s -r -p "Press any key to continue"
+	echo ""
 }
 
 ### file_exists [file.ext]
