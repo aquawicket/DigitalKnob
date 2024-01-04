@@ -1868,7 +1868,6 @@ function(dk_executeProcess commands) #NOASSERT
 		execute_process(COMMAND ${commands} RESULT_VARIABLE result ERROR_VARIABLE error)
 	endif()
 	if(NOT ${result} EQUAL 0)
-		#if(WIN_HOST)
 		if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 			execute_process(COMMAND timeout /t 2 /nobreak OUTPUT_QUIET WORKING_DIRECTORY ${CURRENT_DIR}) # wait 2 seconds for the stdout to flush before printing error
 		else()
