@@ -103,6 +103,12 @@ command_exists() {
 	command -v "$1" >/dev/null 2>&1
 }
 
+### get_dk_uname ###
+function get_dk_uname() {
+	DK_UNAME=$(uname -a)
+	echo "DK_UNAME = $DK_UNAME"
+}
+
 ### get_dk_host ###
 function get_dk_host() {
 	DK_HOST=$(uname -s)
@@ -125,6 +131,14 @@ function get_dk_version() {
 function get_dk_ostype() {
 	DK_OSTYPE=$OSTYPE
 	echo "DK_OSTYPE = $DK_OSTYPE"
+}
+
+### get_dk_cpuinfo ###
+function get_dk_cpuinfo() {
+	if [ -e /proc/cpuinfo ]; then
+		DK_CPUINFO=$(tr -d '\0' </proc/cpuinfo)
+	fi
+	echo "DK_CPUINFO = $DK_CPUINFO"
 }
 
 ### get_dk_model ###
@@ -249,10 +263,12 @@ function clear_dk_root() {
 #################################
 function main() {
 
+	get_dk_uname
 	get_dk_host
 	get_dk_arch
 	get_dk_version
 	get_dk_ostype
+	#get_dk_cpuinfo
 	get_dk_model
 	get_dk_machtype
 	get_dk_lang
