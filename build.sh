@@ -75,6 +75,8 @@ install() {
 		$SUDO pkg install $1
 	elif command_exists pacman; then
 		$SUDO pacman -S $1 --noconfirm
+	elif command_exists tce-load; then
+		$SUDO tce-load $1
 	else
 		echo "ERROR: no package managers found"
 	fi
