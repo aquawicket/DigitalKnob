@@ -433,6 +433,9 @@ while :
 
 	if [[ $MSYSTEM == "MINGW32" ]] || [[ $MSYSTEM == "MINGW32" ]] || [[ $MSYSTEM == "MSYS" ]] || [[ $MSYSTEM == "UCRT64" ]]; then
 		validate_package gcc toolchain
+	fi
+	
+	if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 		GCC_PATH=$(which gcc)
 		GPP_PATH=$(which g++)
 		export CC="$GCC_PATH"
@@ -440,6 +443,7 @@ while :
 		echo "GCC_PATH = $GCC_PATH"
 		echo "GPP_PATH = $GPP_PATH"
 	fi
+
 	
 	if [[ $MSYSTEM == "CLANG32" ]] || [[ $MSYSTEM == "CLANG64" ]] || [[ $MSYSTEM == "CLANGARM64" ]]; then
 		validate_package clang toolchain
