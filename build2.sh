@@ -149,9 +149,9 @@ function get_dk_lang() {
 
 ### get_dk_username ###
 function get_dk_username() {
-	if [[ -n "$USER" ]]; then
+	if [ -n "$USER" ]; then
 		DK_USERNAME=$USER
-	elif [[ -n "$USERNAME" ]]; then
+	elif [ -n "$USERNAME" ]; then
 		DK_USERNAME=$USERNAME
 	fi
 	echo "DK_USERNAME = $DK_USERNAME"
@@ -335,7 +335,7 @@ if [ $# -ne 0 ]; then
 	
 	"$@"
 	
-	if [[ $? -eq 0 ]]; then
+	if [ $? -eq 0 ]; then
 		echo ""
 		echo -e "-> returned true"
 	else
