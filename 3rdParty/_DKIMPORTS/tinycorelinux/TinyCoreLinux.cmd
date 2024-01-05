@@ -43,13 +43,17 @@ goto:eof
 :: Launching the VM with CD to install
 :install
 	echo "Installing TinyCoreLinux . . ."
-	%QEMU%\qemu-system-x86_64 -cdrom %TINYCORELINUX_ISO% -boot menu=on -drive file=%TINYCORELINUX_IMG% -m 1G -cpu max -smp 2 -vga virtio -display sdl
+	%QEMU%\qemu-system-x86_64 -cdrom %TINYCORELINUX_ISO% -boot menu=on -drive file=%TINYCORELINUX_IMG% -m 1.5G -cpu max -smp 2 -vga virtio -display sdl
+	echo "Installation complete"
+	pause
+	call:launch
 goto:eof
 
 :: Launching the VM (after install)
 :launch
 	echo "Starting up TinyCoreLinux . . ."
 	%QEMU%\qemu-system-x86_64 -boot menu=on -drive file=%TINYCORELINUX_IMG% -cpu max -smp 2 -vga virtio -display sdl
+	goto:end
 goto:eof
 
 :: download file()
@@ -63,3 +67,5 @@ goto:eof
 		certutil.exe -urlcache -split -f %~1 %~2
 	)
 goto:eof
+
+:end
