@@ -1,38 +1,57 @@
 @echo off
-if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
+::if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
 
-::set "TINYCORELINUX_DL=http://tinycorelinux.net/14.x/x86/release/TinyCore-current.iso"
-::set "TINYCORELINUX_ISO=%cd%\TinyCore-current.iso"
+:: Install instructions ::
+:: select Frugal
+:: select sda
+:: check online
+
+:: delete tinycore.img to redo the process if needed
+
 
 set "TINYCORELINUX_DL=http://tinycorelinux.net/14.x/x86/release/CorePlus-current.iso"
 set "TINYCORELINUX_ISO=%cd%\CorePlus-current.iso"
-
-
-
 set "TINYCORELINUX_IMG=tinycore.img"
 set "QEMU=C:\Users\Administrator\digitalknob\Development\3rdParty\qemu"
 
 
-if NOT exist "%TINYCORELINUX_ISO%" (
-	call:download %TINYCORELINUX_DL% %TINYCORELINUX_ISO%
+if exist "%TINYCORELINUX_IMG%" (
+	call:launch
+)
+if NOT exist "%TINYCORELINUX_IMG%" (
+	call:install
 )
 
-:: cd <iso directory>
-:: already there
+:: Download CorePlus-current.iso
+:download_iso
+	if NOT exist "%TINYCORELINUX_ISO%" (
+		echo "Downloading CorePlus-current.iso . . ."
+		call:download %TINYCORELINUX_DL% %TINYCORELINUX_ISO%
+	)
+goto:eof
 
 :: Create the virtual image (10gb)
-if exist "%TINYCORELINUX_IMG%" (
-	del "%TINYCORELINUX_IMG%"
-)
-%QEMU%\qemu-img create -f qcow2 %TINYCORELINUX_IMG% 10G
+:create_image
+	echo "Creating %TINYCORELINUX_IMG% . . ."
+	if exist "%TINYCORELINUX_IMG%" (
+		del "%TINYCORELINUX_IMG%"
+	)
+	%QEMU%\qemu-img create -f qcow2 %TINYCORELINUX_IMG% 10G
+goto:eof
 
-:: Launching the VM
-%QEMU%\qemu-system-x86_64 -cdrom %TINYCORELINUX_ISO% -boot menu=on -drive file=%TINYCORELINUX_IMG% -m 1G -cpu max -smp 2 -vga virtio -display sdl
+:: Launching the VM with CD to install
+:install
+	echo "Installing TinyCoreLinux . . ."
+	call::create_image
+	call:download_iso
+	%QEMU%\qemu-system-x86_64 -cdrom %TINYCORELINUX_ISO% -boot menu=on -drive file=%TINYCORELINUX_IMG% -m 1G -cpu max -smp 2 -vga virtio -display sdl
+goto:eof
 
-:: Install the OS to the .img file
-:: (Install from the running virtual OS)
-
-
+:: Launching the VM (after install)
+:launch
+	echo "Starting up TinyCoreLinux . . ."
+	%QEMU%\qemu-system-x86_64 -boot menu=on -drive file=%TINYCORELINUX_IMG% -cpu max -smp 2 -vga virtio -display sdl
+goto:eof
 
 :: download()
 :download
@@ -44,5 +63,4 @@ if exist "%TINYCORELINUX_IMG%" (
 		echo please wait . . .
 		certutil.exe -urlcache -split -f %~1 %~2
 	)
-	::call:check_error
 goto:eof
