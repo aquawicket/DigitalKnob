@@ -14,7 +14,7 @@
 TINYCORELINUX_DL="http://tinycorelinux.net/14.x/x86/release/CorePlus-current.iso"
 TINYCORELINUX_ISO="CorePlus-current.iso"
 TINYCORELINUX_IMG="tinycore.img"
-QEMU="qemu"
+QEMU="urs/bin"
 QEMU_MEMORY="1G"
 QEMU_DRIVE_SIZE="10G"
 
@@ -48,13 +48,13 @@ function download() {
 # Launching the VM (after install)
 function launch() {
 	echo "Starting up TinyCoreLinux . . ."
-	${QEMU}\qemu-system-x86_64.exe -boot menu=on -drive file=%TINYCORELINUX_IMG% -m ${QEMU_MEMORY} -cpu max -smp 2 -vga virtio -display sdl
+	${QEMU}/qemu-system-x86_64.exe -boot menu=on -drive file=${TINYCORELINUX_IMG} -m ${QEMU_MEMORY} -cpu max -smp 2 -vga virtio -display sdl
 }
 
 # Launching the VM with CD to install
 function install() {
 	echo "Installing TinyCoreLinux . . ."
-	${QEMU}\qemu-system-x86_64 -cdrom ${TINYCORELINUX_ISO} -boot menu=on -drive file=%TINYCORELINUX_IMG% -m ${QEMU_MEMORY} -cpu max -smp 2 -vga virtio -display sdl
+	${QEMU}/qemu-system-x86_64 -cdrom ${TINYCORELINUX_ISO} -boot menu=on -drive file=${TINYCORELINUX_IMG} -m ${QEMU_MEMORY} -cpu max -smp 2 -vga virtio -display sdl
 	#if NOT "%ERRORLEVEL%" == "0" (
 	#	del %TINYCORELINUX_IMG%
 	#	assert "Launching the virtual maching failed"
@@ -66,6 +66,7 @@ function install() {
 function create_image() {
 	if file_exists ${TINYCORELINUX_IMG%}; then
 		assert "${TINYCORELINUX_IMG} already exists"
+		return 1
 	fi
 	echo "Creating ${TINYCORELINUX_IMG} . . ."
 	${QEMU}/qemu-img create -f qcow2 ${TINYCORELINUX_IMG} ${QEMU_DRIVE_SIZE}
