@@ -31,15 +31,30 @@ else()
     dk_copy(${ANDROID-SDK}/termux/platform-tools ${ANDROID-SDK}/platform-tools)
     
     ## fix aapt2 in gradle/cache
-    if(EXISTS /data/data/com.termux/files/home/.gradle)
-        dk_wait()
+    if(EXISTS /data/data/com.termux/files/home/.gradle/caches/modules-2/files-2.1/com.android.tools.build/aapt2/7.0.3-7396180/942684a205d274f6b23f6d066cafcc12a17ce9ff)
         dk_info("Patching Gradle aapt2 .......")
-        dk_executeProcess(cd ~/.gradle/caches/modules-2/files-2.1/com.android.tools.build/aapt2/7.0.3-7396180/942684a205d274f6b23f6d066cafcc12a17ce9ff)
-        dk_executeProcess(unzip aapt2-7.0.3-7396180-linux.jar)
-        dk_executeProcess(rm aapt2)
-        dk_executeProcess(cp ${ANDROID-SDK}/build-tools/30.0.3/aapt2 .)
-        dk_executeProcess(rm aapt2-7.0.3-7396180-linux.jar)
-        dk_executeProcess(zip aapt2-7.0.3-7396180-linux.jar *)
-        dk_executeProcess(rm -rf META-INF NOTICE aapt2)
+        
+        dk_wait()
+        execute_process(COMMAND 
+             "cd /data/data/com.termux/files/home/.gradle/caches/modules-2/files-2.1/com.android.tools.build/aapt2/7.0.3-7396180/942684a205d274f6b23f6d066cafcc12a17ce9ff &&
+              unzip aapt2-7.0.3-7396180-linux.jar &&
+              rm aapt2 &&
+              cp ${ANDROID-SDK}/build-tools/30.0.3/aapt2 . &&
+              rm aapt2-7.0.3-7396180-linux.jar &&
+              zip aapt2-7.0.3-7396180-linux.jar * &&
+              rm -rf META-INF NOTICE aapt2"
+              WORKING_DIRECTORY /data/data/com.termux/files/home/.gradle/caches/modules-2/files-2.1/com.android.tools.build/aapt2/7.0.3-7396180/942684a205d274f6b23f6d066cafcc12a17ce9ff)
+        dk_wait()
+        
+        #dk_setPath(/data/data/com.termux/files/home/.gradle/caches/modules-2/files-2.1/com.android.tools.build/aapt2/7.0.3-7396180/942684a205d274f6b23f6d066cafcc12a17ce9ff)
+        #dk_extract(/data/data/com.termux/files/home/.gradle/caches/modules-2/files-2.1/com.android.tools.build/aapt2/7.0.3-7396180/942684a205d274f6b23f6d066cafcc12a17ce9ff/aapt2-7.0.3-7396180-linux.jar
+        #               /data/data/com.termux/files/home/.gradle/caches/modules-2/files-2.1/com.android.tools.build/aapt2/7.0.3-7396180/942684a205d274f6b23f6d066cafcc12a17ce9ff)
+        #dk_remove( /data/data/com.termux/files/home/.gradle/caches/modules-2/files-2.1/com.android.tools.build/aapt2/7.0.3-7396180/942684a205d274f6b23f6d066cafcc12a17ce9ff/aapt2)
+        #dk_copy(${ANDROID-SDK}/build-tools/30.0.3/aapt2 
+        #               /data/data/com.termux/files/home/.gradle/caches/modules-2/files-2.1/com.android.tools.build/aapt2/7.0.3-7396180/942684a205d274f6b23f6d066cafcc12a17ce9ff)
+        #dk_remove(/data/data/com.termux/files/home/.gradle/caches/modules-2/files-2.1/com.android.tools.build/aapt2/7.0.3-7396180/942684a205d274f6b23f6d066cafcc12a17ce9ff/aapt2-7.0.3-7396180-linux.jar)
+        #dk_zip( /data/data/com.termux/files/home/.gradle/caches/modules-2/files-2.1/com.android.tools.build/aapt2/7.0.3-7396180/942684a205d274f6b23f6d066cafcc12a17ce9ff
+        #    /data/data/com.termux/files/home/.gradle/caches/modules-2/files-2.1/com.android.tools.build/aapt2/7.0.3-7396180/942684a205d274f6b23f6d066cafcc12a17ce9ff/aapt2-7.0.3-7396180-linux.jar)
+        #dk_executeProcess(rm -rf META-INF NOTICE aapt2)
     endif()
 endif()
