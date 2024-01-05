@@ -78,7 +78,7 @@ goto:eof
 :: Launching the VM (after install)
 :launch
 	echo "Starting up TinyCoreLinux . . ."
-	start "" %QEMU%\qemu-system-x86_64.exe -boot menu=on -drive file=%TINYCORELINUX_IMG% -m %QEMU_MEMORY% -cpu max -smp 2 -vga virtio -display sdl
+	start "" %QEMU%\qemu-system-x86_64 -boot menu=on -drive file=%TINYCORELINUX_IMG% -m %QEMU_MEMORY% -cpu max -smp 2 -vga virtio -display sdl
 goto:eof
 
 :: download file()
