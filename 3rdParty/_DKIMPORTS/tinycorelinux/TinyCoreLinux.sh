@@ -14,7 +14,7 @@
 TINYCORELINUX_DL="http://tinycorelinux.net/14.x/x86/release/CorePlus-current.iso"
 TINYCORELINUX_ISO="CorePlus-current.iso"
 TINYCORELINUX_IMG="tinycore.img"
-QEMU="urs/bin"
+QEMU="usr/bin"
 QEMU_MEMORY="1G"
 QEMU_DRIVE_SIZE="10G"
 
