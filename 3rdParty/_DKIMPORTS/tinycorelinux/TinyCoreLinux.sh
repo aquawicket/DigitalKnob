@@ -98,4 +98,4 @@ function main() {
 	fi
 }
 main
-		
+wait_for_key		
