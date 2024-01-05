@@ -16,9 +16,11 @@ set "QEMU=C:\Users\Administrator\digitalknob\Development\3rdParty\qemu"
 
 if NOT exist "%TINYCORELINUX_IMG%" (
 	call:download_iso
+	goto:end
 )
 if exist "%TINYCORELINUX_IMG%" (
 	call:launch
+	goto:end
 )
 
 :: Download CorePlus-current.iso
@@ -33,10 +35,9 @@ goto:eof
 :: Create the virtual image (10gb)
 :create_image
 	echo "Creating %TINYCORELINUX_IMG% . . ."
-	if exist "%TINYCORELINUX_IMG%" (
-		del "%TINYCORELINUX_IMG%"
+	if NOT exist "%TINYCORELINUX_IMG%" (
+		%QEMU%\qemu-img create -f qcow2 %TINYCORELINUX_IMG% 10G
 	)
-	%QEMU%\qemu-img create -f qcow2 %TINYCORELINUX_IMG% 10G
 	call:install
 goto:eof
 
@@ -45,15 +46,12 @@ goto:eof
 	echo "Installing TinyCoreLinux . . ."
 	%QEMU%\qemu-system-x86_64 -cdrom %TINYCORELINUX_ISO% -boot menu=on -drive file=%TINYCORELINUX_IMG% -m 1.5G -cpu max -smp 2 -vga virtio -display sdl
 	echo "Installation complete"
-	pause
-	call:launch
 goto:eof
 
 :: Launching the VM (after install)
 :launch
 	echo "Starting up TinyCoreLinux . . ."
-	%QEMU%\qemu-system-x86_64 -boot menu=on -drive file=%TINYCORELINUX_IMG% -cpu max -smp 2 -vga virtio -display sdl
-	goto:end
+	start "" %QEMU%\qemu-system-x86_64.exe -boot menu=on -drive file=%TINYCORELINUX_IMG% -cpu max -smp 2 -vga virtio -display sdl
 goto:eof
 
 :: download file()
@@ -69,3 +67,4 @@ goto:eof
 goto:eof
 
 :end
+exit
