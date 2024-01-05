@@ -38,9 +38,13 @@ else()
         dk_executeProcess(rm aapt2 WORKING_DIRECTORY ${AAPT2})
         dk_executeProcess(cp ${ANDROID-SDK}/build-tools/30.0.3/aapt2 . WORKING_DIRECTORY ${AAPT2})
 		dk_executeProcess(rm aapt2-7.0.3-7396180-linux.jar WORKING_DIRECTORY ${AAPT2})
+		dk_executeProcess(zip aapt2-7.0.3-7396180-linux.jar * WORKING_DIRECTORY ${AAPT2})
 		dk_executeProcess(rm -rf META-INF NOTICE aapt2 WORKING_DIRECTORY ${AAPT2})
     endif()
 endif()
 
 # 34.0.3
+#ANDROID_HOST_dk_import(https://github.com/lzhiyong/android-sdk-tools/releases/download/34.0.3/android-sdk-tools-static-aarch64.zip PATH ${ANDROID-SDK}/termux)
+#dk_copy(${ANDROID-SDK}/termux/build-tools ${ANDROID-SDK}/build-tools/30.0.3)	# move termux/build-tools to android-sdk
+#dk_copy(${ANDROID-SDK}/termux/platform-tools ${ANDROID-SDK}/platform-tools)		# move termux/platform-tools to android-sdk
 
