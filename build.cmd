@@ -135,6 +135,7 @@ if '%choice%'=='7' goto pickapp
 if '%choice%'=='8' call:end
 ::if not '%choice%'=='' set choice=%choice:~0,1%	::What does this do?
 ECHO "%choice%" is not valid, try again
+goto pickos
 
 
 
@@ -157,6 +158,7 @@ if '%choice%'=='5' goto pickos
 if '%choice%'=='6' call:end
 ::if not '%choice%'=='' set choice=%choice:~0,1%	::What does this do?
 ECHO "%choice%" is not valid, try again
+goto type
 
 
 
