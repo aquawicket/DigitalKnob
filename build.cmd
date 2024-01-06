@@ -57,17 +57,16 @@ call:main
 goto:eof
 
 
-
+::###### checkApp ######
 :checkApp
 	if NOT exist "%DKPATH%\DKApps\%APP%\DKMAKE.cmake" (
 		echo ERROR: %APP%/DKMAKE.cmake file not found
 		goto pickapp
 	)
 goto:eof 
-::goto pickos
 
 
-
+::###### pickos ######
 :pickos
 	::  TODO
 	::  1) Windows (x86_64)
@@ -129,7 +128,7 @@ goto:eof
 goto:eof 
 
 
-
+::###### type ######
 :type
 	echo %APP% - %OS%
 	echo.
@@ -141,9 +140,9 @@ goto:eof
 	echo 6) Exit
 	set choice=
 	set /p choice=Please select a build type: 
-	if '%choice%'=='1' set "TYPE=Debug" & goto generate
-	if '%choice%'=='2' set "TYPE=Release" & goto generate
-	if '%choice%'=='3' set "TYPE=All" & goto generate
+	if '%choice%'=='1' set "TYPE=Debug" & goto:eof
+	if '%choice%'=='2' set "TYPE=Release" & goto:eof
+	if '%choice%'=='3' set "TYPE=All" & goto:eof
 	if '%choice%'=='4' call:clear_screen & goto type
 	if '%choice%'=='5' goto pickos
 	if '%choice%'=='6' call:end
@@ -153,7 +152,7 @@ goto:eof
 goto:eof 
 
 
-
+::###### generate ######
 :generate
 	echo ""
 	echo ###########################################	
@@ -178,38 +177,48 @@ goto:eof
 	if %OS%==emscripten goto generate_emscripten
 goto:eof 
 
+
+::###### generate_win32 ######
 :generate_win32
 	call:validate_visual_studio
 	"%CMAKE%" -G "Visual Studio 17 2022" -A Win32 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKCMAKE%
 	set TARGET=%APP%_APP
-	goto build
+	::goto build
 goto:eof 
 
+
+::###### generate_win64 ######
 :generate_win64
 	call:validate_visual_studio
 	"%CMAKE%" -G "Visual Studio 17 2022" -A x64 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKCMAKE%
 	set TARGET=%APP%_APP
-	goto build
+	::goto build
 goto:eof 
 
+
+::###### generate_android32 ######
 :generate_android32
 	call:validate_android_ndk
 	::call:validate_openjdk
 	::call %DKPATH%\3rdParty\_DKIMPORTS\openjdk\registerJDK.cmd
 	"%CMAKE%" -G "Visual Studio 17 2022" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID-NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_NDK%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
 	set TARGET=main
-	goto build
+	::goto build
 goto:eof
 
+
+::###### generate_android64 ######
 :generate_android64
 	call:validate_android_ndk
 	::call:validate_openjdk
 	::call %DKPATH%\3rdParty\_DKIMPORTS\openjdk\registerJDK.cmd
 	"%CMAKE%" -G "Visual Studio 17 2022" -A ARM64 -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID-NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_NDK%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
 	set TARGET=main
-	goto build
+	::goto build
 goto:eof
 
+
+::###### generate_emscripten ######
 :generate_emscripten
 	call:validate_emscripten
 	set EMSDK=DIGITALKNOB+C:/Users/Administrator/digitalknob/Development/3rdParty/emsdk-main
@@ -218,6 +227,8 @@ goto:eof
 	call:assert "emscriten incomplete"
 goto:eof
 
+
+::###### build ######
 :build
 	echo ""
 	echo ###########################################	
@@ -233,27 +244,35 @@ goto:eof
 	call:assert "TYPE not set"
 goto:eof
 
+
+::###### build_debug ######
 :build_debug
 	echo "Building %APP_PATH% for %OS%"
 	"%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Debug
-	goto end_message
+	::goto end_message
 goto:eof
 
+
+::###### build_release ######
 :build_release
 	"%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Release
-	goto end_message
+	::goto end_message
 goto:eof
 
+
+::###### build_all ######
 :build_all
 	"%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Debug
 	"%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Release
-	goto end_message
+	::goto end_message
 goto:eof
 
+
+::###### end_message ######
 :end_message
 	echo:
 	echo ******* Done building %APP% - %OS% - %TYPE% *******
-	goto pickapp
+	::goto pickapp
 goto:eof
 
 
@@ -536,5 +555,8 @@ goto:eof
 	call:checkApp
 	call:pickos
 	call:type
+	call:generate
+	call:build
+	
 	::call:end
 goto:eof
