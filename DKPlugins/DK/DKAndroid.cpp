@@ -31,7 +31,7 @@
 #include "DK/DKApp.h"
 #include "DK/DKClass.h"
 
-# if HAVE_sdl
+#if HAVE_sdl
 	#include "SDL.h"
 #endif
 

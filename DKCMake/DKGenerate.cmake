@@ -1136,7 +1136,6 @@ if(ANDROID)
 	else() 
 		
 		################################## !CMAKE_ANDROID_GUI ########################################
-		# NOT CMAKE_ANDROID_GUI
 		add_executable(main ${App_SRC})
 		
 	endif()
