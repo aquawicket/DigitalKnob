@@ -275,7 +275,7 @@ goto pickapp
 
 :: end()
 :end
-	ECHO Done
+	echo Done
 	exit
 goto:eof
 
