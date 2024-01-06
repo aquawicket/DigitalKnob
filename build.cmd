@@ -385,6 +385,7 @@ goto:eof
 		call:assert "GIT is still and invalid command"
 	)
 	echo GIT = %GIT%
+	git config --global core.autocrlf true
 	call:check_error
 goto:eof
 

@@ -241,6 +241,7 @@ while :
 						pacman -S git --noconfirm
 					else
 						validate_package git git
+						git config --global core.autocrlf input
 					fi
 				fi
 				
@@ -271,6 +272,7 @@ while :
 					# brew install git
 				else
 					validate_package git git
+					git config --global core.autocrlf input
 				fi
 				cd $DKPATH
 				git commit -a -m "git commit"
@@ -525,6 +527,7 @@ while :
 		pacman -S git --noconfirm
 	else
 		validate_package git git
+		git config --global core.autocrlf input
 	fi
 
 	if [[ $MSYSTEM == "MINGW32" ]] || [[ $MSYSTEM == "MINGW32" ]] || [[ $MSYSTEM == "MSYS" ]] || [[ $MSYSTEM == "UCRT64" ]]; then
