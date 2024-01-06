@@ -303,23 +303,21 @@ goto pickapp
 :: https://www.dostips.com/DtTutoFunctions.php
 ::--------------------------------------------------------
 
-
-
-:: assert()
+::###### assert <message> ######
 :assert
 	echo ASSERT: %~1
 	pause
 	exit
 goto:eof
 
-:: check_error()
+::###### check_error ######
 :check_error
 	if "%ERRORLEVEL%" == "0" goto:eof
 	call:assert "ERRORLEVEL = %ERRORLEVEL%"
 	exit
 goto:eof
 
-:: download() <url> <dl_path>
+:: ###### download <url> <dl_path> ######
 :download
 	echo Downloading %~1
 	if exist "%~2" (
@@ -338,12 +336,12 @@ goto:eof
 	call:check_error
 goto:eof
 
-:: make_directory()
+::###### make_directory <dir> ######
 :make_directory
 	if NOT exist "%~1" mkdir "%~1"
 goto:eof
 
-:: extract()
+::###### extract ######
 :extract
 	echo Extracting %~1 to %~2
 	if NOT exist "%~2" (
@@ -354,7 +352,7 @@ goto:eof
 	call:check_error
 goto:eof
 
-:: rename()
+::###### rename <from> <to> ######
 :rename
 	echo Renaming %~1 to %~2
 	if NOT exist "%~1" (
@@ -364,7 +362,7 @@ goto:eof
 	call:check_error
 goto:eof
 
-:: validate_branch()
+::###### validate_branch ######
 :validate_branch
 	:: https://stackoverflow.com/a/33662275
 	:: If the current folder matches the current branch set DKBRANCH, default to Development
@@ -380,7 +378,7 @@ goto:eof
 	call:check_error
 goto:eof
 
-:: validate_wget()
+::###### validate_wget ######
 :validate_wget
 	if exist "%DKDOWNLOAD%\wget.exe" set "WGET=%DKDOWNLOAD%\wget.exe"
 	if NOT exist "%WGET%" (
@@ -395,7 +393,7 @@ goto:eof
 	call:check_error
 goto:eof
 
-:: validate_git()
+::###### validate_git ######
 :validate_git
 	if exist "C:\Program Files\Git\bin\git.exe" set "GIT=C:\Program Files\Git\bin\git.exe"
 	if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
@@ -414,7 +412,7 @@ goto:eof
 	call:check_error
 goto:eof
 
-:: validate_cmake()
+::###### validate_cmake ######
 :validate_cmake
 	if exist "C:\Program Files\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files\CMake\bin\cmake.exe"
 	if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files (x86)\CMake\bin\cmake.exe"
@@ -428,7 +426,7 @@ goto:eof
 	call:check_error
 goto:eof
 
-:: validate_visual_studio()
+::###### validate_visual_studio ######
 :validate_visual_studio
 	if exist "C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
 	if exist "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
@@ -446,13 +444,13 @@ goto:eof
 	call:check_error
 goto:eof
 
-:: validate_openjdk()
+::###### validate_openjdk ######
 :validate_openjdk
 	:: TODO
 	call:assert "validate_openjdk() not implemented"
 goto:eof
 
-:: validate_android_ndk()
+::###### validate_android_ndk ######
 :validate_android_ndk
 	set "ANDROID_NDK=%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk\%ANDROID_NDK_BUILD%"
 	echo ANDROID_NDK = %ANDROID_NDK%
@@ -470,13 +468,13 @@ goto:eof
 	call:check_error
 goto:eof
 
-:: validate_emscripten()
+::###### validate_emscripten ######
 :validate_emscripten
 	:: TODO
 	call:assert "validate_emscripten() not implemented"
 goto:eof
 
-:: clear_cmake_cache()
+::###### clear_cmake_cache ######
 :clear_cmake_cache
 	echo Deleteing CMake cache . . .
 	cd "%DIGITALKNOB%"
@@ -485,7 +483,7 @@ goto:eof
 	call:check_error
 goto:eof
 
-:: delete_temp_files()
+::###### delete_temp_files ######
 :delete_temp_files
 	echo Deleteing .tmp files . . .
 	cd "%DIGITALKNOB%"
@@ -494,7 +492,7 @@ goto:eof
 	call:check_error
 goto:eof
 
-:: git_update()
+::###### git_update ######
 :git_update
 	if NOT exist "%DKPATH%\.git" (
 		"%GIT%" clone https://github.com/aquawicket/DigitalKnob.git "%DKPATH%"
@@ -514,7 +512,7 @@ goto:eof
 	call:check_error
 goto:eof
 
-:: git_commit()
+::###### git_commit ######
 :git_commit
 	cd %DKPATH%
 	"%GIT%" config user.email "%GIT_USER_EMAIL%"
@@ -524,12 +522,12 @@ goto:eof
 	call:check_error
 goto:eof
 
-:: clear_screen()
+::###### clear_screen ######
 :clear_screen
 	cls
 goto:eof
 
-:: end()
+::###### end ######
 :end
 	echo "the end"
 	echo Done
