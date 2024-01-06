@@ -57,6 +57,7 @@ endif()
 if(WIN AND GNU)
 	dk_msys2(${DKCMAKE_BUILD} ${DUKTAPE})
 else()
+	dk_dump(DKCMAKE_BUILD)
 	dk_queueCommand(${DKCMAKE_BUILD} ${DUKTAPE})
 endif()
 
