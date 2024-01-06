@@ -78,6 +78,40 @@ goto pickos
 
 
 :pickos
+:: TODO
+::  1) Windows (x86_64)
+
+:: 	2) Android (arm32)
+:: 	3) Android (arm64)
+:: 	4) Android (x86)
+:: 	5) Android (x86_64)
+:: 	6) iOS (arm32)
+:: 	7) iOS (arm64)
+:: 	8) iOS (x86)
+:: 	9) iOS (x86_64)
+:: 10) iOS-Simulator (arm32)
+:: 11) iOS-Simulator (arm64)
+:: 12) iOS-Simulator (x86)
+:: 13) iOS-Simulator (x86_64)
+:: 14) Linux (c)
+:: 15) Linux (arm64)
+:: 16) Linux (x86)
+:: 17) Linux (x86_64)
+:: 18) Mac (arm32)
+:: 19) Mac (arm64)
+:: 20) Mac (x86)
+:: 21) Mac (x86_64)
+:: 22) Raspberry (arm32)
+:: 23) Raspberry (arm64)
+:: 24) Raspberry (x86)
+:: 25) Raspberry (x86_64)
+:: 26) Windows (arm32)
+:: 27) Windows (arm64)
+:: 28) Windows (x86)
+:: 29) Windows (x86_64)
+:: 30) Clear Screen
+:: 31) Go Back
+:: 32) Exit
 ECHO %APP%
 ECHO.
 ECHO 1) Windows 32
