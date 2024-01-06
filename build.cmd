@@ -5,16 +5,39 @@
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
 
 
-
-goto:main 
-
-:::: get_variables()
-:get_variables
-	echo "get_variables()"
+goto:skip_test
+::#######################
+call:main
 goto:eof
-::call:get_variables
+
+:func1
+	echo "func1()"
+	call:func3
+goto:eof
+
+:func2
+	echo "func2()"
+	call:func1
+goto:eof
+
+:func3
+	echo "func3()"
+goto:eof
 
 :main
+	echo "main()"
+	call:func2
+goto:eof
+
+::main
+::exit
+::#########################
+:skip_test
+
+
+
+
+
 ::--------------------------------------------------------
 :: GLOBAL USER VARIABLES
 ::--------------------------------------------------------
@@ -26,6 +49,7 @@ set "MSBUILD_DL=https://aka.ms/vs/17/release/vs_community.exe"
 set "ANDROID_API=31"
 set "ANDROID_NDK_BUILD=23.1.7779620"
 set "ANDROID_NDK_DL=https://dl.google.com/android/repository/android-ndk-r23b-windows.zip"
+
 
 
 
@@ -43,6 +67,8 @@ call:validate_branch
 set "APP="
 set "OS="
 set "TYPE="
+
+
 
 
 
@@ -273,12 +299,7 @@ goto pickapp
 :: https://www.dostips.com/DtTutoFunctions.php
 ::--------------------------------------------------------
 
-:: end()
-:end
-	echo "the end"
-	echo Done
-	exit
-goto:eof
+
 
 :: assert()
 :assert
@@ -481,4 +502,11 @@ goto:eof
 :: clear_screen()
 :clear_screen
 	cls
+goto:eof
+
+:: end()
+:end
+	echo "the end"
+	echo Done
+	exit
 goto:eof

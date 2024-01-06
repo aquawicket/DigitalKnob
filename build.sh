@@ -5,17 +5,60 @@
 # to run this script requires privledges
 # > chmod 777 build.sh
 
+if false; then
+#######################
+#call:main
+#goto:eof
 
-# main 
+func1() {
+	echo "func1()"
+	func3
+}
 
-### get_variables()
+func2() {
+	echo "func2()"
+	func1
+}
+
+func3() {
+	echo "func3()"
+}
+
+main() {
+	echo "main()"
+	func2
+}
+
+main
+exit
+#########################
+fi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### get_variables ######
 get_variables() {
 	echo "get_variables()"
 }
 get_variables
 
 
-###### validate_branch()
+###### validate_branch ######
 validate_branch() {
 	# If the current folder matches the current branch set DKBRANCH, default to Development
 	FOLDER="$(basename $(pwd))"
@@ -75,14 +118,14 @@ install() {
 	fi
 }
 
-### validate_package <command> <package> ###
+###### validate_package <command> <package> ######
 validate_package() {
 	if ! command_exists $1; then
 		install $2
 	fi
 }
 
-### clear_cmake_cache ###
+###### clear_cmake_cache ######
 clear_cmake_cache() {
 	echo "Clearing CMake cache . . ."
 	cd $DIGITALKNOB
@@ -90,7 +133,7 @@ clear_cmake_cache() {
 	rm -rf `find . -type d -name CMakeFiles`
 }
 
-### delete_temp_files ###
+###### delete_temp_files ######
 delete_temp_files() {
 	echo "Deleting .TMP files . . ."
 	cd $DIGITALKNOB
@@ -100,7 +143,7 @@ delete_temp_files() {
 	find . -name "*.TMP" -delete
 }
 
-### validate_ostype ###
+###### validate_ostype ######
 validate_ostype() {
 	if [ -e /proc/device-tree/model ]; then
 		MODEL=$(tr -d '\0' </proc/device-tree/model)
