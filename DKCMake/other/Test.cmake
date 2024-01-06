@@ -28,4 +28,4 @@ message(STATUS "CMAKE_SOURCE_DIR = ${CMAKE_SOURCE_DIR}")
 get_filename_component(DKCMAKE "${CMAKE_SOURCE_DIR}/.." ABSOLUTE)
 include(${DKCMAKE}/DK.cmake)
 
-include(C:/Users/Administrator/digitalknob/DK/3rdParty/_DKIMPORTS/far/DKMAKE.cmake)
+include(C:/Users/Administrator/digitalknob/Development/3rdParty/_DKIMPORTS/far/DKMAKE.cmake)

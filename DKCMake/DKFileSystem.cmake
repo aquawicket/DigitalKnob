@@ -24,8 +24,8 @@
 include_guard()
 
 
-#     dk.filesystem.js - %DIGITALKNOB%/DK/Api/filesystem/filesystem.js
-#    dk.filesystem.cpp - %DIGITALKNOB%/DK/Api/filesystem/filesystem.cpp
+#     dk.filesystem.js - %DIGITALKNOB%/Development/Api/filesystem/filesystem.js
+#    dk.filesystem.cpp - %DIGITALKNOB%/Development/Api/filesystem/filesystem.cpp
 #   DKBatch filesystem - %DIGITALKNOB%/DKBatch/filesystem
 #    DKBash filesystem - %DIGITALKNOB%/DKBash/filesystem
 #   DKCMake filesystem - %DIGITALKNOB%/DKCMake/filesystem/DKFileSystem.cmake

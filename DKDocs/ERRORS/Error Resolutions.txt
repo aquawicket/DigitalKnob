@@ -4,5 +4,5 @@ https://stackoverflow.com/a/50924477/688352
 PKIX path building failed” and “unable to find valid certification path to requested target
 https://serverfault.com/questions/139728/how-to-download-the-ssl-certificate-from-a-website
 https://stackoverflow.com/a/36427118/688352
-C:\Users\Administrator\digitalknob\DK\3rdParty\openjdk-9.0.4_windows-x64_bin\bin\keytool -import -alias google -keystore  C:\Users\Administrator\digitalknob\DK\3rdParty\openjdk-9.0.4_windows-x64_bin\lib\security\cacerts -file C:\Users\Administrator\digitalknob\DK\3rdParty\openjdk-9.0.4_windows-x64_bin\lib\security\google.cer
+C:\Users\Administrator\digitalknob\Development\3rdParty\openjdk-9.0.4_windows-x64_bin\bin\keytool -import -alias google -keystore  C:\Users\Administrator\digitalknob\Development\3rdParty\openjdk-9.0.4_windows-x64_bin\lib\security\cacerts -file C:\Users\Administrator\digitalknob\Development\3rdParty\openjdk-9.0.4_windows-x64_bin\lib\security\google.cer
 Default Password: "changeit"

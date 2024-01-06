@@ -244,7 +244,7 @@ dk.solutionmenu.upxCompress = function dk_solutionmenuuUpxCompress() {
 
         var dk_path = DIGITALKNOB;
         //from DKBuild.js
-        var upx = dk_path + "/DK/3rdParty/upx-3.95-win64/upx.exe";
+        var upx = dk_path + "/Development/3rdParty/upx-3.95-win64/upx.exe";
         console.log("upx = " + upx + "\n");
         //upx compress the exe file
         if (dk.file.extist(upx)) {

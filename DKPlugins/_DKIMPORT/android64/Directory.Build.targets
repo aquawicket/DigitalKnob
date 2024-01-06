@@ -6,7 +6,7 @@
 		<DefaultAndroidAPILevelNumber>31</DefaultAndroidAPILevelNumber>
 		<AndroidAPIFriendlyName_android-31>Android 12 (S) 12.0</AndroidAPIFriendlyName_android-31>
 		<AndroidAPILevel>android-31</AndroidAPILevel>
-		<AndroidSDKAPILevelRoot>C:\Users\Administrator\digitalknob\DK\3rdParty\android-sdk\Platforms\android-31\</AndroidSDKAPILevelRoot>
+		<AndroidSDKAPILevelRoot>C:\Users\Administrator\digitalknob\Development\3rdParty\android-sdk\Platforms\android-31\</AndroidSDKAPILevelRoot>
 		<ClangTarget>aarch64-none-linux-android31</ClangTarget>
 		<TargetOsAndVersion>android-31</TargetOsAndVersion>
 		<TargetPlatformDisplayName>Android 31.0</TargetPlatformDisplayName>

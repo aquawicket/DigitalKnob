@@ -17,7 +17,7 @@ endif()
 #cmake_policy(SET CMP0074 NEW)
 #project(HelloWorld C CXX)
 ##set(OS win32 CACHE PATH "" FORCE)
-set(3RDPARTY "C:/Users/$ENV{USERNAME}/digitalknob/DK/3rdParty" CACHE PATH "" FORCE)
+set(3RDPARTY "C:/Users/$ENV{USERNAME}/digitalknob/Development/3rdParty" CACHE PATH "" FORCE)
 
 ##${STDINT}
 

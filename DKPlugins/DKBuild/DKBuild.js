@@ -666,7 +666,7 @@ function DKBuild_DoResults(){
 	
 	//////// EMSCRIPTEN //////////////////////////////////////////////////////////////
 	if(OS === "emscripten"){
-		const EMSDK = DIGITALKNOB+"/DK/3rdParty/emsdk-main"
+		const EMSDK = DIGITALKNOB+"/Development/3rdParty/emsdk-main"
 		const EMSDK_ENV = EMSDK+"/emsdk_env"
 		const EMSDK_TOOLCHAIN_FILE = EMSDK+"/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake"
 		DKBuild_ValidateEMSDK()

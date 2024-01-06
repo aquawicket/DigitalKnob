@@ -222,7 +222,7 @@ bool DKUpdate::UpdatePlugin(const DKString& url){
 	//TODO - recursive plugin file downloading
 	
 	//ok, here we are going to copy the url to the assets folder
-	//I.E.   digitalknob.com/TradePost/DKBrowser  ->  c:/digitalknob/DKApps/TradePost/DKBrowser
+	//I.E.   digitalknob.com/TradePost/DKBrowser  ->  c:/digitalknob/Development/DKApps/TradePost/DKBrowser
 
 	//first check that the url exists
 	DKCurl::Instance("DKCurlUpdate");

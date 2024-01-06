@@ -616,7 +616,7 @@ DKDebug.prototype.pushDKFiles = function DKDebug_pushDKFiles() {
     }
     console.log("assets = " + assets);
     var search = assets;
-    while (!CPP_DKFile_Exists(search + "/DK/DKPlugins")) {
+    while (!CPP_DKFile_Exists(search + "/Development/DKPlugins")) {
         var n = search.lastIndexOf("/");
         if (n === -1) {
             return error("could not locate a DKPlugins folder");
@@ -635,7 +635,7 @@ DKDebug.prototype.pushDKFiles = function DKDebug_pushDKFiles() {
     }
     var folders = temp.split(",");
     var plugin_folders = [];
-    plugin_folders.push(DIGITALKNOB + "/DK/DKPlugins");
+    plugin_folders.push(DIGITALKNOB + "/Development/DKPlugins");
     for (var n = 0; n < folders.length; n++) {
         if (CPP_DKFile_Exists(DIGITALKNOB + "/" + folders[n] + "/DKPlugins"))
             plugin_folders.push(DIGITALKNOB + "/" + folders[n] + "/DKPlugins");

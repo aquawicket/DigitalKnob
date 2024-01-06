@@ -24,7 +24,7 @@ GRADLE=1
 
 APP_ROOT="$PWD"
 APP_PATH="$APP_ROOT/app/src/main"
-ANDROID_HOME="$DIGITALKNOB/DK/3rdParty/android-sdk"
+ANDROID_HOME="$DIGITALKNOB/Development/3rdParty/android-sdk"
 
 # App package name and lable
 TYPE="com"

@@ -24,7 +24,7 @@
 %dkbatch%
 
 :: Choose the repositoy and the branch to merge in to a destination(usually master)
-set "repository=C:\Users\%USERNAME%\digitalknob\DK"
+set "repository=C:\Users\%USERNAME%\digitalknob\Development"
 set "branch=Development"
 set "destination=master"
 

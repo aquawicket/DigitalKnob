@@ -37,7 +37,7 @@ if NOT exist "%CMAKE%" (
     echo "cannot find cmake, please update the repository"
 )
 
-set "Test_cmake=C:\Users\%USERNAME%\digitalknob\DK\DKCMake\other\Test.cmake"
+set "Test_cmake=C:\Users\%USERNAME%\digitalknob\Development\DKCMake\other\Test.cmake"
 if NOT exist "%Test_cmake%" (
 	echo "cannot find Test.cmake file, please update the repository"
 )

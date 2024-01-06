@@ -23,7 +23,7 @@ fi
 PACKAGE_NAME="com.digitalknob.dk"
 #if not "%1"=="" set PACKAGE_NAME=%~1
 APP_ROOT="$PWD"
-ANDROID_HOME="$DIGITALKNOB/DK/3rdParty/android-sdk"
+ANDROID_HOME="$DIGITALKNOB/Development/3rdParty/android-sdk"
 
 
 if [[ -f "$ANDROID_HOME" ]]; then

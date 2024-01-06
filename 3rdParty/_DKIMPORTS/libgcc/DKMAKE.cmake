@@ -26,4 +26,4 @@ WIN_dk_libRelease(${LIBGCC}/libgcc.a)
 WIN_dk_set(LIBGCC_CMAKE -DLIBGCC_LIBRARIES=${LIBGCC})
 
 
-# fatal error LNK1104: cannot open file 'C:\Users\Administrator\digitalknob\DK\3rdParty\mingw32-i686-8.1.0-release-posix-dwarf-rt_v6-rev0\lib\gcc\i686-w64-mingw32\i686-8.1.0-release-posix-dwarf-rt_v6-rev0\libgcc.a'
+# fatal error LNK1104: cannot open file 'C:\Users\Administrator\digitalknob\Development\3rdParty\mingw32-i686-8.1.0-release-posix-dwarf-rt_v6-rev0\lib\gcc\i686-w64-mingw32\i686-8.1.0-release-posix-dwarf-rt_v6-rev0\libgcc.a'

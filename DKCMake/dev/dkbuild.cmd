@@ -30,8 +30,8 @@
 
 :: get digitalknob paths and install CMake if needed
 set "DIGITALKNOB=C:\Users\%USERNAME%\digitalknob"
-set "DKPATH=%DIGITALKNOB%\DK"
-set "DKCMAKE=%DIGITALKNOB%\DK\DKCMake"
+set "DKPATH=%DIGITALKNOB%\Development"
+set "DKCMAKE=%DIGITALKNOB%\Development\DKCMake"
 if exist "C:\Program Files\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files\CMake\bin\cmake.exe"
 if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files (x86)\CMake\bin\cmake.exe"
 if NOT exist "%CMAKE%" (

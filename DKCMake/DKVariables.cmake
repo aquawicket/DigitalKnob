@@ -391,7 +391,7 @@ endif()
 if(NOT CMAKE_SCRIPT_MODE_FILE)
 	if(NOT OS)
 		dk_error(CMAKE_BINARY_DIR)
-		dk_assert("The binary directory must contain an os folder. \n Valid folders are android32,android64,emscripten,ios32,ios64,iossim32,iossim64,linux32,linux64,mac32,mac64,raspberry32,raspberry64,win32,win64 \n 	EXAMPLE: digitalknob/DKApps/MyApp/win32")
+		dk_assert("The binary directory must contain an os folder. \n Valid folders are android32,android64,emscripten,ios32,ios64,iossim32,iossim64,linux32,linux64,mac32,mac64,raspberry32,raspberry64,win32,win64 \n 	EXAMPLE: digitalknob/Development/DKApps/MyApp/win32")
 		#file(REMOVE ${CMAKE_BINARY_DIR})
 	endif()
 

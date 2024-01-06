@@ -33,7 +33,7 @@ else
     echo "UNKNOWN OS TYPE ($OSTYPE)"
 fi
 DKPATH="$DIGITALKNOB/DK"
-DKCMAKE="$DIGITALKNOB/DK/DKCMake"
+DKCMAKE="$DIGITALKNOB/Development/DKCMake"
 
 sudo echo
 

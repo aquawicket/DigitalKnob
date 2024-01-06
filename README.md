@@ -335,7 +335,7 @@ raspberry64 <br>
 win32 <br>
 win64 <br>
 
-EXAMPLE: cmake -G"Visual Studio 17 2022" -SC:/Users/<username>/digitalknob/DK/DKCMake -BC:/Users/<username>/digitalknob/DK/DKApps/DKCore/win32
+EXAMPLE: cmake -G"Visual Studio 17 2022" -SC:/Users/<username>/digitalknob/Development/DKCMake -BC:/Users/<username>/digitalknob/Development/DKApps/DKCore/win32
 	"will use Visual Studio 17 2022 to build DKCore for the windows i686 platform"
 "NOTE: using build.sh to build DKBuilder, and using DKBuilder_APP.exe is the prefered and tested way to build DK Apps" 
 

@@ -115,10 +115,10 @@ function DKGit_GitUpdate() {
     }
 
 	if (CPP_DK_GetOS() != "Windows"){
-		if (CPP_DKFile_Exists(DIGITALKNOB+"/DK/build.sh"))
-			CPP_DK_Execute("chmod +x "+DIGITALKNOB+"/DK/build.sh")
-		if (CPP_DKFile_Exists(DIGITALKNOB+"/DK/DKCMake/dev/dkbuild.sh"))
-			CPP_DK_Execute("chmod +x "+DIGITALKNOB+"/DK/DKCMake/dev/dkbuild.sh")
+		if (CPP_DKFile_Exists(DIGITALKNOB+"/Development/build.sh"))
+			CPP_DK_Execute("chmod +x "+DIGITALKNOB+"/Development/build.sh")
+		if (CPP_DKFile_Exists(DIGITALKNOB+"/Development/DKCMake/dev/dkbuild.sh"))
+			CPP_DK_Execute("chmod +x "+DIGITALKNOB+"/Development/DKCMake/dev/dkbuild.sh")
 	}
 	
     if (CPP_DK_Available("DKAudio"))
