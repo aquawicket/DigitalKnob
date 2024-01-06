@@ -4,6 +4,8 @@
 
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
 
+
+
 goto:skip_test
 ::#######################
 call:main
@@ -40,6 +42,7 @@ goto:eof
 ::--------------------------------------------------------
 :: GLOBAL USER VARIABLES
 ::--------------------------------------------------------
+set "WGET_DL=https://eternallybored.org/misc/wget/1.21.4/32/wget.exe"
 set "GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.30.1.windows.1/Git-2.30.1-32-bit.exe"
 set "GIT_USER_EMAIL=aquawicket@hotmail.com"
 set "GIT_USER_NAME=aquawicket"
@@ -60,8 +63,10 @@ call:make_directory "%DIGITALKNOB%"
 set "DKDOWNLOAD=%DIGITALKNOB%\download"
 call:make_directory "%DKDOWNLOAD%"
 
+call:validate_wget
 call:validate_git
 call:validate_branch
+
 
 set "APP="
 set "OS="
@@ -314,7 +319,7 @@ goto:eof
 	exit
 goto:eof
 
-:: download()
+:: download() <url> <dl_path>
 :download
 	echo Downloading %~1
 	if exist "%~2" (
@@ -322,7 +327,12 @@ goto:eof
 	)
 	if NOT exist "%~2" (
 		echo please wait . . .
-		certutil.exe -urlcache -split -f %~1 %~2
+		if exist "%WGET%" (
+			%WGET% %~1 -O %~2
+		)
+		if NOT exist "%WGET%" (
+			certutil.exe -urlcache -split -f %~1 %~2
+		)
 	)
 	::bitsadmin /transfer myDownloadJob /download /priority normal %~1 %~2
 	call:check_error
@@ -370,6 +380,21 @@ goto:eof
 	call:check_error
 goto:eof
 
+:: validate_wget()
+:validate_wget
+	if exist "%DKDOWNLOAD%\wget.exe" set "WGET=%DKDOWNLOAD%\wget.exe"
+	if NOT exist "%WGET%" (
+		echo "installing wget"
+		call:download %WGET_DL% "%DKDOWNLOAD%\wget.exe"
+		if exist "%DKDOWNLOAD%\wget.exe" set "WGET=%DKDOWNLOAD%\wget.exe"
+	)
+	if NOT exist "%WGET%" (
+		call:assert "ERROR: cannot find wget"
+	)
+	echo WGET = %WGET%
+	call:check_error
+goto:eof
+
 :: validate_git()
 :validate_git
 	if exist "C:\Program Files\Git\bin\git.exe" set "GIT=C:\Program Files\Git\bin\git.exe"
@@ -382,7 +407,7 @@ goto:eof
 		if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
 	)
 	if NOT exist "%GIT%" (
-		call:assert "GIT is still and invalid command"
+		call:assert "ERROR: cannot find git"
 	)
 	echo GIT = %GIT%
 	git config --global core.autocrlf true
