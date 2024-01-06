@@ -1038,7 +1038,7 @@ endif()
 ###########
 if(ANDROID)
 	
-	set(CMAKE_ANDROID_GUI 0)
+	#set(CMAKE_ANDROID_GUI 1)
 	
 	if(CMAKE_ANDROID_GUI)
 		########################## CREATE ICONS ###############################
