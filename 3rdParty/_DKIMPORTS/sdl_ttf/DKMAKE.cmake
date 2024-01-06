@@ -16,7 +16,7 @@ dk_import(https://github.com/libsdl-org/SDL_ttf/archive/refs/tags/release-2.20.1
 
 ### LINK ###
 dk_include					(${SDL_TTF})
-if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC" OR VISUAL_STUDIO_IDE)
 	ANDROID_dk_libDebug		(${SDL_TTF}/${OS}/lib/${DEBUG_DIR}/SDL_ttf.a)
 	ANDROID_dk_libRelease	(${SDL_TTF}/${OS}/lib/${RELEASE_DIR}/SDL_ttf.a)
 	WIN_dk_libDebug			(${SDL_TTF}/${OS}/lib/${DEBUG_DIR}/SDL_ttf.lib)
