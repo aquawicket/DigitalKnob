@@ -18,63 +18,7 @@ set "ANDROID_NDK_BUILD=23.1.7779620"
 set "ANDROID_NDK_DL=https://dl.google.com/android/repository/android-ndk-r23b-windows.zip"
 
 
-
-
-::goto:skip_test
-::#######################
 call:main
-goto:eof
-
-:func1
-	echo "func1()"
-	call:func3
-goto:eof
-
-:func2
-	echo "func2()"
-	call:func1
-goto:eof
-
-:func3
-	echo "func3()"
-goto:eof
-
-::main
-::	echo "main()"
-::	call:func2
-::goto:eof
-
-::main
-::exit
-::#########################
-:skip_test
-
-
-
-
-
-
-
-
-
-
-::--------------------------------------------------------
-:: Main
-::--------------------------------------------------------
-set "DIGITALKNOB=C:\Users\%USERNAME%\digitalknob"
-call:make_directory "%DIGITALKNOB%"
-set "DKDOWNLOAD=%DIGITALKNOB%\download"
-call:make_directory "%DKDOWNLOAD%"
-
-call:validate_wget
-call:validate_git
-call:validate_branch
-
-
-set "APP="
-set "OS="
-set "TYPE="
-
 
 
 
