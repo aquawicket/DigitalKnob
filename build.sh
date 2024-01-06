@@ -2,8 +2,7 @@
 
 ############## DigitalKnob builder script ############
 
-# to run this script requires privledges
-# > chmod 777 build.sh
+# to run this script requires privledges, use $ chmod 777 build.sh
 
 if false; then
 #######################
