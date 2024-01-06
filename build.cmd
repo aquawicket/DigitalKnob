@@ -53,6 +53,7 @@ echo 11) Clear Screen
 echo 12) Exit
 set choice=
 set /p choice=Please select an app to build:
+::if not '%choice%'=='' set choice=%choice:~0,1%	::What does this do?
 if '%choice%'=='1' call:git_update & goto pickapp
 if '%choice%'=='2' call:git_commit & goto pickapp
 if '%choice%'=='3' set "APP=HelloWorld" & goto checkApp
@@ -65,7 +66,6 @@ if '%choice%'=='9' set "APP=DKDomTest" & goto checkApp
 if '%choice%'=='10' set "APP=DKTestAll" & goto checkApp
 if '%choice%'=='11' call:clear_screen & goto pickapp
 if '%choice%'=='12" call:end
-::if not '%choice%'=='' set choice=%choice:~0,1%	::What does this do?
 echo "%choice%" is not valid, try again
 goto pickapp
 
@@ -127,6 +127,7 @@ echo 7) Go Back
 echo 8) Exit
 set choice=
 set /p choice=Please select an OS to build for: 
+::if not '%choice%'=='' set choice=%choice:~0,1%	::What does this do?
 if '%choice%'=='1' set "OS=win32" & goto type
 if '%choice%'=='2' set "OS=win64" & goto type
 if '%choice%'=='3' set "OS=android32" & goto type
@@ -135,7 +136,6 @@ if '%choice%'=='5' set "OS=emscripten" & goto type
 if '%choice%'=='6' call:clear_screen & goto pickos
 if '%choice%'=='7' goto pickapp
 if '%choice%'=='8' call:end
-::if not '%choice%'=='' set choice=%choice:~0,1%	::What does this do?
 echo "%choice%" is not valid, try again
 goto pickos
 
@@ -152,13 +152,13 @@ echo 5) Go Back
 echo 6) Exit
 set choice=
 set /p choice=Please select a build type: 
+::if not '%choice%'=='' set choice=%choice:~0,1%	::What does this do?
 if '%choice%'=='1' set "TYPE=Debug" & goto generate
 if '%choice%'=='2' set "TYPE=Release" & goto generate
 if '%choice%'=='3' set "TYPE=All" & goto generate
 if '%choice%'=='4' call:clear_screen & goto type
 if '%choice%'=='5' goto pickos
 if '%choice%'=='6' call:end
-::if not '%choice%'=='' set choice=%choice:~0,1%	::What does this do?
 echo "%choice%" is not valid, try again
 goto type
 
@@ -166,11 +166,11 @@ goto type
 
 :generate
 echo ""
-echo ###########################################	
-echo ############  GENERATE PROJECT ############ 
-echo ###########################################
-echo ""
+echo ##########################################################	
 echo ****** Generating %APP% - %OS% - %TYPE% - %LEVEL% ******
+echo ##########################################################
+echo ""
+
 
 call:clear_cmake_cache
 call:delete_temp_files
@@ -203,7 +203,7 @@ goto build
 :generate_android32
 call:validate_android_ndk
 ::call:validate_openjdk
-call %DKPATH%\3rdParty\_DKIMPORTS\openjdk\registerJDK.cmd
+::call %DKPATH%\3rdParty\_DKIMPORTS\openjdk\registerJDK.cmd
 "%CMAKE%" -G "Visual Studio 17 2022" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID-NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_NDK%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
 set TARGET=main
 goto build
@@ -225,11 +225,11 @@ call:assert "emscriten incomplete"
 
 :build
 echo ""
-echo ###########################################	
-echo ##############  BUILD PROJECT  ############
-echo ###########################################
-echo ""
+echo ###########################################################	
 echo ****** Building %APP% - %OS% - %TYPE% - %LEVEL% ******
+echo ###########################################################
+echo ""
+
 
 echo TYPE = %TYPE%
 if %TYPE%==Debug goto build_debug
@@ -239,11 +239,11 @@ call:assert "TYPE not set"
 
 :build_debug
 echo "Building %APP_PATH% for %OS%"
-"%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Debug
+"%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Debug --verbose
 goto end_message
 
 :build_release
-"%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Release
+"%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Release --verbose
 goto end_message
 
 :build_all

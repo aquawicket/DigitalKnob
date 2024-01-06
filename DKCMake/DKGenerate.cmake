@@ -1045,29 +1045,20 @@ if(ANDROID)
 	if(CMAKE_ANDROID_GUI)
 		########################## CREATE ICONS ###############################
 		dk_info("Creating android icons for ${APP_NAME} . . .")
-		if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-			dk_resizeImage(${DKPROJECT}/icons/icon.png 36 36 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-ldpi/ic_launcher.png)
-			dk_resizeImage(${DKPROJECT}/icons/icon.png 48 48 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-mdpi/ic_launcher.png)
-			dk_resizeImage(${DKPROJECT}/icons/icon.png 72 72 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-hdpi/ic_launcher.png)
-			dk_resizeImage(${DKPROJECT}/icons/icon.png 96 96 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-xhdpi/ic_launcher.png)
-			dk_resizeImage(${DKPROJECT}/icons/icon.png 144 144 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
-			dk_resizeImage(${DKPROJECT}/icons/icon.png 192 192 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
-		else()
-			if(DEBUG)
-				dk_resizeImage(${DKPROJECT}/icons/icon.png 36 36 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-ldpi/ic_launcher.png)
-				dk_resizeImage(${DKPROJECT}/icons/icon.png 48 48 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-mdpi/ic_launcher.png)
-				dk_resizeImage(${DKPROJECT}/icons/icon.png 72 72 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-hdpi/ic_launcher.png)
-				dk_resizeImage(${DKPROJECT}/icons/icon.png 96 96 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-xhdpi/ic_launcher.png)
-				dk_resizeImage(${DKPROJECT}/icons/icon.png 144 144 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
-				dk_resizeImage(${DKPROJECT}/icons/icon.png 192 192 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
-			elseif(RELEASE)
-				dk_resizeImage(${DKPROJECT}/icons/icon.png 36 36 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-ldpi/ic_launcher.png)
-				dk_resizeImage(${DKPROJECT}/icons/icon.png 48 48 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-mdpi/ic_launcher.png)
-				dk_resizeImage(${DKPROJECT}/icons/icon.png 72 72 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-hdpi/ic_launcher.png)
-				dk_resizeImage(${DKPROJECT}/icons/icon.png 96 96 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-xhdpi/ic_launcher.png)
-				dk_resizeImage(${DKPROJECT}/icons/icon.png 144 144 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
-				dk_resizeImage(${DKPROJECT}/icons/icon.png 192 192 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
-			endif()
+		if(DEBUG)
+			dk_resizeImage(${DKPROJECT}/icons/icon.png 36 36 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-ldpi/ic_launcher.png)
+			dk_resizeImage(${DKPROJECT}/icons/icon.png 48 48 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-mdpi/ic_launcher.png)
+			dk_resizeImage(${DKPROJECT}/icons/icon.png 72 72 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-hdpi/ic_launcher.png)
+			dk_resizeImage(${DKPROJECT}/icons/icon.png 96 96 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-xhdpi/ic_launcher.png)
+			dk_resizeImage(${DKPROJECT}/icons/icon.png 144 144 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
+			dk_resizeImage(${DKPROJECT}/icons/icon.png 192 192 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
+		elseif(RELEASE)
+			dk_resizeImage(${DKPROJECT}/icons/icon.png 36 36 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-ldpi/ic_launcher.png)
+			dk_resizeImage(${DKPROJECT}/icons/icon.png 48 48 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-mdpi/ic_launcher.png)
+			dk_resizeImage(${DKPROJECT}/icons/icon.png 72 72 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-hdpi/ic_launcher.png)
+			dk_resizeImage(${DKPROJECT}/icons/icon.png 96 96 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-xhdpi/ic_launcher.png)
+			dk_resizeImage(${DKPROJECT}/icons/icon.png 144 144 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
+			dk_resizeImage(${DKPROJECT}/icons/icon.png 192 192 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
 		endif()
 	
 		dk_copy(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png OVERWRITE)
@@ -1075,6 +1066,7 @@ if(ANDROID)
 		###################### Backup Executable ###########################
 		if(BACKUP_APP_EXECUTABLES)
 			if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+				dk_wait()
 				DEBUG_dk_rename(${DKPROJECT}/${OS}/app/build/outputs/apk/debug/app-debug.apk ${DKPROJECT}/${OS}/app/build/outputs/apk/app-debug.apk.backup OVERWRITE)
 				RELEASE_dk_rename(${DKPROJECT}/${OS}/app/build/outputs/apk/release/app-release-unsigned.apk ${DKPROJECT}/${OS}/app/build/outputs/apk/release/app-release-unsigned.apk.backup OVERWRITE)
 			else()
@@ -1096,33 +1088,24 @@ if(ANDROID)
 		set(localProperties "sdk.dir=${ANDROID-SDK}")
 	
 		####### Import Android Gui Build files ############################################
-		if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-			dk_copy(${DKPLUGINS}/_DKIMPORT/android/ ${DKPROJECT}/${OS}/)
-			dk_copy(${DKPLUGINS}/_DKIMPORT/${OS}/ ${DKPROJECT}/${OS}/)
-			dk_copy(${DKPROJECT}/assets ${DKPROJECT}/${OS}/app/src/main/assets OVERWRITE)
-			file(WRITE ${DKPROJECT}/${OS}/local.properties ${localProperties})
-			dkFileReplace(${DKPROJECT}/${OS}/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}")
-		else()
-			if(DEBUG)
-				dk_copy(${DKPLUGINS}/_DKIMPORT/android/ ${DKPROJECT}/${OS}/Debug)
-				dk_copy(${DKPLUGINS}/_DKIMPORT/${OS}/ ${DKPROJECT}/${OS}/Debug)
-				dk_copy(${DKPROJECT}/assets ${DKPROJECT}/${OS}/Debug/app/src/main/assets OVERWRITE)
-				file(WRITE ${DKPROJECT}/${OS}/Debug/local.properties ${localProperties})
-				dkFileReplace(${DKPROJECT}/${OS}/Debug/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}")
-				UNIX_HOST_dk_executeProcess(chmod 777 ${DKPROJECT}/${OS}/Debug/gradlew)
-				UNIX_HOST_dk_executeProcess(sed -i -e "s/\r$//" "${DKPROJECT}/${OS}/Debug/gradlew")
-			elseif(RELEASE)
-				dk_copy(${DKPLUGINS}/_DKIMPORT/android/ ${DKPROJECT}/${OS}/Release)
-				dk_copy(${DKPLUGINS}/_DKIMPORT/${OS}/ ${DKPROJECT}/${OS}/Release)
-				dk_copy(${DKPROJECT}/assets ${DKPROJECT}/${OS}/Release/app/src/main/assets OVERWRITE)
-				file(WRITE ${DKPROJECT}/${OS}/Release/local.properties ${localProperties})
-				dkFileReplace(${DKPROJECT}/${OS}/Release/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}")
-				UNIX_HOST_dk_executeProcess(chmod 777 ${DKPROJECT}/${OS}/Release/gradlew)
-				UNIX_HOST_dk_executeProcess(sed -i -e "s/\r$//" "${DKPROJECT}/${OS}/Release/gradlew")
-			endif()
+		if(DEBUG)
+			dk_copy(${DKPLUGINS}/_DKIMPORT/android/ ${DKPROJECT}/${OS}/Debug)
+			dk_copy(${DKPLUGINS}/_DKIMPORT/${OS}/ ${DKPROJECT}/${OS}/Debug)
+			dk_copy(${DKPROJECT}/assets ${DKPROJECT}/${OS}/Debug/app/src/main/assets OVERWRITE)
+			file(WRITE ${DKPROJECT}/${OS}/Debug/local.properties ${localProperties})
+			dkFileReplace(${DKPROJECT}/${OS}/Debug/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}")
+			UNIX_HOST_dk_executeProcess(chmod 777 ${DKPROJECT}/${OS}/Debug/gradlew)
+			UNIX_HOST_dk_executeProcess(sed -i -e "s/\r$//" "${DKPROJECT}/${OS}/Debug/gradlew")
+		elseif(RELEASE)
+			dk_copy(${DKPLUGINS}/_DKIMPORT/android/ ${DKPROJECT}/${OS}/Release)
+			dk_copy(${DKPLUGINS}/_DKIMPORT/${OS}/ ${DKPROJECT}/${OS}/Release)
+			dk_copy(${DKPROJECT}/assets ${DKPROJECT}/${OS}/Release/app/src/main/assets OVERWRITE)
+			file(WRITE ${DKPROJECT}/${OS}/Release/local.properties ${localProperties})
+			dkFileReplace(${DKPROJECT}/${OS}/Release/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}")
+			UNIX_HOST_dk_executeProcess(chmod 777 ${DKPROJECT}/${OS}/Release/gradlew)
+			UNIX_HOST_dk_executeProcess(sed -i -e "s/\r$//" "${DKPROJECT}/${OS}/Release/gradlew")
 		endif()
-	
-	
+
 		####### Append -frtti to C/CXX Flags ##############################
 		#dk_set(CMAKE_C_FLAGS ${CMAKE_C_FLAGS} -frtti)
 		#dk_set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} -frtti)
@@ -1151,19 +1134,20 @@ if(ANDROID)
 	######################### Link Libraries ###########################
 	#target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	#target_include_directories(${APP_NAME} PUBLIC ${SDL2}/include)
-	if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-		target_link_libraries(main ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
-	else()
+	
+	#if(VISUAL_STUDIO_IDE)
+	#	target_link_libraries(main ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
+	#else()
 		if(DEBUG)
 			target_link_libraries(main ${DEBUG_LIBS} ${LIBS})
 		elseif(RELEASE)
 			target_link_libraries(main ${RELEASE_LIBS} ${LIBS})
 		endif()
-	endif()
+	#endif()
 	target_include_directories(main PUBLIC ${SDL2}/include) # FIXME: this should be in sdl/DKMake.cmake somehow
 	
 	if(CMAKE_ANDROID_GUI)
-		if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+		if(VISUAL_STUDIO_IDE)
 			include_external_msproject(gradleAPK gradleAPK.androidproj TYPE 39E2626F-3545-4960-A6E8-258AD8476CE5)
 			set_property(TARGET gradleAPK PROPERTY VS_SOLUTION_DEPLOY ON) # NOT WORKING
 			set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT gradleAPK)
@@ -1211,19 +1195,22 @@ if(ANDROID)
 		if(WIN_HOST)
 			set(CMD "cmd /c")
 		endif()
-				
-		add_custom_command(
-			POST_BUILD
-			TARGET main
-			COMMAND ${CMAKE_COMMAND} -E echo "Installing <app-debug.apk> to device"
-			COMMAND ${CMD} ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/Debug/app/build/outputs/apk/debug/app-debug.apk
-			COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing <app-debug.apk> to device")
-		add_custom_command(
-			POST_BUILD
-			TARGET main
-			COMMAND ${CMAKE_COMMAND} -E echo "Installing <app-release-unsigned.apk> to device"
-			COMMAND ${CMD} ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/Release/app/build/outputs/apk/release/app-release-unsigned.apk
-			COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing <app-release-unsigned.apk> to device")	
+		
+		if(DEBUG)		
+			add_custom_command(
+				POST_BUILD
+				TARGET main
+				COMMAND ${CMAKE_COMMAND} -E echo "Installing <app-debug.apk> to device"
+				COMMAND ${CMD} ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/Debug/app/build/outputs/apk/debug/app-debug.apk
+				COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing <app-debug.apk> to device")
+		elseif(RELEASE)
+			add_custom_command(
+				POST_BUILD
+				TARGET main
+				COMMAND ${CMAKE_COMMAND} -E echo "Installing <app-release-unsigned.apk> to device"
+				COMMAND ${CMD} ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/Release/app/build/outputs/apk/release/app-release-unsigned.apk
+				COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing <app-release-unsigned.apk> to device")
+		endif()
 	endif()
 	
 endif()
