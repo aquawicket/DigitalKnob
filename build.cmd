@@ -37,18 +37,18 @@ set "TYPE="
 
 :pickapp
 ECHO.
-ECHO 1. Git Update
-ECHO 2. Git Commit
-ECHO 3. HelloWorld
-ECHO 4. DKCore
-ECHO 5. DKJavascript
-ECHO 6. DKBuilder
-ECHO 7. DKSDL
-ECHO 8. DKSDLRml
-ECHO 9. DKDomTest
-ECHO 10. DKTestAll
-ECHO c. Clear Screen
-ECHO x. Exit
+ECHO  1) Git Update
+ECHO  2) Git Commit
+ECHO  3) HelloWorld
+ECHO  4) DKCore
+ECHO  5) DKJavascript
+ECHO  6) DKBuilder
+ECHO  7) DKSDL
+ECHO  8) DKSDLRml
+ECHO  9) DKDomTest
+ECHO 10) DKTestAll
+ECHO 11) Clear Screen
+ECHO 12) Exit
 set choice=
 set /p choice=Please select an app to build: 
 if not '%choice%'=='' set choice=%choice:~0,1%
@@ -62,8 +62,8 @@ if '%choice%'=='7' set "APP=DKSDL" & goto checkApp
 if '%choice%'=='8' set "APP=DKSDLRml" & goto checkApp
 if '%choice%'=='9' set "APP=DKDomTest" & goto checkApp
 if '%choice%'=='10' set "APP=DKTestAll" & goto checkApp
-if '%choice%'=='c' call:clear_screen & goto pickapp
-if '%choice%'=='x' call:end
+if '%choice%'=='11' call:clear_screen & goto pickapp
+if '%choice%'=='12 call:end
 ECHO "%choice%" is not valid, try again
 
 
@@ -80,14 +80,14 @@ goto pickos
 :pickos
 ECHO %APP%
 ECHO.
-ECHO 1. Windows 32
-ECHO 2. Windows 64
-ECHO 3. Android 32
-ECHO 4. Android 64
-ECHO 5. Emscripten
-ECHO c. Clear Screen
-ECHO b. Go Back
-ECHO x. Exit
+ECHO 1) Windows 32
+ECHO 2) Windows 64
+ECHO 3) Android 32
+ECHO 4) Android 64
+ECHO 5) Emscripten
+ECHO 6) Clear Screen
+ECHO 7) Go Back
+ECHO 8) Exit
 set choice=
 set /p choice=Please select an OS to build for: 
 if not '%choice%'=='' set choice=%choice:~0,1%
@@ -96,9 +96,9 @@ if '%choice%'=='2' set "OS=win64" & goto type
 if '%choice%'=='3' set "OS=android32" & goto type
 if '%choice%'=='4' set "OS=android64" & goto type
 if '%choice%'=='5' set "OS=emscripten" & goto type
-if '%choice%'=='c' call:clear_screen & goto pickos
-if '%choice%'=='b' goto pickapp
-if '%choice%'=='x' call:end
+if '%choice%'=='6' call:clear_screen & goto pickos
+if '%choice%'=='7' goto pickapp
+if '%choice%'=='8' call:end
 ECHO "%choice%" is not valid, try again
 
 
@@ -106,21 +106,21 @@ ECHO "%choice%" is not valid, try again
 :type
 ECHO %APP% - %OS%
 ECHO.
-ECHO 1. Debug
-ECHO 2. Release
-ECHO 3. All
-ECHO c. Clear Screen
-ECHO b. Go Back
-ECHO x. Exit
+ECHO 1) Debug
+ECHO 2) Release
+ECHO 3) All
+ECHO 4) Clear Screen
+ECHO 5) Go Back
+ECHO 6) Exit
 set choice=
 set /p choice=Please select a build type: 
 if not '%choice%'=='' set choice=%choice:~0,1%
 if '%choice%'=='1' set "TYPE=Debug" & goto generate
 if '%choice%'=='2' set "TYPE=Release" & goto generate
 if '%choice%'=='3' set "TYPE=All" & goto generate
-if '%choice%'=='c' call:clear_screen & goto type
-if '%choice%'=='b' goto pickos
-if '%choice%'=='x' call:end
+if '%choice%'=='4' call:clear_screen & goto type
+if '%choice%'=='5' goto pickos
+if '%choice%'=='6' call:end
 ECHO "%choice%" is not valid, try again
 
 
