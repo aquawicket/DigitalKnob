@@ -1974,10 +1974,12 @@ dk_createOsMacros("dk_setPath")
 function(dk_msys)
 	DKDEBUGFUNC(${ARGV})
 	
-	if(USE_MSYS2)
-		dk_msys2(${ARGV})
-		return()
-	endif()
+	dk_warn("WARNING: dk_msys() is deprecated. Please switch to using msys2()")
+	
+	#if(USE_MSYS2)
+	#	dk_msys2(${ARGV})
+	#	return()
+	#endif()
 	
 	if(QUEUE_BUILD)
 		string(REPLACE ";" " " str "${ARGV}")
@@ -2055,6 +2057,22 @@ function(dk_queueMsys)
 	endif()	
 endfunction()
 dk_createOsMacros("dk_queueMsys")
+
+
+###############################################################################
+# dk_queueMsys2(args)
+#
+#	TODO
+#
+#	@args	- TODO
+#
+function(dk_queueMsys2)
+	DKDEBUGFUNC(${ARGV})
+	if(QUEUE_BUILD)
+		dk_msys2(${ARGV})
+	endif()	
+endfunction()
+dk_createOsMacros("dk_queueMsys2")
 
 
 ###############################################################################
@@ -2150,7 +2168,7 @@ dk_createOsMacros("dk_queueCommand")
 #
 function(dk_visualStudioDebug path) #target #arch
 	DKDEBUGFUNC(${ARGV})
-	if(NOT CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")	# replaces if(NOT VISUAL_STUDIO_IDE)
+	if(NOT CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 		return()
 	endif()
 	
@@ -2198,7 +2216,7 @@ dk_createOsMacros("dk_visualStudioDebug" "NO_DEBUG_RELEASE_TAGS")
 #
 function(dk_visualStudioRelease path) #target #arch
 	DKDEBUGFUNC(${ARGV})
-	if(NOT CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")	# replaces if(NOT VISUAL_STUDIO_IDE)
+	if(NOT CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 		return()
 	endif()
 	
@@ -2680,7 +2698,6 @@ function(dk_generateCmake plugin_name)
 	file(APPEND ${plugin_path}/CMakeLists.txt "endif()\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "add_library(${plugin_name} STATIC \${${plugin_name}_SRC})\n")
 #	file(APPEND ${plugin_path}/CMakeLists.txt "target_compile_options(${plugin_name} PRIVATE \${CMAKE_CXX_FLAGS} $<$<CONFIG:Debug>:\${CMAKE_CXX_FLAGS_DEBUG}> $<$<CONFIG:Release>:\${CMAKE_CXX_FLAGS_RELEASE}>)\n")
-#	file(APPEND ${plugin_path}/CMakeLists.txt "if(VISUAL_STUDIO_IDE)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "if(CMAKE_CXX_COMPILER_ID STREQUAL \"MSVC\")\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "		set_target_properties(${plugin_name} PROPERTIES LINKER_LANGUAGE CPP)\n")
 	file(APPEND ${plugin_path}/CMakeLists.txt "		set_property(DIRECTORY \${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${plugin_name})\n")
@@ -2708,7 +2725,7 @@ function(dk_generateCmake plugin_name)
 		endforeach()
 	endif()
 	dk_enable				(${plugin_name})
-	if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")	# replaces if(VISUAL_STUDIO_IDE)
+	if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 		WIN_dk_libDebug			(${plugin_path}/${OS}/${DEBUG_DIR}/${plugin_name}.lib)
 		WIN_dk_libRelease		(${plugin_path}/${OS}/${RELEASE_DIR}/${plugin_name}.lib)
 	else()
@@ -4744,7 +4761,7 @@ endfunction()
 macro(dk_shell args)
 	DKDEBUGFUNC(${ARGV})
 	if(WIN_HOST)# AND NOT EMSCRIPTEN)
-		dk_msys(${ARGV})
+		dk_msys2(${ARGV})
 	else()
 		dk_command(${ARGV})
 	endif()

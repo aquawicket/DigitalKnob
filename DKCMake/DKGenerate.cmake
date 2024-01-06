@@ -151,7 +151,7 @@ foreach(plugin ${dkdepend_list})
 	
 		#Add the DKPlugin to the app project
 		if(EXISTS "${plugin_path}/CMakeLists.txt")
-			if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC" OR CMAKE_CXX_COMPILER_ID STREQUAL "XCODE")	# replaces if(VISUAL_STUDIO_IDE OR XCODE_IDE)
+			if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC" OR CMAKE_CXX_COMPILER_ID STREQUAL "XCODE")
 				add_subdirectory(${plugin_path} ${plugin_path}/${OS})
 			else()
 				if(DEBUG)
@@ -175,7 +175,7 @@ foreach(plugin ${dkdepend_list})
 			dk_info("******* Prebuilding ${plugin} *******")
 			dk_setPath(${plugin_path}/${BUILD_DIR})
 			
-			if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC" OR CMAKE_CXX_COMPILER_ID STREQUAL "XCODE")	# replaces if(VISUAL_STUDIO_IDE OR XCODE_IDE)
+			if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC" OR CMAKE_CXX_COMPILER_ID STREQUAL "XCODE")
 				ANDROID32_dk_queueCommand	(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DANDROID_32=ON ${plugin_path})
 				ANDROID64_dk_queueCommand	(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DANDROID_64=ON ${plugin_path})
 				EMSCRIPTEN_dk_queueCommand	(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DEMSCRIPTEN=ON ${plugin_path})
@@ -376,7 +376,7 @@ if(WIN_32)
 
 	##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
 	
-	if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")	# replaces if(VISUAL_STUDIO_IDE)
+	if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 		list(APPEND DEBUG_LINK_FLAGS /MANIFEST:NO)
 		list(APPEND DEBUG_LINK_FLAGS /MANIFESTUAC:NO)
 		list(APPEND DEBUG_LINK_FLAGS /level='highestAvailable')
