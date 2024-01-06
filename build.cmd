@@ -63,7 +63,7 @@ if '%choice%'=='9' set "APP=DKDomTest" & goto checkApp
 if '%choice%'=='10' set "APP=DKTestAll" & goto checkApp
 if '%choice%'=='11' call:clear_screen & goto pickapp
 if '%choice%'=='12 call:end
-::if not '%choice%'=='' set choice=%choice:~0,1%
+::if not '%choice%'=='' set choice=%choice:~0,1%	::What does this do?
 ECHO "%choice%" is not valid, try again
 goto pickapp
 
@@ -125,7 +125,6 @@ ECHO 7) Go Back
 ECHO 8) Exit
 set choice=
 set /p choice=Please select an OS to build for: 
-if not '%choice%'=='' set choice=%choice:~0,1%
 if '%choice%'=='1' set "OS=win32" & goto type
 if '%choice%'=='2' set "OS=win64" & goto type
 if '%choice%'=='3' set "OS=android32" & goto type
@@ -134,6 +133,7 @@ if '%choice%'=='5' set "OS=emscripten" & goto type
 if '%choice%'=='6' call:clear_screen & goto pickos
 if '%choice%'=='7' goto pickapp
 if '%choice%'=='8' call:end
+::if not '%choice%'=='' set choice=%choice:~0,1%	::What does this do?
 ECHO "%choice%" is not valid, try again
 
 
@@ -149,13 +149,13 @@ ECHO 5) Go Back
 ECHO 6) Exit
 set choice=
 set /p choice=Please select a build type: 
-if not '%choice%'=='' set choice=%choice:~0,1%
 if '%choice%'=='1' set "TYPE=Debug" & goto generate
 if '%choice%'=='2' set "TYPE=Release" & goto generate
 if '%choice%'=='3' set "TYPE=All" & goto generate
 if '%choice%'=='4' call:clear_screen & goto type
 if '%choice%'=='5' goto pickos
 if '%choice%'=='6' call:end
+::if not '%choice%'=='' set choice=%choice:~0,1%	::What does this do?
 ECHO "%choice%" is not valid, try again
 
 
