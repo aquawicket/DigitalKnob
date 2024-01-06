@@ -1039,6 +1039,7 @@ endif()
 if(ANDROID)
 	
 	#set(CMAKE_ANDROID_GUI 1)
+	# CMAKE_ANDROID_GUI is set to 1 by DKSDLWindow/DKCMake.cmake
 	
 	if(CMAKE_ANDROID_GUI)
 		########################## CREATE ICONS ###############################
@@ -1131,9 +1132,12 @@ if(ANDROID)
 		#set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS_RELEASE} -Wl,--hash-style=both")
 		
 		add_library(main SHARED ${App_SRC})
-	else() # NOT CMAKE_ANDROID_GUI
+	else() 
+		
+		# NOT CMAKE_ANDROID_GUI
 		add_executable(main ${App_SRC})
 	endif()
+		
 		
 	########################## Add Dependencies ########################
 	foreach(plugin ${dkdepend_list})
@@ -1154,7 +1158,7 @@ if(ANDROID)
 			target_link_libraries(main ${RELEASE_LIBS} ${LIBS})
 		endif()
 	endif()
-	target_include_directories(main PUBLIC ${SDL2}/include)
+	target_include_directories(main PUBLIC ${SDL2}/include) # FIXME: this should be in sdl/DKMake.cmake somehow
 	
 	if(CMAKE_ANDROID_GUI)
 		if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
@@ -1207,8 +1211,7 @@ if(ANDROID)
 		#################### List packages matching PACKAGE_NAME ##############
 		#################### Uninstall PACKAGE_NAME package ###################
 		
-		#################### Install apk to device ###############
-
+		#################### Install apk to device ################
 		if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 			add_custom_command(
 				POST_BUILD
