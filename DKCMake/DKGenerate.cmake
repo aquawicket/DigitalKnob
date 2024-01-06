@@ -1052,7 +1052,8 @@ if(ANDROID)
 			dk_resizeImage(${DKPROJECT}/icons/icon.png 96 96 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-xhdpi/ic_launcher.png)
 			dk_resizeImage(${DKPROJECT}/icons/icon.png 144 144 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
 			dk_resizeImage(${DKPROJECT}/icons/icon.png 192 192 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
-		elseif(RELEASE)
+		endif()
+		if(RELEASE)
 			dk_resizeImage(${DKPROJECT}/icons/icon.png 36 36 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-ldpi/ic_launcher.png)
 			dk_resizeImage(${DKPROJECT}/icons/icon.png 48 48 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-mdpi/ic_launcher.png)
 			dk_resizeImage(${DKPROJECT}/icons/icon.png 72 72 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-hdpi/ic_launcher.png)
@@ -1065,8 +1066,7 @@ if(ANDROID)
 	
 		###################### Backup Executable ###########################
 		if(BACKUP_APP_EXECUTABLES)
-			if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-				dk_wait()
+			if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC" OR VISUAL_STUDIO_IDE)
 				DEBUG_dk_rename(${DKPROJECT}/${OS}/app/build/outputs/apk/debug/app-debug.apk ${DKPROJECT}/${OS}/app/build/outputs/apk/app-debug.apk.backup OVERWRITE)
 				RELEASE_dk_rename(${DKPROJECT}/${OS}/app/build/outputs/apk/release/app-release-unsigned.apk ${DKPROJECT}/${OS}/app/build/outputs/apk/release/app-release-unsigned.apk.backup OVERWRITE)
 			else()
@@ -1076,7 +1076,7 @@ if(ANDROID)
 		endif()
 	
 		####################### Create Library Target ###################
-		if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+		if(VISUAL_STUDIO_IDE)
 			set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/app/src/main/jniLibs/${ANDROID_ABI}")
 			set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/app/src/main/jniLibs/${ANDROID_ABI}")
 		else()
@@ -1096,7 +1096,8 @@ if(ANDROID)
 			dkFileReplace(${DKPROJECT}/${OS}/Debug/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}")
 			UNIX_HOST_dk_executeProcess(chmod 777 ${DKPROJECT}/${OS}/Debug/gradlew)
 			UNIX_HOST_dk_executeProcess(sed -i -e "s/\r$//" "${DKPROJECT}/${OS}/Debug/gradlew")
-		elseif(RELEASE)
+		endif()
+		if(RELEASE)
 			dk_copy(${DKPLUGINS}/_DKIMPORT/android/ ${DKPROJECT}/${OS}/Release)
 			dk_copy(${DKPLUGINS}/_DKIMPORT/${OS}/ ${DKPROJECT}/${OS}/Release)
 			dk_copy(${DKPROJECT}/assets ${DKPROJECT}/${OS}/Release/app/src/main/assets OVERWRITE)
@@ -1135,15 +1136,16 @@ if(ANDROID)
 	#target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	#target_include_directories(${APP_NAME} PUBLIC ${SDL2}/include)
 	
-	if(VISUAL_STUDIO_IDE)
-		target_link_libraries(main ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
-	else()
+	#if(VISUAL_STUDIO_IDE)
+	#	target_link_libraries(main ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
+	#else()
 		if(DEBUG)
 			target_link_libraries(main ${DEBUG_LIBS} ${LIBS})
-		elseif(RELEASE)
+		endif()
+		if(RELEASE)
 			target_link_libraries(main ${RELEASE_LIBS} ${LIBS})
 		endif()
-	endif()
+	#endif()
 	target_include_directories(main PUBLIC ${SDL2}/include) # FIXME: this should be in sdl/DKMake.cmake somehow
 	
 	if(CMAKE_ANDROID_GUI)
@@ -1175,7 +1177,8 @@ if(ANDROID)
 				COMMAND ${CMAKE_COMMAND} -E echo "Building with Gradle"
 				COMMAND ${DKPROJECT}/${OS}/Debug/gradlew --project-dir ${DKPROJECT}/${OS}/Debug --info clean build #--offline
 				COMMAND ${CMAKE_COMMAND} -E echo "Finnished building with Gradle")
-		elseif(RELEASE)
+		endif()
+		if(RELEASE)
 			add_custom_command(
 				POST_BUILD
 				TARGET main
@@ -1203,7 +1206,8 @@ if(ANDROID)
 				COMMAND ${CMAKE_COMMAND} -E echo "Installing <app-debug.apk> to device"
 				COMMAND ${CMD} ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/Debug/app/build/outputs/apk/debug/app-debug.apk
 				COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing <app-debug.apk> to device")
-		elseif(RELEASE)
+		if(RELEASE)
+		endif()
 			add_custom_command(
 				POST_BUILD
 				TARGET main
