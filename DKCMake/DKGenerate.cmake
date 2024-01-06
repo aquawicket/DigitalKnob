@@ -1117,8 +1117,12 @@ if(ANDROID)
 		endif()
 	endif()
 	
+	dk_set(TERMUX_APP 1)
+	
 	####### Append -frtti to C/CXX Flags ##############################
-	set(CMAKE_ANDROID_GUI 1)
+	if(NOT TERMUX_APP)
+		set(CMAKE_ANDROID_GUI 1)
+	endif()
 	#dk_set(CMAKE_C_FLAGS ${CMAKE_C_FLAGS} -frtti)
 	#dk_set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} -frtti)
 	
@@ -1127,7 +1131,11 @@ if(ANDROID)
     #set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS_RELEASE} -Wl,--hash-style=both")
     #set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS_RELEASE} -Wl,--hash-style=both")
 	
-	add_library(main SHARED ${App_SRC})
+	if(TERMUX_APP)
+		add_executable(main ${App_SRC})
+	else()
+		add_library(main SHARED ${App_SRC})
+	endif()
 		
 	########################## Add Dependencies ########################
 	foreach(plugin ${dkdepend_list})
@@ -1169,29 +1177,30 @@ if(ANDROID)
 	#)
 	
 	####################### Gradle Build #####################
-	#WIN_HOST_dk_set(CMD_K cmd /k)
-	if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-		add_custom_command(
-			POST_BUILD
-			TARGET main
-			COMMAND ${CMAKE_COMMAND} -E echo "Building with Gradle"
-			COMMAND cmd /k ${DKPROJECT}/${OS}/gradlew --project-dir ${DKPROJECT}/${OS} --info clean build #--offline
-			COMMAND ${CMAKE_COMMAND} -E echo "Finnished building with Gradle")
-	else() 
-		if(DEBUG)
+	if(NOT TERMUX_APP)
+		if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 			add_custom_command(
 				POST_BUILD
 				TARGET main
 				COMMAND ${CMAKE_COMMAND} -E echo "Building with Gradle"
-				COMMAND ${DKPROJECT}/${OS}/Debug/gradlew --project-dir ${DKPROJECT}/${OS}/Debug --info clean build #--offline
+				COMMAND cmd /k ${DKPROJECT}/${OS}/gradlew --project-dir ${DKPROJECT}/${OS} --info clean build #--offline
 				COMMAND ${CMAKE_COMMAND} -E echo "Finnished building with Gradle")
-		elseif(RELEASE)
-			add_custom_command(
-				POST_BUILD
-				TARGET main
-				COMMAND ${CMAKE_COMMAND} -E echo "Building with Gradle"
-				COMMAND ${DKPROJECT}/${OS}/Release/gradlew --project-dir ${DKPROJECT}/${OS}/Release --info clean build #--offline
-				COMMAND ${CMAKE_COMMAND} -E echo "Finnished building with Gradle")
+		else() 
+			if(DEBUG)
+				add_custom_command(
+					POST_BUILD
+					TARGET main
+					COMMAND ${CMAKE_COMMAND} -E echo "Building with Gradle"
+					COMMAND ${DKPROJECT}/${OS}/Debug/gradlew --project-dir ${DKPROJECT}/${OS}/Debug --info clean build #--offline
+					COMMAND ${CMAKE_COMMAND} -E echo "Finnished building with Gradle")
+			elseif(RELEASE)
+				add_custom_command(
+					POST_BUILD
+					TARGET main
+					COMMAND ${CMAKE_COMMAND} -E echo "Building with Gradle"
+					COMMAND ${DKPROJECT}/${OS}/Release/gradlew --project-dir ${DKPROJECT}/${OS}/Release --info clean build #--offline
+					COMMAND ${CMAKE_COMMAND} -E echo "Finnished building with Gradle")
+			endif()
 		endif()
 	endif()
 	
@@ -1200,7 +1209,8 @@ if(ANDROID)
 	#################### Uninstall PACKAGE_NAME package ###################
 	
 	#################### Install apk to device ###############
-	if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")	# replaces if(VISUAL_STUDIO_IDE)
+if(NOT TERMUX_APP)
+if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 		add_custom_command(
 			POST_BUILD
 			TARGET main
@@ -1223,6 +1233,7 @@ if(ANDROID)
 				COMMAND ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/Release/app/build/outputs/apk/debug/app-debug.apk
 				COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing app-debug.apk to device")
 		endif()
+	endif()
 	endif()
 endif()
 
