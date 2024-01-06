@@ -1222,10 +1222,9 @@ if(ANDROID)
 			TARGET main
 			COMMAND ${CMAKE_COMMAND} -E echo "Installing <app-release-unsigned.apk> to device"
 			COMMAND ${CMD} ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/Release/app/build/outputs/apk/release/app-release-unsigned.apk
-			COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing <app-release-unsigned.apk> to device")
-		endif()
-			
+			COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing <app-release-unsigned.apk> to device"	
 	endif()
+	
 endif()
 
 
