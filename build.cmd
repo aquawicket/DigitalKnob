@@ -62,7 +62,7 @@ if '%choice%'=='8' set "APP=DKSDLRml" & goto checkApp
 if '%choice%'=='9' set "APP=DKDomTest" & goto checkApp
 if '%choice%'=='10' set "APP=DKTestAll" & goto checkApp
 if '%choice%'=='11' call:clear_screen & goto pickapp
-if '%choice%'=='12 call:end
+if '%choice%'=='12" call:end
 ::if not '%choice%'=='' set choice=%choice:~0,1%	::What does this do?
 ECHO "%choice%" is not valid, try again
 goto pickapp
