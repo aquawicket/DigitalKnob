@@ -1206,7 +1206,8 @@ if(ANDROID)
 	#################### Uninstall PACKAGE_NAME package ###################
 		
 	#################### Install apk to device ################
-	if(NOT ANDROID_HOST)
+	#dk_set(INSTALL_APK 1)
+	if(NOT ANDROID_HOST AND INSTALL_APK)
 		if(WIN_HOST)
 			set(CMD "cmd /c")
 		endif()
