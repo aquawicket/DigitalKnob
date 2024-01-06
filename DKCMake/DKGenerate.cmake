@@ -151,7 +151,7 @@ foreach(plugin ${dkdepend_list})
 	
 		#Add the DKPlugin to the app project
 		if(EXISTS "${plugin_path}/CMakeLists.txt")
-			if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC" OR CMAKE_CXX_COMPILER_ID STREQUAL "XCODE")
+			if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC" OR CMAKE_CXX_COMPILER_ID STREQUAL "XCODE" OR VISUAL_STUDIO_IDE OR XCODE_IDE)
 				add_subdirectory(${plugin_path} ${plugin_path}/${OS})
 			else()
 				if(DEBUG)
