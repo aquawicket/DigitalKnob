@@ -1,9 +1,20 @@
-:: Windows Batch file DK builder
 @echo off
+
+::############ DigitalKnob builder script ############
+
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
-call:check_error
 
 
+
+goto:main 
+
+:::: get_variables()
+:get_variables
+	echo "get_variables()"
+goto:eof
+::call:get_variables
+
+:main
 ::--------------------------------------------------------
 :: GLOBAL USER VARIABLES
 ::--------------------------------------------------------

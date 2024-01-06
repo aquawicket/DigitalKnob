@@ -1,28 +1,21 @@
 #!/bin/bash
 
+############## DigitalKnob builder script ############
+
 # to run this script requires privledges
 # > chmod 777 build.sh
 
 
-echo ""
-echo ""
-echo "HOSTNAME = $HOSTNAME"
-echo "HOSTTYPE = $HOSTTYPE"
-echo "OSTYPE = $OSTYPE"
-echo "MACHTYPE = $MACHTYPE"
-echo "MODEL = $MODEL"
-echo "USER = $USER"
-echo "USERNAME = $USERNAME"
-echo "DIGITALKNOB = $DIGITALKNOB"
-echo "DKPATH = $DKPATH"
-echo "DKCMAKE = $DKCMAKE"
+# main 
 
+### get_variables()
 get_variables() {
 	echo "get_variables()"
 }
 get_variables
 
-###### validate_branch ######
+
+###### validate_branch()
 validate_branch() {
 	# If the current folder matches the current branch set DKBRANCH, default to Development
 	FOLDER="$(basename $(pwd))"
