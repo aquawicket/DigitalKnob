@@ -1038,6 +1038,7 @@ endif()
 ###########
 if(ANDROID)
 	
+	################################ CMAKE_ANDROID_GUI ########################################
 	#set(CMAKE_ANDROID_GUI 1)
 	# CMAKE_ANDROID_GUI is set to 1 by DKSDLWindow/DKCMake.cmake
 	
@@ -1134,8 +1135,10 @@ if(ANDROID)
 		add_library(main SHARED ${App_SRC})
 	else() 
 		
+		################################## !CMAKE_ANDROID_GUI ########################################
 		# NOT CMAKE_ANDROID_GUI
 		add_executable(main ${App_SRC})
+		
 	endif()
 		
 		
