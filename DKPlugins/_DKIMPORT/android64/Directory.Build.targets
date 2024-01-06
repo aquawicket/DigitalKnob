@@ -12,6 +12,6 @@
 		<TargetPlatformDisplayName>Android 31.0</TargetPlatformDisplayName>
 		<TargetPlatformMoniker>Android,Version=31.0</TargetPlatformMoniker>
 		<TargetPlatformVersion>31.0</TargetPlatformVersion>
-		<PreprocessorDefinitions>__ANDROID_API__=31;NDEBUG;</PreprocessorDefinitions>
+		<!-- <PreprocessorDefinitions>__ANDROID_API__=31;NDEBUG;</PreprocessorDefinitions> -->
 	</PropertyGroup>
 </Project>
