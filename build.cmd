@@ -158,6 +158,7 @@ goto build
 
 :generate_android32
 call:validate_android_ndk
+::call:validate_openjdk
 call %DKPATH%\3rdParty\_DKIMPORTS\openjdk\registerJDK.cmd
 "%CMAKE%" -G "Visual Studio 17 2022" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID-NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_NDK%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
 set TARGET=main
@@ -165,6 +166,7 @@ goto build
 
 :generate_android64
 call:validate_android_ndk
+::call:validate_openjdk
 call %DKPATH%\3rdParty\_DKIMPORTS\openjdk\registerJDK.cmd
 "%CMAKE%" -G "Visual Studio 17 2022" -A ARM64 -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID-NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_NDK%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
 set TARGET=main
@@ -336,6 +338,12 @@ goto:eof
 	call:check_error
 goto:eof
 
+:: validate_openjdk()
+:validate_openjdk
+	:: TODO
+	call:assert "validate_openjdk() not implemented"
+goto:eof
+
 :: validate_android_ndk()
 :validate_android_ndk
 	set "ANDROID_NDK=%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk\%ANDROID_NDK_BUILD%"
@@ -354,9 +362,9 @@ goto:eof
 	call:check_error
 goto:eof
 
-
 :: validate_emscripten()
 :validate_emscripten
+	:: TODO
 	call:assert "validate_emscripten() not implemented"
 goto:eof
 
