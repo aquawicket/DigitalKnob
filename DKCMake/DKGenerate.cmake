@@ -1217,30 +1217,23 @@ if(ANDROID)
 		#################### Install apk to device ################
 		if(NOT ANDROID_HOST)
 			if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-				add_custom_command(
-					POST_BUILD
-					TARGET main
-					COMMAND ${CMAKE_COMMAND} -E echo "Installing app-debug.apk to device"
-					COMMAND cmd /c ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/app/build/outputs/apk/debug/app-debug.apk
-					COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing app-debug.apk to device")
-			else()
-				if(DEBUG)
-					add_custom_command(
-						POST_BUILD
-						TARGET main
-						COMMAND ${CMAKE_COMMAND} -E echo "Installing app-debug.apk to device"
-						COMMAND ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/Debug/app/build/outputs/apk/debug/app-debug.apk
-						COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing app-debug.apk to device")
-				elseif(RELEASE)
-					add_custom_command(
-						POST_BUILD
-						TARGET main
-						COMMAND ${CMAKE_COMMAND} -E echo "Installing app-debug.apk to device"
-						COMMAND ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/Release/app/build/outputs/apk/debug/app-debug.apk
-						COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing app-debug.apk to device")
-				endif()
+				set(CMD "cmd /c")
 			endif()
+				
+			add_custom_command(
+				POST_BUILD
+				TARGET main
+				COMMAND ${CMAKE_COMMAND} -E echo "Installing <app-debug.apk> to device"
+				COMMAND ${CMD} ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/Debug/app/build/outputs/apk/debug/app-debug.apk
+				COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing <app-debug.apk> to device")
+			add_custom_command(
+				POST_BUILD
+				TARGET main
+				COMMAND ${CMAKE_COMMAND} -E echo "Installing <app-release-unsigned.apk> to device"
+				COMMAND ${CMD} ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/Release/app/build/outputs/apk/release/app-release-unsigned.apk
+				COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing <app-release-unsigned.apk> to device")
 		endif()
+			
 	endif()
 endif()
 
