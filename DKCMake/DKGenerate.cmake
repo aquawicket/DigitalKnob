@@ -1038,60 +1038,62 @@ endif()
 ###########
 if(ANDROID)
 	
-	########################## CREATE ICONS ###############################
-	dk_info("Creating android icons for ${APP_NAME} . . .")
-	if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-		dk_resizeImage(${DKPROJECT}/icons/icon.png 36 36 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-ldpi/ic_launcher.png)
-		dk_resizeImage(${DKPROJECT}/icons/icon.png 48 48 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-mdpi/ic_launcher.png)
-		dk_resizeImage(${DKPROJECT}/icons/icon.png 72 72 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-hdpi/ic_launcher.png)
-		dk_resizeImage(${DKPROJECT}/icons/icon.png 96 96 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-xhdpi/ic_launcher.png)
-		dk_resizeImage(${DKPROJECT}/icons/icon.png 144 144 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
-		dk_resizeImage(${DKPROJECT}/icons/icon.png 192 192 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
-	else()
-		if(DEBUG)
-			dk_resizeImage(${DKPROJECT}/icons/icon.png 36 36 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-ldpi/ic_launcher.png)
-			dk_resizeImage(${DKPROJECT}/icons/icon.png 48 48 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-mdpi/ic_launcher.png)
-			dk_resizeImage(${DKPROJECT}/icons/icon.png 72 72 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-hdpi/ic_launcher.png)
-			dk_resizeImage(${DKPROJECT}/icons/icon.png 96 96 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-xhdpi/ic_launcher.png)
-			dk_resizeImage(${DKPROJECT}/icons/icon.png 144 144 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
-			dk_resizeImage(${DKPROJECT}/icons/icon.png 192 192 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
-		elseif(RELEASE)
-			dk_resizeImage(${DKPROJECT}/icons/icon.png 36 36 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-ldpi/ic_launcher.png)
-			dk_resizeImage(${DKPROJECT}/icons/icon.png 48 48 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-mdpi/ic_launcher.png)
-			dk_resizeImage(${DKPROJECT}/icons/icon.png 72 72 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-hdpi/ic_launcher.png)
-			dk_resizeImage(${DKPROJECT}/icons/icon.png 96 96 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-xhdpi/ic_launcher.png)
-			dk_resizeImage(${DKPROJECT}/icons/icon.png 144 144 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
-			dk_resizeImage(${DKPROJECT}/icons/icon.png 192 192 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
-		endif()
-	endif()
+	set(CMAKE_ANDROID_GUI 1)
 	
-	dk_copy(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png OVERWRITE)
-	
-	###################### Backup Executable ###########################
-	if(BACKUP_APP_EXECUTABLES)
+	if(CMAKE_ANDROID_GUI)
+		########################## CREATE ICONS ###############################
+		dk_info("Creating android icons for ${APP_NAME} . . .")
 		if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-			DEBUG_dk_rename(${DKPROJECT}/${OS}/app/build/outputs/apk/debug/app-debug.apk ${DKPROJECT}/${OS}/app/build/outputs/apk/app-debug.apk.backup OVERWRITE)
-			RELEASE_dk_rename(${DKPROJECT}/${OS}/app/build/outputs/apk/release/app-release-unsigned.apk ${DKPROJECT}/${OS}/app/build/outputs/apk/release/app-release-unsigned.apk.backup OVERWRITE)
+			dk_resizeImage(${DKPROJECT}/icons/icon.png 36 36 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-ldpi/ic_launcher.png)
+			dk_resizeImage(${DKPROJECT}/icons/icon.png 48 48 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-mdpi/ic_launcher.png)
+			dk_resizeImage(${DKPROJECT}/icons/icon.png 72 72 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-hdpi/ic_launcher.png)
+			dk_resizeImage(${DKPROJECT}/icons/icon.png 96 96 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-xhdpi/ic_launcher.png)
+			dk_resizeImage(${DKPROJECT}/icons/icon.png 144 144 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
+			dk_resizeImage(${DKPROJECT}/icons/icon.png 192 192 ${DKPROJECT}/${OS}/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
 		else()
-			DEBUG_dk_rename(${DKPROJECT}/${OS}/Debug/app/build/outputs/apk/debug/app-debug.apk ${DKPROJECT}/${OS}/Debug/app/build/outputs/apk/app-debug.apk.backup OVERWRITE)
-			RELEASE_dk_rename(${DKPROJECT}/${OS}/Release/app/build/outputs/apk/release/app-release-unsigned.apk ${DKPROJECT}/${OS}/Release/app/build/outputs/apk/release/app-release-unsigned.apk.backup OVERWRITE)
+			if(DEBUG)
+				dk_resizeImage(${DKPROJECT}/icons/icon.png 36 36 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-ldpi/ic_launcher.png)
+				dk_resizeImage(${DKPROJECT}/icons/icon.png 48 48 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-mdpi/ic_launcher.png)
+				dk_resizeImage(${DKPROJECT}/icons/icon.png 72 72 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-hdpi/ic_launcher.png)
+				dk_resizeImage(${DKPROJECT}/icons/icon.png 96 96 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-xhdpi/ic_launcher.png)
+				dk_resizeImage(${DKPROJECT}/icons/icon.png 144 144 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
+				dk_resizeImage(${DKPROJECT}/icons/icon.png 192 192 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
+			elseif(RELEASE)
+				dk_resizeImage(${DKPROJECT}/icons/icon.png 36 36 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-ldpi/ic_launcher.png)
+				dk_resizeImage(${DKPROJECT}/icons/icon.png 48 48 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-mdpi/ic_launcher.png)
+				dk_resizeImage(${DKPROJECT}/icons/icon.png 72 72 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-hdpi/ic_launcher.png)
+				dk_resizeImage(${DKPROJECT}/icons/icon.png 96 96 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-xhdpi/ic_launcher.png)
+				dk_resizeImage(${DKPROJECT}/icons/icon.png 144 144 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
+				dk_resizeImage(${DKPROJECT}/icons/icon.png 192 192 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
+			endif()
 		endif()
-	endif()
-		
-	####################### Create Library Target ###################
-	if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-		set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/app/src/main/jniLibs/${ANDROID_ABI}")
-		set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/app/src/main/jniLibs/${ANDROID_ABI}")
-	else()
-		set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/Debug/app/src/main/jniLibs/${ANDROID_ABI}")
-		set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/Release/app/src/main/jniLibs/${ANDROID_ABI}")
-	endif()
-
-	######## Create local.properties file that points to android-sdk path #############
-	set(localProperties "sdk.dir=${ANDROID-SDK}")
 	
-	####### Import Android Gui Build files ############################################
-	if(NOT TERMUX_APP)
+		dk_copy(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png OVERWRITE)
+	
+		###################### Backup Executable ###########################
+		if(BACKUP_APP_EXECUTABLES)
+			if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+				DEBUG_dk_rename(${DKPROJECT}/${OS}/app/build/outputs/apk/debug/app-debug.apk ${DKPROJECT}/${OS}/app/build/outputs/apk/app-debug.apk.backup OVERWRITE)
+				RELEASE_dk_rename(${DKPROJECT}/${OS}/app/build/outputs/apk/release/app-release-unsigned.apk ${DKPROJECT}/${OS}/app/build/outputs/apk/release/app-release-unsigned.apk.backup OVERWRITE)
+			else()
+				DEBUG_dk_rename(${DKPROJECT}/${OS}/Debug/app/build/outputs/apk/debug/app-debug.apk ${DKPROJECT}/${OS}/Debug/app/build/outputs/apk/app-debug.apk.backup OVERWRITE)
+				RELEASE_dk_rename(${DKPROJECT}/${OS}/Release/app/build/outputs/apk/release/app-release-unsigned.apk ${DKPROJECT}/${OS}/Release/app/build/outputs/apk/release/app-release-unsigned.apk.backup OVERWRITE)
+			endif()
+		endif()
+	
+		####################### Create Library Target ###################
+		if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+			set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/app/src/main/jniLibs/${ANDROID_ABI}")
+			set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/app/src/main/jniLibs/${ANDROID_ABI}")
+		else()
+			set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/Debug/app/src/main/jniLibs/${ANDROID_ABI}")
+			set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/Release/app/src/main/jniLibs/${ANDROID_ABI}")
+		endif()
+	
+		######## Create local.properties file that points to android-sdk path #############
+		set(localProperties "sdk.dir=${ANDROID-SDK}")
+	
+		####### Import Android Gui Build files ############################################
 		if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 			dk_copy(${DKPLUGINS}/_DKIMPORT/android/ ${DKPROJECT}/${OS}/)
 			dk_copy(${DKPLUGINS}/_DKIMPORT/${OS}/ ${DKPROJECT}/${OS}/)
@@ -1117,26 +1119,20 @@ if(ANDROID)
 				UNIX_HOST_dk_executeProcess(sed -i -e "s/\r$//" "${DKPROJECT}/${OS}/Release/gradlew")
 			endif()
 		endif()
-	endif()
 	
-	dk_set(TERMUX_APP 1)
 	
-	####### Append -frtti to C/CXX Flags ##############################
-	if(NOT TERMUX_APP)
-		set(CMAKE_ANDROID_GUI 1)
-	endif()
-	#dk_set(CMAKE_C_FLAGS ${CMAKE_C_FLAGS} -frtti)
-	#dk_set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} -frtti)
-	
-	# https://stackoverflow.com/a/53806411/688352
-	#set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS_RELEASE} -Wl,--hash-style=both")
-    #set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS_RELEASE} -Wl,--hash-style=both")
-    #set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS_RELEASE} -Wl,--hash-style=both")
-	
-	if(TERMUX_APP)
-		add_executable(main ${App_SRC})
-	else()
+		####### Append -frtti to C/CXX Flags ##############################
+		#dk_set(CMAKE_C_FLAGS ${CMAKE_C_FLAGS} -frtti)
+		#dk_set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} -frtti)
+		
+		# https://stackoverflow.com/a/53806411/688352
+		#set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS_RELEASE} -Wl,--hash-style=both")
+		#set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS_RELEASE} -Wl,--hash-style=both")
+		#set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS_RELEASE} -Wl,--hash-style=both")
+		
 		add_library(main SHARED ${App_SRC})
+	else() # NOT CMAKE_ANDROID_GUI
+		add_executable(main ${App_SRC})
 	endif()
 		
 	########################## Add Dependencies ########################
@@ -1160,10 +1156,12 @@ if(ANDROID)
 	endif()
 	target_include_directories(main PUBLIC ${SDL2}/include)
 	
-	if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-		include_external_msproject(gradleAPK gradleAPK.androidproj TYPE 39E2626F-3545-4960-A6E8-258AD8476CE5)
-		set_property(TARGET gradleAPK PROPERTY VS_SOLUTION_DEPLOY ON) # NOT WORKING
-		set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT gradleAPK)
+	if(CMAKE_ANDROID_GUI)
+		if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+			include_external_msproject(gradleAPK gradleAPK.androidproj TYPE 39E2626F-3545-4960-A6E8-258AD8476CE5)
+			set_property(TARGET gradleAPK PROPERTY VS_SOLUTION_DEPLOY ON) # NOT WORKING
+			set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT gradleAPK)
+		endif()
 	endif()
 		
 		
@@ -1179,7 +1177,7 @@ if(ANDROID)
 	#)
 	
 	####################### Gradle Build #####################
-	if(NOT TERMUX_APP)
+	if(CMAKE_ANDROID_GUI)
 		if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 			add_custom_command(
 				POST_BUILD
@@ -1211,7 +1209,7 @@ if(ANDROID)
 	#################### Uninstall PACKAGE_NAME package ###################
 	
 	#################### Install apk to device ###############
-	if(NOT TERMUX_APP)
+	if(CMAKE_ANDROID_GUI)
 		if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 			add_custom_command(
 				POST_BUILD
