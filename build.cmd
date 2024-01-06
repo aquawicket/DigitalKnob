@@ -4,6 +4,20 @@
 
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
 
+::--------------------------------------------------------
+:: GLOBAL USER VARIABLES
+::--------------------------------------------------------
+set "WGET_DL=https://eternallybored.org/misc/wget/1.21.4/32/wget.exe"
+set "GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.30.1.windows.1/Git-2.30.1-32-bit.exe"
+set "GIT_USER_EMAIL=aquawicket@hotmail.com"
+set "GIT_USER_NAME=aquawicket"
+set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi"
+set "MSBUILD_DL=https://aka.ms/vs/17/release/vs_community.exe"
+set "ANDROID_API=31"
+set "ANDROID_NDK_BUILD=23.1.7779620"
+set "ANDROID_NDK_DL=https://dl.google.com/android/repository/android-ndk-r23b-windows.zip"
+
+
 
 
 goto:skip_test
@@ -39,18 +53,7 @@ goto:eof
 
 
 
-::--------------------------------------------------------
-:: GLOBAL USER VARIABLES
-::--------------------------------------------------------
-set "WGET_DL=https://eternallybored.org/misc/wget/1.21.4/32/wget.exe"
-set "GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.30.1.windows.1/Git-2.30.1-32-bit.exe"
-set "GIT_USER_EMAIL=aquawicket@hotmail.com"
-set "GIT_USER_NAME=aquawicket"
-set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi"
-set "MSBUILD_DL=https://aka.ms/vs/17/release/vs_community.exe"
-set "ANDROID_API=31"
-set "ANDROID_NDK_BUILD=23.1.7779620"
-set "ANDROID_NDK_DL=https://dl.google.com/android/repository/android-ndk-r23b-windows.zip"
+
 
 
 
@@ -242,7 +245,7 @@ goto build
 :generate_android32
 call:validate_android_ndk
 ::call:validate_openjdk
-call %DKPATH%\3rdParty\_DKIMPORTS\openjdk\registerJDK.cmd
+::call %DKPATH%\3rdParty\_DKIMPORTS\openjdk\registerJDK.cmd
 "%CMAKE%" -G "Visual Studio 17 2022" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID-NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_NDK%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
 set TARGET=main
 goto build
@@ -250,7 +253,7 @@ goto build
 :generate_android64
 call:validate_android_ndk
 ::call:validate_openjdk
-call %DKPATH%\3rdParty\_DKIMPORTS\openjdk\registerJDK.cmd
+::call %DKPATH%\3rdParty\_DKIMPORTS\openjdk\registerJDK.cmd
 "%CMAKE%" -G "Visual Studio 17 2022" -A ARM64 -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID-NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_NDK%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
 set TARGET=main
 goto build
