@@ -1215,28 +1215,30 @@ if(ANDROID)
 		#################### Uninstall PACKAGE_NAME package ###################
 		
 		#################### Install apk to device ################
-		if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-			add_custom_command(
-				POST_BUILD
-				TARGET main
-				COMMAND ${CMAKE_COMMAND} -E echo "Installing app-debug.apk to device"
-				COMMAND cmd /c ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/app/build/outputs/apk/debug/app-debug.apk
-				COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing app-debug.apk to device")
-		else()
-			if(DEBUG)
+		if(NOT ANDROID_HOST)
+			if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 				add_custom_command(
 					POST_BUILD
 					TARGET main
 					COMMAND ${CMAKE_COMMAND} -E echo "Installing app-debug.apk to device"
-					COMMAND ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/Debug/app/build/outputs/apk/debug/app-debug.apk
+					COMMAND cmd /c ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/app/build/outputs/apk/debug/app-debug.apk
 					COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing app-debug.apk to device")
-			elseif(RELEASE)
-				add_custom_command(
-					POST_BUILD
-					TARGET main
-					COMMAND ${CMAKE_COMMAND} -E echo "Installing app-debug.apk to device"
-					COMMAND ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/Release/app/build/outputs/apk/debug/app-debug.apk
-					COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing app-debug.apk to device")
+			else()
+				if(DEBUG)
+					add_custom_command(
+						POST_BUILD
+						TARGET main
+						COMMAND ${CMAKE_COMMAND} -E echo "Installing app-debug.apk to device"
+						COMMAND ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/Debug/app/build/outputs/apk/debug/app-debug.apk
+						COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing app-debug.apk to device")
+				elseif(RELEASE)
+					add_custom_command(
+						POST_BUILD
+						TARGET main
+						COMMAND ${CMAKE_COMMAND} -E echo "Installing app-debug.apk to device"
+						COMMAND ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/Release/app/build/outputs/apk/debug/app-debug.apk
+						COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing app-debug.apk to device")
+				endif()
 			endif()
 		endif()
 	endif()
