@@ -52,6 +52,7 @@ ECHO 12) Exit
 set choice=
 set /p choice=Please select an app to build: 
 if not '%choice%'=='' set choice=%choice:~0,1%
+echo "choice = %choice%"
 if '%choice%'=='1' call:git_update & goto pickapp
 if '%choice%'=='2' call:git_commit & goto pickapp
 if '%choice%'=='3' set "APP=HelloWorld" & goto checkApp
@@ -62,7 +63,7 @@ if '%choice%'=='7' set "APP=DKSDL" & goto checkApp
 if '%choice%'=='8' set "APP=DKSDLRml" & goto checkApp
 if '%choice%'=='9' set "APP=DKDomTest" & goto checkApp
 if '%choice%'=='10' set "APP=DKTestAll" & goto checkApp
-if '%choice%'=='11' call:clear_screen & goto pickapp
+if '%choice%'==11 call:clear_screen & goto pickapp
 if '%choice%'=='12 call:end
 ECHO "%choice%" is not valid, try again
 
