@@ -47,19 +47,19 @@ set "TYPE="
 
 
 :pickapp
-ECHO.
-ECHO  1) Git Update
-ECHO  2) Git Commit
-ECHO  3) HelloWorld
-ECHO  4) DKCore
-ECHO  5) DKJavascript
-ECHO  6) DKBuilder
-ECHO  7) DKSDL
-ECHO  8) DKSDLRml
-ECHO  9) DKDomTest
-ECHO 10) DKTestAll
-ECHO 11) Clear Screen
-ECHO 12) Exit
+echo.
+echo  1) Git Update
+echo  2) Git Commit
+echo  3) HelloWorld
+echo  4) DKCore
+echo  5) DKJavascript
+echo  6) DKBuilder
+echo  7) DKSDL
+echo  8) DKSDLRml
+echo  9) DKDomTest
+echo 10) DKTestAll
+echo 11) Clear Screen
+echo 12) Exit
 set choice=
 set /p choice=Please select an app to build:
 if '%choice%'=='1' call:git_update & goto pickapp
@@ -75,14 +75,14 @@ if '%choice%'=='10' set "APP=DKTestAll" & goto checkApp
 if '%choice%'=='11' call:clear_screen & goto pickapp
 if '%choice%'=='12" call:end
 ::if not '%choice%'=='' set choice=%choice:~0,1%	::What does this do?
-ECHO "%choice%" is not valid, try again
+echo "%choice%" is not valid, try again
 goto pickapp
 
 
 
 :checkApp
 if NOT exist "%DKPATH%\DKApps\%APP%\DKMAKE.cmake" (
-	ECHO ERROR: %APP%/DKMAKE.cmake file not found
+	echo ERROR: %APP%/DKMAKE.cmake file not found
 	goto pickapp
 ) 
 goto pickos
@@ -124,16 +124,16 @@ goto pickos
 :: 30) Clear Screen
 :: 31) Go Back
 :: 32) Exit
-ECHO %APP%
-ECHO.
-ECHO 1) Windows 32
-ECHO 2) Windows 64
-ECHO 3) Android 32
-ECHO 4) Android 64
-ECHO 5) Emscripten
-ECHO 6) Clear Screen
-ECHO 7) Go Back
-ECHO 8) Exit
+echo %APP%
+echo.
+echo 1) Windows 32
+echo 2) Windows 64
+echo 3) Android 32
+echo 4) Android 64
+echo 5) Emscripten
+echo 6) Clear Screen
+echo 7) Go Back
+echo 8) Exit
 set choice=
 set /p choice=Please select an OS to build for: 
 if '%choice%'=='1' set "OS=win32" & goto type
@@ -145,20 +145,20 @@ if '%choice%'=='6' call:clear_screen & goto pickos
 if '%choice%'=='7' goto pickapp
 if '%choice%'=='8' call:end
 ::if not '%choice%'=='' set choice=%choice:~0,1%	::What does this do?
-ECHO "%choice%" is not valid, try again
+echo "%choice%" is not valid, try again
 goto pickos
 
 
 
 :type
-ECHO %APP% - %OS%
-ECHO.
-ECHO 1) Debug
-ECHO 2) Release
-ECHO 3) All
-ECHO 4) Clear Screen
-ECHO 5) Go Back
-ECHO 6) Exit
+echo %APP% - %OS%
+echo.
+echo 1) Debug
+echo 2) Release
+echo 3) All
+echo 4) Clear Screen
+echo 5) Go Back
+echo 6) Exit
 set choice=
 set /p choice=Please select a build type: 
 if '%choice%'=='1' set "TYPE=Debug" & goto generate
@@ -168,7 +168,7 @@ if '%choice%'=='4' call:clear_screen & goto type
 if '%choice%'=='5' goto pickos
 if '%choice%'=='6' call:end
 ::if not '%choice%'=='' set choice=%choice:~0,1%	::What does this do?
-ECHO "%choice%" is not valid, try again
+echo "%choice%" is not valid, try again
 goto type
 
 
@@ -186,7 +186,7 @@ call:delete_temp_files
 call::validate_cmake
 
 set "APP_PATH=%DKPATH%\DKApps\%APP%"
-ECHO APP_PATH = %APP_PATH%
+echo APP_PATH = %APP_PATH%
 call:make_directory "%APP_PATH%\%OS%"
 cd "%APP_PATH%\%OS%"
 
@@ -275,6 +275,7 @@ goto pickapp
 
 :: end()
 :end
+	echo "the end"
 	echo Done
 	exit
 goto:eof
