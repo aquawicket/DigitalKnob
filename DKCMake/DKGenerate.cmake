@@ -1090,30 +1090,32 @@ if(ANDROID)
 	######## Create local.properties file that points to android-sdk path #############
 	set(localProperties "sdk.dir=${ANDROID-SDK}")
 	
-	####### Import Android Build files ############################################
-	if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-		dk_copy(${DKPLUGINS}/_DKIMPORT/android/ ${DKPROJECT}/${OS}/)
-		dk_copy(${DKPLUGINS}/_DKIMPORT/${OS}/ ${DKPROJECT}/${OS}/)
-		dk_copy(${DKPROJECT}/assets ${DKPROJECT}/${OS}/app/src/main/assets OVERWRITE)
-		file(WRITE ${DKPROJECT}/${OS}/local.properties ${localProperties})
-		dkFileReplace(${DKPROJECT}/${OS}/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}")
-	else()
-		if(DEBUG)
-			dk_copy(${DKPLUGINS}/_DKIMPORT/android/ ${DKPROJECT}/${OS}/Debug)
-			dk_copy(${DKPLUGINS}/_DKIMPORT/${OS}/ ${DKPROJECT}/${OS}/Debug)
-			dk_copy(${DKPROJECT}/assets ${DKPROJECT}/${OS}/Debug/app/src/main/assets OVERWRITE)
-			file(WRITE ${DKPROJECT}/${OS}/Debug/local.properties ${localProperties})
-			dkFileReplace(${DKPROJECT}/${OS}/Debug/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}")
-			UNIX_HOST_dk_executeProcess(chmod 777 ${DKPROJECT}/${OS}/Debug/gradlew)
-		    UNIX_HOST_dk_executeProcess(sed -i -e "s/\r$//" "${DKPROJECT}/${OS}/Debug/gradlew")
-		elseif(RELEASE)
-			dk_copy(${DKPLUGINS}/_DKIMPORT/android/ ${DKPROJECT}/${OS}/Release)
-			dk_copy(${DKPLUGINS}/_DKIMPORT/${OS}/ ${DKPROJECT}/${OS}/Release)
-			dk_copy(${DKPROJECT}/assets ${DKPROJECT}/${OS}/Release/app/src/main/assets OVERWRITE)
-			file(WRITE ${DKPROJECT}/${OS}/Release/local.properties ${localProperties})
-			dkFileReplace(${DKPROJECT}/${OS}/Release/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}")
-			UNIX_HOST_dk_executeProcess(chmod 777 ${DKPROJECT}/${OS}/Release/gradlew)
-			UNIX_HOST_dk_executeProcess(sed -i -e "s/\r$//" "${DKPROJECT}/${OS}/Release/gradlew")
+	####### Import Android Gui Build files ############################################
+	if(NOT TERMUX_APP)
+		if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+			dk_copy(${DKPLUGINS}/_DKIMPORT/android/ ${DKPROJECT}/${OS}/)
+			dk_copy(${DKPLUGINS}/_DKIMPORT/${OS}/ ${DKPROJECT}/${OS}/)
+			dk_copy(${DKPROJECT}/assets ${DKPROJECT}/${OS}/app/src/main/assets OVERWRITE)
+			file(WRITE ${DKPROJECT}/${OS}/local.properties ${localProperties})
+			dkFileReplace(${DKPROJECT}/${OS}/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}")
+		else()
+			if(DEBUG)
+				dk_copy(${DKPLUGINS}/_DKIMPORT/android/ ${DKPROJECT}/${OS}/Debug)
+				dk_copy(${DKPLUGINS}/_DKIMPORT/${OS}/ ${DKPROJECT}/${OS}/Debug)
+				dk_copy(${DKPROJECT}/assets ${DKPROJECT}/${OS}/Debug/app/src/main/assets OVERWRITE)
+				file(WRITE ${DKPROJECT}/${OS}/Debug/local.properties ${localProperties})
+				dkFileReplace(${DKPROJECT}/${OS}/Debug/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}")
+				UNIX_HOST_dk_executeProcess(chmod 777 ${DKPROJECT}/${OS}/Debug/gradlew)
+				UNIX_HOST_dk_executeProcess(sed -i -e "s/\r$//" "${DKPROJECT}/${OS}/Debug/gradlew")
+			elseif(RELEASE)
+				dk_copy(${DKPLUGINS}/_DKIMPORT/android/ ${DKPROJECT}/${OS}/Release)
+				dk_copy(${DKPLUGINS}/_DKIMPORT/${OS}/ ${DKPROJECT}/${OS}/Release)
+				dk_copy(${DKPROJECT}/assets ${DKPROJECT}/${OS}/Release/app/src/main/assets OVERWRITE)
+				file(WRITE ${DKPROJECT}/${OS}/Release/local.properties ${localProperties})
+				dkFileReplace(${DKPROJECT}/${OS}/Release/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}")
+				UNIX_HOST_dk_executeProcess(chmod 777 ${DKPROJECT}/${OS}/Release/gradlew)
+				UNIX_HOST_dk_executeProcess(sed -i -e "s/\r$//" "${DKPROJECT}/${OS}/Release/gradlew")
+			endif()
 		endif()
 	endif()
 	
@@ -1209,31 +1211,31 @@ if(ANDROID)
 	#################### Uninstall PACKAGE_NAME package ###################
 	
 	#################### Install apk to device ###############
-if(NOT TERMUX_APP)
-if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-		add_custom_command(
-			POST_BUILD
-			TARGET main
-			COMMAND ${CMAKE_COMMAND} -E echo "Installing app-debug.apk to device"
-			COMMAND cmd /c ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/app/build/outputs/apk/debug/app-debug.apk
-			COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing app-debug.apk to device")
-	else()
-		if(DEBUG)
+	if(NOT TERMUX_APP)
+		if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 			add_custom_command(
 				POST_BUILD
 				TARGET main
 				COMMAND ${CMAKE_COMMAND} -E echo "Installing app-debug.apk to device"
-				COMMAND ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/Debug/app/build/outputs/apk/debug/app-debug.apk
+				COMMAND cmd /c ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/app/build/outputs/apk/debug/app-debug.apk
 				COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing app-debug.apk to device")
-		elseif(RELEASE)
-			add_custom_command(
-				POST_BUILD
-				TARGET main
-				COMMAND ${CMAKE_COMMAND} -E echo "Installing app-debug.apk to device"
-				COMMAND ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/Release/app/build/outputs/apk/debug/app-debug.apk
-				COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing app-debug.apk to device")
+		else()
+			if(DEBUG)
+				add_custom_command(
+					POST_BUILD
+					TARGET main
+					COMMAND ${CMAKE_COMMAND} -E echo "Installing app-debug.apk to device"
+					COMMAND ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/Debug/app/build/outputs/apk/debug/app-debug.apk
+					COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing app-debug.apk to device")
+			elseif(RELEASE)
+				add_custom_command(
+					POST_BUILD
+					TARGET main
+					COMMAND ${CMAKE_COMMAND} -E echo "Installing app-debug.apk to device"
+					COMMAND ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/Release/app/build/outputs/apk/debug/app-debug.apk
+					COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing app-debug.apk to device")
+			endif()
 		endif()
-	endif()
 	endif()
 endif()
 
