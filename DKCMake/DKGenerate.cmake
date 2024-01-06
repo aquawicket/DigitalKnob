@@ -1184,53 +1184,45 @@ if(ANDROID)
 	
 	####################### Gradle Build #####################
 	if(CMAKE_ANDROID_GUI)
-		if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+		if(DEBUG)
 			add_custom_command(
 				POST_BUILD
 				TARGET main
 				COMMAND ${CMAKE_COMMAND} -E echo "Building with Gradle"
-				COMMAND cmd /k ${DKPROJECT}/${OS}/gradlew --project-dir ${DKPROJECT}/${OS} --info clean build #--offline
+				COMMAND ${DKPROJECT}/${OS}/Debug/gradlew --project-dir ${DKPROJECT}/${OS}/Debug --info clean build #--offline
 				COMMAND ${CMAKE_COMMAND} -E echo "Finnished building with Gradle")
-		else() 
-			if(DEBUG)
-				add_custom_command(
-					POST_BUILD
-					TARGET main
-					COMMAND ${CMAKE_COMMAND} -E echo "Building with Gradle"
-					COMMAND ${DKPROJECT}/${OS}/Debug/gradlew --project-dir ${DKPROJECT}/${OS}/Debug --info clean build #--offline
-					COMMAND ${CMAKE_COMMAND} -E echo "Finnished building with Gradle")
-			elseif(RELEASE)
-				add_custom_command(
-					POST_BUILD
-					TARGET main
-					COMMAND ${CMAKE_COMMAND} -E echo "Building with Gradle"
-					COMMAND ${DKPROJECT}/${OS}/Release/gradlew --project-dir ${DKPROJECT}/${OS}/Release --info clean build #--offline
-					COMMAND ${CMAKE_COMMAND} -E echo "Finnished building with Gradle")
-			endif()
+		elseif(RELEASE)
+			add_custom_command(
+				POST_BUILD
+				TARGET main
+				COMMAND ${CMAKE_COMMAND} -E echo "Building with Gradle"
+				COMMAND ${DKPROJECT}/${OS}/Release/gradlew --project-dir ${DKPROJECT}/${OS}/Release --info clean build #--offline
+				COMMAND ${CMAKE_COMMAND} -E echo "Finnished building with Gradle")
 		endif()
+	endif()
 		
-		#################### List packages ####################################
-		#################### List packages matching PACKAGE_NAME ##############
-		#################### Uninstall PACKAGE_NAME package ###################
+	#################### List packages ####################################
+	#################### List packages matching PACKAGE_NAME ##############
+	#################### Uninstall PACKAGE_NAME package ###################
 		
-		#################### Install apk to device ################
-		if(NOT ANDROID_HOST)
-			if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-				set(CMD "cmd /c")
-			endif()
+	#################### Install apk to device ################
+	if(NOT ANDROID_HOST)
+		if(WIN_HOST)
+			set(CMD "cmd /c")
+		endif()
 				
-			add_custom_command(
-				POST_BUILD
-				TARGET main
-				COMMAND ${CMAKE_COMMAND} -E echo "Installing <app-debug.apk> to device"
-				COMMAND ${CMD} ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/Debug/app/build/outputs/apk/debug/app-debug.apk
-				COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing <app-debug.apk> to device")
-			add_custom_command(
-				POST_BUILD
-				TARGET main
-				COMMAND ${CMAKE_COMMAND} -E echo "Installing <app-release-unsigned.apk> to device"
-				COMMAND ${CMD} ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/Release/app/build/outputs/apk/release/app-release-unsigned.apk
-				COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing <app-release-unsigned.apk> to device")
+		add_custom_command(
+			POST_BUILD
+			TARGET main
+			COMMAND ${CMAKE_COMMAND} -E echo "Installing <app-debug.apk> to device"
+			COMMAND ${CMD} ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/Debug/app/build/outputs/apk/debug/app-debug.apk
+			COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing <app-debug.apk> to device")
+		add_custom_command(
+			POST_BUILD
+			TARGET main
+			COMMAND ${CMAKE_COMMAND} -E echo "Installing <app-release-unsigned.apk> to device"
+			COMMAND ${CMD} ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/Release/app/build/outputs/apk/release/app-release-unsigned.apk
+			COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing <app-release-unsigned.apk> to device")
 		endif()
 			
 	endif()
