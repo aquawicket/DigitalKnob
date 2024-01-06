@@ -285,6 +285,9 @@ while :
 				echo "$opt"
 				clear
 				;;
+			"Go Back")
+				echo "$opt"
+				;;
 			"Exit")
 				echo "$opt"
 				exit 0
@@ -332,17 +335,17 @@ while :
 	echo " "
 	PS3='Please select an OS to build for: '
 	if [[ "$MODEL" == "Raspberry"* ]]; then
-		options=("raspberry32" "android32" "android64" "emscripten" "Clear Screen" "Exit")
+		options=("raspberry32" "android32" "android64" "emscripten" "Clear Screen" "Go Back" "Exit")
 	elif [[ "$OSTYPE" == "linux-gnu"* ]] && [[ "$HOSTTYPE" == "x86_64"* ]]; then
-		options=("linux64" "android32" "android64" "emscripten" "Clear Screen" "Exit")
+		options=("linux64" "android32" "android64" "emscripten" "Clear Screen" "Go Back" "Exit")
 	elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
-		options=("linux32" "android32" "android64" "emscripten" "Clear Screen" "Exit")
+		options=("linux32" "android32" "android64" "emscripten" "Clear Screen" "Go Back" "Exit")
 	elif [[ "$OSTYPE" == "darwin"* ]] && [[ "$HOSTTYPE" == "x86_64"* ]]; then
-		options=("mac64" "ios32" "ios64" "iossim32" "iossim64" "android32" "android64" "emscripten" "Clear Screen" "Exit")
+		options=("mac64" "ios32" "ios64" "iossim32" "iossim64" "android32" "android64" "emscripten" "Clear Screen" "Go Back" "Exit")
 	elif [[ "$OSTYPE" == "linux-android" ]]; then
-		options=("android32" "android64" "Clear Screen" "Exit")
+		options=("android32" "android64" "Clear Screen" "Go Back" "Exit")
 	elif [[ "$OSTYPE" == "msys" ]]; then
-		options=("win32" "win64" "android32" "android64" "Clear Screen" "Exit")
+		options=("win32" "win64" "android32" "android64" "Clear Screen" "Go Back" "Exit")
 	else
 		echo "UNKNOWN OS TYPE ($OSTYPE)"
 		options=("Exit")
@@ -423,6 +426,9 @@ while :
 			"Clear Screen")
 				echo "$opt"
 				clear
+				;;
+			"Go Back")
+				echo "$opt"
 				;;
 			"Exit")
 				echo "$opt"
