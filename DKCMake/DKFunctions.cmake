@@ -756,13 +756,11 @@ macro(dk_wait)
 	
 	if(WIN_HOST)	
 		execute_process(COMMAND cmd /c echo ${msg} ${timeout_str} > nul WORKING_DIRECTORY C:/)
-		return()
-	endif()
-	if(UNIX_HOST)
+	elseif(UNIX_HOST)
 		execute_process(COMMAND bash -c "read -n 1 -s -r -p \"${msg}\"" OUTPUT_VARIABLE outVar)
-		return()
+	else()
+		dk_error("dk_wait(): Not implemented for this platform")
 	endif()
-	dk_error("Not implemented for this platform")
 endmacro()
 
 

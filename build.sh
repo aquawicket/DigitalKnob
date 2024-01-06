@@ -68,7 +68,7 @@ install() {
 	elif command_exists brew; then
 		$SUDO brew install $1
 	elif command_exists apt; then
-		$SUDO apt -y install $1f
+		$SUDO apt -y install $1
 	elif command_exists apt-get; then
 		$SUDO apt-get -y install $1
 	elif command_exists pkg; then
