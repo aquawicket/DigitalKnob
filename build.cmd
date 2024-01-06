@@ -357,7 +357,7 @@ goto:eof
 
 :: validate_emscripten()
 :validate_emscripten
-	call:assert "validate_emscripten() no implemented"
+	call:assert "validate_emscripten() not implemented"
 goto:eof
 
 :: clear_cmake_cache()
