@@ -552,9 +552,11 @@ while :
 	
 	echo cmake_string = $cmake_string
 	
-		
+	###########################################	
 	############  GENERATE PROJECT ############ 
-	echo Generating OS=$OS APP=$APP TYPE=$TYPE LEVEL=$LEVEL
+	###########################################
+	echo ""
+	echo ****** Generating $APP - $OS - $TYPE - $LEVEL ******
 	
 	mkdir -p $DKPATH/DKApps/$APP/$OS
 	cd /
@@ -700,8 +702,13 @@ while :
 		TARGET=${APP}_APP
 	fi
 	
+	echo ""
+	echo ###########################################	
+	echo ##############  BUILD PROJECT  ############ 
+	echo ###########################################
+	echo ""
+	echo ****** Building $APP - $OS - $TYPE - $LEVEL ******
 	
-	############  BUILD PROJECT ############ 
 	if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
 		if file_exists $DKPATH/DKApps/$APP/$OS/Debug/CMakeCache.txt; then
 			cmake --build $DKPATH/DKApps/$APP/$OS/Debug --target ${TARGET} --config Debug

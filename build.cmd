@@ -163,11 +163,15 @@ goto type
 
 
 :generate
+::###########################################	
+::############  GENERATE PROJECT ############ 
+::###########################################
+echo ""
+echo ****** Generating %APP% - %OS% - %TYPE% - %LEVEL% ******
+
 call:clear_cmake_cache
 call:delete_temp_files
 call::validate_cmake
-
-echo ****** BUILDING %APP% - %OS% - %TYPE% ******
 
 set "APP_PATH=%DKPATH%\DKApps\%APP%"
 ECHO APP_PATH = %APP_PATH%
@@ -204,7 +208,7 @@ goto build
 :generate_android64
 call:validate_android_ndk
 ::call:validate_openjdk
-call %DKPATH%\3rdParty\_DKIMPORTS\openjdk\registerJDK.cmd
+::call %DKPATH%\3rdParty\_DKIMPORTS\openjdk\registerJDK.cmd
 "%CMAKE%" -G "Visual Studio 17 2022" -A ARM64 -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID-NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_NDK%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
 set TARGET=main
 goto build
@@ -217,6 +221,13 @@ set EMSDK_TOOLCHAIN_FILE=%EMSDK%/upstream/emscripten/cmake/Modules/Platform/Emsc
 call:assert "emscriten incomplete"
 
 :build
+echo ""
+echo ###########################################	
+echo ##############  BUILD PROJECT  ############
+echo ###########################################
+echo ""
+echo ****** Building %APP% - %OS% - %TYPE% - %LEVEL% ******
+
 echo TYPE = %TYPE%
 if %TYPE%==Debug goto build_debug
 if %TYPE%==Release goto build_release
@@ -224,6 +235,7 @@ if %TYPE%==All goto build_all
 call:assert "TYPE not set"
 
 :build_debug
+echo "Building %APP_PATH% for %OS%"
 "%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Debug
 goto end_message
 
