@@ -4,9 +4,9 @@
 
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
 
-::--------------------------------------------------------
-:: GLOBAL USER VARIABLES
-::--------------------------------------------------------
+::#################################
+::#		Global variablee
+::#################################
 set "WGET_DL=https://eternallybored.org/misc/wget/1.21.4/32/wget.exe"
 set "GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.30.1.windows.1/Git-2.30.1-32-bit.exe"
 set "GIT_USER_EMAIL=aquawicket@hotmail.com"
@@ -17,10 +17,12 @@ set "ANDROID_API=31"
 set "ANDROID_NDK_BUILD=23.1.7779620"
 set "ANDROID_NDK_DL=https://dl.google.com/android/repository/android-ndk-r23b-windows.zip"
 
-
 call:main
 
 
+::#################################
+::#		Functions
+::#################################
 
 ::###### pickapp ######
 :pickapp
@@ -39,6 +41,8 @@ call:main
 	echo 12) Exit
 	set choice=
 	set /p choice=Please select an app to build:
+	:: make sure choice is cleared
+	:: if not '%choice%'=='' set choice=%choice:~0,1%	
 	if '%choice%'=='1' call:git_update & goto pickapp
 	if '%choice%'=='2' call:git_commit & goto pickapp
 	if '%choice%'=='3' set "APP=HelloWorld" & goto:eof
@@ -51,7 +55,6 @@ call:main
 	if '%choice%'=='10' set "APP=DKTestAll" & goto:eof
 	if '%choice%'=='11' call:clear_screen & goto:eof
 	if '%choice%'=='12" call:end
-	::if not '%choice%'=='' set choice=%choice:~0,1%	::What does this do?
 	echo "%choice%" is not valid, try again
 	goto pickapp
 goto:eof
@@ -122,7 +125,6 @@ goto:eof
 	if '%choice%'=='6' call:clear_screen & goto pickos
 	if '%choice%'=='7' goto pickapp
 	if '%choice%'=='8' call:end
-	::if not '%choice%'=='' set choice=%choice:~0,1%	::What does this do?
 	echo "%choice%" is not valid, try again
 	goto pickos
 goto:eof 
@@ -146,7 +148,6 @@ goto:eof
 	if '%choice%'=='4' call:clear_screen & goto type
 	if '%choice%'=='5' goto pickos
 	if '%choice%'=='6' call:end
-	::if not '%choice%'=='' set choice=%choice:~0,1%	::What does this do?
 	echo "%choice%" is not valid, try again
 	goto type
 goto:eof 
@@ -533,10 +534,13 @@ goto:eof
 goto:eof
 
 
+
+::#################################
+::#		    Main
+::#################################
+
 ::###### main ######
 :main
-	echo "###### main ######"
-	
 	set "DIGITALKNOB=C:\Users\%USERNAME%\digitalknob"
 	call:make_directory "%DIGITALKNOB%"
 	set "DKDOWNLOAD=%DIGITALKNOB%\download"
@@ -545,7 +549,6 @@ goto:eof
 	call:validate_wget
 	call:validate_git
 	call:validate_branch
-
 
 	set "APP="
 	set "OS="
