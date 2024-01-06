@@ -1202,14 +1202,13 @@ if(ANDROID)
 					COMMAND ${CMAKE_COMMAND} -E echo "Finnished building with Gradle")
 			endif()
 		endif()
-	endif()
-	
-	#################### List packages ####################################
-	#################### List packages matching PACKAGE_NAME ##############
-	#################### Uninstall PACKAGE_NAME package ###################
-	
-	#################### Install apk to device ###############
-	if(CMAKE_ANDROID_GUI)
+		
+		#################### List packages ####################################
+		#################### List packages matching PACKAGE_NAME ##############
+		#################### Uninstall PACKAGE_NAME package ###################
+		
+		#################### Install apk to device ###############
+
 		if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 			add_custom_command(
 				POST_BUILD
