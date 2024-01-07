@@ -38,7 +38,7 @@ set(red          "${ESC}[31m") # error
 set(green        "${ESC}[32m")
 set(yellow       "${ESC}[33m") # warn
 set(blue         "${ESC}[34m") # debug
-set(magenta      "${ESC}[35m") 
+set(magenta      "${ESC}[35m") # command
 set(cyan         "${ESC}[36m") 
 set(white        "${ESC}[37m") # info
 

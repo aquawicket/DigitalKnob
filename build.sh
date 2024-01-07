@@ -4,6 +4,32 @@
 
 # to run this script requires privledges, use $ chmod 777 build.sh
 
+###### global variables ######
+true=0
+false=1
+
+###### color variables ######
+CLR="\033[0m"
+black="100m"
+red="\033[31m"
+green="\033[32m"
+yellow="\033[33m"
+blue="\033[34m"
+magenta="\033[35m"
+cyan="\033[36m"
+white="\033[37m"
+
+
+###### call <command args> ######
+call() {
+	echo -e "${magenta} $ $@ ${CLR}"
+	"$@"
+}
+
+### error <string> ###
+function error() {
+	echo -e "${red} ERROR: $1 ${red}"
+}
 
 
 ###### validate_branch ######
@@ -20,51 +46,93 @@ validate_branch() {
 }
 validate_branch
 
+
 ###### command_exists <command> ######
 command_exists() {
 	command -v "$1" >/dev/null 2>&1
 }
+
 
 ###### file_exists <file> ######
 file_exists() {
 	[ -e $1 ]
 }
 
+###### package_installed <package> ######
+package_installed() {
+	if command_exists brew; then
+		call $SUDO brew install $1
+	elif command_exists apt; then
+		call $SUDO apt -y install $1
+	elif command_exists apt-get; then
+		call $SUDO apt-get -y install $1
+	elif command_exists pkg; then
+		call $SUDO pkg install $1
+	elif command_exists pacman; then
+		if pacman -Qs $1 > /dev/null; then
+			return $true;
+		fi
+	elif command_exists tce-load; then
+		call tce-load -wi $1
+	else
+		error "ERROR: no package managers found"
+	fi
+	return $false
+}
+
+# Test package_installed
+if package_installed git; then
+	echo "git is already installed"
+else
+	echo "git is not installed"
+fi
+if package_installed digitalknob; then
+	echo "digitalknob is already installed"
+else
+	echo "digitalknob is not installed"
+fi
+
 ###### install <package> ######
 install() {
+	if package_installed $1; then
+		echo "$1 already installed"
+		return $false;
+	fi
+	
 	echo "installing $1"
 	### MSYS2 Environments ###
 	if [[ "$MSYSTEM" == "CLANG32" ]]; then
-		pacman -S mingw-w64-clang-i686-$1 --noconfirm
+		call pacman -S mingw-w64-clang-i686-$1 --noconfirm
 	elif [[ "$MSYSTEM" == "CLANG64" ]]; then
-		pacman -S mingw-w64-clang-x86_64-$1 --noconfirm
+		call pacman -S mingw-w64-clang-x86_64-$1 --noconfirm
 	elif [[ "$MSYSTEM" == "CLANGARM64" ]]; then
-		pacman -S mingw-w64-clang-aarch64-$1 --noconfirm
+		call pacman -S mingw-w64-clang-aarch64-$1 --noconfirm
 	elif [[ "$MSYSTEM" == "MINGW32" ]]; then
-		pacman -S mingw-w64-i686-$1 --noconfirm
+		call pacman -S mingw-w64-i686-$1 --noconfirm
 	elif [[ "$MSYSTEM" == "MINGW64" ]]; then
-		pacman -S mingw-w64-x86_64-$1 --noconfirm
+		call pacman -S mingw-w64-x86_64-$1 --noconfirm
 	elif [[ "$MSYSTEM" == "MSYS" ]]; then
-		pacman -S $1 --noconfirm
+		call pacman -S $1 --noconfirm
 	elif [[ "$MSYSTEM" == "UCRT64" ]]; then
-		pacman -S mingw-w64-ucrt-x86_64-$1 --noconfirm
+		call pacman -S mingw-w64-ucrt-x86_64-$1 --noconfirm
 	###########################
 	elif command_exists brew; then
-		$SUDO brew install $1
+		call $SUDO brew install $1
 	elif command_exists apt; then
-		$SUDO apt -y install $1
+		call $SUDO apt -y install $1
 	elif command_exists apt-get; then
-		$SUDO apt-get -y install $1
+		call $SUDO apt-get -y install $1
 	elif command_exists pkg; then
-		$SUDO pkg install $1
+		call $SUDO pkg install $1
 	elif command_exists pacman; then
-		$SUDO pacman -S $1 --noconfirm
+		call $SUDO pacman -S $1 --noconfirm
 	elif command_exists tce-load; then
-		tce-load -wi $1
+		call tce-load -wi $1
 	else
-		echo "ERROR: no package managers found"
+		error "ERROR: no package managers found"
 	fi
 }
+
 
 ###### validate_package <command> <package> ######
 validate_package() {
@@ -73,6 +141,7 @@ validate_package() {
 	fi
 }
 
+
 ###### clear_cmake_cache ######
 clear_cmake_cache() {
 	echo "Clearing CMake cache . . ."
@@ -80,6 +149,7 @@ clear_cmake_cache() {
 	find . -name "CMakeCache.*" -delete
 	rm -rf `find . -type d -name CMakeFiles`
 }
+
 
 ###### delete_temp_files ######
 delete_temp_files() {
@@ -90,6 +160,7 @@ delete_temp_files() {
 	find . -name "*.tmp" -delete
 	find . -name "*.TMP" -delete
 }
+
 
 ###### validate_ostype ######
 validate_ostype() {
@@ -112,10 +183,11 @@ validate_ostype() {
 	elif [[ "$OSTYPE" == "linux-android" ]]; then
 		DIGITALKNOB="/data/data/com.termux/files/home/digitalknob"
 	else
-		echo "UNKNOWN OS ($OSTYPE)"
+		error "UNKNOWN OS ($OSTYPE)"
 	fi
 }
 validate_ostype
+
 
 # validata sudo
 if command_exists sudo; then
@@ -189,14 +261,14 @@ while :
 					# brew install git
 				else
 					if [ -n "$MSYSTEM" ]; then
-						pacman -S git --noconfirm
+						call pacman -S git --noconfirm
 					else
 						validate_package git git
 					fi
 				fi
 				
 				if [[ ! -d "$DKPATH/.git" ]]; then
-					git clone https://github.com/aquawicket/DigitalKnob.git $DKPATH
+					call git clone https://github.com/aquawicket/DigitalKnob.git $DKPATH
 				fi
 				cd $DKPATH
 				git pull --all
@@ -473,7 +545,7 @@ while :
 		
 	validate_package which which
 	if [[ -n "$MSYSTEM" ]]; then
-		pacman -S git --noconfirm
+		call pacman -S git --noconfirm
 	else
 		validate_package git git
 	fi
@@ -587,11 +659,11 @@ while :
 		#	ANDROID_TOOLCHAIN=$ANDROID_NDK/build/cmake/android.toolchain.cmake
 		#fi
 		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-	     	cmake -G "Unix Makefiles" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=$ANDROID_API -DANDROID-NDK=$ANDROID_NDK -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+	     	call cmake -G "Unix Makefiles" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=$ANDROID_API -DANDROID-NDK=$ANDROID_NDK -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
 	     	TARGET="main"
 	    fi
 	    if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-	     	cmake -G "Unix Makefiles" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=$ANDROID_API -DANDROID-NDK=$ANDROID_NDK -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release 
+	     	call cmake -G "Unix Makefiles" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=$ANDROID_API -DANDROID-NDK=$ANDROID_NDK -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release 
 	     	TARGET="main"
 	    fi
 	fi
@@ -607,11 +679,11 @@ while :
 		#	ANDROID_TOOLCHAIN=$ANDROID_NDK/build/cmake/android.toolchain.cmake
 		#fi
 		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-		    cmake -G "Unix Makefiles" -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=$ANDROID_API -DANDROID-NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_TOOLCHAIN -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+		    call cmake -G "Unix Makefiles" -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=$ANDROID_API -DANDROID-NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_TOOLCHAIN -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
 	    	TARGET="main"
 	    fi
     	if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-		    cmake -G "Unix Makefiles" -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=$ANDROID_API -DANDROID-NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_TOOLCHAIN -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
+		    call cmake -G "Unix Makefiles" -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=$ANDROID_API -DANDROID-NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_TOOLCHAIN -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
 	    	TARGET="main"
 	    fi
 	fi
@@ -619,38 +691,38 @@ while :
 		echo -e "emscripten incomplete...\n"
 	fi
 	if [[ "$OS" == "ios32" ]]; then
-		cmake -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake -DPLATFORM=OS -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
+		call cmake -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake -DPLATFORM=OS -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
 	fi
 	if [[ "$OS" == "ios64" ]]; then
-		cmake -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake -DPLATFORM=OS64 -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
+		call cmake -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake -DPLATFORM=OS64 -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
 	fi
 	if [[ "$OS" == "iossim32" ]]; then
-		cmake -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake -DPLATFORM=SIMULATOR -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
+		call cmake -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake -DPLATFORM=SIMULATOR -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
 	fi
 	if [[ "$OS" == "iossim64" ]]; then
-		cmake -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake -DPLATFORM=SIMULATOR64 -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
+		call cmake -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake -DPLATFORM=SIMULATOR64 -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
 	fi
 	if [[ "$OS" == "linux32" ]]; then
-		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
+		call cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
 		TARGET=${APP}_APP
 	fi
 	if [[ "$OS" == "linux64" ]]; then
-		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
+		call cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
 		TARGET=${APP}_APP
 	fi
 	if [[ "$OS" == "mac32" ]]; then
-		cmake -G "Xcode" -DMAC_32=ON -DCMAKE_OSX_ARCHITECTURES=i686 $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
+		call cmake -G "Xcode" -DMAC_32=ON -DCMAKE_OSX_ARCHITECTURES=i686 $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
 	fi
 	if [[ "$OS" == "mac64" ]]; then
-		cmake -G "Xcode" -DMAC_64=ON -DCMAKE_OSX_ARCHITECTURES=x86_64 $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
+		call cmake -G "Xcode" -DMAC_64=ON -DCMAKE_OSX_ARCHITECTURES=x86_64 $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
 		TARGET=${APP}_APP
 	fi
 	if [[ "$OS" == "raspberry32" ]]; then
-		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
+		call cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
 		TARGET=${APP}_APP
 	fi
 	if [[ "$OS" == "raspberry64" ]]; then
-		cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
+		call cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
 		TARGET=${APP}_APP
 	fi
 	if [[ "$OS" == "win32" ]]; then
@@ -681,18 +753,16 @@ while :
 		#set PATH=%PATH%;${MSYS2}/mingw64/bin
 		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
 			if [[ -n "$MSYSTEM" ]]; then
-				echo "cmake -G "MinGW Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug"
-				cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
-				#cmake -G "MinGW Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+				call cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
 			else
-				cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+				call cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
 			fi
 		fi
 		if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
 			if [[ -n "$MSYSTEM" ]]; then
-				cmake -G "MinGW Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
+				call cmake -G "MinGW Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
 			else
-				cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
+				call cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
 			fi
 		fi
 		TARGET=${APP}_APP
@@ -706,16 +776,16 @@ while :
 	
 	if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
 		if file_exists $DKPATH/DKApps/$APP/$OS/Debug/CMakeCache.txt; then
-			cmake --build $DKPATH/DKApps/$APP/$OS/Debug --target ${TARGET} --config Debug
+			call cmake --build $DKPATH/DKApps/$APP/$OS/Debug --target ${TARGET} --config Debug
 		else
-			cmake --build $DKPATH/DKApps/$APP/$OS --target ${TARGET} --config Debug
+			call cmake --build $DKPATH/DKApps/$APP/$OS --target ${TARGET} --config Debug
 		fi
 	fi
 	if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
 		if file_exists $DKPATH/DKApps/$APP/$OS/Release/CMakeCache.txt; then
-			cmake --build $DKPATH/DKApps/$APP/$OS/Release --target ${TARGET} --config Release
+			call cmake --build $DKPATH/DKApps/$APP/$OS/Release --target ${TARGET} --config Release
 		else
-			cmake --build $DKPATH/DKApps/$APP/$OS --target ${TARGET} --config Release
+			call cmake --build $DKPATH/DKApps/$APP/$OS --target ${TARGET} --config Release
 		fi
 	fi
 	
