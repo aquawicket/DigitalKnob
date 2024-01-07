@@ -6,13 +6,6 @@
 
 
 
-### get_variables ######
-get_variables() {
-	echo "get_variables()"
-}
-get_variables
-
-
 ###### validate_branch ######
 validate_branch() {
 	# If the current folder matches the current branch set DKBRANCH, default to Development
@@ -131,6 +124,7 @@ fi
 
 DKPATH="$DIGITALKNOB/$DKBRANCH"
 DKCMAKE="$DIGITALKNOB/$DKBRANCH/DKCMake"
+#MSYS2="$DKPATH/3rdParty/msys2-x86_64-20221216"
 
 echo ""
 echo "HOSTNAME = $HOSTNAME"
@@ -142,6 +136,7 @@ echo "USER = $USER"
 echo "USERNAME = $USERNAME"
 echo "DIGITALKNOB = $DIGITALKNOB"
 echo "DKPATH = $DKPATH"
+#echo "MSYS2 = $MSYS2"
 echo "DKCMAKE = $DKCMAKE"
 
 ##### MSYS2 Environments ($MSYSTEM)	################################################
@@ -482,8 +477,15 @@ while :
 	else
 		validate_package git git
 	fi
-
-	if [[ "$OSTYPE" == "linux-gnu"* ]] || [[ $MSYSTEM == "MINGW32" ]] || [[ $MSYSTEM == "MINGW32" ]] || [[ $MSYSTEM == "MSYS" ]] || [[ $MSYSTEM == "UCRT64" ]]; then
+	
+	#if [[ $MSYSTEM == "MINGW64" ]]; then
+	#	echo $PATH
+	#	export PATH=$PATH:$MSYS2/usr/bin
+	#	export PATH=$PATH:$MSYS2/mingw64/bin
+	#	echo $PATH
+	#fi
+	
+	if [[ "$OSTYPE" == "linux-gnu"* ]] || [[ $MSYSTEM == "MINGW32" ]] || [[ $MSYSTEM == "MINGW64" ]] || [[ $MSYSTEM == "MSYS" ]] || [[ $MSYSTEM == "UCRT64" ]]; then
 		validate_package gcc toolchain
 		GCC_PATH=$(which gcc)
 		GPP_PATH=$(which g++)
@@ -505,7 +507,6 @@ while :
 	fi
 	
 	validate_package cmake_reinstall cmake
-	
 	
 	LEVEL="RebuildAll"
 	LINK="Static"
@@ -533,10 +534,11 @@ while :
 	if [[ $LINK == "Shared" ]]; then
 		cmake_string+="-DSHARED=ON "
 	fi
+	
 	#cmake_string = cmake_string.replace("  "," ")
 	#const app_path = DKBuild_FindAppPath(APP)
-	
-	#cmake_string+="-DCMAKE_C_COMPILER=\"$GCC_PATH\""
+	#cmake_string+="-DCMAKE_C_COMPILER=$GCC_PATH "
+	#cmake_string+="-DCMAKE_CXX_COMPILER=$GPP_PATH "
 	
 	echo cmake_string = $cmake_string
 	
@@ -545,11 +547,10 @@ while :
 	
 	
 	echo ""
-	echo ###########################################	
-	echo ############  GENERATE PROJECT ############ 
-	echo ###########################################
+	echo "##################################################################"
+	echo "****** Generating $APP - $OS - $TYPE - $LEVEL ******"
+	echo "##################################################################"
 	echo ""
-	echo ****** Generating $APP - $OS - $TYPE - $LEVEL ******
 	
 	mkdir -p $DKPATH/DKApps/$APP/$OS
 	cd /
@@ -680,7 +681,9 @@ while :
 		#set PATH=%PATH%;${MSYS2}/mingw64/bin
 		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
 			if [[ -n "$MSYSTEM" ]]; then
-				cmake -G "MinGW Makefiles" $cmake_string -DBUILD_SHARED_LIBS=OFF -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+				echo "cmake -G "MinGW Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug"
+				cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+				#cmake -G "MinGW Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
 			else
 				cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
 			fi
@@ -696,11 +699,10 @@ while :
 	fi
 	
 	echo ""
-	echo ###########################################	
-	echo ##############  BUILD PROJECT  ############ 
-	echo ###########################################
+	echo "##################################################################"
+	echo "****** Building $APP - $OS - $TYPE - $LEVEL ******"
+	echo "##################################################################"
 	echo ""
-	echo ****** Building $APP - $OS - $TYPE - $LEVEL ******
 	
 	if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
 		if file_exists $DKPATH/DKApps/$APP/$OS/Debug/CMakeCache.txt; then
