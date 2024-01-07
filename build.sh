@@ -65,6 +65,11 @@ file_exists() {
 
 ###### package_installed <package> ######
 package_installed() {
+	if command_exists dpkg-query; then
+		if $(dpkg-query -W -f='${Status}' nano 2>/dev/null | grep -c "ok installed"); then
+			return $true
+		fi
+	fi
 	if command_exists brew; then
 		call $SUDO brew install $1
 	elif command_exists apt; then
