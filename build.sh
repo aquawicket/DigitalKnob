@@ -68,7 +68,9 @@ package_installed() {
 	if command_exists brew; then
 		call $SUDO brew install $1
 	elif command_exists apt; then
-		call $SUDO apt -y install $1
+		if apt list $1 --installed; then
+			return $true
+		fi
 	elif command_exists apt-get; then
 		call $SUDO apt-get -y install $1
 	elif command_exists pkg; then
