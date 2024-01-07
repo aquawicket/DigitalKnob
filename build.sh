@@ -4,50 +4,6 @@
 
 # to run this script requires privledges, use $ chmod 777 build.sh
 
-if false; then
-#######################
-#call:main
-#goto:eof
-
-func1() {
-	echo "func1()"
-	func3
-}
-
-func2() {
-	echo "func2()"
-	func1
-}
-
-func3() {
-	echo "func3()"
-}
-
-main() {
-	echo "main()"
-	func2
-}
-
-main
-exit
-#########################
-fi
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ### get_variables ######
@@ -241,7 +197,6 @@ while :
 						pacman -S git --noconfirm
 					else
 						validate_package git git
-						git config --global core.autocrlf input
 					fi
 				fi
 				
@@ -272,7 +227,6 @@ while :
 					# brew install git
 				else
 					validate_package git git
-					git config --global core.autocrlf input
 				fi
 				cd $DKPATH
 				git commit -a -m "git commit"
@@ -527,21 +481,17 @@ while :
 		pacman -S git --noconfirm
 	else
 		validate_package git git
-		git config --global core.autocrlf input
 	fi
 
-	if [[ $MSYSTEM == "MINGW32" ]] || [[ $MSYSTEM == "MINGW32" ]] || [[ $MSYSTEM == "MSYS" ]] || [[ $MSYSTEM == "UCRT64" ]]; then
+	if [[ "$OSTYPE" == "linux-gnu"* ]] || [[ $MSYSTEM == "MINGW32" ]] || [[ $MSYSTEM == "MINGW32" ]] || [[ $MSYSTEM == "MSYS" ]] || [[ $MSYSTEM == "UCRT64" ]]; then
 		validate_package gcc toolchain
-	fi
-	
-	if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 		GCC_PATH=$(which gcc)
 		GPP_PATH=$(which g++)
 		export CC="$GCC_PATH"
 		export CXX="$GPP_PATH"
 		echo "GCC_PATH = $GCC_PATH"
 		echo "GPP_PATH = $GPP_PATH"
-	fi
+	#fi
 
 	
 	if [[ $MSYSTEM == "CLANG32" ]] || [[ $MSYSTEM == "CLANG64" ]] || [[ $MSYSTEM == "CLANGARM64" ]]; then
