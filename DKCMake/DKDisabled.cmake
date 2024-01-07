@@ -68,7 +68,7 @@ dk_disable(DKOsgVideo)			# requires openscenegraph
 dk_disable(DKOsgViewer)			# requires openscenegraph 
 dk_disable(DKOsgWidget)			# requires openscenegraph 
 dk_disable(DKOsgWindow)			# requires openscenegraph 
-dk_disable(DKSdlOsg)			# requires openscenegraph, sdl
+dk_disable(DKSDLOsg)			# requires openscenegraph, sdl
 
 # OpenFrameworks (disabled)
 dk_disable(DKOfWindow)
@@ -102,9 +102,9 @@ if(ANDROID)
 	dk_disable(DKMidi)				# requires rtmidi
 	dk_disable(DKMySql)				# requires curl			
 	dk_disable(DKOcr)				# requires tesseract
-	dk_disable(DKSdlCef)			# requires cef_binary
-	dk_disable(DKSdlWaave)			# requires waave
-	dk_disable(DKSdlWav)			# build errors
+	dk_disable(DKSDLCef)			# requires cef_binary
+	dk_disable(DKSDLWaave)			# requires waave
+	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKScreenRecorder)	# requires opencv
 	dk_disable(DKThread)			# requires threadpool
 	dk_disable(DKTorrent)			# requires libtorrent
@@ -187,11 +187,11 @@ if(EMSCRIPTEN)
 	dk_disable(DKMySql)
 	dk_disable(DKOcr)
 	dk_disable(DKRestart)
-	dk_disable(DKSdlAudio)
-	dk_disable(DKSdlCef)
-	dk_disable(DKSdlMetalWindow)
-	dk_disable(DKSdlWaave)			# requires waave
-	dk_disable(DKSdlWav)
+	dk_disable(DKSDLAudio)
+	dk_disable(DKSDLCef)
+	dk_disable(DKSDLMetalWindow)
+	dk_disable(DKSDLWaave)			# requires waave
+	dk_disable(DKSDLWav)
 	dk_disable(DKScreenRecorder)
 	dk_disable(DKThread)
 	dk_disable(DKTorrent)
@@ -277,9 +277,9 @@ if(IOS OR IOSSIM)
 	dk_disable(DKJerryscript)		# requires jerryscript
 	dk_disable(DKMidi)				# requires rtmidi
 	dk_disable(DKOcr)				# requires tesseract
-	dk_disable(DKSdlCef)			# requires cef_binary
-	dk_disable(DKSdlWaave)			# requires waave
-	dk_disable(DKSdlWav)			# build errors
+	dk_disable(DKSDLCef)			# requires cef_binary
+	dk_disable(DKSDLWaave)			# requires waave
+	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKScreenRecorder)	# requires opencv
 	dk_disable(DKThread)			# requires threadpool
 	dk_disable(DKTorrent)			# requires libtorrent
@@ -349,8 +349,8 @@ if(LINUX)
 	dk_disable(DKHook)				# 'read' was not declared in this scope
 	dk_disable(DKJerryscript)		# requires jerryscript
 	dk_disable(DKOcr)				# requires tesseract
-	dk_disable(DKSdlWaave)			# requires waave
-	dk_disable(DKSdlWav)			# build errors
+	dk_disable(DKSDLWaave)			# requires waave
+	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKScreenRecorder)
 	dk_disable(DKThread)			# error: need to implement boost::placeholders
 	dk_disable(DKTorrent)			# requires libtorrent
@@ -388,8 +388,8 @@ endif(LINUX)
 # Disabled for Mac targets
 if(MAC) 
 	dk_disable(DKOcr)				# requires tesseract
-	dk_disable(DKSdlWaave)			# requires waave
-	dk_disable(DKSdlWav)			# build errors
+	dk_disable(DKSDLWaave)			# requires waave
+	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKScreenRecorder)
 	dk_disable(DKThread)			# Error: 'boost/thread/xtime.hpp:24 expected identifier TIME_UTC_=1
 	dk_disable(DKTorrent)			# requires libtorrent
@@ -428,8 +428,8 @@ if(RASPBERRY)
 	dk_disable(DKJerryscript)		# requires jerryscript
 	dk_disable(DKMidi)				# requires rtmidi
 	dk_disable(DKOcr)				# requires tesseract
-	dk_disable(DKSdlWaave)			# requires waave
-	dk_disable(DKSdlWav)			# build errors
+	dk_disable(DKSDLWaave)			# requires waave
+	dk_disable(DKSDLWav)			# build errors
 	dk_disable(DKScreenRecorder)	# requires opencv
 	dk_disable(DKThread)			# requires threadpool
 	dk_disable(DKTorrent)			# requires libtorrent
@@ -492,9 +492,9 @@ if(WIN)
 	dk_disable(boost)				# error: cl command not found
 	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKScreenRecorder)    # requires opencv
-	dk_disable(DKSdlVideo)			# error: 'av_mallocz_array': identifier not found
-	dk_disable(DKSdlWaave)			# requires waave
-	dk_disable(DKSdlWav)			# build errorsE
+	dk_disable(DKSDLVideo)			# error: 'av_mallocz_array': identifier not found
+	dk_disable(DKSDLWaave)			# requires waave
+	dk_disable(DKSDLWav)			# build errorsE
 	dk_disable(DKThread)			# build errors
 	dk_disable(DKTorrent)			# requires libtorrent
 	dk_disable(DKUpdate)			# build errors

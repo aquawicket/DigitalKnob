@@ -10,8 +10,8 @@ endif()
 if(HAVE_DKCef)
 	dk_depend(DKCef)
 endif()
-if(HAVE_DKSdlRmlDocument)
-	dk_depend(DKSdlRmlDocument)	# LINUX FIX:
+if(HAVE_DKSDLRmlDocument)
+	dk_depend(DKSDLRmlDocument)	# LINUX FIX:
 endif()
 
 dk_generateCmake(DKRmlInterface)
