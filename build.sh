@@ -491,7 +491,7 @@ while :
 		export CXX="$GPP_PATH"
 		echo "GCC_PATH = $GCC_PATH"
 		echo "GPP_PATH = $GPP_PATH"
-	#fi
+	fi
 
 	
 	if [[ $MSYSTEM == "CLANG32" ]] || [[ $MSYSTEM == "CLANG64" ]] || [[ $MSYSTEM == "CLANGARM64" ]]; then
