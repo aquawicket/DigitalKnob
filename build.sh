@@ -4,6 +4,11 @@
 
 # to run this script requires privledges, use $ chmod 777 build.sh
 
+###### validate sudo ######
+if command -v "sudo" >/dev/null 2>&1; then
+	SUDO="sudo"
+fi
+
 ###### global variables ######
 true=0
 false=1
@@ -188,11 +193,6 @@ validate_ostype() {
 }
 validate_ostype
 
-
-# validata sudo
-if command_exists sudo; then
-	SUDO="sudo"
-fi
 
 DKPATH="$DIGITALKNOB/$DKBRANCH"
 DKCMAKE="$DIGITALKNOB/$DKBRANCH/DKCMake"
