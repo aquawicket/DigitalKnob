@@ -70,21 +70,21 @@ package_installed() {
 		  return $true
 		fi
 	elif command_exists brew; then
-		call $SUDO brew install $1
-	elif command_exists apt; then
-		if apt list $1 --installed; then
+		if brew list $1 &>/dev/null; then
 			return $true
 		fi
+	elif command_exists apt; then
+		error "package_installed() apt-get not implemented"
 	elif command_exists apt-get; then
-		call $SUDO apt-get -y install $1
+		error "package_installed() apt-get not implemented"
 	elif command_exists pkg; then
-		call $SUDO pkg install $1
+		error "package_installed() pkg not implemented"
 	elif command_exists pacman; then
 		if pacman -Qs $1 > /dev/null; then
 			return $true;
 		fi
 	elif command_exists tce-load; then
-		call tce-load -wi $1
+		error "package_installed() tce-load not implemented"
 	else
 		error "ERROR: no package managers found"
 	fi
