@@ -65,11 +65,14 @@ file_exists() {
 
 ###### package_installed <package> ######
 package_installed() {
-	if command_exists dpkg-query; then
-		if $(dpkg-query -W -f='${Status}' nano 2>/dev/null | grep -c "ok installed"); then
-			return $true
-		fi
-	fi
+	
+	PKG_OK=$(dpkg-query -W --showformat='${Status}\n' $1|grep "install ok installed")
+	echo Checking for $1: $PKG_OK
+	#if [ "" = "$PKG_OK" ]; then
+	#	echo "No $REQUIRED_PKG. Setting up $REQUIRED_PKG."
+	#	sudo apt-get --yes install $REQUIRED_PKG
+	#fi
+
 	if command_exists brew; then
 		call $SUDO brew install $1
 	elif command_exists apt; then
