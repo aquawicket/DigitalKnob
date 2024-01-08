@@ -487,7 +487,13 @@ if(WIN_64)
 			${DKPROJECT}/icons/windows/*.rc)
 	endif()
 	list(APPEND App_SRC ${resources_SRC})
-	add_executable(${APP_NAME} WIN32 ${App_SRC})
+	
+	# https://stackoverflow.com/a/74491601
+	if(MSYS)
+		add_executable(${APP_NAME} ${App_SRC})
+	else()
+		add_executable(${APP_NAME} WIN32 ${App_SRC})
+	endif()
 
 	########################## Add Dependencies ########################
 	foreach(plugin ${dkdepend_list})

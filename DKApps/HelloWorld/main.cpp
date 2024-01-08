@@ -25,10 +25,16 @@
 */
 
 #include <iostream>
+#include <stdio.h>
+
+//__cdecl __attribute__((__nothrow__))  int printf(const char *, ...);
 
 int main() {
-    std::cout << "Hello World!" << std::endl << std::endl;
-	std::cout << "(press any enter to exit)" << std::endl;
-	std::cin.get(); //wait for enter to exit
+	printf("Hello World! from printf\n");
+	//fflush(stdout);
+	//std::ios_base::sync_with_stdio( false ) ; 
+    std::cout << "Hello World! from std::cout" << std::endl << std::flush;;
+	//std::cout << "(press any enter to exit)" << std::endl << std::flush;;
+	//std::cin.get(); //wait for enter to exit
     return 0;
 }

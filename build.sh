@@ -125,7 +125,8 @@ function package_installed() {
 			return $true;
 		fi
 	elif command_exists tce-load; then
-		error "package_installed() tce-load not implemented"
+		#error "package_installed() tce-load not implemented"
+		return $false
 	else
 		error "ERROR: no package managers found"
 	fi
@@ -152,23 +153,8 @@ function install() {
 	fi
 	
 	echo "installing $1"
-	### MSYS2 Environments ###
-	if [[ "$MSYSTEM" == "CLANG32" ]]; then
-		call pacman -S mingw-w64-clang-i686-$1 --noconfirm
-	elif [[ "$MSYSTEM" == "CLANG64" ]]; then
-		call pacman -S mingw-w64-clang-x86_64-$1 --noconfirm
-	elif [[ "$MSYSTEM" == "CLANGARM64" ]]; then
-		call pacman -S mingw-w64-clang-aarch64-$1 --noconfirm
-	elif [[ "$MSYSTEM" == "MINGW32" ]]; then
-		call pacman -S mingw-w64-i686-$1 --noconfirm
-	elif [[ "$MSYSTEM" == "MINGW64" ]]; then
-		call pacman -S mingw-w64-x86_64-$1 --noconfirm
-	elif [[ "$MSYSTEM" == "MSYS" ]]; then
-		call pacman -S $1 --noconfirm
-	elif [[ "$MSYSTEM" == "UCRT64" ]]; then
-		call pacman -S mingw-w64-ucrt-x86_64-$1 --noconfirm
-	###########################
-	elif command_exists brew; then
+
+	if command_exists brew; then
 		call $SUDO brew install $1
 	elif command_exists apt; then
 		call $SUDO apt -y install $1
@@ -225,11 +211,11 @@ function validate_ostype() {
 	elif [[ "$OSTYPE" == "darwin"* ]]; then
 		DIGITALKNOB="/Users/$USER/digitalknob"
 	elif [[ "$OSTYPE" == "cygwin" ]]; then
-		DIGITALKNOB="C:/Users/$USERNAME/digitalknob"
+		DIGITALKNOB="/c/Users/$USERNAME/digitalknob"
 	elif [[ "$OSTYPE" == "msys" ]]; then
-		DIGITALKNOB="C:/Users/$USERNAME/digitalknob"
+		DIGITALKNOB="/c/Users/$USERNAME/digitalknob"
 	elif [[ "$OSTYPE" == "win32" ]]; then #I'm not sure this can happen
-		DIGITALKNOB="C:/Users/$USERNAME/digitalknob" 
+		DIGITALKNOB="/c/Users/$USERNAME/digitalknob" 
 	elif [[ "$OSTYPE" == "freebsd"* ]]; then
 		echo "TODO: freebsd builder incomplete"
 	elif [[ "$OSTYPE" == "linux-android" ]]; then
@@ -593,45 +579,76 @@ while :
 		REPLY=
 	done
 	
-	clear_cmake_cache
-	delete_temp_files
+	#clear_cmake_cache
+	#delete_temp_files
 		
 	validate_package which which
-	if [[ -n "$MSYSTEM" ]]; then
-		call pacman -S git --noconfirm
-	else
-		validate_package git git
+	validate_package git git
+	validate_package cmake_reinstall cmake
+	validate_package reinstall base-devel
+	
+	# MSYS Package prefixes
+	# CLANG32 =  mingw-w64-clang-i686-
+	# CLANG64 = mingw-w64-clang-x86_64-
+	# CLANGARM64 = mingw-w64-clang-aarch64-
+	# MINGW32 = mingw-w64-i686-
+	# MINGW64 = mingw-w64-x86_64-
+	# UCRT64 = mingw-w64-ucrt-x86_64-
+	# MSYS = 
+
+	# build-essential for MSYS2
+	if [[ "$MSYSTEM" == "CLANG32" ]]; then
+		validate_package cmake_reinstall mingw-w64-clang-i686-cmake
+		validate_package clang mingw-w64-clang-i686-toolchain
+	elif [[ "$MSYSTEM" == "CLANG64" ]]; then
+		validate_package cmake_reinstall mingw-w64-clang-x86_64-cmake
+		validate_package clang mingw-w64-clang-x86_64-toolchain
+		validate_package clang_reinstall mingw-w64-x86_64-clang
+	elif [[ "$MSYSTEM" == "CLANGARM64" ]]; then
+		validate_package cmake_reinstall mingw-w64-clang-aarch64-cmake
+		validate_package clang mingw-w64-clang-aarch64-toolchain
+	elif [[ "$MSYSTEM" == "MINGW32" ]]; then
+		validate_package cmake_reinstall mingw-w64-i686-cmake
+		validate_package gcc mingw-w64-i686-toolchain
+	elif [[ "$MSYSTEM" == "MINGW64" ]]; then
+		validate_package cmake_reinstall mingw-w64-x86_64-cmake
+		validate_package gcc mingw-w64-x86_64-toolchain
+	elif [[ "$MSYSTEM" == "UCRT64" ]]; then
+		validate_package cmake_reinstall mingw-w64-ucrt-x86_64-cmake
+		validate_package gcc mingw-w64-ucrt-x86_64-toolchain
+		validate_package clang mingw-w64-ucrt-x86_64-clang
 	fi
 	
-	#if [[ $MSYSTEM == "MINGW64" ]]; then
-	#	echo $PATH
-	#	export PATH=$PATH:$MSYS2/usr/bin
-	#	export PATH=$PATH:$MSYS2/mingw64/bin
-	#	echo $PATH
-	#fi
+	# build-essential for Tiny Core Linux
+	if command_exists tce-load; then
+		validate_package gcc compiletc
+	fi
 	
-	if [[ "$OSTYPE" == "linux-gnu"* ]] || [[ $MSYSTEM == "MINGW32" ]] || [[ $MSYSTEM == "MINGW64" ]] || [[ $MSYSTEM == "MSYS" ]] || [[ $MSYSTEM == "UCRT64" ]]; then
-		validate_package gcc toolchain
+	call export SHELL="/bin/bash"
+	
+	if [[ "$OSTYPE" == "linux-gnu"* ]] || [[ $MSYSTEM == "MINGW32" ]] || [[ $MSYSTEM == "MINGW64" ]] || [[ $MSYSTEM == "MSYS" ]]; then
+		#validate_package gcc toolchain
 		GCC_PATH=$(which gcc)
 		GPP_PATH=$(which g++)
-		export CC="$GCC_PATH"
-		export CXX="$GPP_PATH"
+		call export CC="$GCC_PATH"
+		call export CXX="$GPP_PATH"
 		echo "GCC_PATH = $GCC_PATH"
 		echo "GPP_PATH = $GPP_PATH"
+		call export LDFLAGS="-static -mconsole"
 	fi
 
 	
-	if [[ $MSYSTEM == "CLANG32" ]] || [[ $MSYSTEM == "CLANG64" ]] || [[ $MSYSTEM == "CLANGARM64" ]]; then
-		validate_package clang toolchain
+	if [[ $MSYSTEM == "CLANG32" ]] || [[ $MSYSTEM == "CLANG64" ]] || [[ $MSYSTEM == "CLANGARM64" ]] || [[ $MSYSTEM == "UCRT64" ]]; then
+		#validate_package clang toolchain
 		CLANG_PATH=$(which clang)
 		CLANGPP_PATH=$(which clang++)
-		export CC="$CLANG_PATH"
-		export CXX="$CLANGPP_PATH"
+		call export CC="$CLANG_PATH"
+		call export CXX="$CLANGPP_PATH"
 		echo "CLANG_PATH = $CLANG_PATH"
 		echo "CLANGPP_PATH = $CLANGPP_PATH"
+		call export LDFLAGS="-static -mconsole"
 	fi
-	
-	validate_package cmake_reinstall cmake
+
 	
 	LEVEL="RebuildAll"
 	LINK="Static"
@@ -659,6 +676,9 @@ while :
 	if [[ $LINK == "Shared" ]]; then
 		cmake_string+="-DSHARED=ON "
 	fi
+	
+	cmake_string+="-DCMAKE_VERBOSE_MAKEFILE=1 "
+	cmake_string+="--fresh"
 	
 	#cmake_string = cmake_string.replace("  "," ")
 	#const app_path = DKBuild_FindAppPath(APP)
@@ -800,13 +820,12 @@ while :
 		TARGET=${APP}_APP
 	fi
 	if [[ "$OS" == "win64" ]]; then
-		#MSYS2="$DKPATH/3rdParty/msys2-x86_64-20221216"
-		#export PATH=${MSYS2}/mingw64/bin:$PATH
-		#export PATH=${MSYS2}/usr/bin:$PATH
-		#set PATH=%PATH%;${MSYS2}/mingw64/bin
+		MSYS2="$DKPATH/3rdParty/msys2-x86_64-20221216"
+		call export PATH=${MSYS2}/mingw64/bin:$PATH
+		call export PATH=${MSYS2}/usr/bin:$PATH
 		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
 			if [[ -n "$MSYSTEM" ]]; then
-				call cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+				call cmake -G "MSYS Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
 			else
 				call cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
 			fi
@@ -829,16 +848,16 @@ while :
 	
 	if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
 		if file_exists $DKPATH/DKApps/$APP/$OS/Debug/CMakeCache.txt; then
-			call cmake --build $DKPATH/DKApps/$APP/$OS/Debug --target ${TARGET} --config Debug
+			call cmake --build $DKPATH/DKApps/$APP/$OS/Debug --target ${TARGET} --config Debug --verbose
 		else
-			call cmake --build $DKPATH/DKApps/$APP/$OS --target ${TARGET} --config Debug
+			call cmake --build $DKPATH/DKApps/$APP/$OS --target ${TARGET} --config Debug --verbose
 		fi
 	fi
 	if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
 		if file_exists $DKPATH/DKApps/$APP/$OS/Release/CMakeCache.txt; then
-			call cmake --build $DKPATH/DKApps/$APP/$OS/Release --target ${TARGET} --config Release
+			call cmake --build $DKPATH/DKApps/$APP/$OS/Release --target ${TARGET} --config Release --verbose
 		else
-			call cmake --build $DKPATH/DKApps/$APP/$OS --target ${TARGET} --config Release
+			call cmake --build $DKPATH/DKApps/$APP/$OS --target ${TARGET} --config Release --verbose
 		fi
 	fi
 	
