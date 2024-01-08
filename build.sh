@@ -66,7 +66,6 @@ file_exists() {
 ###### package_installed <package> ######
 package_installed() {
 	if command_exists dpkg-query; then
-		echo $(dpkg-query -W -f='${Status}' $1 2>/dev/null | grep -c "ok installed")
 		if [ $(dpkg-query -W -f='${Status}' $1 2>/dev/null | grep -c "ok installed") -ne 0 ]; then
 		  return $true
 		fi
