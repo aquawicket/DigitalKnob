@@ -4,12 +4,9 @@
 
 # to run this script requires privledges, use $ chmod 777 build.sh
 
-###### validate sudo ######
-if command -v "sudo" >/dev/null 2>&1; then
-	SUDO="sudo"
-fi
-
 ###### global variables ######
+SCRIPTPATH=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
+SCRIPTNAME=$(basename "$0")
 true=0
 false=1
 
@@ -24,21 +21,66 @@ magenta="\033[35m"
 cyan="\033[36m"
 white="\033[37m"
 
+###### validate sudo ######
+if command -v "sudo" >/dev/null 2>&1; then
+	SUDO="sudo"
+fi
 
 ###### call <command args> ######
-call() {
+function call() {
+	if [ -z "$1" ]; then
+		error "call <command args> requires at least 1 parameter"
+		return $false
+	fi
+	
 	echo -e "${magenta} $ $@ ${CLR}"
 	"$@"
 }
 
-### error <string> ###
+###### warning <string> ######
+function warning() {
+	echo -e "${yellow} WARNING: $1 ${CLR}"
+}
+
+###### error <string> ######
 function error() {
-	echo -e "${red} ERROR: $1 ${red}"
+	echo -e "${red} ERROR: $1 ${CLR}"
+}
+
+###### message <string> ######
+function message() {
+	if [ -z "$1" ]; then
+		error "message <string> requires 1 parameter"
+		return $false
+	fi
+	
+	echo "$@"	
+}
+
+###### call <command args> ######
+function call() {
+	if [ -z "$1" ]; then
+		error "call <command args> requires at least 1 parameter"
+		return $false
+	fi
+	
+	echo -e "${magenta} $ $@ ${CLR}"
+	"$@"
+}
+
+###### string_contains <string> <substring> ######
+function string_contains() {
+	if [ -z "$2" ]; then
+		error "string_contains <string> <substring> requires 2 parameters"
+		return $false
+	fi
+	
+	[[ $1 == *"$2"* ]]
 }
 
 
 ###### validate_branch ######
-validate_branch() {
+function validate_branch() {
 	# If the current folder matches the current branch set DKBRANCH, default to Development
 	FOLDER="$(basename $(pwd))"
 	DKBRANCH="$(git rev-parse --abbrev-ref HEAD)"
@@ -53,18 +95,17 @@ validate_branch
 
 
 ###### command_exists <command> ######
-command_exists() {
+function command_exists() {
 	command -v "$1" >/dev/null 2>&1
 }
 
-
 ###### file_exists <file> ######
-file_exists() {
+function file_exists() {
 	[ -e $1 ]
 }
 
 ###### package_installed <package> ######
-package_installed() {
+function package_installed() {
 	if command_exists dpkg-query; then
 		if [ $(dpkg-query -W -f='${Status}' $1 2>/dev/null | grep -c "ok installed") -ne 0 ]; then
 		  return $true
@@ -104,7 +145,7 @@ else
 fi
 
 ###### install <package> ######
-install() {
+function install() {
 	if package_installed $1; then
 		echo "$1 already installed"
 		return $false;
@@ -146,7 +187,7 @@ install() {
 
 
 ###### validate_package <command> <package> ######
-validate_package() {
+function validate_package() {
 	if ! command_exists $1; then
 		install $2
 	fi
@@ -154,7 +195,7 @@ validate_package() {
 
 
 ###### clear_cmake_cache ######
-clear_cmake_cache() {
+function clear_cmake_cache() {
 	echo "Clearing CMake cache . . ."
 	cd $DIGITALKNOB
 	find . -name "CMakeCache.*" -delete
@@ -163,7 +204,7 @@ clear_cmake_cache() {
 
 
 ###### delete_temp_files ######
-delete_temp_files() {
+function delete_temp_files() {
 	echo "Deleting .TMP files . . ."
 	cd $DIGITALKNOB
 	rm -rf `find . -type d -name *.tmp`
@@ -174,7 +215,7 @@ delete_temp_files() {
 
 
 ###### validate_ostype ######
-validate_ostype() {
+function validate_ostype() {
 	if [ -e /proc/device-tree/model ]; then
 		MODEL=$(tr -d '\0' </proc/device-tree/model)
 	fi
@@ -202,7 +243,12 @@ validate_ostype
 
 DKPATH="$DIGITALKNOB/$DKBRANCH"
 DKCMAKE="$DIGITALKNOB/$DKBRANCH/DKCMake"
-#MSYS2="$DKPATH/3rdParty/msys2-x86_64-20221216"
+
+if [ $SCRIPTPATH == $DKPATH ];then
+	echo "SCRIPTPATH and DKPATH are the same"
+else
+	warning "$SCRIPTNAME is not running from the DKPATH directory. Any changes will not be saved by git!"
+fi
 
 echo ""
 echo "HOSTNAME = $HOSTNAME"
@@ -214,8 +260,9 @@ echo "USER = $USER"
 echo "USERNAME = $USERNAME"
 echo "DIGITALKNOB = $DIGITALKNOB"
 echo "DKPATH = $DKPATH"
-#echo "MSYS2 = $MSYS2"
 echo "DKCMAKE = $DKCMAKE"
+echo "SCRIPTPATH = $SCRIPTPATH"
+echo "SCRIPTNAME = $SCRIPTNAME"
 
 ##### MSYS2 Environments ($MSYSTEM)	################################################
 # https://www.msys2.org/docs/environments/
@@ -362,40 +409,40 @@ while :
 	done
 	TARGET=${APP}
 
-# TODO
-#  1) Linux (x86_64)
+	# TODO
+	#  1) Linux (x86_64)
 
-# 2) Android (arm32)
-# 3) Android (arm64)
-# 4) Android (x86)
-# 5) Android (x86_64)
-# 6) iOS (arm32)
-# 7) iOS (arm64)
-# 8) iOS (x86)
-# 9) iOS (x86_64)
-# 10) iOS-Simulator (arm32)
-# 11) iOS-Simulator (arm64)
-# 12) iOS-Simulator (x86)
-# 13) iOS-Simulator (x86_64)
-# 14) Linux (c)
-# 15) Linux (arm64)
-# 16) Linux (x86)
-# 17) Linux (x86_64)
-# 18) Mac (arm32)
-# 19) Mac (arm64)
-# 20) Mac (x86)
-# 21) Mac (x86_64)
-# 22) Raspberry (arm32)
-# 23) Raspberry (arm64)
-# 24) Raspberry (x86)
-# 25) Raspberry (x86_64)
-# 26) Windows (arm32)
-# 27) Windows (arm64)
-# 28) Windows (x86)
-# 29) Windows (x86_64)
-# 30) Clear Screen
-# 31) Go Back
-# 32) Exit
+	# 2) Android (arm32)
+	# 3) Android (arm64)
+	# 4) Android (x86)
+	# 5) Android (x86_64)
+	# 6) iOS (arm32)
+	# 7) iOS (arm64)
+	# 8) iOS (x86)
+	# 9) iOS (x86_64)
+	# 10) iOS-Simulator (arm32)
+	# 11) iOS-Simulator (arm64)
+	# 12) iOS-Simulator (x86)
+	# 13) iOS-Simulator (x86_64)
+	# 14) Linux (c)
+	# 15) Linux (arm64)
+	# 16) Linux (x86)
+	# 17) Linux (x86_64)
+	# 18) Mac (arm32)
+	# 19) Mac (arm64)
+	# 20) Mac (x86)
+	# 21) Mac (x86_64)
+	# 22) Raspberry (arm32)
+	# 23) Raspberry (arm64)
+	# 24) Raspberry (x86)
+	# 25) Raspberry (x86_64)
+	# 26) Windows (arm32)
+	# 27) Windows (arm64)
+	# 28) Windows (x86)
+	# 29) Windows (x86_64)
+	# 30) Clear Screen
+	# 31) Go Back
+	# 32) Exit
 	echo " "
 	PS3='Please select an OS to build for: '
 	if [[ "$MODEL" == "Raspberry"* ]]; then

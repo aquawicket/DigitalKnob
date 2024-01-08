@@ -11,50 +11,152 @@ clear
 #################################
 #	Global variables
 #################################
+SCRIPTPATH=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
+SCRIPTNAME=$(basename "$0")
 true=0
 false=1
-END_COLOR="\033[0m"
-RED="\033[0;31m"
-GREEN='\033[0;32m'
-CYAN='\033[0;36'
+CLR="\033[0m"
+black="100m"
+red="\033[31m"
+green="\033[32m"
+yellow="\033[33m"
+blue="\033[34m"
+magenta="\033[35m"
+cyan="\033[36m"
+white="\033[37m"
 
 
 #################################
 #	Functions
 #################################
 
-### error <string> ###
+###### error <string> ######
 function error() {
-	echo -e "${RED} ERROR: $1 ${END_COLOR}"
+	if [ -z "$1" ]; then
+		echo -e "error <string> requires 1 parameter"
+		return $false
+	fi
+	
+	echo -e "${red} ERROR: $1 ${CLR}"
 }
 
-### message <string> ###
+###### warning <string> ######
+function warning() {
+	if [ -z "$1" ]; then
+		error "error <string> requires 1 parameter"
+		return $false
+	fi
+	
+	echo -e "${yellow} ERROR: $1 ${CLR}"
+}
+
+###### message <string> ######
 function message() {
+	get_func_name funcname
+	echo "funcname = $funcname"
+	
 	if [ -z "$1" ]; then
 		error "message <string> requires 1 parameter"
 		return $false
 	fi
 	
-	echo "$@"	
+	echo "$@"
 }
 
-### string_contains <string> <substring> ###
+###### print_var <variable> ######
+function print_var() {
+	if [ -z "$1" ]; then
+		error "print_var <variable> requires 1 parameter"
+		return $false
+	fi
+	
+	var_name=$1
+	exists=0
+	
+	if [[ $(type -t $1) == function ]]; then
+		echo -e "${blue} \$$var_name = function $1() ${CLR}"
+		func=$(type $1 | sed '1,2d')
+		echo -e "${blue} $func ${CLR}"
+		exists=1;
+	fi
+		
+	if ! [ -v $1 ]; then
+		if [ $exists -eq 1 ]; then
+			return $true
+		fi
+			
+		error "$1 is not set"
+		return $false
+	fi
+		
+	if $(declare -p $1 2> /dev/null | grep -q '^declare \-a'); then	
+		declare -n arr="$1"
+		for ((i=0; i < ${#arr[@]}; i++ )); do 
+			echo -e "${blue} \$$var_name[$i] = ${arr[$i]} ${CLR}";
+		done
+	else
+		arr=$1
+		echo -e "${blue} \$$arr = ${!arr} ${CLR}"
+	fi
+}
+
+###### test <...> ######
+function test() {
+	echo "############ test() ############"
+	get_func_name="TEST"
+	print_var get_func_name
+	
+	
+	print_var BASH
+	print_var BASHOPTS
+	print_var FUNCNAME
+	print_var FUNCNAME
+	print_var FUNCNAME
+	print_var LINENO
+	print_var BASH_SOURCE
+	print_var BASH_LINENO
+}
+
+###### get_func_name <variable> ######
+function get_func_name() {
+	if [ -z "$1" ]; then
+		error "get_func_name <variable> requires 1 parameter"
+		return $false
+	fi
+	
+	eval "$1=${FUNCNAME[1]}"
+	#echo "parameter name = $1"
+	#echo "function name = ${FUNCNAME[1]}"
+}
+
+###### call <command args> ######
+call() {
+	if [ -z "$1" ]; then
+		error "call <command args> requires at least 1 parameter"
+		return $false
+	fi
+	
+	echo -e "${magenta} $ $@ ${CLR}"
+	"$@"
+}
+
+###### string_contains <string> <substring> ######
 function string_contains() {
 	if [ -z "$2" ]; then
-		error "string_contains <string] [substring] requires 2 parameters"
+		error "string_contains <string> <substring> requires 2 parameters"
 		return $false
 	fi
 	
 	[[ $1 == *"$2"* ]]
 }
 
-### wait_for_key ###
+###### wait_for_key ######
 function wait_for_key() {
 	read -n 1 -s -r -p "Press any key to continue"
 	echo ""
 }
 
-### file_exists <file> ###
+###### file_exists <file> ######
 function file_exists() {
 	if [ -z "$1" ]; then
 		error "file_exists <file> requires 1 parameter"
@@ -64,7 +166,7 @@ function file_exists() {
 	[ -e $1 ]
 }
 
-### file_contains <file.ext> <string> ###
+###### file_contains <file.ext> <string> ######
 function file_contains() {
 	if [ -z "$2" ]; then
 		error "file_contains <file.ext> <string> requires 2 parameters"
@@ -74,7 +176,7 @@ function file_contains() {
 	grep -q "$2" "$1"
 }
 
-### append_file <string> <file.ext> ###
+###### append_file <string> <file.ext> ######
 function append_file() {
 	if [ -z "$2" ]; then
 		error "append_file <string> <file.ext> requires 2 parameters"
@@ -84,7 +186,7 @@ function append_file() {
 	echo "$1" >> $2
 }
 
-### remove_from_file <string> <file.ext> ###
+###### remove_from_file <string> <file.ext> ######
 function remove_from_file() {
 	if [ -z "$2" ]; then
 		error "remove_from_file <string> <file.ext> requires 2 parameters"
@@ -94,7 +196,7 @@ function remove_from_file() {
 	sed -i -e "/$1/d" $2
 }
 
-### command_exists <command> ###
+###### command_exists <command> ######
 command_exists() {
 	if [ -z "$1" ]; then
 		error "command_exists <command> requires 1 parameter"
@@ -103,37 +205,37 @@ command_exists() {
 	command -v "$1" >/dev/null 2>&1
 }
 
-### get_dk_uname ###
+###### get_dk_uname ######
 function get_dk_uname() {
 	DK_UNAME=$(uname -a)
 	echo "DK_UNAME = $DK_UNAME"
 }
 
-### get_dk_host ###
+###### get_dk_host ######
 function get_dk_host() {
 	DK_HOST=$(uname -s)
 	echo "DK_HOST = $DK_HOST"
 }
 
-### get_dk_arch ###
+###### get_dk_arch ######
 function get_dk_arch() {
 	DK_ARCH=$(uname -m)
 	echo "DK_ARCH = $DK_ARCH"
 }
 
-### get_dk_version ###
+###### get_dk_version ######
 function get_dk_version() {
 	DK_VERSION=$(uname -v)
 	echo "DK_VERSION = $DK_VERSION"
 }
 
-### get_dk_ostype ###
+###### get_dk_ostype ######
 function get_dk_ostype() {
 	DK_OSTYPE=$OSTYPE
 	echo "DK_OSTYPE = $DK_OSTYPE"
 }
 
-### get_dk_cpuinfo ###
+###### get_dk_cpuinfo ######
 function get_dk_cpuinfo() {
 	if [ -e /proc/cpuinfo ]; then
 		DK_CPUINFO=$(tr -d '\0' </proc/cpuinfo)
@@ -141,7 +243,7 @@ function get_dk_cpuinfo() {
 	echo "DK_CPUINFO = $DK_CPUINFO"
 }
 
-### get_dk_model ###
+###### get_dk_model ######
 function get_dk_model() {
 	if [ -e /proc/device-tree/model ]; then
 		DK_MODEL=$(tr -d '\0' </proc/device-tree/model)
@@ -149,19 +251,19 @@ function get_dk_model() {
 	echo "DK_MODEL = $DK_MODEL"
 }
 
-### get_dk_machtype ###
+###### get_dk_machtype ######
 function get_dk_machtype() {
 	DK_MACHTYPE=$MACHTYPE
 	echo "DK_MACHTYPE = $DK_MACHTYPE"
 }
 
-### get_dk_lang ###
+###### get_dk_lang ######
 function get_dk_lang() {
 	DK_LANG=$LANG
 	echo "DK_LANG = $DK_LANG"
 }
 
-### get_dk_username ###
+###### get_dk_username ######
 function get_dk_username() {
 	if [ -n "$USER" ]; then
 		DK_USERNAME=$USER
@@ -171,55 +273,55 @@ function get_dk_username() {
 	echo "DK_USERNAME = $DK_USERNAME"
 }
 
-### get_dk_logname ###
+###### get_dk_logname ######
 function get_dk_logname() {
 	DK_LOGNAME=$LOGNAME
 	echo "DK_LOGNAME = $DK_LOGNAME"
 }
 
-### get_dk_home ###
+###### get_dk_home ######
 function get_dk_home() {
 	DK_HOME=$HOME
 	echo "DK_HOME = $DK_HOME"
 }
 
-### get_dk_prefix ###
+###### get_dk_prefix ######
 function get_dk_prefix() {
 	DK_PREFIX=$PREFIX
 	echo "DK_PREFIX = $DK_PREFIX"
 }
 
-### get_dk_term ###
+###### get_dk_term ######
 function get_dk_term() {
 	DK_TERM=$TERM
 	echo "DK_TERM = $DK_TERM"
 }
 
-### get_dk_shell ###
+###### get_dk_shell ######
 function get_dk_shell() {
 	DK_SHELL=$SHELL
 	echo "DK_SHELL = $DK_SHELL"
 }
 
-### get_dk_path ###
+###### get_dk_path ######
 function get_dk_path() {
 	DK_PATH=$PATH
 	echo "DK_PATH = $DK_PATH"
 }
 
-### get_dk_pwd ###
+###### get_dk_pwd ######
 function get_dk_pwd() {
 	DK_PWD=$PWD
 	echo "DK_PWD = $DK_PWD"
 }
 
-### load_dkenv ###
+###### load_dkenv ######
 function load_dkenv() {
 	touch ~/.dkenv
 	source ~/.dkenv
 }
 
-### set_dk_root <path> ###
+###### set_dk_root <path> ######
 function set_dk_root(){
 	if [ -z "$1" ]; then
 		error "set_dk_root <path> requires 1 parameter"
@@ -236,7 +338,7 @@ function set_dk_root(){
 	echo "DK_ROOT = $DK_ROOT"
 }
 
-### get_dk_root ###
+###### get_dk_root ######
 function get_dk_root() {
 	load_dkenv
 	
@@ -248,7 +350,7 @@ function get_dk_root() {
 	fi
 }
 
-### clear_dk_root ###
+###### clear_dk_root ######
 function clear_dk_root() {
 	export -n DK_ROOT
 	unset DK_ROOT
