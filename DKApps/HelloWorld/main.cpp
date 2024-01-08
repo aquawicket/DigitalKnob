@@ -34,7 +34,7 @@ int main() {
 	//fflush(stdout);
 	//std::ios_base::sync_with_stdio( false ) ; 
     std::cout << "Hello World! from std::cout" << std::endl << std::flush;;
-	//std::cout << "(press any enter to exit)" << std::endl << std::flush;;
-	//std::cin.get(); //wait for enter to exit
+	std::cout << "(press any enter to exit)" << std::endl << std::flush;;
+	std::cin.get(); //wait for enter to exit
     return 0;
 }
