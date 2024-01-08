@@ -26,8 +26,22 @@ cyan="\033[36m"
 white="\033[37m"
 
 
+###### test <...> ######
+function test() {
+	echo "############ test() ############"
+	print_var BASH
+	print_var BASHOPTS
+	print_var FUNCNAME
+	print_var FUNCNAME
+	print_var FUNCNAME
+	print_var LINENO
+	print_var BASH_SOURCE
+	print_var BASH_LINENO
+}
+
+
 #################################
-#	Functions
+#		Functions
 #################################
 
 ###### error <string> ######
@@ -98,23 +112,6 @@ function print_var() {
 		arr=$1
 		echo -e "${blue} \$$arr = ${!arr} ${CLR}"
 	fi
-}
-
-###### test <...> ######
-function test() {
-	echo "############ test() ############"
-	get_func_name="TEST"
-	print_var get_func_name
-	
-	
-	print_var BASH
-	print_var BASHOPTS
-	print_var FUNCNAME
-	print_var FUNCNAME
-	print_var FUNCNAME
-	print_var LINENO
-	print_var BASH_SOURCE
-	print_var BASH_LINENO
 }
 
 ###### get_func_name <variable> ######
