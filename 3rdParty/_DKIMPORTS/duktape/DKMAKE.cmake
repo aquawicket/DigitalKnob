@@ -53,18 +53,7 @@ if(NOT EXISTS ${DUKTAPE}/src/duktape.c)
 	#dk_executeProcess(${NODE_EXE} ${DUKTAPE}/src-tools/index.js configure --output-directory ${DUKTAPE}/src --source-directory ${DUKTAPE}/src-input --config-directory ${DUKTAPE}/config)
 endif()
 
-## TODO: Work dk_msys2 into dk_queueCommand
-#if(WIN AND GNU)
-#	dk_msys2(${DKCMAKE_BUILD} ${DUKTAPE})
-#else()
-	dk_queueCommand(${DKCMAKE_BUILD} ${DUKTAPE})
-#endif()
+dk_queueCommand(${DKCMAKE_BUILD} ${DUKTAPE})
 
+dk_build(${DUKTAPE})
 
-### COMPILE ###
-## TODO: Work dk_msys2 into dk_build
-if(WIN AND GNU)
-	dk_msys2(cmake --build . --config Debug)
-else()
-	dk_build(${DUKTAPE})
-endif()

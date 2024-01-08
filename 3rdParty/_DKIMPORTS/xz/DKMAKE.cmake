@@ -22,10 +22,15 @@ dk_import(https://github.com/xz-mirror/xz.git)
 ### LINK ###
 dk_define			(LZMA_API_STATIC)
 dk_include			(${XZ}/src/liblzma/api)
-UNIX_dk_libDebug	(${XZ}/${OS}/${DEBUG_DIR}/liblzma.a)
-UNIX_dk_libRelease	(${XZ}/${OS}/${RELEASE_DIR}/liblzma.a)
-WIN_dk_libDebug		(${XZ}/${OS}/${DEBUG_DIR}/liblzma.lib)
-WIN_dk_libRelease	(${XZ}/${OS}/${RELEASE_DIR}/liblzma.lib)
+
+if(MSVC)
+	dk_libDebug		(${XZ}/${OS}/${DEBUG_DIR}/liblzma.lib)
+	dk_libRelease	(${XZ}/${OS}/${RELEASE_DIR}/liblzma.lib)
+else()
+	dk_libDebug		(${XZ}/${OS}/${DEBUG_DIR}/liblzma.a)
+	dk_libRelease	(${XZ}/${OS}/${RELEASE_DIR}/liblzma.a)
+endif()
+
 
 
 ### 3RDPARTY LINK ###
