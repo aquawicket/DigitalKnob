@@ -1,8 +1,7 @@
 # https://www.msys2.org
 # https://silentinstallhq.com/msys2-silent-install-how-to-guide
 
-#if(NOT WIN_HOST)
-if(NOT CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+if(NOT CMAKE_HOST_SYSTEM_NAME STREQUAL "Windows")
 	dk_undepend(msys2)
 	dk_return()
 endif()
@@ -22,7 +21,7 @@ endif()
 
 
 ### ADD msys2 bin directory to path environment variable
-dk_setEnv("PATH" "${MSYS2}/usr/bin")
+#dk_setEnv("PATH" "${MSYS2}/usr/bin")
 
 ### Install other utilities ###
 if(NOT EXISTS ${MSYS2}/usr/bin/make.exe)

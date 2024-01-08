@@ -11,7 +11,11 @@ endif()
 
 ### IMPORT ###
 UNIX_dk_import	(https://github.com/weidai11/cryptopp/archive/refs/tags/CRYPTOPP_8_5_0.zip PATCH)
-WIN_dk_import	(https://github.com/weidai11/cryptopp.git PATCH)
+if(MSYS)
+	dk_import	(https://github.com/weidai11/cryptopp/archive/refs/tags/CRYPTOPP_8_5_0.zip PATCH)
+else()
+	WIN_dk_import	(https://github.com/weidai11/cryptopp.git PATCH)
+endif()
 
 
 ### LINK ###

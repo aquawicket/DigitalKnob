@@ -54,17 +54,17 @@ if(NOT EXISTS ${DUKTAPE}/src/duktape.c)
 endif()
 
 ## TODO: Work dk_msys2 into dk_queueCommand
-if(WIN AND GNU)
-	dk_msys2(${DKCMAKE_BUILD} ${DUKTAPE})
-else()
+#if(WIN AND GNU)
+#	dk_msys2(${DKCMAKE_BUILD} ${DUKTAPE})
+#else()
 	dk_queueCommand(${DKCMAKE_BUILD} ${DUKTAPE})
-endif()
+#endif()
 
 
 ### COMPILE ###
 ## TODO: Work dk_msys2 into dk_build
 if(WIN AND GNU)
-	dk_msys2("cmake --build . --config Debug")
+	dk_msys2(cmake --build . --config Debug)
 else()
 	dk_build(${DUKTAPE})
 endif()

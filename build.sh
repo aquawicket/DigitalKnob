@@ -678,7 +678,7 @@ while :
 	fi
 	
 	cmake_string+="-DCMAKE_VERBOSE_MAKEFILE=1 "
-	cmake_string+="--fresh"
+	cmake_string+="--fresh --debug-trycompile"
 	
 	#cmake_string = cmake_string.replace("  "," ")
 	#const app_path = DKBuild_FindAppPath(APP)
