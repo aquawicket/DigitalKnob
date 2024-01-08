@@ -172,8 +172,8 @@ echo ##########################################################
 echo ""
 
 
-call:clear_cmake_cache
-call:delete_temp_files
+::call:clear_cmake_cache
+::call:delete_temp_files
 call::validate_cmake
 
 set "APP_PATH=%DKPATH%\DKApps\%APP%"
@@ -190,13 +190,13 @@ if %OS%==emscripten goto generate_emscripten
 
 :generate_win32
 call:validate_visual_studio
-"%CMAKE%" -G "Visual Studio 17 2022" -A Win32 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKCMAKE%
+"%CMAKE%" -G "Visual Studio 17 2022" -A Win32 --fresh -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKCMAKE%
 set TARGET=%APP%_APP
 goto build
 
 :generate_win64
 call:validate_visual_studio
-"%CMAKE%" -G "Visual Studio 17 2022" -A x64 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKCMAKE%
+"%CMAKE%" -G "Visual Studio 17 2022" -A x64 --fresh -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKCMAKE%
 set TARGET=%APP%_APP
 goto build
 
@@ -204,7 +204,7 @@ goto build
 call:validate_android_ndk
 ::call:validate_openjdk
 ::call %DKPATH%\3rdParty\_DKIMPORTS\openjdk\registerJDK.cmd
-"%CMAKE%" -G "Visual Studio 17 2022" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID-NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_NDK%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
+"%CMAKE%" -G "Visual Studio 17 2022" -A ARM --fresh -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID-NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_NDK%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
 set TARGET=main
 goto build
 
@@ -212,7 +212,7 @@ goto build
 call:validate_android_ndk
 ::call:validate_openjdk
 ::call %DKPATH%\3rdParty\_DKIMPORTS\openjdk\registerJDK.cmd
-"%CMAKE%" -G "Visual Studio 17 2022" -A ARM64 -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID-NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_NDK%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
+"%CMAKE%" -G "Visual Studio 17 2022" -A ARM64 --fresh -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID-NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_NDK%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
 set TARGET=main
 goto build
 
@@ -247,8 +247,8 @@ goto end_message
 goto end_message
 
 :build_all
-"%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Debug
-"%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Release
+"%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Debug --verbose
+"%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Release --verbose
 goto end_message
 
 :end_message
