@@ -802,11 +802,21 @@ while :
 		TARGET=${APP}_APP
 	fi
 	if [[ "$OS" == "raspberry32" ]]; then
-		call cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
+		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
+			call cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+		fi
+		if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
+			call cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
+		fi
 		TARGET=${APP}_APP
 	fi
 	if [[ "$OS" == "raspberry64" ]]; then
-		call cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
+		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
+			call cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+		fi
+		if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
+			call cmake -G "Unix Makefiles" -DCMAKE_C_COMPILER="$GCC_PATH" -DCMAKE_CXX_COMPILER="$GPP_PATH" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
+		fi
 		TARGET=${APP}_APP
 	fi
 	if [[ "$OS" == "win32" ]]; then
