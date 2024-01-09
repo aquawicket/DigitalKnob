@@ -49,16 +49,26 @@ if not exist "%CMAKE%" ( echo "ERROR: Could not locate CMAKE" )
 
 ::echo arg1 = %1
 set commands=%1
-::echo commands = %commands%
+echo commands = %commands%
 set commands=%commands:"=%
-::echo commands = %commands%
+set "DKCOMMAND=%commands%"
+echo DKCOMMAND = %DKCOMMAND%
 
-set "DKCOMMAND=include(%DKCMAKE%/DK.cmake)"
-set "DKCOMMAND=%DKCOMMAND%;%commands%"
+::set "DKCOMMAND=include(%DKCMAKE%/DK.cmake)"
+::set "DKCOMMAND=%DKCOMMAND%;%commands%"
 
 
-::echo DKCOMMAND = "%DKCOMMAND%"
+
 
 ::echo ERRORLEVEL = %ERRORLEVEL%
-"%CMAKE%" -DDKCMAKE=%DKCMAKE% -DDKCOMMAND="%DKCOMMAND%" -P "%DKCMAKE%/dev/cmake_eval.cmake"
-echo cmake_eval returned = %ERRORLEVEL%
+
+"%CMAKE%" -DDKCMAKE=%DKCMAKE% "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE%/dev/cmake_eval.cmake" > cmake_eval.out
+set /p output=<cmake_eval.out
+set output=%output:~3%
+echo output = %output%
+del cmake_eval.out
+
+
+
+
+
