@@ -579,8 +579,8 @@ while :
 		REPLY=
 	done
 	
-	#clear_cmake_cache
-	#delete_temp_files
+	clear_cmake_cache
+	delete_temp_files
 		
 	validate_package which which
 	validate_package git git
@@ -679,7 +679,7 @@ while :
 	fi
 	
 	cmake_string+="-DCMAKE_VERBOSE_MAKEFILE=1 "
-	cmake_string+="--fresh --debug-trycompile"
+	#cmake_string+="--fresh --debug-trycompile"
 	
 	#cmake_string = cmake_string.replace("  "," ")
 	#const app_path = DKBuild_FindAppPath(APP)
