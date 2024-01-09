@@ -22,7 +22,7 @@
 :: OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 :: SOFTWARE.
 @echo off
-setlocal EnableDelayedExpansion
+::setlocal EnableDelayedExpansion
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: cmake_eval eval_code error
@@ -47,15 +47,18 @@ if exist "C:\Program Files\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files\CMak
 if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files (x86)\CMake\bin\cmake.exe"
 if not exist "%CMAKE%" ( echo "ERROR: Could not locate CMAKE" )
 
-echo arg1 = %1
+::echo arg1 = %1
 set commands=%1
-echo commands = %commands%
+::echo commands = %commands%
 set commands=%commands:"=%
-echo commands = %commands%
+::echo commands = %commands%
 
 set "DKCOMMAND=include(%DKCMAKE%/DK.cmake)"
 set "DKCOMMAND=%DKCOMMAND%;%commands%"
 
 
-echo DKCOMMAND = "%DKCOMMAND%"
+::echo DKCOMMAND = "%DKCOMMAND%"
+
+::echo ERRORLEVEL = %ERRORLEVEL%
 "%CMAKE%" -DDKCMAKE=%DKCMAKE% -DDKCOMMAND="%DKCOMMAND%" -P "%DKCMAKE%/dev/cmake_eval.cmake"
+echo cmake_eval returned = %ERRORLEVEL%

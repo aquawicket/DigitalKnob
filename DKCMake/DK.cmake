@@ -45,18 +45,18 @@ endif()
 ## Set the DIGITALKNOB, DKBRANCH and DKCMAKE variables 
 get_filename_component(path ${CMAKE_SOURCE_DIR} ABSOLUTE)
 set(DKCMAKE ${path} CACHE INTERNAL "")
-message(STATUS "\n DKCMAKE =  ${DKCMAKE}\n")
+#message(STATUS "\n DKCMAKE =  ${DKCMAKE}\n")
 
 string(FIND "${DKCMAKE}" "DKCMake" pos)
 math(EXPR pos "${pos}-1")
 string(SUBSTRING ${DKCMAKE} 0 ${pos} DKBRANCH)
 set(DKBRANCH ${DKBRANCH} CACHE INTERNAL "")
-message(STATUS "\n DKBRANCH =  ${DKBRANCH}\n")
+#message(STATUS "\n DKBRANCH =  ${DKBRANCH}\n")
 
 string(FIND "${DKBRANCH}" "digitalknob" pos)
 string(SUBSTRING ${DKBRANCH} 0 ${pos} DIGITALKNOB)
 set(DIGITALKNOB ${DIGITALKNOB}digitalknob CACHE INTERNAL "")
-message(STATUS "\n DIGITALKNOB =  ${DIGITALKNOB}\n")
+#message(STATUS "\n DIGITALKNOB =  ${DIGITALKNOB}\n")
 
 
 #set(ENV{DIGITALKNOB} ${DIGITALKNOB})

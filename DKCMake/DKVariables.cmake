@@ -112,7 +112,7 @@ endif()
 ###########################################################################
 option(BUILD "Simpily build the app or library" OFF)
 option(REBUILD "Rebuild the app" OFF)
-option(REBUILDALL "Rebuild the app and all dependencies" OFF)
+option(REBUILDALL "Rebuild the app and all dependencies" ON)
 if(NOT BUILD)
 if(NOT REBUILD)
 if(NOT REBUILDALL)
