@@ -634,7 +634,6 @@ while :
 		call export CXX="$GPP_PATH"
 		echo "GCC_PATH = $GCC_PATH"
 		echo "GPP_PATH = $GPP_PATH"
-		call export LDFLAGS="-static -mconsole"
 	fi
 
 	
@@ -646,9 +645,11 @@ while :
 		call export CXX="$CLANGPP_PATH"
 		echo "CLANG_PATH = $CLANG_PATH"
 		echo "CLANGPP_PATH = $CLANGPP_PATH"
-		call export LDFLAGS="-static -mconsole"
 	fi
 
+	if [[ -n "$MSYSTEM" ]]; then
+		call export LDFLAGS="-static -mconsole"
+	fi
 	
 	LEVEL="RebuildAll"
 	LINK="Static"
