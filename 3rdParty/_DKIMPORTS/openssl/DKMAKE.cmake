@@ -9,8 +9,12 @@
 #EMSCRIPTEN_dk_depend(python3)
 
 ### IMPORT ###
-UNIX_dk_import	(https://github.com/openssl/openssl.git PATCH) #PATCH: premade emscripten libraries
-WIN_dk_import	(https://www.npcglib.org/~stathis/downloads/openssl-1.0.2h-vs2015.7z)
+if(MSVC)
+	WIN_dk_import	(https://www.npcglib.org/~stathis/downloads/openssl-1.0.2h-vs2015.7z)
+else()
+	dk_import		(https://github.com/openssl/openssl.git PATCH) #PATCH: premade emscripten libraries
+endif()
+
 
 #if(EMSCRIPTEN)
 #	dk_copy(${OPENSSL-CMAKE} ${OPENSSL})
@@ -22,8 +26,10 @@ DEBUG_dk_include		(${OPENSSL}/${OS}/${DEBUG_DIR}/include)
 RELEASE_dk_include      (${OPENSSL}/${OS}/${RELEASE_DIR}/include)
 
 # libcrypto
-UNIX_dk_libDebug		(${OPENSSL}/${OS}/${DEBUG_DIR}/libcrypto.a)
-UNIX_dk_libRelease		(${OPENSSL}/${OS}/${RELEASE_DIR}/libcrypto.a)
+if(NOT MSVC)
+	dk_libDebug		(${OPENSSL}/${OS}/${DEBUG_DIR}/libcrypto.a)
+	dk_libRelease		(${OPENSSL}/${OS}/${RELEASE_DIR}/libcrypto.a)
+endif()
 
 # libeay
 WIN32_dk_libDebug		(${OPENSSL}/lib/libeay32MTd.lib)
@@ -32,8 +38,10 @@ WIN64_dk_libDebug		(${OPENSSL}/lib64/libeay32MTd.lib)
 WIN64_dk_libRelease		(${OPENSSL}/lib64/libeay32MT.lib)
 
 # libssl
-UNIX_dk_libDebug		(${OPENSSL}/${OS}/${DEBUG_DIR}/libssl.a)
-UNIX_dk_libRelease		(${OPENSSL}/${OS}/${RELEASE_DIR}/libssl.a)
+if(NOT MSVC)
+	dk_libDebug			(${OPENSSL}/${OS}/${DEBUG_DIR}/libssl.a)
+	dk_libRelease		(${OPENSSL}/${OS}/${RELEASE_DIR}/libssl.a)
+endif()
 WIN32_dk_libDebug		(${OPENSSL}/lib/ssleay32MTd.lib)
 WIN32_dk_libRelease		(${OPENSSL}/lib/ssleay32MT.lib)
 WIN64_dk_libDebug		(${OPENSSL}/lib64/ssleay32MTd.lib)
@@ -42,10 +50,14 @@ WIN64_dk_libRelease		(${OPENSSL}/lib64/ssleay32MT.lib)
 
 ### 3RDPARTY LINK ###
 #-DOPENSSL_ROOT_DIR=${OPENSSL}
-UNIX_DEBUG_dk_set	(OPENSSL_CMAKE -DOPENSSL_INCLUDE_DIR=${OPENSSL}/${OS}/${DEBUG_DIR}/include -DOPENSSL_CRYPTO_LIBRARY=${OPENSSL}/${OS}/${DEBUG_DIR}/libcrypto.a -DOPENSSL_SSL_LIBRARY=${OPENSSL}/${OS}/${DEBUG_DIR}/libssl.a "-DCMAKE_C_FLAGS=-I${OPENSSL}/include -I${OPENSSL}/${OS}/${DEBUG_DIR}/include" "-DCMAKE_CXX_FLAGS=-I${OPENSSL}/include -I${OPENSSL}/${OS}/${DEBUG_DIR}/include")
-UNIX_RELEASE_dk_set	(OPENSSL_CMAKE -DOPENSSL_INCLUDE_DIR=${OPENSSL}/${OS}/${RELEASE_DIR}/include -DOPENSSL_CRYPTO_LIBRARY=${OPENSSL}/${OS}/${RELEASE_DIR}/libcrypto.a -DOPENSSL_SSL_LIBRARY=${OPENSSL}/${OS}/${RELEASE_DIR}/libssl.a "-DCMAKE_C_FLAGS=-I${OPENSSL}/include -I${OPENSSL}/${OS}/${RELEASE_DIR}/include" "-DCMAKE_CXX_FLAGS=-I${OPENSSL}/include -I${OPENSSL}/${OS}/${RELEASE_DIR}/include")
-WIN32_dk_set		(OPENSSL_CMAKE -DOPENSSL_INCLUDE_DIR=${OPENSSL}/include -DLIB_EAY_DEBUG=${OPENSSL}/lib/libeay32MTd.lib -DLIB_EAY_RELEASE=${OPENSSL}/lib/libeay32MT.lib -DSSL_EAY_DEBUG=${OPENSSL}/lib/ssleay32MTd.lib -DSSL_EAY_RELEASE=${OPENSSL}/lib/ssleay32MT.lib "-DCMAKE_C_FLAGS=-I${OPENSSL}/include" "-DCMAKE_CXX_FLAGS=-I${OPENSSL}/include")
-WIN64_dk_set		(OPENSSL_CMAKE -DOPENSSL_INCLUDE_DIR=${OPENSSL}/include -DLIB_EAY_DEBUG=${OPENSSL}/lib64/libeay32MTd.lib -DLIB_EAY_RELEASE=${OPENSSL}/lib64/libeay32MT.lib -DSSL_EAY_DEBUG=${OPENSSL}/lib64/ssleay32MTd.lib -DSSL_EAY_RELEASE=${OPENSSL}/lib64/ssleay32MT.lib "-DCMAKE_C_FLAGS=-I${OPENSSL}/include" "-DCMAKE_CXX_FLAGS=-I${OPENSSL}/include")
+if(MSVC)
+	WIN32_dk_set		(OPENSSL_CMAKE -DOPENSSL_INCLUDE_DIR=${OPENSSL}/include -DLIB_EAY_DEBUG=${OPENSSL}/lib/libeay32MTd.lib -DLIB_EAY_RELEASE=${OPENSSL}/lib/libeay32MT.lib -DSSL_EAY_DEBUG=${OPENSSL}/lib/ssleay32MTd.lib -DSSL_EAY_RELEASE=${OPENSSL}/lib/ssleay32MT.lib "-DCMAKE_C_FLAGS=-I${OPENSSL}/include" "-DCMAKE_CXX_FLAGS=-I${OPENSSL}/include")
+	WIN64_dk_set		(OPENSSL_CMAKE -DOPENSSL_INCLUDE_DIR=${OPENSSL}/include -DLIB_EAY_DEBUG=${OPENSSL}/lib64/libeay32MTd.lib -DLIB_EAY_RELEASE=${OPENSSL}/lib64/libeay32MT.lib -DSSL_EAY_DEBUG=${OPENSSL}/lib64/ssleay32MTd.lib -DSSL_EAY_RELEASE=${OPENSSL}/lib64/ssleay32MT.lib "-DCMAKE_C_FLAGS=-I${OPENSSL}/include" "-DCMAKE_CXX_FLAGS=-I${OPENSSL}/include")
+else()
+	UNIX_DEBUG_dk_set	(OPENSSL_CMAKE -DOPENSSL_INCLUDE_DIR=${OPENSSL}/${OS}/${DEBUG_DIR}/include -DOPENSSL_CRYPTO_LIBRARY=${OPENSSL}/${OS}/${DEBUG_DIR}/libcrypto.a -DOPENSSL_SSL_LIBRARY=${OPENSSL}/${OS}/${DEBUG_DIR}/libssl.a "-DCMAKE_C_FLAGS=-I${OPENSSL}/include -I${OPENSSL}/${OS}/${DEBUG_DIR}/include" "-DCMAKE_CXX_FLAGS=-I${OPENSSL}/include -I${OPENSSL}/${OS}/${DEBUG_DIR}/include")
+	UNIX_RELEASE_dk_set	(OPENSSL_CMAKE -DOPENSSL_INCLUDE_DIR=${OPENSSL}/${OS}/${RELEASE_DIR}/include -DOPENSSL_CRYPTO_LIBRARY=${OPENSSL}/${OS}/${RELEASE_DIR}/libcrypto.a -DOPENSSL_SSL_LIBRARY=${OPENSSL}/${OS}/${RELEASE_DIR}/libssl.a "-DCMAKE_C_FLAGS=-I${OPENSSL}/include -I${OPENSSL}/${OS}/${RELEASE_DIR}/include" "-DCMAKE_CXX_FLAGS=-I${OPENSSL}/include -I${OPENSSL}/${OS}/${RELEASE_DIR}/include")
+endif()
+
 
 ### GENERATE ###
 ### COMPILE ###
@@ -68,9 +80,12 @@ IOSSIM_DEBUG_dk_queueShell		(../../Configure no-shared --debug iossimulator-xcru
 LINUX_DEBUG_dk_queueShell		(../../Configure no-shared --debug)
 MAC_DEBUG_dk_queueShell			(../../Configure no-shared --debug)
 RASPBERRY_DEBUG_dk_queueShell	(../../Configure no-shared --debug)
+if(MSYS)
+	DEBUG_dk_queueShell			(../../Configure no-shared --debug)
+endif()
 
-if(NOT ANDROID)
-	UNIX_DEBUG_dk_queueShell(make)
+if(NOT ANDROID AND NOT MSVC)
+	DEBUG_dk_queueShell(make)
 else()
 	ANDROID_DEBUG_dk_queueShell(
 	"export ANDROID_NDK_ROOT=${ANDROID-NDK}\n"
@@ -97,9 +112,12 @@ IOSSIM_RELEASE_dk_queueShell	(../../Configure no-shared --release iossimulator-x
 LINUX_RELEASE_dk_queueShell		(../../Configure no-shared --release)
 MAC_RELEASE_dk_queueShell		(../../Configure no-shared --release)
 RASPBERRY_RELEASE_dk_queueShell	(../../Configure no-shared --release)
+if(MSYS)
+	RELEASE_dk_queueShell		(../../Configure no-shared --release)
+endif()
 
-if(NOT ANDROID)
-	UNIX_RELEASE_dk_queueShell(make)
+if(NOT ANDROID AND NOT MSVC)
+	RELEASE_dk_queueShell(make)
 else()
 	ANDROID_RELEASE_dk_queueShell(
 	"export ANDROID_NDK_ROOT=${ANDROID-NDK}\n"
