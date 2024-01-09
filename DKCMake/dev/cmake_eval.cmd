@@ -49,25 +49,30 @@ if not exist "%CMAKE%" ( echo "ERROR: Could not locate CMAKE" )
 
 ::echo arg1 = %1
 set commands=%1
-echo commands = %commands%
+::echo commands = %commands%
 set commands=%commands:"=%
 set "DKCOMMAND=%commands%"
 ::echo DKCOMMAND = %DKCOMMAND%
 
 
-::echo ERRORLEVEL = %ERRORLEVEL%
-
 "%CMAKE%" -DDKCMAKE=%DKCMAKE% "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE%/dev/cmake_eval.cmake" >cmake_eval.out 2>cmake_eval.err
 
-set out=
-for /f "Tokens=* Delims=" %%x in (cmake_eval.out) do set out=!out!%%x
-if NOT "%out%" == "" echo %out%
 
+set out=
+for /f "Tokens=* Delims=" %%x in (cmake_eval.out) do (
+	set out=!out!%%x
+	echo %%x
+)
+::out contains all of the lines
+::echo %out%		
 		
 set err=
-for /f "Tokens=* Delims=" %%x in (cmake_eval.err) do set err=!err!%%x
-if NOT "%err%" == "" echo [91m %err% [0m
-
+for /f "Tokens=* Delims=" %%x in (cmake_eval.err) do (
+	set err=!err!%%x
+	echo [91m %%x [0m
+)
+::err contains all of the lines
+::echo %err%
 
 ::del cmake_eval.out
 ::del cmake_eval.out
