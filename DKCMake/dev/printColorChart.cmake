@@ -25,7 +25,9 @@ include_guard()
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 CMAKE_POLICY(SET CMP0007 NEW)
-include(../DK.cmake)
+include(${DKCMAKE}/DK.cmake)
 dk_clearScreen()
 
-printColorChart()
+
+include(${DKCMAKE}/functions/dk_printColorChart.cmake)
+dk_printColorChart()
