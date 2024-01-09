@@ -22,7 +22,7 @@
 :: OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 :: SOFTWARE.
 @echo off
-::setlocal EnableDelayedExpansion
+setlocal EnableDelayedExpansion
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: cmake_eval eval_code error
@@ -52,23 +52,26 @@ set commands=%1
 echo commands = %commands%
 set commands=%commands:"=%
 set "DKCOMMAND=%commands%"
-echo DKCOMMAND = %DKCOMMAND%
-
-::set "DKCOMMAND=include(%DKCMAKE%/DK.cmake)"
-::set "DKCOMMAND=%DKCOMMAND%;%commands%"
-
-
+::echo DKCOMMAND = %DKCOMMAND%
 
 
 ::echo ERRORLEVEL = %ERRORLEVEL%
 
-"%CMAKE%" -DDKCMAKE=%DKCMAKE% "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE%/dev/cmake_eval.cmake" > cmake_eval.out
-set /p output=<cmake_eval.out
-set output=%output:~3%
-echo output = %output%
-del cmake_eval.out
+"%CMAKE%" -DDKCMAKE=%DKCMAKE% "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE%/dev/cmake_eval.cmake" >cmake_eval.out 2>cmake_eval.err
+
+set out=
+for /f "Tokens=* Delims=" %%x in (cmake_eval.out) do set out=!out!%%x
+if NOT "%out%" == "" echo %out%
+
+		
+set err=
+for /f "Tokens=* Delims=" %%x in (cmake_eval.err) do set err=!err!%%x
+if NOT "%err%" == "" echo [91m %err% [0m
 
 
+::del cmake_eval.out
+::del cmake_eval.out
 
-
-
+::if not "%ERROR_CODE%"=="0" (
+::	echo [91m ERROR: %ERROR_CODE%   %3 [0m
+::)
