@@ -54,7 +54,7 @@ call:main
 	if '%choice%'=='9' set "APP=DKDomTest" & goto:eof
 	if '%choice%'=='10' set "APP=DKTestAll" & goto:eof
 	if '%choice%'=='11' call:clear_screen & goto:eof
-	if '%choice%'=='12" call:end
+	if '%choice%'=='12' call:end
 	echo "%choice%" is not valid, try again
 	goto pickapp
 goto:eof
@@ -527,7 +527,6 @@ goto:eof
 
 ::###### end ######
 :end
-	echo "the end"
 	echo Done
 	exit
 goto:eof
@@ -561,4 +560,5 @@ goto:eof
 	call:build
 	
 	::call:end
+	goto:main
 goto:eof
