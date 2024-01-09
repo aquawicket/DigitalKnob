@@ -666,9 +666,13 @@ while :
 	cmake_string=""
 	if [[ $TYPE == "Debug" ]] || [[ $TYPE == "All" ]]; then
 		cmake_string+="-DDEBUG=ON "
+	else
+		cmake_string+="-DDEBUG=OFF "
 	fi
 	if [[ $TYPE == "Release" ]] || [[ $TYPE == "All" ]]; then
 		cmake_string+="-DRELEASE=ON "
+	else
+		cmake_string+="-DRELEASE=OFF "
 	fi
 	if [[ $LEVEL == "Build" ]]; then
 		cmake_string+="-DBUILD=ON "

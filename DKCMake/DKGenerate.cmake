@@ -520,7 +520,7 @@ if(WIN_64)
 		elseif(RELEASE)
 			target_link_libraries(${APP_NAME} ${RELEASE_LIBS} ${LIBS})
 		endif()
-	else()
+	endif()
 	
 	if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 		list(APPEND DEBUG_LINK_FLAGS /MANIFEST:NO)
