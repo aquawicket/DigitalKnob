@@ -487,8 +487,8 @@ if(TINYCORE)
 endif()
 
 
-# Disabled for Windows targets
-if(WIN) 
+# Disabled for Windows (MSVC) targets
+if(MSVC) 
 	dk_disable(boost)				# error: cl command not found
 	dk_disable(DKOcr)				# requires tesseract
 	dk_disable(DKScreenRecorder)    # requires opencv
@@ -527,8 +527,8 @@ if(WIN)
 endif(WIN)
 
 
-# Disabled for Windows 64bit targets
-if(WIN_64)
+# Disabled for Windows 64bit (MSVC) targets
+if(MSVC AND WIN_64)
 	dk_disable(DKVncClient)			# requires libvncserver
 	dk_disable(DKVncServer)			# requires libvncserver
 	dk_disable(libvncserver)		# build errors
@@ -536,3 +536,8 @@ if(WIN_64)
 	dk_disable(sdl_net)				# can't find "sys/ioctl.h"
 	dk_disable(smpeg2)				# fatal error C1083: Cannot open include file: 'unistd.h'
 endif(WIN_64)
+
+# Disabled for Windows (MSYS2) targets
+if(MSYS)
+	dk_disable(libexpat)
+endif()

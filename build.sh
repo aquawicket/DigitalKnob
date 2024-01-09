@@ -164,7 +164,11 @@ function validate_package() {
 	fi
 }
 
-
+# build-essential for Tiny Core Linux
+if command_exists tce-load; then
+	validate_package libzstd libzstd
+fi
+	
 ###### validate_branch ######
 function validate_branch() {
 	# If the current folder matches the current branch set DKBRANCH, default to Development

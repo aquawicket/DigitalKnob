@@ -2588,7 +2588,7 @@ function(dk_libDebug lib_path)
 		return() # The library is already in the list
 	endif()
 	
-	if(LINUX OR RASPBERRY OR ANDROID OR EMSCRIPTEN)
+	if(LINUX OR RASPBERRY OR ANDROID OR EMSCRIPTEN OR MSYS)
 		dk_set(DEBUG_LIBS debug ${lib_path} ${DEBUG_LIBS})  # Add to beginning of list
 	else()
 		dk_set(DEBUG_LIBS ${DEBUG_LIBS} debug ${lib_path})  # Add to end of list
@@ -2631,7 +2631,7 @@ function(dk_libRelease lib_path)
 		return() # The library is already in the list
 	endif()	
 	
-	if(LINUX OR RASPBERRY OR ANDROID OR EMSCRIPTEN)
+	if(LINUX OR RASPBERRY OR ANDROID OR EMSCRIPTEN OR MSYS)
 		dk_set(RELEASE_LIBS optimized ${lib_path} ${RELEASE_LIBS})  # Add to beginning of list
 	else()
 		dk_set(RELEASE_LIBS ${RELEASE_LIBS} optimized ${lib_path})  # Add to end of list

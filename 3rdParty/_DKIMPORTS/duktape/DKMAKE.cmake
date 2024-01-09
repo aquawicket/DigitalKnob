@@ -20,7 +20,9 @@ dk_import(https://github.com/aquawicket/duktape.git PATCH) #NOTE: PATCH is for C
 
 
 ### LINK ###
-WIN_dk_define		(DUK_F_VBCC)
+if(MSVC)
+	WIN_dk_define	(DUK_F_VBCC)
+endif()
 ANDROID_dk_define	(DUK_F_32BIT_PTRS)
 dk_include			(${DUKTAPE}/src)
 
