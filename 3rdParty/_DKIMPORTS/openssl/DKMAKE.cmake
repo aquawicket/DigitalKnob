@@ -28,14 +28,16 @@ RELEASE_dk_include      (${OPENSSL}/${OS}/${RELEASE_DIR}/include)
 # libcrypto
 if(NOT MSVC)
 	dk_libDebug		(${OPENSSL}/${OS}/${DEBUG_DIR}/libcrypto.a)
-	dk_libRelease		(${OPENSSL}/${OS}/${RELEASE_DIR}/libcrypto.a)
+	dk_libRelease	(${OPENSSL}/${OS}/${RELEASE_DIR}/libcrypto.a)
 endif()
 
 # libeay
-WIN32_dk_libDebug		(${OPENSSL}/lib/libeay32MTd.lib)
-WIN32_dk_libRelease		(${OPENSSL}/lib/libeay32MT.lib)
-WIN64_dk_libDebug		(${OPENSSL}/lib64/libeay32MTd.lib)
-WIN64_dk_libRelease		(${OPENSSL}/lib64/libeay32MT.lib)
+if(MSVC)
+	WIN32_dk_libDebug		(${OPENSSL}/lib/libeay32MTd.lib)
+	WIN32_dk_libRelease		(${OPENSSL}/lib/libeay32MT.lib)
+	WIN64_dk_libDebug		(${OPENSSL}/lib64/libeay32MTd.lib)
+	WIN64_dk_libRelease		(${OPENSSL}/lib64/libeay32MT.lib)
+endif()
 
 # libssl
 if(NOT MSVC)

@@ -35,52 +35,45 @@ setlocal EnableDelayedExpansion
 :: Example:  call cmake_eval dk_info("called from cmake_eval")
 ::           echo cmake_eval returned: %error%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::echo cmake_eval %1
-IF [%1] == [] (
-	echo "ERROR: cmake_eval() parameter1 is invalid"
-	goto:eof
-)
 
-set "DIGITALKNOB=C:/Users/%USERNAME%/digitalknob"
-set "DKCMAKE=%DIGITALKNOB%/Development/DKCMake"
-if exist "C:\Program Files\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files\CMake\bin\cmake.exe"
-if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files (x86)\CMake\bin\cmake.exe"
-if not exist "%CMAKE%" ( echo "ERROR: Could not locate CMAKE" )
+::###### cmake_eval ######
+:cmake_eval
+	::echo cmake_eval %1
+	IF [%1] == [] (
+		echo "ERROR: cmake_eval() parameter1 is invalid"
+		goto:eof
+	)
 
-set commands=%1
-::echo commands = %commands%
-set commands=%commands:"=%
-set "DKCOMMAND=%commands%"
-::echo DKCOMMAND = %DKCOMMAND%
+	set "DIGITALKNOB=C:/Users/%USERNAME%/digitalknob"
+	set "DKCMAKE=%DIGITALKNOB%/Development/DKCMake"
+	if exist "C:\Program Files\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files\CMake\bin\cmake.exe"
+	if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files (x86)\CMake\bin\cmake.exe"
+	if not exist "%CMAKE%" ( echo "ERROR: Could not locate CMAKE" )
 
+	set commands=%1
+	::echo commands = %commands%
+	set commands=%commands:"=%
+	set "DKCOMMAND=%commands%"
+	::echo DKCOMMAND = %DKCOMMAND%
 
-"%CMAKE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE%/dev/cmake_eval.cmake" --log-level=TRACE >cmake_eval.out 2>cmake_eval.err
-echo return code: %ERRORLEVEL%
+	"%CMAKE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE%/dev/cmake_eval.cmake" --log-level=TRACE >cmake_eval.out 2>cmake_eval.err
+	echo return code: %ERRORLEVEL%
 
-set out=
-for /f "Tokens=* Delims=" %%x in (cmake_eval.out) do (
-	set out=!out!%%x
-	echo %%x
-)
-::out contains all of the lines
-::echo %out%		
-		
-set err=
-for /f "Tokens=* Delims=" %%x in (cmake_eval.err) do (
-	set err=!err!%%x
-	echo [91m %%x [0m
-)
-::err contains all of the lines
-::echo %err%
-
-::del cmake_eval.out
-::del cmake_eval.out
-
-
-::if "%ERROR_CODE%"=="0" (
-::	echo return code: %ERROR_CODE%
-::)
-::if not "%ERROR_CODE%"=="0" (
-::	echo return code: %ERROR_CODE%
-::)
-
+	set out=
+	for /f "Tokens=* Delims=" %%x in (cmake_eval.out) do (
+		set out=!out!%%x
+		echo %%x
+	)
+	::out contains all of the lines
+	::del cmake_eval.out
+	::echo %out%		
+			
+	set err=
+	for /f "Tokens=* Delims=" %%x in (cmake_eval.err) do (
+		set err=!err!%%x
+		echo [91m %%x [0m
+	)
+	::del cmake_eval.out
+	::err contains all of the lines
+	::echo %err%
+goto:eof 
