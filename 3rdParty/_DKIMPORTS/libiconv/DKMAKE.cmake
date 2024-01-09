@@ -16,16 +16,24 @@ dk_include				(${LIBICONV}/${OS}/${RELEASE_DIR})
 ANDROID_dk_include		(${LIBICONV}/${OS}/$(BUILD_TYPE)/jni)
 
 # libcharset
-UNIX_dk_libDebug		(${LIBICONV}/${OS}/${DEBUG_DIR}/libcharset.a)
-UNIX_dk_libRelease		(${LIBICONV}/${OS}/${RELEASE_DIR}/libcharset.a)
-WIN_dk_libDebug			(${LIBICONV}/${OS}/${DEBUG_DIR}/charset.lib)
-WIN_dk_libRelease		(${LIBICONV}/${OS}/${RELEASE_DIR}/charset.lib)
+if(MSVC)
+	WIN_dk_libDebug		(${LIBICONV}/${OS}/${DEBUG_DIR}/charset.lib)
+	WIN_dk_libRelease	(${LIBICONV}/${OS}/${RELEASE_DIR}/charset.lib)
+else()
+	dk_libDebug			(${LIBICONV}/${OS}/${DEBUG_DIR}/libcharset.a)
+	dk_libRelease		(${LIBICONV}/${OS}/${RELEASE_DIR}/libcharset.a)
+endif()
 
 #libiconv
-UNIX_dk_libDebug		(${LIBICONV}/${OS}/${DEBUG_DIR}/libiconv.a)
-UNIX_dk_libRelease		(${LIBICONV}/${OS}/${RELEASE_DIR}/libiconv.a)
-WIN_dk_libDebug			(${LIBICONV}/${OS}/${DEBUG_DIR}/iconv.lib)
-WIN_dk_libRelease		(${LIBICONV}/${OS}/${RELEASE_DIR}/iconv.lib)
+if(MSVC)
+	WIN_dk_libDebug		(${LIBICONV}/${OS}/${DEBUG_DIR}/iconv.lib)
+	WIN_dk_libRelease	(${LIBICONV}/${OS}/${RELEASE_DIR}/iconv.lib)
+else()
+	dk_libDebug			(${LIBICONV}/${OS}/${DEBUG_DIR}/libiconv.a)
+	dk_libRelease		(${LIBICONV}/${OS}/${RELEASE_DIR}/libiconv.a)
+endif()
+
+
 
 
 ### 3RDPARTY LINK ###

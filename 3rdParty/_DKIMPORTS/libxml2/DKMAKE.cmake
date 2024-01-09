@@ -23,8 +23,8 @@ if(MSVC)
 	WIN_dk_libDebug		(${LIBXML2}/${OS}/${DEBUG_DIR}/xml2.lib)
 	WIN_dk_libRelease	(${LIBXML2}/${OS}/${RELEASE_DIR}/xml2.lib)
 else()
-	UNIX_dk_libDebug	(${LIBXML2}/${OS}/${DEBUG_DIR}/libxml2.a)
-	UNIX_dk_libRelease	(${LIBXML2}/${OS}/${RELEASE_DIR}/libxml2.a)
+	dk_libDebug			(${LIBXML2}/${OS}/${DEBUG_DIR}/libxml2.a)
+	dk_libRelease		(${LIBXML2}/${OS}/${RELEASE_DIR}/libxml2.a)
 endif()
 
 
@@ -56,9 +56,9 @@ RASPBERRY_dk_queueShell			(${DKCONFIGURE_BUILD})
 RASPBERRY_DEBUG_dk_queueShell	(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=-DLIBXML_THREAD_ENABLED -DHAVE_ERRNO_H -I${LIBXML2}/${OS}/${DEBUG_DIR}" ${LIBICONV_CMAKE} ${XZ_CMAKE} ${ZLIB_CMAKE} ${LIBXML2})
 RASPBERRY_RELEASE_dk_queueShell	(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=-DLIBXML_THREAD_ENABLED -DHAVE_ERRNO_H -I${LIBXML2}/${OS}/${RELEASE_DIR}" ${LIBICONV_CMAKE} ${XZ_CMAKE} ${ZLIB_CMAKE} ${LIBXML2})
 
-if(MSYS)
-	dk_queueCommand				(${DKCONFIGURE_BUILD})
-endif()
+#if(MSYS)
+#	dk_queueCommand				(${DKCONFIGURE_BUILD})
+#endif()
 WIN_dk_queueCommand				(${DKCMAKE_BUILD} ${LIBICONV_CMAKE} ${XZ_CMAKE} ${ZLIB_CMAKE} ${LIBXML2})
 
 
