@@ -47,7 +47,6 @@ if exist "C:\Program Files\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files\CMak
 if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files (x86)\CMake\bin\cmake.exe"
 if not exist "%CMAKE%" ( echo "ERROR: Could not locate CMAKE" )
 
-::echo arg1 = %1
 set commands=%1
 ::echo commands = %commands%
 set commands=%commands:"=%
@@ -55,8 +54,8 @@ set "DKCOMMAND=%commands%"
 ::echo DKCOMMAND = %DKCOMMAND%
 
 
-"%CMAKE%" -DDKCMAKE=%DKCMAKE% "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE%/dev/cmake_eval.cmake" >cmake_eval.out 2>cmake_eval.err
-
+"%CMAKE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE%/dev/cmake_eval.cmake" --log-level=TRACE >cmake_eval.out 2>cmake_eval.err
+echo return code: %ERRORLEVEL%
 
 set out=
 for /f "Tokens=* Delims=" %%x in (cmake_eval.out) do (
@@ -77,6 +76,11 @@ for /f "Tokens=* Delims=" %%x in (cmake_eval.err) do (
 ::del cmake_eval.out
 ::del cmake_eval.out
 
-::if not "%ERROR_CODE%"=="0" (
-::	echo [91m ERROR: %ERROR_CODE%   %3 [0m
+
+::if "%ERROR_CODE%"=="0" (
+::	echo return code: %ERROR_CODE%
 ::)
+::if not "%ERROR_CODE%"=="0" (
+::	echo return code: %ERROR_CODE%
+::)
+
