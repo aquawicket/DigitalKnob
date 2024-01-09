@@ -1837,13 +1837,18 @@ endfunction()
 #
 #	@commands	- TODO
 #
-function(dk_executeProcess commands) #NOASSERT
+function(dk_executeProcess commands) #NOASSERT #NOECHO
 	DKDEBUGFUNC(${ARGV})
 	set(commands ${ARGV})
 	
 	dk_includes("${ARGN}" "NOASSERT" includes)
 	if(${includes})
 		set(noassert true)
+	endif()
+	
+	dk_includes("${ARGN}" "NOECHO" includes)
+	if(${includes})
+		set(noecho true)
 	endif()
 	
 	list(REMOVE_ITEM commands NOASSERT)
@@ -1854,10 +1859,12 @@ function(dk_executeProcess commands) #NOASSERT
 		set(command ${commands} WORKING_DIRECTORY ${CURRENT_DIR}) # add WORKING_DIRECTORY if missing
 	endif()	
 	
-	if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-		dk_info("\n${CLR}${magenta} $ cmd /c ${commands}\n")
-	else()
-		dk_info("\n${CLR}${magenta} $ ${commands}\n")
+	if(NOT ${noecho})
+		if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+			dk_info("\n${CLR}${magenta} $ cmd /c ${commands}\n")
+		else()
+			dk_info("\n${CLR}${magenta} $ ${commands}\n")
+		endif()
 	endif()
 	
 	if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
@@ -1865,6 +1872,7 @@ function(dk_executeProcess commands) #NOASSERT
 	else()
 		execute_process(COMMAND ${commands} RESULT_VARIABLE result ERROR_VARIABLE error)
 	endif()
+
 	if(NOT ${result} EQUAL 0)
 		if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 			execute_process(COMMAND timeout /t 2 /nobreak OUTPUT_QUIET WORKING_DIRECTORY ${CURRENT_DIR}) # wait 2 seconds for the stdout to flush before printing error
@@ -1976,11 +1984,6 @@ function(dk_msys)
 	
 	dk_warn("WARNING: dk_msys() is deprecated. Please switch to using msys2()")
 	
-	#if(USE_MSYS2)
-	#	dk_msys2(${ARGV})
-	#	return()
-	#endif()
-	
 	if(QUEUE_BUILD)
 		string(REPLACE ";" " " str "${ARGV}")
 		set(bash "#!/bin/bash")
@@ -2036,8 +2039,8 @@ function(dk_msys2)
 		string(REPLACE ";" "\n"	bash "${bash}")
 		string(REPLACE "C:/" "/c/" bash ${bash})
 		file(WRITE ${MSYS2}/dkscript.tmp ${bash})
-		dk_debug("dk_msys2 $ ${bash}")
-		dk_executeProcess(${MSYS2}/usr/bin/bash ${MSYS2}/dkscript.tmp)
+		#dk_debug("dk_msys2 $ ${bash}")
+		dk_executeProcess(${MSYS2}/usr/bin/bash ${MSYS2}/dkscript.tmp NOECHO)
 endfunction()
 dk_createOsMacros("dk_msys2")
 

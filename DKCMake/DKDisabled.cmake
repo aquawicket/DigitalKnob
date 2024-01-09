@@ -147,7 +147,6 @@ if(ANDROID)
 	dk_disable(opencv)				# build errors
 	dk_disable(openframeworks)		# error: CMakeLists.txt broken
 	dk_disable(openmw)
-	
 	dk_disable(poco)				# error: Compiler does not support C++14
 	dk_disable(podofo)				# error: can't find "fontconfig/fontconfig.h"
 	dk_disable(rmlui-d3d11)
@@ -267,7 +266,7 @@ if(EMSCRIPTEN)
 	dk_disable(x265)
 	dk_disable(xz)					# CMake Error: TEST_BIG_ENDIAN found no result!
 	dk_disable(zstd)				# error: call to undeclared function 'fileno'; ISO C99 and later do not support implicit function declarations
-endif()
+endif(EMSCRIPTEN) 
 
 
 # Disabled for iOS and iOS-Simulator targets
@@ -341,7 +340,7 @@ if(IOS AND NOT IOSSIM)
 	dk_disable(flac)				# configure: error: C compiler cannot create executables
 	dk_disable(ogg)					# configure: error: C compiler cannot create executables
 	dk_disable(vorbis)				# configure: error: C compiler cannot create executables
-endif()
+endif(IOS AND NOT IOSSIM)
 
 
 # Disabled for Linux targets
@@ -484,7 +483,7 @@ if(TINYCORE)
 	dk_disable(mesa-common-dev)
 	dk_disable(opengl)
 	dk_disable(pyyaml)
-endif()
+endif(TINYCORE)
 
 
 # Disabled for Windows (MSVC) targets
@@ -524,7 +523,7 @@ if(MSVC)
 	dk_disable(waave)				# error C2065: 'PIX_FMT_YUV420P': undeclared identifier.  https://sourceforge.net/p/guvcview/tickets/34/
 	dk_disable(x264)				# broken with new msys2,   check DKMAKE.cmake build script
 	dk_disable(x265)
-endif(WIN)
+endif(MSVC)
 
 
 # Disabled for Windows 64bit (MSVC) targets
@@ -535,10 +534,10 @@ if(MSVC AND WIN_64)
 	dk_disable(opencv)				# error: Only SIMD128, AVX2 and NEON are supported in Winograd.
 	dk_disable(sdl_net)				# can't find "sys/ioctl.h"
 	dk_disable(smpeg2)				# fatal error C1083: Cannot open include file: 'unistd.h'
-endif(WIN_64)
+endif(MSVC AND WIN_64)
 
 # Disabled for Windows (MSYS2) targets
 if(MSYS)
-	#dk_disable(libbcrypt)
+	dk_disable(libbcrypt)
 	dk_disable(libexpat)
-endif()
+endif(MSYS)

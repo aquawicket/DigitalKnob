@@ -72,14 +72,17 @@ RASPBERRY_dk_include	(/opt/vc/lib)
 #dk_addTarget(sdl SDL2main)		# TODO
 
 #if(sdl_SDL2static)
-	WIN_dk_libDebug			(${SDL}/${OS}/${DEBUG_DIR}/SDL2-staticd.lib)
-	WIN_dk_libRelease		(${SDL}/${OS}/${RELEASE_DIR}/SDL2-static.lib)
+if(MSVC)
+	WIN_dk_libDebug		(${SDL}/${OS}/${DEBUG_DIR}/SDL2-staticd.lib)
+	WIN_dk_libRelease	(${SDL}/${OS}/${RELEASE_DIR}/SDL2-static.lib)
+else()
 	if(ANDROID)
 		ANDROID_dk_libDebug	(${SDL}/${OS}/${DEBUG_DIR}/libSDL2.a)
 	else()
-		UNIX_dk_libDebug	(${SDL}/${OS}/${DEBUG_DIR}/libSDL2d.a)
+		dk_libDebug		(${SDL}/${OS}/${DEBUG_DIR}/libSDL2d.a)
 	endif()
-	UNIX_dk_libRelease		(${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a)
+	dk_libRelease		(${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a)
+endif()
 #endif()
 
 #ANDROID_dk_libDebug(${SDL}/${OS}/${DEBUG_DIR}/libhidapi.a)
@@ -185,19 +188,33 @@ RASPBERRY_dk_set(SDL_CMAKE
 	-DSDL2_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/libSDL2d.a
 	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a)
 	
-WIN_dk_set(SDL_CMAKE
-	"-DCMAKE_C_FLAGS=/I${SDL}/include"
-	"-DCMAKE_CXX_FLAGS=/I${SDL}/include" 
-	-DSDL2_DIR=${SDL}
-	-DSDL2_INCLUDE_DIR=${SDL}/include
-	-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/SDL2.lib
-	-DSDL2_LIBRARY=${SDL}/${OS}/${RELEASE_DIR}/SDL2.lib
-	-DSDL2_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/SDL2d.lib
-	-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/SDL2.lib
-	-DSDL2_MAIN_LIBRARY=${SDL}/${OS}/${RELEASE_DIR}/SDL2main.lib)
-WIN_dk_set(SDLMAIN_CMAKE
-	-DSDL2MAIN_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/SDL2maind.lib
-	-DSDL2MAIN_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/SDL2main.lib)
+if(MSVC)
+	WIN_dk_set(SDL_CMAKE
+		"-DCMAKE_C_FLAGS=/I${SDL}/include"
+		"-DCMAKE_CXX_FLAGS=/I${SDL}/include" 
+		-DSDL2_DIR=${SDL}
+		-DSDL2_INCLUDE_DIR=${SDL}/include
+		-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/SDL2.lib
+		-DSDL2_LIBRARY=${SDL}/${OS}/${RELEASE_DIR}/SDL2.lib
+		-DSDL2_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/SDL2d.lib
+		-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/SDL2.lib
+		-DSDL2_MAIN_LIBRARY=${SDL}/${OS}/${RELEASE_DIR}/SDL2main.lib)
+	WIN_dk_set(SDLMAIN_CMAKE
+		-DSDL2MAIN_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/SDL2maind.lib
+		-DSDL2MAIN_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/SDL2main.lib)
+endif()
+
+if(MSYS)
+	WIN_dk_set(SDL_CMAKE
+		"-DCMAKE_C_FLAGS=-I${SDL}/include"
+		"-DCMAKE_CXX_FLAGS=-I${SDL}/include"
+		-DSDL2_DIR=${SDL}
+		-DSDL2_INCLUDE_DIR=${SDL}/include
+		-DSDL2_LIBRARY_TEMP=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a
+		-DSDL2_LIBRARY=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a
+		-DSDL2_LIBRARY_DEBUG=${SDL}/${OS}/${DEBUG_DIR}/libSDL2d.a
+		-DSDL2_LIBRARY_RELEASE=${SDL}/${OS}/${RELEASE_DIR}/libSDL2.a)
+endif()
 
 
 ### GENERATE ###
@@ -221,7 +238,11 @@ MAC_dk_queueCommand			(${SDL_BUILD} -DSDL_SHARED=OFF -DSDL_OPENGL=ON -DSDL_METAL
 
 RASPBERRY_dk_queueCommand	(${DKCMAKE_BUILD} -DSDL_SHARED=OFF -DVIDEO_OPENGLES=ON ${SDL})
 
-WIN_dk_queueCommand			(${DKCMAKE_BUILD} -DSDL_SHARED=OFF -DSDL_LIBC=ON ${SDL})
+if(MSVC)
+	WIN_dk_queueCommand			(${DKCMAKE_BUILD} -DSDL_SHARED=OFF -DSDL_LIBC=ON ${SDL})
+else()
+	WIN_dk_queueCommand			(${DKCMAKE_BUILD} -DSDL_SHARED=OFF -DSDL_LIBC=ON ${SDL})
+endif()
 
 
 ### COMPILE ###
