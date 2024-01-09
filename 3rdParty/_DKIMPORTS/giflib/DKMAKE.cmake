@@ -9,6 +9,9 @@
 ### DEPEND ###
 MAC_dk_depend(autotools)
 WIN_dk_depend(msys2)
+if(MSYS)
+	dk_depend(autotools)
+endif()
 
 
 ### IMPORT ###
@@ -31,7 +34,10 @@ if(GIFLIB_USE_CMAKE)
 	### GENERATE / CONFIGURE ###
 	if(WIN)
 		dk_setPath				(${GIFLIB})
+		
+
 		dk_queueShell			(autoreconf -f -i)
+
 		
 		string(REPLACE "-std=c17" "" GIFLIB_CONFIGURE "${DKCONFIGURE_BUILD}")
 		string(REPLACE "-std=c++1z" "" GIFLIB_CONFIGURE "${GIFLIB_CONFIGURE}")
@@ -60,7 +66,7 @@ else()
 		ANDROID_dk_libRelease	(${GIFLIB}/${OS}/${RELEASE_DIR}/libgiflib.a)
 		WIN_dk_libDebug			(${GIFLIB}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
 		WIN_dk_libRelease		(${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
-	elseif(CMAKE_CXX_COMPILER_ID STREQUAL "XCODE")
+	elseif(APPLE)
 		dk_libDebug				(${GIFLIB}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
 		dk_libRelease			(${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
 	else()
@@ -84,7 +90,9 @@ else()
 
 
 	dk_setPath		(${GIFLIB})
-	dk_queueShell	(autoreconf -f -i)
+	if(NOT MSYS)
+		dk_queueShell	(autoreconf -f -i)
+	endif()
 
 
 	string(REPLACE "-std=c17" "" GIFLIB_CONFIGURE "${DKCONFIGURE_BUILD}")

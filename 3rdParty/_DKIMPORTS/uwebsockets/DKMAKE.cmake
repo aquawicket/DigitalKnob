@@ -14,12 +14,16 @@ dk_import(https://github.com/uNetworking/uWebSockets/archive/refs/tags/v0.14.8.z
 
 
 ### LINK ###
-dk_include			(${UWEBSOCKETS})
-dk_include			(${UWEBSOCKETS}/${OS})
-UNIX_dk_libDebug	(${UWEBSOCKETS}/${OS}/${DEBUG_DIR}/libuWS.a)
-UNIX_dk_libRelease	(${UWEBSOCKETS}/${OS}/${RELEASE_DIR}/libuWS.a)
-WIN_dk_libDebug		(${UWEBSOCKETS}/${OS}/${DEBUG_DIR}/uWS.lib)
-WIN_dk_libRelease	(${UWEBSOCKETS}/${OS}/${RELEASE_DIR}/uWS.lib)
+dk_include				(${UWEBSOCKETS})
+dk_include				(${UWEBSOCKETS}/${OS})
+if(MSVC)
+	WIN_dk_libDebug		(${UWEBSOCKETS}/${OS}/${DEBUG_DIR}/uWS.lib)
+	WIN_dk_libRelease	(${UWEBSOCKETS}/${OS}/${RELEASE_DIR}/uWS.lib)
+else()
+	dk_libDebug			(${UWEBSOCKETS}/${OS}/${DEBUG_DIR}/libuWS.a)
+	dk_libRelease		(${UWEBSOCKETS}/${OS}/${RELEASE_DIR}/libuWS.a)
+endif()
+
 
 
 ### GENERATE ###

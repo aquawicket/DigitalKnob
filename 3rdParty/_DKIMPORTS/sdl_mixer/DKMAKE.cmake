@@ -15,15 +15,16 @@ dk_import(https://github.com/libsdl-org/SDL_mixer/archive/refs/tags/release-2.6.
 
 
 ### LINK ###
-dk_include				(${SDL_MIXER}/include)
-WIN_dk_libDebug			(${SDL_MIXER}/${OS}/${DEBUG_DIR}/SDL2_mixer-staticd.lib)
-WIN_dk_libRelease		(${SDL_MIXER}/${OS}/${RELEASE_DIR}/SDL2_mixer-static.lib)
-if(ANDROID)
-	dk_libDebug			(${SDL_MIXER}/${OS}/${DEBUG_DIR}/libSDL2_mixer.a)
-	dk_libRelease		(${SDL_MIXER}/${OS}/${RELEASE_DIR}/libSDL2_mixer.a)
+dk_include					(${SDL_MIXER}/include)
+if(MSVC)
+	WIN_dk_libDebug			(${SDL_MIXER}/${OS}/${DEBUG_DIR}/SDL2_mixer-staticd.lib)
+	WIN_dk_libRelease		(${SDL_MIXER}/${OS}/${RELEASE_DIR}/SDL2_mixer-static.lib)
+elseif(ANDROID)
+	ANDROID_dk_libDebug		(${SDL_MIXER}/${OS}/${DEBUG_DIR}/libSDL2_mixer.a)
+	ANDROID_dk_libRelease	(${SDL_MIXER}/${OS}/${RELEASE_DIR}/libSDL2_mixer.a)
 else()
-	UNIX_dk_libDebug	(${SDL_MIXER}/${OS}/${DEBUG_DIR}/libSDL2_mixerd.a)
-	UNIX_dk_libRelease	(${SDL_MIXER}/${OS}/${RELEASE_DIR}/libSDL2_mixer.a)
+	dk_libDebug				(${SDL_MIXER}/${OS}/${DEBUG_DIR}/libSDL2_mixerd.a)
+	dk_libRelease			(${SDL_MIXER}/${OS}/${RELEASE_DIR}/libSDL2_mixer.a)
 endif()
 
 
