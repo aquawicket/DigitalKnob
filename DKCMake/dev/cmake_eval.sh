@@ -36,39 +36,49 @@
 #echo cmake_eval $1
 if [ -z "$1" ]; then
 	echo "ERROR: cmake_eval() parameter1 is invalid"
-	return $false
+	#return $false #FIXME:  return: can only `return' from a function or sourced script
 fi
 
-DIGITALKNOB="$HOME/digitalknob"
-DKCMAKE="$DIGITALKNOB%/Development/DKCMake"
-CMAKE=$(which cmake)
-echo "CMAKE = $CMAKE"
+#################################
+#	Global variables
+#################################
+red="\033[31m"
 
-commands=$1
+
+DIGITALKNOB=/c/Users/Administrator/digitalknob
+DKCMAKE="$DIGITALKNOB/Development/DKCMake"
+CMAKE=$(which cmake)
+#echo "CMAKE = $CMAKE"
+
+commands="$@"
 #echo "commands = $commands"
 #set commands=$commands:"=%"  #TODO: remove double quotes
-set DKCOMMAND="$commands"
-echo "DKCOMMAND = $DKCOMMAND"
+DKCOMMAND="$commands"
+#echo "DKCOMMAND = $DKCOMMAND"
 
 
-"$CMAKE" "-DDKCMAKE=$DKCMAKE" "-DDKCOMMAND=$DKCOMMAND" -P "$DKCMAKE/dev/cmake_eval.cmake" --log-level=TRACE >cmake_eval.out 2>cmake_eval.err
-#echo return code: %ERRORLEVEL%  #TODO: get return code
+$CMAKE -DDKCMAKE=$DKCMAKE "-DDKCOMMAND=$DKCOMMAND" -P $DKCMAKE/dev/cmake_eval.cmake --log-level=TRACE >cmake_eval.out 2>cmake_eval.err
+echo return code: $? 
 
-out=
-#for /f "Tokens=* Delims=" %%x in (cmake_eval.out) do (
-#	set out=!out!%%x
-#	echo %%x
-#)
+
+out=""
+while IFS= read -r outline 
+	do
+		out="$out $outline"
+        echo "$outline"
+    done < cmake_eval.out
 #out contains all of the lines
-#echo %out%		
+#echo "$out"
+	
 		
-err=
-#for /f "Tokens=* Delims=" %%x in (cmake_eval.err) do (
-#	set err=!err!%%x
-#	echo [91m %%x [0m
-#)
+err=""
+while IFS= read -r errline
+    do
+		err="$err $errline"
+		echo -e "${red} $errline ${CLR}"
+    done < cmake_eval.err
 #err contains all of the lines
-#echo %err%
+#echo "$err"	
 
 #del cmake_eval.out
 #del cmake_eval.out
