@@ -8,6 +8,7 @@
 dk_depend(bzip2)
 dk_depend(cryptopp)
 dk_depend(libb2)
+dk_depend(libbcrypt)
 dk_depend(libexpat)
 dk_depend(libiconv)
 dk_depend(libxml2)
@@ -392,6 +393,7 @@ else()
 		${BZIP2_CMAKE}
 		${CRYPTOPP_CMAKE}
 		${LIBB2_CMAKE}
+		${LIBBCRYPT_CMAKE}
 		${LIBEXPAT_CMAKE}
 		${LIBICONV_CMAKE}
 		${LIBXML2_CMAKE}

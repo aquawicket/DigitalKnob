@@ -539,5 +539,6 @@ endif(WIN_64)
 
 # Disabled for Windows (MSYS2) targets
 if(MSYS)
+	#dk_disable(libbcrypt)
 	dk_disable(libexpat)
 endif()
