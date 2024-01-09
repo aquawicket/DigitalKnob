@@ -78,22 +78,6 @@ function string_contains() {
 	[[ $1 == *"$2"* ]]
 }
 
-
-###### validate_branch ######
-function validate_branch() {
-	# If the current folder matches the current branch set DKBRANCH, default to Development
-	FOLDER="$(basename $(pwd))"
-	DKBRANCH="$(git rev-parse --abbrev-ref HEAD)"
-	if [[ "$DKBRANCH" == "$FOLDER" ]]; then
-		DKBRANCH="$FOLDER"
-	else
-		DKBRANCH="Development"
-	fi
-	echo "DKBRANCH = $DKBRANCH"
-}
-validate_branch
-
-
 ###### command_exists <command> ######
 function command_exists() {
 	command -v "$1" >/dev/null 2>&1
@@ -108,7 +92,7 @@ function file_exists() {
 function package_installed() {
 	if command_exists dpkg-query; then
 		if [ $(dpkg-query -W -f='${Status}' $1 2>/dev/null | grep -c "ok installed") -ne 0 ]; then
-		  return $true
+			return $true
 		fi
 	elif command_exists brew; then
 		if brew list $1 &>/dev/null; then
@@ -122,7 +106,8 @@ function package_installed() {
 		error "package_installed() pkg not implemented"
 	elif command_exists pacman; then
 		if pacman -Qs $1 > /dev/null; then
-			return $true;
+			#FIXME: this doesn't always work
+			return $false;
 		fi
 	elif command_exists tce-load; then
 		#error "package_installed() tce-load not implemented"
@@ -134,16 +119,16 @@ function package_installed() {
 }
 
 # Test package_installed
-if package_installed git; then
-	echo "git is already installed"
-else
-	echo "git is not installed"
-fi
-if package_installed digitalknob; then
-	echo "digitalknob is already installed"
-else
-	echo "digitalknob is not installed"
-fi
+#if package_installed git; then
+#	echo "git is already installed"
+#lse
+#	echo "git is not installed"
+#fi
+#if package_installed digitalknob; then
+#	echo "digitalknob is already installed"
+#else
+#	echo "digitalknob is not installed"
+#fi
 
 ###### install <package> ######
 function install() {
@@ -178,6 +163,25 @@ function validate_package() {
 		install $2
 	fi
 }
+
+
+###### validate_branch ######
+function validate_branch() {
+	# If the current folder matches the current branch set DKBRANCH, default to Development
+	validate_package git git
+	GIT=$(which git)
+	echo "\$GIT = $GIT"
+	
+	FOLDER="$(basename $(pwd))"
+	DKBRANCH="$($GIT rev-parse --abbrev-ref HEAD)"
+	if [[ "$DKBRANCH" == "$FOLDER" ]]; then
+		DKBRANCH="$FOLDER"
+	else
+		DKBRANCH="Development"
+	fi
+	echo "DKBRANCH = $DKBRANCH"
+}
+validate_branch
 
 
 ###### clear_cmake_cache ######
@@ -299,11 +303,11 @@ while :
 					# brew tap homebrew/core
 					# brew install git
 				else
-					if [ -n "$MSYSTEM" ]; then
-						call pacman -S git --noconfirm
-					else
+					#if [ -n "$MSYSTEM" ]; then
+					#	call pacman -S git --noconfirm
+					#else
 						validate_package git git
-					fi
+					#fi
 				fi
 				
 				if [[ ! -d "$DKPATH/.git" ]]; then
@@ -584,8 +588,11 @@ while :
 		
 	validate_package which which
 	validate_package git git
-	validate_package cmake_reinstall cmake
-	validate_package reinstall base-devel
+	
+	if ! [[ -n "$MSYSTEM" ]]; then
+		validate_package cmake cmake
+	fi
+	#validate_package reinstall base-devel
 	
 	# MSYS Package prefixes
 	# CLANG32 =  mingw-w64-clang-i686-
@@ -826,14 +833,14 @@ while :
 		#set PATH=%PATH%;${MSYS2}/mingw64/bin
 		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
 			if [[ -n "$MSYSTEM" ]]; then
-				cmake -G "MinGW Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+				cmake -G "MSYS Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
 			else
 				cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
 			fi	
 		fi
 		if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
 			if [[ -n "$MSYSTEM" ]]; then
-				cmake -G "MinGW Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
+				cmake -G "MSYS Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
 			else
 				cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
 			fi
@@ -853,7 +860,7 @@ while :
 		fi
 		if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
 			if [[ -n "$MSYSTEM" ]]; then
-				call cmake -G "MinGW Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
+				call cmake -G "MSYS Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
 			else
 				call cmake -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
 			fi
