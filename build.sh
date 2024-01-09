@@ -589,6 +589,7 @@ while :
 	validate_package which which
 	validate_package git git
 	
+	# This will break MSYS2 builds. Never install the base cmake in MSYS2
 	if ! [[ -n "$MSYSTEM" ]]; then
 		validate_package cmake cmake
 	fi
