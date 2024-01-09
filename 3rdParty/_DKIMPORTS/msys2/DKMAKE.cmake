@@ -1,10 +1,10 @@
 # https://www.msys2.org
 # https://silentinstallhq.com/msys2-silent-install-how-to-guide
 
-if(NOT CMAKE_HOST_SYSTEM_NAME STREQUAL "Windows")
-	dk_undepend(msys2)
-	dk_return()
-endif()
+#if(NOT CMAKE_HOST_SYSTEM_NAME STREQUAL "Windows")
+#	dk_undepend(msys2)
+#	dk_return()
+#endif()
 
 
 ### INSTALL ###
@@ -25,25 +25,31 @@ endif()
 
 ### Install other utilities ###
 if(NOT EXISTS ${MSYS2}/usr/bin/make.exe)
-	dk_command(bash -c "pacman -S make --noconfirm")					# make
+	#dk_command(bash -c "pacman -S make --noconfirm")						# make
+	dk_msys2("pacman -S make --noconfirm")									# make
 endif()
 
 if(NOT EXISTS ${MSYS2}/usr/bin/diff.exe)
-	dk_command(bash -c "pacman -S diffutils --noconfirm")				# diffutils
+	#dk_command(bash -c "pacman -S diffutils --noconfirm")					# diffutils
+	dk_msys2("pacman -S diffutils --noconfirm")								# diffutils
 endif()
 
 if(NOT EXISTS ${MSYS2}/usr/bin/yasm.exe)
-	dk_command(bash -c "pacman -S yasm --noconfirm")					# yasm
+	#dk_command(bash -c "pacman -S yasm --noconfirm")						# yasm
+	dk_msys2("pacman -S yasm --noconfirm")									# yasm
 endif()
 
 if(NOT EXISTS ${MSYS2}/mingw64/bin/gcc.exe)
-	dk_command(bash -c "pacman -S mingw-w64-x86_64-gcc --noconfirm")	# WIN64 builds
+	#dk_command(bash -c "pacman -S mingw-w64-x86_64-gcc --noconfirm")		# WIN64 builds
+	dk_msys2("pacman -S mingw-w64-x86_64-gcc --noconfirm")					# WIN64 builds
 endif()
 
 if(NOT EXISTS ${MSYS2}/mingw32/bin/gcc.exe)
-	dk_command(bash -c "pacman -S mingw-w64-i686-gcc --noconfirm")		# WIN32 builds
+	#dk_command(bash -c "pacman -S mingw-w64-i686-gcc --noconfirm")			# WIN32 builds
+	dk_msys2("pacman -S mingw-w64-i686-gcc --noconfirm")					# WIN32 builds
 endif()
 
 if(NOT EXISTS ${MSYS2}/usr/bin/automake)
-	dk_command(bash -c "pacman -S mingw-w64-x86_64-autotools --noconfirm")	# used by giflib
+	#dk_command(bash -c "pacman -S mingw-w64-x86_64-autotools --noconfirm")	# used by giflib
+	dk_msys("pacman -S mingw-w64-x86_64-autotools --noconfirm")				# used by giflib
 endif()
