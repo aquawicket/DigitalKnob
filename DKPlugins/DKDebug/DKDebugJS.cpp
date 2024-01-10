@@ -25,6 +25,7 @@
 */
 
 #if HAVE_DKDuktape 
+#if HAVE_boost
 #include "DKDebug/DKDebug.h"
 #include "DKDebug/DKDebugJS.h"
 
@@ -50,5 +51,5 @@ int DKDebugJS::ShowStackTrace(duk_context* ctx){
 		return 0;
 	return 1;
 }
-
+#endif //HAVE_boost
 #endif //HAVE_DKDuktape
