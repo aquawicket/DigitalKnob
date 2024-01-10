@@ -300,18 +300,15 @@ while :
 			"Git Update")
 				echo "$opt"
 				if [[ "$OSTYPE" == "darwin"* ]]; then
-					echo "install Homebrew and git"
-					#ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+					echo .
+					# echo "install Homebrew and git"
+					# ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 					# https://github.com/Homebrew/brew/issues/10368
 					# rm -fr $(brew --repo homebrew/core)
 					# brew tap homebrew/core
 					# brew install git
 				else
-					#if [ -n "$MSYSTEM" ]; then
-					#	call pacman -S git --noconfirm
-					#else
-						validate_package git git
-					#fi
+					validate_package git git
 				fi
 				
 				if [[ ! -d "$DKPATH/.git" ]]; then
@@ -333,7 +330,8 @@ while :
 			"Git Commit")
 				echo "$opt"
 				if [[ "$OSTYPE" == "darwin"* ]]; then
-					echo "install Homebrew and git"
+					echo .
+					#echo "install Homebrew and git"
 					#ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 					# https://github.com/Homebrew/brew/issues/10368
 					# rm -fr $(brew --repo homebrew/core)
@@ -610,23 +608,23 @@ while :
 
 	# build-essential for MSYS2
 	if [[ "$MSYSTEM" == "CLANG32" ]]; then
-		validate_package cmake_reinstall mingw-w64-clang-i686-cmake
+		validate_package cmake mingw-w64-clang-i686-cmake
 		validate_package clang mingw-w64-clang-i686-toolchain
 	elif [[ "$MSYSTEM" == "CLANG64" ]]; then
-		validate_package cmake_reinstall mingw-w64-clang-x86_64-cmake
+		validate_package cmake mingw-w64-clang-x86_64-cmake
 		validate_package clang mingw-w64-clang-x86_64-toolchain
 		validate_package clang_reinstall mingw-w64-x86_64-clang
 	elif [[ "$MSYSTEM" == "CLANGARM64" ]]; then
-		validate_package cmake_reinstall mingw-w64-clang-aarch64-cmake
+		validate_package cmake mingw-w64-clang-aarch64-cmake
 		validate_package clang mingw-w64-clang-aarch64-toolchain
 	elif [[ "$MSYSTEM" == "MINGW32" ]]; then
-		validate_package cmake_reinstall mingw-w64-i686-cmake
+		validate_package cmake mingw-w64-i686-cmake
 		validate_package gcc mingw-w64-i686-toolchain
 	elif [[ "$MSYSTEM" == "MINGW64" ]]; then
-		validate_package cmake_reinstall mingw-w64-x86_64-cmake
+		validate_package cmake mingw-w64-x86_64-cmake
 		validate_package gcc mingw-w64-x86_64-toolchain
 	elif [[ "$MSYSTEM" == "UCRT64" ]]; then
-		validate_package cmake_reinstall mingw-w64-ucrt-x86_64-cmake
+		validate_package cmake mingw-w64-ucrt-x86_64-cmake
 		validate_package gcc mingw-w64-ucrt-x86_64-toolchain
 		validate_package clang mingw-w64-ucrt-x86_64-clang
 	fi

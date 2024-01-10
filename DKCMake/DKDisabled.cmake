@@ -536,8 +536,10 @@ if(MSVC AND WIN_64)
 	dk_disable(smpeg2)				# fatal error C1083: Cannot open include file: 'unistd.h'
 endif(MSVC AND WIN_64)
 
+
 # Disabled for Windows (MSYS2) targets
 if(MSYS)
+	dk_disable(boost)
 	dk_disable(glew)
 	dk_disable(libbcrypt)
 	dk_disable(libexpat)

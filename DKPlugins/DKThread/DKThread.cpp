@@ -23,7 +23,7 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
+#if HAVE_boost
 #include "DK/stdafx.h"
 #include "DKThread/DKThread.h"
 
@@ -85,3 +85,5 @@ void DKThreadPool::Process(){
 		DKEvents::SendEvent("DKThreadPoolDlg.html", "Update", "");
 	}
 }
+
+#endif //HAVE_boost

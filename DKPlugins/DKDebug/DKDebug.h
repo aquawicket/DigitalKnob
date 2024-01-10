@@ -23,7 +23,7 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-
+#if HAVE_stackwalker
 #pragma once
 #ifndef DKDebug_H
 #define DKDebug_H
@@ -46,3 +46,4 @@ public:
 REGISTER_OBJECT(DKDebug, true);
 
 #endif //DKDebug_H
+#endif //HAVE_stackwalker

@@ -30,6 +30,8 @@
 #ifndef DKThread_H
 #define DKThread_H
 
+#if HAVE_boost
+
 #include "DK/DK.h"
 
 #if MAC || IOS //|| ANDROID
@@ -37,10 +39,10 @@
 #endif
 
 //WARNING_DISABLE
-#include "threadpool/boost/threadpool.hpp" //Not truly a Boost library.
-#include <boost/asio.hpp>
-#include <boost/smart_ptr.hpp>
-#include <boost/thread.hpp>
+	#include "threadpool/boost/threadpool.hpp" //Not truly a Boost library.
+	#include <boost/asio.hpp>
+	#include <boost/smart_ptr.hpp>
+	#include <boost/thread.hpp>
 //WARNING_ENABLE
 
 
@@ -55,9 +57,13 @@ public:
 	//void Queue(const DKString& name, boost::function<void ()> func, const DKString& data);
 	void Queue(const DKString& name, std::function<void()> func, const DKString& data);
 	void Process();
-	
+
 	bool active;
+	
+#if HAVE_boost
 	boost::threadpool::pool* dkThreadPool; //Not truly a Boost function.
+#endif
+
 	DKStringArray names;
 	DKStringArray tdata;
 };
@@ -114,4 +120,5 @@ public:
 
 
 REGISTER_OBJECT(DKThreadPool, true)
+#endif //HAVE_boost
 #endif //DKThread_h

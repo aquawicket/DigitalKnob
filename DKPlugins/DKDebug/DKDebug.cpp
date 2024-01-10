@@ -25,6 +25,7 @@
 */
 
 //https://oroboro.com/stack-trace-on-crash
+#if HAVE_stackwalker
 
 #include "DK/stdafx.h"
 #include "DKDebug/DKDebug.h"
@@ -36,7 +37,7 @@
 #include <stdio.h>
 
 #if WIN32
-#include "StackWalker.h"
+	#include "StackWalker.h"
 #include <tchar.h>
 #include <fstream>
 // secure-CRT_functions are only available starting with VC8
@@ -266,3 +267,5 @@ bool DKDebug::ShowStackTrace(const void* input, void* output){
 	return DKREDINFO("not implemented on this OS \n");
 #endif
 }
+
+#endif //HAVE_stackwalker

@@ -448,9 +448,11 @@ if(MSVC)
 		${BOOST_WITHOUT}
 		--build-dir=${BOOST}/${OS}/${RELEASE_DIR}
 		--stagedir=${BOOST}/${OS}/${RELEASE_DIR})
-else()
+elseif(MSYS)
 	DEBUG_dk_queueCommand(${BOOST}/b2
 		toolset=gcc
+		target-os=windows
+		architecture=x86
 		address-model=64
 		variant=debug
 		link=static
@@ -464,6 +466,8 @@ else()
 		--stagedir=${BOOST}/${OS}/${DEBUG_DIR})
 	RELEASE_dk_queueCommand(${BOOST}/b2
 		toolset=gcc
+		target-os=windows
+		architecture=x86
 		address-model=64
 		variant=release
 		link=static
