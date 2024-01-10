@@ -36,7 +36,11 @@
 #include <X11/Xlib.h>
 #include <X11/XKBlib.h>
 #include <X11/extensions/XTest.h>  //requires libxtst-dev
-#include <alsa/asoundlib.h>
+
+#if HAVE_libasound2-dev
+	#include <alsa/asoundlib.h>
+#endif
+
 #include <unistd.h>         
 #include <termios.h>               //for system()
 //WARNING_ENABLE
@@ -211,6 +215,7 @@ bool DKLinux::SetClipboard(const DKString& text){
 
 bool DKLinux::SetVolume(double nVolume){
 	DKDEBUGFUNC(nVolume);
+#if HAVE_libasound2-dev
 	long min, max;
 	snd_mixer_t *handle;
 	snd_mixer_selem_id_t *sid;
@@ -228,6 +233,8 @@ bool DKLinux::SetVolume(double nVolume){
 	snd_mixer_selem_set_playback_volume_all(elem, nVolume/* * max / 100*/);
 	snd_mixer_close(handle);
 	return true;
+#endif
+	return DKERROR("no libasound2-dev\n");
 }
 
 bool DKLinux::StrokeKey(const int& key){
@@ -238,6 +245,7 @@ bool DKLinux::StrokeKey(const int& key){
 
 bool DKLinux::GetVolume(int& percent){
 	DKDEBUGFUNC(percent);
+#if HAVE_libasound2-dev
 	long min, max;
 	snd_mixer_t *handle;
 	snd_mixer_selem_id_t *sid;
@@ -259,6 +267,8 @@ bool DKLinux::GetVolume(int& percent){
 	DKINFO("DKLinux::GetVolume(): returned "+toString(percent)+"\n");
 	snd_mixer_close(handle);
 	return true;
+#endif
+	return DKERROR("no libasound2-dev\n");
 }
 
 bool DKLinux::VirtualMemory(unsigned long long& virtualMemory){

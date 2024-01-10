@@ -35,8 +35,11 @@ if(GIFLIB_USE_CMAKE)
 	if(WIN)
 		dk_setPath				(${GIFLIB})
 		
-
-		dk_queueShell			(autoreconf -f -i)
+		if(MSYS)
+			dk_queueShell	(export ACLOCAL_PATH=${MSYS2}/usr/share/aclocal && autoreconf -f -i)
+		else()
+			dk_queueShell	(autoreconf -f -i)
+		endif()
 
 		
 		string(REPLACE "-std=c17" "" GIFLIB_CONFIGURE "${DKCONFIGURE_BUILD}")
@@ -90,7 +93,10 @@ else()
 
 
 	dk_setPath		(${GIFLIB})
-	if(NOT MSYS)
+	
+	if(MSYS)
+		dk_queueShell	(export ACLOCAL_PATH=${MSYS2}/usr/share/aclocal && autoreconf -f -i)
+	else()
 		dk_queueShell	(autoreconf -f -i)
 	endif()
 
