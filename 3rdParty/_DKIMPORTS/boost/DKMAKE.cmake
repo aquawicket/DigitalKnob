@@ -129,7 +129,7 @@ if(MSVC)
 	endif()
 else()
 	if(NOT EXISTS ${BOOST}/b2)
-		dk_queueCommand(${BOOST}/bootstrap.sh)
+		UNIX_dk_queueCommand(${BOOST}/bootstrap.sh)
 	endif()
 endif()
 

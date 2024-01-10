@@ -29,7 +29,7 @@
 
 #if WIN
 	HANDLE DKTextColor::hConsole = NULL;
-	WORD DKTextColor::storedColorScheme = NULL;
+	WORD DKTextColor::storedColorScheme = nullptr;
 #endif
 std::ostringstream DKTextColor::out;
 
