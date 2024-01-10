@@ -594,17 +594,9 @@ endif()
 # MinGW Makefiles   ${OS}/${TYPE}	${OS}/${TYPE} 
 # Unix Makefiles    ${OS}/${TYPE}   ${OS}/${TYPE}  
 # ./configure       ${OS}/${TYPE}   ${OS}/${TYPE}
-string(FIND "${CMAKE_GENERATOR}" "Visual Studio" index)
-if(${index} GREATER -1)
-	dk_set(VISUAL_STUDIO_IDE ON)
-endif()
-string(FIND "${CMAKE_GENERATOR}" "Xcode" index)
-if(${index} GREATER -1)
-	dk_set(XCODE_IDE ON)
-endif()
 
 
-if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC" OR CMAKE_CXX_COMPILER_ID STREQUAL "XCODE" OR VISUAL_STUDIO_IDE OR XCODE_IDE)
+if(MSVC OR XCODE)
 	dk_set		(CMAKE_BUILD_TYPE DEBUG RELEASE)
 	dk_set		(BUILD_DIR ${OS})
 else()

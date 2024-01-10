@@ -85,12 +85,6 @@ endif()
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
 	dk_set(GNU ON)
 endif()
-if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-	dk_set(MSVC ON)
-endif()
-if(CMAKE_CXX_COMPILER_ID STREQUAL "XCODE")
-	dk_set(XCODE ON)
-endif()
 
 
 ###########################################################################

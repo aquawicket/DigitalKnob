@@ -55,7 +55,7 @@ elseif(EXISTS "C:/Program Files (x86)/CMake/bin/cmake.exe")
 else()
 	### INSTALL ###
 	dk_info("Installing CMake . . .")
-	if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+	if(MSVC)
 		WIN_HOST_dk_download(${CMAKE_DL} ${DKDOWNLOAD})
 		WIN_HOST_dk_command(${DKDOWNLOAD}/${CMAKE_FILE})
 	endif()

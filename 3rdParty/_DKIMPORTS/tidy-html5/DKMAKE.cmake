@@ -17,10 +17,15 @@ dk_include				(${TIDY-HTML5})
 dk_include				(${TIDY-HTML5}/include)
 dk_include				(${TIDY-HTML5}/${OS})
 ANDROID_dk_include		(${TIDY-HTML5}/${OS}/$(BUILD_TYPE)/jni)
-UNIX_dk_libDebug		(${TIDY-HTML5}/${OS}/${DEBUG_DIR}/libtidy.a)
-UNIX_dk_libRelease		(${TIDY-HTML5}/${OS}/${RELEASE_DIR}/libtidy.a)
-WIN_dk_libDebug			(${TIDY-HTML5}/${OS}/${DEBUG_DIR}/tidy_staticd.lib)
-WIN_dk_libRelease		(${TIDY-HTML5}/${OS}/${RELEASE_DIR}/tidy_static.lib)
+
+if(MSVC)
+	WIN_dk_libDebug		(${TIDY-HTML5}/${OS}/${DEBUG_DIR}/tidy_staticd.lib)
+	WIN_dk_libRelease		(${TIDY-HTML5}/${OS}/${RELEASE_DIR}/tidy_static.lib)
+else()
+	UNIX_dk_libDebug	(${TIDY-HTML5}/${OS}/${DEBUG_DIR}/libtidy.a)
+	UNIX_dk_libRelease		(${TIDY-HTML5}/${OS}/${RELEASE_DIR}/libtidy.a)
+endif()
+
 
 
 ### GENERATE ###

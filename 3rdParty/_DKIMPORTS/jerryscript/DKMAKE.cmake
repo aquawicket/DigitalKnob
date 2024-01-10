@@ -11,7 +11,7 @@ dk_include				(${JERRYSCRIPT}/jerry-core/include)
 dk_include				(${JERRYSCRIPT}/${OS})
 
 # jerry-core
-if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+if(MSVC)
 	ANDROID_dk_libDebug		(${JERRYSCRIPT}/${OS}/lib/${DEBUG_DIR}/libjerry-core.a)
 	ANDROID_dk_libRelease	(${JERRYSCRIPT}/${OS}/lib/${RELEASE_DIR}/libjerry-core.a)
 else()
@@ -30,7 +30,7 @@ WIN_dk_libDebug			(${JERRYSCRIPT}/${OS}/lib/${DEBUG_DIR}/jerry-core.lib)
 WIN_dk_libRelease		(${JERRYSCRIPT}/${OS}/lib/${RELEASE_DIR}/jerry-core.lib)
 
 # jerry-ext
-if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+if(MSVC)
 	ANDROID_dk_libDebug		(${JERRYSCRIPT}/${OS}/lib/${DEBUG_DIR}/libjerry-ext.a)
 	ANDROID_dk_libRelease	(${JERRYSCRIPT}/${OS}/lib/${RELEASE_DIR}/libjerry-ext.a)
 else()
@@ -49,7 +49,7 @@ WIN_dk_libDebug			(${JERRYSCRIPT}/${OS}/lib/${DEBUG_DIR}/jerry-ext.lib)
 WIN_dk_libRelease		(${JERRYSCRIPT}/${OS}/lib/${RELEASE_DIR}/jerry-ext.lib)
 
 # jerry-port
-if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+if(MSVC)
 	ANDROID_dk_libDebug		(${JERRYSCRIPT}/${OS}/lib/${DEBUG_DIR}/libjerry-port.a)
 	ANDROID_dk_libRelease	(${JERRYSCRIPT}/${OS}/lib/${RELEASE_DIR}/libjerry-port.a)
 else()

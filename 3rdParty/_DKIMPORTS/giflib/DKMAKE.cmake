@@ -64,7 +64,7 @@ else()
 
 	### LINK ###
 	dk_include					(${GIFLIB}/lib)
-	if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+	if(MSVC)
 		ANDROID_dk_libDebug		(${GIFLIB}/${OS}/${DEBUG_DIR}/libgiflib.a)
 		ANDROID_dk_libRelease	(${GIFLIB}/${OS}/${RELEASE_DIR}/libgiflib.a)
 		WIN_dk_libDebug			(${GIFLIB}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
@@ -106,7 +106,7 @@ else()
 	string(REPLACE "  " " " GIFLIB_CONFIGURE "${GIFLIB_CONFIGURE}")
 
 	if(ANDROID)
-		if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+		if(MSVC)
 			dk_queueCommand(${DKCMAKE_BUILD} ${GIFLIB})
 			dk_visualStudio(${GIFLIB} giflib)
 		else()
