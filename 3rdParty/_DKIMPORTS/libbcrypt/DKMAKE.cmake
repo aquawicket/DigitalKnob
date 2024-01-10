@@ -1,5 +1,5 @@
 if(NOT MSYS)
-	dk_undepend(libcrypt)
+	dk_undepend(libbcrypt)
 	dk_return()
 endif()
 
