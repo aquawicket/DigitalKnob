@@ -19,18 +19,17 @@ dk_copy(${GLEW}/build/cmake ${GLEW}/${OS}/CMakeFiles/Export/lib/cmake/glew OVERW
 ### LINK ###
 dk_define				(GLEW_STATIC)
 dk_include				(${GLEW}/include)
-ANDROID_dk_libDebug		(${GLEW}/${OS}/${DEBUG_DIR}/lib/libGLEWd.a)
-ANDROID_dk_libRelease	(${GLEW}/${OS}/${RELEASE_DIR}/lib/libGLEW.a)
-APPLE_dk_libDebug		(${GLEW}/${OS}/lib/${DEBUG_DIR}/libGLEWd.a)
-APPLE_dk_libRelease		(${GLEW}/${OS}/lib/${RELEASE_DIR}/libGLEW.a)
-EMSCRIPTEN_dk_libDebug	(${GLEW}/${OS}/${DEBUG_DIR}/lib/libGLEWd.a)
-EMSCRIPTEN_dk_libRelease(${GLEW}/${OS}/${RELEASE_DIR}/lib/libGLEW.a)
-LINUX_dk_libDebug		(${GLEW}/${OS}/${DEBUG_DIR}/lib/libGLEWd.a)
-LINUX_dk_libRelease		(${GLEW}/${OS}/${RELEASE_DIR}/lib/libGLEW.a)
-RASPBERRY_dk_libDebug	(${GLEW}/${OS}/${DEBUG_DIR}/lib/libGLEWd.a)
-RASPBERRY_dk_libRelease	(${GLEW}/${OS}/${RELEASE_DIR}/lib/libGLEW.a)
-WIN_dk_libDebug			(${GLEW}/${OS}/lib/${DEBUG_DIR}/libglew32d.lib)
-WIN_dk_libRelease		(${GLEW}/${OS}/lib/${RELEASE_DIR}/libglew32.lib)
+if(MSVC)
+	WIN_dk_libDebug		(${GLEW}/${OS}/lib/${DEBUG_DIR}/libglew32d.lib)
+	WIN_dk_libRelease	(${GLEW}/${OS}/lib/${RELEASE_DIR}/libglew32.lib)
+elseif(APPLE)
+	APPLE_dk_libDebug	(${GLEW}/${OS}/lib/${DEBUG_DIR}/libGLEWd.a)
+	APPLE_dk_libRelease	(${GLEW}/${OS}/lib/${RELEASE_DIR}/libGLEW.a)
+else()
+	dk_libDebug			(${GLEW}/${OS}/${DEBUG_DIR}/lib/libGLEWd.a)
+	dk_libRelease		(${GLEW}/${OS}/${RELEASE_DIR}/lib/libGLEW.a)
+endif()
+
 
 
 ### 3RDPARTY LINK ###
@@ -44,9 +43,13 @@ WIN_dk_libRelease		(${GLEW}/${OS}/lib/${RELEASE_DIR}/libglew32.lib)
 #	-DGLEW_STATIC_LIBRARY_DEBUG=${GLEW}/${OS}/lib/${DEBUG_DIR}/glew32d.lib
 #	-DGLEW_STATIC_LIBRARY_RELEASE=${GLEW}/${OS}/lib/${RELEASE_DIR}/glew32.lib
 #	-DGLEW_LIBRARIES=${GLEW}/${OS}/lib/${DEBUG_DIR}/libglew32d.lib ${GLEW}/${OS}/lib/${RELEASE_DIR}/libglew32.lib)
-UNIX_dk_set	(GLEW_CMAKE "-DCMAKE_C_FLAGS=-I${GLEW}/include -DGLEW_STATIC" "-DCMAKE_CXX_FLAGS=-I${GLEW}/include -DGLEW_STATIC" -DGLEW_INCLUDE_DIR=${GLEW}/include)
-WIN_dk_set	(GLEW_CMAKE "-DCMAKE_C_FLAGS=/I${GLEW}/include /DGLEW_STATIC" "-DCMAKE_CXX_FLAGS=/I${GLEW}/include /DGLEW_STATIC" -DGLEW_INCLUDE_DIR=${GLEW}/include -DGLEW_LIBRARY=${GLEW}/${OS}/lib/${DEBUG_DIR}/libglew32.lib)
-	
+if(MSVC)
+	WIN_dk_set	(GLEW_CMAKE "-DCMAKE_C_FLAGS=/I${GLEW}/include /DGLEW_STATIC" "-DCMAKE_CXX_FLAGS=/I${GLEW}/include /DGLEW_STATIC" -DGLEW_INCLUDE_DIR=${GLEW}/include -DGLEW_LIBRARY=${GLEW}/${OS}/lib/${DEBUG_DIR}/libglew32.lib)
+else()
+	dk_set	(GLEW_CMAKE "-DCMAKE_C_FLAGS=-I${GLEW}/include -DGLEW_STATIC" "-DCMAKE_CXX_FLAGS=-I${GLEW}/include -DGLEW_STATIC" -DGLEW_INCLUDE_DIR=${GLEW}/include)
+endif()
+
+
 	
 ### GENERATE ###
 dk_queueCommand(${DKCMAKE_BUILD} ${GLEW}/build/cmake)
