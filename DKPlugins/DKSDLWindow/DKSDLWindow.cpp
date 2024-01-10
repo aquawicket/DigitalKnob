@@ -32,8 +32,10 @@
 
 //WARNING_DISABLE
 #include "SDL_syswm.h"
+#if HAVE_glew
+	#include <GL/glew.h>
+#endif
 #if WIN
-    #include <GL/glew.h>
 	#include <GL/gl.h>
 #endif
 #if MAC
@@ -206,11 +208,11 @@ bool DKSDLWindow::Init(){
         SDL_Quit();
 		return DKERROR("SDL_CreateRenderer Error: " + DKString(SDL_GetError()) + "\n");
     }
-#	if WIN
+	#if HAVE_glew
 		GLenum err = glewInit();
 		if (err != GLEW_OK)
 			DKERROR("GLEW ERROR:\n"); // "+glewGetErrorString(err)+"\n");
-#	endif
+	#endif
 #endif
     //Set window Title
     DKString appName;

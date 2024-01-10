@@ -538,6 +538,7 @@ endif(MSVC AND WIN_64)
 
 # Disabled for Windows (MSYS2) targets
 if(MSYS)
+	dk_disable(glew)
 	dk_disable(libbcrypt)
 	dk_disable(libexpat)
 endif(MSYS)
