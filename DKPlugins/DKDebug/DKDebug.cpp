@@ -25,7 +25,7 @@
 */
 
 //https://oroboro.com/stack-trace-on-crash
-#if HAVE_stackwalker
+#ifdef HAVE_stackwalker
 
 #include "DK/stdafx.h"
 #include "DKDebug/DKDebug.h"

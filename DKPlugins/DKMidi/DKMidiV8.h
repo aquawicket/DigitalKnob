@@ -24,8 +24,8 @@
 * SOFTWARE.
 */
 
-#ifdef HAVE_rtmidi
-#ifdef HAVE_DKCef
+#if HAVE_rtmidi
+#if HAVE_DKCef
 
 #pragma once
 #ifndef DKMidiV8_H

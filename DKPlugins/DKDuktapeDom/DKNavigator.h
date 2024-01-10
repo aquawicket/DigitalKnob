@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-#ifdef HAVE_DKDuktape 
+#if HAVE_DKDuktape 
 #pragma once
 #ifndef DKNavigator_H
 #define DKNavigator_H

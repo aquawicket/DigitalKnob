@@ -24,9 +24,9 @@
 * SOFTWARE.
 */
 
-#ifdef HAVE_DKMySql
-#ifdef HAVE_DKRocket
-#ifdef HAVE_DKDuktape 
+#if HAVE_DKMySql
+#if HAVE_DKRocket
+#if HAVE_DKDuktape 
 #pragma once
 #ifndef DKWidgetMySqlJS_H
 #define DKWidgetMySqlJS_H

@@ -23,7 +23,7 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-#ifdef HAVE_DKCef
+#if HAVE_DKCef
 #pragma once
 #ifndef DKUpdateV8_H
 #define DKUpdateV8_H

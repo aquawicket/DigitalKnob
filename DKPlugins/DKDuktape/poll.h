@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-#ifdef HAVE_eventloop
+#if HAVE_eventloop
 #pragma once
 #ifndef DKPoll_H
 #define DKPoll_H

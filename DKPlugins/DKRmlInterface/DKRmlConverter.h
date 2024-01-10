@@ -50,7 +50,7 @@ public:
 	//bool MouseOverIframe(DKEvents* event);
 	bool MouseOverIframe(DKRmlInterface* dkRmlInterface, DKEvents* event);
 	bool Encode(std::string& _data);
-#ifdef USE_tidy_html5
+#if HAVE_tidy_html5
 	bool TidyFile(const DKString& in, DKString& out);
 #endif
 	bool GetOuterHtml(Rml::Element* element, DKString& string);

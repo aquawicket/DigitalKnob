@@ -23,7 +23,8 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-#if HAVE_DKDuktape && HAVE_Boost
+#ifdef HAVE_DKDuktape
+#ifdef HAVE_Boost
 #include "DKThread/DKThread.h"
 #include "DKThread/DKThreadJS.h"
 
@@ -79,4 +80,5 @@ void DKThreadJS::QueueItem(){
 	//DKDuktape::ctx = ctx2;
 }
 
-#endif //HAVE_DKDuktape && HAVE_Boost
+#endif //HAVE_boost
+#endif //HAVE_DKDuktape

@@ -23,7 +23,7 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-#ifdef USE_DKDuktape 
+##if HAVE_DKDuktape 
 #pragma once
 #ifndef DKOSGModelJS_H
 #define DKOSGModelJS_H
@@ -41,4 +41,4 @@ public:
 REGISTER_OBJECT(DKOSGModelJS, true)
 
 #endif //DKOSGModelJS_H
-#endif //USE_DKDuktape
+#endif //HAVE_DKDuktape

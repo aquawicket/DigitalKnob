@@ -23,7 +23,7 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-#ifdef HAVE_DKCef
+#if HAVE_DKCef
 #pragma once
 #ifndef DKWebSocketsV8_H
 #define DKWebSocketsV8_H

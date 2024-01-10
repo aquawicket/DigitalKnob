@@ -23,7 +23,8 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-#ifdef HAVE_DKDuktape 
+#if HAVE_DKDuktape
+#if HAVE_Boost
 #pragma once
 #ifndef DKThreadJS_H
 #define DKThreadJS_H
@@ -45,4 +46,5 @@ public:
 REGISTER_OBJECT(DKThreadJS, true)
 
 #endif //DKDKThreadJS_H
+#endif //HAVE_Boost
 #endif //HAVE_DKThread

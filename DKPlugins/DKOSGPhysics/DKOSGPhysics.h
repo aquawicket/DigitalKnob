@@ -32,22 +32,22 @@
 //WARNING_DISABLE
 #include <osgDB/ReadFile>
 #include <osgViewer/Viewer>
-//#ifdef USE_osgwTools
+//#if HAVE_osgwTools
 #include <osgwTools/Shapes.h>
 #include <osgwTools/AbsoluteModelTransform.h>
 //#endif
-//#ifdef USE_osgbDynamics 
+//#if HAVE_osgbDynamics 
 #include <osgbDynamics/GroundPlane.h>
 #include <osgbDynamics/MotionState.h>
 #include <osgbDynamics/RigidBody.h>
 #include <osgbDynamics/TripleBuffer.h>
 #include <osgbDynamics/PhysicsThread.h>
 //#endif
-//#ifdef USE_osgbCollision
+//#if HAVE_osgbCollision
 #include <osgbCollision/RefBulletObject.h>
 #include <osgbCollision/Utils.h>
 //#endif
-//#ifdef USE_osgbInteraction
+//#if HAVE_osgbInteraction
 #include <osgbInteraction/LaunchHandler.h>
 #include <osgbInteraction/SaveRestoreHandler.h>
 #include <osgbInteraction/DragHandler.h>
@@ -67,7 +67,7 @@ public:
 	bool AddModel(const DKOSGModel* model); //add existing model to physics
 	bool makeModel(osg::Group* theRoot, const std::string& fileName, osg::Vec3 pos);
 
-//#ifdef USE_osgbDynamics 
+//#if HAVE_osgbDynamics 
 	void Start();
 	void Kill();
 	bool Ground(osg::Group* world);
@@ -83,7 +83,7 @@ private:
 	osg::ref_ptr<osgbInteraction::SaveRestoreHandler> srh;
 	int index;
 	osgbInteraction::LaunchHandler* lh;
-//#endif //USE_osgbDynamics 
+//#endif //HAVE_osgbDynamics 
 
 };
 

@@ -45,7 +45,7 @@
 
 #include "DK/DK.h"
 
-#ifdef USE_mysql
+#ifdef HAVE_mysql
 	//WARNING_DISABLE
 	#include "mysql.h"
 	//WARNING_ENABLE
@@ -64,7 +64,7 @@ public:
 	bool Database(const DKString& database);
 	bool Query(DKString query, DKStringArray& results);
 
-#ifdef USE_mysql
+#ifdef HAVE_mysql
 	MYSQL mysql;
 #endif 
 

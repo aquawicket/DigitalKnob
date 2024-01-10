@@ -23,7 +23,7 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-//#ifdef USE_osgFX
+//#if HAVE_osgFX
 #pragma once
 #ifndef DKOSGPicker_H
 #define DKOSGPicker_H
@@ -54,4 +54,4 @@ private:
 
 REGISTER_OBJECT(DKOSGPicker, true);
 #endif //DKOSGPicker_H
-//#endif //USE_osgFX
+//#endif //HAVE_osgFX

@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-#ifdef HAVE_DKRocket
+#if HAVE_DKRocket
 #pragma once
 #ifndef DKWidget_H
 #define DKWidget_H

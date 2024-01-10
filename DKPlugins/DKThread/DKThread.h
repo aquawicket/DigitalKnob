@@ -25,12 +25,11 @@
 */
 
 // https://stackoverflow.com/a/32593825/688352
+#if HAVE_boost
 
 #pragma once
 #ifndef DKThread_H
 #define DKThread_H
-
-#if HAVE_boost
 
 #include "DK/DK.h"
 

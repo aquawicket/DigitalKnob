@@ -29,7 +29,7 @@
 #include "DK/DK.h"
 
 //WARNING_DISABLE
-#ifdef USE_osgDB
+#if HAVE_osgDB
 	#include <osgDB/Registry>
 #endif
 //WARNING_ENABLE
@@ -57,7 +57,7 @@ REGISTER_OBJECT(DKOSGVideo, true)
     }; \
 static DK_VIDEO_LOAD global_DK_VIDEO_LOAD;
  
-//#ifdef USE_osgdb_ffmpeg
+//#if HAVE_osgdb_ffmpeg
 #ifndef ANDROID
 	//#include "DKOSGVideo.h"
 	DKVIDEO_LOAD_DLLS()

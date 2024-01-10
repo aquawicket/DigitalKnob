@@ -24,7 +24,7 @@
 * SOFTWARE.
 */
 
-#ifdef HAVE_rtmidi
+#if HAVE_rtmidi
 #pragma once
 #ifndef DKMidi_H
 #define DKMidi_H

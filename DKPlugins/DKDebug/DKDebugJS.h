@@ -25,6 +25,7 @@
 */
 
 #if HAVE_DKDuktape 
+#if HAVE_stackwalker
 #pragma once
 #ifndef DKDebugJS_H
 #define DKDebugJS_H
@@ -41,4 +42,5 @@ public:
 REGISTER_OBJECT(DKDebugJS, true)
 
 #endif //DKDebugJS_H
+#endif //HAVE_stackwalker
 #endif //HAVE_DKDuktape

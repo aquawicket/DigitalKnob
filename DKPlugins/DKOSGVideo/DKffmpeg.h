@@ -103,7 +103,7 @@ protected:
 };
 
 
-#if USE_SDL
+#if HAVE_sdl
 class SDLAudioSink : public osg::AudioSink
 {
     public:
@@ -236,7 +236,7 @@ int main(int argc, char** argv)
     bool xyPlane = fullscreen;
     bool useAudioSink = false;
     while(arguments.read("--audio")) { useAudioSink = true; }
-#if USE_SDL
+#if HAVE_sdl
     unsigned int numAudioStreamsEnabled = 0;
 #endif
     for(int i=1;i<arguments.argc();++i){
@@ -248,7 +248,7 @@ int main(int argc, char** argv)
                 if (useAudioSink && !audioStreams.empty()){
                     osg::AudioStream* audioStream = audioStreams[0].get();
                     osg::notify(osg::NOTICE)<<"AudioStream read ["<<audioStream->getName()<<"]"<<std::endl;
-#if USE_SDL
+#if HAVE_sdl
                     if (numAudioStreamsEnabled==0){
                         audioStream->setAudioSink(new SDLAudioSink(audioStream));   
                         ++numAudioStreamsEnabled;

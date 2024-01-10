@@ -24,8 +24,8 @@
 * SOFTWARE.
 */
 
-#ifdef HAVE_rtmidi
-#ifdef HAVE_DKDuktape
+#if HAVE_rtmidi
+#if HAVE_DKDuktape
  
 #pragma once
 #ifndef DKMidiJS_H

@@ -24,8 +24,8 @@
 * SOFTWARE.
 */
 
-#ifdef HAVE_DKRocket
-#ifdef HAVE_DKDuktape 
+#if HAVE_DKRocket
+#if HAVE_DKDuktape 
 #pragma once
 #ifndef DKWidgetJS_H
 #define DKWidgetJS_H

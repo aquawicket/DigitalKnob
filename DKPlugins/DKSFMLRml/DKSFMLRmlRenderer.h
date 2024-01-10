@@ -43,7 +43,7 @@
 //#ifndef ENABLE_GLEW
 //#include "../../../shell/include/ShellOpenGL.h"
 //#endif
-#ifdef USE_SFML_gif
+#ifdef HAVE_SFML_gif
 extern "C" {
 	#include "SFML_gif.h"
 }
@@ -91,7 +91,7 @@ private:
 private:
 	sf::RenderWindow *MyWindow;
 
-#ifdef USE_SFML_gif
+#ifdef HAVE_SFML_gif
 	std::vector<SFML_GifAnim*> animations;
 #endif
 };

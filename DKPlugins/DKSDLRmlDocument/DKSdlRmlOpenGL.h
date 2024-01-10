@@ -40,7 +40,7 @@ WARNING_DISABLE
 #else
 	#include "SDL_opengles.h"
 #endif
-#ifdef USE_SDL2_gif
+#if HAVE_SDL2_gif
 extern "C" {
 	#include "SDL2_gif.h"
 }
@@ -73,7 +73,7 @@ private:
     SDL_Renderer* mRenderer;
     SDL_Window* mScreen;
 
-#ifdef USE_SDL2_gif
+#if HAVE_SDL2_gif
 	std::vector<SDL_GifAnim*> animations;
 #endif
 };

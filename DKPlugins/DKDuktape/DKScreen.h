@@ -26,7 +26,7 @@
 
 //https://developer.mozilla.org/en-US/docs/Web/API/Screen
 
-#ifdef HAVE_DKDuktape 
+#if HAVE_DKDuktape 
 #pragma once
 #ifndef DKScreen_H
 #define DKScreen_H
