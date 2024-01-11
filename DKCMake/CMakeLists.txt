@@ -55,12 +55,12 @@ if(CMAKE_HOST_UNIX)
 endif()
 
 ###### TEST CODE ######
-include(${CMAKE_SOURCE_DIR}/DK.cmake)
-dk_wait()
-dk_wait(5)
-dk_wait("message")
-dk_wait(5 "message with 5")
-return()
+#include(${CMAKE_SOURCE_DIR}/DK.cmake)
+#dk_wait()
+#dk_wait(5)
+#dk_wait("message")
+#dk_wait(5 "message with 5")
+#return()
 ######################
 
 include(${CMAKE_SOURCE_DIR}/functions/dk_dumpAllVariables.cmake)
