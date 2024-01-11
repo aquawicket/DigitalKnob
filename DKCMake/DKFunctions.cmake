@@ -717,7 +717,7 @@ endmacro()
 #
 macro(dk_isNumber variable RESULT)
 	DKDEBUGFUNC(${ARGV})
-	if(variable MATCHES "^[0-9]+$")
+	if(${variable} MATCHES "^[0-9]+$")
 		set(${RESULT} TRUE)
 	else()
 		set(${RESULT} FALSE)
@@ -735,29 +735,25 @@ endmacro()
 #
 macro(dk_wait) 
 	DKDEBUGFUNC(${ARGV})
-	set(timeout ${ARGV0})
-	set(msg ${ARGV1})
 	
-	dk_isNumber(timeout isNumber)
-	if(NOT isNumber)
-		set(timeout 60) # default
-	endif()
-	
-	if(NOT msg)
-		set(msg "press and key to continue.") # default
-	endif()
-
-	if(${timeout} GREATER 0)
-		set(timeout_str && timeout /t ${timeout}) 
-		set(msg "${msg}. Waiting ${timeout} seconds...")
+	dk_isNumber("${ARGV0}" isNumber)
+	if(isNumber)
+	    message(STATUS "isNumber")
+		set(timeout ${ARGV0})
+		set(msg "${ARGV1}") 
 	else()
-		set(timeout_str && timeout /t -1) # no timeout
+	    message(STATUS "notNumber")
+		set(timeout 60) # default
+		set(msg "${ARGV0}")
 	endif()
+	
+	#set(msg "\n\n${msg}\nWaiting ${timeout} seconds...\npress and key to continue.")
+	message(STATUS "${msg} ${timeout}")
 	
 	if(MSVC)
-		execute_process(COMMAND cmd /c echo ${msg} ${timeout_str} > nul WORKING_DIRECTORY C:/)
+		execute_process(COMMAND cmd /c TIMEOUT ${timeout})
 	elseif(UNIX_HOST OR MSYS)
-		execute_process(COMMAND bash -c "read -n 1 -s -r -p \"${msg}\"" OUTPUT_VARIABLE outVar)
+		execute_process(COMMAND bash -c "read -n 1 -r" TIMEOUT ${timeout})
 	else()
 		dk_error("dk_wait(): Not implemented for this platform")
 	endif()
@@ -1352,11 +1348,11 @@ dk_createOsMacros("dk_define")
 #
 function(dk_undefine str)
 	DKDEBUGFUNC(${ARGV})
+	remove_definitions(${str})
 	if(NOT DKDEFINES_LIST)
 		return()
 	endif()
 	list(REMOVE_ITEM DKDEFINES_LIST ${str})
-	remove_definitions(-D${str})
 endfunction()
 
 
