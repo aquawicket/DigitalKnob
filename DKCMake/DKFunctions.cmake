@@ -748,7 +748,7 @@ macro(dk_wait)
 	message (STATUS "\n\n${msg}\nWaiting ${timeout} seconds...\npress and key to continue.")
 	
 	math(EXPR timeout_p1 ${timeout}+1)
-	if(MSVC)
+	if(WIN32)
 		execute_process(COMMAND cmd /c "timeout ${timeout}" TIMEOUT ${timeout_p1})
 	elseif(UNIX_HOST OR MSYS)
 		execute_process(COMMAND bash -c "read -n 1 -r -s -t ${timeout}" TIMEOUT ${timeout_p1})
