@@ -221,10 +221,13 @@ goto build
 
 :generate_emscripten
 call:validate_emscripten
-set EMSDK=DIGITALKNOB+C:/Users/Administrator/digitalknob/Development/3rdParty/emsdk-main
-set EMSDK_ENV=%EMSDK%/emsdk_env
-set EMSDK_TOOLCHAIN_FILE=%EMSDK%/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake
-call:assert "emscriten incomplete"
+set EMSDK_ENV=%EMSDK%\emsdk_env.bat
+set EMSDK_TOOLCHAIN_FILE=%EMSDK%\upstream\emscripten\cmake\Modules\Platform\Emscripten.cmake
+::%EMSDK_ENV% & "%CMAKE%" -G \"MinGW Makefiles\" -DCMAKE_TOOLCHAIN_FILE=\""%EMSDK_TOOLCHAIN_FILE%"\" "%DKCMAKE%"
+echo ""
+echo ""
+echo "%EMSDK_ENV% & %CMAKE% -G MinGW Makefiles -DCMAKE_TOOLCHAIN_FILE=%EMSDK_TOOLCHAIN_FILE% %DKCMAKE%"
+"%EMSDK_ENV%" & "%CMAKE%" -G "MinGW Makefiles" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" "%DKCMAKE%"
 
 :build
 echo ""
@@ -420,6 +423,7 @@ goto:eof
 :: validate_emscripten()
 :validate_emscripten
 	call:validate_python
+	@echo on
 	
 	set "EMSDK=%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main"
 	if NOT exist "%EMSDK%\.git" (
@@ -432,19 +436,20 @@ goto:eof
 	"%GIT%" pull
 		
 	call "%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main\emsdk.bat" install latest
-	call "%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main\emsdk.bat" activate latest
+	"%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main\emsdk.bat" activate latest --permanent
 	
-	call "%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main\emsdk.bat" install mingw-4.6.2-32bit
-	call "%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main\emsdk.bat" activate mingw-4.6.2-32bit
+	"%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main\emsdk.bat" install mingw-4.6.2-32bit
+	"%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main\emsdk.bat" activate mingw-4.6.2-32bit
 	
 	::CPP_DK_Execute("chmod 777 "+DIGITALKNOB+"DK/3rdParty/emsdk-main/emsdk_env.sh")  :: MSYS
+	"%PYTHON_PATH%\emsdk_env.bat"
 goto:eof
 
 :: validate_python()
 :validate_python
 	set "PYTHON_PATH=%DIGITALKNOB%\%DKBRANCH%\3rdParty\%PYTHON_FOLDER%"
 	set "PYTHON_EXE=%PYTHON_PATH%\python.exe"
-	::call:make_directory "%PYTHON_PATH%"
+	call:make_directory "%PYTHON_PATH%"
 	set PATH=%PATH%;%PYTHON_PATH%
 	
 	if NOT exist %PYTHON_EXE% (
@@ -455,8 +460,6 @@ goto:eof
 	if NOT exist %PYTHON_PATH%\Scripts\pip.exe (
 		"%PYTHON_EXE%" -m ensurepip
 	)
-		
-
 goto:eof
 
 :: clear_cmake_cache()
