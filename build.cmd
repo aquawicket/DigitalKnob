@@ -228,7 +228,7 @@ call:validate_emscripten
 	if %TYPE%==Release (
 		call "%EMSDK_ENV%" & "%CMAKE%" -G "MinGW Makefiles" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%APP_PATH%/%OS%/Release
 	)
-	if %TYPE%==ALL (
+	if %TYPE%==All (
 		call "%EMSDK_ENV%" & "%CMAKE%" -G "MinGW Makefiles" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%APP_PATH%/%OS%/Debug
 		call "%EMSDK_ENV%" & "%CMAKE%" -G "MinGW Makefiles" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%APP_PATH%/%OS%/Release
 	)
@@ -251,22 +251,36 @@ if %TYPE%==All goto build_all
 call:assert "TYPE not set"
 
 :build_debug
-	echo "build_debug = %APP_PATH%\%OS%\Debug\CMakeCache.txt"
 	if exist %APP_PATH%\%OS%\Debug\CMakeCache.txt (
 		"%CMAKE%" --build %APP_PATH%\%OS%\Debug --target %TARGET% --config Debug --verbose
 	)
-	if exist %APP_PATH%\%OS%\Debug\CMakeCache.txt (
+	if exist %APP_PATH%\%OS%\CMakeCache.txt (
 		"%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Debug --verbose
 	)
 goto end_message
 
 :build_release
-"%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Release --verbose
+	if exist %APP_PATH%\%OS%\Release\CMakeCache.txt (
+		"%CMAKE%" --build %APP_PATH%\%OS%\Release --target %TARGET% --config Release --verbose
+	)
+	if exist %APP_PATH%\%OS%\CMakeCache.txt (
+		"%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Release --verbose
+	)
 goto end_message
 
 :build_all
-"%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Debug --verbose
-"%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Release --verbose
+	if exist %APP_PATH%\%OS%\Debug\CMakeCache.txt (
+		"%CMAKE%" --build %APP_PATH%\%OS%\Debug --target %TARGET% --config Debug --verbose
+	)
+	if exist %APP_PATH%\%OS%\CMakeCache.txt (
+		"%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Debug --verbose
+	)
+	if exist %APP_PATH%\%OS%\Debug\CMakeCache.txt (
+		"%CMAKE%" --build %APP_PATH%\%OS%\Release --target %TARGET% --config Release --verbose
+	)
+	if exist %APP_PATH%\%OS%\CMakeCache.txt (
+		"%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Release --verbose
+	)
 goto end_message
 
 :end_message
