@@ -205,7 +205,8 @@ void DebugFunc(const char* file, int line, const char* func, const DKString& nam
 
 template <typename... Args>
 bool DebugReturn(const char* file, int line, const char* func, const DKString& names, Args&&... args){
-	return true;
+	if(1) return true;	//DISABLED
+
 	if (!DKUtil::InMainThread())
 		return true;
 	if (DKLog::log_show.empty() && !DKLog::log_debug)

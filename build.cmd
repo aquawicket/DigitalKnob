@@ -14,6 +14,7 @@ set "GIT_USER_EMAIL=aquawicket@hotmail.com"
 set "GIT_USER_NAME=aquawicket"
 set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi"
 set "MSBUILD_DL=https://aka.ms/vs/17/release/vs_community.exe"
+set "MSYS2_DL=https://github.com/msys2/msys2-installer/releases/download/2023-10-26/msys2-x86_64-20231026.exe"
 set "ANDROID_API=31"
 set "ANDROID_NDK_BUILD=23.1.7779620"
 set "ANDROID_NDK_DL=https://dl.google.com/android/repository/android-ndk-r23b-windows.zip"
@@ -217,7 +218,7 @@ goto build
 goto build
 
 :generate_emscripten
-call:validate_emscripten
+	call:validate_emscripten
 	set EMSDK_ENV=%EMSDK%\emsdk_env.bat
 	set EMSDK_TOOLCHAIN_FILE=%EMSDK%\upstream\emscripten\cmake\Modules\Platform\Emscripten.cmake
 	echo ""
@@ -233,7 +234,7 @@ call:validate_emscripten
 		call "%EMSDK_ENV%" & "%CMAKE%" -G "MinGW Makefiles" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%APP_PATH%/%OS%/Release
 	)
 	set TARGET=%APP%_APP
-::goto build
+goto build
 
 
 :build
@@ -420,6 +421,12 @@ goto:eof
 	if exist "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
 	if exist "C:\Program Files (x86)\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files (x86)\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
 	call:check_error
+goto:eof
+
+:: validate_msys2()
+:validate_msys2
+	:: TODO
+	call:assert "validate_msys2() not implemented"
 goto:eof
 
 :: validate_openjdk()
