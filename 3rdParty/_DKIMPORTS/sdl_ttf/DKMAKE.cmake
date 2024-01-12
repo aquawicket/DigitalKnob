@@ -17,11 +17,8 @@ dk_import(https://github.com/libsdl-org/SDL_ttf/archive/refs/tags/release-2.20.1
 ### LINK ###
 dk_include					(${SDL_TTF})
 if(MSVC)
-	WIN_dk_libDebug			(${SDL_TTF}/${OS}/lib/${DEBUG_DIR}/SDL_ttf.lib)
-	WIN_dk_libRelease		(${SDL_TTF}/${OS}/lib/${RELEASE_DIR}/SDL_ttf.lib)
-elseif(ANDROID)
-	ANDROID_dk_libDebug		(${SDL_TTF}/${OS}/lib/${DEBUG_DIR}/SDL_ttf.a)
-	ANDROID_dk_libRelease	(${SDL_TTF}/${OS}/lib/${RELEASE_DIR}/SDL_ttf.a)	
+	dk_libDebug			(${SDL_TTF}/${OS}/lib/${DEBUG_DIR}/SDL_ttf.lib)
+	dk_libRelease		(${SDL_TTF}/${OS}/lib/${RELEASE_DIR}/SDL_ttf.lib)
 elseif(APPLE)
 	dk_libDebug				(${SDL_TTF}/${OS}/lib/Debug/SDL_ttf.a)
 	dk_libRelease			(${SDL_TTF}/${OS}/lib/Release/SDL_ttf.a)

@@ -1854,21 +1854,21 @@ function(dk_executeProcess commands) #NOASSERT #NOECHO
 	endif()	
 	
 	if(NOT ${noecho})
-		if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+		if(MSVC)
 			dk_info("\n${CLR}${magenta} $ cmd /c ${commands}\n")
 		else()
 			dk_info("\n${CLR}${magenta} $ ${commands}\n")
 		endif()
 	endif()
 	
-	if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+	if(MSVC)
 		execute_process(COMMAND cmd /c ${commands} RESULT_VARIABLE result ERROR_VARIABLE error) # FIXME: Do we always need  cmd /c  here?
 	else()
 		execute_process(COMMAND ${commands} RESULT_VARIABLE result ERROR_VARIABLE error)
 	endif()
 
 	if(NOT ${result} EQUAL 0)
-		if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+		if(MSVC)
 			execute_process(COMMAND timeout /t 2 /nobreak OUTPUT_QUIET WORKING_DIRECTORY ${CURRENT_DIR}) # wait 2 seconds for the stdout to flush before printing error
 		else()
 			execute_process(COMMAND sleep 2 WORKING_DIRECTORY ${CURRENT_DIR}) # wait 2 seconds for the stdout to flush before printing error
@@ -2126,12 +2126,11 @@ function(dk_command)
 		dk_set(CURRENT_DIR ${DIGITALKNOB})
 	endif()
 	dk_mergeFlags("${ARGV}" merged_args)
+
 	#if(EMSCRIPTEN)
 	#	dk_executeProcess(${EMMAKE} bash ${merged_args} WORKING_DIRECTORY ${CURRENT_DIR})
 	#else()
-	#endif()
 	
-	#if(WIN AND GNU)
 	if(MSYS)
 		dk_msys2(${merged_args})
 	else()
@@ -2167,7 +2166,7 @@ dk_createOsMacros("dk_queueCommand")
 #
 function(dk_visualStudioDebug path) #target #arch
 	DKDEBUGFUNC(${ARGV})
-	if(NOT CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+	if(NOT MSVC)
 		return()
 	endif()
 	
@@ -2208,7 +2207,7 @@ dk_createOsMacros("dk_visualStudioDebug" "NO_DEBUG_RELEASE_TAGS")
 #
 function(dk_visualStudioRelease path) #target #arch
 	DKDEBUGFUNC(${ARGV})
-	if(NOT CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+	if(NOT MSVC)
 		return()
 	endif()
 	
@@ -2699,7 +2698,7 @@ function(dk_generateCmake plugin_name)
 		endforeach()
 	endif()
 	dk_enable				(${plugin_name})
-	if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+	if(MSVC)
 		WIN_dk_libDebug			(${plugin_path}/${OS}/${DEBUG_DIR}/${plugin_name}.lib)
 		WIN_dk_libRelease		(${plugin_path}/${OS}/${RELEASE_DIR}/${plugin_name}.lib)
 	else()

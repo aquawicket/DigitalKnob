@@ -129,6 +129,7 @@ if(ANDROID)
 	if(MAC_HOST)
 		dk_disable(giflib)
 	endif()
+	dk_disable(glew)
 	dk_disable(gzip)
 	dk_disable(jasper)
 	dk_disable(kdevelop)			# Permission denied running KDevelop-5.6.1-x86_64.AppImage
