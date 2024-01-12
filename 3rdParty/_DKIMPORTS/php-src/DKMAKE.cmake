@@ -16,5 +16,6 @@ dk_depend(vc_redist) #for VCRUNTIME140.dll
 
 
 ### IMPORT ###
-dk_import(https://windows.php.net/downloads/releases/php-8.2.7-Win32-vs16-x86.zip)
+#dk_import(https://windows.php.net/downloads/releases/php-8.2.7-Win32-vs16-x86.zip)
+dk_import(https://windows.php.net/downloads/releases/php-8.0.30-Win32-vs16-x86.zip)
 #dk_import(https://github.com/php/php-src.git)

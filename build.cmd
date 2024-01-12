@@ -41,96 +41,96 @@ set "TYPE="
 
 
 :pickapp
-echo.
-echo  1) Git Update
-echo  2) Git Commit
-echo  3) HelloWorld
-echo  4) DKCore
-echo  5) DKJavascript
-echo  6) DKBuilder
-echo  7) DKSDL
-echo  8) DKSDLRml
-echo  9) DKDomTest
-echo 10) DKTestAll
-echo 11) Clear Screen
-echo 12) Exit
-set choice=
-set /p choice=Please select an app to build:
-::if not '%choice%'=='' set choice=%choice:~0,1%	::What does this do?
-if '%choice%'=='1' call:git_update & goto pickapp
-if '%choice%'=='2' call:git_commit & goto pickapp
-if '%choice%'=='3' set "APP=HelloWorld" & goto checkApp
-if '%choice%'=='4' set "APP=DKCore" & goto checkApp
-if '%choice%'=='5' set "APP=DKJavascript" & goto checkApp
-if '%choice%'=='6' set "APP=DKBuilder" & goto checkApp
-if '%choice%'=='7' set "APP=DKSDL" & goto checkApp
-if '%choice%'=='8' set "APP=DKSDLRml" & goto checkApp
-if '%choice%'=='9' set "APP=DKDomTest" & goto checkApp
-if '%choice%'=='10' set "APP=DKTestAll" & goto checkApp
-if '%choice%'=='11' call:clear_screen & goto pickapp
-if '%choice%'=='12' call:end
-echo "%choice%" is not valid, try again
+	echo.
+	echo  1) Git Update
+	echo  2) Git Commit
+	echo  3) HelloWorld
+	echo  4) DKCore
+	echo  5) DKJavascript
+	echo  6) DKBuilder
+	echo  7) DKSDL
+	echo  8) DKSDLRml
+	echo  9) DKDomTest
+	echo 10) DKTestAll
+	echo 11) Clear Screen
+	echo 12) Exit
+	set choice=
+	set /p choice=Please select an app to build:
+	::if not '%choice%'=='' set choice=%choice:~0,1%	::What does this do?
+	if '%choice%'=='1' call:git_update & goto pickapp
+	if '%choice%'=='2' call:git_commit & goto pickapp
+	if '%choice%'=='3' set "APP=HelloWorld" & goto checkApp
+	if '%choice%'=='4' set "APP=DKCore" & goto checkApp
+	if '%choice%'=='5' set "APP=DKJavascript" & goto checkApp
+	if '%choice%'=='6' set "APP=DKBuilder" & goto checkApp
+	if '%choice%'=='7' set "APP=DKSDL" & goto checkApp
+	if '%choice%'=='8' set "APP=DKSDLRml" & goto checkApp
+	if '%choice%'=='9' set "APP=DKDomTest" & goto checkApp
+	if '%choice%'=='10' set "APP=DKTestAll" & goto checkApp
+	if '%choice%'=='11' call:clear_screen & goto pickapp
+	if '%choice%'=='12' call:end
+	echo "%choice%" is not valid, try again
 goto pickapp
 
 
 
 :checkApp
-if NOT exist "%DKPATH%\DKApps\%APP%\DKMAKE.cmake" (
-	echo ERROR: %APP%/DKMAKE.cmake file not found
-	goto pickapp
-) 
+	if NOT exist "%DKPATH%\DKApps\%APP%\DKMAKE.cmake" (
+		echo ERROR: %APP%/DKMAKE.cmake file not found
+		goto pickapp
+	) 
 goto pickos
 
 
 
 :pickos
-:: TODO
-::  1) Windows (x86_64)
+	:: TODO
+	::  1) Windows (x86_64)
 
-:: 	2) Android (arm32)
-:: 	3) Android (arm64)
-:: 	4) Android (x86)
-:: 	5) Android (x86_64)
-:: 	6) iOS (arm32)
-:: 	7) iOS (arm64)
-:: 	8) iOS (x86)
-:: 	9) iOS (x86_64)
-:: 10) iOS-Simulator (arm32)
-:: 11) iOS-Simulator (arm64)
-:: 12) iOS-Simulator (x86)
-:: 13) iOS-Simulator (x86_64)
-:: 14) Linux (c)
-:: 15) Linux (arm64)
-:: 16) Linux (x86)
-:: 17) Linux (x86_64)
-:: 18) Mac (arm32)
-:: 19) Mac (arm64)
-:: 20) Mac (x86)
-:: 21) Mac (x86_64)
-:: 22) Raspberry (arm32)
-:: 23) Raspberry (arm64)
-:: 24) Raspberry (x86)
-:: 25) Raspberry (x86_64)
-:: 26) Windows (arm32)
-:: 27) Windows (arm64)
-:: 28) Windows (x86)
-:: 29) Windows (x86_64)
-:: 30) Clear Screen
-:: 31) Go Back
-:: 32) Exit
-echo %APP%
-echo.
-echo 1) Windows 32
-echo 2) Windows 64
-echo 3) Android 32
-echo 4) Android 64
-echo 5) Emscripten
-echo 6) Clear Screen
-echo 7) Go Back
-echo 8) Exit
-set choice=
-set /p choice=Please select an OS to build for: 
-::if not '%choice%'=='' set choice=%choice:~0,1%	::What does this do?
+	:: 	2) Android (arm32)
+	:: 	3) Android (arm64)
+	:: 	4) Android (x86)
+	:: 	5) Android (x86_64)
+	:: 	6) iOS (arm32)
+	:: 	7) iOS (arm64)
+	:: 	8) iOS (x86)
+	:: 	9) iOS (x86_64)
+	:: 10) iOS-Simulator (arm32)
+	:: 11) iOS-Simulator (arm64)
+	:: 12) iOS-Simulator (x86)
+	:: 13) iOS-Simulator (x86_64)
+	:: 14) Linux (c)
+	:: 15) Linux (arm64)
+	:: 16) Linux (x86)
+	:: 17) Linux (x86_64)
+	:: 18) Mac (arm32)
+	:: 19) Mac (arm64)
+	:: 20) Mac (x86)
+	:: 21) Mac (x86_64)
+	:: 22) Raspberry (arm32)
+	:: 23) Raspberry (arm64)
+	:: 24) Raspberry (x86)
+	:: 25) Raspberry (x86_64)
+	:: 26) Windows (arm32)
+	:: 27) Windows (arm64)
+	:: 28) Windows (x86)
+	:: 29) Windows (x86_64)
+	:: 30) Clear Screen
+	:: 31) Go Back
+	:: 32) Exit
+	echo %APP%
+	echo.
+	echo 1) Windows 32
+	echo 2) Windows 64
+	echo 3) Android 32
+	echo 4) Android 64
+	echo 5) Emscripten
+	echo 6) Clear Screen
+	echo 7) Go Back
+	echo 8) Exit
+	set choice=
+	set /p choice=Please select an OS to build for: 
+	::if not '%choice%'=='' set choice=%choice:~0,1%	::What does this do?
 if '%choice%'=='1' set "OS=win32" & goto type
 if '%choice%'=='2' set "OS=win64" & goto type
 if '%choice%'=='3' set "OS=android32" & goto type
@@ -145,17 +145,17 @@ goto pickos
 
 
 :type
-echo %APP% - %OS%
-echo.
-echo 1) Debug
-echo 2) Release
-echo 3) All
-echo 4) Clear Screen
-echo 5) Go Back
-echo 6) Exit
-set choice=
-set /p choice=Please select a build type: 
-::if not '%choice%'=='' set choice=%choice:~0,1%	::What does this do?
+	echo %APP% - %OS%
+	echo.
+	echo 1) Debug
+	echo 2) Release
+	echo 3) All
+	echo 4) Clear Screen
+	echo 5) Go Back
+	echo 6) Exit
+	set choice=
+	set /p choice=Please select a build type: 
+	::if not '%choice%'=='' set choice=%choice:~0,1%	::What does this do?
 if '%choice%'=='1' set "TYPE=Debug" & goto generate
 if '%choice%'=='2' set "TYPE=Release" & goto generate
 if '%choice%'=='3' set "TYPE=All" & goto generate
@@ -168,23 +168,20 @@ goto type
 
 
 :generate
-echo ""
-echo ##########################################################	
-echo ****** Generating %APP% - %OS% - %TYPE% - %LEVEL% ******
-echo ##########################################################
-echo ""
+	echo ""
+	echo ##########################################################	
+	echo ****** Generating %APP% - %OS% - %TYPE% - %LEVEL% ******
+	echo ##########################################################
+	echo ""
 
+	call:clear_cmake_cache
+	call:delete_temp_files
+	call::validate_cmake
 
-call:clear_cmake_cache
-call:delete_temp_files
-call::validate_cmake
-
-set "APP_PATH=%DKPATH%\DKApps\%APP%"
-echo APP_PATH = %APP_PATH%
-call:make_directory "%APP_PATH%\%OS%"
-cd "%APP_PATH%\%OS%"
-
-
+	set "APP_PATH=%DKPATH%\DKApps\%APP%"
+	echo APP_PATH = %APP_PATH%
+	call:make_directory "%APP_PATH%\%OS%"
+	cd "%APP_PATH%\%OS%"
 if %OS%==win32 goto generate_win32
 if %OS%==win64 goto generate_win64
 if %OS%==android32 goto generate_android32
@@ -192,42 +189,57 @@ if %OS%==android64 goto generate_android64
 if %OS%==emscripten goto generate_emscripten
 
 :generate_win32
-call:validate_visual_studio
-"%CMAKE%" -G "Visual Studio 17 2022" -A Win32 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKCMAKE%
-set TARGET=%APP%_APP
+	call:validate_visual_studio
+	"%CMAKE%" -G "Visual Studio 17 2022" -A Win32 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKCMAKE%
+	set TARGET=%APP%_APP
 goto build
 
 :generate_win64
-call:validate_visual_studio
-"%CMAKE%" -G "Visual Studio 17 2022" -A x64 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKCMAKE%
-set TARGET=%APP%_APP
+	call:validate_visual_studio
+	"%CMAKE%" -G "Visual Studio 17 2022" -A x64 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKCMAKE%
+	set TARGET=%APP%_APP
 goto build
 
 :generate_android32
-call:validate_android_ndk
-::call:validate_openjdk
-::call %DKPATH%\3rdParty\_DKIMPORTS\openjdk\registerJDK.cmd
-"%CMAKE%" -G "Visual Studio 17 2022" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID-NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_NDK%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
-set TARGET=main
+	call:validate_android_ndk
+	::call:validate_openjdk
+	::call %DKPATH%\3rdParty\_DKIMPORTS\openjdk\registerJDK.cmd
+	"%CMAKE%" -G "Visual Studio 17 2022" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID-NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_NDK%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
+	set TARGET=main
 goto build
 
 :generate_android64
-call:validate_android_ndk
-::call:validate_openjdk
-::call %DKPATH%\3rdParty\_DKIMPORTS\openjdk\registerJDK.cmd
-"%CMAKE%" -G "Visual Studio 17 2022" -A ARM64 -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID-NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_NDK%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
-set TARGET=main
+	call:validate_android_ndk
+	::call:validate_openjdk
+	::call %DKPATH%\3rdParty\_DKIMPORTS\openjdk\registerJDK.cmd
+	"%CMAKE%" -G "Visual Studio 17 2022" -A ARM64 -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID-NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_NDK%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
+	set TARGET=main
 goto build
 
 :generate_emscripten
 call:validate_emscripten
-set EMSDK_ENV=%EMSDK%\emsdk_env.bat
-set EMSDK_TOOLCHAIN_FILE=%EMSDK%\upstream\emscripten\cmake\Modules\Platform\Emscripten.cmake
-::%EMSDK_ENV% & "%CMAKE%" -G \"MinGW Makefiles\" -DCMAKE_TOOLCHAIN_FILE=\""%EMSDK_TOOLCHAIN_FILE%"\" "%DKCMAKE%"
-echo ""
-echo ""
-echo "%EMSDK_ENV% & %CMAKE% -G MinGW Makefiles -DCMAKE_TOOLCHAIN_FILE=%EMSDK_TOOLCHAIN_FILE% %DKCMAKE%"
-"%EMSDK_ENV%" & "%CMAKE%" -G "MinGW Makefiles" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" "%DKCMAKE%"
+	set EMSDK_ENV=%EMSDK%\emsdk_env.bat
+	set EMSDK_TOOLCHAIN_FILE=%EMSDK%\upstream\emscripten\cmake\Modules\Platform\Emscripten.cmake
+	echo ""
+	echo ""
+	::%EMSDK_ENV% & "%CMAKE%" -G \"MinGW Makefiles\" -DCMAKE_TOOLCHAIN_FILE=\""%EMSDK_TOOLCHAIN_FILE%"\" "%DKCMAKE%"
+	if %TYPE%==Debug (
+		echo "%EMSDK_ENV% & %CMAKE% -G MinGW Makefiles -DCMAKE_TOOLCHAIN_FILE=%EMSDK_TOOLCHAIN_FILE% -S%DKCMAKE% -B%APP_PATH%/%OS%/Debug"
+		call "%EMSDK_ENV%" & "%CMAKE%" -G "MinGW Makefiles" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%APP_PATH%/%OS%/Debug
+	)
+	if %TYPE%==Release (
+		echo "%EMSDK_ENV% & %CMAKE% -G MinGW Makefiles -DCMAKE_TOOLCHAIN_FILE=%EMSDK_TOOLCHAIN_FILE% -S%DKCMAKE% -B%APP_PATH%/%OS%/Release"
+		"%EMSDK_ENV%" & "%CMAKE%" -G "MinGW Makefiles" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%APP_PATH%/%OS%/Release
+	)
+	if %TYPE%==ALL (
+		echo "%EMSDK_ENV% & %CMAKE% -G MinGW Makefiles -DCMAKE_TOOLCHAIN_FILE=%EMSDK_TOOLCHAIN_FILE% -S%DKCMAKE% -B%APP_PATH%/%OS%/Debug"
+		"%EMSDK_ENV%" & "%CMAKE%" -G "MinGW Makefiles" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%APP_PATH%/%OS%/Debug
+		echo "%EMSDK_ENV% & %CMAKE% -G MinGW Makefiles -DCMAKE_TOOLCHAIN_FILE=%EMSDK_TOOLCHAIN_FILE% -S%DKCMAKE% -B%APP_PATH%/%OS%/Release"
+		"%EMSDK_ENV%" & "%CMAKE%" -G "MinGW Makefiles" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%APP_PATH%/%OS%/Release
+	)
+	set TARGET=%APP%_APP
+::goto build
+
 
 :build
 echo ""
@@ -244,8 +256,13 @@ if %TYPE%==All goto build_all
 call:assert "TYPE not set"
 
 :build_debug
-echo "Building %APP_PATH% for %OS%"
-"%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Debug --verbose
+	echo "build_debug = %APP_PATH%\%OS%\Debug\CMakeCache.txt"
+	if exist %APP_PATH%\%OS%\Debug\CMakeCache.txt (
+		"%CMAKE%" --build %APP_PATH%\%OS%\Debug --target %TARGET% --config Debug --verbose
+	)
+	if exist %APP_PATH%\%OS%\Debug\CMakeCache.txt (
+		"%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Debug --verbose
+	)
 goto end_message
 
 :build_release
