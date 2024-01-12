@@ -15,8 +15,8 @@ WIN_dk_libRelease	(${AUBIO}/${OS}/${RELEASE_DIR}/aubio.lib)
 
 ### GENERATE / COMPILE ###
 DEBUG_dk_setPath		(${AUBIO}/${OS}/${DEBUG_DIR})
-DEBUG_dk_queueshell		(${DKCONFIGURE_BUILD})
-DEBUG_dk_queueshell		(make)
+DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
+DEBUG_dk_queueCommand	(make)
 RELEASE_dk_setPath		(${AUBIO}/${OS}/${RELEASE_DIR})
-RELEASE_dk_queueshell	(${DKCONFIGURE_BUILD})
-RELEASE_dk_queueshell	(make)
+RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
+RELEASE_dk_queueCommand	(make)

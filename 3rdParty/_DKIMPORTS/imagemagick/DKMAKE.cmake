@@ -18,15 +18,15 @@ if(NOT ANDROID)
 
 	UNIX_HOST_dk_libDebug	(${IMAGEMAGICK}/${OS}/${DEBUG_DIR}/libimagemagick.a)
 	UNIX_HOST_dk_libRelease	(${IMAGEMAGICK}/${OS}/${RELEASE_DIR}/libimagemagick.a)
-	#WIN_dk_libDebug	(${IMAGEMAGICK}/${OS}/${DEBUG_DIR}/imagemagickd.lib)
-	#WIN_dk_libRelease	(${IMAGEMAGICK}/${OS}/${RELEASE_DIR}/imagemagick.lib)
+	#WIN_dk_libDebug		(${IMAGEMAGICK}/${OS}/${DEBUG_DIR}/imagemagickd.lib)
+	#WIN_dk_libRelease		(${IMAGEMAGICK}/${OS}/${RELEASE_DIR}/imagemagick.lib)
 
 
 	### GENERATE / COMPILE ###
 	DEBUG_dk_setPath		(${IMAGEMAGICK}/${OS}/${DEBUG_DIR})
-	DEBUG_dk_queueShell		(${DKCONFIGURE_BUILD})
-	DEBUG_dk_queueShell		(make)
+	DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
+	DEBUG_dk_queueCommand	(make)
 	RELEASE_dk_setPath		(${IMAGEMAGICK}/${OS}/${RELEASE_DIR})
-	RELEASE_dk_queueShell	(${DKCONFIGURE_BUILD})
-	RELEASE_dk_queueShell	(make)
+	RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
+	RELEASE_dk_queueCommand	(make)
 endif()

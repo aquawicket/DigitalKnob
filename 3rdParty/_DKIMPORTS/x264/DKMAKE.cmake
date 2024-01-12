@@ -2,7 +2,6 @@
 
 
 ### DEPENDS ###
-#dk_depend(msys)	# migrated to msys2
 dk_depend(msys2)
 dk_depend(nasm)
 
@@ -21,19 +20,19 @@ dk_libRelease	(${X264}/${OS}/${RELEASE_DIR}/libx264.a)
 ### GENERATE / COMPILE ###
 DEBUG_dk_setPath			(${X264}/${OS}/${DEBUG_DIR})
 if(EMSCRIPTEN)
-	DEBUG_dk_queueShell		(${EMCONFIGURE} ../../configure --host=i686-pc-linux-gnu --enable-static --disable-asm --disable-cli) #--extra-cflags="-s USE_PTHREADS=1"
-	DEBUG_dk_queueShell		(${EMMAKE} make)
+	DEBUG_dk_queueCommand	(${EMCONFIGURE} ../../configure --host=i686-pc-linux-gnu --enable-static --disable-asm --disable-cli) #--extra-cflags="-s USE_PTHREADS=1"
+	DEBUG_dk_queueCommand	(${EMMAKE} make)
 else()
-	DEBUG_dk_queueShell		(../../configure --disable-asm)
-	DEBUG_dk_queueShell		(make)
+	DEBUG_dk_queueCommand	(../../configure --disable-asm)
+	DEBUG_dk_queueCommand	(make)
 endif()
 
 RELEASE_dk_setPath			(${X264}/${OS}/${RELEASE_DIR})
 if(EMSCRIPTEN)
-	RELEASE_dk_queueShell	(${EMCONFIGURE} ../../configure --host=i686-pc-linux-gnu --enable-static --disable-asm --disable-cli)
-	RELEASE_dk_queueShell	(${EMMAKE} make)
+	RELEASE_dk_queueCommand	(${EMCONFIGURE} ../../configure --host=i686-pc-linux-gnu --enable-static --disable-asm --disable-cli)
+	RELEASE_dk_queueCommand	(${EMMAKE} make)
 else()
-	RELEASE_dk_queueShell	(../../configure --disable-asm)
-	RELEASE_dk_queueShell	(make)
+	RELEASE_dk_queueCommand	(../../configure --disable-asm)
+	RELEASE_dk_queueCommand	(make)
 endif()
 

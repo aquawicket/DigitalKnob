@@ -56,8 +56,8 @@ RELEASE_dk_set	(OGG_CMAKE -DOGG_INCLUDE_DIR=${OGG}/include -DOGG_LIBRARY=${OGG}/
 
 ### GENERATE / COMPILE ###
 DEBUG_dk_setPath		(${OGG}/${OS}/${DEBUG_DIR})
-DEBUG_dk_queueShell		(${DKCONFIGURE_BUILD})
-DEBUG_dk_queueShell		(make)
+DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
+DEBUG_dk_queueCommand	(make)
 RELEASE_dk_setPath		(${OGG}/${OS}/${RELEASE_DIR})
-RELEASE_dk_queueShell	(${DKCONFIGURE_BUILD})
-RELEASE_dk_queueShell	(make)
+RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
+RELEASE_dk_queueCommand	(make)

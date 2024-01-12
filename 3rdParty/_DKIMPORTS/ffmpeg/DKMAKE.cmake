@@ -61,7 +61,7 @@ dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavformat/libavformat.a)
 set(USE_MSYS2 1)
 
 DEBUG_dk_setPath(${FFMPEG}/${OS}/${DEBUG_DIR})
-EMSCRIPTEN_DEBUG_dk_queueshell(${EMCONFIGURE} ../../configure
+EMSCRIPTEN_DEBUG_dk_queueCommand(${EMCONFIGURE} ../../configure
 	--pkg-config-flags=--static 
 	--disable-shared 
 	--enable-static
@@ -84,8 +84,8 @@ EMSCRIPTEN_DEBUG_dk_queueshell(${EMCONFIGURE} ../../configure
 	--cxx=${EMPP}
 	--objcc=${EMCC}
 	--dep-cc=${EMCC})
-IOS32_DEBUG_dk_queueshell(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=armv7 --disable-x86asm --disable-iconv)
-IOS64_DEBUG_dk_queueshell(../../configure 
+IOS32_DEBUG_dk_queueCommand(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=armv7 --disable-x86asm --disable-iconv)
+IOS64_DEBUG_dk_queueCommand(../../configure 
 	--pkg-config-flags=--static
 	--disable-shared
 	--enable-static
@@ -100,8 +100,8 @@ IOS64_DEBUG_dk_queueshell(../../configure
 	--cc=${XCODE_CLANG}
 	--cxx=${XCODE_CLANGXX}
 	--extra-cflags="-arch arm64 -DIOS -DIOS64 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOS_SYSROOT}")
-IOSSIM32_DEBUG_dk_queueshell(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
-IOSSIM64_DEBUG_dk_queueshell(../../configure
+IOSSIM32_DEBUG_dk_queueCommand(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
+IOSSIM64_DEBUG_dk_queueCommand(../../configure
 	--pkg-config-flags=--static
 	--disable-shared
 	--enable-static
@@ -115,24 +115,24 @@ IOSSIM64_DEBUG_dk_queueshell(../../configure
 	--cc=${XCODE_CLANG}
 	--cxx=${XCODE_CLANGXX}
 	--extra-cflags="-arch x86_64 -DIOS -DIOS64 -DIOSSIM -DIOSSIM64 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOSSIM_SYSROOT}")
-LINUX32_DEBUG_dk_queueshell		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
-LINUX64_DEBUG_dk_queueshell		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=x86_64 --disable-x86asm --disable-iconv)
-MAC32_DEBUG_dk_queueshell		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
-MAC64_DEBUG_dk_queueshell		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=x86_64 --disable-x86asm --disable-iconv)
-RASPBERRY32_DEBUG_dk_queueshell	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
-RASPBERRY64_DEBUG_dk_queueshell	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=x86_64 --disable-x86asm --disable-iconv)
-WIN32_DEBUG_dk_queueshell		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-sdl2 --target-os=mingw32)
-#WIN32_DEBUG_dk_queueshell(../../configure --pkg-config-flags=--static --disable-shared --enable-static --toolchain=msvc) # --cc=\${MSVC_CL}
-WIN64_DEBUG_dk_queueshell		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --target-os=mingw64)
+LINUX32_DEBUG_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
+LINUX64_DEBUG_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=x86_64 --disable-x86asm --disable-iconv)
+MAC32_DEBUG_dk_queueCommand			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
+MAC64_DEBUG_dk_queueCommand			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=x86_64 --disable-x86asm --disable-iconv)
+RASPBERRY32_DEBUG_dk_queueCommand	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
+RASPBERRY64_DEBUG_dk_queueCommand	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=x86_64 --disable-x86asm --disable-iconv)
+WIN32_DEBUG_dk_queueCommand			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-sdl2 --target-os=mingw32)
+#WIN32_DEBUG_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --toolchain=msvc) # --cc=\${MSVC_CL}
+WIN64_DEBUG_dk_queueCommand			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --target-os=mingw64)
 
-EMSCRIPTEN_DEBUG_dk_queueShell(${EMMAKE} make)
+EMSCRIPTEN_DEBUG_dk_queueCommand(${EMMAKE} make)
 if(NOT EMSCRIPTEN)
-	DEBUG_dk_queueshell(make)
+	DEBUG_dk_queueCommand(make)
 endif()
 
 
 RELEASE_dk_setPath(${FFMPEG}/${OS}/${RELEASE_DIR})
-EMSCRIPTEN_RELEASE_dk_queueshell(${EMCONFIGURE} ../../configure 
+EMSCRIPTEN_RELEASE_dk_queueCommand(${EMCONFIGURE} ../../configure 
 	--pkg-config-flags=--static 
 	--disable-shared 
 	--enable-static
@@ -156,23 +156,23 @@ EMSCRIPTEN_RELEASE_dk_queueshell(${EMCONFIGURE} ../../configure
 	--cxx=${EMPP}
 	--objcc=${EMCC}
 	--dep-cc=${EMCC})
-IOS32_RELEASE_dk_queueshell			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=arm --disable-x86asm --disable-iconv)
-IOS64_RELEASE_dk_queueshell			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=arm64 --disable-x86asm --disable-iconv)
-IOSSIM32_RELEASE_dk_queueshell		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=i686 --disable-x86asm --disable-iconv)
-IOSSIM64_RELEASE_dk_queueshell		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=x86_64 --disable-x86asm --disable-iconv)
-LINUX32_RELEASE_dk_queueshell		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=i686 --disable-x86asm --disable-iconv)
-LINUX64_RELEASE_dk_queueshell		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=x86_64 --disable-x86asm --disable-iconv)
-MAC32_RELEASE_dk_queueshell			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=i686 --disable-x86asm --disable-iconv)
-MAC64_RELEASE_dk_queueshell			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=x86_64 --disable-x86asm --disable-iconv)
-RASPBERRY32_RELEASE_dk_queueshell	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=i686 --disable-x86asm --disable-iconv)
-RASPBERRY64_RELEASE_dk_queueshell	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=x86_64 --disable-x86asm --disable-iconv)
-WIN32_RELEASE_dk_queueshell			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --disable-sdl2 --target-os=mingw32)
-#WIN32_RELEASE_dk_queueshell			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --toolchain=msvc)
-WIN64_RELEASE_dk_queueshell			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --target-os=mingw64)
+IOS32_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=arm --disable-x86asm --disable-iconv)
+IOS64_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=arm64 --disable-x86asm --disable-iconv)
+IOSSIM32_RELEASE_dk_queueCommand	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=i686 --disable-x86asm --disable-iconv)
+IOSSIM64_RELEASE_dk_queueCommand	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=x86_64 --disable-x86asm --disable-iconv)
+LINUX32_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=i686 --disable-x86asm --disable-iconv)
+LINUX64_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=x86_64 --disable-x86asm --disable-iconv)
+MAC32_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=i686 --disable-x86asm --disable-iconv)
+MAC64_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=x86_64 --disable-x86asm --disable-iconv)
+RASPBERRY32_RELEASE_dk_queueCommand	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=i686 --disable-x86asm --disable-iconv)
+RASPBERRY64_RELEASE_dk_queueCommand	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=x86_64 --disable-x86asm --disable-iconv)
+WIN32_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --disable-sdl2 --target-os=mingw32)
+#WIN32_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --toolchain=msvc)
+WIN64_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --target-os=mingw64)
 
-EMSCRIPTEN_RELEASE_dk_queueShell(${EMMAKE} make)
+EMSCRIPTEN_RELEASE_dk_queueCommand(${EMMAKE} make)
 if(NOT EMSCRIPTEN)
-	RELEASE_dk_queueshell(make)
+	RELEASE_dk_queueCommand(make)
 endif()
 
 set(USE_MSYS2 0)

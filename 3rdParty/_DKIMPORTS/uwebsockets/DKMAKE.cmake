@@ -38,12 +38,12 @@ dk_build(${UWEBSOCKETS} uWS)
 
 ###### NON CMAKE #########
 ### GENERATE / COMPILE ###
-#DEBUG_dk_setPath		(${UWEBSOCKETS}/${OS}/${DEBUG_DIR})
-#DEBUG_dk_queueShell	(${DKCONFIGURE_BUILD})
-#DEBUG_dk_queueShell		(make)
-#RELEASE_dk_setPath		(${UWEBSOCKETS}/${OS}/${RELEASE_DIR})
-#RELEASE_dk_queueShell	(${DKCONFIGURE_BUILD})
-#RELEASE_dk_queueShell	(make)
+#DEBUG_dk_setPath			(${UWEBSOCKETS}/${OS}/${DEBUG_DIR})
+#DEBUG_dk_queueCommand		(${DKCONFIGURE_BUILD})
+#DEBUG_dk_queueCommand		(make)
+#RELEASE_dk_setPath			(${UWEBSOCKETS}/${OS}/${RELEASE_DIR})
+#RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
+#RELEASE_dk_queueCommand	(make)
 
 #dk_setPath		(${UWEBSOCKETS})
 #dk_queueShell	(make)

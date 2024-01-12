@@ -7,9 +7,8 @@
 
 
 ### DEPEND ###
-MAC_dk_depend(autotools)
 WIN_dk_depend(msys2)
-if(MSYS)
+if(MSYS OR MAC)
 	dk_depend(autotools)
 endif()
 
@@ -36,22 +35,21 @@ if(GIFLIB_USE_CMAKE)
 		dk_setPath				(${GIFLIB})
 		
 		if(MSYS)
-			dk_queueShell	(export ACLOCAL_PATH=${MSYS2}/usr/share/aclocal && autoreconf -f -i)
+			dk_queueCommand	(export ACLOCAL_PATH=${MSYS2}/usr/share/aclocal && autoreconf -f -i)
 		else()
-			dk_queueShell	(autoreconf -f -i)
+			dk_queueCommand	(autoreconf -f -i)
 		endif()
 
-		
 		string(REPLACE "-std=c17" "" GIFLIB_CONFIGURE "${DKCONFIGURE_BUILD}")
 		string(REPLACE "-std=c++1z" "" GIFLIB_CONFIGURE "${GIFLIB_CONFIGURE}")
 		string(REPLACE "  " " " GIFLIB_CONFIGURE "${GIFLIB_CONFIGURE}")
 	
 		DEBUG_dk_setPath		(${GIFLIB}/${OS}/${DEBUG_DIR})
-		DEBUG_dk_queueShell		(${GIFLIB_CONFIGURE})
-		DEBUG_dk_queueShell		(make -C lib)
+		DEBUG_dk_queueCommand	(${GIFLIB_CONFIGURE})
+		DEBUG_dk_queueCommand	(make -C lib)
 		RELEASE_dk_setPath		(${GIFLIB}/${OS}/${RELEASE_DIR})
-		RELEASE_dk_queueShell	(${GIFLIB_CONFIGURE})
-		RELEASE_dk_queueShell	(make -C lib)
+		RELEASE_dk_queueCommand	(${GIFLIB_CONFIGURE})
+		RELEASE_dk_queueCommand	(make -C lib)
 	else()
 		### GENERATE ###
 		dk_queueCommand(${DKCMAKE_BUILD} ${GIFLIB})
@@ -61,7 +59,6 @@ if(GIFLIB_USE_CMAKE)
 	endif()
 	
 else()
-
 	### LINK ###
 	dk_include					(${GIFLIB}/lib)
 	if(MSVC)
@@ -82,7 +79,6 @@ else()
 		endif()
 	endif()
 
-
 	### 3RDPARTY LINK ###
 	ANDROID_dk_set		(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIFLIB}/lib -DGIF_INCLUDE_DIR2=${GIFLIB}/${OS} -DGIF_LIBRARY=${GIFLIB}/${OS}/${RELEASE_DIR}/libgiflib.a)	
 	APPLE_dk_set		(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIFLIB}/lib -DGIF_INCLUDE_DIR2=${GIFLIB}/${OS} -DGIF_LIBRARY=${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
@@ -90,17 +86,15 @@ else()
 	LINUX_dk_set		(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIFLIB}/lib -DGIF_INCLUDE_DIR2=${GIFLIB}/${OS} -DGIF_LIBRARY=${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
 	RASPBERRY_dk_set	(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIFLIB}/lib -DGIF_INCLUDE_DIR2=${GIFLIB}/${OS} -DGIF_LIBRARY=${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
 	WIN_dk_set			(GIFLIB_CMAKE -DGIF_INCLUDE_DIR=${GIFLIB}/lib -DGIF_INCLUDE_DIR2=${GIFLIB}/${OS} -DGIF_LIBRARY=${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
-
-
+	
 	dk_setPath		(${GIFLIB})
 	
 	if(MSYS)
-		dk_queueShell	(export ACLOCAL_PATH=${MSYS2}/usr/share/aclocal && autoreconf -f -i)
+		dk_queueCommand	(export ACLOCAL_PATH=${MSYS2}/usr/share/aclocal && autoreconf -f -i)
 	else()
-		dk_queueShell	(autoreconf -f -i)
+		dk_queueCommand	(autoreconf -f -i)
 	endif()
-
-
+	
 	string(REPLACE "-std=c17" "" GIFLIB_CONFIGURE "${DKCONFIGURE_BUILD}")
 	string(REPLACE "-std=c++1z" "" GIFLIB_CONFIGURE "${GIFLIB_CONFIGURE}")
 	string(REPLACE "  " " " GIFLIB_CONFIGURE "${GIFLIB_CONFIGURE}")
@@ -111,11 +105,11 @@ else()
 			dk_visualStudio(${GIFLIB} giflib)
 		else()
 			DEBUG_dk_setPath		(${GIFLIB}/${OS}/${DEBUG_DIR})
-			DEBUG_dk_queueShell		(${GIFLIB_CONFIGURE})
-			DEBUG_dk_queueShell		(make -C lib)
+			DEBUG_dk_queueCommand	(${GIFLIB_CONFIGURE})
+			DEBUG_dk_queueCommand	(make -C lib)
 			RELEASE_dk_setPath		(${GIFLIB}/${OS}/${RELEASE_DIR})
-			RELEASE_dk_queueShell	(${GIFLIB_CONFIGURE})
-			RELEASE_dk_queueShell	(make -C lib)
+			RELEASE_dk_queueCommand	(${GIFLIB_CONFIGURE})
+			RELEASE_dk_queueCommand	(make -C lib)
 		endif()
 	else()
 		if(EMSCRIPTEN)
@@ -123,12 +117,11 @@ else()
 			dk_build(${GIFLIB})
 		else()
 			DEBUG_dk_setPath		(${GIFLIB}/${OS}/${DEBUG_DIR})
-			DEBUG_dk_queueShell		(${GIFLIB_CONFIGURE})
-			DEBUG_dk_queueShell		(make -C lib)
+			DEBUG_dk_queueCommand	(${GIFLIB_CONFIGURE})
+			DEBUG_dk_queueCommand	(make -C lib)
 			RELEASE_dk_setPath		(${GIFLIB}/${OS}/${RELEASE_DIR})
-			RELEASE_dk_queueShell	(${GIFLIB_CONFIGURE})
-			RELEASE_dk_queueShell	(make -C lib)
+			RELEASE_dk_queueCommand	(${GIFLIB_CONFIGURE})
+			RELEASE_dk_queueCommand	(make -C lib)
 		endif()
 	endif()
-	
 endif()

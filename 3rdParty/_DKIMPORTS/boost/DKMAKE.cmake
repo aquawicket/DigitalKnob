@@ -135,7 +135,7 @@ endif()
 
 
 ### COMPILE ###
-ANDROID_dk_shell(${BOOST}/SetupAndroid.sh)
+ANDROID_dk_command(${BOOST}/SetupAndroid.sh)
 ANDROID32_DEBUG_dk_queueCommand(
 	#setx NDK_ROOT ${ANDROID-NDK} &&
 	${BOOST}/b2.exe

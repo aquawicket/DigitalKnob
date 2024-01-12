@@ -3,7 +3,7 @@
 
 
 if(APPLE)
-	dk_shell(sudo port install fontconfig)
+	dk_command(sudo port install fontconfig)
 	return()
 endif()
 
@@ -23,15 +23,15 @@ dk_set(FONTCONFIG_CMAKE -DFONTCONFIG_INCLUDE_DIR=${FONTCONFIG}/lib -DFONTCONFIG_
 
 ### GENERATE / COMPILE ###
 DEBUG_dk_setPath		(${FONTCONFIG})
-DEBUG_dk_queueShell		(autoupdate)
-DEBUG_dk_queueShell		(autoconf)
+DEBUG_dk_queueCommand	(autoupdate)
+DEBUG_dk_queueCommand	(autoconf)
 DEBUG_dk_setPath		(${FONTCONFIG}/${OS}/${DEBUG_DIR})
-DEBUG_dk_queueShell		(${DKCONFIGURE_BUILD})
-DEBUG_dk_queueShell		(make)
+DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
+DEBUG_dk_queueCommand	(make)
 
 RELEASE_dk_setPath		(${FONTCONFIG})
-RELEASE_dk_queueShell	(autoupdate)
-RELEASE_dk_queueShell	(autoconf)
+RELEASE_dk_queueCommand	(autoupdate)
+RELEASE_dk_queueCommand	(autoconf)
 RELEASE_dk_setPath		(${FONTCONFIG}/${OS}/${RELEASE_DIR})
-RELEASE_dk_queueShell	(${DKCONFIGURE_BUILD})
-RELEASE_dk_queueShell	(make)
+RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
+RELEASE_dk_queueCommand	(make)

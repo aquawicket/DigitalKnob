@@ -4718,15 +4718,15 @@ endfunction()
 #
 #	@args	- The command and args to execute
 #
-macro(dk_shell args)
-	DKDEBUGFUNC(${ARGV})
-	if(WIN_HOST)# AND NOT EMSCRIPTEN)
-		dk_msys2(${ARGV})
-	else()
-		dk_command(${ARGV})
-	endif()
-endmacro()
-dk_createOsMacros("dk_shell")
+#macro(dk_shell args)
+#	DKDEBUGFUNC(${ARGV})
+#	if(WIN_HOST)# AND NOT EMSCRIPTEN)
+#		dk_msys2(${ARGV})
+#	else()
+#		dk_command(${ARGV})
+#	endif()
+#endmacro()
+#dk_createOsMacros("dk_shell")
 
 
 ###############################################################################
@@ -4736,13 +4736,13 @@ dk_createOsMacros("dk_shell")
 #
 #	@args	- The command and args to execute
 #
-macro(dk_queueShell args)
-	DKDEBUGFUNC(${ARGV})
-	if(QUEUE_BUILD)
-		dk_shell(${ARGV})
-	endif()	
-endmacro()
-dk_createOsMacros("dk_queueShell")
+#macro(dk_queueShell args)
+#	DKDEBUGFUNC(${ARGV})
+#	if(QUEUE_BUILD)
+#		dk_shell(${ARGV})
+#	endif()	
+#endmacro()
+#dk_createOsMacros("dk_queueShell")
 
 
 ###############################################################################
