@@ -17,6 +17,8 @@ set "MSBUILD_DL=https://aka.ms/vs/17/release/vs_community.exe"
 set "ANDROID_API=31"
 set "ANDROID_NDK_BUILD=23.1.7779620"
 set "ANDROID_NDK_DL=https://dl.google.com/android/repository/android-ndk-r23b-windows.zip"
+set "PYTHON_FOLDER=python-2.7.18"
+set "PYTHON_DL=https://www.python.org/ftp/python/2.7.18/python-2.7.18.msi"
 set "EMSDK_GIT=https://github.com/emscripten-core/emsdk.git"
 
 
@@ -417,6 +419,8 @@ goto:eof
 
 :: validate_emscripten()
 :validate_emscripten
+	call:validate_python
+	
 	set "EMSDK=%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main"
 	if NOT exist "%EMSDK%\.git" (
 		echo "installing emsdk"
@@ -427,13 +431,32 @@ goto:eof
 	"%GIT%" checkout main
 	"%GIT%" pull
 		
-	"%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main\emsdk.bat" install latest
-	"%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main\emsdk.bat" activate latest
+	call "%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main\emsdk.bat" install latest
+	call "%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main\emsdk.bat" activate latest
 	
-	"%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main\emsdk.bat" install mingw-4.6.2-32bit
-	"%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main\emsdk.bat" activate mingw-4.6.2-32bit
+	call "%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main\emsdk.bat" install mingw-4.6.2-32bit
+	call "%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main\emsdk.bat" activate mingw-4.6.2-32bit
 	
 	::CPP_DK_Execute("chmod 777 "+DIGITALKNOB+"DK/3rdParty/emsdk-main/emsdk_env.sh")  :: MSYS
+goto:eof
+
+:: validate_python()
+:validate_python
+	set "PYTHON_PATH=%DIGITALKNOB%\%DKBRANCH%\3rdParty\%PYTHON_FOLDER%"
+	set "PYTHON_EXE=%PYTHON_PATH%\python.exe"
+	::call:make_directory "%PYTHON_PATH%"
+	set PATH=%PATH%;%PYTHON_PATH%
+	
+	if NOT exist %PYTHON_EXE% (
+		echo "installing python"
+		call:download %PYTHON_DL% "%DKDOWNLOAD%\python-2.7.18.msi"
+		"%DKDOWNLOAD%\python-2.7.18.msi" /passive PrependPath=1 TargetDir=%PYTHON_PATH%
+	)
+	if NOT exist %PYTHON_PATH%\Scripts\pip.exe (
+		"%PYTHON_EXE%" -m ensurepip
+	)
+		
+
 goto:eof
 
 :: clear_cmake_cache()
