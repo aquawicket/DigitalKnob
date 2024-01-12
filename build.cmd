@@ -222,20 +222,15 @@ call:validate_emscripten
 	set EMSDK_TOOLCHAIN_FILE=%EMSDK%\upstream\emscripten\cmake\Modules\Platform\Emscripten.cmake
 	echo ""
 	echo ""
-	::%EMSDK_ENV% & "%CMAKE%" -G \"MinGW Makefiles\" -DCMAKE_TOOLCHAIN_FILE=\""%EMSDK_TOOLCHAIN_FILE%"\" "%DKCMAKE%"
 	if %TYPE%==Debug (
-		echo "%EMSDK_ENV% & %CMAKE% -G MinGW Makefiles -DCMAKE_TOOLCHAIN_FILE=%EMSDK_TOOLCHAIN_FILE% -S%DKCMAKE% -B%APP_PATH%/%OS%/Debug"
 		call "%EMSDK_ENV%" & "%CMAKE%" -G "MinGW Makefiles" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%APP_PATH%/%OS%/Debug
 	)
 	if %TYPE%==Release (
-		echo "%EMSDK_ENV% & %CMAKE% -G MinGW Makefiles -DCMAKE_TOOLCHAIN_FILE=%EMSDK_TOOLCHAIN_FILE% -S%DKCMAKE% -B%APP_PATH%/%OS%/Release"
-		"%EMSDK_ENV%" & "%CMAKE%" -G "MinGW Makefiles" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%APP_PATH%/%OS%/Release
+		call "%EMSDK_ENV%" & "%CMAKE%" -G "MinGW Makefiles" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%APP_PATH%/%OS%/Release
 	)
 	if %TYPE%==ALL (
-		echo "%EMSDK_ENV% & %CMAKE% -G MinGW Makefiles -DCMAKE_TOOLCHAIN_FILE=%EMSDK_TOOLCHAIN_FILE% -S%DKCMAKE% -B%APP_PATH%/%OS%/Debug"
-		"%EMSDK_ENV%" & "%CMAKE%" -G "MinGW Makefiles" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%APP_PATH%/%OS%/Debug
-		echo "%EMSDK_ENV% & %CMAKE% -G MinGW Makefiles -DCMAKE_TOOLCHAIN_FILE=%EMSDK_TOOLCHAIN_FILE% -S%DKCMAKE% -B%APP_PATH%/%OS%/Release"
-		"%EMSDK_ENV%" & "%CMAKE%" -G "MinGW Makefiles" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%APP_PATH%/%OS%/Release
+		call "%EMSDK_ENV%" & "%CMAKE%" -G "MinGW Makefiles" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%APP_PATH%/%OS%/Debug
+		call "%EMSDK_ENV%" & "%CMAKE%" -G "MinGW Makefiles" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%APP_PATH%/%OS%/Release
 	)
 	set TARGET=%APP%_APP
 ::goto build
@@ -440,7 +435,6 @@ goto:eof
 :: validate_emscripten()
 :validate_emscripten
 	call:validate_python
-	@echo on
 	
 	set "EMSDK=%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main"
 	if NOT exist "%EMSDK%\.git" (
@@ -453,13 +447,13 @@ goto:eof
 	"%GIT%" pull
 		
 	call "%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main\emsdk.bat" install latest
-	"%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main\emsdk.bat" activate latest --permanent
+	call "%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main\emsdk.bat" activate latest --permanent
 	
-	"%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main\emsdk.bat" install mingw-4.6.2-32bit
-	"%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main\emsdk.bat" activate mingw-4.6.2-32bit
+	call "%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main\emsdk.bat" install mingw-4.6.2-32bit
+	call "%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main\emsdk.bat" activate mingw-4.6.2-32bit
 	
 	::CPP_DK_Execute("chmod 777 "+DIGITALKNOB+"DK/3rdParty/emsdk-main/emsdk_env.sh")  :: MSYS
-	"%PYTHON_PATH%\emsdk_env.bat"
+	call "%PYTHON_PATH%\emsdk_env.bat"
 goto:eof
 
 :: validate_python()
