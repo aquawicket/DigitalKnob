@@ -17,6 +17,7 @@ set "MSBUILD_DL=https://aka.ms/vs/17/release/vs_community.exe"
 set "ANDROID_API=31"
 set "ANDROID_NDK_BUILD=23.1.7779620"
 set "ANDROID_NDK_DL=https://dl.google.com/android/repository/android-ndk-r23b-windows.zip"
+set "EMSDK_GIT=https://github.com/emscripten-core/emsdk.git"
 
 
 
@@ -401,7 +402,7 @@ goto:eof
 	set "ANDROID_NDK=%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk\%ANDROID_NDK_BUILD%"
 	echo ANDROID_NDK = %ANDROID_NDK%
 	if NOT exist "%ANDROID_NDK%" (
-		echo "installing android ndk"
+		echo "installing android-ndk"
 		call:download %ANDROID_NDK_DL% "%DKDOWNLOAD%\android-ndk-r23b-windows.zip"
 		call:make_directory "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk"
 		call:make_directory "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk"
@@ -416,8 +417,23 @@ goto:eof
 
 :: validate_emscripten()
 :validate_emscripten
-	:: TODO
-	call:assert "validate_emscripten() not implemented"
+	set "EMSDK=%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main"
+	if NOT exist "%EMSDK%\.git" (
+		echo "installing emsdk"
+		"%GIT%" clone "%EMSDK_GIT%" "%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main"
+	)
+	::"%GIT%" checkout -- .
+	cd "%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main"
+	"%GIT%" checkout main
+	"%GIT%" pull
+		
+	"%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main\emsdk.bat" install latest
+	"%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main\emsdk.bat" activate latest
+	
+	"%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main\emsdk.bat" install mingw-4.6.2-32bit
+	"%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main\emsdk.bat" activate mingw-4.6.2-32bit
+	
+	::CPP_DK_Execute("chmod 777 "+DIGITALKNOB+"DK/3rdParty/emsdk-main/emsdk_env.sh")  :: MSYS
 goto:eof
 
 :: clear_cmake_cache()
