@@ -2106,7 +2106,8 @@ function(dk_mergeFlags args RESULT)
 			if(${placeholder} GREATER ${args_length})
 				math(EXPR placeholder "${args_length}-1")
 			endif()			
-			list(INSERT args ${placeholder} "\"${DK_${word}}\"")  # https://stackoverflow.com/a/61948012
+			#list(INSERT args ${placeholder} "\"${DK_${word}}\"")  # https://stackoverflow.com/a/61948012
+			list(INSERT args ${placeholder} "${DK_${word}}") 
 		endif()
 	endforeach()
 	set(${RESULT} ${args} PARENT_SCOPE)
@@ -2150,6 +2151,7 @@ dk_createOsMacros("dk_command")
 #
 function(dk_queueCommand)
 	DKDEBUGFUNC(${ARGV})
+	dk_info("\n${CLR}${magenta} $ ${ARGV}\n")
 	if(QUEUE_BUILD)
 		dk_command(${ARGV})
 	endif()	
