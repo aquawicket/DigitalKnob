@@ -546,3 +546,47 @@ goto:eof
 :clear_screen
 	cls
 goto:eof
+
+::###### cmake_eval ######
+:cmake_eval
+	::echo cmake_eval %1
+	if [%1] == [] (
+		echo "ERROR: cmake_eval() parameter1 is invalid"
+		goto:eof
+	)
+	if not exist "%CMAKE%" ( 
+		echo "ERROR: Could not locate CMAKE" 
+		goto:eof
+	)
+	if not exist "%DKCMAKE%" ( 
+		echo "ERROR: Could not locate DKCMAKE" 
+		goto:eof
+	)
+
+	set commands=%1
+	::echo commands = %commands%
+	set commands=%commands:"=%
+	set "DKCOMMAND=%commands%"
+	::echo DKCOMMAND = %DKCOMMAND%
+
+	"%CMAKE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE%/dev/cmake_eval.cmake" --log-level=TRACE >cmake_eval.out 2>cmake_eval.err
+	echo return code: %ERRORLEVEL%
+
+	set out=
+	for /f "Tokens=* Delims=" %%x in (cmake_eval.out) do (
+		set out=!out!%%x
+		echo %%x
+	)
+	::out contains all of the lines
+	::del cmake_eval.out
+	::echo %out%		
+			
+	set err=
+	for /f "Tokens=* Delims=" %%x in (cmake_eval.err) do (
+		set err=!err!%%x
+		echo [91m %%x [0m
+	)
+	::del cmake_eval.out
+	::err contains all of the lines
+	::echo %err%
+goto:eof
