@@ -15,7 +15,6 @@ dk_depend(android-cmdline-tools)
 
 if(NOT EXISTS ${ANDROID-SDK})
 	dk_info("Installing android-sdk")
-	#dk_wait()
 	dk_set(ANDROID-SDK ${3RDPARTY}/android-sdk)
 	dk_makeDirectory(${ANDROID-SDK})
 	dk_patch(android-sdk ${ANDROID-SDK})

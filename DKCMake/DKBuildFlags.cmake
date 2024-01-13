@@ -623,7 +623,7 @@ dk_depend			(cmake)
 #ANDROID_dk_depend	(android)
 #ANDROID_dk_depend	(m)
 
-ANDROID_dk_depend	(ant)
+#ANDROID_dk_depend	(ant)
 ANDROID_dk_depend	(android-cmdline-tools)
 ANDROID_dk_depend	(android-ndk)
 ANDROID_dk_depend	(android-platforms)
