@@ -9,8 +9,8 @@
 ### DEPEND ###
 dk_depend(python)
 dk_depend(pyyaml)
-dk_depend(nodejs)
-dk_depend(msys2)
+#dk_depend(nodejs)
+#dk_depend(msys2)
 
 
 ### IMPORT ###
