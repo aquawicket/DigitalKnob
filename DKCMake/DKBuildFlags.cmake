@@ -656,7 +656,6 @@ MAC_HOST_dk_depend	(xcode)
 
 WIN_HOST_dk_depend	(visualstudio)
 WIN_HOST_dk_depend	(imagemagick)
-#WIN_HOST_dk_depend	(msys)		# migrated to msys2	
 WIN_HOST_dk_depend	(msys2)			
 
 
