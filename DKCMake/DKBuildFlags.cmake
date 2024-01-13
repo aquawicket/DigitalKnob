@@ -618,11 +618,6 @@ endif()
 dk_depend			(git)
 dk_depend			(cmake)
 
-#ANDROID_dk_depend	(dl)
-#ANDROID_dk_depend	(log)
-#ANDROID_dk_depend	(android)
-#ANDROID_dk_depend	(m)
-
 ##ANDROID_dk_depend	(ant)
 #ANDROID_dk_depend	(android-cmdline-tools)
 #ANDROID_dk_depend	(android-ndk)
@@ -639,20 +634,7 @@ dk_depend			(cmake)
 EMSCRIPTEN_dk_depend(emsdk)
 EMSCRIPTEN_dk_depend(DKPhp)
 
-#LINUX_dk_depend	(kdevelop)
-#LINUX_dk_depend	(libx11-dev)
-#LINUX_dk_depend	(pthread)
-#LINUX_dk_depend	(dl)
-#LINUX_dk_depend	(libstdc++fs)
-
 MAC_HOST_dk_depend	(xcode)
-
-#RASPBERRY_dk_depend(libx11-dev)
-#RASPBERRY_dk_depend(pthread)
-#RASPBERRY_dk_depend(dl)
-#RASPBERRY_dk_depend(libstdc++fs)
-#RASPBERRY_dk_linkDir(/opt/vc/lib)
-#RASPBERRY_dk_depend(bcm_host)
 
 WIN_HOST_dk_depend	(visualstudio)
 WIN_HOST_dk_depend	(imagemagick)
