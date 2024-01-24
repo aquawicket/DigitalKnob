@@ -569,9 +569,12 @@ goto:eof
 	set "DKCOMMAND=%commands%"
 	::echo DKCOMMAND = %DKCOMMAND%
 
+	:: call cmake with parmeters and take in return values from   -       -       -      -      -        -      -  ->stdout         &>stderr
 	"%CMAKE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE%/dev/cmake_eval.cmake" --log-level=TRACE >cmake_eval.out 2>cmake_eval.err
 	echo return code: %ERRORLEVEL%
 
+	:::: work with cmake return code files ::::
+	:: std::out
 	set out=
 	for /f "Tokens=* Delims=" %%x in (cmake_eval.out) do (
 		set out=!out!%%x
@@ -581,6 +584,7 @@ goto:eof
 	::del cmake_eval.out
 	::echo %out%		
 			
+	:: std::err
 	set err=
 	for /f "Tokens=* Delims=" %%x in (cmake_eval.err) do (
 		set err=!err!%%x
