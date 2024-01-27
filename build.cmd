@@ -27,11 +27,12 @@ set "EMSDK_GIT=https://github.com/emscripten-core/emsdk.git"
 ::--------------------------------------------------------
 :: Main
 ::--------------------------------------------------------
-set "DIGITALKNOB=C:\Users\%USERNAME%\digitalknob"
+set "DIGITALKNOB=%HOMEDRIVE%\%HOMEPATH%\digitalknob"
 call:make_directory "%DIGITALKNOB%"
 set "DKDOWNLOAD=%DIGITALKNOB%\download"
 call:make_directory "%DKDOWNLOAD%"
 
+call:validate_cmake
 call:validate_git
 call:validate_branch
 
@@ -375,51 +376,56 @@ goto:eof
 
 :: validate_git()
 :validate_git
-	if exist "C:\Program Files\Git\bin\git.exe" set "GIT=C:\Program Files\Git\bin\git.exe"
-	if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
+	::for /F "tokens=*" %%g in ('where git') do (SET GIT=%%g)
+	::for /F "tokens=*" %%g in ('where /R "%ProgramFiles(x86)%" git.exe') do (SET GIT=%%g)
+	
+	call:command_to_variable where /R "%ProgramFiles(x86)%" git.exe GIT
+
 	if NOT exist "%GIT%" (
 		echo "installing git"
 		call:download %GIT_DL% "%DKDOWNLOAD%\Git-2.30.1-32-bit.exe"
 		"%DKDOWNLOAD%\Git-2.30.1-32-bit.exe" /VERYSILENT /NORESTART
-		if exist "C:\Program Files\Git\bin\git.exe" set "GIT=C:\Program Files\Git\bin\git.exe"
-		if exist "C:\Program Files (x86)\Git\bin\git.exe" set "GIT=C:\Program Files (x86)\Git\bin\git.exe"
+		for /F "tokens=*" %%g in ('where git') do (SET GIT=%%g)
 	)
 	if NOT exist "%GIT%" (
-		call:assert "GIT is still and invalid command"
+		call:assert "cannot find git"
 	)
 	echo GIT = %GIT%
 	call:check_error
+	
 goto:eof
 
 :: validate_cmake()
 :validate_cmake
-	if exist "C:\Program Files\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files\CMake\bin\cmake.exe"
-	if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files (x86)\CMake\bin\cmake.exe"
+	::echo validating cmake . . .
+	if exist "%ProgramFiles%\CMake\bin\cmake.exe" set "CMAKE=%ProgramFiles%\CMake\bin\cmake.exe"
+	if exist "%ProgramFiles(x86)%\CMake\bin\cmake.exe" set "CMAKE=%ProgramFiles(x86)%\CMake\bin\cmake.exe"
 	if NOT exist "%CMAKE%" (
 		echo "installing cmake"
 		call:download %CMAKE_DL% "%DKDOWNLOAD%\cmake-3.21.1-windows-i386.msi"
 		"%DKDOWNLOAD%\cmake-3.21.1-windows-i386.msi"
-		if exist "C:\Program Files\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files\CMake\bin\cmake.exe"
-		if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files (x86)\CMake\bin\cmake.exe"
+		if exist "%ProgramFiles%\CMake\bin\cmake.exe" set "CMAKE=%ProgramFiles%\CMake\bin\cmake.exe"
+		if exist "%ProgramFiles(x86)%\CMake\bin\cmake.exe" set "CMAKE=%ProgramFiles(x86)%\CMake\bin\cmake.exe"
 	)
+	echo CMAKE = %CMAKE%
 	call:check_error
 goto:eof
 
 :: validate_visual_studio()
 :validate_visual_studio
-	if exist "C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
-	if exist "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
-	if exist "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
-	if exist "C:\Program Files (x86)\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files (x86)\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
+	if exist "%ProgramFiles%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=%ProgramFiles%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
+	if exist "%ProgramFiles%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=%ProgramFiles%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
+	if exist "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=%ProgramFiles(x86)%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
+	if exist "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=%ProgramFiles(x86)%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
 	if NOT exist "%MSBUILD%" (
 		echo "installing Visual Studio"
 		call:download %MSBUILD_DL% "%DKDOWNLOAD%\vs_Community.exe"
 		"%DKDOWNLOAD%\vs_Community.exe"
 	)
-	if exist "C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
-	if exist "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
-	if exist "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
-	if exist "C:\Program Files (x86)\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=C:\Program Files (x86)\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
+	if exist "%ProgramFiles%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=%ProgramFiles%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
+	if exist "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=%ProgramFiles(x86)%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
+	if exist "%ProgramFiles%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=%ProgramFiles%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
+	if exist "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=%ProgramFiles(x86)%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
 	call:check_error
 goto:eof
 
@@ -492,6 +498,37 @@ goto:eof
 	if NOT exist %PYTHON_PATH%\Scripts\pip.exe (
 		"%PYTHON_EXE%" -m ensurepip
 	)
+goto:eof
+
+:: command_to_variable() <command . .> <variable_name> 
+:command_to_variable
+	if [%2] == [] (
+		echo "ERROR: command_to_variable()requires at least 2 parameters"
+		goto:eof
+	)
+
+	:command_args
+	set arg=%1
+	:: replace " with _QUOTE_
+	set arg=%arg:"=_QUOTE_%
+		
+	if not "%~2"=="" (
+		if "%command%"=="" (
+			set "command=%arg%"
+		) else (
+			set "command=%command% %arg%"
+		)
+	)
+	
+	set "variable_name=%~1"
+	shift
+	if not "%~1"=="" goto command_args
+	
+	:: replace _QUOTE_ with "
+	set command=%command:_QUOTE_="%
+
+	echo for /F "tokens=*" %%g in ('%command%') do (SET %variable_name%=%%g)
+	for /F "tokens=*" %%g in ('%command%') do (SET %variable_name%=%%g)
 goto:eof
 
 :: clear_cmake_cache()
