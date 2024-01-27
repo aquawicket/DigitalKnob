@@ -39,6 +39,7 @@ echo DKDOWNLOAD = %DKDOWNLOAD%
 call:validate_cmake
 call:validate_git
 call:validate_branch
+call:validate_msys2
 
 set "APP="
 set "OS="
@@ -463,7 +464,7 @@ goto:eof
 :: validate_msys2()
 :validate_msys2
 	:: TODO
-	call:assert "validate_msys2() not implemented"
+	call:cmake_eval "include('%DKCMAKE%/DK.cmake');set(WIN 1);set(WIN_64 1);include('%DIGITALKNOB%/%DKBRANCH%/3rdParty/_DKIMPORTS/msys2/DKMAKE.cmake')"
 goto:eof
 
 :: validate_openjdk()
@@ -474,21 +475,26 @@ goto:eof
 
 :: validate_android_ndk()
 :validate_android_ndk
-	set "ANDROID_NDK=%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk\%ANDROID_NDK_BUILD%"
-	echo ANDROID_NDK = %ANDROID_NDK%
+	call:cmake_eval "include('%DKCMAKE%/DK.cmake');set(ANDROID 1);include('%DIGITALKNOB%/%DKBRANCH%/3rdParty/_DKIMPORTS/android-ndk/DKMAKE.cmake')"
+
+	::set DK.cmake=%DKCMAKE%/DK.cmake:^\=^/%
+	::set NDK.cmake=%DIGITALKNOB%/%DKBRANCH%/3rdParty/android-sdk/ndk/DKMAKE.cmake:^\=^/%
 	
-	call:get_filename %ANDROID_NDK_DL% ANDROID_NDK_DL_FILE
-	if NOT exist "%ANDROID_NDK%" (
-		echo "installing android-ndk"
-		call:download %ANDROID_NDK_DL% "%DKDOWNLOAD%\%ANDROID_NDK_DL_FILE%"
-		call:make_directory "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk"
-		call:make_directory "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk"
-		call:extract "%DKDOWNLOAD%\%ANDROID_NDK_DL_FILE%" "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk"
-		call:rename "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk\android-ndk-r23b" "C:\Users\Administrator\digitalknob\Development\3rdParty\android-sdk\ndk\23.1.7779620"
-	)
-	if not '%VS_NdkRoot%'=='%ANDROID_NDK%' setx VS_NdkRoot %ANDROID_NDK%
-	:: replace all \ characters with / in ANDROID_NDK for cmake compatability
-	set ANDROID_NDK=%ANDROID_NDK:\=/%
+	::set "ANDROID_NDK=%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk\%ANDROID_NDK_BUILD%"
+	::echo ANDROID_NDK = %ANDROID_NDK%
+	
+	::call:get_filename %ANDROID_NDK_DL% ANDROID_NDK_DL_FILE
+	::if NOT exist "%ANDROID_NDK%" (
+	::	echo "installing android-ndk"
+	::	call:download %ANDROID_NDK_DL% "%DKDOWNLOAD%\%ANDROID_NDK_DL_FILE%"
+	::	call:make_directory "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk"
+	::	call:make_directory "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk"
+	::	call:extract "%DKDOWNLOAD%\%ANDROID_NDK_DL_FILE%" "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk"
+	::	call:rename "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk\android-ndk-r23b" "C:\Users\Administrator\digitalknob\Development\3rdParty\android-sdk\ndk\23.1.7779620"
+	::)
+	::if not '%VS_NdkRoot%'=='%ANDROID_NDK%' setx VS_NdkRoot %ANDROID_NDK%
+	:::: replace all \ characters with / in ANDROID_NDK for cmake compatability
+	::set ANDROID_NDK=%ANDROID_NDK:\=/%
 	call:check_error
 goto:eof
 
@@ -621,7 +627,7 @@ goto:eof
 	cls
 goto:eof
 
-:: cmake_eval()
+:: cmake_eval <cmake;commands;.;.;>
 :cmake_eval
 	::echo cmake_eval %1
 	if [%1] == [] (
@@ -639,34 +645,43 @@ goto:eof
 
 	set commands=%1
 	::echo commands = %commands%
-	set commands=%commands:"=%
+	call set commands=%%commands:"=%%
 	set "DKCOMMAND=%commands%"
-	::echo DKCOMMAND = %DKCOMMAND%
+	call set DKCOMMAND=%%DKCOMMAND:^\=^/%%
+	echo DKCOMMAND = %DKCOMMAND%
 
 	:: call cmake with parmeters and take in return values from   -       -       -      -      -        -      -  ->stdout         &>stderr
-	"%CMAKE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE%/dev/cmake_eval.cmake" --log-level=TRACE >cmake_eval.out 2>cmake_eval.err
+	call set DKCMAKE=%%DKCMAKE:^\=^/%%
+	::echo "%CMAKE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE%/dev/cmake_eval.cmake" --log-level=TRACE >cmake_eval.out 2>cmake_eval.err
+	"%CMAKE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE%/dev/cmake_eval.cmake" --log-level=TRACE
 	echo return code: %ERRORLEVEL%
-
+	
 	:::: work with cmake return code files ::::
 	:: std::out
 	set out=
-	for /f "Tokens=* Delims=" %%x in (cmake_eval.out) do (
-		set out=!out!%%x
-		echo %%x
+	if exist "cmake_eval.out" (
+		for /f "Tokens=* Delims=" %%x in (cmake_eval.out) do (
+			set out=!out!%%x
+			echo %%x
+		)
 	)
 	::out contains all of the lines
 	::del cmake_eval.out
-	::echo %out%		
+	::echo %out%	
+		
 			
 	:: std::err
 	set err=
-	for /f "Tokens=* Delims=" %%x in (cmake_eval.err) do (
-		set err=!err!%%x
-		echo [91m %%x [0m
+	if exist "cmake_eval.err" (
+		for /f "Tokens=* Delims=" %%x in (cmake_eval.err) do (
+			set err=!err!%%x
+			echo [91m %%x [0m
+		)
 	)
 	::del cmake_eval.out
 	::err contains all of the lines
 	::echo %err%
+
 goto:eof
 
 :: get_filename <path> <output_variable>

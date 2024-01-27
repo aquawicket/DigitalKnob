@@ -51,5 +51,5 @@ endif()
 
 if(NOT EXISTS ${MSYS2}/usr/bin/automake)
 	#dk_command(bash -c "pacman -S mingw-w64-x86_64-autotools --noconfirm")	# used by giflib
-	dk_msys("pacman -S mingw-w64-x86_64-autotools --noconfirm")				# used by giflib
+	dk_msys2("pacman -S mingw-w64-x86_64-autotools --noconfirm")			# used by giflib
 endif()

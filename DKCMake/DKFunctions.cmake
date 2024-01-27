@@ -1973,34 +1973,34 @@ dk_createOsMacros("dk_setPath")
 #
 #	@args	- TODO
 #
-function(dk_msys)
-	DKDEBUGFUNC(${ARGV})
-	
-	dk_warn("WARNING: dk_msys() is deprecated. Please switch to using msys2()")
-	
-	if(QUEUE_BUILD)
-		string(REPLACE ";" " " str "${ARGV}")
-		set(bash "#!/bin/bash")
-		list(APPEND bash "cd ${CURRENT_DIR}")
-		if(WIN_32 OR ANDROID_32) # OR EMSCRIPTEN)
-			list(APPEND bash "export PATH=${MINGW32}/bin:$PATH")
-		elseif(WIN_64 OR ANDROID_64)
-			list(APPEND bash "export PATH=${MINGW64}/bin:$PATH")
-		else()
-			dk_assert("dk_msys(): ERROR: not WIN_32, WIN_64, ANDROID_32 or ANDROID_64")
-		endif()
-		list(APPEND bash "export PATH=${MSYS}/bin:$PATH")
-		list(APPEND bash "${str}")
-		list(APPEND bash "exit")
-		list(APPEND bash " ")
-		string(REPLACE ";" "\n"	bash "${bash}")
-		string(REPLACE "C:/" "/c/" bash ${bash})
-		file(WRITE ${MSYS}/dkscript.tmp ${bash})
-		dk_info("dk_msys $ ${bash}")
-		dk_executeProcess(${MSYS}/bin/bash ${MSYS}/dkscript.tmp)
-	endif()
-endfunction()
-dk_createOsMacros("dk_msys")
+#function(dk_msys)
+#	DKDEBUGFUNC(${ARGV})
+#	
+#	dk_assert("WARNING: dk_msys() is deprecated. Please switch to using msys2()")
+#	
+#	if(QUEUE_BUILD)
+#		string(REPLACE ";" " " str "${ARGV}")
+#		set(bash "#!/bin/bash")
+#		list(APPEND bash "cd ${CURRENT_DIR}")
+#		if(WIN_32 OR ANDROID_32) # OR EMSCRIPTEN)
+#			list(APPEND bash "export PATH=${MINGW32}/bin:$PATH")
+#		elseif(WIN_64 OR ANDROID_64)
+#			list(APPEND bash "export PATH=${MINGW64}/bin:$PATH")
+#		else()
+#			dk_assert("dk_msys(): ERROR: not WIN_32, WIN_64, ANDROID_32 or ANDROID_64")
+#		endif()
+#		list(APPEND bash "export PATH=${MSYS}/bin:$PATH")
+#		list(APPEND bash "${str}")
+#		list(APPEND bash "exit")
+#		list(APPEND bash " ")
+#		string(REPLACE ";" "\n"	bash "${bash}")
+#		string(REPLACE "C:/" "/c/" bash ${bash})
+#		file(WRITE ${MSYS}/dkscript.tmp ${bash})
+#		dk_info("dk_msys $ ${bash}")
+#		dk_executeProcess(${MSYS}/bin/bash ${MSYS}/dkscript.tmp)
+#	endif()
+#endfunction()
+#dk_createOsMacros("dk_msys")
 
 
 ###############################################################################
@@ -3069,10 +3069,12 @@ function(dk_undepend plugin)
 	
 	# Only allow dk_undepend command from these filters	
 	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKCMAKE})
-		if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPROJECT})
-			if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKIMPORTS}/${plugin})
-				if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPLUGINS}/${plugin})
-					dk_assert("dk_undepend() Can only be used from a plugin directory. This is to avoid having disabled libraries hideing everywhere")
+		if(DKPROJECT)
+			if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPROJECT})
+				if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKIMPORTS}/${plugin})
+					if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKPLUGINS}/${plugin})
+						dk_assert("dk_undepend() Can only be used from a plugin directory. This is to avoid having disabled libraries hideing everywhere")
+					endif()
 				endif()
 			endif()
 		endif()
@@ -4248,7 +4250,8 @@ endfunction()
 #
 function(dk_import url)
 	DKDEBUGFUNC(${ARGV})
-	dk_importVariables(${ARGV} plugin)
+	dk_importVariables(${url} plugin)
+	message(STATUS "plugin = ${plugin}")
 	string(TOUPPER ${plugin} plugin_var)
 	
 	dk_verbose("\${${plugin_var}}] =			${${plugin_var}}")
@@ -4784,6 +4787,8 @@ function(dk_pathContains expression RESULT)
 		return()
 	endif()
 endfunction()
+
+
 
 
 

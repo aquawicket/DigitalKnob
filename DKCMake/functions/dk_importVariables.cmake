@@ -253,6 +253,5 @@ function(dk_importVariables PLUGIN_URL RESULT)
 		dk_debug("[${PLUGIN_INSTALL_NAME_UPPER}_TAG]		= ${${PLUGIN_INSTALL_NAME_UPPER}_TAG}")
 	endif()
 	
-	
 	set(${RESULT} ${PLUGIN_INSTALL_NAME_LOWER} PARENT_SCOPE)
 endfunction()
