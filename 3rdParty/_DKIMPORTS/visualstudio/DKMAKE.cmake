@@ -15,7 +15,6 @@ if(NOT WIN_HOST)
 	dk_return()
 endif()
 
-
 #ANDROID_dk_depend(ant)
 #ANDROID_dk_depend(android-sdk)
  
@@ -31,13 +30,13 @@ dk_set(DUMPBIN "${VISUALSTUDIO}/VC/Tools/MSVC/14.30.30705/bin/Hostx86/x86/dumpbi
 dk_set(VS_GENERATOR "Visual Studio ${VISUALSTUDIO_BUILD} ${VISUALSTUDIO_VERSION}")
 
 if(EXISTS ${VISUALSTUDIO})
-	#already have newest version
+	dk_info("Visual Studio ${VISUALSTUDIO_BUILD} ${VISUALSTUDIO_VERSION} already installed")
 elseif(EXISTS "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community") #fall back to older version
 	dk_set(VISUALSTUDIO "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community")
 	dk_set(MSBUILD "${VISUALSTUDIO}/MSBuild/Current/Bin/MSBuild.exe")
 	dk_set(VS_GENERATOR "Visual Studio 16 2019")
 else()  #install
-	MESSAGE(STATUS "Installing Visual Studio ${VISUALSTUDIO_VERSION}")
+	dk_info("Installing Visual Studio ${VISUALSTUDIO_VERSION}")
 	if(EXISTS ${DKDOWNLOAD}/VisualStudio/vs_setup.exe)
 		# offline installer
 		dk_command(${3RDPARTY}/_DKIMPORTS/visualstudio/InstallVisualStudio.cmd)

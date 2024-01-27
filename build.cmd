@@ -15,14 +15,14 @@ set "GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.30.1.win
 set "GIT_USER_EMAIL=aquawicket@hotmail.com"
 set "GIT_USER_NAME=aquawicket"
 set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi"
-set "MSBUILD_DL=https://aka.ms/vs/17/release/vs_community.exe"
-set "MSYS2_DL=https://github.com/msys2/msys2-installer/releases/download/2023-10-26/msys2-x86_64-20231026.exe"
-set "ANDROID_API=31"
-set "ANDROID_NDK_BUILD=23.1.7779620"
-set "ANDROID_NDK_DL=https://dl.google.com/android/repository/android-ndk-r23b-windows.zip"
-set "PYTHON_FOLDER=python-2.7.18"
-set "PYTHON_DL=https://www.python.org/ftp/python/2.7.18/python-2.7.18.msi"
-set "EMSDK_GIT=https://github.com/emscripten-core/emsdk.git"
+::set "MSBUILD_DL=https://aka.ms/vs/17/release/vs_community.exe"
+::set "MSYS2_DL=https://github.com/msys2/msys2-installer/releases/download/2023-10-26/msys2-x86_64-20231026.exe"
+::set "ANDROID_API=31"
+::set "ANDROID_NDK_BUILD=23.1.7779620"
+::set "ANDROID_NDK_DL=https://dl.google.com/android/repository/android-ndk-r23b-windows.zip"
+::set "PYTHON_FOLDER=python-2.7.18"
+::set "PYTHON_DL=https://www.python.org/ftp/python/2.7.18/python-2.7.18.msi"
+::set "EMSDK_GIT=https://github.com/emscripten-core/emsdk.git"
 
 
 ::--------------------------------------------------------
@@ -39,7 +39,13 @@ echo DKDOWNLOAD = %DKDOWNLOAD%
 call:validate_cmake
 call:validate_git
 call:validate_branch
+call:validate_visual_studio
 call:validate_msys2
+call:validate_openjdk
+call:validate_python
+call:validate_emscripten
+call:validate_android_ndk
+
 
 set "APP="
 set "OS="
@@ -375,7 +381,9 @@ goto:eof
 		set "DKBRANCH=%FOLDER%"
 	)
 	set "DKPATH=%DIGITALKNOB%\%DKBRANCH%"
-	set "DKCMAKE=%DIGITALKNOB%\%DKBRANCH%\DKCMake"
+	set "DKCMAKE=%DKPATH%\DKCMake"
+	set "3RDPARTY=%DKPATH%\3rdParty"
+	set "DKIMPORTS=%DKPATH%\3rdParty\_DKIMPORTS"
 	echo DKBRANCH = %DKBRANCH%
 	call:check_error
 goto:eof
@@ -443,102 +451,73 @@ goto:eof
 
 :: validate_visual_studio()
 :validate_visual_studio
-	if exist "%ProgramFiles%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=%ProgramFiles%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
-	if exist "%ProgramFiles%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=%ProgramFiles%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
-	if exist "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=%ProgramFiles(x86)%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
-	if exist "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=%ProgramFiles(x86)%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
-	
-	call:get_filename %MSBUILD_DL% MSBUILD_DL_FILE
-	if NOT exist "%MSBUILD%" (
-		echo "installing Visual Studio"
-		call:download %MSBUILD_DL% "%DKDOWNLOAD%\%MSBUILD_DL_FILE%"
-		"%DKDOWNLOAD%\%MSBUILD_DL_FILE%"
-	)
-	if exist "%ProgramFiles%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=%ProgramFiles%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
-	if exist "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=%ProgramFiles(x86)%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
-	if exist "%ProgramFiles%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=%ProgramFiles%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
-	if exist "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=%ProgramFiles(x86)%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
+	call:cmake_eval "include('%DKCMAKE%/DK.cmake');include('%DKIMPORTS%/visualstudio/DKMAKE.cmake')"
 	call:check_error
+	
+	::if exist "%ProgramFiles%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=%ProgramFiles%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
+	::if exist "%ProgramFiles%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=%ProgramFiles%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
+	::if exist "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=%ProgramFiles(x86)%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
+	::if exist "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=%ProgramFiles(x86)%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
+	
+	::call:get_filename %MSBUILD_DL% MSBUILD_DL_FILE
+	::if NOT exist "%MSBUILD%" (
+	::	echo "installing Visual Studio"
+	::	call:download %MSBUILD_DL% "%DKDOWNLOAD%\%MSBUILD_DL_FILE%"
+	::	"%DKDOWNLOAD%\%MSBUILD_DL_FILE%"
+	::)
+	::if exist "%ProgramFiles%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=%ProgramFiles%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
+	::if exist "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=%ProgramFiles(x86)%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
+	::if exist "%ProgramFiles%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=%ProgramFiles%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
+	::if exist "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=%ProgramFiles(x86)%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
 goto:eof
 
 :: validate_msys2()
 :validate_msys2
-	:: TODO
-	call:cmake_eval "include('%DKCMAKE%/DK.cmake');set(WIN 1);set(WIN_64 1);include('%DIGITALKNOB%/%DKBRANCH%/3rdParty/_DKIMPORTS/msys2/DKMAKE.cmake')"
+	call:cmake_eval "include('%DKCMAKE%/DK.cmake');set(WIN 1);set(WIN_64 1);include('%DKIMPORTS%/msys2/DKMAKE.cmake')"
+	call:check_error
 goto:eof
 
 :: validate_openjdk()
 :validate_openjdk
-	:: TODO
-	call:assert "validate_openjdk() not implemented"
+	call:cmake_eval "include('%DKCMAKE%/DK.cmake');set(WIN 1);set(WIN_64 1);include('%DKIMPORTS%/openjdk/DKMAKE.cmake')"
+	call:check_error
 goto:eof
 
 :: validate_android_ndk()
 :validate_android_ndk
-	call:cmake_eval "include('%DKCMAKE%/DK.cmake');set(ANDROID 1);include('%DIGITALKNOB%/%DKBRANCH%/3rdParty/_DKIMPORTS/android-ndk/DKMAKE.cmake')"
-
-	::set DK.cmake=%DKCMAKE%/DK.cmake:^\=^/%
-	::set NDK.cmake=%DIGITALKNOB%/%DKBRANCH%/3rdParty/android-sdk/ndk/DKMAKE.cmake:^\=^/%
+	call:cmake_eval "include('%DKCMAKE%/DK.cmake');set(ANDROID 1);include('%DKIMPORTS%/android-ndk/DKMAKE.cmake')"
+	call:check_error
 	
-	::set "ANDROID_NDK=%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk\%ANDROID_NDK_BUILD%"
+	::set DK.cmake=%DKCMAKE%/DK.cmake:^\=^/%
+	::set NDK.cmake=%3RDPARTY%/android-sdk/ndk/DKMAKE.cmake:^\=^/%
+	
+	::set "ANDROID_NDK=%3RDPARTY%\android-sdk\ndk\%ANDROID_NDK_BUILD%"
 	::echo ANDROID_NDK = %ANDROID_NDK%
 	
 	::call:get_filename %ANDROID_NDK_DL% ANDROID_NDK_DL_FILE
 	::if NOT exist "%ANDROID_NDK%" (
 	::	echo "installing android-ndk"
 	::	call:download %ANDROID_NDK_DL% "%DKDOWNLOAD%\%ANDROID_NDK_DL_FILE%"
-	::	call:make_directory "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk"
-	::	call:make_directory "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk"
-	::	call:extract "%DKDOWNLOAD%\%ANDROID_NDK_DL_FILE%" "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk"
-	::	call:rename "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk\android-ndk-r23b" "C:\Users\Administrator\digitalknob\Development\3rdParty\android-sdk\ndk\23.1.7779620"
+	::	call:make_directory "%3RDPARTY%\android-sdk"
+	::	call:make_directory "%3RDPARTY%\android-sdk\ndk"
+	::	call:extract "%DKDOWNLOAD%\%ANDROID_NDK_DL_FILE%" "%3RDPARTY%\android-sdk\ndk"
+	::	call:rename "%3RDPARTY%\android-sdk\ndk\android-ndk-r23b" "C:\Users\Administrator\digitalknob\Development\3rdParty\android-sdk\ndk\23.1.7779620"
 	::)
 	::if not '%VS_NdkRoot%'=='%ANDROID_NDK%' setx VS_NdkRoot %ANDROID_NDK%
 	:::: replace all \ characters with / in ANDROID_NDK for cmake compatability
 	::set ANDROID_NDK=%ANDROID_NDK:\=/%
-	call:check_error
 goto:eof
 
 :: validate_emscripten()
 :validate_emscripten
-	call:validate_git
-	call:validate_python
-	
-	set "EMSDK=%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main"
-	if NOT exist "%EMSDK%\.git" (
-		echo "installing emsdk"
-		"%GIT%" clone "%EMSDK_GIT%" "%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main"
-	)
-	::"%GIT%" checkout -- .
-	cd "%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main"
-	"%GIT%" checkout main
-	"%GIT%" pull
-		
-	call "%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main\emsdk.bat" install latest
-	call "%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main\emsdk.bat" activate latest --permanent
-	
-	call "%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main\emsdk.bat" install mingw-4.6.2-32bit
-	call "%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main\emsdk.bat" activate mingw-4.6.2-32bit
-	
-	::CPP_DK_Execute("chmod 777 "+DIGITALKNOB+"DK/3rdParty/emsdk-main/emsdk_env.sh")  :: MSYS
-	call "%PYTHON_PATH%\emsdk_env.bat"
+	call:cmake_eval "include('%DKCMAKE%/DK.cmake');include('%DKIMPORTS%/emsdk/DKMAKE.cmake')"
+	call:check_error
 goto:eof
 
 :: validate_python()
 :validate_python
-	set "PYTHON_PATH=%DIGITALKNOB%\%DKBRANCH%\3rdParty\%PYTHON_FOLDER%"
-	set "PYTHON_EXE=%PYTHON_PATH%\python.exe"
-	call:make_directory "%PYTHON_PATH%"
-	set PATH=%PATH%;%PYTHON_PATH%
-	
-	call:get_filename %PYTHON_DL% PYTHON_DL_FILE
-	if NOT exist %PYTHON_EXE% (
-		echo "installing python"
-		call:download %PYTHON_DL% "%DKDOWNLOAD%\%PYTHON_DL_FILE%"
-		"%DKDOWNLOAD%\%PYTHON_DL_FILE%" /passive PrependPath=1 TargetDir=%PYTHON_PATH%
-	)
-	if NOT exist %PYTHON_PATH%\Scripts\pip.exe (
-		"%PYTHON_EXE%" -m ensurepip
-	)
+	call:cmake_eval "include('%DKCMAKE%/DK.cmake');set(WIN 1);include('%DKIMPORTS%/python/DKMAKE.cmake')"
+	call:check_error
 goto:eof
 
 :: command_to_variable <command . .> <variable_name>
@@ -572,6 +551,7 @@ goto:eof
 	)
 	
 	::echo command_to_variable("%*") -^> %%%variable_name%%% = %variable_value%
+	call:check_error
 goto:eof
 
 :: clear_cmake_cache()
@@ -654,7 +634,7 @@ goto:eof
 	call set DKCMAKE=%%DKCMAKE:^\=^/%%
 	::echo "%CMAKE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE%/dev/cmake_eval.cmake" --log-level=TRACE >cmake_eval.out 2>cmake_eval.err
 	"%CMAKE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE%/dev/cmake_eval.cmake" --log-level=TRACE
-	echo return code: %ERRORLEVEL%
+	::echo return code: %ERRORLEVEL%
 	
 	:::: work with cmake return code files ::::
 	:: std::out
@@ -681,7 +661,8 @@ goto:eof
 	::del cmake_eval.out
 	::err contains all of the lines
 	::echo %err%
-
+	
+	call:check_error
 goto:eof
 
 :: get_filename <path> <output_variable>
@@ -701,6 +682,7 @@ goto:eof
 	)
 	
 	::echo get_filename(%*) -^> %2 = %val%
+	call:check_error
 goto:eof
 
 :: remove_extension <path> <output_variable>
@@ -720,5 +702,5 @@ goto:eof
 	)
 
 	::echo remove_extension(%*) -^> %2 = %val%
-)
+	call:check_error
 goto:eof

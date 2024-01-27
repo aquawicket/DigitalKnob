@@ -1,3 +1,4 @@
+dk_depend(git)
 # dk_import(url) details
 #
 #	*** Variables ***

@@ -3286,16 +3286,23 @@ endfunction()
 
 
 ###############################################################################
-# dkFileReplace(filePath find replace)
+# dkFileReplace(filePath find replace) NOERROR
 #
 #	TODO
 #
 #	@filePath	- TODO
 #	@find		- TODO
 #	@replace	- TODO
+#   NOERROR (optional)	- if any of the parameters equals NOERROR, dk_error() messages will not be displayed
 #
 function(dkFileReplace filePath find replace)
 	DKDEBUGFUNC(${ARGV})
+	
+	dk_includes("${ARGN}" "NOERROR" includes)
+	if(${includes})
+		set(noerror true)
+	endif()
+	
 	file(READ ${filePath} fileString)
 	string(FIND "${fileString}" "${find}" index)
 	if(${index} GREATER -1)
@@ -3304,7 +3311,9 @@ function(dkFileReplace filePath find replace)
 		string(REPLACE "${find}" "${replace}" fileString "${fileString}")
 		file(WRITE ${filePath} "${fileString}")
 	else()
-		dk_error("cannot find \"${find}\"  in  (${filePath})")
+		if(NOT noerror)
+			dk_error("cannot find \"${find}\"  in  (${filePath})")
+		endif()
 	endif()
 endfunction()
 
@@ -4250,8 +4259,7 @@ endfunction()
 #
 function(dk_import url)
 	DKDEBUGFUNC(${ARGV})
-	dk_importVariables(${url} plugin)
-	message(STATUS "plugin = ${plugin}")
+	dk_importVariables(${url} plugin ${ARGN})
 	string(TOUPPER ${plugin} plugin_var)
 	
 	dk_verbose("\${${plugin_var}}] =			${${plugin_var}}")

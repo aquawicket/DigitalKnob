@@ -5,7 +5,7 @@
 
 
 dk_depend(python)
-
+dk_setEnv("PATH" "${PYTHON}")
 
 #dk_import(https://github.com/emscripten-core/emsdk/archive/refs/tags/3.1.31.zip)
 dk_import(https://github.com/emscripten-core/emsdk.git BRANCH main)
@@ -28,12 +28,12 @@ WIN_HOST_dk_command(${EMSDK}/emsdk.bat activate mingw-4.6.2-32bit)
 UNIX_HOST_dk_command(${EMSDK}/emsdk.sh activate mingw-4.6.2-32bit)
 
 
-dkFileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL = 0;" 		"var USE_SDL = false;")
-dkFileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL_IMAGE = 1;" 	"var USE_SDL_IMAGE = false;")
-dkFileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL_TTF = 1;" 	"var USE_SDL_TTF = false;")
-dkFileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL_NET = 1;" 	"var USE_SDL_NET = false;")
-dkFileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL_MIXER = 1;" 	"var USE_SDL_MIXER = false;")
-dkFileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_PTHREADS = false;" "var USE_PTHREADS = true;")
+dkFileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL = 0;" 		"var USE_SDL = false;"			NOERROR)
+dkFileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL_IMAGE = 1;" 	"var USE_SDL_IMAGE = false;"	NOERROR)
+dkFileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL_TTF = 1;" 	"var USE_SDL_TTF = false;"		NOERROR)
+dkFileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL_NET = 1;" 	"var USE_SDL_NET = false;"		NOERROR)
+dkFileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL_MIXER = 1;" 	"var USE_SDL_MIXER = false;"	NOERROR)
+dkFileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_PTHREADS = false;" "var USE_PTHREADS = true;"		NOERROR)
 
 
 WIN_HOST_dk_set(EMSDK_ENV ${EMSDK}/emsdk_env.bat)

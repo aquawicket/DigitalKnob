@@ -157,7 +157,7 @@ endif()
 
 ########### Determine the OS we are building for ####################
 if(CMAKE_BINARY_DIR)
-	dk_debug("CMAKE_BINARY_DIR = ${CMAKE_BINARY_DIR}")
+	#dk_debug("CMAKE_BINARY_DIR = ${CMAKE_BINARY_DIR}")
 endif()
 
 # ANDROID 32
