@@ -23,14 +23,16 @@ set "PYTHON_DL=https://www.python.org/ftp/python/2.7.18/python-2.7.18.msi"
 set "EMSDK_GIT=https://github.com/emscripten-core/emsdk.git"
 
 
-
 ::--------------------------------------------------------
 :: Main
 ::--------------------------------------------------------
-set "DIGITALKNOB=%HOMEDRIVE%\%HOMEPATH%\digitalknob"
+set "DIGITALKNOB=%HOMEDRIVE%%HOMEPATH%\digitalknob"
 call:make_directory "%DIGITALKNOB%"
+echo DIGITALKNOB = %DIGITALKNOB%
+
 set "DKDOWNLOAD=%DIGITALKNOB%\download"
 call:make_directory "%DKDOWNLOAD%"
+echo DKDOWNLOAD = %DKDOWNLOAD%
 
 call:validate_cmake
 call:validate_git
@@ -387,8 +389,9 @@ goto:eof
 	)
 	if NOT exist "%GIT%" (
 		echo "installing git"
-		call:download %GIT_DL% "%DKDOWNLOAD%\Git-2.30.1-32-bit.exe"
-		"%DKDOWNLOAD%\Git-2.30.1-32-bit.exe" /VERYSILENT /NORESTART
+		call:get_filename %GIT_DL% GIT_DL_FILE
+		call:download %GIT_DL% "%DKDOWNLOAD%\%GIT_DL_FILE%"
+		"%DKDOWNLOAD%\%GIT_DL_FILE%" /VERYSILENT /NORESTART
 		call:command_to_variable where git GIT
 	)
 	if NOT exist "%GIT%" (
@@ -400,15 +403,31 @@ goto:eof
 
 :: validate_cmake()
 :validate_cmake
-	::echo validating cmake . . .
-	if exist "%ProgramFiles%\CMake\bin\cmake.exe" set "CMAKE=%ProgramFiles%\CMake\bin\cmake.exe"
-	if exist "%ProgramFiles(x86)%\CMake\bin\cmake.exe" set "CMAKE=%ProgramFiles(x86)%\CMake\bin\cmake.exe"
+	if NOT exist "%CMAKE%" (
+		call:command_to_variable where cmake.exe CMAKE
+	)
+	if NOT exist "%CMAKE%" (
+		call:command_to_variable where /R "%ProgramFiles%\CMake\bin" cmake.exe CMAKE
+	)
+	if NOT exist "%CMAKE%" (
+		call:command_to_variable where /R "%ProgramFiles(x86)%\CMake\bin" cmake.exe CMAKE
+	)
 	if NOT exist "%CMAKE%" (
 		echo "installing cmake"
-		call:download %CMAKE_DL% "%DKDOWNLOAD%\cmake-3.21.1-windows-i386.msi"
-		"%DKDOWNLOAD%\cmake-3.21.1-windows-i386.msi"
-		if exist "%ProgramFiles%\CMake\bin\cmake.exe" set "CMAKE=%ProgramFiles%\CMake\bin\cmake.exe"
-		if exist "%ProgramFiles(x86)%\CMake\bin\cmake.exe" set "CMAKE=%ProgramFiles(x86)%\CMake\bin\cmake.exe"
+		call:get_filename %CMAKE_DL% CMAKE_DL_FILE
+		call:download %CMAKE_DL% "%DKDOWNLOAD%\%CMAKE_DL_FILE%"
+		"%DKDOWNLOAD%\%CMAKE_DL_FILE%"
+		
+		if NOT exist "%CMAKE%" (
+			call:command_to_variable where /R "%ProgramFiles%\CMake\bin" cmake.exe CMAKE
+		)
+		if NOT exist "%CMAKE%" (
+			call:command_to_variable where /R "%ProgramFiles(x86)%\CMake\bin" cmake.exe CMAKE
+		)
+	)
+	
+	if NOT exist "%CMAKE%" (
+		call:assert "cannot find cmake"
 	)
 	echo CMAKE = %CMAKE%
 	call:check_error
@@ -422,8 +441,9 @@ goto:eof
 	if exist "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=%ProgramFiles(x86)%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
 	if NOT exist "%MSBUILD%" (
 		echo "installing Visual Studio"
-		call:download %MSBUILD_DL% "%DKDOWNLOAD%\vs_Community.exe"
-		"%DKDOWNLOAD%\vs_Community.exe"
+		call:get_filename %MSBUILD_DL% MSBUILD_DL_FILE
+		call:download %MSBUILD_DL% "%DKDOWNLOAD%\%MSBUILD_DL_FILE%"
+		"%DKDOWNLOAD%\%MSBUILD_DL_FILE%"
 	)
 	if exist "%ProgramFiles%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=%ProgramFiles%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
 	if exist "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=%ProgramFiles(x86)%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
@@ -450,10 +470,11 @@ goto:eof
 	echo ANDROID_NDK = %ANDROID_NDK%
 	if NOT exist "%ANDROID_NDK%" (
 		echo "installing android-ndk"
-		call:download %ANDROID_NDK_DL% "%DKDOWNLOAD%\android-ndk-r23b-windows.zip"
+		call:get_filename %ANDROID_NDK_DL% ANDROID_NDK_DL_FILE
+		call:download %ANDROID_NDK_DL% "%DKDOWNLOAD%\%ANDROID_NDK_DL_FILE%"
 		call:make_directory "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk"
 		call:make_directory "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk"
-		call:extract "%DKDOWNLOAD%\android-ndk-r23b-windows.zip" "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk"
+		call:extract "%DKDOWNLOAD%\%ANDROID_NDK_DL_FILE%" "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk"
 		call:rename "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk\android-ndk-r23b" "C:\Users\Administrator\digitalknob\Development\3rdParty\android-sdk\ndk\23.1.7779620"
 	)
 	if not '%VS_NdkRoot%'=='%ANDROID_NDK%' setx VS_NdkRoot %ANDROID_NDK%
@@ -464,6 +485,7 @@ goto:eof
 
 :: validate_emscripten()
 :validate_emscripten
+	call:validate_git
 	call:validate_python
 	
 	set "EMSDK=%DIGITALKNOB%\%DKBRANCH%\3rdParty\emsdk-main"
@@ -495,21 +517,24 @@ goto:eof
 	
 	if NOT exist %PYTHON_EXE% (
 		echo "installing python"
-		call:download %PYTHON_DL% "%DKDOWNLOAD%\python-2.7.18.msi"
-		"%DKDOWNLOAD%\python-2.7.18.msi" /passive PrependPath=1 TargetDir=%PYTHON_PATH%
+		call:get_filename %PYTHON_DL% PYTHON_DL_FILE
+		call:download %PYTHON_DL% "%DKDOWNLOAD%\%PYTHON_DL_FILE%"
+		"%DKDOWNLOAD%\%PYTHON_DL_FILE%" /passive PrependPath=1 TargetDir=%PYTHON_PATH%
 	)
 	if NOT exist %PYTHON_PATH%\Scripts\pip.exe (
 		"%PYTHON_EXE%" -m ensurepip
 	)
 goto:eof
 
-:: command_to_variable() <command . .> <variable_name>
+:: command_to_variable <command . .> <variable_name>
 :command_to_variable
+	::echo command_to_variable("%*")
 	if [%2] == [] (
 		echo "ERROR: command_to_variable()requires at least 2 parameters"
 		goto:eof
 	)
-
+	set command=
+	
 	:command_args
 	set arg=%1
 	set arg=%arg:"=_QUOTE_%
@@ -521,15 +546,14 @@ goto:eof
 			set "command=%command% %arg%"
 		)
 	)
-	
 	set "variable_name=%~1"
 	shift
 	if not "%~1"=="" goto command_args
 	
 	set command=%command:_QUOTE_="%
-	for /F "tokens=*" %%g in ('%command%') do (
-		set %variable_name%=%%g
-		set variable_value=%%g
+	for /F "tokens=*" %%g in ('%command% 2^>nul') do (
+		set "%variable_name%=%%g"
+		set "variable_value=%%g"
 	)
 	
 	::echo command_to_variable("%*") -^> %%%variable_name%%% = %variable_value%
@@ -588,7 +612,7 @@ goto:eof
 	cls
 goto:eof
 
-::###### cmake_eval ######
+:: cmake_eval()
 :cmake_eval
 	::echo cmake_eval %1
 	if [%1] == [] (
@@ -634,4 +658,25 @@ goto:eof
 	::del cmake_eval.out
 	::err contains all of the lines
 	::echo %err%
+goto:eof
+
+:: get_filename <path> <output_variable>
+:get_filename
+	if [%1] == [] (
+		echo "ERROR: get_filename() parameter 1 is invalid"
+		goto:eof
+	)
+	if [%2] == [] (
+		echo "ERROR: get_filename() parameter 2 is invalid"
+		goto:eof
+	)
+	
+	set "variable_name=%~2"
+	
+	for %%F in ("%1") do (
+		set "%variable_name%=%%~nxF"
+		set "variable_value=%%~nxF"
+	)
+
+	echo get_filename("%*") -^> %%%variable_name%%% = %variable_value%
 goto:eof
