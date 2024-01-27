@@ -376,8 +376,6 @@ goto:eof
 
 :: validate_git()
 :validate_git
-	::for /F "tokens=*" %%g in ('where git') do (SET GIT=%%g)
-	::for /F "tokens=*" %%g in ('where /R "%ProgramFiles(x86)%" git.exe') do (SET GIT=%%g)
 	if NOT exist "%GIT%" (
 		call:command_to_variable where git GIT
 	)
@@ -391,14 +389,13 @@ goto:eof
 		echo "installing git"
 		call:download %GIT_DL% "%DKDOWNLOAD%\Git-2.30.1-32-bit.exe"
 		"%DKDOWNLOAD%\Git-2.30.1-32-bit.exe" /VERYSILENT /NORESTART
-		for /F "tokens=*" %%g in ('where git') do (SET GIT=%%g)
+		call:command_to_variable where git GIT
 	)
 	if NOT exist "%GIT%" (
 		call:assert "cannot find git"
 	)
 	echo GIT = %GIT%
 	call:check_error
-	
 goto:eof
 
 :: validate_cmake()
