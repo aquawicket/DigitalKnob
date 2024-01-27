@@ -509,7 +509,6 @@ goto:eof
 
 	:command_args
 	set arg=%1
-	:: replace " with _QUOTE_
 	set arg=%arg:"=_QUOTE_%
 		
 	if not "%~2"=="" (
@@ -524,11 +523,13 @@ goto:eof
 	shift
 	if not "%~1"=="" goto command_args
 	
-	:: replace _QUOTE_ with "
 	set command=%command:_QUOTE_="%
-
-	echo for /F "tokens=*" %%g in ('%command%') do (SET %variable_name%=%%g)
-	for /F "tokens=*" %%g in ('%command%') do (SET %variable_name%=%%g)
+	for /F "tokens=*" %%g in ('%command%') do (
+		set %variable_name%=%%g
+		set variable_value=%%g
+	)
+	
+	::echo command_to_variable("%*") -^> %%%variable_name%%% = %variable_value%
 goto:eof
 
 :: clear_cmake_cache()
