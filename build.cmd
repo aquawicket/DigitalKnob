@@ -39,12 +39,12 @@ echo DKDOWNLOAD = %DKDOWNLOAD%
 call:validate_cmake
 call:validate_git
 call:validate_branch
-call:validate_visual_studio
-call:validate_msys2
-call:validate_openjdk
-call:validate_python
-call:validate_emscripten
-call:validate_android_ndk
+::call:validate_visual_studio
+::call:validate_msys2
+::call:validate_openjdk
+::call:validate_python
+::call:validate_emscripten
+::call:validate_android_ndk
 
 
 set "APP="
@@ -453,22 +453,6 @@ goto:eof
 :validate_visual_studio
 	call:cmake_eval "include('%DKCMAKE%/DK.cmake');include('%DKIMPORTS%/visualstudio/DKMAKE.cmake')"
 	call:check_error
-	
-	::if exist "%ProgramFiles%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=%ProgramFiles%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
-	::if exist "%ProgramFiles%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=%ProgramFiles%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
-	::if exist "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=%ProgramFiles(x86)%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
-	::if exist "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=%ProgramFiles(x86)%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
-	
-	::call:get_filename %MSBUILD_DL% MSBUILD_DL_FILE
-	::if NOT exist "%MSBUILD%" (
-	::	echo "installing Visual Studio"
-	::	call:download %MSBUILD_DL% "%DKDOWNLOAD%\%MSBUILD_DL_FILE%"
-	::	"%DKDOWNLOAD%\%MSBUILD_DL_FILE%"
-	::)
-	::if exist "%ProgramFiles%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=%ProgramFiles%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
-	::if exist "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=%ProgramFiles(x86)%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
-	::if exist "%ProgramFiles%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=%ProgramFiles%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
-	::if exist "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=%ProgramFiles(x86)%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
 goto:eof
 
 :: validate_msys2()

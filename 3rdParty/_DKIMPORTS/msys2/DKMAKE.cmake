@@ -24,38 +24,59 @@ endif()
 ### ADD msys2 bin directory to path environment variable
 #dk_setEnv("PATH" "${MSYS2}/usr/bin")
 
-### Install other utilities ###
-if(NOT EXISTS ${MSYS2}/usr/bin/make.exe)
-	#dk_command(bash -c "pacman -S make --noconfirm")						# make
-	dk_msys2("pacman -S make --noconfirm")									# make
-endif()
-
-if(NOT EXISTS ${MSYS2}/usr/bin/diff.exe)
-	#dk_command(bash -c "pacman -S diffutils --noconfirm")					# diffutils
-	dk_msys2("pacman -S diffutils --noconfirm")								# diffutils
-endif()
-
-if(NOT EXISTS ${MSYS2}/usr/bin/yasm.exe)
-	#dk_command(bash -c "pacman -S yasm --noconfirm")						# yasm
-	dk_msys2("pacman -S yasm --noconfirm")									# yasm
-endif()
-
-if(NOT EXISTS ${MSYS2}/mingw64/bin/gcc.exe)
-	#dk_command(bash -c "pacman -S mingw-w64-x86_64-gcc --noconfirm")		# WIN64 builds
-	dk_msys2("pacman -S mingw-w64-x86_64-gcc --noconfirm")					# WIN64 builds
-endif()
-
-if(NOT EXISTS ${MSYS2}/mingw32/bin/gcc.exe)
-	#dk_command(bash -c "pacman -S mingw-w64-i686-gcc --noconfirm")			# WIN32 builds
-	dk_msys2("pacman -S mingw-w64-i686-gcc --noconfirm")					# WIN32 builds
-endif()
-
-if(NOT EXISTS ${MSYS2}/usr/bin/automake)
-	#dk_command(bash -c "pacman -S mingw-w64-x86_64-autotools --noconfirm")	# used by giflib
-	dk_msys2("pacman -S mingw-w64-x86_64-autotools --noconfirm")			# used by giflib
-endif()
-
 if(MSYS)
 	set(MSYSTEM "$ENV{MSYSTEM}")
 	dk_debug("MSYSTEM = ${MSYSTEM}")
 endif()
+
+if(NOT MSYSTEM)
+	return()
+endif()
+	
+if(${MSYSTEM} STREQUAL "CLANG32")							
+	dk_msys2(pacman -S mingw-w64-clang-i686-toolchain --noconfirm)			# toolchain
+elseif(${MSYSTEM} STREQUAL "CLANG64")
+	dk_msys2(pacman -S mingw-w64-clang-x86_64-toolchain --noconfirm)		# toolchain
+elseif(${MSYSTEM} STREQUAL "CLANGARM64")
+	dk_msys2(pacman -S mingw-w64-clang-aarch64-toolchain --noconfirm)		# toolchain
+elseif(${MSYSTEM} STREQUAL "MINGW32")
+	dk_msys2(pacman -S mingw-w64-i686-toolchain --noconfirm)				# toolchain
+elseif(${MSYSTEM} STREQUAL "MINGW64")
+	dk_msys2(pacman -S mingw-w64-x86_64-toolchain --noconfirm)				# toolchain
+elseif(${MSYSTEM} STREQUAL "UCRT64")
+	dk_msys2(pacman -S mingw-w64-ucrt-x86_64-toolchain --noconfirm)			# toolchain
+else()
+	dk_error("MSYSTEM is invalid")
+endif()
+
+### Install other utilities ###
+#if(NOT EXISTS ${MSYS2}/usr/bin/make.exe)
+	#dk_command(bash -c "pacman -S make --noconfirm")						# make
+#	dk_msys2("pacman -S make --noconfirm")									# make
+#endif()
+
+#if(NOT EXISTS ${MSYS2}/usr/bin/diff.exe)
+	#dk_command(bash -c "pacman -S diffutils --noconfirm")					# diffutils
+#	dk_msys2("pacman -S diffutils --noconfirm")								# diffutils
+#endif()
+
+#if(NOT EXISTS ${MSYS2}/usr/bin/yasm.exe)
+	#dk_command(bash -c "pacman -S yasm --noconfirm")						# yasm
+#	dk_msys2("pacman -S yasm --noconfirm")									# yasm
+#endif()
+
+#if(NOT EXISTS ${MSYS2}/mingw64/bin/gcc.exe)
+	#dk_command(bash -c "pacman -S mingw-w64-x86_64-gcc --noconfirm")		# WIN64 builds
+#	dk_msys2("pacman -S mingw-w64-x86_64-gcc --noconfirm")					# WIN64 builds
+#endif()
+
+#if(NOT EXISTS ${MSYS2}/mingw32/bin/gcc.exe)
+	#dk_command(bash -c "pacman -S mingw-w64-i686-gcc --noconfirm")			# WIN32 builds
+#	dk_msys2("pacman -S mingw-w64-i686-gcc --noconfirm")					# WIN32 builds
+#endif()
+
+#if(NOT EXISTS ${MSYS2}/usr/bin/automake)
+	#dk_command(bash -c "pacman -S mingw-w64-x86_64-autotools --noconfirm")	# used by giflib
+#	dk_msys2("pacman -S mingw-w64-x86_64-autotools --noconfirm")			# used by giflib
+#endif()
+
