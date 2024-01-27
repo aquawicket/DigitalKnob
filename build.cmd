@@ -1,8 +1,10 @@
 @echo off
 
+
 ::############ DigitalKnob builder script ############
 
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
+
 
 
 
@@ -300,6 +302,7 @@ goto pickapp
 :: https://www.dostips.com/DtTutoFunctions.php
 ::--------------------------------------------------------
 
+
 :: end()
 :end
 	echo Done
@@ -379,17 +382,18 @@ goto:eof
 :: validate_git()
 :validate_git
 	if NOT exist "%GIT%" (
-		call:command_to_variable where git GIT
-	)
-	if NOT exist "%GIT%" (
-		call:command_to_variable where /R "%ProgramFiles%" git.exe GIT
+		call:command_to_variable where git.exe GIT
 	)
 	if NOT exist "%GIT%" (
 		call:command_to_variable where /R "%ProgramFiles(x86)%" git.exe GIT
 	)
 	if NOT exist "%GIT%" (
+		call:command_to_variable where /R "%ProgramFiles%" git.exe GIT
+	)
+	
+	call:get_filename %GIT_DL% GIT_DL_FILE
+	if NOT exist "%GIT%" (
 		echo "installing git"
-		call:get_filename %GIT_DL% GIT_DL_FILE
 		call:download %GIT_DL% "%DKDOWNLOAD%\%GIT_DL_FILE%"
 		"%DKDOWNLOAD%\%GIT_DL_FILE%" /VERYSILENT /NORESTART
 		call:command_to_variable where git GIT
@@ -412,11 +416,14 @@ goto:eof
 	if NOT exist "%CMAKE%" (
 		call:command_to_variable where /R "%ProgramFiles(x86)%\CMake\bin" cmake.exe CMAKE
 	)
+	
+	call:get_filename %CMAKE_DL% CMAKE_DL_FILE
 	if NOT exist "%CMAKE%" (
 		echo "installing cmake"
-		call:get_filename %CMAKE_DL% CMAKE_DL_FILE
+		echo CMAKE_DL_FILE = %CMAKE_DL_FILE%
 		call:download %CMAKE_DL% "%DKDOWNLOAD%\%CMAKE_DL_FILE%"
-		"%DKDOWNLOAD%\%CMAKE_DL_FILE%"
+
+		MsiExec.exe /i "%DKDOWNLOAD%\%CMAKE_DL_FILE%" /qn
 		
 		if NOT exist "%CMAKE%" (
 			call:command_to_variable where /R "%ProgramFiles%\CMake\bin" cmake.exe CMAKE
@@ -439,9 +446,10 @@ goto:eof
 	if exist "%ProgramFiles%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=%ProgramFiles%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
 	if exist "%ProgramFiles(x86)%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=%ProgramFiles(x86)%\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe"
 	if exist "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" set "MSBUILD=%ProgramFiles(x86)%\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
+	
+	call:get_filename %MSBUILD_DL% MSBUILD_DL_FILE
 	if NOT exist "%MSBUILD%" (
 		echo "installing Visual Studio"
-		call:get_filename %MSBUILD_DL% MSBUILD_DL_FILE
 		call:download %MSBUILD_DL% "%DKDOWNLOAD%\%MSBUILD_DL_FILE%"
 		"%DKDOWNLOAD%\%MSBUILD_DL_FILE%"
 	)
@@ -468,9 +476,10 @@ goto:eof
 :validate_android_ndk
 	set "ANDROID_NDK=%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk\%ANDROID_NDK_BUILD%"
 	echo ANDROID_NDK = %ANDROID_NDK%
+	
+	call:get_filename %ANDROID_NDK_DL% ANDROID_NDK_DL_FILE
 	if NOT exist "%ANDROID_NDK%" (
 		echo "installing android-ndk"
-		call:get_filename %ANDROID_NDK_DL% ANDROID_NDK_DL_FILE
 		call:download %ANDROID_NDK_DL% "%DKDOWNLOAD%\%ANDROID_NDK_DL_FILE%"
 		call:make_directory "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk"
 		call:make_directory "%DIGITALKNOB%\%DKBRANCH%\3rdParty\android-sdk\ndk"
@@ -515,9 +524,9 @@ goto:eof
 	call:make_directory "%PYTHON_PATH%"
 	set PATH=%PATH%;%PYTHON_PATH%
 	
+	call:get_filename %PYTHON_DL% PYTHON_DL_FILE
 	if NOT exist %PYTHON_EXE% (
 		echo "installing python"
-		call:get_filename %PYTHON_DL% PYTHON_DL_FILE
 		call:download %PYTHON_DL% "%DKDOWNLOAD%\%PYTHON_DL_FILE%"
 		"%DKDOWNLOAD%\%PYTHON_DL_FILE%" /passive PrependPath=1 TargetDir=%PYTHON_PATH%
 	)
@@ -671,12 +680,30 @@ goto:eof
 		goto:eof
 	)
 	
-	set "variable_name=%~2"
-	
 	for %%F in ("%1") do (
-		set "%variable_name%=%%~nxF"
-		set "variable_value=%%~nxF"
+		set %2=%%~nxF
+		set val=%%~nxF
+	)
+	
+	echo get_filename(%*) -^> %2 = %val%
+goto:eof
+
+:: remove_extension <path> <output_variable>
+:remove_extension
+	if [%1] == [] (
+		echo "ERROR: remove_extension() parameter 1 is invalid"
+		goto:eof
+	)
+	if [%2] == [] (
+		echo "ERROR: remove_extension() parameter 2 is invalid"
+		goto:eof
+	)
+	
+	for %%f in ("%1") do (
+		set "%2=%%~dpnf"
+		set "val=%%~dpnf"
 	)
 
-	echo get_filename("%*") -^> %%%variable_name%%% = %variable_value%
+	echo remove_extension(%*) -^> %2 = %val%
+)
 goto:eof
