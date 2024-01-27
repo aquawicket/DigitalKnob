@@ -58,15 +58,15 @@ function message() {
 }
 
 ###### call <command args> ######
-function call() {
-	if [ -z "$1" ]; then
-		error "call <command args> requires at least 1 parameter"
-		return $false
-	fi
-	
-	echo -e "${magenta} $ $@ ${CLR}"
-	"$@"
-}
+#function call() {
+#	if [ -z "$1" ]; then
+#		error "call <command args> requires at least 1 parameter"
+#		return $false
+#	fi
+#	
+#	echo -e "${magenta} $ $@ ${CLR}"
+#	"$@"
+#}
 
 ###### string_contains <string> <substring> ######
 function string_contains() {
@@ -237,6 +237,58 @@ validate_ostype
 
 DKPATH="$DIGITALKNOB/$DKBRANCH"
 DKCMAKE="$DIGITALKNOB/$DKBRANCH/DKCMake"
+
+###### cmake_eval ######
+function cmake_eval() {
+	if [ -z "$1" ]; then
+		echo "ERROR: cmake_eval() parameter 1 is invalid"
+		return $false
+	fi
+	
+	CMAKE=$(which cmake)
+	#echo "CMAKE = $CMAKE"
+	
+	commands="$@"
+	#echo "commands = $commands"
+	#set commands=$commands:"=%"  #TODO: remove double quotes
+	DKCOMMAND="$commands"
+	#echo "DKCOMMAND = $DKCOMMAND"
+	
+	$CMAKE "-DDKCMAKE=$DKCMAKE" "-DDKCOMMAND=$DKCOMMAND" -P $DKCMAKE/dev/cmake_eval.cmake --log-level=TRACE >cmake_eval.out 2>cmake_eval.err
+	echo return code: $?
+	
+	
+	out=""
+	while IFS= read -r outline 
+		do
+			out="$out $outline"
+			echo "$outline"
+		done < cmake_eval.out
+	#out contains all of the lines
+	#echo "$out"
+	
+	
+	err=""
+	while IFS= read -r errline
+		do
+			err="$err $errline"
+			echo -e "${red} $errline ${CLR}"
+		done < cmake_eval.err
+	#err contains all of the lines
+	#echo "$err"	
+
+	#del cmake_eval.out
+	#del cmake_eval.out
+
+
+	#if "%ERROR_CODE%"=="0" (
+	#	echo return code: %ERROR_CODE%
+	#)
+	#if not "%ERROR_CODE%"=="0" (
+	#	echo return code: %ERROR_CODE%
+	#)
+}
+
 
 if [ $SCRIPTPATH == $DKPATH ];then
 	echo "SCRIPTPATH and DKPATH are the same"
@@ -607,27 +659,30 @@ while :
 	# MSYS = 
 
 	# build-essential for MSYS2
-	if [[ "$MSYSTEM" == "CLANG32" ]]; then
-		validate_package cmake mingw-w64-clang-i686-cmake
-		validate_package clang mingw-w64-clang-i686-toolchain
-	elif [[ "$MSYSTEM" == "CLANG64" ]]; then
-		validate_package cmake mingw-w64-clang-x86_64-cmake
-		validate_package clang mingw-w64-clang-x86_64-toolchain
-		validate_package clang_reinstall mingw-w64-x86_64-clang
-	elif [[ "$MSYSTEM" == "CLANGARM64" ]]; then
-		validate_package cmake mingw-w64-clang-aarch64-cmake
-		validate_package clang mingw-w64-clang-aarch64-toolchain
-	elif [[ "$MSYSTEM" == "MINGW32" ]]; then
-		validate_package cmake mingw-w64-i686-cmake
-		validate_package gcc mingw-w64-i686-toolchain
-	elif [[ "$MSYSTEM" == "MINGW64" ]]; then
-		validate_package cmake mingw-w64-x86_64-cmake
-		validate_package gcc mingw-w64-x86_64-toolchain
-	elif [[ "$MSYSTEM" == "UCRT64" ]]; then
-		validate_package cmake mingw-w64-ucrt-x86_64-cmake
-		validate_package gcc mingw-w64-ucrt-x86_64-toolchain
-		validate_package clang mingw-w64-ucrt-x86_64-clang
-	fi
+	cmake_eval "include('C:/Users/$USERNAME/digitalknob/Development/DKCMake/DK.cmake');set(WIN 1);include('C:/Users/$USERNAME/digitalknob/Development/3rdParty/_DKIMPORTS/msys2/DKMAKE.cmake')"
+	
+	
+	#if [[ "$MSYSTEM" == "CLANG32" ]]; then
+	#	validate_package cmake mingw-w64-clang-i686-cmake
+	#	validate_package clang mingw-w64-clang-i686-toolchain
+	#elif [[ "$MSYSTEM" == "CLANG64" ]]; then
+	#	validate_package cmake mingw-w64-clang-x86_64-cmake
+	#	validate_package clang mingw-w64-clang-x86_64-toolchain
+	#	validate_package clang_reinstall mingw-w64-x86_64-clang
+	#elif [[ "$MSYSTEM" == "CLANGARM64" ]]; then
+	#	validate_package cmake mingw-w64-clang-aarch64-cmake
+	#	validate_package clang mingw-w64-clang-aarch64-toolchain
+	#elif [[ "$MSYSTEM" == "MINGW32" ]]; then
+	#	#validate_package cmake mingw-w64-i686-cmake
+	#	#validate_package gcc mingw-w64-i686-toolchain
+	#elif [[ "$MSYSTEM" == "MINGW64" ]]; then
+	#	validate_package cmake mingw-w64-x86_64-cmake
+	#	validate_package gcc mingw-w64-x86_64-toolchain
+	#elif [[ "$MSYSTEM" == "UCRT64" ]]; then
+	#	validate_package cmake mingw-w64-ucrt-x86_64-cmake
+	#	validate_package gcc mingw-w64-ucrt-x86_64-toolchain
+	#	validate_package clang mingw-w64-ucrt-x86_64-clang
+	#fi
 	
 	# build-essential for Tiny Core Linux
 	if command_exists tce-load; then

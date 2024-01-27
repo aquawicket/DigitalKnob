@@ -464,7 +464,7 @@ goto:eof
 
 :: validate_msys2()
 :validate_msys2
-	call:cmake_eval "include('%DKCMAKE%/DK.cmake');set(WIN 1);set(WIN_64 1);include('%DKIMPORTS%/msys2/DKMAKE.cmake')"
+	call:cmake_eval "include('%DKCMAKE%/DK.cmake');set(WIN 1);include('%DKIMPORTS%/msys2/DKMAKE.cmake')"
 	call:check_error
 goto:eof
 

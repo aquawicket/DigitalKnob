@@ -25,7 +25,7 @@
 #################################################################
 # cmake_eval eval_code error
 #
-# Func:  Run code within th DKCMake codebase
+# Func:  Run code within the DKCMake codebase
 #
 # eval_code:  the code to send to CMake
 # error:    the error code if any
