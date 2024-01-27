@@ -385,10 +385,10 @@ goto:eof
 		call:command_to_variable where git.exe GIT
 	)
 	if NOT exist "%GIT%" (
-		call:command_to_variable where /R "%ProgramFiles(x86)%" git.exe GIT
+		call:command_to_variable where /R "%ProgramFiles(x86)%\Git" git.exe GIT
 	)
 	if NOT exist "%GIT%" (
-		call:command_to_variable where /R "%ProgramFiles%" git.exe GIT
+		call:command_to_variable where /R "%ProgramFiles%\Git" git.exe GIT
 	)
 	
 	call:get_filename %GIT_DL% GIT_DL_FILE
@@ -411,10 +411,10 @@ goto:eof
 		call:command_to_variable where cmake.exe CMAKE
 	)
 	if NOT exist "%CMAKE%" (
-		call:command_to_variable where /R "%ProgramFiles%\CMake\bin" cmake.exe CMAKE
+		call:command_to_variable where /R "%ProgramFiles%\CMake" cmake.exe CMAKE
 	)
 	if NOT exist "%CMAKE%" (
-		call:command_to_variable where /R "%ProgramFiles(x86)%\CMake\bin" cmake.exe CMAKE
+		call:command_to_variable where /R "%ProgramFiles(x86)%\CMake" cmake.exe CMAKE
 	)
 	
 	call:get_filename %CMAKE_DL% CMAKE_DL_FILE
@@ -685,7 +685,7 @@ goto:eof
 		set val=%%~nxF
 	)
 	
-	echo get_filename(%*) -^> %2 = %val%
+	::echo get_filename(%*) -^> %2 = %val%
 goto:eof
 
 :: remove_extension <path> <output_variable>
@@ -704,6 +704,6 @@ goto:eof
 		set "val=%%~dpnf"
 	)
 
-	echo remove_extension(%*) -^> %2 = %val%
+	::echo remove_extension(%*) -^> %2 = %val%
 )
 goto:eof
