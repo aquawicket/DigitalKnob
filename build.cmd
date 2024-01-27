@@ -379,8 +379,12 @@ goto:eof
 	::for /F "tokens=*" %%g in ('where git') do (SET GIT=%%g)
 	::for /F "tokens=*" %%g in ('where /R "%ProgramFiles(x86)%" git.exe') do (SET GIT=%%g)
 	
-	call:command_to_variable where /R "%ProgramFiles(x86)%" git.exe GIT
-
+	if NOT exist "%GIT%" (
+		call:command_to_variable where /R "%ProgramFiles%" git.exe GIT
+	)
+	if NOT exist "%GIT%" (
+		call:command_to_variable where /R "%ProgramFiles(x86)%" git.exe GIT
+	)
 	if NOT exist "%GIT%" (
 		echo "installing git"
 		call:download %GIT_DL% "%DKDOWNLOAD%\Git-2.30.1-32-bit.exe"
@@ -500,7 +504,7 @@ goto:eof
 	)
 goto:eof
 
-:: command_to_variable() <command . .> <variable_name> 
+:: command_to_variable() <command . .> <variable_name>
 :command_to_variable
 	if [%2] == [] (
 		echo "ERROR: command_to_variable()requires at least 2 parameters"
