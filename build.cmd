@@ -378,7 +378,9 @@ goto:eof
 :validate_git
 	::for /F "tokens=*" %%g in ('where git') do (SET GIT=%%g)
 	::for /F "tokens=*" %%g in ('where /R "%ProgramFiles(x86)%" git.exe') do (SET GIT=%%g)
-	
+	if NOT exist "%GIT%" (
+		call:command_to_variable where git GIT
+	)
 	if NOT exist "%GIT%" (
 		call:command_to_variable where /R "%ProgramFiles%" git.exe GIT
 	)
