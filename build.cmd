@@ -12,6 +12,7 @@ set "GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.30.1.win
 set "GIT_USER_EMAIL=aquawicket@hotmail.com"
 set "GIT_USER_NAME=aquawicket"
 set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi"
+set "ANDROID_API=31"
 
 
 ::--------------------------------------------------------
@@ -192,7 +193,7 @@ if %OS%==emscripten goto generate_emscripten
 	call:validate_msys2
 	TITLE DigitalKnob - MINGW32
 	call set DKPATH=%%DKPATH:^\=^/%%
-	set "MSYS2=%DKPATH%/3rdParty/msys2-x86_64-20231026"
+	::set "MSYS2=%DKPATH%/3rdParty/msys2-x86_64-20231026"
 	%MSYS2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -lc "clear && %DKPATH%/build.sh"
 	goto:eof
 goto build
@@ -208,7 +209,7 @@ goto build
 	call:validate_android_ndk
 	::call:validate_openjdk
 	::call %DKPATH%\3rdParty\_DKIMPORTS\openjdk\registerJDK.cmd
-	"%CMAKE%" -G "Visual Studio 17 2022" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID-NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_NDK%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
+	"%CMAKE%" -G "Visual Studio 17 2022" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID-NDK=%ANDROID-NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID-NDK%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
 	set TARGET=main
 goto build
 
@@ -217,7 +218,7 @@ goto build
 	call:validate_android_ndk
 	::call:validate_openjdk
 	::call %DKPATH%\3rdParty\_DKIMPORTS\openjdk\registerJDK.cmd
-	"%CMAKE%" -G "Visual Studio 17 2022" -A ARM64 -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID-NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_NDK%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
+	"%CMAKE%" -G "Visual Studio 17 2022" -A ARM64 -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID-NDK=%ANDROID-NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID-NDK%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
 	set TARGET=main
 goto build
 
@@ -449,39 +450,17 @@ goto:eof
 
 :: validate_msys2()
 :validate_msys2
-	call:cmake_eval "include('%DKIMPORTS%/msys2/DKMAKE.cmake')"
+	call:cmake_eval "include('%DKIMPORTS%/msys2/DKMAKE.cmake')" "MSYS2"
+	echo MSYS2 = %MSYS2%
 	call:check_error
 goto:eof
 
-:: validate_openjdk()
-:::validate_openjdk
-::	call:cmake_eval "include('%DKIMPORTS%/openjdk/DKMAKE.cmake')"
-::	call:check_error
-::goto:eof
-
 :: validate_android_ndk()
 :validate_android_ndk
-	call:cmake_eval "include('%DKIMPORTS%/android-ndk/DKMAKE.cmake')"
+	call:cmake_eval "include('%DKIMPORTS%/android-ndk/DKMAKE.cmake')" "ANDROID-NDK"
+	echo ANDROID-NDK = %ANDROID-NDK%
+	::if not '%VS_NdkRoot%'=='%ANDROID-NDK%' setx VS_NdkRoot %ANDROID-NDK%
 	call:check_error
-	
-	::set DK.cmake=%DKCMAKE%/DK.cmake:^\=^/%
-	::set NDK.cmake=%3RDPARTY%/android-sdk/ndk/DKMAKE.cmake:^\=^/%
-	
-	::set "ANDROID_NDK=%3RDPARTY%\android-sdk\ndk\%ANDROID_NDK_BUILD%"
-	::echo ANDROID_NDK = %ANDROID_NDK%
-	
-	::call:get_filename %ANDROID_NDK_DL% ANDROID_NDK_DL_FILE
-	::if NOT exist "%ANDROID_NDK%" (
-	::	echo "installing android-ndk"
-	::	call:download %ANDROID_NDK_DL% "%DKDOWNLOAD%\%ANDROID_NDK_DL_FILE%"
-	::	call:make_directory "%3RDPARTY%\android-sdk"
-	::	call:make_directory "%3RDPARTY%\android-sdk\ndk"
-	::	call:extract "%DKDOWNLOAD%\%ANDROID_NDK_DL_FILE%" "%3RDPARTY%\android-sdk\ndk"
-	::	call:rename "%3RDPARTY%\android-sdk\ndk\android-ndk-r23b" "C:\Users\Administrator\digitalknob\Development\3rdParty\android-sdk\ndk\23.1.7779620"
-	::)
-	::if not '%VS_NdkRoot%'=='%ANDROID_NDK%' setx VS_NdkRoot %ANDROID_NDK%
-	:::: replace all \ characters with / in ANDROID_NDK for cmake compatability
-	::set ANDROID_NDK=%ANDROID_NDK:\=/%
 goto:eof
 
 :: validate_emscripten()
