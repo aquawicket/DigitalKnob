@@ -54,14 +54,3 @@ endif()
 	#dk_command(bash -c "pacman -S make --noconfirm")						# make
 #	dk_msys2("pacman -S make --noconfirm")									# make
 #endif()
-
-#if(NOT EXISTS ${MSYS2}/usr/bin/diff.exe)
-	#dk_command(bash -c "pacman -S diffutils --noconfirm")					# diffutils
-#	dk_msys2("pacman -S diffutils --noconfirm")								# diffutils
-#endif()
-
-#if(NOT EXISTS ${MSYS2}/usr/bin/yasm.exe)
-	#dk_command(bash -c "pacman -S yasm --noconfirm")						# yasm
-#	dk_msys2("pacman -S yasm --noconfirm")									# yasm
-#endif()
-
