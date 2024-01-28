@@ -53,7 +53,6 @@ function message() {
 		error "message <string> requires 1 parameter"
 		return $false
 	fi
-	
 	echo "$@"	
 }
 
@@ -74,7 +73,6 @@ function string_contains() {
 		error "string_contains <string> <substring> requires 2 parameters"
 		return $false
 	fi
-	
 	[[ $1 == *"$2"* ]]
 }
 
@@ -164,6 +162,7 @@ function validate_package() {
 	fi
 }
 
+# TODO: Turn this into a cmake_eval to 3rdParty/libzstd
 # build-essential for Tiny Core Linux
 if command_exists tce-load; then
 	validate_package libzstd libzstd
@@ -640,7 +639,9 @@ while :
 	clear_cmake_cache
 	delete_temp_files
 		
-	validate_package which which
+	#TODO: move to 3rdParty with cmake_eval
+	validate_package which which 
+	
 	validate_package git git
 	
 	# This will break MSYS2 builds. Never install the base cmake in MSYS2
@@ -659,8 +660,9 @@ while :
 	# MSYS = 
 
 	# build-essential for MSYS2
-	cmake_eval "include('C:/Users/$USERNAME/digitalknob/Development/DKCMake/DK.cmake');set(WIN 1);include('C:/Users/$USERNAME/digitalknob/Development/3rdParty/_DKIMPORTS/msys2/DKMAKE.cmake')"
-	
+		if  [[ -n "$MSYSTEM" ]]; then
+        	cmake_eval "include('C:/Users/$USERNAME/digitalknob/Development/DKCMake/DK.cmake');set(WIN 1);include('C:/Users/$USERNAME/digitalknob/Development/3rdParty/_DKIMPORTS/msys2/DKMAKE.cmake')"
+    	fi
 	
 	#if [[ "$MSYSTEM" == "CLANG32" ]]; then
 	#	validate_package cmake mingw-w64-clang-i686-cmake
@@ -683,7 +685,9 @@ while :
 	#	validate_package gcc mingw-w64-ucrt-x86_64-toolchain
 	#	validate_package clang mingw-w64-ucrt-x86_64-clang
 	#fi
-	
+
+
+    #TODO: turn into a cmake_eval to 3rdParty
 	# build-essential for Tiny Core Linux
 	if command_exists tce-load; then
 		validate_package gcc compiletc
@@ -777,6 +781,7 @@ while :
 		mkdir -p $DKPATH/DKApps/$APP/$OS/Release
 	fi
 	
+	#TODO: create a cmake_eval for android_ndk stuff
 	if [[ "$OS" == "android"* ]]; then
 		ANDROID_API="31"
 		if [[ "$OSTYPE" == "linux-android" ]]; then
@@ -831,9 +836,11 @@ while :
 	    fi
 	fi
 	if [[ "$OS" == "emscipten" ]]; then
+	    #TODO:  create cmake_eval for emsdk stuff
 		echo -e "emscripten incomplete...\n"
 	fi
 	if [[ "$OS" == "ios32" ]]; then
+	   #TODO:  create cmake_eval for xcode stuff
 		call cmake -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake -DPLATFORM=OS -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
 	fi
 	if [[ "$OS" == "ios64" ]]; then
