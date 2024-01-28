@@ -3007,6 +3007,12 @@ endfunction()
 #
 function(dk_depend plugin)
 	DKDEBUGFUNC(${ARGV})
+	
+	if(CMAKE_SCRIPT_MODE_FILE)
+		dk_getPathToPlugin(${plugin} plugin_path)
+		dk_debug("include(${plugin_path}/DKMAKE.cmake)")
+		include(${plugin_path}/DKMAKE.cmake)
+	endif()
 #	dk_debug(CMAKE_CURRENT_LIST_DIR)
 	
 #	if(${ARGC} GREATER 1)

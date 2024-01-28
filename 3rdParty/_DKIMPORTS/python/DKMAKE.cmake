@@ -16,7 +16,7 @@ RASPBERRY_dk_set(PYTHON_APP python)
 
 
 ### INSTALL ###
-if(WIN)
+if(WIN_HOST)
 	dk_makeDirectory(${PYTHON})
 	dk_setEnv("PATH" "${PYTHON}")
 

@@ -3,9 +3,8 @@
 # https://lyceum-allotments.github.io/2016/06/emscripten-and-sdl-2-tutorial-part-1/
 # https://github.com/emscripten-core/emsdk/archive/refs/tags/2.0.26.zip
 
-
 dk_depend(python)
-#dk_setEnv("PATH" "${PYTHON}")
+
 
 #dk_import(https://github.com/emscripten-core/emsdk/archive/refs/tags/3.1.31.zip)
 dk_import(https://github.com/emscripten-core/emsdk.git BRANCH main)

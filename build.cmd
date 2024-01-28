@@ -493,7 +493,6 @@ goto:eof
 
 :: validate_emscripten()
 :validate_emscripten
-	::call:validate_python
 	call:cmake_eval "include('%DKIMPORTS%/emsdk/DKMAKE.cmake')" "EMSDK"
 	echo EMSDK = %EMSDK%
 	call:check_error
