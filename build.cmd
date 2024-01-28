@@ -1,17 +1,16 @@
 @echo off
-
-::############ DigitalKnob builder script ############
-
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
 
+
+::############ DigitalKnob builder script ############
 
 ::--------------------------------------------------------
 :: GLOBAL USER VARIABLES
 ::--------------------------------------------------------
+set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi"
 set "GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.30.1.windows.1/Git-2.30.1-32-bit.exe"
 set "GIT_USER_EMAIL=aquawicket@hotmail.com"
 set "GIT_USER_NAME=aquawicket"
-set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi"
 set "ANDROID_API=31"
 
 
@@ -179,11 +178,12 @@ goto type
 	echo APP_PATH = %APP_PATH%
 	call:make_directory "%APP_PATH%\%OS%"
 	cd "%APP_PATH%\%OS%"
-if %OS%==win32 goto generate_win32
-if %OS%==win64 goto generate_win64
-if %OS%==android32 goto generate_android32
-if %OS%==android64 goto generate_android64
-if %OS%==emscripten goto generate_emscripten
+	
+	if %OS%==win32 goto generate_win32
+	if %OS%==win64 goto generate_win64
+	if %OS%==android32 goto generate_android32
+	if %OS%==android64 goto generate_android64
+	if %OS%==emscripten goto generate_emscripten
 
 :generate_win32
 	::call:validate_visual_studio
@@ -223,10 +223,6 @@ goto build
 
 :generate_emscripten
 	call:validate_emscripten
-	::set EMSDK_ENV=%EMSDK%\emsdk_env.bat
-	::set EMSDK_TOOLCHAIN_FILE=%EMSDK%\upstream\emscripten\cmake\Modules\Platform\Emscripten.cmake
-	echo ""
-	echo ""
 	if %TYPE%==Debug (
 		call "%EMSDK_ENV%" & "%CMAKE%" -G "MinGW Makefiles" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%APP_PATH%/%OS%/Debug
 	)
