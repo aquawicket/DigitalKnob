@@ -12,9 +12,6 @@ set "GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.30.1.win
 set "GIT_USER_EMAIL=aquawicket@hotmail.com"
 set "GIT_USER_NAME=aquawicket"
 set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi"
-::set "ANDROID_API=31"
-::set "ANDROID_NDK_BUILD=23.1.7779620"
-::set "ANDROID_NDK_DL=https://dl.google.com/android/repository/android-ndk-r23b-windows.zip"
 
 
 ::--------------------------------------------------------
@@ -31,12 +28,6 @@ echo DKDOWNLOAD = %DKDOWNLOAD%
 call:validate_cmake
 call:validate_git
 call:validate_branch
-::call:validate_visual_studio
-::call:validate_msys2
-::call:validate_openjdk
-::call:validate_python
-::call:validate_emscripten
-::call:validate_android_ndk
 
 
 set "APP="
@@ -213,6 +204,7 @@ goto build
 goto build
 
 :generate_android32
+	call:validate_visual_studio
 	call:validate_android_ndk
 	::call:validate_openjdk
 	::call %DKPATH%\3rdParty\_DKIMPORTS\openjdk\registerJDK.cmd
@@ -221,6 +213,7 @@ goto build
 goto build
 
 :generate_android64
+	call:validate_visual_studio
 	call:validate_android_ndk
 	::call:validate_openjdk
 	::call %DKPATH%\3rdParty\_DKIMPORTS\openjdk\registerJDK.cmd
@@ -230,8 +223,8 @@ goto build
 
 :generate_emscripten
 	call:validate_emscripten
-	set EMSDK_ENV=%EMSDK%\emsdk_env.bat
-	set EMSDK_TOOLCHAIN_FILE=%EMSDK%\upstream\emscripten\cmake\Modules\Platform\Emscripten.cmake
+	::set EMSDK_ENV=%EMSDK%\emsdk_env.bat
+	::set EMSDK_TOOLCHAIN_FILE=%EMSDK%\upstream\emscripten\cmake\Modules\Platform\Emscripten.cmake
 	echo ""
 	echo ""
 	if %TYPE%==Debug (
@@ -456,19 +449,19 @@ goto:eof
 
 :: validate_msys2()
 :validate_msys2
-	call:cmake_eval "set(WIN 1);include('%DKIMPORTS%/msys2/DKMAKE.cmake')"
+	call:cmake_eval "include('%DKIMPORTS%/msys2/DKMAKE.cmake')"
 	call:check_error
 goto:eof
 
 :: validate_openjdk()
-:validate_openjdk
-	call:cmake_eval "include('%DKIMPORTS%/openjdk/DKMAKE.cmake')"
-	call:check_error
-goto:eof
+:::validate_openjdk
+::	call:cmake_eval "include('%DKIMPORTS%/openjdk/DKMAKE.cmake')"
+::	call:check_error
+::goto:eof
 
 :: validate_android_ndk()
 :validate_android_ndk
-	call:cmake_eval "set(ANDROID 1);include('%DKIMPORTS%/android-ndk/DKMAKE.cmake')"
+	call:cmake_eval "include('%DKIMPORTS%/android-ndk/DKMAKE.cmake')"
 	call:check_error
 	
 	::set DK.cmake=%DKCMAKE%/DK.cmake:^\=^/%
@@ -493,14 +486,10 @@ goto:eof
 
 :: validate_emscripten()
 :validate_emscripten
-	call:cmake_eval "include('%DKIMPORTS%/emsdk/DKMAKE.cmake')" "EMSDK"
+	call:cmake_eval "include('%DKIMPORTS%/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_TOOLCHAIN_FILE"
 	echo EMSDK = %EMSDK%
-	call:check_error
-goto:eof
-
-:: validate_python()
-:validate_python
-	call:cmake_eval "set(WIN 1);include('%DKIMPORTS%/python/DKMAKE.cmake')"
+	echo EMSDK_ENV = %EMSDK_ENV%
+	echo EMSDK_TOOLCHAIN_FILE = %EMSDK_TOOLCHAIN_FILE%
 	call:check_error
 goto:eof
 
