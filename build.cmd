@@ -12,14 +12,9 @@ set "GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.30.1.win
 set "GIT_USER_EMAIL=aquawicket@hotmail.com"
 set "GIT_USER_NAME=aquawicket"
 set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi"
-::set "MSBUILD_DL=https://aka.ms/vs/17/release/vs_community.exe"
-::set "MSYS2_DL=https://github.com/msys2/msys2-installer/releases/download/2023-10-26/msys2-x86_64-20231026.exe"
 ::set "ANDROID_API=31"
 ::set "ANDROID_NDK_BUILD=23.1.7779620"
 ::set "ANDROID_NDK_DL=https://dl.google.com/android/repository/android-ndk-r23b-windows.zip"
-::set "PYTHON_FOLDER=python-2.7.18"
-::set "PYTHON_DL=https://www.python.org/ftp/python/2.7.18/python-2.7.18.msi"
-::set "EMSDK_GIT=https://github.com/emscripten-core/emsdk.git"
 
 
 ::--------------------------------------------------------
@@ -498,11 +493,9 @@ goto:eof
 
 :: validate_emscripten()
 :validate_emscripten
-	call:cmake_eval "include('%DKIMPORTS%/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_URL;EMSDK_VERSION"
+	::call:validate_python
+	call:cmake_eval "include('%DKIMPORTS%/emsdk/DKMAKE.cmake')" "EMSDK"
 	echo EMSDK = %EMSDK%
-	echo EMSDK_URL = %EMSDK_URL%
-	echo EMSDK_VERSION = %EMSDK_VERSION%
-	pause
 	call:check_error
 goto:eof
 
@@ -624,18 +617,35 @@ goto:eof
 	call set DKCOMMAND=%%DKCOMMAND:^\=^/%%
 	echo DKCOMMAND = %DKCOMMAND%
 
-	:: call cmake with parmeters and take in return values from   -       -       -      -      -        -      -  ->stdout         &>stderr
+	
 	call set DKCMAKE=%%DKCMAKE:^\=^/%%
+	
+	:: call cmake with parmeters and take in return values from   -       -       -      -      -        -      -  ->stdout         &>stderr
 	::echo "%CMAKE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE%/dev/cmake_eval.cmake" --log-level=TRACE >cmake_eval.out 2>cmake_eval.err
 	
-	echo VARIABLE_LIST = %~2
-	for /F "Delims=" %%g in ('^""%CMAKE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" "-DDKRETURN=%~2" -P %DKCMAKE%/dev/cmake_eval.cmake^"') do (
-		echo %%g
-		set "last_line=%%g"
-	)
-	set last_line=%last_line:~3%
-	%last_line%
+	if [%2] == [] goto no_return_values
+	goto with_return_values
+	
+	:no_return_values
+		echo no_return_values
+		"%CMAKE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE%/dev/cmake_eval.cmake"
+		goto:eof
 		
+	:with_return_values
+		echo with_return_values
+		
+		"%CMAKE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" "-DDKRETURN=%~2" -P %DKCMAKE%/dev/cmake_eval.cmake
+		if not exist %DKCMAKE%/cmake_vars.cmd goto:eof
+		call C:\Users\Administrator\digitalknob\Development\DKCMake\cmake_vars.cmd
+		del C:\Users\Administrator\digitalknob\Development\DKCMake\cmake_vars.cmd
+				
+		::for /F "Delims=" %%g in ('^""%CMAKE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" "-DDKRETURN=%~2" -P %DKCMAKE%/dev/cmake_eval.cmake^"') do (
+		::	echo %%g
+		::	set "last_line=%%g"
+		::)
+		::set last_line=%last_line:~3%
+		::%last_line%
+
 		
 	::echo return code: %ERRORLEVEL%
 	

@@ -59,14 +59,6 @@ set(DIGITALKNOB ${DIGITALKNOB}digitalknob CACHE INTERNAL "")
 #message(STATUS "\n DIGITALKNOB =  ${DIGITALKNOB}\n")
 
 
-#set(ENV{DIGITALKNOB} ${DIGITALKNOB})
-#set(ENV{DKCMAKE} ${DKCMAKE})
-#if(WIN_HOST)
-#	execute_process(COMMAND cmd /c setx DIGITALKNOB ${DIGITALKNOB})
-#	execute_process(COMMAND cmd /c setx DKCMAKE ${DKCMAKE})
-#endif()
-
-
 ##### Load Function files #################
 include(${DKCMAKE}/functions/dk_load.cmake)
 #include(${DKCMAKE}/functions/dk_call.cmake)
