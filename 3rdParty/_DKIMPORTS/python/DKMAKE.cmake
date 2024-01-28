@@ -5,14 +5,12 @@
 # https://silentinstallhq.com/python-2-7-silent-install-how-to-guide/
 
 
-dk_set			(PYTHON_FOLDER python-2.7.18)
-dk_set			(PYTHON ${3RDPARTY}/${PYTHON_FOLDER})
-WIN_dk_set		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18.msi)
-APPLE_dk_set	(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18-macosx10.9.pkg)
-WIN_dk_set		(PYTHON_APP ${PYTHON}/python.exe)
-APPLE_dk_set	(PYTHON_APP python)
-LINUX_dk_set	(PYTHON_APP python)
-RASPBERRY_dk_set(PYTHON_APP python)
+dk_set				(PYTHON_FOLDER python-2.7.18)
+dk_set				(PYTHON ${3RDPARTY}/${PYTHON_FOLDER})
+WIN_HOST_dk_set		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18.msi)
+APPLE_HOST_dk_set	(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18-macosx10.9.pkg)
+WIN_HOST_dk_set		(PYTHON_APP ${PYTHON}/python.exe)
+UNIX_HOST_dk_set	(PYTHON_APP python)
 
 
 ### INSTALL ###

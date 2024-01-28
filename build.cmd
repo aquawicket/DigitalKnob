@@ -558,7 +558,6 @@ goto:eof
 	call set DKCOMMAND=%%DKCOMMAND:^\=^/%%
 	echo DKCOMMAND = %DKCOMMAND%
 
-	
 	call set DKCMAKE=%%DKCMAKE:^\=^/%%
 	
 	:: call cmake with parmeters and take in return values from   -       -       -      -      -        -      -  ->stdout         &>stderr
@@ -568,26 +567,15 @@ goto:eof
 	goto with_return_values
 	
 	:no_return_values
-		echo no_return_values
 		"%CMAKE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE%/dev/cmake_eval.cmake"
 		goto:eof
 		
 	:with_return_values
-		echo with_return_values
-		
 		"%CMAKE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" "-DDKRETURN=%~2" -P %DKCMAKE%/dev/cmake_eval.cmake
 		if not exist %DKCMAKE%/cmake_vars.cmd goto:eof
 		call C:\Users\Administrator\digitalknob\Development\DKCMake\cmake_vars.cmd
 		del C:\Users\Administrator\digitalknob\Development\DKCMake\cmake_vars.cmd
 				
-		::for /F "Delims=" %%g in ('^""%CMAKE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" "-DDKRETURN=%~2" -P %DKCMAKE%/dev/cmake_eval.cmake^"') do (
-		::	echo %%g
-		::	set "last_line=%%g"
-		::)
-		::set last_line=%last_line:~3%
-		::%last_line%
-
-		
 	::echo return code: %ERRORLEVEL%
 	
 	:::: work with cmake return code files ::::
@@ -636,25 +624,5 @@ goto:eof
 	)
 	
 	::echo get_filename(%*) -^> %2 = %val%
-	call:check_error
-goto:eof
-
-:: remove_extension <path> <output_variable>
-:remove_extension
-	if [%1] == [] (
-		echo "ERROR: remove_extension() parameter 1 is invalid"
-		goto:eof
-	)
-	if [%2] == [] (
-		echo "ERROR: remove_extension() parameter 2 is invalid"
-		goto:eof
-	)
-	
-	for %%f in ("%1") do (
-		set "%2=%%~dpnf"
-		set "val=%%~dpnf"
-	)
-
-	::echo remove_extension(%*) -^> %2 = %val%
 	call:check_error
 goto:eof
