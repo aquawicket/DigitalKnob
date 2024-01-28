@@ -193,7 +193,6 @@ if %OS%==emscripten goto generate_emscripten
 	call:validate_msys2
 	TITLE DigitalKnob - MINGW32
 	call set DKPATH=%%DKPATH:^\=^/%%
-	::set "MSYS2=%DKPATH%/3rdParty/msys2-x86_64-20231026"
 	%MSYS2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -lc "clear && %DKPATH%/build.sh"
 	goto:eof
 goto build
@@ -340,27 +339,6 @@ goto:eof
 :: make_directory()
 :make_directory
 	if NOT exist "%~1" mkdir "%~1"
-goto:eof
-
-:: extract()
-:extract
-	echo Extracting %~1 to %~2
-	if NOT exist "%~2" (
-		call:assert "extract(): destination path '%~2' does not exist"
-	)
-	chdir "%~2"
-	"%CMAKE%" -E tar x "%~1"
-	call:check_error
-goto:eof
-
-:: rename()
-:rename
-	echo Renaming %~1 to %~2
-	if NOT exist "%~1" (
-		call:assert "source path '%~1' does not exist"
-	)
-	"%CMAKE%" -E rename "%~1" "%~2"
-	call:check_error
 goto:eof
 
 :: validate_branch()
