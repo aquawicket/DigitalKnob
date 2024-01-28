@@ -5,12 +5,12 @@
 # https://sourceforge.net/projects/giflib/files/giflib-5.1.1.tar.gz
 # https://stackoverflow.com/a/34102586/688352  #'aclocal-1.15' is missing on your system
 
-
 ### DEPEND ###
 WIN_dk_depend(msys2)
-if(MSYS OR MAC)
-	dk_depend(autotools)
-endif()
+#if(MSYS OR MAC)
+dk_depend(autotools)
+dk_depend(gcc)
+#endif()
 
 
 ### IMPORT ###
@@ -34,8 +34,9 @@ if(GIFLIB_USE_CMAKE)
 	if(WIN)
 		dk_setPath				(${GIFLIB})
 		
-		if(MSYS)
-			dk_queueCommand	(export ACLOCAL_PATH=${MSYS2}/usr/share/aclocal && autoreconf -f -i)
+		if(MSYS2)
+			#dk_queueCommand	(export ACLOCAL_PATH=${MSYS2}/usr/share/aclocal && autoreconf -f -i)
+			dk_msys2			(export ACLOCAL_PATH=${MSYS2}/usr/share/aclocal && autoreconf -f -i)
 		else()
 			dk_queueCommand	(autoreconf -f -i)
 		endif()
@@ -45,11 +46,15 @@ if(GIFLIB_USE_CMAKE)
 		string(REPLACE "  " " " GIFLIB_CONFIGURE "${GIFLIB_CONFIGURE}")
 	
 		DEBUG_dk_setPath		(${GIFLIB}/${OS}/${DEBUG_DIR})
-		DEBUG_dk_queueCommand	(${GIFLIB_CONFIGURE})
-		DEBUG_dk_queueCommand	(make -C lib)
+		#DEBUG_dk_queueCommand	(${GIFLIB_CONFIGURE})
+		DEBUG_dk_msys2			(${GIFLIB_CONFIGURE})
+		#DEBUG_dk_queueCommand	(make -C lib)
+		DEBUG_dk_msys2			(make -C lib)
 		RELEASE_dk_setPath		(${GIFLIB}/${OS}/${RELEASE_DIR})
-		RELEASE_dk_queueCommand	(${GIFLIB_CONFIGURE})
-		RELEASE_dk_queueCommand	(make -C lib)
+		#RELEASE_dk_queueCommand(${GIFLIB_CONFIGURE})
+		RELEASE_dk_msys2		(${GIFLIB_CONFIGURE})
+		#RELEASE_dk_queueCommand(make -C lib)
+		RELEASE_dk_msys2		(make -C lib)
 	else()
 		### GENERATE ###
 		dk_queueCommand(${DKCMAKE_BUILD} ${GIFLIB})

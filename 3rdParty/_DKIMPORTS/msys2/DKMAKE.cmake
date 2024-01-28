@@ -65,18 +65,3 @@ endif()
 #	dk_msys2("pacman -S yasm --noconfirm")									# yasm
 #endif()
 
-#if(NOT EXISTS ${MSYS2}/mingw64/bin/gcc.exe)
-	#dk_command(bash -c "pacman -S mingw-w64-x86_64-gcc --noconfirm")		# WIN64 builds
-#	dk_msys2("pacman -S mingw-w64-x86_64-gcc --noconfirm")					# WIN64 builds
-#endif()
-
-#if(NOT EXISTS ${MSYS2}/mingw32/bin/gcc.exe)
-	#dk_command(bash -c "pacman -S mingw-w64-i686-gcc --noconfirm")			# WIN32 builds
-#	dk_msys2("pacman -S mingw-w64-i686-gcc --noconfirm")					# WIN32 builds
-#endif()
-
-#if(NOT EXISTS ${MSYS2}/usr/bin/automake)
-	#dk_command(bash -c "pacman -S mingw-w64-x86_64-autotools --noconfirm")	# used by giflib
-#	dk_msys2("pacman -S mingw-w64-x86_64-autotools --noconfirm")			# used by giflib
-#endif()
-

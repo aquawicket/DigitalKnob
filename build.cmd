@@ -304,6 +304,7 @@ goto pickapp
 	exit
 goto:eof
 
+
 :: assert()
 :assert
 	echo ASSERT: %~1
@@ -311,12 +312,14 @@ goto:eof
 	exit
 goto:eof
 
+
 :: check_error()
 :check_error
 	if "%ERRORLEVEL%" == "0" goto:eof
 	call:assert "ERRORLEVEL = %ERRORLEVEL%"
 	exit
 goto:eof
+
 
 :: download()
 :download
@@ -328,14 +331,15 @@ goto:eof
 		echo please wait . . .
 		certutil.exe -urlcache -split -f %~1 %~2
 	)
-	::bitsadmin /transfer myDownloadJob /download /priority normal %~1 %~2
 	call:check_error
 goto:eof
+
 
 :: make_directory()
 :make_directory
 	if NOT exist "%~1" mkdir "%~1"
 goto:eof
+
 
 :: validate_branch()
 :validate_branch
@@ -355,6 +359,7 @@ goto:eof
 	call:check_error
 goto:eof
 
+
 :: validate_git()
 :validate_git
 	if NOT exist "%GIT%" (
@@ -366,7 +371,6 @@ goto:eof
 	if NOT exist "%GIT%" (
 		call:command_to_variable where /R "%ProgramFiles%\Git" git.exe GIT
 	)
-	
 	call:get_filename %GIT_DL% GIT_DL_FILE
 	if NOT exist "%GIT%" (
 		echo "installing git"
@@ -381,6 +385,7 @@ goto:eof
 	call:check_error
 goto:eof
 
+
 :: validate_cmake()
 :validate_cmake
 	if NOT exist "%CMAKE%" (
@@ -392,7 +397,6 @@ goto:eof
 	if NOT exist "%CMAKE%" (
 		call:command_to_variable where /R "%ProgramFiles(x86)%\CMake" cmake.exe CMAKE
 	)
-	
 	call:get_filename %CMAKE_DL% CMAKE_DL_FILE
 	if NOT exist "%CMAKE%" (
 		echo "installing cmake"
@@ -408,7 +412,6 @@ goto:eof
 			call:command_to_variable where /R "%ProgramFiles(x86)%\CMake\bin" cmake.exe CMAKE
 		)
 	)
-	
 	if NOT exist "%CMAKE%" (
 		call:assert "cannot find cmake"
 	)
@@ -416,11 +419,13 @@ goto:eof
 	call:check_error
 goto:eof
 
+
 :: validate_visual_studio()
 :validate_visual_studio
 	call:cmake_eval "include('%DKIMPORTS%/visualstudio/DKMAKE.cmake')"
 	call:check_error
 goto:eof
+
 
 :: validate_msys2()
 :validate_msys2
@@ -429,6 +434,7 @@ goto:eof
 	call:check_error
 goto:eof
 
+
 :: validate_android_ndk()
 :validate_android_ndk
 	call:cmake_eval "include('%DKIMPORTS%/android-ndk/DKMAKE.cmake')" "ANDROID-NDK"
@@ -436,6 +442,7 @@ goto:eof
 	::if not '%VS_NdkRoot%'=='%ANDROID-NDK%' setx VS_NdkRoot %ANDROID-NDK%
 	call:check_error
 goto:eof
+
 
 :: validate_emscripten()
 :validate_emscripten
@@ -446,9 +453,9 @@ goto:eof
 	call:check_error
 goto:eof
 
+
 :: command_to_variable <command . .> <variable_name>
 :command_to_variable
-	::echo command_to_variable("%*")
 	if [%2] == [] (
 		echo "ERROR: command_to_variable() requires at least 2 parameters"
 		goto:eof
@@ -471,7 +478,7 @@ goto:eof
 	if not "%~1"=="" goto command_args
 	
 	set command=%command:_QUOTE_="%
-	::for /F "tokens=*" %%g in ('%command% 2^>nul') do (
+
 	for /F "tokens=*" %%g in ('%command%') do (
 		set "%variable_name%=%%g"
 		set "variable_value=%%g"
@@ -480,6 +487,7 @@ goto:eof
 	::echo command_to_variable(%*) -^> %%%variable_name%%% = %variable_value%
 	call:check_error
 goto:eof
+
 
 :: clear_cmake_cache()
 :clear_cmake_cache
@@ -490,6 +498,7 @@ goto:eof
 	call:check_error
 goto:eof
 
+
 :: delete_temp_files()
 :delete_temp_files
 	echo Deleteing .tmp files . . .
@@ -498,6 +507,7 @@ goto:eof
 	for /r %%i in (*.TMP) do del "%%i"
 	call:check_error
 goto:eof
+
 
 :: git_update()
 :git_update
@@ -519,6 +529,7 @@ goto:eof
 	call:check_error
 goto:eof
 
+
 :: git_commit()
 :git_commit
 	cd %DKPATH%
@@ -529,10 +540,12 @@ goto:eof
 	call:check_error
 goto:eof
 
+
 :: clear_screen()
 :clear_screen
 	cls
 goto:eof
+
 
 :: cmake_eval <cmake_commands;.;.;> <variables;.;.;.>
 :cmake_eval
@@ -560,7 +573,6 @@ goto:eof
 
 	call set DKCMAKE=%%DKCMAKE:^\=^/%%
 	
-	:: call cmake with parmeters and take in return values from   -       -       -      -      -        -      -  ->stdout         &>stderr
 	::echo "%CMAKE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE%/dev/cmake_eval.cmake" --log-level=TRACE >cmake_eval.out 2>cmake_eval.err
 	
 	if [%2] == [] goto no_return_values
