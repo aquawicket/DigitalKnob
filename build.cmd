@@ -1,11 +1,8 @@
 @echo off
 
-
 ::############ DigitalKnob builder script ############
 
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
-
-
 
 
 ::--------------------------------------------------------
@@ -458,25 +455,25 @@ goto:eof
 
 :: validate_visual_studio()
 :validate_visual_studio
-	call:cmake_eval "include('%DKCMAKE%/DK.cmake');include('%DKIMPORTS%/visualstudio/DKMAKE.cmake')"
+	call:cmake_eval "include('%DKIMPORTS%/visualstudio/DKMAKE.cmake')"
 	call:check_error
 goto:eof
 
 :: validate_msys2()
 :validate_msys2
-	call:cmake_eval "include('%DKCMAKE%/DK.cmake');set(WIN 1);include('%DKIMPORTS%/msys2/DKMAKE.cmake')"
+	call:cmake_eval "set(WIN 1);include('%DKIMPORTS%/msys2/DKMAKE.cmake')"
 	call:check_error
 goto:eof
 
 :: validate_openjdk()
 :validate_openjdk
-	call:cmake_eval "include('%DKCMAKE%/DK.cmake');set(WIN 1);set(WIN_64 1);include('%DKIMPORTS%/openjdk/DKMAKE.cmake')"
+	call:cmake_eval "include('%DKIMPORTS%/openjdk/DKMAKE.cmake')"
 	call:check_error
 goto:eof
 
 :: validate_android_ndk()
 :validate_android_ndk
-	call:cmake_eval "include('%DKCMAKE%/DK.cmake');set(ANDROID 1);include('%DKIMPORTS%/android-ndk/DKMAKE.cmake')"
+	call:cmake_eval "set(ANDROID 1);include('%DKIMPORTS%/android-ndk/DKMAKE.cmake')"
 	call:check_error
 	
 	::set DK.cmake=%DKCMAKE%/DK.cmake:^\=^/%
@@ -501,13 +498,17 @@ goto:eof
 
 :: validate_emscripten()
 :validate_emscripten
-	call:cmake_eval "include('%DKCMAKE%/DK.cmake');include('%DKIMPORTS%/emsdk/DKMAKE.cmake')"
+	call:cmake_eval "include('%DKIMPORTS%/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_URL;EMSDK_VERSION"
+	echo EMSDK = %EMSDK%
+	echo EMSDK_URL = %EMSDK_URL%
+	echo EMSDK_VERSION = %EMSDK_VERSION%
+	pause
 	call:check_error
 goto:eof
 
 :: validate_python()
 :validate_python
-	call:cmake_eval "include('%DKCMAKE%/DK.cmake');set(WIN 1);include('%DKIMPORTS%/python/DKMAKE.cmake')"
+	call:cmake_eval "set(WIN 1);include('%DKIMPORTS%/python/DKMAKE.cmake')"
 	call:check_error
 goto:eof
 
@@ -515,7 +516,7 @@ goto:eof
 :command_to_variable
 	::echo command_to_variable("%*")
 	if [%2] == [] (
-		echo "ERROR: command_to_variable()requires at least 2 parameters"
+		echo "ERROR: command_to_variable() requires at least 2 parameters"
 		goto:eof
 	)
 	set command=
@@ -536,12 +537,13 @@ goto:eof
 	if not "%~1"=="" goto command_args
 	
 	set command=%command:_QUOTE_="%
-	for /F "tokens=*" %%g in ('%command% 2^>nul') do (
+	::for /F "tokens=*" %%g in ('%command% 2^>nul') do (
+	for /F "tokens=*" %%g in ('%command%') do (
 		set "%variable_name%=%%g"
 		set "variable_value=%%g"
 	)
 	
-	::echo command_to_variable("%*") -^> %%%variable_name%%% = %variable_value%
+	::echo command_to_variable(%*) -^> %%%variable_name%%% = %variable_value%
 	call:check_error
 goto:eof
 
@@ -598,7 +600,7 @@ goto:eof
 	cls
 goto:eof
 
-:: cmake_eval <cmake;commands;.;.;>
+:: cmake_eval <cmake_commands;.;.;> <variables;.;.;.>
 :cmake_eval
 	::echo cmake_eval %1
 	if [%1] == [] (
@@ -615,6 +617,7 @@ goto:eof
 	)
 
 	set commands=%1
+	set variables=%2
 	::echo commands = %commands%
 	call set commands=%%commands:"=%%
 	set "DKCOMMAND=%commands%"
@@ -624,7 +627,16 @@ goto:eof
 	:: call cmake with parmeters and take in return values from   -       -       -      -      -        -      -  ->stdout         &>stderr
 	call set DKCMAKE=%%DKCMAKE:^\=^/%%
 	::echo "%CMAKE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE%/dev/cmake_eval.cmake" --log-level=TRACE >cmake_eval.out 2>cmake_eval.err
-	"%CMAKE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE%/dev/cmake_eval.cmake" --log-level=TRACE
+	
+	echo VARIABLE_LIST = %~2
+	for /F "Delims=" %%g in ('^""%CMAKE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" "-DDKRETURN=%~2" -P %DKCMAKE%/dev/cmake_eval.cmake^"') do (
+		echo %%g
+		set "last_line=%%g"
+	)
+	set last_line=%last_line:~3%
+	%last_line%
+		
+		
 	::echo return code: %ERRORLEVEL%
 	
 	:::: work with cmake return code files ::::

@@ -25,7 +25,8 @@ include_guard()
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 CMAKE_POLICY(SET CMP0007 NEW)
-#include(${DKCMAKE}/DK.cmake)
+
+include(${DKCMAKE}/DK.cmake)
 
 #message("CMAKE_ARGC=\"${CMAKE_ARGC}\"")
 #message("CMAKE_ARGV0=\"${CMAKE_ARGV0}\"")
@@ -40,10 +41,6 @@ CMAKE_POLICY(SET CMP0007 NEW)
 #message("ARGV0=\"${ARGV0}\"")
 #message("ARGV1=\"${ARGV1}\"")
 
-
-function(loopback var)
-	message(STATUS "${var}")
-endfunction()
 
 # Evaluate expression (faster version)
 # Suggestion from the Wiki: http://cmake.org/Wiki/CMake/Language_Syntax
@@ -79,3 +76,17 @@ endfunction()
 
 #message(STATUS "DKCOMMAND = ${DKCOMMAND}")
 cmake_eval("${DKCOMMAND}")
+
+if(DKRETURN)
+	message(STATUS "DKRETURN = ${DKRETURN}")
+	foreach(item ${DKRETURN})
+		#message(STATUS "item = ${item}")
+		set(out "set \"${item}=${${item}}\"")
+		if(line)
+			set(line "${line} & ${out}")
+		else()
+			set(line "${out}")
+		endif()
+	endforeach()
+	message(STATUS "${line}")
+endif()
