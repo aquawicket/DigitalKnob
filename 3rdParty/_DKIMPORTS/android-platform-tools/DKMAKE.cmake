@@ -26,8 +26,8 @@ if(NOT ANDROID_HOST)
 	LINUX_HOST_dk_import(https://dl.google.com/android/repository/platform-tools_r33.0.3-linux.zip PATH ${ANDROID-SDK}/platform-tools)
 else()
 	ANDROID_HOST_dk_import(https://github.com/lzhiyong/android-sdk-tools/releases/download/33.0.3/android-sdk-tools-static-aarch64.zip PATH ${ANDROID-SDK}/termux)
-	dk_copy(${ANDROID-SDK}/termux/build-tools ${ANDROID-SDK}/build-tools/30.0.3)	# move termux/build-tools to android-sdk
-	dk_copy(${ANDROID-SDK}/termux/platform-tools ${ANDROID-SDK}/platform-tools)		# move termux/platform-tools to android-sdk
+	dk_copy(${ANDROID-SDK}/termux/build-tools ${ANDROID-SDK}/build-tools/30.0.3 OVERWRITE)	# move termux/build-tools to android-sdk
+	dk_copy(${ANDROID-SDK}/termux/platform-tools ${ANDROID-SDK}/platform-tools OVERWRITE)		# move termux/platform-tools to android-sdk
 	
 	## Repackage Gradle's aapt2.jar with out version of aapt
 	dk_set(AAPT2 /data/data/com.termux/files/home/.gradle/caches/modules-2/files-2.1/com.android.tools.build/aapt2/7.0.3-7396180/942684a205d274f6b23f6d066cafcc12a17ce9ff)

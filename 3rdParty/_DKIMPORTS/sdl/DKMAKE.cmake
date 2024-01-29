@@ -7,6 +7,8 @@
 
 ### DEPEND ###
 ANDROID_dk_depend(android)
+ANDROID_dk_depend(android-build-tools)
+ANDROID_dk_depend(android-platform-tools)
 ANDROID_dk_depend(libiconv)
 ANDROID_dk_depend(opengles)
 ANDROID_dk_depend(opensles)
