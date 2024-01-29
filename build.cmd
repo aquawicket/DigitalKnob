@@ -206,8 +206,8 @@ goto build
 :generate_android32
 	call:validate_visual_studio
 	call:validate_android_ndk
-	::call:validate_openjdk
-	::call %DKPATH%\3rdParty\_DKIMPORTS\openjdk\registerJDK.cmd
+	call:validate_openjdk
+	call %OPENJDK%\registerJDK.cmd
 	"%CMAKE%" -G "Visual Studio 17 2022" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID-NDK=%ANDROID-NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID-NDK%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
 	set TARGET=main
 goto build
@@ -215,8 +215,8 @@ goto build
 :generate_android64
 	call:validate_visual_studio
 	call:validate_android_ndk
-	::call:validate_openjdk
-	::call %DKPATH%\3rdParty\_DKIMPORTS\openjdk\registerJDK.cmd
+	call:validate_openjdk
+	call %OPENJDK%\registerJDK.cmd
 	"%CMAKE%" -G "Visual Studio 17 2022" -A ARM64 -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID-NDK=%ANDROID-NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID-NDK%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
 	set TARGET=main
 goto build
@@ -434,6 +434,13 @@ goto:eof
 	call:check_error
 goto:eof
 
+
+:: validate_openjdk()
+:validate_openjdk
+	call:cmake_eval "include('%DKIMPORTS%/openjdk/DKMAKE.cmake')" "OPENJDK"
+	echo OPENJDK = %OPENJDK%
+	call:check_error
+goto:eof
 
 :: validate_android_ndk()
 :validate_android_ndk

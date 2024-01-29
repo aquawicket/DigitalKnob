@@ -28,19 +28,6 @@ CMAKE_POLICY(SET CMP0007 NEW)
 
 include(${DKCMAKE}/DK.cmake)
 
-#message("CMAKE_ARGC=\"${CMAKE_ARGC}\"")
-#message("CMAKE_ARGV0=\"${CMAKE_ARGV0}\"")
-#message("CMAKE_ARGV1=\"${CMAKE_ARGV1}\"")
-#message("CMAKE_ARGV2=\"${CMAKE_ARGV2}\"")
-#message("CMAKE_ARGV3=\"${CMAKE_ARGV3}\"")
-#message("CMAKE_ARGV4=\"${CMAKE_ARGV4}\"")
-
-#message("ARGC=\"${ARGC}\"")
-#message("ARGN=\"${ARGN}\"")
-#message("ARGV=\"${ARGV}\"")
-#message("ARGV0=\"${ARGV0}\"")
-#message("ARGV1=\"${ARGV1}\"")
-
 
 # Evaluate expression (faster version)
 # Suggestion from the Wiki: http://cmake.org/Wiki/CMake/Language_Syntax
@@ -78,7 +65,7 @@ endfunction()
 cmake_eval("${DKCOMMAND}")
 
 if(DKRETURN)
-	message(STATUS "DKRETURN = ${DKRETURN}")
+	#message(STATUS "DKRETURN = ${DKRETURN}")
 	foreach(item ${DKRETURN})
 		set(out "set \"${item}=${${item}}\"")
 		if(line)
@@ -87,6 +74,6 @@ if(DKRETURN)
 			set(line "${out}")
 		endif()
 	endforeach()
-	message(STATUS "${line}")
+	#message(STATUS "${line}")
 	file(WRITE ${DKCMAKE}/cmake_vars.cmd "${line}")
 endif()
