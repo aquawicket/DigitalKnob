@@ -151,7 +151,8 @@ foreach(plugin ${dkdepend_list})
 	
 		#Add the DKPlugin to the app project
 		if(EXISTS "${plugin_path}/CMakeLists.txt")
-			if(MSVC OR XCODE)
+			#if(MSVC OR XCODE)
+			if(MULTI_CONFIG)
 				add_subdirectory(${plugin_path} ${plugin_path}/${OS})
 			else()
 				if(DEBUG)
@@ -175,7 +176,8 @@ foreach(plugin ${dkdepend_list})
 			dk_info("******* Prebuilding ${plugin} *******")
 			dk_setPath(${plugin_path}/${BUILD_DIR})
 			
-			if(MSVC OR XCODE)
+			#if(MSVC OR XCODE)
+			if(MULTI_CONFIG)
 				ANDROID32_dk_queueCommand	(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DANDROID_32=ON ${plugin_path})
 				ANDROID64_dk_queueCommand	(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DANDROID_64=ON ${plugin_path})
 				EMSCRIPTEN_dk_queueCommand	(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DEMSCRIPTEN=ON ${plugin_path})
@@ -511,7 +513,7 @@ if(WIN_64)
 	endforeach()
 		
 	############# Link Libraries, Set Startup Project #################
-	if(MSVC)
+	if(MULTI_CONFIG)
 		target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	else()
 		target_link_libraries(${APP_NAME} -static gcc stdc++ winpthread -dynamic)
@@ -1085,7 +1087,7 @@ if(ANDROID)
 	
 		###################### Backup Executable ###########################
 		if(BACKUP_APP_EXECUTABLES)
-			if(MSVC)
+			if(MULTI_CONFIG)
 				DEBUG_dk_rename(${DKPROJECT}/${OS}/app/build/outputs/apk/debug/app-debug.apk ${DKPROJECT}/${OS}/app/build/outputs/apk/app-debug.apk.backup OVERWRITE)
 				RELEASE_dk_rename(${DKPROJECT}/${OS}/app/build/outputs/apk/release/app-release-unsigned.apk ${DKPROJECT}/${OS}/app/build/outputs/apk/release/app-release-unsigned.apk.backup OVERWRITE)
 			else()
@@ -1168,7 +1170,7 @@ if(ANDROID)
 	target_include_directories(main PUBLIC ${SDL2}/include) # FIXME: this should be in sdl/DKMake.cmake somehow
 	
 	if(CMAKE_ANDROID_GUI)
-		if(MSVC)
+		if(VISUAL_STUDIO)
 			include_external_msproject(gradleAPK gradleAPK.androidproj TYPE 39E2626F-3545-4960-A6E8-258AD8476CE5)
 			set_property(TARGET gradleAPK PROPERTY VS_SOLUTION_DEPLOY ON) # NOT WORKING
 			set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT gradleAPK)

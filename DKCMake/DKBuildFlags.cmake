@@ -597,7 +597,8 @@ endif()
 
 # https://cmake.org/cmake/help/latest/manual/cmake-buildsystem.7.html#build-configurations
 
-if(VISUAL_STUDIO OR XCODE)
+#if(VISUAL_STUDIO OR XCODE)
+if(MULTI_CONFIG)
 	dk_set		(CMAKE_BUILD_TYPE DEBUG RELEASE)
 	dk_set		(BUILD_DIR ${OS})
 else()
