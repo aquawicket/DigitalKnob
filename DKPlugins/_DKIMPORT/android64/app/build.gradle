@@ -10,6 +10,7 @@ else {
 
 android {
 	compileSdkVersion 31
+	buildToolsVersion "30.0.3"
 	ndkVersion "23.1.7779620"
 	ndkPath 'C:/Users/Administrator/digitalknob/Development/3rdParty/android-sdk/ndk/23.1.7779620'
     defaultConfig {
