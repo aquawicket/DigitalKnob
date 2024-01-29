@@ -56,17 +56,6 @@ function message() {
 	echo "$@"	
 }
 
-###### call <command args> ######
-#function call() {
-#	if [ -z "$1" ]; then
-#		error "call <command args> requires at least 1 parameter"
-#		return $false
-#	fi
-#	
-#	echo -e "${magenta} $ $@ ${CLR}"
-#	"$@"
-#}
-
 ###### string_contains <string> <substring> ######
 function string_contains() {
 	if [ -z "$2" ]; then
