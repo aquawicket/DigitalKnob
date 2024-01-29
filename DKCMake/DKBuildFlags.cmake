@@ -589,14 +589,15 @@ endif()
 
 # GENERATOR			BUILD_DIR		OUTPUT_DIR
 # -----------------------------------------------
-# MSVC     			${OS}			${OS}/${TYPE}		
+# Visual Studio  	${OS}			${OS}/${TYPE}		
 # XCODE			    ${OS}			${OS}/${TYPE} 
 # MinGW Makefiles   ${OS}/${TYPE}	${OS}/${TYPE} 
 # Unix Makefiles    ${OS}/${TYPE}   ${OS}/${TYPE}  
 # ./configure       ${OS}/${TYPE}   ${OS}/${TYPE}
 
+# https://cmake.org/cmake/help/latest/manual/cmake-buildsystem.7.html#build-configurations
 
-if(MSVC OR XCODE)
+if(VISUAL_STUDIO OR XCODE)
 	dk_set		(CMAKE_BUILD_TYPE DEBUG RELEASE)
 	dk_set		(BUILD_DIR ${OS})
 else()
@@ -641,7 +642,7 @@ WIN_HOST_dk_depend	(imagemagick)
 WIN_HOST_dk_depend	(msys2)			
 
 
-if(MSVC)
+if(VISUAL_STUDIO)
 	WIN32_dk_set			(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -A Win32 ${DKCMAKE_FLAGS})
 	WIN64_dk_set			(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -A x64 ${DKCMAKE_FLAGS})
 else()
@@ -657,7 +658,7 @@ RASPBERRY_RELEASE_dk_set	(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -DCMA
 
 
 
-if(MSVC)
+if(VISUAL_STUDIO)
 	ANDROID32_dk_set		(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -A ARM ${DKCMAKE_FLAGS})
 	ANDROID64_dk_set		(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -A ARM64 ${DKCMAKE_FLAGS})
 else()

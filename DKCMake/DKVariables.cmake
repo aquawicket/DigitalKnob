@@ -85,6 +85,10 @@ endif()
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
 	dk_set(GNU ON)
 endif()
+string(FIND "${CMAKE_GENERATOR}" "Visual Studio" index)
+if(${index} GREATER -1)
+	dk_set(VISUAL_STUDIO ON)
+endif()
 
 
 ###########################################################################

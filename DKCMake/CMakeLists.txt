@@ -68,6 +68,14 @@ dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_START_VARIABLES.temp)
 
 
 PROJECT(DigitalKnob)
+get_property(MULTI_CONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
+if(MULTI_CONFIG)
+	set(MULTI_CONFIG TRUE CACHE INTERNAL "")
+	message(STATUS "*** Generator is Multi-Config ***")
+else()
+	set(SINGLE_CONFIG TRUE CACHE INTERNAL "")
+	message(STATUS "*** Generator is Single-Config ***")
+endif()
 dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_PROJECT_VARIABLES.temp)
 
 

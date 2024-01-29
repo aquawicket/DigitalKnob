@@ -1854,21 +1854,21 @@ function(dk_executeProcess commands) #NOASSERT #NOECHO
 	endif()	
 	
 	if(NOT ${noecho})
-		if(MSVC)
+		if(MSVC)	#FIXME: detect cmd instead of msvc
 			dk_info("\n${CLR}${magenta} $ cmd /c ${commands}\n")
 		else()
 			dk_info("\n${CLR}${magenta} $ ${commands}\n")
 		endif()
 	endif()
 	
-	if(MSVC)
+	if(MSVC)	#FIXME: detect cmd instead of msvc
 		execute_process(COMMAND cmd /c ${commands} RESULT_VARIABLE result ERROR_VARIABLE error) # FIXME: Do we always need  cmd /c  here?
 	else()
 		execute_process(COMMAND ${commands} RESULT_VARIABLE result ERROR_VARIABLE error)
 	endif()
 
 	if(NOT ${result} EQUAL 0)
-		if(MSVC)
+		if(MSVC)	#FIXME: detect cmd instead of msvc
 			execute_process(COMMAND timeout /t 2 /nobreak OUTPUT_QUIET WORKING_DIRECTORY ${CURRENT_DIR}) # wait 2 seconds for the stdout to flush before printing error
 		else()
 			execute_process(COMMAND sleep 2 WORKING_DIRECTORY ${CURRENT_DIR}) # wait 2 seconds for the stdout to flush before printing error
@@ -2168,7 +2168,7 @@ dk_createOsMacros("dk_queueCommand")
 #
 function(dk_visualStudioDebug path) #target #arch
 	DKDEBUGFUNC(${ARGV})
-	if(NOT MSVC)
+	if(NOT VISUAL_STUDIO)
 		return()
 	endif()
 	
@@ -2209,7 +2209,7 @@ dk_createOsMacros("dk_visualStudioDebug" "NO_DEBUG_RELEASE_TAGS")
 #
 function(dk_visualStudioRelease path) #target #arch
 	DKDEBUGFUNC(${ARGV})
-	if(NOT MSVC)
+	if(NOT VISUAL_STUDIO)
 		return()
 	endif()
 	
@@ -3568,6 +3568,9 @@ function(dk_printSettings)
 	dk_buildLog("UNAME:                         ${UNAME}")
 	dk_buildLog("MINGW:                         ${MINGW}")
 	dk_buildLog("MSYS:                          ${MSYS}")
+	dk_buildLog("MSVC:                          ${MSVC}")
+	dk_buildLog("VISUAL_STUDIO:					${VISUAL_STUDIO}")
+	dk_buildLog("XCODE:                         ${XCODE}")
 	dk_buildLog("CMAKE_LIBRARY_ARCHITECTURE:    ${CMAKE_LIBRARY_ARCHITECTURE}")
 	dk_buildLog("CMAKE_CPP_COMPILER_ID:         ${CMAKE_CPP_COMPILER_ID}")
 	dk_buildLog("CMAKE_CXX_COMPILER_ID:         ${CMAKE_CXX_COMPILER_ID}")
