@@ -549,7 +549,6 @@ goto:eof
 
 :: cmake_eval <cmake_commands;.;.;> <variables;.;.;.>
 :cmake_eval
-	::echo cmake_eval %1
 	if [%1] == [] (
 		echo "ERROR: cmake_eval() parameter1 is invalid"
 		goto:eof

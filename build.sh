@@ -237,6 +237,16 @@ validate_ostype
 DKPATH="$DIGITALKNOB/$DKBRANCH"
 DKCMAKE="$DIGITALKNOB/$DKBRANCH/DKCMake"
 
+
+###### validate_emscripten ######
+function validate_emscripten() {
+	cmake_eval "include('$DKIMPORTS/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_TOOLCHAIN_FILE"
+	echo EMSDK = $EMSDK
+	echo EMSDK_ENV = $EMSDK_ENV
+	echo EMSDK_TOOLCHAIN_FILE = $EMSDK_TOOLCHAIN_FILE
+}
+
+
 ###### cmake_eval ######
 function cmake_eval() {
 	if [ -z "$1" ]; then
@@ -247,14 +257,26 @@ function cmake_eval() {
 	CMAKE=$(which cmake)
 	#echo "CMAKE = $CMAKE"
 	
-	commands="$@"
+	commands="$1"
+	variables="$2"
 	#echo "commands = $commands"
 	#set commands=$commands:"=%"  #TODO: remove double quotes
 	DKCOMMAND="$commands"
-	#echo "DKCOMMAND = $DKCOMMAND"
+	echo "DKCOMMAND = $DKCOMMAND"
 	
-	$CMAKE "-DDKCMAKE=$DKCMAKE" "-DDKCOMMAND=$DKCOMMAND" -P $DKCMAKE/dev/cmake_eval.cmake --log-level=TRACE >cmake_eval.out 2>cmake_eval.err
-	echo return code: $?
+	#$CMAKE "-DDKCMAKE=$DKCMAKE" "-DDKCOMMAND=$DKCOMMAND" -P $DKCMAKE/dev/cmake_eval.cmake --log-level=TRACE >cmake_eval.out 2>cmake_eval.err
+	
+	if [[ -n "$2" ]]; then
+		$CMAKE "-DDKCMAKE=$DKCMAKE" "-DDKCOMMAND=$DKCOMMAND" "-DDKRETURN=$2" -P $DKCMAKE/dev/cmake_eval.cmake
+		if file_exists $DKCMAKE/cmake_vars.sh; then
+			source $DKCMAKE/cmake_vars.sh
+			rm $DKCMAKE/cmake_vars.sh
+		fi
+	else
+		$CMAKE "-DDKCMAKE=$DKCMAKE" "-DDKCOMMAND=$DKCOMMAND" -P $DKCMAKE/dev/cmake_eval.cmake
+	fi
+	
+	#echo return code: $?
 	
 	
 	out=""
@@ -660,9 +682,9 @@ while :
 	# MSYS = 
 
 	# build-essential for MSYS2
-		if  [[ -n "$MSYSTEM" ]]; then
-        	cmake_eval "include('C:/Users/$USERNAME/digitalknob/Development/DKCMake/DK.cmake');set(WIN 1);include('C:/Users/$USERNAME/digitalknob/Development/3rdParty/_DKIMPORTS/msys2/DKMAKE.cmake')"
-    	fi
+	if  [[ -n "$MSYSTEM" ]]; then
+       	cmake_eval "include('C:/Users/$USERNAME/digitalknob/Development/DKCMake/DK.cmake');set(WIN 1);include('C:/Users/$USERNAME/digitalknob/Development/3rdParty/_DKIMPORTS/msys2/DKMAKE.cmake')"
+    fi
 	
 	#if [[ "$MSYSTEM" == "CLANG32" ]]; then
 	#	validate_package cmake mingw-w64-clang-i686-cmake
@@ -835,10 +857,20 @@ while :
 	    	TARGET="main"
 	    fi
 	fi
+	
+	
 	if [[ "$OS" == "emscipten" ]]; then
-	    #TODO:  create cmake_eval for emsdk stuff
-		echo -e "emscripten incomplete...\n"
+	    call validate_emscripten
+		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
+			call "$EMSDK_ENV" & "$CMAKE" -G "MinGW Makefiles" -DCMAKE_TOOLCHAIN_FILE="$EMSDK_TOOLCHAIN_FILE" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+		fi
+		if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
+			call "$EMSDK_ENV" & "$CMAKE" -G "MinGW Makefiles" -DCMAKE_TOOLCHAIN_FILE="$EMSDK_TOOLCHAIN_FILE" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
+		fi
+		TARGET=${APP}_APP
 	fi
+	
+	
 	if [[ "$OS" == "ios32" ]]; then
 	   #TODO:  create cmake_eval for xcode stuff
 		call cmake -G "Xcode" -DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake -DPLATFORM=OS -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
