@@ -7,8 +7,9 @@ if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: k
 :: GLOBAL USER VARIABLES
 ::--------------------------------------------------------
 set "SCRIPTPATH=%~dp0"
+set "SCRIPTPATH=%SCRIPTPATH:~0,-1%"
 set "SCRIPTNAME=%~nx0"
-echo %SCRIPTPATH%%SCRIPTNAME%
+echo %SCRIPTPATH%\%SCRIPTNAME%
 
 set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi"
 set "GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.30.1.windows.1/Git-2.30.1-32-bit.exe"
@@ -305,8 +306,8 @@ goto pickapp
 :: reload()
 :reload
 	echo .
-	echo reloading %~f0
-	start "" "%~f0"
+	echo reloading %SCRIPTNAME%
+	start "" "%SCRIPTPATH%\%SCRIPTNAME%"
 	exit
 goto:eof
 
@@ -371,6 +372,14 @@ goto:eof
 	set "DK3RDPARTY=%DKPATH%\3rdParty"
 	set "DKIMPORTS=%DK3RDPARTY%\_DKIMPORTS"
 	echo DKBRANCH = %DKBRANCH%
+	
+	if not %SCRIPTPATH% == %DKPATH% (
+		if not exist %DKPATH%\%SCRIPTNAME% (
+			copy %SCRIPTPATH%\%SCRIPTNAME% %DKPATH%\%SCRIPTNAME%
+		)
+		set "SCRIPTPATH=%DKPATH%"
+		call:reload
+	)
 	call:check_error
 goto:eof
 
