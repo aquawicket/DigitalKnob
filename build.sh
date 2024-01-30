@@ -162,66 +162,6 @@ function validate_package() {
 if command_exists tce-load; then
 	validate_package libzstd libzstd
 fi
-	
-###### validate_branch ######
-function validate_branch() {
-	# If the current folder matches the current branch set DKBRANCH, default to Development
-	validate_package git git
-	GIT=$(which git)
-	echo "\$GIT = $GIT"
-	
-	FOLDER="$(basename $(pwd))"
-	DKBRANCH="Development"
-	
-	if file_exists .git; then
-		BRANCH="$($GIT rev-parse --abbrev-ref HEAD)"
-		if [[ "$BRANCH" == "$FOLDER" ]]; then
-			DKBRANCH="$FOLDER"
-		fi
-	fi
-	
-	echo "DKBRANCH = $DKBRANCH"
-	DKPATH="$DIGITALKNOB/$DKBRANCH"
-	DKCMAKE="$DKPATH/DKCMake"
-	DK3RDPARTY="$DKPATH/3rdParty"
-	DKIMPORTS="$DK3RDPARTY/_DKIMPORTS"
-
-	# make sure script is running from DKPATH
-	if [[ "$SCRIPTPATH" == "$DKPATH" ]]; then
-		if ! file_exists $DKPATH/$SCRIPTNAME; then
-			cp $SCRIPTPATH/$SCRIPTNAME $DKPATH/$SCRIPTNAME
-		fi
-		echo .
-		echo "RELOADING SCRIPT TO -> $DKPATH/$SCRIPTNAME"
-		read -p "Press enter to continue"
-		clear 
-		$SCRIPTPATH/$SCRIPTNAME
-		rm $SCRIPTPATH/$SCRIPTNAME
-		exit
-	fi
-}
-validate_branch
-
-
-###### clear_cmake_cache ######
-function clear_cmake_cache() {
-	echo "Clearing CMake cache . . ."
-	cd $DIGITALKNOB
-	find . -name "CMakeCache.*" -delete
-	rm -rf `find . -type d -name CMakeFiles`
-}
-
-
-###### delete_temp_files ######
-function delete_temp_files() {
-	echo "Deleting .TMP files . . ."
-	cd $DIGITALKNOB
-	rm -rf `find . -type d -name *.tmp`
-	rm -rf `find . -type d -name *.TMP`
-	find . -name "*.tmp" -delete
-	find . -name "*.TMP" -delete
-}
-
 
 ###### validate_ostype ######
 function validate_ostype() {
@@ -248,6 +188,66 @@ function validate_ostype() {
 	fi
 }
 validate_ostype
+
+###### validate_branch ######
+function validate_branch() {
+	# If the current folder matches the current branch set DKBRANCH, default to Development
+	validate_package git git
+	GIT=$(which git)
+	echo "\$GIT = $GIT"
+	
+	FOLDER="$(basename $(pwd))"
+	DKBRANCH="Development"
+	
+	if file_exists .git; then
+		BRANCH="$($GIT rev-parse --abbrev-ref HEAD)"
+		if [[ "$BRANCH" == "$FOLDER" ]]; then
+			DKBRANCH="$FOLDER"
+		fi
+	fi
+	
+	echo "DKBRANCH = $DKBRANCH"
+	DKPATH="$DIGITALKNOB/$DKBRANCH"
+	DKCMAKE="$DKPATH/DKCMake"
+	DK3RDPARTY="$DKPATH/3rdParty"
+	DKIMPORTS="$DK3RDPARTY/_DKIMPORTS"
+
+	# make sure script is running from DKPATH
+	if ! [[ "$SCRIPTPATH" == "$DKPATH" ]]; then
+		if ! file_exists $DKPATH/$SCRIPTNAME; then
+			echo "$DKPATH/$SCRIPTNAME"
+			cp $SCRIPTPATH/$SCRIPTNAME $DKPATH/$SCRIPTNAME
+		fi
+		echo .
+		echo "RELOADING SCRIPT TO -> $DKPATH/$SCRIPTNAME"
+		read -p "Press enter to continue"
+		clear 
+		$DKPATH/$SCRIPTNAME
+		rm $SCRIPTPATH/$SCRIPTNAME
+		exit
+	fi
+}
+validate_branch
+
+
+###### clear_cmake_cache ######
+function clear_cmake_cache() {
+	echo "Clearing CMake cache . . ."
+	cd $DIGITALKNOB
+	find . -name "CMakeCache.*" -delete
+	rm -rf `find . -type d -name CMakeFiles`
+}
+
+
+###### delete_temp_files ######
+function delete_temp_files() {
+	echo "Deleting .TMP files . . ."
+	cd $DIGITALKNOB
+	rm -rf `find . -type d -name *.tmp`
+	rm -rf `find . -type d -name *.TMP`
+	find . -name "*.tmp" -delete
+	find . -name "*.TMP" -delete
+}
 
 DKPATH="$DIGITALKNOB/$DKBRANCH"
 DKCMAKE="$DKPATH/DKCMake"
