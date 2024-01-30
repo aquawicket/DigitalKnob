@@ -24,8 +24,9 @@ if(MSYSTEM)
 	endif()
 	
 	dk_set(CMAKE_EXE cmake)
-	dk_msys2(${CMAKE_EXE} --version)
 	dk_debug("CMAKE_EXE = ${CMAKE_EXE}")
+	dk_msys2(${CMAKE_EXE} --version)
+	
 	return()
 endif()
 

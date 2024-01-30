@@ -20,7 +20,8 @@ if(MSYSTEM)
 	endif()
 	
 	dk_set(GCC_EXE gcc)
-	dk_msys2(${GCC_EXE} --version)
 	dk_debug("GCC_EXE = ${GCC_EXE}")
+	dk_msys2(${GCC_EXE} --version)
+	
 	return()
 endif()

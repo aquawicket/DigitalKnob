@@ -7,13 +7,27 @@ MAC_HOST_dk_queueCommand(brew install autogen)
 MAC_HOST_dk_queueCommand(brew install autoconf)
 MAC_HOST_dk_queueCommand(brew install automake)
 
-if(MSYS2)
-	#pacman -S mingw-w64-clang-i686-autotools		# CLANG32
-	#pacman -S mingw-w64-clang-x86_64-autotools		# CLANG64
-	#pacman -S mingw-w64-clang-aarch64-autotools	# CLANGARM64
-	#pacman -S mingw-w64-i686-autotools				# MINGW32
-	dk_msys2("pacman -S mingw-w64-x86_64-autotools --noconfirm")	# MINGW64
-	#pacman -S mingw-w64-ucrt-x86_64-autotools		# UCRT64
+if(MSYSTEM)
+	dk_depend(msys2)
 	
-	#dk_msys2("export ACLOCAL_PATH=${MSYS2}/usr/share/aclocal")
+	if(CLANG32)
+		dk_msys2("pacman -S mingw-w64-clang-i686-autotools --noconfirm")	# CLANG32
+	elseif(CLANG64)
+		dk_msys2("pacman -S mingw-w64-clang-x86_64-autotools --noconfirm")	# CLANG64
+	elseif(CLANGARM64)
+		dk_msys2("pacman -S mingw-w64-clang-aarch64-autotools --noconfirm")	# CLANGARM64
+	elseif(MINGW32)
+		dk_msys2("pacman -S mingw-w64-i686-autotools --noconfirm")			# MINGW32
+	elseif(MINGW64)
+		dk_msys2("pacman -S mingw-w64-x86_64-autotools --noconfirm")		# MINGW64
+	elseif(UCRT64)
+		dk_msys2("pacman -S mingw-w64-ucrt-x86_64-autotools --noconfirm")	# UCRT64
+	else()
+		dk_error("MSYSTEM is invalid")
+	endif()
+	
+	dk_set(GCC_EXE gcc)
+	dk_msys2(${GCC_EXE} --version)
+	dk_debug("GCC_EXE = ${GCC_EXE}")
+	return()
 endif()

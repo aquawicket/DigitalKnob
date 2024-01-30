@@ -24,7 +24,8 @@ endif()
 ### ADD msys2 bin directory to path environment variable
 #dk_setEnv("PATH" "${MSYS2}/usr/bin")
 
-## DEFINED EXTRA MSYS2 VARIABLES
+# FIXME: currently already done int DK.cmake
+## DEFINED EXTRA MSYS2 VARIABLES   
 if(DEFINED ENV{MSYSTEM})
 	set(MSYSTEM $ENV{MSYSTEM}	CACHE INTERNAL "")	
 	set($ENV{MSYSTEM} TRUE		CACHE INTERNAL "")
