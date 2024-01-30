@@ -181,6 +181,24 @@ function validate_branch() {
 	fi
 	
 	echo "DKBRANCH = $DKBRANCH"
+	DKPATH="$DIGITALKNOB/$DKBRANCH"
+	DKCMAKE="$DKPATH/DKCMake"
+	DK3RDPARTY="$DKPATH/3rdParty"
+	DKIMPORTS="$DK3RDPARTY/_DKIMPORTS"
+
+	# make sure script is running from DKPATH
+	if [[ "$SCRIPTPATH" == "$DKPATH" ]]; then
+		if ! file_exists $DKPATH/$SCRIPTNAME; then
+			cp $SCRIPTPATH/$SCRIPTNAME $DKPATH/$SCRIPTNAME
+		fi
+		echo .
+		echo "RELOADING SCRIPT TO -> $DKPATH/$SCRIPTNAME"
+		read -p "Press enter to continue"
+		clear 
+		$SCRIPTPATH/$SCRIPTNAME
+		rm $SCRIPTPATH/$SCRIPTNAME
+		exit
+	fi
 }
 validate_branch
 

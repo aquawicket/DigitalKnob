@@ -367,11 +367,12 @@ goto:eof
 			set "DKBRANCH=%FOLDER%"
 		)
 	)
+	
+	echo DKBRANCH = %DKBRANCH%
 	set "DKPATH=%DIGITALKNOB%\%DKBRANCH%"
 	set "DKCMAKE=%DKPATH%\DKCMake"
 	set "DK3RDPARTY=%DKPATH%\3rdParty"
 	set "DKIMPORTS=%DK3RDPARTY%\_DKIMPORTS"
-	echo DKBRANCH = %DKBRANCH%
 	
 	:: make sure script is running from DKPATH
 	if not %SCRIPTPATH% == %DKPATH% (
