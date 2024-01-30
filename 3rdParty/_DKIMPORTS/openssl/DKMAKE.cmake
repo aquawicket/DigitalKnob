@@ -17,7 +17,7 @@ endif()
 
 
 #if(EMSCRIPTEN)
-#	dk_copy(${OPENSSL-CMAKE} ${OPENSSL})
+#	dk_copy(${OPENSSL_CMAKE} ${OPENSSL})
 #endif()
 
 ### LINK ###

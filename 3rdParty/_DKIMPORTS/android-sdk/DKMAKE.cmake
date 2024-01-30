@@ -7,7 +7,7 @@
 #endif()
 
 
-dk_set(ANDROID-SDK ${3RDPARTY}/android-sdk)
+dk_set(ANDROID_SDK ${3RDPARTY}/android-sdk)
 dk_depend(openjdk)
 dk_depend(openjdk-8u41)
 dk_depend(android-cmdline-tools)
@@ -15,7 +15,7 @@ dk_depend(android-cmdline-tools)
 
 if(NOT EXISTS ${ANDROID_SDK})
 	dk_info("Installing android-sdk")
-	dk_set(ANDROID-SDK ${3RDPARTY}/android-sdk)
+	dk_set(ANDROID_SDK ${3RDPARTY}/android-sdk)
 	dk_makeDirectory(${ANDROID_SDK})
 	dk_patch(android-sdk ${ANDROID_SDK})
 	dk_setEnv("ANDROID_HOME" ${ANDROID_SDK})

@@ -9,7 +9,7 @@
 # https://cfdownload.adobe.com/pub/adobe/coldfusion/java/java11/java110151/jdk-11.0.15.1_windows-x64_bin.zip
 # https://gist.github.com/douglarek/bbda8cc23a562cb5d5798717d57bc9e9
 
-#dk_set(OPENJDK-11_VERSION 11)
+#dk_set(OPENJDK_11_VERSION 11)
 
 WIN_HOST_dk_import	(https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip PATCH)
 #MAC_HOST_dk_import	(https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz PATCH)

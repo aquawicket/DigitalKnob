@@ -1106,7 +1106,7 @@ if(ANDROID)
 		#endif()
 	
 		######## Create local.properties file that points to android-sdk path #############
-		set(localProperties "sdk.dir=${ANDROID-SDK}")
+		set(localProperties "sdk.dir=${ANDROID_SDK}")
 	
 		####### Import Android Gui Build files ############################################
 		if(DEBUG)
@@ -1225,7 +1225,7 @@ if(ANDROID)
 				POST_BUILD
 				TARGET main
 				COMMAND ${CMAKE_COMMAND} -E echo "Installing <app-debug.apk> to device"
-				COMMAND ${CMD} ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/Debug/app/build/outputs/apk/debug/app-debug.apk
+				COMMAND ${CMD} ${ANDROID_SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/Debug/app/build/outputs/apk/debug/app-debug.apk
 				COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing <app-debug.apk> to device")
 		if(RELEASE)
 		endif()
@@ -1233,7 +1233,7 @@ if(ANDROID)
 				POST_BUILD
 				TARGET main
 				COMMAND ${CMAKE_COMMAND} -E echo "Installing <app-release-unsigned.apk> to device"
-				COMMAND ${CMD} ${ANDROID-SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/Release/app/build/outputs/apk/release/app-release-unsigned.apk
+				COMMAND ${CMD} ${ANDROID_SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/Release/app/build/outputs/apk/release/app-release-unsigned.apk
 				COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing <app-release-unsigned.apk> to device")
 		endif()
 	endif()
