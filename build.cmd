@@ -346,10 +346,12 @@ goto:eof
 	:: https://stackoverflow.com/a/33662275
 	:: If the current folder matches the current branch set DKBRANCH, default to Development
 	for %%I in (.) do set "FOLDER=%%~nxI"
-	"%GIT%" branch | find "* %FOLDER%" > NUL & IF ERRORLEVEL 1 (
-		set "DKBRANCH=Development"
-	) else (
-		set "DKBRANCH=%FOLDER%"
+	
+	set "DKBRANCH=Development"
+	if exist .git (
+		"%GIT%" branch | find "* %FOLDER%" > NUL & IF ERRORLEVEL 0 (
+			set "DKBRANCH=%FOLDER%"
+		)
 	)
 	set "DKPATH=%DIGITALKNOB%\%DKBRANCH%"
 	set "DKCMAKE=%DKPATH%\DKCMake"
