@@ -66,14 +66,19 @@ cmake_eval("${DKCOMMAND}")
 
 if(DKRETURN)
 	#message(STATUS "DKRETURN = ${DKRETURN}")
+	
+	## windows cmd
 	foreach(item ${DKRETURN})
-		set(out "set \"${item}=${${item}}\"")
-		if(line)
-			set(line "${line} & ${out}")
-		else()
-			set(line "${out}")
-		endif()
+		set(line "set \"${item}=${${item}}\" \n")
+		file(APPEND ${DKCMAKE}/cmake_vars.cmd "${line}\n")
 	endforeach()
-	#message(STATUS "${line}")
-	file(WRITE ${DKCMAKE}/cmake_vars.cmd "${line}")
+	
+	## unix shell
+	file(APPEND ${DKCMAKE}/cmake_vars.sh "#!/bin/bash \n")
+	foreach(var ${DKRETURN})
+	    string(MAKE_C_IDENTIFIER ${var} var_)
+		set(line "export ${var_}=\"${${var}}\" \n")
+        file(APPEND ${DKCMAKE}/cmake_vars.sh "${line}\n")
+	endforeach()
+	
 endif()

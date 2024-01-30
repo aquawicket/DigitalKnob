@@ -1,10 +1,10 @@
 ### android-sdk ###
 # https://androidsdkoffline.blogspot.com/
 
-if(NOT ANDROID)
-	dk_undepend(android-sdk)
-	dk_return()
-endif()
+#if(NOT ANDROID)
+#	dk_undepend(android-sdk)
+#	dk_return()
+#endif()
 
 
 dk_set(ANDROID-SDK ${3RDPARTY}/android-sdk)

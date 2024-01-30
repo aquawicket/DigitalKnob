@@ -225,7 +225,7 @@ validate_ostype
 DKPATH="$DIGITALKNOB/$DKBRANCH"
 DKCMAKE="$DKPATH/DKCMake"
 DK3RDPARTY="$DKPATH/3rdParty"
-DKIMPORT="$DK3RDPARTY/_DKIMPORTS"
+DKIMPORTS="$DK3RDPARTY/_DKIMPORTS"
 
 
 ###### validate_emscripten ######
@@ -254,13 +254,14 @@ function cmake_eval() {
 	#$CMAKE "-DDKCMAKE=$DKCMAKE" "-DDKCOMMAND=$DKCOMMAND" -P $DKCMAKE/dev/cmake_eval.cmake --log-level=TRACE >cmake_eval.out 2>cmake_eval.err
 	
 	if [[ -n "$2" ]]; then
-		$CMAKE "-DDKCMAKE=$DKCMAKE" "-DDKCOMMAND=$DKCOMMAND" "-DDKRETURN=$2" -P $DKCMAKE/dev/cmake_eval.cmake
+		call $CMAKE "-DDKCMAKE=$DKCMAKE" "-DDKCOMMAND=$DKCOMMAND" "-DDKRETURN=$2" -P $DKCMAKE/dev/cmake_eval.cmake
 		if file_exists $DKCMAKE/cmake_vars.sh; then
+	    	echo "executing cmake_vars.sh"
 			source $DKCMAKE/cmake_vars.sh
-			rm $DKCMAKE/cmake_vars.sh
+			#rm $DKCMAKE/cmake_vars.sh
 		fi
 	else
-		$CMAKE "-DDKCMAKE=$DKCMAKE" "-DDKCOMMAND=$DKCOMMAND" -P $DKCMAKE/dev/cmake_eval.cmake
+		call $CMAKE -DDKCMAKE=$DKCMAKE -DDKCOMMAND=$DKCOMMAND -P $DKCMAKE/dev/cmake_eval.cmake
 	fi
 	
 	#echo return code: $?
@@ -330,8 +331,8 @@ echo "SCRIPTNAME = $SCRIPTNAME"
 # UCRT64		=	x86_64		ucrt		gcc			libstdc++		/ucrt64
 echo "MSYSTEM = $MSYSTEM"
 
-CMAKE_PATH=$(which cmake)
-echo "CMAKE_PATH = $CMAKE_PATH"
+CMAKE=$(which cmake)
+echo "CMAKE = $CMAKE"
 
 $SUDO echo
 
@@ -792,27 +793,24 @@ while :
 		mkdir -p $DKPATH/DKApps/$APP/$OS/Release
 	fi
 	
-	#TODO: create a cmake_eval for android_ndk stuff
 	if [[ "$OS" == "android"* ]]; then
-	    cmake_eval "include('$DKIMPORTS/android-ndk/DKMAKE.cmake')"
-		#ANDROID_API="31"
+	    cmake_eval "include('$DKIMPORTS/android-ndk/DKMAKE.cmake')" "ANDROID-NDK;ANDROID_TOOLCHAIN"
+	    echo "ANDROID_NDK = $ANDROID_NDK"
+	    echo "ANDROID_TOOLCHAIN = $ANDROID_TOOLCHAIN"
+		ANDROID_API="31"
+		
 		#if [[ "$OSTYPE" == "linux-android" ]]; then
 		#    ANDROID_NDK_BUILD="23.2.8568313"
 		#else
 		#	ANDROID_NDK_BUILD="23.1.7779620"
-		#fi
-		#ANDROID_NDK="$DKPATH/3rdParty/android-sdk/ndk/$ANDROID_NDK_BUILD"
-		#if file_exists $ANDROID_NDK/build/cmake/android.toolchain.cmake; then
-		#	ANDROID_TOOLCHAIN=$ANDROID_NDK/build/cmake/android.toolchain.cmake
-		#fi
 	fi
 			
 	if [[ "$OS" == "android32" ]]; then
 		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-	     	call cmake -G "Unix Makefiles" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=$ANDROID_API -DANDROID-NDK=$ANDROID_NDK -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+	     	call cmake -G "Unix Makefiles" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=$ANDROID_API -DANDROID-NDK=$ANDROID-NDK -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
 	    fi
 	    if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-	     	call cmake -G "Unix Makefiles" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=$ANDROID_API -DANDROID-NDK=$ANDROID_NDK -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
+	     	call cmake -G "Unix Makefiles" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=$ANDROID_API -DANDROID-NDK=$ANDROID-NDK -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
 	    fi
 	    TARGET="main"
 	fi

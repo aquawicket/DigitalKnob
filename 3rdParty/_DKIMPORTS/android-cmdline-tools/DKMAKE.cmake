@@ -4,10 +4,10 @@
 # https://developer.android.com/studio?hl=fr#command-tools
 # https://androidsdkoffline.blogspot.com/p/android-sdk-cmdline-tools-offline.html
 
-if(NOT ANDROID)
-	dk_undepend(android-cmdline-tools)
-	dk_return()
-endif()
+#if(NOT ANDROID)
+#	dk_undepend(android-cmdline-tools)
+#	dk_return()
+#endif()
 
 #dk_depend(openjdk-8u41)
 

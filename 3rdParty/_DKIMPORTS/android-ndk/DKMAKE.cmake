@@ -4,16 +4,15 @@
 # https://android.googlesource.com/platform/ndk/+/refs/heads/ndk-release-r21/docs/BuildSystemMaintainers.md
 # https://androidsdkoffline.blogspot.com/p/android-ndk-side-by-side-direct-download.html
 
-if(NOT ANDROID)
-	dk_undepend(android-ndk)
-	dk_return()
-endif()
+#if(NOT ANDROID)
+#	dk_undepend(android-ndk)
+#	dk_return()
+#endif()
 
 
 ### DEPEND ###
 dk_depend(android-sdk)
 
-# NOTE: these variables are rquired by DKBuild.js
 
 # r21e
 #dk_set(ANDROID-NDK_VERSION r21e)
@@ -69,8 +68,7 @@ LINUX_HOST_dk_import(${ANDROID-NDK_LINUX_DL} PATH ${ANDROID-SDK}/ndk/${ANDROID-N
 else()
 LINUX_HOST_dk_import(${ANDROID-NDK_ANDROID_DL} PATH ${ANDROID-SDK}/ndk/${ANDROID-NDK_BUILD})
 endif()
+dk_set(ANDROID_TOOLCHAIN "${ANDROID-NDK}/build/cmake/android.toolchain.cmake")
 
 dk_setEnv("NDK_ROOT" ${ANDROID-NDK})
 dk_setEnv("VS_NdkRoot" ${ANDROID-NDK})
-
-#dk_dump(ANDROID-NDK)
