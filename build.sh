@@ -741,34 +741,35 @@ while :
 	LINK="Static"
 	
 	###### BUILD CMAKE_CONFIGURE_STRING ######
-	cmake_string=""
+	#cmake_string=""
+	declare -a cmake_string
 	if [[ $TYPE == "Debug" ]] || [[ $TYPE == "All" ]]; then
-		cmake_string+="-DDEBUG=ON "
+		cmake_string+=( "-DDEBUG=ON" )
 	else
-		cmake_string+="-DDEBUG=OFF "
+		cmake_string+=( "-DDEBUG=OFF" )
 	fi
 	if [[ $TYPE == "Release" ]] || [[ $TYPE == "All" ]]; then
-		cmake_string+="-DRELEASE=ON "
+		cmake_string+=( "-DRELEASE=ON" )
 	else
-		cmake_string+="-DRELEASE=OFF "
+		cmake_string+=( "-DRELEASE=OFF" )
 	fi
 	if [[ $LEVEL == "Build" ]]; then
-		cmake_string+="-DBUILD=ON "
+		cmake_string+=( "-DBUILD=ON" )
 	fi
 	if [[ $LEVEL == "Rebuild" ]]; then
-		cmake_string+="-DREBUILD=ON "
+		cmake_string+=( "-DREBUILD=ON" )
 	fi
 	if [[ $LEVEL == "RebuildAll" ]]; then
-		cmake_string+="-DREBUILDALL=ON "
+		cmake_string+=( "-DREBUILDALL=ON" )
 	fi
 	if [[ $LINK == "Static" ]]; then
-		cmake_string+="-DSTATIC=ON "
+		cmake_string+=( "-DSTATIC=ON" )
 	fi
 	if [[ $LINK == "Shared" ]]; then
-		cmake_string+="-DSHARED=ON "
+		cmake_string+=( "-DSHARED=ON" )
 	fi
 	
-	cmake_string+="-DCMAKE_VERBOSE_MAKEFILE=1 "
+	cmake_string+=( "-DCMAKE_VERBOSE_MAKEFILE=1" )
 	#echo cmake_string = $cmake_string
 	
 	
@@ -790,7 +791,7 @@ while :
 	cmake_eval "include('$DKIMPORTS/make/DKMAKE.cmake')" "MAKE_PROGRAM"
 	echo "MAKE_PROGRAM = $MAKE_PROGRAM"
 	if [[ -n "$MAKE_PROGRAM" ]]; then
-		cmake_string+="-DCMAKE_MAKE_PROGRAM=$MAKE_PROGRAM "
+		cmake_string+=( "-DCMAKE_MAKE_PROGRAM=$MAKE_PROGRAM" )
 	fi
 	
 	###### C_COMPILER; CXX_COMPILER ######
@@ -807,10 +808,10 @@ while :
 		echo "CXX_COMPILER = $CXX_COMPILER"
 	fi
 	if [[ -n "$C_COMPILER" ]]; then
-		cmake_string+="-DCMAKE_C_COMPILER=$C_COMPILER "
+		cmake_string+=( "-DCMAKE_C_COMPILER=$C_COMPILER" )
 	fi
 	if [[ -n "$CXX_COMPILER" ]]; then
-		cmake_string+="-DCMAKE_CXX_COMPILER=$CXX_COMPILER "
+		cmake_string+=( "-DCMAKE_CXX_COMPILER=$CXX_COMPILER" )
 	fi
 	
 	
@@ -819,9 +820,9 @@ while :
 		#call export LDFLAGS="-static -mconsole"
 		EXE_LINKER_FLAGS="-static -mconsole"
 	fi
-	#if [[ -n "$EXE_LINKER_FLAGS" ]]; then
-	#	cmake_string+="-DCMAKE_EXE_LINKER_FLAGS=$EXE_LINKER_FLAGS "
-	#fi
+	if [[ -n "$EXE_LINKER_FLAGS" ]]; then
+		cmake_string+=( "-DCMAKE_EXE_LINKER_FLAGS=$EXE_LINKER_FLAGS" )
+	fi
 	
 	
 	
@@ -983,7 +984,8 @@ while :
 	
 	if [[ "$OS" == "win64" ]]; then
 		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-			call $CMAKE -G "$GENERATOR" $cmake_string -DCMAKE_EXE_LINKER_FLAGS="$EXE_LINKER_FLAGS" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+			#call $CMAKE -G "$GENERATOR" $cmake_string -DCMAKE_EXE_LINKER_FLAGS="$EXE_LINKER_FLAGS" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+			call $CMAKE -G "$GENERATOR" "${cmake_string[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
 		fi
 		if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
 			call $CMAKE -G "$GENERATOR" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
