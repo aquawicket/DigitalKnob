@@ -7,6 +7,8 @@
 ###### global variables ######
 SCRIPTPATH=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
 SCRIPTNAME=$(basename "$0")
+echo $SCRIPTPATH/$SCRIPTNAME
+
 true=0
 false=1
 CLR="\033[0m"

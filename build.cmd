@@ -6,6 +6,10 @@ if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: k
 ::--------------------------------------------------------
 :: GLOBAL USER VARIABLES
 ::--------------------------------------------------------
+set "SCRIPTPATH=%~dp0"
+set "SCRIPTNAME=%~nx0"
+echo %SCRIPTPATH%%SCRIPTNAME%
+
 set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi"
 set "GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.30.1.windows.1/Git-2.30.1-32-bit.exe"
 set "GIT_USER_EMAIL=aquawicket@hotmail.com"
