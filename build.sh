@@ -165,12 +165,15 @@ function validate_branch() {
 	echo "\$GIT = $GIT"
 	
 	FOLDER="$(basename $(pwd))"
-	DKBRANCH="$($GIT rev-parse --abbrev-ref HEAD)"
-	if [[ "$DKBRANCH" == "$FOLDER" ]]; then
-		DKBRANCH="$FOLDER"
-	else
-		DKBRANCH="Development"
+	DKBRANCH="Development"
+	
+	if file_exists .git; then
+		BRANCH="$($GIT rev-parse --abbrev-ref HEAD)"
+		if [[ "$BRANCH" == "$FOLDER" ]]; then
+			DKBRANCH="$FOLDER"
+		fi
 	fi
+	
 	echo "DKBRANCH = $DKBRANCH"
 }
 validate_branch
