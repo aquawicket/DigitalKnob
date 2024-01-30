@@ -238,7 +238,6 @@ function validate_ostype() {
 ###### validate_branch ######
 function validate_branch() {
 	# If the current folder matches the current branch set DKBRANCH, default to Development
-	validate_git
 	
 	FOLDER="$(basename $(pwd))"
 	DKBRANCH="Development"
@@ -744,8 +743,7 @@ while :
         echo "MSYS2 = $MSYS2"
 		
 		cmake_eval "include('$DKIMPORTS/make/DKMAKE.cmake')"
-		MAKE_EXE=$(which make)
-		echo "MAKE_EXE = $MAKE_EXE"
+		CMAKE_MAKE_PROGRAM="${MSYS}/mingw64/bin/mingw32-make.exe"
     fi
 
 	#TODO: turn into a cmake_eval
@@ -763,14 +761,13 @@ while :
 	call export SHELL="/bin/bash"
 	
 	if [[ "$OSTYPE" == "linux-gnu"* ]] || [[ $MSYSTEM == "MINGW32" ]] || [[ $MSYSTEM == "MINGW64" ]] || [[ $MSYSTEM == "MSYS" ]]; then
-		#validate_package gcc toolchain
 		cmake_eval "include('$DKIMPORTS/gcc/DKMAKE.cmake')"
-		GCC_EXE=$(which gcc)
-		GPP_EXE=$(which g++)
-		call export CC="$GCC_EXE"
-		call export CXX="$GPP_EXE"
-		echo "GCC_EXE = $GCC_EXE"
-		echo "GPP_EXE = $GPP_EXE"
+		CMAKE_C_COMPILER="${MSYS}/mingw64/bin/gcc.exe"
+		CMAKE_CXX_COMPILER="${MSYS}/mingw64/bin/g++.exe"
+		#GCC_EXE=$(which gcc)
+		#GPP_EXE=$(which g++)
+		#call export CC="$GCC_EXE"
+		#call export CXX="$GPP_EXE"
 	fi
 
 	
@@ -975,11 +972,11 @@ while :
 	fi
 	if [[ "$OS" == "win64" ]]; then
 		#MSYS2="$DKPATH/3rdParty/msys2-x86_64-20221216"
-		call export PATH=$MSYS2/mingw64/bin:$PATH
-		call export PATH=$MSYS2/usr/bin:$PATH
+		#call export PATH=$MSYS2/mingw64/bin:$PATH
+		#call export PATH=$MSYS2/usr/bin:$PATH
 		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
 			if [[ -n "$MSYSTEM" ]]; then
-				call $CMAKE -G "MSYS Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+				call $CMAKE -G "MSYS Makefiles" $cmake_string -DCMAKE_C_COMPILER="$CMAKE_C_COMPILER" -DCMAKE_CXX_COMPILER="$CMAKE_CXX_COMPILER" -DCMAKE_MAKE_PROGRAM=${CMAKE_MAKE_PROGRAM} -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
 			else
 				call $CMAKE -G "Unix Makefiles" $cmake_string -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
 			fi

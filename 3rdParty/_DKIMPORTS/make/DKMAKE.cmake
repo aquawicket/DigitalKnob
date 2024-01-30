@@ -13,7 +13,8 @@ if(MSYSTEM)
 		dk_msys2("pacman -S mingw-w64-i686-make --noconfirm")			# MINGW32
 	elseif(MINGW64)
 		dk_msys2("pacman -S mingw-w64-x86_64-make --noconfirm")			# MINGW64
-		dk_executeProcess("mklink make mingw32-make.exe" WORKING_DIRECTORY ${MSYS2}/mingw64/bin)
+		#dk_executeProcess("mklink make mingw32-make.exe" WORKING_DIRECTORY ${MSYS2}/mingw64/bin)
+		file(CREATE_LINK ${MSYS2}/mingw64/bin/mingw32-make.exe make)
 	elseif(UCRT64)
 		dk_msys2("pacman -S mingw-w64-ucrt-x86_64-make --noconfirm")	# UCRT64
 	else()
