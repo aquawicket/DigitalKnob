@@ -397,8 +397,15 @@ echo " "
 #--------------------------------------------------------
 # Main
 #--------------------------------------------------------
-DIGITALKNOB="$HOME/digitalknob"
-mkdir -p $DIGITALKNOB;
+if [[ -n "$USERPROFILE" ]]; then
+	DIGITALKNOB="$USERPROFILE\digitalknob"
+	echo "DIGITALKNOB = $DIGITALKNOB"
+	DIGITALKNOB=$(sed 's.C:./c.g' <<< $DIGITALKNOB)
+	echo "DIGITALKNOB = $DIGITALKNOB"
+	DIGITALKNOB=$(sed 's.\\./.g' <<< $DIGITALKNOB)
+fi
+
+#mkdir -p $DIGITALKNOB;
 echo "DIGITALKNOB = $DIGITALKNOB"
 
 DKDOWNLOAD="$DIGITALKNOB/download"
