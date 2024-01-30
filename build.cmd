@@ -33,12 +33,17 @@ call:validate_cmake
 call:validate_git
 call:validate_branch
 
+echo DKPATH = %DKPATH%
+echo DKCMAKE = %DKCMAKE%
+echo DK3RDPARTY = %DK3RDPARTY%
+echo DKIMPORTS = %DKIMPORTS%
+
+
+
 
 set "APP="
 set "OS="
 set "TYPE="
-
-
 
 :pickapp
 	echo.
@@ -178,7 +183,6 @@ goto type
 
 	call:clear_cmake_cache
 	call:delete_temp_files
-	call::validate_cmake
 
 	set "APP_PATH=%DKPATH%\DKApps\%APP%"
 	echo APP_PATH = %APP_PATH%
@@ -368,7 +372,7 @@ goto:eof
 		)
 	)
 	
-	echo DKBRANCH = %DKBRANCH%
+	::echo DKBRANCH = %DKBRANCH%
 	set "DKPATH=%DIGITALKNOB%\%DKBRANCH%"
 	set "DKCMAKE=%DKPATH%\DKCMake"
 	set "DK3RDPARTY=%DKPATH%\3rdParty"

@@ -68,12 +68,14 @@ if(DKRETURN)
 	#message(STATUS "DKRETURN = ${DKRETURN}")
 	
 	## windows cmd
+	dk_remove(${DKCMAKE}/cmake_vars.cmd)
 	foreach(item ${DKRETURN})
 		set(line "set \"${item}=${${item}}\" \n")
 		file(APPEND ${DKCMAKE}/cmake_vars.cmd "${line}\n")
 	endforeach()
 	
 	## unix shell
+	dk_remove(${DKCMAKE}/cmake_vars.sh)
 	file(APPEND ${DKCMAKE}/cmake_vars.sh "#!/bin/bash \n")
 	foreach(var ${DKRETURN})
 	    string(MAKE_C_IDENTIFIER ${var} var_)

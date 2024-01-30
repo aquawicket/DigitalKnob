@@ -21,10 +21,13 @@ magenta="\033[35m"
 cyan="\033[36m"
 white="\033[37m"
 
-###### validate sudo ######
-if command -v "sudo" >/dev/null 2>&1; then
-	SUDO="sudo"
-fi
+###### validate_sudo ######
+function validate_sudo() {
+	if command -v "sudo" >/dev/null 2>&1; then
+		SUDO="sudo"
+	fi
+	$SUDO echo
+}
 
 ###### call <command args> ######
 function call() {
@@ -81,6 +84,67 @@ function file_exists() {
 	[ -e $1 ]
 }
 
+###### validate_which ######
+function validate_which() {
+	if ! command_exists which; then
+		install which
+	fi
+	
+	WHICH=$(which which)
+	echo "\$WHICH = $WHICH"
+}
+
+###### validate_cmake ######
+function validate_cmake() {
+	if ! command_exists cmake; then
+		if [[ "$MSYSTEM" == "CLANG32" ]]; then
+			install mingw-w64-clang-i686-cmake
+		elif [[ "$MSYSTEM" == "CLANG64" ]]; then
+			install mingw-w64-clang-x86_64-cmake
+		elif [[ "$MSYSTEM" == "CLANGARM64" ]]; then
+			install mingw-w64-clang-aarch64-cmake
+		elif [[ "$MSYSTEM" == "MINGW32" ]]; then
+			install mingw-w64-i686-cmake
+		elif [[ "$MSYSTEM" == "MINGW64" ]]; then
+			install mingw-w64-x86_64-cmake
+		elif [[ "$MSYSTEM" == "UCRT64" ]]; then
+			install mingw-w64-ucrt-x86_64-cmake
+		fi
+	fi
+	
+	CMAKE=$(which cmake)
+	echo "\$CMAKE = $CMAKE"
+}
+
+###### validate_git ######
+function validate_git() {
+	if ! command_exists git; then
+		install git
+	fi
+	
+	GIT=$(which git)
+	echo "\$GIT = $GIT"	
+}
+
+###### validate_homebrew ######
+function validate_homebrew() {
+	
+	if ! [[ "$OSTYPE" == "darwin"* ]]; then
+		return
+	fi
+		
+	if ! command_exists brew; then
+		echo "installing Homebrew"
+		ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+		# https://github.com/Homebrew/brew/issues/10368
+		rm -fr $(brew --repo homebrew/core)
+		brew tap homebrew/core
+	fi
+	
+	BREW=$(which brew)
+	echo "\$BREW = $BREW"	
+}
+
 ###### package_installed <package> ######
 function package_installed() {
 	if command_exists dpkg-query; then
@@ -111,24 +175,12 @@ function package_installed() {
 	return $false
 }
 
-# Test package_installed
-#if package_installed git; then
-#	echo "git is already installed"
-#lse
-#	echo "git is not installed"
-#fi
-#if package_installed digitalknob; then
-#	echo "digitalknob is already installed"
-#else
-#	echo "digitalknob is not installed"
-#fi
-
 ###### install <package> ######
 function install() {
-	if package_installed $1; then
-		echo "$1 already installed"
-		return $false;
-	fi
+	#if package_installed $1; then
+	#	echo "$1 already installed"
+	#	return $false;
+	#fi
 	
 	echo "installing $1"
 
@@ -149,19 +201,12 @@ function install() {
 	fi
 }
 
-
 ###### validate_package <command> <package> ######
 function validate_package() {
 	if ! command_exists $1; then
 		install $2
 	fi
 }
-
-# TODO: Turn this into a cmake_eval to 3rdParty/libzstd
-# build-essential for Tiny Core Linux
-if command_exists tce-load; then
-	validate_package libzstd libzstd
-fi
 
 ###### validate_ostype ######
 function validate_ostype() {
@@ -187,14 +232,11 @@ function validate_ostype() {
 		error "UNKNOWN OS ($OSTYPE)"
 	fi
 }
-validate_ostype
 
 ###### validate_branch ######
 function validate_branch() {
 	# If the current folder matches the current branch set DKBRANCH, default to Development
-	validate_package git git
-	GIT=$(which git)
-	echo "\$GIT = $GIT"
+	validate_git
 	
 	FOLDER="$(basename $(pwd))"
 	DKBRANCH="Development"
@@ -206,7 +248,7 @@ function validate_branch() {
 		fi
 	fi
 	
-	echo "DKBRANCH = $DKBRANCH"
+	#echo "DKBRANCH = $DKBRANCH"
 	DKPATH="$DIGITALKNOB/$DKBRANCH"
 	DKCMAKE="$DKPATH/DKCMake"
 	DK3RDPARTY="$DKPATH/3rdParty"
@@ -227,8 +269,6 @@ function validate_branch() {
 		exit
 	fi
 }
-validate_branch
-
 
 ###### clear_cmake_cache ######
 function clear_cmake_cache() {
@@ -237,7 +277,6 @@ function clear_cmake_cache() {
 	find . -name "CMakeCache.*" -delete
 	rm -rf `find . -type d -name CMakeFiles`
 }
-
 
 ###### delete_temp_files ######
 function delete_temp_files() {
@@ -248,12 +287,6 @@ function delete_temp_files() {
 	find . -name "*.tmp" -delete
 	find . -name "*.TMP" -delete
 }
-
-DKPATH="$DIGITALKNOB/$DKBRANCH"
-DKCMAKE="$DKPATH/DKCMake"
-DK3RDPARTY="$DKPATH/3rdParty"
-DKIMPORTS="$DK3RDPARTY/_DKIMPORTS"
-
 
 ###### validate_emscripten ######
 function validate_emscripten() {
@@ -327,41 +360,70 @@ function cmake_eval() {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+############################################################
+#############  main #######################################
+###########################################################
+
+validate_sudo
+
+
+echo ""
+echo "HOSTNAME = $HOSTNAME"
+echo "HOSTTYPE = $HOSTTYPE"
+echo "MACHTYPE = $MACHTYPE"
+echo "MODEL = $MODEL"
+echo "MSYSTEM = $MSYSTEM"
+echo "OSTYPE = $OSTYPE"
+echo "SCRIPTNAME = $SCRIPTNAME"
+echo "SCRIPTPATH = $SCRIPTPATH"
+echo "USER = $USER"
+echo "USERNAME = $USERNAME"
+echo " "
+
+#--------------------------------------------------------
+# Main
+#--------------------------------------------------------
+DIGITALKNOB="$HOME/digitalknob"
+mkdir -p $DIGITALKNOB;
+echo "DIGITALKNOB = $DIGITALKNOB"
+
+DKDOWNLOAD="$DIGITALKNOB/download"
+mkdir -p $DKDOWNLOAD;
+echo "DKDOWNLOAD = $DKDOWNLOAD"
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+	validate_homebrew
+fi
+
+validate_which
+validate_cmake
+validate_git
+validate_branch
+
+echo "DKPATH = $DKPATH"
+echo "DKCMAKE = $DKCMAKE"
+echo "DK3RDPARTY = $DK3RDPARTY"
+echo "DKIMPORTS = $DKIMPORTS"
+
+
 if [ $SCRIPTPATH == $DKPATH ];then
 	echo "SCRIPTPATH and DKPATH are the same"
 else
 	warning "$SCRIPTNAME is not running from the DKPATH directory. Any changes will not be saved by git!"
 fi
 
-echo ""
-echo "HOSTNAME = $HOSTNAME"
-echo "HOSTTYPE = $HOSTTYPE"
-echo "OSTYPE = $OSTYPE"
-echo "MACHTYPE = $MACHTYPE"
-echo "MODEL = $MODEL"
-echo "USER = $USER"
-echo "USERNAME = $USERNAME"
-echo "DIGITALKNOB = $DIGITALKNOB"
-echo "DKPATH = $DKPATH"
-echo "DKCMAKE = $DKCMAKE"
-echo "SCRIPTPATH = $SCRIPTPATH"
-echo "SCRIPTNAME = $SCRIPTNAME"
-
-##### MSYS2 Environments ($MSYSTEM)	################################################
-# https://www.msys2.org/docs/environments/
-# CLANG32		=	i686		ucrt		llvm		libc++			/clang32
-# CLANG64		=	x86_64		ucrt		llvm		libc++			/clang64
-# CLANGARM64	=	aarch64		ucrt		llvm		libc++			/clangarm64
-# MINGW32		=	i686		msvcrt		gcc			libstdc++		/mingw32
-# MINGW64		=	x86_64		msvcrt		gcc			libstdc++		/mingw64
-# MSYS			=	x86_64		cygwin		gcc			libstdc++		/usr
-# UCRT64		=	x86_64		ucrt		gcc			libstdc++		/ucrt64
-echo "MSYSTEM = $MSYSTEM"
-
-CMAKE=$(which cmake)
-echo "CMAKE = $CMAKE"
-
-$SUDO echo
 
 # https://unix.stackexchange.com/a/293605
 COLUMNS=1
@@ -390,17 +452,6 @@ while :
 		case $opt in
 			"Git Update")
 				echo "$opt"
-				if [[ "$OSTYPE" == "darwin"* ]]; then
-					echo .
-					# echo "install Homebrew and git"
-					# ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-					# https://github.com/Homebrew/brew/issues/10368
-					# rm -fr $(brew --repo homebrew/core)
-					# brew tap homebrew/core
-					# brew install git
-				else
-					validate_package git git
-				fi
 				
 				if [[ ! -d "$DKPATH/.git" ]]; then
 					call git clone https://github.com/aquawicket/DigitalKnob.git $DKPATH
@@ -421,17 +472,6 @@ while :
 				;;
 			"Git Commit")
 				echo "$opt"
-				if [[ "$OSTYPE" == "darwin"* ]]; then
-					echo .
-					#echo "install Homebrew and git"
-					#ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-					# https://github.com/Homebrew/brew/issues/10368
-					# rm -fr $(brew --repo homebrew/core)
-					# brew tap homebrew/core
-					# brew install git
-				else
-					validate_package git git
-				fi
 				cd $DKPATH
 				git commit -a -m "git commit"
 				git push
@@ -496,6 +536,7 @@ while :
 		REPLY=
 	done
 	TARGET=${APP}
+
 
 	# TODO
 	#  1) Linux (x86_64)
@@ -684,60 +725,25 @@ while :
 	clear_cmake_cache
 	delete_temp_files
 		
-	#TODO: move to 3rdParty with cmake_eval
-	validate_package which which 
-	
-	validate_package git git
-	
-	# This will break MSYS2 builds. Never install the base cmake in MSYS2
-	if ! [[ -n "$MSYSTEM" ]]; then
-		validate_package cmake cmake
-	fi
-	#validate_package reinstall base-devel
-	
-	# MSYS Package prefixes
-	# CLANG32 =  mingw-w64-clang-i686-
-	# CLANG64 = mingw-w64-clang-x86_64-
-	# CLANGARM64 = mingw-w64-clang-aarch64-
-	# MINGW32 = mingw-w64-i686-
-	# MINGW64 = mingw-w64-x86_64-
-	# UCRT64 = mingw-w64-ucrt-x86_64-
-	# MSYS = 
+	 
 
 	# build-essential for MSYS2
-	if  [[ -n "$MSYSTEM" ]]; then
-       	cmake_eval "include('$DKIMPORTS/msys2/DKMAKE.cmake')"
-           #TODO
-    fi
-	
-	#if [[ "$MSYSTEM" == "CLANG32" ]]; then
-	#	validate_package cmake mingw-w64-clang-i686-cmake
-	#	validate_package clang mingw-w64-clang-i686-toolchain
-	#elif [[ "$MSYSTEM" == "CLANG64" ]]; then
-	#	validate_package cmake mingw-w64-clang-x86_64-cmake
-	#	validate_package clang mingw-w64-clang-x86_64-toolchain
-	#	validate_package clang_reinstall mingw-w64-x86_64-clang
-	#elif [[ "$MSYSTEM" == "CLANGARM64" ]]; then
-	#	validate_package cmake mingw-w64-clang-aarch64-cmake
-	#	validate_package clang mingw-w64-clang-aarch64-toolchain
-	#elif [[ "$MSYSTEM" == "MINGW32" ]]; then
-	#	#validate_package cmake mingw-w64-i686-cmake
-	#	#validate_package gcc mingw-w64-i686-toolchain
-	#elif [[ "$MSYSTEM" == "MINGW64" ]]; then
-	#	validate_package cmake mingw-w64-x86_64-cmake
-	#	validate_package gcc mingw-w64-x86_64-toolchain
-	#elif [[ "$MSYSTEM" == "UCRT64" ]]; then
-	#	validate_package cmake mingw-w64-ucrt-x86_64-cmake
-	#	validate_package gcc mingw-w64-ucrt-x86_64-toolchain
-	#	validate_package clang mingw-w64-ucrt-x86_64-clang
-	#fi
+	#if  [[ -n "$MSYSTEM" ]]; then
+    #   	cmake_eval "include('$DKIMPORTS/msys2/DKMAKE.cmake')"
+    #       #TODO
+    #fi
 
-
-    #TODO: turn into a cmake_eval to 3rdParty
+	#TODO: turn into a cmake_eval
 	# build-essential for Tiny Core Linux
-	if command_exists tce-load; then
-		validate_package gcc compiletc
-	fi
+	#if command_exists tce-load; then
+	#	validate_package libzstd libzstd
+	#fi
+	
+    #TODO: turn into a cmake_eval
+	# build-essential for Tiny Core Linux
+	#if command_exists tce-load; then
+	#	validate_package gcc compiletc
+	#fi
 	
 	call export SHELL="/bin/bash"
 	
@@ -828,10 +834,11 @@ while :
 	fi
 	
 	if [[ "$OS" == "android"* ]]; then
-	    cmake_eval "include('$DKIMPORTS/android-ndk/DKMAKE.cmake')" "ANDROID_NDK;ANDROID_TOOLCHAIN"
+	    cmake_eval "include('$DKIMPORTS/android-ndk/DKMAKE.cmake')" "ANDROID_NDK;ANDROID_NDK_BUILD;ANDROID_TOOLCHAIN;ANDROID_API"
 	    echo "ANDROID_NDK = $ANDROID_NDK"
+		echo "ANDROID_NDK_BUILD = $ANDROID_NDK_BUILD"
 	    echo "ANDROID_TOOLCHAIN = $ANDROID_TOOLCHAIN"
-		ANDROID_API="31"
+		echo "ANDROID_API = $ANDROID_API"
 		
 		#if [[ "$OSTYPE" == "linux-android" ]]; then
 		#    ANDROID_NDK_BUILD="23.2.8568313"
