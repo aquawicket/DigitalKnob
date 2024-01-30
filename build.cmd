@@ -1,7 +1,6 @@
 @echo off
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
 
-
 ::############ DigitalKnob builder script ############
 
 ::--------------------------------------------------------
@@ -49,7 +48,8 @@ set "TYPE="
 	echo  9) DKDomTest
 	echo 10) DKTestAll
 	echo 11) Clear Screen
-	echo 12) Exit
+	echo 12) Restart
+	echo 13) Exit
 	set choice=
 	set /p choice=Please select an app to build:
 	::if not '%choice%'=='' set choice=%choice:~0,1%	::What does this do?
@@ -64,7 +64,8 @@ set "TYPE="
 	if '%choice%'=='9' set "APP=DKDomTest" & goto checkApp
 	if '%choice%'=='10' set "APP=DKTestAll" & goto checkApp
 	if '%choice%'=='11' call:clear_screen & goto pickapp
-	if '%choice%'=='12' call:end
+	if '%choice%'=='12' call:restart
+	if '%choice%'=='13' call:end
 	echo "%choice%" is not valid, try again
 goto pickapp
 
@@ -296,6 +297,14 @@ goto pickapp
 :: FUNCTIONS
 :: https://www.dostips.com/DtTutoFunctions.php
 ::--------------------------------------------------------
+
+:: restart()
+:restart
+	echo .
+	echo reloading %~f0
+	start "" "%~f0"
+	exit
+goto:eof
 
 
 :: end()
@@ -529,12 +538,14 @@ goto:eof
 	"%GIT%" pull --all
 	"%GIT%" checkout -- .
 	call:check_error
+	
 	"%GIT%" checkout %DKBRANCH%
 	if NOT "%ERRORLEVEL%" == "0" (
 		echo Remote has no %DKBRANCH% branch. Creating...
 		"%GIT%" checkout -b %DKBRANCH% main
 		"%GIT%" push --set-upstream origin %DKBRANCH%
 	)
+	
 	call:check_error
 goto:eof
 
