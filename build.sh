@@ -222,8 +222,8 @@ function validate_branch() {
 		echo "RELOADING SCRIPT TO -> $DKPATH/$SCRIPTNAME"
 		read -p "Press enter to continue"
 		clear 
-		$DKPATH/$SCRIPTNAME
 		rm $SCRIPTPATH/$SCRIPTNAME
+		$DKPATH/$SCRIPTNAME
 		exit
 	fi
 }
