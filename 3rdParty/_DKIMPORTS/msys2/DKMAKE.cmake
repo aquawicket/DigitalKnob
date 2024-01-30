@@ -26,27 +26,32 @@ endif()
 
 # FIXME: currently already done int DK.cmake
 ## DEFINED EXTRA MSYS2 VARIABLES   
-if(DEFINED ENV{MSYSTEM})
-	set(MSYSTEM $ENV{MSYSTEM}	CACHE INTERNAL "")	
-	set($ENV{MSYSTEM} TRUE		CACHE INTERNAL "")
-endif()
-
-	
-#if(CLANG32)						
-#	dk_msys2(pacman -S mingw-w64-clang-i686-toolchain --noconfirm)			# toolchain
-#elseif(CLANG64)
-#	dk_msys2(pacman -S mingw-w64-clang-x86_64-toolchain --noconfirm)		# toolchain
-#elseif(CLANGARM64)
-#	dk_msys2(pacman -S mingw-w64-clang-aarch64-toolchain --noconfirm)		# toolchain
-#elseif(MINGW32)
-#	dk_msys2(pacman -S mingw-w64-i686-toolchain --noconfirm)				# toolchain
-#elseif(MINGW64)
-#	dk_msys2(pacman -S mingw-w64-x86_64-toolchain --noconfirm)				# toolchain
-#elseif(UCRT64)
-#	dk_msys2(pacman -S mingw-w64-ucrt-x86_64-toolchain --noconfirm)			# toolchain
-#else()
-#	dk_error("MSYSTEM is invalid")
+#if(DEFINED ENV{MSYSTEM})
+#	set(MSYSTEM $ENV{MSYSTEM}	CACHE INTERNAL "")	
+#	set($ENV{MSYSTEM} TRUE		CACHE INTERNAL "")
 #endif()
+
+#if(NOT MSYS_LOADED)
+#	if(CLANG32)						
+#		dk_msys2(pacman -S mingw-w64-clang-i686-toolchain --noconfirm)			# toolchain
+#	elseif(CLANG64)
+#		dk_msys2(pacman -S mingw-w64-clang-x86_64-toolchain --noconfirm)		# toolchain
+#	elseif(CLANGARM64)
+#		dk_msys2(pacman -S mingw-w64-clang-aarch64-toolchain --noconfirm)		# toolchain
+#	elseif(MINGW32)
+#		dk_msys2(pacman -S mingw-w64-i686-toolchain --noconfirm)				# toolchain
+#	elseif(MINGW64)
+#		dk_msys2(pacman -S mingw-w64-x86_64-toolchain --noconfirm)				# toolchain
+#	elseif(UCRT64)
+#		dk_msys2(pacman -S mingw-w64-ucrt-x86_64-toolchain --noconfirm)			# toolchain
+#	else()
+#		dk_error("MSYSTEM is invalid")
+#	endif()
+#	dk_set(MSYS_LOADED TRUE)
+#endif()
+
+
+
 
 ### Install other utilities ###
 #if(NOT EXISTS ${MSYS2}/usr/bin/make.exe)
