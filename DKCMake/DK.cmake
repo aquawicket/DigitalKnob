@@ -41,6 +41,16 @@ if(CMAKE_HOST_UNIX AND NOT CMAKE_HOST_APPLE)
 	endif()
 endif()
 
+#if($ENV{MSYSTEM})
+#	set(MSYSTEM $ENV{MSYSTEM}	CACHE INTERNAL "")
+#	set($ENV{MSYSTEM} 1			CACHE INTERNAL "")
+#endif()
+dk_set(MSYSTEM $ENV{MSYSTEM}	CACHE INTERNAL ""))
+dk_set($ENV{MSYSTEM} 1			CACHE INTERNAL ""))
+message(STATUS "MSYSTEM = ${MSYSTEM}")
+#message(STATUS "${MSYSTEM} = ${${MSYSTEM}}")
+
+
 
 ## Set the DIGITALKNOB, DKBRANCH and DKCMAKE variables 
 get_filename_component(path ${CMAKE_SOURCE_DIR} ABSOLUTE)

@@ -758,6 +758,7 @@ while :
 	
 	if [[ "$OSTYPE" == "linux-gnu"* ]] || [[ $MSYSTEM == "MINGW32" ]] || [[ $MSYSTEM == "MINGW64" ]] || [[ $MSYSTEM == "MSYS" ]]; then
 		#validate_package gcc toolchain
+		cmake_eval "include('$DKIMPORTS/gcc/DKMAKE.cmake')"
 		GCC_PATH=$(which gcc)
 		GPP_PATH=$(which g++)
 		call export CC="$GCC_PATH"
@@ -769,6 +770,7 @@ while :
 	
 	if [[ $MSYSTEM == "CLANG32" ]] || [[ $MSYSTEM == "CLANG64" ]] || [[ $MSYSTEM == "CLANGARM64" ]] || [[ $MSYSTEM == "UCRT64" ]]; then
 		#validate_package clang toolchain
+		cmake_eval "include('$DKIMPORTS/clang/DKMAKE.cmake')"
 		CLANG_PATH=$(which clang)
 		CLANGPP_PATH=$(which clang++)
 		call export CC="$CLANG_PATH"
