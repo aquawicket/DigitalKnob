@@ -15,4 +15,4 @@ dk_import(https://github.com/nowres/conio-for-linux.git)
 
 
 ### LINK ###
-dk_include(${CONIO-FOR-LINUX})
+dk_include(${CONIO_FOR_LINUX})

@@ -59,12 +59,12 @@ endif()
 ### COMPILE ###
 DEBUG_dk_setPath(${OPENSSL}/${OS}/${DEBUG_DIR})
 ANDROID32_DEBUG_dk_queueCommand(
-"export ANDROID_NDK_ROOT=${ANDROID-NDK}\n"
+"export ANDROID_NDK_ROOT=${ANDROID_NDK}\n"
 "export PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/windows-x86_64/bin:$PATH\n"
 "export PATH=$ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/bin:$PATH\n"
 "../../Configure no-shared --debug android-arm -D__ANDROID_API__=31")
 ANDROID64_DEBUG_dk_queueCommand(
-"export ANDROID_NDK_ROOT=${ANDROID-NDK}\n"
+"export ANDROID_NDK_ROOT=${ANDROID_NDK}\n"
 "export PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/windows-x86_64/bin:$PATH\n"
 "export PATH=$ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/bin:$PATH\n"
 "../../Configure no-shared --debug android-arm64 -D__ANDROID_API__=31")
@@ -84,7 +84,7 @@ if(NOT ANDROID AND NOT MSVC)
 	DEBUG_dk_queueCommand(make)
 else()
 	ANDROID_DEBUG_dk_queueCommand(
-	"export ANDROID_NDK_ROOT=${ANDROID-NDK}\n"
+	"export ANDROID_NDK_ROOT=${ANDROID_NDK}\n"
 	"export PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/windows-x86_64/bin:$PATH\n"
 	"export PATH=$ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/bin:$PATH\n"
 	"make")
@@ -93,12 +93,12 @@ endif()
 
 RELEASE_dk_setPath(${OPENSSL}/${OS}/${RELEASE_DIR})
 ANDROID32_RELEASE_dk_queueCommand(
-"export ANDROID_NDK_ROOT=${ANDROID-NDK}\n"
+"export ANDROID_NDK_ROOT=${ANDROID_NDK}\n"
 "export PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/windows-x86_64/bin:$PATH\n"
 "export PATH=$ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/bin:$PATH\n"
 "../../Configure no-shared --release android-arm -D__ANDROID_API__=31")
 ANDROID64_RELEASE_dk_queueCommand(
-"export ANDROID_NDK_ROOT=${ANDROID-NDK}\n"
+"export ANDROID_NDK_ROOT=${ANDROID_NDK}\n"
 "export PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/windows-x86_64/bin:$PATH\n"
 "export PATH=$ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/bin:$PATH\n"
 "../../Configure no-shared --release android-arm64 -D__ANDROID_API__=31")
@@ -116,7 +116,7 @@ if(NOT ANDROID AND NOT MSVC)
 	RELEASE_dk_queueCommand(make)
 else()
 	ANDROID_RELEASE_dk_queueCommand(
-	"export ANDROID_NDK_ROOT=${ANDROID-NDK}\n"
+	"export ANDROID_NDK_ROOT=${ANDROID_NDK}\n"
 	"export PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/windows-x86_64/bin:$PATH\n"
 	"export PATH=$ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/bin:$PATH\n"
 	"make")

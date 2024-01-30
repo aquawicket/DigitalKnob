@@ -353,8 +353,8 @@ goto:eof
 	)
 	set "DKPATH=%DIGITALKNOB%\%DKBRANCH%"
 	set "DKCMAKE=%DKPATH%\DKCMake"
-	set "3RDPARTY=%DKPATH%\3rdParty"
-	set "DKIMPORTS=%DKPATH%\3rdParty\_DKIMPORTS"
+	set "DK3RDPARTY=%DKPATH%\3rdParty"
+	set "DKIMPORTS=%DK3RDPARTY%\_DKIMPORTS"
 	echo DKBRANCH = %DKBRANCH%
 	call:check_error
 goto:eof

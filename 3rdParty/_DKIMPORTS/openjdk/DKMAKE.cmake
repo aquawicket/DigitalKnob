@@ -49,12 +49,12 @@ endif()
 
 
 ### LINK ###
-#dk_include(${OPENJDK-11}/)	
-#dk_setEnv("JAVA_HOME" ${OPENJDK-11})
-#dk_setEnv("JAVA_VERSION" ${OPENJDK-11_VERSION})
-#dk_setEnv("VS_JavaHome" ${OPENJDK-11})
+#dk_include(${OPENJDK_11}/)	
+#dk_setEnv("JAVA_HOME" ${OPENJDK_11})
+#dk_setEnv("JAVA_VERSION" ${OPENJDK_11_VERSION})
+#dk_setEnv("VS_JavaHome" ${OPENJDK_11})
 
 #Add registry entries
-#dk_addRegistryKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment" "CurrentVersion" "${OPENJDK-11_VERSION}")
-#dk_addRegistryKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment/${OPENJDK-11_VERSION}" "JavaHome" "${OPENJDK-11}")
-#dk_addRegistryKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment/${OPENJDK-11_VERSION}" "RuntimeLib" "${OPENJDK-11}/bin/server/jvm.dll")
+#dk_addRegistryKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment" "CurrentVersion" "${OPENJDK_11_VERSION}")
+#dk_addRegistryKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment/${OPENJDK_11_VERSION}" "JavaHome" "${OPENJDK_11}")
+#dk_addRegistryKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment/${OPENJDK_11_VERSION}" "RuntimeLib" "${OPENJDK_11}/bin/server/jvm.dll")

@@ -7,12 +7,12 @@ endif()
 # https://developer.apple.com/metal/cpp/files/metal-cpp_macOS12_iOS15.zip
 
 ### VERSION ###
-dk_set(METALCPP_FOLDER metal-cpp_macOS12_iOS15)
-dk_set(METALCPP_DL https://developer.apple.com/metal/cpp/files/metal-cpp_macOS12_iOS15.zip)
-dk_set(METALCPP ${3RDPARTY}/${METALCPP_FOLDER})
+dk_set(METAL_CPP_FOLDER metal-cpp_macOS12_iOS15)
+dk_set(METAL_CPP_DL https://developer.apple.com/metal/cpp/files/metal-cpp_macOS12_iOS15.zip)
+dk_set(METAL_CPP ${3RDPARTY}/${METAL_CPP_FOLDER})
 
 
 ### INSTALL ###
-dk_import(${METALCPP_DL} ${METALCPP})
+dk_import(${METAL_CPP_DL} ${METAL_CPP})
 
-dk_include(${METALCPP})
+dk_include(${METAL_CPP})

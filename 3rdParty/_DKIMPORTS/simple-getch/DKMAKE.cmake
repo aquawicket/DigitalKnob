@@ -10,9 +10,9 @@ dk_import(https://github.com/mouuff/simple-getch.git)
 
 
 ### LINK ###
-dk_include		(${SIMPLE-GETCH}/getch/include)
-dk_libDebug		(${SIMPLE-GETCH}/getch/libgetch.a)
-dk_libRelease	(${SIMPLE-GETCH}/getch/libgetch.a)
+dk_include		(${SIMPLE_GETCH}/getch/include)
+dk_libDebug		(${SIMPLE_GETCH}/getch/libgetch.a)
+dk_libRelease	(${SIMPLE_GETCH}/getch/libgetch.a)
 
 
 ### COMPILE ###

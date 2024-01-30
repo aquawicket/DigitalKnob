@@ -1609,8 +1609,11 @@ endfunction()
 function(dk_install plugin) #PATCH
 	DKDEBUGFUNC(${ARGV})
 	
+	dk_debug("dk_install(${plugin})")
+	
 	# set PLUGIN_URL variable
-	string(TOUPPER ${plugin} plugin_var)	
+	string(MAKE_C_IDENTIFIER ${plugin} plugin_alpha_numeric)
+	string(TOUPPER ${plugin_alpha_numeric} plugin_var)	
 	set(dest_path ${${plugin_var}})			
 	set(url_path ${${plugin_var}_URL})
 	
@@ -4271,14 +4274,18 @@ endfunction()
 function(dk_import url)
 	DKDEBUGFUNC(${ARGV})
 	dk_importVariables(${url} plugin ${ARGN})
-	string(TOUPPER ${plugin} plugin_var)
 	
-	dk_verbose("\${${plugin_var}}] =			${${plugin_var}}")
-	dk_verbose("[${plugin_var}_URL] =			${${plugin_var}_URL}")
-	dk_verbose("[${plugin_var}_VERSION] =		${${plugin_var}_VERSION}")
-	dk_verbose("[${plugin_var}_FOLDER] =		${${plugin_var}_FOLDER}")
-	dk_verbose("[${plugin_var}_BRANCH] =		${${plugin_var}_BRANCH}")
-	dk_verbose("[${plugin_var}_TAG] =			${${plugin_var}_TAG}")
+	#string(TOUPPER ${plugin} plugin_var)
+	string(MAKE_C_IDENTIFIER ${plugin} plugin_alpha_numeric)
+	string(TOUPPER ${plugin_alpha_numeric} plugin_var)	
+	
+	dk_debug("\${${plugin_var}}] =			${${plugin_var}}")
+	dk_debug("[${plugin_var}_IMPORT] =		${${plugin_var}_IMPORT}")
+	dk_debug("[${plugin_var}_URL] =			${${plugin_var}_URL}")
+	dk_debug("[${plugin_var}_VERSION] =		${${plugin_var}_VERSION}")
+	dk_debug("[${plugin_var}_FOLDER] =		${${plugin_var}_FOLDER}")
+	dk_debug("[${plugin_var}_BRANCH] =		${${plugin_var}_BRANCH}")
+	dk_debug("[${plugin_var}_TAG] =			${${plugin_var}_TAG}")
 	
 	if(NOT DKOFFLINE)
 		### .git
@@ -4311,6 +4318,7 @@ function(dk_import url)
 	
 	dk_includes("${ARGN}" "PATCH" has_patch)
 	if(${has_patch})
+		dk_debug("dk_patch(${plugin} ${${plugin_var}})")
 		dk_patch(${plugin} ${${plugin_var}})
 	endif()
 	

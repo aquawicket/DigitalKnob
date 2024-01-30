@@ -64,7 +64,7 @@ dk_import(https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.26.1.zip
 ### LINK ###
 #ANDROID_dk_define		(GL_GLEXT_PROTOTYPES)
 dk_include				(${SDL}/include)
-ANDROID_dk_include		(${ANDROID-NDK}/sources/android/cpufeatures)
+ANDROID_dk_include		(${ANDROID_NDK}/sources/android/cpufeatures)
 ANDROID_dk_include		(${SDL}/src)
 EMSCRIPTEN_dk_include	(${SDL}/${OS}/${DEBUG_DIR}/include)
 LINUX_dk_include		(${SDL}/${OS}/${RELEASE_DIR}/include)

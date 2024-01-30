@@ -14,13 +14,13 @@ LINUX_HOST_dk_import(https://download.java.net/openjdk/jdk8u41/ri/openjdk-8u41-b
 
 
 ### LINK ###
-#dk_include(${OPENJDK-8U41}/)	
-#dk_setEnv("JAVA_HOME" ${OPENJDK-8U41})
-#dk_setEnv("JAVA_VERSION" ${OPENJDK-8U41_VERSION})
-#dk_setEnv("VS_JavaHome" ${OPENJDK-8U41})
+#dk_include(${OPENJDK_8U41}/)	
+#dk_setEnv("JAVA_HOME" ${OPENJDK_8U41})
+#dk_setEnv("JAVA_VERSION" ${OPENJDK_8U41_VERSION})
+#dk_setEnv("VS_JavaHome" ${OPENJDK_8U41})
 
 
 #Add registry entries
-#dk_addRegistryKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment" "CurrentVersion" "${OPENJDK-8U41_VERSION}")
-#dk_addRegistryKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment/${OPENJDK-8U41_VERSION}" "JavaHome" "${OPENJDK-8U41}")
-#dk_addRegistryKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment/${OPENJDK-8U41_VERSION}" "RuntimeLib" "${OPENJDK-8U41}/bin/server/jvm.dll")
+#dk_addRegistryKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment" "CurrentVersion" "${OPENJDK_8U41_VERSION}")
+#dk_addRegistryKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment/${OPENJDK_8U41_VERSION}" "JavaHome" "${OPENJDK_8U41}")
+#dk_addRegistryKey("HKLM/SOFTWARE/JavaSoft/Java Runtime Environment/${OPENJDK_8U41_VERSION}" "RuntimeLib" "${OPENJDK_8U41}/bin/server/jvm.dll")

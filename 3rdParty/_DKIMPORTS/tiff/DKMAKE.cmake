@@ -54,7 +54,7 @@ endif()
 
 ### GENERATE ###
 dk_queueCommand(${DKCMAKE_BUILD} 
-	${LIBJPEG-TURBO_CMAKE} 
+	${LIBJPEG_TURBO_CMAKE} 
 	${XZ_CMAKE}
 	${ZLIB_CMAKE}
 	${ZSTD_CMAKE}

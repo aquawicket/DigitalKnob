@@ -8,4 +8,4 @@ dk_import(https://github.com/tsaarni/cpp-subprocess.git)
 
 
 ### LINK ###
-dk_include(${CPP-SUBPROCESS}/include)
+dk_include(${CPP_SUBPROCESS}/include)
