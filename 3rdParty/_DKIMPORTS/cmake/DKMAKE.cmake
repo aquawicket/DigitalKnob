@@ -4,26 +4,25 @@
 # https://developer.android.com/studio/projects/configure-cmake
 # https://discourse.cmake.org/t/cmake-silent-install-with-options-help/1475/2
 
-if(MSYS)
+if(MSYSTEM)
 	dk_depend(msys2)
-	if(NOT MSYSTEM)
-		return()
-	endif()
-	if(${MSYSTEM} STREQUAL "CLANG32")
-		dk_msys2(pacman -S mingw-w64-clang-i686-cmake --noconfirm)
-	elseif(${MSYSTEM} STREQUAL "CLANG64")
-		dk_msys2(pacman -S mingw-w64-clang-x86_64-cmake --noconfirm)
-	elseif(${MSYSTEM} STREQUAL "CLANGARM64")
-		dk_msys2(pacman -S mingw-w64-clang-aarch64-cmake --noconfirm)
-	elseif(${MSYSTEM} STREQUAL "MINGW32")
-		dk_msys2(pacman -S mingw-w64-i686-cmake --noconfirm)
-	elseif(${MSYSTEM} STREQUAL "MINGW64")
-		dk_msys2(pacman -S mingw-w64-x86_64-cmake --noconfirm)
-	elseif(${MSYSTEM} STREQUAL "UCRT64")
-		dk_msys2(pacman -S mingw-w64-ucrt-x86_64-cmake --noconfirm)
+	
+	if(CLANG32)
+		dk_msys2("pacman -S mingw-w64-clang-i686-cmake --noconfirm")	# CLANG32
+	elseif(CLANG64)
+		dk_msys2("pacman -S mingw-w64-clang-x86_64-cmake --noconfirm")	# CLANG64
+	elseif(CLANGARM64)
+		dk_msys2("pacman -S mingw-w64-clang-aarch64-cmake --noconfirm")	# CLANGARM64
+	elseif(MINGW32)
+		dk_msys2("pacman -S mingw-w64-i686-cmake --noconfirm")			# MINGW32
+	elseif(MINGW64)
+		dk_msys2("pacman -S mingw-w64-x86_64-cmake --noconfirm")		# MINGW64
+	elseif(UCRT64)
+		dk_msys2("pacman -S mingw-w64-ucrt-x86_64-cmake --noconfirm")	# UCRT64
 	else()
 		dk_error("MSYSTEM is invalid")
 	endif()
+	
 	dk_set(CMAKE_EXE cmake)
 	dk_msys2(${CMAKE_EXE} --version)
 	dk_debug("CMAKE_EXE = ${CMAKE_EXE}")

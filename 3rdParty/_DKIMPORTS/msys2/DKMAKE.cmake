@@ -1,7 +1,7 @@
 # https://www.msys2.org
 # https://silentinstallhq.com/msys2-silent-install-how-to-guide
 
-if(NOT WIN)
+if(NOT WIN_HOST)
 	dk_undepend(msys2)
 	dk_return()
 endif()
@@ -24,30 +24,28 @@ endif()
 ### ADD msys2 bin directory to path environment variable
 #dk_setEnv("PATH" "${MSYS2}/usr/bin")
 
-if(MSYS)
-	set(MSYSTEM "$ENV{MSYSTEM}")
-	dk_debug("MSYSTEM = ${MSYSTEM}")
+## DEFINED EXTRA MSYS2 VARIABLES
+if(DEFINED ENV{MSYSTEM})
+	set(MSYSTEM $ENV{MSYSTEM}	CACHE INTERNAL "")	
+	set($ENV{MSYSTEM} TRUE		CACHE INTERNAL "")
 endif()
 
-if(NOT MSYSTEM)
-	return()
-endif()
 	
-if(${MSYSTEM} STREQUAL "CLANG32")							
-	dk_msys2(pacman -S mingw-w64-clang-i686-toolchain --noconfirm)			# toolchain
-elseif(${MSYSTEM} STREQUAL "CLANG64")
-	dk_msys2(pacman -S mingw-w64-clang-x86_64-toolchain --noconfirm)		# toolchain
-elseif(${MSYSTEM} STREQUAL "CLANGARM64")
-	dk_msys2(pacman -S mingw-w64-clang-aarch64-toolchain --noconfirm)		# toolchain
-elseif(${MSYSTEM} STREQUAL "MINGW32")
-	dk_msys2(pacman -S mingw-w64-i686-toolchain --noconfirm)				# toolchain
-elseif(${MSYSTEM} STREQUAL "MINGW64")
-	dk_msys2(pacman -S mingw-w64-x86_64-toolchain --noconfirm)				# toolchain
-elseif(${MSYSTEM} STREQUAL "UCRT64")
-	dk_msys2(pacman -S mingw-w64-ucrt-x86_64-toolchain --noconfirm)			# toolchain
-else()
-	dk_error("MSYSTEM is invalid")
-endif()
+#if(CLANG32)						
+#	dk_msys2(pacman -S mingw-w64-clang-i686-toolchain --noconfirm)			# toolchain
+#elseif(CLANG64)
+#	dk_msys2(pacman -S mingw-w64-clang-x86_64-toolchain --noconfirm)		# toolchain
+#elseif(CLANGARM64)
+#	dk_msys2(pacman -S mingw-w64-clang-aarch64-toolchain --noconfirm)		# toolchain
+#elseif(MINGW32)
+#	dk_msys2(pacman -S mingw-w64-i686-toolchain --noconfirm)				# toolchain
+#elseif(MINGW64)
+#	dk_msys2(pacman -S mingw-w64-x86_64-toolchain --noconfirm)				# toolchain
+#elseif(UCRT64)
+#	dk_msys2(pacman -S mingw-w64-ucrt-x86_64-toolchain --noconfirm)			# toolchain
+#else()
+#	dk_error("MSYSTEM is invalid")
+#endif()
 
 ### Install other utilities ###
 #if(NOT EXISTS ${MSYS2}/usr/bin/make.exe)

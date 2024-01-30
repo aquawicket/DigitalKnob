@@ -2,9 +2,11 @@
 # https://github.com/git-for-windows/git/releases/download/v2.31.1.windows.1/Git-2.31.1-32-bit.exe
 
 
-if(MSYS)
+if(MSYSTEM)
 	dk_depend(msys2)
+	
 	dk_msys2(pacman -S git --noconfirm)
+	
 	dk_set(GIT_EXE git)
 	dk_msys2(${GIT_EXE} --version)
 	dk_debug("GIT_EXE = ${GIT_EXE}")
