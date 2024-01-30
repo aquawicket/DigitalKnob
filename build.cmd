@@ -373,6 +373,7 @@ goto:eof
 	set "DKIMPORTS=%DK3RDPARTY%\_DKIMPORTS"
 	echo DKBRANCH = %DKBRANCH%
 	
+	:: make sure script is running from DKPATH
 	if not %SCRIPTPATH% == %DKPATH% (
 		if not exist %DKPATH%\%SCRIPTNAME% (
 			copy %SCRIPTPATH%\%SCRIPTNAME% %DKPATH%\%SCRIPTNAME%
