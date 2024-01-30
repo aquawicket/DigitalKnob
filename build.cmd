@@ -378,8 +378,9 @@ goto:eof
 		if not exist %DKPATH%\%SCRIPTNAME% (
 			copy %SCRIPTPATH%\%SCRIPTNAME% %DKPATH%\%SCRIPTNAME%
 		)
-		set "SCRIPTPATH=%DKPATH%"
-		call:reload
+		start "" "%DKPATH%\%SCRIPTNAME%"
+		del "%SCRIPTPATH%\%SCRIPTNAME%"
+		exit
 	)
 	call:check_error
 goto:eof
