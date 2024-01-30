@@ -378,6 +378,9 @@ goto:eof
 		if not exist %DKPATH%\%SCRIPTNAME% (
 			copy %SCRIPTPATH%\%SCRIPTNAME% %DKPATH%\%SCRIPTNAME%
 		)
+		echo .
+		echo "RELOADING SCRIPT TO -> %DKPATH%\%SCRIPTNAME%"
+		pause
 		start "" "%DKPATH%\%SCRIPTNAME%"
 		del "%SCRIPTPATH%\%SCRIPTNAME%"
 		exit
