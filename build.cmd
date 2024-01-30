@@ -48,12 +48,12 @@ set "TYPE="
 	echo  9) DKDomTest
 	echo 10) DKTestAll
 	echo 11) Clear Screen
-	echo 12) Restart
+	echo 12) Reload
 	echo 13) Exit
 	set choice=
 	set /p choice=Please select an app to build:
 	::if not '%choice%'=='' set choice=%choice:~0,1%	::What does this do?
-	if '%choice%'=='1' call:git_update & call:restart
+	if '%choice%'=='1' call:git_update & call:reload
 	if '%choice%'=='2' call:git_commit & goto pickapp
 	if '%choice%'=='3' set "APP=HelloWorld" & goto checkApp
 	if '%choice%'=='4' set "APP=DKCore" & goto checkApp
@@ -64,7 +64,7 @@ set "TYPE="
 	if '%choice%'=='9' set "APP=DKDomTest" & goto checkApp
 	if '%choice%'=='10' set "APP=DKTestAll" & goto checkApp
 	if '%choice%'=='11' call:clear_screen & goto pickapp
-	if '%choice%'=='12' call:restart
+	if '%choice%'=='12' call:reload
 	if '%choice%'=='13' call:end
 	echo "%choice%" is not valid, try again
 goto pickapp
@@ -298,8 +298,8 @@ goto pickapp
 :: https://www.dostips.com/DtTutoFunctions.php
 ::--------------------------------------------------------
 
-:: restart()
-:restart
+:: reload()
+:reload
 	echo .
 	echo reloading %~f0
 	start "" "%~f0"

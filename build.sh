@@ -9,8 +9,6 @@ SCRIPTPATH=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
 SCRIPTNAME=$(basename "$0")
 true=0
 false=1
-
-###### color variables ######
 CLR="\033[0m"
 black="100m"
 red="\033[31m"
@@ -35,6 +33,12 @@ function call() {
 	
 	echo -e "${magenta} $ $@ ${CLR}"
 	"$@"
+}
+
+###### reload ######
+function reload() {
+	echo "reloading $SCRIPTPATH/$SCRIPTNAME"
+	clear && $SCRIPTPATH/$SCRIPTNAME && exit
 }
 
 ###### warning <string> ######
@@ -357,7 +361,9 @@ while :
 		"DKSDLRml" 
 		"DKDomTest" 
 		"DKTestAll" 
-		"Clear Screen" 
+		"Clear Screen"
+		"Go Back"
+		"Reload"
 		"Exit")
 	select opt in "${options[@]}"
 	do
@@ -391,6 +397,7 @@ while :
 					git push --set-upstream origin $DKBRANCH
 				fi
 				chmod +x $DKPATH/build.sh
+				call reload
 				;;
 			"Git Commit")
 				echo "$opt"
@@ -455,6 +462,10 @@ while :
 				;;
 			"Go Back")
 				echo "$opt"
+				;;
+			"Reload")
+				echo "$opt"
+				call reload
 				;;
 			"Exit")
 				echo "$opt"
