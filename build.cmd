@@ -387,7 +387,9 @@ goto:eof
 		echo "RELOADING SCRIPT TO -> %DKPATH%\%SCRIPTNAME%"
 		pause
 		start "" "%DKPATH%\%SCRIPTNAME%"
-		del "%SCRIPTPATH%\%SCRIPTNAME%"
+		if exist %DKPATH%\%SCRIPTNAME% (
+			del "%SCRIPTPATH%\%SCRIPTNAME%"
+		)
 		exit
 	)
 	call:check_error
