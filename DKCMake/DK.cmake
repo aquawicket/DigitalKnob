@@ -1,7 +1,7 @@
 include_guard()
 
 #################### GLOBAL DKCMake SETTINGS ############################
-set(DKOFFLINE					1		CACHE INTERNAL "")	# work offline. No Git remote commands or downloading files
+set(DKOFFLINE					0		CACHE INTERNAL "")	# work offline. No Git remote commands or downloading files
 set(BACKUP_APP_EXECUTABLES		1		CACHE INTERNAL "")	# backup previous app executable when rebuilding
 #set(BACKUP_APP_USER_DATA		0		CACHE INTERNAL "")	# preserve assets/USER folder when building
 set(BYPASS_DISABLE				0		CACHE INTERNAL "")	# bypass dk_disable() commands
