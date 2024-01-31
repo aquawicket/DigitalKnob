@@ -63,7 +63,7 @@ set "TYPE="
 	set choice=
 	set /p choice=Please select an app to build:
 	::if not '%choice%'=='' set choice=%choice:~0,1%	::What does this do?
-	if '%choice%'=='1' call:git_update
+	if '%choice%'=='1' call:git_update & goto pickapp
 	if '%choice%'=='2' call:git_commit & goto pickapp
 	if '%choice%'=='3' set "APP=HelloWorld" & goto checkApp
 	if '%choice%'=='4' set "APP=DKCore" & goto checkApp
