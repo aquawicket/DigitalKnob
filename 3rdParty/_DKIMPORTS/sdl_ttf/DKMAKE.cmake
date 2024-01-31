@@ -20,8 +20,8 @@ if(MSVC)
 	dk_libDebug			(${SDL_TTF}/${OS}/lib/${DEBUG_DIR}/SDL_ttf.lib)
 	dk_libRelease		(${SDL_TTF}/${OS}/lib/${RELEASE_DIR}/SDL_ttf.lib)
 else()
-	dk_libDebug			(${SDL_TTF}/${OS}/lib/Debug/SDL_ttf.a)
-	dk_libRelease		(${SDL_TTF}/${OS}/lib/Release/SDL_ttf.a)
+	dk_libDebug			(${SDL_TTF}/${OS}/${DEBUG_DIR}/lib/SDL_ttf.a)
+	dk_libRelease		(${SDL_TTF}/${OS}/${RELEASE_DIR}/lib/SDL_ttf.a)
 endif()
 
 ### GENERATE ###
