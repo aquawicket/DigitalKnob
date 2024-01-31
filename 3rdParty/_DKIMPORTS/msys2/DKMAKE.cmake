@@ -44,8 +44,6 @@ endif()
 #		dk_msys2(pacman -S mingw-w64-x86_64-toolchain --noconfirm)				# toolchain
 #	elseif(UCRT64)
 #		dk_msys2(pacman -S mingw-w64-ucrt-x86_64-toolchain --noconfirm)			# toolchain
-#	else()
-#		dk_error("MSYSTEM is invalid")
 #	endif()
 #	dk_set(MSYS_LOADED TRUE)
 #endif()

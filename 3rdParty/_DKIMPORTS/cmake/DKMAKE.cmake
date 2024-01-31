@@ -7,6 +7,8 @@
 if(MSYSTEM)
 	dk_depend(msys2)
 	
+	dk_remove(${MSYS2}/var/lib/pacman/db.lck NOERROR)
+	
 	if(CLANG32)
 		dk_msys2("pacman -S mingw-w64-clang-i686-cmake --noconfirm")	# CLANG32
 	elseif(CLANG64)
@@ -19,8 +21,10 @@ if(MSYSTEM)
 		dk_msys2("pacman -S mingw-w64-x86_64-cmake --noconfirm")		# MINGW64
 	elseif(UCRT64)
 		dk_msys2("pacman -S mingw-w64-ucrt-x86_64-cmake --noconfirm")	# UCRT64
-	else()
-		dk_error("MSYSTEM is invalid")
+	elseif(WIN_32)
+		dk_msys2("pacman -S mingw-w64-i686-cmake --noconfirm")			# WIN32 / MINGW32
+	elseif(WIN_64)
+		dk_msys2("pacman -S mingw-w64-x86_64-cmake --noconfirm")		# WIN64 / MINGW64
 	endif()
 	
 	dk_set(CMAKE_EXE cmake)
