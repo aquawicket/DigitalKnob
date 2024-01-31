@@ -190,34 +190,34 @@ goto type
 	cd "%APP_PATH%\%OS%"
 	
 	
-	
 	::::::::: BUILD CMAKE_ARGS ARRAY :::::::::
-	set "LEVEL=RebuildAll"
-	set "LINK=Static"
+	set "DKLEVEL=RebuildAll"
+	set "DKLINK=Static"
 	
 	set "CMAKE_ARGS="
-	if %TYPE%==Debug set "CMAKE_ARGS=-DDEBUG=ON -DRELEASE=OFF"
-	if %TYPE%==Release set "CMAKE_ARGS=-DDEBUG=OFF -DRELEASE=ON"
-	if %TYPE%==All set "CMAKE_ARGS=-DDEBUG=ON -DRELEASE=ON"
-	if %LEVEL%==Build set "CMAKE_ARGS=%CMAKE_ARGS% -DBUILD=ON"
-	if %LEVEL%==Rebuild set "CMAKE_ARGS=%CMAKE_ARGS% -DREBUILD=ON"
-	if %LEVEL%==RebuildAll set "CMAKE_ARGS=%CMAKE_ARGS% -DREBUILDALL=ON"
-	if %LINK%==Static set "CMAKE_ARGS=%CMAKE_ARGS% -DSTATIC=ON"
-	if %LINK%==Shared set "CMAKE_ARGS=%CMAKE_ARGS% -DSHARED=ON"
-	::set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_VERBOSE_MAKEFILE=1"
+	if %TYPE%==Debug 			set "CMAKE_ARGS=-DDEBUG=ON -DRELEASE=OFF"
+	if %TYPE%==Release 			set "CMAKE_ARGS=-DDEBUG=OFF -DRELEASE=ON"
+	if %TYPE%==All 				set "CMAKE_ARGS=-DDEBUG=ON -DRELEASE=ON"
+	if %DKLEVEL%==Build 		set "CMAKE_ARGS=%CMAKE_ARGS% -DBUILD=ON"
+	if %DKLEVEL%==Rebuild 		set "CMAKE_ARGS=%CMAKE_ARGS% -DREBUILD=ON"
+	if %DKLEVEL%==RebuildAll 	set "CMAKE_ARGS=%CMAKE_ARGS% -DREBUILDALL=ON"
+	if %DKLINK%==Static 		set "CMAKE_ARGS=%CMAKE_ARGS% -DSTATIC=ON"
+	if %DKLINK%==Shared 		set "CMAKE_ARGS=%CMAKE_ARGS% -DSHARED=ON"
+								set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_VERBOSE_MAKEFILE=1"
 	
 	:::::::::::: GENERATOR ::::::::::::
-	if %OS%==win32 set "GENERATOR=Visual Studio 17 2022"
-	if %OS%==win64 set "GENERATOR=Visual Studio 17 2022"
-	if %OS%==android32 set "GENERATOR=Visual Studio 17 2022"
-	if %OS%==android64 set "GENERATOR=Visual Studio 17 2022"
-	if %OS%==emscripten set "GENERATOR=MinGW Makefiles"
+	if %OS%==win32 				set "GENERATOR=Visual Studio 17 2022"
+	if %OS%==win64 				set "GENERATOR=Visual Studio 17 2022"
+	if %OS%==android32 			set "GENERATOR=Visual Studio 17 2022"
+	if %OS%==android64 			set "GENERATOR=Visual Studio 17 2022"
+	if %OS%==emscripten 		set "GENERATOR=MinGW Makefiles"
 	
 	:::::::::::: MAKE_PROGRAM ::::::::::::
 	
 	:::::::::::: C_COMPILER; CXX_COMPILER ::::::::::::
 	
 	:::::::::::: EXE_LINKER_FLAGS ::::::::::::
+	
 	
 	:: Goto OS to build
 	if %OS%==win32 goto generate_win32
@@ -228,7 +228,10 @@ goto type
 
 :generate_win32
 	call:validate_visual_studio
-	"%CMAKE%" -G "Visual Studio 17 2022" -A Win32 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKCMAKE%
+	"CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_C_COMPILER=%VC_32%"
+	"CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_COMPILER=%VC_32%"
+		
+	 "%CMAKE%" -G "%GENERATOR%" -A x64 %CMAKE_ARGS% "%DKCMAKE%"
 	set TARGET=%APP%_APP
 	
 	::call:validate_msys2
@@ -240,12 +243,11 @@ goto build
 
 :generate_win64
 	call:validate_visual_studio
-	echo "%CMAKE%" -G "Visual Studio 17 2022" -A x64 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON -S%DKCMAKE%
-	"%CMAKE%" -G "Visual Studio 17 2022" -A x64 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON -S%DKCMAKE%
-	
-	::echo "%CMAKE%" -G "%GENERATOR%" -A x64 %CMAKE_ARGS% %DKPATH%\DKCMake
-	::"%CMAKE%" -G "%GENERATOR%" -A x64 %CMAKE_ARGS% %DKPATH%\DKCMake
-	set TARGET=%APP%_APP
+	"CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_C_COMPILER=%VC_64%"
+	"CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_COMPILER=%VC_64%"
+		
+	 "%CMAKE%" -G "%GENERATOR%" -A x64 %CMAKE_ARGS% %DKCMAKE%
+	 set TARGET=%APP%_APP
 goto build
 
 :generate_android32
@@ -490,10 +492,10 @@ goto:eof
 	call:check_error
 goto:eof
 
-
+@echo on
 :: validate_visual_studio()
 :validate_visual_studio
-	call:cmake_eval "include('%DKIMPORTS%/visualstudio/DKMAKE.cmake')"
+	call:cmake_eval "include('%DKIMPORTS%/visualstudio/DKMAKE.cmake')" "VC_32;VC_64;VCLINK_32;VCLINK_64"
 	call:check_error
 goto:eof
 

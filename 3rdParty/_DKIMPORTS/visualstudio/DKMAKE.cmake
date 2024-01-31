@@ -18,25 +18,31 @@ endif()
 #ANDROID_dk_depend(ant)
 #ANDROID_dk_depend(android-sdk)
  
+ 
 ### VERSION ###
 dk_set(VISUALSTUDIO_BUILD 17)
-dk_set(VISUALSTUDIO_VERSION 2022)
+dk_set(VISUALSTUDIO_YEAR 2022)
+dk_set(VISUALSTUDIO_VERSION 14.36.32532)
 dk_set(VISUALSTUDIO_PROGRAM_FILES "Program Files")
 dk_set(VISUALSTUDIO_DL https://aka.ms/vs/${VISUALSTUDIO_BUILD}/release/vs_community.exe)
-dk_set(VISUALSTUDIO "C:/${VISUALSTUDIO_PROGRAM_FILES}/Microsoft Visual Studio/${VISUALSTUDIO_VERSION}/Community")
-dk_set(VISUALSTUDIO_CL "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.34.31933/bin/Hostx64/x86/cl.exe")
+dk_set(VISUALSTUDIO "C:/${VISUALSTUDIO_PROGRAM_FILES}/Microsoft Visual Studio/${VISUALSTUDIO_YEAR}/Community")
 dk_set(MSBUILD "${VISUALSTUDIO}/MSBuild/Current/Bin/MSBuild.exe")
-dk_set(DUMPBIN "${VISUALSTUDIO}/VC/Tools/MSVC/14.30.30705/bin/Hostx86/x86/dumpbin.exe")
-dk_set(VS_GENERATOR "Visual Studio ${VISUALSTUDIO_BUILD} ${VISUALSTUDIO_VERSION}")
+dk_set(DUMPBIN "${VISUALSTUDIO}/VC/Tools/MSVC/${VISUALSTUDIO_VERSION}/bin/Hostx86/x86/dumpbin.exe")
+dk_set(VS_GENERATOR "Visual Studio ${VISUALSTUDIO_BUILD} ${VISUALSTUDIO_YEAR}")
+
+dk_set(VC_86 "${VISUALSTUDIO}/VC/Tools/MSVC/${VISUALSTUDIO_VERSION}/bin/Hostx64/x86/cl.exe")
+dk_set(VC_64 "${VISUALSTUDIO}/VC/Tools/MSVC/${VISUALSTUDIO_VERSION}/bin/Hostx64/x64/cl.exe")
+dk_set(VCLINK_32 "${VISUALSTUDIO}/VC/Tools/MSVC/${VISUALSTUDIO_VERSION}/bin/Hostx64/x86/link.exe")
+dk_set(VCLINK_64 "${VISUALSTUDIO}/VC/Tools/MSVC/${VISUALSTUDIO_VERSION}/bin/Hostx64/x64/link.exe")
 
 if(EXISTS ${VISUALSTUDIO})
-	dk_info("Visual Studio ${VISUALSTUDIO_BUILD} ${VISUALSTUDIO_VERSION} already installed")
+	dk_info("Visual Studio ${VISUALSTUDIO_BUILD} ${VISUALSTUDIO_YEAR} already installed")
 elseif(EXISTS "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community") #fall back to older version
 	dk_set(VISUALSTUDIO "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community")
 	dk_set(MSBUILD "${VISUALSTUDIO}/MSBuild/Current/Bin/MSBuild.exe")
 	dk_set(VS_GENERATOR "Visual Studio 16 2019")
 else()  #install
-	dk_info("Installing Visual Studio ${VISUALSTUDIO_VERSION}")
+	dk_info("Installing Visual Studio ${VISUALSTUDIO_YEAR}")
 	if(EXISTS ${DKDOWNLOAD}/VisualStudio/vs_setup.exe)
 		# offline installer
 		dk_command(${3RDPARTY}/_DKIMPORTS/visualstudio/InstallVisualStudio.cmd)
