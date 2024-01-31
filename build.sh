@@ -256,21 +256,21 @@ function validate_branch() {
 	DKIMPORTS="$DK3RDPARTY/_DKIMPORTS"
 
 	# make sure script is running from DKPATH
-	if ! [[ "$SCRIPTPATH" == "$DKPATH" ]]; then
-		if ! file_exists $DKPATH/$SCRIPTNAME; then
-			echo "$DKPATH/$SCRIPTNAME"
-			cp $SCRIPTPATH/$SCRIPTNAME $DKPATH/$SCRIPTNAME
-		fi
-		echo .
-		echo "RELOADING SCRIPT TO -> $DKPATH/$SCRIPTNAME"
-		read -p "Press enter to continue"
-		clear
-		if file_exists $DKPATH/$SCRIPTNAME; then
-			rm $SCRIPTPATH/$SCRIPTNAME
-		fi
-		$DKPATH/$SCRIPTNAME
-		exit
-	fi
+	#if ! [[ "$SCRIPTPATH" == "$DKPATH" ]]; then
+	#	if ! file_exists $DKPATH/$SCRIPTNAME; then
+	#		echo "$DKPATH/$SCRIPTNAME"
+	#		cp $SCRIPTPATH/$SCRIPTNAME $DKPATH/$SCRIPTNAME
+	#	fi
+	#	echo .
+	#	echo "RELOADING SCRIPT TO -> $DKPATH/$SCRIPTNAME"
+	#	read -p "Press enter to continue"
+	#	clear
+	#	if file_exists $DKPATH/$SCRIPTNAME; then
+	#		rm $SCRIPTPATH/$SCRIPTNAME
+	#	fi
+	#	$DKPATH/$SCRIPTNAME
+	#	exit
+	#fi
 }
 
 ###### clear_cmake_cache ######
@@ -478,7 +478,7 @@ while :
 					git push --set-upstream origin $DKBRANCH
 				fi
 				chmod +x $DKPATH/build.sh
-				call reload
+				#call reload
 				;;
 			"Git Commit")
 				echo "$opt"
