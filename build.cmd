@@ -196,15 +196,15 @@ goto type
 	if %OS%==emscripten goto generate_emscripten
 
 :generate_win32
-	::call:validate_visual_studio
-	::"%CMAKE%" -G "Visual Studio 17 2022" -A Win32 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKCMAKE%
-	::set TARGET=%APP%_APP
+	call:validate_visual_studio
+	"%CMAKE%" -G "Visual Studio 17 2022" -A Win32 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKCMAKE%
+	set TARGET=%APP%_APP
 	
-	call:validate_msys2
-	TITLE DigitalKnob - MINGW32
-	call set DKPATH=%%DKPATH:^\=^/%%
-	%MSYS2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -lc "clear && %DKPATH%/build.sh"
-	goto:eof
+	::call:validate_msys2
+	::TITLE DigitalKnob - MINGW32
+	::call set DKPATH=%%DKPATH:^\=^/%%
+	::%MSYS2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -lc "clear && %DKPATH%/build.sh"
+	::goto:eof
 goto build
 
 :generate_win64
