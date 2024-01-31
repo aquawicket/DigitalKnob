@@ -189,17 +189,37 @@ goto type
 	call:make_directory "%APP_PATH%\%OS%"
 	cd "%APP_PATH%\%OS%"
 	
+	
+	
 	::::::::: BUILD CMAKE_ARGS ARRAY :::::::::
-	::if %TYPE%==All (
-	::	CMAKE_ARGS+=( "-DDEBUG=ON" )
-	::	CMAKE_ARGS+=( "-DRELEASE=ON" )
-	::fi
-	::if %TYPE%==Debug (
-	::	CMAKE_ARGS+=( "-DDEBUG=ON" )
-	::)
-	::if %TYPE%==Release (
-	::	CMAKE_ARGS+=( "-DRELEASE=ON" )
-	::)
+	set "LEVEL=RebuildAll"
+	set "LINK=Static"
+	
+	set "CMAKE_ARGS="
+	if %TYPE%==Debug set "CMAKE_ARGS=-DDEBUG=ON -DRELEASE=OFF"
+	if %TYPE%==Release set "CMAKE_ARGS=-DDEBUG=OFF -DRELEASE=ON"
+	if %TYPE%==All set "CMAKE_ARGS=-DDEBUG=ON -DRELEASE=ON"
+	if %LEVEL%==Build set "CMAKE_ARGS=%CMAKE_ARGS% -DBUILD=ON"
+	if %LEVEL%==Rebuild set "CMAKE_ARGS=%CMAKE_ARGS% -DREBUILD=ON"
+	if %LEVEL%==RebuildAll set "CMAKE_ARGS=%CMAKE_ARGS% -DREBUILDALL=ON"
+	if %LINK%==Static set "CMAKE_ARGS=%CMAKE_ARGS% -DSTATIC=ON"
+	if %LINK%==Shared set "CMAKE_ARGS=%CMAKE_ARGS% -DSHARED=ON"
+	::set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_VERBOSE_MAKEFILE=1"
+	
+	:::::::::::: GENERATOR ::::::::::::
+	if %OS%==win32 set "GENERATOR=Visual Studio 17 2022"
+	if %OS%==win64 set "GENERATOR=Visual Studio 17 2022"
+	if %OS%==android32 set "GENERATOR=Visual Studio 17 2022"
+	if %OS%==android64 set "GENERATOR=Visual Studio 17 2022"
+	if %OS%==emscripten set "GENERATOR=MinGW Makefiles"
+	
+	:::::::::::: MAKE_PROGRAM ::::::::::::
+	
+	:::::::::::: C_COMPILER; CXX_COMPILER ::::::::::::
+	
+	:::::::::::: EXE_LINKER_FLAGS ::::::::::::
+	
+	:: Goto OS to build
 	if %OS%==win32 goto generate_win32
 	if %OS%==win64 goto generate_win64
 	if %OS%==android32 goto generate_android32
@@ -220,7 +240,11 @@ goto build
 
 :generate_win64
 	call:validate_visual_studio
-	"%CMAKE%" -G "Visual Studio 17 2022" -A x64 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKCMAKE%
+	echo "%CMAKE%" -G "Visual Studio 17 2022" -A x64 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON -S%DKCMAKE%
+	"%CMAKE%" -G "Visual Studio 17 2022" -A x64 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON -S%DKCMAKE%
+	
+	::echo "%CMAKE%" -G "%GENERATOR%" -A x64 %CMAKE_ARGS% %DKPATH%\DKCMake
+	::"%CMAKE%" -G "%GENERATOR%" -A x64 %CMAKE_ARGS% %DKPATH%\DKCMake
 	set TARGET=%APP%_APP
 goto build
 
