@@ -26,8 +26,8 @@ dk_depend(zstd)
 
 
 ### IMPORT ###
-dk_import(https://github.com/libarchive/libarchive.git BRANCH master TAG a5aac7c9295449dc2fabf36f203f4ff464724ccf PATCH)
-#dk_import(https://github.com/libarchive/libarchive.git PATCH)
+#dk_import(https://github.com/libarchive/libarchive.git BRANCH master TAG a5aac7c9295449dc2fabf36f203f4ff464724ccf PATCH)
+dk_import(https://github.com/libarchive/libarchive.git)
 
 
 ### LINK ###

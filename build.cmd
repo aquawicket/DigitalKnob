@@ -189,6 +189,17 @@ goto type
 	call:make_directory "%APP_PATH%\%OS%"
 	cd "%APP_PATH%\%OS%"
 	
+	::::::::: BUILD CMAKE_ARGS ARRAY :::::::::
+	::if %TYPE%==All (
+	::	CMAKE_ARGS+=( "-DDEBUG=ON" )
+	::	CMAKE_ARGS+=( "-DRELEASE=ON" )
+	::fi
+	::if %TYPE%==Debug (
+	::	CMAKE_ARGS+=( "-DDEBUG=ON" )
+	::)
+	::if %TYPE%==Release (
+	::	CMAKE_ARGS+=( "-DRELEASE=ON" )
+	::)
 	if %OS%==win32 goto generate_win32
 	if %OS%==win64 goto generate_win64
 	if %OS%==android32 goto generate_android32
