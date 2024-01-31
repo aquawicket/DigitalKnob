@@ -7,8 +7,10 @@ MAC_HOST_dk_queueCommand(brew install autogen)
 MAC_HOST_dk_queueCommand(brew install autoconf)
 MAC_HOST_dk_queueCommand(brew install automake)
 
-if(MSYSTEM)
+if(WIN_HOST)
 	dk_depend(msys2)
+	
+	dk_remove(${MSYS2}/var/lib/pacman/db.lck NOERROR)
 	
 	if(CLANG32)
 		dk_msys2("pacman -S mingw-w64-clang-i686-autotools --noconfirm")	# CLANG32
@@ -22,12 +24,9 @@ if(MSYSTEM)
 		dk_msys2("pacman -S mingw-w64-x86_64-autotools --noconfirm")		# MINGW64
 	elseif(UCRT64)
 		dk_msys2("pacman -S mingw-w64-ucrt-x86_64-autotools --noconfirm")	# UCRT64
-	else()
-		dk_error("MSYSTEM is invalid")
+	elseif(WIN_32)
+		dk_msys2("pacman -S mingw-w64-i686-autotools --noconfirm")			# WIN32 / MINGW32
+	elseif(WIN_64)
+		dk_msys2("pacman -S mingw-w64-x86_64-autotools --noconfirm")		# WIN64	/ MINGW64
 	endif()
-	
-	dk_set(GCC_EXE gcc)
-	dk_msys2(${GCC_EXE} --version)
-	dk_debug("GCC_EXE = ${GCC_EXE}")
-	return()
 endif()
