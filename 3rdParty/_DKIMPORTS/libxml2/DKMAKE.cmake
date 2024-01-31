@@ -15,6 +15,8 @@ dk_import(https://github.com/GNOME/libxml2.git TAG f2ad86fa600885429a6083aaf6926
 
 
 ### LINK ###
+dk_set		(LIBXML2_INCLUDE_DIR ${LIBXML2}/include)
+dk_include	(${LIBXML2_INCLUDE_DIR})
 dk_include	(${LIBXML2})
 dk_include	(${LIBXML2}/include)
 dk_include	(${LIBXML2}/${OS})
@@ -22,9 +24,11 @@ dk_include	(${LIBXML2}/${OS})
 if(MSVC)
 	WIN_dk_libDebug		(${LIBXML2}/${OS}/${DEBUG_DIR}/xml2.lib)
 	WIN_dk_libRelease	(${LIBXML2}/${OS}/${RELEASE_DIR}/xml2.lib)
+	dk_set				(LIBXML2_LIBRARIES ${LIBXML2}/${OS}/${DEBUG_DIR}/xml2.lib;${LIBXML2}/${OS}/${RELEASE_DIR}/xml2.lib)
 else()
 	dk_libDebug			(${LIBXML2}/${OS}/${DEBUG_DIR}/libxml2.a)
 	dk_libRelease		(${LIBXML2}/${OS}/${RELEASE_DIR}/libxml2.a)
+	dk_set				(LIBXML2_LIBRARIES ${LIBXML2}/${OS}/${DEBUG_DIR}/libxml2.a;${LIBXML2}/${OS}/${RELEASE_DIR}/libxml2.a)
 endif()
 
 
