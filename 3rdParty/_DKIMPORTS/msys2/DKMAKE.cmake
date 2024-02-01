@@ -20,6 +20,7 @@ if(NOT EXISTS ${MSYS2}/msys2.exe)
 	dk_command(${DKDOWNLOAD}/${MSYS2_DL_FILE} install --root ${MSYS2} --confirm-command)
 endif()	
 
+dk_addFirewallAllow("pacman" "${MSYS2}/usr/bin/pacman.exe")
 
 ### ADD msys2 bin directory to path environment variable
 #dk_setEnv("PATH" "${MSYS2}/usr/bin")

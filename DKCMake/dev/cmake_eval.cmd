@@ -38,42 +38,67 @@ if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: k
 
 ::###### cmake_eval ######
 :cmake_eval
-	::echo cmake_eval %1
-	IF [%1] == [] (
-		echo "ERROR: cmake_eval() parameter1 is invalid"
-		goto:eof
-	)
+	if [%1] == [] 				echo "ERROR: cmake_eval() parameter1 is invalid" & goto:eof
+	
+	set "DKBRANCH=Development"
+	set "DIGITALKNOB=%HOMEDRIVE%%HOMEPATH%\digitalknob"
+	set "DKCMAKE=%DIGITALKNOB%\%DKBRANCH%\DKCMake"
+	
+	if exist "C:\Program Files\CMake\bin\cmake.exe" 		set "CMAKE=C:\Program Files\CMake\bin\cmake.exe"
+	if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" 	set "CMAKE=C:\Program Files (x86)\CMake\bin\cmake.exe"
+	if not exist "%CMAKE%" 									echo "ERROR: Could not locate CMAKE" & goto:eof
+	
+	if not exist "%CMAKE%"		echo "ERROR: Could not locate CMAKE" 	& goto:eof
+	if not exist "%DKCMAKE%" 	echo "ERROR: Could not locate DKCMAKE" 	& goto:eof
 
-	set "DIGITALKNOB=C:/Users/%USERNAME%/digitalknob"
-	set "DKCMAKE=%DIGITALKNOB%/Development/DKCMake"
-	if exist "C:\Program Files\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files\CMake\bin\cmake.exe"
-	if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" set "CMAKE=C:\Program Files (x86)\CMake\bin\cmake.exe"
-	if not exist "%CMAKE%" ( echo "ERROR: Could not locate CMAKE" )
-
+	:: cmake_eval begin
 	set commands=%1
-	::echo commands = %commands%
-	set commands=%commands:"=%
+	set variables=%2
+	call set commands=%%commands:"=%%
 	set "DKCOMMAND=%commands%"
-	::echo DKCOMMAND = %DKCOMMAND%
-
-	"%CMAKE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE%/dev/cmake_eval.cmake" --log-level=TRACE >cmake_eval.out 2>cmake_eval.err
-	echo return code: %ERRORLEVEL%
-
+	call set DKCOMMAND=%%DKCOMMAND:^\=^/%%
+	echo DKCOMMAND = %DKCOMMAND%
+	call set DKCMAKE_DIR=%%DKCMAKE:^\=^/%%
+	
+	::echo "%CMAKE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE%/dev/cmake_eval.cmake" --log-level=TRACE >cmake_eval.out 2>cmake_eval.err
+	
+	if [%2] == [] goto no_return_values
+	goto with_return_values
+	
+	:no_return_values
+		"%CMAKE%" "-DDKCMAKE=%DKCMAKE_DIR%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE_DIR%/dev/cmake_eval.cmake"
+		goto:eof
+		
+	:with_return_values
+		"%CMAKE%" "-DDKCMAKE=%DKCMAKE_DIR%" "-DDKCOMMAND=%DKCOMMAND%" "-DDKRETURN=%~2" -P %DKCMAKE_DIR%/dev/cmake_eval.cmake
+		if not exist %DKCMAKE%/cmake_vars.cmd goto:eof
+		call %DKCMAKE%\cmake_vars.cmd
+		del %DKCMAKE%\cmake_vars.cmd
+		
+	::echo return code: %ERRORLEVEL%
+	
+	:::: work with cmake return code files ::::
+	:: std::out
 	set out=
-	for /f "Tokens=* Delims=" %%x in (cmake_eval.out) do (
-		set out=!out!%%x
-		echo %%x
+	if exist "cmake_eval.out" (
+		for /f "Tokens=* Delims=" %%x in (cmake_eval.out) do (
+			set out=!out!%%x
+			echo %%x
+		)
 	)
 	::out contains all of the lines
 	::del cmake_eval.out
-	::echo %out%		
+	::echo %out%	
 			
+	:: std::err
 	set err=
-	for /f "Tokens=* Delims=" %%x in (cmake_eval.err) do (
-		set err=!err!%%x
-		echo [91m %%x [0m
+	if exist "cmake_eval.err" (
+		for /f "Tokens=* Delims=" %%x in (cmake_eval.err) do (
+			set err=!err!%%x
+			echo [91m %%x [0m
+		)
 	)
 	::del cmake_eval.out
 	::err contains all of the lines
 	::echo %err%
-goto:eof 
+goto:eof
