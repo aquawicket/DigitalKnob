@@ -859,17 +859,14 @@ while :
 	fi
 	
 	if [[ "$OS" == "android"* ]]; then
-	    cmake_eval "include('$DKIMPORTS/android-ndk/DKMAKE.cmake')" "ANDROID_NDK;ANDROID_NDK_BUILD;ANDROID_TOOLCHAIN;ANDROID_API"
+	    cmake_eval "include('$DKIMPORTS/android-ndk/DKMAKE.cmake')" "ANDROID_NDK;ANDROID_NDK_BUILD;ANDROID_TOOLCHAIN"
 	    echo "ANDROID_NDK = $ANDROID_NDK"
 		echo "ANDROID_NDK_BUILD = $ANDROID_NDK_BUILD"
 	    echo "ANDROID_TOOLCHAIN = $ANDROID_TOOLCHAIN"
-		echo "ANDROID_API = $ANDROID_API"
+		ANDROID_API=31
+        echo "ANDROID_API = $ANDROID_API"
 		
 		TARGET="main"
-		#if [[ "$OSTYPE" == "linux-android" ]]; then
-		#    ANDROID_NDK_BUILD="23.2.8568313"
-		#else
-		#	ANDROID_NDK_BUILD="23.1.7779620"
 	fi
 			
 	if [[ "$OS" == "android32" ]]; then
