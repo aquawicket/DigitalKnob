@@ -1,4 +1,4 @@
-# Information
+# Microsoft Visual Studio Comunity
 # https://docs.microsoft.com/en-us/cpp/build/building-on-the-command-line?view=msvc-160
 # https://docs.microsoft.com/en-us/visualstudio/msbuild/msbuild?view=vs-2019
 # MSBuild command-line reference  https://docs.microsoft.com/en-us/visualstudio/msbuild/msbuild-command-line-reference?view=vs-2019
@@ -17,30 +17,58 @@ endif()
 
 
 ### VERSION ###
-dk_set(VISUALSTUDIO_BUILD 				17)
-dk_set(VISUALSTUDIO_YEAR 				2022)
-dk_set(VISUALSTUDIO_VERSION 			14.36.32532)
-dk_set(VISUALSTUDIO_DL 					"https://aka.ms/vs/${VISUALSTUDIO_BUILD}/release/vs_community.exe")
-dk_set(VISUALSTUDIO 					"${ProgramFiles}/Microsoft Visual Studio/${VISUALSTUDIO_YEAR}/Community")
-dk_set(VISUALSTUDIO_GENERATOR 			"Visual Studio ${VISUALSTUDIO_BUILD} ${VISUALSTUDIO_YEAR}")
-dk_set(VISUALSTUDIO_X86_C_COMPILER 		"${VISUALSTUDIO}/VC/Tools/MSVC/${VISUALSTUDIO_VERSION}/bin/Hostx64/x86/cl.exe")
-dk_set(VISUALSTUDIO_X86_CXX_COMPILER 	"${VISUALSTUDIO}/VC/Tools/MSVC/${VISUALSTUDIO_VERSION}/bin/Hostx64/x86/cl.exe")
-dk_set(VISUALSTUDIO_X64_C_COMPILER 		"${VISUALSTUDIO}/VC/Tools/MSVC/${VISUALSTUDIO_VERSION}/bin/Hostx64/x64/cl.exe")
-dk_set(VISUALSTUDIO_X64_CXX_COMPILER 	"${VISUALSTUDIO}/VC/Tools/MSVC/${VISUALSTUDIO_VERSION}/bin/Hostx64/x64/cl.exe")
-dk_set(VISUALSTUDIO_X86_LINKER 			"${VISUALSTUDIO}/VC/Tools/MSVC/${VISUALSTUDIO_VERSION}/bin/Hostx64/x86/link.exe")
-dk_set(VISUALSTUDIO_X64_LINKER 			"${VISUALSTUDIO}/VC/Tools/MSVC/${VISUALSTUDIO_VERSION}/bin/Hostx64/x64/link.exe")
-dk_set(VISUALSTUDIO_X86_DUMPBIN 		"${VISUALSTUDIO}/VC/Tools/MSVC/${VISUALSTUDIO_VERSION}/bin/Hostx86/x86/dumpbin.exe")
-dk_set(VISUALSTUDIO_X64_DUMPBIN 		"${VISUALSTUDIO}/VC/Tools/MSVC/${VISUALSTUDIO_VERSION}/bin/Hostx86/x64/dumpbin.exe")
-dk_set(VISUALSTUDIO_MAKE_PROGRAM		"${VISUALSTUDIO}/MSBuild/Current/Bin/amd64/MSBuild.exe")
+dk_set(VISUALSTUDIO_VERSION 	17)
+dk_set(VISUALSTUDIO_DL 			"https://aka.ms/vs/${VISUALSTUDIO_VERSION}/release/vs_community.exe")
+dk_set(VISUALSTUDIO 			"${ProgramFiles}/Microsoft Visual Studio")
+
+
+macro(get_visualstudio_year result)
+	file(GLOB children RELATIVE "${VISUALSTUDIO}" "${VISUALSTUDIO}/*")
+	foreach(child ${children})
+		if(IS_DIRECTORY "${VISUALSTUDIO}/${child}")
+			if(EXISTS "${VISUALSTUDIO}/${child}/Community")
+				set(${result} ${child})
+			endif()
+		endif()
+	endforeach()
+	if(NOT ${result})
+		dk_assert("get_visualstudio_year() Could not locate year.")
+	endif()
+endmacro()
+
+macro(get_visualstudio_edition result)
+	file(GLOB children RELATIVE "${VISUALSTUDIO_COMMUNITY}/VC/Tools/MSVC" "${VISUALSTUDIO_COMMUNITY}/VC/Tools/MSVC/*")
+	foreach(child ${children})
+		if(IS_DIRECTORY "${VISUALSTUDIO_COMMUNITY}/VC/Tools/MSVC/${child}")
+			if(EXISTS "${VISUALSTUDIO_COMMUNITY}/VC/Tools/MSVC/${child}/bin/Hostx86")
+				set(${result} ${child})
+			endif()
+		endif()
+	endforeach()
+	if(NOT ${result})
+		dk_assert("get_visualstudio_edition() Could not locate edition.")
+	endif()
+endmacro()
 
 if(EXISTS ${VISUALSTUDIO})
-	dk_info("Visual Studio ${VISUALSTUDIO_BUILD} ${VISUALSTUDIO_YEAR} already installed")
-elseif(EXISTS "${ProgramFiles_x86}/Microsoft Visual Studio/2019/Community") #fall back to older version
-	dk_set(VISUALSTUDIO "${ProgramFiles_x86}/Microsoft Visual Studio/2019/Community")
-	dk_set(MSBUILD "${VISUALSTUDIO}/MSBuild/Current/Bin/MSBuild.exe")
-	dk_set(VS_GENERATOR "Visual Studio 16 2019")
+	get_visualstudio_year(VISUALSTUDIO_YEAR)
+	dk_set(VISUALSTUDIO_COMMUNITY 			"${VISUALSTUDIO}/${VISUALSTUDIO_YEAR}/Community")
+	get_visualstudio_edition(VISUALSTUDIO_EDITION)
+	dk_set(VISUALSTUDIO_GENERATOR 			"Visual Studio ${VISUALSTUDIO_VERSION} ${VISUALSTUDIO_YEAR}")
+	dk_set(VISUALSTUDIO_X86_C_COMPILER 		"${VISUALSTUDIO_COMMUNITY}/VC/Tools/MSVC/${VISUALSTUDIO_EDITION}/bin/Hostx64/x86/cl.exe")
+	dk_set(VISUALSTUDIO_X86_CXX_COMPILER 	"${VISUALSTUDIO_COMMUNITY}/VC/Tools/MSVC/${VISUALSTUDIO_EDITION}/bin/Hostx64/x86/cl.exe")
+	dk_set(VISUALSTUDIO_X64_C_COMPILER 		"${VISUALSTUDIO_COMMUNITY}/VC/Tools/MSVC/${VISUALSTUDIO_EDITION}/bin/Hostx64/x64/cl.exe")
+	dk_set(VISUALSTUDIO_X64_CXX_COMPILER 	"${VISUALSTUDIO_COMMUNITY}/VC/Tools/MSVC/${VISUALSTUDIO_EDITION}/bin/Hostx64/x64/cl.exe")
+	dk_set(VISUALSTUDIO_X86_LINKER 			"${VISUALSTUDIO_COMMUNITY}/VC/Tools/MSVC/${VISUALSTUDIO_EDITION}/bin/Hostx64/x86/link.exe")
+	dk_set(VISUALSTUDIO_X64_LINKER 			"${VISUALSTUDIO_COMMUNITY}/VC/Tools/MSVC/${VISUALSTUDIO_EDITION}/bin/Hostx64/x64/link.exe")
+	dk_set(VISUALSTUDIO_X86_DUMPBIN 		"${VISUALSTUDIO_COMMUNITY}/VC/Tools/MSVC/${VISUALSTUDIO_EDITION}/bin/Hostx86/x86/dumpbin.exe")
+	dk_set(VISUALSTUDIO_X64_DUMPBIN 		"${VISUALSTUDIO_COMMUNITY}/VC/Tools/MSVC/${VISUALSTUDIO_EDITION}/bin/Hostx86/x64/dumpbin.exe")
+	dk_set(VISUALSTUDIO_MAKE_PROGRAM		"${VISUALSTUDIO_COMMUNITY}/MSBuild/Current/Bin/amd64/MSBuild.exe")
+	
+	dk_info("Visual Studio ${VISUALSTUDIO_VERSION} ${VISUALSTUDIO_YEAR} already installed")
+	
 else()  #install
-	dk_info("Installing Visual Studio ${VISUALSTUDIO_YEAR}")
+	dk_info("Installing Visual Studio . . .")
 	if(EXISTS ${DKDOWNLOAD}/VisualStudio/vs_setup.exe)
 		# offline installer
 		dk_command(${3RDPARTY}/_DKIMPORTS/visualstudio/InstallVisualStudio.cmd)
@@ -52,12 +80,12 @@ else()  #install
 ENDIF()
 
 if(ANDROID)
-	if(NOT EXISTS "${ProgramFiles}/Microsoft Visual Studio/2022/Community/MSBuild/Microsoft/MDD/Android/V150/Android.Common.targets")
-		dk_error("${ProgramFiles}/Microsoft Visual Studio/2022/Community/MSBuild/Microsoft/MDD/Android/V150/Android.Common.targets does not exist!")
+	if(NOT EXISTS "${VISUALSTUDIO_COMMUNITY}/MSBuild/Microsoft/MDD/Android/V150/Android.Common.targets")
+		dk_error("${VISUALSTUDIO_COMMUNITY}/MSBuild/Microsoft/MDD/Android/V150/Android.Common.targets does not exist!")
 	else()
 		dk_info("Patching Android.Common.targets. . .")
-		dkFileReplace("${ProgramFiles}/Microsoft Visual Studio/2022/Community/MSBuild/Microsoft/MDD/Android/V150/Android.Common.targets" ">ARM7</GradlePlatform>" "></GradlePlatform>")
-		dkFileReplace("${ProgramFiles}/Microsoft Visual Studio/2022/Community/MSBuild/Microsoft/MDD/Android/V150/Android.Common.targets" ">ARM8</GradlePlatform>" "></GradlePlatform>")
-		dkFileReplace("${ProgramFiles}/Microsoft Visual Studio/2022/Community/MSBuild/Microsoft/MDD/Android/V150/Android.Common.targets" ">x86-64</GradlePlatform>" "></GradlePlatform>")
+		dkFileReplace("${VISUALSTUDIO_COMMUNITY}/MSBuild/Microsoft/MDD/Android/V150/Android.Common.targets" ">ARM7</GradlePlatform>" "></GradlePlatform>")
+		dkFileReplace("${VISUALSTUDIO_COMMUNITY}/MSBuild/Microsoft/MDD/Android/V150/Android.Common.targets" ">ARM8</GradlePlatform>" "></GradlePlatform>")
+		dkFileReplace("${VISUALSTUDIO_COMMUNITY}/MSBuild/Microsoft/MDD/Android/V150/Android.Common.targets" ">x86-64</GradlePlatform>" "></GradlePlatform>")
 	endif()
 endif()
