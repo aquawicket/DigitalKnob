@@ -7,10 +7,10 @@ dk_import(https://github.com/madler/zlib.git)
 
 
 ### LINK ###
-dk_include			(${ZLIB})
-dk_include			(${ZLIB}/${OS})
-DEBUG_dk_include	(${ZLIB}/${OS}/${DEBUG_DIR})
-RELEASE_dk_include	(${ZLIB}/${OS}/${RELEASE_DIR})
+dk_include				(${ZLIB})
+dk_include				(${ZLIB}/${OS})
+DEBUG_dk_include		(${ZLIB}/${OS}/${DEBUG_DIR})
+RELEASE_dk_include		(${ZLIB}/${OS}/${RELEASE_DIR})
 if(MSVC)
 	WIN_dk_libDebug		(${ZLIB}/${OS}/${DEBUG_DIR}/zlibstaticd.lib)
 	WIN_dk_libRelease	(${ZLIB}/${OS}/${RELEASE_DIR}/zlibstatic.lib)
