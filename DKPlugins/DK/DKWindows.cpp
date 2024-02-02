@@ -78,9 +78,9 @@ bool WINAPI DKWindows::ConsoleHandler(DWORD type){
 bool DKWindows::CpuInit(){
 	DKDEBUGFUNC();
 	//Init for DKWindows::CpuUsed()
-	PdhOpenQuery(NULL, NULL, &cpuQuery);
+	PdhOpenQuery(NULL, 0, &cpuQuery);
 	// You can also use L"\\Processor(*)\\% Processor Time" and get individual CPU values with PdhGetFormattedCounterArray()
-	PdhAddEnglishCounter(cpuQuery, "\\Processor(_Total)\\% Processor Time", NULL, &cpuTotal);
+	PdhAddEnglishCounter(cpuQuery, "\\Processor(_Total)\\% Processor Time", 0, &cpuTotal);
 	PdhCollectQueryData(cpuQuery);
 	//Init for DKWindows::CpuUsedByApp()
 	SYSTEM_INFO sysInfo;
@@ -175,7 +175,7 @@ bool DKWindows::FindImageOnScreen(const DKString& file, int& x, int& y){
 	#else
 		BYTE* sP = new BYTE;
 	#endif
-	HBITMAP hBitmap = CreateDIBSection(hdcTemp, &bitmap, DIB_RGB_COLORS, (void**)(&sP), NULL, NULL);
+	HBITMAP hBitmap = CreateDIBSection(hdcTemp, &bitmap, DIB_RGB_COLORS, (void**)(&sP), nullptr, 0);
 	SelectObject(hdcTemp, hBitmap);
 	BitBlt(hdcTemp, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, hdc, 0, 0, SRCCOPY);
 	// clean up
@@ -208,7 +208,7 @@ bool DKWindows::FindImageOnScreen(const DKString& file, int& x, int& y){
 	#else
 		BYTE* iP = new BYTE;
 	#endif
-	HBITMAP hDIBMemBM  = ::CreateDIBSection(0, &bitmap2, DIB_RGB_COLORS, (void**)&iP, NULL, NULL);
+	HBITMAP hDIBMemBM  = ::CreateDIBSection(0, &bitmap2, DIB_RGB_COLORS, (void**)&iP, nullptr, 0);
 	HBITMAP hOldBmp1  = (HBITMAP)::SelectObject(memDC1,hDIBMemBM);  
 	HBITMAP hOldBmp2  = (HBITMAP)::SelectObject(memDC2,hBmp);
 	BitBlt(memDC1, 0, 0, bm.bmWidth, bm.bmHeight, memDC2, 0, 0, SRCCOPY);
@@ -420,7 +420,7 @@ bool DKWindows::GetUsername(DKString& username){
 bool DKWindows::GetVolume(int& percent){
 	DKDEBUGFUNC(percent);
 	//bool bScalar = true;
-	HRESULT hr=NULL;
+	HRESULT hr = 0;
 	//bool decibels = false;
 	//bool scalar = false;
 	CoInitialize(NULL);
@@ -780,7 +780,7 @@ bool DKWindows::SetVolume(int& percent){
 	if(percent < 0)
 		percent = 0;
 	bool bScalar = true;
-    HRESULT hr=NULL;
+    HRESULT hr = 0;
     //bool decibels = false;
     //bool scalar = false;
     double newVolume = (double)percent / 100;
@@ -885,7 +885,7 @@ bool DKWindows::WheelDown(){
 
 bool DKWindows::WheelUp(){
 	DKDEBUGFUNC();
-	mouse_event(MOUSEEVENTF_WHEEL, 0, 0, WHEEL_DELTA, NULL);
+	mouse_event(MOUSEEVENTF_WHEEL, 0, 0, WHEEL_DELTA, 0);
 	return true;
 }
 
