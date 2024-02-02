@@ -47,6 +47,19 @@ if(DEFINED ENV{MSYSTEM})
 	set($ENV{MSYSTEM} TRUE		CACHE INTERNAL "")
 endif()
 
+## DEFINED ProgramFiles VARIABLES
+if(DEFINED "ENV{ProgramW6432}")
+	file(TO_CMAKE_PATH "$ENV{ProgramW6432}" ProgramFiles)
+	set(ProgramFiles "${ProgramFiles}")
+elseif(DEFINED "ENV{ProgramFiles}")
+	file(TO_CMAKE_PATH "$ENV{ProgramFiles}" ProgramFiles)
+	set(ProgramFiles "${ProgramFiles}")
+endif()
+if(DEFINED "ENV{ProgramFiles\(x86\)}")
+	file(TO_CMAKE_PATH "$ENV{ProgramFiles\(x86\)}" ProgramFiles_x86)
+	set(ProgramFiles_x86 "${ProgramFiles_x86}")
+endif()
+
 
 
 ## Set the DIGITALKNOB, DKBRANCH and DKCMAKE variables 
