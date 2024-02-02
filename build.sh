@@ -971,6 +971,9 @@ while :
 	fi
 	
 	if [[ "$OS" == "win32" ]]; then
+		validate_msys2
+		call export PATH=${MSYS2}/mingw32/bin:$PATH
+		call export PATH=${MSYS2}/usr/bin:$PATH
 		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
 			call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
 		fi
@@ -982,7 +985,6 @@ while :
 	
 	if [[ "$OS" == "win64" ]]; then
 		validate_msys2
-		#MSYS2="$DKPATH/3rdParty/msys2-x86_64-20231026"
 		call export PATH=${MSYS2}/mingw64/bin:$PATH
 		call export PATH=${MSYS2}/usr/bin:$PATH
 		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
