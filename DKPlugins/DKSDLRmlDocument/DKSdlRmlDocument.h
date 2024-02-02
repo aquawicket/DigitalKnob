@@ -33,7 +33,7 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 #include "DK/DK.h"
-#include "DKSdlWindow/DKSdlWindow.h"
+#include "DKSDLWindow/DKSDLWindow.h"
 #include "DKRmlInterface/DKRmlInterface.h"
 #include "DKSdlRmlDocument/DKSdlRmlSystem.h"
 
@@ -55,7 +55,7 @@ WARNING_ENABLE
 class DKSdlRmlDocument //: public DKObjectT<DKSdlRmlDocument>
 {
 public:
-	DKSdlRmlDocument(DKSdlWindow* _dkSdlWindow, DKRmlInterface* _dkRmlInterface);
+	DKSdlRmlDocument(DKSDLWindow* _dkSdlWindow, DKRmlInterface* _dkRmlInterface);
 
 	bool Handle(SDL_Event *event);
 	bool Render();
@@ -63,7 +63,7 @@ public:
 	//void ProcessEvent(Rml::Core::Event& event);
 	
 	DKRmlInterface* dkRmlInterface;
-	DKSdlWindow* dkSdlWindow;
+	DKSDLWindow* dkSdlWindow;
 	
 #	if USE_DKSDLRMLRENDERER
 		static DKSdlRmlRenderer* Renderer;

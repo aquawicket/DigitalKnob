@@ -79,7 +79,7 @@ DKRmlInterface::DKRmlInterface(DKWindow* window) : DKInterface() {
 
 	//DKINFO("DKRmlInterface(" + window->interfaceName + ") \n");
 	if (same(window->interfaceName, "SdlWindow")) {
-		DKSdlRmlDocument* dkSdlRmlDocument = new DKSdlRmlDocument(dynamic_cast<DKSdlWindow*>(window), this);
+		DKSdlRmlDocument* dkSdlRmlDocument = new DKSdlRmlDocument(dynamic_cast<DKSDLWindow*>(window), this);
 	}
 	else {
 		DKERROR("No registered window found \n");
