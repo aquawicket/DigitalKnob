@@ -311,7 +311,7 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 	// // // IDE Software Console Output
 #	if WIN
 		if(log_msvc)
-			OutputDebugString(output.str()); //Output to Visual Studio
+			OutputDebugString(output.str().c_str()); //Output to Visual Studio
 #	endif
 #	if MAC || IOS
 		if(log_xcode)
