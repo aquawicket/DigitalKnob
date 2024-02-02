@@ -35,8 +35,9 @@
 #include "DK/DKApp.h"
 #include "assets.h"
 
-char* BUILD_DATE = __DATE__;
-char* BUILD_TIME = __TIME__;
+const char* BUILD_DATE = __DATE__;
+const char* BUILD_TIME = __TIME__;
+
 
 int main(int argc, char** argv) {
 	#if HAVE_DKSDLWindow

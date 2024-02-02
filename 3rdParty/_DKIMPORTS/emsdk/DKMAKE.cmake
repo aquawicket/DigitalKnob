@@ -38,6 +38,7 @@ dkFileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_PTHREADS =
 WIN_HOST_dk_set	(EMSDK_ENV ${EMSDK}/emsdk_env.bat)
 UNIX_HOST_dk_set(EMSDK_ENV ${EMSDK}/emsdk_env.sh)
 dk_set			(EMSDK_TOOLCHAIN_FILE ${EMSDK}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake)
+WIN_HOST_dk_set	(EMSDK_GENERATOR "MinGW Makefiles")
 
 dk_set(EMAR ${EMSDK}/upstream/emscripten/emar)
 dk_set(EMCC ${EMSDK}/upstream/emscripten/emcc)

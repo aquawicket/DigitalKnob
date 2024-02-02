@@ -33,6 +33,8 @@ dk_addFirewallAllow("pacman" "${MSYS2}/usr/bin/pacman.exe")
 #endif()
 
 #if(NOT MSYS_LOADED)
+	dk_remove(${MSYS2}/var/lib/pacman/db.lck NOERROR)
+	
 	if(CLANG32)						
 		dk_msys2(pacman -S mingw-w64-clang-i686-toolchain --needed --noconfirm)			# toolchain
 	elseif(CLANG64)

@@ -266,14 +266,14 @@ goto build
 :generate_emscripten
 	call:validate_emscripten
 	if %TYPE%==Debug (
-		call "%EMSDK_ENV%" & "%CMAKE%" -G "MinGW Makefiles" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%APP_PATH%/%OS%/Debug
+		call "%EMSDK_ENV%" & "%CMAKE%" -G "%EMSDK_GENERATOR%" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%APP_PATH%/%OS%/Debug
 	)
 	if %TYPE%==Release (
-		call "%EMSDK_ENV%" & "%CMAKE%" -G "MinGW Makefiles" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%APP_PATH%/%OS%/Release
+		call "%EMSDK_ENV%" & "%CMAKE%" -G "%EMSDK_GENERATOR%" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%APP_PATH%/%OS%/Release
 	)
 	if %TYPE%==All (
-		call "%EMSDK_ENV%" & "%CMAKE%" -G "MinGW Makefiles" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%APP_PATH%/%OS%/Debug
-		call "%EMSDK_ENV%" & "%CMAKE%" -G "MinGW Makefiles" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%APP_PATH%/%OS%/Release
+		call "%EMSDK_ENV%" & "%CMAKE%" -G "%EMSDK_GENERATOR%" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%APP_PATH%/%OS%/Debug
+		call "%EMSDK_ENV%" & "%CMAKE%" -G "%EMSDK_GENERATOR%" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%APP_PATH%/%OS%/Release
 	)
 	set TARGET=%APP%_APP
 goto build
@@ -521,9 +521,10 @@ goto:eof
 
 :: validate_emscripten()
 :validate_emscripten
-	call:cmake_eval "include('%DKIMPORTS%/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_TOOLCHAIN_FILE"
+	call:cmake_eval "include('%DKIMPORTS%/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE"
 	echo EMSDK = %EMSDK%
 	echo EMSDK_ENV = %EMSDK_ENV%
+	echo EMSDK_GENERATOR = %EMSDK_GENERATOR%
 	echo EMSDK_TOOLCHAIN_FILE = %EMSDK_TOOLCHAIN_FILE%
 	call:check_error
 goto:eof
