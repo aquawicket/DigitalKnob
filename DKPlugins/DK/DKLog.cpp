@@ -281,7 +281,7 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 	//File output (log.txt)	
 	if(log_file){
 		if(DKFile::local_assets.empty()) {	// no assets path available yet
-			output_buffer += out_stream.str();	// save the outputs to a buffer until we have an assets path
+			output_buffer += out_stream.str();	// save the output to a buffer until we have an assets path
 		}
 		else {	// assets path is available
 			std::ofstream file_log;
