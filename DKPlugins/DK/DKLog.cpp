@@ -60,7 +60,8 @@ DKString DKLog::log_show = ""; //comma seperated
 DKString DKLog::log_hide = ""; //comma seperated
 bool DKLog::stacktrace_on_errors = false;
 bool DKLog::exception_on_errors = false;
-std::stringstream DKLog::output_buffer;
+
+std::string DKLog::output_buffer;
 
 bool GetVersion(DKString& version){
 	DKString year;
@@ -216,35 +217,32 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 		if (log_verbose == false && lvl == DK_VERBOSE) { return true; }
 	}
 
-    //DKString output;
-    std::stringstream output;
-    //output_buffer.str(std::string()); //clear the stringstream
+    //DKString out_string;
+    std::stringstream out_stream;
 	
-	
-
 	///// ADD extra info if requested
 	if (log_thread){
 		unsigned long int threadId;
 		DKUtil::GetThreadId(threadId);
-		//output = output + "TID: " + toString((unsigned int)threadId) + "  ";
-		output << std::left << std::setw(10) << "TID: " + toString((unsigned int)threadId);
+		//out_string = out_string + "TID: " + toString((unsigned int)threadId) + "  ";
+		out_stream << std::left << std::setw(10) << "TID: " + toString((unsigned int)threadId);
 	}
 	if (log_lines || lvl <= DK_ERROR){
 		DKString filename = file;
 		std::string::size_type found = filename.find_last_of("/\\");
 		//if (found != std::string::npos && found < filename.length())
-		//	output += filename.substr(found + 1);
-		//output = output + ":" + toString(line) + "  ";
-		output << std::right << std::setw(25) << filename.substr(found + 1) + ":" + toString(line) << "  ";
+		//	out_string += filename.substr(found + 1);
+		//out_string = out_string + ":" + toString(line) + "  ";
+		out_stream << std::right << std::setw(25) << filename.substr(found + 1) + ":" + toString(line) << "  ";
 	}
 	if (log_funcs || lvl <= DK_ERROR){
 		if (strlen(func)){
-			//output = output + func + "() ";
-			output << func << "() ";
+			//out_string = output + func + "() ";
+			out_stream << func << "() ";
 		}
 	}
-	//output += input;
-	output << input;
+	//out_string += input;
+	out_stream << input;
 
 	/////// Main Console Color Decorators ///////
 #	if WIN32
@@ -278,61 +276,63 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 #	endif
 
 	//CONSOLE/TERMINAL WINDOW OUTPUT
-	//printf("%s", output.c_str());
-	//std::cout << ss.str();
-	std::cout << output.str();
-					
-	// File Output (log.txt)
-	// TODO: write to a buffer until file is available.
-	//              then push the buffer to the file once it is.
-        
-    if(log_file){
-		if(DKFile::local_assets.empty()){
-			output_buffer << output.str();
+	std::cout << out_stream.str();
+	
+	//File output (log.txt)	
+	if(log_file){
+		if(DKFile::local_assets.empty()) {	// no assets path available yet
+			output_buffer += out_stream.str();	// save the outputs to a buffer until we have an assets path
 		}
-		else {
-    		std::ofstream file_log;
-    		file_log.open(DKString(DKFile::local_assets+"log.txt").c_str(), std::ofstream::out | std::ofstream::app);
-    		if(file_log.is_open()) {
-    	        if(output_buffer.rdbuf()->in_avail()){
-    	        //if(!output_buffer.eof()) {
-                    file_log << "buf " << output_buffer.str();
-                    //output_buffer.clear();
-                    output_buffer.str("");
-                }
-                else {
-	    	    	file_log << "out" << output.str();
-	            }
-	            file_log.close();
-	    	}
+		else {	// assets path is available
+			std::ofstream file_log;
+			if(!output_buffer.empty()) { // we have a buffer to dump into the file first
+				//clear the log file
+				file_log.open(DKString(DKFile::local_assets+"log.txt").c_str(), std::ofstream::out | std::ofstream::trunc);
+				file_log.close();
+				
+				// dump the buffer into the file
+				file_log.open(DKString(DKFile::local_assets+"log.txt").c_str(), std::ofstream::out | std::ofstream::app);
+				if(file_log.is_open()) {
+					file_log << "buffer " << output_buffer;
+					file_log.close();
+					output_buffer.clear();
+				}
+			}
+			else { // we have an assets path and the buffer is empty, just write to the file
+				file_log.open(DKString(DKFile::local_assets+"log.txt").c_str(), std::ofstream::out | std::ofstream::app);
+				if(file_log.is_open()){
+					file_log << "stream" << out_stream.str();
+					file_log.close();
+				}
+			}
 		}
 	}
 
-	// // // IDE Software Console Output
+	// IDE Software Console Output
 #	if WIN
 		if(log_msvc)
-			OutputDebugString(output.str().c_str()); //Output to Visual Studio
+			OutputDebugString(out_stream.str().c_str()); //Output to Visual Studio
 #	endif
 #	if MAC || IOS
 		if(log_xcode)
-			NSLog(@"%s", output.str()); //Output to XCode
+			NSLog(@"%s", out_stream.str()); //Output to XCode
 #	endif
 #	ifdef ANDROID
 		// https://developer.android.com/ndk/reference/group/logging
 		if(lvl == DK_FATAL) //Android Studio 
-			__android_log_write(ANDROID_LOG_FATAL, "DKAndroid", output.str().c_str());
+			__android_log_write(ANDROID_LOG_FATAL, "DKAndroid", out_stream.str().c_str());
 		else if(lvl == DK_ERROR) //Android Studio 
-			__android_log_write(ANDROID_LOG_ERROR, "DKAndroid", output.str().c_str());
+			__android_log_write(ANDROID_LOG_ERROR, "DKAndroid", out_stream.str().c_str());
 		else if(lvl == DK_WARN)
-			__android_log_write(ANDROID_LOG_WARN, "DKAndroid", output.str().c_str());
+			__android_log_write(ANDROID_LOG_WARN, "DKAndroid", out_stream.str().c_str());
 		else if(lvl == DK_INFO)
-			__android_log_write(ANDROID_LOG_INFO, "DKAndroid", output.str().c_str()); //Default
+			__android_log_write(ANDROID_LOG_INFO, "DKAndroid", out_stream.str().c_str()); //Default
 		else if(lvl == DK_DEBUG)
-			__android_log_write(ANDROID_LOG_DEBUG, "DKAndroid", output.str().c_str());
+			__android_log_write(ANDROID_LOG_DEBUG, "DKAndroid", out_stream.str().c_str());
 		else if(lvl == DK_VERBOSE)
-			__android_log_write(ANDROID_LOG_VERBOSE, "DKAndroid", output.str().c_str());
+			__android_log_write(ANDROID_LOG_VERBOSE, "DKAndroid", out_stream.str().c_str());
 		else //if(lvl == DK_INFO)
-			__android_log_write(ANDROID_LOG_INFO, "DKAndroid", output.str().c_str());
+			__android_log_write(ANDROID_LOG_INFO, "DKAndroid", out_stream.str().c_str());
 #	endif
 
 	// // // Restore Default Color Decorators
@@ -355,14 +355,14 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 		if(exception_on_errors || lvl <=  DK_FATAL){
 #			ifndef ANDROID //FIXME: change to DKEXCEPTIONS		
 				try{
-					throw output.str(); // throw an exception
+					throw out_stream.str(); // throw an exception
 				}
 				//catch (const std::string& e){
 				catch(...){
 #			endif
 #			ifdef HAVE_boxer
 					output << "\n\n Would you like to exit the application?";
-					boxer::Selection sel = boxer::show(output.str(), "EXCEPTION", boxer::Style::Error, boxer::Buttons::YesNo);
+					boxer::Selection sel = boxer::show(out_stream.str(), "EXCEPTION", boxer::Style::Error, boxer::Buttons::YesNo);
 					if(sel == boxer::Selection::Yes){
 						DKApp::Exit();
 						return false;

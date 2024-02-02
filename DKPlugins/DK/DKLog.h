@@ -102,7 +102,7 @@ public:
 	static bool stacktrace_on_errors;
 	static bool exception_on_errors;
 	
-	static std::stringstream output_buffer;
+	static std::string output_buffer;
 };
 
 bool GetVersion(DKString& version);
