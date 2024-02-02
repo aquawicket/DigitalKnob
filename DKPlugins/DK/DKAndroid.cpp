@@ -47,7 +47,8 @@ extern "C" {
 
 	//JNIEXPORT jint JNI_OnLoad(JavaVM* vm, void* reserved){
 	JNIEXPORT jint JNI_OnLoad2(JavaVM* vm, void* reserved){
-		DKDEBUGFUNC(vm, reserved);
+		DKINFO("JNI_OnLoad2() \n");
+        DKDEBUGFUNC(vm, reserved);
 		thejvm = vm;
 		return JNI_VERSION_1_6;
 	}
@@ -57,18 +58,21 @@ extern "C" {
 	}
 
 	void initJNIBridge(JNIEnv* env, jobject obj){
-		DKDEBUGFUNC(env, obj);
+	    DKINFO("initJNIBridge() \n");
+    	DKDEBUGFUNC(env, obj);
 		theobj = env->NewGlobalRef(obj);
 	}
 
 	void exitJNIBridge(JNIEnv* env, jobject obj){
+		DKINFO("exitJNIBridge() \n");
 		DKDEBUGFUNC(env, obj);
 		env->DeleteGlobalRef(theobj);
 	}
 
 	//FIXME: this needs to fail without crashing
 	void CallJavaFunction(const DKString& name, const DKString& param){
-		DKDEBUGFUNC(name, param);
+		DKINFO("CallJavaFunction("+name+","+param+") \n");
+        DKDEBUGFUNC(name, param);
 		JNIEnv* env;
 		bool attached = false;
 		switch(thejvm->GetEnv((void**)&env, JNI_VERSION_1_6)){
@@ -109,7 +113,8 @@ extern "C" {
 	}
 
 	void initSDL(JNIEnv* env, jclass cls, jobject array){
-		DKDEBUGFUNC(env, cls, array);
+		DKINFO("initSDL() \n");
+        DKDEBUGFUNC(env, cls, array);
 		JavaData jdata;
 		jdata.env = env;
 		jdata.cls = cls;
@@ -119,7 +124,8 @@ extern "C" {
 	}
 
 	jstring CallCppFunction(JNIEnv* env, jclass cls, jstring data){
-		DKDEBUGFUNC(env, cls, data);
+		DKINFO("CallCppFunction() \n");
+        DKDEBUGFUNC(env, cls, data);
 		const char* _data = env->GetStringUTFChars(data,JNI_FALSE);
 		DKStringArray arry;
 		toStringArray(arry, _data, ",");
@@ -221,6 +227,7 @@ extern "C" {
 
 
 void DKAndroid::init(){
+	DKINFO("DKAndroid::init() \n");
 	DKDEBUGFUNC();
 	if(!DKApp::active){ //if ! android context resume	
 		//required for loading screen
@@ -257,7 +264,7 @@ void DKAndroid::init(){
 }
 
 bool DKAndroid::GetMousePos(int& x, int& y){
-	DKDEBUGFUNC(x, y);
+    DKDEBUGFUNC(x, y);
 	x = android_mouseX;
 	y = android_mouseY;
 	return true;

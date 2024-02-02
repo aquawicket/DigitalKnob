@@ -59,13 +59,13 @@ bool DKAssets::Init(){
 		DKLog::log_file = false;
 	}
 	else{
-#if !ANDROID
+//#if !ANDROID
 	//clear the log file
 	std::ofstream file_log;
     DKString path = DKFile::local_assets+"log.txt";
 	file_log.open(path.c_str(), std::ofstream::out | std::ofstream::trunc);
 	file_log.close();
-#endif		
+//#endif		
 	}
 
 #if WIN32
@@ -158,7 +158,7 @@ bool DKAssets::Init(){
 		DKFile::online_assets = "http://aquawicket.github.io/DigitalKnob/DKPlugins/";
 
 	DKINFO("DKFile::online_assets = "+DKFile::online_assets+"\n");
-	DKINFO("Loaded -> "+DKFile::online_assets+"settings.txt\n");
+	//DKINFO("Loaded -> "+DKFile::online_assets+"settings.txt\n");
 	return true;
 }
 

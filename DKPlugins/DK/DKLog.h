@@ -101,6 +101,8 @@ public:
 	static DKString log_hide;
 	static bool stacktrace_on_errors;
 	static bool exception_on_errors;
+	
+	static std::stringstream output_buffer;
 };
 
 bool GetVersion(DKString& version);
