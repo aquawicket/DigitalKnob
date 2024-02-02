@@ -206,11 +206,6 @@ goto type
 								set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_VERBOSE_MAKEFILE=1"
 	
 	:::::::::::: GENERATOR ::::::::::::
-	if %OS%==win32 				set "GENERATOR=Visual Studio 17 2022"
-	if %OS%==win64 				set "GENERATOR=Visual Studio 17 2022"
-	if %OS%==android32 			set "GENERATOR=Visual Studio 17 2022"
-	if %OS%==android64 			set "GENERATOR=Visual Studio 17 2022"
-	if %OS%==emscripten 		set "GENERATOR=MinGW Makefiles"
 	
 	:::::::::::: MAKE_PROGRAM ::::::::::::
 	
@@ -228,10 +223,10 @@ goto type
 
 :generate_win32
 	call:validate_visual_studio
-	"CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_C_COMPILER=%VISUALSTUDIO_X86_C_COMPILER%"
+	"CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_C_COMPILER=%VISUALSTUDIO_X86_CXX_COMPILER%"
 	"CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_COMPILER=%VISUALSTUDIO_X86_CXX_COMPILER%"
 		
-	"%CMAKE%" -G "%GENERATOR%" -A Win32 %CMAKE_ARGS% "%DKCMAKE%"
+	"%CMAKE%" -G "%VISUALSTUDIO_GENERATOR%" -A Win32 %CMAKE_ARGS% "%DKCMAKE%"
 	set TARGET=%APP%_APP
 	
 	::call:validate_msys2
@@ -243,10 +238,10 @@ goto build
 
 :generate_win64
 	call:validate_visual_studio
-	"CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_C_COMPILER=%VISUALSTUDIO_X64_C_COMPILER%"
+	"CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_C_COMPILER=%VISUALSTUDIO_X64_CXX_COMPILER%"
 	"CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_COMPILER=%VISUALSTUDIO_X64_CXX_COMPILER%"
 		
-	"%CMAKE%" -G "%GENERATOR%" -A x64 %CMAKE_ARGS% %DKCMAKE%
+	"%CMAKE%" -G "%VISUALSTUDIO_GENERATOR%" -A x64 %CMAKE_ARGS% %DKCMAKE%
 	 set TARGET=%APP%_APP
 goto build
 
@@ -255,7 +250,7 @@ goto build
 	call:validate_android_ndk
 	call:validate_openjdk
 	call %OPENJDK%\registerJDK.cmd
-	"%CMAKE%" -G "Visual Studio 17 2022" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID_NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_NDK%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
+	"%CMAKE%" -G "%VISUALSTUDIO_GENERATOR%" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID_NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_NDK%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
 	set TARGET=main
 goto build
 
@@ -264,7 +259,7 @@ goto build
 	call:validate_android_ndk
 	call:validate_openjdk
 	call %OPENJDK%\registerJDK.cmd
-	"%CMAKE%" -G "Visual Studio 17 2022" -A ARM64 -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID_NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_NDK%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
+	"%CMAKE%" -G "%VISUALSTUDIO_GENERATOR%" -A ARM64 -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID_NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_NDK%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
 	set TARGET=main
 goto build
 
@@ -495,7 +490,7 @@ goto:eof
 @echo on
 :: validate_visual_studio()
 :validate_visual_studio
-	call:cmake_eval "include('%DKIMPORTS%/visualstudio/DKMAKE.cmake')" "VISUALSTUDIO_X86_C_COMPILER;VISUALSTUDIO_X86_CXX_COMPILER;VISUALSTUDIO_X64_C_COMPILER;VISUALSTUDIO_X64_CXX_COMPILER;VCLINK_32;VCLINK_64"
+	call:cmake_eval "include('%DKIMPORTS%/visualstudio/DKMAKE.cmake')" "VISUALSTUDIO_GENERATOR;VISUALSTUDIO_X86_CXX_COMPILER;VISUALSTUDIO_X64_CXX_COMPILER;"
 	call:check_error
 goto:eof
 
