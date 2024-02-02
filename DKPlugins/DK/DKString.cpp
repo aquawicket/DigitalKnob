@@ -30,6 +30,7 @@
 
 //WARNING_DISABLE
 #include <codecvt> //string <--> wsting conversion
+#include <cstdint>
 //WARNING_ENABLE
 
 

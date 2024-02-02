@@ -291,6 +291,12 @@ function delete_temp_files() {
 	find . -name "*.TMP" -delete
 }
 
+###### validate_msys2 ######
+function validate_msys2() {
+	cmake_eval "include('$DKIMPORTS/msys2/DKMAKE.cmake')" "MSYS2"
+	echo MSYS2 = $MSYS2
+}
+
 ###### validate_emscripten ######
 function validate_emscripten() {
 	cmake_eval "include('$DKIMPORTS/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_TOOLCHAIN_FILE"
@@ -432,6 +438,8 @@ if [ $SCRIPTPATH == $DKPATH ];then
 	echo "SCRIPTPATH and DKPATH are the same"
 else
 	warning "$SCRIPTNAME is not running from the DKPATH directory. Any changes will not be saved by git!"
+	warning "$SCRIPTNAME path = $SCRIPTPATH"
+	warning "DKPATH path = $DKPATH"
 fi
 
 
@@ -787,11 +795,11 @@ while :
 	
 	
 	###### MAKE_PROGRAM ######
-	cmake_eval "include('$DKIMPORTS/make/DKMAKE.cmake')" "MAKE_PROGRAM"
-	echo "MAKE_PROGRAM = $MAKE_PROGRAM"
-	if [[ -n "$MAKE_PROGRAM" ]]; then
-		CMAKE_ARGS+=( "-DCMAKE_MAKE_PROGRAM=$MAKE_PROGRAM" )
-	fi
+	#cmake_eval "include('$DKIMPORTS/make/DKMAKE.cmake')" "MAKE_PROGRAM"
+	#echo "MAKE_PROGRAM = $MAKE_PROGRAM"
+	#if [[ -n "$MAKE_PROGRAM" ]]; then
+	#	CMAKE_ARGS+=( "-DCMAKE_MAKE_PROGRAM=$MAKE_PROGRAM" )
+	#fi
 	
 	###### C_COMPILER; CXX_COMPILER ######
 	### GCC ###
@@ -814,8 +822,8 @@ while :
 	
 	###### EXE_LINKER_FLAGS ######
 	if [[ -n "$MSYSTEM" ]]; then
-		EXE_LINKER_FLAGS="-static -mconsole"
-		CMAKE_ARGS+=( "-DCMAKE_EXE_LINKER_FLAGS=$EXE_LINKER_FLAGS" )
+		EXE_LINKER_FLAGS="-static -mconsole"		
+		#CMAKE_ARGS+=( "-DCMAKE_EXE_LINKER_FLAGS=$EXE_LINKER_FLAGS" )
 	fi
 	
 	
@@ -973,6 +981,10 @@ while :
 	fi
 	
 	if [[ "$OS" == "win64" ]]; then
+		validate_msys2
+		#MSYS2="$DKPATH/3rdParty/msys2-x86_64-20231026"
+		call export PATH=${MSYS2}/mingw64/bin:$PATH
+		call export PATH=${MSYS2}/usr/bin:$PATH
 		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
 			call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
 		fi
