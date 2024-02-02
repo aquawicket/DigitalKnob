@@ -48,6 +48,9 @@ if(DEFINED ENV{MSYSTEM})
 endif()
 
 ## DEFINED ProgramFiles VARIABLES
+if(DEFINED "ENV{HOMEDRIVE}")
+	# TODO
+endif()
 if(DEFINED "ENV{ProgramW6432}")
 	file(TO_CMAKE_PATH "$ENV{ProgramW6432}" ProgramFiles)
 	set(ProgramFiles "${ProgramFiles}")
