@@ -249,7 +249,7 @@ function validate_branch() {
 		fi
 	fi
 	
-	#echo "DKBRANCH = $DKBRANCH"
+	#echo "$\DKBRANCH = $DKBRANCH"
 	DKPATH="$DIGITALKNOB/$DKBRANCH"
 	DKCMAKE="$DKPATH/DKCMake"
 	DK3RDPARTY="$DKPATH/3rdParty"
@@ -318,7 +318,7 @@ function cmake_eval() {
 	#echo "commands = $commands"
 	#set commands=$commands:"=%"  #TODO: remove double quotes
 	DKCOMMAND="$commands"
-	echo "DKCOMMAND = $DKCOMMAND"
+	echo "\$DKCOMMAND = $DKCOMMAND"
 	
 	#$CMAKE "-DDKCMAKE=$DKCMAKE" "-DDKCOMMAND=$DKCOMMAND" -P $DKCMAKE/dev/cmake_eval.cmake --log-level=TRACE >cmake_eval.out 2>cmake_eval.err
 	
@@ -389,16 +389,16 @@ validate_sudo
 
 
 echo ""
-echo "HOSTNAME = $HOSTNAME"
-echo "HOSTTYPE = $HOSTTYPE"
-echo "MACHTYPE = $MACHTYPE"
-echo "MODEL = $MODEL"
-echo "MSYSTEM = $MSYSTEM"
-echo "OSTYPE = $OSTYPE"
-echo "SCRIPTNAME = $SCRIPTNAME"
-echo "SCRIPTPATH = $SCRIPTPATH"
-echo "USER = $USER"
-echo "USERNAME = $USERNAME"
+echo "\$HOSTNAME = $HOSTNAME"
+echo "\$HOSTTYPE = $HOSTTYPE"
+echo "\$MACHTYPE = $MACHTYPE"
+echo "\$MODEL = $MODEL"
+echo "\$MSYSTEM = $MSYSTEM"
+echo "\$OSTYPE = $OSTYPE"
+echo "\$SCRIPTNAME = $SCRIPTNAME"
+echo "\$SCRIPTPATH = $SCRIPTPATH"
+echo "\$USER = $USER"
+echo "\$USERNAME = $USERNAME"
 echo " "
 
 #--------------------------------------------------------
@@ -413,11 +413,11 @@ else
 fi
 
 mkdir -p $DIGITALKNOB;
-echo "DIGITALKNOB = $DIGITALKNOB"
+echo "\$DIGITALKNOB = $DIGITALKNOB"
 
 DKDOWNLOAD="$DIGITALKNOB/download"
 mkdir -p $DKDOWNLOAD;
-echo "DKDOWNLOAD = $DKDOWNLOAD"
+echo "\$DKDOWNLOAD = $DKDOWNLOAD"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	validate_homebrew
@@ -428,14 +428,14 @@ validate_cmake
 validate_git
 validate_branch
 
-echo "DKPATH = $DKPATH"
-echo "DKCMAKE = $DKCMAKE"
-echo "DK3RDPARTY = $DK3RDPARTY"
-echo "DKIMPORTS = $DKIMPORTS"
+echo "\$DKPATH = $DKPATH"
+echo "\$DKCMAKE = $DKCMAKE"
+echo "\$DK3RDPARTY = $DK3RDPARTY"
+echo "\$DKIMPORTS = $DKIMPORTS"
 
 
 if [ $SCRIPTPATH == $DKPATH ];then
-	echo "SCRIPTPATH and DKPATH are the same"
+	echo "\$SCRIPTPATH and \$DKPATH are the same"
 else
 	warning "$SCRIPTNAME is not running from the DKPATH directory. Any changes will not be saved by git!"
 	warning "$SCRIPTNAME path = $SCRIPTPATH"
@@ -796,7 +796,7 @@ while :
 	
 	###### MAKE_PROGRAM ######
 	#cmake_eval "include('$DKIMPORTS/make/DKMAKE.cmake')" "MAKE_PROGRAM"
-	#echo "MAKE_PROGRAM = $MAKE_PROGRAM"
+	#echo "\$MAKE_PROGRAM = $MAKE_PROGRAM"
 	#if [[ -n "$MAKE_PROGRAM" ]]; then
 	#	CMAKE_ARGS+=( "-DCMAKE_MAKE_PROGRAM=$MAKE_PROGRAM" )
 	#fi
@@ -805,16 +805,16 @@ while :
 	### GCC ###
 	if [[ $MSYSTEM == "MINGW32" ]] || [[ $MSYSTEM == "MINGW64" ]]; then
 		cmake_eval "include('$DKIMPORTS/gcc/DKMAKE.cmake')" "C_COMPILER;CXX_COMPILER"
-		echo "C_COMPILER = $C_COMPILER"
-		echo "CXX_COMPILER = $CXX_COMPILER"
+		echo "\$C_COMPILER = $C_COMPILER"
+		echo "\$CXX_COMPILER = $CXX_COMPILER"
 		CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$C_COMPILER" )
 		CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$CXX_COMPILER" )
 	fi
 	### CLANG ###
 	if [[ $MSYSTEM == "CLANG32" ]] || [[ $MSYSTEM == "CLANG64" ]] || [[ $MSYSTEM == "CLANGARM64" ]] || [[ $MSYSTEM == "UCRT64" ]]; then
 		cmake_eval "include('$DKIMPORTS/clang/DKMAKE.cmake')" "C_COMPILER;CXX_COMPILER"
-		echo "C_COMPILER = $C_COMPILER"
-		echo "CXX_COMPILER = $CXX_COMPILER"
+		echo "\$C_COMPILER = $C_COMPILER"
+		echo "\$CXX_COMPILER = $CXX_COMPILER"
 		CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$C_COMPILER" )
 		CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$CXX_COMPILER" )
 	fi
@@ -868,11 +868,11 @@ while :
 	
 	if [[ "$OS" == "android"* ]]; then
 	    cmake_eval "include('$DKIMPORTS/android-ndk/DKMAKE.cmake')" "ANDROID_NDK;ANDROID_NDK_BUILD;ANDROID_TOOLCHAIN"
-	    echo "ANDROID_NDK = $ANDROID_NDK"
-		echo "ANDROID_NDK_BUILD = $ANDROID_NDK_BUILD"
-	    echo "ANDROID_TOOLCHAIN = $ANDROID_TOOLCHAIN"
+	    echo "\$ANDROID_NDK = $ANDROID_NDK"
+		echo "\$ANDROID_NDK_BUILD = $ANDROID_NDK_BUILD"
+	    echo "\$ANDROID_TOOLCHAIN = $ANDROID_TOOLCHAIN"
 		ANDROID_API=31
-        echo "ANDROID_API = $ANDROID_API"
+        echo "\$ANDROID_API = $ANDROID_API"
 		
 		TARGET="main"
 	fi
@@ -1007,15 +1007,19 @@ while :
 	if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
 		if file_exists $DKPATH/DKApps/$APP/$OS/Debug/CMakeCache.txt; then
 			call $CMAKE --build $DKPATH/DKApps/$APP/$OS/Debug --target ${TARGET} --config Debug --verbose
-		else
+		elif file_exists $DKPATH/DKApps/$APP/$OS/CMakeCache.txt; then
 			call $CMAKE --build $DKPATH/DKApps/$APP/$OS --target ${TARGET} --config Debug --verbose
+		else
+			error "Could not find CMakeCache.txt in $APP/$OS/Debug or $APP/$OS"
 		fi
 	fi
 	if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
 		if file_exists $DKPATH/DKApps/$APP/$OS/Release/CMakeCache.txt; then
 			call $CMAKE --build $DKPATH/DKApps/$APP/$OS/Release --target ${TARGET} --config Release --verbose
-		else
+		elif file_exists $DKPATH/DKApps/$APP/$OS/CMakeCache.txt; then
 			call $CMAKE --build $DKPATH/DKApps/$APP/$OS --target ${TARGET} --config Release --verbose
+		else
+			error "Could not find CMakeCache.txt in $APP/$OS/Release or $APP/$OS"
 		fi
 	fi
 	
