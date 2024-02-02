@@ -6,28 +6,28 @@ if(WIN_HOST)
 	dk_remove(${MSYS2}/var/lib/pacman/db.lck NOERROR)
 	
 	if(CLANG32)
-		dk_msys2("pacman -S mingw-w64-clang-i686-make --noconfirm")		# CLANG32
+		dk_msys2("pacman -S mingw-w64-clang-i686-make --needed --noconfirm")		# CLANG32
 		dk_set(MAKE_PROGRAM ${MSYS2}/clang32/bin/mingw32-make.exe)
 	elseif(CLANG64)
-		dk_msys2("pacman -S mingw-w64-clang-x86_64-make --noconfirm")	# CLANG64
+		dk_msys2("pacman -S mingw-w64-clang-x86_64-make --needed --noconfirm")	# CLANG64
 		dk_set(MAKE_PROGRAM ${MSYS2}/clang64/bin/mingw32-make.exe)
 	elseif(CLANGARM64)
-		dk_msys2("pacman -S mingw-w64-clang-aarch64-make --noconfirm")	# CLANGARM64
+		dk_msys2("pacman -S mingw-w64-clang-aarch64-make --needed --noconfirm")	# CLANGARM64
 		dk_set(MAKE_PROGRAM ${MSYS2}/clangarm64/bin/mingw32-make.exe)
 	elseif(MINGW32)
-		dk_msys2("pacman -S mingw-w64-i686-make --noconfirm")			# MINGW32
+		dk_msys2("pacman -S mingw-w64-i686-make --needed --noconfirm")			# MINGW32
 		dk_set(MAKE_PROGRAM ${MSYS2}/mingw32/bin/mingw32-make.exe)
 	elseif(MINGW64)
-		dk_msys2("pacman -S mingw-w64-x86_64-make --noconfirm")			# MINGW64
+		dk_msys2("pacman -S mingw-w64-x86_64-make --needed --noconfirm")			# MINGW64
 		dk_set(MAKE_PROGRAM ${MSYS2}/mingw64/bin/mingw32-make.exe)
 	elseif(UCRT64)
-		dk_msys2("pacman -S mingw-w64-ucrt-x86_64-make --noconfirm")	# UCRT64
+		dk_msys2("pacman -S mingw-w64-ucrt-x86_64-make --needed --noconfirm")	# UCRT64
 		dk_set(MAKE_PROGRAM ${MSYS2}/ucrt64/bin/mingw32-make.exe)
 	elseif(WIN_32)
-		dk_msys2("pacman -S mingw-w64-i686-make --noconfirm")			# WIN32 / MINGW32
+		dk_msys2("pacman -S mingw-w64-i686-make --needed --noconfirm")			# WIN32 / MINGW32
 		dk_set(MAKE_PROGRAM ${MSYS2}/mingw32/bin/mingw32-make.exe)
 	elseif(WIN_64)
-		dk_msys2("pacman -S mingw-w64-x86_64-make --noconfirm")			# WIN64 /MINGW64
+		dk_msys2("pacman -S mingw-w64-x86_64-make --needed --noconfirm")			# WIN64 /MINGW64
 		dk_set(MAKE_PROGRAM ${MSYS2}/mingw64/bin/mingw32-make.exe)
 	endif()
 endif()

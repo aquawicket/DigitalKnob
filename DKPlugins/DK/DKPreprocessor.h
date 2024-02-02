@@ -277,9 +277,9 @@
 #elif __MINGW32__
 #	define DKCOMPILER "Mingw32"
 #   define DKCOMPILER_VERSION "UNKNOWN" //JOIN_TWO(__MINGW32_MAJOR_VERSION, __MINGW32_MINOR_VERSION)  FIXME: defining from another macro
-#elif _MSC_VER
+#elif _MSC_VER	// https://learn.microsoft.com/en-us/cpp/preprocessor/predefined-macros?view=msvc-170
 #	define DKCOMPILER "Microsoft Visual C++"
-#   define DKCOMPILER_VERSION "UNKNOWN" //STR(_MSC_FULL_VER)  FIXME: defining from another macro
+#   define DKCOMPILER_VERSION _MSC_FULL_VER
 #elif __GNUG__
 #	define DKCOMPILER "GNU G++"
 #   define DKCOMPILER_VERSION "UNKNOWN" //JOIN_THREE(__GNUC__, __GNUC_MINOR_, __GNUC_PATCHLEVEL__)  FIXME: defining from another macro

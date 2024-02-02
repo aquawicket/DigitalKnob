@@ -25,6 +25,7 @@
 */
 
 #include "DK/DKPreprocessor.h"
+#include "DK/DKLog.h"
 
 WARNING_DISABLE
 #include <cstdio>
@@ -33,30 +34,30 @@ WARNING_DISABLE
 WARNING_ENABLE
 
 bool DKPreprocessor::PrintPreprocessor(){
-	printf("DKPreprocessor::PrintPreprocessor()\n");
+	DKINFO("DKPreprocessor::PrintPreprocessor()\n");
 
 #ifdef RTTI_ENABLED
-	printf("RTTI_ENABLED = TRUE\n");
+	DKINFO("RTTI_ENABLED = TRUE\n");
 #else
-	printf("RTTI_ENABLED = FALSE\n");
+	DKINFO("RTTI_ENABLED = FALSE\n");
 #endif
 
 #ifdef __has_builtin
-	printf("__has_builtin = TRUE\n");
+	DKINFO("__has_builtin = TRUE\n");
 #else
-	printf("__has_builtin = FALSE\n");
+	DKINFO("__has_builtin = FALSE\n");
 #endif
 
 #ifdef __has_feature
-	printf("__has_feature = TRUE\n");
+	DKINFO("__has_feature = TRUE\n");
 #else
-	printf("__has_feature = FALSE\n");
+	DKINFO("__has_feature = FALSE\n");
 #endif
 
 #ifdef __has_include
-	printf("__has_include = TRUE\n");
+	DKINFO("__has_include = TRUE\n");
 #else
-	printf("__has_include = FALSE\n");
+	DKINFO("__has_include = FALSE\n");
 #endif
 
 	return true;

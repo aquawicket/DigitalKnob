@@ -5,7 +5,7 @@
 if(MSYSTEM)
 	dk_depend(msys2)
 	
-	dk_msys2(pacman -S git --noconfirm)
+	dk_msys2(pacman -S git --needed --noconfirm)
 	
 	dk_set(GIT_EXE git)
 	dk_msys2(${GIT_EXE} --version)
