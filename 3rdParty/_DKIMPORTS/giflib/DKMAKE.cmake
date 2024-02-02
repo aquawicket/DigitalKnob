@@ -23,7 +23,6 @@ if(GIFLIB_USE_CMAKE)
 	dk_include			(${GIFLIB}/lib)
 	UNIX_dk_libDebug	(${GIFLIB}/${OS}/${DEBUG_DIR}/libgiflib.a)
 	UNIX_dk_libRelease	(${GIFLIB}/${OS}/${RELEASE_DIR}/libgiflib.a)
-	C:\Users\Administrator\digitalknob\Development\3rdParty\giflib-master\win64\Debug\lib\.libs
 	WIN_dk_libDebug		(${GIFLIB}/${OS}/${DEBUG_DIR}/lib/.libs/libgif.a)
 	WIN_dk_libRelease	(${GIFLIB}/${OS}/${RELEASE_DIR}/lib/.libs/libgif.a)
 	
