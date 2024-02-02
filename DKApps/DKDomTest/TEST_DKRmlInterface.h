@@ -3,7 +3,7 @@
 #define TEST_DKRmlInterface_H
 
 #include "DKRmlInterface/DKRmlInterface.h"
-#include "TEST_DKSdlWindow.h"
+#include "TEST_DKSDLWindow.h"
 
 
 class TEST_DKRmlInterface //: public DKObjectT<TEST_DKRmlInterface>
@@ -15,7 +15,7 @@ public:
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_DKRmlInterface.h //////");
 		
-		_dkRmlInterface = new DKRmlInterface(TEST_DKSdlWindow::_dkSdlWindow);
+		_dkRmlInterface = new DKRmlInterface(TEST_DKSDLWindow::_dkSdlWindow);
 		
 		printDKRmlInterfaceProperties(*_dkRmlInterface);
 	}

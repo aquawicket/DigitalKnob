@@ -119,9 +119,9 @@ CPP_DK_Create("DKHTMLImageElementDUK");
 CPP_DK_Create("DKConsoleWindowDUK");
 //CPP_DK_Create("TEST_DKConsoleWindow.js");
 
-// [DKSdlWindow]
-CPP_DK_Create("DKSdlWindowDUK");
-//CPP_DK_Create("TEST_DKSdlWindow.js");
+// [DKSDLWindow]
+CPP_DK_Create("DKSDLWindowDUK");
+//CPP_DK_Create("TEST_DKSDLWindow.js");
 
 // [DKSdlRmlDocument]
 //CPP_DK_Create("DKSdlRmlDocumentDUK");				// Mixin

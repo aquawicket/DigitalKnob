@@ -103,8 +103,8 @@ bool App::Init() {
 	// [DKConsoleWindow]
 	test_DKConsoleWindow = std::make_unique<TEST_DKConsoleWindow>();										
 
-	// [DKSdlWindow]
-	test_DKSdlWindow = std::make_unique<TEST_DKSdlWindow>();
+	// [DKSDLWindow]
+	test_DKSDLWindow = std::make_unique<TEST_DKSDLWindow>();
 	
 	// [DKSdlRmlDocument]
 	//test_DKSdlRmlDocument = std::make_unique<TEST_DKSdlRmlDocument>();														// Mixin

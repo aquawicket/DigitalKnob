@@ -1,4 +1,4 @@
-console.log("\n////// TEST_DKSdlWindow.js //////")
+console.log("\n////// TEST_DKSDLWindow.js //////")
 
 function printSdlWindowProperties(dkSdlWindow){
 	// TODO
@@ -7,8 +7,8 @@ function printSdlWindowProperties(dkSdlWindow){
 }
 
 
-////// DKSdlWindow //////
-const dkSdlWindow = new DKSdlWindow()
+////// DKSDLWindow //////
+const dkSdlWindow = new DKSDLWindow()
 printWindowProperties(dkSdlWindow)		//requires TEST_Window.js
 printSdlWindowProperties(dkSdlWindow)
 dkSdlWindow.outerHeight = 300;	

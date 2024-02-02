@@ -2,13 +2,13 @@
 #ifndef TEST_Browser_H
 #define TEST_Browser_H
 
-#include "DKSdlWindow/DKSdlWindow.h"
+#include "DKSDLWindow/DKSDLWindow.h"
 
 
 class TEST_Browser //: public DKObjectT<TEST_Browser>
 {
 public:
-	static DKSdlWindow* 	window;
+	static DKSDLWindow* 	window;
 	DKRmlInterface* 		dkRmlInterface;
 	DKRmlEventListener* 	dkRmlEventListener;
 	static DKRmlLocation*	location;
@@ -19,8 +19,8 @@ public:
 		console.log("\n////// TEST_Browser.h //////");
 		
 		//////////// Setup ////////////
-		console.log("/// DKSdlWindow /////////////////");
-		window = 				new DKSdlWindow();
+		console.log("/// DKSDLWindow /////////////////");
+		window = 				new DKSDLWindow();
 		console.log(" ");
 		
 		console.log("/// DKRmlInterface //////////////");
@@ -98,7 +98,7 @@ public:
 };
 //REGISTER_OBJECT(TEST_Browser, true);
 
-DKSdlWindow* 	TEST_Browser::window;
+DKSDLWindow* 	TEST_Browser::window;
 DKRmlLocation*	TEST_Browser::location;
 DKRmlDocument*	TEST_Browser::document;
 

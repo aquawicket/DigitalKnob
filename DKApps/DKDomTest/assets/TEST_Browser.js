@@ -1,7 +1,7 @@
 console.log("\n////// TEST_Browser.js //////")
 
 //////////// Setup ////////////
-const window = new DKSdlWindow()
+const window = new DKSDLWindow()
 console.log("window = "+window);
 
 const dkRmlInterface = new DKRmlInterface(window);

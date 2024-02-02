@@ -41,7 +41,7 @@
 
 ////// DigitalKnob Interfaces //////
 #include "TEST_DKConsoleWindow.h"
-#include "TEST_DKSdlWindow.h"
+#include "TEST_DKSDLWindow.h"
 
 //#include "TEST_DKSdlRmlDocument.h"			// Mixin	// TODO
 #include "TEST_DKRmlInterface.h"
@@ -70,7 +70,7 @@ public:
 	////// DigitalKnob Interfaces //////
 	/*
 	std::unique_ptr<TEST_DKConsoleWindow> 				test_DKConsoleWindow;
-	std::unique_ptr<TEST_DKSdlWindow> 					test_DKSdlWindow;
+	std::unique_ptr<TEST_DKSDLWindow> 					test_DKSDLWindow;
 	
 	//std::unique_ptr<TEST_DKSdlRmlDocument> 			test_DKSdlRmlDocument;				// Mixin
 	std::unique_ptr<TEST_DKRmlInterface>				test_DKRmlInterface;

@@ -7,6 +7,6 @@ function printDKRmlInterfaceProperties(dkRmlInterface){
 }
 
 
-const dkRmlInterface = new DKRmlInterface(dkSdlWindow)		// requires TEST_DKSdlWindow.js
+const dkRmlInterface = new DKRmlInterface(dkSdlWindow)		// requires TEST_DKSDLWindow.js
 printDKRmlInterfaceProperties(dkRmlInterface)
 

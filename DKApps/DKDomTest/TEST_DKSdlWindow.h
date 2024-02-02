@@ -1,76 +1,76 @@
 #pragma once
-#ifndef TEST_DKSdlWindow_H
-#define TEST_DKSdlWindow_H
+#ifndef TEST_DKSDLWindow_H
+#define TEST_DKSDLWindow_H
 
-#include "DKSdlWindow/DKSdlWindow.h"
+#include "DKSDLWindow/DKSDLWindow.h"
 
 
-class TEST_DKSdlWindow //: public DKObjectT<TEST_DKSdlWindow>
+class TEST_DKSDLWindow //: public DKObjectT<TEST_DKSDLWindow>
 {
 public:
-	static DKSdlWindow* _dkSdlWindow;
-	//static std::unique_ptr<DKSdlWindow> _dkSdlWindow;
-	//static std::shared_ptr<DKSdlWindow> _dkSdlWindow;
+	static DKSDLWindow* _dkSdlWindow;
+	//static std::unique_ptr<DKSDLWindow> _dkSdlWindow;
+	//static std::shared_ptr<DKSDLWindow> _dkSdlWindow;
 	
-	TEST_DKSdlWindow(){
+	TEST_DKSDLWindow(){
 		DKDEBUGFUNC();
-		console.log("\n////// TEST_DKSdlWindow.h //////");
+		console.log("\n////// TEST_DKSDLWindow.h //////");
 		
-		_dkSdlWindow = new DKSdlWindow();
-		//_dkSdlWindow = std::make_unique<DKSdlWindow>();
-		//_dkSdlWindow = std::make_shared<DKSdlWindow>();	
+		_dkSdlWindow = new DKSDLWindow();
+		//_dkSdlWindow = std::make_unique<DKSDLWindow>();
+		//_dkSdlWindow = std::make_shared<DKSDLWindow>();	
 		
 		
 		_dkSdlWindow->screen(TEST_Screen::_screen);
-		printDKSdlWindowProperties(_dkSdlWindow);
+		printDKSDLWindowProperties(_dkSdlWindow);
 		
 		////// FocusEvent //////
 		// https://w3c.github.io/uievents/#events-focus-types
-		_dkSdlWindow->addEventListener("blur", 				&TEST_DKSdlWindow::onblur);
-		_dkSdlWindow->addEventListener("focus", 			&TEST_DKSdlWindow::onfocus);
-		_dkSdlWindow->addEventListener("focusin", 			&TEST_DKSdlWindow::onfocusin);
-		_dkSdlWindow->addEventListener("focusout", 			&TEST_DKSdlWindow::onfocusout);
+		_dkSdlWindow->addEventListener("blur", 				&TEST_DKSDLWindow::onblur);
+		_dkSdlWindow->addEventListener("focus", 			&TEST_DKSDLWindow::onfocus);
+		_dkSdlWindow->addEventListener("focusin", 			&TEST_DKSDLWindow::onfocusin);
+		_dkSdlWindow->addEventListener("focusout", 			&TEST_DKSDLWindow::onfocusout);
 		
 		////// MouseEvent //////
 		// https://w3c.github.io/uievents/#events-mouse-types
-		_dkSdlWindow->addEventListener("auxclick", 			&TEST_DKSdlWindow::onauxclick);
-		_dkSdlWindow->addEventListener("click", 			&TEST_DKSdlWindow::onclick);
-		_dkSdlWindow->addEventListener("contextmenu",		&TEST_DKSdlWindow::oncontextmenu);
-		_dkSdlWindow->addEventListener("dblclick", 			&TEST_DKSdlWindow::ondblclick);
-		_dkSdlWindow->addEventListener("mousedown", 		&TEST_DKSdlWindow::onmousedown);
-		_dkSdlWindow->addEventListener("mouseenter", 		&TEST_DKSdlWindow::onmouseenter);
-		_dkSdlWindow->addEventListener("mouseleave", 		&TEST_DKSdlWindow::onmouseleave);
-		_dkSdlWindow->addEventListener("mousemove", 		&TEST_DKSdlWindow::onmousemove);
-		_dkSdlWindow->addEventListener("mouseout", 			&TEST_DKSdlWindow::onmouseout);
-		_dkSdlWindow->addEventListener("mouseover", 		&TEST_DKSdlWindow::onmouseover);
-		_dkSdlWindow->addEventListener("mouseup", 			&TEST_DKSdlWindow::onmouseup);
+		_dkSdlWindow->addEventListener("auxclick", 			&TEST_DKSDLWindow::onauxclick);
+		_dkSdlWindow->addEventListener("click", 			&TEST_DKSDLWindow::onclick);
+		_dkSdlWindow->addEventListener("contextmenu",		&TEST_DKSDLWindow::oncontextmenu);
+		_dkSdlWindow->addEventListener("dblclick", 			&TEST_DKSDLWindow::ondblclick);
+		_dkSdlWindow->addEventListener("mousedown", 		&TEST_DKSDLWindow::onmousedown);
+		_dkSdlWindow->addEventListener("mouseenter", 		&TEST_DKSDLWindow::onmouseenter);
+		_dkSdlWindow->addEventListener("mouseleave", 		&TEST_DKSDLWindow::onmouseleave);
+		_dkSdlWindow->addEventListener("mousemove", 		&TEST_DKSDLWindow::onmousemove);
+		_dkSdlWindow->addEventListener("mouseout", 			&TEST_DKSDLWindow::onmouseout);
+		_dkSdlWindow->addEventListener("mouseover", 		&TEST_DKSDLWindow::onmouseover);
+		_dkSdlWindow->addEventListener("mouseup", 			&TEST_DKSDLWindow::onmouseup);
 		
 		////// WheelEvent //////
 		// https://w3c.github.io/uievents/#events-wheel-types
-		_dkSdlWindow->addEventListener("wheel", 				&TEST_DKSdlWindow::onwheel);
+		_dkSdlWindow->addEventListener("wheel", 				&TEST_DKSDLWindow::onwheel);
 		
 		////// InputEvent //////
 		// https://w3c.github.io/uievents/#events-input-types
-		_dkSdlWindow->addEventListener("beforeinput", 		&TEST_DKSdlWindow::onbeforeinput);
-		_dkSdlWindow->addEventListener("input", 			&TEST_DKSdlWindow::oninput);
+		_dkSdlWindow->addEventListener("beforeinput", 		&TEST_DKSDLWindow::onbeforeinput);
+		_dkSdlWindow->addEventListener("input", 			&TEST_DKSDLWindow::oninput);
 		
 		////// KeyboardEvent //////
 		// https://w3c.github.io/uievents/#events-keyboard-types
-		_dkSdlWindow->addEventListener("keydown", 			&TEST_DKSdlWindow::onkeydown);
-		_dkSdlWindow->addEventListener("keyup", 			&TEST_DKSdlWindow::onkeyup);
+		_dkSdlWindow->addEventListener("keydown", 			&TEST_DKSDLWindow::onkeydown);
+		_dkSdlWindow->addEventListener("keyup", 			&TEST_DKSDLWindow::onkeyup);
 		
 		////// CompositionEvent //////
 		// https://w3c.github.io/uievents/#events-composition-types
-		_dkSdlWindow->addEventListener("compositionstart",	&TEST_DKSdlWindow::oncompositionstart);
-		_dkSdlWindow->addEventListener("compositionupdate", &TEST_DKSdlWindow::oncompositionupdate);
-		_dkSdlWindow->addEventListener("compositionend", 	&TEST_DKSdlWindow::oncompositionend);
+		_dkSdlWindow->addEventListener("compositionstart",	&TEST_DKSDLWindow::oncompositionstart);
+		_dkSdlWindow->addEventListener("compositionupdate", &TEST_DKSDLWindow::oncompositionupdate);
+		_dkSdlWindow->addEventListener("compositionend", 	&TEST_DKSDLWindow::oncompositionend);
 	}
 	
-	~TEST_DKSdlWindow(){
+	~TEST_DKSDLWindow(){
 		delete _dkSdlWindow;
 	}
 
-	static void printDKSdlWindowProperties(DKSdlWindow* dkSdlWindow){
+	static void printDKSDLWindowProperties(DKSDLWindow* dkSdlWindow){
 		DKDEBUGFUNC(dkSdlWindow);
 		
 		console.log("dkSdlWindow = "				+toString(dkSdlWindow));
@@ -82,25 +82,25 @@ public:
 	// https://w3c.github.io/uievents/#events-focus-types
 	static bool onblur(DKEvent* event){
 		DKDEBUGFUNC(event);
-		console.log("\nTEST_DKSdlWindow::onblur()");
+		console.log("\nTEST_DKSDLWindow::onblur()");
 		TEST_FocusEvent::printFocusEventProperties(dynamic_cast<DKFocusEvent*>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool onfocus(DKEvent* event){
 		DKDEBUGFUNC(event);
-		console.log("\nTEST_DKSdlWindow::onfocus()");
+		console.log("\nTEST_DKSDLWindow::onfocus()");
 		TEST_FocusEvent::printFocusEventProperties(dynamic_cast<DKFocusEvent*>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool onfocusin(DKEvent* event){
 		DKDEBUGFUNC(event);
-		console.log("\nTEST_DKSdlWindow::onfocusin()");
+		console.log("\nTEST_DKSDLWindow::onfocusin()");
 		TEST_FocusEvent::printFocusEventProperties(dynamic_cast<DKFocusEvent*>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool onfocusout(DKEvent* event){
 		DKDEBUGFUNC(event);
-		console.log("\nTEST_DKSdlWindow::onfocusout()");
+		console.log("\nTEST_DKSDLWindow::onfocusout()");
 		TEST_FocusEvent::printFocusEventProperties(dynamic_cast<DKFocusEvent*>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
@@ -109,67 +109,67 @@ public:
 	// https://w3c.github.io/uievents/#events-mouse-types
 	static bool onauxclick(DKEvent* event){
 		DKDEBUGFUNC(event);
-		console.log("\nTEST_DKSdlWindow::onauxclick()");
+		console.log("\nTEST_DKSDLWindow::onauxclick()");
 		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent*>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool onclick(DKEvent* event){
 		DKDEBUGFUNC(event);
-		console.log("\nTEST_DKSdlWindow::onclick()");
+		console.log("\nTEST_DKSDLWindow::onclick()");
 		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent*>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool oncontextmenu(DKEvent* event){
 		DKDEBUGFUNC(event);
-		console.log("\nTEST_DKSdlWindow::oncontextmenu()");
+		console.log("\nTEST_DKSDLWindow::oncontextmenu()");
 		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent*>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool ondblclick(DKEvent* event){
 		DKDEBUGFUNC(event);
-		console.log("\nTEST_DKSdlWindow::ondblclick()");
+		console.log("\nTEST_DKSDLWindow::ondblclick()");
 		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent*>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool onmousedown(DKEvent* event){
 		DKDEBUGFUNC(event);
-		console.log("\nTEST_DKSdlWindow::onmousedown()");
+		console.log("\nTEST_DKSDLWindow::onmousedown()");
 		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent*>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool onmouseenter(DKEvent* event){
 		DKDEBUGFUNC(event);
-		console.log("\nTEST_DKSdlWindow::onmouseenter()");
+		console.log("\nTEST_DKSDLWindow::onmouseenter()");
 		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent*>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool onmouseleave(DKEvent* event){
 		DKDEBUGFUNC(event);
-		console.log("\nTEST_DKSdlWindow::onmouseleave()");
+		console.log("\nTEST_DKSDLWindow::onmouseleave()");
 		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent*>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool onmousemove(DKEvent* event){
 		DKDEBUGFUNC(event);
-		console.log("\nTEST_DKSdlWindow::onmousemove()");
+		console.log("\nTEST_DKSDLWindow::onmousemove()");
 		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent*>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool onmouseout(DKEvent* event){
 		DKDEBUGFUNC(event);
-		console.log("\nTEST_DKSdlWindow::onmouseout()");
+		console.log("\nTEST_DKSDLWindow::onmouseout()");
 		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent*>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool onmouseover(DKEvent* event){
 		DKDEBUGFUNC(event);
-		console.log("\nTEST_DKSdlWindow::onmouseover()");
+		console.log("\nTEST_DKSDLWindow::onmouseover()");
 		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent*>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool onmouseup(DKEvent* event){
 		DKDEBUGFUNC(event);
-		console.log("\nTEST_DKSdlWindow::onmouseup()");
+		console.log("\nTEST_DKSDLWindow::onmouseup()");
 		TEST_MouseEvent::printMouseEventProperties(dynamic_cast<DKMouseEvent*>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
@@ -178,7 +178,7 @@ public:
 	// https://w3c.github.io/uievents/#events-wheel-types
 	static bool onwheel(DKEvent* event){
 		DKDEBUGFUNC(event);
-		console.log("\nTEST_DKSdlWindow::onwheel()");
+		console.log("\nTEST_DKSDLWindow::onwheel()");
 		TEST_WheelEvent::printWheelEventProperties(dynamic_cast<DKWheelEvent*>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
@@ -187,13 +187,13 @@ public:
 	// https://w3c.github.io/uievents/#events-input-types
 	static bool onbeforeinput(DKEvent* event){
 		DKDEBUGFUNC(event);
-		console.log("\nTEST_DKSdlWindow::onbeforeinput()");
+		console.log("\nTEST_DKSDLWindow::onbeforeinput()");
 		TEST_InputEvent::printInputEventProperties(dynamic_cast<DKInputEvent*>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool oninput(DKEvent* event){
 		DKDEBUGFUNC(event);
-		console.log("\nTEST_DKSdlWindow::oninput()");
+		console.log("\nTEST_DKSDLWindow::oninput()");
 		TEST_InputEvent::printInputEventProperties(dynamic_cast<DKInputEvent*>(event));				//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
@@ -202,13 +202,13 @@ public:
 	// https://w3c.github.io/uievents/#events-keyboard-types
 	static bool onkeydown(DKEvent* event){
 		DKDEBUGFUNC(event);
-		console.log("\nTEST_DKSdlWindow::onkeydown()");
+		console.log("\nTEST_DKSDLWindow::onkeydown()");
 		TEST_KeyboardEvent::printKeyboardEventProperties(dynamic_cast<DKKeyboardEvent*>(event));	//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool onkeyup(DKEvent* event){
 		DKDEBUGFUNC(event);
-		console.log("\nTEST_DKSdlWindow::onkeyup()");
+		console.log("\nTEST_DKSDLWindow::onkeyup()");
 		TEST_KeyboardEvent::printKeyboardEventProperties(dynamic_cast<DKKeyboardEvent*>(event));	//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
@@ -217,31 +217,31 @@ public:
 	// https://w3c.github.io/uievents/#events-composition-types
 	static bool oncompositionstart(DKEvent* event){
 		DKDEBUGFUNC(event);
-		console.log("\nTEST_DKSdlWindow::oncompositionstart()");
+		console.log("\nTEST_DKSDLWindow::oncompositionstart()");
 		TEST_CompositionEvent::printCompositionEventProperties(dynamic_cast<DKCompositionEvent*>(event));	//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool oncompositionupdate(DKEvent* event){
 		DKDEBUGFUNC(event);
-		console.log("\nTEST_DKSdlWindow::oncompositionupdate()");
+		console.log("\nTEST_DKSDLWindow::oncompositionupdate()");
 		TEST_CompositionEvent::printCompositionEventProperties(dynamic_cast<DKCompositionEvent*>(event));	//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 	static bool oncompositionend(DKEvent* event){
 		DKDEBUGFUNC(event);
-		console.log("\nTEST_DKSdlWindow::oncompositionend()");
+		console.log("\nTEST_DKSDLWindow::oncompositionend()");
 		TEST_CompositionEvent::printCompositionEventProperties(dynamic_cast<DKCompositionEvent*>(event));	//TODO: try to remove the need for dynamic_cast
 		return true;
 	}
 };
-//REGISTER_OBJECT(TEST_DKSdlWindow, true);
+//REGISTER_OBJECT(TEST_DKSDLWindow, true);
 
-DKSdlWindow* TEST_DKSdlWindow::_dkSdlWindow;
-//std::unique_ptr<DKSdlWindow> TEST_DKSdlWindow::_dkSdlWindow;
-//std::shared_ptr<DKSdlWindow> TEST_DKSdlWindow::_dkSdlWindow;
+DKSDLWindow* TEST_DKSDLWindow::_dkSdlWindow;
+//std::unique_ptr<DKSDLWindow> TEST_DKSDLWindow::_dkSdlWindow;
+//std::shared_ptr<DKSDLWindow> TEST_DKSDLWindow::_dkSdlWindow;
 
-//DKSdlWindow& window;	// global window variable (TODO)
+//DKSDLWindow& window;	// global window variable (TODO)
 
 
 
-#endif //TEST_DKSdlWindow_H
+#endif //TEST_DKSDLWindow_H

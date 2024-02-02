@@ -2,26 +2,26 @@
 #ifndef TEST_Multiple_H
 #define TEST_Multiple_H
 
-#include "DKSdlWindow/DKSdlWindow.h"
+#include "DKSDLWindow/DKSDLWindow.h"
 
 
 class TEST_Multiple //: public DKObjectT<TEST_Multiple>
 {
 public:
-	DKSdlWindow* 			dkSdlWindowA;
+	DKSDLWindow* 			dkSdlWindowA;
 	DKRmlInterface* 		dkRmlInterfaceA;
 	DKRmlEventListener* 	dkRmlEventListenerA;
 	static DKRmlLocation*	dkRmlLocationA;
 	static DKRmlDocument*	dkRmlDocumentA;
 	
-	DKSdlWindow* 			dkSdlWindowB;
+	DKSDLWindow* 			dkSdlWindowB;
 	DKRmlInterface* 		dkRmlInterfaceB;
 	DKRmlEventListener* 	dkRmlEventListenerB;
 	static DKRmlLocation*	dkRmlLocationB;
 	static DKRmlDocument*	dkRmlDocumentB;
 	
 	/*
-	DKSdlWindow* 			dkSdlWindowC;
+	DKSDLWindow* 			dkSdlWindowC;
 	DKRmlInterface* 		dkRmlInterfaceC;
 	DKRmlEventListener* 	dkRmlEventListenerC;
 	static DKRmlLocation*	dkRmlLocationC;
@@ -32,7 +32,7 @@ public:
 		DKDEBUGFUNC();
 		console.log("\n////// TEST_Multiple.h //////");
 		
-		dkSdlWindowA = 			new DKSdlWindow();
+		dkSdlWindowA = 			new DKSDLWindow();
 		dkRmlInterfaceA = 		new DKRmlInterface(dkSdlWindowA);
 		dkRmlEventListenerA = 	new DKRmlEventListener();
 		dkRmlLocationA = 		new DKRmlLocation(dkRmlInterfaceA, dkRmlEventListenerA);
@@ -40,7 +40,7 @@ public:
 		dkRmlDocumentA = 		DKRmlDocument::instance(dkRmlInterfaceA, dkRmlEventListenerA);
 		dkRmlDocumentA->addEventListener("load", &TEST_Multiple::onLoad);
 		
-		dkSdlWindowB = 			new DKSdlWindow();
+		dkSdlWindowB = 			new DKSDLWindow();
 		dkRmlInterfaceB = 		new DKRmlInterface(dkSdlWindowB);
 		dkRmlEventListenerB = 	new DKRmlEventListener();
 		dkRmlLocationB = 		new DKRmlLocation(dkRmlInterfaceB, dkRmlEventListenerB);
@@ -49,7 +49,7 @@ public:
 		dkRmlDocumentB->addEventListener("load", &TEST_Multiple::onLoad);
 		
 		/*
-		dkSdlWindowC = 			new DKSdlWindow();
+		dkSdlWindowC = 			new DKSDLWindow();
 		dkRmlInterfaceC = 		new DKRmlInterface(dkSdlWindowC);
 		dkRmlEventListenerC = 	new DKRmlEventListener();
 		dkRmlLocationC = 		new DKRmlLocation(dkRmlInterfaceC, dkRmlEventListenerC);
