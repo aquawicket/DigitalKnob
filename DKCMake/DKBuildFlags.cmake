@@ -136,26 +136,11 @@ dk_set(ANDROID_MIN_API 19)
 #dk_set(ANDROID_CLANGXX	${3RDPARTY}/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/windows-x86_64/bin/clang.exe)
 
 
-# Visual C++ variables 
-dk_set(MSVC_CL			C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.34.31933/bin/Hostx64/x86/cl.exe)
 
-#if(NOT USE_MSYS2)
-#	dk_set(MINGW32			${3RDPARTY}/mingw32-i686-8.1.0-release-posix-dwarf-rt_v6-rev0)
-#	dk_set(MINGW64			${3RDPARTY}/mingw64-x86_64-8.1.0-release-posix-seh-rt_v6-rev0)
-#	dk_set(MINGW32_GCC  	${MINGW32}/bin/gcc.exe)
-#	dk_set(MINGW32_GXX  	${MINGW32}/bin/g++.exe)
-#	dk_set(MINGW64_GCC  	${MINGW64}/bin/gcc.exe)
-#	dk_set(MINGW64_GXX  	${MINGW64}/bin/g++.exe)
-#endif()
- 
-# Global Flags
-#dk_set(DKCMAKE_FLAGS	-DBUILD_SHARED_LIBS=OFF -DBUILD_STATIC_LIBS=ON)
-
-# Windows i686 (x32)
-WIN32_dk_set(DKCMAKE_FLAGS					-DBUILD_SHARED_LIBS=OFF -DBUILD_STATIC_LIBS=ON -DCMAKE_POSITION_INDEPENDENT_CODE=ON)
-
+# Windows i686 (x32) - MSVC
 if(MSVC)
-	#WIN32_dk_append(DKCMAKE_FLAGS				-DCMAKE_POSITION_INDEPENDENT_CODE=ON)
+	dk_depend(visualstudio) #dk_set(MSVC_CL			C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.36.32532/bin/Hostx64/x86/cl.exe)
+	WIN32_dk_set(DKCMAKE_FLAGS					-DBUILD_SHARED_LIBS=OFF -DBUILD_STATIC_LIBS=ON -DCMAKE_POSITION_INDEPENDENT_CODE=ON)
 	WIN32_dk_set(DKCMAKE_C_COMPILER				"${MSVC_CL}")
 	WIN32_dk_set(DKCMAKE_C_FLAGS				"/DWIN /DWIN32 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c17 /nologo /GR /EHsc /Zm500 /Zc:__cplusplus /bigobj") #/D_WIN32_WINNT=0x0600
 	WIN32_dk_set(DKCMAKE_C_FLAGS_DEBUG			"/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG")
@@ -165,23 +150,18 @@ if(MSVC)
 	WIN32_dk_set(DKCMAKE_CXX_FLAGS_DEBUG		"/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG")
 	WIN32_dk_set(DKCMAKE_CXX_FLAGS_RELEASE		"/MT /O2 /Ob2 /DNDEBUG")
 	WIN32_dk_set(DKCONFIGURE_FLAGS				--build=i686-w64-mingw32 --disable-shared --enable-static)
-	#if(NOT USE_MSYS2)
-	#	WIN32_dk_set(DKCONFIGURE_CC				${MINGW32_GCC})
-	#endif()
 	WIN32_dk_set(DKCONFIGURE_CFLAGS				"-march=i686 -DWIN -DWIN32 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17 -fexceptions") #-D_WIN32_WINNT=0x0600 
 	WIN32_dk_set(DKCONFIGURE_CFLAGS_DEBUG		"-DDEBUG -D_DEBUG -g")
 	WIN32_dk_set(DKCONFIGURE_CFLAGS_RELEASE		"-O3 -DNDEBU")
-	#if(NOT USE_MSYS2)
-	#	WIN32_dk_set(DKCONFIGURE_CXX			${MINGW32_GXX})
-	#endif()
 	WIN32_dk_set(DKCONFIGURE_CXXFLAGS			"-march=i686 -DWIN -DWIN32 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17 -frtti -fexceptions") #-D_WIN32_WINNT=0x0600
 	WIN32_dk_set(DKCONFIGURE_CXXFLAGS_DEBUG		"-DDEBUG -D_DEBUG -g")
 	WIN32_dk_set(DKCONFIGURE_CXXFLAGS_RELEASE	"-O3 -DNDEBUG")
 endif()
 
-# Windows x86_64 (x64)
-WIN64_dk_set(DKCMAKE_FLAGS					-DBUILD_SHARED_LIBS=OFF -DBUILD_STATIC_LIBS=ON -DCMAKE_POSITION_INDEPENDENT_CODE=ON)
+# Windows x86_64 (x64) - MSVC
 if(MSVC)
+	dk_depend(visualstudio) #dk_set(MSVC_CL			C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.36.32532/bin/Hostx64/x86/cl.exe)
+	WIN64_dk_set(DKCMAKE_FLAGS					-DBUILD_SHARED_LIBS=OFF -DBUILD_STATIC_LIBS=ON -DCMAKE_POSITION_INDEPENDENT_CODE=ON)
 	WIN64_dk_set(DKCMAKE_C_COMPILER				"${MSVC_CL}")
 	WIN64_dk_set(DKCMAKE_C_FLAGS				"/DWIN /DWIN64 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c17 /nologo /GR /EHsc /Zm500 /Zc:__cplusplus /bigobj") #/MACHINE:X64 /D_WIN32_WINNT=0x0600
 	WIN64_dk_set(DKCMAKE_C_FLAGS_DEBUG			"/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG")
@@ -191,15 +171,9 @@ if(MSVC)
 	WIN64_dk_set(DKCMAKE_CXX_FLAGS_DEBUG		"/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG")
 	WIN64_dk_set(DKCMAKE_CXX_FLAGS_RELEASE		"/MT /O2 /Ob2 /DNDEBUG")
 	WIN64_dk_set(DKCONFIGURE_FLAGS				--build=x86_64-w64-mingw32 --disable-shared --enable-static)
-	#if(NOT USE_MSYS2)
-	#	WIN64_dk_set(DKCONFIGURE_CC				${MINGW64_GCC})
-	#endif()
 	WIN64_dk_set(DKCONFIGURE_CFLAGS				"-march=x86-64 -DWIN -DWIN64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_WIN32_WINNT=0x0600 -D_USING_V110_SDK71_ -std=gnu17 -fexceptions") #/D_WIN32_WINNT=0x0600
 	WIN64_dk_set(DKCONFIGURE_CFLAGS_DEBUG		"-DDEBUG -D_DEBUG -g")
 	WIN64_dk_set(DKCONFIGURE_CFLAGS_RELEASE		"-DNDEBUG -O3")
-	#if(NOT USE_MSYS2)
-	#	WIN64_dk_set(DKCONFIGURE_CXX			${MINGW64_GXX})
-	#endif()
 	WIN64_dk_set(DKCONFIGURE_CXXFLAGS			"-march=x86-64 -DWIN -DWIN64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_WIN32_WINNT=0x0600 -D_USING_V110_SDK71_ -std=gnu++17 -frtti -fexceptions") #/D_WIN32_WINNT=0x0600
 	WIN64_dk_set(DKCONFIGURE_CXXFLAGS_DEBUG		"-DDEBUG -D_DEBUG -g")
 	WIN64_dk_set(DKCONFIGURE_CXXFLAGS_RELEASE	"-DNDEBUG -O3") 

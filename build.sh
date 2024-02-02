@@ -305,7 +305,31 @@ function validate_emscripten() {
 	echo EMSDK_TOOLCHAIN_FILE = $EMSDK_TOOLCHAIN_FILE
 }
 
+###### validate_android_ndk ######
+function validate_android_ndk() {
+	cmake_eval "include('$DKIMPORTS/android-ndk/DKMAKE.cmake')" "ANDROID_NDK;ANDROID_NDK_BUILD;ANDROID_TOOLCHAIN"	
+	echo "\$ANDROID_NDK = $ANDROID_NDK"
+	echo "\$ANDROID_NDK_BUILD = $ANDROID_NDK_BUILD"
+	echo "\$ANDROID_TOOLCHAIN = $ANDROID_TOOLCHAIN"
+	ANDROID_API=31
+	echo "\$ANDROID_API = $ANDROID_API"
+}
 
+###### validate_clang ######
+function validate_clang() {
+	cmake_eval "include('$DKIMPORTS/clang/DKMAKE.cmake')" "C_COMPILER;CXX_COMPILER"
+	echo "\$C_COMPILER = $C_COMPILER"
+	echo "\$CXX_COMPILER = $CXX_COMPILER"
+}
+
+###### validate_gcc ######
+function validate_gcc() {
+	cmake_eval "include('$DKIMPORTS/gcc/DKMAKE.cmake')" "C_COMPILER;CXX_COMPILER"
+	echo "\$C_COMPILER = $C_COMPILER"
+	echo "\$CXX_COMPILER = $CXX_COMPILER"
+}
+		
+		
 ###### cmake_eval ######
 function cmake_eval() {
 	if [ -z "$1" ]; then
@@ -804,17 +828,13 @@ while :
 	###### C_COMPILER; CXX_COMPILER ######
 	### GCC ###
 	if [[ $MSYSTEM == "MINGW32" ]] || [[ $MSYSTEM == "MINGW64" ]]; then
-		cmake_eval "include('$DKIMPORTS/gcc/DKMAKE.cmake')" "C_COMPILER;CXX_COMPILER"
-		echo "\$C_COMPILER = $C_COMPILER"
-		echo "\$CXX_COMPILER = $CXX_COMPILER"
+		validate_gcc
 		CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$C_COMPILER" )
 		CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$CXX_COMPILER" )
 	fi
 	### CLANG ###
 	if [[ $MSYSTEM == "CLANG32" ]] || [[ $MSYSTEM == "CLANG64" ]] || [[ $MSYSTEM == "CLANGARM64" ]] || [[ $MSYSTEM == "UCRT64" ]]; then
-		cmake_eval "include('$DKIMPORTS/clang/DKMAKE.cmake')" "C_COMPILER;CXX_COMPILER"
-		echo "\$C_COMPILER = $C_COMPILER"
-		echo "\$CXX_COMPILER = $CXX_COMPILER"
+		validate_clang
 		CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$C_COMPILER" )
 		CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$CXX_COMPILER" )
 	fi
@@ -867,13 +887,7 @@ while :
 	fi
 	
 	if [[ "$OS" == "android"* ]]; then
-	    cmake_eval "include('$DKIMPORTS/android-ndk/DKMAKE.cmake')" "ANDROID_NDK;ANDROID_NDK_BUILD;ANDROID_TOOLCHAIN"
-	    echo "\$ANDROID_NDK = $ANDROID_NDK"
-		echo "\$ANDROID_NDK_BUILD = $ANDROID_NDK_BUILD"
-	    echo "\$ANDROID_TOOLCHAIN = $ANDROID_TOOLCHAIN"
-		ANDROID_API=31
-        echo "\$ANDROID_API = $ANDROID_API"
-		
+		validate_android_ndk
 		TARGET="main"
 	fi
 			
