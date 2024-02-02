@@ -355,7 +355,7 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 		if(exception_on_errors || lvl <=  DK_FATAL){
 #			ifndef ANDROID //FIXME: change to DKEXCEPTIONS		
 				try{
-					throw output; // throw an exception
+					throw output.str(); // throw an exception
 				}
 				//catch (const std::string& e){
 				catch(...){
