@@ -293,7 +293,7 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 				// dump the buffer into the file
 				file_log.open(DKString(DKFile::local_assets+"log.txt").c_str(), std::ofstream::out | std::ofstream::app);
 				if(file_log.is_open()) {
-					file_log << "buffer " << output_buffer;
+					file_log << output_buffer;
 					file_log.close();
 					output_buffer.clear();
 				}
@@ -301,7 +301,7 @@ bool DKLog::Log(const char* file, int line, const char* func, const DKString& in
 			else { // we have an assets path and the buffer is empty, just write to the file
 				file_log.open(DKString(DKFile::local_assets+"log.txt").c_str(), std::ofstream::out | std::ofstream::app);
 				if(file_log.is_open()){
-					file_log << "stream" << out_stream.str();
+					file_log << out_stream.str();
 					file_log.close();
 				}
 			}
