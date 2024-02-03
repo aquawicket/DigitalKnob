@@ -176,6 +176,7 @@ else()
 		-DUSE_WIN32_LDAP=OFF
 		${OPENSSL_CMAKE}
 		${ZLIB_CMAKE}
+		${ZSTD_CMAKE}
 		${CURL})
 endif()
 
