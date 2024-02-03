@@ -2119,9 +2119,15 @@ function(dk_mergeFlags args RESULT)
 			list(LENGTH args args_length)
 			if(${placeholder} GREATER ${args_length})
 				math(EXPR placeholder "${args_length}-1")
-			endif()			
-			#list(INSERT args ${placeholder} "\"${DK_${word}}\"")  # https://stackoverflow.com/a/61948012
-			list(INSERT args ${placeholder} "${DK_${word}}") 
+			endif()
+			
+			# FIXME: Msys treats things differently here and it causes errors 
+			if(MSYS)
+				list(INSERT args ${placeholder} "\"${DK_${word}}\"")  # https://stackoverflow.com/a/61948012
+			else()
+				list(INSERT args ${placeholder} "${DK_${word}}")
+			endif()
+			
 		endif()
 	endforeach()
 	set(${RESULT} ${args} PARENT_SCOPE)

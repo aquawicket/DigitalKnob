@@ -27,7 +27,7 @@ dk_import			(https://github.com/curl/curl.git)
 ### LINK ###
 dk_define					(CURL_STATICLIB)
 dk_include					(${CURL}/include 								CURL_INCLUDE_DIR)
-dk_include					(${CURL}/${OS}/include/curl)					CURL_INCLUDE_DIR2)
+dk_include					(${CURL}/${OS}/include/curl						CURL_INCLUDE_DIR2)
 DEBUG_dk_include			(${CURL}/${OS}/${DEBUG_DIR}/include/curl)
 RELEASE_dk_include			(${CURL}/${OS}/${RELEASE_DIR}/include/curl)
 
