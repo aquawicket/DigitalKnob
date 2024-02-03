@@ -58,15 +58,6 @@ bool DKAssets::Init(){
 	if(same(file, "OFF")){
 		DKLog::log_file = false;
 	}
-	else{
-//#if !ANDROID
-	//clear the log file
-	//std::ofstream file_log;
-    //DKString path = DKFile::local_assets+"log.txt";
-	//file_log.open(path.c_str(), std::ofstream::out | std::ofstream::trunc);
-	//file_log.close();
-//#endif		
-	}
 
 #if WIN32
 	DKString console;

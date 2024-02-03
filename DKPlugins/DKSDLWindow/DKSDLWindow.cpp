@@ -344,6 +344,10 @@ bool DKSDLWindow::Init(){
         SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_WARNING, "OpenGL Drivers", "Your OpenGL video drivers are out of date. Please upgrade the graphics card drivers for best performance and compatability.", window);
 #endif
 
+#if ANDROID
+    SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_WARNING, "Android Test", "Message box test sent from C++", window);
+#endif
+
     DKClass::DKCreate("DKWindow");
     return true;
 }

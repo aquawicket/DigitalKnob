@@ -227,8 +227,8 @@ extern "C" {
 
 
 void DKAndroid::init(){
-	DKINFO("DKAndroid::init() \n");
 	DKDEBUGFUNC();
+	DKINFO("DKAndroid::init() \n");
 	if(!DKApp::active){ //if ! android context resume	
 		//required for loading screen
 		CallJavaFunction("copyAssets", ""); //copy ALL assets on startup
