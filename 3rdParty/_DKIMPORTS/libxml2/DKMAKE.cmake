@@ -17,27 +17,24 @@ dk_import(https://github.com/GNOME/libxml2.git)
 
 ### LINK ###
 dk_define	(LIBXML_STATIC)
-dk_include	(${LIBXML2}/include LIBXML2_INCLUDE_DIR)
 dk_include	(${LIBXML2})
+dk_include	(${LIBXML2}/include 										LIBXML2_INCLUDE_DIR)
 dk_include	(${LIBXML2}/${OS})
-
 if(MSVC)
-	WIN_dk_libDebug		(${LIBXML2}/${OS}/${DEBUG_DIR}/libxml2sd.lib)
-	WIN_dk_libRelease	(${LIBXML2}/${OS}/${RELEASE_DIR}/libxml2s.lib)
-	#dk_set				(LIBXML2_LIBRARIES ${LIBXML2}/${OS}/${DEBUG_DIR}/xml2.lib;${LIBXML2}/${OS}/${RELEASE_DIR}/xml2.lib)
+	WIN_dk_libDebug		(${LIBXML2}/${OS}/${DEBUG_DIR}/libxml2sd.lib	LIBXML2_LIBRARY_DEBUG)
+	WIN_dk_libRelease	(${LIBXML2}/${OS}/${RELEASE_DIR}/libxml2s.lib	LIBXML2_LIBRARY_RELEASE)
 else()
-	dk_libDebug			(${LIBXML2}/${OS}/${DEBUG_DIR}/libxml2.a)
-	dk_libRelease		(${LIBXML2}/${OS}/${RELEASE_DIR}/libxml2.a)
-	#dk_set				(LIBXML2_LIBRARIES ${LIBXML2}/${OS}/${DEBUG_DIR}/libxml2.a;${LIBXML2}/${OS}/${RELEASE_DIR}/libxml2.a)
+	dk_libDebug			(${LIBXML2}/${OS}/${DEBUG_DIR}/libxml2.a		LIBXML2_LIBRARY_DEBUG)
+	dk_libRelease		(${LIBXML2}/${OS}/${RELEASE_DIR}/libxml2.a		LIBXML2_LIBRARY_RELEASE)
 endif()
 
 
 
 ### 3RDPARTY LINK ###
 if(MSVC)
-	WIN_dk_set	(LIBXML2_CMAKE -DLIBXML2_INCLUDE_DIR=${LIBXML2}/include -DLIBXML2_LIBRARY=${LIBXML2}/${OS}/${RELEASE_DIR}/libxml2s.lib -DLIBXML2_LIBRARIES=${LIBXML2}/${OS}/${RELEASE_DIR}/libxml2s.lib)
+	WIN_dk_set	(LIBXML2_CMAKE -DLIBXML2_INCLUDE_DIR=${LIBXML2_INCLUDE_DIR} -DLIBXML2_LIBRARY=${LIBXML2}/${OS}/${RELEASE_DIR}/libxml2s.lib -DLIBXML2_LIBRARIES=${LIBXML2}/${OS}/${RELEASE_DIR}/libxml2s.lib)
 else()
-	dk_set		(LIBXML2_CMAKE -DLIBXML2_INCLUDE_DIR=${LIBXML2}/include -DLIBXML2_LIBRARY=${LIBXML2}/${OS}/${RELEASE_DIR}/libxml2.a -DLIBXML2_LIBRARIES=${LIBXML2}/${OS}/${RELEASE_DIR}/libxml2.a)
+	dk_set		(LIBXML2_CMAKE -DLIBXML2_INCLUDE_DIR=${LIBXML2_INCLUDE_DIR} -DLIBXML2_LIBRARY=${LIBXML2}/${OS}/${RELEASE_DIR}/libxml2.a -DLIBXML2_LIBRARIES=${LIBXML2}/${OS}/${RELEASE_DIR}/libxml2.a)
 endif()
 
 
