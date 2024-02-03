@@ -39,6 +39,10 @@ else()
 endif()
 
 
+if(MSYS)
+	dkFileReplace("${TIFF}/CMakeLists.txt" "add_subdirectory(tools)" " ") # skip windres.exe (broken)
+endif() 
+
 ### 3RDPARTY LINK ###
 if(MSVC)
 	WIN_dk_set		(TIFF_CMAKE -DTIFF_INCLUDE_DIR=${TIFF_INCLUDE_DIR} -DTIFF_LIBRARY_DEBUG=${TIFF_LIBRARY_DEBUG} -DTIFF_LIBRARY_RELEASE=${TIFF_LIBRARY_RELEASE} -DTIFF_INCLUDE_DIR2=${TIFF_INCLUDE_DIR2} "-DCMAKE_C_FLAGS=/I${TIFF}/${OS}/libtiff" "-DCMAKE_CXX_FLAGS=/I${TIFF}/${OS}/libtiff")
