@@ -11,7 +11,7 @@ dk_import(https://github.com/grimfang4/sdl-gpu.git)
 
 
 ### LINK ###
-dk_include				(${SDL_GPU}/include)
+dk_include					(${SDL_GPU}/include)
 if(MSVC)
 	WIN_dk_libDebug			(${SDL_GPU}/${OS}/SDL_gpu-VS/lib/${DEBUG_DIR}/SDL2_gpu_s.lib)
 	WIN_dk_libRelease		(${SDL_GPU}/${OS}/SDL_gpu-VS/lib/${RELEASE_DIR}/SDL2_gpu_s.lib)

@@ -6,23 +6,23 @@ dk_import(https://github.com/facebook/zstd.git)
 
 
 ### LINK ###
-dk_include					(${ZSTD}/lib)
+dk_include					(${ZSTD}/lib										ZSTD_INCLUDE_DIR)
 if(MSVC)
-	ANDROID_dk_libDebug		(${ZSTD}/${OS}/lib/${DEBUG_DIR}/libzstd.a)
-	ANDROID_dk_libRelease	(${ZSTD}/${OS}/lib/${RELEASE_DIR}/libzstd.a)
-	WIN_dk_libDebug			(${ZSTD}/${OS}/lib/${DEBUG_DIR}/zstd_static.lib)
-	WIN_dk_libRelease		(${ZSTD}/${OS}/lib/${RELEASE_DIR}/zstd_static.lib)
+	ANDROID_dk_libDebug		(${ZSTD}/${OS}/lib/${DEBUG_DIR}/libzstd.a			ZSTD_LIBRARY_DEBUG)
+	ANDROID_dk_libRelease	(${ZSTD}/${OS}/lib/${RELEASE_DIR}/libzstd.a			ZSTD_LIBRARY_RELEASE)
+	WIN_dk_libDebug			(${ZSTD}/${OS}/lib/${DEBUG_DIR}/zstd_static.lib		ZSTD_LIBRARY_DEBUG)
+	WIN_dk_libRelease		(${ZSTD}/${OS}/lib/${RELEASE_DIR}/zstd_static.lib	ZSTD_LIBRARY_RELEASE)
 elseif(APPLE)
-	dk_libDebug				(${ZSTD}/${OS}/lib/${DEBUG_DIR}/libzstd.a)
-	dk_libRelease			(${ZSTD}/${OS}/lib/${RELEASE_DIR}/libzstd.a)
+	dk_libDebug				(${ZSTD}/${OS}/lib/${DEBUG_DIR}/libzstd.a			ZSTD_LIBRARY_DEBUG)
+	dk_libRelease			(${ZSTD}/${OS}/lib/${RELEASE_DIR}/libzstd.a			ZSTD_LIBRARY_RELEASE)
 else()
-	dk_libDebug				(${ZSTD}/${OS}/${DEBUG_DIR}/lib/libzstd.a)
-	dk_libRelease			(${ZSTD}/${OS}/${RELEASE_DIR}/lib/libzstd.a)
+	dk_libDebug				(${ZSTD}/${OS}/${DEBUG_DIR}/lib/libzstd.a			ZSTD_LIBRARY_DEBUG)
+	dk_libRelease			(${ZSTD}/${OS}/${RELEASE_DIR}/lib/libzstd.a			ZSTD_LIBRARY_RELEASE)
 endif()
 
 
 ### 3RDPARTY LINK ###
-dk_set(ZSTD_CMAKE -DZSTD_INCLUDE_DIR=${ZSTD}/lib) #TODO
+dk_set(ZSTD_CMAKE -DZSTD_INCLUDE_DIR=${ZSTD_INCLUDE_DIR}) #TODO
 
 
 ### GENERATE ###
