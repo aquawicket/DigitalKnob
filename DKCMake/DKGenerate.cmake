@@ -23,15 +23,11 @@
 # SOFTWARE.
 include_guard()
 
-#if(EXISTS $ENV{DKCMAKE})
-#	set(ENV{DKCMAKE} "$ENV{DKCMAKE}/")
-#endif()
-#include("$ENV{DKCMAKE}DK.cmake")
+
 get_filename_component(path ${CMAKE_SOURCE_DIR} ABSOLUTE)
 set(DKCMAKE ${path} CACHE INTERNAL "")
 
 include("${DKCMAKE}/DK.cmake")
-#include("$ENV{DKCMAKE}DKDisabled.cmake") 
 include("${DKCMAKE}/DKDisabled.cmake")
 
 dk_info("\n")
@@ -58,7 +54,7 @@ include(${DKCMAKE}/DKBuildFlags.cmake)
 include(${DKPROJECT}/DKMAKE.cmake)
 file(REMOVE ${DKPROJECT}/${OS}/DKBUILD.log)
 dk_printSettings()
-#dk_printAllVariables()
+
 
 dk_buildLog("##############################################")
 dk_buildLog("######  Enabled Dependencies (sorted)  #######")
@@ -176,7 +172,6 @@ foreach(plugin ${dkdepend_list})
 			dk_info("******* Prebuilding ${plugin} *******")
 			dk_setPath(${plugin_path}/${BUILD_DIR})
 			
-			#if(MSVC OR XCODE)
 			if(MULTI_CONFIG)
 				ANDROID32_dk_queueCommand	(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DANDROID_32=ON ${plugin_path})
 				ANDROID64_dk_queueCommand	(${DKCMAKE_BUILD} -DDEBUG=ON -DRELEASE=ON -DREBUILD=ON -DANDROID_64=ON ${plugin_path})
