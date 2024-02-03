@@ -1,0 +1,12 @@
+#! /bin/sh
+
+# https://amindlost.wordpress.com/2012/06/09/mingw-windres-exe-cant-popen-error/
+# run the commands to replace windres
+# 1. rename original windres
+#	mv /mingw64/bin/windres /mingw64/bin/windres2
+#
+# 2. copy this file to substitute the old windres
+#	cp /c/Users/Administrator/digitalknob/Development/3rdParty/_DKIMPORTS/msys2/windres /mingw64/bin/windres
+#
+
+/mingw64/bin/windres2 --use-temp-file `echo "$*" | sed 's/\\\\//g'`

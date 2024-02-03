@@ -1,6 +1,9 @@
 # https://git-scm.com
 # https://github.com/git-for-windows/git/releases/download/v2.31.1.windows.1/Git-2.31.1-32-bit.exe
 
+if(GIT_EXE)
+	return()
+endif()
 
 if(MSYSTEM)
 	dk_depend(msys2)
