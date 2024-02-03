@@ -19,23 +19,23 @@ endif()
 
 
 ### LINK ###
-dk_include(${BZIP2})
+dk_include(${BZIP2}																BZIP2_INCLUDE_DIR)
 if(MSVC)
-	WIN32_dk_libDebug	(${BZIP2}/${OS}/${DEBUG_DIR}/libbz2-static.lib)
-	WIN32_dk_libRelease	(${BZIP2}/${OS}/${RELEASE_DIR}/libbz2-static.lib)
-	WIN64_dk_libDebug	(${BZIP2}/${OS}/x64/${DEBUG_DIR}/libbz2-static.lib)
-	WIN64_dk_libRelease	(${BZIP2}/${OS}/x64/${RELEASE_DIR}/libbz2-static.lib)
+	WIN32_dk_libDebug	(${BZIP2}/${OS}/${DEBUG_DIR}/libbz2-static.lib			BZIP2_LIBRARY_DEBUG)
+	WIN32_dk_libRelease	(${BZIP2}/${OS}/${RELEASE_DIR}/libbz2-static.lib		BZIP2_LIBRARY_RELEASE)
+	WIN64_dk_libDebug	(${BZIP2}/${OS}/x64/${DEBUG_DIR}/libbz2-static.lib		BZIP2_LIBRARY_DEBUG)
+	WIN64_dk_libRelease	(${BZIP2}/${OS}/x64/${RELEASE_DIR}/libbz2-static.lib	BZIP2_LIBRARY_RELEASE)
 else()
-	dk_libDebug	(${BZIP2}/${OS}/libbz2.a)
-	dk_libRelease	(${BZIP2}/${OS}/libbz2.a)
+	dk_libDebug			(${BZIP2}/${OS}/libbz2.a								BZIP2_LIBRARY_DEBUG)
+	dk_libRelease		(${BZIP2}/${OS}/libbz2.a								BZIP2_LIBRARY_RELEASE)
 endif()
 
 
 ### 3RDPARTY LINK ###
 if(MSVC)
-	WIN_dk_set	(BZIP2_CMAKE -DBZIP2_INCLUDE_DIR=${BZIP2} -DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/${DEBUG_DIR}/libbz2-static.lib -DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/${RELEASE_DIR}/libbz2-static.lib)
+	WIN_dk_set	(BZIP2_CMAKE -DBZIP2_INCLUDE_DIR=${BZIP2_INCLUDE_DIR} -DBZIP2_LIBRARY_DEBUG=${BZIP2_LIBRARY_DEBUG} -DBZIP2_LIBRARY_RELEASE=${BZIP2_LIBRARY_RELEASE})
 else()
-	UNIX_dk_set	(BZIP2_CMAKE -DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} -DBZIP2_LIBRARY_DEBUG=${BZIP2}/${OS}/libbz2.a -DBZIP2_LIBRARY_RELEASE=${BZIP2}/${OS}/libbz2.a)
+	UNIX_dk_set	(BZIP2_CMAKE -DBZIP2_INCLUDE_DIR=${BZIP2}/${OS} -DBZIP2_LIBRARY_DEBUG=${BZIP2_LIBRARY_DEBUG} -DBZIP2_LIBRARY_RELEASE=${BZIP2_LIBRARY_RELEASE})
 endif()
 
 	
