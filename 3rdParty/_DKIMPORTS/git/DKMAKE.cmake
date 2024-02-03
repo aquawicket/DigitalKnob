@@ -12,7 +12,7 @@ if(MSYSTEM)
 	
 	dk_set(GIT_EXE git)
 	dk_msys2(${GIT_EXE} --version)
-	dk_debug("GIT_EXE = ${GIT_EXE}")
+	#dk_debug("GIT_EXE = ${GIT_EXE}")
 	return()
 endif()
 
@@ -86,4 +86,4 @@ else()
 	dk_error("GIT NOT FOUND!")
 endif()
 
-dk_command(${GIT_EXE} --version)
+#dk_command(${GIT_EXE} --version)

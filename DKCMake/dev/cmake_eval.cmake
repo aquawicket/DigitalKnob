@@ -28,7 +28,6 @@ CMAKE_POLICY(SET CMP0007 NEW)
 
 include(${DKCMAKE}/DK.cmake)
 
-
 # Evaluate expression (faster version)
 # Suggestion from the Wiki: http://cmake.org/Wiki/CMake/Language_Syntax
 # Unfortunately, no built-in stuff for this: http://public.kitware.com/Bug/view.php?id=4034
@@ -63,6 +62,7 @@ endfunction()
 
 #message(STATUS "DKCOMMAND = ${DKCOMMAND}")
 cmake_eval("${DKCOMMAND}")
+
 
 if(DKRETURN)
 	#message(STATUS "DKRETURN = ${DKRETURN}")

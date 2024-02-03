@@ -57,7 +57,7 @@ if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: k
 	call set commands=%%commands:"=%%
 	set "DKCOMMAND=%commands%"
 	call set DKCOMMAND=%%DKCOMMAND:^\=^/%%
-	echo DKCOMMAND = %DKCOMMAND%
+	::echo DKCOMMAND = %DKCOMMAND%
 	call set DKCMAKE_DIR=%%DKCMAKE:^\=^/%%
 	
 	::echo "%CMAKE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE%/dev/cmake_eval.cmake" --log-level=TRACE >cmake_eval.out 2>cmake_eval.err
