@@ -83,7 +83,7 @@ elseif(EXISTS "${ProgramFiles_x86}/Git/bin/git.exe")
 	dk_set(GIT "${ProgramFiles_x86}/Git/bin")
 	dk_set(GIT_EXE "${ProgramFiles_x86}/Git/bin/git.exe")
 else()
-	dk_assert("GIT NOT FOUND!")
+	dk_error("GIT NOT FOUND!")
 endif()
 
 dk_command(${GIT_EXE} --version)

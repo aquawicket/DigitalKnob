@@ -120,7 +120,7 @@ elseif(EXISTS "${ProgramFiles_x86}/CMake/bin/cmake.exe")
 	dk_set(CMAKE "${ProgramFiles_x86}/CMake/bin")
 	dk_set(CMAKE_EXE "${ProgramFiles_x86}/CMake/bin/cmake.exe")
 else()
-	dk_assert("CMAKE NOT FOUND!")
+	dk_error("CMAKE NOT FOUND!")
 endif()
 
 

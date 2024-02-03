@@ -149,6 +149,6 @@ endif()
 # 	endif()
 # endif()
 # if(NOT EXISTS "${OPENSSL_BINARY_EXE}")
-# 	dk_assert("openssl_binary IS NOT FOUND OR INVALID")
+# 	dk_error("openssl_binary IS NOT FOUND OR INVALID")
 # endif()
 ###################################################################

@@ -44,7 +44,7 @@ function(dk_getGithubDownload url) #install_path #Patch
 	dk_debug(url_length)
 	
 	if(${url_length} LESS 5)
-		dk_assert("url_list doesn't contain enough elements to have a 'orginization/library'")
+		dk_error("url_list doesn't contain enough elements to have a 'orginization/library'")
 		return()
 	endif()	
 	
@@ -71,7 +71,7 @@ function(dk_getGithubDownload url) #install_path #Patch
 		if(${includes} EQUAL -1)
 			string(FIND ${url} "gitlab.com" includes)
 			if(${includes} EQUAL -1)
-				dk_assert("Lib invalid and The url does not contain 'github.com' OR 'gitlab.com'")
+				dk_error("Lib invalid and The url does not contain 'github.com' OR 'gitlab.com'")
 				return()
 			endif()
 		endif()
@@ -88,14 +88,14 @@ function(dk_getGithubDownload url) #install_path #Patch
 	string(TOLOWER ${Lib} FOLDER)
 	dk_set(${LIBVAR}_FOLDER ${FOLDER})
 	if(NOT ${LIBVAR}_FOLDER)
-		dk_assert("${LIBVAR}_FOLDER invalid")
+		dk_error("${LIBVAR}_FOLDER invalid")
 	endif()
 	dk_debug(${LIBVAR}_FOLDER)
 	
 	# check current folder name
 	dk_debug("\${DKIMPORTS}/\${${LIBVAR}_FOLDER}} = ${DKIMPORTS}/${${LIBVAR}_FOLDER}}")
 	if(NOT "${DKIMPORTS}/${FOLDER}" STREQUAL "${CMAKE_CURRENT_LIST_DIR}")
-		dk_assert("The Imports folder is named inncorrectly. \n CURRENTLY: ${CMAKE_CURRENT_LIST_DIR} \n SHOULD BE: ${DKIMPORTS}/${${LIBVAR}_FOLDER}}")
+		dk_error("The Imports folder is named inncorrectly. \n CURRENTLY: ${CMAKE_CURRENT_LIST_DIR} \n SHOULD BE: ${DKIMPORTS}/${${LIBVAR}_FOLDER}}")
 	endif()
 	
 	math(EXPR last "${url_length}-1")
@@ -149,7 +149,7 @@ function(dk_getGithubDownload url) #install_path #Patch
 		if(${includes} EQUAL -1)
 			string(FIND ${url} "gitlab.com" includes)
 			if(${includes} EQUAL -1)
-				dk_assert("The url is not a 'github.com' address")
+				dk_error("The url is not a 'github.com' address")
 				return()
 			endif()
 		endif()
@@ -161,7 +161,7 @@ function(dk_getGithubDownload url) #install_path #Patch
 		file(REMOVE ${DKDOWNLOAD}/TEMP/${FOLDER}.html)
 		string(FIND "${PAGE}" "spoofed_commit_check" index)
 		if(${index} EQUAL -1)
-			dk_assert("The page doesn't contain a 'spoofed_commit_check' variable")
+			dk_error("The page doesn't contain a 'spoofed_commit_check' variable")
 			return()
 		endif()
 		math(EXPR value "${index} + 21") #OUTPUT_FORMAT DECIMAL) # CMake 3.13+
@@ -194,7 +194,7 @@ function(dk_getGithubDownload url) #install_path #Patch
 	endif()
 	
 	if(NOT ${LIBVAR})
-		dk_assert("${LIBVAR} invalid")
+		dk_error("${LIBVAR} invalid")
 	endif()
 	
 	if(NOT ${LIBVAR}_BRANCH)
@@ -202,11 +202,11 @@ function(dk_getGithubDownload url) #install_path #Patch
 	endif()
 	
 	if(NOT ${LIBVAR}_NAME)
-		dk_assert("${LIBVAR}_NAME invalid")
+		dk_error("${LIBVAR}_NAME invalid")
 	endif()
 	
 	if(NOT ${LIBVAR}_DL)
-		dk_assert("${LIBVAR}_DL invalid")
+		dk_error("${LIBVAR}_DL invalid")
 	endif()
 	
 	

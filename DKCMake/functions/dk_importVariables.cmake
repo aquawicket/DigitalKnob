@@ -33,7 +33,7 @@ function(dk_importVariables PLUGIN_URL RESULT)
 	##### Test that we dont have any non-alphanumeric characters ######
 	#string(MAKE_C_IDENTIFIER ${PLUGIN_URL} PLUGIN_URL_TEST)
 	#if(NOT ${PLUGIN_URL} STREQUAL ${PLUGIN_URL_TEST})
-	#	dk_assert("${PLUGIN_URL} contains non-alphanumeric characters")
+	#	dk_error("${PLUGIN_URL} contains non-alphanumeric characters")
 	#	#string(MAKE_C_IDENTIFIER ${PLUGIN_URL} PLUGIN_URL)
 	#endif()
 	###################################################################
@@ -105,7 +105,7 @@ function(dk_importVariables PLUGIN_URL RESULT)
 	
 	### TEST
 	if(NOT PLUGIN_IMPORT)
-		dk_assert("PLUGIN_IMPORT invalid")
+		dk_error("PLUGIN_IMPORT invalid")
 	endif()
 	
 	if(PLUGIN_IMPORT)
