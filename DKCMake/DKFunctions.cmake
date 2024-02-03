@@ -2019,6 +2019,7 @@ function(dk_msys2)
 	DKDEBUGFUNC(${ARGV})
 		string(REPLACE ";" " " str "${ARGV}")
 		dk_info("\n${CLR}${magenta} $ ${str}\n")
+		
 		set(bash "#!/bin/bash")
 		list(APPEND bash "cd ${CURRENT_DIR}")
 		
@@ -2143,6 +2144,8 @@ endfunction()
 #
 function(dk_command)
 	DKDEBUGFUNC(${ARGV})
+	dk_info("\n${CLR}${magenta} $ ${ARGV}\n")
+	
 	if(NOT EXISTS ${CURRENT_DIR})
 		dk_set(CURRENT_DIR ${DIGITALKNOB})
 	endif()

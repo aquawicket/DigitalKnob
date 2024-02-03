@@ -94,7 +94,7 @@ function validate_which() {
 	fi
 	
 	WHICH=$(which which)
-	echo "\$WHICH = $WHICH"
+	echo "WHICH = $WHICH"
 }
 
 ###### validate_cmake ######
@@ -118,7 +118,7 @@ function validate_cmake() {
 	fi
 	
 	CMAKE=$(which cmake)
-	echo "\$CMAKE = $CMAKE"
+	echo "CMAKE = $CMAKE"
 }
 
 ###### validate_git ######
@@ -128,7 +128,7 @@ function validate_git() {
 	fi
 	
 	GIT=$(which git)
-	echo "\$GIT = $GIT"	
+	echo "GIT = $GIT"	
 }
 
 ###### validate_homebrew ######
@@ -147,7 +147,7 @@ function validate_homebrew() {
 	fi
 	
 	BREW=$(which brew)
-	echo "\$BREW = $BREW"	
+	echo "BREW = $BREW"	
 }
 
 ###### package_installed <package> ######
@@ -316,26 +316,24 @@ function validate_emscripten() {
 
 ###### validate_android_ndk ######
 function validate_android_ndk() {
-	cmake_eval "include('$DKIMPORTS/android-ndk/DKMAKE.cmake')" "ANDROID_NDK;ANDROID_NDK_BUILD;ANDROID_TOOLCHAIN"	
-	echo "\$ANDROID_NDK = $ANDROID_NDK"
-	echo "\$ANDROID_NDK_BUILD = $ANDROID_NDK_BUILD"
-	echo "\$ANDROID_TOOLCHAIN = $ANDROID_TOOLCHAIN"
-	ANDROID_API=31
-	echo "\$ANDROID_API = $ANDROID_API"
+	cmake_eval "include('$DKIMPORTS/android-ndk/DKMAKE.cmake')" "ANDROID_API;ANDROID_NDK;ANDROID_TOOLCHAIN_FILE"	
+	echo "ANDROID_API = $ANDROID_API"
+	echo "ANDROID_NDK = $ANDROID_NDK"
+	echo "ANDROID_TOOLCHAIN_FILE = $ANDROID_TOOLCHAIN_FILE"
 }
 
 ###### validate_clang ######
 function validate_clang() {
 	cmake_eval "include('$DKIMPORTS/clang/DKMAKE.cmake')" "C_COMPILER;CXX_COMPILER"
-	echo "\$C_COMPILER = $C_COMPILER"
-	echo "\$CXX_COMPILER = $CXX_COMPILER"
+	echo "C_COMPILER = $C_COMPILER"
+	echo "CXX_COMPILER = $CXX_COMPILER"
 }
 
 ###### validate_gcc ######
 function validate_gcc() {
 	cmake_eval "include('$DKIMPORTS/gcc/DKMAKE.cmake')" "C_COMPILER;CXX_COMPILER"
-	echo "\$C_COMPILER = $C_COMPILER"
-	echo "\$CXX_COMPILER = $CXX_COMPILER"
+	echo "C_COMPILER = $C_COMPILER"
+	echo "CXX_COMPILER = $CXX_COMPILER"
 }
 		
 		
@@ -350,7 +348,7 @@ function cmake_eval() {
 	variables="$2"
 	#set commands=$commands:"=%"  #TODO: remove double quotes
 	DKCOMMAND="$commands"
-	echo "\$DKCOMMAND = $DKCOMMAND"
+	echo "DKCOMMAND = $DKCOMMAND"
 	
 	if [[ -n "$variables" ]]; then
 		call $CMAKE "-DDKCMAKE=$DKCMAKE" "-DDKCOMMAND=$DKCOMMAND" "-DDKRETURN=$2" -P $DKCMAKE/dev/cmake_eval.cmake
@@ -387,16 +385,16 @@ validate_sudo
 
 
 echo ""
-echo "\$HOSTNAME = $HOSTNAME"
-echo "\$HOSTTYPE = $HOSTTYPE"
-echo "\$MACHTYPE = $MACHTYPE"
-echo "\$MODEL = $MODEL"
-echo "\$MSYSTEM = $MSYSTEM"
-echo "\$OSTYPE = $OSTYPE"
-echo "\$SCRIPTNAME = $SCRIPTNAME"
-echo "\$SCRIPTPATH = $SCRIPTPATH"
-echo "\$USER = $USER"
-echo "\$USERNAME = $USERNAME"
+echo "HOSTNAME = $HOSTNAME"
+echo "HOSTTYPE = $HOSTTYPE"
+echo "MACHTYPE = $MACHTYPE"
+echo "MODEL = $MODEL"
+echo "MSYSTEM = $MSYSTEM"
+echo "OSTYPE = $OSTYPE"
+echo "SCRIPTNAME = $SCRIPTNAME"
+echo "SCRIPTPATH = $SCRIPTPATH"
+echo "USER = $USER"
+echo "USERNAME = $USERNAME"
 echo " "
 
 #--------------------------------------------------------
@@ -411,11 +409,11 @@ else
 fi
 
 mkdir -p $DIGITALKNOB;
-echo "\$DIGITALKNOB = $DIGITALKNOB"
+echo "DIGITALKNOB = $DIGITALKNOB"
 
 DKDOWNLOAD="$DIGITALKNOB/download"
 mkdir -p $DKDOWNLOAD;
-echo "\$DKDOWNLOAD = $DKDOWNLOAD"
+echo "DKDOWNLOAD = $DKDOWNLOAD"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	validate_homebrew
@@ -426,14 +424,14 @@ validate_cmake
 validate_git
 validate_branch
 
-echo "\$DKPATH = $DKPATH"
-echo "\$DKCMAKE = $DKCMAKE"
-echo "\$DK3RDPARTY = $DK3RDPARTY"
-echo "\$DKIMPORTS = $DKIMPORTS"
+echo "DKPATH = $DKPATH"
+echo "DKCMAKE = $DKCMAKE"
+echo "DK3RDPARTY = $DK3RDPARTY"
+echo "DKIMPORTS = $DKIMPORTS"
 
 
 if [ $SCRIPTPATH == $DKPATH ];then
-	echo "\$SCRIPTPATH and \$DKPATH are the same"
+	echo "SCRIPTPATH and \$DKPATH are the same"
 else
 	warning "$SCRIPTNAME is not running from the DKPATH directory. Any changes will not be saved by git!"
 	warning "$SCRIPTNAME path = $SCRIPTPATH"
@@ -866,10 +864,10 @@ while :
 			
 	if [[ "$OS" == "android32" ]]; then
 		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-	     	call $CMAKE -G "$GENERATOR" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=$ANDROID_API -DANDROID_NDK=$ANDROID_NDK -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+	     	call $CMAKE -G "$GENERATOR" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=$ANDROID_API -DANDROID_NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_TOOLCHAIN -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
 	    fi
 	    if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-	     	call $CMAKE -G "$GENERATOR" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=$ANDROID_API -DANDROID_NDK=$ANDROID_NDK -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
+	     	call $CMAKE -G "$GENERATOR" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=$ANDROID_API -DANDROID_NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_TOOLCHAIN -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
 	    fi
 	fi
 

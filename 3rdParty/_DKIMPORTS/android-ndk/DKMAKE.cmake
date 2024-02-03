@@ -68,7 +68,10 @@ LINUX_HOST_dk_import(${ANDROID_NDK_LINUX_DL} PATH ${ANDROID_SDK}/ndk/${ANDROID_N
 else()
 LINUX_HOST_dk_import(${ANDROID_NDK_ANDROID_DL} PATH ${ANDROID_SDK}/ndk/${ANDROID_NDK_BUILD})
 endif()
-dk_set(ANDROID_TOOLCHAIN "${ANDROID_NDK}/build/cmake/android.toolchain.cmake")
+
+
+dk_set(ANDROID_TOOLCHAIN_FILE "${ANDROID_NDK}/build/cmake/android.toolchain.cmake")
+dk_set(ANDROID_API 31)
 
 dk_setEnv("NDK_ROOT" ${ANDROID_NDK})
 dk_setEnv("VS_NdkRoot" ${ANDROID_NDK})
