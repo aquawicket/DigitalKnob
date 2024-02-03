@@ -16,7 +16,7 @@ dk_return()
 #dk_set(APP_VERSION 1.0)
 #dk_set(APP_NAME "app-${APP_VERSION}.exe")
 #dk_set(APP_DL https://app.com/app.exe)
-#dk_set(APP "C:/Program Files (x86)/${APP_NAME}")
+#dk_set(APP "${ProgramFiles_x86}/${APP_NAME}")
 #dk_set(APP_EXE "${APP}/app.exe")
 
 ### INSTALL ###

@@ -4,27 +4,28 @@
 # https://developer.android.com/studio/projects/configure-cmake
 # https://discourse.cmake.org/t/cmake-silent-install-with-options-help/1475/2
 
+
 if(MSYSTEM)
 	dk_depend(msys2)
 	
 	dk_remove(${MSYS2}/var/lib/pacman/db.lck NOERROR)
 	
 	if(CLANG32)
-		dk_msys2("pacman -S mingw-w64-clang-i686-cmake --needed --noconfirm")	# CLANG32
+		dk_msys2("pacman -S mingw-w64-clang-i686-cmake --needed --noconfirm")		# CLANG32
 	elseif(CLANG64)
-		dk_msys2("pacman -S mingw-w64-clang-x86_64-cmake --needed --noconfirm")	# CLANG64
+		dk_msys2("pacman -S mingw-w64-clang-x86_64-cmake --needed --noconfirm")		# CLANG64
 	elseif(CLANGARM64)
 		dk_msys2("pacman -S mingw-w64-clang-aarch64-cmake --needed --noconfirm")	# CLANGARM64
 	elseif(MINGW32)
-		dk_msys2("pacman -S mingw-w64-i686-cmake --needed --noconfirm")			# MINGW32
+		dk_msys2("pacman -S mingw-w64-i686-cmake --needed --noconfirm")				# MINGW32
 	elseif(MINGW64)
-		dk_msys2("pacman -S mingw-w64-x86_64-cmake --needed --noconfirm")		# MINGW64
+		dk_msys2("pacman -S mingw-w64-x86_64-cmake --needed --noconfirm")			# MINGW64
 	elseif(UCRT64)
-		dk_msys2("pacman -S mingw-w64-ucrt-x86_64-cmake --needed --noconfirm")	# UCRT64
+		dk_msys2("pacman -S mingw-w64-ucrt-x86_64-cmake --needed --noconfirm")		# UCRT64
 	elseif(WIN_32)
-		dk_msys2("pacman -S mingw-w64-i686-cmake --needed --noconfirm")			# WIN32 / MINGW32
+		dk_msys2("pacman -S mingw-w64-i686-cmake --needed --noconfirm")				# WIN32 / MINGW32
 	elseif(WIN_64)
-		dk_msys2("pacman -S mingw-w64-x86_64-cmake --needed --noconfirm")		# WIN64 / MINGW64
+		dk_msys2("pacman -S mingw-w64-x86_64-cmake --needed --noconfirm")			# WIN64 / MINGW64
 	endif()
 	
 	dk_set(CMAKE_EXE cmake)
@@ -63,12 +64,12 @@ elseif(EXISTS "C:/Progra~1/CMake/bin/cmake.exe")
 elseif(EXISTS "C:/Progra~2/CMake/bin/cmake.exe")
 	dk_set(CMAKE "C:/Progra~2/CMake/bin")
 	dk_set(CMAKE_EXE "C:/Progra~2/CMake/bin/cmake.exe")
-elseif(EXISTS "C:/Program Files/CMake/bin/cmake.exe")
-	dk_set(CMAKE "C:/Program Files/CMake/bin")
-	dk_set(CMAKE_EXE "C:/Program Files/CMake/bin/cmake.exe")
-elseif(EXISTS "C:/Program Files (x86)/CMake/bin/cmake.exe")
-	dk_set(CMAKE "C:/Program Files (x86)/CMake/bin")
-	dk_set(CMAKE_EXE "C:/Program Files (x86)/CMake/bin/cmake.exe")
+elseif(EXISTS "${ProgramFiles}/CMake/bin/cmake.exe")
+	dk_set(CMAKE "${ProgramFiles}/CMake/bin")
+	dk_set(CMAKE_EXE "${ProgramFiles}/CMake/bin/cmake.exe")
+elseif(EXISTS "${ProgramFiles_x86}/CMake/bin/cmake.exe")
+	dk_set(CMAKE "${ProgramFiles_x86}/CMake/bin")
+	dk_set(CMAKE_EXE "${ProgramFiles_x86}/CMake/bin/cmake.exe")
 else()
 	### INSTALL ###
 	dk_info("Installing CMake . . .")
@@ -112,12 +113,12 @@ elseif(EXISTS "C:/Progra~1/CMake/bin/cmake.exe")
 elseif(EXISTS "C:/Progra~2/CMake/bin/cmake.exe")
 	dk_set(CMAKE "C:/Progra~2/CMake/bin")
 	dk_set(CMAKE_EXE "C:/Progra~2/CMake/bin/cmake.exe")
-elseif(EXISTS "C:/Program Files/CMake/bin/cmake.exe")
-	dk_set(CMAKE "C:/Program Files/CMake/bin")
-	dk_set(CMAKE_EXE "C:/Program Files/CMake/bin/cmake.exe")
-elseif(EXISTS "C:/Program Files (x86)/CMake/bin/cmake.exe")
-	dk_set(CMAKE "C:/Program Files (x86)/CMake/bin")
-	dk_set(CMAKE_EXE "C:/Program Files (x86)/CMake/bin/cmake.exe")
+elseif(EXISTS "${ProgramFiles}/CMake/bin/cmake.exe")
+	dk_set(CMAKE "${ProgramFiles}/CMake/bin")
+	dk_set(CMAKE_EXE "${ProgramFiles}/CMake/bin/cmake.exe")
+elseif(EXISTS "${ProgramFiles_x86}/CMake/bin/cmake.exe")
+	dk_set(CMAKE "${ProgramFiles_x86}/CMake/bin")
+	dk_set(CMAKE_EXE "${ProgramFiles_x86}/CMake/bin/cmake.exe")
 else()
 	dk_assert("CMAKE NOT FOUND!")
 endif()

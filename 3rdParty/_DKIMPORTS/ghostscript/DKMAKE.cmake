@@ -8,7 +8,7 @@ endif()
 
 
 ### IMPORT ###
-#dk_set(GHOSTSCRIPT "C:/Program Files/gs/gs9.22/bin")
+#dk_set(GHOSTSCRIPT "${ProgramFiles}/gs/gs9.22/bin")
 #dk_import(https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs922/gs922w64.exe)
 dk_set(GHOSTSCRIPT ${3RDPARTY}/ghostscript-9.22)
 if(NOT EXISTS ${GHOSTSCRIPT}/bin)

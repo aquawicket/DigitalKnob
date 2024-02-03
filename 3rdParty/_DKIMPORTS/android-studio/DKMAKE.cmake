@@ -14,7 +14,7 @@ dk_depend(android-ndk)
 
 ### IMPORT ###
 if(WIN_HOST)
-	if(NOT EXISTS "C:/Program Files/Android/Android Studio/bin/studio.exe")
+	if(NOT EXISTS "${ProgramFiles}/Android/Android Studio/bin/studio.exe")
 		dk_download("https://redirector.gvt1.com/edgedl/android/studio/install/2020.3.1.26/android-studio-2020.3.1.26-windows.exe" ${DKDOWNLOAD}/android-studio-2020.3.1.26-windows.exe)
 		dk_command(${DKDOWNLOAD}/android-studio-2020.3.1.26-windows.exe)
 		#dk_remove(${DKDOWNLOAD}/android-studio-2020.3.1.26-windows.exe)

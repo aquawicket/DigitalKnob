@@ -128,7 +128,7 @@ endif()
 # https://slproweb.com/products/Win32OpenSSL.html
 # https://slproweb.com/download/Win64OpenSSL-3_0_4.exe
 ### INSTALL ###
-# WIN_HOST_dk_set(OPENSSL_BINARY "C:/Program Files/OpenSSL-Win64")
+# WIN_HOST_dk_set(OPENSSL_BINARY "${ProgramFiles}/OpenSSL-Win64")
 # WIN_HOST_dk_set(OPENSSL_BINARY_EXE ${OPENSSL_BINARY}/bin/openssl.exe)
 # MAC_HOST_dk_set(OPENSSL_BINARY /usr/bin)
 # MAC_HOST_dk_set(OPENSSL_BINARY_EXE ${OPENSSL_BINARY}/openssl)
