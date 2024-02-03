@@ -39,3 +39,18 @@ if(WIN_HOST)
 		dk_set(CXX_COMPILER ${MSYS2}/mingw64/bin/g++.exe)
 	endif()
 endif()
+
+
+if(LINUX_HOST)
+	if(EXISTS /usr/bin/gcc)
+		dk_set(LINUX_GCC	/usr/bin/gcc)
+	elseif(EXISTS /usr/local/bin/gcc)
+		dk_set(LINUX_GCC	/usr/local/bin/gcc)
+	endif()
+
+	if(EXISTS /usr/bin/g++)
+		dk_set(LINUX_GXX	/usr/bin/g++)
+	elseif(EXISTS /usr/local/bin/g++)
+		dk_set(LINUX_GXX	/usr/local/bin/g++)
+	endif()
+endif()

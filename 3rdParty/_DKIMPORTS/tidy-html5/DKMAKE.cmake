@@ -22,15 +22,15 @@ if(MSVC)
 	WIN_dk_libDebug		(${TIDY_HTML5}/${OS}/${DEBUG_DIR}/tidy_staticd.lib)
 	WIN_dk_libRelease	(${TIDY_HTML5}/${OS}/${RELEASE_DIR}/tidy_static.lib)
 else()
-	UNIX_dk_libDebug	(${TIDY_HTML5}/${OS}/${DEBUG_DIR}/libtidy.a)
-	UNIX_dk_libRelease	(${TIDY_HTML5}/${OS}/${RELEASE_DIR}/libtidy.a)
+	dk_libDebug			(${TIDY_HTML5}/${OS}/${DEBUG_DIR}/libtidy.a)
+	dk_libRelease		(${TIDY_HTML5}/${OS}/${RELEASE_DIR}/libtidy.a)
 endif()
 
 
 
 ### GENERATE ###
 if(EMSCRIPTEN)
-	dk_queueCommand		(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=-DHAS_FUTIME=0" ${ZLIB_CMAKE} ${TIDY_HTML5})
+	dk_queueCommand		(${DKCMAKE_BUILD} ${ZLIB_CMAKE} "-DCMAKE_C_FLAGS=-DHAS_FUTIME=0" ${TIDY_HTML5})
 else()
 	dk_queueCommand		(${DKCMAKE_BUILD} ${ZLIB_CMAKE} ${TIDY_HTML5})
 endif()

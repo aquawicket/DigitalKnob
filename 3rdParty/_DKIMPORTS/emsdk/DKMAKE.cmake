@@ -35,15 +35,16 @@ dkFileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_SDL_MIXER 
 dkFileReplace("${EMSDK}/upstream/emscripten/src/settings.js" "var USE_PTHREADS = false;" "var USE_PTHREADS = true;"		NOERROR)
 
 
-WIN_HOST_dk_set	(EMSDK_ENV ${EMSDK}/emsdk_env.bat)
-UNIX_HOST_dk_set(EMSDK_ENV ${EMSDK}/emsdk_env.sh)
-dk_set			(EMSDK_TOOLCHAIN_FILE ${EMSDK}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake)
-WIN_HOST_dk_set	(EMSDK_GENERATOR "MinGW Makefiles")
+WIN_HOST_dk_set	(EMSDK_ENV 				${EMSDK}/emsdk_env.bat)
+UNIX_HOST_dk_set(EMSDK_ENV 				${EMSDK}/emsdk_env.sh)
+dk_set			(EMSDK_TOOLCHAIN_FILE 	${EMSDK}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake)
+WIN_HOST_dk_set	(EMSDK_GENERATOR 		"MinGW Makefiles")
 
-dk_set(EMAR ${EMSDK}/upstream/emscripten/emar)
-dk_set(EMCC ${EMSDK}/upstream/emscripten/emcc)
-dk_set(EMCMAKE ${EMSDK}/upstream/emscripten/emcmake)
-dk_set(EMCONFIGURE ${EMSDK}/upstream/emscripten/emconfigure)
-dk_set(EMMAKE ${EMSDK}/upstream/emscripten/emmake)
-dk_set(EMPP ${EMSDK}/upstream/emscripten/em++)
-dk_set(EMRANLIB ${EMSDK}/upstream/emscripten/emranlib)
+
+dk_set(EMAR 		${EMSDK}/upstream/emscripten/emar)
+dk_set(EMCC 		${EMSDK}/upstream/emscripten/emcc)
+dk_set(EMCMAKE 		${EMSDK}/upstream/emscripten/emcmake)
+dk_set(EMCONFIGURE 	${EMSDK}/upstream/emscripten/emconfigure)
+dk_set(EMMAKE 		${EMSDK}/upstream/emscripten/emmake)
+dk_set(EMPP 		${EMSDK}/upstream/emscripten/em++)
+dk_set(EMRANLIB 	${EMSDK}/upstream/emscripten/emranlib)

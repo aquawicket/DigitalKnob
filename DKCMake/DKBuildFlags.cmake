@@ -101,45 +101,13 @@ dk_set(WARNING_5105			OFF)
 dk_set(STATIC				ON)
 dk_set(SHARED				OFF)                                          
 
-# xcode Variables
-dk_set(XCODE_DEVROOT	/Applications/Xcode.app/Contents/Developer)
-dk_set(XCODE_CLANG		${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang)
-dk_set(XCODE_CLANGXX	${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++)
-dk_set(XCODE_LIBTOOL	${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool)
-
-# iOS variables
-dk_set(IOS_DARWIN		darwin20.6.0)
-dk_set(IOS_SDK			15.0)
-dk_set(IOS_MIN_SDK		13.0)
-dk_set(IOS_SYSROOT		${XCODE_DEVROOT}/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.0.sdk)
-dk_set(IOSSIM_SYSROOT	${XCODE_DEVROOT}/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator15.0.sdk)
-
-# linux variables
-if(EXISTS /usr/bin/gcc)
-	dk_set(LINUX_GCC	/usr/bin/gcc)
-elseif(EXISTS /usr/local/bin/gcc)
-	dk_set(LINUX_GCC	/usr/local/bin/gcc)
-endif()
-
-if(EXISTS /usr/bin/g++)
-	dk_set(LINUX_GXX	/usr/bin/g++)
-elseif(EXISTS /usr/local/bin/g++)
-	dk_set(LINUX_GXX	/usr/local/bin/g++)
-endif()
 
 
-# Android variables
-dk_set(ANDROID_API 31)
-dk_set(ANDROID_MIN_API 19)
-#dk_set(__ANDROID_MIN_SDK_VERSION__ 31)
-#dk_set(ANDROID_CLANG	${3RDPARTY}/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/windows-x86_64/bin/clang.exe)
-#dk_set(ANDROID_CLANGXX	${3RDPARTY}/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/windows-x86_64/bin/clang.exe)
 
-
+WIN_dk_depend(visualstudio)
 
 # Windows i686 (x32) - MSVC
 if(MSVC)
-	dk_depend(visualstudio)
 	WIN32_dk_set(DKCMAKE_FLAGS					-DBUILD_SHARED_LIBS=OFF -DBUILD_STATIC_LIBS=ON -DCMAKE_POSITION_INDEPENDENT_CODE=ON)
 	WIN32_dk_set(DKCMAKE_C_COMPILER				"${VISUALSTUDIO_X86_C_COMPILER}")
 	WIN32_dk_set(DKCMAKE_C_FLAGS				"/DWIN /DWIN32 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c17 /nologo /GR /EHsc /Zm500 /Zc:__cplusplus /bigobj") #/D_WIN32_WINNT=0x0600
@@ -160,7 +128,6 @@ endif()
 
 # Windows x86_64 (x64) - MSVC
 if(MSVC)
-	dk_depend(visualstudio)
 	WIN64_dk_set(DKCMAKE_FLAGS					-DBUILD_SHARED_LIBS=OFF -DBUILD_STATIC_LIBS=ON -DCMAKE_POSITION_INDEPENDENT_CODE=ON)
 	WIN64_dk_set(DKCMAKE_C_COMPILER				"${VISUALSTUDIO_X64_C_COMPILER}")
 	WIN64_dk_set(DKCMAKE_C_FLAGS				"/DWIN /DWIN64 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c17 /nologo /GR /EHsc /Zm500 /Zc:__cplusplus /bigobj") #/MACHINE:X64 /D_WIN32_WINNT=0x0600
@@ -179,10 +146,16 @@ if(MSVC)
 	WIN64_dk_set(DKCONFIGURE_CXXFLAGS_RELEASE	"-DNDEBUG -O3") 
 endif()
 
+
+
+#MSYS_dk_depend(msys2)
 #if(MSYS)
-#	dk_depend(visualstudio)
 #	WIN64_dk_set(DKCMAKE_C_FLAGS				"-march=x86-64 -DWIN -DWIN64 -std=gnu11 -no-pie -fPIC")
 #endif()
+
+
+
+MAC_HOST_dk_depend(xcode)
 
 # Moc i686 (x32) - XCODE
 MAC32_dk_set(DKCMAKE_FLAGS					-DBUILD_SHARED_LIBS=OFF -DBUILD_STATIC_LIBS=ON -DCMAKE_OSX_ARCHITECTURES=x86)
@@ -384,9 +357,8 @@ RASPBERRY64_dk_set(DKCONFIGURE_CXXFLAGS			"-march=armv7l -DLINUX -DLINUX64 -DRAS
 RASPBERRY64_dk_set(DKCONFIGURE_CXXFLAGS_DEBUG	"-DDEBUG -D_DEBUG -g")
 RASPBERRY64_dk_set(DKCONFIGURE_CXXFLAGS_RELEASE	"-DNDEBUG -O3")
 
-#ANDROID_dk_depend(android-ndk) #for ${ANDROID_NDK} variable
-dk_set(ANDROID_NDK ${3RDPARTY}/android-sdk/ndk/23.1.7779620)
-#dk_dump(ANDROID_NDK)
+
+ANDROID_dk_depend(android-ndk)
 
 # Android armeabi-v7a (x32)
 ANDROID32_dk_set(DKCMAKE_FLAGS
@@ -444,7 +416,11 @@ ANDROID64_dk_set(DKCONFIGURE_CFLAGS			"-DANDROID -DANDROID64 -frtti -fexceptions
 #ANDROID64_dk_set(DKCONFIGURE_CXX			${ANDROID_CLANGXX})
 ANDROID64_dk_set(DKCONFIGURE_CXXFLAGS		"-DANDROID -DANDROID64 -frtti -fexceptions -std=c++1z") #-U__ANDROID_API__ -D__ANDROID_API__=26 -Wno-macro-redefined
 
-# Emscripten
+
+EMSCRIPTEN_dk_depend(emsdk)
+EMSCRIPTEN_dk_depend(DKPhp)
+
+# Emscripten x32
 EMSCRIPTEN_dk_set(DKCMAKE_FLAGS					-DBUILD_SHARED_LIBS=OFF -DBUILD_STATIC_LIBS=ON -DEMSCRIPTEN=ON)
 #EMSCRIPTEN_dk_set(DKCMAKE_C_COMPILER			${EMSCRIPTEN_EMCC})
 EMSCRIPTEN_dk_set(DKCMAKE_C_FLAGS				"-DEMSCRIPTEN -std=gnu11")
@@ -469,8 +445,8 @@ EMSCRIPTEN_dk_set(DKCONFIGURE_CXXFLAGS_RELEASE	"-DNDEBUG -O3")
 ######### Extra Flags and Settings #########
 if(WARNINGS_AS_ERRORS)
 	if(MSVC)
-		WIN_dk_set		(DKCMAKE_C_FLAGS	"${DKCMAKE_C_FLAGS} /WX")
-		WIN_dk_set		(DKCMAKE_CXX_FLAGS	"${DKCMAKE_CXX_FLAGS} /WX")
+		WIN_dk_set	(DKCMAKE_C_FLAGS	"${DKCMAKE_C_FLAGS} /WX")
+		WIN_dk_set	(DKCMAKE_CXX_FLAGS	"${DKCMAKE_CXX_FLAGS} /WX")
 	endif()
 	UNIX_dk_set		(DCMAKE_C_FLAGS		"${DKCMAKE_C_FLAGS} -Werror")
 	UNIX_dk_set		(DCMAKE_CXX_FLAGS	"${DKCMAKE_CXX_FLAGS} -Werror")
@@ -596,30 +572,6 @@ endif()
 
 
 ############ CORE DEPENDENCIES ############
-dk_depend			(git)
-dk_depend			(cmake)
-
-##ANDROID_dk_depend	(ant)
-#ANDROID_dk_depend	(android-cmdline-tools)
-#ANDROID_dk_depend	(android-ndk)
-#ANDROID_dk_depend	(android-platforms)
-#ANDROID_dk_depend	(android-sources)
-#ANDROID_dk_depend	(android-system-images)
-#ANDROID_dk_depend	(android-platform-tools)
-#ANDROID_dk_depend	(android-build-tools)
-#ANDROID_dk_depend	(android-sdk-tools)
-#ANDROID_dk_depend	(android-cmake)
-##ANDROID_dk_depend	(android-studio)
-#ANDROID_dk_depend	(visualstudio)
-
-EMSCRIPTEN_dk_depend(emsdk)
-EMSCRIPTEN_dk_depend(DKPhp)
-
-MAC_HOST_dk_depend	(xcode)
-
-WIN_HOST_dk_depend	(visualstudio)
-WIN_HOST_dk_depend	(imagemagick)
-WIN_HOST_dk_depend	(msys2)			
 
 
 if(VISUAL_STUDIO)
@@ -637,7 +589,6 @@ RASPBERRY_DEBUG_dk_set		(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -DCMAK
 RASPBERRY_RELEASE_dk_set	(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -DCMAKE_BUILD_TYPE=Release ${DKCMAKE_FLAGS})
 
 
-
 if(VISUAL_STUDIO)
 	ANDROID32_dk_set		(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -A ARM ${DKCMAKE_FLAGS})
 	ANDROID64_dk_set		(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -A ARM64 ${DKCMAKE_FLAGS})
@@ -646,15 +597,7 @@ else()
 	ANDROID64_dk_set		(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})
 endif()
 
-#dk_dump(EMSDK) #FIXME: not set
-EMSCRIPTEN_dk_set			(EMSDK ${3RDPARTY}/emsdk-main)
-if(WIN_HOST)
-	EMSCRIPTEN_dk_set		(EMSDK_ENV ${3RDPARTY}/emsdk-main/emsdk_env.bat;&)
-else()
-	EMSCRIPTEN_dk_unset		(EMSDK_ENV)
-endif()
-EMSCRIPTEN_dk_set			(EMSDK_TOOLCHAIN_FILE ${EMSDK}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake)
-EMSCRIPTEN_dk_set			(EMCONFIGURE ${EMSDK}/upstream/emscripten/emconfigure)
+
 EMSCRIPTEN_DEBUG_dk_set		(DKCMAKE_BUILD ${EMSDK_ENV} ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -DCMAKE_TOOLCHAIN_FILE=${EMSDK_TOOLCHAIN_FILE} -DCMAKE_BUILD_TYPE=Debug ${DKCMAKE_FLAGS})
 EMSCRIPTEN_RELEASE_dk_set	(DKCMAKE_BUILD ${EMSDK_ENV} ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -DCMAKE_TOOLCHAIN_FILE=${EMSDK_TOOLCHAIN_FILE} -DCMAKE_BUILD_TYPE=Release ${DKCMAKE_FLAGS})
 

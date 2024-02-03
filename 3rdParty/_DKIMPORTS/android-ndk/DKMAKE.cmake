@@ -60,6 +60,7 @@ endif()
 #dk_set(ANDROID_NDK_LINUX_DL https://dl.google.com/android/repository/android-ndk-r25-linux.zip)
 
 
+### Install ###
 dk_makeDirectory(${ANDROID_SDK}/ndk)
 WIN_HOST_dk_import	(${ANDROID_NDK_WIN_DL} PATH ${ANDROID_SDK}/ndk/${ANDROID_NDK_BUILD} PATCH)
 MAC_HOST_dk_import	(${ANDROID_NDK_MAC_DL} PATH ${ANDROID_SDK}/ndk/${ANDROID_NDK_BUILD} PATCH)
@@ -69,9 +70,14 @@ else()
 LINUX_HOST_dk_import(${ANDROID_NDK_ANDROID_DL} PATH ${ANDROID_SDK}/ndk/${ANDROID_NDK_BUILD})
 endif()
 
-
+### Make Variables ###
+dk_set(ANDROID_NDK ${ANDROID_SDK}/ndk/${ANDROID_NDK_BUILD})
 dk_set(ANDROID_TOOLCHAIN_FILE "${ANDROID_NDK}/build/cmake/android.toolchain.cmake")
 dk_set(ANDROID_API 31)
+dk_set(ANDROID_MIN_API 19)
+#dk_set(__ANDROID_MIN_SDK_VERSION__ 31)
+#dk_set(ANDROID_CLANG	${3RDPARTY}/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/windows-x86_64/bin/clang.exe)
+#dk_set(ANDROID_CLANGXX	${3RDPARTY}/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/windows-x86_64/bin/clang.exe)
 
 dk_setEnv("NDK_ROOT" ${ANDROID_NDK})
 dk_setEnv("VS_NdkRoot" ${ANDROID_NDK})

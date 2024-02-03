@@ -78,6 +78,7 @@ elseif(ANDROID)
 		-DHAVE_POSIX_STRERROR_R=1
 		${OPENSSL_CMAKE}
 		${ZLIB_CMAKE}
+		${ZSTD_CMAKE}
 		${CURL})
 elseif(IOS OR IOSSIM)
 	dk_queueCommand(${DKCMAKE_BUILD}
@@ -95,6 +96,7 @@ elseif(IOS OR IOSSIM)
 		-DHAVE_POSIX_STRERROR_R=0
 		${OPENSSL_CMAKE}
 		${ZLIB_CMAKE}
+		${ZSTD_CMAKE}
 		${CURL})
 elseif(LINUX)
 	dk_queueCommand(${DKCMAKE_BUILD}

@@ -8,6 +8,20 @@ if(NOT MAC_HOST)
 endif()
 
 
+# xcode Variables
+dk_set(XCODE_DEVROOT	/Applications/Xcode.app/Contents/Developer)
+dk_set(XCODE_CLANG		${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang)
+dk_set(XCODE_CLANGXX	${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++)
+dk_set(XCODE_LIBTOOL	${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool)
+
+# iOS variables
+dk_set(IOS_DARWIN		darwin20.6.0)
+dk_set(IOS_SDK			15.0)
+dk_set(IOS_MIN_SDK		13.0)
+dk_set(IOS_SYSROOT		${XCODE_DEVROOT}/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.0.sdk)
+dk_set(IOSSIM_SYSROOT	${XCODE_DEVROOT}/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator15.0.sdk)
+
+
 ### VERSION ###
 #dk_set(XCODE_VERSION ???)
 #dk_set(XCODE_NAME ???)
