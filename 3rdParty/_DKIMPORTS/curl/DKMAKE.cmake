@@ -6,12 +6,13 @@
 
 ### DEPEND ###
 dk_depend(dl)
-dk_depend(libssh)
+dk_depend(libssh2)
 dk_depend(openssl)
 dk_depend(pthread)
 dk_depend(system_configuration)
 dk_depend(ws2_32.lib)
 dk_depend(zlib)
+dk_depend(zstd)
 
 
 ### IMPORT ###
@@ -26,7 +27,7 @@ endif()
 ### LINK ###
 dk_define					(CURL_STATICLIB)
 dk_include					(${CURL}/include 								CURL_INCLUDE_DIR)
-dk_include					(${CURL}/${OS}/include/curl)
+dk_include					(${CURL}/${OS}/include/curl)					CURL_INCLUDE_DIR2)
 DEBUG_dk_include			(${CURL}/${OS}/${DEBUG_DIR}/include/curl)
 RELEASE_dk_include			(${CURL}/${OS}/${RELEASE_DIR}/include/curl)
 
@@ -148,13 +149,13 @@ else()
 		-DCURL_USE_LIBSSH=OFF
 		-DCURL_USE_NSS=OFF
 		-DCURL_USE_OPENLDAP=OFF
-		-DCURL_USE_OPENSSL=OFF
+		-DCURL_USE_OPENSSL=${OPENSSL}
 		-DCURL_USE_SCHANNEL=OFF
 		-DCURL_USE_SECTRANSP=OFF
 		-DCURL_USE_WOLFSSL=OFF
 		-DCURL_WERROR=OFF
 		-DCURL_WINDOWS_SSPI=ON
-		-DCURL_ZSTD=OFF
+		-DCURL_ZSTD=${ZSTD}
 		-DENABLE_ARES=OFF
 		-DENABLE_CURLDEBUG=OFF
 		-DENABLE_DEBUG=OFF
