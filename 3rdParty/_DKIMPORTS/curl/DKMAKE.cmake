@@ -16,12 +16,12 @@ dk_depend(zstd)
 
 
 ### IMPORT ###
-if(MSVC)
-	WIN_dk_import	(https://github.com/curl/curl/archive/refs/tags/curl-7_43_0.zip)
-else()
-	dk_import		(https://github.com/curl/curl/archive/refs/tags/curl-7_84_0.zip)
-endif()
-#dk_import			(https://github.com/curl/curl.git)
+#if(MSVC)
+#	WIN_dk_import	(https://github.com/curl/curl/archive/refs/tags/curl-7_43_0.zip)
+#else()
+#	dk_import		(https://github.com/curl/curl/archive/refs/tags/curl-7_84_0.zip)
+#endif()
+dk_import			(https://github.com/curl/curl.git)
 
 
 ### LINK ###

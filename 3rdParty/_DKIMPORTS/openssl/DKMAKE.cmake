@@ -9,11 +9,12 @@
 #EMSCRIPTEN_dk_depend(python3)
 
 ### IMPORT ###
-if(MSVC)
-	WIN_dk_import	(https://www.npcglib.org/~stathis/downloads/openssl-1.0.2h-vs2015.7z)
-else()
-	dk_import		(https://github.com/openssl/openssl.git PATCH) #PATCH: premade emscripten libraries
-endif()
+#if(MSVC)
+#	WIN_dk_import	(https://www.npcglib.org/~stathis/downloads/openssl-1.0.2h-vs2015.7z)
+#else()
+#	dk_import		(https://github.com/openssl/openssl.git PATCH) #PATCH: premade emscripten libraries
+#endif()
+dk_import		(https://github.com/openssl/openssl.git)
 
 
 #if(EMSCRIPTEN)
