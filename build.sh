@@ -1,10 +1,11 @@
 #!/bin/bash
+# to run this script requires privledges, use $ chmod 777 build.sh
 
 ############## DigitalKnob builder script ############
 
-# to run this script requires privledges, use $ chmod 777 build.sh
-
-###### global variables ######
+#--------------------------------------------------------
+#  GLOBAL USER VARIABLES
+#--------------------------------------------------------
 SCRIPTPATH=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
 SCRIPTNAME=$(basename "$0")
 echo $SCRIPTPATH/$SCRIPTNAME
@@ -20,6 +21,8 @@ blue="\033[34m"
 magenta="\033[35m"
 cyan="\033[36m"
 white="\033[37m"
+
+
 
 ###### validate_sudo ######
 function validate_sudo() {
