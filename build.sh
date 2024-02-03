@@ -297,6 +297,12 @@ function validate_msys2() {
 	echo MSYS2 = $MSYS2
 }
 
+###### validate_make ######
+function validate_make() {
+	cmake_eval "include('$DKIMPORTS/make/DKMAKE.cmake')" "MAKE_PROGRAM"
+	echo MAKE_PROGRAM = $MAKE_PROGRAM
+}
+
 ###### validate_emscripten ######
 function validate_emscripten() {
 	cmake_eval "include('$DKIMPORTS/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_TOOLCHAIN_FILE"
@@ -784,8 +790,7 @@ while :
 	
 	
 	###### MAKE_PROGRAM ######
-	#cmake_eval "include('$DKIMPORTS/make/DKMAKE.cmake')" "MAKE_PROGRAM"
-	#echo "\$MAKE_PROGRAM = $MAKE_PROGRAM"
+	#validate_make
 	#if [[ -n "$MAKE_PROGRAM" ]]; then
 	#	CMAKE_ARGS+=( "-DCMAKE_MAKE_PROGRAM=$MAKE_PROGRAM" )
 	#fi
@@ -951,6 +956,7 @@ while :
 	
 	if [[ "$OS" == "win32" ]]; then
 		validate_msys2
+		validate_make
 		call export PATH=${MSYS2}/mingw32/bin:$PATH
 		call export PATH=${MSYS2}/usr/bin:$PATH
 		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
@@ -964,6 +970,7 @@ while :
 	
 	if [[ "$OS" == "win64" ]]; then
 		validate_msys2
+		validate_make
 		call export PATH=${MSYS2}/mingw64/bin:$PATH
 		call export PATH=${MSYS2}/usr/bin:$PATH
 		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
