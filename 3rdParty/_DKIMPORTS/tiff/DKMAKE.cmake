@@ -53,7 +53,15 @@ endif()
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} 
+dk_queueCommand(${DKCMAKE_BUILD}
+	-DBUILD_SHARED_LIBS=OFF
+	-Dtiff-tools=OFF				# "build TIFF tools" ON
+	-Dtiff-tools-unsupported=OFF	# "build unsupported TIFF tools" OFF
+	-Dtiff-tests=OFF				# "build TIFF tests" ON
+	-Dtiff-contrib=OFF				# "build TIFF contrib" ON
+	-Dtiff-docs=OFF					# "build TIFF documentation" ON
+	-Dtiff-deprecated=OFF			# "build TIFF deprecated features" OFF
+	-Dtiff-install=OFF				# "install TIFF targets" ${TIFF_INSTALL_DEFAULT}
 	${LIBJPEG_TURBO_CMAKE} 
 	${XZ_CMAKE}
 	${ZLIB_CMAKE}
