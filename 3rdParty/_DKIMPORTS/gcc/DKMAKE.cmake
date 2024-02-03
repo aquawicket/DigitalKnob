@@ -26,7 +26,7 @@ if(WIN_HOST)
 		dk_set(C_COMPILER ${MSYS2}/mingw64/bin/gcc.exe)
 		dk_set(CXX_COMPILER ${MSYS2}/mingw64/bin/g++.exe)
 	elseif(UCRT64)
-		dk_msys2("pacman -S mingw-w64-ucrt-x86_64-gcc --needed --noconfirm")		# UCRT64
+		dk_msys2("pacman -S mingw-w64-ucrt-x86_64-gcc --needed --noconfirm")	# UCRT64
 		dk_set(C_COMPILER ${MSYS2}/ucrt64/bin/gcc.exe)
 		dk_set(CXX_COMPILER ${MSYS2}/ucrt64/bin/g++.exe)
 	elseif(WIN_32)

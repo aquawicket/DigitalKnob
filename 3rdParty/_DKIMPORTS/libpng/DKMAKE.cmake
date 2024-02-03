@@ -20,7 +20,7 @@ endif()
 
 ### LINK ###
 dk_define					(PNG_STATIC)
-dk_include					(${LIBPNG}  					PNG_INCLUDE_DIR)
+dk_include					(${LIBPNG}  																	PNG_INCLUDE_DIR)
 dk_include					(${LIBPNG}/${OS})
 dk_include					(${LIBPNG}/${OS}/${RELEASE_DIR})
 ANDROID_dk_include			(${LIBPNG}/${OS}/$(BUILD_TYPE)/jni)
