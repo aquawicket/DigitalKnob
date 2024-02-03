@@ -17,10 +17,8 @@ dk_import(https://github.com/GNOME/libxml2.git)
 
 ### LINK ###
 dk_define	(LIBXML_STATIC)
-dk_set		(LIBXML2_INCLUDE_DIR ${LIBXML2}/include)
-dk_include	(${LIBXML2_INCLUDE_DIR})
+dk_include	(${LIBXML2}/include LIBXML2_INCLUDE_DIR)
 dk_include	(${LIBXML2})
-dk_include	(${LIBXML2}/include)
 dk_include	(${LIBXML2}/${OS})
 
 if(MSVC)
@@ -63,8 +61,7 @@ RASPBERRY_DEBUG_dk_queueCommand		(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=-DLIBXML_THR
 RASPBERRY_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=-DLIBXML_THREAD_ENABLED -DHAVE_ERRNO_H -I${LIBXML2}/${OS}/${RELEASE_DIR}" ${LIBICONV_CMAKE} ${XZ_CMAKE} ${ZLIB_CMAKE} ${LIBXML2})
 
 if(MSYS)
-	#WIN_dk_queueMsys2				(${DKCONFIGURE_BUILD})
-	#dkFileReplace("${LIBXML2}/CMakeLists.txt" "list(APPEND LIBXML2_SRCS win32/libxml2.rc)" " ")
+	dkFileReplace("${LIBXML2}/CMakeLists.txt" "list(APPEND LIBXML2_SRCS win32/libxml2.rc)" " ") # skip windres.exe (broken) 
 	WIN_DEBUG_dk_queueMsys2			(${DKCMAKE_BUILD} -DBUILD_SHARED_LIBS=OFF "-DCMAKE_C_FLAGS=-I${LIBXML2}/${OS}/${DEBUG_DIR}" ${LIBICONV_CMAKE} ${XZ_CMAKE} ${ZLIB_CMAKE} ${LIBXML2})
 	WIN_RELEASE_dk_queueMsys2		(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=-I${LIBXML2}/${OS}/${RELEASE_DIR}" ${LIBICONV_CMAKE} ${XZ_CMAKE} ${ZLIB_CMAKE} ${LIBXML2})
 endif()

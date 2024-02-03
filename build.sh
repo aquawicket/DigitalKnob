@@ -339,14 +339,11 @@ function cmake_eval() {
 	
 	commands="$1"
 	variables="$2"
-	#echo "commands = $commands"
 	#set commands=$commands:"=%"  #TODO: remove double quotes
 	DKCOMMAND="$commands"
 	echo "\$DKCOMMAND = $DKCOMMAND"
 	
-	#$CMAKE "-DDKCMAKE=$DKCMAKE" "-DDKCOMMAND=$DKCOMMAND" -P $DKCMAKE/dev/cmake_eval.cmake --log-level=TRACE >cmake_eval.out 2>cmake_eval.err
-	
-	if [[ -n "$2" ]]; then
+	if [[ -n "$variables" ]]; then
 		call $CMAKE "-DDKCMAKE=$DKCMAKE" "-DDKCOMMAND=$DKCOMMAND" "-DDKRETURN=$2" -P $DKCMAKE/dev/cmake_eval.cmake
 		if file_exists $DKCMAKE/cmake_vars.sh; then
 	    	echo "executing cmake_vars.sh"
@@ -358,38 +355,6 @@ function cmake_eval() {
 	fi
 	
 	#echo return code: $?
-	return $true
-	
-	
-	out=""
-	while IFS= read -r outline 
-		do
-			out="$out $outline"
-			echo "$outline"
-		done < cmake_eval.out
-	#out contains all of the lines
-	#echo "$out"
-	
-	
-	err=""
-	while IFS= read -r errline
-		do
-			err="$err $errline"
-			echo -e "${red} $errline ${CLR}"
-		done < cmake_eval.err
-	#err contains all of the lines
-	#echo "$err"	
-
-	#del cmake_eval.out
-	#del cmake_eval.out
-
-
-	#if "%ERROR_CODE%"=="0" (
-	#	echo return code: %ERROR_CODE%
-	#)
-	#if not "%ERROR_CODE%"=="0" (
-	#	echo return code: %ERROR_CODE%
-	#)
 }
 
 

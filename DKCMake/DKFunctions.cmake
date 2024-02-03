@@ -1355,33 +1355,35 @@ endfunction()
 
 
 ###############################################################################
-# dk_include(path)
+# dk_include(path) variable
 #
 #	Add a directory to the compiler include paths
 #
-#	@path	- The path to add to the compiler include paths
+#	@path					- The path to add to the compiler include paths
+#   @variable (optional)	- Create a variable to store the path in.
 #
 function(dk_include path)
 	DKDEBUGFUNC(${ARGV})
-	#foreach(item ${ARGV})
-		#list(FIND DKINCLUDES_LIST "${item}" index)
-		list(FIND DKINCLUDES_LIST "${path}" index)
-		if(${index} GREATER -1)
-			#continue()	# path is already in the list
-			dk_return()	# path is already in the list
-		endif()
+	
+	list(FIND DKINCLUDES_LIST "${path}" index)
+	if(${index} GREATER -1)
+		dk_return()	# path is already in the list
+	endif()
 		
-		if(INSTALL_DKLIBS)
-			dk_getFilename(${CMAKE_CURRENT_LIST_DIR} LIB_NAME)
-			file(INSTALL DIRECTORY ${path}/ DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${LIB_NAME} FILES_MATCHING PATTERN "*.h")
-			dk_deleteEmptyDirectories(${CMAKE_INSTALL_PREFIX}/include/${LIB_NAME})
-		endif()
+	if(INSTALL_DKLIBS)
+		dk_getFilename(${CMAKE_CURRENT_LIST_DIR} LIB_NAME)
+		file(INSTALL DIRECTORY ${path}/ DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${LIB_NAME} FILES_MATCHING PATTERN "*.h")
+		dk_deleteEmptyDirectories(${CMAKE_INSTALL_PREFIX}/include/${LIB_NAME})
+	endif()
 		
-		#dk_set(DKINCLUDES_LIST ${DKINCLUDES_LIST} ${item})
-		dk_set(DKINCLUDES_LIST ${DKINCLUDES_LIST} ${path})
-		#include_directories(${item})
-		include_directories(${path})
-	#endforeach()
+	dk_set(DKINCLUDES_LIST ${DKINCLUDES_LIST} ${path})
+
+	include_directories(${path})
+		
+	if(ARGV1)
+		dk_set(${ARGV1} ${path}) # add the path to the supplied variable
+	endif()
+
 endfunction()
 dk_createOsMacros("dk_include")
 
@@ -2553,6 +2555,7 @@ dk_createOsMacros("dk_lib" "NO_DEBUG_RELEASE_TAGS")
 #	TODO
 #
 #	@lib_path	- TODO
+#	@variable (optional)	- Create a variable to store the lib_path in.
 #
 function(dk_libDebug lib_path)
 	DKDEBUGFUNC(${ARGV})
@@ -2586,6 +2589,10 @@ function(dk_libDebug lib_path)
 		endif()
 	endif()
 	
+	if(ARGV1)
+		dk_set(${ARGV1} ${lib_path}) # add the lib_path to the supplied variable
+	endif()
+	
 endfunction()
 dk_createOsMacros("dk_libDebug" "NO_DEBUG_RELEASE_TAGS")
 
@@ -2596,6 +2603,7 @@ dk_createOsMacros("dk_libDebug" "NO_DEBUG_RELEASE_TAGS")
 #	TODO
 #
 #	@lib_path		- TODO
+#	@variable (optional)	- Create a variable to store the lib_path in.
 #
 function(dk_libRelease lib_path)
 	DKDEBUGFUNC(${ARGV})
@@ -2627,6 +2635,10 @@ function(dk_libRelease lib_path)
 			dk_getFilename(${CMAKE_CURRENT_LIST_DIR} LIB_NAME)
 			file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/${LIB_NAME}/${OS}/Release)
 		endif()
+	endif()
+	
+	if(ARGV1)
+		dk_set(${ARGV1} ${lib_path}) # add the lib_path to the supplied variable
 	endif()
 	
 endfunction()
