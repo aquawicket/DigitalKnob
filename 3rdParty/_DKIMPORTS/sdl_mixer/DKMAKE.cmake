@@ -15,27 +15,35 @@ dk_import(https://github.com/libsdl-org/SDL_mixer/archive/refs/tags/release-2.6.
 
 
 ### LINK ###
-dk_include					(${SDL_MIXER}/include)
+dk_include					(${SDL_MIXER}/include										SDL_MIXER_INCLUDE_DIR)
 if(MSVC)
-	WIN_dk_libDebug			(${SDL_MIXER}/${OS}/${DEBUG_DIR}/SDL2_mixer-staticd.lib)
-	WIN_dk_libRelease		(${SDL_MIXER}/${OS}/${RELEASE_DIR}/SDL2_mixer-static.lib)
+	WIN_dk_libDebug			(${SDL_MIXER}/${OS}/${DEBUG_DIR}/SDL2_mixer-staticd.lib		SDL_MIXER_LIBRARY_DEBUG)
+	WIN_dk_libRelease		(${SDL_MIXER}/${OS}/${RELEASE_DIR}/SDL2_mixer-static.lib	SDL_MIXER_LIBRARY_RELEASE)
 elseif(ANDROID)
-	ANDROID_dk_libDebug		(${SDL_MIXER}/${OS}/${DEBUG_DIR}/libSDL2_mixer.a)
-	ANDROID_dk_libRelease	(${SDL_MIXER}/${OS}/${RELEASE_DIR}/libSDL2_mixer.a)
+	ANDROID_dk_libDebug		(${SDL_MIXER}/${OS}/${DEBUG_DIR}/libSDL2_mixer.a			SDL_MIXER_LIBRARY_DEBUG)
+	ANDROID_dk_libRelease	(${SDL_MIXER}/${OS}/${RELEASE_DIR}/libSDL2_mixer.a			SDL_MIXER_LIBRARY_RELEASE)
 else()
-	dk_libDebug				(${SDL_MIXER}/${OS}/${DEBUG_DIR}/libSDL2_mixerd.a)
-	dk_libRelease			(${SDL_MIXER}/${OS}/${RELEASE_DIR}/libSDL2_mixer.a)
+	dk_libDebug				(${SDL_MIXER}/${OS}/${DEBUG_DIR}/libSDL2_mixerd.a			SDL_MIXER_LIBRARY_DEBUG)
+	dk_libRelease			(${SDL_MIXER}/${OS}/${RELEASE_DIR}/libSDL2_mixer.a			SDL_MIXER_LIBRARY_RELEASE)
 endif()
 
 
 ### GENERATE ###
 dk_queueCommand(${DKCMAKE_BUILD} 
+	-DBUILD_SHARED_LIBS=OFF
+	-DCMAKE_POSITION_INDEPENDENT_CODE=ON
+	-DSDL2MIXER_CMD=OFF
 	-DSDL2MIXER_DEPS_SHARED=OFF 
-	-DSDL2MIXER_FLAC=OFF 
+	-DSDL2MIXER_FLAC=${FLAC} 
+	-DSDL2MIXER_INSTALL=OFF
 	-DSDL2MIXER_MIDI=OFF 
-	-DSDL2MIXER_MOD=OFF 
+	-DSDL2MIXER_MOD=OFF
+	-DSDL2MIXER_MP3=ON
 	-DSDL2MIXER_OPUS=OFF 
-	-DSDL2MIXER_VENDORED=OFF 
+	-DSDL2MIXER_SAMPLES=OFF
+	-DSDL2MIXER_VENDORED=${MSVC}
+	-DSDL2MIXER_VENDORED=OFF
+	-DSDL2MIXER_WAVE=ON
 	${FLAC_CMAKE} 
 	${OGG_CMAKE} 
 	${SDL_CMAKE} 
