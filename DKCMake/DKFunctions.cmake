@@ -1971,42 +1971,6 @@ endfunction()
 dk_createOsMacros("dk_setPath")
 
 
-###############################################################################
-# dk_msys(args)
-#
-#	TODO
-#
-#	@args	- TODO
-#
-#function(dk_msys)
-#	DKDEBUGFUNC(${ARGV})
-#	
-#	dk_assert("WARNING: dk_msys() is deprecated. Please switch to using msys2()")
-#	
-#	if(QUEUE_BUILD)
-#		string(REPLACE ";" " " str "${ARGV}")
-#		set(bash "#!/bin/bash")
-#		list(APPEND bash "cd ${CURRENT_DIR}")
-#		if(WIN_32 OR ANDROID_32) # OR EMSCRIPTEN)
-#			list(APPEND bash "export PATH=${MINGW32}/bin:$PATH")
-#		elseif(WIN_64 OR ANDROID_64)
-#			list(APPEND bash "export PATH=${MINGW64}/bin:$PATH")
-#		else()
-#			dk_assert("dk_msys(): ERROR: not WIN_32, WIN_64, ANDROID_32 or ANDROID_64")
-#		endif()
-#		list(APPEND bash "export PATH=${MSYS}/bin:$PATH")
-#		list(APPEND bash "${str}")
-#		list(APPEND bash "exit")
-#		list(APPEND bash " ")
-#		string(REPLACE ";" "\n"	bash "${bash}")
-#		string(REPLACE "C:/" "/c/" bash ${bash})
-#		file(WRITE ${MSYS}/dkscript.tmp ${bash})
-#		dk_info("dk_msys $ ${bash}")
-#		dk_executeProcess(${MSYS}/bin/bash ${MSYS}/dkscript.tmp)
-#	endif()
-#endfunction()
-#dk_createOsMacros("dk_msys")
-
 
 ###############################################################################
 # dk_msys2(args)
@@ -2144,7 +2108,7 @@ endfunction()
 #
 function(dk_command)
 	DKDEBUGFUNC(${ARGV})
-	dk_info("\n${CLR}${magenta} $ ${ARGV}\n")
+	#dk_info("\n${CLR}${magenta} $ ${ARGV}\n")
 	
 	if(NOT EXISTS ${CURRENT_DIR})
 		dk_set(CURRENT_DIR ${DIGITALKNOB})
@@ -2174,7 +2138,7 @@ dk_createOsMacros("dk_command")
 #
 function(dk_queueCommand)
 	DKDEBUGFUNC(${ARGV})
-	dk_info("\n${CLR}${magenta} $ ${ARGV}\n")
+	#dk_info("\n${CLR}${magenta} $ ${ARGV}\n")
 	if(QUEUE_BUILD)
 		dk_command(${ARGV})
 	endif()	
