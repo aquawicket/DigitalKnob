@@ -50,33 +50,21 @@ include_guard()
 message(STATUS "\nCMake version ${CMAKE_VERSION}\n")
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 CMAKE_POLICY(SET CMP0054 NEW)
+
 if(CMAKE_HOST_UNIX)
 	execute_process(COMMAND sudo echo WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}) #ask for sudo password ahead of time
 endif()
 
-###### TEST CODE ######
-#include(${CMAKE_SOURCE_DIR}/DK.cmake)
-#dk_wait()
-#dk_wait(5)
-#dk_wait("message")
-#dk_wait(5 "message with 5")
-#return()
-######################
 
 include(${CMAKE_SOURCE_DIR}/functions/dk_dumpAllVariables.cmake)
 dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_START_VARIABLES.temp)
 
 
+
 PROJECT(DigitalKnob)
-get_property(MULTI_CONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
-if(MULTI_CONFIG)
-	set(MULTI_CONFIG TRUE CACHE INTERNAL "")
-	message(STATUS "*** Generator is Multi-Config ***")
-else()
-	set(SINGLE_CONFIG TRUE CACHE INTERNAL "")
-	message(STATUS "*** Generator is Single-Config ***")
-endif()
 dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_PROJECT_VARIABLES.temp)
+
+
 
 
 include(${CMAKE_SOURCE_DIR}/DKGenerate.cmake)

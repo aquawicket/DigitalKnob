@@ -184,7 +184,7 @@ goto type
 	echo ##########################################################
 	echo ""
 
-	call:clear_cmake_cache
+	call:dk_deleteCache
 	call:delete_temp_files
 
 	set "APP_PATH=%DKPATH%\DKApps\%APP%"
@@ -570,12 +570,13 @@ goto:eof
 goto:eof
 
 
-:: clear_cmake_cache()
-:clear_cmake_cache
-	echo Deleteing CMake cache . . .
-	cd "%DIGITALKNOB%"
-	for /r %%i in (CMakeCache.*) do del "%%i"
-	for /d /r %%i in (*CMakeFiles*) do rd /s /q "%%i"
+:: dk_deleteCache()
+:dk_deleteCache
+	call:cmake_eval "dk_deleteCache"
+	::echo Deleteing CMake cache . . .
+	::cd "%DIGITALKNOB%"
+	::for /r %%i in (CMakeCache.*) do del "%%i"
+	::for /d /r %%i in (*CMakeFiles*) do rd /s /q "%%i"
 	call:check_error
 goto:eof
 

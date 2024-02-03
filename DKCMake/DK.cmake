@@ -24,8 +24,11 @@ set(USE_MSYS2		 			1		CACHE INTERNAL "")	# use msys2 instead of msys
 set(WAIT_ON_ERRORS				1		CACHE INTERNAL "")	# pause cmake build script on errors
 set(WAIT_ON_WARNINGS			0		CACHE INTERNAL "")	# pause cmake build script on warnings
 
+if(${DKOFFLINE})
+	dk_warn("!!!!!!!!!! WORKING IN DKOFFLINE MODE !!!!!!!!!")
+endif()
 
-## DEFINED EXTRA OS_HOST VARIABLES
+###### DEFINED EXTRA OS_HOST VARIABLES ######
 if(CMAKE_HOST_WIN32)
 	set(WIN_HOST 	TRUE 	CACHE INTERNAL "")
 endif()
@@ -41,13 +44,13 @@ if(CMAKE_HOST_UNIX AND NOT CMAKE_HOST_APPLE)
 	endif()
 endif()
 
-## DEFINED EXTRA MSYS2 VARIABLES
+###### DEFINED EXTRA MSYS2 VARIABLES #######
 if(DEFINED ENV{MSYSTEM})
 	set(MSYSTEM $ENV{MSYSTEM}	CACHE INTERNAL "")	
 	set($ENV{MSYSTEM} TRUE		CACHE INTERNAL "")
 endif()
 
-## DEFINED ProgramFiles VARIABLES
+##### DEFINED ProgramFiles VARIABLES ######
 if(DEFINED "ENV{HOMEDRIVE}")
 	# TODO
 endif()
@@ -63,9 +66,18 @@ if(DEFINED "ENV{ProgramFiles\(x86\)}")
 	set(ProgramFiles_x86 "${ProgramFiles_x86}")
 endif()
 
+###### DEFINED MULTI_CONFIG / SINGLE_CONFIG VARIABLES ######
+get_property(MULTI_CONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
+if(MULTI_CONFIG)
+	set(MULTI_CONFIG TRUE CACHE INTERNAL "")
+	message(STATUS "*** Generator is Multi-Config ***")
+else()
+	set(SINGLE_CONFIG TRUE CACHE INTERNAL "")
+	message(STATUS "*** Generator is Single-Config ***")
+endif()
 
 
-## Set the DIGITALKNOB, DKBRANCH and DKCMAKE variables 
+###### Set the DIGITALKNOB, DKBRANCH and DKCMAKE variables ######
 get_filename_component(path ${CMAKE_SOURCE_DIR} ABSOLUTE)
 set(DKCMAKE ${path} CACHE INTERNAL "")
 #message(STATUS "\n DKCMAKE =  ${DKCMAKE}\n")
@@ -107,9 +119,8 @@ dk_load(DKVariables)
 include(${DKCMAKE}/functions/dk_importVariables.cmake)
 #dk_load(dk_findFiles)
 
-# flag arnings
-if(${DKOFFLINE})
-	dk_warn("!!!!!!!!!! WORKING IN DKOFFLINE MODE !!!!!!!!!")
-endif()
 
-# POST DEFINED VARIABLES
+##### Load 3rdParty Tools #################
+dk_depend(cmake)
+dk_depend(git)
+dk_depend(msys2)

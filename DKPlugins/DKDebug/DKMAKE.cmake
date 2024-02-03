@@ -11,7 +11,7 @@ ENDIF()
 
 if(WIN)
 	dk_copy(${STACKWALKER}/StackWalker/StackWalker.cpp ${DKPLUGINS}/DKDebug/StackWalker.cpp)
-	WIN_dk_include(${3RDPARTY}/stackwalker/StackWalker)
+	WIN_dk_include(${STACKWALKER}/StackWalker)
 else()
 	dk_remove(${DKPLUGINS}/DKDebug/StackWalker.cpp)
 endif()
