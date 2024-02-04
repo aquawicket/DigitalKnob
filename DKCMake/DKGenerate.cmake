@@ -43,6 +43,7 @@ set(APP_NAME ${APP_NAME}_APP)
 ############################   ADD EXECUTABLE  #############################################
 ############################################################################################
 if(NOT TARGET)
+	include(${DKCMAKE}/DKBuildFlags.cmake)
 	PROJECT(${APP_NAME})
 	dk_set(DKAPP ON)
 endif()
@@ -50,7 +51,7 @@ endif()
 ##################################################
 ##### Scan the DKPlugins and build the lists #####
 ##################################################
-include(${DKCMAKE}/DKBuildFlags.cmake)
+
 include(${DKPROJECT}/DKMAKE.cmake)
 file(REMOVE ${DKPROJECT}/${OS}/DKBUILD.log)
 dk_printSettings()

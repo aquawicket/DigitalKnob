@@ -21,11 +21,13 @@ ANDROID_dk_include		(${TIDY_HTML5}/${OS}/$(BUILD_TYPE)/jni)
 if(MSVC)
 	WIN_dk_libDebug		(${TIDY_HTML5}/${OS}/${DEBUG_DIR}/tidy_staticd.lib)
 	WIN_dk_libRelease	(${TIDY_HTML5}/${OS}/${RELEASE_DIR}/tidy_static.lib)
+elseif(MSYS)
+	WIN_dk_libDebug		(${TIDY_HTML5}/${OS}/${DEBUG_DIR}/libtidy_static.a)
+	WIN_dk_libRelease	(${TIDY_HTML5}/${OS}/${RELEASE_DIR}/libtidy_static.a)
 else()
 	dk_libDebug			(${TIDY_HTML5}/${OS}/${DEBUG_DIR}/libtidy.a)
 	dk_libRelease		(${TIDY_HTML5}/${OS}/${RELEASE_DIR}/libtidy.a)
 endif()
-
 
 
 ### GENERATE ###

@@ -422,7 +422,6 @@ ANDROID64_dk_set(DKCONFIGURE_CXXFLAGS		"-DANDROID -DANDROID64 -frtti -fexception
 
 
 EMSCRIPTEN_dk_depend(emsdk)
-EMSCRIPTEN_dk_depend(DKPhp)
 
 # Emscripten x32
 EMSCRIPTEN_dk_set(DKCMAKE_FLAGS					-DBUILD_SHARED_LIBS=OFF -DBUILD_STATIC_LIBS=ON -DEMSCRIPTEN=ON)
@@ -556,7 +555,6 @@ endif()
 
 # https://cmake.org/cmake/help/latest/manual/cmake-buildsystem.7.html#build-configurations
 
-#if(VISUAL_STUDIO OR XCODE)
 if(MULTI_CONFIG)
 	dk_set		(CMAKE_BUILD_TYPE DEBUG RELEASE)
 	dk_set		(BUILD_DIR ${OS})
@@ -577,7 +575,6 @@ endif()
 
 ############ CORE DEPENDENCIES ############
 dk_depend(cmake)
-DKASSERT(cmake)
 
 if(VISUAL_STUDIO)
 	WIN32_dk_set			(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} -A Win32 ${DKCMAKE_FLAGS})
@@ -611,3 +608,5 @@ if(EMSCRIPTEN)
 else()
 	dk_set(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})
 endif()
+
+dk_debug("DKCMAKE_BUILD = ${DKCMAKE_BUILD}")

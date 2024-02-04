@@ -2100,7 +2100,7 @@ endfunction()
 #
 function(dk_command)
 	DKDEBUGFUNC(${ARGV})
-	#dk_info("\n${CLR}${magenta} $ ${ARGV}\n")
+	dk_info("\n${CLR}${magenta} $ ${ARGV}\n")
 	
 	if(NOT EXISTS ${CURRENT_DIR})
 		dk_set(CURRENT_DIR ${DIGITALKNOB})
@@ -2997,12 +2997,12 @@ endfunction()
 function(dk_depend plugin)
 	DKDEBUGFUNC(${ARGV})
 	
-	if(CMAKE_SCRIPT_MODE_FILE)
+	if(CMAKE_SCRIPT_MODE_FILE OR NOT DKAPP)
 		dk_getPathToPlugin(${plugin} plugin_path)
-		#dk_debug("include(${plugin_path}/DKMAKE.cmake)")
 		include(${plugin_path}/DKMAKE.cmake)
+		return()
 	endif()
-#	dk_debug(CMAKE_CURRENT_LIST_DIR)
+	
 	
 #	if(${ARGC} GREATER 1)
 #		dk_info(ARGV)
