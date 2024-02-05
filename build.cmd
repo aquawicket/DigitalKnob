@@ -249,11 +249,12 @@ goto build
 :generate_win64
 	::if %COMPILER%==MINGW64 (
 		call:validate_msys2
-		TITLE DigitalKnob - MINGW64
-		::set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_C_COMPILER=%C_COMPILER%"
-		::set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_COMPILER=%CXX_COMPILER%"
+		call:validate_gcc
+		set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_C_COMPILER=%C_COMPILER%"
+		set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_COMPILER=%CXX_COMPILER%"
 		
 		call set DKPATH=%%DKPATH:^\=^/%%
+		TITLE DigitalKnob - MINGW64
 		%MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE%' -G '%MSYS2_GENERATOR%' %CMAKE_ARGS% -S%DKCMAKE% -B%DKPATH%/DKApps/%APP%/%OS%/Debug"
 		set TARGET=%APP%_APP
 		goto build

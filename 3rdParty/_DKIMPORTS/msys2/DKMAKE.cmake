@@ -22,16 +22,6 @@ endif()
 
 dk_addFirewallAllow("pacman" "${MSYS2}/usr/bin/pacman.exe")
 
-### ADD msys2 bin directory to path environment variable
-#dk_setEnv("PATH" "${MSYS2}/usr/bin")
-
-# FIXME: currently already done int DK.cmake
-## DEFINED EXTRA MSYS2 VARIABLES   
-#if(DEFINED ENV{MSYSTEM})
-#	set(MSYSTEM $ENV{MSYSTEM}	CACHE INTERNAL "")	
-#	set($ENV{MSYSTEM} TRUE		CACHE INTERNAL "")
-#endif()
-
 #if(NOT MSYS_LOADED)
 	dk_remove(${MSYS2}/var/lib/pacman/db.lck NOERROR)
 	
@@ -46,16 +36,10 @@ dk_addFirewallAllow("pacman" "${MSYS2}/usr/bin/pacman.exe")
 	elseif(MINGW64)
 		dk_msys2(pacman -S mingw-w64-x86_64-toolchain --needed --noconfirm)				# toolchain
 	elseif(UCRT64)
-		dk_msys2(pacman -S mingw-w64-ucrt-x86_64-toolchain --needed --noconfirm)			# toolchain
+		dk_msys2(pacman -S mingw-w64-ucrt-x86_64-toolchain --needed --noconfirm)		# toolchain
 	endif()
 #	dk_set(MSYS_LOADED TRUE)
 #endif()
 
 dk_set(MSYS2_GENERATOR "MSYS Makefiles")
 
-
-### Install other utilities ###
-#if(NOT EXISTS ${MSYS2}/usr/bin/make.exe)
-	#dk_command(bash -c "pacman -S make --needed --noconfirm")						# make
-#	dk_msys2("pacman -S make --needed --noconfirm")									# make
-#endif()

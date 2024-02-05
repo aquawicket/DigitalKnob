@@ -148,7 +148,6 @@ foreach(plugin ${dkdepend_list})
 	
 		#Add the DKPlugin to the app project
 		if(EXISTS "${plugin_path}/CMakeLists.txt")
-			#if(MSVC OR XCODE)
 			if(MULTI_CONFIG)
 				add_subdirectory(${plugin_path} ${plugin_path}/${OS})
 			else()
@@ -169,6 +168,7 @@ foreach(plugin ${dkdepend_list})
 			endif()
 		endforeach()
 		
+		set(PREBUILD ON)
 		if(PREBUILD)
 			dk_info("******* Prebuilding ${plugin} *******")
 			dk_setPath(${plugin_path}/${BUILD_DIR})
