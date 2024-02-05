@@ -1,11 +1,10 @@
 # https://packages.msys2.org/base/make
 
+message(STATUS "make: MSYSTEM = ${MSYSTEM}")
 if(MSYSTEM)
 	dk_depend(msys2)
 	
 	dk_remove(${MSYS2}/var/lib/pacman/db.lck NOERROR)
-	
-	message(STATUS "MSYSTEM = ${MSYSTEM}")
 	
 	if(CLANG32)
 		dk_msys2("pacman -S mingw-w64-clang-i686-make --needed --noconfirm")		# CLANG32

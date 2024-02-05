@@ -248,20 +248,32 @@ goto build
 
 :generate_win64
 	::if %COMPILER%==MINGW64 (
+		
+		echo generate_win64
+		call:cmake_eval "include('%DKIMPORTS%/cmake/DKMAKE.cmake')" "CMAKE_EXE" "-DMSYSTEM=MINGW64"
+		echo CMAKE_EXE = %CMAKE_EXE%
+		PAUSE
+		
 		::call:validate_msys2
-		call:cmake_eval "set(MSYSTEM MINGW64);include('%DKIMPORTS%/msys2/DKMAKE.cmake')" "MSYS2;MSYS2_GENERATOR"
+		call:cmake_eval "include('%DKIMPORTS%/msys2/DKMAKE.cmake')" "MSYS2;MSYS2_GENERATOR" "-DMSYSTEM=MINGW64"
+		echo MSYS2 = %MSYS2%
+		echo MSYS2_GENERATOR = %MSYS2_GENERATOR%
+		
 		
 		::call:validate_gcc
-		call:cmake_eval "set(MSYSTEM MINGW64);include('%DKIMPORTS%/gcc/DKMAKE.cmake')" "C_COMPILER;CXX_COMPILER"
+		call:cmake_eval "include('%DKIMPORTS%/gcc/DKMAKE.cmake')" "C_COMPILER;CXX_COMPILER" "-DMSYSTEM=MINGW64"
+		echo C_COMPILER = %C_COMPILER%
+		echo CXX_COMPILER = %CXX_COMPILER%
 		set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_C_COMPILER=%C_COMPILER%"
 		set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_COMPILER=%CXX_COMPILER%"
+		PAUSE
 		
 		::call:validate_make
-		call:cmake_eval "set(MSYSTEM MINGW64);include('%DKIMPORTS%/make/DKMAKE.cmake')" "MAKE_PROGRAM"
+		call:cmake_eval "include('%DKIMPORTS%/make/DKMAKE.cmake')" "MAKE_PROGRAM" "-DMSYSTEM=MINGW64"
 		
 		call set DKPATH=%%DKPATH:^\=^/%%
 		TITLE DigitalKnob - MINGW64
-		%MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE%' -G '%MSYS2_GENERATOR%' %CMAKE_ARGS% -S%DKCMAKE% -B%DKPATH%/DKApps/%APP%/%OS%/Debug"
+		%MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' -G '%MSYS2_GENERATOR%' %CMAKE_ARGS% -S%DKCMAKE% -B%DKPATH%/DKApps/%APP%/%OS%/Debug"
 		set TARGET=%APP%_APP
 		goto build
 	::)
@@ -670,7 +682,7 @@ goto:eof
 goto:eof
 
 
-:: cmake_eval <cmake_commands;.;.;> <variables;.;.;.>
+:: cmake_eval <cmake_commands;.;.;> <return_variables;.;.;.> <-DVARS;.;.;>
 :cmake_eval
     if [%1] == [] (
         echo "ERROR: cmake_eval() parameter1 is invalid"
@@ -706,7 +718,7 @@ goto:eof
         goto:eof
 
     :with_return_values
-        "%CMAKE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" "-DDKRETURN=%~2" -P %DKCMAKE%/dev/cmake_eval.cmake
+        "%CMAKE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" "-DDKRETURN=%~2" %~3 -P %DKCMAKE%/dev/cmake_eval.cmake
         if not exist %DKCMAKE%/cmake_vars.cmd goto:eof
         call %EVAL_VARS%
         ::del %EVAL_VARS%

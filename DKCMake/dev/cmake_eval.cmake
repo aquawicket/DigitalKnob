@@ -26,7 +26,9 @@ include_guard()
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 CMAKE_POLICY(SET CMP0007 NEW)
 
+
 include(${DKCMAKE}/DK.cmake)
+
 
 # Evaluate expression (faster version)
 # Suggestion from the Wiki: http://cmake.org/Wiki/CMake/Language_Syntax
@@ -39,6 +41,7 @@ function(cmake_eval eval_code)
 	#message(STATUS "eval_code = ${eval_code}")
 	if(COMMAND cmake_language)
 		#message(STATUS "eval_code = ${eval_code}")
+		message(STATUS "cmake_evel.cmake: MSYSTEM = ${MSYSTEM}")
 		cmake_language(EVAL CODE "${eval_code}")
 	else()
 		# one file per execution of cmake (if this file were in memory it would probably be faster...)
