@@ -285,9 +285,10 @@ goto:eof
 	echo LEVEL = %LEVEL%
 	call set CMAKE_TARGET_PATH=%%TARGET_PATH:^\=^/%%
 	echo TARGET_PATH = %TARGET_PATH%
+	echo CMAKE_TARGET_PATH = %CMAKE_TARGET_PATH%
 	
 	
-	if '%CUSTOM_BUILD%'=='1' echo "We have a custom build request to work with"
+	if '%CUSTOM_BUILD%'=='1' echo "We have a custom build request to work with,  not implemented yet. Goodbye" & pause & exit
 	
 	
     ::::::::: BUILD CMAKE_ARGS ARRAY :::::::::
@@ -474,11 +475,12 @@ goto:eof
 	echo Please type the name of the library, tool or app to build. Then press enter.
 	set /p input=
 
+	
 	::Search digitalknob for the matching entry containing a DKMAKE.cmake file  
 	cd %DIGITALKNOB%
 	for /f "delims=" %%a in ('dir /b /s /a-d DKMAKE.cmake ^| findstr /E /R "%input%\\DKMAKE.cmake" ') do set "path=%%a"
-	set ""TARGET_PATH=%path:~0,-13%"
-	echo "TARGET_PATH = %"TARGET_PATH%
+	set "TARGET_PATH=%path:~0,-13%"
+	echo TARGET_PATH = %TARGET_PATH%
 	set APP=%input%
 	set CUSTOM_BUILD=1
 	::"cmnd="%CMAKE%" -G "Visual Studio 17 2022" -A %CPU% -DDEBUG=ON -DRELEASE=ON -DSTATIC=ON -DREBUILDALL=ON -DHAVE_DKDuktape=1 -DTARGET=%input% -DOS=%OS% -S "%DKCMAKE%" -B "%target_path%\%OS%"
