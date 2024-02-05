@@ -232,7 +232,12 @@ goto:eof
     if %DKLEVEL%==RebuildAll        set "CMAKE_ARGS=%CMAKE_ARGS% -DREBUILDALL=ON"
     if %DKLINK%==Static             set "CMAKE_ARGS=%CMAKE_ARGS% -DSTATIC=ON"
     if %DKLINK%==Shared             set "CMAKE_ARGS=%CMAKE_ARGS% -DSHARED=ON"
-                                    set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_VERBOSE_MAKEFILE=1"
+	
+	:::::::::::: CMake Options :::::::::::::
+    set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_VERBOSE_MAKEFILE=1"
+	::set "CMAKE_ARGS=%CMAKE_ARGS% --debug-output"
+	::set "CMAKE_ARGS=%CMAKE_ARGS% --trace"
+	::set "CMAKE_ARGS=%CMAKE_ARGS% --warn-unused-vars"
 
     :::::::::::: GENERATOR ::::::::::::
 

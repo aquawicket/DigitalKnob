@@ -233,9 +233,9 @@ macro(dk_error msg)
 	
 	string(REPLACE " " "" var ${msg})
 	if(${var})
-		message(STATUS "${H_black}${STACK_HEADER}${CLR}${red}Error: { \"${var}\" : \"${${var}}\" } ${CLR}")
+		message(SEND_ERROR "${H_black}${STACK_HEADER}${CLR}${red}Error: { \"${var}\" : \"${${var}}\" } ${CLR}")
 	else()
-		message(STATUS "${H_black}${STACK_HEADER}${CLR}${red}Error: ${msg} ${CLR}")
+		message(SEND_ERROR "${H_black}${STACK_HEADER}${CLR}${red}Error: ${msg} ${CLR}")
 	endif()
 	
 	if(${WAIT_ON_ERRORS})
@@ -2986,12 +2986,13 @@ function(dk_depend plugin)
 	DKDEBUGFUNC(${ARGV})
 	
 	if(CMAKE_SCRIPT_MODE_FILE OR NOT DKAPP)
-		list(FIND dkdepend_list ${plugin} index)
+		list(FIND init_list ${plugin} index)
 		if(${index} GREATER -1)
-			return()  #plugin is already in the list
+			#dk_debug("${plugin} is allready in the init_list")
+			return()  #plugin is already in the init_list
 		endif()
-	
-		dk_set(dkdepend_list ${dkdepend_list} "${plugin}")
+		dk_set(init_list ${init_list} "${plugin}")
+		
 		dk_getPathToPlugin(${plugin} plugin_path)
 		include(${plugin_path}/DKMAKE.cmake)
 		#return()

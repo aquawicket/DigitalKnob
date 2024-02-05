@@ -10,9 +10,9 @@
 
 ### DEPENDS ###
 dk_depend(bzip2)
-dk_depend(cryptopp)
+#dk_depend(cryptopp)
 dk_depend(libb2)
-dk_depend(libbcrypt)
+#dk_depend(libbcrypt)
 dk_depend(libexpat)
 dk_depend(libiconv)
 dk_depend(libxml2)
@@ -583,9 +583,7 @@ dk_queueCommand(${DKCMAKE_BUILD}
 	-DUSE_BZIP2_STATIC=OFF
 	-DWINDOWS_VERSION="WIN10"
 	${BZIP2_CMAKE}
-	${CRYPTOPP_CMAKE}
 	${LIBB2_CMAKE}
-	${LIBBCRYPT_CMAKE}
 	${LIBEXPAT_CMAKE}
 	${LIBICONV_CMAKE}
 	${LIBXML2_CMAKE}

@@ -1,9 +1,10 @@
 # https://git-scm.com
 # https://github.com/git-for-windows/git/releases/download/v2.31.1.windows.1/Git-2.31.1-32-bit.exe
 
-if(GIT_EXE)
-	return()
-endif()
+### DOWNLOAD ###
+WIN_HOST_dk_set(GIT_DL https://github.com/git-for-windows/git/releases/download/v2.31.1.windows.1/Git-2.31.1-32-bit.exe)
+WIN_HOST_dk_set(GIT_FILE Git-2.31.1-32-bit.exe)
+
 
 if(MSYSTEM)
 	dk_depend(msys2)
@@ -15,14 +16,6 @@ if(MSYSTEM)
 	#dk_debug("GIT_EXE = ${GIT_EXE}")
 	return()
 endif()
-
-
-### DOWNLOAD ###
-WIN_HOST_dk_set(GIT_DL https://github.com/git-for-windows/git/releases/download/v2.31.1.windows.1/Git-2.31.1-32-bit.exe)
-WIN_HOST_dk_set(GIT_FILE Git-2.31.1-32-bit.exe)
-
-
-
 
 
 if(EXISTS /usr/bin/git)
