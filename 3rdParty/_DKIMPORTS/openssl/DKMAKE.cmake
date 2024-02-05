@@ -8,6 +8,7 @@
 #EMSCRIPTEN_dk_depend(openssl-cmake)
 #EMSCRIPTEN_dk_depend(python3)
 dk_depend(dl)
+dk_depend(pthread)
 
 ### IMPORT ###
 #if(MSVC)
