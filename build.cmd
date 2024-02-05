@@ -253,6 +253,9 @@ goto build
     ::set TARGET=%APP%_APP
         
     call:validate_msys2
+    TITLE DigitalKnob - MINGW64
+    call set DKPATH=%%DKPATH:^\=^/%%
+    %MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "clear && %DKPATH%/build.sh"
 goto build
 
 :generate_android32
@@ -656,7 +659,7 @@ goto:eof
 
     set commands=%1
     set variables=%2
-    ::echo commands = %commands%
+
     call set commands=%%commands:"=%%
     set "DKCOMMAND=%commands%"
     call set DKCOMMAND=%%DKCOMMAND:^\=^/%%
