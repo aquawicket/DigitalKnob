@@ -24,17 +24,17 @@ if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 ::--------------------------------------------------------
 :: GLOBAL USER VARIABLES
 ::--------------------------------------------------------
-set "SCRIPTPATH=%~dp0"
-set "SCRIPTPATH=%SCRIPTPATH:~0,-1%"
-set "SCRIPTNAME=%~nx0"
+set SCRIPTPATH=%~dp0
+set SCRIPTPATH=%SCRIPTPATH:~0,-1%
+set SCRIPTNAME=%~nx0
 echo %SCRIPTPATH%\%SCRIPTNAME%
 
-set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi"
-set "GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.30.1.windows.1/Git-2.30.1-32-bit.exe"
-set "GIT_USER_EMAIL=aquawicket@hotmail.com"
-set "GIT_USER_NAME=aquawicket"
+set CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi
+set GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.30.1.windows.1/Git-2.30.1-32-bit.exe
+set GIT_USER_EMAIL=aquawicket@hotmail.com
+set GIT_USER_NAME=aquawicket
 
-set "COMPILER=MINGW64"
+set COMPILER=MINGW64
 
 ::--------------------------------------------------------
 :: Main
@@ -57,21 +57,21 @@ set "COMPILER=MINGW64"
 	echo DK3RDPARTY = %DK3RDPARTY%
 	echo DKIMPORTS = %DKIMPORTS%
 
-	set "OS="
+	set "TARGET_OS="
 	:while_loop		
 		if '%UPDATE%'=='' call:pick_update
 		if '%APP%'=='' call:pick_app
-		if '%OS%'=='' call:pick_os
+		if '%TARGET_OS%'=='' call:pick_os
 		if '%TYPE%'=='' call:pick_type
 		
 		if '%TYPE%'=='' goto:while_loop
 
 		call:generate
-		if %OS%==win32 call:generate_win32
-		if %OS%==win64 call:generate_win64
-		if %OS%==android32 call:generate_android32
-		if %OS%==android64 call:generate_android64
-		if %OS%==emscripten call:generate_emscripten
+		if %TARGET_OS%==win32 call:generate_win32
+		if %TARGET_OS%==win64 call:generate_win64
+		if %TARGET_OS%==android32 call:generate_android32
+		if %TARGET_OS%==android64 call:generate_android64
+		if %TARGET_OS%==emscripten call:generate_emscripten
 		
 		call:build
 		if %TYPE%==Debug call:build_debug
@@ -120,12 +120,12 @@ goto:eof
     if '%choice%'=='11' call:reload
     if '%choice%'=='12' call:end
 	
-	set "UPDATE=true"
+	set UPDATE=true
 goto:eof
 
 :pick_app
 	set "APP="
-	TITLE DigitalKnob - %APP% %OS% %TYPE%
+	TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
 	
     echo.
     echo  1) HelloWorld
@@ -144,17 +144,17 @@ goto:eof
     set /p choice=Please select an app to build:
     ::if not '%choice%'=='' set choice=%choice:~0,1%        ::What does this do?
 	
-    if '%choice%'=='1' set "APP=HelloWorld"
-    if '%choice%'=='2' set "APP=DKCore"
-    if '%choice%'=='3' set "APP=DKJavascript"
-    if '%choice%'=='4' set "APP=DKBuilder"
-    if '%choice%'=='5' set "APP=DKSDL"
-    if '%choice%'=='6' set "APP=DKSDLRml"
-    if '%choice%'=='7' set "APP=DKDomTest"
-    if '%choice%'=='8' set "APP=DKTestAll"
+    if '%choice%'=='1' set APP=HelloWorld
+    if '%choice%'=='2' set APP=DKCore
+    if '%choice%'=='3' set APP=DKJavascript
+    if '%choice%'=='4' set APP=DKBuilder
+    if '%choice%'=='5' set APP=DKSDL
+    if '%choice%'=='6' set APP=DKSDLRml
+    if '%choice%'=='7' set APP=DKDomTest
+    if '%choice%'=='8' set APP=DKTestAll
     if '%choice%'=='9' call:clear_screen
     if '%choice%'=='10' call:reload
-	if '%choice%'=='11' set UPDATE=
+	if '%choice%'=='11' "set UPDATE="
     if '%choice%'=='12' call:end
     ::echo "%choice%" is not valid, try again
 	
@@ -171,8 +171,8 @@ goto:eof
 
 
 :pick_os
-	set "OS="
-	TITLE DigitalKnob - %APP% %OS% %TYPE%
+	set "TARGET_OS="
+	TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
 	
     :: TODO
     :: 1) Windows (x86_64)
@@ -208,7 +208,7 @@ goto:eof
     :: 30) Clear Screen
     :: 31) Go Back
     :: 32) Exit
-    echo %APP% %OS% %TYPE%
+    echo %APP% %TARGET_OS% %TYPE%
     echo.
     echo 1) Windows 32
     echo 2) Windows 64
@@ -222,11 +222,11 @@ goto:eof
     set /p choice=Please select an OS to build for: 
     ::if not '%choice%'=='' set choice=%choice:~0,1%        ::What does this do?
 	
-	if '%choice%'=='1' set "OS=win32"
-    if '%choice%'=='2' set "OS=win64"
-    if '%choice%'=='3' set "OS=android32"
-    if '%choice%'=='4' set "OS=android64"
-    if '%choice%'=='5' set "OS=emscripten"
+	if '%choice%'=='1' set TARGET_OS=win32
+    if '%choice%'=='2' set TARGET_OS=win64
+    if '%choice%'=='3' set TARGET_OS=android32
+    if '%choice%'=='4' set TARGET_OS=android64
+    if '%choice%'=='5' set TARGET_OS=emscripten
     if '%choice%'=='6' call:clear_screen
     if '%choice%'=='7' set APP=
     if '%choice%'=='8' call:end
@@ -237,9 +237,9 @@ goto:eof
 
 :pick_type
 	set "TYPE="
-	TITLE DigitalKnob - %APP% %OS% %TYPE%
+	TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
 	
-    echo %APP% %OS% %TYPE%
+    echo %APP% %TARGET_OS% %TYPE%
     echo.
     echo 1) Debug
     echo 2) Release
@@ -251,21 +251,21 @@ goto:eof
     set /p choice=Please select a build type: 
     ::if not '%choice%'=='' set choice=%choice:~0,1%        ::What does this do?
 	
-	if '%choice%'=='1' set "TYPE=Debug"
-    if '%choice%'=='2' set "TYPE=Release"
-    if '%choice%'=='3' set "TYPE=All"
+	if '%choice%'=='1' set TYPE=Debug
+    if '%choice%'=='2' set TYPE=Release
+    if '%choice%'=='3' set TYPE=All
     if '%choice%'=='4' call:clear_screen
-    if '%choice%'=='5' set OS=
+    if '%choice%'=='5' set "TARGET_OS="
     if '%choice%'=='6' call:end
 	
     ::echo "%choice%" is not valid, try again
 goto:eof
 
 :generate
-	TITLE DigitalKnob - Generating %APP%_%OS%_%TYPE% %LEVEL% . . .
+	TITLE DigitalKnob - Generating %APP%_%TARGET_OS%_%TYPE% %LEVEL% . . .
     echo ""
     echo ########################################################## 
-    echo ****** Generating %APP% - %OS% - %TYPE% - %LEVEL% ******
+    echo ****** Generating %APP% - %TARGET_OS% - %TYPE% - %LEVEL% ******
     echo ##########################################################
     echo ""
 
@@ -274,13 +274,13 @@ goto:eof
 
     set "APP_PATH=%DKPATH%\DKApps\%APP%"
     echo APP_PATH = %APP_PATH%
-    call:make_directory "%APP_PATH%\%OS%"
-    cd "%APP_PATH%\%OS%"
+    call:make_directory "%APP_PATH%\%TARGET_OS%"
+    cd "%APP_PATH%\%TARGET_OS%"
 
 
     ::::::::: BUILD CMAKE_ARGS ARRAY :::::::::
-    set "DKLEVEL=RebuildAll"
-    set "DKLINK=Static"
+    set DKLEVEL=RebuildAll
+    set DKLINK=Static
 
     set "CMAKE_ARGS="
     if %TYPE%==Debug                set "CMAKE_ARGS=-DDEBUG=ON -DRELEASE=OFF"
@@ -344,7 +344,7 @@ goto:eof
 		call:cmake_eval "include('%DKIMPORTS%/make/DKMAKE.cmake')" "MAKE_PROGRAM" "-DMSYSTEM=MINGW64"
 		
 		call set DKPATH=%%DKPATH:^\=^/%%
-		%MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' -G '%MSYS2_GENERATOR%' %CMAKE_ARGS% -S%DKCMAKE% -B%DKPATH%/DKApps/%APP%/%OS%/Debug"
+		%MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' -G '%MSYS2_GENERATOR%' %CMAKE_ARGS% -S%DKCMAKE% -B%DKPATH%/DKApps/%APP%/%TARGET_OS%/Debug"
 		set TARGET=%APP%_APP
 		goto build
 	::)
@@ -361,7 +361,7 @@ goto:eof
     call:validate_android_ndk
     call:validate_openjdk
     call %OPENJDK%\registerJDK.cmd
-    "%CMAKE%" -G "%VISUALSTUDIO_GENERATOR%" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID_NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_TOOLCHAIN_FILE% -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
+    "%CMAKE%" -G "%VISUALSTUDIO_GENERATOR%" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID_NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_TOOLCHAIN_FILE% -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%TARGET_OS%
     set TARGET=main
 goto:eof
 
@@ -370,81 +370,81 @@ goto:eof
     call:validate_android_ndk
     call:validate_openjdk
     call %OPENJDK%\registerJDK.cmd
-    "%CMAKE%" -G "%VISUALSTUDIO_GENERATOR%" -A ARM64 -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID_NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_TOOLCHAIN_FILE% -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
+    "%CMAKE%" -G "%VISUALSTUDIO_GENERATOR%" -A ARM64 -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID_NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_TOOLCHAIN_FILE% -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%TARGET_OS%
     set TARGET=main
 goto:eof
 
 :generate_emscripten
     call:validate_emscripten
     if %TYPE%==Debug (
-        call "%EMSDK_ENV%" & "%CMAKE%" -G "%EMSDK_GENERATOR%" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%APP_PATH%/%OS%/Debug
+        call "%EMSDK_ENV%" & "%CMAKE%" -G "%EMSDK_GENERATOR%" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%APP_PATH%/%TARGET_OS%/Debug
     )
     if %TYPE%==Release (
-        call "%EMSDK_ENV%" & "%CMAKE%" -G "%EMSDK_GENERATOR%" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%APP_PATH%/%OS%/Release
+        call "%EMSDK_ENV%" & "%CMAKE%" -G "%EMSDK_GENERATOR%" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%APP_PATH%/%TARGET_OS%/Release
     )
     if %TYPE%==All (
-        call "%EMSDK_ENV%" & "%CMAKE%" -G "%EMSDK_GENERATOR%" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%APP_PATH%/%OS%/Debug
-        call "%EMSDK_ENV%" & "%CMAKE%" -G "%EMSDK_GENERATOR%" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%APP_PATH%/%OS%/Release
+        call "%EMSDK_ENV%" & "%CMAKE%" -G "%EMSDK_GENERATOR%" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%APP_PATH%/%TARGET_OS%/Debug
+        call "%EMSDK_ENV%" & "%CMAKE%" -G "%EMSDK_GENERATOR%" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%APP_PATH%/%TARGET_OS%/Release
     )
     set TARGET=%APP%_APP
 goto:eof
 
 
 :build
-	TITLE DigitalKnob - Building %APP%_%OS%_%TYPE% %LEVEL% . . .
+	TITLE DigitalKnob - Building %APP%_%TARGET_OS%_%TYPE% %LEVEL% . . .
 	echo ""
 	echo ###########################################################        
-	echo ****** Building %APP% - %OS% - %TYPE% - %LEVEL% ******
+	echo ****** Building %APP% - %TARGET_OS% - %TYPE% - %LEVEL% ******
 	echo ###########################################################
 	echo ""
 goto:eof
 
 :build_debug
 	if %COMPILER%==MINGW64 (
-        %MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %DKPATH%/DKApps/%APP%/%OS%/Debug --target %TARGET% --config Debug --verbose"
+        %MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %DKPATH%/DKApps/%APP%/%TARGET_OS%/Debug --target %TARGET% --config Debug --verbose"
 		goto end_message
 	)
 	
-	if exist %APP_PATH%\%OS%\Debug\CMakeCache.txt (
-		"%CMAKE%" --build %APP_PATH%\%OS%\Debug --target %TARGET% --config Debug --verbose
+	if exist %APP_PATH%\%TARGET_OS%\Debug\CMakeCache.txt (
+		"%CMAKE%" --build %APP_PATH%\%TARGET_OS%\Debug --target %TARGET% --config Debug --verbose
 	)
-	if exist %APP_PATH%\%OS%\CMakeCache.txt (
-		"%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Debug --verbose
+	if exist %APP_PATH%\%TARGET_OS%\CMakeCache.txt (
+		"%CMAKE%" --build %APP_PATH%\%TARGET_OS% --target %TARGET% --config Debug --verbose
 	)
 goto:eof
 
 :build_release
-    if exist %APP_PATH%\%OS%\Release\CMakeCache.txt (
-        "%CMAKE%" --build %APP_PATH%\%OS%\Release --target %TARGET% --config Release --verbose
+    if exist %APP_PATH%\%TARGET_OS%\Release\CMakeCache.txt (
+        "%CMAKE%" --build %APP_PATH%\%TARGET_OS%\Release --target %TARGET% --config Release --verbose
     )
-    if exist %APP_PATH%\%OS%\CMakeCache.txt (
-        "%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Release --verbose
+    if exist %APP_PATH%\%TARGET_OS%\CMakeCache.txt (
+        "%CMAKE%" --build %APP_PATH%\%TARGET_OS% --target %TARGET% --config Release --verbose
     )
 goto:eof
 
 :build_all
-    if exist %APP_PATH%\%OS%\Debug\CMakeCache.txt (
-        "%CMAKE%" --build %APP_PATH%\%OS%\Debug --target %TARGET% --config Debug --verbose
+    if exist %APP_PATH%\%TARGET_OS%\Debug\CMakeCache.txt (
+        "%CMAKE%" --build %APP_PATH%\%TARGET_OS%\Debug --target %TARGET% --config Debug --verbose
     )
-    if exist %APP_PATH%\%OS%\CMakeCache.txt (
-        "%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Debug --verbose
+    if exist %APP_PATH%\%TARGET_OS%\CMakeCache.txt (
+        "%CMAKE%" --build %APP_PATH%\%TARGET_OS% --target %TARGET% --config Debug --verbose
     )
-    if exist %APP_PATH%\%OS%\Debug\CMakeCache.txt (
-        "%CMAKE%" --build %APP_PATH%\%OS%\Release --target %TARGET% --config Release --verbose
+    if exist %APP_PATH%\%TARGET_OS%\Debug\CMakeCache.txt (
+        "%CMAKE%" --build %APP_PATH%\%TARGET_OS%\Release --target %TARGET% --config Release --verbose
     )
-    if exist %APP_PATH%\%OS%\CMakeCache.txt (
-        "%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Release --verbose
+    if exist %APP_PATH%\%TARGET_OS%\CMakeCache.txt (
+        "%CMAKE%" --build %APP_PATH%\%TARGET_OS% --target %TARGET% --config Release --verbose
     )
 goto:eof
 
 :end_message
 	echo:
-	echo ******* Done building %APP% - %OS% - %TYPE% *******
+	echo ******* Done building %APP% - %TARGET_OS% - %TYPE% *******
 	
-	set UPDATE=
-	set APP=
-	set OS=
-	set TYPE=
+	set "UPDATE="
+	set "APP="
+	set "TARGET_OS="
+	set "TYPE="
 goto:eof
 
 
