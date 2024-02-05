@@ -251,11 +251,16 @@ goto build
     ::"CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_COMPILER=%VISUALSTUDIO_X64_CXX_COMPILER%"
     ::"%CMAKE%" -G "%VISUALSTUDIO_GENERATOR%" -A x64 %CMAKE_ARGS% %DKCMAKE%
     ::set TARGET=%APP%_APP
-        
+	
     call:validate_msys2
-    TITLE DigitalKnob - MINGW64
-    call set DKPATH=%%DKPATH:^\=^/%%
-    %MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "clear && %DKPATH%/build.sh"
+	call:validate_gcc
+	"CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_C_COMPILER=%C_COMPILER%"
+    "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_COMPILER=%CXX_COMPILER%"
+	::"%CMAKE%" -G "%MSYS2_GENERATOR%" %CMAKE_ARGS% %DKCMAKE%
+	pause
+    ::call set DKPATH=%%DKPATH:^\=^/%%
+	::TITLE DigitalKnob - MINGW64
+    ::%MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "clear && %CMAKE% -G %MSYS2_GENERATOR% %CMAKE_ARGS% %DKCMAKE%"
 goto build
 
 :generate_android32
@@ -508,7 +513,6 @@ goto:eof
     call:check_error
 goto:eof
 
-
 :: validate_msys2()
 :validate_msys2
     call:cmake_eval "include('%DKIMPORTS%/msys2/DKMAKE.cmake')" "MSYS2"
@@ -516,6 +520,13 @@ goto:eof
     call:check_error
 goto:eof
 
+:: validate_gcc()
+:validate_gcc
+    call:cmake_eval "include('%DKIMPORTS%/gcc/DKMAKE.cmake')" "C_COMPILER;CXX_COMPILER"
+    echo C_COMPILER = %C_COMPILER%
+	echo CXX_COMPILER = %CXX_COMPILER%
+    call:check_error
+goto:eof
 
 :: validate_openjdk()
 :validate_openjdk

@@ -58,7 +58,6 @@ dk_libRelease	(${FFMPEG}/${OS}/${RELEASE_DIR}/libavformat/libavformat.a)
 
 
 ### GENERATE / COMPILE ###
-set(USE_MSYS2 1)
 
 DEBUG_dk_setPath(${FFMPEG}/${OS}/${DEBUG_DIR})
 EMSCRIPTEN_DEBUG_dk_queueCommand(${EMCONFIGURE} ../../configure
@@ -174,5 +173,3 @@ EMSCRIPTEN_RELEASE_dk_queueCommand(${EMMAKE} make)
 if(NOT EMSCRIPTEN)
 	RELEASE_dk_queueCommand(make)
 endif()
-
-set(USE_MSYS2 0)

@@ -51,7 +51,7 @@ dk_addFirewallAllow("pacman" "${MSYS2}/usr/bin/pacman.exe")
 #	dk_set(MSYS_LOADED TRUE)
 #endif()
 
-
+dk_set(MSYS2_GENERATOR "MSYS Makefiles")
 
 
 ### Install other utilities ###
