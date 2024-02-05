@@ -154,7 +154,7 @@ goto:eof
     if '%choice%'=='8' set APP=DKTestAll
     if '%choice%'=='9' call:clear_screen
     if '%choice%'=='10' call:reload
-    if '%choice%'=='11' "set UPDATE="
+    if '%choice%'=='11' set UPDATE=
     if '%choice%'=='12' call:end
     ::echo "%choice%" is not valid, try again
         
@@ -171,7 +171,7 @@ goto:eof
 
 
 :pick_os
-    set "TARGET_OS="
+    set TARGET_OS=
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
         
     :: TODO
@@ -236,7 +236,7 @@ goto:eof
 
 
 :pick_type
-    set "TYPE="
+    set TYPE=
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
         
     echo %APP% %TARGET_OS% %TYPE%
@@ -255,7 +255,7 @@ goto:eof
     if '%choice%'=='2' set TYPE=Release
     if '%choice%'=='3' set TYPE=All
     if '%choice%'=='4' call:clear_screen
-    if '%choice%'=='5' set "TARGET_OS="
+    if '%choice%'=='5' set TARGET_OS=
     if '%choice%'=='6' call:end
         
     ::echo "%choice%" is not valid, try again
@@ -441,10 +441,10 @@ goto:eof
     echo:
     echo ******* Done building %APP% - %TARGET_OS% - %TYPE% *******
         
-    set "UPDATE="
-    set "APP="
-    set "TARGET_OS="
-    set "TYPE="
+    set UPDATE=
+    set APP=
+    set TARGET_OS=
+    set TYPE=
 goto:eof
 
 
