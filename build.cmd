@@ -14,6 +14,12 @@ if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 ::    del build.cmd & rename build_crlf.cmd build.cmd
 ::)
 
+::--------------------------------------------------------
+:: enable escape sequence console colors
+:: https://superuser.com/a/1300251
+::--------------------------------------------------------
+::REG ADD HKCU\CONSOLE /f /v VirtualTerminalLevel /t REG_DWORD /d 1
+
 
 ::--------------------------------------------------------
 :: GLOBAL USER VARIABLES

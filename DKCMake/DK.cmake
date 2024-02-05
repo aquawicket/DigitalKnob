@@ -22,7 +22,7 @@ set(PRINT_FUNCTION_NAMES 		1 		CACHE INTERNAL "")	# print function call function
 set(PRINT_LINE_NUMBERS 			1		CACHE INTERNAL "")	# print function call file line numbers
 set(WAIT_ON_ERRORS				1		CACHE INTERNAL "")	# pause cmake build script on errors
 set(WAIT_ON_WARNINGS			0		CACHE INTERNAL "")	# pause cmake build script on warnings
-set(USE_COLOR					0		CACHE INTERNAL "")	# colored text output
+set(USE_COLOR					1		CACHE INTERNAL "")	# colored text output
 set(INCLUDE_DKPLUGINS			1		CACHE INTERNAL "")  # Include the DKPlugins to the main app project
 
 
