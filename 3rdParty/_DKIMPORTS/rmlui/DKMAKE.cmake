@@ -33,7 +33,7 @@ dk_define(RMLUI_STATIC_LIB)
 ANDROID_dk_define(CHOBO_FLAT_MAP_NO_THROW)
 ANDROID_dk_define(RMLUI_USE_CUSTOM_RTTI)
 
-dk_include		(${RMLUI}/Include										RML_INCLUDE_DIR)
+dk_include		(${RMLUI}/Include					RML_INCLUDE_DIR)
 dk_include		(${RMLUI}/Source)
 
 dk_addTarget	(rmlui RmlCore)
@@ -128,18 +128,18 @@ else()
 		"-DCMAKE_CXX_FLAGS=-DRMLUI_STATIC_LIB" 
 		-DBUILD_FRAMEWORK=OFF 					# "Build Framework bundle for OSX" OFF
 		-DBUILD_LUA_BINDINGS_FOR_LUAJIT=OFF 	# "Build Lua bindings using luajit" OFF
-		-DBUILD_LUA_BINDINGS=${LUA}	 			# "Build Lua bindings" OFF
+		#-DBUILD_LUA_BINDINGS=${LUA}	 			# "Build Lua bindings" OFF
 		-DBUILD_SAMPLES=OFF 					# "Build samples" OFF
 		-DBUILD_SHARED_LIBS=OFF					# "Build shared (dynamic) libraries" ON
 		-DBUILD_TESTING=OFF 					#  OFF
 		-DBUILD_UNIVERSAL_BINARIES=OFF 			# "Build universal binaries for all architectures supported" ON
 		-DCUSTOM_CONFIGURATION=OFF				# "Customize RmlUi configuration files for overriding the default configuration and types." OFF
 		-DDISABLE_RTTI_AND_EXCEPTIONS=OFF		# "Build with rtti and exceptions disabled." OFF
-		-DENABLE_HARFBUZZ=${HARFBUZZ}			# "Enable HarfBuzz for text-shaping sample. Requires the HarfBuzz library." OFF
+		#-DENABLE_HARFBUZZ=${HARFBUZZ}			# "Enable HarfBuzz for text-shaping sample. Requires the HarfBuzz library." OFF
 		-DENABLE_LOTTIE_PLUGIN=${RLOTTIE} 		# "Enable plugin for Lottie animations. Requires the rlottie library." OFF
-		-DENABLE_PRECOMPILED_HEADERS=ON			# "Enable precompiled headers" ON
-		-DENABLE_SVG_PLUGIN=${LUNASVG_CMAKE}	# "Enable plugin for SVG images. Requires the lunasvg library." OFF
-		-DMATRIX_ROW_MAJOR=OFF 					# "Use row-major matrices. Column-major matrices are used by default." OFF
+		-DENABLE_PRECOMPILED_HEADERS=OFF		# "Enable precompiled headers" ON
+		#-DENABLE_SVG_PLUGIN=${LUNASVG}			# "Enable plugin for SVG images. Requires the lunasvg library." OFF
+		#-DMATRIX_ROW_MAJOR=OFF 					# "Use row-major matrices. Column-major matrices are used by default." OFF
 		-DNO_FONT_INTERFACE_DEFAULT=OFF			# "Do not include the default font engine in the build. Allows building without the FreeType dependency, but a custom font engine must be created and set." OFF
 		-DNO_THIRDPARTY_CONTAINERS=OFF			# "Only use standard library containers." OFF
 		-DRMLUI_TRACY_CONFIGURATION=OFF			# "Enable a separate Tracy configuration type for multi-config generators such as Visual Studio, otherwise enable Tracy in all configurations." ON
