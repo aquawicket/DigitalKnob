@@ -58,15 +58,12 @@ set "COMPILER=MINGW64"
 	echo DKIMPORTS = %DKIMPORTS%
 
 	set "OS="
-	:while_loop
+	:while_loop		
 		if '%UPDATE%'=='' call:pick_update
 		if '%APP%'=='' call:pick_app
 		if '%OS%'=='' call:pick_os
 		if '%TYPE%'=='' call:pick_type
 		
-		if '%UPDATE%'=='' goto:while_loop
-		if '%APP%'=='' goto:while_loop
-		if '%OS%'=='' goto:while_loop
 		if '%TYPE%'=='' goto:while_loop
 
 		call:generate
