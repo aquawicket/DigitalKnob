@@ -9,11 +9,11 @@ IF(HAVE_DKCef)
 	dk_depend(DKCef)
 ENDIF()
 
-if(WIN)
+if(MSVC)
 	dk_copy(${STACKWALKER}/StackWalker/StackWalker.cpp ${DKPLUGINS}/DKDebug/StackWalker.cpp)
 	WIN_dk_include(${STACKWALKER}/StackWalker)
 else()
-	dk_remove(${DKPLUGINS}/DKDebug/StackWalker.cpp)
+	dk_remove(${DKPLUGINS}/DKDebug/StackWalker.cpp NOERROR)
 endif()
 
 dk_generateCmake(DKDebug)
