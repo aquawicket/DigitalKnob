@@ -326,6 +326,8 @@ goto:eof
 
 :generate_win64
     ::if %COMPILER%==MINGW64 (
+		call:cmake_eval "include('%DKIMPORTS%/msys2/DKMAKE.cmake')"
+		
         echo generate_win64
         call:cmake_eval "include('%DKIMPORTS%/cmake/DKMAKE.cmake')" "CMAKE_EXE" "-DMSYSTEM=MINGW64"
         echo CMAKE_EXE = %CMAKE_EXE%
