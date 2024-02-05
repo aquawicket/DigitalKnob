@@ -57,13 +57,16 @@ set "COMPILER=MINGW64"
 	echo DK3RDPARTY = %DK3RDPARTY%
 	echo DKIMPORTS = %DKIMPORTS%
 
-	set "APP="
-	set "OS="
+	
+	
 	set "TYPE="
 	goto :pickapp
 goto:eof
 
 :pickapp
+	set "APP="
+	TITLE DigitalKnob - %APP% %OS% %TYPE%
+	
     echo.
     echo  1) Git Update
     echo  2) Git Commit
@@ -111,6 +114,9 @@ goto:eof
 
 
 :pickos
+	set "OS="
+	TITLE DigitalKnob - %APP% %OS% %TYPE%
+	
     :: TODO
     :: 1) Windows (x86_64)
 
@@ -172,6 +178,9 @@ goto:eof
 
 
 :type
+	set "TYPE="
+	TITLE DigitalKnob - %APP% %OS% %TYPE%
+	
     echo %APP% - %OS%
     echo.
     echo 1) Debug
