@@ -22,7 +22,7 @@ endif()
 
 dk_addFirewallAllow("pacman" "${MSYS2}/usr/bin/pacman.exe")
 
-#if(NOT MSYS_LOADED)
+if(MSYSTEM)
 	dk_remove(${MSYS2}/var/lib/pacman/db.lck NOERROR)
 	
 	if(CLANG32)						
@@ -38,8 +38,7 @@ dk_addFirewallAllow("pacman" "${MSYS2}/usr/bin/pacman.exe")
 	elseif(UCRT64)
 		dk_msys2(pacman -S mingw-w64-ucrt-x86_64-toolchain --needed --noconfirm)		# toolchain
 	endif()
-#	dk_set(MSYS_LOADED TRUE)
-#endif()
+endif()
 
 dk_set(MSYS2_GENERATOR "MSYS Makefiles")
 

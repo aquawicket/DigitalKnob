@@ -22,10 +22,6 @@ if(MSYSTEM)
 		dk_msys2("pacman -S mingw-w64-x86_64-cmake --needed --noconfirm")			# MINGW64
 	elseif(UCRT64)
 		dk_msys2("pacman -S mingw-w64-ucrt-x86_64-cmake --needed --noconfirm")		# UCRT64
-	elseif(WIN_32)
-		dk_msys2("pacman -S mingw-w64-i686-cmake --needed --noconfirm")				# WIN32 / MINGW32
-	elseif(WIN_64)
-		dk_msys2("pacman -S mingw-w64-x86_64-cmake --needed --noconfirm")			# WIN64 / MINGW64
 	endif()
 	
 	dk_set(CMAKE_EXE cmake)

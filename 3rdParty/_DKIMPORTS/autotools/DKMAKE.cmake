@@ -7,7 +7,7 @@ MAC_HOST_dk_queueCommand(brew install autogen)
 MAC_HOST_dk_queueCommand(brew install autoconf)
 MAC_HOST_dk_queueCommand(brew install automake)
 
-if(WIN_HOST)
+if(MSYSTEM)
 	dk_depend(msys2)
 	
 	dk_remove(${MSYS2}/var/lib/pacman/db.lck NOERROR)
@@ -24,9 +24,5 @@ if(WIN_HOST)
 		dk_msys2("pacman -S mingw-w64-x86_64-autotools --needed --noconfirm")		# MINGW64
 	elseif(UCRT64)
 		dk_msys2("pacman -S mingw-w64-ucrt-x86_64-autotools --needed --noconfirm")	# UCRT64
-	elseif(WIN_32)
-		dk_msys2("pacman -S mingw-w64-i686-autotools --needed --noconfirm")			# WIN32 / MINGW32
-	elseif(WIN_64)
-		dk_msys2("pacman -S mingw-w64-x86_64-autotools --needed --noconfirm")		# WIN64	/ MINGW64
 	endif()
 endif()

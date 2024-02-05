@@ -1,6 +1,6 @@
 # https://packages.msys2.org/base/make
 
-if(WIN_HOST)
+if(MSYSTEM)
 	dk_depend(msys2)
 	
 	dk_remove(${MSYS2}/var/lib/pacman/db.lck NOERROR)
@@ -26,12 +26,5 @@ if(WIN_HOST)
 	elseif(UCRT64)
 		dk_msys2("pacman -S mingw-w64-ucrt-x86_64-make --needed --noconfirm")		# UCRT64
 		dk_set(MAKE_PROGRAM ${MSYS2}/ucrt64/bin/mingw32-make.exe)
-	elseif(WIN_32)
-		dk_msys2("pacman -S mingw-w64-i686-make --needed --noconfirm")				# WIN32 / MINGW32
-		dk_set(MAKE_PROGRAM ${MSYS2}/mingw32/bin/mingw32-make.exe)
-	elseif(WIN_64)
-		dk_msys2("pacman -S mingw-w64-x86_64-make --needed --noconfirm")			# WIN64 /MINGW64
-		dk_copy(${MSYS2}/mingw64/bin/mingw32-make.exe ${MSYS2}/mingw64/bin/make.exe)
-		dk_set(MAKE_PROGRAM ${MSYS2}/mingw64/bin/mingw32-make.exe)
 	endif()
 endif()
