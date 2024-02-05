@@ -77,7 +77,7 @@ foreach(plugin ${dkdepend_list})
 	dk_info("######  Processing   ${plugin} . . .                        ")
 	dk_info("############################################################")
 	
-	##Strip any sublibrary named in the plugin, and enable it
+	## Strip any sublibrary named in the plugin, and enable it
 	string(FIND "${plugin}" " " index)
 	if(${index} GREATER -1)
 		math(EXPR index "${index}+1")
@@ -250,6 +250,13 @@ foreach(plugin ${dkdepend_list})
 			
 		endif() # NOT INCLUDE_DKPLUGINS
 	endif() # isDKPlugin
+	
+	foreach(lib ${LIBLIST})
+		if(NOT EXISTS ${lib})
+			dk_error("\n\n\n****************************\nFAILED to find: ${lib} \n***********************************")
+		endif()
+	endforeach()
+	
 endforeach()
 
 if(INSTALL_DKLIBS)

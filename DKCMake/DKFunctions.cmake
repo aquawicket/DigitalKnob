@@ -1982,7 +1982,7 @@ function(dk_msys2)
 	DKASSERT(MSYSTEM)
 	
 	string(REPLACE ";" " " str "${ARGV}")
-	dk_info("\n${CLR}${magenta} $ ${str}\n")
+	#dk_info("\n${CLR}${magenta} $ ${str}\n")
 		
 	set(bash "#!/bin/bash")
 	list(APPEND bash "cd ${CURRENT_DIR}")
