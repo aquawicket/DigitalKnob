@@ -359,6 +359,7 @@ if(LINUX)
 	dk_disable(aubio)
 	dk_disable(boxer)				# error: can't create CMakeFiles/Boxer.dir/src/boxer_linux.cpp.o: No such file or directory
 	dk_disable(dukluv)
+	dk_disable(flac)
 	dk_disable(fontconfig)
 	dk_disable(gdal)
 	dk_disable(gnutls)
