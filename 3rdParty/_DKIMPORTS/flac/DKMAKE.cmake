@@ -44,7 +44,7 @@ endif()
 
 ### GENERATE / COMPILE ###
 string(REPLACE "-std=c++17" "" 	FLAC_BUILD "${DKCONFIGURE_BUILD}")
-string(REPLACE "  " 		" " FLAC_BUILD "${FLAC_BUILD}")
+string(REPLACE "  "         " " FLAC_BUILD "${FLAC_BUILD}")
 
 DEBUG_dk_setPath		(${FLAC}/${OS}/${DEBUG_DIR})
 DEBUG_dk_queueCommand	(${FLAC_BUILD} ${OGG_CONFIGURE})

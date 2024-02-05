@@ -307,7 +307,6 @@ WIN_dk_queueCommand			(${DKCMAKE_BUILD} -DSDL_SHARED=OFF -DSDL_LIBC=ON ${SDL})
 
 
 
-
 ### COMPILE ###
 #dk_build(${SDL})
 dk_build(${SDL} SDL2-static)
