@@ -9,10 +9,10 @@ WIN_HOST_dk_set(GIT_FILE Git-2.31.1-32-bit.exe)
 if(MSYSTEM)
 	dk_depend(msys2)
 	
-	dk_msys2(pacman -S git --needed --noconfirm)
+	dk_command(pacman -S git --needed --noconfirm)
 	
 	dk_set(GIT_EXE git)
-	dk_msys2(${GIT_EXE} --version)
+	dk_command(${GIT_EXE} --version)
 	#dk_debug("GIT_EXE = ${GIT_EXE}")
 	return()
 endif()

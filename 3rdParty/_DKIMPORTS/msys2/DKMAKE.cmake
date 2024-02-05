@@ -26,17 +26,17 @@ if(MSYSTEM)
 	dk_remove(${MSYS2}/var/lib/pacman/db.lck NOERROR)
 	
 	if(CLANG32)						
-		dk_msys2(pacman -S mingw-w64-clang-i686-toolchain --needed --noconfirm)			# toolchain
+		dk_command(pacman -S mingw-w64-clang-i686-toolchain --needed --noconfirm)		# toolchain
 	elseif(CLANG64)
-		dk_msys2(pacman -S mingw-w64-clang-x86_64-toolchain --needed --noconfirm)		# toolchain
+		dk_command(pacman -S mingw-w64-clang-x86_64-toolchain --needed --noconfirm)		# toolchain
 	elseif(CLANGARM64)
-		dk_msys2(pacman -S mingw-w64-clang-aarch64-toolchain --needed --noconfirm)		# toolchain
+		dk_command(pacman -S mingw-w64-clang-aarch64-toolchain --needed --noconfirm)	# toolchain
 	elseif(MINGW32)
-		dk_msys2(pacman -S mingw-w64-i686-toolchain --needed --noconfirm)				# toolchain
+		dk_command(pacman -S mingw-w64-i686-toolchain --needed --noconfirm)				# toolchain
 	elseif(MINGW64)
-		dk_msys2(pacman -S mingw-w64-x86_64-toolchain --needed --noconfirm)				# toolchain
+		dk_command(pacman -S mingw-w64-x86_64-toolchain --needed --noconfirm)			# toolchain
 	elseif(UCRT64)
-		dk_msys2(pacman -S mingw-w64-ucrt-x86_64-toolchain --needed --noconfirm)		# toolchain
+		dk_command(pacman -S mingw-w64-ucrt-x86_64-toolchain --needed --noconfirm)		# toolchain
 	endif()
 endif()
 

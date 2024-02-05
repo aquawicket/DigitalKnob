@@ -57,7 +57,7 @@ set COMPILER=MINGW64
     echo DK3RDPARTY = %DK3RDPARTY%
     echo DKIMPORTS = %DKIMPORTS%
 
-    set "TARGET_OS="
+    set TARGET_OS=
     :while_loop             
         if '%UPDATE%'=='' call:pick_update
         if '%APP%'=='' call:pick_app
@@ -86,7 +86,7 @@ goto:eof
 
 
 :pick_update
-    set "UPDATE="
+    set UPDATE=
         
     echo.
     echo  1) Git Update
@@ -96,7 +96,7 @@ goto:eof
     echo  5) Reset Apps
     echo  6) Reset Plugins
     echo  7) Reset 3rdParty
-    echo  8) Reset Everything
+    echo  8) Reset All
     echo  9) Clear Screen
     echo  10) Clear cmake cache and .tmp files
     echo  11) Reload
@@ -109,12 +109,12 @@ goto:eof
         
     if '%choice%'=='1' call:git_update
     if '%choice%'=='2' call:git_commit
-    if '%choice%'=='3' echo "Push assets not implemented yet"
-    if '%choice%'=='4' echo "Pull assets not implemented yet"
-    if '%choice%'=='5' echo "Reset Apps not implemented yet"
-    if '%choice%'=='6' echo "Reset Plugins not implemented yet"
-    if '%choice%'=='7' echo "Reset 3rdParty not implemented yet"
-    if '%choice%'=='8' echo "Reset Everything not implemented yet"
+    if '%choice%'=='3' call:push_assets
+    if '%choice%'=='4' call:pull_assets
+    if '%choice%'=='5' call:reset_apps
+    if '%choice%'=='6' call:reset_plugins
+    if '%choice%'=='7' call:reset_3rdparty
+    if '%choice%'=='8' call:reset_all
     if '%choice%'=='9' call:clear_screen
     if '%choice%'=='10' call:dk_deleteCache & call:delete_temp_files
     if '%choice%'=='11' call:reload
@@ -124,7 +124,7 @@ goto:eof
 goto:eof
 
 :pick_app
-    set "APP="
+    set APP=
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
         
     echo.
@@ -282,7 +282,7 @@ goto:eof
     set DKLEVEL=RebuildAll
     set DKLINK=Static
 
-    set "CMAKE_ARGS="
+    set CMAKE_ARGS=
     if %TYPE%==Debug                set "CMAKE_ARGS=-DDEBUG=ON -DRELEASE=OFF"
     if %TYPE%==Release              set "CMAKE_ARGS=-DDEBUG=OFF -DRELEASE=ON"
     if %TYPE%==All                  set "CMAKE_ARGS=-DDEBUG=ON -DRELEASE=ON"
@@ -455,6 +455,42 @@ goto:eof
 :: https://www.dostips.com/DtTutoFunctions.php
 ::--------------------------------------------------------
 
+:: push_assets()
+:push_assets
+	echo not implemented,  TODO
+goto:eof
+
+
+:: pull_assets()
+:pull_assets
+	echo not implemented,  TODO
+goto:eof
+
+
+:: reset_apps()
+:reset_apps
+	echo not implemented,  TODO
+goto:eof
+
+
+:: reset_plugins()
+:reset_plugins
+	echo not implemented,  TODO
+goto:eof
+
+
+:: reset_3rdparty()
+:reset_3rdparty
+	echo not implemented,  TODO
+goto:eof
+
+
+:: :reset_all()
+:reset_all
+	echo not implemented,  TODO
+goto:eof
+
+
 :: reload()
 :reload
     echo .
@@ -511,12 +547,12 @@ goto:eof
 :validate_branch
     :: https://stackoverflow.com/a/33662275
     :: If the current folder matches the current branch set DKBRANCH, default to Development
-    for %%I in (.) do set "FOLDER=%%~nxI"
+    for %%I in (.) do set FOLDER=%%~nxI
         
-    set "DKBRANCH=Development"
+    set DKBRANCH=Development
     if exist .git (
         "%GIT%" branch | find "* %FOLDER%" > NUL & IF ERRORLEVEL 0 (
-            set "DKBRANCH=%FOLDER%"
+            set DKBRANCH=%FOLDER%
         )
     )
 
@@ -674,14 +710,14 @@ goto:eof
             set "command=%command% %arg%"
         )
     )
-    set "variable_name=%~1"
+    set variable_name=%~1
     shift
     if not "%~1"=="" goto command_args
 
     set command=%command:_QUOTE_="%
 
     for /F "tokens=*" %%g in ('%command%') do (
-        set "%variable_name%=%%g"
+        set %variable_name%=%%g
         set "variable_value=%%g"
     )
 

@@ -15,22 +15,22 @@ if(MSYSTEM)
 	dk_remove(${MSYS2}/var/lib/pacman/db.lck NOERROR)
 	
 	if(CLANG32)
-		dk_msys2("pacman -S mingw-w64-clang-i686-cmake --needed --noconfirm")		# CLANG32
+		dk_command("pacman -S mingw-w64-clang-i686-cmake --needed --noconfirm")		# CLANG32
 	elseif(CLANG64)
-		dk_msys2("pacman -S mingw-w64-clang-x86_64-cmake --needed --noconfirm")		# CLANG64
+		dk_command("pacman -S mingw-w64-clang-x86_64-cmake --needed --noconfirm")	# CLANG64
 	elseif(CLANGARM64)
-		dk_msys2("pacman -S mingw-w64-clang-aarch64-cmake --needed --noconfirm")	# CLANGARM64
+		dk_command("pacman -S mingw-w64-clang-aarch64-cmake --needed --noconfirm")	# CLANGARM64
 	elseif(MINGW32)
-		dk_msys2("pacman -S mingw-w64-i686-cmake --needed --noconfirm")				# MINGW32
+		dk_command("pacman -S mingw-w64-i686-cmake --needed --noconfirm")			# MINGW32
 	elseif(MINGW64)
-		dk_msys2("pacman -S mingw-w64-x86_64-cmake --needed --noconfirm")			# MINGW64
+		dk_command("pacman -S mingw-w64-x86_64-cmake --needed --noconfirm")			# MINGW64
 	elseif(UCRT64)
-		dk_msys2("pacman -S mingw-w64-ucrt-x86_64-cmake --needed --noconfirm")		# UCRT64
+		dk_command("pacman -S mingw-w64-ucrt-x86_64-cmake --needed --noconfirm")	# UCRT64
 	endif()
 	
 	dk_set(CMAKE_EXE cmake)
 	dk_debug("CMAKE_EXE = ${CMAKE_EXE}")
-	dk_msys2(${CMAKE_EXE} --version)
+	dk_command(${CMAKE_EXE} --version)
 	
 	return()
 endif()
@@ -72,9 +72,6 @@ else()
 	if(MSVC)
 		WIN_HOST_dk_download(${CMAKE_DL} ${DKDOWNLOAD})
 		WIN_HOST_dk_command(${DKDOWNLOAD}/${CMAKE_FILE})
-	endif()
-	if(MINGW)
-		dk_msys2("pacman -S mingw-w64-x86_64-cmake --needed --noconfirm")
 	endif()
 	MAC_HOST_dk_command(brew install cmake)
 	if("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "Android")
