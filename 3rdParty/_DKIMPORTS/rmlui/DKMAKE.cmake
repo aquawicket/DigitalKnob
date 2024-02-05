@@ -4,16 +4,19 @@
 
 ### DEPEND ###
 dk_depend(freetype)
-
-# BUILD_SAMPLES
-dk_depend(glew)
 #dk_depend(harfbuzz)
 #dk_depend(lua)
 #dk_depend(lunasvg)
 #dk_depend(rlottie)
-dk_depend(sdl)
-dk_depend(sdl_image)
-#dk_depend(sfml)
+
+# BUILD_SAMPLES
+set(RMLUI_BUILD_SAMPLES OFF)
+if(RMLUI_BUILD_SAMPLES)
+	dk_depend(glew)
+	dk_depend(sdl)
+	dk_depend(sdl_image)
+	#dk_depend(sfml)
+endif()
 
 
 ### IMPORT ###
