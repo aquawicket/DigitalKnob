@@ -39,29 +39,29 @@ set "COMPILER=MINGW64"
 ::--------------------------------------------------------
 :: Main
 ::--------------------------------------------------------
-set "DIGITALKNOB=%HOMEDRIVE%%HOMEPATH%\digitalknob"
-call:make_directory "%DIGITALKNOB%"
-echo DIGITALKNOB = %DIGITALKNOB%
+:main
+	set "DIGITALKNOB=%HOMEDRIVE%%HOMEPATH%\digitalknob"
+	call:make_directory "%DIGITALKNOB%"
+	echo DIGITALKNOB = %DIGITALKNOB%
 
-set "DKDOWNLOAD=%DIGITALKNOB%\download"
-call:make_directory "%DKDOWNLOAD%"
-echo DKDOWNLOAD = %DKDOWNLOAD%
+	set "DKDOWNLOAD=%DIGITALKNOB%\download"
+	call:make_directory "%DKDOWNLOAD%"
+	echo DKDOWNLOAD = %DKDOWNLOAD%
 
-call:validate_cmake
-call:validate_git
-call:validate_branch
+	call:validate_cmake
+	call:validate_git
+	call:validate_branch
 
-echo DKPATH = %DKPATH%
-echo DKCMAKE = %DKCMAKE%
-echo DK3RDPARTY = %DK3RDPARTY%
-echo DKIMPORTS = %DKIMPORTS%
+	echo DKPATH = %DKPATH%
+	echo DKCMAKE = %DKCMAKE%
+	echo DK3RDPARTY = %DK3RDPARTY%
+	echo DKIMPORTS = %DKIMPORTS%
 
-
-
-
-set "APP="
-set "OS="
-set "TYPE="
+	set "APP="
+	set "OS="
+	set "TYPE="
+	goto :pickapp
+goto:eof
 
 :pickapp
     echo.
@@ -95,7 +95,9 @@ set "TYPE="
     if '%choice%'=='12' call:reload
     if '%choice%'=='13' call:end
     echo "%choice%" is not valid, try again
-goto pickapp
+	
+	goto pickapp
+goto:eof
 
 
 
@@ -104,8 +106,8 @@ goto pickapp
         echo ERROR: %APP%/DKMAKE.cmake file not found
         goto pickapp
     ) 
-goto pickos
-
+	goto pickos
+goto:eof
 
 
 :pickos
@@ -166,7 +168,7 @@ goto pickos
     if '%choice%'=='8' call:end
     echo "%choice%" is not valid, try again
     goto pickos
-
+goto:eof
 
 
 :type
@@ -189,7 +191,7 @@ goto pickos
     if '%choice%'=='6' call:end
     echo "%choice%" is not valid, try again
     goto type
-
+goto:eof
 
 :generate
     echo ""
@@ -230,13 +232,13 @@ goto pickos
 
     :::::::::::: EXE_LINKER_FLAGS ::::::::::::
 
-
     :: Goto OS to build
     if %OS%==win32 goto generate_win32
     if %OS%==win64 goto generate_win64
     if %OS%==android32 goto generate_android32
     if %OS%==android64 goto generate_android64
     if %OS%==emscripten goto generate_emscripten
+goto:eof
 
 :generate_win32
     call:validate_visual_studio
@@ -250,7 +252,8 @@ goto pickos
     ::call set DKPATH=%%DKPATH:^\=^/%%
     ::%MSYS2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -lc "clear && %DKPATH%/build.sh"
     ::goto:eof
-goto build
+	goto build
+goto:eof
 
 :generate_win64
 	::if %COMPILER%==MINGW64 (
@@ -285,7 +288,8 @@ goto build
     ::set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_COMPILER=%VISUALSTUDIO_X64_CXX_COMPILER%"
     ::"%CMAKE%" -G "%VISUALSTUDIO_GENERATOR%" -A x64 %CMAKE_ARGS% %DKCMAKE%
     ::set TARGET=%APP%_APP
-goto build
+	goto build
+goto:eof
 
 :generate_android32
     call:validate_visual_studio
@@ -294,7 +298,8 @@ goto build
     call %OPENJDK%\registerJDK.cmd
     "%CMAKE%" -G "%VISUALSTUDIO_GENERATOR%" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID_NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_TOOLCHAIN_FILE% -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
     set TARGET=main
-goto build
+	goto build
+goto:eof
 
 :generate_android64
     call:validate_visual_studio
@@ -303,7 +308,8 @@ goto build
     call %OPENJDK%\registerJDK.cmd
     "%CMAKE%" -G "%VISUALSTUDIO_GENERATOR%" -A ARM64 -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID_NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_TOOLCHAIN_FILE% -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%OS%
     set TARGET=main
-goto build
+	goto build
+goto:eof
 
 :generate_emscripten
     call:validate_emscripten
@@ -318,22 +324,24 @@ goto build
         call "%EMSDK_ENV%" & "%CMAKE%" -G "%EMSDK_GENERATOR%" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%APP_PATH%/%OS%/Release
     )
     set TARGET=%APP%_APP
-goto build
+	goto build
+goto:eof
 
 
 :build
-echo ""
-echo ###########################################################        
-echo ****** Building %APP% - %OS% - %TYPE% - %LEVEL% ******
-echo ###########################################################
-echo ""
+	echo ""
+	echo ###########################################################        
+	echo ****** Building %APP% - %OS% - %TYPE% - %LEVEL% ******
+	echo ###########################################################
+	echo ""
 
 
-echo TYPE = %TYPE%
-if %TYPE%==Debug goto build_debug
-if %TYPE%==Release goto build_release
-if %TYPE%==All goto build_all
-call:assert "TYPE not set"
+	echo TYPE = %TYPE%
+	if %TYPE%==Debug goto build_debug
+	if %TYPE%==Release goto build_release
+	if %TYPE%==All goto build_all
+	call:assert "TYPE not set"
+goto:eof
 
 :build_debug
 	if %COMPILER%==MINGW64 (
@@ -347,7 +355,8 @@ call:assert "TYPE not set"
 	if exist %APP_PATH%\%OS%\CMakeCache.txt (
 		"%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Debug --verbose
 	)
-goto end_message
+	goto end_message
+goto:eof
 
 :build_release
     if exist %APP_PATH%\%OS%\Release\CMakeCache.txt (
@@ -356,7 +365,8 @@ goto end_message
     if exist %APP_PATH%\%OS%\CMakeCache.txt (
         "%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Release --verbose
     )
-goto end_message
+	goto end_message
+goto:eof
 
 :build_all
     if exist %APP_PATH%\%OS%\Debug\CMakeCache.txt (
@@ -371,12 +381,14 @@ goto end_message
     if exist %APP_PATH%\%OS%\CMakeCache.txt (
         "%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Release --verbose
     )
-goto end_message
+	goto end_message
+goto:eof
 
 :end_message
-echo:
-echo ******* Done building %APP% - %OS% - %TYPE% *******
-goto pickapp
+	echo:
+	echo ******* Done building %APP% - %OS% - %TYPE% *******
+	goto pickapp
+goto:eof
 
 
 
