@@ -1012,7 +1012,7 @@ function(dk_download src_path) # ARGV1 = dest_path #NOERROR
 	
 	if(EXISTS ${dest_path})
 		if(NOT noerror)
-			dk_error("dest_path:(${dest_path}) already exists")
+			dk_warn("dest_path:(${dest_path}) already exists")
 		endif()
 		return()
 	endif()

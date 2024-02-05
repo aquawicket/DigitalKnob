@@ -101,7 +101,12 @@ dk_set(WARNING_5105			OFF)
 dk_set(STATIC				ON)
 dk_set(SHARED				OFF)                                          
 
+dk_depend(imagemagick)
 
+## TODO - INCLUDE_DKPLUGINS not working on MSYS
+if(MSYS)
+	set(INCLUDE_DKPLUGINS 0)
+endif()
 
 if(MSVC)
 	WIN_dk_depend(visualstudio)

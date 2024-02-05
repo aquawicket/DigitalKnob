@@ -248,10 +248,16 @@ goto build
 
 :generate_win64
 	::if %COMPILER%==MINGW64 (
-		call:validate_msys2
-		call:validate_gcc
+		::call:validate_msys2
+		call:cmake_eval "set(MSYSTEM MINGW64);include('%DKIMPORTS%/msys2/DKMAKE.cmake')" "MSYS2;MSYS2_GENERATOR"
+		
+		::call:validate_gcc
+		call:cmake_eval "set(MSYSTEM MINGW64);include('%DKIMPORTS%/gcc/DKMAKE.cmake')" "C_COMPILER;CXX_COMPILER"
 		set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_C_COMPILER=%C_COMPILER%"
 		set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_COMPILER=%CXX_COMPILER%"
+		
+		::call:validate_make
+		call:cmake_eval "set(MSYSTEM MINGW64);include('%DKIMPORTS%/make/DKMAKE.cmake')" "MAKE_PROGRAM"
 		
 		call set DKPATH=%%DKPATH:^\=^/%%
 		TITLE DigitalKnob - MINGW64

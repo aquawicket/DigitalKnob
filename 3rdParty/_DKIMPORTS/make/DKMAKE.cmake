@@ -5,6 +5,8 @@ if(WIN_HOST)
 	
 	dk_remove(${MSYS2}/var/lib/pacman/db.lck NOERROR)
 	
+	message(STATUS "MSYSTEM = ${MSYSTEM}")
+	
 	if(CLANG32)
 		dk_msys2("pacman -S mingw-w64-clang-i686-make --needed --noconfirm")		# CLANG32
 		dk_set(MAKE_PROGRAM ${MSYS2}/clang32/bin/mingw32-make.exe)
@@ -20,7 +22,6 @@ if(WIN_HOST)
 	elseif(MINGW64)
 		dk_msys2("pacman -S mingw-w64-x86_64-make --noconfirm")						# MINGW64
 		dk_copy(${MSYS2}/mingw64/bin/mingw32-make.exe ${MSYS2}/mingw64/bin/make.exe)
-		#dk_set(MAKE_PROGRAM ${MSYS2}/mingw64/bin/mingw32-make.exe)
 		dk_set(MAKE_PROGRAM ${MSYS2}/mingw64/bin/make.exe)
 	elseif(UCRT64)
 		dk_msys2("pacman -S mingw-w64-ucrt-x86_64-make --needed --noconfirm")		# UCRT64
@@ -30,6 +31,7 @@ if(WIN_HOST)
 		dk_set(MAKE_PROGRAM ${MSYS2}/mingw32/bin/mingw32-make.exe)
 	elseif(WIN_64)
 		dk_msys2("pacman -S mingw-w64-x86_64-make --needed --noconfirm")			# WIN64 /MINGW64
+		dk_copy(${MSYS2}/mingw64/bin/mingw32-make.exe ${MSYS2}/mingw64/bin/make.exe)
 		dk_set(MAKE_PROGRAM ${MSYS2}/mingw64/bin/mingw32-make.exe)
 	endif()
 endif()
