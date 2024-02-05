@@ -23,10 +23,6 @@
 # SOFTWARE.
 include_guard()
 
-#if(EXISTS $ENV{DKCMAKE})
-#	set(ENV{DKCMAKE} "$ENV{DKCMAKE}/")
-#endif()
-#include("$ENV{DKCMAKE}DK.cmake")
 include("${DKCMAKE}/DK.cmake")
 
 # FIXME: work to remove this

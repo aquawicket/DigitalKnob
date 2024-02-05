@@ -146,15 +146,19 @@ foreach(plugin ${dkdepend_list})
 			dk_deleteEmptyDirectories(${CMAKE_INSTALL_PREFIX}/include/${plugin})
 		endif()
 	
+		set(PREBUILD ON)
+		
 		#Add the DKPlugin to the app project
-		if(EXISTS "${plugin_path}/CMakeLists.txt")
-			if(MULTI_CONFIG)
-				add_subdirectory(${plugin_path} ${plugin_path}/${OS})
-			else()
-				if(DEBUG)
-					add_subdirectory(${plugin_path} ${plugin_path}/${OS}/Debug)
-				elseif(RELEASE)
-					add_subdirectory(${plugin_path} ${plugin_path}/${OS}/Release)
+		if(NOT PREBUILD)
+			if(EXISTS "${plugin_path}/CMakeLists.txt")
+				if(MULTI_CONFIG)
+					add_subdirectory(${plugin_path} ${plugin_path}/${OS})
+				else()
+					if(DEBUG)
+						add_subdirectory(${plugin_path} ${plugin_path}/${OS}/Debug)
+					elseif(RELEASE)
+						add_subdirectory(${plugin_path} ${plugin_path}/${OS}/Release)
+					endif()
 				endif()
 			endif()
 		endif()
@@ -168,7 +172,7 @@ foreach(plugin ${dkdepend_list})
 			endif()
 		endforeach()
 		
-		set(PREBUILD ON)
+		
 		if(PREBUILD)
 			dk_info("******* Prebuilding ${plugin} *******")
 			dk_setPath(${plugin_path}/${BUILD_DIR})
@@ -283,8 +287,6 @@ if(HAVE_DK)
 	dk_info("Copying DKPlugins/_DKIMPORT/ to App...")
 	dk_copy(${DKPLUGINS}/_DKIMPORT/icons ${DKPROJECT}/icons) 
 	dk_copy(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h)
-	#dk_copy(${DKPLUGINS}/_DKIMPORT/App.h ${DKPROJECT}/App.h)
-	#dk_copy(${DKPLUGINS}/_DKIMPORT/App.cpp ${DKPROJECT}/App.cpp)
 	dk_copy(${DKPLUGINS}/_DKIMPORT/main.cpp ${DKPROJECT}/main.cpp)
 endif()
 	
@@ -361,14 +363,14 @@ if(WIN_32)
 			${DKPROJECT}/*.manifest
 			${DKPROJECT}/*.rc
 			${DKPROJECT}/icons/windows/*.rc)
-			list(APPEND App_SRC ${resources_SRC})
+		list(APPEND App_SRC ${resources_SRC})
 	endif()
 	
 	# https://stackoverflow.com/a/74491601
-	if(MSYS)
-		add_executable(${APP_NAME} ${App_SRC})
-	else()
+	if(MSVC)
 		add_executable(${APP_NAME} WIN32 ${App_SRC})
+	else()
+		add_executable(${APP_NAME} ${App_SRC})
 	endif()
 	
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
@@ -447,38 +449,36 @@ if(WIN_64)
 	########################## CREATE ICONS ###############################
 	if(EXISTS ${DKPROJECT}/icons/icon.png)
 		if(IMAGEMAGICK_CONVERT)
-			#if(MSVC)
-				dk_info("Building icons for ${APP_NAME} . . .")
-				dk_makeDirectory(${DKPROJECT}/icons/windows)
-				dk_executeProcess(${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 ${DKPROJECT}/icons/windows/icon.ico)
-				dk_makeDirectory(${DKPROJECT}/assets)
-				dk_copy(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico OVERWRITE)
-				dk_executeProcess(${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=16 ${DKPROJECT}/assets/favicon.ico)
-			#endif()
+			dk_info("Building icons for ${APP_NAME} . . .")
+			dk_makeDirectory(${DKPROJECT}/icons/windows)
+			dk_executeProcess(${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 ${DKPROJECT}/icons/windows/icon.ico)
+			dk_makeDirectory(${DKPROJECT}/assets)
+			dk_copy(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico OVERWRITE)
+			dk_executeProcess(${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=16 ${DKPROJECT}/assets/favicon.ico)
 		endif()
 	endif()
 			
 	################# BACKUP USERDATA / INJECT ASSETS #####################
 	if(HAVE_DK)
-		dk_copy(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER OVERWRITE)
+		dk_copy(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER OVERWRITE NOERROR)
 		file(REMOVE ${DKPROJECT}/assets/USER)
 		#Compress the assets, they will be included by resource.rc
 		dk_info("Creating assets.zip . . .")
 		dk_zip(${DKPROJECT}/assets)
 		# Restore the backed up files
-		dk_copy(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ OVERWRITE)
+		dk_copy(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ OVERWRITE NOERROR)
 		file(REMOVE ${DKPROJECT}/Backup)
 		#dummy assets.h file, or the builder wil complain about assets.h missing
-		dk_copy(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h OVERWRITE)
+		dk_copy(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h OVERWRITE NOERROR)
 	endif()
 
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
 		if(DEBUG)
-			dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe.backup OVERWRITE)
+			dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe.backup OVERWRITE NOERROR)
 		endif()
 		if(RELEASE)
-			dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe.backup OVERWRITE)
+			dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe.backup OVERWRITE NOERROR)
 		endif()
 	endif()
 		
@@ -491,14 +491,15 @@ if(WIN_64)
 			${DKPROJECT}/*.manifest
 			${DKPROJECT}/*.rc
 			${DKPROJECT}/icons/windows/*.rc)
+		list(APPEND App_SRC ${resources_SRC})
 	endif()
-	list(APPEND App_SRC ${resources_SRC})
+	
 	
 	# https://stackoverflow.com/a/74491601
-	if(MSYS)
-		add_executable(${APP_NAME} ${App_SRC})
-	else()
+	if(MSVC)
 		add_executable(${APP_NAME} WIN32 ${App_SRC})
+	else()
+		add_executable(${APP_NAME} ${App_SRC})
 	endif()
 
 	########################## Add Dependencies ########################
