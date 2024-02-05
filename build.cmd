@@ -134,10 +134,11 @@ goto:eof
     echo  6) DKSDLRml
     echo  7) DKDomTest
     echo  8) DKTestAll
-    echo  9) Clear Screen
-    echo 10) Reload
-    echo 11) Go Back
-    echo 12) Exit
+	echo  9) Enter Manually
+    echo 10) Clear Screen
+    echo 11) Reload
+    echo 12) Go Back
+    echo 13) Exit
     set choice=
     set /p choice=Please select an app to build:
     ::if not '%choice%'=='' set choice=%choice:~0,1%        ::What does this do?
@@ -150,10 +151,11 @@ goto:eof
     if '%choice%'=='6'  set "APP=DKSDLRml"     & goto:eof
     if '%choice%'=='7'  set "APP=DKDomTest"    & goto:eof
     if '%choice%'=='8'  set "APP=DKTestAll"    & goto:eof
-    if '%choice%'=='9'  call:clear_screen      & goto:eof
-    if '%choice%'=='10' call:reload            & goto:eof
-    if '%choice%'=='11' set "UPDATE="          & goto:eof
-    if '%choice%'=='12' call:end               & goto:eof
+	if '%choice%'=='9'  call:enter_manually    & goto:eof
+    if '%choice%'=='10' call:clear_screen      & goto:eof
+    if '%choice%'=='11' call:reload            & goto:eof
+    if '%choice%'=='12' set "UPDATE="          & goto:eof
+    if '%choice%'=='13' call:end               & goto:eof
 	
     echo %choice%: invalid selection, please try again
 	set APP=
@@ -273,12 +275,17 @@ goto:eof
 
     call:dk_deleteCache
     call:delete_temp_files
-
-    set "APP_PATH=%DKPATH%\DKApps\%APP%"
-    echo APP_PATH = %APP_PATH%
-    call:make_directory "%APP_PATH%\%TARGET_OS%"
-    cd "%APP_PATH%\%TARGET_OS%"
-
+	
+	if not '%CUSTOM_BUILD%'=='1' set "TARGET_PATH=%DKPATH%\DKApps\%APP%"
+    echo TARGET_PATH = %TARGET_PATH%
+    call:make_directory "%TARGET_PATH%\%TARGET_OS%"
+    cd "%TARGET_PATH%\%TARGET_OS%"
+	echo APP = %APP%
+	call set CMAKE_TARGET_PATH=%%TARGET_PATH:^\=^/%%
+	echo TARGET_PATH = %TARGET_PATH%
+	echo TARGET_OS = %TARGET_OS%
+	echo TYPE = %TYPE%
+	echo LEVEL = %LEVEL%
 
     ::::::::: BUILD CMAKE_ARGS ARRAY :::::::::
     set DKLEVEL=RebuildAll
@@ -365,7 +372,7 @@ goto:eof
     call:validate_android_ndk
     call:validate_openjdk
     call %OPENJDK%\registerJDK.cmd
-    "%CMAKE%" -G "%VISUALSTUDIO_GENERATOR%" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID_NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_TOOLCHAIN_FILE% -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%TARGET_OS%
+    "%CMAKE%" -G "%VISUALSTUDIO_GENERATOR%" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID_NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_TOOLCHAIN_FILE% -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%CMAKE_TARGET_PATH%/%TARGET_OS%
     set TARGET=main
 goto:eof
 
@@ -374,21 +381,21 @@ goto:eof
     call:validate_android_ndk
     call:validate_openjdk
     call %OPENJDK%\registerJDK.cmd
-    "%CMAKE%" -G "%VISUALSTUDIO_GENERATOR%" -A ARM64 -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID_NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_TOOLCHAIN_FILE% -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%APP_PATH%/%TARGET_OS%
+    "%CMAKE%" -G "%VISUALSTUDIO_GENERATOR%" -A ARM64 -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID_NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_TOOLCHAIN_FILE% -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%CMAKE_TARGET_PATH%/%TARGET_OS%
     set TARGET=main
 goto:eof
 
 :generate_emscripten
     call:validate_emscripten
     if %TYPE%==Debug (
-        call "%EMSDK_ENV%" & "%CMAKE%" -G "%EMSDK_GENERATOR%" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%APP_PATH%/%TARGET_OS%/Debug
+        call "%EMSDK_ENV%" & "%CMAKE%" -G "%EMSDK_GENERATOR%" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%CMAKE_TARGET_PATH%/%TARGET_OS%/Debug
     )
     if %TYPE%==Release (
-        call "%EMSDK_ENV%" & "%CMAKE%" -G "%EMSDK_GENERATOR%" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%APP_PATH%/%TARGET_OS%/Release
+        call "%EMSDK_ENV%" & "%CMAKE%" -G "%EMSDK_GENERATOR%" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%CMAKE_TARGET_PATH%/%TARGET_OS%/Release
     )
     if %TYPE%==All (
-        call "%EMSDK_ENV%" & "%CMAKE%" -G "%EMSDK_GENERATOR%" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%APP_PATH%/%TARGET_OS%/Debug
-        call "%EMSDK_ENV%" & "%CMAKE%" -G "%EMSDK_GENERATOR%" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%APP_PATH%/%TARGET_OS%/Release
+        call "%EMSDK_ENV%" & "%CMAKE%" -G "%EMSDK_GENERATOR%" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%CMAKE_TARGET_PATH%/%TARGET_OS%/Debug
+        call "%EMSDK_ENV%" & "%CMAKE%" -G "%EMSDK_GENERATOR%" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%CMAKE_TARGET_PATH%/%TARGET_OS%/Release
     )
     set TARGET=%APP%_APP
 goto:eof
@@ -405,39 +412,39 @@ goto:eof
 
 :build_debug
     if %COMPILER%==MINGW64 (
-        %MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %DKPATH%/DKApps/%APP%/%TARGET_OS%/Debug --target %TARGET% --config Debug --verbose"
+        %MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Debug --target %TARGET% --config Debug --verbose"
         goto end_message
     )
         
-    if exist %APP_PATH%\%TARGET_OS%\Debug\CMakeCache.txt (
-        "%CMAKE%" --build %APP_PATH%\%TARGET_OS%\Debug --target %TARGET% --config Debug --verbose
+    if exist %TARGET_PATH%\%TARGET_OS%\Debug\CMakeCache.txt (
+        "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS%\Debug --target %TARGET% --config Debug --verbose
     )
-    if exist %APP_PATH%\%TARGET_OS%\CMakeCache.txt (
-        "%CMAKE%" --build %APP_PATH%\%TARGET_OS% --target %TARGET% --config Debug --verbose
+    if exist %TARGET_PATH%\%TARGET_OS%\CMakeCache.txt (
+        "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS% --target %TARGET% --config Debug --verbose
     )
 goto:eof
 
 :build_release
-    if exist %APP_PATH%\%TARGET_OS%\Release\CMakeCache.txt (
-        "%CMAKE%" --build %APP_PATH%\%TARGET_OS%\Release --target %TARGET% --config Release --verbose
+    if exist %TARGET_PATH%\%TARGET_OS%\Release\CMakeCache.txt (
+        "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS%\Release --target %TARGET% --config Release --verbose
     )
-    if exist %APP_PATH%\%TARGET_OS%\CMakeCache.txt (
-        "%CMAKE%" --build %APP_PATH%\%TARGET_OS% --target %TARGET% --config Release --verbose
+    if exist %TARGET_PATH%\%TARGET_OS%\CMakeCache.txt (
+        "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS% --target %TARGET% --config Release --verbose
     )
 goto:eof
 
 :build_all
-    if exist %APP_PATH%\%TARGET_OS%\Debug\CMakeCache.txt (
-        "%CMAKE%" --build %APP_PATH%\%TARGET_OS%\Debug --target %TARGET% --config Debug --verbose
+    if exist %TARGET_PATH%\%TARGET_OS%\Debug\CMakeCache.txt (
+        "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS%\Debug --target %TARGET% --config Debug --verbose
     )
-    if exist %APP_PATH%\%TARGET_OS%\CMakeCache.txt (
-        "%CMAKE%" --build %APP_PATH%\%TARGET_OS% --target %TARGET% --config Debug --verbose
+    if exist %TARGET_PATH%\%TARGET_OS%\CMakeCache.txt (
+        "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS% --target %TARGET% --config Debug --verbose
     )
-    if exist %APP_PATH%\%TARGET_OS%\Debug\CMakeCache.txt (
-        "%CMAKE%" --build %APP_PATH%\%TARGET_OS%\Release --target %TARGET% --config Release --verbose
+    if exist %TARGET_PATH%\%TARGET_OS%\Debug\CMakeCache.txt (
+        "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS%\Release --target %TARGET% --config Release --verbose
     )
-    if exist %APP_PATH%\%TARGET_OS%\CMakeCache.txt (
-        "%CMAKE%" --build %APP_PATH%\%TARGET_OS% --target %TARGET% --config Release --verbose
+    if exist %TARGET_PATH%\%TARGET_OS%\CMakeCache.txt (
+        "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS% --target %TARGET% --config Release --verbose
     )
 goto:eof
 
@@ -458,6 +465,24 @@ goto:eof
 :: FUNCTIONS
 :: https://www.dostips.com/DtTutoFunctions.php
 ::--------------------------------------------------------
+
+::enter_manually()
+:enter_manually
+	echo Please type the name of the library, tool or app to build. Then press enter.
+	set /p input=
+
+	::Search digitalknob for the matching entry containing a DKMAKE.cmake file  
+	cd %DIGITALKNOB%
+	for /f "delims=" %%a in ('dir /b /s /a-d DKMAKE.cmake ^| findstr /E /R "%input%\\DKMAKE.cmake" ') do set "path=%%a"
+	set ""TARGET_PATH=%path:~0,-13%"
+	echo "TARGET_PATH = %"TARGET_PATH%
+	set APP=%input%
+	set CUSTOM_BUILD=1
+	::"cmnd="%CMAKE%" -G "Visual Studio 17 2022" -A %CPU% -DDEBUG=ON -DRELEASE=ON -DSTATIC=ON -DREBUILDALL=ON -DHAVE_DKDuktape=1 -DTARGET=%input% -DOS=%OS% -S "%DKCMAKE%" -B "%target_path%\%OS%"
+	
+	echo This feature is incomplete. TODO
+	:: see DKCMake/dev/dkbuild.cmd
+goto:eof
 
 :: push_assets()
 :push_assets
