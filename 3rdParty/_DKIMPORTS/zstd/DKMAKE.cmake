@@ -19,7 +19,7 @@ else()
 	dk_libDebug				(${ZSTD}/${OS}/${DEBUG_DIR}/lib/libzstd.a			ZSTD_LIBRARY_DEBUG)
 	dk_libRelease			(${ZSTD}/${OS}/${RELEASE_DIR}/lib/libzstd.a			ZSTD_LIBRARY_RELEASE)
 endif()
-
+	
 
 ### 3RDPARTY LINK ###
 if(MULTI_CONFIG)

@@ -59,13 +59,15 @@ set "COMPILER=MINGW64"
 
 	set "OS="
 	:while_loop
-		if not '%TYPE%'=='' goto:while_loop_end
-		
 		if '%UPDATE%'=='' call:pick_update
 		if '%APP%'=='' call:pick_app
 		if '%OS%'=='' call:pick_os
 		if '%TYPE%'=='' call:pick_type
-	
+		
+		if '%UPDATE%'=='' goto:while_loop
+		if '%APP%'=='' goto:while_loop
+		if '%OS%'=='' goto:while_loop
+		if '%TYPE%'=='' goto:while_loop
 
 		call:generate
 		if %OS%==win32 call:generate_win32
