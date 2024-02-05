@@ -203,6 +203,7 @@ goto:eof
 goto:eof
 
 :generate
+	TITLE DigitalKnob - Generating %APP%_%OS%_%TYPE% %LEVEL% . . .
     echo ""
     echo ########################################################## 
     echo ****** Generating %APP% - %OS% - %TYPE% - %LEVEL% ******
@@ -338,6 +339,7 @@ goto:eof
 
 
 :build
+	TITLE DigitalKnob - Building %APP%_%OS%_%TYPE% %LEVEL% . . .
 	echo ""
 	echo ###########################################################        
 	echo ****** Building %APP% - %OS% - %TYPE% - %LEVEL% ******

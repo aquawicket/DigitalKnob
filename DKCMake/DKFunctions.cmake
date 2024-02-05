@@ -2986,6 +2986,12 @@ function(dk_depend plugin)
 	DKDEBUGFUNC(${ARGV})
 	
 	if(CMAKE_SCRIPT_MODE_FILE OR NOT DKAPP)
+		list(FIND dkdepend_list ${plugin} index)
+		if(${index} GREATER -1)
+			return()  #plugin is already in the list
+		endif()
+	
+		dk_set(dkdepend_list ${dkdepend_list} "${plugin}")
 		dk_getPathToPlugin(${plugin} plugin_path)
 		include(${plugin_path}/DKMAKE.cmake)
 		#return()

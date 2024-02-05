@@ -35,6 +35,7 @@ dk_define				(LIBARCHIVE_STATIC)
 dk_include				(${LIBARCHIVE}/libarchive)
 dk_include				(${LIBARCHIVE}/${OS})
 ANDROID_dk_include		(${LIBARCHIVE}/contrib/android/include)
+
 ANDROID_dk_libDebug		(${LIBARCHIVE}/${OS}/libarchive/${DEBUG_DIR}/libarchive.a)
 ANDROID_dk_libRelease	(${LIBARCHIVE}/${OS}/libarchive/${RELEASE_DIR}/libarchive.a)
 APPLE_dk_libDebug		(${LIBARCHIVE}/${OS}/libarchive/${DEBUG_DIR}/libarchive.a)
@@ -45,8 +46,13 @@ LINUX_dk_libDebug		(${LIBARCHIVE}/${OS}/${DEBUG_DIR}/libarchive/libarchive.a)
 LINUX_dk_libRelease		(${LIBARCHIVE}/${OS}/${RELEASE_DIR}/libarchive/libarchive.a)
 RASPBERRY_dk_libDebug	(${LIBARCHIVE}/${OS}/${DEBUG_DIR}/libarchive/libarchive.a)
 RASPBERRY_dk_libRelease	(${LIBARCHIVE}/${OS}/${RELEASE_DIR}/libarchive/libarchive.a)
-WIN_dk_libDebug		(${LIBARCHIVE}/${OS}/libarchive/${DEBUG_DIR}/archive.lib)
-WIN_dk_libRelease	(${LIBARCHIVE}/${OS}/libarchive/${RELEASE_DIR}/archive.lib)
+if(MSVC)
+	WIN_dk_libDebug		(${LIBARCHIVE}/${OS}/libarchive/${DEBUG_DIR}/archive.lib)
+	WIN_dk_libRelease	(${LIBARCHIVE}/${OS}/libarchive/${RELEASE_DIR}/archive.lib)
+else()
+	WIN_dk_libDebug		(${LIBARCHIVE}/${OS}/${DEBUG_DIR}/libarchive/libarchive_static.a)
+	WIN_dk_libRelease	(${LIBARCHIVE}/${OS}/${DEBUG_DIR}/libarchive/libarchive_static.a)
+endif()
 
 
 ### GENERATE ###

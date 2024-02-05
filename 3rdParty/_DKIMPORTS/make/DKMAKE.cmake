@@ -18,7 +18,7 @@ if(MSYSTEM)
 		dk_msys2("pacman -S mingw-w64-i686-make --needed --noconfirm")				# MINGW32
 		dk_set(MAKE_PROGRAM ${MSYS2}/mingw32/bin/mingw32-make.exe)
 	elseif(MINGW64)
-		dk_msys2("pacman -S mingw-w64-x86_64-make --noconfirm")						# MINGW64
+		dk_msys2("pacman -S mingw-w64-x86_64-make --needed --noconfirm")			# MINGW64
 		dk_copy(${MSYS2}/mingw64/bin/mingw32-make.exe ${MSYS2}/mingw64/bin/make.exe)
 		dk_set(MAKE_PROGRAM ${MSYS2}/mingw64/bin/make.exe)
 	elseif(UCRT64)
