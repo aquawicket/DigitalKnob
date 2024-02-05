@@ -28,6 +28,7 @@ set "GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.30.1.win
 set "GIT_USER_EMAIL=aquawicket@hotmail.com"
 set "GIT_USER_NAME=aquawicket"
 
+set "COMPILER=MINGW64"
 
 ::--------------------------------------------------------
 :: Main
@@ -246,21 +247,23 @@ goto pickos
 goto build
 
 :generate_win64
-    ::call:validate_visual_studio
-    ::"CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_C_COMPILER=%VISUALSTUDIO_X64_CXX_COMPILER%"
-    ::"CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_COMPILER=%VISUALSTUDIO_X64_CXX_COMPILER%"
+	::if %COMPILER%==MINGW64 (
+		call:validate_msys2
+		TITLE DigitalKnob - MINGW64
+		set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_C_COMPILER=%C_COMPILER%"
+		set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_COMPILER=%CXX_COMPILER%"
+		
+		call set DKPATH=%%DKPATH:^\=^/%%
+		%MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE%' -G '%MSYS2_GENERATOR%' %CMAKE_ARGS% -S%DKCMAKE% -B%DKPATH%/DKApps/%APP%/%OS%/Debug"
+		set TARGET=%APP%_APP
+		goto build
+	::)
+    
+	::call:validate_visual_studio
+    ::set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_C_COMPILER=%VISUALSTUDIO_X64_CXX_COMPILER%"
+    ::setb"CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_COMPILER=%VISUALSTUDIO_X64_CXX_COMPILER%"
     ::"%CMAKE%" -G "%VISUALSTUDIO_GENERATOR%" -A x64 %CMAKE_ARGS% %DKCMAKE%
     ::set TARGET=%APP%_APP
-	
-    call:validate_msys2
-	call:validate_gcc
-	"CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_C_COMPILER=%C_COMPILER%"
-    "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_COMPILER=%CXX_COMPILER%"
-	::"%CMAKE%" -G "%MSYS2_GENERATOR%" %CMAKE_ARGS% %DKCMAKE%
-	pause
-    ::call set DKPATH=%%DKPATH:^\=^/%%
-	::TITLE DigitalKnob - MINGW64
-    ::%MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "clear && %CMAKE% -G %MSYS2_GENERATOR% %CMAKE_ARGS% %DKCMAKE%"
 goto build
 
 :generate_android32
@@ -312,12 +315,17 @@ if %TYPE%==All goto build_all
 call:assert "TYPE not set"
 
 :build_debug
-    if exist %APP_PATH%\%OS%\Debug\CMakeCache.txt (
-        "%CMAKE%" --build %APP_PATH%\%OS%\Debug --target %TARGET% --config Debug --verbose
-    )
-    if exist %APP_PATH%\%OS%\CMakeCache.txt (
-        "%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Debug --verbose
-    )
+	if %COMPILER%==MINGW64 (
+        %MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE%' --build %DKPATH%/DKApps/%APP%/%OS%/Debug --target %TARGET% --config Debug --verbose"
+		goto end_message
+	)
+	
+	if exist %APP_PATH%\%OS%\Debug\CMakeCache.txt (
+		"%CMAKE%" --build %APP_PATH%\%OS%\Debug --target %TARGET% --config Debug --verbose
+	)
+	if exist %APP_PATH%\%OS%\CMakeCache.txt (
+		"%CMAKE%" --build %APP_PATH%\%OS% --target %TARGET% --config Debug --verbose
+	)
 goto end_message
 
 :build_release
@@ -515,23 +523,25 @@ goto:eof
 
 :: validate_msys2()
 :validate_msys2
-    call:cmake_eval "include('%DKIMPORTS%/msys2/DKMAKE.cmake')" "MSYS2"
-    echo MSYS2 = %MSYS2%
+    call:cmake_eval "include('%DKIMPORTS%/msys2/DKMAKE.cmake')" "MSYS2;MSYS2_GENERATOR"
     call:check_error
 goto:eof
 
 :: validate_gcc()
 :validate_gcc
     call:cmake_eval "include('%DKIMPORTS%/gcc/DKMAKE.cmake')" "C_COMPILER;CXX_COMPILER"
-    echo C_COMPILER = %C_COMPILER%
-	echo CXX_COMPILER = %CXX_COMPILER%
+    call:check_error
+goto:eof
+
+:: validate_make()
+:validate_make
+    call:cmake_eval "include('%DKIMPORTS%/make/DKMAKE.cmake')" "MAKE_PROGRAM"
     call:check_error
 goto:eof
 
 :: validate_openjdk()
 :validate_openjdk
     call:cmake_eval "include('%DKIMPORTS%/openjdk/DKMAKE.cmake')" "OPENJDK"
-    echo OPENJDK = %OPENJDK%
     call:check_error
 goto:eof
 
@@ -692,7 +702,7 @@ goto:eof
         "%CMAKE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" "-DDKRETURN=%~2" -P %DKCMAKE%/dev/cmake_eval.cmake
         if not exist %DKCMAKE%/cmake_vars.cmd goto:eof
         call %EVAL_VARS%
-                del %EVAL_VARS%
+        ::del %EVAL_VARS%
 
     ::echo return code: %ERRORLEVEL%
 

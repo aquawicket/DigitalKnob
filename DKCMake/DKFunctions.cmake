@@ -1978,7 +1978,7 @@ dk_createOsMacros("dk_setPath")
 #
 function(dk_msys2)
 	DKDEBUGFUNC(${ARGV})
-	#DKASSERT(MSYS2)
+	DKASSERT(MSYS2)
 	
 	string(REPLACE ";" " " str "${ARGV}")
 	dk_info("\n${CLR}${magenta} $ ${str}\n")

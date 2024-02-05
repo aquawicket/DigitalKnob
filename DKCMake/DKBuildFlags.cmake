@@ -103,8 +103,9 @@ dk_set(SHARED				OFF)
 
 
 
-
-WIN_dk_depend(visualstudio)
+if(MSVC)
+	WIN_dk_depend(visualstudio)
+endif()
 
 # Windows i686 (x32) - MSVC
 if(MSVC)
@@ -154,48 +155,53 @@ endif()
 #endif()
 
 
-
-MAC_HOST_dk_depend(xcode)
+if(XCODE)
+	MAC_HOST_dk_depend(xcode)
+endif()
 
 # Moc i686 (x32) - XCODE
-MAC32_dk_set(DKCMAKE_FLAGS					-DBUILD_SHARED_LIBS=OFF -DBUILD_STATIC_LIBS=ON -DCMAKE_OSX_ARCHITECTURES=x86)
-MAC32_dk_set(DKCMAKE_C_COMPILER				${XCODE_CLANG})
-MAC32_dk_set(DKCMAKE_C_FLAGS				"-DMAC -DMAC32 -std=c17 -x objective-c")
-MAC32_dk_set(DKCMAKE_C_FLAGS_DEBUG			"-DDEBUG -D_DEBUG -g")
-MAC32_dk_set(DKCMAKE_C_FLAGS_RELEASE		"-O3 -DNDEBUG")
-MAC32_dk_set(DKCMAKE_CXX_COMPILER			${XCODE_CLANGXX})
-MAC32_dk_set(DKCMAKE_CXX_FLAGS				"-DMAC -DMAC32 -std=c++17 -x objective-c++")
-MAC32_dk_set(DKCMAKE_CXX_FLAGS_DEBUG		"-DDEBUG -D_DEBUG -g")
-MAC32_dk_set(DKCMAKE_CXX_FLAGS_RELEASE		"-O3 -DNDEBUG")
-MAC32_dk_set(DKCONFIGURE_FLAGS				--disable-shared --enable-static)
-#MAC32_dk_set(DKCONFIGURE_CC				${XCODE_CLANG})
-MAC32_dk_set(DKCONFIGURE_CFLAGS				"-arch i686 -DMAC -DMAC32 -std=c17") #-x objective-c") # https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
-MAC32_dk_set(DKCONFIGURE_CFLAGS_DEBUG		"-DDEBUG -D_DEBUG -g")
-MAC32_dk_set(DKCONFIGURE_CFLAGS_RELEASE		"-DNDEBUG -O3")
-#MAC32_dk_set(DKCONFIGURE_CXX				${XCODE_CLANGXX})
-MAC32_dk_set(DKCONFIGURE_CXXFLAGS			"-arch i686 -DMAC -DMAC32 -std=c++17 -x objective-c++") #-x objective-c++") # https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
-MAC32_dk_set(DKCONFIGURE_CXXFLAGS_DEBUG		"-DDEBUG -D_DEBUG -g")
-MAC32_dk_set(DKCONFIGURE_CXXFLAGS_RELEASE	"-DNDEBUG -O3")
+if(XCODE)
+	MAC32_dk_set(DKCMAKE_FLAGS					-DBUILD_SHARED_LIBS=OFF -DBUILD_STATIC_LIBS=ON -DCMAKE_OSX_ARCHITECTURES=x86)
+	MAC32_dk_set(DKCMAKE_C_COMPILER				${XCODE_CLANG})
+	MAC32_dk_set(DKCMAKE_C_FLAGS				"-DMAC -DMAC32 -std=c17 -x objective-c")
+	MAC32_dk_set(DKCMAKE_C_FLAGS_DEBUG			"-DDEBUG -D_DEBUG -g")
+	MAC32_dk_set(DKCMAKE_C_FLAGS_RELEASE		"-O3 -DNDEBUG")
+	MAC32_dk_set(DKCMAKE_CXX_COMPILER			${XCODE_CLANGXX})
+	MAC32_dk_set(DKCMAKE_CXX_FLAGS				"-DMAC -DMAC32 -std=c++17 -x objective-c++")
+	MAC32_dk_set(DKCMAKE_CXX_FLAGS_DEBUG		"-DDEBUG -D_DEBUG -g")
+	MAC32_dk_set(DKCMAKE_CXX_FLAGS_RELEASE		"-O3 -DNDEBUG")
+	MAC32_dk_set(DKCONFIGURE_FLAGS				--disable-shared --enable-static)
+	#MAC32_dk_set(DKCONFIGURE_CC				${XCODE_CLANG})
+	MAC32_dk_set(DKCONFIGURE_CFLAGS				"-arch i686 -DMAC -DMAC32 -std=c17") #-x objective-c") # https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
+	MAC32_dk_set(DKCONFIGURE_CFLAGS_DEBUG		"-DDEBUG -D_DEBUG -g")
+	MAC32_dk_set(DKCONFIGURE_CFLAGS_RELEASE		"-DNDEBUG -O3")
+	#MAC32_dk_set(DKCONFIGURE_CXX				${XCODE_CLANGXX})
+	MAC32_dk_set(DKCONFIGURE_CXXFLAGS			"-arch i686 -DMAC -DMAC32 -std=c++17 -x objective-c++") #-x objective-c++") # https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
+	MAC32_dk_set(DKCONFIGURE_CXXFLAGS_DEBUG		"-DDEBUG -D_DEBUG -g")
+	MAC32_dk_set(DKCONFIGURE_CXXFLAGS_RELEASE	"-DNDEBUG -O3")
+endif()
 
 # Moc x86_64 (x64)
-MAC64_dk_set(DKCMAKE_FLAGS					-DBUILD_SHARED_LIBS=OFF -DBUILD_STATIC_LIBS=ON -DCMAKE_OSX_ARCHITECTURES=x86_64)
-MAC64_dk_set(DKCMAKE_C_COMPILER				${XCODE_CLANG})
-MAC64_dk_set(DKCMAKE_C_FLAGS				"-DMAC -DMAC64 -std=c17 -x objective-c")
-MAC64_dk_set(DKCMAKE_C_FLAGS_DEBUG			"-DDEBUG -D_DEBUG -g")
-MAC64_dk_set(DKCMAKE_C_FLAGS_RELEASE		"-DNDEBUG -O3")
-MAC64_dk_set(DKCMAKE_CXX_COMPILER			${XCODE_CLANGXX})
-MAC64_dk_set(DKCMAKE_CXX_FLAGS				"-DMAC -DMAC64 -std=c++17 -x objective-c++")
-MAC64_dk_set(DKCMAKE_CXX_FLAGS_DEBUG		"-DDEBUG -D_DEBUG -g")
-MAC64_dk_set(DKCMAKE_CXX_FLAGS_RELEASE		"-DNDEBUG -O3")
-MAC64_dk_set(DKCONFIGURE_FLAGS				--disable-shared --enable-static)
-#MAC64_dk_set(DKCONFIGURE_CC				${XCODE_CLANG})
-MAC64_dk_set(DKCONFIGURE_CFLAGS				"-DMAC -DMAC64 -std=c17") #-x objective-c") # https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
-MAC64_dk_set(DKCONFIGURE_CFLAGS_DEBUG		"-DDEBUG -D_DEBUG -g")
-MAC64_dk_set(DKCONFIGURE_CFLAGS_RELEASE		"-DNDEBUG -O3")
-#MAC64_dk_set(DKCONFIGURE_CXX				${XCODE_CLANGXX})
-MAC64_dk_set(DKCONFIGURE_CXXFLAGS			"-DMAC -DMAC64 -std=c++17") #-x objective-c++") #https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
-MAC64_dk_set(DKCONFIGURE_CXXFLAGS_DEBUG		"-DDEBUG -D_DEBUG -g")
-MAC64_dk_set(DKCONFIGURE_CXXFLAGS_RELEASE	"-DNDEBUG -O3")
+if(XCODE)
+	MAC64_dk_set(DKCMAKE_FLAGS					-DBUILD_SHARED_LIBS=OFF -DBUILD_STATIC_LIBS=ON -DCMAKE_OSX_ARCHITECTURES=x86_64)
+	MAC64_dk_set(DKCMAKE_C_COMPILER				${XCODE_CLANG})
+	MAC64_dk_set(DKCMAKE_C_FLAGS				"-DMAC -DMAC64 -std=c17 -x objective-c")
+	MAC64_dk_set(DKCMAKE_C_FLAGS_DEBUG			"-DDEBUG -D_DEBUG -g")
+	MAC64_dk_set(DKCMAKE_C_FLAGS_RELEASE		"-DNDEBUG -O3")
+	MAC64_dk_set(DKCMAKE_CXX_COMPILER			${XCODE_CLANGXX})
+	MAC64_dk_set(DKCMAKE_CXX_FLAGS				"-DMAC -DMAC64 -std=c++17 -x objective-c++")
+	MAC64_dk_set(DKCMAKE_CXX_FLAGS_DEBUG		"-DDEBUG -D_DEBUG -g")
+	MAC64_dk_set(DKCMAKE_CXX_FLAGS_RELEASE		"-DNDEBUG -O3")
+	MAC64_dk_set(DKCONFIGURE_FLAGS				--disable-shared --enable-static)
+	#MAC64_dk_set(DKCONFIGURE_CC				${XCODE_CLANG})
+	MAC64_dk_set(DKCONFIGURE_CFLAGS				"-DMAC -DMAC64 -std=c17") #-x objective-c") # https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
+	MAC64_dk_set(DKCONFIGURE_CFLAGS_DEBUG		"-DDEBUG -D_DEBUG -g")
+	MAC64_dk_set(DKCONFIGURE_CFLAGS_RELEASE		"-DNDEBUG -O3")
+	#MAC64_dk_set(DKCONFIGURE_CXX				${XCODE_CLANGXX})
+	MAC64_dk_set(DKCONFIGURE_CXXFLAGS			"-DMAC -DMAC64 -std=c++17") #-x objective-c++") #https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
+	MAC64_dk_set(DKCONFIGURE_CXXFLAGS_DEBUG		"-DDEBUG -D_DEBUG -g")
+	MAC64_dk_set(DKCONFIGURE_CXXFLAGS_RELEASE	"-DNDEBUG -O3")
+endif()
 
 # iOS arm (x32)
 IOS32_dk_set(DKCMAKE_FLAGS					-DBUILD_SHARED_LIBS=OFF -DBUILD_STATIC_LIBS=ON -DCMAKE_TOOLCHAIN_FILE=${DKCMAKE}/ios.toolchain.cmake -DSDK_VERSION=${IOS_SDK} -DDEPLOYMENT_TARGET=${IOS_MIN_SDK} -DPLATFORM=OS -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_SYSROOT=iphoneos -DCMAKE_OSX_ARCHITECTURES=arm)
