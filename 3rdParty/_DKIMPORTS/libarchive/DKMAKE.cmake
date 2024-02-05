@@ -10,8 +10,7 @@
 
 ### DEPENDS ###
 dk_depend(bzip2)
-#dk_depend(cryptopp)
-dk_depend(libb2)
+#dk_depend(libb2)
 #dk_depend(libbcrypt)
 dk_depend(libexpat)
 dk_depend(libiconv)
