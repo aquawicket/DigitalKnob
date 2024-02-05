@@ -102,10 +102,11 @@ goto:eof
 	echo  10) Clear cmake cache and .tmp files
 	echo  11) Reload
 	echo  12) Exit
-	echo  13) Press Enter To Skip
+	echo. 
+	echo  Press Enter To Skip
 	
 	set choice=
-    set /p choice=Update DigitalKnob ?
+    set /p choice=Choose a selection:
 	
 	if '%choice%'=='1' call:git_update
     if '%choice%'=='2' call:git_commit
