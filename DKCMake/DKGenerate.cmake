@@ -251,11 +251,11 @@ foreach(plugin ${dkdepend_list})
 		endif() # NOT INCLUDE_DKPLUGINS
 	endif() # isDKPlugin
 	
-	foreach(lib ${LIBLIST})
-		if(NOT EXISTS ${lib})
-			dk_error("\n\n\n****************************\nFAILED to find: ${lib} \n***********************************")
-		endif()
-	endforeach()
+	#foreach(lib ${LIBLIST})
+	#	if(NOT EXISTS ${lib})
+	#		dk_error("\n\n\n****************************\nFAILED to find: ${lib} \n***********************************")
+	#	endif()
+	#endforeach()
 	
 endforeach()
 
