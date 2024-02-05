@@ -9,10 +9,10 @@ if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 ::--------------------------------------------------------
 :: convert line endings
 ::--------------------------------------------------------
-if '%~nx0'=='build.cmd' (
-    more /P build.cmd >build_crlf.cmd
-    del build.cmd & rename build_crlf.cmd build.cmd
-)
+::if '%~nx0'=='build.cmd' (
+::    more /P build.cmd >build_crlf.cmd
+::    del build.cmd & rename build_crlf.cmd build.cmd
+::)
 
 
 ::--------------------------------------------------------

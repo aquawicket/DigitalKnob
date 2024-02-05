@@ -200,20 +200,17 @@ endmacro()
 macro(DKASSERT expression)
 	#DKDEBUGFUNC(${ARGV})
 	
-	if(${expression})
-		return()
+	if(NOT ${expression})
+		message(STATUS "\n\n${BG_red}Assertion failed: at ${expression}, ${STACK_HEADER}${CLR}")
+		string(REPLACE " " "" var ${expression})
+		
+		if(${var})
+			message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${BG_red} { \"${var}\" : \"${${var}}\" } ${CLR}")
+		else()
+			message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${BG_red} ${expression} ${CLR}")
+		endif()
+		dk_exit() #FIXME:  is this needed?
 	endif()
-	
-	
-	message(STATUS "\n\n${BG_red}Assertion failed: at ${expression}, ${STACK_HEADER}${CLR}")
-	string(REPLACE " " "" var ${expression})
-	
-	if(${var})
-		message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${BG_red} { \"${var}\" : \"${${var}}\" } ${CLR}")
-	else()
-		message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${BG_red} ${expression} ${CLR}")
-	endif()
-	dk_exit() #FIXME:  is this needed?
 endmacro()
 
 
@@ -1846,31 +1843,29 @@ function(dk_executeProcess commands) #NOASSERT #NOECHO
 	if(${includes})
 		set(noassert true)
 	endif()
-	
 	dk_includes("${ARGN}" "NOECHO" includes)
 	if(${includes})
 		set(noecho true)
 	endif()
+	
+	if(NOT ${noecho})
+		dk_info("\n${CLR}${magenta} $ ${commands}\n")
+	endif()
+
+	#file(TO_NATIVE_PATH ${CURRENT_DIR} CURRENT_DIR)
 	
 	list(REMOVE_ITEM commands NOASSERT)
 	list(REMOVE_ITEM commands COMMAND)
 	list(REMOVE_ITEM commands "cmd /c ")
 	list(FIND commands "WORKING_DIRECTORY" index)
 	if(index EQUAL -1)
-		set(command ${commands} WORKING_DIRECTORY ${CURRENT_DIR}) # add WORKING_DIRECTORY if missing
+		set(commands ${commands} WORKING_DIRECTORY ${CURRENT_DIR}) # add WORKING_DIRECTORY if missing
 	endif()	
-	
-	if(NOT ${noecho})
-		if(MSVC)	#FIXME: detect cmd instead of msvc
-			dk_info("\n${CLR}${magenta} $ cmd /c ${commands}\n")
-		else()
-			dk_info("\n${CLR}${magenta} $ ${commands}\n")
-		endif()
-	endif()
 	
 	if(MSVC)	#FIXME: detect cmd instead of msvc
 		execute_process(COMMAND cmd /c ${commands} RESULT_VARIABLE result ERROR_VARIABLE error) # FIXME: Do we always need  cmd /c  here?
 	else()
+		#dk_info("execute_process -> ${commands}")
 		execute_process(COMMAND ${commands} RESULT_VARIABLE result ERROR_VARIABLE error)
 	endif()
 
@@ -1983,7 +1978,7 @@ dk_createOsMacros("dk_setPath")
 #
 function(dk_msys2)
 	DKDEBUGFUNC(${ARGV})
-	DKASSERT(MSYS2)
+	#DKASSERT(MSYS2)
 	
 	string(REPLACE ";" " " str "${ARGV}")
 	dk_info("\n${CLR}${magenta} $ ${str}\n")
@@ -2098,9 +2093,6 @@ function(dk_command)
 	DKDEBUGFUNC(${ARGV})
 	dk_info("\n${CLR}${magenta} $ ${ARGV}\n")
 	
-	if(NOT EXISTS ${CURRENT_DIR})
-		dk_set(CURRENT_DIR ${DIGITALKNOB})
-	endif()
 	dk_mergeFlags("${ARGV}" merged_args)
 
 	#if(EMSCRIPTEN)
