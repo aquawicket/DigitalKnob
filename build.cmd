@@ -277,16 +277,19 @@ goto:eof
     call:delete_temp_files
 	
 	if not '%CUSTOM_BUILD%'=='1' set "TARGET_PATH=%DKPATH%\DKApps\%APP%"
-    echo TARGET_PATH = %TARGET_PATH%
     call:make_directory "%TARGET_PATH%\%TARGET_OS%"
     cd "%TARGET_PATH%\%TARGET_OS%"
 	echo APP = %APP%
-	call set CMAKE_TARGET_PATH=%%TARGET_PATH:^\=^/%%
-	echo TARGET_PATH = %TARGET_PATH%
 	echo TARGET_OS = %TARGET_OS%
 	echo TYPE = %TYPE%
 	echo LEVEL = %LEVEL%
-
+	call set CMAKE_TARGET_PATH=%%TARGET_PATH:^\=^/%%
+	echo TARGET_PATH = %TARGET_PATH%
+	
+	
+	if '%CUSTOM_BUILD%'=='1' echo "We have a custom build request to work with"
+	
+	
     ::::::::: BUILD CMAKE_ARGS ARRAY :::::::::
     set DKLEVEL=RebuildAll
     set DKLINK=Static
