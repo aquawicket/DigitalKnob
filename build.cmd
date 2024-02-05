@@ -59,24 +59,22 @@ set COMPILER=MINGW64
 
     set TARGET_OS=
     :while_loop             
-        if '%UPDATE%'=='' call:pick_update
-        if '%APP%'=='' call:pick_app
-        if '%TARGET_OS%'=='' call:pick_os
-        if '%TYPE%'=='' call:pick_type
-                
-        if '%TYPE%'=='' goto:while_loop
+        if '%UPDATE%'==''     call:pick_update & goto:while_loop
+        if '%APP%'==''        call:pick_app    & goto:while_loop
+        if '%TARGET_OS%'==''  call:pick_os     & goto:while_loop
+        if '%TYPE%'==''       call:pick_type   & goto:while_loop
 
         call:generate
-        if %TARGET_OS%==win32 call:generate_win32
-        if %TARGET_OS%==win64 call:generate_win64
-        if %TARGET_OS%==android32 call:generate_android32
-        if %TARGET_OS%==android64 call:generate_android64
-        if %TARGET_OS%==emscripten call:generate_emscripten
+        if %TARGET_OS%==win32       call:generate_win32
+        if %TARGET_OS%==win64       call:generate_win64
+        if %TARGET_OS%==android32   call:generate_android32
+        if %TARGET_OS%==android64   call:generate_android64
+        if %TARGET_OS%==emscripten  call:generate_emscripten
                 
         call:build
-        if %TYPE%==Debug call:build_debug
-        if %TYPE%==Release call:build_release
-        if %TYPE%==All call:build_all
+        if %TYPE%==Debug    call:build_debug
+        if %TYPE%==Release  call:build_release
+        if %TYPE%==All      call:build_all
                 
         call:end_message
         
@@ -107,19 +105,19 @@ goto:eof
     set choice=
     set /p choice=Choose a selection:
         
-    if '%choice%'=='1' call:git_update
-    if '%choice%'=='2' call:git_commit
-    if '%choice%'=='3' call:push_assets
-    if '%choice%'=='4' call:pull_assets
-    if '%choice%'=='5' call:reset_apps
-    if '%choice%'=='6' call:reset_plugins
-    if '%choice%'=='7' call:reset_3rdparty
-    if '%choice%'=='8' call:reset_all
-    if '%choice%'=='9' call:clear_screen
+    if '%choice%'=='1'  call:git_update
+    if '%choice%'=='2'  call:git_commit
+    if '%choice%'=='3'  call:push_assets
+    if '%choice%'=='4'  call:pull_assets
+    if '%choice%'=='5'  call:reset_apps
+    if '%choice%'=='6'  call:reset_plugins
+    if '%choice%'=='7'  call:reset_3rdparty
+    if '%choice%'=='8'  call:reset_all
+    if '%choice%'=='9'  call:clear_screen
     if '%choice%'=='10' call:dk_deleteCache & call:delete_temp_files
     if '%choice%'=='11' call:reload
     if '%choice%'=='12' call:end
-        
+	
     set UPDATE=true
 goto:eof
 
@@ -144,19 +142,21 @@ goto:eof
     set /p choice=Please select an app to build:
     ::if not '%choice%'=='' set choice=%choice:~0,1%        ::What does this do?
         
-    if '%choice%'=='1' set APP=HelloWorld
-    if '%choice%'=='2' set APP=DKCore
-    if '%choice%'=='3' set APP=DKJavascript
-    if '%choice%'=='4' set APP=DKBuilder
-    if '%choice%'=='5' set APP=DKSDL
-    if '%choice%'=='6' set APP=DKSDLRml
-    if '%choice%'=='7' set APP=DKDomTest
-    if '%choice%'=='8' set APP=DKTestAll
-    if '%choice%'=='9' call:clear_screen
-    if '%choice%'=='10' call:reload
-    if '%choice%'=='11' set UPDATE=
-    if '%choice%'=='12' call:end
-    ::echo "%choice%" is not valid, try again
+    if '%choice%'=='1'  set "APP=HelloWorld"   & goto:eof
+    if '%choice%'=='2'  set "APP=DKCore"       & goto:eof
+    if '%choice%'=='3'  set "APP=DKJavascript" & goto:eof
+    if '%choice%'=='4'  set "APP=DKBuilder"    & goto:eof
+    if '%choice%'=='5'  set "APP=DKSDL"        & goto:eof
+    if '%choice%'=='6'  set "APP=DKSDLRml"     & goto:eof
+    if '%choice%'=='7'  set "APP=DKDomTest"    & goto:eof
+    if '%choice%'=='8'  set "APP=DKTestAll"    & goto:eof
+    if '%choice%'=='9'  call:clear_screen      & goto:eof
+    if '%choice%'=='10' call:reload            & goto:eof
+    if '%choice%'=='11' set "UPDATE="          & goto:eof
+    if '%choice%'=='12' call:end               & goto:eof
+	
+    echo %choice%: invalid selection, please try again
+	set APP=
         
     ::if not 'APP'=='' call:checkApp
 goto:eof
@@ -222,16 +222,17 @@ goto:eof
     set /p choice=Please select an OS to build for: 
     ::if not '%choice%'=='' set choice=%choice:~0,1%        ::What does this do?
         
-    if '%choice%'=='1' set TARGET_OS=win32
-    if '%choice%'=='2' set TARGET_OS=win64
-    if '%choice%'=='3' set TARGET_OS=android32
-    if '%choice%'=='4' set TARGET_OS=android64
-    if '%choice%'=='5' set TARGET_OS=emscripten
-    if '%choice%'=='6' call:clear_screen
-    if '%choice%'=='7' set APP=
-    if '%choice%'=='8' call:end
+    if '%choice%'=='1' set "TARGET_OS=win32"      & goto:eof
+    if '%choice%'=='2' set "TARGET_OS=win64"      & goto:eof
+    if '%choice%'=='3' set "TARGET_OS=android32"  & goto:eof
+    if '%choice%'=='4' set "TARGET_OS=android64"  & goto:eof
+    if '%choice%'=='5' set "TARGET_OS=emscripten" & goto:eof
+    if '%choice%'=='6' call:clear_screen          & goto:eof
+    if '%choice%'=='7' set "APP="                 & goto:eof
+    if '%choice%'=='8' call:end                   & goto:eof
     
-    ::echo "%choice%" is not valid, try again
+	echo %choice%: invalid selection, please try again
+	set TARGET_OS=
 goto:eof
 
 
@@ -251,14 +252,15 @@ goto:eof
     set /p choice=Please select a build type: 
     ::if not '%choice%'=='' set choice=%choice:~0,1%        ::What does this do?
         
-    if '%choice%'=='1' set TYPE=Debug
-    if '%choice%'=='2' set TYPE=Release
-    if '%choice%'=='3' set TYPE=All
-    if '%choice%'=='4' call:clear_screen
-    if '%choice%'=='5' set TARGET_OS=
-    if '%choice%'=='6' call:end
+    if '%choice%'=='1' set "TYPE=Debug"    & goto:eof
+    if '%choice%'=='2' set "TYPE=Release"  & goto:eof
+    if '%choice%'=='3' set "TYPE=All"      & goto:eof
+    if '%choice%'=='4' call:clear_screen   & goto:eof
+    if '%choice%'=='5' set "TARGET_OS="    & goto:eof
+    if '%choice%'=='6' call:end            & goto:eof
         
-    ::echo "%choice%" is not valid, try again
+    echo %choice%: invalid selection, please try again
+	set TYPE=
 goto:eof
 
 :generate
@@ -283,14 +285,14 @@ goto:eof
     set DKLINK=Static
 
     set CMAKE_ARGS=
-    if %TYPE%==Debug                set "CMAKE_ARGS=-DDEBUG=ON -DRELEASE=OFF"
-    if %TYPE%==Release              set "CMAKE_ARGS=-DDEBUG=OFF -DRELEASE=ON"
-    if %TYPE%==All                  set "CMAKE_ARGS=-DDEBUG=ON -DRELEASE=ON"
-    if %DKLEVEL%==Build             set "CMAKE_ARGS=%CMAKE_ARGS% -DBUILD=ON"
-    if %DKLEVEL%==Rebuild           set "CMAKE_ARGS=%CMAKE_ARGS% -DREBUILD=ON"
-    if %DKLEVEL%==RebuildAll        set "CMAKE_ARGS=%CMAKE_ARGS% -DREBUILDALL=ON"
-    if %DKLINK%==Static             set "CMAKE_ARGS=%CMAKE_ARGS% -DSTATIC=ON"
-    if %DKLINK%==Shared             set "CMAKE_ARGS=%CMAKE_ARGS% -DSHARED=ON"
+    if %TYPE%==Debug            set "CMAKE_ARGS=-DDEBUG=ON -DRELEASE=OFF"
+    if %TYPE%==Release          set "CMAKE_ARGS=-DDEBUG=OFF -DRELEASE=ON"
+    if %TYPE%==All              set "CMAKE_ARGS=-DDEBUG=ON -DRELEASE=ON"
+    if %DKLEVEL%==Build         set "CMAKE_ARGS=%CMAKE_ARGS% -DBUILD=ON"
+    if %DKLEVEL%==Rebuild       set "CMAKE_ARGS=%CMAKE_ARGS% -DREBUILD=ON"
+    if %DKLEVEL%==RebuildAll    set "CMAKE_ARGS=%CMAKE_ARGS% -DREBUILDALL=ON"
+    if %DKLINK%==Static         set "CMAKE_ARGS=%CMAKE_ARGS% -DSTATIC=ON"
+    if %DKLINK%==Shared         set "CMAKE_ARGS=%CMAKE_ARGS% -DSHARED=ON"
         
     :::::::::::: CMake Options :::::::::::::
     set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_VERBOSE_MAKEFILE=1"
