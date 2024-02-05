@@ -1,6 +1,5 @@
 # https://packages.msys2.org/base/make
 
-message(STATUS "make: MSYSTEM = ${MSYSTEM}")
 if(MSYSTEM)
 	dk_depend(msys2)
 	

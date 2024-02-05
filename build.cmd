@@ -248,17 +248,14 @@ goto build
 
 :generate_win64
 	::if %COMPILER%==MINGW64 (
-		
 		echo generate_win64
 		call:cmake_eval "include('%DKIMPORTS%/cmake/DKMAKE.cmake')" "CMAKE_EXE" "-DMSYSTEM=MINGW64"
 		echo CMAKE_EXE = %CMAKE_EXE%
-		PAUSE
 		
 		::call:validate_msys2
 		call:cmake_eval "include('%DKIMPORTS%/msys2/DKMAKE.cmake')" "MSYS2;MSYS2_GENERATOR" "-DMSYSTEM=MINGW64"
 		echo MSYS2 = %MSYS2%
 		echo MSYS2_GENERATOR = %MSYS2_GENERATOR%
-		
 		
 		::call:validate_gcc
 		call:cmake_eval "include('%DKIMPORTS%/gcc/DKMAKE.cmake')" "C_COMPILER;CXX_COMPILER" "-DMSYSTEM=MINGW64"
@@ -266,7 +263,6 @@ goto build
 		echo CXX_COMPILER = %CXX_COMPILER%
 		set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_C_COMPILER=%C_COMPILER%"
 		set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_COMPILER=%CXX_COMPILER%"
-		PAUSE
 		
 		::call:validate_make
 		call:cmake_eval "include('%DKIMPORTS%/make/DKMAKE.cmake')" "MAKE_PROGRAM" "-DMSYSTEM=MINGW64"
@@ -335,7 +331,7 @@ call:assert "TYPE not set"
 
 :build_debug
 	if %COMPILER%==MINGW64 (
-        %MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE%' --build %DKPATH%/DKApps/%APP%/%OS%/Debug --target %TARGET% --config Debug --verbose"
+        %MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %DKPATH%/DKApps/%APP%/%OS%/Debug --target %TARGET% --config Debug --verbose"
 		goto end_message
 	)
 	

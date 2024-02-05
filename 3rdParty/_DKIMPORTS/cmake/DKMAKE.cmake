@@ -4,7 +4,6 @@
 # https://developer.android.com/studio/projects/configure-cmake
 # https://discourse.cmake.org/t/cmake-silent-install-with-options-help/1475/2
 
-message(STATUS "cmake: MSYSTEM = ${MSYSTEM}")
 if(MSYSTEM)
 	dk_depend(msys2)
 	

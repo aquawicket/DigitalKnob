@@ -22,7 +22,6 @@ endif()
 
 dk_addFirewallAllow("pacman" "${MSYS2}/usr/bin/pacman.exe")
 
-message(STATUS "msys: MSYSTEM = ${MSYSTEM}")
 if(MSYSTEM)
 	dk_remove(${MSYS2}/var/lib/pacman/db.lck NOERROR)
 	

@@ -41,7 +41,6 @@ function(cmake_eval eval_code)
 	#message(STATUS "eval_code = ${eval_code}")
 	if(COMMAND cmake_language)
 		#message(STATUS "eval_code = ${eval_code}")
-		message(STATUS "cmake_evel.cmake: MSYSTEM = ${MSYSTEM}")
 		cmake_language(EVAL CODE "${eval_code}")
 	else()
 		# one file per execution of cmake (if this file were in memory it would probably be faster...)
@@ -70,14 +69,14 @@ cmake_eval("${DKCOMMAND}")
 if(DKRETURN)
 	#message(STATUS "DKRETURN = ${DKRETURN}")
 	
-	## windows cmd
+	## create windows cmd to set variables
 	dk_remove(${DKCMAKE}/cmake_vars.cmd NOERROR)
 	foreach(item ${DKRETURN})
 		set(line "set \"${item}=${${item}}\" \n")
 		file(APPEND ${DKCMAKE}/cmake_vars.cmd "${line}\n")
 	endforeach()
 	
-	## unix shell
+	## create unix shell to set variables 
 	dk_remove(${DKCMAKE}/cmake_vars.sh NOERROR)
 	file(APPEND ${DKCMAKE}/cmake_vars.sh "#!/bin/bash \n")
 	foreach(var ${DKRETURN})

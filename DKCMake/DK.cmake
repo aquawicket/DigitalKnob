@@ -53,7 +53,6 @@ endif()
 if(MSYSTEM)
 	set(${MSYSTEM} TRUE			CACHE INTERNAL "")
 endif()
-message(STATUS "DK.cmake: MSYSTEM = ${MSYSTEM}")
 
 ##### DEFINED ProgramFiles VARIABLES ######
 if(DEFINED "ENV{HOMEDRIVE}")

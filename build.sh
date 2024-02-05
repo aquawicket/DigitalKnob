@@ -337,7 +337,7 @@ function validate_gcc() {
 }
 		
 		
-###### cmake_eval ######
+### cmake_eval <cmake_commands;.;.;> <return_variables;.;.;.> <-DVARS;.;.;>
 function cmake_eval() {
 	if [ -z "$1" ]; then
 		echo "ERROR: cmake_eval() parameter 1 is invalid"
@@ -351,7 +351,7 @@ function cmake_eval() {
 	echo "DKCOMMAND = $DKCOMMAND"
 	
 	if [[ -n "$variables" ]]; then
-		call $CMAKE "-DDKCMAKE=$DKCMAKE" "-DDKCOMMAND=$DKCOMMAND" "-DDKRETURN=$2" -P $DKCMAKE/dev/cmake_eval.cmake
+		call $CMAKE "-DDKCMAKE=$DKCMAKE" "-DDKCOMMAND=$DKCOMMAND" "-DDKRETURN=$2" $3 -P $DKCMAKE/dev/cmake_eval.cmake
 		if file_exists $DKCMAKE/cmake_vars.sh; then
 	    	echo "executing cmake_vars.sh"
 			source $DKCMAKE/cmake_vars.sh
