@@ -232,14 +232,13 @@ goto pickos
     if %OS%==emscripten goto generate_emscripten
 
 :generate_win32
-    call:validate_visual_studio
-    "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_C_COMPILER=%VISUALSTUDIO_X86_CXX_COMPILER%"
-    "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_COMPILER=%VISUALSTUDIO_X86_CXX_COMPILER%"
+    ::call:validate_visual_studio
+    ::"CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_C_COMPILER=%VISUALSTUDIO_X86_CXX_COMPILER%"
+    ::"CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_COMPILER=%VISUALSTUDIO_X86_CXX_COMPILER%"
+    ::"%CMAKE%" -G "%VISUALSTUDIO_GENERATOR%" -A Win32 %CMAKE_ARGS% "%DKCMAKE%"
+    ::set TARGET=%APP%_APP
 
-    "%CMAKE%" -G "%VISUALSTUDIO_GENERATOR%" -A Win32 %CMAKE_ARGS% "%DKCMAKE%"
-    set TARGET=%APP%_APP
-
-    ::call:validate_msys2
+    call:validate_msys2
     ::TITLE DigitalKnob - MINGW32
     ::call set DKPATH=%%DKPATH:^\=^/%%
     ::%MSYS2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -lc "clear && %DKPATH%/build.sh"
@@ -247,12 +246,13 @@ goto pickos
 goto build
 
 :generate_win64
-    call:validate_visual_studio
-    "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_C_COMPILER=%VISUALSTUDIO_X64_CXX_COMPILER%"
-    "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_COMPILER=%VISUALSTUDIO_X64_CXX_COMPILER%"
-                
-    "%CMAKE%" -G "%VISUALSTUDIO_GENERATOR%" -A x64 %CMAKE_ARGS% %DKCMAKE%
-     set TARGET=%APP%_APP
+    ::call:validate_visual_studio
+    ::"CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_C_COMPILER=%VISUALSTUDIO_X64_CXX_COMPILER%"
+    ::"CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_COMPILER=%VISUALSTUDIO_X64_CXX_COMPILER%"
+    ::"%CMAKE%" -G "%VISUALSTUDIO_GENERATOR%" -A x64 %CMAKE_ARGS% %DKCMAKE%
+    ::set TARGET=%APP%_APP
+        
+    call:validate_msys2
 goto build
 
 :generate_android32
@@ -579,17 +579,18 @@ goto:eof
 
 :: dk_deleteCache()
 :dk_deleteCache
-    call:cmake_eval "dk_deleteCache"
-    ::echo Deleteing CMake cache . . .
-    ::cd "%DIGITALKNOB%"
-    ::for /r %%i in (CMakeCache.*) do del "%%i"
-    ::for /d /r %%i in (*CMakeFiles*) do rd /s /q "%%i"
+    ::call:cmake_eval "dk_deleteCache()"
+    echo Deleteing CMake cache . . .
+    cd "%DIGITALKNOB%"
+    for /r %%i in (CMakeCache.*) do del "%%i"
+    for /d /r %%i in (*CMakeFiles*) do rd /s /q "%%i"
     call:check_error
 goto:eof
 
 
 :: delete_temp_files()
 :delete_temp_files
+        ::call:cmake_eval "dk_deleteTempFiles()"
     echo Deleteing .tmp files . . .
     cd "%DIGITALKNOB%"
     for /r %%i in (*.tmp) do del "%%i"
@@ -661,8 +662,9 @@ goto:eof
     call set DKCOMMAND=%%DKCOMMAND:^\=^/%%
     echo DKCOMMAND = %DKCOMMAND%
 
+    set "EVAL_VARS=%DKCMAKE%\cmake_vars.cmd"
     call set DKCMAKE=%%DKCMAKE:^\=^/%%
-
+        
     ::echo "%CMAKE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE%/dev/cmake_eval.cmake" --log-level=TRACE >cmake_eval.out 2>cmake_eval.err
 
     if [%2] == [] goto no_return_values
@@ -675,8 +677,8 @@ goto:eof
     :with_return_values
         "%CMAKE%" "-DDKCMAKE=%DKCMAKE%" "-DDKCOMMAND=%DKCOMMAND%" "-DDKRETURN=%~2" -P %DKCMAKE%/dev/cmake_eval.cmake
         if not exist %DKCMAKE%/cmake_vars.cmd goto:eof
-        call C:\Users\Administrator\digitalknob\Development\DKCMake\cmake_vars.cmd
-        del C:\Users\Administrator\digitalknob\Development\DKCMake\cmake_vars.cmd
+        call %EVAL_VARS%
+                del %EVAL_VARS%
 
     ::echo return code: %ERRORLEVEL%
 

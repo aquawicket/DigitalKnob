@@ -23,15 +23,11 @@
 # SOFTWARE.
 include_guard()
 
-
 # Extra Documentation
 # https://asitdhal.medium.com/cmake-functions-and-macros-22293041519f
 # https://foonathan.net/2016/03/cmake-install/ 
 
-#if(EXISTS $ENV{DKCMAKE})
-#	set(ENV{DKCMAKE} "$ENV{DKCMAKE}/")
-#endif()
-#include("$ENV{DKCMAKE}DK.cmake")
+
 include("${DKCMAKE}/DK.cmake")
 
 
@@ -855,8 +851,8 @@ endmacro()
 #
 function(dk_deleteCache)
 	DKDEBUGFUNC(${ARGV})
+	DKASSERT(DIGITALKNOB)
 	dk_info("Deleteing CMake cache . . .")
-	dk_file_getDigitalknobPath(DIGITALKNOB)
 	if(WIN_HOST)
 		dk_executeProcess(for /r %%i in (CMakeCache.*) do del "%%i" WORKING_DIRECTORY ${DIGITALKNOB})
 		dk_executeProcess(for /d /r %%i in (*CMakeFiles*) do rd /s /q "%%i" WORKING_DIRECTORY ${DIGITALKNOB})
@@ -874,8 +870,8 @@ endfunction()
 #
 function(dk_deleteTempFiles)
 	DKDEBUGFUNC(${ARGV})
+	DKASSERT(DIGITALKNOB)
 	dk_info("Deleteing Temporary files . . .")
-	dk_file_getDigitalknobPath(DIGITALKNOB)
 	if(WIN_HOST)
 		dk_executeProcess(for /r %%i in (*.TMP) do del "%%i" WORKING_DIRECTORY ${DIGITALKNOB})
 		dk_executeProcess(for /r %%i in (*.tmp) do del "%%i" WORKING_DIRECTORY ${DIGITALKNOB})
@@ -4813,7 +4809,8 @@ endfunction()
 #
 function(dk_addFirewallAllow name executable)
 	DKDEBUGFUNC(${ARGV})
-
+	return()	# this function is disabled for now
+	
 	if(NOT WIN_HOST)
 		return()
 	endif()

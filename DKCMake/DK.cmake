@@ -23,6 +23,7 @@ set(PRINT_LINE_NUMBERS 			1		CACHE INTERNAL "")	# print function call file line 
 set(USE_MSYS2		 			1		CACHE INTERNAL "")	# use msys2 instead of msys
 set(WAIT_ON_ERRORS				1		CACHE INTERNAL "")	# pause cmake build script on errors
 set(WAIT_ON_WARNINGS			0		CACHE INTERNAL "")	# pause cmake build script on warnings
+set(USE_COLOR					0		CACHE INTERNAL "")	# colored text output
 
 if(${DKOFFLINE})
 	dk_warn("!!!!!!!!!! WORKING IN DKOFFLINE MODE !!!!!!!!!")
