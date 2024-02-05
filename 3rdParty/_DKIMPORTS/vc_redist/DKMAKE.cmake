@@ -20,7 +20,7 @@ dk_set(VC_REDIST_PLATFORM x86)
 dk_set(VC_REDIST_NAME vc_redist.${VC_REDIST_PLATFORM})
 dk_set(VC_REDIST_DL https://aka.ms/vs/16/release/${VC_REDIST_NAME}.exe)
 #dk_set(VC_REDIST "${ProgramFiles_x86}/Microsoft Visual Studio/2019/Community/VC/Redist/MSVC/${VC_REDIST_VERSION}")
-dk_set(VC_REDIST "C:/Windows/System32/vcruntime140.dll")
+dk_set(VC_REDIST "C:/Windows/SysWOW64/vcruntime140.dll")
 
 ### INSTALL ###
 IF(NOT EXISTS "${VC_REDIST}")

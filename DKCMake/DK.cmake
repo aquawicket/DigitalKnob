@@ -23,6 +23,8 @@ set(PRINT_LINE_NUMBERS 			1		CACHE INTERNAL "")	# print function call file line 
 set(WAIT_ON_ERRORS				1		CACHE INTERNAL "")	# pause cmake build script on errors
 set(WAIT_ON_WARNINGS			0		CACHE INTERNAL "")	# pause cmake build script on warnings
 set(USE_COLOR					0		CACHE INTERNAL "")	# colored text output
+set(INCLUDE_DKPLUGINS			1		CACHE INTERNAL "")  # Include the DKPlugins to the main app project
+
 
 if(${DKOFFLINE})
 	dk_warn("!!!!!!!!!! WORKING IN DKOFFLINE MODE !!!!!!!!!")
@@ -125,3 +127,8 @@ dk_depend(cmake)
 dk_depend(git)
 dk_depend(msys2)
 dk_depend(imagemagick)
+
+## TODO - INCLUDE_DKPLUGINS not working on MSYS
+if(MSYS)
+	set(INCLUDE_DKPLUGINS 0)
+endif()

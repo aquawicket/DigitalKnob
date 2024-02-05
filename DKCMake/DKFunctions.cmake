@@ -2988,7 +2988,7 @@ function(dk_depend plugin)
 	if(CMAKE_SCRIPT_MODE_FILE OR NOT DKAPP)
 		dk_getPathToPlugin(${plugin} plugin_path)
 		include(${plugin_path}/DKMAKE.cmake)
-		return()
+		#return()
 	endif()
 	
 	

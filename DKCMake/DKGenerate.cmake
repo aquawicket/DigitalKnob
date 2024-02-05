@@ -145,11 +145,9 @@ foreach(plugin ${dkdepend_list})
 			file(INSTALL DIRECTORY ${plugin_path}/ DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${plugin} FILES_MATCHING PATTERN "*.h")
 			dk_deleteEmptyDirectories(${CMAKE_INSTALL_PREFIX}/include/${plugin})
 		endif()
-	
-		set(PREBUILD ON)
 		
 		#Add the DKPlugin to the app project
-		if(NOT PREBUILD)
+		if(INCLUDE_DKPLUGINS)
 			if(EXISTS "${plugin_path}/CMakeLists.txt")
 				if(MULTI_CONFIG)
 					add_subdirectory(${plugin_path} ${plugin_path}/${OS})
@@ -165,15 +163,14 @@ foreach(plugin ${dkdepend_list})
 		
 		## Prebuild DKPlugins switch
 		## Only prebuild if the library binaries are missing
-		foreach(lib ${LIBLIST})
-			if(NOT EXISTS ${lib})
+		#foreach(lib ${LIBLIST})
+		#	if(NOT EXISTS ${lib})
 				#dk_set(PREBUILD ON)
-				dk_set(QUEUE_BUILD ON)
-			endif()
-		endforeach()
+		#		dk_set(QUEUE_BUILD ON)
+		#	endif()
+		#endforeach()
 		
-		
-		if(PREBUILD)
+		if(NOT INCLUDE_DKPLUGINS)
 			dk_info("******* Prebuilding ${plugin} *******")
 			dk_setPath(${plugin_path}/${BUILD_DIR})
 			
@@ -233,7 +230,7 @@ foreach(plugin ${dkdepend_list})
 				endif()
 			endif()
 			
-			set(PREBUILD OFF)
+			#set(PREBUILD OFF)
 
 			## double check that the missing libs were built
 			foreach(lib ${LIBLIST})
@@ -251,8 +248,8 @@ foreach(plugin ${dkdepend_list})
 				endif()
 			endforeach()
 			
-		endif()
-	endif()
+		endif() # NOT INCLUDE_DKPLUGINS
+	endif() # isDKPlugin
 endforeach()
 
 if(INSTALL_DKLIBS)
@@ -374,11 +371,13 @@ if(WIN_32)
 	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
 	
 	########################## Add Dependencies ########################
-	foreach(plugin ${dkdepend_list})
-		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
-			add_dependencies(${APP_NAME} ${plugin})
-		endif()	
-	endforeach()
+	if(INCLUDE_DKPLUGINS)
+		foreach(plugin ${dkdepend_list})
+			if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
+				add_dependencies(${APP_NAME} ${plugin})
+			endif()	
+		endforeach()
+	endif()
 
 	##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
 	
@@ -501,11 +500,13 @@ if(WIN_64)
 	endif()
 
 	########################## Add Dependencies ########################
-	foreach(plugin ${dkdepend_list})
-		if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
-			add_dependencies(${APP_NAME} ${plugin})
-		endif()	
-	endforeach()
+	if(INCLUDE_DKPLUGINS)
+		foreach(plugin ${dkdepend_list})
+			if(EXISTS "${DKPLUGINS}/${plugin}/CMakeLists.txt")
+				add_dependencies(${APP_NAME} ${plugin})
+			endif()	
+		endforeach()
+	endif()
 		
 	############# Link Libraries, Set Startup Project #################
 	if(MULTI_CONFIG)
