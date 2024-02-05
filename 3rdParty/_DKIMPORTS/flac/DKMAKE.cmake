@@ -14,7 +14,8 @@ dk_import(https://ftp.osuosl.org/pub/xiph/releases/flac/flac-1.3.2.tar.xz)
 
 
 ### LINK ###
-dk_include		(${FLAC}																FLAC_INCLUDE_DIR)
+dk_include		(${FLAC})
+dk_include		(${FLAC}/include														FLAC_INCLUDE_DIR)
 dk_libDebug		(${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a			FLAC_LIBRARY_DEBUG)
 dk_libRelease	(${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a		FLAC_LIBRARY_RELEASE)
 
