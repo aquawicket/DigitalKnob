@@ -15,7 +15,7 @@ if(RMLUI_BUILD_SAMPLES)
 	dk_depend(glew)
 	dk_depend(sdl)
 	dk_depend(sdl_image)
-	#dk_depend(sfml)
+	dk_depend(sfml)
 endif()
 
 
@@ -43,10 +43,13 @@ dk_addTarget	(rmlui RmlCore)
 dk_addTarget	(rmlui RmlDebugger)
 
 if(rmlui_RmlCore)
-	WIN_dk_libDebug		(${RMLUI}/${OS}/${DEBUG_DIR}/RmlCore.lib)
-	WIN_dk_libRelease	(${RMLUI}/${OS}/${RELEASE_DIR}/RmlCore.lib)
-	dk_libDebug			(${RMLUI}/${OS}/${DEBUG_DIR}/libRmlCore.a)
-	dk_libRelease		(${RMLUI}/${OS}/${RELEASE_DIR}/libRmlCore.a)
+	if(MSVC)
+		WIN_dk_libDebug		(${RMLUI}/${OS}/${DEBUG_DIR}/RmlCore.lib)
+		WIN_dk_libRelease	(${RMLUI}/${OS}/${RELEASE_DIR}/RmlCore.lib)
+	else()
+		dk_libDebug			(${RMLUI}/${OS}/${DEBUG_DIR}/libRmlCore.a)
+		dk_libRelease		(${RMLUI}/${OS}/${RELEASE_DIR}/libRmlCore.a)
+	endif()
 endif()
 
 if(rmlui_RmlDebugger)
@@ -56,7 +59,7 @@ if(rmlui_RmlDebugger)
 	dk_libDebug			(${RMLUI}/${OS}/${DEBUG_DIR}/libRmlDebugger.a)
 	dk_libRelease		(${RMLUI}/${OS}/${RELEASE_DIR}/libRmlDebugger.a)
 endif()
-
+C:\Users\aquawicket\digitalknob\Development\3rdParty\rmlui-master\win64\Debug\libRmlCore.a
 
 ### GENERATE ###
 if(MSVC)
