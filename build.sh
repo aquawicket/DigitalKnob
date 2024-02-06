@@ -425,22 +425,28 @@ function enter_manually() {
 	echo "Please type the name of the library, tool or app to build. Then press enter."
 	read input
 	
-	#APP=_$input_
+	APP="_${input}_"
+	
 	#Search digitalknob for the matching entry containing a DKMAKE.cmake file  
-	#cd $DIGITALKNOB
-	#for /f "delims=" %%a in ('dir /b /s /a-d DKMAKE.cmake ^| findstr /E /R "%input%\\DKMAKE.cmake" ') do set "path=%%a"
-	#set "TARGET_PATH=%path:~0,-13%"
+	if test -f $DKPATH/3rdParty/_DKIMPORTS/$input/DKMAKE.cmake; then
+		TARGET_PATH=$DKPATH/3rdParty/_DKIMPORTS/$input
+	fi
+	if test -f $DKPATH/DKPlugins/$input/DKMAKE.cmake; then
+		TARGET_PATH=$DKPATH/DKPlugins/$input
+	fi
+	if test -f $DKPATH/DKApps/$input/DKMAKE.cmake; then
+		TARGET_PATH=$DKPATH/DKApps/$input
+		return 0
+	fi
 	
-	#get_parent_folder $TARGET_PATH parent
-	#echo parent = $parent
+	if [ ! -d $DKPATH/DKApps/$APP ]; then
+		mkdir -p $DKPATH/DKApps/$APP;
+	fi
+	echo "dk_depend($input)" > $DKPATH/DKApps/$APP/DKMAKE.cmake
 	
-	#if $parent==DKApps goto:eof
-	#make_directory  $DKPATH/DKApps/$APP
-	#echo dk_depend($input)> $DKPATH/DKApps/$APP/DKMAKE.cmake
-	
-	#echo.
-	#echo $input
-	#echo $TARGET_PATH
+	echo ""
+	echo "$input" 
+	echo "TARGET_PATH = $TARGET_PATH"
 }
 
 
@@ -500,7 +506,7 @@ echo "DK3RDPARTY = $DK3RDPARTY"
 echo "DKIMPORTS = $DKIMPORTS"
 
 
-if [ $SCRIPTPATH == $DKPATH ];then
+if [ $SCRIPTPATH == $DKPATH ]; then
 	echo "SCRIPTPATH and \$DKPATH are the same"
 else
 	warning "$SCRIPTNAME is not running from the DKPATH directory. Any changes will not be saved by git!"
@@ -529,6 +535,10 @@ fi
 	select opt in "${options[@]}"
 	do
 		case $opt in
+					'')
+				echo "$opt"
+				break
+				;;
 			"Git Update")
 				echo "$opt"
 				git_update
@@ -610,7 +620,8 @@ while :
 		"DKSDL" 
 		"DKSDLRml" 
 		"DKDomTest" 
-		"DKTestAll" 
+		"DKTestAll"
+		"Enter_manually"
 		"Clear Screen"
 		"Go Back"
 		"Reload"
@@ -658,7 +669,7 @@ while :
 				APP="DKTestAll"
 				break
 				;;
-			"enter_manually")
+			"Enter_manually")
 				echo "$opt"
 				enter_manually
 				break
