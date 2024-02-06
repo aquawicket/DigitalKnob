@@ -483,6 +483,10 @@ goto:eof
 	if %parent%==DKApps goto:eof
 	call:make_directory  %DKPATH%\DKApps\%APP%
 	echo dk_depend(%input%)> %DKPATH%\DKApps\%APP%\DKMAKE.cmake
+	
+	echo.
+	echo %input%
+	echo %TARGET_PATH%
 goto:eof
 
 :: get_parent_folder
