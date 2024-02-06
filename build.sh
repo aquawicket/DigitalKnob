@@ -364,18 +364,84 @@ function cmake_eval() {
 	#echo return code: $?
 }
 
+function push_assets() {
+	echo "not implemented,  TODO"
+}
 
-function reset_all(){
-	cd $DKPATH
+
+function pull_assets() {
+	echo "not implemented,  TODO"
+}
+
+
+function reset_apps() {
+	cd $DKPATH/DKApps
+	$GIT clean -f -d
+}
+
+function reset_3rdpaty() {
+	cd $DKPATH/3rdParty
 	$GIT clean -f -d
 }
 
 
+function reset_plugins() {
+	cd $DKPATH/DKPlugins
+	$GIT clean -f -d
+}
 
 
+function reset_all() {
+	cd $DKPATH
+	$GIT clean -f -d
+}
 
+function git_update() {
 
+	if [[ ! -d "$DKPATH/.git" ]]; then
+		call git clone https://github.com/aquawicket/DigitalKnob.git $DKPATH
+	fi
+	cd $DKPATH
+	git pull --all
+	git checkout -- .
+	git checkout $DKBRANCH
+	if [[ "$?" == "0" ]]; then
+		echo "$DKBRANCH branch selected"
+	else
+	echo "Remote has no $DKBRANCH branch. Creating..."
+		git checkout -b $DKBRANCH main
+		git push --set-upstream origin $DKBRANCH
+	fi
+	chmod +x $DKPATH/build.sh
+	#call reload
+}
 
+function git_commit() {
+	cd $DKPATH
+	git commit -a -m "git commit"
+}
+
+function enter_manually() {
+	echo "Please type the name of the library, tool or app to build. Then press enter."
+	read input
+	
+	#APP=_$input_
+	#Search digitalknob for the matching entry containing a DKMAKE.cmake file  
+	#cd $DIGITALKNOB
+	#for /f "delims=" %%a in ('dir /b /s /a-d DKMAKE.cmake ^| findstr /E /R "%input%\\DKMAKE.cmake" ') do set "path=%%a"
+	#set "TARGET_PATH=%path:~0,-13%"
+	
+	#get_parent_folder $TARGET_PATH parent
+	#echo parent = $parent
+	
+	#if $parent==DKApps goto:eof
+	#make_directory  $DKPATH/DKApps/$APP
+	#echo dk_depend($input)> $DKPATH/DKApps/$APP/DKMAKE.cmake
+	
+	#echo.
+	#echo $input
+	#echo $TARGET_PATH
+}
 
 
 
@@ -465,14 +531,17 @@ fi
 		case $opt in
 			"Git Update")
 				echo "$opt"
+				git_update
 				break
 				;;
 			"Git Commit")
 				echo "$opt"
+				git_commit
 				break
 				;;
 			"Push assets")
 				echo "$opt"
+				push_assets
 				break
 				;;
 			"Pull assets")
@@ -481,14 +550,17 @@ fi
 				;;
 			"Reset Apps")
 				echo "$opt"
+				reset_apps
 				break
 				;;
 			"Reset Plugins")
 				echo "$opt"
+				reset_plugins
 				break
 				;;
 			"Reset 3rdParty")
 				echo "$opt"
+				reset_3rdpaty
 				break
 				;;
 			"Reset All")
@@ -531,8 +603,6 @@ while :
 	echo " "
 	PS3='Please update and select an app to build: '
 	options=(
-		"Git Update" 
-		"Git Commit" 
 		"HelloWorld" 
 		"DKCore" 
 		"DKJavascript" 
@@ -548,32 +618,6 @@ while :
 	select opt in "${options[@]}"
 	do
 		case $opt in
-			"Git Update")
-				echo "$opt"
-				
-				if [[ ! -d "$DKPATH/.git" ]]; then
-					call git clone https://github.com/aquawicket/DigitalKnob.git $DKPATH
-				fi
-				cd $DKPATH
-				git pull --all
-				git checkout -- .
-				git checkout $DKBRANCH
-				if [[ "$?" == "0" ]]; then
-					echo "$DKBRANCH branch selected"
-				else
-					echo "Remote has no $DKBRANCH branch. Creating..."
-					git checkout -b $DKBRANCH main
-					git push --set-upstream origin $DKBRANCH
-				fi
-				chmod +x $DKPATH/build.sh
-				#call reload
-				;;
-			"Git Commit")
-				echo "$opt"
-				cd $DKPATH
-				git commit -a -m "git commit"
-				git push
-				;;
 			"HelloWorld")
 				echo "$opt"
 				APP="HelloWorld"
@@ -614,6 +658,11 @@ while :
 				APP="DKTestAll"
 				break
 				;;
+			"enter_manually")
+				echo "$opt"
+				enter_manually
+				break
+				;;				
 			"Clear Screen")
 				echo "$opt"
 				clear
