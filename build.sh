@@ -367,7 +367,7 @@ function cmake_eval() {
 
 function reset_all(){
 	cd $DKPATH
-	$GIT clean -n -f -d
+	$GIT clean -f -d
 }
 
 
