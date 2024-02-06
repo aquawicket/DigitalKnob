@@ -506,25 +506,29 @@ goto:eof
 
 :: reset_apps()
 :reset_apps
-	echo not implemented,  TODO
+	cd %DKPATH%\DKApps
+	"%GIT%" clean -n -f -d
 goto:eof
 
 
 :: reset_plugins()
 :reset_plugins
-	echo not implemented,  TODO
+	cd %DKPATH%\DKPlugins
+	"%GIT%" clean -n -f -d
 goto:eof
 
 
 :: reset_3rdparty()
 :reset_3rdparty
-	echo not implemented,  TODO
+	cd %DKPATH%\3rdParty
+	"%GIT%" clean -n -f -d
 goto:eof
 
 
 :: :reset_all()
 :reset_all
-	echo not implemented,  TODO
+	cd %DKPATH%
+	"%GIT%" clean -n -f -d
 goto:eof
 
 

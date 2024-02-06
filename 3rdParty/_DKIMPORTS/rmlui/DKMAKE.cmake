@@ -85,7 +85,7 @@ if(MSVC)
 		-DWARNINGS_AS_ERRORS=OFF				# "Treat compiler warnings as errors." OFF
 		${FREETYPE_CMAKE} 
 		${GLEW_CMAKE}
-		${HARFBUZZ}
+		${HARFBUZZ_CMAKE}
 		${LUA_CMAKE}
 		${LUNASVG_CMAKE}
 		${SDL_CMAKE} 
@@ -118,7 +118,7 @@ if(MSVC)
 		-DWARNINGS_AS_ERRORS=OFF				# "Treat compiler warnings as errors." OFF
 		${FREETYPE_CMAKE} 
 		${GLEW_CMAKE}
-		${HARFBUZZ}
+		${HARFBUZZ_CMAKE}
 		${LUA_CMAKE}
 		${LUNASVG_CMAKE}
 		${SDL_CMAKE} 
@@ -151,7 +151,7 @@ else()
 		-DWARNINGS_AS_ERRORS=OFF				# "Treat compiler warnings as errors." OFF
 		${FREETYPE_CMAKE} 
 		${GLEW_CMAKE}
-		${HARFBUZZ}
+		${HARFBUZZ_CMAKE}
 		${LUA_CMAKE}
 		${LUNASVG_CMAKE}
 		${SDL_CMAKE} 
