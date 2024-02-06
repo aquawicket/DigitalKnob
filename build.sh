@@ -477,29 +477,36 @@ fi
 				;;
 			"Pull assets")
 				echo "$opt"
-				clear
+				break
 				;;
 			"Reset Apps")
 				echo "$opt"
+				break
 				;;
 			"Reset Plugins")
 				echo "$opt"
+				break
 				;;
 			"Reset 3rdParty")
 				echo "$opt"
+				break
 				;;
 			"Reset All")
 				echo "$opt"
 				reset_all
+				break
 				;;
 			"Clear Screen")
 				echo "$opt"
+				break
 				;;
 			"Clear cmake cache and .tmp files")
 				echo "$opt"
+				break
 				;;
 			"Reload")
 				echo "$opt"
+				break
 				;;
 			"Exit")
 				echo "$opt"
