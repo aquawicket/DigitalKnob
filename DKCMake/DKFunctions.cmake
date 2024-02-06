@@ -1981,8 +1981,11 @@ function(dk_msys2)
 	DKASSERT(MSYS2)
 	DKASSERT(MSYSTEM)
 	
+	#dk_msys2_direct(${ARGV})
+	#return()
+	
 	string(REPLACE ";" " " str "${ARGV}")
-	#dk_info("\n${CLR}${magenta} $ ${str}\n")
+	dk_info("\n${CLR}${magenta} $ ${str}\n")
 		
 	set(bash "#!/bin/bash")
 	list(APPEND bash "cd ${CURRENT_DIR}")
@@ -2016,6 +2019,19 @@ function(dk_msys2)
 	dk_executeProcess(${MSYS2}/usr/bin/bash ${MSYS2}/dkscript.tmp NOECHO)
 endfunction()
 dk_createOsMacros("dk_msys2")
+
+
+
+
+function(dk_msys2_direct)
+	DKDEBUGFUNC(${ARGV})
+	#DKASSERT(MSYS2)
+	#DKASSERT(MSYSTEM)
+
+	dk_info("\n${CLR}${magenta} $ ${ARGV}\n")
+	execute_process(COMMAND ${ARGV} WORKING_DIRECTORY ${CURRENT_DIR})
+
+endfunction()
 
 
 ###############################################################################
@@ -2061,7 +2077,7 @@ function(dk_mergeFlags args RESULT)
 				endif()				
 				list(REMOVE_ITEM args ${arg})
 				string(REPLACE ${word} "" arg ${arg})
-				set(DK_${word} "${DK_${word}}${arg} ")
+				set(DK_${word} "${DK_${word}}${arg}")
 			endif()
 		endforeach()
 		if(${placeholder} GREATER 0)
@@ -2071,11 +2087,11 @@ function(dk_mergeFlags args RESULT)
 			endif()
 			
 			# FIXME: Msys treats things differently here and it causes errors 
-			if(MSYS)
-				list(INSERT args ${placeholder} "\"${DK_${word}}\"")  # https://stackoverflow.com/a/61948012
-			else()
+			#if(MSYS)
+			#	list(INSERT args ${placeholder} "\"${DK_${word}}\"")  # https://stackoverflow.com/a/61948012
+			#else()
 				list(INSERT args ${placeholder} "${DK_${word}}")
-			endif()
+			#endif()
 			
 		endif()
 	endforeach()
@@ -2092,6 +2108,7 @@ endfunction()
 #
 function(dk_command)
 	DKDEBUGFUNC(${ARGV})
+	#string(REPLACE ";" " " ARGV "${ARGV}")
 	dk_info("\n${CLR}${magenta} $ ${ARGV}\n")
 	
 	dk_mergeFlags("${ARGV}" merged_args)
@@ -2101,7 +2118,8 @@ function(dk_command)
 	#else()
 	
 	if(MSYS OR MINGW OR MSYSTEM)
-		dk_msys2(${merged_args})
+		#dk_msys2(${merged_args})
+		dk_msys2_direct(${merged_args})
 	else()
 		dk_executeProcess(${merged_args} WORKING_DIRECTORY ${CURRENT_DIR})
 	endif()
