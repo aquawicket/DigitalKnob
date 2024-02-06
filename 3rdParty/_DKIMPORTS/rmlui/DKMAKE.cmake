@@ -59,7 +59,6 @@ if(rmlui_RmlDebugger)
 	dk_libDebug			(${RMLUI}/${OS}/${DEBUG_DIR}/libRmlDebugger.a)
 	dk_libRelease		(${RMLUI}/${OS}/${RELEASE_DIR}/libRmlDebugger.a)
 endif()
-C:\Users\aquawicket\digitalknob\Development\3rdParty\rmlui-master\win64\Debug\libRmlCore.a
 
 ### GENERATE ###
 if(MSVC)
