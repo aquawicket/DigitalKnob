@@ -1888,6 +1888,11 @@ function(dk_executeProcess commands) #NOASSERT #NOECHO
 endfunction()
 dk_createOsMacros("dk_executeProcess")
 
+
+
+# BE CAREFUL WITH THIS. It can make the shell unresponsive to commands
+# BE CAREFUL WITH THIS. It can make the shell unresponsive to commands
+# BE CAREFUL WITH THIS. It can make the shell unresponsive to commands
 ###############################################################################
 # dk_setEnv(name value)
 #
@@ -1896,6 +1901,7 @@ dk_createOsMacros("dk_executeProcess")
 #	@name	- The name of the system environment variable to set
 #	@value	- The value to set the system environment vairable to
 #
+# BE CAREFUL WITH THIS. It can make the shell unresponsive to commands
 function(dk_setEnv name value)
 	DKDEBUGFUNC(${ARGV})
 	dk_debug(ENV{${name}})
@@ -2024,13 +2030,12 @@ dk_createOsMacros("dk_msys2")
 
 
 function(dk_msys2_direct)
-	DKDEBUGFUNC(${ARGV})
+	#DKDEBUGFUNC(${ARGV})
 	#DKASSERT(MSYS2)
 	#DKASSERT(MSYSTEM)
 
 	dk_info("\n${CLR}${magenta} $ ${ARGV}\n")
-	execute_process(COMMAND ${ARGV} WORKING_DIRECTORY ${CURRENT_DIR})
-
+	execute_process(COMMAND ${ARGV} WORKING_DIRECTORY ${CURRENT_DIR} OUTPUT_STRIP_TRAILING_WHITESPACE)
 endfunction()
 
 
@@ -2112,7 +2117,7 @@ function(dk_command)
 	dk_info("\n${CLR}${magenta} $ ${ARGV}\n")
 	
 	dk_mergeFlags("${ARGV}" merged_args)
-
+	#string(REPLACE ";" " " ARGV "${ARGV}")
 	#if(EMSCRIPTEN)
 	#	dk_executeProcess(${EMMAKE} bash ${merged_args} WORKING_DIRECTORY ${CURRENT_DIR})
 	#else()
@@ -2120,6 +2125,7 @@ function(dk_command)
 	if(MSYS OR MINGW OR MSYSTEM)
 		#dk_msys2(${merged_args})
 		dk_msys2_direct(${merged_args})
+		#dk_msys2_direct(args=(${merged_args} & ls "${args[@]}")
 	else()
 		dk_executeProcess(${merged_args} WORKING_DIRECTORY ${CURRENT_DIR})
 	endif()

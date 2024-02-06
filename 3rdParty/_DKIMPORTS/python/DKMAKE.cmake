@@ -16,8 +16,6 @@ UNIX_HOST_dk_set	(PYTHON_APP python)
 ### INSTALL ###
 if(WIN_HOST)
 	dk_makeDirectory(${PYTHON})
-	dk_setEnv("PATH" "${PYTHON}")
-
 	if(NOT EXISTS ${PYTHON_APP})
 		dk_download(${PYTHON_DL} ${DKDOWNLOAD}/python-2.7.18.msi)
 		#string(REPLACE "/" "\\" PYTHON_PATH "${PYTHON}")
@@ -26,6 +24,7 @@ if(WIN_HOST)
 		#NOTE:	TargetDir requires the path to use backslashes, yet I cannot figure out how to send this command
 		#		from cmake successfully. So, the command is placed in 'python/install.cmd' and called instead.
 		dk_executeProcess(${DKIMPORTS}/python/install.cmd)
+		dk_setEnv("PATH" "${PYTHON}") # BE CAREFUL WITH THIS. It can make the shell unresponsive to commands
 	endif()
 	if(EXISTS ${PYTHON_APP})
 		if(NOT EXISTS ${PYTHON}/Scripts/pip.exe)

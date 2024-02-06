@@ -365,6 +365,10 @@ function cmake_eval() {
 }
 
 
+function reset_all(){
+	cd $DKPATH
+	$GIT clean -n -f -d
+}
 
 
 
@@ -486,6 +490,7 @@ fi
 				;;
 			"Reset All")
 				echo "$opt"
+				reset_all
 				;;
 			"Clear Screen")
 				echo "$opt"
