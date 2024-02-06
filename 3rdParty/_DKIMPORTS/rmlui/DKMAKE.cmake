@@ -126,8 +126,9 @@ if(MSVC)
 		${SFML_CMAKE} 
 		${RMLUI}) 
 else()
+	dk_debug(LUA_CMAKE)
 	dk_queueCommand(${DKCMAKE_BUILD} 
-		"-DCMAKE_CXX_FLAGS=-DRMLUI_STATIC_LIB" 
+		"-DCMAKE_CXX_FLAGS=-DRMLUI_STATIC_LIB"
 		-DBUILD_FRAMEWORK=OFF 					# "Build Framework bundle for OSX" OFF
 		-DBUILD_LUA_BINDINGS_FOR_LUAJIT=OFF 	# "Build Lua bindings using luajit" OFF
 		-DBUILD_LUA_BINDINGS=${LUA}	 			# "Build Lua bindings" OFF
@@ -152,8 +153,9 @@ else()
 		${FREETYPE_CMAKE} 
 		${GLEW_CMAKE}
 		${HARFBUZZ_CMAKE}
-		${LUA_CMAKE}
+		#${LUA_CMAKE}
 		${LUNASVG_CMAKE}
+		${RLOTTIE_CMAKE}
 		${SDL_CMAKE} 
 		${SDL_IMAGE_CMAKE} 
 		${SFML_CMAKE} 

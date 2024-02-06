@@ -106,7 +106,10 @@ dk_depend(imagemagick)
 ## TODO - INCLUDE_DKPLUGINS not working on MSYS
 if(MSYS)
 	set(INCLUDE_DKPLUGINS 0)
+	#WIN_dk_set(DKCMAKE_FLAGS					-DBUILD_SHARED_LIBS=OFF -DBUILD_STATIC_LIBS=ON)
 endif()
+
+
 
 if(MSVC)
 	WIN_dk_depend(visualstudio)

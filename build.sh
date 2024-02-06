@@ -439,6 +439,78 @@ else
 fi
 
 
+
+######### Pick_Update #########
+	echo " "
+	PS3='Please select an option:     (Press Enter To Skip)'
+	options=(
+		"Git Update" 
+		"Git Commit" 
+		"Push assets" 
+		"Pull assets"
+		"Reset Apps"
+		"Reset Plugins"
+		"Reset 3rdParty"
+		"Reset All"
+		"Clear Screen"
+		"Clear cmake cache and .tmp files"
+		"Reload"
+		"Exit")
+	select opt in "${options[@]}"
+	do
+		case $opt in
+			"Git Update")
+				echo "$opt"
+				break
+				;;
+			"Git Commit")
+				echo "$opt"
+				break
+				;;
+			"Push assets")
+				echo "$opt"
+				break
+				;;
+			"Pull assets")
+				echo "$opt"
+				clear
+				;;
+			"Reset Apps")
+				echo "$opt"
+				;;
+			"Reset Plugins")
+				echo "$opt"
+				;;
+			"Reset 3rdParty")
+				echo "$opt"
+				;;
+			"Reset All")
+				echo "$opt"
+				;;
+			"Clear Screen")
+				echo "$opt"
+				;;
+			"Clear cmake cache and .tmp files")
+				echo "$opt"
+				;;
+			"Reload")
+				echo "$opt"
+				;;
+			"Exit")
+				echo "$opt"
+				exit 0
+				;;
+			*) echo "invalid option $REPLY";;
+		esac 
+		REPLY=
+	done 
+    
+	
+	
+	
+	
+######### Pick_App #########	
+
 # https://unix.stackexchange.com/a/293605
 COLUMNS=1
 
@@ -552,6 +624,7 @@ while :
 	TARGET=${APP}
 
 
+######### Pick_OS #########
 	# TODO
 	#  1) Linux (x86_64)
 
@@ -693,6 +766,9 @@ while :
 		REPLY=
 	done
 
+
+
+######### Pick_Type #########
 	echo " "
 	PS3='Please select build type: '
 	options=(
