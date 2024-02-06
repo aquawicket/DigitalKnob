@@ -28,7 +28,9 @@ endif()
 
 # LINUX Install
 if(LINUX_HOST)
-	dk_set(CURRENT_DIR /usr)
+	if(EXISTS /usr)
+		dk_set(CURRENT_DIR /usr)
+	endif()
 	
 	if(ANDROID_HOST)
 		dk_set(SUDO "")
