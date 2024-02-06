@@ -1984,11 +1984,23 @@ dk_createOsMacros("dk_setPath")
 #
 function(dk_msys2)
 	DKDEBUGFUNC(${ARGV})
+	dk_info("\n${CLR}${magenta} $ ${ARGV}\n")
+	execute_process(COMMAND ${ARGV} WORKING_DIRECTORY ${CURRENT_DIR} OUTPUT_STRIP_TRAILING_WHITESPACE)
+endfunction()
+
+
+
+###############################################################################
+# dk_msys2_bash(args)
+#
+#	TODO
+#
+#	@args	- TODO
+#
+function(dk_msys2_bash)
+	DKDEBUGFUNC(${ARGV})
 	DKASSERT(MSYS2)
 	DKASSERT(MSYSTEM)
-	
-	#dk_msys2_direct(${ARGV})
-	#return()
 	
 	string(REPLACE ";" " " str "${ARGV}")
 	dk_info("\n${CLR}${magenta} $ ${str}\n")
@@ -2028,15 +2040,6 @@ dk_createOsMacros("dk_msys2")
 
 
 
-
-function(dk_msys2_direct)
-	#DKDEBUGFUNC(${ARGV})
-	#DKASSERT(MSYS2)
-	#DKASSERT(MSYSTEM)
-
-	dk_info("\n${CLR}${magenta} $ ${ARGV}\n")
-	execute_process(COMMAND ${ARGV} WORKING_DIRECTORY ${CURRENT_DIR} OUTPUT_STRIP_TRAILING_WHITESPACE)
-endfunction()
 
 
 ###############################################################################
@@ -2113,19 +2116,16 @@ endfunction()
 #
 function(dk_command)
 	DKDEBUGFUNC(${ARGV})
-	#string(REPLACE ";" " " ARGV "${ARGV}")
 	dk_info("\n${CLR}${magenta} $ ${ARGV}\n")
 	
 	dk_mergeFlags("${ARGV}" merged_args)
-	#string(REPLACE ";" " " ARGV "${ARGV}")
+
 	#if(EMSCRIPTEN)
 	#	dk_executeProcess(${EMMAKE} bash ${merged_args} WORKING_DIRECTORY ${CURRENT_DIR})
 	#else()
 	
 	if(MSYS OR MINGW OR MSYSTEM)
-		#dk_msys2(${merged_args})
-		dk_msys2_direct(${merged_args})
-		#dk_msys2_direct(args=(${merged_args} & ls "${args[@]}")
+		dk_msys2(${merged_args})
 	else()
 		dk_executeProcess(${merged_args} WORKING_DIRECTORY ${CURRENT_DIR})
 	endif()

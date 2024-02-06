@@ -72,9 +72,10 @@ set COMPILER=MINGW64
         if %TARGET_OS%==emscripten  call:generate_emscripten
                 
         call:build
+		if %TYPE%==All      call:build_all
+		if %TYPE%==Release  call:build_release
         if %TYPE%==Debug    call:build_debug
-        if %TYPE%==Release  call:build_release
-        if %TYPE%==All      call:build_all
+
                 
         call:end_message
         
