@@ -4,10 +4,10 @@
 
 ### DEPEND ###
 dk_depend(freetype)
-#dk_depend(harfbuzz)
-#dk_depend(lua)
-#dk_depend(lunasvg)
-#dk_depend(rlottie)
+dk_depend(harfbuzz)
+dk_depend(lua)
+dk_depend(lunasvg)
+dk_depend(rlottie)
 
 # BUILD_SAMPLES
 set(RMLUI_BUILD_SAMPLES OFF)
@@ -21,6 +21,9 @@ endif()
 
 ### IMPORT ###
 dk_import(https://github.com/mikke89/RmlUi.git)
+
+# Version fix #
+dkFileReplace(${RMLUI}/CMakeLists.txt "list(APPEND CORE_PRIVATE_DEFS RMLUI_VERSION" "#list(APPEND CORE_PRIVATE_DEFS RMLUI_VERSION")
 
 # ANDROID FIX
 if(ANDROID)
@@ -90,7 +93,7 @@ if(MSVC)
 		${SFML_CMAKE} 
 		${RMLUI})
 	
-	ANDROID_dk_queueCommand(
+	ANDROID_dk_queueCommand(${DKCMAKE_BUILD} 
 		"-DCMAKE_CXX_FLAGS=-DRMLUI_STATIC_LIB -DCHOBO_FLAT_MAP_NO_THROW -std=c++1z"
 		-DBUILD_FRAMEWORK=OFF 					# "Build Framework bundle for OSX" OFF
 		-DBUILD_LUA_BINDINGS_FOR_LUAJIT=OFF 	# "Build Lua bindings using luajit" OFF
@@ -113,7 +116,6 @@ if(MSVC)
 		-DRMLUI_TRACY_PROFILING=OFF				# "Enable profiling with Tracy. Source files can be placed in Dependencies/tracy." OFF
 		-DRMLUI_VK_DEBUG=OFF					# "Enable debugging mode for Vulkan renderer." OFF
 		-DWARNINGS_AS_ERRORS=OFF				# "Treat compiler warnings as errors." OFF
-		${DKCMAKE_BUILD} 
 		${FREETYPE_CMAKE} 
 		${GLEW_CMAKE}
 		${HARFBUZZ}
@@ -128,18 +130,18 @@ else()
 		"-DCMAKE_CXX_FLAGS=-DRMLUI_STATIC_LIB" 
 		-DBUILD_FRAMEWORK=OFF 					# "Build Framework bundle for OSX" OFF
 		-DBUILD_LUA_BINDINGS_FOR_LUAJIT=OFF 	# "Build Lua bindings using luajit" OFF
-		#-DBUILD_LUA_BINDINGS=${LUA}	 			# "Build Lua bindings" OFF
+		-DBUILD_LUA_BINDINGS=${LUA}	 			# "Build Lua bindings" OFF
 		-DBUILD_SAMPLES=OFF 					# "Build samples" OFF
 		-DBUILD_SHARED_LIBS=OFF					# "Build shared (dynamic) libraries" ON
 		-DBUILD_TESTING=OFF 					#  OFF
 		-DBUILD_UNIVERSAL_BINARIES=OFF 			# "Build universal binaries for all architectures supported" ON
 		-DCUSTOM_CONFIGURATION=OFF				# "Customize RmlUi configuration files for overriding the default configuration and types." OFF
 		-DDISABLE_RTTI_AND_EXCEPTIONS=OFF		# "Build with rtti and exceptions disabled." OFF
-		#-DENABLE_HARFBUZZ=${HARFBUZZ}			# "Enable HarfBuzz for text-shaping sample. Requires the HarfBuzz library." OFF
+		-DENABLE_HARFBUZZ=${HARFBUZZ}			# "Enable HarfBuzz for text-shaping sample. Requires the HarfBuzz library." OFF
 		-DENABLE_LOTTIE_PLUGIN=${RLOTTIE} 		# "Enable plugin for Lottie animations. Requires the rlottie library." OFF
 		-DENABLE_PRECOMPILED_HEADERS=OFF		# "Enable precompiled headers" ON
-		#-DENABLE_SVG_PLUGIN=${LUNASVG}			# "Enable plugin for SVG images. Requires the lunasvg library." OFF
-		#-DMATRIX_ROW_MAJOR=OFF 					# "Use row-major matrices. Column-major matrices are used by default." OFF
+		-DENABLE_SVG_PLUGIN=${LUNASVG}			# "Enable plugin for SVG images. Requires the lunasvg library." OFF
+		-DMATRIX_ROW_MAJOR=OFF 					# "Use row-major matrices. Column-major matrices are used by default." OFF
 		-DNO_FONT_INTERFACE_DEFAULT=OFF			# "Do not include the default font engine in the build. Allows building without the FreeType dependency, but a custom font engine must be created and set." OFF
 		-DNO_THIRDPARTY_CONTAINERS=OFF			# "Only use standard library containers." OFF
 		-DRMLUI_TRACY_CONFIGURATION=OFF			# "Enable a separate Tracy configuration type for multi-config generators such as Visual Studio, otherwise enable Tracy in all configurations." ON
@@ -147,7 +149,6 @@ else()
 		-DRMLUI_TRACY_PROFILING=OFF				# "Enable profiling with Tracy. Source files can be placed in Dependencies/tracy." OFF
 		-DRMLUI_VK_DEBUG=OFF					# "Enable debugging mode for Vulkan renderer." OFF
 		-DWARNINGS_AS_ERRORS=OFF				# "Treat compiler warnings as errors." OFF
-		${DKCMAKE_BUILD} 
 		${FREETYPE_CMAKE} 
 		${GLEW_CMAKE}
 		${HARFBUZZ}

@@ -276,7 +276,7 @@ goto:eof
     call:dk_deleteCache
     call:delete_temp_files
 	
-	if not '%CUSTOM_BUILD%'=='1' set "TARGET_PATH=%DKPATH%\DKApps\%APP%"
+	if '%TARGET_PATH%'=='' set "TARGET_PATH=%DKPATH%\DKApps\%APP%"
     call:make_directory "%TARGET_PATH%\%TARGET_OS%"
     cd "%TARGET_PATH%\%TARGET_OS%"
 	echo APP = %APP%
@@ -285,11 +285,7 @@ goto:eof
 	echo LEVEL = %LEVEL%
 	call set CMAKE_TARGET_PATH=%%TARGET_PATH:^\=^/%%
 	echo TARGET_PATH = %TARGET_PATH%
-	echo CMAKE_TARGET_PATH = %CMAKE_TARGET_PATH%
-	
-	
-	if '%CUSTOM_BUILD%'=='1' echo "We have a custom build request to work with,  not implemented yet. Goodbye" & pause & exit
-	
+	echo CMAKE_TARGET_PATH = %CMAKE_TARGET_PATH%	
 	
     ::::::::: BUILD CMAKE_ARGS ARRAY :::::::::
     set DKLEVEL=RebuildAll
@@ -475,19 +471,26 @@ goto:eof
 	echo Please type the name of the library, tool or app to build. Then press enter.
 	set /p input=
 
-	
+	set APP=_%input%_
 	::Search digitalknob for the matching entry containing a DKMAKE.cmake file  
 	cd %DIGITALKNOB%
 	for /f "delims=" %%a in ('dir /b /s /a-d DKMAKE.cmake ^| findstr /E /R "%input%\\DKMAKE.cmake" ') do set "path=%%a"
 	set "TARGET_PATH=%path:~0,-13%"
-	echo TARGET_PATH = %TARGET_PATH%
-	set APP=%input%
-	set CUSTOM_BUILD=1
-	::"cmnd="%CMAKE%" -G "Visual Studio 17 2022" -A %CPU% -DDEBUG=ON -DRELEASE=ON -DSTATIC=ON -DREBUILDALL=ON -DHAVE_DKDuktape=1 -DTARGET=%input% -DOS=%OS% -S "%DKCMAKE%" -B "%target_path%\%OS%"
 	
-	echo This feature is incomplete. TODO
-	:: see DKCMake/dev/dkbuild.cmd
+	call:get_parent_folder %TARGET_PATH% parent
+	echo parent = %parent%
+	
+	if %parent%==DKApps goto:eof
+	call:make_directory  %DKPATH%\DKApps\%APP%
+	echo dk_depend(%input%)> %DKPATH%\DKApps\%APP%\DKMAKE.cmake
 goto:eof
+
+:: get_parent_folder
+:get_parent_folder
+	for %%a in ("%1") do for %%b in ("%%~dpa\.") do set "parent=%%~nxb"
+	set "%2=%parent%"
+goto:eof
+
 
 :: push_assets()
 :push_assets
