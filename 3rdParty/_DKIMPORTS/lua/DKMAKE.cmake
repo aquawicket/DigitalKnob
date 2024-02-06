@@ -32,7 +32,7 @@ WIN_RELEASE_dk_set			(LUA_CMAKE -DLUA_INCLUDE_DIR=${LUA} -DLUA_LIBRARIES=${LUA}/
 
 
 ### GENERATE ###
-dk_queueCommand	(${DKCMAKE_BUILD} ${LUA})
+dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_SHARED_LIBS=OFF ${LUA})
 
 
 ### COMPILE ###
