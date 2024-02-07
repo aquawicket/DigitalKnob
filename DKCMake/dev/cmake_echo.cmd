@@ -48,20 +48,9 @@ if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: k
 	if not exist "%CMAKE%"		echo "ERROR: Could not locate CMAKE" 	& goto:eof
 	if not exist "%DKCMAKE%" 	echo "ERROR: Could not locate DKCMAKE" 	& goto:eof
 
-	:: cmake_echo begin
-	::set commands=%1
-	::set file=%2
-	::call set commands=%%commands:"=%%
-	::set "DKCOMMAND=%commands%"
-	::call set DKCOMMAND=%%DKCOMMAND:^\=^/%%
-	::echo "cmd> %DKCOMMAND%"
 	call set DKCMAKE_DIR=%%DKCMAKE:^\=^/%%
 	
-	set "ALL_ARGS=%*"
-	echo %ALL_ARGS%
-	::"%CMAKE%" "-DDKCMAKE=%DKCMAKE_DIR%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE_DIR%/dev/cmake_echo.cmake"
-	"%CMAKE%" %ALL_ARGS% -P "%DKCMAKE_DIR%/dev/cmake_echo.cmake"
+	"%CMAKE%" %* -P "%DKCMAKE_DIR%/dev/cmake_echo.cmake"
 
-		
 	::echo return code: %ERRORLEVEL%
 goto:eof
