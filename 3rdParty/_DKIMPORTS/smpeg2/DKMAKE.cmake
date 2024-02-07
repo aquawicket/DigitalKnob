@@ -9,18 +9,8 @@ dk_depend(sdl)
 dk_import(https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz PATCH)
 
 
-set(COMMAND_ARGS "")
-set(COMMAND_ARGS ${COMMAND_ARGS} git)
-set(COMMAND_ARGS ${COMMAND_ARGS} apply)
-set(COMMAND_ARGS ${COMMAND_ARGS} ${DKIMPORTS}/smpeg2/gcc6.patch.txt)
-dk_debug("${COMMAND_ARGS}")
-execute_process(COMMAND ${COMMAND_ARGS}
-				WORKING_DIRECTORY ${SMPEG2}
-				RESULT_VARIABLE result
-				OUTPUT_STRIP_TRAILING_WHITESPACE)
-if(NOT ${result} EQUAL 0)
-    dk_error("ERROR: 'An error occured patching smpeg2'")
-endif()
+### PATCH ###
+dk_applyPatch(${SMPEG2} ${DKIMPORTS}/smpeg2/gcc6.patch.txt)
 
 
 ### LINK ###
