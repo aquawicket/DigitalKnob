@@ -3,6 +3,22 @@
 
 ############## DigitalKnob builder script ############
 
+function confirm() {
+	read -p "Are you sure? " -n 1 -r
+	if [[ ! $REPLY =~ ^[Yy]$ ]]; then 
+		return 0; 
+	fi
+	return 1
+}
+
+
+
+
+
+
+
+
+
 #--------------------------------------------------------
 #  GLOBAL USER VARIABLES
 #--------------------------------------------------------
@@ -81,7 +97,7 @@ function string_contains() {
 function command_exists() {
 	command -v "$1" >/dev/null 2>&1
 }
-
+	
 ###### file_exists <file> ######
 function file_exists() {
 	[ -e $1 ]
@@ -392,50 +408,33 @@ function reset_plugins() {
 
 
 function reset_all() {
-	read -p "Are you sure? " -n 1 -r
-	echo
-	if [[ $REPLY =~ ^[Yy]$ ]]
-	then
-		cd $DKPATH
-		$GIT clean -f -d
-	fi
+	cd $DKPATH
+	$GIT clean -f -d
 }
 
 function git_update() {
-
-
-		if [[ ! -d "$DKPATH/.git" ]]; then
-			call git clone https://github.com/aquawicket/DigitalKnob.git $DKPATH
-		fi
-		cd $DKPATH
-		git pull --all
-		git checkout -- .
-		git checkout $DKBRANCH
-		if [[ "$?" == "0" ]]; then
-			echo "$DKBRANCH branch selected"
-		else
-		echo "Remote has no $DKBRANCH branch. Creating..."
-			git checkout -b $DKBRANCH main
-			git push --set-upstream origin $DKBRANCH
-		fi
-		chmod +x $DKPATH/build.sh
-		#call reload
-
+	if [[ ! -d "$DKPATH/.git" ]]; then
+		call git clone https://github.com/aquawicket/DigitalKnob.git $DKPATH
+	fi
+	cd $DKPATH
+	git pull --all
+	git checkout -- .
+	git checkout $DKBRANCH
+	if [[ "$?" == "0" ]]; then
+		echo "$DKBRANCH branch selected"
+	else
+	echo "Remote has no $DKBRANCH branch. Creating..."
+		git checkout -b $DKBRANCH main
+		git push --set-upstream origin $DKBRANCH
+	fi
+	chmod +x $DKPATH/build.sh
 }
 
-function git_commit() {
-	read -p "Are you sure? " -n 1 -r
-	if [[ ! $REPLY =~ ^[Yy]$ ]]; then echo "inside"
-	fi
+function git_commit() {	
+	if confirm; then return; fi
 	
-	echo "passed"
-
-
-	
-		cd $DKPATH
-		git commit -a -m "git commit"
-		
-
+	cd $DKPATH
+	git commit -a -m "git commit"
 }
 
 function enter_manually() {
