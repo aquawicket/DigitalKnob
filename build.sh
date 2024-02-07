@@ -3,12 +3,12 @@
 
 ############## DigitalKnob builder script ############
 
-function confirm() {
-	read -p "Are you sure? " -n 1 -r
-	if [[ ! $REPLY =~ ^[Yy]$ ]]; then 
-		return 0; 
+function CONFIRM() {
+	echo 
+	read -p "Are you sure (Y/N) ? " -n 1 -r
+	if [[ $REPLY =~ ^[Yy]$ ]]; then 
+		return 1; 
 	fi
-	return 1
 }
 
 
@@ -431,7 +431,7 @@ function git_update() {
 }
 
 function git_commit() {	
-	if confirm; then return; fi
+	if CONFIRM; then return; fi
 	
 	cd $DKPATH
 	git commit -a -m "git commit"
