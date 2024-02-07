@@ -3,23 +3,6 @@
 
 ############## DigitalKnob builder script ############
 
-function CONFIRM() {
-	echo 
-	read -p "Are you sure (Y/N) ? " -n 1 -r
-	echo
-	echo
-	if [[ $REPLY =~ ^[Yy]$ ]]; then 
-		return 1; 
-	fi
-}
-
-
-
-
-
-
-
-
 
 #--------------------------------------------------------
 #  GLOBAL USER VARIABLES
@@ -41,8 +24,7 @@ cyan="\033[36m"
 white="\033[37m"
 
 
-
-###### validate_sudo ######
+###### validate_sudo() ######
 function validate_sudo() {
 	if command -v "sudo" >/dev/null 2>&1; then
 		SUDO="sudo"
@@ -84,6 +66,17 @@ function message() {
 		return $false
 	fi
 	echo "$@"	
+}
+
+###### CONFIRM() ######
+function CONFIRM() {
+	echo -e "${yellow} Are you sure (Y/N) ? $1 ${CLR}"
+	read -p " " -n 1 -r
+	echo
+	echo
+	if [[ $REPLY =~ ^[Y]$ ]]; then 
+		return 1; 
+	fi
 }
 
 ###### string_contains <string> <substring> ######
@@ -383,38 +376,52 @@ function cmake_eval() {
 }
 
 function push_assets() {
+	if CONFIRM; then return; fi
+	
 	echo "not implemented,  TODO"
 }
 
 
 function pull_assets() {
+	if CONFIRM; then return; fi
+	
 	echo "not implemented,  TODO"
 }
 
 
 function reset_apps() {
+	if CONFIRM; then return; fi
+	
 	cd $DKPATH/DKApps
 	$GIT clean -f -d
 }
 
 function reset_3rdpaty() {
+	if CONFIRM; then return; fi
+	
 	cd $DKPATH/3rdParty
 	$GIT clean -f -d
 }
 
 
 function reset_plugins() {
+	if CONFIRM; then return; fi
+	
 	cd $DKPATH/DKPlugins
 	$GIT clean -f -d
 }
 
 
 function reset_all() {
+	if CONFIRM; then return; fi
+
 	cd $DKPATH
 	$GIT clean -f -d
 }
 
 function git_update() {
+	if CONFIRM; then return; fi
+
 	if [[ ! -d "$DKPATH/.git" ]]; then
 		call git clone https://github.com/aquawicket/DigitalKnob.git $DKPATH
 	fi
