@@ -233,9 +233,9 @@ macro(dk_error msg)
 	
 	string(REPLACE " " "" var ${msg})
 	if(${var})
-		message(SEND_ERROR "${H_black}${STACK_HEADER}${CLR}${red}Error: { \"${var}\" : \"${${var}}\" } ${CLR}")
+		message(STATUS "${H_black}${STACK_HEADER}${CLR}${red}Error: { \"${var}\" : \"${${var}}\" } ${CLR}")
 	else()
-		message(SEND_ERROR "${H_black}${STACK_HEADER}${CLR}${red}Error: ${msg} ${CLR}")
+		message(STATUS "${H_black}${STACK_HEADER}${CLR}${red}Error: ${msg} ${CLR}")
 	endif()
 	
 	if(${WAIT_ON_ERRORS})

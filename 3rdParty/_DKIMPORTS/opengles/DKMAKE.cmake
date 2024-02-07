@@ -23,6 +23,8 @@ endif()
 #endif()	
 
 if(ANDROID)
+	dk_findLibrary(OpenGLES)
+	
 	dk_define(GL_GLEXT_PROTOTYPES)
 	ANDROID_dk_lib(GLESv1_CM)
 	ANDROID_dk_lib(GLESv2)

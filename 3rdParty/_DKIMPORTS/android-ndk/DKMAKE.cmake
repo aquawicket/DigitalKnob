@@ -62,9 +62,13 @@ endif()
 
 ### Make Variables ###
 dk_set(ANDROID_NDK ${ANDROID_SDK}/ndk/${ANDROID_NDK_BUILD})
+dk_debug(ANDROID_NDK)
 dk_set(ANDROID_TOOLCHAIN_FILE "${ANDROID_NDK}/build/cmake/android.toolchain.cmake")
+dk_debug(ANDROID_TOOLCHAIN_FILE)
 dk_set(ANDROID_API 31)
-dk_set(ANDROID_MIN_API 19)
+dk_debug(ANDROID_API)
+#dk_set(ANDROID_MIN_API 19)
+
 #dk_set(__ANDROID_MIN_SDK_VERSION__ 31)
 #dk_set(ANDROID_CLANG	${3RDPARTY}/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/windows-x86_64/bin/clang.exe)
 #dk_set(ANDROID_CLANGXX	${3RDPARTY}/android-sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/windows-x86_64/bin/clang.exe)

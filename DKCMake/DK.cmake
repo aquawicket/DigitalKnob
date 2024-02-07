@@ -11,7 +11,7 @@ set(PRINT_DKRETURNS				0		CACHE INTERNAL "")	# dk_return() will print the curren
 set(DELETE_DOWNLOADS			1		CACHE INTERNAL "")  # delete downloads after they are extracted or installed
 set(DKTODO_ENABLED				1		CACHE INTERNAL "")	# enable dk_todo() functions
 set(DKVERBOSE_ENABLED			0		CACHE INTERNAL "")	# enable dk_verbose() functions
-set(HALT_ON_ERRORS				1		CACHE INTERNAL "")	# halt cmake build script on errors
+set(HALT_ON_ERRORS				0		CACHE INTERNAL "")	# halt cmake build script on errors
 set(HALT_ON_WARNINGS			0		CACHE INTERNAL "")	# halt cmake build script on warnings
 set(INSTALL_DKLIBS              0		CACHE INTERNAL "")	# install header files and libraries to DKBIN directory
 set(MAC_TERMINAL_WRAPPER        1		CACHE INTERNAL "")	# open app with terminal
@@ -20,7 +20,7 @@ set(PRINT_FILE_NAMES 			1 		CACHE INTERNAL "")	# print function call file names
 set(PRINT_FUNCTION_ARGUMENTS 	1 		CACHE INTERNAL "")	# print function call arguments
 set(PRINT_FUNCTION_NAMES 		1 		CACHE INTERNAL "")	# print function call function names
 set(PRINT_LINE_NUMBERS 			1		CACHE INTERNAL "")	# print function call file line numbers
-set(WAIT_ON_ERRORS				1		CACHE INTERNAL "")	# pause cmake build script on errors
+set(WAIT_ON_ERRORS				0		CACHE INTERNAL "")	# pause cmake build script on errors
 set(WAIT_ON_WARNINGS			0		CACHE INTERNAL "")	# pause cmake build script on warnings
 set(USE_COLOR					1		CACHE INTERNAL "")	# colored text output
 set(INCLUDE_DKPLUGINS			1		CACHE INTERNAL "")  # Include the DKPlugins to the main app project
