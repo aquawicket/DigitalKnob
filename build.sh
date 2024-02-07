@@ -1156,8 +1156,16 @@ while :
 		TARGET=${APP}_APP
 	fi
 	
+	#>>>>>>>>>>>>
+	build_project
+done
 	
 	
+	
+	
+### build_project() ###
+function build_project() {
+
 	echo ""
 	echo "##################################################################"
 	echo "****** Building $APP - $OS - $TYPE - $LEVEL ******"
@@ -1188,7 +1196,8 @@ while :
     unset APP
 	unset OS
 	unset TYPE
-done
+}
+
 
 
 exec $SHELL		# keep terminal open
