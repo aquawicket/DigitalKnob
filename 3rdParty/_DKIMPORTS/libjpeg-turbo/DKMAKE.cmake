@@ -8,6 +8,10 @@
 #dk_import(https://sourceforge.net/projects/libjpeg-turbo/files/2.1.1/libjpeg-turbo-2.1.1.tar.gz ${3RDPARTY}/libjpeg-turbo-2.1.1)
 dk_import(https://github.com/libjpeg-turbo/libjpeg-turbo.git BRANCH main)
 
+if(LIBJPEG_TURBO_INCLUDE_DIR2)
+	dk_copy("${LIBJPEG_TURBO_INCLUDE_DIR2}/jconfig.h" "${LIBJPEG_TURBO}/jconfig.h")
+endif()
+
 
 ### LINK ###
 dk_include					(${LIBJPEG_TURBO}												LIBJPEG_TURBO_INCLUDE_DIR)
@@ -28,6 +32,8 @@ else()
 	dk_libDebug				(${LIBJPEG_TURBO}/${OS}/${DEBUG_DIR}/libturbojpeg.a				LIBJPEG_TURBO_LIBRARY_DEBUG)
 	dk_libRelease			(${LIBJPEG_TURBO}/${OS}/${RELEASE_DIR}/libturbojpeg.a			LIBJPEG_TURBO_LIBRARY_RELEASE)
 endif()
+
+
 
 ### 3RDPARTY LINK ###
 if(MSVC)
@@ -50,4 +56,4 @@ dk_queueCommand(${DKCMAKE_BUILD} -DWITH_SIMD=OFF "-DCMAKE_C_FLAGS=-I${LIBJPEG_TU
 dk_build(${LIBJPEG_TURBO} turbojpeg-static)
 
 
-dk_copy("${LIBJPEG_TURBO_INCLUDE_DIR2}/jconfig.h ${LIBJPEG_TURBO_INCLUDE_DIR}/jconfig.h")
+
