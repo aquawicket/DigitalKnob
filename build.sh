@@ -70,11 +70,11 @@ function message() {
 
 ###### CONFIRM() ######
 function CONFIRM() {
-	echo -e "${yellow} Are you sure (Y/N) ? $1 ${CLR}"
+	echo -e "${yellow} Are you sure (Y/N) ? ${CLR}"
 	read -p " " -n 1 -r
 	echo
 	echo
-	if [[ $REPLY =~ ^[Y]$ ]]; then 
+	if [[ $REPLY =~ ^[Yy]$ ]]; then 
 		return 1; 
 	fi
 }
