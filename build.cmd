@@ -228,7 +228,7 @@ goto:eof
     if '%choice%'=='9'  call:clear_screen
     if '%choice%'=='10' call:dk_deleteCache & call:delete_temp_files
     if '%choice%'=='11' call:reload
-    if '%choice%'=='12' call:end
+    if '%choice%'=='12' exit
 	
     set UPDATE=true
 goto:eof
@@ -267,7 +267,7 @@ goto:eof
     if '%choice%'=='10' call:clear_screen      & goto:eof
     if '%choice%'=='11' call:reload            & goto:eof
     if '%choice%'=='12' set "UPDATE="          & goto:eof
-    if '%choice%'=='13' call:end               & goto:eof
+    if '%choice%'=='13' exit               & goto:eof
 	
     echo %choice%: invalid selection, please try again
 	set APP=
@@ -343,7 +343,7 @@ goto:eof
     if '%choice%'=='5' set "TARGET_OS=emscripten" & goto:eof
     if '%choice%'=='6' call:clear_screen          & goto:eof
     if '%choice%'=='7' set "APP="                 & goto:eof
-    if '%choice%'=='8' call:end                   & goto:eof
+    if '%choice%'=='8' exit                   & goto:eof
     
 	echo %choice%: invalid selection, please try again
 	set TARGET_OS=
@@ -371,7 +371,7 @@ goto:eof
     if '%choice%'=='3' set "TYPE=All"      & goto:eof
     if '%choice%'=='4' call:clear_screen   & goto:eof
     if '%choice%'=='5' set "TARGET_OS="    & goto:eof
-    if '%choice%'=='6' call:end            & goto:eof
+    if '%choice%'=='6' exit            & goto:eof
         
     echo %choice%: invalid selection, please try again
 	set TYPE=
