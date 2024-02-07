@@ -511,8 +511,8 @@ goto:eof
 
 :: reset_apps()
 :reset_apps
-	:PROMPT
 	echo Resetting Apps . . .
+
 	set /P AREYOUSURE=Are you sure (Y/[N])?
 	if /I "%AREYOUSURE%" NEQ "Y" goto:eof
 
@@ -523,8 +523,8 @@ goto:eof
 
 :: reset_plugins()
 :reset_plugins
-	:PROMPT
 	echo Resetting DKPlugins . . .
+
 	set /P AREYOUSURE=Are you sure (Y/[N])?
 	if /I "%AREYOUSURE%" NEQ "Y" goto:eof
 	
@@ -535,8 +535,8 @@ goto:eof
 
 :: reset_3rdparty()
 :reset_3rdparty
-	:PROMPT
 	echo Resetting 3rdParty Libraries . . .
+	
 	set /P AREYOUSURE=Are you sure (Y/[N])?
 	if /I "%AREYOUSURE%" NEQ "Y" goto:eof
 	
@@ -547,8 +547,8 @@ goto:eof
 
 :: :reset_all()
 :reset_all
-	:PROMPT
 	echo Resetting Entire Local Repository . . .
+	
 	set /P AREYOUSURE=Are you sure (Y/[N])?
 	if /I "%AREYOUSURE%" NEQ "Y" goto:eof
 	
@@ -816,8 +816,8 @@ goto:eof
 
 :: git_update()
 :git_update
-	:PROMPT
 	echo Git Update? Any local changes will be lost.
+	
 	set /P AREYOUSURE=Are you sure (Y/[N])?
 	if /I "%AREYOUSURE%" NEQ "Y" goto:eof
 	
@@ -844,7 +844,7 @@ goto:eof
 
 :: git_commit()
 :git_commit
-	echo Git Commit?
+	echo Git Commit
 	set /P AREYOUSURE=Are you sure (Y/[N])?
 	if /I "%AREYOUSURE%" NEQ "Y" goto:eof
 	
