@@ -428,6 +428,7 @@ function git_commit() {
 	if [[ ! $REPLY =~ ^[Yy]$ ]]; then echo "inside"
 	fi
 	
+	echo "passed"
 
 
 	
