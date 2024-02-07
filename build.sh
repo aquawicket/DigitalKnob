@@ -3,7 +3,6 @@
 
 ############## DigitalKnob builder script ############
 
-
 #--------------------------------------------------------
 #  GLOBAL USER VARIABLES
 #--------------------------------------------------------
@@ -22,6 +21,78 @@ blue="\033[34m"
 magenta="\033[35m"
 cyan="\033[36m"
 white="\033[37m"
+
+
+############################################################
+#############  main #######################################
+###########################################################
+function main() {
+
+	validate_sudo
+
+	echo ""
+	echo "HOSTNAME = $HOSTNAME"
+	echo "HOSTTYPE = $HOSTTYPE"
+	echo "MACHTYPE = $MACHTYPE"
+	echo "MODEL = $MODEL"
+	echo "MSYSTEM = $MSYSTEM"
+	echo "OSTYPE = $OSTYPE"
+	echo "SCRIPTNAME = $SCRIPTNAME"
+	echo "SCRIPTPATH = $SCRIPTPATH"
+	echo "USER = $USER"
+	echo "USERNAME = $USERNAME"
+	echo " "
+
+	#--------------------------------------------------------
+	# Main
+	#--------------------------------------------------------
+	if [[ -n "$USERPROFILE" ]]; then
+		DIGITALKNOB="$USERPROFILE\digitalknob"
+		DIGITALKNOB=$(sed 's.C:./c.g' <<< $DIGITALKNOB)
+		DIGITALKNOB=$(sed 's.\\./.g' <<< $DIGITALKNOB)
+	else
+		DIGITALKNOB="$HOME/digitalknob"
+	fi
+
+	mkdir -p $DIGITALKNOB;
+	echo "DIGITALKNOB = $DIGITALKNOB"
+
+	DKDOWNLOAD="$DIGITALKNOB/download"
+	mkdir -p $DKDOWNLOAD;
+	echo "DKDOWNLOAD = $DKDOWNLOAD"
+
+	if [[ "$OSTYPE" == "darwin"* ]]; then
+		validate_homebrew
+	fi
+
+	validate_which
+	validate_cmake
+	validate_git
+	validate_branch
+
+	echo "DKPATH = $DKPATH"
+	echo "DKCMAKE = $DKCMAKE"
+	echo "DK3RDPARTY = $DK3RDPARTY"
+	echo "DKIMPORTS = $DKIMPORTS"
+
+
+	if [ $SCRIPTPATH == $DKPATH ]; then
+		echo "SCRIPTPATH and \$DKPATH are the same"
+	else
+		warning "$SCRIPTNAME is not running from the DKPATH directory. Any changes will not be saved by git!"
+		warning "$SCRIPTNAME path = $SCRIPTPATH"
+		warning "DKPATH path = $DKPATH"
+	fi
+	
+	Pick_Update
+	Pick_App
+	Pick_OS
+	Pick_Type
+	Generate
+	build_project
+}
+
+
 
 
 ###### validate_sudo() ######
@@ -476,252 +547,193 @@ function enter_manually() {
 
 
 
-
-
-############################################################
-#############  main #######################################
-###########################################################
-
-validate_sudo
-
-
-echo ""
-echo "HOSTNAME = $HOSTNAME"
-echo "HOSTTYPE = $HOSTTYPE"
-echo "MACHTYPE = $MACHTYPE"
-echo "MODEL = $MODEL"
-echo "MSYSTEM = $MSYSTEM"
-echo "OSTYPE = $OSTYPE"
-echo "SCRIPTNAME = $SCRIPTNAME"
-echo "SCRIPTPATH = $SCRIPTPATH"
-echo "USER = $USER"
-echo "USERNAME = $USERNAME"
-echo " "
-
-#--------------------------------------------------------
-# Main
-#--------------------------------------------------------
-if [[ -n "$USERPROFILE" ]]; then
-	DIGITALKNOB="$USERPROFILE\digitalknob"
-	DIGITALKNOB=$(sed 's.C:./c.g' <<< $DIGITALKNOB)
-	DIGITALKNOB=$(sed 's.\\./.g' <<< $DIGITALKNOB)
-else
-	DIGITALKNOB="$HOME/digitalknob"
-fi
-
-mkdir -p $DIGITALKNOB;
-echo "DIGITALKNOB = $DIGITALKNOB"
-
-DKDOWNLOAD="$DIGITALKNOB/download"
-mkdir -p $DKDOWNLOAD;
-echo "DKDOWNLOAD = $DKDOWNLOAD"
-
-if [[ "$OSTYPE" == "darwin"* ]]; then
-	validate_homebrew
-fi
-
-validate_which
-validate_cmake
-validate_git
-validate_branch
-
-echo "DKPATH = $DKPATH"
-echo "DKCMAKE = $DKCMAKE"
-echo "DK3RDPARTY = $DK3RDPARTY"
-echo "DKIMPORTS = $DKIMPORTS"
-
-
-if [ $SCRIPTPATH == $DKPATH ]; then
-	echo "SCRIPTPATH and \$DKPATH are the same"
-else
-	warning "$SCRIPTNAME is not running from the DKPATH directory. Any changes will not be saved by git!"
-	warning "$SCRIPTNAME path = $SCRIPTPATH"
-	warning "DKPATH path = $DKPATH"
-fi
-
-
-
 ######### Pick_Update #########
-	echo " "
-	PS3='Please select an option:     (Press Enter To Skip)'
-	options=(
-		"Git Update" 
-		"Git Commit" 
-		"Push assets" 
-		"Pull assets"
-		"Reset Apps"
-		"Reset Plugins"
-		"Reset 3rdParty"
-		"Reset All"
-		"Clear Screen"
-		"Clear cmake cache and .tmp files"
-		"Reload"
-		"Exit")
-	select opt in "${options[@]}"
-	do
-		case $opt in
-					'')
-				echo "$opt"
-				break
-				;;
-			"Git Update")
-				echo "$opt"
-				git_update
-				break
-				;;
-			"Git Commit")
-				echo "$opt"
-				git_commit
-				break
-				;;
-			"Push assets")
-				echo "$opt"
-				push_assets
-				break
-				;;
-			"Pull assets")
-				echo "$opt"
-				break
-				;;
-			"Reset Apps")
-				echo "$opt"
-				reset_apps
-				break
-				;;
-			"Reset Plugins")
-				echo "$opt"
-				reset_plugins
-				break
-				;;
-			"Reset 3rdParty")
-				echo "$opt"
-				reset_3rdpaty
-				break
-				;;
-			"Reset All")
-				echo "$opt"
-				reset_all
-				break
-				;;
-			"Clear Screen")
-				echo "$opt"
-				break
-				;;
-			"Clear cmake cache and .tmp files")
-				echo "$opt"
-				break
-				;;
-			"Reload")
-				echo "$opt"
-				break
-				;;
+function Pick_Update() {
+		echo " "
+		PS3='Please select an option:     (Press Enter To Skip)'
+		options=(
+			"Git Update" 
+			"Git Commit" 
+			"Push assets" 
+			"Pull assets"
+			"Reset Apps"
+			"Reset Plugins"
+			"Reset 3rdParty"
+			"Reset All"
+			"Clear Screen"
+			"Clear cmake cache and .tmp files"
+			"Reload"
 			"Exit")
-				echo "$opt"
-				exit 0
-				;;
-			*) echo "invalid option $REPLY";;
-		esac 
-		REPLY=
-	done 
-    
+		select opt in "${options[@]}"
+		do
+			case $opt in
+						'')
+					echo "$opt"
+					break
+					;;
+				"Git Update")
+					echo "$opt"
+					git_update
+					break
+					;;
+				"Git Commit")
+					echo "$opt"
+					git_commit
+					break
+					;;
+				"Push assets")
+					echo "$opt"
+					push_assets
+					break
+					;;
+				"Pull assets")
+					echo "$opt"
+					break
+					;;
+				"Reset Apps")
+					echo "$opt"
+					reset_apps
+					break
+					;;
+				"Reset Plugins")
+					echo "$opt"
+					reset_plugins
+					break
+					;;
+				"Reset 3rdParty")
+					echo "$opt"
+					reset_3rdpaty
+					break
+					;;
+				"Reset All")
+					echo "$opt"
+					reset_all
+					break
+					;;
+				"Clear Screen")
+					echo "$opt"
+					break
+					;;
+				"Clear cmake cache and .tmp files")
+					echo "$opt"
+					break
+					;;
+				"Reload")
+					echo "$opt"
+					break
+					;;
+				"Exit")
+					echo "$opt"
+					exit 0
+					;;
+				*) echo "invalid option $REPLY";;
+			esac 
+			REPLY=
+		done 	
+}   
 	
 	
 	
 	
-######### Pick_App #########	
+######### Pick_App #########
+function Pick_App() {
 
-# https://unix.stackexchange.com/a/293605
-COLUMNS=1
+	# https://unix.stackexchange.com/a/293605
+	COLUMNS=1
 
-while :
-	do
-	echo " "
-	PS3='Please update and select an app to build: '
-	options=(
-		"HelloWorld" 
-		"DKCore" 
-		"DKJavascript" 
-		"DKBuilder" 
-		"DKSDL" 
-		"DKSDLRml" 
-		"DKDomTest" 
-		"DKTestAll"
-		"Enter_manually"
-		"Clear Screen"
-		"Go Back"
-		"Reload"
-		"Exit")
-	select opt in "${options[@]}"
-	do
-		case $opt in
-			"HelloWorld")
-				echo "$opt"
-				APP="HelloWorld"
-				break
-				;;
-			"DKCore")
-				echo "$opt"
-				APP="DKCore"
-				break
-				;;
-			"DKJavascript")
-				echo "$opt"
-				APP="DKJavascript"
-				break
-				;;
-			"DKBuilder")
-				echo "$opt"
-				APP="DKBuilder"
-				break
-				;;
-			"DKSDL")
-				echo "$opt"
-				APP="DKSDL"
-				break
-				;;
-			"DKSDLRml")
-				echo "$opt"
-				APP="DKSDLRml"
-				break
-				;;
-			"DKDomTest")
-				echo "$opt"
-				APP="DKDomTest"
-				break
-				;;
-			"DKTestAll")
-				echo "$opt"
-				APP="DKTestAll"
-				break
-				;;
-			"Enter_manually")
-				echo "$opt"
-				enter_manually
-				break
-				;;				
-			"Clear Screen")
-				echo "$opt"
-				clear
-				;;
-			"Go Back")
-				echo "$opt"
-				;;
-			"Reload")
-				echo "$opt"
-				call reload
-				;;
+	while :
+		do
+		echo " "
+		PS3='Please update and select an app to build: '
+		options=(
+			"HelloWorld" 
+			"DKCore" 
+			"DKJavascript" 
+			"DKBuilder" 
+			"DKSDL" 
+			"DKSDLRml" 
+			"DKDomTest" 
+			"DKTestAll"
+			"Enter_manually"
+			"Clear Screen"
+			"Go Back"
+			"Reload"
 			"Exit")
-				echo "$opt"
-				exit 0
-				;;
-			*) echo "invalid option $REPLY";;
-		esac 
-		REPLY=
-	done
-	TARGET=${APP}
+		select opt in "${options[@]}"
+		do
+			case $opt in
+				"HelloWorld")
+					echo "$opt"
+					APP="HelloWorld"
+					break
+					;;
+				"DKCore")
+					echo "$opt"
+					APP="DKCore"
+					break
+					;;
+				"DKJavascript")
+					echo "$opt"
+					APP="DKJavascript"
+					break
+					;;
+				"DKBuilder")
+					echo "$opt"
+					APP="DKBuilder"
+					break
+					;;
+				"DKSDL")
+					echo "$opt"
+					APP="DKSDL"
+					break
+					;;
+				"DKSDLRml")
+					echo "$opt"
+					APP="DKSDLRml"
+					break
+					;;
+				"DKDomTest")
+					echo "$opt"
+					APP="DKDomTest"
+					break
+					;;
+				"DKTestAll")
+					echo "$opt"
+					APP="DKTestAll"
+					break
+					;;
+				"Enter_manually")
+					echo "$opt"
+					enter_manually
+					break
+					;;				
+				"Clear Screen")
+					echo "$opt"
+					clear
+					;;
+				"Go Back")
+					echo "$opt"
+					;;
+				"Reload")
+					echo "$opt"
+					call reload
+					;;
+				"Exit")
+					echo "$opt"
+					exit 0
+					;;
+				*) echo "invalid option $REPLY";;
+			esac 
+			REPLY=
+		done
+		TARGET=${APP}
+done
+}
+
 
 
 ######### Pick_OS #########
+function Pick_OS() {
 	# TODO
 	#  1) Linux (x86_64)
 
@@ -862,10 +874,11 @@ while :
 		esac 
 		REPLY=
 	done
-
+}
 
 
 ######### Pick_Type #########
+function Pick_Type() {
 	echo " "
 	PS3='Please select build type: '
 	options=(
@@ -908,11 +921,20 @@ while :
 		esac 
 		REPLY=
 	done
+}
 	
+	
+
+function Generate() {
+	
+	echo ""
+	echo "##################################################################"
+	echo "****** Generating $APP - $OS - $TYPE - $LEVEL ******"
+	echo "##################################################################"
+	echo ""
+
 	clear_cmake_cache
 	delete_temp_files
-		
-	 
 
 	LEVEL="RebuildAll"
 	LINK="Static"
@@ -962,7 +984,6 @@ while :
 	fi
 
 	
-	
 	###### MAKE_PROGRAM ######
 	#validate_make
 	#if [[ -n "$MAKE_PROGRAM" ]]; then
@@ -989,10 +1010,7 @@ while :
 		EXE_LINKER_FLAGS="-static -mconsole"		
 		#CMAKE_ARGS+=( "-DCMAKE_EXE_LINKER_FLAGS=$EXE_LINKER_FLAGS" )
 	fi
-	
-	
-	
-	
+
 	
 	#TODO: turn into a cmake_eval
 	# build-essential for Tiny Core Linux
@@ -1008,17 +1026,6 @@ while :
 	
 	call export SHELL="/bin/bash"
 	
-
-	
-	
-	
-	
-	
-	echo ""
-	echo "##################################################################"
-	echo "****** Generating $APP - $OS - $TYPE - $LEVEL ******"
-	echo "##################################################################"
-	echo ""
 	
 	mkdir -p $DKPATH/DKApps/$APP/$OS
 	cd /
@@ -1155,11 +1162,9 @@ while :
 		fi
 		TARGET=${APP}_APP
 	fi
-	
-	#>>>>>>>>>>>>
-	build_project
-done
-	
+}
+
+
 	
 	
 	
@@ -1199,5 +1204,6 @@ function build_project() {
 }
 
 
+main "$@"
 
 exec $SHELL		# keep terminal open
