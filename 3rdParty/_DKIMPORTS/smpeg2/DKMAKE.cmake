@@ -9,6 +9,9 @@ dk_depend(sdl)
 dk_import(https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz PATCH)
 
 
+### PATCH ###
+dk_command("git apply gcc6.patch.txt")
+
 ### LINK ###
 dk_include				(${SMPEG2})
 if(MSVC)
