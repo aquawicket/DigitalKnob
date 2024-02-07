@@ -392,33 +392,49 @@ function reset_plugins() {
 
 
 function reset_all() {
-	cd $DKPATH
-	$GIT clean -f -d
+	read -p "Are you sure? " -n 1 -r
+	echo
+	if [[ $REPLY =~ ^[Yy]$ ]]
+	then
+		cd $DKPATH
+		$GIT clean -f -d
+	fi
 }
 
 function git_update() {
 
-	if [[ ! -d "$DKPATH/.git" ]]; then
-		call git clone https://github.com/aquawicket/DigitalKnob.git $DKPATH
-	fi
-	cd $DKPATH
-	git pull --all
-	git checkout -- .
-	git checkout $DKBRANCH
-	if [[ "$?" == "0" ]]; then
-		echo "$DKBRANCH branch selected"
-	else
-	echo "Remote has no $DKBRANCH branch. Creating..."
-		git checkout -b $DKBRANCH main
-		git push --set-upstream origin $DKBRANCH
-	fi
-	chmod +x $DKPATH/build.sh
-	#call reload
+
+		if [[ ! -d "$DKPATH/.git" ]]; then
+			call git clone https://github.com/aquawicket/DigitalKnob.git $DKPATH
+		fi
+		cd $DKPATH
+		git pull --all
+		git checkout -- .
+		git checkout $DKBRANCH
+		if [[ "$?" == "0" ]]; then
+			echo "$DKBRANCH branch selected"
+		else
+		echo "Remote has no $DKBRANCH branch. Creating..."
+			git checkout -b $DKBRANCH main
+			git push --set-upstream origin $DKBRANCH
+		fi
+		chmod +x $DKPATH/build.sh
+		#call reload
+
 }
 
 function git_commit() {
-	cd $DKPATH
-	git commit -a -m "git commit"
+	read -p "Are you sure? " -n 1 -r
+	if [[ ! $REPLY =~ ^[Yy]$ ]]; then echo "inside"
+	fi
+	
+
+
+	
+		cd $DKPATH
+		git commit -a -m "git commit"
+		
+
 }
 
 function enter_manually() {
