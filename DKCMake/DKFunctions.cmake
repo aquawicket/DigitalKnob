@@ -4715,7 +4715,7 @@ endfunction()
 #
 function(dk_findLibrary name)
 	DKDEBUGFUNC(${ARGV})
-	find_library(${name}_LIBRARY ${name})
+	find_library(${name}_LIBRARY ${name} ${ARGN})
 	if(NOT WIN)
 		if(NOT ${name}_LIBRARY)
 			dk_error("Could not locate ${name} Library")

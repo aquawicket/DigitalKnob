@@ -23,7 +23,7 @@ endif()
 #endif()	
 
 if(ANDROID)
-	dk_findLibrary(OpenGLES)
+	dk_findLibrary(OpenGLES ${ANDROID_NDK}/toolchains/llvm/prebuilt/linux-aarch64/sysroot/usr/include)
 	
 	dk_define(GL_GLEXT_PROTOTYPES)
 	ANDROID_dk_lib(GLESv1_CM)
