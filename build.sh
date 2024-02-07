@@ -641,8 +641,6 @@ function Pick_App() {
 	# https://unix.stackexchange.com/a/293605
 	COLUMNS=1
 
-	while :
-		do
 		echo " "
 		PS3='Please update and select an app to build: '
 		options=(
@@ -727,7 +725,7 @@ function Pick_App() {
 			REPLY=
 		done
 		#TARGET=${APP}
-done
+
 }
 
 
