@@ -22,7 +22,6 @@
 :: OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 :: SOFTWARE.
 @echo off
-setlocal EnableDelayedExpansion
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: cmake_echo <command> <file.ext>
@@ -38,31 +37,31 @@ if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit ) :: k
 
 ::###### cmake_echo ######
 :cmake_echo
-	if [%1] == [] 				echo "ERROR: cmake_echo() parameterv1 is invalid" & goto:eof
-	if [%2] == [] 				echo "ERROR: cmake_echo() parameterv2 is invalid" & goto:eof
+	if [%1] == []  goto:eof
 	
 	set "DKBRANCH=Development"
 	set "DIGITALKNOB=%HOMEDRIVE%%HOMEPATH%\digitalknob"
 	set "DKCMAKE=%DIGITALKNOB%\%DKBRANCH%\DKCMake"
-	
 	if exist "C:\Program Files\CMake\bin\cmake.exe" 		set "CMAKE=C:\Program Files\CMake\bin\cmake.exe"
 	if exist "C:\Program Files (x86)\CMake\bin\cmake.exe" 	set "CMAKE=C:\Program Files (x86)\CMake\bin\cmake.exe"
 	if not exist "%CMAKE%" 									echo "ERROR: Could not locate CMAKE" & goto:eof
-	
 	if not exist "%CMAKE%"		echo "ERROR: Could not locate CMAKE" 	& goto:eof
 	if not exist "%DKCMAKE%" 	echo "ERROR: Could not locate DKCMAKE" 	& goto:eof
 
 	:: cmake_echo begin
-	set commands=%1
-	set file=%2
-	call set commands=%%commands:"=%%
-	set "DKCOMMAND=%commands%"
-	call set DKCOMMAND=%%DKCOMMAND:^\=^/%%
-	echo DKCOMMAND = %DKCOMMAND%
+	::set commands=%1
+	::set file=%2
+	::call set commands=%%commands:"=%%
+	::set "DKCOMMAND=%commands%"
+	::call set DKCOMMAND=%%DKCOMMAND:^\=^/%%
+	::echo "cmd> %DKCOMMAND%"
 	call set DKCMAKE_DIR=%%DKCMAKE:^\=^/%%
 	
-	"%CMAKE%" "-DDKCMAKE=%DKCMAKE_DIR%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE_DIR%/dev/cmake_echo.cmake"
-	goto:eof
+	set "ALL_ARGS=%*"
+	echo %ALL_ARGS%
+	::"%CMAKE%" "-DDKCMAKE=%DKCMAKE_DIR%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE_DIR%/dev/cmake_echo.cmake"
+	"%CMAKE%" %ALL_ARGS% -P "%DKCMAKE_DIR%/dev/cmake_echo.cmake"
+
 		
 	::echo return code: %ERRORLEVEL%
 goto:eof

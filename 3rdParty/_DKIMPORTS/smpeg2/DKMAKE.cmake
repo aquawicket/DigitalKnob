@@ -10,7 +10,18 @@ dk_import(https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz PATC
 
 
 ### PATCH ###
-dk_command("git apply gcc6.patch.txt")
+macro(dk_getUnixPath path unix_path)
+	if(WIN32)
+		execute_process(COMMAND cygpath.exe "${path}" OUTPUT_VARIABLE ${unix_path} OUTPUT_STRIP_TRAILING_WHITESPACE)
+		string (STRIP ${unix_path} unix_path)
+	endif(WIN32)
+endmacro()
+dk_debug(SMPEG2
+dk_getUnixPath("${SMPEG2}" SMPEG2_UNIX)
+execute_process(COMMAND "git apply -v '${SMPEG2}/gcc6.patch.txt'" OUTPUT_VARIABLE RPLY WORKING_DIRECTORY "${SMPEG2}")
+
+
+
 
 ### LINK ###
 dk_include				(${SMPEG2})

@@ -25,5 +25,28 @@ include_guard()
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 
-execute_process(COMMAND "${DKCOMMAND}" OUTPUT_VARIABLE out ERROR_VARIABLE out ECHO_OUTPUT_VARIABLE)
-file(WRITE log.txt "${out}")
+
+set(PASSED_PARAMETERS "") # it will contain all params string
+set(ARG_NUM 1) # current index, starting with 1 (0 ignored)
+math(EXPR ARGC_COUNT "${CMAKE_ARGC}-2") # disscount last 2 parameters
+
+
+while(ARG_NUM LESS ARGC_COUNT)	
+    set(CURRENT_ARG ${CMAKE_ARGV${ARG_NUM}})					# making current arg named "CMAKE_ARGV" + "CURRENT_INDEX"
+    #message(STATUS "${CURRENT_ARG}")
+    set(PASSED_PARAMETERS ${PASSED_PARAMETERS} ${CURRENT_ARG})  # adding current param to the list
+    math(EXPR ARG_NUM "${ARG_NUM}+1") 							# incrementing current index
+endwhile()
+
+#message(STATUS "> ${PASSED_PARAMETERS}")
+execute_process(COMMAND ${PASSED_PARAMETERS}
+				RESULT_VARIABLE result
+				OUTPUT_VARIABLE output
+				OUTPUT_STRIP_TRAILING_WHITESPACE)
+
+if(NOT ${result} EQUAL 0)
+    message(STATUS "ERROR: '${result}'")
+endif()
+message(STATUS "output> ${output}")
+
+file(WRITE log.txt "${output}")

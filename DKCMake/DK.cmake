@@ -128,3 +128,5 @@ include(${DKCMAKE}/functions/dk_importVariables.cmake)
 dk_depend(cmake)
 dk_depend(git)
 dk_depend(msys2)
+
+dk_msys2("echo MSYSTEM = $MSYSTEM")
