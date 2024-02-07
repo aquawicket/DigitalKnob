@@ -84,12 +84,12 @@ function main() {
 		warning "DKPATH path = $DKPATH"
 	fi
 	
-	Pick_Update
-	Pick_App
-	Pick_OS
-	Pick_Type
-	Generate
-	build_project
+	if ! [[ -n "$Update" ]]; then Pick_Update; fi
+	if ! [[ -n "$APP" ]]; then Pick_App; fi
+	if ! [[ -n "$OS" ]]; then Pick_OS; fi
+	if ! [[ -n "$Type" ]]; then Pick_Type; fi
+	Generate_Project
+	Build_Project
 }
 
 
@@ -726,7 +726,7 @@ function Pick_App() {
 			esac 
 			REPLY=
 		done
-		TARGET=${APP}
+		#TARGET=${APP}
 done
 }
 
@@ -925,7 +925,7 @@ function Pick_Type() {
 	
 	
 
-function Generate() {
+function Generate_Project() {
 	
 	echo ""
 	echo "##################################################################"
@@ -1168,8 +1168,8 @@ function Generate() {
 	
 	
 	
-### build_project() ###
-function build_project() {
+### Build_Project() ###
+function Build_Project() {
 
 	echo ""
 	echo "##################################################################"
