@@ -32,7 +32,7 @@ if(GIFLIB_USE_CMAKE)
 	if(WIN)
 		dk_setPath				(${GIFLIB})
 		
-		if(MSYS2)
+		if(MSYS)
 			dk_queueCommand		(export ACLOCAL_PATH=${MSYS2}/usr/share/aclocal && autoreconf -f -i)
 		else()
 			dk_queueCommand		(autoreconf -f -i)

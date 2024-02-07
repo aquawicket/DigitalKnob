@@ -29,10 +29,13 @@ dk_set(SMPEG2_CMAKE -DSMPEG_INCLUDE_DIR=${SMPEG2})
 	
 	
 ### GENERATE ###
+string(REPLACE "-std=c17" "" SMPEG2_BUILD "${DKCMAKE_BUILD}")
+string(REPLACE "-std=c++1z" "" SMPEG2_BUILD "${SMPEG2_BUILD}")
+string(REPLACE "  " " " SMPEG2_BUILD "${SMPEG2_BUILD}")
 if(MSVC OR ANDROID)
-	dk_queueCommand		(${DKCMAKE_BUILD} ${SDL_CMAKE} ${SMPEG2})
+	dk_queueCommand		(${SMPEG2_BUILD} ${SDL_CMAKE} ${SMPEG2})
 else()
-	dk_queueCommand		(${DKCMAKE_BUILD} ${SDL_CMAKE} -DCMAKE_CXX_FLAGS=-Wno-narrowing ${SMPEG2})
+	dk_queueCommand		(${SMPEG2_BUILD} ${SDL_CMAKE} -DCMAKE_CXX_FLAGS=-Wno-narrowing ${SMPEG2})
 endif()
 
 
