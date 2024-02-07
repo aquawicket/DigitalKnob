@@ -7,6 +7,7 @@ function CONFIRM() {
 	echo 
 	read -p "Are you sure (Y/N) ? " -n 1 -r
 	echo
+	echo
 	if [[ $REPLY =~ ^[Yy]$ ]]; then 
 		return 1; 
 	fi
