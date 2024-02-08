@@ -943,6 +943,7 @@ goto:eof
     cd %DKPATH%
     "%GIT%" config user.email "%GIT_USER_EMAIL%"
     "%GIT%" config user.name "%GIT_USER_NAME%"
+	"%GIT%" config credential.helper store
     
 	if ["%message%"]==[""] set "message=git commit"
 	"%GIT%" commit -a -m "%message%"

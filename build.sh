@@ -1135,6 +1135,7 @@ function git_commit() {
 	cd $DKPATH
     $GIT config user.email $GIT_USER_EMAIL
     $GIT config user.name $GIT_USER_NAME
+	$GIT config credential.helper store
     
 	if ! [[ -n "$message" ]]; then
 		message="git commit"
