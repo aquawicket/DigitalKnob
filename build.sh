@@ -6,6 +6,10 @@
 #--------------------------------------------------------
 #  GLOBAL USER VARIABLES
 #--------------------------------------------------------
+GIT_USER_EMAIL="aquawicket@hotmail.com"
+GIT_USER_NAME="aquawicket"
+	
+
 SCRIPTPATH=$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )
 SCRIPTNAME=$(basename "$0")
 echo $SCRIPTPATH/$SCRIPTNAME
@@ -520,7 +524,7 @@ function git_commit() {
     $GIT config user.email $GIT_USER_EMAIL
     $GIT config user.name $GIT_USER_NAME
     
-	if $message=""; then
+	if "${message}"=""; then
 			message="git commit"
 	fi
 	$GIT commit -a -m "${message}"
@@ -1006,7 +1010,7 @@ function Generate_Project() {
 		CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$CXX_COMPILER" )
 	fi
 	### CLANG ###
-	if [[ $MSYSTEM == "CLANG32" ]] || [[ $MSYSTEM == "CLANG64" ]] || [[ $MSYSTEM == "CLANGARM64" ]] || [[ $MSYSTEM == "UCRT64" ]]; then
+	if [[ $MSYSTEM == "CLANG32" ]] || [[ $MSYSTEM == "CLANG64" ]] || [[ $MSYSTEM == "CLANGARM64" ]] || [[ $MSYSTEM == "UCRT64" ]] || [[ "$OSTYPE" == "linux-android" ]]; then
 		validate_clang
 		CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$C_COMPILER" )
 		CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$CXX_COMPILER" )

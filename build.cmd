@@ -944,17 +944,17 @@ goto:eof
 	set /P AREYOUSURE=Are you sure (Y/[N])?
 	if /I "%AREYOUSURE%" NEQ "Y" goto:eof
 	
-	
 	echo "Please enter some details about this commit, Then press enter."
-	set /p message=
+	set /p message=">"
 	
     cd %DKPATH%
     "%GIT%" config user.email "%GIT_USER_EMAIL%"
     "%GIT%" config user.name "%GIT_USER_NAME%"
     
-	if [%message%]=[]   message="git commit"
+	if ["%message%"]==[""] set "message=git commit"
 	"%GIT%" commit -a -m "%message%"
     "%GIT%" push
+	
     call:check_error
 goto:eof
 
