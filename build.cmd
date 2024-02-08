@@ -673,6 +673,7 @@ goto:eof
 :check_error
     if "%ERRORLEVEL%" == "0" goto:eof
     call:error "ERRORLEVEL = %ERRORLEVEL%"
+	pause
     exit
 goto:eof
 
