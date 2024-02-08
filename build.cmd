@@ -102,6 +102,7 @@ call:ASSERT
 pause & goto:main
 :ASSERT
 	if [%1]==[] goto:is_false
+	if [%1]==[''] goto:is_false
 	if [%1]==[""] goto:is_false
 	
 	if not %~1 LSS 1 echo ^[32m %1 = true ^[0m & goto:eof
@@ -168,12 +169,11 @@ goto:eof
     echo DK3RDPARTY = %DK3RDPARTY%
     echo DKIMPORTS = %DKIMPORTS%
 
-    set TARGET_OS=
     :while_loop             
-        if '%UPDATE%'==''     call:pick_update & goto:while_loop
-        if '%APP%'==''        call:pick_app    & goto:while_loop
-        if '%TARGET_OS%'==''  call:pick_os     & goto:while_loop
-        if '%TYPE%'==''       call:pick_type   & goto:while_loop
+        if "%UPDATE%"==""     call:pick_update & goto:while_loop
+        if "%APP%"==""        call:pick_app    & goto:while_loop
+        if "%TARGET_OS%"==""  call:pick_os     & goto:while_loop
+        if "%TYPE%"==""       call:pick_type   & goto:while_loop
 
         call:generate
         if %TARGET_OS%==win32       call:generate_win32
@@ -186,8 +186,7 @@ goto:eof
 		if %TYPE%==All      call:build_all
 		if %TYPE%==Release  call:build_release
         if %TYPE%==Debug    call:build_debug
-
-                
+       
         call:end_message
         
     goto while_loop
@@ -215,28 +214,27 @@ goto:eof
     echo  Press Enter To Skip
         
     set choice=
-    set /p choice=Choose a selection:
-        
-    if '%choice%'=='1'  call:git_update
-    if '%choice%'=='2'  call:git_commit
-    if '%choice%'=='3'  call:push_assets
-    if '%choice%'=='4'  call:pull_assets
-    if '%choice%'=='5'  call:reset_apps
-    if '%choice%'=='6'  call:reset_plugins
-    if '%choice%'=='7'  call:reset_3rdparty
-    if '%choice%'=='8'  call:reset_all
-    if '%choice%'=='9'  call:clear_screen
-    if '%choice%'=='10' call:dk_deleteCache & call:delete_temp_files
-    if '%choice%'=='11' call:reload
-    if '%choice%'=='12' exit
+    set /p choice=Choose a selection
+    if "%choice%"=="1"  call:git_update
+    if "%choice%"=="2"  call:git_commit
+    if "%choice%"=="3"  call:push_assets
+    if "%choice%"=="4"  call:pull_assets
+    if "%choice%"=="5"  call:reset_apps
+    if "%choice%"=="6"  call:reset_plugins
+    if "%choice%"=="7"  call:reset_3rdparty
+    if "%choice%"=="8"  call:reset_all
+    if "%choice%"=="9"  call:clear_screen
+    if "%choice%"=="10" call:dk_deleteCache & call:delete_temp_files
+    if "%choice%"=="11" call:reload
+    if "%choice%"=="12" exit
 	
     set UPDATE=true
 goto:eof
 
 :pick_app
-    set APP=
-    TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
-        
+	TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
+    
+	set APP=  
     echo.
     echo  1) HelloWorld
     echo  2) DKCore
@@ -254,25 +252,22 @@ goto:eof
     set choice=
     set /p choice=Please select an app to build:
     ::if not '%choice%'=='' set choice=%choice:~0,1%        ::What does this do?
-        
-    if '%choice%'=='1'  set "APP=HelloWorld"   & goto:eof
-    if '%choice%'=='2'  set "APP=DKCore"       & goto:eof
-    if '%choice%'=='3'  set "APP=DKJavascript" & goto:eof
-    if '%choice%'=='4'  set "APP=DKBuilder"    & goto:eof
-    if '%choice%'=='5'  set "APP=DKSDL"        & goto:eof
-    if '%choice%'=='6'  set "APP=DKSDLRml"     & goto:eof
-    if '%choice%'=='7'  set "APP=DKDomTest"    & goto:eof
-    if '%choice%'=='8'  set "APP=DKTestAll"    & goto:eof
-	if '%choice%'=='9'  call:enter_manually    & goto:eof
-    if '%choice%'=='10' call:clear_screen      & goto:eof
-    if '%choice%'=='11' call:reload            & goto:eof
-    if '%choice%'=='12' set "UPDATE="          & goto:eof
-    if '%choice%'=='13' exit               & goto:eof
+    if "%choice%"=="1"  set "APP=HelloWorld"   & goto:eof
+    if "%choice%"=="2"  set "APP=DKCore"       & goto:eof
+    if "%choice%"=="3"  set "APP=DKJavascript" & goto:eof
+    if "%choice%"=="4"  set "APP=DKBuilder"    & goto:eof
+    if "%choice%"=="5"  set "APP=DKSDL"        & goto:eof
+    if "%choice%"=="6"  set "APP=DKSDLRml"     & goto:eof
+    if "%choice%"=="7"  set "APP=DKDomTest"    & goto:eof
+    if "%choice%"=="8"  set "APP=DKTestAll"    & goto:eof
+	if "%choice%"=="9"  call:enter_manually    & goto:eof
+    if "%choice%"=="10" call:clear_screen      & goto:eof
+    if "%choice%"=="11" call:reload            & goto:eof
+    if "%choice%"=="12" set "UPDATE="          & goto:eof
+    if "%choice%"=="13" exit                   & goto:eof
 	
     echo %choice%: invalid selection, please try again
 	set APP=
-        
-    ::if not 'APP'=='' call:checkApp
 goto:eof
 
 
@@ -334,17 +329,15 @@ goto:eof
     echo 8) Exit
     set choice=
     set /p choice=Please select an OS to build for: 
-    ::if not '%choice%'=='' set choice=%choice:~0,1%        ::What does this do?
-        
-    if '%choice%'=='1' set "TARGET_OS=win32"      & goto:eof
-    if '%choice%'=='2' set "TARGET_OS=win64"      & goto:eof
-    if '%choice%'=='3' set "TARGET_OS=android32"  & goto:eof
-    if '%choice%'=='4' set "TARGET_OS=android64"  & goto:eof
-    if '%choice%'=='5' set "TARGET_OS=emscripten" & goto:eof
-    if '%choice%'=='6' call:clear_screen          & goto:eof
-    if '%choice%'=='7' set "APP="                 & goto:eof
-    if '%choice%'=='8' exit                   & goto:eof
-    
+    ::if not "%choice%"=="" set choice=%choice:~0,1%        ::What does this do?
+    if "%choice%"=="1" set "TARGET_OS=win32"		& goto:eof
+    if "%choice%"=="2" set "TARGET_OS=win64"		& goto:eof
+    if "%choice%"=="3" set "TARGET_OS=android32"	& goto:eof
+    if "%choice%"=="4" set "TARGET_OS=android64"	& goto:eof
+    if "%choice%"=="5" set "TARGET_OS=emscripten"	& goto:eof
+    if "%choice%"=="6' call:clear_screen			& goto:eof
+    if "%choice%"=="7" set "APP="					& goto:eof
+    if "%choice%"=="8" exit							& goto:eof
 	echo %choice%: invalid selection, please try again
 	set TARGET_OS=
 goto:eof
@@ -364,14 +357,14 @@ goto:eof
     echo 6) Exit
     set choice=
     set /p choice=Please select a build type: 
-    ::if not '%choice%'=='' set choice=%choice:~0,1%        ::What does this do?
+    ::if not "%choice%"=="" set choice=%choice:~0,1%        ::What does this do?
         
-    if '%choice%'=='1' set "TYPE=Debug"    & goto:eof
-    if '%choice%'=='2' set "TYPE=Release"  & goto:eof
-    if '%choice%'=='3' set "TYPE=All"      & goto:eof
-    if '%choice%'=='4' call:clear_screen   & goto:eof
-    if '%choice%'=='5' set "TARGET_OS="    & goto:eof
-    if '%choice%'=='6' exit            & goto:eof
+    if "%choice%"=="1" set "TYPE=Debug"    & goto:eof
+    if "%choice%"=="2" set "TYPE=Release"  & goto:eof
+    if "%choice%"=="3" set "TYPE=All"      & goto:eof
+    if "%choice%"=="4" call:clear_screen   & goto:eof
+    if "%choice%"=="5" set "TARGET_OS="    & goto:eof
+    if "%choice%"=="6" exit            & goto:eof
         
     echo %choice%: invalid selection, please try again
 	set TYPE=
@@ -388,7 +381,7 @@ goto:eof
     call:dk_deleteCache
     call:delete_temp_files
 	
-	if '%TARGET_PATH%'=='' set "TARGET_PATH=%DKPATH%\DKApps\%APP%"
+	if "%TARGET_PATH%"=="" set "TARGET_PATH=%DKPATH%\DKApps\%APP%"
     call:make_directory "%TARGET_PATH%\%TARGET_OS%"
     cd "%TARGET_PATH%\%TARGET_OS%"
 	echo APP = %APP%
