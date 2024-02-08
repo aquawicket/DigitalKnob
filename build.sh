@@ -4,7 +4,6 @@
 ############ DigitalKnob builder script ############
 # to run this script requires privledges, use $ chmod 777 build.sh
 
-
 ###### GLOBAL USER VARIABLES ######
 GIT_USER_EMAIL="aquawicket@hotmail.com"
 GIT_USER_NAME="aquawicket"
