@@ -513,8 +513,18 @@ function git_update() {
 function git_commit() {	
 	if CONFIRM; then return; fi
 	
+	echo "Please enter some details about this commit, Then press enter."
+	read message
+	
 	cd $DKPATH
-	git commit -a -m "git commit"
+    $GIT config user.email $GIT_USER_EMAIL
+    $GIT config user.name $GIT_USER_NAME
+    
+	if $message=""; then
+			message="git commit"
+	fi
+	$GIT commit -a -m "${message}"
+    $GIT push
 }
 
 function enter_manually() {
