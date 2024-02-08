@@ -6,7 +6,6 @@
 ::--------------------------------------------------------
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 
-
 :: https://stackoverflow.com/a/4095133/688352
 
 ::	0
@@ -617,8 +616,8 @@ goto:eof
 :reset_apps
 	echo Resetting Apps . . .
 
-	set /P AREYOUSURE=Are you sure (Y/[N])?
-	if /I "%AREYOUSURE%" NEQ "Y" goto:eof
+	set /P CONFIRM=Are you sure (Y/[N])?
+	if /I "%CONFIRM%" NEQ "Y" goto:eof
 
 	cd %DKPATH%\DKApps
 	"%GIT%" clean -f -d
@@ -629,8 +628,8 @@ goto:eof
 :reset_plugins
 	echo Resetting DKPlugins . . .
 
-	set /P AREYOUSURE=Are you sure (Y/[N])?
-	if /I "%AREYOUSURE%" NEQ "Y" goto:eof
+	set /P CONFIRM=Are you sure (Y/[N])?
+	if /I "%CONFIRM%" NEQ "Y" goto:eof
 	
 	cd %DKPATH%\DKPlugins
 	"%GIT%" clean -f -d
@@ -641,8 +640,8 @@ goto:eof
 :reset_3rdparty
 	echo Resetting 3rdParty Libraries . . .
 	
-	set /P AREYOUSURE=Are you sure (Y/[N])?
-	if /I "%AREYOUSURE%" NEQ "Y" goto:eof
+	set /P CONFIRM=Are you sure (Y/[N])?
+	if /I "%CONFIRM%" NEQ "Y" goto:eof
 	
 	cd %DKPATH%\3rdParty
 	"%GIT%" clean -f -d
@@ -653,8 +652,8 @@ goto:eof
 :reset_all
 	echo Resetting Entire Local Repository . . .
 	
-	set /P AREYOUSURE=Are you sure (Y/[N])?
-	if /I "%AREYOUSURE%" NEQ "Y" goto:eof
+	set /P CONFIRM=Are you sure (Y/[N])?
+	if /I "%CONFIRM%" NEQ "Y" goto:eof
 	
 	cd %DKPATH%
 	"%GIT%" clean -f -d
@@ -907,8 +906,8 @@ goto:eof
 :git_update
 	echo Git Update? Any local changes will be lost.
 	
-	set /P AREYOUSURE=Are you sure (Y/[N])?
-	if /I "%AREYOUSURE%" NEQ "Y" goto:eof
+	set /P CONFIRM=Are you sure (Y/[N])?
+	if /I "%CONFIRM%" NEQ "Y" goto:eof
 	
     if NOT exist "%DKPATH%\.git" (
         "%GIT%" clone https://github.com/aquawicket/DigitalKnob.git "%DKPATH%"
@@ -934,24 +933,28 @@ goto:eof
 :: git_commit()
 :git_commit
 	echo Git Commit
-	set /P AREYOUSURE=Are you sure (Y/[N])?
-	if /I "%AREYOUSURE%" NEQ "Y" goto:eof
+	set /P CONFIRM=Are you sure (Y/[N])?
+	if /I "%CONFIRM%" NEQ "Y" goto:eof
 	
 	echo "Please enter some details about this commit, Then press enter."
 	set /p message=">"
 	
     cd %DKPATH%
-    "%GIT%" config user.email "%GIT_USER_EMAIL%"
-    "%GIT%" config user.name "%GIT_USER_NAME%"
-	"%GIT%" config credential.helper store
-    
+	call:command_to_variable "%GIT%" config --global user.email USER_EMAIL
+    if not "%USER_EMAIL%"=="%GIT_USER_EMAIL%" "%GIT%" config --global user.email "%GIT_USER_EMAIL%"
+	
+	call:command_to_variable "%GIT%" config --global user.email USER_NAME
+    if not "%USER_NAME%"=="%GIT_USER_NAME%" "%GIT%" config --global user.name "%GIT_USER_NAME%"
+	
+	call:command_to_variable "%GIT%" config --global credential.helper STORE
+	if not "%STORE%"=="store" "%GIT%" config --global credential.helper store
+	 
 	if ["%message%"]==[""] set "message=git commit"
 	"%GIT%" commit -a -m "%message%"
     "%GIT%" push
 	
     call:check_error
 goto:eof
-
 
 :: clear_screen()
 :clear_screen

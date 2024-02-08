@@ -1133,9 +1133,18 @@ function git_commit() {
 	read message
 	
 	cd $DKPATH
-    $GIT config user.email $GIT_USER_EMAIL
-    $GIT config user.name $GIT_USER_NAME
-	$GIT config credential.helper store
+	USER_EMAIL=$($GIT config --global user.email)
+	if ! [[ -n "USER_EMAIL" ]]; then
+		$GIT config --global user.email $GIT_USER_EMAIL
+	fi
+	USER_NAME=$($GIT config --global user.name)
+	if ! [[ -n "USER_NAME" ]]; then
+		$GIT config --global user.name $GIT_USER_NAME
+	fi
+	STORE=$($GIT config credential.helper)
+	if [[ "$STORE" == "store" ]]; then
+		$GIT config --global credential.helper store
+	fi
     
 	if ! [[ -n "$message" ]]; then
 		message="git commit"
