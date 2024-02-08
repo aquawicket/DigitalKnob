@@ -1136,7 +1136,7 @@ function git_commit() {
     $GIT config user.email $GIT_USER_EMAIL
     $GIT config user.name $GIT_USER_NAME
     
-	if "${message}"=""; then
+	if "${message}"==""; then
 			message="git commit"
 	fi
 	$GIT commit -a -m "${message}"
