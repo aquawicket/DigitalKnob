@@ -1,7 +1,9 @@
 #!/bin/bash
+{
 # to run this script requires privledges, use $ chmod 777 build.sh
 
 ############## DigitalKnob builder script ############
+
 
 #--------------------------------------------------------
 #  GLOBAL USER VARIABLES
@@ -33,6 +35,8 @@ white="\033[37m"
 function main() {
 
 	validate_sudo
+
+	exec |& tee file.log
 
 	echo ""
 	echo "HOSTNAME = $HOSTNAME"
@@ -90,7 +94,7 @@ function main() {
 	
 	if ! [[ -n "$Update" ]]; then Pick_Update; fi
 	if ! [[ -n "$APP" ]]; then Pick_App; fi
-	if ! [[ -n "$OS" ]]; then Pick_OS; fi
+	if ! [[ -n "$TARGET_OS" ]]; then Pick_OS; fi
 	if ! [[ -n "$Type" ]]; then Pick_Type; fi
 	Generate_Project
 	Build_Project
@@ -803,72 +807,72 @@ function Pick_OS() {
 		case $opt in
 			"android32")
 				echo "$opt"
-				OS="android32"
+				TARGET_OS="android32"
 				break
 				;;
 			"android64")
 				echo "$opt"
-				OS="android64"
+				TARGET_OS="android64"
 				break
 				;;
 			"emscripten")
 				echo "$opt"
-				OS="emscripten"
+				TARGET_OS="emscripten"
 				break
 				;;
 			"ios32")
 				echo "$opt"
-				OS="ios32"
+				TARGET_OS="ios32"
 				break
 				;;
 			"ios64")
 				echo "$opt"
-				OS="ios64"
+				TARGET_OS="ios64"
 				break
 				;;
 			"iossim32")
 				echo "$opt"
-				OS="iossim32"
+				TARGET_OS="iossim32"
 				break
 				;;
 			"iossim64")
 				echo "$opt"
-				OS="iossim64"
+				TARGET_OS="iossim64"
 				break
 				;;
 			"linux32")
 				echo "$opt"
-				OS="linux32"
+				TARGET_OS="linux32"
 				break
 				;;
 			"linux64")
 				echo "$opt"
-				OS="linux64"
+				TARGET_OS="linux64"
 				break
 				;;
 			"mac32")
 				echo "$opt"
-				OS="mac32"
+				TARGET_OS="mac32"
 				break
 				;;
 			"mac64")
 				echo "$opt"
-				OS="mac64"
+				TARGET_OS="mac64"
 				break
 				;;
 			"raspberry32")
 				echo "$opt"
-				OS="raspberry32"
+				TARGET_OS="raspberry32"
 				break
 				;;
 			"win32")
 				echo "$opt"
-				OS="win32"
+				TARGET_OS="win32"
 				break
 				;;
 			"win64")
 				echo "$opt"
-				OS="win64"
+				TARGET_OS="win64"
 				break
 				;;
 			"Clear Screen")
@@ -987,9 +991,9 @@ function Generate_Project() {
 	###### GENERATOR ######
 	if  [[ -n "$MSYSTEM" ]]; then
 		GENERATOR="MSYS Makefiles"
-	elif [[ "$OS" == "mac"* ]] || [[ "$OS" == "ios"* ]]; then
+	elif [[ "$TARGET_OS" == "mac"* ]] || [[ "$TARGET_OS" == "ios"* ]]; then
 		GENERATOR="Xcode"
-	elif [[ "$OS" == "emscipten"* ]]; then
+	elif [[ "$TARGET_OS" == "emscipten"* ]]; then
 		GENERATOR="MinGW Makefiles"
 	else
 		GENERATOR="Unix Makefiles"
@@ -1039,138 +1043,138 @@ function Generate_Project() {
 	call export SHELL="/bin/bash"
 	
 	
-	mkdir -p $DKPATH/DKApps/$APP/$OS
+	mkdir -p $DKPATH/DKApps/$APP/$TARGET_OS
 	cd /
 	
 	if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-		mkdir -p $DKPATH/DKApps/$APP/$OS/Debug
+		mkdir -p $DKPATH/DKApps/$APP/$TARGET_OS/Debug
 	fi
 	if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-		mkdir -p $DKPATH/DKApps/$APP/$OS/Release
+		mkdir -p $DKPATH/DKApps/$APP/$TARGET_OS/Release
 	fi
 	
-	if [[ "$OS" == "android"* ]]; then
+	if [[ "$TARGET_OS" == "android"* ]]; then
 		validate_android_ndk
 		TARGET="main"
 	fi
 			
-	if [[ "$OS" == "android32" ]]; then
+	if [[ "$TARGET_OS" == "android32" ]]; then
 		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-	     	call $CMAKE -G "$GENERATOR" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=$ANDROID_API -DANDROID_NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_TOOLCHAIN_FILE -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+	     	call $CMAKE -G "$GENERATOR" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=$ANDROID_API -DANDROID_NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_TOOLCHAIN_FILE -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Debug
 	    fi
 	    if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-	     	call $CMAKE -G "$GENERATOR" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=$ANDROID_API -DANDROID_NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_TOOLCHAIN_FILE -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
+	     	call $CMAKE -G "$GENERATOR" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=$ANDROID_API -DANDROID_NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_TOOLCHAIN_FILE -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Release
 	    fi
 	fi
 
-	if [[ "$OS" == "android64" ]]; then
+	if [[ "$TARGET_OS" == "android64" ]]; then
 		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-		    call $CMAKE -G "$GENERATOR" -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=$ANDROID_API -DANDROID_NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_TOOLCHAIN_FILE -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+		    call $CMAKE -G "$GENERATOR" -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=$ANDROID_API -DANDROID_NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_TOOLCHAIN_FILE -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Debug
 	    fi
     	if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-		    call $CMAKE -G "$GENERATOR" -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=$ANDROID_API -DANDROID_NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_TOOLCHAIN_FILE -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
+		    call $CMAKE -G "$GENERATOR" -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=$ANDROID_API -DANDROID_NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_TOOLCHAIN_FILE -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Release
 	    fi
 	fi
 	
 	
-	if [[ "$OS" == "emscipten" ]]; then
+	if [[ "$TARGET_OS" == "emscipten" ]]; then
 	    call validate_emscripten
 		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-			call "$EMSDK_ENV" & "$CMAKE" -G "$GENERATOR" -DCMAKE_TOOLCHAIN_FILE="$EMSDK_TOOLCHAIN_FILE" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+			call "$EMSDK_ENV" & "$CMAKE" -G "$GENERATOR" -DCMAKE_TOOLCHAIN_FILE="$EMSDK_TOOLCHAIN_FILE" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Debug
 		fi
 		if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-			call "$EMSDK_ENV" & "$CMAKE" -G "$GENERATOR" -DCMAKE_TOOLCHAIN_FILE="$EMSDK_TOOLCHAIN_FILE" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
+			call "$EMSDK_ENV" & "$CMAKE" -G "$GENERATOR" -DCMAKE_TOOLCHAIN_FILE="$EMSDK_TOOLCHAIN_FILE" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Release
 		fi
 		TARGET=${APP}_APP
 	fi
 	
 	
-	if [[ "$OS" == "ios32" ]]; then
-		call $CMAKE -G "$GENERATOR" -DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake -DPLATFORM=OS -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
+	if [[ "$TARGET_OS" == "ios32" ]]; then
+		call $CMAKE -G "$GENERATOR" -DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake -DPLATFORM=TARGET_OS -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS
 	fi
-	if [[ "$OS" == "ios64" ]]; then
-		call $CMAKE -G "$GENERATOR" -DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake -DPLATFORM=OS64 -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
+	if [[ "$TARGET_OS" == "ios64" ]]; then
+		call $CMAKE -G "$GENERATOR" -DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake -DPLATFORM=OS64 -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS
 	fi
-	if [[ "$OS" == "iossim32" ]]; then
-		call $CMAKE -G "$GENERATOR" -DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake -DPLATFORM=SIMULATOR -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
+	if [[ "$TARGET_OS" == "iossim32" ]]; then
+		call $CMAKE -G "$GENERATOR" -DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake -DPLATFORM=SIMULATOR -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS
 	fi
-	if [[ "$OS" == "iossim64" ]]; then
-		call $CMAKE -G "$GENERATOR" -DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake -DPLATFORM=SIMULATOR64 -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
+	if [[ "$TARGET_OS" == "iossim64" ]]; then
+		call $CMAKE -G "$GENERATOR" -DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake -DPLATFORM=SIMULATOR64 -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS
 	fi
 	
-	if [[ "$OS" == "linux32" ]]; then
+	if [[ "$TARGET_OS" == "linux32" ]]; then
 		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-			call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+			call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Debug
 		fi
 		if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-			call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
+			call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Release
 		fi
 		TARGET=${APP}_APP
 	fi
 	
-	if [[ "$OS" == "linux64" ]]; then
+	if [[ "$TARGET_OS" == "linux64" ]]; then
 		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-			call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+			call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Debug
 		fi
 		if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-			call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
+			call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Release
 		fi
 		TARGET=${APP}_APP
 	fi
 	
-	if [[ "$OS" == "mac32" ]]; then
-		call $CMAKE -G "$GENERATOR" -DMAC_32=ON -DCMAKE_OSX_ARCHITECTURES=i686 "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
+	if [[ "$TARGET_OS" == "mac32" ]]; then
+		call $CMAKE -G "$GENERATOR" -DMAC_32=ON -DCMAKE_OSX_ARCHITECTURES=i686 "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS
 	fi
 	
-	if [[ "$OS" == "mac64" ]]; then
-		call $CMAKE -G "$GENERATOR" -DMAC_64=ON -DCMAKE_OSX_ARCHITECTURES=x86_64 "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS
+	if [[ "$TARGET_OS" == "mac64" ]]; then
+		call $CMAKE -G "$GENERATOR" -DMAC_64=ON -DCMAKE_OSX_ARCHITECTURES=x86_64 "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS
 		TARGET=${APP}_APP
 	fi
 	
-	if [[ "$OS" == "raspberry32" ]]; then
+	if [[ "$TARGET_OS" == "raspberry32" ]]; then
 		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-			call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+			call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Debug
 		fi
 		if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-			call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
+			call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Release
 		fi
 		TARGET=${APP}_APP
 	fi
 	
-	if [[ "$OS" == "raspberry64" ]]; then
+	if [[ "$TARGET_OS" == "raspberry64" ]]; then
 		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-			call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+			call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Debug
 		fi
 		if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-			call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
+			call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Release
 		fi
 		TARGET=${APP}_APP
 	fi
 	
-	if [[ "$OS" == "win32" ]]; then
+	if [[ "$TARGET_OS" == "win32" ]]; then
 		validate_msys2
 		validate_make
 		call export PATH=${MSYS2}/mingw32/bin:$PATH
 		call export PATH=${MSYS2}/usr/bin:$PATH
 		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-			call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+			call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Debug
 		fi
 		if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-			call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
+			call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Release
 		fi
 		TARGET=${APP}_APP
 	fi
 	
-	if [[ "$OS" == "win64" ]]; then
+	if [[ "$TARGET_OS" == "win64" ]]; then
 		validate_msys2
 		validate_make
 		call export PATH=${MSYS2}/mingw64/bin:$PATH
 		call export PATH=${MSYS2}/usr/bin:$PATH
 		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-			call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Debug
+			call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Debug
 		fi
 		if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-			call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$OS/Release
+			call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Release
 		fi
 		TARGET=${APP}_APP
 	fi
@@ -1185,37 +1189,38 @@ function Build_Project() {
 
 	echo ""
 	echo "##################################################################"
-	echo "****** Building $APP - $OS - $TYPE - $LEVEL ******"
+	echo "****** Building $APP - $TARGET_OS - $TYPE - $LEVEL ******"
 	echo "##################################################################"
 	echo ""
 	
 	if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-		if file_exists $DKPATH/DKApps/$APP/$OS/Debug/CMakeCache.txt; then
-			call $CMAKE --build $DKPATH/DKApps/$APP/$OS/Debug --target ${TARGET} --config Debug --verbose
-		elif file_exists $DKPATH/DKApps/$APP/$OS/CMakeCache.txt; then
-			call $CMAKE --build $DKPATH/DKApps/$APP/$OS --target ${TARGET} --config Debug --verbose
+		if file_exists $DKPATH/DKApps/$APP/$TARGET_OS/Debug/CMakeCache.txt; then
+			call $CMAKE --build $DKPATH/DKApps/$APP/$TARGET_OS/Debug --target ${TARGET} --config Debug --verbose
+		elif file_exists $DKPATH/DKApps/$APP/$TARGET_OS/CMakeCache.txt; then
+			call $CMAKE --build $DKPATH/DKApps/$APP/$TARGET_OS --target ${TARGET} --config Debug --verbose
 		else
-			error "Could not find CMakeCache.txt in $APP/$OS/Debug or $APP/$OS"
+			error "Could not find CMakeCache.txt in $APP/$TARGET_OS/Debug or $APP/$TARGET_OS"
 		fi
 	fi
 	if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-		if file_exists $DKPATH/DKApps/$APP/$OS/Release/CMakeCache.txt; then
-			call $CMAKE --build $DKPATH/DKApps/$APP/$OS/Release --target ${TARGET} --config Release --verbose
-		elif file_exists $DKPATH/DKApps/$APP/$OS/CMakeCache.txt; then
-			call $CMAKE --build $DKPATH/DKApps/$APP/$OS --target ${TARGET} --config Release --verbose
+		if file_exists $DKPATH/DKApps/$APP/$TARGET_OS/Release/CMakeCache.txt; then
+			call $CMAKE --build $DKPATH/DKApps/$APP/$TARGET_OS/Release --target ${TARGET} --config Release --verbose
+		elif file_exists $DKPATH/DKApps/$APP/$TARGET_OS/CMakeCache.txt; then
+			call $CMAKE --build $DKPATH/DKApps/$APP/$TARGET_OS --target ${TARGET} --config Release --verbose
 		else
-			error "Could not find CMakeCache.txt in $APP/$OS/Release or $APP/$OS"
+			error "Could not find CMakeCache.txt in $APP/$TARGET_OS/Release or $APP/$TARGET_OS"
 		fi
 	fi
 	
-	echo "******* Done building $APP - $OS - $TYPE *******"
+	echo "******* Done building $APP - $TARGET_OS - $TYPE *******"
 	
     unset APP
-	unset OS
+	unset TARGET_OS
 	unset TYPE
 }
 
 
 main "$@"
+} |& tee build.log
 
 exec $SHELL		# keep terminal open
