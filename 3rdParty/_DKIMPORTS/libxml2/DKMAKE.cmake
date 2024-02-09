@@ -48,6 +48,13 @@ endif()
 
 
 ### GENERATE ###
+dk_setPath(${LIBXML2})
+dk_queueCommand(autogen.sh)
+
+DEBUG_dk_setPath					(${GIFLIB}/${OS}/${DEBUG_DIR})
+RELEASE_dk_setPath					(${GIFLIB}/${OS}/${RELEASE_DIR})
+
+
 ANDROID_dk_queueCommand				(${DKCONFIGURE_BUILD})
 ANDROID_dk_queueCommand				(${DKCMAKE_BUILD} "-DANDROID_COMPILER_FLAGS=-I${LIBXML2_INCLUDE_DIR2}" ${LIBICONV_CMAKE} ${XZ_CMAKE} ${ZLIB_CMAKE} ${LIBXML2})
 
