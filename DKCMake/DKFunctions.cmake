@@ -745,7 +745,7 @@ macro(dk_wait)
 		set(msg "${ARGV0}")
 	endif()
 	
-	message (STATUS "\n\n${msg}\nWaiting ${timeout} seconds...\npress and key to continue.")
+	message(STATUS "\n\n${msg}\nWaiting ${timeout} seconds...\npress and key to continue.")
 	
 	math(EXPR timeout_p1 ${timeout}+1)
 	if(WIN32)
@@ -3794,7 +3794,7 @@ function(dk_addTarget plugin target)
 	endif()
 	if(${plugin}_all)
 		dk_set(${plugin}_${target} 1)
-#		dk_set(${plugin}::${target} 1) # TESTME
+		#dk_set(${plugin}::${target} 1) # TESTME
 	endif()
 endfunction()
 
@@ -3820,7 +3820,7 @@ function(dk_removeTarget plugin target)
 	endif()
 	dk_set(${plugin}_${target} 0)
 	dk_unset(${plugin}_${target})
-#	dk_unset(${plugin}::${target}) # TESTME
+	#dk_unset(${plugin}::${target}) # TESTME
 endfunction()
 
 

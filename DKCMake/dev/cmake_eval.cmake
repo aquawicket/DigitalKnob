@@ -26,8 +26,9 @@ include_guard()
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 CMAKE_POLICY(SET CMP0007 NEW)
 
-
-include(${DKCMAKE}/DK.cmake)
+if(DKCMAKE)
+	include(${DKCMAKE}/DK.cmake)
+endif()
 
 
 # Evaluate expression (faster version)
@@ -57,7 +58,6 @@ function(cmake_eval eval_code)
 		")
 		include("${__eval_temp_file}")
 		eval("${eval_code}")
-		#return_ans()
 	endif()
 endfunction()
 
@@ -84,5 +84,4 @@ if(DKRETURN)
 		set(line "export ${var_}=\"${${var}}\" \n")
         file(APPEND ${DKCMAKE}/cmake_vars.sh "${line}\n")
 	endforeach()
-	
 endif()

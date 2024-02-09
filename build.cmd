@@ -1,117 +1,10 @@
 ::############ DigitalKnob builder script ############
 @echo off
 
-::--------------------------------------------------------
-:: keep window open
-::--------------------------------------------------------
+::### keep window open ###
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 
 :: https://stackoverflow.com/a/4095133/688352
-
-::	0
-echo|set /p= "ASSERT  0		"
-call:ASSERT 0
-
-::	1
-echo|set /p= "ASSERT  1		"
-call:ASSERT 1
-
-::	'0'
-echo|set /p= "ASSERT '0'		"
-call:ASSERT '0'
-
-::	'1'
-echo|set /p= "ASSERT '1'		"
-call:ASSERT '1'
-
-::	"0"
-echo|set /p= "ASSERT "0"		"
-call:ASSERT "0"
-
-::	"1"
-echo|set /p= "ASSERT "1"		"
-call:ASSERT "1"
-
-::	stringA
-echo|set /p= "ASSERT stringA		"
-call:ASSERT stringA
-
-::	'stringB'
-echo|set /p= "ASSERT 'stringB'	"
-call:ASSERT 'stringB'
-
-::	"stringC"
-echo|set /p= "ASSERT "stringC"	"
-call:ASSERT "stringC"
-
-::	%var%
-set "var="
-echo|set /p= "ASSERT %%var		"
-call:ASSERT %var%
-
-::	%var_A%
-set "var_A=a"
-echo|set /p= "ASSERT %%var_A		"
-call:ASSERT %var_A%
-
-::	'%vaB%'
-set "var_B=b"
-echo|set /p= "ASSERT '%%var_B'		"
-call:ASSERT '%var_B%'
-
-::	"%var_C%"
-set "var_C=c"
-echo|set /p= "ASSERT "%%var_C"		"
-call:ASSERT "%var_C%"
-
-::	%%var_D%%
-set "var_D=d"
-echo|set /p= "ASSERT %%%var_D		"
-call:ASSERT %%var_D%%
-
-::	'%%vaE%%'
-set "var_E=e"
-echo|set /p= "ASSERT '%%%var_E'		"
-call:ASSERT '%%var_E%%'
-
-::	"%%var_F%%"
-set "var_F=f"
-echo|set /p= "ASSERT "%%%var_F"		"
-call:ASSERT "%%var_F%%"
-
-::	%var_G%
-set "var_G="
-echo|set /p= "ASSERT %%var_G		"
-call:ASSERT %var_G%
-
-::	'%vaH%'
-set "var_H="
-echo|set /p= "ASSERT '%%var_H'		"
-call:ASSERT '%var_H%'
-
-::	"%var_I%"
-set "var_I="
-echo|set /p= "ASSERT "%%var_I"		"
-call:ASSERT "%var_I%"
-
-::
-echo|set /p= "ASSERT  		"
-call:ASSERT
-
-pause & goto:main
-:ASSERT
-	if [%1]==[] goto:is_false
-	if [%1]==[''] goto:is_false
-	if [%1]==[""] goto:is_false
-	
-	if not %~1 LSS 1 echo ^[32m %1 = true ^[0m & goto:eof
-	
-	:is_false
-	echo ^[31m %1 = false ^[0m
-goto:eof
-
-:: echo ^[31m Red [0m
-:: echo ^[32m Green [0m
 
 ::--------------------------------------------------------
 :: convert line endings
@@ -126,8 +19,6 @@ goto:eof
 :: https://superuser.com/a/1300251
 ::--------------------------------------------------------
 ::REG ADD HKCU\CONSOLE /f /v VirtualTerminalLevel /t REG_DWORD /d 1
-
-
 
 
 ::--------------------------------------------------------
@@ -616,7 +507,7 @@ goto:eof
 :reset_apps
 	echo Resetting Apps . . .
 
-	set /P CONFIRM=Are you sure (Y/[N])?
+	set /P CONFIRM=Are you sure (Y)?
 	if /I "%CONFIRM%" NEQ "Y" goto:eof
 
 	cd %DKPATH%\DKApps
@@ -628,7 +519,7 @@ goto:eof
 :reset_plugins
 	echo Resetting DKPlugins . . .
 
-	set /P CONFIRM=Are you sure (Y/[N])?
+	set /P CONFIRM=Are you sure (Y)?
 	if /I "%CONFIRM%" NEQ "Y" goto:eof
 	
 	cd %DKPATH%\DKPlugins
@@ -640,7 +531,7 @@ goto:eof
 :reset_3rdparty
 	echo Resetting 3rdParty Libraries . . .
 	
-	set /P CONFIRM=Are you sure (Y/[N])?
+	set /P CONFIRM=Are you sure (Y)?
 	if /I "%CONFIRM%" NEQ "Y" goto:eof
 	
 	cd %DKPATH%\3rdParty
@@ -652,7 +543,7 @@ goto:eof
 :reset_all
 	echo Resetting Entire Local Repository . . .
 	
-	set /P CONFIRM=Are you sure (Y/[N])?
+	set /P CONFIRM=Are you sure (Y)?
 	if /I "%CONFIRM%" NEQ "Y" goto:eof
 	
 	cd %DKPATH%
@@ -671,7 +562,7 @@ goto:eof
 
 :: check_error()
 :check_error
-    if "%ERRORLEVEL%" == "0" goto:eof
+    if %ERRORLEVEL% EQU 0 goto:eof
     call:error "ERRORLEVEL = %ERRORLEVEL%"
 	pause
     exit
@@ -907,7 +798,7 @@ goto:eof
 :git_update
 	echo Git Update? Any local changes will be lost.
 	
-	set /P CONFIRM=Are you sure (Y/[N])?
+	set /P CONFIRM=Are you sure (Y)?
 	if /I "%CONFIRM%" NEQ "Y" goto:eof
 	
     if NOT exist "%DKPATH%\.git" (
@@ -934,7 +825,7 @@ goto:eof
 :: git_commit()
 :git_commit
 	echo Git Commit
-	set /P CONFIRM=Are you sure (Y/[N])?
+	set /P CONFIRM=Are you sure (Y)?
 	if /I "%CONFIRM%" NEQ "Y" goto:eof
 	
 	echo "Please enter some details about this commit, Then press enter."
@@ -1035,6 +926,21 @@ goto:eof
     call:check_error
 goto:eof
 
+:: command_exists <command> <result>
+:command_exists
+	set "command=%1"
+	cmd /c "(help %command% > nul || exit 0) && where %command% > nul 2> nul"
+	if %ERRORLEVEL% EQU 0 echo "%command% found" & goto:eof
+	echo "%command% NOT found"
+goto:eof
+
+:: command_exists <command> <result>
+:command_exists
+	set "command=%1"
+	cmd /c "(help %command% > nul || exit 0) && where %command% > nul 2> nul"
+	if %ERRORLEVEL% EQU 0 set "%2=1" & goto:eof
+	set "%2=0"
+goto:eof
 
 :: get_filename <path> <output_variable>
 :get_filename
