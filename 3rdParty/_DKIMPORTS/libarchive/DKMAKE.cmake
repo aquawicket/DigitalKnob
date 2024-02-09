@@ -50,7 +50,7 @@ if(MSVC)
 	WIN_dk_libRelease	(${LIBARCHIVE}/${OS}/libarchive/${RELEASE_DIR}/archive.lib)
 else()
 	WIN_dk_libDebug		(${LIBARCHIVE}/${OS}/${DEBUG_DIR}/libarchive/libarchive_static.a)
-	WIN_dk_libRelease	(${LIBARCHIVE}/${OS}/${DEBUG_DIR}/libarchive/libarchive_static.a)
+	WIN_dk_libRelease	(${LIBARCHIVE}/${OS}/${RELEASE_DIR}/libarchive/libarchive_static.a)
 endif()
 
 
