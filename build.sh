@@ -297,6 +297,11 @@ function Pick_OS() {
 	# 31) Go Back
 	# 32) Exit
 	
+	# Raspberry Pi
+	if [ -e /proc/device-tree/model ]; then
+		MODEL=$(tr -d '\0' </proc/device-tree/model)
+	fi
+	
 	# https://unix.stackexchange.com/a/293605
 	COLUMNS=1
 	PS3="Please select an OS to build for: "
