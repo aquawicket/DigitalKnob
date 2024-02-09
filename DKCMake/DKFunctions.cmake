@@ -32,11 +32,12 @@ include("${DKCMAKE}/DK.cmake")
 
 
 ##################################################################################
-# dk_Call(func) parameters
+# dk_Call(func) args
 #
-#	load a ${func}.cmake file located in the DKCMake path amd call the function and pass arguments
+#	load a ${func}.cmake file located in the DKCMake path and call the function with arguments
 #
-#	@func	- TODO
+#	@func				- The name of the .cmake function file as well as the name of the function
+#	@args (optional) 	- The arguments to pass to the function
 #
 macro(dk_call func) #parameters
 	#DKDEBUGFUNC(${ARGV})
@@ -195,7 +196,7 @@ endmacro()
 #
 #	If the expression compares equal to false (i.e., the expression is false), a error message is written and abort is called, terminating the scripts execution.
 #
-#	@expression:  Expression to be evaluated. If this expression evaluates to false, this causes an assertion
+#	@expression:  The expression to be evaluated. If this expression evaluates to false, this causes an assertion
 #
 macro(DKASSERT expression)
 	#DKDEBUGFUNC(${ARGV})
