@@ -828,7 +828,7 @@ goto:eof
 	set /P CONFIRM=Are you sure (Y)?
 	if /I "%CONFIRM%" NEQ "Y" goto:eof
 	
-	echo "Please enter some details about this commit, Then press enter."
+	echo "Please enter some details about this commit, then press enter."
 	set /p message=">"
 	
     cd %DKPATH%

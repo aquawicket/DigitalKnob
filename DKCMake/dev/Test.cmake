@@ -1,9 +1,44 @@
-set(var "TEST123")
-set(my_list ${my_list} "${var}")
+function(is_list sent var)
+	message("")
+	message("${sent} \${ARGV} = "${ARGV})
+	message("${sent} \${ARGC} = "${ARGC})
+	message("${sent} \${\${ARGV}} = "${${ARGV}})
+	message("${sent} \${ARGV} = ${ARGV}")
+	message("${sent} \${ARGC} = ${ARGC}")
+	message("${sent} \${\${ARGV}} = ${${ARGV}}")
+	message("")
+	
+	
+	
 
-list(FIND my_list ${var} index)
-if(${index} GREATER -1)
-	message(STATUS "Found ${var} in my_list")
-else()
-	message(STATUS "${var} NOT FOUND in my_list")
-endif()
+	
+	#message(STATUS "var =  ${ARGV} ${${ARGV}}")
+	#string(COMPARE EQUAL ${${ARGV}} "${${ARGV}}" is_string)
+	#if(is_string)
+	#	message("${ARGV} is a string")
+	#else()
+	#	message("${ARGV} is a list")
+	#endif()
+endfunction()
+
+set(MY_LIST 	"This;is;a;list")
+set(MY_STRING 	"This is a string")
+
+message(STATUS ${MY_LIST})
+message(STATUS "${MY_LIST}")
+message(STATUS ${MY_STRING})
+message(STATUS "${MY_STRING}")
+
+is_list("MY_STRING" 		MY_STRING)
+is_list("\"MY_STRING\"" 	"MY_STRING")
+is_list("\${MY_STRING}" 	${MY_STRING})
+is_list("\"\${MY_STRING}\"" "${MY_STRING}")
+is_list("MY_LIST" 			MY_LIST)
+is_list("\"MY_LIST\"" 		"MY_LIST")
+is_list("\${MY_LIST}" 		${MY_LIST})
+is_list("\"\${MY_LIST}\"" 	"${MY_LIST}")
+
+
+
+
+

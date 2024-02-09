@@ -1,11 +1,9 @@
-clear
-
 CMAKE=$(which cmake)
-echo CMAKE = $CMAKE
-DKCMAKE=/c/Users/Administrator/digitalknob/Development/DKCMake
-echo DKCMAKE = $DKCMAKE
+#echo CMAKE = $CMAKE
+DKCMAKE=/c/Users/aquawicket/digitalknob/Development/DKCMake
+#echo DKCMAKE = $DKCMAKE
 
 
-$CMAKE -DDKCMAKE=$DKCMAKE -P $DKCMAKE/dev/Test.cmake
+$CMAKE -P $DKCMAKE/dev/Test.cmake
 
-exec $SHELL #keep terminal open
+#exec $SHELL #keep terminal open

@@ -1858,20 +1858,17 @@ function(dk_executeProcess commands) #NOASSERT #NOECHO
 		dk_info("\n${CLR}${magenta} $ ${commands}\n")
 	endif()
 
-	#file(TO_NATIVE_PATH ${CURRENT_DIR} CURRENT_DIR)
-	
 	list(REMOVE_ITEM commands NOASSERT)
 	list(REMOVE_ITEM commands COMMAND)
 	list(REMOVE_ITEM commands "cmd /c ")
 	list(FIND commands "WORKING_DIRECTORY" index)
 	if(index EQUAL -1)
 		set(commands ${commands} WORKING_DIRECTORY ${CURRENT_DIR}) # add WORKING_DIRECTORY if missing
-	endif()	
+	endif()
 	
 	if(MSVC)	#FIXME: detect cmd instead of msvc
 		execute_process(COMMAND cmd /c ${commands} RESULT_VARIABLE result ERROR_VARIABLE error) # FIXME: Do we always need  cmd /c  here?
 	else()
-		#dk_info("execute_process -> ${commands}")
 		execute_process(COMMAND ${commands} RESULT_VARIABLE result ERROR_VARIABLE error)
 	endif()
 
@@ -1990,10 +1987,22 @@ dk_createOsMacros("dk_setPath")
 #
 function(dk_msys2)
 	DKDEBUGFUNC(${ARGV})
-	dk_info("\n${CLR}${magenta} $ ${ARGV}\n")
-	execute_process(COMMAND ${ARGV} WORKING_DIRECTORY ${CURRENT_DIR} OUTPUT_STRIP_TRAILING_WHITESPACE)
+	dk_info("\n${CLR}${magenta} msys2> ${ARGV}\n")
+	#set(msys2_command "${MSYS2}/usr/bin/env --chdir=${CURRENT_DIR} MSYSTEM=MINGW64 ${MSYS2}/usr/bin/bash -lc '${ARGV}'")
+	#execute_process(COMMAND ${msys2_command} RESULT_VARIABLE result ERROR_VARIABLE error WORKING_DIRECTORY ${CURRENT_DIR} OUTPUT_STRIP_TRAILING_WHITESPACE)
+	execute_process(COMMAND ${MSYS2}/usr/bin/bash -c "export PATH=${MSYS2}/mingw64/bin:$PATH; export PATH=${MSYS2}/usr/bin:$PATH;" ${ARGV}
+		RESULT_VARIABLE result 
+		ERROR_VARIABLE error 
+		WORKING_DIRECTORY ${CURRENT_DIR} 
+		OUTPUT_STRIP_TRAILING_WHITESPACE)
+		
+	if(NOT ${result} EQUAL 0)
+		dk_info("   command: ${commands}")
+		dk_info("    result: ${result}")
+		dk_info("     error: ${error}")
+	endif()
 endfunction()
-
+dk_createOsMacros("dk_msys2")
 
 
 ###############################################################################
@@ -2008,12 +2017,12 @@ function(dk_msys2_bash)
 	DKASSERT(MSYS2)
 	DKASSERT(MSYSTEM)
 	
-	string(REPLACE ";" " " str "${ARGV}")
-	dk_info("\n${CLR}${magenta} $ ${str}\n")
-		
+	#message(STATUS msys2_bash("${ARGV}"))
+	string(REPLACE ";" " " ARGV "${ARGV}")
+	#dk_info("\n${CLR}${magenta} $ ${ARGV}\n")
+
 	set(bash "#!/bin/bash")
 	list(APPEND bash "cd ${CURRENT_DIR}")
-	
 	if(CLANG32)
 		list(APPEND bash "export PATH=${MSYS2}/clang32/bin:$PATH")
 	elseif(CLANG64)
@@ -2033,17 +2042,22 @@ function(dk_msys2_bash)
 	endif()
 		
 	list(APPEND bash "export PATH=${MSYS2}/usr/bin:$PATH")
-	list(APPEND bash "${str}")
+	list(APPEND bash "${ARGV}")
 	list(APPEND bash "exit")
 	list(APPEND bash " ")
 	string(REPLACE ";" "\n"	bash "${bash}")
-	string(REPLACE "C:/" "/c/" bash ${bash})
-	file(WRITE ${MSYS2}/dkscript.tmp ${bash})
-	#dk_debug("dk_msys2 $ ${bash}")
-	dk_executeProcess(${MSYS2}/usr/bin/bash ${MSYS2}/dkscript.tmp NOECHO)
+	string(REPLACE "${CMAKE_GENERATOR}" "'${CMAKE_GENERATOR}'" bash "${bash}")
+	string(REPLACE "C:/" "/c/" bash "${bash}")
+	#message(STATUS msys2_bash("${bash}"))
+	
+	### run bash as a file
+	#file(WRITE ${MSYS2}/dkscript.tmp ${bash})
+	#dk_executeProcess(${MSYS2}/usr/bin/bash ${MSYS2}/dkscript.tmp NOECHO)	
+	
+	### run bash as a string parameter
+	dk_executeProcess(${MSYS2}/usr/bin/bash -c "${bash}" NOECHO)
 endfunction()
-dk_createOsMacros("dk_msys2")
-
+dk_createOsMacros("dk_msys2_bash")
 
 
 
@@ -2055,13 +2069,13 @@ dk_createOsMacros("dk_msys2")
 #
 #	@args	- TODO
 #
-function(dk_queueMsys2)
-	DKDEBUGFUNC(${ARGV})
-	if(QUEUE_BUILD)
-		dk_msys2(${ARGV})
-	endif()	
-endfunction()
-dk_createOsMacros("dk_queueMsys2")
+#function(dk_queueMsys2)
+#	DKDEBUGFUNC(${ARGV})
+#	if(QUEUE_BUILD)
+#		dk_msys2(${ARGV})
+#	endif()	
+#endfunction()
+#dk_createOsMacros("dk_queueMsys2")
 
 
 ###############################################################################
@@ -2104,7 +2118,7 @@ function(dk_mergeFlags args RESULT)
 			#if(MSYS)
 			#	list(INSERT args ${placeholder} "\"${DK_${word}}\"")  # https://stackoverflow.com/a/61948012
 			#else()
-				list(INSERT args ${placeholder} "${DK_${word}}")
+				list(INSERT args ${placeholder} "'${DK_${word}}'")
 			#endif()
 			
 		endif()
@@ -2122,18 +2136,21 @@ endfunction()
 #
 function(dk_command)
 	DKDEBUGFUNC(${ARGV})
-	dk_info("\n${CLR}${magenta} $ ${ARGV}\n")
+	
+	string(REPLACE ";" " " command_string "${ARGV}")
+	dk_info("\n${CLR}${magenta} $ ${command_string}\n")
 	
 	dk_mergeFlags("${ARGV}" merged_args)
-
+	
 	#if(EMSCRIPTEN)
 	#	dk_executeProcess(${EMMAKE} bash ${merged_args} WORKING_DIRECTORY ${CURRENT_DIR})
 	#else()
 	
 	if(MSYS OR MINGW OR MSYSTEM)
-		dk_msys2(${merged_args})
+		#dk_msys2(${merged_args})
+		dk_msys2_bash(${merged_args})
 	else()
-		dk_executeProcess(${merged_args} WORKING_DIRECTORY ${CURRENT_DIR})
+		dk_executeProcess(${merged_args})# WORKING_DIRECTORY ${CURRENT_DIR})
 	endif()
 endfunction()
 dk_createOsMacros("dk_command")

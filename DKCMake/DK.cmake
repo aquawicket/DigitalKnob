@@ -11,7 +11,7 @@ set(PRINT_DKRETURNS				0		CACHE INTERNAL "")	# dk_return() will print the curren
 set(DELETE_DOWNLOADS			1		CACHE INTERNAL "")  # delete downloads after they are extracted or installed
 set(DKTODO_ENABLED				1		CACHE INTERNAL "")	# enable dk_todo() functions
 set(DKVERBOSE_ENABLED			0		CACHE INTERNAL "")	# enable dk_verbose() functions
-set(HALT_ON_ERRORS				0		CACHE INTERNAL "")	# halt cmake build script on errors
+set(HALT_ON_ERRORS				1		CACHE INTERNAL "")	# halt cmake build script on errors
 set(HALT_ON_WARNINGS			0		CACHE INTERNAL "")	# halt cmake build script on warnings
 set(INSTALL_DKLIBS              0		CACHE INTERNAL "")	# install header files and libraries to DKBIN directory
 set(MAC_TERMINAL_WRAPPER        1		CACHE INTERNAL "")	# open app with terminal
@@ -128,5 +128,3 @@ include(${DKCMAKE}/functions/dk_importVariables.cmake)
 dk_depend(cmake)
 dk_depend(git)
 dk_depend(msys2)
-
-dk_msys2("echo MSYSTEM = $MSYSTEM")

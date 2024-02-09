@@ -8,7 +8,7 @@
 
 
 ### IMPORT ###
-dk_import(https://github.com/fmtlib/fmt.git PATCH)
+dk_import(https://github.com/fmtlib/fmt.git BRANCH master)# PATCH)
 
 
 ### INCLUDE/LINK ###

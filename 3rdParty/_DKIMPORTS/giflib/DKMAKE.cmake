@@ -42,15 +42,16 @@ if(GIFLIB_USE_CMAKE)
 		string					(REPLACE "-std=c++1z" 	"" 	GIFLIB_CONFIGURE "${GIFLIB_CONFIGURE}")
 		string					(REPLACE "  " 			" " GIFLIB_CONFIGURE "${GIFLIB_CONFIGURE}")
 	
+		
 		DEBUG_dk_setPath		(${GIFLIB}/${OS}/${DEBUG_DIR})
 		DEBUG_dk_queueCommand	(${GIFLIB_CONFIGURE})
 		DEBUG_dk_queueCommand	(make -C lib)
 		RELEASE_dk_setPath		(${GIFLIB}/${OS}/${RELEASE_DIR})
-		RELEASE_dk_queueCommand	(${GIFLIB_CONFIGURE})
+		RELEASE_dk_queueCommand	(../../configure)
 		RELEASE_dk_queueCommand	(make -C lib)
 	else()
 		### GENERATE ###
-		dk_queueCommand			(${DKCMAKE_BUILD} ${GIFLIB})
+		dk_queue				(${DKCMAKE_BUILD} ${GIFLIB})
 	
 		### COMPILE ###
 		dk_build				(${GIFLIB} giflib)
