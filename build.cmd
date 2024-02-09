@@ -313,17 +313,39 @@ goto:eof
 goto:eof
 
 :generate_win32
-    call:validate_visual_studio
-    set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_C_COMPILER=%VISUALSTUDIO_X86_CXX_COMPILER%"
-    set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_COMPILER=%VISUALSTUDIO_X86_CXX_COMPILER%"
-    "%CMAKE%" -G "%VISUALSTUDIO_GENERATOR%" -A Win32 %CMAKE_ARGS% "%DKCMAKE%"
-    set TARGET=%APP%_APP
-
-    ::call:validate_msys2
-    ::TITLE DigitalKnob - MINGW32
-    ::call set DKPATH=%%DKPATH:^\=^/%%
-    ::%MSYS2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -lc "clear && %DKPATH%/build.sh"
-    ::goto:eof
+	 ::if %COMPILER%==MINGW32 (
+		call:cmake_eval "include('%DKIMPORTS%/msys2/DKMAKE.cmake')"
+		
+        echo generate_win32
+        call:cmake_eval "include('%DKIMPORTS%/cmake/DKMAKE.cmake')" "CMAKE_EXE" "-DMSYSTEM=MINGW32"
+        echo CMAKE_EXE = %CMAKE_EXE%
+                
+        ::call:validate_msys2
+        call:cmake_eval "include('%DKIMPORTS%/msys2/DKMAKE.cmake')" "MSYS2;MSYS2_GENERATOR" "-DMSYSTEM=MINGW32"
+        echo MSYS2 = %MSYS2%
+        echo MSYS2_GENERATOR = %MSYS2_GENERATOR%
+                
+        ::call:validate_gcc
+        call:cmake_eval "include('%DKIMPORTS%/gcc/DKMAKE.cmake')" "C_COMPILER;CXX_COMPILER" "-DMSYSTEM=MINGW32"
+        echo C_COMPILER = %C_COMPILER%
+        echo CXX_COMPILER = %CXX_COMPILER%
+        set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_C_COMPILER=%C_COMPILER%"
+        set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_COMPILER=%CXX_COMPILER%"
+                
+        ::call:validate_make
+        call:cmake_eval "include('%DKIMPORTS%/make/DKMAKE.cmake')" "MAKE_PROGRAM" "-DMSYSTEM=MINGW32"
+                
+        call set DKPATH=%%DKPATH:^\=^/%%
+        %MSYS2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -lc "'%CMAKE_EXE%' -G '%MSYS2_GENERATOR%' -DMSYSTEM=MINGW32 %CMAKE_ARGS% -S%DKCMAKE% -B%DKPATH%/DKApps/%APP%/%TARGET_OS%/Debug"
+        set TARGET=%APP%_APP
+        goto build
+    ::)
+	
+    ::call:validate_visual_studio
+    ::set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_C_COMPILER=%VISUALSTUDIO_X86_CXX_COMPILER%"
+    ::set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_COMPILER=%VISUALSTUDIO_X86_CXX_COMPILER%"
+    ::"%CMAKE%" -G "%VISUALSTUDIO_GENERATOR%" -A Win32 %CMAKE_ARGS% "%DKCMAKE%"
+    ::set TARGET=%APP%_APP
 goto:eof
 
 :generate_win64
