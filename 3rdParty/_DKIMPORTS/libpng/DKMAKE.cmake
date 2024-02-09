@@ -63,9 +63,9 @@ dk_queueCommand(${DKCMAKE_BUILD}
 		-DPNG_STATIC=ON					# "Build shared lib" ON
 		-DPNG_SHARED=OFF				# "Build static lib" ON
 		-DPNG_TESTS=OFF 				# "Build libpng tests" ON
-		-DPNG_FRAMEWORK 				# "Build OS X framework" OFF
-		-DPNG_DEBUG     				# "Build with debug output" OFF
-		-DPNGARG        				# "Disable ANSI-C prototypes" OFF
+		-DPNG_FRAMEWORK=OFF				# "Build OS X framework" OFF
+		-DPNG_DEBUG=OFF    				# "Build with debug output" OFF
+		-DPNGARG=OFF       				# "Disable ANSI-C prototypes" OFF
 		-DPNG_HARDWARE_OPTIMIZATIONS=ON	# "Enable Hardware Optimizations" ON
 		#-DPNG_PREFIX="" 				# "Prefix to add to the API function names"
 		#-DDFA_XTRA=""					# "File containing extra configuration settings"

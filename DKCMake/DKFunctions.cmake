@@ -4978,6 +4978,62 @@ macro(dk_applyPatch directory patch_file)
 endmacro()
 
 
+###############################################################################
+# get_arg_count(RESULT args)
+#
+#	@RESULT  - Returns the number of args received (minus the result argument)
+#	@args 	 - a variable number of input arguments
+#
+function(get_arg_count RESULT)
+	math(EXPR ARGC "${ARGC}-1")
+	set(${RESULT} ${ARGC} PARENT_SCOPE)
+endfunction()
+
+
+###############################################################################
+# is_list(result arg(s))
+#
+#	@RESULT     - returns true is the arg(s) is a list, false if not
+#	@arg		- The input argument(s) to be examined 
+#
+function(is_list RESULT)
+	math(EXPR ARGC "${ARGC}-1")  
+
+	if(NOT "${${ARGN}}" STREQUAL "")
+		get_arg_count(count ${${ARGN}})
+		message("count = ${count}")
+		if(${count} GREATER 1)
+			message("${ARGN} is a LIST variable")
+			set(${RESULT} TRUE PARENT_SCOPE)
+		elseif(${count} GREATER 0)
+			message("${ARGN} is a STRING variable")
+			set(${RESULT} FALSE PARENT_SCOPE)
+		else()
+			message("${ARGN} is INVALID!")
+			set(${RESULT} FALSE PARENT_SCOPE)
+		endif()
+		return()
+	endif()
+
+	if(NOT "${ARGN}" STREQUAL "")
+		get_arg_count(count ${ARGN})
+		message("count = ${count}")
+		if(${count} GREATER 1)
+			message("${ARGN} is a LIST value")
+			set(${RESULT} TRUE PARENT_SCOPE)
+		elseif(${count} GREATER 0)
+			message("${ARGN} is a STRING value")
+			set(${RESULT} FALSE PARENT_SCOPE)
+		else()
+			message("${ARGN} is INVALID!")
+			set(${RESULT} FALSE PARENT_SCOPE)
+		endif()
+		return()
+	else()
+		message("${ARGN} is invalid")
+		set(${RESULT} FALSE PARENT_SCOPE)
+	endif()
+endfunction()
 
 
 include(${DKFunctions_ext})
