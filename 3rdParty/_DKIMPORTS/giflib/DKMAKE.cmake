@@ -53,7 +53,7 @@ if(GIFLIB_USE_CMAKE)
 		RELEASE_dk_queueCommand	(make -C lib)
 	else()
 		### GENERATE ###
-		dk_queue				(${DKCMAKE_BUILD} ${GIFLIB})
+		dk_queueCommand			(${DKCMAKE_BUILD} ${GIFLIB})
 	
 		### COMPILE ###
 		dk_build				(${GIFLIB} giflib)
