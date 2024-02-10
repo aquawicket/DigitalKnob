@@ -22,7 +22,8 @@ dk_depend(zstd)
 if(WIN)
 	dk_import				(https://github.com/curl/curl.git)
 else()
-							(https://github.com/curl/curl/archive/refs/tags/curl-7_84_0.zip)
+	#dk_import				(https://github.com/curl/curl/archive/refs/tags/curl-7_84_0.zip)
+	dk_import				(https://github.com/curl/curl/releases/download/curl-8_6_0/curl-8.6.0.zip)
 endif()
 
 
