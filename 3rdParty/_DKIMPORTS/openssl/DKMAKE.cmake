@@ -34,7 +34,7 @@ if(Debug)
 	set(OPENSSL_INCLUDE_DIR "${OPENSSL_INCLUDE_DIR};${OPENSSL_DEBUG_INCLUDE_DIR}")
 endif()
 if(Release)
-	set(OPENSSL_INCLUDE_DIR "${OPENSSL_INCLUDE_DIR};${OPENSSL_DEBUG_INCLUDE_DIR}")
+	set(OPENSSL_INCLUDE_DIR "${OPENSSL_INCLUDE_DIR};${OPENSSL_RELEASE_INCLUDE_DIR}")
 endif()
 
 DEBUG_dk_set(OPENSSL_ROOT_DIR ${OPENSSL}/${OS}/${DEBUG_DIR})
@@ -56,8 +56,8 @@ else()
 	dk_libRelease		(${OPENSSL}/${OS}/${RELEASE_DIR}/libssl.a		OPENSSL_RELEASE_LIBRARY)
 endif()
 
-set(OpenSSL::SSL ${OPENSSL_DEBUG_LIBRARY})		#I'm not sure if these do anything
-set(OpenSSL::Crypto ${OPENSSL_RELEASE_LIBRARY})	#
+#set(OpenSSL::SSL ${OPENSSL_DEBUG_LIBRARY})		#I'm not sure if these do anything
+#set(OpenSSL::Crypto ${OPENSSL_DEBUG_LIBRARY})	#
 
 ### 3RDPARTY LINK ###
 if(MSVC)

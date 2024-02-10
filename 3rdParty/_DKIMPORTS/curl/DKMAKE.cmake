@@ -1,6 +1,5 @@
 # https://github.com/curl/curl
 # https://curl.se/
-# https://curl.haxx.se/download/curl-7.34.0.zip
 # https://robertying.io/posts/compile-openssl-and-curl-for-android
 
 
