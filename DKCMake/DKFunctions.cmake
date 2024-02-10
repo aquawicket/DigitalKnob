@@ -2114,12 +2114,12 @@ function(dk_mergeFlags args RESULT)
 				math(EXPR placeholder "${args_length}-1")
 			endif()
 			
-			# FIXME: Msys treats things differently here and it causes errors 
-			#if(MSYS)
-			#	list(INSERT args ${placeholder} "\"${DK_${word}}\"")  # https://stackoverflow.com/a/61948012
-			#else()
-				list(INSERT args ${placeholder} "'${DK_${word}}'")
-			#endif()
+			# FIXME: Msys supplies a string to bash to run, so flags with spaces need quotes
+			if(MSYS)
+				list(INSERT args ${placeholder} "'${DK_${word}}'")  # https://stackoverflow.com/a/61948012
+			else()
+				list(INSERT args ${placeholder} "${DK_${word}}")
+			endif()
 			
 		endif()
 	endforeach()
