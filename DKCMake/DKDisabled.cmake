@@ -78,7 +78,7 @@ dk_disable(sfml)
 dk_disable(DKSFMLRml)			# requires sfml
 dk_disable(DKSFMLWindow)		# requires sfml
 
-# doxygen (disabledO
+# doxygen (disabled)
 dk_disable(doxygen)
 
 # duk4vb (disabled)
@@ -91,6 +91,11 @@ dk_disable(ffmpeg)
 dk_disable(diff-match-patch)
 
 dk_disable(boxer)
+dk_disable(rlottie)
+dk_disable(lua)
+dk_disable(lunasvg)
+dk_disable(lz4)
+dk_disable(libb2)
 
 # Disabled for Android targets
 if(ANDROID)
@@ -542,13 +547,7 @@ endif(MSVC AND WIN_64)
 if(MSYS)
 	dk_disable(boost)
 	dk_disable(glew)
-	dk_disable(libb2)
-	#dk_disable(libbcrypt)
 	dk_disable(libexpat)
 	dk_disable(libiconv)
-	dk_disable(lua)
-	dk_disable(lunasvg)
-	dk_disable(lz4)
-	dk_disable(rlottie)
 	dk_disable(stackwalker)
 endif(MSYS)
