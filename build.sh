@@ -91,7 +91,14 @@ function main() {
 		if ! [[ -n "$TYPE" ]];		then Pick_Type;		continue; fi
 		Generate_Project
 		Build_Project
+		
+		unset UPDATE
+		unset APP
+		unset TARGET_OS
+		unset TYPE
 	done
+	
+	
 }
 
 ###### Pick_Update ######
@@ -716,9 +723,6 @@ function Build_Project() {
 	echo "****** Done Building $APP - $TARGET_OS - $TYPE - $LEVEL ******"
 	echo "##################################################################"
 	echo ""
-    unset APP
-	unset TARGET_OS
-	unset TYPE
 }
 
 ###### validate_sudo ######
