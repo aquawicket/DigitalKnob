@@ -77,7 +77,7 @@ elseif(ANDROID)
 		-DHAVE_GLIBC_STRERROR_R=advanced
 		-DHAVE_GLIBC_STRERROR_R__TRYRUN_OUTPUT=advanced
 		-DHAVE_POSIX_STRERROR_R=1
-		${OPENSSL_CMAKE}
+		#${OPENSSL_CMAKE}
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE}
 		${CURL})
@@ -111,7 +111,7 @@ elseif(MAC)
 		#-DHAVE_POLL_FINE_EXITCODE=advanced
 		#-DHAVE_POLL_FINE_EXITCODE__TRYRUN_OUTPUT=advanced
 		#-DHAVE_POSIX_STRERROR_R=0
-		${OPENSSL_CMAKE}
+		#${OPENSSL_CMAKE}
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE}
 		${CURL})
@@ -210,7 +210,7 @@ dk_build(${CURL}) # libcurl)
 # arm64
 #export TARGET_HOST=aarch64-linux-android
 #export TOOLCHAIN=$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/$HOST_TAG
-#PATH=$TOOLCHAIN/bin:$PATH
+#export PATH=$TOOLCHAIN/bin:$PATH
 #export AR=$TOOLCHAIN/bin/$TARGET_HOST-ar
 #export AS=$TOOLCHAIN/bin/$TARGET_HOST-as
 #export CC=$TOOLCHAIN/bin/$TARGET_HOST$MIN_SDK_VERSION-clang
