@@ -468,6 +468,7 @@ if(RASPBERRY)
 	dk_disable(openframeworks)		# error: cannot find opengles
 	dk_disable(openjdk)
 	dk_disable(opus)
+	dk_disable(pyyaml)
 	dk_disable(rmlui-d3d11)
 	dk_disable(rtmidi)
 	dk_disable(sdl-gpu)
