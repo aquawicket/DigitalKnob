@@ -1,6 +1,7 @@
 # https://github.com/curl/curl
 # https://curl.se/
 # https://robertying.io/posts/compile-openssl-and-curl-for-android
+# https://curl.se/docs/install.html
 
 
 ### DEPEND ###
@@ -18,10 +19,11 @@ dk_depend(zstd)
 ### IMPORT ###
 #if(MSVC)
 #	WIN_dk_import			(https://github.com/curl/curl/archive/refs/tags/curl-7_43_0.zip)
-#else()
-#	dk_import				(https://github.com/curl/curl/archive/refs/tags/curl-7_84_0.zip)
-#endif()
-dk_import					(https://github.com/curl/curl.git)
+if(WIN)
+	dk_import				(https://github.com/curl/curl.git)
+else()
+							(https://github.com/curl/curl/archive/refs/tags/curl-7_84_0.zip)
+endif()
 
 
 ### LINK ###
@@ -139,7 +141,7 @@ elseif(ANDROID)
 		-DHAVE_GLIBC_STRERROR_R=advanced
 		-DHAVE_GLIBC_STRERROR_R__TRYRUN_OUTPUT=advanced
 		-DHAVE_POSIX_STRERROR_R=1
-		#${OPENSSL_CMAKE}
+		${OPENSSL_CMAKE}
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE}
 		${CURL})
