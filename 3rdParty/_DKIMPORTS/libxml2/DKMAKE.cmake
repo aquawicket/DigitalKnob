@@ -53,7 +53,6 @@ endif()
 
 ### GENERATE ###
 if(NOT WIN)
-	dk_setPath(${LIBXML2})
 	dk_queueCommand(../../autogen.sh)
 endif()
 
