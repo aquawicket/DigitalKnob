@@ -12,8 +12,11 @@ dk_depend(zlib)
 
 
 ### IMPORT ###
-#dk_import(https://github.com/GNOME/libxml2.git TAG f2ad86fa600885429a6083aaf6926c7e2e5b24d6 PATCH)
-dk_import(https://github.com/GNOME/libxml2.git)
+if(NOT MSYS)
+	dk_import(https://github.com/GNOME/libxml2.git TAG f2ad86fa600885429a6083aaf6926c7e2e5b24d6 PATCH)
+else()
+	dk_import(https://github.com/GNOME/libxml2.git)
+endif()
 
 
 ### LINK ###
