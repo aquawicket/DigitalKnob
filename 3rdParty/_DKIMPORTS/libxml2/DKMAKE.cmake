@@ -1,3 +1,4 @@
+# https://gitlab.gnome.org/GNOME/libxml2
 # https://github.com/GNOME/libxml2
 # http://xmlsoft.org/sources/libxml2-2.9.8.tar.gz
 # https://github.com/GNOME/libxml2/archive/refs/tags/v2.9.8.zip
@@ -48,11 +49,46 @@ endif()
 
 
 ### GENERATE ###
-dk_setPath(${LIBXML2})
-dk_queueCommand(autogen.sh)
+if(NOT WIN)
+	dk_setPath(${LIBXML2})
+	dk_queueCommand(../../autogen.sh)
+endif()
 
-DEBUG_dk_setPath					(${GIFLIB}/${OS}/${DEBUG_DIR})
-RELEASE_dk_setPath					(${GIFLIB}/${OS}/${RELEASE_DIR})
+
+#--with-c14n             Canonical XML 1.0 support (on)
+#--with-catalog          XML Catalogs support (on)
+#--with-debug            debugging module and shell (on)
+#--with-history          history support for shell (off)
+#--with-readline[=DIR]   use readline in DIR (for shell history)
+#--with-html             HTML parser (on)
+#--with-http             HTTP support (on)
+#--with-iconv[=DIR]      iconv support (on)
+#--with-icu              ICU support (off)
+#--with-iso8859x         ISO-8859-X support if no iconv (on)
+#--with-lzma[=DIR]       use liblzma in DIR (on)
+#--with-mem-debug        memory debugging module (off)
+#--with-modules          dynamic modules support (on)
+#--with-output           serialization support (on)
+#--with-pattern          xmlPattern selection interface (on)
+#--with-push             push parser interfaces (on)
+#--with-python           Python bindings (on)
+#--with-reader           xmlReader parsing interface (on)
+#--with-regexps          regular expressions support (on)
+#--with-run-debug        runtime debugging module (off)
+#--with-sax1             older SAX1 interface (on)
+#--with-schemas          XML Schemas 1.0 and RELAX NG support (on)
+#--with-schematron       Schematron support (on)
+#--with-threads          multithreading support (on)
+#--with-thread-alloc     per-thread malloc hooks (off)
+#--with-tree             DOM like tree manipulation APIs (on)
+#--with-valid            DTD validation support (on)
+#--with-writer           xmlWriter serialization interface (on)
+#--with-xinclude         XInclude 1.0 support (on)
+#--with-xpath            XPath 1.0 support (on)
+#--with-xptr             XPointer support (on)
+#--with-zlib[=DIR]       use libz in DIR (on)
+#--with-minimum          build a minimally sized library (off)
+#--with-legacy           maximum ABI compatibility (off)
 
 
 ANDROID_dk_queueCommand				(${DKCONFIGURE_BUILD})
