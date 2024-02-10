@@ -30,14 +30,14 @@ if(GIFLIB_USE_CMAKE)
 	
 	### GENERATE / CONFIGURE ###
 	if(WIN)
-		#dk_setPath				(${GIFLIB})
+		dk_setPath				(${GIFLIB})
 		
 		if(MSYS)
 			#dk_queueCommand	(export ACLOCAL_PATH=${MSYS2}/usr/share/aclocal && autoreconf -f -i)
-			dk_queueCommand		(export ACLOCAL_PATH=${MSYS2}/usr/share/aclocal && ../../autoreconf -f -i)
+			dk_queueCommand		(export ACLOCAL_PATH=${MSYS2}/usr/share/aclocal && autoreconf -f -i)
 		else()
 			#dk_queueCommand	(autoreconf -f -i)
-			dk_queueCommand		(../../autoreconf -f -i)
+			dk_queueCommand		(${GIFLIB}/autoreconf -f -i)
 		endif()
 
 		string					(REPLACE "-std=c17" 	""	GIFLIB_CONFIGURE "${DKCONFIGURE_BUILD}")
@@ -45,11 +45,11 @@ if(GIFLIB_USE_CMAKE)
 		string					(REPLACE "  " 			" " GIFLIB_CONFIGURE "${GIFLIB_CONFIGURE}")
 	
 		
-		#DEBUG_dk_setPath		(${GIFLIB}/${OS}/${DEBUG_DIR})
+		DEBUG_dk_setPath		(${GIFLIB}/${OS}/${DEBUG_DIR})
 		DEBUG_dk_queueCommand	(${GIFLIB_CONFIGURE})
 		DEBUG_dk_queueCommand	(make -C lib)
-		#RELEASE_dk_setPath		(${GIFLIB}/${OS}/${RELEASE_DIR})
-		RELEASE_dk_queueCommand	(../../configure)
+		RELEASE_dk_setPath		(${GIFLIB}/${OS}/${RELEASE_DIR})
+		RELEASE_dk_queueCommand	(${GIFLIB_CONFIGURE})
 		RELEASE_dk_queueCommand	(make -C lib)
 	else()
 		### GENERATE ###

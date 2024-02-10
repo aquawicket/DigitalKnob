@@ -8,6 +8,7 @@
 #dk_import(https://sourceforge.net/projects/libjpeg-turbo/files/2.1.1/libjpeg-turbo-2.1.1.tar.gz ${3RDPARTY}/libjpeg-turbo-2.1.1)
 dk_import(https://github.com/libjpeg-turbo/libjpeg-turbo.git BRANCH main)
 
+
 if(LIBJPEG_TURBO_INCLUDE_DIR2)
 	dk_copy("${LIBJPEG_TURBO_INCLUDE_DIR2}/jconfig.h" "${LIBJPEG_TURBO}/jconfig.h")
 endif()
@@ -24,10 +25,10 @@ endif()
 ANDROID_dk_include			(${LIBJPEG_TURBO}/${OS}/$(BUILD_TYPE)/jni)
 
 if(MSVC)
-	ANDROID_dk_libDebug		(${LIBJPEG_TURBO}/${OS}/${DEBUG_DIR}/libturbojpeg.a				LIBJPEG_TURBO_LIBRARY_DEBUG)
-	ANDROID_dk_libRelease	(${LIBJPEG_TURBO}/${OS}/${RELEASE_DIR}/libturbojpeg.a			LIBJPEG_TURBO_LIBRARY_RELEASE)
 	WIN_dk_libDebug			(${LIBJPEG_TURBO}/${OS}/${DEBUG_DIR}/turbojpeg-static.lib		LIBJPEG_TURBO_LIBRARY_DEBUG)
 	WIN_dk_libRelease		(${LIBJPEG_TURBO}/${OS}/${RELEASE_DIR}/turbojpeg-static.lib		LIBJPEG_TURBO_LIBRARY_RELEASE)
+	ANDROID_dk_libDebug		(${LIBJPEG_TURBO}/${OS}/${DEBUG_DIR}/libturbojpeg.a				LIBJPEG_TURBO_LIBRARY_DEBUG)
+	ANDROID_dk_libRelease	(${LIBJPEG_TURBO}/${OS}/${RELEASE_DIR}/libturbojpeg.a			LIBJPEG_TURBO_LIBRARY_RELEASE)
 else()
 	dk_libDebug				(${LIBJPEG_TURBO}/${OS}/${DEBUG_DIR}/libturbojpeg.a				LIBJPEG_TURBO_LIBRARY_DEBUG)
 	dk_libRelease			(${LIBJPEG_TURBO}/${OS}/${RELEASE_DIR}/libturbojpeg.a			LIBJPEG_TURBO_LIBRARY_RELEASE)
