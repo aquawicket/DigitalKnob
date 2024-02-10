@@ -61,6 +61,7 @@ endif()
 if(MSVC)
 	WIN_dk_queueCommand(${DKCMAKE_BUILD}
 		-DBUILD_CURL_EXE=ON								# "Set to ON to build curl executable." ON
+		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
 		-DBUILD_SHARED_LIBS=OFF							# "Build shared libraries" ON
 		-DBUILD_TESTING=OFF								# "Build tests" OFF
 		-DCURL_BROTLI=OFF								# "Set to ON to enable building curl with brotli support." OFF
@@ -114,6 +115,7 @@ if(MSVC)
 		-DCURL_ZSTD=${ZSTD}								# "Set to ON to enable building curl with zstd support." OFF
 		-DENABLE_ARES=OFF								# "Set to ON to enable c-ares support" OFF
 		-DENABLE_CURLDEBUG=OFF							# "Set to ON to build with TrackMemory feature enabled" OFF
+		-DENABLE_CURL_MANUAL=OFF						# "to build the man page for curl and enable its -M/--manual option" OFF
 		-DENABLE_DEBUG=OFF								# "Set to ON to enable curl debug features" OFF
 		-DENABLE_IPV6=OFF								# "Define to enable IPv6 support" ON
 		-DENABLE_THREADED_RESOLVER=OFF					# "Set to ON to enable threaded DNS lookup" ON "NOT ENABLE_ARES" OFF
@@ -136,6 +138,7 @@ elseif(ANDROID)
 	dk_queueCommand(${DKCMAKE_BUILD} 
 		-DBUILD_CURL_EXE=OFF
 		-DBUILD_CURL_TESTS=OFF
+		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
 		-DCURL_DISABLE_LDAP=ON
 		-DCURL_STATICLIB=ON
 		-DCURL_USE_OPENSSL=OFF
@@ -152,6 +155,7 @@ elseif(IOS OR IOSSIM)
 		#-DHAVE_POSIX_STRERROR_R__TRYRUN_OUTPUT=advanced
 		-DBUILD_CURL_EXE=OFF
 		-DBUILD_CURL_TESTS=OFF
+		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
 		-DCURL_DISABLE_LDAP=ON
 		-DCURL_STATICLIB=ON
 		-DCURL_USE_OPENSSL=OFF
@@ -167,6 +171,7 @@ elseif(IOS OR IOSSIM)
 elseif(MAC)
 	dk_queueCommand(${DKCMAKE_BUILD}
 		-DBUILD_CURL_EXE=ON								# "Set to ON to build curl executable." ON
+		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
 		-DBUILD_SHARED_LIBS=OFF							# "Build shared libraries" ON
 		-DBUILD_TESTING=OFF								# "Build tests" OFF
 		-DCURL_BROTLI=OFF								# "Set to ON to enable building curl with brotli support." OFF
@@ -220,6 +225,7 @@ elseif(MAC)
 		-DCURL_ZSTD=${ZSTD}								# "Set to ON to enable building curl with zstd support." OFF
 		-DENABLE_ARES=OFF								# "Set to ON to enable c-ares support" OFF
 		-DENABLE_CURLDEBUG=OFF							# "Set to ON to build with TrackMemory feature enabled" OFF
+		-DENABLE_CURL_MANUAL=OFF						# "to build the man page for curl and enable its -M/--manual option" OFF
 		-DENABLE_DEBUG=OFF								# "Set to ON to enable curl debug features" OFF
 		-DENABLE_IPV6=OFF								# "Define to enable IPv6 support" ON
 		-DENABLE_THREADED_RESOLVER=OFF					# "Set to ON to enable threaded DNS lookup" ON "NOT ENABLE_ARES" OFF
@@ -241,6 +247,7 @@ elseif(MAC)
 elseif(LINUX)
 	dk_queueCommand(${DKCMAKE_BUILD}
 		-DBUILD_CURL_EXE=ON								# "Set to ON to build curl executable." ON
+		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
 		-DBUILD_SHARED_LIBS=OFF							# "Build shared libraries" ON
 		-DBUILD_TESTING=OFF								# "Build tests" OFF
 		-DCURL_BROTLI=OFF								# "Set to ON to enable building curl with brotli support." OFF
@@ -294,6 +301,7 @@ elseif(LINUX)
 		-DCURL_ZSTD=${ZSTD}								# "Set to ON to enable building curl with zstd support." OFF
 		-DENABLE_ARES=OFF								# "Set to ON to enable c-ares support" OFF
 		-DENABLE_CURLDEBUG=OFF							# "Set to ON to build with TrackMemory feature enabled" OFF
+		-DENABLE_CURL_MANUAL=OFF						# "to build the man page for curl and enable its -M/--manual option" OFF
 		-DENABLE_DEBUG=OFF								# "Set to ON to enable curl debug features" OFF
 		-DENABLE_IPV6=OFF								# "Define to enable IPv6 support" ON
 		-DENABLE_THREADED_RESOLVER=OFF					# "Set to ON to enable threaded DNS lookup" ON "NOT ENABLE_ARES" OFF
@@ -315,6 +323,7 @@ elseif(LINUX)
 else()
 	dk_queueCommand(${DKCMAKE_BUILD}
 		-DBUILD_CURL_EXE=ON								# "Set to ON to build curl executable." ON
+		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
 		-DBUILD_SHARED_LIBS=OFF							# "Build shared libraries" ON
 		-DBUILD_TESTING=OFF								# "Build tests" OFF
 		-DCURL_BROTLI=OFF								# "Set to ON to enable building curl with brotli support." OFF
