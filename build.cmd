@@ -427,10 +427,13 @@ goto:eof
     echo.
 goto:eof
 
+:build_all
+
 :build_debug
     if %COMPILER%==MINGW64 (
         %MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Debug --target %TARGET% --config Debug --verbose"
-        goto end_message
+		if %TYPE%==All goto:build_release
+		goto:end_message
     )
         
     if exist %TARGET_PATH%\%TARGET_OS%\Debug\CMakeCache.txt (
@@ -439,9 +442,17 @@ goto:eof
     if exist %TARGET_PATH%\%TARGET_OS%\CMakeCache.txt (
         "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS% --target %TARGET% --config Debug --verbose
     )
+	
+	if %TYPE%==All goto:build_release
+		goto:end_message
 goto:eof
 
 :build_release
+	 if %COMPILER%==MINGW64 (
+        %MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Release --target %TARGET% --config Debug --verbose"
+        goto end_message
+    )
+	
     if exist %TARGET_PATH%\%TARGET_OS%\Release\CMakeCache.txt (
         "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS%\Release --target %TARGET% --config Release --verbose
     )
@@ -450,20 +461,6 @@ goto:eof
     )
 goto:eof
 
-:build_all
-    if exist %TARGET_PATH%\%TARGET_OS%\Debug\CMakeCache.txt (
-        "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS%\Debug --target %TARGET% --config Debug --verbose
-    )
-    if exist %TARGET_PATH%\%TARGET_OS%\CMakeCache.txt (
-        "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS% --target %TARGET% --config Debug --verbose
-    )
-    if exist %TARGET_PATH%\%TARGET_OS%\Debug\CMakeCache.txt (
-        "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS%\Release --target %TARGET% --config Release --verbose
-    )
-    if exist %TARGET_PATH%\%TARGET_OS%\CMakeCache.txt (
-        "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS% --target %TARGET% --config Release --verbose
-    )
-goto:eof
 
 :end_message
     echo:
