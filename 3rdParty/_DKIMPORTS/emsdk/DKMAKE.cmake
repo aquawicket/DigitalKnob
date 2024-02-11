@@ -4,6 +4,12 @@
 # https://github.com/emscripten-core/emsdk/archive/refs/tags/2.0.26.zip
 
 dk_depend(python)
+#
+#	NOTE:
+#	On Windows command prompt,  calling emsdk_env.bat complains about no access to python.
+#	This is because, set PATH=%PATH%;${PYTHON} doesn't see to work.
+#   However, in a msys2 shell, it does. Maybe we can run these call from there
+
 
 #dk_import(https://github.com/emscripten-core/emsdk/archive/refs/tags/3.1.31.zip)
 dk_import(https://github.com/emscripten-core/emsdk.git BRANCH main)
@@ -19,7 +25,7 @@ UNIX_HOST_dk_command(${EMSDK}/emsdk.sh activate latest --permanent)
 WIN_HOST_dk_command(${EMSDK}/emsdk_env.bat)
 UNIX_HOST_dk_command(${EMSDK}/emsdk_env.sh)
 
-WIN_HOST_dk_command(set PATH=%PATH%;${PYTHON} & ${EMSDK}/emsdk.bat install mingw-4.6.2-32bit)
+WIN_HOST_dk_command(${EMSDK}/emsdk.bat install mingw-4.6.2-32bit)
 UNIX_HOST_dk_command(${EMSDK}/emsdk.sh install mingw-4.6.2-32bit)
 
 WIN_HOST_dk_command(${EMSDK}/emsdk.bat activate mingw-4.6.2-32bit)
