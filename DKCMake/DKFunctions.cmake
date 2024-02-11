@@ -1976,6 +1976,30 @@ function(dk_setPath path)
 endfunction()
 dk_createOsMacros("dk_setPath")
 
+###############################################################################
+# dk_bash(args)
+#
+#	TODO
+#
+#	@args	- TODO
+#
+function(dk_bash)
+	DKDEBUGFUNC(${ARGV})
+	dk_info("\n${CLR}${magenta} bash> ${ARGV}\n")
+	
+	execute_process(COMMAND bash -c "${ARGV}"
+		RESULT_VARIABLE result 
+		ERROR_VARIABLE error 
+		WORKING_DIRECTORY ${CURRENT_DIR} 
+		OUTPUT_STRIP_TRAILING_WHITESPACE)
+		
+	if(NOT ${result} EQUAL 0)
+		dk_info("   command: ${commands}")
+		dk_info("    result: ${result}")
+		dk_info("     error: ${error}")
+	endif()
+endfunction()
+dk_createOsMacros("dk_bash")
 
 
 ###############################################################################
@@ -1988,8 +2012,7 @@ dk_createOsMacros("dk_setPath")
 function(dk_msys2)
 	DKDEBUGFUNC(${ARGV})
 	dk_info("\n${CLR}${magenta} msys2> ${ARGV}\n")
-	#set(msys2_command "${MSYS2}/usr/bin/env --chdir=${CURRENT_DIR} MSYSTEM=MINGW64 ${MSYS2}/usr/bin/bash -lc '${ARGV}'")
-	#execute_process(COMMAND ${msys2_command} RESULT_VARIABLE result ERROR_VARIABLE error WORKING_DIRECTORY ${CURRENT_DIR} OUTPUT_STRIP_TRAILING_WHITESPACE)
+	
 	execute_process(COMMAND ${MSYS2}/usr/bin/bash -c "export PATH=${MSYS2}/mingw64/bin:$PATH; export PATH=${MSYS2}/usr/bin:$PATH;" ${ARGV}
 		RESULT_VARIABLE result 
 		ERROR_VARIABLE error 

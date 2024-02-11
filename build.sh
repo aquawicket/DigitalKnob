@@ -527,7 +527,7 @@ function Generate_Project() {
 		CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$CXX_COMPILER" )
 	fi
 	### CLANG ###
-	if [[ $MSYSTEM == "CLANG32" ]] || [[ $MSYSTEM == "CLANG64" ]] || [[ $MSYSTEM == "CLANGARM64" ]] || [[ $MSYSTEM == "UCRT64" ]] || [[ "$OSTYPE" == "linux-android" ]]; then
+	if [[ $MSYSTEM == "CLANG32" ]] || [[ $MSYSTEM == "CLANG64" ]] || [[ $MSYSTEM == "CLANGARM64" ]] || [[ $MSYSTEM == "UCRT64" ]]; then
 		validate_clang
 		CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$C_COMPILER" )
 		CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$CXX_COMPILER" )
