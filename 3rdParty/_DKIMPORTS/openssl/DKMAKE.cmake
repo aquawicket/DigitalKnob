@@ -11,6 +11,7 @@ dk_depend(dl)
 dk_depend(pthread)
 dk_depend(ws2_32.lib)
 dk_depend(crypt32.lib)
+ANDROID_HOST_dk_depend(pearl)
 
 ### IMPORT ###
 #if(MSVC)
