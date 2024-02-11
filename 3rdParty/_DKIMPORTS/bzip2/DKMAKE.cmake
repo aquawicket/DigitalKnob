@@ -63,10 +63,13 @@ else()
 		dk_copy		(${BZIP2}/copy ${BZIP2}/${OS} OVERWRITE)
 	endif()
 	dk_setPath		(${BZIP2}/${OS})
-	if(ANDROID_HOST)
-		dk_copy(${ANDROID_NDK}/toolchains/llvm/prebuilt/linux-aarch64/bin/llvm-ar ${ANDROID_NDK}/toolchains/llvm/prebuilt/linux-aarch64/bin/ar)
-		dk_wait()
-	endif()
+	
+	# This doesn't work..    /bin/sh needs to be able to find ar
+	#if(ANDROID_HOST)
+	#	dk_copy(${ANDROID_NDK}/toolchains/llvm/prebuilt/linux-aarch64/bin/llvm-ar ${ANDROID_NDK}/toolchains/llvm/prebuilt/linux-aarch64/bin/ar)
+	#	dk_wait()
+	#endif()
+	
 	dk_queueCommand	(make)
 endif()
 
