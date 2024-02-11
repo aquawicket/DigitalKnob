@@ -99,10 +99,10 @@ dk_disable(libb2)
 
 # Disabled for Android targets
 if(ANDROID)
-	dk_disable(DKArchive)			# requires libarchive
+	#dk_disable(DKArchive)			# requires libarchive
 	dk_disable(DKCef)				# requires cef_binary
 	dk_disable(DKCefChild)			# requires cef_binary
-	dk_disable(DKCurl)				# requires curl
+	#dk_disable(DKCurl)				# requires curl
 	dk_disable(DKHandles)			# could not find DKHandles
 	dk_disable(DKMidi)				# requires rtmidi
 	dk_disable(DKMySql)				# requires curl			
@@ -123,17 +123,17 @@ if(ANDROID)
 	dk_disable(aubio)				# build errors	
 	dk_disable(boxer)				# fatal error : 'boxer/boxer.h' file not found
 	dk_disable(bullet3)				# build errors
-	dk_disable(bzip2)				# 'make' is not recognized as an internal or external command
+	#dk_disable(bzip2)				# 'make' is not recognized as an internal or external command
 	dk_disable(cryptopp)
-	dk_disable(curl)				# error : "strerror_r MUST be either POSIX, glibc style"
+	#dk_disable(curl)				# error : "strerror_r MUST be either POSIX, glibc style"
 	dk_disable(dukluv)
-	dk_disable(flac)				# configure: error: unrecognized option: `-DANDROID32'
+	#dk_disable(flac)				# configure: error: unrecognized option: `-DANDROID32'
 	dk_disable(fontconfig)
 	dk_disable(freealut)			# DKFunctions.cmake:4405->dk_findFiles():  files is invalid
 	dk_disable(gdal)
-	if(MAC_HOST)
-		dk_disable(giflib)
-	endif()
+	#if(MAC_HOST)
+	#	dk_disable(giflib)
+	#endif()
 	dk_disable(glew)
 	dk_disable(gzip)
 	dk_disable(jasper)
@@ -144,10 +144,10 @@ if(ANDROID)
 	dk_disable(libtorrent)			# Could not find BOOST
 	dk_disable(libvncserver)
 	dk_disable(libwebp)
-	dk_disable(libxml2)				# ../../configure: No such file or directory
+	#dk_disable(libxml2)				# ../../configure: No such file or directory
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(ncurses)				# error: '..' is not recognized as an internal or external command
-	dk_disable(ogg)					# configure: error: unrecognized option: `-DANDROID32'
+	#dk_disable(ogg)					# configure: error: unrecognized option: `-DANDROID32'
 	dk_disable(openal)				# The system cannot find the file specified
 	dk_disable(openblas)
 	dk_disable(opencv)				# build errors
@@ -160,9 +160,9 @@ if(ANDROID)
 	dk_disable(rtmidi)				# ALSA API requested but no ALSA dev libraries found
 	dk_disable(sdl-gpu)				# The target "Sdl_gpu" does not exist in the project
 	dk_disable(sdl_rtf)
-	dk_disable(smpeg2)				# error : ISO C++17 does not allow 'register' storage class specifier
+	#dk_disable(smpeg2)				# error : ISO C++17 does not allow 'register' storage class specifier
 	dk_disable(tesseract)			# requires leptonica
-	dk_disable(vorbis)				# configure: error: unrecognized option: `-DANDROID32'
+	#dk_disable(vorbis)				# configure: error: unrecognized option: `-DANDROID32'
 	dk_disable(waave)
 	dk_disable(wasm3)
 	dk_disable(x264)
