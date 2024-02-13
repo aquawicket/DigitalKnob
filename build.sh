@@ -1160,6 +1160,7 @@ function git_commit() {
 		message="git commit"
 	fi
 	
+	echo ""
 	echo "git commit \"${message}\""
 	if CONFIRM; then return; fi
 	
