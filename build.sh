@@ -1119,20 +1119,20 @@ function git_update() {
 	if CONFIRM; then return; fi
 
 	if [[ ! -d "$DKPATH/.git" ]]; then
-		call git clone https://github.com/aquawicket/DigitalKnob.git $DKPATH
+		call $GIT clone https://github.com/aquawicket/DigitalKnob.git $DKPATH
 	fi
-	cd $DKPATH
-	git pull --all
-	git checkout -- .
-	git checkout $DKBRANCH
+	call cd $DKPATH
+	call $GIT pull --all
+	call $GIT checkout -- .
+	call $GIT checkout $DKBRANCH
 	if [[ "$?" == "0" ]]; then
 		echo "$DKBRANCH branch selected"
 	else
 	echo "Remote has no $DKBRANCH branch. Creating..."
-		git checkout -b $DKBRANCH main
-		git push --set-upstream origin $DKBRANCH
+		call $GIT checkout -b $DKBRANCH main
+		call $GIT push --set-upstream origin $DKBRANCH
 	fi
-	chmod +x $DKPATH/build.sh
+	call chmod +x $DKPATH/build.sh
 }
 
 function git_commit() {	
