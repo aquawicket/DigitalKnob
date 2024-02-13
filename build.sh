@@ -34,7 +34,7 @@ function main() {
 	#exec |& tee file.log
 
 	echo ""
-	echo "SHLVL = $SHLVL"
+	echo "SHLVL = $SHLVL"			# https://stackoverflow.com/a/4511483/688352
 	echo "HOSTNAME = $HOSTNAME"
 	echo "HOSTTYPE = $HOSTTYPE"
 	echo "MACHTYPE = $MACHTYPE"
