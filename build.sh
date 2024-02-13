@@ -1137,7 +1137,7 @@ function git_update() {
 }
 
 function git_commit() {	
-	if CONFIRM; then return; fi
+	#if CONFIRM; then return; fi
 	
 	echo "Please enter some details about this commit, Then press enter."
 	read message
