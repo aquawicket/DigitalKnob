@@ -104,7 +104,7 @@ goto:eof
     echo  Press Enter To Skip
         
     set choice=
-    set /p choice=Choose a selection
+    set /p "choice=Choose a selection "
     if "%choice%"=="1"  call:git_update
     if "%choice%"=="2"  call:git_commit
     if "%choice%"=="3"  call:push_assets
