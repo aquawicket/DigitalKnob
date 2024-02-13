@@ -107,7 +107,7 @@ function Pick_Update() {
 	
 	# https://unix.stackexchange.com/a/293605
 	COLUMNS=1
-	PS3='Please select an option: (Press Enter To Skip)'
+	PS3='Choose a selection: '
 	options=(
 		"Git Update" 
 		"Git Commit" 
@@ -187,7 +187,7 @@ function Pick_App() {
 	
 	# https://unix.stackexchange.com/a/293605
 	COLUMNS=1
-	PS3='Please update and select an app to build: '
+	PS3='Choose a selection: '
 	options=(
 		"HelloWorld" 
 		"DKCore" 
