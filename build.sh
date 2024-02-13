@@ -1159,8 +1159,12 @@ function git_commit() {
 	if ! [[ -n "$message" ]]; then
 		message="git commit"
 	fi
-	$GIT commit -a -m "${message}"
-    $GIT push
+	
+	echo "git commit \"${message}\""
+	if CONFIRM; then return; fi
+	
+	dk_call $GIT commit -a -m "${message}"
+    dk_call $GIT push
 }
 
 function enter_manually() {
