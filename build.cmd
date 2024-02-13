@@ -480,6 +480,13 @@ goto:eof
 :: https://www.dostips.com/DtTutoFunctions.php
 ::--------------------------------------------------------
 
+::dk_call()
+:dk_call
+	::TODO
+	echo %*
+	%*
+goto:eof
+
 ::enter_manually()
 :enter_manually
 	echo Please type the name of the library, tool or app to build. Then press enter.
