@@ -144,7 +144,7 @@ if(ANDROID)
 	dk_disable(libtorrent)			# Could not find BOOST
 	dk_disable(libvncserver)
 	dk_disable(libwebp)
-	#dk_disable(libxml2)				# ../../configure: No such file or directory
+	dk_disable(libxml2)				# ../../configure: No such file or directory
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(ncurses)				# error: '..' is not recognized as an internal or external command
 	#dk_disable(ogg)					# configure: error: unrecognized option: `-DANDROID32'

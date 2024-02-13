@@ -2001,7 +2001,36 @@ function(dk_bash)
 endfunction()
 dk_createOsMacros("dk_bash")
 
-
+###############################################################################
+# dk_commandToVariable(result args)
+#
+#	TODO
+#
+#	@result	- TODO
+#	@args	- TODO
+#
+function(dk_commandToVariable result)
+	DKDEBUGFUNC(${ARGN})
+	
+	dk_info("\n${CLR}${magenta} dk_commandToVariable> ${ARGN}\n")
+	execute_process(COMMAND ${ARGN}
+		RESULT_VARIABLE result
+		OUTPUT_VARIABLE output
+		ERROR_VARIABLE error)
+		
+	#if(NOT ${result} EQUAL 0)
+		dk_info("command: ${ARGN}")
+		dk_info("      output: ${output}")
+		dk_info("        result: ${result}")
+		dk_info("         error: ${error}")
+	#else()
+	#	dk_debug("output = ${output}")
+	#	set(${result} ${output} PARENT_SCOPE)
+	#endif()
+endfunction()
+	
+	
+	
 ###############################################################################
 # dk_msys2(args)
 #

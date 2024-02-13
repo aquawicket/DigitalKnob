@@ -43,3 +43,24 @@ endif()
 if(RASPBERRY AND NOT EXISTS ${PYTHON_APP}) #FIXME
 	dk_import(https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz)
 endif()
+
+ANDROID_HOST_dk_command(pkg install python)
+
+if(ANDROID_HOST)
+	# https://stackoverflow.com/a/38121972
+	#dk_commandToVariable(PYTHON_VERSION "python" "--version")
+	#dk_commandToVariable(PYTHON_INCLUDE_DIR "python" -c "import sysconfig; print(sysconfig.get_path('include'))" )
+	#dk_commandToVariable(PYTHON_LIBRARY $(python -c "import sysconfig; print(sysconfig.get_config_var('LIBDIR'))"))
+	#find_package(Python)
+	#find_package(Python COMPONENTS Development)
+
+	# /data/data/com.termux/files/usr/include/python3.11
+	dk_set(Python_INCLUDE_DIRS /data/data/com.termux/files/usr/include/python3.11)
+	dk_info("Python_INCLUDE_DIRS = ${Python_INCLUDE_DIRS}")
+
+	# /data/data/com.termux/files/usr/lib
+	dk_set(Python_LIBRARIES /data/data/com.termux/files/usr/lib)
+	dk_info("Python_LIBRARIES = ${Python_LIBRARIES}")
+
+	dk_set(PYTHON_CMAKE -DPython_EXECUTABLE=${PYTHON_APP} -DPython_INCLUDE_DIRS=${Python_INCLUDE_DIRS} -DPython_LIBRARIES=${Python_LIBRARIES})
+endif ()

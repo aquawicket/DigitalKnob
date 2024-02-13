@@ -26,3 +26,4 @@ if(MSYSTEM)
 		dk_command("pacman -S mingw-w64-ucrt-x86_64-autotools --needed --noconfirm")	# UCRT64
 	endif()
 endif()
+
