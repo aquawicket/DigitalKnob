@@ -3,6 +3,9 @@
 # https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi
 # https://developer.android.com/studio/projects/configure-cmake
 # https://discourse.cmake.org/t/cmake-silent-install-with-options-help/1475/2
+if(CMAKE)
+	return()
+endif()
 
 ### DOWNLOAD ###
 WIN_HOST_dk_set(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi)

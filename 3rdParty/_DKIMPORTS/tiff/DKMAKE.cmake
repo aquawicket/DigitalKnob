@@ -40,7 +40,7 @@ endif()
 
 
 #if(MSYS)
-#	dkFileReplace("${TIFF}/CMakeLists.txt" "add_subdirectory(tools)" " ") # skip windres.exe (broken)
+#	dk_fileReplace("${TIFF}/CMakeLists.txt" "add_subdirectory(tools)" " ") # skip windres.exe (broken)
 #endif() 
 
 ### 3RDPARTY LINK ###

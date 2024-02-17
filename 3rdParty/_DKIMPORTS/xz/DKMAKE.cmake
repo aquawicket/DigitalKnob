@@ -7,9 +7,9 @@
 dk_import(https://github.com/xz-mirror/xz.git)
 
 
-#dkFileReplace("${XZ}/src/liblzma/api/lzma.h" "__declspec(dllimport)" "")
-#dkFileReplace("${XZ}/src/liblzma/common/common.h" "__declspec(dllexport)" "")
-#dkFileReplace("${XZ}/src/liblzma/api/lzma.h" "__cdecl" "")
+#dk_fileReplace("${XZ}/src/liblzma/api/lzma.h" "__declspec(dllimport)" "")
+#dk_fileReplace("${XZ}/src/liblzma/common/common.h" "__declspec(dllexport)" "")
+#dk_fileReplace("${XZ}/src/liblzma/api/lzma.h" "__cdecl" "")
 
 ### autotools ###
 #dk_set(XZ_VERSION 5.2.5)

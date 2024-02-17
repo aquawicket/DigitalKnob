@@ -11,9 +11,9 @@ dk_import(https://github.com/pocoproject/poco.git)
 
 
 ### EMSCRIPTEN FIXES ###
-dkFileReplace(${POCO}/Foundation/src/Thread_POSIX.cpp "#if POCO_OS == POCO_OS_LINUX" "#if (POCO_OS == POCO_OS_LINUX) && !defined(EMSCRIPTEN)")
-dkFileReplace(${POCO}/Net/src/PollSet.cpp "#if defined(POCO_HAVE_FD_EPOLL)" "#if defined(POCO_HAVE_FD_EPOLL) && !defined(EMSCRIPTEN)")
-dkFileReplace(${POCO}/Net/src/SocketImpl.cpp "#if defined(POCO_HAVE_FD_EPOLL)" "#if defined(POCO_HAVE_FD_EPOLL) && !defined(EMSCRIPTEN)")
+dk_fileReplace(${POCO}/Foundation/src/Thread_POSIX.cpp "#if POCO_OS == POCO_OS_LINUX" "#if (POCO_OS == POCO_OS_LINUX) && !defined(EMSCRIPTEN)")
+dk_fileReplace(${POCO}/Net/src/PollSet.cpp "#if defined(POCO_HAVE_FD_EPOLL)" "#if defined(POCO_HAVE_FD_EPOLL) && !defined(EMSCRIPTEN)")
+dk_fileReplace(${POCO}/Net/src/SocketImpl.cpp "#if defined(POCO_HAVE_FD_EPOLL)" "#if defined(POCO_HAVE_FD_EPOLL) && !defined(EMSCRIPTEN)")
 
 
 ### LINK ###

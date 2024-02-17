@@ -126,7 +126,7 @@ WIN64_DEBUG_dk_queueCommand			(../../configure --pkg-config-flags=--static --dis
 
 EMSCRIPTEN_DEBUG_dk_queueCommand(${EMMAKE} make)
 if(NOT EMSCRIPTEN)
-	DEBUG_dk_queueCommand(make)
+	DEBUG_dk_build(${FFMPEG})
 endif()
 
 
@@ -171,5 +171,5 @@ WIN64_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --di
 
 EMSCRIPTEN_RELEASE_dk_queueCommand(${EMMAKE} make)
 if(NOT EMSCRIPTEN)
-	RELEASE_dk_queueCommand(make)
+	RELEASE_dk_build(${FFMPEG})
 endif()

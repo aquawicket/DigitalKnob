@@ -30,19 +30,19 @@ endif()
 
 ### GENERATE ###
 dk_queueCommand(${DKCMAKE_BUILD} 
-	-DBUILD_SHARED_LIBS=OFF
-	-DCMAKE_POSITION_INDEPENDENT_CODE=ON
-	-DSDL2MIXER_CMD=OFF
-	-DSDL2MIXER_DEPS_SHARED=ON 
-	-DSDL2MIXER_FLAC=${FLAC} 
-	-DSDL2MIXER_INSTALL=OFF
-	-DSDL2MIXER_MIDI=OFF 
-	-DSDL2MIXER_MOD=OFF
-	-DSDL2MIXER_MP3=ON
-	-DSDL2MIXER_OPUS=OFF 
-	-DSDL2MIXER_SAMPLES=OFF
-	-DSDL2MIXER_VENDORED=${MSVC}
-	-DSDL2MIXER_WAVE=ON
+	#-DBUILD_SHARED_LIBS=OFF 				# "Build the library as a shared library" ON
+	#-DCMAKE_POSITION_INDEPENDENT_CODE=ON	# "Build static libraries with -fPIC" ON
+	#-DSDL2MIXER_CMD=OFF					# "Support an external music player" ${sdl2mixer_cmd_default}
+	-DSDL2MIXER_DEPS_SHARED=OFF				# "Default value for loading dependencies dynamically" ON
+	-DSDL2MIXER_FLAC=${FLAC} 				# "Enable FLAC music" ON
+	-DSDL2MIXER_INSTALL=OFF					# "Enable SDL2mixer install target" ON
+	-DSDL2MIXER_MIDI=OFF 					# "Enable MIDI music" ON
+	-DSDL2MIXER_MOD=OFF						# "Support loading MOD music" ON
+	-DSDL2MIXER_MP3=ON						# "Enable MP3 music" ON
+	-DSDL2MIXER_OPUS=OFF 					# "Enable Opus music" ON
+	-DSDL2MIXER_SAMPLES=OFF					# "Build the SDL2_mixer sample program(s)" ON
+	#-DSDL2MIXER_VENDORED=${MSVC}			# "Use vendored third-party libraries" ${vendored_default}
+	-DSDL2MIXER_WAVE=ON						# "Enable streaming WAVE music" ON
 	${FLAC_CMAKE} 
 	${OGG_CMAKE} 
 	${SDL_CMAKE} 

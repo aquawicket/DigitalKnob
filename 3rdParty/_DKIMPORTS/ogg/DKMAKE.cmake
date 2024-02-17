@@ -35,22 +35,22 @@ endif()
 
 
 ### 3RDPARTY CONFIGURE LINK ###
-#DEBUG_dk_set		(OGG_CONFIGURE CFLAGS=-I${OGG_INCLUDE_DIR}	-I${OGG_INCLUDE_DIR2} --with-ogg-includes=${OGG_INCLUDE_DIR} --with-ogg-libraries=${OGG_LIBRARY_DEBUG})
-#RELEASE_dk_set		(OGG_CONFIGURE CFLAGS=-I${OGG_INCLUDE_DIR}	-I${OGG_INCLUDE_DIR2} --with-ogg-includes=${OGG_INCLUDE_DIR} --with-ogg-libraries=${OGG_LIBRARY_RELEASE})
-DEBUG_dk_set		(OGG_CONFIGURE CFLAGS=--with-ogg-includes=${OGG_INCLUDE_DIR} --with-ogg-libraries=${OGG_LIBRARY_DEBUG})
-RELEASE_dk_set		(OGG_CONFIGURE CFLAGS=--with-ogg-includes=${OGG_INCLUDE_DIR} --with-ogg-libraries=${OGG_LIBRARY_RELEASE})
+#DEBUG_dk_set		(OGG_CONFIGURE --with-ogg-includes=${OGG_INCLUDE_DIR} --with-ogg-libraries=${OGG}/${OS}/${DEBUG_DIR}/src/.libs 		CFLAGS='-I${OGG_INCLUDE_DIR2}')
+#RELEASE_dk_set		(OGG_CONFIGURE --with-ogg-includes=${OGG_INCLUDE_DIR} --with-ogg-libraries=${OGG}/${OS}/${RELEASE_DIR}/src/.libs	CFLAGS='-I${OGG_INCLUDE_DIR2}')
+DEBUG_dk_set		(OGG_CONFIGURE --with-ogg-includes=${OGG_INCLUDE_DIR} --with-ogg-libraries=${OGG}/${OS}/${DEBUG_DIR}/src/.libs)
+RELEASE_dk_set		(OGG_CONFIGURE --with-ogg-includes=${OGG_INCLUDE_DIR} --with-ogg-libraries=${OGG}/${OS}/${RELEASE_DIR}/src/.libs)
 
 
 ### 3RDPARTY CMAKE LINK ###
-DEBUG_dk_set		(OGG_CMAKE -DOGG_INCLUDE_DIR=${OGG_INCLUDE_DIR} -DOGG_LIBRARY=${OGG_LIBRARY_DEBUG} 	 "-DCMAKE_CXX_FLAGS=-I${OGG_INCLUDE_DIR2}")
-RELEASE_dk_set		(OGG_CMAKE -DOGG_INCLUDE_DIR=${OGG_INCLUDE_DIR} -DOGG_LIBRARY=${OGG_LIBRARY_RELEASE} "-DCMAKE_CXX_FLAGS=-I${OGG_INCLUDE_DIR2}")
+DEBUG_dk_set		(OGG_CMAKE -DOGG_INCLUDE_DIR=${OGG_INCLUDE_DIR} -DOGG_LIBRARY=${OGG_LIBRARY_DEBUG}		"-DCMAKE_CXX_FLAGS=-I${OGG_INCLUDE_DIR2}")
+RELEASE_dk_set		(OGG_CMAKE -DOGG_INCLUDE_DIR=${OGG_INCLUDE_DIR} -DOGG_LIBRARY=${OGG_LIBRARY_RELEASE}	"-DCMAKE_CXX_FLAGS=-I${OGG_INCLUDE_DIR2}")
 
 
 ### GENERATE / COMPILE ###
 DEBUG_dk_setPath		(${OGG}/${OS}/${DEBUG_DIR})
 DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
-DEBUG_dk_queueCommand	(make)
+DEBUG_dk_build			(${OGG})
 
 RELEASE_dk_setPath		(${OGG}/${OS}/${RELEASE_DIR})
 RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
-RELEASE_dk_queueCommand	(make)
+RELEASE_dk_build		(${OGG})

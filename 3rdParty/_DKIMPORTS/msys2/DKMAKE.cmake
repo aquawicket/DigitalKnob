@@ -1,5 +1,8 @@
 # https://www.msys2.org
 # https://silentinstallhq.com/msys2-silent-install-how-to-guide
+if(MSYS2)
+	return()
+endif()
 
 if(NOT WIN_HOST)
 	dk_undepend(msys2)

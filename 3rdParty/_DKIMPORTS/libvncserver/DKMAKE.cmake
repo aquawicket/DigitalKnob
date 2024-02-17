@@ -72,8 +72,8 @@ WIN_dk_queueCommand					(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=/I${LIBVNCSERVER} -I$
 
 ### PATCH ###
 if(APPLE OR EMSCRIPTEN)
-	dkFileReplace(${LIBVNCSERVER}/${BUILD_DIR}/rfb/rfbconfig.h "\n#include <unistd.h>" "")
-	dkFileReplace(${LIBVNCSERVER}/${BUILD_DIR}/rfb/rfbconfig.h "UNISTD_H  1" "UNISTD_H  1 \n#include <unistd.h>")
+	dk_fileReplace(${LIBVNCSERVER}/${BUILD_DIR}/rfb/rfbconfig.h "\n#include <unistd.h>" "")
+	dk_fileReplace(${LIBVNCSERVER}/${BUILD_DIR}/rfb/rfbconfig.h "UNISTD_H  1" "UNISTD_H  1 \n#include <unistd.h>")
 endif()
 
 

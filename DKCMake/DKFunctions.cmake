@@ -425,9 +425,9 @@ function(dk_includes variable find RESULT)
 	#DKDEBUGFUNC(${ARGV})
 	string(FIND "${variable}" "${find}" index)
 	if(${index} GREATER -1)
-		set(${RESULT} true PARENT_SCOPE)
+		set(${RESULT} TRUE PARENT_SCOPE)
 	else()
-		set(${RESULT} false PARENT_SCOPE)
+		set(${RESULT} FALSE PARENT_SCOPE)
 	endif()
 endfunction()
 
@@ -666,9 +666,13 @@ dk_createOsMacros("dk_set")
 #	@variable	- The name of a variable to declaire
 #	@value		- The value to add to the variable.
 #
-function(dk_append variable value)
+function(dk_append variable) #value
 	DKDEBUGFUNC(${ARGV})
-	set(${variable} "${${variable}} ${value} ${ARGN}" CACHE INTERNAL "")
+	if(NOT ARGN)
+		dk_warn("dk_append(${variable}) ARGN:${ARGN} is invalid")
+		return()
+	endif()
+	dk_set(${variable} ${${variable}} ${ARGN})
 endfunction()
 dk_createOsMacros("dk_append")
 
@@ -754,7 +758,7 @@ macro(dk_wait)
 		execute_process(COMMAND bash -c "read -n 1 -r -s -t ${timeout}" TIMEOUT ${timeout_p1})
 	else()
 		dk_error("dk_wait(): Not implemented for this platform")
-	endif()
+	endif()	
 endmacro()
 
 
@@ -1845,22 +1849,18 @@ function(dk_executeProcess commands) #NOASSERT #NOECHO
 	DKDEBUGFUNC(${ARGV})
 	set(commands ${ARGV})
 	
-	dk_includes("${ARGN}" "NOASSERT" includes)
-	if(${includes})
-		set(noassert true)
-	endif()
-	dk_includes("${ARGN}" "NOECHO" includes)
-	if(${includes})
-		set(noecho true)
-	endif()
+	dk_includes("${ARGN}" "NOASSERT" NOASSERT)
+	dk_includes("${ARGN}" "NOECHO" NOECHO)
 	
-	if(NOT ${noecho})
+	if(NOT ${NOECHO})
 		dk_info("\n${CLR}${magenta} $ ${commands}\n")
 	endif()
 
 	list(REMOVE_ITEM commands NOASSERT)
+	list(REMOVE_ITEM commands NOECHO)
 	list(REMOVE_ITEM commands COMMAND)
 	list(REMOVE_ITEM commands "cmd /c ")
+	
 	list(FIND commands "WORKING_DIRECTORY" index)
 	if(index EQUAL -1)
 		set(commands ${commands} WORKING_DIRECTORY ${CURRENT_DIR}) # add WORKING_DIRECTORY if missing
@@ -1873,19 +1873,15 @@ function(dk_executeProcess commands) #NOASSERT #NOECHO
 	endif()
 
 	if(NOT ${result} EQUAL 0)
-		if(MSVC)	#FIXME: detect cmd instead of msvc
-			execute_process(COMMAND timeout /t 2 /nobreak OUTPUT_QUIET WORKING_DIRECTORY ${CURRENT_DIR}) # wait 2 seconds for the stdout to flush before printing error
+		execute_process(COMMAND ${CMAKE_COMMAND} -E sleep 2) # wait 2 seconds for the stdout to flush before printing error
+		if(${NOASSERT})
+			dk_info(" ")
+			dk_info("   command: ${commands}")
+			dk_info("    result: ${result}")
+			dk_info("     error: ${error}")
+			dk_info(" ")
 		else()
-			execute_process(COMMAND sleep 2 WORKING_DIRECTORY ${CURRENT_DIR}) # wait 2 seconds for the stdout to flush before printing error
-		endif()
-		if(${noassert})
-			dk_error(" ")
-			dk_error("   command: ${commands}")
-			dk_error("    result: ${result}")
-			dk_error("     error: ${error}")
-			dk_error(" ")
-		else()
-			dk_error("\n     command=${commands}\n       result=${result}\n       error=${error}\n")
+			dk_error("\n\n   command=${commands}\n    result=${result}\n     error=${error}\n")
 		endif()
 	endif()
 endfunction()
@@ -2058,7 +2054,7 @@ dk_createOsMacros("dk_msys2")
 
 
 ###############################################################################
-# dk_msys2_bash(args)
+# dk_msys2_bash(args) NOASSERT
 #
 #	TODO
 #
@@ -2068,6 +2064,11 @@ function(dk_msys2_bash)
 	DKDEBUGFUNC(${ARGV})
 	DKASSERT(MSYS2)
 	DKASSERT(MSYSTEM)
+	
+	dk_includes("${ARGN}" "NOASSERT" NOASSERT)
+	if(${NOASSERT})
+		set(NOASSERT NOASSERT)
+	endif()
 	
 	#message(STATUS msys2_bash("${ARGV}"))
 	string(REPLACE ";" " " ARGV "${ARGV}")
@@ -2107,7 +2108,7 @@ function(dk_msys2_bash)
 	#dk_executeProcess(${MSYS2}/usr/bin/bash ${MSYS2}/dkscript.tmp NOECHO)	
 	
 	### run bash as a string parameter
-	dk_executeProcess(${MSYS2}/usr/bin/bash -c "${bash}" NOECHO)
+	dk_executeProcess(${MSYS2}/usr/bin/bash -c "${bash}" NOECHO ${NOASSERT})
 endfunction()
 dk_createOsMacros("dk_msys2_bash")
 
@@ -2180,7 +2181,7 @@ endfunction()
 
 
 ###############################################################################
-# dk_command(args)
+# dk_command(args) NOASSERT
 #
 #	TODO
 #
@@ -2188,6 +2189,11 @@ endfunction()
 #
 function(dk_command)
 	DKDEBUGFUNC(${ARGV})
+	
+	#dk_includes("${ARGN}" "NOASSERT" has_NOASSERT)
+	#if(${has_NOASSERT})
+	#	set(NOASSERT NOASSERT)
+	#endif()
 	
 	string(REPLACE ";" " " command_string "${ARGV}")
 	dk_info("\n${CLR}${magenta} $ ${command_string}\n")
@@ -2199,7 +2205,6 @@ function(dk_command)
 	#else()
 	
 	if(MSYS OR MINGW OR MSYSTEM)
-		#dk_msys2(${merged_args})
 		dk_msys2_bash(${merged_args})
 	else()
 		dk_executeProcess(${merged_args})# WORKING_DIRECTORY ${CURRENT_DIR})
@@ -2210,7 +2215,7 @@ dk_createOsMacros("dk_command")
 
 
 ###############################################################################
-# dk_queueCommand(args)
+# dk_queueCommand(args) NOASSERT
 #
 #	TODO
 #
@@ -2218,7 +2223,14 @@ dk_createOsMacros("dk_command")
 #
 function(dk_queueCommand)
 	DKDEBUGFUNC(${ARGV})
+	
+	#dk_includes("${ARGN}" "NOASSERT" has_NOASSERT)
+	#if(${has_NOASSERT})
+	#	set(NOASSERT NOASSERT)
+	#endif()
+	
 	#dk_info("\n${CLR}${magenta} $ ${ARGV}\n")
+	
 	if(QUEUE_BUILD)
 		dk_command(${ARGV})
 	endif()	
@@ -2483,7 +2495,7 @@ function(dk_make path) #lib
 	# https://github.com/emscripten-core/emscripten/issues/2005#issuecomment-32162107
 	if(EMSCRIPTEN)
 		dk_error("No proper dk_make() implemented for emscripten")
-		dk_set(EMMAKE ${3RDPARTY}/emsdk-main/upstream/emscripten/emmake)
+		dk_set(EMMAKE ${EMSDK}/upstream/emscripten/emmake)
 		set(lib ${ARGV1})
 		dk_set(CURRENT_DIR ${path}/${BUILD_DIR})
 		#if(${ARGC} GREATER 1)
@@ -2506,7 +2518,7 @@ endfunction()
 
 
 ###############################################################################
-# dk_build(path target)
+# dk_build(path target) NOASSERT
 #
 #	TODO
 #
@@ -2515,6 +2527,11 @@ endfunction()
 #
 function(dk_build path)
 	DKDEBUGFUNC(${ARGV})
+	
+	dk_includes("${ARGN}" "NOASSERT" has_NOASSERT)
+	if(${has_NOASSERT})
+		set(NOASSERT NOASSERT)
+	endif()
 	
 	if(NOT EXISTS ${path})
 		dk_error("dk_build(${path}) path does not exist")
@@ -2527,11 +2544,11 @@ function(dk_build path)
 	if(EXISTS ${path}/${BUILD_DIR}/cmake_install.cmake)
 		dk_info("Building with CMake")
 		if(${ARGC} GREATER 1)
-			DEBUG_dk_queueCommand(${CMAKE_COMMAND} --build . --config Debug --target ${target})
-			RELEASE_dk_queueCommand(${CMAKE_COMMAND} --build . --config Release --target ${target})
+			DEBUG_dk_queueCommand(${CMAKE_COMMAND} --build . --config Debug --target ${target} ${NOASSERT})
+			RELEASE_dk_queueCommand(${CMAKE_COMMAND} --build . --config Release --target ${target} ${NOASSERT})
 		else()
-			DEBUG_dk_queueCommand(${CMAKE_COMMAND} --build . --config Debug)
-			RELEASE_dk_queueCommand(${CMAKE_COMMAND} --build . --config Release)
+			DEBUG_dk_queueCommand(${CMAKE_COMMAND} --build . --config Debug ${NOASSERT})
+			RELEASE_dk_queueCommand(${CMAKE_COMMAND} --build . --config Release ${NOASSERT})
 		endif()
 		return()
 	endif()
@@ -2761,7 +2778,8 @@ function(dk_generateCmake plugin_name)
 #	file(APPEND ${plugin_path}/CMakeLists.txt "     set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${plugin_name})\n")
 #	file(APPEND ${plugin_path}/CMakeLists.txt "endif()\n")
 	# add headers to DKPlugins.h
-	if(${plugin_name} STREQUAL DK OR STATIC)
+	#if(${plugin_name} STREQUAL DK OR STATIC)
+	if(${plugin_name} STREQUAL DK OR BUILD_STATIC_LIBS)
 		file(GLOB HEADER_FILES RELATIVE ${DKPLUGINS} ${plugin_path}/*.h)
 		foreach(header ${HEADER_FILES})
 			dk_includes("${PLUGINS_FILE}" "${header}" result)
@@ -3380,7 +3398,7 @@ endfunction()
 
 
 ###############################################################################
-# dkFileReplace(filePath find replace) NOERROR
+# dk_fileReplace(filePath find replace) NOERROR
 #
 #	TODO
 #
@@ -3389,13 +3407,11 @@ endfunction()
 #	@replace	- TODO
 #   NOERROR (optional)	- if any of the parameters equals NOERROR, dk_error() messages will not be displayed
 #
-function(dkFileReplace filePath find replace)
+function(dk_fileReplace filePath find replace)
 	DKDEBUGFUNC(${ARGV})
 	
-	dk_includes("${ARGN}" "NOERROR" includes)
-	if(${includes})
-		set(noerror true)
-	endif()
+	dk_includes("${ARGN}" "NOERROR" NOERROR)
+
 	
 	file(READ ${filePath} fileString)
 	string(FIND "${fileString}" "${find}" index)
@@ -3405,7 +3421,7 @@ function(dkFileReplace filePath find replace)
 		string(REPLACE "${find}" "${replace}" fileString "${fileString}")
 		file(WRITE ${filePath} "${fileString}")
 	else()
-		if(NOT noerror)
+		if(NOT ${NOERROR})
 			dk_error("cannot find \"${find}\"  in  (${filePath})")
 		endif()
 	endif()

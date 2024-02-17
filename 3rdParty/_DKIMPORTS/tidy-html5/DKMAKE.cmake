@@ -11,6 +11,9 @@ dk_depend(zlib)
 dk_import(https://github.com/htacg/tidy-html5.git)
 
 
+dk_fileReplace(${TIDY_HTML5}/CMakeLists.txt "add_definitions ( -DLIBTIDY_VERSION" "#add_definitions ( -DLIBTIDY_VERSION")
+dk_fileReplace(${TIDY_HTML5}/CMakeLists.txt "add_definitions ( -DRELEASE_DATE" "#add_definitions ( -DRELEASE_DATE")
+
 ### LINK ###
 EMSCRIPTEN_dk_define	(HAS_FUTIME=0)
 dk_include				(${TIDY_HTML5})
@@ -32,9 +35,9 @@ endif()
 
 ### GENERATE ###
 if(EMSCRIPTEN)
-	dk_queueCommand		(${DKCMAKE_BUILD} ${ZLIB_CMAKE} "-DCMAKE_C_FLAGS=-DHAS_FUTIME=0" ${TIDY_HTML5})
+	dk_queueCommand		(${DKCMAKE_BUILD} -DBUILD_SHARED_LIB=OFF ${ZLIB_CMAKE} "-DCMAKE_C_FLAGS=-DHAS_FUTIME=0" ${TIDY_HTML5})
 else()
-	dk_queueCommand		(${DKCMAKE_BUILD} ${ZLIB_CMAKE} ${TIDY_HTML5})
+	dk_queueCommand		(${DKCMAKE_BUILD} -DBUILD_SHARED_LIB=OFF ${ZLIB_CMAKE} ${TIDY_HTML5})
 endif()
 
 

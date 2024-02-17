@@ -495,20 +495,27 @@ goto:eof
 	set /p input=
 
 	set APP=_%input%_
+	
 	::Search digitalknob for the matching entry containing a DKMAKE.cmake file  
-	cd %DIGITALKNOB%
-	for /f "delims=" %%a in ('dir /b /s /a-d DKMAKE.cmake ^| findstr /E /R "%input%\\DKMAKE.cmake" ') do set "path=%%a"
-	set "TARGET_PATH=%path:~0,-13%"
+	::cd %DIGITALKNOB%
+	::for /f "delims=" %%a in ('dir /b /s /a-d DKMAKE.cmake ^| findstr /E /R "%input%\\DKMAKE.cmake" ') do set "path=%%a"
+	::set "TARGET_PATH=%path:~0,-13%"
+	
+	if exist "%DKPATH%\3rdParty\_DKIMPORTS\%input%\DKMAKE.cmake" set "TARGET_PATH=%DKPATH%\3rdParty\_DKIMPORTS\%input%"
+	if exist "%DKPATH%\DKPlugins\%input%\DKMAKE.cmake" set "TARGET_PATH=%DKPATH%\DKPlugins\%input%"
+	if exist "%DKPATH%\DKApps\%input%\DKMAKE.cmake" set "TARGET_PATH=%DKPATH%\DKApps\%input%"
+	
+	::echo TARGET_PATH = %TARGET_PATH%
 	
 	call:get_parent_folder %TARGET_PATH% parent
-	echo parent = %parent%
+	::echo parent = %parent%
 	
 	if %parent%==DKApps goto:eof
 	call:make_directory  %DKPATH%\DKApps\%APP%
 	echo dk_depend(%input%)> %DKPATH%\DKApps\%APP%\DKMAKE.cmake
 	
 	echo.
-	echo %input%
+	::echo %input%
 	echo %TARGET_PATH%
 goto:eof
 

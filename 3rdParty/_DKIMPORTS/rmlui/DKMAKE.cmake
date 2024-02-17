@@ -23,11 +23,11 @@ endif()
 dk_import(https://github.com/mikke89/RmlUi.git)
 
 # Version fix #
-dkFileReplace(${RMLUI}/CMakeLists.txt "list(APPEND CORE_PRIVATE_DEFS RMLUI_VERSION" "#list(APPEND CORE_PRIVATE_DEFS RMLUI_VERSION")
+dk_fileReplace(${RMLUI}/CMakeLists.txt "list(APPEND CORE_PRIVATE_DEFS RMLUI_VERSION" "#list(APPEND CORE_PRIVATE_DEFS RMLUI_VERSION")
 
 # ANDROID FIX
 if(ANDROID)
-	dkFileReplace(${RMLUI}/CMakeLists.txt "target_compile_features" "#target_compile_features")
+	dk_fileReplace(${RMLUI}/CMakeLists.txt "target_compile_features" "#target_compile_features")
 endif()
 
 
