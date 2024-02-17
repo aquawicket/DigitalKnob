@@ -9,7 +9,7 @@ dk_depend(vc_redist)
 
 ### IMPORT ###
 UNIX_HOST_dk_import	(https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-0.zip)
-WIN_HOST_dk_import	(http://ftp.icm.edu.pl/packages/ImageMagick/binaries/ImageMagick-7.1.1-27-portable-Q8-x86.zip)
+WIN_HOST_dk_import	(http://ftp.icm.edu.pl/packages/ImageMagick/binaries/ImageMagick-7.1.1-28-portable-Q8-x86.zip)
 WIN_HOST_dk_set		(IMAGEMAGICK_CONVERT ${IMAGEMAGICK}/convert.exe) # TODO: rename to IMAGEMAGICK_CONVERT_EXE
 
 if(DKAPP)
@@ -26,9 +26,12 @@ if(NOT ANDROID)
 	### GENERATE / COMPILE ###
 	DEBUG_dk_setPath		(${IMAGEMAGICK}/${OS}/${DEBUG_DIR})
 	DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
-	DEBUG_dk_queueCommand	(make)
+	#DEBUG_dk_queueCommand	(make)
+	DEBUG_dk_build			(${IMAGEMAGICK})
+	
 	RELEASE_dk_setPath		(${IMAGEMAGICK}/${OS}/${RELEASE_DIR})
 	RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
-	RELEASE_dk_queueCommand	(make)
+	#RELEASE_dk_queueCommand	(make)
+	RELEASE_dk_build		(${IMAGEMAGICK})
 endif()
 endif()

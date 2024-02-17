@@ -452,7 +452,7 @@ endif(WIN_32)
 if(WIN_64)
 	########################## CREATE ICONS ###############################
 	if(EXISTS ${DKPROJECT}/icons/icon.png)
-		dk_depend(imagemagick)
+		#dk_depend(imagemagick)
 		if(IMAGEMAGICK_CONVERT)
 			dk_info("Building icons for ${APP_NAME} . . .")
 			dk_makeDirectory(${DKPROJECT}/icons/windows)

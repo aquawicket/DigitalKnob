@@ -2168,11 +2168,11 @@ function(dk_mergeFlags args RESULT)
 			endif()
 			
 			# FIXME: Msys supplies a string to bash to run, so flags with spaces need quotes
-			if(MSYS)
-				list(INSERT args ${placeholder} "'${DK_${word}}'")  # https://stackoverflow.com/a/61948012
-			else()
+			#if(MSYS)
+			#	list(INSERT args ${placeholder} "'${DK_${word}}'")  # https://stackoverflow.com/a/61948012
+			#else()
 				list(INSERT args ${placeholder} "${DK_${word}}")
-			endif()
+			#endif()
 			
 		endif()
 	endforeach()
@@ -2527,6 +2527,10 @@ endfunction()
 #
 function(dk_build path)
 	DKDEBUGFUNC(${ARGV})
+	
+	if(NOT QUEUE_BUILD)
+		return()
+	endif()
 	
 	dk_includes("${ARGN}" "NOASSERT" has_NOASSERT)
 	if(${has_NOASSERT})
