@@ -1860,7 +1860,7 @@ function(dk_executeProcess commands) #NOASSERT #NOECHO
 	dk_includes("${ARGN}" "NOECHO" NOECHO)
 	
 	if(NOT ${NOECHO})
-		dk_info("\n${CLR}${magenta} $ ${commands}\n")
+		dk_info("\n${CLR}${magenta} dk_executeProcess> ${commands}\n")
 	endif()
 
 	list(REMOVE_ITEM commands NOASSERT)
@@ -2108,7 +2108,6 @@ function(dk_msys2_bash)
 	string(REPLACE ";" "\n"	bash "${bash}")
 	#string(REPLACE "${CMAKE_GENERATOR}" "'${CMAKE_GENERATOR}'" bash "${bash}")
 	string(REPLACE "C:/" "/c/" bash "${bash}")
-	#message(STATUS msys2_bash("${bash}"))
 	
 	### run bash as a file
 	#file(WRITE ${MSYS2}/dkscript.tmp ${bash})
