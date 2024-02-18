@@ -111,19 +111,18 @@ dk_depend(imagemagick)
 
 
 ### User Friendly Options ###
-dk_set(WARNINGS_AS_ERRORS				OFF)
-dk_set(WARNING_LEVEL 					4)
-dk_set(WARNING_4244						OFF)	# /wd4244 - Warning: possible loss of data 
-dk_set(WARNING_5105						OFF)	# /wd5105 - macro producing defined is undefined behaviour
-#dk_set(STATIC							ON)
-#dk_set(SHARED							OFF)
-dk_set(BUILD_STATIC_LIBS				ON)
 dk_set(BUILD_SHARED_LIBS				OFF)
-dk_set(ENABLE_RTTI						ON)
+dk_set(BUILD_STATIC_LIBS				ON)
 dk_set(ENABLE_EXCEPTIONS				ON)    
+dk_set(ENABLE_RTTI						ON)
 dk_set(POSITION_INDEPENDENT_CODE 		ON)
 dk_set(POSITION_INDEPENDENT_EXECUTABLE 	OFF)                                        
-
+dk_set(WARNINGS_AS_ERRORS				OFF)
+dk_set(WARNING_4244						OFF)	# /wd4244 - Warning: possible loss of data 
+dk_set(WARNING_5105						OFF)	# /wd5105 - macro producing defined is undefined behaviour
+dk_set(WARNING_LEVEL 					4)
+#dk_set(STATIC							ON)
+#dk_set(SHARED							OFF)
 
 
 dk_append		(DKCMAKE_FLAGS -DBUILD_SHARED_LIBS=${BUILD_SHARED_LIBS})
@@ -247,9 +246,9 @@ endif()
 # Windows i686 (x32) - MSVC / MSYS
 if(MSVC)
 	WIN32_dk_set(DKCMAKE_C_COMPILER				"${VISUALSTUDIO_X86_C_COMPILER}")
-	WIN32_dk_append(DKCMAKE_C_FLAGS				"/DWIN /DWIN32 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c17 /nologo /Zm500 /Zc:__cplusplus /bigobj") #/D_WIN32_WINNT=0x0600
+	WIN32_dk_append(DKCMAKE_C_FLAGS				"/DWIN /DWIN32 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c17 /nologo /Zm500 /Zc:__cplusplus /bigobj") # /D_WIN32_WINNT=0x0600
 	WIN32_dk_set(DKCMAKE_CXX_COMPILER			"${VISUALSTUDIO_X86_CXX_COMPILER}")
-	WIN32_dk_append(DKCMAKE_CXX_FLAGS			"/DWIN /DWIN32 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c++17 /nologo /Zm500 /Zc:__cplusplus /bigobj") #/D_WIN32_WINNT=0x0600
+	WIN32_dk_append(DKCMAKE_CXX_FLAGS			"/DWIN /DWIN32 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /D_USING_V110_SDK71_ /std:c++17 /nologo /Zm500 /Zc:__cplusplus /bigobj") # /D_WIN32_WINNT=0x0600
 elseif(MSYS)
 	#WIN32_dk_set(DKCMAKE_C_COMPILER			"${GCC_C_COMPILER}")
 	WIN32_dk_append(DKCMAKE_C_FLAGS				"-march=i686 -DWIN -DWIN32 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17")
@@ -257,8 +256,8 @@ elseif(MSYS)
 	WIN32_dk_append(DKCMAKE_CXX_FLAGS			"-march=i686 -DWIN -DWIN32 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17")
 endif()
 WIN32_dk_append(DKCONFIGURE_FLAGS				--build=i686-w64-mingw32)
-WIN32_dk_set(DKCONFIGURE_CFLAGS					"-march=i686 -DWIN -DWIN32 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17") #-D_WIN32_WINNT=0x0600 
-WIN32_dk_set(DKCONFIGURE_CXXFLAGS				"-march=i686 -DWIN -DWIN32 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17") #-D_WIN32_WINNT=0x0600
+WIN32_dk_set(DKCONFIGURE_CFLAGS					"-march=i686 -DWIN -DWIN32 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17") # -D_WIN32_WINNT=0x0600 
+WIN32_dk_set(DKCONFIGURE_CXXFLAGS				"-march=i686 -DWIN -DWIN32 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17") # -D_WIN32_WINNT=0x0600
 
 # Windows x86_64 (x64) - MSVC / MSYS
 if(MSVC)
