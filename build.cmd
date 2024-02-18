@@ -326,11 +326,11 @@ goto:eof
         echo MSYS2_GENERATOR = %MSYS2_GENERATOR%
                 
         ::call:validate_gcc
-        call:cmake_eval "include('%DKIMPORTS%/gcc/DKMAKE.cmake')" "C_COMPILER;CXX_COMPILER" "-DMSYSTEM=MINGW32"
-        echo C_COMPILER = %C_COMPILER%
-        echo CXX_COMPILER = %CXX_COMPILER%
-        set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_C_COMPILER=%C_COMPILER%"
-        set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_COMPILER=%CXX_COMPILER%"
+        call:cmake_eval "include('%DKIMPORTS%/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER" "-DMSYSTEM=MINGW32"
+        echo GCC_C_COMPILER = %GCC_C_COMPILER%
+        echo GCC_CXX_COMPILER = %GCC_CXX_COMPILER%
+        set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_C_COMPILER=%GCC_C_COMPILER%"
+        set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_COMPILER=%GCC_CXX_COMPILER%"
                 
         ::call:validate_make
         call:cmake_eval "include('%DKIMPORTS%/make/DKMAKE.cmake')" "MAKE_PROGRAM" "-DMSYSTEM=MINGW32"
@@ -362,11 +362,11 @@ goto:eof
         echo MSYS2_GENERATOR = %MSYS2_GENERATOR%
                 
         ::call:validate_gcc
-        call:cmake_eval "include('%DKIMPORTS%/gcc/DKMAKE.cmake')" "C_COMPILER;CXX_COMPILER" "-DMSYSTEM=MINGW64"
-        echo C_COMPILER = %C_COMPILER%
-        echo CXX_COMPILER = %CXX_COMPILER%
-        set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_C_COMPILER=%C_COMPILER%"
-        set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_COMPILER=%CXX_COMPILER%"
+        call:cmake_eval "include('%DKIMPORTS%/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER" "-DMSYSTEM=MINGW64"
+        echo GCC_C_COMPILER = %GCC_C_COMPILER%
+        echo GCC_CXX_COMPILER = %GCC_CXX_COMPILER%
+        set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_C_COMPILER=%GCC_C_COMPILER%"
+        set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_COMPILER=%GCC_CXX_COMPILER%"
                 
         ::call:validate_make
         call:cmake_eval "include('%DKIMPORTS%/make/DKMAKE.cmake')" "MAKE_PROGRAM" "-DMSYSTEM=MINGW64"
@@ -735,7 +735,7 @@ goto:eof
 
 :: validate_gcc()
 :validate_gcc
-    call:cmake_eval "include('%DKIMPORTS%/gcc/DKMAKE.cmake')" "C_COMPILER;CXX_COMPILER"
+    call:cmake_eval "include('%DKIMPORTS%/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER"
     call:check_error
 goto:eof
 

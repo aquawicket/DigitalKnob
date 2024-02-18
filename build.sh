@@ -524,14 +524,14 @@ function Generate_Project() {
 	### GCC ###
 	if [[ $MSYSTEM == "MINGW32" ]] || [[ $MSYSTEM == "MINGW64" ]]; then
 		validate_gcc
-		CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$C_COMPILER" )
-		CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$CXX_COMPILER" )
+		CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$GCC_C_COMPILER" )
+		CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$GCC_CXX_COMPILER" )
 	fi
 	### CLANG ###
 	if [[ $MSYSTEM == "CLANG32" ]] || [[ $MSYSTEM == "CLANG64" ]] || [[ $MSYSTEM == "CLANGARM64" ]] || [[ $MSYSTEM == "UCRT64" ]]; then
 		validate_clang
-		CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$C_COMPILER" )
-		CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$CXX_COMPILER" )
+		CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$CLANG_C_COMPILER" )
+		CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$CLANG_CXX_COMPILER" )
 	fi
 	
 	###### EXE_LINKER_FLAGS ######
@@ -1037,16 +1037,16 @@ function validate_android_ndk() {
 
 ###### validate_clang ######
 function validate_clang() {
-	cmake_eval "include('$DKIMPORTS/clang/DKMAKE.cmake')" "C_COMPILER;CXX_COMPILER"
-	echo "C_COMPILER = $C_COMPILER"
-	echo "CXX_COMPILER = $CXX_COMPILER"
+	cmake_eval "include('$DKIMPORTS/clang/DKMAKE.cmake')" "CLANG_C_COMPILER;CLANG_CXX_COMPILER"
+	echo "CLANG_C_COMPILER = $CLANG_C_COMPILER"
+	echo "CLANG_CXX_COMPILER = $CLANG_CXX_COMPILER"
 }
 
 ###### validate_gcc ######
 function validate_gcc() {
-	cmake_eval "include('$DKIMPORTS/gcc/DKMAKE.cmake')" "C_COMPILER;CXX_COMPILER"
-	echo "C_COMPILER = $C_COMPILER"
-	echo "CXX_COMPILER = $CXX_COMPILER"
+	cmake_eval "include('$DKIMPORTS/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER"
+	echo "GCC_C_COMPILER = $GCC_C_COMPILER"
+	echo "GCC_CXX_COMPILER = $GCC_CXX_COMPILER"
 }
 			
 ### cmake_eval <cmake_commands;.;.;> <return_variables;.;.;.> <-DVARS;.;.;>
