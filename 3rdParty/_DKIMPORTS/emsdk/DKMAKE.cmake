@@ -53,3 +53,6 @@ dk_set(EMCONFIGURE 	${EMSDK}/upstream/emscripten/emconfigure)
 dk_set(EMMAKE 		${EMSDK}/upstream/emscripten/emmake)
 dk_set(EMPP 		${EMSDK}/upstream/emscripten/em++)
 dk_set(EMRANLIB 	${EMSDK}/upstream/emscripten/emranlib)
+
+dk_set(EMSDK_C_COMPILER 	${EMSDK}/upstream/emscripten/emcc)
+dk_set(EMSDK_CXX_COMPILER 	${EMSDK}/upstream/emscripten/em++)
