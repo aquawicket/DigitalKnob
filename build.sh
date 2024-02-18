@@ -506,10 +506,10 @@ function Generate_Project() {
 	###### GENERATOR ######
 	if  [[ -n "$MSYSTEM" ]]; then
 		GENERATOR="MSYS Makefiles"
-	elif [[ "$TARGET_OS" == "mac"* ]] || [[ "$TARGET_OS" == "ios"* ]]; then
+	elif [[ $TARGET_OS == "mac"* ]] || [[ $TARGET_OS == "ios"* ]]; then
 		GENERATOR="Xcode"
-	elif [[ "$TARGET_OS" == "emscipten"* ]]; then
-		call validate_emscripten
+	elif [[ $TARGET_OS == "emscripten"* ]]; then
+		validate_emscripten
 		GENERATOR="MinGW Makefiles"
 	else
 		GENERATOR="Unix Makefiles"
