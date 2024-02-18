@@ -606,7 +606,7 @@ if(MAC)
 	dk_copy(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER OVERWRITE NOERROR)
 	#file(REMOVE ${DKPROJECT}/assets/USER)
 	dk_remove(${DKPROJECT}/assets/USER NOERROR)
-	dk_copy(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/)
+	dk_copy(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ OVERWRITE NOERROR)
 	#file(REMOVE ${DKPROJECT}/Backup)
 	dk_remove(${DKPROJECT}/Backup NOERROR)
 	
