@@ -324,7 +324,7 @@ function Pick_OS() {
 	elif [[ "$OSTYPE" == "linux-android" ]]; then
 		options=("android32" "android64" "Clear Screen" "Go Back" "Exit")
 	elif [[ "$OSTYPE" == "msys" ]]; then
-		options=("win32" "win64" "android32" "android64" "Clear Screen" "Go Back" "Exit")
+		options=("win32" "win64" "android32" "android64" "emscripten" "Clear Screen" "Go Back" "Exit")
 	else
 		echo "UNKNOWN OS TYPE ($OSTYPE)"
 		options=("Exit")
@@ -504,13 +504,17 @@ function Generate_Project() {
 	#echo CMAKE_ARGS = "${CMAKE_ARGS[@]}"
 	
 	###### GENERATOR ######
-	if  [[ -n "$MSYSTEM" ]]; then
-		GENERATOR="MSYS Makefiles"
-	elif [[ $TARGET_OS == "mac"* ]] || [[ $TARGET_OS == "ios"* ]]; then
+	if [[ $TARGET_OS == "mac"* ]] || [[ $TARGET_OS == "ios"* ]]; then
 		GENERATOR="Xcode"
-	elif [[ $TARGET_OS == "emscripten"* ]]; then
+	elif [[ $TARGET_OS == "emscripten" ]]; then
 		validate_emscripten
-		GENERATOR="MinGW Makefiles"
+		GENERATOR="$EMSDK_GENERATOR"
+		CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$EMSDK_C_COMPILER" )
+		CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$EMSDK_CXX_COMPILER" )
+		CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$EMSDK_TOOLCHAIN_FILE" )
+		MSYSTEM=""
+	elif [[ -n "$MSYSTEM" ]]; then
+		GENERATOR="MSYS Makefiles"
 	else
 		GENERATOR="Unix Makefiles"
 	fi
@@ -523,7 +527,7 @@ function Generate_Project() {
 	
 	###### C_COMPILER; CXX_COMPILER ######
 	### GCC ###
-	if [[ $MSYSTEM == "MINGW32" ]] || [[ $MSYSTEM == "MINGW64" ]] || [[ "$OSTYPE" == "linux-gnu"* ]] || [[ "$MODEL" == "Raspberry"* ]]; then
+	if [[ $MSYSTEM == "MINGW32" ]] || [[ $MSYSTEM == "MINGW64" ]] || [[ $TARGET_OS == "linux"* ]] || [[ $MODEL == "Raspberry"* ]]; then
 		validate_gcc
 		CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$GCC_C_COMPILER" )
 		CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$GCC_CXX_COMPILER" )
@@ -589,13 +593,13 @@ function Generate_Project() {
 	fi
 	
 	
-	if [[ "$TARGET_OS" == "emscipten" ]]; then
+	if [[ $TARGET_OS == "emscripten" ]]; then
 	    #dk_call validate_emscripten
 		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-			dk_call "$EMSDK_ENV" & "$CMAKE" -G "$GENERATOR" -DCMAKE_TOOLCHAIN_FILE="$EMSDK_TOOLCHAIN_FILE" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Debug
+			dk_call "$EMSDK_ENV" & $CMAKE -G "$GENERATOR" -DCMAKE_TOOLCHAIN_FILE="$EMSDK_TOOLCHAIN_FILE" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Debug
 		fi
 		if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-			dk_call "$EMSDK_ENV" & "$CMAKE" -G "$GENERATOR" -DCMAKE_TOOLCHAIN_FILE="$EMSDK_TOOLCHAIN_FILE" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Release
+			dk_call "$EMSDK_ENV" & $CMAKE -G "$GENERATOR" -DCMAKE_TOOLCHAIN_FILE="$EMSDK_TOOLCHAIN_FILE" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Release
 		fi
 		TARGET=${APP}_APP
 	fi
@@ -1011,22 +1015,24 @@ function delete_temp_files() {
 ###### validate_msys2 ######
 function validate_msys2() {
 	cmake_eval "include('$DKIMPORTS/msys2/DKMAKE.cmake')" "MSYS2"
-	echo MSYS2 = $MSYS2
+	echo "MSYS2 = $MSYS2"
 }
 
 ###### validate_make ######
 function validate_make() {
 	cmake_eval "include('$DKIMPORTS/make/DKMAKE.cmake')" "MAKE_PROGRAM"
-	echo MAKE_PROGRAM = $MAKE_PROGRAM
+	echo "MAKE_PROGRAM = $MAKE_PROGRAM"
 }
 
 ###### validate_emscripten ######
 function validate_emscripten() {
-	cmake_eval "include('$DKIMPORTS/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE"
-	echo EMSDK = $EMSDK
-	echo EMSDK_ENV = $EMSDK_ENV
-	echo EMSDK_GENERATOR = $EMSDK_GENERATOR
-	echo EMSDK_TOOLCHAIN_FILE = $EMSDK_TOOLCHAIN_FILE
+	cmake_eval "include('$DKIMPORTS/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
+	echo "EMSDK = $EMSDK"
+	echo "EMSDK_ENV = $EMSDK_ENV"
+	echo "EMSDK_GENERATOR = $EMSDK_GENERATOR"
+	echo "EMSDK_TOOLCHAIN_FILE = $EMSDK_TOOLCHAIN_FILE"
+	echo "EMSDK_C_COMPILER = $EMSDK_C_COMPILER"
+	echo "EMSDK_CXX_COMPILER = $EMSDK_CXX_COMPILER"
 }
 
 ###### validate_android_ndk ######
