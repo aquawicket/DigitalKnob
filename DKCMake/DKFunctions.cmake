@@ -2106,7 +2106,7 @@ function(dk_msys2_bash)
 	list(APPEND bash "exit")
 	list(APPEND bash " ")
 	string(REPLACE ";" "\n"	bash "${bash}")
-	#string(REPLACE "${CMAKE_GENERATOR}" "'${CMAKE_GENERATOR}'" bash "${bash}")
+	string(REPLACE "${CMAKE_GENERATOR}" "'${CMAKE_GENERATOR}'" bash "${bash}")
 	string(REPLACE "C:/" "/c/" bash "${bash}")
 	
 	### run bash as a file
@@ -2178,7 +2178,7 @@ function(dk_mergeFlags args RESULT)
 			#if(MSYS)
 			#	list(INSERT args ${placeholder} "'${DK_${word}}'")  # https://stackoverflow.com/a/61948012
 			#else()
-				list(INSERT args ${placeholder} "${DK_${word}}")
+				list(INSERT args ${placeholder} "'${DK_${word}}'")
 			#endif()
 			
 		endif()
@@ -2206,7 +2206,7 @@ function(dk_command)
 	#dk_info("\n${CLR}${magenta} dk_command> ${ARGV}\n")
 	dk_mergeFlags("${ARGV}" merged_args)
 	#string(REPLACE ";" " " merged_args "${merged_args}")
-	#dk_info("\n${CLR}${magenta} dk_command> ${merged_args}\n")
+	dk_info("\n${CLR}${magenta} dk_command> ${merged_args}\n")
 	
 	
 	
