@@ -38,7 +38,7 @@ if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 	set GIT_USER_EMAIL=aquawicket@hotmail.com
 	set GIT_USER_NAME=aquawicket
 
-	set COMPILER=MINGW64
+	
 	
 	
 
@@ -254,7 +254,7 @@ goto:eof
     if "%choice%"=="3" set "TYPE=All"      & goto:eof
     if "%choice%"=="4" call:clear_screen   & goto:eof
     if "%choice%"=="5" set "TARGET_OS="    & goto:eof
-    if "%choice%"=="6" exit            & goto:eof
+    if "%choice%"=="6" exit                & goto:eof
         
     echo %choice%: invalid selection, please try again
 	set TYPE=
@@ -349,6 +349,8 @@ goto:eof
 goto:eof
 
 :generate_win64
+		set COMPILER=MINGW64
+	
     ::if %COMPILER%==MINGW64 (
 		call:cmake_eval "include('%DKIMPORTS%/msys2/DKMAKE.cmake')"
 		
@@ -404,25 +406,29 @@ goto:eof
 
 :generate_emscripten
     call:validate_emscripten
+	set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_TOOLCHAIN_FILE=%EMSDK_TOOLCHAIN_FILE%"
+	set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_C_COMPILER=%EMSDK_C_COMPILER%"
+	set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_COMPILER=%EMSDK_CXX_COMPILER%"
+	
     if %TYPE%==Debug (
-        call "%EMSDK_ENV%" & "%CMAKE%" -G "%EMSDK_GENERATOR%" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%CMAKE_TARGET_PATH%/%TARGET_OS%/Debug
+        call "%EMSDK_ENV%" & "%CMAKE%" -G "%EMSDK_GENERATOR%" %CMAKE_ARGS% -S%DKCMAKE% -B%CMAKE_TARGET_PATH%/%TARGET_OS%/Debug
     )
     if %TYPE%==Release (
-        call "%EMSDK_ENV%" & "%CMAKE%" -G "%EMSDK_GENERATOR%" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%CMAKE_TARGET_PATH%/%TARGET_OS%/Release
+        call "%EMSDK_ENV%" & "%CMAKE%" -G "%EMSDK_GENERATOR%" %CMAKE_ARGS% -S%DKCMAKE% -B%CMAKE_TARGET_PATH%/%TARGET_OS%/Release
     )
     if %TYPE%==All (
-        call "%EMSDK_ENV%" & "%CMAKE%" -G "%EMSDK_GENERATOR%" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%CMAKE_TARGET_PATH%/%TARGET_OS%/Debug
-        call "%EMSDK_ENV%" & "%CMAKE%" -G "%EMSDK_GENERATOR%" -DCMAKE_TOOLCHAIN_FILE="%EMSDK_TOOLCHAIN_FILE%" -S%DKCMAKE% -B%CMAKE_TARGET_PATH%/%TARGET_OS%/Release
+        call "%EMSDK_ENV%" & "%CMAKE%" -G "%EMSDK_GENERATOR%" %CMAKE_ARGS% -S%DKCMAKE% -B%CMAKE_TARGET_PATH%/%TARGET_OS%/Debug
+        call "%EMSDK_ENV%" & "%CMAKE%" -G "%EMSDK_GENERATOR%" %CMAKE_ARGS% -S%DKCMAKE% -B%CMAKE_TARGET_PATH%/%TARGET_OS%/Release
     )
     set TARGET=%APP%_APP
 goto:eof
 
 
 :build
-    TITLE DigitalKnob - Building %APP%_%TARGET_OS%_%TYPE% %LEVEL% . . .
+    TITLE DigitalKnob - Building %APP%_%TARGET_OS%_%TYPE% %DKLEVEL% . . .
     echo.
     echo ###########################################################        
-    echo ****** Building %APP% - %TARGET_OS% - %TYPE% - %LEVEL% ******
+    echo ****** Building %APP% - %TARGET_OS% - %TYPE% - %DKLEVEL% ******
     echo ###########################################################
     echo.
 goto:eof
@@ -430,7 +436,7 @@ goto:eof
 :build_all
 
 :build_debug
-    if %COMPILER%==MINGW64 (
+    if "%COMPILER%"=="MINGW64" (
         %MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Debug --target %TARGET% --config Debug --verbose"
 		if %TYPE%==All goto:build_release
 		goto:end_message
@@ -448,7 +454,7 @@ goto:eof
 goto:eof
 
 :build_release
-	 if %COMPILER%==MINGW64 (
+	 if "%COMPILER%"=="MINGW64" (
         %MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Release --target %TARGET% --config Debug --verbose"
         goto end_message
     )
@@ -763,11 +769,13 @@ goto:eof
 
 :: validate_emscripten()
 :validate_emscripten
-    call:cmake_eval "include('%DKIMPORTS%/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE"
+    call:cmake_eval "include('%DKIMPORTS%/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
     echo EMSDK = %EMSDK%
     echo EMSDK_ENV = %EMSDK_ENV%
     echo EMSDK_GENERATOR = %EMSDK_GENERATOR%
     echo EMSDK_TOOLCHAIN_FILE = %EMSDK_TOOLCHAIN_FILE%
+	echo EMSDK_C_COMPILER = %EMSDK_C_COMPILER%
+	echo EMSDK_CXX_COMPILER = %EMSDK_CXX_COMPILER%
     call:check_error
 goto:eof
 
