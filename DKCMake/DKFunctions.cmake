@@ -2114,7 +2114,7 @@ function(dk_msys2_bash)
 	#dk_executeProcess(${MSYS2}/usr/bin/bash ${MSYS2}/dkscript.tmp NOECHO)	
 	
 	### run bash as a string parameter
-	dk_info("\n${CLR}${magenta} dk_msys2_bash> ${bash}\n")
+	#dk_info("\n${CLR}${magenta} dk_msys2_bash> ${bash}\n")
 	dk_executeProcess(${MSYS2}/usr/bin/bash -c "${bash}" NOECHO ${NOASSERT})
 endfunction()
 dk_createOsMacros("dk_msys2_bash")
@@ -2153,7 +2153,7 @@ function(dk_mergeFlags args RESULT)
 	list(REMOVE_AT args -1)
 	set(search "-DCMAKE_C_FLAGS=" "-DCMAKE_C_FLAGS_DEBUG=" "-DCMAKE_C_FLAGS_RELEASE=" "-DCMAKE_CXX_FLAGS=" "-DCMAKE_CXX_FLAGS_DEBUG=" "-DCMAKE_CXX_FLAGS_RELEASE=" "CFLAGS=" "CXXFLAGS=")
 	foreach(word ${search})
-		set(DK_${word} "${word}")
+		set(DK_${word} "${word}'")
 		set(index 0)
 		set(placeholder 0)
 		foreach(arg ${args})
@@ -2165,22 +2165,21 @@ function(dk_mergeFlags args RESULT)
 				endif()				
 				list(REMOVE_ITEM args ${arg})
 				string(REPLACE ${word} "" arg ${arg})
-				set(DK_${word} "${DK_${word}}${arg} ")
+				if(DK_${word})
+					set(DK_${word} "${DK_${word}} ${arg}")
+				else()
+					set(DK_${word} "${arg}")
+				endif()
 			endif()
 		endforeach()
+		set(DK_${word} "${DK_${word}}'")
 		if(${placeholder} GREATER 0)
 			list(LENGTH args args_length)
 			if(${placeholder} GREATER ${args_length})
 				math(EXPR placeholder "${args_length}-1")
 			endif()
-			
-			# FIXME: Msys supplies a string to bash to run, so flags with spaces need quotes
-			#if(MSYS)
-			#	list(INSERT args ${placeholder} "'${DK_${word}}'")  # https://stackoverflow.com/a/61948012
-			#else()
-				list(INSERT args ${placeholder} "'${DK_${word}}'")
-			#endif()
-			
+
+			list(INSERT args ${placeholder} "${DK_${word}}")	# https://stackoverflow.com/a/61948012
 		endif()
 	endforeach()
 	set(${RESULT} ${args} PARENT_SCOPE)
@@ -2202,13 +2201,9 @@ function(dk_command)
 	#	set(NOASSERT NOASSERT)
 	#endif()
 	
-	
-	#dk_info("\n${CLR}${magenta} dk_command> ${ARGV}\n")
 	dk_mergeFlags("${ARGV}" merged_args)
-	#string(REPLACE ";" " " merged_args "${merged_args}")
-	dk_info("\n${CLR}${magenta} dk_command> ${merged_args}\n")
-	
-	
+	#string(REPLACE ";" " " spaced_args "${merged_args}")
+	#dk_info("\n${CLR}${magenta} dk_command> ${spaced_args}\n")
 	
 	#if(EMSCRIPTEN)
 	#	dk_executeProcess(${EMMAKE} bash ${merged_args})
