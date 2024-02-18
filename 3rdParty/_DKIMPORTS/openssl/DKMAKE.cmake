@@ -96,7 +96,7 @@ if(MSYS)
 endif()
 
 if(NOT ANDROID AND NOT MSVC)
-	DEBUG_dk_queueCommand(make)
+	DEBUG_dk_build(${OPENSSL})
 else()
 ANDROID_DEBUG_dk_bash(
 	"export ANDROID_NDK_ROOT=${ANDROID_NDK}"
@@ -128,7 +128,7 @@ if(MSYS)
 endif()
 
 if(NOT ANDROID AND NOT MSVC)
-	RELEASE_dk_queueCommand(make)
+	RELEASE_dk_build(${OPENSSL})
 else()
 	ANDROID_RELEASE_dk_bash(
 		"export ANDROID_NDK_ROOT=${ANDROID_NDK}\n"

@@ -40,10 +40,11 @@ dk_build(${UWEBSOCKETS} uWS)
 ### GENERATE / COMPILE ###
 #DEBUG_dk_setPath			(${UWEBSOCKETS}/${OS}/${DEBUG_DIR})
 #DEBUG_dk_queueCommand		(${DKCONFIGURE_BUILD})
-#DEBUG_dk_queueCommand		(make)
+#DEBUG_dk_build				(${UWEBSOCKETS})
+
 #RELEASE_dk_setPath			(${UWEBSOCKETS}/${OS}/${RELEASE_DIR})
 #RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
-#RELEASE_dk_queueCommand	(make)
+#RELEASE_dk_build			(${UWEBSOCKETS})
 
 #dk_setPath		(${UWEBSOCKETS})
 #dk_queueShell	(make)
