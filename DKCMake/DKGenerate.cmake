@@ -603,10 +603,12 @@ if(MAC)
 	endif()
 		
 	################# BACKUP USERDATA / INJECT ASSETS #####################	
-	dk_copy(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER OVERWRITE)
-	file(REMOVE ${DKPROJECT}/assets/USER)
+	dk_copy(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER OVERWRITE NOERROR)
+	#file(REMOVE ${DKPROJECT}/assets/USER)
+	dk_remove(${DKPROJECT}/assets/USER NOERROR)
 	dk_copy(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/)
-	file(REMOVE ${DKPROJECT}/Backup)
+	#file(REMOVE ${DKPROJECT}/Backup)
+	dk_remove(${DKPROJECT}/Backup NOERROR)
 	
 	####################### Create Executable Target ###################
 	file(GLOB_RECURSE m_SRC 
