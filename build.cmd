@@ -1,8 +1,13 @@
 ::############ DigitalKnob builder script ############
 @echo off
 
+::### call and arguments passed in ###
+::if "%*" NEQ "" echo %%^* = %*
+if "%*" NEQ "" call %* 
+
+	
 ::### keep window open ###
-if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
+::if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 
 :: https://stackoverflow.com/a/4095133/688352
 
@@ -37,9 +42,6 @@ if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 	set GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.30.1.windows.1/Git-2.30.1-32-bit.exe
 	set GIT_USER_EMAIL=aquawicket@hotmail.com
 	set GIT_USER_NAME=aquawicket
-
-	
-	
 	
 
     set "DIGITALKNOB=%HOMEDRIVE%%HOMEPATH%\digitalknob"
@@ -384,7 +386,7 @@ goto:eof
 goto:eof
 
 :generate_android32
-    call:validate_visual_studio
+    ::call:validate_visual_studio
     call:validate_android_ndk
     call:validate_openjdk
     call %OPENJDK%\registerJDK.cmd
@@ -393,7 +395,7 @@ goto:eof
 goto:eof
 
 :generate_android64
-    call:validate_visual_studio
+    ::call:validate_visual_studio
     call:validate_android_ndk
     call:validate_openjdk
     call %OPENJDK%\registerJDK.cmd
@@ -419,7 +421,6 @@ goto:eof
 	
 	if %debug% "%EMSDK_ENV%" && "%CMAKE%" -G "%EMSDK_GENERATOR%" %CMAKE_ARGS% -S%DKCMAKE% -B%CMAKE_TARGET_PATH%/%TARGET_OS%/Debug
 	if %release% "%EMSDK_ENV%" && "%CMAKE%" -G "%EMSDK_GENERATOR%" %CMAKE_ARGS% -S%DKCMAKE% -B%CMAKE_TARGET_PATH%/%TARGET_OS%/Release
-	
 goto:eof
 
 
@@ -592,13 +593,55 @@ goto:eof
 
 :: :reset_all()
 :reset_all
+
+	if "%1" EQU "wipe" goto:wipe
+	
 	echo Resetting Entire Local Repository . . .
+	echo.
 	
 	set /P CONFIRM=Are you sure (Y)?
 	if /I "%CONFIRM%" NEQ "Y" goto:eof
 	
-	cd %DKPATH%
-	"%GIT%" clean -f -d
+	if not "%ARGV%" == "" (
+		echo ARGV = %ARGV%
+		echo all = %*
+		if not "%2" == "" echo the variable is empty
+		echo 2 = %2
+		pause
+		exit
+	)
+	
+	:: first we need to relocate this file up one directory
+	:: make sure script is running from DKPATH
+    if not "%SCRIPTPATH%" == "%DKPATH%" (
+		echo WARNING: this file isn't running from the branch directory
+		echo Is must be in the branch directory to continue.
+		echo SCRIPTPATH = %SCRIPTPATH%
+		echo DKPATH = %DKPATH%
+		goto:oef
+	)
+	
+	echo "RELOADING SCRIPT TO -> %DIGITALKNOB%\%SCRIPTNAME%"
+	echo copy /Y %SCRIPTPATH%\%SCRIPTNAME% %DIGITALKNOB%\%SCRIPTNAME%
+    copy %SCRIPTPATH%\%SCRIPTNAME% %DIGITALKNOB%\%SCRIPTNAME%
+	start "" "%DIGITALKNOB%\%SCRIPTNAME%" :reset_all wipe
+	exit	
+	
+	:wipe
+	echo Removing Entire Local Repository, only this file will remain. . .
+	echo.
+	set /P CONFIRM=Are you sure (Y)?
+	if /I "%CONFIRM%" NEQ "Y" exit
+	
+	::runas /user:Administrator cmd
+	cd %DIGITALKNOB%
+	call rmdir %DKDOWNLOAD% /s /q
+	call rmdir %DKPATH% /s /q
+	
+	::call del /s /q %DKDOWNLOAD%\
+	
+	::cd %DKPATH%
+	::"%GIT%" clean -f -d
 goto:eof
 
 
@@ -823,6 +866,7 @@ goto:eof
     ::echo command_to_variable(%*) -^> %%%variable_name%%% = %variable_value%
     call:check_error
 goto:eof
+
 
 
 :: dk_deleteCache()

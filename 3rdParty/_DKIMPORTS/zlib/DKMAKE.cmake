@@ -39,7 +39,9 @@ endif()
 
 
 ### GENERATE ###
-dk_queueCommand(${DKCMAKE_BUILD} ${ZLIB})
+dk_queueCommand(${DKCMAKE_BUILD} 
+				-DZLIB_BUILD_EXAMPLES=OFF 	# "Enable Zlib Examples" ON
+				${ZLIB})
 
 
 ### COMPILE ###
