@@ -602,15 +602,6 @@ goto:eof
 	set /P CONFIRM=Are you sure (Y)?
 	if /I "%CONFIRM%" NEQ "Y" goto:eof
 	
-	if not "%ARGV%" == "" (
-		echo ARGV = %ARGV%
-		echo all = %*
-		if not "%2" == "" echo the variable is empty
-		echo 2 = %2
-		pause
-		exit
-	)
-	
 	:: first we need to relocate this file up one directory
 	:: make sure script is running from DKPATH
     if not "%SCRIPTPATH%" == "%DKPATH%" (
@@ -621,27 +612,53 @@ goto:eof
 		goto:oef
 	)
 	
-	echo "RELOADING SCRIPT TO -> %DIGITALKNOB%\%SCRIPTNAME%"
-	echo copy /Y %SCRIPTPATH%\%SCRIPTNAME% %DIGITALKNOB%\%SCRIPTNAME%
-    copy %SCRIPTPATH%\%SCRIPTNAME% %DIGITALKNOB%\%SCRIPTNAME%
+	echo "RELOCATING SCRIPT TO -> %DIGITALKNOB%\%SCRIPTNAME%"
+    copy /Y %SCRIPTPATH%\%SCRIPTNAME% %DIGITALKNOB%\%SCRIPTNAME%
 	start "" "%DIGITALKNOB%\%SCRIPTNAME%" :reset_all wipe
 	exit	
 	
+	::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 	:wipe
-	echo Removing Entire Local Repository, only this file will remain. . .
+	echo Refreshing Entire Local Repository . . .
 	echo.
 	set /P CONFIRM=Are you sure (Y)?
 	if /I "%CONFIRM%" NEQ "Y" exit
 	
+	::do we need admin rights?
 	::runas /user:Administrator cmd
-	cd %DIGITALKNOB%
-	call rmdir %DKDOWNLOAD% /s /q
-	call rmdir %DKPATH% /s /q
 	
-	::call del /s /q %DKDOWNLOAD%\
+	::do we need to kill any processes?
 	
+	::do we need to uninstall any apps?
+	
+	::do we need to remove any environment variables?
+	
+	::should we do a git clean first?
 	::cd %DKPATH%
 	::"%GIT%" clean -f -d
+	
+	cd %DIGITALKNOB%
+	echo.
+	echo DELETING %DKDOWNLOAD% . . . .
+	call rmdir %DKDOWNLOAD% /s /q
+	echo done.
+	echo.
+	echo DELETING %DKPATH% . . . .
+	call rmdir %DKPATH% /s /q
+	echo done.
+	
+	:: wait 20 seconds at lease for the folders to get deleted
+	ping 127.0.0.1 -n 6 >nul
+	ping 127.0.0.1 -n 6 >nul
+	ping 127.0.0.1 -n 6 >nul
+	ping 127.0.0.1 -n 6 >nul
+	
+	if exist %DKDOWNLOAD% echo "Oh no, the downloads folder is still there! :( " & exit
+	if exist %DKPATH% echo "Oh no, the BRANCH folder is still there! :( " & exit
+	
+	call:git_update
+	
+	start "" "%DKPATH%\%SCRIPTNAME%" & del /f %DIGITALKNOB%\%SCRIPTNAME% & exit
 goto:eof
 
 
