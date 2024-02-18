@@ -409,13 +409,17 @@ goto:eof
 	set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_C_COMPILER=%EMSDK_C_COMPILER%"
 	set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_COMPILER=%EMSDK_CXX_COMPILER%"
 	
-    if %TYPE%==Debug (
-        call "%EMSDK_ENV%" & "%CMAKE%" -G "%EMSDK_GENERATOR%" %CMAKE_ARGS% -S%DKCMAKE% -B%CMAKE_TARGET_PATH%/%TARGET_OS%/Debug
-    )
-    if %TYPE%==Release (
-        call "%EMSDK_ENV%" & "%CMAKE%" -G "%EMSDK_GENERATOR%" %CMAKE_ARGS% -S%DKCMAKE% -B%CMAKE_TARGET_PATH%/%TARGET_OS%/Release
-    )
-    set TARGET=%APP%_APP
+	set "debug=0==1"
+	set "release=0==1"
+    if %TYPE%==Debug set "debug=1==1"
+	if %TYPE%==Release set "release=1==1"
+	if %TYPE%==All set "debug=1==1" & set "release=1==1"
+	
+	set TARGET=%APP%_APP
+	
+	if %debug% "%EMSDK_ENV%" && "%CMAKE%" -G "%EMSDK_GENERATOR%" %CMAKE_ARGS% -S%DKCMAKE% -B%CMAKE_TARGET_PATH%/%TARGET_OS%/Debug
+	if %release% "%EMSDK_ENV%" && "%CMAKE%" -G "%EMSDK_GENERATOR%" %CMAKE_ARGS% -S%DKCMAKE% -B%CMAKE_TARGET_PATH%/%TARGET_OS%/Release
+	
 goto:eof
 
 
@@ -443,14 +447,16 @@ goto:eof
     )
         
     if exist %TARGET_PATH%\%TARGET_OS%\Debug\CMakeCache.txt (
+		echo "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS%\Debug --target %TARGET% --config Debug --verbose
         "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS%\Debug --target %TARGET% --config Debug --verbose
     )
     if exist %TARGET_PATH%\%TARGET_OS%\CMakeCache.txt (
+		echo "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS% --target %TARGET% --config Debug --verbose
         "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS% --target %TARGET% --config Debug --verbose
     )
 	
 	if %TYPE%==All goto:build_release
-		goto:end_message
+	goto:end_message
 goto:eof
 
 :build_release

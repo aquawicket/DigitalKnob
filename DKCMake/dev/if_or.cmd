@@ -7,7 +7,7 @@ if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 	set var1=3
 	set var2=5
 
-	call:if_or orResult "%var1%==4" "boy==boy" "%var2%==6"
+	call:if_or orResult "%var1%==4" "boy==boy" "%var2%==6" 
 	if %orResult% ( 
 		echo At least one expression is true
 	) else echo All expressions are false
