@@ -522,7 +522,7 @@ function Generate_Project() {
 	
 	###### C_COMPILER; CXX_COMPILER ######
 	### GCC ###
-	if [[ $MSYSTEM == "MINGW32" ]] || [[ $MSYSTEM == "MINGW64" ]]; then
+	if [[ $MSYSTEM == "MINGW32" ]] || [[ $MSYSTEM == "MINGW64" ]] || [[ "$OSTYPE" == "linux-gnu"* ]] || [[ "$MODEL" == "Raspberry"* ]]; then
 		validate_gcc
 		CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$GCC_C_COMPILER" )
 		CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$GCC_CXX_COMPILER" )
