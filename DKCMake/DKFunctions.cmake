@@ -2205,7 +2205,7 @@ function(dk_command)
 	
 	#dk_info("\n${CLR}${magenta} dk_command> ${ARGV}\n")
 	dk_mergeFlags("${ARGV}" merged_args)
-	string(REPLACE ";" " " merged_args "${merged_args}")
+	#string(REPLACE ";" " " merged_args "${merged_args}")
 	#dk_info("\n${CLR}${magenta} dk_command> ${merged_args}\n")
 	
 	
