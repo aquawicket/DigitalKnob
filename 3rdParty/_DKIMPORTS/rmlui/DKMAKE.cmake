@@ -53,7 +53,7 @@ if(rmlui_RmlCore)
 endif()
 
 if(rmlui_RmlDebugger)
-	dk_define			(HAVE_rmlui_debugger)
+	dk_define				(HAVE_rmlui_debugger)
 	if(MSVC)
 		WIN_dk_libRelease	(${RMLUI}/${OS}/${RELEASE_DIR}/RmlDebugger.lib)
 		WIN_dk_libDebug		(${RMLUI}/${OS}/${DEBUG_DIR}/RmlDebugger.lib)
@@ -131,7 +131,6 @@ if(MSVC)
 		${SFML_CMAKE} 
 		${RMLUI}) 
 else()
-	dk_debug(LUA_CMAKE)
 	dk_queueCommand(${DKCMAKE_BUILD} 
 		-DBUILD_FRAMEWORK=OFF 					# "Build Framework bundle for OSX" OFF
 		-DBUILD_LUA_BINDINGS_FOR_LUAJIT=OFF 	# "Build Lua bindings using luajit" OFF

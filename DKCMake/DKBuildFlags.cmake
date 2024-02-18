@@ -624,4 +624,4 @@ else()
 endif()
 
 
-dk_debug("DKCMAKE_BUILD = ${DKCMAKE_BUILD}")
+#dk_debug("DKCMAKE_BUILD = ${DKCMAKE_BUILD}")

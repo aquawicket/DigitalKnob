@@ -1627,7 +1627,7 @@ endfunction()
 function(dk_install plugin) #PATCH
 	DKDEBUGFUNC(${ARGV})
 	
-	dk_debug("dk_install(${plugin})")
+	#dk_debug("dk_install(${plugin})")
 	
 	# set PLUGIN_URL variable
 	string(MAKE_C_IDENTIFIER ${plugin} plugin_alpha_numeric)
@@ -4475,7 +4475,7 @@ function(dk_import url)
 	
 	dk_includes("${ARGN}" "PATCH" has_patch)
 	if(${has_patch})
-		dk_debug("dk_patch(${plugin} ${${plugin_var}})")
+		#dk_debug("dk_patch(${plugin} ${${plugin_var}})")
 		dk_patch(${plugin} ${${plugin_var}})
 	endif()
 	
