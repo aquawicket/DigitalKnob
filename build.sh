@@ -462,7 +462,7 @@ function Generate_Project() {
 	
 	echo ""
 	echo "##################################################################"
-	echo "****** Generating $APP - $OS - $TYPE - $LEVEL ******"
+	echo "****** Generating $APP - $TARGET_OS - $TYPE - $LEVEL ******"
 	echo "##################################################################"
 	echo ""
 
@@ -509,7 +509,7 @@ function Generate_Project() {
 	elif [[ "$TARGET_OS" == "mac"* ]] || [[ "$TARGET_OS" == "ios"* ]]; then
 		GENERATOR="Xcode"
 	elif [[ "$TARGET_OS" == "emscipten"* ]]; then
-		validate_emscripten
+		call validate_emscripten
 		GENERATOR="MinGW Makefiles"
 	else
 		GENERATOR="Unix Makefiles"
