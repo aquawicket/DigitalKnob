@@ -9,10 +9,10 @@ endif()
 
 
 # xcode Variables
-dk_set(XCODE_DEVROOT	/Applications/Xcode.app/Contents/Developer)
-dk_set(XCODE_CLANG		${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang)
-dk_set(XCODE_CLANGXX	${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++)
-dk_set(XCODE_LIBTOOL	${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool)
+dk_set(XCODE_DEVROOT		/Applications/Xcode.app/Contents/Developer)
+dk_set(XCODE_C_COMPILER		${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang)
+dk_set(XCODE_CXX_COMPILER	${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++)
+dk_set(XCODE_LIBTOOL		${XCODE_DEVROOT}/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool)
 
 # iOS variables
 dk_set(IOS_DARWIN		darwin20.6.0)
