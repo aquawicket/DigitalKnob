@@ -1313,13 +1313,13 @@ if(EMSCRIPTEN)
 	if(DEBUG)
 		if(WIN_HOST)
 			set(RUN_SCRIPT_DEBUG
-				"${3RDPARTY}/emsdk-main/upstream/emscripten/emrun ${DKPROJECT}/emscripten/Debug/${APP_NAME}.html"
+				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun.bat ${DKPROJECT}/emscripten/Debug/${APP_NAME}.html"
 			)
 			file(WRITE ${DKPROJECT}/emscripten/Debug/Run.bat ${RUN_SCRIPT_DEBUG})
 		else()
 			set(RUN_SCRIPT_DEBUG
 				"\#!/bin/bash\n"
-				"${3RDPARTY}/emsdk-main/upstream/emscripten/emrun ${DKPROJECT}/emscripten/Debug/${APP_NAME}.html"
+				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun ${DKPROJECT}/emscripten/Debug/${APP_NAME}.html"
 			)
 			file(WRITE ${DKPROJECT}/emscripten/Debug/Run.sh ${RUN_SCRIPT_DEBUG})
 			dk_executeProcess(chmod 777 ${DKPROJECT}/emscripten/Debug/Run.sh)
@@ -1328,13 +1328,13 @@ if(EMSCRIPTEN)
 	if(RELEASE)
 		if(WIN_HOST)
 			set(RUN_SCRIPT_RELEASE
-				"${3RDPARTY}/emsdk-main/upstream/emscripten/emrun ${DKPROJECT}/emscripten/Release/${APP_NAME}.html"
+				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun.bat ${DKPROJECT}/emscripten/Release/${APP_NAME}.html"
 			)
 			file(WRITE ${DKPROJECT}/emscripten/Release/Run.bat ${RUN_SCRIPT_RELEASE})
 		else()
 			set(RUN_SCRIPT_RELEASE
 				"\#!/bin/bash\n"
-				"${3RDPARTY}/emsdk-main/upstream/emscripten/emrun ${DKPROJECT}/emscripten/Release/${APP_NAME}.html"
+				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun ${DKPROJECT}/emscripten/Release/${APP_NAME}.html"
 			)
 			file(WRITE ${DKPROJECT}/emscripten/Release/Run.sh ${RUN_SCRIPT_RELEASE})
 			dk_executeProcess(chmod 777 ${DKPROJECT}/emscripten/Release/Run.sh)
