@@ -44,6 +44,7 @@ WIN_HOST_dk_set	(EMSDK_ENV 				${EMSDK}/emsdk_env.bat)
 UNIX_HOST_dk_set(EMSDK_ENV 				${EMSDK}/emsdk_env.sh)
 dk_set			(EMSDK_TOOLCHAIN_FILE 	${EMSDK}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake)
 WIN_HOST_dk_set	(EMSDK_GENERATOR 		"MinGW Makefiles")
+UNIX_HOST_dk_set(EMSDK_GENERATOR 		"Unix Makefiles")
 
 
 dk_set(EMAR 		${EMSDK}/upstream/emscripten/emar)
