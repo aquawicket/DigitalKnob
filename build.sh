@@ -509,6 +509,7 @@ function Generate_Project() {
 	elif [[ "$TARGET_OS" == "mac"* ]] || [[ "$TARGET_OS" == "ios"* ]]; then
 		GENERATOR="Xcode"
 	elif [[ "$TARGET_OS" == "emscipten"* ]]; then
+		validate_emscripten
 		GENERATOR="MinGW Makefiles"
 	else
 		GENERATOR="Unix Makefiles"
@@ -589,7 +590,7 @@ function Generate_Project() {
 	
 	
 	if [[ "$TARGET_OS" == "emscipten" ]]; then
-	    dk_call validate_emscripten
+	    #dk_call validate_emscripten
 		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
 			dk_call "$EMSDK_ENV" & "$CMAKE" -G "$GENERATOR" -DCMAKE_TOOLCHAIN_FILE="$EMSDK_TOOLCHAIN_FILE" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Debug
 		fi
@@ -1021,9 +1022,10 @@ function validate_make() {
 
 ###### validate_emscripten ######
 function validate_emscripten() {
-	cmake_eval "include('$DKIMPORTS/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_TOOLCHAIN_FILE"
+	cmake_eval "include('$DKIMPORTS/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE"
 	echo EMSDK = $EMSDK
 	echo EMSDK_ENV = $EMSDK_ENV
+	echo EMSDK_GENERATOR = $EMSDK_GENERATOR
 	echo EMSDK_TOOLCHAIN_FILE = $EMSDK_TOOLCHAIN_FILE
 }
 
