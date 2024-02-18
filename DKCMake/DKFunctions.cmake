@@ -672,11 +672,14 @@ function(dk_append variable) #value
 		dk_warn("dk_append(${variable}) ARGN:${ARGN} is invalid")
 		return()
 	endif()
+	#string(REPLACE ";" " " ARGN "${ARGN}")
 	if(${variable})
+		#string(REPLACE ";" " " ${variable} "${${variable}}")
 		dk_set(${variable} ${${variable}} ${ARGN})
 	else()
 		dk_set(${variable} ${ARGN})
 	endif()
+	
 endfunction()
 dk_createOsMacros("dk_append")
 
@@ -2040,6 +2043,7 @@ endfunction()
 #
 function(dk_msys2)
 	DKDEBUGFUNC(${ARGV})
+	#string(REPLACE "C:/" "/c/" ARGV "${ARGV}")
 	dk_info("\n${CLR}${magenta} msys2> ${ARGV}\n")
 	
 	execute_process(COMMAND ${MSYS2}/usr/bin/bash -c "export PATH=${MSYS2}/mingw64/bin:$PATH; export PATH=${MSYS2}/usr/bin:$PATH;" ${ARGV}
@@ -2074,9 +2078,8 @@ function(dk_msys2_bash)
 		set(NOASSERT NOASSERT)
 	endif()
 	
-	#message(STATUS msys2_bash("${ARGV}"))
 	string(REPLACE ";" " " ARGV "${ARGV}")
-	#dk_info("\n${CLR}${magenta} $ ${ARGV}\n")
+	dk_info("\n${CLR}${magenta} dk_msys2_bash> ${ARGV}\n")
 
 	set(bash "#!/bin/bash")
 	list(APPEND bash "cd ${CURRENT_DIR}")
@@ -2103,7 +2106,7 @@ function(dk_msys2_bash)
 	list(APPEND bash "exit")
 	list(APPEND bash " ")
 	string(REPLACE ";" "\n"	bash "${bash}")
-	string(REPLACE "${CMAKE_GENERATOR}" "'${CMAKE_GENERATOR}'" bash "${bash}")
+	#string(REPLACE "${CMAKE_GENERATOR}" "'${CMAKE_GENERATOR}'" bash "${bash}")
 	string(REPLACE "C:/" "/c/" bash "${bash}")
 	#message(STATUS msys2_bash("${bash}"))
 	
@@ -2112,6 +2115,7 @@ function(dk_msys2_bash)
 	#dk_executeProcess(${MSYS2}/usr/bin/bash ${MSYS2}/dkscript.tmp NOECHO)	
 	
 	### run bash as a string parameter
+	dk_info("\n${CLR}${magenta} dk_msys2_bash> ${bash}\n")
 	dk_executeProcess(${MSYS2}/usr/bin/bash -c "${bash}" NOECHO ${NOASSERT})
 endfunction()
 dk_createOsMacros("dk_msys2_bash")
@@ -2199,19 +2203,22 @@ function(dk_command)
 	#	set(NOASSERT NOASSERT)
 	#endif()
 	
-	string(REPLACE ";" " " command_string "${ARGV}")
-	dk_info("\n${CLR}${magenta} $ ${command_string}\n")
 	
+	#dk_info("\n${CLR}${magenta} dk_command> ${ARGV}\n")
 	dk_mergeFlags("${ARGV}" merged_args)
+	string(REPLACE ";" " " merged_args "${merged_args}")
+	#dk_info("\n${CLR}${magenta} dk_command> ${merged_args}\n")
+	
+	
 	
 	#if(EMSCRIPTEN)
-	#	dk_executeProcess(${EMMAKE} bash ${merged_args} WORKING_DIRECTORY ${CURRENT_DIR})
+	#	dk_executeProcess(${EMMAKE} bash ${merged_args})
 	#else()
 	
 	if(MSYS OR MINGW OR MSYSTEM)
 		dk_msys2_bash(${merged_args})
 	else()
-		dk_executeProcess(${merged_args})# WORKING_DIRECTORY ${CURRENT_DIR})
+		dk_executeProcess(${merged_args})
 	endif()
 endfunction()
 dk_createOsMacros("dk_command")
