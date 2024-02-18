@@ -313,18 +313,17 @@ goto:eof
 goto:eof
 
 :generate_win32
-	 ::if %COMPILER%==MINGW32 (
-		call:cmake_eval "include('%DKIMPORTS%/msys2/DKMAKE.cmake')"
-		
-        echo generate_win32
-        call:cmake_eval "include('%DKIMPORTS%/cmake/DKMAKE.cmake')" "CMAKE_EXE" "-DMSYSTEM=MINGW32"
-        echo CMAKE_EXE = %CMAKE_EXE%
-                
-        ::call:validate_msys2
+		set COMPILER=MINGW32
+
+		::call:validate_msys2
         call:cmake_eval "include('%DKIMPORTS%/msys2/DKMAKE.cmake')" "MSYS2;MSYS2_GENERATOR" "-DMSYSTEM=MINGW32"
         echo MSYS2 = %MSYS2%
         echo MSYS2_GENERATOR = %MSYS2_GENERATOR%
-                
+		
+		::call:validate_cmake
+        call:cmake_eval "include('%DKIMPORTS%/cmake/DKMAKE.cmake')" "CMAKE_EXE" "-DMSYSTEM=MINGW32"
+        echo CMAKE_EXE = %CMAKE_EXE%
+                     
         ::call:validate_gcc
         call:cmake_eval "include('%DKIMPORTS%/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER" "-DMSYSTEM=MINGW32"
         echo GCC_C_COMPILER = %GCC_C_COMPILER%
@@ -334,12 +333,13 @@ goto:eof
                 
         ::call:validate_make
         call:cmake_eval "include('%DKIMPORTS%/make/DKMAKE.cmake')" "MAKE_PROGRAM" "-DMSYSTEM=MINGW32"
+		echo MAKE_PROGRAM = %MAKE_PROGRAM%
                 
         call set DKPATH=%%DKPATH:^\=^/%%
         %MSYS2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -lc "'%CMAKE_EXE%' -G '%MSYS2_GENERATOR%' -DMSYSTEM=MINGW32 %CMAKE_ARGS% -S%DKCMAKE% -B%DKPATH%/DKApps/%APP%/%TARGET_OS%/Debug"
         set TARGET=%APP%_APP
         goto build
-    ::)
+
 	
     ::call:validate_visual_studio
     ::set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_C_COMPILER=%VISUALSTUDIO_X86_CXX_COMPILER%"
@@ -351,17 +351,14 @@ goto:eof
 :generate_win64
 		set COMPILER=MINGW64
 	
-    ::if %COMPILER%==MINGW64 (
-		call:cmake_eval "include('%DKIMPORTS%/msys2/DKMAKE.cmake')"
-		
-        echo generate_win64
-        call:cmake_eval "include('%DKIMPORTS%/cmake/DKMAKE.cmake')" "CMAKE_EXE" "-DMSYSTEM=MINGW64"
-        echo CMAKE_EXE = %CMAKE_EXE%
-                
-        ::call:validate_msys2
+		::call:validate_msys2
         call:cmake_eval "include('%DKIMPORTS%/msys2/DKMAKE.cmake')" "MSYS2;MSYS2_GENERATOR" "-DMSYSTEM=MINGW64"
         echo MSYS2 = %MSYS2%
         echo MSYS2_GENERATOR = %MSYS2_GENERATOR%
+		
+		::call:validate_cmake
+        call:cmake_eval "include('%DKIMPORTS%/cmake/DKMAKE.cmake')" "CMAKE_EXE" "-DMSYSTEM=MINGW64"
+        echo CMAKE_EXE = %CMAKE_EXE%
                 
         ::call:validate_gcc
         call:cmake_eval "include('%DKIMPORTS%/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER" "-DMSYSTEM=MINGW64"
@@ -372,12 +369,12 @@ goto:eof
                 
         ::call:validate_make
         call:cmake_eval "include('%DKIMPORTS%/make/DKMAKE.cmake')" "MAKE_PROGRAM" "-DMSYSTEM=MINGW64"
+		echo MAKE_PROGRAM = %MAKE_PROGRAM%
                 
         call set DKPATH=%%DKPATH:^\=^/%%
         %MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' -G '%MSYS2_GENERATOR%' -DMSYSTEM=MINGW64 %CMAKE_ARGS% -S%DKCMAKE% -B%DKPATH%/DKApps/%APP%/%TARGET_OS%/Debug"
         set TARGET=%APP%_APP
         goto build
-    ::)
     
     ::call:validate_visual_studio
     ::set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_C_COMPILER=%VISUALSTUDIO_X64_CXX_COMPILER%"
@@ -404,6 +401,8 @@ goto:eof
     set TARGET=main
 goto:eof
 
+
+
 :generate_emscripten
     call:validate_emscripten
 	set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_TOOLCHAIN_FILE=%EMSDK_TOOLCHAIN_FILE%"
@@ -414,10 +413,6 @@ goto:eof
         call "%EMSDK_ENV%" & "%CMAKE%" -G "%EMSDK_GENERATOR%" %CMAKE_ARGS% -S%DKCMAKE% -B%CMAKE_TARGET_PATH%/%TARGET_OS%/Debug
     )
     if %TYPE%==Release (
-        call "%EMSDK_ENV%" & "%CMAKE%" -G "%EMSDK_GENERATOR%" %CMAKE_ARGS% -S%DKCMAKE% -B%CMAKE_TARGET_PATH%/%TARGET_OS%/Release
-    )
-    if %TYPE%==All (
-        call "%EMSDK_ENV%" & "%CMAKE%" -G "%EMSDK_GENERATOR%" %CMAKE_ARGS% -S%DKCMAKE% -B%CMAKE_TARGET_PATH%/%TARGET_OS%/Debug
         call "%EMSDK_ENV%" & "%CMAKE%" -G "%EMSDK_GENERATOR%" %CMAKE_ARGS% -S%DKCMAKE% -B%CMAKE_TARGET_PATH%/%TARGET_OS%/Release
     )
     set TARGET=%APP%_APP
@@ -436,6 +431,11 @@ goto:eof
 :build_all
 
 :build_debug
+	if "%COMPILER%"=="MINGW32" (
+        %MSYS2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Debug --target %TARGET% --config Debug --verbose"
+		if %TYPE%==All goto:build_release
+		goto:end_message
+    )
     if "%COMPILER%"=="MINGW64" (
         %MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Debug --target %TARGET% --config Debug --verbose"
 		if %TYPE%==All goto:build_release
@@ -454,7 +454,11 @@ goto:eof
 goto:eof
 
 :build_release
-	 if "%COMPILER%"=="MINGW64" (
+	if "%COMPILER%"=="MINGW32" (
+        %MSYS2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Release --target %TARGET% --config Debug --verbose"
+        goto end_message
+    )
+    if "%COMPILER%"=="MINGW64" (
         %MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Release --target %TARGET% --config Debug --verbose"
         goto end_message
     )
