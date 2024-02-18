@@ -672,7 +672,11 @@ function(dk_append variable) #value
 		dk_warn("dk_append(${variable}) ARGN:${ARGN} is invalid")
 		return()
 	endif()
-	dk_set(${variable} ${${variable}} ${ARGN})
+	if(${variable})
+		dk_set(${variable} ${${variable}} ${ARGN})
+	else()
+		dk_set(${variable} ${ARGN})
+	endif()
 endfunction()
 dk_createOsMacros("dk_append")
 
