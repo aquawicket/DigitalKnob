@@ -316,7 +316,10 @@ goto:eof
 
 :generate_win32
 		set COMPILER=MINGW32
-
+		
+		::call:validate_msys2
+		call:cmake_eval "include('%DKIMPORTS%/msys2/DKMAKE.cmake')"
+		
 		::call:validate_msys2
         call:cmake_eval "include('%DKIMPORTS%/msys2/DKMAKE.cmake')" "MSYS2;MSYS2_GENERATOR" "-DMSYSTEM=MINGW32"
         echo MSYS2 = %MSYS2%
@@ -352,7 +355,10 @@ goto:eof
 
 :generate_win64
 		set COMPILER=MINGW64
-	
+		
+		::call:validate_msys2
+		call:cmake_eval "include('%DKIMPORTS%/msys2/DKMAKE.cmake')"
+		
 		::call:validate_msys2
         call:cmake_eval "include('%DKIMPORTS%/msys2/DKMAKE.cmake')" "MSYS2;MSYS2_GENERATOR" "-DMSYSTEM=MINGW64"
         echo MSYS2 = %MSYS2%
