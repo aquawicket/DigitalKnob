@@ -1190,7 +1190,9 @@ else
 	sleep 5
 	
 	if file_exists $DKPATH/$SCRIPTNAME; then
-		source $DKPATH/$SCRIPTNAME & rm -r $DIGITALKNOB/$SCRIPTNAME & exit
+		clear
+		source $DKPATH/$SCRIPTNAME rm -r $DIGITALKNOB/$SCRIPTNAME
+		exit
 	else
 		echo "Oh no, the git cloned build.sh still isn't here! :( "
 	fi
