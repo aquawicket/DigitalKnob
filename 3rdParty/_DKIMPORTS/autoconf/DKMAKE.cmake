@@ -1,3 +1,3 @@
-if(ANDROID_HOST)
-	dk_command(pkg install autoconf)
-endif()
+# https://www.gnu.org/software/autoconf
+
+ANDROID_HOST_dk_command(pkg install autoconf)

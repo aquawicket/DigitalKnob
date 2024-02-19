@@ -1856,9 +1856,11 @@ function(dk_executeProcess commands) #NOASSERT #NOECHO
 	DKDEBUGFUNC(${ARGV})
 	set(commands ${ARGV})
 	
-	dk_includes("${ARGN}" "NOASSERT" NOASSERT)
-	dk_includes("${ARGN}" "NOECHO" NOECHO)
+	dk_includes("${commands}" "NOASSERT" NOASSERT)
+	dk_includes("${commands}" "NOECHO" NOECHO)
 	
+	string(REPLACE ";" " " commands "${commands}")
+
 	if(NOT ${NOECHO})
 		dk_info("\n${CLR}${magenta} dk_executeProcess> ${commands}\n")
 	endif()

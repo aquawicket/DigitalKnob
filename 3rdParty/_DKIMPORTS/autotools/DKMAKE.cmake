@@ -1,3 +1,4 @@
+# https://www.gnu.org/software/automake/manual/html_node/Autotools-Introduction.html
 # http://autogen.sourceforge.net
 # https://macappstore.org/autogen/
 # https://www.xmodulo.com/fix-failed-to-run-aclocal.html
