@@ -1142,7 +1142,7 @@ if ! [ "$1" == "wipe" ]; then
 	
 	echo "RELOCATING SCRIPT TO -> $DIGITALKNOB/$SCRIPTNAME"
 	cp $SCRIPTPATH/$SCRIPTNAME $DIGITALKNOB/$SCRIPTNAME
-	source "$DIGITALKNOB/$SCRIPTNAME" :reset_all wipe
+	source "$DIGITALKNOB/$SCRIPTNAME" reset_all wipe
 	exit
 else	
 	#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
