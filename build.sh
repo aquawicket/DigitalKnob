@@ -1186,11 +1186,19 @@ else
 	
 	git_update
 	
-	source "$DKPATH/$SCRIPTNAME" & rm -r $DIGITALKNOB/$SCRIPTNAME & exit
+	# wait a few seconds for build.sh to show up
+	sleep 5
+	
+	if file_exists $DKPATH/$SCRIPTNAME; then
+		source $DKPATH/$SCRIPTNAME & rm -r $DIGITALKNOB/$SCRIPTNAME & exit
+	else
+		echo "Oh no, the git cloned build.sh still isn't here! :( "
+	fi
 fi
 }
 
 function git_update() {
+	echo "Git Update"
 	if CONFIRM; then return; fi
 
 	if [[ ! -d "$DKPATH/.git" ]]; then
