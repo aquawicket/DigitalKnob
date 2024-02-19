@@ -8,9 +8,10 @@
 
 ### DOWNLOAD ###
 WIN_HOST_dk_set(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi)
-get_filename_component(CMAKE_DL_FILE ${CMAKE_DL} NAME)
-dk_removeExtension(${CMAKE_DL_FILE} CMAKE_FOLDER)
-#WIN_HOST_dk_set(CMAKE_FILE cmake-3.21.1-windows-i386.msi)
+if(WIN)
+	get_filename_component(CMAKE_DL_FILE ${CMAKE_DL} NAME)
+	dk_removeExtension(${CMAKE_DL_FILE} CMAKE_FOLDER)
+endif()
 
 
 if(MSYSTEM)
