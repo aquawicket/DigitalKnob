@@ -216,7 +216,7 @@ endmacro()
 
 
 ##################################################################################
-# dk_error(msg)
+# dk_error(msg) NOASSERT
 #
 #	Print a error message to the console
 #
@@ -224,12 +224,14 @@ endmacro()
 #
 macro(dk_error msg)
 	#DKDEBUGFUNC(${ARGV})
-	#message(STATUS "dk_error(${ARGV})")
+	
+	dk_includes("${ARGV}" "NOASSERT" NOASSERT)
+	
 	dk_updateLogInfo()
-	if(${HALT_ON_ERRORS})
+	if(${HALT_ON_ERRORS} AND NOT ${NOASSERT})
 		message(STATUS "\n${H_black}${STACK_HEADER}${CLR}${red} *** HALT_ON_ERRORS *** ${CLR}")
 		message(FATAL_ERROR "${H_black}${STACK_HEADER}${CLR}${red}Error: ${msg} ${CLR}")
-		dk_exit()
+		#dk_exit()
 	endif()
 	
 	string(REPLACE " " "" var "${msg}")
@@ -672,9 +674,7 @@ function(dk_append variable) #value
 		dk_warn("dk_append(${variable}) ARGN:${ARGN} is invalid")
 		return()
 	endif()
-	#string(REPLACE ";" " " ARGN "${ARGN}")
 	if(${variable})
-		#string(REPLACE ";" " " ${variable} "${${variable}}")
 		dk_set(${variable} ${${variable}} ${ARGN})
 	else()
 		dk_set(${variable} ${ARGN})
@@ -695,10 +695,6 @@ function(dk_unset variable)
 	DKDEBUGFUNC(${ARGV})
 	set(${variable} "" CACHE INTERNAL "")
 	unset(${variable})
-	#set(${variable} "" CACHE INTERNAL "")
-	#set(variable "" CACHE INTERNAL "")
-	#unset(${variable} CACHE)
-	#unset(variable CACHE)
 endfunction()
 dk_createOsMacros("dk_unset")
 
@@ -1311,15 +1307,13 @@ function(dk_disable plugin)
 	#if(target)
 		dk_unset(${ARGV1})
 		dk_unset(HAVE_${ARGV1})
-		# In c/c++ we can't use certian symbals in the preprocess or for macros. I.E. - must be turned to _
-		string(MAKE_C_IDENTIFIER ${ARGV1} argv1_macro)
+		string(MAKE_C_IDENTIFIER ${ARGV1} argv1_macro)		# In c/c++ we can't use certian symbals in the preprocess or for macros. I.E. - must be turned to _
 		dk_undefine(HAVE_${argv1_macro})
 		dk_undepend(${ARGV1})
 	else()
 		dk_unset(${plugin})
 		dk_unset(HAVE_${plugin})
-		# In c/c++ we can't use certian symbals in the preprocess or for macros. I.E. - must be turned to _
-		string(MAKE_C_IDENTIFIER ${plugin} plugin_macro)
+		string(MAKE_C_IDENTIFIER ${plugin} plugin_macro)	# In c/c++ we can't use certian symbals in the preprocess or for macros. I.E. - must be turned to _
 		dk_undefine(HAVE_${plugin_macro})
 		dk_undepend(${plugin})
 	endif()
@@ -1851,13 +1845,15 @@ endfunction()
 #	TODO
 #
 #	@commands	- TODO
+#	@NOASSERT	- will not halt cmake if an error occurs
 #
 function(dk_executeProcess commands) #NOASSERT #NOECHO
 	DKDEBUGFUNC(${ARGV})
-	set(commands ${ARGV})
+
+	dk_includes("${ARGV}" "NOASSERT" NOASSERT)
+	dk_includes("${ARGV}" "NOECHO" NOECHO)
 	
-	dk_includes("${commands}" "NOASSERT" NOASSERT)
-	dk_includes("${commands}" "NOECHO" NOECHO)
+	set(commands ${ARGV})
 	
 	#FIXME: This issue seems to be pretty platform dependant. 
 	#I like to be able to run command in both string a list format
@@ -1888,15 +1884,12 @@ function(dk_executeProcess commands) #NOASSERT #NOECHO
 
 	if(NOT ${result} EQUAL 0)
 		execute_process(COMMAND ${CMAKE_COMMAND} -E sleep 2) # wait 2 seconds for the stdout to flush before printing error
-		if(${NOASSERT})
-			dk_info(" ")
-			dk_info("   command: ${commands}")
-			dk_info("    result: ${result}")
-			dk_info("     error: ${error}")
-			dk_info(" ")
-		else()
-			dk_error("\n\n   command=${commands}\n    result=${result}\n     error=${error}\n")
-		endif()
+		dk_error(" 							" NOASSERT)
+		dk_error("path    = ${CURRENT_DIR}	" NOASSERT)
+		dk_error("command = ${commands}		" NOASSERT)
+		dk_error("result  = ${result}		" NOASSERT)     
+		dk_error("error   = ${error}		" NOASSERT)
+		dk_error(" 							" ${NOASSERT})
 	endif()
 endfunction()
 dk_createOsMacros("dk_executeProcess")

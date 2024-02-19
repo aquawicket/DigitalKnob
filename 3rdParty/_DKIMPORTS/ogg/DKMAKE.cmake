@@ -11,8 +11,9 @@ WIN_dk_depend(msys2)
 
 
 ### IMPORT ###
-dk_import(https://ftp.osuosl.org/pub/xiph/releases/ogg/libogg-1.3.5.zip)
 #dk_import(https://github.com/xiph/ogg.git)
+dk_import(https://ftp.osuosl.org/pub/xiph/releases/ogg/libogg-1.3.5.zip)
+
 
 
 ### LINK ###
