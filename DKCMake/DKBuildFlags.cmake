@@ -201,13 +201,10 @@ endif()
 
 if(ENABLE_RTTI)
 	if(MSVC AND WIN)
-		dk_append(DKCMAKE_C_FLAGS "/GR")
 		dk_append(DKCMAKE_CXX_FLAGS "/GR")
 	else()
-		#dk_append(DKCMAKE_C_FLAGS "-frtti")	# '-frtti' is valid for C++/D/ObjC++ but not for C
 		dk_append(DKCMAKE_CXX_FLAGS "-frtti")
 	endif()
-	#dk_append(DKCONFIGURE_CFLAGS "-frtti") 
 	dk_append(DKCONFIGURE_CXXFLAGS "-frtti")
 else()
 	if(MSVC AND WIN)

@@ -3,13 +3,14 @@
 # https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi
 # https://developer.android.com/studio/projects/configure-cmake
 # https://discourse.cmake.org/t/cmake-silent-install-with-options-help/1475/2
-if(CMAKE)
-	return()
-endif()
+# https://askubuntu.com/questions/355565/how-do-i-install-the-latest-version-of-cmake-from-the-command-line 	# How to get latest version on ubuntu
+
 
 ### DOWNLOAD ###
 WIN_HOST_dk_set(CMAKE_DL https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi)
-WIN_HOST_dk_set(CMAKE_FILE cmake-3.21.1-windows-i386.msi)
+get_filename_component(CMAKE_DL_FILE ${CMAKE_DL} NAME)
+dk_removeExtension(${CMAKE_DL_FILE} CMAKE_FOLDER)
+#WIN_HOST_dk_set(CMAKE_FILE cmake-3.21.1-windows-i386.msi)
 
 
 if(MSYSTEM)
@@ -73,8 +74,8 @@ else()
 	### INSTALL ###
 	dk_info("Installing CMake . . .")
 	if(MSVC)
-		WIN_HOST_dk_download(${CMAKE_DL} ${DKDOWNLOAD})
-		WIN_HOST_dk_command(${DKDOWNLOAD}/${CMAKE_FILE})
+		WIN_HOST_dk_download(${CMAKE_DL_FILE} ${DKDOWNLOAD})
+		WIN_HOST_dk_command(${DKDOWNLOAD}/${CMAKE_DL_FILE})
 	endif()
 	MAC_HOST_dk_command(brew install cmake)
 	if("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "Android")
