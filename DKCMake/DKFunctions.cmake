@@ -2552,50 +2552,75 @@ function(dk_build path)
 	endif()
 	
 	set(target ${ARGV1})
-	dk_setPath(${path}/${BUILD_DIR})
 	
-	# Build with CMake
-	if(EXISTS ${path}/${BUILD_DIR}/cmake_install.cmake)
-		dk_info("Building with CMake")
-		if(${ARGC} GREATER 1)
-			DEBUG_dk_queueCommand(${CMAKE_COMMAND} --build . --config Debug --target ${target} ${NOASSERT})
-			RELEASE_dk_queueCommand(${CMAKE_COMMAND} --build . --config Release --target ${target} ${NOASSERT})
+	# If we are in MULTI_CONFIG mode, we need to do a second pass to check for build files in SINGLE_CONFIG mode. Some libraries are
+	# still built in SINGLE_CONFIG mode event though the main project isn't 
+	if(MULTI_CONFIG)
+		list(APPEND BUILD_MODE multi_config)
+	endif()
+	list(APPEND BUILD_MODE single_config)
+		
+	foreach(BUILD_MODE mode)
+		if(mode STREQUAL multi_config)
+			dk_set		(CMAKE_BUILD_TYPE DEBUG RELEASE)
+			dk_set		(BUILD_DIR ${OS})
+		elseif(mode STREQUAL single_config)
+			if(DEBUG)
+				dk_set	(CMAKE_BUILD_TYPE DEBUG)
+				dk_set	(BUILD_DIR ${OS}/${DEBUG_DIR})
+			elseif(RELEASE)
+				dk_set	(CMAKE_BUILD_TYPE RELEASE)
+				dk_set	(BUILD_DIR ${OS}/${RELEASE_DIR})
+			endif()
 		else()
-			DEBUG_dk_queueCommand(${CMAKE_COMMAND} --build . --config Debug ${NOASSERT})
-			RELEASE_dk_queueCommand(${CMAKE_COMMAND} --build . --config Release ${NOASSERT})
+			dk_error("BUILD_MODE invalid!")
 		endif()
-		return()
-	endif()
-	
-	# Build with MSBuild
-	file(GLOB sln "${path}/${BUILD_DIR}/*.sln")
-	if(sln)
-		dk_info("Building with MSBuild")
-		dk_visualStudio(${ARGV})
-		return()
-	endif()
-	
-	# Build with XCode
-	file(GLOB xcodeproj "${path}/${BUILD_DIR}/*.xcodeproj")
-	if(xcodeproj)
-		dk_info("Building with XCode")
-		dk_xcode(${ARGV})
-		return()
-	endif()
-	
-	# Build with make
-	if(EXISTS ${path}/${BUILD_DIR}/Makefile)
-		dk_info("Building with make")
-		dk_make(${ARGV})
-		return()
-	endif()
-	
-	# Build with Android NDK
-	if(EXISTS ${path}/${BUILD_DIR}/AndroidManifest.xml)
-		dk_info("Building with Android NDK")
-		dk_ndk(${ARGV})
-		return()
-	endif()
+		
+		dk_setPath(${path}/${BUILD_DIR})
+
+		# Build with CMake			(multi_config)
+		if(EXISTS ${path}/${BUILD_DIR}/cmake_install.cmake)
+			dk_info("Building with CMake")
+			if(${ARGC} GREATER 1)
+				DEBUG_dk_queueCommand(${CMAKE_COMMAND} --build . --config Debug --target ${target} ${NOASSERT})
+				RELEASE_dk_queueCommand(${CMAKE_COMMAND} --build . --config Release --target ${target} ${NOASSERT})
+			else()
+				DEBUG_dk_queueCommand(${CMAKE_COMMAND} --build . --config Debug ${NOASSERT})
+				RELEASE_dk_queueCommand(${CMAKE_COMMAND} --build . --config Release ${NOASSERT})
+			endif()
+			return()
+		endif()
+		
+		# Build with MSBuild		(multi_config)
+		file(GLOB sln "${path}/${BUILD_DIR}/*.sln")
+		if(sln)
+			dk_info("Building with MSBuild")
+			dk_visualStudio(${ARGV})
+			return()
+		endif()
+		
+		# Build with XCode			(multi_config)
+		file(GLOB xcodeproj "${path}/${BUILD_DIR}/*.xcodeproj")
+		if(xcodeproj)
+			dk_info("Building with XCode")
+			dk_xcode(${ARGV})
+			return()
+		endif()
+		
+		# Build with make			(single_config)
+		if(EXISTS ${path}/${BUILD_DIR}/Makefile)
+			dk_info("Building with make")
+			dk_make(${ARGV})
+			return()
+		endif()
+		
+		# Build with Android NDK	(single_config)
+		if(EXISTS ${path}/${BUILD_DIR}/AndroidManifest.xml)
+			dk_info("Building with Android NDK")
+			dk_ndk(${ARGV})
+			return()
+		endif()
+	endforeach()
 	
 	dk_error("dk_build(): ${path}/${BUILD_DIR} has no buildable files")
 endfunction()
@@ -2660,7 +2685,7 @@ function(dk_libDebug lib_path)
 		return() # The library is already in the list
 	endif()
 	
-	if(LINUX OR RASPBERRY OR ANDROID OR EMSCRIPTEN OR MSYS)
+	if(LINUX OR RASPBERRY OR ANDROID OR EMSCRIPTEN OR MSYS) # FIXME: can this be covered with MULTI_CONFIG and SINGLE_CONFIG ?
 		dk_set(DEBUG_LIBS debug ${lib_path} ${DEBUG_LIBS})  # Add to beginning of list
 	else()
 		dk_set(DEBUG_LIBS ${DEBUG_LIBS} debug ${lib_path})  # Add to end of list
