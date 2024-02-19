@@ -1859,9 +1859,12 @@ function(dk_executeProcess commands) #NOASSERT #NOECHO
 	dk_includes("${commands}" "NOASSERT" NOASSERT)
 	dk_includes("${commands}" "NOECHO" NOECHO)
 	
-	if(NOT MSYS AND NOT MINGW AND NOT MSYSTEM)
-		string(REPLACE ";" " " commands "${commands}")
-	endif()
+	#FIXME: This issue seems to be pretty platform dependant. 
+	#I like to be able to run command in both string a list format
+	#So we'll continue to narrow this down.
+	#if(NOT MSYS AND NOT MINGW AND NOT MSYSTEM)
+	#	string(REPLACE ";" " " commands "${commands}")
+	#endif()
 
 	if(NOT ${NOECHO})
 		dk_info("\n${CLR}${magenta} dk_executeProcess> ${commands}\n")
