@@ -1859,7 +1859,9 @@ function(dk_executeProcess commands) #NOASSERT #NOECHO
 	dk_includes("${commands}" "NOASSERT" NOASSERT)
 	dk_includes("${commands}" "NOECHO" NOECHO)
 	
-	string(REPLACE ";" " " commands "${commands}")
+	if(NOT MSYS AND NOT MINGW AND NOT MSYSTEM)
+		string(REPLACE ";" " " commands "${commands}")
+	endif()
 
 	if(NOT ${NOECHO})
 		dk_info("\n${CLR}${magenta} dk_executeProcess> ${commands}\n")
