@@ -1,14 +1,15 @@
 ::############ DigitalKnob builder script ############
 @echo off
 
+::### keep window open ###
+if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
+
+
 ::### call and arguments passed in ###
 ::if "%*" NEQ "" echo %%^* = %*
 if "%*" NEQ "" call %* 
 
 	
-::### keep window open ###
-::if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
-
 :: https://stackoverflow.com/a/4095133/688352
 
 ::--------------------------------------------------------

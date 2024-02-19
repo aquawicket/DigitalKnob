@@ -5,9 +5,9 @@
 
 
 ### DEPEND ###
-ANDROID_HOST_dk_depend(autoconf)
-ANDROID_HOST_dk_depend(automake)
-ANDROID_HOST_dk_depend(libtool)
+dk_depend(autoconf)
+dk_depend(automake)
+dk_depend(libtool)
 dk_depend(libiconv)
 dk_depend(python)
 dk_depend(xz)
