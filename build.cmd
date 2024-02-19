@@ -628,7 +628,7 @@ goto:eof
 	echo Refreshing Entire Local Repository . . .
 	echo.
 	set /P CONFIRM=Are you sure (Y)?
-	if /I "%CONFIRM%" NEQ "Y" exit
+	if /I "%CONFIRM%" NEQ "Y" goto:eof
 	
 	::do we need admin rights?
 	::runas /user:Administrator cmd
@@ -659,8 +659,8 @@ goto:eof
 	ping 127.0.0.1 -n 6 >nul
 	ping 127.0.0.1 -n 6 >nul
 	
-	if exist %DKDOWNLOAD% echo "Oh no, the downloads folder is still there! :( " & exit
-	if exist %DKPATH% echo "Oh no, the BRANCH folder is still there! :( " & exit
+	if exist %DKDOWNLOAD% echo "Oh no, the downloads folder is still there! :( "
+	if exist %DKPATH% echo "Oh no, the BRANCH folder is still there! :( "
 	
 	call:git_update
 	
@@ -1055,12 +1055,12 @@ goto:eof
 goto:eof
 
 :: command_exists <command> <result>
-:command_exists
-	set "command=%1"
-	cmd /c "(help %command% > nul || exit 0) && where %command% > nul 2> nul"
-	if %ERRORLEVEL% EQU 0 set "%2=1" & goto:eof
-	set "%2=0"
-goto:eof
+:::command_exists
+::	set "command=%1"
+::	cmd /c "(help %command% > nul || exit 0) && where %command% > nul 2> nul"
+::	if %ERRORLEVEL% EQU 0 set "%2=1" & goto:eof
+::	set "%2=0"
+::goto:eof
 
 :: get_filename <path> <output_variable>
 :get_filename
@@ -1081,3 +1081,9 @@ goto:eof
     ::echo get_filename(%*) -^> %2 = %val%
     call:check_error
 goto:eof
+
+
+:end
+	echo "ERROR: reached the end of the script"
+	pause
+	exit
