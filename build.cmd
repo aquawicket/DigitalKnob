@@ -946,10 +946,6 @@ goto:eof
 
 :: git_commit()
 :git_commit
-	echo Git Commit
-	set /P CONFIRM=Are you sure (Y)?
-	if /I "%CONFIRM%" NEQ "Y" goto:eof
-	
 	echo "Please enter some details about this commit, then press enter."
 	set /p message=">"
 	
@@ -962,8 +958,14 @@ goto:eof
 	
 	call:command_to_variable "%GIT%" config --global credential.helper STORE
 	if not "%STORE%"=="store" "%GIT%" config --global credential.helper store
-	 
+	
 	if ["%message%"]==[""] set "message=git commit"
+	
+	echo.
+	echo git commit "%message%"
+	set /P CONFIRM=Are you sure (Y)?
+	if /I "%CONFIRM%" NEQ "Y" goto:eof
+	
 	"%GIT%" commit -a -m "%message%"
     "%GIT%" push
 	

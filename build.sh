@@ -781,7 +781,7 @@ function message() {
 
 ###### CONFIRM() ######
 function CONFIRM() {
-	echo -e "${yellow} Are you sure (Y/N) ? ${CLR}"
+	echo -e "${yellow} Are you sure ? [Y/N] ${CLR}"
 	read -p " " -n 1 -r
 	echo
 	echo
@@ -1124,8 +1124,15 @@ function reset_plugins() {
 function reset_all() {
 
 if ! [ "$1" == "wipe" ]; then
-	
-	echo "Resetting Entire Local Repository . . ."
+		
+	clear
+	echo ""
+	echo ""
+	echo "Do you want to reset the entire local repository . . . ?"
+	echo "This will delete digitalknob, everything will be reset,"
+	echo "and the repository will be re-cloned. All libraries and tools"
+	echo "will be redownloaded and rebuild from start. Save any changes"
+	echo "you wish to commit or save beforehand."
 	echo ""
 	
 	if CONFIRM; then return; fi
@@ -1147,9 +1154,6 @@ if ! [ "$1" == "wipe" ]; then
 else	
 	#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 	#:wipe
-	echo "Refreshing Entire Local Repository . . ."
-	echo ""
-	if CONFIRM; then return; fi
 	
 	#do we need admin rights?
 	#runas /user:Administrator cmd
@@ -1174,17 +1178,17 @@ else
 	rm -r -f $DKPATH
 	echo "done."
 	
-	# wait 20 seconds at lease for the folders to get deleted
-	sleep 20
+	# wait 10 seconds at lease for the folders to get deleted
+	sleep 10
 	
 	if file_exists $DKDOWNLOAD; then
-		echo "Oh no, the downloads folder is still there! :( " & exit
+		echo "Oh no, the downloads folder is still there! :( "
 	fi
 	if file_exists $DKPATH; then
-		echo "Oh no, the BRANCH folder is still there! :( " & exit
+		echo "Oh no, the BRANCH folder is still there! :( "
 	fi
 	
-	git_update
+	git_update NO_CONFIRM
 	
 	# wait a few seconds for build.sh to show up
 	sleep 5
@@ -1200,8 +1204,11 @@ fi
 }
 
 function git_update() {
-	echo "Git Update"
-	if CONFIRM; then return; fi
+	
+	if ! [ "$1" == "NO_CONFIRM" ]; then
+		echo "Git Update? Any local changes will be lost."
+		if CONFIRM; then return; fi
+	FI
 
 	if [[ ! -d "$DKPATH/.git" ]]; then
 		dk_call $GIT clone https://github.com/aquawicket/DigitalKnob.git $DKPATH
@@ -1221,7 +1228,6 @@ function git_update() {
 }
 
 function git_commit() {	
-	#if CONFIRM; then return; fi
 	
 	echo "Please enter some details about this commit, Then press enter."
 	read message
