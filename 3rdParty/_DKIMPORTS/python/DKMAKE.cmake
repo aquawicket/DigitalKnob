@@ -12,6 +12,10 @@ APPLE_dk_set		(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18-
 WIN_HOST_dk_set		(PYTHON_APP ${PYTHON}/python.exe)
 UNIX_HOST_dk_set	(PYTHON_APP python)
 
+#PYTHON_CFLAGS
+#PYTHON_LIBS
+#${PYTHON}/include
+
 
 ### INSTALL ###
 if(WIN_HOST)
