@@ -603,8 +603,12 @@ goto:eof
 
 	if "%1" EQU "wipe" goto:wipe
 	
-	echo Resetting Entire Local Repository . . .
-	echo.
+	echo  Do you want to reset the entire local repository . . .?
+	echo. This will delete digitalknob, everything will be reset,
+	echo. and the repository will be re-cloned. All libraries and tools
+	echo. will be redownloaded and rebuild from start. Save any changes 
+	echo. you wish to commit or save beforehand.
+	echo. 
 	
 	set /P CONFIRM=Are you sure (Y)?
 	if /I "%CONFIRM%" NEQ "Y" goto:eof
@@ -625,12 +629,7 @@ goto:eof
 	exit	
 	
 	::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-	:wipe
-	echo Refreshing Entire Local Repository . . .
-	echo.
-	set /P CONFIRM=Are you sure (Y)?
-	if /I "%CONFIRM%" NEQ "Y" goto:eof
-	
+	:wipe	
 	::do we need admin rights?
 	::runas /user:Administrator cmd
 	
@@ -654,16 +653,14 @@ goto:eof
 	call rmdir %DKPATH% /s /q
 	echo done.
 	
-	:: wait 20 seconds at lease for the folders to get deleted
-	ping 127.0.0.1 -n 6 >nul
-	ping 127.0.0.1 -n 6 >nul
+	:: wait 10 seconds at lease for the folders to get deleted
 	ping 127.0.0.1 -n 6 >nul
 	ping 127.0.0.1 -n 6 >nul
 	
 	if exist %DKDOWNLOAD% echo "Oh no, the downloads folder is still there! :( "
 	if exist %DKPATH% echo "Oh no, the BRANCH folder is still there! :( "
 	
-	call:git_update
+	call:git_update NO_CONFIRM
 	
 	start "" "%DKPATH%\%SCRIPTNAME%" & del /f %DIGITALKNOB%\%SCRIPTNAME% & exit
 goto:eof
@@ -915,12 +912,13 @@ goto:eof
 goto:eof
 
 
-:: git_update()
+:: git_update() NO_CONFIRM
 :git_update
-	echo Git Update? Any local changes will be lost.
-	
-	set /P CONFIRM=Are you sure (Y)?
-	if /I "%CONFIRM%" NEQ "Y" goto:eof
+	if ! ["%1"] == ["NO_CONFIRM"] (
+		echo Git Update? Any local changes will be lost.
+		set /P CONFIRM=Are you sure (Y)?
+		if /I "%CONFIRM%" NEQ "Y" goto:eof
+	)
 	
     if NOT exist "%DKPATH%\.git" (
         "%GIT%" clone https://github.com/aquawicket/DigitalKnob.git "%DKPATH%"
