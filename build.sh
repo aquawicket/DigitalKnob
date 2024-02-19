@@ -1,6 +1,10 @@
 #!/bin/bash
 #{
 
+if ! [[ "$@" == "" ]]; then
+	"$@"
+fi
+
 
 ############ DigitalKnob builder script ############
 # to run this script requires privledges, use $ chmod 777 build.sh
@@ -1118,10 +1122,72 @@ function reset_plugins() {
 }
 
 function reset_all() {
-	if CONFIRM; then return; fi
 
-	cd $DKPATH
-	$GIT clean -f -d
+if ! [ "$1" == "wipe" ]; then
+	
+	echo "Resetting Entire Local Repository . . ."
+	echo ""
+	
+	if CONFIRM; then return; fi
+	
+	# first we need to relocate this file up one directory
+	# make sure script is running from DKPATH
+	if ! [ $SCRIPTPATH == $DKPATH ]; then
+		echo "WARNING: this file isn't running from the branch directory"
+		echo "Is must be in the branch directory to continue."
+		echo "SCRIPTPATH = $SCRIPTPATH"
+		echo "DKPATH = $DKPATH"
+		return 1;
+	fi
+	
+	echo "RELOCATING SCRIPT TO -> $DIGITALKNOB/$SCRIPTNAME"
+	cp $SCRIPTPATH/$SCRIPTNAME $DIGITALKNOB/$SCRIPTNAME
+	source "$DIGITALKNOB/$SCRIPTNAME" :reset_all wipe
+	exit
+else	
+	#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+	#:wipe
+	echo "Refreshing Entire Local Repository . . ."
+	echo ""
+	if CONFIRM; then return; fi
+	
+	#do we need admin rights?
+	#runas /user:Administrator cmd
+	
+	#do we need to kill any processes?
+	
+	#do we need to uninstall any apps?
+	
+	#do we need to remove any environment variables?
+	
+	#should we do a git clean first?
+	#cd %DKPATH%
+	#"%GIT%" clean -f -d
+	
+	cd $DIGITALKNOB
+	echo ""
+	echo "DELETING $DKDOWNLOAD . . . ."
+	rm -r -f $DKDOWNLOAD
+	echo "done."
+	echo ""
+	echo "DELETING $DKPATH . . . ."
+	rm -r -f $DKPATH
+	echo "done."
+	
+	# wait 20 seconds at lease for the folders to get deleted
+	sleep 20
+	
+	if file_exists $DKDOWNLOAD; then
+		echo "Oh no, the downloads folder is still there! :( " & exit
+	fi
+	if file_exists $DKPATH; then
+		echo "Oh no, the BRANCH folder is still there! :( " & exit
+	fi
+	
+	git_update
+	
+	source "$DKPATH/$SCRIPTNAME" & rm -r $DIGITALKNOB/$SCRIPTNAME & exit
+fi
 }
 
 function git_update() {
