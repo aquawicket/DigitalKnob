@@ -1208,7 +1208,7 @@ function git_update() {
 	if ! [ "$1" == "NO_CONFIRM" ]; then
 		echo "Git Update? Any local changes will be lost."
 		if CONFIRM; then return; fi
-	FI
+	fi
 
 	if [[ ! -d "$DKPATH/.git" ]]; then
 		dk_call $GIT clone https://github.com/aquawicket/DigitalKnob.git $DKPATH
