@@ -6,9 +6,11 @@
 
 
 ### DEPEND ###
-dk_depend(autoconf)
-dk_depend(automake)
-dk_depend(libtool)
+if(NOT EXISTS ${LIBXML2}/configure)
+	dk_depend(autoconf)
+	dk_depend(automake)
+	dk_depend(libtool)
+endif()
 dk_depend(libiconv)
 dk_depend(python)
 dk_depend(xz)
@@ -19,7 +21,8 @@ dk_depend(zlib)
 #if(NOT MSYS AND NOT ANDROID_HOST)
 #	dk_import(https://github.com/GNOME/libxml2.git TAG f2ad86fa600885429a6083aaf6926c7e2e5b24d6 PATCH)
 #else()
-	dk_import(https://github.com/GNOME/libxml2.git)
+	#dk_import(https://github.com/GNOME/libxml2.git)
+	dk_import(https://download.gnome.org/sources/libxml2/2.11/libxml2-2.11.7.tar.xz)
 #endif()
 
 
@@ -56,8 +59,10 @@ endif()
 
 
 ### GENERATE ###
-if(NOT WIN AND NOT ANDROID)
-	dk_queueCommand(../../autogen.sh)
+if(NOT EXISTS ${LIBXML2}/configure)
+	if(NOT WIN AND NOT ANDROID)
+		dk_queueCommand(../../autogen.sh)
+	endif()
 endif()
 #--with-c14n             Canonical XML 1.0 support (on)
 #--with-catalog          XML Catalogs support (on)

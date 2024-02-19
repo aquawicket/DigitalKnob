@@ -1,10 +1,10 @@
-# https://github.com/xz-mirror/xz.git
-# https://tukaani.org/xz/xz-5.2.5.tar.gz
-# https://github.com/xz-mirror/xz/archive/refs/tags/v5.2.5.zip
+# https://github.com/tukaani-project/xz.git
+# https://github.com/tukaani-project/xz/releases/download/v5.4.6/xz-5.4.6.tar.gz
 
 
 ### IMPORT ###
-dk_import(https://github.com/xz-mirror/xz.git)
+#dk_import(https://github.com/tukaani-project/xz.git)
+dk_import(https://github.com/tukaani-project/xz/releases/download/v5.4.6/xz-5.4.6.tar.gz)
 
 
 #dk_fileReplace("${XZ}/src/liblzma/api/lzma.h" "__declspec(dllimport)" "")
