@@ -603,6 +603,9 @@ goto:eof
 
 	if "%1" EQU "wipe" goto:wipe
 	
+	cls
+	echo.
+	echo.
 	echo  Do you want to reset the entire local repository . . .?
 	echo. This will delete digitalknob, everything will be reset,
 	echo. and the repository will be re-cloned. All libraries and tools
