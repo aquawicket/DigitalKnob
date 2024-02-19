@@ -15,11 +15,11 @@ dk_depend(zlib)
 
 
 ### IMPORT ###
-if(NOT MSYS AND NOT ANDROID_HOST)
-	dk_import(https://github.com/GNOME/libxml2.git TAG f2ad86fa600885429a6083aaf6926c7e2e5b24d6 PATCH)
-else()
+#if(NOT MSYS AND NOT ANDROID_HOST)
+#	dk_import(https://github.com/GNOME/libxml2.git TAG f2ad86fa600885429a6083aaf6926c7e2e5b24d6 PATCH)
+#else()
 	dk_import(https://github.com/GNOME/libxml2.git)
-endif()
+#endif()
 
 
 ### LINK ###
@@ -58,8 +58,6 @@ endif()
 if(NOT WIN AND NOT ANDROID)
 	dk_queueCommand(../../autogen.sh)
 endif()
-
-
 #--with-c14n             Canonical XML 1.0 support (on)
 #--with-catalog          XML Catalogs support (on)
 #--with-debug            debugging module and shell (on)
