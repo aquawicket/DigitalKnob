@@ -2,6 +2,7 @@
 # https://github.com/GNOME/libxml2
 # http://xmlsoft.org/sources/libxml2-2.9.8.tar.gz
 # https://github.com/GNOME/libxml2/archive/refs/tags/v2.9.8.zip
+# https://fuchsia.googlesource.com/third_party/libxml2/
 
 
 ### DEPEND ###
@@ -121,41 +122,41 @@ RASPBERRY_RELEASE_dk_queueCommand	(${DKCMAKE_BUILD} "-DCMAKE_C_FLAGS=-DLIBXML_TH
 #if(MSVC)
 	WIN_dk_queueCommand(
 		${DKCMAKE_BUILD} 
-		-DBUILD_SHARED_LIBS=OFF				#Build shared libraries	
-		-DLIBXML2_WITH_C14N=ON				#Add the Canonicalization support
-		-DLIBXML2_WITH_CATALOG=ON			#Add the Catalog support
-		-DLIBXML2_WITH_DEBUG=ON				#Add the debugging module
-		-DLIBXML2_WITH_FTP=OFF				#Add the FTP support
-		-DLIBXML2_WITH_HTML=ON				#Add the HTML support
-		-DLIBXML2_WITH_HTTP=ON				#Add the HTTP support
-		-DLIBXML2_WITH_ICONV=${LIBICONV}	#Add ICONV support
-		-DLIBXML2_WITH_ICU=OFF				#Add ICU support
-		-DLIBXML2_WITH_LEGACY=OFF			#Add deprecated APIs for compatibility
-		-DLIBXML2_WITH_LZMA=${XZ}			#Use liblzma
-		-DLIBXML2_WITH_MEM_DEBUG=OFF		#Add the memory debugging module
-		-DLIBXML2_WITH_MODULES=ON			#Add the dynamic modules support
-		-DLIBXML2_WITH_OUTPUT=ON			#Add the serialization support
-		-DLIBXML2_WITH_PATTERN=ON			#Add the xmlPattern selection interface
-		-DLIBXML2_WITH_PROGRAMS=ON			#Build programs
-		-DLIBXML2_WITH_PUSH=ON				#Add the PUSH parser interfaces
-		-DLIBXML2_WITH_PYTHON=${PYTHON}		#Build Python bindings
-		-DLIBXML2_WITH_READER=ON			#Add the xmlReader parsing interface
-		-DLIBXML2_WITH_REGEXPS=ON			#Add Regular Expressions support
-		-DLIBXML2_WITH_SAX1=ON				#Add the older SAX1 interface
-		-DLIBXML2_WITH_SCHEMAS=ON			#Add Relax-NG and Schemas support
-		-DLIBXML2_WITH_SCHEMATRON=ON		#Add Schematron support
-		-DLIBXML2_WITH_TESTS=ON				#Build tests
-		-DLIBXML2_WITH_THREADS=ON			#Add multithread support
-		-DLIBXML2_WITH_THREAD_ALLOC=OFF		#Add per-thread memory
-		-DLIBXML2_WITH_TLS=OFF				#Enable thread-local storage
-		-DLIBXML2_WITH_TREE=ON				#Add the DOM like tree manipulation APIs
-		-DLIBXML2_WITH_VALID=ON				#Add the DTD validation support
-		-DLIBXML2_WITH_WRITER=ON			#Add the xmlWriter saving interface
-		-DLIBXML2_WITH_XINCLUDE=ON			#Add the XInclude support
-		-DLIBXML2_WITH_XPATH=ON				#Add the XPATH support
-		-DLIBXML2_WITH_XPTR=ON				#Add the XPointer support
-		-DLIBXML2_WITH_XPTR_LOCS=OFF		#Add support for XPointer locations
-		-DLIBXML2_WITH_ZLIB=${ZLIB}			#Use libz
+		-DBUILD_SHARED_LIBS=OFF				# Build shared libraries ON	
+		-DLIBXML2_WITH_C14N=ON				# Add the Canonicalization support ON
+		-DLIBXML2_WITH_CATALOG=ON			# Add the Catalog support ON
+		-DLIBXML2_WITH_DEBUG=ON				# Add the debugging module ON
+		-DLIBXML2_WITH_FTP=OFF				# Add the FTP support OFF
+		-DLIBXML2_WITH_HTML=ON				# Add the HTML support ON
+		-DLIBXML2_WITH_HTTP=ON				# Add the HTTP support ON
+		-DLIBXML2_WITH_ICONV=${LIBICONV}	# Add ICONV support ON
+		-DLIBXML2_WITH_ICU=OFF				# Add ICU support OFF
+		-DLIBXML2_WITH_LEGACY=OFF			# Add deprecated APIs for compatibility OFF
+		-DLIBXML2_WITH_LZMA=${XZ}			# Use liblzma ON
+		-DLIBXML2_WITH_MEM_DEBUG=OFF		# Add the memory debugging module OFF
+		-DLIBXML2_WITH_MODULES=ON			# Add the dynamic modules support ON
+		-DLIBXML2_WITH_OUTPUT=ON			# Add the serialization support ON
+		-DLIBXML2_WITH_PATTERN=ON			# Add the xmlPattern selection interface ON
+		-DLIBXML2_WITH_PROGRAMS=OFF			# Build programs ON
+		-DLIBXML2_WITH_PUSH=ON				# Add the PUSH parser interfaces ON
+		-DLIBXML2_WITH_PYTHON=${PYTHON}		# Build Python bindings ON
+		-DLIBXML2_WITH_READER=ON			# Add the xmlReader parsing interface ON
+		-DLIBXML2_WITH_REGEXPS=ON			# Add Regular Expressions support ON
+		-DLIBXML2_WITH_SAX1=ON				# Add the older SAX1 interface ON
+		-DLIBXML2_WITH_SCHEMAS=ON			# Add Relax-NG and Schemas support ON
+		-DLIBXML2_WITH_SCHEMATRON=ON		# Add Schematron support ON
+		-DLIBXML2_WITH_TESTS=ON				# Build tests ON
+		-DLIBXML2_WITH_THREADS=ON			# Add multithread support ON
+		-DLIBXML2_WITH_THREAD_ALLOC=OFF		# Add per-thread memory OFF
+		-DLIBXML2_WITH_TLS=OFF				# Enable thread-local storage OFF
+		-DLIBXML2_WITH_TREE=ON				# Add the DOM like tree manipulation APIs ON
+		-DLIBXML2_WITH_VALID=ON				# Add the DTD validation support ON
+		-DLIBXML2_WITH_WRITER=ON			# Add the xmlWriter saving interface ON
+		-DLIBXML2_WITH_XINCLUDE=ON			# Add the XInclude support ON
+		-DLIBXML2_WITH_XPATH=ON				# Add the XPATH support ON
+		-DLIBXML2_WITH_XPTR=ON				# Add the XPointer support ON
+		-DLIBXML2_WITH_XPTR_LOCS=OFF		# Add support for XPointer locations OFF
+		-DLIBXML2_WITH_ZLIB=${ZLIB}			# Use libz ON
 		-DPython_EXECUTABLE=${PYTHON_APP}
 		${LIBICONV_CMAKE} 
 		${PYTHON_CMAKE}

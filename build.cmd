@@ -999,7 +999,7 @@ goto:eof
     call set commands=%%commands:"=%%
     set "DKCOMMAND=%commands%"
     call set DKCOMMAND=%%DKCOMMAND:^\=^/%%
-    echo DKCOMMAND = %DKCOMMAND%
+    ::echo DKCOMMAND = %DKCOMMAND%
 
     set "EVAL_VARS=%DKCMAKE%\cmake_vars.cmd"
     call set DKCMAKE=%%DKCMAKE:^\=^/%%
