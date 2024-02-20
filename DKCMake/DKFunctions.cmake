@@ -1940,14 +1940,17 @@ endfunction()
 #
 function(dk_setPath path)
 	DKDEBUGFUNC(${ARGV})
-	if(path STREQUAL "OFF")
-		return() 
-	endif()	
-	dk_set(CURRENT_DIR ${path})
-	if(NOT EXISTS ${CURRENT_DIR})
-		dk_info("Creating directory: ${CURRENT_DIR})")
-		dk_makeDirectory(${CURRENT_DIR})
+	#if(path STREQUAL "OFF")
+	#	return() 
+	#endif()	
+	
+	if(NOT EXISTS ${path})
+		dk_error("path:${path} does not exist.")
+		#dk_info("Creating directory: ${CURRENT_DIR})")
+		#dk_makeDirectory(${CURRENT_DIR})
 	endif()
+	
+	dk_set(CURRENT_DIR ${path})
 	
 	# TODO https://stackoverflow.com/a/6595001/688352
 	# NOTE: Some 3rdParty projects break when their binary output path is changed. It may be better to compile the project normally, then do a library install to a final common location 
