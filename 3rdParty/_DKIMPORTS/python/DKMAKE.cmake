@@ -68,3 +68,7 @@ if(ANDROID_HOST)
 
 	dk_set(PYTHON_CMAKE -DPython_EXECUTABLE=${PYTHON_APP} -DPython_INCLUDE_DIRS=${Python_INCLUDE_DIRS} -DPython_LIBRARIES=${Python_LIBRARIES})
 endif ()
+
+
+dk_debug("PYTHON_APP = ${PYTHON_APP}")
+dk_command(${PYTHON_APP} --version)
