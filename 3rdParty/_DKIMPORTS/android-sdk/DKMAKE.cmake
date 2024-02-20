@@ -8,8 +8,12 @@
 
 
 dk_set(ANDROID_SDK ${3RDPARTY}/android-sdk)
-dk_depend(openjdk)
-dk_depend(openjdk-8u41)
+
+#NOTE: it's actually building android gui apps that depend
+#	on java. So we can push these further up the dependencies list. 
+#dk_depend(openjdk)
+#dk_depend(openjdk-8u41)
+
 dk_depend(android-cmdline-tools)
 
 
