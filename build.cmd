@@ -1,5 +1,6 @@
 ::############ DigitalKnob builder script ############
 @echo off
+setlocal EnableDelayedExpansion
 
 ::### keep window open ###
 if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
@@ -62,7 +63,7 @@ if "%*" NEQ "" call %*
     echo DK3RDPARTY = %DK3RDPARTY%
     echo DKIMPORTS = %DKIMPORTS%
 
-    :while_loop             
+	:while_loop             
         if "%UPDATE%"==""     call:pick_update & goto:while_loop
         if "%APP%"==""        call:pick_app    & goto:while_loop
         if "%TARGET_OS%"==""  call:pick_os     & goto:while_loop
@@ -88,9 +89,11 @@ goto:eof
 
 
 :pick_update
+	call:read_cache
     set UPDATE=
         
     echo.
+	echo  0) Repeat cache %_APP_%-%_TARGET_OS_%-%_TYPE_%
     echo  1) Git Update
     echo  2) Git Commit
     echo  3) Push assets
@@ -108,6 +111,7 @@ goto:eof
         
     set choice=
     set /p "choice=Choose a selection: "
+	if "%choice%"=="0"  set APP=%_APP_% & set TARGET_OS=%_TARGET_OS_% & set TYPE=%_TYPE_%
     if "%choice%"=="1"  call:git_update
     if "%choice%"=="2"  call:git_commit
     if "%choice%"=="3"  call:push_assets
@@ -273,6 +277,8 @@ goto:eof
 
     call:dk_deleteCache
     call:delete_temp_files
+	
+	call:create_cache
 	
 	if "%TARGET_PATH%"=="" set "TARGET_PATH=%DKPATH%\DKApps\%APP%"
 	echo TARGET_PATH = %TARGET_PATH%
@@ -1152,6 +1158,41 @@ goto:eof
     ::echo get_filename(%*) -^> %2 = %val%
     call:check_error
 goto:eof
+
+:: create_cache
+:create_cache
+	echo creating cache...
+	echo APP = %APP%
+	echo TARGET_OS = %TARGET_OS%
+	echo TYPE = %TYPE%
+	echo LEVEL = %LEVEL%
+	
+	:: https://stackoverflow.com/a/5143293/688352
+	echo %APP%>"%DKPATH%\cache"
+	echo %TARGET_OS%>>"%DKPATH%\cache"
+	echo %TYPE%>>"%DKPATH%\cache"
+	::echo %LEVEL%>>"%DKPATH%\cache"
+goto:eof
+
+:: read_cache
+:read_cache
+	echo reading cache...
+	set /a count = 0
+	for /f "tokens=*" %%a in (%DKPATH%\cache) do (
+		echo !count!: %%a
+		if !count! == 0 set _APP_=%%a
+		if !count! == 1 set _TARGET_OS_=%%a
+		if !count! == 2 set _TYPE_=%%a
+		if !count! == 3 set _LEVEL_=%%a
+		call set /a count += 1
+	)
+	::echo _APP_ = !_APP_!
+	::echo _TARGET_OS_ = !_TARGET_OS_!
+	::echo _TYPE_ = !_TYPE_!
+	::echo _LEVEL_ = !_LEVEL_!
+	::SETLOCAL DisableDelayedExpansion
+goto:eof
+
 
 
 :end
