@@ -508,7 +508,9 @@ function Generate_Project() {
 	#echo CMAKE_ARGS = "${CMAKE_ARGS[@]}"
 	
 	###### GENERATOR ######
-	if [[ $TARGET_OS == "mac"* ]] || [[ $TARGET_OS == "ios"* ]]; then
+	if [[ $TARGET_OS == "android"* ]]; then
+		GENERATOR="Unix Makefiles"
+	elif [[ $TARGET_OS == "mac"* ]] || [[ $TARGET_OS == "ios"* ]]; then
 		GENERATOR="Xcode"
 	elif [[ $TARGET_OS == "emscripten" ]]; then
 		validate_emscripten
