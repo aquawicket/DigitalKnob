@@ -566,7 +566,7 @@ goto:eof
 :reset_apps
 	echo Resetting Apps . . .
 
-	set /P CONFIRM=Are you sure (Y)?
+	set /P CONFIRM="Are you sure? [Y] "
 	if /I "%CONFIRM%" NEQ "Y" goto:eof
 
 	cd %DKPATH%\DKApps
@@ -578,7 +578,7 @@ goto:eof
 :reset_plugins
 	echo Resetting DKPlugins . . .
 
-	set /P CONFIRM=Are you sure (Y)?
+	set /P CONFIRM="Are you sure? [Y] "
 	if /I "%CONFIRM%" NEQ "Y" goto:eof
 	
 	cd %DKPATH%\DKPlugins
@@ -590,7 +590,7 @@ goto:eof
 :reset_3rdparty
 	echo Resetting 3rdParty Libraries . . .
 	
-	set /P CONFIRM=Are you sure (Y)?
+	set /P CONFIRM="Are you sure? [Y] "
 	if /I "%CONFIRM%" NEQ "Y" goto:eof
 	
 	cd %DKPATH%\3rdParty
@@ -613,7 +613,7 @@ goto:eof
 	echo. you wish to commit or save beforehand.
 	echo. 
 	
-	set /P CONFIRM=Are you sure (Y)?
+	set /P CONFIRM="Are you sure? [Y] "
 	if /I "%CONFIRM%" NEQ "Y" goto:eof
 	
 	:: first we need to relocate this file up one directory
@@ -917,11 +917,11 @@ goto:eof
 
 :: git_update() NO_CONFIRM
 :git_update
-	if ! ["%1"] == ["NO_CONFIRM"] (
+	if ["%1"] NEQ ["NO_CONFIRM"] (
 		echo Git Update? Any local changes will be lost.
-		set /P CONFIRM=Are you sure (Y)?
-		if /I "%CONFIRM%" NEQ "Y" goto:eof
+		set /P CONFIRM="Are you sure? [Y] "
 	)
+	if /I "%CONFIRM%" NEQ "Y" goto:eof
 	
     if NOT exist "%DKPATH%\.git" (
         "%GIT%" clone https://github.com/aquawicket/DigitalKnob.git "%DKPATH%"
@@ -963,7 +963,7 @@ goto:eof
 	
 	echo.
 	echo git commit "%message%"
-	set /P CONFIRM=Are you sure (Y)?
+	set /P CONFIRM="Are you sure? [Y] "
 	if /I "%CONFIRM%" NEQ "Y" goto:eof
 	
 	"%GIT%" commit -a -m "%message%"
