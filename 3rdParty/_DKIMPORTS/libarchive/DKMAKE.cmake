@@ -42,7 +42,7 @@ if(MULTI_CONFIG)
 	else()
 		dk_libDebug			(${LIBARCHIVE}/${OS}/libarchive/${DEBUG_DIR}/libarchive.a)
 		dk_libRelease		(${LIBARCHIVE}/${OS}/libarchive/${RELEASE_DIR}/libarchive.a)
-	endif
+	endif()
 else()
 	dk_libDebug		(${LIBARCHIVE}/${OS}/${DEBUG_DIR}/libarchive/libarchive.a)
 	dk_libRelease	(${LIBARCHIVE}/${OS}/${RELEASE_DIR}/libarchive/libarchive.a)
