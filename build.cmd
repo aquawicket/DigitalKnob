@@ -352,14 +352,14 @@ goto:eof
 	
 	set "CMAKE_ANDROID_ARCH_ABI=arm64-v8a"
 	::call:append_cmake_arg -DCMAKE_ANDROID_ARCH_ABI=arm64-v8a
-	::call:append_cmake_arg -DANDROID_ABI=arm64-v8a
+	call:append_cmake_arg -DANDROID_ABI=arm64-v8a
 	
 	:: CMAKE_ANDROID_PLATFORM does not exist
 	call:append_cmake_arg -DANDROID_PLATFORM=%ANDROID_API%
 
 	set "CMAKE_ANDROID_NDK=%ANDROID_NDK%"
 	::call:append_cmake_arg -DCMAKE_ANDROID_NDK=%ANDROID_NDK%
-	::call:append_cmake_arg -DANDROID_NDK=%ANDROID_NDK%
+	call:append_cmake_arg -DANDROID_NDK=%ANDROID_NDK%
 	
 	set "CMAKE_TOOLCHAIN_FILE=%ANDROID_TOOLCHAIN_FILE%"
 	::call:append_cmake_arg -DCMAKE_TOOLCHAIN_FILE=%ANDROID_TOOLCHAIN_FILE%
@@ -370,14 +370,18 @@ goto:eof
 	:: CMAKE_ANDROID_STL does not exist
 	set "CMAKE_ANDROID_STL_TYPE=c++_static"
 	::call:append_cmake_arg -DCMAKE_ANDROID_STL_TYPE=c++_static
-	::call:append_cmake_arg -DANDROID_STL=c++_static
+	call:append_cmake_arg -DANDROID_STL=c++_static
 	
 	set "CMAKE_CXX_FLAGS=-std=c++1z -frtti -fexceptions"
 	::call:append_cmake_arg -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions"
 	
-	call:append_cmake_arg -DDEBUG=ON
-	
-	call:append_cmake_arg -DRELEASE=ON
+	if %TYPE%==Debug (
+		call:append_cmake_arg -DDEBUG=ON
+		call:append_cmake_arg -DRELEASE=OFF
+	)
+	if %TYPE%==Release call:append_cmake_arg -DRELEASE=ON
+	if %TYPE%==All call:append_cmake_arg -DDEBUG=ON
+	if %TYPE%==All call:append_cmake_arg -DRELEASE=ON
 	
 	call:append_cmake_arg -DREBUILDALL=ON
 	
