@@ -335,63 +335,63 @@ goto:eof
     call:validate_android_ndk
 	
 	::call:validate_visual_studio
-	::set "GENERATOR=%VISUALSTUDIO_GENERATOR%"
-	::set "GENERATOR_PLATFORM=-A ARM64"
+	::set "CMAKE_GENERATOR=%VISUALSTUDIO_GENERATOR%"
+	::set "CMAKE_GENERATOR_PLATFORM=ARM64"
 	
 	
 	::"%CMAKE%" -G "%GENERATOR%" "%GENERATOR_PLATFORM%" -DCMAKE_MAKE_PROGRAM=%MAKE_PROGRAM% -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID_NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_TOOLCHAIN_FILE% -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%CMAKE_TARGET_PATH%/%TARGET_OS%
-	set "GENERATOR=Unix Makefiles"
-	if defined GENERATOR set "CMAKE_ARGS=%CMAKE_ARGS% -G ^"%GENERATOR%^""
 	
-	::set "GENERATOR_PLATFORM="
-	if defined GENERATOR_PLATFORM set "CMAKE_ARGS=%CMAKE_ARGS% -A %GENERATOR_PLATFORM%"
+	set "CMAKE_GENERATOR=Unix Makefiles"
+	::call:append_cmake_arg -G "Unix Makefiles"
 	
-	set "MAKE_PROGRAM=%ANDROID_NDK%/prebuilt/windows-x86_64/bin/make.exe"
-	if defined MAKE_PROGRAM set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_MAKE_PROGRAM=%MAKE_PROGRAM%"
+	::set "CMAKE_GENERATOR_PLATFORM=%GENERATOR_PLATFORM%"
+	::call:append_cmake_arg -A %GENERATOR_PLATFORM%
 	
-	set "ANDROID_ABI=arm64-v8a"
-	if defined ANDROID_ABI set "CMAKE_ARGS=%CMAKE_ARGS% -DANDROID_ABI=%ANDROID_ABI%"
+	set "CMAKE_MAKE_PROGRAM=%ANDROID_NDK%/prebuilt/windows-x86_64/bin/make.exe"
+	::call:append_cmake_arg -DCMAKE_MAKE_PROGRAM=%ANDROID_NDK%/prebuilt/windows-x86_64/bin/make.exe
 	
-	set "ANDROID_PLATFORM=%ANDROID_API%"
-	if defined ANDROID_PLATFORM set "CMAKE_ARGS=%CMAKE_ARGS% -DANDROID_PLATFORM=%ANDROID_PLATFORM%"
+	set "CMAKE_ANDROID_ARCH_ABI=arm64-v8a"
+	::call:append_cmake_arg -DCMAKE_ANDROID_ARCH_ABI=arm64-v8a
+	::call:append_cmake_arg -DANDROID_ABI=arm64-v8a
+	
+	:: CMAKE_ANDROID_PLATFORM does not exist
+	call:append_cmake_arg -DANDROID_PLATFORM=%ANDROID_API%
 
-	set "ANDROID_NDK=%ANDROID_NDK%"
-	if defined ANDROID_NDK set "CMAKE_ARGS=%CMAKE_ARGS% -DANDROID_NDK=%ANDROID_NDK%"
+	set "CMAKE_ANDROID_NDK=%ANDROID_NDK%"
+	::call:append_cmake_arg -DCMAKE_ANDROID_NDK=%ANDROID_NDK%
+	::call:append_cmake_arg -DANDROID_NDK=%ANDROID_NDK%
 	
 	set "CMAKE_TOOLCHAIN_FILE=%ANDROID_TOOLCHAIN_FILE%"
-	if defined CMAKE_TOOLCHAIN_FILE set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_TOOLCHAIN_FILE=%CMAKE_TOOLCHAIN_FILE%"
+	::call:append_cmake_arg -DCMAKE_TOOLCHAIN_FILE=%ANDROID_TOOLCHAIN_FILE%
 	
-	set "ANDROID_TOOLCHAIN=clang"
-	if defined ANDROID_TOOLCHAIN set "CMAKE_ARGS=%CMAKE_ARGS% -DANDROID_TOOLCHAIN=%ANDROID_TOOLCHAIN%"
+	:: CMAKE_ANDROID_TOOLCHAIN does not exist
+	call:append_cmake_arg -DANDROID_TOOLCHAIN=clang
 	
-	set "ANDROID_STL=c++_static"
-	if defined ANDROID_STL set "CMAKE_ARGS=%CMAKE_ARGS% -DANDROID_STL=%ANDROID_STL%"
+	:: CMAKE_ANDROID_STL does not exist
+	set "CMAKE_ANDROID_STL_TYPE=c++_static"
+	::call:append_cmake_arg -DCMAKE_ANDROID_STL_TYPE=c++_static
+	::call:append_cmake_arg -DANDROID_STL=c++_static
 	
 	set "CMAKE_CXX_FLAGS=-std=c++1z -frtti -fexceptions"
-	if defined CMAKE_CXX_FLAGS set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_FLAGS="%CMAKE_CXX_FLAGS%""
+	::call:append_cmake_arg -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions"
 	
-	set "CMAKE_ANDROID_STL_TYPE=c++_static"
-	if defined CMAKE_ANDROID_STL_TYPE set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_ANDROID_STL_TYPE=%CMAKE_ANDROID_STL_TYPE%"
+	call:append_cmake_arg -DDEBUG=ON
 	
-	set "DEBUG=ON"
-	if defined DEBUG set "CMAKE_ARGS=%CMAKE_ARGS% -DDEBUG=%DEBUG%"
+	call:append_cmake_arg -DRELEASE=ON
 	
-	set "RELEASE=ON"
-	if defined RELEASE set "CMAKE_ARGS=%CMAKE_ARGS% -DRELEASE=%RELEASE%"
-	
-	set "REBUILDALL=ON"
-	if defined REBUILDALL set "CMAKE_ARGS=%CMAKE_ARGS% -DREBUILDALL=%REBUILDALL%"
+	call:append_cmake_arg -DREBUILDALL=ON
 	
 	set "CMAKE_SOURCE_DIR=%DKCMAKE%"
-	if defined CMAKE_SOURCE_DIR set "CMAKE_ARGS=%CMAKE_ARGS% -S=%CMAKE_SOURCE_DIR%"
+	::call:append_cmake_arg -S=%DKCMAKE%
 	
 	set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%TARGET_OS%"
-	if defined CMAKE_BINARY_DIR set "CMAKE_ARGS=%CMAKE_ARGS% -B=%CMAKE_BINARY_DIR%"
+	::call:append_cmake_arg -B=%CMAKE_TARGET_PATH%/%TARGET_OS%
+	
+	set TARGET=main
 	
 	
-    "%CMAKE%" %CMAKE_ARGS%
-	
-    set TARGET=main
+	call:call_cmake_with_args
+    
 	goto build
 goto:eof
 
@@ -491,6 +491,31 @@ goto:eof
     ::set TARGET=%APP%_APP
 goto:eof
 
+
+:append_cmake_arg <arg>
+	set "CMAKE_ARGS=%CMAKE_ARGS% %*"
+goto:eof
+
+
+:call_cmake_with_args
+	if defined CMAKE_GENERATOR set "CMAKE_ARGS=%CMAKE_ARGS% -G ^"%CMAKE_GENERATOR%^""
+	if defined CMAKE_GENERATOR_PLATFORM set "CMAKE_ARGS=%CMAKE_ARGS% -A %CMAKE_GENERATOR_PLATFORM%"
+	if defined CMAKE_MAKE_PROGRAM set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_MAKE_PROGRAM=%CMAKE_MAKE_PROGRAM%"
+	if defined CMAKE_TOOLCHAIN_FILE set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_TOOLCHAIN_FILE=%CMAKE_TOOLCHAIN_FILE%"
+	if defined CMAKE_CXX_FLAGS set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_FLAGS="%CMAKE_CXX_FLAGS%""
+	if defined CMAKE_ANDROID_STL_TYPE set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_ANDROID_STL_TYPE=%CMAKE_ANDROID_STL_TYPE%"
+	if defined CMAKE_SOURCE_DIR set "CMAKE_ARGS=%CMAKE_ARGS% -S=%CMAKE_SOURCE_DIR%"
+	if defined CMAKE_BINARY_DIR set "CMAKE_ARGS=%CMAKE_ARGS% -B=%CMAKE_BINARY_DIR%"
+	if defined CMAKE_ANDROID_ARCH_ABI set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_ANDROID_ARCH_ABI=%CMAKE_ANDROID_ARCH_ABI%"
+	if defined CMAKE_ANDROID_NDK set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_ANDROID_NDK=%CMAKE_ANDROID_NDK%"
+	
+	echo.
+	echo ****** CMAKE COMMAND ******
+	echo "%CMAKE%" %CMAKE_ARGS%
+	echo.
+	
+	"%CMAKE%" %CMAKE_ARGS%
+goto:eof
 
 
 :build
