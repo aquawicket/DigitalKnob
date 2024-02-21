@@ -275,43 +275,43 @@ goto:eof
     call:delete_temp_files
 	
 	if "%TARGET_PATH%"=="" set "TARGET_PATH=%DKPATH%\DKApps\%APP%"
+	echo TARGET_PATH = %TARGET_PATH%
     call:make_directory "%TARGET_PATH%\%TARGET_OS%"
     cd "%TARGET_PATH%\%TARGET_OS%"
 	echo APP = %APP%
 	echo TARGET_OS = %TARGET_OS%
 	echo TYPE = %TYPE%
 	echo LEVEL = %LEVEL%
+	call set CMAKE_SOURCE_DIR=%%DKCMAKE:^\=^/%%
+	echo CMAKE_SOURCE_DIR = %CMAKE_SOURCE_DIR%
 	call set CMAKE_TARGET_PATH=%%TARGET_PATH:^\=^/%%
-	echo TARGET_PATH = %TARGET_PATH%
-	echo CMAKE_TARGET_PATH = %CMAKE_TARGET_PATH%	
+	echo CMAKE_TARGET_PATH = %CMAKE_TARGET_PATH%
 	
     ::::::::: BUILD CMAKE_ARGS ARRAY :::::::::
     set DKLEVEL=RebuildAll
     set DKLINK=Static
 
     set CMAKE_ARGS=
-    if %TYPE%==Debug            set "CMAKE_ARGS=-DDEBUG=ON -DRELEASE=OFF"
-    if %TYPE%==Release          set "CMAKE_ARGS=-DDEBUG=OFF -DRELEASE=ON"
-    if %TYPE%==All              set "CMAKE_ARGS=-DDEBUG=ON -DRELEASE=ON"
-    if %DKLEVEL%==Build         set "CMAKE_ARGS=%CMAKE_ARGS% -DBUILD=ON"
-    if %DKLEVEL%==Rebuild       set "CMAKE_ARGS=%CMAKE_ARGS% -DREBUILD=ON"
-    if %DKLEVEL%==RebuildAll    set "CMAKE_ARGS=%CMAKE_ARGS% -DREBUILDALL=ON"
-    if %DKLINK%==Static         set "CMAKE_ARGS=%CMAKE_ARGS% -DSTATIC=ON"
-    if %DKLINK%==Shared         set "CMAKE_ARGS=%CMAKE_ARGS% -DSHARED=ON"
-        
+    if %TYPE%==Debug            call:add_cmake_arg -DDEBUG=ON & call:add_cmake_arg -DRELEASE=OFF
+    if %TYPE%==Release          call:add_cmake_arg -DDEBUG=OFF & call:add_cmake_arg -DRELEASE=ON
+    if %TYPE%==All              call:add_cmake_arg -DDEBUG=ON & call:add_cmake_arg -DRELEASE=ON
+    if %DKLEVEL%==Build         call:add_cmake_arg -DBUILD=ON
+    if %DKLEVEL%==Rebuild       call:add_cmake_arg -DREBUILD=ON
+    if %DKLEVEL%==RebuildAll    call:add_cmake_arg -DREBUILDALL=ON
+    if %DKLINK%==Static         call:add_cmake_arg -DSTATIC=ON
+    if %DKLINK%==Shared         call:add_cmake_arg -DSHARED=ON
+	
+	set CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%TARGET_OS%/%TYPE%
+	
+	call:add_cmake_arg -S=%CMAKE_SOURCE_DIR%
+	call:add_cmake_arg -B=%CMAKE_BINARY_DIR%
+
+	
     :::::::::::: CMake Options :::::::::::::
-    set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_VERBOSE_MAKEFILE=1"
-    ::set "CMAKE_ARGS=%CMAKE_ARGS% --debug-output"
-    ::set "CMAKE_ARGS=%CMAKE_ARGS% --trace"
-    ::set "CMAKE_ARGS=%CMAKE_ARGS% --warn-unused-vars"
-
-    :::::::::::: GENERATOR ::::::::::::
-
-    :::::::::::: MAKE_PROGRAM ::::::::::::
-
-    :::::::::::: C_COMPILER; CXX_COMPILER ::::::::::::
-
-    :::::::::::: EXE_LINKER_FLAGS ::::::::::::
+    ::call:add_cmake_arg -DCMAKE_VERBOSE_MAKEFILE=1
+    ::call:add_cmake_arg --debug-output"
+    ::call:add_cmake_arg --trace"
+    ::call:add_cmake_arg --warn-unused-vars"
         
 goto:eof
 
@@ -322,12 +322,22 @@ goto:eof
 	::set "GENERATOR=%VISUALSTUDIO_GENERATOR%"
 	::set "GENERATOR_PLATFORM=-A ARM"
 	
-	set "GENERATOR=Unix Makefiles"
-	set "MAKE_PROGRAM=%ANDROID_NDK%/prebuilt/windows-x86_64/bin/make.exe"
+	call:add_cmake_arg -G "Unix Makefiles"
+	call:add_cmake_arg -DCMAKE_MAKE_PROGRAM=%ANDROID_NDK%/prebuilt/windows-x86_64/bin/make.exe
+	call:add_cmake_arg -DCMAKE_ANDROID_ARCH_ABI=armeabi-v7a
+	call:add_cmake_arg -DANDROID_ABI=armeabi-v7a
+	call:add_cmake_arg -DANDROID_PLATFORM=%ANDROID_API%
+	call:add_cmake_arg -DCMAKE_ANDROID_NDK=%ANDROID_NDK%
+	call:add_cmake_arg -DANDROID_NDK=%ANDROID_NDK%
+	call:add_cmake_arg -DCMAKE_TOOLCHAIN_FILE=%ANDROID_TOOLCHAIN_FILE%
+	call:add_cmake_arg -DANDROID_TOOLCHAIN=clang
+	call:add_cmake_arg -DCMAKE_ANDROID_STL_TYPE=c++_static
+	call:add_cmake_arg -DANDROID_STL=c++_static
+	call:add_cmake_arg -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions"
 	
-    call %OPENJDK%\registerJDK.cmd
-    "%CMAKE%" -G "%GENERATOR%" "%GENERATOR_PLATFORM%" -DCMAKE_MAKE_PROGRAM=%MAKE_PROGRAM% -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID_NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_TOOLCHAIN_FILE% -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%CMAKE_TARGET_PATH%/%TARGET_OS%
-    set TARGET=main
+	call:cmake_generate
+	
+	set TARGET=main
 	goto build
 goto:eof
 
@@ -338,180 +348,148 @@ goto:eof
 	::set "CMAKE_GENERATOR=%VISUALSTUDIO_GENERATOR%"
 	::set "CMAKE_GENERATOR_PLATFORM=ARM64"
 	
-	
-	::"%CMAKE%" -G "%GENERATOR%" "%GENERATOR_PLATFORM%" -DCMAKE_MAKE_PROGRAM=%MAKE_PROGRAM% -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID_NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_TOOLCHAIN_FILE% -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%CMAKE_TARGET_PATH%/%TARGET_OS%
-	
-	set "CMAKE_GENERATOR=Unix Makefiles"
-	::call:append_cmake_arg -G "Unix Makefiles"
-	
-	::set "CMAKE_GENERATOR_PLATFORM=%GENERATOR_PLATFORM%"
-	::call:append_cmake_arg -A %GENERATOR_PLATFORM%
-	
-	set "CMAKE_MAKE_PROGRAM=%ANDROID_NDK%/prebuilt/windows-x86_64/bin/make.exe"
-	::call:append_cmake_arg -DCMAKE_MAKE_PROGRAM=%ANDROID_NDK%/prebuilt/windows-x86_64/bin/make.exe
-	
-	set "CMAKE_ANDROID_ARCH_ABI=arm64-v8a"
-	::call:append_cmake_arg -DCMAKE_ANDROID_ARCH_ABI=arm64-v8a
-	call:append_cmake_arg -DANDROID_ABI=arm64-v8a
-	
-	:: CMAKE_ANDROID_PLATFORM does not exist
-	call:append_cmake_arg -DANDROID_PLATFORM=%ANDROID_API%
-
-	set "CMAKE_ANDROID_NDK=%ANDROID_NDK%"
-	::call:append_cmake_arg -DCMAKE_ANDROID_NDK=%ANDROID_NDK%
-	call:append_cmake_arg -DANDROID_NDK=%ANDROID_NDK%
-	
-	set "CMAKE_TOOLCHAIN_FILE=%ANDROID_TOOLCHAIN_FILE%"
-	::call:append_cmake_arg -DCMAKE_TOOLCHAIN_FILE=%ANDROID_TOOLCHAIN_FILE%
-	
-	:: CMAKE_ANDROID_TOOLCHAIN does not exist
-	call:append_cmake_arg -DANDROID_TOOLCHAIN=clang
-	
-	:: CMAKE_ANDROID_STL does not exist
-	set "CMAKE_ANDROID_STL_TYPE=c++_static"
-	::call:append_cmake_arg -DCMAKE_ANDROID_STL_TYPE=c++_static
-	call:append_cmake_arg -DANDROID_STL=c++_static
-	
-	set "CMAKE_CXX_FLAGS=-std=c++1z -frtti -fexceptions"
-	::call:append_cmake_arg -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions"
-	
-	if %TYPE%==Debug (
-		call:append_cmake_arg -DDEBUG=ON
-		call:append_cmake_arg -DRELEASE=OFF
-	)
-	if %TYPE%==Release call:append_cmake_arg -DRELEASE=ON
-	if %TYPE%==All call:append_cmake_arg -DDEBUG=ON
-	if %TYPE%==All call:append_cmake_arg -DRELEASE=ON
-	
-	call:append_cmake_arg -DREBUILDALL=ON
-	
-	set "CMAKE_SOURCE_DIR=%DKCMAKE%"
-	::call:append_cmake_arg -S=%DKCMAKE%
-	
-	set "CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%TARGET_OS%"
-	::call:append_cmake_arg -B=%CMAKE_TARGET_PATH%/%TARGET_OS%
-	
-	set TARGET=main
-	
+	call:add_cmake_arg -G "Unix Makefiles"
+	call:add_cmake_arg -DCMAKE_MAKE_PROGRAM=%ANDROID_NDK%/prebuilt/windows-x86_64/bin/make.exe
+	call:add_cmake_arg -DCMAKE_ANDROID_ARCH_ABI=arm64-v8a
+	call:add_cmake_arg -DANDROID_ABI=arm64-v8a
+	call:add_cmake_arg -DANDROID_PLATFORM=%ANDROID_API%
+	call:add_cmake_arg -DCMAKE_ANDROID_NDK=%ANDROID_NDK%
+	call:add_cmake_arg -DANDROID_NDK=%ANDROID_NDK%
+	call:add_cmake_arg -DCMAKE_TOOLCHAIN_FILE=%ANDROID_TOOLCHAIN_FILE%
+	call:add_cmake_arg -DANDROID_TOOLCHAIN=clang
+	call:add_cmake_arg -DCMAKE_ANDROID_STL_TYPE=c++_static
+	call:add_cmake_arg -DANDROID_STL=c++_static
+	call:add_cmake_arg -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions"
 	
 	call:cmake_generate
     
+	set TARGET=main
 	goto build
 goto:eof
 
 :generate_emscripten
-    call:validate_emscripten
-	set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_TOOLCHAIN_FILE=%EMSDK_TOOLCHAIN_FILE%"
-	set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_C_COMPILER=%EMSDK_C_COMPILER%"
-	set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_COMPILER=%EMSDK_CXX_COMPILER%"
+    setx PATH %PATH%;C:\Users\aquawicket\digitalknob\Development\3rdParty\python-2.7.18
+	call:validate_emscripten
 	
-	set "debug=0==1"
-	set "release=0==1"
-    if %TYPE%==Debug set "debug=1==1"
-	if %TYPE%==Release set "release=1==1"
-	if %TYPE%==All set "debug=1==1" & set "release=1==1"
+	call:add_cmake_arg -G "%EMSDK_GENERATOR%"
+	call:add_cmake_arg -DCMAKE_TOOLCHAIN_FILE=%EMSDK_TOOLCHAIN_FILE%"
+	call:add_cmake_arg -DCMAKE_C_COMPILER=%EMSDK_C_COMPILER%"
+	call:add_cmake_arg -DCMAKE_CXX_COMPILER=%EMSDK_CXX_COMPILER%"
+	
+	echo.
+	echo ****** CMAKE COMMAND ******
+	echo "%EMSDK_ENV%" && "%CMAKE%" %CMAKE_ARGS%
+	echo.
+	"%EMSDK_ENV%" && "%CMAKE%" %CMAKE_ARGS%
 	
 	set TARGET=%APP%_APP
-	
-	if %debug% "%EMSDK_ENV%" && "%CMAKE%" -G "%EMSDK_GENERATOR%" %CMAKE_ARGS% -S%DKCMAKE% -B%CMAKE_TARGET_PATH%/%TARGET_OS%/Debug
-	if %release% "%EMSDK_ENV%" && "%CMAKE%" -G "%EMSDK_GENERATOR%" %CMAKE_ARGS% -S%DKCMAKE% -B%CMAKE_TARGET_PATH%/%TARGET_OS%/Release
 	goto build
 goto:eof
 
 :generate_win32
-		set COMPILER=MINGW32
+	set COMPILER=MINGW32
 		
-		::call:validate_msys2
-		call:cmake_eval "include('%DKIMPORTS%/msys2/DKMAKE.cmake')"
+	::call:validate_msys2
+	call:cmake_eval "include('%DKIMPORTS%/msys2/DKMAKE.cmake')"
 		
-		::call:validate_msys2
-        call:cmake_eval "include('%DKIMPORTS%/msys2/DKMAKE.cmake')" "MSYS2;MSYS2_GENERATOR" "-DMSYSTEM=MINGW32"
-        echo MSYS2 = %MSYS2%
-        echo MSYS2_GENERATOR = %MSYS2_GENERATOR%
+	::call:validate_msys2
+    call:cmake_eval "include('%DKIMPORTS%/msys2/DKMAKE.cmake')" "MSYS2;MSYS2_GENERATOR" "-DMSYSTEM=MINGW32"
+    echo MSYS2 = %MSYS2%
+    echo MSYS2_GENERATOR = %MSYS2_GENERATOR%
 		
-		::call:validate_cmake
-        call:cmake_eval "include('%DKIMPORTS%/cmake/DKMAKE.cmake')" "CMAKE_EXE" "-DMSYSTEM=MINGW32"
-        echo CMAKE_EXE = %CMAKE_EXE%
-                     
-        ::call:validate_gcc
-        call:cmake_eval "include('%DKIMPORTS%/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER" "-DMSYSTEM=MINGW32"
-        echo GCC_C_COMPILER = %GCC_C_COMPILER%
-        echo GCC_CXX_COMPILER = %GCC_CXX_COMPILER%
-        set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_C_COMPILER=%GCC_C_COMPILER%"
-        set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_COMPILER=%GCC_CXX_COMPILER%"
+	::call:validate_cmake
+    call:cmake_eval "include('%DKIMPORTS%/cmake/DKMAKE.cmake')" "CMAKE_EXE" "-DMSYSTEM=MINGW32"
+    echo CMAKE_EXE = %CMAKE_EXE%
                 
-        ::call:validate_make
-        call:cmake_eval "include('%DKIMPORTS%/make/DKMAKE.cmake')" "MAKE_PROGRAM" "-DMSYSTEM=MINGW32"
-		echo MAKE_PROGRAM = %MAKE_PROGRAM%
+    ::call:validate_gcc
+    call:cmake_eval "include('%DKIMPORTS%/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER" "-DMSYSTEM=MINGW32"
+    echo GCC_C_COMPILER = %GCC_C_COMPILER%
+    echo GCC_CXX_COMPILER = %GCC_CXX_COMPILER%
+    call:add_cmake_arg -DCMAKE_C_COMPILER=%GCC_C_COMPILER%
+    call:add_cmake_arg -DCMAKE_CXX_COMPILER=%GCC_CXX_COMPILER%
                 
-        call set DKPATH=%%DKPATH:^\=^/%%
-        %MSYS2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -lc "'%CMAKE_EXE%' -G '%MSYS2_GENERATOR%' -DMSYSTEM=MINGW32 %CMAKE_ARGS% -S%DKCMAKE% -B%DKPATH%/DKApps/%APP%/%TARGET_OS%/Debug"
-        set TARGET=%APP%_APP
-        goto build
+    ::call:validate_make
+    call:cmake_eval "include('%DKIMPORTS%/make/DKMAKE.cmake')" "MAKE_PROGRAM" "-DMSYSTEM=MINGW32"
+	echo MAKE_PROGRAM = %MAKE_PROGRAM%
+                
+	call:add_cmake_arg -G '%MSYS2_GENERATOR%'
+	call:add_cmake_arg -DMSYSTEM=MINGW32
+		
+    call set DKPATH=%%DKPATH:^\=^/%%
 
-	
+	echo.
+	echo ****** CMAKE COMMAND ******
+	echo %MSYS2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -lc "'%CMAKE_EXE%' %CMAKE_ARGS%"
+	echo.
+	%MSYS2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -lc "'%CMAKE_EXE%' %CMAKE_ARGS%"
+		
+    set TARGET=%APP%_APP
+    goto build
+    
     ::call:validate_visual_studio
-    ::set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_C_COMPILER=%VISUALSTUDIO_X86_CXX_COMPILER%"
-    ::set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_COMPILER=%VISUALSTUDIO_X86_CXX_COMPILER%"
-    ::"%CMAKE%" -G "%VISUALSTUDIO_GENERATOR%" -A Win32 %CMAKE_ARGS% "%DKCMAKE%"
+    ::call:add_cmake_arg -DCMAKE_C_COMPILER=%VISUALSTUDIO_X64_CXX_COMPILER%"
+    ::call:add_cmake_arg -DCMAKE_CXX_COMPILER=%VISUALSTUDIO_X64_CXX_COMPILER%"
+    ::"%CMAKE%" -G "%VISUALSTUDIO_GENERATOR%" -A x64 %CMAKE_ARGS% %DKCMAKE%
     ::set TARGET=%APP%_APP
 goto:eof
 
 :generate_win64
-		set COMPILER=MINGW64
+	set COMPILER=MINGW64
 		
-		::call:validate_msys2
-		call:cmake_eval "include('%DKIMPORTS%/msys2/DKMAKE.cmake')"
+	::call:validate_msys2
+	call:cmake_eval "include('%DKIMPORTS%/msys2/DKMAKE.cmake')"
 		
-		::call:validate_msys2
-        call:cmake_eval "include('%DKIMPORTS%/msys2/DKMAKE.cmake')" "MSYS2;MSYS2_GENERATOR" "-DMSYSTEM=MINGW64"
-        echo MSYS2 = %MSYS2%
-        echo MSYS2_GENERATOR = %MSYS2_GENERATOR%
+	::call:validate_msys2
+    call:cmake_eval "include('%DKIMPORTS%/msys2/DKMAKE.cmake')" "MSYS2;MSYS2_GENERATOR" "-DMSYSTEM=MINGW64"
+    echo MSYS2 = %MSYS2%
+    echo MSYS2_GENERATOR = %MSYS2_GENERATOR%
 		
-		::call:validate_cmake
-        call:cmake_eval "include('%DKIMPORTS%/cmake/DKMAKE.cmake')" "CMAKE_EXE" "-DMSYSTEM=MINGW64"
-        echo CMAKE_EXE = %CMAKE_EXE%
+	::call:validate_cmake
+    call:cmake_eval "include('%DKIMPORTS%/cmake/DKMAKE.cmake')" "CMAKE_EXE" "-DMSYSTEM=MINGW64"
+    echo CMAKE_EXE = %CMAKE_EXE%
                 
-        ::call:validate_gcc
-        call:cmake_eval "include('%DKIMPORTS%/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER" "-DMSYSTEM=MINGW64"
-        echo GCC_C_COMPILER = %GCC_C_COMPILER%
-        echo GCC_CXX_COMPILER = %GCC_CXX_COMPILER%
-        set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_C_COMPILER=%GCC_C_COMPILER%"
-        set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_COMPILER=%GCC_CXX_COMPILER%"
+    ::call:validate_gcc
+    call:cmake_eval "include('%DKIMPORTS%/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER" "-DMSYSTEM=MINGW64"
+    echo GCC_C_COMPILER = %GCC_C_COMPILER%
+    echo GCC_CXX_COMPILER = %GCC_CXX_COMPILER%
+    call:add_cmake_arg -DCMAKE_C_COMPILER=%GCC_C_COMPILER%
+    call:add_cmake_arg -DCMAKE_CXX_COMPILER=%GCC_CXX_COMPILER%
                 
-        ::call:validate_make
-        call:cmake_eval "include('%DKIMPORTS%/make/DKMAKE.cmake')" "MAKE_PROGRAM" "-DMSYSTEM=MINGW64"
-		echo MAKE_PROGRAM = %MAKE_PROGRAM%
+    ::call:validate_make
+    call:cmake_eval "include('%DKIMPORTS%/make/DKMAKE.cmake')" "MAKE_PROGRAM" "-DMSYSTEM=MINGW64"
+	echo MAKE_PROGRAM = %MAKE_PROGRAM%
                 
-        call set DKPATH=%%DKPATH:^\=^/%%
-        %MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' -G '%MSYS2_GENERATOR%' -DMSYSTEM=MINGW64 %CMAKE_ARGS% -S%DKCMAKE% -B%DKPATH%/DKApps/%APP%/%TARGET_OS%/Debug"
-        set TARGET=%APP%_APP
-        goto build
+	call:add_cmake_arg -G '%MSYS2_GENERATOR%'
+	call:add_cmake_arg -DMSYSTEM=MINGW64
+		
+    call set DKPATH=%%DKPATH:^\=^/%%
+
+	echo.
+	echo ****** CMAKE COMMAND ******
+	echo %MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' %CMAKE_ARGS%"
+	echo.
+	%MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' %CMAKE_ARGS%"
+		
+    set TARGET=%APP%_APP
+    goto build
     
     ::call:validate_visual_studio
-    ::set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_C_COMPILER=%VISUALSTUDIO_X64_CXX_COMPILER%"
-    ::set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_COMPILER=%VISUALSTUDIO_X64_CXX_COMPILER%"
+    ::call:add_cmake_arg -DCMAKE_C_COMPILER=%VISUALSTUDIO_X64_CXX_COMPILER%"
+    ::call:add_cmake_arg -DCMAKE_CXX_COMPILER=%VISUALSTUDIO_X64_CXX_COMPILER%"
     ::"%CMAKE%" -G "%VISUALSTUDIO_GENERATOR%" -A x64 %CMAKE_ARGS% %DKCMAKE%
     ::set TARGET=%APP%_APP
 goto:eof
 
 
-:append_cmake_arg <arg>
-	set "CMAKE_ARGS=%CMAKE_ARGS% %*"
+:add_cmake_arg <arg>
+	if "%*" == "" echo ERROR: add_cmake_arg is empty! & goto:eof
+	echo %*
+	set CMAKE_ARGS=%CMAKE_ARGS% %* 
 goto:eof
 
 
 :cmake_generate
-	if defined CMAKE_GENERATOR set "CMAKE_ARGS=%CMAKE_ARGS% -G ^"%CMAKE_GENERATOR%^""
-	if defined CMAKE_GENERATOR_PLATFORM set "CMAKE_ARGS=%CMAKE_ARGS% -A %CMAKE_GENERATOR_PLATFORM%"
-	if defined CMAKE_MAKE_PROGRAM set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_MAKE_PROGRAM=%CMAKE_MAKE_PROGRAM%"
-	if defined CMAKE_TOOLCHAIN_FILE set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_TOOLCHAIN_FILE=%CMAKE_TOOLCHAIN_FILE%"
-	if defined CMAKE_CXX_FLAGS set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_FLAGS="%CMAKE_CXX_FLAGS%""
-	if defined CMAKE_ANDROID_STL_TYPE set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_ANDROID_STL_TYPE=%CMAKE_ANDROID_STL_TYPE%"
-	if defined CMAKE_SOURCE_DIR set "CMAKE_ARGS=%CMAKE_ARGS% -S=%CMAKE_SOURCE_DIR%"
-	if defined CMAKE_BINARY_DIR set "CMAKE_ARGS=%CMAKE_ARGS% -B=%CMAKE_BINARY_DIR%"
-	if defined CMAKE_ANDROID_ARCH_ABI set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_ANDROID_ARCH_ABI=%CMAKE_ANDROID_ARCH_ABI%"
-	if defined CMAKE_ANDROID_NDK set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_ANDROID_NDK=%CMAKE_ANDROID_NDK%"
+	::if "%1" NEQ "" set "prefix=%1 && " 
 	
 	echo.
 	echo ****** CMAKE COMMAND ******
@@ -578,9 +556,15 @@ goto:eof
 
 
 :end_message
-    echo:
-    echo ******* Done building %APP% - %TARGET_OS% - %TYPE% *******
-        
+    echo.
+    
+	TITLE DigitalKnob - Done Building %APP%_%TARGET_OS%_%TYPE% %DKLEVEL% . . .
+    echo.
+    echo ###########################################################        
+    echo ****** Done Building %APP% - %TARGET_OS% - %TYPE% - %DKLEVEL% ******
+    echo ###########################################################
+    echo.
+	
     set UPDATE=
     set APP=
     set TARGET_OS=
@@ -1148,14 +1132,6 @@ goto:eof
 	if %ERRORLEVEL% EQU 0 echo "%command% found" & goto:eof
 	echo "%command% NOT found"
 goto:eof
-
-:: command_exists <command> <result>
-:::command_exists
-::	set "command=%1"
-::	cmd /c "(help %command% > nul || exit 0) && where %command% > nul 2> nul"
-::	if %ERRORLEVEL% EQU 0 set "%2=1" & goto:eof
-::	set "%2=0"
-::goto:eof
 
 :: get_filename <path> <output_variable>
 :get_filename

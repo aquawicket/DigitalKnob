@@ -321,22 +321,17 @@ include_directories(${DKPLUGINS})
 if(WIN_32)
 	########################## CREATE ICONS ###############################
 	if(EXISTS ${DKPROJECT}/icons/icon.png)
-		if(IMAGEMAGICK_CONVERT)
-			dk_info("Building icons for ${APP_NAME} . . .")
-			dk_makeDirectory(${DKPROJECT}/icons/windows)
-			dk_executeProcess(${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 ${DKPROJECT}/icons/windows/icon.ico)
-			dk_makeDirectory(${DKPROJECT}/assets)
-			dk_copy(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico OVERWRITE)
-			dk_executeProcess(${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=16 ${DKPROJECT}/assets/favicon.ico)
-		endif()
+		dk_info("Building icons for ${APP_NAME} . . .")
+		dk_makeDirectory(${DKPROJECT}/icons/windows)
+		dk_createWindowsIcon(${DKPROJECT}/icons/icon.png ${DKPROJECT}/icons/windows/icon.ico)
+		dk_makeDirectory(${DKPROJECT}/assets)
+		dk_copy(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico OVERWRITE)
+		dk_createFavIcon(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/favicon.ico)
 	endif()
 	
 	################# BACKUP USERDATA / INJECT ASSETS #####################	
 	if(HAVE_DK)
-		## ASSETS ##
-		# Backup files and folders excluded from the package
 		dk_copy(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER OVERWRITE NOERROR)
-		# Remove excluded files and folders before packaging
 		file(REMOVE ${DKPROJECT}/assets/USER)
 		#Compress the assets, they will be included by resource.rc
 		dk_info("Creating assets.zip . . .")
@@ -359,6 +354,7 @@ if(WIN_32)
 		
 	####################### Create Executable Target ###################
 	if(HAVE_DK)
+		##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
 		dk_copy(${DKPLUGINS}/_DKIMPORT/win/resource.h ${DKPROJECT}/resource.h)
 		dk_copy(${DKPLUGINS}/_DKIMPORT/win/resource.rc ${DKPROJECT}/resource.rc)
 		file(GLOB_RECURSE resources_SRC 
@@ -375,8 +371,6 @@ if(WIN_32)
 		add_executable(${APP_NAME} ${App_SRC})
 	endif()
 	
-	target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
-	
 	########################## Add Dependencies ########################
 	if(INCLUDE_DKPLUGINS)
 		foreach(plugin ${dkdepend_list})
@@ -386,7 +380,17 @@ if(WIN_32)
 		endforeach()
 	endif()
 
-	##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
+	############# Link Libraries, Set Startup Project #################
+	if(MULTI_CONFIG)
+		target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${RELEASE_LIBS} ${LIBS})
+	else()
+		target_link_libraries(${APP_NAME} -static gcc stdc++ winpthread -dynamic)
+		if(DEBUG)
+			target_link_libraries(${APP_NAME} ${DEBUG_LIBS} ${LIBS})
+		elseif(RELEASE)
+			target_link_libraries(${APP_NAME} ${RELEASE_LIBS} ${LIBS})
+		endif()
+	endif()
 	
 	if(MSVC)
 		list(APPEND DEBUG_LINK_FLAGS /MANIFEST:NO)
@@ -452,15 +456,12 @@ endif(WIN_32)
 if(WIN_64)
 	########################## CREATE ICONS ###############################
 	if(EXISTS ${DKPROJECT}/icons/icon.png)
-		#dk_depend(imagemagick)
-		if(IMAGEMAGICK_CONVERT)
-			dk_info("Building icons for ${APP_NAME} . . .")
-			dk_makeDirectory(${DKPROJECT}/icons/windows)
-			dk_executeProcess(${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=256,128,64,48,32,16 ${DKPROJECT}/icons/windows/icon.ico)
-			dk_makeDirectory(${DKPROJECT}/assets)
-			dk_copy(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico OVERWRITE)
-			dk_executeProcess(${IMAGEMAGICK_CONVERT} ${DKPROJECT}/icons/icon.png -define icon:auto-resize=16 ${DKPROJECT}/assets/favicon.ico)
-		endif()
+		dk_info("Building icons for ${APP_NAME} . . .")
+		dk_makeDirectory(${DKPROJECT}/icons/windows)
+		dk_createWindowsIcon(${DKPROJECT}/icons/icon.png ${DKPROJECT}/icons/windows/icon.ico)
+		dk_makeDirectory(${DKPROJECT}/assets)
+		dk_copy(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico OVERWRITE)
+		dk_createFavIcon(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/favicon.ico)
 	endif()
 			
 	################# BACKUP USERDATA / INJECT ASSETS #####################
@@ -498,7 +499,6 @@ if(WIN_64)
 			${DKPROJECT}/icons/windows/*.rc)
 		list(APPEND App_SRC ${resources_SRC})
 	endif()
-	
 	
 	# https://stackoverflow.com/a/74491601
 	if(MSVC)

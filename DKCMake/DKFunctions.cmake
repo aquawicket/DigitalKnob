@@ -5044,12 +5044,47 @@ function(dk_resizeImage inpath width height outpath)
 		dk_error("outdir is invalid")
 	endif()
 	dk_makeDirectory(${outdir})
+	include("${DKIMPORTS}/imagemagick/DKMAKE.cmake")
 	if(IMAGEMAGICK_CONVERT)
 		dk_executeProcess(${IMAGEMAGICK_CONVERT} ${inpath} -resize ${width}x${height} ${outpath})
 	elseif(MAC_HOST)
 		dk_executeProcess(sips -z ${width} ${height} ${inpath} --out ${outpath})
 	else()
 		dk_warn("No method to resize images on this host OS")
+	endif()
+endfunction()
+
+
+###############################################################################
+# dk_createWindowsIcon()
+#
+#	@inpath		- Full path of the image file to use (.png)
+#	@outpath	- Full path of the output file to save to (.ico)
+#
+function(dk_createWindowsIcon inpath outpath)
+	DKDEBUGFUNC(${ARGV})
+	include("${DKIMPORTS}/imagemagick/DKMAKE.cmake")
+	if(IMAGEMAGICK_CONVERT)
+		dk_executeProcess(${IMAGEMAGICK_CONVERT} ${inpath} -define icon:auto-resize=256,128,64,48,32,16 ${outpath})
+	else()
+		dk_error("IMAGEMAGICK_CONVERT is invalid!")
+	endif()
+endfunction()
+
+
+###############################################################################
+# dk_createFavIcon()
+#
+#	@inpath		- Full path of the image file to use (.png)
+#	@outpath	- Full path of the output file to save to (.ico)
+#
+function(dk_createFavIcon inpath outpath)
+	DKDEBUGFUNC(${ARGV})
+	include("${DKIMPORTS}/imagemagick/DKMAKE.cmake")
+	if(IMAGEMAGICK_CONVERT)
+		dk_executeProcess(${IMAGEMAGICK_CONVERT} ${inpath} -define icon:auto-resize=16 ${outpath})
+	else()
+		dk_error("IMAGEMAGICK_CONVERT is invalid!")
 	endif()
 endfunction()
 

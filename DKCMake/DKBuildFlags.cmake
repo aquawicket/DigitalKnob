@@ -108,7 +108,6 @@ endif()
 LINUX_HOST_dk_depend(gcc)
 ANDROID_dk_depend(android-ndk)
 EMSCRIPTEN_dk_depend(emsdk)
-dk_depend(imagemagick)
 
 
 ### User Friendly Options ###
