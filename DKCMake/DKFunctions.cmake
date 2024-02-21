@@ -1945,9 +1945,9 @@ function(dk_setPath path)
 	#endif()	
 	
 	if(NOT EXISTS ${path})
-		dk_error("path:${path} does not exist.")
-		#dk_info("Creating directory: ${CURRENT_DIR})")
-		#dk_makeDirectory(${CURRENT_DIR})
+		dk_warn("path:${path} does not exist.")
+		dk_warn("Creating directory: ${path})")
+		dk_makeDirectory(${path})
 	endif()
 	
 	dk_set(CURRENT_DIR ${path})
