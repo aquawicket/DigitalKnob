@@ -390,7 +390,7 @@ goto:eof
 	set TARGET=main
 	
 	
-	call:call_cmake_with_args
+	call:cmake_generate
     
 	goto build
 goto:eof
@@ -497,7 +497,7 @@ goto:eof
 goto:eof
 
 
-:call_cmake_with_args
+:cmake_generate
 	if defined CMAKE_GENERATOR set "CMAKE_ARGS=%CMAKE_ARGS% -G ^"%CMAKE_GENERATOR%^""
 	if defined CMAKE_GENERATOR_PLATFORM set "CMAKE_ARGS=%CMAKE_ARGS% -A %CMAKE_GENERATOR_PLATFORM%"
 	if defined CMAKE_MAKE_PROGRAM set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_MAKE_PROGRAM=%CMAKE_MAKE_PROGRAM%"
