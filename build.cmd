@@ -111,7 +111,7 @@ goto:eof
         
     set choice=
     set /p "choice=Choose a selection: "
-	if "%choice%"=="0"  set APP=%_APP_% & set TARGET_OS=%_TARGET_OS_% & set TYPE=%_TYPE_%
+	if "%choice%"=="0"  set "APP=%_APP_%" & set "TARGET_OS=%_TARGET_OS_%" & set "TYPE=%_TYPE_%"
     if "%choice%"=="1"  call:git_update
     if "%choice%"=="2"  call:git_commit
     if "%choice%"=="3"  call:push_assets
@@ -1179,13 +1179,20 @@ goto:eof
 	echo reading cache...
 	set /a count = 0
 	for /f "tokens=*" %%a in (%DKPATH%\cache) do (
+		set a=%%a: =%
 		echo !count!: %%a
-		if !count! == 0 set _APP_=%%a
-		if !count! == 1 set _TARGET_OS_=%%a
-		if !count! == 2 set _TYPE_=%%a
-		if !count! == 3 set _LEVEL_=%%a
+		if !count! == 0 set "_APP_=%%a"
+		if !count! == 1 set "_TARGET_OS_=%%a"
+		if !count! == 2 set "_TYPE_=%%a"
+		if !count! == 3 set "_LEVEL_=%%a"
 		call set /a count += 1
 	)
+	
+	set _APP_=%_APP_: =%
+	set _TARGET_OS_=%_TARGET_OS_: =%
+	set _TYPE_=%_TYPE_: =%
+	set _LEVEL_=%_LEVEL_: =%
+	
 	::echo _APP_ = !_APP_!
 	::echo _TARGET_OS_ = !_TARGET_OS_!
 	::echo _TYPE_ = !_TYPE_!
