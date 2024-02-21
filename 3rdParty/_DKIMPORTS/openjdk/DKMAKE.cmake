@@ -23,6 +23,8 @@ if(MAC_HOST)
 		dk_command(sudo mv ${DKDOWNLOAD}/jdk-11.jdk /Library/Java/JavaVirtualMachines/)
 		dk_remove(${DKDOWNLOAD}/openjdk-11_osx-x64_bin.tar.gz)
 	endif()
+	
+	dk_command(java --version)
 endif()
 
 if(LINUX_HOST)
@@ -44,9 +46,11 @@ if(LINUX_HOST)
 		dk_command(${SUDO} apt update)
 		dk_command(${SUDO} apt -y install openjdk-11-jdk)
 	endif()
+	
+	dk_command(java --version)
 endif()
 
-dk_command(java --version)
+
 
 ### LINK ###
 #dk_include(${OPENJDK_11}/)	

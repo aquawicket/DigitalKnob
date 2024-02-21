@@ -315,6 +315,51 @@ goto:eof
         
 goto:eof
 
+:generate_android32
+    ::call:validate_visual_studio
+    call:validate_android_ndk
+    call:validate_openjdk
+    call %OPENJDK%\registerJDK.cmd
+    "%CMAKE%" -G "%VISUALSTUDIO_GENERATOR%" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID_NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_TOOLCHAIN_FILE% -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%CMAKE_TARGET_PATH%/%TARGET_OS%
+    set TARGET=main
+	goto build
+goto:eof
+
+:generate_android64
+    ::call:validate_visual_studio
+    call:validate_android_ndk
+    call:validate_openjdk
+    call %OPENJDK%\registerJDK.cmd
+	
+	::set "GENERATOR=%VISUALSTUDIO_GENERATOR%"
+	::set "GENERATOR_PLATFORM=-A ARM64"
+	
+	set "GENERATOR=Unix Makefiles"
+	
+    "%CMAKE%" -G "%GENERATOR%" "%GENERATOR_PLATFORM%" -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID_NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_TOOLCHAIN_FILE% -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%CMAKE_TARGET_PATH%/%TARGET_OS%
+    set TARGET=main
+	goto build
+goto:eof
+
+:generate_emscripten
+    call:validate_emscripten
+	set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_TOOLCHAIN_FILE=%EMSDK_TOOLCHAIN_FILE%"
+	set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_C_COMPILER=%EMSDK_C_COMPILER%"
+	set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_COMPILER=%EMSDK_CXX_COMPILER%"
+	
+	set "debug=0==1"
+	set "release=0==1"
+    if %TYPE%==Debug set "debug=1==1"
+	if %TYPE%==Release set "release=1==1"
+	if %TYPE%==All set "debug=1==1" & set "release=1==1"
+	
+	set TARGET=%APP%_APP
+	
+	if %debug% "%EMSDK_ENV%" && "%CMAKE%" -G "%EMSDK_GENERATOR%" %CMAKE_ARGS% -S%DKCMAKE% -B%CMAKE_TARGET_PATH%/%TARGET_OS%/Debug
+	if %release% "%EMSDK_ENV%" && "%CMAKE%" -G "%EMSDK_GENERATOR%" %CMAKE_ARGS% -S%DKCMAKE% -B%CMAKE_TARGET_PATH%/%TARGET_OS%/Release
+	goto build
+goto:eof
+
 :generate_win32
 		set COMPILER=MINGW32
 		
@@ -392,43 +437,6 @@ goto:eof
     ::set TARGET=%APP%_APP
 goto:eof
 
-:generate_android32
-    ::call:validate_visual_studio
-    call:validate_android_ndk
-    call:validate_openjdk
-    call %OPENJDK%\registerJDK.cmd
-    "%CMAKE%" -G "%VISUALSTUDIO_GENERATOR%" -A ARM -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID_NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_TOOLCHAIN_FILE% -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%CMAKE_TARGET_PATH%/%TARGET_OS%
-    set TARGET=main
-goto:eof
-
-:generate_android64
-    ::call:validate_visual_studio
-    call:validate_android_ndk
-    call:validate_openjdk
-    call %OPENJDK%\registerJDK.cmd
-    "%CMAKE%" -G "%VISUALSTUDIO_GENERATOR%" -A ARM64 -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=%ANDROID_API% -DANDROID_NDK=%ANDROID_NDK% -DCMAKE_TOOLCHAIN_FILE=%ANDROID_TOOLCHAIN_FILE% -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -S%DKCMAKE% -B%CMAKE_TARGET_PATH%/%TARGET_OS%
-    set TARGET=main
-goto:eof
-
-
-
-:generate_emscripten
-    call:validate_emscripten
-	set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_TOOLCHAIN_FILE=%EMSDK_TOOLCHAIN_FILE%"
-	set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_C_COMPILER=%EMSDK_C_COMPILER%"
-	set "CMAKE_ARGS=%CMAKE_ARGS% -DCMAKE_CXX_COMPILER=%EMSDK_CXX_COMPILER%"
-	
-	set "debug=0==1"
-	set "release=0==1"
-    if %TYPE%==Debug set "debug=1==1"
-	if %TYPE%==Release set "release=1==1"
-	if %TYPE%==All set "debug=1==1" & set "release=1==1"
-	
-	set TARGET=%APP%_APP
-	
-	if %debug% "%EMSDK_ENV%" && "%CMAKE%" -G "%EMSDK_GENERATOR%" %CMAKE_ARGS% -S%DKCMAKE% -B%CMAKE_TARGET_PATH%/%TARGET_OS%/Debug
-	if %release% "%EMSDK_ENV%" && "%CMAKE%" -G "%EMSDK_GENERATOR%" %CMAKE_ARGS% -S%DKCMAKE% -B%CMAKE_TARGET_PATH%/%TARGET_OS%/Release
-goto:eof
 
 
 :build
