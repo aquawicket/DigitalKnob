@@ -24,11 +24,13 @@ if(NOT EXISTS ${ANDROID_SDK})
 	dk_setEnv("ANDROID_HOME" ${ANDROID_SDK})
 	dk_setEnv("VS_AndroidHome" ${ANDROID_SDK})
 
+	# FIXME:  more work to be done on killing tasks
+	#if(WIN_HOST)
+	#	dk_killProcess(java.exe NOASSERT)
+	#	dk_killProcess(adb.exe NOASSERT)
+	#endif()
+	
 	### SignLicenses ###
-	if(WIN_HOST)
-		dk_killProcess(java.exe NOASSERT)
-		dk_killProcess(adb.exe NOASSERT)
-	endif()
 	WIN_HOST_dk_executeProcess(call "${OPENJDK_8U41}/registerJDK.cmd")
 	WIN_HOST_dk_executeProcess("${SDKMANAGER_BAT} --licenses")
 	#WIN_HOST_dk_executeProcess(call "${OPENJDK}/registerJDK.cmd")
