@@ -21,7 +21,7 @@ if(MSYSTEM)
 	elseif(CLANGARM64)
 		dk_command("pacman -S mingw-w64-clang-aarch64-pearl --needed --noconfirm")	# CLANGARM64
 	elseif(MINGW32)
-		dk_command("pacman -S mingw-w64-i686-pearl --needed --noconfirm")			# MINGW32
+		dk_command("pacman -S mingw-w64-i686-perl --needed --noconfirm")			# MINGW32
 	elseif(MINGW64)
 		dk_command("pacman -S mingw-w64-x86_64-pearl --needed --noconfirm")			# MINGW64
 	elseif(UCRT64)
@@ -30,7 +30,7 @@ if(MSYSTEM)
 	
 	dk_set(PEARL_EXE pearl)
 	dk_debug("PEARL_EXE = ${PEARL_EXE}")
-	dk_command(${PEARL_EXE} --version)
+	#dk_command(${PEARL_EXE} --version)
 	
 	return()
 endif()
