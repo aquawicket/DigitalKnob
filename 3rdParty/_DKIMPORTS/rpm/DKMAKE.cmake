@@ -1,6 +1,6 @@
 # https://www.thegeekdiary.com/rpm-command-not-found
 
-if(NOT LINUX_HOST)
+if(NOT LINUX_HOST OR ANDROID_HOST)
 	dk_undepend(rpm)
 	dk_return()
 endif()
