@@ -28,24 +28,29 @@ endif()
 
 
 ### LINK ###
-dk_define					(CURL_STATICLIB)
-dk_include					(${CURL}/include 								CURL_INCLUDE_DIR)
-dk_include					(${CURL}/${OS}/include/curl						CURL_INCLUDE_DIR2)
-DEBUG_dk_include			(${CURL}/${OS}/${DEBUG_DIR}/include/curl)
-RELEASE_dk_include			(${CURL}/${OS}/${RELEASE_DIR}/include/curl)
+dk_define				(CURL_STATICLIB)
+dk_include				(${CURL}/include 								CURL_INCLUDE_DIR)
+dk_include				(${CURL}/${OS}/include/curl						CURL_INCLUDE_DIR2)
+DEBUG_dk_include		(${CURL}/${OS}/${DEBUG_DIR}/include/curl		CURL_INCLUDE_DIR2)
+RELEASE_dk_include		(${CURL}/${OS}/${RELEASE_DIR}/include/curl		CURL_INCLUDE_DIR2)
+
+if(MULTI_CONFIG)
+	set(CURL_DEBUG_DIR ${CURL}/${OS}/lib/${DEBUG_DIR})
+	set(CURL_RELEASE_DIR ${CURL}/${OS}/lib/${RELEASE_DIR})
+else()
+	set(CURL_DEBUG_DIR ${CURL}/${OS}/${DEBUG_DIR}/lib)
+	set(CURL_RELEASE_DIR ${CURL}/${OS}/${RELEASE_DIR}/lib)
+endif()
 
 if(MSVC)
-	ANDROID_dk_libDebug		(${CURL}/${OS}/lib/${DEBUG_DIR}/libcurl.a		CURL_LIBRARY_DEBUG)
-	ANDROID_dk_libRelease	(${CURL}/${OS}/lib/${RELEASE_DIR}/libcurl.a		CURL_LIBRARY_RELEASE)
-	WIN_dk_libDebug			(${CURL}/${OS}/lib/${DEBUG_DIR}/libcurl.lib		CURL_LIBRARY_DEBUG)
-	WIN_dk_libRelease		(${CURL}/${OS}/lib/${RELEASE_DIR}/libcurl.lib	CURL_LIBRARY_RELEASE)
-elseif(NOT ANDROID)
-	dk_libDebug				(${CURL}/${OS}/lib/${DEBUG_DIR}/libcurl-d.a		CURL_LIBRARY_DEBUG)
-	dk_libRelease			(${CURL}/${OS}/lib/${RELEASE_DIR}/libcurl.a		CURL_LIBRARY_RELEASE)
-else()
-	dk_libDebug				(${CURL}/${OS}/${DEBUG_DIR}/lib/libcurl.a		CURL_LIBRARY_DEBUG)
-	dk_libRelease			(${CURL}/${OS}/${RELEASE_DIR}/lib/libcurl.a		CURL_LIBRARY_RELEASE)
+	WIN_dk_libDebug		(${CURL_DEBUG_DIR}/libcurl.lib					CURL_LIBRARY_DEBUG)
+	WIN_dk_libRelease	(${CURL_RELEASE_DIR}/libcurl.lib				CURL_LIBRARY_RELEASE)
+else()	
+	dk_libDebug			(${CURL_DEBUG_DIR}/libcurl-d.a					CURL_LIBRARY_DEBUG)
+	dk_libRelease		(${CURL_RELEASE_DIR}/libcurl.a					CURL_LIBRARY_RELEASE)
 endif()
+
+
 
 
 ### 3RDPARTY LINK ###
