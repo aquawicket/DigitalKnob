@@ -43,7 +43,7 @@ elseif(APPLE)
 	dk_libDebug				(${CURL}/${OS}/lib/${DEBUG_DIR}/libcurl-d.a		CURL_LIBRARY_DEBUG)
 	dk_libRelease			(${CURL}/${OS}/lib/${RELEASE_DIR}/libcurl.a		CURL_LIBRARY_RELEASE)
 else()
-	dk_libDebug				(${CURL}/${OS}/${DEBUG_DIR}/lib/libcurl-d.a		CURL_LIBRARY_DEBUG)
+	dk_libDebug				(${CURL}/${OS}/${DEBUG_DIR}/lib/libcurl.a		CURL_LIBRARY_DEBUG)
 	dk_libRelease			(${CURL}/${OS}/${RELEASE_DIR}/lib/libcurl.a		CURL_LIBRARY_RELEASE)
 endif()
 
