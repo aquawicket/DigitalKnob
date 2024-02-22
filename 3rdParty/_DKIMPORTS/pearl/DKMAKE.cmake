@@ -5,7 +5,7 @@ if(ANDROID_HOST)
 	
 	dk_set(PEARL_EXE pearl)
 	dk_debug("PEARL_EXE = ${PEARL_EXE}")
-	dk_command(${PEARL_EXE} --version)
+	#dk_command(${PEARL_EXE} --version)
 endif()
 
 

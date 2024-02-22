@@ -11,7 +11,7 @@ dk_depend(dl)
 dk_depend(pthread)
 dk_depend(ws2_32.lib)
 dk_depend(crypt32.lib)
-ANDROID_HOST_dk_depend(pearl)
+dk_depend(pearl)
 
 ### IMPORT ###
 #if(MSVC)
@@ -73,12 +73,12 @@ endif()
 ### GENERATE ###
 ### COMPILE ###
 DEBUG_dk_setPath(${OPENSSL}/${OS}/${DEBUG_DIR})
-ANDROID32_DEBUG_dk_bash(
+ANDROID32_DEBUG_dk_queueBash(
 	"export ANDROID_NDK_ROOT=${ANDROID_NDK}\n"
 	"export PATH=${ANDROID_NDK}/toolchains/llvm/prebuilt/linux-aarch64/bin:$PATH\n"
 	#"export PATH=${ANDROID_NDK}/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-aarch64/bin:$PATH\n"
 	"${OPENSSL}/Configure no-shared --debug android-arm -D__ANDROID_API__=31")
-ANDROID64_DEBUG_dk_bash(
+ANDROID64_DEBUG_dk_queueBash(
 	"export ANDROID_NDK_ROOT=${ANDROID_NDK};"
 	"export PATH=${ANDROID_NDK}/toolchains/llvm/prebuilt/linux-aarch64/bin:$PATH;"
 	#"export PATH=${ANDROID_NDK}/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/bin:$PATH;"
@@ -98,7 +98,7 @@ endif()
 if(NOT ANDROID AND NOT MSVC)
 	DEBUG_dk_build(${OPENSSL})
 else()
-ANDROID_DEBUG_dk_bash(
+ANDROID_DEBUG_queueBash(
 	"export ANDROID_NDK_ROOT=${ANDROID_NDK}"
 	"export PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/linux-aarch64/bin:$PATH"
 	#"export PATH=$ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/bin:$PATH"
@@ -107,12 +107,12 @@ endif()
 
 
 RELEASE_dk_setPath(${OPENSSL}/${OS}/${RELEASE_DIR})
-ANDROID32_RELEASE_dk_bash(
+ANDROID32_RELEASE_queueBash(
 	"export ANDROID_NDK_ROOT=${ANDROID_NDK}\n"
 	"export PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/windows-x86_64/bin:$PATH\n"
 	#"export PATH=$ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/bin:$PATH\n"
 	"../../Configure no-shared --release android-arm -D__ANDROID_API__=${ANDROID_API}")
-ANDROID64_RELEASE_dk_bash(
+ANDROID64_RELEASE_queueBash(
 	"export ANDROID_NDK_ROOT=${ANDROID_NDK}\n"
 	"export PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/windows-x86_64/bin:$PATH\n"
 	#"export PATH=$ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/bin:$PATH\n"
