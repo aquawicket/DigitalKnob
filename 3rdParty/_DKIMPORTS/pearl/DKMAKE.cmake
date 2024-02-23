@@ -3,8 +3,13 @@
 if(ANDROID_HOST)
 	dk_command(pkg install perl)
 	
-	dk_set(PEARL_EXE pearl)
-	dk_debug("PEARL_EXE = ${PEARL_EXE}")
+	find_program(PEARL_EXE pearl)
+	dk_debug(${PEARL_EXE})
+	
+	if(NOT PEARL_EXE)
+		dk_warn("pearl not found!")
+	endif()
+	
 	#dk_command(${PEARL_EXE} --version)
 endif()
 

@@ -93,7 +93,7 @@ goto:eof
     set UPDATE=
         
     echo.
-	if "%_APP_%" NEQ "" if "%_TARGT_OS_%" NEQ "" if "%_TYPE_%" NEQ "" echo  0) Repeat cache %_APP_% - %_TARGET_OS_% - %_TYPE_%
+	if "%_APP_%" NEQ "" if "%_TARGET_OS_%" NEQ "" if "%_TYPE_%" NEQ "" echo  0) Repeat cache [%_APP_% - %_TARGET_OS_% - %_TYPE_%]
     echo  1) Git Update
     echo  2) Git Commit
     echo  3) Push assets
@@ -1180,7 +1180,7 @@ goto:eof
 	set /a count = 0
 	for /f "tokens=*" %%a in (%DKPATH%\cache) do (
 		set a=%%a: =%
-		echo !count!: %%a
+		::echo !count!: %%a
 		if !count! == 0 set "_APP_=%%a"
 		if !count! == 1 set "_TARGET_OS_=%%a"
 		if !count! == 2 set "_TYPE_=%%a"
