@@ -112,15 +112,15 @@ function Pick_Update() {
 	#read_cache
 	
 	echo ""	
-    echo "1) Git Update"
-    echo "2) Git Commit"
-    echo "3) Push assets"
-    echo "4) Pull assets"
-    echo "5) Reset Apps"
-    echo "6) Reset Plugins"
-    echo "7) Reset 3rdParty"
-    echo "8) Reset All"
-    echo "9) Clear Screen"
+    echo " 1) Git Update"
+    echo " 2) Git Commit"
+    echo " 3) Push assets"
+    echo " 4) Pull assets"
+    echo " 5) Reset Apps"
+    echo " 6) Reset Plugins"
+    echo " 7) Reset 3rdParty"
+    echo " 8) Reset All"
+    echo " 9) Clear Screen"
     echo "10) Clear cmake cache and .tmp files"
     echo "11) Reload"
     echo "12) Exit"
@@ -128,218 +128,93 @@ function Pick_Update() {
     echo " Press Enter To Skip"
 	
 	read input
-	
 	if [ "$input" == "1" ]; then
 		git_update
-		return 0
 	elif [ "$input" == "2" ]; then
 		git_commit
-		return 0
 	elif [ "$input" == "3" ]; then
 		push_assets
-		return 0
 	elif [ "$input" == "4" ]; then
 		pull_assets
-		return 0
 	elif [ "$input" == "5" ]; then
 		reset_apps
-		return 0
 	elif [ "$input" == "6" ]; then
 		reset_plugins
-		return 0
 	elif [ "$input" == "7" ]; then
 		reset_3rdpaty
-		return 0
 	elif [ "$input" == "8" ]; then
 		reset_all
-		return 0
 	elif [ "$input" == "9" ]; then
 		clear
-		return 0
 	elif [ "$input" == "10" ]; then
 		clear_cmake_cache
 		delete_temp_files
-		return 0
 	elif [ "$input" == "11" ]; then
 		reload
-		return 0
 	elif [ "$input" == "12" ]; then
 		exit 0
-		return 0
 	elif [ "$input" == "" ]; then
 		UPDATE=1
-		return 0
 	else
 		echo "invalid selection"
 	fi
-	return 0
-	
-	# https://unix.stackexchange.com/a/293605
-	#COLUMNS=1
-	#S3='Choose a selection: '
-	#options=(
-	#	"Git Update" 
-	#	"Git Commit" 
-	#	"Push assets" 
-	#	"Pull assets"
-	#	"Reset Apps"
-	#	"Reset Plugins"
-	#	"Reset 3rdParty"
-	#	"Reset All"
-	#	"Clear Screen"
-	#	"Clear cmake cache and .tmp files"
-	#	"Reload"
-	#	"Exit")
-	#select opt in "${options[@]}"
-	#do
-	#	case $opt in
-	#		"Git Update")
-	#			git_update
-	#			break
-	#			;;
-	#		"Git Commit")
-	#			git_commit
-	#			break
-	#			;;
-	#		"Push assets")
-	#			push_assets
-	#			break
-	#			;;
-	#		"Pull assets")
-	#			pull_assets
-	#			break
-	#			;;
-	#		"Reset Apps")
-	#			reset_apps
-	#			break
-	#			;;
-	#		"Reset Plugins")
-	#			reset_plugins
-	#			break
-	#			;;
-	#		"Reset 3rdParty")
-	#			reset_3rdpaty
-	#			break
-	#			;;
-	#		"Reset All")
-	#			reset_all
-	#			break
-	#			;;
-	#		"Clear Screen")
-	#			clear
-	#			break
-	#			;;
-	#		"Clear cmake cache and .tmp files")
-	#			clear_cmake_cache
-	#			delete_temp_files
-	#			break
-	#			;;
-	#		"Reload")
-	#			reload
-	#			break
-	#			;;
-	#		"Exit")
-	#			exit 0
-	#			break
-	#			;;
-	#		*)
-	#			UPDATE=1
-	#			break
-	#			;;
-	#	esac
-	#done
 }
 
 ###### Pick_App ######
 function Pick_App() {
-	echo ""
 	
-	# https://unix.stackexchange.com/a/293605
-	COLUMNS=1
-	PS3='Choose a selection: '
-	options=(
-		"HelloWorld" 
-		"DKCore" 
-		"DKJavascript" 
-		"DKBuilder" 
-		"DKSDL" 
-		"DKSDLRml" 
-		"DKDomTest" 
-		"DKTestAll"
-		"Enter_manually"
-		"Clear Screen"
-		"Go Back"
-		"Reload"
-		"Exit")
-	select opt in "${options[@]}"
-	do
-		case $opt in
-			"HelloWorld")
-				APP="HelloWorld"
-				break
-				;;
-			"DKCore")
-				APP="DKCore"
-				break
-				;;
-			"DKJavascript")
-				APP="DKJavascript"
-				break
-				;;
-			"DKBuilder")
-				APP="DKBuilder"
-				break
-				;;
-			"DKSDL")
-				APP="DKSDL"
-				break
-				;;
-			"DKSDLRml")
-				APP="DKSDLRml"
-				break
-				;;
-			"DKDomTest")
-				APP="DKDomTest"
-				break
-				;;
-			"DKTestAll")
-				APP="DKTestAll"
-				break
-				;;
-			"Enter_manually")
-				enter_manually
-				break
-				;;				
-			"Clear Screen")
-				clear
-				break
-				;;
-			"Go Back")
-				UPDATE=
-				break
-				;;
-			"Reload")
-				dk_call reload
-				break
-				;;
-			"Exit")
-				exit 0
-				break
-				;;
-			*) 
-				echo "invalid option: $opt"
-				APP=
-				break
-				;;
-		esac
-	done
+	echo ""	
+    echo " 1) HelloWorld"
+    echo " 2) DKCore"
+    echo " 3) DKJavascript"
+    echo " 4) DKBuilder"
+    echo " 5) DKSDL"
+    echo " 6) DKSDLRml"
+    echo " 7) DKDomTest"
+    echo " 8) DKTestAll"
+    echo " 9) Enter Manually"
+    echo "10) Clear Screen"
+    echo "11) Go Back"
+    echo "12) Reload"
+	echo "13) Exit"
+    echo "" 
+	
+	read input
+	if [ "$input" == "1" ]; then
+		APP="HelloWorld"
+	elif [ "$input" == "2" ]; then
+		APP="DKCore"
+	elif [ "$input" == "3" ]; then
+		APP="DKJavascript"
+	elif [ "$input" == "4" ]; then
+		APP="DKBuilder"
+	elif [ "$input" == "5" ]; then
+		APP="DKSDL"
+	elif [ "$input" == "6" ]; then
+		APP="DKSDLRml"
+	elif [ "$input" == "7" ]; then
+		APP="DKDomTest"
+	elif [ "$input" == "8" ]; then
+		APP="DKTestAll"
+	elif [ "$input" == "9" ]; then
+		enter_manually
+	elif [ "$input" == "10" ]; then
+		clear
+	elif [ "$input" == "11" ]; then
+		UPDATE=
+	elif [ "$input" == "12" ]; then
+		dk_call reload
+	elif [ "$input" == "13" ]; then
+		exit 0
+	else
+		echo "invalid selection"
+	fi
 }
 
 ###### Pick_OS ######
 function Pick_OS() {
-	echo ""
 	# TODO
-	#  1) Linux (x86_64)
+	#  1) Linux (x86_64)		<-- the HOST OS
 
 	# 2) Android (arm32)
 	# 3) Android (arm64)
@@ -397,6 +272,9 @@ function Pick_OS() {
 		echo "UNKNOWN OS TYPE ($OSTYPE)"
 		options=("Exit")
 	fi
+	
+	echo ""
+	
 	select opt in "${options[@]}"
 	do
 		case $opt in
