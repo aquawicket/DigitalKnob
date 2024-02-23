@@ -108,6 +108,9 @@ function main() {
 
 ###### Pick_Update ######
 function Pick_Update() {
+	
+	read_cache
+	
 	echo ""
 	
 	# https://unix.stackexchange.com/a/293605
@@ -1289,10 +1292,10 @@ function enter_manually() {
 
 function create_cache() {
 	echo "creating cache..."
-	echo "APP = $APP"
-	echo "TARGET_OS = $TARGET_OS"
-	echo "TYPE = $TYPE"
-	echo "LEVEL = $LEVEL"
+	#echo "APP = $APP"
+	#echo "TARGET_OS = $TARGET_OS"
+	#echo "TYPE = $TYPE"
+	#echo "LEVEL = $LEVEL"
 	
 	# write variable values line by line
 	echo "$APP">"$DKPATH/cache"
@@ -1303,9 +1306,29 @@ function create_cache() {
 
 function read_cache() {
 	echo "reading cache..."
+	count=0
 	while read p; do
-	echo "$p"
+		#echo "$count: $p"
+		if [ $count == 0 ]; then 
+			_APP_="$p"
+		fi
+		if [ $count == 1 ]; then
+			_TARGET_OS_="$p"
+		fi
+		if [ $count == 2 ]; then
+			_TYPE_="$p"
+		fi
+		#if [ $count == 3 ]; then
+		#	_LEVEL_="$p"
+		#fi
+
+		(( count++ ))
 	done < $DKPATH/cache
+	
+	#echo "_APP_ = $_APP_"
+	#echo "_TARGET_OS_ = $_TARGET_OS_"
+	#echo "_TYPE_ = $_TYPE_"
+	#echo "_LEVEL_ = $_LEVEL_"
 }
 
 
