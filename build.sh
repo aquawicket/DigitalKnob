@@ -35,7 +35,8 @@ function main() {
 
 	validate_sudo
 
-	#exec |& tee file.log
+	# log to stdout and file
+	#exec |& tee file.log 
 
 	# UNIX Environment Variables
 	print_var SHLVL			# https://stackoverflow.com/a/4511483/688352
