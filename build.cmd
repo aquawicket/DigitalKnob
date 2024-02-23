@@ -93,7 +93,7 @@ goto:eof
     set UPDATE=
         
     echo.
-	echo  0) Repeat cache %_APP_%-%_TARGET_OS_%-%_TYPE_%
+	if "%_APP_%" NEQ "" if "%_TARGT_OS_%" NEQ "" if "%_TYPE_%" NEQ "" echo  0) Repeat cache %_APP_% - %_TARGET_OS_% - %_TYPE_%
     echo  1) Git Update
     echo  2) Git Commit
     echo  3) Push assets
