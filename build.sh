@@ -1198,7 +1198,7 @@ function git_commit() {
 	fi
 	# git config --global user.email "aquawicket"
 	USER_NAME=$($GIT config --global user.name)
-	if [[ -n "USER_NAME" ]]; then
+	if [[ -z "USER_NAME" ]]; then
 		$GIT config --global user.name "$GIT_USER_NAME"
 		echo "git user.name '$GIT_USER_NAME' saved"
 	fi
