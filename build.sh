@@ -38,8 +38,6 @@ function main() {
 	#exec |& tee file.log
 
 	# UNIX Environment Variables
-	echo ""
-	print_var TESTIES
 	print_var SHLVL			# https://stackoverflow.com/a/4511483/688352
 	print_var HOSTNAME
 	print_var HOSTTYPE

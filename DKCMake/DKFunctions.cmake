@@ -1855,15 +1855,12 @@ function(dk_executeProcess commands) #NOASSERT #NOECHO
 	
 	set(commands ${ARGV})
 	
-	#FIXME: This issue seems to be pretty platform dependant. 
-	#I like to be able to run command in both string a list format
-	#So we'll continue to narrow this down.
-	#if(NOT MSYS AND NOT MINGW AND NOT MSYSTEM)
-	#	string(REPLACE ";" " " commands "${commands}")
-	#endif()
+	### DO NOT DO THIS ###
+	#string(REPLACE ";" " " ARGV "${ARGV}")
 
 	if(NOT ${NOECHO})
-		dk_info("\n${CLR}${magenta} dk_executeProcess> ${commands}\n")
+		string(REPLACE ";" " " print_commands "${ARGV}")
+		dk_info("\n${CLR}${magenta} dk_executeProcess> ${print_commands}\n")
 	endif()
 
 	list(REMOVE_ITEM commands NOASSERT)
@@ -3835,20 +3832,20 @@ function(dk_printSettings)
 	dk_buildLog("CMAKE_HOST_SYSTEM_PROCESSOR:   ${CMAKE_HOST_SYSTEM_PROCESSOR}")
 	dk_buildLog("CMAKE_SYSTEM:                  ${CMAKE_SYSTEM}")
 	dk_buildLog("CMAKE_SYSTEM_NAME:             ${CMAKE_SYSTEM_NAME}")
-	dk_buildLog("MULTI_CONFIG:            		${MULTI_CONFIG}")
-	dk_buildLog("SINGLE_CONFIG:            		${SINGLE_CONFIG}")
+	dk_buildLog("MULTI_CONFIG:                  ${MULTI_CONFIG}")
+	dk_buildLog("SINGLE_CONFIG:                 ${SINGLE_CONFIG}")
 	execute_process(COMMAND uname OUTPUT_VARIABLE UNAME)
 	dk_buildLog("UNAME:                         ${UNAME}")
 	dk_buildLog("MINGW:                         ${MINGW}")
 	dk_buildLog("MSYS:                          ${MSYS}")
 	dk_buildLog("MSVC:                          ${MSVC}")
-	dk_buildLog("VISUAL_STUDIO:					${VISUAL_STUDIO}")
+	dk_buildLog("VISUAL_STUDIO:                 ${VISUAL_STUDIO}")
 	dk_buildLog("XCODE:                         ${XCODE}")
 	dk_buildLog("CMAKE_LIBRARY_ARCHITECTURE:    ${CMAKE_LIBRARY_ARCHITECTURE}")
 	dk_buildLog("CMAKE_CPP_COMPILER_ID:         ${CMAKE_CPP_COMPILER_ID}")
 	dk_buildLog("CMAKE_CXX_COMPILER_ID:         ${CMAKE_CXX_COMPILER_ID}")
 	dk_buildLog("ENV(USERNAME):                 $ENV{USERNAME}")
-	dk_buildLog("ENV(USER):	    				$ENV{USER}")
+	dk_buildLog("ENV(USER):                     $ENV{USER}")
 	dk_buildLog("DIGITALKNOB:                   ${DIGITALKNOB}")
 	dk_buildLog("3RDPARTY:                      ${3RDPARTY}")
 	dk_buildLog("DKPLUGINS:                     ${DKPLUGINS}")
