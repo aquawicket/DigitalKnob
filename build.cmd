@@ -1192,12 +1192,6 @@ goto:eof
 	set _TARGET_OS_=%_TARGET_OS_: =%
 	set _TYPE_=%_TYPE_: =%
 	set _LEVEL_=%_LEVEL_: =%
-	
-	::echo _APP_ = !_APP_!
-	::echo _TARGET_OS_ = !_TARGET_OS_!
-	::echo _TYPE_ = !_TYPE_!
-	::echo _LEVEL_ = !_LEVEL_!
-	::SETLOCAL DisableDelayedExpansion
 goto:eof
 
 

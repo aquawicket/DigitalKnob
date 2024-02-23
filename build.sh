@@ -1287,6 +1287,27 @@ function enter_manually() {
 	echo "TARGET_PATH = $TARGET_PATH"
 }
 
+function create_cache() {
+	echo "creating cache..."
+	echo "APP = $APP"
+	echo "TARGET_OS = $TARGET_OS"
+	echo "TYPE = $TYPE"
+	echo "LEVEL = $LEVEL"
+	
+	# write variable values line by line
+	echo "$APP">"$DKPATH/cache"
+	echo "$TARGET_OS">>"$DKPATH/cache"
+	echo "$TYPE">>"$DKPATH/cache"
+	#echo "$LEVEL">>"$DKPATH/cache"
+}
+
+function read_cache() {
+	echo "reading cache..."
+	while read p; do
+	echo "$p"
+	done < $DKPATH/cache
+}
+
 
 main "$@"
 

@@ -1143,10 +1143,6 @@ if(ANDROID)
 			UNIX_HOST_dk_executeProcess(chmod 777 ${DKPROJECT}/${OS}/Release/gradlew)
 			UNIX_HOST_dk_executeProcess(sed -i -e "s/\r$//" "${DKPROJECT}/${OS}/Release/gradlew")
 		endif()
-
-		####### Append -frtti to C/CXX Flags ##############################
-		#dk_set(CMAKE_C_FLAGS ${CMAKE_C_FLAGS} -frtti)
-		#dk_set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} -frtti)
 		
 		# https://stackoverflow.com/a/53806411/688352
 		#set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS_RELEASE} -Wl,--hash-style=both")
@@ -1186,7 +1182,7 @@ if(ANDROID)
 	target_include_directories(main PUBLIC ${SDL2}/include) # FIXME: this should be in sdl/DKMake.cmake somehow
 	
 	if(CMAKE_ANDROID_GUI)
-		if(VISUAL_STUDIO)
+		if(MSVC)
 			include_external_msproject(gradleAPK gradleAPK.androidproj TYPE 39E2626F-3545-4960-A6E8-258AD8476CE5)
 			set_property(TARGET gradleAPK PROPERTY VS_SOLUTION_DEPLOY ON) # NOT WORKING
 			set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT gradleAPK)

@@ -1,5 +1,9 @@
 # https://www.nasm.us
 
+if(ANDROID_HOST)
+	return()
+endif()
+
 dk_depend(rpm)
 
 
