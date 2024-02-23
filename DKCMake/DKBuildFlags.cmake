@@ -484,8 +484,12 @@ string(REPLACE ";" " " DKCONFIGURE_CXXFLAGS "${DKCONFIGURE_CXXFLAGS}")
 
 
 ############## Setup continued by cmake from here ##############
-dk_set						(CMAKE_C_COMPILER			${DKCMAKE_C_COMPILER})
-dk_set						(CMAKE_CXX_COMPILER			${DKCMAKE_CXX_COMPILER})
+if(DKCMAKE_C_COMPILER)
+	dk_set					(CMAKE_C_COMPILER			${DKCMAKE_C_COMPILER})
+endif()
+if(DKCMAKE_CXX_COMPILER)
+	dk_set					(CMAKE_CXX_COMPILER			${DKCMAKE_CXX_COMPILER})
+endif()
 
 dk_set						(CMAKE_C_FLAGS				${DKCMAKE_C_FLAGS})
 dk_set						(CMAKE_C_FLAGS_DEBUG		${DKCMAKE_C_FLAGS_DEBUG})

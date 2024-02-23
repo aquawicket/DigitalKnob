@@ -350,7 +350,7 @@ goto:eof
 	::set "CMAKE_GENERATOR=%VISUALSTUDIO_GENERATOR%"
 	::set "CMAKE_GENERATOR_PLATFORM=ARM64"
 	
-	call:add_cmake_arg -G "Unix Makefiles"
+	::call:add_cmake_arg -G "Unix Makefiles"
 	call:add_cmake_arg -DCMAKE_MAKE_PROGRAM=%ANDROID_NDK%/prebuilt/windows-x86_64/bin/make.exe
 	call:add_cmake_arg -DCMAKE_ANDROID_ARCH_ABI=arm64-v8a
 	call:add_cmake_arg -DANDROID_ABI=arm64-v8a
@@ -361,9 +361,14 @@ goto:eof
 	call:add_cmake_arg -DANDROID_TOOLCHAIN=clang
 	call:add_cmake_arg -DCMAKE_ANDROID_STL_TYPE=c++_static
 	call:add_cmake_arg -DANDROID_STL=c++_static
-	call:add_cmake_arg -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions"
+	::call:add_cmake_arg -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions"
 	
-	call:cmake_generate
+	::call:cmake_generate
+	echo.
+	echo ****** CMAKE COMMAND ******
+	echo "%CMAKE%" -G "Unix Makefiles" %CMAKE_ARGS% -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions"
+	echo.
+	"%CMAKE%" -G "Unix Makefiles" %CMAKE_ARGS% -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions"
     
 	set TARGET=main
 	goto build
