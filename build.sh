@@ -1200,17 +1200,23 @@ function git_commit() {
 	
 	USER_EMAIL=$($GIT config --global user.email)
 	if [ -z "$USER_EMAIL" ]; then
-		$GIT config --global user.email "$GIT_USER_EMAIL"
 		echo ""
-		echo "git user.email '$GIT_USER_EMAIL' saved"
+		echo "please enter an email address"
+		read input
+		$GIT config --global user.email "$input"
+		echo ""
+		echo "git user.email '$input' saved"
 		echo ""
 	fi
 
 	USER_NAME=$($GIT config --global user.name)
 	if [ -z "USER_NAME" ]; then
-		$GIT config --global user.name "$GIT_USER_NAME"
 		echo ""
-		echo "git user.name '$GIT_USER_NAME' saved"
+		echo "please enter a username"
+		read input
+		$GIT config --global user.name "$input"
+		echo ""
+		echo "git user.name '$input' saved"
 		echo ""
 	fi
 	
