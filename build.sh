@@ -1189,23 +1189,24 @@ function git_commit() {
 	
 	cd $DKPATH
 	
+	STORE=$($GIT config credential.helper)
+	if [[ -z "STORE" ]]; then
+		$GIT config --global credential.helper store
+		echo "git credential.helper set to store"
+	fi
 	
-	# git config --global user.email "aquawicket@hotmail.com"
 	USER_EMAIL=$($GIT config --global user.email)
 	if [ -z "$USER_EMAIL" ]; then
 		$GIT config --global user.email "$GIT_USER_EMAIL"
 		echo "git user.email '$GIT_USER_EMAIL' saved"
 	fi
-	# git config --global user.email "aquawicket"
+
 	USER_NAME=$($GIT config --global user.name)
 	if [[ -z "USER_NAME" ]]; then
 		$GIT config --global user.name "$GIT_USER_NAME"
 		echo "git user.name '$GIT_USER_NAME' saved"
 	fi
-	STORE=$($GIT config credential.helper)
-	if [[ -z "STORE" ]]; then
-		$GIT config --global credential.helper store
-	fi
+	
     
 	if ! [[ -n "$message" ]]; then
 		message="git commit"
