@@ -94,36 +94,36 @@ goto:eof
         
     echo.
 	if "%_APP_%" NEQ "" if "%_TARGET_OS_%" NEQ "" if "%_TYPE_%" NEQ "" echo  1) Repeat cache [%_APP_% - %_TARGET_OS_% - %_TYPE_%]
-    echo  2) Git Update
-    echo  3) Git Commit
-    echo  4) Push assets
-    echo  5) Pull assets
-    echo  6) Reset Apps
-    echo  7) Reset Plugins
-    echo  8) Reset 3rdParty
-    echo  9) Reset All
-    echo  10) Clear Screen
-    echo  11) Clear cmake cache and .tmp files
-    echo  12) Reload
-    echo  13) Exit
+    echo  1) Git Update
+    echo  2) Git Commit
+    echo  3) Push assets
+    echo  4) Pull assets
+    echo  5) Reset Apps
+    echo  6) Reset Plugins
+    echo  7) Reset 3rdParty
+    echo  8) Reset All
+    echo  9) Clear Screen
+    echo  10) Clear cmake cache and .tmp files
+    echo  11) Reload
+    echo  12) Exit
     echo. 
     echo  Press Enter To Skip
         
     set choice=
     set /p "choice=Choose a selection: "
-	if "%choice%"=="1"  set "APP=%_APP_%" & set "TARGET_OS=%_TARGET_OS_%" & set "TYPE=%_TYPE_%"
-    if "%choice%"=="2"  call:git_update
-    if "%choice%"=="3"  call:git_commit
-    if "%choice%"=="4"  call:push_assets
-    if "%choice%"=="5"  call:pull_assets
-    if "%choice%"=="6"  call:reset_apps
-    if "%choice%"=="7"  call:reset_plugins
-    if "%choice%"=="8"  call:reset_3rdparty
-    if "%choice%"=="9"  call:reset_all
-    if "%choice%"=="10"  call:clear_screen
-    if "%choice%"=="11" call:dk_deleteCache & call:delete_temp_files
-    if "%choice%"=="12" call:reload
-    if "%choice%"=="13" exit
+	if "%choice%"=="0"  set "APP=%_APP_%" & set "TARGET_OS=%_TARGET_OS_%" & set "TYPE=%_TYPE_%"
+    if "%choice%"=="1"  call:git_update
+    if "%choice%"=="2"  call:git_commit
+    if "%choice%"=="3"  call:push_assets
+    if "%choice%"=="4"  call:pull_assets
+    if "%choice%"=="5"  call:reset_apps
+    if "%choice%"=="6"  call:reset_plugins
+    if "%choice%"=="7"  call:reset_3rdparty
+    if "%choice%"=="8"  call:reset_all
+    if "%choice%"=="9"  call:clear_screen
+    if "%choice%"=="10" call:dk_deleteCache & call:delete_temp_files
+    if "%choice%"=="11" call:reload
+    if "%choice%"=="12" exit
 	
     set UPDATE=true
 goto:eof
