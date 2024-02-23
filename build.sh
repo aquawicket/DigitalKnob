@@ -37,19 +37,60 @@ function main() {
 
 	#exec |& tee file.log
 
+	# UNIX Environment Variables
 	echo ""
-	echo "SHLVL = $SHLVL"			# https://stackoverflow.com/a/4511483/688352
-	echo "HOSTNAME = $HOSTNAME"
-	echo "HOSTTYPE = $HOSTTYPE"
-	echo "MACHTYPE = $MACHTYPE"
-	echo "MODEL = $MODEL"
-	echo "MSYSTEM = $MSYSTEM"
-	echo "OSTYPE = $OSTYPE"
-	echo "SCRIPTNAME = $SCRIPTNAME"
-	echo "SCRIPTPATH = $SCRIPTPATH"
-	echo "USER = $USER"
-	echo "USERNAME = $USERNAME"
+	print_var TESTIES
+	print_var SHLVL			# https://stackoverflow.com/a/4511483/688352
+	print_var HOSTNAME
+	print_var HOSTTYPE
+	print_var MACHTYPE
+	if [ -e /proc/device-tree/model ]; then
+		MODEL=$(tr -d '\0' </proc/device-tree/model)
+	fi
+	print_var MODEL
+	print_var MSYSTEM
+	print_var OSTYPE
+	print_var SCRIPTNAME
+	print_var SCRIPTPATH
+	print_var USER
+	print_var USERNAME
 	echo ""
+	
+	# https://llvm.org/doxygen/Triple_8h_source.html
+	# NATIVE_OS
+	
+	if [[ "$MODEL" == "Raspberry"* ]]; then
+		NATIVE_OS="raspberry"
+	elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+		NATIVE_OS="linux"
+	elif [[ "$OSTYPE" == "darwin"* ]]; then
+		NATIVE_OS="mac"
+	elif [[ "$OSTYPE" == "linux-android" ]]; then
+		NATIVE_OS="android"
+	elif [[ "$OSTYPE" == "msys" ]]; then
+		NATIVE_OS="win"
+	else
+		echo "Unknown NATIVE_OS"
+	fi
+	print_var NATIVE_OS
+	
+	# NATIVE_ARCH
+	if [[ "$HOSTTYPE" == "x86" ]]; then
+		NATIVE_ARCH="32"
+	elif [[ "$HOSTTYPE" == "x86_64"* ]]; then
+		NATIVE_ARCH="64"
+	elif [[ "$HOSTTYPE" == "aarch64"* ]]; then
+		NATIVE_ARCH="64"
+	else
+		echo "Unknown NATIVE_ARCH"
+	fi
+	print_var NATIVE_ARCH
+	
+	# NATIVE_TRIPLE
+	NATIVE_TRIPLE=$NATIVE_OS$NATIVE_ARCH
+	print_var NATIVE_TRIPLE
+	echo ""
+	
 
 	if [[ -n "$USERPROFILE" ]]; then
 		DIGITALKNOB="$USERPROFILE\digitalknob"
@@ -60,11 +101,11 @@ function main() {
 	fi
 
 	mkdir -p $DIGITALKNOB;
-	echo "DIGITALKNOB = $DIGITALKNOB"
+	print_var DIGITALKNOB
 
 	DKDOWNLOAD="$DIGITALKNOB/download"
 	mkdir -p $DKDOWNLOAD;
-	echo "DKDOWNLOAD = $DKDOWNLOAD"
+	print_var DKDOWNLOAD
 
 	if [[ "$OSTYPE" == "darwin"* ]]; then
 		validate_homebrew
@@ -75,10 +116,10 @@ function main() {
 	validate_git
 	validate_branch
 
-	echo "DKPATH = $DKPATH"
-	echo "DKCMAKE = $DKCMAKE"
-	echo "DK3RDPARTY = $DK3RDPARTY"
-	echo "DKIMPORTS = $DKIMPORTS"
+	print_var DKPATH
+	print_var DKCMAKE
+	print_var DK3RDPARTY
+	print_var DKIMPORTS
 
 	if [ $SCRIPTPATH == $DKPATH ]; then
 		echo "SCRIPTPATH and DKPATH are the same"
@@ -213,40 +254,6 @@ function Pick_App() {
 
 ###### Pick_OS ######
 function Pick_OS() {
-	
-	# https://llvm.org/doxygen/Triple_8h_source.html
-	
-	# NATIVE_OS
-	if [ -e /proc/device-tree/model ]; then
-		MODEL=$(tr -d '\0' </proc/device-tree/model)
-	fi
-	if [[ "$MODEL" == "Raspberry"* ]]; then
-		NATIVE_OS="raspberry"
-	elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
-		NATIVE_OS="linux"
-	elif [[ "$OSTYPE" == "darwin"* ]]; then
-		NATIVE_OS="mac"
-	elif [[ "$OSTYPE" == "linux-android" ]]; then
-		NATIVE_OS="android"
-	elif [[ "$OSTYPE" == "msys" ]]; then
-		NATIVE_OS="win"
-	else
-		echo "Unknown NATIVE_OS"
-	fi
-	
-	# NATIVE_ARCH
-	if [[ "$HOSTTYPE" == "x86" ]]; then
-		NATIVE_ARCH="32"
-	elif [[ "$HOSTTYPE" == "x86_64"* ]]; then
-		NATIVE_ARCH="64"
-	elif [[ "$HOSTTYPE" == "aarch64"* ]]; then
-		NATIVE_ARCH="64"
-	else
-		echo "Unknown NATIVE_ARCH"
-	fi
-	
-	# NATIVE_TRIPLE
-	NATIVE_TRIPLE=$NATIVE_OS$NATIVE_ARCH
 	
 	echo ""	
     echo " 1) $NATIVE_TRIPLE"
@@ -764,7 +771,7 @@ function validate_which() {
 	fi
 	
 	WHICH=$(which which)
-	echo "WHICH = $WHICH"
+	print_var WHICH
 }
 
 ###### validate_cmake ######
@@ -788,7 +795,7 @@ function validate_cmake() {
 	fi
 	
 	CMAKE=$(which cmake)
-	echo "CMAKE = $CMAKE"
+	print_var CMAKE
 }
 
 ###### validate_git ######
@@ -798,7 +805,7 @@ function validate_git() {
 	fi
 	
 	GIT=$(which git)
-	echo "GIT = $GIT"	
+	print_var GIT
 }
 
 ###### validate_homebrew ######
@@ -817,7 +824,7 @@ function validate_homebrew() {
 	fi
 	
 	BREW=$(which brew)
-	echo "BREW = $BREW"	
+	print_var BREW
 }
 
 ###### package_installed <package> ######
@@ -922,7 +929,7 @@ function validate_branch() {
 		fi
 	fi
 	
-	#echo "$\DKBRANCH = $DKBRANCH"
+	print_var DKBRANCH
 	DKPATH="$DIGITALKNOB/$DKBRANCH"
 	DKCMAKE="$DKPATH/DKCMake"
 	DK3RDPARTY="$DKPATH/3rdParty"
@@ -967,46 +974,46 @@ function delete_temp_files() {
 ###### validate_msys2 ######
 function validate_msys2() {
 	cmake_eval "include('$DKIMPORTS/msys2/DKMAKE.cmake')" "MSYS2"
-	echo "MSYS2 = $MSYS2"
+	print_var MSYS2
 }
 
 ###### validate_make ######
 function validate_make() {
 	cmake_eval "include('$DKIMPORTS/make/DKMAKE.cmake')" "MAKE_PROGRAM"
-	echo "MAKE_PROGRAM = $MAKE_PROGRAM"
+	print_var MAKE_PROGRAM
 }
 
 ###### validate_emscripten ######
 function validate_emscripten() {
 	cmake_eval "include('$DKIMPORTS/emsdk/DKMAKE.cmake')" "EMSDK;EMSDK_ENV;EMSDK_GENERATOR;EMSDK_TOOLCHAIN_FILE;EMSDK_C_COMPILER;EMSDK_CXX_COMPILER"
-	echo "EMSDK = $EMSDK"
-	echo "EMSDK_ENV = $EMSDK_ENV"
-	echo "EMSDK_GENERATOR = $EMSDK_GENERATOR"
-	echo "EMSDK_TOOLCHAIN_FILE = $EMSDK_TOOLCHAIN_FILE"
-	echo "EMSDK_C_COMPILER = $EMSDK_C_COMPILER"
-	echo "EMSDK_CXX_COMPILER = $EMSDK_CXX_COMPILER"
+	print_var EMSDK
+	print_var EMSDK_ENV
+	print_var EMSDK_GENERATOR
+	print_var EMSDK_TOOLCHAIN_FILE
+	print_var EMSDK_C_COMPILER
+	print_var EMSDK_CXX_COMPILER
 }
 
 ###### validate_android_ndk ######
 function validate_android_ndk() {
 	cmake_eval "include('$DKIMPORTS/android-ndk/DKMAKE.cmake')" "ANDROID_API;ANDROID_NDK;ANDROID_TOOLCHAIN_FILE"	
-	echo "ANDROID_API = $ANDROID_API"
-	echo "ANDROID_NDK = $ANDROID_NDK"
-	echo "ANDROID_TOOLCHAIN_FILE = $ANDROID_TOOLCHAIN_FILE"
+	print_var ANDROID_API
+	print_var ANDROID_NDK
+	print_var ANDROID_TOOLCHAIN_FILE
 }
 
 ###### validate_clang ######
 function validate_clang() {
 	cmake_eval "include('$DKIMPORTS/clang/DKMAKE.cmake')" "CLANG_C_COMPILER;CLANG_CXX_COMPILER"
-	echo "CLANG_C_COMPILER = $CLANG_C_COMPILER"
-	echo "CLANG_CXX_COMPILER = $CLANG_CXX_COMPILER"
+	print_var CLANG_C_COMPILER
+	print_var CLANG_CXX_COMPILER
 }
 
 ###### validate_gcc ######
 function validate_gcc() {
 	cmake_eval "include('$DKIMPORTS/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER"
-	echo "GCC_C_COMPILER = $GCC_C_COMPILER"
-	echo "GCC_CXX_COMPILER = $GCC_CXX_COMPILER"
+	print_var GCC_C_COMPILER"
+	print_var GCC_CXX_COMPILER"
 }
 			
 ### cmake_eval <cmake_commands;.;.;> <return_variables;.;.;.> <-DVARS;.;.;>
@@ -1020,7 +1027,7 @@ function cmake_eval() {
 	variables="$2"
 	#set commands=$commands:"=%"  #TODO: remove double quotes
 	DKCOMMAND="$commands"
-	echo "DKCOMMAND = $DKCOMMAND"
+	print_var DKCOMMAND
 	
 	if [[ -n "$variables" ]]; then
 		dk_call $CMAKE "-DDKCMAKE=$DKCMAKE" "-DDKCOMMAND=$DKCOMMAND" "-DDKRETURN=$2" $3 -P $DKCMAKE/dev/cmake_eval.cmake
@@ -1091,7 +1098,7 @@ if ! [ "$1" == "wipe" ]; then
 		echo "WARNING: this file isn't running from the branch directory"
 		echo "Is must be in the branch directory to continue."
 		echo "SCRIPTPATH = $SCRIPTPATH"
-		echo "DKPATH = $DKPATH"
+		print_var DKPATH
 		return 1;
 	fi
 	
@@ -1181,13 +1188,19 @@ function git_commit() {
 	read message
 	
 	cd $DKPATH
+	
+	
+	# git config --global user.email "aquawicket@hotmail.com"
 	USER_EMAIL=$($GIT config --global user.email)
-	if ! [[ -n "USER_EMAIL" ]]; then
-		$GIT config --global user.email $GIT_USER_EMAIL
+	if [ -z "$USER_EMAIL" ]; then
+		$GIT config --global user.email "$GIT_USER_EMAIL"
+		echo "git user.email '$GIT_USER_EMAIL' saved"
 	fi
+	# git config --global user.email "aquawicket"
 	USER_NAME=$($GIT config --global user.name)
-	if ! [[ -n "USER_NAME" ]]; then
-		$GIT config --global user.name $GIT_USER_NAME
+	if [[ -n "USER_NAME" ]]; then
+		$GIT config --global user.name "$GIT_USER_NAME"
+		echo "git user.name '$GIT_USER_NAME' saved"
 	fi
 	STORE=$($GIT config credential.helper)
 	if [[ "$STORE" == "store" ]]; then
@@ -1229,16 +1242,16 @@ function enter_manually() {
 	echo "dk_depend($input)" > $DKPATH/DKApps/$APP/DKMAKE.cmake
 	
 	echo ""
-	echo "$input" 
-	echo "TARGET_PATH = $TARGET_PATH"
+	print_var input 
+	print_var TARGET_PATH
 }
 
 function create_cache() {
 	echo "creating cache..."
-	#echo "APP = $APP"
-	#echo "TARGET_OS = $TARGET_OS"
-	#echo "TYPE = $TYPE"
-	#echo "LEVEL = $LEVEL"
+	#print_var APP
+	#print_var TARGET_OS
+	#print_var TYPE
+	#print_var LEVEL
 	
 	# write variable values line by line
 	echo "$APP">"$DKPATH/cache"
@@ -1268,10 +1281,19 @@ function read_cache() {
 		(( count++ ))
 	done < $DKPATH/cache
 	
-	#echo "_APP_ = $_APP_"
-	#echo "_TARGET_OS_ = $_TARGET_OS_"
-	#echo "_TYPE_ = $_TYPE_"
-	#echo "_LEVEL_ = $_LEVEL_"
+	#print_var _APP_
+	#print_var _TARGET_OS_
+	#print_var _TYPE_
+	#print_var _LEVEL_
+}
+
+function print_var() {
+	var=$1
+	if [ -z "${!var}" ]; then
+		echo "$1 = !!!INVALID!!!"
+	else
+		echo "$1 = ${!var}"
+	fi
 }
 
 
