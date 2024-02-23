@@ -1027,14 +1027,20 @@ goto:eof
 	set /p message=">"
 	
     cd %DKPATH%
+	
+	call:command_to_variable "%GIT%" config --global credential.helper STORE
+	if not "%STORE%"=="store" (
+		"%GIT%" config --global credential.helper store
+		echo "git credential.helper is now set to store"
+	)
+	
 	call:command_to_variable "%GIT%" config --global user.email USER_EMAIL
     if not "%USER_EMAIL%"=="%GIT_USER_EMAIL%" "%GIT%" config --global user.email "%GIT_USER_EMAIL%"
+	:: TODO: add input for email
 	
 	call:command_to_variable "%GIT%" config --global user.email USER_NAME
     if not "%USER_NAME%"=="%GIT_USER_NAME%" "%GIT%" config --global user.name "%GIT_USER_NAME%"
-	
-	call:command_to_variable "%GIT%" config --global credential.helper STORE
-	if not "%STORE%"=="store" "%GIT%" config --global credential.helper store
+	:: TODO: add input for username
 	
 	if ["%message%"]==[""] set "message=git commit"
 	
