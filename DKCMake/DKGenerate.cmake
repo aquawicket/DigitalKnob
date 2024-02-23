@@ -1205,19 +1205,23 @@ if(ANDROID)
 	if(CMAKE_ANDROID_GUI)
 		if(DEBUG)
 			add_custom_command(
-				POST_BUILD
 				TARGET main
+				POST_BUILD
 				COMMAND ${CMAKE_COMMAND} -E echo "Building with Gradle"
 				COMMAND ${DKPROJECT}/${OS}/Debug/gradlew --project-dir ${DKPROJECT}/${OS}/Debug --info clean build #--offline
-				COMMAND ${CMAKE_COMMAND} -E echo "Finnished building with Gradle")
+				COMMAND ${CMAKE_COMMAND} -E echo "Finnished building with Gradle"
+				WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+				VERBATIM)
 		endif()
 		if(RELEASE)
 			add_custom_command(
-				POST_BUILD
 				TARGET main
+				POST_BUILD
 				COMMAND ${CMAKE_COMMAND} -E echo "Building with Gradle"
 				COMMAND ${DKPROJECT}/${OS}/Release/gradlew --project-dir ${DKPROJECT}/${OS}/Release --info clean build #--offline
-				COMMAND ${CMAKE_COMMAND} -E echo "Finnished building with Gradle")
+				COMMAND ${CMAKE_COMMAND} -E echo "Finnished building with Gradle"
+				WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+				VERBATIM)
 		endif()
 	endif()
 		
