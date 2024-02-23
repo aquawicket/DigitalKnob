@@ -109,84 +109,145 @@ function main() {
 ###### Pick_Update ######
 function Pick_Update() {
 	
-	read_cache
+	#read_cache
 	
-	echo ""
+	echo ""	
+    echo "1) Git Update"
+    echo "2) Git Commit"
+    echo "3) Push assets"
+    echo "4) Pull assets"
+    echo "5) Reset Apps"
+    echo "6) Reset Plugins"
+    echo "7) Reset 3rdParty"
+    echo "8) Reset All"
+    echo "9) Clear Screen"
+    echo "10) Clear cmake cache and .tmp files"
+    echo "11) Reload"
+    echo "12) Exit"
+    echo "" 
+    echo " Press Enter To Skip"
+	
+	read input
+	
+	if [ "$input" == "1" ]; then
+		git_update
+		return 0
+	elif [ "$input" == "2" ]; then
+		git_commit
+		return 0
+	elif [ "$input" == "3" ]; then
+		push_assets
+		return 0
+	elif [ "$input" == "4" ]; then
+		pull_assets
+		return 0
+	elif [ "$input" == "5" ]; then
+		reset_apps
+		return 0
+	elif [ "$input" == "6" ]; then
+		reset_plugins
+		return 0
+	elif [ "$input" == "7" ]; then
+		reset_3rdpaty
+		return 0
+	elif [ "$input" == "8" ]; then
+		reset_all
+		return 0
+	elif [ "$input" == "9" ]; then
+		clear
+		return 0
+	elif [ "$input" == "10" ]; then
+		clear_cmake_cache
+		delete_temp_files
+		return 0
+	elif [ "$input" == "11" ]; then
+		reload
+		return 0
+	elif [ "$input" == "12" ]; then
+		exit 0
+		return 0
+	elif [ "$input" == "" ]; then
+		UPDATE=1
+		return 0
+	else
+		echo "invalid selection"
+	fi
+	return 0
 	
 	# https://unix.stackexchange.com/a/293605
-	COLUMNS=1
-	PS3='Choose a selection: '
-	options=(
-		"Git Update" 
-		"Git Commit" 
-		"Push assets" 
-		"Pull assets"
-		"Reset Apps"
-		"Reset Plugins"
-		"Reset 3rdParty"
-		"Reset All"
-		"Clear Screen"
-		"Clear cmake cache and .tmp files"
-		"Reload"
-		"Exit")
-	select opt in "${options[@]}"
-	do
-		case $opt in
-			"Git Update")
-				git_update
-				break
-				;;
-			"Git Commit")
-				git_commit
-				break
-				;;
-			"Push assets")
-				push_assets
-				break
-				;;
-			"Pull assets")
-				pull_assets
-				break
-				;;
-			"Reset Apps")
-				reset_apps
-				break
-				;;
-			"Reset Plugins")
-				reset_plugins
-				break
-				;;
-			"Reset 3rdParty")
-				reset_3rdpaty
-				break
-				;;
-			"Reset All")
-				reset_all
-				break
-				;;
-			"Clear Screen")
-				clear
-				break
-				;;
-			"Clear cmake cache and .tmp files")
-				clear_cmake_cache
-				delete_temp_files
-				break
-				;;
-			"Reload")
-				reload
-				break
-				;;
-			"Exit")
-				exit 0
-				break
-				;;
-			*)
-				UPDATE=1
-				break
-				;;
-		esac
-	done
+	#COLUMNS=1
+	#S3='Choose a selection: '
+	#options=(
+	#	"Git Update" 
+	#	"Git Commit" 
+	#	"Push assets" 
+	#	"Pull assets"
+	#	"Reset Apps"
+	#	"Reset Plugins"
+	#	"Reset 3rdParty"
+	#	"Reset All"
+	#	"Clear Screen"
+	#	"Clear cmake cache and .tmp files"
+	#	"Reload"
+	#	"Exit")
+	#select opt in "${options[@]}"
+	#do
+	#	case $opt in
+	#		"Git Update")
+	#			git_update
+	#			break
+	#			;;
+	#		"Git Commit")
+	#			git_commit
+	#			break
+	#			;;
+	#		"Push assets")
+	#			push_assets
+	#			break
+	#			;;
+	#		"Pull assets")
+	#			pull_assets
+	#			break
+	#			;;
+	#		"Reset Apps")
+	#			reset_apps
+	#			break
+	#			;;
+	#		"Reset Plugins")
+	#			reset_plugins
+	#			break
+	#			;;
+	#		"Reset 3rdParty")
+	#			reset_3rdpaty
+	#			break
+	#			;;
+	#		"Reset All")
+	#			reset_all
+	#			break
+	#			;;
+	#		"Clear Screen")
+	#			clear
+	#			break
+	#			;;
+	#		"Clear cmake cache and .tmp files")
+	#			clear_cmake_cache
+	#			delete_temp_files
+	#			break
+	#			;;
+	#		"Reload")
+	#			reload
+	#			break
+	#			;;
+	#		"Exit")
+	#			exit 0
+	#			break
+	#			;;
+	#		*)
+	#			UPDATE=1
+	#			break
+	#			;;
+	#	esac
+	#done
 }
 
 ###### Pick_App ######

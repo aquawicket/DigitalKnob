@@ -47,6 +47,9 @@ include_guard()
 ### https://cmake.org/cmake/help/git-master/guide/tutorial/index.html
 ###
 
+messgge(STATUS "########################################")
+messgge(STATUS "###### DIGITALKNOB CMakeLists.txt ######")
+messgge(STATUS "########################################")
 message(STATUS "\nCMake version ${CMAKE_VERSION}\n")
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 CMAKE_POLICY(SET CMP0054 NEW)

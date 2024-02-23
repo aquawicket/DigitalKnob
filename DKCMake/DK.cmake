@@ -74,10 +74,10 @@ endif()
 get_property(MULTI_CONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
 if(MULTI_CONFIG)
 	set(MULTI_CONFIG TRUE CACHE INTERNAL "")
-	message(STATUS "*** Generator is Multi-Config ***")
+	message(STATUS "*** ${CMAKE_GENERATOR}: Generator is Multi-Config ***")
 else()
 	set(SINGLE_CONFIG TRUE CACHE INTERNAL "")
-	message(STATUS "*** Generator is Single-Config ***")
+	message(STATUS "*** ${CMAKE_GENERATOR}: Generator is Single-Config ***")
 endif()
 
 
