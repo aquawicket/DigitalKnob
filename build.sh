@@ -1203,7 +1203,7 @@ function git_commit() {
 		echo "git user.name '$GIT_USER_NAME' saved"
 	fi
 	STORE=$($GIT config credential.helper)
-	if [[ "$STORE" == "store" ]]; then
+	if [[ -z "STORE" ]]; then
 		$GIT config --global credential.helper store
 	fi
     
