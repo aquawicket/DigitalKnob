@@ -994,7 +994,7 @@ goto:eof
 
 :: git_update() NO_CONFIRM
 :git_update
-	if ["%1"] NEQ ["NO_CONFIRM"] (
+	if "%1" NEQ "NO_CONFIRM" (
 		echo Git Update? Any local changes will be lost.
 		set /P CONFIRM="Are you sure? [Y] "
 	)
@@ -1035,14 +1035,28 @@ goto:eof
 	)
 	
 	call:command_to_variable "%GIT%" config --global user.email USER_EMAIL
-    if not "%USER_EMAIL%"=="%GIT_USER_EMAIL%" "%GIT%" config --global user.email "%GIT_USER_EMAIL%"
-	:: TODO: add input for email
+	if "%USER_EMAIL%"=="" (
+		echo.
+		echo please enter an email address
+		set /p input=">"
+		"%GIT%" config --global user.email "%input%"
+		echo.
+		echo "git user.email %input% saved"
+		echo.
+	)
 	
 	call:command_to_variable "%GIT%" config --global user.email USER_NAME
-    if not "%USER_NAME%"=="%GIT_USER_NAME%" "%GIT%" config --global user.name "%GIT_USER_NAME%"
-	:: TODO: add input for username
+    if "%USER_NAME%"=="" (
+		echo.
+		echo please enter a username
+		set /p input=">"
+		"%GIT%" config --global user.name "%input%"
+		echo.
+		echo "git user.name %input% saved"
+		echo.
+	)
 	
-	if ["%message%"]==[""] set "message=git commit"
+	if "%message%"=="" set "message=git commit"
 	
 	echo.
 	echo git commit "%message%"
