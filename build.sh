@@ -213,46 +213,146 @@ function Pick_App() {
 
 ###### Pick_OS ######
 function Pick_OS() {
-	# TODO
-	#  1) Linux (x86_64)		<-- the HOST OS
-
-	# 2) Android (arm32)
-	# 3) Android (arm64)
-	# 4) Android (x86)
-	# 5) Android (x86_64)
-	# 6) iOS (arm32)
-	# 7) iOS (arm64)
-	# 8) iOS (x86)
-	# 9) iOS (x86_64)
-	# 10) iOS-Simulator (arm32)
-	# 11) iOS-Simulator (arm64)
-	# 12) iOS-Simulator (x86)
-	# 13) iOS-Simulator (x86_64)
-	# 14) Linux (c)
-	# 15) Linux (arm64)
-	# 16) Linux (x86)
-	# 17) Linux (x86_64)
-	# 18) Mac (arm32)
-	# 19) Mac (arm64)
-	# 20) Mac (x86)
-	# 21) Mac (x86_64)
-	# 22) Raspberry (arm32)
-	# 23) Raspberry (arm64)
-	# 24) Raspberry (x86)
-	# 25) Raspberry (x86_64)
-	# 26) Windows (arm32)
-	# 27) Windows (arm64)
-	# 28) Windows (x86)
-	# 29) Windows (x86_64)
-	# 30) Clear Screen
-	# 31) Go Back
-	# 32) Exit
+	
+	# https://llvm.org/doxygen/Triple_8h_source.html
+	
+	if [ -e /proc/device-tree/model ]; then
+		MODEL=$(tr -d '\0' </proc/device-tree/model)
+	fi
+	if [[ "$MODEL" == "Raspberry"* ]]; then
+		HOST_OS="raspberry32"
+	elif [[ "$OSTYPE" == "linux-gnu"* ]] && [[ "$HOSTTYPE" == "x86_64"* ]]; then
+		HOST_OS="linux64"
+	elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+		HOST_OS="linux32"
+	elif [[ "$OSTYPE" == "darwin"* ]] && [[ "$HOSTTYPE" == "x86_64"* ]]; then
+		HOST_OS="mac64"
+	elif [[ "$OSTYPE" == "darwin"* ]]; then
+		HOST_OS="mac32"
+	elif [[ "$OSTYPE" == "linux-android" ]]; then
+		HOST_OS="android64"
+	elif [[ "$OSTYPE" == "msys" ]]; then
+		HOST_OS="win64"
+	else
+		echo "UNKNOWN HOST Operating System"
+	fi
+	
+	echo ""	
+    echo " 1) $HOST_OS"
+	echo ""
+	echo " 2) Android (arm32)"
+	echo " 3) Android (arm64)"
+	#echo " 4) Android (x86)"
+	#echo " 5) Android (x86_64)"
+	echo " 6) Emscripten"
+	echo " 7) iOS (arm32)"
+	echo " 8) iOS (arm64)"
+	#echo " 9) iOS (x86)"
+	#echo " 10) iOS (x86_64)"
+	#echo "11) iOS-Simulator (arm32)"
+	#echo "12) iOS-Simulator (arm64)"
+	echo "13) iOS-Simulator (x86)"
+	echo "14) iOS-Simulator (x86_64)"
+	#echo "15) Linux (arm32)"
+	#echo "16) Linux (arm64)"
+	echo "17) Linux (x86)"
+	echo "18) Linux (x86_64)"
+	#echo "19) Mac (arm32)"
+	#echo "20) Mac (arm64)"
+	echo "21) Mac (x86)"
+	echo "22) Mac (x86_64)"
+	echo "23) Raspberry (arm32)"
+	echo "24) Raspberry (arm64)"
+	#echo "25) Raspberry (x86)"
+	#echo "26) Raspberry (x86_64)"
+	#echo "27) Windows (arm32)"
+	#echo "28) Windows (arm64)"
+	echo "29) Windows (x86)"
+	echo "30) Windows (x86_64)"
+	echo "31) Clear Screen"
+	echo "32) Go Back"
+	echo "33) Exit"
+	echo "" 
+	
+	read input
+	if [ "$input" == "1" ]; then
+		TARGET_OS="$HOST_OS"
+	elif [ "$input" == "2" ]; then
+		TARGET_OS="android32"
+	elif [ "$input" == "3" ]; then
+		TARGET_OS="android64"
+	#elif [ "$input" == "4" ]; then
+	#	TARGET_OS="android_x86"
+	#elif [ "$input" == "5" ]; then
+	#	TARGET_OS="android_x64"
+	elif [ "$input" == "6" ]; then
+		TARGET_OS="emscripten"
+	elif [ "$input" == "7" ]; then
+		TARGET_OS="ios32"
+	elif [ "$input" == "8" ]; then
+		TARGET_OS="ios64"
+	#elif [ "$input" == "9" ]; then
+	#	TARGET_OS="ios_x86"
+	#elif [ "$input" == "10" ]; then
+	#	TARGET_OS="ios_x64"
+	elif [ "$input" == "11" ]; then
+		TARGET_OS="iossim32"
+	elif [ "$input" == "12" ]; then
+		TARGET_OS="iossim64"
+	#elif [ "$input" == "13" ]; then
+	#	TARGET_OS="iossim_x86"
+	#elif [ "$input" == "14" ]; then
+	#	TARGET_OS="iossim_x64"
+	#elif [ "$input" == "15" ]; then
+	#	TARGET_OS="linux_arm32"
+	#elif [ "$input" == "16" ]; then
+	#	TARGET_OS="linux_arm64"
+	elif [ "$input" == "17" ]; then
+		TARGET_OS="linux32"
+	elif [ "$input" == "18" ]; then
+		TARGET_OS="linux64"
+	#elif [ "$input" == "19" ]; then
+	#	TARGET_OS="mac_arm32"
+	#elif [ "$input" == "20" ]; then
+	#	TARGET_OS="mac_arm64"
+	elif [ "$input" == "21" ]; then
+		TARGET_OS="mac32"
+	elif [ "$input" == "22" ]; then
+		TARGET_OS="mac64"
+	elif [ "$input" == "23" ]; then
+		TARGET_OS="raspberry32"
+	elif [ "$input" == "24" ]; then
+		TARGET_OS="raspberry64"
+	#elif [ "$input" == "25" ]; then
+	#	TARGET_OS="raspberry_x86"
+	#elif [ "$input" == "26" ]; then
+	#	TARGET_OS="raspberry_x64"
+	#elif [ "$input" == "27" ]; then
+	#	TARGET_OS="windows_arm32"
+	#elif [ "$input" == "28" ]; then
+	#	TARGET_OS="windows_arm64"
+	elif [ "$input" == "29" ]; then
+		TARGET_OS="windows32"
+	elif [ "$input" == "30" ]; then
+		TARGET_OS="windows64"
+	elif [ "$input" == "31" ]; then
+		clear
+	elif [ "$input" == "32" ]; then
+		APP=
+	elif [ "$input" == "33" ]; then
+		exit 0
+	else
+		echo "invalid selection"
+	fi
+	return 0
+	
+	
+	
 	
 	# Raspberry Pi
 	if [ -e /proc/device-tree/model ]; then
 		MODEL=$(tr -d '\0' </proc/device-tree/model)
 	fi
-	
 	# https://unix.stackexchange.com/a/293605
 	COLUMNS=1
 	PS3="Please select an OS to build for: "
@@ -271,7 +371,7 @@ function Pick_OS() {
 	else
 		echo "UNKNOWN OS TYPE ($OSTYPE)"
 		options=("Exit")
-	fi
+	fi	
 	
 	echo ""
 	
