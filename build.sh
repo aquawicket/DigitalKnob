@@ -1193,19 +1193,25 @@ function git_commit() {
 	print_var STORE
 	if [ -z "$STORE" ]; then
 		$GIT config --global credential.helper store
-		echo "git credential.helper set to store"
+		echo ""
+		echo "git credential.helper is now set to store"
+		echo ""
 	fi
 	
 	USER_EMAIL=$($GIT config --global user.email)
 	if [ -z "$USER_EMAIL" ]; then
 		$GIT config --global user.email "$GIT_USER_EMAIL"
+		echo ""
 		echo "git user.email '$GIT_USER_EMAIL' saved"
+		echo ""
 	fi
 
 	USER_NAME=$($GIT config --global user.name)
 	if [ -z "USER_NAME" ]; then
 		$GIT config --global user.name "$GIT_USER_NAME"
+		echo ""
 		echo "git user.name '$GIT_USER_NAME' saved"
+		echo ""
 	fi
 	
     
