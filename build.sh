@@ -1190,6 +1190,7 @@ function git_commit() {
 	cd $DKPATH
 	
 	STORE=$($GIT config credential.helper)
+	print_var STORE
 	if [[ -z "STORE" ]]; then
 		$GIT config --global credential.helper store
 		echo "git credential.helper set to store"
