@@ -216,29 +216,40 @@ function Pick_OS() {
 	
 	# https://llvm.org/doxygen/Triple_8h_source.html
 	
+	# NATIVE_OS
 	if [ -e /proc/device-tree/model ]; then
 		MODEL=$(tr -d '\0' </proc/device-tree/model)
 	fi
 	if [[ "$MODEL" == "Raspberry"* ]]; then
-		HOST_OS="raspberry32"
-	elif [[ "$OSTYPE" == "linux-gnu"* ]] && [[ "$HOSTTYPE" == "x86_64"* ]]; then
-		HOST_OS="linux64"
+		NATIVE_OS="raspberry"
 	elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
-		HOST_OS="linux32"
-	elif [[ "$OSTYPE" == "darwin"* ]] && [[ "$HOSTTYPE" == "x86_64"* ]]; then
-		HOST_OS="mac64"
+		NATIVE_OS="linux"
 	elif [[ "$OSTYPE" == "darwin"* ]]; then
-		HOST_OS="mac32"
+		NATIVE_OS="mac"
 	elif [[ "$OSTYPE" == "linux-android" ]]; then
-		HOST_OS="android64"
+		NATIVE_OS="android"
 	elif [[ "$OSTYPE" == "msys" ]]; then
-		HOST_OS="win64"
+		NATIVE_OS="win"
 	else
-		echo "UNKNOWN HOST Operating System"
+		echo "Unknown NATIVE_OS"
 	fi
 	
+	# NATIVE_ARCH
+	if [[ "$HOSTTYPE" == "x86" ]]; then
+		NATIVE_ARCH="32"
+	elif [[ "$HOSTTYPE" == "x86_64"* ]]; then
+		NATIVE_ARCH="64"
+	elif [[ "$HOSTTYPE" == "aarch64"* ]]; then
+		NATIVE_ARCH="64"
+	else
+		echo "Unknown NATIVE_ARCH"
+	fi
+	
+	# NATIVE_TRIPLE
+	NATIVE_TRIPLE=$NATIVE_OS$NATIVE_ARCH
+	
 	echo ""	
-    echo " 1) $HOST_OS"
+    echo " 1) $NATIVE_TRIPLE"
 	echo ""
 	echo " 2) Android (arm32)"
 	echo " 3) Android (arm64)"
@@ -276,7 +287,7 @@ function Pick_OS() {
 	
 	read input
 	if [ "$input" == "1" ]; then
-		TARGET_OS="$HOST_OS"
+		TARGET_OS="$NATIVE_TRIPLE"
 	elif [ "$input" == "2" ]; then
 		TARGET_OS="android32"
 	elif [ "$input" == "3" ]; then
@@ -345,113 +356,6 @@ function Pick_OS() {
 		echo "invalid selection"
 	fi
 	return 0
-	
-	
-	
-	
-	# Raspberry Pi
-	if [ -e /proc/device-tree/model ]; then
-		MODEL=$(tr -d '\0' </proc/device-tree/model)
-	fi
-	# https://unix.stackexchange.com/a/293605
-	COLUMNS=1
-	PS3="Please select an OS to build for: "
-	if [[ "$MODEL" == "Raspberry"* ]]; then
-		options=("raspberry32" "android32" "android64" "emscripten" "Clear Screen" "Go Back" "Exit")
-	elif [[ "$OSTYPE" == "linux-gnu"* ]] && [[ "$HOSTTYPE" == "x86_64"* ]]; then
-		options=("linux64" "android32" "android64" "emscripten" "Clear Screen" "Go Back" "Exit")
-	elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
-		options=("linux32" "android32" "android64" "emscripten" "Clear Screen" "Go Back" "Exit")
-	elif [[ "$OSTYPE" == "darwin"* ]] && [[ "$HOSTTYPE" == "x86_64"* ]]; then
-		options=("mac64" "ios32" "ios64" "iossim32" "iossim64" "android32" "android64" "emscripten" "Clear Screen" "Go Back" "Exit")
-	elif [[ "$OSTYPE" == "linux-android" ]]; then
-		options=("android32" "android64" "Clear Screen" "Go Back" "Exit")
-	elif [[ "$OSTYPE" == "msys" ]]; then
-		options=("win32" "win64" "android32" "android64" "emscripten" "Clear Screen" "Go Back" "Exit")
-	else
-		echo "UNKNOWN OS TYPE ($OSTYPE)"
-		options=("Exit")
-	fi	
-	
-	echo ""
-	
-	select opt in "${options[@]}"
-	do
-		case $opt in
-			"android32")
-				TARGET_OS="android32"
-				break
-				;;
-			"android64")
-				TARGET_OS="android64"
-				break
-				;;
-			"emscripten")
-				TARGET_OS="emscripten"
-				break
-				;;
-			"ios32")
-				TARGET_OS="ios32"
-				break
-				;;
-			"ios64")
-				TARGET_OS="ios64"
-				break
-				;;
-			"iossim32")
-				TARGET_OS="iossim32"
-				break
-				;;
-			"iossim64")
-				TARGET_OS="iossim64"
-				break
-				;;
-			"linux32")
-				TARGET_OS="linux32"
-				break
-				;;
-			"linux64")
-				TARGET_OS="linux64"
-				break
-				;;
-			"mac32")
-				TARGET_OS="mac32"
-				break
-				;;
-			"mac64")
-				TARGET_OS="mac64"
-				break
-				;;
-			"raspberry32")
-				TARGET_OS="raspberry32"
-				break
-				;;
-			"win32")
-				TARGET_OS="win32"
-				break
-				;;
-			"win64")
-				TARGET_OS="win64"
-				break
-				;;
-			"Clear Screen")
-				clear
-				break;
-				;;
-			"Go Back")
-				APP=
-				break
-				;;
-			"Exit")
-				exit 0
-				break
-				;;
-			*) 
-				echo "invalid option: $opt"
-				break
-				;;
-		esac 
-	done
 }
 
 ###### Pick_Type ######
