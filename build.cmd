@@ -327,7 +327,7 @@ goto:eof
 	::set "GENERATOR=%VISUALSTUDIO_GENERATOR%"
 	::set "GENERATOR_PLATFORM=-A ARM"
 	
-	call:add_cmake_arg -G "Unix Makefiles"
+	::call:add_cmake_arg -G "Unix Makefiles"
 	call:add_cmake_arg -DCMAKE_MAKE_PROGRAM=%ANDROID_NDK%/prebuilt/windows-x86_64/bin/make.exe
 	call:add_cmake_arg -DCMAKE_ANDROID_ARCH_ABI=armeabi-v7a
 	call:add_cmake_arg -DANDROID_ABI=armeabi-v7a
@@ -338,9 +338,14 @@ goto:eof
 	call:add_cmake_arg -DANDROID_TOOLCHAIN=clang
 	call:add_cmake_arg -DCMAKE_ANDROID_STL_TYPE=c++_static
 	call:add_cmake_arg -DANDROID_STL=c++_static
-	call:add_cmake_arg -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions"
+	::call:add_cmake_arg -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions"
 	
-	call:cmake_generate
+	::call:cmake_generate
+	echo.
+	echo ****** CMAKE COMMAND ******
+	echo "%CMAKE%" -G "Unix Makefiles" %CMAKE_ARGS% -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions"
+	echo.
+	"%CMAKE%" -G "Unix Makefiles" %CMAKE_ARGS% -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions"
 	
 	set TARGET=main
 	goto build
@@ -381,16 +386,16 @@ goto:eof
     setx PATH %PATH%;C:\Users\aquawicket\digitalknob\Development\3rdParty\python-2.7.18
 	call:validate_emscripten
 	
-	call:add_cmake_arg -G "%EMSDK_GENERATOR%"
-	call:add_cmake_arg -DCMAKE_TOOLCHAIN_FILE=%EMSDK_TOOLCHAIN_FILE%"
-	call:add_cmake_arg -DCMAKE_C_COMPILER=%EMSDK_C_COMPILER%"
-	call:add_cmake_arg -DCMAKE_CXX_COMPILER=%EMSDK_CXX_COMPILER%"
+	::call:add_cmake_arg -G "%EMSDK_GENERATOR%"
+	call:add_cmake_arg -DCMAKE_TOOLCHAIN_FILE=%EMSDK_TOOLCHAIN_FILE%
+	call:add_cmake_arg -DCMAKE_C_COMPILER=%EMSDK_C_COMPILER%
+	call:add_cmake_arg -DCMAKE_CXX_COMPILER=%EMSDK_CXX_COMPILER%
 	
 	echo.
 	echo ****** CMAKE COMMAND ******
-	echo "%EMSDK_ENV%" && "%CMAKE%" %CMAKE_ARGS%
+	echo "%EMSDK_ENV%" && "%CMAKE%" -G "%EMSDK_GENERATOR%" %CMAKE_ARGS%
 	echo.
-	"%EMSDK_ENV%" && "%CMAKE%" %CMAKE_ARGS%
+	"%EMSDK_ENV%" && "%CMAKE%" -G "%EMSDK_GENERATOR%" %CMAKE_ARGS%
 	
 	set TARGET=%APP%_APP
 	goto build
@@ -511,7 +516,7 @@ goto:eof
 
 
 :build
-    TITLE DigitalKnob - Building %APP%_%TARGET_OS%_%TYPE% %DKLEVEL% . . .
+    TITLE DigitalKnob - Building %APP% - %TARGET_OS% -%TYPE% - %DKLEVEL% . . .
     echo.
     echo ###########################################################        
     echo ****** Building %APP% - %TARGET_OS% - %TYPE% - %DKLEVEL% ******
@@ -534,12 +539,16 @@ goto:eof
     )
         
     if exist %TARGET_PATH%\%TARGET_OS%\Debug\CMakeCache.txt (
-		echo "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS%\Debug --target %TARGET% --config Debug --verbose
-        "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS%\Debug --target %TARGET% --config Debug --verbose
+		::echo "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS%\Debug --target %TARGET% --config Debug --verbose
+        ::"%CMAKE%" --build %TARGET_PATH%\%TARGET_OS%\Debug --target %TARGET% --config Debug --verbose
+		echo "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS%\Debug --config Debug --verbose
+        "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS%\Debug --config Debug --verbose
     )
     if exist %TARGET_PATH%\%TARGET_OS%\CMakeCache.txt (
-		echo "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS% --target %TARGET% --config Debug --verbose
-        "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS% --target %TARGET% --config Debug --verbose
+		::echo "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS% --target %TARGET% --config Debug --verbose
+        ::"%CMAKE%" --build %TARGET_PATH%\%TARGET_OS% --target %TARGET% --config Debug --verbose
+		echo "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS% --config Debug --verbose
+        "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS% --config Debug --verbose
     )
 	
 	if %TYPE%==All goto:build_release
@@ -556,10 +565,16 @@ goto:eof
     )
 	
     if exist %TARGET_PATH%\%TARGET_OS%\Release\CMakeCache.txt (
-        "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS%\Release --target %TARGET% --config Release --verbose
+		::echo "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS%\Release --target %TARGET% --config Release --verbose
+        ::"%CMAKE%" --build %TARGET_PATH%\%TARGET_OS%\Release --target %TARGET% --config Release --verbose
+		echo "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS%\Release --config Release --verbose
+        "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS%\Release --config Release --verbose
     )
     if exist %TARGET_PATH%\%TARGET_OS%\CMakeCache.txt (
-        "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS% --target %TARGET% --config Release --verbose
+		::echo "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS% --target %TARGET% --config Release --verbose
+        ::"%CMAKE%" --build %TARGET_PATH%\%TARGET_OS% --target %TARGET% --config Release --verbose
+		echo "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS% --config Release --verbose
+        "%CMAKE%" --build %TARGET_PATH%\%TARGET_OS% --config Release --verbose
     )
 goto:eof
 
