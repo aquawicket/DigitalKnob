@@ -93,7 +93,7 @@ goto:eof
     set UPDATE=
         
     echo.
-	if "%_APP_%" NEQ "" if "%_TARGET_OS_%" NEQ "" if "%_TYPE_%" NEQ "" echo  0) Repeat cache [%_APP_% - %_TARGET_OS_% - %_TYPE_%]
+	if exist "%DKPATH%\cache" if "%_APP_%" NEQ "" if "%_TARGET_OS_%" NEQ "" if "%_TYPE_%" NEQ "" echo  0) Repeat cache [%_APP_% - %_TARGET_OS_% - %_TYPE_%]
     echo  1) Git Update
     echo  2) Git Commit
     echo  3) Push assets
@@ -522,12 +522,12 @@ goto:eof
 	if "%COMPILER%"=="MINGW32" (
         %MSYS2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Debug --target %TARGET% --config Debug --verbose"
 		if %TYPE%==All goto:build_release
-		goto:end_message
+		goto:eof
     )
     if "%COMPILER%"=="MINGW64" (
         %MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Debug --target %TARGET% --config Debug --verbose"
 		if %TYPE%==All goto:build_release
-		goto:end_message
+		goto:eof
     )
         
     if exist %TARGET_PATH%\%TARGET_OS%\Debug\CMakeCache.txt (
@@ -540,17 +540,16 @@ goto:eof
     )
 	
 	if %TYPE%==All goto:build_release
-	goto:end_message
 goto:eof
 
 :build_release
 	if "%COMPILER%"=="MINGW32" (
         %MSYS2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Release --target %TARGET% --config Debug --verbose"
-        goto end_message
+		goto:eof
     )
     if "%COMPILER%"=="MINGW64" (
         %MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_TARGET_PATH%/%TARGET_OS%/Release --target %TARGET% --config Debug --verbose"
-        goto end_message
+		goto:eof
     )
 	
     if exist %TARGET_PATH%\%TARGET_OS%\Release\CMakeCache.txt (
@@ -1198,6 +1197,7 @@ goto:eof
 :: read_cache
 :read_cache
 	echo reading cache...
+	if not exist %DKPATH%\cache goto:eof
 	set /a count = 0
 	for /f "tokens=*" %%a in (%DKPATH%\cache) do (
 		set a=%%a: =%
