@@ -232,7 +232,7 @@ goto:eof
     if "%choice%"=="3" set "TARGET_OS=android32"	& goto:eof
     if "%choice%"=="4" set "TARGET_OS=android64"	& goto:eof
     if "%choice%"=="5" set "TARGET_OS=emscripten"	& goto:eof
-    if "%choice%"=="6' call:clear_screen			& goto:eof
+    if "%choice%"=="6" call:clear_screen			& goto:eof
     if "%choice%"=="7" set "APP="					& goto:eof
     if "%choice%"=="8" exit							& goto:eof
 	echo %choice%: invalid selection, please try again
