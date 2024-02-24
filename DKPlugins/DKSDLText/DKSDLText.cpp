@@ -88,8 +88,8 @@ bool DKSDLText::Render(){
 	int texW = 0;
 	int texH = 0;
 	SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
-	int left = 5;
-	int top = dkSdlWindow->height - texH;
+	int left = dkSdlWindow->width - texW;
+	int top = 0;
 	SDL_Rect dstrect = {left, top, texW, texH};
 	SDL_RenderCopy(dkSdlWindow->renderer, texture, NULL, &dstrect);
 	SDL_DestroyTexture(texture);
