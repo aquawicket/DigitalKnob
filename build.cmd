@@ -704,7 +704,7 @@ goto:eof
 		echo Is must be in the branch directory to continue.
 		echo SCRIPTPATH = %SCRIPTPATH%
 		echo DKPATH = %DKPATH%
-		goto:oef
+		goto:eof
 	)
 	
 	echo "RELOCATING SCRIPT TO -> %DIGITALKNOB%\%SCRIPTNAME%"
