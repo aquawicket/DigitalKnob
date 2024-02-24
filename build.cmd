@@ -89,8 +89,11 @@ goto:eof
 
 
 :pick_update
+	TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
+	::echo.
+	::echo %APP% %TARGET_OS% %TYPE%
+	
 	call:read_cache
-    set UPDATE=
         
     echo.
 	if exist "%DKPATH%\cache" if "%_APP_%" NEQ "" if "%_TARGET_OS_%" NEQ "" if "%_TYPE_%" NEQ "" echo  0) Repeat cache [%_APP_% - %_TARGET_OS_% - %_TYPE_%]
@@ -130,8 +133,9 @@ goto:eof
 
 :pick_app
 	TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
-    
-	set APP=  
+	::echo.
+    ::echo %APP% %TARGET_OS% %TYPE%
+	
     echo.
     echo  1) HelloWorld
     echo  2) DKCore
@@ -177,9 +181,10 @@ goto:eof
 
 
 :pick_os
-    set TARGET_OS=
-    TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
-        
+	TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
+	echo.
+	echo %APP% %TARGET_OS% %TYPE%
+       
     :: TODO
     :: 1) Windows (x86_64)
 
@@ -214,7 +219,7 @@ goto:eof
     :: 30) Clear Screen
     :: 31) Go Back
     :: 32) Exit
-    echo %APP% %TARGET_OS% %TYPE%
+
     echo.
     echo 1) Windows 32
     echo 2) Windows 64
@@ -241,10 +246,10 @@ goto:eof
 
 
 :pick_type
-    set TYPE=
     TITLE DigitalKnob - %APP% %TARGET_OS% %TYPE%
-        
+	echo.
     echo %APP% %TARGET_OS% %TYPE%
+	
     echo.
     echo 1) Debug
     echo 2) Release
@@ -268,7 +273,7 @@ goto:eof
 goto:eof
 
 :generate
-    TITLE DigitalKnob - Generating %APP%_%TARGET_OS%_%TYPE% %LEVEL% . . .
+    TITLE DigitalKnob - Generating %APP% - %TARGET_OS% - %TYPE% - %LEVEL% . . .
     echo.
     echo ########################################################## 
     echo ****** Generating %APP% - %TARGET_OS% - %TYPE% - %LEVEL% ******
@@ -308,13 +313,11 @@ goto:eof
 	call:add_cmake_arg -S=%CMAKE_SOURCE_DIR%
 	call:add_cmake_arg -B=%CMAKE_BINARY_DIR%
 
-	
     :::::::::::: CMake Options :::::::::::::
     ::call:add_cmake_arg -DCMAKE_VERBOSE_MAKEFILE=1
     ::call:add_cmake_arg --debug-output"
     ::call:add_cmake_arg --trace"
     ::call:add_cmake_arg --warn-unused-vars"
-        
 goto:eof
 
 :generate_android32
@@ -562,8 +565,6 @@ goto:eof
 
 
 :end_message
-    echo.
-    
 	TITLE DigitalKnob - Done Building %APP%_%TARGET_OS%_%TYPE% %DKLEVEL% . . .
     echo.
     echo ###########################################################        
