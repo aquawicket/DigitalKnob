@@ -9,16 +9,22 @@ dk_depend(ogg)
 
 
 ### IMPORT ###
-#dk_import(https://ftp.osuosl.org/pub/xiph/releases/flac/flac-1.3.2.tar.xz)
-dk_import(https://github.com/xiph/flac/releases/download/1.3.3/flac-1.3.3.tar.xz)
 #dk_import(https://github.com/xiph/flac.git)
+#dk_import(https://github.com/xiph/flac/releases/download/1.3.3/flac-1.3.3.tar.xz)
+dk_import(https://ftp.osuosl.org/pub/xiph/releases/flac/flac-1.4.3.tar.xz)
+
 
 
 ### LINK ###
 #dk_include		(${FLAC})
 dk_include		(${FLAC}/include														FLAC_INCLUDE_DIR)
-dk_libDebug		(${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a			FLAC_LIBRARY_DEBUG)
-dk_libRelease	(${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a		FLAC_LIBRARY_RELEASE)
+if(ANDROID)
+	dk_libDebug		(${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/libFLAC.a			FLAC_LIBRARY_DEBUG)
+	dk_libRelease	(${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/libFLAC.a		FLAC_LIBRARY_RELEASE)
+else()
+	dk_libDebug		(${FLAC}/${OS}/${DEBUG_DIR}/src/libFLAC/.libs/libFLAC-static.a			FLAC_LIBRARY_DEBUG)
+	dk_libRelease	(${FLAC}/${OS}/${RELEASE_DIR}/src/libFLAC/.libs/libFLAC-static.a		FLAC_LIBRARY_RELEASE)
+endif()
 
 
 ### 3rd Party Link ###
@@ -49,15 +55,19 @@ endif()
 
 
 
-### GENERATE / COMPILE ###
-string(REPLACE "-std=c++17" "" 	FLAC_BUILD "${DKCONFIGURE_BUILD}")
-string(REPLACE "  "         " " FLAC_BUILD "${FLAC_BUILD}")
+### GENERATE ###
+if(ANDROID)
+	dk_queueCommand(${DKCMAKE_BUILD} ${OGG_CMAKE} ${FLAC})
+else()
+	string(REPLACE "-std=c++17" "" 	FLAC_BUILD "${DKCONFIGURE_BUILD}")
+	string(REPLACE "  "         " " FLAC_BUILD "${FLAC_BUILD}")
+	DEBUG_dk_setPath		(${FLAC}/${OS}/${DEBUG_DIR})
+	DEBUG_dk_queueCommand	(${FLAC_BUILD} ${OGG_CONFIGURE})
+	RELEASE_dk_setPath		(${FLAC}/${OS}/${RELEASE_DIR})
+	RELEASE_dk_queueCommand	(${FLAC_BUILD} ${OGG_CONFIGURE})
+endif()
 
-DEBUG_dk_setPath		(${FLAC}/${OS}/${DEBUG_DIR})
-DEBUG_dk_queueCommand	(${FLAC_BUILD} ${OGG_CONFIGURE})
+
 DEBUG_dk_build   		(${FLAC})
-
-RELEASE_dk_setPath		(${FLAC}/${OS}/${RELEASE_DIR})
-RELEASE_dk_queueCommand	(${FLAC_BUILD} ${OGG_CONFIGURE})
 RELEASE_dk_build   		(${FLAC})
 

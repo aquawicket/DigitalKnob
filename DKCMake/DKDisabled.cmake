@@ -126,7 +126,7 @@ if(ANDROID)
 	dk_disable(bzip2)				# 'make' can't find ar
 	dk_disable(cryptopp)
 	dk_disable(dukluv)
-	dk_disable(flac)				# error: cannot open crtbegin_dynamic.o
+	#dk_disable(flac)				# error: cannot open crtbegin_dynamic.o
 	dk_disable(fontconfig)
 	dk_disable(freealut)			# DKFunctions.cmake:4405->dk_findFiles():  files is invalid
 	dk_disable(gdal)
@@ -142,7 +142,7 @@ if(ANDROID)
 	dk_disable(libxml2)				# ../../configure: No such file or directory
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
 	dk_disable(ncurses)				# error: '..' is not recognized as an internal or external command
-	dk_disable(ogg)					# error: cannot open crtbegin_dynamic.o
+	#dk_disable(ogg)					# error: cannot open crtbegin_dynamic.o
 	dk_disable(openal)				# The system cannot find the file specified
 	dk_disable(openblas)
 	dk_disable(opencv)				# build errors
@@ -160,7 +160,7 @@ if(ANDROID)
 	dk_disable(sdl_rtf)
 	#dk_disable(smpeg2)				# error : ISO C++17 does not allow 'register' storage class specifier
 	dk_disable(tesseract)			# requires leptonica
-	dk_disable(vorbis)
+	#dk_disable(vorbis)
 	dk_disable(waave)
 	dk_disable(wasm3)
 	dk_disable(x264)
