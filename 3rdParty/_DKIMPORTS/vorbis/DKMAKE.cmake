@@ -1,7 +1,6 @@
 # https://github.com/xiph/vorbis
-# https://deltaepsilon.ca/posts/compiling-libogg-libvorbis-for-dummies/
-# https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-1.3.7.zip
-
+# https://ftp.osuosl.org/pub/xiph/releases/vorbis
+# https://deltaepsilon.ca/posts/compiling-libogg-libvorbis-for-dummies
 
 ### DEPEND ###
 dk_depend(libgcc)
@@ -10,27 +9,29 @@ dk_depend(ogg)
 
 
 ### IMPORT ###
-dk_import(https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-1.3.7.zip)
+#dk_import(https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-1.3.7.zip)
+#dk_import(https://github.com/xiph/vorbis.git)
+dk_import(https://github.com/xiph/vorbis/releases/download/v1.3.7/libvorbis-1.3.7.zip)
 
 
 ### LINK ###
-dk_include					(${VORBIS}/include														VORBIS_INCLUDE_DIR)
+dk_include			(${VORBIS}/include											VORBIS_INCLUDE_DIR)
 
-if(ANDROID)
-	ANDROID_dk_libDebug		(${VORBIS}/${OS}/${DEBUG_DIR}/lib/libvorbis.a			VORBIG_DEBUG_LIBRARY)
-	ANDROID_dk_libDebug		(${VORBIS}/${OS}/${DEBUG_DIR}/lib/libvorbisenc.a		VORBIG_ENC_DEBUG_LIBRARY)
-	ANDROID_dk_libDebug		(${VORBIS}/${OS}/${DEBUG_DIR}/lib/libvorbisfile.a		VORBIG_FILE_DEBUG_LIBRARY)
-	ANDROID_dk_libRelease	(${VORBIS}/${OS}/${RELEASE_DIR}/lib/libvorbis.a		VORBIG_RELEASE_LIBRARY)
-	ANDROID_dk_libRelease	(${VORBIS}/${OS}/${RELEASE_DIR}/lib/libvorbisenc.a	VORBIG_ENC_RELEASE_LIBRARY)
-	ANDROID_dk_libRelease	(${VORBIS}/${OS}/${RELEASE_DIR}/lib/libvorbisfile.a	VORBIG_FILE_RELEASE_LIBRARY)
-else()
-	dk_libDebug				(${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbis.a						VORBIG_DEBUG_LIBRARY)
-	dk_libDebug				(${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbisenc.a					VORBIG_ENC_DEBUG_LIBRARY)
-	dk_libDebug				(${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbisfile.a					VORBIG_FILE_DEBUG_LIBRARY)
-	dk_libRelease			(${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbis.a					VORBIG_RELEASE_LIBRARY)
-	dk_libRelease			(${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisenc.a				VORBIG_ENC_RELEASE_LIBRARY)
-	dk_libRelease			(${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisfile.a				VORBIG_FILE_RELEASE_LIBRARY)
-endif()
+#if(ANDROID)
+#	dk_libDebug		(${VORBIS}/${OS}/${DEBUG_DIR}/lib/libvorbis.a				VORBIG_DEBUG_LIBRARY)
+#	dk_libDebug		(${VORBIS}/${OS}/${DEBUG_DIR}/lib/libvorbisenc.a			VORBIG_ENC_DEBUG_LIBRARY)
+#	dk_libDebug		(${VORBIS}/${OS}/${DEBUG_DIR}/lib/libvorbisfile.a			VORBIG_FILE_DEBUG_LIBRARY)
+#	dk_libRelease	(${VORBIS}/${OS}/${RELEASE_DIR}/lib/libvorbis.a				VORBIG_RELEASE_LIBRARY)
+#	dk_libRelease	(${VORBIS}/${OS}/${RELEASE_DIR}/lib/libvorbisenc.a			VORBIG_ENC_RELEASE_LIBRARY)
+#	dk_libRelease	(${VORBIS}/${OS}/${RELEASE_DIR}/lib/libvorbisfile.a			VORBIG_FILE_RELEASE_LIBRARY)
+#else()
+	dk_libDebug		(${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbis.a			VORBIG_DEBUG_LIBRARY)
+	dk_libDebug		(${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbisenc.a		VORBIG_ENC_DEBUG_LIBRARY)
+	dk_libDebug		(${VORBIS}/${OS}/${DEBUG_DIR}/lib/.libs/libvorbisfile.a		VORBIG_FILE_DEBUG_LIBRARY)
+	dk_libRelease	(${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbis.a		VORBIG_RELEASE_LIBRARY)
+	dk_libRelease	(${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisenc.a	VORBIG_ENC_RELEASE_LIBRARY)
+	dk_libRelease	(${VORBIS}/${OS}/${RELEASE_DIR}/lib/.libs/libvorbisfile.a	VORBIG_FILE_RELEASE_LIBRARY)
+#endif()
 
 
 
@@ -40,21 +41,25 @@ RELEASE_dk_set	(VORBIS_CMAKE -DVORBIS_INCLUDE_DIR=${VORBIS_INCLUDE_DIR} -DVORBIS
 
 	
 ### GENERATE ###
-if(ANDROID)
-	dk_queueCommand(${DKCMAKE_BUILD} ${OGG_CMAKE} ${VORBIS})
-else()
-	if(DEBUG)
-		set(ENV{PKG_CONFIG_PATH} "${OGG}/${OS}/${DEBUG_DIR}")
-	endif()
-	DEBUG_dk_setPath			(${VORBIS}/${OS}/${DEBUG_DIR})
-	DEBUG_dk_queueCommand		(${DKCONFIGURE_BUILD} ${OGG_CONFIGURE})
-	if(RELEASE)
-		set(ENV{PKG_CONFIG_PATH} "${OGG}/${OS}/${RELEASE_DIR}")
-	endif()
-	RELEASE_dk_setPath			(${VORBIS}/${OS}/${RELEASE_DIR})
-	RELEASE_dk_queueCommand		(${DKCONFIGURE_BUILD} ${OGG_CONFIGURE})
-endif()
+#if(ANDROID)
+	dk_queueCommand(${DKCMAKE_BUILD}
+					#-DBUILD_SHARED_LIBS=OFF 	# "Build shared library" OFF
+					${OGG_CMAKE} 
+					${VORBIS})
+#else()
+#	if(DEBUG)
+#		set(ENV{PKG_CONFIG_PATH} "${OGG}/${OS}/${DEBUG_DIR}")
+#	endif()
+#	DEBUG_dk_setPath			(${VORBIS}/${OS}/${DEBUG_DIR})
+#	DEBUG_dk_queueCommand		(${DKCONFIGURE_BUILD} ${OGG_CONFIGURE})
+#	if(RELEASE)
+#		set(ENV{PKG_CONFIG_PATH} "${OGG}/${OS}/${RELEASE_DIR}")
+#	endif()
+#	RELEASE_dk_setPath			(${VORBIS}/${OS}/${RELEASE_DIR})
+#	RELEASE_dk_queueCommand		(${DKCONFIGURE_BUILD} ${OGG_CONFIGURE})
+#endif()
 
 
-DEBUG_dk_build		(${VORBIS})
-RELEASE_dk_build	(${VORBIS})
+#DEBUG_dk_build		(${VORBIS})
+#RELEASE_dk_build	(${VORBIS})
+dk_build		(${VORBIS})
