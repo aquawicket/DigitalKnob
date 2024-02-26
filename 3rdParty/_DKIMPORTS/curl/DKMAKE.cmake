@@ -7,6 +7,7 @@
 ### DEPEND ###
 dk_depend(dl)
 dk_depend(libbcrypt)
+dk_depend(libpsl)
 dk_depend(libssh2)
 dk_depend(openssl)
 dk_depend(pthread)
@@ -138,8 +139,13 @@ if(MSVC)
 		-DUSE_NGTCP2=OFF								# "Use ngtcp2 and nghttp3 libraries for HTTP/3 support" OFF
 		-DUSE_QUICHE=OFF								# "Use quiche library for HTTP/3 support" OFF
 		-DUSE_WIN32_IDN=OFF								# "Use WinIDN for IDN support" OFF
-		-DUSE_WIN32_LDAP=OFF							# "Use Windows LDAP implementation" ON
+		-DUSE_WIN32_LDAP=OFF					# "Use Windows LDAP implementation" ON
+		${LIBBCRYPT_CMAKE}
+		${LIBPSL_CMAKE}
+		${LIBSSH2_CMAKE}
 		${OPENSSL_CMAKE}
+		${PTHREAD_CMAKE}
+		${WS2_32_LIB_CMAKE}
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE}
 		${CURL})
