@@ -1011,8 +1011,8 @@ function validate_clang() {
 ###### validate_gcc ######
 function validate_gcc() {
 	cmake_eval "include('$DKIMPORTS/gcc/DKMAKE.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER"
-	print_var GCC_C_COMPILER"
-	print_var GCC_CXX_COMPILER"
+	print_var GCC_C_COMPILER
+	print_var GCC_CXX_COMPILER
 }
 			
 ### cmake_eval <cmake_commands;.;.;> <return_variables;.;.;.> <-DVARS;.;.;>
