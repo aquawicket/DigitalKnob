@@ -506,7 +506,7 @@ function DKBuild_DoResults(){
 		}
 	}
 	
-	///// IOSSIM32 //////
+	///// IOSSIM_X86 //////
 	if(OS === "iossim_x86"){
 		DKBuild_ValidateXcode()
 		CPP_DKFile_MkDir(app_path+OS)

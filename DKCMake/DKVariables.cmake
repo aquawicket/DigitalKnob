@@ -225,12 +225,12 @@ if(${index} GREATER -1)
 	string(REPLACE "/ios_arm64" "" DKPROJECT ${CMAKE_BINARY_DIR})
 endif()
 
-# IOSSIM 32
+# iossim_x86
 string(FIND "${CMAKE_BINARY_DIR}" "/iossim_x86" index)
 if(${index} GREATER -1)
 	dk_info("*** Creating iOS-Simulator x32 Project Files ***")
 	dk_set(IOSSIM ON)
-	dk_set(IOSSIM_32 ON)
+	dk_set(IOSSIM_X86 ON)
 	dk_set(OS "iossim_x86")
 	dk_set(DEBUG_DIR Debug-iphonesimulator)
 	dk_set(RELEASE_DIR Release-iphonesimulator)

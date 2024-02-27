@@ -159,10 +159,10 @@
 #			ifndef IOS_ARM32
 #				define IOS_ARM32 1
 #			endif
-#			ifndef IOSSIM32
-#				define IOSSIM32 1
+#			ifndef IOSSIM_X86
+#				define IOSSIM_X86 1
 #			endif
-#			define DKOS "IOSSIM32"
+#			define DKOS "IOSSIM_X86"
 #			define DKOS_VERSION "UNKNOWN"
 #		endif
 #	elif TARGET_OS_IPHONE == 1
