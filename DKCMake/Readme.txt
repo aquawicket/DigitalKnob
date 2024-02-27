@@ -12,7 +12,7 @@
 		* /ios_arm64
 		* /iossim_x86
 		* /iossim_x86_64
-		* /linux32
+		* /linux_x86
 		* /linux64
 		* /mac32
 		* /mac64

@@ -120,7 +120,7 @@ while :
 	elif [[ "$OSTYPE" == "linux-gnu"* ]] && [[ "$HOSTTYPE" == "x86_64"* ]]; then
 		options=("linux64" "Exit")
 	elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
-		options=("linux32" "Exit")
+		options=("linux_x86" "Exit")
 	elif [[ "$OSTYPE" == "darwin"* ]] && [[ "$HOSTTYPE" == "x86_64"* ]]; then
 		options=("mac64" "Exit")
 	else
@@ -130,9 +130,9 @@ while :
 	select opt in "${options[@]}"
 	do
 		case $opt in
-			"linux32")
+			"linux_x86")
 				echo "$opt"
-				OS="linux32"
+				OS="linux_x86"
 				break
 				;;
 			"linux64")
