@@ -86,7 +86,7 @@ ANDROID_ARM64_DEBUG_dk_queueBash(
 #EMSCRIPTEN_DEBUG_dk_queueCommand(${EMCONFIGURE} ${OPENSSL}/Configure linux-x32 -no-asm -static -no-sock -no-afalgeng -DOPENSSL_SYS_NETWARE -DSIG_DFL=0 -DSIG_IGN=0 -DHAVE_FORK=0 -DOPENSSL_NO_AFALGENG=1 -DOPENSSL_NO_SPEED=1)
 #EMSCRIPTEN_dk_queueCommand(${DKCMAKE_BUILD} -DBUILD_OPENSSL=ON -DGIT_EXECUTABLE=${GIT_EXE} -DPYTHON_EXECUTABLE=${PYTHON3_APP} ${OPENSSL})
 
-IOS64_DEBUG_dk_queueCommand		(../../Configure no-shared --debug ios64-xcrun)
+IOS_ARM64_DEBUG_dk_queueCommand		(../../Configure no-shared --debug ios64-xcrun)
 IOSSIM_DEBUG_dk_queueCommand	(../../Configure no-shared --debug iossimulator-xcrun)
 LINUX_DEBUG_dk_queueCommand		(../../Configure no-shared --debug)
 MAC_DEBUG_dk_queueCommand		(../../Configure no-shared --debug)
@@ -118,7 +118,7 @@ ANDROID_ARM64_RELEASE_dk_queueBash(
 	#"export PATH=$ANDROID_NDK_ROOT/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64/bin:$PATH\n"
 	"../../Configure no-shared --release android-arm64 -D__ANDROID_API__=${ANDROID_API}")
 #EMSCRIPTEN_RELEASE_dk_queueCommand(${EMCONFIGURE} ${OPENSSL}/Configure)
-IOS64_RELEASE_dk_queueCommand		(../../Configure no-shared --release ios64-xcrun)
+IOS_ARM64_RELEASE_dk_queueCommand		(../../Configure no-shared --release ios64-xcrun)
 IOSSIM_RELEASE_dk_queueCommand		(../../Configure no-shared --release iossimulator-xcrun)
 LINUX_RELEASE_dk_queueCommand		(../../Configure no-shared --release)
 MAC_RELEASE_dk_queueCommand			(../../Configure no-shared --release)

@@ -489,7 +489,7 @@ function DKBuild_DoResults(){
 		}
 	}
 	
-	///// IOS64 ///////
+	///// IOS_ARM64 ///////
 	if(OS === "ios_arm64"){
 		DKBuild_ValidateXcode()
 		CPP_DKFile_MkDir(app_path+OS)

@@ -146,8 +146,8 @@
 #			define IOS 1
 #		endif
 #		if DKBITS == 64
-#			ifndef IOS64
-#				define IOS64 1
+#			ifndef IOS_ARM64
+#				define IOS_ARM64 1
 #			endif
 #			ifndef IOSSIM64
 #				define IOSSIM64 1
@@ -173,10 +173,10 @@
 #			define IOS 1
 #		endif
 #		if DKBITS == 64
-#			ifndef IOS64
-#				define IOS64 1
+#			ifndef IOS_ARM64
+#				define IOS_ARM64 1
 #			endif
-#			define DKOS "IOS64"
+#			define DKOS "IOS_ARM64"
 #			define DKOS_VERSION "UNKNOWN"
 #		endif
 #		if DKBITS == 32
