@@ -19,7 +19,7 @@
 		* /raspberry_arm32
 		* /raspberry_arm64
 		* /win_x86
-		* /win64
+		* /win_x86_64
 		
 * Note: DKCMake will fill in most variables by the path you have selected.		
 

@@ -119,7 +119,7 @@ goto:eof
 	set choice=
 	set /p choice=Please select an OS to build for: 
 	if '%choice%'=='1' set "OS=win_x86" & goto:eof
-	if '%choice%'=='2' set "OS=win64" & goto:eof
+	if '%choice%'=='2' set "OS=win_x86_64" & goto:eof
 	if '%choice%'=='3' set "OS=android_arm32" & goto:eof
 	if '%choice%'=='4' set "OS=android_arm64" & goto:eof
 	if '%choice%'=='5' set "OS=emscripten" & goto:eof
@@ -172,7 +172,7 @@ goto:eof
 	cd "%APP_PATH%\%OS%"
 
 	if %OS%==win_x86 goto generate_win_x86
-	if %OS%==win64 goto generate_win64
+	if %OS%==win_x86_64 goto generate_win_x86_64
 	if %OS%==android_arm32 goto generate_android_arm32
 	if %OS%==android_arm64 goto generate_android_arm64
 	if %OS%==emscripten goto generate_emscripten
@@ -188,8 +188,8 @@ goto:eof
 goto:eof 
 
 
-::###### generate_win64 ######
-:generate_win64
+::###### generate_win_x86_64 ######
+:generate_win_x86_64
 	call:validate_visual_studio
 	"%CMAKE%" -G "Visual Studio 17 2022" -A x64 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKCMAKE%
 	set TARGET=%APP%_APP

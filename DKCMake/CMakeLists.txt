@@ -26,7 +26,7 @@ include_guard()
 ### and the build directy will be set to /Users/username/digitalknob/Development/DKApps/MyApp/linux_x86_64/Debug. The set build directoy tells DKCMake everything 
 ### it needs to know to begine to process, acuire all dependencies and build the project. 
 ###
-### Example 2:  cmake -G "Visual Studio 17 2022" -A x64 -B C:/Users/username/digitalknob/Development/DKApps/DKBuilder/win64 -S C:/Users/username/digitalknob/Development
+### Example 2:  cmake -G "Visual Studio 17 2022" -A x64 -B C:/Users/username/digitalknob/Development/DKApps/DKBuilder/win_x86_64 -S C:/Users/username/digitalknob/Development
 ###
 ### Example 3: 
 ### 	cd /Users/username/digitalknob/Development/DKApps/DKTestAll/linux_x86_64/Release

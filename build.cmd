@@ -71,7 +71,7 @@ if "%*" NEQ "" call %*
 
         call:generate
         if %TARGET_OS%==win_x86       call:generate_win_x86
-        if %TARGET_OS%==win64       call:generate_win64
+        if %TARGET_OS%==win_x86_64       call:generate_win_x86_64
         if %TARGET_OS%==android_arm32   call:generate_android_arm32
         if %TARGET_OS%==android_arm64   call:generate_android_arm64
         if %TARGET_OS%==emscripten  call:generate_emscripten
@@ -229,7 +229,7 @@ goto:eof
     set /p choice=Please select an OS to build for: 
     ::if not "%choice%"=="" set choice=%choice:~0,1%        ::What does this do?
     if "%choice%"=="1" set "TARGET_OS=win_x86"		& goto:eof
-    if "%choice%"=="2" set "TARGET_OS=win64"		& goto:eof
+    if "%choice%"=="2" set "TARGET_OS=win_x86_64"		& goto:eof
     if "%choice%"=="3" set "TARGET_OS=android_arm32"	& goto:eof
     if "%choice%"=="4" set "TARGET_OS=android_arm64"	& goto:eof
     if "%choice%"=="5" set "TARGET_OS=emscripten"	& goto:eof
@@ -445,7 +445,7 @@ goto:eof
     ::set TARGET=%APP%_APP
 goto:eof
 
-:generate_win64
+:generate_win_x86_64
 	set COMPILER=MINGW64
 		
 	::call:validate_msys2

@@ -68,7 +68,7 @@ function RunMenu_onevent(event) {
                     }
                 }
             }
-            if (OS === "win64") {
+            if (OS === "win_x86_64") {
                 DK_Run(DIGITALKNOB + "/DKApps/" + APP + "/" + OS + "/Release/" + APP + "_64.exe");
                 DK_Run(DIGITALKNOB + "/USER/DKApps/" + APP + "/" + OS + "/Release/" + APP + "_64.exe");
 
