@@ -22,7 +22,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 include_guard()
-
+message(STATUS "*** DKGenerate.cmake ***")
 
 get_filename_component(path ${CMAKE_SOURCE_DIR} ABSOLUTE)
 set(DKCMAKE ${path} CACHE INTERNAL "")

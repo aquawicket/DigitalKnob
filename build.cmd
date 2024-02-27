@@ -348,6 +348,9 @@ goto:eof
 goto:eof
 
 :generate_android_arm32
+	"%CMAKE%" -G "Unix Makefiles" %CMAKE_ARGS%
+	goto:eof
+	
 	call:validate_android_ndk
 	
     ::call:validate_visual_studio

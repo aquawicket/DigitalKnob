@@ -547,7 +547,8 @@ function Generate_Project() {
 	if [[ "$TARGET_OS" == "iossim_x86" ]]; then
 		CMAKE_ARGS+=( "-G Xcode" )
 		CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$DKCMAKE/ios.toolchain.cmake" )
-		CMAKE_ARGS+=( "-DPLATFORM=SIMULATOR -DSDK_VERSION=15.0" )
+		CMAKE_ARGS+=( "-DPLATFORM=SIMULATOR" )
+		CMAKE_ARGS+=( "-DSDK_VERSION=15.0" )
 		CMAKE_ARGS+=( "-DDEPLOYMENT_TARGET=13.0" )
 		dk_call $CMAKE "${CMAKE_ARGS[@]}"
 	fi

@@ -22,6 +22,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 include_guard()
+message(STATUS "*** DKBuildFlags.cmake ***")
 
 # Reference docs
 # Get the definition of any shell command		https://explainshell.com 
@@ -383,6 +384,7 @@ RASPBERRY_ARM64_dk_set(DKCONFIGURE_CXX				${GCC_CXX_COMPILER})
 RASPBERRY_ARM64_dk_append(DKCONFIGURE_CXXFLAGS		"-DLINUX -DLINUX_X86_64 -DRASPBERRY -DRASPBERRY_ARM64 -std=gnu++17 -lstdc++fs") #-march=armv7l 
 
 # Android armeabi-v7a (x32) - CLANG
+ANDROID_ARM32_dk_set(CMAKE_GENERATOR				"Unix Makefiles")
 ANDROID_ARM32_dk_append(DKCMAKE_FLAGS
 	-DANDROID_ABI=armeabi-v7a
 	"-DANDROID_CPP_FEATURES=rtti exceptions"

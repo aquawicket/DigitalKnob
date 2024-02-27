@@ -22,6 +22,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 include_guard()
+message(STATUS "*** DKVariables.cmake ***")
 
 include("${DKCMAKE}/DK.cmake")
 

@@ -1,4 +1,5 @@
 include_guard()
+message(STATUS "*** DK.cmake ***")
 
 #################### GLOBAL DKCMake SETTINGS ############################
 set(DKOFFLINE					0		CACHE INTERNAL "")	# work offline. No Git remote commands or downloading files

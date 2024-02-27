@@ -22,6 +22,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 include_guard()
+message(STATUS "*** DKString.cmake ***")
 
 
 # https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String

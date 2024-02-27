@@ -47,6 +47,11 @@ include_guard()
 ### https://cmake.org/cmake/help/git-master/guide/tutorial/index.html
 ###
 
+
+get_filename_component(DKCMAKE ${CMAKE_SOURCE_DIR} ABSOLUTE)
+include(${DKCMAKE}/DKInit.cmake)
+
+
 message(STATUS "########################################")
 message(STATUS "###### DIGITALKNOB CMakeLists.txt ######")
 message(STATUS "########################################")
@@ -66,7 +71,6 @@ dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_START_VARIABLES.temp)
 
 PROJECT(DigitalKnob)
 dk_dumpAllVariables(${CMAKE_BINARY_DIR}/DKCMAKE_PROJECT_VARIABLES.temp)
-
 
 
 
