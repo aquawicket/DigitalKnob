@@ -122,11 +122,11 @@ WIN_X86_RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
 WIN_X86_RELEASE_dk_build			(${XZ})
 
 # look at xz/windows/build.bash for details
-WIN64_DEBUG_dk_setPath			(${XZ}/${OS}/${DEBUG_DIR})
-WIN64_DEBUG_dk_queueCommand		(${DKCONFIGURE_BUILD} --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts)
-WIN64_DEBUG_dk_build			(${XZ})
-WIN64_RELEASE_dk_setPath		(${XZ}/${OS}/${RELEASE_DIR})
-WIN64_DEBUG_dk_queueCommand		(${DKCONFIGURE_BUILD}  --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts)
-WIN64_RELEASE_dk_build			(${XZ})
+WIN_X86_64_DEBUG_dk_setPath			(${XZ}/${OS}/${DEBUG_DIR})
+WIN_X86_64_DEBUG_dk_queueCommand		(${DKCONFIGURE_BUILD} --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts)
+WIN_X86_64_DEBUG_dk_build			(${XZ})
+WIN_X86_64_RELEASE_dk_setPath		(${XZ}/${OS}/${RELEASE_DIR})
+WIN_X86_64_DEBUG_dk_queueCommand		(${DKCONFIGURE_BUILD}  --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts)
+WIN_X86_64_RELEASE_dk_build			(${XZ})
 
 #endif()

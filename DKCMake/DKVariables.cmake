@@ -371,12 +371,12 @@ if(${index} GREATER -1)
 	string(REPLACE "/win_x86" "" DKPROJECT ${CMAKE_BINARY_DIR})
 endif()
 
-# WIN 64
+# win_x86_64
 string(FIND "${CMAKE_BINARY_DIR}" "/win_x86_64" index)
 if(${index} GREATER -1)
 	dk_info("*** Creating Windows x64 Project Files ***")
 	dk_set(WIN ON)
-	dk_set(WIN_64 ON)
+	dk_set(WIN_X86_64 ON)
 	dk_set(OS "win_x86_64")
 	dk_set(DEBUG_DIR Debug)
 	dk_set(RELEASE_DIR Release)

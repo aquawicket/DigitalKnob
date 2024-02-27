@@ -6,6 +6,6 @@ IF(WIN_X86)
 	dk_copy(${DKPLUGINS}/DKPlugin1/win_x86/Release/DKPlugin1.dll ${DKPROJECT}/assets/DKPlugin1 OVERWRITE)
 ENDIF()
 
-IF(WIN_64)
+IF(WIN_X86_64)
 	dk_copy(${DKPLUGINS}/DKPlugin1/win_x86_64/Release/DKPlugin1.dll ${DKPROJECT}/assets/DKPlugin1 OVERWRITE)
 ENDIF()

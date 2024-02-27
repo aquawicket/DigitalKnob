@@ -528,14 +528,14 @@ endif(MSVC)
 
 
 # Disabled for Windows 64bit (MSVC) targets
-if(MSVC AND WIN_64)
+if(MSVC AND WIN_X86_64)
 	dk_disable(DKVncClient)			# requires libvncserver
 	dk_disable(DKVncServer)			# requires libvncserver
 	dk_disable(libvncserver)		# build errors
 	dk_disable(opencv)				# error: Only SIMD128, AVX2 and NEON are supported in Winograd.
 	dk_disable(sdl_net)				# can't find "sys/ioctl.h"
 	dk_disable(smpeg2)				# fatal error C1083: Cannot open include file: 'unistd.h'
-endif(MSVC AND WIN_64)
+endif(MSVC AND WIN_X86_64)
 
 
 # Disabled for Windows (MSYS2) targets

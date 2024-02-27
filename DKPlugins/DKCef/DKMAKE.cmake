@@ -53,7 +53,7 @@ if(WIN_X86)
 	LIST(APPEND RELEASE_LINK_FLAGS /DELAYLOAD:chrome_elf.dll)
 endif()
 
-if(WIN_64)
+if(WIN_X86_64)
 	dk_copy(${CEF_BINARY}/Resources/ ${DKPROJECT}/assets/DKCef OVERWRITE)
 	if(DEBUG)
 		dk_copy(${CEF_BINARY}/Debug/ ${DKPROJECT}/assets/DKCef/win_x86_64_Debug OVERWRITE)

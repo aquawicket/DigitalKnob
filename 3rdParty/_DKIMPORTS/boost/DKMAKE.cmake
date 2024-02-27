@@ -106,8 +106,8 @@ foreach(lib ${boost_targets})
 		if(MSVC)
 			WIN_X86_dk_libDebug(${BOOST}/${OS}/${DEBUG_DIR}/lib/libboost_${lib}.lib)
 			WIN_X86_dk_libRelease(${BOOST}/${OS}/${RELEASE_DIR}/lib/libboost_${lib}.lib)
-			WIN64_dk_libDebug(${BOOST}/${OS}/${DEBUG_DIR}/lib/libboost_${lib}.lib)
-			WIN64_dk_libRelease(${BOOST}/${OS}/${RELEASE_DIR}/lib/libboost_${lib}.lib)
+			WIN_X86_64_dk_libDebug(${BOOST}/${OS}/${DEBUG_DIR}/lib/libboost_${lib}.lib)
+			WIN_X86_64_dk_libRelease(${BOOST}/${OS}/${RELEASE_DIR}/lib/libboost_${lib}.lib)
 		else()
 			dk_libDebug(${BOOST}/${OS}/${DEBUG_DIR}/lib/libboost_${lib}.a)
 			dk_libRelease(${BOOST}/${OS}/${RELEASE_DIR}/lib/libboost_${lib}.a)
@@ -420,7 +420,7 @@ if(MSVC)
 		${BOOST_WITHOUT}
 		--build-dir=${BOOST}/${OS}/${RELEASE_DIR}
 		--stagedir=${BOOST}/${OS}/${RELEASE_DIR})
-	WIN64_DEBUG_dk_queueCommand(${BOOST}/b2.exe
+	WIN_X86_64_DEBUG_dk_queueCommand(${BOOST}/b2.exe
 		toolset=msvc-14.3
 		address-model=64
 		variant=debug
@@ -434,7 +434,7 @@ if(MSVC)
 		${BOOST_WITHOUT}
 		--build-dir=${BOOST}/${OS}/${DEBUG_DIR}
 		--stagedir=${BOOST}/${OS}/${DEBUG_DIR})
-	WIN64_RELEASE_dk_queueCommand(${BOOST}/b2
+	WIN_X86_64_RELEASE_dk_queueCommand(${BOOST}/b2
 		toolset=msvc-14.3
 		address-model=64
 		variant=release

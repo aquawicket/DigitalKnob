@@ -20,8 +20,8 @@ dk_import(https://github.com/kiyolee/bzip2-win-build.git BRANCH main)
 dk_include			(${BZIP2_WIN_BUILD}												BZIP2_INCLUDE_DIR)
 WIN_X86_dk_libDebug	(${BZIP2_WIN_BUILD}/${OS}/${DEBUG_DIR}/libbz2-static.lib		BZIP2_LIBRARY_DEBUG)
 WIN_X86_dk_libRelease	(${BZIP2_WIN_BUILD}/${OS}/${RELEASE_DIR}/libbz2-static.lib		BZIP2_LIBRARY_RELEASE)
-WIN64_dk_libDebug	(${BZIP2_WIN_BUILD}/${OS}/x64/${DEBUG_DIR}/libbz2-static.lib	BZIP2_LIBRARY_DEBUG)
-WIN64_dk_libRelease	(${BZIP2_WIN_BUILD}/${OS}/x64/${RELEASE_DIR}/libbz2-static.lib	BZIP2_LIBRARY_RELEASE)
+WIN_X86_64_dk_libDebug	(${BZIP2_WIN_BUILD}/${OS}/x64/${DEBUG_DIR}/libbz2-static.lib	BZIP2_LIBRARY_DEBUG)
+WIN_X86_64_dk_libRelease	(${BZIP2_WIN_BUILD}/${OS}/x64/${RELEASE_DIR}/libbz2-static.lib	BZIP2_LIBRARY_RELEASE)
 
 
 ### 3RDPARTY LINK ###
@@ -39,7 +39,7 @@ if(WIN_X86)
 endif()
 
 
-if(WIN_64)
+if(WIN_X86_64)
 	dk_copy			(${BZIP2_WIN_BUILD}/win32/bzip2.rc ${BZIP2_WIN_BUILD}/${OS}/bzip2.rc) #copy project files that came with bzip
 	dk_copy			(${BZIP2_WIN_BUILD}/win32/bzip2recover.rc ${BZIP2_WIN_BUILD}/${OS}/bzip2recover.rc)
 	dk_copy			(${BZIP2_WIN_BUILD}/win32/bzip2_version.h ${BZIP2_WIN_BUILD}/${OS}/bzip2_version.h)

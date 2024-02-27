@@ -141,7 +141,7 @@ bool DKCef::Init(){
 		__HrLoadAllImportsForDll("libcef.dll"); //delay loading the DLL from another location 
 #	endif
 
-#if WIN64
+#if WIN_X86_64
 		DKString elf_dll;
 		DKString cef_dll;
 #		ifdef DEBUG
@@ -270,7 +270,7 @@ bool DKCef::Init(){
 				DKString ep = DKFile::local_assets + "/DKCef/win_x86_Release/DKCefChild.exe";
 #			endif
 #		endif
-#		ifdef WIN64
+#		if WIN_X86_64
 #			ifdef DEBUG
 				DKString ep = DKFile::local_assets + "/DKCef/win_x86_64_Debug/DKCefChild.exe";
 #			else

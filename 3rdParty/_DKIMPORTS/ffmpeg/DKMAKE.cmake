@@ -122,7 +122,7 @@ RASPBERRY_ARM32_DEBUG_dk_queueCommand	(../../configure --pkg-config-flags=--stat
 RASPBERRY_ARM64_DEBUG_dk_queueCommand	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=x86_64 --disable-x86asm --disable-iconv)
 WIN_X86_DEBUG_dk_queueCommand			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-sdl2 --target-os=mingw32)
 #WIN_X86_DEBUG_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --toolchain=msvc) # --cc=\${MSVC_CL}
-WIN64_DEBUG_dk_queueCommand			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --target-os=mingw64)
+WIN_X86_64_DEBUG_dk_queueCommand			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --target-os=mingw64)
 
 EMSCRIPTEN_DEBUG_dk_queueCommand(${EMMAKE} make)
 if(NOT EMSCRIPTEN)
@@ -167,7 +167,7 @@ RASPBERRY_ARM32_RELEASE_dk_queueCommand	(../../configure --pkg-config-flags=--st
 RASPBERRY_ARM64_RELEASE_dk_queueCommand	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=x86_64 --disable-x86asm --disable-iconv)
 WIN_X86_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --disable-sdl2 --target-os=mingw32)
 #WIN_X86_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --toolchain=msvc)
-WIN64_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --target-os=mingw64)
+WIN_X86_64_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --target-os=mingw64)
 
 EMSCRIPTEN_RELEASE_dk_queueCommand(${EMMAKE} make)
 if(NOT EMSCRIPTEN)
