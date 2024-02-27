@@ -29,7 +29,7 @@ dk_generateCmake(DKCef)
 dk_assets(DKCef)
 
 
-if(WIN_32)
+if(WIN_X86)
 	dk_copy(${CEF_BINARY}/Resources/ ${DKPROJECT}/assets/DKCef OVERWRITE)
 	if(DEBUG)
 		dk_copy(${CEF_BINARY}/Debug/ ${DKPROJECT}/assets/DKCef/win_x86_Debug OVERWRITE)

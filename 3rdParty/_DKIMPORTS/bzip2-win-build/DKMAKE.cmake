@@ -29,7 +29,7 @@ WIN_dk_set(BZIP2_WIN_BUILD_CMAKE -DBZIP2_INCLUDE_DIR=${BZIP2_INCLUDE_DIR} -DBZIP
 	
 	
 ### COMPILE ###
-if(WIN_32)
+if(WIN_X86)
 	dk_define		(BZ_NO_STDIO)
 	dk_copy			(${BZIP2_WIN_BUILD}/build-VS2022 ${BZIP2_WIN_BUILD}/${OS})
 	dk_fileReplace	(${BZIP2_WIN_BUILD}/${OS}/bzip2-static/bzip2-static.vcxproj "v142" "v143")

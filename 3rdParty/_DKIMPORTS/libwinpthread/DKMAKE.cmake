@@ -1,4 +1,4 @@
-#if(WIN_32)
+#if(WIN_X86)
 #	dk_depend(mingw32)
 #elseif(WIN_64)
 #	dk_depend(mingw64)
@@ -6,7 +6,7 @@
 dk_depend(msys2)
 
 
-if(WIN_32)
+if(WIN_X86)
 	#dk_set(LIBWINPTHREAD ${MINGW32}/i686-w64-mingw32/lib)
 	dk_set(LIBWINPTHREAD ${MSYS2}/mingw32/lib)
 endif()

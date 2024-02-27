@@ -1,7 +1,7 @@
 dk_depend(msys2)
 
 dk_set(LIBGCC_NAME libgcc)
-if(WIN_32)
+if(WIN_X86)
 	dk_set(LIBGCC  ${MSYS2}/mingw32/lib/gcc/i686-w64-mingw32/13.2.0)
 endif()
 if(WIN_64)

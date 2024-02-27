@@ -358,12 +358,12 @@ if(${index} GREATER -1)
 	dk_set(TINYCORE ON)
 endif()	
 	
-# WIN 32
+# WIN win_x86
 string(FIND "${CMAKE_BINARY_DIR}" "/win_x86" index)
 if(${index} GREATER -1)
 	dk_info("Creating Windows x32 Project Files")
 	dk_set(WIN ON)
-	dk_set(WIN_32 ON)
+	dk_set(WIN_X86 ON)
 	dk_set(OS "win_x86")
 	dk_set(DEBUG_DIR Debug)
 	dk_set(RELEASE_DIR Release)

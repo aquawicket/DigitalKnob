@@ -39,7 +39,7 @@ dk_set(BZIP2_CMAKE -DBZIP2_INCLUDE_DIR=${BZIP2_INCLUDE_DIR} -DBZIP2_LIBRARY_DEBU
 
 ### COMPILE ###
 if(MSVC)
-	if(WIN_32)
+	if(WIN_X86)
 		dk_define	(BZ_NO_STDIO)
 		dk_copy		(${BZIP2}/build-VS2019 ${BZIP2}/${OS})
 		dk_setPath	(${BZIP2}/${OS})
