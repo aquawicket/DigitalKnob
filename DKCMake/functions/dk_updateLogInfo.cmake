@@ -1,9 +1,11 @@
 include_guard()
+message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
+
 
 ##################################################################################
 # dk_updateLogInfo()
 #
-#	TODO
+#	Updates the STACK_HEADER variable with the current filename, line number, function name and arguments
 #
 macro(dk_updateLogInfo)
 	#DKDEBUGFUNC(${ARGV})

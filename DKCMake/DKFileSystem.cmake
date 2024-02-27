@@ -22,7 +22,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 include_guard()
-message(STATUS "*** DKFileSystem.cmake ***")
+message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
 
 
 #     dk.filesystem.js - %DIGITALKNOB%/Development/Api/filesystem/filesystem.js

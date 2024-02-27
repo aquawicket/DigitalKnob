@@ -22,7 +22,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 include_guard()
-message(STATUS "*** DKBuildFlags.cmake ***")
+message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
 
 # Reference docs
 # Get the definition of any shell command		https://explainshell.com 

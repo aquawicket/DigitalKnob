@@ -1,4 +1,6 @@
 include_guard()
+message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
+
 
 ##################################################################################
 # dk_debugFunc(${ARGV})
@@ -13,6 +15,7 @@ include_guard()
 #		endfunction()
 #
 macro(dk_debugFunc)
+	#DKDEBUGFUNC(${ARGV})
 	if(DKDEBUGFUNC_ENABLED)
 		if(NOT CMAKE_CURRENT_FUNCTION_LIST_FILE)
 			set(CMAKE_CURRENT_FUNCTION_LIST_FILE "unknown")

@@ -22,7 +22,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 include_guard()
-message(STATUS "*** DKFunctions.cmake ***")
+message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
 
 # Extra Documentation
 # https://asitdhal.medium.com/cmake-functions-and-macros-22293041519f

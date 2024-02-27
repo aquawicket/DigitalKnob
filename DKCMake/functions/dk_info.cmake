@@ -1,4 +1,6 @@
 include_guard()
+message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
+
 
 ##################################################################################
 # dk_info(msg)
@@ -8,10 +10,11 @@ include_guard()
 #	@msg	- The message to print
 #
 macro(dk_info msg)
+	#DKDEBUGFUNC(${ARGV})
 	#message(STATUS "dk_info(${ARGV})")
-	string(REPLACE " " "" var ${msg})
+	string(REPLACE " " "" var "${msg}")
 	dk_updateLogInfo()
-	if(${var})
+	if("${var}")
 		message(STATUS "${H_black}${STACK_HEADER}${CLR}${white} { \"${var}\" : \"${${var}}\" } ${CLR}")
 	else()
 		message(STATUS "${H_black}${STACK_HEADER}${CLR}${white} ${msg} ${CLR}")

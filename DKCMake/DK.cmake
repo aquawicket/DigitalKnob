@@ -1,5 +1,6 @@
 include_guard()
-message(STATUS "*** DK.cmake ***")
+message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
+
 
 #################### GLOBAL DKCMake SETTINGS ############################
 set(DKOFFLINE					0		CACHE INTERNAL "")	# work offline. No Git remote commands or downloading files
@@ -26,12 +27,51 @@ set(WAIT_ON_WARNINGS			0		CACHE INTERNAL "")	# pause cmake build script on warni
 set(USE_COLOR					1		CACHE INTERNAL "")	# colored text output
 set(INCLUDE_DKPLUGINS			1		CACHE INTERNAL "")  # Include the DKPlugins to the main app project
 
-
+###### DKOFFLINE Warning ######
 if(${DKOFFLINE})
 	dk_warn("!!!!!!!!!! WORKING IN DKOFFLINE MODE !!!!!!!!!")
 endif()
 
-###### DEFINED EXTRA OS_HOST VARIABLES ######
+###### Get CMAKE_SOURCE_DIR ######
+if(NOT CMAKE_SOURCE_DIR)
+	message(FATAL_ERROR "CMAKE_SOURCE_DIR invalid!")
+endif()
+get_filename_component(CMAKE_SOURCE_DIR ${CMAKE_SOURCE_DIR} ABSOLUTE)
+message(STATUS "CMAKE_SOURCE_DIR = ${CMAKE_SOURCE_DIR}")
+
+###### Get CMAKE_BINARY_DIR ######
+if(NOT CMAKE_BINARY_DIR)
+	message(FATAL_ERROR "CMAKE_BINARY_DIR invalid!")
+endif()
+get_filename_component(CMAKE_BINARY_DIR ${CMAKE_BINARY_DIR} ABSOLUTE)
+message(STATUS "CMAKE_BINARY_DIR = ${CMAKE_BINARY_DIR}")
+
+###### Set DKCMAKE_DIR ######
+set(DKCMAKE_DIR ${CMAKE_SOURCE_DIR} CACHE INTERNAL "" FORCE)
+message(STATUS "DKCMAKE_DIR = ${DKCMAKE_DIR}")
+
+###### Set DKBRANCH_DIR ######
+string(FIND "${DKCMAKE}" "DKCMake" pos)
+math(EXPR pos "${pos}-1")
+string(SUBSTRING ${DKCMAKE} 0 ${pos} DKBRANCH_DIR)
+set(DKBRANCH_DIR ${DKBRANCH_DIR} CACHE INTERNAL "" FORCE)
+message(STATUS "DKBRANCH_DIR = ${DKBRANCH_DIR}")
+
+###### Set DIGITALKNOB_DIR ######
+string(FIND "${DKBRANCH_DIR}" "digitalknob" pos)
+string(SUBSTRING ${DKBRANCH_DIR} 0 ${pos} DIGITALKNOB_DIR)
+set(DIGITALKNOB_DIR ${DIGITALKNOB_DIR}digitalknob CACHE INTERNAL "" FORCE)
+message(STATUS "DIGITALKNOB_DIR = ${DIGITALKNOB_DIR}")
+
+##### Set DK3RDPARTY_DIR ######
+set(DK3RDPARTY_DIR ${DKBRANCH_DIR}/3rdParty CACHE INTERNAL "" FORCE)
+message(STATUS "DK3RDPARTY_DIR = ${DK3RDPARTY_DIR}")
+
+###### Set DKIMPORTS_DIR ######
+set(DKIMPORTS_DIR ${DK3RDPARTY_DIR}/_DKIMPORTS CACHE INTERNAL "" FORCE)
+message(STATUS "DKIMPORTS_DIR = ${DKIMPORTS_DIR}")
+
+###### Set <SYSTEM_NAME>_HOST variables ######
 if(CMAKE_HOST_WIN32)
 	set(WIN_HOST 				TRUE 							CACHE INTERNAL "")
 endif()
@@ -48,7 +88,7 @@ if(CMAKE_HOST_UNIX AND NOT CMAKE_HOST_APPLE)
 	endif()
 endif()
 
-### Set HOST
+###### Set HOST ######
 message(STATUS "CMAKE_HOST_SYSTEM_NAME = ${CMAKE_HOST_SYSTEM_NAME}")
 if(CMAKE_HOST_WIN32)
 	set(HOST		WIN			CACHE INTERNAL "")
@@ -65,6 +105,81 @@ else()
 endif()
 message(STATUS "HOST = ${HOST}")
 
+###### Set MSYSTEM and ${MSYSTEM} variables ######
+if(DEFINED "ENV{MSYSTEM}")
+	set(MSYSTEM "$ENV{MSYSTEM}"	CACHE INTERNAL "")		
+endif()
+if(MSYSTEM)
+	set(${MSYSTEM} TRUE			CACHE INTERNAL "")
+endif()
+message(STATUS "MSYSTEM = ${MSYSTEM}")
+message(STATUS "${MSYSTEM} = ${${MSYSTEM}}")
+
+##### Set ProgramFiles_<> variables ######
+if(DEFINED "ENV{HOMEDRIVE}")
+	# TODO
+endif()
+if(DEFINED "ENV{ProgramW6432}")
+	file(TO_CMAKE_PATH "$ENV{ProgramW6432}" ProgramFiles)
+	set(ProgramFiles "${ProgramFiles}")
+elseif(DEFINED "ENV{ProgramFiles}")
+	file(TO_CMAKE_PATH "$ENV{ProgramFiles}" ProgramFiles)
+	set(ProgramFiles "${ProgramFiles}")
+endif()
+if(DEFINED "ENV{ProgramFiles\(x86\)}")
+	file(TO_CMAKE_PATH "$ENV{ProgramFiles\(x86\)}" ProgramFiles_x86)
+	set(ProgramFiles_x86 "${ProgramFiles_x86}")
+endif()
+message(STATUS "ProgramFiles = ${ProgramFiles}")
+message(STATUS "ProgramFiles_x86 = ${ProgramFiles_x86}")
+
+###### set MULTI_CONFIG / SINGLE_CONFIG variables ######
+get_property(MULTI_CONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
+if(MULTI_CONFIG)
+	set(MULTI_CONFIG TRUE CACHE INTERNAL "")
+	message(STATUS "*** ${CMAKE_GENERATOR}: Generator is Multi-Config ***")
+else()
+	set(SINGLE_CONFIG TRUE CACHE INTERNAL "")
+	message(STATUS "*** ${CMAKE_GENERATOR}: Generator is Single-Config ***")
+endif()
+message(STATUS "MULTI_CONFIG = ${MULTI_CONFIG}")
+message(STATUS "SINGLE_CONFIG = ${SINGLE_CONFIG}")
+
+###### Set the DIGITALKNOB, DKBRANCH and DKCMAKE variables ######
+get_filename_component(path ${CMAKE_SOURCE_DIR} ABSOLUTE)
+set(DKCMAKE ${path} CACHE INTERNAL "")
+message(STATUS "DKCMAKE = ${DKCMAKE}")
+
+string(FIND "${DKCMAKE}" "DKCMake" pos)
+math(EXPR pos "${pos}-1")
+string(SUBSTRING ${DKCMAKE} 0 ${pos} DKBRANCH)
+set(DKBRANCH ${DKBRANCH} CACHE INTERNAL "")
+message(STATUS "DKBRANCH = ${DKBRANCH}")
+
+string(FIND "${DKBRANCH}" "digitalknob" pos)
+string(SUBSTRING ${DKBRANCH} 0 ${pos} DIGITALKNOB)
+set(DIGITALKNOB ${DIGITALKNOB}digitalknob CACHE INTERNAL "")
+message(STATUS "DIGITALKNOB = ${DIGITALKNOB}")
+
+
+### load DKCMake function
+include(${DKCMAKE}/functions/dk_load.cmake)
+#dk_load(DKDEBUGFUNC)
+#dk_load(dk_updateLogInfo)
+#dk_load(dk_debug)
+#dk_load(dk_createOsMacros)
+#dk_load(dk_set)
+#dk_load(dk_mergeFlags)
+#dk_load(dk_includes)
+#dk_load(dk_info)
+#dk_load(dk_executeProcess)
+#dk_load(dk_command)
+
+### include CMakeDetermineSystem.cmake if needed 
+#if(NOT CMAKE_HOST_SYSTEM_PROCESSOR)
+#	include(${DKIMPORTS_DIR}/cmake/DKMAKE.cmake)
+#	include(${CMAKE_MODULES}/CMakeDetermineSystem.cmake)
+#endif()
 
 ### Set HOST_ARCH
 if(NOT CMAKE_HOST_SYSTEM_PROCESSOR)
@@ -96,60 +211,26 @@ message(STATUS "HOST_ARCH = ${HOST_ARCH}")
 
 
 
-###### DEFINED EXTRA MSYS2 VARIABLES #######
-if(DEFINED "ENV{MSYSTEM}")
-	set(MSYSTEM "$ENV{MSYSTEM}"	CACHE INTERNAL "")		
-endif()
-if(MSYSTEM)
-	set(${MSYSTEM} TRUE			CACHE INTERNAL "")
-endif()
-
-##### DEFINED ProgramFiles VARIABLES ######
-if(DEFINED "ENV{HOMEDRIVE}")
-	# TODO
-endif()
-if(DEFINED "ENV{ProgramW6432}")
-	file(TO_CMAKE_PATH "$ENV{ProgramW6432}" ProgramFiles)
-	set(ProgramFiles "${ProgramFiles}")
-elseif(DEFINED "ENV{ProgramFiles}")
-	file(TO_CMAKE_PATH "$ENV{ProgramFiles}" ProgramFiles)
-	set(ProgramFiles "${ProgramFiles}")
-endif()
-if(DEFINED "ENV{ProgramFiles\(x86\)}")
-	file(TO_CMAKE_PATH "$ENV{ProgramFiles\(x86\)}" ProgramFiles_x86)
-	set(ProgramFiles_x86 "${ProgramFiles_x86}")
-endif()
-
-###### DEFINED MULTI_CONFIG / SINGLE_CONFIG VARIABLES ######
-get_property(MULTI_CONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
-if(MULTI_CONFIG)
-	set(MULTI_CONFIG TRUE CACHE INTERNAL "")
-	message(STATUS "*** ${CMAKE_GENERATOR}: Generator is Multi-Config ***")
-else()
-	set(SINGLE_CONFIG TRUE CACHE INTERNAL "")
-	message(STATUS "*** ${CMAKE_GENERATOR}: Generator is Single-Config ***")
-endif()
 
 
-###### Set the DIGITALKNOB, DKBRANCH and DKCMAKE variables ######
-get_filename_component(path ${CMAKE_SOURCE_DIR} ABSOLUTE)
-set(DKCMAKE ${path} CACHE INTERNAL "")
-#message(STATUS "\n DKCMAKE =  ${DKCMAKE}\n")
 
-string(FIND "${DKCMAKE}" "DKCMake" pos)
-math(EXPR pos "${pos}-1")
-string(SUBSTRING ${DKCMAKE} 0 ${pos} DKBRANCH)
-set(DKBRANCH ${DKBRANCH} CACHE INTERNAL "")
-#message(STATUS "\n DKBRANCH =  ${DKBRANCH}\n")
 
-string(FIND "${DKBRANCH}" "digitalknob" pos)
-string(SUBSTRING ${DKBRANCH} 0 ${pos} DIGITALKNOB)
-set(DIGITALKNOB ${DIGITALKNOB}digitalknob CACHE INTERNAL "")
-#message(STATUS "\n DIGITALKNOB =  ${DIGITALKNOB}\n")
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ##### Load Function files #################
-include(${DKCMAKE}/functions/dk_load.cmake)
+#include(${DKCMAKE}/functions/dk_load.cmake)
 #include(${DKCMAKE}/functions/dk_call.cmake)
 #dk_load(dk_listReplace)
 #dk_load(dk_getArgIdentifiers)

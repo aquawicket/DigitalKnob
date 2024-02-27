@@ -22,7 +22,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 include_guard()
-message(STATUS "*** DKInit.cmake ***")
+message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
 
 
 ### Get CMAKE_SOURCE_DIR ###

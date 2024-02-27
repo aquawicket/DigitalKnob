@@ -1,3 +1,7 @@
+include_guard()
+message(STATUS "****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
+
+
 dk_depend(git)
 # dk_import(url) details
 #
