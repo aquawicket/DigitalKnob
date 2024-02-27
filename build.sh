@@ -86,7 +86,7 @@ function main() {
 	print_var NATIVE_ARCH
 	
 	# NATIVE_TRIPLE
-	NATIVE_TRIPLE=$NATIVE_OS_$NATIVE_ARCH
+	NATIVE_TRIPLE=${NATIVE_OS}_${NATIVE_ARCH}
 	print_var NATIVE_TRIPLE
 	echo ""
 	
