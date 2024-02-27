@@ -156,14 +156,12 @@ function Pick_Update() {
     echo " 2) Git Commit"
     echo " 3) Push assets"
     echo " 4) Pull assets"
-    echo " 5) Reset Apps"
-    echo " 6) Reset Plugins"
-    echo " 7) Reset 3rdParty"
-    echo " 8) Reset All"
-    echo " 9) Clear Screen"
-    echo "10) Clear cmake cache and .tmp files"
-    echo "11) Reload"
-    echo "12) Exit"
+    echo " 5) Reset All"
+	echo " 6) Remove All"
+    echo " 7) Clear Screen"
+    echo " 8) Clear cmake cache and .tmp files"
+    echo " 9) Reload"
+    echo "10) Exit"
     echo "" 
     echo " Press Enter To Skip"
 	
@@ -177,22 +175,18 @@ function Pick_Update() {
 	elif [ "$input" == "4" ]; then
 		pull_assets
 	elif [ "$input" == "5" ]; then
-		reset_apps
-	elif [ "$input" == "6" ]; then
-		reset_plugins
-	elif [ "$input" == "7" ]; then
-		reset_3rdpaty
-	elif [ "$input" == "8" ]; then
 		reset_all
-	elif [ "$input" == "9" ]; then
+	elif [ "$input" == "6" ]; then
+		remove_all
+	elif [ "$input" == "7" ]; then
 		clear
-	elif [ "$input" == "10" ]; then
+	elif [ "$input" == "8" ]; then
 		clear_cmake_cache
 		delete_temp_files
-	elif [ "$input" == "11" ]; then
+	elif [ "$input" == "9" ]; then
 		reload
-	elif [ "$input" == "12" ]; then
-		exit 0
+	elif [ "$input" == "10" ]; then
+		exit 0	
 	elif [ "$input" == "" ]; then
 		UPDATE=1
 	else
@@ -1076,86 +1070,152 @@ function reset_plugins() {
 }
 
 function reset_all() {
-
-if ! [ "$1" == "wipe" ]; then
-		
-	clear
-	echo ""
-	echo ""
-	echo "Do you want to reset the entire local repository . . . ?"
-	echo "This will delete digitalknob, everything will be reset,"
-	echo "and the repository will be re-cloned. All libraries and tools"
-	echo "will be redownloaded and rebuild from start. Save any changes"
-	echo "you wish to commit or save beforehand."
-	echo ""
-	
-	if CONFIRM; then return; fi
-	
-	# first we need to relocate this file up one directory
-	# make sure script is running from DKPATH
-	if ! [ $SCRIPTPATH == $DKPATH ]; then
-		echo "WARNING: this file isn't running from the branch directory"
-		echo "Is must be in the branch directory to continue."
-		echo "SCRIPTPATH = $SCRIPTPATH"
-		print_var DKPATH
-		return 1;
-	fi
-	
-	echo "RELOCATING SCRIPT TO -> $DIGITALKNOB/$SCRIPTNAME"
-	cp $SCRIPTPATH/$SCRIPTNAME $DIGITALKNOB/$SCRIPTNAME
-	source "$DIGITALKNOB/$SCRIPTNAME" reset_all wipe
-	exit
-else	
-	#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-	#:wipe
-	
-	#do we need admin rights?
-	#runas /user:Administrator cmd
-	
-	#do we need to kill any processes?
-	
-	#do we need to uninstall any apps?
-	
-	#do we need to remove any environment variables?
-	
-	#should we do a git clean first?
-	#cd %DKPATH%
-	#"%GIT%" clean -f -d
-	
-	cd $DIGITALKNOB
-	echo ""
-	echo "DELETING $DKDOWNLOAD . . . ."
-	rm -r -f $DKDOWNLOAD
-	echo "done."
-	echo ""
-	echo "DELETING $DKPATH . . . ."
-	rm -r -f $DKPATH
-	echo "done."
-	
-	# wait 10 seconds at lease for the folders to get deleted
-	sleep 10
-	
-	if file_exists $DKDOWNLOAD; then
-		echo "Oh no, the downloads folder is still there! :( "
-	fi
-	if file_exists $DKPATH; then
-		echo "Oh no, the BRANCH folder is still there! :( "
-	fi
-	
-	git_update NO_CONFIRM
-	
-	# wait a few seconds for build.sh to show up
-	sleep 5
-	
-	if file_exists $DKPATH/$SCRIPTNAME; then
+	if ! [ "$1" == "wipe" ]; then
+			
 		clear
-		source $DKPATH/$SCRIPTNAME rm -r $DIGITALKNOB/$SCRIPTNAME
+		echo ""
+		echo ""
+		echo "Do you want to reset the entire local repository . . . ?"
+		echo "This will delete digitalknob, everything will be reset,"
+		echo "and the repository will be re-cloned. All libraries and tools"
+		echo "will be redownloaded and rebuild from start. Save any changes"
+		echo "you wish to commit or save beforehand."
+		echo ""
+		
+		if CONFIRM; then return; fi
+		
+		# first we need to relocate this file up one directory
+		# make sure script is running from DKPATH
+		if ! [ $SCRIPTPATH == $DKPATH ]; then
+			echo "WARNING: this file isn't running from the branch directory"
+			echo "Is must be in the branch directory to continue."
+			echo "SCRIPTPATH = $SCRIPTPATH"
+			print_var DKPATH
+			return 1;
+		fi
+		
+		echo "RELOCATING SCRIPT TO -> $DIGITALKNOB/$SCRIPTNAME"
+		cp $SCRIPTPATH/$SCRIPTNAME $DIGITALKNOB/$SCRIPTNAME
+		source "$DIGITALKNOB/$SCRIPTNAME" reset_all wipe
 		exit
-	else
-		echo "Oh no, the git cloned build.sh still isn't here! :( "
+	else	
+		#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+		#:wipe
+		
+		#do we need admin rights?
+		#runas /user:Administrator cmd
+		
+		#do we need to kill any processes?
+		
+		#do we need to uninstall any apps?
+		
+		#do we need to remove any environment variables?
+		
+		#should we do a git clean first?
+		#cd %DKPATH%
+		#"%GIT%" clean -f -d
+		
+		cd $DIGITALKNOB
+		echo ""
+		echo "DELETING $DKDOWNLOAD . . . ."
+		rm -r -f $DKDOWNLOAD
+		echo "done."
+		echo ""
+		echo "DELETING $DKPATH . . . ."
+		rm -r -f $DKPATH
+		echo "done."
+		
+		# wait 10 seconds at lease for the folders to get deleted
+		sleep 10
+		
+		if file_exists $DKDOWNLOAD; then
+			echo "Oh no, the downloads folder is still there! :( "
+		fi
+		if file_exists $DKPATH; then
+			echo "Oh no, the BRANCH folder is still there! :( "
+		fi
+		
+		git_update NO_CONFIRM
+		
+		# wait a few seconds for build.sh to show up
+		sleep 5
+		
+		if file_exists $DKPATH/$SCRIPTNAME; then
+			clear
+			source $DKPATH/$SCRIPTNAME rm -r $DIGITALKNOB/$SCRIPTNAME
+			exit
+		else
+			echo "Oh no, the git cloned build.sh still isn't here! :( "
+		fi
 	fi
-fi
 }
+
+
+function remove_all() {
+	if ! [ "$1" == "wipe" ]; then	
+		clear
+		echo ""
+		echo ""
+		echo "Do you want to remove the entire local repository . . . ?"
+		echo "This will delete digitalknob, Save any changes"
+		echo "you wish to commit or save beforehand."
+		echo ""
+		
+		if CONFIRM; then return; fi
+		
+		# first we need to relocate this file up one directory
+		# make sure script is running from DKPATH
+		if ! [ $SCRIPTPATH == $DKPATH ]; then
+			echo "WARNING: this file isn't running from the branch directory"
+			echo "Is must be in the branch directory to continue."
+			echo "SCRIPTPATH = $SCRIPTPATH"
+			print_var DKPATH
+			return 1;
+		fi
+		
+		echo "RELOCATING SCRIPT TO -> $DIGITALKNOB/$SCRIPTNAME"
+		cp $SCRIPTPATH/$SCRIPTNAME $DIGITALKNOB/$SCRIPTNAME
+		source "$DIGITALKNOB/$SCRIPTNAME" remove_all wipe
+		exit
+	else	
+		#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+		#:wipe
+		
+		#do we need admin rights?
+		#runas /user:Administrator cmd
+		
+		#do we need to kill any processes?
+		
+		#do we need to uninstall any apps?
+		
+		#do we need to remove any environment variables?
+		
+		#should we do a git clean first?
+		#cd %DKPATH%
+		#"%GIT%" clean -f -d
+		
+		cd $DIGITALKNOB
+		echo ""
+		echo "DELETING $DKDOWNLOAD . . . ."
+		rm -r -f $DKDOWNLOAD
+		echo "done."
+		echo ""
+		echo "DELETING $DKPATH . . . ."
+		rm -r -f $DKPATH
+		echo "done."
+		
+		# wait 10 seconds at lease for the folders to get deleted
+		sleep 10
+		
+		if file_exists $DKDOWNLOAD; then
+			echo "Oh no, the downloads folder is still there! :( "
+		fi
+		if file_exists $DKPATH; then
+			echo "Oh no, the BRANCH folder is still there! :( "
+		fi
+	fi
+}
+
 
 function git_update() {
 	
