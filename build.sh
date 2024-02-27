@@ -551,11 +551,6 @@ function Generate_Project() {
 	#	mkdir -p $DKPATH/DKApps/$APP/$TARGET_OS/Release
 	#fi
 	
-	#if [[ "$TARGET_OS" == "android"* ]]; then
-	#	validate_android_ndk
-	#	TARGET="main"
-	#fi
-			
 	if [[ "$TARGET_OS" == "android_arm32" ]]; then
 		validate_android_ndk
 	
@@ -579,34 +574,61 @@ function Generate_Project() {
 		dk_call $CMAKE -G "Unix Makefiles" "${CMAKE_ARGS[@]}" -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions"
 	
 		TARGET="main"	
-	
-		#if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-	    # 	dk_call $CMAKE -G "$GENERATOR" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=$ANDROID_API -DANDROID_NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_TOOLCHAIN_FILE -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Debug
-	    #fi
-	    #if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-	    #	dk_call $CMAKE -G "$GENERATOR" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=$ANDROID_API -DANDROID_NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_TOOLCHAIN_FILE -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Release
-	    #fi
 	fi
 
 	if [[ "$TARGET_OS" == "android_arm64" ]]; then
-		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-		    dk_call $CMAKE -G "$GENERATOR" -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=$ANDROID_API -DANDROID_NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_TOOLCHAIN_FILE -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Debug
-	    fi
-    	if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-		    dk_call $CMAKE -G "$GENERATOR" -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=$ANDROID_API -DANDROID_NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_TOOLCHAIN_FILE -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Release
-	    fi
+		validate_android_ndk
+	
+		#CMAKE_ARGS+=( "-G 'Unix Makefiles'" )
+		CMAKE_ARGS+=( "-DCMAKE_MAKE_PROGRAM=$ANDROID_NDK/prebuilt/linux-x86_64/bin/make" )
+		CMAKE_ARGS+=( "-DCMAKE_ANDROID_ARCH_ABI=arm64-v8a" )
+		CMAKE_ARGS+=( "-DANDROID_ABI=arm64-v8a" )
+		CMAKE_ARGS+=( "-DANDROID_PLATFORM=$ANDROID_API" )
+		CMAKE_ARGS+=( "-DCMAKE_ANDROID_NDK=$ANDROID_NDK" )
+		CMAKE_ARGS+=( "-DANDROID_NDK=$ANDROID_NDK" )
+		CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$ANDROID_TOOLCHAIN_FILE" )
+		CMAKE_ARGS+=( "-DANDROID_TOOLCHAIN=clang" )
+		CMAKE_ARGS+=( "-DCMAKE_ANDROID_STL_TYPE=c++_static" )
+		CMAKE_ARGS+=( "-DANDROID_STL=c++_static" )
+		#CMAKE_ARGS+=( "-DCMAKE_CXX_FLAGS='-std=c++1z -frtti -fexceptions'" )
+	
+		echo ""
+		echo "****** CMAKE COMMAND ******"
+		echo $CMAKE -G "Unix Makefiles" "${CMAKE_ARGS[@]}" -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions"
+		echo ""
+		dk_call $CMAKE -G "Unix Makefiles" "${CMAKE_ARGS[@]}" -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions"
+	
+		TARGET="main"
 	fi
 	
 	
 	if [[ $TARGET_OS == "emscripten" ]]; then
+		#setx PATH %PATH%;C:\Users\aquawicket\digitalknob\Development\3rdParty\python-2.7.18
+		validate_emscripten
+	
+		CMAKE_ARGS+=( "-G \"$EMSDK_GENERATOR\"" )
+		CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$EMSDK_TOOLCHAIN_FILE" )
+		CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$EMSDK_C_COMPILER" )
+		CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$EMSDK_CXX_COMPILER" )
+	
+		echo ""
+		echo "****** CMAKE COMMAND ******"
+		#echo $EMSDK_ENV && $CMAKE -G "$EMSDK_GENERATOR" "${CMAKE_ARGS[@]}"
+		echo $EMSDK_ENV && $CMAKE "${CMAKE_ARGS[@]}"
+		echo ""
+		#dk_call $EMSDK_ENV && $CMAKE -G "$EMSDK_GENERATOR" "${CMAKE_ARGS[@]}"
+		dk_call $EMSDK_ENV && $CMAKE "${CMAKE_ARGS[@]}"
+	
+		set TARGET=${APP}_APP
+	
 	    #dk_call validate_emscripten
-		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-			dk_call $EMSDK_ENV && $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Debug
-		fi
-		if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-			dk_call $EMSDK_ENV && $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Release
-		fi
-		TARGET=${APP}_APP
+		#if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
+		#	dk_call $EMSDK_ENV && $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Debug
+		#fi
+		#if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
+		#	dk_call $EMSDK_ENV && $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Release
+		#fi
+		#TARGET=${APP}_APP
 	fi
 	
 	
