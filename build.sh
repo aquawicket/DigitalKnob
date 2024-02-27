@@ -196,6 +196,8 @@ function Pick_Update() {
 
 ###### Pick_App ######
 function Pick_App() {
+	echo ""
+	echo "${APP} ${TARGET_OS} ${TYPE}"
 	
 	echo ""	
     echo " 1) HelloWorld"
@@ -247,6 +249,8 @@ function Pick_App() {
 
 ###### Pick_OS ######
 function Pick_OS() {
+	echo ""
+	echo "${APP} ${TARGET_OS} ${TYPE}"
 	
 	echo ""	
     echo " 1) $NATIVE_TRIPLE"
@@ -361,50 +365,33 @@ function Pick_OS() {
 ###### Pick_Type ######
 function Pick_Type() {
 	echo ""
+	echo "${APP} ${TARGET_OS} ${TYPE}"
 	
-	# https://unix.stackexchange.com/a/293605
-	COLUMNS=1
-	PS3="Please select build type: "
-	options=(
-		"Debug" 
-		"Release" 
-		"All" 
-		"Clear Screen"
-		"Go Back"
-		"Exit")
-	select opt in "${options[@]}"
-	do
-		case $opt in
-			"Debug")
-				TYPE="Debug"
-				break
-				;;
-			"Release")
-				TYPE="Release"
-				break
-				;;
-			"All")
-				TYPE="All"
-				break
-				;;
-			"Clear Screen")
-				clear
-				break
-				;;
-			"Go Back")
-				TARGET_OS=
-				break
-				;;
-			"Exit")
-				exit 0
-				break
-				;;
-			*) 
-				echo "invalid option: $opt"
-				break
-				;;
-		esac 
-	done
+	echo ""	
+    echo " 1) Debug"
+	echo " 2) Release"
+	echo " 3) All"
+	echo " 4) Clear Screen"
+	echo " 5) Go Back"
+	echo " 6) Exit"
+	echo ""
+	
+	read input
+	if [ "$input" == "1" ]; then
+		TYPE="Debug"
+	elif [ "$input" == "2" ]; then
+		TYPE="Release"
+	elif [ "$input" == "3" ]; then
+		TYPE="All"
+	elif [ "$input" == "4" ]; then
+		clear
+	elif [ "$input" == "5" ]; then
+		TARGET_OS=
+	elif [ "$input" == "6" ]; then
+		exit 0
+	else
+		echo "invalid selection"
+	fi
 }
 
 ###### Generate_Project ######
