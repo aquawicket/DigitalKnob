@@ -507,8 +507,8 @@ function Generate_Project() {
 		CMAKE_ARGS+=( "-DCMAKE_ANDROID_STL_TYPE=c++_static" )
 		CMAKE_ARGS+=( "-DANDROID_STL=c++_static" )
 		CMAKE_ARGS+=( "-DCMAKE_CXX_FLAGS='-std=c++1z -frtti -fexceptions'" )
-		#dk_call $CMAKE -G "${CMAKE_ARGS[@]}" -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions"
-		dk_call $CMAKE -G "${CMAKE_ARGS[@]}"
+		#dk_call $CMAKE "${CMAKE_ARGS[@]}" -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions"
+		dk_call $CMAKE "${CMAKE_ARGS[@]}"
 	fi
 
 	if [[ "$TARGET_OS" == "android_arm64" ]]; then
