@@ -165,9 +165,9 @@ endif(ANDROID)
 
 
 # Disabled for Android 64bit targets
-if(ANDROID_64)
+if(ANDROID_ARM64)
 	dk_disable(boost)
-endif(ANDROID_64)
+endif(ANDROID_ARM64)
 
 
 # Disabled for Emscripten targets

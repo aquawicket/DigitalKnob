@@ -217,10 +217,10 @@
 #		define ANDROID 1
 #	endif
 #	if DKBITS == 64
-#		ifndef ANDROID64
-#			define ANDROID64 1
+#		ifndef ANDROID_ARM64
+#			define ANDROID_ARM64 1
 #		endif
-#		define DKOS "ANDROID64"
+#		define DKOS "ANDROID_ARM64"
 #		define DKOS_VERSION "UNKNOWN" //TOSTRING(__ANDROID_API__)  FIXME: defining from another macro
 #	endif
 #	if DKBITS == 32

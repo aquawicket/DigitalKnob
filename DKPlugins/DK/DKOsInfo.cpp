@@ -69,8 +69,8 @@ bool GetOSFlag(DKString& flag){
 #if ANDROID_ARM32
 	flag = "ANDROID_ARM32";
 #endif
-#if ANDROID64
-	flag = "ANDROID64";
+#if ANDROID_ARM64
+	flag = "ANDROID_ARM64";
 #endif
 #if EMSCRIPTEN
 	flag = "EMSCRIPTEN";

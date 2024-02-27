@@ -174,7 +174,7 @@ ANDROID_ARM32_RELEASE_dk_queueCommand(
 	${BOOST_WITHOUT}
 	abi=aapcs
 	binary-format=elf)
-ANDROID64_DEBUG_dk_queueCommand(
+ANDROID_ARM64_DEBUG_dk_queueCommand(
 	#setx NDK_ROOT ${ANDROID_NDK} &&
 	${BOOST}/b2.exe
 	toolset=clang-arm64v8a
@@ -194,7 +194,7 @@ ANDROID64_DEBUG_dk_queueCommand(
 	${BOOST_WITHOUT}
 	abi=aapcs
 	binary-format=elf)
-ANDROID64_RELEASE_dk_queueCommand(
+ANDROID_ARM64_RELEASE_dk_queueCommand(
 	#setx NDK_ROOT ${ANDROID_NDK} &&
 	${BOOST}/b2.exe
 	toolset=clang-arm64v8a

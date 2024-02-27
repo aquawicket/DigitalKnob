@@ -100,8 +100,8 @@ bool DKUpdate::Init(){
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_ANDROID_ARM32]", url);
 	if(url.empty()){ url = downloads+app+".apk"; }
 #endif
-#ifdef ANDROID64
-	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_ANDROID64]", url);
+#ifdef ANDROID_ARM64
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_ANDROID_ARM64]", url);
 	if(url.empty()){ url = downloads+app+".apk"; }
 #endif
 
