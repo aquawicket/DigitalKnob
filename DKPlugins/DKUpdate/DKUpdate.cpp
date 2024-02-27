@@ -39,7 +39,7 @@
 
 //////////////////////////////////////
 //     Default update files
-// win32     - http://DigitalKnob.com/Download/DKApp.exe
+// win_x86     - http://DigitalKnob.com/Download/DKApp.exe
 // win63     - http://DigitalKnob.com/Download/DKApp_64.exe
 // mac_x86     - http://DigitalKnob.com/Download/DKApp_mac_x86.zip
 // mac_x86_64     - http://DigitalKnob.com/Download/DKApp_mac_x86_64.zip

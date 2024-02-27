@@ -118,7 +118,7 @@ goto:eof
 	echo 8) Exit
 	set choice=
 	set /p choice=Please select an OS to build for: 
-	if '%choice%'=='1' set "OS=win32" & goto:eof
+	if '%choice%'=='1' set "OS=win_x86" & goto:eof
 	if '%choice%'=='2' set "OS=win64" & goto:eof
 	if '%choice%'=='3' set "OS=android_arm32" & goto:eof
 	if '%choice%'=='4' set "OS=android_arm64" & goto:eof
@@ -171,7 +171,7 @@ goto:eof
 	call:make_directory "%APP_PATH%\%OS%"
 	cd "%APP_PATH%\%OS%"
 
-	if %OS%==win32 goto generate_win32
+	if %OS%==win_x86 goto generate_win_x86
 	if %OS%==win64 goto generate_win64
 	if %OS%==android_arm32 goto generate_android_arm32
 	if %OS%==android_arm64 goto generate_android_arm64
@@ -179,8 +179,8 @@ goto:eof
 goto:eof 
 
 
-::###### generate_win32 ######
-:generate_win32
+::###### generate_win_x86 ######
+:generate_win_x86
 	call:validate_visual_studio
 	"%CMAKE%" -G "Visual Studio 17 2022" -A Win32 -DDEBUG=ON -DRELEASE=ON -DREBUILDALL=ON -DSTATIC=ON %DKCMAKE%
 	set TARGET=%APP%_APP

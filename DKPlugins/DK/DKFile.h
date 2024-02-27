@@ -101,9 +101,9 @@ public:
 	static bool VerifyPath(DKString& path);
 	static bool ValidatePath(DKString& path);
   
-	static DKString exe_path;      //example:  C:/Users/username/digitalknob/Development/DKApps/DKMyApp/win32/Release/DKMyApp.exe
+	static DKString exe_path;      //example:  C:/Users/username/digitalknob/Development/DKApps/DKMyApp/win_x86/Release/DKMyApp.exe
 	static DKString exe_name;      //example:  DKMyApp.exe
-	static DKString app_path;      //example:  C:/Users/username/digitalknob/Development/DKApps/DKMyApp/win32/Release
+	static DKString app_path;      //example:  C:/Users/username/digitalknob/Development/DKApps/DKMyApp/win_x86/Release
 	static DKString app_name;      //example:  DKMyApp
 	static DKString local_assets;  //example:  C:/Users/username/digitalknob/Development/DKApps/DKMyApp/assets
 	static DKString online_assets; //example:  http://digitalknob.com/DKMyApp

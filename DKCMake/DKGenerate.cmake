@@ -443,7 +443,7 @@ if(WIN_32)
     #POST_BUILD
     #COMMAND "mt.exe" -nologo
     #        -manifest \"${DKPROJECT}/compatibility.manifest\"
-    #        -outputresource:"${DKPROJECT}/win32/Debug/${APP_NAME}.exe"\;\#1
+    #        -outputresource:"${DKPROJECT}/win_x86/Debug/${APP_NAME}.exe"\;\#1
     #COMMENT "Adding manifest..."
     #)
 	

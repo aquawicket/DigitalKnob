@@ -334,7 +334,7 @@ if(${index} GREATER -1)
 	string(REPLACE "/raspberry_arm32" "" DKPROJECT ${CMAKE_BINARY_DIR})
 endif()
 
-# RASPBERY 64
+# raspberry_arm64
 string(FIND "${CMAKE_BINARY_DIR}" "/raspberry_arm64" index)
 if(${index} GREATER -1)
 	dk_info("*** Creating Raspberry x64 Project Files ***")
@@ -359,16 +359,16 @@ if(${index} GREATER -1)
 endif()	
 	
 # WIN 32
-string(FIND "${CMAKE_BINARY_DIR}" "/win32" index)
+string(FIND "${CMAKE_BINARY_DIR}" "/win_x86" index)
 if(${index} GREATER -1)
 	dk_info("Creating Windows x32 Project Files")
 	dk_set(WIN ON)
 	dk_set(WIN_32 ON)
-	dk_set(OS "win32")
+	dk_set(OS "win_x86")
 	dk_set(DEBUG_DIR Debug)
 	dk_set(RELEASE_DIR Release)
 	dk_set(CMAKE_SKIP_RPATH ON)
-	string(REPLACE "/win32" "" DKPROJECT ${CMAKE_BINARY_DIR})
+	string(REPLACE "/win_x86" "" DKPROJECT ${CMAKE_BINARY_DIR})
 endif()
 
 # WIN 64
@@ -388,7 +388,7 @@ endif()
 if(NOT CMAKE_SCRIPT_MODE_FILE)
 	if(NOT OS)
 		dk_error(CMAKE_BINARY_DIR)
-		dk_error("The binary directory must contain an os folder. \n Valid folders are android_arm32,android_arm64,emscripten,ios_arm32,ios_arm64,iossim_x86,iossim_x86_64,linux_x86,linux_x86_64,mac_x86,mac_x86_64,raspberry_arm32,raspberry_arm64,win32,win64 \n 	EXAMPLE: digitalknob/Development/DKApps/MyApp/win32")
+		dk_error("The binary directory must contain an os folder. \n Valid folders are android_arm32,android_arm64,emscripten,ios_arm32,ios_arm64,iossim_x86,iossim_x86_64,linux_x86,linux_x86_64,mac_x86,mac_x86_64,raspberry_arm32,raspberry_arm64,win_x86,win64 \n 	EXAMPLE: digitalknob/Development/DKApps/MyApp/win_x86")
 		#file(REMOVE ${CMAKE_BINARY_DIR})
 	endif()
 

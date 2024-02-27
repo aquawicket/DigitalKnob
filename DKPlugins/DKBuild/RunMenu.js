@@ -56,7 +56,7 @@ function RunMenu_onevent(event) {
         OS = byId("OSList").value;
         APP = byId("AppList").value;
         if (DK_GetOS() === "Win32" || DK_GetOS() === "Win64") {
-            if (OS === "win32") {
+            if (OS === "win_x86") {
                 DK_Run(DIGITALKNOB + "/DKApps/" + APP + "/" + OS + "/Release/" + APP + ".exe");
                 var contents = DKFile_DirectoryContents(DIGITALKNOB);
                 var files = contents.split(",");

@@ -3,7 +3,7 @@
 * There is only one CMakeLists.txt file in the root of the /digitalknob folder.
 
 * When running Cmake, the source path is always the /digitalknob folder, where the CMakeLists.txt file is located. 
-* The build directory is the path to the app followed by the OS.  i.e  DKApps/DKMyApp/win32  
+* The build directory is the path to the app followed by the OS.  i.e  DKApps/DKMyApp/win_x86  
 	* Output Build OS's are
 		* /android_arm32
 		* /android_arm64
@@ -18,7 +18,7 @@
 		* /mac_x86_64
 		* /raspberry_arm32
 		* /raspberry_arm64
-		* /win32
+		* /win_x86
 		* /win64
 		
 * Note: DKCMake will fill in most variables by the path you have selected.		
@@ -41,7 +41,7 @@
 /digitalknob      ( I.E.  C:/Users/username/digitalknob for windows.. ,where the digitalknob folder resides on your system )
 
 *** BINARY DIRECTORY ****
-/digitalknob/Development/DKApps/DKCore/win32   ( By setting the binary directory to be win32, most variables will be casted )
+/digitalknob/Development/DKApps/DKCore/win_x86   ( By setting the binary directory to be win_x86, most variables will be casted )
 
 
 ****************************************************

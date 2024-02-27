@@ -57,7 +57,7 @@ set APP=DKBuilder
 
 
 :pickos
-set OS="win32"
+set OS="win_x86"
 
 
 :type

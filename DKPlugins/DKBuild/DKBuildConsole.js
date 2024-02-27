@@ -135,7 +135,7 @@ function DKBuildConsole_SelectOs() {
 		//console.log("arch = "+arch)
 		//if(CPP_DK_GetOSArchitecture() === "i686")
 		//if(arch === "i686" || arch === "x86"){
-			OSes.push("win32")
+			OSes.push("win_x86")
 		//}
 		//if(CPP_DK_GetOSArchitecture() === "x86_64")
 		//if(arch === "x86_64"){
@@ -417,7 +417,7 @@ function DKBuildConsole_Process() {
 
 function DKBuildConsole_FindAppExecutablePath(os, app, type){
 	const app_path = DKBuild_FindAppPath(app)
-	if(os === "win32" || os === "win64"){
+	if(os === "win_x86" || os === "win64"){
 		const exe_name = app+".exe"
 	}
 	else if(os === "linux_x86" || os === "linux_x86_64" || os === "raspberry_arm32" || os === "raspberry_arm64"){
@@ -445,7 +445,7 @@ function DKBuildConsole_FindAppExecutablePath(os, app, type){
 function DKBuildConsole_FindAppSolutionPath(os, app, type){
 	const app_path = DKBuild_FindAppPath(app)
 	var solution_path
-	if(os === "win32" || os === "win64"){
+	if(os === "win_x86" || os === "win64"){
 		solution_path = app_path+os+"/"+app+".sln"
 	}
 	else if(os === "mac_x86" || os === "mac_x86_64"){
@@ -477,7 +477,7 @@ function DKBuildConsole_RunApp(os, app, type){
 
 function DKBuildConsole_OpenAppSolution(os, app){
 	const app_path = DKBuild_FindAppPath(app)
-	if(os === "win32" || os === "win64"){
+	if(os === "win_x86" || os === "win64"){
 		const solution_name = app+".sln"
 	}
 	else if(os === "mac_x86" || os === "mac_x86_64" || os === "ios_arm32" || os === "ios_arm64" || os === "iossim_x86" || os === "iossim_x86_64"){

@@ -3,7 +3,7 @@ if not defined in_subprocess (cmd /k set in_subprocess=y ^& %0 %*) & exit )
 
 ::set "DIGITALKNOB=C:\Users\%USERNAME%\digitalknob"
 ::set "DKPATH=%DIGITALKNOB%\DK"
-::set "EXECUTABLE=%DKPATH%\DKApps\DKBuilder\win32\Release\DKBuilder.exe"
+::set "EXECUTABLE=%DKPATH%\DKApps\DKBuilder\win_x86\Release\DKBuilder.exe"
 
 
 set "NAME=Git"

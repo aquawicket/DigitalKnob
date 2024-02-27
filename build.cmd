@@ -70,7 +70,7 @@ if "%*" NEQ "" call %*
         if "%TYPE%"==""       call:pick_type   & goto:while_loop
 
         call:generate
-        if %TARGET_OS%==win32       call:generate_win32
+        if %TARGET_OS%==win_x86       call:generate_win_x86
         if %TARGET_OS%==win64       call:generate_win64
         if %TARGET_OS%==android_arm32   call:generate_android_arm32
         if %TARGET_OS%==android_arm64   call:generate_android_arm64
@@ -228,7 +228,7 @@ goto:eof
     set choice=
     set /p choice=Please select an OS to build for: 
     ::if not "%choice%"=="" set choice=%choice:~0,1%        ::What does this do?
-    if "%choice%"=="1" set "TARGET_OS=win32"		& goto:eof
+    if "%choice%"=="1" set "TARGET_OS=win_x86"		& goto:eof
     if "%choice%"=="2" set "TARGET_OS=win64"		& goto:eof
     if "%choice%"=="3" set "TARGET_OS=android_arm32"	& goto:eof
     if "%choice%"=="4" set "TARGET_OS=android_arm64"	& goto:eof
@@ -398,7 +398,7 @@ goto:eof
 	goto build
 goto:eof
 
-:generate_win32
+:generate_win_x86
 	set COMPILER=MINGW32
 		
 	::call:validate_msys2

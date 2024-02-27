@@ -619,7 +619,7 @@ function Generate_Project() {
 		TARGET=${APP}_APP
 	fi
 	
-	if [[ "$TARGET_OS" == "win32" ]]; then
+	if [[ "$TARGET_OS" == "win_x86" ]]; then
 		validate_msys2
 		validate_make
 		dk_call export PATH=${MSYS2}/mingw32/bin:$PATH

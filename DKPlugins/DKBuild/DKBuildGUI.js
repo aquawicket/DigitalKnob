@@ -19,7 +19,7 @@ function DKBuildGUI_init() {
 
                 /*
 		if(DK_GetOS() === "Win32" ||  DK_GetOS() === "Win64"){
-			byId("OSList").value = "win32";
+			byId("OSList").value = "win_x86";
 		}
 		if(DK_GetOS() === "Mac"){
 			byId("OSList").value = "mac_x86_64";

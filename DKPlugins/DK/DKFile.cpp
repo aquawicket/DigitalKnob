@@ -38,9 +38,9 @@
 #include <cstring>
 //WARNING_ENABLE
 
-DKString DKFile::exe_path;      //EXAMPLE:  C:/Users/aquawicket/digitalknob/Development/DKApps/DKBuilder/win32/Release/DKBuilder.exe
+DKString DKFile::exe_path;      //EXAMPLE:  C:/Users/aquawicket/digitalknob/Development/DKApps/DKBuilder/win_x86/Release/DKBuilder.exe
 DKString DKFile::exe_name;      //EXAMPLE:  DKBuilder.exe
-DKString DKFile::app_path;      //EXAMPLE:  C:/Users/aquawicket/digitalknob/Development/DKApps/DKBuilder/win32/Release/
+DKString DKFile::app_path;      //EXAMPLE:  C:/Users/aquawicket/digitalknob/Development/DKApps/DKBuilder/win_x86/Release/
 DKString DKFile::app_name;      //EXAMPLE:  DKBuilder
 DKString DKFile::local_assets;  //EXAMPLE:  C:/Users/aquawicket/digitalknob/Development/DKApps/DKBuilder/assets/
 DKString DKFile::online_assets; //EXAMPLE:  http://aquawicket.github.io/DigitalKnob/DKPlugins/
