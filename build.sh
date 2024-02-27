@@ -412,64 +412,94 @@ function Generate_Project() {
 	
 	echo ""
 	echo "##################################################################"
-	echo "****** Generating $APP - $TARGET_OS - $TYPE - $LEVEL ******"
+	echo "****** Generating $APP - $TARGET_OS - $TYPE - $DKLEVEL ******"
 	echo "##################################################################"
 	echo ""
 
 	clear_cmake_cache
 	delete_temp_files
 
-	LEVEL="RebuildAll"
-	LINK="Static"
+	TARGET_PATH=$DKPATH/DKApps/$APP
+	print_var TARGET_PATH
+	mkdir -p $TARGET_PATH/$TARGET_OS
+	cd $TARGET_PATH/$TARGET_OS
+	CMAKE_SOURCE_DIR=$DKCMAKE
+	print_var CMAKE_SOURCE_DIR
+	CMAKE_TARGET_PATH=$TARGET_PATH
+	print_var CMAKE_TARGET_PATH
 	
 	###### BUILD CMAKE_ARGS ARRAY ######
+	DKLEVEL="RebuildAll"
+	DKLINK="Static"
+	
 	declare -a CMAKE_ARGS
-	if [[ $TYPE == "Debug" ]] || [[ $TYPE == "All" ]]; then
+	if [[ $TYPE == "Debug" ]]; then
 		CMAKE_ARGS+=( "-DDEBUG=ON" )
-	else
-		CMAKE_ARGS+=( "-DDEBUG=OFF" )
-	fi
-	if [[ $TYPE == "Release" ]] || [[ $TYPE == "All" ]]; then
-		CMAKE_ARGS+=( "-DRELEASE=ON" )
-	else
 		CMAKE_ARGS+=( "-DRELEASE=OFF" )
 	fi
-	if [[ $LEVEL == "Build" ]]; then
+	if [[ $TYPE == "Release" ]]; then
+		CMAKE_ARGS+=( "-DDEBUG=OFF" )
+		CMAKE_ARGS+=( "-DRELEASE=ON" )
+	fi
+	if [[ $TYPE == "All" ]]; then
+		CMAKE_ARGS+=( "-DDEBUG=ON" )
+		CMAKE_ARGS+=( "-DRELEASE=ON" )
+	fi
+	if [[ $DKLEVEL == "Build" ]]; then
 		CMAKE_ARGS+=( "-DBUILD=ON" )
 	fi
-	if [[ $LEVEL == "Rebuild" ]]; then
+	if [[ $DKLEVEL == "Rebuild" ]]; then
 		CMAKE_ARGS+=( "-DREBUILD=ON" )
 	fi
-	if [[ $LEVEL == "RebuildAll" ]]; then
+	if [[ $DKLEVEL == "RebuildAll" ]]; then
 		CMAKE_ARGS+=( "-DREBUILDALL=ON" )
 	fi
-	if [[ $LINK == "Static" ]]; then
+	if [[ $DKLINK == "Static" ]]; then
 		CMAKE_ARGS+=( "-DSTATIC=ON" )
 	fi
-	if [[ $LINK == "Shared" ]]; then
+	if [[ $DKLINK == "Shared" ]]; then
 		CMAKE_ARGS+=( "-DSHARED=ON" )
 	fi
 	
-	#CMAKE_ARGS+=( "-DCMAKE_VERBOSE_MAKEFILE=1" )
+	CMAKE_BINARY_DIR=$CMAKE_TARGET_PATH/$TARGET_OS/$TYPE
+	print_var CMAKE_BINARY_DIR
+	
+	CMAKE_ARGS+=( "-S=$CMAKE_SOURCE_DIR" )
+	CMAKE_ARGS+=( "-B=$CMAKE_BINARY_DIR" )
+	
+	############ CMake Options ############
+    #CMAKE_ARGS+=( "-DCMAKE_VERBOSE_MAKEFILE=1" ) 
+    #CMAKE_ARGS+=( "--debug-output" )
+	#CMAKE_ARGS+=( "--trace" )
+	#CMAKE_ARGS+=( "--warn-unused-vars" )
+	
 	#echo CMAKE_ARGS = "${CMAKE_ARGS[@]}"
 	
+	#if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
+	#	mkdir -p $CMAKE_TARGET_PATH/$TARGET_OS/Debug
+	#fi
+	#if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
+	#	mkdir -p $CMAKE_TARGET_PATH/$TARGET_OS/Release
+	#fi
+	
+	
 	###### GENERATOR ######
-	if [[ $TARGET_OS == "android"* ]]; then
-		GENERATOR="Unix Makefiles"
-	elif [[ $TARGET_OS == "mac"* ]] || [[ $TARGET_OS == "ios"* ]]; then
-		GENERATOR="Xcode"
-	elif [[ $TARGET_OS == "emscripten" ]]; then
-		validate_emscripten
-		GENERATOR="$EMSDK_GENERATOR"
-		CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$EMSDK_C_COMPILER" )
-		CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$EMSDK_CXX_COMPILER" )
-		CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$EMSDK_TOOLCHAIN_FILE" )
-		MSYSTEM=""
-	elif [[ -n "$MSYSTEM" ]]; then
-		GENERATOR="MSYS Makefiles"
-	else
-		GENERATOR="Unix Makefiles"
-	fi
+	#if [[ $TARGET_OS == "android"* ]]; then
+	#	GENERATOR="Unix Makefiles"
+	#elif [[ $TARGET_OS == "mac"* ]] || [[ $TARGET_OS == "ios"* ]]; then
+	#	GENERATOR="Xcode"
+	#elif [[ $TARGET_OS == "emscripten" ]]; then
+	#	validate_emscripten
+	#	GENERATOR="$EMSDK_GENERATOR"
+	#	CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$EMSDK_C_COMPILER" )
+	#	CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$EMSDK_CXX_COMPILER" )
+	#	CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$EMSDK_TOOLCHAIN_FILE" )
+	#	MSYSTEM=""
+	#elif [[ -n "$MSYSTEM" ]]; then
+	#	GENERATOR="MSYS Makefiles"
+	#else
+	#	GENERATOR="Unix Makefiles"
+	#fi
 
 	###### MAKE_PROGRAM ######
 	#validate_make
@@ -479,23 +509,23 @@ function Generate_Project() {
 	
 	###### C_COMPILER; CXX_COMPILER ######
 	### GCC ###
-	if [[ $MSYSTEM == "MINGW32" ]] || [[ $MSYSTEM == "MINGW64" ]] || [[ $TARGET_OS == "linux"* ]] || [[ $MODEL == "Raspberry"* ]]; then
-		validate_gcc
-		CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$GCC_C_COMPILER" )
-		CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$GCC_CXX_COMPILER" )
-	fi
+	#if [[ $MSYSTEM == "MINGW32" ]] || [[ $MSYSTEM == "MINGW64" ]] || [[ $TARGET_OS == "linux"* ]] || [[ $MODEL == "Raspberry"* ]]; then
+	#	validate_gcc
+	#	CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$GCC_C_COMPILER" )
+	#	CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$GCC_CXX_COMPILER" )
+	#fi
 	### CLANG ###
-	if [[ $MSYSTEM == "CLANG32" ]] || [[ $MSYSTEM == "CLANG64" ]] || [[ $MSYSTEM == "CLANGARM64" ]] || [[ $MSYSTEM == "UCRT64" ]]; then
-		validate_clang
-		CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$CLANG_C_COMPILER" )
-		CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$CLANG_CXX_COMPILER" )
-	fi
+	#if [[ $MSYSTEM == "CLANG32" ]] || [[ $MSYSTEM == "CLANG64" ]] || [[ $MSYSTEM == "CLANGARM64" ]] || [[ $MSYSTEM == "UCRT64" ]]; then
+	#	validate_clang
+	#	CMAKE_ARGS+=( "-DCMAKE_C_COMPILER=$CLANG_C_COMPILER" )
+	#	CMAKE_ARGS+=( "-DCMAKE_CXX_COMPILER=$CLANG_CXX_COMPILER" )
+	#fi
 	
 	###### EXE_LINKER_FLAGS ######
-	if [[ -n "$MSYSTEM" ]]; then
-		EXE_LINKER_FLAGS="-static -mconsole"		
-		#CMAKE_ARGS+=( "-DCMAKE_EXE_LINKER_FLAGS=$EXE_LINKER_FLAGS" )
-	fi
+	#if [[ -n "$MSYSTEM" ]]; then
+	#	EXE_LINKER_FLAGS="-static -mconsole"		
+	#	#CMAKE_ARGS+=( "-DCMAKE_EXE_LINKER_FLAGS=$EXE_LINKER_FLAGS" )
+	#fi
 
 	#TODO: turn into a cmake_eval
 	# build-essential for Tiny Core Linux
@@ -511,28 +541,51 @@ function Generate_Project() {
 	
 	#dk_call export SHELL="/bin/bash"
 	
-	mkdir -p $DKPATH/DKApps/$APP/$TARGET_OS
-	cd /
+	#mkdir -p $DKPATH/DKApps/$APP/$TARGET_OS
+	#cd /
 	
-	if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-		mkdir -p $DKPATH/DKApps/$APP/$TARGET_OS/Debug
-	fi
-	if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-		mkdir -p $DKPATH/DKApps/$APP/$TARGET_OS/Release
-	fi
+	#if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
+	#	mkdir -p $DKPATH/DKApps/$APP/$TARGET_OS/Debug
+	#fi
+	#if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
+	#	mkdir -p $DKPATH/DKApps/$APP/$TARGET_OS/Release
+	#fi
 	
-	if [[ "$TARGET_OS" == "android"* ]]; then
-		validate_android_ndk
-		TARGET="main"
-	fi
+	#if [[ "$TARGET_OS" == "android"* ]]; then
+	#	validate_android_ndk
+	#	TARGET="main"
+	#fi
 			
 	if [[ "$TARGET_OS" == "android_arm32" ]]; then
-		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-	     	dk_call $CMAKE -G "$GENERATOR" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=$ANDROID_API -DANDROID_NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_TOOLCHAIN_FILE -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Debug
-	    fi
-	    if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-	     	dk_call $CMAKE -G "$GENERATOR" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=$ANDROID_API -DANDROID_NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_TOOLCHAIN_FILE -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Release
-	    fi
+		validate_android_ndk
+	
+		CMAKE_ARGS+=( "-G 'Unix Makefiles'" )
+		CMAKE_ARGS+=( "-DCMAKE_MAKE_PROGRAM=%ANDROID_NDK%/prebuilt/windows-x86_64/bin/make.exe" )
+		CMAKE_ARGS+=( "-DCMAKE_ANDROID_ARCH_ABI=armeabi-v7a" )
+		CMAKE_ARGS+=( "-DANDROID_ABI=armeabi-v7a" )
+		CMAKE_ARGS+=( "-DANDROID_PLATFORM=$ANDROID_API" )
+		CMAKE_ARGS+=( "-DCMAKE_ANDROID_NDK=$ANDROID_NDK" )
+		CMAKE_ARGS+=( "-DANDROID_NDK=$ANDROID_NDK" )
+		CMAKE_ARGS+=( "-DCMAKE_TOOLCHAIN_FILE=$ANDROID_TOOLCHAIN_FILE" )
+		CMAKE_ARGS+=( "-DANDROID_TOOLCHAIN=clang" )
+		CMAKE_ARGS+=( "-DCMAKE_ANDROID_STL_TYPE=c++_static" )
+		CMAKE_ARGS+=( "-DANDROID_STL=c++_static" )
+		CMAKE_ARGS+=( "-DCMAKE_CXX_FLAGS='-std=c++1z -frtti -fexceptions'" )
+	
+		echo ""
+		echo "****** CMAKE COMMAND ******"
+		echo $CMAKE -G "Unix Makefiles" "${CMAKE_ARGS[@]}" -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions"
+		echo ""
+		dk_call $CMAKE -G "Unix Makefiles" "${CMAKE_ARGS[@]}" -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions"
+	
+		TARGET="main"	
+	
+		#if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
+	    # 	dk_call $CMAKE -G "$GENERATOR" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=$ANDROID_API -DANDROID_NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_TOOLCHAIN_FILE -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Debug
+	    #fi
+	    #if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
+	    #	dk_call $CMAKE -G "$GENERATOR" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=$ANDROID_API -DANDROID_NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_TOOLCHAIN_FILE -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Release
+	    #fi
 	fi
 
 	if [[ "$TARGET_OS" == "android_arm64" ]]; then
@@ -653,7 +706,7 @@ function Build_Project() {
 
 	echo ""
 	echo "##################################################################"
-	echo "****** Building $APP - $TARGET_OS - $TYPE - $LEVEL ******"
+	echo "****** Building $APP - $TARGET_OS - $TYPE - $DKLEVEL ******"
 	echo "##################################################################"
 	echo ""
 	
@@ -678,7 +731,7 @@ function Build_Project() {
 	
 	echo ""
 	echo "##################################################################"
-	echo "****** Done Building $APP - $TARGET_OS - $TYPE - $LEVEL ******"
+	echo "****** Done Building $APP - $TARGET_OS - $TYPE - $DKLEVEL ******"
 	echo "##################################################################"
 	echo ""
 }
@@ -1328,13 +1381,13 @@ function create_cache() {
 	#print_var APP
 	#print_var TARGET_OS
 	#print_var TYPE
-	#print_var LEVEL
+	#print_var DKLEVEL
 	
 	# write variable values line by line
 	echo "$APP">"$DKPATH/cache"
 	echo "$TARGET_OS">>"$DKPATH/cache"
 	echo "$TYPE">>"$DKPATH/cache"
-	#echo "$LEVEL">>"$DKPATH/cache"
+	#echo "$DKLEVEL">>"$DKPATH/cache"
 }
 
 function read_cache() {
@@ -1352,7 +1405,7 @@ function read_cache() {
 			_TYPE_="$p"
 		fi
 		#if [ $count == 3 ]; then
-		#	_LEVEL_="$p"
+		#	_DKLEVEL_="$p"
 		#fi
 
 		(( count++ ))
@@ -1361,7 +1414,7 @@ function read_cache() {
 	#print_var _APP_
 	#print_var _TARGET_OS_
 	#print_var _TYPE_
-	#print_var _LEVEL_
+	#print_var _DKLEVEL_
 }
 
 function print_var() {

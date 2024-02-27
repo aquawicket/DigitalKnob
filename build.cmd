@@ -335,6 +335,7 @@ goto:eof
     if %DKLINK%==Shared         call:add_cmake_arg -DSHARED=ON
 	
 	set CMAKE_BINARY_DIR=%CMAKE_TARGET_PATH%/%TARGET_OS%/%TYPE%
+	echo CMAKE_BINARY_DIR = %CMAKE_BINARY_DIR%
 	
 	call:add_cmake_arg -S=%CMAKE_SOURCE_DIR%
 	call:add_cmake_arg -B=%CMAKE_BINARY_DIR%
