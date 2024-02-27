@@ -62,6 +62,19 @@ if "%*" NEQ "" call %*
     echo DKCMAKE = %DKCMAKE%
     echo DK3RDPARTY = %DK3RDPARTY%
     echo DKIMPORTS = %DKIMPORTS%
+	
+	set NATIVE_OS=win
+	echo NATIVE_OS = %NATIVE_OS%
+	
+	if %PROCESSOR_ARCHITECTURE%==x86 set NATIVE_ARCH=x86
+	if %PROCESSOR_ARCHITECTURE%==AMD64 set NATIVE_ARCH=x86_64
+	if %PROCESSOR_ARCHITECTURE%==IA64  set NATIVE_ARCH=x86_64
+	if %PROCESSOR_ARCHITECTURE%==EM64T set NATIVE_ARCH=x86_64
+	if %PROCESSOR_ARCHITECTURE%==ARM64  set NATIVE_ARCH=arm64
+	echo NATIVE_ARCH = %NATIVE_ARCH%
+	
+	set NATIVE_TRIPLE=%NATIVE_OS%_%NATIVE_ARCH%
+	echo NATIVE_TRIPLE = %NATIVE_TRIPLE%
 
 	:while_loop             
         if "%UPDATE%"==""     call:pick_update & goto:while_loop
@@ -181,61 +194,77 @@ goto:eof
 	echo.
 	echo %APP% %TARGET_OS% %TYPE%
        
-    :: TODO
-    :: 1) Windows (x86_64)
-
-    :: 2) Android (arm32)
-    :: 3) Android (arm64)
-    :: 4) Android (x86)
-    :: 5) Android (x86_64)
-    :: 6) iOS (arm32)
-    :: 7) iOS (arm64)
-    :: 8) iOS (x86)
-    :: 9) iOS (x86_64)
-    :: 10) iOS-Simulator (arm32)
-    :: 11) iOS-Simulator (arm64)
-    :: 12) iOS-Simulator (x86)
-    :: 13) iOS-Simulator (x86_64)
-    :: 14) Linux (c)
-    :: 15) Linux (arm64)
-    :: 16) Linux (x86)
-    :: 17) Linux (x86_64)
-    :: 18) Mac (arm32)
-    :: 19) Mac (arm64)
-    :: 20) Mac (x86)
-    :: 21) Mac (x86_64)
-    :: 22) Raspberry (arm32)
-    :: 23) Raspberry (arm64)
-    :: 24) Raspberry (x86)
-    :: 25) Raspberry (x86_64)
-    :: 26) Windows (arm32)
-    :: 27) Windows (arm64)
-    :: 28) Windows (x86)
-    :: 29) Windows (x86_64)
-    :: 30) Clear Screen
-    :: 31) Go Back
-    :: 32) Exit
-
     echo.
-    echo 1) Windows 32
-    echo 2) Windows 64
-    echo 3) Android 32
-    echo 4) Android 64
-    echo 5) Emscripten
-    echo 6) Clear Screen
-    echo 7) Go Back
-    echo 8) Exit
+    echo  1) %NATIVE_TRIPLE%
+	echo.
+	echo  2) android arm32
+	echo  3) android arm64
+	echo  4) android x86
+	echo  5) android x86_64
+	echo  6) emscripten
+	echo  7) ios arm32
+	echo  8) ios arm64
+	echo  9) ios x86
+	echo 10) ios x86_64
+	echo 11) iossim arm32
+	echo 12) iossim arm64
+	echo 13) iossim x86
+	echo 14) iossim x86_64
+	echo 15) linux arm32
+	echo 16) linux arm64
+	echo 17) linux x86
+	echo 18) linux x86_64
+	echo 19) mac arm32
+	echo 20) mac arm64
+	echo 21) mac x86
+	echo 22) mac x86_64
+	echo 23) raspberry arm32
+	echo 24) raspberry arm64
+	echo 25) raspberry x86
+	echo 26) raspberry x86_64
+	echo 27) win arm32
+	echo 28) win arm64
+	echo 29) win x86
+	echo 30) win x86_64
+    echo 31) Clear Screen
+    echo 32) Go Back
+    echo 33) Exit
     set choice=
     set /p choice=Please select an OS to build for: 
     ::if not "%choice%"=="" set choice=%choice:~0,1%        ::What does this do?
-    if "%choice%"=="1" set "TARGET_OS=win_x86"		& goto:eof
-    if "%choice%"=="2" set "TARGET_OS=win_x86_64"		& goto:eof
-    if "%choice%"=="3" set "TARGET_OS=android_arm32"	& goto:eof
-    if "%choice%"=="4" set "TARGET_OS=android_arm64"	& goto:eof
-    if "%choice%"=="5" set "TARGET_OS=emscripten"	& goto:eof
-    if "%choice%"=="6" call:clear_screen			& goto:eof
-    if "%choice%"=="7" set "APP="					& goto:eof
-    if "%choice%"=="8" exit							& goto:eof
+    if "%choice%"=="1" set "TARGET_OS=%NATIVE_TRIPLE%"		& goto:eof
+	if "%choice%"=="2" set "TARGET_OS=android_arm32"		& goto:eof
+	if "%choice%"=="3" set "TARGET_OS=android_arm64"		& goto:eof
+	if "%choice%"=="4" set "TARGET_OS=android_x86"			& goto:eof
+	if "%choice%"=="5" set "TARGET_OS=android_x86_64"		& goto:eof
+	if "%choice%"=="6" set "TARGET_OS=emscripten"			& goto:eof
+	if "%choice%"=="7" set "TARGET_OS=ios_arm32"			& goto:eof
+	if "%choice%"=="8" set "TARGET_OS=ios_arm64"			& goto:eof
+	if "%choice%"=="9" set "TARGET_OS=ios_x86"				& goto:eof
+	if "%choice%"=="10" set "TARGET_OS=ios_x86_64"			& goto:eof
+	if "%choice%"=="11" set "TARGET_OS=iossim_arm32"		& goto:eof
+	if "%choice%"=="12" set "TARGET_OS=iossim_arm64"		& goto:eof
+	if "%choice%"=="13" set "TARGET_OS=iossim_x86"			& goto:eof
+	if "%choice%"=="14" set "TARGET_OS=iossim_x86_64"		& goto:eof
+	if "%choice%"=="15" set "TARGET_OS=linux_arm32"			& goto:eof
+	if "%choice%"=="16" set "TARGET_OS=linux_arm64"			& goto:eof
+	if "%choice%"=="17" set "TARGET_OS=linux_x86"			& goto:eof
+	if "%choice%"=="18" set "TARGET_OS=linux_x86_64"		& goto:eof
+	if "%choice%"=="19" set "TARGET_OS=mac_arm32"			& goto:eof
+	if "%choice%"=="20" set "TARGET_OS=mac_arm64"			& goto:eof
+	if "%choice%"=="21" set "TARGET_OS=mac_x86"				& goto:eof
+	if "%choice%"=="22" set "TARGET_OS=mac_x86_64"			& goto:eof
+	if "%choice%"=="23" set "TARGET_OS=raspberry_arm32"		& goto:eof
+	if "%choice%"=="24" set "TARGET_OS=raspberry_arm64"		& goto:eof
+	if "%choice%"=="25" set "TARGET_OS=raspberry_x86"		& goto:eof
+	if "%choice%"=="26" set "TARGET_OS=raspberry_x86_64"	& goto:eof
+	if "%choice%"=="27" set "TARGET_OS=win_arm32"			& goto:eof
+	if "%choice%"=="28" set "TARGET_OS=win_arm64"			& goto:eof
+	if "%choice%"=="29" set "TARGET_OS=win_x86"				& goto:eof
+	if "%choice%"=="30" set "TARGET_OS=win_x86_64"			& goto:eof
+    if "%choice%"=="31" call:clear_screen					& goto:eof
+    if "%choice%"=="32" set "APP="							& goto:eof
+    if "%choice%"=="33" exit								& goto:eof
 	echo %choice%: invalid selection, please try again
 	set TARGET_OS=
 goto:eof
