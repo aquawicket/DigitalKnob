@@ -127,7 +127,9 @@ elseif(WIN_X86_HOST)
 	dk_set(ANDROID_HOST_TAG windows-x86)
 elseif(WIN_X86_64_HOST)
 	dk_set(ANDROID_HOST_TAG windows-x86_64)
-elseif()
+else()
+	dk_error("could not set ANDROID_HOST_TAG!")
+endif()
 
 
 
