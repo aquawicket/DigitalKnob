@@ -156,8 +156,8 @@
 #			define DKOS_VERSION "UNKNOWN"
 #		endif
 #		if DKBITS == 32
-#			ifndef IOS32
-#				define IOS32 1
+#			ifndef IOS_ARM32
+#				define IOS_ARM32 1
 #			endif
 #			ifndef IOSSIM32
 #				define IOSSIM32 1
@@ -180,10 +180,10 @@
 #			define DKOS_VERSION "UNKNOWN"
 #		endif
 #		if DKBITS == 32
-#			ifndef IOS32
-#				define IOS32 1
+#			ifndef IOS_ARM32
+#				define IOS_ARM32 1
 #			endif
-#			define DKOS "IOS32"
+#			define DKOS "IOS_ARM32"
 #			define DKOS_VERSION "UNKNOWN"
 #		endif
 #	elif TARGET_OS_MAC == 1

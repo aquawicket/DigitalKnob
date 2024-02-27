@@ -45,8 +45,8 @@
 // mac64     - http://DigitalKnob.com/Download/DKApp_mac64.zip
 // linux32   - http://DigitalKnob.com/Download/DKApp_linux32.zip
 // linux64   - http://DigitalKnob.com/Download/DKApp_linux64.zip
-// ios32     - http://DigitalKnob.com/Download/DKApp_ios32.zip
-// ios64     - http://DigitalKnob.com/Download/DKApp_ios64.zip
+// ios_arm32     - http://DigitalKnob.com/Download/DKApp_ios_arm32.zip
+// ios_arm64     - http://DigitalKnob.com/Download/DKApp_ios_arm64.zip
 // iossim32  - http://DigitalKnob.com/Download/DKApp_iossim32.zip
 // iossim64  - http://DigitalKnob.com/Download/DKApp_iossim64.zip
 // android_arm32 - http://DigitalKnob.com/Download/DKApp.apk
@@ -88,13 +88,13 @@ bool DKUpdate::Init(){
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_LINUX64]", url);
 	if(url.empty()){ url = downloads+app+"_linux64.zip"; }
 #endif
-#ifdef IOS32
-	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_IOS32]", url);
-	if(url.empty()){ url = downloads+app+"_ios32.zip"; }
+#ifdef IOS_ARM32
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_IOS_ARM32]", url);
+	if(url.empty()){ url = downloads+app+"_ios_arm32.zip"; }
 #endif
 #ifdef IOS64
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_IO64S]", url);
-	if(url.empty()){ url = downloads+app+"_ios64.zip"; }
+	if(url.empty()){ url = downloads+app+"_ios_arm64.zip"; }
 #endif
 #ifdef ANDROID_ARM32
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_ANDROID_ARM32]", url);

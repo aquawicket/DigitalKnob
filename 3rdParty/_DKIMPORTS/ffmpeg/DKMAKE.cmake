@@ -83,7 +83,7 @@ EMSCRIPTEN_DEBUG_dk_queueCommand(${EMCONFIGURE} ../../configure
 	--cxx=${EMPP}
 	--objcc=${EMCC}
 	--dep-cc=${EMCC})
-IOS32_DEBUG_dk_queueCommand(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=armv7 --disable-x86asm --disable-iconv)
+IOS_ARM32_DEBUG_dk_queueCommand(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=armv7 --disable-x86asm --disable-iconv)
 IOS64_DEBUG_dk_queueCommand(../../configure 
 	--pkg-config-flags=--static
 	--disable-shared
@@ -155,7 +155,7 @@ EMSCRIPTEN_RELEASE_dk_queueCommand(${EMCONFIGURE} ../../configure
 	--cxx=${EMPP}
 	--objcc=${EMCC}
 	--dep-cc=${EMCC})
-IOS32_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=arm --disable-x86asm --disable-iconv)
+IOS_ARM32_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=arm --disable-x86asm --disable-iconv)
 IOS64_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=arm64 --disable-x86asm --disable-iconv)
 IOSSIM32_RELEASE_dk_queueCommand	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=i686 --disable-x86asm --disable-iconv)
 IOSSIM64_RELEASE_dk_queueCommand	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=x86_64 --disable-x86asm --disable-iconv)

@@ -162,7 +162,7 @@ if(CMAKE_BINARY_DIR)
 	#dk_debug("CMAKE_BINARY_DIR = ${CMAKE_BINARY_DIR}")
 endif()
 
-# ANDROID 32
+# ANDROID arm32
 string(FIND "${CMAKE_BINARY_DIR}" "/android_arm32" index)
 if(${index} GREATER -1)
 	dk_info("*** Creating Android x32 Project Files ***")
@@ -175,7 +175,7 @@ if(${index} GREATER -1)
 	string(REPLACE "/android_arm32" "" DKPROJECT ${CMAKE_BINARY_DIR})
 endif()
 
-# ANDROID 64
+# ANDROID arm64
 string(FIND "${CMAKE_BINARY_DIR}" "/android_arm64" index)
 if(${index} GREATER -1)
 	dk_info("*** Creating Android x64 Project Files ***")
@@ -199,30 +199,30 @@ if(${index} GREATER -1)
 	string(REPLACE "/emscripten" "" DKPROJECT ${CMAKE_BINARY_DIR})
 endif()
 
-# IOS 32
-string(FIND "${CMAKE_BINARY_DIR}" "/ios32" index)
+# IOS arm32
+string(FIND "${CMAKE_BINARY_DIR}" "/ios_arm32" index)
 if(${index} GREATER -1)
 	dk_info("*** Creating iOS x32 Project Files ***")
 	dk_set(IOS ON)
-	dk_set(IOS_32 ON)
-	dk_set(OS "ios32")
+	dk_set(IOS_ARM32 ON)
+	dk_set(OS "ios_arm32")
 	dk_set(DEBUG_DIR Debug-iphoneos)
 	dk_set(RELEASE_DIR Release-iphoneos)
 	dk_set(CMAKE_SKIP_RPATH ON)
-	string(REPLACE "/ios32" "" DKPROJECT ${CMAKE_BINARY_DIR})
+	string(REPLACE "/ios_arm32" "" DKPROJECT ${CMAKE_BINARY_DIR})
 endif()
 
-# IOS 64
-string(FIND "${CMAKE_BINARY_DIR}" "/ios64" index)
+# IOS arm64
+string(FIND "${CMAKE_BINARY_DIR}" "/ios_arm64" index)
 if(${index} GREATER -1)
 	dk_info("*** Creating iOS x64 Project Files ***")
 	dk_set(IOS ON)
-	dk_set(IOS_64 ON)
-	dk_set(OS "ios64")
+	dk_set(IOS_ARM64 ON)
+	dk_set(OS "ios_arm64")
 	dk_set(DEBUG_DIR Debug-iphoneos)
 	dk_set(RELEASE_DIR Release-iphoneos)
 	dk_set(CMAKE_SKIP_RPATH ON)
-	string(REPLACE "/ios64" "" DKPROJECT ${CMAKE_BINARY_DIR})
+	string(REPLACE "/ios_arm64" "" DKPROJECT ${CMAKE_BINARY_DIR})
 endif()
 
 # IOSSIM 32
@@ -390,7 +390,7 @@ endif()
 if(NOT CMAKE_SCRIPT_MODE_FILE)
 	if(NOT OS)
 		dk_error(CMAKE_BINARY_DIR)
-		dk_error("The binary directory must contain an os folder. \n Valid folders are android_arm32,android_arm64,emscripten,ios32,ios64,iossim32,iossim64,linux32,linux64,mac32,mac64,raspberry32,raspberry64,win32,win64 \n 	EXAMPLE: digitalknob/Development/DKApps/MyApp/win32")
+		dk_error("The binary directory must contain an os folder. \n Valid folders are android_arm32,android_arm64,emscripten,ios_arm32,ios_arm64,iossim32,iossim64,linux32,linux64,mac32,mac64,raspberry32,raspberry64,win32,win64 \n 	EXAMPLE: digitalknob/Development/DKApps/MyApp/win32")
 		#file(REMOVE ${CMAKE_BINARY_DIR})
 	endif()
 

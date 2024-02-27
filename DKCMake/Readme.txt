@@ -8,8 +8,8 @@
 		* /android_arm32
 		* /android_arm64
 		* /emscripten
-		* /ios32
-		* /ios64
+		* /ios_arm32
+		* /ios_arm64
 		* /iossim32
 		* /iossim64
 		* /linux32
