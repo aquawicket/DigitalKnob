@@ -48,7 +48,7 @@
 // ios_arm32     - http://DigitalKnob.com/Download/DKApp_ios_arm32.zip
 // ios_arm64     - http://DigitalKnob.com/Download/DKApp_ios_arm64.zip
 // iossim_x86  - http://DigitalKnob.com/Download/DKApp_iossim_x86.zip
-// iossim64  - http://DigitalKnob.com/Download/DKApp_iossim64.zip
+// iossim_x86_64  - http://DigitalKnob.com/Download/DKApp_iossim_x86_64.zip
 // android_arm32 - http://DigitalKnob.com/Download/DKApp.apk
 // android_arm64 - http://DigitalKnob.com/Download/DKApp_64.apk
 

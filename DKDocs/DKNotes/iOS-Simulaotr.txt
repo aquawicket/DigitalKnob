@@ -5,7 +5,7 @@ https://suelan.github.io/2020/02/05/iOS-Simulator-from-the-Command-Line
 open -a Simulator.app
 
 // Install DKSdlRml_App
-xcrun simctl install booted /Users/aquamac/digitalknob/Development/DKApps/DKSdlRml/iossim64/Debug-iphonesimulator/DKSdlRml_APP.app
+xcrun simctl install booted /Users/aquamac/digitalknob/Development/DKApps/DKSdlRml/iossim_x86_64/Debug-iphonesimulator/DKSdlRml_APP.app
 
 // Launch DKSdlRml_APP
 xcrun simctl launch booted com.digitalknob.DKSdlRml_APP

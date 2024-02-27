@@ -859,21 +859,21 @@ if(IOS OR IOSSIM)
 			set(RUN_SCRIPT_DEBUG
 				"\#!/bin/bash\n"
 				"open -a Simulator.app\n"
-				"xcrun simctl install booted ${DKPROJECT}/iossim64/Debug-iphonesimulator/${APP_NAME}.app\n"
+				"xcrun simctl install booted ${DKPROJECT}/iossim_x86_64/Debug-iphonesimulator/${APP_NAME}.app\n"
 				"xcrun simctl launch --console-pty booted com.digitalknob.${APP_NAME}"
 			)
-			file(WRITE ${DKPROJECT}/iossim64/Debug-iphonesimulator/Run.sh ${RUN_SCRIPT_DEBUG})
-			dk_executeProcess(chmod 777 ${DKPROJECT}/iossim64/Debug-iphonesimulator/Run.sh)
+			file(WRITE ${DKPROJECT}/iossim_x86_64/Debug-iphonesimulator/Run.sh ${RUN_SCRIPT_DEBUG})
+			dk_executeProcess(chmod 777 ${DKPROJECT}/iossim_x86_64/Debug-iphonesimulator/Run.sh)
 		endif()
 		if(RELEASE)
 			set(RUN_SCRIPT_RELEASE
 				"\#!/bin/bash\n"
 				"open -a Simulator.app\n"
-				"xcrun simctl install booted ${DKPROJECT}/iossim64/Release-iphonesimulator/${APP_NAME}.app\n"
+				"xcrun simctl install booted ${DKPROJECT}/iossim_x86_64/Release-iphonesimulator/${APP_NAME}.app\n"
 				"xcrun simctl launch --console-pty booted com.digitalknob.${APP_NAME}"
 			)
-			file(WRITE ${DKPROJECT}/iossim64/Release-iphonesimulator/Run.sh ${RUN_SCRIPT_RELEASE})
-			dk_executeProcess(chmod 777 ${DKPROJECT}/iossim64/Release-iphonesimulator/Run.sh)
+			file(WRITE ${DKPROJECT}/iossim_x86_64/Release-iphonesimulator/Run.sh ${RUN_SCRIPT_RELEASE})
+			dk_executeProcess(chmod 777 ${DKPROJECT}/iossim_x86_64/Release-iphonesimulator/Run.sh)
 		endif()
 	endif()
 	

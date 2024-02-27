@@ -238,17 +238,17 @@ if(${index} GREATER -1)
 	string(REPLACE "/iossim_x86" "" DKPROJECT ${CMAKE_BINARY_DIR})
 endif()
 
-# IOSSIM 64
-string(FIND "${CMAKE_BINARY_DIR}" "/iossim64" index)
+# iossim_x86_64
+string(FIND "${CMAKE_BINARY_DIR}" "/iossim_x86_64" index)
 if(${index} GREATER -1)
 	dk_info("*** Creating iOS-Simulator x64 Project Files ***")
 	dk_set(IOSSIM ON)
 	dk_set(IOSSIM_64 ON)
-	dk_set(OS "iossim64")
+	dk_set(OS "iossim_x86_64")
 	dk_set(DEBUG_DIR Debug-iphonesimulator)
 	dk_set(RELEASE_DIR Release-iphonesimulator)
 	dk_set(CMAKE_SKIP_RPATH ON)
-	string(REPLACE "/iossim64" "" DKPROJECT ${CMAKE_BINARY_DIR})
+	string(REPLACE "/iossim_x86_64" "" DKPROJECT ${CMAKE_BINARY_DIR})
 endif()
 
 # LINUX 32
@@ -390,7 +390,7 @@ endif()
 if(NOT CMAKE_SCRIPT_MODE_FILE)
 	if(NOT OS)
 		dk_error(CMAKE_BINARY_DIR)
-		dk_error("The binary directory must contain an os folder. \n Valid folders are android_arm32,android_arm64,emscripten,ios_arm32,ios_arm64,iossim_x86,iossim64,linux32,linux64,mac32,mac64,raspberry32,raspberry64,win32,win64 \n 	EXAMPLE: digitalknob/Development/DKApps/MyApp/win32")
+		dk_error("The binary directory must contain an os folder. \n Valid folders are android_arm32,android_arm64,emscripten,ios_arm32,ios_arm64,iossim_x86,iossim_x86_64,linux32,linux64,mac32,mac64,raspberry32,raspberry64,win32,win64 \n 	EXAMPLE: digitalknob/Development/DKApps/MyApp/win32")
 		#file(REMOVE ${CMAKE_BINARY_DIR})
 	endif()
 

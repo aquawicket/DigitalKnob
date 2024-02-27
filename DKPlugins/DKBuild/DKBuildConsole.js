@@ -153,7 +153,7 @@ function DKBuildConsole_SelectOs() {
 		//OSes.push("ios_arm32")
 		OSes.push("ios_arm64")
 		//OSes.push("iossim_x86")
-		OSes.push("iossim64")
+		OSes.push("iossim_x86_64")
 		OSes.push("android_arm32")
 		OSes.push("android_arm64")
 		OSes.push("emscripten")
@@ -480,7 +480,7 @@ function DKBuildConsole_OpenAppSolution(os, app){
 	if(os === "win32" || os === "win64"){
 		const solution_name = app+".sln"
 	}
-	else if(os === "mac32" || os === "mac64" || os === "ios_arm32" || os === "ios_arm64" || os === "iossim_x86" || os === "iossim64"){
+	else if(os === "mac32" || os === "mac64" || os === "ios_arm32" || os === "ios_arm64" || os === "iossim_x86" || os === "iossim_x86_64"){
 		const solution_name = app+".xcodeproj"
 	}
 	else{
