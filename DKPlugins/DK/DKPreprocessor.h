@@ -194,10 +194,10 @@
 #			define MAC 1
 #		endif
 #		if DKBITS == 64
-#			ifndef MAC64
-#				define MAC64 1
+#			ifndef MAC_X86_64
+#				define MAC_X86_64 1
 #			endif
-#			define DKOS "MAC64"
+#			define DKOS "MAC_X86_64"
 #			define DKOS_VERSION "UNKNOWN"
 #		endif
 #		if DKBITS == 32

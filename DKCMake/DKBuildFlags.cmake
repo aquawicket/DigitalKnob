@@ -283,15 +283,15 @@ endif()
 
 # Moc x86_64 (x64) - XCODE
 if(XCODE)
-	MAC64_dk_append(DKCMAKE_FLAGS				-DCMAKE_OSX_ARCHITECTURES=x86_64)
-	MAC64_dk_set(DKCMAKE_C_COMPILER				${XCODE_C_COMPILER})
-	MAC64_dk_append(DKCMAKE_C_FLAGS				"-DMAC -DMAC64 -std=c17 -x objective-c")
-	MAC64_dk_set(DKCMAKE_CXX_COMPILER			${XCODE_CXX_COMPILER})
-	MAC64_dk_append(DKCMAKE_CXX_FLAGS			"-DMAC -DMAC64 -std=c++17 -x objective-c++")
-	#MAC64_dk_set(DKCONFIGURE_CC				${XCODE_C_COMPILER})
-	MAC64_dk_append(DKCONFIGURE_CFLAGS			"-DMAC -DMAC64 -std=c17") #-x objective-c") # https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
-	#MAC64_dk_set(DKCONFIGURE_CXX				${XCODE_CXX_COMPILER})
-	MAC64_dk_append(DKCONFIGURE_CXXFLAGS		"-DMAC -DMAC64 -std=c++17") #-x objective-c++") #https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
+	MAC_X86_64_dk_append(DKCMAKE_FLAGS				-DCMAKE_OSX_ARCHITECTURES=x86_64)
+	MAC_X86_64_dk_set(DKCMAKE_C_COMPILER				${XCODE_C_COMPILER})
+	MAC_X86_64_dk_append(DKCMAKE_C_FLAGS				"-DMAC -DMAC_X86_64 -std=c17 -x objective-c")
+	MAC_X86_64_dk_set(DKCMAKE_CXX_COMPILER			${XCODE_CXX_COMPILER})
+	MAC_X86_64_dk_append(DKCMAKE_CXX_FLAGS			"-DMAC -DMAC_X86_64 -std=c++17 -x objective-c++")
+	#MAC_X86_64_dk_set(DKCONFIGURE_CC				${XCODE_C_COMPILER})
+	MAC_X86_64_dk_append(DKCONFIGURE_CFLAGS			"-DMAC -DMAC_X86_64 -std=c17") #-x objective-c") # https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
+	#MAC_X86_64_dk_set(DKCONFIGURE_CXX				${XCODE_CXX_COMPILER})
+	MAC_X86_64_dk_append(DKCONFIGURE_CXXFLAGS		"-DMAC -DMAC_X86_64 -std=c++17") #-x objective-c++") #https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
 endif()
 
 # iOS arm (x32) - XCODE

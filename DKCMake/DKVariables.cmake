@@ -296,12 +296,12 @@ if(${index} GREATER -1)
 	string(REPLACE "/mac_x86" "" DKPROJECT ${CMAKE_BINARY_DIR})
 endif()
 
-# MAC 64
+# mac_x86_64
 string(FIND "${CMAKE_BINARY_DIR}" "/mac_x86_64" index)
 if(${index} GREATER -1)
 	dk_info("*** Creating Mac x64 Project Files ***")
 	dk_set(MAC ON)
-	dk_set(MAC_64 ON)
+	dk_set(MAC_X86_64 ON)
 	dk_set(OS "mac_x86_64")
 	dk_set(DEBUG_DIR Debug)
 	dk_set(RELEASE_DIR Release)

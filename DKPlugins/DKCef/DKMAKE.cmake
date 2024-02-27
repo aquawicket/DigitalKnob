@@ -78,7 +78,7 @@ if(WIN_64)
 endif()
 
 #https://bitbucket.org/chromiumembedded/cef/wiki/Tutorial#markdown-header-mac-os-x-build-steps
-if(MAC_64)
+if(MAC_X86_64)
 	#dk_info("Adding Chromium Embedded Framework.framework to bundle . . .")
 	#add_custom_command(
 	#	TARGET DKCef

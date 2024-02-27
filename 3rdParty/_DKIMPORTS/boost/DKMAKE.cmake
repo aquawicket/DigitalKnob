@@ -313,7 +313,7 @@ MAC_X86_RELEASE_dk_queueCommand(${BOOST}/b2
 	${BOOST_WITHOUT}
 	--build-dir=${BOOST}/${OS}/${RELEASE_DIR}
 	--stagedir=${BOOST}/${OS}/${RELEASE_DIR})
-MAC64_DEBUG_dk_queueCommand(${BOOST}/b2
+MAC_X86_64_DEBUG_dk_queueCommand(${BOOST}/b2
 	toolset=darwin
 	address-model=64
 	variant=debug
@@ -326,7 +326,7 @@ MAC64_DEBUG_dk_queueCommand(${BOOST}/b2
 	${BOOST_WITHOUT}
 	--build-dir=${BOOST}/${OS}/${DEBUG_DIR}
 	--stagedir=${BOOST}/${OS}/${DEBUG_DIR})
-MAC64_RELEASE_dk_queueCommand(${BOOST}/b2
+MAC_X86_64_RELEASE_dk_queueCommand(${BOOST}/b2
 	toolset=darwin
 	address-model=64
 	variant=release

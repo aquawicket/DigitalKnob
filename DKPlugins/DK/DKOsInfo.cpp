@@ -45,8 +45,8 @@ bool GetOSFlag(DKString& flag){
 #if MAC_X86
 	flag = "MAC_X86";
 #endif
-#if MAC64
-	flag = "MAC64";
+#if MAC_X86_64
+	flag = "MAC_X86_64";
 #endif
 #if IOS_ARM32
 	flag = "IOS_ARM32";
