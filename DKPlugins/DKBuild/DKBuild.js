@@ -523,7 +523,7 @@ function DKBuild_DoResults(){
 		}
 	}
 	
-	///// IOSSIM64 ///////
+	///// IOSSIM_X86_64 ///////
 	if(OS === "iossim_x86_64"){
 		DKBuild_ValidateXcode()
 		if(!DKBuild_Command(CMAKE+" -G \"Xcode\" "+cmake_string+" -DCMAKE_TOOLCHAIN_FILE="+DIGITALKNOB+"DK/DKCMake/ios.toolchain.cmake -DPLATFORM=SIMULATOR64 -DSDK_VERSION=15.0 -DDEPLOYMENT_TARGET=13.0 -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+OS))

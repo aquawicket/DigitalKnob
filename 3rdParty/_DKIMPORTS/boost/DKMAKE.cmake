@@ -214,7 +214,7 @@ ANDROID_ARM64_RELEASE_dk_queueCommand(
 	${BOOST_WITHOUT}
 	abi=aapcs
 	binary-format=elf )
-IOSSIM64_DEBUG_dk_queueCommand(${BOOST}/b2
+IOSSIM_X86_64_DEBUG_dk_queueCommand(${BOOST}/b2
 	toolset=darwin address-model=64
 	variant=debug
 	link=static
@@ -224,7 +224,7 @@ IOSSIM64_DEBUG_dk_queueCommand(${BOOST}/b2
 	--layout=system
 	${BOOST_WITH}
 	${BOOST_WITHOUT}) #--build-dir=${BOOST}/${OS}/${DEBUG_DIR} --stagedir=${BOOST}/${OS}/${DEBUG_DIR}
-IOSSIM64_RELEASE_dk_queueCommand(${BOOST}/b2
+IOSSIM_X86_64_RELEASE_dk_queueCommand(${BOOST}/b2
 	toolset=darwin
 	address-model=64
 	variant=release

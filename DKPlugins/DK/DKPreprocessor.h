@@ -149,10 +149,10 @@
 #			ifndef IOS_ARM64
 #				define IOS_ARM64 1
 #			endif
-#			ifndef IOSSIM64
-#				define IOSSIM64 1
+#			ifndef IOSSIM_X86_64
+#				define IOSSIM_X86_64 1
 #			endif
-#			define DKOS "IOSSIM64"
+#			define DKOS "IOSSIM_X86_64"
 #			define DKOS_VERSION "UNKNOWN"
 #		endif
 #		if DKBITS == 32
