@@ -613,22 +613,11 @@ function Generate_Project() {
 	
 		echo ""
 		echo "****** CMAKE COMMAND ******"
-		#$EMSDK_ENV && $CMAKE -G "$EMSDK_GENERATOR" "${CMAKE_ARGS[@]}"
 		echo "$EMSDK_ENV && $CMAKE "${CMAKE_ARGS[@]}""
 		echo ""
-		#dk_call $EMSDK_ENV && $CMAKE -G "$EMSDK_GENERATOR" "${CMAKE_ARGS[@]}"
 		dk_call $EMSDK_ENV && $CMAKE "${CMAKE_ARGS[@]}"
 	
-		set TARGET=${APP}_APP
-	
-	    #dk_call validate_emscripten
-		#if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
-		#	dk_call $EMSDK_ENV && $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Debug
-		#fi
-		#if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
-		#	dk_call $EMSDK_ENV && $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Release
-		#fi
-		#TARGET=${APP}_APP
+		#set TARGET=${APP}_APP
 	fi
 	
 	
@@ -734,18 +723,22 @@ function Build_Project() {
 	
 	if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
 		if file_exists $DKPATH/DKApps/$APP/$TARGET_OS/Debug/CMakeCache.txt; then
-			dk_call $CMAKE --build $DKPATH/DKApps/$APP/$TARGET_OS/Debug --target ${TARGET} --config Debug --verbose
+			dk_call $CMAKE --build $DKPATH/DKApps/$APP/$TARGET_OS/Debug --config Debug --verbose
+			#dk_call $CMAKE --build $DKPATH/DKApps/$APP/$TARGET_OS/Debug --target ${TARGET} --config Debug --verbose
 		elif file_exists $DKPATH/DKApps/$APP/$TARGET_OS/CMakeCache.txt; then
-			dk_call $CMAKE --build $DKPATH/DKApps/$APP/$TARGET_OS --target ${TARGET} --config Debug --verbose
+			dk_call $CMAKE --build $DKPATH/DKApps/$APP/$TARGET_OS --config Debug --verbose
+			#dk_call $CMAKE --build $DKPATH/DKApps/$APP/$TARGET_OS --target ${TARGET} --config Debug --verbose
 		else
 			error "Could not find CMakeCache.txt in $APP/$TARGET_OS/Debug or $APP/$TARGET_OS"
 		fi
 	fi
 	if [[ "$TYPE" == "Release" ]] || [[ "$TYPE" == "All" ]]; then
 		if file_exists $DKPATH/DKApps/$APP/$TARGET_OS/Release/CMakeCache.txt; then
-			dk_call $CMAKE --build $DKPATH/DKApps/$APP/$TARGET_OS/Release --target ${TARGET} --config Release --verbose
+			dk_call $CMAKE --build $DKPATH/DKApps/$APP/$TARGET_OS/Release --config Release --verbose
+			#dk_call $CMAKE --build $DKPATH/DKApps/$APP/$TARGET_OS/Release --target ${TARGET} --config Release --verbose
 		elif file_exists $DKPATH/DKApps/$APP/$TARGET_OS/CMakeCache.txt; then
-			dk_call $CMAKE --build $DKPATH/DKApps/$APP/$TARGET_OS --target ${TARGET} --config Release --verbose
+			dk_call $CMAKE --build $DKPATH/DKApps/$APP/$TARGET_OS --config Release --verbose
+			#dk_call $CMAKE --build $DKPATH/DKApps/$APP/$TARGET_OS --target ${TARGET} --config Release --verbose
 		else
 			error "Could not find CMakeCache.txt in $APP/$TARGET_OS/Release or $APP/$TARGET_OS"
 		fi
