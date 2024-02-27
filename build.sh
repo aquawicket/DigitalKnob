@@ -75,18 +75,18 @@ function main() {
 	
 	# NATIVE_ARCH
 	if [[ "$HOSTTYPE" == "x86" ]]; then
-		NATIVE_ARCH="32"
+		NATIVE_ARCH="x86"
 	elif [[ "$HOSTTYPE" == "x86_64"* ]]; then
-		NATIVE_ARCH="64"
+		NATIVE_ARCH="x86_64"
 	elif [[ "$HOSTTYPE" == "aarch64"* ]]; then
-		NATIVE_ARCH="64"
+		NATIVE_ARCH="arm64"
 	else
 		echo "Unknown NATIVE_ARCH"
 	fi
 	print_var NATIVE_ARCH
 	
 	# NATIVE_TRIPLE
-	NATIVE_TRIPLE=$NATIVE_OS$NATIVE_ARCH
+	NATIVE_TRIPLE=$NATIVE_OS_$NATIVE_ARCH
 	print_var NATIVE_TRIPLE
 	echo ""
 	
