@@ -251,14 +251,14 @@ if(${index} GREATER -1)
 	string(REPLACE "/iossim_x86_64" "" DKPROJECT ${CMAKE_BINARY_DIR})
 endif()
 
-# LINUX 32
+# linux_x86
 string(FIND "${CMAKE_BINARY_DIR}" "/linux_x86" index)
 if(${index} GREATER -1)
 if(NOT RASPBERRY)
 if(NOT RPI)
 	dk_info("*** Creating Linux x32 Project Files ***")
 	dk_set(LINUX ON)
-	dk_set(LINUX_32 ON)
+	dk_set(LINUX_X86 ON)
 	dk_set(OS "linux_x86")
 	dk_set(DEBUG_DIR Debug)
 	dk_set(RELEASE_DIR Release)
@@ -316,7 +316,7 @@ endif()
 ## Working to consolidate and remove the need for seperate raspberry pi functions
 ## The build setup is almost Identicle to linux. We will try to compile Rpi by excluding
 ## the RASPBERRY flag variables in place of the LINUX functions. In this conversion,
-## Raspberry will listen to LINUX 32/64 and RPI 32/34.   The RASPBERRY flags will do nothing
+## Raspberry will listen to LINUX x86/64 and RPI x86/64.   The RASPBERRY flags will do nothing
 ## and we should be able to remove them once everythng is working.
 
 # RASPBERRY 32
@@ -326,7 +326,7 @@ if(${index} GREATER -1)
 	dk_set(RASPBERRY ON)     #To be disabled
 	dk_set(RASPBERRY_32 ON)  #To be disabled
 	#dk_set(LINUX ON)
-	#dk_set(LINUX32 ON)
+	#dk_set(LINUX_X86 ON)
 	dk_set(RPI ON)
 	dk_set(RPI32 ON)
 	dk_set(OS "raspberry32")

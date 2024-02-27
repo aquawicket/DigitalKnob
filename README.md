@@ -7,15 +7,15 @@
 *"Apps should look and act the same on every operating system and browser."* <br><br>
 
 ### Supported Platforms
-Windows 32 <br>
-Windows 64 <br>
-Mac 64 <br>
-Linux 32 <br>
-Linux 64 <br>
-iPhone/iPad 64 (<br>
-iPhone/iPad-Simulator 64 <br>
-Android 32 <br>
-Android 64 <br>
+Windows x86 <br>
+Windows x86_64 <br>
+Mac x86_64 <br>
+Linux x86 <br>
+Linux x86_64 <br>
+iPhone/iPad arm64 (<br>
+iPhone/iPad-Simulator x86_64 <br>
+Android arm32 <br>
+Android arm64 <br>
 Raspberry Pi <br>
 Chrome <br>
 Safari <br>

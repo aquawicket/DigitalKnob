@@ -89,7 +89,7 @@ if(MAC_64)
 	#)
 endif()
 
-if(LINUX_32)
+if(LINUX_X86)
 if(NOT RASPBERRY)
 	if(DEBUG)
 		dk_copy(${CEF_BINARY}/Debug ${DKPROJECT}/assets/DKCef OVERWRITE)

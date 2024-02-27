@@ -54,8 +54,8 @@ bool GetOSFlag(DKString& flag){
 #if IOS_ARM64
 	flag = "IOS_ARM64";
 #endif
-#if LINUX32
-	flag = "LINUX32";
+#if LINUX_X86
+	flag = "LINUX_X86";
 #endif
 #if LINUX64
 	flag = "LINUX64";

@@ -7,8 +7,8 @@ endif()
 dk_depend(rpm)
 
 
-LINUX32_HOST_dk_import(https://www.nasm.us/pub/nasm/releasebuilds/2.16.01/linux/nasm-2.16.01-0.fc36.i686.rpm)
-LINUX32_HOST_dk_set(NASM_EXE ${NASM}/nasm)
+LINUX_X86_HOST_dk_import(https://www.nasm.us/pub/nasm/releasebuilds/2.16.01/linux/nasm-2.16.01-0.fc36.i686.rpm)
+LINUX_X86_HOST_dk_set(NASM_EXE ${NASM}/nasm)
 
 if(LINUX_HOST)
 #import(https://www.nasm.us/pub/nasm/releasebuilds/2.16.01/linux/nasm-2.16.01-0.fc36.x86_64.rpm)

@@ -245,10 +245,10 @@
 #		define DKOS_VERSION "UNKNOWN"
 #	endif
 #	if DKBITS == 32
-#		ifndef LINUX32
-#			define LINUX32 1
+#		ifndef LINUX_X86
+#			define LINUX_X86 1
 #		endif
-#		define DKOS "LINUX32"
+#		define DKOS "LINUX_X86"
 #		define DKOS_VERSION "UNKNOWN"
 #	endif
 #elif MSDOS

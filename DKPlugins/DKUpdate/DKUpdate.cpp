@@ -80,8 +80,8 @@ bool DKUpdate::Init(){
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_MAC64]", url);
 	if(url.empty()){ url = downloads+app+"_mac64.zip"; }
 #endif
-#ifdef LINUX32
-	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_LINUX32]", url);
+#ifdef LINUX_X86
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_LINUX_X86]", url);
 	if(url.empty()){ url = downloads+app+"_linux_x86.zip"; }
 #endif
 #ifdef LINUX64

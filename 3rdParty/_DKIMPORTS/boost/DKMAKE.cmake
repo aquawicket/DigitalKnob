@@ -235,7 +235,7 @@ IOSSIM_X86_64_RELEASE_dk_queueCommand(${BOOST}/b2
 	--layout=system
 	${BOOST_WITH}
 	${BOOST_WITHOUT}) #--build-dir=${BOOST}/${OS}/${RELEASE_DIR} --stagedir=${BOOST}/${OS}/${RELEASE_DIR}
-LINUX32_DEBUG_dk_queueCommand(${BOOST}/b2
+LINUX_X86_DEBUG_dk_queueCommand(${BOOST}/b2
 	toolset=gcc
 	address-model=32
 	variant=debug
@@ -248,7 +248,7 @@ LINUX32_DEBUG_dk_queueCommand(${BOOST}/b2
 	${BOOST_WITHOUT}
 	--build-dir=${BOOST}/${OS}/${DEBUG_DIR}
 	--stagedir=${BOOST}/${OS}/${DEBUG_DIR})
-LINUX32_RELEASE_dk_queueCommand(${BOOST}/b2
+LINUX_X86_RELEASE_dk_queueCommand(${BOOST}/b2
 	toolset=gcc 
 	address-model=32 
 	variant=release 
