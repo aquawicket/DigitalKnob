@@ -348,16 +348,13 @@ goto:eof
 goto:eof
 
 :generate_android_arm32
-	"%CMAKE%" -G "Unix Makefiles" %CMAKE_ARGS%
-	goto:eof
-	
 	call:validate_android_ndk
 	
     ::call:validate_visual_studio
-	::set "GENERATOR=%VISUALSTUDIO_GENERATOR%"
-	::set "GENERATOR_PLATFORM=-A ARM"
+	::call:add_cmake_arg -G %VISUALSTUDIO_GENERATOR%
+	::call:add_cmake_arg -A %VISUALSTUDIO_GENERATOR_PLATFORM%
 	
-	::call:add_cmake_arg -G "Unix Makefiles"
+	call:add_cmake_arg -G %ANDROID_GENERATOR%
 	call:add_cmake_arg -DCMAKE_MAKE_PROGRAM=%ANDROID_NDK%/prebuilt/windows-x86_64/bin/make.exe
 	call:add_cmake_arg -DCMAKE_ANDROID_ARCH_ABI=armeabi-v7a
 	call:add_cmake_arg -DANDROID_ABI=armeabi-v7a
@@ -368,14 +365,13 @@ goto:eof
 	call:add_cmake_arg -DANDROID_TOOLCHAIN=clang
 	call:add_cmake_arg -DCMAKE_ANDROID_STL_TYPE=c++_static
 	call:add_cmake_arg -DANDROID_STL=c++_static
-	::call:add_cmake_arg -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions"
+	call:add_cmake_arg -DCMAKE_CXX_FLAGS=-std=c++1z -frtti -fexception
 	
-	::call:cmake_generate
 	echo.
 	echo ****** CMAKE COMMAND ******
-	echo "%CMAKE%" -G "Unix Makefiles" %CMAKE_ARGS% -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions"
+	echo "%CMAKE%" %CMAKE_ARGS%
+	"%CMAKE%" %CMAKE_ARGS%
 	echo.
-	"%CMAKE%" -G "Unix Makefiles" %CMAKE_ARGS% -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions"
 	
 	set TARGET=main
 	goto build
@@ -385,10 +381,10 @@ goto:eof
     call:validate_android_ndk
 	
 	::call:validate_visual_studio
-	::set "CMAKE_GENERATOR=%VISUALSTUDIO_GENERATOR%"
-	::set "CMAKE_GENERATOR_PLATFORM=ARM64"
+	::call:add_cmake_arg -G %VISUALSTUDIO_GENERATOR%
+	::call:add_cmake_arg -A %VISUALSTUDIO_GENERATOR_PLATFORM%
 	
-	::call:add_cmake_arg -G "Unix Makefiles"
+	call:add_cmake_arg -G %ANDROID_GENERATOR%
 	call:add_cmake_arg -DCMAKE_MAKE_PROGRAM=%ANDROID_NDK%/prebuilt/windows-x86_64/bin/make.exe
 	call:add_cmake_arg -DCMAKE_ANDROID_ARCH_ABI=arm64-v8a
 	call:add_cmake_arg -DANDROID_ABI=arm64-v8a
@@ -399,14 +395,13 @@ goto:eof
 	call:add_cmake_arg -DANDROID_TOOLCHAIN=clang
 	call:add_cmake_arg -DCMAKE_ANDROID_STL_TYPE=c++_static
 	call:add_cmake_arg -DANDROID_STL=c++_static
-	::call:add_cmake_arg -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions"
+	call:add_cmake_arg -DCMAKE_CXX_FLAGS=-std=c++1z -frtti -fexceptions
 	
-	::call:cmake_generate
 	echo.
 	echo ****** CMAKE COMMAND ******
-	echo "%CMAKE%" -G "Unix Makefiles" %CMAKE_ARGS% -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions"
+	echo "%CMAKE%" %CMAKE_ARGS%
+	"%CMAKE%" %CMAKE_ARGS%
 	echo.
-	"%CMAKE%" -G "Unix Makefiles" %CMAKE_ARGS% -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions"
     
 	set TARGET=main
 	goto build
@@ -416,16 +411,16 @@ goto:eof
     setx PATH %PATH%;C:\Users\aquawicket\digitalknob\Development\3rdParty\python-2.7.18
 	call:validate_emscripten
 	
-	::call:add_cmake_arg -G "%EMSDK_GENERATOR%"
+	call:add_cmake_arg -G %EMSDK_GENERATOR%
 	call:add_cmake_arg -DCMAKE_TOOLCHAIN_FILE=%EMSDK_TOOLCHAIN_FILE%
 	call:add_cmake_arg -DCMAKE_C_COMPILER=%EMSDK_C_COMPILER%
 	call:add_cmake_arg -DCMAKE_CXX_COMPILER=%EMSDK_CXX_COMPILER%
 	
 	echo.
 	echo ****** CMAKE COMMAND ******
-	echo "%EMSDK_ENV%" && "%CMAKE%" -G "%EMSDK_GENERATOR%" %CMAKE_ARGS%
+	echo "%EMSDK_ENV%" && "%CMAKE%" %CMAKE_ARGS%
+	"%EMSDK_ENV%" && "%CMAKE%" %CMAKE_ARGS%
 	echo.
-	"%EMSDK_ENV%" && "%CMAKE%" -G "%EMSDK_GENERATOR%" %CMAKE_ARGS%
 	
 	set TARGET=%APP%_APP
 	goto build
@@ -457,16 +452,15 @@ goto:eof
     call:cmake_eval "include('%DKIMPORTS%/make/DKMAKE.cmake')" "MAKE_PROGRAM" "-DMSYSTEM=MINGW32"
 	echo MAKE_PROGRAM = %MAKE_PROGRAM%
                 
-	call:add_cmake_arg -G '%MSYS2_GENERATOR%'
+	call:add_cmake_arg -G %MSYS2_GENERATOR%
 	call:add_cmake_arg -DMSYSTEM=MINGW32
 		
-    call set DKPATH=%%DKPATH:^\=^/%%
-
 	echo.
 	echo ****** CMAKE COMMAND ******
+	call set CMAKE_ARGS=%%CMAKE_ARGS:^"=^'%%
 	echo %MSYS2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -lc "'%CMAKE_EXE%' %CMAKE_ARGS%"
-	echo.
 	%MSYS2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -lc "'%CMAKE_EXE%' %CMAKE_ARGS%"
+	echo.
 		
     set TARGET=%APP%_APP
     goto build
@@ -504,16 +498,15 @@ goto:eof
     call:cmake_eval "include('%DKIMPORTS%/make/DKMAKE.cmake')" "MAKE_PROGRAM" "-DMSYSTEM=MINGW64"
 	echo MAKE_PROGRAM = %MAKE_PROGRAM%
                 
-	call:add_cmake_arg -G '%MSYS2_GENERATOR%'
+	call:add_cmake_arg -G %MSYS2_GENERATOR%
 	call:add_cmake_arg -DMSYSTEM=MINGW64
 		
-    call set DKPATH=%%DKPATH:^\=^/%%
-
 	echo.
 	echo ****** CMAKE COMMAND ******
+	call set CMAKE_ARGS=%%CMAKE_ARGS:^"=^'%%
 	echo %MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' %CMAKE_ARGS%"
-	echo.
 	%MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "'%CMAKE_EXE%' %CMAKE_ARGS%"
+	echo.
 		
     set TARGET=%APP%_APP
     goto build
@@ -528,21 +521,10 @@ goto:eof
 
 :add_cmake_arg <arg>
 	if "%*" == "" echo ERROR: add_cmake_arg is empty! & goto:eof
-	echo %*
-	set CMAKE_ARGS=%CMAKE_ARGS% %* 
+	echo added %*
+	set CMAKE_ARGS=%CMAKE_ARGS% "%*"
 goto:eof
 
-
-:cmake_generate
-	::if "%1" NEQ "" set "prefix=%1 && " 
-	
-	echo.
-	echo ****** CMAKE COMMAND ******
-	echo "%CMAKE%" %CMAKE_ARGS%
-	echo.
-	
-	"%CMAKE%" %CMAKE_ARGS%
-goto:eof
 
 
 :build
@@ -1032,8 +1014,9 @@ goto:eof
 
 :: validate_android_ndk()
 :validate_android_ndk
-    call:cmake_eval "include('%DKIMPORTS%/android-ndk/DKMAKE.cmake')" "ANDROID_API;ANDROID_NDK;ANDROID_TOOLCHAIN_FILE"
-    echo ANDROID_API = %ANDROID_API%
+    call:cmake_eval "include('%DKIMPORTS%/android-ndk/DKMAKE.cmake')" "ANDROID_GENERATOR;ANDROID_API;ANDROID_NDK;ANDROID_TOOLCHAIN_FILE"
+    echo ANDROID_GENERATOR = %ANDROID_GENERATOR%
+	echo ANDROID_API = %ANDROID_API%
     echo ANDROID_NDK = %ANDROID_NDK%
     echo ANDROID_TOOLCHAIN_FILE = %ANDROID_TOOLCHAIN_FILE%
     call:check_error

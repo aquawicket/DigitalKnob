@@ -299,7 +299,7 @@ function Pick_OS() {
 	elif [ "$input" == "4" ]; then
 		TARGET_OS="android_x86"
 	elif [ "$input" == "5" ]; then
-		TARGET_OS="android_x64"
+		TARGET_OS="android_x86_64"
 	elif [ "$input" == "6" ]; then
 		TARGET_OS="emscripten"
 	elif [ "$input" == "7" ]; then
@@ -309,11 +309,11 @@ function Pick_OS() {
 	elif [ "$input" == "9" ]; then
 		TARGET_OS="ios_x86"
 	elif [ "$input" == "10" ]; then
-		TARGET_OS="ios_x64"
+		TARGET_OS="ios_x86_64"
 	elif [ "$input" == "11" ]; then
-		TARGET_OS="iossim_x86"
+		TARGET_OS="iossim_arm32"
 	elif [ "$input" == "12" ]; then
-		TARGET_OS="iossim_x86_64"
+		TARGET_OS="iossim_arm64"
 	elif [ "$input" == "13" ]; then
 		TARGET_OS="iossim_x86"
 	elif [ "$input" == "14" ]; then
@@ -347,9 +347,9 @@ function Pick_OS() {
 	elif [ "$input" == "28" ]; then
 		TARGET_OS="windows_arm64"
 	elif [ "$input" == "29" ]; then
-		TARGET_OS="windows32"
+		TARGET_OS="windows_x86"
 	elif [ "$input" == "30" ]; then
-		TARGET_OS="windows64"
+		TARGET_OS="windows_x86_64"
 	elif [ "$input" == "31" ]; then
 		clear
 	elif [ "$input" == "32" ]; then
