@@ -165,7 +165,7 @@ function DKBuildConsole_SelectOs() {
 			OSes.push("linux_x86")
 		}
 		else if(arch === "x86_64"){
-			OSes.push("linux64")
+			OSes.push("linux_x86_64")
 		}
 		else{
 			console.log("ERROR: Unrecognized architecture")
@@ -420,7 +420,7 @@ function DKBuildConsole_FindAppExecutablePath(os, app, type){
 	if(os === "win32" || os === "win64"){
 		const exe_name = app+".exe"
 	}
-	else if(os === "linux_x86" || os === "linux64" || os === "raspberry32" || os === "raspberry64"){
+	else if(os === "linux_x86" || os === "linux_x86_64" || os === "raspberry32" || os === "raspberry64"){
 		const exe_name = app
 	}
 	else if(os === "mac32" || os === "mac64"){
@@ -451,7 +451,7 @@ function DKBuildConsole_FindAppSolutionPath(os, app, type){
 	else if(os === "mac32" || os === "mac64"){
 		solution_path = app_path+os+"/"+app+".xcodeproj"
 	}
-	else if(os === "linux_x86" || os === "linux64" || os === "raspberry32" || os === "raspberry64"){
+	else if(os === "linux_x86" || os === "linux_x86_64" || os === "raspberry32" || os === "raspberry64"){
 		//solution_path = app_path+os+"/"+app+".xcodeproj"
 		console.warn("the OS ("+os+") is not implemented")
 		return false

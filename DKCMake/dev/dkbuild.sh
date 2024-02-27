@@ -42,7 +42,7 @@ PS3='Please select an OS to build for: '
 if [[ "$MODEL" == "Raspberry"* ]]; then
 	options=("raspberry32" "Exit")
 elif [[ "$OSTYPE" == "linux-gnu"* ]] && [[ "$HOSTTYPE" == "x86_64"* ]]; then
-	options=("linux64" "Exit")
+	options=("linux_x86_64" "Exit")
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	options=("linux_x86" "Exit")
 elif [[ "$OSTYPE" == "darwin"* ]] && [[ "$HOSTTYPE" == "x86_64"* ]]; then
@@ -59,9 +59,9 @@ do
 			OS="linux_x86"
 			break
 			;;
-		"linux64")
+		"linux_x86_64")
 			echo "$opt"
-			OS="linux64"
+			OS="linux_x86_64"
 			break
 			;;
 		"mac64")

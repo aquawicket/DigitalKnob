@@ -25,7 +25,7 @@ function DKBuildGUI_init() {
 			byId("OSList").value = "mac64";
 		}	
 		if(DK_GetOS() === "Linux"){
-			byId("OSList").value = "linux64";
+			byId("OSList").value = "linux_x86_64";
 		}
 		if(DK_GetOS() === "Linux"){
 			byId("BuildType").value = "Release";

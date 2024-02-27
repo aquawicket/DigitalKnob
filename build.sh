@@ -321,7 +321,7 @@ function Pick_OS() {
 	elif [ "$input" == "17" ]; then
 		TARGET_OS="linux_x86"
 	elif [ "$input" == "18" ]; then
-		TARGET_OS="linux64"
+		TARGET_OS="linux_x86_64"
 	elif [ "$input" == "19" ]; then
 		TARGET_OS="mac_arm32"
 	elif [ "$input" == "20" ]; then
@@ -580,7 +580,7 @@ function Generate_Project() {
 		TARGET=${APP}_APP
 	fi
 	
-	if [[ "$TARGET_OS" == "linux64" ]]; then
+	if [[ "$TARGET_OS" == "linux_x86_64" ]]; then
 		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
 			dk_call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Debug
 		fi

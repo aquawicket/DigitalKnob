@@ -99,7 +99,7 @@ function RunMenu_onevent(event) {
             }
         }
         if (DK_GetOS() === "Linux") {
-            //if(OS === "linux64"){
+            //if(OS === "linux_x86_64"){
             //console.log("TODO: Run linux apps from Linux\n");
             if (dk.file.extist(DIGITALKNOB + "/DKApps/" + APP + "/" + OS + "/Release/" + APP + ".desktop")) {
                 DK_Run(DIGITALKNOB + "/DKApps/" + APP + "/" + OS + "/Release/" + APP + ".desktop");
