@@ -72,7 +72,7 @@ if "%*" NEQ "" call %*
         call:generate
         if %TARGET_OS%==win32       call:generate_win32
         if %TARGET_OS%==win64       call:generate_win64
-        if %TARGET_OS%==android32   call:generate_android32
+        if %TARGET_OS%==android_arm32   call:generate_android_arm32
         if %TARGET_OS%==android64   call:generate_android64
         if %TARGET_OS%==emscripten  call:generate_emscripten
                 
@@ -230,7 +230,7 @@ goto:eof
     ::if not "%choice%"=="" set choice=%choice:~0,1%        ::What does this do?
     if "%choice%"=="1" set "TARGET_OS=win32"		& goto:eof
     if "%choice%"=="2" set "TARGET_OS=win64"		& goto:eof
-    if "%choice%"=="3" set "TARGET_OS=android32"	& goto:eof
+    if "%choice%"=="3" set "TARGET_OS=android_arm32"	& goto:eof
     if "%choice%"=="4" set "TARGET_OS=android64"	& goto:eof
     if "%choice%"=="5" set "TARGET_OS=emscripten"	& goto:eof
     if "%choice%"=="6" call:clear_screen			& goto:eof
@@ -317,7 +317,7 @@ goto:eof
     ::call:add_cmake_arg --warn-unused-vars"
 goto:eof
 
-:generate_android32
+:generate_android_arm32
 	call:validate_android_ndk
 	
     ::call:validate_visual_studio

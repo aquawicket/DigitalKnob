@@ -163,16 +163,16 @@ if(CMAKE_BINARY_DIR)
 endif()
 
 # ANDROID 32
-string(FIND "${CMAKE_BINARY_DIR}" "/android32" index)
+string(FIND "${CMAKE_BINARY_DIR}" "/android_arm32" index)
 if(${index} GREATER -1)
 	dk_info("*** Creating Android x32 Project Files ***")
 	dk_set(ANDROID ON)
 	dk_set(ANDROID_32 ON)
-	dk_set(OS "android32")
+	dk_set(OS "android_arm32")
 	dk_set(DEBUG_DIR Debug)
 	dk_set(RELEASE_DIR Release)
 	dk_set(CMAKE_SKIP_RPATH ON)
-	string(REPLACE "/android32" "" DKPROJECT ${CMAKE_BINARY_DIR})
+	string(REPLACE "/android_arm32" "" DKPROJECT ${CMAKE_BINARY_DIR})
 endif()
 
 # ANDROID 64
@@ -390,7 +390,7 @@ endif()
 if(NOT CMAKE_SCRIPT_MODE_FILE)
 	if(NOT OS)
 		dk_error(CMAKE_BINARY_DIR)
-		dk_error("The binary directory must contain an os folder. \n Valid folders are android32,android64,emscripten,ios32,ios64,iossim32,iossim64,linux32,linux64,mac32,mac64,raspberry32,raspberry64,win32,win64 \n 	EXAMPLE: digitalknob/Development/DKApps/MyApp/win32")
+		dk_error("The binary directory must contain an os folder. \n Valid folders are android_arm32,android64,emscripten,ios32,ios64,iossim32,iossim64,linux32,linux64,mac32,mac64,raspberry32,raspberry64,win32,win64 \n 	EXAMPLE: digitalknob/Development/DKApps/MyApp/win32")
 		#file(REMOVE ${CMAKE_BINARY_DIR})
 	endif()
 
