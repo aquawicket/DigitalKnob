@@ -101,14 +101,12 @@ goto:eof
     echo  2) Git Commit
     echo  3) Push assets
     echo  4) Pull assets
-    echo  5) Reset Apps
-    echo  6) Reset Plugins
-    echo  7) Reset 3rdParty
-    echo  8) Reset All
-    echo  9) Clear Screen
-    echo  10) Clear cmake cache and .tmp files
-    echo  11) Reload
-    echo  12) Exit
+    echo  5) Reset All
+	echo  6) Remove All
+    echo  7) Clear Screen
+    echo  8) Clear cmake cache and .tmp files
+    echo  9) Reload
+    echo  10) Exit
     echo. 
     echo  Press Enter To Skip
         
@@ -119,14 +117,12 @@ goto:eof
     if "%choice%"=="2"  call:git_commit
     if "%choice%"=="3"  call:push_assets
     if "%choice%"=="4"  call:pull_assets
-    if "%choice%"=="5"  call:reset_apps
-    if "%choice%"=="6"  call:reset_plugins
-    if "%choice%"=="7"  call:reset_3rdparty
-    if "%choice%"=="8"  call:reset_all
-    if "%choice%"=="9"  call:clear_screen
-    if "%choice%"=="10" call:dk_deleteCache & call:delete_temp_files
-    if "%choice%"=="11" call:reload
-    if "%choice%"=="12" exit
+    if "%choice%"=="5"  call:reset_all
+	if "%choice%"=="6"  call:remove_all
+    if "%choice%"=="7"  call:clear_screen
+    if "%choice%"=="8" call:dk_deleteCache & call:delete_temp_files
+    if "%choice%"=="9" call:reload
+    if "%choice%"=="10" exit
 	
     set UPDATE=true
 goto:eof
@@ -764,6 +760,71 @@ goto:eof
 	call:git_update NO_CONFIRM
 	
 	start "" "%DKPATH%\%SCRIPTNAME%" & del /f %DIGITALKNOB%\%SCRIPTNAME% & exit
+goto:eof
+
+
+:: :remove_all()
+:remove_all
+
+	if "%1" EQU "wipe" goto:wipe
+	
+	cls
+	echo.
+	echo.
+	echo  Do you want to remove the entire local repository . . .?
+	echo. This will delete digitalknob. Save any changes 
+	echo. you wish to commit or save beforehand.
+	echo. 
+	
+	set /P CONFIRM="Are you sure? [Y] "
+	if /I "%CONFIRM%" NEQ "Y" goto:eof
+	
+	:: first we need to relocate this file up one directory
+	:: make sure script is running from DKPATH
+    if not "%SCRIPTPATH%" == "%DKPATH%" (
+		echo WARNING: this file isn't running from the branch directory
+		echo Is must be in the branch directory to continue.
+		echo SCRIPTPATH = %SCRIPTPATH%
+		echo DKPATH = %DKPATH%
+		goto:eof
+	)
+	
+	echo "RELOCATING SCRIPT TO -> %DIGITALKNOB%\%SCRIPTNAME%"
+    copy /Y %SCRIPTPATH%\%SCRIPTNAME% %DIGITALKNOB%\%SCRIPTNAME%
+	start "" "%DIGITALKNOB%\%SCRIPTNAME%" :remove_all wipe
+	exit	
+	
+	::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+	:wipe	
+	::do we need admin rights?
+	::runas /user:Administrator cmd
+	
+	::do we need to kill any processes?
+	
+	::do we need to uninstall any apps?
+	
+	::do we need to remove any environment variables?
+	
+	::should we do a git clean first?
+	::cd %DKPATH%
+	::"%GIT%" clean -f -d
+	
+	cd %DIGITALKNOB%
+	echo.
+	echo DELETING %DKDOWNLOAD% . . . .
+	call rmdir %DKDOWNLOAD% /s /q
+	echo done.
+	echo.
+	echo DELETING %DKPATH% . . . .
+	call rmdir %DKPATH% /s /q
+	echo done.
+	
+	:: wait 10 seconds at lease for the folders to get deleted
+	ping 127.0.0.1 -n 6 >nul
+	ping 127.0.0.1 -n 6 >nul
+	
+	if exist %DKDOWNLOAD% echo "Oh no, the downloads folder is still there! :( "
+	if exist %DKPATH% echo "Oh no, the BRANCH folder is still there! :( "
 goto:eof
 
 
