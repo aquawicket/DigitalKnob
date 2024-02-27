@@ -47,9 +47,9 @@ include_guard()
 ### https://cmake.org/cmake/help/git-master/guide/tutorial/index.html
 ###
 
-
-get_filename_component(DKCMAKE ${CMAKE_SOURCE_DIR} ABSOLUTE)
-include(${DKCMAKE}/DKInit.cmake)
+#Load all cmake flags prior to calling PROJECT()
+#get_filename_component(DKCMAKE ${CMAKE_SOURCE_DIR} ABSOLUTE)
+#include(${DKCMAKE}/DKInit.cmake)
 
 
 message(STATUS "########################################")
