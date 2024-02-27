@@ -339,7 +339,7 @@ string(FIND "${CMAKE_BINARY_DIR}" "/raspberry_arm64" index)
 if(${index} GREATER -1)
 	dk_info("*** Creating Raspberry x64 Project Files ***")
 	dk_set(RASPBERRY ON)     #To be disabled
-	dk_set(RASPBERRY_64 ON)  #To be disabled
+	dk_set(RASPBERRY_ARM64 ON)  #To be disabled
 	#dk_set(LINUX ON)
 	dk_set(RPI ON)
 	dk_set(RPI64 ON)
