@@ -157,157 +157,237 @@ endif()
 #endif()
 
 
-########### Determine the OS we are building for ####################
+########### Set DK_BINARY_ and DK_PROJECT_ variables ####################
 if(CMAKE_BINARY_DIR)
-	#dk_debug("CMAKE_BINARY_DIR = ${CMAKE_BINARY_DIR}")
+	dk_debug("CMAKE_BINARY_DIR = ${CMAKE_BINARY_DIR}")
+	
+	### Set DK_BINARY_DIR ###
+	dk_set(DK_BINARY_DIR ${CMAKE_BINARY_DIR})
+	dk_debug("DK_BINARY_DIR = ${DK_BINARY_DIR}")
+	
+	### Set DK_BINARY_OSARCH_DIR ###
+	if(${CMAKE_BINARY_DIR} MATCHES "Debug$")
+		get_filename_component(DK_BINARY_OSARCH_DIR ${CMAKE_BINARY_DIR} DIRECTORY)
+	elseif(${CMAKE_BINARY_DIR} MATCHES "Release$")
+		get_filename_component(DK_BINARY_OSARCH_DIR ${CMAKE_BINARY_DIR} DIRECTORY)
+	else()
+		dk_set(DK_BINARY_OSARCH_DIR ${DK_BINARY_DIR})
+	endif()
+	dk_debug("DK_BINARY_OSARCH_DIR = ${DK_BINARY_OSARCH_DIR}")
+	
+	### Set DK_BINARY_OSARCH ###
+	get_filename_component(DK_BINARY_OSARCH ${DK_BINARY_OSARCH_DIR} NAME)     
+	dk_debug("DK_BINARY_OSARCH = ${DK_BINARY_OSARCH}")
+	
+	### Set DK_BINARY_OS ###
+	string(FIND "${DK_BINARY_OSARCH}" "_" first_underscore)
+	string(SUBSTRING "${DK_BINARY_OSARCH}" 0 ${first_underscore} DK_BINARY_OS)
+	dk_debug("DK_BINARY_OS = ${DK_BINARY_OS}")
+	
+	### Set DK_BINARY_ARCH ###
+	string(FIND "${DK_BINARY_OSARCH}" "_" first_underscore)
+	math(EXPR after_underscore "${first_underscore}+1" OUTPUT_FORMAT DECIMAL)
+	string(SUBSTRING "${DK_BINARY_OSARCH}" ${after_underscore} -1 DK_BINARY_ARCH)
+	dk_debug("DK_BINARY_ARCH = ${DK_BINARY_ARCH}")
+	
+	### Set DK_PROJECT_DIR ###
+	get_filename_component(DK_PROJECT_DIR ${DK_BINARY_OSARCH_DIR} DIRECTORY)
+	dk_debug("DK_PROJECT_DIR = ${DK_PROJECT_DIR}")
 endif()
+
+
+### Set OS ###
+dk_set(OS "${DK_BINARY_OSARCH}")
+dk_debug("OS = ${OS}")
+
+### Set ${OS} variable ON ##
+string(TOUPPER ${DK_BINARY_OS} DK_BINARY_OS_UPPER)
+dk_set(${DK_BINARY_OS_UPPER} ON)
+dk_debug("${DK_BINARY_OS_UPPER} = ${${DK_BINARY_OS_UPPER}}")
+
+### Set ${ARCH} variable ON ##
+string(TOUPPER ${DK_BINARY_ARCH} DK_BINARY_ARCH_UPPER)
+dk_set(${DK_BINARY_ARCH_UPPER} ON)
+dk_debug("${DK_BINARY_ARCH_UPPER} = ${${DK_BINARY_ARCH_UPPER}}")
+
+### Set ${OS_ARCH} variable ON ##
+string(TOUPPER ${DK_BINARY_ARCH} DK_BINARY_ARCH_UPPER)
+dk_set(${DK_BINARY_OS_UPPER}_${DK_BINARY_ARCH_UPPER} ON)
+dk_debug("${DK_BINARY_OS_UPPER}_${DK_BINARY_ARCH_UPPER} = ${${DK_BINARY_OS_UPPER}_${DK_BINARY_ARCH_UPPER}}")
+
+### Set DEBUG_DIR and RELEASE_DIR variables
+if(${DK_BINARY_OS} MATCHES "ios")
+	dk_set(DEBUG_DIR Debug-iphoneos)
+	dk_set(RELEASE_DIR Release-iphoneos)
+elseif(${DK_BINARY_OS} MATCHES "iossim")
+	dk_set(DEBUG_DIR Debug-iphonesimulator)
+	dk_set(RELEASE_DIR Release-iphonesimulator)
+else()
+	dk_set(DEBUG_DIR Debug)
+	dk_set(RELEASE_DIR Release)
+endif()
+dk_debug("DEBUG_DIR = ${DEBUG_DIR}")
+dk_debug("RELEASE_DIR = ${RELEASE_DIR}")
+
+### Set other OS Specific variables ###
+# RPI and RPI32
+if(${DK_BINARY_OSARCH} MATCHES "raspberry_arm32")
+	dk_set(RPI ON)
+	dk_set(RPI32 ON)
+	dk_debug("RPI = ${RPI}")
+	dk_debug("RPI32 = ${RPI32}")
+endif()
+# RPI and RPI64
+if(${DK_BINARY_OSARCH} MATCHES "raspberry_arm64")
+	dk_set(RPI ON)
+	dk_set(RPI64 ON)
+	dk_debug("RPI = ${RPI}")
+	dk_debug("RPI64 = ${RPI64}")
+endif()
+# TINYCORE
+string(FIND "${CMAKE_HOST_SYSTEM_VERSION}" "tinycore" contains_tinycore)
+if(${contains_tinycore} GREATER -1)
+	dk_set(TINYCORE ON)
+	dk_debug("TINYCORE = ${TINYCORE}")
+endif()	
+
+### Display OS info to user ###
+dk_info("*** Creating ${OS} Project Files ***")
+
+
+
+### Set CMAKE_SKIP_RPATH ###
+dk_set(CMAKE_SKIP_RPATH ON)
+dk_debug("CMAKE_SKIP_RPATH = ${CMAKE_SKIP_RPATH}")
+
+
+
+
 
 # android_arm32
-string(FIND "${CMAKE_BINARY_DIR}" "/android_arm32" index)
-if(${index} GREATER -1)
-	dk_info("*** Creating Android x32 Project Files ***")
-	dk_set(ANDROID ON)
-	dk_set(ANDROID_ARM32 ON)
-	dk_set(OS "android_arm32")
-	dk_set(DEBUG_DIR Debug)
-	dk_set(RELEASE_DIR Release)
-	dk_set(CMAKE_SKIP_RPATH ON)
-	string(REPLACE "/android_arm32" "" DKPROJECT ${CMAKE_BINARY_DIR})
-endif()
+#if(${DK_BINARY_OS_DIR} MATCHES "android_arm32$")
+	#dk_info("*** Creating Android x32 Project Files ***")
+	#dk_set(ANDROID ON)
+	#dk_set(ANDROID_ARM32 ON)
+	#dk_set(OS "android_arm32")
+	#dk_set(DEBUG_DIR Debug)
+	#dk_set(RELEASE_DIR Release)
+	#dk_set(CMAKE_SKIP_RPATH ON)
+#endif()
 
 # android_arm64
-string(FIND "${CMAKE_BINARY_DIR}" "/android_arm64" index)
-if(${index} GREATER -1)
-	dk_info("*** Creating Android x64 Project Files ***")
-	dk_set(ANDROID ON)
-	dk_set(ANDROID_ARM64 ON)
-	dk_set(OS "android_arm64")
-	dk_set(DEBUG_DIR Debug)
-	dk_set(RELEASE_DIR Release)
-	dk_set(CMAKE_SKIP_RPATH ON)
-	string(REPLACE "/android_arm64" "" DKPROJECT ${CMAKE_BINARY_DIR})
-endif()
+#if(${DK_BINARY_OS_DIR} MATCHES "android_arm64$")
+	#dk_info("*** Creating Android x64 Project Files ***")
+	#dk_set(ANDROID ON)
+	#dk_set(ANDROID_ARM64 ON)
+	#dk_set(OS "android_arm64")
+	#dk_set(DEBUG_DIR Debug)
+	#dk_set(RELEASE_DIR Release)
+	#dk_set(CMAKE_SKIP_RPATH ON)
+#endif()
 
 # emscripten
-string(FIND "${CMAKE_BINARY_DIR}" "/emscripten" index)
-if(${index} GREATER -1)
-	dk_info("*** Creating Emscripten Project Files ***")
-	dk_set(EMSCRIPTEN ON)
-	dk_set(OS "emscripten")
-	dk_set(DEBUG_DIR Debug)
-	dk_set(RELEASE_DIR Release)
-	string(REPLACE "/emscripten" "" DKPROJECT ${CMAKE_BINARY_DIR})
-endif()
+#if(${DK_BINARY_OS_DIR} MATCHES "emscripten$")
+	#dk_info("*** Creating Emscripten Project Files ***")
+	#dk_set(EMSCRIPTEN ON)
+	#dk_set(OS "emscripten")
+	#dk_set(DEBUG_DIR Debug)
+	#dk_set(RELEASE_DIR Release)
+#endif()
 
 # ios_arm32
-string(FIND "${CMAKE_BINARY_DIR}" "/ios_arm32" index)
-if(${index} GREATER -1)
-	dk_info("*** Creating iOS x32 Project Files ***")
-	dk_set(IOS ON)
-	dk_set(IOS_ARM32 ON)
-	dk_set(OS "ios_arm32")
-	dk_set(DEBUG_DIR Debug-iphoneos)
-	dk_set(RELEASE_DIR Release-iphoneos)
-	dk_set(CMAKE_SKIP_RPATH ON)
-	string(REPLACE "/ios_arm32" "" DKPROJECT ${CMAKE_BINARY_DIR})
-endif()
+#if(${DK_BINARY_OS_DIR} MATCHES "ios_arm32$")
+	#dk_info("*** Creating iOS x32 Project Files ***")
+	#dk_set(IOS ON)
+	#dk_set(IOS_ARM32 ON)
+	#dk_set(OS "ios_arm32")
+	#dk_set(DEBUG_DIR Debug-iphoneos)
+	#dk_set(RELEASE_DIR Release-iphoneos)
+	#dk_set(CMAKE_SKIP_RPATH ON)
+#endif()
 
 # ios_arm64
-string(FIND "${CMAKE_BINARY_DIR}" "/ios_arm64" index)
-if(${index} GREATER -1)
-	dk_info("*** Creating iOS x64 Project Files ***")
-	dk_set(IOS ON)
-	dk_set(IOS_ARM64 ON)
-	dk_set(OS "ios_arm64")
-	dk_set(DEBUG_DIR Debug-iphoneos)
-	dk_set(RELEASE_DIR Release-iphoneos)
-	dk_set(CMAKE_SKIP_RPATH ON)
-	string(REPLACE "/ios_arm64" "" DKPROJECT ${CMAKE_BINARY_DIR})
-endif()
+#if(${DK_BINARY_OS_DIR} MATCHES "ios_arm64$")
+	#dk_info("*** Creating iOS x64 Project Files ***")
+	#dk_set(IOS ON)
+	#dk_set(IOS_ARM64 ON)
+	#dk_set(OS "ios_arm64")
+	#dk_set(DEBUG_DIR Debug-iphoneos)
+	#dk_set(RELEASE_DIR Release-iphoneos)
+	#dk_set(CMAKE_SKIP_RPATH ON)
+#endif()
 
 # iossim_x86
-string(FIND "${CMAKE_BINARY_DIR}" "/iossim_x86" index)
-if(${index} GREATER -1)
-	dk_info("*** Creating iOS-Simulator x32 Project Files ***")
-	dk_set(IOSSIM ON)
-	dk_set(IOSSIM_X86 ON)
-	dk_set(OS "iossim_x86")
-	dk_set(DEBUG_DIR Debug-iphonesimulator)
-	dk_set(RELEASE_DIR Release-iphonesimulator)
-	dk_set(CMAKE_SKIP_RPATH ON)
-	string(REPLACE "/iossim_x86" "" DKPROJECT ${CMAKE_BINARY_DIR})
-endif()
+#if(${DK_BINARY_OS_DIR} MATCHES "iossim_x86_64$")
+	#dk_info("*** Creating iOS-Simulator x32 Project Files ***")
+	#dk_set(IOSSIM ON)
+	#dk_set(IOSSIM_X86 ON)
+	#dk_set(OS "iossim_x86")
+	#dk_set(DEBUG_DIR Debug-iphonesimulator)
+	#dk_set(RELEASE_DIR Release-iphonesimulator)
+	#dk_set(CMAKE_SKIP_RPATH ON)
+#endif()
 
 # iossim_x86_64
-string(FIND "${CMAKE_BINARY_DIR}" "/iossim_x86_64" index)
-if(${index} GREATER -1)
-	dk_info("*** Creating iOS-Simulator x64 Project Files ***")
-	dk_set(IOSSIM ON)
-	dk_set(IOSSIM_X86_64 ON)
-	dk_set(OS "iossim_x86_64")
-	dk_set(DEBUG_DIR Debug-iphonesimulator)
-	dk_set(RELEASE_DIR Release-iphonesimulator)
-	dk_set(CMAKE_SKIP_RPATH ON)
-	string(REPLACE "/iossim_x86_64" "" DKPROJECT ${CMAKE_BINARY_DIR})
-endif()
+#if(${DK_BINARY_OS_DIR} MATCHES "iossim_x86_64$")
+	#dk_info("*** Creating iOS-Simulator x64 Project Files ***")
+	#dk_set(IOSSIM ON)
+	#dk_set(IOSSIM_X86_64 ON)
+	#dk_set(OS "iossim_x86_64")
+	#dk_set(DEBUG_DIR Debug-iphonesimulator)
+	#dk_set(RELEASE_DIR Release-iphonesimulator)
+	#dk_set(CMAKE_SKIP_RPATH ON)
+#endif()
 
 # linux_x86
-string(FIND "${CMAKE_BINARY_DIR}" "/linux_x86" index)
-if(${index} GREATER -1)
-if(NOT RASPBERRY)
-if(NOT RPI)
-	dk_info("*** Creating Linux x32 Project Files ***")
-	dk_set(LINUX ON)
-	dk_set(LINUX_X86 ON)
-	dk_set(OS "linux_x86")
-	dk_set(DEBUG_DIR Debug)
-	dk_set(RELEASE_DIR Release)
-	string(REPLACE "/linux_x86" "" DKPROJECT ${CMAKE_BINARY_DIR})
-endif()
-endif()
-endif()
+#if(${DK_BINARY_OS_DIR} MATCHES "linux_x86$")
+#	if(NOT RASPBERRY)
+#	if(NOT RPI)
+		#dk_info("*** Creating Linux x32 Project Files ***")
+		#dk_set(LINUX ON)
+		#dk_set(LINUX_X86 ON)
+		#dk_set(OS "linux_x86")
+		#dk_set(DEBUG_DIR Debug)
+		#dk_set(RELEASE_DIR Release)
+#	endif()
+#	endif()
+#endif()
 
 # linux_x86_64
-string(FIND "${CMAKE_BINARY_DIR}" "/linux_x86_64" index)
-if(${index} GREATER -1)
-if(NOT RASPBERRY)
-if(NOT RPI)
-	dk_info("*** Creating Linux x64 Project Files ***")
-	dk_set(LINUX ON)
-	dk_set(LINUX_X86_64 ON)
-	dk_set(OS "linux_x86_64")
-	dk_set(DEBUG_DIR Debug)
-	dk_set(RELEASE_DIR Release)
-	string(REPLACE "/linux_x86_64" "" DKPROJECT ${CMAKE_BINARY_DIR})
-endif()
-endif()
-endif()
+#if(${DK_BINARY_OS_DIR} MATCHES "linux_x86_64$")
+#	if(NOT RASPBERRY)
+#	if(NOT RPI)
+		#dk_info("*** Creating Linux x64 Project Files ***")
+		#dk_set(LINUX ON)
+		#dk_set(LINUX_X86_64 ON)
+		#dk_set(OS "linux_x86_64")
+		#dk_set(DEBUG_DIR Debug)
+		#dk_set(RELEASE_DIR Release)
+#	endif()
+#	endif()
+#endif()
 
 # mac_x86
-string(FIND "${CMAKE_BINARY_DIR}" "/mac_x86" index)
-if(${index} GREATER -1)
-	dk_info("*** Creating Mac x32 Project Files ***")
-	dk_set(MAC ON)
-	dk_set(MAC_X86 ON)
-	dk_set(OS "mac_x86")
-	dk_set(DEBUG_DIR Debug)
-	dk_set(RELEASE_DIR Release)
-	dk_set(CMAKE_SKIP_RPATH ON)
-	string(REPLACE "/mac_x86" "" DKPROJECT ${CMAKE_BINARY_DIR})
-endif()
+#if(${DK_BINARY_OS_DIR} MATCHES "mac_x86$")
+	#dk_info("*** Creating Mac x32 Project Files ***")
+	#dk_set(MAC ON)
+	#dk_set(MAC_X86 ON)
+	#dk_set(OS "mac_x86")
+	#dk_set(DEBUG_DIR Debug)
+	#dk_set(RELEASE_DIR Release)
+	#dk_set(CMAKE_SKIP_RPATH ON)
+#endif()
 
 # mac_x86_64
-string(FIND "${CMAKE_BINARY_DIR}" "/mac_x86_64" index)
-if(${index} GREATER -1)
-	dk_info("*** Creating Mac x64 Project Files ***")
-	dk_set(MAC ON)
-	dk_set(MAC_X86_64 ON)
-	dk_set(OS "mac_x86_64")
-	dk_set(DEBUG_DIR Debug)
-	dk_set(RELEASE_DIR Release)
-	dk_set(CMAKE_SKIP_RPATH ON)
-	string(REPLACE "/mac_x86_64" "" DKPROJECT ${CMAKE_BINARY_DIR})
-endif()
+#if(${DK_BINARY_OS_DIR} MATCHES "mac_x86_64$")
+	#dk_info("*** Creating Mac x64 Project Files ***")
+	#dk_set(MAC ON)
+	#dk_set(MAC_X86_64 ON)
+	#dk_set(OS "mac_x86_64")
+	#dk_set(DEBUG_DIR Debug)
+	#dk_set(RELEASE_DIR Release)
+	#dk_set(CMAKE_SKIP_RPATH ON)
+#endif()
 
 ###########################################################################################
 ###########################################################################################
@@ -320,122 +400,70 @@ endif()
 ## and we should be able to remove them once everythng is working.
 
 # raspberry_arm32
-string(FIND "${CMAKE_BINARY_DIR}" "/raspberry_arm32" index)
-if(${index} GREATER -1)
-	dk_info("*** Creating RASPBERRY x32 Project Files ***")
-	dk_set(RASPBERRY ON)     #To be disabled
-	dk_set(RASPBERRY_ARM32 ON)  #To be disabled
+#if(${DK_BINARY_OS_DIR} MATCHES "raspberry_arm32$")
+	#dk_info("*** Creating RASPBERRY x32 Project Files ***")
+	#dk_set(RASPBERRY ON)     #To be disabled
+	#dk_set(RASPBERRY_ARM32 ON)  #To be disabled
 	#dk_set(LINUX ON)
-	dk_set(RPI ON)
-	dk_set(RPI32 ON)
-	dk_set(OS "raspberry_arm32")
-	dk_set(DEBUG_DIR Debug)
-	dk_set(RELEASE_DIR Release)
-	string(REPLACE "/raspberry_arm32" "" DKPROJECT ${CMAKE_BINARY_DIR})
-endif()
+	#dk_set(RPI ON)
+	#dk_set(RPI32 ON)
+	#dk_set(OS "raspberry_arm32")
+	#dk_set(DEBUG_DIR Debug)
+	#dk_set(RELEASE_DIR Release)
+#endif()
 
 # raspberry_arm64
-string(FIND "${CMAKE_BINARY_DIR}" "/raspberry_arm64" index)
-if(${index} GREATER -1)
-	dk_info("*** Creating Raspberry x64 Project Files ***")
-	dk_set(RASPBERRY ON)     #To be disabled
-	dk_set(RASPBERRY_ARM64 ON)  #To be disabled
+#if(${DK_BINARY_OS_DIR} MATCHES "raspberry_arm64$")
+	#dk_info("*** Creating Raspberry x64 Project Files ***")
+	#dk_set(RASPBERRY ON)     #To be disabled
+	#dk_set(RASPBERRY_ARM64 ON)  #To be disabled
 	#dk_set(LINUX ON)
-	dk_set(RPI ON)
-	dk_set(RPI64 ON)
-	dk_set(OS "raspberry_arm64")
-	dk_set(DEBUG_DIR Debug)
-	dk_set(RELEASE_DIR Release)
-	string(REPLACE "/raspberry_arm64" "" DKPROJECT ${CMAKE_BINARY_DIR})
-endif()
+	#dk_set(RPI ON)
+	#dk_set(RPI64 ON)
+	#dk_set(OS "raspberry_arm64")
+	#dk_set(DEBUG_DIR Debug)
+	#dk_set(RELEASE_DIR Release)
+#endif()
 #########################################################################################
 #########################################################################################
 
 # TINYCORE
-string(FIND "${CMAKE_HOST_SYSTEM_VERSION}" "tinycore" index)
-if(${index} GREATER -1)
-	dk_info("Detected tinycore OS")
-	dk_set(TINYCORE ON)
-endif()	
+#string(FIND "${CMAKE_HOST_SYSTEM_VERSION}" "tinycore" index)
+#if(${index} GREATER -1)
+#	dk_info("Detected tinycore OS")
+#	dk_set(TINYCORE ON)
+#endif()	
 	
-# WIN win_x86
-string(FIND "${CMAKE_BINARY_DIR}" "/win_x86" index)
-if(${index} GREATER -1)
-	dk_info("Creating Windows x32 Project Files")
-	dk_set(WIN ON)
-	dk_set(WIN_X86 ON)
-	dk_set(OS "win_x86")
-	dk_set(DEBUG_DIR Debug)
-	dk_set(RELEASE_DIR Release)
-	dk_set(CMAKE_SKIP_RPATH ON)
-	string(REPLACE "/win_x86" "" DKPROJECT ${CMAKE_BINARY_DIR})
-endif()
+# win_x86
+#if(${DK_BINARY_OS_DIR} MATCHES "win_x86$")
+	#dk_info("Creating Windows x32 Project Files")
+	#dk_set(WIN ON)
+	#dk_set(WIN_X86 ON)
+	#dk_set(OS "win_x86")
+	#dk_set(DEBUG_DIR Debug)
+	#dk_set(RELEASE_DIR Release)
+	#dk_set(CMAKE_SKIP_RPATH ON)
+#endif()
 
 # win_x86_64
-string(FIND "${CMAKE_BINARY_DIR}" "/win_x86_64" index)
-if(${index} GREATER -1)
-	dk_info("*** Creating Windows x64 Project Files ***")
-	dk_set(WIN ON)
-	dk_set(WIN_X86_64 ON)
-	dk_set(OS "win_x86_64")
-	dk_set(DEBUG_DIR Debug)
-	dk_set(RELEASE_DIR Release)
-	dk_set(CMAKE_SKIP_RPATH ON)
-	string(REPLACE "/win_x86_64" "" DKPROJECT ${CMAKE_BINARY_DIR})
-endif()
+#if(${DK_BINARY_OS_DIR} MATCHES "win_x86_64$")
+	#dk_info("*** Creating Windows x64 Project Files ***")
+	#dk_set(WIN ON)
+	#dk_set(WIN_X86_64 ON)
+	#dk_set(OS "win_x86_64")
+	#dk_set(DEBUG_DIR Debug)
+	#dk_set(RELEASE_DIR Release)
+	#dk_set(CMAKE_SKIP_RPATH ON)
+#endif()
+
+
+
 
 
 if(NOT CMAKE_SCRIPT_MODE_FILE)
 	if(NOT OS)
-		dk_error(CMAKE_BINARY_DIR)
-		dk_error("The binary directory must contain an os folder. \n Valid folders are android_arm32,android_arm64,emscripten,ios_arm32,ios_arm64,iossim_x86,iossim_x86_64,linux_x86,linux_x86_64,mac_x86,mac_x86_64,raspberry_arm32,raspberry_arm64,win_x86,win_x86_64 \n 	EXAMPLE: digitalknob/Development/DKApps/MyApp/win_x86")
+		#dk_error(CMAKE_BINARY_DIR)
+		dk_error("The binary directory must contain a valid os folder. \n Valid folders are android_arm32,android_arm64,emscripten,ios_arm32,ios_arm64,iossim_x86,iossim_x86_64,linux_x86,linux_x86_64,mac_x86,mac_x86_64,raspberry_arm32,raspberry_arm64,win_x86,win_x86_64 \n 	EXAMPLE: digitalknob/Development/DKApps/MyApp/win_x86")
 		#file(REMOVE ${CMAKE_BINARY_DIR})
 	endif()
-
-	## we use /Debug and /Release folders for Linux, Android and Raspberry
-	## if they are present, remove them and let DEBUG and RELEASE flags deal with that later.
-	string(REPLACE "/Debug" "" DKPROJECT ${DKPROJECT})
-	string(REPLACE "/Release" "" DKPROJECT ${DKPROJECT})
 endif()
-
-
-## TODO: NEW STYLE
-#if(WIN) #OS
-#	add_definitions(-DWIN) #OS
-#	if(X32) #ARCH
-#		add_definitions(-DWIN_X32) #OS_ARCH
-#		if(DEBUG)
-#			add_definitions(-DWIN_X32_DEBUG) #OS_ARCH_TYPE
-#		endif()
-#		if(RELEASE)
-#			add_definitions(-DWIN_X32_RELEASE) #OS_ARCH_TYPE
-#		endif()
-#	endif()
-#	if(X64) #ARCH
-#		add_definitions(-DWIN_X64) #OS_ARCH
-#		if(DEBUG)
-#			add_definitions(-DWIN_X64_DEBUG) #OS_ARCH_TYPE
-#		endif()
-#		if(RELEASE)
-#			add_definitions(-DWIN_X64_RELEASE) #OS_ARCH_TYPE
-#		endif()
-#	endif()
-#	if(ARM32) #ARCH
-#		add_definitions(-DWIN_ARM32) #OS_ARCH
-#		if(DEBUG)
-#			add_definitions(-DWIN_ARM32_DEBUG) #OS_ARCH_TYPE
-#		endif()
-#		if(RELEASE)
-#			add_definitions(-DWIN_ARM32_RELEASE) #OS_ARCH_TYPE
-#		endif()
-#	endif()
-#	if(ARM64) #ARCH
-#		add_definitions(-DWIN_ARM64) #OS_ARCH
-#		if(DEBUG)
-#			add_definitions(-DWIN_ARM64_DEBUG) #OS_ARCH_TYPE
-#		endif()
-#		if(RELEASE)
-#			add_definitions(-DWIN_ARM64_RELEASE) #OS_ARCH_TYPE
-#		endif()
-#	endif()
-#endif()

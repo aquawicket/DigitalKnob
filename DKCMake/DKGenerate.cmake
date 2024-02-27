@@ -35,7 +35,7 @@ dk_info("############################################################")
 dk_info("######################  DigitalKnob  #######################")
 dk_info("############################################################")
 dk_info("\n")
-get_filename_component(APP_NAME ${DKPROJECT} NAME)
+get_filename_component(APP_NAME ${DK_PROJECT_DIR} NAME)
 string(REPLACE " " "_" APP_NAME ${APP_NAME})
 set(APP_NAME ${APP_NAME}_APP)
 
@@ -52,8 +52,8 @@ endif()
 ##### Scan the DKPlugins and build the lists #####
 ##################################################
 
-include(${DKPROJECT}/DKMAKE.cmake)
-file(REMOVE ${DKPROJECT}/${OS}/DKBUILD.log)
+include(${DK_PROJECT_DIR}/DKMAKE.cmake)
+file(REMOVE ${DK_PROJECT_DIR}/${OS}/DKBUILD.log)
 dk_printSettings()
 
 
@@ -283,25 +283,25 @@ dk_set(APP_VERSION "${year}.${month}.${day}")
 if(PLUGINS_FILE)
 	string(REPLACE "#include \"DKWindow.h\"" "" PLUGINS_FILE ${PLUGINS_FILE})
 	string(REPLACE "\\n" "\n" PLUGINS_FILE ${PLUGINS_FILE})
-	file(WRITE ${DKPROJECT}/DKPlugins.h ${PLUGINS_FILE})
+	file(WRITE ${DK_PROJECT_DIR}/DKPlugins.h ${PLUGINS_FILE})
 endif()
 
 if(HAVE_DK)
 	## copy app default files recursivly without overwrite
 	dk_info("Copying DKPlugins/_DKIMPORT/ to App...")
-	dk_copy(${DKPLUGINS}/_DKIMPORT/icons ${DKPROJECT}/icons) 
-	dk_copy(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h)
-	dk_copy(${DKPLUGINS}/_DKIMPORT/main.cpp ${DKPROJECT}/main.cpp)
+	dk_copy(${DKPLUGINS}/_DKIMPORT/icons ${DK_PROJECT_DIR}/icons) 
+	dk_copy(${DKPLUGINS}/_DKIMPORT/assets.h ${DK_PROJECT_DIR}/assets.h)
+	dk_copy(${DKPLUGINS}/_DKIMPORT/main.cpp ${DK_PROJECT_DIR}/main.cpp)
 endif()
 	
 ### Include all source files from the app folder for the compilers
 #file(GLOB_RECURSE App_SRC
 file(GLOB App_SRC
-	${DKPROJECT}/*.h
-	${DKPROJECT}/*.c
-	${DKPROJECT}/*.cpp)
-list(FILTER App_SRC EXCLUDE REGEX "${DKPROJECT}/assets/*")
-list(FILTER App_SRC EXCLUDE REGEX "${DKPROJECT}/${OS}/*")
+	${DK_PROJECT_DIR}/*.h
+	${DK_PROJECT_DIR}/*.c
+	${DK_PROJECT_DIR}/*.cpp)
+list(FILTER App_SRC EXCLUDE REGEX "${DK_PROJECT_DIR}/assets/*")
+list(FILTER App_SRC EXCLUDE REGEX "${DK_PROJECT_DIR}/${OS}/*")
 if(SRC_INCLUDE)
 	file(GLOB App_SRC_INCLUDE ${SRC_INCLUDE})
 	list(APPEND App_SRC ${App_SRC_INCLUDE})
@@ -314,53 +314,53 @@ endif()
 
 	
 add_definitions(-DDKAPP)
-include_directories(${DKPROJECT})
+include_directories(${DK_PROJECT_DIR})
 include_directories(${DKPLUGINS})
 
 ##########
 if(WIN_X86)
 	########################## CREATE ICONS ###############################
-	if(EXISTS ${DKPROJECT}/icons/icon.png)
+	if(EXISTS ${DK_PROJECT_DIR}/icons/icon.png)
 		dk_info("Building icons for ${APP_NAME} . . .")
-		dk_makeDirectory(${DKPROJECT}/icons/windows)
-		dk_createWindowsIcon(${DKPROJECT}/icons/icon.png ${DKPROJECT}/icons/windows/icon.ico)
-		dk_makeDirectory(${DKPROJECT}/assets)
-		dk_copy(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico OVERWRITE)
-		dk_createFavIcon(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/favicon.ico)
+		dk_makeDirectory(${DK_PROJECT_DIR}/icons/windows)
+		dk_createWindowsIcon(${DK_PROJECT_DIR}/icons/icon.png ${DK_PROJECT_DIR}/icons/windows/icon.ico)
+		dk_makeDirectory(${DK_PROJECT_DIR}/assets)
+		dk_copy(${DK_PROJECT_DIR}/icons/windows/icon.ico ${DK_PROJECT_DIR}/assets/icon.ico OVERWRITE)
+		dk_createFavIcon(${DK_PROJECT_DIR}/icons/icon.png ${DK_PROJECT_DIR}/assets/favicon.ico)
 	endif()
 	
 	################# BACKUP USERDATA / INJECT ASSETS #####################	
 	if(HAVE_DK)
-		dk_copy(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER OVERWRITE NOERROR)
-		file(REMOVE ${DKPROJECT}/assets/USER)
+		dk_copy(${DK_PROJECT_DIR}/assets/USER ${DK_PROJECT_DIR}/Backup/USER OVERWRITE NOERROR)
+		file(REMOVE ${DK_PROJECT_DIR}/assets/USER)
 		#Compress the assets, they will be included by resource.rc
 		dk_info("Creating assets.zip . . .")
-		dk_zip(${DKPROJECT}/assets)
+		dk_zip(${DK_PROJECT_DIR}/assets)
 		# Restore the backed up files, excluded from assets
-		dk_copy(${DKPROJECT}/Backup ${DKPROJECT}/assets OVERWRITE NOERROR)
-		file(REMOVE ${DKPROJECT}/Backup)
-		dk_copy(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h OVERWRITE) #required
+		dk_copy(${DK_PROJECT_DIR}/Backup ${DK_PROJECT_DIR}/assets OVERWRITE NOERROR)
+		file(REMOVE ${DK_PROJECT_DIR}/Backup)
+		dk_copy(${DKPLUGINS}/_DKIMPORT/assets.h ${DK_PROJECT_DIR}/assets.h OVERWRITE) #required
 	endif()	
 		
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
 		if(DEBUG)
-			dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe.backup OVERWRITE NOERROR)
+			dk_rename(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe.backup OVERWRITE NOERROR)
 		endif()
 		if(RELEASE)
-			dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe.backup OVERWRITE NOERROR)
+			dk_rename(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe.backup OVERWRITE NOERROR)
 		endif()
 	endif()
 		
 	####################### Create Executable Target ###################
 	if(HAVE_DK)
 		##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
-		dk_copy(${DKPLUGINS}/_DKIMPORT/win/resource.h ${DKPROJECT}/resource.h)
-		dk_copy(${DKPLUGINS}/_DKIMPORT/win/resource.rc ${DKPROJECT}/resource.rc)
+		dk_copy(${DKPLUGINS}/_DKIMPORT/win/resource.h ${DK_PROJECT_DIR}/resource.h)
+		dk_copy(${DKPLUGINS}/_DKIMPORT/win/resource.rc ${DK_PROJECT_DIR}/resource.rc)
 		file(GLOB_RECURSE resources_SRC 
-			${DKPROJECT}/*.manifest
-			${DKPROJECT}/*.rc
-			${DKPROJECT}/icons/windows/*.rc)
+			${DK_PROJECT_DIR}/*.manifest
+			${DK_PROJECT_DIR}/*.rc
+			${DK_PROJECT_DIR}/icons/windows/*.rc)
 		list(APPEND App_SRC ${resources_SRC})
 	endif()
 	
@@ -435,15 +435,15 @@ if(WIN_X86)
 	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE:APP_NAME = $<TARGET_FILE:${APP_NAME}>"
 	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! TARGET_FILE_DIR:APP_NAME = $<TARGET_FILE_DIR:${APP_NAME}>"
 	#	COMMAND ${CMAKE_COMMAND} -E echo "!!!!!! CONFIG = $<CONFIG>"
-	#	#COMMAND cmd /c ${CMAKE_COMMAND} --build ${DKPROJECT}/${OS} --target ${APP_NAME}
+	#	#COMMAND cmd /c ${CMAKE_COMMAND} --build ${DK_PROJECT_DIR}/${OS} --target ${APP_NAME}
 	#)
 	
 	#add_custom_command(
     #TARGET ${APP_NAME}
     #POST_BUILD
     #COMMAND "mt.exe" -nologo
-    #        -manifest \"${DKPROJECT}/compatibility.manifest\"
-    #        -outputresource:"${DKPROJECT}/win_x86/Debug/${APP_NAME}.exe"\;\#1
+    #        -manifest \"${DK_PROJECT_DIR}/compatibility.manifest\"
+    #        -outputresource:"${DK_PROJECT_DIR}/win_x86/Debug/${APP_NAME}.exe"\;\#1
     #COMMENT "Adding manifest..."
     #)
 	
@@ -455,48 +455,48 @@ endif(WIN_X86)
 ##########
 if(WIN_X86_64)
 	########################## CREATE ICONS ###############################
-	if(EXISTS ${DKPROJECT}/icons/icon.png)
+	if(EXISTS ${DK_PROJECT_DIR}/icons/icon.png)
 		dk_info("Building icons for ${APP_NAME} . . .")
-		dk_makeDirectory(${DKPROJECT}/icons/windows)
-		dk_createWindowsIcon(${DKPROJECT}/icons/icon.png ${DKPROJECT}/icons/windows/icon.ico)
-		dk_makeDirectory(${DKPROJECT}/assets)
-		dk_copy(${DKPROJECT}/icons/windows/icon.ico ${DKPROJECT}/assets/icon.ico OVERWRITE)
-		dk_createFavIcon(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/favicon.ico)
+		dk_makeDirectory(${DK_PROJECT_DIR}/icons/windows)
+		dk_createWindowsIcon(${DK_PROJECT_DIR}/icons/icon.png ${DK_PROJECT_DIR}/icons/windows/icon.ico)
+		dk_makeDirectory(${DK_PROJECT_DIR}/assets)
+		dk_copy(${DK_PROJECT_DIR}/icons/windows/icon.ico ${DK_PROJECT_DIR}/assets/icon.ico OVERWRITE)
+		dk_createFavIcon(${DK_PROJECT_DIR}/icons/icon.png ${DK_PROJECT_DIR}/assets/favicon.ico)
 	endif()
 			
 	################# BACKUP USERDATA / INJECT ASSETS #####################
 	if(HAVE_DK)
-		dk_copy(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER OVERWRITE NOERROR)
-		file(REMOVE ${DKPROJECT}/assets/USER)
+		dk_copy(${DK_PROJECT_DIR}/assets/USER ${DK_PROJECT_DIR}/Backup/USER OVERWRITE NOERROR)
+		file(REMOVE ${DK_PROJECT_DIR}/assets/USER)
 		#Compress the assets, they will be included by resource.rc
 		dk_info("Creating assets.zip . . .")
-		dk_zip(${DKPROJECT}/assets)
+		dk_zip(${DK_PROJECT_DIR}/assets)
 		# Restore the backed up files
-		dk_copy(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ OVERWRITE NOERROR)
-		file(REMOVE ${DKPROJECT}/Backup)
+		dk_copy(${DK_PROJECT_DIR}/Backup/ ${DK_PROJECT_DIR}/assets/ OVERWRITE NOERROR)
+		file(REMOVE ${DK_PROJECT_DIR}/Backup)
 		#dummy assets.h file, or the builder wil complain about assets.h missing
-		dk_copy(${DKPLUGINS}/_DKIMPORT/assets.h ${DKPROJECT}/assets.h OVERWRITE NOERROR)
+		dk_copy(${DKPLUGINS}/_DKIMPORT/assets.h ${DK_PROJECT_DIR}/assets.h OVERWRITE NOERROR)
 	endif()
 
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
 		if(DEBUG)
-			dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe.backup OVERWRITE NOERROR)
+			dk_rename(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe.backup OVERWRITE NOERROR)
 		endif()
 		if(RELEASE)
-			dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe.backup OVERWRITE NOERROR)
+			dk_rename(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.exe.backup OVERWRITE NOERROR)
 		endif()
 	endif()
 		
 	####################### Create Executable Target ###################
 	if(HAVE_DK)
 		##set_source_files_properties(${DIGITALKNOB}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
-		dk_copy(${DKPLUGINS}/_DKIMPORT/win/resource.h ${DKPROJECT}/resource.h)
-		dk_copy(${DKPLUGINS}/_DKIMPORT/win/resource.rc ${DKPROJECT}/resource.rc)
+		dk_copy(${DKPLUGINS}/_DKIMPORT/win/resource.h ${DK_PROJECT_DIR}/resource.h)
+		dk_copy(${DKPLUGINS}/_DKIMPORT/win/resource.rc ${DK_PROJECT_DIR}/resource.rc)
 		file(GLOB_RECURSE resources_SRC 
-			${DKPROJECT}/*.manifest
-			${DKPROJECT}/*.rc
-			${DKPROJECT}/icons/windows/*.rc)
+			${DK_PROJECT_DIR}/*.manifest
+			${DK_PROJECT_DIR}/*.rc
+			${DK_PROJECT_DIR}/icons/windows/*.rc)
 		list(APPEND App_SRC ${resources_SRC})
 	endif()
 	
@@ -575,55 +575,55 @@ if(MAC)
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
 		if(DEBUG)
-			dk_copy(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app.backup OVERWRITE NOERROR)
+			dk_copy(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.app.backup OVERWRITE NOERROR)
 		endif()
 		if(RELEASE)
-			dk_copy(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app.backup OVERWRITE NOERROR)
+			dk_copy(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.app.backup OVERWRITE NOERROR)
 		endif()
 	endif()
 		
 	########################## CREATE ICONS ###############################
-	if(EXISTS ${DKPROJECT}/icons/icon.png)
-		dk_makeDirectory(${DKPROJECT}/icons/mac)
-		dk_makeDirectory(${DKPROJECT}/icons/mac/icons.iconset)
-		#dk_executeProcess(sips -z 16 16 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_16x16.png WORKING_DIRECTORY ${DIGITALKNOB})
-		dk_resizeImage(${DKPROJECT}/icons/icon.png 16 16 ${DKPROJECT}/icons/mac/icons.iconset/icon_16x16.png)
-		#dk_executeProcess(sips -z 32 32 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_16x16@2x.png WORKING_DIRECTORY ${DIGITALKNOB})
-		dk_resizeImage(${DKPROJECT}/icons/icon.png 32 32 ${DKPROJECT}/icons/mac/icons.iconset/icon_16x16@2x.png)
-		#dk_executeProcess(sips -z 32 32 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_32x32.png WORKING_DIRECTORY ${DIGITALKNOB})
-		dk_resizeImage(${DKPROJECT}/icons/icon.png 32 32 ${DKPROJECT}/icons/mac/icons.iconset/icon_32x32.png)
-		#dk_executeProcess(sips -z 64 64 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_32x32@2x.png WORKING_DIRECTORY ${DIGITALKNOB})
-		dk_resizeImage(${DKPROJECT}/icons/icon.png 64 64 ${DKPROJECT}/icons/mac/icons.iconset/icon_32x32@2x.png)
-		#dk_executeProcess(sips -z 128 128 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_128x128.png WORKING_DIRECTORY ${DIGITALKNOB})
-		dk_resizeImage(${DKPROJECT}/icons/icon.png 128 128 ${DKPROJECT}/icons/mac/icons.iconset/icon_128x128.png)
-		#dk_executeProcess(sips -z 256 256 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_128x128@2x.png WORKING_DIRECTORY ${DIGITALKNOB})
-		dk_resizeImage(${DKPROJECT}/icons/icon.png 256 256 ${DKPROJECT}/icons/mac/icons.iconset/icon_128x128@2x.png)
-		#dk_executeProcess(sips -z 256 256 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_256x256.png WORKING_DIRECTORY ${DIGITALKNOB})
-		dk_resizeImage(${DKPROJECT}/icons/icon.png 256 256 ${DKPROJECT}/icons/mac/icons.iconset/icon_256x256.png)
-		#dk_executeProcess(sips -z 512 512 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_256x256@2x.png WORKING_DIRECTORY ${DIGITALKNOB})
-		dk_resizeImage(${DKPROJECT}/icons/icon.png 512 512 ${DKPROJECT}/icons/mac/icons.iconset/icon_256x256@2x.png)
-		#dk_executeProcess(sips -z 512 512 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_512x512.png WORKING_DIRECTORY ${DIGITALKNOB})
-		dk_resizeImage(${DKPROJECT}/icons/icon.png 512 512 ${DKPROJECT}/icons/mac/icons.iconset/icon_512x512.png)
-		#dk_executeProcess(sips -z 1024 1024 ${DKPROJECT}/icons/icon.png --out ${DKPROJECT}/icons/mac/icons.iconset/icon_512x512@2x.png WORKING_DIRECTORY ${DIGITALKNOB})
-		dk_resizeImage(${DKPROJECT}/icons/icon.png 1024 1024 ${DKPROJECT}/icons/mac/icons.iconset/icon_512x512@2x.png)
-		dk_executeProcess(iconutil -c icns -o ${DKPROJECT}/icons/mac/icons.icns ${DKPROJECT}/icons/mac/icons.iconset WORKING_DIRECTORY ${DIGITALKNOB})
+	if(EXISTS ${DK_PROJECT_DIR}/icons/icon.png)
+		dk_makeDirectory(${DK_PROJECT_DIR}/icons/mac)
+		dk_makeDirectory(${DK_PROJECT_DIR}/icons/mac/icons.iconset)
+		#dk_executeProcess(sips -z 16 16 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_16x16.png WORKING_DIRECTORY ${DIGITALKNOB})
+		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 16 16 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_16x16.png)
+		#dk_executeProcess(sips -z 32 32 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_16x16@2x.png WORKING_DIRECTORY ${DIGITALKNOB})
+		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 32 32 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_16x16@2x.png)
+		#dk_executeProcess(sips -z 32 32 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_32x32.png WORKING_DIRECTORY ${DIGITALKNOB})
+		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 32 32 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_32x32.png)
+		#dk_executeProcess(sips -z 64 64 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_32x32@2x.png WORKING_DIRECTORY ${DIGITALKNOB})
+		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 64 64 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_32x32@2x.png)
+		#dk_executeProcess(sips -z 128 128 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_128x128.png WORKING_DIRECTORY ${DIGITALKNOB})
+		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 128 128 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_128x128.png)
+		#dk_executeProcess(sips -z 256 256 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_128x128@2x.png WORKING_DIRECTORY ${DIGITALKNOB})
+		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 256 256 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_128x128@2x.png)
+		#dk_executeProcess(sips -z 256 256 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_256x256.png WORKING_DIRECTORY ${DIGITALKNOB})
+		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 256 256 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_256x256.png)
+		#dk_executeProcess(sips -z 512 512 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_256x256@2x.png WORKING_DIRECTORY ${DIGITALKNOB})
+		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 512 512 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_256x256@2x.png)
+		#dk_executeProcess(sips -z 512 512 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_512x512.png WORKING_DIRECTORY ${DIGITALKNOB})
+		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 512 512 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_512x512.png)
+		#dk_executeProcess(sips -z 1024 1024 ${DK_PROJECT_DIR}/icons/icon.png --out ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_512x512@2x.png WORKING_DIRECTORY ${DIGITALKNOB})
+		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 1024 1024 ${DK_PROJECT_DIR}/icons/mac/icons.iconset/icon_512x512@2x.png)
+		dk_executeProcess(iconutil -c icns -o ${DK_PROJECT_DIR}/icons/mac/icons.icns ${DK_PROJECT_DIR}/icons/mac/icons.iconset WORKING_DIRECTORY ${DIGITALKNOB})
 		set(MACOSX_BUNDLE_ICON_FILE icons.icns)
-		set(app_ICONS ${DKPROJECT}/icons/mac/icons.icns)
+		set(app_ICONS ${DK_PROJECT_DIR}/icons/mac/icons.icns)
 		set_source_files_properties(${app_ICONS} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
 	endif()
 		
 	################# BACKUP USERDATA / INJECT ASSETS #####################	
-	dk_copy(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER OVERWRITE NOERROR)
-	#file(REMOVE ${DKPROJECT}/assets/USER)
-	dk_remove(${DKPROJECT}/assets/USER NOERROR)
-	dk_copy(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/ OVERWRITE NOERROR)
-	#file(REMOVE ${DKPROJECT}/Backup)
-	dk_remove(${DKPROJECT}/Backup NOERROR)
+	dk_copy(${DK_PROJECT_DIR}/assets/USER ${DK_PROJECT_DIR}/Backup/USER OVERWRITE NOERROR)
+	#file(REMOVE ${DK_PROJECT_DIR}/assets/USER)
+	dk_remove(${DK_PROJECT_DIR}/assets/USER NOERROR)
+	dk_copy(${DK_PROJECT_DIR}/Backup/ ${DK_PROJECT_DIR}/assets/ OVERWRITE NOERROR)
+	#file(REMOVE ${DK_PROJECT_DIR}/Backup)
+	dk_remove(${DK_PROJECT_DIR}/Backup NOERROR)
 	
 	####################### Create Executable Target ###################
 	file(GLOB_RECURSE m_SRC 
-		${DKPROJECT}/*.m
-		${DKPROJECT}/*.mm)
+		${DK_PROJECT_DIR}/*.m
+		${DK_PROJECT_DIR}/*.mm)
 	list(APPEND App_SRC ${m_SRC})
 	add_executable(${APP_NAME} MACOSX_BUNDLE ${app_ICONS} ${App_SRC})
 		
@@ -666,10 +666,10 @@ if(MAC)
 		MACOSX_BUNDLE_INFO_PLIST ${DKPLUGINS}/_DKIMPORT/mac/Info.plist)
 		
 	############## Delete Exlusions and Copy Assets to Bundle #######################
-	if(EXISTS ${DKPROJECT}/assets)
-		file(REMOVE ${DKPROJECT}/assets/log.txt)
-		file(REMOVE ${DKPROJECT}/assets/cef.txt)
-		add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${DKPROJECT}/assets $<TARGET_BUNDLE_CONTENT_DIR:${APP_NAME}>/Resources)
+	if(EXISTS ${DK_PROJECT_DIR}/assets)
+		file(REMOVE ${DK_PROJECT_DIR}/assets/log.txt)
+		file(REMOVE ${DK_PROJECT_DIR}/assets/cef.txt)
+		add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${DK_PROJECT_DIR}/assets $<TARGET_BUNDLE_CONTENT_DIR:${APP_NAME}>/Resources)
 	endif()
 		
 	############# Link Libraries, Set Startup Project #################
@@ -709,9 +709,9 @@ if(MAC)
 			"dir=$(cd \"$( dirname \"\${0}\")\" && pwd )\n"
 			"Open -a \"Terminal\" \"\${dir}/${APP_NAME}\""
 		)
-		file(WRITE ${DKPROJECT}/${OS}/wrapper ${TERMINAL_SCRIPT})
-		dk_executeProcess(chmod +x ${DKPROJECT}/${OS}/wrapper WORKING_DIRECTORY ${DKPROJECT}/${OS})
-		add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/${OS}/wrapper" "$<TARGET_FILE_DIR:${APP_NAME}>/wrapper")
+		file(WRITE ${DK_PROJECT_DIR}/${OS}/wrapper ${TERMINAL_SCRIPT})
+		dk_executeProcess(chmod +x ${DK_PROJECT_DIR}/${OS}/wrapper WORKING_DIRECTORY ${DK_PROJECT_DIR}/${OS})
+		add_custom_command(TARGET ${APP_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy "${DK_PROJECT_DIR}/${OS}/wrapper" "$<TARGET_FILE_DIR:${APP_NAME}>/wrapper")
 	endif()
 	
 	#CPP_DK_Execute("chmod +x "+app_path+OS+"/Debug/"+APP)
@@ -756,44 +756,44 @@ if(IOS OR IOSSIM)
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
 		if(DEBUG)
-			if(EXISTS ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app)
-				dk_remove(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app.backup)
-				dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app.backup OVERWRITE)
+			if(EXISTS ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.app)
+				dk_remove(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.app.backup)
+				dk_rename(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.app ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.app.backup OVERWRITE)
 			endif()
 		endif()
 		if(RELEASE)
-			if(EXISTS ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app)
-				dk_remove(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app.backup)
-				dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.app.backup OVERWRITE)
+			if(EXISTS ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.app)
+				dk_remove(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.app.backup)
+				dk_rename(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.app ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.app.backup OVERWRITE)
 			endif()
 		endif()
 	endif()
 	
 	###################### BACKUP USERDATA ###############################
 	# Backup files and folders excluded from the package
-	#	dk_copy(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER OVERWRITE)
+	#	dk_copy(${DK_PROJECT_DIR}/assets/USER ${DK_PROJECT_DIR}/Backup/USER OVERWRITE)
 	# Remove excluded files and folders before packaging
-	#	file(REMOVE ${DKPROJECT}/assets/USER)
+	#	file(REMOVE ${DK_PROJECT_DIR}/assets/USER)
 	# Restore the backed up files, excluded from assets
-	#	dk_copy(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/)
-	#	file(REMOVE ${DKPROJECT}/Backup)
+	#	dk_copy(${DK_PROJECT_DIR}/Backup/ ${DK_PROJECT_DIR}/assets/)
+	#	file(REMOVE ${DK_PROJECT_DIR}/Backup)
 	
 	########################## ICONS ###############################
-	if(EXISTS ${DKPROJECT}/icons/icon.png)
-		dk_resizeImage(${DKPROJECT}/icons/icon.png 16 16 ${DKPROJECT}/icons/ios/icons.iconset/icon_16x16.png)
-		dk_resizeImage(${DKPROJECT}/icons/icon.png 32 32 ${DKPROJECT}/icons/ios/icons.iconset/icon_16x16@2x.png)
-		dk_resizeImage(${DKPROJECT}/icons/icon.png 32 32 ${DKPROJECT}/icons/ios/icons.iconset/icon_32x32.png)
-		dk_resizeImage(${DKPROJECT}/icons/icon.png 64 64 ${DKPROJECT}/icons/ios/icons.iconset/icon_32x32@2x.png)
-		dk_resizeImage(${DKPROJECT}/icons/icon.png 128 128 ${DKPROJECT}/icons/ios/icons.iconset/icon_128x128.png)
-		dk_resizeImage(${DKPROJECT}/icons/icon.png 256 256 ${DKPROJECT}/icons/ios/icons.iconset/icon_128x128@2x.png)
-		dk_resizeImage(${DKPROJECT}/icons/icon.png 256 256 ${DKPROJECT}/icons/ios/icons.iconset/icon_256x256.png)
-		dk_resizeImage(${DKPROJECT}/icons/icon.png 512 512 ${DKPROJECT}/icons/ios/icons.iconset/icon_256x256@2x.png)
-		dk_resizeImage(${DKPROJECT}/icons/icon.png 512 512 ${DKPROJECT}/icons/ios/icons.iconset/icon_512x512.png)
-		dk_resizeImage(${DKPROJECT}/icons/icon.png 1024 1024 ${DKPROJECT}/icons/ios/icons.iconset/icon_512x512@2x.png)
+	if(EXISTS ${DK_PROJECT_DIR}/icons/icon.png)
+		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 16 16 ${DK_PROJECT_DIR}/icons/ios/icons.iconset/icon_16x16.png)
+		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 32 32 ${DK_PROJECT_DIR}/icons/ios/icons.iconset/icon_16x16@2x.png)
+		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 32 32 ${DK_PROJECT_DIR}/icons/ios/icons.iconset/icon_32x32.png)
+		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 64 64 ${DK_PROJECT_DIR}/icons/ios/icons.iconset/icon_32x32@2x.png)
+		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 128 128 ${DK_PROJECT_DIR}/icons/ios/icons.iconset/icon_128x128.png)
+		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 256 256 ${DK_PROJECT_DIR}/icons/ios/icons.iconset/icon_128x128@2x.png)
+		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 256 256 ${DK_PROJECT_DIR}/icons/ios/icons.iconset/icon_256x256.png)
+		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 512 512 ${DK_PROJECT_DIR}/icons/ios/icons.iconset/icon_256x256@2x.png)
+		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 512 512 ${DK_PROJECT_DIR}/icons/ios/icons.iconset/icon_512x512.png)
+		dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 1024 1024 ${DK_PROJECT_DIR}/icons/ios/icons.iconset/icon_512x512@2x.png)
 
-		dk_executeProcess(iconutil -c icns -o ${DKPROJECT}/icons/ios/icons.icns ${DKPROJECT}/icons/ios/icons.iconset)
+		dk_executeProcess(iconutil -c icns -o ${DK_PROJECT_DIR}/icons/ios/icons.icns ${DK_PROJECT_DIR}/icons/ios/icons.iconset)
 		set(MACOSX_BUNDLE_ICON_FILE icons.icns)
-		set(app_ICONS ${DKPROJECT}/icons/ios/icons.icns)
+		set(app_ICONS ${DK_PROJECT_DIR}/icons/ios/icons.icns)
 		set_source_files_properties(${app_ICONS} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
 	endif()
 	
@@ -802,8 +802,8 @@ if(IOS OR IOSSIM)
 		
 	####################### Create Executable Target ###################
 	file(GLOB_RECURSE m_SRC 
-	${DKPROJECT}/*.m
-	${DKPROJECT}/*.mm)
+	${DK_PROJECT_DIR}/*.m
+	${DK_PROJECT_DIR}/*.mm)
 	list(APPEND App_SRC ${m_SRC})
 	#if(HAVE_DK)
 	#	list(APPEND App_SRC ${DKPLUGINS}/DK/DKAppDelegate.h)
@@ -843,9 +843,9 @@ if(IOS OR IOSSIM)
 	set_target_properties(${APP_NAME} PROPERTIES XCODE_ATTRIBUTE_ENABLE_BITCODE "NO")
 	
 	###################### Add Assets to Bundle #######################
-	add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${DKPROJECT}/assets $<TARGET_FILE_DIR:${APP_NAME}>/assets)
-	#if(EXISTS ${DKPROJECT}/icons/mac/icons.icns)
-	#	add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${DKPROJECT}/icons/ios/icons.icns $<TARGET_FILE_DIR:${APP_NAME}>/Resources/icons.icns)
+	add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${DK_PROJECT_DIR}/assets $<TARGET_FILE_DIR:${APP_NAME}>/assets)
+	#if(EXISTS ${DK_PROJECT_DIR}/icons/mac/icons.icns)
+	#	add_custom_command(TARGET ${APP_NAME} PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${DK_PROJECT_DIR}/icons/ios/icons.icns $<TARGET_FILE_DIR:${APP_NAME}>/Resources/icons.icns)
 	#endif()
 	
 	############# Link Libraries, Set Startup Project #################
@@ -859,21 +859,21 @@ if(IOS OR IOSSIM)
 			set(RUN_SCRIPT_DEBUG
 				"\#!/bin/bash\n"
 				"open -a Simulator.app\n"
-				"xcrun simctl install booted ${DKPROJECT}/iossim_x86_64/Debug-iphonesimulator/${APP_NAME}.app\n"
+				"xcrun simctl install booted ${DK_PROJECT_DIR}/iossim_x86_64/Debug-iphonesimulator/${APP_NAME}.app\n"
 				"xcrun simctl launch --console-pty booted com.digitalknob.${APP_NAME}"
 			)
-			file(WRITE ${DKPROJECT}/iossim_x86_64/Debug-iphonesimulator/Run.sh ${RUN_SCRIPT_DEBUG})
-			dk_executeProcess(chmod 777 ${DKPROJECT}/iossim_x86_64/Debug-iphonesimulator/Run.sh)
+			file(WRITE ${DK_PROJECT_DIR}/iossim_x86_64/Debug-iphonesimulator/Run.sh ${RUN_SCRIPT_DEBUG})
+			dk_executeProcess(chmod 777 ${DK_PROJECT_DIR}/iossim_x86_64/Debug-iphonesimulator/Run.sh)
 		endif()
 		if(RELEASE)
 			set(RUN_SCRIPT_RELEASE
 				"\#!/bin/bash\n"
 				"open -a Simulator.app\n"
-				"xcrun simctl install booted ${DKPROJECT}/iossim_x86_64/Release-iphonesimulator/${APP_NAME}.app\n"
+				"xcrun simctl install booted ${DK_PROJECT_DIR}/iossim_x86_64/Release-iphonesimulator/${APP_NAME}.app\n"
 				"xcrun simctl launch --console-pty booted com.digitalknob.${APP_NAME}"
 			)
-			file(WRITE ${DKPROJECT}/iossim_x86_64/Release-iphonesimulator/Run.sh ${RUN_SCRIPT_RELEASE})
-			dk_executeProcess(chmod 777 ${DKPROJECT}/iossim_x86_64/Release-iphonesimulator/Run.sh)
+			file(WRITE ${DK_PROJECT_DIR}/iossim_x86_64/Release-iphonesimulator/Run.sh ${RUN_SCRIPT_RELEASE})
+			dk_executeProcess(chmod 777 ${DK_PROJECT_DIR}/iossim_x86_64/Release-iphonesimulator/Run.sh)
 		endif()
 	endif()
 	
@@ -897,30 +897,30 @@ if(NOT RASPBERRY)
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
 		if(DEBUG)
-			dk_copy(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup OVERWRITE NOERROR)
+			dk_copy(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME} ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup OVERWRITE NOERROR)
 		elseif(RELEASE)
-			dk_copy(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup OVERWRITE NOERROR)
+			dk_copy(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME} ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup OVERWRITE NOERROR)
 		endif()
 	endif()
 	
 	########################## CREATE ICONS ###############################
-	if(EXISTS ${DKPROJECT}/icons/icon.png)
-		dk_copy(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png OVERWRITE)
+	if(EXISTS ${DK_PROJECT_DIR}/icons/icon.png)
+		dk_copy(${DK_PROJECT_DIR}/icons/icon.png ${DK_PROJECT_DIR}/assets/icon.png OVERWRITE)
 	endif()
 	
 	############### BACKUP USERDATA / inject assets #######################
 	if(false)
 		# backup files not going in the package
-		dk_copy(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER OVERWRITE)
-		file(REMOVE ${DKPROJECT}/assets/USER)
+		dk_copy(${DK_PROJECT_DIR}/assets/USER ${DK_PROJECT_DIR}/Backup/USER OVERWRITE)
+		file(REMOVE ${DK_PROJECT_DIR}/assets/USER)
 		# Remove excluded files and folders before packaging
 		dk_info("Creating assets.zip . . .")
-		dk_zip(${DKPROJECT}/assets)
+		dk_zip(${DK_PROJECT_DIR}/assets)
 		#dk_info("Creating assets.h . . .")
-		bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
+		bin2h(SOURCE_FILE ${DK_PROJECT_DIR}/assets.zip HEADER_FILE ${DK_PROJECT_DIR}/assets.h VARIABLE_NAME "ASSETS_H")
 		# Restore the backed up assets
-		dk_copy(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/)
-		file(REMOVE ${DKPROJECT}/Backup)
+		dk_copy(${DK_PROJECT_DIR}/Backup/ ${DK_PROJECT_DIR}/assets/)
+		file(REMOVE ${DK_PROJECT_DIR}/Backup)
 	endif()
 	
 	####################### Create Executable Target ###################
@@ -947,9 +947,9 @@ if(NOT RASPBERRY)
 			"Type=Application\n"
 			"Terminal=true\n"
 			"Name=${APP_NAME}\n"
-			"Exec=${DKPROJECT}/${OS}/Debug/${APP_NAME}\n"
-			"Icon=${DKPROJECT}/icons/icon.png\n")
-		file(WRITE ${DKPROJECT}/${OS}/Debug/${APP_NAME}.desktop ${DESKTOP_FILE})
+			"Exec=${DK_PROJECT_DIR}/${OS}/Debug/${APP_NAME}\n"
+			"Icon=${DK_PROJECT_DIR}/icons/icon.png\n")
+		file(WRITE ${DK_PROJECT_DIR}/${OS}/Debug/${APP_NAME}.desktop ${DESKTOP_FILE})
 	elseif(RELEASE)
 		dk_set(DESKTOP_FILE
 			"[Desktop Entry]\n"
@@ -958,13 +958,13 @@ if(NOT RASPBERRY)
 			"Type=Application\n"
 			"Terminal=true\n"
 			"Name=${APP_NAME}\n"
-			"Exec=${DKPROJECT}/${OS}/Release/${APP_NAME}\n"
-			"Icon=${DKPROJECT}/icons/icon.png\n")
-		file(WRITE ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop ${DESKTOP_FILE})
+			"Exec=${DK_PROJECT_DIR}/${OS}/Release/${APP_NAME}\n"
+			"Icon=${DK_PROJECT_DIR}/icons/icon.png\n")
+		file(WRITE ${DK_PROJECT_DIR}/${OS}/Release/${APP_NAME}.desktop ${DESKTOP_FILE})
 	
 		# Install shortcut of Release build to the apps menu
 		if(NOT TINYCORE)
-			dk_executeProcess(desktop-file-install --dir=/home/$ENV{USER}/.local/share/applications ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DKPROJECT}/${OS}/Release)
+			dk_executeProcess(desktop-file-install --dir=/home/$ENV{USER}/.local/share/applications ${DK_PROJECT_DIR}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DK_PROJECT_DIR}/${OS}/Release)
 		endif()
 	endif()
 	
@@ -987,31 +987,31 @@ endif()
 #############
 if(RASPBERRY)
 	########################## CREATE ICONS ###############################
-	if(EXISTS ${DKPROJECT}/icons/icon.png)
-		dk_copy(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png OVERWRITE)
+	if(EXISTS ${DK_PROJECT_DIR}/icons/icon.png)
+		dk_copy(${DK_PROJECT_DIR}/icons/icon.png ${DK_PROJECT_DIR}/assets/icon.png OVERWRITE)
 	endif()
 
 	############### BACKUP USERDATA / inject assets #######################
 	if(false)
 		# backup files not going in the package
-		dk_copy(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER OVERWRITE)
+		dk_copy(${DK_PROJECT_DIR}/assets/USER ${DK_PROJECT_DIR}/Backup/USER OVERWRITE)
 		# Remove excluded files and folders before packaging
-		file(REMOVE ${DKPROJECT}/assets/USER)
+		file(REMOVE ${DK_PROJECT_DIR}/assets/USER)
 		dk_info("Creating assets.zip . . .")
-		dk_zip(${DKPROJECT}/assets)
+		dk_zip(${DK_PROJECT_DIR}/assets)
 		#dk_info("Creating assets.h . . .")
-		bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
+		bin2h(SOURCE_FILE ${DK_PROJECT_DIR}/assets.zip HEADER_FILE ${DK_PROJECT_DIR}/assets.h VARIABLE_NAME "ASSETS_H")
 		# Restore the backed up assets
-		dk_copy(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/)
-		file(REMOVE ${DKPROJECT}/Backup)
+		dk_copy(${DK_PROJECT_DIR}/Backup/ ${DK_PROJECT_DIR}/assets/)
+		file(REMOVE ${DK_PROJECT_DIR}/Backup)
 	endif()
 	
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
 		if(DEBUG)
-			dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup OVERWRITE NOERROR)
+			dk_rename(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME} ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.backup OVERWRITE NOERROR)
 		elseif(RELEASE)
-			dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME} ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup OVERWRITE NOERROR)
+			dk_rename(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME} ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.backup OVERWRITE NOERROR)
 		endif()
 	endif()
 	
@@ -1040,9 +1040,9 @@ if(RASPBERRY)
 		"Type=Application\n"
 		"Terminal=true\n"
 		"Name=${APP_NAME}\n"
-		"Exec=${DKPROJECT}/${OS}/Debug/${APP_NAME}\n"
-		"Icon=${DKPROJECT}/icons/icon.png\n")
-	file(WRITE ${DKPROJECT}/${OS}/Debug/${APP_NAME}.desktop ${DESKTOP_FILE})
+		"Exec=${DK_PROJECT_DIR}/${OS}/Debug/${APP_NAME}\n"
+		"Icon=${DK_PROJECT_DIR}/icons/icon.png\n")
+	file(WRITE ${DK_PROJECT_DIR}/${OS}/Debug/${APP_NAME}.desktop ${DESKTOP_FILE})
 	endif()
 	if(RELEASE)
 	# Create .desktop file for Release
@@ -1053,14 +1053,14 @@ if(RASPBERRY)
 		"Type=Application\n"
 		"Terminal=true\n"
 		"Name=${APP_NAME}\n"
-		"Exec=${DKPROJECT}/${OS}/Release/${APP_NAME}\n"
-		"Icon=${DKPROJECT}/icons/icon.png\n")
-	file(WRITE ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop ${DESKTOP_FILE})
+		"Exec=${DK_PROJECT_DIR}/${OS}/Release/${APP_NAME}\n"
+		"Icon=${DK_PROJECT_DIR}/icons/icon.png\n")
+	file(WRITE ${DK_PROJECT_DIR}/${OS}/Release/${APP_NAME}.desktop ${DESKTOP_FILE})
 	endif()
 	
 	# Install shortcut of Release build to the apps menu
 	if(RELEASE)
-		dk_executeProcess(desktop-file-install --dir=/home/$ENV{USER}/.local/share/applications ${DKPROJECT}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DKPROJECT}/${OS}/Release)
+		dk_executeProcess(desktop-file-install --dir=/home/$ENV{USER}/.local/share/applications ${DK_PROJECT_DIR}/${OS}/Release/${APP_NAME}.desktop WORKING_DIRECTORY ${DK_PROJECT_DIR}/${OS}/Release)
 	endif()
 		
 	####################### Do Post Build Stuff #######################
@@ -1085,36 +1085,36 @@ if(ANDROID)
 	
 	if(CMAKE_ANDROID_GUI)
 		########################## CREATE ICONS ###############################
-		if(EXISTS ${DKPROJECT}/icons/icon.png)
+		if(EXISTS ${DK_PROJECT_DIR}/icons/icon.png)
 			dk_info("Creating android icons for ${APP_NAME} . . .")
 			if(DEBUG)
-				dk_resizeImage(${DKPROJECT}/icons/icon.png 36 36 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-ldpi/ic_launcher.png)
-				dk_resizeImage(${DKPROJECT}/icons/icon.png 48 48 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-mdpi/ic_launcher.png)
-				dk_resizeImage(${DKPROJECT}/icons/icon.png 72 72 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-hdpi/ic_launcher.png)
-				dk_resizeImage(${DKPROJECT}/icons/icon.png 96 96 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-xhdpi/ic_launcher.png)
-				dk_resizeImage(${DKPROJECT}/icons/icon.png 144 144 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
-				dk_resizeImage(${DKPROJECT}/icons/icon.png 192 192 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
+				dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 36 36 ${DK_PROJECT_DIR}/${OS}/Debug/app/src/main/res/mipmap-ldpi/ic_launcher.png)
+				dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 48 48 ${DK_PROJECT_DIR}/${OS}/Debug/app/src/main/res/mipmap-mdpi/ic_launcher.png)
+				dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 72 72 ${DK_PROJECT_DIR}/${OS}/Debug/app/src/main/res/mipmap-hdpi/ic_launcher.png)
+				dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 96 96 ${DK_PROJECT_DIR}/${OS}/Debug/app/src/main/res/mipmap-xhdpi/ic_launcher.png)
+				dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 144 144 ${DK_PROJECT_DIR}/${OS}/Debug/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
+				dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 192 192 ${DK_PROJECT_DIR}/${OS}/Debug/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
 			endif()
 			if(RELEASE)
-				dk_resizeImage(${DKPROJECT}/icons/icon.png 36 36 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-ldpi/ic_launcher.png)
-				dk_resizeImage(${DKPROJECT}/icons/icon.png 48 48 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-mdpi/ic_launcher.png)
-				dk_resizeImage(${DKPROJECT}/icons/icon.png 72 72 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-hdpi/ic_launcher.png)
-				dk_resizeImage(${DKPROJECT}/icons/icon.png 96 96 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-xhdpi/ic_launcher.png)
-				dk_resizeImage(${DKPROJECT}/icons/icon.png 144 144 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
-				dk_resizeImage(${DKPROJECT}/icons/icon.png 192 192 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
+				dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 36 36 ${DK_PROJECT_DIR}/${OS}/Release/app/src/main/res/mipmap-ldpi/ic_launcher.png)
+				dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 48 48 ${DK_PROJECT_DIR}/${OS}/Release/app/src/main/res/mipmap-mdpi/ic_launcher.png)
+				dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 72 72 ${DK_PROJECT_DIR}/${OS}/Release/app/src/main/res/mipmap-hdpi/ic_launcher.png)
+				dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 96 96 ${DK_PROJECT_DIR}/${OS}/Release/app/src/main/res/mipmap-xhdpi/ic_launcher.png)
+				dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 144 144 ${DK_PROJECT_DIR}/${OS}/Release/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
+				dk_resizeImage(${DK_PROJECT_DIR}/icons/icon.png 192 192 ${DK_PROJECT_DIR}/${OS}/Release/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
 			endif()
 		
-			dk_copy(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png OVERWRITE)
+			dk_copy(${DK_PROJECT_DIR}/icons/icon.png ${DK_PROJECT_DIR}/assets/icon.png OVERWRITE)
 		endif()
 	
 		###################### Backup Executable ###########################
 		if(BACKUP_APP_EXECUTABLES)
 			if(MULTI_CONFIG)
-				DEBUG_dk_rename(${DKPROJECT}/${OS}/app/build/outputs/apk/debug/app-debug.apk ${DKPROJECT}/${OS}/app/build/outputs/apk/app-debug.apk.backup OVERWRITE NOERROR)
-				RELEASE_dk_rename(${DKPROJECT}/${OS}/app/build/outputs/apk/release/app-release-unsigned.apk ${DKPROJECT}/${OS}/app/build/outputs/apk/release/app-release-unsigned.apk.backup OVERWRITE NOERROR)
+				DEBUG_dk_rename(${DK_PROJECT_DIR}/${OS}/app/build/outputs/apk/debug/app-debug.apk ${DK_PROJECT_DIR}/${OS}/app/build/outputs/apk/app-debug.apk.backup OVERWRITE NOERROR)
+				RELEASE_dk_rename(${DK_PROJECT_DIR}/${OS}/app/build/outputs/apk/release/app-release-unsigned.apk ${DK_PROJECT_DIR}/${OS}/app/build/outputs/apk/release/app-release-unsigned.apk.backup OVERWRITE NOERROR)
 			else()
-				DEBUG_dk_rename(${DKPROJECT}/${OS}/Debug/app/build/outputs/apk/debug/app-debug.apk ${DKPROJECT}/${OS}/Debug/app/build/outputs/apk/app-debug.apk.backup OVERWRITE NOERROR)
-				RELEASE_dk_rename(${DKPROJECT}/${OS}/Release/app/build/outputs/apk/release/app-release-unsigned.apk ${DKPROJECT}/${OS}/Release/app/build/outputs/apk/release/app-release-unsigned.apk.backup OVERWRITE NOERROR)
+				DEBUG_dk_rename(${DK_PROJECT_DIR}/${OS}/Debug/app/build/outputs/apk/debug/app-debug.apk ${DK_PROJECT_DIR}/${OS}/Debug/app/build/outputs/apk/app-debug.apk.backup OVERWRITE NOERROR)
+				RELEASE_dk_rename(${DK_PROJECT_DIR}/${OS}/Release/app/build/outputs/apk/release/app-release-unsigned.apk ${DK_PROJECT_DIR}/${OS}/Release/app/build/outputs/apk/release/app-release-unsigned.apk.backup OVERWRITE NOERROR)
 			endif()
 		endif()
 	
@@ -1132,22 +1132,22 @@ if(ANDROID)
 	
 		####### Import Android Gui Build files ############################################
 		if(DEBUG)
-			dk_copy(${DKPLUGINS}/_DKIMPORT/android/ ${DKPROJECT}/${OS}/Debug)
-			dk_copy(${DKPLUGINS}/_DKIMPORT/${OS}/ ${DKPROJECT}/${OS}/Debug)
-			dk_copy(${DKPROJECT}/assets ${DKPROJECT}/${OS}/Debug/app/src/main/assets OVERWRITE)
-			file(WRITE ${DKPROJECT}/${OS}/Debug/local.properties ${localProperties})
-			dk_fileReplace(${DKPROJECT}/${OS}/Debug/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}" NOERROR)
-			UNIX_HOST_dk_executeProcess(chmod 777 ${DKPROJECT}/${OS}/Debug/gradlew)
-			UNIX_HOST_dk_executeProcess(sed -i -e "s/\r$//" "${DKPROJECT}/${OS}/Debug/gradlew")
+			dk_copy(${DKPLUGINS}/_DKIMPORT/android/ ${DK_PROJECT_DIR}/${OS}/Debug)
+			dk_copy(${DKPLUGINS}/_DKIMPORT/${OS}/ ${DK_PROJECT_DIR}/${OS}/Debug)
+			dk_copy(${DK_PROJECT_DIR}/assets ${DK_PROJECT_DIR}/${OS}/Debug/app/src/main/assets OVERWRITE)
+			file(WRITE ${DK_PROJECT_DIR}/${OS}/Debug/local.properties ${localProperties})
+			dk_fileReplace(${DK_PROJECT_DIR}/${OS}/Debug/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}" NOERROR)
+			UNIX_HOST_dk_executeProcess(chmod 777 ${DK_PROJECT_DIR}/${OS}/Debug/gradlew)
+			UNIX_HOST_dk_executeProcess(sed -i -e "s/\r$//" "${DK_PROJECT_DIR}/${OS}/Debug/gradlew")
 		endif()
 		if(RELEASE)
-			dk_copy(${DKPLUGINS}/_DKIMPORT/android/ ${DKPROJECT}/${OS}/Release)
-			dk_copy(${DKPLUGINS}/_DKIMPORT/${OS}/ ${DKPROJECT}/${OS}/Release)
-			dk_copy(${DKPROJECT}/assets ${DKPROJECT}/${OS}/Release/app/src/main/assets OVERWRITE)
-			file(WRITE ${DKPROJECT}/${OS}/Release/local.properties ${localProperties})
-			dk_fileReplace(${DKPROJECT}/${OS}/Release/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}" NOERROR)
-			UNIX_HOST_dk_executeProcess(chmod 777 ${DKPROJECT}/${OS}/Release/gradlew)
-			UNIX_HOST_dk_executeProcess(sed -i -e "s/\r$//" "${DKPROJECT}/${OS}/Release/gradlew")
+			dk_copy(${DKPLUGINS}/_DKIMPORT/android/ ${DK_PROJECT_DIR}/${OS}/Release)
+			dk_copy(${DKPLUGINS}/_DKIMPORT/${OS}/ ${DK_PROJECT_DIR}/${OS}/Release)
+			dk_copy(${DK_PROJECT_DIR}/assets ${DK_PROJECT_DIR}/${OS}/Release/app/src/main/assets OVERWRITE)
+			file(WRITE ${DK_PROJECT_DIR}/${OS}/Release/local.properties ${localProperties})
+			dk_fileReplace(${DK_PROJECT_DIR}/${OS}/Release/app/src/main/res/values/strings.xml "_DKIMPORT" "${APP_NAME}" NOERROR)
+			UNIX_HOST_dk_executeProcess(chmod 777 ${DK_PROJECT_DIR}/${OS}/Release/gradlew)
+			UNIX_HOST_dk_executeProcess(sed -i -e "s/\r$//" "${DK_PROJECT_DIR}/${OS}/Release/gradlew")
 		endif()
 		
 		# https://stackoverflow.com/a/53806411/688352
@@ -1214,7 +1214,7 @@ if(ANDROID)
 				TARGET main
 				POST_BUILD
 				COMMAND ${CMAKE_COMMAND} -E echo "Building with Gradle"
-				COMMAND ${DKPROJECT}/${OS}/Debug/gradlew --project-dir ${DKPROJECT}/${OS}/Debug --info clean build #--offline
+				COMMAND ${DK_PROJECT_DIR}/${OS}/Debug/gradlew --project-dir ${DK_PROJECT_DIR}/${OS}/Debug --info clean build #--offline
 				COMMAND ${CMAKE_COMMAND} -E echo "Finnished building with Gradle"
 				WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 				VERBATIM)
@@ -1224,7 +1224,7 @@ if(ANDROID)
 				TARGET main
 				POST_BUILD
 				COMMAND ${CMAKE_COMMAND} -E echo "Building with Gradle"
-				COMMAND ${DKPROJECT}/${OS}/Release/gradlew --project-dir ${DKPROJECT}/${OS}/Release --info clean build #--offline
+				COMMAND ${DK_PROJECT_DIR}/${OS}/Release/gradlew --project-dir ${DK_PROJECT_DIR}/${OS}/Release --info clean build #--offline
 				COMMAND ${CMAKE_COMMAND} -E echo "Finnished building with Gradle"
 				WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 				VERBATIM)
@@ -1247,7 +1247,7 @@ if(ANDROID)
 				POST_BUILD
 				TARGET main
 				COMMAND ${CMAKE_COMMAND} -E echo "Installing <app-debug.apk> to device"
-				COMMAND ${CMD} ${ANDROID_SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/Debug/app/build/outputs/apk/debug/app-debug.apk
+				COMMAND ${CMD} ${ANDROID_SDK}/platform-tools/adb install -r ${DK_PROJECT_DIR}/${OS}/Debug/app/build/outputs/apk/debug/app-debug.apk
 				COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing <app-debug.apk> to device")
 		if(RELEASE)
 		endif()
@@ -1255,7 +1255,7 @@ if(ANDROID)
 				POST_BUILD
 				TARGET main
 				COMMAND ${CMAKE_COMMAND} -E echo "Installing <app-release-unsigned.apk> to device"
-				COMMAND ${CMD} ${ANDROID_SDK}/platform-tools/adb install -r ${DKPROJECT}/${OS}/Release/app/build/outputs/apk/release/app-release-unsigned.apk
+				COMMAND ${CMD} ${ANDROID_SDK}/platform-tools/adb install -r ${DK_PROJECT_DIR}/${OS}/Release/app/build/outputs/apk/release/app-release-unsigned.apk
 				COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing <app-release-unsigned.apk> to device")
 		endif()
 	endif()
@@ -1267,37 +1267,37 @@ endif()
 ##############
 if(EMSCRIPTEN)
 	########################## CREATE ICONS ###############################
-	if(EXISTS ${DKPROJECT}/icons/icon.png)
-		dk_copy(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png OVERWRITE)
+	if(EXISTS ${DK_PROJECT_DIR}/icons/icon.png)
+		dk_copy(${DK_PROJECT_DIR}/icons/icon.png ${DK_PROJECT_DIR}/assets/icon.png OVERWRITE)
 	endif()
 
 	############### BACKUP USERDATA / inject assets #######################
 	if(false)
 		# backup files not going in the package
-		dk_copy(${DKPROJECT}/assets/USER ${DKPROJECT}/Backup/USER OVERWRITE NOERROR)
+		dk_copy(${DK_PROJECT_DIR}/assets/USER ${DK_PROJECT_DIR}/Backup/USER OVERWRITE NOERROR)
 		# Remove excluded files and folders before packaging
-		file(REMOVE ${DKPROJECT}/assets/USER)
+		file(REMOVE ${DK_PROJECT_DIR}/assets/USER)
 		dk_info("Creating assets.zip . . .")
-		dk_zip(${DKPROJECT}/assets)
+		dk_zip(${DK_PROJECT_DIR}/assets)
 		#dk_info("Creating assets.h . . .")
-		bin2h(SOURCE_FILE ${DKPROJECT}/assets.zip HEADER_FILE ${DKPROJECT}/assets.h VARIABLE_NAME "ASSETS_H")
+		bin2h(SOURCE_FILE ${DK_PROJECT_DIR}/assets.zip HEADER_FILE ${DK_PROJECT_DIR}/assets.h VARIABLE_NAME "ASSETS_H")
 		# Restore the backed up assets
-		dk_copy(${DKPROJECT}/Backup/ ${DKPROJECT}/assets/)
-		file(REMOVE ${DKPROJECT}/Backup)
+		dk_copy(${DK_PROJECT_DIR}/Backup/ ${DK_PROJECT_DIR}/assets/)
+		file(REMOVE ${DK_PROJECT_DIR}/Backup)
 	endif()
 	
 	###################### Backup Executable ###########################
 	if(BACKUP_APP_EXECUTABLES)
 		if(DEBUG)
-			dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.data ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.data.backup OVERWRITE NOERROR)
-			dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.html ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.html.backup OVERWRITE NOERROR)
-			dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.js ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.js.backup OVERWRITE NOERROR)
-			dk_rename(${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.wasm ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.wasm.backup OVERWRITE NOERROR)
+			dk_rename(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.data ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.data.backup OVERWRITE NOERROR)
+			dk_rename(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.html ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.html.backup OVERWRITE NOERROR)
+			dk_rename(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.js ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.js.backup OVERWRITE NOERROR)
+			dk_rename(${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.wasm ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.wasm.backup OVERWRITE NOERROR)
 		elseif(RELEASE)
-			dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.data ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.data.backup OVERWRITE NOERROR)
-			dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.html ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.html.backup OVERWRITE NOERROR)
-			dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.js ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.js.backup OVERWRITE NOERROR)
-			dk_rename(${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.wasm ${DKPROJECT}/${OS}/${RELEASE_DIR}/${APP_NAME}.wasm.backup OVERWRITE NOERROR)
+			dk_rename(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.data ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.data.backup OVERWRITE NOERROR)
+			dk_rename(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.html ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.html.backup OVERWRITE NOERROR)
+			dk_rename(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.js ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.js.backup OVERWRITE NOERROR)
+			dk_rename(${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.wasm ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/${APP_NAME}.wasm.backup OVERWRITE NOERROR)
 		endif()
 	endif()
 	
@@ -1318,44 +1318,44 @@ if(EMSCRIPTEN)
 	endforeach()
 
 	########## Remove previous built files from assets #################
-	dk_remove(${DKPROJECT}/assets/${APP_NAME}.data NOERROR)
-	dk_remove(${DKPROJECT}/assets/${APP_NAME}.html NOERROR)
-	dk_remove(${DKPROJECT}/assets/${APP_NAME}.js NOERROR)
-	dk_remove(${DKPROJECT}/assets/${APP_NAME}.wasm NOERROR)
+	dk_remove(${DK_PROJECT_DIR}/assets/${APP_NAME}.data NOERROR)
+	dk_remove(${DK_PROJECT_DIR}/assets/${APP_NAME}.html NOERROR)
+	dk_remove(${DK_PROJECT_DIR}/assets/${APP_NAME}.js NOERROR)
+	dk_remove(${DK_PROJECT_DIR}/assets/${APP_NAME}.wasm NOERROR)
 
 	########################## PACKAGE ASSETS ##########################
-	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS "-sASSERTIONS -sALLOW_MEMORY_GROWTH --preload-file ${DKPROJECT}/assets@/")
+	set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS "-sASSERTIONS -sALLOW_MEMORY_GROWTH --preload-file ${DK_PROJECT_DIR}/assets@/")
 	
 	################### Create Run.sh #################################
 	dk_info("Creating Run scripts . . .")
 	if(DEBUG)
 		if(WIN_HOST)
 			set(RUN_SCRIPT_DEBUG
-				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun.bat ${DKPROJECT}/emscripten/Debug/${APP_NAME}.html"
+				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun.bat ${DK_PROJECT_DIR}/emscripten/Debug/${APP_NAME}.html"
 			)
-			file(WRITE ${DKPROJECT}/emscripten/Debug/Run.bat ${RUN_SCRIPT_DEBUG})
+			file(WRITE ${DK_PROJECT_DIR}/emscripten/Debug/Run.bat ${RUN_SCRIPT_DEBUG})
 		else()
 			set(RUN_SCRIPT_DEBUG
 				"\#!/bin/bash\n"
-				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun ${DKPROJECT}/emscripten/Debug/${APP_NAME}.html"
+				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun ${DK_PROJECT_DIR}/emscripten/Debug/${APP_NAME}.html"
 			)
-			file(WRITE ${DKPROJECT}/emscripten/Debug/Run.sh ${RUN_SCRIPT_DEBUG})
-			dk_executeProcess(chmod 777 ${DKPROJECT}/emscripten/Debug/Run.sh)
+			file(WRITE ${DK_PROJECT_DIR}/emscripten/Debug/Run.sh ${RUN_SCRIPT_DEBUG})
+			dk_executeProcess(chmod 777 ${DK_PROJECT_DIR}/emscripten/Debug/Run.sh)
 		endif()
 	endif()
 	if(RELEASE)
 		if(WIN_HOST)
 			set(RUN_SCRIPT_RELEASE
-				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun.bat ${DKPROJECT}/emscripten/Release/${APP_NAME}.html"
+				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun.bat ${DK_PROJECT_DIR}/emscripten/Release/${APP_NAME}.html"
 			)
-			file(WRITE ${DKPROJECT}/emscripten/Release/Run.bat ${RUN_SCRIPT_RELEASE})
+			file(WRITE ${DK_PROJECT_DIR}/emscripten/Release/Run.bat ${RUN_SCRIPT_RELEASE})
 		else()
 			set(RUN_SCRIPT_RELEASE
 				"\#!/bin/bash\n"
-				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun ${DKPROJECT}/emscripten/Release/${APP_NAME}.html"
+				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun ${DK_PROJECT_DIR}/emscripten/Release/${APP_NAME}.html"
 			)
-			file(WRITE ${DKPROJECT}/emscripten/Release/Run.sh ${RUN_SCRIPT_RELEASE})
-			dk_executeProcess(chmod 777 ${DKPROJECT}/emscripten/Release/Run.sh)
+			file(WRITE ${DK_PROJECT_DIR}/emscripten/Release/Run.sh ${RUN_SCRIPT_RELEASE})
+			dk_executeProcess(chmod 777 ${DK_PROJECT_DIR}/emscripten/Release/Run.sh)
 		endif()
 	endif()
 
@@ -1377,19 +1377,19 @@ if(EMSCRIPTEN)
 	#		TARGET ${APP_NAME} 
 	#		POST_BUILD
 	#		COMMAND ${CMAKE_COMMAND} -E echo "Copying ${APP_NAME} Debug wasm files to /assets"
-	#		COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/emscripten/Debug/${APP_NAME}.data" "${DKPROJECT}/assets/"
-	#		COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/emscripten/Debug/${APP_NAME}.html" "${DKPROJECT}/assets/"
-	#		COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/emscripten/Debug/${APP_NAME}.js" "${DKPROJECT}/assets/"
-	#		COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/emscripten/Debug/${APP_NAME}.wasm" "${DKPROJECT}/assets/")
+	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_PROJECT_DIR}/emscripten/Debug/${APP_NAME}.data" "${DK_PROJECT_DIR}/assets/"
+	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_PROJECT_DIR}/emscripten/Debug/${APP_NAME}.html" "${DK_PROJECT_DIR}/assets/"
+	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_PROJECT_DIR}/emscripten/Debug/${APP_NAME}.js" "${DK_PROJECT_DIR}/assets/"
+	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_PROJECT_DIR}/emscripten/Debug/${APP_NAME}.wasm" "${DK_PROJECT_DIR}/assets/")
 	#else()
 	#	add_custom_command(
 	#		TARGET ${APP_NAME} 
 	#		POST_BUILD
 	#		COMMAND ${CMAKE_COMMAND} -E echo "Copying ${APP_NAME} Release wasm files to /assets"
-	#		COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/emscripten/Release/${APP_NAME}.data" "${DKPROJECT}/assets/"
-	#		COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/emscripten/Release/${APP_NAME}.html" "${DKPROJECT}/assets/"
-	#		COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/emscripten/Release/${APP_NAME}.js" "${DKPROJECT}/assets/"
-	#		COMMAND ${CMAKE_COMMAND} -E copy "${DKPROJECT}/emscripten/Release/${APP_NAME}.wasm" "${DKPROJECT}/assets/")
+	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_PROJECT_DIR}/emscripten/Release/${APP_NAME}.data" "${DK_PROJECT_DIR}/assets/"
+	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_PROJECT_DIR}/emscripten/Release/${APP_NAME}.html" "${DK_PROJECT_DIR}/assets/"
+	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_PROJECT_DIR}/emscripten/Release/${APP_NAME}.js" "${DK_PROJECT_DIR}/assets/"
+	#		COMMAND ${CMAKE_COMMAND} -E copy "${DK_PROJECT_DIR}/emscripten/Release/${APP_NAME}.wasm" "${DK_PROJECT_DIR}/assets/")
 	#endif()
 endif()
 
@@ -1451,13 +1451,13 @@ endforeach()
 #dk_buildLog("\n")
 #dk_buildLog(" ### Dynamic libraries ###")
 #if(LINUX OR RASPBERRY OR ANDROID)
-#	dk_command(ldd >> ${DKPROJECT}/${OS}/DKBUILD.log)
+#	dk_command(ldd >> ${DK_PROJECT_DIR}/${OS}/DKBUILD.log)
 #elseif(MAC OR IOS)
 	# TODO
-	#dk_command(otool -L ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.app)
+	#dk_command(otool -L ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.app)
 #elseif(WIN)	
 	# TODO
-	#"C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.30.30705/bin/Hostx86/x86/dumpbin.exe" /dependents ${DKPROJECT}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe
+	#"C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.30.30705/bin/Hostx86/x86/dumpbin.exe" /dependents ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/${APP_NAME}.exe
 #endif()
 
 dk_info("\n\n")

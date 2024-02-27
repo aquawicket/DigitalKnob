@@ -37,7 +37,7 @@ include_guard()
 #add_custom_command(TARGET ${APP_NAME}
 #   # Run after all other rules within the target have been executed
 #    POST_BUILD
-#    COMMAND "${3RDPARTY}/upx-3.96/upx.exe" "-9 -v ${DKPROJECT}/${OS}/Release/${APP_NAME}.exe"
+#    COMMAND "${3RDPARTY}/upx-3.96/upx.exe" "-9 -v ${DK_PROJECT_DIR}/${OS}/Release/${APP_NAME}.exe"
 #    COMMENT "This command will be executed after building target"
 #    VERBATIM
 #)
@@ -127,9 +127,9 @@ include_guard()
 #	dk_set(ANDROID_APPMK ${ANDROID_APPMK} "include $(BUILD_SHARED_LIBRARY)\n\n")
 #	
 #	if(DEBUG)
-#		file(WRITE ${DKPROJECT}/${OS}/${DEBUG_DIR}/jni/Android.mk ${ANDROID_APPMK})
+#		file(WRITE ${DK_PROJECT_DIR}/${OS}/${DEBUG_DIR}/jni/Android.mk ${ANDROID_APPMK})
 #	endif()
 #	if(RELEASE)
-#		file(WRITE ${DKPROJECT}/${OS}/${RELEASE_DIR}/jni/Android.mk ${ANDROID_APPMK})
+#		file(WRITE ${DK_PROJECT_DIR}/${OS}/${RELEASE_DIR}/jni/Android.mk ${ANDROID_APPMK})
 #	endif()
 #endif()

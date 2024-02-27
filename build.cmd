@@ -183,7 +183,7 @@ goto:eof
 
 :checkApp
     if NOT exist "%DKPATH%\DKApps\%APP%\DKMAKE.cmake" (
-        echo ERROR: %APP%/DKMAKE.cmake file not found
+        echo ERROR: "%DKPATH%\DKApps\%APP%\DKMAKE.cmake" file not found
         set APP=
     ) 
 goto:eof

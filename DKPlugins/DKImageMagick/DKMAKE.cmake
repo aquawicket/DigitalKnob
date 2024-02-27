@@ -4,6 +4,6 @@ dk_generateCmake(DKImageMagick)
 dk_assets(DKImageMagick)
 
 IF(WIN_X86)
-	dk_copy(${IMAGEMAGICK}/magick.exe ${DKPROJECT}/assets/DKImageMagick/magick.exe OVERWRITE)
-	##UPX_COMPRESS(${DKPROJECT}/assets/DKImageMagick/magick.exe)
+	dk_copy(${IMAGEMAGICK}/magick.exe ${DK_PROJECT_DIR}/assets/DKImageMagick/magick.exe OVERWRITE)
+	##UPX_COMPRESS(${DK_PROJECT_DIR}/assets/DKImageMagick/magick.exe)
 ENDIF()

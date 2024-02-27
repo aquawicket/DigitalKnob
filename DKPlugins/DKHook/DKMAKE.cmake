@@ -21,5 +21,5 @@ if(WIN)
 endif()
 
 # FIXME - these should be post built operations. hookdll.dll will not exist yet
-WIN_X86_dk_copy(${DKPLUGINS}/DKHook/win_x86/Release/hookdll.dll ${DKPROJECT}/assets/DKHook OVERWRITE)
-WIN_X86_64_dk_copy(${DKPLUGINS}/DKHook/win_x86_64/Release/hookdll.dll ${DKPROJECT}/assets/DKHook OVERWRITE)
+WIN_X86_dk_copy(${DKPLUGINS}/DKHook/win_x86/Release/hookdll.dll ${DK_PROJECT_DIR}/assets/DKHook OVERWRITE)
+WIN_X86_64_dk_copy(${DKPLUGINS}/DKHook/win_x86_64/Release/hookdll.dll ${DK_PROJECT_DIR}/assets/DKHook OVERWRITE)
