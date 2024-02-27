@@ -559,7 +559,7 @@ function Generate_Project() {
 	if [[ "$TARGET_OS" == "android_arm32" ]]; then
 		validate_android_ndk
 	
-		CMAKE_ARGS+=( "-G 'Unix Makefiles'" )
+		#CMAKE_ARGS+=( "-G 'Unix Makefiles'" )
 		CMAKE_ARGS+=( "-DCMAKE_MAKE_PROGRAM=%ANDROID_NDK%/prebuilt/windows-x86_64/bin/make.exe" )
 		CMAKE_ARGS+=( "-DCMAKE_ANDROID_ARCH_ABI=armeabi-v7a" )
 		CMAKE_ARGS+=( "-DANDROID_ABI=armeabi-v7a" )
@@ -570,7 +570,7 @@ function Generate_Project() {
 		CMAKE_ARGS+=( "-DANDROID_TOOLCHAIN=clang" )
 		CMAKE_ARGS+=( "-DCMAKE_ANDROID_STL_TYPE=c++_static" )
 		CMAKE_ARGS+=( "-DANDROID_STL=c++_static" )
-		CMAKE_ARGS+=( "-DCMAKE_CXX_FLAGS='-std=c++1z -frtti -fexceptions'" )
+		#CMAKE_ARGS+=( "-DCMAKE_CXX_FLAGS='-std=c++1z -frtti -fexceptions'" )
 	
 		echo ""
 		echo "****** CMAKE COMMAND ******"
