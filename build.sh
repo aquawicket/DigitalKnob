@@ -331,7 +331,7 @@ function Pick_OS() {
 	elif [ "$input" == "22" ]; then
 		TARGET_OS="mac_x86_64"
 	elif [ "$input" == "23" ]; then
-		TARGET_OS="raspberry32"
+		TARGET_OS="raspberry_arm32"
 	elif [ "$input" == "24" ]; then
 		TARGET_OS="raspberry64"
 	elif [ "$input" == "25" ]; then
@@ -599,7 +599,7 @@ function Generate_Project() {
 		TARGET=${APP}_APP
 	fi
 	
-	if [[ "$TARGET_OS" == "raspberry32" ]]; then
+	if [[ "$TARGET_OS" == "raspberry_arm32" ]]; then
 		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
 			dk_call $CMAKE -G "$GENERATOR" "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Debug
 		fi

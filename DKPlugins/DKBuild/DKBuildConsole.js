@@ -178,7 +178,7 @@ function DKBuildConsole_SelectOs() {
 		var arch = CPP_DK_Execute("uname -m")
 		//console.log("arch = "+arch)
 		//if(arch = "amrv7l"){
-			OSes.push("raspberry32")
+			OSes.push("raspberry_arm32")
 		//}
 		//else if(arch = "amrv7l64")
 			//OSes.push("raspberry64")
@@ -420,7 +420,7 @@ function DKBuildConsole_FindAppExecutablePath(os, app, type){
 	if(os === "win32" || os === "win64"){
 		const exe_name = app+".exe"
 	}
-	else if(os === "linux_x86" || os === "linux_x86_64" || os === "raspberry32" || os === "raspberry64"){
+	else if(os === "linux_x86" || os === "linux_x86_64" || os === "raspberry_arm32" || os === "raspberry64"){
 		const exe_name = app
 	}
 	else if(os === "mac_x86" || os === "mac_x86_64"){
@@ -451,7 +451,7 @@ function DKBuildConsole_FindAppSolutionPath(os, app, type){
 	else if(os === "mac_x86" || os === "mac_x86_64"){
 		solution_path = app_path+os+"/"+app+".xcodeproj"
 	}
-	else if(os === "linux_x86" || os === "linux_x86_64" || os === "raspberry32" || os === "raspberry64"){
+	else if(os === "linux_x86" || os === "linux_x86_64" || os === "raspberry_arm32" || os === "raspberry64"){
 		//solution_path = app_path+os+"/"+app+".xcodeproj"
 		console.warn("the OS ("+os+") is not implemented")
 		return false

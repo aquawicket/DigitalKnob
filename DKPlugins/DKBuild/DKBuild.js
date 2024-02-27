@@ -1,6 +1,6 @@
 //CPP_DK_Execute("cmd /c echo press and key to continue && timeout /t 60 > nul") //Wait for key or 1 minute
 var UPDATE = "" //allow the first screen to loop
-var OS = ""   //win32,win64,mac_x86,mac_x86_64,linux_x86,linux_x86_64,ios_arm32,ios_arm64,iossim_x86,iossim_x86_64,android_arm32,android_arm64,raspberry32,raspberry64 
+var OS = ""   //win32,win64,mac_x86,mac_x86_64,linux_x86,linux_x86_64,ios_arm32,ios_arm64,iossim_x86,iossim_x86_64,android_arm32,android_arm64,raspberry_arm32,raspberry64 
 var APP = ""  //DKAppname
 var TYPE = ""  //Debug, Release, ALL
 var LINK = "Static" //, Dynamic
@@ -540,7 +540,7 @@ function DKBuild_DoResults(){
 	}
 	
 	//////// LINUX,  RASPBERRY //////////////////////////////////////////////////////////////
-	if(OS === "linux_x86" || OS === "linux_x86_64" || OS === "raspberry32" || OS === "raspberry64"){
+	if(OS === "linux_x86" || OS === "linux_x86_64" || OS === "raspberry_arm32" || OS === "raspberry64"){
 		DKBuild_ValidateGcc()
 		CPP_DKFile_MkDir(app_path+OS)
 		if(TYPE === "Debug" || TYPE === "ALL"){

@@ -40,7 +40,7 @@ COLUMNS=1
 echo " "
 PS3='Please select an OS to build for: '
 if [[ "$MODEL" == "Raspberry"* ]]; then
-	options=("raspberry32" "Exit")
+	options=("raspberry_arm32" "Exit")
 elif [[ "$OSTYPE" == "linux-gnu"* ]] && [[ "$HOSTTYPE" == "x86_64"* ]]; then
 	options=("linux_x86_64" "Exit")
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
@@ -69,9 +69,9 @@ do
 			OS="mac_x86_64"
 			break
 			;;
-		"raspberry32")
+		"raspberry_arm32")
 			echo "$opt"
-			OS="raspberry32"
+			OS="raspberry_arm32"
 			break
 			;;
 		"Exit")
