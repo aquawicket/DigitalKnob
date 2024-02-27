@@ -169,6 +169,7 @@ endif()
 
 ########### Set DK_BINARY_ and DK_PROJECT_ variables ####################
 if(CMAKE_BINARY_DIR)
+	get_filename_component(CMAKE_BINARY_DIR ${CMAKE_BINARY_DIR} ABSOLUTE)
 	dk_debug("CMAKE_BINARY_DIR = ${CMAKE_BINARY_DIR}")
 	
 	### Set DK_BINARY_DIR ###
