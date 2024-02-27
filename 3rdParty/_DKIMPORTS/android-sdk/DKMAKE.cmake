@@ -38,6 +38,8 @@ if(NOT EXISTS ${ANDROID_SDK})
 		WIN_HOST_dk_executeProcess("${SDKMANAGER_BAT} --licenses")
 	endif()
 	#WIN_HOST_dk_executeProcess(call "${OPENJDK}/registerJDK.cmd")
+	
+	execute_process(COMMAND ${CMAKE_COMMAND} -E sleep 2) # wait 2 seconds for the file to become available
 	WIN_HOST_dk_executeProcess(call ${ANDROID_SDK}/SignLicenses.cmd)
 	if(OPENJDK_11)
 		WIN_HOST_dk_executeProcess(call "${OPENJDK_11}/registerJDK.cmd")
