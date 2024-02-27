@@ -904,7 +904,9 @@ if(NOT RASPBERRY)
 	endif()
 	
 	########################## CREATE ICONS ###############################
-	dk_copy(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png OVERWRITE)
+	if(EXISTS ${DKPROJECT}/icons/icon.png)
+		dk_copy(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png OVERWRITE)
+	endif()
 	
 	############### BACKUP USERDATA / inject assets #######################
 	if(false)
@@ -985,7 +987,9 @@ endif()
 #############
 if(RASPBERRY)
 	########################## CREATE ICONS ###############################
-	dk_copy(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png OVERWRITE)
+	if(EXISTS ${DKPROJECT}/icons/icon.png)
+		dk_copy(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png OVERWRITE)
+	endif()
 
 	############### BACKUP USERDATA / inject assets #######################
 	if(false)
@@ -1081,25 +1085,27 @@ if(ANDROID)
 	
 	if(CMAKE_ANDROID_GUI)
 		########################## CREATE ICONS ###############################
-		dk_info("Creating android icons for ${APP_NAME} . . .")
-		if(DEBUG)
-			dk_resizeImage(${DKPROJECT}/icons/icon.png 36 36 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-ldpi/ic_launcher.png)
-			dk_resizeImage(${DKPROJECT}/icons/icon.png 48 48 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-mdpi/ic_launcher.png)
-			dk_resizeImage(${DKPROJECT}/icons/icon.png 72 72 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-hdpi/ic_launcher.png)
-			dk_resizeImage(${DKPROJECT}/icons/icon.png 96 96 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-xhdpi/ic_launcher.png)
-			dk_resizeImage(${DKPROJECT}/icons/icon.png 144 144 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
-			dk_resizeImage(${DKPROJECT}/icons/icon.png 192 192 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
+		if(EXISTS ${DKPROJECT}/icons/icon.png)
+			dk_info("Creating android icons for ${APP_NAME} . . .")
+			if(DEBUG)
+				dk_resizeImage(${DKPROJECT}/icons/icon.png 36 36 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-ldpi/ic_launcher.png)
+				dk_resizeImage(${DKPROJECT}/icons/icon.png 48 48 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-mdpi/ic_launcher.png)
+				dk_resizeImage(${DKPROJECT}/icons/icon.png 72 72 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-hdpi/ic_launcher.png)
+				dk_resizeImage(${DKPROJECT}/icons/icon.png 96 96 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-xhdpi/ic_launcher.png)
+				dk_resizeImage(${DKPROJECT}/icons/icon.png 144 144 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
+				dk_resizeImage(${DKPROJECT}/icons/icon.png 192 192 ${DKPROJECT}/${OS}/Debug/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
+			endif()
+			if(RELEASE)
+				dk_resizeImage(${DKPROJECT}/icons/icon.png 36 36 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-ldpi/ic_launcher.png)
+				dk_resizeImage(${DKPROJECT}/icons/icon.png 48 48 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-mdpi/ic_launcher.png)
+				dk_resizeImage(${DKPROJECT}/icons/icon.png 72 72 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-hdpi/ic_launcher.png)
+				dk_resizeImage(${DKPROJECT}/icons/icon.png 96 96 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-xhdpi/ic_launcher.png)
+				dk_resizeImage(${DKPROJECT}/icons/icon.png 144 144 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
+				dk_resizeImage(${DKPROJECT}/icons/icon.png 192 192 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
+			endif()
+		
+			dk_copy(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png OVERWRITE)
 		endif()
-		if(RELEASE)
-			dk_resizeImage(${DKPROJECT}/icons/icon.png 36 36 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-ldpi/ic_launcher.png)
-			dk_resizeImage(${DKPROJECT}/icons/icon.png 48 48 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-mdpi/ic_launcher.png)
-			dk_resizeImage(${DKPROJECT}/icons/icon.png 72 72 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-hdpi/ic_launcher.png)
-			dk_resizeImage(${DKPROJECT}/icons/icon.png 96 96 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-xhdpi/ic_launcher.png)
-			dk_resizeImage(${DKPROJECT}/icons/icon.png 144 144 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
-			dk_resizeImage(${DKPROJECT}/icons/icon.png 192 192 ${DKPROJECT}/${OS}/Release/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
-		endif()
-	
-		dk_copy(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png OVERWRITE)
 	
 		###################### Backup Executable ###########################
 		if(BACKUP_APP_EXECUTABLES)
@@ -1261,7 +1267,9 @@ endif()
 ##############
 if(EMSCRIPTEN)
 	########################## CREATE ICONS ###############################
-	dk_copy(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png OVERWRITE)
+	if(EXISTS ${DKPROJECT}/icons/icon.png)
+		dk_copy(${DKPROJECT}/icons/icon.png ${DKPROJECT}/assets/icon.png OVERWRITE)
+	endif()
 
 	############### BACKUP USERDATA / inject assets #######################
 	if(false)
