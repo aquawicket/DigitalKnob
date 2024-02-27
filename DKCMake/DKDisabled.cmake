@@ -138,6 +138,7 @@ if(ANDROID)
 	dk_disable(libwebp)
 	dk_disable(libxml2)				# ../../configure: No such file or directory
 	dk_disable(lighttpd)			# DKMAKE.cmake incomplete
+	dk_disable(nasm)
 	dk_disable(ncurses)				# error: '..' is not recognized as an internal or external command
 	dk_disable(openal)				# The system cannot find the file specified
 	dk_disable(openblas)
