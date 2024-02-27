@@ -8,7 +8,7 @@ ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
 LOCAL_ARM_NEON := true
 LIBDIR := /obj/local/armeabi-v7a
 endif
-LOCAL_SRC_FILES := $(LOCAL_PATH)/../../../../../$(ZLIB)/android32/Debug/$(LIBDIR)/libzlib.a
+LOCAL_SRC_FILES := $(LOCAL_PATH)/../../../../../$(ZLIB)/android_arm32/Debug/$(LIBDIR)/libzlib.a
 include $(PREBUILT_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
@@ -24,9 +24,9 @@ LOCAL_SRC_FILES := \
 FILE_LIST := $(wildcard $(LOCAL_PATH)/../../../libarchive/*.c)
 LOCAL_SRC_FILES += $(FILE_LIST:$(LOCAL_PATH)/%=%)
 
-LOCAL_SRC_FILES += $(LOCAL_PATH)/../../../../android32/Debug/jni/mbtowc.c
+LOCAL_SRC_FILES += $(LOCAL_PATH)/../../../../android_arm32/Debug/jni/mbtowc.c
 
-LOCAL_CFLAGS := -DPLATFORM_CONFIG_H=\"$(LOCAL_PATH)/../../../../android32/Debug/jni/config.h\"
+LOCAL_CFLAGS := -DPLATFORM_CONFIG_H=\"$(LOCAL_PATH)/../../../../android_arm32/Debug/jni/config.h\"
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../../../libarchive $(LOCAL_PATH)/../../../../libarchive_fe
 
 LOCAL_STATIC_LIBRARIES := zlib

@@ -18,7 +18,7 @@ LOCAL_CPPFLAGS += -DOSGWORKS_STATIC
 LOCAL_C_INCLUDES :=  \
 	$(LOCAL_PATH)/../../../include \
 	$(LOCAL_PATH)/../../../../$(OSG)/include \
-	$(LOCAL_PATH)/../../../../$(OSG)/android32/Debug/armeabi-v7a/include
+	$(LOCAL_PATH)/../../../../$(OSG)/android_arm32/Debug/armeabi-v7a/include
 
 include $(BUILD_STATIC_LIBRARY)
 
@@ -47,7 +47,7 @@ LOCAL_CPPFLAGS += -DOSGWORKS_STATIC
 LOCAL_C_INCLUDES :=  \
 	$(LOCAL_PATH)/../../../include \
 	$(LOCAL_PATH)/../../../../$(OSG)/include \
-	$(LOCAL_PATH)/../../../../$(OSG)/android32/Debug/armeabi-v7a/include
+	$(LOCAL_PATH)/../../../../$(OSG)/android_arm32/Debug/armeabi-v7a/include
 
 include $(BUILD_STATIC_LIBRARY)
 
@@ -78,7 +78,7 @@ LOCAL_CPPFLAGS += -DOSGWORKS_STATIC
 LOCAL_C_INCLUDES :=  \
 	$(LOCAL_PATH)/../../../include \
 	$(LOCAL_PATH)/../../../../$(OSG)/include \
-	$(LOCAL_PATH)/../../../../$(OSG)/android32/Debug/armeabi-v7a/include
+	$(LOCAL_PATH)/../../../../$(OSG)/android_arm32/Debug/armeabi-v7a/include
 
 include $(BUILD_STATIC_LIBRARY)
 
@@ -141,7 +141,7 @@ LOCAL_CPPFLAGS += -DOSGWORKS_STATIC
 LOCAL_C_INCLUDES :=  \
 	$(LOCAL_PATH)/../../../include \
 	$(LOCAL_PATH)/../../../../$(OSG)/include \
-	$(LOCAL_PATH)/../../../../$(OSG)/android32/Debug/armeabi-v7a/include
+	$(LOCAL_PATH)/../../../../$(OSG)/android_arm32/Debug/armeabi-v7a/include
 
 include $(BUILD_STATIC_LIBRARY)
 
@@ -166,7 +166,7 @@ LOCAL_CPPFLAGS += -DOSGWORKS_STATIC
 LOCAL_C_INCLUDES :=  \
 	$(LOCAL_PATH)/../../../include \
 	$(LOCAL_PATH)/../../../../$(OSG)/include \
-	$(LOCAL_PATH)/../../../../$(OSG)/android32/Debug/armeabi-v7a/include
+	$(LOCAL_PATH)/../../../../$(OSG)/android_arm32/Debug/armeabi-v7a/include
 
 include $(BUILD_STATIC_LIBRARY)
 
@@ -194,7 +194,7 @@ LOCAL_CPPFLAGS += -DOSGWORKS_STATIC
 LOCAL_C_INCLUDES :=  \
 	$(LOCAL_PATH)/../../../include \
 	$(LOCAL_PATH)/../../../../$(OSG)/include \
-	$(LOCAL_PATH)/../../../../$(OSG)/android32/Debug/armeabi-v7a/include
+	$(LOCAL_PATH)/../../../../$(OSG)/android_arm32/Debug/armeabi-v7a/include
 
 include $(BUILD_STATIC_LIBRARY)
 
@@ -219,7 +219,7 @@ LOCAL_CPPFLAGS += -DOSGWORKS_STATIC
 LOCAL_C_INCLUDES :=  \
 	$(LOCAL_PATH)/../../../include \
 	$(LOCAL_PATH)/../../../../$(OSG)/include \
-	$(LOCAL_PATH)/../../../../$(OSG)/android32/Debug/armeabi-v7a/include
+	$(LOCAL_PATH)/../../../../$(OSG)/android_arm32/Debug/armeabi-v7a/include
 
 include $(BUILD_STATIC_LIBRARY)
 

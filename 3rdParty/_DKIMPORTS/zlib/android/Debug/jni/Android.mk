@@ -28,7 +28,7 @@ LOCAL_SRC_FILES := \
 LOCAL_CFLAGS := -DUSE_MMAP
 
 LOCAL_C_INCLUDES :=  $(LOCAL_PATH) \
-../../../android32/Debug/jni
+../../../android_arm32/Debug/jni
 
 
 include $(BUILD_STATIC_LIBRARY)

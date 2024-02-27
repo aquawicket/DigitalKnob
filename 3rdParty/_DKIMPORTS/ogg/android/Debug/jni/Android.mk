@@ -12,7 +12,7 @@ LOCAL_SRC_FILES := \
 
 LOCAL_C_INCLUDES += \
 	$(LOCAL_PATH)/../../../include \
-	$(LOCAL_PATH)/../../../android32
+	$(LOCAL_PATH)/../../../android_arm32
 	
 LOCAL_CFLAGS    := \
     -DFIXED_POINT -DUSE_KISS_FFT -DEXPORT="" -UHAVE_CONFIG_H \

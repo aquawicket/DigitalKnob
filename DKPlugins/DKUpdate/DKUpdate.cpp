@@ -49,7 +49,7 @@
 // ios64     - http://DigitalKnob.com/Download/DKApp_ios64.zip
 // iossim32  - http://DigitalKnob.com/Download/DKApp_iossim32.zip
 // iossim64  - http://DigitalKnob.com/Download/DKApp_iossim64.zip
-// android32 - http://DigitalKnob.com/Download/DKApp.apk
+// android_arm32 - http://DigitalKnob.com/Download/DKApp.apk
 // android64 - http://DigitalKnob.com/Download/DKApp_64.apk
 
 DKString DKUpdate::url;

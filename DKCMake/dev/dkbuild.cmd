@@ -48,7 +48,7 @@ set "CPU="
 echo.
 echo 1. win32
 echo 2. win64
-echo 3. android32
+echo 3. android_arm32
 echo 4. android64
 echo 5. Exit
 set choice=
@@ -56,7 +56,7 @@ set /p choice=Please select an OS to build for:
 if not '%choice%'=='' set choice=%choice:~0,1%
 if '%choice%'=='1' set "OS=win32" && set "CPU=Win32" && goto picktarget
 if '%choice%'=='2' set "OS=win64" && set "CPU=x64" && goto picktarget
-if '%choice%'=='3' set "OS=android32" && set "CPU=ARM" && goto picktarget
+if '%choice%'=='3' set "OS=android_arm32" && set "CPU=ARM" && goto picktarget
 if '%choice%'=='4' set "OS=android64" && set "CPU=ARM64" && goto picktarget
 if '%choice%'=='5' goto end
 ECHO "%choice%" is not valid, please try again

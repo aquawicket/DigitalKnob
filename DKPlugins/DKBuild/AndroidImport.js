@@ -83,9 +83,9 @@ function AndroidImport_Import() {
 
     //Get app path
     if (TYPE === "Debug") {
-        path = appdir + "/android32/Debug";
+        path = appdir + "/android_arm32/Debug";
     } else {
-        path = appdir + "/android32/Release";
+        path = appdir + "/android_arm32/Release";
     }
 
     console.log(path + "\n");
@@ -172,9 +172,9 @@ function AndroidImport_Import() {
     dk.file.makeDir(WORKSPACE + "/" + APP + "_" + TYPE + "/app/src/main/jniLibs");
     dk.file.makeDir(WORKSPACE + "/" + APP + "_" + TYPE + "/app/src/main/jniLibs/armeabi-v7a");
     if (TYPE === "Debug") {
-        DKFile_Copy(appdir + "/android32/Debug/libs/armeabi-v7a", WORKSPACE + "/" + APP + "_" + TYPE + "/app/src/main/jniLibs/armeabi-v7a", true);
+        DKFile_Copy(appdir + "/android_arm32/Debug/libs/armeabi-v7a", WORKSPACE + "/" + APP + "_" + TYPE + "/app/src/main/jniLibs/armeabi-v7a", true);
     } else {
-        DKFile_Copy(appdir + "/android32/Release/libs/armeabi-v7a", WORKSPACE + "/" + APP + "_" + TYPE + "/app/src/main/jniLibs/armeabi-v7a", true);
+        DKFile_Copy(appdir + "/android_arm32/Release/libs/armeabi-v7a", WORKSPACE + "/" + APP + "_" + TYPE + "/app/src/main/jniLibs/armeabi-v7a", true);
     }
 
     console.log("Import finished\n");

@@ -120,7 +120,7 @@ goto:eof
 	set /p choice=Please select an OS to build for: 
 	if '%choice%'=='1' set "OS=win32" & goto:eof
 	if '%choice%'=='2' set "OS=win64" & goto:eof
-	if '%choice%'=='3' set "OS=android32" & goto:eof
+	if '%choice%'=='3' set "OS=android_arm32" & goto:eof
 	if '%choice%'=='4' set "OS=android64" & goto:eof
 	if '%choice%'=='5' set "OS=emscripten" & goto:eof
 	if '%choice%'=='6' call:clear_screen & goto pickos
@@ -173,7 +173,7 @@ goto:eof
 
 	if %OS%==win32 goto generate_win32
 	if %OS%==win64 goto generate_win64
-	if %OS%==android32 goto generate_android32
+	if %OS%==android_arm32 goto generate_android_arm32
 	if %OS%==android64 goto generate_android64
 	if %OS%==emscripten goto generate_emscripten
 goto:eof 
@@ -197,8 +197,8 @@ goto:eof
 goto:eof 
 
 
-::###### generate_android32 ######
-:generate_android32
+::###### generate_android_arm32 ######
+:generate_android_arm32
 	call:validate_android_ndk
 	::call:validate_openjdk
 	::call %DKPATH%\3rdParty\_DKIMPORTS\openjdk\registerJDK.cmd
