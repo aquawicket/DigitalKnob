@@ -157,6 +157,16 @@ endif()
 #endif()
 
 
+###########################################################################################
+###########################################################################################
+## NOTICE ##
+## WORK IN PROGRESS ##
+## Working to consolidate and remove the need for seperate raspberry pi functions
+## The build setup is almost Identicle to linux. We will try to compile Rpi by excluding
+## the RASPBERRY flag variables in place of the LINUX functions. In this conversion,
+## Raspberry will listen to LINUX x86/64 and RPI x86/64.   The RASPBERRY flags will do nothing
+## and we should be able to remove them once everythng is working.
+
 ########### Set DK_BINARY_ and DK_PROJECT_ variables ####################
 if(CMAKE_BINARY_DIR)
 	dk_debug("CMAKE_BINARY_DIR = ${CMAKE_BINARY_DIR}")
@@ -194,7 +204,6 @@ if(CMAKE_BINARY_DIR)
 	get_filename_component(DK_PROJECT_DIR ${DK_BINARY_OSARCH_DIR} DIRECTORY)
 	dk_debug("DK_PROJECT_DIR = ${DK_PROJECT_DIR}")
 endif()
-
 
 ### Set OS ###
 dk_set(OS "${DK_BINARY_OSARCH}")
@@ -260,201 +269,6 @@ dk_info("*** Creating ${OS} Project Files ***")
 dk_set(CMAKE_SKIP_RPATH ON)
 dk_debug("CMAKE_SKIP_RPATH = ${CMAKE_SKIP_RPATH}")
 
-
-
-
-
-# android_arm32
-#if(${DK_BINARY_OS_DIR} MATCHES "android_arm32$")
-	#dk_info("*** Creating Android x32 Project Files ***")
-	#dk_set(ANDROID ON)
-	#dk_set(ANDROID_ARM32 ON)
-	#dk_set(OS "android_arm32")
-	#dk_set(DEBUG_DIR Debug)
-	#dk_set(RELEASE_DIR Release)
-	#dk_set(CMAKE_SKIP_RPATH ON)
-#endif()
-
-# android_arm64
-#if(${DK_BINARY_OS_DIR} MATCHES "android_arm64$")
-	#dk_info("*** Creating Android x64 Project Files ***")
-	#dk_set(ANDROID ON)
-	#dk_set(ANDROID_ARM64 ON)
-	#dk_set(OS "android_arm64")
-	#dk_set(DEBUG_DIR Debug)
-	#dk_set(RELEASE_DIR Release)
-	#dk_set(CMAKE_SKIP_RPATH ON)
-#endif()
-
-# emscripten
-#if(${DK_BINARY_OS_DIR} MATCHES "emscripten$")
-	#dk_info("*** Creating Emscripten Project Files ***")
-	#dk_set(EMSCRIPTEN ON)
-	#dk_set(OS "emscripten")
-	#dk_set(DEBUG_DIR Debug)
-	#dk_set(RELEASE_DIR Release)
-#endif()
-
-# ios_arm32
-#if(${DK_BINARY_OS_DIR} MATCHES "ios_arm32$")
-	#dk_info("*** Creating iOS x32 Project Files ***")
-	#dk_set(IOS ON)
-	#dk_set(IOS_ARM32 ON)
-	#dk_set(OS "ios_arm32")
-	#dk_set(DEBUG_DIR Debug-iphoneos)
-	#dk_set(RELEASE_DIR Release-iphoneos)
-	#dk_set(CMAKE_SKIP_RPATH ON)
-#endif()
-
-# ios_arm64
-#if(${DK_BINARY_OS_DIR} MATCHES "ios_arm64$")
-	#dk_info("*** Creating iOS x64 Project Files ***")
-	#dk_set(IOS ON)
-	#dk_set(IOS_ARM64 ON)
-	#dk_set(OS "ios_arm64")
-	#dk_set(DEBUG_DIR Debug-iphoneos)
-	#dk_set(RELEASE_DIR Release-iphoneos)
-	#dk_set(CMAKE_SKIP_RPATH ON)
-#endif()
-
-# iossim_x86
-#if(${DK_BINARY_OS_DIR} MATCHES "iossim_x86_64$")
-	#dk_info("*** Creating iOS-Simulator x32 Project Files ***")
-	#dk_set(IOSSIM ON)
-	#dk_set(IOSSIM_X86 ON)
-	#dk_set(OS "iossim_x86")
-	#dk_set(DEBUG_DIR Debug-iphonesimulator)
-	#dk_set(RELEASE_DIR Release-iphonesimulator)
-	#dk_set(CMAKE_SKIP_RPATH ON)
-#endif()
-
-# iossim_x86_64
-#if(${DK_BINARY_OS_DIR} MATCHES "iossim_x86_64$")
-	#dk_info("*** Creating iOS-Simulator x64 Project Files ***")
-	#dk_set(IOSSIM ON)
-	#dk_set(IOSSIM_X86_64 ON)
-	#dk_set(OS "iossim_x86_64")
-	#dk_set(DEBUG_DIR Debug-iphonesimulator)
-	#dk_set(RELEASE_DIR Release-iphonesimulator)
-	#dk_set(CMAKE_SKIP_RPATH ON)
-#endif()
-
-# linux_x86
-#if(${DK_BINARY_OS_DIR} MATCHES "linux_x86$")
-#	if(NOT RASPBERRY)
-#	if(NOT RPI)
-		#dk_info("*** Creating Linux x32 Project Files ***")
-		#dk_set(LINUX ON)
-		#dk_set(LINUX_X86 ON)
-		#dk_set(OS "linux_x86")
-		#dk_set(DEBUG_DIR Debug)
-		#dk_set(RELEASE_DIR Release)
-#	endif()
-#	endif()
-#endif()
-
-# linux_x86_64
-#if(${DK_BINARY_OS_DIR} MATCHES "linux_x86_64$")
-#	if(NOT RASPBERRY)
-#	if(NOT RPI)
-		#dk_info("*** Creating Linux x64 Project Files ***")
-		#dk_set(LINUX ON)
-		#dk_set(LINUX_X86_64 ON)
-		#dk_set(OS "linux_x86_64")
-		#dk_set(DEBUG_DIR Debug)
-		#dk_set(RELEASE_DIR Release)
-#	endif()
-#	endif()
-#endif()
-
-# mac_x86
-#if(${DK_BINARY_OS_DIR} MATCHES "mac_x86$")
-	#dk_info("*** Creating Mac x32 Project Files ***")
-	#dk_set(MAC ON)
-	#dk_set(MAC_X86 ON)
-	#dk_set(OS "mac_x86")
-	#dk_set(DEBUG_DIR Debug)
-	#dk_set(RELEASE_DIR Release)
-	#dk_set(CMAKE_SKIP_RPATH ON)
-#endif()
-
-# mac_x86_64
-#if(${DK_BINARY_OS_DIR} MATCHES "mac_x86_64$")
-	#dk_info("*** Creating Mac x64 Project Files ***")
-	#dk_set(MAC ON)
-	#dk_set(MAC_X86_64 ON)
-	#dk_set(OS "mac_x86_64")
-	#dk_set(DEBUG_DIR Debug)
-	#dk_set(RELEASE_DIR Release)
-	#dk_set(CMAKE_SKIP_RPATH ON)
-#endif()
-
-###########################################################################################
-###########################################################################################
-## NOTICE ##
-## WORK IN PROGRESS ##
-## Working to consolidate and remove the need for seperate raspberry pi functions
-## The build setup is almost Identicle to linux. We will try to compile Rpi by excluding
-## the RASPBERRY flag variables in place of the LINUX functions. In this conversion,
-## Raspberry will listen to LINUX x86/64 and RPI x86/64.   The RASPBERRY flags will do nothing
-## and we should be able to remove them once everythng is working.
-
-# raspberry_arm32
-#if(${DK_BINARY_OS_DIR} MATCHES "raspberry_arm32$")
-	#dk_info("*** Creating RASPBERRY x32 Project Files ***")
-	#dk_set(RASPBERRY ON)     #To be disabled
-	#dk_set(RASPBERRY_ARM32 ON)  #To be disabled
-	#dk_set(LINUX ON)
-	#dk_set(RPI ON)
-	#dk_set(RPI32 ON)
-	#dk_set(OS "raspberry_arm32")
-	#dk_set(DEBUG_DIR Debug)
-	#dk_set(RELEASE_DIR Release)
-#endif()
-
-# raspberry_arm64
-#if(${DK_BINARY_OS_DIR} MATCHES "raspberry_arm64$")
-	#dk_info("*** Creating Raspberry x64 Project Files ***")
-	#dk_set(RASPBERRY ON)     #To be disabled
-	#dk_set(RASPBERRY_ARM64 ON)  #To be disabled
-	#dk_set(LINUX ON)
-	#dk_set(RPI ON)
-	#dk_set(RPI64 ON)
-	#dk_set(OS "raspberry_arm64")
-	#dk_set(DEBUG_DIR Debug)
-	#dk_set(RELEASE_DIR Release)
-#endif()
-#########################################################################################
-#########################################################################################
-
-# TINYCORE
-#string(FIND "${CMAKE_HOST_SYSTEM_VERSION}" "tinycore" index)
-#if(${index} GREATER -1)
-#	dk_info("Detected tinycore OS")
-#	dk_set(TINYCORE ON)
-#endif()	
-	
-# win_x86
-#if(${DK_BINARY_OS_DIR} MATCHES "win_x86$")
-	#dk_info("Creating Windows x32 Project Files")
-	#dk_set(WIN ON)
-	#dk_set(WIN_X86 ON)
-	#dk_set(OS "win_x86")
-	#dk_set(DEBUG_DIR Debug)
-	#dk_set(RELEASE_DIR Release)
-	#dk_set(CMAKE_SKIP_RPATH ON)
-#endif()
-
-# win_x86_64
-#if(${DK_BINARY_OS_DIR} MATCHES "win_x86_64$")
-	#dk_info("*** Creating Windows x64 Project Files ***")
-	#dk_set(WIN ON)
-	#dk_set(WIN_X86_64 ON)
-	#dk_set(OS "win_x86_64")
-	#dk_set(DEBUG_DIR Debug)
-	#dk_set(RELEASE_DIR Release)
-	#dk_set(CMAKE_SKIP_RPATH ON)
-#endif()
 
 
 
