@@ -617,7 +617,7 @@ function Generate_Project() {
 		#echo $EMSDK_ENV && $CMAKE "${CMAKE_ARGS[@]}"
 		echo ""
 		#dk_call $EMSDK_ENV && $CMAKE -G "$EMSDK_GENERATOR" "${CMAKE_ARGS[@]}"
-		dk_call $EMSDK_ENV && $CMAKE "${CMAKE_ARGS[@]}"
+		dk_call $EMSDK_ENV && dk_call $CMAKE "${CMAKE_ARGS[@]}"
 	
 		set TARGET=${APP}_APP
 	
