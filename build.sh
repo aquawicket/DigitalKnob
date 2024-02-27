@@ -1235,8 +1235,8 @@ function git_commit() {
 function enter_manually() {
 	echo "Please type the name of the library, tool or app to build. Then press enter."
 	read input
+	#print_var input
 	
-	print_var input 
 	APP="_${input}_"
 	
 	#Search digitalknob for the matching entry containing a DKMAKE.cmake file  
@@ -1261,8 +1261,6 @@ function enter_manually() {
 	
 	# create DKApps/<APP>/main.cpp
 	echo "int main(int argc, char** argv) { return 0; }" > $DKPATH/DKApps/$APP/main.cpp
-	
-	echo ""
 }
 
 function create_cache() {
