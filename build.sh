@@ -1236,6 +1236,7 @@ function enter_manually() {
 	echo "Please type the name of the library, tool or app to build. Then press enter."
 	read input
 	
+	print_var input 
 	APP="_${input}_"
 	
 	#Search digitalknob for the matching entry containing a DKMAKE.cmake file  
@@ -1249,14 +1250,19 @@ function enter_manually() {
 		TARGET_PATH=$DKPATH/DKApps/$input
 		return 0
 	fi
+	print_var TARGET_PATH
+	
 	if [ ! -d $DKPATH/DKApps/$APP ]; then
 		mkdir -p $DKPATH/DKApps/$APP;
 	fi
+	
+	# create DKApps/<APP>/DKMAKE.cmake 
 	echo "dk_depend($input)" > $DKPATH/DKApps/$APP/DKMAKE.cmake
 	
+	# create DKApps/<APP>/main.cpp
+	echo "int main(int argc, char** argv) { return 0; }" > $DKPATH/DKApps/$APP/main.cpp
+	
 	echo ""
-	print_var input 
-	print_var TARGET_PATH
 }
 
 function create_cache() {
