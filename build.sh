@@ -306,15 +306,15 @@ function Pick_OS() {
 	#	TARGET_OS="ios_x86"
 	#elif [ "$input" == "10" ]; then
 	#	TARGET_OS="ios_x64"
-	elif [ "$input" == "11" ]; then
+	#elif [ "$input" == "11" ]; then
+	#	TARGET_OS="iossim32"
+	#elif [ "$input" == "12" ]; then
+	#	TARGET_OS="iossim64"
+	elif [ "$input" == "13" ]; then
 		TARGET_OS="iossim32"
-	elif [ "$input" == "12" ]; then
+	elif [ "$input" == "14" ]; then
 		TARGET_OS="iossim64"
-	#elif [ "$input" == "13" ]; then
-	#	TARGET_OS="iossim_x86"
-	#elif [ "$input" == "14" ]; then
-	#	TARGET_OS="iossim_x64"
-	#elif [ "$input" == "15" ]; then
+	elif [ "$input" == "15" ]; then
 	#	TARGET_OS="linux_arm32"
 	#elif [ "$input" == "16" ]; then
 	#	TARGET_OS="linux_arm64"
