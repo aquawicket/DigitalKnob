@@ -297,16 +297,16 @@ if(${index} GREATER -1)
 endif()
 
 # MAC 64
-string(FIND "${CMAKE_BINARY_DIR}" "/mac64" index)
+string(FIND "${CMAKE_BINARY_DIR}" "/mac_x86_64" index)
 if(${index} GREATER -1)
 	dk_info("*** Creating Mac x64 Project Files ***")
 	dk_set(MAC ON)
 	dk_set(MAC_64 ON)
-	dk_set(OS "mac64")
+	dk_set(OS "mac_x86_64")
 	dk_set(DEBUG_DIR Debug)
 	dk_set(RELEASE_DIR Release)
 	dk_set(CMAKE_SKIP_RPATH ON)
-	string(REPLACE "/mac64" "" DKPROJECT ${CMAKE_BINARY_DIR})
+	string(REPLACE "/mac_x86_64" "" DKPROJECT ${CMAKE_BINARY_DIR})
 endif()
 
 ###########################################################################################
@@ -390,7 +390,7 @@ endif()
 if(NOT CMAKE_SCRIPT_MODE_FILE)
 	if(NOT OS)
 		dk_error(CMAKE_BINARY_DIR)
-		dk_error("The binary directory must contain an os folder. \n Valid folders are android_arm32,android_arm64,emscripten,ios_arm32,ios_arm64,iossim_x86,iossim_x86_64,linux_x86,linux_x86_64,mac_x86,mac64,raspberry32,raspberry64,win32,win64 \n 	EXAMPLE: digitalknob/Development/DKApps/MyApp/win32")
+		dk_error("The binary directory must contain an os folder. \n Valid folders are android_arm32,android_arm64,emscripten,ios_arm32,ios_arm64,iossim_x86,iossim_x86_64,linux_x86,linux_x86_64,mac_x86,mac_x86_64,raspberry32,raspberry64,win32,win64 \n 	EXAMPLE: digitalknob/Development/DKApps/MyApp/win32")
 		#file(REMOVE ${CMAKE_BINARY_DIR})
 	endif()
 

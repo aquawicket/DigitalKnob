@@ -1,6 +1,6 @@
 //CPP_DK_Execute("cmd /c echo press and key to continue && timeout /t 60 > nul") //Wait for key or 1 minute
 var UPDATE = "" //allow the first screen to loop
-var OS = ""   //win32,win64,mac_x86,mac64,linux_x86,linux_x86_64,ios_arm32,ios_arm64,iossim_x86,iossim_x86_64,android_arm32,android_arm64,raspberry32,raspberry64 
+var OS = ""   //win32,win64,mac_x86,mac_x86_64,linux_x86,linux_x86_64,ios_arm32,ios_arm64,iossim_x86,iossim_x86_64,android_arm32,android_arm64,raspberry32,raspberry64 
 var APP = ""  //DKAppname
 var TYPE = ""  //Debug, Release, ALL
 var LINK = "Static" //, Dynamic
@@ -451,11 +451,11 @@ function DKBuild_DoResults(){
 	
 	///// MAC_X86 ////
 	if(OS === "mac_x86"){
-		//Copy from mac64
+		//Copy from mac_x86_64
 	}
 	
 	///// MAC x86_64 ////
-	if(OS === "mac64"){
+	if(OS === "mac_x86_64"){
 		DKBuild_ValidateXcode()
 		CPP_DKFile_MkDir(app_path+OS)
 		if(!DKBuild_Command(CMAKE+" -G \"Xcode\" -T buildsystem=1 -DCMAKE_OSX_ARCHITECTURES=x86_64 "+cmake_string+" -S"+DIGITALKNOB+"DK/DKCMake -B"+app_path+OS))

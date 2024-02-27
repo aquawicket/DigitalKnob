@@ -42,7 +42,7 @@
 // win32     - http://DigitalKnob.com/Download/DKApp.exe
 // win63     - http://DigitalKnob.com/Download/DKApp_64.exe
 // mac_x86     - http://DigitalKnob.com/Download/DKApp_mac_x86.zip
-// mac64     - http://DigitalKnob.com/Download/DKApp_mac64.zip
+// mac_x86_64     - http://DigitalKnob.com/Download/DKApp_mac_x86_64.zip
 // linux_x86   - http://DigitalKnob.com/Download/DKApp_linux_x86.zip
 // linux_x86_64   - http://DigitalKnob.com/Download/DKApp_linux_x86_64.zip
 // ios_arm32     - http://DigitalKnob.com/Download/DKApp_ios_arm32.zip
@@ -78,7 +78,7 @@ bool DKUpdate::Init(){
 #endif
 #ifdef MAC64
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_MAC64]", url);
-	if(url.empty()){ url = downloads+app+"_mac64.zip"; }
+	if(url.empty()){ url = downloads+app+"_mac_x86_64.zip"; }
 #endif
 #ifdef LINUX_X86
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_LINUX_X86]", url);

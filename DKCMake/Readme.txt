@@ -15,7 +15,7 @@
 		* /linux_x86
 		* /linux_x86_64
 		* /mac_x86
-		* /mac64
+		* /mac_x86_64
 		* /raspberry32
 		* /raspberry64
 		* /win32

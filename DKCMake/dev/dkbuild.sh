@@ -46,7 +46,7 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]] && [[ "$HOSTTYPE" == "x86_64"* ]]; then
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
 	options=("linux_x86" "Exit")
 elif [[ "$OSTYPE" == "darwin"* ]] && [[ "$HOSTTYPE" == "x86_64"* ]]; then
-	options=("mac64" "Exit")
+	options=("mac_x86_64" "Exit")
 else
 	echo "UNKNOWN OS TYPE ($OSTYPE)"
 	options=("Exit")
@@ -64,9 +64,9 @@ do
 			OS="linux_x86_64"
 			break
 			;;
-		"mac64")
+		"mac_x86_64")
 			echo "$opt"
-			OS="mac64"
+			OS="mac_x86_64"
 			break
 			;;
 		"raspberry32")
