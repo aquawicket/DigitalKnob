@@ -328,7 +328,7 @@ iossim_x86 <br>
 iossim_x86_64 <br>
 linux_x86 <br>
 linux_x86_64 <br>
-mac32 <br>
+mac_x86 <br>
 mac64 <br>
 raspberry32 <br>
 raspberry64 <br>

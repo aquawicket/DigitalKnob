@@ -327,7 +327,7 @@ function Pick_OS() {
 	elif [ "$input" == "20" ]; then
 		TARGET_OS="mac_arm64"
 	elif [ "$input" == "21" ]; then
-		TARGET_OS="mac32"
+		TARGET_OS="mac_x86"
 	elif [ "$input" == "22" ]; then
 		TARGET_OS="mac64"
 	elif [ "$input" == "23" ]; then
@@ -590,7 +590,7 @@ function Generate_Project() {
 		TARGET=${APP}_APP
 	fi
 	
-	if [[ "$TARGET_OS" == "mac32" ]]; then
+	if [[ "$TARGET_OS" == "mac_x86" ]]; then
 		dk_call $CMAKE -G "$GENERATOR" -DMAC_32=ON -DCMAKE_OSX_ARCHITECTURES=i686 "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS
 	fi
 	

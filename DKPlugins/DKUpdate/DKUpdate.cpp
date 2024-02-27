@@ -41,7 +41,7 @@
 //     Default update files
 // win32     - http://DigitalKnob.com/Download/DKApp.exe
 // win63     - http://DigitalKnob.com/Download/DKApp_64.exe
-// mac32     - http://DigitalKnob.com/Download/DKApp_mac32.zip
+// mac_x86     - http://DigitalKnob.com/Download/DKApp_mac_x86.zip
 // mac64     - http://DigitalKnob.com/Download/DKApp_mac64.zip
 // linux_x86   - http://DigitalKnob.com/Download/DKApp_linux_x86.zip
 // linux_x86_64   - http://DigitalKnob.com/Download/DKApp_linux_x86_64.zip
@@ -74,7 +74,7 @@ bool DKUpdate::Init(){
 #endif
 #ifdef MAC32
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_MAC32]", url);
-	if(url.empty()){ url = downloads+app+"_mac32.zip"; }
+	if(url.empty()){ url = downloads+app+"_mac_x86.zip"; }
 #endif
 #ifdef MAC64
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_MAC64]", url);
