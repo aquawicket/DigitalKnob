@@ -449,7 +449,7 @@ function DKBuild_DoResults(){
 		}
 	}
 	
-	///// MAC32 ////
+	///// MAC_X86 ////
 	if(OS === "mac_x86"){
 		//Copy from mac64
 	}

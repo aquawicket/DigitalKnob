@@ -72,8 +72,8 @@ bool DKUpdate::Init(){
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_WIN64]", url);
 	if(url.empty()){ url = downloads+app; }
 #endif
-#ifdef MAC32
-	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_MAC32]", url);
+#ifdef MAC_X86
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_MAC_X86]", url);
 	if(url.empty()){ url = downloads+app+"_mac_x86.zip"; }
 #endif
 #ifdef MAC64

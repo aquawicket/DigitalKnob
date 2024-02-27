@@ -127,7 +127,7 @@ if(MAC)
 	#endif()
 	
 	dk_appendCmake("file(GLOB DKCefChild_SRC ${DKPLUGINS}/DKCefChild/*.cpp)\n")
-	if(MAC_32)
+	if(MAC_X86)
 		dk_appendCmake("SET(CMAKE_OSX_ARCHITECTURES \"i386\")\n")
 	endif()
 	if(MAC_64)

@@ -42,8 +42,8 @@ bool GetOSFlag(DKString& flag){
 #if WIN64
 	flag = "WIN64";
 #endif
-#if MAC32
-	flag = "MAC32";
+#if MAC_X86
+	flag = "MAC_X86";
 #endif
 #if MAC64
 	flag = "MAC64";

@@ -201,10 +201,10 @@
 #			define DKOS_VERSION "UNKNOWN"
 #		endif
 #		if DKBITS == 32
-#			ifndef MAC32
-#				define MAC32 1
+#			ifndef MAC_X86
+#				define MAC_X86 1
 #			endif
-#			define DKOS "MAC32"
+#			define DKOS "MAC_X86"
 #			define DKOS_VERSION "UNKNOWN"
 #		endif
 #	else

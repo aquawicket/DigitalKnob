@@ -283,12 +283,12 @@ endif()
 endif()
 endif()
 
-# MAC 32
+# mac_x86
 string(FIND "${CMAKE_BINARY_DIR}" "/mac_x86" index)
 if(${index} GREATER -1)
 	dk_info("*** Creating Mac x32 Project Files ***")
 	dk_set(MAC ON)
-	dk_set(MAC_32 ON)
+	dk_set(MAC_X86 ON)
 	dk_set(OS "mac_x86")
 	dk_set(DEBUG_DIR Debug)
 	dk_set(RELEASE_DIR Release)

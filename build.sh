@@ -591,7 +591,7 @@ function Generate_Project() {
 	fi
 	
 	if [[ "$TARGET_OS" == "mac_x86" ]]; then
-		dk_call $CMAKE -G "$GENERATOR" -DMAC_32=ON -DCMAKE_OSX_ARCHITECTURES=i686 "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS
+		dk_call $CMAKE -G "$GENERATOR" -DMAC_X86=ON -DCMAKE_OSX_ARCHITECTURES=i686 "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS
 	fi
 	
 	if [[ "$TARGET_OS" == "mac64" ]]; then

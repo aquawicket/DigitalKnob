@@ -270,15 +270,15 @@ WIN64_dk_append(DKCONFIGURE_CXXFLAGS			"-march=x86-64 -DWIN -DWIN64 -D_WINDOWS -
 
 # Moc i686 (x32) - XCODE
 if(XCODE)
-	MAC32_dk_append(DKCMAKE_FLAGS				-DCMAKE_OSX_ARCHITECTURES=x86)
-	MAC32_dk_set(DKCMAKE_C_COMPILER				${XCODE_C_COMPILER})
-	MAC32_dk_append(DKCMAKE_C_FLAGS				"-DMAC -DMAC32 -std=c17 -x objective-c")
-	MAC32_dk_set(DKCMAKE_CXX_COMPILER			${XCODE_CXX_COMPILER})
-	MAC32_dk_append(DKCMAKE_CXX_FLAGS			"-DMAC -DMAC32 -std=c++17 -x objective-c++")
-	#MAC32_dk_set(DKCONFIGURE_CC				${XCODE_C_COMPILER})
-	MAC32_dk_append(DKCONFIGURE_CFLAGS			"-arch i686 -DMAC -DMAC32 -std=c17") #-x objective-c") # https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
-	#MAC32_dk_set(DKCONFIGURE_CXX				${XCODE_CXX_COMPILER})
-	MAC32_dk_append(DKCONFIGURE_CXXFLAGS		"-arch i686 -DMAC -DMAC32 -std=c++17 -x objective-c++") #-x objective-c++") # https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
+	MAC_X86_dk_append(DKCMAKE_FLAGS				-DCMAKE_OSX_ARCHITECTURES=x86)
+	MAC_X86_dk_set(DKCMAKE_C_COMPILER				${XCODE_C_COMPILER})
+	MAC_X86_dk_append(DKCMAKE_C_FLAGS				"-DMAC -DMAC_X86 -std=c17 -x objective-c")
+	MAC_X86_dk_set(DKCMAKE_CXX_COMPILER			${XCODE_CXX_COMPILER})
+	MAC_X86_dk_append(DKCMAKE_CXX_FLAGS			"-DMAC -DMAC_X86 -std=c++17 -x objective-c++")
+	#MAC_X86_dk_set(DKCONFIGURE_CC				${XCODE_C_COMPILER})
+	MAC_X86_dk_append(DKCONFIGURE_CFLAGS			"-arch i686 -DMAC -DMAC_X86 -std=c17") #-x objective-c") # https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
+	#MAC_X86_dk_set(DKCONFIGURE_CXX				${XCODE_CXX_COMPILER})
+	MAC_X86_dk_append(DKCONFIGURE_CXXFLAGS		"-arch i686 -DMAC -DMAC_X86 -std=c++17 -x objective-c++") #-x objective-c++") # https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
 endif()
 
 # Moc x86_64 (x64) - XCODE
