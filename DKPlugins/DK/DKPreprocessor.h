@@ -238,10 +238,10 @@
 #		define LINUX 1
 #	endif
 #	if DKBITS == 64
-#		ifndef LINUX64
-#			define LINUX64 1
+#		ifndef LINUX_X86_64
+#			define LINUX_X86_64 1
 #		endif
-#		define DKOS "LINUX64"
+#		define DKOS "LINUX_X86_64"
 #		define DKOS_VERSION "UNKNOWN"
 #	endif
 #	if DKBITS == 32

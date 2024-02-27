@@ -261,7 +261,7 @@ LINUX_X86_RELEASE_dk_queueCommand(${BOOST}/b2
 	${BOOST_WITHOUT}
 	--build-dir=${BOOST}/${OS}/${RELEASE_DIR}
 	--stagedir=${BOOST}/${OS}/${RELEASE_DIR})
-LINUX64_DEBUG_dk_queueCommand(${BOOST}/b2
+LINUX_X86_64_DEBUG_dk_queueCommand(${BOOST}/b2
 	toolset=gcc
 	address-model=64
 	variant=debug
@@ -274,7 +274,7 @@ LINUX64_DEBUG_dk_queueCommand(${BOOST}/b2
 	${BOOST_WITHOUT}
 	--build-dir=${BOOST}/${OS}/${DEBUG_DIR}
 	--stagedir=${BOOST}/${OS}/${DEBUG_DIR})
-LINUX64_RELEASE_dk_queueCommand(${BOOST}/b2
+LINUX_X86_64_RELEASE_dk_queueCommand(${BOOST}/b2
 	toolset=gcc
 	address-model=64
 	variant=release

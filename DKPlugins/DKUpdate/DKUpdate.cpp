@@ -84,8 +84,8 @@ bool DKUpdate::Init(){
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_LINUX_X86]", url);
 	if(url.empty()){ url = downloads+app+"_linux_x86.zip"; }
 #endif
-#ifdef LINUX64
-	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_LINUX64]", url);
+#ifdef LINUX_X86_64
+	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_LINUX_X86_64]", url);
 	if(url.empty()){ url = downloads+app+"_linux_x86_64.zip"; }
 #endif
 #ifdef IOS_ARM32

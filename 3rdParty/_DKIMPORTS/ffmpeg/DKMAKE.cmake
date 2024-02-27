@@ -115,7 +115,7 @@ IOSSIM_X86_64_DEBUG_dk_queueCommand(../../configure
 	--cxx=${XCODE_CLANGXX}
 	--extra-cflags="-arch x86_64 -DIOS -DIOS_ARM64 -DIOSSIM -DIOSSIM_X86_64 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOSSIM_SYSROOT}")
 LINUX_X86_DEBUG_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
-LINUX64_DEBUG_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=x86_64 --disable-x86asm --disable-iconv)
+LINUX_X86_64_DEBUG_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=x86_64 --disable-x86asm --disable-iconv)
 MAC32_DEBUG_dk_queueCommand			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
 MAC64_DEBUG_dk_queueCommand			(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=x86_64 --disable-x86asm --disable-iconv)
 RASPBERRY32_DEBUG_dk_queueCommand	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
@@ -160,7 +160,7 @@ IOS_ARM64_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static 
 IOSSIM_X86_RELEASE_dk_queueCommand	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=i686 --disable-x86asm --disable-iconv)
 IOSSIM_X86_64_RELEASE_dk_queueCommand	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=x86_64 --disable-x86asm --disable-iconv)
 LINUX_X86_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=i686 --disable-x86asm --disable-iconv)
-LINUX64_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=x86_64 --disable-x86asm --disable-iconv)
+LINUX_X86_64_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=x86_64 --disable-x86asm --disable-iconv)
 MAC32_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=i686 --disable-x86asm --disable-iconv)
 MAC64_RELEASE_dk_queueCommand		(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=x86_64 --disable-x86asm --disable-iconv)
 RASPBERRY32_RELEASE_dk_queueCommand	(../../configure --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=i686 --disable-x86asm --disable-iconv)

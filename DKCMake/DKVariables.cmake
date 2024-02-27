@@ -267,14 +267,14 @@ endif()
 endif()
 endif()
 
-# LINUX 64
+# linux_x86_64
 string(FIND "${CMAKE_BINARY_DIR}" "/linux_x86_64" index)
 if(${index} GREATER -1)
 if(NOT RASPBERRY)
 if(NOT RPI)
 	dk_info("*** Creating Linux x64 Project Files ***")
 	dk_set(LINUX ON)
-	dk_set(LINUX_64 ON)
+	dk_set(LINUX_X86_64 ON)
 	dk_set(OS "linux_x86_64")
 	dk_set(DEBUG_DIR Debug)
 	dk_set(RELEASE_DIR Release)
@@ -342,7 +342,7 @@ if(${index} GREATER -1)
 	dk_set(RASPBERRY ON)     #To be disabled
 	dk_set(RASPBERRY_64 ON)  #To be disabled
 	#dk_set(LINUX ON)
-	#dk_set(LINUX64 ON)
+	#dk_set(LINUX_X86_64 ON)
 	dk_set(RPI ON)
 	dk_set(RPI64 ON)
 	dk_set(OS "raspberry64")

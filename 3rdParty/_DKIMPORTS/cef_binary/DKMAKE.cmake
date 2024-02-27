@@ -87,7 +87,7 @@ APPLE_dk_import			(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+
 # MACARM64_dk_import	(https://cef-builds.spotifycdn.com/cef_binary_88.1.6+g4fe33a1+chromium-88.0.4324.96_macosarm64.tar.bz2)
 # MACARM64_dk_download	(https://cef-builds.spotifycdn.com/cef_binary_88.1.6+g4fe33a1+chromium-88.0.4324.96_macosarm64_debug_symbols.tar.bz2)
 LINUX_X86_dk_import		(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linux32.tar.bz2)
-LINUX64_dk_import		(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linux64.tar.bz2)
+LINUX_X86_64_dk_import		(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linux64.tar.bz2)
 # LINUXARM32_dk_import	(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm.tar.bz2)
 # LINUXARM64_dk_import	(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm64.tar.bz2)
 RASPBERRY32_dk_import	(https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_linuxarm.tar.bz2)
