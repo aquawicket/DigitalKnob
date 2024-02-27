@@ -331,7 +331,7 @@ linux_x86_64 <br>
 mac_x86 <br>
 mac_x86_64 <br>
 raspberry_arm32 <br>
-raspberry64 <br>
+raspberry_arm64 <br>
 win32 <br>
 win64 <br>
 
