@@ -320,7 +320,7 @@ EXAMPLE: "<DKApps/MyApp/ios64>" <br>
 
 Valid <'OS'>'s are <br>
 android_arm32 <br>
-android64 <br>
+android_arm64 <br>
 emscripten <br>
 ios32 <br>
 ios64 <br>

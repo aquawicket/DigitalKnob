@@ -6,7 +6,7 @@
 * The build directory is the path to the app followed by the OS.  i.e  DKApps/DKMyApp/win32  
 	* Output Build OS's are
 		* /android_arm32
-		* /android64
+		* /android_arm64
 		* /emscripten
 		* /ios32
 		* /ios64

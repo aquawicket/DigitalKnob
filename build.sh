@@ -291,7 +291,7 @@ function Pick_OS() {
 	elif [ "$input" == "2" ]; then
 		TARGET_OS="android_arm32"
 	elif [ "$input" == "3" ]; then
-		TARGET_OS="android64"
+		TARGET_OS="android_arm64"
 	elif [ "$input" == "4" ]; then
 		TARGET_OS="android_x86"
 	elif [ "$input" == "5" ]; then
@@ -535,7 +535,7 @@ function Generate_Project() {
 	    fi
 	fi
 
-	if [[ "$TARGET_OS" == "android64" ]]; then
+	if [[ "$TARGET_OS" == "android_arm64" ]]; then
 		if [[ "$TYPE" == "Debug" ]] || [[ "$TYPE" == "All" ]]; then
 		    dk_call $CMAKE -G "$GENERATOR" -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=$ANDROID_API -DANDROID_NDK=$ANDROID_NDK -DCMAKE_TOOLCHAIN_FILE=$ANDROID_TOOLCHAIN_FILE -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static -DCMAKE_CXX_FLAGS="-std=c++1z -frtti -fexceptions" -DCMAKE_ANDROID_STL_TYPE=c++_static "${CMAKE_ARGS[@]}" -S$DKCMAKE -B$DKPATH/DKApps/$APP/$TARGET_OS/Debug
 	    fi

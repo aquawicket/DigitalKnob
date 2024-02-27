@@ -73,7 +73,7 @@ if "%*" NEQ "" call %*
         if %TARGET_OS%==win32       call:generate_win32
         if %TARGET_OS%==win64       call:generate_win64
         if %TARGET_OS%==android_arm32   call:generate_android_arm32
-        if %TARGET_OS%==android64   call:generate_android64
+        if %TARGET_OS%==android_arm64   call:generate_android_arm64
         if %TARGET_OS%==emscripten  call:generate_emscripten
                 
         call:build
@@ -231,7 +231,7 @@ goto:eof
     if "%choice%"=="1" set "TARGET_OS=win32"		& goto:eof
     if "%choice%"=="2" set "TARGET_OS=win64"		& goto:eof
     if "%choice%"=="3" set "TARGET_OS=android_arm32"	& goto:eof
-    if "%choice%"=="4" set "TARGET_OS=android64"	& goto:eof
+    if "%choice%"=="4" set "TARGET_OS=android_arm64"	& goto:eof
     if "%choice%"=="5" set "TARGET_OS=emscripten"	& goto:eof
     if "%choice%"=="6" call:clear_screen			& goto:eof
     if "%choice%"=="7" set "APP="					& goto:eof
@@ -348,7 +348,7 @@ goto:eof
 	goto build
 goto:eof
 
-:generate_android64
+:generate_android_arm64
     call:validate_android_ndk
 	
 	::call:validate_visual_studio

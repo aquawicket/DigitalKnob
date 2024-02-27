@@ -21,7 +21,7 @@
 
 
 ## Launch an .apk install file
-1. termux-open /DKApps/DKSDL/android64/Debug/app/build/output/apk/debug/app-debug.apk
+1. termux-open /DKApps/DKSDL/android_arm64/Debug/app/build/output/apk/debug/app-debug.apk
 
 ## Launch an installed app
 1. am start --user 0 -n com.digitalknob.dk/.DKApp
